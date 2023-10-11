@@ -1,14 +1,12 @@
-import ts from 'typescript';
-
 import {transform} from '../lib/styleTransform';
 import {createProgramFromSource} from './createProgramFromSource';
 
 describe('styleParser', () => {
   it('should parse simple objects with string values', () => {
     const program = createProgramFromSource(`
-      import {cs} from '@workday/canvas-kit-styling';
+      import {createStyles} from '@workday/canvas-kit-styling';
 
-      const styles = cs({
+      const styles = createStyles({
         fontSize: '12px'
       })
     `);
@@ -20,9 +18,9 @@ describe('styleParser', () => {
 
   it('should parse simple objects with numeric values', () => {
     const program = createProgramFromSource(`
-      import {cs} from '@workday/canvas-kit-styling';
+      import {createStyles} from '@workday/canvas-kit-styling';
 
-      const styles = cs({
+      const styles = createStyles({
         fontSize: 12
       })
     `);
@@ -34,9 +32,9 @@ describe('styleParser', () => {
 
   it('should return an Emotion-optimized object', () => {
     const program = createProgramFromSource(`
-      import {cs} from '@workday/canvas-kit-styling';
+      import {createStyles} from '@workday/canvas-kit-styling';
 
-      const styles = cs({
+      const styles = createStyles({
         fontSize: 12
       })
     `);
@@ -48,9 +46,9 @@ describe('styleParser', () => {
 
   it('should handle nested selectors', () => {
     const program = createProgramFromSource(`
-      import {cs} from '@workday/canvas-kit-styling';
+      import {createStyles} from '@workday/canvas-kit-styling';
 
-      const styles = cs({
+      const styles = createStyles({
         '&:hover': {
           backgroundColor: 'red'
         }
@@ -64,11 +62,11 @@ describe('styleParser', () => {
 
   it('should parse properties that are identifiers that have statically extractable types', () => {
     const program = createProgramFromSource(`
-      import {cs} from '@workday/canvas-kit-styling';
+      import {createStyles} from '@workday/canvas-kit-styling';
 
       const fontSize = 12;
 
-      const styles = cs({
+      const styles = createStyles({
         fontSize: fontSize
       })
     `);
@@ -80,11 +78,11 @@ describe('styleParser', () => {
 
   it('should parse properties that are PropertyAssignment, extracting static types', () => {
     const program = createProgramFromSource(`
-      import {cs} from '@workday/canvas-kit-styling';
+      import {createStyles} from '@workday/canvas-kit-styling';
 
       const fontSize = 12;
 
-      const styles = cs({
+      const styles = createStyles({
         fontSize: fontSize
       })
     `);
@@ -96,14 +94,34 @@ describe('styleParser', () => {
 
   it('should handle spread operator that resolves to a type', () => {
     const program = createProgramFromSource(`
-      import {cs} from '@workday/canvas-kit-styling';
+      import {createStyles} from '@workday/canvas-kit-styling';
 
       const spreadProps = {
         fontSize: 12
       } as const
 
-      const styles = cs({
+      const styles = createStyles({
         ...spreadProps
+      })
+    `);
+
+    const result = transform(program, 'test.ts'); //?
+
+    expect(result).toContain('font-size:12px;');
+  });
+
+  it('should handle spread operator that resolves to a type', () => {
+    const program = createProgramFromSource(`
+      import {createStyles} from '@workday/canvas-kit-styling';
+
+      const makeFontSize = <T extends string>(input: T): { fontSize: T} => {
+        return {
+          fontSize: input
+        }
+      }
+
+      const styles = createStyles({
+        ...makeFontSize('12px')
       })
     `);
 
@@ -114,7 +132,7 @@ describe('styleParser', () => {
 
   it('should handle nested spread operator that resolves to a type', () => {
     const program = createProgramFromSource(`
-      import {cs} from '@workday/canvas-kit-styling';
+      import {createStyles} from '@workday/canvas-kit-styling';
 
       const nestedSpreadProps = {
         spreadProps: {
@@ -122,7 +140,7 @@ describe('styleParser', () => {
         }
       } as const
 
-      const styles = cs({
+      const styles = createStyles({
         ...nestedSpreadProps.spreadProps
       })
     `);
@@ -134,13 +152,13 @@ describe('styleParser', () => {
 
   it('should handle PropertyAccessExpressions that are statically resolvable', () => {
     const program = createProgramFromSource(`
-      import {cs} from '@workday/canvas-kit-styling';
+      import {createStyles} from '@workday/canvas-kit-styling';
 
     const space = {
       small: 12
     } as const
 
-    const styles = cs({
+    const styles = createStyles({
       padding: space.small
     })
   `);
@@ -152,13 +170,13 @@ describe('styleParser', () => {
 
   it('should handle cssVar call expressions referencing static variables', () => {
     const program = createProgramFromSource(`
-      import {cs, cssVar} from '@workday/canvas-kit-styling';
+      import {createStyles, cssVar} from '@workday/canvas-kit-styling';
 
       const myVars = {
         color: '--color'
       } as const;
 
-      const styles = cs({
+      const styles = createStyles({
         backgroundColor: cssVar(myVars.color)
       })
     `);
@@ -170,10 +188,10 @@ describe('styleParser', () => {
 
   it('should handle cssVar call expressions referencing simple variables', () => {
     const program = createProgramFromSource(`
-      import {cs, CsVars, createVars} from '@workday/canvas-kit-styling';
+      import {createStyles, CsVars, createVars} from '@workday/canvas-kit-styling';
 
       const myVars = createVars('color');
-      const styles = cs({
+      const styles = createStyles({
         backgroundColor: cssVar(myVars.color)
       })
     `);
@@ -185,14 +203,48 @@ describe('styleParser', () => {
 
   it('should handle cssVar call expressions referencing nested variables', () => {
     const program = createProgramFromSource(`
-      import {cs, CsVars, createVars} from '@workday/canvas-kit-styling';
+      import {createStyles, CsVars, createVars} from '@workday/canvas-kit-styling';
 
       const myVars = {
         colors: createVars('default', 'background')
       };
 
-      const styles = cs({
+      const styles = createStyles({
         backgroundColor: cssVar(myVars.colors.background)
+      })
+    `);
+
+    const result = transform(program, 'test.ts'); //?
+
+    expect(result).toContain('background-color:var(--css-my-vars-colors-background);');
+  });
+
+  it('should handle css vars even without the cssVar call expressions referencing static variables', () => {
+    const program = createProgramFromSource(`
+      import {createStyles} from '@workday/canvas-kit-styling';
+
+      const myVar = '--color'
+
+      const styles = createStyles({
+        backgroundColor: myVar
+      })
+    `);
+
+    const result = transform(program, 'test.ts'); //?
+
+    expect(result).toContain('background-color:var(--color);');
+  });
+
+  it('should handle css vars event without the cssVar call expressions referencing created variables', () => {
+    const program = createProgramFromSource(`
+      import {createStyles, CsVars, createVars} from '@workday/canvas-kit-styling';
+
+      const myVars = {
+        colors: createVars('default', 'background')
+      };
+
+      const styles = createStyles({
+        backgroundColor: myVars.colors.background
       })
     `);
 
@@ -203,13 +255,13 @@ describe('styleParser', () => {
 
   it('should handle ComputedPropertyName that are static', () => {
     const program = createProgramFromSource(`
-      import {cs, CsVars, createVars} from '@workday/canvas-kit-styling';
+      import {createStyles, CsVars, createVars} from '@workday/canvas-kit-styling';
 
       const myVars = {
         color: '--color'
       } as const;
 
-      const styles = cs({
+      const styles = createStyles({
         [myVars.color]: 'red'
       })
     `);
@@ -221,11 +273,11 @@ describe('styleParser', () => {
 
   it('should handle ComputedPropertyName that is a variable created with createVars', () => {
     const program = createProgramFromSource(`
-      import {cs, CsVars, createVars} from '@workday/canvas-kit-styling';
+      import {createStyles, CsVars, createVars} from '@workday/canvas-kit-styling';
 
       const myVars = createVars('color')
 
-      const styles = cs({
+      const styles = createStyles({
         [myVars.color]: 'red'
       })
     `);
@@ -237,11 +289,11 @@ describe('styleParser', () => {
 
   it('should slugify ComputedPropertyName with capital letters that is a variable created with createVars', () => {
     const program = createProgramFromSource(`
-      import {cs, CsVars, createVars} from '@workday/canvas-kit-styling';
+      import {createStyles, CsVars, createVars} from '@workday/canvas-kit-styling';
 
       const myVars = createVars('hoverColor')
 
-      const styles = cs({
+      const styles = createStyles({
         [myVars.hoverColor]: 'red'
       })
     `);
@@ -253,11 +305,11 @@ describe('styleParser', () => {
 
   it('should slugify cssVars with capital letters that is a variable created with createVars', () => {
     const program = createProgramFromSource(`
-      import {cs, cssVar, createVars} from '@workday/canvas-kit-styling';
+      import {createStyles, cssVar, createVars} from '@workday/canvas-kit-styling';
 
       const myVars = createVars('hoverColor')
 
-      const styles = cs({
+      const styles = createStyles({
         backgroundColor: cssVar(myVars.hoverColor)
       })
     `);
@@ -269,13 +321,13 @@ describe('styleParser', () => {
 
   it('should handle ComputedPropertyName that is a variable created with createVars inside an object', () => {
     const program = createProgramFromSource(`
-      import {cs, cssVar, createVars} from '@workday/canvas-kit-styling';
+      import {createStyles, cssVar, createVars} from '@workday/canvas-kit-styling';
 
       const myVars = {
         hover: createVars('color')
       }
 
-      const styles = cs({
+      const styles = createStyles({
         [myVars.hover.color]: 'red'
       })
     `);
@@ -287,11 +339,11 @@ describe('styleParser', () => {
 
   it('should handle fallback call expressions referencing static variables', () => {
     const program = createProgramFromSource(`
-      import {cs, CsVars, createVars} from '@workday/canvas-kit-styling';
+      import {createStyles, CsVars, createVars} from '@workday/canvas-kit-styling';
 
       const myVars = createVars('color')
 
-      const styles = cs({
+      const styles = createStyles({
         backgroundColor: cssVar(myVars.color, 'red')
       })
     `);
@@ -303,11 +355,11 @@ describe('styleParser', () => {
 
   it('should handle fallback call expressions referencing other variables', () => {
     const program = createProgramFromSource(`
-      import {cs, CsVars, createVars} from '@workday/canvas-kit-styling';
+      import {createStyles, CsVars, createVars} from '@workday/canvas-kit-styling';
 
       const myVars = createVars('color', 'background')
 
-      const styles = cs({
+      const styles = createStyles({
         backgroundColor: cssVar(myVars.color, myVars.background)
       })
     `);
@@ -315,15 +367,15 @@ describe('styleParser', () => {
     const result = transform(program, 'test.ts'); //?
 
     expect(result).toContain(
-      'background-color:var(--css-my-vars-color, --css-my-vars-background);'
+      'background-color:var(--css-my-vars-color, var(--css-my-vars-background));'
     );
   });
 
   it('should handle fallback variables if provided', () => {
     const program = createProgramFromSource(`
-      import {cs, CsVars, createVars} from '@workday/canvas-kit-styling';
+      import {createStyles, CsVars, createVars} from '@workday/canvas-kit-styling';
 
-      const styles = cs({
+      const styles = createStyles({
         backgroundColor: cssVar('--var-1')
       })
     `);
@@ -335,9 +387,9 @@ describe('styleParser', () => {
 
   it('should handle fallbackFiles', () => {
     const program = createProgramFromSource(`
-      import {cs, CsVars, createVars} from '@workday/canvas-kit-styling';
+      import {createStyles, CsVars, createVars} from '@workday/canvas-kit-styling';
 
-      const styles = cs({
+      const styles = createStyles({
         backgroundColor: cssVar('--var-1')
       })
     `);
@@ -351,9 +403,9 @@ describe('styleParser', () => {
 
   it('should handle multiple arguments with a string', () => {
     const program = createProgramFromSource(`
-      import {cs} from '@workday/canvas-kit-styling';
+      import {createStyles} from '@workday/canvas-kit-styling';
 
-      const styles = cs('css-12345', {
+      const styles = createStyles('css-12345', {
         backgroundColor: 'red'
       })
     `);
@@ -366,11 +418,11 @@ describe('styleParser', () => {
 
   it('should handle template stings in properties', () => {
     const program = createProgramFromSource(`
-      import {cs, cssVar} from '@workday/canvas-kit-styling';
+      import {createStyles, cssVar} from '@workday/canvas-kit-styling';
 
       const borderColor = 'red';
 
-      const styles = cs('css-12345', {
+      const styles = createStyles('css-12345', {
         border: \`1px solid \${borderColor}\`
       })
     `);
@@ -383,11 +435,11 @@ describe('styleParser', () => {
 
   it('should handle template stings using cssVar in properties', () => {
     const program = createProgramFromSource(`
-      import {cs, cssVar} from '@workday/canvas-kit-styling';
+      import {createStyles, cssVar} from '@workday/canvas-kit-styling';
 
       const myVars = createVars('borderColor')
 
-      const styles = cs('css-12345', {
+      const styles = createStyles('css-12345', {
         border: \`1px solid \${cssVar(myVars.borderColor)}\`
       })
     `);
@@ -400,11 +452,11 @@ describe('styleParser', () => {
 
   it('should handle template stings with multiple spans', () => {
     const program = createProgramFromSource(`
-      import {cs, cssVar} from '@workday/canvas-kit-styling';
+      import {createStyles, cssVar} from '@workday/canvas-kit-styling';
 
       const myVars = createVars('boxShadowInner', 'boxShadowOuter')
 
-      const styles = cs('css-12345', {
+      const styles = createStyles('css-12345', {
         boxShadow: \`\${cssVar(myVars.boxShadowInner)} 0px 0px 0px 2px, \${cssVar(myVars.boxShadowOuter)} 0px 0px 0px 4px\`
       })
     `);
@@ -419,13 +471,13 @@ describe('styleParser', () => {
 
   it('should handle multiple arguments with an identifier of a type of an object literal', () => {
     const program = createProgramFromSource(`
-      import {cs} from '@workday/canvas-kit-styling';
+      import {createStyles} from '@workday/canvas-kit-styling';
 
       const obj = {
         color: 'blue'
       } as const
 
-      const styles = cs(obj, {
+      const styles = createStyles(obj, {
         backgroundColor: 'red'
       })
     `);
@@ -440,19 +492,19 @@ describe('styleParser', () => {
       {
         filename: 'styles.ts',
         source: `
-        import {cs} from '@workday/canvas-kit-styling';
+        import {createStyles} from '@workday/canvas-kit-styling';
       `,
       },
       {
         filename: 'test.ts',
         source: `
-          import {cs} from '@workday/canvas-kit-styling';
+          import {createStyles} from '@workday/canvas-kit-styling';
 
           const obj = {
             color: 'blue'
           } as const
 
-          const styles = cs(obj, {
+          const styles = createStyles(obj, {
             backgroundColor: 'red'
           })
     `,
@@ -466,11 +518,11 @@ describe('styleParser', () => {
 
   it('should output an error with the matching line, character, and underlined text', () => {
     const program = createProgramFromSource(`
-      import {cs} from '@workday/canvas-kit-styling';
+      import {createStyles} from '@workday/canvas-kit-styling';
 
       const color: string = 'red
 
-      const styles = cs({
+      const styles = createStyles({
         backgroundColor: color
       })
     `);

@@ -10,7 +10,8 @@ import {slugify} from './slugify';
 const tokens = {};
 
 /**
- * Style props
+ * Style properties in a JavaScript camelCase. Everything Emotion allows is also
+ * allowed here.
  */
 export type StyleProps =
   | undefined
@@ -22,6 +23,10 @@ export type StyleProps =
   | CSSObject;
 
 function replaceWithToken<T>(value: T): T {
+  // Handle the case where the value is a variable without the `var()` wrapping function. A common mistake.
+  if (typeof value === 'string' && value.startsWith('--')) {
+    return `var(${value})` as any as T;
+  }
   return (tokens as any)[value] || value;
 }
 
@@ -57,7 +62,7 @@ export type CsVars<T extends string, ID extends string | never> = CsVarsMap<T, I
  * ```ts
  * const myVars = createVars('color')
  *
- * const myStyles = cs({
+ * const myStyles = createStyles({
  *   color: cssVar(myVars.color) // color: 'var(--{hash}-color)'
  * })
  * ```
@@ -65,7 +70,7 @@ export type CsVars<T extends string, ID extends string | never> = CsVarsMap<T, I
  * It can also support an optional fallback. Fallbacks should only be used if it is reasonable to
  * expect a CSS variable isn't defined.
  * ```ts
- * const myStyles = cs({
+ * const myStyles = createStyles({
  *   color: cssVar(myVars.color, 'red') // color: 'var(--{hash}-color, red)'
  * })
  * ```
@@ -75,7 +80,9 @@ export type CsVars<T extends string, ID extends string | never> = CsVarsMap<T, I
  * in the environment.
  */
 export function cssVar(input: string, fallback?: string) {
-  return fallback ? `var(${input}, ${fallback})` : `var(${input})`;
+  return fallback
+    ? `var(${input}, ${fallback.startsWith('--') ? `var(${fallback})` : fallback})`
+    : `var(${input})`;
 }
 
 /**
@@ -136,6 +143,28 @@ type ModifierValues<T extends ModifierConfig> = {
 type ModifierReturn<T extends ModifierConfig> = T &
   ((modifiers: Partial<ModifierValues<T>>) => string);
 
+/**
+ * Creates a modifier function that takes in a modifier config and will return a CSS class name that
+ * matches the result. Modifiers can be thought as `if` or `switch` statements. This function can be
+ * thought of as a helper function that makes it easier to work with modifiers. Without it, you
+ * would have to implement if/switch/ternary for each option.
+ *
+ * ```tsx
+ * const myModifiers = createModifiers({
+ *   // a modifier called 'size'
+ *   size: {
+ *     small: createStyles({ fontSize: 12 }),
+ *     medium: createStyles({ fontSize: 14 })
+ *   }
+ * })
+ *
+ * // with the modifier function
+ * myModifiers({ size: 'medium' }) // returns the medium class name
+ *
+ * // manually without the function
+ * size === 'small' ? myModifiers.size.small : size === 'medium' ? myModifiers.size.medium : ''
+ * ```
+ */
 export function createModifiers<T extends ModifierConfig>(input: T): ModifierReturn<T> {
   const modifierFn = (modifiers: Partial<ModifierValues<T>>) => {
     return Object.keys(modifiers)
@@ -224,7 +253,7 @@ export interface CSProps {
  * It can take a number of inputs of various types. The simplest is object-styles.
  *
  * ```ts
- * const myStyles = cs({
+ * const myStyles = createStyles({
  *   backgroundColor: 'red'
  * })
  * ```
@@ -234,7 +263,7 @@ export interface CSProps {
  * The cs function is curried into 2 parts. The first function could be done at build time. The
  * returned function combines classnames and will remain as a small runtime.
  */
-export function cs(...args: (StyleProps | string)[]): string {
+export function createStyles(...args: (StyleProps | string)[]): string {
   return args
     .map(input => {
       if (typeof input === 'string') {
@@ -249,11 +278,11 @@ export function cs(...args: (StyleProps | string)[]): string {
 }
 
 /**
- * React hook to apply CSS class names and dynamic CSS variables
+ * React utility function to apply CSS class names and dynamic CSS variables
  *
  * ```tsx
  * const MyComponent = (props: any) => {
- *   return <div {...useCs(props)} />
+ *   return <div {...handleCsProp(props)} />
  * }
  * ```
  *
@@ -263,15 +292,13 @@ export function cs(...args: (StyleProps | string)[]): string {
  *
  * ```tsx
  * const vars = createVars('background')
- * const styles = cs({
+ * const styles = createStyles({
  *   color: vars.color
  * })
  * <MyComponent
  *   className="foobar"
  *   style={{ padding: 10 }}
  *   cs={styles}
- *   csVars
- ={vars({background: 'red'})}
  * />
  *
  * // Output
@@ -281,7 +308,7 @@ export function cs(...args: (StyleProps | string)[]): string {
  * />
  * ```
  */
-export function useCs<
+export function handleCsProp<
   T extends CSProps & {
     className?: string | undefined;
 
@@ -291,5 +318,5 @@ export function useCs<
   return {
     ...csToProps([cs, className, style]),
     ...props,
-  } as Omit<T, 'cs' | 'csVars'>;
+  } as Omit<T, 'cs'>;
 }

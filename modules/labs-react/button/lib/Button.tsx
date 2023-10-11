@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {BaseButton} from './BaseButton';
 import {createComponent, GrowthBehavior} from '@workday/canvas-kit-react/common';
-import {cs, createModifiers} from '@workday/canvas-kit-styling';
+import {createStyles, createModifiers} from '@workday/canvas-kit-styling';
 import {SystemIconProps} from '@workday/canvas-kit-react/icon';
 import {space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
 
@@ -56,7 +56,7 @@ export const ButtonModifiers = createModifiers({
     only: 'canvas-button-icon-only',
   },
   size: {
-    large: cs({
+    large: createStyles({
       fontSize: space.s,
       lineHeight: space.m,
       letterSpacing: '0.01rem',
@@ -74,7 +74,7 @@ export const ButtonModifiers = createModifiers({
         paddingInlineEnd: `${spaceNumbers.xl / 2}rem`,
       },
     }),
-    medium: cs({
+    medium: createStyles({
       fontSize: '0.875rem',
       lineHeight: '1.25rem',
       letterSpacing: '0.015rem',
@@ -92,7 +92,7 @@ export const ButtonModifiers = createModifiers({
         paddingInlineEnd: `${spaceNumbers.xl / 2}rem`,
       },
     }),
-    small: cs({
+    small: createStyles({
       fontSize: '0.875rem',
       lineHeight: '1.25rem',
       letterSpacing: '0.015rem',
@@ -111,7 +111,7 @@ export const ButtonModifiers = createModifiers({
         paddingInlineEnd: space.xs,
       },
     }),
-    extraSmall: cs({
+    extraSmall: createStyles({
       fontSize: '0.75rem',
       lineHeight: space.s,
       letterSpacing: '0.02rem',

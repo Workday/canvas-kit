@@ -13,11 +13,19 @@ function getConfig() {
 }
 
 const styleSource = `
-export type CsVars<T extends string> = Record<T, string> & {
+declare type CsVarsMap<T extends string, ID extends string | never> = [ID] extends [never]
+  ? Record<T, string>
+  : {[K in T]: \`--\${ID}-\${K}\`};
+
+declare type CsVars<T extends string, ID extends string | never> = CsVarsMap<T, ID> & {
   (input: Partial<Record<T, string>>): Record<T, string>;
 };
-declare function createVars<T extends string>(input: {id: string, args: T[]}): CsVars<T>;
-declare function createVars<T extends string>(...args: T[]): CsVars<T>
+declare function createVars<T extends string, ID extends string>(input: {
+  id: ID;
+  args: T[];
+}): CsVars<T, ID>;
+declare function createVars<T extends string>(...args: T[]): CsVars<T, never>;
+declare function createVars<T extends string, ID extends string>(...args: T[]): CsVars<T, ID>;
 declare function cssVar(input: string): string
 `;
 

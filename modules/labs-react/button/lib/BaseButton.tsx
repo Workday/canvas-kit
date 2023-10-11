@@ -4,7 +4,7 @@ import {ButtonLabelIcon} from './parts/ButtonLabelIcon';
 import {ButtonLabel} from './parts/ButtonLabel';
 
 import {createComponent, GrowthBehavior} from '@workday/canvas-kit-react/common';
-import {cs, createVars, cssVar, createModifiers} from '@workday/canvas-kit-styling';
+import {createStyles, createVars, cssVar, createModifiers} from '@workday/canvas-kit-styling';
 import {SystemIconProps} from '@workday/canvas-kit-react/icon';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
@@ -114,7 +114,7 @@ export const buttonVars = {
   ),
 };
 
-const baseButtonStyles = cs({
+const baseButtonStyles = createStyles({
   fontFamily: '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif',
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
@@ -193,7 +193,7 @@ const baseButtonStyles = cs({
 
 export const sizeModifiers = createModifiers({
   size: {
-    large: cs({
+    large: createStyles({
       fontSize: space.s,
       lineHeight: space.m,
       letterSpacing: '0.01rem',
@@ -213,7 +213,7 @@ export const sizeModifiers = createModifiers({
         paddingInlineEnd: `${spaceNumbers.xl / 2}rem`,
       },
     }),
-    medium: cs({
+    medium: createStyles({
       fontSize: '0.875rem',
       lineHeight: '1.25rem',
       letterSpacing: '0.015rem',
@@ -231,7 +231,7 @@ export const sizeModifiers = createModifiers({
         paddingInlineEnd: `${spaceNumbers.xl / 2}rem`,
       },
     }),
-    small: cs({
+    small: createStyles({
       fontSize: '0.875rem',
       lineHeight: '1.25rem',
       letterSpacing: '0.015rem',
@@ -252,7 +252,7 @@ export const sizeModifiers = createModifiers({
         paddingInlineEnd: space.xs,
       },
     }),
-    extraSmall: cs({
+    extraSmall: createStyles({
       fontSize: '0.75rem',
       lineHeight: space.s,
       letterSpacing: '0.02rem',

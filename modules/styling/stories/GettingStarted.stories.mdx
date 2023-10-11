@@ -14,7 +14,7 @@ import {createRoot} from 'react-dom/client';
 
 import {cs} from '@workday/canvas-kit-styling';
 
-const myStyles = cs({
+const myStyles = createStyles({
   backgroundColor: 'red',
 }); // returns the CSS class name created for this style
 
@@ -58,4 +58,32 @@ transforms.
 ### Webpack
 
 You will need to transform TypeScript files using the `ttypescript` (note the extra `t`) which is
-the same as the TypeScript tanspiler except it uses TypeScript's [transform API]()
+the same as the TypeScript tanspiler except it uses TypeScript's
+[transform API](https://levelup.gitconnected.com/writing-a-custom-typescript-ast-transformer-731e2b0b66e6)
+to transform code during compilation.
+
+In your webpack config, you add the following:
+
+```js
+{
+  rules: [
+    //...
+    {
+      test: /.\.tsx?$/,
+      loaders: [
+        // ts-loader
+        {
+          loader: require.resolve('ts-loader'),
+          options: {
+            compiler: 'ttypescript',
+          },
+        },
+        // OR awesome-typescript-loader
+        {
+          loader: require.resolve('awesome-typescript-loader'),
+        },
+      ],
+    },
+  ];
+}
+```

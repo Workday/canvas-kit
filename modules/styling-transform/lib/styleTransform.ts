@@ -6,7 +6,7 @@ import path from 'node:path';
 import {slugify} from '@workday/canvas-kit-styling';
 import {getFallbackVariable, getVariablesFromFiles} from './getCssVariables';
 
-const styleExpressionName = 'cs';
+const styleExpressionName = 'createStyles';
 const cssVarExpressionName = 'cssVar';
 const createVarExpressionName = 'createVars';
 const styleImportString = '@workday/canvas-kit-styling';
@@ -17,16 +17,15 @@ const vars: Record<string, string> = {};
 export type NestedStyleObject = {[key: string]: string | NestedStyleObject};
 
 function getStyleValueFromType(node: ts.Node, type: ts.Type, checker: ts.TypeChecker) {
-  node.getText(); //?
-  // checker.typeToString(type); //?
-  if (type.isNumberLiteral()) {
-    return `${type.value}px`;
-  }
-  if (type.isStringLiteral()) {
-    return type.value;
+  const value = getCSSValueAtLocation(node as ts.Expression, checker, type); //?
+  if (value) {
+    if (value.startsWith('--')) {
+      return `var(${value})`;
+    }
+    return value;
   }
 
-  const typeValue = checker.typeToString(type);
+  const typeValue = checker.typeToString(type); //?
 
   throw new Error(
     `Unknown type at: "${node.getText()}". Received "${typeValue}"\n${getErrorMessage(
@@ -104,7 +103,9 @@ function parseStyleObjValue(
     // handle fallback variables
     const fallbackValue = getFallbackVariable(value, variables); //?
     if (value && (value2 || fallbackValue)) {
-      return `var(${value}, ${value2 || fallbackValue})`;
+      return `var(${value}, ${
+        (value2?.startsWith('--') ? `var(${value2})` : value2) || fallbackValue
+      })`;
     }
 
     if (value) {
@@ -160,22 +161,44 @@ function getStyleValueFromTemplateExpression(
   return '';
 }
 
-function getCSSValueAtLocation(node: ts.Expression, checker: ts.TypeChecker): string {
-  const varsKey = getVarsKeyFromNode(node); //?
+function getCSSValueAtLocation(
+  node: ts.Expression,
+  checker: ts.TypeChecker,
+  /**
+   * Optional type. This works for cases where the node is a TypeNode or TypeScript infers the Type
+   * via a generic resolution. For example:
+   * ```ts
+   * function someFn<T extends string>(input: T): {fontSize: T} {
+   *   return { fontSize: input }
+   * }
+   *
+   * // in styles
+   * ...someFn('12px')
+   * ```
+   *
+   * If we don't pass a type of the property given by `type.getProperties()`, TypeScript will
+   * resolve the type at the value node as `T` instead of `12px`. Allowing for a type override is
+   * useful when the caller may have more context about the type at a given node than we do.
+   */
+  type: ts.Type = checker.getTypeAtLocation(node)
+): string {
+  const varsKey = getVarsKeyFromNode(node);
 
   if (vars[varsKey]) {
     return vars[varsKey];
   }
 
-  const type = checker.getTypeAtLocation(node);
-
   if (type.isStringLiteral()) {
     // This isn't a component variable, it is a static CSS variable
     return type.value;
-  } else {
-    if (node && ts.isPropertyAccessExpression(node)) {
-      return getPropertyAccessExpressionText(node);
-    }
+  }
+
+  if (type.isNumberLiteral()) {
+    return `${type.value}px`;
+  }
+
+  if (node && ts.isPropertyAccessExpression(node)) {
+    return getPropertyAccessExpressionText(node);
   }
 
   return '';
@@ -244,9 +267,11 @@ function getStyleFromProperty(
   if (ts.isSpreadAssignment(property)) {
     const type = checker.getTypeAtLocation(property.expression);
 
+    checker.typeToString(type); //?
+
     return type.getProperties().reduce((result, prop) => {
       const propType = checker.getTypeOfSymbolAtLocation(prop, prop.valueDeclaration);
-      checker.typeToString(propType); //?
+      propType; //?
       return {
         ...result,
         [prop.name]: getStyleValueFromType(prop.valueDeclaration, propType, checker),
@@ -479,7 +504,7 @@ function getVarName(node: ts.Node): string {
  * ```
  * Unknown type at: "fontSize".
  * File: test.ts, Line: 6, Character: 17.
- * const styles = cs({
+ * const styles = createStyles({
  *   fontSize: fontSize
  *             ========
  * })
@@ -514,7 +539,7 @@ function getErrorMessage(node: ts.Node) {
 
   /** This should look something like:
    * ```
-   * const styles = cs({
+   * const styles = createStyles({
    *   fontSize: fontSize
    *             ========
    * })

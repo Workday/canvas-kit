@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {BaseButton, buttonVars, BaseButtonContainerProps} from './BaseButton';
 import {createComponent, newTheme} from '@workday/canvas-kit-react/common';
-import {cs, createModifiers, cssVar} from '@workday/canvas-kit-styling';
+import {createStyles, createModifiers, cssVar} from '@workday/canvas-kit-styling';
 import {borderRadius, colors} from '@workday/canvas-kit-react/tokens';
 
 /**
@@ -17,7 +17,7 @@ export interface PrimaryButtonProps extends Omit<BaseButtonContainerProps, 'ref'
   variant?: 'inverse';
 }
 
-const PrimaryStyles = cs({
+const PrimaryStyles = createStyles({
   [buttonVars.default.background]: cssVar(newTheme.colors.primary.main),
   [buttonVars.default.border]: 'transparent',
   [buttonVars.default.borderRadius]: cssVar(newTheme.borderRadius.circle),
@@ -68,7 +68,7 @@ export const PrimaryButtonModifiers = createModifiers({
     only: 'canvas-button-icon-only',
   },
   variant: {
-    inverse: cs({
+    inverse: createStyles({
       [buttonVars.default.background]: newTheme.colors.primary.contrast,
       [buttonVars.default.border]: 'transparent',
       [buttonVars.default.borderRadius]: borderRadius.circle,

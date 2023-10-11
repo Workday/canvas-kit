@@ -1,26 +1,43 @@
 import {setUniqueSeed, resetUniqueIdCount} from '../lib/uniqueId';
-import {cs, cssVar, createVars, createModifiers, csToProps, CS} from '../lib/cs';
+import {createStyles, cssVar, createVars, createModifiers, csToProps, CS} from '../lib/cs';
 import {expectTypeOf} from 'expect-type';
 import {Properties} from 'csstype';
 import {SerializedStyles} from '@emotion/serialize';
 
-describe('cs', () => {
+describe('createStyles', () => {
   beforeEach(() => {
     setUniqueSeed('a');
     resetUniqueIdCount();
   });
 
-  describe('cs', () => {
+  describe('createStyles', () => {
     it('should accept an object of CSS Properties', () => {
-      type Input = Exclude<Parameters<typeof cs>[0], string | number | boolean | SerializedStyles>;
+      type Input = Exclude<
+        Parameters<typeof createStyles>[0],
+        string | number | boolean | SerializedStyles
+      >;
       type PositionProperty = Input['position'];
       const temp: PositionProperty = 'absolute';
-      cs({
+      createStyles({
         position: 'absolute', //
       });
       expectTypeOf<PositionProperty>().toMatchTypeOf<
         Properties['position'] | Properties['position'][]
       >();
+    });
+
+    it('should convert values that are CSS variables to CSS variable wrapping', () => {
+      const styles = createStyles({
+        color: '--my-var',
+      });
+      // find the rule we just created
+      for (const sheet of document.styleSheets as StyleSheetList & Iterable<CSSStyleSheet>) {
+        for (const rule of sheet.cssRules as CSSRuleList & Iterable<CSSRule>) {
+          if (rule.cssText.includes(styles)) {
+            expect(rule.cssText).toContain(`var(--my-var)`);
+          }
+        }
+      }
     });
   });
 
@@ -37,6 +54,12 @@ describe('cs', () => {
       const expected = cssVar(input, 'red');
 
       expect(expected).toEqual('var(--my-var, red)');
+    });
+
+    it('should return a css var wrapper that includes a fallback without cssVar wrapping', () => {
+      const expected = cssVar('--my-var', '--my-fallback-var');
+
+      expect(expected).toEqual('var(--my-var, var(--my-fallback-var))');
     });
   });
 
@@ -75,8 +98,8 @@ describe('cs', () => {
   describe('createModifiers', () => {
     const myModifiers = createModifiers({
       size: {
-        large: cs({fontSize: '1.5rem'}),
-        small: cs({fontSize: '0.8rem'}),
+        large: createStyles({fontSize: '1.5rem'}),
+        small: createStyles({fontSize: '0.8rem'}),
       },
     });
 

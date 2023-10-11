@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import isPropValid from '@emotion/is-prop-valid';
 import {createComponent, StyledType, useConstant} from '@workday/canvas-kit-react/common';
 
-import {useCs, CSProps} from '@workday/canvas-kit-styling';
+import {handleCsProp, CSProps} from '@workday/canvas-kit-styling';
 
 // style props
 import {background} from './utils/background';
@@ -139,15 +139,13 @@ const StyledBoxComponent = styled('div')<StyledType & BoxProps>(boxStyleFn);
  */
 export const Box = createComponent('div')({
   displayName: 'Box',
-  Component: ({children, ...props}: BoxProps, ref, Element) => {
+  Component: ({children, ...elemProps}: BoxProps, ref, Element) => {
     const BoxComponent = useConstant(() =>
       typeof Element === 'string' ? StyledBoxElement : StyledBoxComponent
     );
 
-    const elemProps = useCs(props as any); // useCs doesn't recognize the token-adapted props of BoxProps
-
     return (
-      <BoxComponent as={Element} ref={ref} {...elemProps}>
+      <BoxComponent as={Element} ref={ref} {...handleCsProp(elemProps)}>
         {children}
       </BoxComponent>
     );

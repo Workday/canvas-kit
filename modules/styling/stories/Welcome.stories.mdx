@@ -19,3 +19,50 @@ want to use this package for your own styles, you don't need to do anything spec
 development. Included is a small runtime to get styling working. If you wish to statically compile
 your CSS from your TypeScript files for faster page loading, visit the
 [Getting Started](/docs/features-styling-getting-started--page)
+
+## What is this?
+
+Canvas Kit Styling is two things:
+
+1. A utility function wrapper around `@emotion/css`
+2. An optional static compiler to get remove most of the runtime
+
+### Utility functions
+
+The basic utility function is the `cs` function. It makes a call to the `css` function from
+`@emotion/css`. Emotion takes care of the serializing, hashing, caching, and style injection.
+`@emotion/css` does most of the heavy lifting.
+
+These utility functions make it easier to create styles for element-based components with CSS
+Variables used for dynamic properties and modifiers used for dynamic groups of properties. The API
+functions can be found in the [API docs](/docs/features-styling-api--create-styles)
+
+### Static compiler
+
+The static compiler run as a TypeScript transform during TypeScript's transpilation phase. It
+requires the TypeScript type checker to determine the static value of any variables used. The
+transformer calls `@emotion/serialize` to pre-compute the serialized styles and hash so that the
+`@emotion/css` can skip these steps. For example, there's the before/after of the code.
+
+```ts
+// before
+const myVars = createVars('textColor', 'backgroundColor');
+
+const myStyles = createStyles({
+  fontSize: 12,
+  color: cssVar(myVars.textColor),
+  backgroundColor: cssVar(myVars.backgroundColor),
+});
+
+// after
+const myVars = createVars('textColor', 'backgroundColor');
+
+const myStyles = createStyles({
+  name: 'a8g234',
+  styles:
+    'font-size: 12px; color: var(--css-my-vars-textColor); backgroundColor: var(--css-my-vars-backgroundColor);',
+});
+```
+
+Emotion has an internal shortcut that recognizes the `styles` property and
+[short circuits interpolation](https://github.com/emotion-js/emotion/blob/f3b268f7c52103979402da919c9c0dd3f9e0e189/packages/serialize/src/index.js#L319).

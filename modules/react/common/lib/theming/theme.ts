@@ -1,7 +1,7 @@
 import colors from '@workday/canvas-colors-web';
 import {CanvasTheme, ContentDirection} from './types';
 import {breakpoints, up, down, between, only} from './breakpoints';
-import {cs} from '@workday/canvas-kit-styling';
+import {createStyles} from '@workday/canvas-kit-styling';
 
 export const defaultCanvasTheme: CanvasTheme = {
   palette: {
@@ -138,7 +138,7 @@ export const newTheme = {
 } as const;
 
 // temporary theme injection
-cs({
+createStyles({
   ':root': {
     '--canvas-color-base-cinnamon-100': '#ffefee',
     '--canvas-color-base-cinnamon-200': '#fcc9c5',

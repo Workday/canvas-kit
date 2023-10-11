@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {BaseButton, buttonVars, BaseButtonContainerProps} from './BaseButton';
 import {createComponent, newTheme} from '@workday/canvas-kit-react/common';
-import {cs, cssVar} from '@workday/canvas-kit-styling';
+import {createStyles, cssVar} from '@workday/canvas-kit-styling';
 
 export type DeleteButtonVariant = 'primary' | 'inverse';
 
@@ -13,7 +13,7 @@ export type DeleteButtonVariant = 'primary' | 'inverse';
  */
 export interface DeleteButtonProps extends Omit<BaseButtonContainerProps, 'ref'> {}
 
-const DeleteStyles = cs({
+const DeleteStyles = createStyles({
   [buttonVars.default.background]: cssVar(newTheme.colors.error.main),
   [buttonVars.default.border]: 'transparent',
   [buttonVars.default.borderRadius]: cssVar(newTheme.borderRadius.circle),
