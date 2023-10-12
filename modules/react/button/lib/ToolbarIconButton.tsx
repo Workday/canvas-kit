@@ -11,9 +11,9 @@ import {
   cssVar,
 } from '@workday/canvas-kit-react/common';
 import {ButtonColors} from './types';
-import {BaseButton, buttonVars} from './BaseButton';
+import {BaseButton} from './BaseButton';
 import {TertiaryButtonProps} from './TertiaryButton';
-import {base, brand} from '@workday/canvas-tokens-web';
+import {brand} from '@workday/canvas-tokens-web';
 
 export interface ToolbarIconButtonProps
   extends Omit<TertiaryButtonProps, 'size' | 'variant'>,
@@ -33,8 +33,8 @@ const StyledToolbarIconButton = styled(BaseButton)<StyledType & ToolbarIconButto
     ...focusRing({
       width: 2,
       separation: 0,
-      innerColor: cssVar(buttonVars.focus.boxShadowInner, cssVar(base.frenchVanilla100)),
-      outerColor: cssVar(buttonVars.focus.boxShadowOuter, cssVar(brand.primary.base)),
+      innerColor: 'transparent',
+      outerColor: cssVar(brand.common.focusOutline),
     }),
   },
 });

@@ -48,8 +48,6 @@ const tertiaryStyles = cs({
   [buttonVars.focus.icon]: cssVar(base.blackPepper500),
   [buttonVars.focus.boxShadowInner]: cssVar(brand.common.focusOutline),
   [buttonVars.focus.boxShadowOuter]: cssVar(brand.common.focusOutline),
-  // Focus Ring Styles
-  // [focusRingVars.width]: '0px',
   // Active Styles
   [buttonVars.active.background]: cssVar(base.soap300),
   [buttonVars.active.border]: 'transparent',
@@ -101,9 +99,6 @@ export const tertiaryButtonModifiers = createModifiers({
       [buttonVars.focus.boxShadowInner]: cssVar(base.blackPepper400),
       [buttonVars.focus.boxShadowOuter]: cssVar(base.frenchVanilla100),
       [buttonVars.focus.icon]: cssVar(base.blackPepper400),
-      // Focus Ring Styles
-      // [focusRingVars.width]: '2px',
-      // [focusRingVars.separation]: '0px',
       // Active Styles
       [buttonVars.active.background]: cssVar(base.soap200),
       [buttonVars.active.border]: 'transparent',
@@ -117,6 +112,7 @@ export const tertiaryButtonModifiers = createModifiers({
 
       '&:focus-visible, &.focus': {
         ...focusRing({
+          inset: 'inner',
           width: 2,
           separation: 2,
           innerColor: cssVar(buttonVars.focus.boxShadowInner, cssVar(base.frenchVanilla100)),
@@ -131,7 +127,6 @@ export const tertiaryButtonModifiers = createModifiers({
       padding: '0',
       minWidth: `${spaceNumbers.xl + spaceNumbers.xxs}rem`,
     }),
-
     largeStart: cs({
       paddingInlineStart: space.xxs,
       paddingInlineEnd: space.xs,
@@ -157,9 +152,9 @@ export const TertiaryButton = createComponent('button')({
       icon,
       colors,
       size = 'medium',
-      iconPosition = children ? undefined : 'only',
-      variant,
       isThemeable,
+      variant,
+      iconPosition = children ? undefined : 'only',
       ...elemProps
     }: TertiaryButtonProps,
     ref,

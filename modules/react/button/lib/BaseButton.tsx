@@ -375,8 +375,8 @@ export const BaseButton = createComponent('button')({
           baseButtonStyles,
           cs,
           buttonModifiers({
-            iconPosition: getIconPosition(size, iconPosition),
             size: size,
+            iconPosition: getIconPosition(size, iconPosition),
           }),
           buttonVars.active(colors?.active || {}),
           buttonVars.default(colors?.default || {}),
