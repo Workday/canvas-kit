@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.23](https://github.com/Workday/canvas-kit/releases/tag/v9.1.23) (2023-10-11)
+
+### Components
+
+- fix(popup): Include document.body in useReturnFocus bound check ([#2351](https://github.com/Workday/canvas-kit/pull/2351)) ([@Ebin-Benny](https://github.com/Ebin-Benny), [@ebin-benny-wd](https://github.com/ebin-benny-wd))
+
+
+## [v8.6.24](https://github.com/Workday/canvas-kit/releases/tag/v8.6.24) (2023-10-11)
+
+### Components
+
+- fix(popup): Include document.body in useReturnFocus bound check ([#2351](https://github.com/Workday/canvas-kit/pull/2351)) ([@Ebin-Benny](https://github.com/Ebin-Benny), [@ebin-benny-wd](https://github.com/ebin-benny-wd))
 ## [v9.1.22](https://github.com/Workday/canvas-kit/releases/tag/v9.1.22) (2023-10-02)
 
 ### Documentation
