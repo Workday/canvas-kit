@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {colors, type, space} from '@workday/canvas-kit-react/tokens';
-import {createSubcomponent, useIsRTL, styled, StyledType} from '@workday/canvas-kit-react/common';
+import {createSubcomponent, useIsRTL} from '@workday/canvas-kit-react/common';
 import {Tooltip, TooltipProps} from '@workday/canvas-kit-react/tooltip';
 import {
   BaseButton,
@@ -9,7 +9,6 @@ import {
   ButtonColors,
   ButtonSizes,
   getMinWidthStyles,
-  focusRingVars,
 } from '@workday/canvas-kit-react/button';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {useSegmentedControlModel} from './hooks/useSegmentedControlModel';
@@ -152,11 +151,6 @@ const Container = ({
   );
 };
 
-const StyledButton = styled(BaseButton)<StyledType>({
-  [focusRingVars.innerColor]: colors.frenchVanilla100,
-  [focusRingVars.outerColor]: colors.blueberry400,
-});
-
 export const SegmentedControlItem = createSubcomponent('button')({
   displayName: 'SegmentedControl.Item',
   modelHook: useSegmentedControlModel,
@@ -166,7 +160,7 @@ export const SegmentedControlItem = createSubcomponent('button')({
 
   return (
     <Container tooltipProps={tooltipProps}>
-      <StyledButton
+      <BaseButton
         as={Element}
         borderRadius="m"
         colors={getIconButtonColors(elemProps['aria-pressed'])}
@@ -185,7 +179,7 @@ export const SegmentedControlItem = createSubcomponent('button')({
             {children}
           </Text>
         )}
-      </StyledButton>
+      </BaseButton>
     </Container>
   );
 });

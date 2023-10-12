@@ -54,7 +54,6 @@ export interface ButtonContainerProps extends Partial<SystemIconProps>, GrowthBe
    */
   shouldMirrorIcon?: boolean;
   children?: React.ReactNode;
-  // focusRing?: keyof typeof buttonModifiers.focusRing;
 }
 
 /**

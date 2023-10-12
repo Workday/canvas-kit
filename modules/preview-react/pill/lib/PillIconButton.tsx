@@ -1,12 +1,6 @@
 import React from 'react';
 
-import {
-  focusRing,
-  styled,
-  StyledType,
-  createSubcomponent,
-  cssVar,
-} from '@workday/canvas-kit-react/common';
+import {focusRing, styled, StyledType, createSubcomponent} from '@workday/canvas-kit-react/common';
 
 import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
 import {usePillModel} from './usePillModel';
@@ -14,7 +8,6 @@ import {xSmallIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {colors, space} from '@workday/canvas-kit-react/tokens';
 import {BaseButton} from '@workday/canvas-kit-react/button';
-import {base} from '@workday/canvas-tokens-web';
 
 export interface PillIconButtonProps extends Omit<SystemIconProps, 'icon'> {
   /**
@@ -35,7 +28,6 @@ const getIconColors = () => {
       icon: colors.licorice200,
       border: 'initial',
     },
-
     hover: {
       icon: colors.licorice500,
       border: 'initial',
@@ -70,12 +62,9 @@ const StyledIconButton = styled(BaseButton)<StyledType & PillIconButtonProps>({
     pointerEvents: 'all',
     cursor: 'pointer',
   },
-  '&.focus-visibile, &.focus': {
+  '&:focus, &:focus-visible': {
     ...focusRing({
-      width: 0,
-      separation: 2,
       innerColor: 'transparent',
-      outerColor: cssVar(base.blueberry400),
     }),
   },
 });

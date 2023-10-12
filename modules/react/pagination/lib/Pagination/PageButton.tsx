@@ -6,14 +6,12 @@ import {
   createComponent,
 } from '@workday/canvas-kit-react/common';
 import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
-import {BaseButton, focusRingVars} from '@workday/canvas-kit-react/button';
+import {BaseButton} from '@workday/canvas-kit-react/button';
 
 import {PaginationContext} from './usePaginationModel';
 
 const StyledPageButton = styled(BaseButton)<{toggled?: boolean}>(
   {
-    [focusRingVars.innerColor]: colors.frenchVanilla100,
-    [focusRingVars.outerColor]: colors.blueberry400,
     minWidth: space.l,
     width: space.l,
     borderRadius: borderRadius.circle,

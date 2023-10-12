@@ -4,7 +4,6 @@ import {CSSObject} from '@emotion/react';
 import {BaseButton} from '@workday/canvas-kit-react/button';
 import {
   createContainer,
-  cssVar,
   focusRing,
   mouseFocusBehavior,
   styled,
@@ -20,7 +19,6 @@ import {PillIconButton} from './PillIconButton';
 import {PillCount} from './PillCount';
 import {PillAvatar} from './PillAvatar';
 import {PillLabel} from './PillLabel';
-import {base} from '@workday/canvas-tokens-web';
 
 export interface PillProps extends BoxProps {
   /**
@@ -43,13 +41,6 @@ const getButtonPillColors = () => {
       background: colors.soap300,
       border: colors.blueberry400,
       label: colors.blackPepper400,
-      focusRing: focusRing({
-        width: 0,
-        inset: 'inner',
-        innerColor: colors.blueberry400,
-        outerColor: colors.blueberry400,
-        separation: 1,
-      }),
     },
     hover: {
       icon: colors.licorice500,
@@ -98,12 +89,6 @@ const getRemovablePillColors = (disabled?: boolean) => {
       background: colors.soap300,
       label: colors.blackPepper400,
       border: colors.licorice200,
-
-      focusRing: focusRing({
-        width: 0,
-        innerColor: 'transparent',
-        outerColor: 'transparent',
-      }),
     },
     disabled: {},
   };
@@ -156,11 +141,11 @@ const StyledBasePill = styled(BaseButton.as('button'))<StyledType & PillProps>(
     '&:focus, &:focus-visible': {
       borderColor: variant === 'removable' ? undefined : colors.blueberry400,
       ...focusRing({
-        inset: 'inner',
         width: 0,
-        separation: variant === 'removable' ? 0 : 1,
-        innerColor: cssVar(base.blueberry400),
-        outerColor: 'transparent',
+        inset: 'inner',
+        innerColor: colors.blueberry400,
+        outerColor: colors.blueberry400,
+        separation: 1,
       }),
     },
   }),
@@ -171,6 +156,13 @@ const StyledNonInteractivePill = styled(StyledBasePill)<StyledType>({
   cursor: 'default',
   overflow: 'revert', // override BaseButton overflow styles so the click target exists outside the pill for removable
   position: 'relative',
+  '&.focus-visibile, &.focus': {
+    ...focusRing({
+      width: 0,
+      innerColor: 'transparent',
+      outerColor: 'transparent',
+    }),
+  },
 });
 
 /**
