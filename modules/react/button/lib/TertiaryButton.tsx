@@ -9,7 +9,7 @@ import {
   focusRing,
 } from '@workday/canvas-kit-react/common';
 import {system, brand, base} from '@workday/canvas-tokens-web';
-import {borderRadius, space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
+import {borderRadius, space} from '@workday/canvas-kit-react/tokens';
 import {Button} from './Button';
 
 /**
@@ -26,7 +26,7 @@ export interface TertiaryButtonProps extends Omit<ButtonContainerProps, 'ref'> {
 }
 
 const tertiaryStyles = cs({
-  paddingInline: cssVar(system.space.x2),
+  paddingInline: cssVar(system.space.x2, cssVar(space.xxs)),
   minWidth: 'auto',
   textDecoration: 'underline',
   border: 0,
@@ -125,7 +125,7 @@ export const tertiaryButtonModifiers = createModifiers({
     largeOnly: cs({
       borderRadius: borderRadius.circle,
       padding: '0',
-      minWidth: `${spaceNumbers.xl + spaceNumbers.xxs}rem`,
+      minWidth: cssVar(system.space.x12),
     }),
     largeStart: cs({
       paddingInlineStart: space.xxs,

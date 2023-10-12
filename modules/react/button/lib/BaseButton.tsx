@@ -14,7 +14,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {SystemIconProps} from '@workday/canvas-kit-react/icon';
 import {Box} from '@workday/canvas-kit-react/layout';
-import {space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
+import {space} from '@workday/canvas-kit-react/tokens';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 import {ButtonColors, ButtonSizes, IconPositions} from './types';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
@@ -133,6 +133,9 @@ export const getPaddingStyles = (
   }
 };
 
+/**
+ * Temporary css variables to be used across all Buttons.
+ */
 export const buttonVars = {
   default: createVars(
     'background',
@@ -186,6 +189,9 @@ export const buttonVars = {
   ),
 };
 
+/**
+ * Base styles for Buttons.
+ */
 const baseButtonStyles = cs({
   fontFamily: '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif',
   fontSize: '0.875rem',
@@ -196,7 +202,7 @@ const baseButtonStyles = cs({
   color: cssVar(buttonVars.default.label, cssVar(base.blackPepper400)),
   borderWidth: '1px',
   borderStyle: 'solid',
-  gap: cssVar(system.space.x2),
+  gap: cssVar(system.space.x2, space.xxs),
   borderColor: cssVar(buttonVars.default.border, 'transparent'),
   cursor: 'pointer',
   display: 'inline-flex',
@@ -217,19 +223,19 @@ const baseButtonStyles = cs({
   '&:disabled, &:disabled:active': {
     cursor: 'default',
     boxShadow: 'none',
-    opacity: cssVar(buttonVars.disabled.opacity),
+    opacity: cssVar(buttonVars.disabled.opacity, '1'),
   },
   '& span .wd-icon-fill': {
     transitionDuration: '40ms',
     fill: cssVar(buttonVars.default.icon, cssVar(base.blackPepper400)),
   },
   '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
-    fill: cssVar(buttonVars.default.icon),
+    fill: cssVar(buttonVars.default.icon, cssVar(base.blackPepper400)),
   },
   '&:focus-visible, &.focus': {
     backgroundColor: cssVar(buttonVars.focus.background, 'transparent'),
     borderColor: cssVar(buttonVars.focus.border, 'transparent'),
-    color: cssVar(buttonVars.focus.label),
+    color: cssVar(buttonVars.focus.label, cssVar(base.blackPepper400)),
     '& span .wd-icon-fill': {
       fill: cssVar(buttonVars.focus.icon),
     },
@@ -274,19 +280,25 @@ const baseButtonStyles = cs({
       fill: cssVar(buttonVars.disabled.icon, cssVar(base.blackPepper400)),
     },
     '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
-      fill: cssVar(buttonVars.disabled.icon),
+      fill: cssVar(buttonVars.disabled.icon, cssVar(base.blackPepper400)),
     },
   },
 });
 
+/**
+ * Button modifiers that will overwrite the base styles of Buttons.
+ * - `Size`: These modifiers will dictate a size of a Button and has a set of styles to associated with it.
+ * - `iconPosition`: These modifiers will override the existing `Size` styles. These are specific to icon locations
+ * within a button or if there is only an icon and no text.
+ */
 export const buttonModifiers = createModifiers({
   size: {
     large: cs({
-      fontSize: space.s,
-      lineHeight: space.m,
+      fontSize: cssVar(system.space.x4, space.s),
+      lineHeight: cssVar(system.space.x6, space.m),
       letterSpacing: '0.01rem',
       height: '48px',
-      paddingInline: space.l,
+      paddingInline: cssVar(system.space.x8, space.l),
       minWidth: '112px',
     }),
     medium: cs({
@@ -294,47 +306,68 @@ export const buttonModifiers = createModifiers({
       lineHeight: '1.25rem',
       letterSpacing: '0.015rem',
       minWidth: '96px',
-      paddingInline: space.m,
-      height: space.xl,
+      paddingInline: cssVar(system.space.x6, space.m),
+      height: cssVar(system.space.x10, space.xl),
     }),
     small: cs({
       fontSize: '0.875rem',
       lineHeight: '1.25rem',
       letterSpacing: '0.015rem',
-      height: space.l,
-      minWidth: space.xxxl,
-      paddingInline: space.s,
-      gap: space.xxxs,
+      height: cssVar(system.space.x8, space.l),
+      minWidth: cssVar(system.space.x20, space.xxxl),
+      paddingInline: cssVar(system.space.x4, space.s),
+      gap: cssVar(system.space.x1, space.xxxs),
     }),
     extraSmall: cs({
       fontSize: '0.75rem',
-      lineHeight: space.s,
+      lineHeight: cssVar(system.space.x4, space.s),
       letterSpacing: '0.02rem',
-      height: space.m,
+      height: cssVar(system.space.x6, space.m),
       minWidth: 'auto',
-      paddingInline: space.xs,
-      gap: space.xxxs,
+      paddingInline: cssVar(system.space.x3, space.xs),
+      gap: cssVar(system.space.x1, space.xxxs),
     }),
   },
   iconPosition: {
     largeOnly: cs({
       padding: '0',
-      minWidth: `${spaceNumbers.xl + spaceNumbers.xxs}rem`,
+      minWidth: cssVar(system.space.x12, '3rem'),
     }),
     largeStart: cs({
-      paddingInlineStart: space.m,
-      paddingInlineEnd: space.l,
+      paddingInlineStart: cssVar(system.space.x6, space.m),
+      paddingInlineEnd: cssVar(system.space.x8, space.l),
     }),
-    largeEnd: cs({paddingInlineStart: space.l, paddingInlineEnd: space.m}),
-    mediumOnly: cs({padding: '0', minWidth: space.xl}),
-    mediumStart: cs({paddingInlineStart: `${spaceNumbers.xl / 2}rem`, paddingInlineEnd: space.m}),
-    mediumEnd: cs({paddingInlineStart: space.m, paddingInlineEnd: `${spaceNumbers.xl / 2}rem`}),
-    smallOnly: cs({padding: '0', minWidth: space.l}),
-    smallStart: cs({paddingInlineStart: space.xs, paddingInlineEnd: space.s}),
-    smallEnd: cs({paddingInlineStart: space.s, paddingInlineEnd: space.xs}),
-    extraSmallOnly: cs({padding: '0', minWidth: space.m}),
-    extraSmallStart: cs({paddingInlineStart: space.xxs, paddingInlineEnd: space.xs}),
-    extraSmallEnd: cs({paddingInlineStart: space.xs, paddingInlineEnd: space.xxs}),
+    largeEnd: cs({
+      paddingInlineStart: cssVar(system.space.x8, space.l),
+      paddingInlineEnd: cssVar(system.space.x6, space.m),
+    }),
+    mediumOnly: cs({padding: '0', minWidth: cssVar(system.space.x10, space.xl)}),
+    mediumStart: cs({
+      paddingInlineStart: cssVar(system.space.x5, '1.25rem'),
+      paddingInlineEnd: cssVar(system.space.x6, space.m),
+    }),
+    mediumEnd: cs({
+      paddingInlineStart: cssVar(system.space.x6, space.m),
+      paddingInlineEnd: cssVar(system.space.x5, '1.25rem'),
+    }),
+    smallOnly: cs({padding: '0', minWidth: cssVar(system.space.x8, space.l)}),
+    smallStart: cs({
+      paddingInlineStart: cssVar(system.space.x3, space.xs),
+      paddingInlineEnd: cssVar(system.space.x4, space.s),
+    }),
+    smallEnd: cs({
+      paddingInlineStart: cssVar(system.space.x4, space.s),
+      paddingInlineEnd: cssVar(system.space.x3, space.xs),
+    }),
+    extraSmallOnly: cs({padding: '0', minWidth: cssVar(system.space.x6, space.m)}),
+    extraSmallStart: cs({
+      paddingInlineStart: cssVar(system.space.x2, space.xxs),
+      paddingInlineEnd: cssVar(system.space.x3, space.xs),
+    }),
+    extraSmallEnd: cs({
+      paddingInlineStart: cssVar(system.space.x3, space.xs),
+      paddingInlineEnd: cssVar(system.space.x2, space.xxs),
+    }),
   },
 });
 
@@ -349,6 +382,9 @@ export function getIconPosition(
   return `${size}${capitalize(iconPosition)}` as keyof typeof buttonModifiers.iconPosition;
 }
 
+/**
+ * The base button which all other buttons are built.
+ */
 export const BaseButton = createComponent('button')({
   displayName: 'BaseButton',
   Component: (

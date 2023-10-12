@@ -9,14 +9,14 @@ This guide contains an overview of the changes in Canvas Kit v10. Please
 any questions.
 
 - [Codemod](#codemod)
-- [Removals](#removals)
-	- [useBanner](#useBanner)
+- [Removals](#removals) - [useBanner](#useBanner)
 - [Deprecations](#deprecations)
   - [InputIconContainer](#input-icon-container)
   - [Table](#table)
 - [Token Updates](#token-updates)
   - [Space and Depth](#space-and-depth)
 - [Component Updates](#component-updates)
+  - [Button](#button)
 - [Glossary](#glossary)
   - [Main](#main)
   - [Preview](#preview)
@@ -61,19 +61,23 @@ promoted or replaced a component or utility.
 ## useBanner
 
 We have removed the `useBanner` hook, the only function of which was to add `aria-labelledby` and
-`aria-describedby` references to the text inside of the Banner. This was not required for accessibility,
-and browsers can compute the name of the Banner from the text given inside.
+`aria-describedby` references to the text inside of the Banner. This was not required for
+accessibility, and browsers can compute the name of the Banner from the text given inside.
 
 ## Deprecations
 
 ### Input Icon Container
 
-We've deprecated `InputIconContainer` from [Main](#main) because it doesn't handle
-bidirectionality or icons at the start of an input. Please consider using [`InputGroup`](https://workday.github.io/canvas-kit/?path=/story/components-inputs-text-input--icons) instead.
+We've deprecated `InputIconContainer` from [Main](#main) because it doesn't handle bidirectionality
+or icons at the start of an input. Please consider using
+[`InputGroup`](https://workday.github.io/canvas-kit/?path=/story/components-inputs-text-input--icons)
+instead.
 
 ### Table
 
-We've deprecated `Table` and `TableRow` as well as all of their exported members. Please consider using [`Table in Preview`](https://workday.github.io/canvas-kit/?path=/docs/preview-table--basic) instead.
+We've deprecated `Table` and `TableRow` as well as all of their exported members. Please consider
+using [`Table in Preview`](https://workday.github.io/canvas-kit/?path=/docs/preview-table--basic)
+instead.
 
 ## Token Updates
 
@@ -122,6 +126,10 @@ these sizes should change along with it. Since `px` are a fixed unit and do not 
 `rem` will allow these tokens to scale with a new default font size.
 
 ## Component Updates
+
+### Button
+
+**PR:** [#2285](https://github.com/Workday/canvas-kit/pull/2285)
 
 ## Glossary
 

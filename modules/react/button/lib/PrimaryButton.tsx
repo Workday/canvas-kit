@@ -19,7 +19,7 @@ export interface PrimaryButtonProps extends Omit<ButtonContainerProps, 'ref'> {
 
 const primaryStyles = cs({
   // Default Styles
-  [buttonVars.default.background]: cssVar(brand.primary.base),
+  [buttonVars.default.background]: cssVar(brand.primary.base, cssVar(base.blueberry400)),
   [buttonVars.default.border]: 'transparent',
   [buttonVars.default.borderRadius]: cssVar(system.shape.circle),
   [buttonVars.default.label]: cssVar(brand.primary.accent),
