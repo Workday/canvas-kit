@@ -2,7 +2,7 @@ import React from 'react';
 import {generateUniqueId} from './uniqueId';
 // eslint-disable-next-line @emotion/no-vanilla
 import {css} from '@emotion/css';
-import type {Keyframes, SerializedStyles, CSSObject} from '@emotion/serialize';
+import {serializeStyles, Keyframes, SerializedStyles, CSSObject} from '@emotion/serialize';
 
 import {slugify} from './slugify';
 
@@ -186,7 +186,8 @@ function isCsPropsReturn(input: {}): input is CsToPropsReturn {
 }
 
 /**
- * All acceptable values of the `cs` prop.
+ * All acceptable values of the `cs` prop. It can be a CSS class name, any CSS properties, an object
+ * with a `className` and `styles`, or an array of these
  */
 export type CSToPropsInput =
   | undefined
@@ -243,6 +244,20 @@ export function csToProps(input: CSToPropsInput): CsToPropsReturn {
 }
 
 export interface CSProps {
+  /** The `cs` prop takes in a single value or an array of values. You can pass the CSS class name
+   * returned by {@link createStyles}, or the result of {@link createVars} and
+   * {@link createModifiers}. If you're extending a component already using `cs`, you can merge that
+   * prop in as well.
+   *
+   * ```tsx
+   * cs={[
+   *   cs, // from the prop list
+   *   myStyles,
+   *   myModifiers({ size: 'medium' }),
+   *   myVars({ backgroundColor: 'red' })
+   * ]}
+   * ```
+   */
   cs?: CSToPropsInput;
 }
 
@@ -272,7 +287,20 @@ export function createStyles(...args: (StyleProps | string)[]): string {
 
       const convertedStyles = replaceAllWithTokens(input);
 
-      return css(convertedStyles as any);
+      // We want to call `serializeStyles` directly and ignore the hash generated so we can have
+      // more predictable style merging. If 2 different files define the same style properties, the
+      // hash will be the same and using the default hash functionality of Emotion will mean the
+      // merge order will be unpredictable. For example, `BaseButton` and `TertiaryButton` define
+      // different modifiers for padding. The BaseButton's `extraSmall` modifier contains the same
+      // styling as TertiaryButton's `large` modifier. Emotion would hash these two declarations as
+      // the same hash and only inject the one from `BaseButton`. If `TertiaryButton` defines
+      // `padding` in its base styles, and uses the large size modifier, the base padding will
+      // override the `TertiaryButton` `large` size modifier because `BaseButton.small` modifier was
+      // injected into the document's style sheets before `TertiaryButton.base` styles. This is due
+      // to CSS specificity. If everything has the same specificity, last defined wins. More info:
+      // https://codesandbox.io/s/stupefied-bartik-9c2jtd?file=/src/App.tsx
+      const {styles} = serializeStyles([convertedStyles]);
+      return css({name: generateUniqueId(), styles});
     })
     .join(' ');
 }
