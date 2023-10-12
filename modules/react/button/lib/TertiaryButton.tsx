@@ -26,7 +26,7 @@ export interface TertiaryButtonProps extends Omit<ButtonContainerProps, 'ref'> {
 }
 
 const tertiaryStyles = cs({
-  paddingInline: cssVar(system.space.x2, cssVar(space.xxs)),
+  paddingInline: cssVar(system.space.x2, space.xxs),
   minWidth: 'auto',
   textDecoration: 'underline',
   border: 0,
