@@ -2,7 +2,8 @@ import React from 'react';
 import {generateUniqueId} from '@workday/canvas-kit-react/common';
 // eslint-disable-next-line @emotion/no-vanilla
 import {css} from '@emotion/css';
-import type {Keyframes, SerializedStyles, CSSObject} from '@emotion/serialize';
+// import {serializeStyles,} from '@emotion/serialize';
+import {serializeStyles, Keyframes, SerializedStyles, CSSObject} from '@emotion/serialize';
 
 // future placeholder for token replacement
 const tokens = {};
@@ -273,7 +274,8 @@ export function cs(...args: (StyleProps | string)[]): string {
 
       const convertedStyles = replaceAllWithTokens(input);
 
-      return css(convertedStyles as any);
+      const {styles} = serializeStyles([convertedStyles])
+      return css({name: generateUniqueId(), styles});
     })
     .join(' ');
 }

@@ -64,8 +64,8 @@ const tertiaryStyles = cs({
     ...focusRing({
       width: 2,
       separation: 0,
-      innerColor: cssVar(buttonVars.focus.boxShadowInner, cssVar(base.frenchVanilla100)),
-      outerColor: cssVar(buttonVars.focus.boxShadowOuter, cssVar(brand.primary.base)),
+      innerColor: cssVar(base.frenchVanilla100, cssVar(buttonVars.focus.boxShadowInner)),
+      outerColor: cssVar(brand.common.focusOutline, cssVar(buttonVars.focus.boxShadowOuter)),
     }),
   },
 });
@@ -115,8 +115,8 @@ export const tertiaryButtonModifiers = createModifiers({
           inset: 'inner',
           width: 2,
           separation: 2,
-          innerColor: cssVar(buttonVars.focus.boxShadowInner, cssVar(base.frenchVanilla100)),
-          outerColor: cssVar(buttonVars.focus.boxShadowOuter, cssVar(brand.primary.base)),
+          innerColor: cssVar(base.blackPepper400, cssVar(buttonVars.focus.boxShadowInner)),
+          outerColor: cssVar(base.frenchVanilla100, cssVar(buttonVars.focus.boxShadowOuter)),
         }),
       },
     }),
@@ -170,9 +170,9 @@ export const TertiaryButton = createComponent('button')({
         cs={[
           tertiaryStyles,
           tertiaryButtonModifiers({
-            iconPosition: getIconPosition(size, iconPosition),
             isThemeable: (isThemeable || iconPosition !== 'only') as any,
             variant: variant,
+            iconPosition: getIconPosition(size, iconPosition),
           }),
         ]}
         {...elemProps}

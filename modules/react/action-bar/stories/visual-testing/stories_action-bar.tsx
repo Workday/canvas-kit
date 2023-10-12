@@ -76,7 +76,7 @@ export const ActionBarWithOverflowMenuStates = () => {
           },
           {
             label: 'Maximum Visible Items (as 5 buttons)',
-            props: {maximumVisible: items.length},
+            props: {maximumVisible: items.length, containerWidth: 830},
           },
           {
             label: 'Maximum Visible Items (400px width)',
