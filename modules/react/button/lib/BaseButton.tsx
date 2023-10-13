@@ -195,7 +195,7 @@ export const buttonVars = {
 const baseButtonStyles = cs({
   fontFamily: '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif',
   fontSize: '0.875rem',
-  lineHeight: '1.25rem',
+  lineHeight: 'normal',
   letterSpacing: '0.015rem',
   fontWeight: 'bold',
   backgroundColor: cssVar(buttonVars.default.background, 'transparent'),
@@ -303,7 +303,6 @@ export const buttonModifiers = createModifiers({
     }),
     medium: cs({
       fontSize: '0.875rem',
-      lineHeight: '1.25rem',
       letterSpacing: '0.015rem',
       minWidth: '96px',
       paddingInline: cssVar(system.space.x6, space.m),
@@ -311,7 +310,6 @@ export const buttonModifiers = createModifiers({
     }),
     small: cs({
       fontSize: '0.875rem',
-      lineHeight: '1.25rem',
       letterSpacing: '0.015rem',
       height: cssVar(system.space.x8, space.l),
       minWidth: cssVar(system.space.x20, space.xxxl),

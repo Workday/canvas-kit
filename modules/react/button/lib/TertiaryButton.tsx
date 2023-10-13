@@ -96,8 +96,6 @@ export const tertiaryButtonModifiers = createModifiers({
       [buttonVars.focus.background]: cssVar(base.frenchVanilla100),
       [buttonVars.focus.border]: 'transparent',
       [buttonVars.focus.label]: cssVar(base.blackPepper400),
-      [buttonVars.focus.boxShadowInner]: cssVar(base.blackPepper400),
-      [buttonVars.focus.boxShadowOuter]: cssVar(base.frenchVanilla100),
       [buttonVars.focus.icon]: cssVar(base.blackPepper400),
       // Active Styles
       [buttonVars.active.background]: cssVar(base.soap200),
