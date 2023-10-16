@@ -267,7 +267,7 @@ export class DeprecatedMenuItem extends React.Component<DeprecatedMenuItemProps>
 
   componentDidMount() {
     console.warn(
-      `This component is being deprecated and will be removed in Canvas Kit V9.\n
+      `This component is being deprecated and will be removed in a future major version.\n
       For more information, please see the V8 upgrade guide:\n
       https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page
       `
