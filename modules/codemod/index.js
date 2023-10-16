@@ -61,6 +61,13 @@ const {_: commands, path, ignoreConfig, ignorePattern, verbose} = require('yargs
       describe: chalk.gray('The path to execute the transform in (recursively).'),
     });
   })
+  .command('v10 [path]', chalk.gray('Canvas Kit v9 > v10 upgrade transform'), yargs => {
+    yargs.positional('path', {
+      type: 'string',
+      default: '.',
+      describe: chalk.gray('The path to execute the transform in (recursively).'),
+    });
+  })
   .demandCommand(1, chalk.red.bold('You must provide a transform to apply.'))
   .strictCommands()
   .fail((msg, err, yargs) => {
