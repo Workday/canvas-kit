@@ -6,9 +6,6 @@ import {serializeStyles, Keyframes, SerializedStyles, CSSObject} from '@emotion/
 
 import {slugify} from './slugify';
 
-// future placeholder for token replacement
-const tokens = {};
-
 /**
  * Style properties in a JavaScript camelCase. Everything Emotion allows is also
  * allowed here.
@@ -22,28 +19,30 @@ export type StyleProps =
   | SerializedStyles
   | CSSObject;
 
-function replaceWithToken<T>(value: T): T {
-  // Handle the case where the value is a variable without the `var()` wrapping function. A common mistake.
+function convertProperty<T>(value: T): T {
+  // Handle the case where the value is a variable without the `var()` wrapping function. It happens
+  // enough that it makes sense to automatically wrap.
   if (typeof value === 'string' && value.startsWith('--')) {
     return `var(${value})` as any as T;
   }
-  return (tokens as any)[value] || value;
+  return value;
 }
 
-// This function current replaces token values like "blueberry400" with a color value
-// but it can be used to replace other things if we want or remove it entirely
-
-function replaceAllWithTokens<T extends unknown>(obj: T): T {
+/**
+ * Walks through all the properties and values of a style and converts properties and/or values that
+ * need special processing. An example might be using a CSS variable without a `var()` wrapping.
+ */
+function convertAllProperties<T extends unknown>(obj: T): T {
   if (typeof obj === 'object') {
     const converted = {};
     for (const key in obj) {
       if ((obj as Object).hasOwnProperty(key)) {
-        (converted as any)[key] = replaceAllWithTokens(obj[key]);
+        (converted as any)[key] = convertAllProperties(obj[key]);
       }
     }
     return converted as T;
   }
-  return replaceWithToken(obj);
+  return convertProperty(obj);
 }
 
 export type CS = string | Record<string, string>;
@@ -285,7 +284,7 @@ export function createStyles(...args: (StyleProps | string)[]): string {
         return input;
       }
 
-      const convertedStyles = replaceAllWithTokens(input);
+      const convertedStyles = convertAllProperties(input);
 
       // We want to call `serializeStyles` directly and ignore the hash generated so we can have
       // more predictable style merging. If 2 different files define the same style properties, the
