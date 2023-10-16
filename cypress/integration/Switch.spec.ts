@@ -1,7 +1,7 @@
 import * as h from '../helpers';
 
 const getSwitch = () => {
-  return cy.findByRole('checkbox');
+  return cy.findByRole('switch');
 };
 
 describe('Switch', () => {
