@@ -200,10 +200,10 @@ const baseButtonStyles = createStyles({
     borderColor: cssVar(buttonVars.focus.border, 'transparent'),
     color: cssVar(buttonVars.focus.label, cssVar(base.blackPepper400)),
     '& span .wd-icon-fill': {
-      fill: cssVar(buttonVars.focus.icon),
+      fill: cssVar(buttonVars.focus.icon, cssVar(base.blackPepper400)),
     },
     '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
-      fill: cssVar(buttonVars.focus.icon),
+      fill: cssVar(buttonVars.focus.icon, cssVar(base.blackPepper400)),
     },
     ...focusRing({
       width: 2,
@@ -220,7 +220,7 @@ const baseButtonStyles = createStyles({
       fill: cssVar(buttonVars.hover.icon, cssVar(base.blackPepper500)),
     },
     '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
-      fill: cssVar(buttonVars.hover.icon),
+      fill: cssVar(buttonVars.hover.icon, cssVar(base.blackPepper500)),
     },
   },
   '&:hover:active': {transitionDuration: '40ms'},

@@ -37,7 +37,9 @@ function storySort(a, b) {
     prefix('basic', 'aa'),
     prefix('default', 'ab'),
     prefix('testing', 'zzz'),
-    prefix('examples', 'zz')
+    prefix('examples', 'zz'),
+    // Make sure upgrade guides follow chronological order by replacing `v9.0` with `v09.0`
+    value => value.replace(/v([1-9]\-0)/, '0$1')
   );
 
   const left = prefixFn(a[0]);
