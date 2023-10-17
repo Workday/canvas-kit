@@ -47,9 +47,31 @@ function convertAllProperties<T extends unknown>(obj: T): T {
 
 export type CS = string | Record<string, string>;
 
+/**
+ * CSS variable map type. In developer/dynamic mode, we don't know what the hash is going to be. All
+ * variables will look like `--{hash}-{name}`. But the static optimizers generates the name based on
+ * the AST, so the `id` will be known. Instead of something like `--abc123-color`, the `ID` is set
+ * by the optimizer.
+ *
+ * For example:
+ * ```ts
+ * // dynamic
+ * const myVars = createVars('color') // type is `Record<'color', string>`
+ *
+ * // optimizer rewrites the code
+ * const myVars = createVars<'color', 'myVars'>('color')
+ * // type is now `{color: "--myVars-color"}`
+ *
+ * myVars.color // type is `--myVars-color`
+ * ```
+ *
+ * This is so optimized variables can be used directly by the static parser downstream. The variable
+ * names become statically analyzable.
+ */
 export type CsVarsMap<T extends string, ID extends string | never> = [ID] extends [never]
   ? Record<T, string>
-  : {[K in T]: `--${ID}-${K}`};
+  : // map type. If the ID is known from the style optimizer, use static keys using string template literals instead of `string`
+    {[K in T]: `--${ID}-${K}`};
 
 export type CsVars<T extends string, ID extends string | never> = CsVarsMap<T, ID> & {
   (input: Partial<Record<T, string>>): Record<T, string>;
@@ -95,7 +117,7 @@ export function cssVar(input: string, fallback?: string) {
  * const myVars = createVars('color', 'background')
  *
  * // 'color' is a typed property. The type is `string`
- * console.log(myValues.color) // `'var(--{hash}-color)'`
+ * console.log(myVars.color) // `'var(--{hash}-color)'`
  *
  * // 'color' is a typed property. The type is `string?`
  * // The returned object can be assigned to the `style` property of an element
