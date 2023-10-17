@@ -370,16 +370,16 @@ export const BaseButton = createComponent('button')({
         type="button"
         cs={[
           baseButtonStyles,
-          cs,
           buttonModifiers({
             size: size,
             iconPosition: getIconPosition(size, iconPosition),
           }),
-          buttonVars.active(colors?.active || {}),
           buttonVars.default(colors?.default || {}),
-          buttonVars.disabled(colors?.disabled || {}),
           buttonVars.focus(colors?.focus || {}),
           buttonVars.hover(colors?.hover || {}),
+          buttonVars.active(colors?.active || {}),
+          buttonVars.disabled(colors?.disabled || {}),
+          cs,
         ]}
         {...elemProps}
       >
