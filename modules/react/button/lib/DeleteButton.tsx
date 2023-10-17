@@ -1,7 +1,8 @@
 import * as React from 'react';
 
 import {buttonVars, ButtonContainerProps} from './BaseButton';
-import {createComponent, cs, cssVar} from '@workday/canvas-kit-react/common';
+import {createComponent} from '@workday/canvas-kit-react/common';
+import {createStyles, cssVar} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 import {Button} from './Button';
 
@@ -12,7 +13,7 @@ import {Button} from './Button';
  */
 export interface DeleteButtonProps extends Omit<ButtonContainerProps, 'ref'> {}
 
-const deleteStyles = cs({
+const deleteStyles = createStyles({
   [buttonVars.default.background]: cssVar(brand.error.base),
   [buttonVars.default.border]: 'transparent',
   [buttonVars.default.borderRadius]: cssVar(system.shape.circle),

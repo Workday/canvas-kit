@@ -3,15 +3,8 @@ import * as React from 'react';
 import {ButtonLabelIcon} from '../lib/parts/ButtonLabelIcon';
 import {ButtonLabel} from '../lib/parts/ButtonLabel';
 
-import {
-  createComponent,
-  GrowthBehavior,
-  cs,
-  createVars,
-  cssVar,
-  createModifiers,
-  focusRing,
-} from '@workday/canvas-kit-react/common';
+import {createComponent, GrowthBehavior, focusRing} from '@workday/canvas-kit-react/common';
+import {createStyles, createVars, cssVar, createModifiers} from '@workday/canvas-kit-styling';
 import {SystemIconProps} from '@workday/canvas-kit-react/icon';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {space} from '@workday/canvas-kit-react/tokens';
@@ -162,7 +155,7 @@ export const buttonVars = {
 /**
  * Base styles for Buttons.
  */
-const baseButtonStyles = cs({
+const baseButtonStyles = createStyles({
   fontFamily: '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif',
   fontSize: '0.875rem',
   lineHeight: 'normal',
@@ -263,7 +256,7 @@ const baseButtonStyles = cs({
  */
 export const buttonModifiers = createModifiers({
   size: {
-    large: cs({
+    large: createStyles({
       fontSize: cssVar(system.space.x4, space.s),
       lineHeight: cssVar(system.space.x6, space.m),
       letterSpacing: '0.01rem',
@@ -271,14 +264,14 @@ export const buttonModifiers = createModifiers({
       paddingInline: cssVar(system.space.x8, space.l),
       minWidth: '112px',
     }),
-    medium: cs({
+    medium: createStyles({
       fontSize: '0.875rem',
       letterSpacing: '0.015rem',
       minWidth: '96px',
       paddingInline: cssVar(system.space.x6, space.m),
       height: cssVar(system.space.x10, space.xl),
     }),
-    small: cs({
+    small: createStyles({
       fontSize: '0.875rem',
       letterSpacing: '0.015rem',
       height: cssVar(system.space.x8, space.l),
@@ -286,7 +279,7 @@ export const buttonModifiers = createModifiers({
       paddingInline: cssVar(system.space.x4, space.s),
       gap: cssVar(system.space.x1, space.xxxs),
     }),
-    extraSmall: cs({
+    extraSmall: createStyles({
       fontSize: '0.75rem',
       lineHeight: cssVar(system.space.x4, space.s),
       letterSpacing: '0.02rem',
@@ -297,42 +290,42 @@ export const buttonModifiers = createModifiers({
     }),
   },
   iconPosition: {
-    largeOnly: cs({
+    largeOnly: createStyles({
       padding: '0',
       minWidth: cssVar(system.space.x12, '3rem'),
     }),
-    largeStart: cs({
+    largeStart: createStyles({
       paddingInlineStart: cssVar(system.space.x6, space.m),
       paddingInlineEnd: cssVar(system.space.x8, space.l),
     }),
-    largeEnd: cs({
+    largeEnd: createStyles({
       paddingInlineStart: cssVar(system.space.x8, space.l),
       paddingInlineEnd: cssVar(system.space.x6, space.m),
     }),
-    mediumOnly: cs({padding: '0', minWidth: cssVar(system.space.x10, space.xl)}),
-    mediumStart: cs({
+    mediumOnly: createStyles({padding: '0', minWidth: cssVar(system.space.x10, space.xl)}),
+    mediumStart: createStyles({
       paddingInlineStart: cssVar(system.space.x5, '1.25rem'),
       paddingInlineEnd: cssVar(system.space.x6, space.m),
     }),
-    mediumEnd: cs({
+    mediumEnd: createStyles({
       paddingInlineStart: cssVar(system.space.x6, space.m),
       paddingInlineEnd: cssVar(system.space.x5, '1.25rem'),
     }),
-    smallOnly: cs({padding: '0', minWidth: cssVar(system.space.x8, space.l)}),
-    smallStart: cs({
+    smallOnly: createStyles({padding: '0', minWidth: cssVar(system.space.x8, space.l)}),
+    smallStart: createStyles({
       paddingInlineStart: cssVar(system.space.x3, space.xs),
       paddingInlineEnd: cssVar(system.space.x4, space.s),
     }),
-    smallEnd: cs({
+    smallEnd: createStyles({
       paddingInlineStart: cssVar(system.space.x4, space.s),
       paddingInlineEnd: cssVar(system.space.x3, space.xs),
     }),
-    extraSmallOnly: cs({padding: '0', minWidth: cssVar(system.space.x6, space.m)}),
-    extraSmallStart: cs({
+    extraSmallOnly: createStyles({padding: '0', minWidth: cssVar(system.space.x6, space.m)}),
+    extraSmallStart: createStyles({
       paddingInlineStart: cssVar(system.space.x2, space.xxs),
       paddingInlineEnd: cssVar(system.space.x3, space.xs),
     }),
-    extraSmallEnd: cs({
+    extraSmallEnd: createStyles({
       paddingInlineStart: cssVar(system.space.x3, space.xs),
       paddingInlineEnd: cssVar(system.space.x2, space.xxs),
     }),

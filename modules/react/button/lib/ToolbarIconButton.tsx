@@ -8,8 +8,8 @@ import {
   createComponent,
   styled,
   StyledType,
-  cssVar,
 } from '@workday/canvas-kit-react/common';
+import {cssVar} from '@workday/canvas-kit-styling';
 import {ButtonColors} from './types';
 import {BaseButton} from './BaseButton';
 import {TertiaryButtonProps} from './TertiaryButton';

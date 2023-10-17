@@ -1,13 +1,8 @@
 import * as React from 'react';
 
 import {buttonVars, ButtonContainerProps, getIconPosition} from './BaseButton';
-import {
-  createComponent,
-  cs,
-  createModifiers,
-  cssVar,
-  focusRing,
-} from '@workday/canvas-kit-react/common';
+import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
+import {createStyles, cssVar, createModifiers} from '@workday/canvas-kit-styling';
 import {system, brand, base} from '@workday/canvas-tokens-web';
 import {borderRadius, space} from '@workday/canvas-kit-react/tokens';
 import {Button} from './Button';
@@ -25,7 +20,7 @@ export interface TertiaryButtonProps extends Omit<ButtonContainerProps, 'ref'> {
   isThemeable?: boolean;
 }
 
-const tertiaryStyles = cs({
+const tertiaryStyles = createStyles({
   paddingInline: cssVar(system.space.x2, space.xxs),
   minWidth: 'auto',
   textDecoration: 'underline',
@@ -72,7 +67,7 @@ const tertiaryStyles = cs({
 
 export const tertiaryButtonModifiers = createModifiers({
   isThemeable: {
-    true: cs({
+    true: createStyles({
       [buttonVars.default.icon]: cssVar(brand.primary.base),
       [buttonVars.hover.icon]: cssVar(brand.primary.dark),
       [buttonVars.focus.icon]: cssVar(brand.primary.base),
@@ -81,7 +76,7 @@ export const tertiaryButtonModifiers = createModifiers({
     }),
   },
   variant: {
-    inverse: cs({
+    inverse: createStyles({
       // Default Styles
       [buttonVars.default.background]: 'transparent',
       [buttonVars.default.border]: 'transparent',
@@ -120,25 +115,29 @@ export const tertiaryButtonModifiers = createModifiers({
     }),
   },
   iconPosition: {
-    largeOnly: cs({
+    largeOnly: createStyles({
       borderRadius: borderRadius.circle,
       padding: '0',
       minWidth: cssVar(system.space.x12),
     }),
-    largeStart: cs({
+    largeStart: createStyles({
       paddingInlineStart: space.xxs,
       paddingInlineEnd: space.xs,
     }),
-    largeEnd: cs({paddingInlineStart: space.xs, paddingInlineEnd: space.xxs}),
-    mediumOnly: cs({padding: '0', minWidth: space.xl, borderRadius: borderRadius.circle}),
-    mediumStart: cs({paddingInlineStart: space.xxs, paddingInlineEnd: space.xs}),
-    mediumEnd: cs({paddingInlineStart: space.xs, paddingInlineEnd: space.xxs}),
-    smallOnly: cs({padding: '0', minWidth: space.l, borderRadius: borderRadius.circle}),
-    smallStart: cs({paddingInlineStart: space.xxs, paddingInlineEnd: space.xs}),
-    smallEnd: cs({paddingInlineStart: space.xs, paddingInlineEnd: space.xxs}),
-    extraSmallOnly: cs({padding: '0', minWidth: space.m, borderRadius: borderRadius.circle}),
-    extraSmallStart: cs({paddingInlineStart: space.xxxs, paddingInlineEnd: space.xxs}),
-    extraSmallEnd: cs({paddingInlineStart: space.xxs, paddingInlineEnd: space.xxxs}),
+    largeEnd: createStyles({paddingInlineStart: space.xs, paddingInlineEnd: space.xxs}),
+    mediumOnly: createStyles({padding: '0', minWidth: space.xl, borderRadius: borderRadius.circle}),
+    mediumStart: createStyles({paddingInlineStart: space.xxs, paddingInlineEnd: space.xs}),
+    mediumEnd: createStyles({paddingInlineStart: space.xs, paddingInlineEnd: space.xxs}),
+    smallOnly: createStyles({padding: '0', minWidth: space.l, borderRadius: borderRadius.circle}),
+    smallStart: createStyles({paddingInlineStart: space.xxs, paddingInlineEnd: space.xs}),
+    smallEnd: createStyles({paddingInlineStart: space.xs, paddingInlineEnd: space.xxs}),
+    extraSmallOnly: createStyles({
+      padding: '0',
+      minWidth: space.m,
+      borderRadius: borderRadius.circle,
+    }),
+    extraSmallStart: createStyles({paddingInlineStart: space.xxxs, paddingInlineEnd: space.xxs}),
+    extraSmallEnd: createStyles({paddingInlineStart: space.xxs, paddingInlineEnd: space.xxxs}),
   },
 });
 

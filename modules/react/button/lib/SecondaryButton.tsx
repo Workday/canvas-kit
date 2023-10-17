@@ -1,7 +1,8 @@
 import * as React from 'react';
 
 import {buttonVars, ButtonContainerProps} from './BaseButton';
-import {createComponent, cs, createModifiers, cssVar} from '@workday/canvas-kit-react/common';
+import {createComponent} from '@workday/canvas-kit-react/common';
+import {createStyles, cssVar, createModifiers} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 import {Button} from './Button';
 
@@ -17,7 +18,7 @@ export interface SecondaryButtonProps extends Omit<ButtonContainerProps, 'ref'> 
   variant?: 'inverse';
 }
 
-const secondaryStyles = cs({
+const secondaryStyles = createStyles({
   // Default Styles
   [buttonVars.default.background]: 'transparent',
   [buttonVars.default.border]: cssVar(base.blackPepper400),
@@ -51,7 +52,7 @@ const secondaryStyles = cs({
 
 export const secondaryButtonModifiers = createModifiers({
   variant: {
-    inverse: cs({
+    inverse: createStyles({
       // Default Styles
       [buttonVars.default.background]: 'transparent',
       [buttonVars.default.border]: cssVar(base.frenchVanilla100),
