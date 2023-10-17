@@ -105,7 +105,7 @@ If you're a Canvas Kit maintainer, please read our [maintaining docs](./modules/
 ## Open Development
 
 All work on the Canvas Kit happens directly on [GitHub](https://github.com/Workday/canvas-kit). Both
-core team members and external contributors can send pull requests which go through the same review
+core team members and external contributors can send pull requests, which go through the same review
 process. Any and all issues are public and available for discussion.
 
 ## Versioning
@@ -119,17 +119,17 @@ Each module is independently versioned using [Lerna](https://github.com/lerna/le
 ## Version Support
 
 At any given time, we support three major versions of Canvas Kit: previous, current, and next. Each
-of these have different levels of support.
+of these has different levels of support.
 
 The previous major version is stable for production and will receive patch updates as needed, but
 there will be no new features added. Patch releases are automatically deployed upon merge by GitHub
 Actions.
 
-The current major version is also stable and receives new feature and patch updates. Patch releases
+The current major version is also stable and receives new features and patch updates. Patch releases
 are automatically deployed upon merge by GitHub Actions, and minor releases are manually deployed at
 the end of each sprint.
 
-The next major version is typically an unstable environment and has major breaking changes. You are
+The next major version is typically an unstable environment that has major breaking changes. You are
 welcome to pull this version down for local development and experimentation, but we generally
 recommend against using it in production until the first stable version has been released.
 
