@@ -113,7 +113,7 @@ export function cssVar(input: string, fallback?: string) {
  * return a map of variable keys to CSS Variable names.
  *
  * ```ts
- * // creates a `color` and `background` variable
+ * // creates a `color` and `background` CSS variable
  * const myVars = createVars('color', 'background')
  *
  * // 'color' is a typed property. The type is `string`
@@ -166,9 +166,10 @@ type ModifierReturn<T extends ModifierConfig> = T &
 
 /**
  * Creates a modifier function that takes in a modifier config and will return a CSS class name that
- * matches the result. Modifiers can be thought as `if` or `switch` statements. This function can be
- * thought of as a helper function that makes it easier to work with modifiers. Without it, you
- * would have to implement if/switch/ternary for each option.
+ * matches the result. Modifiers can be thought as `if` or `switch` statements when conditionally
+ * changing the styles of a component based on props. This function can be thought of as a helper
+ * function that makes it easier to work with modifiers. Without it, you would have to implement
+ * if/switch/ternary for each option.
  *
  * ```tsx
  * const myModifiers = createModifiers({
@@ -294,10 +295,16 @@ export interface CSProps {
  * })
  * ```
  *
+ * The `createStyles` function is curried into 2 parts. The first function could be done at build
+ * time. The returned function combines CSS class names and will remain as a small runtime.
  *
- *
- * The cs function is curried into 2 parts. The first function could be done at build time. The
- * returned function combines classnames and will remain as a small runtime.
+ * > **Note:** The order of calling `createStyles` is important. Each call will make a single CSS
+ * > class selector and will be injected into the document's
+ * > [StyleSheetList](https://developer.mozilla.org/en-US/docs/Web/API/StyleSheetList). Style
+ * > properties will be merge by the rules of [CSS
+ * > specificity](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity). If two selectors
+ * > have the same specificity, the last defined wins. Always make sure that the properties you want
+ * > to win are last in your file.
  */
 export function createStyles(...args: (StyleProps | string)[]): string {
   return args
@@ -341,9 +348,9 @@ export function createStyles(...args: (StyleProps | string)[]): string {
  * }
  * ```
  *
- * It will return an object with `className` and `style` attributes.
- * If a `className` is provided to the component, it will merge the classNames.
- * If a `style` is provided to the component, it will merge the styles.
+ * It will return an object with `className` and `style` attributes. If a `className` is provided to
+ * the component, it will merge the class names. If a `style` is provided to the component, it will
+ * merge the styles.
  *
  * ```tsx
  * const vars = createVars('background')
