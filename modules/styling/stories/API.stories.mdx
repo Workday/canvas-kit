@@ -1,0 +1,57 @@
+import {SymbolDoc} from '@workday/canvas-kit-docs';
+
+import {CreateStyles} from './examples/CreateStyles';
+import {CreateVars} from './examples/CreateVars';
+import {CreateModifiers} from './examples/CreateModifiers';
+
+<Meta title="Features/Styling/API" />
+
+## Usage
+
+<SymbolDoc name="createStyles" />
+
+<ExampleCodeBlock code={CreateStyles} />
+
+In this example, the HTML will look like:
+
+```html
+<div class="css-m39zwu"></div>
+```
+
+The CSS will look like this:
+
+```css
+.css-m39zwu {
+  width: 100px;
+  height: 100px;
+  background-color: gray;
+}
+```
+
+We're using `className` for simplicity here. Most components will use the `cs` prop instead for more
+versatility.
+
+<SymbolDoc name="createVars" />
+
+<ExampleCodeBlock code={CreateVars} />
+
+In this example, the HTML will look like:
+
+```html
+<div class="css-4iptxs" style="--c6kna-background: gray;"></div>
+<div class="css-4iptxs" style="--c6kna-background: blue;"></div>
+```
+
+And the CSS will look like:
+
+```css
+.css-4iptxs {
+  width: 100px;
+  height: 100px;
+  background-color: var(--c6kna-background);
+}
+```
+
+<SymbolDoc name="createModifiers" />
+
+<ExampleCodeBlock code={CreateModifiers} />
