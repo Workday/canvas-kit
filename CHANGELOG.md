@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.24](https://github.com/Workday/canvas-kit/releases/tag/v9.1.24) (2023-10-16)
+
+### Components
+
+- fix(tabs): Slugify Tabs.Item aria-controls attribute ([#2354](https://github.com/Workday/canvas-kit/pull/2354)) ([@biplobsd](https://github.com/biplobsd))
+
+
 ## [v9.1.23](https://github.com/Workday/canvas-kit/releases/tag/v9.1.23) (2023-10-11)
 
 ### Components
