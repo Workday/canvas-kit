@@ -134,59 +134,29 @@ export const getPaddingStyles = (
 };
 
 /**
+ * Factory function for creating Button vars.
+ */
+const createButtonVars = () =>
+  createVars(
+    'background',
+    'border',
+    'boxShadowInner',
+    'boxShadowOuter',
+    'icon',
+    'label',
+    'opacity',
+    'borderRadius'
+  );
+
+/**
  * Temporary css variables to be used across all Buttons.
  */
 export const buttonVars = {
-  default: createVars(
-    'background',
-    'border',
-    'boxShadowInner',
-    'boxShadowOuter',
-    'icon',
-    'label',
-    'opacity',
-    'borderRadius'
-  ),
-  hover: createVars(
-    'background',
-    'border',
-    'boxShadowInner',
-    'boxShadowOuter',
-    'icon',
-    'label',
-    'opacity',
-    'borderRadius'
-  ),
-  active: createVars(
-    'background',
-    'border',
-    'boxShadowInner',
-    'boxShadowOuter',
-    'icon',
-    'label',
-    'opacity',
-    'borderRadius'
-  ),
-  focus: createVars(
-    'background',
-    'border',
-    'boxShadowInner',
-    'boxShadowOuter',
-    'icon',
-    'label',
-    'opacity',
-    'borderRadius'
-  ),
-  disabled: createVars(
-    'background',
-    'border',
-    'boxShadowInner',
-    'boxShadowOuter',
-    'icon',
-    'label',
-    'opacity',
-    'borderRadius'
-  ),
+  default: createButtonVars(),
+  hover: createButtonVars(),
+  active: createButtonVars(),
+  focus: createButtonVars(),
+  disabled: createButtonVars(),
 };
 
 /**
