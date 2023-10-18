@@ -7,7 +7,7 @@ import {base, brand, system} from '@workday/canvas-tokens-web';
 import {Button, ButtonProps} from './Button';
 
 /**
- * Extends all the style properties from Box to our buttons as well as props from ButtonContainerProps.
+ * Extends all the style properties from Box to our buttons as well as props from ButtonProps.
  * We omit `ref` since all of our buttons use `createComponent` and already give access to `ref`.
  * Use this type to extend and customize any one off buttons that you want full control over styling.
  */
@@ -87,13 +87,7 @@ export const secondaryButtonModifiers = createModifiers({
 export const SecondaryButton = createComponent('button')({
   displayName: 'SecondaryButton',
   Component: (
-    {
-      children,
-      icon,
-      iconPosition = children ? undefined : 'only',
-      variant,
-      ...elemProps
-    }: SecondaryButtonProps,
+    {children, icon, cs, iconPosition, variant, ...elemProps}: SecondaryButtonProps,
     ref,
     Element
   ) => {
@@ -103,7 +97,7 @@ export const SecondaryButton = createComponent('button')({
         ref={ref}
         icon={icon}
         iconPosition={iconPosition}
-        cs={[secondaryStyles, secondaryButtonModifiers({variant: variant})]}
+        cs={[secondaryStyles, secondaryButtonModifiers({variant: variant}), cs]}
         {...elemProps}
       >
         {children}

@@ -56,76 +56,6 @@ export interface ButtonContainerProps extends Partial<SystemIconProps>, GrowthBe
  */
 export interface BaseButtonProps extends Omit<ButtonContainerProps, 'ref'> {}
 
-export const getMinWidthStyles = (children: React.ReactNode, size: ButtonSizes) => {
-  switch (size) {
-    case 'large':
-      return children ? '112px' : '48px';
-    case 'medium':
-      return children ? '96px' : space.xl;
-    case 'small':
-      return children ? space.xxxl : space.l;
-    case 'extraSmall':
-      return children ? 'auto' : space.m;
-    default:
-      return children ? '96px' : space.xl;
-  }
-};
-
-export const getPaddingStyles = (
-  children: React.ReactNode,
-  size: ButtonSizes,
-  icon: CanvasSystemIcon | undefined,
-  iconPosition: IconPositions | undefined
-) => {
-  // In order to calculate the correct padding, we need to know its children
-  // and what side the icon is on and if there's an icon provided
-  if (!children) {
-    // icon buttons do not have any padding
-    return 0;
-  }
-  // If there are children AND an icon
-  // 1. We check what side the icon is in
-  // 2. Adjust padding to visually center the icon and text
-  // If there is children (most likely just text)
-  // 1. We keep the padding the same on both side
-  switch (size) {
-    case 'large':
-      return icon
-        ? iconPosition === 'start'
-          ? `0 ${space.l} 0 ${space.m}`
-          : `0 ${space.m} 0 ${space.l}`
-        : `0 ${space.l}`;
-
-    case 'medium':
-      return icon
-        ? iconPosition === 'start'
-          ? `0 ${space.m} 0 20px`
-          : `0 20px 0 ${space.m}`
-        : `0 ${space.m}`;
-
-    case 'small':
-      return icon
-        ? iconPosition === 'start'
-          ? `0 ${space.s} 0 ${space.xs}`
-          : `0 ${space.xs} 0 ${space.s}`
-        : `0 ${space.s}`;
-
-    case 'extraSmall':
-      return icon
-        ? iconPosition === 'start'
-          ? `0 ${space.xs} 0 ${space.xxs}`
-          : `0 ${space.xxs} 0 ${space.xs}`
-        : `0 ${space.xs}`;
-
-    default:
-      return icon
-        ? iconPosition === 'start'
-          ? `0 ${space.m} 0 20px`
-          : `0 20px 0 ${space.m}`
-        : `0 ${space.m}`;
-  }
-};
-
 /**
  * Factory function for creating Button vars.
  */
@@ -338,7 +268,8 @@ export function capitalize(string: string = '') {
 
 export function getIconPosition(
   size?: keyof typeof buttonModifiers.size,
-  iconPosition?: IconPositions
+  iconPosition?: IconPositions,
+  children?: React.ReactNode
 ): keyof typeof buttonModifiers.iconPosition {
   return `${size}${capitalize(iconPosition)}` as keyof typeof buttonModifiers.iconPosition;
 }
@@ -363,6 +294,7 @@ export const BaseButton = createComponent('button')({
     ref,
     Element
   ) => {
+    // console.log('iconPosition', children, getIconPosition(size, iconPosition));
     return (
       <Box
         as={Element}
@@ -372,7 +304,7 @@ export const BaseButton = createComponent('button')({
           baseButtonStyles,
           buttonModifiers({
             size: size,
-            iconPosition: getIconPosition(size, iconPosition),
+            iconPosition: getIconPosition(size, iconPosition, children),
           }),
           buttonVars.default(colors?.default || {}),
           buttonVars.focus(colors?.focus || {}),

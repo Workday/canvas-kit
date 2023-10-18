@@ -8,7 +8,7 @@ import {borderRadius, space} from '@workday/canvas-kit-react/tokens';
 import {Button, ButtonProps} from './Button';
 
 /**
- * Extends all the style properties from Box to our buttons as well as props from ButtonContainerProps.
+ * Extends all the style properties from Box to our buttons as well as props from ButtonProps.
  * We omit `ref` since all of our buttons use `createComponent` and already give access to `ref`.
  * Use this type to extend and customize any one off buttons that you want full control over styling.
  */
@@ -151,12 +151,21 @@ export const TertiaryButton = createComponent('button')({
       size = 'medium',
       isThemeable,
       variant,
-      iconPosition = children ? undefined : 'only',
+      iconPosition,
+      cs,
       ...elemProps
     }: TertiaryButtonProps,
     ref,
     Element
   ) => {
+    const baseIconPosition = iconPosition
+      ? iconPosition
+      : icon
+      ? children
+        ? 'start'
+        : 'only'
+      : undefined;
+
     return (
       <Button
         as={Element}
@@ -167,10 +176,11 @@ export const TertiaryButton = createComponent('button')({
         cs={[
           tertiaryStyles,
           tertiaryButtonModifiers({
-            isThemeable: (isThemeable || iconPosition !== 'only') as any,
+            isThemeable: (isThemeable || baseIconPosition !== 'only') as any,
             variant: variant,
-            iconPosition: getIconPosition(size, iconPosition),
+            iconPosition: getIconPosition(size, baseIconPosition),
           }),
+          cs,
         ]}
         {...elemProps}
       >

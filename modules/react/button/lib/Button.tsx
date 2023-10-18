@@ -8,7 +8,15 @@ import {createComponent} from '@workday/canvas-kit-react/common';
  * We omit `ref` since all of our buttons use `createComponent` and already give access to `ref`.
  * Use this type to extend and customize any one off buttons that you want full control over styling.
  */
-export interface ButtonProps extends Omit<ButtonContainerProps, 'ref'> {}
+export interface ButtonProps extends Omit<ButtonContainerProps, 'ref'> {
+  /**
+   * Button icon positions can either be `start` or `end`.
+   * If no value is provided, it defaults to `start`.
+   *
+   * @default 'start'
+   */
+  iconPosition?: 'start' | 'end';
+}
 
 export const Button = createComponent('button')({
   displayName: 'Button',
@@ -17,7 +25,7 @@ export const Button = createComponent('button')({
       children,
       icon,
       colors,
-      iconPosition = icon ? (children ? 'start' : 'only') : undefined,
+      iconPosition,
       shouldMirrorIcon,
       size = 'medium',
       ...elemProps
@@ -25,41 +33,33 @@ export const Button = createComponent('button')({
     ref,
     Element
   ) => {
+    const baseIconPosition = iconPosition
+      ? iconPosition
+      : icon
+      ? children
+        ? 'start'
+        : 'only'
+      : undefined;
+
     return (
       <BaseButton
         as={Element}
         ref={ref}
         size={size}
         icon={icon}
-        iconPosition={iconPosition}
-        type="button"
+        iconPosition={baseIconPosition}
         {...elemProps}
       >
-        {icon && iconPosition === 'start' && (
-          <BaseButton.Icon
-            size={size}
-            iconPosition={iconPosition}
-            icon={icon}
-            shouldMirrorIcon={shouldMirrorIcon}
-          />
+        {icon && baseIconPosition === 'start' && (
+          <BaseButton.Icon size={size} icon={icon} shouldMirrorIcon={shouldMirrorIcon} />
         )}
         {children && <BaseButton.Label>{children}</BaseButton.Label>}
 
-        {icon && iconPosition === 'only' && (
-          <BaseButton.Icon
-            size={size}
-            iconPosition={iconPosition}
-            icon={icon}
-            shouldMirrorIcon={shouldMirrorIcon}
-          />
+        {icon && baseIconPosition === 'only' && (
+          <BaseButton.Icon size={size} icon={icon} shouldMirrorIcon={shouldMirrorIcon} />
         )}
-        {icon && iconPosition === 'end' && (
-          <BaseButton.Icon
-            size={size}
-            iconPosition={iconPosition}
-            icon={icon}
-            shouldMirrorIcon={shouldMirrorIcon}
-          />
+        {icon && baseIconPosition === 'end' && (
+          <BaseButton.Icon size={size} icon={icon} shouldMirrorIcon={shouldMirrorIcon} />
         )}
       </BaseButton>
     );

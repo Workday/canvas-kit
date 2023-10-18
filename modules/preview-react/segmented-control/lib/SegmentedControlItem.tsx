@@ -8,7 +8,6 @@ import {
   ButtonContainerProps,
   ButtonColors,
   ButtonSizes,
-  getMinWidthStyles,
 } from '@workday/canvas-kit-react/button';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {useSegmentedControlModel} from './hooks/useSegmentedControlModel';
@@ -52,6 +51,21 @@ export interface ItemProps extends ButtonContainerProps {
    */
   tooltipProps?: Omit<TooltipProps, 'children'>;
 }
+
+const getMinWidthStyles = (children: React.ReactNode, size: ButtonSizes) => {
+  switch (size) {
+    case 'large':
+      return children ? '112px' : '48px';
+    case 'medium':
+      return children ? '96px' : space.xl;
+    case 'small':
+      return children ? space.xxxl : space.l;
+    case 'extraSmall':
+      return children ? 'auto' : space.m;
+    default:
+      return children ? '96px' : space.xl;
+  }
+};
 
 const getButtonSize = (size: ButtonContainerProps['size']) => {
   switch (size) {

@@ -7,7 +7,7 @@ import {base, brand, system} from '@workday/canvas-tokens-web';
 import {Button, ButtonProps} from './Button';
 
 /**
- * Extends all the style properties from Box to our buttons as well as props from ButtonContainerProps.
+ * Extends all the style properties from Box to our buttons as well as props from ButtonProps.
  * We omit `ref` since all of our buttons use `createComponent` and already give access to `ref`.
  * Use this type to extend and customize any one off buttons that you want full control over styling.
  */
@@ -49,9 +49,9 @@ const deleteStyles = createStyles({
  */
 export const DeleteButton = createComponent('button')({
   displayName: 'DeleteButton',
-  Component: ({children, colors, size, ...elemProps}: DeleteButtonProps, ref, Element) => {
+  Component: ({children, cs, size, ...elemProps}: DeleteButtonProps, ref, Element) => {
     return (
-      <Button as={Element} ref={ref} type="button" size={size} cs={[deleteStyles]} {...elemProps}>
+      <Button as={Element} ref={ref} size={size} cs={[deleteStyles, cs]} {...elemProps}>
         {children}
       </Button>
     );
