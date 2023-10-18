@@ -17,7 +17,7 @@ export const Button = createComponent('button')({
       children,
       icon,
       colors,
-      iconPosition = children ? 'start' : 'only',
+      iconPosition = icon ? (children ? 'start' : 'only') : undefined,
       shouldMirrorIcon,
       size = 'medium',
       ...elemProps
