@@ -165,7 +165,7 @@ const baseButtonStyles = createStyles({
       fill: cssVar(buttonVars.active.icon),
     },
   },
-  '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
+  '&:disabled': {
     backgroundColor: cssVar(buttonVars.disabled.background, 'transparent'),
     borderColor: cssVar(buttonVars.disabled.border, 'transparent'),
     color: cssVar(buttonVars.disabled.label, cssVar(base.blackPepper400)),
