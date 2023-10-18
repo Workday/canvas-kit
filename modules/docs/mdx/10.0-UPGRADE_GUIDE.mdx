@@ -28,12 +28,12 @@ Unlike past major releases, v10 does not have a codemod.
 
 ## Removals
 
-Removals are deletions from our codebase and you can no longer consume this component. We've either
-promoted or replaced a component or utility.
+Removals are deletions from our codebase which may no longer be consumed. We've either promoted or
+replaced the removed component or utility.
 
 ## useBanner
 
-We have removed the `useBanner` hook, the only function of which was to add `aria-labelledby` and
+We've removed the `useBanner` hook, the only function of which was to add `aria-labelledby` and
 `aria-describedby` references to the text inside of the Banner. This was not required for
 accessibility, and browsers can compute the name of the Banner from the text given inside.
 
@@ -44,17 +44,18 @@ accessibility, and browsers can compute the name of the Banner from the text giv
 **PR:** [#2332](https://github.com/Workday/canvas-kit/pull/2332)
 
 We've deprecated `InputIconContainer` from [Main](#main) because it doesn't handle bidirectionality
-or icons at the start of an input. Please consider using
+or icons at the start of an input. Please use
 [`InputGroup`](https://workday.github.io/canvas-kit/?path=/story/components-inputs-text-input--icons)
 instead.
+
+---
 
 ### Table
 
 **PR:** [#2344](https://github.com/Workday/canvas-kit/pull/2344)
 
-We've deprecated `Table` and `TableRow` as well as all of their exported members. Please consider
-using [`Table in Preview`](https://workday.github.io/canvas-kit/?path=/docs/preview-table--basic)
-instead.
+We've deprecated `Table` and `TableRow` and all of their exported members. Please use
+[`Table in Preview`](https://workday.github.io/canvas-kit/?path=/docs/preview-table--basic) instead.
 
 ## Token Updates
 
