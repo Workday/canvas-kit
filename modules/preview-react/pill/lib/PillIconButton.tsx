@@ -26,20 +26,19 @@ const getIconColors = () => {
   return {
     default: {
       icon: colors.licorice200,
+      border: 'initial',
     },
-
     hover: {
       icon: colors.licorice500,
+      border: 'initial',
     },
     active: {
       icon: colors.licorice500,
+      border: 'initial',
     },
     focus: {
       icon: colors.licorice500,
-
-      focusRing: focusRing({
-        innerColor: 'transparent',
-      }),
+      border: 'transparent',
     },
     disabled: {
       icon: colors.licorice100,
@@ -62,6 +61,11 @@ const StyledIconButton = styled(BaseButton)<StyledType & PillIconButtonProps>({
     margin: 0,
     pointerEvents: 'all',
     cursor: 'pointer',
+  },
+  '&.focus, &:focus-visible': {
+    ...focusRing({
+      innerColor: 'transparent',
+    }),
   },
 });
 

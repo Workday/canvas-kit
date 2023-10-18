@@ -130,7 +130,7 @@
     "chromatic": "chromatic",
     "commit": "git-cz",
     "commitmsg": "commitlint --edit $HUSKY_GIT_PARAMS",
-    "build-storybook": "node utils/download-fonts.js && build-storybook -c .storybook -o docs -s ./public ",
+    "build-storybook": "node utils/download-fonts.js && build-storybook -c .storybook -o docs -s ./public",
     "lint": "node utils/check-lockfile.js && node utils/check-mismatched-dependencies.js && eslint -c ./.eslintrc.js --ext=jsx,ts,tsx .",
     "typecheck": "npm-run-all --parallel typecheck:src typecheck:cypress typecheck:types typecheck:specs typecheck:stories",
     "typecheck:src": "lerna run typecheck:src",
@@ -176,6 +176,7 @@
   "browserslist": "> 5%, last 2 firefox versions, last 2 chrome versions, last 2 safari versions, last 2 edge versions, Firefox ESR, not ie 11",
   "dependencies": {
     "@emotion/react": "^11.7.1",
-    "@emotion/styled": "^11.6.0"
+    "@emotion/styled": "^11.6.0",
+    "@workday/canvas-tokens-web": "0.1.6"
   }
 }
