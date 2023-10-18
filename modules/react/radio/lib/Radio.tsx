@@ -52,7 +52,7 @@ const radioBorderRadius = 9;
 const RadioContainer = styled('div')({
   display: 'flex',
   alignItems: 'center',
-  minHeight: `calc(${space.m})`,
+  minHeight: space.m,
   position: 'relative',
 });
 
@@ -85,8 +85,8 @@ const RadioRipple = styled('span')<Pick<RadioProps, 'disabled' | 'variant'>>(
 const RadioInput = styled('input')<RadioProps & StyledType>(
   {
     borderRadius: `calc(${space.xxs} + 1px)`,
-    width: `calc(${space.m})`,
-    height: `calc(${space.m})`,
+    width: space.m,
+    height: space.m,
     margin: 0,
     marginTop: '-3px',
     marginLeft: '-3px',
@@ -250,10 +250,10 @@ const RadioCheck = styled('div')<Pick<RadioProps, 'checked' | 'variant'>>(
     borderRadius: radioBorderRadius,
     display: 'flex',
     flexDirection: 'column',
-    height: `calc(${space.xxs})`,
+    height: space.xxs,
     pointerEvents: 'none',
     transition: 'transform 200ms ease, opacity 200ms ease',
-    width: `calc(${space.xxs})`,
+    width: space.xxs,
   },
   ({theme, variant}) => ({
     backgroundColor:
@@ -308,12 +308,7 @@ export const Radio = createComponent('input')({
           </RadioBackground>
         </RadioInputWrapper>
         {label && (
-          <LabelText
-            paddingLeft={`calc(${space.xs})`}
-            htmlFor={inputId}
-            disabled={disabled}
-            variant={variant}
-          >
+          <LabelText paddingLeft={space.xs} htmlFor={inputId} disabled={disabled} variant={variant}>
             {label}
           </LabelText>
         )}
