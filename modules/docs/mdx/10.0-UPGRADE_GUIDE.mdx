@@ -135,6 +135,11 @@ this as a breaking change but, there may be slight changes to visual test.
 
 **PR:** [#2285](https://github.com/Workday/canvas-kit/pull/2285)
 
+#### Button Icon Fill
+
+Icons will no longer be "filled" on toggle. This decision was made to not have the exisitng icon
+look so different in the toggled state.
+
 #### Button Focus Ring Update
 
 We found that focus ring was not consistent across all Buttons. We have made some changes to create
@@ -143,6 +148,36 @@ some small changes visually with Buttons.
 
 - `PrimaryButton`: `inverse` variant now has the same focus ring as default variant and as
   `SecondaryButton`.
+
+Also, `colors` will no longer support the `focusRing` option.
+
+```tsx
+import {focusRing} from '@workday/canvas-kit-react/common';
+
+// before
+<PrimaryButton
+  colors={{
+    // other colors
+    focus: {
+      // other colors
+     focusRing: focusRing(/* options */)
+    }
+  }}
+/>
+
+// after
+<PrimaryButton
+  colors={{
+    // other colors
+    focus: {
+      // other colors
+    }
+  }}
+  css={{
+    ':focus-visible': focusRing(/* options */)
+  }}
+/>;
+```
 
 ## Glossary
 

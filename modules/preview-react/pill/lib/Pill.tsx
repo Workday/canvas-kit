@@ -156,7 +156,7 @@ const StyledNonInteractivePill = styled(StyledBasePill)<StyledType>({
   cursor: 'default',
   overflow: 'revert', // override BaseButton overflow styles so the click target exists outside the pill for removable
   position: 'relative',
-  '&.focus-visibile, &.focus': {
+  '&:focus-visibile, &.focus': {
     ...focusRing({
       width: 0,
       innerColor: 'transparent',

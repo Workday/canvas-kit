@@ -1,17 +1,17 @@
 import * as React from 'react';
 
-import {buttonVars, ButtonContainerProps} from './BaseButton';
+import {buttonVars} from './BaseButton';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {createStyles, cssVar, createModifiers} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
-import {Button} from './Button';
+import {Button, ButtonProps} from './Button';
 
 /**
  * Extends all the style properties from Box to our buttons as well as props from ButtonContainerProps.
  * We omit `ref` since all of our buttons use `createComponent` and already give access to `ref`.
  * Use this type to extend and customize any one off buttons that you want full control over styling.
  */
-export interface SecondaryButtonProps extends Omit<ButtonContainerProps, 'ref'> {
+export interface SecondaryButtonProps extends ButtonProps {
   /**
    * Variant has an option for `inverse` which will inverse the styling
    */

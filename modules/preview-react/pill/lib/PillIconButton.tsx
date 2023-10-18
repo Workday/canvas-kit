@@ -62,7 +62,7 @@ const StyledIconButton = styled(BaseButton)<StyledType & PillIconButtonProps>({
     pointerEvents: 'all',
     cursor: 'pointer',
   },
-  '&:focus, &:focus-visible': {
+  '&.focus, &:focus-visible': {
     ...focusRing({
       innerColor: 'transparent',
     }),

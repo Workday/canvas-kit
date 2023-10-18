@@ -1,17 +1,17 @@
 import * as React from 'react';
 
-import {buttonVars, ButtonContainerProps} from './BaseButton';
+import {buttonVars} from './BaseButton';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {createStyles, cssVar} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
-import {Button} from './Button';
+import {Button, ButtonProps} from './Button';
 
 /**
  * Extends all the style properties from Box to our buttons as well as props from ButtonContainerProps.
  * We omit `ref` since all of our buttons use `createComponent` and already give access to `ref`.
  * Use this type to extend and customize any one off buttons that you want full control over styling.
  */
-export interface DeleteButtonProps extends Omit<ButtonContainerProps, 'ref'> {}
+export interface DeleteButtonProps extends ButtonProps {}
 
 const deleteStyles = createStyles({
   [buttonVars.default.background]: cssVar(brand.error.base),
@@ -42,6 +42,11 @@ const deleteStyles = createStyles({
   },
 });
 
+/**
+ * Use sparingly for destructive actions that will result in data loss, can’t be undone, or will
+ * have significant consequences. They commonly appear in confirmation dialogs as the final
+ * confirmation before deleting.
+ */
 export const DeleteButton = createComponent('button')({
   displayName: 'DeleteButton',
   Component: ({children, colors, size, ...elemProps}: DeleteButtonProps, ref, Element) => {
