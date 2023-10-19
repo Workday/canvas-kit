@@ -90,7 +90,9 @@ export type CanvasSpaceNumbers = {
   xxxl: 80;
 };
 
-/** The numeric rem values for CanvasSpaceNumbers (numbers) */
+/** The numeric rem values for CanvasSpaceNumbers (numbers)
+ * @deprecated ⚠️ `CanvasSpaceNumberValues` has been deprecated in a future major version. Please use our `rem` based [`space`](https://workday.github.io/canvas-kit/?path=/docs/tokens--space) tokens. In the case where you need to calculate a value, use [CSS calc()](https://developer.mozilla.org/en-US/docs/Web/CSS/calc).
+ */
 export type CanvasSpaceNumberValues = ValueOf<CanvasSpaceNumbers>;
 
 /**
