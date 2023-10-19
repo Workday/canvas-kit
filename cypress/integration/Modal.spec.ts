@@ -375,9 +375,8 @@ describe('Modal', () => {
         cy.checkA11y();
       });
 
-      it('should transfer focus to the header element', () => {
-        cy.findByRole('dialog', {name: 'Delete Item'})
-          .pipe(h.modal.getTitle)
+      it('should transfer focus to the cancel button', () => {
+        cy.findByRole('button', {name: 'Cancel'})
           .should('have.focus');
       });
 
@@ -409,9 +408,8 @@ describe('Modal', () => {
           });
         });
 
-        it('should transfer focus to the header element', () => {
-          cy.findByRole('dialog', {name: 'Delete Item'})
-            .pipe(h.modal.getTitle)
+        it('should transfer focus to the cancel button', () => {
+          cy.findByRole('button', {name: 'Cancel'})
             .should('have.focus');
         });
 
