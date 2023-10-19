@@ -64,7 +64,7 @@ export interface CheckboxProps extends Themeable {
 const CheckboxContainer = styled('div')({
   display: 'flex',
   alignItems: 'center',
-  minHeight: `calc(${space.m})`,
+  minHeight: space.m,
   position: 'relative',
 });
 
@@ -113,8 +113,8 @@ const CheckboxInput = styled('input')<CheckboxProps & StyledType>(
     variant,
   }) => ({
     borderRadius: borderRadius.s,
-    width: `calc(${space.m})`,
-    height: `calc(${space.m})`,
+    width: space.m,
+    height: space.m,
     margin: 0,
     marginTop: '-3px',
     marginLeft: '-3px',
@@ -126,11 +126,12 @@ const CheckboxInput = styled('input')<CheckboxProps & StyledType>(
     },
 
     // States
-    '&:not(:checked):not(:indeterminate):not(:disabled):not(:focus):hover, &:not(:checked):not(:indeterminate):not(:disabled):active': {
-      '~ div:first-of-type': {
-        borderColor: variant === 'inverse' ? colors.soap300 : inputColors.hoverBorder,
+    '&:not(:checked):not(:indeterminate):not(:disabled):not(:focus):hover, &:not(:checked):not(:indeterminate):not(:disabled):active':
+      {
+        '~ div:first-of-type': {
+          borderColor: variant === 'inverse' ? colors.soap300 : inputColors.hoverBorder,
+        },
       },
-    },
     '&:checked ~ div:first-of-type, &:indeterminate ~ div:first-of-type': {
       borderColor: variant === 'inverse' ? colors.soap300 : themePrimary.main,
       backgroundColor: variant === 'inverse' ? colors.frenchVanilla100 : themePrimary.main,
@@ -215,11 +216,12 @@ const CheckboxInput = styled('input')<CheckboxProps & StyledType>(
           variant === 'inverse' ? `1px solid ${colors.soap300}` : `1px solid ${errorColors.inner}`,
         boxShadow: `0 0 0 1px ${errorColors.inner}, 0 0 0 2px ${errorColors.outer}`,
       },
-      '&:not(:checked):not(:indeterminate):not(:disabled):not(:focus):hover, &:not(:checked):not(:indeterminate):not(:disabled):active': {
-        '~ div:first-of-type': {
-          borderColor: variant === 'inverse' ? `1px solid ${colors.soap300}` : errorColors.inner,
+      '&:not(:checked):not(:indeterminate):not(:disabled):not(:focus):hover, &:not(:checked):not(:indeterminate):not(:disabled):active':
+        {
+          '~ div:first-of-type': {
+            borderColor: variant === 'inverse' ? `1px solid ${colors.soap300}` : errorColors.inner,
+          },
         },
-      },
       '&:checked ~ div:first-of-type, &:indeterminate ~ div:first-of-type': {
         borderColor: variant === 'inverse' ? colors.soap300 : theme.canvas.palette.primary.main,
         boxShadow: `
@@ -362,7 +364,7 @@ export const Checkbox = createComponent('input')({
             htmlFor={inputId}
             disabled={disabled}
             variant={variant}
-            paddingInlineStart={`calc(${space.xs})`}
+            paddingInlineStart={space.xs}
             cursor="pointer"
           >
             {label}
