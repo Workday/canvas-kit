@@ -9,14 +9,7 @@ import {
   styled,
   useUniqueId,
 } from '@workday/canvas-kit-react/common';
-import {
-  colors,
-  borderRadius,
-  inputColors,
-  spaceNumbers,
-  type,
-  space,
-} from '@workday/canvas-kit-react/tokens';
+import {colors, borderRadius, inputColors, type, space} from '@workday/canvas-kit-react/tokens';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 
@@ -190,24 +183,17 @@ export interface SelectBaseProps extends CoreSelectBaseProps, StyledType {
    */
   shouldMenuAutoFocus?: boolean;
 }
-/**
- * @deprecated ⚠️ `buttonBorderWidth` in Preview has been deprecated and will be removed in a future major version. Please use [`Select` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) instead.
- */
-export const buttonBorderWidth = 0.0625;
-/**
- * @deprecated ⚠️ `buttonDefaultWidth` in Preview has been deprecated and will be removed in a future major version. Please use [`Select` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) instead.
- */
-export const buttonDefaultWidth = `${(spaceNumbers.xxxl * 7) / 2}rem`;
 
-const menuIconSize = spaceNumbers.m;
-const buttonPadding = spaceNumbers.xxs - buttonBorderWidth;
+export const buttonBorderWidth = 1;
+
+const menuIconSize = space.m;
 
 const SelectButton = styled('button')<
   Pick<SelectBaseProps, 'error' | 'grow' | 'menuVisibility' | 'theme'> & StyledType
 >(
   {
     ...type.levels.subtext.large,
-    border: `${buttonBorderWidth}rem solid ${inputColors.border}`,
+    border: `${buttonBorderWidth}px solid ${inputColors.border}`,
     cursor: 'default',
     display: 'block',
     backgroundColor: inputColors.background,
@@ -216,15 +202,15 @@ const SelectButton = styled('button')<
     height: space.xl,
     outline: 'none',
     overflow: 'hidden',
-    padding: `${buttonPadding}rem`,
-    paddingRight: `${spaceNumbers.xxs + menuIconSize + buttonPadding}rem`,
+    padding: `calc(${space.xxs} - ${buttonBorderWidth}px)`,
+    paddingRight: `calc(${space.xxs} + ${space.m} + (${space.xxs} + ${buttonBorderWidth}px))`,
     textAlign: 'left',
     textOverflow: 'ellipsis',
     transition: '0.2s box-shadow, 0.2s border-color',
     whiteSpace: 'nowrap',
     // width is required (instead of minWidth) in order for the button to
     // be sized properly for lengthy options
-    width: buttonDefaultWidth,
+    width: `calc((${space.xxxl} * 7) / 2)`,
     '&::placeholder': {
       color: inputColors.placeholder,
     },

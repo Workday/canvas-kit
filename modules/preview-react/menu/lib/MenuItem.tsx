@@ -12,12 +12,7 @@ import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
 
 /**
- * ### Deprecated Menu Item Props
- *
- * As of Canvas Kit v8, Menu is being deprecated.
- * It will be removed in a future major version. Please see the
- * [upgrade guide](https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page)
- * for more information.
+ * @deprecated ⚠️ `DeprecatedMenuItemProps` has been deprecated and will be removed in a future major version. Please use [Menu in Main](https://workday.github.io/canvas-kit/?path=/docs/components-popups-menu--basic) instead.
  */
 export interface DeprecatedMenuItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
   /**
@@ -116,9 +111,10 @@ const Item = styled('li')<Pick<DeprecatedMenuItemProps, 'isDisabled' | 'isFocuse
           'span .wd-icon-fill, span .wd-icon-accent, span .wd-icon-accent2': {
             fill: iconColors.inverse,
           },
-          'span .wd-icon-background ~ .wd-icon-accent, span .wd-icon-background ~ .wd-icon-accent2': {
-            fill: isDisabled ? iconColors.disabled : iconColors.active,
-          },
+          'span .wd-icon-background ~ .wd-icon-accent, span .wd-icon-background ~ .wd-icon-accent2':
+            {
+              fill: isDisabled ? iconColors.disabled : iconColors.active,
+            },
           'span .wd-icon-background': {
             fill: iconColors.inverse,
           },
@@ -128,9 +124,10 @@ const Item = styled('li')<Pick<DeprecatedMenuItemProps, 'isDisabled' | 'isFocuse
           [data-whatinput='pointer'] &`]: {
           backgroundColor: 'inherit',
           color: colors.blackPepper300,
-          'span .wd-icon-background ~ .wd-icon-accent, span .wd-icon-background ~ .wd-icon-accent2': {
-            fill: iconColors.standard,
-          },
+          'span .wd-icon-background ~ .wd-icon-accent, span .wd-icon-background ~ .wd-icon-accent2':
+            {
+              fill: iconColors.standard,
+            },
           '&:hover': {
             backgroundColor: commonColors.hoverBackground,
             'span .wd-icon-fill, span .wd-icon-accent, span .wd-icon-accent2': {
@@ -262,14 +259,10 @@ const scrollIntoViewIfNeeded = (elem: HTMLElement, centerIfNeeded = true): void 
  * - `tabindex={-1}`
  * - `id`s following this pattern: `${MenuId}-${index}`
  *
- * As of Canvas Kit v8, Menu is being deprecated.
- * It will be removed in a future major version. Please see the [upgrade
- * guide](https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page) for
- * more information.
- *
  * Undocumented props are spread to the underlying `<li>` element.
  *
- * @deprecated
+ * @deprecated ⚠️ `DeprecatedMenuItem` has been deprecated and will be removed in a future major version. Please use [Menu in Main](https://workday.github.io/canvas-kit/?path=/docs/components-popups-menu--basic) instead.
+ *
  */
 export class DeprecatedMenuItem extends React.Component<DeprecatedMenuItemProps> {
   ref = React.createRef<HTMLLIElement>();

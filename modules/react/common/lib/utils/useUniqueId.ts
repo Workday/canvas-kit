@@ -32,8 +32,7 @@ export const useUniqueId = (id?: string) => {
 
 /**
  * Backwards-compatible change to converting to hook
- * @deprecated
- * TODO: Remove in major release
+ * @deprecated ⚠️ `uniqueId` has been deprecated and will be removed in a future major version. Please use `useUniqueId` instead.
  */
 export const uniqueId = useUniqueId;
 
