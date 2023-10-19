@@ -6,7 +6,7 @@ import {Flex} from '@workday/canvas-kit-react/layout';
 const options = [
   'E-mail',
   'Phone',
-  'Fax',
+  'Fax (disabled)',
   'Mail',
   'Mobile Phone',
   'The Ontologically Anthropocentric Sensory Immersive Simulation',
@@ -20,15 +20,13 @@ export const Error = () => {
   };
   return (
     <Flex flexDirection="column">
-      <Select items={options}>
+      <Select items={options} nonInteractiveIds={['Fax (disabled)']}>
         <FormField
           error={FormField.ErrorType.Error}
-          hintId="error-select"
           hintText="Fax is disabled. Please choose a different option."
           label="Contact"
-          inputId="error-select"
         >
-          <Select.Input onChange={e => handleChange(e)} id="error-select" />
+          <Select.Input onChange={e => handleChange(e)} />
           <Select.Popper>
             <Select.Card>
               <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>

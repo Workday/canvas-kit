@@ -4,44 +4,45 @@ import {Select} from '@workday/canvas-kit-react/select';
 import {Flex} from '@workday/canvas-kit-react/layout';
 
 const options = [
-  {id: 'E-mail'},
-  {id: 'Phone'},
-  {id: 'Fax (disabled)', disabled: true},
-  {id: 'Mail'},
-  {id: 'Mobile Phone'},
+  {id: 'email', text: 'E-mail'},
+  {id: 'phone', text: 'Phone'},
+  {id: 'fax', text: 'Fax'},
+  {id: 'mail', text: 'Mail'},
+  {id: 'mobile', text: 'Mobile Phone'},
   {
-    id: 'The Ontologically Anthropocentric Sensory Immersive Simulation',
-    disabled: false,
+    id: 'oasis',
+    text: 'The Ontologically Anthropocentric Sensory Immersive Simulation',
   },
 ];
 
-const disabledItems = options.filter(item => item.disabled === true).map(item => item.id);
-
-export const Disabled = () => {
+export const Complex = () => {
   const [value, setValue] = React.useState('');
+  const [id, setId] = React.useState('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
   };
 
+  const handleSelect = ({id}: {id: string}) => {
+    setId(id);
+  };
+
   return (
     <Flex flexDirection="column">
-      <Select items={options} nonInteractiveIds={disabledItems}>
+      <Select items={options} onSelect={handleSelect}>
         <FormField label="Contact">
-          <Select.Input disabled onChange={e => handleChange(e)} />
+          <Select.Input onChange={e => handleChange(e)} />
           <Select.Popper>
             <Select.Card>
               <Select.List>
-                {item => (
-                  <Select.Item aria-disabled={item.disabled ? item.disabled : undefined}>
-                    {item.id}
-                  </Select.Item>
-                )}
+                {item => <Select.Item data-id={item.id}>{item.text}</Select.Item>}
               </Select.List>
             </Select.Card>
           </Select.Popper>
         </FormField>
       </Select>
+      <p>Id: {id}</p>
+      <p>Value: {value}</p>
     </Flex>
   );
 };

@@ -23,10 +23,8 @@ export const Alert = () => {
       <Select items={options}>
         <FormField
           error={FormField.ErrorType.Alert}
-          hintId="alert-select"
           hintText="Please choose a form of contact."
           label="Contact"
-          inputId="alert-select"
         >
           <Select.Input onChange={e => handleChange(e)} id="alert-select" />
           <Select.Popper>

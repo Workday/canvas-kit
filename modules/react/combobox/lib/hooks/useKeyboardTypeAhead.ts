@@ -45,7 +45,7 @@ export const useKeyboardTypeAhead = createElemPropsHook(useComboboxModel)(model 
     ignoreDisabled: boolean = true
   ): number => {
     for (let i = startIndex; i < endIndex; i++) {
-      const label = model.state.items[i].id.toLowerCase();
+      const label = model.state.items[i].textValue.toLowerCase();
       if (label.indexOf(startString.toLowerCase()) === 0) {
         if (
           !ignoreDisabled ||
@@ -59,7 +59,7 @@ export const useKeyboardTypeAhead = createElemPropsHook(useComboboxModel)(model 
   };
 
   const currentItem = model.navigation.getItem(model.state.cursorId, model);
-  const cursorFocusedIndex = model.state.items.findIndex(item => item.id === currentItem.id);
+  const cursorFocusedIndex = currentItem.index;
 
   const handleKeyboardTypeAhead = (key: string, numOptions: number) => {
     // If the starting point is beyond the list of options, reset it

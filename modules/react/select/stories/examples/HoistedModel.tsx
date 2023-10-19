@@ -27,8 +27,8 @@ export const HoistedModel = () => {
   return (
     <>
       <Select model={model}>
-        <FormField label="Contact" inputId="hoisted-select">
-          <Select.Input id="hoisted-select" />
+        <FormField label="Contact">
+          <Select.Input />
           <Select.Popper>
             <Select.Card>
               <Select.List>

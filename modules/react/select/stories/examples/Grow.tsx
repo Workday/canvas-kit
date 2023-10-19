@@ -20,8 +20,8 @@ export const Grow = () => {
   return (
     <Flex>
       <Select model={model}>
-        <FormField label="Contact" grow inputId="grow-select">
-          <Select.Input id="grow-select" />
+        <FormField label="Contact" grow>
+          <Select.Input />
           <Select.Popper>
             <Select.Card>
               {model.state.items.length > 0 && (

@@ -21,16 +21,16 @@ export const Required = () => {
 
   return (
     <Flex flexDirection="column">
-      <FormField label="Contact" inputId="required-select" required>
-        <Select items={options}>
-          <Select.Input onChange={e => handleChange(e)} id="required-select" />
+      <Select items={options}>
+        <FormField label="Contact" required>
+          <Select.Input onChange={e => handleChange(e)} />
           <Select.Popper>
             <Select.Card>
               <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
             </Select.Card>
           </Select.Popper>
-        </Select>
-      </FormField>
+        </FormField>
+      </Select>
       Selected Value: {value}
     </Flex>
   );

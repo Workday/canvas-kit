@@ -38,9 +38,9 @@ export const cities = [
 export const MenuHeight = () => {
   return (
     <Box>
-      <FormField label="Choose a City" inputId="menu-height-select">
+      <FormField label="Choose a City">
         <Select items={cities}>
-          <Select.Input id="menu-height-select" />
+          <Select.Input />
           <Select.Popper>
             <Select.Card maxHeight={200}>
               <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>

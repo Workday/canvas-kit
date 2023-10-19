@@ -29,8 +29,8 @@ export const RefForwarding = () => {
   return (
     <>
       <Select items={options}>
-        <FormField label="Contact" inputId="refforwarding-select">
-          <Select.Input ref={ref} onChange={e => handleChange(e)} id="refforwarding-select" />
+        <FormField label="Contact">
+          <Select.Input ref={ref} onChange={e => handleChange(e)} />
           <Select.Popper>
             <Select.Card>
               <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>

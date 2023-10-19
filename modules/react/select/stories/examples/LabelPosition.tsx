@@ -20,12 +20,8 @@ export const LabelPosition = () => {
   return (
     <Flex>
       <Select model={model}>
-        <FormField
-          label="Contact"
-          labelPosition={FormField.LabelPosition.Left}
-          inputId="label-position-select"
-        >
-          <Select.Input id="label-position-select" />
+        <FormField label="Contact" labelPosition={FormField.LabelPosition.Left}>
+          <Select.Input />
           <Select.Popper>
             <Select.Card>
               {model.state.items.length > 0 && (
