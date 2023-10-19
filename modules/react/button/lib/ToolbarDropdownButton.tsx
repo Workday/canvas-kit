@@ -9,10 +9,12 @@ import {
   styled,
   StyledType,
 } from '@workday/canvas-kit-react/common';
+import {cssVar} from '@workday/canvas-kit-styling';
 import {ButtonColors} from './types';
 import {BaseButton} from './BaseButton';
 import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {ToolbarIconButtonProps} from './ToolbarIconButton';
+import {brand} from '@workday/canvas-tokens-web';
 
 export interface ToolbarDropdownButtonProps
   extends Omit<ToolbarIconButtonProps, 'toggled' | 'onToggleChange'>,
@@ -24,9 +26,9 @@ const StyledToolbarDropdownButton = styled(BaseButton)<StyledType & ToolbarDropd
   width: 'auto',
   height: space.l,
   borderRadius: borderRadius.m,
+  gap: space.zero,
   '& .wd-icon': {
     display: 'inline-block',
-    verticalAlign: 'middle',
     width: 20,
     height: 20,
   },
@@ -37,6 +39,14 @@ const StyledToolbarDropdownButton = styled(BaseButton)<StyledType & ToolbarDropd
     marginLeft: `${space.xxxs}`,
     marginRight: 0,
     width: 18, // decrease the space between a custom icon and the chevron per design
+  },
+  '&:focus-visible, &.focus': {
+    ...focusRing({
+      width: 2,
+      separation: 0,
+      innerColor: 'transparent',
+      outerColor: cssVar(brand.common.focusOutline),
+    }),
   },
 });
 
@@ -96,7 +106,6 @@ const getToolbarDropdownButtonColors = (theme: EmotionCanvasTheme): ButtonColors
     },
     focus: {
       icon: colors.licorice200,
-      focusRing: focusRing({width: 2, separation: 0}, theme),
       background: 'transparent',
     },
     disabled: {

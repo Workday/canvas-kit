@@ -36,27 +36,23 @@ const getButtonPillColors = () => {
       label: colors.blackPepper400,
       border: colors.licorice200,
     },
+    focus: {
+      icon: colors.licorice500,
+      background: colors.soap300,
+      border: colors.blueberry400,
+      label: colors.blackPepper400,
+    },
     hover: {
       icon: colors.licorice500,
       background: colors.soap400,
       border: colors.licorice400,
+      label: colors.blackPepper400,
     },
     active: {
       icon: colors.licorice500,
       background: colors.soap500,
       border: colors.licorice500,
-    },
-    focus: {
-      icon: colors.licorice500,
-      background: colors.soap300,
-      border: colors.blueberry400,
-      focusRing: focusRing({
-        width: 0,
-        inset: 'inner',
-        innerColor: colors.blueberry400,
-        outerColor: colors.blueberry400,
-        separation: 1,
-      }),
+      label: colors.blackPepper400,
     },
     disabled: {
       icon: colors.licorice100,
@@ -92,12 +88,7 @@ const getRemovablePillColors = (disabled?: boolean) => {
       icon: colors.licorice200,
       background: colors.soap300,
       label: colors.blackPepper400,
-
-      focusRing: focusRing({
-        width: 0,
-        innerColor: 'transparent',
-        outerColor: 'transparent',
-      }),
+      border: colors.licorice200,
     },
     disabled: {},
   };
@@ -147,8 +138,15 @@ const StyledBasePill = styled(BaseButton.as('button'))<StyledType & PillProps>(
     }),
   },
   ({variant}) => ({
-    '&:focus': {
+    '&:focus, &:focus-visible': {
       borderColor: variant === 'removable' ? undefined : colors.blueberry400,
+      ...focusRing({
+        width: 0,
+        inset: 'inner',
+        innerColor: colors.blueberry400,
+        outerColor: colors.blueberry400,
+        separation: 1,
+      }),
     },
   }),
   boxStyleFn
@@ -158,6 +156,13 @@ const StyledNonInteractivePill = styled(StyledBasePill)<StyledType>({
   cursor: 'default',
   overflow: 'revert', // override BaseButton overflow styles so the click target exists outside the pill for removable
   position: 'relative',
+  '&:focus-visibile, &.focus': {
+    ...focusRing({
+      width: 0,
+      innerColor: 'transparent',
+      outerColor: 'transparent',
+    }),
+  },
 });
 
 /**
