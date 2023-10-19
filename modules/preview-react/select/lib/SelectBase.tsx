@@ -170,7 +170,7 @@ export interface SelectBaseProps extends CoreSelectBaseProps, StyledType {
   shouldMenuAutoFocus?: boolean;
 }
 
-export const buttonBorderWidth = 0.0625;
+export const buttonBorderWidth = 1;
 
 const menuIconSize = space.m;
 
@@ -179,7 +179,7 @@ const SelectButton = styled('button')<
 >(
   {
     ...type.levels.subtext.large,
-    border: `${buttonBorderWidth}rem solid ${inputColors.border}`,
+    border: `${buttonBorderWidth}px solid ${inputColors.border}`,
     cursor: 'default',
     display: 'block',
     backgroundColor: inputColors.background,
@@ -189,7 +189,6 @@ const SelectButton = styled('button')<
     outline: 'none',
     overflow: 'hidden',
     padding: `calc(${space.xxs} - ${buttonBorderWidth}px)`,
-    // padding: `${buttonPadding}rem`,
     paddingRight: `calc(${space.xxs} + ${space.m} + (${space.xxs} + ${buttonBorderWidth}px))`,
     textAlign: 'left',
     textOverflow: 'ellipsis',
