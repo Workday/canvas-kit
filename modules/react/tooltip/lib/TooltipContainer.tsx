@@ -2,7 +2,7 @@ import * as React from 'react';
 import {keyframes} from '@emotion/react';
 import styled from '@emotion/styled';
 
-import {borderRadius, colors, space, spaceNumbers, type} from '@workday/canvas-kit-react/tokens';
+import {borderRadius, colors, space, type} from '@workday/canvas-kit-react/tokens';
 import {TransformOrigin, getTranslateFromOrigin} from '@workday/canvas-kit-react/common';
 
 const tooltipAnimation = (transformOrigin: TransformOrigin) => {
@@ -72,9 +72,9 @@ export const TooltipContainer = styled('div')<TooltipContainerProps>(
 
     // offset tooltips by 2 pixels when a keyboard focus ring is detected
     '[data-whatinput=keyboard] &': {
-      padding: `${spaceNumbers.s - 0.125}rem`,
+      padding: `calc(${space.s} - 0.125rem)`,
       ':before': {
-        margin: `${spaceNumbers.xxxs + 0.125}rem`,
+        margin: `calc(${space.xxxs} + 0.125rem)`,
       },
     },
 

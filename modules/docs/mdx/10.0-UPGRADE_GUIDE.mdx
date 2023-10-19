@@ -12,7 +12,8 @@ any questions.
 - [Removals](#removals)
   - [useBanner](#useBanner)
 - [Deprecations](#deprecations)
-  - [InputIconContainer](#input-icon-container)
+  - [Input Icon Container](#input-icon-container)
+	- [Space Numbers](#space-numbers)
   - [Table](#table)
 - [Token Updates](#token-updates)
   - [Space and Depth](#space-and-depth)
@@ -69,16 +70,45 @@ accessibility, and browsers can compute the name of the Banner from the text giv
 
 ### Input Icon Container
 
+**PR:** [#2332](https://github.com/Workday/canvas-kit/pull/2332)
+
 We've deprecated `InputIconContainer` from [Main](#main) because it doesn't handle bidirectionality
-or icons at the start of an input. Please consider using
+or icons at the start of an input. Please use
 [`InputGroup`](https://workday.github.io/canvas-kit/?path=/story/components-inputs-text-input--icons)
 instead.
 
+### Space Numbers
+
+**PR:** [#2345](https://github.com/Workday/canvas-kit/pull/2345)
+
+We've deprecated `spaceNumbers`. Please use our `rem` based
+[`space`](https://workday.github.io/canvas-kit/?path=/docs/tokens--space) tokens. In the case where
+you need to calculate a value, use
+[CSS calc()](https://developer.mozilla.org/en-US/docs/Web/CSS/calc) instead.
+
+Example using `space` with calc instead of deprecated `spaceNumbers`.
+
+```tsx
+// With deprecated `spaceNumbers`
+{
+  paddingLeft: spaceNumbers.xl + 2; // 42px
+}
+```
+
+```tsx
+// With `rem` based `space` tokens
+{
+  padding: `calc(${space.xl} + 2px)`; // 42px
+}
+```
+
+For more information on how to handle this migration, you can reference our [discussion](https://github.com/Workday/canvas-kit/discussions/2343).
+
 ### Table
 
-We've deprecated `Table` and `TableRow` as well as all of their exported members. Please consider
-using [`Table in Preview`](https://workday.github.io/canvas-kit/?path=/docs/preview-table--basic)
-instead.
+**PR:** [#2344](https://github.com/Workday/canvas-kit/pull/2344)
+
+We've deprecated `Table` and `TableRow` as well as all of their exported members. Please use [`Table`](https://workday.github.io/canvas-kit/?path=/docs/preview-table--basic) in [Preview](#preview) instead.
 
 ## Token Updates
 
