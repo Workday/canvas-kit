@@ -43,4 +43,24 @@ describe('Checkbox', () => {
       getCheckbox().should('be.disabled');
     });
   });
+
+  context(`given the 'Indeterminate' story is rendered`, () => {
+    beforeEach(() => {
+      h.stories.load('Components/Inputs/Checkbox', 'Indeterminate');
+    });
+
+    it('should not have any axe errors', () => {
+      cy.checkA11y();
+    });
+
+    it('should have the correct attributes', () => {
+      getCheckbox()
+        .eq(1)
+        .click();
+      getCheckbox()
+        .eq(0)
+        .should('have.prop', 'indeterminate', true)
+        .should('have.attr', 'aria-checked', 'mixed');
+    });
+  });
 });

@@ -45,8 +45,9 @@ export const Indeterminate = () => {
 
     const anyToppingChecked = newToppings.filter(topping => topping.checked).length > 0;
     const anyToppingUnchecked = newToppings.filter(topping => !topping.checked).length > 0;
-    setPizzaChecked(anyToppingChecked);
+    const allToppingChecked = !anyToppingUnchecked;
     setPizzaIndeterminate(anyToppingChecked && anyToppingUnchecked);
+    setPizzaChecked(allToppingChecked);
   };
 
   return (

@@ -10,6 +10,8 @@ import {LabelPositionVertical} from './examples/LabelPositionVertical';
 import {Placeholder} from './examples/Placeholder';
 import {RefForwarding} from './examples/RefForwarding';
 import {Required} from './examples/Required';
+import {Hidden} from './examples/Hidden';
+import {ReadOnly} from './examples/ReadOnly';
 import {Password} from './examples/Password';
 import {HiddenLabel} from './examples/HiddenLabel';
 import {ThemedAlert} from './examples/ThemedAlert';
@@ -57,6 +59,21 @@ that the field is required. This will also add a red asterisk to `TextInput.Labe
 
 <ExampleCodeBlock code={Required} />
 
+### ReadOnly
+
+Use `TextInput.Field`'s `readOnly` prop to indicate that the field can not be changed. We reccommend
+setting the background and border color to tranparent and the cursor to default to help inform users
+of the immutiblity.
+
+<ExampleCodeBlock code={ReadOnly} />
+
+### Hidden
+
+Set `TextInput.Field`'s `type` prop to
+`hidden` to completly hide a field while still submitting its value, often used for things like security tokens. Note: You will likely need to manually set`aria-describedby={undefined}`and`id={undefined}`
+
+<ExampleCodeBlock code={Hidden} />
+
 ### Ref Forwarding
 
 All the TextInput subcomponents support
@@ -76,7 +93,7 @@ extend full width, e.g. setting width prop to 100%, or you can set the `alignIte
 ### Label Position
 
 Use the `orientation` property to set `TextInput.Label`'s position. You can override the default
-spacing using the `spacing` prop. Below are examples of both positions:
+spacing using the `gap` prop. Below are examples of both positions:
 
 #### Horizontal
 
@@ -89,7 +106,7 @@ spacing using the `spacing` prop. Below are examples of both positions:
 ### Visually Hiding The Label
 
 If your label is just for screen reader users you can use the `accessibleHide` utility class from
-`@workday/canvas-kit-react/common`. You will likely want to set the `spacing` prop on `TextInput` to
+`@workday/canvas-kit-react/common`. You will likely want to set the `gap` prop on `TextInput` to
 `zero`.
 
 <ExampleCodeBlock code={HiddenLabel} />

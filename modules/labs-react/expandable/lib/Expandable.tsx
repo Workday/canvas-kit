@@ -33,7 +33,7 @@ export const Expandable = createContainer('div')({
      * associated content.
      *
      * As according to the [W3 disclosure
-     * specification](https://www.w3.org/TR/wai-aria-practices-1.1/#disclosure), the button has
+     * specification](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/), the button has
      * `aria-expanded` and `aria-controls` attributes set by default
      *
      * This component should hold an `Expandable.Icon`, an optional `Expandable.Avatar`, and an

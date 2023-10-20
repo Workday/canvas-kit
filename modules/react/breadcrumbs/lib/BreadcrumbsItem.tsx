@@ -38,7 +38,7 @@ export const useBreadcrumbsItem = composeHooks(
   createElemPropsHook(useBreadcrumbsModel)(
     (
       {state},
-      _?: React.Ref<HTMLElement>,
+      _,
       elemProps: {
         'data-id'?: string;
         item?: {id: string};

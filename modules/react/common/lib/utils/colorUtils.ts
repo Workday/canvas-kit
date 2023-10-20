@@ -32,7 +32,7 @@ const colorPriority = [
 
 /**
  *
- * Chooses foreground color with accesible contrast against background. If contrast ratio
+ * Chooses foreground color with accessible contrast against background. If contrast ratio
  * is greater than 4.5:1, chooses provided light or dark color (favoring light color). If neither
  * have a high enough contrast ratio, picks the first color of the following that meets 4.5:1 or higher:
  * [frenchVanilla100, blackPepper300, blackPepper400, blackPepper500, blackPepper600]

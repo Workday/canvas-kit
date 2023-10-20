@@ -36,7 +36,7 @@ export const ActionBar = createContainer()({
   modelHook: useActionBarModel,
   subComponents: {
     /**
-     * `ActionBar.List` is a `HStack` element. It is a container for
+     * `ActionBar.List` is a {@link Flex} element. It is a container for
      * {@link ActionBarItem ActionBar.Item} subcomponents. To render an overflow button for
      * ActionBar with overflow behavior `overflowButton` prop with overflow button component as a
      * value should be passed.

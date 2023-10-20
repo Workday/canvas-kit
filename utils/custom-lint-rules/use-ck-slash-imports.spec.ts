@@ -7,7 +7,7 @@ const slashImportRuleTester = new lint.RuleTester({
 slashImportRuleTester.run('use-ck-slash-imports', ckSlashImportRule, {
   valid: [
     "import {ColorSwatch} from '@workday/canvas-kit-react/color-picker'",
-    "import {Toast} from '@workday/canvas-kit-labs-react/toast'",
+    "import {Toast} from '@workday/canvas-kit-react/toast'",
     "import {SidePanel} from '@workday/canvas-kit-preview-react/side-panel'",
     "import {styled} from '@workday/canvas-kit-react/common'",
     "import {Specifications} from '@workday/canvas-kit-docs'",

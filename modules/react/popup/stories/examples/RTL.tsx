@@ -3,7 +3,7 @@ import React from 'react';
 import {SecondaryButton, DeleteButton} from '@workday/canvas-kit-react/button';
 import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
 import {Popup} from '@workday/canvas-kit-react/popup';
-import {Box, HStack} from '@workday/canvas-kit-react/layout';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
 
 export const RTL = () => {
   return (
@@ -16,10 +16,10 @@ export const RTL = () => {
             האם ברצונך למחוק פריט זה
           </Box>
         </Popup.Body>
-        <HStack spacing="s" padding="xxs" marginTop="xxs">
+        <Flex gap="s" padding="xxs" marginTop="xxs">
           <DeleteButton>לִמְחוֹק</DeleteButton>
           <SecondaryButton>לְבַטֵל</SecondaryButton>
-        </HStack>
+        </Flex>
       </Popup.Card>
     </CanvasProvider>
   );
