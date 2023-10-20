@@ -414,8 +414,7 @@ describe('Modal', () => {
         });
 
         it('should trap focus inside the modal element', () => {
-          cy.findByRole('dialog', {name: 'Delete Item'})
-            .pipe(h.modal.getTitle)
+          cy.findByRole('button', {name: 'Cancel'})
             .should('have.focus');
           cy.tab()
             .should('contain', 'Delete')
