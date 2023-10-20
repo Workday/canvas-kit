@@ -227,7 +227,7 @@ context(`given the "Basic" story is rendered`, () => {
 
             context('the menu', () => {
               it('should set assistive focus to the second option ("Phone") that is where the cursor was', () => {
-                cy.findAllByRole('option').eq(0).should('have.attr', 'aria-selected', 'true');
+                cy.findAllByRole('option').eq(1).should('have.attr', 'aria-selected', 'true');
               });
             });
           });
