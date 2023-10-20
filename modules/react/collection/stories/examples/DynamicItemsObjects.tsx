@@ -16,10 +16,6 @@ const items = [
 
 export const DynamicItemsObjects = () => (
   <ListBox items={items}>
-    {item => (
-      <ListBox.Item aria-disabled={item.disabled ? item.disabled : undefined}>
-        {item.id}
-      </ListBox.Item>
-    )}
+    {item => <ListBox.Item aria-disabled={item.disabled}>{item.id}</ListBox.Item>}
   </ListBox>
 );

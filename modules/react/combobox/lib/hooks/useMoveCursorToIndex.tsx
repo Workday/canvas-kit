@@ -10,9 +10,9 @@ export const useMoveCursorToIndex = createElemPropsHook(useComboboxModel)(model 
   React.useLayoutEffect(() => {
     const cursorItemId = model.state.items.find(item => item.id === model.state.cursorId)?.id;
     // If there is no selected item and items exists we want to set the cursor to the first item in the array
-    if (model.state.selectedIds.length === 0 && model.state.items.length > 0 && !cursorItemId) {
+    if (!model.state.selectedIds.length && model.state.items.length && !cursorItemId) {
       model.events.goTo({id: model.state.items[0].id});
-    } else if (model.state.selectedIds.length > 0 && !cursorItemId) {
+    } else if (model.state.selectedIds.length && !cursorItemId) {
       // If the user wants an item selected by default by passing `initialSelectedId` we select that item
       model.events.goTo({id: model.state.selectedIds[0]});
     }
@@ -26,8 +26,7 @@ export const useMoveCursorToIndex = createElemPropsHook(useComboboxModel)(model 
 
   React.useEffect(() => {
     // when closed, the cursor should reset to the selected item if something is selected
-    if (!visible && model.state.selectedIds.length !== 0) {
-      console.log();
+    if (!visible && model.state.selectedIds.length) {
       model.events.goTo({id: model.state.selectedIds[0]});
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
