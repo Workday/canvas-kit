@@ -2,7 +2,7 @@
 import React from 'react';
 
 /**
- * @deprecated ⚠️ `Model` has been deprecated and will be removed in a future major version. The returned model is now inferred from `createModelHook`.
+ * @deprecated The returned model is now inferred from `createModelHook`
  */
 export type Model<State, Events extends IEvent> = {
   state: State;
@@ -64,7 +64,7 @@ type ToCallbackConfig<
  *   id?: string
  * } & Partial<ToModelConfig<State, Events, typeof eventMap>>
  *
- * @deprecated ⚠️ `ToModelConfig` has been deprecated and will be removed in a future major version. Please use `createModelHook` instead since it infers the config type.
+ * @deprecated `createModelHook` now infers the config type
  */
 export type ToModelConfig<
   TState extends Record<string, any>,
@@ -97,17 +97,19 @@ export type ToModelConfig<
  *   }
  * })
  *
- * @deprecated ⚠️ `createEventMap` has been deprecated and will be removed in a future major version. Please use `createModelHook` instead. It uses Template Literal Types to create event map types.
+ * @deprecated `createModelHook` uses Template Literal Types to create event map types
  */
-export const createEventMap = <TEvents extends IEvent>() => <
-  TGuardMap extends Record<string, keyof TEvents>,
-  TCallbackMap extends Record<string, keyof TEvents>
->(
-  config: Partial<EventMap<TEvents, TGuardMap, TCallbackMap>>
-): EventMap<TEvents, TGuardMap, TCallbackMap> => {
-  // Instruct Typescript that all valid guards and callbacks exist
-  return config as EventMap<TEvents, TGuardMap, TCallbackMap>;
-};
+export const createEventMap =
+  <TEvents extends IEvent>() =>
+  <
+    TGuardMap extends Record<string, keyof TEvents>,
+    TCallbackMap extends Record<string, keyof TEvents>
+  >(
+    config: Partial<EventMap<TEvents, TGuardMap, TCallbackMap>>
+  ): EventMap<TEvents, TGuardMap, TCallbackMap> => {
+    // Instruct Typescript that all valid guards and callbacks exist
+    return config as EventMap<TEvents, TGuardMap, TCallbackMap>;
+  };
 
 // small wrapper to get `keyof T` instead of `string | number | symbol`
 const keys = <T extends object>(input: T) => Object.keys(input) as (keyof T)[];
@@ -131,7 +133,7 @@ const keys = <T extends object>(input: T) => Object.keys(input) as (keyof T)[];
  *     }
  *   }
  * })
- * @deprecated ⚠️ `useEventMap` has been deprecated and will be removed in a future major version. Please use `createModelHook` instead.
+ * @deprecated Use `createModelHook` instead
  */
 export const useEventMap = <
   TEvents extends IEvent,
@@ -207,14 +209,16 @@ type ToEvent<TEvents extends EventCreator> = {
 };
 
 // use this?
-export const createEvents = <TEvents extends EventCreator>(events: TEvents) => <
-  TGuardMap extends Record<string, keyof TEvents>,
-  TCallbackMap extends Record<string, keyof TEvents>
->(
-  config?: Partial<EventMap<ToEvent<TEvents>, TGuardMap, TCallbackMap>>
-) => {
-  return {events, eventMap: config as EventMap<ToEvent<TEvents>, TGuardMap, TCallbackMap>};
-};
+export const createEvents =
+  <TEvents extends EventCreator>(events: TEvents) =>
+  <
+    TGuardMap extends Record<string, keyof TEvents>,
+    TCallbackMap extends Record<string, keyof TEvents>
+  >(
+    config?: Partial<EventMap<ToEvent<TEvents>, TGuardMap, TCallbackMap>>
+  ) => {
+    return {events, eventMap: config as EventMap<ToEvent<TEvents>, TGuardMap, TCallbackMap>};
+  };
 
 /**
  * Special type that will be a placeholder during development. At build time, this generic will be
@@ -222,8 +226,7 @@ export const createEvents = <TEvents extends EventCreator>(events: TEvents) => <
  * explicit type for your configs to preserve the `Generic` symbol, otherwise Typescript will
  * convert to `any`.
  */
-export type Generic = any
-
+export type Generic = any;
 
 export type ModelExtras<TDefaultConfig, TRequiredConfig, TState, TEvents, TModel> = {
   /** Default config of the model. Useful when composing models to reused config */
@@ -245,12 +248,7 @@ export type ModelExtras<TDefaultConfig, TRequiredConfig, TState, TEvents, TModel
    * */
   getElemProps: <P extends {}>(
     props: P
-  ) => Omit<
-    P,
-    | keyof TDefaultConfig
-    | keyof TRequiredConfig
-    | keyof ToEventConfig<TState, TEvents>
-  >;
+  ) => Omit<P, keyof TDefaultConfig | keyof TRequiredConfig | keyof ToEventConfig<TState, TEvents>>;
   /**
    * A typed function to merge config when composing models together. Guards and Callbacks haven't
    * been resolved yet. `mergeConfig` is a type-attached function that includes guard and callback
@@ -277,9 +275,7 @@ export type ModelExtras<TDefaultConfig, TRequiredConfig, TState, TEvents, TModel
    */
   mergeConfig: (
     source: Partial<TDefaultConfig> & TRequiredConfig,
-    target: Partial<
-      TDefaultConfig & TRequiredConfig & ToEventConfig<TState, TEvents>
-    >
+    target: Partial<TDefaultConfig & TRequiredConfig & ToEventConfig<TState, TEvents>>
   ) => TDefaultConfig & TRequiredConfig & ToEventConfig<TState, TEvents>;
 };
 
@@ -287,16 +283,13 @@ export type ModelExtras<TDefaultConfig, TRequiredConfig, TState, TEvents, TModel
  * Generic type for all models. It makes `defaultConfig` have optional keys and adds `getElemProps`
  * statically to the model function.
  */
-export type ModelFn<
-  TDefaultConfig,
-  TRequiredConfig,
-  TModel
-> = TModel extends { state: infer TState; events: infer TEvents }
+export type ModelFn<TDefaultConfig, TRequiredConfig, TModel> = TModel extends {
+  state: infer TState;
+  events: infer TEvents;
+}
   ? (<TT_Special_Generic>( // special generic used by post processing to handle generic models
-      config?: Partial<TDefaultConfig> &
-        TRequiredConfig &
-        ToEventConfig<TState, TEvents>
-    ) => TModel ) &
+      config?: Partial<TDefaultConfig> & TRequiredConfig & ToEventConfig<TState, TEvents>
+    ) => TModel) &
       ModelExtras<TDefaultConfig, TRequiredConfig, TState, TEvents, TModel>
   : never;
 
@@ -320,15 +313,13 @@ export type ModelFn<
 // contain `state` that are incompatible. More info:
 // https://github.com/damianc/dev-notes/blob/master/typescript/bivariance-hack.md
 export type ToEventConfig<TState, TEvents extends Record<string, any>> = {
-  [K in keyof TEvents as `on${Capitalize<string & K>}`]?: {bivarianceHack(
-    data: Parameters<TEvents[K]>[0],
-    prevState: TState
-  ): void}['bivarianceHack'];
+  [K in keyof TEvents as `on${Capitalize<string & K>}`]?: {
+    bivarianceHack(data: Parameters<TEvents[K]>[0], prevState: TState): void;
+  }['bivarianceHack'];
 } & {
-  [K in keyof TEvents as `should${Capitalize<string & K>}`]?: {bivarianceHack(
-    data: Parameters<TEvents[K]>[0],
-    state: TState
-  ): boolean}['bivarianceHack'];
+  [K in keyof TEvents as `should${Capitalize<string & K>}`]?: {
+    bivarianceHack(data: Parameters<TEvents[K]>[0], state: TState): boolean;
+  }['bivarianceHack'];
 };
 
 function capitalize(string: string) {
@@ -349,12 +340,12 @@ function mergeConfig<TConfig extends Record<string, any>>(
   sourceConfig: Partial<TConfig>,
   newConfig: Partial<TConfig>
 ): TConfig {
-  const result = { ...sourceConfig } as TConfig;
+  const result = {...sourceConfig} as TConfig;
   for (const key in newConfig) {
     if (
-      typeof newConfig[key] === "function" &&
+      typeof newConfig[key] === 'function' &&
       /(on)[A-Z]/.test(key) &&
-      typeof sourceConfig[key] === "function"
+      typeof sourceConfig[key] === 'function'
     ) {
       // merge callbacks and ignore Typescript's errors. We've already tested call signatures
       //  @ts-ignore
@@ -364,11 +355,7 @@ function mergeConfig<TConfig extends Record<string, any>>(
         // @ts-ignore
         newConfig[key](data, state);
       };
-    } else if (
-      newConfig[key] &&
-      /(should)[A-Z]/.test(key) &&
-      sourceConfig[key]
-    ) {
+    } else if (newConfig[key] && /(should)[A-Z]/.test(key) && sourceConfig[key]) {
       // merge guards and ignore Typescript's errors. We've already tested call signatures
       // @ts-ignore
       result[key] = (data: any, state: any) => {
@@ -377,14 +364,16 @@ function mergeConfig<TConfig extends Record<string, any>>(
       };
     } else {
       // @ts-ignore
-      result[key] = newConfig[key]
+      result[key] = newConfig[key];
     }
   }
 
   return result;
 }
 
-export type ExtractModelConfig<T extends (config: any) => any> = T extends (config: infer P) => any ? Required<P> : {}
+export type ExtractModelConfig<T extends (config: any) => any> = T extends (config: infer P) => any
+  ? Required<P>
+  : {};
 
 export type ModelConfig<TDefaultConfig, TRequiredConfig> = {
   /**
@@ -465,7 +454,7 @@ export type ModelConfig<TDefaultConfig, TRequiredConfig> = {
    *   model.state.value // `string`
    * })
    */
-  contextOverride?: React.Context<any>
+  contextOverride?: React.Context<any>;
 };
 
 /**
@@ -494,15 +483,15 @@ export type ModelConfig<TDefaultConfig, TRequiredConfig> = {
 export const createModelHook = <TDefaultConfig extends {}, TRequiredConfig extends {}>(
   options: ModelConfig<TDefaultConfig, TRequiredConfig>
 ) => {
-  const { defaultConfig = {}, requiredConfig = {}, defaultContext, contextOverride } =
-    options;
+  const {defaultConfig = {}, requiredConfig = {}, defaultContext, contextOverride} = options;
 
   // create a bunch of refs so we can define the `wrappedModel` function once.
-  const fnRef: { current: any } = { current: null };
+  const fnRef: {current: any} = {current: null};
 
-  const callbacksRef: { current: string[] } = { current: [] };
-  const guardsRef: { current: string[] } = { current: [] };
-  const Context = contextOverride || React.createContext<any>(defaultContext || {state: {}, events: {}})
+  const callbacksRef: {current: string[]} = {current: []};
+  const guardsRef: {current: string[]} = {current: []};
+  const Context =
+    contextOverride || React.createContext<any>(defaultContext || {state: {}, events: {}});
 
   const getElemProps = (props: object) => {
     // if (eventsRef.current === null) {
@@ -514,9 +503,10 @@ export const createModelHook = <TDefaultConfig extends {}, TRequiredConfig exten
     for (const key in props) {
       if (
         (!defaultConfig.hasOwnProperty(key) &&
-        !requiredConfig.hasOwnProperty(key) &&
-        !callbacksRef.current.includes(key) &&
-        !guardsRef.current.includes(key)) || key === 'id'
+          !requiredConfig.hasOwnProperty(key) &&
+          !callbacksRef.current.includes(key) &&
+          !guardsRef.current.includes(key)) ||
+        key === 'id'
       ) {
         // @ts-ignore  Typescript complains about index signatures and this type is never exposed in definitions, so suppress the error
         elemProps[key] = props[key];
@@ -529,11 +519,11 @@ export const createModelHook = <TDefaultConfig extends {}, TRequiredConfig exten
   // we use `any` here because we don't know what the type is here and it is internal. No use
   // slowing down Typescript to bother type checking
   function wrappedModelHook(config: Record<string, any>) {
-    const stateRef = React.useRef<Record<string, any>>({})
-    const configRef = React.useRef<Record<string, any>>({})
-    const eventsRef = React.useRef<Record<string, any>>({})
+    const stateRef = React.useRef<Record<string, any>>({});
+    const configRef = React.useRef<Record<string, any>>({});
+    const eventsRef = React.useRef<Record<string, any>>({});
 
-    const { state, events, ...rest } = fnRef.current({
+    const {state, events, ...rest} = fnRef.current({
       ...defaultConfig,
       ...config,
     });
@@ -558,10 +548,7 @@ export const createModelHook = <TDefaultConfig extends {}, TRequiredConfig exten
 
             if (
               configRef.current[guardFnName] &&
-              !configRef.current[guardFnName](
-                data,
-                stateRef.current,
-              )
+              !configRef.current[guardFnName](data, stateRef.current)
             ) {
               return;
             }
@@ -572,12 +559,8 @@ export const createModelHook = <TDefaultConfig extends {}, TRequiredConfig exten
 
           const callbackFnName = getCallbackName(key);
           if (!(eventsRef.current[key] as any)._wrapped) {
-
             if (configRef.current[callbackFnName]) {
-              configRef.current[callbackFnName](
-                data,
-                stateRef.current,
-              );
+              configRef.current[callbackFnName](data, stateRef.current);
             }
           }
         };
@@ -588,8 +571,8 @@ export const createModelHook = <TDefaultConfig extends {}, TRequiredConfig exten
       }, {} as Record<string, any>);
     }, []);
 
-  // The model context is private and should never be used
-    return { state, events: wrappedEvents, __UNSTABLE_modelContext: Context, ...rest };
+    // The model context is private and should never be used
+    return {state, events: wrappedEvents, __UNSTABLE_modelContext: Context, ...rest};
   }
 
   wrappedModelHook.getElemProps = getElemProps;

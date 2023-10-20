@@ -111,12 +111,13 @@ const StyledRadioInput = styled(Box.as('input'))<StyledRadioButtonProps & Styled
     },
 
     ...mouseFocusBehavior({
-      '&:focus + .cnvs-radio-check, &:focus:hover + .cnvs-radio-check, &:focus:active + .cnvs-radio-check, &:focus:hover:checked + .cnvs-radio-check, &:focus:active:checked + .cnvs-radio-check': {
-        ...focusRing({
-          width: 0,
-          outerColor: variant === 'inverse' ? colors.frenchVanilla100 : themeFocusOutline,
-        }),
-      },
+      '&:focus + .cnvs-radio-check, &:focus:hover + .cnvs-radio-check, &:focus:active + .cnvs-radio-check, &:focus:hover:checked + .cnvs-radio-check, &:focus:active:checked + .cnvs-radio-check':
+        {
+          ...focusRing({
+            width: 0,
+            outerColor: variant === 'inverse' ? colors.frenchVanilla100 : themeFocusOutline,
+          }),
+        },
     }),
   })
 );

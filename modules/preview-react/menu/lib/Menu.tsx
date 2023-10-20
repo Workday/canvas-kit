@@ -266,9 +266,9 @@ export class DeprecatedMenu extends React.Component<DeprecatedMenuProps, Depreca
         case ' ':
         case 'Enter':
           nextSelectedIndex = this.state.selectedItemIndex;
-          const child = interactiveItems[this.state.selectedItemIndex] as React.ReactElement<
-            DeprecatedMenuItemProps
-          >;
+          const child = interactiveItems[
+            this.state.selectedItemIndex
+          ] as React.ReactElement<DeprecatedMenuItemProps>;
           this.handleClick(event, child.props);
           isShortcut = true;
           break;
@@ -324,11 +324,7 @@ export class DeprecatedMenu extends React.Component<DeprecatedMenuProps, Depreca
       if (!child || typeof child === 'boolean') {
         character = '';
       } else if (typeof child === 'string' || typeof child === 'number') {
-        character = child
-          .toString()
-          .trim()
-          .substring(0, 1)
-          .toLowerCase();
+        character = child.toString().trim().substring(0, 1).toLowerCase();
       } else if (Array.isArray(child) && child[0]) {
         // TODO test React.ReactNodeArray
         character = getFirstCharacter(child[0]);

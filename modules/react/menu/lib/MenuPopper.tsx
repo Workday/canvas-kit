@@ -15,7 +15,20 @@ export const MenuPopper = createSubcomponent('div')({
   elemPropsHook: useMenuPopper,
 })<MenuPopperProps>(({children, ...elemProps}) => {
   return (
-    <Popper placement="bottom-start" {...elemProps}>
+    <Popper
+      placement="bottom-start"
+      popperOptions={{
+        modifiers: [
+          {
+            name: 'offset',
+            options: {
+              offset: () => [0, 4],
+            },
+          },
+        ],
+      }}
+      {...elemProps}
+    >
       {children}
     </Popper>
   );

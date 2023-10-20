@@ -1,7 +1,8 @@
 import React from 'react';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {Select} from '@workday/canvas-kit-react/select';
-import {Flex} from '@workday/canvas-kit-react/layout';
+import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
+import {BodyText} from '@workday/canvas-kit-react/text';
 
 const options = [
   'E-mail',
@@ -12,18 +13,17 @@ const options = [
   'The Ontologically Anthropocentric Sensory Immersive Simulation',
 ];
 
-export const Disabled = () => {
-  const [value, setValue] = React.useState('');
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
-  };
+export const HoistedModel = () => {
+  const model = useSelectModel({
+    items: options,
+    nonInteractiveIds: ['Fax (disabled)'],
+  });
 
   return (
-    <Flex flexDirection="column">
-      <Select items={options} nonInteractiveIds={['Fax (disabled)']}>
+    <>
+      <Select model={model}>
         <FormField label="Contact">
-          <Select.Input disabled onChange={e => handleChange(e)} />
+          <Select.Input />
           <Select.Popper>
             <Select.Card>
               <Select.List>
@@ -37,6 +37,14 @@ export const Disabled = () => {
           </Select.Popper>
         </FormField>
       </Select>
-    </Flex>
+      <BodyText size="small">Selected Value: {model.state.selectedIds[0]}</BodyText>
+      <SecondaryButton
+        onClick={() => {
+          model.events.select({id: 'Phone'});
+        }}
+      >
+        Select Phone Item
+      </SecondaryButton>
+    </>
   );
 };
