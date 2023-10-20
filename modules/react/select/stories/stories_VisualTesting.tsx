@@ -58,10 +58,7 @@ export const SelectStates = () => {
             ],
           },
           props => {
-            if (props.disabled && !['', 'hover'].includes(props.className)) {
-              return false;
-            }
-            return true;
+            return !props.disabled || !props.className || props.className === 'hover';
           }
         )}
       >
