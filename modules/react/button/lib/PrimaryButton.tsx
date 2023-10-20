@@ -31,15 +31,19 @@ const getPrimaryButtonColors = (variant: 'inverse' | undefined, theme: EmotionCa
         },
         hover: {
           background: themePrimary.dark,
+          label: themePrimary.contrast,
         },
         active: {
           background: themePrimary.darkest,
+          label: themePrimary.contrast,
         },
         focus: {
           background: themePrimary.main,
+          label: themePrimary.contrast,
         },
         disabled: {
           background: themePrimary.main,
+          label: themePrimary.contrast,
         },
       };
 
