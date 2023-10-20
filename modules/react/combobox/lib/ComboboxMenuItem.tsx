@@ -32,12 +32,6 @@ export const useComboboxMenuItem = composeHooks(
     const id = elemProps['data-id'] || '';
 
     const onMouseDown = (event: React.MouseEvent<HTMLElement>) => {
-      if (
-        model.state.nonInteractiveIds.includes(id) ||
-        event.currentTarget.hasAttribute('aria-disabled')
-      ) {
-        return;
-      }
       if (event.currentTarget.getAttribute('aria-disabled') !== 'true') {
         model.events.select({id});
 

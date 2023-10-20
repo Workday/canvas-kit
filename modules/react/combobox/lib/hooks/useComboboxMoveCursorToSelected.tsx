@@ -5,8 +5,7 @@ import {useComboboxModel} from './useComboboxModel';
 /**
  * If there is nothing selected, move cursor to the first item, otherwise, move the cursor to the selected item
  */
-export const useMoveCursorToIndex = createElemPropsHook(useComboboxModel)(model => {
-  const visible = model.state.visibility !== 'hidden';
+export const useComboboxMoveCursorToSelected = createElemPropsHook(useComboboxModel)(model => {
   React.useLayoutEffect(() => {
     const cursorItemId = model.state.items.find(item => item.id === model.state.cursorId)?.id;
     // If there is no selected item and items exists we want to set the cursor to the first item in the array
@@ -24,12 +23,5 @@ export const useMoveCursorToIndex = createElemPropsHook(useComboboxModel)(model 
     model.state.visibility,
   ]);
 
-  React.useEffect(() => {
-    // when closed, the cursor should reset to the selected item if something is selected
-    if (!visible && model.state.selectedIds.length) {
-      model.events.goTo({id: model.state.selectedIds[0]});
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [visible, model.events, model.state.selectedIds]);
   return {};
 });

@@ -6,11 +6,16 @@ import {
   useLocalRef,
   useResizeObserver,
 } from '@workday/canvas-kit-react/common';
-import {useComboboxInput, useKeyboardTypeAhead} from '@workday/canvas-kit-react/combobox';
+import {
+  useComboboxInput,
+  useComboboxKeyboardTypeAhead,
+  useComboboxMoveCursorToSelected,
+  useComboboxResetCursorToSelected,
+} from '@workday/canvas-kit-react/combobox';
 import {useSelectModel} from './useSelectModel';
 
 /**
- * `useSelectInput` extends {@link useComboboxInput useComboboxInput}  and {@link useKeyboardTypeAhead useKeyboardTypeAhead} and adds type ahead functionality and Select-specific [keyboard support](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/).
+ * `useSelectInput` extends {@link useComboboxInput useComboboxInput}  and {@link useComboboxKeyboardTypeAhead useComboboxKeyboardTypeAhead} and adds type ahead functionality and Select-specific [keyboard support](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/).
  */
 export const useSelectInput = composeHooks(
   createElemPropsHook(useSelectModel)((model, ref, elemProps: {keySofar?: string} = {}) => {
@@ -32,7 +37,9 @@ export const useSelectInput = composeHooks(
     return {
       onKeyDown(event: React.KeyboardEvent) {
         // Prevent the keys from being enter in the input
-        event.preventDefault();
+        if (event.key !== 'Tab') {
+          event.preventDefault();
+        }
 
         // Select should open if Spacebar is typed and nothing has been typed AND the menu is hidden
         if (
@@ -60,6 +67,8 @@ export const useSelectInput = composeHooks(
       defaultValue: model.state.selectedIds[0] || model.state.value,
     } as const;
   }),
-  useKeyboardTypeAhead,
+  useComboboxKeyboardTypeAhead,
+  useComboboxResetCursorToSelected,
+  useComboboxMoveCursorToSelected,
   useComboboxInput
 );

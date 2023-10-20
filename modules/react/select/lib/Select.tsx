@@ -77,6 +77,7 @@ export interface SelectProps extends Themeable, ExtractProps<typeof Combobox> {}
  * Use `Select` to allow users to choose an option from a list or type characters to select a matching option.
  *
  * **Note: `Select` must wrap `FormField` and `FormField` must wrap all `Select` children to ensure proper accessibility. **
+ *
  * ```tsx
  * <Select items={options}>
  *  <FormField label="Your Label">
@@ -88,7 +89,7 @@ export interface SelectProps extends Themeable, ExtractProps<typeof Combobox> {}
  *        </Select.List>
  *      </Select.Card>
  *      </Select.Popper>
- *   </FormField>
+ *    </FormField>
  * </Select>
  * ```
  */

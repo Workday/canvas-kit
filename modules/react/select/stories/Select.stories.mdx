@@ -201,6 +201,23 @@ type-ahead.
 
 <ExampleCodeBlock code={Complex} />
 
+By default, the identifier and text value are `id` and `text` properties respectively. If your data
+object for each item is different, provide a `getId` or `getTextValue` function to the model config.
+For example:
+
+```jsx
+const items = [
+  {
+    serverId: '1',
+    label: 'First Option',
+  },
+];
+
+<Select items={items} getId={item => item.serverId} getTextValue={item => item.label}>
+  {/* etc */}
+</Select>;
+```
+
 ## Component API
 
 <SymbolDoc name="Select" fileName="/react/" />

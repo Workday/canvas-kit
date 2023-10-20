@@ -5,10 +5,11 @@ export {useComboboxMenuList} from './lib/ComboboxMenuList';
 export {
   useComboboxLoader,
   useComboboxModel,
-  useComboboxInputOpenWithArrowKeys as useComboboxOpenWithArrowKeys,
-  useKeyboardTypeAhead,
+  useComboboxInputOpenWithArrowKeys,
+  useComboboxKeyboardTypeAhead,
   useSetPopupWidth,
-  useMoveCursorToIndex,
+  useComboboxMoveCursorToSelected,
   useComboboxInput,
   useComboboxListKeyboardHandler,
+  useComboboxResetCursorToSelected,
 } from './lib/hooks';

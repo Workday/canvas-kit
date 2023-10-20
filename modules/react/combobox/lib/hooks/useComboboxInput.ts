@@ -8,7 +8,6 @@ import {useListActiveDescendant} from '@workday/canvas-kit-react/collection';
 import {
   useComboboxModel,
   useComboboxInputOpenWithArrowKeys,
-  useMoveCursorToIndex,
   useSetPopupWidth,
   useComboboxListKeyboardHandler,
 } from './index';
@@ -63,11 +62,7 @@ export const useComboboxInput = composeHooks(
         }
       },
       onBlur(event: React.FocusEvent) {
-        if (model.state.nonInteractiveIds.length > 0) {
-          return;
-        } else {
-          model.events.hide(event);
-        }
+        model.events.hide(event);
       },
       onChange: model.onChange,
       onClick(event: React.MouseEvent) {
@@ -86,7 +81,6 @@ export const useComboboxInput = composeHooks(
     } as const;
   }),
   useSetPopupWidth,
-  useMoveCursorToIndex,
   useComboboxInputOpenWithArrowKeys,
   useListActiveDescendant,
   useComboboxListKeyboardHandler,

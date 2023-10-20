@@ -3,7 +3,7 @@ import {createElemPropsHook} from '@workday/canvas-kit-react/common';
 import {useComboboxModel} from './useComboboxModel';
 
 /**
- * `useKeyboardTypeAhead` handles type-ahead. It will try and find a matching item in the list. It also returns the keys types so far.
+ * `useComboboxKeyboardTypeAhead` handles type-ahead. It will try and find a matching item in the list. It also returns the keys types so far.
  * This hook is best used when composing hooks and in conjunction with `useComboboxInput`.
  *
  * ```tsx
@@ -16,12 +16,12 @@ import {useComboboxModel} from './useComboboxModel';
  *    },
  *  } as const;
  * }),
- * useKeyboardTypeAhead,
+ * useComboboxKeyboardTypeAhead,
  * useComboboxInput
  * );
  * ```
  */
-export const useKeyboardTypeAhead = createElemPropsHook(useComboboxModel)(model => {
+export const useComboboxKeyboardTypeAhead = createElemPropsHook(useComboboxModel)(model => {
   const keySofar = React.useRef('');
   const timer = React.useRef<ReturnType<typeof setTimeout>>();
   const [keyTypedSofar, setKeyTypedSofar] = React.useState(keySofar.current);
@@ -46,13 +46,12 @@ export const useKeyboardTypeAhead = createElemPropsHook(useComboboxModel)(model 
   ): number => {
     for (let i = startIndex; i < endIndex; i++) {
       const label = model.state.items[i].textValue.toLowerCase();
-      if (label.indexOf(startString.toLowerCase()) === 0) {
-        if (
-          !ignoreDisabled ||
-          (ignoreDisabled && !model.state.nonInteractiveIds.includes(model.state.items[i].id))
-        ) {
-          return i;
-        }
+      if (
+        label.startsWith(startString.toLowerCase()) &&
+        (!ignoreDisabled ||
+          (ignoreDisabled && !model.state.nonInteractiveIds.includes(model.state.items[i].id)))
+      ) {
+        return i;
       }
     }
     return -1;
@@ -75,8 +74,8 @@ export const useKeyboardTypeAhead = createElemPropsHook(useComboboxModel)(model 
     startClearKeysSoFarTimer();
 
     // First, look for a match from start to end
-    let matchIndex;
-    matchIndex = getIndexByStartString(start, keySofar.current);
+    let matchIndex = getIndexByStartString(start, keySofar.current);
+    getIndexByStartString(start, keySofar.current);
 
     // If a match isn't found between start and end, wrap the search
     // around and search again from the beginning (0) to start
@@ -86,15 +85,11 @@ export const useKeyboardTypeAhead = createElemPropsHook(useComboboxModel)(model 
 
     // A match was found...
     if (matchIndex > -1) {
+      model.events.goTo({id: model.state.items[matchIndex].id});
       if (model.state.visibility === 'hidden') {
         // If the menu is closed, fire the change event
         // go to that item and select based on its id
-        model.events.goTo({id: model.state.items[matchIndex].id});
         model.events.select({id: model.state.items[matchIndex].id});
-      } else {
-        // Otherwise the menu is visible
-        // move the cursor to that matched item
-        model.events.goTo({id: model.state.items[matchIndex].id});
       }
     }
   };

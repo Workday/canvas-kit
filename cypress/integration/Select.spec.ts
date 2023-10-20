@@ -47,9 +47,7 @@ describe('Select', () => {
 
         context('the first option ("E-Mail")', () => {
           it('should have an aria-selected attribute set to "true"', () => {
-            cy.findAllByRole('option')
-              .eq(0)
-              .should('have.attr', 'aria-selected', 'true');
+            cy.findAllByRole('option').eq(0).should('have.attr', 'aria-selected', 'true');
           });
         });
 
@@ -91,9 +89,7 @@ describe('Select', () => {
 
       context('when the select input is focused and down arrow key is pressed', () => {
         beforeEach(() => {
-          cy.findByRole('combobox')
-            .focus()
-            .realType('{downarrow}');
+          cy.findByRole('combobox').focus().realType('{downarrow}');
         });
 
         context('the select input', () => {
@@ -115,9 +111,7 @@ describe('Select', () => {
 
           context('the menu', () => {
             it('should set assistive focus to the "Phone" option', () => {
-              cy.findAllByRole('option')
-                .eq(1)
-                .should('have.attr', 'aria-selected', 'true');
+              cy.findAllByRole('option').eq(1).should('have.attr', 'aria-selected', 'true');
             });
           });
 
@@ -128,9 +122,7 @@ describe('Select', () => {
 
             context('the menu', () => {
               it('should set assistive focus to the "Mail" option and skip disabled fax', () => {
-                cy.findAllByRole('option')
-                  .eq(3)
-                  .should('have.attr', 'aria-selected', 'true');
+                cy.findAllByRole('option').eq(3).should('have.attr', 'aria-selected', 'true');
               });
             });
           });
@@ -139,9 +131,7 @@ describe('Select', () => {
 
       context('when the enter key is pressed', () => {
         beforeEach(() => {
-          cy.findByRole('combobox')
-            .focus()
-            .realType('{downarrow}');
+          cy.findByRole('combobox').focus().realType('{downarrow}');
         });
 
         context('the menu', () => {
@@ -150,9 +140,7 @@ describe('Select', () => {
           });
 
           it('should have E-Mail selected', () => {
-            cy.findAllByRole('option')
-              .eq(0)
-              .should('have.attr', 'aria-selected', 'true');
+            cy.findAllByRole('option').eq(0).should('have.attr', 'aria-selected', 'true');
           });
         });
 
@@ -160,9 +148,7 @@ describe('Select', () => {
           beforeEach(() => {
             cy.focused().realType('{downarrow}');
             cy.focused().realType('{downarrow}');
-            cy.findAllByRole('option')
-              .eq(3)
-              .realType('{enter}');
+            cy.findAllByRole('option').eq(3).realType('{enter}');
           });
           it(`should read "Mail"`, () => {
             cy.findByRole('combobox').should('have.value', 'Mail');
@@ -180,16 +166,12 @@ describe('Select', () => {
 
       context('when the up arrow key is pressed', () => {
         beforeEach(() => {
-          cy.findByRole('combobox')
-            .focus()
-            .realType('{uparrow}');
+          cy.findByRole('combobox').focus().realType('{uparrow}');
         });
 
         context('the menu', () => {
           it('should set assistive focus to the "E-mail" option', () => {
-            cy.findAllByRole('option')
-              .eq(0)
-              .should('have.class', 'focus');
+            cy.findAllByRole('option').eq(0).should('have.class', 'focus');
           });
         });
       });
@@ -207,16 +189,12 @@ context(`given the "Basic" story is rendered`, () => {
 
   context('when the menu is opened', () => {
     beforeEach(() => {
-      cy.findByRole('combobox')
-        .focus()
-        .realType('{downarrow}');
+      cy.findByRole('combobox').focus().realType('{downarrow}');
     });
 
     context('the menu', () => {
       it('should set assistive focus to the first option ("E-mail")', () => {
-        cy.findAllByRole('option')
-          .eq(0)
-          .should('have.attr', 'aria-selected', 'true');
+        cy.findAllByRole('option').eq(0).should('have.attr', 'aria-selected', 'true');
       });
     });
 
@@ -227,9 +205,7 @@ context(`given the "Basic" story is rendered`, () => {
 
       context('the menu', () => {
         it('should set assistive focus to the second option ("Phone")', () => {
-          cy.findAllByRole('option')
-            .eq(1)
-            .should('have.attr', 'aria-selected', 'true');
+          cy.findAllByRole('option').eq(1).should('have.attr', 'aria-selected', 'true');
         });
       });
 
@@ -246,16 +222,12 @@ context(`given the "Basic" story is rendered`, () => {
               // don't interrupt the menu's closing animation and cause it to
               // re-open while it's in the middle of closing)
               cy.findByRole('listbox').should('not.exist');
-              cy.findByRole('combobox')
-                .focus()
-                .realType('{downarrow}');
+              cy.findByRole('combobox').focus().realType('{downarrow}');
             });
 
             context('the menu', () => {
-              it('should have reset assistive focus to the first option ("E-mail") since nothing was selected', () => {
-                cy.findAllByRole('option')
-                  .eq(0)
-                  .should('have.attr', 'aria-selected', 'true');
+              it('should set assistive focus to the second option ("Phone") that is where the cursor was', () => {
+                cy.findAllByRole('option').eq(0).should('have.attr', 'aria-selected', 'true');
               });
             });
           });
@@ -294,16 +266,12 @@ context('given the "Disabled Options" story with a disabled option', () => {
 
   context('when the menu is opened', () => {
     beforeEach(() => {
-      cy.findByRole('combobox')
-        .focus()
-        .realType('{downarrow}');
+      cy.findByRole('combobox').focus().realType('{downarrow}');
     });
 
     context('the "Fax (disabled)" option', () => {
       it('should have an aria-disabled attribute set to "true"', () => {
-        cy.findAllByRole('option')
-          .eq(2)
-          .should('have.attr', 'aria-disabled', 'true');
+        cy.findAllByRole('option').eq(2).should('have.attr', 'aria-disabled', 'true');
       });
     });
 
@@ -314,9 +282,7 @@ context('given the "Disabled Options" story with a disabled option', () => {
 
       context('the menu', () => {
         it('should set assistive focus to second enabled option ("Phone")', () => {
-          cy.findAllByRole('option')
-            .eq(1)
-            .should('have.attr', 'aria-selected', 'true');
+          cy.findAllByRole('option').eq(1).should('have.attr', 'aria-selected', 'true');
         });
       });
 
@@ -327,9 +293,7 @@ context('given the "Disabled Options" story with a disabled option', () => {
 
         context('the menu', () => {
           it('should set assistive focus to the fourth option down ("Mail") since focus will have skipped one disabled option ("Fax")', () => {
-            cy.findAllByRole('option')
-              .eq(3)
-              .should('have.attr', 'aria-selected', 'true');
+            cy.findAllByRole('option').eq(3).should('have.attr', 'aria-selected', 'true');
           });
         });
       });
@@ -355,9 +319,7 @@ describe('Select With Menu Height', () => {
         () => {
           context('when "s" is typed', () => {
             beforeEach(() => {
-              cy.findByRole('combobox')
-                .focus()
-                .realType('s');
+              cy.findByRole('combobox').focus().realType('s');
             });
 
             context('the select button', () => {
@@ -369,9 +331,7 @@ describe('Select With Menu Height', () => {
 
           context('when "s{500ms delay}s" is typed', () => {
             beforeEach(() => {
-              cy.findByRole('combobox')
-                .focus()
-                .realType('ss', {delay: 500});
+              cy.findByRole('combobox').focus().realType('ss', {delay: 500});
             });
 
             context('the select button', () => {
@@ -424,9 +384,7 @@ describe('Select With Menu Height', () => {
 
           context('when "san m" is typed', () => {
             beforeEach(() => {
-              cy.findByRole('combobox')
-                .focus()
-                .realType('san m');
+              cy.findByRole('combobox').focus().realType('san m');
             });
 
             context('the select button', () => {
@@ -483,9 +441,7 @@ describe('Select With Menu Height', () => {
 
           context('when "s{500ms delay}d" is typed', () => {
             beforeEach(() => {
-              cy.findByRole('combobox')
-                .focus()
-                .realType('sd', {delay: 500});
+              cy.findByRole('combobox').focus().realType('sd', {delay: 500});
               cy.wait(150);
             });
 
@@ -539,9 +495,7 @@ describe('Select With Menu Height', () => {
 
           context('when "san m" is typed', () => {
             beforeEach(() => {
-              cy.findByRole('combobox')
-                .focus()
-                .realType('san m');
+              cy.findByRole('combobox').focus().realType('san m');
               cy.wait(150);
             });
 
@@ -564,10 +518,7 @@ describe('Select With Menu Height', () => {
       () => {
         context('when "Dallas (United States)" is selected and the menu is opened', () => {
           beforeEach(() => {
-            cy.findByRole('combobox')
-              .focus()
-              .type('d')
-              .click();
+            cy.findByRole('combobox').focus().type('d').click();
           });
 
           context('the menu', () => {
