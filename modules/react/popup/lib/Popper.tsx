@@ -173,7 +173,7 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
           placement: popperPlacement,
           ...popperOptions,
           modifiers: [
-            placementModifier,      
+            placementModifier,
             {
               ...fallbackPlacementsModifier,
               options: {

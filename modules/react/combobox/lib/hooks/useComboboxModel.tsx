@@ -43,21 +43,25 @@ export const useComboboxModel = createModelHook({
   defaultConfig: {
     ...useInputModel.defaultConfig,
     ...useMenuModel.defaultConfig,
+    shouldVirtualize: true,
   },
+
   requiredConfig: {
     ...useInputModel.requiredConfig,
     ...useMenuModel.requiredConfig,
   },
 })(config => {
   const input = useInputModel(config);
+
   const menu = useMenuModel(
     useMenuModel.mergeConfig(config, {
-      shouldVirtualize: true,
       onSelect({id}) {
-        dispatchInputEvent(menu.state.targetRef.current, id);
+        const textValue = menu.navigation.getItem(id, menu).textValue || id;
+        dispatchInputEvent(menu.state.targetRef.current, textValue);
       },
     })
   );
+
   const [width, setWidth] = React.useState(0);
 
   const state = {

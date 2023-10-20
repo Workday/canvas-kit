@@ -111,9 +111,10 @@ const Item = styled('li')<Pick<DeprecatedMenuItemProps, 'isDisabled' | 'isFocuse
           'span .wd-icon-fill, span .wd-icon-accent, span .wd-icon-accent2': {
             fill: iconColors.inverse,
           },
-          'span .wd-icon-background ~ .wd-icon-accent, span .wd-icon-background ~ .wd-icon-accent2': {
-            fill: isDisabled ? iconColors.disabled : iconColors.active,
-          },
+          'span .wd-icon-background ~ .wd-icon-accent, span .wd-icon-background ~ .wd-icon-accent2':
+            {
+              fill: isDisabled ? iconColors.disabled : iconColors.active,
+            },
           'span .wd-icon-background': {
             fill: iconColors.inverse,
           },
@@ -123,9 +124,10 @@ const Item = styled('li')<Pick<DeprecatedMenuItemProps, 'isDisabled' | 'isFocuse
           [data-whatinput='pointer'] &`]: {
           backgroundColor: 'inherit',
           color: colors.blackPepper300,
-          'span .wd-icon-background ~ .wd-icon-accent, span .wd-icon-background ~ .wd-icon-accent2': {
-            fill: iconColors.standard,
-          },
+          'span .wd-icon-background ~ .wd-icon-accent, span .wd-icon-background ~ .wd-icon-accent2':
+            {
+              fill: iconColors.standard,
+            },
           '&:hover': {
             backgroundColor: commonColors.hoverBackground,
             'span .wd-icon-fill, span .wd-icon-accent, span .wd-icon-accent2': {
@@ -267,7 +269,7 @@ export class DeprecatedMenuItem extends React.Component<DeprecatedMenuItemProps>
 
   componentDidMount() {
     console.warn(
-      `This component is being deprecated and will be removed in Canvas Kit V9.\n
+      `This component is being deprecated and will be removed in a future major version.\n
       For more information, please see the V8 upgrade guide:\n
       https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page
       `

@@ -8,7 +8,7 @@ import {
   styled,
   Themeable,
 } from '@workday/canvas-kit-react/common';
-import {borderRadius, inputColors, spaceNumbers, type} from '@workday/canvas-kit-react/tokens';
+import {borderRadius, inputColors, space, type} from '@workday/canvas-kit-react/tokens';
 
 export interface TextInputProps extends Themeable, GrowthBehavior {
   /**
@@ -33,7 +33,7 @@ const StyledTextInput = styled('input')<
     boxSizing: 'border-box',
     height: 40,
     transition: '0.2s box-shadow, 0.2s border-color',
-    padding: spaceNumbers.xxs, // Compensate for border
+    padding: space.xxs, // Compensate for border
     margin: 0, // Fix Safari
     '&::placeholder': {
       color: inputColors.placeholder,

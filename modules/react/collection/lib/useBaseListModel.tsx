@@ -10,7 +10,7 @@ export const defaultGetId = (item: any): string => {
 };
 
 export const defaultGetTextValue = (item: any): string => {
-  return typeof item === 'string' ? item : item.text || '';
+  return typeof item === 'string' ? item : item.text || item.id || '';
 };
 
 export interface Item<T> {
@@ -20,7 +20,7 @@ export interface Item<T> {
   /**
    * Used by components that allow jumping to an item based on typing
    */
-  textValue?: string;
+  textValue: string;
 }
 
 // interface Collection<T> {
@@ -124,7 +124,7 @@ export const useBaseListModel = createModelHook({
   const getTextValueRef = React.useRef(defaultGetTextValue);
 
   const getId = config.getId || defaultGetId;
-  const getTextValue = config.getTextValue || defaultGetTextValue;
+  const getTextValue = config.getTextValue || config.getId || defaultGetTextValue;
   getIdRef.current = getId;
   getTextValueRef.current = getTextValue;
 
