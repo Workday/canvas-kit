@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.6.25](https://github.com/Workday/canvas-kit/releases/tag/v8.6.25) (2023-10-20)
+
+### Components
+
+- fix(collection): Set correct aria-setsize in virtualized collections ([#2362](https://github.com/Workday/canvas-kit/pull/2362)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v8.6.24](https://github.com/Workday/canvas-kit/releases/tag/v8.6.24) (2023-10-11)
 
 ### Components
