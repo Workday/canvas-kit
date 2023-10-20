@@ -114,7 +114,7 @@ export const SelectOpenMenuStates = () => {
               <Select.Input {...props} id="contact-select" />
               <Select.Popper>
                 <Select.Card maxHeight="200px">
-                  {model.state.items.length > 0 && (
+                  {!!model.state.items.length && (
                     <Select.List>
                       {item => {
                         return (
