@@ -10,10 +10,10 @@ import {
 } from '@workday/canvas-system-icons-web';
 
 export const customOptions = [
-  {id: 'Activity Stream', icon: activityStreamIcon},
-  {id: 'Avatar', icon: avatarIcon},
-  {id: 'Upload Cloud', icon: uploadCloudIcon},
-  {id: 'User', icon: userIcon},
+  {text: 'Activity Stream', id: 'activity-stream', icon: activityStreamIcon},
+  {text: 'Avatar', id: 'avatar', icon: avatarIcon},
+  {text: 'Upload Cloud', id: 'upload-cloud', icon: uploadCloudIcon},
+  {text: 'User', id: 'user', icon: userIcon},
 ];
 
 export const WithIcons = () => {
@@ -31,9 +31,9 @@ export const WithIcons = () => {
               {model.state.items.length > 0 && (
                 <Select.List>
                   {item => (
-                    <Select.Item>
+                    <Select.Item data-id={item.id}>
                       <Select.Item.Icon icon={item.icon} />
-                      {item.id}
+                      {item.text}
                     </Select.Item>
                   )}
                 </Select.List>

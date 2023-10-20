@@ -4,17 +4,13 @@ import {Select} from '@workday/canvas-kit-react/select';
 import {Flex} from '@workday/canvas-kit-react/layout';
 
 const options = [
-  {id: 'E-mail'},
-  {id: 'Phone'},
-  {id: 'Fax (disabled)', disabled: true},
-  {id: 'Mail'},
-  {id: 'Mobile Phone', disabled: true},
-  {
-    id: 'The Ontologically Anthropocentric Sensory Immersive Simulation',
-  },
+  'E-mail',
+  'Phone',
+  'Fax (disabled)',
+  'Mail',
+  'Mobile Phone',
+  'The Ontologically Anthropocentric Sensory Immersive Simulation',
 ];
-
-const disabledItems = options.filter(item => item.disabled === true).map(item => item.id);
 
 export const DisabledOptions = () => {
   const [value, setValue] = React.useState('');
@@ -25,13 +21,21 @@ export const DisabledOptions = () => {
 
   return (
     <Flex flexDirection="column">
-      <Select items={options} nonInteractiveIds={disabledItems}>
+      <Select items={options} nonInteractiveIds={['Fax (disabled)', 'Mobile Phone']}>
         <FormField label="Contact">
           <Select.Input onChange={e => handleChange(e)} />
           <Select.Popper>
             <Select.Card>
               <Select.List>
-                {item => <Select.Item aria-disabled={item.disabled}>{item.id}</Select.Item>}
+                {item => (
+                  <Select.Item
+                    aria-disabled={
+                      item === 'Mobile Phone' || item === 'Fax (disabled)' ? true : undefined
+                    }
+                  >
+                    {item}
+                  </Select.Item>
+                )}
               </Select.List>
             </Select.Card>
           </Select.Popper>

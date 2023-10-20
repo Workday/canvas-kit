@@ -14,14 +14,14 @@ any questions.
 - [Deprecations](#deprecations)
   - [Input Icon Container](#input-icon-container)
   - [Space Numbers](#space-numbers)
-  - [Select Preview](#select-preview)
   - [Table](#table)
+  - [Select Preview](#select-preview)
 - [Token Updates](#token-updates)
   - [Space and Depth](#space-and-depth)
 - [Component Updates](#component-updates)
-  - [Select](#select)
-  - [Popups](#popups)
   - [Buttons](#buttons)
+  - [Popups](#popups)
+  - [Select Main](#select-main)
 - [Glossary](#glossary)
   - [Main](#main)
   - [Preview](#preview)
@@ -76,16 +76,8 @@ accessibility, and browsers can compute the name of the Banner from the text giv
 **PR:** [#2332](https://github.com/Workday/canvas-kit/pull/2332)
 
 We've deprecated `InputIconContainer` from [Main](#main) because it doesn't handle bidirectionality
-or icons at the start of an input. Please consider using
+or icons at the start of an input. Please use
 [`InputGroup`](https://workday.github.io/canvas-kit/?path=/story/components-inputs-text-input--icons)
-instead.
-
-### Select Preview
-
-**PR:** [#2309](https://github.com/Workday/canvas-kit/pull/2309)
-
-We've deprecated `Select` from [Preview](#preview). Please use
-[`Select` in Main](https://workday.github.io/canvas-kit/?path=/story/components-inputs-select--basic)
 instead.
 
 ### Space Numbers
@@ -120,11 +112,17 @@ For more information on how to handle this migration, you can reference our
 
 **PR:** [#2344](https://github.com/Workday/canvas-kit/pull/2344)
 
-as all of their exported members. Please use
-[`Table` in Preview](https://workday.github.io/canvas-kit/?path=/docs/preview-table--basic) instead.
 We've deprecated `Table` and `TableRow` as well as all of their exported members. Please use
 [`Table`](https://workday.github.io/canvas-kit/?path=/docs/preview-table--basic) in
 [Preview](#preview) instead.
+
+### Select Preview
+
+**PR:** [#2309](https://github.com/Workday/canvas-kit/pull/2309)
+
+We've deprecated `Select` from [Preview](#preview). Please use
+[`Select` in Main](https://workday.github.io/canvas-kit/?path=/story/components-inputs-select--basic)
+instead.
 
 ## Token Updates
 
@@ -173,52 +171,6 @@ these sizes should change along with it. Since `px` are a fixed unit and do not 
 `rem` will allow these tokens to scale with a new default font size.
 
 ## Component Updates
-
-### Popups
-
-All Popup components including `Menu` and `Popup` have increased the top and bottom spacing between
-the target and popup to `4px`.
-
-### Select (Main)
-
-**PR:** [#2309](https://github.com/Workday/canvas-kit/pull/2309)
-
-We've converted `Select` into a
-[compound component](/getting-started/for-developers/resources/compound-components/) which provides
-a flexible API and access to its internals via its subcomponents.
-
-```tsx
-// v9
-<FormField label="Pizza Size">
-  <Select onChange={handleChange} value={value}>
-    <SelectOption label="Small" value="small" />
-    <SelectOption label="Medium" value="medium" />
-    <SelectOption label="Large" value="large" />
-  </Select>
-</FormField>
-```
-
-```tsx
-// v10
-<Select items={['Small', 'Medium', 'Large']}>
-  <FormField label="Pizza Size" inputId="pizza">
-    <Select.Input id="pizza" onChange={e => handleChange(e)} id="pizza" />
-    <Select.Popper>
-      <Select.Card maxHeight="200px">
-        <Select.List>
-          {item => {
-            return <Select.Item>{item}</Select.Item>;
-          }}
-        </Select.List>
-      </Select.Card>
-    </Select.Popper>
-  </FormField>
-</Select>
-```
-
-This component also does not have a border around the `Menu` component as the
-[Select in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-select-left-label--default)
-has.
 
 ### Buttons
 
@@ -270,6 +222,52 @@ import {focusRing} from '@workday/canvas-kit-react/common';
   }}
 />;
 ```
+
+### Popups
+
+All Popup components including `Menu` and `Popup` have increased the top and bottom spacing between
+the target and popup to `4px`.
+
+### Select (Main)
+
+**PR:** [#2309](https://github.com/Workday/canvas-kit/pull/2309)
+
+We've converted `Select` into a
+[compound component](/getting-started/for-developers/resources/compound-components/) which provides
+a flexible API and access to its internals via its subcomponents.
+
+```tsx
+// v9
+<FormField label="Pizza Size">
+  <Select onChange={handleChange} value={value}>
+    <SelectOption label="Small" value="small" />
+    <SelectOption label="Medium" value="medium" />
+    <SelectOption label="Large" value="large" />
+  </Select>
+</FormField>
+```
+
+```tsx
+// v10
+<Select items={['Small', 'Medium', 'Large']}>
+  <FormField label="Pizza Size" inputId="pizza">
+    <Select.Input id="pizza" onChange={e => handleChange(e)} id="pizza" />
+    <Select.Popper>
+      <Select.Card maxHeight="200px">
+        <Select.List>
+          {item => {
+            return <Select.Item>{item}</Select.Item>;
+          }}
+        </Select.List>
+      </Select.Card>
+    </Select.Popper>
+  </FormField>
+</Select>
+```
+
+This component also does not have a border around the `Menu` component as the
+[Select in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-select-left-label--default)
+has.
 
 ## Glossary
 

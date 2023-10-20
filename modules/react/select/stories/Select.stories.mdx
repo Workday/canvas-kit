@@ -43,9 +43,22 @@ items may be provided as an
 [array of objects](/getting-started/for-developers/resources/collection-api/#array-of-objects).
 
 `Select` should be used in tandem with [Form Field](/components/inputs/form-field/) where the
-`inputId` prop matches an `id` on the `Select.Input` to meet accessibility standards. This ensures
-the `label` text from `FormField` is attached to the `Select.Input` and read out as a group for
-voiceover.
+`Select` wraps the `FormField` element and the `FormField` element wraps the children of `Select` to
+meet accessibility standards. This ensures the `label` text from `FormField` is attached to the
+`Select.Input` and read out as a group for voiceover.
+
+```tsx
+<Select items={options}>
+  <FormField label="Your Label">
+    <Select.Input onChange={e => handleChange(e)} id="contact-select" />
+    <Select.Popper>
+      <Select.Card>
+        <Select.List>{item => <Select.Item>{item.id}</Select.Item>}</Select.List>
+      </Select.Card>
+    </Select.Popper>
+  </FormField>
+</Select>
+```
 
 <ExampleCodeBlock code={Basic} />
 
@@ -92,14 +105,16 @@ Set the `disabled` prop of `Select.Input` to prevent users from interacting with
 
 In order to disable items and prevent users from interacting with them:
 
-1. Set the `nonInteractiveIds` prop of `Select` to an array of disabled item `id`s. This will
-   disable interaction for those items and exclude them from type-ahead.
+1. Set the `nonInteractiveIds` prop of `Select` to an array of disabled item `id`s. If your items
+   are an array of `strings` this will be just the text value. If your items are an array of
+   `objects`, this will be that value of the `id` property. This will disable interaction for those
+   items and exclude them from type-ahead.
 
 2. Set the `aria-disabled` attribute of all disabled `Select.Item`s to `true`. This ensures the
    items are styled as disabled.
 
-The following example assigns a `disabled` property to the disabled items in the `items` array.
-`disabled` is used to populate `nonInteractiveIds` and set `aria-disabled` for the disabled items.
+The following example adds the string value of the items we want disable to `nonInteractiveIds` and
+sets `aria-disabled` for the disabled items.
 
 <ExampleCodeBlock code={DisabledOptions} />
 
@@ -116,9 +131,12 @@ In order to render the icon for the selected item in the `Select.Input`:
 3. Pass the icon for the selected item to the input:
    `<Select.Input inputStartIcon={selectedItem.value.icon}>`
 
+> **Note: `data-id` on `Select.Item` must match the `id` property in your array of objects. This
+> ensures proper keyboard handling and type-ahead.**
+
 <ExampleCodeBlock code={WithIcons} />
 
-Note that `Select.Input` will only render an icon if an item is selected.
+**Note: that `Select.Input` will only render an icon if an item is selected.**
 
 ### Grow
 
@@ -176,7 +194,10 @@ Use the error state when the selection is no longer valid.
 
 ### Complex
 
-Test complex
+When registering items in an array of objects, it's common to have an `id` that is different than
+the text value displayed in the UI. Typically, this `id` is used to send to the server. Use the `id`
+value to set the `data-id` property on `Select.Item` to ensure proper keyboard handling and
+type-ahead.
 
 <ExampleCodeBlock code={Complex} />
 

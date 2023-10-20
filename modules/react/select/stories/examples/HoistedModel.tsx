@@ -5,23 +5,18 @@ import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
 import {BodyText} from '@workday/canvas-kit-react/text';
 
 const options = [
-  {id: 'E-mail'},
-  {id: 'Phone'},
-  {id: 'Fax (disabled)', disabled: true},
-  {id: 'Mail'},
-  {id: 'Mobile Phone'},
-  {
-    id: 'The Ontologically Anthropocentric Sensory Immersive Simulation',
-    disabled: false,
-  },
+  'E-mail',
+  'Phone',
+  'Fax (disabled)',
+  'Mail',
+  'Mobile Phone',
+  'The Ontologically Anthropocentric Sensory Immersive Simulation',
 ];
-
-const disabledItems = options.filter(item => item.disabled === true).map(item => item.id);
 
 export const HoistedModel = () => {
   const model = useSelectModel({
     items: options,
-    nonInteractiveIds: disabledItems,
+    nonInteractiveIds: ['Fax (disabled)'],
   });
 
   return (
@@ -33,8 +28,8 @@ export const HoistedModel = () => {
             <Select.Card>
               <Select.List>
                 {item => (
-                  <Select.Item aria-disabled={item.disabled ? item.disabled : undefined}>
-                    {item.id}
+                  <Select.Item aria-disabled={item === 'Fax (disabled)' ? true : undefined}>
+                    {item}
                   </Select.Item>
                 )}
               </Select.List>

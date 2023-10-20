@@ -29,7 +29,13 @@ export const Error = () => {
           <Select.Input onChange={e => handleChange(e)} />
           <Select.Popper>
             <Select.Card>
-              <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
+              <Select.List>
+                {item => (
+                  <Select.Item aria-disabled={item === 'Fax (disabled)' ? true : undefined}>
+                    {item}
+                  </Select.Item>
+                )}
+              </Select.List>
             </Select.Card>
           </Select.Popper>
         </FormField>

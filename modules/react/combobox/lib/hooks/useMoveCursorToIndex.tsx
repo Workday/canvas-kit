@@ -27,9 +27,10 @@ export const useMoveCursorToIndex = createElemPropsHook(useComboboxModel)(model 
   React.useEffect(() => {
     // when closed, the cursor should reset to the selected item if something is selected
     if (!visible && model.state.selectedIds.length !== 0) {
+      console.log();
       model.events.goTo({id: model.state.selectedIds[0]});
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [visible, model.events]);
+  }, [visible, model.events, model.state.selectedIds]);
   return {};
 });

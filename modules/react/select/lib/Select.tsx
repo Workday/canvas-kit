@@ -76,17 +76,20 @@ export interface SelectProps extends Themeable, ExtractProps<typeof Combobox> {}
 /**
  * Use `Select` to allow users to choose an option from a list or type characters to select a matching option.
  *
+ * **Note: `Select` must wrap `FormField` and `FormField` must wrap all `Select` children to ensure proper accessibility. **
  * ```tsx
  * <Select items={options}>
- *  <Select.Input onChange={e => handleChange(e)} id="contact-select" />
- *  <Select.Popper>
- *    <Select.Card>
- *      <Select.List>
- *        {item => <Select.Item>{item.id}</Select.Item>}
- *      </Select.List>
- *     </Select.Card>
- *    </Select.Popper>
- *  </Select>
+ *  <FormField label="Your Label">
+ *    <Select.Input onChange={e => handleChange(e)} id="contact-select" />
+ *    <Select.Popper>
+ *      <Select.Card>
+ *        <Select.List>
+ *          {item => <Select.Item>{item.id}</Select.Item>}
+ *        </Select.List>
+ *      </Select.Card>
+ *      </Select.Popper>
+ *   </FormField>
+ * </Select>
  * ```
  */
 export const Select = createContainer()({
@@ -97,12 +100,10 @@ export const Select = createContainer()({
      * `Select.Input` renders a {@link ComboboxMenu Combobox.Input} that handles keyboard navigation and interaction defined by [WAI](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/).
      * This component can either be [controlled or uncontrolled](https://react.dev/learn/sharing-state-between-components#controlled-and-uncontrolled-components).
      *
-     * **Note: An `id` must be provided that matches the `inputId` attribute on the `FormField` component from Main in order for the `label` element to be associated with the `input` element.**
-     *
      * ```tsx
      * <Select items={options}>
-     *   <FormField label="Contact" inputId="matching-formfield-inputId">
-     *     <Select.Input id="matching-formfield-inputId" onChange={(event) => handleChange(event)}>
+     *   <FormField label="Contact">
+     *     <Select.Input onChange={(event) => handleChange(event)}>
      *     ...
      *   </FormField>
      * </Select>
@@ -114,10 +115,12 @@ export const Select = createContainer()({
      *
      * ```tsx
      * <Select item={options}>
-     *  <Select.Input id="matching-formfield-inputId" onChange={(event) => handleChange(event)}>
-     *  <Select.Popper>
+     *  <FormField label="Your Label">
+     *    <Select.Input onChange={(event) => handleChange(event)}>
+     *    <Select.Popper>
      *    ...
-     *  </Select.Popper>
+     *    </Select.Popper>
+     *  </FormField>
      * </Select>
      * ```
      */
@@ -129,12 +132,14 @@ export const Select = createContainer()({
      *
      * ```tsx
      * <Select item={options}>
-     *  <Select.Input id="matching-formfield-inputId" onChange={(event) => handleChange(event)}>
-     *  <Select.Popper>
-     *    <Select.Card>
-     *      ...
-     *    </Select.Card>
-     *  </Select.Popper>
+     *  <FormField label="Your Label">
+     *    <Select.Input onChange={(event) => handleChange(event)}>
+     *    <Select.Popper>
+     *      <Select.Card>
+     *        ...
+     *      </Select.Card>
+     *    </Select.Popper>
+     *  </FormField>
      * </Select>
      * ```
      */
@@ -144,14 +149,16 @@ export const Select = createContainer()({
      *
      * ```tsx
      * <Select item={options}>
-     *  <Select.Input id="matching-formfield-inputId" onChange={(event) => handleChange(event)}>
-     *  <Select.Popper>
-     *    <Select.Card>
-     *      <Select.List>
-     *        {(item) => <Select.Item>{item}</Select.Item>}
-     *      </Select.List
-     *    </Select.Card>
-     *  </Select.Popper>
+     *  <FormField label="Your Label">
+     *    <Select.Input onChange={(event) => handleChange(event)}>
+     *    <Select.Popper>
+     *      <Select.Card>
+     *        <Select.List>
+     *          {(item) => <Select.Item>{item}</Select.Item>}
+     *        </Select.List
+     *      </Select.Card>
+     *    </Select.Popper>
+     *  </FormField>
      * </Select>
      * ```
      */
@@ -161,14 +168,16 @@ export const Select = createContainer()({
      *
      * ```tsx
      * <Select item={options}>
-     *  <Select.Input id="matching-formfield-inputId" onChange={(event) => handleChange(event)}>
-     *  <Select.Popper>
-     *    <Select.Card>
-     *      <Select.List>
-     *        {(item) => <Select.Item><Select.Item.Icon icon={icon} />{item}</Select.Item>}
-     *      </Select.List
-     *    </Select.Card>
-     *  </Select.Popper>
+     *  <FormField label="Your Label">
+     *    <Select.Input onChange={(event) => handleChange(event)}>
+     *      <Select.Popper>
+     *        <Select.Card>
+     *          <Select.List>
+     *            {(item) => <Select.Item><Select.Item.Icon icon={icon} />{item}</Select.Item>}
+     *          </Select.List
+     *        </Select.Card>
+     *      </Select.Popper>
+     *  </FormField>
      * </Select>
      * ```
      */
