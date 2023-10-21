@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.26](https://github.com/Workday/canvas-kit/releases/tag/v9.1.26) (2023-10-20)
+
+### Components
+
+- fix: Force PrimaryButton text color in all states ([#2364](https://github.com/Workday/canvas-kit/pull/2364)) ([@anicholls](https://github.com/anicholls))
+
+
 ## [v9.1.25](https://github.com/Workday/canvas-kit/releases/tag/v9.1.25) (2023-10-20)
 
 ### Components
