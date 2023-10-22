@@ -21,7 +21,6 @@ module.exports = {
     },
     './readme-panel/preset.js',
     '@storybook/addon-storysource',
-    '@storybook/addon-postcss',
   ],
   typescript: {
     check: false,
@@ -137,22 +136,6 @@ module.exports = {
     mdxRule.use.find(loader => loader.loader.includes('mdx1-csf')).options['compilers'] = [
       createCompiler({}),
     ];
-
-    // Load our scss files with postscss.
-    // Note: This is the same as @storybook/preset-scss, but with postcss added.
-    config.module.rules.push({
-      test: /\.(scss|css)$/,
-      use: [
-        'style-loader',
-        {
-          loader: 'css-loader',
-          options: {importLoaders: 2},
-        },
-        'postcss-loader',
-        'sass-loader',
-      ],
-      include: modulesPath,
-    });
 
     return config;
   },
