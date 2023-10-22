@@ -81,27 +81,22 @@ instead.
 **PR:** [#2345](https://github.com/Workday/canvas-kit/pull/2345)
 
 We've deprecated `spaceNumbers`. Please use our `rem` based
-[`space`](https://workday.github.io/canvas-kit/?path=/docs/tokens--space) tokens. In the case where
-you need to calculate a value, use
-[CSS calc()](https://developer.mozilla.org/en-US/docs/Web/CSS/calc) instead.
-
-Example using `space` with calc instead of deprecated `spaceNumbers`.
+[`space`](https://workday.github.io/canvas-kit/?path=/docs/tokens--space) tokens. If you need to
+calculate a value, use [CSS calc()](https://developer.mozilla.org/en-US/docs/Web/CSS/calc) instead.
 
 ```tsx
 // With deprecated `spaceNumbers`
 {
   paddingLeft: spaceNumbers.xl + 2; // 42px
 }
-```
 
-```tsx
 // With `rem` based `space` tokens
 {
   padding: `calc(${space.xl} + 2px)`; // 42px
 }
 ```
 
-For more information on how to handle this migration, you can reference our
+For more information on how to handle this migration, please reference our
 [discussion](https://github.com/Workday/canvas-kit/discussions/2343).
 
 ---
@@ -120,14 +115,14 @@ We've deprecated `Table` and `TableRow` and all of their exported members. Pleas
 
 **PR:** [#2229](https://github.com/Workday/canvas-kit/pull/2229)
 
-In v10, we have updated our `space` and `depth` token values from `px` to `rem`. This is based on
-the default browser font size which is `16px`.
+We've updated our `space` and `depth` token values from `px` to `rem`. This is based on the default
+browser font size which is `16px`.
 
-These updates just mean that we have moved the values from `px` to `rem`. The values have been
-updated on a 1:1 basis. None of the base value have changed, just the unit.
+These updates simply mean that we have moved the values from `px` to `rem`. The values have been
+updated on a 1:1 basis. None of the base values have changed, only the unit.
 
-Below is a table to show what each token value is, what is corresponds too and what the new `rem`
-value is in `px`:
+The table below shows what each token value is, what it corresponds to, and what the new `rem` value
+is in `px`:
 
 | px Value | rem Value | space Token |
 | -------- | --------- | ----------- |
@@ -157,8 +152,8 @@ For example:
 
 We wanted to move away from absolute units in tokens to relative units for better accessibility and
 adaptability to different viewport/screen sizes. If a user changes their default browser font size,
-these sizes should change along with it. Since `px` are a fixed unit and do not scale, utilizing
-`rem` will allow these tokens to scale with a new default font size.
+these sizes should change along with it. `px` are a fixed unit and do not scale, whereas `rem` will
+allow these tokens to scale with a new default font size.
 
 ## Component Updates
 
@@ -259,9 +254,9 @@ a flexible API and access to its internals via its subcomponents.
 </Select>
 ```
 
-This component also does not have a border around the `Menu` component as the
-[Select in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-select-left-label--default)
-has.
+Unlike the
+[Select in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-select-left-label--default),
+this component does not have a border around its menu.
 
 ## Glossary
 
