@@ -21,38 +21,38 @@ export interface TertiaryButtonProps extends ButtonProps {
 }
 
 const tertiaryStyles = createStyles({
-  paddingInline: cssVar(system.space.x2, space.xxs),
+  paddingInline: cssVar(system.space.x2, '0.5rem'),
   minWidth: 'auto',
   textDecoration: 'underline',
   border: 0,
   // Default Styles
   [buttonVars.default.background]: 'transparent',
   [buttonVars.default.border]: 'transparent',
-  [buttonVars.default.borderRadius]: cssVar(system.shape.medium),
-  [buttonVars.default.label]: cssVar(brand.primary.base),
-  [buttonVars.default.icon]: cssVar(base.blackPepper400),
+  [buttonVars.default.borderRadius]: cssVar(system.shape.medium, '0.25rem'),
+  [buttonVars.default.label]: cssVar(brand.primary.base, 'rgba(8,117,226,1)'),
+  [buttonVars.default.icon]: cssVar(base.blackPepper400, 'rgba(51, 51, 51, 1)'),
   // Hover Styles
-  [buttonVars.hover.background]: cssVar(base.soap200),
+  [buttonVars.hover.background]: cssVar(base.soap200, 'rgba(241, 242, 243, 1)'),
   [buttonVars.hover.border]: 'transparent',
-  [buttonVars.hover.label]: cssVar(brand.primary.dark),
-  [buttonVars.hover.icon]: cssVar(base.blackPepper500),
+  [buttonVars.hover.label]: cssVar(brand.primary.dark, 'rgba(0,92,184,1)'),
+  [buttonVars.hover.icon]: cssVar(base.blackPepper500, 'rgba(31,31,31,1)'),
   // Focus Styles
   [buttonVars.focus.background]: 'transparent',
   [buttonVars.focus.border]: 'transparent',
-  [buttonVars.focus.label]: cssVar(brand.primary.base),
-  [buttonVars.focus.icon]: cssVar(base.blackPepper500),
-  [buttonVars.focus.boxShadowInner]: cssVar(brand.common.focusOutline),
-  [buttonVars.focus.boxShadowOuter]: cssVar(brand.common.focusOutline),
+  [buttonVars.focus.label]: cssVar(brand.primary.base, 'rgba(8,117,226,1)'),
+  [buttonVars.focus.icon]: cssVar(base.blackPepper500, 'rgba(31,31,31,1)'),
+  [buttonVars.focus.boxShadowInner]: cssVar(brand.common.focusOutline, 'rgba(8,117,226,1)'),
+  [buttonVars.focus.boxShadowOuter]: cssVar(brand.common.focusOutline, 'rgba(8,117,226,1)'),
   // Active Styles
-  [buttonVars.active.background]: cssVar(base.soap300),
+  [buttonVars.active.background]: cssVar(base.soap300, 'rgba(232,235,237,1)'),
   [buttonVars.active.border]: 'transparent',
-  [buttonVars.active.label]: cssVar(brand.primary.dark),
-  [buttonVars.active.icon]: cssVar(base.blackPepper500),
+  [buttonVars.active.label]: cssVar(brand.primary.dark, 'rgba(0,92,184,1)'),
+  [buttonVars.active.icon]: cssVar(base.blackPepper500, 'rgba(31,31,31,1)'),
   // Disabled Styles
   [buttonVars.disabled.background]: 'transparent',
-  [buttonVars.disabled.border]: cssVar(base.frenchVanilla100),
-  [buttonVars.disabled.label]: cssVar(brand.primary.base),
-  [buttonVars.disabled.icon]: cssVar(base.blackPepper400),
+  [buttonVars.disabled.border]: cssVar(base.frenchVanilla100, '#fff'),
+  [buttonVars.disabled.label]: cssVar(brand.primary.base, 'rgba(8,117,226,1)'),
+  [buttonVars.disabled.icon]: cssVar(base.blackPepper400, 'rgba(51, 51, 51, 1)'),
   [buttonVars.disabled.opacity]: '0.4',
 
   '&:focus-visible, &.focus': {
@@ -68,11 +68,11 @@ const tertiaryStyles = createStyles({
 export const tertiaryButtonModifiers = createModifiers({
   isThemeable: {
     true: createStyles({
-      [buttonVars.default.icon]: cssVar(brand.primary.base),
-      [buttonVars.hover.icon]: cssVar(brand.primary.dark),
-      [buttonVars.focus.icon]: cssVar(brand.primary.base),
-      [buttonVars.active.icon]: cssVar(brand.primary.dark),
-      [buttonVars.disabled.icon]: cssVar(brand.primary.base),
+      [buttonVars.default.icon]: cssVar(brand.primary.base, 'rgba(8,117,226,1)'),
+      [buttonVars.hover.icon]: cssVar(brand.primary.dark, 'rgba(0,92,184,1)'),
+      [buttonVars.focus.icon]: cssVar(brand.primary.base, 'rgba(8,117,226,1)'),
+      [buttonVars.active.icon]: cssVar(brand.primary.dark, 'rgba(0,92,184,1)'),
+      [buttonVars.disabled.icon]: cssVar(brand.primary.base, 'rgba(8,117,226,1)'),
     }),
   },
   variant: {
@@ -80,28 +80,28 @@ export const tertiaryButtonModifiers = createModifiers({
       // Default Styles
       [buttonVars.default.background]: 'transparent',
       [buttonVars.default.border]: 'transparent',
-      [buttonVars.default.label]: cssVar(base.frenchVanilla100),
-      [buttonVars.default.icon]: cssVar(base.frenchVanilla100),
+      [buttonVars.default.label]: cssVar(base.frenchVanilla100, '#fff'),
+      [buttonVars.default.icon]: cssVar(base.frenchVanilla100, '#fff'),
       // Hover Styles
-      [buttonVars.hover.background]: cssVar(base.frenchVanilla100),
+      [buttonVars.hover.background]: cssVar(base.frenchVanilla100, '#fff'),
       [buttonVars.hover.border]: 'transparent',
-      [buttonVars.hover.label]: cssVar(base.blackPepper400),
-      [buttonVars.hover.icon]: cssVar(base.blackPepper400),
+      [buttonVars.hover.label]: cssVar(base.blackPepper400, 'rgba(51, 51, 51, 1)'),
+      [buttonVars.hover.icon]: cssVar(base.blackPepper400, 'rgba(51, 51, 51, 1)'),
       // Focus Styles
-      [buttonVars.focus.background]: cssVar(base.frenchVanilla100),
+      [buttonVars.focus.background]: cssVar(base.frenchVanilla100, '#fff'),
       [buttonVars.focus.border]: 'transparent',
-      [buttonVars.focus.label]: cssVar(base.blackPepper400),
-      [buttonVars.focus.icon]: cssVar(base.blackPepper400),
+      [buttonVars.focus.label]: cssVar(base.blackPepper400, 'rgba(51, 51, 51, 1)'),
+      [buttonVars.focus.icon]: cssVar(base.blackPepper400, 'rgba(51, 51, 51, 1)'),
       // Active Styles
-      [buttonVars.active.background]: cssVar(base.soap200),
+      [buttonVars.active.background]: cssVar(base.soap200, 'rgba(241, 242, 243, 1)'),
       [buttonVars.active.border]: 'transparent',
-      [buttonVars.active.label]: cssVar(base.blackPepper400),
-      [buttonVars.active.icon]: cssVar(base.blackPepper400),
+      [buttonVars.active.label]: cssVar(base.blackPepper400, 'rgba(51, 51, 51, 1)'),
+      [buttonVars.active.icon]: cssVar(base.blackPepper400, 'rgba(51, 51, 51, 1)'),
       // Disabled Styles
       [buttonVars.disabled.background]: 'transparent',
-      [buttonVars.disabled.border]: cssVar(base.frenchVanilla100),
-      [buttonVars.disabled.label]: cssVar(base.frenchVanilla100),
-      [buttonVars.disabled.icon]: cssVar(base.frenchVanilla100),
+      [buttonVars.disabled.border]: cssVar(base.frenchVanilla100, '#fff'),
+      [buttonVars.disabled.label]: cssVar(base.frenchVanilla100, '#fff'),
+      [buttonVars.disabled.icon]: cssVar(base.frenchVanilla100, '#fff'),
 
       '&:focus-visible, &.focus': {
         ...focusRing({
@@ -118,7 +118,7 @@ export const tertiaryButtonModifiers = createModifiers({
     largeOnly: createStyles({
       borderRadius: borderRadius.circle,
       padding: '0',
-      minWidth: cssVar(system.space.x12),
+      minWidth: cssVar(system.space.x12, '3rem'),
     }),
     largeStart: createStyles({
       paddingInlineStart: space.xxs,

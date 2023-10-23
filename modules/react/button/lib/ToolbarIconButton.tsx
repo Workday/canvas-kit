@@ -34,7 +34,7 @@ const StyledToolbarIconButton = styled(BaseButton)<StyledType & ToolbarIconButto
       width: 2,
       separation: 0,
       innerColor: 'transparent',
-      outerColor: cssVar(brand.common.focusOutline),
+      outerColor: cssVar(brand.common.focusOutline, 'rgba(8,117,226,1)'),
     }),
   },
 });
