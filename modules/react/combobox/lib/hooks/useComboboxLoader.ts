@@ -19,7 +19,7 @@ const useDebounce = () => {
   return (fn: (...args: any[]) => any, wait: number) => {
     clearTimeout(debounceTimer.current);
 
-    debounceTimer.current = (setTimeout(fn, wait) as any) as number; // We don't actually care what the real return type of setTimeout is. It is a number in the browser and something else in Node
+    debounceTimer.current = setTimeout(fn, wait) as any as number; // We don't actually care what the real return type of setTimeout is. It is a number in the browser and something else in Node
   };
 };
 
