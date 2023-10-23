@@ -3,7 +3,7 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Select} from '@workday/canvas-kit-react/select';
 import {Box} from '@workday/canvas-kit-react/layout';
 
-export const cities = [
+const cities = [
   'Atlanta (United States)',
   'Amsterdam (Europe)',
   'Austin (United States)',
