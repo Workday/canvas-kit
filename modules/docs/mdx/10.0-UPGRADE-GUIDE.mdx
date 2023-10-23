@@ -11,6 +11,7 @@ any questions.
 - [Codemod](#codemod)
 - [Removals](#removals)
   - [useBanner](#useBanner)
+  - [CSS packages](#css-packages)
 - [Deprecations](#deprecations)
   - [Input Icon Container](#input-icon-container)
   - [Select (Preview)](#select-preview)
@@ -50,6 +51,19 @@ component or utility.
 We've removed the `useBanner` hook, the only function of which was to add `aria-labelledby` and
 `aria-describedby` references to the text inside of the Banner. This was not required for
 accessibility, and browsers can compute the name of the Banner from the text given inside.
+
+### CSS Packages
+
+**PR:** [#2368](https://github.com/Workday/canvas-kit/pull/2368)
+
+We've removed the `@workday/canvas-kit-css-*` packages from our source code. The packages have been
+in maintenance mode for a while with no updates, but still riding the wave of version updates.
+Starting in version 10, our plan is to release our CSS kit as a static build straight from our React
+package and under the new `@workday/canvas-kit-css` package. This means we're not releasing an update
+to the CSS package in `10.0.0`, but will add our button CSS as a minor version. We're converting all
+our existing React packages to use this new styling strategy which will allow us to publish all CSS
+packages straight from the styles of our React packages, reducing the maitenance overhead required to
+maintain both our React Kit and CSS kit.
 
 ## Deprecations
 
