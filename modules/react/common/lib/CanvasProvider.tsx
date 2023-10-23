@@ -5,7 +5,7 @@ import {defaultCanvasTheme, PartialEmotionCanvasTheme, useTheme} from './theming
 import {brand} from '@workday/canvas-tokens-web';
 
 export interface CanvasProviderProps {
-  theme: PartialEmotionCanvasTheme;
+  theme?: PartialEmotionCanvasTheme;
 }
 
 const mappedKeys = {
@@ -18,7 +18,7 @@ const mappedKeys = {
 };
 
 const useCanvasThemeToCssVars = (
-  theme: PartialEmotionCanvasTheme,
+  theme: PartialEmotionCanvasTheme | undefined,
   elemProps: React.HTMLAttributes<HTMLElement>
 ) => {
   const filledTheme = useTheme(theme);
@@ -42,7 +42,7 @@ const useCanvasThemeToCssVars = (
 
 export const CanvasProvider = ({
   children,
-  theme,
+  theme = {canvas: defaultCanvasTheme},
   ...props
 }: CanvasProviderProps & React.HTMLAttributes<HTMLElement>) => {
   const elemProps = useCanvasThemeToCssVars(theme, props);
@@ -50,7 +50,7 @@ export const CanvasProvider = ({
     <ThemeProvider theme={theme as Theme}>
       <InputProvider />
       <div
-        dir={(theme.canvas && theme.canvas.direction) || defaultCanvasTheme.direction}
+        dir={theme?.canvas?.direction || defaultCanvasTheme.direction}
         {...(elemProps as React.HTMLAttributes<HTMLDivElement>)}
       >
         {children}
