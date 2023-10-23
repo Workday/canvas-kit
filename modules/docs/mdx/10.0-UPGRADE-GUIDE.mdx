@@ -43,13 +43,15 @@ this Upgrade Guide should provide everything you need to update your code to be 
 
 ### Styling
 
+**PR:** [#2273](https://github.com/Workday/canvas-kit/pull/2273)
+
 We've introduced a new styling package `@workday/canvas-kit-styling` which is a wrapper around
 `@emotion/css`.
 
 If you're using Canvas Kit and not directly using this package, there is nothing extra to do on your
 end. The Canvas Kit packages are using the static compilation as part of the build process. If you
 want to use this package for your own styles, you don't need to do anything special to use in
-development, just reference our
+development; just reference our
 [documentation](https://workday.github.io/canvas-kit/?path=/story/features-styling-welcome--page) on
 how to get started.
 
@@ -68,12 +70,12 @@ component or utility.
 
 We've removed the `@workday/canvas-kit-css-*` packages from our source code. The packages have been
 in maintenance mode for a while with no updates, but still riding the wave of version updates.
-Starting in version 10, our plan is to release our CSS kit as a static build straight from our React
-package and under the new `@workday/canvas-kit-css` package. This means we're not releasing an update
-to the CSS package in `10.0.0`, but will add our button CSS as a minor version. We're converting all
-our existing React packages to use this new styling strategy which will allow us to publish all CSS
-packages straight from the styles of our React packages, reducing the maitenance overhead required to
-maintain both our React Kit and CSS kit.
+Starting in v10, our plan is to release our CSS kit as a static build straight from our React
+package and under the new `@workday/canvas-kit-css` package. This means we're not releasing an
+update to the CSS package in `10.0.0`, but will add our button CSS as a minor version. We're
+converting all our existing React packages to use this new styling strategy which will allow us to
+publish all CSS packages straight from the styles of our React packages, reducing the maitenance
+overhead required to maintain both our React kit and CSS kit.
 
 ---
 
@@ -204,8 +206,7 @@ slight changes to visual tests.
 
 #### Button Icon Fill
 
-In an effort to soften the visual effect when a button is toggled, icons will no longer be "filled"
-on toggle.
+Icons will no longer be incorrectly filled on toggle.
 
 #### Button Focus Ring Update
 
