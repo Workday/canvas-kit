@@ -7,7 +7,6 @@ import {createComponent, GrowthBehavior, focusRing} from '@workday/canvas-kit-re
 import {createStyles, createVars, cssVar, createModifiers} from '@workday/canvas-kit-styling';
 import {SystemIconProps} from '@workday/canvas-kit-react/icon';
 import {Box} from '@workday/canvas-kit-react/layout';
-import {space} from '@workday/canvas-kit-react/tokens';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 import {ButtonColors, ButtonSizes, IconPositions} from './types';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
