@@ -9,9 +9,11 @@ This guide contains an overview of the changes in Canvas Kit v10. Please
 any questions.
 
 - [Codemod](#codemod)
+- [Features](#features)
+  - [Styling](#styling)
 - [Removals](#removals)
+  - [CSS Packages](#css-packages)
   - [useBanner](#useBanner)
-  - [CSS packages](#css-packages)
 - [Deprecations](#deprecations)
   - [Input Icon Container](#input-icon-container)
   - [Select (Preview)](#select-preview)
@@ -23,8 +25,6 @@ any questions.
   - [Button](#button)
   - [Popups](#popups)
   - [Select (Main)](#select-main)
-- [Features](#features)
-  - [Styling](#styling)
 - [Glossary](#glossary)
   - [Main](#main)
   - [Preview](#preview)
@@ -39,18 +39,28 @@ necessary, we can release codemods as minor updates.
 Codemods are here to stay and will continue to be a part of our release process. In the meantime,
 this Upgrade Guide should provide everything you need to update your code to be compatible with v10.
 
+## Features
+
+### Styling
+
+We've introduced a new styling package `@workday/canvas-kit-styling` which is a wrapper around
+`@emotion/css`.
+
+If you're using Canvas Kit and not directly using this package, there is nothing extra to do on your
+end. The Canvas Kit packages are using the static compilation as part of the build process. If you
+want to use this package for your own styles, you don't need to do anything special to use in
+development, just reference our
+[documentation](https://workday.github.io/canvas-kit/?path=/story/features-styling-welcome--page) on
+how to get started.
+
+For more information on why this package was introduced, please reference our
+[discussion](https://github.com/Workday/canvas-kit/discussions/2265) on the future of styling for
+Canvas Kit.
+
 ## Removals
 
 Removals from our codebase may no longer be consumed. We've either promoted or replaced the removed
 component or utility.
-
-### useBanner
-
-**PR:** [#2318](https://github.com/Workday/canvas-kit/pull/2318)
-
-We've removed the `useBanner` hook, the only function of which was to add `aria-labelledby` and
-`aria-describedby` references to the text inside of the Banner. This was not required for
-accessibility, and browsers can compute the name of the Banner from the text given inside.
 
 ### CSS Packages
 
@@ -64,6 +74,16 @@ to the CSS package in `10.0.0`, but will add our button CSS as a minor version. 
 our existing React packages to use this new styling strategy which will allow us to publish all CSS
 packages straight from the styles of our React packages, reducing the maitenance overhead required to
 maintain both our React Kit and CSS kit.
+
+---
+
+### useBanner
+
+**PR:** [#2318](https://github.com/Workday/canvas-kit/pull/2318)
+
+We've removed the `useBanner` hook, the only function of which was to add `aria-labelledby` and
+`aria-describedby` references to the text inside of the Banner. This was not required for
+accessibility, and browsers can compute the name of the Banner from the text given inside.
 
 ## Deprecations
 
@@ -273,26 +293,6 @@ a flexible API and access to its internals via its subcomponents.
 Unlike the
 [Select in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-select-left-label--default),
 this component does not have a border around its menu.
-
----
-
-## Features
-
-### Styling
-
-We've introduced a new styling package `@workday/canvas-kit-styling` which is a wrapper around
-`@emotion/css`.
-
-If you're using Canvas Kit and not directly using this package, there is nothing extra to do on your
-end. The Canvas Kit packages are using the static compilation as part of the build process. If you
-want to use this package for your own styles, you don't need to do anything special to use in
-development, just reference our
-[documentation](https://workday.github.io/canvas-kit/?path=/story/features-styling-welcome--page) on
-how to get started.
-
-For more information on why this package was introduced, please reference our
-[discussion](https://github.com/Workday/canvas-kit/discussions/2265) on the future of styling for
-Canvas Kit.
 
 ## Glossary
 
