@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-styling",
-  "version": "9.1.20",
+  "version": "9.1.26",
   "description": "The custom CSS in JS solution that takes JS styles and turns them into static CSS",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -30,6 +30,9 @@
     "build": "npm-run-all --parallel build:cjs build:es6",
     "depcheck": "node ../../utils/check-dependencies-exist.js",
     "typecheck:src": "tsc -p . --noEmit --incremental false"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "keywords": [
     "canvas",

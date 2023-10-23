@@ -1,4 +1,4 @@
-import {setUniqueSeed, resetUniqueIdCount} from '../lib/uniqueId';
+import {setUniqueSeed} from '../lib/uniqueId';
 import {createStyles, cssVar, createVars, createModifiers, csToProps, CS} from '../lib/cs';
 import {expectTypeOf} from 'expect-type';
 import {Properties} from 'csstype';
@@ -7,7 +7,6 @@ import {SerializedStyles} from '@emotion/serialize';
 describe('createStyles', () => {
   beforeEach(() => {
     setUniqueSeed('a');
-    resetUniqueIdCount();
   });
 
   describe('createStyles', () => {
@@ -19,7 +18,7 @@ describe('createStyles', () => {
       type PositionProperty = Input['position'];
       const temp: PositionProperty = 'absolute';
       createStyles({
-        position: 'absolute', //
+        position: 'absolute',
       });
       expectTypeOf<PositionProperty>().toMatchTypeOf<
         Properties['position'] | Properties['position'][]
@@ -30,14 +29,42 @@ describe('createStyles', () => {
       const styles = createStyles({
         color: '--my-var',
       });
+
       // find the rule we just created
       for (const sheet of document.styleSheets as StyleSheetList & Iterable<CSSStyleSheet>) {
         for (const rule of sheet.cssRules as CSSRuleList & Iterable<CSSRule>) {
           if (rule.cssText.includes(styles)) {
-            expect(rule.cssText).toContain(`var(--my-var)`);
+            expect(rule.cssText).toContain(`.${styles} {color: var(--my-var);}`);
           }
         }
       }
+    });
+
+    it('should always add new styles for every "createStyles" call to have style merging that is intuitive', () => {
+      const styles1 = createStyles({
+        color: 'red',
+      });
+      const styles2 = createStyles({
+        color: 'blue',
+      });
+      const styles3 = createStyles({
+        color: 'red',
+      });
+
+      for (const sheet of document.styleSheets as StyleSheetList & Iterable<CSSStyleSheet>) {
+        for (const rule of sheet.cssRules as CSSRuleList & Iterable<CSSRule>) {
+          if (rule.cssText.includes(styles3)) {
+            expect(rule.cssText).toContain(`.${styles3} {color: red;}`);
+          }
+        }
+      }
+
+      const div = document.createElement('div');
+      div.className = `${styles2} ${styles3}`;
+      document.body.append(div);
+
+      // Test jsdom resolution of style properties
+      expect(getComputedStyle(div).color).toEqual('red');
     });
   });
 
@@ -86,7 +113,7 @@ describe('createStyles', () => {
     it('should return a function that takes in an object with the values and return a style object', () => {
       const myVars = createVars('color');
 
-      expect(myVars({color: 'red'})).toHaveProperty('--a0-color', 'red');
+      expect(myVars({color: 'red'})).toHaveProperty(myVars.color, 'red');
     });
 
     it('should type optimized style functions correctly so they can be consumed by other repositories', () => {
@@ -96,28 +123,34 @@ describe('createStyles', () => {
   });
 
   describe('createModifiers', () => {
-    const myModifiers = createModifiers({
-      size: {
-        large: createStyles({fontSize: '1.5rem'}),
-        small: createStyles({fontSize: '0.8rem'}),
-      },
-    });
+    // factory function to only run code inside a spec. This prevents a global leak of styles in other tests
+    const myModifiersFactory = () =>
+      createModifiers({
+        size: {
+          large: createStyles({fontSize: '1.5rem'}),
+          small: createStyles({fontSize: '0.8rem'}),
+        },
+      });
 
     it('should return an object with class names for each modifier', () => {
+      const myModifiers = myModifiersFactory();
       expect(myModifiers).toHaveProperty('size.large', expect.stringContaining('css'));
       expect(myModifiers).toHaveProperty('size.small', expect.stringContaining('css'));
     });
 
     it('should return a function that in an object of keys with limited values', () => {
+      const myModifiers = myModifiersFactory();
       expect(myModifiers({size: 'large'})).toEqual(myModifiers.size.large);
     });
 
     it('should return a function with a type that expects optional parameters matching the config object', () => {
+      const myModifiers = myModifiersFactory();
       type Input = Parameters<typeof myModifiers>[0];
       expectTypeOf<Input>().toMatchTypeOf<{size?: 'large' | 'small'}>();
     });
 
     it('should return an object with a type that matches the input object type', () => {
+      const myModifiers = myModifiersFactory();
       expectTypeOf(myModifiers.size).toMatchTypeOf<{large: CS; small: CS}>();
     });
   });
@@ -145,7 +178,7 @@ describe('createStyles', () => {
       const myVariables = createVars('color');
       const input = myVariables({color: 'red'});
 
-      expect(csToProps(input)).toHaveProperty('style', {'--a0-color': 'red'});
+      expect(csToProps(input)).toHaveProperty('style', {[myVariables.color]: 'red'});
     });
 
     it('should merge multiple classNames together', () => {
@@ -170,7 +203,10 @@ describe('createStyles', () => {
       ]);
 
       expect(actual).toHaveProperty('className', 'foo bar');
-      expect(actual).toHaveProperty('style', {'--a0-color': 'red', '--a1-fill': 'blue'});
+      expect(actual).toHaveProperty('style', {
+        [myVariables.color]: 'red',
+        [innerVariables.fill]: 'blue',
+      });
     });
   });
 });

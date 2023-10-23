@@ -3,6 +3,64 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.26](https://github.com/Workday/canvas-kit/releases/tag/v9.1.26) (2023-10-20)
+
+### Components
+
+- fix: Force PrimaryButton text color in all states ([#2364](https://github.com/Workday/canvas-kit/pull/2364)) ([@anicholls](https://github.com/anicholls))
+
+
+## [v9.1.25](https://github.com/Workday/canvas-kit/releases/tag/v9.1.25) (2023-10-20)
+
+### Components
+
+- fix(collection): Set correct aria-setsize in virtualized collections ([#2362](https://github.com/Workday/canvas-kit/pull/2362)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v8.6.25](https://github.com/Workday/canvas-kit/releases/tag/v8.6.25) (2023-10-20)
+
+### Components
+
+- fix(collection): Set correct aria-setsize in virtualized collections ([#2362](https://github.com/Workday/canvas-kit/pull/2362)) ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v9.1.24](https://github.com/Workday/canvas-kit/releases/tag/v9.1.24) (2023-10-16)
+
+### Components
+
+- fix(tabs): Slugify Tabs.Item aria-controls attribute ([#2354](https://github.com/Workday/canvas-kit/pull/2354)) ([@biplobsd](https://github.com/biplobsd))
+
+
+## [v9.1.23](https://github.com/Workday/canvas-kit/releases/tag/v9.1.23) (2023-10-11)
+
+### Components
+
+- fix(popup): Include document.body in useReturnFocus bound check ([#2351](https://github.com/Workday/canvas-kit/pull/2351)) ([@Ebin-Benny](https://github.com/Ebin-Benny), [@ebin-benny-wd](https://github.com/ebin-benny-wd))
+
+
+## [v8.6.24](https://github.com/Workday/canvas-kit/releases/tag/v8.6.24) (2023-10-11)
+
+### Components
+
+- fix(popup): Include document.body in useReturnFocus bound check ([#2351](https://github.com/Workday/canvas-kit/pull/2351)) ([@Ebin-Benny](https://github.com/Ebin-Benny), [@ebin-benny-wd](https://github.com/ebin-benny-wd))
+## [v9.1.22](https://github.com/Workday/canvas-kit/releases/tag/v9.1.22) (2023-10-02)
+
+### Documentation
+
+- fix: Add jsdoc element in backticks for Avatar ([#2350](https://github.com/Workday/canvas-kit/pull/2350)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v8.6.23](https://github.com/Workday/canvas-kit/releases/tag/v8.6.23) (2023-10-02)
+
+### Documentation
+
+- fix: Add jsdoc element in backticks for Avatar ([#2350](https://github.com/Workday/canvas-kit/pull/2350)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+## [v9.1.21](https://github.com/Workday/canvas-kit/releases/tag/v9.1.21) (2023-09-26)
+
+### Documentation
+
+- docs: Update the docParser to prevent max call stack errors ([#2342](https://github.com/Workday/canvas-kit/pull/2342)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- docs: Add info to maintaining doc about deprecations ([#2339](https://github.com/Workday/canvas-kit/pull/2339)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@jamesfan](https://github.com/jamesfan))
+
+
 ## [v9.1.20](https://github.com/Workday/canvas-kit/releases/tag/v9.1.20) (2023-09-20)
 
 ### Components

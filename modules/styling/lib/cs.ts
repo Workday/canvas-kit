@@ -2,12 +2,9 @@ import React from 'react';
 import {generateUniqueId} from './uniqueId';
 // eslint-disable-next-line @emotion/no-vanilla
 import {css} from '@emotion/css';
-import type {Keyframes, SerializedStyles, CSSObject} from '@emotion/serialize';
+import {serializeStyles, Keyframes, SerializedStyles, CSSObject} from '@emotion/serialize';
 
 import {slugify} from './slugify';
-
-// future placeholder for token replacement
-const tokens = {};
 
 /**
  * Style properties in a JavaScript camelCase. Everything Emotion allows is also
@@ -22,35 +19,59 @@ export type StyleProps =
   | SerializedStyles
   | CSSObject;
 
-function replaceWithToken<T>(value: T): T {
-  // Handle the case where the value is a variable without the `var()` wrapping function. A common mistake.
+function convertProperty<T>(value: T): T {
+  // Handle the case where the value is a variable without the `var()` wrapping function. It happens
+  // enough that it makes sense to automatically wrap.
   if (typeof value === 'string' && value.startsWith('--')) {
     return `var(${value})` as any as T;
   }
-  return (tokens as any)[value] || value;
+  return value;
 }
 
-// This function current replaces token values like "blueberry400" with a color value
-// but it can be used to replace other things if we want or remove it entirely
-
-function replaceAllWithTokens<T extends unknown>(obj: T): T {
+/**
+ * Walks through all the properties and values of a style and converts properties and/or values that
+ * need special processing. An example might be using a CSS variable without a `var()` wrapping.
+ */
+function convertAllProperties<T extends unknown>(obj: T): T {
   if (typeof obj === 'object') {
     const converted = {};
     for (const key in obj) {
       if ((obj as Object).hasOwnProperty(key)) {
-        (converted as any)[key] = replaceAllWithTokens(obj[key]);
+        (converted as any)[key] = convertAllProperties(obj[key]);
       }
     }
     return converted as T;
   }
-  return replaceWithToken(obj);
+  return convertProperty(obj);
 }
 
 export type CS = string | Record<string, string>;
 
+/**
+ * CSS variable map type. In developer/dynamic mode, we don't know what the hash is going to be. All
+ * variables will look like `--{hash}-{name}`. But the static optimizers generates the name based on
+ * the AST, so the `id` will be known. Instead of something like `--abc123-color`, the `ID` is set
+ * by the optimizer.
+ *
+ * For example:
+ * ```ts
+ * // dynamic
+ * const myVars = createVars('color') // type is `Record<'color', string>`
+ *
+ * // optimizer rewrites the code
+ * const myVars = createVars<'color', 'myVars'>('color')
+ * // type is now `{color: "--myVars-color"}`
+ *
+ * myVars.color // type is `--myVars-color`
+ * ```
+ *
+ * This is so optimized variables can be used directly by the static parser downstream. The variable
+ * names become statically analyzable.
+ */
 export type CsVarsMap<T extends string, ID extends string | never> = [ID] extends [never]
   ? Record<T, string>
-  : {[K in T]: `--${ID}-${K}`};
+  : // map type. If the ID is known from the style optimizer, use static keys using string template literals instead of `string`
+    {[K in T]: `--${ID}-${K}`};
 
 export type CsVars<T extends string, ID extends string | never> = CsVarsMap<T, ID> & {
   (input: Partial<Record<T, string>>): Record<T, string>;
@@ -92,11 +113,11 @@ export function cssVar(input: string, fallback?: string) {
  * return a map of variable keys to CSS Variable names.
  *
  * ```ts
- * // creates a `color` and `background` variable
+ * // creates a `color` and `background` CSS variable
  * const myVars = createVars('color', 'background')
  *
  * // 'color' is a typed property. The type is `string`
- * console.log(myValues.color) // `'var(--{hash}-color)'`
+ * console.log(myVars.color) // `'var(--{hash}-color)'`
  *
  * // 'color' is a typed property. The type is `string?`
  * // The returned object can be assigned to the `style` property of an element
@@ -145,9 +166,10 @@ type ModifierReturn<T extends ModifierConfig> = T &
 
 /**
  * Creates a modifier function that takes in a modifier config and will return a CSS class name that
- * matches the result. Modifiers can be thought as `if` or `switch` statements. This function can be
- * thought of as a helper function that makes it easier to work with modifiers. Without it, you
- * would have to implement if/switch/ternary for each option.
+ * matches the result. Modifiers can be thought as `if` or `switch` statements when conditionally
+ * changing the styles of a component based on props. This function can be thought of as a helper
+ * function that makes it easier to work with modifiers. Without it, you would have to implement
+ * if/switch/ternary for each option.
  *
  * ```tsx
  * const myModifiers = createModifiers({
@@ -186,7 +208,8 @@ function isCsPropsReturn(input: {}): input is CsToPropsReturn {
 }
 
 /**
- * All acceptable values of the `cs` prop.
+ * All acceptable values of the `cs` prop. It can be a CSS class name, any CSS properties, an object
+ * with a `className` and `styles`, or an array of these
  */
 export type CSToPropsInput =
   | undefined
@@ -243,6 +266,20 @@ export function csToProps(input: CSToPropsInput): CsToPropsReturn {
 }
 
 export interface CSProps {
+  /** The `cs` prop takes in a single value or an array of values. You can pass the CSS class name
+   * returned by {@link createStyles}, or the result of {@link createVars} and
+   * {@link createModifiers}. If you're extending a component already using `cs`, you can merge that
+   * prop in as well.
+   *
+   * ```tsx
+   * cs={[
+   *   cs, // from the prop list
+   *   myStyles,
+   *   myModifiers({ size: 'medium' }),
+   *   myVars({ backgroundColor: 'red' })
+   * ]}
+   * ```
+   */
   cs?: CSToPropsInput;
 }
 
@@ -258,10 +295,16 @@ export interface CSProps {
  * })
  * ```
  *
+ * The `createStyles` function is curried into 2 parts. The first function could be done at build
+ * time. The returned function combines CSS class names and will remain as a small runtime.
  *
- *
- * The cs function is curried into 2 parts. The first function could be done at build time. The
- * returned function combines classnames and will remain as a small runtime.
+ * > **Note:** The order of calling `createStyles` is important. Each call will make a single CSS
+ * > class selector and will be injected into the document's
+ * > [StyleSheetList](https://developer.mozilla.org/en-US/docs/Web/API/StyleSheetList). Style
+ * > properties will be merge by the rules of [CSS
+ * > specificity](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity). If two selectors
+ * > have the same specificity, the last defined wins. Always make sure that the properties you want
+ * > to win are last in your file.
  */
 export function createStyles(...args: (StyleProps | string)[]): string {
   return args
@@ -270,9 +313,28 @@ export function createStyles(...args: (StyleProps | string)[]): string {
         return input;
       }
 
-      const convertedStyles = replaceAllWithTokens(input);
+      const convertedStyles = convertAllProperties(input);
 
-      return css(convertedStyles as any);
+      // We want to call `serializeStyles` directly and ignore the hash generated so we can have
+      // more predictable style merging. If 2 different files define the same style properties, the
+      // hash will be the same and using the default hash functionality of Emotion will mean the
+      // merge order will be unpredictable. For example, `BaseButton` and `TertiaryButton` define
+      // different modifiers for padding. The BaseButton's `extraSmall` modifier contains the same
+      // styling as TertiaryButton's `large` modifier. Emotion would hash these two declarations as
+      // the same hash and only inject the one from `BaseButton`. If `TertiaryButton` defines
+      // `padding` in its base styles, and uses the large size modifier, the base padding will
+      // override the `TertiaryButton` `large` size modifier because `BaseButton.small` modifier was
+      // injected into the document's style sheets before `TertiaryButton.base` styles. This is due
+      // to CSS specificity. If everything has the same specificity, last defined wins. More info:
+      // https://codesandbox.io/s/stupefied-bartik-9c2jtd?file=/src/App.tsx
+      const {styles} = serializeStyles([convertedStyles]);
+
+      // use `css.call()` instead of `css()` to trick Emotion's babel plugin to not rewrite our code
+      // to remove our generated Id for the name:
+      // https://github.com/emotion-js/emotion/blob/f3b268f7c52103979402da919c9c0dd3f9e0e189/packages/babel-plugin/src/utils/transform-expression-with-styles.js#L81-L82
+      // Without this "fix", anyone using the Emotion babel plugin would get different results than
+      // intended when styles are merged.
+      return css.call(null, {name: generateUniqueId(), styles}); //?
     })
     .join(' ');
 }
@@ -286,9 +348,9 @@ export function createStyles(...args: (StyleProps | string)[]): string {
  * }
  * ```
  *
- * It will return an object with `className` and `style` attributes.
- * If a `className` is provided to the component, it will merge the classNames.
- * If a `style` is provided to the component, it will merge the styles.
+ * It will return an object with `className` and `style` attributes. If a `className` is provided to
+ * the component, it will merge the class names. If a `style` is provided to the component, it will
+ * merge the styles.
  *
  * ```tsx
  * const vars = createVars('background')

@@ -20,6 +20,37 @@ development. Included is a small runtime to get styling working. If you wish to 
 your CSS from your TypeScript files for faster page loading, visit the
 [Getting Started](/docs/features-styling-getting-started--page)
 
+## Why?
+
+Canvas Kit no longer needs to support IE11 which allows us to use
+[CSS Custom Properties a.k.a. CSS Variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties).
+Dynamic style properties (properties that change during the lifecylce of the component) are the most
+costly in terms of performance in Emotion and should be avoided. Also if you have conditionals in
+your Emotion style functions, that creates unique hashes in the Emotion cache and makes that render
+frame pay an expensive
+[style recalculation](https://microsoftedge.github.io/DevTools/explainers/StyleTracing/explainer.html).
+
+We can avoid most of the cost of Emotion's runtime by using
+[@emotion/css](https://www.npmjs.com/package/@emotion/css) instead and hoist all style definitions
+outside of a component's render function. All dynamic styling can be moved into "modifiers" (from
+[BEM](https://getbem.com/introduction/#modifer:~:text=%2C%20header%20title-,Modifier,-A%20flag%20on)).
+
+There's still a runtime to select which styles should apply to an element and what the CSS Variable
+should be, but it is essentially only having to choose what CSS classes should apply to an element
+and changing the `style` property to set the CSS Variables. This does not require new
+[StyleSheet](https://developer.mozilla.org/en-US/docs/Web/API/StyleSheet) inserts which cause
+expensive style recalculation. Think of the runtime as being the following:
+
+```jsx
+<div
+  className={getClassNames(/* input from props */)}
+  style={getCSSVarValues(/* input from props */)}
+/>
+```
+
+Here's the GitHub discussion on
+[the future of styling](https://github.com/Workday/canvas-kit/discussions/2265)
+
 ## What is this?
 
 Canvas Kit Styling is two things:
@@ -29,8 +60,8 @@ Canvas Kit Styling is two things:
 
 ### Utility functions
 
-The basic utility function is the `cs` function. It makes a call to the `css` function from
-`@emotion/css`. Emotion takes care of the serializing, hashing, caching, and style injection.
+The basic utility function is the `createStyles` function. It makes a call to the `css` function
+from `@emotion/css`. Emotion takes care of the serializing, hashing, caching, and style injection.
 `@emotion/css` does most of the heavy lifting.
 
 These utility functions make it easier to create styles for element-based components with CSS

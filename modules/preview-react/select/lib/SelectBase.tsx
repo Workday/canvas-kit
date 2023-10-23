@@ -9,14 +9,7 @@ import {
   styled,
   useUniqueId,
 } from '@workday/canvas-kit-react/common';
-import {
-  colors,
-  borderRadius,
-  inputColors,
-  spaceNumbers,
-  type,
-  space,
-} from '@workday/canvas-kit-react/tokens';
+import {colors, borderRadius, inputColors, type, space} from '@workday/canvas-kit-react/tokens';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 
@@ -32,7 +25,9 @@ interface OptionData {
   // function without encountering TypeScript errors
   [key: string]: any;
 }
-
+/**
+ * @deprecated ⚠️ `Option` in Preview has been deprecated and will be removed in a future major version. Please use [`Select` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) instead.
+ */
 export interface Option {
   data?: OptionData;
   disabled?: boolean;
@@ -40,7 +35,9 @@ export interface Option {
   label?: string;
   value: string;
 }
-
+/**
+ * @deprecated ⚠️ `NormalizedOption` in Preview has been deprecated and will be removed in a future major version. Please use [`Select` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) instead.
+ */
 export interface NormalizedOption extends Option {
   // Optional keys in Option are required in NormalizedOption
   data: OptionData;
@@ -48,20 +45,28 @@ export interface NormalizedOption extends Option {
   id: string;
   label: string;
 }
-
+/**
+ * @deprecated ⚠️ `RenderSelectedFunction` in Preview has been deprecated and will be removed in a future major version. Please use [`Select` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) instead.
+ */
 export interface RenderSelectedFunction {
   (option: NormalizedOption): React.ReactNode;
 }
-
+/**
+ * @deprecated ⚠️ `RenderableOption` in Preview has been deprecated and will be removed in a future major version. Please use [`Select` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) instead.
+ */
 export interface RenderableOption extends NormalizedOption {
   focused: boolean;
   selected: boolean;
 }
-
+/**
+ * @deprecated ⚠️ `RenderOptionFunction` in Preview has been deprecated and will be removed in a future major version. Please use [`Select` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) instead.
+ */
 export interface RenderOptionFunction {
   (option: RenderableOption): React.ReactNode;
 }
-
+/**
+ * @deprecated ⚠️ `CoreSelectBaseProps` in Preview has been deprecated and will be removed in a future major version. Please use [`Select` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) instead.
+ */
 export interface CoreSelectBaseProps
   extends Themeable,
     GrowthBehavior,
@@ -111,7 +116,9 @@ export interface CoreSelectBaseProps
    */
   value?: string;
 }
-
+/**
+ * @deprecated ⚠️ `SelectBaseProps` in Preview has been deprecated and will be removed in a future major version. Please use [`Select` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) instead.
+ */
 export interface SelectBaseProps extends CoreSelectBaseProps, StyledType {
   /**
    * The ref to be forwarded to the underlying button element. Use this to imperatively manipulate the button.
@@ -177,18 +184,16 @@ export interface SelectBaseProps extends CoreSelectBaseProps, StyledType {
   shouldMenuAutoFocus?: boolean;
 }
 
-export const buttonBorderWidth = 0.0625;
-export const buttonDefaultWidth = `${(spaceNumbers.xxxl * 7) / 2}rem`;
+export const buttonBorderWidth = 1;
 
-const menuIconSize = spaceNumbers.m;
-const buttonPadding = spaceNumbers.xxs - buttonBorderWidth;
+const menuIconSize = space.m;
 
 const SelectButton = styled('button')<
   Pick<SelectBaseProps, 'error' | 'grow' | 'menuVisibility' | 'theme'> & StyledType
 >(
   {
     ...type.levels.subtext.large,
-    border: `${buttonBorderWidth}rem solid ${inputColors.border}`,
+    border: `${buttonBorderWidth}px solid ${inputColors.border}`,
     cursor: 'default',
     display: 'block',
     backgroundColor: inputColors.background,
@@ -197,15 +202,15 @@ const SelectButton = styled('button')<
     height: space.xl,
     outline: 'none',
     overflow: 'hidden',
-    padding: `${buttonPadding}rem`,
-    paddingRight: `${spaceNumbers.xxs + menuIconSize + buttonPadding}rem`,
+    padding: `calc(${space.xxs} - ${buttonBorderWidth}px)`,
+    paddingRight: `calc(${space.xxs} + ${space.m} + (${space.xxs} + ${buttonBorderWidth}px))`,
     textAlign: 'left',
     textOverflow: 'ellipsis',
     transition: '0.2s box-shadow, 0.2s border-color',
     whiteSpace: 'nowrap',
     // width is required (instead of minWidth) in order for the button to
     // be sized properly for lengthy options
-    width: buttonDefaultWidth,
+    width: `calc((${space.xxxl} * 7) / 2)`,
     '&::placeholder': {
       color: inputColors.placeholder,
     },
@@ -287,7 +292,9 @@ const defaultRenderOption: RenderOptionFunction = option => {
 const defaultRenderSelected: RenderSelectedFunction = option => {
   return option.label;
 };
-
+/**
+ * @deprecated ⚠️ `SelectBase` in Preview has been deprecated and will be removed in a future major version. Please use [`Select` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) instead.
+ */
 export const SelectBase = ({
   'aria-labelledby': ariaLabelledBy,
   'aria-required': ariaRequired,

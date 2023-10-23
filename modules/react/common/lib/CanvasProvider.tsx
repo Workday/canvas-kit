@@ -1,14 +1,24 @@
 import * as React from 'react';
 import {Theme, ThemeProvider} from '@emotion/react';
 import {InputProvider} from './InputProvider';
-import {defaultCanvasTheme, newTheme, PartialEmotionCanvasTheme, useTheme} from './theming';
+import {defaultCanvasTheme, PartialEmotionCanvasTheme, useTheme} from './theming';
+import {brand} from '@workday/canvas-tokens-web';
 
 export interface CanvasProviderProps {
-  theme: PartialEmotionCanvasTheme;
+  theme?: PartialEmotionCanvasTheme;
 }
 
+const mappedKeys = {
+  lightest: 'lightest',
+  light: 'light',
+  main: 'base',
+  dark: 'dark',
+  darkest: 'darkest',
+  contrast: 'accent',
+};
+
 const useCanvasThemeToCssVars = (
-  theme: PartialEmotionCanvasTheme,
+  theme: PartialEmotionCanvasTheme | undefined,
   elemProps: React.HTMLAttributes<HTMLElement>
 ) => {
   const filledTheme = useTheme(theme);
@@ -17,11 +27,11 @@ const useCanvasThemeToCssVars = (
     (result, color) => {
       if (color === 'common') {
         // @ts-ignore
-        result[newTheme.colors.common.focusOutline] = palette.common.focusOutline;
+        result[brand.common.focusOutline] = palette.common.focusOutline;
       }
       (['lightest', 'light', 'main', 'dark', 'darkest', 'contrast'] as const).forEach(key => {
         // @ts-ignore
-        result[newTheme.colors[color][key]] = palette[color][key];
+        result[brand[color][mappedKeys[key]]] = palette[color][key];
       });
       return result;
     },
@@ -32,7 +42,7 @@ const useCanvasThemeToCssVars = (
 
 export const CanvasProvider = ({
   children,
-  theme,
+  theme = {canvas: defaultCanvasTheme},
   ...props
 }: CanvasProviderProps & React.HTMLAttributes<HTMLElement>) => {
   const elemProps = useCanvasThemeToCssVars(theme, props);
@@ -40,7 +50,7 @@ export const CanvasProvider = ({
     <ThemeProvider theme={theme as Theme}>
       <InputProvider />
       <div
-        dir={(theme.canvas && theme.canvas.direction) || defaultCanvasTheme.direction}
+        dir={theme?.canvas?.direction || defaultCanvasTheme.direction}
         {...(elemProps as React.HTMLAttributes<HTMLDivElement>)}
       >
         {children}

@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import isPropValid from '@emotion/is-prop-valid';
 import {createComponent, StyledType, useConstant} from '@workday/canvas-kit-react/common';
+import {CSProps, handleCsProp} from '@workday/canvas-kit-styling';
 
 import {handleCsProp, CSProps} from '@workday/canvas-kit-styling';
 
