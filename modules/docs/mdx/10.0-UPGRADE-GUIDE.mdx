@@ -22,6 +22,8 @@ any questions.
   - [Button](#button)
   - [Popups](#popups)
   - [Select (Main)](#select-main)
+- [Features](#features)
+  - [Styling](#styling)
 - [Glossary](#glossary)
   - [Main](#main)
   - [Preview](#preview)
@@ -257,6 +259,26 @@ a flexible API and access to its internals via its subcomponents.
 Unlike the
 [Select in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-select-left-label--default),
 this component does not have a border around its menu.
+
+---
+
+## Features
+
+### Styling
+
+We've introduced a new styling package `@workday/canvas-kit-styling` which is a wrapper around
+`@emotion/css`.
+
+If you're using Canvas Kit and not directly using this package, there is nothing extra to do on your
+end. The Canvas Kit packages are using the static compilation as part of the build process. If you
+want to use this package for your own styles, you don't need to do anything special to use in
+development, just reference our
+[documentation](https://workday.github.io/canvas-kit/?path=/story/features-styling-welcome--page) on
+how to get started.
+
+For more information on why this package was introduced, please reference our
+[discussion](https://github.com/Workday/canvas-kit/discussions/2265) on the future of styling for
+Canvas Kit.
 
 ## Glossary
 
