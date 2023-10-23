@@ -4,8 +4,6 @@ import isPropValid from '@emotion/is-prop-valid';
 import {createComponent, StyledType, useConstant} from '@workday/canvas-kit-react/common';
 import {CSProps, handleCsProp} from '@workday/canvas-kit-styling';
 
-import {handleCsProp, CSProps} from '@workday/canvas-kit-styling';
-
 // style props
 import {background} from './utils/background';
 import {border} from './utils/border';

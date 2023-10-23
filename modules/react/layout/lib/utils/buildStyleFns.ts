@@ -1,6 +1,5 @@
 import {
   borderRadius as borderRadiusTokens,
-  CanvasColor,
   colors as colorTokens,
   depth as depthTokens,
   space as spaceTokens,
@@ -19,7 +18,7 @@ export type StyleFns = {
   [key: string]: (value: unknown) => {};
 };
 
-const getColor = (value: CanvasColor) => {
+const getColor = (value: SystemPropValues['color']) => {
   return colorTokens[value] || value;
 };
 
@@ -52,7 +51,7 @@ export function buildStyleFns(styleFnConfigs: StyleFnConfig[]): StyleFns {
     const styleFn = (value: unknown) => {
       return styleFnConfig.properties.reduce((styles = {}, property: string) => {
         if (styleFnConfig.system === 'color') {
-          return {...styles, [property]: getColor(value as CanvasColor)};
+          return {...styles, [property]: getColor(value as SystemPropValues['color'])};
         }
 
         if (styleFnConfig.system === 'depth') {
