@@ -73,9 +73,7 @@ describe('Autocomplete', () => {
 
       context('when the user types a printable character "b"', () => {
         beforeEach(() => {
-          cy.findByRole('combobox')
-            .clear()
-            .type('b');
+          cy.findByRole('combobox').clear().type('b');
           waitForAutocompleteReady();
         });
 
@@ -84,9 +82,7 @@ describe('Autocomplete', () => {
         });
 
         it('should not set aria-selected to the first option', () => {
-          cy.findAllByRole('option')
-            .eq(0)
-            .should('have.not.attr', 'aria-selected');
+          cy.findAllByRole('option').eq(0).should('have.not.attr', 'aria-selected');
         });
       });
 
@@ -144,9 +140,7 @@ describe('Autocomplete', () => {
           });
 
           it('should set aria-selected to the first option', () => {
-            cy.findAllByRole('option')
-              .eq(0)
-              .should('have.attr', 'aria-selected', 'true');
+            cy.findAllByRole('option').eq(0).should('have.attr', 'aria-selected', 'true');
           });
 
           context('when the user presses the enter key', () => {
@@ -199,9 +193,7 @@ describe('Autocomplete', () => {
 
         context('when the user clicks on the first option', () => {
           beforeEach(() => {
-            cy.findAllByRole('option')
-              .eq(0)
-              .click();
+            cy.findAllByRole('option').eq(0).click();
           });
 
           it('should set the combobox value to the option text value', () => {
@@ -239,9 +231,7 @@ describe('Autocomplete', () => {
           });
 
           it('should set aria-selected to the second option', () => {
-            cy.findAllByRole('option')
-              .eq(1)
-              .should('have.attr', 'aria-selected', 'true');
+            cy.findAllByRole('option').eq(1).should('have.attr', 'aria-selected', 'true');
           });
         });
 
@@ -264,9 +254,7 @@ describe('Autocomplete', () => {
             });
 
             it('should set aria-selected to the first option', () => {
-              cy.findAllByRole('option')
-                .eq(0)
-                .should('have.attr', 'aria-selected', 'true');
+              cy.findAllByRole('option').eq(0).should('have.attr', 'aria-selected', 'true');
             });
           });
 
@@ -282,9 +270,7 @@ describe('Autocomplete', () => {
             });
 
             it('should set aria-selected to the last option', () => {
-              cy.findAllByRole('option')
-                .eq(3)
-                .should('have.attr', 'aria-selected', 'true');
+              cy.findAllByRole('option').eq(3).should('have.attr', 'aria-selected', 'true');
             });
           });
 
@@ -300,9 +286,7 @@ describe('Autocomplete', () => {
             });
 
             it('should set aria-selected to the third option', () => {
-              cy.findAllByRole('option')
-                .eq(2)
-                .should('have.attr', 'aria-selected', 'true');
+              cy.findAllByRole('option').eq(2).should('have.attr', 'aria-selected', 'true');
             });
           });
 
@@ -317,9 +301,7 @@ describe('Autocomplete', () => {
             });
 
             it('should set aria-selected to the first option', () => {
-              cy.findAllByRole('option')
-                .eq(0)
-                .should('have.attr', 'aria-selected', 'true');
+              cy.findAllByRole('option').eq(0).should('have.attr', 'aria-selected', 'true');
             });
           });
         });

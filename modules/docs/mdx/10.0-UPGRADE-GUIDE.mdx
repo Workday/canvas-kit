@@ -9,19 +9,22 @@ This guide contains an overview of the changes in Canvas Kit v10. Please
 any questions.
 
 - [Codemod](#codemod)
+- [Features](#features)
+  - [Styling](#styling)
 - [Removals](#removals)
+  - [CSS Packages](#css-packages)
   - [useBanner](#useBanner)
 - [Deprecations](#deprecations)
   - [Input Icon Container](#input-icon-container)
+  - [Select (Preview)](#select-preview)
   - [Space Numbers](#space-numbers)
   - [Table](#table)
-  - [Select Preview](#select-preview)
 - [Token Updates](#token-updates)
   - [Space and Depth](#space-and-depth)
 - [Component Updates](#component-updates)
-  - [Buttons](#buttons)
+  - [Button](#button)
   - [Popups](#popups)
-  - [Select Main](#select-main)
+  - [Select (Main)](#select-main)
 - [Glossary](#glossary)
   - [Main](#main)
   - [Preview](#preview)
@@ -29,47 +32,66 @@ any questions.
 
 ## Codemod
 
-Please use our [codemod package](https://github.com/Workday/canvas-kit/tree/master/modules/codemod)
-to automatically update your code to work with most of the breaking changes in v10.
+Unlike past major releases, v10 does not have a codemod. The changes in v10 were either deemed
+infeasible to codemod or provided low ROI based on consumer usage. This is subject to change; if
+necessary, we can release codemods as minor updates.
 
-```sh
-> npx @workday/canvas-kit-codemod v10 [path]
-```
+Codemods are here to stay and will continue to be a part of our release process. In the meantime,
+this Upgrade Guide should provide everything you need to update your code to be compatible with v10.
 
-Alternatively, if you're unable to run the codemod successfully using `npx`, you can install the
-codemod package as a dev dependency, run it with `yarn`, and then remove the package after you're
-finished.
+## Features
 
-```sh
-> yarn add @workday/canvas-kit-codemod --dev
-> yarn canvas-kit-codemod v10 [path]
-> yarn remove @workday/canvas-kit-codemod
-```
+### Styling
 
-> The codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` files. You'll need to manually edit
-> other file types (`.json`, `.mdx`, `.md`, etc.). You may need to run your linter after executing
-> the codemod, as its resulting formatting (spacing, quotes, etc.) may not match your project
-> conventions.
+**PR:** [#2273](https://github.com/Workday/canvas-kit/pull/2273)
 
-The codemod will handle _most_ but _not all_ of the breaking changes in 10. **Breaking changes
-handled by the codemod are marked with 🤖 in the Upgrade Guide.**
+We've introduced a new styling package `@workday/canvas-kit-styling` which is a wrapper around
+`@emotion/css`.
 
-**Please verify all changes made by the codemod.** As a safety precaution, we recommend committing
-the changes from the codemod as a single isolated commit (separate from other changes) so you can
-roll back more easily if necessary.
+If you're using Canvas Kit and not directly using this package, there is nothing extra to do on your
+end. The Canvas Kit packages are using the static compilation as part of the build process. If you
+want to use this package for your own styles, you don't need to do anything special to use in
+development; just reference our
+[documentation](https://workday.github.io/canvas-kit/?path=/story/features-styling-welcome--page) on
+how to get started.
+
+For more information on why this package was introduced, please reference our
+[discussion](https://github.com/Workday/canvas-kit/discussions/2265) on the future of styling for
+Canvas Kit.
 
 ## Removals
 
-Removals are deletions from our codebase and you can no longer consume this component. We've either
-promoted or replaced a component or utility.
+Removals from our codebase may no longer be consumed. We've either promoted or replaced the removed
+component or utility.
 
-## useBanner
+### CSS Packages
 
-We have removed the `useBanner` hook, the only function of which was to add `aria-labelledby` and
+**PR:** [#2368](https://github.com/Workday/canvas-kit/pull/2368)
+
+We've removed the `@workday/canvas-kit-css-*` packages from our source code. The packages have been
+in maintenance mode for a while with no updates, but still riding the wave of version updates.
+Starting in v10, our plan is to release our CSS kit as a static build straight from our React
+package and under the new `@workday/canvas-kit-css` package. This means we're not releasing an
+update to the CSS package in `10.0.0`, but will add our button CSS as a minor version. We're
+converting all our existing React packages to use this new styling strategy which will allow us to
+publish all CSS packages straight from the styles of our React packages, reducing the maitenance
+overhead required to maintain both our React kit and CSS kit.
+
+---
+
+### useBanner
+
+**PR:** [#2318](https://github.com/Workday/canvas-kit/pull/2318)
+
+We've removed the `useBanner` hook, the only function of which was to add `aria-labelledby` and
 `aria-describedby` references to the text inside of the Banner. This was not required for
 accessibility, and browsers can compute the name of the Banner from the text given inside.
 
 ## Deprecations
+
+We add the [@deprecated](https://jsdoc.app/tags-deprecated.html) JSDoc tag to code we plan to remove
+in a future major release. This signals consumers to migrate to a more stable alternative before the
+deprecated code is removed.
 
 ### Input Icon Container
 
@@ -80,43 +102,9 @@ or icons at the start of an input. Please use
 [`InputGroup`](https://workday.github.io/canvas-kit/?path=/story/components-inputs-text-input--icons)
 instead.
 
-### Space Numbers
+---
 
-**PR:** [#2345](https://github.com/Workday/canvas-kit/pull/2345)
-
-We've deprecated `spaceNumbers`. Please use our `rem` based
-[`space`](https://workday.github.io/canvas-kit/?path=/docs/tokens--space) tokens. In the case where
-you need to calculate a value, use
-[CSS calc()](https://developer.mozilla.org/en-US/docs/Web/CSS/calc) instead.
-
-Example using `space` with calc instead of deprecated `spaceNumbers`.
-
-```tsx
-// With deprecated `spaceNumbers`
-{
-  paddingLeft: spaceNumbers.xl + 2; // 42px
-}
-```
-
-```tsx
-// With `rem` based `space` tokens
-{
-  padding: `calc(${space.xl} + 2px)`; // 42px
-}
-```
-
-For more information on how to handle this migration, you can reference our
-[discussion](https://github.com/Workday/canvas-kit/discussions/2343).
-
-### Table
-
-**PR:** [#2344](https://github.com/Workday/canvas-kit/pull/2344)
-
-We've deprecated `Table` and `TableRow` as well as all of their exported members. Please use
-[`Table`](https://workday.github.io/canvas-kit/?path=/docs/preview-table--basic) in
-[Preview](#preview) instead.
-
-### Select Preview
+### Select (Preview)
 
 **PR:** [#2309](https://github.com/Workday/canvas-kit/pull/2309)
 
@@ -124,20 +112,55 @@ We've deprecated `Select` from [Preview](#preview). Please use
 [`Select` in Main](https://workday.github.io/canvas-kit/?path=/story/components-inputs-select--basic)
 instead.
 
+---
+
+### Space Numbers
+
+**PR:** [#2345](https://github.com/Workday/canvas-kit/pull/2345)
+
+We've deprecated `spaceNumbers`. Please use our `rem` based
+[`space`](https://workday.github.io/canvas-kit/?path=/docs/tokens--space) tokens. If you need to
+calculate a value, use [CSS calc()](https://developer.mozilla.org/en-US/docs/Web/CSS/calc) instead.
+
+```tsx
+// With deprecated `spaceNumbers`
+{
+  paddingLeft: spaceNumbers.xl + 2; // 42px
+}
+
+// With `rem` based `space` tokens
+{
+  padding: `calc(${space.xl} + 2px)`; // 42px
+}
+```
+
+For more information on how to handle this migration, please reference our
+[discussion](https://github.com/Workday/canvas-kit/discussions/2343).
+
+---
+
+### Table
+
+**PR:** [#2344](https://github.com/Workday/canvas-kit/pull/2344)
+
+We've deprecated `Table` and `TableRow` and all of their exported members. Please use
+[`Table`](https://workday.github.io/canvas-kit/?path=/docs/preview-table--basic) in
+[Preview](#preview) instead.
+
 ## Token Updates
 
 ### Space and Depth
 
 **PR:** [#2229](https://github.com/Workday/canvas-kit/pull/2229)
 
-In v10, we have updated our `space` and `depth` token values from `px` to `rem`. This is based on
-the default browser font size which is `16px`.
+We've updated our `space` and `depth` token values from `px` to `rem`. This is based on the default
+browser font size which is `16px`.
 
-These updates just mean that we have moved the values from `px` to `rem`. The values have been
-updated on a 1:1 basis. None of the base value have changed, just the unit.
+These updates simply mean that we have moved the values from `px` to `rem`. The values have been
+updated on a 1:1 basis. None of the base values have changed, only the unit.
 
-Below is a table to show what each token value is, what is corresponds too and what the new `rem`
-value is in `px`:
+The table below shows what each token value is, what it corresponds to, and what the new `rem` value
+is in `px`:
 
 | px Value | rem Value | space Token |
 | -------- | --------- | ----------- |
@@ -167,38 +190,37 @@ For example:
 
 We wanted to move away from absolute units in tokens to relative units for better accessibility and
 adaptability to different viewport/screen sizes. If a user changes their default browser font size,
-these sizes should change along with it. Since `px` are a fixed unit and do not scale, utilizing
-`rem` will allow these tokens to scale with a new default font size.
+these sizes should change along with it. `px` are a fixed unit and do not scale, whereas `rem` will
+allow these tokens to scale with a new default font size.
 
 ## Component Updates
 
-### Buttons
-
-We re-factored how we styled Buttons to use our `createStyles` utility function. We don't anticipate
-this as a breaking change but, there may be slight changes to visual test.
+### Button
 
 **PR:** [#2285](https://github.com/Workday/canvas-kit/pull/2285)
 
+We've refactored how we style buttons to use our
+[`createStyles`](https://workday.github.io/canvas-kit/?path=/docs/features-styling-api--create-styles)
+utility function. We don't anticipate this being a breaking change in most cases, but there may be
+slight changes to visual tests.
+
 #### Button Icon Fill
 
-Icons will no longer be "filled" on toggle. This decision was made to not have the exisitng icon
-look so different in the toggled state.
+Icons will no longer be incorrectly filled on toggle.
 
 #### Button Focus Ring Update
 
-We found that focus ring was not consistent across all Buttons. We have made some changes to create
-a consistent focus ring across all Buttons and variants. These will need to be taken note of due to
-some small changes visually with Buttons.
-
-- `PrimaryButton`: `inverse` variant now has the same focus ring as default variant and as
-  `SecondaryButton`.
+We found that focus rings were not consistent across all buttons. We've updated the focus ring on
+the `inverse` variant of `PrimaryButton` to display a consistent focus ring across `PrimaryButton`
+and `SecondaryButton`. The changes to `PrimaryButton` will need to be taken note of due to small
+visual changes with the `inverse` variant.
 
 Also, `colors` will no longer support the `focusRing` option.
 
 ```tsx
 import {focusRing} from '@workday/canvas-kit-react/common';
 
-// before
+// v9
 <PrimaryButton
   colors={{
     // other colors
@@ -209,7 +231,7 @@ import {focusRing} from '@workday/canvas-kit-react/common';
   }}
 />
 
-// after
+// v10
 <PrimaryButton
   colors={{
     // other colors
@@ -223,10 +245,14 @@ import {focusRing} from '@workday/canvas-kit-react/common';
 />;
 ```
 
+---
+
 ### Popups
 
 All Popup components including `Menu` and `Popup` have increased the top and bottom spacing between
 the target and popup to `4px`.
+
+---
 
 ### Select (Main)
 
@@ -265,9 +291,9 @@ a flexible API and access to its internals via its subcomponents.
 </Select>
 ```
 
-This component also does not have a border around the `Menu` component as the
-[Select in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-select-left-label--default)
-has.
+Unlike the
+[Select in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-select-left-label--default),
+this component does not have a border around its menu.
 
 ## Glossary
 
