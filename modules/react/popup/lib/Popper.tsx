@@ -1,6 +1,12 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Placement as PopperJSPlacement, Options, Instance, Modifier, createPopper } from '@popperjs/core';
+import {
+  Placement as PopperJSPlacement,
+  Options,
+  Instance,
+  Modifier,
+  createPopper,
+} from '@popperjs/core';
 
 export type Placement = `${PopperJSPlacement}`; // Use template literals to make documentation list them out
 export type PopperOptions = Options;
