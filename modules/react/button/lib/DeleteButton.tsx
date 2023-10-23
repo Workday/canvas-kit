@@ -14,30 +14,30 @@ import {Button, ButtonProps} from './Button';
 export interface DeleteButtonProps extends ButtonProps {}
 
 const deleteStyles = createStyles({
-  [buttonVars.default.background]: cssVar(brand.error.base),
+  [buttonVars.default.background]: cssVar(brand.error.base, '#de2e21'),
   [buttonVars.default.border]: 'transparent',
-  [buttonVars.default.borderRadius]: cssVar(system.shape.circle),
-  [buttonVars.default.label]: cssVar(brand.error.accent),
+  [buttonVars.default.borderRadius]: cssVar(system.shape.circle, '999px'),
+  [buttonVars.default.label]: cssVar(brand.error.accent, '#ffffff'),
   '&:hover, &.hover': {
-    [buttonVars.hover.background]: cssVar(brand.error.dark),
+    [buttonVars.hover.background]: cssVar(brand.error.dark, '#a31b12'),
     [buttonVars.hover.border]: 'transparent',
-    [buttonVars.hover.label]: cssVar(brand.error.accent),
+    [buttonVars.hover.label]: cssVar(brand.error.accent, '#ffffff'),
   },
   '&:focus-visible, &.focus': {
-    [buttonVars.focus.background]: cssVar(brand.error.base),
+    [buttonVars.focus.background]: cssVar(brand.error.base, '#de2e21'),
     [buttonVars.focus.border]: 'transparent',
-    [buttonVars.focus.label]: cssVar(brand.error.accent),
-    [buttonVars.focus.boxShadowInner]: cssVar(base.frenchVanilla100),
-    [buttonVars.focus.boxShadowOuter]: cssVar(brand.common.focusOutline),
+    [buttonVars.focus.label]: cssVar(brand.error.accent, '#ffffff'),
+    [buttonVars.focus.boxShadowInner]: cssVar(base.frenchVanilla100, '#ffffff'),
+    [buttonVars.focus.boxShadowOuter]: cssVar(brand.common.focusOutline, '#0875e1'),
   },
   '&:active, &.active': {
-    [buttonVars.active.background]: cssVar(brand.error.darkest),
+    [buttonVars.active.background]: cssVar(brand.error.darkest, 'rgba(128,22,14,1)'),
     [buttonVars.active.border]: 'transparent',
-    [buttonVars.active.label]: cssVar(brand.error.accent),
+    [buttonVars.active.label]: cssVar(brand.error.accent, '#ffffff'),
   },
   '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
-    [buttonVars.disabled.background]: cssVar(brand.error.light),
-    [buttonVars.disabled.label]: cssVar(brand.error.accent),
+    [buttonVars.disabled.background]: cssVar(brand.error.light, '#fcc9c5'),
+    [buttonVars.disabled.label]: cssVar(brand.error.accent, '#ffffff'),
     opacity: 1,
   },
 });
