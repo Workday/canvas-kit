@@ -9,7 +9,7 @@ import {
   userIcon,
 } from '@workday/canvas-system-icons-web';
 
-export const customOptions = [
+const customOptions = [
   {text: 'Activity Stream', id: 'activity-stream', icon: activityStreamIcon},
   {text: 'Avatar', id: 'avatar', icon: avatarIcon},
   {text: 'Upload Cloud', id: 'upload-cloud', icon: uploadCloudIcon},

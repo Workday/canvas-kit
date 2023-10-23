@@ -31,6 +31,9 @@
     "depcheck": "node ../../utils/check-dependencies-exist.js",
     "typecheck:src": "tsc -p . --noEmit --incremental false"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "canvas",
     "canvas-kit",
