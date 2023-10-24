@@ -2,7 +2,48 @@ import {transform} from '../lib/styleTransform';
 import {createProgramFromSource} from './createProgramFromSource';
 
 describe('styleParser', () => {
-  it.only('should parse simple objects with string values', () => {
+  it('should parse string literals, passing them through', () => {
+    const program = createProgramFromSource(`
+      import {createStyles} from '@workday/canvas-kit-styling';
+
+      const styles = createStyles('my-class')
+    `);
+
+    const result = transform(program, 'test.ts'); //?
+
+    expect(result).toContain("createStyles('my-class')");
+  });
+
+  it('should parse string type identifiers, passing them through', () => {
+    const program = createProgramFromSource(`
+      import {createStyles} from '@workday/canvas-kit-styling';
+
+      const myClassName = 'my-class'
+
+      const styles = createStyles(myClassName)
+    `);
+
+    const result = transform(program, 'test.ts'); //?
+
+    expect(result).toContain('createStyles(myClassName)');
+  });
+
+  it('should parse string styles returned by createStyles, passing through the reference', () => {
+    const program = createProgramFromSource(`
+      import {createStyles} from '@workday/canvas-kit-styling';
+
+      let myClassName = 'my-class';
+
+      const styles = createStyles(myClassName);
+      const styles2 = createStyles(styles);
+    `);
+
+    const result = transform(program, 'test.ts'); //?
+
+    expect(result).toContain('createStyles(styles)');
+  });
+
+  it('should parse simple objects with string values', () => {
     const program = createProgramFromSource(`
       import {createStyles} from '@workday/canvas-kit-styling';
 

@@ -13,20 +13,21 @@ function getConfig() {
 }
 
 const styleSource = `
-declare type CsVarsMap<T extends string, ID extends string | never> = [ID] extends [never]
+export type CsVarsMap<T extends string, ID extends string | never> = [ID] extends [never]
   ? Record<T, string>
   : {[K in T]: \`--\${ID}-\${K}\`};
 
-declare type CsVars<T extends string, ID extends string | never> = CsVarsMap<T, ID> & {
+export type CsVars<T extends string, ID extends string | never> = CsVarsMap<T, ID> & {
   (input: Partial<Record<T, string>>): Record<T, string>;
 };
-declare function createVars<T extends string, ID extends string>(input: {
+export function createVars<T extends string, ID extends string>(input: {
   id: ID;
   args: T[];
 }): CsVars<T, ID>;
-declare function createVars<T extends string>(...args: T[]): CsVars<T, never>;
-declare function createVars<T extends string, ID extends string>(...args: T[]): CsVars<T, ID>;
-declare function cssVar(input: string): string
+export function createVars<T extends string>(...args: T[]): CsVars<T, never>;
+export function createVars<T extends string, ID extends string>(...args: T[]): CsVars<T, ID>;
+export function cssVar(input: string): string;
+export function createStyles(...args: any[]): string;
 `;
 
 export function createProgramFromSource(source: string): ts.Program;
@@ -62,7 +63,7 @@ export function createProgramFromSource(...args: any[]) {
               ts.sys.readFile(`node_modules/typescript/lib/${name}`),
               languageVersion
             )
-          : name === '@workday/canvas-kit-styling'
+          : name === 'node_modules/@workday/canvas-kit-styling/index.ts'
           ? ts.createSourceFile(name, styleSource, languageVersion)
           : name === 'node_modules/react.ts'
           ? ts.createSourceFile(
@@ -74,7 +75,7 @@ export function createProgramFromSource(...args: any[]) {
       );
     },
     // eslint-disable-next-line no-empty-function
-    writeFile: (filename, data) => {},
+    writeFile: () => {},
     getDefaultLibFileName: () => 'lib.d.ts',
     useCaseSensitiveFileNames: () => false,
     getCanonicalFileName: filename => filename,
@@ -82,11 +83,15 @@ export function createProgramFromSource(...args: any[]) {
     getNewLine: () => '\n',
     getDirectories: () => [],
     // This should be kept up to date with getSourceFile()
-    fileExists: fileName =>
-      fileName.startsWith('lib') ||
-      fileName === 'node_modules/react.ts' ||
-      fileName === 'node_modules/@types/react/index.d.ts' ||
-      !!sourceFiles.find(s => s.fileName === fileName),
+    fileExists: fileName => {
+      return (
+        fileName.startsWith('lib') ||
+        fileName === 'node_modules/react.ts' ||
+        fileName === 'node_modules/@types/react/index.d.ts' ||
+        fileName === 'node_modules/@workday/canvas-kit-styling/index.ts' ||
+        !!sourceFiles.find(s => s.fileName === fileName)
+      );
+    },
     readFile: () => '',
   };
 

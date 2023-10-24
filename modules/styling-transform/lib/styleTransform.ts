@@ -34,6 +34,11 @@ function getStyleValueFromType(node: ts.Node, type: ts.Type, checker: ts.TypeChe
   );
 }
 
+/**
+ * A `PropertyExpression` is an expression with a dot in it. Like `a.b.c`. It may be nested. This
+ * function will walk the AST and create a string like `a.b.c` to be passed on to variable name
+ * generation. This will be used for CSS variable lookups.
+ */
 function getPropertyAccessExpressionText(node: ts.PropertyAccessExpression): string {
   if (ts.isIdentifier(node.name)) {
     if (ts.isIdentifier(node.expression)) {
@@ -161,6 +166,9 @@ function getStyleValueFromTemplateExpression(
   return '';
 }
 
+/**
+ * Gets a CSS value from an AST node
+ */
 function getCSSValueAtLocation(
   node: ts.Expression,
   checker: ts.TypeChecker,
@@ -264,7 +272,21 @@ function getStyleFromProperty(
     }
   }
 
+  /**
+   * A spread assignment looks like:
+   *
+   * ```ts
+   * {
+   *   ...styles
+   * }
+   * ```
+   *
+   * https://ts-ast-viewer.com/#code/MYewdgzgLgBFCmBbADjAvDA3gMxCAXDAOQBGAhgE5EC+AUKJLAigEzpYB0Xzy1QA
+   */
   if (ts.isSpreadAssignment(property)) {
+    // Detect `focusRing` calls. This is temporary until we figure out a better way to do focus
+    // rings that doesn't require a special entry in the transform function.
+    //
     // TODO: implement a fully working type resolver for CSS variables or remove support for them an
     // remove all uses of `focusRing` from new styling code
     if (
@@ -311,19 +333,19 @@ function getStyleFromProperty(
       }
     }
 
+    // Spread assignments are a bit complicated to use the AST to figure out, so we'll ask the
+    // TypeScript type checker.
     const type = checker.getTypeAtLocation(property.expression);
-
-    return type.getProperties().reduce((result, prop) => {
-      const propType = checker.getTypeOfSymbolAtLocation(prop, prop.valueDeclaration);
-      return {
-        ...result,
-        [prop.name]: getStyleValueFromType(prop.valueDeclaration, propType, checker),
-      };
-    }, {});
+    return parseStyleObjFromType(type, prefix, variables, checker);
   }
   return {};
 }
 
+/**
+ * If we're here, we have a `ts.Type` that represents a style object. We try to parse a style object
+ * from the AST, but we might have something that is more complicated like a function call or an
+ * identifier that represents an object. It could be imported from another file.
+ */
 function parseStyleObjFromType(
   type: ts.Type,
   prefix: string,
@@ -332,6 +354,7 @@ function parseStyleObjFromType(
 ) {
   const styleObj: Record<string, any> = {};
 
+  // Gets all the properties of the type object
   return type.getProperties().reduce((result, property) => {
     const declaration = property.declarations[0];
     if (declaration) {
@@ -341,6 +364,10 @@ function parseStyleObjFromType(
   }, styleObj);
 }
 
+/**
+ * If the node is an `ObjectLiteralExpression`, we'll walk the `properties` of the AST node and
+ * create a style object for each property we find.
+ */
 function parseStyleObjFromNode(
   node: ts.Node,
   prefix: string,
@@ -357,6 +384,12 @@ function parseStyleObjFromNode(
   return styleObj;
 }
 
+/**
+ * Creates an AST node representation of the passed in `styleObj`, but in the format of `{name:
+ * string, styles: serializedStyles}`. The `name` is hard-coded here to work with both server-side
+ * and client-side style injection. This results in a stable style key for Emotion while also
+ * optimizing style serialization.
+ */
 function createStyleObjectNode(styleObj: Record<string, string>) {
   const serialized = serializeStyles([styleObj]); //?
   const styleText = serialized.styles;
@@ -412,6 +445,38 @@ export default function styleTransformer(
       // eslint-disable-next-line no-param-reassign
       node = ts.visitEachChild(node, visit, context);
 
+      /**
+       * Check if the node is a call expression that looks like:
+       *
+       * ```ts
+       * createStyles({
+       *   // properties
+       * })
+       * ```
+       *
+       * It will also make sure the `createStyles` function was imported from
+       * `@workday/canvas-kit-styling` to ensure we don't rewrite the AST of code we don't own.
+       *
+       * This transformation will pre-serialize the style objects and turn them into strings for
+       * faster runtime processing in Emotion. The following is an example of the transformation.
+       *
+       * ```ts
+       * // before transformation
+       * const myStyles = createStyles({
+       *   fontSize: '1rem'
+       * })
+       *
+       * // after transformation
+       * const myStyles = createStyles({
+       *   name: 'abc123',
+       *   styles: 'font-size: 1rem;'
+       * })
+       * ```
+       *
+       * The after transformation already serialized the styles and goes through a shortcut process
+       * in `@emotion/css` where only the Emotion cache is checked and styles are inserted if the
+       * cache key wasn't found.
+       */
       if (
         ts.isCallExpression(node) &&
         ts.isIdentifier(node.expression) &&
@@ -423,20 +488,26 @@ export default function styleTransformer(
         const declaration = symbol?.declarations[0];
 
         if (getModuleSpecifierFromDeclaration(declaration) === styleImportString) {
-          const newArguments = [...node.arguments].map((arg, index) => {
+          const newArguments = [...node.arguments].map(arg => {
+            // An `ObjectLiteralExpression` is an object like `{foo:'bar'}`:
+            // https://ts-ast-viewer.com/#code/MYewdgzgLgBFCmBbADjAvDA3gKBjAZiCAFwwDkARgIYBOZ2AvkA
             if (ts.isObjectLiteralExpression(arg)) {
-              const styleObj = parseStyleObjFromNode(arg, prefix, variables, checker); //?
+              const styleObj = parseStyleObjFromNode(arg, prefix, variables, checker);
 
               return createStyleObjectNode(styleObj);
             }
+            // An Identifier is a variable. It could come from anywhere - imports, earlier
+            // assignments, etc. The easiest thing to do is to ask the TypeScript type checker what
+            // the type representation is and go from there.
             if (ts.isIdentifier(arg)) {
               const type = checker.getTypeAtLocation(arg);
 
-              if (type.isStringLiteral()) {
-                return ts.factory.createStringLiteral(type.value);
+              // `createStyles` accepts strings as class names. If the class name is
+              if (type.isStringLiteral() || type.getFlags() & ts.TypeFlags.String) {
+                return arg;
               }
 
-              checker.typeToString(type); //?
+              // The type must be a object
               const styleObj = parseStyleObjFromType(type, prefix, variables, checker); //?
 
               return createStyleObjectNode(styleObj);

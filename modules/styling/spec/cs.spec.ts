@@ -80,6 +80,12 @@ describe('createStyles', () => {
         }
       }
     });
+
+    it('should return the same className that was provided to provide extending', () => {
+      const styles = createStyles('my-class');
+
+      expect(styles).toEqual('my-class');
+    });
   });
 
   describe('cssVar', () => {
