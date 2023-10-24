@@ -108,7 +108,7 @@
     "yargs": "^16.2.0"
   },
   "scripts": {
-    "start": "node utils/download-fonts.js && node --max-old-space-size=2048 node_modules/.bin/start-storybook -p 9001 -c .storybook -s ./public",
+    "start": "node utils/download-fonts.js && node --max-old-space-size=4096 node_modules/.bin/start-storybook -p 9001 -c .storybook -s ./public",
     "watch": "TSC_NONPOLLING_WATCHER=1 lerna run watch --parallel --stream",
     "clean": "lerna run clean",
     "depcheck": "lerna run depcheck",

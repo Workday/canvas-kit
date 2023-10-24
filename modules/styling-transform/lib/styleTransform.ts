@@ -1,6 +1,7 @@
 /// <reference types="node" />
 import ts from 'typescript';
 import {serializeStyles} from '@emotion/serialize';
+import {base, brand} from '@workday/canvas-tokens-web';
 import path from 'node:path';
 
 import {slugify} from '@workday/canvas-kit-styling';
@@ -50,7 +51,7 @@ function parseStyleObjValue(
   initializer: ts.Node,
   variables: Record<string, string>,
   checker: ts.TypeChecker
-) {
+): string {
   /**
    * String literals like 'red' or empty Template Expressions like `red`
    */
@@ -97,7 +98,7 @@ function parseStyleObjValue(
   ) {
     const value = getCSSValueAtLocation(initializer.arguments[0], checker); //?
     const value2 = initializer.arguments[1]
-      ? getCSSValueAtLocation(initializer.arguments[1], checker)
+      ? parseStyleObjValue(initializer.arguments[1], variables, checker)
       : undefined; //?
 
     // handle fallback variables
@@ -265,13 +266,60 @@ function getStyleFromProperty(
   }
 
   if (ts.isSpreadAssignment(property)) {
+    // TODO: implement a fully working type resolver for CSS variables or remove support for them an
+    // remove all uses of `focusRing` from new styling code
+    if (
+      ts.isCallExpression(property.expression) &&
+      ts.isIdentifier(property.expression.expression) &&
+      property.expression.expression.text === 'focusRing'
+    ) {
+      const argumentObject = property.expression.arguments[0];
+      // defaults
+      const defaults = {
+        width: 2,
+        separation: 0,
+        inset: undefined as undefined | 'inner' | 'outer',
+        innerColor: `var(${base.frenchVanilla100}, rgba(255,255,255,1))`,
+        outerColor: `var(${brand.common.focusOutline}, rgba(8,117,225,1))`,
+      };
+      if (argumentObject && ts.isObjectLiteralExpression(argumentObject)) {
+        argumentObject.properties.forEach(property => {
+          if (ts.isPropertyAssignment(property) && ts.isIdentifier(property.name)) {
+            property.name.text; //?
+            property.initializer; //?
+            defaults[property.name.text] = parseStyleObjValue(
+              property.initializer,
+              variables,
+              checker
+            ); //?
+          }
+        });
+
+        let boxShadow;
+        switch (defaults.inset) {
+          case 'outer':
+            boxShadow = `inset 0 0 0 ${defaults.separation} ${defaults.outerColor}, inset 0 0 0 calc(${defaults.width} + ${defaults.separation}) ${defaults.innerColor}`;
+            break;
+
+          case 'inner':
+            boxShadow = `inset 0 0 0 ${defaults.separation} ${defaults.innerColor}, 0 0 0 ${defaults.width} ${defaults.outerColor}`;
+            break;
+
+          default:
+            boxShadow = `0 0 0 ${defaults.separation} ${defaults.innerColor}, 0 0 0 calc(${defaults.width} + ${defaults.separation}) ${defaults.outerColor}`;
+            break;
+        }
+
+        return {boxShadow}; //?
+      }
+    }
+
     const type = checker.getTypeAtLocation(property.expression);
 
     checker.typeToString(type); //?
 
     return type.getProperties().reduce((result, prop) => {
       const propType = checker.getTypeOfSymbolAtLocation(prop, prop.valueDeclaration);
-      propType; //?
       return {
         ...result,
         [prop.name]: getStyleValueFromType(prop.valueDeclaration, propType, checker),
@@ -406,7 +454,7 @@ export default function styleTransformer(
           });
 
           return ts.factory.createCallExpression(
-            ts.factory.createIdentifier('cs'),
+            ts.factory.createIdentifier(styleExpressionName),
             [],
             newArguments
           );

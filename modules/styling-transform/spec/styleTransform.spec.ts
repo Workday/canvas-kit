@@ -130,6 +130,32 @@ describe('styleParser', () => {
     expect(result).toContain('font-size:12px;');
   });
 
+  it('should handle spread operator with a "focusRing" call', () => {
+    const program = createProgramFromSource(`
+      import {createStyles} from '@workday/canvas-kit-styling';
+
+      const myVars = createVars('boxShadowInner', 'boxShadowOuter');
+
+      const styles = createStyles({
+        ...focusRing({
+          width: 2,
+          separation: 2,
+          innerColor: cssVar(myVars.boxShadowInner, cssVar('--test-fallback-inner', '#fff')),
+          outerColor: cssVar(
+            myVars.boxShadowOuter,
+            cssVar('--test-fallback-outer', 'rgba(0,92,184,1)')
+          )
+        })
+      })
+    `);
+
+    const result = transform(program, 'test.ts'); //?
+
+    expect(result).toContain(
+      'box-shadow:0 0 0 2px var(--css-my-vars-boxShadowInner, var(--test-fallback-inner, #fff)), 0 0 0 calc(2px + 2px) var(--css-my-vars-boxShadowOuter, var(--test-fallback-outer, rgba(0,92,184,1)));'
+    );
+  });
+
   it('should handle nested spread operator that resolves to a type', () => {
     const program = createProgramFromSource(`
       import {createStyles} from '@workday/canvas-kit-styling';

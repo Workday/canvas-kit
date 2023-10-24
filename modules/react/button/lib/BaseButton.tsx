@@ -56,10 +56,10 @@ export interface ButtonContainerProps extends Partial<SystemIconProps>, GrowthBe
 export interface BaseButtonProps extends Omit<ButtonContainerProps, 'ref'> {}
 
 /**
- * Factory function for creating Button vars.
+ * Temporary css variables to be used across all Buttons.
  */
-const createButtonVars = () =>
-  createVars(
+export const buttonVars = {
+  default: createVars(
     'background',
     'border',
     'boxShadowInner',
@@ -68,17 +68,47 @@ const createButtonVars = () =>
     'label',
     'opacity',
     'borderRadius'
-  );
-
-/**
- * Temporary css variables to be used across all Buttons.
- */
-export const buttonVars = {
-  default: createButtonVars(),
-  hover: createButtonVars(),
-  active: createButtonVars(),
-  focus: createButtonVars(),
-  disabled: createButtonVars(),
+  ),
+  hover: createVars(
+    'background',
+    'border',
+    'boxShadowInner',
+    'boxShadowOuter',
+    'icon',
+    'label',
+    'opacity',
+    'borderRadius'
+  ),
+  active: createVars(
+    'background',
+    'border',
+    'boxShadowInner',
+    'boxShadowOuter',
+    'icon',
+    'label',
+    'opacity',
+    'borderRadius'
+  ),
+  focus: createVars(
+    'background',
+    'border',
+    'boxShadowInner',
+    'boxShadowOuter',
+    'icon',
+    'label',
+    'opacity',
+    'borderRadius'
+  ),
+  disabled: createVars(
+    'background',
+    'border',
+    'boxShadowInner',
+    'boxShadowOuter',
+    'icon',
+    'label',
+    'opacity',
+    'borderRadius'
+  ),
 };
 
 /**

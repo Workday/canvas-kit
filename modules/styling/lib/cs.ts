@@ -306,11 +306,18 @@ export interface CSProps {
  * > have the same specificity, the last defined wins. Always make sure that the properties you want
  * > to win are last in your file.
  */
-export function createStyles(...args: (StyleProps | string)[]): string {
+export function createStyles(
+  ...args: ({name: string; styles: string} | StyleProps | string)[]
+): string {
   return args
     .map(input => {
       if (typeof input === 'string') {
         return input;
+      }
+
+      // If we were called with a {name, styles} object, it must be optimized. We'll shortcut here
+      if (typeof input === 'object' && input.name) {
+        return css.call(null, input);
       }
 
       const convertedStyles = convertAllProperties(input);
