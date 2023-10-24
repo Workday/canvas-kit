@@ -2,7 +2,7 @@ import {compile, Element} from 'stylis';
 
 export function getVariablesFromFiles(files: string[]): Record<string, string> {
   return files.reduce((result, file) => {
-    extractVariables(compile(file)); //?
+    extractVariables(compile(file));
     return {...result, ...extractVariables(compile(file))};
   }, {} as Record<string, string>);
 }
@@ -27,15 +27,12 @@ export function extractVariables(
             ) {
               result[child.props] = child.children;
             }
-            if (Array.isArray(child.props)) {
-              //
-            }
           });
         }
         return result;
       },
       {...variables}
-    ); //?
+    );
 }
 
 export function getFallbackVariable(
@@ -52,16 +49,16 @@ export function getFallbackVariable(
         /** the variable name  - match of the second group "--var-name" */ cssVarName,
         ...args
       ) => {
-        const value = variables[cssVarName]; //?
+        const value = variables[cssVarName];
         if (value && value.startsWith('var')) {
           return getFallbackVariable(value, variables);
         }
         return value || varMatch;
       }
-    ); //?
+    );
   }
   if (variable) {
-    return variable; //?
+    return variable;
   }
 
   return;

@@ -17,7 +17,7 @@ const vars: Record<string, string> = {};
 export type NestedStyleObject = {[key: string]: string | NestedStyleObject};
 
 function getStyleValueFromType(node: ts.Node, type: ts.Type, checker: ts.TypeChecker) {
-  const value = getCSSValueAtLocation(node as ts.Expression, checker, type); //?
+  const value = getCSSValueAtLocation(node as ts.Expression, checker, type);
   if (value) {
     if (value.startsWith('--')) {
       return `var(${value})`;
@@ -25,7 +25,7 @@ function getStyleValueFromType(node: ts.Node, type: ts.Type, checker: ts.TypeChe
     return value;
   }
 
-  const typeValue = checker.typeToString(type); //?
+  const typeValue = checker.typeToString(type);
 
   throw new Error(
     `Unknown type at: "${node.getText()}". Received "${typeValue}"\n${getErrorMessage(
@@ -92,7 +92,8 @@ function parseStyleObjValue(
    *
    * ```ts
    * cssVar(myVars.color);
-   * cssVar(myVars.colors.background)
+   * cssVar(myVars.colors.background);
+   * cssVar(myVars.colors.background, 'red')
    * ```
    */
   if (
@@ -100,13 +101,13 @@ function parseStyleObjValue(
     ts.isIdentifier(initializer.expression) &&
     initializer.expression.text === cssVarExpressionName
   ) {
-    const value = getCSSValueAtLocation(initializer.arguments[0], checker); //?
+    const value = getCSSValueAtLocation(initializer.arguments[0], checker);
     const value2 = initializer.arguments[1]
       ? parseStyleObjValue(initializer.arguments[1], variables, checker)
-      : undefined; //?
+      : undefined;
 
     // handle fallback variables
-    const fallbackValue = getFallbackVariable(value, variables); //?
+    const fallbackValue = getFallbackVariable(value, variables);
     if (value && (value2 || fallbackValue)) {
       return `var(${value}, ${
         (value2?.startsWith('--') ? `var(${value2})` : value2) || fallbackValue
@@ -145,15 +146,13 @@ function getStyleValueFromTemplateExpression(
     return (
       getStyleValueFromTemplateExpression(node.head, variables, checker) +
       node.templateSpans
-        .map(
-          value => getStyleValueFromTemplateExpression(value, variables, checker) //?
-        )
+        .map(value => getStyleValueFromTemplateExpression(value, variables, checker))
         .join('')
     );
   }
 
   if (ts.isTemplateHead(node) || ts.isTemplateTail(node) || ts.isTemplateMiddle(node)) {
-    return node.text; //?
+    return node.text;
   }
 
   if (ts.isTemplateSpan(node)) {
@@ -232,7 +231,7 @@ function getStyleFromProperty(
     // All properties should be non-objects
     // {foo: 'bar'}
     if (ts.isIdentifier(property.name)) {
-      const value = parseStyleObjValue(property.initializer, variables, checker); //?
+      const value = parseStyleObjValue(property.initializer, variables, checker);
       if (value) {
         return {[property.name.text]: value};
       }
@@ -240,18 +239,18 @@ function getStyleFromProperty(
 
     if (ts.isComputedPropertyName(property.name)) {
       if (ts.isPropertyAccessExpression(property.name.expression)) {
-        const value = parseStyleObjValue(property.initializer, variables, checker); //?
+        const value = parseStyleObjValue(property.initializer, variables, checker);
         if (value) {
           // test if the property is a static value
-          getPropertyAccessExpressionText(property.name.expression); //?
+          getPropertyAccessExpressionText(property.name.expression);
           const type = checker.getTypeAtLocation(property.name.expression);
-          checker.typeToString(type); //?
+          checker.typeToString(type);
 
           if (type.isStringLiteral()) {
             return {[type.value]: value};
           } else {
-            const expressionText = getPropertyAccessExpressionText(property.name.expression); //?
-            const [id, name] = getVariableNameParts(expressionText); //?
+            const expressionText = getPropertyAccessExpressionText(property.name.expression);
+            const [id, name] = getVariableNameParts(expressionText);
             return {[`--${prefix}-${slugify(id)}-${name}`]: value};
           }
         }
@@ -310,7 +309,7 @@ function getStyleFromProperty(
               property.initializer,
               variables,
               checker
-            ); //?
+            );
           }
         });
 
@@ -329,7 +328,7 @@ function getStyleFromProperty(
             break;
         }
 
-        return {boxShadow}; //?
+        return {boxShadow};
       }
     }
 
@@ -378,7 +377,7 @@ function parseStyleObjFromNode(
   if (ts.isObjectLiteralExpression(node)) {
     return node.properties.reduce((result, property) => {
       return {...result, ...getStyleFromProperty(property, prefix, variables, checker)};
-    }, styleObj); //?
+    }, styleObj);
   }
 
   return styleObj;
@@ -391,7 +390,7 @@ function parseStyleObjFromNode(
  * optimizing style serialization.
  */
 function createStyleObjectNode(styleObj: Record<string, string>) {
-  const serialized = serializeStyles([styleObj]); //?
+  const serialized = serializeStyles([styleObj]);
   const styleText = serialized.styles;
   const styleExpression = ts.factory.createStringLiteral(styleText);
 
@@ -433,7 +432,7 @@ export default function styleTransformer(
         // Find the fully-qualified path name. This could error which should give "module not found" errors
         return file.startsWith('.') ? path.resolve(process.cwd(), file) : require.resolve(file);
       })
-      .map(file => ts.sys.readFile(file) || ''); //?
+      .map(file => ts.sys.readFile(file) || '');
 
     // eslint-disable-next-line no-param-reassign
     variables = getVariablesFromFiles(files);
@@ -508,7 +507,7 @@ export default function styleTransformer(
               }
 
               // The type must be a object
-              const styleObj = parseStyleObjFromType(type, prefix, variables, checker); //?
+              const styleObj = parseStyleObjFromType(type, prefix, variables, checker);
 
               return createStyleObjectNode(styleObj);
             }
@@ -531,10 +530,10 @@ export default function styleTransformer(
         ts.isIdentifier(node.expression) &&
         node.expression.text === createVarExpressionName
       ) {
-        const id = slugify(getVarName(node)); //?
+        const id = slugify(getVarName(node));
         const variables = node.arguments
           .map(arg => ts.isStringLiteral(arg) && arg.text)
-          .filter(Boolean) as string[]; //?
+          .filter(Boolean) as string[];
 
         variables.forEach(v => {
           vars[`${id}-${v}`] = `--${prefix}-${id}-${v}`;
@@ -593,7 +592,7 @@ function getVarName(node: ts.Node): string {
   const parent = node.parent;
 
   if (ts.isVariableDeclaration(parent) && ts.isIdentifier(parent.name)) {
-    return parent.name.text; //?
+    return parent.name.text;
   }
 
   if (ts.isPropertyAssignment(parent) && ts.isIdentifier(parent.name)) {
@@ -657,7 +656,7 @@ function getErrorMessage(node: ts.Node) {
 }
 
 function getVariableNameParts(input: string): [string, string] {
-  const parts = input.split('.'); //?
+  const parts = input.split('.');
 
   // grab the last item in the array. This will also mutate the array, removing the last item
   const variable = parts.pop()!;
@@ -667,11 +666,11 @@ function getVariableNameParts(input: string): [string, string] {
 
 function getVarsKeyFromNode(node: ts.Node): string {
   if (ts.isIdentifier(node)) {
-    return slugify(node.text); //?
+    return slugify(node.text);
   }
 
   if (ts.isPropertyAccessExpression(node) && ts.isIdentifier(node.name)) {
-    return `${getVarsKeyFromNode(node.expression)}-${node.name.text}`; //?
+    return `${getVarsKeyFromNode(node.expression)}-${node.name.text}`;
   }
 
   return '';

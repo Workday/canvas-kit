@@ -9,7 +9,7 @@ describe('styleParser', () => {
       const styles = createStyles('my-class')
     `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toContain("createStyles('my-class')");
   });
@@ -23,7 +23,7 @@ describe('styleParser', () => {
       const styles = createStyles(myClassName)
     `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toContain('createStyles(myClassName)');
   });
@@ -38,7 +38,7 @@ describe('styleParser', () => {
       const styles2 = createStyles(styles);
     `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toContain('createStyles(styles)');
   });
@@ -52,7 +52,7 @@ describe('styleParser', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toContain('font-size:12px;');
   });
@@ -66,7 +66,7 @@ describe('styleParser', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toContain('font-size:12px;');
   });
@@ -80,7 +80,7 @@ describe('styleParser', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toMatch(/{ name: "[a-z0-9]+", styles: "font-size:12px;" }/);
   });
@@ -96,7 +96,7 @@ describe('styleParser', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toContain('&:hover{background-color:red;}');
   });
@@ -112,7 +112,7 @@ describe('styleParser', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toContain('font-size:12px;');
   });
@@ -128,7 +128,7 @@ describe('styleParser', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toContain('font-size:12px;');
   });
@@ -146,7 +146,7 @@ describe('styleParser', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toContain('font-size:12px;');
   });
@@ -166,7 +166,7 @@ describe('styleParser', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toContain('font-size:12px;');
   });
@@ -190,7 +190,7 @@ describe('styleParser', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toContain(
       'box-shadow:0 0 0 2px var(--css-my-vars-boxShadowInner, var(--test-fallback-inner, #fff)), 0 0 0 calc(2px + 2px) var(--css-my-vars-boxShadowOuter, var(--test-fallback-outer, rgba(0,92,184,1)));'
@@ -212,7 +212,7 @@ describe('styleParser', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toContain('font-size:12px;');
   });
@@ -230,7 +230,7 @@ describe('styleParser', () => {
     })
   `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toContain('padding:12px;');
   });
@@ -248,7 +248,7 @@ describe('styleParser', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toContain('background-color:var(--color);');
   });
@@ -263,7 +263,7 @@ describe('styleParser', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toContain('background-color:var(--css-my-vars-color);');
   });
@@ -281,7 +281,7 @@ describe('styleParser', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toContain('background-color:var(--css-my-vars-colors-background);');
   });
@@ -297,7 +297,7 @@ describe('styleParser', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toContain('background-color:var(--color);');
   });
@@ -315,7 +315,7 @@ describe('styleParser', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toContain('background-color:var(--css-my-vars-colors-background);');
   });
@@ -333,7 +333,7 @@ describe('styleParser', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toContain('--color:red;');
   });
@@ -349,7 +349,7 @@ describe('styleParser', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toContain('--css-my-vars-color:red;');
   });
@@ -365,7 +365,7 @@ describe('styleParser', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toContain('--css-my-vars-hoverColor:red;');
   });
@@ -381,7 +381,7 @@ describe('styleParser', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toContain('background-color:var(--css-my-vars-hoverColor);');
   });
@@ -399,7 +399,7 @@ describe('styleParser', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toContain('--css-my-vars-hover-color:red;');
   });
@@ -415,7 +415,7 @@ describe('styleParser', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toContain('background-color:var(--css-my-vars-color, red);');
   });
@@ -431,7 +431,7 @@ describe('styleParser', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toContain(
       'background-color:var(--css-my-vars-color, var(--css-my-vars-background));'
@@ -447,7 +447,7 @@ describe('styleParser', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts', {variables: {'--var-1': 'red'}}); //?
+    const result = transform(program, 'test.ts', {variables: {'--var-1': 'red'}});
 
     expect(result).toContain('background-color:var(--var-1, red);');
   });
@@ -463,7 +463,7 @@ describe('styleParser', () => {
 
     const result = transform(program, 'test.ts', {
       fallbackFiles: ['./modules/styling-transform/spec/_variables.css'],
-    }); //?
+    });
 
     expect(result).toContain('background-color:var(--var-1, red);');
   });
@@ -477,7 +477,7 @@ describe('styleParser', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toContain('css-12345');
     expect(result).toContain('background-color:red;');
@@ -494,7 +494,7 @@ describe('styleParser', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toContain('css-12345');
     expect(result).toContain('border:1px solid red;');
@@ -511,7 +511,7 @@ describe('styleParser', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toContain('css-12345');
     expect(result).toContain('border:1px solid var(--css-my-vars-borderColor);');
@@ -528,7 +528,7 @@ describe('styleParser', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toContain('css-12345');
     expect(result).toContain(
@@ -549,7 +549,7 @@ describe('styleParser', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toContain('color:blue;');
   });
@@ -578,7 +578,7 @@ describe('styleParser', () => {
       },
     ]);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toContain('color:blue;');
   });
