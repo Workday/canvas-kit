@@ -335,6 +335,7 @@ function getStyleFromProperty(
     // Spread assignments are a bit complicated to use the AST to figure out, so we'll ask the
     // TypeScript type checker.
     const type = checker.getTypeAtLocation(property.expression);
+    checker.typeToString(type); //?
     return parseStyleObjFromType(type, prefix, variables, checker);
   }
   return {};
@@ -357,7 +358,11 @@ function parseStyleObjFromType(
   return type.getProperties().reduce((result, property) => {
     const declaration = property.declarations[0];
     if (declaration) {
-      return {...result, ...getStyleFromProperty(declaration, prefix, variables, checker)};
+      const propType = checker.getTypeOfSymbolAtLocation(property, declaration);
+      return {
+        ...result,
+        [property.name]: getStyleValueFromType(declaration, propType, checker),
+      };
     }
     return result;
   }, styleObj);
