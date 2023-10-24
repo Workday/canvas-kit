@@ -519,11 +519,13 @@ export default function styleTransformer(
             return arg;
           });
 
-          return ts.factory.createCallExpression(
-            ts.factory.createIdentifier(styleExpressionName),
-            [],
-            newArguments
-          );
+          (node.arguments as any) = newArguments;
+          // The following code is correct according to TypeScript, but causes the commonjs module to create incorrect code
+          // return ts.factory.createCallExpression(
+          //   ts.factory.createIdentifier(styleExpressionName),
+          //   [],
+          //   newArguments
+          // );
         }
       }
 
