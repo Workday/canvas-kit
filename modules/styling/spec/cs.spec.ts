@@ -66,6 +66,26 @@ describe('createStyles', () => {
       // Test jsdom resolution of style properties
       expect(getComputedStyle(div).color).toEqual('red');
     });
+
+    it('should use the name if name is passed', () => {
+      const styles = createStyles({name: 'foo', styles: 'color: red;'});
+
+      expect(styles).toEqual('css-foo');
+
+      for (const sheet of document.styleSheets as StyleSheetList & Iterable<CSSStyleSheet>) {
+        for (const rule of sheet.cssRules as CSSRuleList & Iterable<CSSRule>) {
+          if (rule.cssText.includes(styles)) {
+            expect(rule.cssText).toContain(`.${styles} {color: red;}`);
+          }
+        }
+      }
+    });
+
+    it('should return the same className that was provided to provide extending', () => {
+      const styles = createStyles('my-class');
+
+      expect(styles).toEqual('my-class');
+    });
   });
 
   describe('cssVar', () => {
