@@ -4,7 +4,7 @@ import {serializeStyles} from '@emotion/serialize';
 import {base, brand} from '@workday/canvas-tokens-web';
 import path from 'node:path';
 
-import {slugify} from '@workday/canvas-kit-styling';
+import {slugify, generateUniqueId} from '@workday/canvas-kit-styling';
 import {getFallbackVariable, getVariablesFromFiles} from './getCssVariables';
 
 const styleExpressionName = 'createStyles';
@@ -368,8 +368,8 @@ function createStyleObjectNode(styleObj: Record<string, string>) {
     [
       ts.factory.createPropertyAssignment(
         ts.factory.createIdentifier('name'),
-        // TODO - this might cause a problem if we need to change `createStyles` to always return a unique ID and not a hash
-        ts.factory.createStringLiteral(serialized.name) // We might be using values that are resolved at runtime, but should still be static. We're only supporting the `cs` function running once per file, so a stable id based on a hash is not necessary
+        // TODO - we may need this to be a static variable for the CSS package
+        ts.factory.createStringLiteral(generateUniqueId()) // We might be using values that are resolved at runtime, but should still be static. We're only supporting the `cs` function running once per file, so a stable id based on a hash is not necessary
       ),
       ts.factory.createPropertyAssignment(
         ts.factory.createIdentifier('styles'),

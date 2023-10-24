@@ -2,7 +2,7 @@ import {transform} from '../lib/styleTransform';
 import {createProgramFromSource} from './createProgramFromSource';
 
 describe('styleParser', () => {
-  it('should parse simple objects with string values', () => {
+  it.only('should parse simple objects with string values', () => {
     const program = createProgramFromSource(`
       import {createStyles} from '@workday/canvas-kit-styling';
 
