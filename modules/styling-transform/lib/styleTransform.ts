@@ -12,7 +12,6 @@ const cssVarExpressionName = 'cssVar';
 const createVarExpressionName = 'createVars';
 const styleImportString = '@workday/canvas-kit-styling';
 
-// const styles: NestedStyleObject = {};
 const vars: Record<string, string> = {};
 
 export type NestedStyleObject = {[key: string]: string | NestedStyleObject};
@@ -276,18 +275,16 @@ function getStyleFromProperty(
       const argumentObject = property.expression.arguments[0];
       // defaults
       const defaults = {
-        width: 2,
-        separation: 0,
-        inset: undefined as undefined | 'inner' | 'outer',
+        width: '2px',
+        separation: '0px',
+        inset: undefined as undefined | string,
         innerColor: `var(${base.frenchVanilla100}, rgba(255,255,255,1))`,
         outerColor: `var(${brand.common.focusOutline}, rgba(8,117,225,1))`,
       };
       if (argumentObject && ts.isObjectLiteralExpression(argumentObject)) {
         argumentObject.properties.forEach(property => {
           if (ts.isPropertyAssignment(property) && ts.isIdentifier(property.name)) {
-            property.name.text; //?
-            property.initializer; //?
-            defaults[property.name.text] = parseStyleObjValue(
+            defaults[property.name.text as keyof typeof defaults] = parseStyleObjValue(
               property.initializer,
               variables,
               checker
@@ -315,8 +312,6 @@ function getStyleFromProperty(
     }
 
     const type = checker.getTypeAtLocation(property.expression);
-
-    checker.typeToString(type); //?
 
     return type.getProperties().reduce((result, prop) => {
       const propType = checker.getTypeOfSymbolAtLocation(prop, prop.valueDeclaration);
@@ -385,9 +380,6 @@ function createStyleObjectNode(styleObj: Record<string, string>) {
   );
 }
 
-// const variables: Record<string, string> = {};
-// const errors: Error[] = [];
-
 export interface StyleTransformerOptions {
   prefix: string;
   variables: Record<string, string>;
@@ -420,7 +412,6 @@ export default function styleTransformer(
       // eslint-disable-next-line no-param-reassign
       node = ts.visitEachChild(node, visit, context);
 
-      // try {
       if (
         ts.isCallExpression(node) &&
         ts.isIdentifier(node.expression) &&
@@ -460,12 +451,6 @@ export default function styleTransformer(
           );
         }
       }
-      // } catch (e) {
-      //   // If we got here, we cannot parse the node properly
-      //   errors.push(e);
-
-      //   return node;
-      // }
 
       /**
        * This will create a variable

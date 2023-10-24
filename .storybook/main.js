@@ -147,8 +147,6 @@ module.exports = {
             loader: require.resolve('ts-loader'),
             options: {
               compiler: 'ttypescript',
-              // transpileOnly: true,
-              // happyPackMode: true,
             },
           },
         ],
