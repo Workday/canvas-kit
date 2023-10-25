@@ -519,11 +519,43 @@ export default function styleTransformer(
             return arg;
           });
 
-          return ts.factory.createCallExpression(
-            ts.factory.createIdentifier(styleExpressionName),
-            [],
-            newArguments
-          );
+          newArguments.forEach(argument => {
+            // TypeScript isn't expecting us to mutate arguments arguments and when emitting will
+            // try to do something where it checks the `parent` node of the argument. Using
+            // `ts.factory.create*`, the `parent` is `undefined` and this check will throw an error.
+            // In order to get past this error, we manually update the `parent` node of each
+            // argument to reference the existing call expression. This allows TypeScript to fully
+            // type check and/or emit.
+            (argument as any).parent = node;
+          });
+
+          /**
+           * We're not supposed to mutate arguments since it is supposed to be read-only. But, if I
+           * return a new callExpression, there is no parent and it is no longer linked to the
+           * import module. This causes incorrect code when the module export type is `commonjs`.
+           * For example:
+           *
+           * ```ts
+           * // with new callExpression
+           * const canvas_kit_styling_1 = require(...)
+           *
+           * createStyles({...})
+           *
+           * // if we instead mutate arguments
+           * const canvas_kit_styling_1 = require(...)
+           *
+           * canvas_kit_styling_1.createStyles({...})
+           * ```
+           *
+           * My best guess as to why it fails when creating a new callExpression is the node's
+           * symbol declaration link gets lost. TypeScript then has no idea `createStyles` comes
+           * from an `ImportDeclaration` declaration node and when emitting `commonjs`, it doesn't
+           * prefix with the `canvas_kit_styling_1`. This is hacky, but the only thing that works
+           * correctly.
+           */
+          (node.arguments as any) = newArguments;
+
+          return node;
         }
       }
 
