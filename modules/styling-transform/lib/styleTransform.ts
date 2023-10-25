@@ -620,7 +620,7 @@ export function transform(
 
   return printer.printFile(
     ts
-      .transform(source, [styleTransformer(program, options)], {module: ts.ModuleKind.CommonJS})
+      .transform(source, [styleTransformer(program, options)])
       .transformed.find(s => (s.fileName = fileName)) || source
   );
 }
