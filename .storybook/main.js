@@ -138,21 +138,6 @@ module.exports = {
       createCompiler({}),
     ];
 
-    if (process.env.STATIC_CSS || configType === 'PRODUCTION') {
-      config.module.rules.push({
-        test: /.+react.+\.tsx?$/, // only React packages
-        include: [modulesPath],
-        loaders: [
-          {
-            loader: require.resolve('ts-loader'),
-            options: {
-              compiler: 'ttypescript',
-            },
-          },
-        ],
-        enforce: 'pre',
-      });
-    }
     return config;
   },
   babel: async options => ({
