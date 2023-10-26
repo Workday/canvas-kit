@@ -5035,12 +5035,26 @@
   dependencies:
     "@workday/design-assets-types" "0.2.8"
 
+"@workday/canvas-accent-icons-web@^3.0.9":
+  version "3.0.9"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-accent-icons-web/-/canvas-accent-icons-web-3.0.9.tgz#fd57b84f2ba55185feec9001b724d1fc24c594e3"
+  integrity sha512-H+BMdtwc/Sy+2r4viHNq9m3Bz11jRmOMlPavxLfEGkXZUcwYtLextXoFvgy+bH9xa+F/jzwMHzF+myW7BdoN1Q==
+  dependencies:
+    "@workday/design-assets-types" "0.2.10"
+
 "@workday/canvas-applet-icons-web@^2.0.0":
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@workday/canvas-applet-icons-web/-/canvas-applet-icons-web-2.0.1.tgz#4e47e11dd0aa301a7736847d0db798b20096fb24"
   integrity sha512-4RiCySs4HefJkqFFSNwskwWshV3Hfbld3U0mU//GFO2oYbQ4lM+Jxxkn83YWObb57e4QgsJoZ/CaLvyQ6dFCcQ==
   dependencies:
     "@workday/design-assets-types" "0.2.8"
+
+"@workday/canvas-applet-icons-web@^2.0.9":
+  version "2.0.9"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-applet-icons-web/-/canvas-applet-icons-web-2.0.9.tgz#31270e5dd4193af59a691ff9b418c111eb04026c"
+  integrity sha512-H18DaTJBaf5GXmjcMXMbYNRFszU/9fgXoccqNHbsnGt2YbWE9fnT6/QwYZFpGpa2jd5SbMS2VJcuQlOgS9jsrg==
+  dependencies:
+    "@workday/design-assets-types" "0.2.10"
 
 "@workday/canvas-colors-web@^2.0.0":
   version "2.0.0"
@@ -5054,10 +5068,15 @@
   dependencies:
     "@workday/design-assets-types" "0.2.8"
 
-"@workday/canvas-tokens-web@0.1.6":
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/@workday/canvas-tokens-web/-/canvas-tokens-web-0.1.6.tgz#8275fa0a27a2e206c376010ebe5ff3c6ac2eac28"
-  integrity sha512-EEzav3739i8R/wgPEBXKYnGIRmdURNs5gKCxHX17KRzdl5lCwzEmTRrVvHExO9zS/5M1ULb38BNE/4SAWlFs2Q==
+"@workday/canvas-tokens-web@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-tokens-web/-/canvas-tokens-web-1.0.0.tgz#4bab2d0f2fe52ecbbcd2731f0463c70942ae7f5e"
+  integrity sha512-VooVwG2wmL4VG/pNlw7IuzSsFkg3q3Y4oFuYvuVYGS5ZftX7uej1rq67dNzayhfnRDlMfo0Gv74LuRs355HtHg==
+
+"@workday/design-assets-types@0.2.10":
+  version "0.2.10"
+  resolved "https://registry.yarnpkg.com/@workday/design-assets-types/-/design-assets-types-0.2.10.tgz#ebcc16377951cd0449b885a467eb68c9e715e05f"
+  integrity sha512-8Za1aBNP5wIQrwOd/CrbFzlsfDLRP0yWTD6nGCR4+UFx5Dw4tEcQIQ01waW/CurBv9zDUxeWged4ld1rQkfQcg==
 
 "@workday/design-assets-types@0.2.8", "@workday/design-assets-types@^0.2.8":
   version "0.2.8"

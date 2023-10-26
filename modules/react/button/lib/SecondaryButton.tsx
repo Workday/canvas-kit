@@ -22,7 +22,7 @@ const secondaryStyles = createStyles({
   // Default Styles
   [buttonVars.default.background]: 'transparent',
   [buttonVars.default.border]: cssVar(base.blackPepper400, 'rgba(51,51,51,1)'),
-  [buttonVars.default.borderRadius]: cssVar(system.shape.circle, '999px'),
+  [buttonVars.default.borderRadius]: cssVar(system.shape.round, '62.5rem'),
   [buttonVars.default.label]: cssVar(base.blackPepper400, 'rgba(51,51,51,1)'),
   [buttonVars.default.icon]: cssVar(base.blackPepper400, 'rgba(51,51,51,1)'),
   // Hover Styles

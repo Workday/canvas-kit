@@ -22,7 +22,7 @@ const primaryStyles = createStyles({
   // Default Styles
   [buttonVars.default.background]: cssVar(brand.primary.base, cssVar(base.blueberry400, '#0875e1')),
   [buttonVars.default.border]: 'transparent',
-  [buttonVars.default.borderRadius]: cssVar(system.shape.circle, '999px'),
+  [buttonVars.default.borderRadius]: cssVar(system.shape.round, '62.5rem'),
   [buttonVars.default.label]: cssVar(brand.primary.accent, '#ffffff'),
   [buttonVars.default.icon]: cssVar(brand.primary.accent, '#ffffff'),
   // Hover Styles
@@ -55,7 +55,7 @@ export const primaryButtonModifiers = createModifiers({
     inverse: createStyles({
       // Default Styles
       [buttonVars.default.background]: cssVar(base.frenchVanilla100, '#ffffff'),
-      [buttonVars.default.borderRadius]: cssVar(system.shape.circle, '999px'),
+      [buttonVars.default.borderRadius]: cssVar(system.shape.round, '62.5rem'),
       [buttonVars.default.label]: cssVar(base.blackPepper400, 'rgba(51,51,51,1)'),
       [buttonVars.default.icon]: cssVar(base.blackPepper400, 'rgba(51,51,51,1)'),
       // Hover Styles

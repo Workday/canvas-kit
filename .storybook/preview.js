@@ -5,9 +5,9 @@ import routes from './routes';
 import {CanvasProviderDecorator} from '../utils/storybook';
 import theme from './theme';
 import {defaultCanvasTheme} from '@workday/canvas-kit-react/common';
-import "@workday/canvas-tokens-web/dist/css/base/_variables.css";
-import "@workday/canvas-tokens-web/dist/css/brand/_variables.css";
-import "@workday/canvas-tokens-web/dist/css/system/_variables.css";
+import "@workday/canvas-tokens-web/css/base/_variables.css";
+import "@workday/canvas-tokens-web/css/brand/_variables.css";
+import "@workday/canvas-tokens-web/css/system/_variables.css";
 
 // set routes on window for testing the validity of the routes
 window.__routes = routes;

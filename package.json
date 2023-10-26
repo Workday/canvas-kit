@@ -169,6 +169,9 @@
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
-    "@workday/canvas-tokens-web": "0.1.6"
+    "@workday/canvas-accent-icons-web": "^3.0.9",
+    "@workday/canvas-applet-icons-web": "^2.0.9",
+    "@workday/canvas-system-icons-web": "^3.0.0",
+    "@workday/canvas-tokens-web": "^1.0.0"
   }
 }
