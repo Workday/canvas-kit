@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.0.1](https://github.com/Workday/canvas-kit/releases/tag/v10.0.1) (2023-10-30)
+
+### Dependencies
+
+- chore: Update Canvas dependencies ([#2377](https://github.com/Workday/canvas-kit/pull/2377)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v10.0.0](https://github.com/Workday/canvas-kit/releases/tag/v10.0.0) (2023-10-25)
 
 ### BREAKING CHANGES
