@@ -49,9 +49,9 @@ const deleteStyles = createStyles({
  */
 export const DeleteButton = createComponent('button')({
   displayName: 'DeleteButton',
-  Component: ({children, cs, size, ...elemProps}: DeleteButtonProps, ref, Element) => {
+  Component: ({children, localCs, size, ...elemProps}: DeleteButtonProps, ref, Element) => {
     return (
-      <Button as={Element} ref={ref} size={size} cs={[deleteStyles, cs]} {...elemProps}>
+      <Button as={Element} ref={ref} size={size} {...elemProps} localCs={[deleteStyles, localCs]}>
         {children}
       </Button>
     );

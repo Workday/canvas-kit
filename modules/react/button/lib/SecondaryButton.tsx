@@ -87,7 +87,7 @@ export const secondaryButtonModifiers = createModifiers({
 export const SecondaryButton = createComponent('button')({
   displayName: 'SecondaryButton',
   Component: (
-    {children, icon, cs, iconPosition, variant, ...elemProps}: SecondaryButtonProps,
+    {children, icon, localCs, iconPosition, variant, ...elemProps}: SecondaryButtonProps,
     ref,
     Element
   ) => {
@@ -97,8 +97,8 @@ export const SecondaryButton = createComponent('button')({
         ref={ref}
         icon={icon}
         iconPosition={iconPosition}
-        cs={[secondaryStyles, secondaryButtonModifiers({variant: variant}), cs]}
         {...elemProps}
+        localCs={[secondaryStyles, secondaryButtonModifiers({variant: variant}), localCs]}
       >
         {children}
       </Button>

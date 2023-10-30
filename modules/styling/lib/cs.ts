@@ -269,18 +269,42 @@ export interface CSProps {
   /** The `cs` prop takes in a single value or an array of values. You can pass the CSS class name
    * returned by {@link createStyles}, or the result of {@link createVars} and
    * {@link createModifiers}. If you're extending a component already using `cs`, you can merge that
-   * prop in as well.
+   * prop in as well. Any style that is passed to the `cs` prop will override style props. If you
+   * wish to have styles that are overridden by style props, use `localCs`. The general rule is
+   * Canvas Kit components should use `localCs` and any component library wrapping Canvas Kit should
+   * also use `localCs`. Applications should use `cs`.
+   *
+   * By design, the `styled` API and `css` prop from Emotion will override both `localCs` and `cs`
+   * props.
+   *
    *
    * ```tsx
    * cs={[
-   *   cs, // from the prop list
    *   myStyles,
    *   myModifiers({ size: 'medium' }),
    *   myVars({ backgroundColor: 'red' })
+   *   cs, // from the prop list - for extending local props
    * ]}
    * ```
    */
   cs?: CSToPropsInput;
+  /**
+   * The `localCs` prop is included to support style props. It should be considered unstable and
+   * will be removed when style props are no longer supported. The idea is your component should
+   * only use `localCs` for styles your component uses. The `cs` prop is then exposed to users of
+   * the component and will always be merged last. The styling merge order goes: `[localCs,
+   * styleProps, cs]`. This ensures style props supersede `localCs` and `cs` supersedes both.
+   *
+   * ```tsx
+   * localCs={[
+   *   myStyles,
+   *   myModifiers({ size: 'medium' }),
+   *   myVars({ backgroundColor: 'red' })
+   *   localCs, // from the prop list - for extending local props
+   * ]}
+   * ```
+   */
+  localCs?: CSToPropsInput;
 }
 
 /**
@@ -383,9 +407,9 @@ export function handleCsProp<
 
     style?: React.CSSProperties | undefined;
   }
->({cs, style, className, ...props}: T) {
+>({cs, localCs, style, className, ...props}: T) {
   return {
-    ...csToProps([cs, className, style]),
+    ...csToProps([localCs, cs, className, style]),
     ...props,
   } as Omit<T, 'cs'>;
 }

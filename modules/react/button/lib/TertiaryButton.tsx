@@ -152,7 +152,7 @@ export const TertiaryButton = createComponent('button')({
       isThemeable,
       variant,
       iconPosition,
-      cs,
+      localCs,
       ...elemProps
     }: TertiaryButtonProps,
     ref,
@@ -173,16 +173,16 @@ export const TertiaryButton = createComponent('button')({
         icon={icon}
         iconPosition={iconPosition}
         size={size}
-        cs={[
+        {...elemProps}
+        localCs={[
           tertiaryStyles,
           tertiaryButtonModifiers({
             isThemeable: (isThemeable || baseIconPosition !== 'only') as any,
             variant: variant,
             iconPosition: getIconPosition(size, baseIconPosition),
           }),
-          cs,
+          localCs,
         ]}
-        {...elemProps}
       >
         {children}
       </Button>

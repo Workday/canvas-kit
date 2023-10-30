@@ -1,0 +1,154 @@
+import * as React from 'react';
+import styled from '@emotion/styled';
+import {jsx} from '@emotion/react';
+
+import {Flex, StylingBox} from '@workday/canvas-kit-react/layout';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {base} from '@workday/canvas-tokens-web';
+import {createStyles, cssVar} from '../../lib/cs';
+
+const backgroundColors = {
+  cssProp: cssVar(base.chiliMango500),
+  styledComponent: cssVar(base.kiwi500),
+  styleProps: cssVar(base.pomegranate500),
+  createStyles: cssVar(base.grapeSoda500),
+};
+
+const StyledPrimaryButton = styled(PrimaryButton)({
+  backgroundColor: backgroundColors.styledComponent,
+});
+
+const styles = createStyles({
+  backgroundColor: backgroundColors.createStyles,
+});
+
+const CSSProp = () => (
+  <div
+    style={{
+      color: 'white',
+      padding: '0 4px',
+      height: 40,
+      width: 100,
+      backgroundColor: backgroundColors.cssProp,
+    }}
+  >
+    CSS Prop
+  </div>
+);
+const StyledComponent = () => (
+  <div
+    style={{
+      color: 'white',
+      padding: '0 4px',
+      height: 40,
+      width: 100,
+      backgroundColor: backgroundColors.styledComponent,
+    }}
+  >
+    Styled Component
+  </div>
+);
+const CreateStyles = () => (
+  <div
+    style={{
+      color: 'white',
+      padding: '0 4px',
+      height: 40,
+      width: 100,
+      backgroundColor: backgroundColors.createStyles,
+    }}
+  >
+    createStyles
+  </div>
+);
+const StyleProps = () => (
+  <div
+    style={{
+      color: 'white',
+      padding: '0 4px',
+      height: 40,
+      width: 100,
+      backgroundColor: backgroundColors.styleProps,
+    }}
+  >
+    Style Props
+  </div>
+);
+
+// We use this object and cast to `{}` to keep TypeScript happy. Emotion extends the JSX interface
+// to include the `css` prop, but the `jsx` function type doesn't accept the `css` prop. Casting to
+// an empty object keeps TypeScript happy and the `css` prop is valid at runtime.
+const cssProp = {css: {backgroundColor: backgroundColors.cssProp}} as {};
+
+export const StylingOverrides = () => {
+  return (
+    <Flex flexDirection="column" minHeight="100vh" gap="s">
+      <Flex flexDirection="column" gap="s">
+        <h2>Buttons</h2>
+        <Flex flexDirection="row" gap="s">
+          {jsx(PrimaryButton, {...cssProp}, 'CSS Prop')}
+          <StyledPrimaryButton>Styled Component</StyledPrimaryButton>
+          <PrimaryButton cs={styles}>createStyles</PrimaryButton>
+          <PrimaryButton backgroundColor={backgroundColors.styleProps}>Style Props</PrimaryButton>
+        </Flex>
+        <div>{jsx(StyledPrimaryButton, {...cssProp}, 'CSS Prop + Styled Component')}</div>
+        <div>
+          {jsx(
+            PrimaryButton,
+            {
+              ...cssProp,
+              cs: backgroundColors.createStyles,
+            },
+            'CSS Prop + createStyles'
+          )}
+        </div>
+        <div>
+          {jsx(
+            PrimaryButton,
+            {
+              ...cssProp,
+              backgroundColor: backgroundColors.styleProps,
+            },
+            'CSS Prop + Style Props'
+          )}
+        </div>
+        <div>
+          {jsx(
+            StyledPrimaryButton,
+            {
+              ...cssProp,
+              backgroundColor: backgroundColors.styleProps,
+              cs: styles,
+            },
+            'CSS Prop + Styled Component + createStyles + Style Props'
+          )}
+        </div>
+        <div>
+          <StyledPrimaryButton cs={styles}>Styled Component + createStyles</StyledPrimaryButton>
+        </div>
+        <div>
+          <StyledPrimaryButton backgroundColor={backgroundColors.styleProps}>
+            Styled Component + Styled Props
+          </StyledPrimaryButton>
+        </div>
+        <div>
+          <StyledPrimaryButton backgroundColor={backgroundColors.styleProps} cs={styles}>
+            Styled Component + createStyles + Styled Props
+          </StyledPrimaryButton>
+        </div>
+        <div>
+          <PrimaryButton cs={styles} backgroundColor={backgroundColors.styleProps}>
+            createStyles + Style Props
+          </PrimaryButton>
+        </div>
+      </Flex>
+      <div>
+        <p>Legend:</p>
+        <CSSProp />
+        <StyledComponent />
+        <CreateStyles />
+        <StyleProps />
+      </div>
+    </Flex>
+  );
+};

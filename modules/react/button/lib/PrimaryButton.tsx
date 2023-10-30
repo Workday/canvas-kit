@@ -83,7 +83,7 @@ export const primaryButtonModifiers = createModifiers({
 export const PrimaryButton = createComponent('button')({
   displayName: 'PrimaryButton',
   Component: (
-    {children, icon, cs, iconPosition, variant, size, ...elemProps}: PrimaryButtonProps,
+    {children, icon, localCs, iconPosition, variant, size, ...elemProps}: PrimaryButtonProps,
     ref,
     Element
   ) => {
@@ -94,7 +94,7 @@ export const PrimaryButton = createComponent('button')({
         size={size}
         icon={icon}
         iconPosition={iconPosition}
-        cs={[primaryStyles, primaryButtonModifiers({variant: variant}), cs]}
+        localCs={[primaryStyles, primaryButtonModifiers({variant: variant}), localCs]}
         {...elemProps}
       >
         {children}
