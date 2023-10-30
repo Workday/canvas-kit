@@ -136,7 +136,7 @@ const baseButtonStyles = createStyles({
   whiteSpace: 'nowrap',
   WebkitFontSmoothing: 'antialiased',
   MozOsxFontSmoothing: 'grayscale',
-  borderRadius: cssVar(buttonVars.default.borderRadius, cssVar(system.shape.circle, '999px')),
+  borderRadius: cssVar(buttonVars.default.borderRadius, cssVar(system.shape.round, '62.5rem')),
   position: 'relative',
   verticalAlign: 'middle',
   overflow: 'hidden',
@@ -254,7 +254,7 @@ export const buttonModifiers = createModifiers({
   iconPosition: {
     largeOnly: createStyles({
       padding: '0',
-      minWidth: cssVar(system.space.x12, '3rem'),
+      minWidth: `calc(${cssVar(system.space.x4, '1rem')} * 3)`,
     }),
     largeStart: createStyles({
       paddingInlineStart: cssVar(system.space.x6, '1.5rem'),
@@ -266,12 +266,12 @@ export const buttonModifiers = createModifiers({
     }),
     mediumOnly: createStyles({padding: '0', minWidth: cssVar(system.space.x10, '2.5rem')}),
     mediumStart: createStyles({
-      paddingInlineStart: cssVar(system.space.x5, '1.25rem'),
+      paddingInlineStart: `calc(${cssVar(system.space.x1, '0.25rem')} * 5)`,
       paddingInlineEnd: cssVar(system.space.x6, '1.5rem'),
     }),
     mediumEnd: createStyles({
       paddingInlineStart: cssVar(system.space.x6, '1.5rem'),
-      paddingInlineEnd: cssVar(system.space.x5, '1.25rem'),
+      paddingInlineEnd: `calc(${cssVar(system.space.x1, '0.25rem')} * 5)`,
     }),
     smallOnly: createStyles({padding: '0', minWidth: cssVar(system.space.x8, '2rem')}),
     smallStart: createStyles({

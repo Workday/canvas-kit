@@ -16,7 +16,7 @@ export interface DeleteButtonProps extends ButtonProps {}
 const deleteStyles = createStyles({
   [buttonVars.default.background]: cssVar(brand.error.base, '#de2e21'),
   [buttonVars.default.border]: 'transparent',
-  [buttonVars.default.borderRadius]: cssVar(system.shape.circle, '999px'),
+  [buttonVars.default.borderRadius]: cssVar(system.shape.round, '62.5rem'),
   [buttonVars.default.label]: cssVar(brand.error.accent, '#ffffff'),
   '&:hover, &.hover': {
     [buttonVars.hover.background]: cssVar(brand.error.dark, '#a31b12'),

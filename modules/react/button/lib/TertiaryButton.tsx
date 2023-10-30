@@ -28,7 +28,7 @@ const tertiaryStyles = createStyles({
   // Default Styles
   [buttonVars.default.background]: 'transparent',
   [buttonVars.default.border]: 'transparent',
-  [buttonVars.default.borderRadius]: cssVar(system.shape.medium, '0.25rem'),
+  [buttonVars.default.borderRadius]: cssVar(system.shape.x1, '0.25rem'),
   [buttonVars.default.label]: cssVar(brand.primary.base, 'rgba(8,117,226,1)'),
   [buttonVars.default.icon]: cssVar(base.blackPepper400, 'rgba(51, 51, 51, 1)'),
   // Hover Styles
@@ -118,7 +118,7 @@ export const tertiaryButtonModifiers = createModifiers({
     largeOnly: createStyles({
       borderRadius: borderRadius.circle,
       padding: '0',
-      minWidth: cssVar(system.space.x12, '3rem'),
+      minWidth: `calc(${cssVar(system.space.x4, '1rem')} * 3)`,
     }),
     largeStart: createStyles({
       paddingInlineStart: space.xxs,
