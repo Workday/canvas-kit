@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.1.1",
+    "@emotion/css": "^11.7.1",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@popperjs/core": "^2.5.4",
