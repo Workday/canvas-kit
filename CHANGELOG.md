@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.0.2](https://github.com/Workday/canvas-kit/releases/tag/v10.0.2) (2023-10-31)
+
+### Components
+
+- fix: Pass colors prop to basebutton and button ([#2381](https://github.com/Workday/canvas-kit/pull/2381)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v10.0.1](https://github.com/Workday/canvas-kit/releases/tag/v10.0.1) (2023-10-30)
 
 ### Dependencies
