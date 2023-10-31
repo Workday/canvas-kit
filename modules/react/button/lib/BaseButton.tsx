@@ -319,7 +319,6 @@ export const BaseButton = createComponent('button')({
       fillIcon,
       iconPosition,
       icon,
-      colors,
       shouldMirrorIcon = false,
       ...elemProps
     }: ButtonContainerProps,
@@ -338,11 +337,11 @@ export const BaseButton = createComponent('button')({
             size: size,
             iconPosition: getIconPosition(size, iconPosition, children),
           }),
-          buttonVars.default(colors?.default || {}),
-          buttonVars.focus(colors?.focus || {}),
-          buttonVars.hover(colors?.hover || {}),
-          buttonVars.active(colors?.active || {}),
-          buttonVars.disabled(colors?.disabled || {}),
+          buttonVars.default(elemProps.colors?.default || {}),
+          buttonVars.focus(elemProps.colors?.focus || {}),
+          buttonVars.hover(elemProps.colors?.hover || {}),
+          buttonVars.active(elemProps.colors?.active || {}),
+          buttonVars.disabled(elemProps.colors?.disabled || {}),
           cs,
         ]}
         {...elemProps}
