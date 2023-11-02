@@ -3,7 +3,7 @@ import {Box, Grid, Flex} from '@workday/canvas-kit-react/layout';
 import {Text} from '@workday/canvas-kit-react/text';
 import {useResponsiveContainerStyles, useResizeObserver} from '@workday/canvas-kit-react/common';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {Select, SelectOption} from '@workday/canvas-kit-react/select';
+import {Select} from '@workday/canvas-kit-react/select';
 
 const HeadingText = ({children, ...props}) => (
   <Text as="p" fontSize={20} fontWeight="bold" color="frenchVanilla100" margin={0} {...props}>
@@ -77,22 +77,21 @@ export const ResponsiveContainer = () => {
 
   const [contWidth, setContWidth] = React.useState(desktop);
 
-  const [value, setValue] = React.useState('desktop');
-
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedItemWidth = event.target[event.target.selectedIndex].label;
-    setValue(event.target.value);
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     // eslint-disable-next-line radix
-    setContWidth(parseInt(selectedItemWidth));
+    setContWidth(parseInt(event.target.value));
   };
 
   return (
     <Box ref={ref} width={contWidth}>
       <FormField label={'Container Size'}>
-        <Select onChange={handleChange} value={value}>
-          <SelectOption label="1024px" value="desktop" />
-          <SelectOption label="768px" value="tablet" />
-          <SelectOption label="320px" value="mobile" />
+        <Select items={['1024px', '768px', '320px']} initialSelectedIds={['1024px']}>
+          <Select.Input onChange={handleChange} />
+          <Select.Popper>
+            <Select.Card>
+              <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
+            </Select.Card>
+          </Select.Popper>
         </Select>
       </FormField>
       <Grid as="section">

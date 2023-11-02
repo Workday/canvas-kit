@@ -1,0 +1,178 @@
+import {EmotionButton} from './examples/EmotionButton';
+import {ManualStylesButton} from './examples/ManualStylesButton';
+import {StylingButton} from './examples/StylingButton';
+
+<Meta title="Features/Styling/From Emotion" />
+
+# Converting from @emotion/styled
+
+The most difficult part of understanding styling without Emotion's runtime is the mindset shift. You
+are using CSS to merge properties instead of JavaScript. This is essential to remove the runtime of
+Emotion. We'll use a contrived button example using `@emotion/styled` and our styling solution to
+step through the differences.
+
+## Button using `@emotion/styled`
+
+<ExampleCodeBlock code={EmotionButton} />
+
+If we inspect each button, we'll notice each has a different class name. They all look like
+`css-{hash}`:
+
+For example, the Primary buttons:
+
+- Primary Large: `css-oqv33j`
+- Primary Medium: `css-1nhzlx`
+- Primary Small: `css-1ygk6q`
+
+This means each button is a unique style sheet insert by Emotion. If we render each permutation at
+once, there will only be one expensive
+[style recalculation](https://microsoftedge.github.io/DevTools/explainers/StyleTracing/explainer.html)
+
+Converting to use the Canvas Kit Styling solution means organizing a little different. In our
+example, it is already organized well, but conditionals might be anywhere in the style functions and
+will need to be organized in groups.
+
+## Button using only `createStyles`
+
+What are we really trying to accomplish? [BEM](https://getbem.com/introduction) fits well with
+compound components. BEM stands for Block, Element, Modifer. In compound components, "Block" refers
+to a container component while "Element" refers to subcomponets. The "Modifer" refers to changing
+the appearance of a block.
+
+In our example, all styles that are common to all appearances of our button. It might be
+`borderRadius`, `fontFamily`. We can use `createStyles` to define these styles:
+
+```ts
+const baseStyles = createStyles({
+  fontSize: '1rem',
+  display: 'flex',
+  borderRadius: '1rem',
+});
+```
+
+The `variant` modifiers use a variable prop called `backgroundColor` which cannot be variable at
+runtime. We need to use a CSS Variable for this.
+
+We can create modifers using `createStyles` and organize them in an object:
+
+```ts
+const modifierStyles = {
+  variant: {
+    primary: createStyles({
+      background: `var(--button-background-color, blue)`,
+      color: 'white',
+    }),
+    secondary: createStyles({
+      background: `var(--button-background-color, gray)`,
+    }),
+    danger: createStyles({
+      background: `var(--button-background-color, red)`,
+    }),
+  },
+  size: {
+    large: createStyles({
+      fontSize: '1.4rem',
+      height: '2rem',
+    }),
+    medium: createStyles({
+      fontSize: '1rem',
+      height: '1.5rem',
+    }),
+    small: createStyles({
+      fontSize: '0.8rem',
+      height: '1.2rem',
+    }),
+  },
+};
+```
+
+Each modifier value uses `createStyles` which returns a different class name. This means we can
+create a "Primary Large" button by applying these modifiers to the `className` prop of a React
+element:
+
+```jsx
+<button className={`${baseStyles} ${modifierStyles.variant.primary} ${modifierStyles.size.large}`}>
+  Primary Large
+</button>
+```
+
+This will create a button with 3 separate class names applied. `@emotion/styled` only applies a
+single css class name.
+
+```html
+<!-- @emotion/styled -->
+<button class="css-108wq52">Primary Large</button>
+
+<!-- createStyles -->
+<button class="css-puxv12 css-puxv13 css-puxv16">Primary Large</button>
+```
+
+If you want to change the background color, you'll have to pass it using `style`:
+
+```jsx
+<button
+  className={`${baseStyles} ${modifierStyles.size.large}`}
+  style={{'--background-button-color': 'orange'}}
+>
+  Orange Large
+</button>
+```
+
+The output HTML will look like:
+
+```html
+<button class="css-puxv12 css-puxv16" style="--background-button-color: orange;">
+  Orange Large
+</button>
+```
+
+This works because CSS Custom Properties cascade values. The `style` attribute defines styles on the
+element directly. This is a runtime in React that allows us to change a style without a new style
+block - the styles can be static, but we can still have variable property values.
+
+<ExampleCodeBlock code={ManualStylesButton} />
+
+## Button using all utilities
+
+If we want variables that are hashed and make it easier to define and use, we have `createVars`.
+There are also edge cases for modifiers like allowing `undefined`, so we made a `createModifiers`
+function as well. Both `createModifiers` and `createVars` return a function that makes it easier to
+call with inputs and will return the correct output.
+
+For example, `createModifiers`:
+
+```tsx
+const myModifiers = createModifiers({
+  size: {
+    large: 'button-large',
+    small: 'button-small'
+  }
+})
+
+myModifiers.size.large // 'button-large'
+
+// the function knows what config can be passed
+// and what restrictions each value has
+myModifiers({size: 'large'}) // 'button-large'
+myModifiers({size: 'small'}) // 'button-small'
+myModifiers() // ''
+
+// in a component
+<div className={myModifiers({size: 'large'})} /> // <div class="button-large" />
+```
+
+`createVars`:
+
+```tsx
+const myVars = createVars('background', 'color')
+
+myVars.color // something like `--{hash}-color`
+
+// the function knows what keys are allowed
+myVars({color: 'red'}) // {'--{hash}-color': 'red'}
+
+// in a component
+<div style={myVars({color: 'red'})} /> // <div style="--{hash}-color: red;">
+```
+
+<ExampleCodeBlock code={StylingButton} />

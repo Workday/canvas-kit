@@ -12,7 +12,7 @@ import {
   Themeable,
   useLocalRef,
 } from '@workday/canvas-kit-react/common';
-import {borderRadius, colors, inputColors, spaceNumbers} from '@workday/canvas-kit-react/tokens';
+import {borderRadius, colors, inputColors, space} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import {LabelText} from '@workday/canvas-kit-react/text';
@@ -61,17 +61,10 @@ export interface CheckboxProps extends Themeable {
   variant?: 'inverse' | undefined;
 }
 
-const checkboxHeight = 18;
-const checkboxTapArea = spaceNumbers.m;
-const checkboxContainerHeight = checkboxTapArea;
-const checkboxLabelDistance = spaceNumbers.xs;
-const checkboxWidth = 18;
-const rippleRadius = (spaceNumbers.l - checkboxWidth) / 2;
-
 const CheckboxContainer = styled('div')({
   display: 'flex',
   alignItems: 'center',
-  minHeight: checkboxContainerHeight,
+  minHeight: space.m,
   position: 'relative',
 });
 
@@ -82,8 +75,8 @@ const CheckboxContainer = styled('div')({
  */
 const CheckboxInputWrapper = styled('div')<Pick<CheckboxProps, 'disabled'>>({
   display: 'flex',
-  height: checkboxHeight,
-  minWidth: checkboxWidth,
+  height: `calc(${space.s} + 2px)`,
+  minWidth: `calc(${space.s} + 2px)`,
   marginTop: '3px',
   alignSelf: 'flex-start',
 });
@@ -92,9 +85,9 @@ const CheckboxRipple = styled('span')<Pick<CheckboxProps, 'disabled' | 'variant'
   {
     borderRadius: borderRadius.circle,
     boxShadow: `0 0 0 0 ${colors.soap200}`,
-    height: checkboxHeight,
+    height: `calc(${space.s} + 2px)`,
     transition: 'box-shadow 150ms ease-out',
-    width: checkboxWidth,
+    width: `calc(${space.s} + 2px)`,
     position: 'absolute',
     pointerEvents: 'none', // This is a decorative element we don't want it to block clicks to input
   },
@@ -120,8 +113,8 @@ const CheckboxInput = styled('input')<CheckboxProps & StyledType>(
     variant,
   }) => ({
     borderRadius: borderRadius.s,
-    width: checkboxTapArea,
-    height: checkboxTapArea,
+    width: space.m,
+    height: space.m,
     margin: 0,
     marginTop: '-3px',
     marginLeft: '-3px',
@@ -133,11 +126,12 @@ const CheckboxInput = styled('input')<CheckboxProps & StyledType>(
     },
 
     // States
-    '&:not(:checked):not(:indeterminate):not(:disabled):not(:focus):hover, &:not(:checked):not(:indeterminate):not(:disabled):active': {
-      '~ div:first-of-type': {
-        borderColor: variant === 'inverse' ? colors.soap300 : inputColors.hoverBorder,
+    '&:not(:checked):not(:indeterminate):not(:disabled):not(:focus):hover, &:not(:checked):not(:indeterminate):not(:disabled):active':
+      {
+        '~ div:first-of-type': {
+          borderColor: variant === 'inverse' ? colors.soap300 : inputColors.hoverBorder,
+        },
       },
-    },
     '&:checked ~ div:first-of-type, &:indeterminate ~ div:first-of-type': {
       borderColor: variant === 'inverse' ? colors.soap300 : themePrimary.main,
       backgroundColor: variant === 'inverse' ? colors.frenchVanilla100 : themePrimary.main,
@@ -204,7 +198,9 @@ const CheckboxInput = styled('input')<CheckboxProps & StyledType>(
   }),
   ({disabled}) => ({
     '&:hover ~ span:first-of-type': {
-      boxShadow: disabled ? undefined : `0 0 0 ${rippleRadius}px ${colors.soap200}`,
+      boxShadow: disabled
+        ? undefined
+        : `0 0 0 calc((${space.l} - (${space.s} + 2px)) / 2) ${colors.soap200}`,
     },
   }),
   ({theme, error, variant}) => {
@@ -220,11 +216,12 @@ const CheckboxInput = styled('input')<CheckboxProps & StyledType>(
           variant === 'inverse' ? `1px solid ${colors.soap300}` : `1px solid ${errorColors.inner}`,
         boxShadow: `0 0 0 1px ${errorColors.inner}, 0 0 0 2px ${errorColors.outer}`,
       },
-      '&:not(:checked):not(:indeterminate):not(:disabled):not(:focus):hover, &:not(:checked):not(:indeterminate):not(:disabled):active': {
-        '~ div:first-of-type': {
-          borderColor: variant === 'inverse' ? `1px solid ${colors.soap300}` : errorColors.inner,
+      '&:not(:checked):not(:indeterminate):not(:disabled):not(:focus):hover, &:not(:checked):not(:indeterminate):not(:disabled):active':
+        {
+          '~ div:first-of-type': {
+            borderColor: variant === 'inverse' ? `1px solid ${colors.soap300}` : errorColors.inner,
+          },
         },
-      },
       '&:checked ~ div:first-of-type, &:indeterminate ~ div:first-of-type': {
         borderColor: variant === 'inverse' ? colors.soap300 : theme.canvas.palette.primary.main,
         boxShadow: `
@@ -254,13 +251,13 @@ const CheckboxBackground = styled('div')<CheckboxProps>(
     borderRadius: borderRadius.s,
     boxSizing: 'border-box',
     display: 'flex',
-    height: checkboxHeight,
+    height: `calc(${space.s} + 2px)`,
     justifyContent: 'center',
     padding: '0px 2px',
     pointerEvents: 'none',
     position: 'absolute',
     transition: 'border 200ms ease, background 200ms',
-    width: checkboxWidth,
+    width: `calc(${space.s} + 2px)`,
   },
   ({variant}) => ({
     border: `1px solid ${variant === 'inverse' ? colors.soap300 : inputColors.border}`,
@@ -367,7 +364,7 @@ export const Checkbox = createComponent('input')({
             htmlFor={inputId}
             disabled={disabled}
             variant={variant}
-            paddingInlineStart={checkboxLabelDistance}
+            paddingInlineStart={space.xs}
             cursor="pointer"
           >
             {label}

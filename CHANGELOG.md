@@ -3,6 +3,140 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.0.2](https://github.com/Workday/canvas-kit/releases/tag/v10.0.2) (2023-10-31)
+
+### Components
+
+- fix: Pass colors prop to basebutton and button ([#2381](https://github.com/Workday/canvas-kit/pull/2381)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v10.0.1](https://github.com/Workday/canvas-kit/releases/tag/v10.0.1) (2023-10-30)
+
+### Dependencies
+
+- chore: Update Canvas dependencies ([#2377](https://github.com/Workday/canvas-kit/pull/2377)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v10.0.0](https://github.com/Workday/canvas-kit/releases/tag/v10.0.0) (2023-10-25)
+
+### BREAKING CHANGES
+
+- [#2229](https://github.com/Workday/canvas-kit/pull/2229) There is the possibility of breaking changes if users are changing the default browser font size from `16px` to another value. 
+  
+  You can convert a `px` value to a `rem` value by dividing your `px` value by `16`(if your default browser font size hasn't been updated, the value will be `16`).
+  
+  For example:
+  
+  | Equation    | rem Value |
+  | ----------- | --------- |
+  | `16px/16px` | `1rem`    |
+  | `32px/16px` | `2rem`    |
+  | `8px/16px`  | `0.5rem`  |
+- [#2247](https://github.com/Workday/canvas-kit/pull/2247) To move from the Menu component in Preview to the Menu compound component in Main, please read [this discussion](https://github.com/Workday/canvas-kit/discussions/2063).
+  
+  Also, see [this](https://codesandbox.io/s/deprecatedmenu-and-menu-migration-gwi1ov) codesandbox that shows the differences between DeprecatedMenu and the Menu compound component.
+- [#2318](https://github.com/Workday/canvas-kit/pull/2318) We have removed the useBanner hook, the only function of which was to add `aria-labelledby` and `aria-describedby` references to the text inside of the Banner. This was not required for accessibility, and browsers can compute the `name` of the Banner from the text given inside.
+- [#2285](https://github.com/Workday/canvas-kit/pull/2285) - We refactored how we styled Buttons to use our `createStyles` utility function. We don't anticipate
+  this as a breaking change but, there may be slight changes to visual test.
+  - Icons will no longer be "filled" on toggle. This decision was made to not have the existing icon
+  look different in the toggled state from default state.
+  - `PrimaryButton`: On the `inverse` variant, the focus ring is now consistent with the default variant of `PrimaryButton`. This will visually change the `inverse` variant to have a larger appearance when focused. 
+  - `colors` will no longer support the `focusRing` option:
+    ```tsx
+    import {focusRing} from '@workday/canvas-kit-react/common';
+  
+    // before
+    <PrimaryButton
+      colors={{
+        // other colors
+        focus: {
+          // other colors
+        focusRing: focusRing(/* options */)
+        }
+      }}
+    />
+  
+    // after
+    <PrimaryButton
+      colors={{
+        // other colors
+        focus: {
+          // other colors
+        }
+      }}
+      css={{
+        ':focus-visible': focusRing(/* options */)
+      }}
+    />;
+    ```
+- [#2309](https://github.com/Workday/canvas-kit/pull/2309) - We've converted `Select` in Main into a compound component. This component matches our pattern of providing access to lower-level elements and allows for more flexibility. 
+  - The spacing between menu and its target element will increase from 0px to 4px
+  - We've also [deprecated](https://canvas.workday.com/getting-started/canvas-glossary#deprecation) the `Select` in Preview. You may still consume this component but suggest migrating over to the one in Main.
+- [#2368](https://github.com/Workday/canvas-kit/pull/2368) The CSS kit is being removed in v10 and will come back later as derived from our React packages.
+
+### Codemods
+
+- feat: Set initial v10 codemod ([#2239](https://github.com/Workday/canvas-kit/pull/2239)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+### Components
+
+- feat: Update space and depth tokens to rem ([#2229](https://github.com/Workday/canvas-kit/pull/2229)) ([@josh-bagwell](https://github.com/josh-bagwell), [@alanbsmith](https://github.com/alanbsmith), [@bstanton678](https://github.com/bstanton678), [@mannycarrera4](https://github.com/mannycarrera4))
+  Updated `depth` and `space` token values to use `rem` instead of `px`.
+- feat: Remove Menu Preview ([#2247](https://github.com/Workday/canvas-kit/pull/2247)) ([@josh-bagwell](https://github.com/josh-bagwell))
+  This will not involve a codemod since the API has too many differences between the component being removed in Preview and the component in Main.
+- fix: Changing ARIA role to switch ([#2292](https://github.com/Workday/canvas-kit/pull/2292)) ([@williamjstanton](https://github.com/williamjstanton), [@alanbsmith](https://github.com/alanbsmith))
+- refactor: Removing aria attributes from Banner component ([#2318](https://github.com/Workday/canvas-kit/pull/2318)) ([@williamjstanton](https://github.com/williamjstanton), [@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- fix: Revert removal of Menu in Preview ([#2335](https://github.com/Workday/canvas-kit/pull/2335)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  We're going to continue supporting the Menu in Preview until we implement grouped menu items (with virtualization) for the Menu in Main.
+- feat: Deprecate InputIconContainer ([#2332](https://github.com/Workday/canvas-kit/pull/2332)) ([@dgubko](https://github.com/dgubko), [@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  `InputIconContainer` has been deprecated, because it does not handle bidirectionally or icons at the start of an input. Please use [`InputGroup`](https://workday.github.io/canvas-kit/?path=/story/components-inputs-text-input--icons) instead.
+- feat: Deprecated Table in Main ([#2344](https://github.com/Workday/canvas-kit/pull/2344)) ([@thunguyen19](https://github.com/thunguyen19), [@mannycarrera4](https://github.com/mannycarrera4))
+- feat: Add CSS styling function ([#2273](https://github.com/Workday/canvas-kit/pull/2273)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  This change introduces an intermediate step towards static styling. The style function takes in statically analyzable style definitions with modifiers, variables, and static styles to create styling to be used in components. It can later be interpreted at build time to create CSS packages.
+- chore: Refactored Button styles to use `createStyles` utility ([#2285](https://github.com/Workday/canvas-kit/pull/2285)) ([@josh-bagwell](https://github.com/josh-bagwell))
+- feat: Convert Select from Main into a compound component ([#2309](https://github.com/Workday/canvas-kit/pull/2309)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@RayRedGoose](https://github.com/RayRedGoose), [@jamesfan](https://github.com/jamesfan))
+- chore: Remove CSS packages ([#2368](https://github.com/Workday/canvas-kit/pull/2368)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- fix: Set a default theme in canvas provider ([#2371](https://github.com/Workday/canvas-kit/pull/2371)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- chore(button): Add CSS Variable fallbacks ([#2372](https://github.com/Workday/canvas-kit/pull/2372)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Documentation
+
+- chore: Adding v10 upgrade guide ([#2237](https://github.com/Workday/canvas-kit/pull/2237)) ([@jaclynjessup](https://github.com/jaclynjessup))
+- docs: Fix Select examples ([#2370](https://github.com/Workday/canvas-kit/pull/2370)) ([@jamesfan](https://github.com/jamesfan))
+- docs: Clean up v10 Upgrade Guide ([#2358](https://github.com/Workday/canvas-kit/pull/2358)) ([@jamesfan](https://github.com/jamesfan), manuel.carrera, [@NicholasBoll](https://github.com/NicholasBoll))
+
+### Infrastructure
+
+- chore: Make the styling package publish ([@NicholasBoll](https://github.com/NicholasBoll))
+- fix: Fix version numbers ([#2373](https://github.com/Workday/canvas-kit/pull/2373)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- feat: Add static style transform ([#2374](https://github.com/Workday/canvas-kit/pull/2374)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- fix: Fix commonjs styling transform ([#2375](https://github.com/Workday/canvas-kit/pull/2375)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Tokens
+
+- fix: Revert spaceNumber values to pixel values and deprecate it ([#2345](https://github.com/Workday/canvas-kit/pull/2345)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@josh-bagwell](https://github.com/josh-bagwell))
+  We've [deprecated](https://canvas.workday.com/getting-started/canvas-glossary#deprecation) `spaceNumbers` and encourage users to use our [rem](https://www.sitepoint.com/understanding-and-using-rem-units-in-css/) based `space` tokens.
+
+
+## [v9.1.26](https://github.com/Workday/canvas-kit/releases/tag/v9.1.26) (2023-10-20)
+
+### Components
+
+- fix: Force PrimaryButton text color in all states ([#2364](https://github.com/Workday/canvas-kit/pull/2364)) ([@anicholls](https://github.com/anicholls))
+
+
+## [v9.1.25](https://github.com/Workday/canvas-kit/releases/tag/v9.1.25) (2023-10-20)
+
+### Components
+
+- fix(collection): Set correct aria-setsize in virtualized collections ([#2362](https://github.com/Workday/canvas-kit/pull/2362)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v8.6.25](https://github.com/Workday/canvas-kit/releases/tag/v8.6.25) (2023-10-20)
+
+### Components
+
+- fix(collection): Set correct aria-setsize in virtualized collections ([#2362](https://github.com/Workday/canvas-kit/pull/2362)) ([@NicholasBoll](https://github.com/NicholasBoll))
 ## [v9.1.24](https://github.com/Workday/canvas-kit/releases/tag/v9.1.24) (2023-10-16)
 
 ### Components
