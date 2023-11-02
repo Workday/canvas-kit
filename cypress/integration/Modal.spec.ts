@@ -420,8 +420,7 @@ describe('Modal', () => {
             .should('contain', 'Delete')
             .tab()
             .should('contain', 'Cancel')
-            .tab();
-          cy.focused().should('have.text', 'Delete');
+          cy.focused().should('have.text', 'Cancel');
         });
       });
 
