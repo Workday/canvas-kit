@@ -3,7 +3,7 @@ import {Modal} from '@workday/canvas-kit-react/modal';
 import {Box, BoxProps, Flex} from '@workday/canvas-kit-react/layout';
 import {Text} from '@workday/canvas-kit-react/text';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {spaceNumbers} from '@workday/canvas-kit-react/tokens';
+import {space} from '@workday/canvas-kit-react/tokens';
 import {createComponent} from '@workday/canvas-kit-react/common';
 
 const MediaImage = createComponent('img')({
@@ -36,8 +36,8 @@ const Media = createComponent('div')({
       <Box
         as={Element}
         ref={ref}
-        width={`calc(100% + ${spaceNumbers.l * 2}px)`}
-        marginLeft={`-${spaceNumbers.l}px`}
+        width={`calc(100% + (${space.l} * 2))`}
+        marginLeft={`calc(-${space.l})`}
         marginTop="m"
         marginBottom="s"
         {...elemProps}

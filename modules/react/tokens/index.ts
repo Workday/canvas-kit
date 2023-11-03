@@ -11,7 +11,12 @@ import {
   typeColors,
 } from '@workday/canvas-colors-web';
 
-import {borderRadius, CanvasBorderRadius, CanvasBorderRadiusKeys, CanvasBorderRadiusValues} from './lib/radius';
+import {
+  borderRadius,
+  CanvasBorderRadius,
+  CanvasBorderRadiusKeys,
+  CanvasBorderRadiusValues,
+} from './lib/radius';
 import {BrandingColor, CanvasColor} from './lib/colors.types';
 import {depth, CanvasDepth, CanvasDepthValues} from './lib/depth';
 import {
@@ -23,7 +28,8 @@ import {
   CanvasSpaceNumbers,
   spaceNumbers,
 } from './lib/space';
-import {type,
+import {
+  type,
   fontFamily,
   monoFontFamily,
   CanvasType,
@@ -82,4 +88,4 @@ export type {
   CanvasTypeVariants,
   CanvasTypeHierarchy,
   CSSProperties,
-}
+};

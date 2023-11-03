@@ -5,6 +5,9 @@ import routes from './routes';
 import {CanvasProviderDecorator} from '../utils/storybook';
 import theme from './theme';
 import {defaultCanvasTheme} from '@workday/canvas-kit-react/common';
+import "@workday/canvas-tokens-web/css/base/_variables.css";
+import "@workday/canvas-tokens-web/css/brand/_variables.css";
+import "@workday/canvas-tokens-web/css/system/_variables.css";
 
 // set routes on window for testing the validity of the routes
 window.__routes = routes;
@@ -34,7 +37,9 @@ function storySort(a, b) {
     prefix('basic', 'aa'),
     prefix('default', 'ab'),
     prefix('testing', 'zzz'),
-    prefix('examples', 'zz')
+    prefix('examples', 'zz'),
+    // Make sure upgrade guides follow chronological order by replacing `v9.0` with `v09.0`
+    value => value.replace(/v([1-9]\-0)/, '0$1')
   );
 
   const left = prefixFn(a[0]);

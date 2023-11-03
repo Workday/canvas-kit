@@ -12,13 +12,13 @@ export interface ButtonStateColors {
   opacity?: string;
 }
 export interface ButtonColors {
-  default: ButtonStateColors;
-  hover: ButtonStateColors;
-  active: ButtonStateColors;
-  focus: ButtonStateColors & {
+  default?: ButtonStateColors;
+  hover?: ButtonStateColors;
+  active?: ButtonStateColors;
+  focus?: ButtonStateColors & {
     focusRing?: CSSObject;
   };
-  disabled: ButtonStateColors;
+  disabled?: ButtonStateColors;
 }
 
 /**
@@ -28,6 +28,4 @@ export interface ButtonColors {
  * @default 'medium'
  */
 export type ButtonSizes = 'extraSmall' | 'small' | 'medium' | 'large';
-// TODO: Remove TertiaryButtonSizes in favor of button sizes when we add Tertiary large
-export type TertiaryButtonSizes = 'extraSmall' | 'small' | 'medium';
-export type IconPositions = 'start' | 'end';
+export type IconPositions = 'start' | 'end' | 'only';
