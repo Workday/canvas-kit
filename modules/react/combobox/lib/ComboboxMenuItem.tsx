@@ -14,7 +14,7 @@ import {
 } from '@workday/canvas-kit-react/collection';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 
-import {useComboboxModel} from './hooks';
+import {useComboboxModel} from './hooks/useComboboxModel';
 
 export interface ComboboxMenuItemProps {
   children: React.ReactNode;

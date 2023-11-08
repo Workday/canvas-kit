@@ -5,12 +5,10 @@ import {usePopupTarget} from '@workday/canvas-kit-react/popup';
 
 import {useListActiveDescendant} from '@workday/canvas-kit-react/collection';
 
-import {
-  useComboboxModel,
-  useComboboxInputOpenWithArrowKeys,
-  useSetPopupWidth,
-  useComboboxListKeyboardHandler,
-} from './index';
+import {useComboboxModel} from './useComboboxModel';
+import {useComboboxInputOpenWithArrowKeys} from './useComboboxInputOpenWithArrowKeys';
+import {useSetPopupWidth} from './useSetPopupWidth';
+import {useComboboxListKeyboardHandler} from './useComboboxListKeyboardHandler';
 
 /**
  * `useComboboxInput` Adds all attributes necessary to start with a {@link ComboboxInput Combobox.Input}. It opens the

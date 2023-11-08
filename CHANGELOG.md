@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.0.4](https://github.com/Workday/canvas-kit/releases/tag/v10.0.4) (2023-11-08)
+
+### Components
+
+- fix(select): Fix circular import statement ([#2386](https://github.com/Workday/canvas-kit/pull/2386)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v10.0.3](https://github.com/Workday/canvas-kit/releases/tag/v10.0.3) (2023-11-03)
 
 

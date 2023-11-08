@@ -3,7 +3,8 @@ import React from 'react';
 import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 
-import {useComboboxModel, useComboboxInput} from './hooks';
+import {useComboboxModel} from './hooks/useComboboxModel';
+import {useComboboxInput} from './hooks/useComboboxInput';
 
 export const ComboboxInput = createSubcomponent(TextInput)({
   modelHook: useComboboxModel,
