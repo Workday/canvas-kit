@@ -1,10 +1,12 @@
 import React from 'react';
-import {generateUniqueId} from './uniqueId';
 // eslint-disable-next-line @emotion/no-vanilla
-import {css} from '@emotion/css';
+import {cache, css} from '@emotion/css';
 import {serializeStyles, Keyframes, SerializedStyles, CSSObject} from '@emotion/serialize';
 
+import {generateUniqueId} from './uniqueId';
 import {slugify} from './slugify';
+
+export const createStylesCache: Record<string, boolean> = {};
 
 /**
  * Style properties in a JavaScript camelCase. Everything Emotion allows is also
@@ -270,41 +272,29 @@ export interface CSProps {
    * returned by {@link createStyles}, or the result of {@link createVars} and
    * {@link createModifiers}. If you're extending a component already using `cs`, you can merge that
    * prop in as well. Any style that is passed to the `cs` prop will override style props. If you
-   * wish to have styles that are overridden by style props, use `localCs`. The general rule is
-   * Canvas Kit components should use `localCs` and any component library wrapping Canvas Kit should
-   * also use `localCs`. Applications should use `cs`.
-   *
-   * By design, the `styled` API and `css` prop from Emotion will override both `localCs` and `cs`
-   * props.
+   * wish to have styles that are overridden by style props, the `css` prop, or styles added via
+   * the `styled` API, use {@link mergeStyles} wherever `elemProps` is used.
    *
    *
    * ```tsx
-   * cs={[
-   *   myStyles,
-   *   myModifiers({ size: 'medium' }),
-   *   myVars({ backgroundColor: 'red' })
-   *   cs, // from the prop list - for extending local props
-   * ]}
+   * import {mergeStyles} from '@workday/canvas-kit-react/layout';
+   *
+   * // ...
+   *
+   * return (
+   *   <Element
+   *     {...mergeStyles(elemProps, [
+   *       myStyles,
+   *       myModifiers({ size: 'medium' }),
+   *       myVars({ backgroundColor: 'red' })
+   *     ])}
+   *   >
+   *     {children}
+   *   </Element>
+   * )
    * ```
    */
   cs?: CSToPropsInput;
-  /**
-   * The `localCs` prop is included to support style props. It should be considered unstable and
-   * will be removed when style props are no longer supported. The idea is your component should
-   * only use `localCs` for styles your component uses. The `cs` prop is then exposed to users of
-   * the component and will always be merged last. The styling merge order goes: `[localCs,
-   * styleProps, cs]`. This ensures style props supersede `localCs` and `cs` supersedes both.
-   *
-   * ```tsx
-   * localCs={[
-   *   myStyles,
-   *   myModifiers({ size: 'medium' }),
-   *   myVars({ backgroundColor: 'red' })
-   *   localCs, // from the prop list - for extending local props
-   * ]}
-   * ```
-   */
-  localCs?: CSToPropsInput;
 }
 
 /**
@@ -365,7 +355,9 @@ export function createStyles(
       // https://github.com/emotion-js/emotion/blob/f3b268f7c52103979402da919c9c0dd3f9e0e189/packages/babel-plugin/src/utils/transform-expression-with-styles.js#L81-L82
       // Without this "fix", anyone using the Emotion babel plugin would get different results than
       // intended when styles are merged.
-      return css.call(null, {name: generateUniqueId(), styles}); //?
+      const name = generateUniqueId();
+      createStylesCache[`${cache.key}-${name}`] = true;
+      return css.call(null, {name, styles}); //?
     })
     .join(' ');
 }
@@ -407,9 +399,9 @@ export function handleCsProp<
 
     style?: React.CSSProperties | undefined;
   }
->({cs, localCs, style, className, ...props}: T) {
+>({cs, style, className, ...props}: T) {
   return {
-    ...csToProps([localCs, cs, className, style]),
+    ...csToProps([className, cs, style]),
     ...props,
   } as Omit<T, 'cs'>;
 }

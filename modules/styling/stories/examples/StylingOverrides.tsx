@@ -2,10 +2,10 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import {jsx} from '@emotion/react';
 
-import {Flex, StylingBox} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {base} from '@workday/canvas-tokens-web';
-import {createStyles, cssVar} from '../../lib/cs';
+import {createStyles, cssVar} from '@workday/canvas-kit-styling';
 
 const backgroundColors = {
   cssProp: cssVar(base.chiliMango500),
@@ -128,12 +128,12 @@ export const StylingOverrides = () => {
         </div>
         <div>
           <StyledPrimaryButton backgroundColor={backgroundColors.styleProps}>
-            Styled Component + Styled Props
+            Styled Component + Style Props
           </StyledPrimaryButton>
         </div>
         <div>
           <StyledPrimaryButton backgroundColor={backgroundColors.styleProps} cs={styles}>
-            Styled Component + createStyles + Styled Props
+            Styled Component + createStyles + Style Props
           </StyledPrimaryButton>
         </div>
         <div>
@@ -149,6 +149,10 @@ export const StylingOverrides = () => {
         <CreateStyles />
         <StyleProps />
       </div>
+      <p>
+        Style Precedence: <strong>CSS Props</strong> &gt; <strong>createStyles</strong> &gt;{' '}
+        <strong>Styled Component</strong> &gt; <strong>Style Props</strong>
+      </p>
     </Flex>
   );
 };

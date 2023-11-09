@@ -4,9 +4,9 @@ import {ButtonLabelIcon} from '../lib/parts/ButtonLabelIcon';
 import {ButtonLabel} from '../lib/parts/ButtonLabel';
 
 import {createComponent, GrowthBehavior, focusRing} from '@workday/canvas-kit-react/common';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStyles, createVars, cssVar, createModifiers} from '@workday/canvas-kit-styling';
 import {SystemIconProps} from '@workday/canvas-kit-react/icon';
-import {StylingBox} from '@workday/canvas-kit-react/layout';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 import {ButtonColors, ButtonSizes, IconPositions} from './types';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
@@ -314,7 +314,6 @@ export const BaseButton = createComponent('button')({
   Component: (
     {
       children,
-      localCs,
       size,
       fillIcon,
       iconPosition,
@@ -327,12 +326,10 @@ export const BaseButton = createComponent('button')({
     Element
   ) => {
     return (
-      <StylingBox
-        as={Element}
+      <Element
         ref={ref}
         type="button"
-        {...elemProps}
-        localCs={[
+        {...mergeStyles(elemProps, [
           baseButtonStyles,
           buttonModifiers({
             size: size,
@@ -343,11 +340,10 @@ export const BaseButton = createComponent('button')({
           buttonVars.hover(colors?.hover || {}),
           buttonVars.active(colors?.active || {}),
           buttonVars.disabled(colors?.disabled || {}),
-          localCs,
-        ]}
+        ])}
       >
         {children}
-      </StylingBox>
+      </Element>
     );
   },
   subComponents: {
