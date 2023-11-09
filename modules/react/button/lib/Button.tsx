@@ -47,6 +47,7 @@ export const Button = createComponent('button')({
         ref={ref}
         size={size}
         icon={icon}
+        colors={colors}
         iconPosition={baseIconPosition}
         {...elemProps}
       >

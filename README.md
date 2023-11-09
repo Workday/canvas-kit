@@ -86,13 +86,13 @@ Each module is independently versioned using [Lerna](https://github.com/lerna/le
 ## Version Support
 
 At any given time, we support three major versions of Canvas Kit: previous, current, and next. Each
-of these have different levels of support.
+of these has different levels of support.
 
 The previous major version is stable for production and will receive patch updates as needed, but
 there will be no new features added. Patch releases are automatically deployed upon merge by GitHub
 Actions.
 
-The current major version is also stable and receives new feature and patch updates. Patch releases
+The current major version is also stable and receives new features and patch updates. Patch releases
 are automatically deployed upon merge by GitHub Actions, and minor releases are manually deployed at
 the end of each sprint.
 

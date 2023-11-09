@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.0.5](https://github.com/Workday/canvas-kit/releases/tag/v10.0.5) (2023-11-09)
+
+### Documentation
+
+- docs: Update README ([#2369](https://github.com/Workday/canvas-kit/pull/2369)) ([@aditya7302](https://github.com/aditya7302))
+
+
+## [v10.0.4](https://github.com/Workday/canvas-kit/releases/tag/v10.0.4) (2023-11-08)
+
+### Components
+
+- fix(select): Fix circular import statement ([#2386](https://github.com/Workday/canvas-kit/pull/2386)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v10.0.3](https://github.com/Workday/canvas-kit/releases/tag/v10.0.3) (2023-11-03)
+
+
+
+
+## [v10.0.2](https://github.com/Workday/canvas-kit/releases/tag/v10.0.2) (2023-10-31)
+
+### Components
+
+- fix: Pass colors prop to basebutton and button ([#2381](https://github.com/Workday/canvas-kit/pull/2381)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v10.0.1](https://github.com/Workday/canvas-kit/releases/tag/v10.0.1) (2023-10-30)
 
 ### Dependencies
