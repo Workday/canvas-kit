@@ -318,6 +318,7 @@ export const BaseButton = createComponent('button')({
       fillIcon,
       iconPosition,
       icon,
+      colors,
       shouldMirrorIcon = false,
       ...elemProps
     }: ButtonContainerProps,

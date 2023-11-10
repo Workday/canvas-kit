@@ -159,8 +159,14 @@ export function createVars<T extends string, ID extends string>(...args: T[]): C
 
 type ModifierConfig = Record<string, Record<string, CS>>;
 
+/**
+ * Helper type to convert `'true'` into `true` for boolean modifiers which are a pain to type as a
+ * prop.
+ */
+type MaybeBoolean<T> = T extends 'true' ? true : T extends 'false' ? false : T;
+
 type ModifierValues<T extends ModifierConfig> = {
-  [P in keyof T]: keyof T[P];
+  [P in keyof T]: MaybeBoolean<keyof T[P]>;
 };
 
 type ModifierReturn<T extends ModifierConfig> = T &
