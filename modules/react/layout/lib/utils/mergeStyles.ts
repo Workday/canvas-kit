@@ -126,7 +126,7 @@ export function mergeStyles<T extends {}>(
   // component which will merge all the CSS classes into a single class name in the order that the
   // class names are listed. See the comments on `Box` for more details.
   let stylePropsClassName = '';
-  const returnProps = csToProps([cs, className, (allProps as any).cs]); // doesn't matter if `cs` is undefined. csToProps will handle undefined. Thanks anyways, TypeScript
+  const returnProps = csToProps([cs, className, (allProps as any).cs, (allProps as any).style]); // doesn't matter if `cs` is undefined. csToProps will handle undefined. Thanks anyways, TypeScript
 
   // see if we need to do style merging
   (returnProps.className || '').split(' ').forEach(name => {
