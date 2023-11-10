@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import {buttonVars} from './BaseButton';
 import {createComponent} from '@workday/canvas-kit-react/common';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStyles, cssVar, createModifiers} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 import {Button, ButtonProps} from './Button';
@@ -86,19 +87,12 @@ export const secondaryButtonModifiers = createModifiers({
 
 export const SecondaryButton = createComponent('button')({
   displayName: 'SecondaryButton',
-  Component: (
-    {children, icon, cs, iconPosition, variant, ...elemProps}: SecondaryButtonProps,
-    ref,
-    Element
-  ) => {
+  Component: ({children, variant, ...elemProps}: SecondaryButtonProps, ref, Element) => {
     return (
       <Button
         as={Element}
         ref={ref}
-        icon={icon}
-        iconPosition={iconPosition}
-        cs={[secondaryStyles, secondaryButtonModifiers({variant: variant}), cs]}
-        {...elemProps}
+        {...mergeStyles(elemProps, [secondaryStyles, secondaryButtonModifiers({variant: variant})])}
       >
         {children}
       </Button>

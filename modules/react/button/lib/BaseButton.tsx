@@ -4,9 +4,9 @@ import {ButtonLabelIcon} from '../lib/parts/ButtonLabelIcon';
 import {ButtonLabel} from '../lib/parts/ButtonLabel';
 
 import {createComponent, GrowthBehavior, focusRing} from '@workday/canvas-kit-react/common';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStyles, createVars, cssVar, createModifiers} from '@workday/canvas-kit-styling';
 import {SystemIconProps} from '@workday/canvas-kit-react/icon';
-import {Box} from '@workday/canvas-kit-react/layout';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 import {ButtonColors, ButtonSizes, IconPositions} from './types';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
@@ -314,40 +314,36 @@ export const BaseButton = createComponent('button')({
   Component: (
     {
       children,
-      cs,
       size,
       fillIcon,
       iconPosition,
       icon,
+      colors,
       shouldMirrorIcon = false,
       ...elemProps
     }: ButtonContainerProps,
     ref,
     Element
   ) => {
-    // console.log('iconPosition', children, getIconPosition(size, iconPosition));
     return (
-      <Box
-        as={Element}
+      <Element
         ref={ref}
         type="button"
-        cs={[
+        {...mergeStyles(elemProps, [
           baseButtonStyles,
           buttonModifiers({
             size: size,
             iconPosition: getIconPosition(size, iconPosition, children),
           }),
-          buttonVars.default(elemProps.colors?.default || {}),
-          buttonVars.focus(elemProps.colors?.focus || {}),
-          buttonVars.hover(elemProps.colors?.hover || {}),
-          buttonVars.active(elemProps.colors?.active || {}),
-          buttonVars.disabled(elemProps.colors?.disabled || {}),
-          cs,
-        ]}
-        {...elemProps}
+          buttonVars.default(colors?.default || {}),
+          buttonVars.focus(colors?.focus || {}),
+          buttonVars.hover(colors?.hover || {}),
+          buttonVars.active(colors?.active || {}),
+          buttonVars.disabled(colors?.disabled || {}),
+        ])}
       >
         {children}
-      </Box>
+      </Element>
     );
   },
   subComponents: {

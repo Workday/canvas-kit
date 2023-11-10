@@ -1,10 +1,12 @@
 import React from 'react';
-import {generateUniqueId} from './uniqueId';
 // eslint-disable-next-line @emotion/no-vanilla
-import {css} from '@emotion/css';
+import {cache, css} from '@emotion/css';
 import {serializeStyles, Keyframes, SerializedStyles, CSSObject} from '@emotion/serialize';
 
+import {generateUniqueId} from './uniqueId';
 import {slugify} from './slugify';
+
+export const createStylesCache: Record<string, boolean> = {};
 
 /**
  * Style properties in a JavaScript camelCase. Everything Emotion allows is also
@@ -157,8 +159,14 @@ export function createVars<T extends string, ID extends string>(...args: T[]): C
 
 type ModifierConfig = Record<string, Record<string, CS>>;
 
+/**
+ * Helper type to convert `'true'` into `true` for boolean modifiers which are a pain to type as a
+ * prop.
+ */
+type MaybeBoolean<T> = T extends 'true' ? true : T extends 'false' ? false : T;
+
 type ModifierValues<T extends ModifierConfig> = {
-  [P in keyof T]: keyof T[P];
+  [P in keyof T]: MaybeBoolean<keyof T[P]>;
 };
 
 type ModifierReturn<T extends ModifierConfig> = T &
@@ -269,15 +277,27 @@ export interface CSProps {
   /** The `cs` prop takes in a single value or an array of values. You can pass the CSS class name
    * returned by {@link createStyles}, or the result of {@link createVars} and
    * {@link createModifiers}. If you're extending a component already using `cs`, you can merge that
-   * prop in as well.
+   * prop in as well. Any style that is passed to the `cs` prop will override style props. If you
+   * wish to have styles that are overridden by style props, the `css` prop, or styles added via
+   * the `styled` API, use {@link mergeStyles} wherever `elemProps` is used.
+   *
    *
    * ```tsx
-   * cs={[
-   *   cs, // from the prop list
-   *   myStyles,
-   *   myModifiers({ size: 'medium' }),
-   *   myVars({ backgroundColor: 'red' })
-   * ]}
+   * import {mergeStyles} from '@workday/canvas-kit-react/layout';
+   *
+   * // ...
+   *
+   * return (
+   *   <Element
+   *     {...mergeStyles(elemProps, [
+   *       myStyles,
+   *       myModifiers({ size: 'medium' }),
+   *       myVars({ backgroundColor: 'red' })
+   *     ])}
+   *   >
+   *     {children}
+   *   </Element>
+   * )
    * ```
    */
   cs?: CSToPropsInput;
@@ -341,7 +361,9 @@ export function createStyles(
       // https://github.com/emotion-js/emotion/blob/f3b268f7c52103979402da919c9c0dd3f9e0e189/packages/babel-plugin/src/utils/transform-expression-with-styles.js#L81-L82
       // Without this "fix", anyone using the Emotion babel plugin would get different results than
       // intended when styles are merged.
-      return css.call(null, {name: generateUniqueId(), styles}); //?
+      const name = generateUniqueId();
+      createStylesCache[`${cache.key}-${name}`] = true;
+      return css.call(null, {name, styles}); //?
     })
     .join(' ');
 }
@@ -385,7 +407,7 @@ export function handleCsProp<
   }
 >({cs, style, className, ...props}: T) {
   return {
-    ...csToProps([cs, className, style]),
+    ...csToProps([className, cs, style]),
     ...props,
   } as Omit<T, 'cs'>;
 }
