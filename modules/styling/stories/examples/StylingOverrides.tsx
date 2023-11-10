@@ -86,22 +86,46 @@ export const StylingOverrides = () => {
       <Flex flexDirection="column" gap="s">
         <h2>Buttons</h2>
         <Flex flexDirection="row" gap="s">
+          <PrimaryButton cs={styles}>createStyles</PrimaryButton>
           {jsx(PrimaryButton, {...cssProp}, 'CSS Prop')}
           <StyledPrimaryButton>Styled Component</StyledPrimaryButton>
-          <PrimaryButton cs={styles}>createStyles</PrimaryButton>
           <PrimaryButton backgroundColor={backgroundColors.styleProps}>Style Props</PrimaryButton>
         </Flex>
-        <div>{jsx(StyledPrimaryButton, {...cssProp}, 'CSS Prop + Styled Component')}</div>
         <div>
           {jsx(
             PrimaryButton,
             {
               ...cssProp,
-              cs: backgroundColors.createStyles,
+              cs: styles,
             },
-            'CSS Prop + createStyles'
+            'createStyles + CSS Prop'
           )}
         </div>
+        <div>
+          <StyledPrimaryButton cs={styles}>createStyles + Styled Component</StyledPrimaryButton>
+        </div>
+        <div>
+          <PrimaryButton cs={styles} backgroundColor={backgroundColors.styleProps}>
+            createStyles + Style Props
+          </PrimaryButton>
+        </div>
+        <div>
+          <StyledPrimaryButton backgroundColor={backgroundColors.styleProps} cs={styles}>
+            createStyles + Styled Component + Style Props
+          </StyledPrimaryButton>
+        </div>
+        <div>
+          {jsx(
+            StyledPrimaryButton,
+            {
+              ...cssProp,
+              backgroundColor: backgroundColors.styleProps,
+              cs: styles,
+            },
+            'createStyles + CSS Prop + Styled Component + Style Props'
+          )}
+        </div>
+        <div>{jsx(StyledPrimaryButton, {...cssProp}, 'CSS Prop + Styled Component')}</div>
         <div>
           {jsx(
             PrimaryButton,
@@ -113,44 +137,20 @@ export const StylingOverrides = () => {
           )}
         </div>
         <div>
-          {jsx(
-            StyledPrimaryButton,
-            {
-              ...cssProp,
-              backgroundColor: backgroundColors.styleProps,
-              cs: styles,
-            },
-            'CSS Prop + Styled Component + createStyles + Style Props'
-          )}
-        </div>
-        <div>
-          <StyledPrimaryButton cs={styles}>Styled Component + createStyles</StyledPrimaryButton>
-        </div>
-        <div>
           <StyledPrimaryButton backgroundColor={backgroundColors.styleProps}>
             Styled Component + Style Props
           </StyledPrimaryButton>
         </div>
-        <div>
-          <StyledPrimaryButton backgroundColor={backgroundColors.styleProps} cs={styles}>
-            Styled Component + createStyles + Style Props
-          </StyledPrimaryButton>
-        </div>
-        <div>
-          <PrimaryButton cs={styles} backgroundColor={backgroundColors.styleProps}>
-            createStyles + Style Props
-          </PrimaryButton>
-        </div>
       </Flex>
       <div>
         <p>Legend:</p>
+        <CreateStyles />
         <CSSProp />
         <StyledComponent />
-        <CreateStyles />
         <StyleProps />
       </div>
       <p>
-        Style Precedence: <strong>CSS Props</strong> &gt; <strong>createStyles</strong> &gt;{' '}
+        Style Precedence: <strong>createStyles</strong> &gt; <strong>CSS Props</strong> &gt;{' '}
         <strong>Styled Component</strong> &gt; <strong>Style Props</strong>
       </p>
     </Flex>

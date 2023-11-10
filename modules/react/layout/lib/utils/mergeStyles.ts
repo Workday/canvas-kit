@@ -102,8 +102,9 @@ export function mergeStyles<T extends {}>(
 ): Omit<T, 'cs' | keyof CommonStyleProps> {
   const styleProps = {};
   let shouldRuntimeMergeStyles = false;
-  // @ts-ignore
-  let className = allProps.className || '';
+  // TypeScript can't handle a type where I declare T extends `{className?: string}` for some
+  // reason, so we'll do a `as any` any time we check for possible props on `allProps`
+  let className = (allProps as any).className || '';
 
   // separate style props from all other props. `cs` is special and should be forwarded to the
   // `handleCsProp` function.
@@ -122,13 +123,29 @@ export function mergeStyles<T extends {}>(
     return result;
   }, {});
 
-  // We need to determine if style props have been used. If they have, we need to use a styled
-  // component which will merge all the CSS classes into a single class name in the order that the
-  // class names are listed. See the comments on `Box` for more details.
+  // We need to determine if style props have been used. If they have, we need to merge all the CSS
+  // classes into a single class name in the order that the class names are listed. This variable
+  // will collect the CSS class name created by Emotion if we detect style props.
   let stylePropsClassName = '';
-  const returnProps = csToProps([cs, className, (allProps as any).cs, (allProps as any).style]); // doesn't matter if `cs` is undefined. csToProps will handle undefined. Thanks anyways, TypeScript
 
-  // see if we need to do style merging
+  // We have style props. We need to create style and merge with our `csToProps` to get the correct
+  // merging order for styles
+  if (shouldRuntimeMergeStyles) {
+    const styles = boxStyleFn(styleProps);
+    stylePropsClassName = css(styles);
+  }
+
+  const returnProps = csToProps([
+    cs,
+    stylePropsClassName, // if style props are not defined, this will be an empty string, which is fine
+    className, // This will come from `styled` components or the `css` prop or if a user manually sets the `className` prop
+    (allProps as any).cs, // doesn't matter if `cs` is undefined. csToProps will handle undefined. Thanks anyways, TypeScript
+    (allProps as any).style, // doesn't matter if `style` is undefined. csToProps will handle undefined. Thanks anyways, TypeScript
+  ]);
+
+  // see if we need to do style merging based off use of Emotion runtime APIs. We do this by testing
+  // the Emotion cache for a match to any class names we find, filtering out those created via
+  // `createStyles`. If only `createStyles` is detected, there is no reason to merge styles
   (returnProps.className || '').split(' ').forEach(name => {
     if (!createStylesCache[name] && cache.registered[name]) {
       shouldRuntimeMergeStyles = true;
@@ -136,15 +153,12 @@ export function mergeStyles<T extends {}>(
   });
 
   if (shouldRuntimeMergeStyles) {
-    const styles = boxStyleFn(styleProps);
-    stylePropsClassName = css(styles);
-
-    const registeredStyles = [stylePropsClassName];
+    const registeredStyles: string[] = [];
 
     // We are using the raw `css` instead of `createStyles` because `css` uses style hashing and
     // `createStyles` generates a new ID every time. We could use `createStyles` here, but it
     // would be more wasteful and new styles would be generated each React render cycle. `css` is
-    // safe to use inside a render method while `createStyles` should always be used outside the
+    // safe to use inside a render function while `createStyles` should always be used outside the
     // React render cycle.
     className = getRegisteredStyles(
       cache.registered,
