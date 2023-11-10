@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.0.6](https://github.com/Workday/canvas-kit/releases/tag/v10.0.6) (2023-11-10)
+
+### Components
+
+- fix: Fix Style prop merging with cs prop ([#2379](https://github.com/Workday/canvas-kit/pull/2379)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  This fix adds Emotion's `CacheProvider` to the `CanvasProvider`. Any application that uses the `CacheProvider` will not see this fix within the render tree of the custom `CacheProvider`.  For this fix to be applied everywhere, consider removing any use of Emotion's `CacheProvider`.
+  
+  Some instances of use of `CacheProvider` were to set the `compat` mode of the cache. You can now do the following instead and not use `CacheProvider` at all:
+  
+  ```ts
+  cache.compat = true
+  ```
+  
+  Also note this fix will break automatic server side rendering because style merging is not creating server-side only `style` tags. Since `createStyles` isn't compatible with automatic server side rendering, the merge style fix isn't compatible either. Use Emotion's solution for server-side `@emotion/css`: https://emotion.sh/docs/ssr#when-using-emotioncss
+  
+  The only modification is to import `cache` from `@emotion/css` instead of creating a new cache. Their documentation doesn't work:
+  
+  ```patch
+  - import createCache from '@emotion/cache'
+  - 
+  - const key = 'custom'
+  - const cache = createCache({ key })
+  + import {cache} from '@emotion/css';
+  + const {key} = cache
+  ```
+
+
 ## [v10.0.5](https://github.com/Workday/canvas-kit/releases/tag/v10.0.5) (2023-11-09)
 
 ### Documentation
