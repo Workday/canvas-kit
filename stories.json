@@ -690,6 +690,20 @@
         "__isArgsStory": false
       }
     },
+    "features-styling-api--styling-overrides": {
+      "id": "features-styling-api--styling-overrides",
+      "name": "Styling Overrides",
+      "title": "Features/Styling/API",
+      "importPath": "./modules/styling/stories/API.stories.mdx",
+      "kind": "Features/Styling/API",
+      "story": "Styling Overrides",
+      "parameters": {
+        "fileName": "./modules/styling/stories/API.stories.mdx",
+        "framework": "react",
+        "__id": "features-styling-api--styling-overrides",
+        "__isArgsStory": false
+      }
+    },
     "features-styling-from-emotion--emotion-button": {
       "id": "features-styling-from-emotion--emotion-button",
       "name": "Emotion Button",
