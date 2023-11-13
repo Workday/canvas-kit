@@ -1,0 +1,59 @@
+import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {Table} from '@workday/canvas-kit-preview-react/table';
+// Examples
+import {SelectableRows} from './examples/SelectableRows';
+import {ExpandableRows} from './examples/ExpandableRows';
+import {SortableColumnHeaders} from './examples/SortableColumnHeaders';
+
+<Meta title="Preview/Table/Patterns" component={Table} />
+
+# Canvas Kit Table Patterns
+
+## Expandable Rows
+
+Expandable Rows combines the likes of an accordion with tabular data tables. Column 1 renders icon
+buttons with 2 states, a collapsed and expanded state. A new row that spans the entire width of the
+table is added to the table just after the expanded row.
+
+- The `aria-expanded` property is added to the button to communicate this state to screen reader
+  users.
+- A Canvas accessible Tooltip component is used to assign names to each icon button based on the
+  most useful value in the row. In this pattern, we combined the car make and model together. This
+  allows everyone to view the name of the Checkboxes by hovering the mouse or focusing with the
+  keyboard.
+- The expanded row uses `colspan` to span the entire width of the table and support screen readers.
+  This space provides flexibility to show headings, lists, and other structured content for the
+  table row above.
+- There is no explicit relationship between a row of cells, and the spanned content below it. The
+  spanned content is assumed to belong to the row of cells above it, based on established Accordion
+  patterns and logical reading order of content rendered to the screen.
+- Outlining hierarchy in a data table is not supported for screen readers in this pattern.
+
+<ExampleCodeBlock code={ExpandableRows} />
+
+## Selectable Rows
+
+Developed by the Workday accessibility team, using a Checkbox labeled "Select All" inside of a table
+column header can be a confusing experience for screen reader users. Screen readers will
+automatically announce the "Select All" column header each time users are reading any cell in
+column 1. For instance, the Checkbox in row 4 is decidedly not going to select all of the rows. Here
+is what we did about it:
+
+- We intentionally rendered row 1, column 1 as a standard `<td>` element so screen readers won't
+  automatically announce "Select All" while reading cells in column 1.
+- Our research found that VoiceOver (MacOS v12.7, Safari v17.1) persistently announce "Select All"
+  despite using the `<td>` element because of the optional `<thead>` element in the table. We
+  omitted the optional `<thead>` and `<tbody>` elements from this pattern for that reason.
+- We used Canvas' accessible Tooltip component to assign names to each Checkbox based on the most
+  useful value in the row, the topping name. This allows everyone to view the name of the Checkboxes
+  by hovering the mouse or focusing with the keyboard.
+- We rendered the cells in column 2 as the Row Headers for the table, enabling screen readers to
+  automatically announce the topping name even while reading down the Amounts in column 3. When we
+  rendered column 1 as row headers, then reading down column 2 (Topping Name) sounded redundant
+  because the Checkbox names in column 1 are identical to the Topping Name in column 2.
+
+<ExampleCodeBlock code={SelectableRows} />
+
+## Sortable Column Headers
+
+<ExampleCodeBlock code={SortableColumnHeaders} />
