@@ -30,9 +30,7 @@ const SelectableRow = props => {
           <Checkbox checked={isSelected} onChange={selectRowHandler} />
         </Tooltip>
       </StyledCell>
-      <StyledCell as="th" scope="row">
-        {props.rowData.topping}
-      </StyledCell>
+      <Table.Header scope="row">{props.rowData.topping}</Table.Header>
       <StyledCell>{props.rowData.amount}</StyledCell>
     </Table.Row>
   );
