@@ -39,11 +39,17 @@ function headerRowReducer(state, action) {
       action.payload.sort((a, b) => {
         const x = a.country.toLowerCase();
         const y = b.country.toLowerCase();
-        if (x < y) return -1;
-        if (x > y) return 1;
+        if (x < y) {
+          return -1;
+        }
+        if (x > y) {
+          return 1;
+        }
         return 0;
       });
-      state.col1 === 'ascending' && action.payload.reverse();
+      if (state.col1 === 'ascending') {
+        action.payload.reverse();
+      }
       return {
         col1: state.col1 === 'ascending' ? 'descending' : 'ascending',
         col2: 'none',
@@ -53,11 +59,17 @@ function headerRowReducer(state, action) {
       action.payload.sort((a, b) => {
         const x = a.capital.toLowerCase();
         const y = b.capital.toLowerCase();
-        if (x < y) return -1;
-        if (x > y) return 1;
+        if (x < y) {
+          return -1;
+        }
+        if (x > y) {
+          return 1;
+        }
         return 0;
       });
-      state.col2 === 'ascending' && action.payload.reverse();
+      if (state.col2 === 'ascending') {
+        action.payload.reverse();
+      }
       return {
         col1: 'none',
         col2: state.col2 === 'ascending' ? 'descending' : 'ascending',
@@ -65,7 +77,9 @@ function headerRowReducer(state, action) {
       };
     case 'Population':
       action.payload.sort((a, b) => a.pop - b.pop);
-      state.col3 === 'ascending' && action.payload.reverse();
+      if (state.col3 === 'ascending') {
+        action.payload.reverse();
+      }
       return {
         col1: 'none',
         col2: 'none',
@@ -88,8 +102,12 @@ function SortableColumnHeader(props) {
 
   function showSortIcon() {
     // determine which icon to show in col header
-    if (isAscending) return sortUpIcon;
-    if (props.sortOrder === 'descending') return sortDownIcon;
+    if (isAscending) {
+      return sortUpIcon;
+    }
+    if (props.sortOrder === 'descending') {
+      return sortDownIcon;
+    }
     return undefined;
   }
 
