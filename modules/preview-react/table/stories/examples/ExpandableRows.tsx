@@ -19,7 +19,7 @@ function ExpandableRow(props) {
 
   const expansion = (
     <Table.Row>
-      <Table.Cell colspan={10} style={{border: `1px solid ${colors.blueberry400}`}}>
+      <Table.Cell colSpan={10} style={{border: `1px solid ${colors.blueberry400}`}}>
         <Subtext as="h4" size="medium">
           Order status:
         </Subtext>
