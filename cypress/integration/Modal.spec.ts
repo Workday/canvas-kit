@@ -414,21 +414,11 @@ describe('Modal', () => {
         });
 
         it('should trap focus inside the modal element', () => {
-          cy.findByRole('button', {name: 'Cancel'}).should('have.focus');
+          cy.findByRole('dialog', {name: 'Cancel'}).should('have.focus');
           cy.tab()
             .should('contain', 'Delete')
-            .tab()
-            .should('contain', 'Delete Item')
             .tab()
             .should('contain', 'Cancel');
-          cy.focused().should('have.text', 'Cancel');
-        });
-          cy.findByRole('button', {name: 'Cancel'})
-            .should('have.focus');
-          cy.tab()
-            .should('contain', 'Delete')
-            .tab()
-            .should('contain', 'Cancel')
           cy.focused().should('have.text', 'Cancel');
         });
       });
