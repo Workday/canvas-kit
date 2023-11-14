@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.27](https://github.com/Workday/canvas-kit/releases/tag/v9.1.27) (2023-11-14)
+
+### Components
+
+- fix: Prevent modal from overlapping on mobile devices ([#2385](https://github.com/Workday/canvas-kit/pull/2385)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v9.1.26](https://github.com/Workday/canvas-kit/releases/tag/v9.1.26) (2023-10-20)
 
 ### Components
