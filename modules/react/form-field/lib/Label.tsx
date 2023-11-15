@@ -2,6 +2,7 @@ import * as React from 'react';
 import {colors, space, type} from '@workday/canvas-kit-react/tokens';
 import {accessibleHide as accessibleHideCSS, styled} from '@workday/canvas-kit-react/common';
 import {FormFieldLabelPosition, FormFieldLabelPositionBehavior} from './types';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
 export interface LabelProps extends FormFieldLabelPositionBehavior {
   /**
@@ -51,12 +52,9 @@ const labelStyles = [
         ? {
             marginRight: space.l,
             minWidth: 180,
-            display: 'flex',
-            alignItems: 'center',
             maxHeight: space.xl,
           }
         : {
-            display: 'block',
             marginBottom: space.xxxs,
           }),
     };
@@ -107,7 +105,7 @@ class Label extends React.Component<React.PropsWithChildren<LabelProps>> {
           </RequiredAsterisk>,
         ];
     return (
-      <>
+      <Flex alignItems="center">
         {isLegend ? (
           <LegendComponent
             labelPosition={labelPosition}
@@ -118,7 +116,7 @@ class Label extends React.Component<React.PropsWithChildren<LabelProps>> {
         ) : (
           <LabelComponent labelPosition={labelPosition} {...elemProps} children={children} />
         )}
-      </>
+      </Flex>
     );
   }
 }
