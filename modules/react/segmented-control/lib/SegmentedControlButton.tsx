@@ -29,11 +29,13 @@ const getIconButtonColors = (toggled?: boolean): ButtonColors => {
       icon: toggled ? colors.frenchVanilla100 : colors.licorice500,
     },
     focus: {
-      background: toggled ? colors.blueberry400 : undefined,
+      background: toggled ? colors.blueberry400 : colors.soap200,
       icon: toggled ? colors.frenchVanilla100 : colors.licorice500,
+      border: toggled ? 'transparent' : colors.soap500,
     },
     disabled: {
       background: toggled ? colors.soap100 : colors.soap100,
+      border: colors.soap500,
       icon: colors.soap600,
       opacity: '1',
     },

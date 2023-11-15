@@ -10,7 +10,9 @@ import {menuAnimationDuration} from './SelectMenu';
 import {SelectBase, CoreSelectBaseProps, Option, NormalizedOption} from './SelectBase';
 import {MenuVisibility} from './types';
 import {getCorrectedIndexByValue} from './utils';
-
+/**
+ * @deprecated ⚠️ `SelectProps` in Preview has been deprecated and will be removed in a future major version. Please use [`Select` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) instead.
+ */
 export interface SelectProps extends CoreSelectBaseProps {
   /**
    * The options of the Select. `options` may be an array of objects, an array of strings,
@@ -577,7 +579,9 @@ class SelectContainer extends React.Component<SelectContainerProps, SelectContai
     );
   }
 }
-
+/**
+ * @deprecated ⚠️ `Select` in Preview has been deprecated and will be removed in a future major version. Please use [`Select` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) instead.
+ */
 export const Select = createComponent('button')({
   displayName: 'Select',
   Component: (props: SelectProps, ref, Element) => (

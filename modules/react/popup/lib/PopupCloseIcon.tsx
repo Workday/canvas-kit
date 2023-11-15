@@ -21,7 +21,7 @@ export const PopupCloseIcon = createSubcomponent('button')({
       icon={xIcon}
       type="button"
       position="absolute"
-      right={space.xxxs}
+      insetInlineEnd={space.xxxs}
       top={space.xxxs}
       {...elemProps}
     />

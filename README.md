@@ -19,7 +19,6 @@ implement user experiences consistent with
 
 ---
 
-
 ## Getting started
 
 ### React
@@ -47,39 +46,6 @@ import {SecondaryButton} from '@workday/canvas-kit-react';
 <SecondaryButton>Button Label</SecondaryButton>;
 ```
 
-### CSS
-
-**Installation**
-
-To get started using Canvas kit CSS first add or install the module to your project
-
-```sh
-yarn add @workday/canvas-kit-css
-```
-
-or
-
-```sh
-npm install @workday/canvas-kit-css
-```
-
-Add your `node_modules` directory to your SASS `includePaths`. You will then be able to import
-`index.scss`.
-
-**Usage**
-
-```scss
-@import '~@workday/canvas-kit-css/index.scss';
-```
-
-**You must have PostCSS support.** Add the
-[postcss-inline-svg](https://github.com/TrySound/postcss-inline-svg) plugin to properly process and
-inline icons. Process your SASS through PostCSS once it has been compiled to CSS.
-
-```html
-<button class="wdc-btn">Button Label</button>
-```
-
 ## Reporting a Bug
 
 If you spot a bug, inconsistency, or typo, please
@@ -100,7 +66,8 @@ started.
 
 ## Maintaining
 
-If you're a Canvas Kit maintainer, please read our [maintaining docs](./modules/docs/mdx/MAINTAINING.mdx) to learn more about our processes.
+If you're a Canvas Kit maintainer, please read our
+[maintaining docs](./modules/docs/mdx/MAINTAINING.mdx) to learn more about our processes.
 
 ## Open Development
 
@@ -119,13 +86,13 @@ Each module is independently versioned using [Lerna](https://github.com/lerna/le
 ## Version Support
 
 At any given time, we support three major versions of Canvas Kit: previous, current, and next. Each
-of these have different levels of support.
+of these has different levels of support.
 
 The previous major version is stable for production and will receive patch updates as needed, but
 there will be no new features added. Patch releases are automatically deployed upon merge by GitHub
 Actions.
 
-The current major version is also stable and receives new feature and patch updates. Patch releases
+The current major version is also stable and receives new features and patch updates. Patch releases
 are automatically deployed upon merge by GitHub Actions, and minor releases are manually deployed at
 the end of each sprint.
 
