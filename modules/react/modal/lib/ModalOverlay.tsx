@@ -26,20 +26,30 @@ const fadeIn = keyframes`
   }
 `;
 
-const Container = styled(Box)<StyledType>({
-  position: 'fixed',
-  top: 0,
-  left: 0,
-  width: '100vw',
-  height: '100vh',
-  background: 'rgba(0,0,0,0.65)',
-  animationName: `${fadeIn}`,
-  animationDuration: '0.3s',
-  // Allow overriding of animation in special cases
-  '.wd-no-animation &': {
-    animation: 'none',
+const Container = styled(Box)<StyledType>(
+  {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    width: '100vw',
+    height: '100vh',
+    background: 'rgba(0,0,0,0.65)',
+    animationName: `${fadeIn}`,
+    animationDuration: '0.3s',
+    // Allow overriding of animation in special cases
+    '.wd-no-animation &': {
+      animation: 'none',
+    },
   },
-});
+  ({theme}) => {
+    const {canvas: canvasTheme} = getTheme(theme);
+    return {
+      [canvasTheme.breakpoints.down('s')]: {
+        height: '100%',
+      },
+    };
+  }
+);
 
 // This centering container helps fix an issue with Chrome. Chrome doesn't normally do subpixel
 // positioning, but seems to when using flexbox centering. This messes up Popper calculations inside
@@ -48,14 +58,14 @@ const Container = styled(Box)<StyledType>({
 const ResponsiveContainer = styled('div')(({theme}) => {
   const {canvas: canvasTheme} = getTheme(theme);
   return {
-    maxHeight: '100vh',
+    maxHeight: '100%',
     display: 'flex',
     position: 'absolute',
     left: 0,
     top: 0,
     justifyContent: 'center',
     alignItems: 'center',
-    height: '100vh',
+    height: '100%',
     [canvasTheme.breakpoints.down('s')]: {
       alignItems: 'end',
     },
