@@ -268,7 +268,7 @@ export function csToProps(input: CSToPropsInput): CsToPropsReturn {
     const staticStyles: CSSObject = {};
     const cssVars: Record<string, string> = {};
     for (const key in input) {
-      if (key.charAt(0) === '-') {
+      if (key.startsWith('--')) {
         cssVars[key] = (input as any)[key];
       } else {
         (staticStyles as any)[key] = (input as any)[key];
