@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.0.11](https://github.com/Workday/canvas-kit/releases/tag/v10.0.11) (2023-11-16)
+
+### Components
+
+- fix(button): Allow colors to override TertiaryButton ([#2411](https://github.com/Workday/canvas-kit/pull/2411)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v10.0.10](https://github.com/Workday/canvas-kit/releases/tag/v10.0.10) (2023-11-16)
 
 ### Test
