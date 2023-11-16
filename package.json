@@ -14,7 +14,6 @@
     "@babel/preset-typescript": "^7.1.0",
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.1.0",
-    "@emotion/babel-plugin": "^11.9.2",
     "@emotion/eslint-plugin": "^11.7.0",
     "@emotion/is-prop-valid": "^1.1.1",
     "@storybook/addon-essentials": "^6.5.9",

@@ -1,8 +1,10 @@
+/* eslint-disable @emotion/no-vanilla */
 import {setUniqueSeed} from '../lib/uniqueId';
 import {createStyles, cssVar, createVars, createModifiers, csToProps, CS} from '../lib/cs';
 import {expectTypeOf} from 'expect-type';
 import {Properties} from 'csstype';
 import {SerializedStyles} from '@emotion/serialize';
+import {css} from '@emotion/css';
 
 describe('createStyles', () => {
   beforeEach(() => {
@@ -227,6 +229,17 @@ describe('createStyles', () => {
         [myVariables.color]: 'red',
         [innerVariables.fill]: 'blue',
       });
+    });
+
+    it('should handle statically embedded styles', () => {
+      const baseClassName = createStyles({padding: 20});
+      const inlineStyleOverride = css({padding: 10}); // hash should be the same
+      const actual = csToProps([baseClassName, {padding: 10}]);
+
+      expect(actual).not.toHaveProperty('style', {
+        padding: 10,
+      });
+      expect(actual).toHaveProperty('className', expect.stringContaining(inlineStyleOverride));
     });
   });
 });
