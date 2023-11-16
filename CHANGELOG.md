@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.0.10](https://github.com/Workday/canvas-kit/releases/tag/v10.0.10) (2023-11-16)
+
+### Test
+
+- test: Skip autocomplete test for now ([#2407](https://github.com/Workday/canvas-kit/pull/2407)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v10.0.9](https://github.com/Workday/canvas-kit/releases/tag/v10.0.9) (2023-11-16)
 
 ### Documentation
