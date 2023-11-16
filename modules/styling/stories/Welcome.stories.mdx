@@ -18,16 +18,16 @@ end. The Canvas Kit packages are using the static compilation as part of the bui
 want to use this package for your own styles, you don't need to do anything special to use in
 development. Included is a small runtime to get styling working. If you wish to statically compile
 your CSS from your TypeScript files for faster page loading, visit the
-[Getting Started](/docs/features-styling-getting-started--page)
+[Getting Started](/docs/features-styling-getting-started--page) page.
 
 ## Why?
 
 Canvas Kit no longer needs to support IE11 which allows us to use
 [CSS Custom Properties a.k.a. CSS Variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties).
 Dynamic style properties (properties that change during the lifecylce of the component) are the most
-costly in terms of performance in Emotion and should be avoided. Also if you have conditionals in
-your Emotion style functions, that creates unique hashes in the Emotion cache and makes that render
-frame pay an expensive
+costly in terms of performance in Emotion and should be avoided. Also, any conditionals in your
+Emotion style functions create unique hashes in the Emotion cache and makes that render frame pay an
+expensive
 [style recalculation](https://microsoftedge.github.io/DevTools/explainers/StyleTracing/explainer.html).
 
 We can avoid most of the cost of Emotion's runtime by using
@@ -48,31 +48,37 @@ expensive style recalculation. Think of the runtime as being the following:
 />
 ```
 
-Here's the GitHub discussion on
+For further information, please read our GitHub discussion on
 [the future of styling](https://github.com/Workday/canvas-kit/discussions/2265)
 
-## What is this?
+## What is Canvas Kit Styling?
 
-Canvas Kit Styling is two things:
+Canvas Kit Styling includes two things:
 
 1. A utility function wrapper around `@emotion/css`
-2. An optional static compiler to get remove most of the runtime
+2. An optional static compiler to remove most of the runtime
 
-### Utility functions
+### Utility Functions
 
-The basic utility function is the `createStyles` function. It makes a call to the `css` function
-from `@emotion/css`. Emotion takes care of the serializing, hashing, caching, and style injection.
-`@emotion/css` does most of the heavy lifting.
+This packages provides three utility functions to make it easier to style element-based components.
+The following is a brief description of each function. If you'd like to read a more in-depth
+discussion of each, our [API docs](/docs/features-styling-api--create-styles).
 
-These utility functions make it easier to create styles for element-based components with CSS
-Variables used for dynamic properties and modifiers used for dynamic groups of properties. The API
-functions can be found in the [API docs](/docs/features-styling-api--create-styles)
+The primary utility function is the `createStyles` function. It makes a call to the `css` function
+from `@emotion/css`. Emotion still does most of the heavy lifting by handling the serialization,
+hashing, caching, and style injection.
 
-### Static compiler
+The other two utility functions, `createVars` and `createModifiers`, provide supplemental styling
+functionality. `createVars` allows you to create temporary CSS variables within components to create
+dynamic properties. And `createModifiers` creates a modifier function to create dynamic groups of
+properties. If you're familiar with modifiers in [BEM](https://getbem.com/introduction/) (Block,
+Element, Modifier) CSS, you're well on your way to understanding this function's intent.
+
+### Static Compiler
 
 The static compiler run as a TypeScript transform during TypeScript's transpilation phase. It
 requires the TypeScript type checker to determine the static value of any variables used. The
-transformer calls `@emotion/serialize` to pre-compute the serialized styles and hash so that the
+transformer calls `@emotion/serialize` to pre-compute the serialized styles and hash so that
 `@emotion/css` can skip these steps. For example, there's the before/after of the code.
 
 ```ts
@@ -96,4 +102,4 @@ const myStyles = createStyles({
 ```
 
 Emotion has an internal shortcut that recognizes the `styles` property and
-[short circuits interpolation](https://github.com/emotion-js/emotion/blob/f3b268f7c52103979402da919c9c0dd3f9e0e189/packages/serialize/src/index.js#L319).
+[short-circuits interpolation](https://github.com/emotion-js/emotion/blob/f3b268f7c52103979402da919c9c0dd3f9e0e189/packages/serialize/src/index.js#L319).
