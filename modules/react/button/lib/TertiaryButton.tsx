@@ -3,6 +3,7 @@ import * as React from 'react';
 import {buttonVars, getIconPosition} from './BaseButton';
 import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
 import {createStyles, cssVar, createModifiers} from '@workday/canvas-kit-styling';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {system, brand, base} from '@workday/canvas-tokens-web';
 import {borderRadius, space} from '@workday/canvas-kit-react/tokens';
 import {Button, ButtonProps} from './Button';
@@ -152,7 +153,6 @@ export const TertiaryButton = createComponent('button')({
       isThemeable,
       variant,
       iconPosition,
-      cs,
       ...elemProps
     }: TertiaryButtonProps,
     ref,
@@ -173,16 +173,14 @@ export const TertiaryButton = createComponent('button')({
         icon={icon}
         iconPosition={iconPosition}
         size={size}
-        cs={[
+        {...mergeStyles(elemProps, [
           tertiaryStyles,
           tertiaryButtonModifiers({
             isThemeable: (isThemeable || baseIconPosition !== 'only') as any,
             variant: variant,
             iconPosition: getIconPosition(size, baseIconPosition),
           }),
-          cs,
-        ]}
-        {...elemProps}
+        ])}
       >
         {children}
       </Button>

@@ -1,8 +1,10 @@
 import * as React from 'react';
-import {Theme, ThemeProvider} from '@emotion/react';
+import {Theme, ThemeProvider, CacheProvider} from '@emotion/react';
 import {InputProvider} from './InputProvider';
 import {defaultCanvasTheme, PartialEmotionCanvasTheme, useTheme} from './theming';
 import {brand} from '@workday/canvas-tokens-web';
+// eslint-disable-next-line @emotion/no-vanilla
+import {cache} from '@emotion/css';
 
 export interface CanvasProviderProps {
   theme?: PartialEmotionCanvasTheme;
@@ -47,14 +49,16 @@ export const CanvasProvider = ({
 }: CanvasProviderProps & React.HTMLAttributes<HTMLElement>) => {
   const elemProps = useCanvasThemeToCssVars(theme, props);
   return (
-    <ThemeProvider theme={theme as Theme}>
-      <InputProvider />
-      <div
-        dir={theme?.canvas?.direction || defaultCanvasTheme.direction}
-        {...(elemProps as React.HTMLAttributes<HTMLDivElement>)}
-      >
-        {children}
-      </div>
-    </ThemeProvider>
+    <CacheProvider value={cache}>
+      <ThemeProvider theme={theme as Theme}>
+        <InputProvider />
+        <div
+          dir={theme?.canvas?.direction || defaultCanvasTheme.direction}
+          {...(elemProps as React.HTMLAttributes<HTMLDivElement>)}
+        >
+          {children}
+        </div>
+      </ThemeProvider>
+    </CacheProvider>
   );
 };
