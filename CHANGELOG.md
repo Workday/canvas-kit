@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.0.9](https://github.com/Workday/canvas-kit/releases/tag/v10.0.9) (2023-11-16)
+
+### Documentation
+
+- docs(select): Add controlled and uncontrolled Select examples ([#2406](https://github.com/Workday/canvas-kit/pull/2406)) ([@vibdev](https://github.com/vibdev))
+
+
 ## [v10.0.8](https://github.com/Workday/canvas-kit/releases/tag/v10.0.8) (2023-11-16)
 
 ### Documentation
