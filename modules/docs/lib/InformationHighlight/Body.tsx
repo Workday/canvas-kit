@@ -16,6 +16,6 @@ const bodyStyles = createStyles({
 export const Body = createComponent('p')({
   displayName: 'Body',
   Component: (props, ref, Element) => {
-    return <Base as={Element} ref={ref} cs={[bodyStyles]} {...props} />;
+    return <Base as={Element} ref={ref} cs={bodyStyles} {...props} />;
   },
 });

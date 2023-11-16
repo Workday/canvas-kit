@@ -20,24 +20,24 @@ const containerStyles = createStyles({
   backgroundColor: base.soap100,
   display: 'grid',
   gridTemplateColumns: 'min-content',
-  columnGap: cssVar(system.space.x4, '1rem'),
-  rowGap: cssVar(system.space.x2, '0.5rem'),
-  padding: cssVar(system.space.x4, '1rem'),
-  borderRadius: cssVar(system.shape.x1, '0.25rem'),
+  columnGap: system.space.x4,
+  rowGap: system.space.x2,
+  padding: system.space.x4,
+  borderRadius: system.shape.x1,
 });
 
 const containerModifiers = createModifiers({
   variant: {
     emphasis: createStyles({
-      borderInlineStart: `solid ${cssVar(system.space.x1, '0.25rem')} ${cssVar(base.blueberry400)}`,
+      borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(base.blueberry400)}`,
     }),
     caution: createStyles({
-      borderInlineStart: `solid ${cssVar(system.space.x1, '0.25rem')} ${cssVar(
+      borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(
         base.cantaloupe400
       )}`,
     }),
     attention: createStyles({
-      borderInlineStart: `solid ${cssVar(system.space.x1, '0.25rem')} ${cssVar(base.cinnamon500)}`,
+      borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(base.cinnamon500)}`,
     }),
   },
 });
