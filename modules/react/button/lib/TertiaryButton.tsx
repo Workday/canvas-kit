@@ -148,7 +148,6 @@ export const TertiaryButton = createComponent('button')({
     {
       children,
       icon,
-      colors,
       size = 'medium',
       isThemeable,
       variant,
