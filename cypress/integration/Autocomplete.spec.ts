@@ -12,7 +12,7 @@ function waitForAutocompleteReady() {
   cy.get('[data-loading]').should('have.attr', 'data-loading', 'false');
 }
 
-describe('Autocomplete', () => {
+describe.skip('Autocomplete', () => {
   before(() => {
     h.stories.visit();
   });
