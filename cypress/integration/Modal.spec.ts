@@ -375,9 +375,8 @@ describe('Modal', () => {
         cy.checkA11y();
       });
 
-      it('should transfer focus to the header element', () => {
-        cy.findByRole('dialog', {name: 'Delete Item'})
-          .pipe(h.modal.getTitle)
+      it('should transfer focus to the cancel button', () => {
+        cy.findByRole('button', {name: 'Cancel'})
           .should('have.focus');
       });
 
@@ -409,22 +408,20 @@ describe('Modal', () => {
           });
         });
 
-        it('should transfer focus to the header element', () => {
-          cy.findByRole('dialog', {name: 'Delete Item'})
-            .pipe(h.modal.getTitle)
+        it('should transfer focus to the cancel button', () => {
+          cy.findByRole('button', {name: 'Cancel'})
             .should('have.focus');
         });
 
         it('should trap focus inside the modal element', () => {
-          cy.findByRole('dialog', {name: 'Delete Item'})
-            .pipe(h.modal.getTitle)
-            .should('have.focus');
+          cy.findByRole('button', {name: 'Cancel'}).should('have.focus');
           cy.tab()
             .should('contain', 'Delete')
             .tab()
-            .should('contain', 'Cancel')
-            .tab();
-          cy.focused().should('have.text', 'Delete');
+            .should('contain', 'Delete Item')
+            .tab()
+            .should('contain', 'Cancel');
+          cy.focused().should('have.text', 'Cancel');
         });
       });
 

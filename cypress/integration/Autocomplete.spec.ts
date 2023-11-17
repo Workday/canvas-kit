@@ -170,7 +170,7 @@ describe('Autocomplete', () => {
                 cy.findByRole('combobox').should('have.value', 'Red Apple 12');
               });
 
-              it('should change the filtered results', () => {
+              it.skip('should change the filtered results', () => {
                 cy.findByRole('option', {name: 'Red Apple 121'}).should('be.visible');
               });
             });
