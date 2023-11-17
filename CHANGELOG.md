@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.0.12](https://github.com/Workday/canvas-kit/releases/tag/v10.0.12) (2023-11-17)
+
+### Documentation
+
+- docs: Modal example a11y polish ([#2360](https://github.com/Workday/canvas-kit/pull/2360)) ([@williamjstanton](https://github.com/williamjstanton), [@josh-bagwell](https://github.com/josh-bagwell))
+
+
 ## [v10.0.11](https://github.com/Workday/canvas-kit/releases/tag/v10.0.11) (2023-11-16)
 
 ### Components
