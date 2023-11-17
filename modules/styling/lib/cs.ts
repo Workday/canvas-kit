@@ -260,6 +260,26 @@ export function csToProps(input: CSToPropsInput): CsToPropsReturn {
   // At this point, `input` is either an array or a `Record<T, string>`. If it isn't an array, it
   // must be a style object for setting CSS variables. So set the `style` attribute
   if (!Array.isArray(input)) {
+    // The input is an object. We'll separate variables from static styles. If static styles are
+    // detected here, a dynamic mode should be detected and done for development. The transform
+    // should take care of extracting static styles out of a render function and this function
+    // should not be run.
+    let hasStaticStyles = false;
+    const staticStyles: CSSObject = {};
+    const cssVars: Record<string, string> = {};
+    for (const key in input) {
+      if (key.startsWith('--')) {
+        cssVars[key] = (input as any)[key];
+      } else {
+        (staticStyles as any)[key] = (input as any)[key];
+        hasStaticStyles = true;
+      }
+    }
+
+    if (hasStaticStyles) {
+      const className = css(staticStyles);
+      return {style: cssVars, className};
+    }
     return {style: input};
   }
 
