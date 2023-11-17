@@ -8,12 +8,14 @@ import {
 import {Combobox} from '@workday/canvas-kit-react/combobox';
 
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {useSelectModel} from './hooks/useSelectModel';
 import {useSelectCard} from './hooks/useSelectCard';
 import {useSelectInput} from './hooks/useSelectInput';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
+import {createStyles} from '@workday/canvas-kit-styling';
 
 export interface SelectInputProps extends ExtractProps<typeof TextInput> {
   /**
@@ -23,6 +25,15 @@ export interface SelectInputProps extends ExtractProps<typeof TextInput> {
    */
   inputStartIcon?: CanvasSystemIcon;
 }
+
+const selectInputStyles = createStyles({
+  caretColor: 'transparent',
+  cursor: 'default',
+  '&::selection': {
+    backgroundColor: 'transparent',
+  },
+});
+
 export const SelectInput = createSubcomponent(TextInput)({
   modelHook: useSelectModel,
   elemPropsHook: useSelectInput,
@@ -38,8 +49,7 @@ export const SelectInput = createSubcomponent(TextInput)({
         <InputGroup.Input
           as={Element}
           placeholder={placeholder}
-          style={{caretColor: 'transparent', cursor: 'default'}}
-          {...elemProps}
+          {...mergeStyles(elemProps, [selectInputStyles])}
         ></InputGroup.Input>
         <InputGroup.InnerEnd position="absolute" pointerEvents="none">
           <SystemIcon icon={caretDownSmallIcon} />
