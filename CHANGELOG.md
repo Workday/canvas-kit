@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.0.13](https://github.com/Workday/canvas-kit/releases/tag/v10.0.13) (2023-11-17)
+
+### Components
+
+- fix(select): Remove visual selection on Select input ([#2410](https://github.com/Workday/canvas-kit/pull/2410)) ([@vibdev](https://github.com/vibdev))
+
+
 ## [v10.0.12](https://github.com/Workday/canvas-kit/releases/tag/v10.0.12) (2023-11-17)
 
 ### Documentation
