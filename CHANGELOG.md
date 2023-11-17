@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.0.14](https://github.com/Workday/canvas-kit/releases/tag/v10.0.14) (2023-11-17)
+
+### Components
+
+- fix: Update cs prop to create a class instead of style ([#2408](https://github.com/Workday/canvas-kit/pull/2408)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v10.0.13](https://github.com/Workday/canvas-kit/releases/tag/v10.0.13) (2023-11-17)
 
 ### Components
