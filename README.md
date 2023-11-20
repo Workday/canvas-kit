@@ -110,6 +110,8 @@ recommend against using it in production until the first stable version has been
   - [v6.0 Upgrade Guide](./modules/docs/mdx/6.0-UPGRADE-GUIDE.mdx)
   - [v7.0 Upgrade Guide](./modules/docs/mdx/7.0-UPGRADE-GUIDE.mdx)
   - [v8.0 Upgrade Guide](./modules/docs/mdx/8.0-UPGRADE-GUIDE.mdx)
+  - [v9.0 Upgrade Guide](./modules/docs/mdx/9.0-UPGRADE-GUIDE.mdx)
+  - [v10.0 Upgrade Guide](./modules/docs/mdx/10.0-UPGRADE-GUIDE.mdx)
 - Code Style / Best Practices:
   - [API & Pattern Guidelines](./modules/docs/mdx/API_PATTERN_GUIDELINES.mdx)
   - [Compound Components](./modules/docs/mdx/COMPOUND_COMPONENTS.mdx)
