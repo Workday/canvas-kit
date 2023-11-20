@@ -64,7 +64,8 @@ export const useSelectInput = composeHooks(
       },
       ref: elementRef,
       autoComplete: 'off',
-      defaultValue: model.state.selectedIds[0] || model.state.value,
+      defaultValue:
+        model.navigation.getItem(model.state.selectedIds[0], model).textValue || model.state.value,
     } as const;
   }),
   useComboboxKeyboardTypeAhead,
