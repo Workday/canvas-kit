@@ -1,3 +1,4 @@
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import React from 'react';
 import {assert} from './assert';
 import {memoize} from './memoize';
@@ -214,6 +215,7 @@ export type Component<P> = {
 interface RefForwardingComponent<T, P = {}> {
   (
     props: React.PropsWithChildren<P>,
+
     /**
      * A ref to be forwarded. Pass it along to the root element. If no element was passed, this
      * will result in a `never`
@@ -224,7 +226,8 @@ interface RefForwardingComponent<T, P = {}> {
      * to a root element or be the root element. If no element was passed, this will result in a
      * `never`
      */
-    Element: T extends undefined ? never : T
+    Element: T extends undefined ? never : T,
+    mergePropsAndStyles: typeof mergeStyles
   ): JSX.Element | null;
 }
 
@@ -536,10 +539,97 @@ export const createComponent =
       >) &
     SubComponents => {
     const ReturnedComponent = React.forwardRef<E, P & {as?: React.ElementType}>(
-      ({as: asOverride, ...props}, ref) => {
+      ({as: asOverride, ...props}, ref, mergePropsAndStyles) => {
         return Component(
           props as P,
           ref as ExtractRef<E>,
+          mergePropsAndStyles,
+          // Cast to `any` to avoid: "ts(2345): Type 'undefined' is not assignable to type 'E extends
+          // undefined ? never : E'" I'm not sure I can actually cast to this conditional type and it
+          // doesn't actually matter, so cast to `any` it is.
+          (asOverride || as) as any
+        );
+      }
+    );
+
+    Object.keys(subComponents || {}).forEach(key => {
+      // `ReturnedComponent` is a `React.ForwardRefExoticComponent` which has no additional keys so
+      // we'll cast to `Record<string, any>` for assignment. Note the lack of type checking
+      // properties. Take care when changing the runtime of this function.
+      (ReturnedComponent as Record<string, any>)[key] = (subComponents as Record<string, any>)[key];
+    });
+    ReturnedComponent.displayName = displayName;
+
+    // The `any`s are here because `ElementComponent` takes care of the `as` type and the
+    // `ReturnComponent` type is overridden
+    (ReturnedComponent as any).as = memoize(
+      (as: any) => createComponent(as)({displayName, Component, subComponents}),
+      as => as
+    );
+
+    // Cast as `any`. We have already specified the return type. Be careful making changes to this
+    // file due to this `any` `ReturnedComponent` is a `React.ForwardRefExoticComponent`, but we want
+    // it to be either an `Component` or `ElementComponent`
+    return ReturnedComponent as any;
+  };
+
+export const createStyledComponent =
+  <
+    E extends
+      | keyof JSX.IntrinsicElements
+      | React.ComponentType
+      | ElementComponent<any, any>
+      | undefined = undefined
+  >(
+    as?: E
+  ) =>
+  <P, SubComponents = {}>({
+    displayName,
+    Component,
+    subComponents,
+  }: {
+    /** This is what the component will look like in the React dev tools. Encouraged to more easily
+     * understand the component tree */
+    displayName?: string;
+    /** The component function. The function looks like:
+     * @example
+     * Component: ({children}, ref, Element) {
+     *   // `Element` is what's passed to the `as` of your component. If no `as` was defined, it
+     *   // will be the default element. It will be 'div' or even a another Component!
+     *   return (
+     *     <Element ref={ref}>{children}</Element>
+     *   )
+     * }
+     *
+     * @example
+     * Component: ({children}, ref, Element) {
+     *   // `Element` can be passed via `as` to the next component
+     *   return (
+     *     <AnotherElement as={Element} ref={ref}>{children}</AnotherElement>
+     *   )
+     * }
+     */
+    Component: RefForwardingComponent<E, P>;
+    /**
+     * Used in container components
+     */
+    subComponents?: SubComponents;
+  }): (E extends undefined
+    ? Component<P>
+    : ElementComponent<
+        // E is not `undefined` here, but Typescript thinks it could be, so we add another `undefined`
+        // check and cast to a `React.FC` to match a valid signature for `ElementComponent`.
+        // `React.FC` was chosen as the simplest valid interface.
+        E extends undefined ? React.FC : E,
+        P
+      >) &
+    SubComponents => {
+    const ReturnedComponent = React.forwardRef<E, P & {as?: React.ElementType}>(
+      ({as: asOverride, ...props}, ref, mergePropsAndStyles) => {
+        return Component(
+          props as P,
+          ref as ExtractRef<E>,
+          mergePropsAndStyles,
           // Cast to `any` to avoid: "ts(2345): Type 'undefined' is not assignable to type 'E extends
           // undefined ? never : E'" I'm not sure I can actually cast to this conditional type and it
           // doesn't actually matter, so cast to `any` it is.

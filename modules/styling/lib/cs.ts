@@ -322,6 +322,12 @@ export interface CSProps {
    */
   cs?: CSToPropsInput;
 }
+/**
+ * Extend DefaultProps when you need a component to be styled and it accepts children
+ */
+export interface DefaultProps extends CSProps {
+  children?: React.ReactNode;
+}
 
 /**
  * Creates CSS styles based on object-style input. It has a side-effect of adding CSS to the page
