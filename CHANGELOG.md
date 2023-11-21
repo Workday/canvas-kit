@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.0.16](https://github.com/Workday/canvas-kit/releases/tag/v10.0.16) (2023-11-21)
+
+### Documentation
+
+- docs: Update README to include latest upgrade guide links ([#2420](https://github.com/Workday/canvas-kit/pull/2420)) ([@vibdev](https://github.com/vibdev))
+
+
 ## [v10.0.15](https://github.com/Workday/canvas-kit/releases/tag/v10.0.15) (2023-11-21)
 
 ### Components
