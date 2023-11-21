@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.0.15](https://github.com/Workday/canvas-kit/releases/tag/v10.0.15) (2023-11-21)
+
+### Components
+
+- fix(select): Set initial selected id to the text value ([#2421](https://github.com/Workday/canvas-kit/pull/2421)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v10.0.14](https://github.com/Workday/canvas-kit/releases/tag/v10.0.14) (2023-11-17)
 
 ### Components
