@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.29](https://github.com/Workday/canvas-kit/releases/tag/v9.1.29) (2023-11-21)
+
+### Components
+
+- fix: Check for undefined error in radio group ([#2427](https://github.com/Workday/canvas-kit/pull/2427)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v9.1.28](https://github.com/Workday/canvas-kit/releases/tag/v9.1.28) (2023-11-20)
 
 ### Components
