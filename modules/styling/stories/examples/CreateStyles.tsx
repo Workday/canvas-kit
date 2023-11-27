@@ -35,9 +35,9 @@ const myComponentStyles = createStyles({
 });
 const MyComponent = createStyledComponent(Flex)({
   displayName: 'MyComponent',
-  Component: ({children, ...elemProps}: FlexProps, ref, Element, mergePropsAndStyles) => {
+  Component: ({children, ...elemProps}: FlexProps, ref, Element) => {
     return (
-      <Element ref={ref} {...mergePropsAndStyles(elemProps, [myComponentStyles])}>
+      <Element ref={ref} {...mergeStyles(elemProps, [myComponentStyles])}>
         {children}
       </Element>
     );

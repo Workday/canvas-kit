@@ -226,8 +226,7 @@ interface RefForwardingComponent<T, P = {}> {
      * to a root element or be the root element. If no element was passed, this will result in a
      * `never`
      */
-    Element: T extends undefined ? never : T,
-    mergePropsAndStyles: typeof mergeStyles
+    Element: T extends undefined ? never : T
   ): JSX.Element | null;
 }
 
@@ -539,11 +538,10 @@ export const createComponent =
       >) &
     SubComponents => {
     const ReturnedComponent = React.forwardRef<E, P & {as?: React.ElementType}>(
-      ({as: asOverride, ...props}, ref, mergePropsAndStyles) => {
+      ({as: asOverride, ...props}, ref) => {
         return Component(
           props as P,
           ref as ExtractRef<E>,
-          mergePropsAndStyles,
           // Cast to `any` to avoid: "ts(2345): Type 'undefined' is not assignable to type 'E extends
           // undefined ? never : E'" I'm not sure I can actually cast to this conditional type and it
           // doesn't actually matter, so cast to `any` it is.
@@ -625,11 +623,11 @@ export const createStyledComponent =
       >) &
     SubComponents => {
     const ReturnedComponent = React.forwardRef<E, P & {as?: React.ElementType}>(
-      ({as: asOverride, ...props}, ref, mergePropsAndStyles) => {
+      ({as: asOverride, ...props}, ref) => {
         return Component(
           props as P,
           ref as ExtractRef<E>,
-          mergePropsAndStyles,
+
           // Cast to `any` to avoid: "ts(2345): Type 'undefined' is not assignable to type 'E extends
           // undefined ? never : E'" I'm not sure I can actually cast to this conditional type and it
           // doesn't actually matter, so cast to `any` it is.
