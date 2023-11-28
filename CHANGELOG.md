@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.0.18](https://github.com/Workday/canvas-kit/releases/tag/v10.0.18) (2023-11-28)
+
+### Components
+
+- fix: Check for undefined error in radio group ([#2427](https://github.com/Workday/canvas-kit/pull/2427)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- fix: Quiet InputProvider logs for SSR ([#2431](https://github.com/Workday/canvas-kit/pull/2431)) ([@anicholls](https://github.com/anicholls))
+
+
 ## [v9.1.30](https://github.com/Workday/canvas-kit/releases/tag/v9.1.30) (2023-11-28)
 
 ### Components
