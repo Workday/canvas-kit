@@ -139,7 +139,7 @@ export class InputProvider extends React.Component<React.PropsWithChildren<Input
     } catch (e) {
       // Don't log if window is undefined (i.e. we are in an SSR environment), 
       // because we can assume the entire implementation will not work and is not needed.
-      if (window) {
+      if (typeof window !== 'undefined') {
         console.warn('Failed to retrieve input status from session storage' + e);
       }
     }
