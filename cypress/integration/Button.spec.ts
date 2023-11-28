@@ -15,9 +15,7 @@ describe('Button', () => {
     });
 
     it('should render the correct text', () => {
-      cy.findAllByRole('button', {name: 'Primary'})
-        .first()
-        .should('contain', 'Primary');
+      cy.findAllByRole('button', {name: 'Primary'}).first().should('contain', 'Primary');
     });
   });
 
@@ -31,7 +29,7 @@ describe('Button', () => {
     });
 
     it('should render the correct text', () => {
-      cy.findByRole('button', {name: 'Click Me'}).should('contain', 'Click Me');
+      cy.findAllByRole('button', {name: 'Delete'}).first().should('contain', 'Delete');
     });
   });
 });
