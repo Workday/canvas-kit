@@ -12,12 +12,8 @@ function assertOptionInView($option: JQuery) {
   const optionBox = option.getBoundingClientRect();
   const menuBox = menu.getBoundingClientRect();
 
-  expect(optionBox)
-    .property('top')
-    .to.be.gte(menuBox.top);
-  expect(optionBox)
-    .property('bottom')
-    .to.be.lte(menuBox.bottom);
+  expect(optionBox).property('top').to.be.gte(menuBox.top);
+  expect(optionBox).property('bottom').to.be.lte(menuBox.bottom);
 }
 
 describe('Menu', () => {
@@ -45,9 +41,7 @@ describe('Menu', () => {
         });
 
         it('should scroll the menu to show the active menu item', () => {
-          cy.findByRole('menu')
-            .pipe(getAssistiveFocus)
-            .should(assertOptionInView);
+          cy.findByRole('menu').pipe(getAssistiveFocus).should(assertOptionInView);
         });
       });
     });

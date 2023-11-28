@@ -17,6 +17,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - fix(select): Set initial selected id to the text value ([#2421](https://github.com/Workday/canvas-kit/pull/2421)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
 
 
+## [v9.1.28](https://github.com/Workday/canvas-kit/releases/tag/v9.1.28) (2023-11-20)
+
+### Components
+
+- fix: Table in preview export fix ([#2419](https://github.com/Workday/canvas-kit/pull/2419)) ([@josh-bagwell](https://github.com/josh-bagwell))
 ## [v10.0.14](https://github.com/Workday/canvas-kit/releases/tag/v10.0.14) (2023-11-17)
 
 ### Components
