@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.0.17](https://github.com/Workday/canvas-kit/releases/tag/v10.0.17) (2023-11-28)
+
+### Components
+
+- fix: Table in preview export fix ([#2419](https://github.com/Workday/canvas-kit/pull/2419)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
 ## [v10.0.16](https://github.com/Workday/canvas-kit/releases/tag/v10.0.16) (2023-11-21)
 
 ### Documentation
