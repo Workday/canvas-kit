@@ -1,7 +1,7 @@
 import React from 'react';
 import {CSSObject} from '@emotion/react';
 
-import {BaseButton, buttonVars} from '@workday/canvas-kit-react/button';
+import {BaseButton} from '@workday/canvas-kit-react/button';
 import {
   createContainer,
   focusRing,
