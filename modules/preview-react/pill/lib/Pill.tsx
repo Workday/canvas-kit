@@ -9,7 +9,7 @@ import {
   styled,
   StyledType,
 } from '@workday/canvas-kit-react/common';
-import {BoxProps, boxStyleFn, Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {BoxProps, boxStyleFn, Flex} from '@workday/canvas-kit-react/layout';
 import {borderRadius, colors, space, type} from '@workday/canvas-kit-react/tokens';
 
 import {usePillModel} from './usePillModel';
@@ -19,8 +19,6 @@ import {PillIconButton} from './PillIconButton';
 import {PillCount} from './PillCount';
 import {PillAvatar} from './PillAvatar';
 import {PillLabel} from './PillLabel';
-import {createStyles, cssVar} from '@workday/canvas-kit-styling';
-import {base, brand, system} from '@workday/canvas-tokens-web';
 
 export interface PillProps extends BoxProps {
   /**
@@ -127,7 +125,7 @@ const StyledBasePill = styled(BaseButton.as('button'))<StyledType & PillProps>(
 const StyledNonInteractivePill = styled(StyledBasePill)<StyledType>({
   [buttonVars.default.background]: colors.soap300,
   [buttonVars.default.border]: colors.licorice200,
-  [buttonVars.default.label]: cssVar(brand.primary.base),
+  [buttonVars.default.label]: colors.blackPepper400,
 
   [buttonVars.hover.background]: colors.soap300,
   [buttonVars.hover.border]: colors.licorice200,

@@ -29,9 +29,9 @@ const IconContainer = styled('div')({
  * Please consider using [`InputGroup`](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-text-input--icons) instead.
  * @deprecated
  */
-export const InputIconContainer: React.FunctionComponent<React.PropsWithChildren<
-  InputIconContainerProps
->> = ({grow, children, icon}) => (
+export const InputIconContainer: React.FunctionComponent<
+  React.PropsWithChildren<InputIconContainerProps>
+> = ({grow, children, icon}) => (
   <Container grow={grow}>
     {children}
     {icon && <IconContainer>{icon}</IconContainer>}
