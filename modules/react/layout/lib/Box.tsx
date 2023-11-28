@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import isPropValid from '@emotion/is-prop-valid';
 import {createComponent, StyledType, useConstant} from '@workday/canvas-kit-react/common';
+import {CSProps, handleCsProp} from '@workday/canvas-kit-styling';
 
 // style props
 import {background} from './utils/background';
@@ -34,9 +35,10 @@ import {CommonStyleProps} from './utils/styleProps';
  * - space
  * - text
  */
-export type BoxProps = CommonStyleProps & {
-  children?: React.ReactNode;
-};
+export type BoxProps = CommonStyleProps &
+  CSProps & {
+    children?: React.ReactNode;
+  };
 
 const omittedProps = [
   'display',
@@ -142,7 +144,7 @@ export const Box = createComponent('div')({
     );
 
     return (
-      <BoxComponent as={Element} ref={ref} {...elemProps}>
+      <BoxComponent as={Element} ref={ref} {...handleCsProp(elemProps)}>
         {children}
       </BoxComponent>
     );

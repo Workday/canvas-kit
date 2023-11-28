@@ -31,5 +31,21 @@ export const PopupPopper = createSubcomponent('div')({
   modelHook: usePopupModel,
   elemPropsHook: usePopupPopper,
 })<PopupPopperProps>(({children, ...elemProps}) => {
-  return <Popper {...elemProps}>{children}</Popper>;
+  return (
+    <Popper
+      popperOptions={{
+        modifiers: [
+          {
+            name: 'offset',
+            options: {
+              offset: () => [0, 4],
+            },
+          },
+        ],
+      }}
+      {...elemProps}
+    >
+      {children}
+    </Popper>
+  );
 });

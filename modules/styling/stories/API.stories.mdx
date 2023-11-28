@@ -1,0 +1,194 @@
+import {SymbolDoc} from '@workday/canvas-kit-docs';
+
+import {CreateStyles} from './examples/CreateStyles';
+import {CreateVars} from './examples/CreateVars';
+import {CreateModifiers} from './examples/CreateModifiers';
+import {StylingOverrides} from './examples/StylingOverrides';
+
+<Meta title="Features/Styling/API" />
+
+## Usage
+
+<SymbolDoc name="createStyles" />
+
+<ExampleCodeBlock code={CreateStyles} />
+
+In this example, the HTML will look like:
+
+```html
+<div class="css-m39zwu"></div>
+```
+
+The CSS will look like this:
+
+```css
+.css-m39zwu {
+  width: 100px;
+  height: 100px;
+  background-color: gray;
+}
+```
+
+We're using `className` for simplicity here. Most components will use the `cs` prop instead for more
+versatility.
+
+<SymbolDoc name="createVars" />
+
+<ExampleCodeBlock code={CreateVars} />
+
+In this example, the HTML will look like:
+
+```html
+<div class="css-4iptxs" style="--c6kna-background: gray;"></div>
+<div class="css-4iptxs" style="--c6kna-background: blue;"></div>
+```
+
+And the CSS will look like:
+
+```css
+.css-4iptxs {
+  width: 100px;
+  height: 100px;
+  background-color: var(--c6kna-background);
+}
+```
+
+<SymbolDoc name="createModifiers" />
+
+<ExampleCodeBlock code={CreateModifiers} />
+
+<SymbolDoc name="mergeStyles" />
+
+## Styling Precedence
+
+In v9, we used `@emotion/styled` or `@emotion/react` for all styling which is a runtime styling
+solution. Starting in v10, we're migrating our styling to a more static solution using
+`createStyles` and the `cs` prop.
+
+For a transition period, we're opting for backwards compatibility. If style props are present,
+[styled components](https://emotion.sh/docs/styled) are used, or the
+[css prop](https://emotion.sh/docs/css-prop) is used in a component, Emotion's style merging will be
+invoked to make sure the following style precedence:
+
+```
+createStyles > CSS Prop > Styled Component > Style props
+```
+
+This will mean that any `css` prop or use of `styled` within the component tree _per element_ will
+cause style class merging. For example:
+
+```tsx
+import styled from '@emotion/styled';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
+
+const styles1 = createStyles({
+  padding: 4,
+});
+
+const styles2 = createStyles({
+  padding: 12,
+});
+
+const Component1 = props => {
+  return <div {...mergeStyles(props, [styles1])} />;
+};
+
+const Component2 = props => {
+  return <Component1 cs={styles2} />;
+};
+
+const Component3 = styled(Component1)({
+  padding: 8,
+});
+
+const Component4 = props => {
+  return <Component3 cs={styles2} />;
+};
+
+export default () => (
+  <>
+    <Component1 />
+    <Component2 />
+    <Component3 />
+    <Component4 />
+  </>
+);
+```
+
+The `styled` component API is forcing `mergeStyles` to go into Emotion merge mode, which removes the
+`style1` class name and creates a new class based on all the merged style properties. So
+`.component3` is a new class created by Emotion at render time that merges `.style1` and
+`{padding: 8px}`. `Component4` renders `Component3` with a `cs` prop, but `Component3` is already in
+merge mode and so `Component4` will also merge all styles into a new class name of `.component4`
+that has the styles from `.style1`, `.component3`, and `{padding: 12px}`:
+
+```html
+<head>
+  <style>
+    .styles1 {
+      padding: 4px;
+    }
+    .styles2 {
+      padding: 8px;
+    }
+    .component3 {
+      padding: 4px;
+      padding: 8px;
+    }
+    .component4 {
+      padding: 4px;
+      padding: 8px;
+      padding: 12px;
+    }
+  </style>
+</head>
+
+<div class="styles1"></div>
+<div class="styles1 styles2"></div>
+<div class="component3"></div>
+<div class="component4"></div>
+```
+
+The `css` prop and `styled` component APIs will rewrite the `className` React prop by iterating over
+all class names and seeing if any exist within the cache. If a class name does exist in the cache,
+the CSS properties are copied to a new style property map until all the class names are evaluated
+and removed from the `className` prop. Emotion will then combine all the CSS properties and inject a
+new `StyleSheet` with a new class name and add that class name to the element.
+
+The following example shows this style merging.
+
+<ExampleCodeBlock code={StylingOverrides} />
+
+## Performance
+
+`createStyles` is more performant than `styled` components or the `css` prop because the styles must
+be statically evaluated. The actual characters of a CSS property value cannot change at runtime.
+This means we do not need to recalculate a hash every render or inject new `StyleSheet` entries into
+the `StyleSheetList` in a render cycle. Injecting new `StyleSheets` causes slow
+[Style Recalculation](https://web.dev/articles/reduce-the-scope-and-complexity-of-style-calculations).
+What is not well known is browser engines maintain an internal selector cache to make style
+recalculations as fast as possible. Adding a CSS class to a DOM element will invoke a style
+recalculation, but if the the CSS selector is already in the `StyleSheetList`, the browser can
+optimize how those styles are applied to the current element.
+
+In the runtime Emotion's case, a novel style will result in a new style hash which results in a new
+`StyleSheet` being injected into the `StyleSheetList`. To be safe, the browser's runtime engine will
+throw away any style recalculation cache and start from scratch. This happens if you render a new
+component on the page that hasn't been rendered yet, or if you make one of your style properties
+dynamic between render cycles. Eventually the Emotion cache gets warm and style recalcuation costs
+start to normalize and no longer invalidate the browser's selector cache.
+
+On a page with over 1,000 elements and over 1,000
+[CSSRules](https://developer.mozilla.org/en-US/docs/Web/API/CSSRule), (typical of a large web
+application), the difference between a &lt; 1ms for warmed selector cache and &gt; 100ms for a fresh
+selector cache. `createStyles` encourages a pattern similar to [BEM](https://getbem.com/) which
+works well with the browser's selector cache by not injecting new `StyleSheet`s during a page's
+normal operations. All styles are injected before any rendering takes place.
+
+> **Note:** Since style props force Emotion's dynamic rendering, style props will fall back to
+> Emotion's runtime performance characteristics and lose any benefits gained. Also if you use
+> `styled` components or the `css` prop in a tree that uses `createStyles`, the styles created by
+> the runtime APIs will still result in a selector cache invalidation. Even if you want to use
+> `styled` or the `css` prop, consider using CSS Variables for dynamic CSS property values to reduce
+> the performance overhead of Emotion.

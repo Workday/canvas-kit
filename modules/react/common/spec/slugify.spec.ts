@@ -10,15 +10,19 @@ describe('slugify', () => {
   });
 
   it('should lowercase all letters', () => {
-    expect(slugify('Ab')).toEqual('ab');
+    expect(slugify('ABb')).toEqual('a-bb');
   });
 
   it('should add dashes for all spaces', () => {
     expect(slugify('a b')).toEqual('a-b');
   });
 
+  it('should add dashes for all . characters', () => {
+    expect(slugify('a.b')).toEqual('a-b');
+  });
+
   it('should remove all non-alphanumeric characters', () => {
-    expect(slugify('a.b')).toEqual('ab');
+    expect(slugify('a$b')).toEqual('ab');
   });
 
   it('should collapse multiple spaces into a single dash', () => {
