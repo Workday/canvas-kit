@@ -76,12 +76,16 @@ export const RadioGroup = createContainer(Flex)({
       transition="100ms box-shadow"
       marginX={`-${space.xs}`}
       width="fit-content"
-      style={{
-        boxShadow:
-          errorColors.outer !== errorColors.inner
-            ? `inset 0 0 0 1px ${errorColors.outer}, inset 0 0 0 3px ${errorColors.inner}`
-            : `inset 0 0 0 2px ${errorColors.inner}`,
-      }}
+      style={
+        error !== undefined
+          ? {
+              boxShadow:
+                errorColors.outer !== errorColors.inner
+                  ? `inset 0 0 0 1px ${errorColors.outer}, inset 0 0 0 3px ${errorColors.inner}`
+                  : `inset 0 0 0 2px ${errorColors.inner}`,
+            }
+          : undefined
+      }
       {...elemProps}
     >
       {children}
