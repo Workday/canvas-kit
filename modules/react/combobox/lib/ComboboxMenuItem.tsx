@@ -4,15 +4,17 @@ import {
   composeHooks,
   createElemPropsHook,
   createSubcomponent,
+  styled,
 } from '@workday/canvas-kit-react/common';
 import {StyledMenuItem, useMenuModel} from '@workday/canvas-kit-react/menu';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {
   useListItemAllowChildStrings,
   useListItemRegister,
 } from '@workday/canvas-kit-react/collection';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 
-import {useComboboxModel} from './useComboboxModel';
+import {useComboboxModel} from './hooks/useComboboxModel';
 
 export interface ComboboxMenuItemProps {
   children: React.ReactNode;
@@ -26,17 +28,13 @@ export interface ComboboxMenuItemProps {
  * added when the item has "focus" (when the cursor is on the item).
  */
 export const useComboboxMenuItem = composeHooks(
-  createElemPropsHook(useMenuModel)((model, _, elemProps: {'data-id'?: string} = {}) => {
+  createElemPropsHook(useMenuModel)((model, ref, elemProps: {'data-id'?: string} = {}) => {
     const id = elemProps['data-id'] || '';
+
     const onMouseDown = (event: React.MouseEvent<HTMLElement>) => {
-      if (
-        model.state.nonInteractiveIds.includes(id) ||
-        event.currentTarget.hasAttribute('aria-disabled')
-      ) {
-        return;
-      }
       if (event.currentTarget.getAttribute('aria-disabled') !== 'true') {
         model.events.select({id});
+
         if (model.state.mode === 'single') {
           model.events.hide(event);
         }
@@ -63,6 +61,9 @@ export const useComboboxMenuItem = composeHooks(
 export const ComboboxMenuItem = createSubcomponent('li')({
   modelHook: useComboboxModel,
   elemPropsHook: useComboboxMenuItem,
+  subComponents: {
+    Icon: styled(SystemIcon)({alignSelf: 'start'}),
+  },
 })<ComboboxMenuItemProps>(({children, ...elemProps}, Element) => {
   return (
     <OverflowTooltip placement="left">

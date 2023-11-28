@@ -19,6 +19,7 @@ const externalSymbols: Record<string, Record<string, string>> = {
     'React.ReactNode': 'https://reactjs.org/docs/rendering-elements.html',
     SyntheticEvent: 'https://reactjs.org/docs/events.html',
     'React.SyntheticEvent': 'https://reactjs.org/docs/events.html',
+    'React.CSSProperties': 'https://developer.mozilla.org/en-US/docs/Web/CSS',
     'Ref': 'https://reactjs.org/docs/refs-and-the-dom.html',
     'React.Ref': 'https://reactjs.org/docs/refs-and-the-dom.html',
     PopperOptions: 'https://popper.js.org/docs/v2/constructors/#options'
