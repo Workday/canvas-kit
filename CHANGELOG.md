@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.30](https://github.com/Workday/canvas-kit/releases/tag/v9.1.30) (2023-11-28)
+
+### Components
+
+- fix: Quiet InputProvider logs for SSR ([#2431](https://github.com/Workday/canvas-kit/pull/2431)) ([@anicholls](https://github.com/anicholls))
+
+
 ## [v9.1.29](https://github.com/Workday/canvas-kit/releases/tag/v9.1.29) (2023-11-21)
 
 ### Components
