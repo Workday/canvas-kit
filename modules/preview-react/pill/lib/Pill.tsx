@@ -9,7 +9,7 @@ import {
   styled,
   StyledType,
 } from '@workday/canvas-kit-react/common';
-import {BoxProps, boxStyleFn, Flex} from '@workday/canvas-kit-react/layout';
+import {BoxProps, boxStyleFn, Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {borderRadius, colors, space, type} from '@workday/canvas-kit-react/tokens';
 
 import {usePillModel} from './usePillModel';
@@ -19,7 +19,8 @@ import {PillIconButton} from './PillIconButton';
 import {PillCount} from './PillCount';
 import {PillAvatar} from './PillAvatar';
 import {PillLabel} from './PillLabel';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {createStyles, cssVar} from '@workday/canvas-kit-styling';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 
 export interface PillProps extends BoxProps {
   /**
@@ -95,6 +96,30 @@ const getRemovablePillColors = (disabled?: boolean) => {
   };
 };
 
+const removeablePillColors = createStyles({
+  [buttonVars.default.background]: colors.soap300,
+  [buttonVars.default.border]: colors.licorice200,
+  [buttonVars.default.label]: colors.blackPepper400,
+
+  [buttonVars.hover.background]: colors.soap300,
+  [buttonVars.hover.border]: colors.licorice200,
+  [buttonVars.hover.label]: colors.blackPepper400,
+
+  [buttonVars.focus.background]: colors.soap300,
+  [buttonVars.focus.border]: colors.licorice200,
+  [buttonVars.focus.label]: colors.blackPepper400,
+  // [buttonVars.focus.boxShadowInner]: cssVar(base.frenchVanilla100, '#ffffff'),
+  // [buttonVars.focus.boxShadowOuter]: cssVar(brand.common.focusOutline, '#0875e1'),
+
+  [buttonVars.active.background]: colors.soap500,
+  [buttonVars.active.border]: colors.licorice500,
+  [buttonVars.active.label]: colors.blackPepper400,
+
+  [buttonVars.disabled.background]: colors.soap100,
+  [buttonVars.disabled.label]: colors.licorice100,
+  opacity: 1,
+});
+
 const pillBaseStyles: CSSObject = {
   display: 'inline-flex',
   alignItems: 'center',
@@ -154,6 +179,26 @@ const StyledBasePill = styled(BaseButton.as('button'))<StyledType & PillProps>(
 );
 
 const StyledNonInteractivePill = styled(StyledBasePill)<StyledType>({
+  [buttonVars.default.background]: colors.soap300,
+  [buttonVars.default.border]: colors.licorice200,
+  [buttonVars.default.label]: cssVar(brand.primary.base),
+
+  [buttonVars.hover.background]: colors.soap300,
+  [buttonVars.hover.border]: colors.licorice200,
+  [buttonVars.hover.label]: colors.blackPepper400,
+
+  [buttonVars.focus.background]: colors.soap300,
+  [buttonVars.focus.border]: colors.licorice200,
+  [buttonVars.focus.label]: colors.blackPepper400,
+  // [buttonVars.focus.boxShadowInner]: cssVar(base.frenchVanilla100, '#ffffff'),
+  // [buttonVars.focus.boxShadowOuter]: cssVar(brand.common.focusOutline, '#0875e1'),
+
+  [buttonVars.active.background]: colors.soap500,
+  [buttonVars.active.border]: colors.licorice500,
+  [buttonVars.active.label]: colors.blackPepper400,
+
+  [buttonVars.disabled.background]: colors.soap100,
+  [buttonVars.disabled.label]: colors.licorice100,
   cursor: 'default',
   overflow: 'revert', // override BaseButton overflow styles so the click target exists outside the pill for removable
   position: 'relative',
@@ -164,6 +209,29 @@ const StyledNonInteractivePill = styled(StyledBasePill)<StyledType>({
       outerColor: 'transparent',
     }),
   },
+});
+
+const StyledReadOnlyPill = styled(StyledNonInteractivePill)<StyledType>({
+  [buttonVars.default.background]: 'transparent',
+  [buttonVars.default.border]: colors.licorice200,
+  [buttonVars.default.label]: cssVar(brand.primary.base),
+
+  [buttonVars.hover.background]: 'transparent',
+  [buttonVars.hover.border]: colors.licorice200,
+  [buttonVars.hover.label]: colors.blackPepper400,
+
+  [buttonVars.focus.background]: 'transparent',
+  [buttonVars.focus.border]: colors.licorice200,
+  [buttonVars.focus.label]: colors.blackPepper400,
+  // [buttonVars.focus.boxShadowInner]: cssVar(base.frenchVanilla100, '#ffffff'),
+  // [buttonVars.focus.boxShadowOuter]: cssVar(brand.common.focusOutline, '#0875e1'),
+
+  [buttonVars.active.background]: 'transparent',
+  [buttonVars.active.border]: colors.licorice500,
+  [buttonVars.active.label]: colors.blackPepper400,
+
+  [buttonVars.disabled.background]: 'transparent',
+  [buttonVars.disabled.label]: colors.licorice100,
 });
 
 /**
@@ -278,16 +346,15 @@ export const Pill = createContainer('button')({
   return (
     <>
       {variant === 'readOnly' && (
-        <StyledNonInteractivePill
+        <StyledReadOnlyPill
           maxWidth={model.state.maxWidth}
           as={Element !== 'button' ? Element : 'span'}
-          pointerEvents="none"
           border={`1px solid ${colors.licorice200}`}
           id={model.state.id}
           {...elemProps}
         >
           <PillLabel>{elemProps.children}</PillLabel>
-        </StyledNonInteractivePill>
+        </StyledReadOnlyPill>
       )}
       {variant === 'default' && (
         <StyledBasePill
@@ -312,7 +379,7 @@ export const Pill = createContainer('button')({
       )}
       {variant === 'removable' && (
         <StyledNonInteractivePill
-          colors={getRemovablePillColors(model.state.disabled)}
+          // colors={getRemovablePillColors(model.state.disabled)}
           as={Element !== 'button' ? Element : 'span'}
           variant={variant}
           {...elemProps}
