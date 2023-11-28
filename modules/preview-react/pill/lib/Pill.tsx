@@ -1,7 +1,7 @@
 import React from 'react';
 import {CSSObject} from '@emotion/react';
 
-import {BaseButton} from '@workday/canvas-kit-react/button';
+import {BaseButton, buttonVars} from '@workday/canvas-kit-react/button';
 import {
   createContainer,
   focusRing,
@@ -19,6 +19,7 @@ import {PillIconButton} from './PillIconButton';
 import {PillCount} from './PillCount';
 import {PillAvatar} from './PillAvatar';
 import {PillLabel} from './PillLabel';
+import {createStyles} from '@workday/canvas-kit-styling';
 
 export interface PillProps extends BoxProps {
   /**
@@ -280,6 +281,7 @@ export const Pill = createContainer('button')({
         <StyledNonInteractivePill
           maxWidth={model.state.maxWidth}
           as={Element !== 'button' ? Element : 'span'}
+          pointerEvents="none"
           border={`1px solid ${colors.licorice200}`}
           id={model.state.id}
           {...elemProps}
