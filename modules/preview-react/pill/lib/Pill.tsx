@@ -66,60 +66,6 @@ const getButtonPillColors = () => {
   };
 };
 
-const getRemovablePillColors = (disabled?: boolean) => {
-  return {
-    default: {
-      background: disabled ? colors.soap100 : colors.soap300,
-      icon: disabled ? colors.licorice100 : colors.licorice200,
-      label: disabled ? colors.licorice100 : colors.blackPepper400,
-      border: disabled ? colors.licorice100 : colors.licorice200,
-    },
-    hover: {
-      icon: disabled ? colors.licorice100 : colors.licorice500,
-      background: disabled ? colors.soap100 : colors.soap300,
-      border: disabled ? colors.licorice100 : colors.licorice200,
-      label: disabled ? colors.licorice100 : colors.blackPepper400,
-    },
-    active: {
-      icon: disabled ? colors.licorice100 : colors.licorice500,
-      background: disabled ? colors.soap100 : colors.soap500,
-      border: disabled ? colors.licorice100 : colors.licorice500,
-      label: disabled ? colors.licorice100 : colors.blackPepper400,
-    },
-    focus: {
-      icon: colors.licorice200,
-      background: colors.soap300,
-      label: colors.blackPepper400,
-      border: colors.licorice200,
-    },
-    disabled: {},
-  };
-};
-
-const removeablePillColors = createStyles({
-  [buttonVars.default.background]: colors.soap300,
-  [buttonVars.default.border]: colors.licorice200,
-  [buttonVars.default.label]: colors.blackPepper400,
-
-  [buttonVars.hover.background]: colors.soap300,
-  [buttonVars.hover.border]: colors.licorice200,
-  [buttonVars.hover.label]: colors.blackPepper400,
-
-  [buttonVars.focus.background]: colors.soap300,
-  [buttonVars.focus.border]: colors.licorice200,
-  [buttonVars.focus.label]: colors.blackPepper400,
-  // [buttonVars.focus.boxShadowInner]: cssVar(base.frenchVanilla100, '#ffffff'),
-  // [buttonVars.focus.boxShadowOuter]: cssVar(brand.common.focusOutline, '#0875e1'),
-
-  [buttonVars.active.background]: colors.soap500,
-  [buttonVars.active.border]: colors.licorice500,
-  [buttonVars.active.label]: colors.blackPepper400,
-
-  [buttonVars.disabled.background]: colors.soap100,
-  [buttonVars.disabled.label]: colors.licorice100,
-  opacity: 1,
-});
-
 const pillBaseStyles: CSSObject = {
   display: 'inline-flex',
   alignItems: 'center',
@@ -190,8 +136,6 @@ const StyledNonInteractivePill = styled(StyledBasePill)<StyledType>({
   [buttonVars.focus.background]: colors.soap300,
   [buttonVars.focus.border]: colors.licorice200,
   [buttonVars.focus.label]: colors.blackPepper400,
-  // [buttonVars.focus.boxShadowInner]: cssVar(base.frenchVanilla100, '#ffffff'),
-  // [buttonVars.focus.boxShadowOuter]: cssVar(brand.common.focusOutline, '#0875e1'),
 
   [buttonVars.active.background]: colors.soap500,
   [buttonVars.active.border]: colors.licorice500,
@@ -213,25 +157,10 @@ const StyledNonInteractivePill = styled(StyledBasePill)<StyledType>({
 
 const StyledReadOnlyPill = styled(StyledNonInteractivePill)<StyledType>({
   [buttonVars.default.background]: 'transparent',
-  [buttonVars.default.border]: colors.licorice200,
-  [buttonVars.default.label]: cssVar(brand.primary.base),
-
   [buttonVars.hover.background]: 'transparent',
-  [buttonVars.hover.border]: colors.licorice200,
-  [buttonVars.hover.label]: colors.blackPepper400,
-
   [buttonVars.focus.background]: 'transparent',
-  [buttonVars.focus.border]: colors.licorice200,
-  [buttonVars.focus.label]: colors.blackPepper400,
-  // [buttonVars.focus.boxShadowInner]: cssVar(base.frenchVanilla100, '#ffffff'),
-  // [buttonVars.focus.boxShadowOuter]: cssVar(brand.common.focusOutline, '#0875e1'),
-
   [buttonVars.active.background]: 'transparent',
-  [buttonVars.active.border]: colors.licorice500,
-  [buttonVars.active.label]: colors.blackPepper400,
-
   [buttonVars.disabled.background]: 'transparent',
-  [buttonVars.disabled.label]: colors.licorice100,
 });
 
 /**
