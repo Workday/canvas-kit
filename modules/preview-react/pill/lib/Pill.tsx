@@ -19,7 +19,6 @@ import {PillIconButton} from './PillIconButton';
 import {PillCount} from './PillCount';
 import {PillAvatar} from './PillAvatar';
 import {PillLabel} from './PillLabel';
-import {createStyles} from '@workday/canvas-kit-styling';
 
 export interface PillProps extends BoxProps {
   /**
