@@ -142,7 +142,7 @@ const baseButtonStyles = createStyles({
   overflow: 'hidden',
   transition:
     'box-shadow 120ms linear, border 120ms linear, background-color 120ms linear, color 120ms linear',
-  '&:disabled, &:disabled:active': {
+  '&:disabled, &:disabled:active, &.disabled': {
     cursor: 'default',
     boxShadow: 'none',
     opacity: cssVar(buttonVars.disabled.opacity, '1'),
@@ -197,7 +197,7 @@ const baseButtonStyles = createStyles({
       fill: cssVar(buttonVars.active.icon),
     },
   },
-  '&:disabled': {
+  '&:disabled, &.disabled': {
     backgroundColor: cssVar(buttonVars.disabled.background, 'transparent'),
     borderColor: cssVar(buttonVars.disabled.border, 'transparent'),
     color: cssVar(buttonVars.disabled.label, cssVar(base.blackPepper400, '#333333')),

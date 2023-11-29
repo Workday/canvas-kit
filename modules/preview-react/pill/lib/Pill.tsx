@@ -28,42 +28,6 @@ export interface PillProps extends BoxProps {
   variant?: 'default' | 'readOnly' | 'removable';
 }
 
-const getButtonPillColors = () => {
-  return {
-    default: {
-      background: colors.soap300,
-      icon: colors.licorice200,
-      label: colors.blackPepper400,
-      border: colors.licorice200,
-    },
-    focus: {
-      icon: colors.licorice500,
-      background: colors.soap300,
-      border: colors.blueberry400,
-      label: colors.blackPepper400,
-    },
-    hover: {
-      icon: colors.licorice500,
-      background: colors.soap400,
-      border: colors.licorice400,
-      label: colors.blackPepper400,
-    },
-    active: {
-      icon: colors.licorice500,
-      background: colors.soap500,
-      border: colors.licorice500,
-      label: colors.blackPepper400,
-    },
-    disabled: {
-      icon: colors.licorice100,
-      label: colors.licorice100,
-      background: colors.soap100,
-      border: colors.licorice100,
-      opacity: '1',
-    },
-  };
-};
-
 const pillBaseStyles: CSSObject = {
   display: 'inline-flex',
   alignItems: 'center',
@@ -85,6 +49,7 @@ const pillBaseStyles: CSSObject = {
 const StyledBasePill = styled(BaseButton.as('button'))<StyledType & PillProps>(
   {
     ...pillBaseStyles,
+
     '&:focus': {
       'span[data-count="ck-pill-count"]': {
         borderTop: `1px solid ${colors.blueberry400}`,
@@ -106,7 +71,34 @@ const StyledBasePill = styled(BaseButton.as('button'))<StyledType & PillProps>(
         },
       },
     }),
+    // Default Styles
+    [buttonVars.default.background]: colors.soap300,
+    [buttonVars.default.border]: colors.licorice200,
+    [buttonVars.default.label]: colors.blackPepper400,
+    [buttonVars.default.icon]: colors.licorice200,
+    // Hover Styles
+    [buttonVars.hover.background]: colors.soap400,
+    [buttonVars.hover.border]: colors.licorice400,
+    [buttonVars.hover.label]: colors.blackPepper400,
+    [buttonVars.hover.icon]: colors.licorice500,
+    // Focus Styles
+    [buttonVars.focus.background]: colors.soap300,
+    [buttonVars.focus.border]: colors.blueberry400,
+    [buttonVars.focus.label]: colors.blackPepper400,
+    [buttonVars.focus.icon]: colors.licorice500,
+    // Active Styles
+    [buttonVars.active.background]: colors.soap500,
+    [buttonVars.active.border]: colors.licorice500,
+    [buttonVars.active.label]: colors.blackPepper400,
+    [buttonVars.active.icon]: colors.licorice500,
+    // Disabled Styles
+    [buttonVars.disabled.background]: colors.soap100,
+    [buttonVars.disabled.border]: colors.licorice100,
+    [buttonVars.disabled.label]: colors.licorice100,
+    [buttonVars.disabled.opacity]: '1',
+    [buttonVars.disabled.icon]: colors.licorice100,
   },
+
   ({variant}) => ({
     '&:focus, &:focus-visible': {
       borderColor: variant === 'removable' ? undefined : colors.blueberry400,
@@ -159,6 +151,7 @@ const StyledReadOnlyPill = styled(StyledNonInteractivePill)<StyledType>({
   [buttonVars.focus.background]: 'transparent',
   [buttonVars.active.background]: 'transparent',
   [buttonVars.disabled.background]: 'transparent',
+  border: `1px solid ${colors.licorice200}`,
 });
 
 /**
@@ -274,9 +267,7 @@ export const Pill = createContainer('button')({
     <>
       {variant === 'readOnly' && (
         <StyledReadOnlyPill
-          maxWidth={model.state.maxWidth}
           as={Element !== 'button' ? Element : 'span'}
-          border={`1px solid ${colors.licorice200}`}
           id={model.state.id}
           {...elemProps}
         >
@@ -284,12 +275,7 @@ export const Pill = createContainer('button')({
         </StyledReadOnlyPill>
       )}
       {variant === 'default' && (
-        <StyledBasePill
-          colors={getButtonPillColors()}
-          as={Element}
-          {...elemProps}
-          disabled={model.state.disabled}
-        >
+        <StyledBasePill as={Element} {...elemProps} disabled={model.state.disabled}>
           <Flex gap="xxxs" display="inline-flex" alignItems="center">
             {React.Children.map(elemProps.children, (child, index) => {
               if (typeof child === 'string') {
@@ -306,9 +292,10 @@ export const Pill = createContainer('button')({
       )}
       {variant === 'removable' && (
         <StyledNonInteractivePill
-          // colors={getRemovablePillColors(model.state.disabled)}
           as={Element !== 'button' ? Element : 'span'}
           variant={variant}
+          type={undefined}
+          className={model.state.disabled ? 'disabled' : undefined}
           {...elemProps}
         >
           <Flex gap="xxxs" display="inline-flex" alignItems="center" justifyContent="center">
