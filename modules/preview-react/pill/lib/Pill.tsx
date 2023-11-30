@@ -269,6 +269,7 @@ export const Pill = createContainer('button')({
         <StyledReadOnlyPill
           as={Element !== 'button' ? Element : 'span'}
           id={model.state.id}
+          maxWidth={model.state.maxWidth}
           {...elemProps}
         >
           <PillLabel>{elemProps.children}</PillLabel>
