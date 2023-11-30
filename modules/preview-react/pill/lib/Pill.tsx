@@ -299,7 +299,6 @@ export const Pill = createContainer('button')({
         <StyledNonInteractivePill
           as={Element !== 'button' ? Element : 'span'}
           variant={variant}
-          id="foo"
           type={undefined}
           cs={model.state.disabled ? 'disabled' : undefined}
           {...elemProps}
