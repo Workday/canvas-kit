@@ -139,12 +139,11 @@ export const RemovablePillStates = () => {
         columnProps={stateTableColumnProps}
       >
         {({avatar, maxWidth, ...props}) => {
-          // console.log(props)
           return (
             <Pill variant="removable" {...props}>
               {avatar && <Pill.Avatar url={testAvatar} />}
               {maxWidth ? 'This is a super long text that should overflow' : 'PillLabel'}
-              <Pill.IconButton />
+              <Pill.IconButton {...props} />
             </Pill>
           );
         }}
