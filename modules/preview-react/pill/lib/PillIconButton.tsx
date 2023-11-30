@@ -60,6 +60,7 @@ const StyledIconButton = styled(BaseButton)<StyledType & PillIconButtonProps>({
   [buttonVars.disabled.background]: colors.soap100,
   [buttonVars.disabled.label]: colors.licorice100,
   [buttonVars.disabled.border]: 'transparent',
+  [buttonVars.disabled.icon]: colors.licorice100,
 });
 
 export const PillIconButton = createSubcomponent('button')({

@@ -11,7 +11,7 @@ export const WithRemovable = () => {
   return (
     <Box>
       <Flex gap="xxs">
-        <Pill variant="removable">
+        {/* <Pill variant="removable">
           Pink Shirts
           <Pill.IconButton onClick={() => setText('The first pill is clicked!')} />
         </Pill>
@@ -19,8 +19,8 @@ export const WithRemovable = () => {
           <Pill.Avatar url={testAvatar} />
           Carolyn Grimaldi
           <Pill.IconButton onClick={() => setText('The second pill is clicked!')} />
-        </Pill>
-        <Pill variant="removable" disabled>
+        </Pill> */}
+        <Pill variant="removable" className="foo" disabled>
           <Pill.Label>This is a category that should not exist because it is too long</Pill.Label>
           <Pill.IconButton />
         </Pill>

@@ -11,6 +11,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {BoxProps, boxStyleFn, Flex} from '@workday/canvas-kit-react/layout';
 import {borderRadius, colors, space, type} from '@workday/canvas-kit-react/tokens';
+import {CSProp} from '@workday/canvas-kit-styling';
 
 import {usePillModel} from './usePillModel';
 
@@ -114,7 +115,7 @@ const StyledBasePill = styled(BaseButton.as('button'))<StyledType & PillProps>(
   boxStyleFn
 );
 
-const StyledNonInteractivePill = styled(StyledBasePill)<StyledType>({
+const StyledNonInteractivePill = styled(StyledBasePill)<StyledType & CSProp>({
   [buttonVars.default.background]: colors.soap300,
   [buttonVars.default.border]: colors.licorice200,
   [buttonVars.default.label]: colors.blackPepper400,
@@ -264,6 +265,8 @@ export const Pill = createContainer('button')({
     Label: PillLabel,
   },
 })<PillProps>(({variant = 'default', maxWidth, ...elemProps}, Element, model) => {
+  console.log(elemProps);
+  console.log(model.state.disabled);
   return (
     <>
       {variant === 'readOnly' && (
@@ -296,8 +299,9 @@ export const Pill = createContainer('button')({
         <StyledNonInteractivePill
           as={Element !== 'button' ? Element : 'span'}
           variant={variant}
+          id="foo"
           type={undefined}
-          className={model.state.disabled ? 'disabled' : undefined}
+          cs={model.state.disabled ? 'disabled' : undefined}
           {...elemProps}
         >
           <Flex gap="xxxs" display="inline-flex" alignItems="center" justifyContent="center">
