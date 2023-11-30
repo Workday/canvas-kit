@@ -1,10 +1,23 @@
 import React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStyles, CSProps} from './cs';
+import {createStyles, CSProps, handleCsProp} from './cs';
+
+export function mergeClassNames(classNames: string[]) {
+  return classNames
+    .reduce((acc: string = '', className) => {
+      if (className) {
+        // eslint-disable-next-line no-param-reassign
+        acc += ` ${className}`;
+      }
+      return acc;
+    }, '')
+    .trim();
+}
 
 export interface BaseProps extends CSProps {
-  children: React.ReactNode;
+  className?: string;
+  stencil?: string;
+  children?: React.ReactNode;
 }
 
 const baseStyles = createStyles({
@@ -28,12 +41,8 @@ const baseStyles = createStyles({
  * ```
  */
 export const Base = createComponent('div')({
-  displayName: 'MyComponent',
-  Component: ({children, ...elemProps}: BaseProps, ref, Element) => {
-    return (
-      <Element ref={ref} {...mergeStyles(elemProps, [baseStyles])}>
-        {children}
-      </Element>
-    );
+  Component: ({className = '', stencil = '', ...elemProps}: BaseProps, ref, Element) => {
+    const classNames = mergeClassNames([baseStyles, stencil, className]);
+    return <Element ref={ref} {...handleCsProp({className: classNames, ...elemProps})} />;
   },
 });
