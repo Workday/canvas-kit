@@ -133,6 +133,7 @@ const StyledNonInteractivePill = styled(StyledBasePill)<StyledType>({
 
   [buttonVars.disabled.background]: colors.soap100,
   [buttonVars.disabled.label]: colors.licorice100,
+  [buttonVars.disabled.border]: colors.licorice100,
   cursor: 'default',
   overflow: 'revert', // override BaseButton overflow styles so the click target exists outside the pill for removable
   position: 'relative',
