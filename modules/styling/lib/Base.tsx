@@ -41,6 +41,7 @@ const baseStyles = createStyles({
  * ```
  */
 export const Base = createComponent('div')({
+  displayName: 'Base',
   Component: ({className = '', stencil = '', ...elemProps}: BaseProps, ref, Element) => {
     const classNames = mergeClassNames([baseStyles, stencil, className]);
     return <Element ref={ref} {...handleCsProp({className: classNames, ...elemProps})} />;
