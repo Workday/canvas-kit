@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.0.20](https://github.com/Workday/canvas-kit/releases/tag/v10.0.20) (2023-12-01)
+
+### Components
+
+- fix(preview): Fix multiline asterisk on preview form field ([#2436](https://github.com/Workday/canvas-kit/pull/2436)) ([@vibdev](https://github.com/vibdev))
+  We removed a wrapping flex element so elemProps is now spread directly on the `<label>` element and the asterisk is at the end of the label.
+
+
 ## [v10.0.19](https://github.com/Workday/canvas-kit/releases/tag/v10.0.19) (2023-11-30)
 
 ### Components
