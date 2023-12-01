@@ -1,6 +1,7 @@
 import React from 'react';
 // eslint-disable-next-line @emotion/no-vanilla
 import {cache, css} from '@emotion/css';
+import {getRegisteredStyles} from '@emotion/utils';
 import {serializeStyles, Keyframes, SerializedStyles, CSSObject} from '@emotion/serialize';
 
 import {generateUniqueId} from './uniqueId';
@@ -298,18 +299,23 @@ export interface CSProps {
    * returned by {@link createStyles}, or the result of {@link createVars} and
    * {@link createModifiers}. If you're extending a component already using `cs`, you can merge that
    * prop in as well. Any style that is passed to the `cs` prop will override style props. If you
-   * wish to have styles that are overridden by style props, the `css` prop, or styles added via
-   * the `styled` API, use {@link mergeStyles} wherever `elemProps` is used.
+   * wish to have styles that are overridden by the `css` prop, or styles added via the `styled`
+   * API, use {@link handleCsProp} wherever `elemProps` is used. If your component needs to also
+   * handle style props, use {@link mergeStyles} instead.
    *
    *
    * ```tsx
+   * import {handleCsProp} from '@workday/canvas-kit-styling';
    * import {mergeStyles} from '@workday/canvas-kit-react/layout';
    *
    * // ...
    *
+   * // `handleCsProp` handles compat mode with Emotion's runtime APIs. `mergeStyles` has the same
+   * // function signature, but adds support for style props.
+   *
    * return (
    *   <Element
-   *     {...mergeStyles(elemProps, [
+   *     {...handleCsProp(elemProps, [
    *       myStyles,
    *       myModifiers({ size: 'medium' }),
    *       myVars({ backgroundColor: 'red' })
@@ -389,34 +395,56 @@ export function createStyles(
 }
 
 /**
- * React utility function to apply CSS class names and dynamic CSS variables
+ * This function handles the `cs` prop for you, as well as local styles you want to define. It will
+ * force style merging with Emotion's runtime APIs, including [styled
+ * components](https://emotion.sh/docs/styled) and the [css prop](https://emotion.sh/docs/css-prop).
+ *
+ * Runtime style merging works by forcing Emotion's styling merging if use of runtime APIs have been
+ * detected. If only `createStyles` were used to style a component, the faster non-runtime styling
+ * will be used.
+ *
+ * You can use `handleCsProp` if you wish to use {@link createStyles} on your own components and want
+ * your components to be compatible with Emotion's runtime styling APIs.
  *
  * ```tsx
- * const MyComponent = (props: any) => {
- *   return <div {...handleCsProp(props)} />
+ * import {createStyles, handleCsProp, CSProps} from '@workday/canvas-kit-styling';
+ *
+ * interface MyComponentProps extends CSProps {
+ *   // other props
  * }
- * ```
  *
- * It will return an object with `className` and `style` attributes. If a `className` is provided to
- * the component, it will merge the class names. If a `style` is provided to the component, it will
- * merge the styles.
- *
- * ```tsx
- * const vars = createVars('background')
- * const styles = createStyles({
- *   color: vars.color
+ * const myStyles = createStyles({
+ *   background: 'green',
+ *   height: 40,
+ *   width: 40
  * })
- * <MyComponent
- *   className="foobar"
- *   style={{ padding: 10 }}
- *   cs={styles}
- * />
  *
- * // Output
- * <div
- *   className="foobar {hashedClassName}"
- *   style="padding: 10px; --{hash}-background: red;"
- * />
+ * const MyComponent = ({children, ...elemProps}: MyComponentProps) => {
+ *   return (
+ *     <div
+ *       {...handleCsProp(elemProps, [myStyles])}
+ *     >
+ *       {children}
+ *     </div>
+ *   )
+ * }
+ *
+ * const StyledMyComponent(MyComponent)({
+ *   background: 'red'
+ * })
+ *
+ * const myOverridingStyles = createStyles({
+ *   background: 'blue'
+ * })
+ *
+ * // now everything works. Without `handleCsProp`, the last component would be a red box
+ * export default () => (
+ *   <>
+ *     <MyComponent>Green box</MyComponent>
+ *     <StyledMyComponent>Red box</StyledMyComponent>
+ *     <StyledMyComponent cs={myOverridingStyles}>Blue box</StyledMyComponent>
+ *   </>
+ * )
  * ```
  */
 export function handleCsProp<
@@ -425,9 +453,75 @@ export function handleCsProp<
 
     style?: React.CSSProperties | undefined;
   }
->({cs, style, className, ...props}: T) {
+>(
+  /**
+   * All the props to be spread onto an element. The `cs` prop will be removed an reduced to
+   * `className` and `style` props which should be safe on every element.
+   */
+  elemProps: T,
+  /**
+   * Optional local style created by `createStyles`. Using this parameter, you can style your
+   * element while supporting proper style merging order.
+   */
+  localCs?: CSToPropsInput
+): Omit<T, 'cs'> {
+  const {cs, style, className, ...restProps} = elemProps;
+  // We are going to track if any runtime styles are detected
+  let shouldRuntimeMergeStyles = false;
+
+  // The order is intentional. The `className` should go first, then the `cs` prop. If we don't do
+  // runtime merging, this order doesn't actually matter because the browser doesn't care the order
+  // of classes on the element's
+  // [classList](https://developer.mozilla.org/en-US/docs/Web/API/Element/classList). But Emotion
+  // _does_ care because it uses the `classList` order to determine style merging. Therefore we
+  // should always be careful to order class names knowing we need to support runtime merging if
+  // runtime styles are detected.
+  const returnProps = csToProps([localCs, className, cs, style]);
+
+  // The following is basically what Emotion does internally to merge styles from different
+  // components into a single className. We will do this here for backwards compatibility with
+  // runtime style merging. `createStyles` and `@emotion/css` works by creating styles and injecting
+  // them immediately into the document. `@emotion/react` and `@emotion/styled` work by injecting
+  // styles during the React render cycle. The following links are to source code of
+  // `@emotion/styled` and `@emotion/react` respectively that merge styles in a similar manner.
+  // - https://github.com/emotion-js/emotion/blob/f3b268f7c52103979402da919c9c0dd3f9e0e189/packages/styled/src/base.js#L120C51-L138
+  // - https://github.com/emotion-js/emotion/blob/f3b268f7c52103979402da919c9c0dd3f9e0e189/packages/react/src/emotion-element.js#L102-L116
+  (returnProps.className || '').split(' ').forEach(name => {
+    // Here we detect if a className is associated with Emotion's cache. Styles created via
+    // `createStyles` do not need special runtime merge treatment, but `@emotion/react` and
+    // `@emotion/styled` do. The `createStylesCache` tracks all styles injected into the cache via
+    // `createStyles`, so those are filtered out.
+    if (!createStylesCache[name] && cache.registered[name]) {
+      shouldRuntimeMergeStyles = true;
+    }
+  });
+
+  // If runtime styles are detected, we need to do extra work to ensure styles merge according to
+  // the rules of Emotion's runtime.
+  if (shouldRuntimeMergeStyles) {
+    const registeredStyles: string[] = [];
+
+    // We are using the raw `css` instead of `createStyles` because `css` uses style hashing and
+    // `createStyles` generates a new ID every time. We could use `createStyles` here, but it would
+    // be more wasteful and new styles would be generated each React render cycle. `css` is safe to
+    // use inside a render function while `createStyles` should always be used outside the React
+    // render cycle. The following is `@emotion/utils` and it mutates the passed in
+    // `registeredStyles` array. It uses the cache of registered styles and the original className.
+    // It returns a string with found registered class names removed.
+    returnProps.className = getRegisteredStyles(
+      cache.registered,
+      registeredStyles,
+      returnProps.className || ''
+    );
+
+    // The `className` is mutated again, but with a brand new CSS class name of all the merged
+    // registered styles. This is how Emotion merges styles from the `css` prop and `styled`
+    // components.
+    returnProps.className += css(registeredStyles);
+  }
+
   return {
-    ...csToProps([className, cs, style]),
-    ...props,
+    ...returnProps,
+    ...restProps,
   } as Omit<T, 'cs'>;
 }
