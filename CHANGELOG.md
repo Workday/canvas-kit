@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.0.21](https://github.com/Workday/canvas-kit/releases/tag/v10.0.21) (2023-12-01)
+
+### Components
+
+- fix: Fix runtime style merging in handleCsProps ([#2439](https://github.com/Workday/canvas-kit/pull/2439)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v10.0.20](https://github.com/Workday/canvas-kit/releases/tag/v10.0.20) (2023-12-01)
 
 ### Components
