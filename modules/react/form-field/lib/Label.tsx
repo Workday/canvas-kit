@@ -51,9 +51,9 @@ const labelStyles = [
         ? {
             marginRight: space.l,
             minWidth: 180,
+            maxHeight: space.xl,
             display: 'flex',
             alignItems: 'center',
-            maxHeight: space.xl,
           }
         : {
             display: 'block',
@@ -101,10 +101,12 @@ class Label extends React.Component<React.PropsWithChildren<LabelProps>> {
     const children = !required
       ? this.props.children
       : [
-          this.props.children,
-          <RequiredAsterisk key={'0'} aria-hidden>
-            *
-          </RequiredAsterisk>,
+          <span>
+            {this.props.children}
+            <RequiredAsterisk key={'0'} aria-hidden>
+              *
+            </RequiredAsterisk>
+          </span>,
         ];
     return (
       <>
