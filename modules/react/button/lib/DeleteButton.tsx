@@ -1,43 +1,45 @@
 import * as React from 'react';
-import {ButtonColors} from './types';
-import {BaseButton, BaseButtonProps, getMinWidthStyles, getPaddingStyles} from './BaseButton';
-import {
-  GrowthBehavior,
-  useTheme,
-  Themeable,
-  EmotionCanvasTheme,
-  createComponent,
-} from '@workday/canvas-kit-react/common';
 
-export interface DeleteButtonProps extends Themeable, GrowthBehavior, BaseButtonProps {
-  /**
-   * The size of the Button.
-   */
-  size?: 'small' | 'medium' | 'large';
-  children?: React.ReactNode;
-}
+import {buttonVars} from './BaseButton';
+import {createComponent} from '@workday/canvas-kit-react/common';
+import {createStyles, cssVar} from '@workday/canvas-kit-styling';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {base, brand, system} from '@workday/canvas-tokens-web';
+import {Button, ButtonProps} from './Button';
 
-const getDeleteButtonColors = ({
-  canvas: {
-    palette: {error: themeError},
+/**
+ * Extends all the style properties from Box to our buttons as well as props from ButtonProps.
+ * We omit `ref` since all of our buttons use `createComponent` and already give access to `ref`.
+ * Use this type to extend and customize any one off buttons that you want full control over styling.
+ */
+export interface DeleteButtonProps extends ButtonProps {}
+
+const deleteStyles = createStyles({
+  [buttonVars.default.background]: cssVar(brand.error.base, '#de2e21'),
+  [buttonVars.default.border]: 'transparent',
+  [buttonVars.default.borderRadius]: cssVar(system.shape.round, '62.5rem'),
+  [buttonVars.default.label]: cssVar(brand.error.accent, '#ffffff'),
+  '&:hover, &.hover': {
+    [buttonVars.hover.background]: cssVar(brand.error.dark, '#a31b12'),
+    [buttonVars.hover.border]: 'transparent',
+    [buttonVars.hover.label]: cssVar(brand.error.accent, '#ffffff'),
   },
-}: EmotionCanvasTheme): ButtonColors => ({
-  default: {
-    background: themeError.main,
-    label: themeError.contrast,
+  '&:focus-visible, &.focus': {
+    [buttonVars.focus.background]: cssVar(brand.error.base, '#de2e21'),
+    [buttonVars.focus.border]: 'transparent',
+    [buttonVars.focus.label]: cssVar(brand.error.accent, '#ffffff'),
+    [buttonVars.focus.boxShadowInner]: cssVar(base.frenchVanilla100, '#ffffff'),
+    [buttonVars.focus.boxShadowOuter]: cssVar(brand.common.focusOutline, '#0875e1'),
   },
-  hover: {
-    background: themeError.dark,
+  '&:active, &.active': {
+    [buttonVars.active.background]: cssVar(brand.error.darkest, 'rgba(128,22,14,1)'),
+    [buttonVars.active.border]: 'transparent',
+    [buttonVars.active.label]: cssVar(brand.error.accent, '#ffffff'),
   },
-  active: {
-    background: themeError.darkest,
-  },
-  focus: {
-    background: themeError.main,
-  },
-  disabled: {
-    background: themeError.light,
-    opacity: '1', // allows for overriding the default opacity of 0.4
+  '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
+    [buttonVars.disabled.background]: cssVar(brand.error.light, '#fcc9c5'),
+    [buttonVars.disabled.label]: cssVar(brand.error.accent, '#ffffff'),
+    opacity: 1,
   },
 });
 
@@ -48,28 +50,11 @@ const getDeleteButtonColors = ({
  */
 export const DeleteButton = createComponent('button')({
   displayName: 'DeleteButton',
-  Component: (
-    {
-      // TODO: Fix useTheme and make it a real hook
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      theme = useTheme(),
-      size = 'medium',
-      children,
-      ...elemProps
-    }: DeleteButtonProps,
-    ref,
-    Element
-  ) => (
-    <BaseButton
-      padding={getPaddingStyles(children, size, undefined, undefined)}
-      minWidth={getMinWidthStyles(children, size)}
-      ref={ref}
-      as={Element}
-      colors={getDeleteButtonColors(theme)}
-      size={size}
-      {...elemProps}
-    >
-      <BaseButton.Label>{children}</BaseButton.Label>
-    </BaseButton>
-  ),
+  Component: ({children, size, ...elemProps}: DeleteButtonProps, ref, Element) => {
+    return (
+      <Button as={Element} ref={ref} size={size} {...mergeStyles(elemProps, [deleteStyles])}>
+        {children}
+      </Button>
+    );
+  },
 });

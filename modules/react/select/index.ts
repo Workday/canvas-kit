@@ -1,2 +1,2 @@
 export * from './lib/Select';
-export * from './lib/SelectOption';
+export * from './lib/hooks';

@@ -19,7 +19,6 @@ implement user experiences consistent with
 
 ---
 
-
 ## Getting started
 
 ### React
@@ -47,39 +46,6 @@ import {SecondaryButton} from '@workday/canvas-kit-react';
 <SecondaryButton>Button Label</SecondaryButton>;
 ```
 
-### CSS
-
-**Installation**
-
-To get started using Canvas kit CSS first add or install the module to your project
-
-```sh
-yarn add @workday/canvas-kit-css
-```
-
-or
-
-```sh
-npm install @workday/canvas-kit-css
-```
-
-Add your `node_modules` directory to your SASS `includePaths`. You will then be able to import
-`index.scss`.
-
-**Usage**
-
-```scss
-@import '~@workday/canvas-kit-css/index.scss';
-```
-
-**You must have PostCSS support.** Add the
-[postcss-inline-svg](https://github.com/TrySound/postcss-inline-svg) plugin to properly process and
-inline icons. Process your SASS through PostCSS once it has been compiled to CSS.
-
-```html
-<button class="wdc-btn">Button Label</button>
-```
-
 ## Reporting a Bug
 
 If you spot a bug, inconsistency, or typo, please
@@ -95,12 +61,13 @@ The Canvas Kit core team will take a look and discuss it with you.
 ## Contributing
 
 Want to contribute to Canvas Kit React? Please read our
-[contributing guidelines](./modules/docs/mdx/CONTRIBUTING.mdx) to find out more and how to get
+[contributing guidelines](https://workday.github.io/canvas-kit/?path=/docs/guides-contributing--page) to find out more and how to get
 started.
 
 ## Maintaining
 
-If you're a Canvas Kit maintainer, please read our [maintaining docs](./modules/docs/mdx/MAINTAINING.mdx) to learn more about our processes.
+If you're a Canvas Kit maintainer, please read our
+[maintaining docs](https://workday.github.io/canvas-kit/?path=/docs/guides-maintaining--page) to learn more about our processes.
 
 ## Open Development
 
@@ -112,20 +79,20 @@ process. Any and all issues are public and available for discussion.
 
 Canvas Kit follows [semantic versioning](https://semver.org/) and is enforced automatically by
 [conventional commits](https://www.conventionalcommits.org/) (see
-["Commit Message Format"](./modules/docs/mdx/CONTRIBUTING.mdx#commit-message-format)).
+["Commit Message Format"](https://workday.github.io/canvas-kit/?path=/docs/guides-contributing--page#commit-message-format)).
 
 Each module is independently versioned using [Lerna](https://github.com/lerna/lerna).
 
 ## Version Support
 
 At any given time, we support three major versions of Canvas Kit: previous, current, and next. Each
-of these have different levels of support.
+of these has different levels of support.
 
 The previous major version is stable for production and will receive patch updates as needed, but
 there will be no new features added. Patch releases are automatically deployed upon merge by GitHub
 Actions.
 
-The current major version is also stable and receives new feature and patch updates. Patch releases
+The current major version is also stable and receives new features and patch updates. Patch releases
 are automatically deployed upon merge by GitHub Actions, and minor releases are manually deployed at
 the end of each sprint.
 
@@ -135,19 +102,21 @@ recommend against using it in production until the first stable version has been
 
 ## Developer Documentation
 
-- [Contributing](./modules/docs/mdx/CONTRIBUTING.mdx)
-- [Code of Conduct](./modules/docs/mdx/CODE_OF_CONDUCT.md)
+- [Contributing](https://workday.github.io/canvas-kit/?path=/docs/guides-contributing--page)
+- [Code of Conduct](https://workday.github.io/canvas-kit/?path=/docs/guides-contributing--page#code-of-conduct)
 - Upgrade Guides:
-  - [v4.0 Upgrade Guide](./modules/docs/mdx/4.0-UPGRADE-GUIDE.mdx)
-  - [v5.0 Upgrade Guide](./modules/docs/mdx/5.0-UPGRADE-GUIDE.mdx)
-  - [v6.0 Upgrade Guide](./modules/docs/mdx/6.0-UPGRADE-GUIDE.mdx)
-  - [v7.0 Upgrade Guide](./modules/docs/mdx/7.0-UPGRADE-GUIDE.mdx)
-  - [v8.0 Upgrade Guide](./modules/docs/mdx/8.0-UPGRADE-GUIDE.mdx)
+  - [v4.0 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v4-0--page)
+  - [v5.0 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v5-0--page)
+  - [v6.0 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v6-0--page)
+  - [v7.0 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v7-0--page)
+  - [v8.0 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v8-0--page)
+  - [v9.0 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v9-0--page)
+  - [v10.0 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v10-0--page)
 - Code Style / Best Practices:
-  - [API & Pattern Guidelines](./modules/docs/mdx/API_PATTERN_GUIDELINES.mdx)
-  - [Compound Components](./modules/docs/mdx/COMPOUND_COMPONENTS.mdx)
-  - [Creating Compound Components](./modules/docs/mdx/CREATING_COMPOUND_COMPONENTS.mdx)
-  - [Testing](./modules/docs/mdx/TESTING.mdx)
+  - [API & Pattern Guidelines](https://workday.github.io/canvas-kit/?path=/docs/guides-api-pattern-guidelines--page)
+  - [Compound Components](https://workday.github.io/canvas-kit/?path=/docs/guides-compound-components--page)
+  - [Creating Compound Components](https://workday.github.io/canvas-kit/?path=/docs/guides-creating-compound-components--page)
+  - [Testing](https://workday.github.io/canvas-kit/?path=/docs/guides-testing--page)
 
 ## License
 

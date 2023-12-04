@@ -4,7 +4,9 @@ import {ListBox} from '@workday/canvas-kit-react/collection';
 
 import {Basic} from './examples/Basic';
 import {StringChildren} from './examples/StringChildren';
-import {DynamicItems} from './examples/DynamicItems';
+import {DynamicItemsStrings} from './examples/DynamicItemsStrings';
+import {DynamicItemsObjects} from './examples/DynamicItemsObjects';
+import {Virtualization} from './examples/Virtualization';
 import {DataLoader} from './examples/DataLoader';
 import {BasicVirtual} from './examples/BasicVirtual';
 import {IdentifiedItems} from './examples/IdentifiedItems';
@@ -36,7 +38,7 @@ yarn add @workday/canvas-kit-react
 The `ListBox` on its own isn't very useful. It registers each item with the model. The
 `ListBox.Item` only uses the `useListItemRegister` hook which handles registration of static items
 to the model. The `ListBox` uses `useListRenderItems` which handles rendering static items as well
-as [Dynamic List](#dynamic-list) example.
+as [dynamic items](#dynamic-items).
 
 <ExampleCodeBlock code={Basic} />
 
@@ -53,13 +55,42 @@ item for selection, maintaining a cursor, or anything else.
 ### Dynamic Items
 
 The `ListBox` also handles a dynamic collection of items. Instead of providing each `ListBox.Item`
-statically, provide a render function instead. The function is called with an `items` value that is
-the same was what's provided to the model. By default, providing items will enable virtualization.
-This example adds a `maxHeight` to ensure overflow. Virtualization uses absolute positioning of each
-item, which could cause problems for popup menus. If your item count is low, pass
-`shouldVirtualize={false}` to disable virtualization.
+statically, provide a render function instead. The function is called with an `item` value that is
+the same as what's provided to the model.
 
-<ExampleCodeBlock code={DynamicItems} />
+#### Registering Items
+
+Dynamic items can be passed in as an array of strings or objects via the `items` prop or the model
+config.
+
+##### Array of Strings
+
+Use strings when your data is a simple list of options. Each string value is used as the unique
+identifer.
+
+<ExampleCodeBlock code={DynamicItemsStrings} />
+
+##### Array of Objects
+
+Use objects when your data contains additional information. Each object must have an `id` to ensure
+it's registered and searchable. Additional information such as icons or if the item is disabled can
+be included in the object and will be accessible in the render function.
+
+<ExampleCodeBlock code={DynamicItemsObjects} />
+
+> **Note: The `id` should match your text value for each item. This ensures proper selection of
+> items in components like `Select` and `Autocomplete`. If your `id` is different from your text
+> value, you'll have to add a
+> [translation layer](https://codesandbox.io/s/combobox-object-items-forked-mc7tm4). **
+
+#### Virtualization
+
+By default, providing items dynamically will enable virtualization. This example adds a `maxHeight`
+to ensure overflow. Virtualization uses absolute positioning of each item, which could cause
+problems for popup menus. If your item count is low, pass `shouldVirtualize={false}` to disable
+virtualization.
+
+<ExampleCodeBlock code={Virtualization} />
 
 ### DataLoader
 

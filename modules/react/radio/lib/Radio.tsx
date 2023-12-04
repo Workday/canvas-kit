@@ -8,7 +8,7 @@ import {
   Themeable,
   useUniqueId,
 } from '@workday/canvas-kit-react/common';
-import {borderRadius, colors, inputColors, spaceNumbers} from '@workday/canvas-kit-react/tokens';
+import {borderRadius, colors, inputColors, space} from '@workday/canvas-kit-react/tokens';
 import {LabelText} from '@workday/canvas-kit-react/text';
 
 export interface RadioProps extends Themeable {
@@ -48,18 +48,11 @@ export interface RadioProps extends Themeable {
 }
 
 const radioBorderRadius = 9;
-const radioDot = 8;
-const radioHeight = 18;
-const radioTapArea = spaceNumbers.m;
-const radioContainerHeight = radioTapArea;
-const radioLabelDistance = spaceNumbers.xs;
-const radioWidth = 18;
-const rippleRadius = (spaceNumbers.l - radioWidth) / 2;
 
 const RadioContainer = styled('div')({
   display: 'flex',
   alignItems: 'center',
-  minHeight: radioContainerHeight,
+  minHeight: space.m,
   position: 'relative',
 });
 
@@ -70,17 +63,17 @@ const RadioContainer = styled('div')({
  */
 const RadioInputWrapper = styled('div')<Pick<RadioProps, 'disabled'>>({
   display: 'flex',
-  height: radioHeight,
-  width: radioWidth,
+  height: `calc(${space.s} + 2px)`,
+  width: `calc(${space.s} + 2px)`,
 });
 
 const RadioRipple = styled('span')<Pick<RadioProps, 'disabled' | 'variant'>>(
   {
     borderRadius: borderRadius.circle,
     boxShadow: `0 0 0 0 ${colors.soap200}`,
-    height: radioHeight,
+    height: `calc(${space.s} + 2px)`,
     transition: 'box-shadow 150ms ease-out',
-    width: radioWidth,
+    width: `calc(${space.s} + 2px)`,
     position: 'absolute',
     pointerEvents: 'none', // This is a decorative element we don't want it to block clicks to input
   },
@@ -91,9 +84,9 @@ const RadioRipple = styled('span')<Pick<RadioProps, 'disabled' | 'variant'>>(
 
 const RadioInput = styled('input')<RadioProps & StyledType>(
   {
-    borderRadius: radioBorderRadius,
-    width: radioTapArea,
-    height: radioTapArea,
+    borderRadius: `calc(${space.xxs} + 1px)`,
+    width: space.m,
+    height: space.m,
     margin: 0,
     marginTop: '-3px',
     marginLeft: '-3px',
@@ -129,7 +122,9 @@ const RadioInput = styled('input')<RadioProps & StyledType>(
     // `span:first-of-type` refers to `RadioRipple`, the light grey
     // element that animates around the component on hover
     '&:hover ~ span:first-of-type': {
-      boxShadow: disabled ? undefined : `0 0 0 ${rippleRadius}px ${colors.soap200}`,
+      boxShadow: disabled
+        ? undefined
+        : `0 0 0 calc((${space.l} - (${space.s} + 2px)) / 2) ${colors.soap200}`,
     },
 
     // `div:first-of-type` refers to the `RadioBackground`, the visual facade of the
@@ -212,13 +207,13 @@ const RadioBackground = styled('div')<RadioProps>(
     borderWidth: '1px',
     boxSizing: 'border-box',
     display: 'flex',
-    height: radioHeight,
+    height: `calc(${space.s} + 2px)`,
     justifyContent: 'center',
     padding: '0px 2px',
     pointerEvents: 'none',
     position: 'absolute',
     transition: 'border 200ms ease, background 200ms',
-    width: radioWidth,
+    width: `calc(${space.s} + 2px)`,
   },
   ({
     checked,
@@ -255,10 +250,10 @@ const RadioCheck = styled('div')<Pick<RadioProps, 'checked' | 'variant'>>(
     borderRadius: radioBorderRadius,
     display: 'flex',
     flexDirection: 'column',
-    height: radioDot,
+    height: space.xxs,
     pointerEvents: 'none',
     transition: 'transform 200ms ease, opacity 200ms ease',
-    width: radioDot,
+    width: space.xxs,
   },
   ({theme, variant}) => ({
     backgroundColor:
@@ -313,12 +308,7 @@ export const Radio = createComponent('input')({
           </RadioBackground>
         </RadioInputWrapper>
         {label && (
-          <LabelText
-            paddingLeft={radioLabelDistance}
-            htmlFor={inputId}
-            disabled={disabled}
-            variant={variant}
-          >
+          <LabelText paddingLeft={space.xs} htmlFor={inputId} disabled={disabled} variant={variant}>
             {label}
           </LabelText>
         )}
