@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.31](https://github.com/Workday/canvas-kit/releases/tag/v9.1.31) (2023-12-04)
+
+### Components
+
+- fix: FormField fix alignment for required asterisk ([#2404](https://github.com/Workday/canvas-kit/pull/2404)) ([@thunguyen19](https://github.com/thunguyen19), manuel.carrera)
+  We've wrapped the contents of the `label` element including the asterisk in a `span`. The asterisk now is at the end of the `label`.
 ## [v10.0.21](https://github.com/Workday/canvas-kit/releases/tag/v10.0.21) (2023-12-01)
 
 ### Components
