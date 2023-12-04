@@ -56,6 +56,7 @@ const labelStyles = [
             alignItems: 'center',
           }
         : {
+            display: 'block',
             marginBottom: space.xxxs,
           }),
     };
