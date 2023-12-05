@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.32](https://github.com/Workday/canvas-kit/releases/tag/v9.1.32) (2023-12-05)
+
+### Components
+
+- fix: Fix accessibility tooltip bug ([#2446](https://github.com/Workday/canvas-kit/pull/2446)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
 ## [v9.1.31](https://github.com/Workday/canvas-kit/releases/tag/v9.1.31) (2023-12-04)
 
 ### Components
