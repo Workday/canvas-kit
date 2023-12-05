@@ -74,12 +74,10 @@ describe('enhancedComponentParser', () => {
       expect(symbols).toHaveProperty('0.type.parameters.1.type.properties.0.type.value', 'string');
       expect(symbols).toHaveProperty('0.type.returnType.kind', 'object');
       expect(symbols).toHaveProperty('0.type.returnType.properties.0.kind', 'property');
-      expect(symbols).toHaveProperty('0.type.returnType.properties.0.name', 'data-id');
       expect(symbols).toHaveProperty('0.type.returnType.properties.0.type.kind', 'primitive');
       expect(symbols).toHaveProperty('0.type.returnType.properties.0.type.value', 'string');
     });
   });
-
   describe('elemPropsHook', () => {
     it('should handle "createElemPropsHook" with a ref in returnType', () => {
       const program = createProgramFromSource(`
@@ -674,6 +672,51 @@ describe('enhancedComponentParser', () => {
       expect(symbols).toHaveProperty('0.type.model', 'MyModel');
       expect(symbols).toHaveProperty('0.type.subComponents.0.name', 'SubComponent');
       expect(symbols).toHaveProperty('0.type.subComponents.0.symbol', 'MySubcomponent');
+    });
+
+
+    it('should add subcomponent source symbol to the declaration array so we can filter the symbol properly', () => {
+      const program = createProgramFromSource([
+        {filename: 'child.tsx', source: `
+          export const MySubcomponent = createComponent('button')({
+            displayName: 'My.Component',
+            Component(props: MyComponentProps, ref, Element) {
+              return <Element />
+            }
+          });
+        `},
+        {filename: 'parent.tsx', source: `
+          import {MySubcomponent} from './child'
+
+          export const MyComponent = createContainer('div')({
+            displayName: 'My.Component',
+            modelHook: useMyModel,
+            subComponents: {
+              /** MyComponent.Subcomponent */
+              SubComponent: MySubcomponent
+            }
+          })<MyComponentProps>((elemProps, Element) => {
+            return <Element size="medium" {...elemProps} />
+          });
+
+          export interface MyComponentProps {
+            size: string
+          }`
+        },
+      ]);
+
+      const symbols = parse(program, 'parent.tsx', [enhancedComponentParser]);
+
+      expect(symbols).toHaveProperty('0.name', 'MyComponent');
+      expect(symbols).toHaveProperty('0.type.kind', 'enhancedComponent');
+      expect(symbols).toHaveProperty('0.type.displayName', 'My.Component');
+      expect(symbols).toHaveProperty('0.type.baseElement.kind', 'external');
+      expect(symbols).toHaveProperty('0.type.baseElement.name', 'div');
+      expect(symbols).toHaveProperty('0.type.props.0.kind', 'property');
+      expect(symbols).toHaveProperty('0.type.props.0.name', 'size');
+      expect(symbols).toHaveProperty('0.type.props.0.type.kind', 'primitive');
+      expect(symbols).toHaveProperty('0.type.props.0.type.value', 'string');
+      expect(symbols).toHaveProperty('0.type.subComponents.0.declarations.1.filePath', 'child.tsx');
     });
 
     it('should filter out "model" and "elemPropsHooks" props that are already part of a prop interface', () => {

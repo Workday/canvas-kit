@@ -45,6 +45,8 @@ const getConvertedStyles = (
  *
  *   return <span css={errorTextStyles} {...props} />;
  * }
+ *
+ * @deprecated ⚠️ `useThemeRTL` has been deprecated and will be removed in a future major version. Now that IE11 is no longer supported, we encourage consumers to use [CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties).
  */
 export function useThemeRTL() {
   const theme = useTheme();

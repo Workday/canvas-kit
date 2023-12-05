@@ -37,7 +37,7 @@ export const TabsOverflowButton = createSubcomponent('button')({
   elemPropsHook: useTabsOverflowButton,
 })<OverflowButtonProps>(({children, ...elemProps}, Element) => {
   return (
-    <StyledTabItem type="button" spacing="xxxs" as={Element} {...elemProps}>
+    <StyledTabItem type="button" gap="xxxs" as={Element} {...elemProps}>
       <span>{children}</span>
       <SystemIcon icon={chevronDownSmallIcon} />
     </StyledTabItem>

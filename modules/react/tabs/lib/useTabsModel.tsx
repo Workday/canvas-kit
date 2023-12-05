@@ -48,6 +48,7 @@ export const useTabsModel = createModelHook({
     menuConfig: {} as typeof useMenuModel.TConfig,
   },
   requiredConfig: useOverflowListModel.requiredConfig,
+  contextOverride: useOverflowListModel.Context,
 })(config => {
   const initialSelectedRef = React.useRef(config.initialTab);
   const getId = config.getId || defaultGetId;

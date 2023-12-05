@@ -18,6 +18,9 @@ export class DocParser<T extends {kind: string} = any> {
   /** A shared reference to the Typescript type checker */
   public checker: ts.TypeChecker;
 
+  // track symbols to ensure we don't get stuck in an infinite loop
+  public visitedTypeScriptSymbols: Record<string, ts.SyntaxKind> = {};
+
   /**
    * This is the shared mutable instance of all exported symbols already processed. You can push new
    * symbols or search for existing symbols. If your plugin doesn't need to access existing symbols,
@@ -53,7 +56,9 @@ export class DocParser<T extends {kind: string} = any> {
           .includes(kind) && isNodeExported(this.checker, node)
       );
     }).forEach(node => {
-      const symbol = getSymbolFromNode(this.checker, node);
+      // reset visited symbols for every exported symbol to prevent accidental short-circuiting of non-exported symbols of the same name across files or scopes.
+      this.visitedTypeScriptSymbols = {};
+      const symbol = getSymbolFromNode(this, node);
       const previousSymbolsLength = this.symbols.length;
       if (symbol) {
         const exportedSymbol: ExportedSymbol<T> = {
@@ -121,7 +126,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
   // Uncomment for debugging
   // console.log(
   //   t.getKindNameFromNode(node) || node.kind,
-  //   safeGetText(checker, node),
+  //   safeGetText(parser, node),
   //   checker.typeToString(checker.getTypeAtLocation(node))
   // );
 
@@ -223,10 +228,10 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     // If `ValueOf` was exported, the type would be documented as `ValueOf<{a: 'first', b:
     // 'second'}>`, but if it isn't exported, the value is `'first' | 'second'`
     const isLocalTypeReference =
-      t.isTypeReference(node.type) && !isExportedSymbol(checker, node.type.typeName);
+      t.isTypeReference(node.type) && !isExportedSymbol(parser, node.type.typeName);
     const value = isLocalTypeReference
       ? getValueFromType(parser, checker.getTypeAtLocation(node), node) ||
-        unknownValue(safeGetText(checker, node))
+        unknownValue(safeGetText(parser, node))
       : getValueFromNode(parser, node.type);
 
     return {
@@ -340,7 +345,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
    */
   if (t.isMethodDeclaration(node)) {
     const signature = getValueFromSignatureNode(parser, node as ts.SignatureDeclaration)!;
-    const symbol = getSymbolFromNode(checker, node);
+    const symbol = getSymbolFromNode(parser, node);
     const type = checker.getTypeAtLocation(node);
     const jsDoc = findDocComment(checker, symbol);
 
@@ -375,7 +380,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
    */
   if (t.isMethodSignature(node)) {
     const signature = getValueFromSignatureNode(parser, node as ts.SignatureDeclaration)!;
-    const symbol = getSymbolFromNode(checker, node);
+    const symbol = getSymbolFromNode(parser, node);
     const jsDoc = findDocComment(checker, symbol);
 
     return {
@@ -431,9 +436,9 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     if (
       node.initializer &&
       t.isIdentifier(node.initializer) &&
-      isExportedSymbol(checker, node.initializer)
+      isExportedSymbol(parser, node.initializer)
     ) {
-      const symbol = getSymbolFromNode(checker, node.initializer);
+      const symbol = getSymbolFromNode(parser, node.initializer);
       return {
         kind: 'symbol',
         name: node.initializer.text,
@@ -452,7 +457,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     // Both functions and objects are considered objects to Typescript
     if (isObject(type)) {
       if (type.objectFlags & ts.ObjectFlags.ArrayLiteral) {
-        return getValueFromType(parser, type) || unknownValue(safeGetText(checker, node));
+        return getValueFromType(parser, type) || unknownValue(safeGetText(parser, node));
       }
       return getObjectValueFromType(parser, type);
     }
@@ -470,7 +475,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
    * }
    */
   if (t.isPropertySignature(node)) {
-    const symbol = getSymbolFromNode(checker, node);
+    const symbol = getSymbolFromNode(parser, node);
     const jsDoc = findDocComment(checker, symbol);
     // Get the name of the property - it could be a symbol or have a `name` that is an identifier or string literal
     const name =
@@ -486,7 +491,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
       required: node.questionToken ? false : true,
       type: node.type
         ? getValueFromNode(parser, node.type)
-        : unknownValue(safeGetText(checker, node)),
+        : unknownValue(safeGetText(parser, node)),
       ...jsDoc,
     };
   }
@@ -504,14 +509,14 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
    */
   if (t.isPropertyDeclaration(node)) {
     const name = getNodeName(node);
-    const symbol = getSymbolFromNode(checker, node);
+    const symbol = getSymbolFromNode(parser, node);
     const jsDoc = findDocComment(checker, symbol);
     const type = checker.getTypeAtLocation(node);
 
     return {
       kind: 'property',
       name: name || symbol?.name || 'unknown',
-      type: getValueFromType(parser, type) || unknownValue(safeGetText(checker, node)),
+      type: getValueFromType(parser, type) || unknownValue(safeGetText(parser, node)),
       ...jsDoc,
     };
   }
@@ -551,7 +556,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
   }
 
   if (t.isSpreadAssignment(node)) {
-    const symbol = getSymbolFromNode(checker, node.expression);
+    const symbol = getSymbolFromNode(parser, node.expression);
     const declaration = getValueDeclaration(symbol);
     if (declaration) {
       return getValueFromNode(parser, declaration);
@@ -579,7 +584,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
   }
 
   if (t.isSpreadElement(node)) {
-    const symbol = getSymbolFromNode(checker, node.expression);
+    const symbol = getSymbolFromNode(parser, node.expression);
     const declaration = getValueDeclaration(symbol);
     if (declaration) {
       return getValueFromNode(parser, declaration);
@@ -600,7 +605,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
    * */
   if (t.isPropertyAssignment(node)) {
     const type = checker.getTypeAtLocation(node);
-    const symbol = getSymbolFromNode(checker, node);
+    const symbol = getSymbolFromNode(parser, node);
     const jsDoc = findDocComment(checker, symbol);
 
     // For default values, we want the value and not the type. An `AsExpression` redirects to types,
@@ -613,7 +618,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
       kind: 'property',
       name: symbol?.name || '',
       defaultValue: getValueFromNode(parser, defaultValueNode),
-      type: getValueFromType(parser, type) || unknownValue(safeGetText(checker, node)),
+      type: getValueFromType(parser, type) || unknownValue(safeGetText(parser, node)),
       required: symbol ? !isOptional(symbol) && !includesUndefined(type) : false,
       ...jsDoc,
     };
@@ -621,9 +626,9 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
 
   // as A
   if (t.isAsExpression(node)) {
-    if (safeGetText(checker, node) === 'const') {
+    if (safeGetText(parser, node) === 'const') {
       const type = checker.getTypeAtLocation(node.parent);
-      return getValueFromType(parser, type) || unknownValue(safeGetText(checker, node));
+      return getValueFromType(parser, type) || unknownValue(safeGetText(parser, node));
     }
     return getValueFromNode(parser, node.type);
   }
@@ -633,9 +638,9 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     // something like `keyof A`. In this case, we'll get the symbol and ask for the properties of
     // the symbol's declaration.
     if (t.isTypeReference(node.type)) {
-      const symbol = getSymbolFromNode(checker, node.type.typeName);
+      const symbol = getSymbolFromNode(parser, node.type.typeName);
       const declaration = getValueDeclaration(symbol);
-      if (symbol && declaration && isExportedSymbol(checker, declaration)) {
+      if (symbol && declaration && isExportedSymbol(parser, declaration)) {
         return {
           kind: 'keyof',
           name: {
@@ -659,7 +664,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
 
     return (
       getValueFromType(parser, checker.getTypeFromTypeNode(node), node) ||
-      unknownValue(safeGetText(checker, node))
+      unknownValue(safeGetText(parser, node))
     );
   }
 
@@ -767,7 +772,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
   // type A = B['C']
   if (t.isIndexedAccessType(node)) {
     const type = checker.getTypeAtLocation(node);
-    return getValueFromType(parser, type, node) || unknownValue(safeGetText(checker, node));
+    return getValueFromType(parser, type, node) || unknownValue(safeGetText(parser, node));
   }
 
   /**
@@ -808,12 +813,12 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
    * latter is only allowed for everything else. For example, accessing a property of an interface.
    */
   if (t.isQualifiedName(node)) {
-    if (isExportedSymbol(checker, node.left)) {
+    if (isExportedSymbol(parser, node.left)) {
       const value = checker.typeToString(checker.getTypeAtLocation(node.left));
       return {
         kind: 'qualifiedName',
-        left: {kind: 'symbol', name: safeGetText(checker, node.left), value},
-        right: {kind: 'string', value: safeGetText(checker, node.right)},
+        left: {kind: 'symbol', name: safeGetText(parser, node.left), value},
+        right: {kind: 'string', value: safeGetText(parser, node.right)},
       };
     }
     // if the node.left is not exported, we'll reduce to a type
@@ -832,11 +837,11 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
    * In this example, the TypeQuery is `typeof a`
    */
   if (t.isTypeQuery(node)) {
-    if (isExportedSymbol(checker, node.exprName)) {
+    if (isExportedSymbol(parser, node.exprName)) {
       const value = checker.typeToString(checker.getTypeAtLocation(node.exprName));
       return {kind: 'symbol', name: node.exprName.getText(), value};
     }
-    const symbol = getSymbolFromNode(checker, node.exprName);
+    const symbol = getSymbolFromNode(parser, node.exprName);
     if (symbol) {
       const declaration = getValueDeclaration(symbol)!;
       return getValueFromNode(parser, declaration);
@@ -880,7 +885,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
    */
   if (t.isTypeReference(node)) {
     // handle `as const` specially. If we don't do this, we'll get into an infinite loop
-    if (safeGetText(checker, node) === 'const') {
+    if (safeGetText(parser, node) === 'const') {
       const type = checker.getTypeAtLocation(node.parent.parent);
       return getValueFromType(parser, type) || unknownValue(node.parent.parent.getText());
     }
@@ -889,9 +894,9 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
       p => getValueFromNode(parser, p) as TypeParameter
     );
     const symbolNode = t.isQualifiedName(node.typeName) ? node.typeName.right : node.typeName;
-    const symbol = getSymbolFromNode(checker, symbolNode);
+    const symbol = getSymbolFromNode(parser, symbolNode);
     const fileName = getValueDeclaration(symbol)?.getSourceFile().fileName;
-    const externalSymbol = getExternalSymbol(symbol?.name || safeGetText(checker, node), fileName);
+    const externalSymbol = getExternalSymbol(symbol?.name || safeGetText(parser, node), fileName);
     if (externalSymbol) {
       return {
         kind: 'external',
@@ -901,9 +906,9 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
       };
     }
 
-    if (isExportedSymbol(checker, symbolNode)) {
+    if (isExportedSymbol(parser, symbolNode)) {
       const value = checker.typeToString(checker.getTypeAtLocation(node.typeName));
-      return {kind: 'symbol', name: safeGetText(checker, node.typeName), typeParameters, value};
+      return {kind: 'symbol', name: safeGetText(parser, node.typeName), typeParameters, value};
     }
 
     // If it is a qualified name, handle that specially. The `left` might be a symbol
@@ -916,6 +921,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     const type = checker.getTypeAtLocation(node);
     if (symbol) {
       if (type.getFlags() & ts.TypeFlags.Instantiable) {
+        symbol.name; //?
         // It is a generic type
         return {kind: 'generic', name: symbol?.name};
       }
@@ -932,7 +938,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
 
     // The type reference is not external, not an exported symbol, and not generic.
     // Fall back to returning the value from it's type property
-    return getValueFromType(parser, type) || unknownValue(safeGetText(checker, node));
+    return getValueFromType(parser, type) || unknownValue(safeGetText(parser, node));
   }
 
   /**
@@ -956,7 +962,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
    */
   if (t.isShorthandPropertyAssignment(node)) {
     const type = checker.getTypeAtLocation(node);
-    const symbol = getSymbolFromNode(checker, node);
+    const symbol = getSymbolFromNode(parser, node);
     const jsDoc = findDocComment(checker, symbol);
 
     // see if the declaration is assigned to something exported
@@ -964,7 +970,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     return {
       kind: 'property',
       name: symbol?.name || '',
-      type: getValueFromType(parser, type) || unknownValue(safeGetText(checker, node)),
+      type: getValueFromType(parser, type) || unknownValue(safeGetText(parser, node)),
       ...jsDoc,
     };
   }
@@ -987,7 +993,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
       properties: node.members.map((m, index) => {
         return {
           kind: 'property',
-          name: safeGetText(checker, m.name),
+          name: safeGetText(parser, m.name),
           type: m.initializer
             ? getValueFromNode(parser, m.initializer)
             : {kind: 'number', value: index},
@@ -1010,8 +1016,8 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
    * In this example, `b` is the identifier because it is a value reference to something else.
    */
   if (t.isIdentifier(node)) {
-    if (isExportedSymbol(checker, node)) {
-      const symbol = getSymbolFromNode(checker, node);
+    if (isExportedSymbol(parser, node)) {
+      const symbol = getSymbolFromNode(parser, node);
       const declaration = getValueDeclaration(symbol);
       return {
         kind: 'symbol',
@@ -1030,7 +1036,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
    */
   if (t.isParameter(node)) {
     const type = checker.getTypeAtLocation(node);
-    const symbol = getSymbolFromNode(checker, node);
+    const symbol = getSymbolFromNode(parser, node);
     const jsDoc = findDocComment(checker, symbol);
     const isRequired = node.questionToken
       ? false
@@ -1042,7 +1048,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
 
     const typeInfo = node.type
       ? getValueFromNode(parser, node.type)
-      : getValueFromType(parser, type) || unknownValue(safeGetText(checker, node));
+      : getValueFromType(parser, type) || unknownValue(safeGetText(parser, node));
 
     const defaultValue = node.initializer ? getValueFromNode(parser, node.initializer) : undefined;
 
@@ -1091,12 +1097,12 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     }
   }
 
-  const symbol = getSymbolFromNode(checker, node);
+  const symbol = getSymbolFromNode(parser, node);
   if (!symbol) {
-    return unknownValue(safeGetText(checker, node));
+    return unknownValue(safeGetText(parser, node));
   }
 
-  return unknownValue(safeGetText(checker, node));
+  return unknownValue(safeGetText(parser, node));
 }
 
 /** True if this is visible outside this file, false otherwise */
@@ -1187,8 +1193,8 @@ export function filterFunctionParameters(value: any): value is FunctionParameter
 }
 
 // https://github.com/dsherret/ts-ast-viewer/blob/c71e238123d972bae889b3829e23b44f39d8d5c2/site/src/components/PropertiesViewer.tsx#L172
-export function getSymbolFromNode(checker: ts.TypeChecker, node: ts.Node): ts.Symbol | undefined {
-  return (node as any).symbol || checker.getSymbolAtLocation(node);
+export function getSymbolFromNode(parser: DocParser, node: ts.Node): ts.Symbol | undefined {
+  return (node as any).symbol || parser.checker.getSymbolAtLocation(node);
 }
 
 export function isObject(type: ts.Type): type is ts.ObjectType {
@@ -1283,7 +1289,7 @@ function getIndexSignatureFromType(
     const parameter = indexSignature.declaration?.parameters[0];
     return {
       kind: 'indexSignature',
-      name: parameter?.name ? safeGetText(checker, parameter?.name) : '',
+      name: parameter?.name ? safeGetText(parser, parameter?.name) : '',
       type:
         (parameter && getValueFromType(parser, checker.getTypeAtLocation(parameter), parameter)) ||
         unknownValue(''),
@@ -1365,7 +1371,7 @@ export function getValueFromType(
   if (typeNode && originalNodeKind !== typeNode.kind) {
     // find the symbol
     if (t.isTypeReference(typeNode)) {
-      const symbol = getSymbolFromNode(checker, typeNode.typeName);
+      const symbol = getSymbolFromNode(parser, typeNode.typeName);
       const declaration = getValueDeclaration(symbol);
       const fileName = declaration?.getSourceFile().fileName;
       if (symbol) {
@@ -1375,7 +1381,7 @@ export function getValueFromType(
         }
 
         if (declaration && declaration !== node) {
-          if (isExportedSymbol(checker, declaration)) {
+          if (isExportedSymbol(parser, declaration)) {
             return {kind: 'symbol', name: symbol.name, value: typeToString};
           }
           return getValueFromNode(parser, declaration);
@@ -1517,15 +1523,23 @@ export function unknownValue(nodeText: string) {
   return {kind: 'unknown', value: 'unknown', text: nodeText} as UnknownValue;
 }
 
-export function isExportedSymbol(checker: ts.TypeChecker, node: ts.Node): boolean {
+export function isExportedSymbol(parser: DocParser, node: ts.Node): boolean {
   const sourceFile = node.getSourceFile?.();
   if (sourceFile?.isDeclarationFile) {
     return true;
   }
-  const symbol = getSymbolFromNode(checker, node);
+  const symbol = getSymbolFromNode(parser, node);
   const declarationNode = getValueDeclaration(symbol);
-  if (declarationNode) {
-    t.getKindNameFromNode(declarationNode);
+
+  // Prevent circular types that aren't exported
+  if (symbol && declarationNode) {
+    if (parser.visitedTypeScriptSymbols[symbol.name]) {
+      return true;
+    }
+    // We don't consider type parameter declarations to be visited. These are generics like `T`
+    if (!t.isTypeParameter(declarationNode)) {
+      parser.visitedTypeScriptSymbols[symbol.name] = declarationNode.kind;
+    }
     // Check if the declaration's sourcefile is a declaration file
     if (declarationNode.getSourceFile().isDeclarationFile) {
       return true;
@@ -1538,7 +1552,7 @@ export function isExportedSymbol(checker: ts.TypeChecker, node: ts.Node): boolea
     ) {
       return true;
     }
-    return isNodeExported(checker, declarationNode);
+    return isNodeExported(parser.checker, declarationNode);
   }
   return false;
 }
@@ -1551,7 +1565,7 @@ function isOptional(symbol: ts.Symbol): boolean {
   return (symbol.getFlags() & ts.SymbolFlags.Optional) !== 0;
 }
 
-function safeGetText(checker: ts.TypeChecker, node: ts.Node): string {
+function safeGetText(parser: DocParser, node: ts.Node): string {
   if (node.getSourceFile?.()) {
     return node.getText();
   }
@@ -1562,7 +1576,7 @@ function safeGetText(checker: ts.TypeChecker, node: ts.Node): string {
     return (node as any).text;
   }
   // Try a symbol
-  const symbol = getSymbolFromNode(checker, node);
+  const symbol = getSymbolFromNode(parser, node);
   return symbol?.name || `SyntheticNode - ${t.getKindNameFromNode(node)}`;
 }
 
@@ -1577,8 +1591,7 @@ function safeGetText(checker: ts.TypeChecker, node: ts.Node): string {
  * ```
  */
 function getExportMembers(parser: DocParser, node: ts.Node) {
-  const {checker} = parser;
-  const exports = getSymbolFromNode(checker, node)?.exports || new Map();
+  const exports = getSymbolFromNode(parser, node)?.exports || new Map();
   const members = (Array.from(exports.values() as any) as ts.Symbol[])
     .map(symbol => {
       const declaration = getValueDeclaration(symbol);
@@ -1623,7 +1636,7 @@ function getValueFromSignature(
 function generateSignatureFromTypeNode(parser: DocParser, node: ts.Node): ts.Signature | undefined {
   if (t.isFunctionType(node) || t.isMethodSignature(node)) {
     const parameters = node.parameters.map(
-      p => (getSymbolFromNode(parser.checker, p) || getSymbolFromNode(parser.checker, p.name))!
+      p => (getSymbolFromNode(parser, p) || getSymbolFromNode(parser, p.name))!
     );
     const typeParameters = node.typeParameters?.map(
       t => parser.checker.getTypeAtLocation(t) as ts.TypeParameter
@@ -1645,11 +1658,11 @@ function generateSignatureFromTypeNode(parser: DocParser, node: ts.Node): ts.Sig
         return parser.checker.getTypeAtLocation(node.type || node);
       },
       getDocumentationComment() {
-        const symbol = getSymbolFromNode(parser.checker, node)!;
+        const symbol = getSymbolFromNode(parser, node)!;
         return symbol.getDocumentationComment(parser.checker);
       },
       getJsDocTags() {
-        const symbol = getSymbolFromNode(parser.checker, node)!;
+        const symbol = getSymbolFromNode(parser, node)!;
         return symbol.getJsDocTags();
       },
     };
@@ -1669,7 +1682,7 @@ export function getValueFromSignatureNode(
   if (signature) {
     return getValueFromSignature(parser, declaration, signature);
   }
-  return unknownValue(safeGetText(checker, declaration));
+  return unknownValue(safeGetText(parser, declaration));
 }
 
 function getObjectValueFromType(parser: DocParser, type: ts.Type): Value {

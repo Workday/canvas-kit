@@ -2,7 +2,7 @@
 import React from 'react';
 
 /**
- * @deprecated The returned model is now inferred from `createModelHook`
+ * @deprecated ⚠️ `Model` has been deprecated and will be removed in a future major version. The returned model is now inferred from `createModelHook`.
  */
 export type Model<State, Events extends IEvent> = {
   state: State;
@@ -64,7 +64,7 @@ type ToCallbackConfig<
  *   id?: string
  * } & Partial<ToModelConfig<State, Events, typeof eventMap>>
  *
- * @deprecated `createModelHook` now infers the config type
+ * @deprecated ⚠️ `ToModelConfig` has been deprecated and will be removed in a future major version. Please use `createModelHook` instead since it infers the config type.
  */
 export type ToModelConfig<
   TState extends Record<string, any>,
@@ -97,7 +97,7 @@ export type ToModelConfig<
  *   }
  * })
  *
- * @deprecated `createModelHook` uses Template Literal Types to create event map types
+ * @deprecated ⚠️ `createEventMap` has been deprecated and will be removed in a future major version. Please use `createModelHook` instead. It uses Template Literal Types to create event map types.
  */
 export const createEventMap = <TEvents extends IEvent>() => <
   TGuardMap extends Record<string, keyof TEvents>,
@@ -131,7 +131,7 @@ const keys = <T extends object>(input: T) => Object.keys(input) as (keyof T)[];
  *     }
  *   }
  * })
- * @deprecated Use `createModelHook` instead
+ * @deprecated ⚠️ `useEventMap` has been deprecated and will be removed in a future major version. Please use `createModelHook` instead.
  */
 export const useEventMap = <
   TEvents extends IEvent,
@@ -316,16 +316,19 @@ export type ModelFn<
  * }
  * ```
  */
+// We use the bivariance hack so models can be considered compatible even if the guard and callbacks
+// contain `state` that are incompatible. More info:
+// https://github.com/damianc/dev-notes/blob/master/typescript/bivariance-hack.md
 export type ToEventConfig<TState, TEvents extends Record<string, any>> = {
-  [K in keyof TEvents as `on${Capitalize<string & K>}`]?: (
+  [K in keyof TEvents as `on${Capitalize<string & K>}`]?: {bivarianceHack(
     data: Parameters<TEvents[K]>[0],
     prevState: TState
-  ) => void;
+  ): void}['bivarianceHack'];
 } & {
-  [K in keyof TEvents as `should${Capitalize<string & K>}`]?: (
+  [K in keyof TEvents as `should${Capitalize<string & K>}`]?: {bivarianceHack(
     data: Parameters<TEvents[K]>[0],
     state: TState
-  ) => boolean;
+  ): boolean}['bivarianceHack'];
 };
 
 function capitalize(string: string) {
@@ -510,10 +513,10 @@ export const createModelHook = <TDefaultConfig extends {}, TRequiredConfig exten
     const elemProps = {};
     for (const key in props) {
       if (
-        !defaultConfig.hasOwnProperty(key) &&
+        (!defaultConfig.hasOwnProperty(key) &&
         !requiredConfig.hasOwnProperty(key) &&
         !callbacksRef.current.includes(key) &&
-        !guardsRef.current.includes(key)
+        !guardsRef.current.includes(key)) || key === 'id'
       ) {
         // @ts-ignore  Typescript complains about index signatures and this type is never exposed in definitions, so suppress the error
         elemProps[key] = props[key];
@@ -585,7 +588,8 @@ export const createModelHook = <TDefaultConfig extends {}, TRequiredConfig exten
       }, {} as Record<string, any>);
     }, []);
 
-    return { state, events: wrappedEvents, ...rest };
+  // The model context is private and should never be used
+    return { state, events: wrappedEvents, __UNSTABLE_modelContext: Context, ...rest };
   }
 
   wrappedModelHook.getElemProps = getElemProps;
