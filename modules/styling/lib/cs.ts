@@ -5,7 +5,6 @@ import {getRegisteredStyles} from '@emotion/utils';
 import {serializeStyles, Keyframes, SerializedStyles, CSSObject} from '@emotion/serialize';
 
 import {generateUniqueId} from './uniqueId';
-import {slugify} from './slugify';
 
 export const createStylesCache: Record<string, boolean> = {};
 
@@ -110,6 +109,18 @@ export function cssVar(input: string, fallback?: string) {
 }
 
 /**
+ * Util function to fix an issue with Emotion by
+ * appending `EmotionIssue#3066` to end of css variable
+ * See issue: [#3066](https://github.com/emotion-js/emotion/issues/3066)
+ */
+const makeEmotionSafe = (key: string): string => {
+  if (key.endsWith('label')) {
+    return `${key}-emotion-safe`;
+  }
+  return key;
+};
+
+/**
  * Create temporary CSS variables to use in components. The CSS variable names will
  * be unique at runtime to avoid collisions. The return value is a function and a
  * Map. The function can be used to pass in values from JavaScript. The function will
@@ -130,6 +141,7 @@ export function cssVar(input: string, fallback?: string) {
  * div.style = myVars({ color: 'red' }) // <div style="--{hash}-color: red;" />
  * ```
  */
+
 export function createVars<T extends string, ID extends string>(input: {
   id: ID;
   args: T[];
@@ -151,8 +163,9 @@ export function createVars<T extends string, ID extends string>(...args: T[]): C
   };
 
   args.forEach(key => {
+    console.log(key);
     // @ts-ignore
-    result[key] = `--${id}-${slugify(key)}`;
+    result[key] = `--${id}-${makeEmotionSafe(key)}`;
   }, {});
 
   return result as CsVars<T, ID>;
