@@ -7,21 +7,21 @@ import {
   ComboBoxMenuItemGroup,
 } from '@workday/canvas-kit-labs-react/combobox';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {DeprecatedMenuItem, DeprecatedMenuItemProps} from '@workday/canvas-kit-preview-react/menu';
+import {StyledMenuItem, MenuItemProps} from '@workday/canvas-kit-react/menu';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
 
 const autocompleteResult = (
   textModifier: number,
-  isDisabled: boolean
-): ReactElement<DeprecatedMenuItemProps> => (
-  <DeprecatedMenuItem isDisabled={isDisabled}>
+  disabled: boolean
+): ReactElement<MenuItemProps> => (
+  <StyledMenuItem isDisabled={disabled}>
     Result{' '}
     <span>
       num<span>ber</span>
     </span>{' '}
     {textModifier}
-  </DeprecatedMenuItem>
+  </StyledMenuItem>
 );
 
 const simpleAutoComplete = (count: number, showDisabledItems, total = 5) =>
@@ -35,17 +35,19 @@ const groupOfResults = (
   groupHeading: ReactNode = 'Group'
 ): ComboBoxMenuItemGroup => ({
   header: (
-    <DeprecatedMenuItem>
+    <StyledMenuItem>
       <strong>{groupHeading}</strong>
-    </DeprecatedMenuItem>
+    </StyledMenuItem>
   ),
   items: simpleAutoComplete(count, showDisabledItems, 10),
 });
 
-export const Autocomplete: FC<Omit<ComboboxProps, 'children'> & {
-  group?: boolean;
-  showDisabledItems?: boolean;
-}> = ({showClearButton, group, showDisabledItems = false, ...props}) => {
+export const Autocomplete: FC<
+  Omit<ComboboxProps, 'children'> & {
+    group?: boolean;
+    showDisabledItems?: boolean;
+  }
+> = ({showClearButton, group, showDisabledItems = false, ...props}) => {
   const [currentText, setCurrentText] = useState('');
 
   const autocompleteCallback = (event: ChangeEvent<HTMLInputElement>): void => {

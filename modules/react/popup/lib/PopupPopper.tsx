@@ -26,10 +26,26 @@ export interface PopupPopperProps extends PopperProps {
   popperOptions?: Partial<PopperOptions>;
 }
 
+// We moved this out of the component function to prevent rebuilding this object on re-renders.
+const popperOptions = {
+  modifiers: [
+    {
+      name: 'offset',
+      options: {
+        offset: () => [0, 4],
+      },
+    },
+  ],
+};
+
 export const PopupPopper = createSubcomponent('div')({
   displayName: 'Popup.Popper',
   modelHook: usePopupModel,
   elemPropsHook: usePopupPopper,
 })<PopupPopperProps>(({children, ...elemProps}) => {
-  return <Popper {...elemProps}>{children}</Popper>;
+  return (
+    <Popper {...elemProps} popperOptions={popperOptions} {...elemProps}>
+      {children}
+    </Popper>
+  );
 });
