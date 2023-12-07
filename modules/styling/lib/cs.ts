@@ -163,7 +163,6 @@ export function createVars<T extends string, ID extends string>(...args: T[]): C
   };
 
   args.forEach(key => {
-    console.log(key);
     // @ts-ignore
     result[key] = `--${id}-${makeEmotionSafe(key)}`;
   }, {});
