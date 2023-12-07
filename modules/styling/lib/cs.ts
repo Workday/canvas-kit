@@ -1,8 +1,8 @@
-import React from 'react';
 // eslint-disable-next-line @emotion/no-vanilla
 import {cache, css} from '@emotion/css';
 import {getRegisteredStyles} from '@emotion/utils';
 import {serializeStyles, Keyframes, SerializedStyles, CSSObject} from '@emotion/serialize';
+import {Properties} from 'csstype';
 
 import {generateUniqueId} from './uniqueId';
 
@@ -237,10 +237,10 @@ export type CSToPropsInput =
   | undefined
   | CS
   | CsToPropsReturn
-  | React.CSSProperties
+  | Properties<string | number>
   | CSToPropsInput[];
 
-export type CsToPropsReturn = {className?: string; style?: React.CSSProperties};
+export type CsToPropsReturn = {className?: string; style?: Properties<string | number>};
 /**
  * A function that takes in a single input, or an array. The type of the input is either:
  *
@@ -464,7 +464,7 @@ export function handleCsProp<
   T extends CSProps & {
     className?: string | undefined;
 
-    style?: React.CSSProperties | undefined;
+    style?: Properties<string | number> | undefined;
   }
 >(
   /**
@@ -489,7 +489,7 @@ export function handleCsProp<
   // _does_ care because it uses the `classList` order to determine style merging. Therefore we
   // should always be careful to order class names knowing we need to support runtime merging if
   // runtime styles are detected.
-  const returnProps = csToProps([localCs, className, cs, style]);
+  const returnProps = csToProps([localCs, className, cs]);
 
   // The following is basically what Emotion does internally to merge styles from different
   // components into a single className. We will do this here for backwards compatibility with
@@ -508,6 +508,8 @@ export function handleCsProp<
       shouldRuntimeMergeStyles = true;
     }
   });
+
+  returnProps.style = {...returnProps.style, ...style};
 
   // If runtime styles are detected, we need to do extra work to ensure styles merge according to
   // the rules of Emotion's runtime.

@@ -287,6 +287,13 @@ describe('handleCsProp', () => {
     expect(screen.getByTestId('base')).toHaveStyle({padding: padding.base});
   });
 
+  it('should forward the style attribute', () => {
+    const returnProps = handleCsProp({style: {position: 'absolute'}});
+
+    expect(returnProps).toHaveProperty('className', '');
+    expect(returnProps).toHaveProperty('style', {position: 'absolute'});
+  });
+
   it('should allow overriding via the style attribute', () => {
     render(<BaseComponent style={{padding: padding.styleAttribute}} />);
 
