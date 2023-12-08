@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.0.26](https://github.com/Workday/canvas-kit/releases/tag/v10.0.26) (2023-12-08)
+
+### Components
+
+- fix: Remove console.log ([#2451](https://github.com/Workday/canvas-kit/pull/2451)) ([@michaelhabibi](https://github.com/michaelhabibi))
+
+
+## [v10.0.25](https://github.com/Workday/canvas-kit/releases/tag/v10.0.25) (2023-12-07)
+
+### Components
+
+- fix: Fix forwarding of the style attribute ([#2453](https://github.com/Workday/canvas-kit/pull/2453)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v10.0.24](https://github.com/Workday/canvas-kit/releases/tag/v10.0.24) (2023-12-07)
+
+### Components
+
+- fix: Fix accessibility tooltip bug ([#2446](https://github.com/Workday/canvas-kit/pull/2446)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
 ## [v10.0.23](https://github.com/Workday/canvas-kit/releases/tag/v10.0.23) (2023-12-06)
 
 ### Components
@@ -10,6 +31,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - fix: Add button vars to pills to overwrite styles ([#2432](https://github.com/Workday/canvas-kit/pull/2432)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
 
 
+## [v9.1.32](https://github.com/Workday/canvas-kit/releases/tag/v9.1.32) (2023-12-05)
+
+### Components
+
+- fix: Fix accessibility tooltip bug ([#2446](https://github.com/Workday/canvas-kit/pull/2446)) ([@RayRedGoose](https://github.com/RayRedGoose))
 ## [v10.0.22](https://github.com/Workday/canvas-kit/releases/tag/v10.0.22) (2023-12-04)
 
 ### Components
