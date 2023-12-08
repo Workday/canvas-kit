@@ -1,8 +1,10 @@
 import * as React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
-// type changes no need
-import {type, CanvasTypeHierarchy, CanvasTypeVariants} from '@workday/canvas-kit-react/tokens';
 import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
+import {createModifiers, createStyles, handleCsProp} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
+
+type TokenName = `${keyof typeof system.type}.${'large' | 'medium' | 'small'}`;
 
 export interface TextProps extends BoxProps {
   /**
@@ -12,58 +14,40 @@ export interface TextProps extends BoxProps {
    * ```tsx
    * <Text typeLevel="body.small">Small body text</Text>
    * ```
-  */
-  typeLevel?: `${keyof CanvasTypeHierarchy}.${'large'|'medium'|'small'}`;
+   */
+  typeLevel?: TokenName;
   /**
    * Type variant token names: `error`, `hint` or `inverse`.
    *
    * ```tsx
    * <Text variant="error" typeLevel="subtext.large">Error text</Text>
    * ```
-  */
-  variant?: keyof CanvasTypeVariants;
+   */
+  variant?: 'error' | 'hint' | 'inverse';
 }
 
-/**
- * Function returns updated props by token and variant values
-*/
-const validateProps = ({typeLevel, variant, ...props}: TextProps) => {
-  let updatedProps: any = props;
-  const tokenPropNames = [
-    'color',
-    'fontFamily',
-    'fontSize',
-    'fontWeight',
-    'letterSpacing',
-    'lineHeight',
-  ];
+type ModifierConfig = Record<TokenName, string>;
 
-  /*
-  If token provided it updates undefined values of token styles:
-  `fontFamily`, `fontSize`, `lineHeight`, `fontWeight`, `color`
-  by replacing them by token value
-  */
-  if (typeLevel) {
-    const [level, size] = typeLevel.split('.') as [
-      keyof CanvasTypeHierarchy,
-      'large' | 'medium' | 'small'
-    ];
-    const tokenProps = type.levels[level][size];
-
-    tokenPropNames.forEach(item => {
-      if (!props[item as keyof typeof props]) {
-        updatedProps[item] = tokenProps[item as keyof typeof tokenProps];
-      }
+const createModRules = (tokens: typeof system.type): ModifierConfig | {} => {
+  return Object.entries(tokens).reduce((acc, [firstLevelKey, firstLevelValue]) => {
+    Object.entries(firstLevelValue).forEach(([k, v]) => {
+      const key = `${firstLevelKey}.${k}` as TokenName;
+      (acc as ModifierConfig)[key] = createStyles(v);
     });
-  }
-
-  // If variant provided it updates color value by variant color
-  if (variant) {
-    updatedProps = {...updatedProps, ...type.variants[variant]};
-  }
-
-  return updatedProps;
+    return acc;
+  }, {});
 };
+
+const getModifiers = createModifiers({
+  tokenName: {
+    ...createModRules(system.type),
+  },
+  variant: {
+    error: createStyles({color: base.cinnamon500}),
+    hint: createStyles({color: base.licorice300}),
+    inverse: createStyles({color: base.frenchVanilla100}),
+  },
+});
 
 /**
  * This is a generic base component intended to render any text. It's built on top of the
@@ -95,12 +79,15 @@ const validateProps = ({typeLevel, variant, ...props}: TextProps) => {
  *   </Text>
  * );
  * ```
-*/
+ */
 export const Text = createComponent('span')({
   displayName: 'Text',
-  Component: ({children, ...elemProps}: TextProps, ref, Element) => (
-    <Box ref={ref} as={Element} {...validateProps(elemProps)}>
-      {children}
-    </Box>
-  ),
+  Component: ({children, typeLevel, variant, ...elemProps}: TextProps, ref, Element) => {
+    const modifiers = getModifiers({tokenName: typeLevel, variant});
+    return (
+      <Element ref={ref} {...handleCsProp(elemProps, modifiers)}>
+        {children}
+      </Element>
+    );
+  },
 });

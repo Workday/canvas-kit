@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Property} from 'csstype';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {Text, TextProps} from './Text';
-import {inputColors} from '@workday/canvas-kit-react/tokens';
+import {base, system} from '@workday/canvas-tokens-web';
 
 export interface TypeLabelProps extends TextProps {
   cursor?: Property.Cursor;
@@ -34,10 +34,12 @@ export const LabelText = createComponent('label')({
         ref={ref}
         as={Element}
         typeLevel="subtext.large"
-        color={disabled && variant !== 'inverse' ? inputColors.disabled.text : undefined}
-        cursor={cursor && !disabled ? cursor : 'default'}
-        opacity={disabled && variant === 'inverse' ? '.4' : '1'}
         variant={variant}
+        cs={{
+          color: disabled && variant !== 'inverse' ? base.licorice100 : undefined,
+          cursor: cursor && !disabled ? cursor : 'default',
+          opacity: disabled && variant === 'inverse' ? system.opacity.disabled : 1,
+        }}
         {...elemProps}
       />
     );
