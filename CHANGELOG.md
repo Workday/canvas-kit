@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.0.26](https://github.com/Workday/canvas-kit/releases/tag/v10.0.26) (2023-12-08)
+
+### Components
+
+- fix: Remove console.log ([#2451](https://github.com/Workday/canvas-kit/pull/2451)) ([@michaelhabibi](https://github.com/michaelhabibi))
+
+
 ## [v10.0.25](https://github.com/Workday/canvas-kit/releases/tag/v10.0.25) (2023-12-07)
 
 ### Components
