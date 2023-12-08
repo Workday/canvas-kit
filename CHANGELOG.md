@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.0.25](https://github.com/Workday/canvas-kit/releases/tag/v10.0.25) (2023-12-07)
+
+### Components
+
+- fix: Fix forwarding of the style attribute ([#2453](https://github.com/Workday/canvas-kit/pull/2453)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v10.0.24](https://github.com/Workday/canvas-kit/releases/tag/v10.0.24) (2023-12-07)
 
 ### Components
