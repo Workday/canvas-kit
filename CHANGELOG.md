@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.0.27](https://github.com/Workday/canvas-kit/releases/tag/v10.0.27) (2023-12-11)
+
+### Documentation
+
+- docs(_examples): Add example for basic search form ([#2454](https://github.com/Workday/canvas-kit/pull/2454)) ([@vibdev](https://github.com/vibdev))
+
+
 ## [v10.0.26](https://github.com/Workday/canvas-kit/releases/tag/v10.0.26) (2023-12-08)
 
 ### Components
