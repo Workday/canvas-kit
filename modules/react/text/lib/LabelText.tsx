@@ -1,19 +1,19 @@
 import * as React from 'react';
 import {Property} from 'csstype';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {Text, TextProps} from './Text';
 import {base, system} from '@workday/canvas-tokens-web';
-import {createStyles, handleCsProp} from '@workday/canvas-kit-styling';
-import {mergeStyles} from '../../layout';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {Subtext, TypeLevelProps} from './TypeLevelComponents';
 
-export interface TypeLabelProps extends TextProps {
+export interface TypeLabelProps extends Omit<TypeLevelProps, 'size'> {
   cursor?: Property.Cursor;
   disabled?: boolean;
 }
 
 /**
  * This component is intended to be used for labeling input fields. It's built on top of the
- * {@link Text} component, so it has access to all `TextProps`. By default, it renders a semantic
+ * {@link Subtext} component, so it has access to all `TypeLevelProps`. By default, it renders a semantic
  * `label` element.
  *
  * It also uses the `subtext.large` typeLevel by default:
@@ -40,10 +40,10 @@ export const LabelText = createComponent('label')({
     });
 
     return (
-      <Text
+      <Subtext
         ref={ref}
         as={Element}
-        typeLevel="subtext.large"
+        size="large"
         variant={variant}
         {...mergeStyles(elemProps, baseStyles)}
       />
