@@ -2,11 +2,11 @@ import * as React from 'react';
 import {base, system} from '@workday/canvas-tokens-web';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {createModifiers, createStyles, CSProps} from '@workday/canvas-kit-styling';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {mergeStyles, CommonStyleProps} from '@workday/canvas-kit-react/layout';
 
 type TokenName = `${keyof typeof system.type}.${'large' | 'medium' | 'small'}`;
 
-export interface TextProps extends CSProps {
+export interface TextProps extends CSProps, CommonStyleProps {
   /**
    * Type token as string with level and size separated by dot.
    * These values map to our [Canvas type levels](https://canvas.workday.com/tokens/type#type-styles).
@@ -24,7 +24,7 @@ export interface TextProps extends CSProps {
    * ```
    */
   variant?: 'error' | 'hint' | 'inverse';
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 type ModRules = Record<TokenName, string>;

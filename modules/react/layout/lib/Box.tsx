@@ -150,3 +150,5 @@ export const Box = createComponent('div')({
     );
   },
 });
+
+export {CommonStyleProps};
