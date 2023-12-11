@@ -1,6 +1,11 @@
 import * as React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {Text, TextProps} from './Text';
+import {createModifiers, createStyles} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
+
+type Size = 'large' | 'medium' | 'small';
 
 /**
  * Prop interface for type level specific components:
@@ -10,8 +15,24 @@ export interface TypeLevelProps extends Omit<TextProps, 'typeLevel'> {
   /**
    * Each type level has three sizes: `large`, `medium`, and `small`.
    */
-  size: 'large' | 'medium' | 'small';
+  size: Size;
 }
+
+const createComponentStyles = (name: keyof typeof system.type, modifier: Size) => {
+  const entries = Object.entries(system.type[name]).map(([k, v]) => [k, createStyles(v)]);
+
+  const getTitleModifiers = createModifiers({
+    size: Object.fromEntries(entries),
+  });
+
+  const baseStyles = createStyles({
+    color: /^(title|heading)$/.test(name) ? base.blackPepper400 : base.blackPepper300,
+  });
+
+  const modifiers = getTitleModifiers({size: modifier});
+
+  return [baseStyles, modifiers];
+};
 
 /**
  * This component is intended to be used for small subtext content or in tight spaces.
@@ -39,9 +60,9 @@ export interface TypeLevelProps extends Omit<TextProps, 'typeLevel'> {
  */
 export const Subtext = createComponent('p')({
   displayName: 'Subtext',
-  Component: ({size, ...elemProps}: TypeLevelProps, ref, Element) => {
-    const typeLevel = `subtext.${size}` as TextProps['typeLevel'];
-    return <Text ref={ref} as={Element} typeLevel={typeLevel} {...elemProps} />;
+  Component: ({size, variant, ...elemProps}: TypeLevelProps, ref, Element) => {
+    const styles = createComponentStyles('subtext', size);
+    return <Text ref={ref} as={Element} variant={variant} {...mergeStyles(elemProps, styles)} />;
   },
 });
 
@@ -71,9 +92,9 @@ export const Subtext = createComponent('p')({
  */
 export const BodyText = createComponent('p')({
   displayName: 'BodyText',
-  Component: ({size, ...elemProps}: TypeLevelProps, ref, Element) => {
-    const typeLevel = `body.${size}` as TextProps['typeLevel'];
-    return <Text ref={ref} as={Element} typeLevel={typeLevel} {...elemProps} />;
+  Component: ({size, variant, ...elemProps}: TypeLevelProps, ref, Element) => {
+    const styles = createComponentStyles('body', size);
+    return <Text ref={ref} as={Element} variant={variant} {...mergeStyles(elemProps, styles)} />;
   },
 });
 
@@ -103,9 +124,9 @@ export const BodyText = createComponent('p')({
  */
 export const Heading = createComponent('h2')({
   displayName: 'Heading',
-  Component: ({size, ...elemProps}: TypeLevelProps, ref, Element) => {
-    const typeLevel = `heading.${size}` as TextProps['typeLevel'];
-    return <Text ref={ref} as={Element} typeLevel={typeLevel} {...elemProps} />;
+  Component: ({size, variant, ...elemProps}: TypeLevelProps, ref, Element) => {
+    const styles = createComponentStyles('heading', size);
+    return <Text ref={ref} as={Element} variant={variant} {...mergeStyles(elemProps, styles)} />;
   },
 });
 
@@ -135,8 +156,8 @@ export const Heading = createComponent('h2')({
  */
 export const Title = createComponent('h1')({
   displayName: 'Title',
-  Component: ({size, ...elemProps}: TypeLevelProps, ref, Element) => {
-    const typeLevel = `title.${size}` as TextProps['typeLevel'];
-    return <Text ref={ref} as={Element} typeLevel={typeLevel} {...elemProps} />;
+  Component: ({size, variant, ...elemProps}: TypeLevelProps, ref, Element) => {
+    const styles = createComponentStyles('title', size);
+    return <Text ref={ref} as={Element} variant={variant} {...mergeStyles(elemProps, styles)} />;
   },
 });

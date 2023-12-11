@@ -3,6 +3,8 @@ import {Property} from 'csstype';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {Text, TextProps} from './Text';
 import {base, system} from '@workday/canvas-tokens-web';
+import {createStyles, handleCsProp} from '@workday/canvas-kit-styling';
+import {mergeStyles} from '../../layout';
 
 export interface TypeLabelProps extends TextProps {
   cursor?: Property.Cursor;
@@ -29,18 +31,21 @@ export interface TypeLabelProps extends TextProps {
 export const LabelText = createComponent('label')({
   displayName: 'Label',
   Component: ({cursor, disabled, variant, ...elemProps}: TypeLabelProps, ref, Element) => {
+    const isInverse = variant === 'inverse';
+
+    const baseStyles = createStyles({
+      color: disabled && !isInverse ? base.licorice100 : undefined,
+      cursor: cursor && !disabled ? cursor : 'default',
+      opacity: disabled && isInverse ? system.opacity.disabled : 1,
+    });
+
     return (
       <Text
         ref={ref}
         as={Element}
         typeLevel="subtext.large"
         variant={variant}
-        cs={{
-          color: disabled && variant !== 'inverse' ? base.licorice100 : undefined,
-          cursor: cursor && !disabled ? cursor : 'default',
-          opacity: disabled && variant === 'inverse' ? system.opacity.disabled : 1,
-        }}
-        {...elemProps}
+        {...mergeStyles(elemProps, baseStyles)}
       />
     );
   },
