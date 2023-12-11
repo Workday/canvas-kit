@@ -5830,6 +5830,20 @@
         "__isArgsStory": false
       }
     },
+    "examples-forms-search-form--search-form-basic": {
+      "id": "examples-forms-search-form--search-form-basic",
+      "name": "Search Form Basic",
+      "title": "Examples/Forms/Search Form",
+      "importPath": "./modules/react/_examples/stories/SearchForm.stories.mdx",
+      "kind": "Examples/Forms/Search Form",
+      "story": "Search Form Basic",
+      "parameters": {
+        "fileName": "./modules/react/_examples/stories/SearchForm.stories.mdx",
+        "framework": "react",
+        "__id": "examples-forms-search-form--search-form-basic",
+        "__isArgsStory": false
+      }
+    },
     "examples-forms-select-using-formik--select-with-formik": {
       "id": "examples-forms-select-using-formik--select-with-formik",
       "name": "Select With Formik",
