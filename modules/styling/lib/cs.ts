@@ -183,7 +183,7 @@ export function createVars<
 }
 
 // Type to create CSS Variable names based on JS names and ID
-type CSSVarName<ID extends string, Name> = `--${ID}-${string & Name}`;
+type CSSVarName<ID extends string, Name> = `--${ID}-${ToString<Name>}`;
 
 /**
  * For custom themes that do not overwrite every default.
@@ -232,8 +232,8 @@ type DefaultedVars<
 
 type FlattenObjectKeys<T extends Record<string, any>, K = keyof T> = K extends string
   ? T[K] extends Record<string, any>
-    ? `${string & K}-${FlattenObjectKeys<T[string & K]>}`
-    : `${string & K}`
+    ? `${ToString<K>}-${FlattenObjectKeys<T[ToString<K>]>}`
+    : `${ToString<K>}`
   : never;
 
 export function createDefaultedVars<
