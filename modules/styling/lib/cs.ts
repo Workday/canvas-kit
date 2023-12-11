@@ -160,7 +160,7 @@ export function createVars<
     // this is a defaulted var
     return createDefaultedVars(arg0 as any, args[1] as string);
   }
-  const id = (args[0] as any).id || generateUniqueId(); //?
+  const id = (args[0] as any).id || generateUniqueId();
   // eslint-disable-next-line no-param-reassign
   args = (args[0] as any).args || args;
   const result = (input: Record<ToString<T>, string>) => {
@@ -175,42 +175,13 @@ export function createVars<
   };
 
   args.forEach(key => {
-    console.log(key);
     // @ts-ignore
     result[key] = `--${id}-${makeEmotionSafe(key)}`;
   }, {});
 
   return result;
 }
-// {
-//   {
-//     const myVars = createVars({
-//       default: {
-//         color: 'red',
-//       },
-//       hover: {
-//         color: 'blue',
-//       },
-//     });
 
-//     myVars; //?
-
-//     const myStyles = createStencil({
-//       // TODO: Implement this
-//       vars: {
-//         color: 'red',
-//       },
-//       base: ({color}) => ({
-//         // [myVars.default.color]: 'red',
-//         // ...myVars.$$defaults,
-//         color: myVars.default.color,
-//       }),
-//     });
-// }
-// <style>.css-123abc {
-//   --myVars-default-color: red;
-//   color: var(--myVars-default-color);
-//}</style>
 // Type to create CSS Variable names based on JS names and ID
 type CSSVarName<ID extends string, Name> = `--${ID}-${string & Name}`;
 
@@ -259,12 +230,11 @@ type DefaultedVars<
     : {[K in FlattenObjectKeys<T> as CSSVarName<ID, K>]: ExtractValue<T, K>};
 };
 
-type FlattenObjectKeys<T extends Record<string, any>, K = keyof T> = T[string & K] extends Record<
-  string,
-  any
->
-  ? `${string & K}-${FlattenObjectKeys<T[string & K]>}`
-  : `${string & K}`;
+type FlattenObjectKeys<T extends Record<string, any>, K = keyof T> = K extends string
+  ? T[K] extends Record<string, any>
+    ? `${string & K}-${FlattenObjectKeys<T[string & K]>}`
+    : `${string & K}`
+  : never;
 
 export function createDefaultedVars<
   T extends Record<string, string> | Record<string, Record<string, string>>,
@@ -318,31 +288,6 @@ export function createDefaultedVars<
   }
 
   return result as DefaultedVars<T, ID>;
-}
-{
-  {
-    // const vars = createDefaultedVars(
-    //   {
-    //     color: 'red' as 'red',
-    //   },
-    //   'foobar'
-    // ); //?
-    // vars({color: 'blue'}); //?
-    // vars.$$defaults; //?
-    // const vars3 = createDefaultedVars(
-    //   {
-    //     default: {
-    //       color: 'red',
-    //     },
-    //   },
-    //   'vars3'
-    // ); //?
-    // vars3.$$defaults; //?
-    // vars3.default.color; //?
-    // vars3({default: {color: 'blue'}}); //?
-    // const vars2 = createVars('color'); //?
-    // vars2({color: 'blue'}); //?
-  }
 }
 
 type ModifierConfig = Record<string, Record<string, CS>>;
@@ -869,15 +814,30 @@ export interface StencilConfig<
    * ```
    */
   compound?: StencilCompoundConfig<M>[];
+  /**
+   * Modifiers are optional. If you need a modifier to always be defined, a default modifier value
+   * will be used when a modifier is `undefined`
+   */
+  defaultModifiers?: {[K in keyof M]?: keyof M[K]};
 }
+
+type StencilModifierReturn<
+  M extends StencilModifierConfig<V>,
+  V extends Record<string, string> | Record<string, Record<string, string>>
+> = {[K1 in keyof M]: {[K2 in keyof M[K1]]: string}};
 
 export type Stencil<
   M extends StencilModifierConfig<V>,
   V extends Record<string, string> | Record<string, Record<string, string>>,
   ID extends string = never
-> = (modifiers?: ModifierValuesStencil<M> & VariableValuesStencil<V>) => {
-  className: string;
-  style?: Record<string, string>;
+> = {
+  (modifiers?: ModifierValuesStencil<M> & VariableValuesStencil<V>): {
+    className: string;
+    style?: Record<string, string>;
+  };
+  vars: DefaultedVars<V, ID>;
+  base: string;
+  modifiers: StencilModifierReturn<M, V>;
 };
 
 type VariableValuesStencil<
@@ -895,8 +855,8 @@ export function createStencil<
   V extends Record<string, string> | Record<string, Record<string, string>>,
   ID extends string = never
 >(config: StencilConfig<M, V, ID>, id?: ID): Stencil<M, V, ID> {
-  const {vars, base, modifiers, compound} = config;
-  const _vars = createDefaultedVars(vars || {});
+  const {vars, base, modifiers, compound, defaultModifiers} = config;
+  const _vars = createDefaultedVars(vars || {}, id);
   const _base = createStyles({
     ..._vars.$$defaults,
     ...(typeof base === 'function' ? base(_vars) : base),
@@ -927,21 +887,28 @@ export function createStencil<
           return {
             modifiers: compoundModifier.modifiers,
             styles: createStyles(compoundModifier.styles),
-          }; //?
+          };
         })
       )
     : () => '';
 
-  return input => {
+  const stencil: Stencil<M, V, ID> = input => {
+    const inputModifiers = {...defaultModifiers, ...input};
     return {
       className: [
         _base,
-        modifiers ? _modifiers(input || {}) : '',
-        compound ? _compound(input || {}) : '',
+        modifiers ? _modifiers(inputModifiers) : '',
+        compound ? _compound(inputModifiers) : '',
       ]
         .filter(v => v) // filter out empty strings
         .join(' '),
       style: _vars(input || {}),
     };
   };
+
+  stencil.vars = _vars as DefaultedVars<V, ID>;
+  stencil.base = _base;
+  stencil.modifiers = _modifiers as any as StencilModifierReturn<M, V>;
+
+  return stencil;
 }

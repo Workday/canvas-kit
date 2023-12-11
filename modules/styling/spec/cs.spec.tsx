@@ -478,9 +478,23 @@ describe('createStyles', () => {
         },
       });
 
-      render(<div data-testid="test" className={myStencil()} />);
+      render(<div data-testid="test" {...myStencil()} />);
 
       expect(screen.getByTestId('test')).toHaveStyle({padding: '10px'});
+    });
+
+    it('should set the `base` property with the className of the base', () => {
+      const myStencil = createStencil({
+        base: {
+          padding: 10,
+        },
+      });
+
+      expectTypeOf(myStencil).toHaveProperty('base');
+      expectTypeOf(myStencil.base).toEqualTypeOf<string>();
+
+      expect(myStencil).toHaveProperty('base');
+      expect(typeof myStencil.base).toEqual('string');
     });
 
     it('should allow the creation of a modifier and apply it', () => {
@@ -499,14 +513,62 @@ describe('createStyles', () => {
 
       render(
         <>
-          <div data-testid="test1" className={myStencil()} />
-          <div data-testid="test2" className={myStencil({size: 'large'})} />
+          <div data-testid="test1" {...myStencil()} />
+          <div data-testid="test2" {...myStencil({size: 'large'})} />
         </>
       );
 
       expect(screen.getByTestId('test1')).toHaveStyle({padding: '10px'});
       expect(screen.getByTestId('test2')).toHaveStyle({padding: '20px'});
-      expect(myStencil({size: 'large'}).split(' ')).toHaveLength(2);
+      expect(myStencil({size: 'large'}).className.split(' ')).toHaveLength(2);
+    });
+
+    it('should set the `modifiers` property with the className of the modifier', () => {
+      const myStencil = createStencil({
+        base: {
+          padding: 10,
+        },
+        modifiers: {
+          size: {
+            large: {
+              padding: 20,
+            },
+          },
+        },
+      });
+
+      expectTypeOf(myStencil).toHaveProperty('modifiers');
+      expectTypeOf(myStencil.modifiers).toHaveProperty('size');
+      expectTypeOf(myStencil.modifiers.size).toHaveProperty('large');
+      expectTypeOf(myStencil.modifiers.size.large).toEqualTypeOf<string>();
+
+      expect(myStencil).toHaveProperty('modifiers.size.large');
+      expect(typeof myStencil.modifiers.size.large).toEqual('string');
+    });
+
+    it('should default modifiers if no modifier override is passed', () => {
+      const myStencil = createStencil({
+        base: {
+          padding: 10,
+        },
+        modifiers: {
+          /** foobar */
+          size: {
+            large: {
+              padding: 20,
+            },
+            small: {
+              padding: 5,
+            },
+          },
+        },
+        defaultModifiers: {
+          size: 'large',
+        },
+      });
+
+      expect(myStencil().className).toContain(myStencil.modifiers.size.large);
+      expect(myStencil().className).not.toContain(myStencil.modifiers.size.small);
     });
 
     it('should allow the creation of compound modifiers an apply it', () => {
@@ -544,8 +606,8 @@ describe('createStyles', () => {
 
       render(
         <>
-          <div data-testid="test1" className={myStencil({size: 'large'})} />
-          <div data-testid="test2" className={myStencil({size: 'large', position: 'start'})} />
+          <div data-testid="test1" {...myStencil({size: 'large'})} />
+          <div data-testid="test2" {...myStencil({size: 'large', position: 'start'})} />
         </>
       );
 
@@ -556,22 +618,79 @@ describe('createStyles', () => {
       });
 
       // 4 class names - base, size, position, size-position
-      expect(myStencil({size: 'large', position: 'start'}).split(' ')).toHaveLength(4);
+      expect(myStencil({size: 'large', position: 'start'}).className.split(' ')).toHaveLength(4);
     });
 
-    it.only('should handle variables and pass them to the base function', () => {
+    it('should return access to variables for use in other components', () => {
+      const myStencil = createStencil({
+        vars: {
+          color: 'red',
+        },
+        base: {},
+      });
+
+      expectTypeOf(myStencil).toHaveProperty('vars');
+      expectTypeOf(myStencil.vars).toHaveProperty('color');
+      expectTypeOf(myStencil.vars.color).toEqualTypeOf<string>();
+
+      expect(myStencil).toHaveProperty('vars.color', expect.stringMatching(/--[a-z0-9]+-color/));
+    });
+
+    it('should return access to variables with an ID for use in other components', () => {
+      const myStencil = createStencil(
+        {
+          vars: {
+            color: 'red',
+          },
+          base: {},
+        },
+        'foo'
+      );
+
+      expectTypeOf(myStencil).toHaveProperty('vars');
+      expectTypeOf(myStencil.vars).toHaveProperty('color');
+      expectTypeOf(myStencil.vars.color).toEqualTypeOf<'--foo-color'>();
+
+      expect(myStencil).toHaveProperty('vars.color', expect.stringMatching(/--foo-color/));
+    });
+
+    it('should handle variables and pass them to the base function', () => {
       const myStencil = createStencil({
         vars: {
           default: {
-            /** varbar */
             color: 'red',
           },
         },
         base: vars => ({
           color: vars.default.color,
         }),
+      });
+
+      // `.toHaveStyle` doesn't work with variables and worse, it ALWAYS passes when passed anything
+      // other than a parsable color string. https://github.com/testing-library/jest-dom/issues/322
+      // We'll resort to iterating over injected styles instead.
+      let found = false;
+      for (const sheet of document.styleSheets as any as Iterable<CSSStyleSheet>) {
+        for (const rule of sheet.cssRules as any as Iterable<CSSRule>) {
+          if (rule.cssText.includes(myStencil.base)) {
+            expect(rule.cssText).toContain(`${myStencil.vars.default.color}: red;`);
+            expect(rule.cssText).toContain(`color: var(${myStencil.vars.default.color})`);
+            found = true;
+          }
+        }
+      }
+      expect(found).toEqual(true);
+    });
+
+    it('should handle variables and pass them to the modifier function', () => {
+      const myStencil = createStencil({
+        vars: {
+          default: {
+            color: 'red',
+          },
+        },
+        base: {},
         modifiers: {
-          /** Foobar */
           variant: {
             regular: vars => ({
               color: vars.default.color,
@@ -580,9 +699,19 @@ describe('createStyles', () => {
         },
       });
 
-      const temp = <div {...myStencil({})} />;
-
-      const result = myStencil({default: {color: 'blue'}, variant: 'regular'}); //?
+      // `.toHaveStyle` doesn't work with variables and worse, it ALWAYS passes when passed anything
+      // other than a parsable color string. https://github.com/testing-library/jest-dom/issues/322
+      // We'll resort to iterating over injected styles instead.
+      let found = false;
+      for (const sheet of document.styleSheets as any as Iterable<CSSStyleSheet>) {
+        for (const rule of sheet.cssRules as any as Iterable<CSSRule>) {
+          if (rule.cssText.includes(myStencil.modifiers.variant.regular)) {
+            expect(rule.cssText).toContain(`color: var(${myStencil.vars.default.color})`);
+            found = true;
+          }
+        }
+      }
+      expect(found).toEqual(true);
     });
   });
 });

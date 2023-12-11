@@ -104,6 +104,9 @@ const buttonStencil = createStencil({
         background: 'gray'
       }
     }
+  },
+  defaultModifiers: {
+    variant: 'secondary'
   }
 })
 
@@ -127,6 +130,13 @@ The HTML may look something like this:
   }
 </style>
 <div class="css-a0 css-a1"></div>
+```
+
+The optional `defaultModifiers` config property will default modifiers to a value. If a modifier is
+not passed to the stencil, the default will be used.
+
+```tsx
+myStencil(); // className will be `'css-a0 css-a2'`
 ```
 
 ### Compound Modifiers
