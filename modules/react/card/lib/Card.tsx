@@ -1,18 +1,27 @@
 import * as React from 'react';
 
-import {colors} from '@workday/canvas-kit-react/tokens';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {createStyles, CSProps, cssVar} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {CardHeading} from './CardHeading';
 import {CardBody} from './CardBody';
 
-export interface CardProps extends BoxProps {
+export interface CardProps extends CSProps {
   /**
    * Children of the Card. Should contain a `<Card.Body>` and an optional `<Card.Heading>`
    */
   children?: React.ReactNode;
 }
+
+const cardBaseStyles = createStyles({
+  boxShadow: system.depth[1],
+  padding: system.space.x8,
+  backgroundColor: base.frenchVanilla100,
+  border: `0.0625rem solid ${cssVar(base.soap500)}`,
+  borderRadius: system.shape.x2,
+});
 
 /**
  * `Card` is a container component that holds a {@link CardBody Card.Body} and an optional
@@ -30,18 +39,9 @@ export const Card = createComponent('div')({
   displayName: 'Card',
   Component: ({children, ...elemProps}: CardProps, ref, Element) => {
     return (
-      <Box
-        ref={ref}
-        as={Element}
-        depth={1}
-        padding="l"
-        backgroundColor="frenchVanilla100"
-        border={`1px solid ${colors.soap500}`}
-        borderRadius="l"
-        {...elemProps}
-      >
+      <Element ref={ref} {...mergeStyles(elemProps, cardBaseStyles)}>
         {children}
-      </Box>
+      </Element>
     );
   },
   subComponents: {
