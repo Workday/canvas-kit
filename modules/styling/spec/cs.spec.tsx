@@ -552,7 +552,6 @@ describe('createStyles', () => {
           padding: 10,
         },
         modifiers: {
-          /** foobar */
           size: {
             large: {
               padding: 20,

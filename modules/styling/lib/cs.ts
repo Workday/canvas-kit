@@ -849,8 +849,8 @@ type VariableValuesStencil<
   : {[K1 in keyof V]?: {[K2 in keyof V[K1]]: string}};
 
 /**
- * Creates a reuseable Stencil for styling elements. It takes base styles, modifiers, and compound
- * modifiers.
+ * Creates a reuseable Stencil for styling elements. It takes vars, base styles, modifiers, and
+ * compound modifiers.
  */
 export function createStencil<
   M extends StencilModifierConfig<V>,

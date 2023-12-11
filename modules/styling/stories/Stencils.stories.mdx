@@ -6,11 +6,11 @@ import {CreateStencil} from './examples/CreateStencil';
 
 ## Stencil
 
-Stencils are a reusable function that returns styles based on modifiers passed in. A Stencil should
-apply to a single element. If your component has nested elements, you can either nest styles in the
-stencil or create a stencil for each nested element. If your component is a compound component, a
-stencil should be created for each subcomponet. If your component is a config component, a stencil
-can have nested styles.
+Stencils are a reusable function that returns `style` and `className` props in an object. A Stencil
+should apply to a single element. If your component has nested elements, you can either nest styles
+in the stencil or create a stencil for each nested element. If your component is a compound
+component, a stencil should be created for each subcomponet. If your component is a config
+component, a stencil can have nested styles.
 
 <SymbolDoc name="createStencil" />
 
