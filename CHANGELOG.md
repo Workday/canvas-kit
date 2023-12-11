@@ -3,6 +3,182 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.0.26](https://github.com/Workday/canvas-kit/releases/tag/v10.0.26) (2023-12-08)
+
+### Components
+
+- fix: Remove console.log ([#2451](https://github.com/Workday/canvas-kit/pull/2451)) ([@michaelhabibi](https://github.com/michaelhabibi))
+
+
+## [v10.0.25](https://github.com/Workday/canvas-kit/releases/tag/v10.0.25) (2023-12-07)
+
+### Components
+
+- fix: Fix forwarding of the style attribute ([#2453](https://github.com/Workday/canvas-kit/pull/2453)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v10.0.24](https://github.com/Workday/canvas-kit/releases/tag/v10.0.24) (2023-12-07)
+
+### Components
+
+- fix: Fix accessibility tooltip bug ([#2446](https://github.com/Workday/canvas-kit/pull/2446)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v10.0.23](https://github.com/Workday/canvas-kit/releases/tag/v10.0.23) (2023-12-06)
+
+### Components
+
+- fix: Add button vars to pills to overwrite styles ([#2432](https://github.com/Workday/canvas-kit/pull/2432)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v9.1.32](https://github.com/Workday/canvas-kit/releases/tag/v9.1.32) (2023-12-05)
+
+### Components
+
+- fix: Fix accessibility tooltip bug ([#2446](https://github.com/Workday/canvas-kit/pull/2446)) ([@RayRedGoose](https://github.com/RayRedGoose))
+## [v10.0.22](https://github.com/Workday/canvas-kit/releases/tag/v10.0.22) (2023-12-04)
+
+### Components
+
+- fix: FormField fix alignment for required asterisk ([#2404](https://github.com/Workday/canvas-kit/pull/2404)) ([@thunguyen19](https://github.com/thunguyen19), manuel.carrera)
+  We've wrapped the contents of the `label` element including the asterisk in a `span`. The asterisk now is at the end of the `label`.
+
+
+## [v9.1.31](https://github.com/Workday/canvas-kit/releases/tag/v9.1.31) (2023-12-04)
+
+### Components
+
+- fix: FormField fix alignment for required asterisk ([#2404](https://github.com/Workday/canvas-kit/pull/2404)) ([@thunguyen19](https://github.com/thunguyen19), manuel.carrera)
+  We've wrapped the contents of the `label` element including the asterisk in a `span`. The asterisk now is at the end of the `label`.
+## [v10.0.21](https://github.com/Workday/canvas-kit/releases/tag/v10.0.21) (2023-12-01)
+
+### Components
+
+- fix: Fix runtime style merging in handleCsProps ([#2439](https://github.com/Workday/canvas-kit/pull/2439)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v10.0.20](https://github.com/Workday/canvas-kit/releases/tag/v10.0.20) (2023-12-01)
+
+### Components
+
+- fix(preview): Fix multiline asterisk on preview form field ([#2436](https://github.com/Workday/canvas-kit/pull/2436)) ([@vibdev](https://github.com/vibdev))
+  We removed a wrapping flex element so elemProps is now spread directly on the `<label>` element and the asterisk is at the end of the label.
+
+
+## [v10.0.19](https://github.com/Workday/canvas-kit/releases/tag/v10.0.19) (2023-11-30)
+
+### Components
+
+- fix: Fixes popperOptions rerendering bug ([#2437](https://github.com/Workday/canvas-kit/pull/2437)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v10.0.18](https://github.com/Workday/canvas-kit/releases/tag/v10.0.18) (2023-11-28)
+
+### Components
+
+- fix: Check for undefined error in radio group ([#2427](https://github.com/Workday/canvas-kit/pull/2427)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- fix: Quiet InputProvider logs for SSR ([#2431](https://github.com/Workday/canvas-kit/pull/2431)) ([@anicholls](https://github.com/anicholls))
+
+
+## [v9.1.30](https://github.com/Workday/canvas-kit/releases/tag/v9.1.30) (2023-11-28)
+
+### Components
+
+- fix: Quiet InputProvider logs for SSR ([#2431](https://github.com/Workday/canvas-kit/pull/2431)) ([@anicholls](https://github.com/anicholls))
+
+
+## [v10.0.17](https://github.com/Workday/canvas-kit/releases/tag/v10.0.17) (2023-11-28)
+
+### Components
+
+- fix: Table in preview export fix ([#2419](https://github.com/Workday/canvas-kit/pull/2419)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
+## [v9.1.29](https://github.com/Workday/canvas-kit/releases/tag/v9.1.29) (2023-11-21)
+
+### Components
+
+- fix: Check for undefined error in radio group ([#2427](https://github.com/Workday/canvas-kit/pull/2427)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+## [v10.0.16](https://github.com/Workday/canvas-kit/releases/tag/v10.0.16) (2023-11-21)
+
+### Documentation
+
+- docs: Update README to include latest upgrade guide links ([#2420](https://github.com/Workday/canvas-kit/pull/2420)) ([@vibdev](https://github.com/vibdev))
+
+
+## [v10.0.15](https://github.com/Workday/canvas-kit/releases/tag/v10.0.15) (2023-11-21)
+
+### Components
+
+- fix(select): Set initial selected id to the text value ([#2421](https://github.com/Workday/canvas-kit/pull/2421)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v9.1.28](https://github.com/Workday/canvas-kit/releases/tag/v9.1.28) (2023-11-20)
+
+### Components
+
+- fix: Table in preview export fix ([#2419](https://github.com/Workday/canvas-kit/pull/2419)) ([@josh-bagwell](https://github.com/josh-bagwell))
+## [v10.0.14](https://github.com/Workday/canvas-kit/releases/tag/v10.0.14) (2023-11-17)
+
+### Components
+
+- fix: Update cs prop to create a class instead of style ([#2408](https://github.com/Workday/canvas-kit/pull/2408)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v10.0.13](https://github.com/Workday/canvas-kit/releases/tag/v10.0.13) (2023-11-17)
+
+### Components
+
+- fix(select): Remove visual selection on Select input ([#2410](https://github.com/Workday/canvas-kit/pull/2410)) ([@vibdev](https://github.com/vibdev))
+
+
+## [v10.0.12](https://github.com/Workday/canvas-kit/releases/tag/v10.0.12) (2023-11-17)
+
+### Documentation
+
+- docs: Modal example a11y polish ([#2360](https://github.com/Workday/canvas-kit/pull/2360)) ([@williamjstanton](https://github.com/williamjstanton), [@josh-bagwell](https://github.com/josh-bagwell))
+
+
+## [v10.0.11](https://github.com/Workday/canvas-kit/releases/tag/v10.0.11) (2023-11-16)
+
+### Components
+
+- fix(button): Allow colors to override TertiaryButton ([#2411](https://github.com/Workday/canvas-kit/pull/2411)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v10.0.10](https://github.com/Workday/canvas-kit/releases/tag/v10.0.10) (2023-11-16)
+
+### Test
+
+- test: Skip autocomplete test for now ([#2407](https://github.com/Workday/canvas-kit/pull/2407)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v10.0.9](https://github.com/Workday/canvas-kit/releases/tag/v10.0.9) (2023-11-16)
+
+### Documentation
+
+- docs(select): Add controlled and uncontrolled Select examples ([#2406](https://github.com/Workday/canvas-kit/pull/2406)) ([@vibdev](https://github.com/vibdev))
+
+
+## [v10.0.8](https://github.com/Workday/canvas-kit/releases/tag/v10.0.8) (2023-11-16)
+
+### Documentation
+
+- docs: Update Token docs ([#2383](https://github.com/Workday/canvas-kit/pull/2383)) ([@alanbsmith](https://github.com/alanbsmith), [@mannycarrera4](https://github.com/mannycarrera4))
+
+
+## [v10.0.7](https://github.com/Workday/canvas-kit/releases/tag/v10.0.7) (2023-11-16)
+
+### Components
+
+- fix: Prevent modal from overlapping on mobile devices ([#2385](https://github.com/Workday/canvas-kit/pull/2385)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v9.1.27](https://github.com/Workday/canvas-kit/releases/tag/v9.1.27) (2023-11-14)
+
+### Components
+
+- fix: Prevent modal from overlapping on mobile devices ([#2385](https://github.com/Workday/canvas-kit/pull/2385)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
 ## [v10.0.6](https://github.com/Workday/canvas-kit/releases/tag/v10.0.6) (2023-11-10)
 
 ### Components
