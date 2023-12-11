@@ -2,15 +2,14 @@ import {Specifications} from '@workday/canvas-kit-docs';
 
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 
-import {Custom} from './examples/Custom';
-import {WithSelect} from './examples/Select';
+import {Basic} from './examples/Basic';
 
 <Meta title="Preview/Inputs/Form Field" component={FormField} />
 
 # Canvas Kit Form Field
 
-FormField allows users to wrap input components to make them accessible. You usually won't want to
-use FormField directly but instead should use the specific component you need, e.g. `TextInput`.
+FormField allows users to wrap input components to make them accessible. You can customize the field
+by passing in `TextInput`, `Select`, `RadioGroup` and other form elements to `FormField.Input`.
 
 ## Installation
 
@@ -26,15 +25,4 @@ If you need full customization you can use the `FormField` behavior hooks to bui
 solution. It is also easy it work with custom components or third party libraries and get the CKR
 accessibility guarantees by using the `as` prop.
 
-<ExampleCodeBlock code={Custom} />
-
-### Use with Select
-
-For some custom inputs, such as Canvas Kit's `Select`, you won't be able to reliably cast the
-`FormField.Input` with the `as` prop. Instead you'll want to use `FormField`'s hooks for the
-implementation. In the example below, we're using the `useFormFieldModel` hook to hoist the model
-and providing it to the `useFormFieldInput` behavior hook. Then we pass the model to the `FormField`
-component and the input props to `Select`. This connects `Select` to the `FormField` components and
-provides it with all the accessible attributes it needs.
-
-<ExampleCodeBlock code={WithSelect} />
+<ExampleCodeBlock code={Basic} />

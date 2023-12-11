@@ -13,19 +13,35 @@ export const Error = () => {
   };
 
   return (
-    <FormField
-      label="Choose Your Pizza Crust"
-      useFieldset={true}
-      error={FormField.ErrorType.Error}
-      hintId="error"
-      hintText="Deep dish is currently sold out."
-    >
-      <RadioGroup name="crust-error" onChange={handleChange} value={value} aria-describedby="error">
-        <RadioGroup.RadioButton value="deep-dish">Deep dish</RadioGroup.RadioButton>
-        <RadioGroup.RadioButton value="thin">Thin</RadioGroup.RadioButton>
-        <RadioGroup.RadioButton value="gluten-free">Gluten free</RadioGroup.RadioButton>
-        <RadioGroup.RadioButton value="cauliflower">Cauliflower</RadioGroup.RadioButton>
-      </RadioGroup>
-    </FormField>
+    <div>
+      <FormField
+        label="Choose Your Pizza Crust"
+        useFieldset={true}
+        error={FormField.ErrorType.Error}
+        hintId="error"
+        hintText="Deep dish is currently sold out."
+      >
+        <input />
+      </FormField>
+      <FormField
+        label="Choose Your Pizza Crust"
+        useFieldset={true}
+        error={FormField.ErrorType.Error}
+        hintId="error"
+        hintText="Deep dish is currently sold out."
+      >
+        <RadioGroup
+          name="crust-error"
+          onChange={handleChange}
+          value={value}
+          aria-describedby="error"
+        >
+          <RadioGroup.RadioButton value="deep-dish">Deep dish</RadioGroup.RadioButton>
+          <RadioGroup.RadioButton value="thin">Thin</RadioGroup.RadioButton>
+          <RadioGroup.RadioButton value="gluten-free">Gluten free</RadioGroup.RadioButton>
+          <RadioGroup.RadioButton value="cauliflower">Cauliflower</RadioGroup.RadioButton>
+        </RadioGroup>
+      </FormField>
+    </div>
   );
 };

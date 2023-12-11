@@ -1,4 +1,4 @@
-import {createModelHook, useUniqueId} from '@workday/canvas-kit-react/common';
+import {createModelHook, ErrorType, useUniqueId} from '@workday/canvas-kit-react/common';
 
 export const useFormFieldModel = createModelHook({
   defaultConfig: {
@@ -6,7 +6,7 @@ export const useFormFieldModel = createModelHook({
      * Optional flag to denote if this field has an error to display. When true the `FormField.Input` will have
      * `required` set to true, and usually some subcomponents will have a error color applied.
      */
-    hasError: false,
+    error: undefined as 'error' | 'alert' | undefined,
     /**
      * Optional `id` provided to `FormField`'s subcomponents as HTML attributes:
      * - `FormField.Input` will set `aria-describedby` to `hint-${id}`

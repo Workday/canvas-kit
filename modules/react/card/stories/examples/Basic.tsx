@@ -1,5 +1,6 @@
 import React from 'react';
 import {Card} from '@workday/canvas-kit-react/card';
+import {PrimaryButton} from '../../../button';
 
 export const Basic = () => {
   return (

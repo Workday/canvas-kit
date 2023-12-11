@@ -11,7 +11,7 @@ export const Basic = () => {
     <Box>
       <Flex gap="xxs">
         <Pill onClick={() => setText('The first pill is clicked!')}>
-          <Pill.Icon />
+          <Pill.Icon role="img" aria-label="add" />
           <Pill.Label>Regina Skeltor</Pill.Label>
         </Pill>
         <Pill onClick={() => setText('The second pill is clicked!')} disabled>

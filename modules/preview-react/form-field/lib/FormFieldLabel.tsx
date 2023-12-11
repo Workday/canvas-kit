@@ -17,7 +17,12 @@ export interface FormFieldLabelProps extends ExtractProps<typeof LabelText, neve
 
 const labelStyles = createStyles({
   fontWeight: type.properties.fontWeights.medium,
-  minWidth: '180px',
+  paddingInlineStart: 0,
+  marginBottom: space.xxxs,
+  display: 'flex',
+  alignItems: 'center',
+  maxHeight: '40px',
+  // minWidth: '180px',
 });
 
 const asteriskStyles = createStyles({
@@ -26,6 +31,7 @@ const asteriskStyles = createStyles({
   fontWeight: type.properties.fontWeights.regular,
   textDecoration: 'unset',
   color: cssVar(brand.error.base, '#de2e21'),
+  // margin
 });
 
 export const FormFieldLabel = createSubcomponent(LabelText)({

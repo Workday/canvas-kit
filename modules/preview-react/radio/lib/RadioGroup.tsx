@@ -11,6 +11,7 @@ import {useRadioModel} from './hooks/useRadioModel';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {RadioLabel} from './RadioLabel';
 import {RadioButton} from './RadioButton';
+import {createStyles} from '@workday/canvas-kit-styling';
 
 export interface RadioGroupProps extends Themeable, ExtractProps<typeof Flex, never> {
   /**
@@ -62,6 +63,7 @@ export const RadioGroup = createContainer(Flex)({
   },
 })<RadioGroupProps>(({children, error, theme, ...elemProps}, Element, model) => {
   const errorColors = getErrorColors(error, theme);
+  console.log(errorColors);
   return (
     <Flex
       as={Element}
@@ -76,16 +78,12 @@ export const RadioGroup = createContainer(Flex)({
       transition="100ms box-shadow"
       marginX={`-${space.xs}`}
       width="fit-content"
-      style={
-        error !== undefined
-          ? {
-              boxShadow:
-                errorColors.outer !== errorColors.inner
-                  ? `inset 0 0 0 1px ${errorColors.outer}, inset 0 0 0 3px ${errorColors.inner}`
-                  : `inset 0 0 0 2px ${errorColors.inner}`,
-            }
-          : undefined
-      }
+      cs={{
+        boxShadow:
+          errorColors.outer !== errorColors.inner
+            ? `inset 0 0 0 1px ${errorColors.outer}, inset 0 0 0 3px ${errorColors.inner}`
+            : `inset 0 0 0 2px ${errorColors.inner}`,
+      }}
       {...elemProps}
     >
       {children}

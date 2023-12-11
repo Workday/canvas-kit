@@ -1,12 +1,15 @@
 import React from 'react';
 
-import {createContainer} from '@workday/canvas-kit-react/common';
+import {createContainer, ErrorType} from '@workday/canvas-kit-react/common';
 import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {space} from '@workday/canvas-kit-react/tokens';
 
 import {useFormFieldModel, useFormFieldOrientation} from './hooks';
 import {FormFieldInput} from './FormFieldInput';
 import {FormFieldLabel} from './FormFieldLabel';
 import {FormFieldHint} from './FormFieldHint';
+import {FormFieldContainer} from './FormFieldContainer';
 
 export interface FormFieldProps extends FlexProps {
   /**
@@ -19,6 +22,12 @@ export interface FormFieldProps extends FlexProps {
   orientation: 'vertical' | 'horizontal';
 }
 
+const formFieldBaseStyles = createStyles({
+  border: 'none',
+  padding: 0,
+  margin: `0 0 ${space.m}`,
+});
+
 export const FormField = createContainer('div')({
   displayName: 'FormField',
   modelHook: useFormFieldModel,
@@ -26,12 +35,13 @@ export const FormField = createContainer('div')({
     Input: FormFieldInput,
     Label: FormFieldLabel,
     Hint: FormFieldHint,
+    Container: FormFieldContainer,
   },
 })<FormFieldProps>(({children, orientation, ...elemProps}, Element) => {
   const layoutProps = useFormFieldOrientation(orientation);
 
   return (
-    <Flex as={Element} {...layoutProps} {...elemProps}>
+    <Flex as={Element} {...layoutProps} cs={formFieldBaseStyles} {...elemProps}>
       {children}
     </Flex>
   );
