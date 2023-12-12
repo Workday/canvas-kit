@@ -19,7 +19,7 @@ function ExpandableRow(props) {
 
   const expansion = (
     <Table.Row>
-      <Table.Cell colSpan={10} style={{border: `1px solid ${colors.blueberry400}`}}>
+      <Table.Cell colSpan={5} style={{border: `1px solid ${colors.blueberry400}`}}>
         <Subtext as="h4" size="medium">
           Order status:
         </Subtext>
@@ -160,7 +160,7 @@ export const ExpandableRows = () => {
               backgroundColor={colors.soap100}
               borderRight={`2px solid ${colors.soap400}`}
             >
-              Brand
+              Make
             </Table.Header>
             <Table.Header scope="col">Model</Table.Header>
             <Table.Header scope="col">Year</Table.Header>
