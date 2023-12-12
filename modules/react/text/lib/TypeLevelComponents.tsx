@@ -18,18 +18,26 @@ export interface TypeLevelProps extends Omit<TextProps, 'typeLevel'> {
   size: Size;
 }
 
-const createComponentStyles = (name: keyof typeof system.type, modifier: Size) => {
+const createComponentStyles = (
+  name: keyof typeof system.type,
+  modifier: {size?: Size; variant?: TextProps['variant']}
+) => {
   const entries = Object.entries(system.type[name]).map(([k, v]) => [k, createStyles(v)]);
-
-  const getTitleModifiers = createModifiers({
-    size: Object.fromEntries(entries),
-  });
 
   const baseStyles = createStyles({
     color: /^(title|heading)$/.test(name) ? base.blackPepper400 : base.blackPepper300,
   });
 
-  const modifiers = getTitleModifiers({size: modifier});
+  const getTitleModifiers = createModifiers({
+    size: Object.fromEntries(entries),
+    variant: {
+      error: createStyles({color: base.cinnamon500}),
+      hint: createStyles({color: base.licorice300}),
+      inverse: createStyles({color: base.frenchVanilla100}),
+    },
+  });
+
+  const modifiers = getTitleModifiers(modifier);
 
   return [baseStyles, modifiers];
 };
@@ -61,8 +69,8 @@ const createComponentStyles = (name: keyof typeof system.type, modifier: Size) =
 export const Subtext = createComponent('p')({
   displayName: 'Subtext',
   Component: ({size, variant, ...elemProps}: TypeLevelProps, ref, Element) => {
-    const styles = createComponentStyles('subtext', size);
-    return <Text ref={ref} as={Element} variant={variant} {...mergeStyles(elemProps, styles)} />;
+    const styles = createComponentStyles('subtext', {size, variant});
+    return <Text ref={ref} as={Element} {...mergeStyles(elemProps, styles)} />;
   },
 });
 
@@ -93,7 +101,7 @@ export const Subtext = createComponent('p')({
 export const BodyText = createComponent('p')({
   displayName: 'BodyText',
   Component: ({size, variant, ...elemProps}: TypeLevelProps, ref, Element) => {
-    const styles = createComponentStyles('body', size);
+    const styles = createComponentStyles('body', {size, variant});
     return <Text ref={ref} as={Element} variant={variant} {...mergeStyles(elemProps, styles)} />;
   },
 });
@@ -125,7 +133,7 @@ export const BodyText = createComponent('p')({
 export const Heading = createComponent('h2')({
   displayName: 'Heading',
   Component: ({size, variant, ...elemProps}: TypeLevelProps, ref, Element) => {
-    const styles = createComponentStyles('heading', size);
+    const styles = createComponentStyles('heading', {size, variant});
     return <Text ref={ref} as={Element} variant={variant} {...mergeStyles(elemProps, styles)} />;
   },
 });
@@ -157,7 +165,7 @@ export const Heading = createComponent('h2')({
 export const Title = createComponent('h1')({
   displayName: 'Title',
   Component: ({size, variant, ...elemProps}: TypeLevelProps, ref, Element) => {
-    const styles = createComponentStyles('title', size);
-    return <Text ref={ref} as={Element} variant={variant} {...mergeStyles(elemProps, styles)} />;
+    const styles = createComponentStyles('title', {size, variant});
+    return <Text ref={ref} as={Element} {...mergeStyles(elemProps, styles)} />;
   },
 });

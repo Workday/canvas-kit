@@ -2,18 +2,18 @@ import * as React from 'react';
 import {Property} from 'csstype';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {base, system} from '@workday/canvas-tokens-web';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {createModifiers, createStyles} from '@workday/canvas-kit-styling';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {Subtext, TypeLevelProps} from './TypeLevelComponents';
+import {Text, TextProps} from './Text';
 
-export interface TypeLabelProps extends Omit<TypeLevelProps, 'size'> {
+export interface TypeLabelProps extends Omit<TextProps, 'typeLevel'> {
   cursor?: Property.Cursor;
   disabled?: boolean;
 }
 
 /**
  * This component is intended to be used for labeling input fields. It's built on top of the
- * {@link Subtext} component, so it has access to all `TypeLevelProps`. By default, it renders a semantic
+ * {@link Text} component, so it has access to all `TextProps`. By default, it renders a semantic
  * `label` element.
  *
  * It also uses the `subtext.large` typeLevel by default:
@@ -34,18 +34,34 @@ export const LabelText = createComponent('label')({
     const isInverse = variant === 'inverse';
 
     const baseStyles = createStyles({
-      color: disabled && !isInverse ? base.licorice100 : undefined,
-      cursor: cursor && !disabled ? cursor : 'default',
-      opacity: disabled && isInverse ? system.opacity.disabled : 1,
+      cursor: cursor || 'default',
+      color: !isInverse ? base.blackPepper300 : undefined,
+    });
+
+    const modifiers = createModifiers({
+      variant: {
+        error: createStyles({color: base.cinnamon500}),
+        hint: createStyles({color: base.licorice300}),
+        inverse: createStyles({color: base.frenchVanilla100}),
+      },
+      state: {
+        disabled: createStyles({
+          color: !isInverse ? base.licorice100 : undefined,
+          opacity: isInverse ? system.opacity.disabled : '1',
+          cursor: 'default',
+        }),
+      },
     });
 
     return (
-      <Subtext
+      <Text
         ref={ref}
         as={Element}
-        size="large"
-        variant={variant}
-        {...mergeStyles(elemProps, baseStyles)}
+        typeLevel="subtext.large"
+        {...mergeStyles(elemProps, [
+          baseStyles,
+          modifiers({state: disabled ? 'disabled' : undefined, variant}),
+        ])}
       />
     );
   },
