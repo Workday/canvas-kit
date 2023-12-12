@@ -75,7 +75,7 @@ function headerRowReducer(state, action) {
         col2: state.col2 === 'ascending' ? 'descending' : 'ascending',
         col3: 'none',
       };
-    case 'Population':
+    case 'Population (2021)':
       action.payload.sort((a, b) => a.pop - b.pop);
       if (state.col3 === 'ascending') {
         action.payload.reverse();
