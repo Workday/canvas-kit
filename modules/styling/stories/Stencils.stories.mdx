@@ -25,9 +25,12 @@ the tranformer. If you need dynamic styling, look at Variables and Modifiers.
 
 ### Variables
 
-Variables allow some properties to be dynamic. They work by creating CSS variables and are applied
-using the [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) property of an
-element to locally scope an override.
+Variables allow some properties to be dynamic. They work by creating
+[CSS Variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) with
+unique names and are applied using the
+[style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) property of an element
+to locally scope an override. Since we don't have access to those names, we need a function wrapper
+around our style objects. This includes `base`, `modifiers`, and `compound` modifiers.
 
 Here's a simplified example:
 
@@ -74,13 +77,43 @@ element.style {
 ```
 
 Variables are automatically added to the config of a Stencil. They share the same namespace as
-modifiers, so do not have a modifier with the same name as a variable.
+modifiers, so **do not have a modifier with the same name as a variable**.
 
 **Note:** Variables should be used sparingly. Style properties can be easily overridden without
 variables. Variables are useful if you want to expose changing properties regardless of selectors.
-For example, Buttons use a variables for colors of all states (hover, active, focus, disabled, and
+For example, Buttons use variables for colors of all states (hover, active, focus, disabled, and
 nested icons). Without variables, overriding the focus color would require deeply nested selector
 overrides.
+
+#### Nested Variables
+
+Variables can be nested one level. This can be useful for colors with different psuedo selectors
+like `:hover` or `:focus`. Here's an example:
+
+```tsx
+const myStencil = createStencil({
+  vars: {
+    default: {
+      color: 'red'
+    },
+    hover: {
+      color: 'blue'
+    },
+    focus: {
+      color: 'orange'
+    }
+  },
+  base: ({default, hover, focus}) => {
+    color: default.color,
+    '&:hover': {
+      color: hover.color
+    },
+    '&:focus': {
+      color: focus.color
+    }
+  }
+})
+```
 
 ### Modifiers
 
@@ -237,7 +270,7 @@ the last defined. This should be the expected order.
 
 #### `handleCsProp`
 
-But what about when using components that use `@emotion/react` or `@emotion/styled`. Those libraries
+But what about when using components that use `@emotion/react` or `@emotion/styled`? Those libraries
 use a different approach. Instead of multiple class names, they use a single, merged class name.
 
 `handleCsProp` was created to handle integration with existing components that use the `css` prop
