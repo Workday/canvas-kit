@@ -7,7 +7,7 @@ import {SortableColumnHeaders} from './examples/SortableColumnHeaders';
 
 <Meta title="Preview/Table/Patterns" component={Table} />
 
-# Canvas Kit Table Patterns
+# Table Patterns using Canvas Kit components
 
 ## Expandable Rows
 
@@ -55,5 +55,16 @@ is what we did about it:
 <ExampleCodeBlock code={SelectableRows} />
 
 ## Sortable Column Headers
+
+The challenge in this pattern is, how will we clearly communicate the complexity of the column headers to screen readers and keep the tabular data easy to understand? The column headers must describe the column name, the current sort state of the column, they are interactive (a button), and instructions about how the column will be sorted next. When screen reader users are focused on the tabular data cells, instructions about how the column will be sorted next is probably not relevant, distracting, and harder to understand the data.
+
+- The `aria-sort` property has been initialized to `none` on each of the `<th>` elements; this value is updated to `ascending` or `descending` to reflect the 
+  current state. 
+- A `<button>` element describing the column name is used inside of the `<th>` column header
+- The `describe` variant of the Canvas Tooltip component is applied to the button in the column header; this is used to describe how the column 
+  will be sorted after interaction and applied to the accessible description of the button with the `aria-describedby` property; this way screen readers won't 
+  read the longer description of the column headers automatically while focusing on the tabular data below
+- The `aria-sort` property may not reliably provide the current sort state of the column to users focused on the tabular data in the table; it may be more 
+  reliable to use an `aria-label` string on the button that describes the column name and sort state together 
 
 <ExampleCodeBlock code={SortableColumnHeaders} />
