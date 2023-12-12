@@ -1,11 +1,12 @@
 import React from 'react';
 
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {Flex} from '@workday/canvas-kit-react/layout';
+import {Grid} from '@workday/canvas-kit-react/layout';
 import {plusIcon, caretDownIcon} from '@workday/canvas-system-icons-web';
 import {space, colors} from '@workday/canvas-kit-react/tokens';
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import styled from '@emotion/styled';
+import {createStyles} from '@workday/canvas-kit-styling';
 
 const getDropdownColors = () => {
   return {
@@ -26,7 +27,12 @@ const getDropdownColors = () => {
 
 const StyledPrimaryButton = styled(PrimaryButton)({
   height: space.l,
-  padding: space.xxs,
+  fontStyle: 'italic',
+});
+
+const customStyles = createStyles({
+  height: space.l,
+  fontStyle: 'italic',
 });
 
 const customColorTheme = {
@@ -54,7 +60,7 @@ const customColorTheme = {
 };
 
 export const CustomStyles = () => (
-  <Flex gap="s" padding="s">
+  <Grid gridGap="s" padding="s" gridTemplateColumns="repeat(auto-fit, minmax(240px, 1fr))">
     <PrimaryButton
       padding={space.l}
       border="3px dotted red"
@@ -69,8 +75,11 @@ export const CustomStyles = () => (
     <StyledPrimaryButton icon={caretDownIcon} iconPosition="end">
       Overwrite styles with emotion
     </StyledPrimaryButton>
+    <PrimaryButton cs={customStyles} icon={caretDownIcon} iconPosition="end">
+      Overwrite styles with createStyles
+    </PrimaryButton>
     <CanvasProvider theme={{canvas: customColorTheme}}>
       <PrimaryButton>Custom Theme</PrimaryButton>
     </CanvasProvider>
-  </Flex>
+  </Grid>
 );

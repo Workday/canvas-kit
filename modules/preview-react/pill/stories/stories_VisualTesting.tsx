@@ -142,8 +142,8 @@ export const RemovablePillStates = () => {
           return (
             <Pill variant="removable" {...props}>
               {avatar && <Pill.Avatar url={testAvatar} />}
-              {maxWidth ? 'This is a super long te that should overflow' : 'PillLabel'}
-              <Pill.IconButton onClick={() => console.warn('clicked')} {...props} />
+              {maxWidth ? 'This is a super long text that should overflow' : 'PillLabel'}
+              <Pill.IconButton {...props} />
             </Pill>
           );
         }}
