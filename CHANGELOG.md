@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.0.29](https://github.com/Workday/canvas-kit/releases/tag/v10.0.29) (2023-12-12)
+
+### Components
+
+- fix: Extend CSSObject types to support CSS variables ([#2462](https://github.com/Workday/canvas-kit/pull/2462)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v10.0.28](https://github.com/Workday/canvas-kit/releases/tag/v10.0.28) (2023-12-12)
 
 ### Components
