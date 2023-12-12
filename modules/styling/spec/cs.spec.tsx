@@ -43,7 +43,7 @@ describe('createStyles', () => {
         position: 'absolute',
       });
       expectTypeOf<PositionProperty>().toMatchTypeOf<
-        Properties['position'] | Properties['position'][]
+        Properties['position'] | Properties['position'][] | (string & {})
       >();
     });
 
