@@ -2,12 +2,14 @@ import React from 'react';
 
 import {createModelHook} from '@workday/canvas-kit-react/common';
 import {useSelectionListModel} from './useSelectionListModel';
+import {Item} from './useBaseListModel';
 
 export function getHiddenIds(
   containerWidth: number,
   overflowTargetWidth: number,
   itemWidthCache: Record<string, number>,
-  selectedIds: string[] | 'all'
+  selectedIds: string[] | 'all',
+  items?: Item<any>[]
 ): string[] {
   /** Allows us to prioritize showing the selected item */
   let selectedKey: undefined | string;
@@ -16,9 +18,13 @@ export function getHiddenIds(
   /** Tally ids that won't fit inside the container. These will be used by components to hide
    * elements that won't fit in the container */
   const hiddenIds: string[] = [];
-
   if (selectedIds !== 'all' && selectedIds.length) {
-    selectedKey = selectedIds[0];
+    if (items?.length) {
+      // If selectedIds[0] is not in items, use the first id from items
+      selectedKey = items.find(item => item.id === selectedIds[0]) ? selectedIds[0] : items[0].id;
+    } else {
+      selectedKey = selectedIds[0];
+    }
   }
 
   if (
@@ -101,7 +107,8 @@ export const useOverflowListModel = createModelHook({
         containerWidthRef.current,
         overflowTargetWidthRef.current,
         itemWidthCacheRef.current,
-        selectedIds
+        selectedIds,
+        config.items
       );
       model.events.select(data);
 
@@ -115,7 +122,8 @@ export const useOverflowListModel = createModelHook({
         containerWidthRef.current,
         overflowTargetWidthRef.current,
         itemWidthCacheRef.current,
-        state.selectedIds
+        state.selectedIds,
+        config.items
       );
 
       setHiddenIds(ids);
@@ -136,7 +144,8 @@ export const useOverflowListModel = createModelHook({
         containerWidthRef.current,
         overflowTargetWidthRef.current,
         itemWidthCacheRef.current,
-        state.selectedIds
+        state.selectedIds,
+        config.items
       );
 
       setHiddenIds(ids);
@@ -153,7 +162,8 @@ export const useOverflowListModel = createModelHook({
         itemWidthCacheRef.current,
         state.selectedIds !== 'all'
           ? state.selectedIds.filter(sId => data.id !== sId)
-          : state.selectedIds
+          : state.selectedIds,
+        config.items
       );
 
       setHiddenIds(ids);
