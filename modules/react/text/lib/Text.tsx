@@ -33,7 +33,10 @@ const createModRules = (tokens: typeof system.type): ModRules | {} => {
   return Object.entries(tokens).reduce((acc, [firstLevelKey, firstLevelValue]) => {
     Object.entries(firstLevelValue).forEach(([k, v]) => {
       const key = `${firstLevelKey}.${k}` as TokenName;
-      (acc as ModRules)[key] = createStyles(v);
+      (acc as ModRules)[key] = createStyles({
+        ...v,
+        color: /^(title|heading)$/.test(firstLevelKey) ? base.blackPepper400 : base.blackPepper300,
+      });
     });
     return acc;
   }, {});
