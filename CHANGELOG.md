@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.0.28](https://github.com/Workday/canvas-kit/releases/tag/v10.0.28) (2023-12-12)
+
+### Components
+
+- fix: OverflowTab does not render when no tab is selected ([#2448](https://github.com/Workday/canvas-kit/pull/2448)) ([@thunguyen19](https://github.com/thunguyen19))
+
+
+## [v9.1.33](https://github.com/Workday/canvas-kit/releases/tag/v9.1.33) (2023-12-11)
+
+### Components
+
+- fix: OverflowTab does not render when no tab is selected ([#2448](https://github.com/Workday/canvas-kit/pull/2448)) ([@thunguyen19](https://github.com/thunguyen19))
+## [v10.0.27](https://github.com/Workday/canvas-kit/releases/tag/v10.0.27) (2023-12-11)
+
+### Documentation
+
+- docs(_examples): Add example for basic search form ([#2454](https://github.com/Workday/canvas-kit/pull/2454)) ([@vibdev](https://github.com/vibdev))
+
+
 ## [v10.0.26](https://github.com/Workday/canvas-kit/releases/tag/v10.0.26) (2023-12-08)
 
 ### Components
