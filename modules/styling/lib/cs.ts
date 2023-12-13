@@ -8,6 +8,12 @@ import {generateUniqueId} from './uniqueId';
 
 export const createStylesCache: Record<string, boolean> = {};
 
+// CSSType doesn't support CSS custom properties
+// Extending CSSObject types to support them
+type CSSObjectWithVars<T extends CSSObject = CSSObject> = {
+  [P in keyof T]?: T[P] | (string & {});
+};
+
 /**
  * Style properties in a JavaScript camelCase. Everything Emotion allows is also
  * allowed here.
@@ -19,7 +25,11 @@ export type StyleProps =
   | string
   | Keyframes
   | SerializedStyles
-  | CSSObject;
+  | CSSObjectWithVars;
+
+// Casting the types here for internal use only.
+// We can remove this when CSSType supports CSS custom properties
+type CastStyleProps = Exclude<StyleProps, CSSObjectWithVars> | CSSObject;
 
 function convertProperty<T>(value: T): T {
   // Handle the case where the value is a variable without the `var()` wrapping function. It happens
@@ -555,7 +565,7 @@ export function createStyles(
 
       // If we were called with a {name, styles} object, it must be optimized. We'll shortcut here
       if (typeof input === 'object' && input.name) {
-        return css.call(null, input);
+        return css.call(null, input as CastStyleProps);
       }
 
       const convertedStyles = convertAllProperties(input);
@@ -572,7 +582,7 @@ export function createStyles(
       // injected into the document's style sheets before `TertiaryButton.base` styles. This is due
       // to CSS specificity. If everything has the same specificity, last defined wins. More info:
       // https://codesandbox.io/s/stupefied-bartik-9c2jtd?file=/src/App.tsx
-      const {styles} = serializeStyles([convertedStyles]);
+      const {styles} = serializeStyles([convertedStyles as CastStyleProps]);
 
       // use `css.call()` instead of `css()` to trick Emotion's babel plugin to not rewrite our code
       // to remove our generated Id for the name:
