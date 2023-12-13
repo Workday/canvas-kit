@@ -19,7 +19,7 @@ export interface FormFieldProps extends FlexProps {
   /**
    * The direction the child elements should stack
    */
-  orientation: 'vertical' | 'horizontal';
+  orientation?: 'vertical' | 'horizontal';
 }
 
 const formFieldBaseStyles = createStyles({
@@ -37,7 +37,7 @@ export const FormField = createContainer('div')({
     Hint: FormFieldHint,
     Container: FormFieldContainer,
   },
-})<FormFieldProps>(({children, orientation, ...elemProps}, Element) => {
+})<FormFieldProps>(({children, orientation = 'vertical', ...elemProps}, Element) => {
   const layoutProps = useFormFieldOrientation(orientation);
 
   return (
