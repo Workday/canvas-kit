@@ -83,7 +83,7 @@ export type CS = string | Record<string, string>;
 export type CsVarsMap<T extends string, ID extends string | never> = [ID] extends [never]
   ? Record<T, string>
   : // map type. If the ID is known from the style optimizer, use static keys using string template literals instead of `string`
-    {[K in T]: `--${ID}-${K}`};
+    {[K in T]: `--${ID}-${MakeEmotionSafe<K>}`};
 
 export type CsVars<T extends string, ID extends string | never> = CsVarsMap<T, ID> & {
   (input: Partial<Record<T, string>>): Record<T, string>;
@@ -192,8 +192,10 @@ export function createVars<
   return result;
 }
 
+type MakeEmotionSafe<T extends string> = T extends `${infer S}label` ? `${S}label-emotion-safe` : T;
+
 // Type to create CSS Variable names based on JS names and ID
-type CSSVarName<ID extends string, Name> = `--${ID}-${ToString<Name>}`;
+type CSSVarName<ID extends string, Name> = `--${ID}-${MakeEmotionSafe<ToString<Name>>}`;
 
 /**
  * For custom themes that do not overwrite every default.

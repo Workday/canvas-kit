@@ -156,6 +156,13 @@ describe('createStyles', () => {
       expect(myVars({color: 'red'})).toHaveProperty(myVars.color, 'red');
     });
 
+    it('should make types Emotion safe when ID is known', () => {
+      const myVars = createVars({id: 'foo', args: ['label']});
+
+      type Input = (typeof myVars)['label'];
+      expectTypeOf<Input>().toMatchTypeOf<'--foo-label-emotion-safe'>();
+    });
+
     it('should type optimized style functions correctly so they can be consumed by other repositories', () => {
       const vars = createVars({id: 'foo', args: ['one']});
       expectTypeOf(vars.one).toMatchTypeOf<'--foo-one'>();

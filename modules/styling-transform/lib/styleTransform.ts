@@ -35,6 +35,18 @@ function getStyleValueFromType(node: ts.Node, type: ts.Type, checker: ts.TypeChe
 }
 
 /**
+ * Util function to fix an issue with Emotion by
+ * appending `EmotionIssue#3066` to end of css variable
+ * See issue: [#3066](https://github.com/emotion-js/emotion/issues/3066)
+ */
+const makeEmotionSafe = (key: string): string => {
+  if (key.endsWith('label')) {
+    return `${key}-emotion-safe`;
+  }
+  return key;
+};
+
+/**
  * A `PropertyExpression` is an expression with a dot in it. Like `a.b.c`. It may be nested. This
  * function will walk the AST and create a string like `a.b.c` to be passed on to variable name
  * generation. This will be used for CSS variable lookups.
@@ -251,7 +263,7 @@ function getStyleFromProperty(
           } else {
             const expressionText = getPropertyAccessExpressionText(property.name.expression);
             const [id, name] = getVariableNameParts(expressionText);
-            return {[`--${prefix}-${slugify(id)}-${name}`]: value};
+            return {[`--${prefix}-${slugify(id)}-${makeEmotionSafe(name)}`]: value};
           }
         }
       }
@@ -573,7 +585,7 @@ export default function styleTransformer(
           .filter(Boolean) as string[];
 
         variables.forEach(v => {
-          vars[`${id}-${v}`] = `--${prefix}-${id}-${v}`;
+          vars[`${id}-${makeEmotionSafe(v)}`] = `--${prefix}-${id}-${makeEmotionSafe(v)}`;
         });
 
         return ts.factory.createCallExpression(
@@ -707,7 +719,7 @@ function getVarsKeyFromNode(node: ts.Node): string {
   }
 
   if (ts.isPropertyAccessExpression(node) && ts.isIdentifier(node.name)) {
-    return `${getVarsKeyFromNode(node.expression)}-${node.name.text}`;
+    return `${getVarsKeyFromNode(node.expression)}-${makeEmotionSafe(node.name.text)}`;
   }
 
   return '';
