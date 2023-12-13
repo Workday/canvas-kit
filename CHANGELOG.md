@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.1.2](https://github.com/Workday/canvas-kit/releases/tag/v10.1.2) (2023-12-13)
+
+### Infrastructure
+
+- fix: Make the style transform Emotion safe ([#2468](https://github.com/Workday/canvas-kit/pull/2468)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v10.1.1](https://github.com/Workday/canvas-kit/releases/tag/v10.1.1) (2023-12-13)
 
 ### Components
