@@ -106,7 +106,7 @@ export const Tooltip = createComponent('div')({
         {React.cloneElement(children, {
           ...targetProps,
           ...mergeCallbacks(children.props, targetProps),
-          ...(type === 'muted' && children.props['aria-label']
+          ...(/^(muted|describe)$/.test(type) && children.props['aria-label']
             ? {'aria-label': children.props['aria-label']}
             : {}),
         })}

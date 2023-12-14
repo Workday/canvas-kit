@@ -3,6 +3,72 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.1.2](https://github.com/Workday/canvas-kit/releases/tag/v10.1.2) (2023-12-13)
+
+### Infrastructure
+
+- fix: Make the style transform Emotion safe ([#2468](https://github.com/Workday/canvas-kit/pull/2468)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v10.1.1](https://github.com/Workday/canvas-kit/releases/tag/v10.1.1) (2023-12-13)
+
+### Components
+
+- fix(Pill): Remove Console Logs ([#2467](https://github.com/Workday/canvas-kit/pull/2467)) ([@jennyy13](https://github.com/jennyy13), jennifer.murray)
+
+
+## [v10.1.0](https://github.com/Workday/canvas-kit/releases/tag/v10.1.0) (2023-12-13)
+
+
+
+
+## [v10.0.29](https://github.com/Workday/canvas-kit/releases/tag/v10.0.29) (2023-12-12)
+
+### Components
+
+- fix: Extend CSSObject types to support CSS variables ([#2462](https://github.com/Workday/canvas-kit/pull/2462)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v10.0.28](https://github.com/Workday/canvas-kit/releases/tag/v10.0.28) (2023-12-12)
+
+### Components
+
+- fix: OverflowTab does not render when no tab is selected ([#2448](https://github.com/Workday/canvas-kit/pull/2448)) ([@thunguyen19](https://github.com/thunguyen19))
+
+
+## [v9.1.33](https://github.com/Workday/canvas-kit/releases/tag/v9.1.33) (2023-12-11)
+
+### Components
+
+- fix: OverflowTab does not render when no tab is selected ([#2448](https://github.com/Workday/canvas-kit/pull/2448)) ([@thunguyen19](https://github.com/thunguyen19))
+## [v10.0.27](https://github.com/Workday/canvas-kit/releases/tag/v10.0.27) (2023-12-11)
+
+### Documentation
+
+- docs(_examples): Add example for basic search form ([#2454](https://github.com/Workday/canvas-kit/pull/2454)) ([@vibdev](https://github.com/vibdev))
+
+
+## [v10.0.26](https://github.com/Workday/canvas-kit/releases/tag/v10.0.26) (2023-12-08)
+
+### Components
+
+- fix: Remove console.log ([#2451](https://github.com/Workday/canvas-kit/pull/2451)) ([@michaelhabibi](https://github.com/michaelhabibi))
+
+
+## [v10.0.25](https://github.com/Workday/canvas-kit/releases/tag/v10.0.25) (2023-12-07)
+
+### Components
+
+- fix: Fix forwarding of the style attribute ([#2453](https://github.com/Workday/canvas-kit/pull/2453)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v10.0.24](https://github.com/Workday/canvas-kit/releases/tag/v10.0.24) (2023-12-07)
+
+### Components
+
+- fix: Fix accessibility tooltip bug ([#2446](https://github.com/Workday/canvas-kit/pull/2446)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
 ## [v10.0.23](https://github.com/Workday/canvas-kit/releases/tag/v10.0.23) (2023-12-06)
 
 ### Components
@@ -10,6 +76,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - fix: Add button vars to pills to overwrite styles ([#2432](https://github.com/Workday/canvas-kit/pull/2432)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
 
 
+## [v9.1.32](https://github.com/Workday/canvas-kit/releases/tag/v9.1.32) (2023-12-05)
+
+### Components
+
+- fix: Fix accessibility tooltip bug ([#2446](https://github.com/Workday/canvas-kit/pull/2446)) ([@RayRedGoose](https://github.com/RayRedGoose))
 ## [v10.0.22](https://github.com/Workday/canvas-kit/releases/tag/v10.0.22) (2023-12-04)
 
 ### Components

@@ -536,6 +536,22 @@ describe('styleParser', () => {
     );
   });
 
+  it('should make variables safe for Emotion', () => {
+    const program = createProgramFromSource(`
+      import {createStyles, createVars} from '@workday/canvas-kit-styling';
+
+      const myVars = createVars('label')
+
+      const styles = createStyles({
+        color: myVars.label
+      })
+    `);
+
+    const result = transform(program, 'test.ts'); //?
+
+    expect(result).toContain('color:var(--css-my-vars-label-emotion-safe)');
+  });
+
   it('should handle multiple arguments with an identifier of a type of an object literal', () => {
     const program = createProgramFromSource(`
       import {createStyles} from '@workday/canvas-kit-styling';

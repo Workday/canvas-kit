@@ -265,8 +265,6 @@ export const Pill = createContainer('button')({
     Label: PillLabel,
   },
 })<PillProps>(({variant = 'default', maxWidth, ...elemProps}, Element, model) => {
-  console.log(elemProps);
-  console.log(model.state.disabled);
   return (
     <>
       {variant === 'readOnly' && (
