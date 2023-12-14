@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Property} from 'csstype';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {base, system} from '@workday/canvas-tokens-web';
-import {createModifiers, createStyles} from '@workday/canvas-kit-styling';
+import {createStencil} from '@workday/canvas-kit-styling';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Text, TextProps} from './Text';
 
@@ -31,37 +31,40 @@ export interface TypeLabelProps extends Omit<TextProps, 'typeLevel'> {
 export const LabelText = createComponent('label')({
   displayName: 'Label',
   Component: ({cursor, disabled, variant, ...elemProps}: TypeLabelProps, ref, Element) => {
-    const isInverse = variant === 'inverse';
-
-    const baseStyles = createStyles({
-      cursor: cursor || 'default',
-      color: !isInverse ? base.blackPepper300 : undefined,
-    });
-
-    const modifiers = createModifiers({
-      variant: {
-        error: createStyles({color: base.cinnamon500}),
-        hint: createStyles({color: base.licorice300}),
-        inverse: createStyles({color: base.frenchVanilla100}),
+    const stencil = createStencil({
+      // @ts-ignore
+      base: {
+        ...system.type.subtext.large,
+        cursor,
       },
-      state: {
-        disabled: createStyles({
-          color: !isInverse ? base.licorice100 : undefined,
-          opacity: isInverse ? system.opacity.disabled : '1',
-          cursor: 'default',
-        }),
+      modifiers: {
+        variant: {
+          error: {color: base.cinnamon500},
+          hint: {color: base.licorice300},
+          inverse: {color: base.frenchVanilla100},
+        },
+        state: {
+          disabled: {
+            cursor: 'default',
+            color: base.licorice100,
+          },
+        },
       },
+      compound: [
+        {
+          modifiers: {variant: 'inverse', state: 'disabled'},
+          styles: {
+            opacity: system.opacity.disabled,
+            color: base.frenchVanilla100,
+          },
+        },
+      ],
     });
 
     return (
-      <Text
+      <Element
         ref={ref}
-        as={Element}
-        typeLevel="subtext.large"
-        {...mergeStyles(elemProps, [
-          baseStyles,
-          modifiers({state: disabled ? 'disabled' : undefined, variant}),
-        ])}
+        {...mergeStyles(elemProps, stencil({variant, state: disabled ? 'disabled' : undefined}))}
       />
     );
   },

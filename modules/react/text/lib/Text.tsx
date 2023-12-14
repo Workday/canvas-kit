@@ -4,7 +4,8 @@ import {createComponent} from '@workday/canvas-kit-react/common';
 import {createModifiers, createStyles, CSProps} from '@workday/canvas-kit-styling';
 import {mergeStyles, CommonStyleProps} from '@workday/canvas-kit-react/layout';
 
-type TokenName = `${keyof typeof system.type}.${'large' | 'medium' | 'small'}`;
+type TypeSize = 'large' | 'medium' | 'small';
+type TokenName = `${keyof typeof system.type}.${TypeSize}`;
 
 export interface TextProps extends CSProps, CommonStyleProps {
   /**
@@ -16,6 +17,7 @@ export interface TextProps extends CSProps, CommonStyleProps {
    * ```
    */
   typeLevel?: TokenName;
+  children?: React.ReactNode;
   /**
    * Type variant token names: `error`, `hint` or `inverse`.
    *
@@ -24,27 +26,34 @@ export interface TextProps extends CSProps, CommonStyleProps {
    * ```
    */
   variant?: 'error' | 'hint' | 'inverse';
-  children?: React.ReactNode;
 }
 
-type ModRules = Record<TokenName, string>;
-
-const createModRules = (tokens: typeof system.type): ModRules | {} => {
-  return Object.entries(tokens).reduce((acc, [firstLevelKey, firstLevelValue]) => {
-    Object.entries(firstLevelValue).forEach(([k, v]) => {
-      const key = `${firstLevelKey}.${k}` as TokenName;
-      (acc as ModRules)[key] = createStyles({
-        ...v,
-        color: /^(title|heading)$/.test(firstLevelKey) ? base.blackPepper400 : base.blackPepper300,
-      });
-    });
-    return acc;
-  }, {});
+const createTypeStyles = (level: keyof typeof system.type, size: TypeSize, isHeading?: boolean) => {
+  // @ts-ignore
+  // font weight type is out with our variables
+  return createStyles({
+    ...system.type[level][size],
+    color: isHeading ? base.blackPepper400 : base.blackPepper300,
+  });
 };
 
 const getModifiers = createModifiers({
-  tokenName: {
-    ...createModRules(system.type),
+  typeLevel: {
+    'title.large': createTypeStyles('title', 'large', true),
+    'title.medium': createTypeStyles('title', 'medium', true),
+    'title.small': createTypeStyles('title', 'small', true),
+
+    'heading.large': createTypeStyles('heading', 'large', true),
+    'heading.medium': createTypeStyles('heading', 'medium', true),
+    'heading.small': createTypeStyles('heading', 'small', true),
+
+    'body.large': createTypeStyles('body', 'large'),
+    'body.medium': createTypeStyles('body', 'medium'),
+    'body.small': createTypeStyles('body', 'small'),
+
+    'subtext.large': createTypeStyles('subtext', 'large'),
+    'subtext.medium': createTypeStyles('subtext', 'medium'),
+    'subtext.small': createTypeStyles('subtext', 'small'),
   },
   variant: {
     error: createStyles({color: base.cinnamon500}),
@@ -87,7 +96,7 @@ const getModifiers = createModifiers({
 export const Text = createComponent('span')({
   displayName: 'Text',
   Component: ({children, typeLevel, variant, ...elemProps}: TextProps, ref, Element) => {
-    const modifiers = getModifiers({tokenName: typeLevel, variant});
+    const modifiers = getModifiers({typeLevel, variant});
     return (
       <Element ref={ref} {...mergeStyles(elemProps, modifiers)}>
         {children}
