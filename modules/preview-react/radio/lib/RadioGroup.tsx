@@ -11,7 +11,6 @@ import {useRadioModel} from './hooks/useRadioModel';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {RadioLabel} from './RadioLabel';
 import {RadioButton} from './RadioButton';
-import {createStyles} from '@workday/canvas-kit-styling';
 
 export interface RadioGroupProps extends Themeable, ExtractProps<typeof Flex, never> {
   /**

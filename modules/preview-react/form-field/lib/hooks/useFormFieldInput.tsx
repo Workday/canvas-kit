@@ -6,7 +6,6 @@ import {useFormFieldModel} from './useFormFieldModel';
  * Used by the FormField.Input subcomponent and other input type components
  */
 export const useFormFieldInput = createElemPropsHook(useFormFieldModel)(({state}) => {
-  console.log(state);
   return {
     required: state.isRequired ? true : undefined,
     'aria-invalid': state.error === 'error' ? true : undefined,
