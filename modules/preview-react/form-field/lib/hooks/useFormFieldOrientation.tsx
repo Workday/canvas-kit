@@ -15,7 +15,7 @@ export const useFormFieldOrientation = (orientation: 'horizontal' | 'vertical') 
     layoutProps = {
       flexDirection: 'row',
       gap: space.l,
-      alignItems: '',
+      alignItems: undefined,
     };
   } else {
     layoutProps = {

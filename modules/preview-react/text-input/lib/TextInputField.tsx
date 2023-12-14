@@ -43,6 +43,9 @@ const baseStyles: CSSProperties = {
   },
 };
 
+/**
+ * @deprecated ⚠️ `TextInputField` in Preview has been deprecated and will be removed in a future major version. Please use [`FormField` in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-inputs-form-field--custom) instead.
+ */
 export const TextInputField = createSubcomponent('input')({
   displayName: 'TextInput.Field',
   modelHook: useTextInputModel,

@@ -1,5 +1,5 @@
 import React from 'react';
-import {useFormFieldOrientation, FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {Flex} from '@workday/canvas-kit-react/layout';
@@ -11,10 +11,8 @@ export const Error = () => {
     setValue(event.target.value);
   };
 
-  const layoutProps = useFormFieldOrientation('vertical');
-
   return (
-    <Flex {...layoutProps}>
+    <Flex>
       <FormField orientation="vertical" error="error">
         <FormField.Label>Password</FormField.Label>
         <FormField.Container>

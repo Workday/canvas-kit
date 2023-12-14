@@ -31,7 +31,6 @@ const asteriskStyles = createStyles({
   fontWeight: type.properties.fontWeights.regular,
   textDecoration: 'unset',
   color: cssVar(brand.error.base, '#de2e21'),
-  // margin
 });
 
 export const FormFieldLabel = createSubcomponent(LabelText)({

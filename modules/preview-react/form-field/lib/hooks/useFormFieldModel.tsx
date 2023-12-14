@@ -27,7 +27,7 @@ export const useFormFieldModel = createModelHook({
   },
 })(config => {
   const id = useUniqueId(config.id);
-  console.log('config id', config.id);
+
   const state = {
     ...config,
     id,

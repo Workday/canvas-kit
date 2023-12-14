@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 
 export const Error = () => {
@@ -13,35 +13,15 @@ export const Error = () => {
   };
 
   return (
-    <div>
-      <FormField
-        label="Choose Your Pizza Crust"
-        useFieldset={true}
-        error={FormField.ErrorType.Error}
-        hintId="error"
-        hintText="Deep dish is currently sold out."
-      >
-        <input />
-      </FormField>
-      <FormField
-        label="Choose Your Pizza Crust"
-        useFieldset={true}
-        error={FormField.ErrorType.Error}
-        hintId="error"
-        hintText="Deep dish is currently sold out."
-      >
-        <RadioGroup
-          name="crust-error"
-          onChange={handleChange}
-          value={value}
-          aria-describedby="error"
-        >
-          <RadioGroup.RadioButton value="deep-dish">Deep dish</RadioGroup.RadioButton>
-          <RadioGroup.RadioButton value="thin">Thin</RadioGroup.RadioButton>
-          <RadioGroup.RadioButton value="gluten-free">Gluten free</RadioGroup.RadioButton>
-          <RadioGroup.RadioButton value="cauliflower">Cauliflower</RadioGroup.RadioButton>
-        </RadioGroup>
-      </FormField>
-    </div>
+    <FormField error="error">
+      <FormField.Label as="legend">Choose Your Pizza Crust</FormField.Label>
+      <RadioGroup name="crust-error" onChange={handleChange} value={value} aria-describedby="error">
+        <RadioGroup.RadioButton value="deep-dish">Deep dish</RadioGroup.RadioButton>
+        <RadioGroup.RadioButton value="thin">Thin</RadioGroup.RadioButton>
+        <RadioGroup.RadioButton value="gluten-free">Gluten free</RadioGroup.RadioButton>
+        <RadioGroup.RadioButton value="cauliflower">Cauliflower</RadioGroup.RadioButton>
+      </RadioGroup>
+      <FormField.Hint>Deep dish is currently sold out.</FormField.Hint>
+    </FormField>
   );
 };
