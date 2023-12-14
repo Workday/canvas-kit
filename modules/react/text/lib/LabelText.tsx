@@ -2,19 +2,55 @@ import * as React from 'react';
 import {Property} from 'csstype';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {base, system} from '@workday/canvas-tokens-web';
-import {createStencil} from '@workday/canvas-kit-styling';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {TextProps} from './Text';
+import {CSProps, createStencil} from '@workday/canvas-kit-styling';
+import {CommonStyleProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 
-export interface TypeLabelProps extends Omit<TextProps, 'typeLevel'> {
+export interface TypeLabelProps extends CSProps, CommonStyleProps {
   cursor?: Property.Cursor;
   disabled?: boolean;
+  /**
+   * Type variant token names: `error`, `hint` or `inverse`.
+   *
+   * ```tsx
+   * <Text variant="error" typeLevel="subtext.large">Error text</Text>
+   * ```
+   */
+  variant?: 'error' | 'hint' | 'inverse';
 }
 
+const stencil = createStencil({
+  // @ts-ignore
+  base: {
+    ...system.type.subtext.large,
+    color: base.blackPepper300,
+  },
+  modifiers: {
+    variant: {
+      error: {color: base.cinnamon500},
+      hint: {color: base.licorice300},
+      inverse: {color: base.frenchVanilla100},
+    },
+    state: {
+      disabled: {
+        cursor: 'default',
+        color: base.licorice100,
+      },
+    },
+  },
+  compound: [
+    {
+      modifiers: {variant: 'inverse', state: 'disabled'},
+      styles: {
+        opacity: system.opacity.disabled,
+        color: base.frenchVanilla100,
+      },
+    },
+  ],
+});
+
 /**
- * This component is intended to be used for labeling input fields. It's built on top of the
- * {@link Text} component, so it has access to all `TextProps`. By default, it renders a semantic
- * `label` element.
+ * This component is intended to be used for labeling input fields.
+ *  By default, it renders a semantic `label` element.
  *
  * It also uses the `subtext.large` typeLevel by default:
  * - font-size: 14px (0.875rem)
@@ -31,40 +67,13 @@ export interface TypeLabelProps extends Omit<TextProps, 'typeLevel'> {
 export const LabelText = createComponent('label')({
   displayName: 'Label',
   Component: ({cursor, disabled, variant, ...elemProps}: TypeLabelProps, ref, Element) => {
-    const stencil = createStencil({
-      // @ts-ignore
-      base: {
-        ...system.type.subtext.large,
-        cursor,
-      },
-      modifiers: {
-        variant: {
-          error: {color: base.cinnamon500},
-          hint: {color: base.licorice300},
-          inverse: {color: base.frenchVanilla100},
-        },
-        state: {
-          disabled: {
-            cursor: 'default',
-            color: base.licorice100,
-          },
-        },
-      },
-      compound: [
-        {
-          modifiers: {variant: 'inverse', state: 'disabled'},
-          styles: {
-            opacity: system.opacity.disabled,
-            color: base.frenchVanilla100,
-          },
-        },
-      ],
-    });
-
     return (
       <Element
         ref={ref}
-        {...mergeStyles(elemProps, stencil({variant, state: disabled ? 'disabled' : undefined}))}
+        {...mergeStyles(elemProps, [
+          stencil({variant, state: disabled ? 'disabled' : undefined}),
+          {cursor},
+        ])}
       />
     );
   },
