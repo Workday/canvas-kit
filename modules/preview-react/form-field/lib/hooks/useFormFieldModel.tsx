@@ -7,6 +7,7 @@ export const useFormFieldModel = createModelHook({
      * `required` set to true, and usually some subcomponents will have a error color applied.
      */
     error: '' as 'error' | 'alert',
+
     /**
      * Optional `id` provided to `FormField`'s subcomponents as HTML attributes:
      * - `FormField.Input` will set `aria-describedby` to `hint-${id}`
@@ -26,7 +27,7 @@ export const useFormFieldModel = createModelHook({
   },
 })(config => {
   const id = useUniqueId(config.id);
-
+  console.log('config id', config.id);
   const state = {
     ...config,
     id,

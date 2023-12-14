@@ -1,15 +1,10 @@
 import React from 'react';
 import {useFormFieldOrientation, FormField} from '@workday/canvas-kit-preview-react/form-field';
-import {ErrorType, useModelContext} from '@workday/canvas-kit-react/common';
+
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
-import {Checkbox} from '@workday/canvas-kit-react/checkbox';
-import {Select} from '@workday/canvas-kit-react/select';
-import {TextArea} from '@workday/canvas-kit-react/text-area';
-import {Switch} from '@workday/canvas-kit-react/switch';
 
-export const Alert = () => {
+export const Hint = () => {
   const [value, setValue] = React.useState('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,7 +15,7 @@ export const Alert = () => {
 
   return (
     <Flex {...layoutProps}>
-      <FormField orientation="vertical" error="alert">
+      <FormField orientation="horizontal">
         <FormField.Label>First Name</FormField.Label>
         <FormField.Container>
           <FormField.Input as={TextInput} value={value} onChange={handleChange} />

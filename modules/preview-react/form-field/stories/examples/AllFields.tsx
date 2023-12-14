@@ -9,42 +9,30 @@ import {TextArea} from '@workday/canvas-kit-react/text-area';
 import {Switch} from '@workday/canvas-kit-react/switch';
 
 export const AllFields = () => {
-  const [value, setValue] = React.useState('');
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
-  };
-
   return (
     <Flex
       cs={{
         flexDirection: 'column',
         gap: '20px',
-        padding: '24px',
+        padding: '36px',
         borderRadius: '4px',
-        border: '1px solid gray',
       }}
     >
       <FormField>
         <FormField.Label>First Name</FormField.Label>
-        <FormField.Input width="100%" as={TextInput} value={value} onChange={handleChange} />
+        <FormField.Input width="100%" as={TextInput} />
       </FormField>
 
-      <FormField isRequired={true}>
-        <FormField.Label>First Name</FormField.Label>
+      <FormField isRequired={true} error="alert">
+        <FormField.Label>Email</FormField.Label>
         <FormField.Container cs={{width: '100%'}}>
-          <FormField.Input
-            width="100%"
-            as={TextInput}
-            value={value}
-            onChange={e => console.log(e)}
-          />
-          <FormField.Hint>When in doubt, go with Butter.</FormField.Hint>
+          <FormField.Input width="100%" as={TextInput} />
+          <FormField.Hint>Hint text for your input</FormField.Hint>
         </FormField.Container>
       </FormField>
       <FormField>
-        <FormField.Label>Choose a Crust</FormField.Label>
-        <FormField.Input as={TextArea} />
+        <FormField.Label>Text Area Label</FormField.Label>
+        <FormField.Input width="100%" as={TextArea} />
       </FormField>
       <FormField error="error" width="100%">
         <FormField.Label>Choose a Crust</FormField.Label>
@@ -58,8 +46,8 @@ export const AllFields = () => {
         </Select>
       </FormField>
       <FormField as="fieldset" isRequired={true} error={'error'}>
-        <FormField.Label as="legend">Choose a Crust</FormField.Label>
-        <FormField.Input as={RadioGroup} onChange={handleChange} value={value}>
+        <FormField.Label as="legend">Radio Group Legend</FormField.Label>
+        <FormField.Input as={RadioGroup}>
           <RadioGroup.RadioButton value="deep-dish">Deep dish</RadioGroup.RadioButton>
           <RadioGroup.RadioButton value="thin">Thin</RadioGroup.RadioButton>
           <RadioGroup.RadioButton value="gluten-free">Gluten free</RadioGroup.RadioButton>
@@ -68,21 +56,17 @@ export const AllFields = () => {
             Butter - the best thing to put on bread
           </RadioGroup.RadioButton>
         </FormField.Input>
-        <FormField.Hint>When in doubt, go with Butter.</FormField.Hint>
+        <FormField.Hint>Error Message</FormField.Hint>
       </FormField>
       <FormField as="fieldset">
-        <FormField.Label as="legend">Choose a Crust</FormField.Label>
-        <FormField.Input
-          as={Checkbox}
-          id="foo"
-          label="Checkbox Label"
-          onChange={handleChange}
-          value={value}
-        />
+        <FormField.Label as="legend">Checkbox Legend</FormField.Label>
+        <FormField.Input as={Checkbox} label="Checkbox Label" />
+        <FormField.Input as={Checkbox} label="Thin Crust" />
+        <FormField.Input as={Checkbox} label="Extra Cheese" />
       </FormField>
 
       <FormField orientation="horizontal">
-        <FormField.Label>Choose a Crust</FormField.Label>
+        <FormField.Label>Switch Label</FormField.Label>
         <FormField.Input as={Switch} />
       </FormField>
     </Flex>

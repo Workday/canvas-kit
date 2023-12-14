@@ -20,12 +20,8 @@ const emailRequired = 'Email is required';
 const passwordRequired = 'Password is required';
 
 const validationSchema: SchemaOf<LoginSchema> = object({
-  email: string()
-    .email('Enter a valid email')
-    .required(emailRequired),
-  password: string()
-    .min(passwordMinimum, passwordHint)
-    .required(passwordRequired),
+  email: string().email('Enter a valid email').required(emailRequired),
+  password: string().min(passwordMinimum, passwordHint).required(passwordRequired),
 });
 
 export const TextInputWithFormik = () => {

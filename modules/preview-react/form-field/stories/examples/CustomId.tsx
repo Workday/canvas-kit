@@ -3,7 +3,7 @@ import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 
-export const Basic = () => {
+export const CustomId = () => {
   const [value, setValue] = React.useState('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -12,7 +12,7 @@ export const Basic = () => {
 
   return (
     <Flex>
-      <FormField orientation="vertical">
+      <FormField orientation="vertical" id="first-name">
         <FormField.Label>First Name</FormField.Label>
         <FormField.Input as={TextInput} value={value} onChange={handleChange} />
       </FormField>

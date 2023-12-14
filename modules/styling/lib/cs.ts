@@ -362,14 +362,13 @@ export interface CSProps {
  * > properties will be merge by the rules of [CSS
  * > specificity](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity). If two selectors
  * > have the same specificity, the last defined wins. Always make sure that the properties you want
- * > to win are last in your file.
+ * > to win are last in your file.c
  */
 export function createStyles(
   ...args: ({name: string; styles: string} | StyleProps | string)[]
 ): string {
   return args
     .map(input => {
-      console.log(input);
       if (typeof input === 'string') {
         return input;
       }
