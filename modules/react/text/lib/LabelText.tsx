@@ -4,7 +4,7 @@ import {createComponent} from '@workday/canvas-kit-react/common';
 import {base, system} from '@workday/canvas-tokens-web';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {Text, TextProps} from './Text';
+import {TextProps} from './Text';
 
 export interface TypeLabelProps extends Omit<TextProps, 'typeLevel'> {
   cursor?: Property.Cursor;
