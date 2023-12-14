@@ -3,7 +3,7 @@ import * as React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Text} from '@workday/canvas-kit-react/text';
-import {createStyles, CSProps, cssVar} from '@workday/canvas-kit-styling';
+import {createStyles, CSProps} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 export interface CardHeadingProps extends CSProps, BoxProps {
@@ -18,9 +18,9 @@ export interface CardHeadingProps extends CSProps, BoxProps {
 const cardHeadingBaseStyles = createStyles({
   ...system.type.body.large,
   color: base.blackPepper400,
-  fontWeight: cssVar(system.fontWeight.bold),
-  marginTop: system.space.x6,
-  marginBottom: 0,
+  fontWeight: system.fontWeight.bold,
+  marginBottom: system.space.x6,
+  marginTop: 0,
 });
 
 export const CardHeading = createComponent('h3')({
@@ -30,12 +30,9 @@ export const CardHeading = createComponent('h3')({
     return (
       <Text
         ref={ref}
-        typeLevel="body.large"
-        fontWeight="bold"
-        marginBottom="m"
-        marginTop={0}
         as={Element}
         {...elemProps}
+        {...mergeStyles(elemProps, cardHeadingBaseStyles)}
       >
         {children}
       </Text>

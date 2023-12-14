@@ -1,14 +1,14 @@
 import * as React from 'react';
 
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {mergeStyles, BoxProps} from '@workday/canvas-kit-react/layout';
 import {createStyles, CSProps, cssVar} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 import {CardHeading} from './CardHeading';
 import {CardBody} from './CardBody';
 
-export interface CardProps extends CSProps {
+export interface CardProps extends BoxProps, CSProps {
   /**
    * Children of the Card. Should contain a `<Card.Body>` and an optional `<Card.Heading>`
    */
