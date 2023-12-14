@@ -1,14 +1,11 @@
 import React from 'react';
 
 import {createContainer, ExtractProps} from '@workday/canvas-kit-react/common';
-import {
-  FormField,
-  useFormFieldModel,
-  useFormFieldOrientation,
-} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField, useFormFieldOrientation} from '@workday/canvas-kit-preview-react/form-field';
 import {Flex} from '@workday/canvas-kit-react/layout';
 
 import {TextAreaField} from './TextAreaField';
+import {useTextInputModel} from '@workday/canvas-kit-preview-react/text-input';
 /**
  * @deprecated ⚠️ `TextAreaProps` in Preview has been deprecated and will be removed in a future major version. Please use [`FormField` in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-inputs-form-field--custom) instead.
  */
@@ -24,7 +21,7 @@ export interface TextAreaProps extends ExtractProps<typeof FormField, never> {
  */
 export const TextArea = createContainer('div')({
   displayName: 'TextArea',
-  modelHook: useFormFieldModel,
+  modelHook: useTextInputModel,
   subComponents: {
     Field: TextAreaField,
     Label: FormField.Label,
