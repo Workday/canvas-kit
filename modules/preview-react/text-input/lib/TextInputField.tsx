@@ -54,7 +54,7 @@ export const TextInputField = createSubcomponent('input')({
   const theme = useTheme();
   const errorRing = useThemedRing('error');
 
-  const focusStyles = model.state.hasError
+  const focusStyles = model.state.error
     ? errorRing
     : {
         '&:focus:not([disabled])': {

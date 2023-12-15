@@ -50,7 +50,7 @@ export const TextInputWithFormik = () => {
         <TextInput
           orientation="vertical"
           isRequired={true}
-          hasError={formik.touched.email && !!formik.errors.email}
+          error={formik.touched.email && !!formik.errors.email ? 'error' : undefined}
         >
           <TextInput.Label>Email</TextInput.Label>
           <TextInput.Field
@@ -66,7 +66,7 @@ export const TextInputWithFormik = () => {
         <TextInput
           orientation="vertical"
           id={passwordId}
-          hasError={formik.touched.password && !!formik.errors.password}
+          error={formik.touched.password && !!formik.errors.password ? 'error' : undefined}
           isRequired={true}
         >
           <TextInput.Label>Password</TextInput.Label>
