@@ -21,13 +21,13 @@ module.exports = {
     },
     './readme-panel/preset.js',
     '@storybook/addon-storysource',
-    '@storybook/addon-postcss',
   ],
   typescript: {
+    skipBabel: true,
     check: false,
     reactDocgen: false, // we'll handle this ourselves
   },
-  webpackFinal: async config => {
+  webpackFinal: async (config, {configType}) => {
     // Get the specifications object and replace with a real object in the spec.ts file
     if (processDocs) {
       const specs = await getSpecifications();
@@ -137,22 +137,6 @@ module.exports = {
     mdxRule.use.find(loader => loader.loader.includes('mdx1-csf')).options['compilers'] = [
       createCompiler({}),
     ];
-
-    // Load our scss files with postscss.
-    // Note: This is the same as @storybook/preset-scss, but with postcss added.
-    config.module.rules.push({
-      test: /\.(scss|css)$/,
-      use: [
-        'style-loader',
-        {
-          loader: 'css-loader',
-          options: {importLoaders: 2},
-        },
-        'postcss-loader',
-        'sass-loader',
-      ],
-      include: modulesPath,
-    });
 
     return config;
   },

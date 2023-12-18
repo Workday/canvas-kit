@@ -24,12 +24,11 @@ function getPackages(context) {
   const cwd = ctx.cwd || process.cwd();
 
   return Promise.all([
-    readdir(path.resolve(cwd, 'modules/css'), {withFileTypes: true}),
     readdir(path.resolve(cwd, 'modules/react'), {withFileTypes: true}),
     readdir(path.resolve(cwd, 'modules/labs-react'), {withFileTypes: true}),
     readdir(path.resolve(cwd, 'modules/preview-react'), {withFileTypes: true}),
   ])
-    .then(([css, react, labs, preview]) => [...css, ...react, ...labs, ...preview])
+    .then(([react, labs, preview]) => [...react, ...labs, ...preview])
     .then(files => files.filter(dirent => dirent.isDirectory()).map(dirent => dirent.name))
     .then(files => scopes.concat(files));
 }

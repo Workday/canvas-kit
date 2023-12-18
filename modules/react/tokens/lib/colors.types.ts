@@ -28,7 +28,7 @@ export enum BrandingColor {
 }
 
 type RemoveIndex<T> = {
-  [ K in keyof T as string extends K ? never : number extends K ? never : K ] : T[K]
+  [K in keyof T as string extends K ? never : number extends K ? never : K]: T[K];
 };
 
 export type CanvasColor = keyof RemoveIndex<typeof colors>;

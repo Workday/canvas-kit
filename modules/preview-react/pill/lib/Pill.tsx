@@ -1,7 +1,7 @@
 import React from 'react';
 import {CSSObject} from '@emotion/react';
 
-import {BaseButton} from '@workday/canvas-kit-react/button';
+import {BaseButton, buttonVars} from '@workday/canvas-kit-react/button';
 import {
   createContainer,
   focusRing,
@@ -11,6 +11,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {BoxProps, boxStyleFn, Flex} from '@workday/canvas-kit-react/layout';
 import {borderRadius, colors, space, type} from '@workday/canvas-kit-react/tokens';
+import {handleCsProp, CSProps} from '@workday/canvas-kit-styling';
 
 import {usePillModel} from './usePillModel';
 
@@ -27,81 +28,6 @@ export interface PillProps extends BoxProps {
    */
   variant?: 'default' | 'readOnly' | 'removable';
 }
-
-const getButtonPillColors = () => {
-  return {
-    default: {
-      background: colors.soap300,
-      icon: colors.licorice200,
-      label: colors.blackPepper400,
-      border: colors.licorice200,
-    },
-    hover: {
-      icon: colors.licorice500,
-      background: colors.soap400,
-      border: colors.licorice400,
-    },
-    active: {
-      icon: colors.licorice500,
-      background: colors.soap500,
-      border: colors.licorice500,
-    },
-    focus: {
-      icon: colors.licorice500,
-      background: colors.soap300,
-      border: colors.blueberry400,
-      focusRing: focusRing({
-        width: 0,
-        inset: 'inner',
-        innerColor: colors.blueberry400,
-        outerColor: colors.blueberry400,
-        separation: 1,
-      }),
-    },
-    disabled: {
-      icon: colors.licorice100,
-      label: colors.licorice100,
-      background: colors.soap100,
-      border: colors.licorice100,
-      opacity: '1',
-    },
-  };
-};
-
-const getRemovablePillColors = (disabled?: boolean) => {
-  return {
-    default: {
-      background: disabled ? colors.soap100 : colors.soap300,
-      icon: disabled ? colors.licorice100 : colors.licorice200,
-      label: disabled ? colors.licorice100 : colors.blackPepper400,
-      border: disabled ? colors.licorice100 : colors.licorice200,
-    },
-    hover: {
-      icon: disabled ? colors.licorice100 : colors.licorice500,
-      background: disabled ? colors.soap100 : colors.soap300,
-      border: disabled ? colors.licorice100 : colors.licorice200,
-      label: disabled ? colors.licorice100 : colors.blackPepper400,
-    },
-    active: {
-      icon: disabled ? colors.licorice100 : colors.licorice500,
-      background: disabled ? colors.soap100 : colors.soap500,
-      border: disabled ? colors.licorice100 : colors.licorice500,
-      label: disabled ? colors.licorice100 : colors.blackPepper400,
-    },
-    focus: {
-      icon: colors.licorice200,
-      background: colors.soap300,
-      label: colors.blackPepper400,
-
-      focusRing: focusRing({
-        width: 0,
-        innerColor: 'transparent',
-        outerColor: 'transparent',
-      }),
-    },
-    disabled: {},
-  };
-};
 
 const pillBaseStyles: CSSObject = {
   display: 'inline-flex',
@@ -124,6 +50,7 @@ const pillBaseStyles: CSSObject = {
 const StyledBasePill = styled(BaseButton.as('button'))<StyledType & PillProps>(
   {
     ...pillBaseStyles,
+
     '&:focus': {
       'span[data-count="ck-pill-count"]': {
         borderTop: `1px solid ${colors.blueberry400}`,
@@ -145,19 +72,88 @@ const StyledBasePill = styled(BaseButton.as('button'))<StyledType & PillProps>(
         },
       },
     }),
+    // Default Styles
+    [buttonVars.default.background]: colors.soap300,
+    [buttonVars.default.border]: colors.licorice200,
+    [buttonVars.default.label]: colors.blackPepper400,
+    [buttonVars.default.icon]: colors.licorice200,
+    // Hover Styles
+    [buttonVars.hover.background]: colors.soap400,
+    [buttonVars.hover.border]: colors.licorice400,
+    [buttonVars.hover.label]: colors.blackPepper400,
+    [buttonVars.hover.icon]: colors.licorice500,
+    // Focus Styles
+    [buttonVars.focus.background]: colors.soap300,
+    [buttonVars.focus.border]: colors.blueberry400,
+    [buttonVars.focus.label]: colors.blackPepper400,
+    [buttonVars.focus.icon]: colors.licorice500,
+    // Active Styles
+    [buttonVars.active.background]: colors.soap500,
+    [buttonVars.active.border]: colors.licorice500,
+    [buttonVars.active.label]: colors.blackPepper400,
+    [buttonVars.active.icon]: colors.licorice500,
+    // Disabled Styles
+    [buttonVars.disabled.background]: colors.soap100,
+    [buttonVars.disabled.border]: colors.licorice100,
+    [buttonVars.disabled.label]: colors.licorice100,
+    [buttonVars.disabled.opacity]: '1',
+    [buttonVars.disabled.icon]: colors.licorice100,
   },
+
   ({variant}) => ({
-    '&:focus': {
+    '&:focus, &:focus-visible': {
       borderColor: variant === 'removable' ? undefined : colors.blueberry400,
+      ...focusRing({
+        width: 0,
+        inset: 'inner',
+        innerColor: colors.blueberry400,
+        outerColor: colors.blueberry400,
+        separation: 1,
+      }),
     },
   }),
   boxStyleFn
 );
 
-const StyledNonInteractivePill = styled(StyledBasePill)<StyledType>({
+const StyledNonInteractivePill = styled(StyledBasePill)<StyledType & CSProps>({
+  [buttonVars.default.background]: colors.soap300,
+  [buttonVars.default.border]: colors.licorice200,
+  [buttonVars.default.label]: colors.blackPepper400,
+
+  [buttonVars.hover.background]: colors.soap300,
+  [buttonVars.hover.border]: colors.licorice200,
+  [buttonVars.hover.label]: colors.blackPepper400,
+
+  [buttonVars.focus.background]: colors.soap300,
+  [buttonVars.focus.border]: colors.licorice200,
+  [buttonVars.focus.label]: colors.blackPepper400,
+
+  [buttonVars.active.background]: colors.soap500,
+  [buttonVars.active.border]: colors.licorice500,
+  [buttonVars.active.label]: colors.blackPepper400,
+
+  [buttonVars.disabled.background]: colors.soap100,
+  [buttonVars.disabled.label]: colors.licorice100,
+  [buttonVars.disabled.border]: colors.licorice100,
   cursor: 'default',
   overflow: 'revert', // override BaseButton overflow styles so the click target exists outside the pill for removable
   position: 'relative',
+  '&:focus-visibile, &.focus': {
+    ...focusRing({
+      width: 0,
+      innerColor: 'transparent',
+      outerColor: 'transparent',
+    }),
+  },
+});
+
+const StyledReadOnlyPill = styled(StyledNonInteractivePill)<StyledType>({
+  [buttonVars.default.background]: 'transparent',
+  [buttonVars.hover.background]: 'transparent',
+  [buttonVars.focus.background]: 'transparent',
+  [buttonVars.active.background]: 'transparent',
+  [buttonVars.disabled.background]: 'transparent',
+  border: `1px solid ${colors.licorice200}`,
 });
 
 /**
@@ -272,23 +268,17 @@ export const Pill = createContainer('button')({
   return (
     <>
       {variant === 'readOnly' && (
-        <StyledNonInteractivePill
-          maxWidth={model.state.maxWidth}
+        <StyledReadOnlyPill
           as={Element !== 'button' ? Element : 'span'}
-          border={`1px solid ${colors.licorice200}`}
           id={model.state.id}
+          maxWidth={model.state.maxWidth}
           {...elemProps}
         >
           <PillLabel>{elemProps.children}</PillLabel>
-        </StyledNonInteractivePill>
+        </StyledReadOnlyPill>
       )}
       {variant === 'default' && (
-        <StyledBasePill
-          colors={getButtonPillColors()}
-          as={Element}
-          {...elemProps}
-          disabled={model.state.disabled}
-        >
+        <StyledBasePill as={Element} {...elemProps} disabled={model.state.disabled}>
           <Flex gap="xxxs" display="inline-flex" alignItems="center">
             {React.Children.map(elemProps.children, (child, index) => {
               if (typeof child === 'string') {
@@ -305,10 +295,10 @@ export const Pill = createContainer('button')({
       )}
       {variant === 'removable' && (
         <StyledNonInteractivePill
-          colors={getRemovablePillColors(model.state.disabled)}
           as={Element !== 'button' ? Element : 'span'}
           variant={variant}
-          {...elemProps}
+          type={undefined}
+          {...handleCsProp(elemProps, [model.state.disabled ? 'disabled' : undefined])}
         >
           <Flex gap="xxxs" display="inline-flex" alignItems="center" justifyContent="center">
             {React.Children.map(elemProps.children, (child, index) => {
