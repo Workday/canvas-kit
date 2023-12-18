@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.1.2](https://github.com/Workday/canvas-kit/releases/tag/v10.1.2) (2023-12-13)
+
+### Infrastructure
+
+- fix: Make the style transform Emotion safe ([#2468](https://github.com/Workday/canvas-kit/pull/2468)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v10.1.1](https://github.com/Workday/canvas-kit/releases/tag/v10.1.1) (2023-12-13)
+
+### Components
+
+- fix(Pill): Remove Console Logs ([#2467](https://github.com/Workday/canvas-kit/pull/2467)) ([@jennyy13](https://github.com/jennyy13), jennifer.murray)
+
+
+## [v10.1.0](https://github.com/Workday/canvas-kit/releases/tag/v10.1.0) (2023-12-13)
+
+
+
+
+## [v10.0.29](https://github.com/Workday/canvas-kit/releases/tag/v10.0.29) (2023-12-12)
+
+### Components
+
+- fix: Extend CSSObject types to support CSS variables ([#2462](https://github.com/Workday/canvas-kit/pull/2462)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v10.0.28](https://github.com/Workday/canvas-kit/releases/tag/v10.0.28) (2023-12-12)
 
 ### Components

@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-preview-react",
-  "version": "10.0.28",
+  "version": "10.1.2",
   "description": "Canvas Kit Preview is made up of components that have the full design and a11y review, are part of the DS ecosystem and are approved for use in product. The API's could be subject to change, but not without strong communication and migration strategies.",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -46,8 +46,8 @@
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
-    "@workday/canvas-kit-react": "^10.0.28",
-    "@workday/canvas-kit-styling": "^10.0.28",
+    "@workday/canvas-kit-react": "^10.1.2",
+    "@workday/canvas-kit-styling": "^10.1.2",
     "@workday/canvas-system-icons-web": "^3.0.0",
     "@workday/canvas-tokens-web": "^1.0.0",
     "@workday/design-assets-types": "^0.2.8"
