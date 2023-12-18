@@ -9,6 +9,9 @@ This guide contains an overview of the changes in Canvas Kit v11. Please
 any questions.
 
 - [Codemod](#codemod)
+- [Component Updates](#component-updates)
+  - [Text](#text)
+  - [LabelText](#labeltext)
 
 ## Codemod
 
@@ -70,3 +73,22 @@ finished.
 > other file types (`.json`, `.mdx`, `.md`, etc.). You may need to run your linter after executing
 > the codemod, as its resulting formatting (spacing, quotes, etc.) may not match your project
 > conventions.
+
+## Component Updates
+
+### Text
+
+`Text` has been refactored to use our new styling utilities and utilize new tokens and no longer
+extends `Box` component. The component API has not been changed, and it should behave identically as
+it did in previous versions and support Emotion `styled` and style props. Type level components,
+`Title`, `Heading`, `BodyText` and `Subtext`, have not been changed, but because they extend `Text`
+components, all changes made for `Text` will be applied for them as well.
+
+### LabelText
+
+`LabelText` has been refactored to use our new styling utilities and utilize new tokens and no
+longer extends `Text` component. The component API is similar to previous one and it still supports
+`variant`, `disabled` and styles props. `typeLevel` prop has been removed from `LabelText` and we
+suggest to use type level components, `Title`, `Heading`, `BodyText` and `Subtext`, instead.
+
+🤖 The codemod will handle a `typeLevel` removal for you automatically.

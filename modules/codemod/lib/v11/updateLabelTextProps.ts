@@ -1,4 +1,4 @@
-import {API, FileInfo, JSXElement, Options} from 'jscodeshift';
+import {API, FileInfo, JSXElement, JSXIdentifier, JSXAttribute} from 'jscodeshift';
 import {getImportRenameMap} from '../v7/utils/getImportRenameMap';
 import {hasImportSpecifiers} from '../v6/utils';
 
@@ -11,7 +11,7 @@ const componentNames = {
   title: 'Title',
 };
 
-export default function transformer(file: FileInfo, api: API, options: Options) {
+export default function transformer(file: FileInfo, api: API) {
   const newImports: string[] = [];
   const j = api.jscodeshift;
 
@@ -25,6 +25,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
 
   const {importMap, styledMap} = getImportRenameMap(j, root, textPackage);
 
+  // pattern to check matching imported or styled name
   const textPattern = styledMap.LabelText
     ? `(${importMap.LabelText}|${styledMap.LabelText})`
     : importMap.LabelText;
@@ -41,10 +42,11 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
       const attributes = nodePath.value.openingElement.attributes || [];
       const typeLevelAttr = attributes.find(
         attr => attr.type === 'JSXAttribute' && attr.name.name === 'typeLevel'
-      );
+      ) as JSXAttribute;
 
+      // change only label that have typeLevel prop
       if (typeLevelAttr) {
-        const [level, size] = (typeLevelAttr as any).value.value.split('.');
+        const [level, size] = (typeLevelAttr.value as {value: string}).value.split('.');
         const newComponentName = componentNames[level as keyof typeof componentNames];
 
         const newAtrr = [
@@ -54,9 +56,9 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
           j.jsxAttribute(j.jsxIdentifier('size'), j.stringLiteral(size)),
         ];
 
-        (nodePath.value.openingElement.name as any).name = newComponentName;
+        (nodePath.value.openingElement.name as JSXIdentifier).name = newComponentName;
         if (nodePath.value.closingElement) {
-          (nodePath.value.closingElement.name as any).name = newComponentName;
+          (nodePath.value.closingElement.name as JSXIdentifier).name = newComponentName;
         }
 
         nodePath.value.openingElement.attributes = newAtrr;
@@ -82,10 +84,11 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
       if (newImports.length) {
         const specifiers = nodePath.value.specifiers || [];
 
+        // removing LabelText import if there is no more LabelText components
         const cleanedSpecifiers = specifiers?.filter(
           s => labels.length && s.type === 'ImportSpecifier' && s.imported.name === 'LabelText'
         );
-
+        // adding new imports after replacing LabelText
         const newSpecifiers = newImports
           .filter(i => !Object.keys(importMap).includes(i))
           .map(i => j.importSpecifier(j.identifier(i)));
