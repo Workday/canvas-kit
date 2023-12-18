@@ -22,7 +22,7 @@ const labelStyles = createStyles({
   display: 'flex',
   alignItems: 'center',
   maxHeight: '40px',
-  // minWidth: '180px',
+  minWidth: '180px',
 });
 
 const asteriskStyles = createStyles({

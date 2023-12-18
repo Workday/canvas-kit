@@ -31,11 +31,10 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
       nodePath.node.attributes?.forEach(attr => {
         if (attr.type === 'JSXAttribute') {
           if (attr.name.name === 'hasError') {
-            //? attr
             attr.name.name = 'error';
             if (attr.value && attr.value.type === 'JSXExpressionContainer') {
               const value = attr.value.expression as any;
-              // if boolean, use boolean, set to error, else undefined
+
               if (value.type === 'BooleanLiteral') {
                 if (value.value) {
                   attr.value = j.stringLiteral('error');
@@ -43,7 +42,6 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
                   attr.value = j.jsxExpressionContainer(j.identifier('undefined'));
                 }
               } else if (value.type === 'Identifier') {
-                console.log('in here'); //?
                 attr.value.expression = j.conditionalExpression(
                   j.identifier(value.name),
                   j.stringLiteral('error'),

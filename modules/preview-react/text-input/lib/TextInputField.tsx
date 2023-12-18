@@ -54,14 +54,15 @@ export const TextInputField = createSubcomponent('input')({
   const theme = useTheme();
   const errorRing = useThemedRing('error');
 
-  const focusStyles = model.state.error
-    ? errorRing
-    : {
-        '&:focus:not([disabled])': {
-          borderColor: theme.canvas.palette.common.focusOutline,
-          boxShadow: `inset 0 0 0 1px ${theme.canvas.palette.common.focusOutline}`,
-        },
-      };
+  const focusStyles =
+    model.state.error === 'error'
+      ? errorRing
+      : {
+          '&:focus:not([disabled])': {
+            borderColor: theme.canvas.palette.common.focusOutline,
+            boxShadow: `inset 0 0 0 1px ${theme.canvas.palette.common.focusOutline}`,
+          },
+        };
 
   return (
     <FormField.Input

@@ -127,7 +127,7 @@ describe('Text Input', () => {
   describe('when rendered with an error', () => {
     it('the input should have aria-invalid for accessibility', () => {
       const {container} = render(
-        <TextInput orientation="vertical" error={'error'}>
+        <TextInput orientation="vertical" error="error">
           <TextInput.Field />
         </TextInput>
       );

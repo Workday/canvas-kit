@@ -11,7 +11,7 @@ export const Basic = () => {
   };
 
   return (
-    <FormField label="Email" labelPosition={FormFieldLabelPosition.Left} hintText="foo bar">
+    <FormField label="Email">
       <TextInput onChange={handleChange} value={value} />
     </FormField>
   );

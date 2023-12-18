@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {createContainer} from '@workday/canvas-kit-react/common';
-import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
+import {Flex, FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {space} from '@workday/canvas-kit-react/tokens';
 
@@ -10,7 +10,6 @@ import {FormFieldInput} from './FormFieldInput';
 import {FormFieldLabel} from './FormFieldLabel';
 import {FormFieldHint} from './FormFieldHint';
 import {FormFieldContainer} from './FormFieldContainer';
-// import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 export interface FormFieldProps extends FlexProps {
   /**
@@ -42,7 +41,7 @@ export const FormField = createContainer('div')({
   const layoutProps = useFormFieldOrientation(orientation);
 
   return (
-    <Flex as={Element} {...layoutProps} cs={formFieldBaseStyles} {...elemProps}>
+    <Flex as={Element} {...layoutProps} {...mergeStyles(elemProps, formFieldBaseStyles)}>
       {children}
     </Flex>
   );
