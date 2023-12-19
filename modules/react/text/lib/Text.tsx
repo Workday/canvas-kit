@@ -29,9 +29,8 @@ export interface TextProps extends CSProps, CommonStyleProps {
 }
 
 const createTypeStyles = (level: keyof typeof system.type, size: TypeSize, isHeading?: boolean) => {
-  // @ts-ignore
   return createStyles({
-     // @ts-ignore font weight type is out with our variables
+    // @ts-ignore
     ...system.type[level][size],
     color: isHeading ? base.blackPepper400 : base.blackPepper300,
   });
