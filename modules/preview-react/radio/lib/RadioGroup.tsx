@@ -62,7 +62,7 @@ export const RadioGroup = createContainer(Flex)({
   },
 })<RadioGroupProps>(({children, error, theme, ...elemProps}, Element, model) => {
   const errorColors = getErrorColors(error, theme);
-  console.log(errorColors);
+
   return (
     <Flex
       as={Element}

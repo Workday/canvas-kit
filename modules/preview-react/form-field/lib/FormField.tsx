@@ -12,12 +12,10 @@ import {FormFieldHint} from './FormFieldHint';
 import {FormFieldContainer} from './FormFieldContainer';
 
 export interface FormFieldProps extends FlexProps {
-  /**
-   * Children of the Text Input. Should contain a `<FormField.Input>`, a `<FormField.Label>` and an optional `<FormField.Hint>`
-   */
   children: React.ReactNode;
   /**
    * The direction the child elements should stack
+   * @default vertical
    */
   orientation?: 'vertical' | 'horizontal';
 }
@@ -27,7 +25,17 @@ const formFieldBaseStyles = createStyles({
   padding: 0,
   margin: `0 0 ${space.m}`,
 });
-
+/**
+ * Use `FormField` wrap input components to make them accessible. You can customize the field
+ * by passing in `TextInput`, `Select`, `RadioGroup` and other form elements to `FormField.Input`.
+ *
+ * ```tsx
+ * <FormField>
+ *    <FormField.Label>First Name</FormField.Label>
+ *    <FormField.Input as={TextInput} value={value} onChange={handleChange} />
+ *  </FormField>
+ * ```
+ */
 export const FormField = createContainer('div')({
   displayName: 'FormField',
   modelHook: useFormFieldModel,

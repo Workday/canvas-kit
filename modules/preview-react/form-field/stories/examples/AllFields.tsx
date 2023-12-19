@@ -60,9 +60,9 @@ export const AllFields = () => {
       </FormField>
       <FormField as="fieldset">
         <FormField.Label as="legend">Checkbox Legend</FormField.Label>
-        <FormField.Input as={Checkbox} label="Checkbox Label" />
-        <FormField.Input as={Checkbox} label="Thin Crust" />
-        <FormField.Input as={Checkbox} label="Extra Cheese" />
+        <FormField.Input checked={true} as={Checkbox} label="Checkbox Label" />
+        <FormField.Input checked={false} as={Checkbox} label="Thin Crust" />
+        <FormField.Input checked={false} as={Checkbox} label="Extra Cheese" />
       </FormField>
 
       <FormField orientation="horizontal">
