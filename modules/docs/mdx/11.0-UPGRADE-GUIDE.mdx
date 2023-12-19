@@ -17,6 +17,7 @@ any questions.
   - [Buttons](#buttons)
   - [Text Input](#textinput)
   - [Text Area](#textarea)
+  - [Count Badge](#count-badge)
 
 ## Codemod
 
@@ -131,3 +132,9 @@ See below:
 ### TextArea
 #### TextAreaField
 - `disabled`: Border color has been updated from `soap600` to `licorice100`.
+### Count Badge
+
+**PR:** [#2442](https://github.com/Workday/canvas-kit/pull/2442)
+
+`CountBadge` now uses `createComponent`, Canvas Tokens, and our new styling utilities. The component
+API has not been changed, and it should behave identically as it did in previous versions.
