@@ -1,7 +1,8 @@
 import React from 'react';
 
 import {PopupStack} from '@workday/canvas-kit-popup-stack';
-import {useLocalRef, useIsRTL} from '@workday/canvas-kit-react/common';
+import {useLocalRef, useIsRTL, useCanvasThemeToCssVars} from '@workday/canvas-kit-react/common';
+import {ThemeContext, Theme} from '@emotion/react';
 
 /**
  * **Note:** If you're using {@link Popper}, you do not need to use this hook directly.
@@ -51,6 +52,8 @@ export const usePopupStack = <E extends HTMLElement>(
 ): React.RefObject<HTMLElement> => {
   const {elementRef, localRef} = useLocalRef(ref);
   const isRTL = useIsRTL();
+  const theme = React.useContext(ThemeContext as React.Context<Theme>);
+  const {className, style} = useCanvasThemeToCssVars(theme, {});
 
   // useState function input ensures we only create a container once.
   const [popupRef] = React.useState(() => {
@@ -89,6 +92,35 @@ export const usePopupStack = <E extends HTMLElement>(
       localRef.current?.removeAttribute('dir');
     }
   }, [localRef, isRTL]);
+
+  // theming className
+  React.useLayoutEffect(() => {
+    const element = localRef.current;
+    element?.classList.add(className.trim());
+    return () => {
+      element?.classList.remove(className.trim());
+    };
+  }, [localRef, className]);
+
+  React.useLayoutEffect(() => {
+    const element = localRef.current;
+    if (element) {
+      // eslint-disable-next-line guard-for-in
+      for (const key in style) {
+        // @ts-ignore
+        element.style.setProperty(key, style[key]);
+      }
+    }
+    return () => {
+      if (element) {
+        // eslint-disable-next-line guard-for-in
+        for (const key in style) {
+          // @ts-ignore
+          element.style.removeProperty(key, style[key]);
+        }
+      }
+    };
+  }, [localRef, style]);
 
   return localRef;
 };
