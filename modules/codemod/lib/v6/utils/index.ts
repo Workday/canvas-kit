@@ -131,7 +131,6 @@ export function hasImportSpecifiers(
         ? value === packageName
         : packageName.includes(value as string)
     ) {
-      console.log('in here'); //?;
       return true;
     }
 
