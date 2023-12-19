@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.34](https://github.com/Workday/canvas-kit/releases/tag/v9.1.34) (2023-12-18)
+
+### Components
+
+- fix: Fixed getFirstFocusableElement to recognize RadioGroup ([#2470](https://github.com/Workday/canvas-kit/pull/2470)) ([@thunguyen19](https://github.com/thunguyen19))
 ## [v10.1.2](https://github.com/Workday/canvas-kit/releases/tag/v10.1.2) (2023-12-13)
 
 ### Infrastructure
