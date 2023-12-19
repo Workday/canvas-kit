@@ -79,10 +79,12 @@ export const ModalRTL = withSnapshotsEnabled(() => {
 });
 
 export const CustomThemeModal = withSnapshotsEnabled(() => {
+  const model = useModalModel({
+    initialVisibility: 'visible',
+  });
   return (
     <CanvasProvider theme={{canvas: customColorTheme}}>
-      <Modal initialVisibility={'visible'}>
-        <Modal.Target as={PrimaryButton}>Open License</Modal.Target>
+      <Modal model={model}>
         <Modal.Overlay style={{animation: 'none'}}>
           <Modal.Card style={{animation: 'none'}}>
             <Modal.CloseIcon aria-label="Close" />
