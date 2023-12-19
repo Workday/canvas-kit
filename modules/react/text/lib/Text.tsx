@@ -32,6 +32,7 @@ const createTypeStyles = (level: keyof typeof system.type, size: TypeSize, isHea
   // @ts-ignore
   // font weight type is out with our variables
   return createStyles({
+     // @ts-ignore font weight type is out with our variables
     ...system.type[level][size],
     color: isHeading ? base.blackPepper400 : base.blackPepper300,
   });
