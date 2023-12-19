@@ -4,7 +4,7 @@ import {stripIndent} from 'common-tags';
 
 const expectTransform = expectTransformFactory(transform);
 
-describe.only('renameHasError', () => {
+describe('renameHasError', () => {
   it('should not change non-canvas imports', () => {
     const input = stripIndent`
             import {TextInput} from '@workday/any-other-package'
