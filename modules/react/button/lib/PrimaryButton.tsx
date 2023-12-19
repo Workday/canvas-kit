@@ -3,7 +3,7 @@ import * as React from 'react';
 import {buttonVars} from './BaseButton';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStyles, cssVar, createModifiers} from '@workday/canvas-kit-styling';
+import {createStyles, createModifiers} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 import {Button, ButtonProps} from './Button';
 
@@ -21,62 +21,62 @@ export interface PrimaryButtonProps extends ButtonProps {
 
 const primaryStyles = createStyles({
   // Default Styles
-  [buttonVars.default.background]: cssVar(brand.primary.base, cssVar(base.blueberry400, '#0875e1')),
+  [buttonVars.default.background]: brand.primary.base,
   [buttonVars.default.border]: 'transparent',
-  [buttonVars.default.borderRadius]: cssVar(system.shape.round, '62.5rem'),
-  [buttonVars.default.label]: cssVar(brand.primary.accent, '#ffffff'),
-  [buttonVars.default.icon]: cssVar(brand.primary.accent, '#ffffff'),
+  [buttonVars.default.borderRadius]: system.shape.round,
+  [buttonVars.default.label]: brand.primary.accent,
+  [buttonVars.default.icon]: brand.primary.accent,
   // Hover Styles
-  [buttonVars.hover.background]: cssVar(brand.primary.dark, 'rgba(0,92,184,1)'),
+  [buttonVars.hover.background]: brand.primary.dark,
   [buttonVars.hover.border]: 'transparent',
-  [buttonVars.hover.label]: cssVar(brand.primary.accent, '#ffffff'),
-  [buttonVars.hover.icon]: cssVar(brand.primary.accent, '#ffffff'),
+  [buttonVars.hover.label]: brand.primary.accent,
+  [buttonVars.hover.icon]: brand.primary.accent,
   // Focus Styles
-  [buttonVars.focus.background]: cssVar(brand.primary.base, 'rgba(8,117,226,1)'),
+  [buttonVars.focus.background]: brand.primary.base,
   [buttonVars.focus.border]: 'transparent',
-  [buttonVars.focus.label]: cssVar(brand.primary.accent, '#ffffff'),
-  [buttonVars.focus.icon]: cssVar(brand.primary.accent, '#ffffff'),
-  [buttonVars.focus.boxShadowInner]: cssVar(base.frenchVanilla100, '#ffffff'),
-  [buttonVars.focus.boxShadowOuter]: cssVar(brand.common.focusOutline, 'rgba(8,117,226,1)'),
+  [buttonVars.focus.label]: brand.primary.accent,
+  [buttonVars.focus.icon]: brand.primary.accent,
+  [buttonVars.focus.boxShadowInner]: base.frenchVanilla100,
+  [buttonVars.focus.boxShadowOuter]: brand.common.focusOutline,
   // Active Styles
-  [buttonVars.active.background]: cssVar(brand.primary.darkest, 'rgba(0,66,133,1)'),
+  [buttonVars.active.background]: brand.primary.darkest,
   [buttonVars.active.border]: 'transparent',
-  [buttonVars.active.label]: cssVar(brand.primary.accent, '#ffffff'),
-  [buttonVars.active.icon]: cssVar(brand.primary.accent, '#ffffff'),
+  [buttonVars.active.label]: brand.primary.accent,
+  [buttonVars.active.icon]: brand.primary.accent,
   // Disabled Styles
-  [buttonVars.disabled.background]: cssVar(brand.primary.base, 'rgba(8,117,226,1)'),
+  [buttonVars.disabled.background]: brand.primary.base,
   [buttonVars.disabled.border]: 'transparent',
-  [buttonVars.disabled.label]: cssVar(brand.primary.accent, '#ffffff'),
+  [buttonVars.disabled.label]: brand.primary.accent,
   [buttonVars.disabled.opacity]: '0.4',
-  [buttonVars.disabled.icon]: cssVar(brand.primary.accent, '#ffffff'),
+  [buttonVars.disabled.icon]: brand.primary.accent,
 });
 
 export const primaryButtonModifiers = createModifiers({
   variant: {
     inverse: createStyles({
       // Default Styles
-      [buttonVars.default.background]: cssVar(base.frenchVanilla100, '#ffffff'),
-      [buttonVars.default.borderRadius]: cssVar(system.shape.round, '62.5rem'),
-      [buttonVars.default.label]: cssVar(base.blackPepper400, 'rgba(51,51,51,1)'),
-      [buttonVars.default.icon]: cssVar(base.blackPepper400, 'rgba(51,51,51,1)'),
+      [buttonVars.default.background]: base.frenchVanilla100,
+      [buttonVars.default.borderRadius]: system.shape.round,
+      [buttonVars.default.label]: base.blackPepper400,
+      [buttonVars.default.icon]: base.blackPepper400,
       // Hover Styles
-      [buttonVars.hover.background]: cssVar(base.soap300, 'rgba(232,235,237,1)'),
-      [buttonVars.hover.label]: cssVar(base.blackPepper500, 'rgba(31,31,31,1)'),
-      [buttonVars.hover.icon]: cssVar(base.blackPepper500, 'rgba(31,31,31,1)'),
+      [buttonVars.hover.background]: base.soap300,
+      [buttonVars.hover.label]: base.blackPepper500,
+      [buttonVars.hover.icon]: base.blackPepper500,
       // Focus Styles
-      [buttonVars.focus.background]: cssVar(base.frenchVanilla100, '#ffffff'),
-      [buttonVars.focus.label]: cssVar(base.blackPepper400, 'rgba(51,51,51,1)'),
-      [buttonVars.focus.icon]: cssVar(base.blackPepper400, 'rgba(51,51,51,1)'),
-      [buttonVars.focus.boxShadowInner]: cssVar(base.blackPepper400, 'rgba(51,51,51,1)'),
-      [buttonVars.focus.boxShadowOuter]: cssVar(base.frenchVanilla100, '#ffffff'),
+      [buttonVars.focus.background]: base.frenchVanilla100,
+      [buttonVars.focus.label]: base.blackPepper400,
+      [buttonVars.focus.icon]: base.blackPepper400,
+      [buttonVars.focus.boxShadowInner]: base.blackPepper400,
+      [buttonVars.focus.boxShadowOuter]: base.frenchVanilla100,
       // Active Styles
-      [buttonVars.active.background]: cssVar(base.soap400, 'rgba(224,227,230,1)'),
-      [buttonVars.active.label]: cssVar(base.blackPepper500, 'rgba(31,31,31,1)'),
-      [buttonVars.active.icon]: cssVar(base.blackPepper500, 'rgba(31,31,31,1)'),
+      [buttonVars.active.background]: base.soap400,
+      [buttonVars.active.label]: base.blackPepper500,
+      [buttonVars.active.icon]: base.blackPepper500,
       // Disabled Styles
-      [buttonVars.disabled.background]: cssVar(base.frenchVanilla100, '#ffffff'),
-      [buttonVars.disabled.label]: cssVar(base.blackPepper400, 'rgba(51,51,51,1)'),
-      [buttonVars.disabled.icon]: cssVar(base.blackPepper400, 'rgba(51,51,51,1)'),
+      [buttonVars.disabled.background]: base.frenchVanilla100,
+      [buttonVars.disabled.label]: base.blackPepper400,
+      [buttonVars.disabled.icon]: base.blackPepper400,
     }),
   },
 });

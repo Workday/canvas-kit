@@ -3,7 +3,7 @@ import * as React from 'react';
 import {buttonVars} from './BaseButton';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStyles, cssVar, createModifiers} from '@workday/canvas-kit-styling';
+import {createStyles, createModifiers} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 import {Button, ButtonProps} from './Button';
 
@@ -22,33 +22,33 @@ export interface SecondaryButtonProps extends ButtonProps {
 const secondaryStyles = createStyles({
   // Default Styles
   [buttonVars.default.background]: 'transparent',
-  [buttonVars.default.border]: cssVar(base.blackPepper400, 'rgba(51,51,51,1)'),
-  [buttonVars.default.borderRadius]: cssVar(system.shape.round, '62.5rem'),
-  [buttonVars.default.label]: cssVar(base.blackPepper400, 'rgba(51,51,51,1)'),
-  [buttonVars.default.icon]: cssVar(base.blackPepper400, 'rgba(51,51,51,1)'),
+  [buttonVars.default.border]: base.blackPepper400,
+  [buttonVars.default.borderRadius]: system.shape.round,
+  [buttonVars.default.label]: base.blackPepper400,
+  [buttonVars.default.icon]: base.blackPepper400,
   // Hover Styles
-  [buttonVars.hover.background]: cssVar(base.blackPepper400, 'rgba(51,51,51,1)'),
-  [buttonVars.hover.border]: cssVar(base.blackPepper400, 'rgba(51,51,51,1)'),
-  [buttonVars.hover.label]: cssVar(brand.primary.accent, 'rgba(255,255,255,1)'),
-  [buttonVars.hover.icon]: cssVar(brand.primary.accent, 'rgba(255,255,255,1)'),
+  [buttonVars.hover.background]: base.blackPepper400,
+  [buttonVars.hover.border]: base.blackPepper400,
+  [buttonVars.hover.label]: brand.primary.accent,
+  [buttonVars.hover.icon]: brand.primary.accent,
   // Focus Styles
   [buttonVars.focus.background]: 'transparent',
-  [buttonVars.focus.border]: cssVar(base.blackPepper400, 'rgba(51,51,51,1)'),
-  [buttonVars.focus.label]: cssVar(base.blackPepper400, 'rgba(51,51,51,1)'),
-  [buttonVars.focus.icon]: cssVar(base.blackPepper400, 'rgba(51,51,51,1)'),
-  [buttonVars.focus.boxShadowInner]: cssVar(base.frenchVanilla100, 'rgba(255,255,255,1)'),
-  [buttonVars.focus.boxShadowOuter]: cssVar(brand.common.focusOutline, 'rgba(8,117,226,1)'),
+  [buttonVars.focus.border]: base.blackPepper400,
+  [buttonVars.focus.label]: base.blackPepper400,
+  [buttonVars.focus.icon]: base.blackPepper400,
+  [buttonVars.focus.boxShadowInner]: base.frenchVanilla100,
+  [buttonVars.focus.boxShadowOuter]: brand.common.focusOutline,
   // Active Styles
-  [buttonVars.active.background]: cssVar(base.blackPepper500, 'rgba(31,31,31,1)'),
-  [buttonVars.active.border]: cssVar(base.blackPepper500, 'rgba(31,31,31,1)'),
-  [buttonVars.active.label]: cssVar(brand.primary.accent, 'rgba(255,255,255,1)'),
-  [buttonVars.active.icon]: cssVar(brand.primary.accent, 'rgba(255,255,255,1)'),
+  [buttonVars.active.background]: base.blackPepper500,
+  [buttonVars.active.border]: base.blackPepper500,
+  [buttonVars.active.label]: brand.primary.accent,
+  [buttonVars.active.icon]: brand.primary.accent,
   // Disabled Styles
   [buttonVars.disabled.background]: 'transparent',
-  [buttonVars.disabled.border]: cssVar(base.blackPepper400, 'rgba(51,51,51,1)'),
-  [buttonVars.disabled.label]: cssVar(base.blackPepper400, 'rgba(51,51,51,1)'),
+  [buttonVars.disabled.border]: base.blackPepper400,
+  [buttonVars.disabled.label]: base.blackPepper400,
   [buttonVars.disabled.opacity]: '0.4',
-  [buttonVars.disabled.icon]: cssVar(base.blackPepper400, 'rgba(51,51,51,1)'),
+  [buttonVars.disabled.icon]: base.blackPepper400,
 });
 
 export const secondaryButtonModifiers = createModifiers({
@@ -56,31 +56,31 @@ export const secondaryButtonModifiers = createModifiers({
     inverse: createStyles({
       // Default Styles
       [buttonVars.default.background]: 'transparent',
-      [buttonVars.default.border]: cssVar(base.frenchVanilla100, 'rgba(255,255,255,1)'),
-      [buttonVars.default.label]: cssVar(base.frenchVanilla100, 'rgba(255,255,255,1)'),
-      [buttonVars.default.icon]: cssVar(base.frenchVanilla100, 'rgba(255,255,255,1)'),
+      [buttonVars.default.border]: base.frenchVanilla100,
+      [buttonVars.default.label]: base.frenchVanilla100,
+      [buttonVars.default.icon]: base.frenchVanilla100,
       // Hover Styles
-      [buttonVars.hover.background]: cssVar(base.soap300, 'rgba(232,235,237,1)'),
-      [buttonVars.hover.border]: cssVar(base.soap300, 'rgba(232,235,237,1)'),
-      [buttonVars.hover.label]: cssVar(base.blackPepper500, 'rgba(31,31,31,1)'),
-      [buttonVars.hover.icon]: cssVar(base.blackPepper500, 'rgba(31,31,31,1)'),
+      [buttonVars.hover.background]: base.soap300,
+      [buttonVars.hover.border]: base.soap300,
+      [buttonVars.hover.label]: base.blackPepper500,
+      [buttonVars.hover.icon]: base.blackPepper500,
       // Focus Styles
-      [buttonVars.focus.background]: cssVar(base.frenchVanilla100, 'rgba(255,255,255,1)'),
-      [buttonVars.focus.border]: cssVar(base.frenchVanilla100, 'rgba(255,255,255,1)'),
-      [buttonVars.focus.label]: cssVar(base.blackPepper500, 'rgba(31,31,31,1)'),
-      [buttonVars.focus.icon]: cssVar(base.blackPepper500, 'rgba(31,31,31,1)'),
-      [buttonVars.focus.boxShadowInner]: cssVar(base.blackPepper500, 'rgba(31,31,31,1)'),
-      [buttonVars.focus.boxShadowOuter]: cssVar(base.frenchVanilla100, 'rgba(255,255,255,1)'),
+      [buttonVars.focus.background]: base.frenchVanilla100,
+      [buttonVars.focus.border]: base.frenchVanilla100,
+      [buttonVars.focus.label]: base.blackPepper400,
+      [buttonVars.focus.icon]: base.blackPepper400,
+      [buttonVars.focus.boxShadowInner]: base.blackPepper400,
+      [buttonVars.focus.boxShadowOuter]: base.frenchVanilla100,
       // Active Styles
-      [buttonVars.active.background]: cssVar(base.soap400, 'rgba(224,227,230,1)'),
-      [buttonVars.active.border]: cssVar(base.soap400, 'rgba(224,227,230,1)'),
-      [buttonVars.active.label]: cssVar(base.blackPepper500, 'rgba(31,31,31,1)'),
-      [buttonVars.active.icon]: cssVar(base.blackPepper500, 'rgba(31,31,31,1)'),
+      [buttonVars.active.background]: base.soap400,
+      [buttonVars.active.border]: base.soap400,
+      [buttonVars.active.label]: base.blackPepper500,
+      [buttonVars.active.icon]: base.blackPepper500,
       // Disabled Styles
       [buttonVars.disabled.background]: 'transparent',
-      [buttonVars.disabled.border]: cssVar(base.frenchVanilla100, 'rgba(255,255,255,1)'),
-      [buttonVars.disabled.label]: cssVar(base.frenchVanilla100, 'rgba(255,255,255,1)'),
-      [buttonVars.disabled.icon]: cssVar(base.frenchVanilla100, 'rgba(255,255,255,1)'),
+      [buttonVars.disabled.border]: base.frenchVanilla100,
+      [buttonVars.disabled.label]: base.frenchVanilla100,
+      [buttonVars.disabled.icon]: base.frenchVanilla100,
     }),
   },
 });

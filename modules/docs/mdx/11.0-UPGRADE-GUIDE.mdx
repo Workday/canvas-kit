@@ -9,6 +9,14 @@ This guide contains an overview of the changes in Canvas Kit v11. Please
 any questions.
 
 - [Codemod](#codemod)
+- [Component Updates](#component-updates)
+  - [Card](#card)
+  - [Table (Preview)](#table)
+  - [Checkbox](#checkbox)
+  - [Radio](#radio)
+  - [Buttons](#buttons)
+  - [Text Input](#textinput)
+  - [Text Area](#textarea)
 
 ## Codemod
 
@@ -70,3 +78,56 @@ finished.
 > other file types (`.json`, `.mdx`, `.md`, etc.). You may need to run your linter after executing
 > the codemod, as its resulting formatting (spacing, quotes, etc.) may not match your project
 > conventions.
+
+## Component Updates
+
+We've made some small styling updates to: `Card`, `Table`, `Checkbox`, `Radio`, `SecondaryButton`, `TertiaryButton`, `DeleteButton`, `TextInput` and `TextArea`.
+
+**PR:** [#](https://github.com/Workday/canvas-kit/pull/2285)
+
+See below:
+
+### Card
+#### CardHeading
+- Type levels has been updated from `body.large` to `heading.small`. You can see the type levels [here](https://workday.github.io/canvas-kit/?path=/docs/tokens--type).
+#### CardBody
+- Type levels has been updated from `subtext.large` to `body.small`.
+
+### Table
+#### TableHeader
+- Border color has been updated from `soap400` to `soap500`.
+
+### Checkbox
+- `disabled`: Border color has been updated from `soap600` to `licorice100`.
+
+#### Inverse
+- `disabled & checked or indeterminate`: Background color has been updated from `soap300` to `frenchVanilla100`.
+
+### Radio
+- `disabled`: Border color has been updated from `soap600` to `licorice100`.
+
+### Buttons
+
+#### SecondaryButton
+- `inverse & focus`: Label color has been updated from `blackPepper500` to `blackPepper400`.
+- `inverse & focus`: Inner box shadow color has been updated from `blackPepper500` to `blackPepper400`.
+- `inverse & focus`: Icon color has been updated from `blackPepper500` to `blackPepper400`.
+
+#### TertiaryButton
+- `hover`: Background color has been updated from `soap200` to `soap300`.
+- `active`: Background color has been updated from `soap300` to `soap400`.
+- `active`: Label color has been updated from `primary.dark` to `primary.darkest`.
+- `disabled`: Border color has been updated from `frenchVanilla100` to `transparent`.
+- `icon only focus`: Icon color has been updaed from `blackPepper500` to `blackPepper400`.
+- `icon only hover`: Icon color has been updaed from `blackPepper500` to `blackPepper400`.
+
+#### DeleteButton
+- `disabled`: Background color has been updated from `error.light` to `error.base` & `opacity: 0.4`
+
+### TextInput
+#### TextInputField
+- `disabled`: Border color has been updated from `soap600` to `licorice100`.
+
+### TextArea
+#### TextAreaField
+- `disabled`: Border color has been updated from `soap600` to `licorice100`.

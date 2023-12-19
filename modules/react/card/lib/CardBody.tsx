@@ -7,7 +7,7 @@ export const CardBody = createComponent('div')({
   displayName: 'Card.Body',
   Component: ({children, ...elemProps}: BoxProps, ref, Element) => {
     return (
-      <Box ref={ref} as={Element} {...type.levels.subtext.large} {...elemProps}>
+      <Box ref={ref} as={Element} {...type.levels.body.small} {...elemProps}>
         {children}
       </Box>
     );
