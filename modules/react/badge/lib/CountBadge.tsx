@@ -2,7 +2,7 @@ import * as React from 'react';
 // eslint-disable-next-line @emotion/no-vanilla
 import {keyframes} from '@emotion/css';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {handleCsProp, CSProps, createStyles, createModifiers} from '@workday/canvas-kit-styling';
+import {handleCsProp, CSProps, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 const grow = keyframes`
@@ -37,43 +37,41 @@ export interface CountBadgeProps extends CSProps {
   variant?: 'default' | 'inverse';
 }
 
-function px2rem(px: number) {
-  return `${px / 16}rem`;
-}
-
-const baseStyles = createStyles({
-  alignItems: 'center',
-  animation: `${grow} 0.2s ease`,
-  borderRadius: system.shape.round,
-  boxSizing: 'border-box',
-  display: 'inline-flex',
-  fontFamily: system.fontFamily.default,
-  fontSize: system.fontSize.subtext.medium,
-  fontWeight: 700, // should use system.fontWeight.bold
-  height: px2rem(20),
-  justifyContent: 'center',
-  lineHeight: px2rem(20),
-  minWidth: px2rem(20),
-  padding: `0 ${px2rem(6.5)}`,
-});
-
-const modifiersFn = createModifiers({
-  variant: {
-    default: createStyles({
-      background: base.cinnamon500,
-      color: base.frenchVanilla100,
-      textShadow: `0 0 ${px2rem(1)} rgba(0,0,0, 0.35)`,
-    }),
-    inverse: createStyles({
-      background: base.frenchVanilla100,
-      boxShadow: `0 ${px2rem(1)} ${px2rem(2)} rgba(0,0,0, 0.25)`,
-      color: base.blueberry400,
-    }),
+const countBadgeStencil = createStencil({
+  base: {
+    alignItems: 'center',
+    animation: `${grow} 0.2s ease`,
+    borderRadius: system.shape.round,
+    boxSizing: 'border-box',
+    display: 'inline-flex',
+    fontFamily: system.fontFamily.default,
+    fontSize: system.fontSize.subtext.medium,
+    //@ts-ignore
+    fontWeight: system.fontWeight.bold,
+    height: px2rem(20),
+    justifyContent: 'center',
+    lineHeight: px2rem(20),
+    minWidth: px2rem(20),
+    padding: `0 ${px2rem(6.5)}`,
+  },
+  modifiers: {
+    variant: {
+      default: {
+        background: base.cinnamon500,
+        color: base.frenchVanilla100,
+        textShadow: `0 0 ${px2rem(1)} rgba(0,0,0, 0.35)`,
+      },
+      inverse: {
+        background: base.frenchVanilla100,
+        boxShadow: `0 ${px2rem(1)} ${px2rem(2)} rgba(0,0,0, 0.25)`,
+        color: base.blueberry400,
+      },
+    },
   },
 });
 
 /**
- *
+ * `CountBadge` provides a quantity-based summary with dynamic values.
  */
 export const CountBadge = createComponent('span')({
   displayName: 'NewCountBadge',
@@ -83,9 +81,9 @@ export const CountBadge = createComponent('span')({
     Element
   ) => {
     const formattedCount = count < limit ? `${count}` : `${limit - 1}+`;
-    const modifiers = modifiersFn({variant});
+
     return (
-      <Element ref={ref} {...handleCsProp(elemProps, [baseStyles, modifiers])}>
+      <Element ref={ref} {...handleCsProp(elemProps, [countBadgeStencil({variant})])}>
         {formattedCount}
       </Element>
     );
