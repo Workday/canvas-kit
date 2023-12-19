@@ -775,6 +775,21 @@
         "__isArgsStory": false
       }
     },
+    "features-styling-styling-functions--page": {
+      "id": "features-styling-styling-functions--page",
+      "name": "Page",
+      "title": "Features/Styling/Styling Functions",
+      "importPath": "./modules/styling/stories/StylingFunctions.stories.mdx",
+      "kind": "Features/Styling/Styling Functions",
+      "story": "Page",
+      "parameters": {
+        "fileName": "./modules/styling/stories/StylingFunctions.stories.mdx",
+        "docsOnly": true,
+        "framework": "react",
+        "__id": "features-styling-styling-functions--page",
+        "__isArgsStory": false
+      }
+    },
     "features-theming--direction": {
       "id": "features-theming--direction",
       "name": "Direction",
