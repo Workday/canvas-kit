@@ -1,13 +1,11 @@
 import {expectTransformFactory} from './expectTransformFactory';
 import transformer from '../updateLabelTextProps';
-const context = describe;
 
 const expectTransform = expectTransformFactory(transformer);
 
 describe('Canvas Kit Transfor Label Codemod', () => {
-  context('should replace LabelText with typeLevel prop by type level component', () => {
-    it('should ignore non-canvas-kit imports', () => {
-      const input = `
+  it('should ignore non-canvas-kit imports', () => {
+    const input = `
         import {LabelText} from '@workday/any-other-package';
 
         const Label = () => {
@@ -17,7 +15,7 @@ describe('Canvas Kit Transfor Label Codemod', () => {
         };
       `;
 
-      const expected = `
+    const expected = `
         import {LabelText} from '@workday/any-other-package';
 
         const Label = () => {
@@ -27,11 +25,11 @@ describe('Canvas Kit Transfor Label Codemod', () => {
         };
       `;
 
-      expectTransform(input, expected); //?
-    });
+    expectTransform(input, expected);
+  });
 
-    it('should transform LabelText from main package', () => {
-      const input = `
+  it('should transform LabelText from main package', () => {
+    const input = `
         import {LabelText} from '@workday/canvas-kit-react';
 
         const Label = () => {
@@ -39,7 +37,7 @@ describe('Canvas Kit Transfor Label Codemod', () => {
         };
       `;
 
-      const expected = `
+    const expected = `
         import {BodyText} from '@workday/canvas-kit-react';
 
         const Label = () => {
@@ -47,11 +45,11 @@ describe('Canvas Kit Transfor Label Codemod', () => {
         };
       `;
 
-      expectTransform(input, expected);
-    });
+    expectTransform(input, expected);
+  });
 
-    it('should transform LabelText from text package', () => {
-      const input = `
+  it('should transform LabelText from text package', () => {
+    const input = `
         import {LabelText} from '@workday/canvas-kit-react/text';
 
         const Label = () => {
@@ -59,7 +57,7 @@ describe('Canvas Kit Transfor Label Codemod', () => {
         };
       `;
 
-      const expected = `
+    const expected = `
         import {BodyText} from '@workday/canvas-kit-react/text';
 
         const Label = () => {
@@ -67,11 +65,31 @@ describe('Canvas Kit Transfor Label Codemod', () => {
         };
       `;
 
-      expectTransform(input, expected);
-    });
+    expectTransform(input, expected);
+  });
 
-    it('should not remove LabelText from import if there are other LabelText components', () => {
-      const input = `
+  it('should transform renamed LabelText from text package', () => {
+    const input = `
+        import {LabelText as CanvasLabel} from '@workday/canvas-kit-react/text';
+
+        const Label = () => {
+          return <CanvasLabel typeLevel="body.medium">My Label</CanvasLabel>;
+        };
+      `;
+
+    const expected = `
+        import {BodyText} from '@workday/canvas-kit-react/text';
+
+        const Label = () => {
+          return <BodyText size="medium">My Label</BodyText>;
+        };
+      `;
+
+    expectTransform(input, expected);
+  });
+
+  it('should not remove LabelText from import if there are other LabelText components', () => {
+    const input = `
         import { LabelText } from '@workday/canvas-kit-react/text';
 
         <>
@@ -80,7 +98,7 @@ describe('Canvas Kit Transfor Label Codemod', () => {
         </>
       `;
 
-      const expected = `
+    const expected = `
         import { LabelText, BodyText } from '@workday/canvas-kit-react/text';
 
         <>
@@ -89,8 +107,7 @@ describe('Canvas Kit Transfor Label Codemod', () => {
         </>
       `;
 
-      expectTransform(input, expected);
-    });
+    expectTransform(input, expected);
   });
 
   it('should not change other props', () => {
@@ -149,7 +166,7 @@ describe('Canvas Kit Transfor Label Codemod', () => {
     expectTransform(input, expected);
   });
 
-  it.only('should transform LabelText by multiple tokens', () => {
+  it('should transform LabelText by multiple tokens', () => {
     const input = `
       import { LabelText } from '@workday/canvas-kit-react/text';
 
