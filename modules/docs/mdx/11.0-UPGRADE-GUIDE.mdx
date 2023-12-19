@@ -144,10 +144,8 @@ import {TextInput} from '@workday/canvas-kit-react/text-input';
 
 <FormField orientation="vertical" hasError={true}>
   <FormField.Label>Password</FormField.Label>
-  <FormField.Container>
-    <FormField.Input as={TextInput} type="password" value={value} onChange={handleChange} />
-    <FormField.Hint>Must Contain a number and a capital letter</FormField.Hint>
-  </FormField.Container>
+  <FormField.Input as={TextInput} type="password" value={value} onChange={handleChange} />
+  <FormField.Hint>Must Contain a number and a capital letter</FormField.Hint>
 </FormField>;
 
 // v11
@@ -156,7 +154,7 @@ import {TextInput} from '@workday/canvas-kit-react/text-input';
 
 //...
 
-<FormField hasError="error">
+<FormField error="error">
   <FormField.Label>Password</FormField.Label>
   <FormField.Container>
     <FormField.Input as={TextInput} type="password" value={value} onChange={handleChange} />
@@ -164,3 +162,5 @@ import {TextInput} from '@workday/canvas-kit-react/text-input';
   </FormField.Container>
 </FormField>;
 ```
+
+🤖 The codemod will handle the change of `hasError` to `error` for you automatically.
