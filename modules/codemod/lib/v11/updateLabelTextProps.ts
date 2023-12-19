@@ -1,4 +1,4 @@
-import {API, FileInfo, JSXElement, JSXIdentifier, JSXAttribute} from 'jscodeshift';
+import {API, FileInfo, JSXElement, JSXIdentifier, JSXAttribute, Options} from 'jscodeshift';
 import {getImportRenameMap} from '../v7/utils/getImportRenameMap';
 import {hasImportSpecifiers} from '../v6/utils';
 
@@ -11,7 +11,7 @@ const componentNames = {
   title: 'Title',
 };
 
-export default function transformer(file: FileInfo, api: API) {
+export default function transformer(file: FileInfo, api: API, _: Options) {
   const newImports: string[] = [];
   const j = api.jscodeshift;
 
