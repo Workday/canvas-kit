@@ -37,7 +37,7 @@ const createTypeStyles = (level: keyof typeof system.type, size: TypeSize, isHea
   });
 };
 
-const modifiers = createModifiers({
+const textModifiers = createModifiers({
   typeLevel: {
     'title.large': createTypeStyles('title', 'large', true),
     'title.medium': createTypeStyles('title', 'medium', true),
@@ -97,7 +97,7 @@ export const Text = createComponent('span')({
   displayName: 'Text',
   Component: ({children, typeLevel, variant, ...elemProps}: TextProps, ref, Element) => {
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, modifiers({typeLevel, variant}))}>
+      <Element ref={ref} {...mergeStyles(elemProps, textModifiers({typeLevel, variant}))}>
         {children}
       </Element>
     );

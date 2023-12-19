@@ -12,13 +12,13 @@ export interface TypeLabelProps extends CSProps, CommonStyleProps {
    * Type variant token names: `error`, `hint` or `inverse`.
    *
    * ```tsx
-   * <Text variant="error" typeLevel="subtext.large">Error text</Text>
+   * <LabelText variant="error">Error text</LabelText>
    * ```
    */
   variant?: 'error' | 'hint' | 'inverse';
 }
 
-const stencil = createStencil({
+const labelTextStencil = createStencil({
   // @ts-ignore
   base: {
     ...system.type.subtext.large,
@@ -70,10 +70,11 @@ export const LabelText = createComponent('label')({
     return (
       <Element
         ref={ref}
-        {...mergeStyles(elemProps, [
-          stencil({variant, state: disabled ? 'disabled' : undefined}),
-          {cursor},
-        ])}
+        {...mergeStyles(
+          elemProps,
+          labelTextStencil({variant, state: disabled ? 'disabled' : undefined})
+        )}
+        style={{cursor}}
       />
     );
   },
