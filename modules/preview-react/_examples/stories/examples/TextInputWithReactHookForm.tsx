@@ -92,7 +92,6 @@ export const TextInputWithReactHookForm = () => {
     passwordCallbackRef(ref);
     passwordRef.current = ref;
   };
-  console.log(!!errors.role);
   return (
     <form onSubmit={onSubmit} action=".">
       <Flex gap="xs" flexDirection="column" alignItems="flex-start">
