@@ -13,7 +13,7 @@ export const Disabled = () => {
 
   return (
     <Flex>
-      <FormField orientation="vertical">
+      <FormField>
         <FormField.Label>Email</FormField.Label>
         <FormField.Input as={TextInput} value={value} disabled onChange={handleChange} />
       </FormField>

@@ -13,7 +13,7 @@ export const Error = () => {
 
   return (
     <Flex>
-      <FormField orientation="vertical" error="error">
+      <FormField error="error">
         <FormField.Label>Password</FormField.Label>
         <FormField.Container>
           <FormField.Input as={TextInput} type="password" value={value} onChange={handleChange} />

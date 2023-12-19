@@ -33,7 +33,7 @@ yarn add @workday/canvas-kit-preview-react
 ### Basic
 
 Form Field should be used in tandem with most Canvas Kit input components to ensure they meet
-accessibility standards.
+accessibility standards. The orientation of the label by default is `vertical`.
 
 <ExampleCodeBlock code={Basic} />
 
@@ -42,7 +42,7 @@ accessibility standards.
 Set the `error` prop of the Form Field or define it in the model to indicate it has an error.
 `error` accepts the following values:
 
-`"error" | "alert"`
+`"error" | "alert" | undefined`
 
 ### Alert
 
@@ -72,7 +72,7 @@ to ensure proper alignment.
 ### Label Position Horizontal
 
 Set the `orientation` prop of the Form Field to designate the position of the label relative to the
-input component.
+input component. By default, the orientation will be set to `vertical`.
 
 <ExampleCodeBlock code={LabelPositionHorizontal} />
 

@@ -10,7 +10,7 @@ export const Required = () => {
   };
 
   return (
-    <FormField isRequired={true} orientation="vertical">
+    <FormField isRequired={true}>
       <FormField.Label>Email</FormField.Label>
       <FormField.Input
         as={TextInput}

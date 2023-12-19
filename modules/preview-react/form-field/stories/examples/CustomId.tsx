@@ -12,7 +12,7 @@ export const CustomId = () => {
 
   return (
     <Flex>
-      <FormField orientation="vertical" id="first-name">
+      <FormField id="first-name">
         <FormField.Label>First Name</FormField.Label>
         <FormField.Input as={TextInput} value={value} onChange={handleChange} />
       </FormField>

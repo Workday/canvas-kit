@@ -19,7 +19,7 @@ export const RefForwarding = () => {
 
   return (
     <Flex gap="xxxs" alignItems="flex-start" flexDirection="column">
-      <FormField orientation="vertical">
+      <FormField>
         <FormField.Label>Email</FormField.Label>
         <FormField.Input as={TextInput} onChange={handleChange} value={value} ref={ref} />
       </FormField>

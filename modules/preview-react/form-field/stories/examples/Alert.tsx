@@ -12,7 +12,7 @@ export const Alert = () => {
 
   return (
     <Flex>
-      <FormField orientation="vertical" error="alert">
+      <FormField error="alert">
         <FormField.Label>First Name</FormField.Label>
         <FormField.Container>
           <FormField.Input as={TextInput} value={value} onChange={handleChange} />
