@@ -7692,6 +7692,20 @@
         "__isArgsStory": false
       }
     },
+    "testing-popups-modal--custom-theme-modal": {
+      "id": "testing-popups-modal--custom-theme-modal",
+      "name": "Custom Theme Modal",
+      "title": "Testing/Popups/Modal",
+      "importPath": "./modules/react/modal/stories/stories_testing.tsx",
+      "kind": "Testing/Popups/Modal",
+      "story": "Custom Theme Modal",
+      "parameters": {
+        "fileName": "./modules/react/modal/stories/stories_testing.tsx",
+        "framework": "react",
+        "__id": "testing-popups-modal--custom-theme-modal",
+        "__isArgsStory": false
+      }
+    },
     "testing-popups-modal--iframe-test": {
       "id": "testing-popups-modal--iframe-test",
       "name": "Iframe Test",
