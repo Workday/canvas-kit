@@ -29,13 +29,22 @@ export const isFocusable = (element: Element): boolean => {
 
 /**
  * Get the first focusable element in a container.
+ *
+ * Returns an array of elements if the first focusable element is a radio group
  */
-export const getFirstFocusableElement = (container: HTMLElement): HTMLElement | null => {
+export const getFirstFocusableElement = (
+  container: HTMLElement
+): Element[] | HTMLElement | null => {
   const elements = container.querySelectorAll('*');
 
   for (let i = 0; i < elements.length; i++) {
     const element = elements.item(i);
     if (element && isFocusable(element) && element.getAttribute('tabindex') !== '-1') {
+      if (isRadioInput(element)) {
+        const radioGroup = getRadioGroup(container, element);
+
+        return radioGroup.length > 1 ? Array.from(radioGroup) : element;
+      }
       return element as HTMLElement;
     }
   }
