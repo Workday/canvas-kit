@@ -47,4 +47,22 @@ describe('renameHasError', () => {
     `;
     expectTransform(input, expected);
   });
+  it.only('should rename rename hasError to error and handle ternary with variable', () => {
+    const input = stripIndent`
+        import {TextInput} from '@workday/canvas-kit-react/text-input'
+        const myBool = true;
+        <>
+            <TextInput hasError={myBool} />
+        </>
+    `;
+
+    const expected = stripIndent`
+        import {TextInput} from '@workday/canvas-kit-react/text-input'
+        const myBool = true;
+        <>
+            <TextInput error={myBool ? "error" : undefined} />
+        </>
+    `;
+    expectTransform(input, expected);
+  });
 });

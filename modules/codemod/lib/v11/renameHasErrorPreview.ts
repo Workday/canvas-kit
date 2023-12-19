@@ -1,8 +1,5 @@
 import {API, FileInfo, Options} from 'jscodeshift';
-import {getImportRenameMap} from './utils/getImportRenameMap';
 import {hasImportSpecifiers} from '../v6/utils';
-
-const mainPackage = '@workday/canvas-kit-preview-react';
 const textInputPackage = '@workday/canvas-kit-preview-react/text-input';
 const textAreaPackage = '@workday/canvas-kit-preview-react/text-area';
 const formFieldPackage = '@workday/canvas-kit-preview-react/form-field';
@@ -21,7 +18,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
 
   // getImportRenameMap utility will tell us if the file containsCanvasImports
   // and give us an importMap to track what identifiers we need to update
-  const {importMap} = getImportRenameMap(j, root, '@workday/canvas-kit-preview-react');
+  // const {importMap} = getImportRenameMap(j, root, '@workday/canvas-kit-preview-react');
 
   root.find(j.JSXOpeningElement, {type: 'JSXOpeningElement'}).forEach(nodePath => {
     if (

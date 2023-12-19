@@ -131,15 +131,13 @@ export function hasImportSpecifiers(
         ? value === packageName
         : packageName.includes(value as string)
     ) {
+      console.log('in here'); //?;
       return true;
     }
 
     // Extract the main package(s) from the import, and test specifiers against that package
     const mainPackage = (typeof packageName === 'string' ? [packageName] : packageName).map(s =>
-      s
-        .split('/')
-        .slice(0, -1)
-        .join('/')
+      s.split('/').slice(0, -1).join('/')
     );
     if (mainPackage.includes(value as string)) {
       return !!(nodePath.specifiers || []).find(specifier => {
@@ -168,10 +166,7 @@ export function renameImports(
     return root;
   }
 
-  const mainPackage = packageName
-    .split('/')
-    .slice(0, -1)
-    .join('/');
+  const mainPackage = packageName.split('/').slice(0, -1).join('/');
 
   // Transform import statements
   // e.g. import { CookieBanner, CookieBannerProps } from '@workday/canvas-kit-react';
