@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.1.4](https://github.com/Workday/canvas-kit/releases/tag/v10.1.4) (2023-12-19)
+
+### Components
+
+- fix: Forward branding CSS variables through portals ([#2482](https://github.com/Workday/canvas-kit/pull/2482)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v10.1.3](https://github.com/Workday/canvas-kit/releases/tag/v10.1.3) (2023-12-19)
 
 ### Components
