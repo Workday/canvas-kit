@@ -34,8 +34,8 @@ export const RadioGroup = createContainer(Flex)({
   modelHook: useRadioModel,
   subComponents: {
     /**
-     * `RadioGroup.Radio` renders an `<input type="radio" />` and its associated `<label>` (using `children` as the label's contents).
-     * This component should satisfy most use cases; use `RadioGroup.Label` if you require more flexibility.
+     * `RadioGroup.RadioButton` renders an `<input type="radio" />` and its associated `<label>` (using `children` as the label's contents).
+     * This component should satisfy most use cases; use `RadioGroup.Label` and its sub components if you require more flexibility.
      *
      * ```tsx
      * <RadioGroup name="pizza-crust" value="thin">

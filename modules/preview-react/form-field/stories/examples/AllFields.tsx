@@ -45,18 +45,20 @@ export const AllFields = () => {
           </Select.Popper>
         </Select>
       </FormField>
-      <FormField as="fieldset" isRequired={true} error={'error'}>
+      <FormField as="fieldset" isRequired={true} error={'error'} orientation="horizontal">
         <FormField.Label as="legend">Radio Group Legend</FormField.Label>
-        <FormField.Input as={RadioGroup}>
-          <RadioGroup.RadioButton value="deep-dish">Deep dish</RadioGroup.RadioButton>
-          <RadioGroup.RadioButton value="thin">Thin</RadioGroup.RadioButton>
-          <RadioGroup.RadioButton value="gluten-free">Gluten free</RadioGroup.RadioButton>
-          <RadioGroup.RadioButton value="cauliflower">Cauliflower</RadioGroup.RadioButton>
-          <RadioGroup.RadioButton value="butter">
-            Butter - the best thing to put on bread
-          </RadioGroup.RadioButton>
-        </FormField.Input>
-        <FormField.Hint>Error Message</FormField.Hint>
+        <FormField.Container>
+          <FormField.Input as={RadioGroup}>
+            <RadioGroup.RadioButton value="deep-dish">Deep dish</RadioGroup.RadioButton>
+            <RadioGroup.RadioButton value="thin">Thin</RadioGroup.RadioButton>
+            <RadioGroup.RadioButton value="gluten-free">Gluten free</RadioGroup.RadioButton>
+            <RadioGroup.RadioButton value="cauliflower">Cauliflower</RadioGroup.RadioButton>
+            <RadioGroup.RadioButton value="butter">
+              Butter - the best thing to put on bread
+            </RadioGroup.RadioButton>
+          </FormField.Input>
+          <FormField.Hint>Error Message</FormField.Hint>
+        </FormField.Container>
       </FormField>
       <FormField as="fieldset">
         <FormField.Label as="legend">Checkbox Legend</FormField.Label>
