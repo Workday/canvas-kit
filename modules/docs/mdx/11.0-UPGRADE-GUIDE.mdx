@@ -9,10 +9,15 @@ This guide contains an overview of the changes in Canvas Kit v11. Please
 any questions.
 
 - [Codemod](#codemod)
+- [Deprecations](#deprecations)
+  - [Form Field Main](#form-field-main)
+  - [Text Input Preview](#text-input-preview)
+  - [Text Area Preview](#text-input-preview)
 - [Component Updates](#component-updates)
   - [Count Badge](#count-badge)
   - [Text](#text)
-  - [LabelText](#labeltext)
+  - [Label Text](#label-text)
+  - [Form Field Preview](#form-field-preview)
 
 ## Codemod
 
@@ -75,6 +80,45 @@ finished.
 > the codemod, as its resulting formatting (spacing, quotes, etc.) may not match your project
 > conventions.
 
+## Deprecations
+
+We add the [@deprecated](https://jsdoc.app/tags-deprecated.html) JSDoc tag to code we plan to remove
+in a future major release. This signals consumers to migrate to a more stable alternative before the
+deprecated code is removed.
+
+### Form Field Main
+
+**PR:** [#2472](https://github.com/Workday/canvas-kit/pull/2472)
+
+We've deprecated `FormField` from [Main](#main) in favor of our compound component `FormField` in
+[Preview](#preview). Please use
+[`FormField`](https://workday.github.io/canvas-kit/?path=//docs/preview-inputs-form-field--basic)
+instead.
+
+---
+
+### Text Input Preview
+
+**PR:** [#2472](https://github.com/Workday/canvas-kit/pull/2472)
+
+We've deprecated `TextInput` from [Preview](#preview) in favor of our compound component `FormField`
+in [Preview](#preview). Please use
+[`FormField`](https://workday.github.io/canvas-kit/?path=//docs/preview-inputs-form-field--basic)
+instead.
+
+---
+
+### Text Area Preview
+
+**PR:** [#2472](https://github.com/Workday/canvas-kit/pull/2472)
+
+We've deprecated `TextArea` from [Preview](#preview) in favor of our compound component `FormField`
+in [Preview](#preview). Please use
+[`FormField`](https://workday.github.io/canvas-kit/?path=//docs/preview-inputs-form-field--basic)
+instead.
+
+---
+
 ## Component Updates
 
 ### Count Badge
@@ -92,7 +136,7 @@ it did in previous versions and support Emotion `styled` and style props. Type l
 `Title`, `Heading`, `BodyText` and `Subtext`, have not been changed, but because they extend `Text`
 components, all changes made for `Text` will be applied for them as well.
 
-### LabelText
+### Label Text
 
 `LabelText` has been refactored to use our new styling utilities and utilize new tokens and no
 longer extends `Text` component. The component API is similar to previous one and it still supports
@@ -101,3 +145,50 @@ we suggest to use type level components, `Title`, `Heading`, `BodyText` and `Sub
 
 🤖 The codemod will handle a `typeLevel` removal and replacement by `Text` component for you
 automatically.
+
+### Form Field Preview
+
+**PR:** [#2472](https://github.com/Workday/canvas-kit/pull/2472)
+
+`FormField` in [Preview](#preview) is a compound component and we intend to promote it in a future
+version to replace the `FormField` in [Main](#main). Because of this, we've refactored how errors
+are applied to `FormField` in [Preview](#preview) in order to match the API from the `FormField` in
+[Main](#main).
+
+- `hasError` prop on the `FormField` has been renamed to `error`.
+- `error` accepts `"error" | "alert" | ""` instead of a boolean value.
+- `orientation` prop defaults to `vertical` and is no longer required.
+- `FormField.Input` can be used by any `input`.
+- `FormField` does **not** support the `useFieldSet` prop that the `FormField` in [Main](#main)
+  does. In order to achieve the same behavior, set the `as` prop on the `FormField` element to
+  `fieldset` and the `as` prop of `FormField.Label` to `legend`.
+
+```tsx
+// v10 FormField in Preview
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+
+//...
+
+<FormField orientation="vertical" hasError={true}>
+  <FormField.Label>Password</FormField.Label>
+  <FormField.Input as={TextInput} type="password" value={value} onChange={handleChange} />
+  <FormField.Hint>Must Contain a number and a capital letter</FormField.Hint>
+</FormField>;
+
+// v11
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+
+//...
+
+<FormField error="error">
+  <FormField.Label>Password</FormField.Label>
+  <FormField.Container>
+    <FormField.Input as={TextInput} type="password" value={value} onChange={handleChange} />
+    <FormField.Hint>Must Contain a number and a capital letter</FormField.Hint>
+  </FormField.Container>
+</FormField>;
+```
+
+🤖 The codemod will handle the change of `hasError` to `error` for you automatically.
