@@ -15,12 +15,12 @@ export const Error = () => {
   return (
     <FormField error="error">
       <FormField.Label as="legend">Choose Your Pizza Crust</FormField.Label>
-      <RadioGroup name="crust-error" onChange={handleChange} value={value} aria-describedby="error">
+      <FormField.Input as={RadioGroup} name="crust-error" onChange={handleChange} value={value}>
         <RadioGroup.RadioButton value="deep-dish">Deep dish</RadioGroup.RadioButton>
         <RadioGroup.RadioButton value="thin">Thin</RadioGroup.RadioButton>
         <RadioGroup.RadioButton value="gluten-free">Gluten free</RadioGroup.RadioButton>
         <RadioGroup.RadioButton value="cauliflower">Cauliflower</RadioGroup.RadioButton>
-      </RadioGroup>
+      </FormField.Input>
       <FormField.Hint>Deep dish is currently sold out.</FormField.Hint>
     </FormField>
   );
