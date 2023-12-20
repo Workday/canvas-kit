@@ -38,10 +38,10 @@ describe('Canvas Kit Transfor Label Codemod', () => {
       `;
 
     const expected = `
-        import {BodyText} from '@workday/canvas-kit-react';
+        import {Text} from '@workday/canvas-kit-react';
 
         const Label = () => {
-          return <BodyText size="medium">My Label</BodyText>;
+          return <Text as="label" typeLevel="body.medium">My Label</Text>;
         };
       `;
 
@@ -58,10 +58,10 @@ describe('Canvas Kit Transfor Label Codemod', () => {
       `;
 
     const expected = `
-        import {BodyText} from '@workday/canvas-kit-react/text';
+        import {Text} from '@workday/canvas-kit-react/text';
 
         const Label = () => {
-          return <BodyText size="medium">My Label</BodyText>;
+          return <Text as="label" typeLevel="body.medium">My Label</Text>;
         };
       `;
 
@@ -78,11 +78,63 @@ describe('Canvas Kit Transfor Label Codemod', () => {
       `;
 
     const expected = `
-        import {BodyText} from '@workday/canvas-kit-react/text';
+        import {Text as CanvasLabel} from '@workday/canvas-kit-react/text';
 
         const Label = () => {
-          return <BodyText size="medium">My Label</BodyText>;
+          return <CanvasLabel as="label" typeLevel="body.medium">My Label</CanvasLabel>;
         };
+      `;
+
+    expectTransform(input, expected);
+  });
+
+  it('should transform styled LabelText from text package', () => {
+    const input = `
+        import {LabelText} from '@workday/canvas-kit-react/text';
+
+        const StyledLabel = styled(LabelText)({color: "#red"});
+
+        const Label = () => {
+          return <StyledLabel typeLevel="body.medium">My Label</StyledLabel>;
+        };
+      `;
+
+    const expected = `
+        import {Text} from '@workday/canvas-kit-react/text';
+
+        const StyledLabel = styled(Text)({color: "#red"});
+
+        const Label = () => {
+          return <StyledLabel as="label" typeLevel="body.medium">My Label</StyledLabel>;
+        };
+      `;
+
+    expectTransform(input, expected);
+  });
+
+  it('should transform multiple styled LabelText from text package', () => {
+    const input = `
+        import {LabelText} from '@workday/canvas-kit-react/text';
+
+        const StyledLabel = styled(LabelText)({color: "#red"});
+
+        <>
+          <StyledLabel>My Label</StyledLabel>;
+          <StyledLabel typeLevel="body.medium">My Label</StyledLabel>;
+        </>
+      `;
+
+    const expected = `
+        import { LabelText, Text } from '@workday/canvas-kit-react/text';
+
+        const StyledLabel = styled(LabelText)({color: "#red"});
+
+        const StyledModifiedText = styled(Text)({color: "#red"});
+
+        <>
+          <StyledLabel>My Label</StyledLabel>;
+          <StyledModifiedText as="label" typeLevel="body.medium">My Label</StyledModifiedText>;
+        </>
       `;
 
     expectTransform(input, expected);
@@ -99,11 +151,11 @@ describe('Canvas Kit Transfor Label Codemod', () => {
       `;
 
     const expected = `
-        import { LabelText, BodyText } from '@workday/canvas-kit-react/text';
+        import { LabelText, Text } from '@workday/canvas-kit-react/text';
 
         <>
           <LabelText>Original Label</LabelText>
-          <BodyText size="medium">My Label</BodyText>
+          <Text as="label" typeLevel="body.medium">My Label</Text>
         </>
       `;
 
@@ -138,27 +190,27 @@ describe('Canvas Kit Transfor Label Codemod', () => {
     `;
 
     const expected = `
-      import {BodyText} from '@workday/canvas-kit-react/text';
+      import {Text} from '@workday/canvas-kit-react/text';
 
       const Label = () => {
         return (
-          <BodyText as="p" aria-label="My accessible text" className="my-label" size="medium">
+          <Text typeLevel="body.medium" as="p" aria-label="My accessible text" className="my-label">
             My Label
-          </BodyText>
+          </Text>
         );
       };
 
       const OtherLabel = () => {
         return (
-          <BodyText 
+          <Text 
             as="p" 
             aria-label="My accessible text" 
             className="my-label"
             color={colors.blueberry400}
-            size="medium" 
+            typeLevel="body.medium" 
           >
             My Label
-          </BodyText>
+          </Text>
         );
       };
     `;
@@ -166,29 +218,98 @@ describe('Canvas Kit Transfor Label Codemod', () => {
     expectTransform(input, expected);
   });
 
-  it('should transform LabelText by multiple tokens', () => {
+  it('should apply correct cursor, disabled, variant styles', () => {
     const input = `
-      import { LabelText } from '@workday/canvas-kit-react/text';
+        import { LabelText } from '@workday/canvas-kit-react/text';
 
-      <>
-        <LabelText>Original Label</LabelText>
-        <LabelText typeLevel="subtext.small" variant="hint">My Label</LabelText>
-        <LabelText id="label" typeLevel="body.small">My Label</LabelText>
-        <LabelText as="p" typeLevel="heading.medium">My Label</LabelText>
-        <LabelText typeLevel="title.large">My Label</LabelText>
-      </>
+        <LabelText typeLevel="body.medium" disabled={disabled} cursor="pointer">My Label</LabelText>
+      `;
+
+    const expected = `
+        import { Text } from '@workday/canvas-kit-react/text';
+
+        <Text as="label" typeLevel="body.medium" style={{
+                color: disabled ? "#a1aab3" : undefined,
+                cursor: disabled ? "default" : "pointer"
+        }}>My Label</Text>
+      `;
+
+    expectTransform(input, expected);
+  });
+
+  it('should apply correct cursor, disabled, variant styles', () => {
+    const input = `
+    import { LabelText } from '@workday/canvas-kit-react/text';
+
+    <>
+      <LabelText typeLevel="body.medium" disabled={disabled}>Original Label</LabelText>
+    </>
     `;
 
     const expected = `
-      import { LabelText, Subtext, BodyText, Heading, Title } from '@workday/canvas-kit-react/text';
+    import { Text } from '@workday/canvas-kit-react/text';
 
-      <>
-        <LabelText>Original Label</LabelText>
-        <Subtext variant="hint" size="small">My Label</Subtext>
-        <BodyText id="label" size="small">My Label</BodyText>
-        <Heading as="p" size="medium">My Label</Heading>
-        <Title size="large">My Label</Title>
-      </>
+    <>
+      <Text
+        as="label"
+        typeLevel="body.medium"
+        style={{
+          color: disabled ? "#a1aab3" : undefined
+        }}>Original Label</Text>
+    </>
+    `;
+
+    expectTransform(input, expected);
+  });
+
+  it('should apply correct cursor, disabled, variant styles', () => {
+    const input = `
+    import { LabelText } from '@workday/canvas-kit-react/text';
+
+    <>
+      <LabelText typeLevel="body.medium" variant={variant} disabled={disabled}>Original Label</LabelText>
+    </>
+    `;
+
+    const expected = `
+    import { Text } from '@workday/canvas-kit-react/text';
+
+    <>
+      <Text
+        as="label"
+        typeLevel="body.medium"
+        variant={variant}
+        style={{
+          color: disabled && variant !== "inverse" ? "#a1aab3" : undefined,
+          opacity: disabled && variant === "inverse" ? "0.4" : 1
+        }}>Original Label</Text>
+    </>
+    `;
+
+    expectTransform(input, expected);
+  });
+
+  it('should apply correct cursor, disabled, variant styles', () => {
+    const input = `
+    import { LabelText } from '@workday/canvas-kit-react/text';
+
+    <>
+      <LabelText typeLevel="body.medium" disabled={disabled} variant="inverse">Original Label</LabelText>
+    </>
+    `;
+
+    const expected = `
+    import { Text } from '@workday/canvas-kit-react/text';
+
+    <>
+      <Text
+        as="label"
+        typeLevel="body.medium"
+        variant="inverse"
+        style={{
+          opacity: disabled ? "0.4" : 1
+        }}>Original Label</Text>
+    </>
     `;
 
     expectTransform(input, expected);

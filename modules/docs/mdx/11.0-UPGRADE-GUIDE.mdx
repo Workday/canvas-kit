@@ -96,7 +96,8 @@ components, all changes made for `Text` will be applied for them as well.
 
 `LabelText` has been refactored to use our new styling utilities and utilize new tokens and no
 longer extends `Text` component. The component API is similar to previous one and it still supports
-`variant`, `disabled` and styles props. `typeLevel` prop has been removed from `LabelText` and we
-suggest to use type level components, `Title`, `Heading`, `BodyText` and `Subtext`, instead.
+`variant`, `disabled` and `Box` styles props. `typeLevel` prop has been removed from `LabelText` and
+we suggest to use type level components, `Title`, `Heading`, `BodyText` and `Subtext`, instead.
 
-🤖 The codemod will handle a `typeLevel` removal for you automatically.
+🤖 The codemod will handle a `typeLevel` removal and replacement by `Text` component for you
+automatically.

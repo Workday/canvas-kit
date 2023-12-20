@@ -1,12 +1,10 @@
 import * as React from 'react';
-import {Property} from 'csstype';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {base, system} from '@workday/canvas-tokens-web';
 import {CSProps, createStencil} from '@workday/canvas-kit-styling';
 import {CommonStyleProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 
 export interface TypeLabelProps extends CSProps, CommonStyleProps {
-  cursor?: Property.Cursor;
   disabled?: boolean;
   /**
    * Type variant token names: `error`, `hint` or `inverse`.
@@ -66,7 +64,7 @@ const labelTextStencil = createStencil({
  */
 export const LabelText = createComponent('label')({
   displayName: 'Label',
-  Component: ({cursor, disabled, variant, ...elemProps}: TypeLabelProps, ref, Element) => {
+  Component: ({disabled, variant, ...elemProps}: TypeLabelProps, ref, Element) => {
     return (
       <Element
         ref={ref}
@@ -74,7 +72,6 @@ export const LabelText = createComponent('label')({
           elemProps,
           labelTextStencil({variant, state: disabled ? 'disabled' : undefined})
         )}
-        style={{cursor}}
       />
     );
   },
