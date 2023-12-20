@@ -1,11 +1,8 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import {css, jsx} from '@emotion/react';
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 
-export const Basic = () => {
+export const LabelPositionHorizontal = () => {
   const [value, setValue] = React.useState('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -13,9 +10,9 @@ export const Basic = () => {
   };
 
   return (
-    <FormField>
+    <FormField orientation="horizontal">
       <FormField.Label>Email</FormField.Label>
-      <FormField.Input as={TextInput} onChange={handleChange} value={value} />
+      <FormField.Input as={TextInput} value={value} onChange={handleChange} />
     </FormField>
   );
 };

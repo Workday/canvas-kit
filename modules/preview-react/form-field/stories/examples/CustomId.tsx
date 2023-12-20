@@ -1,11 +1,9 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import {css, jsx} from '@emotion/react';
 import React from 'react';
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 
-export const Basic = () => {
+export const CustomId = () => {
   const [value, setValue] = React.useState('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -13,9 +11,11 @@ export const Basic = () => {
   };
 
   return (
-    <FormField>
-      <FormField.Label>Email</FormField.Label>
-      <FormField.Input as={TextInput} onChange={handleChange} value={value} />
-    </FormField>
+    <Flex>
+      <FormField id="first-name">
+        <FormField.Label>First Name</FormField.Label>
+        <FormField.Input as={TextInput} value={value} onChange={handleChange} />
+      </FormField>
+    </Flex>
   );
 };
