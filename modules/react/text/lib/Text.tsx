@@ -28,31 +28,59 @@ export interface TextProps extends CSProps, CommonStyleProps {
   variant?: 'error' | 'hint' | 'inverse';
 }
 
-const createTypeStyles = (level: keyof typeof system.type, size: TypeSize, isHeading?: boolean) => {
-  return createStyles({
-    // @ts-ignore
-    ...system.type[level][size],
-    color: isHeading ? base.blackPepper400 : base.blackPepper300,
-  });
-};
-
 const textModifiers = createModifiers({
   typeLevel: {
-    'title.large': createTypeStyles('title', 'large', true),
-    'title.medium': createTypeStyles('title', 'medium', true),
-    'title.small': createTypeStyles('title', 'small', true),
+    'title.large': createStyles({
+      ...system.type.title.large,
+      color: base.blackPepper400,
+    }),
+    'title.medium': createStyles({
+      ...system.type.title.medium,
+      color: base.blackPepper400,
+    }),
+    'title.small': createStyles({
+      ...system.type.title.small,
+      color: base.blackPepper400,
+    }),
 
-    'heading.large': createTypeStyles('heading', 'large', true),
-    'heading.medium': createTypeStyles('heading', 'medium', true),
-    'heading.small': createTypeStyles('heading', 'small', true),
+    'heading.large': createStyles({
+      ...system.type.heading.large,
+      color: base.blackPepper400,
+    }),
+    'heading.medium': createStyles({
+      ...system.type.heading.medium,
+      color: base.blackPepper400,
+    }),
+    'heading.small': createStyles({
+      ...system.type.heading.small,
+      color: base.blackPepper400,
+    }),
 
-    'body.large': createTypeStyles('body', 'large'),
-    'body.medium': createTypeStyles('body', 'medium'),
-    'body.small': createTypeStyles('body', 'small'),
+    'body.large': createStyles({
+      ...system.type.body.large,
+      color: base.blackPepper300,
+    }),
+    'body.medium': createStyles({
+      ...system.type.body.medium,
+      color: base.blackPepper300,
+    }),
+    'body.small': createStyles({
+      ...system.type.body.small,
+      color: base.blackPepper300,
+    }),
 
-    'subtext.large': createTypeStyles('subtext', 'large'),
-    'subtext.medium': createTypeStyles('subtext', 'medium'),
-    'subtext.small': createTypeStyles('subtext', 'small'),
+    'subtext.large': createStyles({
+      ...system.type.subtext.large,
+      color: base.blackPepper300,
+    }),
+    'subtext.medium': createStyles({
+      ...system.type.subtext.medium,
+      color: base.blackPepper300,
+    }),
+    'subtext.small': createStyles({
+      ...system.type.subtext.small,
+      color: base.blackPepper300,
+    }),
   },
   variant: {
     error: createStyles({color: base.cinnamon500}),

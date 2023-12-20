@@ -17,7 +17,6 @@ export interface TypeLabelProps extends CSProps, CommonStyleProps {
 }
 
 const labelTextStencil = createStencil({
-  // @ts-ignore
   base: {
     ...system.type.subtext.large,
     color: base.blackPepper300,
