@@ -9,9 +9,14 @@ This guide contains an overview of the changes in Canvas Kit v11. Please
 any questions.
 
 - [Codemod](#codemod)
+- [Deprecations](#deprecations)
+  - [FormField Main](#form-field-main)
+  - [TextInput Preview](#text-input-preview)
+  - [TextArea Preview](#text-input-preview)
 - [Component Updates](#component-updates)
   - [Style Updates](#style-updates)
   - [Count Badge](#count-badge)
+	- [FormField Preview](#form-field-preview)
 
 ## Codemod
 
@@ -74,6 +79,45 @@ finished.
 > the codemod, as its resulting formatting (spacing, quotes, etc.) may not match your project
 > conventions.
 
+## Deprecations
+
+We add the [@deprecated](https://jsdoc.app/tags-deprecated.html) JSDoc tag to code we plan to remove
+in a future major release. This signals consumers to migrate to a more stable alternative before the
+deprecated code is removed.
+
+### FormField Main
+
+**PR:** [#2472](https://github.com/Workday/canvas-kit/pull/2472)
+
+We've deprecated `FormField` from [Main](#main) in favor of our compound component `FormField` in
+[Preview](#preview). Please use
+[`FormField`](https://workday.github.io/canvas-kit/?path=//docs/preview-inputs-form-field--basic)
+instead.
+
+---
+
+### TextInput Preview
+
+**PR:** [#2472](https://github.com/Workday/canvas-kit/pull/2472)
+
+We've deprecated `TextInput` from [Preview](#preview) in favor of our compound component `FormField`
+in [Preview](#preview). Please use
+[`FormField`](https://workday.github.io/canvas-kit/?path=//docs/preview-inputs-form-field--basic)
+instead.
+
+---
+
+### TextArea Preview
+
+**PR:** [#2472](https://github.com/Workday/canvas-kit/pull/2472)
+
+We've deprecated `TextArea` from [Preview](#preview) in favor of our compound component `FormField`
+in [Preview](#preview). Please use
+[`FormField`](https://workday.github.io/canvas-kit/?path=//docs/preview-inputs-form-field--basic)
+instead.
+
+---
+
 ## Component Updates
 
 ### Style Updates
@@ -105,54 +149,56 @@ See below:
 | TextInput                  |         | disabled     | borderColor             | `soap600`          | `licorice100`     |
 | TextArea                   |         | disabled     | borderColor             | `soap600`          | `licorice100`     |
 
-<!-- ### Card
-#### CardHeading
-- Type levels has been updated from `body.large` to `heading.small`. You can see the type levels [here](https://workday.github.io/canvas-kit/?path=/docs/tokens--type).
-#### CardBody
-- Type levels has been updated from `subtext.large` to `body.small`.
-
-### Table
-#### TableHeader
-- Border color has been updated from `soap400` to `soap500`.
-
-### Checkbox
-- `disabled`: Border color has been updated from `soap600` to `licorice100`.
-
-#### Inverse
-- `disabled & checked or indeterminate`: Background color has been updated from `soap300` to `frenchVanilla100`.
-
-### Radio
-- `disabled`: Border color has been updated from `soap600` to `licorice100`.
-
-### Buttons
-
-#### SecondaryButton
-- `inverse & focus`: Label color has been updated from `blackPepper500` to `blackPepper400`.
-- `inverse & focus`: Inner box shadow color has been updated from `blackPepper500` to `blackPepper400`.
-- `inverse & focus`: Icon color has been updated from `blackPepper500` to `blackPepper400`.
-
-#### TertiaryButton
-- `hover`: Background color has been updated from `soap200` to `soap300`.
-- `active`: Background color has been updated from `soap300` to `soap400`.
-- `active`: Label color has been updated from `primary.dark` to `primary.darkest`.
-- `disabled`: Border color has been updated from `frenchVanilla100` to `transparent`.
-- `icon only focus`: Icon color has been updaed from `blackPepper500` to `blackPepper400`.
-- `icon only hover`: Icon color has been updaed from `blackPepper500` to `blackPepper400`.
-
-#### DeleteButton
-- `disabled`: Background color has been updated from `error.light` to `error.base` & `opacity: 0.4`
-
-### TextInput
-#### TextInputField
-- `disabled`: Border color has been updated from `soap600` to `licorice100`.
-
-### TextArea
-#### TextAreaField
-- `disabled`: Border color has been updated from `soap600` to `licorice100`.
--->
 ### Count Badge
 
 **PR:** [#2442](https://github.com/Workday/canvas-kit/pull/2442)
 
 `CountBadge` now uses `createComponent`, Canvas Tokens, and our new styling utilities. The component
 API has not been changed, and it should behave identically as it did in previous versions.
+
+### FormField Preview
+
+**PR:** [#2472](https://github.com/Workday/canvas-kit/pull/2472)
+
+`FormField` in [Preview](#preview) is a compound component and we intend to promote it in a future
+version to replace the `FormField` in [Main](#main). Because of this, we've refactored how errors
+are applied to `FormField` in [Preview](#preview) in order to match the API from the `FormField` in
+[Main](#main).
+
+- `hasError` prop on the `FormField` has been renamed to `error`.
+- `error` accepts `"error" | "alert" | ""` instead of a boolean value.
+- `orientation` prop defaults to `vertical` and is no longer required.
+- `FormField.Input` can be used by any `input`.
+- `FormField` does **not** support the `useFieldSet` prop that the `FormField` in [Main](#main)
+  does. In order to achieve the same behavior, set the `as` prop on the `FormField` element to
+  `fieldset` and the `as` prop of `FormField.Label` to `legend`.
+
+```tsx
+// v10 FormField in Preview
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+
+//...
+
+<FormField orientation="vertical" hasError={true}>
+  <FormField.Label>Password</FormField.Label>
+  <FormField.Input as={TextInput} type="password" value={value} onChange={handleChange} />
+  <FormField.Hint>Must Contain a number and a capital letter</FormField.Hint>
+</FormField>;
+
+// v11
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+
+//...
+
+<FormField error="error">
+  <FormField.Label>Password</FormField.Label>
+  <FormField.Container>
+    <FormField.Input as={TextInput} type="password" value={value} onChange={handleChange} />
+    <FormField.Hint>Must Contain a number and a capital letter</FormField.Hint>
+  </FormField.Container>
+</FormField>;
+```
+
+🤖 The codemod will handle the change of `hasError` to `error` for you automatically.
