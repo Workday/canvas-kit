@@ -3,6 +3,7 @@ import {styled, createComponent, StyledType} from '@workday/canvas-kit-react/com
 import {extLinkIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon, systemIconStyles} from '@workday/canvas-kit-react/icon';
 import {Hyperlink, HyperlinkProps} from './Hyperlink';
+import {createStyles, handleCsProp} from '@workday/canvas-kit-styling';
 
 export interface ExternalHyperlinkProps extends HyperlinkProps {
   /**
@@ -13,21 +14,22 @@ export interface ExternalHyperlinkProps extends HyperlinkProps {
   iconLabel?: string;
 }
 
-const iconStyles = {
-  ...systemIconStyles({fill: 'currentColor', fillHover: 'currentColor'}),
-};
+const iconStyles = systemIconStyles({fill: 'currentColor', fillHover: 'currentColor'});
+const iconSize = '1em';
+const minIconSize = '16px';
 
-const Anchor = styled(Hyperlink)<ExternalHyperlinkProps & StyledType>({
+const StyledSystemIcon = styled(SystemIcon)<StyledType>({
+  ...iconStyles,
+});
+
+const externalHyperlinkStyles = createStyles({
   ...iconStyles,
   display: 'inline-flex',
   flexDirection: 'row',
   alignItems: 'center',
 });
 
-const iconSize = '1em';
-const minIconSize = '16px';
-
-const StyledSystemIcon = styled(SystemIcon)<StyledType>({
+const externalHyperlinkIconStyles = createStyles({
   ...iconStyles,
   width: `calc(${iconSize} - 1px)`,
   minWidth: `calc(${minIconSize} - 1px)`,
@@ -42,9 +44,16 @@ export const ExternalHyperlink = createComponent('a')({
   displayName: 'ExternalHyperlink',
   Component: (
     {children, iconLabel = 'Opens link in new window', ...elemProps}: ExternalHyperlinkProps,
-    ref
+    ref,
+    Element
   ) => (
-    <Anchor ref={ref} target="_blank" rel="noreferrer" {...elemProps}>
+    <Hyperlink
+      as={Element}
+      ref={ref}
+      target="_blank"
+      rel="noreferrer"
+      {...handleCsProp(elemProps, externalHyperlinkStyles)}
+    >
       <span>{children}</span>
       <StyledSystemIcon
         icon={extLinkIcon}
@@ -52,7 +61,8 @@ export const ExternalHyperlink = createComponent('a')({
         aria-label={iconLabel}
         size={iconSize}
         styles={{['& svg']: {minWidth: minIconSize, minHeight: minIconSize}}}
+        cs={externalHyperlinkIconStyles}
       />
-    </Anchor>
+    </Hyperlink>
   ),
 });

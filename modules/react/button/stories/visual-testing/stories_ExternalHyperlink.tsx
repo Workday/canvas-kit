@@ -44,7 +44,11 @@ export const ExternalHyperlinkStates = () => (
         {(props: any) => (
           <Container blue={props.variant === 'inverse'}>
             <Subtext as="span" size="large" color="#000" variant={props.variant}>
-              Here's a <ExternalHyperlink {...props}>Link</ExternalHyperlink> to something
+              Here's a{' '}
+              <ExternalHyperlink href="#external-hyperlink" {...props}>
+                Link
+              </ExternalHyperlink>{' '}
+              to something
             </Subtext>
           </Container>
         )}
@@ -53,31 +57,39 @@ export const ExternalHyperlinkStates = () => (
     <Flex flexDirection="column" gap="xxs">
       <h3>Typography</h3>
       <Subtext size="large">
-        The quick <ExternalHyperlink>brown fox</ExternalHyperlink> jumps over the lazy dog
+        The quick <ExternalHyperlink href="#external-hyperlink">brown fox</ExternalHyperlink> jumps
+        over the lazy dog
       </Subtext>
       <BodyText size="small">
-        The quick <ExternalHyperlink>brown fox</ExternalHyperlink> jumps over the lazy dog
+        The quick <ExternalHyperlink href="#external-hyperlink">brown fox</ExternalHyperlink> jumps
+        over the lazy dog
       </BodyText>
       <BodyText size="medium">
-        The quick <ExternalHyperlink>brown fox</ExternalHyperlink> jumps over the lazy dog
+        The quick <ExternalHyperlink href="#external-hyperlink">brown fox</ExternalHyperlink> jumps
+        over the lazy dog
       </BodyText>
       <BodyText size="large">
-        The quick <ExternalHyperlink>brown fox</ExternalHyperlink> jumps over the lazy dog
+        The quick <ExternalHyperlink href="#external-hyperlink">brown fox</ExternalHyperlink> jumps
+        over the lazy dog
       </BodyText>
     </Flex>
     <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
       <Flex flexDirection="column" gap="xxs">
         <Subtext size="large">
-          The quick <ExternalHyperlink>brown fox</ExternalHyperlink> jumps over the lazy dog
+          The quick <ExternalHyperlink href="#external-hyperlink">brown fox</ExternalHyperlink>{' '}
+          jumps over the lazy dog
         </Subtext>
         <BodyText size="small">
-          The quick <ExternalHyperlink>brown fox</ExternalHyperlink> jumps over the lazy dog
+          The quick <ExternalHyperlink href="#external-hyperlink">brown fox</ExternalHyperlink>{' '}
+          jumps over the lazy dog
         </BodyText>
         <BodyText size="medium">
-          The quick <ExternalHyperlink>brown fox</ExternalHyperlink> jumps over the lazy dog
+          The quick <ExternalHyperlink href="#external-hyperlink">brown fox</ExternalHyperlink>{' '}
+          jumps over the lazy dog
         </BodyText>
         <BodyText size="large">
-          The quick <ExternalHyperlink>brown fox</ExternalHyperlink> jumps over the lazy dog
+          The quick <ExternalHyperlink href="#external-hyperlink">brown fox</ExternalHyperlink>{' '}
+          jumps over the lazy dog
         </BodyText>
       </Flex>
     </CanvasProvider>

@@ -1,70 +1,73 @@
 import * as React from 'react';
-import {borderRadius, colors, type} from '@workday/canvas-kit-react/tokens';
-import {styled, createComponent, StyledType} from '@workday/canvas-kit-react/common';
+import {createComponent} from '@workday/canvas-kit-react/common';
 
-export interface HyperlinkProps {
-  /**
-   * sets modifier styles for Hyperlink
-   * - `inverse`: sets the color to frenchVanilla100 and updates hover, focus, and active pseudo-classes
-   */
-  variant?: 'inverse';
+import {createStencil, CSProps, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
+
+export interface HyperlinkProps extends CSProps {
   /**
    * attribute for the hyperlink URL
    */
   href?: string;
+  /**
+   * sets modifier styles for Hyperlink
+   * - `inverse`: sets the color to frenchVanilla100 and updates hover, focus, and active pseudo-classes
+   * @default 'default'
+   */
+  variant?: 'default' | 'inverse';
+  /**
+   * The children of this Hyperlink component
+   */
   children?: React.ReactNode;
 }
 
-const variantStyles = {
-  inverse: {
-    color: colors.frenchVanilla100,
-    '&:hover': {
-      color: colors.frenchVanilla100,
-      background: 'rgba(255, 255, 255, 0.1)',
-    },
-    '&:focus': {
-      boxShadow: `0 0 0 2px ${colors.frenchVanilla100}`,
-    },
-    '&:active': {
-      color: colors.blueberry600,
-      background: colors.soap200,
-    },
-  },
-};
-
-const anchorVariants = (props: HyperlinkProps) => {
-  if (props.variant === 'inverse') {
-    return variantStyles.inverse;
-  }
-  return {};
-};
-
-const Anchor = styled('a')<HyperlinkProps & StyledType>(
-  {
-    fontFamily: type.properties.fontFamilies.default,
+const hyperlinkStyles = createStencil({
+  base: {
+    fontFamily: system.fontFamily.default,
     textDecoration: 'underline',
-    color: colors.blueberry400,
     cursor: 'pointer',
-    borderRadius: borderRadius.s,
+    borderRadius: system.shape.half,
     display: 'inline-block',
-    padding: '0 2px',
-    margin: '0 -2px',
+    padding: `0 ${px2rem(2)}`,
+    margin: `0 ${px2rem(-2)}`,
     transition: 'color 0.15s,background-color 0.15s',
-    '&:hover': {
-      color: colors.blueberry500,
-      background: colors.soap200,
-    },
-    '&:focus': {
-      boxShadow: `0 0 0 2px ${colors.blueberry400}`,
+    '&:focus, &.focus': {
       outline: 'none',
     },
-    '&:active': {
-      color: colors.blueberry600,
-      background: colors.soap300,
+  },
+  modifiers: {
+    variant: {
+      default: {
+        color: base.blueberry400,
+        '&:hover, &.hover': {
+          color: base.blueberry500,
+          background: base.soap200,
+        },
+        '&:focus, &.focus': {
+          boxShadow: `0 0 0 2px ${cssVar(base.blueberry400)}`,
+        },
+        '&:active, &.active': {
+          color: base.blueberry600,
+          background: base.soap300,
+        },
+      },
+      inverse: {
+        color: base.frenchVanilla100,
+        '&:hover, &.hover': {
+          color: base.frenchVanilla100,
+          background: 'rgba(255, 255, 255, 0.1)',
+        },
+        '&:focus, &.focus': {
+          boxShadow: `0 0 0 2px ${cssVar(base.frenchVanilla100)}`,
+        },
+        '&:active, &.active': {
+          color: base.blueberry600,
+          background: base.soap200,
+        },
+      },
     },
   },
-  anchorVariants
-);
+});
 
 /**
  * `Hyperlink`s should be used when you want to navigate away from the current page or to an anchor
@@ -72,9 +75,9 @@ const Anchor = styled('a')<HyperlinkProps & StyledType>(
  */
 export const Hyperlink = createComponent('a')({
   displayName: 'Hyperlink',
-  Component: ({children, ...elemProps}: HyperlinkProps, ref, Element) => (
-    <Anchor ref={ref} as={Element} {...elemProps}>
+  Component: ({children, variant = 'default', ...elemProps}: HyperlinkProps, ref, Element) => (
+    <Element ref={ref} {...handleCsProp(elemProps, hyperlinkStyles({variant}))}>
       {children}
-    </Anchor>
+    </Element>
   ),
 });

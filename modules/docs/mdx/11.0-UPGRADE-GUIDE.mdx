@@ -11,11 +11,12 @@ any questions.
 - [Codemod](#codemod)
 - [Deprecations](#deprecations)
   - [FormField Main](#form-field-main)
-  - [TextInput Preview](#text-input-preview)
   - [TextArea Preview](#text-input-preview)
+  - [TextInput Preview](#text-input-preview)
 - [Component Updates](#component-updates)
-	- [FormField Preview](#form-field-preview)
-	- [Count Badge](#count-badge)
+  - [Count Badge](#count-badge)
+  - [Hyperlink & External Hyperlink](#count-badge)
+  - [FormField Preview](#form-field-preview)
 
 ## Codemod
 
@@ -95,22 +96,22 @@ instead.
 
 ---
 
-### TextInput Preview
+### TextArea Preview
 
 **PR:** [#2472](https://github.com/Workday/canvas-kit/pull/2472)
 
-We've deprecated `TextInput` from [Preview](#preview) in favor of our compound component `FormField`
+We've deprecated `TextArea` from [Preview](#preview) in favor of our compound component `FormField`
 in [Preview](#preview). Please use
 [`FormField`](https://workday.github.io/canvas-kit/?path=//docs/preview-inputs-form-field--basic)
 instead.
 
 ---
 
-### TextArea Preview
+### TextInput Preview
 
 **PR:** [#2472](https://github.com/Workday/canvas-kit/pull/2472)
 
-We've deprecated `TextArea` from [Preview](#preview) in favor of our compound component `FormField`
+We've deprecated `TextInput` from [Preview](#preview) in favor of our compound component `FormField`
 in [Preview](#preview). Please use
 [`FormField`](https://workday.github.io/canvas-kit/?path=//docs/preview-inputs-form-field--basic)
 instead.
@@ -123,8 +124,17 @@ instead.
 
 **PR:** [#2442](https://github.com/Workday/canvas-kit/pull/2442)
 
-`CountBadge` now uses `createComponent`, Canvas Tokens, and our new styling utilities. The component
-API has not been changed, and it should behave identically as it did in previous versions.
+`CountBadge` now uses `createComponent`, Canvas Tokens and our new styling utilities. The component
+now supports the `cs` prop, but otherwise the API has not changed. It should behave identically as
+it did in previous versions.
+
+### Hyperlink & External Hyperlink
+
+**PR:** [#2487](https://github.com/Workday/canvas-kit/pull/2487)
+
+`Hyperlink` and `ExternalHyperlink` now use Canvas Tokens and our new styling utilities. The
+component now supports the `cs` prop, but otherwise the API has not changed. It should behave
+identically as it did in previous versions.
 
 ### FormField Preview
 

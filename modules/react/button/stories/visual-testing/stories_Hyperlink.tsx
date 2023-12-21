@@ -41,7 +41,11 @@ export const HyperlinkStates = () => (
         <Container blue={props.variant === 'inverse'}>
           <Box {...type.levels.subtext.large}>
             <Box as="span" color={props.variant === 'inverse' ? 'frenchVanilla100' : undefined}>
-              Here's a <Hyperlink {...props}>Link</Hyperlink> to something
+              Here's a{' '}
+              <Hyperlink href="#hyperlink" {...props}>
+                Link
+              </Hyperlink>{' '}
+              to something
             </Box>
           </Box>
         </Container>
