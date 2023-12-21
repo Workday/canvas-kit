@@ -734,7 +734,7 @@ export function handleCsProp<
 
 type StylesReturn<V extends Record<string, string> | Record<string, Record<string, string>> = {}> =
   | SerializedStyles
-  | CSSObject
+  | CSSObjectWithVars
   | ((vars: OptionalVars<V>) => SerializedStyles | CSSObject);
 
 export type StencilModifierConfig<
