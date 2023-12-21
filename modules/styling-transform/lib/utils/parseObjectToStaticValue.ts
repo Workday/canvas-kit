@@ -2,7 +2,7 @@ import ts from 'typescript';
 
 import {base, brand} from '@workday/canvas-tokens-web';
 
-import {parseNodeToStaticValue} from './parseNodeToStaticValue';
+import {maybeCSSVariable, parseNodeToStaticValue} from './parseNodeToStaticValue';
 
 export type NestedStyleObject = {[key: string]: string | NestedStyleObject};
 
@@ -16,7 +16,7 @@ export function parseObjectToStaticValue(
 
   if (ts.isObjectLiteralExpression(node)) {
     node.properties.forEach(property => {
-      styleObj = {...parsePropertyToStaticValue(property, checker, prefix, variables)};
+      styleObj = {...styleObj, ...parsePropertyToStaticValue(property, checker, prefix, variables)};
     });
   }
 
@@ -37,14 +37,18 @@ function parsePropertyToStaticValue(
       ? node.name.text
       : parseNodeToStaticValue(node.name, checker, prefix, variables);
     if (key) {
-      if (key.includes('&') || key.startsWith(':')) {
+      if (ts.isObjectLiteralExpression(node.initializer)) {
         // nested
         styleObj[key] = parseObjectToStaticValue(node.initializer, checker, prefix, variables);
       } else {
         styleObj[key] =
-          maybeCSSVariable(parseNodeToStaticValue(node.initializer, checker, prefix, variables)) ||
-          '';
+          maybeCSSVariable(
+            parseNodeToStaticValue(node.initializer, checker, prefix, variables),
+            variables
+          ) || '';
       }
+
+      return styleObj;
     }
   }
 
@@ -60,6 +64,8 @@ function parsePropertyToStaticValue(
       } else {
         styleObj[key] = parseNodeToStaticValue(node.type!, checker, prefix, variables) || '';
       }
+
+      return styleObj;
     }
   }
 
@@ -174,11 +180,4 @@ export function parseStyleObjFromType(
       ...parsePropertyToStaticValue(declaration, checker, prefix, variables),
     };
   }, styleObj);
-}
-
-function maybeCSSVariable(input: string): string {
-  if (input.startsWith('--')) {
-    return `var(${input})`;
-  }
-  return input;
 }

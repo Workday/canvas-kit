@@ -30,7 +30,7 @@ describe('getVarName', () => {
 
     const sourceFile = program.getSourceFile('test.ts');
 
-    const node = findNodes(sourceFile, 'baz', ts.isPropertyAssignment)[0]; //?
+    const node = findNodes(sourceFile, 'baz', ts.isPropertyAssignment)[0];
 
     expect(getVarName(node)).toEqual('foo-bar-baz');
   });

@@ -4,13 +4,9 @@ import {slugify} from '@workday/canvas-kit-styling';
 
 import {getVarName} from './getVarName';
 import {makeEmotionSafe} from './makeEmotionSafe';
+import {NodeTransformer} from './types';
 
-export function handleCreateVars(
-  node: ts.Node,
-  checker: ts.TypeChecker,
-  prefix: string,
-  vars: Record<string, string>
-): ts.Node | void {
+export const handleCreateVars: NodeTransformer = (node, _checker, prefix, vars) => {
   /**
    * This will create a variable
    */
@@ -19,7 +15,7 @@ export function handleCreateVars(
     ts.isIdentifier(node.expression) &&
     node.expression.text === 'createVars'
   ) {
-    const id = slugify(getVarName(node));
+    const id = slugify(getVarName(node)).replace('-vars', '');
     const variables = node.arguments
       .map(arg => ts.isStringLiteral(arg) && arg.text)
       .filter(Boolean) as string[];
@@ -51,4 +47,6 @@ export function handleCreateVars(
       ]
     );
   }
-}
+
+  return;
+};

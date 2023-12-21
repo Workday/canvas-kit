@@ -170,7 +170,9 @@ describe('parseNodeToStaticValue', () => {
     const sourceFile = program.getSourceFile('test.ts');
     const node = findNodes(sourceFile, '', ts.isCallExpression)[0];
 
-    expect(parseNodeToStaticValue(node, program.getTypeChecker())).toEqual('var(--foo, --bar)');
+    expect(parseNodeToStaticValue(node, program.getTypeChecker())).toEqual(
+      'var(--foo, var(--bar))'
+    );
   });
 
   it('should handle the "cssVar" CallExpression with automatic fallback variables', () => {

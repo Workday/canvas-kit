@@ -1,18 +1,11 @@
 import ts from 'typescript';
 
-import {slugify} from '@workday/canvas-kit-styling';
-
-import {getVarName} from './getVarName';
-import {makeEmotionSafe} from './makeEmotionSafe';
 import {parseObjectToStaticValue, parseStyleObjFromType} from './parseObjectToStaticValue';
 import {createStyleObjectNode} from './createStyleObjectNode';
+import {NodeTransformer} from './types';
+import {isImportedFromStyling} from './isImportedFromStyling';
 
-export function handleCreateStyles(
-  node: ts.Node,
-  checker: ts.TypeChecker,
-  prefix: string,
-  variables: Record<string, string>
-): ts.Node | void {
+export const handleCreateStyles: NodeTransformer = (node, checker, prefix, variables) => {
   /**
    * Check if the node is a call expression that looks like:
    *
@@ -49,6 +42,7 @@ export function handleCreateStyles(
     ts.isCallExpression(node) &&
     ts.isIdentifier(node.expression) &&
     node.expression.text === 'createStyles' &&
+    isImportedFromStyling(node.expression, checker) &&
     node.arguments.length > 0
   ) {
     const newArguments = [...node.arguments].map(arg => {
@@ -116,4 +110,6 @@ export function handleCreateStyles(
 
     return node;
   }
-}
+
+  return;
+};

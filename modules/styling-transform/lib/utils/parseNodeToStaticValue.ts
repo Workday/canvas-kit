@@ -3,11 +3,11 @@ import ts from 'typescript';
 import {slugify} from '@workday/canvas-kit-styling';
 
 import {makeEmotionSafe} from './makeEmotionSafe';
-import {getFallbackVariable} from './getCssVariables';
+import {getFallbackVariable} from './getFallbackVariable';
 import {getErrorMessage} from './getErrorMessage';
 
 /**
- * This is the workhorse of statically analyzing style objects to static forms
+ * This is the workhorse of statically analyzing style values
  */
 export function parseNodeToStaticValue(
   node: ts.Node,
@@ -15,8 +15,10 @@ export function parseNodeToStaticValue(
   prefix: string = 'css',
   variables: Record<string, string> = {}
 ): string {
-  // '12px'
-  if (ts.isStringLiteral(node)) {
+  /**
+   * String literals like 'red' or empty Template Expressions like `red`
+   */
+  if (ts.isStringLiteral(node) || ts.isNoSubstitutionTemplateLiteral(node)) {
     return node.text;
   }
 
@@ -49,18 +51,35 @@ export function parseNodeToStaticValue(
     ts.isIdentifier(node.expression) &&
     node.expression.text === 'cssVar'
   ) {
-    const value1 = parseNodeToStaticValue(node.arguments[0], checker, prefix, variables); //?
+    const value1 = parseNodeToStaticValue(node.arguments[0], checker, prefix, variables);
     if (value1) {
       const value2 = node.arguments[1]
         ? parseNodeToStaticValue(node.arguments[1], checker, prefix, variables)
-        : undefined; //?
-      const fallbackValue = getFallbackVariable(value1, variables); //?
-      if (value2 || fallbackValue) {
-        return `var(${value1}, ${value2 || fallbackValue})`;
+        : undefined;
+      if (value2) {
+        return `var(${value1}, ${maybeCSSVariable(value2 || '', variables)})`;
       }
-      return `var(${value1})`;
+      return maybeCSSVariable(value1, variables);
     }
-    node.arguments[0].getText(); //?
+  }
+
+  /**
+   * ```ts
+   * `border 1px ${myVars.colors.border}`
+   * ```
+   */
+  if (ts.isTemplateExpression(node)) {
+    return getStyleValueFromTemplateExpression(node, checker, prefix, variables);
+  }
+
+  /**
+   * An Identifier is a simple variable. It may represent a variable, so we'll check it before
+   * moving on. This typically happens in stencils.
+   */
+  if (ts.isIdentifier(node)) {
+    if (variables[node.text]) {
+      return variables[node.text];
+    }
   }
 
   // If we got here, we cannot statically analyze by the AST alone. We have to check the type of the
@@ -81,14 +100,18 @@ export function parseNodeToStaticValue(
   }
 
   // we don't know what this is, we need to throw an error
-  const type = checker.getTypeAtLocation(node); //?
+  const type = checker.getTypeAtLocation(node);
 
-  const typeValue = checker.typeToString(type); //?
+  const typeValue = checker.typeToString(type);
 
   throw new Error(
     `Unknown type at: "${node.getText()}". Received "${typeValue}"\n${getErrorMessage(
       node
-    )}\nFor static analysis of styles, please make sure all types resolve to string or numeric literals. Please use 'const' instead of 'let'. If using an object, cast using "as const" or use an interface with string or numeric literals.`
+    )}\nFor static analysis of styles, please make sure all types resolve to string or numeric literals. Please use 'const' instead of 'let'. If using an object, cast using "as const" or use an interface with string or numeric literals. Variables: ${JSON.stringify(
+      variables,
+      null,
+      '  '
+    )}`
   );
 }
 
@@ -103,7 +126,7 @@ function parseTypeToStaticValue(type: ts.Type): string | void {
 }
 
 function getCSSVariableKey(text: string): string {
-  const [id, name] = getVariableNameParts(text); //?
+  const [id, name] = getVariableNameParts(text);
   return `${slugify(id)}-${makeEmotionSafe(name)}`;
 }
 
@@ -131,4 +154,47 @@ function getVariableNameParts(input: string): [string, string] {
   const variable = parts.pop()!;
 
   return [parts.join('.'), variable];
+}
+
+export function maybeCSSVariable(input: string, variables: Record<string, string>): string {
+  if (input.startsWith('--')) {
+    const fallback = getFallbackVariable(input, variables);
+    return fallback ? `var(${input}, ${maybeCSSVariable(fallback, variables)})` : `var(${input})`;
+  }
+  return input;
+}
+
+/**
+ * Gets a static string value from a template expression. It could recurse.
+ */
+function getStyleValueFromTemplateExpression(
+  node: ts.Node | undefined,
+  checker: ts.TypeChecker,
+  prefix = 'css',
+  variables: Record<string, string> = {}
+): string {
+  if (!node) {
+    return '';
+  }
+  if (ts.isTemplateExpression(node)) {
+    return (
+      getStyleValueFromTemplateExpression(node.head, checker, prefix, variables) +
+      node.templateSpans
+        .map(value => getStyleValueFromTemplateExpression(value, checker, prefix, variables))
+        .join('')
+    );
+  }
+
+  if (ts.isTemplateHead(node) || ts.isTemplateTail(node) || ts.isTemplateMiddle(node)) {
+    return node.text;
+  }
+
+  if (ts.isTemplateSpan(node)) {
+    return (
+      parseNodeToStaticValue(node.expression, checker, prefix, variables) +
+      getStyleValueFromTemplateExpression(node.literal, checker, prefix, variables)
+    );
+  }
+
+  return '';
 }

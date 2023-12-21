@@ -3,13 +3,15 @@ import {serializeStyles} from '@emotion/serialize';
 
 import {generateUniqueId} from '@workday/canvas-kit-styling';
 
+import {NestedStyleObject} from './parseObjectToStaticValue';
+
 /**
  * Creates an AST node representation of the passed in `styleObj`, but in the format of `{name:
  * string, styles: serializedStyles}`. The `name` is hard-coded here to work with both server-side
  * and client-side style injection. This results in a stable style key for Emotion while also
  * optimizing style serialization.
  */
-export function createStyleObjectNode(styleObj: Record<string, string>) {
+export function createStyleObjectNode(styleObj: NestedStyleObject) {
   const serialized = serializeStyles([styleObj]);
   const styleText = serialized.styles;
   const styleExpression = ts.factory.createStringLiteral(styleText);
