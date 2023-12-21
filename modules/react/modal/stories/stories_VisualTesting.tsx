@@ -6,7 +6,7 @@ import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {ContentDirection, CanvasProvider, useTheme} from '@workday/canvas-kit-react/common';
 import {Flex, Box} from '@workday/canvas-kit-react/layout';
 
-import {withSnapshotsEnabled} from '../../../../utils/storybook';
+import {customColorTheme, withSnapshotsEnabled} from '../../../../utils/storybook';
 
 const TestContent = () => {
   const content = (
@@ -71,6 +71,34 @@ export const ModalRTL = withSnapshotsEnabled(() => {
             <Modal.CloseIcon aria-label="" />
             <Modal.Heading>למחוק פריט</Modal.Heading>
             <Modal.Body>האם ברצונך למחוק פריט זה</Modal.Body>
+          </Modal.Card>
+        </Modal.Overlay>
+      </Modal>
+    </CanvasProvider>
+  );
+});
+
+export const CustomThemeModal = withSnapshotsEnabled(() => {
+  const model = useModalModel({
+    initialVisibility: 'visible',
+  });
+  return (
+    <CanvasProvider theme={{canvas: customColorTheme}}>
+      <Modal model={model}>
+        <Modal.Overlay style={{animation: 'none'}}>
+          <Modal.Card style={{animation: 'none'}}>
+            <Modal.CloseIcon aria-label="Close" />
+            <Modal.Heading>MIT License</Modal.Heading>
+            <Modal.Body>
+              <Box as="p" marginY="zero">
+                Permission is hereby granted, free of charge, to any person obtaining a copy of this
+                software and associated documentation files (the "Software").
+              </Box>
+            </Modal.Body>
+            <Flex gap="s" padding="xxs" marginTop="xxs">
+              <Modal.CloseButton as={PrimaryButton}>Acknowledge</Modal.CloseButton>
+              <Modal.CloseButton>Cancel</Modal.CloseButton>
+            </Flex>
           </Modal.Card>
         </Modal.Overlay>
       </Modal>
