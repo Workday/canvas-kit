@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.2.1](https://github.com/Workday/canvas-kit/releases/tag/v10.2.1) (2023-12-21)
+
+### Components
+
+- fix: Default createStyles vars to empty object ([#2488](https://github.com/Workday/canvas-kit/pull/2488)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v10.2.0](https://github.com/Workday/canvas-kit/releases/tag/v10.2.0) (2023-12-19)
 
 
