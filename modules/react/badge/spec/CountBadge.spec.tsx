@@ -4,6 +4,8 @@ import {CountBadge, CountBadgeProps} from '../index';
 const context = describe;
 
 describe('CountBadge', () => {
+  verifyComponent(CountBadge, {});
+
   const renderCountBadge = (props = {} as Partial<CountBadgeProps>) => {
     return render(<CountBadge {...props} />);
   };

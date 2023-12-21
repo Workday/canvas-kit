@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 
 export const Alert = () => {
@@ -13,24 +13,15 @@ export const Alert = () => {
   };
 
   return (
-    <FormField
-      error={FormField.ErrorType.Alert}
-      hintId="hint-alert"
-      hintText="Deep dish is an extra $2.99."
-      label="Choose Your Pizza Crust"
-      useFieldset={true}
-    >
-      <RadioGroup
-        name="crust-alert"
-        onChange={handleChange}
-        value={value}
-        aria-describedby="hint-alert"
-      >
+    <FormField error="alert" id="hint-alert" as="fieldset">
+      <FormField.Label as="legend">Choose Your Pizza Crust</FormField.Label>
+      <FormField.Input as={RadioGroup} name="crust-alert" onChange={handleChange} value={value}>
         <RadioGroup.RadioButton value="deep-dish">Deep dish</RadioGroup.RadioButton>
         <RadioGroup.RadioButton value="thin">Thin</RadioGroup.RadioButton>
         <RadioGroup.RadioButton value="gluten-free">Gluten free</RadioGroup.RadioButton>
         <RadioGroup.RadioButton value="cauliflower">Cauliflower</RadioGroup.RadioButton>
-      </RadioGroup>
+      </FormField.Input>
+      <FormField.Hint>Deep dish is an extra $2.99.</FormField.Hint>
     </FormField>
   );
 };
