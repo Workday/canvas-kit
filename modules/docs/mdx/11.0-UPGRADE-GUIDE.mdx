@@ -10,13 +10,7 @@ any questions.
 
 - [Codemod](#codemod)
 - [Component Updates](#component-updates)
-  - [Card](#card)
-  - [Table (Preview)](#table)
-  - [Checkbox](#checkbox)
-  - [Radio](#radio)
-  - [Buttons](#buttons)
-  - [Text Input](#textinput)
-  - [Text Area](#textarea)
+  - [Style Updates](#style-updates)
   - [Count Badge](#count-badge)
 
 ## Codemod
@@ -82,13 +76,36 @@ finished.
 
 ## Component Updates
 
+### Style Updates
+
 We've made some small styling updates to: `Card`, `Table`, `Checkbox`, `Radio`, `SecondaryButton`, `TertiaryButton`, `DeleteButton`, `TextInput` and `TextArea`.
 
 **PR:** [#2485](https://github.com/Workday/canvas-kit/pull/2485)
 
 See below:
 
-### Card
+| Component                  | Variant | psuedo Class | Property                | v10 Value          | v11 Value         |
+| -------------------------- | ------- | ------------ | ----------------------- | ------------------ | ----------------- |
+| Card (Heading)             |         |              | typeLevel               | `body.large`       | `heading.small`   |
+| Card (Body)                |         |              | typeLevel               | `subtext.large`    | `body.small`      |
+| Table (Header)             |         |              | borderColor             | `soap400`          | `soap500`         |
+| Checkbox                   |         | disabled     | borderColor             | `soap600`          | `licorice100`     |
+| Checkbox                   | Inverse | disabled     | borderColor             | `soap600`          | `licorice100`     |
+| Radio                      |         | disabled     | borderColor             | `soap600`          | `licorice100`     |
+| SecondaryButton            | Inverse | focus        | color                   | `blackPepper500`   | `blackPepper400`  |
+| SecondaryButton            | Inverse | focus        | boxShdaow (Inner Color) | `blackPepper500`   | `blackPepper400`  |
+| SecondaryButton (Icon)     | Inverse | focus        | fill                    | `blackPepper500`   | `blackPepper400`  |
+| TertiaryButton             |         | hover        | backgroundColor         | `soap200`          | `soap300`         |
+| TertiaryButton             |         | active       | backgroundColor         | `soap300`          | `soap400`         |
+| TertiaryButton             |         | active       | color                   | `primary.dark`     | `primary.darkest` |
+| TertiaryButton             |         | disabled     | borderColor             | `frenchVanilla100` | `transparent`     |
+| TertiaryButton (Icon Only) |         | focus        | fill                    | `blackPepper500`   | `blackPepper400`  |
+| TertiaryButton (Icon Only) |         | hover        | fill                    | `blackPepper500`   | `blackPepper400`  |
+| DeleteButton               |         | disabled     | backgroundColor         | `error.light`      | `error.base`      |
+| TextInput                  |         | disabled     | borderColor             | `soap600`          | `licorice100`     |
+| TextArea                   |         | disabled     | borderColor             | `soap600`          | `licorice100`     |
+
+<!-- ### Card
 #### CardHeading
 - Type levels has been updated from `body.large` to `heading.small`. You can see the type levels [here](https://workday.github.io/canvas-kit/?path=/docs/tokens--type).
 #### CardBody
@@ -132,6 +149,7 @@ See below:
 ### TextArea
 #### TextAreaField
 - `disabled`: Border color has been updated from `soap600` to `licorice100`.
+-->
 ### Count Badge
 
 **PR:** [#2442](https://github.com/Workday/canvas-kit/pull/2442)
