@@ -105,7 +105,7 @@ export const MixedPopupTypes = () => {
           <span tabIndex={0}>Contents of Window 1</span>
         </Tooltip>
       </Window>
-      <Window heading="Window 2" top={100} left={250} relativeNode={ref}>
+      <Window heading="Window 2" top={75} left={250} relativeNode={ref}>
         <Tooltip title="Really long tooltip showing how popup stacks overlap 2">
           <span tabIndex={0}>Contents of Window 2</span>
         </Tooltip>
