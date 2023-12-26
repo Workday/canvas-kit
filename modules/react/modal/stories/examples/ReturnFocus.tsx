@@ -1,7 +1,7 @@
 import React from 'react';
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {DeleteButton} from '@workday/canvas-kit-react/button';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {Flex, Box} from '@workday/canvas-kit-react/layout';
 import {Select} from '@workday/canvas-kit-preview-react/select';
 
@@ -18,8 +18,10 @@ export const ReturnFocus = () => {
 
   return (
     <Modal model={model}>
-      <FormField label="Choose an option">
-        <Select
+      <FormField>
+        <FormField.Label>Choose an option</FormField.Label>
+        <FormField.Input
+          as={Select}
           ref={ref}
           options={['', 'Delete', 'Two']}
           value={value}
@@ -32,7 +34,7 @@ export const ReturnFocus = () => {
               setValue(e.currentTarget.value);
             }
           }}
-        ></Select>
+        ></FormField.Input>
       </FormField>
       <Modal.Overlay>
         <Modal.Card>
