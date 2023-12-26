@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {DeleteButton, SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
 import {useMount} from '@workday/canvas-kit-react/common';
@@ -351,8 +351,9 @@ export const ReturnFocusTest = () => {
         <p style={{marginBottom: 400}}>Scroll down</p>
         <p>Scroll right and click on the button</p>
         <Popup model={model}>
-          <FormField inputId="return-focus-text-input" label="Name" style={{marginLeft: 400}}>
-            <TextInput />
+          <FormField id="return-focus-text-input" cs={{marginLeft: 400}}>
+            <FormField.Label>Name</FormField.Label>
+            <FormField.Input as={TextInput} />
           </FormField>
           <Popup.Target style={{marginBottom: 400, marginLeft: 410}} data-testid="target">
             Open Popup
