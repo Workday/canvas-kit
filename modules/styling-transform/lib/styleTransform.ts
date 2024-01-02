@@ -20,6 +20,9 @@ export interface StyleTransformerOptions {
 let vars: Record<string, string> = {};
 let loadedFallbacks = false;
 
+/**
+ * The reset is used in tests and should not be called normally.
+ */
 export function _reset() {
   vars = {};
   loadedFallbacks = false;
@@ -71,7 +74,10 @@ export default function styleTransformer(
   };
 }
 
-// This should only be used for tests
+/**
+ * This function is useful for tests or a custom build. The `styleTransformer` function is used by
+ * the https://www.npmjs.com/package/ttypescript package.
+ */
 export function transform(
   program: ts.Program,
   fileName: string,

@@ -153,7 +153,7 @@ function getVariableNameParts(input: string): [string, string] {
   // grab the last item in the array. This will also mutate the array, removing the last item
   const variable = parts.pop()!;
 
-  return [parts.join('.'), variable];
+  return [parts.join('.').replace(/(vars|stencil|styles)/i, ''), variable];
 }
 
 export function maybeCSSVariable(input: string, variables: Record<string, string>): string {

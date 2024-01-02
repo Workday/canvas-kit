@@ -10,6 +10,9 @@ import {parseNodeToStaticValue} from './parseNodeToStaticValue';
 import {NodeTransformer} from './types';
 import {isImportedFromStyling} from './isImportedFromStyling';
 
+/**
+ * Handle all arguments of the CallExpression `createStencil()`
+ */
 export const handleCreateStencil: NodeTransformer = (
   node,
   checker,

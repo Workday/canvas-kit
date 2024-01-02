@@ -3,6 +3,9 @@ import ts from 'typescript';
 import {isImportedFromStyling} from './isImportedFromStyling';
 import {NodeTransformer} from './types';
 
+/**
+ * Handle the CallExpression `px2rem` to do static conversion and remove the CallExpression.
+ */
 export const handlePx2Rem: NodeTransformer = (node, checker) => {
   if (
     ts.isCallExpression(node) &&

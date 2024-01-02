@@ -213,7 +213,7 @@ describe('createStyles', () => {
     const result = transform(program, 'test.ts');
 
     expect(result).toContain(
-      'box-shadow:0 0 0 2px var(--css-my-vars-boxShadowInner, var(--test-fallback-inner, #fff)), 0 0 0 calc(2px + 2px) var(--css-my-vars-boxShadowOuter, var(--test-fallback-outer, rgba(0,92,184,1)));'
+      'box-shadow:0 0 0 2px var(--css-my-boxShadowInner, var(--test-fallback-inner, #fff)), 0 0 0 calc(2px + 2px) var(--css-my-boxShadowOuter, var(--test-fallback-outer, rgba(0,92,184,1)));'
     );
   });
 
@@ -285,7 +285,7 @@ describe('createStyles', () => {
 
     const result = transform(program, 'test.ts');
 
-    expect(result).toContain('background-color:var(--css-my-vars-color);');
+    expect(result).toContain('background-color:var(--css-my-color);');
   });
 
   it('should handle cssVar call expressions referencing nested variables', () => {
@@ -303,7 +303,7 @@ describe('createStyles', () => {
 
     const result = transform(program, 'test.ts');
 
-    expect(result).toContain('background-color:var(--css-my-vars-colors-background);');
+    expect(result).toContain('background-color:var(--css-my-colors-background);');
   });
 
   it('should handle css vars even without the cssVar call expressions referencing static variables', () => {
@@ -337,7 +337,7 @@ describe('createStyles', () => {
 
     const result = transform(program, 'test.ts');
 
-    expect(result).toContain('background-color:var(--css-my-vars-colors-background);');
+    expect(result).toContain('background-color:var(--css-my-colors-background);');
   });
 
   it('should handle ComputedPropertyName that are static', () => {
@@ -371,7 +371,7 @@ describe('createStyles', () => {
 
     const result = transform(program, 'test.ts');
 
-    expect(result).toContain('--css-my-vars-color:red;');
+    expect(result).toContain('--css-my-color:red;');
   });
 
   it('should slugify ComputedPropertyName with capital letters that is a variable created with createVars', () => {
@@ -387,7 +387,7 @@ describe('createStyles', () => {
 
     const result = transform(program, 'test.ts');
 
-    expect(result).toContain('--css-my-vars-hoverColor:red;');
+    expect(result).toContain('--css-my-hoverColor:red;');
   });
 
   it('should slugify cssVars with capital letters that is a variable created with createVars', () => {
@@ -403,7 +403,7 @@ describe('createStyles', () => {
 
     const result = transform(program, 'test.ts');
 
-    expect(result).toContain('background-color:var(--css-my-vars-hoverColor);');
+    expect(result).toContain('background-color:var(--css-my-hoverColor);');
   });
 
   it('should handle ComputedPropertyName that is a variable created with createVars inside an object', () => {
@@ -421,7 +421,7 @@ describe('createStyles', () => {
 
     const result = transform(program, 'test.ts');
 
-    expect(result).toContain('--css-my-vars-hover-color:red;');
+    expect(result).toContain('--css-my-hover-color:red;');
   });
 
   it('should handle fallback call expressions referencing static variables', () => {
@@ -437,7 +437,7 @@ describe('createStyles', () => {
 
     const result = transform(program, 'test.ts');
 
-    expect(result).toContain('background-color:var(--css-my-vars-color, red);');
+    expect(result).toContain('background-color:var(--css-my-color, red);');
   });
 
   it('should handle fallback call expressions referencing other variables', () => {
@@ -453,9 +453,7 @@ describe('createStyles', () => {
 
     const result = transform(program, 'test.ts');
 
-    expect(result).toContain(
-      'background-color:var(--css-my-vars-color, var(--css-my-vars-background));'
-    );
+    expect(result).toContain('background-color:var(--css-my-color, var(--css-my-background));');
   });
 
   it('should handle fallback variables if provided', () => {
@@ -534,7 +532,7 @@ describe('createStyles', () => {
     const result = transform(program, 'test.ts');
 
     expect(result).toContain('css-12345');
-    expect(result).toContain('border:1px solid var(--css-my-vars-borderColor);');
+    expect(result).toContain('border:1px solid var(--css-my-borderColor);');
   });
 
   it('should handle template stings with multiple spans', () => {
@@ -552,7 +550,7 @@ describe('createStyles', () => {
 
     expect(result).toContain('css-12345');
     expect(result).toContain(
-      'box-shadow:var(--css-my-vars-boxShadowInner) 0px 0px 0px 2px, var(--css-my-vars-boxShadowOuter) 0px 0px 0px 4px'
+      'box-shadow:var(--css-my-boxShadowInner) 0px 0px 0px 2px, var(--css-my-boxShadowOuter) 0px 0px 0px 4px'
     );
   });
 
@@ -569,7 +567,7 @@ describe('createStyles', () => {
 
     const result = transform(program, 'test.ts');
 
-    expect(result).toContain('color:var(--css-my-vars-label-emotion-safe)');
+    expect(result).toContain('color:var(--css-my-label-emotion-safe)');
   });
 
   it('should handle multiple arguments with an identifier of a type of an object literal', () => {
