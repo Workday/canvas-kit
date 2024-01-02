@@ -102,12 +102,12 @@ describe('parseObjectToStaticValue', () => {
 
     expect(
       parseObjectToStaticValue(node, program.getTypeChecker(), 'css', {
-        'my-vars-boxShadowInner': '--css-my-vars-boxShadowInner',
-        'my-vars-boxShadowOuter': '--css-my-vars-boxShadowOuter',
+        'my-boxShadowInner': '--css-my-boxShadowInner',
+        'my-boxShadowOuter': '--css-my-boxShadowOuter',
       })
     ).toEqual({
       boxShadow:
-        '0 0 0 2px var(--css-my-vars-boxShadowInner, var(--test-fallback-inner, #fff)), 0 0 0 calc(2px + 2px) var(--css-my-vars-boxShadowOuter, var(--test-fallback-outer, rgba(0,92,184,1)))',
+        '0 0 0 2px var(--css-my-boxShadowInner, var(--test-fallback-inner, #fff)), 0 0 0 calc(2px + 2px) var(--css-my-boxShadowOuter, var(--test-fallback-outer, rgba(0,92,184,1)))',
     });
   });
 
