@@ -127,18 +127,21 @@ const Sparkle = ({animationDelay = 0}: SparkleProps) => (
       stageIndex={0}
       stageScales={[1, 0.7, 0.55]}
       animationDelay={animationDelay}
+      size={canvas.space.xs}
     />
     <SparkleAnimationIcon
       icon={sparkleStage1Icon}
       stageIndex={1}
       stageScales={[1.4, 1, 0.8]}
       animationDelay={animationDelay}
+      size={canvas.space.xs}
     />
     <SparkleAnimationIcon
       icon={sparkleStage2Icon}
       stageIndex={2}
       stageScales={[1.8, 1.25, 1]}
       animationDelay={animationDelay}
+      size={canvas.space.xs}
     />
   </SparkleContainer>
 );
