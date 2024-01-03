@@ -14,6 +14,7 @@ import {CustomId} from './examples/CustomId';
 import {AllFields} from './examples/AllFields';
 import {Hint} from './examples/Hint';
 import {FieldSet} from './examples/FieldSet';
+import {Grow} from './examples/Grow';
 
 <Meta title="Preview/Inputs/Form Field" component={FormField} />
 
@@ -75,6 +76,15 @@ Set the `orientation` prop of the Form Field to designate the position of the la
 input component. By default, the orientation will be set to `vertical`.
 
 <ExampleCodeBlock code={LabelPositionHorizontal} />
+
+### Grow
+
+Set the `grow` prop of the Form Field to `true` to configure it (including the wrapped input
+component) to expand to the width of its container.
+
+**Note: This Prop is deprecated and will be removed in a future major version.**
+
+<ExampleCodeBlock code={Grow} />
 
 ### Ref Forwarding
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {createContainer} from '@workday/canvas-kit-react/common';
+import {createContainer, createElemPropsHook} from '@workday/canvas-kit-react/common';
 import {Flex, FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {space} from '@workday/canvas-kit-react/tokens';
@@ -20,6 +20,12 @@ const formFieldBaseStyles = createStyles({
   padding: 0,
   margin: `0 0 ${space.m}`,
 });
+
+export const useFormFieldWidth = createElemPropsHook(useFormFieldModel)(model => {
+  return {
+    width: model.state.grow ? '100%' : 'inherit',
+  };
+});
 /**
  * Use `FormField` to wrap input components to make them accessible. You can customize the field
  * by passing in `TextInput`, `Select`, `RadioGroup` and other form elements to `FormField.Input`.
@@ -34,6 +40,7 @@ const formFieldBaseStyles = createStyles({
 export const FormField = createContainer('div')({
   displayName: 'FormField',
   modelHook: useFormFieldModel,
+  elemPropsHook: useFormFieldWidth,
   subComponents: {
     /**
      * `FormField.Input` will render any `inputs` passed to it including `TextInput`, `Select`, `Switch`, `TextArea`, `RadioGroup` or any custom input.

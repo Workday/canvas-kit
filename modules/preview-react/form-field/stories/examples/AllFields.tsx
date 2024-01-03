@@ -18,26 +18,26 @@ export const AllFields = () => {
         borderRadius: '4px',
       }}
     >
-      <FormField>
+      <FormField grow>
         <FormField.Label>First Name</FormField.Label>
-        <FormField.Input width="100%" as={TextInput} />
+        <FormField.Input as={TextInput} />
       </FormField>
 
-      <FormField isRequired={true} error="alert">
+      <FormField isRequired={true} error="alert" grow>
         <FormField.Label>Email</FormField.Label>
-        <FormField.Container cs={{width: '100%'}}>
-          <FormField.Input width="100%" as={TextInput} />
+        <FormField.Container>
+          <FormField.Input as={TextInput} />
           <FormField.Hint>Hint text for your input</FormField.Hint>
         </FormField.Container>
       </FormField>
-      <FormField>
+      <FormField grow>
         <FormField.Label>Text Area Label</FormField.Label>
-        <FormField.Input width="100%" as={TextArea} />
+        <FormField.Input as={TextArea} />
       </FormField>
-      <FormField error="error" width="100%">
+      <FormField error="error" grow>
         <FormField.Label>Choose a Crust</FormField.Label>
         <Select items={['Pizza', 'Cheeseburger', 'Fries']}>
-          <FormField.Input width="100%" as={Select.Input} />
+          <FormField.Input as={Select.Input} />
           <Select.Popper>
             <Select.Card>
               <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
