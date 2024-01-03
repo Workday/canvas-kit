@@ -2,7 +2,7 @@ import React from 'react';
 
 import {createContainer, createElemPropsHook} from '@workday/canvas-kit-react/common';
 import {Flex, FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {createStencil} from '@workday/canvas-kit-styling';
 import {space} from '@workday/canvas-kit-react/tokens';
 
 import {useFormFieldModel, useFormFieldOrientation} from './hooks';
@@ -15,16 +15,19 @@ export interface FormFieldProps extends FlexProps {
   children: React.ReactNode;
 }
 
-const formFieldBaseStyles = createStyles({
-  border: 'none',
-  padding: 0,
-  margin: `0 0 ${space.m}`,
-});
-
-export const useFormFieldWidth = createElemPropsHook(useFormFieldModel)(model => {
-  return {
-    width: model.state.grow ? '100%' : 'inherit',
-  };
+const formFieldBaseStyles = createStencil({
+  base: {
+    border: 'none',
+    padding: 0,
+    margin: `0 0 ${space.m}`,
+  },
+  modifiers: {
+    grow: {
+      true: {
+        width: '100%',
+      },
+    },
+  },
 });
 /**
  * Use `FormField` to wrap input components to make them accessible. You can customize the field
@@ -40,7 +43,6 @@ export const useFormFieldWidth = createElemPropsHook(useFormFieldModel)(model =>
 export const FormField = createContainer('div')({
   displayName: 'FormField',
   modelHook: useFormFieldModel,
-  elemPropsHook: useFormFieldWidth,
   subComponents: {
     /**
      * `FormField.Input` will render any `inputs` passed to it including `TextInput`, `Select`, `Switch`, `TextArea`, `RadioGroup` or any custom input.
@@ -97,7 +99,11 @@ export const FormField = createContainer('div')({
   const layoutProps = useFormFieldOrientation(model.state.orientation);
 
   return (
-    <Flex as={Element} {...layoutProps} {...mergeStyles(elemProps, formFieldBaseStyles)}>
+    <Flex
+      as={Element}
+      {...layoutProps}
+      {...mergeStyles(elemProps, formFieldBaseStyles({grow: model.state.grow}))}
+    >
       {children}
     </Flex>
   );

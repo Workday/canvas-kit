@@ -39,7 +39,7 @@ const labelModifiers = createModifiers({
       maxHeight: space.xl,
     }),
     vertical: createStyles({
-      width: 'auto',
+      width: '100%',
     }),
   },
 });
