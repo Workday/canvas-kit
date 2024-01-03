@@ -145,11 +145,11 @@ const Sparkle = ({animationDelay = 0}: SparkleProps) => (
  */
 const Container = styled('div')({
   display: 'inline-flex',
-  gap: '1px', // QUESTION: is there an appropriate rem or space value for this?
+  gap: '1px',
 });
 
 /**
- * A simple component that displays three horizontal sparkles, to be used when an AI operation is loading.
+ * A simple component that displays three horizontal sparkles, to be used when an AI operation is in progress.
  */
 export const LoadingSparkles = (props: React.HTMLAttributes<HTMLDivElement>) => {
   return (

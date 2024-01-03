@@ -1,4 +1,3 @@
-// QUESTION: Should these icons be included in @workday/canvas-system-icons-web instead?
 import {CanvasSystemIcon, CanvasIconTypes} from '@workday/design-assets-types';
 
 export const sparkleStage2Icon: CanvasSystemIcon = {
