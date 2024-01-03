@@ -26,7 +26,7 @@ const AI_COLORS = {
 };
 
 /**
- * Creates a keyframe animation that cycles through the given stages.
+ * Creates a keyframe animation that cycles through styles for each stage.
  */
 const createAnimation = (stages: CSSObject[]) =>
   keyframes({
@@ -37,6 +37,9 @@ const createAnimation = (stages: CSSObject[]) =>
     '100%': stages[2],
   });
 
+/**
+ * Creates a keyframe animation that cycles through colors for each stage.
+ */
 const COLOR_ANIMATION = createAnimation([
   {fill: AI_COLORS.dragonFruit400},
   {fill: AI_COLORS.dragonFruit300},
@@ -72,7 +75,7 @@ type SparkleAnimationIconProps = {
 } & React.ComponentProps<typeof SystemIcon>;
 
 /**
- * The loading sparkle icon.
+ * The animated sparkle icon.
  */
 const SparkleAnimationIcon = styled(SystemIcon)<SparkleAnimationIconProps>(
   {
