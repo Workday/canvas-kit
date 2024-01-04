@@ -373,7 +373,7 @@ export const ReturnFocusTest = () => {
                       data-testid="focus-text-input-link"
                       onClick={() => {
                         model.events.hide();
-                        document.getElementById('return-focus-text-input').focus();
+                        document.getElementById('input-return-focus-text-input').focus();
                       }}
                     >
                       You click this link
