@@ -60,8 +60,8 @@ const tertiaryStyles = createStyles({
     ...focusRing({
       width: 2,
       separation: 0,
-      innerColor: base.frenchVanilla100,
-      outerColor: brand.common.focusOutline,
+      innerColor: cssVar(base.frenchVanilla100),
+      outerColor: cssVar(brand.common.focusOutline),
     }),
   },
 });
@@ -109,8 +109,8 @@ export const tertiaryButtonModifiers = createModifiers({
           inset: 'inner',
           width: 2,
           separation: 2,
-          innerColor: base.blackPepper400,
-          outerColor: base.frenchVanilla100,
+          innerColor: cssVar(base.blackPepper400),
+          outerColor: cssVar(base.frenchVanilla100),
         }),
       },
     }),
