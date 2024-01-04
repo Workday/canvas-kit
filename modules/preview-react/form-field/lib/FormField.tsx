@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {createContainer, createElemPropsHook} from '@workday/canvas-kit-react/common';
+import {createContainer} from '@workday/canvas-kit-react/common';
 import {Flex, FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {space} from '@workday/canvas-kit-react/tokens';
