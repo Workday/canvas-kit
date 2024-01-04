@@ -1,6 +1,6 @@
-<Meta title="Styling/Welcome" />
+<Meta title="Styling/Why Canvas Styling" />
 
-# Canvas Styling
+# Why Canvas Styling
 
 This package contains everything needed to create CSS styling. This styling package contains a
 runtime for development and a static parsing process for build time.
@@ -103,3 +103,36 @@ const myStyles = createStyles({
 
 Emotion has an internal shortcut that recognizes the `styles` property and
 [short-circuits interpolation](https://github.com/emotion-js/emotion/blob/f3b268f7c52103979402da919c9c0dd3f9e0e189/packages/serialize/src/index.js#L319).
+
+## Performance
+
+`createStyles` is more performant than `styled` components or the `css` prop because the styles must
+be statically evaluated. The actual characters of a CSS property value cannot change at runtime.
+This means we do not need to recalculate a hash every render or inject new `StyleSheet` entries into
+the `StyleSheetList` in a render cycle. Injecting new `StyleSheets` causes slow
+[Style Recalculation](https://web.dev/articles/reduce-the-scope-and-complexity-of-style-calculations).
+What is not well known is browser engines maintain an internal selector cache to make style
+recalculations as fast as possible. Adding a CSS class to a DOM element will invoke a style
+recalculation, but if the the CSS selector is already in the `StyleSheetList`, the browser can
+optimize how those styles are applied to the current element.
+
+In the runtime Emotion's case, a novel style will result in a new style hash which results in a new
+`StyleSheet` being injected into the `StyleSheetList`. To be safe, the browser's runtime engine will
+throw away any style recalculation cache and start from scratch. This happens if you render a new
+component on the page that hasn't been rendered yet, or if you make one of your style properties
+dynamic between render cycles. Eventually the Emotion cache gets warm and style recalcuation costs
+start to normalize and no longer invalidate the browser's selector cache.
+
+On a page with over 1,000 elements and over 1,000
+[CSSRules](https://developer.mozilla.org/en-US/docs/Web/API/CSSRule), (typical of a large web
+application), the difference between a &lt; 1ms for warmed selector cache and &gt; 100ms for a fresh
+selector cache. `createStyles` encourages a pattern similar to [BEM](https://getbem.com/) which
+works well with the browser's selector cache by not injecting new `StyleSheet`s during a page's
+normal operations. All styles are injected before any rendering takes place.
+
+> **Note:** Since style props force Emotion's dynamic rendering, style props will fall back to
+> Emotion's runtime performance characteristics and lose any benefits gained. Also if you use
+> `styled` components or the `css` prop in a tree that uses `createStyles`, the styles created by
+> the runtime APIs will still result in a selector cache invalidation. Even if you want to use
+> `styled` or the `css` prop, consider using CSS Variables for dynamic CSS property values to reduce
+> the performance overhead of Emotion.
