@@ -241,6 +241,163 @@
         "__isArgsStory": false
       }
     },
+    "styling-why-canvas-styling--page": {
+      "id": "styling-why-canvas-styling--page",
+      "name": "Page",
+      "title": "Styling/Why Canvas Styling",
+      "importPath": "./modules/styling/stories/Overview.stories.mdx",
+      "kind": "Styling/Why Canvas Styling",
+      "story": "Page",
+      "parameters": {
+        "fileName": "./modules/styling/stories/Overview.stories.mdx",
+        "docsOnly": true,
+        "framework": "react",
+        "__id": "styling-why-canvas-styling--page",
+        "__isArgsStory": false
+      }
+    },
+    "styling-getting-started--page": {
+      "id": "styling-getting-started--page",
+      "name": "Page",
+      "title": "Styling/Getting Started",
+      "importPath": "./modules/styling/stories/GettingStarted.stories.mdx",
+      "kind": "Styling/Getting Started",
+      "story": "Page",
+      "parameters": {
+        "fileName": "./modules/styling/stories/GettingStarted.stories.mdx",
+        "docsOnly": true,
+        "framework": "react",
+        "__id": "styling-getting-started--page",
+        "__isArgsStory": false
+      }
+    },
+    "styling-basics--create-modifiers": {
+      "id": "styling-basics--create-modifiers",
+      "name": "Create Modifiers",
+      "title": "Styling/Basics",
+      "importPath": "./modules/styling/stories/Basics.stories.mdx",
+      "kind": "Styling/Basics",
+      "story": "Create Modifiers",
+      "parameters": {
+        "fileName": "./modules/styling/stories/Basics.stories.mdx",
+        "framework": "react",
+        "__id": "styling-basics--create-modifiers",
+        "__isArgsStory": false
+      }
+    },
+    "styling-basics--create-stencil": {
+      "id": "styling-basics--create-stencil",
+      "name": "Create Stencil",
+      "title": "Styling/Basics",
+      "importPath": "./modules/styling/stories/Basics.stories.mdx",
+      "kind": "Styling/Basics",
+      "story": "Create Stencil",
+      "parameters": {
+        "fileName": "./modules/styling/stories/Basics.stories.mdx",
+        "framework": "react",
+        "__id": "styling-basics--create-stencil",
+        "__isArgsStory": false
+      }
+    },
+    "styling-basics--create-styles": {
+      "id": "styling-basics--create-styles",
+      "name": "Create Styles",
+      "title": "Styling/Basics",
+      "importPath": "./modules/styling/stories/Basics.stories.mdx",
+      "kind": "Styling/Basics",
+      "story": "Create Styles",
+      "parameters": {
+        "fileName": "./modules/styling/stories/Basics.stories.mdx",
+        "framework": "react",
+        "__id": "styling-basics--create-styles",
+        "__isArgsStory": false
+      }
+    },
+    "styling-basics--create-vars": {
+      "id": "styling-basics--create-vars",
+      "name": "Create Vars",
+      "title": "Styling/Basics",
+      "importPath": "./modules/styling/stories/Basics.stories.mdx",
+      "kind": "Styling/Basics",
+      "story": "Create Vars",
+      "parameters": {
+        "fileName": "./modules/styling/stories/Basics.stories.mdx",
+        "framework": "react",
+        "__id": "styling-basics--create-vars",
+        "__isArgsStory": false
+      }
+    },
+    "styling-basics-styling-functions--page": {
+      "id": "styling-basics-styling-functions--page",
+      "name": "Page",
+      "title": "Styling/Basics/Styling Functions",
+      "importPath": "./modules/styling/stories/StylingFunctions.stories.mdx",
+      "kind": "Styling/Basics/Styling Functions",
+      "story": "Page",
+      "parameters": {
+        "fileName": "./modules/styling/stories/StylingFunctions.stories.mdx",
+        "docsOnly": true,
+        "framework": "react",
+        "__id": "styling-basics-styling-functions--page",
+        "__isArgsStory": false
+      }
+    },
+    "styling-converting-from-emotion--emotion-button": {
+      "id": "styling-converting-from-emotion--emotion-button",
+      "name": "Emotion Button",
+      "title": "Styling/Converting From Emotion",
+      "importPath": "./modules/styling/stories/FromEmotion.stories.mdx",
+      "kind": "Styling/Converting From Emotion",
+      "story": "Emotion Button",
+      "parameters": {
+        "fileName": "./modules/styling/stories/FromEmotion.stories.mdx",
+        "framework": "react",
+        "__id": "styling-converting-from-emotion--emotion-button",
+        "__isArgsStory": false
+      }
+    },
+    "styling-converting-from-emotion--manual-styles-button": {
+      "id": "styling-converting-from-emotion--manual-styles-button",
+      "name": "Manual Styles Button",
+      "title": "Styling/Converting From Emotion",
+      "importPath": "./modules/styling/stories/FromEmotion.stories.mdx",
+      "kind": "Styling/Converting From Emotion",
+      "story": "Manual Styles Button",
+      "parameters": {
+        "fileName": "./modules/styling/stories/FromEmotion.stories.mdx",
+        "framework": "react",
+        "__id": "styling-converting-from-emotion--manual-styles-button",
+        "__isArgsStory": false
+      }
+    },
+    "styling-converting-from-emotion--styling-button": {
+      "id": "styling-converting-from-emotion--styling-button",
+      "name": "Styling Button",
+      "title": "Styling/Converting From Emotion",
+      "importPath": "./modules/styling/stories/FromEmotion.stories.mdx",
+      "kind": "Styling/Converting From Emotion",
+      "story": "Styling Button",
+      "parameters": {
+        "fileName": "./modules/styling/stories/FromEmotion.stories.mdx",
+        "framework": "react",
+        "__id": "styling-converting-from-emotion--styling-button",
+        "__isArgsStory": false
+      }
+    },
+    "styling-mergiing-styles--styling-overrides": {
+      "id": "styling-mergiing-styles--styling-overrides",
+      "name": "Styling Overrides",
+      "title": "Styling/Mergiing Styles",
+      "importPath": "./modules/styling/stories/MergingStyles.stories.mdx",
+      "kind": "Styling/Mergiing Styles",
+      "story": "Styling Overrides",
+      "parameters": {
+        "fileName": "./modules/styling/stories/MergingStyles.stories.mdx",
+        "framework": "react",
+        "__id": "styling-mergiing-styles--styling-overrides",
+        "__isArgsStory": false
+      }
+    },
     "features-collections--basic": {
       "id": "features-collections--basic",
       "name": "Basic",
@@ -630,163 +787,6 @@
         "fileName": "./modules/docs/mdx/style-props/STYLE_PROPS.mdx",
         "framework": "react",
         "__id": "features-style-props--text-example",
-        "__isArgsStory": false
-      }
-    },
-    "features-styling-welcome--page": {
-      "id": "features-styling-welcome--page",
-      "name": "Page",
-      "title": "Features/Styling/Welcome",
-      "importPath": "./modules/styling/stories/Welcome.stories.mdx",
-      "kind": "Features/Styling/Welcome",
-      "story": "Page",
-      "parameters": {
-        "fileName": "./modules/styling/stories/Welcome.stories.mdx",
-        "docsOnly": true,
-        "framework": "react",
-        "__id": "features-styling-welcome--page",
-        "__isArgsStory": false
-      }
-    },
-    "features-styling-api--create-modifiers": {
-      "id": "features-styling-api--create-modifiers",
-      "name": "Create Modifiers",
-      "title": "Features/Styling/API",
-      "importPath": "./modules/styling/stories/API.stories.mdx",
-      "kind": "Features/Styling/API",
-      "story": "Create Modifiers",
-      "parameters": {
-        "fileName": "./modules/styling/stories/API.stories.mdx",
-        "framework": "react",
-        "__id": "features-styling-api--create-modifiers",
-        "__isArgsStory": false
-      }
-    },
-    "features-styling-api--create-styles": {
-      "id": "features-styling-api--create-styles",
-      "name": "Create Styles",
-      "title": "Features/Styling/API",
-      "importPath": "./modules/styling/stories/API.stories.mdx",
-      "kind": "Features/Styling/API",
-      "story": "Create Styles",
-      "parameters": {
-        "fileName": "./modules/styling/stories/API.stories.mdx",
-        "framework": "react",
-        "__id": "features-styling-api--create-styles",
-        "__isArgsStory": false
-      }
-    },
-    "features-styling-api--create-vars": {
-      "id": "features-styling-api--create-vars",
-      "name": "Create Vars",
-      "title": "Features/Styling/API",
-      "importPath": "./modules/styling/stories/API.stories.mdx",
-      "kind": "Features/Styling/API",
-      "story": "Create Vars",
-      "parameters": {
-        "fileName": "./modules/styling/stories/API.stories.mdx",
-        "framework": "react",
-        "__id": "features-styling-api--create-vars",
-        "__isArgsStory": false
-      }
-    },
-    "features-styling-api--styling-overrides": {
-      "id": "features-styling-api--styling-overrides",
-      "name": "Styling Overrides",
-      "title": "Features/Styling/API",
-      "importPath": "./modules/styling/stories/API.stories.mdx",
-      "kind": "Features/Styling/API",
-      "story": "Styling Overrides",
-      "parameters": {
-        "fileName": "./modules/styling/stories/API.stories.mdx",
-        "framework": "react",
-        "__id": "features-styling-api--styling-overrides",
-        "__isArgsStory": false
-      }
-    },
-    "features-styling-from-emotion--emotion-button": {
-      "id": "features-styling-from-emotion--emotion-button",
-      "name": "Emotion Button",
-      "title": "Features/Styling/From Emotion",
-      "importPath": "./modules/styling/stories/FromEmotion.stories.mdx",
-      "kind": "Features/Styling/From Emotion",
-      "story": "Emotion Button",
-      "parameters": {
-        "fileName": "./modules/styling/stories/FromEmotion.stories.mdx",
-        "framework": "react",
-        "__id": "features-styling-from-emotion--emotion-button",
-        "__isArgsStory": false
-      }
-    },
-    "features-styling-from-emotion--manual-styles-button": {
-      "id": "features-styling-from-emotion--manual-styles-button",
-      "name": "Manual Styles Button",
-      "title": "Features/Styling/From Emotion",
-      "importPath": "./modules/styling/stories/FromEmotion.stories.mdx",
-      "kind": "Features/Styling/From Emotion",
-      "story": "Manual Styles Button",
-      "parameters": {
-        "fileName": "./modules/styling/stories/FromEmotion.stories.mdx",
-        "framework": "react",
-        "__id": "features-styling-from-emotion--manual-styles-button",
-        "__isArgsStory": false
-      }
-    },
-    "features-styling-from-emotion--styling-button": {
-      "id": "features-styling-from-emotion--styling-button",
-      "name": "Styling Button",
-      "title": "Features/Styling/From Emotion",
-      "importPath": "./modules/styling/stories/FromEmotion.stories.mdx",
-      "kind": "Features/Styling/From Emotion",
-      "story": "Styling Button",
-      "parameters": {
-        "fileName": "./modules/styling/stories/FromEmotion.stories.mdx",
-        "framework": "react",
-        "__id": "features-styling-from-emotion--styling-button",
-        "__isArgsStory": false
-      }
-    },
-    "features-styling-getting-started--page": {
-      "id": "features-styling-getting-started--page",
-      "name": "Page",
-      "title": "Features/Styling/Getting Started",
-      "importPath": "./modules/styling/stories/GettingStarted.stories.mdx",
-      "kind": "Features/Styling/Getting Started",
-      "story": "Page",
-      "parameters": {
-        "fileName": "./modules/styling/stories/GettingStarted.stories.mdx",
-        "docsOnly": true,
-        "framework": "react",
-        "__id": "features-styling-getting-started--page",
-        "__isArgsStory": false
-      }
-    },
-    "features-styling-stencils--create-stencil": {
-      "id": "features-styling-stencils--create-stencil",
-      "name": "Create Stencil",
-      "title": "Features/Styling/Stencils",
-      "importPath": "./modules/styling/stories/Stencils.stories.mdx",
-      "kind": "Features/Styling/Stencils",
-      "story": "Create Stencil",
-      "parameters": {
-        "fileName": "./modules/styling/stories/Stencils.stories.mdx",
-        "framework": "react",
-        "__id": "features-styling-stencils--create-stencil",
-        "__isArgsStory": false
-      }
-    },
-    "features-styling-styling-functions--page": {
-      "id": "features-styling-styling-functions--page",
-      "name": "Page",
-      "title": "Features/Styling/Styling Functions",
-      "importPath": "./modules/styling/stories/StylingFunctions.stories.mdx",
-      "kind": "Features/Styling/Styling Functions",
-      "story": "Page",
-      "parameters": {
-        "fileName": "./modules/styling/stories/StylingFunctions.stories.mdx",
-        "docsOnly": true,
-        "framework": "react",
-        "__id": "features-styling-styling-functions--page",
         "__isArgsStory": false
       }
     },
