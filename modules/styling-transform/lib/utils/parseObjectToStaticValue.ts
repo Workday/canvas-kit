@@ -34,7 +34,7 @@ function parsePropertyToStaticValue(
   if (ts.isPropertyAssignment(node)) {
     const key = ts.isIdentifier(node.name)
       ? node.name.text
-      : parseNodeToStaticValue(node.name, checker, prefix, variables); //?
+      : parseNodeToStaticValue(node.name, checker, prefix, variables);
     if (key) {
       if (ts.isObjectLiteralExpression(node.initializer)) {
         // nested
@@ -44,10 +44,10 @@ function parsePropertyToStaticValue(
           parseNodeToStaticValue(node.initializer, checker, prefix, variables),
           variables
         );
-        parseNodeToStaticValue(node.initializer, checker, prefix, variables); //?
+        parseNodeToStaticValue(node.initializer, checker, prefix, variables);
       }
 
-      return styleObj; //?
+      return styleObj;
     }
   }
 
@@ -75,7 +75,7 @@ function parsePropertyToStaticValue(
   // {...{key: 'value'}}
   if (ts.isSpreadAssignment(node) && ts.isObjectLiteralExpression(node.expression)) {
     // recurse to parse a nested ObjectLiteralExpression
-    return parseObjectToStaticValue(node.expression, checker, prefix, variables); //?
+    return parseObjectToStaticValue(node.expression, checker, prefix, variables);
   }
 
   // { ...value }
@@ -83,7 +83,7 @@ function parsePropertyToStaticValue(
     // Spread assignments are a bit complicated to use the AST to figure out, so we'll ask the
     // TypeScript type checker.
     const type = checker.getTypeAtLocation(node.expression);
-    checker.typeToString(type); //?
+    checker.typeToString(type);
     return parseStyleObjFromType(type, checker, prefix, variables);
   }
 
@@ -141,8 +141,7 @@ function maybeWrapCSSVariables(input: string, variables: Record<string, string>)
       if (prefix.startsWith('var(')) {
         return match;
       }
-      variable; //?
-      const fallbackVariable = getFallbackVariable(variable, variables); //?
+      const fallbackVariable = getFallbackVariable(variable, variables);
       const fallback = fallbackVariable
         ? `, ${maybeWrapCSSVariables(fallbackVariable, variables)}`
         : '';

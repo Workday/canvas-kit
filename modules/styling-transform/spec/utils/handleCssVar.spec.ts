@@ -14,7 +14,7 @@ describe('handleCssVar', () => {
       const styles = cssVar('--some-var')
     `);
 
-    const result = transform(program, 'test.ts', {transformers: [handleCssVar]}); //?
+    const result = transform(program, 'test.ts', {transformers: [handleCssVar]});
 
     expect(result).toContain("styles = '--some-var'");
   });
@@ -28,7 +28,7 @@ describe('handleCssVar', () => {
       const styles = cssVar(someVar)
     `);
 
-    const result = transform(program, 'test.ts', {transformers: [handleCssVar]}); //?
+    const result = transform(program, 'test.ts', {transformers: [handleCssVar]});
 
     expect(result).toContain('styles = someVar');
   });
@@ -40,7 +40,7 @@ describe('handleCssVar', () => {
       const styles = cssVar('--some-var', '--fallback')
     `);
 
-    const result = transform(program, 'test.ts', {transformers: [handleCssVar]}); //?
+    const result = transform(program, 'test.ts', {transformers: [handleCssVar]});
 
     expect(result).toContain("styles = `var(${'--some-var'}, ${'--fallback'})`");
   });
@@ -52,7 +52,7 @@ describe('handleCssVar', () => {
       const styles = cssVar('--some-var', cssVar('--fallback', 'red'))
     `);
 
-    const result = transform(program, 'test.ts', {transformers: [handleCssVar]}); //?
+    const result = transform(program, 'test.ts', {transformers: [handleCssVar]});
 
     expect(result).toContain(
       "styles = `var(${'--some-var'}, ${`var(${'--fallback'}, ${'red'})`})`"

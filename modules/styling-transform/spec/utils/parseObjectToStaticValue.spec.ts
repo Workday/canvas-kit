@@ -135,7 +135,7 @@ describe('parseObjectToStaticValue', () => {
     expect(
       parseObjectToStaticValue(node, program.getTypeChecker(), 'css', {
         '--fallback': '12px',
-      }) //?
+      })
     ).toEqual({
       padding: 'var(--foobar, var(--fallback, 12px))',
     });

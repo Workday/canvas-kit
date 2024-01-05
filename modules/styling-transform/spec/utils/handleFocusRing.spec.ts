@@ -12,7 +12,7 @@ describe('handleFocusRing', () => {
       const styles = {...focusRing()}
     `);
 
-    const result = transform(program, 'test.ts', {transformers: [handleFocusRing]}); //?
+    const result = transform(program, 'test.ts', {transformers: [handleFocusRing]});
 
     expect(result).toContain(
       'styles = { ...{ boxShadow: `0 0 0 ${"0px"} ${"--cnvs-base-palette-french-vanilla-100"}, 0 0 0 calc(${"2px"} + ${"0px"}) ${"--cnvs-brand-common-focus-outline"}` } }'
@@ -29,7 +29,7 @@ describe('handleFocusRing', () => {
       })}
     `);
 
-    const result = transform(program, 'test.ts', {transformers: [handleFocusRing]}); //?
+    const result = transform(program, 'test.ts', {transformers: [handleFocusRing]});
 
     expect(result).toContain(
       "const styles = { ...{ boxShadow: `0 0 0 ${'1px'} ${myVars.boxShadowInner}, 0 0 0 calc(${'10px'} + ${'1px'}) ${'red'}` } }"
@@ -47,7 +47,7 @@ describe('handleFocusRing', () => {
       })}
     `);
 
-    const result = transform(program, 'test.ts', {transformers: [handleFocusRing]}); //?
+    const result = transform(program, 'test.ts', {transformers: [handleFocusRing]});
 
     expect(result).toContain(
       "const styles = { ...{ boxShadow: `inset 0 0 0 ${'1px'} ${'blue'}, 0 0 0 ${'10px'} ${'red'}` } }"
@@ -65,7 +65,7 @@ describe('handleFocusRing', () => {
       })}
     `);
 
-    const result = transform(program, 'test.ts', {transformers: [handleFocusRing]}); //?
+    const result = transform(program, 'test.ts', {transformers: [handleFocusRing]});
 
     expect(result).toContain(
       "const styles = { ...{ boxShadow: `inset 0 0 0 ${'1px'} ${'red'} inset 0 0 0 calc(${'10px'} + ${'1px'}) ${'blue'}` } }"

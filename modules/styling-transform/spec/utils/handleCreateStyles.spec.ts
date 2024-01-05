@@ -212,7 +212,7 @@ describe('createStyles', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toContain(
       'box-shadow:0 0 0 2px var(--css-my-boxShadowInner, var(--test-fallback-inner, #fff)), 0 0 0 calc(2px + 2px) var(--css-my-boxShadowOuter, var(--test-fallback-outer, rgba(0,92,184,1)));'
@@ -237,7 +237,7 @@ describe('createStyles', () => {
 
     const result = transform(program, 'test.ts', {
       variables: {'--test-fallback-inner': 'red', '--test-fallback-outer': 'blue'},
-    }); //?
+    });
 
     expect(result).toContain(
       'box-shadow:0 0 0 2px var(--test-fallback-inner, red), 0 0 0 calc(2px + 2px) var(--test-fallback-outer, blue);'
@@ -295,7 +295,7 @@ describe('createStyles', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
     expect(result).toContain('background-color:var(--color);');
   });
@@ -492,7 +492,7 @@ describe('createStyles', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts', {variables: {'--var-1': 'red'}}); //?
+    const result = transform(program, 'test.ts', {variables: {'--var-1': 'red'}});
 
     expect(result).toContain('background-color:var(--var-1, red);');
   });

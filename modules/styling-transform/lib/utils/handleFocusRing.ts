@@ -46,9 +46,7 @@ export const handleFocusRing: NodeTransformer = (node, checker, prefix, vars) =>
         });
       }
 
-      defaults; //?
-
-      const inset = parseNodeToStaticValue(defaults.inset, checker, prefix, vars); //?
+      const inset = parseNodeToStaticValue(defaults.inset, checker, prefix, vars);
 
       let boxShadow: ts.TemplateExpression;
       switch (inset) {
