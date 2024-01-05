@@ -3,7 +3,6 @@ import ts from 'typescript';
 import {slugify} from '@workday/canvas-kit-styling';
 
 import {makeEmotionSafe} from './makeEmotionSafe';
-import {getFallbackVariable} from './getFallbackVariable';
 import {getErrorMessage} from './getErrorMessage';
 
 /**
@@ -27,6 +26,11 @@ export function parseNodeToStaticValue(
     return `${node.text}px`;
   }
 
+  // undefined
+  if (ts.isIdentifier(node) && node.text === 'undefined') {
+    return 'undefined';
+  }
+
   // a.b
   if (ts.isPropertyAccessExpression(node)) {
     const varName = getCSSVariableKey(getPropertyAccessExpressionText(node));
@@ -42,24 +46,6 @@ export function parseNodeToStaticValue(
 
     if (variables[varName]) {
       return variables[varName];
-    }
-  }
-
-  // cssVar(any)
-  if (
-    ts.isCallExpression(node) &&
-    ts.isIdentifier(node.expression) &&
-    node.expression.text === 'cssVar'
-  ) {
-    const value1 = parseNodeToStaticValue(node.arguments[0], checker, prefix, variables);
-    if (value1) {
-      const value2 = node.arguments[1]
-        ? parseNodeToStaticValue(node.arguments[1], checker, prefix, variables)
-        : undefined;
-      if (value2) {
-        return `var(${value1}, ${maybeCSSVariable(value2 || '', variables)})`;
-      }
-      return maybeCSSVariable(value1, variables);
     }
   }
 
@@ -154,14 +140,6 @@ function getVariableNameParts(input: string): [string, string] {
   const variable = parts.pop()!;
 
   return [parts.join('.').replace(/(vars|stencil|styles)/i, ''), variable];
-}
-
-export function maybeCSSVariable(input: string, variables: Record<string, string>): string {
-  if (input.startsWith('--')) {
-    const fallback = getFallbackVariable(input, variables);
-    return fallback ? `var(${input}, ${maybeCSSVariable(fallback, variables)})` : `var(${input})`;
-  }
-  return input;
 }
 
 /**

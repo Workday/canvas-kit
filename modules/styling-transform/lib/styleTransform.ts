@@ -8,6 +8,9 @@ import {handleCreateStyles} from './utils/handleCreateStyles';
 import {handleCreateStencil} from './utils/handleCreateStencil';
 import {handleCalc} from './utils/handleCalc';
 import {handlePx2Rem} from './utils/handlePx2Rem';
+import {handleFocusRing} from './utils/handleFocusRing';
+import {handleCssVar} from './utils/handleCssVar';
+import {NodeTransformer} from './utils/types';
 
 export type NestedStyleObject = {[key: string]: string | NestedStyleObject};
 
@@ -15,6 +18,7 @@ export interface StyleTransformerOptions {
   prefix: string;
   variables: Record<string, string>;
   fallbackFiles?: string[];
+  transformers?: NodeTransformer[];
 }
 
 let vars: Record<string, string> = {};
@@ -28,11 +32,30 @@ export function _reset() {
   loadedFallbacks = false;
 }
 
+/**
+ * Optional list of transformers. Useful to override for tests
+ */
+const defaultTransformers = [
+  handleCssVar,
+  handleFocusRing,
+  handleCalc,
+  handlePx2Rem,
+  handleCreateVars,
+  handleCreateStyles,
+  handleCreateStencil,
+];
+
 export default function styleTransformer(
   program: ts.Program,
-  {prefix = 'css', variables = {}, fallbackFiles = []}: Partial<StyleTransformerOptions> = {
+  {
+    prefix = 'css',
+    variables = {},
+    fallbackFiles = [],
+    transformers = defaultTransformers,
+  }: Partial<StyleTransformerOptions> = {
     prefix: 'css',
     variables: {},
+    transformers: defaultTransformers,
   }
 ): ts.TransformerFactory<ts.SourceFile> {
   if (!loadedFallbacks) {
@@ -61,13 +84,7 @@ export default function styleTransformer(
       // eslint-disable-next-line no-param-reassign
       node = ts.visitEachChild(node, visit, context);
 
-      return handleTransformers(node, checker, prefix, vars)(
-        handleCreateStyles,
-        handleCreateVars,
-        handleCreateStencil,
-        handleCalc,
-        handlePx2Rem
-      );
+      return handleTransformers(node, checker, prefix, vars)(transformers);
     };
 
     return node => ts.visitNode(node, visit);
@@ -81,7 +98,8 @@ export default function styleTransformer(
 export function transform(
   program: ts.Program,
   fileName: string,
-  options?: Partial<StyleTransformerOptions>
+  options?: Partial<StyleTransformerOptions>,
+  transformers?: NodeTransformer[]
 ) {
   const source =
     program.getSourceFile(fileName) || ts.createSourceFile(fileName, '', ts.ScriptTarget.ES2019);
@@ -90,15 +108,15 @@ export function transform(
 
   return printer.printFile(
     ts
-      .transform(source, [styleTransformer(program, options)])
-      .transformed.find(s => (s.fileName = fileName)) || source
+      .transform(source, [styleTransformer(program, {...options, transformers})])
+      .transformed.find(s => s.fileName === fileName) || source
   );
 }
 
 const handleTransformers =
   (node: ts.Node, checker: ts.TypeChecker, prefix: string, variables: Record<string, string>) =>
   (
-    ...transformers: ((
+    transformers: ((
       node: ts.Node,
       checker: ts.TypeChecker,
       prefix: string,

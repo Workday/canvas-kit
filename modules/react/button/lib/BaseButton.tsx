@@ -251,7 +251,7 @@ export const buttonModifiers = createModifiers({
   iconPosition: {
     largeOnly: createStyles({
       padding: '0',
-      minWidth: `calc(${cssVar(system.space.x4)} * 3)`,
+      minWidth: `calc(${system.space.x4} * 3)`,
     }),
     largeStart: createStyles({
       paddingInlineStart: system.space.x6,
@@ -268,7 +268,7 @@ export const buttonModifiers = createModifiers({
     }),
     mediumEnd: createStyles({
       paddingInlineStart: system.space.x6,
-      paddingInlineEnd: `calc(${cssVar(system.space.x1)} * 5)`,
+      paddingInlineEnd: `calc(${system.space.x1} * 5)`,
     }),
     smallOnly: createStyles({padding: '0', minWidth: system.space.x8}),
     smallStart: createStyles({

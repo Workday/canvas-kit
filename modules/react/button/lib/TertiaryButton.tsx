@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {buttonVars, getIconPosition} from './BaseButton';
 import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
-import {createStyles, cssVar, createModifiers} from '@workday/canvas-kit-styling';
+import {createStyles, createModifiers} from '@workday/canvas-kit-styling';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {system, brand, base} from '@workday/canvas-tokens-web';
 import {borderRadius, space} from '@workday/canvas-kit-react/tokens';
@@ -60,8 +60,8 @@ const tertiaryStyles = createStyles({
     ...focusRing({
       width: 2,
       separation: 0,
-      innerColor: cssVar(base.frenchVanilla100, cssVar(buttonVars.focus.boxShadowInner)),
-      outerColor: cssVar(brand.common.focusOutline, cssVar(buttonVars.focus.boxShadowOuter)),
+      innerColor: base.frenchVanilla100,
+      outerColor: brand.common.focusOutline,
     }),
   },
 });
@@ -109,8 +109,8 @@ export const tertiaryButtonModifiers = createModifiers({
           inset: 'inner',
           width: 2,
           separation: 2,
-          innerColor: cssVar(base.blackPepper400, cssVar(buttonVars.focus.boxShadowInner)),
-          outerColor: cssVar(base.frenchVanilla100, cssVar(buttonVars.focus.boxShadowOuter)),
+          innerColor: base.blackPepper400,
+          outerColor: base.frenchVanilla100,
         }),
       },
     }),

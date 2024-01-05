@@ -1,8 +1,7 @@
 import ts from 'typescript';
+import {getFallbackVariable} from './getFallbackVariable';
 
-import {base, brand} from '@workday/canvas-tokens-web';
-
-import {maybeCSSVariable, parseNodeToStaticValue} from './parseNodeToStaticValue';
+import {parseNodeToStaticValue} from './parseNodeToStaticValue';
 
 export type NestedStyleObject = {[key: string]: string | NestedStyleObject};
 
@@ -35,20 +34,20 @@ function parsePropertyToStaticValue(
   if (ts.isPropertyAssignment(node)) {
     const key = ts.isIdentifier(node.name)
       ? node.name.text
-      : parseNodeToStaticValue(node.name, checker, prefix, variables);
+      : parseNodeToStaticValue(node.name, checker, prefix, variables); //?
     if (key) {
       if (ts.isObjectLiteralExpression(node.initializer)) {
         // nested
         styleObj[key] = parseObjectToStaticValue(node.initializer, checker, prefix, variables);
       } else {
-        styleObj[key] =
-          maybeCSSVariable(
-            parseNodeToStaticValue(node.initializer, checker, prefix, variables),
-            variables
-          ) || '';
+        styleObj[key] = maybeWrapCSSVariables(
+          parseNodeToStaticValue(node.initializer, checker, prefix, variables),
+          variables
+        );
+        parseNodeToStaticValue(node.initializer, checker, prefix, variables); //?
       }
 
-      return styleObj;
+      return styleObj; //?
     }
   }
 
@@ -62,75 +61,21 @@ function parsePropertyToStaticValue(
         // nested
         styleObj[key] = parseObjectToStaticValue(node.type!, checker, prefix, variables);
       } else {
-        styleObj[key] = parseNodeToStaticValue(node.type!, checker, prefix, variables) || '';
+        styleObj[key] =
+          maybeWrapCSSVariables(
+            parseNodeToStaticValue(node.type!, checker, prefix, variables),
+            variables
+          ) || '';
       }
 
       return styleObj;
     }
   }
 
-  // { ...focusRing() }
-  /**
-   * A spread assignment looks like:
-   *
-   * ```ts
-   * {
-   *   ...styles
-   * }
-   * ```
-   *
-   * https://ts-ast-viewer.com/#code/MYewdgzgLgBFCmBbADjAvDA3gMxCAXDAOQBGAhgE5EC+AUKJLAigEzpYB0Xzy1QA
-   */
-  if (ts.isSpreadAssignment(node)) {
-    // Detect `focusRing` calls. This is temporary until we figure out a better way to do focus
-    // rings that doesn't require a special entry in the transform function.
-    //
-    // TODO: implement a fully working type resolver for CSS variables or remove support for them an
-    // remove all uses of `focusRing` from new styling code
-    if (
-      ts.isCallExpression(node.expression) &&
-      ts.isIdentifier(node.expression.expression) &&
-      node.expression.expression.text === 'focusRing'
-    ) {
-      const argumentObject = node.expression.arguments[0];
-      // defaults
-      const defaults = {
-        width: '2px',
-        separation: '0px',
-        inset: undefined as undefined | string,
-        innerColor: `var(${base.frenchVanilla100}, rgba(255,255,255,1))`,
-        outerColor: `var(${brand.common.focusOutline}, rgba(8,117,225,1))`,
-      };
-      if (argumentObject && ts.isObjectLiteralExpression(argumentObject)) {
-        argumentObject.properties.forEach(property => {
-          if (ts.isPropertyAssignment(property) && ts.isIdentifier(property.name)) {
-            defaults[property.name.text as keyof typeof defaults] = parseNodeToStaticValue(
-              property.initializer,
-              checker,
-              prefix,
-              variables
-            );
-          }
-        });
-
-        let boxShadow;
-        switch (defaults.inset) {
-          case 'outer':
-            boxShadow = `inset 0 0 0 ${defaults.separation} ${defaults.outerColor}, inset 0 0 0 calc(${defaults.width} + ${defaults.separation}) ${defaults.innerColor}`;
-            break;
-
-          case 'inner':
-            boxShadow = `inset 0 0 0 ${defaults.separation} ${defaults.innerColor}, 0 0 0 ${defaults.width} ${defaults.outerColor}`;
-            break;
-
-          default:
-            boxShadow = `0 0 0 ${defaults.separation} ${defaults.innerColor}, 0 0 0 calc(${defaults.width} + ${defaults.separation}) ${defaults.outerColor}`;
-            break;
-        }
-
-        return {boxShadow};
-      }
-    }
+  // {...{key: 'value'}}
+  if (ts.isSpreadAssignment(node) && ts.isObjectLiteralExpression(node.expression)) {
+    // recurse to parse a nested ObjectLiteralExpression
+    return parseObjectToStaticValue(node.expression, checker, prefix, variables); //?
   }
 
   // { ...value }
@@ -138,6 +83,7 @@ function parsePropertyToStaticValue(
     // Spread assignments are a bit complicated to use the AST to figure out, so we'll ask the
     // TypeScript type checker.
     const type = checker.getTypeAtLocation(node.expression);
+    checker.typeToString(type); //?
     return parseStyleObjFromType(type, checker, prefix, variables);
   }
 
@@ -180,4 +126,27 @@ export function parseStyleObjFromType(
       ...parsePropertyToStaticValue(declaration, checker, prefix, variables),
     };
   }, styleObj);
+}
+
+/**
+ * Wrap all unwrapped CSS Variables. For example, `{padding: '--foo'}` will be replaced with
+ * `{padding: 'var(--foo)'}`. It also works on variables in the middle of the property.
+ */
+function maybeWrapCSSVariables(input: string, variables: Record<string, string>): string {
+  // matches an string starting with `--` that isn't already wrapped in a `var()`. It tries to match
+  // any character that isn't a valid separator in CSS
+  return input.replace(
+    /([a-z]*[ (]*)(--[^\s;,'})]+)/gi,
+    (match: string, prefix: string, variable: string) => {
+      if (prefix.startsWith('var(')) {
+        return match;
+      }
+      variable; //?
+      const fallbackVariable = getFallbackVariable(variable, variables); //?
+      const fallback = fallbackVariable
+        ? `, ${maybeWrapCSSVariables(fallbackVariable, variables)}`
+        : '';
+      return `${prefix}var(${variable}${fallback})`;
+    }
+  );
 }
