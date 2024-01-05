@@ -13,10 +13,19 @@ import {Grow} from './examples/Grow.tsx';
 import {Hint} from './examples/Hint.tsx';
 import {LabelPosition} from './examples/LabelPosition.tsx';
 import {Required} from './examples/Required.tsx';
+import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
 
 <Meta title="Components/Inputs/Form Field" component={FormField} />
 
 # Canvas Kit Form Field
+
+<StatusIndicator variant="red">
+  <StatusIndicator.Label>Deprecated</StatusIndicator.Label>
+</StatusIndicator>
+
+`FormField` in Main has been deprecated and will be removed in a future major version. Please use
+[`FormField` in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-inputs-form-field--basic)
+instead.
 
 Form Field allows users to wrap input components to make them accessible and adds complementary
 labels and error messages.
