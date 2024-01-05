@@ -125,7 +125,7 @@ const baseButtonStyles = createStyles({
   borderWidth: '1px',
   borderStyle: 'solid',
   gap: system.space.x2,
-  borderColor: buttonVars.default.border,
+  borderColor: cssVar(buttonVars.default.border, 'transparent'),
   cursor: 'pointer',
   display: 'inline-flex',
   boxShadow: 'none',
@@ -191,7 +191,7 @@ const baseButtonStyles = createStyles({
       fill: cssVar(buttonVars.active.icon, base.blackPepper400),
     },
     '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
-      fill: buttonVars.active.icon,
+      fill: cssVar(buttonVars.active.icon, base.blackPepper400),
     },
   },
   '&:disabled, &.disabled': {
