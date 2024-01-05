@@ -72,7 +72,7 @@ export const tertiaryButtonModifiers = createModifiers({
       [buttonVars.default.icon]: brand.primary.base,
       [buttonVars.hover.icon]: brand.primary.dark,
       [buttonVars.focus.icon]: brand.primary.base,
-      [buttonVars.active.icon]: brand.primary.dark,
+      [buttonVars.active.icon]: brand.primary.darkest,
       [buttonVars.disabled.icon]: brand.primary.base,
     }),
   },
