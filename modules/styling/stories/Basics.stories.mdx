@@ -1,10 +1,63 @@
 import {SymbolDoc} from '@workday/canvas-kit-docs';
 
+import {CreateStyles} from './examples/CreateStyles';
+import {CreateVars} from './examples/CreateVars';
+import {CreateModifiers} from './examples/CreateModifiers';
 import {CreateStencil} from './examples/CreateStencil';
 
-<Meta title="Features/Styling/Stencils" />
+<Meta title="Styling/Basics" />
 
-## Stencil
+## Usage
+
+<SymbolDoc name="createStyles" />
+
+<ExampleCodeBlock code={CreateStyles} />
+
+In this example, the HTML will look like:
+
+```html
+<div class="css-m39zwu"></div>
+```
+
+The CSS will look like this:
+
+```css
+.css-m39zwu {
+  width: 100px;
+  height: 100px;
+  background-color: gray;
+}
+```
+
+We're using `className` for simplicity here. Most components will use the `cs` prop instead for more
+versatility.
+
+<SymbolDoc name="createVars" />
+
+<ExampleCodeBlock code={CreateVars} />
+
+In this example, the HTML will look like:
+
+```html
+<div class="css-4iptxs" style="--c6kna-background: gray;"></div>
+<div class="css-4iptxs" style="--c6kna-background: blue;"></div>
+```
+
+And the CSS will look like:
+
+```css
+.css-4iptxs {
+  width: 100px;
+  height: 100px;
+  background-color: var(--c6kna-background);
+}
+```
+
+<SymbolDoc name="createModifiers" />
+
+<ExampleCodeBlock code={CreateModifiers} />
+
+## Create Stencil
 
 Stencils are a reusable function that returns `style` and `className` props in an object. A Stencil
 should apply to a single element. If your component has nested elements, you can either nest styles
@@ -257,47 +310,5 @@ The HTML will look something like this:
 ```
 
 Notice the stencil adds all the class names that match the base, modifiers, and compound modifiers.
-
-### Style Merging
-
-CSS style property merging works by
-[CSS specificity](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity). If two matching
-selectors have the same specificity, the last defined property wins. Stencils take advantage of this
-by making all styles have the same specificity of `0-1-0` and inserting `base` styles, then
-`modifiers` (in order), then `compound` modifiers (in order). This means if a property was defined
-in `base`, a `modifier`, and a `compound` modifier, the `compound` modifier would win because it is
-the last defined. This should be the expected order.
-
-#### `handleCsProp`
-
-But what about when using components that use `@emotion/react` or `@emotion/styled`? Those libraries
-use a different approach. Instead of multiple class names, they use a single, merged class name.
-
-`handleCsProp` was created to handle integration with existing components that use the `css` prop
-from `@emotion/react` or the `styled` components from `@emotion/styled`. If a class name from one of
-those libraries is detected, style merging will follow the same rules as those libraries. Instead of
-multiple class names, a single class name with all matching properties is created. The
-`handleCsProp` also takes care of merging `style` props, `className` props, and can handle the `cs`
-prop:
-
-```tsx
-const myStencil = createStencil({
-  // ...
-});
-
-const MyComponent = elemProps => {
-  return <div {...handleProps(elemProps, myStencil({}))} />;
-};
-
-// All props will be merged for you
-<MyComponent style={{color: 'red'}} className="my-classname" cs={{position: 'relative'}} />;
-```
-
-`handleCsProp` will make sure the `style` prop is passed to the `div` and that the `my-classname`
-CSS class name appears on the `div`'s class list. Also the `cs` prop will add the appropriate styles
-to the element via a CSS class name. If your component needs to handle being passed a `className`,
-`style`, or `cs` prop, use `handleCsProp`.
-
-## Examples
 
 <ExampleCodeBlock code={CreateStencil} />

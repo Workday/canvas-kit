@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.2.2](https://github.com/Workday/canvas-kit/releases/tag/v10.2.2) (2024-01-05)
+
+### Documentation
+
+- fix: Move styling to its own section ([#2498](https://github.com/Workday/canvas-kit/pull/2498)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v10.2.1](https://github.com/Workday/canvas-kit/releases/tag/v10.2.1) (2023-12-21)
 
 ### Components
