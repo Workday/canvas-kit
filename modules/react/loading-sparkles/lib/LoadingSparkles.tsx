@@ -1,16 +1,14 @@
 import * as React from 'react';
-import {keyframes, CSSObject} from '@emotion/react';
+import {keyframes} from '@emotion/react';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {canvas} from '@workday/canvas-kit-react/tokens';
 import {styled} from '@workday/canvas-kit-react/common';
-import {sparkleStage0Icon} from './sparkleStage0Icon';
-import {sparkleStage1Icon} from './sparkleStage1Icon';
-import {sparkleStage2Icon} from './sparkleStage2Icon';
+import {sparkleIcon} from './sparkleIcon';
 
 /**
  * Duration of the sparkle animation (in ms).
  */
-const ANIMATION_DURATION_MS = 1200;
+const ANIMATION_DURATION_MS = 1230;
 
 // TODO: Replace with the actual color tokens when they are available.
 /**
@@ -26,124 +24,54 @@ const AI_COLORS = {
 };
 
 /**
- * Creates a keyframe animation that cycles through styles for each stage.
+ * The animation for the sparkle.
  */
-const createAnimation = (stages: CSSObject[]) =>
-  keyframes({
-    '0%': stages[2],
-    '20%': stages[2],
-    '47%': stages[0],
-    '73%': stages[1],
-    '100%': stages[2],
-  });
-
-/**
- * Creates a keyframe animation that cycles through colors for each stage.
- */
-const COLOR_ANIMATION = createAnimation([
-  {fill: AI_COLORS.dragonFruit400},
-  {fill: AI_COLORS.dragonFruit300},
-  {fill: AI_COLORS.dragonFruit200},
-]);
-
-/**
- * Creates a keyframe animation that scales the sparkle to the given stage.
- */
-const createScaleAnimation = (stageIndex: number, stageScales: number[]) =>
-  createAnimation(
-    stageScales.map((scale, index) => ({
-      opacity: index === stageIndex ? 1 : 0,
-      transform: `scale(${scale})`,
-    }))
-  );
+const LOADING_ANIMATION = keyframes({
+  '0%, 79%, 100%': {
+    opacity: 0.2,
+    transform: 'scale(0.55)',
+  },
+  '27%': {
+    opacity: 1,
+    transform: 'scale(1)',
+  },
+  '53%': {
+    opacity: 0.6,
+    transform: 'scale(0.7)',
+  },
+});
 
 type SparkleAnimationIconProps = {
   /**
    * The animation delay of the sparkle (in ms).
    */
   animationDelay: number;
-
-  /**
-   * At which stage the icon is visible.
-   */
-  stageIndex: number;
-
-  /**
-   * The scales of the sparkle at each stage.
-   */
-  stageScales: number[];
-} & React.ComponentProps<typeof SystemIcon>;
+};
 
 /**
  * The animated sparkle icon.
  */
 const SparkleAnimationIcon = styled(SystemIcon)<SparkleAnimationIconProps>(
   {
-    position: 'absolute',
-    top: 0,
-    left: 0,
     animationDuration: ANIMATION_DURATION_MS + 'ms',
     animationFillMode: 'both',
     animationIterationCount: 'infinite',
+    animationName: LOADING_ANIMATION,
+    animationTimingFunction: 'ease-in-out',
     '.wd-sparkle-fill': {
-      animationDuration: ANIMATION_DURATION_MS + 'ms',
-      animationFillMode: 'both',
-      animationIterationCount: 'infinite',
-      animationName: COLOR_ANIMATION,
+      fill: AI_COLORS.dragonFruit400,
     },
   },
-  ({animationDelay, stageIndex, stageScales}) => ({
+  ({animationDelay}) => ({
     animationDelay: animationDelay + 'ms',
-    animationName: createScaleAnimation(stageIndex, stageScales),
-    '.wd-sparkle-fill': {
-      animationDelay: animationDelay + 'ms',
-    },
   })
 );
 
 /**
- * A container for the loading sparkle stages.
+ * An individual loading sparkle.
  */
-const SparkleContainer = styled('div')({
-  position: 'relative',
-  width: canvas.space.xs,
-  height: canvas.space.xs,
-});
-
-type SparkleProps = {
-  /**
-   * The animation delay of the sparkle (in ms).
-   */
-  animationDelay?: number;
-};
-
-/**
- * A loading sparkle, which consists of three SVGs laid on top of each other.
- */
-const Sparkle = ({animationDelay = 0}: SparkleProps) => (
-  <SparkleContainer>
-    <SparkleAnimationIcon
-      icon={sparkleStage0Icon}
-      stageIndex={0}
-      stageScales={[1, 0.7, 0.55]}
-      animationDelay={animationDelay}
-      size={canvas.space.xs}
-    />
-    <SparkleAnimationIcon
-      icon={sparkleStage1Icon}
-      stageIndex={1}
-      stageScales={[1.4, 1, 0.8]}
-      animationDelay={animationDelay}
-      size={canvas.space.xs}
-    />
-    <SparkleAnimationIcon
-      icon={sparkleStage2Icon}
-      stageIndex={2}
-      stageScales={[1.8, 1.25, 1]}
-      animationDelay={animationDelay}
-      size={canvas.space.xs}
-    />
-  </SparkleContainer>
+const Sparkle = ({animationDelay = 0}: {animationDelay?: number}) => (
+  <SparkleAnimationIcon icon={sparkleIcon} animationDelay={animationDelay} size={canvas.space.xs} />
 );
 
 /**
