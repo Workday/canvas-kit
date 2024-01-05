@@ -3,7 +3,6 @@ import {Theme, ThemeProvider, CacheProvider} from '@emotion/react';
 import {InputProvider} from './InputProvider';
 import {defaultCanvasTheme, PartialEmotionCanvasTheme, useTheme} from './theming';
 import {brand} from '@workday/canvas-tokens-web';
-// eslint-disable-next-line @emotion/no-vanilla
 import {cache} from '@emotion/css';
 import {createStyles} from '@workday/canvas-kit-styling';
 
