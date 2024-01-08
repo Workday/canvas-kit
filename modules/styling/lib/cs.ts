@@ -1,4 +1,3 @@
-// eslint-disable-next-line @emotion/no-vanilla
 import {cache, css} from '@emotion/css';
 import {getRegisteredStyles} from '@emotion/utils';
 import {serializeStyles, Keyframes, SerializedStyles, CSSObject} from '@emotion/serialize';
@@ -760,7 +759,7 @@ export type StencilModifierConfig<
 > = Record<string, Record<string, StylesReturn<V>>>;
 
 export type StencilCompoundConfig<M> = {
-  modifiers: {[K in keyof M]?: keyof M[K]};
+  modifiers: {[K in keyof M]?: MaybeBoolean<keyof M[K]>};
   styles: SerializedStyles | CSSObject;
 };
 

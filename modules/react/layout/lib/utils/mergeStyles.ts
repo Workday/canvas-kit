@@ -1,4 +1,3 @@
-// eslint-disable-next-line @emotion/no-vanilla
 import {css} from '@emotion/css';
 import {CSToPropsInput, handleCsProp} from '@workday/canvas-kit-styling';
 import {boxStyleFn} from '../Box';

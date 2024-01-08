@@ -1,6 +1,5 @@
 import React from 'react';
 
-// eslint-disable-next-line @emotion/no-vanilla
 import {cache} from '@emotion/css';
 import {jsx, CacheProvider} from '@emotion/react';
 import styled from '@emotion/styled';

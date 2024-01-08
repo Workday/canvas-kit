@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.2.4](https://github.com/Workday/canvas-kit/releases/tag/v10.2.4) (2024-01-08)
+
+### Infrastructure
+
+- fix: Fix TS error for boolean modifiers in compound stencils styles ([#2507](https://github.com/Workday/canvas-kit/pull/2507)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v10.2.3](https://github.com/Workday/canvas-kit/releases/tag/v10.2.3) (2024-01-05)
+
+### Infrastructure
+
+- ci: Update reviewer-lottery.yml ([#2503](https://github.com/Workday/canvas-kit/pull/2503)) ([@mannycarrera4](https://github.com/mannycarrera4))
+- chore: Remove ESLint warning for @emotion/css ([#2505](https://github.com/Workday/canvas-kit/pull/2505)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v10.2.2](https://github.com/Workday/canvas-kit/releases/tag/v10.2.2) (2024-01-05)
 
 ### Documentation
