@@ -3,7 +3,7 @@ import transformer from '../updateLabelTextProps';
 
 const expectTransform = expectTransformFactory(transformer);
 
-describe('Canvas Kit Transfor Label Codemod', () => {
+describe('Canvas Kit Transform Label Codemod', () => {
   it('should ignore non-canvas-kit imports', () => {
     const input = `
         import {LabelText} from '@workday/any-other-package';
