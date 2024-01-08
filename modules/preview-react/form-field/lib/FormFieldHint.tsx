@@ -22,7 +22,7 @@ export const FormFieldHint = createSubcomponent('p')({
       <Subtext
         as={Element}
         size="medium"
-        color={model.state.hasError ? theme.canvas.palette.error.main : undefined}
+        color={model.state.error === 'error' ? theme.canvas.palette.error.main : undefined}
         marginY={space.xxs}
         {...elemProps}
       >
