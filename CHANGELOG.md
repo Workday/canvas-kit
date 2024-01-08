@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.2.4](https://github.com/Workday/canvas-kit/releases/tag/v10.2.4) (2024-01-08)
+
+### Infrastructure
+
+- fix: Fix TS error for boolean modifiers in compound stencils styles ([#2507](https://github.com/Workday/canvas-kit/pull/2507)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
 ## [v10.2.3](https://github.com/Workday/canvas-kit/releases/tag/v10.2.3) (2024-01-05)
 
 ### Infrastructure
