@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {base, system} from '@workday/canvas-tokens-web';
-import {createModifiers, createStencil} from '@workday/canvas-kit-styling';
+import {createStencil} from '@workday/canvas-kit-styling';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 
 export interface TypeLabelProps extends BoxProps {
