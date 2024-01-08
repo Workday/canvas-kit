@@ -1,13 +1,13 @@
 import * as React from 'react';
 import {base, system} from '@workday/canvas-tokens-web';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createModifiers, createStyles, CSProps} from '@workday/canvas-kit-styling';
-import {mergeStyles, CommonStyleProps} from '@workday/canvas-kit-react/layout';
+import {createModifiers, createStyles} from '@workday/canvas-kit-styling';
+import {mergeStyles, BoxProps} from '@workday/canvas-kit-react/layout';
 
 type TypeSize = 'large' | 'medium' | 'small';
 type TokenName = `${keyof typeof system.type}.${TypeSize}`;
 
-export interface TextProps extends CSProps, CommonStyleProps {
+export interface TextProps extends BoxProps {
   /**
    * Type token as string with level and size separated by dot.
    * These values map to our [Canvas type levels](https://canvas.workday.com/tokens/type#type-styles).
@@ -17,7 +17,6 @@ export interface TextProps extends CSProps, CommonStyleProps {
    * ```
    */
   typeLevel?: TokenName;
-  children?: React.ReactNode;
   /**
    * Type variant token names: `error`, `hint` or `inverse`.
    *
@@ -30,6 +29,7 @@ export interface TextProps extends CSProps, CommonStyleProps {
 
 const textModifiers = createModifiers({
   typeLevel: {
+    // Title level styles
     'title.large': createStyles({
       ...system.type.title.large,
       color: base.blackPepper400,
@@ -42,7 +42,7 @@ const textModifiers = createModifiers({
       ...system.type.title.small,
       color: base.blackPepper400,
     }),
-
+    // Heading level styles
     'heading.large': createStyles({
       ...system.type.heading.large,
       color: base.blackPepper400,
@@ -55,7 +55,7 @@ const textModifiers = createModifiers({
       ...system.type.heading.small,
       color: base.blackPepper400,
     }),
-
+    // Body level styles
     'body.large': createStyles({
       ...system.type.body.large,
       color: base.blackPepper300,
@@ -68,7 +68,7 @@ const textModifiers = createModifiers({
       ...system.type.body.small,
       color: base.blackPepper300,
     }),
-
+    // Subtext level styles
     'subtext.large': createStyles({
       ...system.type.subtext.large,
       color: base.blackPepper300,
