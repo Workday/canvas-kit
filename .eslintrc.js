@@ -55,7 +55,6 @@ module.exports = {
     '@typescript-eslint/member-delimiter-style': 'off',
     '@typescript-eslint/type-annotation-spacing': 'off',
     '@emotion/jsx-import': 'error',
-    '@emotion/no-vanilla': 'error',
     '@emotion/import-from-emotion': 'error',
     '@emotion/styled-import': 'error',
     '@emotion/syntax-preference': ['error', 'object'],
