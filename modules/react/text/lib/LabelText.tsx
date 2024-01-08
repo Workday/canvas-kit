@@ -43,7 +43,8 @@ const labelTextStencil = createStencil({
   },
   compound: [
     {
-      modifiers: {variant: 'inverse', disabled: 'true'},
+      // @ts-ignore
+      modifiers: {variant: 'inverse', disabled: true},
       styles: {
         opacity: system.opacity.disabled,
         color: base.frenchVanilla100,
