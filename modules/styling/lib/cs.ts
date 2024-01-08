@@ -741,7 +741,7 @@ export type StencilModifierConfig<
 > = Record<string, Record<string, StylesReturn<V>>>;
 
 export type StencilCompoundConfig<M> = {
-  modifiers: {[K in keyof M]?: keyof M[K]};
+  modifiers: {[K in keyof M]?: MaybeBoolean<keyof M[K]>};
   styles: SerializedStyles | CSSObject;
 };
 
