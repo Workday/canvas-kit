@@ -130,18 +130,18 @@ API has not been changed, and it should behave identically as it did in previous
 
 ### Text
 
-`Text` has been refactored to use our new styling utilities and new tokens and no longer
-extends `Box` component. The component API has not been changed, and it should behave identically as
-it did in previous versions and support Emotion `styled` and style props. Type level components,
-`Title`, `Heading`, `BodyText` and `Subtext`, have not been changed, but because they extend `Text`
-components, all changes made for `Text` will be applied for them as well.
+`Text` has been refactored to use our new styling utilities, new tokens and no longer extends the
+`Box` component. The component API has not been changed and it should behave identically as it did
+in previous versions while still supporting Emotion `styled` and style props. Type level components:
+`Title`, `Heading`, `BodyText` and `Subtext`, have not been changed because they extend `Text`
+components and all changes made to `Text` will be applied to them as well.
 
 ### Label Text
 
-`LabelText` has been refactored to use our new styling utilities and utilize new tokens and no
-longer extends `Text` component. The component API is similar to previous one and it still supports
-`variant`, `disabled` and `Box` styles props. `typeLevel` prop has been removed from `LabelText` and
-we suggest to use type level components, `Title`, `Heading`, `BodyText` and `Subtext`, instead.
+`LabelText` has been refactored to use our new styling utilities, utilize new tokens and no longer
+extends the`Text` component. The component API is similar to the previous one and still supports
+`variant`, `disabled` and `Box` styles props. The `typeLevel` prop has been removed from `LabelText`
+and we suggest to use type level components, `Title`, `Heading`, `BodyText` or `Subtext`.
 
 🤖 The codemod will handle a `typeLevel` removal and replacement by `Text` component for you
 automatically.
