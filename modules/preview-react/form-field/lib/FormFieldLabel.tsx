@@ -4,7 +4,7 @@ import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common
 import {type, space} from '@workday/canvas-kit-react/tokens';
 import {LabelText, Text} from '@workday/canvas-kit-react/text';
 import {useFormFieldLabel, useFormFieldModel} from './hooks';
-import {createStyles, cssVar} from '@workday/canvas-kit-styling';
+import {createStyles} from '@workday/canvas-kit-styling';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {brand} from '@workday/canvas-tokens-web';
 
@@ -25,7 +25,7 @@ const asteriskStyles = createStyles({
   fontSize: type.properties.fontSizes[20],
   fontWeight: type.properties.fontWeights.regular,
   textDecoration: 'unset',
-  color: cssVar(brand.error.base, '#de2e21'),
+  color: brand.error.base,
 });
 
 export const FormFieldLabel = createSubcomponent(LabelText)({

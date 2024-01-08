@@ -1,7 +1,11 @@
-import {transform} from '../lib/styleTransform';
-import {createProgramFromSource} from './createProgramFromSource';
+import {transform, _reset} from '../../lib/styleTransform';
+import {createProgramFromSource} from '../createProgramFromSource';
 
-describe('styleParser', () => {
+describe('createStyles', () => {
+  beforeEach(() => {
+    _reset();
+  });
+
   it('should parse string literals, passing them through', () => {
     const program = createProgramFromSource(`
       import {createStyles} from '@workday/canvas-kit-styling';
@@ -101,6 +105,22 @@ describe('styleParser', () => {
     expect(result).toContain('&:hover{background-color:red;}');
   });
 
+  it('should handle nested selectors without an &', () => {
+    const program = createProgramFromSource(`
+      import {createStyles} from '@workday/canvas-kit-styling';
+
+      const styles = createStyles({
+        '.wd-icon': {
+          backgroundColor: 'red'
+        }
+      })
+    `);
+
+    const result = transform(program, 'test.ts');
+
+    expect(result).toContain('.wd-icon{background-color:red;}');
+  });
+
   it('should parse properties that are identifiers that have statically extractable types', () => {
     const program = createProgramFromSource(`
       import {createStyles} from '@workday/canvas-kit-styling';
@@ -182,6 +202,8 @@ describe('styleParser', () => {
           width: 2,
           separation: 2,
           innerColor: cssVar(myVars.boxShadowInner, cssVar('--test-fallback-inner', '#fff')),
+          // innerColor: cssVar('--test-fallback-inner', '#fff'),
+          // innerColor: cssVar('--test-fallback-inner'),
           outerColor: cssVar(
             myVars.boxShadowOuter,
             cssVar('--test-fallback-outer', 'rgba(0,92,184,1)')
@@ -193,7 +215,32 @@ describe('styleParser', () => {
     const result = transform(program, 'test.ts');
 
     expect(result).toContain(
-      'box-shadow:0 0 0 2px var(--css-my-vars-boxShadowInner, var(--test-fallback-inner, #fff)), 0 0 0 calc(2px + 2px) var(--css-my-vars-boxShadowOuter, var(--test-fallback-outer, rgba(0,92,184,1)));'
+      'box-shadow:0 0 0 2px var(--css-my-boxShadowInner, var(--test-fallback-inner, #fff)), 0 0 0 calc(2px + 2px) var(--css-my-boxShadowOuter, var(--test-fallback-outer, rgba(0,92,184,1)));'
+    );
+  });
+
+  it('should handle spread operator with a "focusRing" call with CSS Variables', () => {
+    const program = createProgramFromSource(`
+      import {createStyles, cssVar} from '@workday/canvas-kit-styling';
+
+      const myVars = createVars('boxShadowInner', 'boxShadowOuter');
+
+      const styles = createStyles({
+        ...focusRing({
+          width: 2,
+          separation: 2,
+          innerColor: '--test-fallback-inner',
+          outerColor: '--test-fallback-outer',
+        })
+      })
+    `);
+
+    const result = transform(program, 'test.ts', {
+      variables: {'--test-fallback-inner': 'red', '--test-fallback-outer': 'blue'},
+    });
+
+    expect(result).toContain(
+      'box-shadow:0 0 0 2px var(--test-fallback-inner, red), 0 0 0 calc(2px + 2px) var(--test-fallback-outer, blue);'
     );
   });
 
@@ -221,14 +268,14 @@ describe('styleParser', () => {
     const program = createProgramFromSource(`
       import {createStyles} from '@workday/canvas-kit-styling';
 
-    const space = {
-      small: 12
-    } as const
+      const space = {
+        small: 12
+      } as const
 
-    const styles = createStyles({
-      padding: space.small
-    })
-  `);
+      const styles = createStyles({
+        padding: space.small
+      })
+    `);
 
     const result = transform(program, 'test.ts');
 
@@ -265,7 +312,7 @@ describe('styleParser', () => {
 
     const result = transform(program, 'test.ts');
 
-    expect(result).toContain('background-color:var(--css-my-vars-color);');
+    expect(result).toContain('background-color:var(--css-my-color);');
   });
 
   it('should handle cssVar call expressions referencing nested variables', () => {
@@ -283,7 +330,7 @@ describe('styleParser', () => {
 
     const result = transform(program, 'test.ts');
 
-    expect(result).toContain('background-color:var(--css-my-vars-colors-background);');
+    expect(result).toContain('background-color:var(--css-my-colors-background);');
   });
 
   it('should handle css vars even without the cssVar call expressions referencing static variables', () => {
@@ -317,12 +364,12 @@ describe('styleParser', () => {
 
     const result = transform(program, 'test.ts');
 
-    expect(result).toContain('background-color:var(--css-my-vars-colors-background);');
+    expect(result).toContain('background-color:var(--css-my-colors-background);');
   });
 
   it('should handle ComputedPropertyName that are static', () => {
     const program = createProgramFromSource(`
-      import {createStyles, CsVars, createVars} from '@workday/canvas-kit-styling';
+      import {createStyles, CsVars} from '@workday/canvas-kit-styling';
 
       const myVars = {
         color: '--color'
@@ -351,7 +398,7 @@ describe('styleParser', () => {
 
     const result = transform(program, 'test.ts');
 
-    expect(result).toContain('--css-my-vars-color:red;');
+    expect(result).toContain('--css-my-color:red;');
   });
 
   it('should slugify ComputedPropertyName with capital letters that is a variable created with createVars', () => {
@@ -367,7 +414,7 @@ describe('styleParser', () => {
 
     const result = transform(program, 'test.ts');
 
-    expect(result).toContain('--css-my-vars-hoverColor:red;');
+    expect(result).toContain('--css-my-hoverColor:red;');
   });
 
   it('should slugify cssVars with capital letters that is a variable created with createVars', () => {
@@ -383,7 +430,7 @@ describe('styleParser', () => {
 
     const result = transform(program, 'test.ts');
 
-    expect(result).toContain('background-color:var(--css-my-vars-hoverColor);');
+    expect(result).toContain('background-color:var(--css-my-hoverColor);');
   });
 
   it('should handle ComputedPropertyName that is a variable created with createVars inside an object', () => {
@@ -401,7 +448,7 @@ describe('styleParser', () => {
 
     const result = transform(program, 'test.ts');
 
-    expect(result).toContain('--css-my-vars-hover-color:red;');
+    expect(result).toContain('--css-my-hover-color:red;');
   });
 
   it('should handle fallback call expressions referencing static variables', () => {
@@ -417,7 +464,7 @@ describe('styleParser', () => {
 
     const result = transform(program, 'test.ts');
 
-    expect(result).toContain('background-color:var(--css-my-vars-color, red);');
+    expect(result).toContain('background-color:var(--css-my-color, red);');
   });
 
   it('should handle fallback call expressions referencing other variables', () => {
@@ -433,9 +480,7 @@ describe('styleParser', () => {
 
     const result = transform(program, 'test.ts');
 
-    expect(result).toContain(
-      'background-color:var(--css-my-vars-color, var(--css-my-vars-background));'
-    );
+    expect(result).toContain('background-color:var(--css-my-color, var(--css-my-background));');
   });
 
   it('should handle fallback variables if provided', () => {
@@ -514,7 +559,7 @@ describe('styleParser', () => {
     const result = transform(program, 'test.ts');
 
     expect(result).toContain('css-12345');
-    expect(result).toContain('border:1px solid var(--css-my-vars-borderColor);');
+    expect(result).toContain('border:1px solid var(--css-my-borderColor);');
   });
 
   it('should handle template stings with multiple spans', () => {
@@ -532,7 +577,7 @@ describe('styleParser', () => {
 
     expect(result).toContain('css-12345');
     expect(result).toContain(
-      'box-shadow:var(--css-my-vars-boxShadowInner) 0px 0px 0px 2px, var(--css-my-vars-boxShadowOuter) 0px 0px 0px 4px'
+      'box-shadow:var(--css-my-boxShadowInner) 0px 0px 0px 2px, var(--css-my-boxShadowOuter) 0px 0px 0px 4px'
     );
   });
 
@@ -547,9 +592,9 @@ describe('styleParser', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts'); //?
+    const result = transform(program, 'test.ts');
 
-    expect(result).toContain('color:var(--css-my-vars-label-emotion-safe)');
+    expect(result).toContain('color:var(--css-my-label-emotion-safe)');
   });
 
   it('should handle multiple arguments with an identifier of a type of an object literal', () => {
@@ -570,40 +615,11 @@ describe('styleParser', () => {
     expect(result).toContain('color:blue;');
   });
 
-  it('should handle multiple arguments with an identifier of a type of an object literal', () => {
-    const program = createProgramFromSource([
-      {
-        filename: 'styles.ts',
-        source: `
-        import {createStyles} from '@workday/canvas-kit-styling';
-      `,
-      },
-      {
-        filename: 'test.ts',
-        source: `
-          import {createStyles} from '@workday/canvas-kit-styling';
-
-          const obj = {
-            color: 'blue'
-          } as const
-
-          const styles = createStyles(obj, {
-            backgroundColor: 'red'
-          })
-    `,
-      },
-    ]);
-
-    const result = transform(program, 'test.ts');
-
-    expect(result).toContain('color:blue;');
-  });
-
   it('should output an error with the matching line, character, and underlined text', () => {
     const program = createProgramFromSource(`
       import {createStyles} from '@workday/canvas-kit-styling';
 
-      const color: string = 'red
+      const color: string = 'red'
 
       const styles = createStyles({
         backgroundColor: color
@@ -611,6 +627,6 @@ describe('styleParser', () => {
     `);
 
     expect(() => transform(program, 'test.ts')).toThrow(/Unknown type at: "color"/);
-    expect(() => transform(program, 'test.ts')).toThrow(/File: test.ts:7:26/);
+    expect(() => transform(program, 'test.ts')).toThrow(/File: test.ts:6:19/);
   });
 });

@@ -1,5 +1,6 @@
 import {keyframes, Theme, CSSObject} from '@emotion/react';
 import {canvas} from '@workday/canvas-kit-react/tokens';
+import {cssVar} from '@workday/canvas-kit-styling';
 import {defaultCanvasTheme} from '../theming/index';
 
 interface FocusRingOptions {
@@ -27,6 +28,14 @@ function calculateFocusRing({
 }: Required<Omit<FocusRingOptions, 'memoize' | 'inset'>> &
   Pick<FocusRingOptions, 'inset'>): CSSObject {
   let boxShadow, innerWidth, outerWidth;
+  if (innerColor && innerColor.startsWith('--')) {
+    // eslint-disable-next-line no-param-reassign
+    innerColor = cssVar(innerColor);
+  }
+  if (outerColor && outerColor.startsWith('--')) {
+    // eslint-disable-next-line no-param-reassign
+    outerColor = cssVar(outerColor);
+  }
 
   switch (inset) {
     case 'outer':
