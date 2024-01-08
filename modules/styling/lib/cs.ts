@@ -1,4 +1,3 @@
-// eslint-disable-next-line @emotion/no-vanilla
 import {cache, css} from '@emotion/css';
 import {getRegisteredStyles} from '@emotion/utils';
 import {serializeStyles, Keyframes, SerializedStyles, CSSObject} from '@emotion/serialize';
@@ -866,7 +865,7 @@ type VariableValuesStencil<
  */
 export function createStencil<
   M extends StencilModifierConfig<V>,
-  V extends Record<string, string> | Record<string, Record<string, string>>,
+  V extends Record<string, string> | Record<string, Record<string, string>> = {},
   ID extends string = never
 >(config: StencilConfig<M, V, ID>, id?: ID): Stencil<M, V, ID> {
   const {vars, base, modifiers, compound, defaultModifiers} = config;

@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.2.3](https://github.com/Workday/canvas-kit/releases/tag/v10.2.3) (2024-01-05)
+
+### Infrastructure
+
+- ci: Update reviewer-lottery.yml ([#2503](https://github.com/Workday/canvas-kit/pull/2503)) ([@mannycarrera4](https://github.com/mannycarrera4))
+- chore: Remove ESLint warning for @emotion/css ([#2505](https://github.com/Workday/canvas-kit/pull/2505)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v10.2.2](https://github.com/Workday/canvas-kit/releases/tag/v10.2.2) (2024-01-05)
+
+### Documentation
+
+- fix: Move styling to its own section ([#2498](https://github.com/Workday/canvas-kit/pull/2498)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v10.2.1](https://github.com/Workday/canvas-kit/releases/tag/v10.2.1) (2023-12-21)
+
+### Components
+
+- fix: Default createStyles vars to empty object ([#2488](https://github.com/Workday/canvas-kit/pull/2488)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v10.2.0](https://github.com/Workday/canvas-kit/releases/tag/v10.2.0) (2023-12-19)
 
 
