@@ -45,7 +45,7 @@ const StyledToolbarDropdownButton = styled(BaseButton)<StyledType & ToolbarDropd
       width: 2,
       separation: 0,
       innerColor: 'transparent',
-      outerColor: cssVar(brand.common.focusOutline, '#0875e1'),
+      outerColor: brand.common.focusOutline,
     }),
   },
 });
