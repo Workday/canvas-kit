@@ -1,8 +1,10 @@
 import * as React from 'react';
-import {keyframes} from '@emotion/react';
+import {keyframes} from '@emotion/css';
+import {system} from '@workday/canvas-tokens-web';
+import {createComponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {canvas} from '@workday/canvas-kit-react/tokens';
-import {styled} from '@workday/canvas-kit-react/common';
+import {createStyles, CSProps, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+
 import {sparkleIcon} from './sparkleIcon';
 
 /**
@@ -41,56 +43,56 @@ const LOADING_ANIMATION = keyframes({
   },
 });
 
-type SparkleAnimationIconProps = {
-  /**
-   * The animation delay of the sparkle (in ms).
-   */
-  animationDelay: number;
+const loadingSparklesIconStyles = createStyles({
+  animationDuration: `${ANIMATION_DURATION_MS}ms`,
+  animationFillMode: 'both',
+  animationIterationCount: 'infinite',
+  animationName: LOADING_ANIMATION,
+  animationTimingFunction: 'ease-in-out',
+  '.wd-sparkle-fill': {
+    fill: AI_COLORS.dragonFruit400,
+  },
+  '&:nth-child(1)': {
+    animationDelay: '0ms',
+  },
+  '&:nth-child(2)': {
+    animationDelay: `calc(${ANIMATION_DURATION_MS}ms * (1/3))`,
+  },
+  '&:nth-child(3)': {
+    animationDelay: `calc(${ANIMATION_DURATION_MS}ms * (2/3))`,
+  },
+});
+
+/**
+ * An individual loading sparkle. ✨
+ */
+const Sparkle = () => {
+  return (
+    <SystemIcon
+      icon={sparkleIcon}
+      cs={[loadingSparklesIconStyles]}
+      size={cssVar(system.space.x3)}
+    />
+  );
 };
 
-/**
- * The animated sparkle icon.
- */
-const SparkleAnimationIcon = styled(SystemIcon)<SparkleAnimationIconProps>(
-  {
-    animationDuration: ANIMATION_DURATION_MS + 'ms',
-    animationFillMode: 'both',
-    animationIterationCount: 'infinite',
-    animationName: LOADING_ANIMATION,
-    animationTimingFunction: 'ease-in-out',
-    '.wd-sparkle-fill': {
-      fill: AI_COLORS.dragonFruit400,
-    },
-  },
-  ({animationDelay}) => ({
-    animationDelay: animationDelay + 'ms',
-  })
-);
-
-/**
- * An individual loading sparkle.
- */
-const Sparkle = ({animationDelay = 0}: {animationDelay?: number}) => (
-  <SparkleAnimationIcon icon={sparkleIcon} animationDelay={animationDelay} size={canvas.space.xs} />
-);
-
-/**
- * A simple container for the loading sparkles.
- */
-const Container = styled('div')({
+const loadingSparklesStyles = createStyles({
   display: 'inline-flex',
-  gap: '1px',
+  gap: px2rem(1),
 });
 
 /**
  * A simple component that displays three horizontal sparkles, to be used when an AI operation is in progress.
  */
-export const LoadingSparkles = (props: React.HTMLAttributes<HTMLDivElement>) => {
-  return (
-    <Container {...props}>
-      <Sparkle />
-      <Sparkle animationDelay={ANIMATION_DURATION_MS / 3} />
-      <Sparkle animationDelay={ANIMATION_DURATION_MS * (2 / 3)} />
-    </Container>
-  );
-};
+export const LoadingSparkles = createComponent('div')({
+  displayName: 'LoadingSparkles',
+  Component: (props: CSProps, ref, Element) => {
+    return (
+      <Element ref={ref} {...handleCsProp(props, loadingSparklesStyles)}>
+        <Sparkle />
+        <Sparkle />
+        <Sparkle />
+      </Element>
+    );
+  },
+});
