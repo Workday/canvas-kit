@@ -2,6 +2,7 @@ import * as React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {BoxProps} from '@workday/canvas-kit-react/layout';
 import {Text} from '@workday/canvas-kit-react/text';
+import colors from '@workday/canvas-colors-web';
 
 export interface CardHeadingProps extends BoxProps {
   /**
@@ -18,7 +19,8 @@ export const CardHeading = createComponent('h3')({
     return (
       <Text
         ref={ref}
-        typeLevel="heading.small"
+        color={colors.blackPepper400}
+        typeLevel="body.large"
         fontWeight="bold"
         marginBottom="m"
         marginTop={0}
