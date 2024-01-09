@@ -1,6 +1,8 @@
 import * as ts from 'typescript';
 import path from 'path';
 
+import {stripIndent} from 'common-tags';
+
 function getConfig() {
   const tsconfigPath = ts.findConfigFile('.', ts.sys.fileExists) || '';
 
@@ -11,6 +13,9 @@ function getConfig() {
 
   return options;
 }
+
+// keep this around for speed. A ts program can take a previous program and share caching
+let program: ts.Program;
 
 const styleSource = `
 export type CsVarsMap<T extends string, ID extends string | never> = [ID] extends [never]
@@ -44,60 +49,64 @@ export function createProgramFromSource(...args: any[]) {
   }
 
   const sourceFiles = sources.map(({filename, source}) => {
-    return ts.createSourceFile(filename, source, ts.ScriptTarget.Latest);
+    return ts.createSourceFile(filename, stripIndent(source), ts.ScriptTarget.Latest);
   });
 
-  const config = getConfig();
+  sourceFiles.push(
+    ts.createSourceFile(
+      'node_modules/@workday/canvas-kit-styling/index.ts',
+      styleSource,
+      ts.ScriptTarget.Latest
+    )
+  );
 
-  const defaultCompilerHost = ts.createCompilerHost(config);
+  const config = getConfig();
 
   const customCompilerHost: ts.CompilerHost = {
     getSourceFile: (name, languageVersion) => {
       // Get the file from our mock list, but read source lib files
-      return (
-        sourceFiles.find(s => s.fileName === name) ||
-        // defaultCompilerHost.getSourceFile(name, languageVersion)
-        (name.startsWith('lib')
-          ? ts.createSourceFile(
-              name,
-              ts.sys.readFile(`node_modules/typescript/lib/${name}`),
-              languageVersion
-            )
-          : name === 'node_modules/@workday/canvas-kit-styling/index.ts'
-          ? ts.createSourceFile(name, styleSource, languageVersion)
-          : name === 'node_modules/react.ts'
-          ? ts.createSourceFile(
-              name,
-              ts.sys.readFile(`node_modules/@types/react/index.d.ts`),
-              languageVersion
-            )
-          : defaultCompilerHost.getSourceFile(name, languageVersion))
-      );
+      const mockedFile = sourceFiles.find(s => s.fileName === name);
+      if (mockedFile) {
+        return mockedFile;
+      }
+
+      if (name.startsWith('lib')) {
+        return ts.createSourceFile(
+          name,
+          ts.sys.readFile(`node_modules/typescript/lib/${name}`),
+          languageVersion
+        );
+      }
+
+      const fileContents = ts.sys.readFile(name);
+      if (fileContents) {
+        return ts.createSourceFile(name, fileContents, languageVersion);
+      }
+
+      return undefined;
     },
     // eslint-disable-next-line no-empty-function
     writeFile: () => {},
     getDefaultLibFileName: () => 'lib.d.ts',
-    useCaseSensitiveFileNames: () => false,
-    getCanonicalFileName: filename => filename,
-    getCurrentDirectory: () => '',
-    getNewLine: () => '\n',
-    getDirectories: () => [],
+    useCaseSensitiveFileNames: () => ts.sys.useCaseSensitiveFileNames,
+    getCanonicalFileName: fileName =>
+      ts.sys.useCaseSensitiveFileNames ? fileName : fileName.toLowerCase(),
+    getCurrentDirectory: () => ts.sys.getCurrentDirectory(),
+    getNewLine: () => ts.sys.newLine,
+    getDirectories: path => ts.sys.getDirectories(path),
     // This should be kept up to date with getSourceFile()
     fileExists: fileName => {
-      return (
-        fileName.startsWith('lib') ||
-        fileName === 'node_modules/react.ts' ||
-        fileName === 'node_modules/@types/react/index.d.ts' ||
-        fileName === 'node_modules/@workday/canvas-kit-styling/index.ts' ||
-        !!sourceFiles.find(s => s.fileName === fileName)
-      );
+      return !!sourceFiles.find(s => s.fileName === fileName) || ts.sys.fileExists(fileName);
     },
-    readFile: () => '',
+    readFile: fileName => ts.sys.readFile(fileName),
   };
 
-  return ts.createProgram(
+  program = ts.createProgram(
     sources.map(s => s.filename),
     config,
-    customCompilerHost
+    customCompilerHost,
+    program
   );
+
+  return program;
 }

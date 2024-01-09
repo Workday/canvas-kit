@@ -9,7 +9,6 @@ import {
   styled,
   StyledType,
 } from '@workday/canvas-kit-react/common';
-import {cssVar} from '@workday/canvas-kit-styling';
 import {ButtonColors} from './types';
 import {BaseButton} from './BaseButton';
 import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
@@ -45,7 +44,7 @@ const StyledToolbarDropdownButton = styled(BaseButton)<StyledType & ToolbarDropd
       width: 2,
       separation: 0,
       innerColor: 'transparent',
-      outerColor: cssVar(brand.common.focusOutline, '#0875e1'),
+      outerColor: brand.common.focusOutline,
     }),
   },
 });
