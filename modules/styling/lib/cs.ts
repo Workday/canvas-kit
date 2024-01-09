@@ -733,8 +733,8 @@ export function handleCsProp<
 
 type StylesReturn<V extends Record<string, string> | Record<string, Record<string, string>> = {}> =
   | SerializedStyles
-  | CSSObject
-  | ((vars: OptionalVars<V>) => SerializedStyles | CSSObject);
+  | CSSObjectWithVars
+  | ((vars: OptionalVars<V>) => SerializedStyles | CSSObjectWithVars);
 
 export type StencilModifierConfig<
   V extends Record<string, string> | Record<string, Record<string, string>> = {}
@@ -742,7 +742,7 @@ export type StencilModifierConfig<
 
 export type StencilCompoundConfig<M> = {
   modifiers: {[K in keyof M]?: MaybeBoolean<keyof M[K]>};
-  styles: SerializedStyles | CSSObject;
+  styles: SerializedStyles | CSSObjectWithVars;
 };
 
 type ModifierValuesStencil<M extends StencilModifierConfig> = {
