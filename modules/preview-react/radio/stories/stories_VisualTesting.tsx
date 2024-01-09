@@ -6,7 +6,7 @@ import {
   permutateProps,
 } from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled, customColorTheme} from '../../../../utils/storybook';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 
 const hintText = 'Helpful text goes here.';
@@ -18,7 +18,7 @@ export default withSnapshotsEnabled({
 });
 
 const testGroup = (
-  <RadioGroup name="contact" value={'email'}>
+  <FormField.Input as={RadioGroup} name="contact" value={'email'}>
     <RadioGroup.RadioButton id="1" value="email">
       Email
     </RadioGroup.RadioButton>
@@ -31,7 +31,7 @@ const testGroup = (
     <RadioGroup.RadioButton id="4" value="mail">
       "Mail (US Postal Service aka USPS), a longer than normal label"
     </RadioGroup.RadioButton>
-  </RadioGroup>
+  </FormField.Input>
 );
 
 export const RadioStates = () => {
@@ -93,14 +93,14 @@ export const RadioStates = () => {
           rowProps={permutateProps({
             error: [
               {value: undefined, label: 'No Error'},
-              {value: FormField.ErrorType.Alert, label: 'Alert'},
-              {value: FormField.ErrorType.Error, label: 'Error'},
+              {value: 'alert', label: 'Alert'},
+              {value: 'error', label: 'Error'},
             ],
           })}
           columnProps={[
             {
               label: 'Left Label',
-              props: {label: 'Contact', labelPosition: FormField.LabelPosition.Left},
+              props: {label: 'Contact', labelPosition: 'horizontal'},
             },
             {
               label: 'Top Label',
@@ -110,12 +110,19 @@ export const RadioStates = () => {
         >
           {props => (
             <FormField
-              useFieldset={true}
-              hintText={typeof props.error !== 'undefined' ? hintText : undefined}
-              hintId={hintId}
-              {...props}
+              as="fieldset"
+              id={hintId}
+              orientation={props.labelPosition}
+              error={props.error}
+              // {...props}
             >
-              {testGroup}
+              <FormField.Label as="legend">{props.label}</FormField.Label>
+              <FormField.Container>
+                {testGroup}
+                <FormField.Hint>
+                  {typeof props.error !== 'undefined' ? hintText : undefined}
+                </FormField.Hint>
+              </FormField.Container>
             </FormField>
           )}
         </ComponentStatesTable>
@@ -126,8 +133,8 @@ export const RadioStates = () => {
           rowProps={permutateProps({
             error: [
               {value: undefined, label: 'No Error'},
-              {value: FormField.ErrorType.Alert, label: 'Alert'},
-              {value: FormField.ErrorType.Error, label: 'Error'},
+              {value: 'alert', label: 'Alert'},
+              {value: 'error', label: 'Error'},
             ],
           })}
           columnProps={[
@@ -139,29 +146,40 @@ export const RadioStates = () => {
         >
           {props => (
             <FormField
-              useFieldset={true}
-              hintText={typeof props.error !== 'undefined' ? hintText : undefined}
-              hintId={hintId}
-              {...props}
+              as="fieldset"
+              id={hintId}
+              orientation={props.labelPosition}
+              error={props.error}
             >
-              {testGroup}
+              <FormField.Label as="legend">{props.label}</FormField.Label>
+              <FormField.Container>
+                {testGroup}
+                <FormField.Hint>
+                  {typeof props.error !== 'undefined' ? hintText : undefined}
+                </FormField.Hint>
+              </FormField.Container>
             </FormField>
           )}
         </ComponentStatesTable>
       </StaticStates>
       <h3>RadioGroup (wrapping)</h3>
       <div style={{maxWidth: 480}}>
-        <FormField
-          label="Really long label. Really long label. Really long label. Really long label. Really long label. Really long label."
-          labelPosition={FormField.LabelPosition.Left}
-          useFieldset={true}
-        >
-          {testGroup}
+        <FormField orientation="horizontal" as="fieldset">
+          <FormField.Label as="legend">
+            Really long label. Really long label. Really long label. Really long label. Really long
+            label. Really long label.
+          </FormField.Label>
+          <FormField.Container>{testGroup}</FormField.Container>
         </FormField>
-        <FormField
-          label="Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label."
-          useFieldset={true}
-        >
+        <FormField as="fieldset">
+          <FormField.Label as="legend">
+            Really long label. Really long label. Really long label. Really long label. Really long
+            label. Really long label. Really long label. Really long label. Really long label.
+            Really long label. Really long label. Really long label. Really long label. Really long
+            label. Really long label. Really long label. Really long label. Really long label.
+            Really long label. Really long label. Really long label. Really long label. Really long
+            label. Really long label. Really long label. Really long label.
+          </FormField.Label>
           {testGroup}
         </FormField>
       </div>
