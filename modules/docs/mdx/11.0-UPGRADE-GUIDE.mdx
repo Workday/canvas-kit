@@ -134,7 +134,10 @@ API has not been changed, and it should behave identically as it did in previous
 `Box` component. The component API has not been changed and it should behave identically as it did
 in previous versions while still supporting Emotion `styled` and style props. Type level components:
 `Title`, `Heading`, `BodyText` and `Subtext`, have not been changed because they extend `Text`
-components and all changes made to `Text` will be applied to them as well.
+`Text` has been refactored to use our new styling utilities and tokens. It no longer extends the
+`Box` component, however,  it  still supports Emotion `styled` and style props. Type level components:
+`Title`, `Heading`, `BodyText` and `Subtext`, have not been changed since they extend the `Text`
+component. These changes do not change the components API.
 
 ### Label Text
 
