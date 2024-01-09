@@ -1,14 +1,14 @@
+import {SymbolDoc} from '@workday/canvas-kit-docs';
 import {LoadingSparkles} from '@workday/canvas-kit-preview-react/loading-sparkles';
 
 import {Basic} from './examples/Basic';
 import {RTL} from './examples/RTL';
-import {Accessible} from './examples/Accessible';
 
 <Meta title="Preview/Loading Sparkles" component={LoadingSparkles} />
 
 # Canvas Kit Loading Sparkles
 
-Loading Sparkles make users aware that an AI operation is in progress.
+`LoadingSparkles` is a loading animation that makes users aware an AI operation is in progress.
 
 ## Installation
 
@@ -20,17 +20,15 @@ yarn add @workday/canvas-kit-react
 
 ### Basic Example
 
+`LoadingSparkles` is designed to work out-of-the-box, but you'll need to add `aria-live="polite"`
+and a descriptive `aria-label` for screen reader accesibility.
+
 <ExampleCodeBlock code={Basic} />
 
 ### Right-to-Left (RTL)
 
 <ExampleCodeBlock code={RTL} />
 
-### Accessible Example
+## Component API
 
-<ExampleCodeBlock code={Accessible} />
-
-## Props
-
-Loading Sparkles does not have any documented props. Undocumented props are spread to its outermost
-element.
+<SymbolDoc name="LoadingSparkles" fileName="/preview-react/" />
