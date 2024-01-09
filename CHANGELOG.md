@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.2.5](https://github.com/Workday/canvas-kit/releases/tag/v10.2.5) (2024-01-09)
+
+### Infrastructure
+
+- fix: Fix stencil types to accept a value as CSS variables ([#2509](https://github.com/Workday/canvas-kit/pull/2509)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
 ## [v10.2.4](https://github.com/Workday/canvas-kit/releases/tag/v10.2.4) (2024-01-08)
 
 ### Infrastructure
