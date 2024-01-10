@@ -4,8 +4,14 @@ import {colors} from '@workday/canvas-kit-react/tokens';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 import {BodyText, Heading, LabelText, Subtext, Text, Title} from '../';
 import {Box} from '@workday/canvas-kit-react/layout';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {base} from '@workday/canvas-tokens-web';
 
-type TypeStateProp = {size: 'small' | 'medium' | 'large'};
+type TypeStateProp = {size: 'small' | 'medium' | 'large'; variant?: 'error' | 'hint' | 'inverse'};
+
+const inverseBackground = createStyles({
+  backgroundColor: base.blueberry400,
+});
 
 export default withSnapshotsEnabled({
   title: 'Testing/Containers/Text',
@@ -108,12 +114,28 @@ export const TitleStates = () => (
       ]}
       columnProps={[
         {
-          label: 'Examples',
+          label: 'Default',
           props: {},
+        },
+        {
+          label: 'Hint variant',
+          props: {variant: 'hint'},
+        },
+        {
+          label: 'Error variant',
+          props: {variant: 'error'},
+        },
+        {
+          label: 'Inverse variant',
+          props: {variant: 'inverse'},
         },
       ]}
     >
-      {(props: TypeStateProp) => <Title {...props}>Lorem ipsum title.</Title>}
+      {(props: TypeStateProp) => (
+        <Box className={props.variant === 'inverse' ? inverseBackground : ''}>
+          <Title {...props}>Lorem ipsum title.</Title>
+        </Box>
+      )}
     </ComponentStatesTable>
   </StaticStates>
 );
@@ -131,9 +153,25 @@ export const HeadingStates = () => (
           label: 'Examples',
           props: {},
         },
+        {
+          label: 'Hint variant',
+          props: {variant: 'hint'},
+        },
+        {
+          label: 'Error variant',
+          props: {variant: 'error'},
+        },
+        {
+          label: 'Inverse variant',
+          props: {variant: 'inverse'},
+        },
       ]}
     >
-      {(props: TypeStateProp) => <Heading {...props}>Lorem ipsum title.</Heading>}
+      {(props: TypeStateProp) => (
+        <Box className={props.variant === 'inverse' ? inverseBackground : ''}>
+          <Heading {...props}>Lorem ipsum title.</Heading>
+        </Box>
+      )}
     </ComponentStatesTable>
   </StaticStates>
 );
@@ -151,9 +189,25 @@ export const SubtextStates = () => (
           label: 'Examples',
           props: {},
         },
+        {
+          label: 'Hint variant',
+          props: {variant: 'hint'},
+        },
+        {
+          label: 'Error variant',
+          props: {variant: 'error'},
+        },
+        {
+          label: 'Inverse variant',
+          props: {variant: 'inverse'},
+        },
       ]}
     >
-      {(props: TypeStateProp) => <Subtext {...props}>Lorem ipsum title.</Subtext>}
+      {(props: TypeStateProp) => (
+        <Box className={props.variant === 'inverse' ? inverseBackground : ''}>
+          <Subtext {...props}>Lorem ipsum title.</Subtext>
+        </Box>
+      )}
     </ComponentStatesTable>
   </StaticStates>
 );
@@ -171,9 +225,25 @@ export const BodyTextStates = () => (
           label: 'Examples',
           props: {},
         },
+        {
+          label: 'Hint variant',
+          props: {variant: 'hint'},
+        },
+        {
+          label: 'Error variant',
+          props: {variant: 'error'},
+        },
+        {
+          label: 'Inverse variant',
+          props: {variant: 'inverse'},
+        },
       ]}
     >
-      {(props: TypeStateProp) => <BodyText {...props}>Lorem ipsum title.</BodyText>}
+      {(props: TypeStateProp) => (
+        <Box className={props.variant === 'inverse' ? inverseBackground : ''}>
+          <BodyText {...props}>Lorem ipsum title.</BodyText>
+        </Box>
+      )}
     </ComponentStatesTable>
   </StaticStates>
 );
@@ -190,9 +260,25 @@ export const LabelStates = () => (
           label: 'Examples',
           props: {},
         },
+        {
+          label: 'Hint variant',
+          props: {variant: 'hint'},
+        },
+        {
+          label: 'Error variant',
+          props: {variant: 'error'},
+        },
+        {
+          label: 'Inverse variant',
+          props: {variant: 'inverse'},
+        },
       ]}
     >
-      {(props: TypeStateProp) => <LabelText {...props}>Lorem ipsum title.</LabelText>}
+      {(props: TypeStateProp) => (
+        <Box className={props.variant === 'inverse' ? inverseBackground : ''}>
+          <LabelText {...props}>Lorem ipsum title.</LabelText>
+        </Box>
+      )}
     </ComponentStatesTable>
   </StaticStates>
 );

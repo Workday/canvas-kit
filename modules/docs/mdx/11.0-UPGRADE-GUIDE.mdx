@@ -10,12 +10,14 @@ any questions.
 
 - [Codemod](#codemod)
 - [Deprecations](#deprecations)
-  - [FormField Main](#form-field-main)
-  - [TextInput Preview](#text-input-preview)
-  - [TextArea Preview](#text-input-preview)
+  - [Form Field Main](#form-field-main)
+  - [Text Input Preview](#text-input-preview)
+  - [Text Area Preview](#text-input-preview)
+  - [Label Text](#label-text)
 - [Component Updates](#component-updates)
-	- [FormField Preview](#form-field-preview)
-	- [Count Badge](#count-badge)
+  - [Count Badge](#count-badge)
+  - [Text](#text)
+  - [Form Field Preview](#form-field-preview)
 
 ## Codemod
 
@@ -84,7 +86,7 @@ We add the [@deprecated](https://jsdoc.app/tags-deprecated.html) JSDoc tag to co
 in a future major release. This signals consumers to migrate to a more stable alternative before the
 deprecated code is removed.
 
-### FormField Main
+### Form Field Main
 
 **PR:** [#2472](https://github.com/Workday/canvas-kit/pull/2472)
 
@@ -95,7 +97,7 @@ instead.
 
 ---
 
-### TextInput Preview
+### Text Input Preview
 
 **PR:** [#2472](https://github.com/Workday/canvas-kit/pull/2472)
 
@@ -106,13 +108,27 @@ instead.
 
 ---
 
-### TextArea Preview
+### Text Area Preview
 
 **PR:** [#2472](https://github.com/Workday/canvas-kit/pull/2472)
 
 We've deprecated `TextArea` from [Preview](#preview) in favor of our compound component `FormField`
 in [Preview](#preview). Please use
 [`FormField`](https://workday.github.io/canvas-kit/?path=//docs/preview-inputs-form-field--basic)
+instead.
+
+---
+
+### Label Text
+
+**PR:** [#2455](https://github.com/Workday/canvas-kit/pull/2455)
+
+We've deprecated `LabelText` from [Main](#main) in favor of our compound component `FormField.Label`
+in [Preview](#preview). Please use
+[`FormField.Label`](https://workday.github.io/canvas-kit/?path=//docs/preview-inputs-form-field--basic)
+instead.
+
+If you still want to use a `label` element outside of the context of a form, you can use `Text`
 instead.
 
 ---
@@ -126,7 +142,16 @@ instead.
 `CountBadge` now uses `createComponent`, Canvas Tokens, and our new styling utilities. The component
 API has not been changed, and it should behave identically as it did in previous versions.
 
-### FormField Preview
+### Text
+
+**PR:** [#2455](https://github.com/Workday/canvas-kit/pull/2455)
+
+`Text` has been refactored to use our new styling utilities and tokens. It no longer extends the
+`Box` component, however, it still supports Emotion `styled` and style props. Type level components:
+`Title`, `Heading`, `BodyText` and `Subtext`, have not been changed since they extend the `Text`
+component. These changes do not affect the components API.
+
+### Form Field Preview
 
 **PR:** [#2472](https://github.com/Workday/canvas-kit/pull/2472)
 
