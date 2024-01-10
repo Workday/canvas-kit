@@ -2,52 +2,45 @@ import React from 'react';
 
 import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {type, space} from '@workday/canvas-kit-react/tokens';
-import {LabelText, Text} from '@workday/canvas-kit-react/text';
+import {Text} from '@workday/canvas-kit-react/text';
 import {useFormFieldLabel, useFormFieldModel} from './hooks';
-import {createModifiers, createStencil, createStyles, cssVar} from '@workday/canvas-kit-styling';
+import {createStencil, createStyles} from '@workday/canvas-kit-styling';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 
-export interface FormFieldLabelProps extends ExtractProps<typeof LabelText, never> {
+export interface FormFieldLabelProps {
   /**
    * The text of the label.
    */
   children: React.ReactNode;
+  /**
+   * Will style the text as disabled
+   */
+  disabled?: boolean;
+  /**
+   * Changes the color of the text
+   */
+  variant?: 'error' | 'hint' | 'inverse';
 }
-
-const labelStyles = createStyles({
-  fontWeight: type.properties.fontWeights.medium,
-  paddingInlineStart: 0,
-  marginBottom: space.xxxs,
-  display: 'flex',
-  alignItems: 'center',
-  minWidth: '180px',
-});
 
 const asteriskStyles = createStyles({
   marginInlineStart: space.xxxs,
   fontSize: type.properties.fontSizes[20],
   fontWeight: type.properties.fontWeights.regular,
   textDecoration: 'unset',
-  color: cssVar(brand.error.base, '#de2e21'),
+  color: brand.error.base,
 });
 
-const labelModifiers = createModifiers({
-  orientation: {
-    horizontal: createStyles({
-      float: 'left',
-      maxHeight: space.xl,
-    }),
-    vertical: createStyles({
-      width: '100%',
-    }),
-  },
-});
-
-const labelTextStencil = createStencil({
+const labelStencil = createStencil({
   base: {
     ...system.type.subtext.large,
+    fontWeight: system.fontWeight.medium,
     color: base.blackPepper300,
+    paddingInlineStart: 0,
+    marginBottom: space.xxxs,
+    display: 'flex',
+    alignItems: 'center',
+    minWidth: '180px',
   },
   modifiers: {
     orientation: {
@@ -73,7 +66,7 @@ const labelTextStencil = createStencil({
   },
   compound: [
     {
-      modifiers: {variant: 'inverse', disabled: 'true'},
+      modifiers: {variant: 'inverse', disabled: true},
       styles: {
         opacity: system.opacity.disabled,
         color: base.frenchVanilla100,
@@ -86,12 +79,11 @@ export const FormFieldLabel = createSubcomponent('label')({
   displayName: 'FormField.Label',
   modelHook: useFormFieldModel,
   elemPropsHook: useFormFieldLabel,
-})<FormFieldLabelProps>(({children, ...elemProps}, Element, model) => {
+})<FormFieldLabelProps>(({children, disabled, variant, ...elemProps}, Element, model) => {
   return (
     <Element
       {...mergeStyles(elemProps, [
-        labelStyles,
-        labelModifiers({orientation: model.state.orientation}),
+        labelStencil({orientation: model.state.orientation, disabled, variant}),
       ])}
     >
       {children}
