@@ -13,10 +13,10 @@ any questions.
   - [Form Field Main](#form-field-main)
   - [Text Input Preview](#text-input-preview)
   - [Text Area Preview](#text-input-preview)
+  - [Label Text](#label-text)
 - [Component Updates](#component-updates)
   - [Count Badge](#count-badge)
   - [Text](#text)
-  - [Label Text](#label-text)
   - [Form Field Preview](#form-field-preview)
 
 ## Codemod
@@ -119,6 +119,20 @@ instead.
 
 ---
 
+### Label Text
+
+**PR:** [#2455](https://github.com/Workday/canvas-kit/pull/2455)
+
+We've deprecated `LabelText` from [Main](#main) in favor of our compound component `FormField.Label`
+in [Preview](#preview). Please use
+[`FormField.Label`](https://workday.github.io/canvas-kit/?path=//docs/preview-inputs-form-field--basic)
+instead.
+
+If you still want to use a `label` element outside of the context of a form, you can use `Text`
+instead.
+
+---
+
 ## Component Updates
 
 ### Count Badge
@@ -130,21 +144,12 @@ API has not been changed, and it should behave identically as it did in previous
 
 ### Text
 
-`Text` has been refactored to use our new styling utilities, new tokens and no longer extends the
-`Box` component. The component API has not been changed and it should behave identically as it did
-in previous versions while still supporting Emotion `styled` and style props. Type level components:
-`Title`, `Heading`, `BodyText` and `Subtext`, have not been changed because they extend `Text`
+**PR:** [#2455](https://github.com/Workday/canvas-kit/pull/2455)
+
 `Text` has been refactored to use our new styling utilities and tokens. It no longer extends the
 `Box` component, however, it still supports Emotion `styled` and style props. Type level components:
 `Title`, `Heading`, `BodyText` and `Subtext`, have not been changed since they extend the `Text`
-component. These changes do not change the components API.
-
-### Label Text
-
-`LabelText` has been deprecated and will be removed in a future major version. Instead please
-consider to use
-[FormField.Label](https://workday.github.io/canvas-kit/?path=/docs/preview-inputs-form-field--basic)
-if you used `LabelText` withing a form or `Text` component for other cases.
+component. These changes do not affect the components API.
 
 ### Form Field Preview
 

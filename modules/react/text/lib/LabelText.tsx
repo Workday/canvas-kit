@@ -126,7 +126,7 @@ const labelTextStencil = createStencil({
  * );
  * ```
  *
- * @deprecated ⚠️ `LabelText` has been deprecated and will be removed in a future major version. Instead please consider to use [FormField.Label](https://workday.github.io/canvas-kit/?path=/docs/preview-inputs-form-field--basic) if you used `LabelText` withing a form or `Text` component for other cases.
+ * @deprecated ⚠️ `LabelText` has been deprecated and will be removed in a future major version. Please use [FormField.Label](https://workday.github.io/canvas-kit/?path=/docs/preview-inputs-form-field--basic) from Preview instead.
  */
 export const LabelText = createComponent('label')({
   displayName: 'Label',
