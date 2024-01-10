@@ -135,21 +135,16 @@ API has not been changed, and it should behave identically as it did in previous
 in previous versions while still supporting Emotion `styled` and style props. Type level components:
 `Title`, `Heading`, `BodyText` and `Subtext`, have not been changed because they extend `Text`
 `Text` has been refactored to use our new styling utilities and tokens. It no longer extends the
-`Box` component, however,  it  still supports Emotion `styled` and style props. Type level components:
+`Box` component, however, it still supports Emotion `styled` and style props. Type level components:
 `Title`, `Heading`, `BodyText` and `Subtext`, have not been changed since they extend the `Text`
 component. These changes do not change the components API.
 
 ### Label Text
 
-`LabelText` has been refactored to use our new styling utilities, utilize new tokens and no longer
-extends the`Text` component. The component API is similar to the previous one and still supports
-`variant`, `disabled` and `Box` styles props. The `typeLevel` prop has been removed from `LabelText`
-`LabelText` has been refactored to use our new styling utilities and tokens and it no longer
-extends the `Text` component. Because of this change, the `typeLevel` prop has been removed from `LabelText`
-and we suggest to use type level components, `Title`, `Heading`, `BodyText` or `Subtext`. The component still supports `variant`, `disabled` and `Box` styles props.
-
-🤖 The codemod will handle removing the `typeLevel` prop and replacing `LabelText` component with the `Text` component for you.
-automatically.
+`LabelText` has been deprecated and will be removed in a future major version. Instead please
+consider to use
+[FormField.Label](https://workday.github.io/canvas-kit/?path=/docs/preview-inputs-form-field--basic)
+if you used `LabelText` withing a form or `Text` component for other cases.
 
 ### Form Field Preview
 

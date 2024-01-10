@@ -4,7 +4,11 @@ import {base, system} from '@workday/canvas-tokens-web';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 
+/**
+ * @deprecated ⚠️ `TypeLabelProps` has been deprecated and will be removed in a future major version.
+ */
 export interface TypeLabelProps extends BoxProps {
+  typeLevel?: `${keyof typeof system.type}.${'large' | 'medium' | 'small'}`;
   /**
    * Disabled state as a boolean
    *
@@ -29,6 +33,60 @@ const labelTextStencil = createStencil({
     color: base.blackPepper300,
   },
   modifiers: {
+    typeLevel: {
+      // Title level styles
+      'title.large': {
+        ...system.type.title.large,
+        color: base.blackPepper400,
+      },
+      'title.medium': {
+        ...system.type.title.medium,
+        color: base.blackPepper400,
+      },
+      'title.small': {
+        ...system.type.title.small,
+        color: base.blackPepper400,
+      },
+      // Heading level styles
+      'heading.large': {
+        ...system.type.heading.large,
+        color: base.blackPepper400,
+      },
+      'heading.medium': {
+        ...system.type.heading.medium,
+        color: base.blackPepper400,
+      },
+      'heading.small': {
+        ...system.type.heading.small,
+        color: base.blackPepper400,
+      },
+      // Body level styles
+      'body.large': {
+        ...system.type.body.large,
+        color: base.blackPepper300,
+      },
+      'body.medium': {
+        ...system.type.body.medium,
+        color: base.blackPepper300,
+      },
+      'body.small': {
+        ...system.type.body.small,
+        color: base.blackPepper300,
+      },
+      // Subtext level styles
+      'subtext.large': {
+        ...system.type.subtext.large,
+        color: base.blackPepper300,
+      },
+      'subtext.medium': {
+        ...system.type.subtext.medium,
+        color: base.blackPepper300,
+      },
+      'subtext.small': {
+        ...system.type.subtext.small,
+        color: base.blackPepper300,
+      },
+    },
     variant: {
       error: {color: base.cinnamon500},
       hint: {color: base.licorice300},
@@ -67,10 +125,17 @@ const labelTextStencil = createStencil({
  *   <LabelText>Input Label Text</LabelText>
  * );
  * ```
+ *
+ * @deprecated ⚠️ `LabelText` has been deprecated and will be removed in a future major version. Instead please consider to use [FormField.Label](https://workday.github.io/canvas-kit/?path=/docs/preview-inputs-form-field--basic) if you used `LabelText` withing a form or `Text` component for other cases.
  */
 export const LabelText = createComponent('label')({
   displayName: 'Label',
-  Component: ({disabled = false, variant, ...elemProps}: TypeLabelProps, ref, Element) => {
-    return <Element ref={ref} {...mergeStyles(elemProps, labelTextStencil({variant, disabled}))} />;
+  Component: ({disabled, typeLevel, variant, ...elemProps}: TypeLabelProps, ref, Element) => {
+    return (
+      <Element
+        ref={ref}
+        {...mergeStyles(elemProps, labelTextStencil({variant, disabled, typeLevel}))}
+      />
+    );
   },
 });
