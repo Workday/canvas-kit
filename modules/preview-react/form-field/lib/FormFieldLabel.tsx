@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {createSubcomponent} from '@workday/canvas-kit-react/common';
 import {type, space} from '@workday/canvas-kit-react/tokens';
 import {Text} from '@workday/canvas-kit-react/text';
 import {useFormFieldLabel, useFormFieldModel} from './hooks';
