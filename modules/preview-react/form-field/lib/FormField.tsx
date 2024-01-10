@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {createContainer} from '@workday/canvas-kit-react/common';
+import {createContainer, GrowthBehavior} from '@workday/canvas-kit-react/common';
 import {Flex, FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {space} from '@workday/canvas-kit-react/tokens';
@@ -11,7 +11,7 @@ import {FormFieldLabel} from './FormFieldLabel';
 import {FormFieldHint} from './FormFieldHint';
 import {FormFieldContainer} from './FormFieldContainer';
 
-export interface FormFieldProps extends FlexProps {
+export interface FormFieldProps extends FlexProps, GrowthBehavior {
   children: React.ReactNode;
 }
 
@@ -25,6 +25,9 @@ const formFieldBaseStyles = createStencil({
     grow: {
       true: {
         width: '100%',
+        '[data-width="ck-formfield-width"]': {
+          width: '100%',
+        },
       },
     },
   },
@@ -102,7 +105,7 @@ export const FormField = createContainer('div')({
     <Flex
       as={Element}
       {...layoutProps}
-      {...mergeStyles(elemProps, formFieldBaseStyles({grow: model.state.grow}))}
+      {...mergeStyles(elemProps, formFieldBaseStyles({grow: elemProps.grow}))}
     >
       {children}
     </Flex>

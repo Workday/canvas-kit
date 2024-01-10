@@ -28,6 +28,7 @@ const StyledTextInput = styled('input')<
     ...type.levels.subtext.large,
     border: `1px solid ${inputColors.border}`,
     display: 'block',
+    width: '100%',
     backgroundColor: inputColors.background,
     borderRadius: borderRadius.m,
     boxSizing: 'border-box',

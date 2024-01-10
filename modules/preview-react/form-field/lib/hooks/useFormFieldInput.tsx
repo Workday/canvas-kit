@@ -12,6 +12,5 @@ export const useFormFieldInput = createElemPropsHook(useFormFieldModel)(({state}
     'aria-describedby': state.id ? `hint-${state.id}` : undefined,
     id: state.id ? `input-${state.id}` : undefined,
     error: state.error,
-    width: state.grow ? '100%' : undefined,
   };
 });

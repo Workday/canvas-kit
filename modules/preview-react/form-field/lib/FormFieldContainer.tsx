@@ -10,18 +10,16 @@ const containerBaseStyles = createStencil({
     display: 'flex',
     flexDirection: 'column',
   },
-  modifiers: {
-    grow: {
-      true: {
-        width: '100%',
-      },
-    },
-  },
 });
 
 export const FormFieldContainer = createSubcomponent('div')({
   displayName: 'FormField.Container',
   modelHook: useFormFieldModel,
 })<CSProps>((elemProps, Element, model) => {
-  return <Element {...handleCsProp(elemProps, [containerBaseStyles({grow: model.state.grow})])} />;
+  return (
+    <Element
+      data-width="ck-formfield-width"
+      {...handleCsProp(elemProps, [containerBaseStyles()])}
+    />
+  );
 });

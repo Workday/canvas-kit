@@ -29,12 +29,6 @@ export const useFormFieldModel = createModelHook({
      * `required` set to true, and an asterisk will be appended to the `FormField.Label`.
      */
     isRequired: false,
-    /**
-     * True if the component and input should grow to its container's width. False otherwise.
-     * @default false
-     * @deprecated This property will be deprecated in a future major version. By default, inputs should be set to width 100% and the container should define its constraints.
-     */
-    grow: false,
   },
 })(config => {
   const id = useUniqueId(config.id);
