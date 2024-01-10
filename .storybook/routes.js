@@ -20,7 +20,7 @@ const routes = {
   '/components/indicators/status-indicator/': 'preview-status-indicator--basic',
   '/components/inputs/checkbox/': 'components-inputs-checkbox--basic',
   '/components/inputs/color-input/': 'components-inputs-color-picker-color-input--basic',
-  '/components/inputs/form-field/': 'components-inputs-form-field--basic',
+  '/components/inputs/form-field/': 'preview-inputs-form-field--basic',
   '/components/inputs/radio/': 'components-inputs-radio--basic',
   '/components/inputs/select/': 'components-inputs-select--basic',
   '/components/inputs/switch/': 'components-inputs-switch--basic',

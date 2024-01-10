@@ -38,9 +38,9 @@ export const SelectInput = createSubcomponent(TextInput)({
   modelHook: useSelectModel,
   elemPropsHook: useSelectInput,
 })<SelectInputProps>(
-  ({placeholder = 'Choose an option', inputStartIcon, ...elemProps}, Element, model) => {
+  ({placeholder = 'Choose an option', inputStartIcon, width, ...elemProps}, Element, model) => {
     return (
-      <InputGroup>
+      <InputGroup width={width}>
         {inputStartIcon && model.state.selectedIds.length > 0 && (
           <InputGroup.InnerStart pointerEvents="none">
             <SystemIcon icon={inputStartIcon} />
