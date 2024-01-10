@@ -30,11 +30,29 @@ export type StyleProps =
 // We can remove this when CSSType supports CSS custom properties
 type CastStyleProps = Exclude<StyleProps, CSSObjectWithVars> | CSSObject;
 
+/**
+ * Wrap all unwrapped CSS Variables. For example, `{padding: '--foo'}` will be replaced with
+ * `{padding: 'var(--foo)'}`. It also works on variables in the middle of the property.
+ */
+function maybeWrapCSSVariables(input: string): string {
+  // matches an string starting with `--` that isn't already wrapped in a `var()`. It tries to match
+  // any character that isn't a valid separator in CSS
+  return input.replace(
+    /([a-z]*[ (]*)(--[^\s;,'})]+)/gi,
+    (match: string, prefix: string, variable: string) => {
+      if (prefix === 'var(') {
+        return match;
+      }
+      return `${prefix}var(${variable})`;
+    }
+  );
+}
+
 function convertProperty<T>(value: T): T {
   // Handle the case where the value is a variable without the `var()` wrapping function. It happens
   // enough that it makes sense to automatically wrap.
-  if (typeof value === 'string' && value.startsWith('--')) {
-    return `var(${value})` as any as T;
+  if (typeof value === 'string') {
+    return maybeWrapCSSVariables(value) as any as T;
   }
   return value;
 }
@@ -734,7 +752,7 @@ export function handleCsProp<
 type StylesReturn<V extends Record<string, string> | Record<string, Record<string, string>> = {}> =
   | SerializedStyles
   | CSSObjectWithVars
-  | ((vars: OptionalVars<V>) => SerializedStyles | CSSObject);
+  | ((vars: OptionalVars<V>) => SerializedStyles | CSSObjectWithVars);
 
 export type StencilModifierConfig<
   V extends Record<string, string> | Record<string, Record<string, string>> = {}
@@ -742,7 +760,7 @@ export type StencilModifierConfig<
 
 export type StencilCompoundConfig<M> = {
   modifiers: {[K in keyof M]?: MaybeBoolean<keyof M[K]>};
-  styles: SerializedStyles | CSSObject;
+  styles: SerializedStyles | CSSObjectWithVars;
 };
 
 type ModifierValuesStencil<M extends StencilModifierConfig> = {
