@@ -91,6 +91,32 @@ describe('parseNodeToStaticValue', () => {
     ).toEqual('--css-foo-bar');
   });
 
+  it('should return the string value of a ElementAccessExpression', () => {
+    const program = createProgramFromSource(`
+      const foo = { 1: '12px'} as const;
+
+      foo[1]
+    `);
+
+    const sourceFile = program.getSourceFile('test.ts');
+    const node = findNodes(sourceFile, '', ts.isElementAccessExpression)[0];
+
+    expect(parseNodeToStaticValue(node, program.getTypeChecker())).toEqual('12px');
+  });
+
+  it('should return the string value of a ElementAccessExpression', () => {
+    const program = createProgramFromSource(`
+      const foo = ['12px'] as const;
+
+      foo[0]
+    `);
+
+    const sourceFile = program.getSourceFile('test.ts');
+    const node = findNodes(sourceFile, '', ts.isElementAccessExpression)[0];
+
+    expect(parseNodeToStaticValue(node, program.getTypeChecker())).toEqual('12px');
+  });
+
   it('should return the string value of a ComputedPropertyName of a variable', () => {
     const program = createProgramFromSource(`
       const temp = {
