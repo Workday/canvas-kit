@@ -5,15 +5,10 @@ import {createComponent} from '@workday/canvas-kit-react/common';
 import {handleCsProp, CSProps, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
-const grow = keyframes`
-  from {
-    transform: scale(0.85);
-  }
-
-  to {
-    transform: scale(1.0);
-  }
-`;
+const grow = keyframes({
+  '0%': {transform: 'scale(0.85)'},
+  '100%': {transform: 'scale(1)'},
+});
 
 export interface CountBadgeProps extends CSProps {
   /**
