@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {buttonVars, getIconPosition} from './BaseButton';
 import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
-import {createStyles, cssVar, createModifiers} from '@workday/canvas-kit-styling';
+import {createStyles, createModifiers} from '@workday/canvas-kit-styling';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {system, brand, base} from '@workday/canvas-tokens-web';
 import {borderRadius, space} from '@workday/canvas-kit-react/tokens';
@@ -22,7 +22,7 @@ export interface TertiaryButtonProps extends ButtonProps {
 }
 
 const tertiaryStyles = createStyles({
-  paddingInline: cssVar(system.space.x2, '0.5rem'),
+  paddingInline: system.space.x2,
   minWidth: 'auto',
   textDecoration: 'underline',
   border: 0,
@@ -60,8 +60,8 @@ const tertiaryStyles = createStyles({
     ...focusRing({
       width: 2,
       separation: 0,
-      innerColor: cssVar(base.frenchVanilla100),
-      outerColor: cssVar(brand.common.focusOutline),
+      innerColor: base.frenchVanilla100,
+      outerColor: brand.common.focusOutline,
     }),
   },
 });
@@ -109,8 +109,8 @@ export const tertiaryButtonModifiers = createModifiers({
           inset: 'inner',
           width: 2,
           separation: 2,
-          innerColor: cssVar(base.blackPepper400),
-          outerColor: cssVar(base.frenchVanilla100),
+          innerColor: base.blackPepper400,
+          outerColor: base.frenchVanilla100,
         }),
       },
     }),
@@ -119,7 +119,7 @@ export const tertiaryButtonModifiers = createModifiers({
     largeOnly: createStyles({
       borderRadius: borderRadius.circle,
       padding: '0',
-      minWidth: `calc(${cssVar(system.space.x4, '1rem')} * 3)`,
+      minWidth: `calc(${system.space.x4} * 3)`,
     }),
     largeStart: createStyles({
       paddingInlineStart: space.xxs,

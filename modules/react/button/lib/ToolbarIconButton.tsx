@@ -13,7 +13,6 @@ import {ButtonColors} from './types';
 import {BaseButton} from './BaseButton';
 import {TertiaryButtonProps} from './TertiaryButton';
 import {brand} from '@workday/canvas-tokens-web';
-import {cssVar} from '@workday/canvas-kit-styling';
 
 export interface ToolbarIconButtonProps
   extends Omit<TertiaryButtonProps, 'size' | 'variant'>,
@@ -34,7 +33,7 @@ const StyledToolbarIconButton = styled(BaseButton)<StyledType & ToolbarIconButto
       width: 2,
       separation: 0,
       innerColor: 'transparent',
-      outerColor: cssVar(brand.common.focusOutline),
+      outerColor: brand.common.focusOutline,
     }),
   },
 });

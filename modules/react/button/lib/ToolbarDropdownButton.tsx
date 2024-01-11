@@ -14,7 +14,6 @@ import {BaseButton} from './BaseButton';
 import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {ToolbarIconButtonProps} from './ToolbarIconButton';
 import {brand} from '@workday/canvas-tokens-web';
-import {cssVar} from '@workday/canvas-kit-styling';
 
 export interface ToolbarDropdownButtonProps
   extends Omit<ToolbarIconButtonProps, 'toggled' | 'onToggleChange'>,
@@ -45,7 +44,7 @@ const StyledToolbarDropdownButton = styled(BaseButton)<StyledType & ToolbarDropd
       width: 2,
       separation: 0,
       innerColor: 'transparent',
-      outerColor: cssVar(brand.common.focusOutline),
+      outerColor: brand.common.focusOutline,
     }),
   },
 });
