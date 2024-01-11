@@ -19,6 +19,7 @@ export const CardHeading = createComponent('h3')({
       <BodyText
         ref={ref}
         size="large"
+        color="blackPepper400"
         fontWeight="bold"
         marginBottom="m"
         marginTop={0}
