@@ -1,4 +1,7 @@
 import {Meta} from '@storybook/addon-docs';
+import {Table} from '@workday/canvas-kit-preview-react'
+import {base, brand} from '@workday/canvas-tokens-web'
+import {cssVar} from '@workday/canvas-kit-styling'
 
 <Meta title="Guides/Upgrade Guides/v11.0" />
 
@@ -122,32 +125,284 @@ instead.
 
 ### Style Updates
 
-We've made some small styling updates to: `Card`, `Table`, `Checkbox`, `Radio`, `SecondaryButton`, `TertiaryButton`, `DeleteButton`, `TextInput` and `TextArea`.
+We've made some small styling updates to: `Table`, `Checkbox`, `Radio`, `SecondaryButton`, `TertiaryButton`, `DeleteButton`, `TextInput` and `TextArea`.
+
+These changes are to address discrepancies that were found between Canvas Kit Design Specs and Canvas Kit.
 
 **PR:** [#2485](https://github.com/Workday/canvas-kit/pull/2485)
 
 See below:
 
-| Component                  | Variant | psuedo Class | Property                | v10 Value          | v11 Value         |
-| -------------------------- | ------- | ------------ | ----------------------- | ------------------ | ----------------- |
-| Card (Heading)             |         |              | typeLevel               | `body.large`       | `heading.small`   |
-| Card (Body)                |         |              | typeLevel               | `subtext.large`    | `body.small`      |
-| Table (Header)             |         |              | borderColor             | `soap400`          | `soap500`         |
-| Checkbox                   |         | disabled     | borderColor             | `soap600`          | `licorice100`     |
-| Checkbox                   | Inverse | disabled     | borderColor             | `soap600`          | `licorice100`     |
-| Radio                      |         | disabled     | borderColor             | `soap600`          | `licorice100`     |
-| SecondaryButton            | Inverse | focus        | color                   | `blackPepper500`   | `blackPepper400`  |
-| SecondaryButton            | Inverse | focus        | boxShdaow (Inner Color) | `blackPepper500`   | `blackPepper400`  |
-| SecondaryButton (Icon)     | Inverse | focus        | fill                    | `blackPepper500`   | `blackPepper400`  |
-| TertiaryButton             |         | hover        | backgroundColor         | `soap200`          | `soap300`         |
-| TertiaryButton             |         | active       | backgroundColor         | `soap300`          | `soap400`         |
-| TertiaryButton             |         | active       | color                   | `primary.dark`     | `primary.darkest` |
-| TertiaryButton             |         | disabled     | borderColor             | `frenchVanilla100` | `transparent`     |
-| TertiaryButton (Icon Only) |         | focus        | fill                    | `blackPepper500`   | `blackPepper400`  |
-| TertiaryButton (Icon Only) |         | hover        | fill                    | `blackPepper500`   | `blackPepper400`  |
-| DeleteButton               |         | disabled     | backgroundColor         | `error.light`      | `error.base`      |
-| TextInput                  |         | disabled     | borderColor             | `soap600`          | `licorice100`     |
-| TextArea                   |         | disabled     | borderColor             | `soap600`          | `licorice100`     |
+<Table>
+  <Table.Head>
+		<Table.Row>
+			<Table.Header scope="col">Component</Table.Header>
+			<Table.Header scope="col">Variant</Table.Header>
+			<Table.Header scope="col">psuedo Class</Table.Header>
+			<Table.Header scope="col">Property</Table.Header>
+			<Table.Header scope="col">v10 Value</Table.Header>
+			<Table.Header scope="col">v11 Value</Table.Header>
+		</Table.Row>
+  </Table.Head>
+  <Table.Body>
+		<Table.Row>
+			<Table.Cell>
+				Table (Header)
+			</Table.Cell>
+			<Table.Cell/>
+			<Table.Cell/>
+			<Table.Cell>
+				borderColor
+			</Table.Cell>
+			<Table.Cell backgroundColor='soap400'>
+				soap400
+			</Table.Cell>
+			<Table.Cell backgroundColor='soap500'>
+				soap500
+			</Table.Cell>
+		</Table.Row>
+		<Table.Row>
+			<Table.Cell>
+				Checkbox
+			</Table.Cell>
+			<Table.Cell/>
+			<Table.Cell>disabled</Table.Cell>
+			<Table.Cell>
+				borderColor
+			</Table.Cell>
+			<Table.Cell backgroundColor='soap600'>
+				soap600
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor='licorice100'>
+				licorice100
+			</Table.Cell>
+		</Table.Row>
+		<Table.Row>
+			<Table.Cell>
+				Checkbox
+			</Table.Cell>
+			<Table.Cell>Inverse</Table.Cell>
+			<Table.Cell>disabled</Table.Cell>
+			<Table.Cell>
+				borderColor
+			</Table.Cell>
+			<Table.Cell backgroundColor='soap600'>
+				soap600
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor='licorice100'>
+				licorice100
+			</Table.Cell>
+		</Table.Row>
+		<Table.Row>
+			<Table.Cell>
+				Radio
+			</Table.Cell>
+			<Table.Cell/>
+			<Table.Cell>disabled</Table.Cell>
+			<Table.Cell>
+				borderColor
+			</Table.Cell>
+			<Table.Cell backgroundColor='soap600'>
+				soap600
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor='licorice100'>
+				licorice100
+			</Table.Cell>
+		</Table.Row>
+		<Table.Row>
+			<Table.Cell>
+				SecondaryButton
+			</Table.Cell>
+			<Table.Cell>Inverse</Table.Cell>
+			<Table.Cell>focus</Table.Cell>
+			<Table.Cell>
+				color
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor='blackPepper500'>
+				blackPepper500
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor='blackPepper400'>
+				blackPepper400
+			</Table.Cell>
+		</Table.Row>
+		<Table.Row>
+			<Table.Cell>
+				SecondaryButton
+			</Table.Cell>
+			<Table.Cell>Inverse</Table.Cell>
+			<Table.Cell>focus</Table.Cell>
+			<Table.Cell>
+				boxShdaow (Inner Color)
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor='blackPepper500'>
+				blackPepper500
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor='blackPepper400'>
+				blackPepper400
+			</Table.Cell>
+		</Table.Row>
+		<Table.Row>
+			<Table.Cell>
+				SecondaryButton (Icon)
+			</Table.Cell>
+			<Table.Cell>Inverse</Table.Cell>
+			<Table.Cell>focus</Table.Cell>
+			<Table.Cell>
+				fill
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor='blackPepper500'>
+				blackPepper500
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor='blackPepper400'>
+				blackPepper400
+			</Table.Cell>
+		</Table.Row>
+		<Table.Row>
+			<Table.Cell>
+				TertiaryButton
+			</Table.Cell>
+			<Table.Cell/>
+			<Table.Cell>hover</Table.Cell>
+			<Table.Cell>
+				backgroundColor
+			</Table.Cell>
+			<Table.Cell backgroundColor='soap200'>
+				soap200
+			</Table.Cell>
+			<Table.Cell backgroundColor='soap300'>
+				soap300
+			</Table.Cell>
+		</Table.Row>
+		<Table.Row>
+			<Table.Cell>
+				TertiaryButton
+			</Table.Cell>
+			<Table.Cell/>
+			<Table.Cell>active</Table.Cell>
+			<Table.Cell>
+				backgroundColor
+			</Table.Cell>
+			<Table.Cell backgroundColor='soap300'>
+				soap300
+			</Table.Cell>
+			<Table.Cell backgroundColor='soap400'>
+				soap400
+			</Table.Cell>
+		</Table.Row>
+		<Table.Row>
+			<Table.Cell>
+				TertiaryButton
+			</Table.Cell>
+			<Table.Cell/>
+			<Table.Cell>active</Table.Cell>
+			<Table.Cell>
+				color
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor={cssVar(brand.primary.dark)}>
+				primary.dark
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor={cssVar(brand.primary.darkest)}>
+				primary.darkest
+			</Table.Cell>
+		</Table.Row>
+		<Table.Row>
+			<Table.Cell>
+				TertiaryButton
+			</Table.Cell>
+			<Table.Cell/>
+			<Table.Cell>disabled</Table.Cell>
+			<Table.Cell>
+				borderColor
+			</Table.Cell>
+			<Table.Cell backgroundColor='frenchVanilla100'>
+				frenchVanilla100
+			</Table.Cell>
+			<Table.Cell backgroundColor='transparent'>
+				transparent
+			</Table.Cell>
+		</Table.Row>
+		<Table.Row>
+			<Table.Cell>
+				TertiaryButton (Icon Only)
+			</Table.Cell>
+			<Table.Cell/>
+			<Table.Cell>focus</Table.Cell>
+			<Table.Cell>
+				fill
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor='blackPepper500'>
+				blackPepper500
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor='blackPepper400'>
+				blackPepper400
+			</Table.Cell>
+		</Table.Row>
+		<Table.Row>
+			<Table.Cell>
+				TertiaryButton (Icon Only)
+			</Table.Cell>
+			<Table.Cell/>
+			<Table.Cell>hover</Table.Cell>
+			<Table.Cell>
+				fill
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor='blackPepper500'>
+				blackPepper500
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor='blackPepper400'>
+				blackPepper400
+			</Table.Cell>
+		</Table.Row>
+		<Table.Row>
+			<Table.Cell>
+				DeleteButton
+			</Table.Cell>
+			<Table.Cell/>
+			<Table.Cell>disabled</Table.Cell>
+			<Table.Cell>
+				backgroundColor
+			</Table.Cell>
+			<Table.Cell backgroundColor={cssVar(brand.error.light)}>
+				error.light
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor={cssVar(brand.error.base)}>
+				error.base
+			</Table.Cell>
+		</Table.Row>
+		<Table.Row>
+			<Table.Cell>
+				TextInput
+			</Table.Cell>
+			<Table.Cell/>
+			<Table.Cell>disabled</Table.Cell>
+			<Table.Cell>
+				borderColor
+			</Table.Cell>
+			<Table.Cell backgroundColor='soap600'>
+				soap600
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor='licorice100'>
+				licorice100
+			</Table.Cell>
+		</Table.Row>
+		<Table.Row>
+			<Table.Cell>
+				TextArea
+			</Table.Cell>
+			<Table.Cell/>
+			<Table.Cell>disabled</Table.Cell>
+			<Table.Cell>
+				borderColor
+			</Table.Cell>
+			<Table.Cell backgroundColor='soap600'>
+				soap600
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor='licorice100'>
+				licorice100
+			</Table.Cell>
+		</Table.Row>
+  </Table.Body>
+</Table>
 
 ### Count Badge
 
