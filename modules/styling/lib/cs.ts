@@ -1,6 +1,6 @@
 import {cache, css} from '@emotion/css';
 import {getRegisteredStyles} from '@emotion/utils';
-import {serializeStyles, Keyframes, SerializedStyles, CSSObject} from '@emotion/serialize';
+import {serializeStyles, SerializedStyles, CSSObject, Keyframes} from '@emotion/serialize';
 import {Properties} from 'csstype';
 
 import {generateUniqueId} from './uniqueId';

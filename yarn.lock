@@ -1828,7 +1828,7 @@
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.6.tgz#d5e0706cf8c6acd8c6032f8d54070af261bbbb2f"
   integrity sha512-ws57AidsDvREKrZKYffXddNkyaF14iHNHm8VQnZH6t99E8gczjNN0GpvcGny0imC80yQ0tHz1xVUKk/KFQSUyA==
 
-"@emotion/babel-plugin@^11.3.0", "@emotion/babel-plugin@^11.7.1", "@emotion/babel-plugin@^11.9.2":
+"@emotion/babel-plugin@^11.3.0", "@emotion/babel-plugin@^11.7.1":
   version "11.9.2"
   resolved "https://registry.yarnpkg.com/@emotion/babel-plugin/-/babel-plugin-11.9.2.tgz#723b6d394c89fb2ef782229d92ba95a740576e95"
   integrity sha512-Pr/7HGH6H6yKgnVFNEj2MVlreu3ADqftqjqwUvDy/OJzKFgxKeTQ+eeUf20FOTuHVkDON2iNa25rAXVYtWJCjw==
@@ -5073,6 +5073,11 @@
   resolved "https://registry.yarnpkg.com/@workday/canvas-tokens-web/-/canvas-tokens-web-1.0.0.tgz#4bab2d0f2fe52ecbbcd2731f0463c70942ae7f5e"
   integrity sha512-VooVwG2wmL4VG/pNlw7IuzSsFkg3q3Y4oFuYvuVYGS5ZftX7uej1rq67dNzayhfnRDlMfo0Gv74LuRs355HtHg==
 
+"@workday/canvas-tokens-web@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-tokens-web/-/canvas-tokens-web-1.0.2.tgz#bb1edc141fadaff440057b7fc3f06cd3d9f0368f"
+  integrity sha512-KwebaZTSO5dRHDbV4VXXAGjtA2dgWmNkx0R3OYxnrJVEY8KgcynpEKQJ9yeU1zkXzutv8L4KE6SFLTGT6JIlCA==
+
 "@workday/design-assets-types@0.2.10":
   version "0.2.10"
   resolved "https://registry.yarnpkg.com/@workday/design-assets-types/-/design-assets-types-0.2.10.tgz#ebcc16377951cd0449b885a467eb68c9e715e05f"
@@ -7639,6 +7644,11 @@ csstype@^3.0.2:
   version "3.0.8"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.8.tgz#d2266a792729fb227cd216fb572f43728e1ad340"
   integrity sha512-jXKhWqXPmlUeoQnF/EhTtTl4C9SnrxSH/jZUih3jmO6lBKr99rP3/+FmrMj4EFpOXzMtXHAZkd3x0E6h6Fgflw==
+
+csstype@^3.1.3:
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.3.tgz#d80ff294d114fb0e6ac500fbf85b60137d7eff81"
+  integrity sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==
 
 currently-unhandled@^0.4.1:
   version "0.4.1"
