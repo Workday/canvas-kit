@@ -1,25 +1,18 @@
 import * as React from 'react';
 
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {mergeStyles, BoxProps} from '@workday/canvas-kit-react/layout';
-import {createStyles, CSProps} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {BoxProps} from '@workday/canvas-kit-react/layout';
+import {Subtext} from '@workday/canvas-kit-react/text';
 
-const cardBodyBaseStyles = createStyles({
-  ...system.type.subtext.large,
-  color: base.blackPepper300,
-  fontWeight: system.fontWeight.normal,
-});
-
-export interface CardBodyProps extends CSProps, BoxProps {}
+export interface CardBodyProps extends BoxProps {}
 
 export const CardBody = createComponent('div')({
   displayName: 'Card.Body',
   Component: ({children, ...elemProps}: CardBodyProps, ref, Element) => {
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, cardBodyBaseStyles)}>
+      <Subtext size="large" ref={ref} as={Element} {...elemProps}>
         {children}
-      </Element>
+      </Subtext>
     );
   },
 });

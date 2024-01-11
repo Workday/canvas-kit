@@ -2,13 +2,13 @@ import * as React from 'react';
 
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {mergeStyles, BoxProps} from '@workday/canvas-kit-react/layout';
-import {createStyles, CSProps, cssVar} from '@workday/canvas-kit-styling';
+import {createStyles} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 import {CardHeading} from './CardHeading';
 import {CardBody} from './CardBody';
 
-export interface CardProps extends BoxProps, CSProps {
+export interface CardProps extends BoxProps {
   /**
    * Children of the Card. Should contain a `<Card.Body>` and an optional `<Card.Heading>`
    */
@@ -19,7 +19,7 @@ const cardBaseStyles = createStyles({
   boxShadow: system.depth[1],
   padding: system.space.x8,
   backgroundColor: base.frenchVanilla100,
-  border: `0.0625rem solid ${cssVar(base.soap500)}`,
+  border: `0.0625rem solid ${base.soap500}`,
   borderRadius: system.shape.x2,
 });
 
