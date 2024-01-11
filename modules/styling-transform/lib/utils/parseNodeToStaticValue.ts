@@ -68,6 +68,14 @@ export function parseNodeToStaticValue(
     }
   }
 
+  if (ts.isElementAccessExpression(node)) {
+    const value = parseTypeToStaticValue(checker.getTypeAtLocation(node));
+
+    if (value) {
+      return value;
+    }
+  }
+
   // If we got here, we cannot statically analyze by the AST alone. We have to check the type of the
   // correct AST Node
 
