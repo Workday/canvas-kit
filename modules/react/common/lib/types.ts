@@ -20,8 +20,8 @@ export interface TransformOrigin {
  * Error types
  */
 export enum ErrorType {
-  Error,
-  Alert,
+  Error = 'error',
+  Alert = 'alert',
 }
 
 /**

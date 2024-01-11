@@ -28,14 +28,14 @@ export const CardHeading = createComponent('h3')({
   Component: ({children, ...elemProps}: CardHeadingProps, ref, Element) => {
     // TODO: This needs to wait on the Text component refactor to be backwards-compatible.
     return (
-      <Text
+      <BodyText
         ref={ref}
         as={Element}
         {...elemProps}
         {...mergeStyles(elemProps, cardHeadingBaseStyles)}
       >
         {children}
-      </Text>
+      </BodyText>
     );
   },
 });
