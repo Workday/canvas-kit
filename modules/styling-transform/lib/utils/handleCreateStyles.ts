@@ -6,7 +6,7 @@ import {NodeTransformer} from './types';
 import {isImportedFromStyling} from './isImportedFromStyling';
 
 export const handleCreateStyles: NodeTransformer = (node, context) => {
-  const {checker, prefix, variables} = context;
+  const {checker} = context;
   /**
    * Check if the node is a call expression that looks like:
    *

@@ -53,11 +53,10 @@ const defaultTransformers = [
 export default function styleTransformer(
   program: ts.Program,
   {
-    prefix = 'css',
     variables = {},
-    keyframes = {},
     fallbackFiles = [],
     transformers = defaultTransformers,
+    ...transformContext
   }: Partial<StyleTransformerOptions> = {
     prefix: 'css',
     variables: {},
@@ -91,7 +90,13 @@ export default function styleTransformer(
       // eslint-disable-next-line no-param-reassign
       node = ts.visitEachChild(node, visit, context);
 
-      return handleTransformers(node, {checker, prefix, variables: vars, keyframes})(transformers);
+      return handleTransformers(node, {
+        checker,
+        prefix: 'css',
+        variables: vars,
+        keyframes,
+        ...transformContext,
+      })(transformers);
     };
 
     return node => ts.visitNode(node, visit);

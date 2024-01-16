@@ -148,7 +148,14 @@ describe('parseNodeToStaticValue', () => {
     const sourceFile = program.getSourceFile('test.ts');
     const node = findNodes(sourceFile, '', ts.isElementAccessExpression)[0];
 
-    expect(parseNodeToStaticValue(node, program.getTypeChecker())).toEqual('12px');
+    expect(
+      parseNodeToStaticValue(node, {
+        checker: program.getTypeChecker(),
+        prefix: 'css',
+        variables: {},
+        keyframes: {},
+      })
+    ).toEqual('12px');
   });
 
   it('should return the string value of a ElementAccessExpression', () => {
@@ -161,7 +168,14 @@ describe('parseNodeToStaticValue', () => {
     const sourceFile = program.getSourceFile('test.ts');
     const node = findNodes(sourceFile, '', ts.isElementAccessExpression)[0];
 
-    expect(parseNodeToStaticValue(node, program.getTypeChecker())).toEqual('12px');
+    expect(
+      parseNodeToStaticValue(node, {
+        checker: program.getTypeChecker(),
+        prefix: 'css',
+        variables: {},
+        keyframes: {},
+      })
+    ).toEqual('12px');
   });
 
   it('should return the string value of a ComputedPropertyName of a variable', () => {
