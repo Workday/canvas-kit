@@ -43,6 +43,9 @@ const baseStyles: CSSProperties = {
   },
 };
 
+/**
+ * @deprecated ⚠️ `TextAreaField` in Preview has been deprecated and will be removed in a future major version. Please use [`FormField` in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-inputs-form-field--custom) instead.
+ */
 export const TextAreaField = createSubcomponent('textarea')({
   displayName: 'TextArea.Field',
   modelHook: useTextInputModel,
@@ -50,14 +53,15 @@ export const TextAreaField = createSubcomponent('textarea')({
   const theme = useTheme();
   const errorRing = useThemedRing('error');
 
-  const focusStyles = model.state.hasError
-    ? errorRing
-    : {
-        '&:focus:not([disabled])': {
-          borderColor: theme.canvas.palette.common.focusOutline,
-          boxShadow: `inset 0 0 0 1px ${theme.canvas.palette.common.focusOutline}`,
-        },
-      };
+  const focusStyles =
+    model.state.error === 'error'
+      ? errorRing
+      : {
+          '&:focus:not([disabled])': {
+            borderColor: theme.canvas.palette.common.focusOutline,
+            boxShadow: `inset 0 0 0 1px ${theme.canvas.palette.common.focusOutline}`,
+          },
+        };
 
   return (
     <FormField.Input

@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {Switch} from '@workday/canvas-kit-react/switch';
 
 export const Disabled = () => {
@@ -10,8 +10,9 @@ export const Disabled = () => {
   };
 
   return (
-    <FormField label="Dark Mode">
-      <Switch checked={checked} disabled onChange={handleChange} />
+    <FormField>
+      <FormField.Label>Dark Mode</FormField.Label>
+      <FormField.Input disabled as={Switch} checked={checked} onChange={handleChange} />
     </FormField>
   );
 };
