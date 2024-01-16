@@ -2,49 +2,43 @@ import ts from 'typescript';
 import {getFallbackVariable} from './getFallbackVariable';
 
 import {parseNodeToStaticValue} from './parseNodeToStaticValue';
+import {TransformerContext} from './types';
 
 export type NestedStyleObject = {[key: string]: string | NestedStyleObject};
 
 export function parseObjectToStaticValue(
   node: ts.Node,
-  checker: ts.TypeChecker,
-  prefix = 'css',
-  variables: Record<string, string> = {}
+  context: TransformerContext
 ): NestedStyleObject {
   let styleObj: NestedStyleObject = {};
 
   if (ts.isObjectLiteralExpression(node)) {
     node.properties.forEach(property => {
-      styleObj = {...styleObj, ...parsePropertyToStaticValue(property, checker, prefix, variables)};
+      styleObj = {...styleObj, ...parsePropertyToStaticValue(property, context)};
     });
   }
 
   return styleObj;
 }
 
-function parsePropertyToStaticValue(
-  node: ts.Node,
-  checker: ts.TypeChecker,
-  prefix = 'css',
-  variables: Record<string, string> = {}
-): NestedStyleObject {
+function parsePropertyToStaticValue(node: ts.Node, context: TransformerContext): NestedStyleObject {
   const styleObj: NestedStyleObject = {};
 
   // { name: value }
   if (ts.isPropertyAssignment(node)) {
     const key = ts.isIdentifier(node.name)
       ? node.name.text
-      : parseNodeToStaticValue(node.name, checker, prefix, variables);
+      : parseNodeToStaticValue(node.name, context);
     if (key) {
       if (ts.isObjectLiteralExpression(node.initializer)) {
         // nested
-        styleObj[key] = parseObjectToStaticValue(node.initializer, checker, prefix, variables);
+        styleObj[key] = parseObjectToStaticValue(node.initializer, context);
       } else {
         styleObj[key] = maybeWrapCSSVariables(
-          parseNodeToStaticValue(node.initializer, checker, prefix, variables),
-          variables
+          parseNodeToStaticValue(node.initializer, context),
+          context.variables
         );
-        parseNodeToStaticValue(node.initializer, checker, prefix, variables);
+        parseNodeToStaticValue(node.initializer, context);
       }
 
       return styleObj;
@@ -55,17 +49,15 @@ function parsePropertyToStaticValue(
   if (ts.isPropertySignature(node)) {
     const key = ts.isIdentifier(node.name)
       ? node.name.text
-      : parseNodeToStaticValue(node.name, checker, prefix, variables);
+      : parseNodeToStaticValue(node.name, context);
     if (key) {
       if (key.includes('&') || key.startsWith(':')) {
         // nested
-        styleObj[key] = parseObjectToStaticValue(node.type!, checker, prefix, variables);
+        styleObj[key] = parseObjectToStaticValue(node.type!, context);
       } else {
         styleObj[key] =
-          maybeWrapCSSVariables(
-            parseNodeToStaticValue(node.type!, checker, prefix, variables),
-            variables
-          ) || '';
+          maybeWrapCSSVariables(parseNodeToStaticValue(node.type!, context), context.variables) ||
+          '';
       }
 
       return styleObj;
@@ -75,16 +67,16 @@ function parsePropertyToStaticValue(
   // {...{key: 'value'}}
   if (ts.isSpreadAssignment(node) && ts.isObjectLiteralExpression(node.expression)) {
     // recurse to parse a nested ObjectLiteralExpression
-    return parseObjectToStaticValue(node.expression, checker, prefix, variables);
+    return parseObjectToStaticValue(node.expression, context);
   }
 
   // { ...value }
   if (ts.isSpreadAssignment(node)) {
     // Spread assignments are a bit complicated to use the AST to figure out, so we'll ask the
     // TypeScript type checker.
-    const type = checker.getTypeAtLocation(node.expression);
-    checker.typeToString(type);
-    return parseStyleObjFromType(type, checker, prefix, variables);
+    const type = context.checker.getTypeAtLocation(node.expression);
+    context.checker.typeToString(type);
+    return parseStyleObjFromType(type, context);
   }
 
   return styleObj;
@@ -95,12 +87,7 @@ function parsePropertyToStaticValue(
  * from the AST, but we might have something that is more complicated like a function call or an
  * identifier that represents an object. It could be imported from another file.
  */
-export function parseStyleObjFromType(
-  type: ts.Type,
-  checker: ts.TypeChecker,
-  prefix: string,
-  variables: Record<string, string>
-) {
+export function parseStyleObjFromType(type: ts.Type, context: TransformerContext) {
   const styleObj: Record<string, any> = {};
 
   // Gets all the properties of the type object
@@ -109,7 +96,7 @@ export function parseStyleObjFromType(
 
     // we might have generics, so we'll use the type of the symbol instead of the type at the
     // declaration. This resolves generics like `T` into literal values if they exist.
-    const propType = checker.getTypeOfSymbolAtLocation(property, declaration);
+    const propType = context.checker.getTypeOfSymbolAtLocation(property, declaration);
 
     if (propType.isStringLiteral()) {
       // This isn't a component variable, it is a static CSS variable
@@ -123,7 +110,7 @@ export function parseStyleObjFromType(
     }
     return {
       ...result,
-      ...parsePropertyToStaticValue(declaration, checker, prefix, variables),
+      ...parsePropertyToStaticValue(declaration, context),
     };
   }, styleObj);
 }

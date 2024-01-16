@@ -7,18 +7,14 @@ import {makeEmotionSafe} from './makeEmotionSafe';
 import {NestedStyleObject, parseObjectToStaticValue} from './parseObjectToStaticValue';
 import {createStyleObjectNode} from './createStyleObjectNode';
 import {parseNodeToStaticValue} from './parseNodeToStaticValue';
-import {NodeTransformer} from './types';
+import {NodeTransformer, TransformerContext} from './types';
 import {isImportedFromStyling} from './isImportedFromStyling';
 
 /**
  * Handle all arguments of the CallExpression `createStencil()`
  */
-export const handleCreateStencil: NodeTransformer = (
-  node,
-  checker,
-  prefix = 'css',
-  variables = {}
-) => {
+export const handleCreateStencil: NodeTransformer = (node, context) => {
+  const {checker, prefix, variables} = context;
   /**
    * This will match whenever a `createStencil()` call expression is encountered. It will loop
    * over all the config to extract variables and styles.
@@ -80,12 +76,7 @@ export const handleCreateStencil: NodeTransformer = (
           tempVariables[makeEmotionSafe(node.name.text)] = varValue;
 
           // Evaluate the variable defaults
-          stencilVariables[varValue] = parseNodeToStaticValue(
-            node.initializer,
-            checker,
-            prefix,
-            variables
-          );
+          stencilVariables[varValue] = parseNodeToStaticValue(node.initializer, context);
         }
       }
 
@@ -99,7 +90,7 @@ export const handleCreateStencil: NodeTransformer = (
         if (property.name && ts.isIdentifier(property.name)) {
           // base config object
           if (property.name.text === 'base') {
-            const styleObj = parseStyleBlock(property, checker, prefix, variables);
+            const styleObj = parseStyleBlock(property, context);
 
             if (styleObj) {
               // The `as any` are necessary because the properties are readonly, even though they
@@ -132,7 +123,7 @@ export const handleCreateStencil: NodeTransformer = (
                 ts.isObjectLiteralExpression(modifierProperty.initializer)
               ) {
                 modifierProperty.initializer.properties.forEach((modifier, index, modifiers) => {
-                  const styleObj = parseStyleBlock(modifier, checker, prefix, variables);
+                  const styleObj = parseStyleBlock(modifier, context);
 
                   if (styleObj && modifier.name) {
                     // The `as any` are necessary because the properties are readonly, even though they
@@ -166,7 +157,7 @@ export const handleCreateStencil: NodeTransformer = (
                     ts.isIdentifier(compoundProperty.name) &&
                     compoundProperty.name.text === 'styles'
                   ) {
-                    const styleObj = parseStyleBlock(compoundProperty, checker, prefix, variables);
+                    const styleObj = parseStyleBlock(compoundProperty, context);
 
                     if (styleObj) {
                       // The `as any` are necessary because the properties are readonly, even though they
@@ -211,20 +202,18 @@ export const handleCreateStencil: NodeTransformer = (
  */
 function parseStyleBlock(
   property: ts.ObjectLiteralElementLike,
-  checker: ts.TypeChecker,
-  prefix: string,
-  variables: Record<string, string>
+  context: TransformerContext
 ): NestedStyleObject | undefined {
   let styleObj: NestedStyleObject | undefined;
   if (ts.isPropertyAssignment(property)) {
     if (ts.isObjectLiteralExpression(property.initializer)) {
-      styleObj = parseObjectToStaticValue(property.initializer, checker, prefix, variables);
+      styleObj = parseObjectToStaticValue(property.initializer, context);
     }
 
     if (isFunctionLikeDeclaration(property.initializer)) {
       const returnNode = getReturnStatement(property.initializer);
       if (returnNode) {
-        styleObj = parseObjectToStaticValue(returnNode, checker, prefix, variables);
+        styleObj = parseObjectToStaticValue(returnNode, context);
       }
     }
   }
@@ -232,7 +221,7 @@ function parseStyleBlock(
   if (isFunctionLikeDeclaration(property)) {
     const returnNode = getReturnStatement(property);
     if (returnNode) {
-      styleObj = parseObjectToStaticValue(returnNode, checker, prefix, variables);
+      styleObj = parseObjectToStaticValue(returnNode, context);
     }
   }
 

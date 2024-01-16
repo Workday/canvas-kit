@@ -19,14 +19,14 @@ import {NodeTransformer} from './types';
  * etc. The transform can handle template string literals with different spans, so we'll convert to
  * those as an intermediate step.
  */
-export const handleCalc: NodeTransformer = (node, checker) => {
+export const handleCalc: NodeTransformer = (node, context) => {
   if (
     ts.isCallExpression(node) &&
     ts.isPropertyAccessExpression(node.expression) &&
     ts.isIdentifier(node.expression.expression) &&
     node.expression.expression.text === 'calc' &&
     ts.isIdentifier(node.expression.name) &&
-    isImportedFromStyling(node.expression.expression, checker)
+    isImportedFromStyling(node.expression.expression, context.checker)
   ) {
     if (node.expression.name.text === 'add') {
       return replaceWithTemplateString(node.arguments[0], node.arguments[1], ' + ');
