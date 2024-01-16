@@ -20,6 +20,7 @@ import {
   CompoundModifier,
   createStencil,
   handleCsProp,
+  keyframes,
 } from '../lib/cs';
 
 // We need to force Emotion's cache wrapper to use the cache from `@emotion/css` for tests to pass
@@ -877,5 +878,28 @@ describe('handleCsProp', () => {
 
     expect(screen.getByTestId('base')).toHaveStyle({padding: padding.styledComponent});
     expect(screen.getByTestId('base')).not.toHaveClass(baseStyles);
+  });
+});
+
+describe('keyframes', () => {
+  it('should return an animation name', () => {
+    const name = keyframes({});
+
+    expect(name).toContain('animation-');
+  });
+
+  it('should return a string when name is not preknown', () => {
+    const name = keyframes({});
+
+    expectTypeOf(name).toBeString();
+  });
+
+  it('should return a string literal when name is not preknown', () => {
+    const name = keyframes({
+      name: 'foo',
+      styles: '',
+    });
+
+    expectTypeOf(name).toMatchTypeOf<'foo'>();
   });
 });

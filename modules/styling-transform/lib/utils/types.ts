@@ -1,5 +1,12 @@
 import ts from 'typescript';
 
+export type TransformerContext = {
+  checker: ts.TypeChecker;
+  prefix: string;
+  variables: Record<string, string>;
+  keyframes: Record<string, string>;
+};
+
 /**
  * Transformer function type. A transformer will be called by the TypeScript AST transformer visitor
  * from the bottom of the tree to the top (inside-out/leaf first, root last). If a transformer knows
@@ -7,9 +14,4 @@ import ts from 'typescript';
  * returning a node shortcuts processing. The visitor will call all NodeTransformers until a match
  * is met.
  */
-export type NodeTransformer = (
-  node: ts.Node,
-  checker: ts.TypeChecker,
-  prefix: string,
-  variables: Record<string, string>
-) => ts.Node | void;
+export type NodeTransformer = (node: ts.Node, context: TransformerContext) => ts.Node | void;

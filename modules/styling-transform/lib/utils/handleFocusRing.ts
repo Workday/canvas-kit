@@ -5,7 +5,7 @@ import {base, brand} from '@workday/canvas-tokens-web';
 import {NodeTransformer} from './types';
 import {parseNodeToStaticValue} from './parseNodeToStaticValue';
 
-export const handleFocusRing: NodeTransformer = (node, checker, prefix, vars) => {
+export const handleFocusRing: NodeTransformer = (node, context) => {
   // { ...focusRing() }
   /**
    * A spread assignment looks like:
@@ -46,7 +46,7 @@ export const handleFocusRing: NodeTransformer = (node, checker, prefix, vars) =>
         });
       }
 
-      const inset = parseNodeToStaticValue(defaults.inset, checker, prefix, vars);
+      const inset = parseNodeToStaticValue(defaults.inset, context);
 
       let boxShadow: ts.TemplateExpression;
       switch (inset) {
