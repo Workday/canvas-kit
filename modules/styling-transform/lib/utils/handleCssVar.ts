@@ -11,7 +11,7 @@ import {NodeTransformer} from './types';
  * The value parser will figure out what to do from there. We don't have access to variables at this
  * point, so we forward CallExpression arguments in ways the value parser understands.
  */
-export const handleCssVar: NodeTransformer = (node, checker, prefix, vars) => {
+export const handleCssVar: NodeTransformer = node => {
   // cssVar(a)
   // cssVar(a, b)
 

@@ -1,4 +1,4 @@
-import {cache, css} from '@emotion/css';
+import {cache, css, keyframes as keyframesEmotion} from '@emotion/css';
 import {getRegisteredStyles} from '@emotion/utils';
 import {serializeStyles, SerializedStyles, CSSObject, Keyframes} from '@emotion/serialize';
 import {Properties} from 'csstype';
@@ -942,4 +942,10 @@ export function createStencil<
   stencil.modifiers = _modifiers as any as StencilModifierReturn<M, V>;
 
   return stencil;
+}
+
+export function keyframes<ID extends string>(
+  ...args: ({name: ID; styles: string} | StyleProps | TemplateStringsArray)[]
+): ID {
+  return keyframesEmotion(...(args as any)) as ID;
 }
