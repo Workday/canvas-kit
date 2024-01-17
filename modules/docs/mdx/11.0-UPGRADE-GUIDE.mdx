@@ -1,4 +1,7 @@
 import {Meta} from '@storybook/addon-docs';
+import {Table} from '@workday/canvas-kit-preview-react'
+import {base, brand} from '@workday/canvas-tokens-web'
+import {cssVar} from '@workday/canvas-kit-styling'
 
 <Meta title="Guides/Upgrade Guides/v11.0" />
 
@@ -15,10 +18,11 @@ any questions.
   - [Text Area Preview](#text-input-preview)
   - [Label Text](#label-text)
 - [Component Updates](#component-updates)
+  - [Component Style Updates](#component-style-updates)
   - [Card](#card)
   - [Count Badge](#count-badge)
   - [Text](#text)
-  - [Form Field Preview](#form-field-preview)
+	- [Form Field Preview](#form-field-preview)
 
 ## Codemod
 
@@ -136,7 +140,306 @@ instead.
 
 ## Component Updates
 
+### Component Style Updates
+
+These changes are to address discrepancies that were found between Canvas Kit Design Specs and Canvas Kit.
+
+We've made some small styling updates to: `Table`, `Checkbox`, `Radio`, `SecondaryButton`, `TertiaryButton`, `DeleteButton`, `TextInput` and `TextArea`.
+
+**PR:** [#2485](https://github.com/Workday/canvas-kit/pull/2485)
+
+See below:
+
+<Table>
+  <Table.Head>
+		<Table.Row>
+			<Table.Header scope="col">Component</Table.Header>
+			<Table.Header scope="col">Variant</Table.Header>
+			<Table.Header scope="col">psuedo Class</Table.Header>
+			<Table.Header scope="col">Property</Table.Header>
+			<Table.Header scope="col">v10 Value</Table.Header>
+			<Table.Header scope="col">v11 Value</Table.Header>
+		</Table.Row>
+  </Table.Head>
+  <Table.Body>
+		<Table.Row>
+			<Table.Cell>
+				Table (Header)
+			</Table.Cell>
+			<Table.Cell/>
+			<Table.Cell/>
+			<Table.Cell>
+				borderColor
+			</Table.Cell>
+			<Table.Cell backgroundColor='soap400'>
+				soap400
+			</Table.Cell>
+			<Table.Cell backgroundColor='soap500'>
+				soap500
+			</Table.Cell>
+		</Table.Row>
+		<Table.Row>
+			<Table.Cell>
+				Checkbox
+			</Table.Cell>
+			<Table.Cell/>
+			<Table.Cell>disabled</Table.Cell>
+			<Table.Cell>
+				borderColor
+			</Table.Cell>
+			<Table.Cell backgroundColor='soap600'>
+				soap600
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor='licorice100'>
+				licorice100
+			</Table.Cell>
+		</Table.Row>
+		<Table.Row>
+			<Table.Cell>
+				Checkbox
+			</Table.Cell>
+			<Table.Cell>Inverse</Table.Cell>
+			<Table.Cell>disabled</Table.Cell>
+			<Table.Cell>
+				borderColor
+			</Table.Cell>
+			<Table.Cell backgroundColor='soap600'>
+				soap600
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor='licorice100'>
+				licorice100
+			</Table.Cell>
+		</Table.Row>
+		<Table.Row>
+			<Table.Cell>
+				Radio
+			</Table.Cell>
+			<Table.Cell/>
+			<Table.Cell>disabled</Table.Cell>
+			<Table.Cell>
+				borderColor
+			</Table.Cell>
+			<Table.Cell backgroundColor='soap600'>
+				soap600
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor='licorice100'>
+				licorice100
+			</Table.Cell>
+		</Table.Row>
+		<Table.Row>
+			<Table.Cell>
+				SecondaryButton
+			</Table.Cell>
+			<Table.Cell>Inverse</Table.Cell>
+			<Table.Cell>focus</Table.Cell>
+			<Table.Cell>
+				color
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor='blackPepper500'>
+				blackPepper500
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor='blackPepper400'>
+				blackPepper400
+			</Table.Cell>
+		</Table.Row>
+		<Table.Row>
+			<Table.Cell>
+				SecondaryButton
+			</Table.Cell>
+			<Table.Cell>Inverse</Table.Cell>
+			<Table.Cell>focus</Table.Cell>
+			<Table.Cell>
+				boxShdaow (Inner Color)
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor='blackPepper500'>
+				blackPepper500
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor='blackPepper400'>
+				blackPepper400
+			</Table.Cell>
+		</Table.Row>
+		<Table.Row>
+			<Table.Cell>
+				SecondaryButton (Icon)
+			</Table.Cell>
+			<Table.Cell>Inverse</Table.Cell>
+			<Table.Cell>focus</Table.Cell>
+			<Table.Cell>
+				fill
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor='blackPepper500'>
+				blackPepper500
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor='blackPepper400'>
+				blackPepper400
+			</Table.Cell>
+		</Table.Row>
+		<Table.Row>
+			<Table.Cell>
+				TertiaryButton
+			</Table.Cell>
+			<Table.Cell/>
+			<Table.Cell>hover</Table.Cell>
+			<Table.Cell>
+				backgroundColor
+			</Table.Cell>
+			<Table.Cell backgroundColor='soap200'>
+				soap200
+			</Table.Cell>
+			<Table.Cell backgroundColor='soap300'>
+				soap300
+			</Table.Cell>
+		</Table.Row>
+		<Table.Row>
+			<Table.Cell>
+				TertiaryButton
+			</Table.Cell>
+			<Table.Cell/>
+			<Table.Cell>active</Table.Cell>
+			<Table.Cell>
+				backgroundColor
+			</Table.Cell>
+			<Table.Cell backgroundColor='soap300'>
+				soap300
+			</Table.Cell>
+			<Table.Cell backgroundColor='soap400'>
+				soap400
+			</Table.Cell>
+		</Table.Row>
+		<Table.Row>
+			<Table.Cell>
+				TertiaryButton
+			</Table.Cell>
+			<Table.Cell/>
+			<Table.Cell>active</Table.Cell>
+			<Table.Cell>
+				color
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor={cssVar(brand.primary.dark)}>
+				primary.dark
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor={cssVar(brand.primary.darkest)}>
+				primary.darkest
+			</Table.Cell>
+		</Table.Row>
+		<Table.Row>
+			<Table.Cell>
+				TertiaryButton
+			</Table.Cell>
+			<Table.Cell/>
+			<Table.Cell>disabled</Table.Cell>
+			<Table.Cell>
+				borderColor
+			</Table.Cell>
+			<Table.Cell backgroundColor='frenchVanilla100'>
+				frenchVanilla100
+			</Table.Cell>
+			<Table.Cell backgroundColor='transparent'>
+				transparent
+			</Table.Cell>
+		</Table.Row>
+		<Table.Row>
+			<Table.Cell>
+				TertiaryButton (Icon Only)
+			</Table.Cell>
+			<Table.Cell/>
+			<Table.Cell>focus</Table.Cell>
+			<Table.Cell>
+				fill
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor='blackPepper500'>
+				blackPepper500
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor='blackPepper400'>
+				blackPepper400
+			</Table.Cell>
+		</Table.Row>
+		<Table.Row>
+			<Table.Cell>
+				TertiaryButton (Icon Only)
+			</Table.Cell>
+			<Table.Cell/>
+			<Table.Cell>hover</Table.Cell>
+			<Table.Cell>
+				fill
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor='blackPepper500'>
+				blackPepper500
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor='blackPepper400'>
+				blackPepper400
+			</Table.Cell>
+		</Table.Row>
+		<Table.Row>
+			<Table.Cell>
+				DeleteButton
+			</Table.Cell>
+			<Table.Cell/>
+			<Table.Cell>disabled</Table.Cell>
+			<Table.Cell>
+				backgroundColor
+			</Table.Cell>
+			<Table.Cell backgroundColor={cssVar(brand.error.light)}>
+				error.light
+			</Table.Cell>
+			<Table.Cell backgroundColor="rgba(222,46,33,0.4)">
+				error.base
+			</Table.Cell>
+		</Table.Row>
+		<Table.Row>
+			<Table.Cell>
+				DeleteButton
+			</Table.Cell>
+			<Table.Cell/>
+			<Table.Cell>disabled</Table.Cell>
+			<Table.Cell>
+				opacity
+			</Table.Cell>
+			<Table.Cell>
+				1
+			</Table.Cell>
+			<Table.Cell>
+				0.4
+			</Table.Cell>
+		</Table.Row>
+		<Table.Row>
+			<Table.Cell>
+				TextInput
+			</Table.Cell>
+			<Table.Cell/>
+			<Table.Cell>disabled</Table.Cell>
+			<Table.Cell>
+				borderColor
+			</Table.Cell>
+			<Table.Cell backgroundColor='soap600'>
+				soap600
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor='licorice100'>
+				licorice100
+			</Table.Cell>
+		</Table.Row>
+		<Table.Row>
+			<Table.Cell>
+				TextArea
+			</Table.Cell>
+			<Table.Cell/>
+			<Table.Cell>disabled</Table.Cell>
+			<Table.Cell>
+				borderColor
+			</Table.Cell>
+			<Table.Cell backgroundColor='soap600'>
+				soap600
+			</Table.Cell>
+			<Table.Cell color='frenchVanilla100' backgroundColor='licorice100'>
+				licorice100
+			</Table.Cell>
+		</Table.Row>
+  </Table.Body>
+</Table>
+
 ### Card
+
+**PR:** [#2471](https://github.com/Workday/canvas-kit/pull/2471)
 
 `Card` and its subcomponents have been refactored to use our new styling utilities and tokens.
 `Card` no longer extends the `Box` component, however, it still supports Emotion `styled` and style

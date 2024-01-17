@@ -26,6 +26,10 @@ export const CardHeading = createComponent('h3')({
     return (
       <BodyText
         size="large"
+        color="blackPepper400"
+        fontWeight="bold"
+        marginBottom="m"
+        marginTop={0}
         ref={ref}
         as={Element}
         {...mergeStyles(elemProps, cardHeadingBaseStyles)}

@@ -4,6 +4,7 @@ import {jsx} from '@emotion/react';
 
 import {
   borderRadius,
+  colors,
   CSSProperties,
   inputColors,
   space,
@@ -35,7 +36,7 @@ const baseStyles: CSSProperties = {
   },
   '&:disabled': {
     backgroundColor: inputColors.disabled.background,
-    borderColor: inputColors.disabled.border,
+    borderColor: colors.licorice100,
     color: inputColors.disabled.text,
     '&::placeholder': {
       color: inputColors.disabled.text,
