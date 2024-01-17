@@ -10,18 +10,21 @@ import {handleCalc} from './utils/handleCalc';
 import {handlePx2Rem} from './utils/handlePx2Rem';
 import {handleFocusRing} from './utils/handleFocusRing';
 import {handleCssVar} from './utils/handleCssVar';
-import {NodeTransformer} from './utils/types';
+import {NodeTransformer, TransformerContext} from './utils/types';
+import {handleKeyframes} from './utils/handleKeyframes';
 
 export type NestedStyleObject = {[key: string]: string | NestedStyleObject};
 
 export interface StyleTransformerOptions {
   prefix: string;
-  variables: Record<string, string>;
+  variables: TransformerContext['variables'];
+  keyframes: TransformerContext['keyframes'];
   fallbackFiles?: string[];
   transformers?: NodeTransformer[];
 }
 
-let vars: Record<string, string> = {};
+let vars: TransformerContext['variables'] = {};
+let keyframes: TransformerContext['keyframes'] = {};
 let loadedFallbacks = false;
 
 /**
@@ -29,6 +32,7 @@ let loadedFallbacks = false;
  */
 export function _reset() {
   vars = {};
+  keyframes = {};
   loadedFallbacks = false;
 }
 
@@ -40,6 +44,7 @@ const defaultTransformers = [
   handleFocusRing,
   handleCalc,
   handlePx2Rem,
+  handleKeyframes,
   handleCreateVars,
   handleCreateStyles,
   handleCreateStencil,
@@ -48,13 +53,14 @@ const defaultTransformers = [
 export default function styleTransformer(
   program: ts.Program,
   {
-    prefix = 'css',
     variables = {},
     fallbackFiles = [],
     transformers = defaultTransformers,
+    ...transformContext
   }: Partial<StyleTransformerOptions> = {
     prefix: 'css',
     variables: {},
+    keyframes: {},
     transformers: defaultTransformers,
   }
 ): ts.TransformerFactory<ts.SourceFile> {
@@ -84,7 +90,13 @@ export default function styleTransformer(
       // eslint-disable-next-line no-param-reassign
       node = ts.visitEachChild(node, visit, context);
 
-      return handleTransformers(node, checker, prefix, vars)(transformers);
+      return handleTransformers(node, {
+        checker,
+        prefix: 'css',
+        variables: vars,
+        keyframes,
+        ...transformContext,
+      })(transformers);
     };
 
     return node => ts.visitNode(node, visit);
@@ -98,8 +110,7 @@ export default function styleTransformer(
 export function transform(
   program: ts.Program,
   fileName: string,
-  options?: Partial<StyleTransformerOptions>,
-  transformers?: NodeTransformer[]
+  options?: Partial<StyleTransformerOptions>
 ) {
   const source =
     program.getSourceFile(fileName) || ts.createSourceFile(fileName, '', ts.ScriptTarget.ES2019);
@@ -108,27 +119,20 @@ export function transform(
 
   return printer.printFile(
     ts
-      .transform(source, [styleTransformer(program, {...options, transformers})])
+      .transform(source, [styleTransformer(program, options)])
       .transformed.find(s => s.fileName === fileName) || source
   );
 }
 
 const handleTransformers =
-  (node: ts.Node, checker: ts.TypeChecker, prefix: string, variables: Record<string, string>) =>
-  (
-    transformers: ((
-      node: ts.Node,
-      checker: ts.TypeChecker,
-      prefix: string,
-      variables: Record<string, string>
-    ) => ts.Node | void)[]
-  ) => {
+  (node: ts.Node, context: TransformerContext) =>
+  (transformers: ((node: ts.Node, context: TransformerContext) => ts.Node | void)[]) => {
     return (
       transformers.reduce((result, transformer) => {
         if (result) {
           return result;
         }
-        return transformer(node, checker, prefix, variables);
+        return transformer(node, context);
       }, undefined as ts.Node | void) || node
     );
   };

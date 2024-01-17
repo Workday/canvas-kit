@@ -1,19 +1,16 @@
 import * as React from 'react';
-// eslint-disable-next-line @emotion/no-vanilla
-import {keyframes} from '@emotion/css';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {handleCsProp, CSProps, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {handleCsProp, CSProps, createStencil, px2rem, keyframes} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
-const grow = keyframes`
-  from {
-    transform: scale(0.85);
-  }
-
-  to {
-    transform: scale(1.0);
-  }
-`;
+const grow = keyframes({
+  from: {
+    transform: 'scale(0.85)',
+  },
+  to: {
+    transform: 'scale(1.0)',
+  },
+});
 
 export interface CountBadgeProps extends CSProps {
   /**
@@ -46,7 +43,6 @@ const countBadgeStencil = createStencil({
     display: 'inline-flex',
     fontFamily: system.fontFamily.default,
     fontSize: system.fontSize.subtext.medium,
-    //@ts-ignore
     fontWeight: system.fontWeight.bold,
     height: px2rem(20),
     justifyContent: 'center',
