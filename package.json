@@ -171,6 +171,6 @@
     "@workday/canvas-accent-icons-web": "^3.0.9",
     "@workday/canvas-applet-icons-web": "^2.0.9",
     "@workday/canvas-system-icons-web": "^3.0.0",
-    "@workday/canvas-tokens-web": "^1.0.0"
+    "@workday/canvas-tokens-web": "^1.0.2"
   }
 }
