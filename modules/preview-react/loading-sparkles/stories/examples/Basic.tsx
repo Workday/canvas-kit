@@ -13,13 +13,13 @@ const containerStyles = createStyles({
 });
 
 export const Basic = () => {
-  const [isLoading, setLoading] = React.useState<'idle' | 'loading' | 'success'>('idle');
+  const [loadingStatus, setLoadingStatus] = React.useState<'idle' | 'loading' | 'success'>('idle');
   const [quote, setQuote] = React.useState('');
 
   React.useEffect(() => {
-    if (isLoading === 'loading') {
+    if (loadingStatus === 'loading') {
       const mockLoading = setTimeout(() => {
-        setLoading('success');
+        setLoadingStatus('success');
         setQuote(getQuote());
       }, 3000);
 
@@ -27,31 +27,29 @@ export const Basic = () => {
         clearTimeout(mockLoading);
       };
     }
-  }, [isLoading]);
+  }, [loadingStatus]);
 
   const handleClick = () => {
     setQuote('');
-    setLoading('loading');
+    setLoadingStatus('loading');
   };
 
   return (
-    <div>
-      <div>
-        <div className={containerStyles}>
-          {quote && <Text cs={{maxWidth: '60ch'}}>{quote}</Text>}
-          <AriaLiveRegion>
-            {isLoading === 'loading' ? (
-              <LoadingSparkles aria-label="loading" />
-            ) : isLoading === 'success' ? (
-              <AccessibleHide role="status">loading complete</AccessibleHide>
-            ) : (
-              ''
-            )}
-          </AriaLiveRegion>
-        </div>
-        <SecondaryButton onClick={handleClick}>Generate Quote</SecondaryButton>
+    <>
+      <div className={containerStyles}>
+        {quote && <Text cs={{maxWidth: '60ch'}}>{quote}</Text>}
+        <AriaLiveRegion>
+          {loadingStatus === 'loading' ? (
+            <LoadingSparkles aria-label="loading" />
+          ) : loadingStatus === 'success' ? (
+            <AccessibleHide role="status">loading complete</AccessibleHide>
+          ) : (
+            ''
+          )}
+        </AriaLiveRegion>
       </div>
-    </div>
+      <SecondaryButton onClick={handleClick}>Generate Quote</SecondaryButton>
+    </>
   );
 };
 
@@ -65,6 +63,5 @@ const robotQuotes = [
 
 const getQuote = () => {
   const index = Math.floor(Math.random() * robotQuotes.length);
-  console.log(index);
   return robotQuotes[index];
 };
