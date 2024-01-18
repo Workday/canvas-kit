@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {CSSProperties} from '@workday/canvas-kit-react/tokens';
 import {createStyles, CSProps, handleCsProp} from '@workday/canvas-kit-styling';
 import {createComponent} from './utils/components';
 
@@ -7,7 +6,7 @@ import {createComponent} from './utils/components';
  * A utility to visually hide content, while still making accessible to screen readers
  * See https://a11y-101.com/development/skip-link
  */
-export const accessibleHide: CSSProperties = {
+export const accessibleHide = {
   clip: 'rect(1px, 1px, 1px, 1px)', // Deprecated but still used by most browsers, clip-path will be taking its place soon.
   clipPath: 'polygon(0px 0px, 0px 0px, 0px 0px, 0px 0px)',
   position: 'absolute',
@@ -18,7 +17,7 @@ export const accessibleHide: CSSProperties = {
   margin: '-1px',
   padding: 0,
   border: 0,
-};
+} as const;
 
 const accessibleHideStyles = createStyles(accessibleHide);
 
