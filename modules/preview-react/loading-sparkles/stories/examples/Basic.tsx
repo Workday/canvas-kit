@@ -39,12 +39,9 @@ export const Basic = () => {
       <div className={containerStyles}>
         {quote && <Text cs={{maxWidth: '60ch'}}>{quote}</Text>}
         <AriaLiveRegion>
-          {loadingStatus === 'loading' ? (
-            <LoadingSparkles aria-label="loading" />
-          ) : loadingStatus === 'success' ? (
+          {loadingStatus === 'loading' && <LoadingSparkles aria-label="loading" />}
+          {loadingStatus === 'success' && (
             <AccessibleHide role="status">loading complete</AccessibleHide>
-          ) : (
-            ''
           )}
         </AriaLiveRegion>
       </div>
