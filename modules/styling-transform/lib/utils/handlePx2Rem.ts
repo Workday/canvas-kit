@@ -6,12 +6,12 @@ import {NodeTransformer} from './types';
 /**
  * Handle the CallExpression `px2rem` to do static conversion and remove the CallExpression.
  */
-export const handlePx2Rem: NodeTransformer = (node, checker) => {
+export const handlePx2Rem: NodeTransformer = (node, context) => {
   if (
     ts.isCallExpression(node) &&
     ts.isIdentifier(node.expression) &&
     node.expression.text === 'px2rem' &&
-    isImportedFromStyling(node.expression, checker)
+    isImportedFromStyling(node.expression, context.checker)
   ) {
     const [pxArgument, baseArgument] = node.arguments;
     const base =

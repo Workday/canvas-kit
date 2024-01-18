@@ -6,7 +6,7 @@ import {getVarName} from './getVarName';
 import {makeEmotionSafe} from './makeEmotionSafe';
 import {NodeTransformer} from './types';
 
-export const handleCreateVars: NodeTransformer = (node, _checker, prefix, vars) => {
+export const handleCreateVars: NodeTransformer = (node, {prefix, variables}) => {
   /**
    * This will create a variable
    */
@@ -16,12 +16,12 @@ export const handleCreateVars: NodeTransformer = (node, _checker, prefix, vars) 
     node.expression.text === 'createVars'
   ) {
     const id = slugify(getVarName(node)).replace('-vars', '');
-    const variables = node.arguments
+    const vars = node.arguments
       .map(arg => ts.isStringLiteral(arg) && arg.text)
       .filter(Boolean) as string[];
 
-    variables.forEach(v => {
-      vars[`${id}-${makeEmotionSafe(v)}`] = `--${prefix}-${id}-${makeEmotionSafe(v)}`;
+    vars.forEach(v => {
+      variables[`${id}-${makeEmotionSafe(v)}`] = `--${prefix}-${id}-${makeEmotionSafe(v)}`;
     });
 
     return ts.factory.createCallExpression(
@@ -37,7 +37,7 @@ export const handleCreateVars: NodeTransformer = (node, _checker, prefix, vars) 
             ts.factory.createPropertyAssignment(
               ts.factory.createIdentifier('args'),
               ts.factory.createArrayLiteralExpression(
-                variables.map(val => ts.factory.createStringLiteral(val)),
+                vars.map(val => ts.factory.createStringLiteral(val)),
                 false
               )
             ),
