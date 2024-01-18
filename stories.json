@@ -4766,6 +4766,34 @@
         "__isArgsStory": false
       }
     },
+    "preview-loading-sparkles--basic": {
+      "id": "preview-loading-sparkles--basic",
+      "name": "Basic",
+      "title": "Preview/Loading Sparkles",
+      "importPath": "./modules/preview-react/loading-sparkles/stories/LoadingSparkles.stories.mdx",
+      "kind": "Preview/Loading Sparkles",
+      "story": "Basic",
+      "parameters": {
+        "fileName": "./modules/preview-react/loading-sparkles/stories/LoadingSparkles.stories.mdx",
+        "framework": "react",
+        "__id": "preview-loading-sparkles--basic",
+        "__isArgsStory": false
+      }
+    },
+    "preview-loading-sparkles--rtl": {
+      "id": "preview-loading-sparkles--rtl",
+      "name": "RTL",
+      "title": "Preview/Loading Sparkles",
+      "importPath": "./modules/preview-react/loading-sparkles/stories/LoadingSparkles.stories.mdx",
+      "kind": "Preview/Loading Sparkles",
+      "story": "RTL",
+      "parameters": {
+        "fileName": "./modules/preview-react/loading-sparkles/stories/LoadingSparkles.stories.mdx",
+        "framework": "react",
+        "__id": "preview-loading-sparkles--rtl",
+        "__isArgsStory": false
+      }
+    },
     "preview-menu--basic": {
       "id": "preview-menu--basic",
       "name": "Basic",
