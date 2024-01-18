@@ -15,7 +15,7 @@ export interface FormFieldProps extends FlexProps, GrowthBehavior {
   children: React.ReactNode;
 }
 
-const formFieldBaseStyles = createStencil({
+const formFieldStencil = createStencil({
   base: {
     border: 'none',
     padding: 0,
@@ -34,7 +34,7 @@ const formFieldBaseStyles = createStencil({
 });
 /**
  * Use `FormField` to wrap input components to make them accessible. You can customize the field
- * by passing in `TextInput`, `Select`, `RadioGroup` and other form elements to `FormField.Input`.
+ * by passing in `TextInput`, `Select`, `RadioGroup` and other form elements to `FormField.Input` through the `as` prop.
  *
  * ```tsx
  * <FormField>
@@ -48,8 +48,10 @@ export const FormField = createContainer('div')({
   modelHook: useFormFieldModel,
   subComponents: {
     /**
-     * `FormField.Input` will render any `inputs` passed to it including `TextInput`, `Select`, `Switch`, `TextArea`, `RadioGroup` or any custom input.
+     * `FormField.Input` will render any `inputs` passed to it via the `as` prop, including `TextInput`, `Select`, `Switch`, `TextArea`, `RadioGroup` or any custom input.
      * `FromField.Input` will be associated with `FormField.Label` and `FormField.Hint` by a generated `id`. You can customize this `id` by passing `id` to `FormField`.
+     *
+     * **Note: If you pass in a custom input that is *not* as Canvas Kit input, you will have to handle the `error` prop, validation and styling. For a custom approach, reference our Custom storybook example.**
      *
      * ```tsx
      *  <FormField id='my-unique-id'>
@@ -105,7 +107,7 @@ export const FormField = createContainer('div')({
     <Flex
       as={Element}
       {...layoutProps}
-      {...mergeStyles(elemProps, formFieldBaseStyles({grow: elemProps.grow}))}
+      {...mergeStyles(elemProps, formFieldStencil({grow: elemProps.grow}))}
     >
       {children}
     </Flex>
