@@ -4,6 +4,7 @@ import {jsx} from '@emotion/react';
 
 import {
   borderRadius,
+  colors,
   CSSProperties,
   inputColors,
   space,
@@ -15,9 +16,9 @@ import {
   useTheme,
   useThemedRing,
 } from '@workday/canvas-kit-react/common';
-import {FormField, useFormFieldModel} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 
-import {useTextInputField} from './hooks';
+import {useTextInputField, useTextInputModel} from './hooks';
 
 const baseStyles: CSSProperties = {
   transition: '0.2s box-shadow, 0.2s border-color',
@@ -32,7 +33,7 @@ const baseStyles: CSSProperties = {
   },
   '&:disabled': {
     backgroundColor: inputColors.disabled.background,
-    borderColor: inputColors.disabled.border,
+    borderColor: colors.licorice100,
     color: inputColors.disabled.text,
     '&::placeholder': {
       color: inputColors.disabled.text,
@@ -43,22 +44,26 @@ const baseStyles: CSSProperties = {
   },
 };
 
+/**
+ * @deprecated ⚠️ `TextInputField` in Preview has been deprecated and will be removed in a future major version. Please use [`FormField` in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-inputs-form-field--custom) instead.
+ */
 export const TextInputField = createSubcomponent('input')({
   displayName: 'TextInput.Field',
-  modelHook: useFormFieldModel,
+  modelHook: useTextInputModel,
   elemPropsHook: useTextInputField,
 })<ExtractProps<typeof FormField.Input, never>>((elemProps, Element, model) => {
   const theme = useTheme();
   const errorRing = useThemedRing('error');
 
-  const focusStyles = model.state.hasError
-    ? errorRing
-    : {
-        '&:focus:not([disabled])': {
-          borderColor: theme.canvas.palette.common.focusOutline,
-          boxShadow: `inset 0 0 0 1px ${theme.canvas.palette.common.focusOutline}`,
-        },
-      };
+  const focusStyles =
+    model.state.error === 'error'
+      ? errorRing
+      : {
+          '&:focus:not([disabled])': {
+            borderColor: theme.canvas.palette.common.focusOutline,
+            boxShadow: `inset 0 0 0 1px ${theme.canvas.palette.common.focusOutline}`,
+          },
+        };
 
   return (
     <FormField.Input
