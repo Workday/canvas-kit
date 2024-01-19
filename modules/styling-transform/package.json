@@ -41,7 +41,7 @@
   ],
   "dependencies": {
     "@emotion/serialize": "^1.0.2",
-    "@workday/canvas-kit-styling": "^10.2.5",
+    "@workday/canvas-kit-styling": "^10.3.0",
     "@workday/canvas-tokens-web": "^1.0.2",
     "stylis": "4.0.13",
     "typescript": "4.2"
