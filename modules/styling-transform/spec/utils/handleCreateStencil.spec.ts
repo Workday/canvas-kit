@@ -35,13 +35,18 @@ describe('handleCreateStencil', () => {
     `);
 
     const sourceFile = program.getSourceFile('test.ts');
-    const vars: Record<string, string> = {};
+    const variables: Record<string, string> = {};
 
     const node = findNodes(sourceFile, 'createStencil', ts.isCallExpression)[0];
 
-    handleCreateStencil(node, program.getTypeChecker(), 'css', vars);
+    handleCreateStencil(node, {
+      checker: program.getTypeChecker(),
+      prefix: 'css',
+      variables,
+      keyframes: {},
+    });
 
-    expect(vars).toHaveProperty('button-color', '--css-button-color');
+    expect(variables).toHaveProperty('button-color', '--css-button-color');
   });
 
   it('should parse base styles into statically optimized versions', () => {

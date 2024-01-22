@@ -20,8 +20,21 @@ yarn add @workday/canvas-kit-react
 
 ### Basic Example
 
-`LoadingSparkles` is designed to work out-of-the-box, but you'll need to add `aria-live="polite"`
-and a descriptive `aria-label` for screen reader accesibility.
+`LoadingSparkles` is designed to work out-of-the-box, but you'll need to add some wiring for screen
+readers. In the example below, we're simulating a loading state with a `setTimeout` that's triggered
+when the "Generate Quote" button is clicked.
+
+The ARIA live region uses the `aria-label` on `LoadingSparkles` to announce the loading state. And
+it uses the text in `AccessibleHide` to announce when loading is complete. In a real-world
+application, you would probably add another state for loading failures. Also note that generated
+text should live outside the live region. This content doesn't need to be announced to screen
+readers.
+
+#### Consolidating ARIA Live Regions
+
+In the example, we wrapped `LoadingSparkles` inside our `AriaLiveRegion` component, but in general
+you should not have multiple ARIA live regions on the page at once. If you already have a live
+region, consider sending these loading messages there instead of adding another region.
 
 <ExampleCodeBlock code={Basic} />
 
