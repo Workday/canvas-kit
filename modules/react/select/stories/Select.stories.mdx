@@ -16,6 +16,7 @@ import {Required} from './examples/Required';
 import {MenuHeight} from './examples/MenuHeight';
 import {HoistedModel} from './examples/HoistedModel';
 import {RefForwarding} from './examples/RefForwarding';
+import {FetchingItems} from './examples/FetchingItems';
 
 <Meta title="Components/Inputs/Select" component={Select} />
 
@@ -191,6 +192,14 @@ Use the alert state when a selection is valid but there is additional informatio
 Use the error state when the selection is no longer valid.
 
 <ExampleCodeBlock code={Error} />
+
+#### Fetching Items
+
+It's common to load items from a server call. Hoisting the `model` and setting your items on state
+allows you to pass those items to your model. The `Select` component will first render a placeholder
+and then once your items are loaded, render your items.
+
+<ExampleCodeBlock code={FetchingItems} />
 
 ### Complex
 

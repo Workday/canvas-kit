@@ -26,5 +26,14 @@ export const useSelectModel = createModelHook({
   contextOverride: useComboboxModel.Context,
 })(config => {
   const model = useComboboxModel(config);
+  if (model.state.items.length > 0 && model.state.inputRef.current) {
+    console.log(' in here');
+
+    model.state.inputRef.current.value = model.navigation.getItem(
+      model.state.selectedIds[0],
+      model
+    ).textValue;
+  }
+
   return model;
 });
