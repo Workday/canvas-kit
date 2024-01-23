@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-css-popup",
-  "version": "9.1.34",
+  "version": "9.1.35",
   "description": "Popup CSS for Canvas kit CSS",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -16,8 +16,8 @@
     "url": "http://github.com/Workday/canvas-kit/tree/master/modules/popup/css"
   },
   "dependencies": {
-    "@workday/canvas-kit-css-card": "^9.1.34",
-    "@workday/canvas-kit-css-core": "^9.1.34"
+    "@workday/canvas-kit-css-card": "^9.1.35",
+    "@workday/canvas-kit-css-core": "^9.1.35"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
