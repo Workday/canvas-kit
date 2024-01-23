@@ -12,14 +12,19 @@ describe('handleCreateVars', () => {
     `);
 
     const sourceFile = program.getSourceFile('test.ts');
-    const vars: Record<string, string> = {};
+    const variables: Record<string, string> = {};
 
     const node = findNodes(sourceFile, 'createVars', ts.isCallExpression)[0];
 
-    handleCreateVars(node, program.getTypeChecker(), 'css', vars);
+    handleCreateVars(node, {
+      checker: program.getTypeChecker(),
+      prefix: 'css',
+      variables,
+      keyframes: {},
+    });
 
-    expect(vars).toHaveProperty('my-color', '--css-my-color');
-    expect(vars).toHaveProperty('my-background', '--css-my-background');
+    expect(variables).toHaveProperty('my-color', '--css-my-color');
+    expect(variables).toHaveProperty('my-background', '--css-my-background');
   });
 
   it('should add nested variables to the cache when the arguments are strings', () => {
@@ -30,12 +35,17 @@ describe('handleCreateVars', () => {
     `);
 
     const sourceFile = program.getSourceFile('test.ts');
-    const vars: Record<string, string> = {};
+    const variables: Record<string, string> = {};
 
     const node = findNodes(sourceFile, 'createVars', ts.isCallExpression)[0];
 
-    handleCreateVars(node, program.getTypeChecker(), 'css', vars);
+    handleCreateVars(node, {
+      checker: program.getTypeChecker(),
+      prefix: 'css',
+      variables,
+      keyframes: {},
+    });
 
-    expect(vars).toHaveProperty('my-foo-color', '--css-my-foo-color');
+    expect(variables).toHaveProperty('my-foo-color', '--css-my-foo-color');
   });
 });

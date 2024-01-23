@@ -2,7 +2,7 @@
   "packages": [
     "modules/**"
   ],
-  "version": "10.2.5",
+  "version": "10.3.0",
   "npmClient": "yarn",
   "useWorkspaces": true,
   "command": {

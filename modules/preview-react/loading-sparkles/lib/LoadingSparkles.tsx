@@ -86,9 +86,9 @@ const loadingSparklesStyles = createStyles({
  */
 export const LoadingSparkles = createComponent('div')({
   displayName: 'LoadingSparkles',
-  Component: (props: CSProps, ref, Element) => {
+  Component: (elemProps: CSProps, ref, Element) => {
     return (
-      <Element ref={ref} {...handleCsProp(props, loadingSparklesStyles)}>
+      <Element ref={ref} role="status" {...handleCsProp(elemProps, loadingSparklesStyles)}>
         <Sparkle />
         <Sparkle />
         <Sparkle />

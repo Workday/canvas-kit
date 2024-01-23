@@ -4,16 +4,13 @@ import {slugify} from '@workday/canvas-kit-styling';
 
 import {makeEmotionSafe} from './makeEmotionSafe';
 import {getErrorMessage} from './getErrorMessage';
+import {TransformerContext} from './types';
 
 /**
  * This is the workhorse of statically analyzing style values
  */
-export function parseNodeToStaticValue(
-  node: ts.Node,
-  checker: ts.TypeChecker,
-  prefix: string = 'css',
-  variables: Record<string, string> = {}
-): string {
+export function parseNodeToStaticValue(node: ts.Node, context: TransformerContext): string {
+  const {checker, variables, keyframes} = context;
   /**
    * String literals like 'red' or empty Template Expressions like `red`
    */
@@ -38,6 +35,10 @@ export function parseNodeToStaticValue(
     if (variables[varName]) {
       return variables[varName];
     }
+
+    if (keyframes[varName]) {
+      return keyframes[varName];
+    }
   }
 
   // [a.b]
@@ -47,6 +48,10 @@ export function parseNodeToStaticValue(
     if (variables[varName]) {
       return variables[varName];
     }
+
+    if (keyframes[varName]) {
+      return keyframes[varName];
+    }
   }
 
   /**
@@ -55,7 +60,7 @@ export function parseNodeToStaticValue(
    * ```
    */
   if (ts.isTemplateExpression(node)) {
-    return getStyleValueFromTemplateExpression(node, checker, prefix, variables);
+    return getStyleValueFromTemplateExpression(node, context);
   }
 
   /**
@@ -65,6 +70,18 @@ export function parseNodeToStaticValue(
   if (ts.isIdentifier(node)) {
     if (variables[node.text]) {
       return variables[node.text];
+    }
+
+    if (keyframes[node.text]) {
+      return keyframes[node.text];
+    }
+  }
+
+  if (ts.isElementAccessExpression(node)) {
+    const value = parseTypeToStaticValue(checker.getTypeAtLocation(node));
+
+    if (value) {
+      return value;
     }
   }
 
@@ -93,11 +110,7 @@ export function parseNodeToStaticValue(
   throw new Error(
     `Unknown type at: "${node.getText()}". Received "${typeValue}"\n${getErrorMessage(
       node
-    )}\nFor static analysis of styles, please make sure all types resolve to string or numeric literals. Please use 'const' instead of 'let'. If using an object, cast using "as const" or use an interface with string or numeric literals. Variables: ${JSON.stringify(
-      variables,
-      null,
-      '  '
-    )}`
+    )}\nFor static analysis of styles, please make sure all types resolve to string or numeric literals. Please use 'const' instead of 'let'. If using an object, cast using "as const" or use an interface with string or numeric literals.`
   );
 }
 
@@ -147,19 +160,15 @@ function getVariableNameParts(input: string): [string, string] {
  */
 function getStyleValueFromTemplateExpression(
   node: ts.Node | undefined,
-  checker: ts.TypeChecker,
-  prefix = 'css',
-  variables: Record<string, string> = {}
+  context: TransformerContext
 ): string {
   if (!node) {
     return '';
   }
   if (ts.isTemplateExpression(node)) {
     return (
-      getStyleValueFromTemplateExpression(node.head, checker, prefix, variables) +
-      node.templateSpans
-        .map(value => getStyleValueFromTemplateExpression(value, checker, prefix, variables))
-        .join('')
+      getStyleValueFromTemplateExpression(node.head, context) +
+      node.templateSpans.map(value => getStyleValueFromTemplateExpression(value, context)).join('')
     );
   }
 
@@ -169,8 +178,8 @@ function getStyleValueFromTemplateExpression(
 
   if (ts.isTemplateSpan(node)) {
     return (
-      parseNodeToStaticValue(node.expression, checker, prefix, variables) +
-      getStyleValueFromTemplateExpression(node.literal, checker, prefix, variables)
+      parseNodeToStaticValue(node.expression, context) +
+      getStyleValueFromTemplateExpression(node.literal, context)
     );
   }
 

@@ -14,7 +14,14 @@ describe('parseNodeToStaticValue', () => {
     const sourceFile = program.getSourceFile('test.ts');
     const node = findNodes(sourceFile, '', ts.isStringLiteral)[0];
 
-    expect(parseNodeToStaticValue(node, program.getTypeChecker())).toEqual('foo');
+    expect(
+      parseNodeToStaticValue(node, {
+        checker: program.getTypeChecker(),
+        prefix: 'css',
+        variables: {},
+        keyframes: {},
+      })
+    ).toEqual('foo');
   });
 
   it('should return the string value of a NumericLiteral', () => {
@@ -25,7 +32,14 @@ describe('parseNodeToStaticValue', () => {
     const sourceFile = program.getSourceFile('test.ts');
     const node = findNodes(sourceFile, '', ts.isNumericLiteral)[0];
 
-    expect(parseNodeToStaticValue(node, program.getTypeChecker())).toEqual('12px');
+    expect(
+      parseNodeToStaticValue(node, {
+        checker: program.getTypeChecker(),
+        prefix: 'css',
+        variables: {},
+        keyframes: {},
+      })
+    ).toEqual('12px');
   });
 
   it('should return the string value of a string Identifier', () => {
@@ -36,7 +50,14 @@ describe('parseNodeToStaticValue', () => {
     const sourceFile = program.getSourceFile('test.ts');
     const node = findNodes(sourceFile, '', ts.isIdentifier)[0];
 
-    expect(parseNodeToStaticValue(node, program.getTypeChecker())).toEqual('bar');
+    expect(
+      parseNodeToStaticValue(node, {
+        checker: program.getTypeChecker(),
+        prefix: 'css',
+        variables: {},
+        keyframes: {},
+      })
+    ).toEqual('bar');
   });
 
   it('should return the string value of a numerical Identifier', () => {
@@ -47,7 +68,14 @@ describe('parseNodeToStaticValue', () => {
     const sourceFile = program.getSourceFile('test.ts');
     const node = findNodes(sourceFile, '', ts.isIdentifier)[0];
 
-    expect(parseNodeToStaticValue(node, program.getTypeChecker())).toEqual('12px');
+    expect(
+      parseNodeToStaticValue(node, {
+        checker: program.getTypeChecker(),
+        prefix: 'css',
+        variables: {},
+        keyframes: {},
+      })
+    ).toEqual('12px');
   });
 
   it('should return the string value of a PropertyAccessExpression', () => {
@@ -60,7 +88,14 @@ describe('parseNodeToStaticValue', () => {
     const sourceFile = program.getSourceFile('test.ts');
     const node = findNodes(sourceFile, '', ts.isPropertyAccessExpression)[0];
 
-    expect(parseNodeToStaticValue(node, program.getTypeChecker())).toEqual('baz');
+    expect(
+      parseNodeToStaticValue(node, {
+        checker: program.getTypeChecker(),
+        prefix: 'css',
+        variables: {},
+        keyframes: {},
+      })
+    ).toEqual('baz');
   });
 
   it('should return the string value of a PropertyAccessExpression', () => {
@@ -73,7 +108,14 @@ describe('parseNodeToStaticValue', () => {
     const sourceFile = program.getSourceFile('test.ts');
     const node = findNodes(sourceFile, '', ts.isPropertyAccessExpression)[0];
 
-    expect(parseNodeToStaticValue(node, program.getTypeChecker())).toEqual('12px');
+    expect(
+      parseNodeToStaticValue(node, {
+        checker: program.getTypeChecker(),
+        prefix: 'css',
+        variables: {},
+        keyframes: {},
+      })
+    ).toEqual('12px');
   });
 
   it('should return the string value of a PropertyAccessExpression of a variable', () => {
@@ -85,10 +127,55 @@ describe('parseNodeToStaticValue', () => {
     const node = findNodes(sourceFile, '', ts.isPropertyAccessExpression)[0];
 
     expect(
-      parseNodeToStaticValue(node, program.getTypeChecker(), 'css', {
-        'foo-bar': '--css-foo-bar',
+      parseNodeToStaticValue(node, {
+        checker: program.getTypeChecker(),
+        prefix: 'css',
+        variables: {
+          'foo-bar': '--css-foo-bar',
+        },
+        keyframes: {},
       })
     ).toEqual('--css-foo-bar');
+  });
+
+  it('should return the string value of a ElementAccessExpression', () => {
+    const program = createProgramFromSource(`
+      const foo = { 1: '12px'} as const;
+
+      foo[1]
+    `);
+
+    const sourceFile = program.getSourceFile('test.ts');
+    const node = findNodes(sourceFile, '', ts.isElementAccessExpression)[0];
+
+    expect(
+      parseNodeToStaticValue(node, {
+        checker: program.getTypeChecker(),
+        prefix: 'css',
+        variables: {},
+        keyframes: {},
+      })
+    ).toEqual('12px');
+  });
+
+  it('should return the string value of a ElementAccessExpression', () => {
+    const program = createProgramFromSource(`
+      const foo = ['12px'] as const;
+
+      foo[0]
+    `);
+
+    const sourceFile = program.getSourceFile('test.ts');
+    const node = findNodes(sourceFile, '', ts.isElementAccessExpression)[0];
+
+    expect(
+      parseNodeToStaticValue(node, {
+        checker: program.getTypeChecker(),
+        prefix: 'css',
+        variables: {},
+        keyframes: {},
+      })
+    ).toEqual('12px');
   });
 
   it('should return the string value of a ComputedPropertyName of a variable', () => {
@@ -102,8 +189,13 @@ describe('parseNodeToStaticValue', () => {
     const node = findNodes(sourceFile, '', ts.isComputedPropertyName)[0];
 
     expect(
-      parseNodeToStaticValue(node, program.getTypeChecker(), 'css', {
-        'foo-bar': '--css-foo-bar',
+      parseNodeToStaticValue(node, {
+        checker: program.getTypeChecker(),
+        prefix: 'css',
+        variables: {
+          'foo-bar': '--css-foo-bar',
+        },
+        keyframes: {},
       })
     ).toEqual('--css-foo-bar');
   });
@@ -120,6 +212,31 @@ describe('parseNodeToStaticValue', () => {
     const sourceFile = program.getSourceFile('test.ts');
     const node = findNodes(sourceFile, '', ts.isComputedPropertyName)[0];
 
-    expect(parseNodeToStaticValue(node, program.getTypeChecker())).toEqual('--bar');
+    expect(
+      parseNodeToStaticValue(node, {
+        checker: program.getTypeChecker(),
+        prefix: 'css',
+        variables: {},
+        keyframes: {},
+      })
+    ).toEqual('--bar');
+  });
+
+  it('should handle keyframes', () => {
+    const program = createProgramFromSource(`
+      \`\${myAnimation} 1s ease\`
+    `);
+
+    const sourceFile = program.getSourceFile('test.ts');
+    const node = findNodes(sourceFile, '', ts.isTemplateExpression)[0];
+
+    expect(
+      parseNodeToStaticValue(node, {
+        checker: program.getTypeChecker(),
+        prefix: 'css',
+        variables: {},
+        keyframes: {myAnimation: 'animation-abc123'},
+      })
+    ).toEqual('animation-abc123 1s ease');
   });
 });
