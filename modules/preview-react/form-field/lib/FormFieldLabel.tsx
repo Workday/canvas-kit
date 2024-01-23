@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {createSubcomponent} from '@workday/canvas-kit-react/common';
-import {type, space} from '@workday/canvas-kit-react/tokens';
+import {type} from '@workday/canvas-kit-react/tokens';
 import {Text} from '@workday/canvas-kit-react/text';
 import {useFormFieldLabel, useFormFieldModel} from './hooks';
 import {createStencil, createStyles} from '@workday/canvas-kit-styling';
@@ -24,7 +24,7 @@ export interface FormFieldLabelProps {
 }
 
 const asteriskStyles = createStyles({
-  marginInlineStart: space.xxxs,
+  marginInlineStart: system.space.x1,
   fontSize: type.properties.fontSizes[20],
   fontWeight: type.properties.fontWeights.regular,
   textDecoration: 'unset',
@@ -37,7 +37,7 @@ const labelStencil = createStencil({
     fontWeight: system.fontWeight.medium,
     color: base.blackPepper300,
     paddingInlineStart: 0,
-    marginBottom: space.xxxs,
+    marginBottom: system.space.x1,
     display: 'flex',
     alignItems: 'center',
     minWidth: '180px',
@@ -46,7 +46,7 @@ const labelStencil = createStencil({
     orientation: {
       horizontal: {
         float: 'left',
-        maxHeight: space.xl,
+        maxHeight: system.space.x10,
       },
       vertical: {
         width: '100%',
