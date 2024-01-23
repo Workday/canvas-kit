@@ -60,8 +60,8 @@ export const AllFields = () => {
           <FormField.Hint>Error Message</FormField.Hint>
         </FormField.Container>
       </FormField>
-      <FormField grow>
-        <FormField.Label>Checkbox Legend</FormField.Label>
+      <FormField as="fieldset" grow>
+        <FormField.Label as="legend">Checkbox Legend</FormField.Label>
         <FormField.Input checked={true} as={Checkbox} label="Checkbox Label" />
         <FormField.Input checked={false} as={Checkbox} label="Thin Crust" />
         <FormField.Input checked={false} as={Checkbox} label="Extra Cheese" />

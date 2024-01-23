@@ -10,9 +10,6 @@ import {withSnapshotsEnabled, customColorTheme} from '../../../../../utils/story
 import {Radio, RadioGroup} from '@workday/canvas-kit-react/radio';
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 
-const hintText = 'Helpful text goes here.';
-const hintId = 'error-desc-id';
-
 export default withSnapshotsEnabled({
   title: 'Testing/Inputs/Radio',
   component: FormField,
@@ -141,10 +138,7 @@ export const RadioStates = () => (
             {testGroup}
             {props.orientation === 'horizontal' && (
               <FormField.Container>
-                {testGroup}{' '}
-                {props.error && (
-                  <FormField.Hint>hintText</FormField.Hint>
-                )}
+                {testGroup} {props.error && <FormField.Hint>hintText</FormField.Hint>}
               </FormField.Container>
             )}
             {typeof props.error !== 'undefined' ? (
