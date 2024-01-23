@@ -34,7 +34,7 @@ export const ReturnFocus = () => {
               setValue(e.currentTarget.value);
             }
           }}
-        ></FormField.Input>
+        />
       </FormField>
       <Modal.Overlay>
         <Modal.Card>
