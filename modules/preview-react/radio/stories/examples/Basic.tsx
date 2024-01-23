@@ -16,7 +16,7 @@ export const Basic = () => {
   return (
     <Flex flexDirection="column">
       <FormField as="fieldset">
-        <FormField.Label>Choose Your Pizza Crust</FormField.Label>
+        <FormField.Label as="legend">Choose Your Pizza Crust</FormField.Label>
         <FormField.Input
           as={RadioGroup}
           name="pizza-crust"

@@ -13,7 +13,7 @@ export const Required = () => {
   };
   return (
     <FormField isRequired={true} as="fieldset">
-      <FormField.Label>Choose Your Pizza Crust</FormField.Label>
+      <FormField.Label as="legend">Choose Your Pizza Crust</FormField.Label>
       <FormField.Input
         as={RadioGroup}
         name="crust-required"

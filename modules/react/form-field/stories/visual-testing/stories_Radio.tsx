@@ -99,16 +99,12 @@ export const RadioStates = () => (
             {props.orientation === 'horizontal' ? (
               <FormField.Container>
                 {testGroup}
-                {typeof props.error !== 'undefined' ? (
-                  <FormField.Hint>hintText</FormField.Hint>
-                ) : undefined}
+                {props.error && <FormField.Hint>hintText</FormField.Hint>}
               </FormField.Container>
             ) : (
               <>
                 {testGroup}
-                {typeof props.error !== 'undefined' ? (
-                  <FormField.Hint>hintText</FormField.Hint>
-                ) : undefined}
+                {props.error && <FormField.Hint>hintText</FormField.Hint>}
               </>
             )}
           </FormField>
@@ -141,9 +137,7 @@ export const RadioStates = () => (
                 {testGroup} {props.error && <FormField.Hint>hintText</FormField.Hint>}
               </FormField.Container>
             )}
-            {typeof props.error !== 'undefined' ? (
-              <FormField.Hint>hintText</FormField.Hint>
-            ) : undefined}
+            {props.error && <FormField.Hint>hintText</FormField.Hint>}
           </FormField>
         )}
       </ComponentStatesTable>
