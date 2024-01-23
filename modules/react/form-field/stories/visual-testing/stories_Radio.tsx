@@ -139,14 +139,14 @@ export const RadioStates = () => (
           <FormField as="fieldset" {...props} cs={{width: props.grow ? '100%' : undefined}}>
             <FormField.Label>{props.label}</FormField.Label>
             {testGroup}
-            {props.orientation === 'horizontal' ? (
+            {props.orientation === 'horizontal' && (
               <FormField.Container>
                 {testGroup}{' '}
-                {typeof props.error !== 'undefined' ? (
+                {props.error && (
                   <FormField.Hint>hintText</FormField.Hint>
-                ) : undefined}
+                )}
               </FormField.Container>
-            ) : undefined}
+            )}
             {typeof props.error !== 'undefined' ? (
               <FormField.Hint>hintText</FormField.Hint>
             ) : undefined}
