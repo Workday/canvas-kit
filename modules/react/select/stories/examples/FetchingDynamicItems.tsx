@@ -12,7 +12,7 @@ const options = [
   'The Ontologically Anthropocentric Sensory Immersive Simulation',
 ];
 
-export const FetchingItems = () => {
+export const FetchingDynamicItems = () => {
   const [value, setValue] = React.useState('John Wick');
   const [moviesLists, setMoviesList] = React.useState([]);
 
