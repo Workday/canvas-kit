@@ -23,7 +23,7 @@ export const Alert = () => {
       <Select items={options}>
         <FormField error="alert">
           <FormField.Label>Contact</FormField.Label>
-          <Select.Input onChange={e => handleChange(e)} id="alert-select" />
+          <FormField.Input as={Select.Input} onChange={e => handleChange(e)} id="alert-select" />
           <Select.Popper>
             <Select.Card>
               <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
