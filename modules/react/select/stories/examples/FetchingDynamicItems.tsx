@@ -3,15 +3,6 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
 import {Flex} from '@workday/canvas-kit-react/layout';
 
-const options = [
-  'E-mail',
-  'Phone',
-  'Fax',
-  'Mail',
-  'Mobile Phone',
-  'The Ontologically Anthropocentric Sensory Immersive Simulation',
-];
-
 export const FetchingDynamicItems = () => {
   const [value, setValue] = React.useState('John Wick');
   const [moviesLists, setMoviesList] = React.useState([]);

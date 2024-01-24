@@ -16,7 +16,9 @@ import {Required} from './examples/Required';
 import {MenuHeight} from './examples/MenuHeight';
 import {HoistedModel} from './examples/HoistedModel';
 import {RefForwarding} from './examples/RefForwarding';
-import {FetchingDyanmicItems} from './examples/FetchingDyanmicItems';
+import {FetchingDynamicItems} from './examples/FetchingDynamicItems';
+import {Placeholder} from './examples/Placeholder';
+import {InitialSelectedItem} from './examples/InitialSelectedItem';
 
 <Meta title="Components/Inputs/Select" component={Select} />
 
@@ -193,13 +195,26 @@ Use the error state when the selection is no longer valid.
 
 <ExampleCodeBlock code={Error} />
 
-#### Fetching Dynamic Items
+### Initial Selected Item
+
+You can set `initialSelectedIds` to the value that you want initially selected.
+
+<ExampleCodeBlock code={InitialSelectedItem} />
+
+### Placeholder
+
+You can change the placeholder text by passing in a string value to the `placeholder` attribute on
+the `Select.Input`.
+
+<ExampleCodeBlock code={Placeholder} />
+
+### Fetching Dynamic Items
 
 It's common to load items from a server call. Hoisting the `model` and setting your items on state
-allows you to pass those items to your model. The `Select` component will first render a placeholder
-and then once your items are loaded, render your items.
+allows you to pass those items to your `model`. The `Select` component will first render a
+placeholder and then once your items are loaded, render your items.
 
-<ExampleCodeBlock code={FetchingDyanmicItems} />
+<ExampleCodeBlock code={FetchingDynamicItems} />
 
 ### Complex
 

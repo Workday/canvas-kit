@@ -49,7 +49,8 @@ export const useSelectInput = composeHooks(
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [model.state.inputRef, model.state.items]);
-
+      console.log(model.navigation.getItem(model.state.selectedIds[0], model).textValue);
+      console.log(model.state.selectedIds);
       return {
         onKeyDown(event: React.KeyboardEvent) {
           // Prevent the keys from being enter in the input
@@ -81,7 +82,7 @@ export const useSelectInput = composeHooks(
         ref: elementRef,
         autoComplete: 'off',
         // defaultValue:
-        //   model.state.items.length > 0
+        //   model.state.items.length > 0 && model.state.selectedIds
         //     ? model.navigation.getItem(model.state.selectedIds[0], model).textValue ||
         //       model.state.value
         //     : elemProps.placeholder,
