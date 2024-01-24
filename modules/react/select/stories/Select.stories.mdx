@@ -1,5 +1,5 @@
 import {Meta} from '@storybook/addon-docs';
-import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {SymbolDoc, Specifications, InformationHighlight} from '@workday/canvas-kit-docs';
 
 import {Select} from '@workday/canvas-kit-react/select';
 
@@ -32,6 +32,18 @@ yarn add @workday/canvas-kit-react
 ```
 
 ## Usage
+
+<InformationHighlight style={{margin: '1.5rem 0'}}>
+  <InformationHighlight.Icon />
+  <InformationHighlight.Heading>Note</InformationHighlight.Heading>
+  <InformationHighlight.Body>
+    These examples are using FormField from Preview. We can plan to promote this component to the
+    Main package in a future major version.
+  </InformationHighlight.Body>
+  <InformationHighlight.Link href="https://workday.github.io/canvas-kit/?path=/docs/preview-inputs-form-field--basic">
+    View Form Field (Preview) Documentation
+  </InformationHighlight.Link>
+</InformationHighlight>
 
 ### Basic Example
 
@@ -78,13 +90,10 @@ trigger an event to change the selected item.
 
 <ExampleCodeBlock code={HoistedModel} />
 
-### Label Position
+### Label Position Horizontal
 
-Set the `labelPosition` prop of the wrapping `FormField` to designate the position of the label
-relative to the `Select`. `labelPosition` accepts the following values:
-
-- `FormField.LabelPosition.Top` (Default)
-- `FormField.LabelPosition.Left`
+Set the `orientation` prop of the Form Field to designate the position of the label relative to the
+input component. By default, the orientation will be set to `vertical`.
 
 <ExampleCodeBlock code={LabelPosition} />
 

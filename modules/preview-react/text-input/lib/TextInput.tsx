@@ -11,7 +11,7 @@ import {Flex} from '@workday/canvas-kit-react/layout';
 import {TextInputField} from './TextInputField';
 
 /**
- * @deprecated ⚠️ `TextInputProps` in Preview has been deprecated and will be removed in a future major version. Please use [`FormField` in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-inputs-form-field--custom) instead.
+ * @deprecated ⚠️ `TextInputProps` in Preview has been deprecated and will be removed in a future major version. Please use [`FormField` in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-inputs-form-field--basic) instead.
  */
 export interface TextInputProps extends ExtractProps<typeof FormField, never> {
   /**
@@ -20,7 +20,7 @@ export interface TextInputProps extends ExtractProps<typeof FormField, never> {
   children: React.ReactNode;
 }
 /**
- * @deprecated ⚠️ `TextInput` in Preview has been deprecated and will be removed in a future major version. Please use [`FormField` in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-inputs-form-field--custom) instead.
+ * @deprecated ⚠️ `TextInput` in Preview has been deprecated and will be removed in a future major version. Please use [`FormField` in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-inputs-form-field--basic) instead.
  */
 export const TextInput = createContainer('div')({
   displayName: 'TextInput',
