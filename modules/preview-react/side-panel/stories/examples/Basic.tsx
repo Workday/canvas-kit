@@ -7,7 +7,7 @@ import {
 } from '@workday/canvas-kit-preview-react/side-panel';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {Text} from '@workday/canvas-kit-react/text';
-import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {AccessibleHide, CanvasProvider} from '@workday/canvas-kit-react/common';
 import {AccentIcon} from '@workday/canvas-kit-react/icon';
 import {rocketIcon} from '@workday/canvas-accent-icons-web';
 // local helper hook for setting content direction;
@@ -20,26 +20,28 @@ export const Basic = () => {
     expanded ? 'expanded' : 'collapsed'
   );
 
+  const expandedContent = (
+    <Flex alignItems="center" paddingY="s" paddingX="s">
+      <Flex marginInlineEnd="s">
+        <AccentIcon icon={rocketIcon} />
+      </Flex>
+      <Text as="h3" typeLevel="body.large" color="licorice500" fontWeight="bold" {...labelProps}>
+        Tasks Panel
+      </Text>
+    </Flex>
+  );
+
   return (
     <CanvasProvider theme={{canvas: {direction}}}>
       <Flex height={320}>
         <SidePanel {...panelProps} onStateTransition={setPanelState}>
           <SidePanel.ToggleButton {...controlProps} />
-          {panelState === 'expanded' && (
-            <Flex alignItems="center" paddingY="s" paddingX="s">
-              <Flex marginInlineEnd="s">
-                <AccentIcon icon={rocketIcon} />
-              </Flex>
-              <Text
-                as="h3"
-                typeLevel="body.large"
-                color="licorice500"
-                fontWeight="bold"
-                {...labelProps}
-              >
-                Tasks Panel
-              </Text>
-            </Flex>
+          {panelState === 'expanded' ? (
+            expandedContent
+          ) : (
+            <AccessibleHide {...labelProps} aria-hidden="true">
+              Tasks Panel
+            </AccessibleHide>
           )}
         </SidePanel>
         <Flex
