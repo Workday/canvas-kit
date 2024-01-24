@@ -12,6 +12,7 @@ import {
 import {ButtonColors} from './types';
 import {BaseButton} from './BaseButton';
 import {TertiaryButtonProps} from './TertiaryButton';
+import {brand} from '@workday/canvas-tokens-web';
 
 export interface ToolbarIconButtonProps
   extends Omit<TertiaryButtonProps, 'size' | 'variant'>,
@@ -24,9 +25,16 @@ export interface ToolbarIconButtonProps
 const StyledToolbarIconButton = styled(BaseButton)<StyledType & ToolbarIconButtonProps>({
   ['& .wd-icon']: {
     display: 'inline-block',
-    verticalAlign: 'middle',
     width: 20,
     height: 20,
+  },
+  '&:focus-visible, &.focus': {
+    ...focusRing({
+      width: 2,
+      separation: 0,
+      innerColor: 'transparent',
+      outerColor: brand.common.focusOutline,
+    }),
   },
 });
 
@@ -102,7 +110,6 @@ const getToolbarIconButtonColors = (theme: EmotionCanvasTheme, toggled?: boolean
     },
     focus: {
       icon: toggled ? themePrimary.main : colors.licorice200,
-      focusRing: focusRing({width: 2, separation: 0}, theme),
       background: toggled ? themePrimary.lightest : 'transparent',
     },
     disabled: {

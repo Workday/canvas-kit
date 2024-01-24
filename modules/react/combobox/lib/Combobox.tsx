@@ -2,7 +2,7 @@ import React from 'react';
 
 import {createContainer} from '@workday/canvas-kit-react/common';
 
-import {useComboboxModel} from './useComboboxModel';
+import {useComboboxModel} from './hooks/useComboboxModel';
 import {ComboboxInput} from './ComboboxInput';
 import {ComboboxMenu} from './ComboboxMenu';
 export interface ComboboxProps {

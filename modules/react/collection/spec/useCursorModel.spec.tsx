@@ -30,7 +30,7 @@ const createState = (input: Partial<CursorListState>): CursorListState => {
   };
 };
 
-const createItem = (id, index) => ({id, index, value: id});
+const createItem = (id, index) => ({id, index, value: id, textValue: id});
 
 describe('getFirstOfRow', () => {
   describe('when state represents a list', () => {
