@@ -242,6 +242,30 @@ const items = [
 </Select>;
 ```
 
+### When do use `getId`, `getTextValue` or `data-id`
+
+- `getId`: This is an optional function to return an id of an item. If not provided, the default
+  function will return the `id` property from the object of each item. If you did not provide
+  `items`, do not override this function. If you don't provided `items` and instead provide static
+  items via JSX, the list will create an internal array of items where `id` is the only property and
+  the default `getId` will return the desired result. **Note: If your array of objects has a
+  different property for `id`, like `serverId`, use this function to set the id.**
+
+  ```tsx
+  const options = [{text: 'Pizza', serverId: 'pizza-1'}, {text: 'CheeseBurger', serverId: 'cheese-burger'}]
+  <Select items={options} getId={(item) => item.serverId}>
+    <FormField label="Your Label">
+      <Select.Input onChange={e => handleChange(e)} id="contact-select" />
+      <Select.Popper>
+        <Select.Card>
+          <Select.List>{item => <Select.Item data-id={item.serverId}>{item.text}</Select.Item>}</Select.List>
+        </Select.Card>
+      </Select.Popper>
+    </FormField>
+  </Select>
+  ```
+- `getTextValue`: 
+
 ## Component API
 
 <SymbolDoc name="Select" fileName="/react/" />

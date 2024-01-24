@@ -41,10 +41,17 @@ export const useSelectInput = composeHooks(
           model.state.items.length > 0 &&
           model.state.selectedIds[0]
         ) {
-          model.state.inputRef.current.value = model.navigation.getItem(
-            model.state.selectedIds[0],
-            model
-          ).textValue;
+          const input = model.state.inputRef.current;
+          const nativeInputValue = Object.getOwnPropertyDescriptor(
+            Object.getPrototypeOf(input),
+            'value'
+          );
+          if (nativeInputValue && nativeInputValue.set) {
+            nativeInputValue.set.call(
+              input,
+              model.navigation.getItem(model.state.selectedIds[0], model).textValue
+            );
+          }
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -80,6 +87,11 @@ export const useSelectInput = composeHooks(
         },
         ref: elementRef,
         autoComplete: 'off',
+        defaultValue:
+          model.state.selectedIds.length > 0
+            ? model.navigation.getItem(model.state.selectedIds[0], model).textValue ||
+              model.state.value
+            : elemProps.placeholder,
       } as const;
     }
   ),
