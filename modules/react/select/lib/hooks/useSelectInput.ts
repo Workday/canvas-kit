@@ -88,7 +88,7 @@ export const useSelectInput = composeHooks(
         ref: elementRef,
         autoComplete: 'off',
         defaultValue:
-          model.state.selectedIds.length > 0
+          model.state.selectedIds.length > 0 && model.state.items.length > 0
             ? model.navigation.getItem(model.state.selectedIds[0], model).textValue ||
               model.state.value
             : elemProps.placeholder,
