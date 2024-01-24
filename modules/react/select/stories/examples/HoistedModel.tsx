@@ -5,18 +5,19 @@ import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
 import {BodyText} from '@workday/canvas-kit-react/text';
 
 const options = [
-  'E-mail',
-  'Phone',
-  'Fax (disabled)',
-  'Mail',
-  'Mobile Phone',
-  'The Ontologically Anthropocentric Sensory Immersive Simulation',
+  {label: 'E-mail', id: 'email-1'},
+  {label: 'Phone', id: 'phone-2'},
+  {label: 'Fax', id: 'fax-3'},
+  {label: 'Mail', id: 'mail-4'},
+  {label: 'Mobile Phone', id: 'mobile-phone-5'},
 ];
 
 export const HoistedModel = () => {
   const model = useSelectModel({
     items: options,
-    nonInteractiveIds: ['Fax (disabled)'],
+    getId: item => item.id,
+    initialSelectedIds: ['fax-3'],
+    getTextValue: item => item.label,
   });
 
   return (
@@ -27,11 +28,7 @@ export const HoistedModel = () => {
           <Select.Popper>
             <Select.Card>
               <Select.List>
-                {item => (
-                  <Select.Item aria-disabled={item === 'Fax (disabled)' ? true : undefined}>
-                    {item}
-                  </Select.Item>
-                )}
+                {item => <Select.Item data-id={item.id}>{item.label}</Select.Item>}
               </Select.List>
             </Select.Card>
           </Select.Popper>
@@ -40,7 +37,7 @@ export const HoistedModel = () => {
       <BodyText size="small">Selected Value: {model.state.selectedIds[0]}</BodyText>
       <SecondaryButton
         onClick={() => {
-          model.events.select({id: 'Phone'});
+          model.events.select({id: 'phone-2'});
         }}
       >
         Select Phone Item

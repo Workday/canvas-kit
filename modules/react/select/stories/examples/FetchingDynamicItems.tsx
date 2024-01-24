@@ -6,13 +6,18 @@ import {Flex} from '@workday/canvas-kit-react/layout';
 export const FetchingDynamicItems = () => {
   const [value, setValue] = React.useState('John Wick');
   const [moviesLists, setMoviesList] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   React.useEffect(() => {
-    fetch('https://my-json-server.typicode.com/horizon-code-academy/fake-movies-api/movies')
-      .then(response => response.json())
-      .then(data => {
-        setMoviesList(data);
-      });
+    setTimeout(() => {
+      setIsLoading(true);
+      fetch('https://my-json-server.typicode.com/horizon-code-academy/fake-movies-api/movies')
+        .then(response => response.json())
+        .then(data => {
+          setMoviesList(data);
+        });
+    }, 2000);
+    setIsLoading(false);
   }, []);
 
   const model = useSelectModel({
@@ -26,7 +31,10 @@ export const FetchingDynamicItems = () => {
     <Flex flexDirection="column">
       <Select model={model}>
         <FormField label="Choose a Film">
-          <Select.Input onChange={e => setValue(e.target.value)} />
+          <Select.Input
+            placeholder={!isLoading ? 'Loading Items...' : 'Choose an Option'}
+            onChange={e => setValue(e.target.value)}
+          />
           <Select.Popper>
             <Select.Card>
               <Select.List>

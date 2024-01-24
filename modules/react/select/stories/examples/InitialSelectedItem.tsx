@@ -28,8 +28,8 @@ const options = [
 ];
 
 export const InitialSelectedItem = () => {
-  const [value, setValue] = React.useState('');
-  const [id, setId] = React.useState('');
+  const [value, setValue] = React.useState('English (United States)');
+  const [id, setId] = React.useState('da594226446c11de98360015c5e6daf6');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
