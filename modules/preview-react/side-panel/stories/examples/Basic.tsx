@@ -7,7 +7,7 @@ import {
 } from '@workday/canvas-kit-preview-react/side-panel';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {Text} from '@workday/canvas-kit-react/text';
-import {AccessibleHide, CanvasProvider} from '@workday/canvas-kit-react/common';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {AccentIcon} from '@workday/canvas-kit-react/icon';
 import {rocketIcon} from '@workday/canvas-accent-icons-web';
 // local helper hook for setting content direction;
@@ -39,9 +39,9 @@ export const Basic = () => {
           {panelState === 'expanded' ? (
             expandedContent
           ) : (
-            <AccessibleHide {...labelProps} aria-hidden="true">
+            <span hidden {...labelProps}>
               Tasks Panel
-            </AccessibleHide>
+            </span>
           )}
         </SidePanel>
         <Flex
