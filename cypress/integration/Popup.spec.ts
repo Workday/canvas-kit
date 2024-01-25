@@ -610,6 +610,35 @@ describe('Popup', () => {
     });
   });
 
+  context.only(`given the [Testing/Popups/Popup, ComboboxWithinPopup] example is rendered`, () => {
+    beforeEach(() => {
+      h.stories.load('Testing/Popups/Popup', 'ComboboxWithinPopup');
+    });
+
+    context('when the button is clicked', () => {
+      beforeEach(() => {
+        cy.findByRole('button', {name: 'Open Popup'}).click();
+      });
+
+      it('should show the popup', () => {
+        cy.findByRole('dialog').should('be.visible');
+      });
+
+      context('when is open and the first item is clicked', () => {
+        beforeEach(() => {
+          cy.findByRole('combobox').click();
+          cy.findAllByRole('option')
+            .eq(0)
+            .click();
+        });
+
+        it('should not close the popup on select', () => {
+          cy.findByRole('dialog').should('be.visible');
+        });
+      });
+    });
+  });
+
   context(
     `given the [Testing/Popups/Popup, PopupWithFallbackPlacements] example is rendered`,
     () => {
