@@ -67,7 +67,7 @@ export const FetchingDynamicItems = () => {
   });
 
   return (
-    <Flex flexDirection="column">
+    <Flex flexDirection="column" maxWidth={300}>
       <Select model={model}>
         <FormField label="Choose a Film">
           <Select.Input
@@ -89,7 +89,7 @@ export const FetchingDynamicItems = () => {
         </FormField>
       </Select>
       <div>Selected Id: {id}</div>
-      <div>Selected value: {value}</div>
+      <div data-testid="selected-value">Selected value: {value}</div>
       <PrimaryButton
         onClick={() => {
           loadItems();

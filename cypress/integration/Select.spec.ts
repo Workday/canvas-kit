@@ -531,3 +531,23 @@ describe('Select With Menu Height', () => {
     );
   });
 });
+
+context.only(`given the "FetchingDynamicItems" story is rendered`, () => {
+  before(() => {
+    h.stories.visit();
+  });
+  beforeEach(() => {
+    h.stories.load('Components/Inputs/Select', 'FetchingDynamicItems');
+  });
+
+  context('when Get Items is clicked', () => {
+    beforeEach(() => {
+      cy.findByRole('button', {name: 'Get Items'}).click();
+    });
+    it('should change the value of the select to 456 (the id) after 1.5 seconds', () => {
+      cy.wait(1500);
+      cy.findByRole('combobox').should('have.value', '456');
+      cy.findByTestId('selected-value').should('have.text', 'Selected value: John Wick');
+    });
+  });
+});
