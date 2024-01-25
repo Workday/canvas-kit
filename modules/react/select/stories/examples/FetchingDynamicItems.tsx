@@ -3,94 +3,96 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {useMount} from '@workday/canvas-kit-react/common';
 
 const movieListItems = [
   {
-    Title: 'The Lion King',
-    id: '123',
+    label: 'The Lion King',
+    serverId: '123',
     Year: '2019',
     Runtime: '118 min',
   },
   {
-    Title: 'Mowgli: Legend of the Jungle',
-    id: '234',
+    label: 'Mowgli: Legend of the Jungle',
+    serverId: '234',
     Year: '2018',
     Runtime: '104 min',
   },
   {
-    Title: 'Doctor Strange',
-    id: '345',
+    label: 'Doctor Strange',
+    serverId: '345',
     Year: '2016',
     Runtime: '115 min',
   },
   {
-    Title: 'John Wick',
+    label: 'John Wick',
     Year: '2014',
-    id: '456',
+    serverId: '456',
     Runtime: '101 min',
   },
   {
-    Title: 'The Notebook',
-    id: '567',
+    label: 'The Notebook',
+    serverId: '567',
     Year: '2004',
     Runtime: '123 min',
   },
 ];
 
 export const FetchingDynamicItems = () => {
+  const [id, setId] = React.useState('456');
   const [value, setValue] = React.useState('');
   const [moviesLists, setMoviesList] = React.useState([]);
   const [loadingStatus, setLoadingStatus] = React.useState<'idle' | 'loading' | 'success'>('idle');
-  const [placeholder, setPlaceholder] = React.useState('Choose an Option');
+  const loadingRef = React.useRef<ReturnType<typeof setTimeout>>();
 
   const model = useSelectModel({
     items: moviesLists,
-    getTextValue: item => item.Title,
-    getId: item => item.id,
-    initialSelectedIds: [value],
+    getTextValue: item => item.label,
+    getId: item => item.serverId,
+    initialSelectedIds: [id],
   });
 
-  React.useEffect(() => {
-    if (loadingStatus === 'loading') {
-      const mockLoading = setTimeout(() => {
-        setLoadingStatus('success');
-        setPlaceholder('Choose an Option');
-        setMoviesList(movieListItems);
-        setValue('456');
-        model.events.select({id: '456'});
-      }, 3000);
+  function loadItems() {
+    setLoadingStatus('loading');
+    loadingRef.current = setTimeout(() => {
+      setLoadingStatus('success');
+      setMoviesList(movieListItems);
+    }, 1500);
+  }
 
-      return () => {
-        clearTimeout(mockLoading);
-      };
-    }
-  }, [loadingStatus, model.events]);
+  useMount(() => {
+    return () => {
+      clearTimeout(loadingRef.current);
+    };
+  });
 
   return (
     <Flex flexDirection="column">
       <Select model={model}>
         <FormField label="Choose a Film">
-          <Select.Input placeholder={placeholder} onChange={e => setValue(e.target.value)} />
+          <Select.Input
+            onChange={e => {
+              setId(e.target.value);
+              setValue(model.navigation.getItem(e.target.value, model).textValue);
+            }}
+            placeholder={loadingStatus}
+          />
           <Select.Popper>
             <Select.Card>
               <Select.List>
                 {item => {
-                  return (
-                    <Select.Item data-id={item.id} data-text={item.Title}>
-                      {item.Title}
-                    </Select.Item>
-                  );
+                  return <Select.Item>{item.label}</Select.Item>;
                 }}
               </Select.List>
             </Select.Card>
           </Select.Popper>
         </FormField>
       </Select>
-      Selected Value: {value}
+      <div>Selected Id: {id}</div>
+      <div>Selected value: {value}</div>
       <PrimaryButton
         onClick={() => {
-          setPlaceholder('Loading Items...');
-          setLoadingStatus('loading');
+          loadItems();
         }}
       >
         Get Items

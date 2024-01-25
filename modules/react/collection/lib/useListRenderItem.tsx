@@ -45,7 +45,7 @@ export function useListRenderItems<T>(
             if (React.isValidElement(child)) {
               return React.cloneElement(child, {
                 key: item.id || item.index,
-                item: item.value,
+                item: item,
               });
             }
             return child;

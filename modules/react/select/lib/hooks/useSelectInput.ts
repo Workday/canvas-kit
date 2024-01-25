@@ -5,6 +5,7 @@ import {
   useForkRef,
   useLocalRef,
   useResizeObserver,
+  dispatchInputEvent,
 } from '@workday/canvas-kit-react/common';
 import {
   useComboboxInput,
@@ -24,6 +25,20 @@ export const useSelectInput = composeHooks(
         useForkRef(ref as React.Ref<HTMLElement>, ref)
       );
 
+      const textInputRef = React.useRef<HTMLInputElement>(null);
+
+      // Update the text value of the input
+      const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = model.navigation.getItem(event.target.value, model)?.textValue;
+        const nativeInputValue = Object.getOwnPropertyDescriptor(
+          Object.getPrototypeOf(textInputRef.current),
+          'value'
+        );
+        if (nativeInputValue && nativeInputValue.set) {
+          nativeInputValue.set.call(textInputRef.current, value);
+        }
+      };
+
       useResizeObserver({
         ref: localRef,
         onResize: data => {
@@ -41,21 +56,14 @@ export const useSelectInput = composeHooks(
           model.state.items.length > 0 &&
           model.state.selectedIds[0]
         ) {
-          const input = model.state.inputRef.current;
-          const nativeInputValue = Object.getOwnPropertyDescriptor(
-            Object.getPrototypeOf(input),
-            'value'
-          );
-          if (nativeInputValue && nativeInputValue.set) {
-            nativeInputValue.set.call(
-              input,
-              model.navigation.getItem(model.state.selectedIds[0], model).textValue
-            );
+          const value = model.navigation.getItem(model.state.selectedIds[0], model).id;
+          if (model.state.inputRef.current.value !== value) {
+            // Programmatically dispatch an onChange once items are loaded
+            dispatchInputEvent(model.state.inputRef.current, value);
           }
         }
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, [model.state.inputRef, model.state.items]);
+      }, [model.state.inputRef, model.state.items.length]);
 
       return {
         onKeyDown(event: React.KeyboardEvent) {
@@ -85,13 +93,27 @@ export const useSelectInput = composeHooks(
             }
           }
         },
+        onFocus() {
+          textInputRef.current?.classList.add('focus');
+        },
+        onBlur() {
+          textInputRef.current?.classList.remove('focus');
+        },
+        onMouseEnter() {
+          textInputRef.current?.classList.add('hover');
+        },
+        onMouseLeave() {
+          textInputRef.current?.classList.remove('hover');
+        },
+        onChange: handleOnChange,
         ref: elementRef,
         autoComplete: 'off',
+        textInputRef,
         defaultValue:
           model.state.selectedIds.length > 0 && model.state.items.length > 0
             ? model.navigation.getItem(model.state.selectedIds[0], model).textValue ||
               model.state.value
-            : elemProps.placeholder,
+            : undefined,
       } as const;
     }
   ),

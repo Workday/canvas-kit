@@ -32,18 +32,14 @@ export const InitialSelectedItem = () => {
   const [id, setId] = React.useState('da594226446c11de98360015c5e6daf6');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
-  };
-
-  const handleSelect = ({id}: {id: string}) => {
-    setId(id);
+    setId(event.target.value);
+    setValue(options.find(item => item.id === event.target.value).label);
   };
 
   return (
     <Flex flexDirection="column">
       <Select
         items={options}
-        onSelect={handleSelect}
         initialSelectedIds={['da594226446c11de98360015c5e6daf6']}
         getId={item => item.id}
         getTextValue={item => item.label}
@@ -52,9 +48,7 @@ export const InitialSelectedItem = () => {
           <Select.Input onChange={e => handleChange(e)} />
           <Select.Popper>
             <Select.Card>
-              <Select.List>
-                {item => <Select.Item data-id={item.id}>{item.label}</Select.Item>}
-              </Select.List>
+              <Select.List>{item => <Select.Item>{item.label}</Select.Item>}</Select.List>
             </Select.Card>
           </Select.Popper>
         </FormField>

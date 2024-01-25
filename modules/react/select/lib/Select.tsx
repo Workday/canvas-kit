@@ -15,9 +15,9 @@ import {useSelectModel} from './hooks/useSelectModel';
 import {useSelectCard} from './hooks/useSelectCard';
 import {useSelectInput} from './hooks/useSelectInput';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {createStyles, CSProps} from '@workday/canvas-kit-styling';
 
-export interface SelectInputProps extends ExtractProps<typeof TextInput> {
+export interface SelectInputProps extends ExtractProps<typeof TextInput>, CSProps {
   /**
    * The Icon to render at the start of the `input`. Use this prop if your options
    * include icons that you would like to render in the `input` when selected.
@@ -28,17 +28,41 @@ export interface SelectInputProps extends ExtractProps<typeof TextInput> {
 
 const selectInputStyles = createStyles({
   caretColor: 'transparent',
+  pointerEvents: 'none', // We want to interact with the hidden input
   cursor: 'default',
   '&::selection': {
     backgroundColor: 'transparent',
   },
 });
 
+const hiddenSelectStyles = createStyles({
+  position: 'absolute',
+  top: 0,
+  bottom: 0,
+  left: 0,
+  right: 0,
+  opacity: 0,
+  cursor: 'default',
+});
+
 export const SelectInput = createSubcomponent(TextInput)({
   modelHook: useSelectModel,
   elemPropsHook: useSelectInput,
 })<SelectInputProps>(
-  ({placeholder = 'Choose an option', inputStartIcon, ...elemProps}, Element, model) => {
+  (
+    {
+      placeholder = 'Choose an option',
+      inputStartIcon,
+      error,
+      textInputRef,
+      className,
+      cs,
+      disabled,
+      ...elemProps
+    },
+    Element,
+    model
+  ) => {
     return (
       <InputGroup>
         {inputStartIcon && model.state.selectedIds.length > 0 && (
@@ -47,10 +71,21 @@ export const SelectInput = createSubcomponent(TextInput)({
           </InputGroup.InnerStart>
         )}
         <InputGroup.Input
+          error={error}
+          disabled={disabled}
+          className={hiddenSelectStyles}
+          {...elemProps}
+        />
+        <InputGroup.Input
           as={Element}
+          disabled={disabled}
           placeholder={placeholder}
-          {...mergeStyles(elemProps, [selectInputStyles])}
-        ></InputGroup.Input>
+          tabIndex={-1}
+          aria-hidden={true}
+          ref={textInputRef}
+          error={error}
+          {...mergeStyles({className, cs}, [selectInputStyles])}
+        />
         <InputGroup.InnerEnd position="absolute" pointerEvents="none">
           <SystemIcon icon={caretDownSmallIcon} />
         </InputGroup.InnerEnd>

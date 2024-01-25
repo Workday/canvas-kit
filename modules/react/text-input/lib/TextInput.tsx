@@ -38,10 +38,10 @@ const StyledTextInput = styled('input')<
     '&::placeholder': {
       color: inputColors.placeholder,
     },
-    '&:hover': {
+    '&:hover, &.hover': {
       borderColor: inputColors.hoverBorder,
     },
-    '&:focus:not([disabled])': {
+    '&:focus:not([disabled]), &.focus:not([disabled])': {
       borderColor: inputColors.focusBorder,
       boxShadow: `inset 0 0 0 1px ${inputColors.focusBorder}`,
       outline: 'none',
@@ -68,7 +68,7 @@ const StyledTextInput = styled('input')<
     },
   ({theme, error}) => {
     return {
-      '&:focus:not([disabled])': {
+      '&:focus:not([disabled]), &.focus:not([disabled])': {
         borderColor: theme.canvas.palette.common.focusOutline,
         boxShadow: `inset 0 0 0 1px ${theme.canvas.palette.common.focusOutline}`,
         outline: 'none',
