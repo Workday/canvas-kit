@@ -58,7 +58,7 @@ export const useSelectInput = composeHooks(
         ) {
           const value = model.navigation.getItem(model.state.selectedIds[0], model).id;
           if (model.state.inputRef.current.value !== value) {
-            // Programmatically dispatch an onChange once items are loaded
+            // Programmatically dispatch an onChange once items are loaded. This account for when a consumer wants an initial selected item and they're loading them from a server.
             dispatchInputEvent(model.state.inputRef.current, value);
           }
         }
@@ -93,6 +93,7 @@ export const useSelectInput = composeHooks(
             }
           }
         },
+        // When the hidden input is focused, we want to show the focus/hover states of the input that sits below it.
         onFocus() {
           textInputRef.current?.classList.add('focus');
         },
@@ -109,6 +110,7 @@ export const useSelectInput = composeHooks(
         ref: elementRef,
         autoComplete: 'off',
         textInputRef,
+        // Account for the case where an initial item is selected when the Select first renders
         defaultValue:
           model.state.selectedIds.length > 0 && model.state.items.length > 0
             ? model.navigation.getItem(model.state.selectedIds[0], model).textValue ||
