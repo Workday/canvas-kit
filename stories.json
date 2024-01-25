@@ -7889,6 +7889,20 @@
         "__isArgsStory": false
       }
     },
+    "testing-popups-popup--combobox-within-popup": {
+      "id": "testing-popups-popup--combobox-within-popup",
+      "name": "Combobox Within Popup",
+      "title": "Testing/Popups/Popup",
+      "importPath": "./modules/react/popup/stories/stories_testing.tsx",
+      "kind": "Testing/Popups/Popup",
+      "story": "Combobox Within Popup",
+      "parameters": {
+        "fileName": "./modules/react/popup/stories/stories_testing.tsx",
+        "framework": "react",
+        "__id": "testing-popups-popup--combobox-within-popup",
+        "__isArgsStory": false
+      }
+    },
     "testing-popups-popup--mixed-popup-types": {
       "id": "testing-popups-popup--mixed-popup-types",
       "name": "Mixed Popup Types",
