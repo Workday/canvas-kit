@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.1](https://github.com/Workday/canvas-kit/releases/tag/v10.3.1) (2024-01-25)
+
+### Components
+
+- fix: Prevent popup from closing when combobox item is clicked ([#2524](https://github.com/Workday/canvas-kit/pull/2524)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  Prevents popup or dialog from closing when a combobox menu item is selected.
+
+
 ## [v9.1.35](https://github.com/Workday/canvas-kit/releases/tag/v9.1.35) (2024-01-23)
 
 ### Components
