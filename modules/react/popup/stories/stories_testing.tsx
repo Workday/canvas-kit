@@ -351,9 +351,10 @@ export const ComboboxWithinPopup = () => {
           <Popup.CloseIcon aria-label="Close" />
           <Popup.Heading>Popup With Combobox</Popup.Heading>
           <Popup.Body>
-            <FormField label="Choose Your Food">
+            <FormField orientation="vertical">
+              <FormField.Label>Choose Your Food</FormField.Label>
               <Combobox items={['Pizza', 'Cheeseburger', 'Fries', 'Hot Dog']}>
-                <Combobox.Input as={TextInput} />
+                <FormField.Input as={Combobox.Input} />
                 <Combobox.Menu.Popper>
                   <Combobox.Menu.Card>
                     <Combobox.Menu.List>
