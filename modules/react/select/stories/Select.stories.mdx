@@ -79,6 +79,10 @@ and provides direct access to its `state` and `events` outside of the `Select` c
 In this example, we set up external observation of the model state and create an external button to
 trigger an event to change the selected item.
 
+**Note: If your array of objects uses an `id` property and a `text` property there is no need to use
+the helper functions of `getId` or `getTextValue`. The collection system and the `Select` use these
+properties by default for keyboard navigation and selected the `id` based on the item clicked.**
+
 <ExampleCodeBlock code={HoistedModel} />
 
 ### Label Position
@@ -211,17 +215,21 @@ the `Select.Input`.
 ### Fetching Dynamic Items
 
 It's common to load items from a server call. Hoisting the `model` and setting your items on state
-allows you to pass those items to your `model`. The `Select` component will first render a
-placeholder and then once your items are loaded, render your items.
+allows you to pass those items to your `model`. You can leverage React State to set your items on
+load as well as displaying a placeholder indicating when items are loaded.
+
+**Note: In this case we need to use `getId` and `getTextValue` because our data doesn't have the
+properties of `id` or `text`. Using these helper functions sets the `serverId` to be `id` and
+`label` to be `text`.**
 
 <ExampleCodeBlock code={FetchingDynamicItems} />
 
 ### Complex
 
-When registering items in an array of objects, it's common to have an `id` that is different than
-the text value displayed in the UI. Typically, this `id` is used to send to the server. Use the `id`
-value to set the `data-id` property on `Select.Item` to ensure proper keyboard handling and
-type-ahead.
+When registering items in an array of objects, it's common to have the text displayed to the user be
+different than an id. In this example, `serverId` and `label` properties need to be re mapped to
+`id` and `text` hence the usage of `getId` and `getTextValue`. If your object has the properties
+`text` and `id`, there would be no need for this.
 
 <ExampleCodeBlock code={Complex} />
 
@@ -242,7 +250,7 @@ const items = [
 </Select>;
 ```
 
-### When do use `getId`, `getTextValue` or `data-id`
+### When to use `getId`, or `getTextValue`
 
 - `getId`: This is an optional function to return an id of an item. If not provided, the default
   function will return the `id` property from the object of each item. If you did not provide
@@ -258,13 +266,32 @@ const items = [
       <Select.Input onChange={e => handleChange(e)} id="contact-select" />
       <Select.Popper>
         <Select.Card>
-          <Select.List>{item => <Select.Item data-id={item.serverId}>{item.text}</Select.Item>}</Select.List>
+          <Select.List>{item => <Select.Item>{item.text}</Select.Item>}</Select.List>
         </Select.Card>
       </Select.Popper>
     </FormField>
   </Select>
   ```
-- `getTextValue`: 
+
+- `getTextValue`: Optional function to return the text representation of an item. If not provided,
+  the default function will return the `text` property of the object of each item or an empty string
+  if there is no `text` property. If you did not provide `items`, do not override this function.
+  **Note: If your array of objects has a different property for `text`, like `label`, use this
+  function to set the text.**
+
+  ```tsx
+  const options = [{label: 'Pizza', id: 'pizza-1'}, {label: 'CheeseBurger', id: 'cheese-burger'}]
+  <Select items={options} getTextValue={(item) => item.label}>
+    <FormField label="Your Label">
+      <Select.Input onChange={e => handleChange(e)} id="contact-select" />
+      <Select.Popper>
+        <Select.Card>
+          <Select.List>{item => <Select.Item>{item.label}</Select.Item>}</Select.List>
+        </Select.Card>
+      </Select.Popper>
+    </FormField>
+  </Select>
+  ```
 
 ## Component API
 
