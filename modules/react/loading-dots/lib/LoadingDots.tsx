@@ -1,8 +1,7 @@
 import * as React from 'react';
-import {keyframes} from '@emotion/css';
 import {base, system} from '@workday/canvas-tokens-web';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStyles, handleCsProp, CSProps} from '@workday/canvas-kit-styling';
+import {createStyles, handleCsProp, keyframes, CSProps, px2rem} from '@workday/canvas-kit-styling';
 
 /**
  * Duration of the sparkle dots loading (in ms).
@@ -35,9 +34,7 @@ const loadingDotStyles = createStyles({
   animationIterationCount: 'infinite',
   animationTimingFunction: 'ease-in-out',
   animationFillMode: 'both',
-  '&:last-child': {
-    marginRight: 0,
-  },
+  gap: px2rem(1),
   '&:nth-child(1)': {
     animationDelay: '0ms',
   },
@@ -52,12 +49,7 @@ const loadingDotStyles = createStyles({
 /**
  * The actual loading dot div.
  */
-const LoadingAnimationDot = createComponent('div')({
-  displayName: 'LoadingDot',
-  Component(elemProps: CSProps, ref, Element) {
-    return <Element ref={ref} {...handleCsProp(elemProps, loadingDotStyles)} />;
-  },
-});
+const LoadingAnimationDot = () => <div className={`${loadingDotStyles}`}></div>;
 
 /**
  * A simple container for the loading dots.
