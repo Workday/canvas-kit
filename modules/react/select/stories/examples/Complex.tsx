@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {Select} from '@workday/canvas-kit-react/select';
 import {Flex} from '@workday/canvas-kit-react/layout';
 
@@ -30,8 +30,9 @@ export const Complex = () => {
   return (
     <Flex flexDirection="column">
       <Select items={options} onSelect={handleSelect}>
-        <FormField label="Contact">
-          <Select.Input onChange={e => handleChange(e)} />
+        <FormField>
+          <FormField.Label>Contact</FormField.Label>
+          <FormField.Input as={Select.Input} onChange={e => handleChange(e)} />
           <Select.Popper>
             <Select.Card>
               <Select.List>
