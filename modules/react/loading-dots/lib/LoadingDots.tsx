@@ -55,7 +55,7 @@ const LoadingAnimationDot = () => <div className={`${loadingDotStyles}`}></div>;
  * A simple container for the loading dots.
  */
 const containerStyles = createStyles({
-  display: 'inline-block',
+  display: 'inline-flex',
 });
 
 /**
