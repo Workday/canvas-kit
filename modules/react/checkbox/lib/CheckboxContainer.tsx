@@ -10,7 +10,7 @@ import {
   handleCsProp,
 } from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {LabelText} from '@workday/canvas-kit-react/text';
 
 interface CheckboxContainerProps extends CSProps {
   children: React.ReactNode;
@@ -27,6 +27,8 @@ const checkboxContainerStyles = createStyles({
   alignItems: 'center',
   minHeight: system.space.x6,
   position: 'relative',
+  // should be removed, just for test
+  margin: '1rem 0',
   /**
    * Using a wrapper prevents the browser default behavior of trigging
    * :hover on the checkbox when you hover on it's corresponding label.
@@ -55,19 +57,14 @@ export const CheckboxContainer = createComponent('div')({
       <div {...handleCsProp(elemProps, checkboxContainerStyles)}>
         <div>{children}</div>
         {label && (
-          <FormField.Label
+          <LabelText
             htmlFor={inputId}
             disabled={disabled}
             variant={variant}
-            cs={{
-              paddingInlineStart: cssVar(system.space.x3),
-              cursor: 'pointer',
-              fontWeight: cssVar(system.fontWeight.normal),
-              minWidth: '0',
-            }}
+            cs={{paddingInlineStart: cssVar(system.space.x3), cursor: 'pointer'}}
           >
             {label}
-          </FormField.Label>
+          </LabelText>
         )}
       </div>
     );
