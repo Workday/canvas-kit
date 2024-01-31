@@ -27,8 +27,6 @@ const checkboxContainerStyles = createStyles({
   alignItems: 'center',
   minHeight: system.space.x6,
   position: 'relative',
-  // should be removed, just for test
-  margin: '1rem 0',
   /**
    * Using a wrapper prevents the browser default behavior of trigging
    * :hover on the checkbox when you hover on it's corresponding label.
