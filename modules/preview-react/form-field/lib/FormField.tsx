@@ -3,7 +3,6 @@ import React from 'react';
 import {createContainer, GrowthBehavior} from '@workday/canvas-kit-react/common';
 import {Flex, FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil} from '@workday/canvas-kit-styling';
-import {space} from '@workday/canvas-kit-react/tokens';
 import {system} from '@workday/canvas-tokens-web';
 
 import {useFormFieldModel, useFormFieldOrientation} from './hooks';
