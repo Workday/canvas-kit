@@ -36,7 +36,7 @@ const radioGroupStyles = createStencil({
         boxShadow: `inset 0 0 0 2px ${brand.error.base}`,
       },
       alert: {
-        boxShadow: `inset 0 0 0 1px ${brand.alert.dark}, inset 0 0 0 3px ${brand.alert.base}`,
+        boxShadow: `inset 0 0 0 1px ${brand.alert.darkest}, inset 0 0 0 3px ${brand.alert.base}`,
       },
     },
   },
