@@ -59,9 +59,10 @@ const isOverflowed = (element: Element) => {
   const overflowElement = findEllipsisElement(element) || findOverflowElement(element);
 
   if (overflowElement) {
+    const clientRect = overflowElement.getBoundingClientRect();
     return (
-      overflowElement.scrollWidth > overflowElement.clientWidth ||
-      overflowElement.scrollHeight > overflowElement.clientHeight
+      overflowElement.scrollWidth > clientRect.width ||
+      overflowElement.scrollHeight > clientRect.height
     );
   }
   return false;
