@@ -28,7 +28,6 @@ export interface SelectInputProps extends ExtractProps<typeof TextInput>, CSProp
 
 const selectInputStyles = createStyles({
   caretColor: 'transparent',
-  pointerEvents: 'none', // We want to interact with the hidden input
   cursor: 'default',
   '&::selection': {
     backgroundColor: 'transparent',
@@ -36,6 +35,7 @@ const selectInputStyles = createStyles({
 });
 
 const hiddenSelectStyles = createStyles({
+  // display: 'none',
   position: 'absolute',
   top: 0,
   bottom: 0,
@@ -43,6 +43,7 @@ const hiddenSelectStyles = createStyles({
   right: 0,
   opacity: 0,
   cursor: 'default',
+  pointerEvents: 'none',
 });
 
 export const SelectInput = createSubcomponent(TextInput)({
@@ -54,10 +55,13 @@ export const SelectInput = createSubcomponent(TextInput)({
       placeholder = 'Choose an option',
       inputStartIcon,
       error,
-      textInputRef,
-      className,
-      cs,
+      textInputProps,
       disabled,
+      ref,
+      onChange,
+      onInput,
+      value,
+      name,
       ...elemProps
     },
     Element,
@@ -70,21 +74,27 @@ export const SelectInput = createSubcomponent(TextInput)({
             <SystemIcon icon={inputStartIcon} />
           </InputGroup.InnerStart>
         )}
+        {/* Hidden input to handle ids */}
         <InputGroup.Input
           error={error}
           disabled={disabled}
           className={hiddenSelectStyles}
-          {...elemProps}
+          tabIndex={-1}
+          aria-hidden={true}
+          onChange={onChange}
+          onInput={onInput}
+          value={value}
+          name={name}
+          ref={ref}
         />
+        {/* Visual input */}
         <InputGroup.Input
           as={Element}
           disabled={disabled}
           placeholder={placeholder}
-          tabIndex={-1}
-          aria-hidden={true}
-          ref={textInputRef}
           error={error}
-          {...mergeStyles({className, cs}, [selectInputStyles])}
+          {...textInputProps}
+          {...mergeStyles(elemProps, [selectInputStyles])}
         />
         <InputGroup.InnerEnd position="absolute" pointerEvents="none">
           <SystemIcon icon={caretDownSmallIcon} />

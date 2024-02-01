@@ -68,6 +68,7 @@ export const FetchingDynamicItems = () => {
 
   return (
     <Flex flexDirection="column" maxWidth={300}>
+      <div id="foo">Foo Bar</div>
       <Select model={model}>
         <FormField label="Choose a Film">
           <Select.Input

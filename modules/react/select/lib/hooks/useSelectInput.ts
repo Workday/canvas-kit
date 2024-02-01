@@ -2,7 +2,6 @@ import React from 'react';
 import {
   composeHooks,
   createElemPropsHook,
-  useForkRef,
   useLocalRef,
   useResizeObserver,
   dispatchInputEvent,
@@ -21,10 +20,7 @@ import {useSelectModel} from './useSelectModel';
 export const useSelectInput = composeHooks(
   createElemPropsHook(useSelectModel)(
     (model, ref, elemProps: {keySofar?: string; placeholder?: string} = {}) => {
-      const {localRef, elementRef} = useLocalRef<HTMLInputElement>(
-        useForkRef(ref as React.Ref<HTMLElement>, ref)
-      );
-
+      const {elementRef} = useLocalRef<HTMLInputElement>(ref as any);
       const textInputRef = React.useRef<HTMLInputElement>(null);
 
       // Update the text value of the input
@@ -40,7 +36,7 @@ export const useSelectInput = composeHooks(
       };
 
       useResizeObserver({
-        ref: localRef,
+        ref: textInputRef,
         onResize: data => {
           if (model.state.visibility === 'visible') {
             // Width of the Input + 2px border + 8px padding
@@ -50,6 +46,8 @@ export const useSelectInput = composeHooks(
         },
       });
 
+      // The intent is if items are loaded after the component is rendered, it will update the input with the value.
+      // **Note: We might need to watch for other things or how often we should do this**
       React.useEffect(() => {
         if (
           model.state.inputRef.current &&
@@ -94,22 +92,25 @@ export const useSelectInput = composeHooks(
           }
         },
         // When the hidden input is focused, we want to show the focus/hover states of the input that sits below it.
-        onFocus() {
-          textInputRef.current?.classList.add('focus');
-        },
-        onBlur() {
-          textInputRef.current?.classList.remove('focus');
-        },
-        onMouseEnter() {
-          textInputRef.current?.classList.add('hover');
-        },
-        onMouseLeave() {
-          textInputRef.current?.classList.remove('hover');
-        },
+        // onFocus() {
+        //   textInputRef.current?.classList.add('focus');
+        // },
+        // onBlur() {
+        //   textInputRef.current?.classList.remove('focus');
+        // },
+        // onMouseEnter() {
+        //   textInputRef.current?.classList.add('hover');
+        // },
+        // onMouseLeave() {
+        //   textInputRef.current?.classList.remove('hover');
+        // },
         onChange: handleOnChange,
-        ref: elementRef,
         autoComplete: 'off',
-        textInputRef,
+        textInputProps: {
+          ref: textInputRef,
+        },
+        ref: elementRef,
+
         // Account for the case where an initial item is selected when the Select first renders
         defaultValue:
           model.state.selectedIds.length > 0 && model.state.items.length > 0
