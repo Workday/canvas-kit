@@ -87,7 +87,7 @@ const checkboxInputStencil = createStencil({
     },
 
     '&:disabled ~ div:first-of-type': {
-      borderColor: base.soap600,
+      borderColor: base.licorice100,
       backgroundColor: base.soap100,
       opacity: 1,
     },
