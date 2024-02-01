@@ -22,6 +22,7 @@ any questions.
   - [Card](#card)
   - [Count Badge](#count-badge)
   - [Text](#text)
+  - [Radio](#radio)
 	- [Form Field Preview](#form-field-preview)
 
 ## Codemod
@@ -460,6 +461,14 @@ API has not been changed, and it should behave identically as it did in previous
 `Box` component, however, it still supports Emotion `styled` and style props. Type level components:
 `Title`, `Heading`, `BodyText` and `Subtext`, have not been changed since they extend the `Text`
 component. These changes do not affect the components API.
+
+### Radio
+
+**PR:** [#XXXX](https://github.com/Workday/canvas-kit/pull)
+
+`Radio` and `RadioGroup` now use Canvas Tokens and our new styling utilities. The
+component now supports the `cs` prop, but otherwise the API has not changed. It should behave
+identically as it did in previous versions.
 
 ### Form Field Preview
 

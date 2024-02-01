@@ -5,14 +5,17 @@ import {useRadioModel} from './hooks/useRadioModel';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {RadioInput} from './RadioInput';
 import {RadioText} from './RadioText';
+import {createStencil, CSProps, handleCsProp} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
-interface RadioLabelContextInterface {
+export interface RadioLabelContextInterface {
   disabled?: boolean | undefined;
   variant?: 'inverse' | undefined;
   value?: string | number;
 }
 export interface RadioLabelProps
   extends Themeable,
+    CSProps,
     ExtractProps<typeof Flex, never>,
     RadioLabelContextInterface {
   /**
@@ -20,6 +23,15 @@ export interface RadioLabelProps
    */
   children?: React.ReactNode;
 }
+
+const radioLabelStyles = createStencil({
+  base: {
+    alignItems: 'flex-start',
+    minHeight: system.space.x6,
+    position: 'relative',
+    gap: system.space.x3,
+  },
+});
 
 export const RadioLabelContext = React.createContext({} as RadioLabelContextInterface);
 
@@ -54,17 +66,10 @@ export const RadioLabel = createSubcomponent('label')({
      */
     Text: RadioText,
   },
-})<RadioLabelProps>(({children, variant, disabled, value, ...elemProps}, Element, model) => {
+})<RadioLabelProps>(({children, variant, disabled, value, ...elemProps}, Element) => {
   return (
     <RadioLabelContext.Provider value={{variant, disabled}}>
-      <Flex
-        as={Element}
-        alignItems="flex-start"
-        minHeight="m"
-        position="relative"
-        gap="xs"
-        {...elemProps}
-      >
+      <Flex as={Element} {...handleCsProp(elemProps, radioLabelStyles({variant}))}>
         {children}
       </Flex>
     </RadioLabelContext.Provider>

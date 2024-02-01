@@ -3,21 +3,44 @@ import {
   createContainer,
   Themeable,
   ErrorType,
-  getErrorColors,
   ExtractProps,
 } from '@workday/canvas-kit-react/common';
-import {space} from '@workday/canvas-kit-react/tokens';
 import {useRadioModel} from './hooks/useRadioModel';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {RadioLabel} from './RadioLabel';
 import {RadioButton} from './RadioButton';
+import {createStencil, CSProps, handleCsProp} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
 
-export interface RadioGroupProps extends Themeable, ExtractProps<typeof Flex, never> {
+export interface RadioGroupProps extends Themeable, CSProps, ExtractProps<typeof Flex, never> {
   /**
    * The type of error associated with the RadioGroup (if applicable).
    */
   error?: ErrorType;
 }
+
+const radioGroupStyles = createStencil({
+  base: {
+    boxSizing: 'border-box',
+    flexDirection: 'column',
+    borderRadius: system.shape.x1,
+    gap: system.space.x2,
+    padding: `10px ${system.space.x3} ${system.space.x2}`,
+    margin: `calc(-1 * ${system.space.x1}) calc(-1 * ${system.space.x3})`,
+    transition: '100ms box-shadow',
+    width: 'fit-content',
+  },
+  modifiers: {
+    error: {
+      error: {
+        boxShadow: `inset 0 0 0 2px ${brand.error.base}`,
+      },
+      alert: {
+        boxShadow: `inset 0 0 0 1px ${brand.alert.dark}, inset 0 0 0 3px ${brand.alert.base}`,
+      },
+    },
+  },
+});
 
 /**
  * Use `RadioGroup` to group a collection of `RadioGroup.RadioButton` components under a common `name`.
@@ -60,30 +83,9 @@ export const RadioGroup = createContainer(Flex)({
      */
     Label: RadioLabel,
   },
-})<RadioGroupProps>(({children, error, theme, ...elemProps}, Element, model) => {
-  const errorColors = getErrorColors(error, theme);
+})<RadioGroupProps>(({children, error, theme, ...elemProps}, Element) => {
   return (
-    <Flex
-      as={Element}
-      boxSizing="border-box"
-      flexDirection="column"
-      borderRadius="m"
-      paddingTop="10px"
-      paddingBottom="8px"
-      paddingX="xs"
-      gap="xxs"
-      marginY={`-${space.xxxs}`}
-      transition="100ms box-shadow"
-      marginX={`-${space.xs}`}
-      width="fit-content"
-      cs={{
-        boxShadow:
-          errorColors.outer !== errorColors.inner
-            ? `inset 0 0 0 1px ${errorColors.outer}, inset 0 0 0 3px ${errorColors.inner}`
-            : `inset 0 0 0 2px ${errorColors.inner}`,
-      }}
-      {...elemProps}
-    >
+    <Flex as={Element} {...handleCsProp(elemProps, radioGroupStyles({error}))}>
       {children}
     </Flex>
   );
