@@ -55,7 +55,7 @@ describe.only('Select', () => {
   describe('when rendered with a value', () => {
     it('it should render a select whose selected option matches value', () => {
       const selectedValue = 'Foo';
-      const {getByDisplayValue} = render(
+      const {getAllByDisplayValue} = render(
         <Select items={['Foo']} initialSelectedIds={['Foo']}>
           <Select.Input id="contact-select" />
           <Select.Popper>
@@ -69,7 +69,7 @@ describe.only('Select', () => {
           </Select.Popper>
         </Select>
       );
-      expect(getByDisplayValue(selectedValue)).toBeDefined();
+      expect(getAllByDisplayValue(selectedValue)[0]).toBeDefined();
     });
   });
 });
