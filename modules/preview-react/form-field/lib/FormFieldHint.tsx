@@ -27,7 +27,6 @@ export const FormFieldHint = createSubcomponent('p')({
   elemPropsHook: useFormFieldHint,
 })<Omit<ExtractProps<typeof Subtext, never>, 'size'>>(
   ({children, ...elemProps}, Element, model) => {
-    console.log(formFieldHintStencil);
     if (!children) {
       // If there is no hint text just skip rendering
       return null;
