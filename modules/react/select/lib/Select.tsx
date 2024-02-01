@@ -40,7 +40,7 @@ export const SelectInput = createSubcomponent(TextInput)({
 })<SelectInputProps>(
   ({placeholder = 'Choose an option', inputStartIcon, width, ...elemProps}, Element, model) => {
     return (
-      <InputGroup width={width}>
+      <InputGroup width={width} data-width="ck-formfield-width">
         {inputStartIcon && model.state.selectedIds.length > 0 && (
           <InputGroup.InnerStart pointerEvents="none">
             <SystemIcon icon={inputStartIcon} />

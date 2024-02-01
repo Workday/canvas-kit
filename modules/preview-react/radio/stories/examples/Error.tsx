@@ -13,7 +13,7 @@ export const Error = () => {
   };
 
   return (
-    <FormField error="error">
+    <FormField error="error" as="fieldset">
       <FormField.Label as="legend">Choose Your Pizza Crust</FormField.Label>
       <FormField.Input as={RadioGroup} name="crust-error" onChange={handleChange} value={value}>
         <RadioGroup.RadioButton value="deep-dish">Deep dish</RadioGroup.RadioButton>

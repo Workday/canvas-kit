@@ -1,18 +1,25 @@
 import React from 'react';
 
 import {createSubcomponent} from '@workday/canvas-kit-react/common';
-import {handleCsProp, createStyles, CSProps} from '@workday/canvas-kit-styling';
+import {handleCsProp, CSProps, createStencil} from '@workday/canvas-kit-styling';
 
 import {useFormFieldModel} from './hooks';
 
-const containerBaseStyles = createStyles({
-  display: 'flex',
-  flexDirection: 'column',
+const containerBaseStyles = createStencil({
+  base: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
 });
 
 export const FormFieldContainer = createSubcomponent('div')({
   displayName: 'FormField.Container',
   modelHook: useFormFieldModel,
-})<CSProps>((elemProps, Element) => {
-  return <Element {...handleCsProp(elemProps, [containerBaseStyles])} />;
+})<CSProps>((elemProps, Element, model) => {
+  return (
+    <Element
+      data-width="ck-formfield-width"
+      {...handleCsProp(elemProps, [containerBaseStyles()])}
+    />
+  );
 });
