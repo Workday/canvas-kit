@@ -11,6 +11,7 @@ const radioTextStyles = createStencil({
     ...system.type.subtext.large,
     cursor: 'pointer',
     opacity: '1',
+    color: base.blackPepper300,
   },
   modifiers: {
     variant: {
