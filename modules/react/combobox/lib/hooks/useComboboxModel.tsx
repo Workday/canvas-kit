@@ -56,7 +56,6 @@ export const useComboboxModel = createModelHook({
   const menu = useMenuModel(
     useMenuModel.mergeConfig(config, {
       onSelect({id}) {
-        // const textValue = menu.navigation.getItem(id, menu).textValue || id;
         dispatchInputEvent(menu.state.targetRef.current, id);
       },
     })

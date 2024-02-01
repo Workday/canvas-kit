@@ -532,7 +532,7 @@ describe('Select With Menu Height', () => {
   });
 });
 
-context.only(`given the "FetchingDynamicItems" story is rendered`, () => {
+context(`given the "FetchingDynamicItems" story is rendered`, () => {
   before(() => {
     h.stories.visit();
   });
