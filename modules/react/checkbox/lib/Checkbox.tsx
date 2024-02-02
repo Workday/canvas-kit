@@ -59,7 +59,7 @@ export const Checkbox = createComponent('input')({
           indeterminate={indeterminate}
           {...elemProps}
         />
-        <CheckboxRipple variant={variant} />
+        <CheckboxRipple />
         <CheckboxCheck variant={variant} checked={checked} indeterminate={indeterminate} />
       </CheckboxContainer>
     );

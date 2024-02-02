@@ -132,6 +132,9 @@ const checkboxInputStencil = createStencil({
   modifiers: {
     variant: {
       inverse: {
+        '& ~ span:first-of-type': {
+          opacity: 0.4,
+        },
         '& ~ div:first-of-type': {
           borderColor: base.soap300,
         },
