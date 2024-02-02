@@ -1,18 +1,13 @@
 import React from 'react';
-import {
-  createContainer,
-  Themeable,
-  ErrorType,
-  ExtractProps,
-} from '@workday/canvas-kit-react/common';
+import {createContainer, Themeable, ErrorType} from '@workday/canvas-kit-react/common';
 import {useRadioModel} from './hooks/useRadioModel';
-import {Flex} from '@workday/canvas-kit-react/layout';
+import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {RadioLabel} from './RadioLabel';
 import {RadioButton} from './RadioButton';
-import {createStencil, CSProps, handleCsProp} from '@workday/canvas-kit-styling';
+import {createStencil, CSProps, calc, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 
-export interface RadioGroupProps extends Themeable, CSProps, ExtractProps<typeof Flex, never> {
+export interface RadioGroupProps extends Themeable, CSProps, FlexProps {
   /**
    * The type of error associated with the RadioGroup (if applicable).
    */
@@ -24,22 +19,24 @@ export interface RadioGroupProps extends Themeable, CSProps, ExtractProps<typeof
  */
 const radioGroupStyles = createStencil({
   base: {
-    boxSizing: 'border-box',
+    display: 'flex',
     flexDirection: 'column',
     borderRadius: system.shape.x1,
     gap: system.space.x2,
-    padding: `10px ${system.space.x3} ${system.space.x2}`,
-    margin: `calc(-1 * ${system.space.x1}) calc(-1 * ${system.space.x3})`,
+    padding: `${px2rem(10)} ${system.space.x3} ${system.space.x2}`,
+    margin: `${calc.negate(system.space.x1)} ${calc.negate(system.space.x3)}`,
     transition: '100ms box-shadow',
     width: 'fit-content',
   },
   modifiers: {
     error: {
       error: {
-        boxShadow: `inset 0 0 0 2px ${brand.error.base}`,
+        boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.error.base}`,
       },
       alert: {
-        boxShadow: `inset 0 0 0 1px ${brand.alert.darkest}, inset 0 0 0 3px ${brand.alert.base}`,
+        boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.alert.darkest}, inset 0 0 0 ${px2rem(3)} ${
+          brand.alert.base
+        }`,
       },
     },
   },
@@ -55,7 +52,7 @@ const radioGroupStyles = createStencil({
  * </RadioGroup>
  * ```
  */
-export const RadioGroup = createContainer(Flex)({
+export const RadioGroup = createContainer('div')({
   displayName: 'RadioGroup',
   modelHook: useRadioModel,
   subComponents: {
@@ -87,9 +84,5 @@ export const RadioGroup = createContainer(Flex)({
     Label: RadioLabel,
   },
 })<RadioGroupProps>(({children, error, theme, ...elemProps}, Element) => {
-  return (
-    <Flex as={Element} {...handleCsProp(elemProps, radioGroupStyles({error}))}>
-      {children}
-    </Flex>
-  );
+  return <Element {...mergeStyles(elemProps, radioGroupStyles({error}))}>{children}</Element>;
 });

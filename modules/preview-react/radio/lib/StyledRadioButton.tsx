@@ -7,7 +7,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
-import {CSProps, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {CSProps, calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 import {RadioLabelContext} from './RadioLabel';
 
@@ -22,8 +22,8 @@ const radioInputStyles = createStencil({
   base: {
     cursor: 'pointer',
     opacity: '1',
-    height: '18px',
-    width: '18px',
+    height: px2rem(radioHeight),
+    width: px2rem(radioWidth),
     borderRadius: system.shape.round,
     position: 'absolute',
     margin: '0',
@@ -52,12 +52,11 @@ const radioInputStyles = createStencil({
       flexDirection: 'column',
       alignItems: 'center',
       backgroundColor: base.frenchVanilla100,
-      borderRadius: '999px',
+      borderRadius: system.shape.round,
       boxSizing: 'border-box',
-      border: `1px solid`,
-      borderColor: base.licorice200,
-      height: '18px',
-      width: '18px',
+      border: `${px2rem(1)} solid ${base.licorice100}`,
+      height: px2rem(radioHeight),
+      width: px2rem(radioWidth),
       justifyContent: 'center',
       pointerEvents: 'none',
       position: 'absolute',
@@ -85,9 +84,8 @@ const radioInputStyles = createStencil({
     },
 
     '&:checked + .cnvs-radio-check, &.checked + .cnvs-radio-check': {
-      backgroundColor: brand.primary.accent, // inner circle color
-      border: `5px solid`, // this creates the inner circle
-      borderColor: brand.primary.base, // outer circle color
+      backgroundColor: brand.primary.accent,
+      border: `${px2rem(5)} solid ${brand.primary.base}`,
     },
 
     '&:focus-visible:checked + .cnvs-radio-check, &:focus-visible:hover:checked + .cnvs-radio-check, &.focus:checked + .cnvs-radio-check, &.focus:hover:checked + .cnvs-radio-check':
@@ -110,11 +108,11 @@ const radioInputStyles = createStencil({
           borderColor: base.soap300,
         },
         '&:disabled, &.disabled': {
-          opacity: '0.4',
+          opacity: system.opacity.disabled,
           '+ .cnvs-radio-check': {
             backgroundColor: base.soap100,
             borderColor: base.licorice100,
-            opacity: '0.4',
+            opacity: system.opacity.disabled,
           },
           '&:checked + .cnvs-radio-check, &.checked + .cnvs-radio-check': {
             backgroundColor: brand.primary.base, // inner circle color
@@ -163,29 +161,29 @@ const StyledRadioInput = createComponent('input')<StyledRadioButtonProps & Style
 
 const radioInputWrapperStyles = createStencil({
   base: {
-    height: '18px',
-    width: '18px',
-    flex: '0 0 auto',
+    height: px2rem(radioHeight),
+    width: px2rem(radioWidth),
+    flex: '0 auto',
     // Hover Ripple element
     '::before': {
       content: "''",
       position: 'absolute',
       borderRadius: system.shape.round,
-      height: radioHeight,
+      height: px2rem(radioHeight),
       transition: 'box-shadow 150ms ease-out',
-      width: radioWidth,
+      width: px2rem(radioWidth),
       pointerEvents: 'none',
       opacity: '1',
     },
     '&:hover:before, &.hover:before': {
-      boxShadow: `0 0 0 calc((${system.space.x8} - ${radioWidth}px) / 2) ${base.soap200}`,
+      boxShadow: `0 0 0 ${calc.subtract(system.space.x2, px2rem(1))} ${base.soap200}`,
     },
   },
   modifiers: {
     variant: {
       inverse: {
         '::before': {
-          opacity: '0.4',
+          opacity: system.opacity.disabled,
         },
       },
     },

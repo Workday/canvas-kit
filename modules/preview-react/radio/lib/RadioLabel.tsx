@@ -2,10 +2,10 @@ import React from 'react';
 
 import {Themeable, createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {useRadioModel} from './hooks/useRadioModel';
-import {Flex} from '@workday/canvas-kit-react/layout';
+import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {RadioInput} from './RadioInput';
 import {RadioText} from './RadioText';
-import {createStencil, CSProps, handleCsProp} from '@workday/canvas-kit-styling';
+import {createStencil, CSProps} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 interface RadioLabelContextInterface {
@@ -69,7 +69,7 @@ export const RadioLabel = createSubcomponent('label')({
 })<RadioLabelProps>(({children, variant, disabled, value, ...elemProps}, Element) => {
   return (
     <RadioLabelContext.Provider value={{variant, disabled}}>
-      <Flex as={Element} {...handleCsProp(elemProps, radioLabelStyles({variant}))}>
+      <Flex as={Element} {...mergeStyles(elemProps, radioLabelStyles({variant}))}>
         {children}
       </Flex>
     </RadioLabelContext.Provider>
