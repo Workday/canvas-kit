@@ -6,6 +6,13 @@ import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import {CheckBackground} from './CheckBackground';
 
+interface CheckboxCheckProps {
+  variant?: 'inverse';
+  checked: boolean;
+  indeterminate?: boolean;
+  error?: 'error' | 'alert';
+}
+
 const checkboxCheckStencil = createStencil({
   base: {
     display: 'flex',
@@ -51,17 +58,9 @@ const indeterminateBoxStyles = createStyles({
 
 export const CheckboxCheck = createComponent('div')({
   displayName: 'CheckboxCheck',
-  Component: ({
-    variant,
-    checked,
-    indeterminate,
-  }: {
-    variant?: 'inverse';
-    checked: boolean;
-    indeterminate?: boolean;
-  }) => {
+  Component: ({variant, checked, indeterminate, error}: CheckboxCheckProps) => {
     return (
-      <CheckBackground>
+      <CheckBackground error={error}>
         <div {...checkboxCheckStencil({checked, indeterminate, variant})}>
           {indeterminate ? (
             <div className={indeterminateBoxStyles} />

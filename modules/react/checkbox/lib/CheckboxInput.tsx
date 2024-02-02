@@ -10,7 +10,7 @@ import {
   CSProps,
 } from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
-import {inputVars} from './CheckboxContainer';
+import {backgroundVars} from './CheckBackground';
 
 export interface CheckboxProps extends CSProps {
   /**
@@ -193,36 +193,36 @@ const checkboxInputStencil = createStencil({
     error: {
       error: {
         '&:not(:where(:focus, .focus)) ~ div:first-of-type': {
-          border: `1px solid ${inputVars.errorInner}`,
-          boxShadow: `0 0 0 1px ${inputVars.errorInner}, 0 0 0 2px ${inputVars.errorOuter}`,
+          borderColor: backgroundVars.inner,
+          boxShadow: `0 0 0 1px ${backgroundVars.inner}, 0 0 0 2px ${backgroundVars.outer}`,
         },
         '&:where(:checked, :indeterminate) ~ div:first-of-type': {
           borderColor: 'transparent',
           boxShadow: `
           0 0 0 2px ${base.frenchVanilla100},
-          0 0 0 4px ${inputVars.errorInner},
-          0 0 0 5px ${inputVars.errorOuter}`,
+          0 0 0 4px ${backgroundVars.inner},
+          0 0 0 5px ${backgroundVars.outer}`,
         },
         '&:not(:where(:checked, :indeterminate, :disabled, :focus, .focus)):where(:hover, .hover, :active, .active) ~ div:first-of-type':
           {
-            borderColor: inputVars.errorInner,
+            borderColor: backgroundVars.inner,
           },
       },
       alert: {
         '&:not(:where(:focus, .focus)) ~ div:first-of-type': {
-          border: `1px solid ${inputVars.alertInner}`,
-          boxShadow: `0 0 0 1px ${inputVars.alertInner}, 0 0 0 2px ${inputVars.alertOuter}`,
+          border: `1px solid ${backgroundVars.inner}`,
+          boxShadow: `0 0 0 1px ${backgroundVars.inner}, 0 0 0 2px ${backgroundVars.outer}`,
         },
         '&:not(where(:checked, :indeterminate, :disabled, :focus, .focus)):where(:hover, .hover, :active, .active) ~ div:first-of-type':
           {
-            borderColor: inputVars.alertInner,
+            borderColor: backgroundVars.inner,
           },
         '&:where(:checked, :indeterminate) ~ div:first-of-type': {
           borderColor: 'transparent',
           boxShadow: `
                 0 0 0 2px ${base.frenchVanilla100},
-                0 0 0 4px ${inputVars.alertInner},
-                0 0 0 5px ${inputVars.alertOuter}`,
+                0 0 0 4px ${backgroundVars.inner},
+                0 0 0 5px ${backgroundVars.outer}`,
         },
       },
     },

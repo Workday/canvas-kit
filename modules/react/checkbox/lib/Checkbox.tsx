@@ -5,29 +5,15 @@ import {
   useUniqueId,
   useLocalRef,
 } from '@workday/canvas-kit-react/common';
-
-import {cssVar} from '@workday/canvas-kit-styling';
-import {base, brand} from '@workday/canvas-tokens-web';
 import {CheckboxRipple} from './CheckboxRipple';
-import {CheckboxContainer, inputVars} from './CheckboxContainer';
+import {CheckboxContainer} from './CheckboxContainer';
 import {CheckboxCheck} from './CheckboxCheck';
 import {CheckboxInput, CheckboxProps} from './CheckboxInput';
 
 export const Checkbox = createComponent('input')({
   displayName: 'Checkbox',
-  Component: (
-    {
-      checked = false,
-      label = '',
-      id,
-      disabled,
-      indeterminate,
-      variant,
-      ...elemProps
-    }: CheckboxProps,
-    ref,
-    Element
-  ) => {
+  Component: ({label = '', id, ...elemProps}: CheckboxProps, ref, Element) => {
+    const {disabled, checked = false, indeterminate, variant, error} = elemProps;
     const inputId = useUniqueId(id);
     const {localRef, elementRef} = useLocalRef(ref);
     React.useEffect(() => {
@@ -37,30 +23,15 @@ export const Checkbox = createComponent('input')({
     }, [indeterminate, localRef]);
 
     return (
-      <CheckboxContainer
-        label={label}
-        disabled={disabled}
-        inputId={inputId}
-        variant={variant}
-        cs={inputVars({
-          errorInner: cssVar(brand.error.base, base.cinnamon500),
-          errorOuter: 'transparent',
-          alertInner: cssVar(brand.alert.base, base.cantaloupe600),
-          alertOuter: cssVar(brand.alert.darkest, base.cantaloupe400),
-        })}
-      >
-        <CheckboxInput
-          as={Element}
-          id={inputId}
-          ref={elementRef}
+      <CheckboxContainer label={label} disabled={disabled} inputId={inputId} variant={variant}>
+        <CheckboxInput as={Element} id={inputId} ref={elementRef} {...elemProps} />
+        <CheckboxRipple />
+        <CheckboxCheck
           variant={variant}
           checked={checked}
-          disabled={disabled}
           indeterminate={indeterminate}
-          {...elemProps}
+          error={error}
         />
-        <CheckboxRipple />
-        <CheckboxCheck variant={variant} checked={checked} indeterminate={indeterminate} />
       </CheckboxContainer>
     );
   },
