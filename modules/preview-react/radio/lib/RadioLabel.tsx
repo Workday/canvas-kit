@@ -8,7 +8,7 @@ import {RadioText} from './RadioText';
 import {createStencil, CSProps, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-export interface RadioLabelContextInterface {
+interface RadioLabelContextInterface {
   disabled?: boolean | undefined;
   variant?: 'inverse' | undefined;
   value?: string | number;

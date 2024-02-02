@@ -19,6 +19,9 @@ export interface RadioGroupProps extends Themeable, CSProps, ExtractProps<typeof
   error?: ErrorType;
 }
 
+/**
+ * Styles for RadioGroup
+ */
 const radioGroupStyles = createStencil({
   base: {
     boxSizing: 'border-box',
