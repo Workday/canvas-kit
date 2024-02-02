@@ -39,9 +39,9 @@ export const Basic = () => {
           {panelState === 'expanded' ? (
             expandedContent
           ) : (
-            <span hidden {...labelProps}>
+            <Text as="span" hidden {...labelProps}>
               Tasks Panel
-            </span>
+            </Text>
           )}
         </SidePanel>
         <Flex
