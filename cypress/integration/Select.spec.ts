@@ -548,7 +548,7 @@ context(`given the "FetchingDynamicItems" story is rendered`, () => {
       cy.wait(1500);
       cy.findByRole('combobox').should('have.value', 'John Wick');
       cy.findByTestId('selected-value').should('have.text', 'Selected value: John Wick');
-      cy.findByTestId('selected-id').should('have.text', 'Selected id: 456');
+      cy.findByTestId('selected-id').should('have.text', 'Selected Id: 456');
     });
   });
 });
