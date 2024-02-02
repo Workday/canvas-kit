@@ -1,14 +1,6 @@
 import * as React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {
-  CSProps,
-  calc,
-  createStyles,
-  cssVar,
-  px2rem,
-  createVars,
-  handleCsProp,
-} from '@workday/canvas-kit-styling';
+import {CSProps, calc, createStyles, cssVar, px2rem, createVars} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import {LabelText} from '@workday/canvas-kit-react/text';
 
@@ -43,16 +35,9 @@ const checkboxContainerStyles = createStyles({
 
 export const CheckboxContainer = createComponent('div')({
   displayName: 'CheckboxRipple',
-  Component: ({
-    children,
-    label,
-    inputId,
-    disabled,
-    variant,
-    ...elemProps
-  }: CheckboxContainerProps) => {
+  Component: ({children, label, inputId, disabled, variant}: CheckboxContainerProps) => {
     return (
-      <div {...handleCsProp(elemProps, checkboxContainerStyles)}>
+      <div className={checkboxContainerStyles}>
         <div>{children}</div>
         {label && (
           <LabelText
