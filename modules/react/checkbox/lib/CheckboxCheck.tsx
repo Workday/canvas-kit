@@ -49,7 +49,7 @@ export const CheckboxCheck = createComponent('div')({
     indeterminate?: boolean;
   }) => {
     return (
-      <CheckBackground variant={variant}>
+      <CheckBackground>
         <div {...checkboxCheckStencil({checked, indeterminate})}>
           {indeterminate ? (
             <IndeterminateBox variant={variant} />

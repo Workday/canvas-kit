@@ -132,6 +132,9 @@ const checkboxInputStencil = createStencil({
   modifiers: {
     variant: {
       inverse: {
+        '& ~ div:first-of-type': {
+          borderColor: base.soap300,
+        },
         // Disabled State for inverse variant
         '&:not(:where(:checked, :indeterminate, :disabled, :focus, .focus)):where(:hover, .hover, :active, .active) ~ div:first-of-type':
           {
