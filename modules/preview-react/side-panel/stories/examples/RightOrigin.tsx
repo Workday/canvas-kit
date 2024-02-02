@@ -35,9 +35,9 @@ const RightPanel = () => {
       {panelState === 'expanded' ? (
         expandedContent
       ) : (
-        <span hidden {...labelProps}>
-          Tasks Panel
-        </span>
+            <Text as="span" hidden {...labelProps}>
+              Tasks Panel
+            </Text>
       )}
     </StyledSidePanel>
   );
