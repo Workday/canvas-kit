@@ -1,8 +1,7 @@
 import * as React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, cssVar} from '@workday/canvas-kit-styling';
-import {brand} from '@workday/canvas-tokens-web';
-import {IndeterminateBox} from './IndeterminateBox';
+import {createStencil, createStyles, cssVar, calc, px2rem} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import {CheckBackground} from './CheckBackground';
@@ -34,7 +33,20 @@ const checkboxCheckStencil = createStencil({
         transform: 'scale(1)',
       },
     },
+    variant: {
+      inverse: {
+        '& > div': {
+          backgroundColor: brand.primary.base,
+        },
+      },
+    },
   },
+});
+
+const indeterminateBoxStyles = createStyles({
+  width: calc.add(system.space.x2, px2rem(2)),
+  height: calc.divide(system.space.x1, 2),
+  backgroundColor: brand.primary.accent,
 });
 
 export const CheckboxCheck = createComponent('div')({
@@ -50,9 +62,9 @@ export const CheckboxCheck = createComponent('div')({
   }) => {
     return (
       <CheckBackground>
-        <div {...checkboxCheckStencil({checked, indeterminate})}>
+        <div {...checkboxCheckStencil({checked, indeterminate, variant})}>
           {indeterminate ? (
-            <IndeterminateBox variant={variant} />
+            <div className={indeterminateBoxStyles} />
           ) : (
             checked && (
               <SystemIcon
