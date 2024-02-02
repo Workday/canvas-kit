@@ -34,9 +34,9 @@ export const AlternatePanel = () => {
           {panelState === 'expanded' ? (
             expandedContent
           ) : (
-            <span hidden {...labelProps}>
-              Alternate Panel
-            </span>
+            <Text as="span" hidden {...labelProps}>
+              Tasks Panel
+            </Text>
           )}
         </SidePanel>
         <Flex
