@@ -89,7 +89,7 @@ export const FetchingDynamicItems = () => {
           </Select.Popper>
         </FormField>
       </Select>
-      <div>Selected Id: {id}</div>
+      <div data-testid="selected-id">Selected Id: {id}</div>
       <div data-testid="selected-value">Selected value: {value}</div>
       <PrimaryButton
         onClick={() => {
