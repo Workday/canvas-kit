@@ -163,7 +163,7 @@ const radioInputWrapperStyles = createStencil({
   base: {
     height: px2rem(radioHeight),
     width: px2rem(radioWidth),
-    flex: '0 auto',
+    flex: '0 0 auto',
     // Hover Ripple element
     '::before': {
       content: "''",
