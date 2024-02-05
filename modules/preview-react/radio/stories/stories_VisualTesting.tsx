@@ -114,7 +114,6 @@ export const RadioStates = () => {
               id={hintId}
               orientation={props.labelPosition}
               error={props.error}
-              // {...props}
             >
               <FormField.Label as="legend">{props.label}</FormField.Label>
               <FormField.Container>

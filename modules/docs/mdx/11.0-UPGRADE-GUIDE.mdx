@@ -13,16 +13,17 @@ any questions.
 
 - [Codemod](#codemod)
 - [Deprecations](#deprecations)
-  - [Form Field Main](#form-field-main)
-  - [Text Input Preview](#text-input-preview)
-  - [Text Area Preview](#text-input-preview)
+  - [Form Field (Main)](#form-field-main)
   - [Label Text](#label-text)
+  - [Text Area (Preview)](#text-area-preview)
+  - [Text Input (Preview)](#text-input-preview)
 - [Component Updates](#component-updates)
   - [Component Style Updates](#component-style-updates)
   - [Card](#card)
   - [Count Badge](#count-badge)
-  - [Text](#text)
   - [Form Field Preview](#form-field-preview)
+  - [Radio (Preview)](#radio-preview)
+  - [Text](#text)
 
 ## Codemod
 
@@ -102,13 +103,16 @@ instead.
 
 ---
 
-### Text Input Preview
+### Label Text
 
-**PR:** [#2472](https://github.com/Workday/canvas-kit/pull/2472)
+**PR:** [#2455](https://github.com/Workday/canvas-kit/pull/2455)
 
-We've deprecated `TextInput` from [Preview](#preview) in favor of our compound component `FormField`
+We've deprecated `LabelText` from [Main](#main) in favor of our compound component `FormField.Label`
 in [Preview](#preview). Please use
-[`FormField`](https://workday.github.io/canvas-kit/?path=//docs/preview-inputs-form-field--basic)
+[`FormField.Label`](https://workday.github.io/canvas-kit/?path=//docs/preview-inputs-form-field--basic)
+instead.
+
+If you still want to use a `label` element outside of the context of a form, you can use `Text`
 instead.
 
 ---
@@ -124,16 +128,13 @@ instead.
 
 ---
 
-### Label Text
+### Text Input Preview
 
-**PR:** [#2455](https://github.com/Workday/canvas-kit/pull/2455)
+**PR:** [#2472](https://github.com/Workday/canvas-kit/pull/2472)
 
-We've deprecated `LabelText` from [Main](#main) in favor of our compound component `FormField.Label`
+We've deprecated `TextInput` from [Preview](#preview) in favor of our compound component `FormField`
 in [Preview](#preview). Please use
-[`FormField.Label`](https://workday.github.io/canvas-kit/?path=//docs/preview-inputs-form-field--basic)
-instead.
-
-If you still want to use a `label` element outside of the context of a form, you can use `Text`
+[`FormField`](https://workday.github.io/canvas-kit/?path=//docs/preview-inputs-form-field--basic)
 instead.
 
 ---
@@ -357,26 +358,7 @@ our new
 The component API has not been changed, and it should behave identically as it did in previous
 versions.
 
-### Form Field in Preview
-
-**PR:** [#2541](https://github.com/Workday/canvas-kit/pull/2541)
-
-`FormField` in [Preview](#preview) and its subcomponents have been refactored to use our
-[new styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api)
-and [tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
-
-### Text
-
-**PR:** [#2455](https://github.com/Workday/canvas-kit/pull/2455)
-
-`Text` has been refactored to use our
-[new styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api)
-and [tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs). It no
-longer extends the `Box` component, however, it still supports Emotion `styled` and style props.
-Type level components: `Title`, `Heading`, `BodyText` and `Subtext`, have not been changed since
-they extend the `Text` component. These changes do not affect the components API.
-
-### Form Field Preview
+### Form Field (Preview)
 
 **PR:** [#2472](https://github.com/Workday/canvas-kit/pull/2472)
 
@@ -422,3 +404,24 @@ import {TextInput} from '@workday/canvas-kit-react/text-input';
 ```
 
 🤖 The codemod will handle the change of `hasError` to `error` for you automatically.
+
+### Radio (Preview)
+
+**PR:** [#2546](https://github.com/Workday/canvas-kit/pull/2546)
+
+`Radio` and `RadioGroup` now use [Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and our [new styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api). The
+component now supports the `cs` prop, but otherwise the API has not changed. It should behave
+identically as it did in previous versions.
+
+### Text
+
+**PR:** [#2455](https://github.com/Workday/canvas-kit/pull/2455)
+
+`Text` has been refactored to use our
+[new styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api)
+and [tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs). It no
+longer extends the `Box` component, however, it still supports Emotion `styled` and style props.
+Type level components: `Title`, `Heading`, `BodyText` and `Subtext`, have not been changed since
+they extend the `Text` component. These changes do not affect the components API.
+
+
