@@ -1,6 +1,7 @@
 import {SymbolDoc} from '@workday/canvas-kit-docs';
 
 import {StatusIndicator} from '@workday/canvas-kit-react/status-indicator';
+import {StatusIndicator as PreviewStatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
 
 import {Basic} from './examples/Basic';
 import {Icon} from './examples/Icon';
@@ -10,6 +11,15 @@ import {MaxWidth} from './examples/MaxWidth';
 <Meta title="Components/Indicators/Status Indicator" component={StatusIndicator} />
 
 # Canvas Kit Status Indicator
+
+<PreviewStatusIndicator variant="red">
+  <PreviewStatusIndicator.Label>Deprecated</PreviewStatusIndicator.Label>
+</PreviewStatusIndicator>
+
+`StatusIndicator` in Main has been deprecated and will be removed in a future major version. Please
+use
+[`StatusIndicator`](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator--basic)
+in Preview instead.
 
 Status Indicators help the user quickly identify the status of a task, action, or page element.
 

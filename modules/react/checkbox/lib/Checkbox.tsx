@@ -16,6 +16,8 @@ import {borderRadius, colors, inputColors, space} from '@workday/canvas-kit-reac
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import {LabelText} from '@workday/canvas-kit-react/text';
+import {base} from '@workday/canvas-tokens-web';
+import {cssVar} from '@workday/canvas-kit-styling';
 
 export interface CheckboxProps extends Themeable {
   /**
@@ -137,13 +139,13 @@ const CheckboxInput = styled('input')<CheckboxProps & StyledType>(
       backgroundColor: variant === 'inverse' ? colors.frenchVanilla100 : themePrimary.main,
     },
     '&:disabled ~ div:first-of-type': {
-      borderColor: inputColors.disabled.border,
+      borderColor: cssVar(base.licorice100),
       backgroundColor: variant === 'inverse' ? colors.soap300 : inputColors.disabled.background,
       opacity: variant === 'inverse' ? '.4' : '1',
     },
     '&:disabled:checked ~ div:first-of-type, &:disabled:indeterminate ~ div:first-of-type': {
       borderColor: variant === 'inverse' ? colors.soap300 : themePrimary.light,
-      backgroundColor: variant === 'inverse' ? colors.soap300 : themePrimary.light,
+      backgroundColor: variant === 'inverse' ? colors.frenchVanilla100 : themePrimary.light,
     },
 
     // Focus
@@ -192,7 +194,7 @@ const CheckboxInput = styled('input')<CheckboxProps & StyledType>(
       },
       '&:disabled:checked ~ div:first-of-type, &:disabled:indeterminate ~ div:first-of-type': {
         borderColor: themePrimary.light,
-        backgroundColor: variant === 'inverse' ? colors.soap300 : themePrimary.light,
+        backgroundColor: variant === 'inverse' ? colors.frenchVanilla100 : themePrimary.light,
       },
     }),
   }),
