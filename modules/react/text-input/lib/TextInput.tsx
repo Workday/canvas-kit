@@ -68,7 +68,7 @@ const StyledTextInput = styled('input')<
     },
   ({theme, error}) => {
     return {
-      '&:focus:not([disabled]), &.focus:not([disabled])': {
+      '&:focus-visible:not([disabled]), &.focus:not([disabled])': {
         borderColor: theme.canvas.palette.common.focusOutline,
         boxShadow: `inset 0 0 0 1px ${theme.canvas.palette.common.focusOutline}`,
         outline: 'none',
