@@ -1,9 +1,25 @@
 import React from 'react';
-import {createSubcomponent, ExtractProps, useTheme} from '@workday/canvas-kit-react/common';
-import {space} from '@workday/canvas-kit-react/tokens';
+import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {system, brand} from '@workday/canvas-tokens-web';
+import {createStencil} from '@workday/canvas-kit-styling';
 
 import {useFormFieldHint, useFormFieldModel} from './hooks';
 import {Subtext} from '@workday/canvas-kit-react/text';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
+
+const formFieldHintStencil = createStencil({
+  base: {
+    margin: `${system.space.x2} 0 0`,
+  },
+  modifiers: {
+    error: {
+      error: {
+        color: brand.error.base,
+      },
+      alert: {},
+    },
+  },
+});
 
 export const FormFieldHint = createSubcomponent('p')({
   displayName: 'FormField.Hint',
@@ -11,8 +27,6 @@ export const FormFieldHint = createSubcomponent('p')({
   elemPropsHook: useFormFieldHint,
 })<Omit<ExtractProps<typeof Subtext, never>, 'size'>>(
   ({children, ...elemProps}, Element, model) => {
-    const theme = useTheme();
-
     if (!children) {
       // If there is no hint text just skip rendering
       return null;
@@ -22,9 +36,7 @@ export const FormFieldHint = createSubcomponent('p')({
       <Subtext
         as={Element}
         size="medium"
-        color={model.state.error === 'error' ? theme.canvas.palette.error.main : undefined}
-        marginY={space.xxs}
-        {...elemProps}
+        {...mergeStyles(elemProps, formFieldHintStencil({error: model.state.error}))}
       >
         {children}
       </Subtext>

@@ -3,7 +3,7 @@ import React from 'react';
 import {createContainer, GrowthBehavior} from '@workday/canvas-kit-react/common';
 import {Flex, FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil} from '@workday/canvas-kit-styling';
-import {space} from '@workday/canvas-kit-react/tokens';
+import {system} from '@workday/canvas-tokens-web';
 
 import {useFormFieldModel, useFormFieldOrientation} from './hooks';
 import {FormFieldInput} from './FormFieldInput';
@@ -19,7 +19,7 @@ const formFieldStencil = createStencil({
   base: {
     border: 'none',
     padding: 0,
-    margin: `0 0 ${space.m}`,
+    margin: `0 0 ${system.space.x6}`,
   },
   modifiers: {
     grow: {
