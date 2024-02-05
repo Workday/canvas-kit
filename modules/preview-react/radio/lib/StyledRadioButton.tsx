@@ -54,7 +54,7 @@ const radioInputStyles = createStencil({
       backgroundColor: base.frenchVanilla100,
       borderRadius: system.shape.round,
       boxSizing: 'border-box',
-      border: `${px2rem(1)} solid ${base.licorice100}`,
+      border: `${px2rem(1)} solid ${base.licorice200}`,
       height: px2rem(radioHeight),
       width: px2rem(radioWidth),
       justifyContent: 'center',
