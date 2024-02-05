@@ -56,7 +56,7 @@ export function errorRing(error?: ErrorType, theme?: EmotionCanvasTheme): CSSObj
     '&:hover, &:disabled, &.hover, &.disabled': {
       borderColor: errorColors.outer,
     },
-    '&:focus:not([disabled]), &.focus:not([disabled])': {
+    '&:focus-visible:not([disabled]), &.focus:not([disabled])': {
       borderColor: errorColors.outer,
       boxShadow: `${errorBoxShadow},
         0 0 0 2px ${colors.frenchVanilla100},
