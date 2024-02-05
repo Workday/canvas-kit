@@ -91,19 +91,6 @@ export const useSelectInput = composeHooks(
             }
           }
         },
-        // When the hidden input is focused, we want to show the focus/hover states of the input that sits below it.
-        // onFocus() {
-        //   textInputRef.current?.classList.add('focus');
-        // },
-        // onBlur() {
-        //   textInputRef.current?.classList.remove('focus');
-        // },
-        // onMouseEnter() {
-        //   textInputRef.current?.classList.add('hover');
-        // },
-        // onMouseLeave() {
-        //   textInputRef.current?.classList.remove('hover');
-        // },
         onChange: handleOnChange,
         autoComplete: 'off',
         textInputProps: {
