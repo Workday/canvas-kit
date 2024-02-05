@@ -35,7 +35,6 @@ const selectInputStyles = createStyles({
 });
 
 const hiddenSelectStyles = createStyles({
-  // display: 'none',
   position: 'absolute',
   top: 0,
   bottom: 0,
