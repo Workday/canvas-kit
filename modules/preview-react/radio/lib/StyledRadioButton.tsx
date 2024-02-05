@@ -39,10 +39,12 @@ const radioInputStyles = createStencil({
       '&:hover + .cnvs-radio-check, &.hover + .cnvs-radio-check': {
         borderColor: base.licorice100,
       },
+      // This creates the inner circle when the Radio is checked.
+      // The backgroundColor represents the dot in the middle of the radio.
+      // The borderColor represents the border around the middle dot of the radio.
       '&:checked + .cnvs-radio-check, &.checked + .cnvs-radio-check': {
-        backgroundColor: brand.primary.accent, // inner circle color
-        border: `5px solid`, // this creates the inner circle
-        borderColor: brand.primary.base, // outer circle color
+        backgroundColor: brand.primary.accent, // inner circle background color
+        border: `5px solid ${brand.primary.base}`, // inner circle border color
       },
     },
 
@@ -82,10 +84,12 @@ const radioInputStyles = createStencil({
     '&:focus-visible:hover + .cnvs-radio-check, &.focus:hover + .cnvs-radio-check': {
       outline: 'transparent',
     },
-
+    // This creates the inner circle when the Radio is checked.
+    // The backgroundColor represents the dot in the middle of the radio.
+    // The borderColor represents the border around the middle dot of the radio.
     '&:checked + .cnvs-radio-check, &.checked + .cnvs-radio-check': {
-      backgroundColor: brand.primary.accent,
-      border: `${px2rem(5)} solid ${brand.primary.base}`,
+      backgroundColor: brand.primary.accent, // inner circle background color
+      border: `${px2rem(5)} solid ${brand.primary.base}`, // inner circle border color
     },
 
     '&:focus-visible:checked + .cnvs-radio-check, &:focus-visible:hover:checked + .cnvs-radio-check, &.focus:checked + .cnvs-radio-check, &.focus:hover:checked + .cnvs-radio-check':
@@ -114,9 +118,12 @@ const radioInputStyles = createStencil({
             borderColor: base.licorice100,
             opacity: system.opacity.disabled,
           },
+          // This creates the inner circle when the Radio is checked.
+          // The backgroundColor represents the dot in the middle of the radio.
+          // The borderColor represents the border around the middle dot of the radio.
           '&:checked + .cnvs-radio-check, &.checked + .cnvs-radio-check': {
-            backgroundColor: brand.primary.base, // inner circle color
-            borderColor: base.frenchVanilla100, // outer circle color
+            backgroundColor: brand.primary.base, // inner circle background color
+            borderColor: base.frenchVanilla100, // inner circle border color
           },
         },
         '&:hover + .cnvs-radio-check, &.hover + .cnvs-radio-check': {
@@ -125,9 +132,12 @@ const radioInputStyles = createStencil({
         '&:focus-visible + .cnvs-radio-check, &.focus + .cnvs-radio-check': {
           borderColor: base.soap300,
         },
+        // This creates the inner circle when the Radio is checked.
+        // The backgroundColor represents the dot in the middle of the radio.
+        // The borderColor represents the border around the middle dot of the radio.
         '&:checked + .cnvs-radio-check, &.checked + .cnvs-radio-check': {
-          backgroundColor: brand.primary.base, // inner circle color
-          borderColor: base.frenchVanilla100, // outer circle color
+          backgroundColor: brand.primary.base, // inner circle background color
+          borderColor: base.frenchVanilla100, // inner circle border color
         },
         '&:focus-visible + .cnvs-radio-check, &:focus-visible:hover + .cnvs-radio-check, &.focus + .cnvs-radio-check, &.focus:hover + .cnvs-radio-check':
           {
