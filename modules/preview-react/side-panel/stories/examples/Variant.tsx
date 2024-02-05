@@ -18,23 +18,25 @@ export const AlternatePanel = () => {
     expanded ? 'expanded' : 'collapsed'
   );
 
+  const expandedContent = (
+    <Flex alignItems="center" paddingY="s" paddingX="s">
+      <Text as="h3" typeLevel="body.large" color="licorice500" fontWeight="bold" {...labelProps}>
+        Alternate Panel
+      </Text>
+    </Flex>
+  );
+
   return (
     <CanvasProvider theme={{canvas: {direction}}}>
       <Flex height={320} backgroundColor="soap100">
         <SidePanel {...panelProps} onStateTransition={setPanelState} variant="alternate">
           <SidePanel.ToggleButton {...controlProps} />
-          {panelState === 'expanded' && (
-            <Flex alignItems="center" paddingY="s" paddingX="s">
-              <Text
-                as="h3"
-                typeLevel="body.large"
-                color="licorice500"
-                fontWeight="bold"
-                {...labelProps}
-              >
-                Alternate Panel
-              </Text>
-            </Flex>
+          {panelState === 'expanded' ? (
+            expandedContent
+          ) : (
+            <Text hidden {...labelProps}>
+              Tasks Panel
+            </Text>
           )}
         </SidePanel>
         <Flex
