@@ -4,6 +4,7 @@ import {calc, createStencil, createVars, px2rem, cssVar} from '@workday/canvas-k
 import {base, brand, system} from '@workday/canvas-tokens-web';
 
 interface CheckBackgroundProps {
+  children: React.ReactNode;
   error?: 'error' | 'alert';
 }
 
@@ -41,7 +42,7 @@ const checkboxBackgroundStencil = createStencil({
 
 export const CheckBackground = createComponent('div')({
   displayName: 'CheckBackground',
-  Component: ({error}: CheckBackgroundProps) => {
-    return <div {...checkboxBackgroundStencil({error})} />;
+  Component: ({error, children}: CheckBackgroundProps) => {
+    return <div {...checkboxBackgroundStencil({error})}>{children}</div>;
   },
 });
