@@ -9,7 +9,6 @@ import {
   styled,
   StyledType,
 } from '@workday/canvas-kit-react/common';
-import {cssVar} from '@workday/canvas-kit-styling';
 import {ButtonColors} from './types';
 import {BaseButton} from './BaseButton';
 import {TertiaryButtonProps} from './TertiaryButton';
@@ -34,7 +33,7 @@ const StyledToolbarIconButton = styled(BaseButton)<StyledType & ToolbarIconButto
       width: 2,
       separation: 0,
       innerColor: 'transparent',
-      outerColor: cssVar(brand.common.focusOutline, 'rgba(8,117,226,1)'),
+      outerColor: brand.common.focusOutline,
     }),
   },
 });

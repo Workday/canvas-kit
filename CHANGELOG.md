@@ -3,6 +3,93 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.2](https://github.com/Workday/canvas-kit/releases/tag/v10.3.2) (2024-02-05)
+
+### Documentation
+
+- fix: SidePanel Examples aria-labelledby Update ([#2538](https://github.com/Workday/canvas-kit/pull/2538)) ([@williamjstanton](https://github.com/williamjstanton), [@josh-bagwell](https://github.com/josh-bagwell))
+  Updates the Basic example, Alternate example, and Right-to-left example to display a hidden <span/> element when in the collapsed state.
+
+
+## [v10.3.1](https://github.com/Workday/canvas-kit/releases/tag/v10.3.1) (2024-01-25)
+
+### Components
+
+- fix: Prevent popup from closing when combobox item is clicked ([#2524](https://github.com/Workday/canvas-kit/pull/2524)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  Prevents popup or dialog from closing when a combobox menu item is selected.
+
+
+## [v9.1.35](https://github.com/Workday/canvas-kit/releases/tag/v9.1.35) (2024-01-23)
+
+### Components
+
+- fix: Prevent popup from closing when combobox item is clicked ([#2524](https://github.com/Workday/canvas-kit/pull/2524)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  Prevents popup or dialog from closing when a combobox menu item is selected.
+## [v10.3.0](https://github.com/Workday/canvas-kit/releases/tag/v10.3.0) (2024-01-18)
+
+
+
+
+## [v10.2.5](https://github.com/Workday/canvas-kit/releases/tag/v10.2.5) (2024-01-09)
+
+### Infrastructure
+
+- fix: Fix stencil types to accept a value as CSS variables ([#2509](https://github.com/Workday/canvas-kit/pull/2509)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v10.2.4](https://github.com/Workday/canvas-kit/releases/tag/v10.2.4) (2024-01-08)
+
+### Infrastructure
+
+- fix: Fix TS error for boolean modifiers in compound stencils styles ([#2507](https://github.com/Workday/canvas-kit/pull/2507)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v10.2.3](https://github.com/Workday/canvas-kit/releases/tag/v10.2.3) (2024-01-05)
+
+### Infrastructure
+
+- ci: Update reviewer-lottery.yml ([#2503](https://github.com/Workday/canvas-kit/pull/2503)) ([@mannycarrera4](https://github.com/mannycarrera4))
+- chore: Remove ESLint warning for @emotion/css ([#2505](https://github.com/Workday/canvas-kit/pull/2505)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v10.2.2](https://github.com/Workday/canvas-kit/releases/tag/v10.2.2) (2024-01-05)
+
+### Documentation
+
+- fix: Move styling to its own section ([#2498](https://github.com/Workday/canvas-kit/pull/2498)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v10.2.1](https://github.com/Workday/canvas-kit/releases/tag/v10.2.1) (2023-12-21)
+
+### Components
+
+- fix: Default createStyles vars to empty object ([#2488](https://github.com/Workday/canvas-kit/pull/2488)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v10.2.0](https://github.com/Workday/canvas-kit/releases/tag/v10.2.0) (2023-12-19)
+
+
+
+
+## [v10.1.4](https://github.com/Workday/canvas-kit/releases/tag/v10.1.4) (2023-12-19)
+
+### Components
+
+- fix: Forward branding CSS variables through portals ([#2482](https://github.com/Workday/canvas-kit/pull/2482)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v10.1.3](https://github.com/Workday/canvas-kit/releases/tag/v10.1.3) (2023-12-19)
+
+### Components
+
+- fix: Fixed getFirstFocusableElement to recognize RadioGroup ([#2470](https://github.com/Workday/canvas-kit/pull/2470)) ([@thunguyen19](https://github.com/thunguyen19))
+
+
+## [v9.1.34](https://github.com/Workday/canvas-kit/releases/tag/v9.1.34) (2023-12-18)
+
+### Components
+
+- fix: Fixed getFirstFocusableElement to recognize RadioGroup ([#2470](https://github.com/Workday/canvas-kit/pull/2470)) ([@thunguyen19](https://github.com/thunguyen19))
 ## [v10.1.2](https://github.com/Workday/canvas-kit/releases/tag/v10.1.2) (2023-12-13)
 
 ### Infrastructure
