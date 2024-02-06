@@ -4,11 +4,11 @@ import {createSubcomponent} from '@workday/canvas-kit-react/common';
 import {type} from '@workday/canvas-kit-react/tokens';
 import {Text} from '@workday/canvas-kit-react/text';
 import {useFormFieldLabel, useFormFieldModel} from './hooks';
-import {CSProps, createStencil, createStyles} from '@workday/canvas-kit-styling';
+import {createStencil, createStyles} from '@workday/canvas-kit-styling';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 
-export interface FormFieldLabelProps extends CSProps {
+export interface FormFieldLabelProps {
   /**
    * The text of the label.
    */
