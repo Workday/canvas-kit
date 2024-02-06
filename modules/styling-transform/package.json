@@ -22,8 +22,7 @@
     "testing.ts"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "typecheck:src": "tsc -p . --noEmit --incremental false"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "canvas",
