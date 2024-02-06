@@ -41,7 +41,7 @@ const StyledTextInput = styled('input')<
     '&:hover, &.hover': {
       borderColor: inputColors.hoverBorder,
     },
-    '&:focus-visible:not([disabled]), &.focus:not([disabled])': {
+    '&:focus-visible:not([disabled]), &.focus:not([disabled]), &:focus:not([disabled])': {
       borderColor: inputColors.focusBorder,
       boxShadow: `inset 0 0 0 1px ${inputColors.focusBorder}`,
       outline: 'none',

@@ -22,6 +22,7 @@ export const RefForwarding = () => {
 
   const handleClick = () => {
     if (ref && ref.current) {
+      console.log(ref);
       ref.current.focus();
     }
   };

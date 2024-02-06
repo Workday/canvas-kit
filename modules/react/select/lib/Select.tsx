@@ -59,6 +59,7 @@ export const SelectInput = createSubcomponent(TextInput)({
       ref,
       onChange,
       onInput,
+      onFocus,
       value,
       name,
       ...elemProps
@@ -83,6 +84,7 @@ export const SelectInput = createSubcomponent(TextInput)({
           onChange={onChange}
           onInput={onInput}
           value={value}
+          onFocus={onFocus}
           name={name}
           ref={ref}
         />

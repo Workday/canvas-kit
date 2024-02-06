@@ -45,7 +45,6 @@ export const useSelectInput = composeHooks(
           }
         },
       });
-
       // The intent is if items are loaded after the component is rendered, it will update the input with the value.
       // **Note: We might need to watch for other things or how often we should do this**
       React.useEffect(() => {
@@ -93,6 +92,10 @@ export const useSelectInput = composeHooks(
         },
         onChange: handleOnChange,
         autoComplete: 'off',
+        // When the hidden input is focused, we want to show the focus/hover states of the input that sits below it.
+        onFocus() {
+          textInputRef.current?.focus();
+        },
         textInputProps: {
           ref: textInputRef,
         },
