@@ -6,9 +6,9 @@ import {LabelText} from '@workday/canvas-kit-react/text';
 
 interface CheckboxContainerProps extends CSProps {
   children: React.ReactNode;
-  label: string;
-  inputId: string;
   disabled?: boolean;
+  id: string;
+  label: string;
   variant?: 'inverse';
 }
 
@@ -28,20 +28,20 @@ const checkboxContainerStyles = createStyles({
     display: 'flex',
     height: calc.add(system.space.x4, px2rem(2)),
     minWidth: calc.add(system.space.x4, px2rem(2)),
-    marginTop: '3px',
+    marginTop: px2rem(3),
     alignSelf: 'flex-start',
   },
 });
 
 export const CheckboxContainer = createComponent('div')({
-  displayName: 'CheckboxRipple',
-  Component: ({children, label, inputId, disabled, variant}: CheckboxContainerProps) => {
+  displayName: 'CheckboxContainer',
+  Component: ({children, disabled, id, label, variant}: CheckboxContainerProps) => {
     return (
       <div className={checkboxContainerStyles}>
         <div>{children}</div>
         {label && (
           <LabelText
-            htmlFor={inputId}
+            htmlFor={id}
             disabled={disabled}
             variant={variant}
             cs={{paddingInlineStart: cssVar(system.space.x3), cursor: 'pointer'}}

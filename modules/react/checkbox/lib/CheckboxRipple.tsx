@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {calc, createStyles, px2rem} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 const checkboxRippleStyles = createStyles({
   borderRadius: system.shape.round,
-  boxShadow: `0 0 0 0 ${base.soap200}`,
+  boxShadow: 'none',
   height: calc.add(system.space.x4, px2rem(2)),
   width: calc.add(system.space.x4, px2rem(2)),
   transition: 'box-shadow 150ms ease-out',

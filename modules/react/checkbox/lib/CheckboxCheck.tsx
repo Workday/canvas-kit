@@ -7,10 +7,10 @@ import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import {CheckBackground} from './CheckBackground';
 
 interface CheckboxCheckProps {
-  variant?: 'inverse';
   checked: boolean;
-  indeterminate?: boolean;
   error?: 'error' | 'alert';
+  indeterminate?: boolean;
+  variant?: 'inverse';
 }
 
 const checkboxCheckStencil = createStencil({
@@ -21,7 +21,7 @@ const checkboxCheckStencil = createStencil({
     pointerEvents: 'none',
     transition: 'transform 200ms ease, opacity 200ms ease',
     span: {
-      marginLeft: '-6px',
+      marginInlineStart: calc.negate(px2rem(6)),
       transition: 'margin 200ms ease',
     },
     opacity: 0,
@@ -58,7 +58,7 @@ const indeterminateBoxStyles = createStyles({
 
 export const CheckboxCheck = createComponent('div')({
   displayName: 'CheckboxCheck',
-  Component: ({variant, checked, indeterminate, error}: CheckboxCheckProps) => {
+  Component: ({checked, error, indeterminate, variant}: CheckboxCheckProps) => {
     return (
       <CheckBackground error={error}>
         <div {...checkboxCheckStencil({checked, indeterminate, variant})}>

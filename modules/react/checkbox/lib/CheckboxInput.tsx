@@ -24,10 +24,19 @@ export interface CheckboxProps extends CSProps {
    */
   disabled?: boolean;
   /**
+   * The type of error associated with the Checkbox (if applicable).
+   */
+  error?: ErrorType;
+  /**
    * The HTML `id` of the underlying checkbox input element. This is required if `label` is defined as a non-empty string.
    * @default {useUniqueId}
    */
   id?: string;
+  /**
+   * If true, set the Checkbox to an indeterminate state. Use this on a Checkbox with nested child Checkboxes to denote that some (but not all) child Checkboxes are checked.
+   * @default false
+   */
+  indeterminate?: boolean;
   /**
    * The text of the Checkbox label.
    * @default ''
@@ -42,15 +51,6 @@ export interface CheckboxProps extends CSProps {
    */
   value?: string;
   /**
-   * The type of error associated with the Checkbox (if applicable).
-   */
-  error?: ErrorType;
-  /**
-   * If true, set the Checkbox to an indeterminate state. Use this on a Checkbox with nested child Checkboxes to denote that some (but not all) child Checkboxes are checked.
-   * @default false
-   */
-  indeterminate?: boolean;
-  /**
    * The variant for the checkbox
    */
   variant?: 'inverse' | undefined;
@@ -63,7 +63,7 @@ const checkboxInputStencil = createStencil({
     height: system.space.x6,
     margin: system.space.zero,
     marginTop: calc.negate(px2rem(3)),
-    marginLeft: calc.negate(px2rem(3)),
+    marginInlineStart: calc.negate(px2rem(3)),
     position: 'absolute',
     opacity: 0,
 
@@ -129,8 +129,9 @@ const checkboxInputStencil = createStencil({
     variant: {
       inverse: {
         '& ~ span:first-of-type': {
-          opacity: 0.4,
+          opacity: system.opacity.disabled,
         },
+
         '& ~ div:first-of-type': {
           borderColor: base.soap300,
         },
@@ -190,14 +191,16 @@ const checkboxInputStencil = createStencil({
       error: {
         '&:not(:where(:focus-visible, .focus)) ~ div:first-of-type': {
           borderColor: backgroundVars.inner,
-          boxShadow: `0 0 0 1px ${backgroundVars.inner}, 0 0 0 2px ${backgroundVars.outer}`,
+          boxShadow: `
+            0 0 0 ${px2rem(1)} ${backgroundVars.inner}, 
+            0 0 0 ${px2rem(2)} ${backgroundVars.outer}`,
         },
         '&:where(:checked, :indeterminate) ~ div:first-of-type': {
           borderColor: 'transparent',
           boxShadow: `
-          0 0 0 2px ${base.frenchVanilla100},
-          0 0 0 4px ${backgroundVars.inner},
-          0 0 0 5px ${backgroundVars.outer}`,
+            0 0 0 ${px2rem(2)} ${base.frenchVanilla100},
+            0 0 0 ${px2rem(4)} ${backgroundVars.inner},
+            0 0 0 ${px2rem(5)} ${backgroundVars.outer}`,
         },
         '&:not(:where(:checked, :indeterminate, :disabled, :focus-visible, .focus)):where(:hover, .hover, :active, .active) ~ div:first-of-type':
           {
@@ -206,8 +209,10 @@ const checkboxInputStencil = createStencil({
       },
       alert: {
         '&:not(:where(:focus-visible, .focus)) ~ div:first-of-type': {
-          border: `1px solid ${backgroundVars.inner}`,
-          boxShadow: `0 0 0 1px ${backgroundVars.inner}, 0 0 0 2px ${backgroundVars.outer}`,
+          border: `${px2rem(1)} solid ${backgroundVars.inner}`,
+          boxShadow: `
+            0 0 0 ${px2rem(1)} ${backgroundVars.inner}, 
+            0 0 0 ${px2rem(2)} ${backgroundVars.outer}`,
         },
         '&:not(where(:checked, :indeterminate, :disabled, :focus-visible, .focus)):where(:hover, .hover, :active, .active) ~ div:first-of-type':
           {
@@ -216,9 +221,9 @@ const checkboxInputStencil = createStencil({
         '&:where(:checked, :indeterminate) ~ div:first-of-type': {
           borderColor: 'transparent',
           boxShadow: `
-                0 0 0 2px ${base.frenchVanilla100},
-                0 0 0 4px ${backgroundVars.inner},
-                0 0 0 5px ${backgroundVars.outer}`,
+            0 0 0 ${px2rem(2)} ${base.frenchVanilla100},
+            0 0 0 ${px2rem(4)} ${backgroundVars.inner},
+            0 0 0 ${px2rem(5)} ${backgroundVars.outer}`,
         },
       },
     },
@@ -228,7 +233,7 @@ const checkboxInputStencil = createStencil({
       modifiers: {variant: 'inverse', error: 'error'},
       styles: {
         '&:not(:where(:focus-visible, .focus)) ~ div:first-of-type': {
-          border: `1px solid ${base.soap300}`,
+          border: `${px2rem(1)} solid ${base.soap300}`,
         },
         '&:not(where(:checked, :indeterminate, :disabled, :focus-visible, .focus)):where(:hover, .hover, :active, .active) ~ div:first-of-type':
           {
@@ -243,7 +248,7 @@ const checkboxInputStencil = createStencil({
       modifiers: {variant: 'inverse', error: 'alert'},
       styles: {
         '&:not(:where(:focus-visible, .focus)) ~ div:first-of-type': {
-          border: `1px solid ${base.soap300}`,
+          border: `${px2rem(1)} solid ${base.soap300}`,
         },
         '&:not(where(:checked, :indeterminate, :disabled, :focus-visible, .focus)):where(:hover, .hover, :active, .active) ~ div:first-of-type':
           {

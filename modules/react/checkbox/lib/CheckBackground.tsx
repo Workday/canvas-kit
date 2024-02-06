@@ -2,11 +2,14 @@ import * as React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {calc, createStencil, createVars, px2rem, cssVar} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
+
+interface CheckBackgroundProps {
+  error?: 'error' | 'alert';
+}
 
 export const backgroundVars = createVars('inner', 'outer');
 
-const checkboxBackgroundStyles = createStencil({
+const checkboxBackgroundStencil = createStencil({
   base: {
     alignItems: 'center',
     backgroundColor: base.frenchVanilla100,
@@ -20,7 +23,7 @@ const checkboxBackgroundStyles = createStencil({
     position: 'absolute',
     transition: 'border 200ms ease, background 200ms',
     width: calc.add(system.space.x4, px2rem(2)),
-    border: `1px solid ${base.licorice200}`,
+    border: `${px2rem(1)} solid ${base.licorice200}`,
   },
   modifiers: {
     error: {
@@ -38,7 +41,7 @@ const checkboxBackgroundStyles = createStencil({
 
 export const CheckBackground = createComponent('div')({
   displayName: 'CheckBackground',
-  Component: ({error, ...elemProps}: any) => {
-    return <div {...mergeStyles(elemProps, checkboxBackgroundStyles({error}))} />;
+  Component: ({error}: CheckBackgroundProps) => {
+    return <div {...checkboxBackgroundStencil({error})} />;
   },
 });
