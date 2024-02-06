@@ -18,17 +18,11 @@
     "*/lib/*",
     "*/index.ts",
     "dist/",
-    "index.ts"
+    "index.ts",
+    "testing.ts"
   ],
   "scripts": {
-    "watch": "yarn build:es6 -w",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "clean": "rimraf dist && rimraf .build-info && mkdirp dist",
-    "build:cjs": "tsc -p tsconfig.cjs.json",
-    "build:es6": "tsc -p tsconfig.es6.json",
-    "build:rebuild": "npm-run-all clean build",
-    "build": "npm-run-all --parallel build:cjs build:es6",
-    "depcheck": "node ../../utils/check-dependencies-exist.js",
     "typecheck:src": "tsc -p . --noEmit --incremental false"
   },
   "keywords": [
@@ -42,7 +36,6 @@
   "dependencies": {
     "@emotion/serialize": "^1.0.2",
     "@workday/canvas-kit-styling": "^10.3.2",
-    "@workday/canvas-tokens-web": "^1.0.0",
     "stylis": "4.0.13",
     "typescript": "4.2"
   },

@@ -6,11 +6,23 @@ import {makeEmotionSafe} from './makeEmotionSafe';
 import {getErrorMessage} from './getErrorMessage';
 import {TransformerContext} from './types';
 
+function handlePropertyTransforms(node: ts.Node, context: TransformerContext): string | undefined {
+  return context.propertyTransforms.reduce((result, transformer) => {
+    return result || transformer(node, context) || undefined;
+  }, undefined as undefined | string);
+}
+
 /**
  * This is the workhorse of statically analyzing style values
  */
 export function parseNodeToStaticValue(node: ts.Node, context: TransformerContext): string {
   const {checker, variables, keyframes} = context;
+
+  const value = handlePropertyTransforms(node, context);
+  if (value) {
+    return value;
+  }
+
   /**
    * String literals like 'red' or empty Template Expressions like `red`
    */
@@ -109,7 +121,8 @@ export function parseNodeToStaticValue(node: ts.Node, context: TransformerContex
 
   throw new Error(
     `Unknown type at: "${node.getText()}". Received "${typeValue}"\n${getErrorMessage(
-      node
+      node,
+      context
     )}\nFor static analysis of styles, please make sure all types resolve to string or numeric literals. Please use 'const' instead of 'let'. If using an object, cast using "as const" or use an interface with string or numeric literals.`
   );
 }

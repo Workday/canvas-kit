@@ -21,7 +21,10 @@ export function getVarName(node: ts.Node, parts: string[] = []): string {
   }
 
   // Any node with a `name` property that is an identifier can add to the var name
-  if ((node as any).name && ts.isIdentifier((node as any).name)) {
+  if (
+    (node as any).name &&
+    (ts.isIdentifier((node as any).name) || ts.isStringLiteral((node as any).name))
+  ) {
     return getVarName(node.parent, [(node as any).name.text, ...parts]);
   }
 

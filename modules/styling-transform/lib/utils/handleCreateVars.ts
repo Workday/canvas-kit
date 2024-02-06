@@ -24,7 +24,8 @@ export const handleCreateVars: NodeTransformer = (node, {prefix, variables}) => 
       variables[`${id}-${makeEmotionSafe(v)}`] = `--${prefix}-${id}-${makeEmotionSafe(v)}`;
     });
 
-    return ts.factory.createCallExpression(
+    return ts.factory.updateCallExpression(
+      node,
       node.expression,
       [],
       [
