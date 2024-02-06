@@ -20,10 +20,10 @@ any questions.
 - [Component Updates](#component-updates)
   - [Component Style Updates](#component-style-updates)
   - [Card](#card)
+  - [Checkbox](#checkbox)
   - [Count Badge](#count-badge)
   - [Text](#text)
   - [Form Field Preview](#form-field-preview)
-  - [Checkbox](#checkbox)
 
 ## Codemod
 
@@ -346,6 +346,14 @@ See below:
 `Card` no longer extends the `Box` component, however, it still supports Emotion `styled` and style
 props.
 
+### Checkbox
+
+**PR:** [#2542](https://github.com/Workday/canvas-kit/pull/2542)
+
+`Checkbox` now uses Canvas Tokens and our new styling utilities. The component now supports the `cs`
+prop, but otherwise the API has not changed. It should behave identically as it did in previous
+versions.
+
 ### Count Badge
 
 **PR:** [#2442](https://github.com/Workday/canvas-kit/pull/2442)
@@ -408,11 +416,3 @@ import {TextInput} from '@workday/canvas-kit-react/text-input';
 ```
 
 🤖 The codemod will handle the change of `hasError` to `error` for you automatically.
-
-### Checkbox
-
-**PR:** [#2542](https://github.com/Workday/canvas-kit/pull/2542)
-
-`Checkbox` now uses Canvas Tokens and our new styling utilities. The component now supports the `cs`
-prop, but otherwise the API has not changed. It should behave identically as it did in previous
-versions.
