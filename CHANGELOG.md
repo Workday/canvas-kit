@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.7](https://github.com/Workday/canvas-kit/releases/tag/v10.3.7) (2024-02-07)
+
+### Documentation
+
+- docs: Add interactive table examples to storybook ([#2457](https://github.com/Workday/canvas-kit/pull/2457)) ([@williamjstanton](https://github.com/williamjstanton), [@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v10.3.6](https://github.com/Workday/canvas-kit/releases/tag/v10.3.6) (2024-02-07)
 
 ### Components
