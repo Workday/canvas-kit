@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.37](https://github.com/Workday/canvas-kit/releases/tag/v9.1.37) (2024-02-07)
+
+### Components
+
+- fix: Update `aria-activedescendant` on ComboboxInput ([#2554](https://github.com/Workday/canvas-kit/pull/2554)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
+## [v9.1.36](https://github.com/Workday/canvas-kit/releases/tag/v9.1.36) (2024-02-07)
+
+### Components
+
+- fix(preview): Changed table justifyContent to start ([#2557](https://github.com/Workday/canvas-kit/pull/2557)) ([@vibdev](https://github.com/vibdev))
 ## [v10.3.5](https://github.com/Workday/canvas-kit/releases/tag/v10.3.5) (2024-02-07)
 
 ### Components
@@ -47,6 +59,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
   Prevents popup or dialog from closing when a combobox menu item is selected.
 
 
+## [v9.1.35](https://github.com/Workday/canvas-kit/releases/tag/v9.1.35) (2024-01-23)
 ## [v9.1.35](https://github.com/Workday/canvas-kit/releases/tag/v9.1.35) (2024-01-23)
 
 ### Components
