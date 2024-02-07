@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-styling",
-  "version": "10.3.4",
+  "version": "10.3.5",
   "description": "The custom CSS in JS solution that takes JS styles and turns them into static CSS",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -54,7 +54,7 @@
     "@emotion/serialize": "^1.0.2",
     "@emotion/styled": "^11.6.0",
     "@emotion/utils": "^1.0.0",
-    "@workday/canvas-kit-react": "^10.3.4",
+    "@workday/canvas-kit-react": "^10.3.5",
     "@workday/canvas-tokens-web": "^1.0.0",
     "typescript": "4.2"
   }
