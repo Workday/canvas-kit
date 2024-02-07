@@ -2666,6 +2666,20 @@
         "__isArgsStory": false
       }
     },
+    "components-inputs-select--fetching-dynamic-items": {
+      "id": "components-inputs-select--fetching-dynamic-items",
+      "name": "Fetching Dynamic Items",
+      "title": "Components/Inputs/Select",
+      "importPath": "./modules/react/select/stories/Select.stories.mdx",
+      "kind": "Components/Inputs/Select",
+      "story": "Fetching Dynamic Items",
+      "parameters": {
+        "fileName": "./modules/react/select/stories/Select.stories.mdx",
+        "framework": "react",
+        "__id": "components-inputs-select--fetching-dynamic-items",
+        "__isArgsStory": false
+      }
+    },
     "components-inputs-select--grow": {
       "id": "components-inputs-select--grow",
       "name": "Grow",
@@ -2694,6 +2708,20 @@
         "__isArgsStory": false
       }
     },
+    "components-inputs-select--initial-selected-item": {
+      "id": "components-inputs-select--initial-selected-item",
+      "name": "Initial Selected Item",
+      "title": "Components/Inputs/Select",
+      "importPath": "./modules/react/select/stories/Select.stories.mdx",
+      "kind": "Components/Inputs/Select",
+      "story": "Initial Selected Item",
+      "parameters": {
+        "fileName": "./modules/react/select/stories/Select.stories.mdx",
+        "framework": "react",
+        "__id": "components-inputs-select--initial-selected-item",
+        "__isArgsStory": false
+      }
+    },
     "components-inputs-select--label-position": {
       "id": "components-inputs-select--label-position",
       "name": "Label Position",
@@ -2719,6 +2747,20 @@
         "fileName": "./modules/react/select/stories/Select.stories.mdx",
         "framework": "react",
         "__id": "components-inputs-select--menu-height",
+        "__isArgsStory": false
+      }
+    },
+    "components-inputs-select--placeholder": {
+      "id": "components-inputs-select--placeholder",
+      "name": "Placeholder",
+      "title": "Components/Inputs/Select",
+      "importPath": "./modules/react/select/stories/Select.stories.mdx",
+      "kind": "Components/Inputs/Select",
+      "story": "Placeholder",
+      "parameters": {
+        "fileName": "./modules/react/select/stories/Select.stories.mdx",
+        "framework": "react",
+        "__id": "components-inputs-select--placeholder",
         "__isArgsStory": false
       }
     },
