@@ -83,7 +83,7 @@ const FormFieldFieldsetContainer = styled('fieldset')<
 }));
 
 const FormFieldContainer = styled('div')<FormFieldLabelPositionBehavior & FormFieldProps>(
-  ({labelPosition, useFieldset}) => {
+  ({labelPosition, useFieldset, grow}) => {
     if (useFieldset) {
       return {
         display: 'flex',
@@ -100,6 +100,7 @@ const FormFieldContainer = styled('div')<FormFieldLabelPositionBehavior & FormFi
     return {
       display: 'block',
       marginBottom: space.m,
+      width: grow ? '100%' : 'inherit',
     };
   }
 );
@@ -231,7 +232,12 @@ export class FormField extends React.Component<React.PropsWithChildren<FormField
       );
     } else {
       return (
-        <FormFieldContainer useFieldset={useFieldset} labelPosition={labelPosition} {...elemProps}>
+        <FormFieldContainer
+          useFieldset={useFieldset}
+          labelPosition={labelPosition}
+          grow={grow}
+          {...elemProps}
+        >
           {field}
         </FormFieldContainer>
       );

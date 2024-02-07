@@ -22,7 +22,7 @@ const routes = {
   '/components/inputs/color-input/': 'components-inputs-color-picker-color-input--basic',
   '/components/inputs/form-field/': 'components-inputs-form-field--basic',
   '/components/inputs/radio/': 'components-inputs-radio--basic',
-  '/components/inputs/select/': 'preview-select-top-label--default',
+  '/components/inputs/select/': 'components-inputs-select--basic',
   '/components/inputs/switch/': 'components-inputs-switch--basic',
   '/components/inputs/text-area/': 'components-inputs-textarea--basic',
   '/components/inputs/text-input/': 'components-inputs-text-input--basic',
@@ -68,6 +68,7 @@ const routes = {
   '/whats-new/upgrade-guides/canvas-kit-v7-upgrade-guide/': 'guides-upgrade-guides-v7-0--page',
   '/whats-new/upgrade-guides/canvas-kit-v8-upgrade-guide/': 'guides-upgrade-guides-v8-0--page',
   '/whats-new/upgrade-guides/canvas-v9-upgrade-guide/': 'guides-upgrade-guides-v9-0--page',
+  '/whats-new/upgrade-guides/canvas-v10-upgrade-guide/': 'guides-upgrade-guides-v10-0--page',
 };
 
 module.exports = routes;

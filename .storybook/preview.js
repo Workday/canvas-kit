@@ -5,6 +5,9 @@ import routes from './routes';
 import {CanvasProviderDecorator} from '../utils/storybook';
 import theme from './theme';
 import {defaultCanvasTheme} from '@workday/canvas-kit-react/common';
+import '@workday/canvas-tokens-web/css/base/_variables.css';
+import '@workday/canvas-tokens-web/css/brand/_variables.css';
+import '@workday/canvas-tokens-web/css/system/_variables.css';
 
 // set routes on window for testing the validity of the routes
 window.__routes = routes;
@@ -14,27 +17,37 @@ const prefix = (phrase, prefix) => (/** @type {string} */ value) => {
   const index = value.indexOf(phrase);
   return index > -1 ? value.substr(0, index) + prefix + value.substr(index) : value;
 };
-const pipe = (...fns) => value => fns.reduce((result, fn) => fn(result), value);
+const pipe =
+  (...fns) =>
+  value =>
+    fns.reduce((result, fn) => fn(result), value);
 function storySort(a, b) {
   const prefixFn = pipe(
     prefix('welcome-', '0'),
     prefix('guides-', '1'),
     prefix('guides-getting-started', '1'),
-    prefix('features-', '2'),
-    prefix('tokens-', '3'),
+    prefix('styling', '2'),
+    prefix('styling-why-canvas-styling', '2'),
+    prefix('features-', '3'),
+    prefix('tokens-', '4'),
     prefix('overview', 'a'),
-    prefix('components-', '4'),
-    prefix('hooks-and-utilities-', '5'),
-    prefix('preview-', '6'),
-    prefix('labs-', '7'),
-    prefix('assets-', '8'),
+    prefix('components-', '5'),
+    prefix('hooks-and-utilities-', '6'),
+    prefix('preview-', '7'),
+    prefix('labs-', '8'),
+    prefix('assets-', '9'),
     prefix('overview', 'a'),
     prefix('css-', 'zzzz'),
     prefix('css-overview-page', 'zzza'),
+    prefix('getting-started', 'aaabc'),
+    prefix('stencils', 'aabcd'),
+    prefix('functions', 'abcde'),
     prefix('basic', 'aa'),
     prefix('default', 'ab'),
     prefix('testing', 'zzz'),
-    prefix('examples', 'zz')
+    prefix('examples', 'zz'),
+    // Make sure upgrade guides follow chronological order by replacing `v9.0` with `v09.0`
+    value => value.replace(/v([1-9]\-0)/, '0$1')
   );
 
   const left = prefixFn(a[0]);

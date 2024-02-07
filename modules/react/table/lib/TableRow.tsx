@@ -1,10 +1,13 @@
 import * as React from 'react';
 import styled, {CSSObject} from '@emotion/styled';
 import {rgba} from 'polished';
-import {colors, space, spaceNumbers, statusColors} from '@workday/canvas-kit-react/tokens';
+import {colors, space, statusColors} from '@workday/canvas-kit-react/tokens';
 import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
 import {borderColor, borderWidth, cellBorder} from './Table';
 
+/**
+ * @deprecated ⚠️ `Table` has been deprecated and will be removed in a future major version. Please use [`Table`](https://workday.github.io/canvas-kit/?path=/docs/preview-table--basic) in Preview instead.
+ */
 export enum TableRowState {
   Error,
   Alert,
@@ -14,6 +17,9 @@ export enum TableRowState {
   Selected,
 }
 
+/**
+ * @deprecated ⚠️ `Table` has been deprecated and will be removed in a future major version. Please use [`Table`](https://workday.github.io/canvas-kit/?path=/docs/preview-table--basic) in Preview instead.
+ */
 export interface TableRowProps extends React.HTMLAttributes<HTMLTableRowElement> {
   /**
    * The state of the TableRow. Accepts `Error`, `Alert`, `InputError`, `InputAlert`, `Hover`, or `Selected`.
@@ -100,7 +106,7 @@ const StyledTableRow = styled('tr')<TableRowProps>(
       fontSize: 13,
       borderRight: cellBorder,
       borderBottom: cellBorder,
-      height: spaceNumbers.xl + spaceNumbers.xxs,
+      height: `calc(${space.xl} + ${space.xxs})`,
       boxSizing: 'border-box',
       transition: 'background-color 0.2s',
     },
@@ -192,6 +198,9 @@ const StyledTableRow = styled('tr')<TableRowProps>(
   }
 );
 
+/**
+ * @deprecated ⚠️ `Table` has been deprecated and will be removed in a future major version. Please use [`Table`](https://workday.github.io/canvas-kit/?path=/docs/preview-table--basic) in Preview instead.
+ */
 export const TableRow = createComponent('tr')({
   displayName: 'TableRow',
   Component: (

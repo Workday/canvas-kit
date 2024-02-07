@@ -5,7 +5,7 @@ import {createElemPropsHook, createSubcomponent} from '@workday/canvas-kit-react
 import {useMenuModel} from '@workday/canvas-kit-react/menu';
 import {ListBox, ListBoxProps} from '@workday/canvas-kit-react/collection';
 
-import {useComboboxModel} from './useComboboxModel';
+import {useComboboxModel} from './hooks/useComboboxModel';
 
 export interface ComboboxMenuListProps<T = any> extends ListBoxProps<T> {}
 
