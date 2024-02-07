@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.6](https://github.com/Workday/canvas-kit/releases/tag/v10.3.6) (2024-02-07)
+
+### Components
+
+- fix(preview): Changed table justifyContent to start ([#2557](https://github.com/Workday/canvas-kit/pull/2557)) ([@vibdev](https://github.com/vibdev))
+- fix: Update `aria-activedescendant` on ComboboxInput ([#2554](https://github.com/Workday/canvas-kit/pull/2554)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+### Infrastructure
+
+- ci: Fix forward merging with CSS packages deleted ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v9.1.37](https://github.com/Workday/canvas-kit/releases/tag/v9.1.37) (2024-02-07)
 
 ### Components
