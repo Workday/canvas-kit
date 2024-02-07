@@ -6181,6 +6181,48 @@
         "__isArgsStory": false
       }
     },
+    "examples-tables-advanced--expandable-rows": {
+      "id": "examples-tables-advanced--expandable-rows",
+      "name": "Expandable Rows",
+      "title": "Examples/Tables/Advanced",
+      "importPath": "./modules/preview-react/_examples/stories/TablesAdvanced.stories.mdx",
+      "kind": "Examples/Tables/Advanced",
+      "story": "Expandable Rows",
+      "parameters": {
+        "fileName": "./modules/preview-react/_examples/stories/TablesAdvanced.stories.mdx",
+        "framework": "react",
+        "__id": "examples-tables-advanced--expandable-rows",
+        "__isArgsStory": false
+      }
+    },
+    "examples-tables-advanced--selectable-rows": {
+      "id": "examples-tables-advanced--selectable-rows",
+      "name": "Selectable Rows",
+      "title": "Examples/Tables/Advanced",
+      "importPath": "./modules/preview-react/_examples/stories/TablesAdvanced.stories.mdx",
+      "kind": "Examples/Tables/Advanced",
+      "story": "Selectable Rows",
+      "parameters": {
+        "fileName": "./modules/preview-react/_examples/stories/TablesAdvanced.stories.mdx",
+        "framework": "react",
+        "__id": "examples-tables-advanced--selectable-rows",
+        "__isArgsStory": false
+      }
+    },
+    "examples-tables-advanced--sortable-column-headers": {
+      "id": "examples-tables-advanced--sortable-column-headers",
+      "name": "Sortable Column Headers",
+      "title": "Examples/Tables/Advanced",
+      "importPath": "./modules/preview-react/_examples/stories/TablesAdvanced.stories.mdx",
+      "kind": "Examples/Tables/Advanced",
+      "story": "Sortable Column Headers",
+      "parameters": {
+        "fileName": "./modules/preview-react/_examples/stories/TablesAdvanced.stories.mdx",
+        "framework": "react",
+        "__id": "examples-tables-advanced--sortable-column-headers",
+        "__isArgsStory": false
+      }
+    },
     "testing-preview-color-picker--color-picker-states": {
       "id": "testing-preview-color-picker--color-picker-states",
       "name": "Color Picker States",
