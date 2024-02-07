@@ -128,26 +128,38 @@ async function main() {
     const conflicts = lines
       .filter(line => line.startsWith('CONFLICT'))
       .map(line => {
-        const match = line.match(/Merge conflict in (.+)/);
-        return (match && match[1]) || '';
+        if (/\(content\)/.test(line)) {
+          const match = line.match(/Merge conflict in (.+)/);
+          return {type: 'content', file: (match && match[1]) || ''};
+        }
+        if (/\(modify\/delete\)/.test(line)) {
+          const match = line.match(/: (.+) deleted in/);
+          return {type: 'modify/delete', file: (match && match[1]) || ''};
+        }
+        return {type: 'unknown', file: ''};
       });
 
     for (const conflict of conflicts) {
-      console.log(`Attempting to resolve conflict in ${conflict}`);
+      console.log(`Attempting to resolve conflict in ${conflict.file}`);
 
-      if (conflict === 'lerna.json' || conflict.includes('package.json')) {
-        // resolve the conflicts by taking incoming file
-        await spawn(`git checkout --theirs -- "${conflict}"`);
-        await spawn(`git add ${conflict}`);
+      if (conflict.file === 'lerna.json' || conflict.file.includes('package.json')) {
+        if (conflict.type === 'content') {
+          // resolve the conflicts by taking incoming file
+          await spawn(`git checkout --theirs -- "${conflict.file}"`);
+          await spawn(`git add ${conflict.file}`);
+        } else if (conflict.type === 'modify/delete') {
+          await spawn(`git rm ${conflict.file}`);
+        }
 
-        console.log(`Resolved conflicts in ${conflict}`);
-      } else if (conflict === 'CHANGELOG.md') {
+        console.log(`Resolved conflicts in ${conflict.file}`);
+      } else if (conflict.file === 'CHANGELOG.md') {
         await updateChangelog();
+        await spawn(`git add ${conflict.file}`);
 
-        console.log(`Resolved conflicts in ${conflict}`);
-      } else if (conflict === 'yarn.lock') {
+        console.log(`Resolved conflicts in ${conflict.file}`);
+      } else if (conflict.file === 'yarn.lock') {
         // yarn resolves yarn.lock conflicts
-        console.log(`Conflicts in ${conflict} will be resolved later.`);
+        console.log(`Conflicts in ${conflict.file} will be resolved later.`);
       } else {
         console.log('Merge cannot be resolved automatically');
         hasUnresolvedConflicts = true;
