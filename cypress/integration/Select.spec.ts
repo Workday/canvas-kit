@@ -14,6 +14,10 @@ describe('Select', () => {
         cy.checkA11y();
       });
 
+      it('should not have an aria-activedescendant attribute', () => {
+        cy.findByRole('combobox').should('not.have.attr', 'aria-activedescendant');
+      });
+
       context('when the select button is clicked', () => {
         beforeEach(() => {
           cy.findByLabelText('Contact').click();
@@ -214,6 +218,10 @@ context(`given the "Basic" story is rendered`, () => {
         () => {
           beforeEach(() => {
             cy.focused().realType('{esc}');
+          });
+
+          it('should not have an aria-activedescendant attribute', () => {
+            cy.findByRole('combobox').should('not.have.attr', 'aria-activedescendant');
           });
 
           context('when the menu is re-opened AFTER it has fully closed', () => {
