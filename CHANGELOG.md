@@ -15,6 +15,17 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Components
 
 - fix(preview): Changed table justifyContent to start ([#2557](https://github.com/Workday/canvas-kit/pull/2557)) ([@vibdev](https://github.com/vibdev))
+## [v10.3.5](https://github.com/Workday/canvas-kit/releases/tag/v10.3.5) (2024-02-07)
+
+### Components
+
+- fix: Allow fetching of dynamic items on select ([#2535](https://github.com/Workday/canvas-kit/pull/2535)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@alanbsmith](https://github.com/alanbsmith), [@josh-bagwell](https://github.com/josh-bagwell))
+  - Allow select to render while fetching items from a server
+  - Add initial selected item example with complex object
+  - Add placeholder example with select
+  - Select will now show your placeholder on initial load.
+  - When using select with complex items, `onChange` will return the `id` of the item, not the text.
+  - `data-id` is no longer required when your object has an `id` property.
 
 
 ## [v10.3.4](https://github.com/Workday/canvas-kit/releases/tag/v10.3.4) (2024-02-07)

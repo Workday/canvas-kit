@@ -4,14 +4,14 @@ import {Select} from '@workday/canvas-kit-react/select';
 import {Flex} from '@workday/canvas-kit-react/layout';
 
 const options = [
-  {id: 'email', text: 'E-mail'},
-  {id: 'phone', text: 'Phone'},
-  {id: 'fax', text: 'Fax'},
-  {id: 'mail', text: 'Mail'},
-  {id: 'mobile', text: 'Mobile Phone'},
+  {serverId: 'email', label: 'E-mail'},
+  {serverId: 'phone', label: 'Phone'},
+  {serverId: 'fax', label: 'Fax'},
+  {serverId: 'mail', label: 'Mail'},
+  {serverId: 'mobile', label: 'Mobile Phone'},
   {
-    id: 'oasis',
-    text: 'The Ontologically Anthropocentric Sensory Immersive Simulation',
+    serverId: 'oasis',
+    label: 'The Ontologically Anthropocentric Sensory Immersive Simulation',
   },
 ];
 
@@ -20,23 +20,18 @@ export const Complex = () => {
   const [id, setId] = React.useState('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
-  };
-
-  const handleSelect = ({id}: {id: string}) => {
-    setId(id);
+    setId(event.target.value);
+    setValue(options.find(item => item.serverId === event.target.value).label);
   };
 
   return (
     <Flex flexDirection="column">
-      <Select items={options} onSelect={handleSelect}>
+      <Select items={options} getId={item => item.serverId} getTextValue={item => item.label}>
         <FormField label="Contact">
           <Select.Input onChange={e => handleChange(e)} />
           <Select.Popper>
             <Select.Card>
-              <Select.List>
-                {item => <Select.Item data-id={item.id}>{item.text}</Select.Item>}
-              </Select.List>
+              <Select.List>{item => <Select.Item>{item.label}</Select.Item>}</Select.List>
             </Select.Card>
           </Select.Popper>
         </FormField>

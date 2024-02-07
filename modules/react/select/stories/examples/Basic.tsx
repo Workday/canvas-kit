@@ -23,7 +23,7 @@ export const Basic = () => {
     <Flex flexDirection="column">
       <Select items={options}>
         <FormField label="Contact">
-          <Select.Input onChange={e => handleChange(e)} />
+          <Select.Input onChange={handleChange} />
           <Select.Popper>
             <Select.Card>
               <Select.List>
