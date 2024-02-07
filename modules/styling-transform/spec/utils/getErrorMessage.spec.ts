@@ -4,6 +4,7 @@ import {findNodes} from '../findNodes';
 import {createProgramFromSource} from '../createProgramFromSource';
 
 import {getErrorMessage} from '../../lib/utils/getErrorMessage';
+import {withDefaultContext} from '../../lib/styleTransform';
 
 describe('getErrorMessage', () => {
   it('should return a message with fileName, line, character, and underline the correct characters', () => {
@@ -16,10 +17,12 @@ describe('getErrorMessage', () => {
     const sourceFile = program.getSourceFile('test.ts');
     const node = findNodes(sourceFile, 'baz', ts.isIdentifier)[0];
 
-    expect(getErrorMessage(node)).toContain('File: test.ts:2:7');
-    expect(getErrorMessage(node)).toContain('const foo = {');
-    expect(getErrorMessage(node)).toContain('  bar: baz');
-    expect(getErrorMessage(node)).toContain('       ===');
-    expect(getErrorMessage(node)).toContain('};');
+    const ctx = withDefaultContext(program.getTypeChecker(), {});
+
+    expect(getErrorMessage(node, ctx)).toContain('File: test.ts:2:7');
+    expect(getErrorMessage(node, ctx)).toContain('const foo = {');
+    expect(getErrorMessage(node, ctx)).toContain('  bar: baz');
+    expect(getErrorMessage(node, ctx)).toContain('       ===');
+    expect(getErrorMessage(node, ctx)).toContain('};');
   });
 });

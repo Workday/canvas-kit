@@ -4,6 +4,7 @@ import {findNodes} from '../findNodes';
 import {createProgramFromSource} from '../createProgramFromSource';
 
 import {parseObjectToStaticValue} from '../../lib/utils/parseObjectToStaticValue';
+import {withDefaultContext} from '../../lib/styleTransform';
 
 describe('parseObjectToStaticValue', () => {
   it('should return the string value of a StringLiteral', () => {
@@ -16,14 +17,7 @@ describe('parseObjectToStaticValue', () => {
     const sourceFile = program.getSourceFile('test.ts');
     const node = findNodes(sourceFile, '', ts.isObjectLiteralExpression)[0];
 
-    expect(
-      parseObjectToStaticValue(node, {
-        checker: program.getTypeChecker(),
-        prefix: 'css',
-        variables: {},
-        keyframes: {},
-      })
-    ).toEqual({
+    expect(parseObjectToStaticValue(node, withDefaultContext(program.getTypeChecker()))).toEqual({
       bar: '12px',
     });
   });
@@ -40,14 +34,7 @@ describe('parseObjectToStaticValue', () => {
     const sourceFile = program.getSourceFile('test.ts');
     const node = findNodes(sourceFile, '', ts.isObjectLiteralExpression)[0];
 
-    expect(
-      parseObjectToStaticValue(node, {
-        checker: program.getTypeChecker(),
-        prefix: 'css',
-        variables: {},
-        keyframes: {},
-      })
-    ).toEqual({
+    expect(parseObjectToStaticValue(node, withDefaultContext(program.getTypeChecker()))).toEqual({
       '&:hover': {
         padding: '12px',
       },
@@ -68,17 +55,27 @@ describe('parseObjectToStaticValue', () => {
     const sourceFile = program.getSourceFile('test.ts');
     const node = findNodes(sourceFile, '', ts.isObjectLiteralExpression)[2];
 
-    expect(
-      parseObjectToStaticValue(node, {
-        checker: program.getTypeChecker(),
-        prefix: 'css',
-        variables: {},
-        keyframes: {},
-      })
-    ).toEqual({
+    expect(parseObjectToStaticValue(node, withDefaultContext(program.getTypeChecker()))).toEqual({
       '&:hover': {
         padding: '12px',
       },
+    });
+  });
+
+  it('should wrap SpreadAssignment in var() wrappers if necessary', () => {
+    const program = createProgramFromSource(`
+      const foo = {
+        color: '--var-color'
+      } as const
+
+      const bar = { ...foo }
+    `);
+
+    const sourceFile = program.getSourceFile('test.ts');
+    const node = findNodes(sourceFile, '', ts.isObjectLiteralExpression)[1];
+
+    expect(parseObjectToStaticValue(node, withDefaultContext(program.getTypeChecker()))).toEqual({
+      color: 'var(--var-color)',
     });
   });
 
@@ -96,14 +93,7 @@ describe('parseObjectToStaticValue', () => {
     const sourceFile = program.getSourceFile('test.ts');
     const node = findNodes(sourceFile, '', ts.isObjectLiteralExpression)[2];
 
-    expect(
-      parseObjectToStaticValue(node, {
-        checker: program.getTypeChecker(),
-        prefix: 'css',
-        variables: {},
-        keyframes: {},
-      })
-    ).toEqual({
+    expect(parseObjectToStaticValue(node, withDefaultContext(program.getTypeChecker()))).toEqual({
       '&:hover': {
         padding: '12px',
       },
@@ -126,14 +116,7 @@ describe('parseObjectToStaticValue', () => {
     const sourceFile = program.getSourceFile('test.ts');
     const node = findNodes(sourceFile, '', ts.isObjectLiteralExpression)[1];
 
-    expect(
-      parseObjectToStaticValue(node, {
-        checker: program.getTypeChecker(),
-        prefix: 'css',
-        variables: {},
-        keyframes: {},
-      })
-    ).toEqual({
+    expect(parseObjectToStaticValue(node, withDefaultContext(program.getTypeChecker()))).toEqual({
       fontSize: '12px',
     });
   });
@@ -149,14 +132,14 @@ describe('parseObjectToStaticValue', () => {
     const node = findNodes(sourceFile, '', ts.isObjectLiteralExpression)[0];
 
     expect(
-      parseObjectToStaticValue(node, {
-        checker: program.getTypeChecker(),
-        prefix: 'css',
-        variables: {
-          '--fallback': '12px',
-        },
-        keyframes: {},
-      })
+      parseObjectToStaticValue(
+        node,
+        withDefaultContext(program.getTypeChecker(), {
+          variables: {
+            '--fallback': '12px',
+          },
+        })
+      )
     ).toEqual({
       padding: 'var(--fallback, 12px)',
     });
@@ -173,14 +156,14 @@ describe('parseObjectToStaticValue', () => {
     const node = findNodes(sourceFile, '', ts.isObjectLiteralExpression)[0];
 
     expect(
-      parseObjectToStaticValue(node, {
-        checker: program.getTypeChecker(),
-        prefix: 'css',
-        variables: {
-          '--fallback': '12px',
-        },
-        keyframes: {},
-      })
+      parseObjectToStaticValue(
+        node,
+        withDefaultContext(program.getTypeChecker(), {
+          variables: {
+            '--fallback': '12px',
+          },
+        })
+      )
     ).toEqual({
       padding: 'var(--foobar, var(--fallback, 12px))',
     });

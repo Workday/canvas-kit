@@ -22,13 +22,7 @@
     "skipLibCheck": true,
     "plugins": [
       {
-        "transform": "./modules/styling-transform/lib/styleTransform.ts",
-        "prefix": "css",
-        "fallbackFiles": [
-          "@workday/canvas-tokens-web/css/base/_variables.css",
-          "@workday/canvas-tokens-web/css/brand/_variables.css",
-          "@workday/canvas-tokens-web/css/system/_variables.css"
-        ]
+        "transform": "./modules/styling-transform/lib/styleTransform.ts"
       }
     ]
   },

@@ -4,17 +4,17 @@ import {slugify} from '@workday/canvas-kit-styling';
 
 import {getVarName} from './getVarName';
 import {makeEmotionSafe} from './makeEmotionSafe';
-import {NestedStyleObject, parseObjectToStaticValue} from './parseObjectToStaticValue';
-import {createStyleObjectNode} from './createStyleObjectNode';
+import {parseObjectToStaticValue} from './parseObjectToStaticValue';
+import {compileCSS, createStyleObjectNode, serializeStyles} from './createStyleObjectNode';
 import {parseNodeToStaticValue} from './parseNodeToStaticValue';
-import {NodeTransformer, TransformerContext} from './types';
+import {NestedStyleObject, NodeTransformer, TransformerContext} from './types';
 import {isImportedFromStyling} from './isImportedFromStyling';
 
 /**
  * Handle all arguments of the CallExpression `createStencil()`
  */
 export const handleCreateStencil: NodeTransformer = (node, context) => {
-  const {checker, prefix, variables} = context;
+  const {checker, prefix, variables, getFileName} = context;
   /**
    * This will match whenever a `createStencil()` call expression is encountered. It will loop
    * over all the config to extract variables and styles.
@@ -26,6 +26,7 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
     node.expression.text === 'createStencil' &&
     isImportedFromStyling(node.expression, checker)
   ) {
+    const fileName = getFileName(node.expression.getSourceFile()?.fileName);
     const config = node.arguments[0];
 
     /**
@@ -49,7 +50,7 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
     const stencilVariables: Record<string, string> = {};
 
     // Stencil name is the variable name
-    const stencilName = slugify(getVarName(node)).replace('-stencil', '');
+    const stencilName = slugify(getVarName(node.expression)).replace('-stencil', '');
 
     if (ts.isObjectLiteralExpression(config)) {
       // get variables first
@@ -86,26 +87,24 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
         });
       }
 
-      config.properties.forEach((property, index, properties) => {
+      const configProperties = config.properties.map((property, index, properties) => {
         if (property.name && ts.isIdentifier(property.name)) {
           // base config object
           if (property.name.text === 'base') {
             const styleObj = parseStyleBlock(property, context);
 
             if (styleObj) {
-              // The `as any` are necessary because the properties are readonly, even though they
-              // can be changed in transformers.
-              const initializer = createStyleObjectNode({
-                ...stencilVariables,
-                ...styleObj,
-              });
-
-              // We cast as any because TypeScript says these are readonly, but we're in a transform
-              (initializer as any).parent = property;
-              (properties as any)[index] = ts.factory.createPropertyAssignment(
-                property.name,
-                initializer
+              const initializer = createStyleReplacementNode(
+                {
+                  ...stencilVariables,
+                  ...styleObj,
+                },
+                getClassName(property.name, context),
+                fileName,
+                context
               );
+
+              return updateStyleProperty(property, initializer);
             }
           }
 
@@ -115,82 +114,178 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
             ts.isPropertyAssignment(property) &&
             ts.isObjectLiteralExpression(property.initializer)
           ) {
-            property.initializer.properties.forEach(modifierProperty => {
-              if (
-                modifierProperty.name &&
-                ts.isIdentifier(modifierProperty.name) &&
-                ts.isPropertyAssignment(modifierProperty) &&
-                ts.isObjectLiteralExpression(modifierProperty.initializer)
-              ) {
-                modifierProperty.initializer.properties.forEach((modifier, index, modifiers) => {
-                  const styleObj = parseStyleBlock(modifier, context);
+            // modifier key
+            return ts.factory.updatePropertyAssignment(
+              property,
+              property.name,
+              ts.factory.updateObjectLiteralExpression(
+                property.initializer,
+                property.initializer.properties.map(modifierProperty => {
+                  if (
+                    modifierProperty.name &&
+                    ts.isIdentifier(modifierProperty.name) &&
+                    ts.isPropertyAssignment(modifierProperty) &&
+                    ts.isObjectLiteralExpression(modifierProperty.initializer)
+                  ) {
+                    // modifier value
+                    return ts.factory.updatePropertyAssignment(
+                      modifierProperty,
+                      property.name,
+                      ts.factory.updateObjectLiteralExpression(
+                        modifierProperty.initializer,
+                        modifierProperty.initializer.properties.map(modifier => {
+                          const styleObj = parseStyleBlock(modifier, context);
 
-                  if (styleObj && modifier.name) {
-                    // The `as any` are necessary because the properties are readonly, even though they
-                    // can be changed in transformers.
-                    const initializer = createStyleObjectNode(styleObj);
+                          if (styleObj && modifier.name && Object.keys(styleObj).length) {
+                            const initializer = createStyleReplacementNode(
+                              styleObj,
+                              getClassName(modifier.name, context),
+                              fileName,
+                              context
+                            );
+                            return updateStyleProperty(modifier, initializer);
+                          }
 
-                    // // We cast as any because TypeScript says these are readonly, but we're in a transform
-                    (initializer as any).parent = modifier;
-                    (modifiers as any)[index] = ts.factory.createPropertyAssignment(
-                      modifier.name,
-                      initializer
+                          return modifier;
+                        })
+                      )
                     );
                   }
-                });
-              }
-            });
+
+                  return property;
+                })
+              )
+            );
           }
 
           // compound config array
+          /**
+           * Compound config array. It looks like:
+           *
+           * ```ts
+           * compound: [
+           *   {
+           *     modifiers: { size: 'large', iconPosition: 'start' },
+           *     styles: { padding: 20 }
+           *   }
+           * ]
+           * ```
+           */
           if (
             property.name.text === 'compound' &&
             ts.isPropertyAssignment(property) &&
             ts.isArrayLiteralExpression(property.initializer)
           ) {
-            property.initializer.elements.forEach(element => {
-              if (ts.isObjectLiteralExpression(element)) {
-                element.properties.forEach((compoundProperty, index, compoundProperties) => {
-                  // styles key
-                  if (
-                    compoundProperty.name &&
-                    ts.isIdentifier(compoundProperty.name) &&
-                    compoundProperty.name.text === 'styles'
-                  ) {
-                    const styleObj = parseStyleBlock(compoundProperty, context);
+            return ts.factory.updatePropertyAssignment(
+              property,
+              property.name,
+              ts.factory.updateArrayLiteralExpression(
+                property.initializer,
+                property.initializer.elements.map(element => {
+                  if (ts.isObjectLiteralExpression(element)) {
+                    const selectors: string[] = [];
 
-                    if (styleObj) {
-                      // The `as any` are necessary because the properties are readonly, even though they
-                      // can be changed in transformers.
-                      const initializer = createStyleObjectNode(styleObj);
+                    return ts.factory.updateObjectLiteralExpression(
+                      element,
+                      element.properties.map((compoundProperty, index, compoundProperties) => {
+                        /**
+                         * If the property is `modifiers`, we want to extract selectors from it. For
+                         * example,
+                         *
+                         * ```ts
+                         * const button = createStencil({
+                         *   // other config
+                         *   compound: {
+                         *     modifiers: { size: 'large', inverse: true },
+                         *     styles: {}
+                         *   }
+                         * })
+                         * ```
+                         *
+                         * After this, `selectors` should contain ['.button--size-large',
+                         * '.button--inverse']
+                         */
+                        if (
+                          compoundProperty.name &&
+                          ts.isIdentifier(compoundProperty.name) &&
+                          compoundProperty.name.text === 'modifiers' &&
+                          ts.isPropertyAssignment(compoundProperty) &&
+                          ts.isObjectLiteralExpression(compoundProperty.initializer)
+                        ) {
+                          compoundProperty.initializer.properties.forEach(modifier => {
+                            if (ts.isPropertyAssignment(modifier)) {
+                              let className = `.${getClassName(modifier.initializer, context)}`;
+                              if (ts.isStringLiteral(modifier.initializer)) {
+                                className += `-${modifier.initializer.text}`;
+                              }
+                              selectors.push(className);
+                            }
+                          });
+                          return compoundProperty;
+                        }
 
-                      // We cast as any because TypeScript says these are readonly, but we're in a transform
-                      (initializer as any).parent = compoundProperty;
-                      (compoundProperties as any)[index] = ts.factory.createPropertyAssignment(
-                        compoundProperty.name,
-                        initializer
-                      );
-                    }
+                        // styles key
+                        if (
+                          compoundProperty.name &&
+                          ts.isIdentifier(compoundProperty.name) &&
+                          compoundProperty.name.text === 'styles'
+                        ) {
+                          const styleObj = parseStyleBlock(compoundProperty, context);
+
+                          if (styleObj) {
+                            const serialized = serializeStyles(styleObj);
+                            // We need to inject compound style selectors into a file. We'll compound the
+                            // selectors with multiple class names. This will increase specificity of compound
+                            // selectors. This will be harder to override and we don't increase specificity in
+                            // the runtime implementation, but runtime creates an extra CSS class name that
+                            // isn't known to anyone. It seems unreasonable to expect CSS users to remember to
+                            // add compound modifier class names. We'll make it so it is easier to author
+                            // components in CSS and let them sort the specificity issues.
+
+                            if (serialized) {
+                              const {styles} = context;
+
+                              const styleOutput = compileCSS(
+                                `${selectors.join('')}{${serialized.styles}}`
+                              );
+                              styles[fileName] = styles[fileName] || [];
+                              styles[fileName].push(styleOutput);
+                            }
+                            const initializer = createStyleObjectNode(
+                              serialized.styles,
+                              serialized.name
+                            );
+
+                            return updateStyleProperty(compoundProperty, initializer);
+                          }
+                        }
+
+                        return compoundProperty;
+                      })
+                    );
                   }
-                });
-              }
-            });
+
+                  return element;
+                })
+              )
+            );
           }
         }
+
+        return property;
       });
+
+      // remove all our temp variables
+      // eslint-disable-next-line guard-for-in
+      for (const key in tempVariables) {
+        delete variables[key];
+      }
+
+      return ts.factory.updateCallExpression(node, node.expression, undefined, [
+        ts.factory.updateObjectLiteralExpression(config, configProperties),
+        ts.factory.createStringLiteral(stencilName),
+      ]);
     }
-
-    // remove all our temp variables
-    // eslint-disable-next-line guard-for-in
-    for (const key in tempVariables) {
-      delete variables[key];
-    }
-
-    // arguments are readonly, but we're in a transform
-    (node.arguments[1] as any) = ts.factory.createStringLiteral(stencilName);
-    (node.arguments[1] as any).parent = node;
-
-    return node;
   }
 
   return;
@@ -252,4 +347,46 @@ function getReturnStatement(node: ts.FunctionLikeDeclaration): ts.Node | undefin
 
 function isFunctionLikeDeclaration(node: ts.Node): node is ts.FunctionLikeDeclaration {
   return (node as Object).hasOwnProperty('body');
+}
+
+function createStyleReplacementNode(
+  styleObj: NestedStyleObject,
+  className: string,
+  fileName: string,
+  {styles}: TransformerContext
+) {
+  const serialized = serializeStyles(styleObj);
+  const styleOutput = compileCSS(`.${className}{${serialized.styles}}`);
+  styles[fileName] = styles[fileName] || [];
+  styles[fileName].push(styleOutput);
+
+  return createStyleObjectNode(serialized.styles, serialized.name);
+}
+
+function getClassName(node: ts.Node, {prefix}: TransformerContext): string {
+  return (
+    `${prefix}-` +
+    slugify(getVarName(node))
+      .replace('-stencil', '')
+      .replace('-base', '')
+      .replace('-modifiers', '-')
+      .replace('-true', '')
+      .replace('-compound', '')
+  );
+}
+
+/**
+ * If the property is a `PropertyAssignment`, use the TypeScript factory updater to maximize
+ * sourcemap use. Otherwise, return a new property assignment. For example, a Stencil could be using
+ * a `MethodDeclaration` which means we return a different node type: `base({color}) {}`
+ */
+function updateStyleProperty(
+  property: ts.ObjectLiteralElementLike,
+  initializer: ts.Expression
+): ts.PropertyAssignment {
+  if (ts.isPropertyAssignment(property)) {
+    return ts.factory.updatePropertyAssignment(property, property.name, initializer);
+  }
+
+  return ts.factory.createPropertyAssignment(property.name!, initializer);
 }

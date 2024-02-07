@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.5](https://github.com/Workday/canvas-kit/releases/tag/v10.3.5) (2024-02-07)
+
+### Components
+
+- fix: Allow fetching of dynamic items on select ([#2535](https://github.com/Workday/canvas-kit/pull/2535)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@alanbsmith](https://github.com/alanbsmith), [@josh-bagwell](https://github.com/josh-bagwell))
+  - Allow select to render while fetching items from a server
+  - Add initial selected item example with complex object
+  - Add placeholder example with select
+  - Select will now show your placeholder on initial load.
+  - When using select with complex items, `onChange` will return the `id` of the item, not the text.
+  - `data-id` is no longer required when your object has an `id` property.
+
+
+## [v10.3.4](https://github.com/Workday/canvas-kit/releases/tag/v10.3.4) (2024-02-07)
+
+### Documentation
+
+- docs: Update common docs ([#2552](https://github.com/Workday/canvas-kit/pull/2552)) ([@alanbsmith](https://github.com/alanbsmith))
+  Optional release note message. Changelog and release summaries will contain a pull request title. This section will add additional notes under that title. This section is not a summary, but something extra to point out in release notes. An example might be calling out breaking changes in a labs component or minor visual changes that need visual regression updates. Remove this section if no additional release notes are required.
+
+
+## [v10.3.3](https://github.com/Workday/canvas-kit/releases/tag/v10.3.3) (2024-02-07)
+
+### Components
+
+- fix: Only run focusRing transform inside static styles ([#2549](https://github.com/Workday/canvas-kit/pull/2549)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v10.3.2](https://github.com/Workday/canvas-kit/releases/tag/v10.3.2) (2024-02-05)
 
 ### Documentation

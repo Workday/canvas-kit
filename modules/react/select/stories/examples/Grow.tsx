@@ -24,11 +24,7 @@ export const Grow = () => {
           <Select.Input />
           <Select.Popper>
             <Select.Card>
-              {model.state.items.length > 0 && (
-                <Select.List scrollMargin="10px">
-                  {item => <Select.Item>{item}</Select.Item>}
-                </Select.List>
-              )}
+              <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
             </Select.Card>
           </Select.Popper>
         </FormField>
