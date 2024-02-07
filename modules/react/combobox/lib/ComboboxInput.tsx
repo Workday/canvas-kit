@@ -83,6 +83,7 @@ export const useComboboxInput = composeHooks(
       'aria-expanded': model.state.visibility === 'visible',
       'aria-autocomplete': 'list',
       'aria-controls': `${model.state.id}-list`,
+      'aria-activedescendant': model.state.visibility === 'hidden' ? null : undefined, // Removes activedescendant on menu close
       id: model.state.id,
       ref: elementRef,
     } as const;
