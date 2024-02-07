@@ -25,6 +25,5 @@ export const useSelectModel = createModelHook({
   },
   contextOverride: useComboboxModel.Context,
 })(config => {
-  const model = useComboboxModel(config);
-  return model;
+  return useComboboxModel(config);
 });
