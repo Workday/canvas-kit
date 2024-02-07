@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.3](https://github.com/Workday/canvas-kit/releases/tag/v10.3.3) (2024-02-07)
+
+### Components
+
+- fix: Only run focusRing transform inside static styles ([#2549](https://github.com/Workday/canvas-kit/pull/2549)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v10.3.2](https://github.com/Workday/canvas-kit/releases/tag/v10.3.2) (2024-02-05)
 
 ### Documentation
