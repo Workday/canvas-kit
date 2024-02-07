@@ -2,9 +2,7 @@ import ts from 'typescript';
 import {getFallbackVariable} from './getFallbackVariable';
 
 import {parseNodeToStaticValue} from './parseNodeToStaticValue';
-import {TransformerContext} from './types';
-
-export type NestedStyleObject = {[key: string]: string | NestedStyleObject};
+import {NestedStyleObject, TransformerContext} from './types';
 
 export function parseObjectToStaticValue(
   node: ts.Node,
@@ -21,8 +19,38 @@ export function parseObjectToStaticValue(
   return styleObj;
 }
 
+function handleObjectTransforms(
+  node: ts.Node,
+  context: TransformerContext
+): NestedStyleObject | undefined {
+  return context.objectTransforms.reduce((result, transformer) => {
+    return result || transformer(node, context) || undefined;
+  }, undefined as undefined | NestedStyleObject);
+}
+
 function parsePropertyToStaticValue(node: ts.Node, context: TransformerContext): NestedStyleObject {
   const styleObj: NestedStyleObject = {};
+
+  // check to see if there's an object transform for this node
+  const obj = handleObjectTransforms(node, context);
+  if (obj) {
+    return obj;
+  }
+
+  // If there's a spread, we're expecting an object to be returned. We'll see if there's an object transform for this node
+  if (ts.isSpreadAssignment(node)) {
+    const obj = handleObjectTransforms(node.expression, context);
+
+    if (obj) {
+      return obj;
+    }
+  }
+
+  // {...{key: 'value'}}
+  if (ts.isSpreadAssignment(node) && ts.isObjectLiteralExpression(node.expression)) {
+    // recurse to parse a nested ObjectLiteralExpression
+    return parseObjectToStaticValue(node.expression, context);
+  }
 
   // { name: value }
   if (ts.isPropertyAssignment(node)) {
@@ -64,12 +92,6 @@ function parsePropertyToStaticValue(node: ts.Node, context: TransformerContext):
     }
   }
 
-  // {...{key: 'value'}}
-  if (ts.isSpreadAssignment(node) && ts.isObjectLiteralExpression(node.expression)) {
-    // recurse to parse a nested ObjectLiteralExpression
-    return parseObjectToStaticValue(node.expression, context);
-  }
-
   // { ...value }
   if (ts.isSpreadAssignment(node)) {
     // Spread assignments are a bit complicated to use the AST to figure out, so we'll ask the
@@ -100,7 +122,7 @@ export function parseStyleObjFromType(type: ts.Type, context: TransformerContext
 
     if (propType.isStringLiteral()) {
       // This isn't a component variable, it is a static CSS variable
-      result[property.name] = propType.value;
+      result[property.name] = maybeWrapCSSVariables(propType.value, context.variables);
       return result;
     }
 
@@ -108,6 +130,7 @@ export function parseStyleObjFromType(type: ts.Type, context: TransformerContext
       result[property.name] = `${propType.value}px`;
       return result;
     }
+
     return {
       ...result,
       ...parsePropertyToStaticValue(declaration, context),

@@ -1,4 +1,5 @@
 import ts from 'typescript';
+import {TransformerContext} from './types';
 
 /**
  * Creates an error message around a node. It will look something like:
@@ -12,7 +13,7 @@ import ts from 'typescript';
  * })
  * ```
  */
-export function getErrorMessage(node: ts.Node) {
+export function getErrorMessage(node: ts.Node, context: TransformerContext) {
   const sourceFile = node.getSourceFile();
 
   const {line} = node.getSourceFile().getLineAndCharacterOfPosition(node.pos);
@@ -50,5 +51,7 @@ export function getErrorMessage(node: ts.Node) {
   const fullContext = lineBefore + lineCurrent + highlightedLine + lineAfter;
 
   const character = node.getStart() - lineStarts[lineStartIndex];
-  return `File: ${sourceFile.fileName}:${line + 1}:${character}.\n${fullContext}`;
+  return `File: ${sourceFile.fileName}:${line + 1}:${character}.\n${fullContext}\nOriginal File: ${
+    context.fileName
+  }`;
 }

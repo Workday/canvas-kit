@@ -1,27 +1,23 @@
 import ts from 'typescript';
 
-import {isImportedFromStyling} from './isImportedFromStyling';
-import {NodeTransformer} from './types';
+import {px2rem} from '@workday/canvas-kit-styling';
+import {createPropertyTransform} from '../createPropertyTransform';
+import {parseNodeToStaticValue} from './parseNodeToStaticValue';
 
-/**
- * Handle the CallExpression `px2rem` to do static conversion and remove the CallExpression.
- */
-export const handlePx2Rem: NodeTransformer = (node, context) => {
+function toNumber(input: string): number {
+  return parseInt(input.replace('px', ''), 10);
+}
+
+export const handlePx2Rem = createPropertyTransform((node, context) => {
   if (
     ts.isCallExpression(node) &&
     ts.isIdentifier(node.expression) &&
-    node.expression.text === 'px2rem' &&
-    isImportedFromStyling(node.expression, context.checker)
+    node.expression.text === 'px2rem'
   ) {
-    const [pxArgument, baseArgument] = node.arguments;
-    const base =
-      baseArgument && ts.isNumericLiteral(baseArgument) ? parseFloat(baseArgument.text) : 16;
+    const args = node.arguments.map(arg => toNumber(parseNodeToStaticValue(arg, context)));
 
-    if (ts.isNumericLiteral(pxArgument)) {
-      const px = parseFloat(pxArgument.text);
-      return ts.factory.createStringLiteral(`${px / base}rem`);
-    }
+    return px2rem(args[0], args[1]);
   }
 
   return;
-};
+});
