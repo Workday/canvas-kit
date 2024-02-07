@@ -4,6 +4,7 @@ import {Table} from '@workday/canvas-kit-preview-react/table';
 import {Basic} from './examples/Basic';
 import {BasicWithHeading} from './examples/BasicWithHeading';
 import {FixedColumn} from './examples/FixedColumn';
+import {RightToLeft} from './examples/RightToLeft';
 
 <Meta title="Preview/Table" component={Table} />
 
@@ -29,6 +30,12 @@ Users may not want to use a `caption` so they can import [Heading](/components/t
 customization of the title/heading of their table.
 
 <ExampleCodeBlock code={BasicWithHeading} />
+
+### Right to Left
+
+Table supports right-to-left languages when specified in the CanvasProvider theme.
+
+<ExampleCodeBlock code={RightToLeft} />
 
 ### Example with Caption
 
