@@ -1,6 +1,6 @@
 import ts from 'typescript';
 
-import {transform, _reset} from '../../lib/styleTransform';
+import {transform, withDefaultContext, _reset} from '../../lib/styleTransform';
 import {createProgramFromSource} from '../createProgramFromSource';
 import {findNodes} from '../findNodes';
 import {handleKeyframes} from '../../lib/utils/handleKeyframes';
@@ -41,12 +41,12 @@ describe('handleKeyframes', () => {
     const sourceFile = program.getSourceFile('test.ts');
     const node = findNodes(sourceFile, '', ts.isTaggedTemplateExpression)[0];
 
-    handleKeyframes(node, {
-      checker: program.getTypeChecker(),
-      prefix: 'css',
-      variables: {},
-      keyframes,
-    });
+    handleKeyframes(
+      node,
+      withDefaultContext(program.getTypeChecker(), {
+        keyframes,
+      })
+    );
 
     expect(keyframes).toHaveProperty(
       'buttonAnimation',
@@ -72,5 +72,33 @@ describe('handleKeyframes', () => {
     const result = transform(program, 'test.ts', {transformers: [handleKeyframes]});
 
     expect(result).toMatch(/keyframes\({ name: "[a-z0-9]+"/);
+  });
+
+  it('should collect styles into a styles object', () => {
+    const program = createProgramFromSource(`
+      import {keyframes} from '@workday/canvas-kit-styling';
+
+      const buttonAnimation = keyframes({
+        from: {
+          transform: 'scale(0.85)'
+        },
+
+        to: {
+          transform: 'scale(1.0)'
+        }
+      })
+    `);
+
+    const styles = {};
+    const sourceFile = program.getSourceFile('test.ts');
+    const node = findNodes(sourceFile, 'keyframes', ts.isCallExpression)[0];
+
+    handleKeyframes(node, withDefaultContext(program.getTypeChecker(), {styles}));
+
+    expect(styles['test.css']).toContainEqual(
+      expect.stringMatching(
+        /@keyframes animation-[a-z0-9]+\s+{\s+from\s+{\s+transform: scale\(0.85\);\s+}\s+to\s+{\s+transform: scale\(1.0\);\s+}\s+}/
+      )
+    );
   });
 });

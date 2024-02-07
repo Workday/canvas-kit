@@ -1,9 +1,11 @@
 import ts from 'typescript';
-import {serializeStyles} from '@emotion/serialize';
+import {serializeStyles as serializedStylesEmotion} from '@emotion/serialize';
+import {serialize, compile} from 'stylis';
 
 import {generateUniqueId} from '@workday/canvas-kit-styling';
 
-import {NestedStyleObject} from './parseObjectToStaticValue';
+import {prettyStringify} from './stylisFns';
+import {NestedStyleObject} from './types';
 
 /**
  * Creates an AST node representation of the passed in `styleObj`, but in the format of `{name:
@@ -15,10 +17,8 @@ import {NestedStyleObject} from './parseObjectToStaticValue';
  * created via `serializeStyles`. For example: 'animation-{hash}' will be converted into
  * 'animation-abc123'
  */
-export function createStyleObjectNode(styleObj: NestedStyleObject | string, name?: string) {
-  const serialized = serializeStyles([styleObj]);
-  const styleText = serialized.styles;
-  const styleExpression = ts.factory.createStringLiteral(styleText);
+export function createStyleObjectNode(styles: string, name?: string) {
+  const styleExpression = ts.factory.createStringLiteral(styles);
 
   // create an emotion-optimized object: https://github.com/emotion-js/emotion/blob/f3b268f7c52103979402da919c9c0dd3f9e0e189/packages/serialize/src/index.js#L315-L322
   // Looks like: `{name: $hash, styles: $styleText }`
@@ -26,10 +26,7 @@ export function createStyleObjectNode(styleObj: NestedStyleObject | string, name
     [
       ts.factory.createPropertyAssignment(
         ts.factory.createIdentifier('name'),
-        // TODO - we may need this to be a static variable for the CSS package
-        ts.factory.createStringLiteral(
-          name ? name.replace('{hash}', serialized.name) : generateUniqueId()
-        ) // We might be using values that are resolved at runtime, but should still be static. We're only supporting the `cs` function running once per file, so a stable id based on a hash is not necessary
+        ts.factory.createStringLiteral(name || generateUniqueId()) // We might be using values that are resolved at runtime, but should still be static. We're only supporting the `cs` function running once per file, so a stable id based on a hash is not necessary
       ),
       ts.factory.createPropertyAssignment(
         ts.factory.createIdentifier('styles'),
@@ -41,15 +38,14 @@ export function createStyleObjectNode(styleObj: NestedStyleObject | string, name
 }
 
 /**
- * Returns the name created by `createStyleObjectNode`
+ * Compiles CSS using stylis. Emotion's `serializeStyles` creates an unwrapped string for cache
+ * storage and it often needs to be wrapped by a CSS selector or `@keyframes`. This function does
+ * this the same way Emotion does it internally.
  */
-export function getStaticCssClassName(node: ts.Node): string {
-  if (
-    ts.isObjectLiteralExpression(node) &&
-    ts.isPropertyAssignment(node.properties[0]) &&
-    ts.isStringLiteral(node.properties[0].initializer)
-  ) {
-    return node.properties[0].initializer.text;
-  }
-  return '';
+export function compileCSS(input: string): string {
+  return serialize(compile(input), prettyStringify);
+}
+
+export function serializeStyles(input: NestedStyleObject | string) {
+  return serializedStylesEmotion([input]);
 }

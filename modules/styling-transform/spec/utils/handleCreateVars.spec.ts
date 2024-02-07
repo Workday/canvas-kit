@@ -4,6 +4,7 @@ import {findNodes} from '../findNodes';
 import {createProgramFromSource} from '../createProgramFromSource';
 
 import {handleCreateVars} from '../../lib/utils/handleCreateVars';
+import {withDefaultContext} from '../../lib/styleTransform';
 
 describe('handleCreateVars', () => {
   it('should add a variable to the cache when the arguments are strings', () => {
@@ -16,12 +17,12 @@ describe('handleCreateVars', () => {
 
     const node = findNodes(sourceFile, 'createVars', ts.isCallExpression)[0];
 
-    handleCreateVars(node, {
-      checker: program.getTypeChecker(),
-      prefix: 'css',
-      variables,
-      keyframes: {},
-    });
+    handleCreateVars(
+      node,
+      withDefaultContext(program.getTypeChecker(), {
+        variables,
+      })
+    );
 
     expect(variables).toHaveProperty('my-color', '--css-my-color');
     expect(variables).toHaveProperty('my-background', '--css-my-background');
@@ -39,12 +40,12 @@ describe('handleCreateVars', () => {
 
     const node = findNodes(sourceFile, 'createVars', ts.isCallExpression)[0];
 
-    handleCreateVars(node, {
-      checker: program.getTypeChecker(),
-      prefix: 'css',
-      variables,
-      keyframes: {},
-    });
+    handleCreateVars(
+      node,
+      withDefaultContext(program.getTypeChecker(), {
+        variables,
+      })
+    );
 
     expect(variables).toHaveProperty('my-foo-color', '--css-my-foo-color');
   });
