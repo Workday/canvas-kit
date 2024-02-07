@@ -1,5 +1,6 @@
 import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
 import {DeprecatedMenu, DeprecatedMenuItem} from '@workday/canvas-kit-preview-react/menu';
+import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
 
 import {Basic} from './examples/Basic';
 import {ContextMenu} from './examples/ContextMenu';
@@ -10,7 +11,15 @@ import {ManyItems} from './examples/ManyItems';
 
 <Meta title="Preview/Menu" component={DeprecatedMenu} />
 
-# Canvas Kit Menu (deprecated)
+# Canvas Kit Menu
+
+<StatusIndicator variant="red">
+  <StatusIndicator.Label>Deprecated</StatusIndicator.Label>
+</StatusIndicator>
+
+`Menu` in Preview been deprecated and will be removed in a future major version. Please use
+[Menu in Main](https://workday.github.io/canvas-kit/?path=/docs/components-popups-menu--basic)
+instead.
 
 `DeprecatedMenu` displays a list of options when triggered by an action or UI element like an icon
 or button.
