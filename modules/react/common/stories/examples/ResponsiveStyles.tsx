@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Box, Grid, Flex} from '@workday/canvas-kit-react/layout';
 import {Text} from '@workday/canvas-kit-react/text';
 import {useResponsiveContainerStyles, useResizeObserver} from '@workday/canvas-kit-react/common';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {Select} from '@workday/canvas-kit-react/select';
 
 const HeadingText = ({children, ...props}) => (
@@ -84,9 +84,10 @@ export const ResponsiveContainer = () => {
 
   return (
     <Box ref={ref} width={contWidth}>
-      <FormField label={'Container Size'}>
+      <FormField>
+        <FormField.Label>Container Size</FormField.Label>
         <Select items={['1024px', '768px', '320px']} initialSelectedIds={['1024px']}>
-          <Select.Input onChange={handleChange} />
+          <FormField.Input as={Select.Input} onChange={handleChange} />
           <Select.Popper>
             <Select.Card>
               <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
