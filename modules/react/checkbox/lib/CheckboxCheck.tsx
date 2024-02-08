@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {ErrorType, createComponent} from '@workday/canvas-kit-react/common';
 import {createStencil, createStyles, cssVar, calc, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
@@ -8,7 +8,7 @@ import {CheckBackground} from './CheckBackground';
 
 interface CheckboxCheckProps {
   checked: boolean;
-  error?: 'error' | 'alert';
+  error?: ErrorType;
   indeterminate?: boolean;
   variant?: 'inverse';
 }
