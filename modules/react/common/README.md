@@ -10,16 +10,32 @@ yarn add @workday/canvas-kit-react
 
 Includes:
 
-- [CanvasProvider](#canvasprovider)
-- [InputProvider](#inputprovider)
-- [Theming](#theming)
-- [Bidirectionality](#bidirectionality)
-- [Component Functions](#component-functions)
-  - [createComponent](#createcomponent)
-  - [ExtractProps](#extractprops)
-- [Common Hooks](#common-hooks)
-  - [useUniqueId](#useuniqueid)
-- [Utility Functions](#utility-functions)
+- [Canvas Kit Common](#canvas-kit-common)
+  - [Installation](#installation)
+  - [CanvasProvider](#canvasprovider)
+      - [Storybook Decorator](#storybook-decorator)
+    - [Input Provider](#input-provider)
+      - [Definitions](#definitions)
+      - [Usage](#usage)
+      - [Static Properties](#static-properties)
+        - [`InputTypes`](#inputtypes)
+      - [Component Props](#component-props)
+        - [Required](#required)
+        - [Optional](#optional)
+          - [`provideIntent: boolean`](#provideintent-boolean)
+          - [`container: HTMLElement | React.RefObject<HTMLElement>`](#container-htmlelement--reactrefobjecthtmlelement)
+      - [Storybook Decorator](#storybook-decorator-1)
+  - [Theming](#theming)
+  - [Bidirectionality](#bidirectionality)
+  - [Component Functions](#component-functions)
+    - [`createComponent`](#createcomponent)
+    - [`ExtractProps`](#extractprops)
+  - [Common Hooks](#common-hooks)
+    - [useUniqueId](#useuniqueid)
+  - [Utility Functions](#utility-functions)
+    - [generateUniqueId](#generateuniqueid)
+    - [setUniqueSeed](#setuniqueseed)
+    - [resetUniqueIdCount](#resetuniqueidcount)
 
 ## CanvasProvider
 
@@ -71,7 +87,7 @@ MyStory.decorators = [CanvasProviderDecorator];
 ### Input Provider
 
 This is a higher order (wrapping) component for providing css-referencable data attributes for the
-users current input. Focus outlines are required for accesibility, but they can be unnecessary
+users current input. Focus outlines are required for accessibility, but they can be unnecessary
 visual noise when using a mouse. This allows us to hide focus outlines (as desired) while the user
 is interacting with components using a mouse, touch, etc. and show them when keyboard navigation
 begins. This logic is heavily influenced by [what-input](https://github.com/ten1seven/what-input).
@@ -344,7 +360,7 @@ this example, `onClick` doesn't exist on `MyComponent`, but since `MyComponent` 
 If we inspect the `MyNewComponentProps` type, it will return the following:
 
 ```tsx
-MyComponentProps & React.HTMLAttributes<HTMLElement>
+MyComponentProps & React.HTMLAttributes<HTMLElement>;
 ```
 
 Inside Canvas Kit components, we use `ExtractProps` when we need to extend from the interfaces of
@@ -377,9 +393,11 @@ be returned since there is not HTML attribute interface associated with `Compone
 
 ### useUniqueId
 
-A hook to generate a unique identifier for an element. Most commonly used for accessibility. The
+A hook to generate a unique identifier for an element – most commonly used for accessibility. The
 hook will generate a unique id the first render and always return the same id every render. This
-uses [generateUniqueId](#generateuniqueid) internally.
+uses [generateUniqueId](#generateuniqueid) internally. You should use `useUniqueId` when you need to
+create a unique ID within a component's render loop. Otherwise, you should opt for
+`generateUniqueId`.
 
 ```tsx
 const MyComponent = () => {

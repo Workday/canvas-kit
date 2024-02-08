@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Select} from '@workday/canvas-kit-react/select';
 import {Flex} from '@workday/canvas-kit-react/layout';
 
@@ -12,7 +12,7 @@ const options = [
   'The Ontologically Anthropocentric Sensory Immersive Simulation',
 ];
 
-export const Basic = () => {
+export const Placeholder = () => {
   const [value, setValue] = React.useState('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,9 +22,8 @@ export const Basic = () => {
   return (
     <Flex flexDirection="column">
       <Select items={options}>
-        <FormField>
-          <FormField.Label>Contact</FormField.Label>
-          <FormField.Input as={Select.Input} onChange={handleChange} />
+        <FormField label="Contact">
+          <Select.Input placeholder="Make a Selection" onChange={e => handleChange(e)} />
           <Select.Popper>
             <Select.Card>
               <Select.List>

@@ -15,9 +15,9 @@ import {useSelectModel} from './hooks/useSelectModel';
 import {useSelectCard} from './hooks/useSelectCard';
 import {useSelectInput} from './hooks/useSelectInput';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {createStyles, CSProps} from '@workday/canvas-kit-styling';
 
-export interface SelectInputProps extends ExtractProps<typeof TextInput> {
+export interface SelectInputProps extends ExtractProps<typeof TextInput>, CSProps {
   /**
    * The Icon to render at the start of the `input`. Use this prop if your options
    * include icons that you would like to render in the `input` when selected.
@@ -34,11 +34,40 @@ const selectInputStyles = createStyles({
   },
 });
 
+const hiddenSelectStyles = createStyles({
+  position: 'absolute',
+  top: 0,
+  bottom: 0,
+  left: 0,
+  right: 0,
+  opacity: 0,
+  cursor: 'default',
+  pointerEvents: 'none',
+});
+
 export const SelectInput = createSubcomponent(TextInput)({
   modelHook: useSelectModel,
   elemPropsHook: useSelectInput,
 })<SelectInputProps>(
-  ({placeholder = 'Choose an option', inputStartIcon, width, ...elemProps}, Element, model) => {
+  (
+    {
+      placeholder = 'Choose an option',
+      inputStartIcon,
+      error,
+      textInputProps,
+      disabled,
+      width,
+      ref,
+      onChange,
+      onInput,
+      onFocus,
+      value,
+      name,
+      ...elemProps
+    },
+    Element,
+    model
+  ) => {
     return (
       <InputGroup width={width} data-width="ck-formfield-width">
         {inputStartIcon && model.state.selectedIds.length > 0 && (
@@ -46,11 +75,29 @@ export const SelectInput = createSubcomponent(TextInput)({
             <SystemIcon icon={inputStartIcon} />
           </InputGroup.InnerStart>
         )}
+        {/* Hidden input to handle ids */}
+        <InputGroup.Input
+          error={error}
+          disabled={disabled}
+          className={hiddenSelectStyles}
+          tabIndex={-1}
+          aria-hidden={true}
+          onChange={onChange}
+          onInput={onInput}
+          value={value}
+          onFocus={onFocus}
+          name={name}
+          ref={ref}
+        />
+        {/* Visual input */}
         <InputGroup.Input
           as={Element}
+          disabled={disabled}
           placeholder={placeholder}
+          error={error}
+          {...textInputProps}
           {...mergeStyles(elemProps, [selectInputStyles])}
-        ></InputGroup.Input>
+        />
         <InputGroup.InnerEnd position="absolute" pointerEvents="none">
           <SystemIcon icon={caretDownSmallIcon} />
         </InputGroup.InnerEnd>

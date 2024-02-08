@@ -5,18 +5,17 @@ import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
 import {BodyText} from '@workday/canvas-kit-react/text';
 
 const options = [
-  'E-mail',
-  'Phone',
-  'Fax (disabled)',
-  'Mail',
-  'Mobile Phone',
-  'The Ontologically Anthropocentric Sensory Immersive Simulation',
+  {text: 'E-mail', id: 'email-1'},
+  {text: 'Phone', id: 'phone-2'},
+  {text: 'Fax', id: 'fax-3'},
+  {text: 'Mail', id: 'mail-4'},
+  {text: 'Mobile Phone', id: 'mobile-phone-5'},
 ];
 
 export const HoistedModel = () => {
   const model = useSelectModel({
     items: options,
-    nonInteractiveIds: ['Fax (disabled)'],
+    initialSelectedIds: ['fax-3'],
   });
 
   return (
@@ -27,13 +26,7 @@ export const HoistedModel = () => {
           <FormField.Input as={Select.Input} />
           <Select.Popper>
             <Select.Card>
-              <Select.List>
-                {item => (
-                  <Select.Item aria-disabled={item === 'Fax (disabled)' ? true : undefined}>
-                    {item}
-                  </Select.Item>
-                )}
-              </Select.List>
+              <Select.List>{item => <Select.Item>{item.text}</Select.Item>}</Select.List>
             </Select.Card>
           </Select.Popper>
         </FormField>
@@ -41,7 +34,7 @@ export const HoistedModel = () => {
       <BodyText size="small">Selected Value: {model.state.selectedIds[0]}</BodyText>
       <SecondaryButton
         onClick={() => {
-          model.events.select({id: 'Phone'});
+          model.events.select({id: 'phone-2'});
         }}
       >
         Select Phone Item
