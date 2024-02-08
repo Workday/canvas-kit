@@ -5901,6 +5901,21 @@
         "__isArgsStory": false
       }
     },
+    "versions--page": {
+      "id": "versions--page",
+      "name": "Page",
+      "title": "Versions",
+      "importPath": "./modules/docs/mdx/Versions.mdx",
+      "kind": "Versions",
+      "story": "Page",
+      "parameters": {
+        "fileName": "./modules/docs/mdx/Versions.mdx",
+        "docsOnly": true,
+        "framework": "react",
+        "__id": "versions--page",
+        "__isArgsStory": false
+      }
+    },
     "examples-compoundcomponent--template": {
       "id": "examples-compoundcomponent--template",
       "name": "Template",
