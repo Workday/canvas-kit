@@ -1,32 +1,5 @@
 import {Meta} from '@storybook/addon-docs';
-import {Table, StatusIndicator} from '@workday/canvas-kit-preview-react';
-import {base, brand} from '@workday/canvas-tokens-web';
-import {cssVar} from '@workday/canvas-kit-styling';
-import {version} from '../../../lerna.json';
-const allVersions = [
-  {
-    versionNumber: version,
-    documentation: 'https://github.com/Workday/canvas-kit',
-  },
-  {
-    versionNumber: 9,
-    documentation: 'https://d2krrudi3mmzzw.cloudfront.net/v9/?path=/docs/welcome--page',
-  },
-  {
-    versionNumber: 8,
-    documentation: 'https://d2krrudi3mmzzw.cloudfront.net/v8/?path=/docs/welcome--page',
-  },
-  {
-    versionNumber: 7,
-    documentation:
-      'https://d2krrudi3mmzzw.cloudfront.net/v7/?path=/story/welcome-getting-started--page',
-  },
-  {
-    versionNumber: 6,
-    documentation:
-      'https://d2krrudi3mmzzw.cloudfront.net/v7/?path=/story/welcome-getting-started--page',
-  },
-];
+import {VersionTable} from './versionsTable';
 
 <Meta title="Versions" />
 
@@ -34,43 +7,4 @@ const allVersions = [
 
 Reference older versions documentation when needed.
 
-<Table>
-  <Table.Head>
-    <Table.Row>
-      <Table.Header scope="col">Version</Table.Header>
-      <Table.Header scope="col">Documentation</Table.Header>
-      <Table.Header scope="col">Status</Table.Header>
-    </Table.Row>
-  </Table.Head>
-  <Table.Body>
-    {allVersions.map(item => {
-      let chooseVariant;
-      let status;
-      if (item.versionNumber === version) {
-        chooseVariant = 'blue';
-        status = 'Stable';
-      } else if (item.versionNumber === version.split('.')[0] - 1) {
-        chooseVariant = 'green';
-        status = 'Support';
-      } else {
-        chooseVariant = 'red';
-        status = 'No Longer Supported';
-      }
-      return (
-        <Table.Row>
-          <Table.Cell>v{item.versionNumber}</Table.Cell>
-          <Table.Cell>
-            <a href={item.documentation} target="_blank">
-              Documentation
-            </a>
-          </Table.Cell>
-          <Table.Cell>
-            <StatusIndicator variant={chooseVariant}>
-              <StatusIndicator.Label>{status}</StatusIndicator.Label>
-            </StatusIndicator>
-          </Table.Cell>
-        </Table.Row>
-      );
-    })}
-  </Table.Body>
-</Table>
+<VersionTable />
