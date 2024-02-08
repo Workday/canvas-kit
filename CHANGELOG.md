@@ -3,6 +3,49 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.8](https://github.com/Workday/canvas-kit/releases/tag/v10.3.8) (2024-02-08)
+
+### Components
+
+- fix: Update isOverflowed logic to account for sub-pixels ([#2548](https://github.com/Workday/canvas-kit/pull/2548)) ([@nonverbal](https://github.com/nonverbal), Lauren Clavell)
+
+
+## [v9.1.38](https://github.com/Workday/canvas-kit/releases/tag/v9.1.38) (2024-02-08)
+
+### Components
+
+- fix: Update isOverflowed logic to account for sub-pixels ([#2548](https://github.com/Workday/canvas-kit/pull/2548)) ([@nonverbal](https://github.com/nonverbal), Lauren Clavell)
+## [v10.3.7](https://github.com/Workday/canvas-kit/releases/tag/v10.3.7) (2024-02-07)
+
+### Documentation
+
+- docs: Add interactive table examples to storybook ([#2457](https://github.com/Workday/canvas-kit/pull/2457)) ([@williamjstanton](https://github.com/williamjstanton), [@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v10.3.6](https://github.com/Workday/canvas-kit/releases/tag/v10.3.6) (2024-02-07)
+
+### Components
+
+- fix(preview): Changed table justifyContent to start ([#2557](https://github.com/Workday/canvas-kit/pull/2557)) ([@vibdev](https://github.com/vibdev))
+- fix: Update `aria-activedescendant` on ComboboxInput ([#2554](https://github.com/Workday/canvas-kit/pull/2554)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+### Infrastructure
+
+- ci: Fix forward merging with CSS packages deleted ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v9.1.37](https://github.com/Workday/canvas-kit/releases/tag/v9.1.37) (2024-02-07)
+
+### Components
+
+- fix: Update `aria-activedescendant` on ComboboxInput ([#2554](https://github.com/Workday/canvas-kit/pull/2554)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
+## [v9.1.36](https://github.com/Workday/canvas-kit/releases/tag/v9.1.36) (2024-02-07)
+
+### Components
+
+- fix(preview): Changed table justifyContent to start ([#2557](https://github.com/Workday/canvas-kit/pull/2557)) ([@vibdev](https://github.com/vibdev))
 ## [v10.3.5](https://github.com/Workday/canvas-kit/releases/tag/v10.3.5) (2024-02-07)
 
 ### Components
@@ -47,6 +90,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
   Prevents popup or dialog from closing when a combobox menu item is selected.
 
 
+## [v9.1.35](https://github.com/Workday/canvas-kit/releases/tag/v9.1.35) (2024-01-23)
 ## [v9.1.35](https://github.com/Workday/canvas-kit/releases/tag/v9.1.35) (2024-01-23)
 
 ### Components
