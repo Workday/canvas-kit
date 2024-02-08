@@ -5,7 +5,7 @@ import {base, brand, system} from '@workday/canvas-tokens-web';
 
 interface CheckBackgroundProps {
   children: React.ReactNode;
-  error?: 'error' | 'alert';
+  error?: ErrorType;
 }
 
 export const backgroundVars = createVars('inner', 'outer');
