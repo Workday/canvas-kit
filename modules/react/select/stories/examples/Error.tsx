@@ -1,27 +1,46 @@
 import React from 'react';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {Select, SelectOption} from '@workday/canvas-kit-react/select';
+import {Select} from '@workday/canvas-kit-react/select';
+import {Flex} from '@workday/canvas-kit-react/layout';
+
+const options = [
+  'E-mail',
+  'Phone',
+  'Fax (disabled)',
+  'Mail',
+  'Mobile Phone',
+  'The Ontologically Anthropocentric Sensory Immersive Simulation',
+];
 
 export const Error = () => {
   const [value, setValue] = React.useState('');
 
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
   };
-
   return (
-    <FormField
-      error={FormField.ErrorType.Error}
-      hintId="hint-error"
-      hintText="Please select a pizza size."
-      label="Pizza Size"
-    >
-      <Select onChange={handleChange} value={value}>
-        <SelectOption disabled label="Please select a pizza size" value="" />
-        <SelectOption label="Small" value="small" />
-        <SelectOption label="Medium" value="medium" />
-        <SelectOption label="Large" value="large" />
+    <Flex flexDirection="column">
+      <Select items={options} nonInteractiveIds={['Fax (disabled)']}>
+        <FormField
+          error={FormField.ErrorType.Error}
+          hintText="Fax is disabled. Please choose a different option."
+          label="Contact"
+        >
+          <Select.Input onChange={e => handleChange(e)} />
+          <Select.Popper>
+            <Select.Card>
+              <Select.List>
+                {item => (
+                  <Select.Item aria-disabled={item === 'Fax (disabled)' ? true : undefined}>
+                    {item}
+                  </Select.Item>
+                )}
+              </Select.List>
+            </Select.Card>
+          </Select.Popper>
+        </FormField>
       </Select>
-    </FormField>
+      Selected Value: {value}
+    </Flex>
   );
 };
