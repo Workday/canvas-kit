@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.39](https://github.com/Workday/canvas-kit/releases/tag/v9.1.39) (2024-02-08)
+
+### Components
+
+- fix: Fix FormField required label error ([#2562](https://github.com/Workday/canvas-kit/pull/2562)) ([@alanbsmith](https://github.com/alanbsmith))
 ## [v10.3.8](https://github.com/Workday/canvas-kit/releases/tag/v10.3.8) (2024-02-08)
 
 ### Components
