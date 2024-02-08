@@ -44,8 +44,8 @@ const statusIndicators = {
   },
 };
 function getVersionStatusIndicator(versionNumber: number | string) {
-  const currentMajorVersion = Number(version.split('.')[0]);
   // version from lerna is a string, so we need to do modify into a number
+  const currentMajorVersion = Number(version.split('.')[0]);
   const modifiedVersionNumber =
     typeof versionNumber === 'string' ? Number(versionNumber.split('.')[0]) : versionNumber;
 
@@ -76,7 +76,7 @@ export const VersionTable = () => {
             <Table.Row>
               <Table.Cell>v{item.versionNumber}</Table.Cell>
               <Table.Cell>
-                <a href={item.documentation} target="_blank">
+                <a href={item.documentation} target="_blank" rel="noreferrer">
                   Documentation
                 </a>
               </Table.Cell>
