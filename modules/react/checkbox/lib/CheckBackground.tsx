@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, ErrorType} from '@workday/canvas-kit-react/common';
 import {calc, createStencil, createVars, px2rem, cssVar} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 
