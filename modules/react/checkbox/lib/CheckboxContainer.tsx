@@ -31,6 +31,9 @@ const checkboxContainerStyles = createStyles({
     marginTop: px2rem(3),
     alignSelf: 'flex-start',
   },
+  '& > label': {
+    paddingInlineStart: cssVar(system.space.x3),
+  },
 });
 
 export const CheckboxContainer = createComponent('div')({
@@ -44,7 +47,7 @@ export const CheckboxContainer = createComponent('div')({
             htmlFor={id}
             disabled={disabled}
             variant={variant}
-            cs={{paddingInlineStart: cssVar(system.space.x3), cursor: 'pointer'}}
+            style={{cursor: disabled ? 'default' : 'pointer'}}
           >
             {label}
           </LabelText>
