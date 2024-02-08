@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.8](https://github.com/Workday/canvas-kit/releases/tag/v10.3.8) (2024-02-08)
+
+### Components
+
+- fix: Update isOverflowed logic to account for sub-pixels ([#2548](https://github.com/Workday/canvas-kit/pull/2548)) ([@nonverbal](https://github.com/nonverbal), Lauren Clavell)
+
+
 ## [v9.1.38](https://github.com/Workday/canvas-kit/releases/tag/v9.1.38) (2024-02-08)
 
 ### Components
