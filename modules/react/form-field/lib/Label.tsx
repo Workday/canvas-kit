@@ -98,16 +98,16 @@ class Label extends React.Component<React.PropsWithChildren<LabelProps>> {
       required,
       ...elemProps
     } = this.props;
-    const children = !required
-      ? this.props.children
-      : [
-          <span>
-            {this.props.children}
-            <RequiredAsterisk key={'0'} aria-hidden>
-              *
-            </RequiredAsterisk>
-          </span>,
-        ];
+    const children = !required ? (
+      this.props.children
+    ) : (
+      <span>
+        {this.props.children}
+        <RequiredAsterisk key={'0'} aria-hidden>
+          *
+        </RequiredAsterisk>
+      </span>
+    );
     return (
       <>
         {isLegend ? (
