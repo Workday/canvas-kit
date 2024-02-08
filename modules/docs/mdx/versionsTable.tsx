@@ -1,5 +1,5 @@
 import React from 'react';
-import {Table, StatusIndicator} from '@workday/canvas-kit-preview-react';
+import {Table, StatusIndicator, StatusIndicatorVariant} from '@workday/canvas-kit-preview-react';
 // @ts-ignore: Cannot find module error
 import {version} from '../../../lerna.json';
 
@@ -43,7 +43,7 @@ const statusIndicators = {
     label: 'No Longer Supported',
   },
 };
-function getVersionStatusIndicator(versionNumber: number) {
+function getVersionStatusIndicator(versionNumber: number | string) {
   const currentMajorVersion = Number(version.split('.')[0]);
   // version from lerna is a string, so we need to do modify into a number
   const modifiedVersionNumber =
@@ -81,7 +81,7 @@ export const VersionTable = () => {
                 </a>
               </Table.Cell>
               <Table.Cell>
-                <StatusIndicator variant={variant}>
+                <StatusIndicator variant={variant as StatusIndicatorVariant}>
                   <StatusIndicator.Label>{label}</StatusIndicator.Label>
                 </StatusIndicator>
               </Table.Cell>
