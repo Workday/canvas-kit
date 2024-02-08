@@ -120,7 +120,7 @@ const checkboxInputStencil = createStencil({
           borderColor: brand.primary.base,
           borderWidth: px2rem(2),
           span: {
-            marginLeft: calc.negate(px2rem(7)),
+            marginInlineStart: calc.negate(px2rem(7)),
           },
         },
       },
