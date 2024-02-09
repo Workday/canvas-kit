@@ -1,14 +1,14 @@
 import React from 'react';
 import {GridProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 const headerStyles = createStyles({
   display: 'grid',
   alignItems: 'center',
   backgroundColor: base.frenchVanilla100,
-  borderBottom: `1px solid ${base.soap400}`,
+  borderBottom: `${px2rem(1)} solid ${base.soap400}`,
   justifyContent: 'start',
   minHeight: '3.5rem',
   padding: `${system.space.x2} ${system.space.x4}`,
