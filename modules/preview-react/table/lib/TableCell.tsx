@@ -12,8 +12,9 @@ const cellStyles = createStyles({
   gridTemplateColumns: '1fr',
   justifyContent: 'start',
   minHeight: '3.5rem',
-  padding: `${system.space.zero} ${system.space.x4}`,
+  padding: `${system.space.x2} ${system.space.x4}`,
   wordBreak: 'break-word',
+  boxSizing: 'border-box',
 });
 
 export const TableCell = createComponent('td')({

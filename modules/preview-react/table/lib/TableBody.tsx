@@ -5,6 +5,7 @@ import {createStyles} from '@workday/canvas-kit-styling';
 
 const bodyStyles = createStyles({
   display: 'grid',
+  boxSizing: 'border-box',
   'tr ': {
     '&:last-of-type': {
       'td, th': {

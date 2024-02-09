@@ -22,6 +22,7 @@ const tableStyles = createStyles({
   fontWeight: system.fontWeight.normal,
   color: base.blackPepper300,
   letterSpacing: '0.015rem',
+  boxSizing: 'border-box',
 });
 
 /**

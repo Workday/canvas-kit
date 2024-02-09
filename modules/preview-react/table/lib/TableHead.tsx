@@ -8,6 +8,7 @@ const headStyles = createStyles({
   display: 'grid',
   backgroundColor: base.soap100,
   minHeight: '48px',
+  boxSizing: 'border-box',
   'th ': {
     '&:first-of-type': {
       borderLeft: 'none',

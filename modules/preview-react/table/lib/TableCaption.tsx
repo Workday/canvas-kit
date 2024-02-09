@@ -8,6 +8,7 @@ const captionStyles = createStyles({
   display: 'flex',
   borderBottom: `1px solid ${base.soap500}`,
   padding: `${system.space.x2} ${system.space.x4}`,
+  boxSizing: 'border-box',
 });
 
 export const TableCaption = createComponent('caption')({

@@ -5,6 +5,7 @@ import {createStyles} from '@workday/canvas-kit-styling';
 
 const footerStyles = createStyles({
   display: 'grid',
+  boxSizing: 'border-box',
 });
 
 export const TableFooter = createComponent('tfoot')({
