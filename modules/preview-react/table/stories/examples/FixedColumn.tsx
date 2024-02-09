@@ -99,7 +99,7 @@ export const FixedColumn = () => {
             <Table.Header scope="col">Transmission</Table.Header>
             <Table.Header scope="col">Horsepower</Table.Header>
             <Table.Header scope="col">Torque</Table.Header>
-            <Table.Header scope="col">Tires</Table.Header>
+            <Table.Header scope="col">Curb Weight</Table.Header>
           </Table.Row>
         </Table.Head>
         <Table.Body>
