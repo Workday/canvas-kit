@@ -14,6 +14,10 @@ describe('Select', () => {
         cy.checkA11y();
       });
 
+      it('should not have an aria-activedescendant attribute', () => {
+        cy.findByRole('combobox').should('not.have.attr', 'aria-activedescendant');
+      });
+
       context('when the select button is clicked', () => {
         beforeEach(() => {
           cy.findByLabelText('Contact').click();
@@ -214,6 +218,10 @@ context(`given the "Basic" story is rendered`, () => {
         () => {
           beforeEach(() => {
             cy.focused().realType('{esc}');
+          });
+
+          it('should not have an aria-activedescendant attribute', () => {
+            cy.findByRole('combobox').should('not.have.attr', 'aria-activedescendant');
           });
 
           context('when the menu is re-opened AFTER it has fully closed', () => {
@@ -529,5 +537,26 @@ describe('Select With Menu Height', () => {
         });
       }
     );
+  });
+});
+
+context(`given the "FetchingDynamicItems" story is rendered`, () => {
+  before(() => {
+    h.stories.visit();
+  });
+  beforeEach(() => {
+    h.stories.load('Components/Inputs/Select', 'FetchingDynamicItems');
+  });
+
+  context('when Get Items is clicked', () => {
+    beforeEach(() => {
+      cy.findByRole('button', {name: 'Get Items'}).click();
+    });
+    it('should change the value of the select to 456 (the id) after 1.5 seconds', () => {
+      cy.wait(1500);
+      cy.findByRole('combobox').should('have.value', 'John Wick');
+      cy.findByTestId('selected-value').should('have.text', 'Selected value: John Wick');
+      cy.findByTestId('selected-id').should('have.text', 'Selected Id: 456');
+    });
   });
 });
