@@ -20,7 +20,7 @@ export const Grow = () => {
   return (
     <Flex>
       <Select model={model}>
-        <FormField cs={{width: '100%'}}>
+        <FormField grow>
           <FormField.Label>Contact</FormField.Label>
           <FormField.Input grow as={Select.Input} />
           <Select.Popper>

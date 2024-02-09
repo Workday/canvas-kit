@@ -1,21 +1,20 @@
 import React from 'react';
+import {CanvasSystemIcon} from '@workday/design-assets-types';
+import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
+import {Combobox} from '@workday/canvas-kit-react/combobox';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {useSelectCard} from './hooks/useSelectCard';
+import {useSelectInput} from './hooks/useSelectInput';
+import {useSelectModel} from './hooks/useSelectModel';
 import {
   createSubcomponent,
   ExtractProps,
   createContainer,
   Themeable,
 } from '@workday/canvas-kit-react/common';
-import {Combobox} from '@workday/canvas-kit-react/combobox';
-
-import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
-import {useSelectModel} from './hooks/useSelectModel';
-import {useSelectCard} from './hooks/useSelectCard';
-import {useSelectInput} from './hooks/useSelectInput';
-import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {createStyles} from '@workday/canvas-kit-styling';
 
 export interface SelectInputProps extends ExtractProps<typeof TextInput> {
   /**
@@ -34,15 +33,24 @@ const selectInputStyles = createStyles({
   },
 });
 
+const hiddenSelectInputStyles = createStyles({
+  pointerEvents: 'none',
+});
+
+const caretIconStyles = createStyles({
+  position: 'absolute',
+  pointerEvents: 'none',
+});
+
 export const SelectInput = createSubcomponent(TextInput)({
   modelHook: useSelectModel,
   elemPropsHook: useSelectInput,
 })<SelectInputProps>(
-  ({placeholder = 'Choose an option', inputStartIcon, width, ...elemProps}, Element, model) => {
+  ({placeholder = 'Choose an option', inputStartIcon, ...elemProps}, Element, model) => {
     return (
-      <InputGroup width={width} data-width="ck-formfield-width">
+      <InputGroup data-width="ck-formfield-width">
         {inputStartIcon && model.state.selectedIds.length > 0 && (
-          <InputGroup.InnerStart pointerEvents="none">
+          <InputGroup.InnerStart className={hiddenSelectInputStyles}>
             <SystemIcon icon={inputStartIcon} />
           </InputGroup.InnerStart>
         )}
@@ -51,7 +59,7 @@ export const SelectInput = createSubcomponent(TextInput)({
           placeholder={placeholder}
           {...mergeStyles(elemProps, [selectInputStyles])}
         ></InputGroup.Input>
-        <InputGroup.InnerEnd position="absolute" pointerEvents="none">
+        <InputGroup.InnerEnd className={caretIconStyles}>
           <SystemIcon icon={caretDownSmallIcon} />
         </InputGroup.InnerEnd>
       </InputGroup>
@@ -72,12 +80,16 @@ export const SelectItem = createSubcomponent('li')({
   );
 });
 
+const selectCardStyles = createStyles({
+  maxHeight: 300,
+});
+
 export const SelectCard = createSubcomponent('div')({
   modelHook: useSelectModel,
   elemPropsHook: useSelectCard,
 })<ExtractProps<typeof Combobox.Menu.Card>>(({children, ...elemProps}, Element) => {
   return (
-    <Combobox.Menu.Card maxHeight={300} as={Element} {...elemProps}>
+    <Combobox.Menu.Card as={Element} {...mergeStyles(elemProps, selectCardStyles)}>
       {children}
     </Combobox.Menu.Card>
   );
