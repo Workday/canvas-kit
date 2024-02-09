@@ -7,14 +7,14 @@ import {base} from '@workday/canvas-tokens-web';
 const headStyles = createStyles({
   display: 'grid',
   backgroundColor: base.soap100,
-  minHeight: '48px',
+  minHeight: '3rem',
   boxSizing: 'border-box',
   'th ': {
     '&:first-of-type': {
-      borderLeft: 'none',
+      borderInlineStart: 'none',
     },
     '&:last-of-type': {
-      borderRight: 'none',
+      borderInlineEnd: 'none',
     },
   },
 });

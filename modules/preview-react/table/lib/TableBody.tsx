@@ -20,10 +20,10 @@ const bodyStyles = createStyles({
   },
   'td ': {
     '&:last-of-type': {
-      borderRight: 'none',
+      borderInlineEnd: 'none',
     },
     '&:first-of-type': {
-      borderLeft: 'none',
+      borderInlineStart: 'none',
     },
   },
 });

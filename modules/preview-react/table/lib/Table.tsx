@@ -12,16 +12,12 @@ import {createStyles} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 const tableStyles = createStyles({
+  ...system.type.subtext.large,
   display: 'grid',
   border: `1px solid ${base.soap500}`,
   borderRadius: system.shape.x2,
   overflow: 'auto',
-  fontFamily: system.fontFamily.default,
-  fontSize: system.fontSize.subtext.large,
-  lineHeight: system.lineHeight.subtext.large,
-  fontWeight: system.fontWeight.normal,
   color: base.blackPepper300,
-  letterSpacing: '0.015rem',
   boxSizing: 'border-box',
 });
 
