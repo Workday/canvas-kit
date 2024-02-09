@@ -1,13 +1,20 @@
 import React from 'react';
-import {GridProps, Grid} from '@workday/canvas-kit-react/layout';
-import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
+import {GridProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {createComponent} from '@workday/canvas-kit-react/common';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {base} from '@workday/canvas-tokens-web';
 
-const StyledHead = styled(Grid.as('thead'))<StyledType>({
-  'th:last-of-type': {
-    borderRight: 'none',
-  },
-  'th:first-of-type': {
-    borderLeft: 'none',
+const headStyles = createStyles({
+  display: 'grid',
+  backgroundColor: base.soap100,
+  minHeight: '48px',
+  'th ': {
+    '&:first-of-type': {
+      borderLeft: 'none',
+    },
+    '&:last-of-type': {
+      borderRight: 'none',
+    },
   },
 });
 
@@ -15,9 +22,9 @@ export const TableHead = createComponent('thead')({
   displayName: 'Table.Head',
   Component: ({children, ...elemProps}: GridProps, ref, Element) => {
     return (
-      <StyledHead as={Element} ref={ref} backgroundColor="soap100" minHeight="48px" {...elemProps}>
+      <Element ref={ref} {...mergeStyles(elemProps, headStyles)}>
         {children}
-      </StyledHead>
+      </Element>
     );
   },
 });

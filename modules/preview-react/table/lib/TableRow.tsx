@@ -15,7 +15,6 @@ export const TableRow = createComponent('tr')({
       <Grid
         as={Element}
         ref={ref}
-        gridAutoFlow="column"
         gridTemplateColumns={`repeat(${childrenArray}, minmax(10rem, 1fr))`}
         {...elemProps}
       >

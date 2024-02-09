@@ -1,6 +1,5 @@
 import React from 'react';
-import {GridProps, Grid} from '@workday/canvas-kit-react/layout';
-import {type, colors} from '@workday/canvas-kit-react/tokens';
+import {GridProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {TableHead} from './TableHead';
 import {TableBody} from './TableBody';
@@ -9,6 +8,21 @@ import {TableHeader} from './TableHeader';
 import {TableCell} from './TableCell';
 import {TableFooter} from './TableFooter';
 import {TableCaption} from './TableCaption';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
+
+const tableStyles = createStyles({
+  display: 'grid',
+  border: `1px solid ${base.soap500}`,
+  borderRadius: system.shape.x2,
+  overflow: 'auto',
+  fontFamily: system.fontFamily.default,
+  fontSize: system.fontSize.subtext.large,
+  lineHeight: system.lineHeight.subtext.large,
+  fontWeight: system.fontWeight.normal,
+  color: base.blackPepper300,
+  letterSpacing: '0.015rem',
+});
 
 /**
  * `Table` is a simple styled compound component that renders a [table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table) element. It is used to present information in a two-dimensional table comprised of rows and columns of cells containing data.
@@ -56,17 +70,9 @@ export const Table = createComponent('table')({
   displayName: 'Table',
   Component: ({children, ...elemProps}: GridProps, ref, Element) => {
     return (
-      <Grid
-        as={Element}
-        ref={ref}
-        border={`1px solid ${colors.soap500}`}
-        borderRadius="l"
-        overflow="auto"
-        {...type.levels.subtext.large}
-        {...elemProps}
-      >
+      <Element ref={ref} {...mergeStyles(elemProps, tableStyles)}>
         {children}
-      </Grid>
+      </Element>
     );
   },
   subComponents: {
