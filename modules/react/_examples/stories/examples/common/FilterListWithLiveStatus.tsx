@@ -24,7 +24,7 @@ const liveRegionStyle = {
 
 let filteredFruits = fruits;
 
-export default function App() {
+export default function FilterListWithLiveStatus() {
   const [filter, setFilter] = useState('');
   function handleFilter(e) {
     filteredFruits = fruits.filter(i => i.toUpperCase().indexOf(e.target.value.toUpperCase()) >= 0);
