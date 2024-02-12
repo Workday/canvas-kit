@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.11](https://github.com/Workday/canvas-kit/releases/tag/v10.3.11) (2024-02-12)
+
+### Documentation
+
+- docs: Fix Table example ([#2564](https://github.com/Workday/canvas-kit/pull/2564)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v10.3.10](https://github.com/Workday/canvas-kit/releases/tag/v10.3.10) (2024-02-08)
 
 ### Documentation
