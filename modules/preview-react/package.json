@@ -24,8 +24,8 @@
     "watch": "yarn build:es6 -w",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf dist && rimraf .build-info && mkdirp dist",
-    "build:cjs": "tsc -p tsconfig.cjs.json",
-    "build:es6": "tsc -p tsconfig.es6.json",
+    "build:cjs": "ttsc -p tsconfig.cjs.json",
+    "build:es6": "ttsc -p tsconfig.es6.json",
     "build:rebuild": "npm-run-all clean build",
     "build": "npm-run-all --parallel build:cjs build:es6",
     "prepack": "node ../../utils/publish.js pre preview-react",
@@ -44,7 +44,6 @@
     "react": ">=16.14"
   },
   "dependencies": {
-    "@emotion/css": "^11.7.1",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@workday/canvas-kit-react": "^10.3.11",
