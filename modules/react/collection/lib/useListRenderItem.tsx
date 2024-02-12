@@ -34,7 +34,7 @@ export function useListRenderItems<T>(
                 // about capital letters in attributes. React thinks this will be applied to the DOM
                 // element even though we remove it later...
                 virtual,
-                key: item.id,
+                key: item.id || item.index,
                 item,
               });
             }
@@ -44,8 +44,8 @@ export function useListRenderItems<T>(
             const child = children(item.value, item.index);
             if (React.isValidElement(child)) {
               return React.cloneElement(child, {
-                key: item.id,
-                item: item.value,
+                key: item.id || item.index,
+                item: item,
               });
             }
             return child;

@@ -1,5 +1,5 @@
 import React from 'react';
-import {ButtonSizes, IconPositions} from '../types';
+import {ButtonSizes} from '../types';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
 
@@ -10,12 +10,6 @@ export interface ButtonLabelIconProps extends Partial<SystemIconProps> {
    * @default 'medium'
    */
   size?: ButtonSizes;
-  /**
-   * Button icon positions can either be `left` or `right`.
-   * If no value is provided, it defaults to `left`.
-   * @default 'start'
-   */
-  iconPosition?: IconPositions;
   /**
    * If set to `true`, transform the icon's x-axis to mirror the graphic
    * @default false

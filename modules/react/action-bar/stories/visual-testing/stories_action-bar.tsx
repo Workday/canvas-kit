@@ -1,7 +1,7 @@
 import React from 'react';
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled} from '../../../../../utils/storybook';
-import {colors, space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
+import {colors, space} from '@workday/canvas-kit-react/tokens';
 import {ActionBar} from '@workday/canvas-kit-react/action-bar';
 import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 
@@ -30,7 +30,7 @@ export const ActionBarStates = () => (
           style={{
             background: colors.soap100,
             position: 'relative',
-            height: `${spaceNumbers.xl * 2.5}px`,
+            height: `calc(${space.xxl} + 2.25rem)`,
             marginBottom: space.xs,
           }}
         >
@@ -76,7 +76,7 @@ export const ActionBarWithOverflowMenuStates = () => {
           },
           {
             label: 'Maximum Visible Items (as 5 buttons)',
-            props: {maximumVisible: items.length},
+            props: {maximumVisible: items.length, containerWidth: 830},
           },
           {
             label: 'Maximum Visible Items (400px width)',
@@ -87,9 +87,7 @@ export const ActionBarWithOverflowMenuStates = () => {
             props: {maximumVisible: items.length, containerWidth: 280},
           },
         ]}
-        columnProps={[
-          {label: 'Example', props: {}},
-        ]}
+        columnProps={[{label: 'Example', props: {}}]}
       >
         {({containerWidth, maximumVisible}) => (
           <ActionBar items={items} maximumVisible={maximumVisible}>
