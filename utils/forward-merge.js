@@ -9,6 +9,9 @@ const {exec: originalExec} = require('node:child_process');
 const exec = promisify(originalExec);
 const getNextBranch = require('./get-forward-merge-branch');
 const nodeSpawn = require('node:child_process').spawn;
+const resolvePackageJson = require('./resolve-package-json');
+const fixPackageJsonVersions = require('./fix-package-json-versions');
+const glob = promisify(require('glob'));
 
 // Tokenize and parse command arguments and be aware that anything in quotes is part of a single argument
 // For example: `echo "hello there" bob` returns args like `['"hello there"', 'bob']
@@ -144,8 +147,7 @@ async function main() {
 
       if (conflict.file === 'lerna.json' || conflict.file.includes('package.json')) {
         if (conflict.type === 'content') {
-          // resolve the conflicts by taking incoming file
-          await spawn(`git checkout --theirs -- "${conflict.file}"`);
+          await resolveJsonFile(conflict.file);
           await spawn(`git add ${conflict.file}`);
         } else if (conflict.type === 'modify/delete') {
           await spawn(`git rm ${conflict.file}`);
@@ -170,6 +172,17 @@ async function main() {
         }
       }
     }
+  }
+
+  // fix any dependency mismatches of dependencies in the mono repo
+  const files = await glob('modules/*/package.json'); //?
+  const monoDependencies = await getMonoDependencies(files); //?
+
+  for (const file of files) {
+    const contents = (await fs.readFile(file)).toString();
+
+    const newContents = fixPackageJsonVersions(contents, monoDependencies);
+    await fs.writeFile(file, newContents, 'utf8');
   }
 
   await spawn(`yarn install --production=false`);
@@ -266,4 +279,30 @@ function parseContents(lines) {
   } while (remainingLines.length);
 
   return [remainingLines, contents];
+}
+
+/**
+ * @param file {string}
+ */
+async function resolveJsonFile(file) {
+  const contents = await fs.readFile(file).toString();
+
+  await fs.writeFile(file, resolvePackageJson(contents));
+}
+
+/**
+ * @param files {string[]}
+ */
+async function getMonoDependencies(files) {
+  /** @type {{name: string, version: string}[]} */
+  const monoDependencies = [];
+
+  for (const file of files) {
+    const contents = (await fs.readFile(file)).toString();
+    const {name, version} = JSON.parse(contents);
+
+    monoDependencies.push({name, version});
+  }
+
+  return monoDependencies;
 }
