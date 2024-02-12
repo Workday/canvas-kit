@@ -1,28 +1,32 @@
+import {Meta} from '@storybook/addon-docs';
 import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
 
 import {Select} from '@workday/canvas-kit-react/select';
 
 import {Alert} from './examples/Alert';
 import {Basic} from './examples/Basic';
+import {Complex} from './examples/Complex';
 import {Disabled} from './examples/Disabled';
-import {DisabledOption} from './examples/DisabledOption';
+import {DisabledOptions} from './examples/DisabledOption';
 import {Error} from './examples/Error';
 import {Grow} from './examples/Grow';
 import {LabelPosition} from './examples/LabelPosition';
-import {RefForwarding} from './examples/RefForwarding';
+import {WithIcons} from './examples/WithIcons';
 import {Required} from './examples/Required';
+import {MenuHeight} from './examples/MenuHeight';
+import {HoistedModel} from './examples/HoistedModel';
+import {RefForwarding} from './examples/RefForwarding';
+import {FetchingDynamicItems} from './examples/FetchingDynamicItems';
+import {Placeholder} from './examples/Placeholder';
+import {InitialSelectedItem} from './examples/InitialSelectedItem';
 
 <Meta title="Components/Inputs/Select" component={Select} />
 
 # Canvas Kit Select
 
-Select menus allow users to choose one option from a list of items.
+Select inputs allow users to choose one option from a list of items or type a matching option.
 
-[> Workday Design Reference](https://design.workday.com/components/inputs/select-drop-down)
-
-> Consider using the [Select in Preview](/components/inputs/select/) instead. It utilizes a
-> Canvas-styled menu with theming support and a more flexible API for defining options. The Select
-> in Preview will replace this component in the future.
+[> Workday Design Reference](https://design.workday.com/components/inputs/select)
 
 ## Installation
 
@@ -34,44 +38,57 @@ yarn add @workday/canvas-kit-react
 
 ### Basic Example
 
-Select should be used in tandem with [Form Field](/components/inputs/form-field/) to meet
-accessibility standards.
+`Select` supports a
+[dynamic API](/getting-started/for-developers/resources/collection-api/#dynamic-items) where you
+pass an array of items via the `items` prop and provide a render function to display the items. The
+items may be provided as an
+[array of strings](/getting-started/for-developers/resources/collection-api/#array-of-strings) or an
+[array of objects](/getting-started/for-developers/resources/collection-api/#array-of-objects).
+
+`Select` should be used in tandem with [Form Field](/components/inputs/form-field/) where the
+`Select` wraps the `FormField` element and the `FormField` element wraps the children of `Select` to
+meet accessibility standards. This ensures the `label` text from `FormField` is attached to the
+`Select.Input` and read out as a group for voiceover.
+
+```tsx
+<Select items={options}>
+  <FormField label="Your Label">
+    <Select.Input onChange={e => handleChange(e)} id="contact-select" />
+    <Select.Popper>
+      <Select.Card>
+        <Select.List>{item => <Select.Item>{item.id}</Select.Item>}</Select.List>
+      </Select.Card>
+    </Select.Popper>
+  </FormField>
+</Select>
+```
 
 <ExampleCodeBlock code={Basic} />
 
-### Disabled
+Our example uses [React state](<(https://react.dev/learn/state-a-components-memory)>) to track the
+value of the `Select`.
 
-Set the `disabled` prop of the Select to prevent users from interacting with it.
+### Hoisted Model
 
-<ExampleCodeBlock code={Disabled} />
+By default, `Select` will create and use its own model internally. Alternatively, you may configure
+your own model with `useSelectModel` and pass it to `Select` via the `model` prop. This pattern is
+referred to as
+[hoisting the model](/getting-started/for-developers/resources/compound-components/#configuring-a-model)
+and provides direct access to its `state` and `events` outside of the `Select` component.
 
-You may also set the `disabled` prop of the Select Option to prevent users from selecting that
-Option. Note that the value of a Select may be programmatically set to a disabled Option by setting
-the Select's `value` prop to the value of the disabled Option. The disabled Option, however, will
-remain unselectable by the user.
+In this example, we set up external observation of the model state and create an external button to
+trigger an event to change the selected item.
 
-<ExampleCodeBlock code={DisabledOption} />
+**Note: If your array of objects uses an `id` property and a `text` property there is no need to use
+the helper functions of `getId` or `getTextValue`. The collection system and the `Select` use these
+properties by default for keyboard navigation and selected the `id` based on the item clicked.**
 
-### Ref Forwarding
-
-Select supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will forward
-`ref` to its underlying `<select>` element.
-
-<ExampleCodeBlock code={RefForwarding} />
-
-### Grow
-
-Set the `grow` prop of the wrapping Form Field to `true` to configure the Select to expand to the
-width of its container.
-
-<ExampleCodeBlock code={Grow} />
-
-The `grow` prop may also be applied directly to the Select if Form Field is not being used.
+<ExampleCodeBlock code={HoistedModel} />
 
 ### Label Position
 
-Set the `labelPosition` prop of the wrapping Form Field to designate the position of the label
-relative to the Select. `labelPosition` accepts the following values:
+Set the `labelPosition` prop of the wrapping `FormField` to designate the position of the label
+relative to the `Select`. `labelPosition` accepts the following values:
 
 - `FormField.LabelPosition.Top` (Default)
 - `FormField.LabelPosition.Left`
@@ -80,28 +97,201 @@ relative to the Select. `labelPosition` accepts the following values:
 
 ### Required
 
-Set the `required` prop of the wrapping Form Field to `true` to indicate that the field is required.
-Labels for required fields are suffixed by a red asterisk.
+Set the `required` prop of the wrapping `FormField` to `true` to indicate that the field is
+required. Labels for required fields are suffixed by a red asterisk.
 
 <ExampleCodeBlock code={Required} />
 
+### Disabled
+
+Set the `disabled` prop of `Select.Input` to prevent users from interacting with it.
+
+<ExampleCodeBlock code={Disabled} />
+
+### Disabled Items
+
+In order to disable items and prevent users from interacting with them:
+
+1. Set the `nonInteractiveIds` prop of `Select` to an array of disabled item `id`s. If your items
+   are an array of `strings` this will be just the text value. If your items are an array of
+   `objects`, this will be that value of the `id` property. This will disable interaction for those
+   items and exclude them from type-ahead.
+
+2. Set the `aria-disabled` attribute of all disabled `Select.Item`s to `true`. This ensures the
+   items are styled as disabled.
+
+The following example adds the string value of the items we want disable to `nonInteractiveIds` and
+sets `aria-disabled` for the disabled items.
+
+<ExampleCodeBlock code={DisabledOptions} />
+
+### With Icons
+
+Use `Select.Item.Icon` to render an icon for a `Select.Item`. The `icon` prop for `Select.Item.Icon`
+accepts [system icons](/assets/system-icons/) from `@workday/canvas-system-icons-web`.
+
+In order to render the icon for the selected item in the `Select.Input`:
+
+1. Obtain a reference to the `model` by registering your `items` with `useSelectModel`.
+2. Get the selected item:
+   `const selectedItem = model.navigation.getItem(model.state.selectedIds[0], model)`
+3. Pass the icon for the selected item to the input:
+   `<Select.Input inputStartIcon={selectedItem.value.icon}>`
+
+> **Note: `data-id` on `Select.Item` must match the `id` property in your array of objects. This
+> ensures proper keyboard handling and type-ahead.**
+
+<ExampleCodeBlock code={WithIcons} />
+
+**Note: that `Select.Input` will only render an icon if an item is selected.**
+
+### Grow
+
+Set the `grow` prop of the wrapping `FormField` to `true` to configure the `Select.Input` to expand
+to the width of its container.
+
+<ExampleCodeBlock code={Grow} />
+
+### Menu Height
+
+`Select.Card` has a default maximum height of `300px` to restrict the height of the dropdown menu.
+Set its `maxHeight` prop to override this value.
+
+<ExampleCodeBlock code={MenuHeight} />
+
+### Ref Forwarding
+
+`Select.Input` supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will
+forward `ref` to its underlying `<input type="text" role="combobox">` element.
+
+<ExampleCodeBlock code={RefForwarding} />
+
 ### Error States
 
-Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Alert` or
-`FormField.ErrorType.Error` to set the Select to the Alert or Error state, respectively. You will
-also need to set the `hintId` and `hintText` props on the Form Field to meet accessibility
-standards.
+Set the `error` prop of the wrapping `FormField` to `FormField.ErrorType.Alert` or
+`FormField.ErrorType.Error` to set the `Select` to the alert or error state, respectively. You will
+also need to set the `hintId` and `hintText` props on the `FormField` to meet accessibility
+standards. You must set an `id` attribute on the `Select.Input` element that matches the value of
+`inputId` set on the `FormField` element. These attributes ensure that the alert message is
+associated to the `Select` and read out by voiceover.
 
-The `error` prop may be applied directly to the Select with a value of `Select.ErrorType.Alert` or
-`Select.ErrorType.Error` if Form Field is not being used.
+**Note: The Select container component, `Select`, must wrap `FormField` to ensure `Select.Input` is
+styled correctly.**
+
+```tsx
+<Select items={options}>
+  <FormField label="Contact" inputId="contact-id-formfield">
+    <Select.Input id="contact-id-formfield" />
+    ...
+  </FormField>
+</Select>
+```
 
 #### Alert
+
+Use the alert state when a selection is valid but there is additional information.
 
 <ExampleCodeBlock code={Alert} />
 
 #### Error
 
+Use the error state when the selection is no longer valid.
+
 <ExampleCodeBlock code={Error} />
+
+### Initial Selected Item
+
+You can set `initialSelectedIds` to the value that you want initially selected.
+
+<ExampleCodeBlock code={InitialSelectedItem} />
+
+### Placeholder
+
+You can change the placeholder text by passing in a string value to the `placeholder` attribute on
+the `Select.Input`.
+
+<ExampleCodeBlock code={Placeholder} />
+
+### Fetching Dynamic Items
+
+It's common to load items from a server call. Hoisting the `model` and setting your items on state
+allows you to pass those items to your `model`. You can leverage React state to set your items on
+load as well as displaying a placeholder indicating when items are loaded.
+
+**Note: In this case we need to use `getId` and `getTextValue` because our data doesn't have the
+properties of `id` or `text`. Using these helper functions sets the `serverId` to be `id` and
+`label` to be `text`.**
+
+<ExampleCodeBlock code={FetchingDynamicItems} />
+
+### Complex
+
+When registering items in an array of objects, it's common to have the text that is displayed to the user be
+different than an id. In this example, `serverId` and `label` properties need to be remapped to
+`id` and `text` hence the usage of `getId` and `getTextValue`. If your object has the properties
+`text` and `id`, there would be no need for this.
+
+<ExampleCodeBlock code={Complex} />
+
+**Note: By default, the identifier and text value are `id` and `text` properties respectively. If
+your data object for each item is different, provide a `getId` or `getTextValue` function to the
+model config. For example:**
+
+```jsx
+const items = [
+  {
+    serverId: '1',
+    label: 'First Option',
+  },
+];
+
+<Select items={items} getId={item => item.serverId} getTextValue={item => item.label}>
+  {/* etc */}
+</Select>;
+```
+
+### When to use `getId`, or `getTextValue`
+
+- `getId`: This is an optional function to return the id of an item. If not provided, the default
+  function will return the `id` property from the object of each item. If you did not provide
+  `items`, do not override this function. Instead provide static
+  items via JSX. the list will create an internal array of items where `id` is the only property and
+  the default `getId` will return the desired result. **Note: If your array of objects has a
+  different property for `id`, like `serverId`, use this function to set the id.**
+
+  ```tsx
+  const options = [{text: 'Pizza', serverId: 'pizza-1'}, {text: 'Cheeseburger', serverId: 'cheeseburger'}]
+  <Select items={options} getId={(item) => item.serverId}>
+    <FormField label="Your Label">
+      <Select.Input onChange={e => handleChange(e)} id="contact-select" />
+      <Select.Popper>
+        <Select.Card>
+          <Select.List>{item => <Select.Item>{item.text}</Select.Item>}</Select.List>
+        </Select.Card>
+      </Select.Popper>
+    </FormField>
+  </Select>
+  ```
+
+- `getTextValue`: Optional function to return the text representation of an item. If not provided,
+  the default function will return the `text` property of the object of each item or an empty string
+  if there is no `text` property. If you did not provide `items`, do not override this function.
+  **Note: If your array of objects has a different property for `text`, like `label`, use this
+  function to set the text.**
+
+  ```tsx
+  const options = [{label: 'Pizza', id: 'pizza-1'}, {label: 'Cheeseburger', id: 'cheeseburger'}]
+  <Select items={options} getTextValue={(item) => item.label}>
+    <FormField label="Your Label">
+      <Select.Input onChange={e => handleChange(e)} id="contact-select" />
+      <Select.Popper>
+        <Select.Card>
+          <Select.List>{item => <Select.Item>{item.label}</Select.Item>}</Select.List>
+        </Select.Card>
+      </Select.Popper>
+    </FormField>
+  </Select>
+  ```
 
 ## Component API
 

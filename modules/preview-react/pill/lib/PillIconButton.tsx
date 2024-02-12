@@ -7,7 +7,7 @@ import {usePillModel} from './usePillModel';
 import {xSmallIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {colors, space} from '@workday/canvas-kit-react/tokens';
-import {BaseButton} from '@workday/canvas-kit-react/button';
+import {BaseButton, buttonVars} from '@workday/canvas-kit-react/button';
 
 export interface PillIconButtonProps extends Omit<SystemIconProps, 'icon'> {
   /**
@@ -22,32 +22,6 @@ export interface PillIconButtonProps extends Omit<SystemIconProps, 'icon'> {
   'aria-label'?: string;
 }
 
-const getIconColors = () => {
-  return {
-    default: {
-      icon: colors.licorice200,
-    },
-
-    hover: {
-      icon: colors.licorice500,
-    },
-    active: {
-      icon: colors.licorice500,
-    },
-    focus: {
-      icon: colors.licorice500,
-
-      focusRing: focusRing({
-        innerColor: 'transparent',
-      }),
-    },
-    disabled: {
-      icon: colors.licorice100,
-      opacity: '1',
-    },
-  };
-};
-
 const StyledIconButton = styled(BaseButton)<StyledType & PillIconButtonProps>({
   marginInlineEnd: '-7px', // visually pull in the pill to the right size
   marginInlineStart: `-2px`, // visually create space between label and the button
@@ -61,8 +35,32 @@ const StyledIconButton = styled(BaseButton)<StyledType & PillIconButtonProps>({
     bottom: '-7px',
     margin: 0,
     pointerEvents: 'all',
-    cursor: 'pointer',
   },
+  '&.focus, &:focus-visible': {
+    ...focusRing({
+      innerColor: 'transparent',
+    }),
+  },
+  [buttonVars.default.background]: colors.soap300,
+  [buttonVars.default.border]: 'transparent',
+  [buttonVars.default.label]: colors.blackPepper400,
+
+  [buttonVars.hover.background]: colors.soap300,
+  [buttonVars.hover.border]: 'transparent',
+  [buttonVars.hover.label]: colors.blackPepper400,
+
+  [buttonVars.focus.background]: colors.soap300,
+  [buttonVars.focus.border]: 'transparent',
+  [buttonVars.focus.label]: colors.blackPepper400,
+
+  [buttonVars.active.background]: colors.soap500,
+  [buttonVars.active.border]: 'transparent',
+  [buttonVars.active.label]: colors.blackPepper400,
+
+  [buttonVars.disabled.background]: colors.soap100,
+  [buttonVars.disabled.label]: colors.licorice100,
+  [buttonVars.disabled.border]: 'transparent',
+  [buttonVars.disabled.icon]: colors.licorice100,
 });
 
 export const PillIconButton = createSubcomponent('button')({
@@ -80,7 +78,6 @@ export const PillIconButton = createSubcomponent('button')({
         width={20}
         padding="zero"
         disabled={model.state.disabled}
-        colors={getIconColors()}
         aria-labelledby={`removable-${model.state.id} label-${model.state.id}`}
         as={Element}
         position="relative"

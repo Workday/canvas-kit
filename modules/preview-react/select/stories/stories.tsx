@@ -20,7 +20,7 @@ const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
 
 export const options = [
-  {label: 'E-mail', value: 'email'},
+  {label: 'E-mail', value: 'email-1234'},
   {label: 'Phone', value: 'phone'},
   {label: 'Fax (disabled)', value: 'fax', disabled: true},
   {label: 'Mail', value: 'mail'},

@@ -130,45 +130,42 @@ Border Radius variables are in a "t-shirt size" format. Border Radius values are
 
 ## Space
 
-Space variables are in a "t-shirt size" format. Space values are in `px` format (`space`) or number
-format (`spaceNumbers`).
+Space variables are in a "t-shirt size" format. Space values are in `rem` format (`space`)
 
-| Variable | Size (px) | Size (number) |
-| -------- | --------- | ------------- |
-| `xxxs`   | `'4px'`   | `4`           |
-| `xxs`    | `'8px'`   | `8`           |
-| `xs`     | `'12px'`  | `12`          |
-| `s`      | `'16px'`  | `16`          |
-| `m`      | `'24px'`  | `24`          |
-| `l`      | `'32px'`  | `32`          |
-| `xl`     | `'40px'`  | `40`          |
-| `xxl`    | `'64px'`  | `64`          |
-| `xxxl`   | `'80px'`  | `80`          |
+| Variable | Size (rem)  | Size (calculated pixels) |
+| -------- | ----------- | ------------------------ |
+| `zero`   | `'0rem'`    | `0px`                    |
+| `xxxs`   | `'0.25rem'` | `4px`                    |
+| `xxs`    | `'0.5rem'`  | `8px`                    |
+| `xs`     | `'0.75rem'` | `12px`                   |
+| `s`      | `'1rem'`    | `16px`                   |
+| `m`      | `'1.5rem'`  | `24px`                   |
+| `l`      | `'2rem'`    | `32px`                   |
+| `xl`     | `'2.5rem'`  | `40px`                   |
+| `xxl`    | `'4rem'`    | `64px`                   |
+| `xxxl`   | `'5rem'`    | `80px`                   |
 
-The following space types are also provided: `CanvasSpace`, `CanvasSpaceValues`,
-`CanvasSpaceNumbers`, `CanvasSpaceNumberValues`
+The following space types are also provided: `CanvasSpace`, `CanvasSpaceValues`.
 
 Below are descriptions of these types:
 
-| Name                      | Description                                  |
-| ------------------------- | -------------------------------------------- |
-| `CanvasSpace`             | `space` object with string px values         |
-| `CanvasSpaceValues`       | string px values for CanvasSpace             |
-| `CanvasSpaceNumbers`      | `spaceNumbers` object with numeric px values |
-| `CanvasSpaceNumberValues` | numeric px values for CanvasSpaceNumbers     |
+| Name                | Description                           |
+| ------------------- | ------------------------------------- |
+| `CanvasSpace`       | `space` object with string rem values |
+| `CanvasSpaceValues` | string rem values for CanvasSpace     |
 
 ### Usage
 
 ```tsx
-import {space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
+import {space} from '@workday/canvas-kit-react/tokens';
 
-const iconSize = 20;
+const iconSize = '1.25rem';
 
 const buttonSyles = {
-  paddingTop: space.xs,
-  paddingRight: space.s,
+  paddingTop: `calc(${space.xs} + 2px)`,
+  paddingInlineStart: space.s,
   paddingBottom: space.xs,
-  paddingLeft: spaceNumbers.s + iconSize,
+  paddingInlineEnd: `calc(${space.s} + ${iconSize})`,
 };
 ```
 

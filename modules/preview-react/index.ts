@@ -1,5 +1,6 @@
 export * from './color-picker';
 export * from './form-field';
+export * from './loading-sparkles';
 export * from './menu';
 export * from './pill';
 export * from './segmented-control';
