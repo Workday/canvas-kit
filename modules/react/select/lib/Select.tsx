@@ -56,6 +56,7 @@ export const SelectInput = createSubcomponent(TextInput)({
       error,
       textInputProps,
       disabled,
+      width,
       ref,
       onChange,
       onInput,
@@ -68,7 +69,7 @@ export const SelectInput = createSubcomponent(TextInput)({
     model
   ) => {
     return (
-      <InputGroup>
+      <InputGroup width={width} data-width="ck-formfield-width">
         {inputStartIcon && model.state.selectedIds.length > 0 && (
           <InputGroup.InnerStart pointerEvents="none">
             <SystemIcon icon={inputStartIcon} />

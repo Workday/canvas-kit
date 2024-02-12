@@ -1,7 +1,7 @@
 import React from 'react';
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {Flex, Box} from '@workday/canvas-kit-react/layout';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
@@ -29,8 +29,14 @@ export const CustomFocus = () => {
             <Box as="p" id={longDescID} marginTop={0} marginBottom="m">
               Enter your initials to acknowledge the license.
             </Box>
-            <FormField label="Initials" style={{marginBottom: 0}}>
-              <TextInput ref={ref} value={value} onChange={e => setValue(e.currentTarget.value)} />
+            <FormField cs={{marginBottom: 0}}>
+              <FormField.Label>Initials</FormField.Label>
+              <FormField.Input
+                as={TextInput}
+                ref={ref}
+                value={value}
+                onChange={e => setValue(e.currentTarget.value)}
+              />
             </FormField>
           </Modal.Body>
           <Flex gap="s" padding="xxs" marginTop="xxs">
