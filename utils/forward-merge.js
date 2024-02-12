@@ -92,7 +92,9 @@ async function main() {
   let hasConflicts = false;
   let hasUnresolvedConflicts = false;
   const {GITHUB_REF: currentBranch = defaultBranch} = process.env;
-  const [branch, nextBranch] = getBranches(currentBranch.replace('refs/heads/', ''));
+  const [branch, nextBranch] = getBranches(
+    currentBranch.replace('refs/heads/', '').replace('\n', '')
+  );
 
   // create a merge branch
   if (!alreadyMerging) {
@@ -285,7 +287,7 @@ function parseContents(lines) {
  * @param file {string}
  */
 async function resolveJsonFile(file) {
-  const contents = await fs.readFile(file).toString();
+  const contents = (await fs.readFile(file)).toString();
 
   await fs.writeFile(file, resolvePackageJson(contents));
 }
