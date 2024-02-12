@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.13](https://github.com/Workday/canvas-kit/releases/tag/v10.3.13) (2024-02-12)
+
+### Components
+
+- fix: Fix keyframes transform for commonjs modules ([#2572](https://github.com/Workday/canvas-kit/pull/2572)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Infrastructure
+
+- ci: Fix forward-merge version conflicts ([#2568](https://github.com/Workday/canvas-kit/pull/2568)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v10.3.12](https://github.com/Workday/canvas-kit/releases/tag/v10.3.12) (2024-02-12)
 
 ### Components
