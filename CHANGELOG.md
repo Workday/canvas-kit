@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.12](https://github.com/Workday/canvas-kit/releases/tag/v10.3.12) (2024-02-12)
+
+### Components
+
+- fix: Add CSS var fallbacks on Preview ([#2571](https://github.com/Workday/canvas-kit/pull/2571)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v10.3.11](https://github.com/Workday/canvas-kit/releases/tag/v10.3.11) (2024-02-12)
 
 ### Documentation
