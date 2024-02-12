@@ -96,4 +96,41 @@ describe('updatePackageJson', () => {
 
     expect(resolvePackageJson(input)).toEqual(expected);
   });
+
+  it('should handle multiple conflicts in the same group', () => {
+    const input = stripIndent`
+      {
+        "dependencies": {
+          "@emotion/serialize": "^1.0.2",
+      <<<<<<< merge/prerelease/minor-into-prerelease/major
+          "@workday/canvas-kit-styling": "^10.3.1",
+          "@workday/canvas-tokens-web": "^1.0.0",
+      =======
+          "@workday/canvas-kit-styling": "^10.3.3",
+          "@workday/canvas-tokens-web": "^1.0.2",
+      >>>>>>> prerelease/major
+          "stylis": "4.0.13",
+          "typescript": "4.2"
+        },
+        "devDependencies": {
+          "common-tags": "^1.8.0"
+        }
+      }`;
+
+    const expected = stripIndent`
+      {
+        "dependencies": {
+          "@emotion/serialize": "^1.0.2",
+          "@workday/canvas-kit-styling": "^10.3.3",
+          "@workday/canvas-tokens-web": "^1.0.2",
+          "stylis": "4.0.13",
+          "typescript": "4.2"
+        },
+        "devDependencies": {
+          "common-tags": "^1.8.0"
+        }
+      }`;
+
+    expect(resolvePackageJson(input)).toEqual(expected);
+  });
 });

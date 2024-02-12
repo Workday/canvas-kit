@@ -41,6 +41,10 @@ function resolvePackageJson(/** @type {string} */ input) {
           const line = currentLines.find(l => l.includes(`"${property}"`));
 
           final += line + '\n';
+        } else {
+          const line = incomingLines.find(l => l.includes(`"${property}"`));
+
+          final += line + '\n';
         }
       }
     });
