@@ -125,7 +125,7 @@ export const SelectableRows = () => {
       </Heading>
       <Table aria-labelledby={headingID}>
         <Table.Row gridTemplateColumns="3.5rem repeat(2, 1fr)">
-          <Table.Header cs={tableHeaderStyles}>
+          <Table.Cell cs={tableHeaderStyles}>
             <Tooltip title="Select All">
               <Checkbox
                 checked={selectAllState === 'checked'}
@@ -133,7 +133,7 @@ export const SelectableRows = () => {
                 onChange={handleSelectAll}
               />
             </Tooltip>
-          </Table.Header>
+          </Table.Cell>
           <Table.Header scope="col" cs={tableHeaderStyles}>
             Toppings
           </Table.Header>
