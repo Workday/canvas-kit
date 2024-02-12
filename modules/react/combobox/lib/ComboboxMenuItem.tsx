@@ -4,6 +4,7 @@ import {
   composeHooks,
   createElemPropsHook,
   createSubcomponent,
+  ExtractProps,
   styled,
 } from '@workday/canvas-kit-react/common';
 import {StyledMenuItem, useMenuModel} from '@workday/canvas-kit-react/menu';
@@ -15,6 +16,9 @@ import {
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 
 import {useComboboxModel} from './hooks/useComboboxModel';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+import {mergeStyles} from '../../layout';
 
 export interface ComboboxMenuItemProps {
   children: React.ReactNode;
@@ -57,17 +61,37 @@ export const useComboboxMenuItem = composeHooks(
   useListItemRegister,
   useListItemAllowChildStrings
 );
+const comboboxMenuItemIconStencil = createStencil({
+  base: {
+    alignSelf: 'start',
+  },
+});
+
+export const ComboboxMenuItemIcon = createSubcomponent('span')({
+  modelHook: useComboboxModel,
+  subComponents: {
+    Icon: styled(SystemIcon)({alignSelf: 'start'}),
+  },
+})<ExtractProps<typeof SystemIcon>>(({...elemProps}, Element) => {
+  return <SystemIcon {...mergeStyles(elemProps, comboboxMenuItemIconStencil())} />;
+});
+
+const comboboxMenuItemStencil = createStencil({
+  base: {
+    minHeight: system.space.x10,
+  },
+});
 
 export const ComboboxMenuItem = createSubcomponent('li')({
   modelHook: useComboboxModel,
   elemPropsHook: useComboboxMenuItem,
   subComponents: {
-    Icon: styled(SystemIcon)({alignSelf: 'start'}),
+    Icon: ComboboxMenuItemIcon,
   },
 })<ComboboxMenuItemProps>(({children, ...elemProps}, Element) => {
   return (
     <OverflowTooltip placement="left">
-      <StyledMenuItem minHeight="xl" as={Element} {...(elemProps as any)}>
+      <StyledMenuItem as={Element} {...mergeStyles(elemProps as any, comboboxMenuItemStencil())}>
         {children}
       </StyledMenuItem>
     </OverflowTooltip>
