@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 
 export const Required = () => {
@@ -12,14 +12,10 @@ export const Required = () => {
     }
   };
   return (
-    <FormField
-      label="Choose Your Pizza Crust"
-      required={true}
-      useFieldset={true}
-      hintText="You must choose a crust"
-      hintId="choose-crust"
-    >
-      <RadioGroup
+    <FormField isRequired={true} as="fieldset">
+      <FormField.Label as="legend">Choose Your Pizza Crust</FormField.Label>
+      <FormField.Input
+        as={RadioGroup}
         name="crust-required"
         onChange={handleChange}
         value={value}
@@ -29,7 +25,8 @@ export const Required = () => {
         <RadioGroup.RadioButton value="thin">Thin</RadioGroup.RadioButton>
         <RadioGroup.RadioButton value="gluten-free">Gluten free</RadioGroup.RadioButton>
         <RadioGroup.RadioButton value="cauliflower">Cauliflower</RadioGroup.RadioButton>
-      </RadioGroup>
+      </FormField.Input>
+      <FormField.Hint>You must choose a crust</FormField.Hint>
     </FormField>
   );
 };
