@@ -4,6 +4,7 @@ import {CanvasAppletIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
 import {Icon, IconProps} from './Icon';
 import {createComponent} from '@workday/canvas-kit-react/common';
+import {mergeStyles} from '../../layout';
 
 export interface AppletIconStyles {
   /**
@@ -69,21 +70,15 @@ export interface AppletIconProps extends AppletIconStyles, Pick<IconProps, 'shou
 
 export const AppletIcon = createComponent('span')({
   displayName: 'AppletIcon',
-  Component: (
-    {size = 92, icon, color, shouldMirror, ...elemProps}: AppletIconProps,
-    ref,
-    Element
-  ) => {
+  Component: ({size = 92, icon, color, ...elemProps}: AppletIconProps, ref, Element) => {
     return (
       <Icon
         src={icon}
         type={CanvasIconTypes.Applet}
-        styles={appletIconStyles({color})}
         as={Element}
         size={size}
         ref={ref}
-        shouldMirror={shouldMirror}
-        {...elemProps}
+        {...mergeStyles(elemProps, [])}
       />
     );
   },

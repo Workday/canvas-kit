@@ -6,7 +6,7 @@ import {shieldIcon} from '@workday/canvas-accent-icons-web';
 
 describe('Icon component', () => {
   test('SVG is set in innerHTML', () => {
-    const {container} = render(<Icon src={shieldIcon} type={CanvasIconTypes.Accent} styles={{}} />);
+    const {container} = render(<Icon src={shieldIcon} type={CanvasIconTypes.Accent} />);
     expect(container.querySelector('svg')).toBeTruthy();
   });
 });

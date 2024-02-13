@@ -1,13 +1,13 @@
-import {CSSObject} from '@emotion/styled';
+// import {CSSObject} from '@emotion/styled';
 import * as React from 'react';
 import {CanvasIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {validateIconType} from './utils';
-import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
-import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
+import {createComponent} from '@workday/canvas-kit-react/common';
+import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {createStencil} from '@workday/canvas-kit-styling';
 
 export interface SvgProps extends BoxProps {
   src: CanvasIcon;
-  styles?: CSSObject;
   type: CanvasIconTypes;
   /**
    * If set to `true`, transform the SVG's x-axis to mirror the graphic
@@ -16,22 +16,24 @@ export interface SvgProps extends BoxProps {
   shouldMirror?: boolean;
 }
 
-const StyledIconSpan = styled(Box.as('span'))<
-  StyledType & Pick<SvgProps, 'shouldMirror' | 'styles'>
->(
-  {
+const svgStencil = createStencil({
+  base: {
+    baxSizing: 'border-box',
     display: 'inline-block',
     '> svg': {display: 'block'},
   },
-  ({shouldMirror, styles}) => ({
-    ...styles,
-    transform: shouldMirror ? 'scaleX(-1)' : undefined,
-  })
-);
+  modifiers: {
+    shouldMirror: {
+      true: {
+        transform: 'scaleX(-1)',
+      },
+    },
+  },
+});
 
 export const Svg = createComponent('span')({
   displayName: 'Svg',
-  Component: ({src, type, ...elemProps}: SvgProps, ref, Element) => {
+  Component: ({shouldMirror, src, type, ...elemProps}: SvgProps, ref, Element) => {
     try {
       validateIconType(src, type);
     } catch (e) {
@@ -40,11 +42,10 @@ export const Svg = createComponent('span')({
     }
 
     return (
-      <StyledIconSpan
-        as={Element}
-        dangerouslySetInnerHTML={{__html: src.svg}}
-        {...elemProps}
+      <Element
         ref={ref}
+        dangerouslySetInnerHTML={{__html: src.svg}}
+        {...mergeStyles(elemProps, svgStencil({shouldMirror}))}
       />
     );
   },

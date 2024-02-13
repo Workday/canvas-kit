@@ -5,7 +5,6 @@ import {colors, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon, SystemIconProps} from './SystemIcon';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {createComponent, getColor, pickForegroundColor} from '@workday/canvas-kit-react/common';
-import {SystemPropValues} from '@workday/canvas-kit-react/layout';
 
 export enum SystemIconCircleSize {
   xs = 16,
@@ -19,9 +18,9 @@ export enum SystemIconCircleSize {
 export interface SystemIconCircleProps extends Pick<SystemIconProps, 'shouldMirror'> {
   /**
    * The background color of the SystemIconCircle from `@workday/canvas-colors-web`.
-   * @default colors.soap300
+   * @default base.soap300
    */
-  background?: SystemPropValues['color'];
+  background?: string;
   /**
    * The icon to display from `@workday/canvas-accent-icons-web`.
    */

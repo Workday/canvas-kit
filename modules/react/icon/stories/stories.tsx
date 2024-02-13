@@ -5,14 +5,22 @@ import {benefitsIcon} from '@workday/canvas-applet-icons-web';
 import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
 
 import {colors} from '@workday/canvas-kit-react/tokens';
-import {AccentIcon, AppletIcon, SystemIcon, SystemIconCircle, Graphic} from '../index';
+import {
+  AccentIcon,
+  AppletIcon,
+  SystemIcon,
+  systemIconVars,
+  SystemIconCircle,
+  Graphic,
+} from '../index';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
+
+import {base, system} from '@workday/canvas-tokens-web';
 
 const graphicExample: CanvasGraphic = {
   name: 'badgeAchievement',
   type: CanvasIconTypes.Graphic,
-  svg:
-    '<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" class="wd-graphic wd-graphic-badge-achievement" focusable="false" role="presentation" viewBox="0 0 50 50"><g fill="none" fill-rule="nonzero" class="wd-icon-container"><circle cx="25" cy="25" r="25" fill="#FFC943"/><path fill="#FF7A45" d="M17 12h23l-4.373 7.5L40 27H17z"/><path fill="#656464" d="M15 12h2v31h-2z"/><circle cx="16" cy="11.5" r="1.5" fill="#656464"/></g></svg>',
+  svg: '<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" class="wd-graphic wd-graphic-badge-achievement" focusable="false" role="presentation" viewBox="0 0 50 50"><g fill="none" fill-rule="nonzero" class="wd-icon-container"><circle cx="25" cy="25" r="25" fill="#FFC943"/><path fill="#FF7A45" d="M17 12h23l-4.373 7.5L40 27H17z"/><path fill="#656464" d="M15 12h2v31h-2z"/><circle cx="16" cy="11.5" r="1.5" fill="#656464"/></g></svg>',
   filename: 'wd-graphic-badge-achievement.svg',
   category: '',
   tags: [],
@@ -56,41 +64,41 @@ storiesOf('Tokens/Icon', module)
   .addParameters({component: SystemIcon})
   .add('System Icon', () => (
     <div className="story">
-      <SystemIcon icon={activityStreamIcon} />
-      <SystemIcon icon={activityStreamIcon} color={colors.blueberry500} />
+      <SystemIcon icon={activityStreamIcon} background={base.cinnamon500} />
+      <SystemIcon icon={activityStreamIcon} color={base.berrySmoothie400} />
       <SystemIcon
         className="custom-class"
         icon={activityStreamIcon}
-        accent={colors.frenchVanilla100}
-        fill={colors.blueberry500}
-        background={colors.blueberry500}
+        accent={base.frenchVanilla100}
+        fill={base.blueberry500}
+        background={base.blueberry500}
       />
       <br />
-      <SystemIcon icon={activityStreamIcon} colorHover={colors.cinnamon300} />
+      <SystemIcon icon={activityStreamIcon} colorHover={base.cinnamon300} />
       <SystemIcon
         icon={activityStreamIcon}
-        color={colors.blueberry500}
-        fillHover={colors.chiliMango200}
-        accentHover={colors.chiliMango400}
+        color={base.blueberry500}
+        fillHover={base.chiliMango200}
+        accentHover={base.chiliMango400}
       />
       <SystemIcon
         className="custom-class"
         icon={activityStreamIcon}
-        accent={colors.frenchVanilla100}
-        fill={colors.blueberry500}
-        background={colors.blueberry500}
-        fillHover={colors.cantaloupe500}
-        accentHover={colors.frenchVanilla100}
-        backgroundHover={colors.cantaloupe500}
+        accent={base.frenchVanilla100}
+        fill={base.blueberry500}
+        background={base.blueberry500}
+        fillHover={base.cantaloupe500}
+        accentHover={base.frenchVanilla100}
+        backgroundHover={base.cantaloupe500}
       />
       <br />
       <SystemIcon icon={activityStreamIcon} size={48} />
       <SystemIconCircle icon={activityStreamIcon} />
       <SystemIconCircle icon={activityStreamIcon} shouldMirror={true} />
-      <SystemIconCircle icon={activityStreamIcon} background={colors.blueberry400} />
+      <SystemIconCircle icon={activityStreamIcon} background={base.blueberry400} />
       <SystemIconCircle
         icon={activityStreamIcon}
-        background={colors.blueberry400}
+        background={base.blueberry400}
         shouldMirror={true}
       />
     </div>

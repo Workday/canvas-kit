@@ -3,6 +3,8 @@ import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
 import {Svg, SvgProps} from './Svg';
 import {createComponent} from '@workday/canvas-kit-react/common';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 
 export interface GraphicStyles {
   /**
@@ -29,6 +31,10 @@ export interface GraphicProps extends GraphicStyles, Pick<SvgProps, 'shouldMirro
   src: CanvasGraphic;
 }
 
+/**
+ * @deprecated
+ *
+ */
 export const graphicStyles = ({width, height, grow}: GraphicStyles): CSSObject => {
   if (grow) {
     return {
@@ -59,22 +65,53 @@ export const graphicStyles = ({width, height, grow}: GraphicStyles): CSSObject =
   return {};
 };
 
+/**
+ * Should we export this stencil?
+ */
+const graphicStencil = createStencil({
+  vars: {
+    height: '100%',
+    width: '100%',
+  },
+  base: ({height, width}) => ({
+    '& svg': {
+      height,
+      width,
+    },
+  }),
+  modifiers: {
+    grow: {
+      true: {
+        width: '100%',
+        '& svg': {
+          width: '100%',
+          height: '100%',
+        },
+      },
+    },
+  },
+});
+
+function convertSize(size: string | number) {
+  return typeof size === 'number' ? px2rem(size) : size;
+}
+
 export const Graphic = createComponent('span')({
   displayName: 'Graphic',
   Component: (
-    {grow = false, src, width, height, shouldMirror, ...elemProps}: GraphicProps,
+    {grow, width = '100%', height = '100%', ...elemProps}: GraphicProps,
     ref,
     Element
   ) => {
     return (
       <Svg
-        src={src}
-        styles={graphicStyles({width, height, grow})}
         type={CanvasIconTypes.Graphic}
         as={Element}
         ref={ref}
-        shouldMirror={shouldMirror}
-        {...elemProps}
+        {...mergeStyles(
+          elemProps,
+          graphicStencil({grow, height: convertSize(height), width: convertSize(width)})
+        )}
       />
     );
   },

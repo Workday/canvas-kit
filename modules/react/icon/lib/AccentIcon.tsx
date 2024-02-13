@@ -4,12 +4,14 @@ import {CanvasAccentIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
 import {Icon, IconProps} from './Icon';
 import {createComponent, getColor} from '@workday/canvas-kit-react/common';
-import {SystemPropValues} from '@workday/canvas-kit-react/layout';
+import {mergeStyles, SystemPropValues} from '@workday/canvas-kit-react/layout';
+import {createStencil, createVars, px2rem} from '@workday/canvas-kit-styling';
+import {base} from '@workday/canvas-tokens-web';
 
 export interface AccentIconStyles {
   /**
    * The fill color of the AccentIcon.
-   * @default colors.blueberry500
+   * @default base.blueberry500
    */
   color?: SystemPropValues['color'];
   /**
@@ -43,10 +45,36 @@ export const accentIconStyles = ({
   },
 });
 
+const accentIconVars = createVars('color', 'size');
+
+const accentIconStencil = createStencil({
+  vars: {
+    color: base.blueberry500,
+    size: px2rem(56),
+  },
+  base: ({color, size}) => ({
+    '& .color-500': {
+      fill: color,
+    },
+    '& .french-vanilla-100': {
+      fill: base.frenchVanilla100,
+    },
+  }),
+  modifiers: {
+    transparent: {
+      true: {
+        '& .french-vanilla-100': {
+          fill: 'transparent',
+        },
+      },
+    },
+  },
+});
+
 export const AccentIcon = createComponent('span')({
   displayName: 'AccentIcon',
   Component: (
-    {transparent = false, size = 56, icon, color, shouldMirror, ...elemProps}: AccentIconProps,
+    {transparent = false, size = 56, icon, color, ...elemProps}: AccentIconProps,
     ref,
     Element
   ) => {
@@ -58,8 +86,7 @@ export const AccentIcon = createComponent('span')({
         size={size}
         as={Element}
         ref={ref}
-        shouldMirror={shouldMirror}
-        {...elemProps}
+        {...mergeStyles(elemProps)}
       />
     );
   },
