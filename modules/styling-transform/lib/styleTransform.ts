@@ -96,23 +96,17 @@ export default function styleTransformer(
         transformContext.fileName = node.getSourceFile()?.fileName;
       }
 
-      // disable for v10
-      // if (
-      //   ts.isSourceFile(node) &&
-      //   node.fileName !== 'test.ts' &&
-      //   transformContext.styles[transformContext.getFileName(node.fileName)]
-      // ) {
-      //   console.log(
-      //     'sourceFile:',
-      //     node.fileName,
-      //     '->',
-      //     transformContext.getFileName(node.fileName)
-      //   );
-      //   ts.sys.writeFile(
-      //     transformContext.getFileName(transformContext.getFileName(node.fileName)),
-      //     (transformContext.styles[transformContext.getFileName(node.fileName)] || []).join('\n')
-      //   );
-      // }
+      if (
+        ts.isSourceFile(node) &&
+        node.fileName !== 'test.ts' &&
+        transformContext.styles[transformContext.getFileName(node.fileName)] &&
+        transformContext.extractCSS
+      ) {
+        ts.sys.writeFile(
+          transformContext.getFileName(transformContext.getFileName(node.fileName)),
+          (transformContext.styles[transformContext.getFileName(node.fileName)] || []).join('\n')
+        );
+      }
 
       const newNode = transform(node, {
         variables: vars,
