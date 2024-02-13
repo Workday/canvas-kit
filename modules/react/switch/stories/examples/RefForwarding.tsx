@@ -1,6 +1,6 @@
 import React from 'react';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {Switch} from '@workday/canvas-kit-react/switch';
 
 export const RefForwarding = () => {
@@ -17,8 +17,9 @@ export const RefForwarding = () => {
 
   return (
     <>
-      <FormField label="Dark Mode">
-        <Switch checked={checked} onChange={handleChange} ref={ref} />
+      <FormField>
+        <FormField.Label>Dark Mode</FormField.Label>
+        <FormField.Input as={Switch} checked={checked} ref={ref} onChange={handleChange} />
       </FormField>
       <PrimaryButton onClick={handleClick}>Focus Switch</PrimaryButton>
     </>
