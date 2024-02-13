@@ -4,6 +4,7 @@ import {BodyText, Heading} from '@workday/canvas-kit-react/text';
 import {AriaLiveRegion} from '@workday/canvas-kit-react/common';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {colors} from '@workday/canvas-kit-react/tokens';
+import {createStyles} from '@workday/canvas-kit-styling';
 
 const fruits = [
   'Apples',
@@ -16,11 +17,18 @@ const fruits = [
   'Blackberries',
 ];
 
-const liveRegionStyle = {
+const liveRegionStyle = createStyles({
   border: `1px solid ${colors.cantaloupe400}`,
   backgroundColor: colors.cantaloupe100,
   padding: '0.5rem',
-};
+});
+
+const listStyles = {paddingLeft: '0px'};
+
+const listItemStyles = createStyles({
+  listStyle: 'none',
+  paddingLeft: '0px',
+});
 
 let filteredFruits = fruits;
 
@@ -36,7 +44,7 @@ export const FilterListWithLiveStatus = () => {
       <Flex gap="1rem">
         <Heading size="small">Fruits</Heading>
         <AriaLiveRegion>
-          <BodyText size="small" style={liveRegionStyle}>
+          <BodyText size="small" cs={liveRegionStyle}>
             {`Showing ${filteredFruits.length} of ${fruits.length}`}
           </BodyText>
         </AriaLiveRegion>
@@ -45,9 +53,9 @@ export const FilterListWithLiveStatus = () => {
         <TextInput.Label>Filter Items:</TextInput.Label>
         <TextInput.Field value={filter} onChange={handleFilter} />
       </TextInput>
-      <ul>
+      <ul style={listStyles}>
         {filteredFruits.map(i => (
-          <BodyText as="li" size="small" key={i}>
+          <BodyText size="small" as="li" cs={listItemStyles} key={i}>
             {i}
           </BodyText>
         ))}
