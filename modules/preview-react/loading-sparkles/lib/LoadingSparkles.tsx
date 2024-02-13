@@ -1,9 +1,15 @@
 import * as React from 'react';
-import {keyframes} from '@emotion/css';
 import {system} from '@workday/canvas-tokens-web';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {createStyles, CSProps, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {
+  createStyles,
+  CSProps,
+  cssVar,
+  handleCsProp,
+  px2rem,
+  keyframes,
+} from '@workday/canvas-kit-styling';
 
 import {sparkleIcon} from './sparkleIcon';
 
@@ -23,7 +29,7 @@ const AI_COLORS = {
   dragonFruit400: '#8C17D2',
   dragonFruit500: '#6B11A3',
   dragonFruit600: '#4A0D71',
-};
+} as const;
 
 /**
  * The animation for the sparkle.
