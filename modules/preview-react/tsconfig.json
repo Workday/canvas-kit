@@ -4,7 +4,7 @@
   "compilerOptions": {
     "plugins": [
       {
-        "transform": "../styling-transform/lib/styleTransform"
+        "transform": "../styling-transform/lib/styleTransform.ts"
       }
     ]
   }
