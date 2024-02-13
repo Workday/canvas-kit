@@ -9,7 +9,7 @@ const childrenVars = createVars('cellNumber');
 const rowStyles = createStyles({
   display: 'grid',
   gridAutoFlow: 'column',
-  gridTemplateColumns: `repeat(${[childrenVars.cellNumber]}, minmax(10rem, 1fr))`,
+  gridTemplateColumns: `repeat(${childrenVars.cellNumber}, minmax(10rem, 1fr))`,
   boxSizing: 'border-box',
 });
 
