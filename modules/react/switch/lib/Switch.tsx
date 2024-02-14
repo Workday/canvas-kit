@@ -40,7 +40,7 @@ const switchHeight = system.space.x4;
 const switchTapArea = system.space.x8;
 const translateLength = system.space.x4;
 
-const switchContainerStyles = createStencil({
+const switchContainerStencil = createStencil({
   base: {
     position: 'relative',
     height: system.space.x6,
@@ -52,14 +52,14 @@ const SwitchContainer = createComponent('div')({
   displayName: 'SwitchContainer',
   Component: ({children, ...elemProps}, ref, Element) => {
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, switchContainerStyles())}>
+      <Element ref={ref} {...mergeStyles(elemProps, switchContainerStencil())}>
         {children}
       </Element>
     );
   },
 });
 
-const switchInputStyles = createStencil({
+const switchInputStencil = createStencil({
   base: {
     display: 'flex',
     position: 'absolute',
@@ -118,11 +118,11 @@ const switchInputStyles = createStencil({
 const SwitchInput = createComponent('input')<SwitchProps>({
   displayName: 'SwitchInput',
   Component: ({error, ...elemProps}, ref, Element) => {
-    return <Element ref={ref} {...mergeStyles(elemProps, switchInputStyles({error}))} />;
+    return <Element ref={ref} {...mergeStyles(elemProps, switchInputStencil({error}))} />;
   },
 });
 
-const switchBackgroundStyles = createStencil({
+const switchBackgroundStencil = createStencil({
   base: {
     boxSizing: 'border-box',
     position: 'absolute',
@@ -143,14 +143,14 @@ const SwitchBackground = createComponent('div')({
   displayName: 'SwitchBackground',
   Component: ({children, ...elemProps}, ref, Element) => {
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, switchBackgroundStyles())}>
+      <Element ref={ref} {...mergeStyles(elemProps, switchBackgroundStencil())}>
         {children}
       </Element>
     );
   },
 });
 
-const switchCircleStyles = createStencil({
+const switchCircleStencil = createStencil({
   base: {
     width: circleSize,
     height: circleSize,
@@ -173,7 +173,7 @@ const switchCircleStyles = createStencil({
 const SwitchCircle = createComponent('div')<Pick<SwitchProps, 'checked'>>({
   displayName: 'SwitchCircle',
   Component: ({checked, ...elemProps}, ref, Element) => {
-    return <Element ref={ref} {...mergeStyles(elemProps, switchCircleStyles({checked}))} />;
+    return <Element ref={ref} {...mergeStyles(elemProps, switchCircleStencil({checked}))} />;
   },
 });
 
