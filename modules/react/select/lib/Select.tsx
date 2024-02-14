@@ -2,7 +2,7 @@ import React from 'react';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {Combobox} from '@workday/canvas-kit-react/combobox';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {createStyles, CSProps} from '@workday/canvas-kit-styling';
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';

@@ -1,13 +1,10 @@
 import * as React from 'react';
 
 import {Card} from '@workday/canvas-kit-react/card';
-import {space, type} from '@workday/canvas-kit-react/tokens';
+import {type} from '@workday/canvas-kit-react/tokens';
 
 import {
-  styled,
-  TransformOrigin,
   createSubcomponent,
-  StyledType,
   ExtractProps,
   createElemPropsHook,
 } from '@workday/canvas-kit-react/common';
