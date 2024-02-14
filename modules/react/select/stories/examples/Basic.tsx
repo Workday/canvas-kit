@@ -24,7 +24,7 @@ export const Basic = () => {
       <Select items={options}>
         <FormField>
           <FormField.Label>Contact</FormField.Label>
-          <FormField.Input as={Select.Input} onChange={e => handleChange(e)} />
+          <FormField.Input as={Select.Input} onChange={handleChange} />
           <Select.Popper>
             <Select.Card>
               <Select.List>

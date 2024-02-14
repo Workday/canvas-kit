@@ -57,13 +57,13 @@ export const useComboboxKeyboardTypeAhead = createElemPropsHook(useComboboxModel
     return -1;
   };
 
-  const currentItem = model.navigation.getItem(model.state.cursorId, model);
-  const cursorFocusedIndex = currentItem.index;
+  const currentItemIndex =
+    model.state.items.length > 0 ? model.navigation.getItem(model.state.cursorId, model).index : 0;
 
   const handleKeyboardTypeAhead = (key: string, numOptions: number) => {
     // If the starting point is beyond the list of options, reset it
     // to the beginning of the list
-    const startNumber = keySofar.current.length === 0 ? cursorFocusedIndex + 1 : cursorFocusedIndex;
+    const startNumber = keySofar.current.length === 0 ? currentItemIndex + 1 : currentItemIndex;
 
     const start = startNumber === numOptions ? 0 : startNumber;
 

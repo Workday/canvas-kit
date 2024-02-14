@@ -9,6 +9,9 @@ const {exec: originalExec} = require('node:child_process');
 const exec = promisify(originalExec);
 const getNextBranch = require('./get-forward-merge-branch');
 const nodeSpawn = require('node:child_process').spawn;
+const resolvePackageJson = require('./resolve-package-json');
+const fixPackageJsonVersions = require('./fix-package-json-versions');
+const glob = promisify(require('glob'));
 
 // Tokenize and parse command arguments and be aware that anything in quotes is part of a single argument
 // For example: `echo "hello there" bob` returns args like `['"hello there"', 'bob']
@@ -89,7 +92,9 @@ async function main() {
   let hasConflicts = false;
   let hasUnresolvedConflicts = false;
   const {GITHUB_REF: currentBranch = defaultBranch} = process.env;
-  const [branch, nextBranch] = getBranches(currentBranch.replace('refs/heads/', ''));
+  const [branch, nextBranch] = getBranches(
+    currentBranch.replace('refs/heads/', '').replace('\n', '')
+  );
 
   // create a merge branch
   if (!alreadyMerging) {
@@ -128,26 +133,37 @@ async function main() {
     const conflicts = lines
       .filter(line => line.startsWith('CONFLICT'))
       .map(line => {
-        const match = line.match(/Merge conflict in (.+)/);
-        return (match && match[1]) || '';
+        if (/\(content\)/.test(line)) {
+          const match = line.match(/Merge conflict in (.+)/);
+          return {type: 'content', file: (match && match[1]) || ''};
+        }
+        if (/\(modify\/delete\)/.test(line)) {
+          const match = line.match(/: (.+) deleted in/);
+          return {type: 'modify/delete', file: (match && match[1]) || ''};
+        }
+        return {type: 'unknown', file: ''};
       });
 
     for (const conflict of conflicts) {
-      console.log(`Attempting to resolve conflict in ${conflict}`);
+      console.log(`Attempting to resolve conflict in ${conflict.file}`);
 
-      if (conflict === 'lerna.json' || conflict.includes('package.json')) {
-        // resolve the conflicts by taking incoming file
-        await spawn(`git checkout --theirs -- "${conflict}"`);
-        await spawn(`git add ${conflict}`);
+      if (conflict.file === 'lerna.json' || conflict.file.includes('package.json')) {
+        if (conflict.type === 'content') {
+          await resolveJsonFile(conflict.file);
+          await spawn(`git add ${conflict.file}`);
+        } else if (conflict.type === 'modify/delete') {
+          await spawn(`git rm ${conflict.file}`);
+        }
 
-        console.log(`Resolved conflicts in ${conflict}`);
-      } else if (conflict === 'CHANGELOG.md') {
+        console.log(`Resolved conflicts in ${conflict.file}`);
+      } else if (conflict.file === 'CHANGELOG.md') {
         await updateChangelog();
+        await spawn(`git add ${conflict.file}`);
 
-        console.log(`Resolved conflicts in ${conflict}`);
-      } else if (conflict === 'yarn.lock') {
+        console.log(`Resolved conflicts in ${conflict.file}`);
+      } else if (conflict.file === 'yarn.lock') {
         // yarn resolves yarn.lock conflicts
-        console.log(`Conflicts in ${conflict} will be resolved later.`);
+        console.log(`Conflicts in ${conflict.file} will be resolved later.`);
       } else {
         console.log('Merge cannot be resolved automatically');
         hasUnresolvedConflicts = true;
@@ -158,6 +174,17 @@ async function main() {
         }
       }
     }
+  }
+
+  // fix any dependency mismatches of dependencies in the mono repo
+  const files = await glob('modules/*/package.json'); //?
+  const monoDependencies = await getMonoDependencies(files); //?
+
+  for (const file of files) {
+    const contents = (await fs.readFile(file)).toString();
+
+    const newContents = fixPackageJsonVersions(contents, monoDependencies);
+    await fs.writeFile(file, newContents, 'utf8');
   }
 
   await spawn(`yarn install --production=false`);
@@ -254,4 +281,30 @@ function parseContents(lines) {
   } while (remainingLines.length);
 
   return [remainingLines, contents];
+}
+
+/**
+ * @param file {string}
+ */
+async function resolveJsonFile(file) {
+  const contents = (await fs.readFile(file)).toString();
+
+  await fs.writeFile(file, resolvePackageJson(contents));
+}
+
+/**
+ * @param files {string[]}
+ */
+async function getMonoDependencies(files) {
+  /** @type {{name: string, version: string}[]} */
+  const monoDependencies = [];
+
+  for (const file of files) {
+    const contents = (await fs.readFile(file)).toString();
+    const {name, version} = JSON.parse(contents);
+
+    monoDependencies.push({name, version});
+  }
+
+  return monoDependencies;
 }

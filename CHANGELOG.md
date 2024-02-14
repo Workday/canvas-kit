@@ -3,6 +3,115 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.13](https://github.com/Workday/canvas-kit/releases/tag/v10.3.13) (2024-02-12)
+
+### Components
+
+- fix: Fix keyframes transform for commonjs modules ([#2572](https://github.com/Workday/canvas-kit/pull/2572)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Infrastructure
+
+- ci: Fix forward-merge version conflicts ([#2568](https://github.com/Workday/canvas-kit/pull/2568)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v10.3.12](https://github.com/Workday/canvas-kit/releases/tag/v10.3.12) (2024-02-12)
+
+### Components
+
+- fix: Add CSS var fallbacks on Preview ([#2571](https://github.com/Workday/canvas-kit/pull/2571)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v10.3.11](https://github.com/Workday/canvas-kit/releases/tag/v10.3.11) (2024-02-12)
+
+### Documentation
+
+- docs: Fix Table example ([#2564](https://github.com/Workday/canvas-kit/pull/2564)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v10.3.10](https://github.com/Workday/canvas-kit/releases/tag/v10.3.10) (2024-02-08)
+
+### Documentation
+
+- chore: Add versions mdx ([#2553](https://github.com/Workday/canvas-kit/pull/2553)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@alanbsmith](https://github.com/alanbsmith))
+  We've added a table of previous versions to storybook
+
+
+## [v10.3.9](https://github.com/Workday/canvas-kit/releases/tag/v10.3.9) (2024-02-08)
+
+### Components
+
+- fix: Fix FormField required label error ([#2562](https://github.com/Workday/canvas-kit/pull/2562)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v9.1.39](https://github.com/Workday/canvas-kit/releases/tag/v9.1.39) (2024-02-08)
+
+### Components
+
+- fix: Fix FormField required label error ([#2562](https://github.com/Workday/canvas-kit/pull/2562)) ([@alanbsmith](https://github.com/alanbsmith))
+## [v10.3.8](https://github.com/Workday/canvas-kit/releases/tag/v10.3.8) (2024-02-08)
+
+### Components
+
+- fix: Update isOverflowed logic to account for sub-pixels ([#2548](https://github.com/Workday/canvas-kit/pull/2548)) ([@nonverbal](https://github.com/nonverbal), Lauren Clavell)
+
+
+## [v9.1.38](https://github.com/Workday/canvas-kit/releases/tag/v9.1.38) (2024-02-08)
+
+### Components
+
+- fix: Update isOverflowed logic to account for sub-pixels ([#2548](https://github.com/Workday/canvas-kit/pull/2548)) ([@nonverbal](https://github.com/nonverbal), Lauren Clavell)
+## [v10.3.7](https://github.com/Workday/canvas-kit/releases/tag/v10.3.7) (2024-02-07)
+
+### Documentation
+
+- docs: Add interactive table examples to storybook ([#2457](https://github.com/Workday/canvas-kit/pull/2457)) ([@williamjstanton](https://github.com/williamjstanton), [@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v10.3.6](https://github.com/Workday/canvas-kit/releases/tag/v10.3.6) (2024-02-07)
+
+### Components
+
+- fix(preview): Changed table justifyContent to start ([#2557](https://github.com/Workday/canvas-kit/pull/2557)) ([@vibdev](https://github.com/vibdev))
+- fix: Update `aria-activedescendant` on ComboboxInput ([#2554](https://github.com/Workday/canvas-kit/pull/2554)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+### Infrastructure
+
+- ci: Fix forward merging with CSS packages deleted ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v9.1.37](https://github.com/Workday/canvas-kit/releases/tag/v9.1.37) (2024-02-07)
+
+### Components
+
+- fix: Update `aria-activedescendant` on ComboboxInput ([#2554](https://github.com/Workday/canvas-kit/pull/2554)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
+## [v9.1.36](https://github.com/Workday/canvas-kit/releases/tag/v9.1.36) (2024-02-07)
+
+### Components
+
+- fix(preview): Changed table justifyContent to start ([#2557](https://github.com/Workday/canvas-kit/pull/2557)) ([@vibdev](https://github.com/vibdev))
+## [v10.3.5](https://github.com/Workday/canvas-kit/releases/tag/v10.3.5) (2024-02-07)
+
+### Components
+
+- fix: Allow fetching of dynamic items on select ([#2535](https://github.com/Workday/canvas-kit/pull/2535)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@alanbsmith](https://github.com/alanbsmith), [@josh-bagwell](https://github.com/josh-bagwell))
+  - Allow select to render while fetching items from a server
+  - Add initial selected item example with complex object
+  - Add placeholder example with select
+  - Select will now show your placeholder on initial load.
+  - When using select with complex items, `onChange` will return the `id` of the item, not the text.
+  - `data-id` is no longer required when your object has an `id` property.
+
+
+## [v10.3.4](https://github.com/Workday/canvas-kit/releases/tag/v10.3.4) (2024-02-07)
+
+### Documentation
+
+- docs: Update common docs ([#2552](https://github.com/Workday/canvas-kit/pull/2552)) ([@alanbsmith](https://github.com/alanbsmith))
+  Optional release note message. Changelog and release summaries will contain a pull request title. This section will add additional notes under that title. This section is not a summary, but something extra to point out in release notes. An example might be calling out breaking changes in a labs component or minor visual changes that need visual regression updates. Remove this section if no additional release notes are required.
+
+
 ## [v10.3.3](https://github.com/Workday/canvas-kit/releases/tag/v10.3.3) (2024-02-07)
 
 ### Components
@@ -26,6 +135,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
   Prevents popup or dialog from closing when a combobox menu item is selected.
 
 
+## [v9.1.35](https://github.com/Workday/canvas-kit/releases/tag/v9.1.35) (2024-01-23)
 ## [v9.1.35](https://github.com/Workday/canvas-kit/releases/tag/v9.1.35) (2024-01-23)
 
 ### Components
