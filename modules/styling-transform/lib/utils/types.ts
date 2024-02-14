@@ -3,6 +3,7 @@ import ts from 'typescript';
 export type TransformerContext = {
   checker: ts.TypeChecker;
   prefix: string;
+  getPrefix: (path: string) => string;
   variables: Record<string, string>;
   keyframes: Record<string, string>;
   styles: StylesOutput;
@@ -129,6 +130,12 @@ export interface Config {
   objectTransforms?: ObjectTransform[];
 
   propertyTransforms?: PropertyTransform[];
+
+  /**
+   * Optional function for getting a prefix given a file path. This is useful if you want to have a
+   * different prefix for each module in a monorepo.
+   */
+  getPrefix?: (path: string) => string;
 }
 
 export type ObjectTransform = (
