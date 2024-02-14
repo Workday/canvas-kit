@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {createComponent, ErrorType, focusRing, useUniqueId} from '@workday/canvas-kit-react/common';
-import {createStencil, createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 import {mergeStyles} from '../../layout';
 
@@ -40,17 +40,19 @@ const switchHeight = system.space.x4;
 const switchTapArea = system.space.x8;
 const translateLength = system.space.x4;
 
-const switchContainerStyles = createStyles({
-  position: 'relative',
-  height: system.space.x6,
-  width: switchTapArea,
+const switchContainerStyles = createStencil({
+  base: {
+    position: 'relative',
+    height: system.space.x6,
+    width: switchTapArea,
+  },
 });
 
 const SwitchContainer = createComponent('div')({
   displayName: 'SwitchContainer',
   Component: ({children, ...elemProps}, ref, Element) => {
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, switchContainerStyles)}>
+      <Element ref={ref} {...mergeStyles(elemProps, switchContainerStyles())}>
         {children}
       </Element>
     );
@@ -120,26 +122,28 @@ const SwitchInput = createComponent('input')<SwitchProps>({
   },
 });
 
-const switchBackgroundStyles = createStyles({
-  boxSizing: 'border-box',
-  position: 'absolute',
-  display: 'flex',
-  alignItems: 'center',
-  pointerEvents: 'none',
-  marginTop: system.space.x1,
-  width: switchWidth,
-  height: switchHeight,
-  borderRadius: system.shape.round,
-  padding: `${system.space.zero} ${px2rem(2)}`,
-  transition: 'background-color 200ms ease',
-  backgroundColor: base.licorice200,
+const switchBackgroundStyles = createStencil({
+  base: {
+    boxSizing: 'border-box',
+    position: 'absolute',
+    display: 'flex',
+    alignItems: 'center',
+    pointerEvents: 'none',
+    marginTop: system.space.x1,
+    width: switchWidth,
+    height: switchHeight,
+    borderRadius: system.shape.round,
+    padding: `${system.space.zero} ${px2rem(2)}`,
+    transition: 'background-color 200ms ease',
+    backgroundColor: base.licorice200,
+  },
 });
 
 const SwitchBackground = createComponent('div')({
   displayName: 'SwitchBackground',
   Component: ({children, ...elemProps}, ref, Element) => {
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, switchBackgroundStyles)}>
+      <Element ref={ref} {...mergeStyles(elemProps, switchBackgroundStyles())}>
         {children}
       </Element>
     );
