@@ -12,7 +12,7 @@ export type TransformerContext = {
   fileName: string;
 };
 
-export type NestedStyleObject = {[key: string]: string | NestedStyleObject};
+export type NestedStyleObject = {[key: string]: number | string | NestedStyleObject};
 
 /**
  * Transformer function type. A transformer will be called by the TypeScript AST transformer visitor
