@@ -1,6 +1,5 @@
 import React from 'react';
 
-import {commonColors} from '@workday/canvas-kit-react/tokens';
 import {createElemPropsHook, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {useMenuModel} from '@workday/canvas-kit-react/menu';
 import {ListBox, ListBoxProps} from '@workday/canvas-kit-react/collection';
