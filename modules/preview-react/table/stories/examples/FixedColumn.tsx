@@ -9,7 +9,7 @@ export const FixedColumn = () => {
   const headingID = useUniqueId();
   const exampleData = [
     {
-      brand: 'Porsche',
+      make: 'Porsche',
       model: '992 911 GT3',
       year: '2022',
       price: 'Starts at $160,000',
@@ -20,7 +20,7 @@ export const FixedColumn = () => {
       curbWeight: '3,164 lbs',
     },
     {
-      brand: 'BMW',
+      make: 'BMW',
       model: 'M5 Competition',
       year: '2018',
       price: 'Starts at $105,000',
@@ -31,18 +31,18 @@ export const FixedColumn = () => {
       curbWeight: '4,345 lbs',
     },
     {
-      brand: 'Audi',
-      model: 'R8',
-      year: '2022',
-      price: 'Starts at $148,000',
-      engine: '5.2L V10',
-      transmission: 'Automatic',
-      horsepower: '562hp',
-      torque: '408 lb-ft',
-      curbWeight: '3,594 lbs',
+      make: 'Alfa Romeo',
+      model: '1750 GTV',
+      year: '1970',
+      price: '$30,000 - $55,000',
+      engine: '1.75L Inline 4',
+      transmission: 'Manual',
+      horsepower: '122hp',
+      torque: '137 lb-ft',
+      curbWeight: '2,140 lbs',
     },
     {
-      brand: 'Lotus',
+      make: 'Lotus',
       model: 'Emira',
       year: '2023',
       price: 'Starts at $78,000',
@@ -53,7 +53,7 @@ export const FixedColumn = () => {
       curbWeight: '3520 lbs',
     },
     {
-      brand: 'Toyota',
+      make: 'Toyota',
       model: 'Supra',
       year: '1998',
       price: '$40,000 - $80,000',
@@ -64,7 +64,7 @@ export const FixedColumn = () => {
       curbWeight: '3,599 lbs',
     },
     {
-      brand: 'Nissan',
+      make: 'Nissan',
       model: 'Skyline GT-R',
       year: '1994',
       price: '$45,000 - $90,000',
@@ -90,7 +90,7 @@ export const FixedColumn = () => {
               backgroundColor="soap100"
               borderRight={`2px solid ${colors.soap400}`}
             >
-              Brand
+              Make
             </Table.Header>
             <Table.Header scope="col">Model</Table.Header>
             <Table.Header scope="col">Year</Table.Header>
@@ -99,7 +99,7 @@ export const FixedColumn = () => {
             <Table.Header scope="col">Transmission</Table.Header>
             <Table.Header scope="col">Horsepower</Table.Header>
             <Table.Header scope="col">Torque</Table.Header>
-            <Table.Header scope="col">Tires</Table.Header>
+            <Table.Header scope="col">Curb Weight</Table.Header>
           </Table.Row>
         </Table.Head>
         <Table.Body>
@@ -113,7 +113,7 @@ export const FixedColumn = () => {
                   backgroundColor="soap100"
                   borderRight={`2px solid ${colors.soap400}`}
                 >
-                  {item.brand}
+                  {item.make}
                 </Table.Header>
                 <Table.Cell>{item.model}</Table.Cell>
                 <Table.Cell>{item.year}</Table.Cell>

@@ -102,6 +102,14 @@ export interface Config {
    * return new AST.
    */
   additionalTransforms?: NodeTransformer[];
+
+  /**
+   * Should the CSS be statically extracted into CSS files? If `true`, CSS files will be created
+   * according to the `getFileName` configuration. If `getFileName` is not defined, a CSS file will
+   * be created with the same name as the source file with a `.css` extension.
+   */
+  extractCSS?: boolean;
+
   /**
    * This will be called every time a style or keyframe needs to be injected into extracted style
    * files. By default, the file name will be the current file with the `.tsx` replaced with a
