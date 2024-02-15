@@ -62,7 +62,7 @@ const switchInputStencil = createStencil({
     margin: system.space.zero,
     marginLeft: system.space.x1,
     borderRadius: system.shape.round,
-    opacity: system.space.zero,
+    opacity: '0',
     cursor: 'pointer',
     '&:checked, &.checked': {
       '& ~ div:first-of-type': {
