@@ -15,7 +15,10 @@ function handlePropertyTransforms(node: ts.Node, context: TransformerContext): s
 /**
  * This is the workhorse of statically analyzing style values
  */
-export function parseNodeToStaticValue(node: ts.Node, context: TransformerContext): string {
+export function parseNodeToStaticValue(
+  node: ts.Node,
+  context: TransformerContext
+): string | number {
   const {checker, variables, keyframes} = context;
 
   const value = handlePropertyTransforms(node, context);
@@ -32,7 +35,7 @@ export function parseNodeToStaticValue(node: ts.Node, context: TransformerContex
 
   // 12
   if (ts.isNumericLiteral(node)) {
-    return `${node.text}px`;
+    return parseFloat(node.text);
   }
 
   // undefined
@@ -127,13 +130,13 @@ export function parseNodeToStaticValue(node: ts.Node, context: TransformerContex
   );
 }
 
-function parseTypeToStaticValue(type: ts.Type): string | void {
+function parseTypeToStaticValue(type: ts.Type): string | number | void {
   if (type.isStringLiteral()) {
     return type.value;
   }
 
   if (type.isNumberLiteral()) {
-    return `${type.value}px`;
+    return type.value;
   }
 }
 

@@ -4,18 +4,6 @@ import {calc} from '@workday/canvas-kit-styling';
 import {createPropertyTransform} from '../createPropertyTransform';
 import {parseNodeToStaticValue} from './parseNodeToStaticValue';
 
-/**
- * Operands are either a number or a CSS variable. The property parser will always return a string
- * where numbers are converted to strings with a suffix of 'px'
- */
-function toOperand(input: string): string | number {
-  if (input.includes('px')) {
-    return parseInt(input.replace('px', ''), 10);
-  }
-
-  return input;
-}
-
 export const handleCalc = createPropertyTransform((node, context) => {
   if (
     ts.isCallExpression(node) &&
@@ -31,13 +19,13 @@ export const handleCalc = createPropertyTransform((node, context) => {
     const method = node.expression.name.text;
 
     if (method === 'add' || method === 'subtract') {
-      return calc[method](toStaticValue(args[0]), toStaticValue(args[1]));
+      return calc[method](toStaticValue(args[0]).toString(), toStaticValue(args[1]).toString());
     }
     if (method === 'multiply' || method === 'divide') {
-      return calc[method](toStaticValue(args[0]), toOperand(toStaticValue(args[1])));
+      return calc[method](toStaticValue(args[0]).toString(), toStaticValue(args[1]));
     }
     if (method === 'negate') {
-      return calc.negate(toStaticValue(args[0]));
+      return calc.negate(toStaticValue(args[0]).toString());
     }
   }
 
