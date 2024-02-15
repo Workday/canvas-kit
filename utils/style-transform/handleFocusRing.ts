@@ -4,10 +4,6 @@ import {parseNodeToStaticValue, createObjectTransform} from '@workday/canvas-kit
 import {focusRing} from '@workday/canvas-kit-react/common';
 import {NestedStyleObject} from '@workday/canvas-kit-styling-transform/lib/utils/types';
 
-function toNumber(input: string): number {
-  return parseInt(input.replace('px', ''), 10);
-}
-
 export const handleFocusRing = createObjectTransform((node, context) => {
   if (
     ts.isCallExpression(node) &&
@@ -25,7 +21,7 @@ export const handleFocusRing = createObjectTransform((node, context) => {
         if (ts.isPropertyAssignment(property) && ts.isIdentifier(property.name)) {
           const key = property.name.text;
           if (['width', 'separation'].includes(key)) {
-            args[key] = toNumber(parseNodeToStaticValue(property.initializer, context));
+            args[key] = parseNodeToStaticValue(property.initializer, context);
           } else if (key !== 'animate') {
             args[key] = parseNodeToStaticValue(property.initializer, context);
           }
