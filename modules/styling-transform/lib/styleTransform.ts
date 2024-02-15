@@ -126,6 +126,7 @@ export function withDefaultContext<T extends TransformerContext>(
   input: Partial<T> = {}
 ): T {
   return {
+    prefix: 'css',
     getPrefix: path => input.prefix || 'css',
     variables: {},
     styles,
