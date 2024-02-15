@@ -2,7 +2,7 @@ import React from 'react';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {Combobox} from '@workday/canvas-kit-react/combobox';
-import {createStyles, CSProps} from '@workday/canvas-kit-styling';
+import {createStencil, createStyles, CSProps, px2rem} from '@workday/canvas-kit-styling';
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
@@ -15,6 +15,7 @@ import {
   createContainer,
   Themeable,
 } from '@workday/canvas-kit-react/common';
+import {system} from '@workday/canvas-tokens-web';
 
 export interface SelectInputProps extends ExtractProps<typeof TextInput>, CSProps {
   /**
@@ -25,27 +26,33 @@ export interface SelectInputProps extends ExtractProps<typeof TextInput>, CSProp
   inputStartIcon?: CanvasSystemIcon;
 }
 
-const selectInputStyles = createStyles({
-  caretColor: 'transparent',
-  cursor: 'default',
-  '&::selection': {
-    backgroundColor: 'transparent',
+const selectInputStencil = createStencil({
+  base: {
+    caretColor: 'transparent',
+    cursor: 'default',
+    '&::selection': {
+      backgroundColor: 'transparent',
+    },
   },
 });
 
-const iconStyles = createStyles({
-  position: 'absolute',
-  pointerEvents: 'none',
+const selectIconsStencil = createStencil({
+  base: {
+    position: 'absolute',
+    pointerEvents: 'none',
+  },
 });
-const hiddenSelectInputStyles = createStyles({
-  position: 'absolute',
-  top: 0,
-  bottom: 0,
-  left: 0,
-  right: 0,
-  opacity: 0,
-  cursor: 'default',
-  pointerEvents: 'none',
+const hiddenSelectInputStencil = createStencil({
+  base: {
+    position: 'absolute',
+    top: system.space.zero,
+    bottom: system.space.zero,
+    left: system.space.zero,
+    right: system.space.zero,
+    opacity: system.space.zero,
+    cursor: 'default',
+    pointerEvents: 'none',
+  },
 });
 
 export const SelectInput = createSubcomponent(TextInput)({
@@ -74,7 +81,7 @@ export const SelectInput = createSubcomponent(TextInput)({
     return (
       <InputGroup data-width="ck-formfield-width">
         {inputStartIcon && model.state.selectedIds.length > 0 && (
-          <InputGroup.InnerStart className={iconStyles}>
+          <InputGroup.InnerStart {...selectIconsStencil}>
             <SystemIcon icon={inputStartIcon} />
           </InputGroup.InnerStart>
         )}
@@ -82,7 +89,6 @@ export const SelectInput = createSubcomponent(TextInput)({
         <InputGroup.Input
           error={error}
           disabled={disabled}
-          className={hiddenSelectInputStyles}
           tabIndex={-1}
           aria-hidden={true}
           onChange={onChange}
@@ -91,6 +97,7 @@ export const SelectInput = createSubcomponent(TextInput)({
           onFocus={onFocus}
           name={name}
           ref={ref}
+          {...hiddenSelectInputStencil}
         />
         {/* Visual input */}
         <InputGroup.Input
@@ -99,9 +106,9 @@ export const SelectInput = createSubcomponent(TextInput)({
           placeholder={placeholder}
           error={error}
           {...textInputProps}
-          {...mergeStyles(elemProps, [selectInputStyles])}
+          {...mergeStyles(elemProps, selectInputStencil())}
         />
-        <InputGroup.InnerEnd className={iconStyles}>
+        <InputGroup.InnerEnd {...selectIconsStencil}>
           <SystemIcon icon={caretDownSmallIcon} />
         </InputGroup.InnerEnd>
       </InputGroup>
@@ -123,7 +130,7 @@ export const SelectItem = createSubcomponent('li')({
 });
 
 const selectCardStyles = createStyles({
-  maxHeight: 300,
+  maxHeight: px2rem(300),
 });
 
 export const SelectCard = createSubcomponent('div')({

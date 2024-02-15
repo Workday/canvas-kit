@@ -26,13 +26,13 @@ export const useComboboxMenuList = createElemPropsHook(useMenuModel)(model => {
 
 const comoboxMenuListStencil = createStencil({
   base: {
-    borderRadius: '0px',
-    gap: '0px',
+    borderRadius: system.space.zero,
+    gap: system.space.zero,
     overflowY: 'auto',
     marginBlockStart: system.space.x2,
     marginBlockEnd: system.space.x2,
     background: base.frenchVanilla100,
-    padding: '0px',
+    padding: system.space.zero,
   },
   modifiers: {
     orientation: {
