@@ -34,17 +34,11 @@ export interface SwitchProps {
   error?: ErrorType;
 }
 
-const circleSize = system.space.x3;
-const switchWidth = system.space.x8;
-const switchHeight = system.space.x4;
-const switchTapArea = system.space.x8;
-const translateLength = system.space.x4;
-
 const switchContainerStencil = createStencil({
   base: {
     position: 'relative',
     height: system.space.x6,
-    width: switchTapArea,
+    width: system.space.x8,
   },
 });
 
@@ -64,7 +58,7 @@ const switchInputStencil = createStencil({
     display: 'flex',
     position: 'absolute',
     height: system.space.x6,
-    width: switchTapArea,
+    width: system.space.x8,
     margin: system.space.zero,
     marginLeft: system.space.x1,
     borderRadius: system.shape.round,
@@ -130,8 +124,8 @@ const switchBackgroundStencil = createStencil({
     alignItems: 'center',
     pointerEvents: 'none',
     marginTop: system.space.x1,
-    width: switchWidth,
-    height: switchHeight,
+    width: system.space.x8,
+    height: system.space.x4,
     borderRadius: system.shape.round,
     padding: `${system.space.zero} ${px2rem(2)}`,
     transition: 'background-color 200ms ease',
@@ -152,8 +146,8 @@ const SwitchBackground = createComponent('div')({
 
 const switchCircleStencil = createStencil({
   base: {
-    width: circleSize,
-    height: circleSize,
+    width: system.space.x3,
+    height: system.space.x3,
     borderRadius: system.shape.round,
     boxShadow: system.depth[1],
     transition: 'transform 150ms ease',
@@ -164,7 +158,7 @@ const switchCircleStencil = createStencil({
   modifiers: {
     checked: {
       true: {
-        transform: `translateX(${translateLength})`,
+        transform: `translateX(${system.space.x4})`,
       },
     },
   },
