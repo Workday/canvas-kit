@@ -1,2 +1,1 @@
-export * from './lib/Table';
-export * from './lib/TableRow';
+export * from '@workday/canvas-kit-react/table/lib/Table';

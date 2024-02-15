@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
-import {Table} from '@workday/canvas-kit-preview-react/table';
+import {Table} from '@workday/canvas-kit-react/table';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {createComponent, generateUniqueId} from '@workday/canvas-kit-react/common';
 import {Heading, Subtext} from '@workday/canvas-kit-react/text';
