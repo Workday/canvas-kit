@@ -18,7 +18,7 @@ export const handleKeyframes: NodeTransformer = (node, context) => {
   ) {
     const fileName = getFileName(node.getSourceFile()?.fileName || context.fileName);
     // parseNodeToStaticValue can parse templates. Pass it through there to get a single static string
-    const styleObj = parseNodeToStaticValue(node.template, context);
+    const styleObj = parseNodeToStaticValue(node.template, context).toString();
     const identifierName = getVarName(node);
 
     return ts.factory.createCallExpression(node.tag, undefined, [
