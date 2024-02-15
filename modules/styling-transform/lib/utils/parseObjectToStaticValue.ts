@@ -66,7 +66,6 @@ function parsePropertyToStaticValue(node: ts.Node, context: TransformerContext):
           parseNodeToStaticValue(node.initializer, context),
           context.variables
         );
-        parseNodeToStaticValue(node.initializer, context);
       }
 
       return styleObj;
@@ -77,15 +76,17 @@ function parsePropertyToStaticValue(node: ts.Node, context: TransformerContext):
   if (ts.isPropertySignature(node)) {
     const key = ts.isIdentifier(node.name)
       ? node.name.text
-      : parseNodeToStaticValue(node.name, context);
+      : parseNodeToStaticValue(node.name, context).toString();
     if (key) {
       if (key.includes('&') || key.startsWith(':')) {
         // nested
         styleObj[key] = parseObjectToStaticValue(node.type!, context);
       } else {
         styleObj[key] =
-          maybeWrapCSSVariables(parseNodeToStaticValue(node.type!, context), context.variables) ||
-          '';
+          maybeWrapCSSVariables(
+            parseNodeToStaticValue(node.type!, context).toString(),
+            context.variables
+          ) || '';
       }
 
       return styleObj;
@@ -127,7 +128,7 @@ export function parseStyleObjFromType(type: ts.Type, context: TransformerContext
     }
 
     if (propType.isNumberLiteral()) {
-      result[property.name] = `${propType.value}px`;
+      result[property.name] = propType.value;
       return result;
     }
 
@@ -142,7 +143,13 @@ export function parseStyleObjFromType(type: ts.Type, context: TransformerContext
  * Wrap all unwrapped CSS Variables. For example, `{padding: '--foo'}` will be replaced with
  * `{padding: 'var(--foo)'}`. It also works on variables in the middle of the property.
  */
-function maybeWrapCSSVariables(input: string, variables: Record<string, string>): string {
+function maybeWrapCSSVariables(
+  input: string | number,
+  variables: Record<string, string>
+): string | number {
+  if (typeof input === 'number') {
+    return input;
+  }
   // matches an string starting with `--` that isn't already wrapped in a `var()`. It tries to match
   // any character that isn't a valid separator in CSS
   return input.replace(

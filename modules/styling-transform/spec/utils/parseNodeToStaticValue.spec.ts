@@ -20,7 +20,7 @@ describe('parseNodeToStaticValue', () => {
     );
   });
 
-  it('should return the string value of a NumericLiteral', () => {
+  it('should return the number value of a NumericLiteral', () => {
     const program = createProgramFromSource(`
       12
     `);
@@ -28,9 +28,7 @@ describe('parseNodeToStaticValue', () => {
     const sourceFile = program.getSourceFile('test.ts');
     const node = findNodes(sourceFile, '', ts.isNumericLiteral)[0];
 
-    expect(parseNodeToStaticValue(node, withDefaultContext(program.getTypeChecker()))).toEqual(
-      '12px'
-    );
+    expect(parseNodeToStaticValue(node, withDefaultContext(program.getTypeChecker()))).toEqual(12);
   });
 
   it('should return the string value of a string Identifier', () => {
@@ -54,9 +52,7 @@ describe('parseNodeToStaticValue', () => {
     const sourceFile = program.getSourceFile('test.ts');
     const node = findNodes(sourceFile, '', ts.isIdentifier)[0];
 
-    expect(parseNodeToStaticValue(node, withDefaultContext(program.getTypeChecker()))).toEqual(
-      '12px'
-    );
+    expect(parseNodeToStaticValue(node, withDefaultContext(program.getTypeChecker()))).toEqual(12);
   });
 
   it('should return the string value of a PropertyAccessExpression', () => {
@@ -84,9 +80,7 @@ describe('parseNodeToStaticValue', () => {
     const sourceFile = program.getSourceFile('test.ts');
     const node = findNodes(sourceFile, '', ts.isPropertyAccessExpression)[0];
 
-    expect(parseNodeToStaticValue(node, withDefaultContext(program.getTypeChecker()))).toEqual(
-      '12px'
-    );
+    expect(parseNodeToStaticValue(node, withDefaultContext(program.getTypeChecker()))).toEqual(12);
   });
 
   it('should return the string value of a PropertyAccessExpression of a variable', () => {
