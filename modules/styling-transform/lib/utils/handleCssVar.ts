@@ -12,7 +12,7 @@ export const handleCssVar = createPropertyTransform((node, context) => {
   ) {
     const args = node.arguments.map(arg => parseNodeToStaticValue(arg, context));
 
-    return cssVar(args[0].toString(), (args[1] || context.variables[args[0]]).toString());
+    return cssVar(args[0] as string, (args[1] as string) || context.variables[args[0]]);
   }
 
   return;
