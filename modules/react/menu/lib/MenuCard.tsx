@@ -61,7 +61,7 @@ export const MenuCard = createSubcomponent('div')({
       {...mergeStyles(
         elemProps,
         menuCardStencil({
-          minWidth: typeof minWidth === 'string' ? minWidth : `${minWidth}px`,
+          minWidth: typeof minWidth === 'string' ? minWidth : px2rem(minWidth),
           transformOriginVertical: transformOrigin.vertical,
           transformOriginHorizontal: transformOrigin.horizontal,
         })
