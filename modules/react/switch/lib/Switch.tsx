@@ -153,7 +153,7 @@ const switchCircleStencil = createStencil({
     transition: 'transform 150ms ease',
     pointerEvents: 'none',
     backgroundColor: brand.primary.accent,
-    transform: 'translateX(0)',
+    transform: `translateX(${system.space.zero})`,
   },
   modifiers: {
     checked: {
