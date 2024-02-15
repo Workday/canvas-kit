@@ -11,7 +11,7 @@ import {getTransformFromPlacement} from '@workday/canvas-kit-react/popup';
 import {system, base} from '@workday/canvas-tokens-web';
 
 import {useMenuModel} from './useMenuModel';
-import {createStencil, calc} from '@workday/canvas-kit-styling';
+import {createStencil, calc, px2rem} from '@workday/canvas-kit-styling';
 import {mergeStyles} from '../../layout';
 
 export interface MenuCardProps extends ExtractProps<typeof Card, never> {
@@ -20,7 +20,7 @@ export interface MenuCardProps extends ExtractProps<typeof Card, never> {
 
 export const menuCardStencil = createStencil({
   vars: {
-    minWidth: '1px',
+    minWidth: px2rem(1),
     transformOriginVertical: 'top',
     transformOriginHorizontal: 'left',
   },
@@ -51,7 +51,7 @@ export const MenuCard = createSubcomponent('div')({
   displayName: 'Menu.Card',
   modelHook: useMenuModel,
   elemPropsHook: useMenuCard,
-})<MenuCardProps>(({minWidth, ...elemProps}, Element, model) => {
+})<MenuCardProps>(({minWidth = px2rem(1), ...elemProps}, Element, model) => {
   const transformOrigin = React.useMemo(() => {
     return getTransformFromPlacement(model.state.placement || 'bottom');
   }, [model.state.placement]);
