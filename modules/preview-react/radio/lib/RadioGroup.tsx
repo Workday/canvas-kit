@@ -17,7 +17,7 @@ export interface RadioGroupProps extends Themeable, CSProps, FlexProps {
 /**
  * Styles for RadioGroup
  */
-const radioGroupStyles = createStencil({
+const radioGroupStencil = createStencil({
   base: {
     display: 'flex',
     flexDirection: 'column',
@@ -84,5 +84,5 @@ export const RadioGroup = createContainer('div')({
     Label: RadioLabel,
   },
 })<RadioGroupProps>(({children, error, theme, ...elemProps}, Element) => {
-  return <Element {...mergeStyles(elemProps, radioGroupStyles({error}))}>{children}</Element>;
+  return <Element {...mergeStyles(elemProps, radioGroupStencil({error}))}>{children}</Element>;
 });

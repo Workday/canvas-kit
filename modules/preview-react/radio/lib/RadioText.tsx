@@ -7,7 +7,7 @@ import {createStencil} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
-const radioTextStyles = createStencil({
+const radioTextStencil = createStencil({
   base: {
     ...system.type.subtext.large,
     cursor: 'pointer',
@@ -41,7 +41,7 @@ export const RadioText = createSubcomponent('span')({
 })(({children, ...elemProps}: ExtractProps<typeof Text>, Element) => {
   const {variant, disabled} = React.useContext(RadioLabelContext);
   return (
-    <Text as={Element} {...mergeStyles(elemProps, radioTextStyles({variant, disabled}))}>
+    <Text as={Element} {...mergeStyles(elemProps, radioTextStencil({variant, disabled}))}>
       {children}
     </Text>
   );

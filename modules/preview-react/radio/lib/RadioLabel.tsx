@@ -24,7 +24,7 @@ export interface RadioLabelProps
   children?: React.ReactNode;
 }
 
-const radioLabelStyles = createStencil({
+const radioLabelStencil = createStencil({
   base: {
     alignItems: 'flex-start',
     minHeight: system.space.x6,
@@ -69,7 +69,7 @@ export const RadioLabel = createSubcomponent('label')({
 })<RadioLabelProps>(({children, variant, disabled, value, ...elemProps}, Element) => {
   return (
     <RadioLabelContext.Provider value={{variant, disabled}}>
-      <Flex as={Element} {...mergeStyles(elemProps, radioLabelStyles({variant}))}>
+      <Flex as={Element} {...mergeStyles(elemProps, radioLabelStencil({variant}))}>
         {children}
       </Flex>
     </RadioLabelContext.Provider>
