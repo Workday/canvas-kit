@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import {Card} from '@workday/canvas-kit-react/card';
-import {type} from '@workday/canvas-kit-react/tokens';
 
 import {
   createSubcomponent,
