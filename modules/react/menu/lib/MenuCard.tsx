@@ -8,7 +8,7 @@ import {
   createElemPropsHook,
 } from '@workday/canvas-kit-react/common';
 import {getTransformFromPlacement} from '@workday/canvas-kit-react/popup';
-import {system} from '@workday/canvas-tokens-web';
+import {system, base} from '@workday/canvas-tokens-web';
 
 import {useMenuModel} from './useMenuModel';
 import {createStencil, calc} from '@workday/canvas-kit-styling';
