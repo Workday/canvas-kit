@@ -12,6 +12,8 @@ This guide contains an overview of the changes in Canvas Kit v11. Please
 any questions.
 
 - [Codemod](#codemod)
+- [Component Promotions](#component-promotions)
+  - [Table (Preview)](#table-preview)
 - [Removals](#removals)
   - [Table (Main)](#table-main)
 - [Deprecations](#deprecations)
@@ -91,17 +93,42 @@ finished.
 > the codemod, as its resulting formatting (spacing, quotes, etc.) may not match your project
 > conventions.
 
+## Component Promotions
+
+### Table (Preview)
+
+**PR:** [#2600](https://github.com/Workday/canvas-kit/pull/2600)
+
+We've promoted the `Table` component in preview to main.
+
 ## Removals
 
 ### Table (Main)
 
 **PR:** [#2600](https://github.com/Workday/canvas-kit/pull/2600)
 
-We've removed the `Table` component in main. In its place, we've promoted `Table` from preview to main. This will consist
-of a new API that more closely represents a html Table element.
+We've removed the `Table` component in main and replaced it with the `Table` component from preview.
+This will consist of a new API since it is now a compound component.
+
+See below for how these components will migrate:
+
+|      v10       |         v11        |
+| -------------- | ------------------ |
+| `<Table/>`     | `<Table/>`         |
+|                | `<Table.Caption/>` |
+|                | `<Table.Head/>`    |
+|                | `<Table.Body/>`    |
+| `<TableRow/>`  | `<Table.Row/>`     |
+|                | `<Table.Header/>`  |
+|                | `<Table.Cell/>`    |
+|                | `<Table.Footer/>`  |
+
+In v10, `Table` and `TableRow` were the pieces you would use to build a Table. `TableRow` is the only piece that will "change" with the update to v11 as it is now `Table.Row` vs `TableRow`.
+
+in v11, `Table` is now a compound component that utilizes all the pieces of an html [Table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table) element.
 
 Please refer to the [Table examples](https://workday.github.io/canvas-kit/?path=/story/components-containers-table--basic) for how
-to implement tables.
+to implement new tables.
 
 ## Deprecations
 
