@@ -28,7 +28,7 @@ const tableStencil = createStencil({
  *
  *
  * ```tsx
-import {Table} from '@workday/canvas-kit-preview-react/table';
+import {Table} from '@workday/canvas-kit-react/table';
 
 export default function App() {
   return (
@@ -80,7 +80,7 @@ export const Table = createComponent('table')({
      *
      *
      * ```tsx
-      import {Table} from '@workday/canvas-kit-preview-react/table';
+      import {Table} from '@workday/canvas-kit-react/table';
 
       export default function App() {
         return (
@@ -103,7 +103,7 @@ export const Table = createComponent('table')({
     *
     *
     * ```tsx
-    import {Table} from '@workday/canvas-kit-preview-react/table';
+    import {Table} from '@workday/canvas-kit-react/table';
 
     export default function App() {
       return (
@@ -125,7 +125,7 @@ export const Table = createComponent('table')({
      *
      *
      * ```tsx
-    import {Table} from '@workday/canvas-kit-preview-react/table';
+    import {Table} from '@workday/canvas-kit-react/table';
 
     export default function App() {
       return (
@@ -154,7 +154,7 @@ export const Table = createComponent('table')({
      *
      *
      * ```tsx
-    import {Table} from '@workday/canvas-kit-preview-react/table';
+    import {Table} from '@workday/canvas-kit-react/table';
 
     export default function App() {
       return (
@@ -176,7 +176,7 @@ export const Table = createComponent('table')({
     *
     *
     * ```tsx
-    import {Table} from '@workday/canvas-kit-preview-react/table';
+    import {Table} from '@workday/canvas-kit-react/table';
 
     export default function App() {
       return (
@@ -198,7 +198,7 @@ export const Table = createComponent('table')({
     *
     *
     * ```tsx
-    import {Table} from '@workday/canvas-kit-preview-react/table';
+    import {Table} from '@workday/canvas-kit-react/table';
 
     export default function App() {
       return (
@@ -220,7 +220,7 @@ export const Table = createComponent('table')({
     *
     *
     * ```tsx
-    import {Table} from '@workday/canvas-kit-preview-react/table';
+    import {Table} from '@workday/canvas-kit-react/table';
 
     export default function App() {
       return (
