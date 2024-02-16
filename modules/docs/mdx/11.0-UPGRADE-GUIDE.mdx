@@ -12,6 +12,8 @@ This guide contains an overview of the changes in Canvas Kit v11. Please
 any questions.
 
 - [Codemod](#codemod)
+- [Removals](#removals)
+  - [Table (Main)](#table-main)
 - [Deprecations](#deprecations)
   - [Form Field (Main)](#form-field-main)
   - [Label Text](#label-text)
@@ -88,6 +90,18 @@ finished.
 > other file types (`.json`, `.mdx`, `.md`, etc.). You may need to run your linter after executing
 > the codemod, as its resulting formatting (spacing, quotes, etc.) may not match your project
 > conventions.
+
+## Removals
+
+### Table (Main)
+
+**PR:** [#2600](https://github.com/Workday/canvas-kit/pull/2600)
+
+We've removed the `Table` component in main. In its place, we've promoted `Table` from preview to main. This will consist
+of a new API that more closely represents a html Table element.
+
+Please refer to the [Table examples](https://workday.github.io/canvas-kit/?path=/story/components-containers-table--basic) for how
+to implement tables.
 
 ## Deprecations
 
