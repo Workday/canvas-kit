@@ -5,13 +5,13 @@ import {StaticStates} from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 // unreleased path
-import {Table} from '@workday/canvas-kit-react/table';
+import {Table} from '@workday/canvas-kit-preview-react/table';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {Heading} from '@workday/canvas-kit-react/text';
 import {colors} from '@workday/canvas-kit-react/tokens';
 
 export default {
-  title: 'Testing/Table',
+  title: 'Testing/Preview/Table',
   component: Table,
 };
 

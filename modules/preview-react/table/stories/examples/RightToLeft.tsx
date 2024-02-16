@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Table} from '@workday/canvas-kit-react/table';
+import {Table} from '@workday/canvas-kit-preview-react/table';
 import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
 
 export const RightToLeft = () => {
