@@ -3,8 +3,69 @@ import ts from 'typescript';
 import {findNodes} from '../findNodes';
 import {createProgramFromSource} from '../createProgramFromSource';
 
-import {parseObjectToStaticValue} from '../../lib/utils/parseObjectToStaticValue';
+import {
+  maybeWrapCSSVariables,
+  parseObjectToStaticValue,
+} from '../../lib/utils/parseObjectToStaticValue';
 import {withDefaultContext} from '../../lib/styleTransform';
+
+describe('maybeWrapCSSVariables', () => {
+  it('should wrap a variable with var(variable)', () => {
+    const input = '--foo-bar';
+    const expected = 'var(--foo-bar)';
+
+    expect(maybeWrapCSSVariables(input, {})).toEqual(expected);
+  });
+
+  it('should wrap a variable that has a matching fallback with var(variable, fallback)', () => {
+    const input = '--foo-bar';
+    const expected = 'var(--foo-bar, red)';
+
+    expect(maybeWrapCSSVariables(input, {'--foo-bar': 'red'})).toEqual(expected);
+  });
+
+  it('should add a fallback to a var() wrapper that does not have a specified fallback, but one matches', () => {
+    const input = 'var(--foo-bar)';
+    const expected = 'var(--foo-bar, red)';
+
+    expect(maybeWrapCSSVariables(input, {'--foo-bar': 'red'})).toEqual(expected);
+  });
+
+  it('should leave alone a var wrapper with a fallback specified', () => {
+    const input = 'var(--foo-bar, red)';
+    const expected = 'var(--foo-bar, red)';
+
+    expect(maybeWrapCSSVariables(input, {})).toEqual(expected);
+  });
+
+  it('should leave alone a var wrapper with a fallback specified even with a matching fallback', () => {
+    const input = 'var(--foo-bar, red)';
+    const expected = 'var(--foo-bar, red)';
+
+    expect(maybeWrapCSSVariables(input, {'--foo-bar': 'blue'})).toEqual(expected);
+  });
+
+  it('should add a fallback even to a nested var() wrapper with no specified fallback that has a matching fallback', () => {
+    const input = 'var(--some-var, var(--foo-bar))';
+    const expected = 'var(--some-var, var(--foo-bar, red))';
+
+    expect(maybeWrapCSSVariables(input, {'--foo-bar': 'red'})).toEqual(expected);
+  });
+
+  it('should add var() to variables inside other CSS functions', () => {
+    const input = 'calc(--foo-bar)';
+    const expected = 'calc(var(--foo-bar))';
+
+    expect(maybeWrapCSSVariables(input, {})).toEqual(expected);
+  });
+
+  it('should add var() with matching fallbacks to variables inside other CSS functions', () => {
+    const input = 'calc(--foo-bar)';
+    const expected = 'calc(var(--foo-bar, red))';
+
+    expect(maybeWrapCSSVariables(input, {'--foo-bar': 'red'})).toEqual(expected);
+  });
+});
 
 describe('parseObjectToStaticValue', () => {
   it('should return the string value of a StringLiteral', () => {
