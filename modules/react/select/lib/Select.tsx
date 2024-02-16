@@ -40,7 +40,7 @@ const hiddenSelectStyles = createStyles({
   bottom: 0,
   left: 0,
   right: 0,
-  opacity: 0,
+  opacity: '0',
   cursor: 'default',
   pointerEvents: 'none',
 });
