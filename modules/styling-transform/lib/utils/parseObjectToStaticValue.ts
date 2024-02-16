@@ -58,7 +58,7 @@ function parsePropertyToStaticValue(node: ts.Node, context: TransformerContext):
 
   // If there's a spread, we're expecting an object to be returned. We'll see if there's an object transform for this node
   if (ts.isSpreadAssignment(node)) {
-    const obj = handleObjectTransforms(node.expression, context); //?
+    const obj = handleObjectTransforms(node.expression, context);
 
     if (obj) {
       return obj;
