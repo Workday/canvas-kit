@@ -10,6 +10,7 @@ import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {useListModel} from './useListModel';
 import {useListRenderItems} from './useListRenderItem';
 import {useListItemRegister} from './useListItemRegister';
+import {createStencil} from '@workday/canvas-kit-styling';
 
 export interface ListBoxProps<T = any> extends Omit<ExtractProps<typeof Flex, never>, 'children'> {
   children?: React.ReactNode | ((item: T, index: number) => React.ReactNode);
@@ -31,6 +32,12 @@ export const useListBox = createElemPropsHook(useListModel)(model => {
     },
   };
 });
+
+// const listBoxStencil = createStencil({
+//   vars: {
+//     marginY: 1,
+//   },
+// });
 
 /**
  * The `ListBox` component that offers vertical rendering of a collection in the form of a
@@ -65,7 +72,7 @@ export const ListBox = createContainer('ul')({
      */
     Item: ListBoxItem,
   },
-})<ListBoxProps>(({height, maxHeight, marginY, ...elemProps}, Element, model) => {
+})<ListBoxProps>(({height, maxHeight, marginY, marginBottom, ...elemProps}, Element, model) => {
   // We're moving `marginY` to the container to not interfere with the virtualization size. We set
   // the `marginY` on the Flex to `0` to avoid inaccurate scrollbars
 
@@ -73,11 +80,19 @@ export const ListBox = createContainer('ul')({
   return (
     <Box
       ref={model.state.containerRef}
-      marginY={marginY}
-      maxHeight={maxHeight}
-      overflowY={model.state.orientation === 'vertical' ? 'auto' : undefined}
+      style={{
+        maxHeight: maxHeight,
+        marginBottom: marginY,
+        marginTop: marginY,
+        overflowY: model.state.orientation === 'vertical' ? 'auto' : undefined,
+      }}
     >
-      <Flex as={Element} flexDirection="column" {...elemProps} marginY={0}>
+      <Flex
+        as={Element}
+        flexDirection="column"
+        {...elemProps}
+        style={{marginTop: 0, marginBottom: 0}}
+      >
         {useListRenderItems(model, elemProps.children)}
       </Flex>
     </Box>

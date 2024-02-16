@@ -6,7 +6,7 @@ import {ListBox, ListBoxProps} from '@workday/canvas-kit-react/collection';
 import {system, base} from '@workday/canvas-tokens-web';
 
 import {useComboboxModel} from './hooks/useComboboxModel';
-import {createStencil} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {mergeStyles} from '../../layout';
 
 export interface ComboboxMenuListProps<T = any> extends ListBoxProps<T> {}
@@ -29,8 +29,6 @@ const comoboxMenuListStencil = createStencil({
     borderRadius: system.shape.zero,
     gap: system.space.zero,
     overflowY: 'auto',
-    marginBlockStart: system.space.x2,
-    marginBlockEnd: system.space.x2,
     background: base.frenchVanilla100,
     padding: system.space.zero,
   },
@@ -54,6 +52,7 @@ export const ComboboxMenuList = createSubcomponent('ul')({
     <ListBox
       as={Element}
       model={model}
+      marginY={cssVar(system.space.x2)}
       {...mergeStyles(elemProps, comoboxMenuListStencil({orientation: model.state.orientation}))}
     >
       {children}
