@@ -4,6 +4,7 @@ import {handleFocusRing} from './utils/style-transform/handleFocusRing';
 
 const config: Config = {
   prefix: 'cnvs',
+  extractCSS: true,
   getFileName(path) {
     return path
       .replace(/modules\/([^/]+)\/([^/]+)\/.+/, (_, modulePath, subPath) => {

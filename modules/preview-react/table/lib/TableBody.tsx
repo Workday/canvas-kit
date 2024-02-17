@@ -1,25 +1,32 @@
 import React from 'react';
-import {Grid, GridProps} from '@workday/canvas-kit-react/layout';
-import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
+import {GridProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {createComponent} from '@workday/canvas-kit-react/common';
+import {createStencil} from '@workday/canvas-kit-styling';
 
-const StyledBody = styled(Grid.as('tbody'))<StyledType>({
-  'tr:last-of-type td': {
-    borderBottom: 'none',
-  },
-  'tr:last-of-type th': {
-    borderBottom: 'none',
-  },
-  'tr:first-of-type td': {
-    borderTop: 'none',
-  },
-  'tr:first-of-type th': {
-    borderTop: 'none',
-  },
-  'td:last-of-type': {
-    borderRight: 'none',
-  },
-  'td:first-of-type': {
-    borderLeft: 'none',
+const tableBodyStencil = createStencil({
+  base: {
+    display: 'grid',
+    boxSizing: 'border-box',
+    'tr ': {
+      '&:last-of-type': {
+        'td, th': {
+          borderBottom: 'none',
+        },
+      },
+      '&:first-of-type': {
+        'td, th': {
+          borderTop: 'none',
+        },
+      },
+    },
+    'td ': {
+      '&:last-of-type': {
+        borderInlineEnd: 'none',
+      },
+      '&:first-of-type': {
+        borderInlineStart: 'none',
+      },
+    },
   },
 });
 
@@ -27,9 +34,9 @@ export const TableBody = createComponent('tbody')({
   displayName: 'Table.Body',
   Component: ({children, ...elemProps}: GridProps, ref, Element) => {
     return (
-      <StyledBody as={Element} ref={ref} {...elemProps}>
+      <Element ref={ref} {...mergeStyles(elemProps, tableBodyStencil())}>
         {children}
-      </StyledBody>
+      </Element>
     );
   },
 });

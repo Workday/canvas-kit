@@ -1,6 +1,7 @@
 import {SymbolDoc} from '@workday/canvas-kit-docs';
 
 import {Table, TableRow} from '@workday/canvas-kit-react/table';
+import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
 
 import {Basic} from './examples/Basic';
 import {RowHeader} from './examples/RowHeader';
@@ -9,6 +10,12 @@ import {RowStates} from './examples/RowStates';
 <Meta title="Components/Containers/Table" component={Table} />
 
 # Canvas Kit Table
+
+<StatusIndicator variant="red">
+  <StatusIndicator.Label>Deprecated</StatusIndicator.Label>
+</StatusIndicator>
+
+`Table` has been deprecated and will be removed in a future major version. Please use [`Table`](https://workday.github.io/canvas-kit/?path=/docs/preview-table--basic) in Preview instead.
 
 Tables are an efficient way of displaying sets of repeating data with the same structure.
 
