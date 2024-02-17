@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.15](https://github.com/Workday/canvas-kit/releases/tag/v10.3.15) (2024-02-17)
+
+### Infrastructure
+
+- fix: Add CSS fallback to custom transforms ([#2604](https://github.com/Workday/canvas-kit/pull/2604)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v10.3.14](https://github.com/Workday/canvas-kit/releases/tag/v10.3.14) (2024-02-15)
 
 ### Infrastructure
