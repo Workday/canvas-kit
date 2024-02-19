@@ -18,10 +18,12 @@ export const handleKeyframes: NodeTransformer = (node, context) => {
   ) {
     const fileName = getFileName(node.getSourceFile()?.fileName || context.fileName);
     // parseNodeToStaticValue can parse templates. Pass it through there to get a single static string
-    const styleObj = parseNodeToStaticValue(node.template, context);
+    const styleObj = parseNodeToStaticValue(node.template, context).toString();
     const identifierName = getVarName(node);
 
-    return createStyleReplacementNode(styleObj, identifierName, fileName, context);
+    return ts.factory.createCallExpression(node.tag, undefined, [
+      createStyleReplacementNode(styleObj, identifierName, fileName, context),
+    ]);
   }
 
   // keyframes({})
@@ -36,7 +38,9 @@ export const handleKeyframes: NodeTransformer = (node, context) => {
       const styleObj = parseObjectToStaticValue(node.arguments[0], context);
       const identifierName = getVarName(node);
 
-      return createStyleReplacementNode(styleObj, identifierName, fileName, context);
+      return ts.factory.updateCallExpression(node, node.expression, undefined, [
+        createStyleReplacementNode(styleObj, identifierName, fileName, context),
+      ]);
     }
   }
 
@@ -57,7 +61,5 @@ function createStyleReplacementNode(
 
   keyframes[identifierName] = animationName;
 
-  return ts.factory.createCallExpression(ts.factory.createIdentifier('keyframes'), undefined, [
-    createStyleObjectNode(serialized.styles, serialized.name),
-  ]);
+  return createStyleObjectNode(serialized.styles, serialized.name);
 }
