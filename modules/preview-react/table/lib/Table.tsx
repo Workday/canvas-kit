@@ -8,17 +8,19 @@ import {TableHeader} from './TableHeader';
 import {TableCell} from './TableCell';
 import {TableFooter} from './TableFooter';
 import {TableCaption} from './TableCaption';
-import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
-const tableStyles = createStyles({
-  ...system.type.subtext.large,
-  display: 'grid',
-  border: `${px2rem(1)} solid ${base.soap500}`,
-  borderRadius: system.shape.x2,
-  overflow: 'auto',
-  color: base.blackPepper300,
-  boxSizing: 'border-box',
+const tableStencil = createStencil({
+  base: {
+    ...system.type.subtext.large,
+    display: 'grid',
+    border: `${px2rem(1)} solid ${base.soap500}`,
+    borderRadius: system.shape.x2,
+    overflow: 'auto',
+    color: base.blackPepper300,
+    boxSizing: 'border-box',
+  },
 });
 
 /**
@@ -67,7 +69,7 @@ export const Table = createComponent('table')({
   displayName: 'Table',
   Component: ({children, ...elemProps}: GridProps, ref, Element) => {
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, tableStyles)}>
+      <Element ref={ref} {...mergeStyles(elemProps, tableStencil())}>
         {children}
       </Element>
     );

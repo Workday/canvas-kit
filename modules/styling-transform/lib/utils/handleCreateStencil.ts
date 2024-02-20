@@ -77,7 +77,7 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
           tempVariables[makeEmotionSafe(node.name.text)] = varValue;
 
           // Evaluate the variable defaults
-          stencilVariables[varValue] = parseNodeToStaticValue(node.initializer, context);
+          stencilVariables[varValue] = parseNodeToStaticValue(node.initializer, context).toString();
         }
       }
 
