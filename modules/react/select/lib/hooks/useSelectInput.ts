@@ -62,6 +62,31 @@ export const useSelectInput = composeHooks(
         // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [model.state.inputRef, model.state.items.length]);
 
+      React.useEffect(() => {
+        if (model.state.cursorId && model.state.visibility === 'visible') {
+          const item = model.navigation.getItem(model.state.cursorId, model);
+          if (model.state.isVirtualized && item) {
+            model.state.UNSTABLE_virtual.scrollToIndex(item.index);
+          } else {
+            console.log(model.state.inputRef);
+            const listboxId = textInputRef.current?.getAttribute('aria-controls');
+            if (listboxId) {
+              const menuItem = document.querySelector(
+                `[id="${listboxId}"] [data-id="${model.state.cursorId}"]`
+              );
+              if (menuItem) {
+                requestAnimationFrame(() => {
+                  menuItem.scrollIntoView({block: 'nearest'});
+                });
+              }
+            }
+          }
+        }
+
+        // we only want to run this effect if the cursor, visibility and selectedIds change and not any other time
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, [model.state.cursorId, model.state.selectedIds, model.state.visibility]);
+
       return {
         onKeyDown(event: React.KeyboardEvent) {
           // Prevent the keys from being enter in the input
