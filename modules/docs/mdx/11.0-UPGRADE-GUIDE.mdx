@@ -115,20 +115,23 @@ See below for how these components will migrate:
 |      v10       |         v11        |
 | -------------- | ------------------ |
 | `<Table/>`     | `<Table/>`         |
-|                | `<Table.Caption/>` |
-|                | `<Table.Head/>`    |
-|                | `<Table.Body/>`    |
+|      `n/a`     | `<Table.Caption/>` |
+|      `n/a`     | `<Table.Head/>`    |
+|      `n/a`     | `<Table.Body/>`    |
 | `<TableRow/>`  | `<Table.Row/>`     |
-|                | `<Table.Header/>`  |
-|                | `<Table.Cell/>`    |
-|                | `<Table.Footer/>`  |
+|      `n/a`     | `<Table.Header/>`  |
+|      `n/a`     | `<Table.Cell/>`    |
+|      `n/a`     | `<Table.Footer/>`  |
 
 In v10, `Table` and `TableRow` were the pieces that would be used to build a Table.
 In v11, `Table` is now a compound component that utilizes all the pieces of an html
 [Table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table) element to build a Table.
 
+
 Please refer to the [Table examples](https://workday.github.io/canvas-kit/?path=/story/components-containers-table--basic) for how
 to implement new tables.
+
+> **NOTE: This will have to be updated manually as the API is too different for a codemod.**
 
 ## Deprecations
 
