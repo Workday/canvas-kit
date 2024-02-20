@@ -86,8 +86,9 @@ export function focusRing(options: FocusRingOptions = {}, theme?: Theme): CSSObj
     width = 2,
     separation = 0,
     animate = true,
-    innerColor = base.frenchVanilla100,
-    outerColor = brand.common.focusOutline,
+    // hard code CSS fallbacks for dynamic styles that don't use the static style transform
+    innerColor = cssVar(base.frenchVanilla100, 'rgba(255,255,255,1)'),
+    outerColor = cssVar(brand.common.focusOutline, 'rgba(8,117,225,1)'),
     inset,
   } = options;
 

@@ -94,6 +94,7 @@ export default function styleTransformer(
     const visit: ts.Visitor = node => {
       if (!transformContext.fileName) {
         transformContext.fileName = node.getSourceFile()?.fileName;
+        transformContext.prefix = transformContext.getPrefix(transformContext.fileName);
       }
 
       if (
@@ -126,6 +127,7 @@ export function withDefaultContext<T extends TransformerContext>(
 ): T {
   return {
     prefix: 'css',
+    getPrefix: path => input.prefix || 'css',
     variables: {},
     styles,
     keyframes,
