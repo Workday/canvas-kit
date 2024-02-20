@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {Select} from '@workday/canvas-kit-react/select';
 import {Box} from '@workday/canvas-kit-react/layout';
 
@@ -38,9 +38,10 @@ const cities = [
 export const MenuHeight = () => {
   return (
     <Box>
-      <FormField label="Choose a City">
+      <FormField>
+        <FormField.Label>Choose a City</FormField.Label>
         <Select items={cities}>
-          <Select.Input />
+          <FormField.Input as={Select.Input} />
           <Select.Popper>
             <Select.Card maxHeight={200}>
               <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>

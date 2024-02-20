@@ -89,7 +89,7 @@ export const Autocomplete = () => {
   );
 
   return (
-    <FormField orientation="horizontal" hasError isRequired>
+    <FormField orientation="horizontal" isRequired>
       <FormField.Label>Fruit</FormField.Label>
       <Combobox model={model} onChange={event => console.log('input', event.currentTarget.value)}>
         <InputGroup>
