@@ -57,6 +57,7 @@ const StyledButton = styled(BaseButton)<ButtonContainerProps & StyledType>(
     borderRadius: borderRadius.zero,
     border: `1px solid ${colors.soap500}`,
     borderLeft: 'none',
+    minWidth: 'auto',
 
     '&:first-of-type': {
       borderRadius: `${borderRadius.m} 0 0 ${borderRadius.m}`,

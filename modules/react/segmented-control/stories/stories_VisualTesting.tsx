@@ -31,29 +31,35 @@ export const SegmentedControlStates = () => (
       columnProps={[
         {label: 'Default', props: {className: ''}},
         {label: 'Focus', props: {className: 'focus'}}, // Test changing border radius for focused button
+        {label: 'Small', props: {size: 'small'}},
+        {label: 'Large', props: {size: 'large'}},
       ]}
     >
       {props => (
         <SegmentedControl value={props.value}>
           <SegmentedControl.Button
+            size={props.size}
             icon={listViewIcon}
             value="list-view"
             aria-label="List View"
             className={props.value === 'list-view' ? props.className : undefined}
           />
           <SegmentedControl.Button
+            size={props.size}
             icon={worksheetsIcon}
             value="table-view"
             aria-label="Table View"
             disabled={true}
           />
           <SegmentedControl.Button
+            size={props.size}
             icon={deviceTabletIcon}
             value="device-view"
             aria-label="Device View"
             className={props.value === 'device-view' ? props.className : undefined}
           />
           <SegmentedControl.Button
+            size={props.size}
             icon={percentageIcon}
             value="percent-view"
             aria-label="Percent View"
