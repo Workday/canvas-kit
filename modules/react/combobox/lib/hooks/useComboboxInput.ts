@@ -24,6 +24,8 @@ export const useComboboxInput = composeHooks(
       if (model.state.cursorId && model.state.visibility === 'visible') {
         const item = model.navigation.getItem(model.state.cursorId, model);
         if (model.state.isVirtualized && item) {
+          console.log('in here');
+
           model.state.UNSTABLE_virtual.scrollToIndex(item.index);
         } else {
           const listboxId = model.state.inputRef.current?.getAttribute('aria-controls');
@@ -59,9 +61,9 @@ export const useComboboxInput = composeHooks(
           event.preventDefault();
         }
       },
-      onBlur(event: React.FocusEvent) {
-        model.events.hide(event);
-      },
+      // onBlur(event: React.FocusEvent) {
+      //   model.events.hide(event);
+      // },
       onChange: model.onChange,
       onClick(event: React.MouseEvent) {
         if (model.state.visibility === 'hidden') {

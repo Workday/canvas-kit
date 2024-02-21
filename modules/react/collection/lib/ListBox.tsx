@@ -28,6 +28,8 @@ export const useListBox = createElemPropsHook(useListModel)(model => {
     style: {
       position: 'relative' as const,
       height: model.state.isVirtualized ? model.state.UNSTABLE_virtual.totalSize : undefined,
+      // marginTop: 0,
+      // marginBottom: 0,
     },
   };
 });
@@ -80,12 +82,7 @@ export const ListBox = createContainer('ul')({
         overflowY: model.state.orientation === 'vertical' ? 'auto' : undefined,
       }}
     >
-      <Flex
-        as={Element}
-        flexDirection="column"
-        {...elemProps}
-        style={{marginTop: 0, marginBottom: 0}}
-      >
+      <Flex as={Element} flexDirection="column" {...elemProps} marginY="zero">
         {useListRenderItems(model, elemProps.children)}
       </Flex>
     </Box>
