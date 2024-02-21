@@ -32,6 +32,37 @@ export const GlobalHeaderWithLiveBadge = () => {
     setCounter(prev => prev + 1);
   };
 
+  // use tooltip to assign name,
+  // use AriaLiveRegion inside button,
+  // assign name to live region referencing the button,
+  // use BadgeCount inside live region,
+  // use AccessibleHide to create invisible word "new" after badge
+  // use aria-describedby on button, referencing live region container to set description
+  // :( isn't working well in Firefox
+  // :( isn't working at all in Safari
+  const MyTasksLiveBadge = () => (
+    <Tooltip title="My Tasks">
+      <TertiaryButton icon={inboxIcon} id={myTasksID} aria-describedby={badgeID}>
+        <AriaLiveRegion id={badgeID} aria-labelledby={myTasksID}>
+          <CountBadge count={counter} />
+          <AccessibleHide>New</AccessibleHide>
+        </AriaLiveRegion>
+      </TertiaryButton>
+    </Tooltip>
+  );
+
+  const NotificationsLiveBadge = () => (
+    <Tooltip title="Notifications">
+      <TertiaryButton icon={notificationsIcon} />
+    </Tooltip>
+  );
+
+  const MainContent = () => (
+    <Flex padding={space.s} as="main">
+      <SecondaryButton onClick={handleClick}>Add an item to My Tasks</SecondaryButton>
+    </Flex>
+  );
+
   return (
     <>
       <GlobalHeader>
@@ -52,25 +83,14 @@ export const GlobalHeaderWithLiveBadge = () => {
           <Tooltip title="Workday Assistant">
             <TertiaryButton icon={assistantIcon} />
           </Tooltip>
-          <Tooltip title="Notifications">
-            <TertiaryButton icon={notificationsIcon} />
-          </Tooltip>
-          <Tooltip title="My Tasks">
-            <TertiaryButton icon={inboxIcon} id={myTasksID} aria-describedby={badgeID}>
-              <AriaLiveRegion id={badgeID} aria-labelledby={myTasksID}>
-                <CountBadge count={counter} />
-                <AccessibleHide>New</AccessibleHide>
-              </AriaLiveRegion>
-            </TertiaryButton>
-          </Tooltip>
+          <NotificationsLiveBadge />
+          <MyTasksLiveBadge />
           <Tooltip title="Profile">
             <TertiaryButton icon={userIcon} />
           </Tooltip>
         </GlobalHeader.Item>
       </GlobalHeader>
-      <Flex padding={space.s} as="main">
-        <SecondaryButton onClick={handleClick}>Add an item to My Tasks</SecondaryButton>
-      </Flex>
+      <MainContent />
     </>
   );
 };
