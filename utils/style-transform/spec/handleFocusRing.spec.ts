@@ -2,6 +2,7 @@ import {focusRing} from '@workday/canvas-kit-react/common';
 import {
   createProgramFromSource,
   findNodes,
+  transform,
   withDefaultContext,
 } from '@workday/canvas-kit-styling-transform/testing';
 
@@ -49,5 +50,33 @@ describe('handleFocusRing', () => {
         outerColor: 'red',
       })
     );
+  });
+
+  it('should wrap CSS vars with fallbacks', () => {
+    const program = createProgramFromSource(`
+      import {createStyles} from '@workday/canvas-kit-styling';
+
+      const myStyles = createStyles({
+        ...focusRing({
+          width: 10,
+          separation: 1,
+          innerColor: '--foo-bar',
+          outerColor: 'red'
+        })
+      })
+    `);
+
+    const result = transform(
+      program,
+      'test.ts',
+      withDefaultContext(program.getTypeChecker(), {
+        variables: {
+          '--foo-bar': 'red',
+        },
+        objectTransforms: [handleFocusRing],
+      })
+    );
+
+    expect(result).toContain('var(--foo-bar, red)');
   });
 });

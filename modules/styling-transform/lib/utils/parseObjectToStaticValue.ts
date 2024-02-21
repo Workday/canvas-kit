@@ -16,6 +16,25 @@ export function parseObjectToStaticValue(
     });
   }
 
+  return wrapStyleObj(styleObj, context);
+}
+
+/**
+ * Wrap all values and nested object values with a maybeWrapCSSVariables call
+ */
+function wrapStyleObj(styleObj: NestedStyleObject, context: TransformerContext): NestedStyleObject {
+  for (const key in styleObj) {
+    if (styleObj.hasOwnProperty(key)) {
+      const value = styleObj[key];
+      if (typeof value === 'object') {
+        styleObj[key] = wrapStyleObj(value, context);
+      }
+      if (typeof value === 'string') {
+        styleObj[key] = maybeWrapCSSVariables(value, context.variables);
+      }
+    }
+  }
+
   return styleObj;
 }
 
@@ -62,10 +81,7 @@ function parsePropertyToStaticValue(node: ts.Node, context: TransformerContext):
         // nested
         styleObj[key] = parseObjectToStaticValue(node.initializer, context);
       } else {
-        styleObj[key] = maybeWrapCSSVariables(
-          parseNodeToStaticValue(node.initializer, context),
-          context.variables
-        );
+        styleObj[key] = parseNodeToStaticValue(node.initializer, context);
       }
 
       return styleObj;
@@ -82,11 +98,7 @@ function parsePropertyToStaticValue(node: ts.Node, context: TransformerContext):
         // nested
         styleObj[key] = parseObjectToStaticValue(node.type!, context);
       } else {
-        styleObj[key] =
-          maybeWrapCSSVariables(
-            parseNodeToStaticValue(node.type!, context).toString(),
-            context.variables
-          ) || '';
+        styleObj[key] = parseNodeToStaticValue(node.type!, context).toString() || '';
       }
 
       return styleObj;
@@ -123,7 +135,7 @@ export function parseStyleObjFromType(type: ts.Type, context: TransformerContext
 
     if (propType.isStringLiteral()) {
       // This isn't a component variable, it is a static CSS variable
-      result[property.name] = maybeWrapCSSVariables(propType.value, context.variables);
+      result[property.name] = propType.value;
       return result;
     }
 
@@ -143,7 +155,7 @@ export function parseStyleObjFromType(type: ts.Type, context: TransformerContext
  * Wrap all unwrapped CSS Variables. For example, `{padding: '--foo'}` will be replaced with
  * `{padding: 'var(--foo)'}`. It also works on variables in the middle of the property.
  */
-function maybeWrapCSSVariables(
+export function maybeWrapCSSVariables(
   input: string | number,
   variables: Record<string, string>
 ): string | number {
@@ -153,16 +165,25 @@ function maybeWrapCSSVariables(
   // matches an string starting with `--` that isn't already wrapped in a `var()`. It tries to match
   // any character that isn't a valid separator in CSS
   return input.replace(
-    /([a-z]*[ (]*)(--[^\s;,'})]+)/gi,
-    (match: string, prefix: string, variable: string) => {
-      if (prefix.startsWith('var(')) {
+    /([a-z]*[ (]*)(--[^\s;,'})]+)(\){0,1})/gi,
+    (match: string, prefix: string, variable: string, postfix: string) => {
+      // shortcut for var() wrappers that already have a fallback
+      if (prefix.startsWith('var(') && postfix !== ')') {
         return match;
       }
+
+      // find a possible fallback
       const fallbackVariable = getFallbackVariable(variable, variables);
       const fallback = fallbackVariable
         ? `, ${maybeWrapCSSVariables(fallbackVariable, variables)}`
         : '';
-      return `${prefix}var(${variable}${fallback})`;
+
+      // if this a var wrapper without a fallback
+      if (prefix.startsWith('var(') && postfix === ')') {
+        return `${prefix}${variable}${fallback}${postfix}`;
+      }
+      // if this is not a var wrapper at all
+      return `${prefix}var(${variable}${fallback})${postfix}`;
     }
   );
 }
