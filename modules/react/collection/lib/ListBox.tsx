@@ -32,12 +32,6 @@ export const useListBox = createElemPropsHook(useListModel)(model => {
   };
 });
 
-// const listBoxStencil = createStencil({
-//   vars: {
-//     marginY: 1,
-//   },
-// });
-
 /**
  * The `ListBox` component that offers vertical rendering of a collection in the form of a
  * 2-dimension list. It supports virtualization, rendering only visible items in the DOM while also
