@@ -67,24 +67,26 @@ export const ListBox = createContainer('ul')({
      */
     Item: ListBoxItem,
   },
-})<ListBoxProps>(({height, maxHeight, marginY, marginBottom, ...elemProps}, Element, model) => {
-  // We're moving `marginY` to the container to not interfere with the virtualization size. We set
-  // the `marginY` on the Flex to `0` to avoid inaccurate scrollbars
+})<ListBoxProps>(
+  ({height, maxHeight, marginY, marginBottom, overflowY, ...elemProps}, Element, model) => {
+    // We're moving `marginY` to the container to not interfere with the virtualization size. We set
+    // the `marginY` on the Flex to `0` to avoid inaccurate scrollbars
 
-  // TODO figure out what style props should go to which `Box`
-  return (
-    <Box
-      ref={model.state.containerRef}
-      style={{
-        maxHeight: maxHeight,
-        marginBottom: marginY,
-        marginTop: marginY,
-        overflowY: model.state.orientation === 'vertical' ? 'auto' : undefined,
-      }}
-    >
-      <Flex as={Element} flexDirection="column" {...elemProps} marginY="zero">
-        {useListRenderItems(model, elemProps.children)}
-      </Flex>
-    </Box>
-  );
-});
+    // TODO figure out what style props should go to which `Box`
+    return (
+      <Box
+        ref={model.state.containerRef}
+        style={{
+          maxHeight: maxHeight,
+          marginBottom: marginY,
+          marginTop: marginY,
+          overflowY: model.state.orientation === 'vertical' ? 'auto' : undefined,
+        }}
+      >
+        <Flex as={Element} flexDirection="column" {...elemProps} marginY="zero">
+          {useListRenderItems(model, elemProps.children)}
+        </Flex>
+      </Box>
+    );
+  }
+);

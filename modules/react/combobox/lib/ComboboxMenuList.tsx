@@ -7,7 +7,7 @@ import {system, base} from '@workday/canvas-tokens-web';
 
 import {useComboboxModel} from './hooks/useComboboxModel';
 import {createStencil, cssVar} from '@workday/canvas-kit-styling';
-import {mergeStyles} from '../../layout';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 export interface ComboboxMenuListProps<T = any> extends ListBoxProps<T> {}
 
@@ -28,7 +28,7 @@ const comoboxMenuListStencil = createStencil({
   base: {
     borderRadius: system.shape.zero,
     gap: system.space.zero,
-    overflowY: 'auto',
+    // overflowY: 'auto',
     background: base.frenchVanilla100,
     padding: system.space.zero,
   },
