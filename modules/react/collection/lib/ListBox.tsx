@@ -10,7 +10,6 @@ import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {useListModel} from './useListModel';
 import {useListRenderItems} from './useListRenderItem';
 import {useListItemRegister} from './useListItemRegister';
-import {createStencil} from '@workday/canvas-kit-styling';
 
 export interface ListBoxProps<T = any> extends Omit<ExtractProps<typeof Flex, never>, 'children'> {
   children?: React.ReactNode | ((item: T, index: number) => React.ReactNode);
