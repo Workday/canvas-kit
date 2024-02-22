@@ -60,9 +60,9 @@ export const useComboboxInput = composeHooks(
           event.preventDefault();
         }
       },
-      // onBlur(event: React.FocusEvent) {
-      //   model.events.hide(event);
-      // },
+       onBlur(event: React.FocusEvent) {
+        model.events.hide(event);
+       },
       onChange: model.onChange,
       onClick(event: React.MouseEvent) {
         if (model.state.visibility === 'hidden') {
