@@ -13,9 +13,7 @@ any questions.
 
 - [Codemod](#codemod)
 - [Component Promotions](#component-promotions)
-  - [Table (Preview)](#table-preview)
-- [Removals](#removals)
-  - [Table (Main)](#table-main)
+  - [Table](#table)
 - [Deprecations](#deprecations)
   - [Form Field (Main)](#form-field-main)
   - [Label Text](#label-text)
@@ -100,24 +98,16 @@ finished.
 
 ## Component Promotions
 
-### Table (Preview)
+### Table
 
 **PR:** [#2600](https://github.com/Workday/canvas-kit/pull/2600)
 
-We've promoted the `Table` compound component in [Preview](#preview) to [Main](#main).
-
-## Removals
-
-### Table (Main)
-
-**PR:** [#2600](https://github.com/Workday/canvas-kit/pull/2600)
-
-We've removed the `Table` component in [Main](#main) and replaced it with the `Table` component from [Preview](#preview).
-This will consist of a new compound component API.
+We've promoted the `Table` compound component in [Preview](#preview) to [Main](#main). This replaces the existing `Table` component with a compound component
+and will consist of a new compound component API.
 
 > `rowState` prop is no longer a part of the `Table` component.
 
-In v10, the main `Table` only exposed a `Table`  and `TableRow` component to build tables.
+In v10, the `Table` component in [Main](#main) only exposed a `Table`  and `TableRow` component to build tables.
 
 In v11, `Table` now exposes every subcomponent of a semantic HTML
 [Table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table). While more verbose, it provides more flexibility for customization.
@@ -163,7 +153,7 @@ v11:
 Please refer to the [Table examples](https://workday.github.io/canvas-kit/?path=/story/components-containers-table--basic) for how
 to implement new tables.
 
-> **NOTE:** If you were using the `preview` table, then you will need to update your import from `"@workday/canvas-kit-preview-react/table"` to `"@workday/canvas-kit-react/table"`.
+> **NOTE:** If you were using the [Preview](#preview) `Table` compound component, then you will need to update your import from `"@workday/canvas-kit-preview-react/table"` to `"@workday/canvas-kit-react/table"`.
 
 ## Deprecations
 
