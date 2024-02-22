@@ -62,6 +62,8 @@ export const useSelectInput = composeHooks(
         // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [model.state.inputRef, model.state.items.length]);
 
+      // This effect is a copy of what is in useComboboxInput. In this case, we need access to `textInputRef` instead of `model.state.inputRef`
+      // since it points to the visual input and not the hidden input. This allows scroll to index to work
       React.useEffect(() => {
         if (model.state.cursorId && model.state.visibility === 'visible') {
           const item = model.navigation.getItem(model.state.cursorId, model);
