@@ -5073,6 +5073,11 @@
   resolved "https://registry.yarnpkg.com/@workday/canvas-tokens-web/-/canvas-tokens-web-1.0.0.tgz#4bab2d0f2fe52ecbbcd2731f0463c70942ae7f5e"
   integrity sha512-VooVwG2wmL4VG/pNlw7IuzSsFkg3q3Y4oFuYvuVYGS5ZftX7uej1rq67dNzayhfnRDlMfo0Gv74LuRs355HtHg==
 
+"@workday/canvas-tokens-web@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-tokens-web/-/canvas-tokens-web-1.0.2.tgz#bb1edc141fadaff440057b7fc3f06cd3d9f0368f"
+  integrity sha512-KwebaZTSO5dRHDbV4VXXAGjtA2dgWmNkx0R3OYxnrJVEY8KgcynpEKQJ9yeU1zkXzutv8L4KE6SFLTGT6JIlCA==
+
 "@workday/design-assets-types@0.2.10":
   version "0.2.10"
   resolved "https://registry.yarnpkg.com/@workday/design-assets-types/-/design-assets-types-0.2.10.tgz#ebcc16377951cd0449b885a467eb68c9e715e05f"

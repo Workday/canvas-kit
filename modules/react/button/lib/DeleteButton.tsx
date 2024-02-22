@@ -41,10 +41,10 @@ const deleteStyles = createStyles({
     [buttonVars.active.icon]: brand.error.accent,
   },
   '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
-    [buttonVars.disabled.background]: brand.error.light,
+    [buttonVars.disabled.background]: brand.error.base,
     [buttonVars.disabled.label]: brand.error.accent,
     [buttonVars.disabled.icon]: brand.error.accent,
-    opacity: 1,
+    [buttonVars.disabled.opacity]: '0.4',
   },
 });
 

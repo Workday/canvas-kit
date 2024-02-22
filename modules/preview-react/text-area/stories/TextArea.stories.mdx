@@ -1,6 +1,7 @@
 import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
 
 import {TextArea} from '@workday/canvas-kit-preview-react/text-area';
+import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
 
 import {Alert} from './examples/Alert';
 import {Basic} from './examples/Basic';
@@ -18,6 +19,14 @@ import {ResizeConstraints} from './examples/ResizeConstraints';
 <Meta title="Preview/Inputs/Text Area" component={TextArea} />
 
 # Canvas Kit Text Area
+
+<StatusIndicator variant="red">
+  <StatusIndicator.Label>Deprecated</StatusIndicator.Label>
+</StatusIndicator>
+
+`TextArea` in Preview has been deprecated and will be removed in a future major version. Please use
+[`FormField` in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-inputs-form-field--basic)
+instead.
 
 TextArea's allow users to enter and edit multiple lines of text.
 
