@@ -23,45 +23,63 @@ import {CountBadge} from '@workday/canvas-kit-react/badge';
 
 interface HeaderItemProps extends FlexProps {}
 
-export const GlobalHeaderWithLiveBadge = () => {
-  const badgeID = useUniqueId();
-  const myTasksID = useUniqueId();
-  const [counter, setCounter] = useState(0);
-
-  const handleClick = () => {
-    setCounter(prev => prev + 1);
-  };
-
+const MyTasksLiveBadge = ({cnt}) => {
   // use tooltip to assign name,
   // use AriaLiveRegion inside button,
   // assign name to live region referencing the button,
   // use BadgeCount inside live region,
   // use AccessibleHide to create invisible word "new" after badge
   // use aria-describedby on button, referencing live region container to set description
-  // :( isn't working well in Firefox
   // :( isn't working at all in Safari
-  const MyTasksLiveBadge = () => (
+  // :( isn't working well in Firefox
+  const badgeID = useUniqueId();
+  const myTasksID = useUniqueId();
+
+  return (
     <Tooltip title="My Tasks">
       <TertiaryButton icon={inboxIcon} id={myTasksID} aria-describedby={badgeID}>
         <AriaLiveRegion id={badgeID} aria-labelledby={myTasksID}>
-          <CountBadge count={counter} />
+          <CountBadge count={cnt} />
           <AccessibleHide>New</AccessibleHide>
         </AriaLiveRegion>
       </TertiaryButton>
     </Tooltip>
   );
+};
 
-  const NotificationsLiveBadge = () => (
-    <Tooltip title="Notifications">
-      <TertiaryButton icon={notificationsIcon} />
+// use AriaLiveRegion around the button,
+// use Tooltip to assign the name of the button,
+// make sure Tooltip title string includes count value
+// Chrome + VO => Announces name "notifications X new" and innerText 'X'
+// Safari + VO => Works nicely :) announces button name
+const NotificationsLiveBadge = ({cnt}) => (
+  <AriaLiveRegion>
+    <Tooltip title={`Notifications ${cnt} new`}>
+      <TertiaryButton icon={notificationsIcon}>
+        <CountBadge count={cnt} />
+      </TertiaryButton>
     </Tooltip>
-  );
+  </AriaLiveRegion>
+);
 
-  const MainContent = () => (
-    <Flex padding={space.s} as="main">
-      <SecondaryButton onClick={handleClick}>Add an item to My Tasks</SecondaryButton>
-    </Flex>
-  );
+const MainContent = ({onAddTask, onAddNotification}) => (
+  <Flex padding={space.s} gap={space.s} as="main">
+    <SecondaryButton onClick={onAddTask}>Add an item to My Tasks</SecondaryButton>
+    <SecondaryButton onClick={onAddNotification}>Add a Notification</SecondaryButton>
+  </Flex>
+);
+
+export const GlobalHeaderWithLiveBadge = () => {
+  const [counter, setCounter] = useState(0);
+  const [notifications, setNotifications] = useState(0);
+
+  const handleClick = () => {
+    setCounter(prev => prev + 1);
+  };
+
+  const handleAddNotification = () => {
+    setNotifications(prev => prev + 1);
+  };
 
   return (
     <>
@@ -83,14 +101,14 @@ export const GlobalHeaderWithLiveBadge = () => {
           <Tooltip title="Workday Assistant">
             <TertiaryButton icon={assistantIcon} />
           </Tooltip>
-          <NotificationsLiveBadge />
-          <MyTasksLiveBadge />
+          <NotificationsLiveBadge cnt={notifications} />
+          <MyTasksLiveBadge cnt={counter} />
           <Tooltip title="Profile">
             <TertiaryButton icon={userIcon} />
           </Tooltip>
         </GlobalHeader.Item>
       </GlobalHeader>
-      <MainContent />
+      <MainContent onAddTask={handleClick} onAddNotification={handleAddNotification} />
     </>
   );
 };
