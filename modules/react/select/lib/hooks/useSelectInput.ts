@@ -68,7 +68,6 @@ export const useSelectInput = composeHooks(
           if (model.state.isVirtualized && item) {
             model.state.UNSTABLE_virtual.scrollToIndex(item.index);
           } else {
-            console.log(model.state.inputRef);
             const listboxId = textInputRef.current?.getAttribute('aria-controls');
             if (listboxId) {
               const menuItem = document.querySelector(
