@@ -901,15 +901,9 @@ describe('createStyles', () => {
           extendedStencil.vars.$$defaults['--extended-background']
         ).toMatchTypeOf<string>();
 
-        expect(extendedStencil).toHaveProperty(
-          'vars.color',
-          expect.stringMatching(/--[0-9a-z]+-color/i)
-        );
+        expect(extendedStencil).toHaveProperty('vars.color', '--base-color');
 
-        expect(extendedStencil).toHaveProperty(
-          'vars.background',
-          expect.stringMatching(/--[0-9a-z]+-background/i)
-        );
+        expect(extendedStencil).toHaveProperty('vars.background', '--extended-background');
       });
     });
   });
