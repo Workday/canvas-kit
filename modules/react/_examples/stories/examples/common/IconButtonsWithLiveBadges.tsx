@@ -19,8 +19,10 @@ const MyTasksLiveBadge = ({cnt}) => {
   // use BadgeCount inside live region,
   // use AccessibleHide to create invisible word "new" after badge
   // use aria-describedby on button, referencing live region container to set description
-  // :( isn't working at all in Safari
-  // :( isn't working well in Firefox
+  // Safari + VO => not working at all
+  // JAWS 2024 + Chrome / Edge => works as expected :)
+  // NVDA + Chrome / Edge => works as expected :)
+  // Firefox => isn't announcing description on focus, only announces "X New" live (missing button name)
   const badgeID = useUniqueId();
   const myTasksID = useUniqueId();
 
@@ -40,7 +42,10 @@ const MyTasksLiveBadge = ({cnt}) => {
 // use Tooltip to assign the name of the button,
 // make sure Tooltip title string includes count value
 // Chrome + VO => Announces name "notifications X new" and innerText 'X'
-// Safari + VO => Works nicely :) announces button name
+// Safari + VO => Works as expected :)
+// JAWS 2024 => Announces full button name twice (previous state, then new state)
+// JAWS 2024 + Firefox => Works as expected :)
+// NVDA (All Browsers) => Atomic property isn't working, only announcing number change, announces twice
 const NotificationsLiveBadge = ({cnt}) => (
   <AriaLiveRegion>
     <Tooltip title={`Notifications ${cnt} new`}>
@@ -65,7 +70,7 @@ export const IconButtonsWithLiveBadges = () => {
 
   return (
     <>
-      <Flex as="header" gap={space.s}>
+      <Flex padding={space.s} gap={space.s} as="header">
         <Tooltip title="Workday Assistant">
           <TertiaryButton icon={assistantIcon} />
         </Tooltip>
