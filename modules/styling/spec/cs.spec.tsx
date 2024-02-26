@@ -159,7 +159,7 @@ describe('createStyles', () => {
 
     it('should return a function that takes in an object with the values and return a style object with wrapped css prop', () => {
       const myVars = createVars('color');
-      expect(myVars({color: '--foo-prop'})).toHaveProperty(myVars.color, 'var(--foo-prop)');
+      expect(myVars({color: '--my-var'})).toHaveProperty(myVars.color, 'var(--my-var)');
     });
 
     it('should make types Emotion safe when ID is known', () => {
@@ -667,19 +667,16 @@ describe('createStyles', () => {
     });
 
     it('should return a function that takes in an object with the values and wrap passed css variables', () => {
-      const myStencil = createStencil(
-        {
-          vars: {
-            color: 'red',
-          },
-          base: {},
+      const myStencil = createStencil({
+        vars: {
+          color: 'red',
         },
-        'foo'
-      );
+        base: {},
+      });
 
-      expect(myStencil({color: '--foo-prop'}).style).toHaveProperty(
-        '--foo-color',
-        'var(--foo-prop)'
+      expect(myStencil({color: '--my-var'}).style).toHaveProperty(
+        myStencil.vars.color,
+        'var(--my-var)'
       );
     });
 
