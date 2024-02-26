@@ -561,7 +561,7 @@ context(`given the "FetchingDynamicItems" story is rendered`, () => {
   });
 });
 
-context.only(`given the "MenuHeight" story is rendered`, () => {
+context(`given the "MenuHeight" story is rendered`, () => {
   before(() => {
     h.stories.visit();
   });
