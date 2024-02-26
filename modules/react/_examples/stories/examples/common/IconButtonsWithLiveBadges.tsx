@@ -56,24 +56,40 @@ const NotificationsLiveBadge = ({cnt}) => (
   </AriaLiveRegion>
 );
 
+const AssistantLiveBadge = ({cnt}) => {
+  // use AriaLiveRegion around the button
+  // use muted type Tooltip (avoid using aria-label to name button)
+  // use AccessibleHide inside of button to compose name
+  // Chrome + VO => announces twice
+  // Safari + VO => works as expected :)
+  const lbl = 'Workday Assistant';
+
+  return (
+    <AriaLiveRegion>
+      <Tooltip title={lbl} type="muted">
+        <TertiaryButton icon={assistantIcon}>
+          <AccessibleHide>{lbl}</AccessibleHide>
+          <CountBadge count={cnt} />
+          <AccessibleHide>New</AccessibleHide>
+        </TertiaryButton>
+      </Tooltip>
+    </AriaLiveRegion>
+  );
+};
+
 export const IconButtonsWithLiveBadges = () => {
   const [counter, setCounter] = useState(0);
   const [notifications, setNotifications] = useState(0);
+  const [assistant, setAssistant] = useState(0);
 
-  const handleAddTask = () => {
-    setCounter(prev => prev + 1);
-  };
-
-  const handleAddNotification = () => {
-    setNotifications(prev => prev + 1);
-  };
+  const handleAddTask = () => setCounter(prev => prev + 1);
+  const handleAddNotification = () => setNotifications(prev => prev + 1);
+  const handleAssistant = () => setAssistant(prev => prev + 1);
 
   return (
     <>
       <Flex padding={space.s} gap={space.s} as="header">
-        <Tooltip title="Workday Assistant">
-          <TertiaryButton icon={assistantIcon} />
-        </Tooltip>
+        <AssistantLiveBadge cnt={assistant} />
         <NotificationsLiveBadge cnt={notifications} />
         <MyTasksLiveBadge cnt={counter} />
         <Tooltip title="Profile">
@@ -81,6 +97,7 @@ export const IconButtonsWithLiveBadges = () => {
         </Tooltip>
       </Flex>
       <Flex padding={space.s} gap={space.s} as="main">
+        <SecondaryButton onClick={handleAssistant}>Add a Message</SecondaryButton>
         <SecondaryButton onClick={handleAddNotification}>Add a Notification</SecondaryButton>
         <SecondaryButton onClick={handleAddTask}>Add an item to My Tasks</SecondaryButton>
       </Flex>
