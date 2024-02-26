@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.17](https://github.com/Workday/canvas-kit/releases/tag/v10.3.17) (2024-02-26)
+
+### Components
+
+- fix: Wrap css variables passed into stencil and vars ([#2614](https://github.com/Workday/canvas-kit/pull/2614)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
 ## [v10.3.16](https://github.com/Workday/canvas-kit/releases/tag/v10.3.16) (2024-02-20)
 
 ### Components
