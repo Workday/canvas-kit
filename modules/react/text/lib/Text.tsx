@@ -1,8 +1,11 @@
 import * as React from 'react';
+import {base, system} from '@workday/canvas-tokens-web';
 import {createComponent} from '@workday/canvas-kit-react/common';
-// type changes no need
-import {type, CanvasTypeHierarchy, CanvasTypeVariants} from '@workday/canvas-kit-react/tokens';
-import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
+import {createModifiers, createStyles} from '@workday/canvas-kit-styling';
+import {mergeStyles, BoxProps} from '@workday/canvas-kit-react/layout';
+
+type TypeSize = 'large' | 'medium' | 'small';
+type TokenName = `${keyof typeof system.type}.${TypeSize}`;
 
 export interface TextProps extends BoxProps {
   /**
@@ -12,65 +15,86 @@ export interface TextProps extends BoxProps {
    * ```tsx
    * <Text typeLevel="body.small">Small body text</Text>
    * ```
-  */
-  typeLevel?: `${keyof CanvasTypeHierarchy}.${'large'|'medium'|'small'}`;
+   */
+  typeLevel?: TokenName;
   /**
    * Type variant token names: `error`, `hint` or `inverse`.
    *
    * ```tsx
    * <Text variant="error" typeLevel="subtext.large">Error text</Text>
    * ```
-  */
-  variant?: keyof CanvasTypeVariants;
+   */
+  variant?: 'error' | 'hint' | 'inverse';
 }
 
+const textModifiers = createModifiers({
+  typeLevel: {
+    // Title level styles
+    'title.large': createStyles({
+      ...system.type.title.large,
+      color: base.blackPepper400,
+    }),
+    'title.medium': createStyles({
+      ...system.type.title.medium,
+      color: base.blackPepper400,
+    }),
+    'title.small': createStyles({
+      ...system.type.title.small,
+      color: base.blackPepper400,
+    }),
+    // Heading level styles
+    'heading.large': createStyles({
+      ...system.type.heading.large,
+      color: base.blackPepper400,
+    }),
+    'heading.medium': createStyles({
+      ...system.type.heading.medium,
+      color: base.blackPepper400,
+    }),
+    'heading.small': createStyles({
+      ...system.type.heading.small,
+      color: base.blackPepper400,
+    }),
+    // Body level styles
+    'body.large': createStyles({
+      ...system.type.body.large,
+      color: base.blackPepper300,
+    }),
+    'body.medium': createStyles({
+      ...system.type.body.medium,
+      color: base.blackPepper300,
+    }),
+    'body.small': createStyles({
+      ...system.type.body.small,
+      color: base.blackPepper300,
+    }),
+    // Subtext level styles
+    'subtext.large': createStyles({
+      ...system.type.subtext.large,
+      color: base.blackPepper300,
+    }),
+    'subtext.medium': createStyles({
+      ...system.type.subtext.medium,
+      color: base.blackPepper300,
+    }),
+    'subtext.small': createStyles({
+      ...system.type.subtext.small,
+      color: base.blackPepper300,
+    }),
+  },
+  variant: {
+    error: createStyles({color: base.cinnamon500}),
+    hint: createStyles({color: base.licorice300}),
+    inverse: createStyles({color: base.frenchVanilla100}),
+  },
+});
+
 /**
- * Function returns updated props by token and variant values
-*/
-const validateProps = ({typeLevel, variant, ...props}: TextProps) => {
-  let updatedProps: any = props;
-  const tokenPropNames = [
-    'color',
-    'fontFamily',
-    'fontSize',
-    'fontWeight',
-    'letterSpacing',
-    'lineHeight',
-  ];
-
-  /*
-  If token provided it updates undefined values of token styles:
-  `fontFamily`, `fontSize`, `lineHeight`, `fontWeight`, `color`
-  by replacing them by token value
-  */
-  if (typeLevel) {
-    const [level, size] = typeLevel.split('.') as [
-      keyof CanvasTypeHierarchy,
-      'large' | 'medium' | 'small'
-    ];
-    const tokenProps = type.levels[level][size];
-
-    tokenPropNames.forEach(item => {
-      if (!props[item as keyof typeof props]) {
-        updatedProps[item] = tokenProps[item as keyof typeof tokenProps];
-      }
-    });
-  }
-
-  // If variant provided it updates color value by variant color
-  if (variant) {
-    updatedProps = {...updatedProps, ...type.variants[variant]};
-  }
-
-  return updatedProps;
-};
-
-/**
- * This is a generic base component intended to render any text. It's built on top of the
- * {@link Box} component. It also has `typeLevel` and `variant` style props that simplify navigating
- * our type hierarchy and using [Canvas type
- * tokens](https://canvas.workday.com/tokens/type#type-styles). By default, it renders a semantic
- * `span` element, but you can adjust this as needed with the `as` prop.
+ * This is a generic base component intended to render any text.
+ * It has `typeLevel` and `variant` style props that simplify navigating
+ * our type hierarchy and using [Canvas type tokens](https://canvas.workday.com/tokens/type#type-styles).
+ * By default, it renders a semantic `span` element,
+ * but you can adjust this as needed with the `as` prop.
  *
  * The type hierarchy is organized into four levels, which correspond to our [Canvas type
  * levels](https://canvas.workday.com/tokens/type#type-styles).
@@ -95,12 +119,14 @@ const validateProps = ({typeLevel, variant, ...props}: TextProps) => {
  *   </Text>
  * );
  * ```
-*/
+ */
 export const Text = createComponent('span')({
   displayName: 'Text',
-  Component: ({children, ...elemProps}: TextProps, ref, Element) => (
-    <Box ref={ref} as={Element} {...validateProps(elemProps)}>
-      {children}
-    </Box>
-  ),
+  Component: ({children, typeLevel, variant, ...elemProps}: TextProps, ref, Element) => {
+    return (
+      <Element ref={ref} {...mergeStyles(elemProps, textModifiers({typeLevel, variant}))}>
+        {children}
+      </Element>
+    );
+  },
 });
