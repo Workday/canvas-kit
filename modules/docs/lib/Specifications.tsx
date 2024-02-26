@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import React from 'react';
 import {toId} from '@storybook/csf';
-import {Table, TableRow} from '@workday/canvas-kit-react/table';
+import {Table} from '@workday/canvas-kit-react/table';
 import {Hyperlink} from '@workday/canvas-kit-react/button';
 
 import {specifications, SpecDescribe, SpecIt} from './specs';
@@ -85,35 +85,37 @@ export const Specifications = ({file, name}: SpecificationsProps) => {
 
     const [, first, kind, name, last] = matches;
 
-    return <>
-      {first.replace(/given /i, '')}
-      <Hyperlink
-        href={`${storybookBaseUrl}?path=/story/${toId(
-          kind,
-          name.replace('DefaultStory', 'Default Story')
-        )}`}
-      >
-        {name.replace('DefaultStory', 'Default')}
-      </Hyperlink>
-      {last}
-    </>;
+    return (
+      <>
+        {first.replace(/given /i, '')}
+        <Hyperlink
+          href={`${storybookBaseUrl}?path=/story/${toId(
+            kind,
+            name.replace('DefaultStory', 'Default Story')
+          )}`}
+        >
+          {name.replace('DefaultStory', 'Default')}
+        </Hyperlink>
+        {last}
+      </>
+    );
   };
 
   return block.type === 'describe' ? (
     <>
       <Table>
-        <thead>
-          <TableRow header={true}>
-            <th>Given</th>
-            <th>When</th>
-            <th>Then</th>
-          </TableRow>
-        </thead>
-        <tbody>
+        <Table.Head>
+          <Table.Row>
+            <Table.Header>Given</Table.Header>
+            <Table.Header>When</Table.Header>
+            <Table.Header>Then</Table.Header>
+          </Table.Row>
+        </Table.Head>
+        <Table.Body>
           {block.children.reduce(createTableRows, []).map((row, index) => (
-            <TableRow key={index}>
-              <td>{renderGiven(row.given[0])}</td>
-              <td>
+            <Table.Row key={index}>
+              <Table.Cell>{renderGiven(row.given[0])}</Table.Cell>
+              <Table.Cell>
                 <ul>
                   {row.when.map((item, index) => (
                     <li key={index}>
@@ -121,17 +123,17 @@ export const Specifications = ({file, name}: SpecificationsProps) => {
                     </li>
                   ))}
                 </ul>
-              </td>
-              <td>
+              </Table.Cell>
+              <Table.Cell>
                 <ul>
                   {row.then.map((item, index) => (
                     <li key={index}>{(item.indexOf('should') === 0 ? 'it ' : '') + item}</li>
                   ))}
                 </ul>
-              </td>
-            </TableRow>
+              </Table.Cell>
+            </Table.Row>
           ))}
-        </tbody>
+        </Table.Body>
       </Table>
       Source:{' '}
       <Hyperlink href={`${githubUrl}blob/${githubBranch}/cypress/integration/${file}`}>
