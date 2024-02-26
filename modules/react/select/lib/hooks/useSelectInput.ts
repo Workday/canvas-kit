@@ -54,10 +54,16 @@ export const useSelectInput = composeHooks(
           model.state.selectedIds[0]
         ) {
           const value = model.navigation.getItem(model.state.selectedIds[0], model).id;
-          if (model.state.inputRef.current.value !== value) {
+          if (
+            model.state.selectedIds[0] !== value &&
+            model.state.inputRef.current.value !== value
+          ) {
             // Programmatically dispatch an onChange once items are loaded. This account for when a consumer wants an initial selected item and they're loading them from a server.
             dispatchInputEvent(model.state.inputRef.current, value);
           }
+        }
+        if (!model.state.selectedIds[0] && textInputRef.current?.value) {
+          dispatchInputEvent(textInputRef.current, '');
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [model.state.inputRef, model.state.items.length]);
