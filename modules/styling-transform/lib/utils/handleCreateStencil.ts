@@ -54,10 +54,8 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
 
     if (ts.isObjectLiteralExpression(config)) {
       const extendedFrom = config.properties.reduce((result, property) => {
-        if (result) {
-          return result;
-        }
         if (
+          !result &&
           ts.isPropertyAssignment(property) &&
           property.name &&
           ts.isIdentifier(property.name) &&
@@ -66,7 +64,7 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
         ) {
           return getClassName(property.initializer.text, context);
         }
-        return '';
+        return result;
       }, '');
 
       // get variables first

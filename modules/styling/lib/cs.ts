@@ -829,7 +829,73 @@ export interface StencilConfig<
   E extends BaseStencil<any, any, any, any> = never,
   ID extends string | never = never
 > {
+  /**
+   * A Stencil can extend another stencil. Styles are not copied from one stencil to another, but
+   * rather the class name generated for each stencil will be included in the stencil output. For
+   * example:
+   *
+   * ```ts
+   * const baseStencil = createStencil({
+   *   base: {padding: 5}
+   * });
+   * const extendingStencil = createStencil({
+   *   extends: baseStencil,
+   *   base: {margin: 5}
+   * });
+   * ```
+   *
+   * In this example, `extendingStencil` does not have a base style that includes `padding`, but
+   * calling the stencil will return both style classes created:
+   *
+   * ```ts
+   * extendingStencil() // {className: 'css-{base} css-{extending}'}
+   * ```
+   *
+   * Notice when the stencil is called, it will return the CSS class name of each stencil.
+   *
+   * An extending stencil can use a `compound` modifier that includes references to the base stencil
+   * modifiers. For runtime, each compound modifier has a unique class name. The static CSS
+   * extraction will use the base modifier name in the selector.
+   */
   extends?: E;
+  /**
+   * A stencil can support CSS variables. Since CSS variables cascade by default, variables are
+   * defined with defaults. These defaults are added automatically to the `base` styles to prevent
+   * CSS variables defined higher in the DOM tree from cascading into a component.
+   *
+   * ```ts
+   * const buttonStencil = createStencil({
+   *   vars: {color: 'red'},
+   *   base: {padding: 5}
+   * })
+   * ```
+   *
+   * ```css
+   * .css-button {
+   *   --css-button-color: red;
+   *   padding: 5px;
+   * }
+   * ```
+   *
+   * Access to variables in `base` and `modifiers` is done via a function wrapper that gives
+   * all variables.
+   *
+   * ```ts
+   * const buttonStencil = createStyles({
+   *   vars: {color: 'red'},
+   *   base({color}) {
+   *     return {color: color}
+   *   }
+   * })
+   * ```
+   *
+   * ```css
+   * .css-button {
+   *   --css-button-color: red;
+   *   color: var(--css-button-color);
+   * }
+   * ```
+   */
   vars?: V;
   /**
    * Base styles. These styles will always be returned when the stencil is called
@@ -959,7 +1025,7 @@ type VariableValuesStencil<
   : {[K1 in keyof V]?: {[K2 in keyof V[K1]]: string}};
 
 function onlyDefined<T>(input: T | undefined): input is T {
-  return input === undefined ? false : true;
+  return !(input === undefined);
 }
 
 /**
@@ -973,7 +1039,7 @@ export function createStencil<
   ID extends string = never
 >(config: StencilConfig<M, V, E, ID>, id?: ID): Stencil<M, V, E, ID> {
   const {vars, base, modifiers, compound, defaultModifiers} = config;
-  const composes = config.extends as Stencil<any, any> | undefined;
+  const composes = config.extends as unknown as Stencil<any, any> | undefined;
   const _vars = createDefaultedVars(vars || {}, id) as any; // The return type is conditional and TypeScript doesn't like that here
 
   // combine the vars keys together
