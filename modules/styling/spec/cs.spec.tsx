@@ -727,6 +727,37 @@ describe('createStyles', () => {
       expect(found).toEqual(true);
     });
 
+    it('should convert "true" modifiers into boolean', () => {
+      const myStencil = createStencil({
+        vars: {
+          foo: 'red',
+        },
+        base: {},
+        modifiers: {
+          size: {
+            large: {},
+          },
+          grow: {
+            true: {},
+          },
+        },
+        // make sure boolean modifiers are valid in compound config
+        compound: [{modifiers: {size: 'large', grow: true}, styles: {}}],
+      });
+
+      type Args = Parameters<typeof myStencil>[0];
+
+      expectTypeOf<Args>().toHaveProperty('grow');
+      expectTypeOf<Args['grow']>().toEqualTypeOf<boolean | undefined>();
+
+      // Make sure the function call passes type checks. Even though we tested the type parameter,
+      // the actual function call may still fail type checks. We need to make sure type conditionals
+      // distribute in the correct order
+      myStencil({
+        grow: true,
+      });
+    });
+
     describe('when extending', () => {
       it('should have both stencil class names', () => {
         const baseStencil = createStencil({
@@ -791,6 +822,12 @@ describe('createStyles', () => {
           size?: 'large';
           extra?: boolean;
         }>();
+
+        // make sure it actually works when calling it. The type test can pass via extracting parameters
+        // while the actual function call fails
+        extendedStencil({
+          extra: true,
+        });
       });
 
       it('should extend compound modifiers and return all compound modifiers', () => {
@@ -818,7 +855,10 @@ describe('createStyles', () => {
               true: {},
             },
           },
-          compound: [{modifiers: {size: 'large'}, styles: {}}],
+          compound: [
+            {modifiers: {size: 'large'}, styles: {}},
+            {modifiers: {size: 'large', extra: true}, styles: {}},
+          ],
         });
 
         extendedStencil({color: 'blue', background: 'red'}); //?
@@ -835,6 +875,11 @@ describe('createStyles', () => {
           color?: string;
           background?: string;
         }>();
+
+        // Verify the actual function call does not give an error for boolean even if the type test says it works
+        extendedStencil({
+          extra: true,
+        });
       });
 
       it('should extend variables', () => {

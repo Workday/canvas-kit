@@ -968,9 +968,11 @@ export interface StencilConfig<
    * // {padding: 10px; paddingInlineStart: 5px;}
    * ```
    */
-  compound?: ([E] extends [BaseStencil<infer ME, any>]
+  compound?: ([E] extends [never]
+    ? StencilCompoundConfig<M>
+    : E extends BaseStencil<infer ME, any, any, any>
     ? StencilCompoundConfig<ME & M>
-    : StencilCompoundConfig<M>)[];
+    : never)[];
   /**
    * Modifiers are optional. If you need a modifier to always be defined, a default modifier value
    * will be used when a modifier is `undefined`
@@ -1003,9 +1005,11 @@ export interface Stencil<
 > extends BaseStencil<M, V, E, ID> {
   (
     // If this stencil extends another stencil, merge the inputs
-    modifiers?: [E] extends [BaseStencil<infer ME, infer VE, any, any>]
+    options?: [E] extends [never]
+      ? ModifierValuesStencil<M> & VariableValuesStencil<V>
+      : E extends BaseStencil<infer ME, infer VE, any, any>
       ? ModifierValuesStencil<ME & M> & VariableValuesStencil<VE & V>
-      : ModifierValuesStencil<M> & VariableValuesStencil<V>
+      : never
   ): {
     className: string;
     style?: Record<string, string>;
