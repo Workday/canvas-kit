@@ -40,7 +40,6 @@ const movieListItems = [
 
 export const FetchingDynamicItems = () => {
   const [id, setId] = React.useState('456');
-  const [value, setValue] = React.useState('');
   const [moviesLists, setMoviesList] = React.useState([]);
   const [loadingStatus, setLoadingStatus] = React.useState<'idle' | 'loading' | 'success'>('idle');
   const loadingRef = React.useRef<ReturnType<typeof setTimeout>>();
@@ -51,6 +50,8 @@ export const FetchingDynamicItems = () => {
     getId: item => item.serverId,
     initialSelectedIds: [id],
   });
+
+  const stringValue = moviesLists.find(item => item.serverId === id)?.label || '';
 
   function loadItems() {
     setLoadingStatus('loading');
@@ -68,13 +69,11 @@ export const FetchingDynamicItems = () => {
 
   return (
     <Flex flexDirection="column" maxWidth={300}>
-      <div id="foo">Foo Bar</div>
       <Select model={model}>
         <FormField label="Choose a Film">
           <Select.Input
             onChange={e => {
               setId(e.target.value);
-              setValue(model.navigation.getItem(e.target.value, model).textValue);
             }}
             placeholder={loadingStatus}
           />
@@ -90,7 +89,7 @@ export const FetchingDynamicItems = () => {
         </FormField>
       </Select>
       <div data-testid="selected-id">Selected Id: {id}</div>
-      <div data-testid="selected-value">Selected value: {value}</div>
+      <div data-testid="selected-value">Selected value: {stringValue}</div>
       <PrimaryButton
         onClick={() => {
           loadItems();
