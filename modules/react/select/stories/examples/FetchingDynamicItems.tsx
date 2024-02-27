@@ -40,7 +40,7 @@ const movieListItems = [
 
 export const FetchingDynamicItems = () => {
   const [id, setId] = React.useState('456');
-  const [moviesLists, setMoviesList] = React.useState([]);
+  const [moviesLists, setMoviesList] = React.useState<typeof movieListItems>([]);
   const [loadingStatus, setLoadingStatus] = React.useState<'idle' | 'loading' | 'success'>('idle');
   const loadingRef = React.useRef<ReturnType<typeof setTimeout>>();
 
