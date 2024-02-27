@@ -157,6 +157,11 @@ describe('createStyles', () => {
       expect(myVars({color: 'red'})).toHaveProperty(myVars.color, 'red');
     });
 
+    it('should return a function that takes in an object with the values and return a style object with wrapped css prop', () => {
+      const myVars = createVars('color');
+      expect(myVars({color: '--my-var'})).toHaveProperty(myVars.color, 'var(--my-var)');
+    });
+
     it('should make types Emotion safe when ID is known', () => {
       const myVars = createVars({id: 'foo', args: ['label']});
 
@@ -529,6 +534,12 @@ describe('createStyles', () => {
       expect(screen.getByTestId('test1')).toHaveStyle({padding: '10px'});
       expect(screen.getByTestId('test2')).toHaveStyle({padding: '20px'});
       expect(myStencil({size: 'large'}).className.split(' ')).toHaveLength(2);
+
+      // type signature of stencil call expression
+      type Arg = Parameters<typeof myStencil>[0];
+      expectTypeOf<Arg>().toMatchTypeOf<{
+        size?: 'large';
+      }>();
     });
 
     it('should set the `modifiers` property with the className of the modifier', () => {
@@ -661,6 +672,20 @@ describe('createStyles', () => {
       expect(myStencil).toHaveProperty('vars.color', expect.stringMatching(/--foo-color/));
     });
 
+    it('should return a function that takes in an object with the values and wrap passed css variables', () => {
+      const myStencil = createStencil({
+        vars: {
+          color: 'red',
+        },
+        base: {},
+      });
+
+      expect(myStencil({color: '--my-var'}).style).toHaveProperty(
+        myStencil.vars.color,
+        'var(--my-var)'
+      );
+    });
+
     it('should handle variables and pass them to the base function', () => {
       const myStencil = createStencil({
         vars: {
@@ -719,6 +744,231 @@ describe('createStyles', () => {
         }
       }
       expect(found).toEqual(true);
+    });
+
+    it('should convert "true" modifiers into boolean', () => {
+      const myStencil = createStencil({
+        vars: {
+          foo: 'red',
+        },
+        base: {},
+        modifiers: {
+          size: {
+            large: {},
+          },
+          grow: {
+            true: {},
+          },
+        },
+        // make sure boolean modifiers are valid in compound config
+        compound: [{modifiers: {size: 'large', grow: true}, styles: {}}],
+      });
+
+      type Args = Parameters<typeof myStencil>[0];
+
+      expectTypeOf<Args>().toHaveProperty('grow');
+      expectTypeOf<Args['grow']>().toEqualTypeOf<boolean | undefined>();
+
+      // Make sure the function call passes type checks. Even though we tested the type parameter,
+      // the actual function call may still fail type checks. We need to make sure type conditionals
+      // distribute in the correct order
+      myStencil({
+        grow: true,
+      });
+    });
+
+    describe('when extending', () => {
+      it('should have both stencil class names', () => {
+        const baseStencil = createStencil({
+          base: {},
+        });
+
+        const extendedStencil = createStencil({
+          extends: baseStencil,
+          base: {},
+        });
+
+        expect(extendedStencil()).toHaveProperty(
+          'className',
+          expect.stringMatching(/css-[a-z0-9]+ css-[a-z0-9]+/)
+        );
+      });
+
+      it('should extend modifiers and return modifier class names', () => {
+        const baseStencil = createStencil({
+          base: {},
+          modifiers: {
+            size: {
+              large: {},
+            },
+          },
+        });
+
+        const extendedStencil = createStencil({
+          extends: baseStencil,
+          base: {},
+          modifiers: {
+            extra: {
+              true: {},
+            },
+          },
+        });
+
+        expect(extendedStencil.modifiers).toHaveProperty(
+          'size.large',
+          baseStencil.modifiers.size.large
+        );
+        expect(extendedStencil.modifiers).toHaveProperty('extra.true');
+        extendedStencil({size: 'large'}); //?
+
+        expect(extendedStencil({size: 'large'})).toHaveProperty(
+          'className',
+          expect.stringContaining(baseStencil.modifiers.size.large)
+        );
+
+        // types
+        expectTypeOf(extendedStencil).toHaveProperty('modifiers');
+        expectTypeOf(extendedStencil.modifiers).toHaveProperty('size');
+        expectTypeOf(extendedStencil.modifiers.size).toHaveProperty('large');
+        expectTypeOf(extendedStencil.modifiers.size.large).toEqualTypeOf<string>();
+        expectTypeOf(extendedStencil.modifiers).toHaveProperty('extra');
+        expectTypeOf(extendedStencil.modifiers.extra).toHaveProperty('true');
+        expectTypeOf(extendedStencil.modifiers.extra.true).toEqualTypeOf<string>();
+
+        // calling the stencil
+        type Args = Parameters<typeof extendedStencil>[0];
+        expectTypeOf<Args>().toEqualTypeOf<{
+          size?: 'large';
+          extra?: boolean;
+        }>();
+
+        // make sure it actually works when calling it. The type test can pass via extracting parameters
+        // while the actual function call fails
+        extendedStencil({
+          extra: true,
+        });
+      });
+
+      it('should extend compound modifiers and return all compound modifiers', () => {
+        const baseStencil = createStencil({
+          vars: {
+            color: 'red',
+          },
+          base: {},
+          modifiers: {
+            size: {
+              large: {},
+            },
+          },
+          compound: [{modifiers: {size: 'large'}, styles: {}}],
+        });
+
+        const extendedStencil = createStencil({
+          extends: baseStencil,
+          vars: {
+            background: 'blue',
+          },
+          base: {},
+          modifiers: {
+            extra: {
+              true: {},
+            },
+          },
+          compound: [
+            {modifiers: {size: 'large'}, styles: {}},
+            {modifiers: {size: 'large', extra: true}, styles: {}},
+          ],
+        });
+
+        extendedStencil({color: 'blue', background: 'red'}); //?
+
+        const {className} = extendedStencil({size: 'large'}); //?
+
+        expect(className.split(' ')).toHaveProperty('length', 5);
+
+        // calling the stencil
+        type Args = Parameters<typeof extendedStencil>[0];
+        expectTypeOf<Args>().toEqualTypeOf<{
+          size?: 'large';
+          extra?: boolean;
+          color?: string;
+          background?: string;
+        }>();
+
+        // Verify the actual function call does not give an error for boolean even if the type test says it works
+        extendedStencil({
+          extra: true,
+        });
+      });
+
+      it('should extend variables', () => {
+        const baseStencil = createStencil({
+          vars: {
+            color: 'red',
+          },
+          base: {},
+        });
+
+        const extendedStencil = createStencil({
+          vars: {
+            background: 'blue',
+          },
+          extends: baseStencil,
+          base: {},
+        });
+
+        expectTypeOf(extendedStencil.vars.color).toEqualTypeOf<string>();
+        expect(extendedStencil).toHaveProperty(
+          'vars.color',
+          expect.stringMatching(/--[0-9a-z]+-color/i)
+        );
+
+        expectTypeOf(extendedStencil.vars.background).toEqualTypeOf<string>();
+        expect(extendedStencil).toHaveProperty(
+          'vars.background',
+          expect.stringMatching(/--[0-9a-z]+-background/i)
+        );
+      });
+
+      it('should extend variables with IDs', () => {
+        const baseStencil = createStencil(
+          {
+            vars: {
+              color: 'red',
+            },
+            base: {},
+          },
+          'base'
+        );
+
+        const extendedStencil = createStencil(
+          {
+            extends: baseStencil,
+            vars: {
+              background: 'blue',
+            },
+            base({color, background}) {
+              expectTypeOf(color).toMatchTypeOf<string>();
+              expectTypeOf(background).toMatchTypeOf<string>();
+              return {};
+            },
+          },
+          'extended'
+        );
+
+        expectTypeOf(extendedStencil.vars.color).toEqualTypeOf<'--base-color'>();
+        expectTypeOf(extendedStencil.vars.background).toEqualTypeOf<'--extended-background'>();
+        expectTypeOf(extendedStencil.vars.$$defaults).toHaveProperty('--base-color');
+        expectTypeOf(extendedStencil.vars.$$defaults).toHaveProperty('--extended-background');
+        expectTypeOf(extendedStencil.vars.$$defaults['--base-color']).toMatchTypeOf<string>();
+        expectTypeOf(
+          extendedStencil.vars.$$defaults['--extended-background']
+        ).toMatchTypeOf<string>();
+
+        expect(extendedStencil).toHaveProperty('vars.color', '--base-color');
+
+        expect(extendedStencil).toHaveProperty('vars.background', '--extended-background');
+      });
     });
   });
 });

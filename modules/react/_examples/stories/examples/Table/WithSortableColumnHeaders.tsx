@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {Table} from '@workday/canvas-kit-preview-react/table';
+import {Table} from '@workday/canvas-kit-react/table';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {Text} from '@workday/canvas-kit-react/text';
