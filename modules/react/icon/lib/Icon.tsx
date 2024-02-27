@@ -1,8 +1,7 @@
 import * as React from 'react';
 import {CanvasIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 
 import {Svg, SvgProps} from './Svg';
 
@@ -30,7 +29,7 @@ export const Icon = createComponent('span')({
         src={src}
         type={type}
         as={Element}
-        {...mergeStyles(
+        {...handleCsProp(
           elemProps,
           iconStencil({size: typeof size === 'number' ? px2rem(size) : size})
         )}

@@ -4,11 +4,10 @@ import {CanvasSystemIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
 import {Icon, IconProps} from './Icon';
 import {createComponent, getColor} from '@workday/canvas-kit-react/common';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStyles, cssVar, createVars} from '@workday/canvas-kit-styling';
+import {cssVar, createStencil, CSProps, handleCsProp} from '@workday/canvas-kit-styling';
 import {base} from '@workday/canvas-tokens-web';
 
-export interface SystemIconStyles {
+export interface SystemIconStyles extends CSProps {
   /**
    * The accent color of the SystemIcon. This overrides `color`.
    */
@@ -60,6 +59,7 @@ export interface SystemIconProps
   size?: number | string | undefined;
 }
 
+/** @deprecated */
 export const systemIconStyles = ({
   accent,
   accentHover,
@@ -90,48 +90,82 @@ export const systemIconStyles = ({
   },
 });
 
-export const systemIconVars = {
-  default: createVars('accent', 'background', 'color', 'fill'),
-  hover: createVars('accent', 'background', 'color', 'fill'),
-};
-
-export const systemIcon = createStyles({
-  '& .wd-icon-fill': {
-    fill: cssVar(systemIconVars.default.fill, systemIconVars.default.color),
+export const systemIconStencil = createStencil({
+  vars: {
+    fillColor: base.licorice200,
+    accentColor: base.licorice200,
+    backgroundColor: 'transparent',
   },
-  ':hover .wd-icon-fill': {
-    fill: cssVar(systemIconVars.hover.fill, systemIconVars.hover.color),
-  },
-  '& .wd-icon-accent, & .wd-icon-accent2': {
-    fill: cssVar(systemIconVars.default.accent, systemIconVars.default.color),
-  },
-  ':hover .wd-icon-accent, :hover .wd-icon-accent2': {
-    fill: cssVar(systemIconVars.hover.accent, systemIconVars.hover.color),
-  },
-  '& .wd-icon-background': {
-    fill: systemIconVars.default.background,
-  },
-  ':hover .wd-icon-background': {
-    fill: systemIconVars.hover.background,
-  },
+  base: ({fillColor, accentColor, backgroundColor}) => ({
+    '& .wd-icon-fill': {
+      fill: fillColor,
+    },
+    '& .wd-icon-accent, & .wd-icon-accent2': {
+      fill: accentColor,
+    },
+    '& .wd-icon-background': {
+      fill: backgroundColor,
+    },
+  }),
 });
 
 /**
- * Wrap a CSS variable in `var()` if it's unwrapped.
- * It returns the original value if it's not a CSS variable or undefined
- */
-function wrapVar(value?: string) {
-  return value?.startsWith('--') ? cssVar(value) : value;
-}
+ * @deprecated should be removed with getHoverStyles function
+ * */
+type GetHoverStylesParams = {
+  accentHover?: string;
+  colorHover?: string;
+  fillHover?: string;
+  backgroundHover?: string;
+};
+
+/**
+ * @deprecated Function should be removed with hover color props
+ * */
+const getHoverStyles = ({
+  accentHover,
+  colorHover,
+  fillHover,
+  backgroundHover,
+}: GetHoverStylesParams): CSProps['cs'] => {
+  const hoverFillColor = fillHover || colorHover;
+  const hoverAccentColor = accentHover || colorHover;
+
+  if (hoverFillColor) {
+    return {
+      '&:hover': {
+        [systemIconStencil.vars.fillColor]: cssVar(hoverFillColor),
+      },
+    };
+  }
+
+  if (hoverAccentColor) {
+    return {
+      '&:hover': {
+        [systemIconStencil.vars.accentColor]: cssVar(hoverAccentColor),
+      },
+    };
+  }
+
+  if (backgroundHover) {
+    return {
+      '&:hover': {
+        [systemIconStencil.vars.backgroundColor]: cssVar(backgroundHover),
+      },
+    };
+  }
+
+  return '';
+};
 
 export const SystemIcon = createComponent('span')({
   displayName: 'SystemIcon',
   Component: (
     {
-      background = 'transparent',
-      backgroundHover = 'transparent',
-      color = base.licorice200,
-      colorHover = base.licorice200,
+      background,
+      backgroundHover,
+      color,
+      colorHover,
       icon,
       accent,
       accentHover,
@@ -148,20 +182,13 @@ export const SystemIcon = createComponent('span')({
         src={icon}
         type={CanvasIconTypes.System}
         ref={ref}
-        {...mergeStyles(elemProps, [
-          systemIcon,
-          systemIconVars.default({
-            accent: wrapVar(accent),
-            background: wrapVar(background),
-            color: wrapVar(color),
-            fill: wrapVar(fill),
+        {...handleCsProp(elemProps, [
+          systemIconStencil({
+            fillColor: fill || color,
+            accentColor: accent || color,
+            backgroundColor: background,
           }),
-          systemIconVars.hover({
-            accent: wrapVar(accent),
-            background: wrapVar(background),
-            color: wrapVar(color),
-            fill: wrapVar(fill),
-          }),
+          getHoverStyles({accentHover, backgroundHover, colorHover, fillHover}),
         ])}
       />
     );
