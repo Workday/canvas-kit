@@ -10,6 +10,7 @@ import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {useListModel} from './useListModel';
 import {useListRenderItems} from './useListRenderItem';
 import {useListItemRegister} from './useListItemRegister';
+import {handleCsProp} from '@workday/canvas-kit-styling';
 
 export interface ListBoxProps<T = any> extends Omit<ExtractProps<typeof Flex, never>, 'children'> {
   children?: React.ReactNode | ((item: T, index: number) => React.ReactNode);
@@ -76,12 +77,15 @@ export const ListBox = createContainer('ul')({
     return (
       <Box
         ref={model.state.containerRef}
-        style={{
-          maxHeight: maxHeight,
-          marginBottom: marginY,
-          marginTop: marginY,
-          overflowY: model.state.orientation === 'vertical' ? 'auto' : undefined,
-        }}
+        {...handleCsProp(
+          {},
+          {
+            maxHeight: maxHeight,
+            marginBottom: marginY,
+            marginTop: marginY,
+            overflowY: model.state.orientation === 'vertical' ? 'auto' : undefined,
+          }
+        )}
       >
         <Flex as={Element} flexDirection="column" {...elemProps} marginY="zero">
           {useListRenderItems(model, elemProps.children)}
