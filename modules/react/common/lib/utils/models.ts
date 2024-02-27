@@ -340,8 +340,8 @@ function mergeConfig<TConfig extends Record<string, any>>(
   sourceConfig: Partial<TConfig>,
   newConfig: Partial<TConfig>
 ): TConfig {
-  const result = {...newConfig} as TConfig;
-  for (const key in sourceConfig) {
+  const result = {...sourceConfig} as TConfig;
+  for (const key in newConfig) {
     if (
       typeof newConfig[key] === 'function' &&
       /(on)[A-Z]/.test(key) &&
@@ -364,7 +364,7 @@ function mergeConfig<TConfig extends Record<string, any>>(
       };
     } else {
       // @ts-ignore
-      result[key] = sourceConfig[key];
+      result[key] = newConfig[key];
     }
   }
 
