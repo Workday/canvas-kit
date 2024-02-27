@@ -6,8 +6,8 @@ import {
   ExtractProps,
 } from '@workday/canvas-kit-react/common';
 
-import {Box, Flex} from '@workday/canvas-kit-react/layout';
-import {CSProps, calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {Box, Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {CSProps, calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 import {RadioLabelContext} from './RadioLabel';
 
@@ -18,7 +18,7 @@ export interface StyledRadioButtonProps extends CSProps {
   variant?: 'inverse' | undefined;
 }
 
-const radioInputStyles = createStencil({
+const radioInputStencil = createStencil({
   base: {
     cursor: 'pointer',
     opacity: '1',
@@ -165,7 +165,7 @@ const radioInputStyles = createStencil({
 const StyledRadioInput = createComponent('input')<StyledRadioButtonProps & StyledType>({
   displayName: 'StyledRadioInput',
   Component: ({children, variant, ...elemProps}: StyledRadioButtonProps, ref, Element) => {
-    return <Element ref={ref} {...handleCsProp(elemProps, radioInputStyles({variant}))} />;
+    return <Element ref={ref} {...mergeStyles(elemProps, radioInputStencil({variant}))} />;
   },
 });
 
@@ -215,7 +215,7 @@ const RadioInputWrapper = createComponent(Flex)<
   Component: ({children, variant, ...elemProps}: StyledRadioButtonProps, ref, Element) => {
     const {disabled} = React.useContext(RadioLabelContext);
     return (
-      <Element ref={ref} {...handleCsProp(elemProps, radioInputWrapperStyles({variant, disabled}))}>
+      <Element ref={ref} {...mergeStyles(elemProps, radioInputWrapperStyles({variant, disabled}))}>
         {children}
       </Element>
     );

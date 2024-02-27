@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Table} from '@workday/canvas-kit-preview-react/table';
+import {Table} from '@workday/canvas-kit-react/table';
 import {Heading} from '@workday/canvas-kit-react/text';
 import {Checkbox} from '@workday/canvas-kit-react/checkbox';
 import {createComponent, generateUniqueId} from '@workday/canvas-kit-react/common';
