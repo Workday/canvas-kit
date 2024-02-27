@@ -157,6 +157,11 @@ describe('createStyles', () => {
       expect(myVars({color: 'red'})).toHaveProperty(myVars.color, 'red');
     });
 
+    it('should return a function that takes in an object with the values and return a style object with wrapped css prop', () => {
+      const myVars = createVars('color');
+      expect(myVars({color: '--my-var'})).toHaveProperty(myVars.color, 'var(--my-var)');
+    });
+
     it('should make types Emotion safe when ID is known', () => {
       const myVars = createVars({id: 'foo', args: ['label']});
 
@@ -659,6 +664,20 @@ describe('createStyles', () => {
       expectTypeOf(myStencil.vars.color).toEqualTypeOf<'--foo-color'>();
 
       expect(myStencil).toHaveProperty('vars.color', expect.stringMatching(/--foo-color/));
+    });
+
+    it('should return a function that takes in an object with the values and wrap passed css variables', () => {
+      const myStencil = createStencil({
+        vars: {
+          color: 'red',
+        },
+        base: {},
+      });
+
+      expect(myStencil({color: '--my-var'}).style).toHaveProperty(
+        myStencil.vars.color,
+        'var(--my-var)'
+      );
     });
 
     it('should handle variables and pass them to the base function', () => {
