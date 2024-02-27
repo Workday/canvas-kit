@@ -16,12 +16,19 @@ export interface SvgProps extends BoxProps {
   shouldMirror?: boolean;
 }
 
-const svgStencil = createStencil({
-  base: {
-    baxSizing: 'border-box',
-    display: 'inline-block',
-    '> svg': {display: 'block'},
+export const svgStencil = createStencil({
+  vars: {
+    size: 'auto',
   },
+  base: ({size}) => ({
+    boxSizing: 'border-box',
+    display: 'inline-block',
+    '> svg': {
+      display: 'block',
+      width: size,
+      height: size,
+    },
+  }),
   modifiers: {
     shouldMirror: {
       true: {

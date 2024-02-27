@@ -2,12 +2,13 @@ import * as React from 'react';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {CanvasAccentIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
-import {Icon, IconProps} from './Icon';
 import {createComponent, getColor} from '@workday/canvas-kit-react/common';
-import {mergeStyles, SystemPropValues} from '@workday/canvas-kit-react/layout';
-import {createStencil, createVars, px2rem} from '@workday/canvas-kit-styling';
+import {SystemPropValues} from '@workday/canvas-kit-react/layout';
+import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {base} from '@workday/canvas-tokens-web';
+import {Svg, SvgProps, svgStencil} from './Svg';
 
+/** @deprecated */
 export interface AccentIconStyles {
   /**
    * The fill color of the AccentIcon.
@@ -21,7 +22,7 @@ export interface AccentIconStyles {
   transparent?: boolean;
 }
 
-export interface AccentIconProps extends AccentIconStyles, Omit<IconProps, 'src' | 'type'> {
+export interface AccentIconProps extends AccentIconStyles, Omit<SvgProps, 'src' | 'type'> {
   /**
    *  The icon to display from `@workday/canvas-accent-icons-web`.
    */
@@ -33,6 +34,7 @@ export interface AccentIconProps extends AccentIconStyles, Omit<IconProps, 'src'
   size?: number;
 }
 
+/** @deprecated */
 export const accentIconStyles = ({
   color = colors.blueberry500,
   transparent = false,
@@ -45,14 +47,11 @@ export const accentIconStyles = ({
   },
 });
 
-const accentIconVars = createVars('color', 'size');
-
 const accentIconStencil = createStencil({
   vars: {
-    color: base.blueberry500,
-    size: px2rem(56),
+    color: `${base.blueberry500}`,
   },
-  base: ({color, size}) => ({
+  base: ({color}) => ({
     '& .color-500': {
       fill: color,
     },
@@ -79,14 +78,15 @@ export const AccentIcon = createComponent('span')({
     Element
   ) => {
     return (
-      <Icon
+      <Svg
         src={icon}
         type={CanvasIconTypes.Accent}
-        styles={accentIconStyles({color, transparent})}
-        size={size}
         as={Element}
         ref={ref}
-        {...mergeStyles(elemProps)}
+        {...handleCsProp(elemProps, [
+          accentIconStencil({color, transparent}),
+          {[svgStencil.vars.size]: px2rem(size)},
+        ])}
       />
     );
   },

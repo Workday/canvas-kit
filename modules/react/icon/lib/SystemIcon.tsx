@@ -2,12 +2,13 @@ import * as React from 'react';
 import {iconColors} from '@workday/canvas-kit-react/tokens';
 import {CanvasSystemIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
-import {Icon, IconProps} from './Icon';
 import {createComponent, getColor} from '@workday/canvas-kit-react/common';
-import {cssVar, createStencil, CSProps, handleCsProp} from '@workday/canvas-kit-styling';
+import {cssVar, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {base} from '@workday/canvas-tokens-web';
+import {Svg, SvgProps, svgStencil} from './Svg';
 
-export interface SystemIconStyles extends CSProps {
+/** @deprecated */
+export interface SystemIconStyles {
   /**
    * The accent color of the SystemIcon. This overrides `color`.
    */
@@ -44,11 +45,15 @@ export interface SystemIconStyles extends CSProps {
    * The fill color of the SystemIcon on hover. This overrides `colorHover`.
    */
   fillHover?: string;
+  /**
+   * The icon to display from `@workday/canvas-system-icons-web`.
+   */
+  icon: CanvasSystemIcon;
 }
 
 export interface SystemIconProps
   extends SystemIconStyles,
-    Omit<IconProps, 'src' | 'fill' | 'type' | 'background' | 'color'> {
+    Omit<SvgProps, 'src' | 'type' | 'fill' | 'background' | 'color'> {
   /**
    * The icon to display from `@workday/canvas-system-icons-web`.
    */
@@ -56,7 +61,7 @@ export interface SystemIconProps
   /**
    * The size of the SystemIcon in `px`.
    */
-  size?: number | string | undefined;
+  size?: number | string;
 }
 
 /** @deprecated */
@@ -92,11 +97,11 @@ export const systemIconStyles = ({
 
 export const systemIconStencil = createStencil({
   vars: {
-    fillColor: base.licorice200,
-    accentColor: base.licorice200,
+    fillColor: `${base.licorice200}`,
+    accentColor: `${base.licorice200}`,
     backgroundColor: 'transparent',
   },
-  base: ({fillColor, accentColor, backgroundColor}) => ({
+  base: ({accentColor, backgroundColor, fillColor}) => ({
     '& .wd-icon-fill': {
       fill: fillColor,
     },
@@ -110,16 +115,6 @@ export const systemIconStencil = createStencil({
 });
 
 /**
- * @deprecated should be removed with getHoverStyles function
- * */
-type GetHoverStylesParams = {
-  accentHover?: string;
-  colorHover?: string;
-  fillHover?: string;
-  backgroundHover?: string;
-};
-
-/**
  * @deprecated Function should be removed with hover color props
  * */
 const getHoverStyles = ({
@@ -127,7 +122,10 @@ const getHoverStyles = ({
   colorHover,
   fillHover,
   backgroundHover,
-}: GetHoverStylesParams): CSProps['cs'] => {
+}: Pick<
+  SystemIconStyles,
+  'accentHover' | 'backgroundHover' | 'colorHover' | 'fillHover'
+>): /* CSProps['cs'] should replace any after stencil styles fixed */ any => {
   const hoverFillColor = fillHover || colorHover;
   const hoverAccentColor = accentHover || colorHover;
 
@@ -171,13 +169,14 @@ export const SystemIcon = createComponent('span')({
       accentHover,
       fill,
       fillHover,
+      size,
       ...elemProps
     }: SystemIconProps,
     ref,
     Element
   ) => {
     return (
-      <Icon
+      <Svg
         as={Element}
         src={icon}
         type={CanvasIconTypes.System}
@@ -188,7 +187,13 @@ export const SystemIcon = createComponent('span')({
             accentColor: accent || color,
             backgroundColor: background,
           }),
-          getHoverStyles({accentHover, backgroundHover, colorHover, fillHover}),
+          getHoverStyles({
+            accentHover,
+            backgroundHover,
+            colorHover,
+            fillHover,
+          }),
+          {[svgStencil.vars.size]: typeof size === 'number' ? px2rem(size) : size},
         ])}
       />
     );

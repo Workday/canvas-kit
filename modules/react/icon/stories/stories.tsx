@@ -5,17 +5,10 @@ import {benefitsIcon} from '@workday/canvas-applet-icons-web';
 import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
 
 import {colors} from '@workday/canvas-kit-react/tokens';
-import {
-  AccentIcon,
-  AppletIcon,
-  SystemIcon,
-  systemIconVars,
-  SystemIconCircle,
-  Graphic,
-} from '../index';
+import {AccentIcon, AppletIcon, SystemIcon, SystemIconCircle, Graphic} from '../index';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
-import {base, system} from '@workday/canvas-tokens-web';
+import {base} from '@workday/canvas-tokens-web';
 
 const graphicExample: CanvasGraphic = {
   name: 'badgeAchievement',
@@ -95,12 +88,8 @@ storiesOf('Tokens/Icon', module)
       <SystemIcon icon={activityStreamIcon} size={48} />
       <SystemIconCircle icon={activityStreamIcon} />
       <SystemIconCircle icon={activityStreamIcon} shouldMirror={true} />
-      <SystemIconCircle icon={activityStreamIcon} background={base.blueberry400} />
-      <SystemIconCircle
-        icon={activityStreamIcon}
-        background={base.blueberry400}
-        shouldMirror={true}
-      />
+      <SystemIconCircle icon={activityStreamIcon} background={'blueberry400'} />
+      <SystemIconCircle icon={activityStreamIcon} background={'blueberry400'} shouldMirror={true} />
     </div>
   ));
 
