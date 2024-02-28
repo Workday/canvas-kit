@@ -195,7 +195,7 @@ export function createVars<
     args.forEach(key => {
       if (input[key as ToString<T>]) {
         // @ts-ignore TS complains about `key` not in object `{}`
-        vars[result[key]] = input[key];
+        vars[result[key]] = convertProperty(input[key]);
       }
     });
     return vars;
@@ -278,7 +278,7 @@ export function createDefaultedVars<
       if (typeof (input as any)[key] === 'string') {
         if ((result as any)[key]) {
           // Don't add an undefined key
-          vars[(result as any)[key]] = (input as any)[key];
+          vars[(result as any)[key]] = convertProperty((input as any)[key]);
         }
       }
       if (typeof (input as any)[key] === 'object') {
@@ -286,7 +286,7 @@ export function createDefaultedVars<
           if (typeof (input as any)[key][subKey] === 'string') {
             // Don't add an undefined key
             if ((result as any)[key][subKey]) {
-              vars[(result as any)[key][subKey]] = (input as any)[key][subKey];
+              vars[(result as any)[key][subKey]] = convertProperty((input as any)[key][subKey]);
             }
           }
         }
