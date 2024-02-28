@@ -448,7 +448,7 @@ export type CSToPropsInput =
   | CSSObjectWithVars
   | CSToPropsInput[];
 
-export type CsToPropsReturn = {className?: string; style?: Record<string, string>};
+export type CsToPropsReturn = {className?: string; style?: CSSObjectWithVars};
 /**
  * A function that takes in a single input, or an array. The type of the input is either:
  *
@@ -502,7 +502,7 @@ export function csToProps(input: CSToPropsInput): CsToPropsReturn {
       const className = css(staticStyles);
       return {style: cssVars, className};
     }
-    return {style: input as Record<string, string>};
+    return {style: input};
   }
 
   // An array. it is the only thing left. We iterate and recurse over the array to produce a single
