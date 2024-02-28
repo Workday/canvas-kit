@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import {commonColors} from '@workday/canvas-kit-react/tokens';
 import {
   createSubcomponent,
   createElemPropsHook,
