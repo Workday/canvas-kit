@@ -28,7 +28,6 @@ const comoboxMenuListStencil = createStencil({
   base: {
     borderRadius: system.shape.zero,
     gap: system.space.zero,
-    // overflowY: 'auto',
     background: base.frenchVanilla100,
     padding: system.space.zero,
   },
