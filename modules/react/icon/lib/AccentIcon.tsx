@@ -6,7 +6,7 @@ import {createComponent, getColor} from '@workday/canvas-kit-react/common';
 import {SystemPropValues} from '@workday/canvas-kit-react/layout';
 import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {base} from '@workday/canvas-tokens-web';
-import {Svg, SvgProps, svgStencil} from './Svg';
+import {Svg, SvgProps, svgStencil, transformColorNameToToken} from './Svg';
 
 /** @deprecated */
 export interface AccentIconStyles {
@@ -84,7 +84,7 @@ export const AccentIcon = createComponent('span')({
         as={Element}
         ref={ref}
         {...handleCsProp(elemProps, [
-          accentIconStencil({color, transparent}),
+          accentIconStencil({color: transformColorNameToToken(color), transparent}),
           {[svgStencil.vars.size]: px2rem(size)},
         ])}
       />

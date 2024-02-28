@@ -5,7 +5,7 @@ import {CSSObject} from '@emotion/styled';
 import {createComponent, getColor} from '@workday/canvas-kit-react/common';
 import {cssVar, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {base} from '@workday/canvas-tokens-web';
-import {Svg, SvgProps, svgStencil} from './Svg';
+import {Svg, SvgProps, svgStencil, transformColorNameToToken} from './Svg';
 
 /** @deprecated */
 export interface SystemIconStyles {
@@ -45,10 +45,6 @@ export interface SystemIconStyles {
    * The fill color of the SystemIcon on hover. This overrides `colorHover`.
    */
   fillHover?: string;
-  /**
-   * The icon to display from `@workday/canvas-system-icons-web`.
-   */
-  icon: CanvasSystemIcon;
 }
 
 export interface SystemIconProps
@@ -183,15 +179,15 @@ export const SystemIcon = createComponent('span')({
         ref={ref}
         {...handleCsProp(elemProps, [
           systemIconStencil({
-            fillColor: fill || color,
-            accentColor: accent || color,
-            backgroundColor: background,
+            fillColor: transformColorNameToToken(fill || color),
+            accentColor: transformColorNameToToken(accent || color),
+            backgroundColor: transformColorNameToToken(background),
           }),
           getHoverStyles({
-            accentHover,
-            backgroundHover,
-            colorHover,
-            fillHover,
+            accentHover: transformColorNameToToken(accentHover),
+            backgroundHover: transformColorNameToToken(backgroundHover),
+            colorHover: transformColorNameToToken(colorHover),
+            fillHover: transformColorNameToToken(fillHover),
           }),
           {[svgStencil.vars.size]: typeof size === 'number' ? px2rem(size) : size},
         ])}

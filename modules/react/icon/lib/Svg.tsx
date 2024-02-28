@@ -5,6 +5,7 @@ import {validateIconType} from './utils';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil} from '@workday/canvas-kit-styling';
+import {base} from '@workday/canvas-tokens-web';
 
 export interface SvgProps extends BoxProps {
   src: CanvasIcon;
@@ -37,6 +38,14 @@ export const svgStencil = createStencil({
     },
   },
 });
+
+/** @deprecated */
+export const transformColorNameToToken = (color?: string) => {
+  if (color && color in base) {
+    return base[color as keyof typeof base];
+  }
+  return color;
+};
 
 export const Svg = createComponent('span')({
   displayName: 'Svg',

@@ -3,9 +3,9 @@ import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
 import {Svg, SvgProps} from './Svg';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {handleCsProp} from '@workday/canvas-kit-styling';
 
+/** @deprecated */
 export interface GraphicStyles {
   /**
    * The width of the Graphic in `px`. The Graphic's `width` takes precedence over its `height` in order to preserve its proportions.
@@ -24,7 +24,7 @@ export interface GraphicStyles {
   grow?: boolean;
 }
 
-export interface GraphicProps extends GraphicStyles, Pick<SvgProps, 'shouldMirror'> {
+export interface GraphicProps extends GraphicStyles, Pick<SvgProps, 'shouldMirror' | 'cs'> {
   /**
    * The graphic to display from `@workday/canvas-graphics-web`.
    */
@@ -65,37 +65,6 @@ export const graphicStyles = ({width, height, grow}: GraphicStyles): CSSObject =
   return {};
 };
 
-/**
- * Should we export this stencil?
- */
-const graphicStencil = createStencil({
-  vars: {
-    height: '100%',
-    width: '100%',
-  },
-  base: ({height, width}) => ({
-    '& svg': {
-      height,
-      width,
-    },
-  }),
-  modifiers: {
-    grow: {
-      true: {
-        width: '100%',
-        '& svg': {
-          width: '100%',
-          height: '100%',
-        },
-      },
-    },
-  },
-});
-
-function convertSize(size: string | number) {
-  return typeof size === 'number' ? px2rem(size) : size;
-}
-
 export const Graphic = createComponent('span')({
   displayName: 'Graphic',
   Component: (
@@ -108,10 +77,13 @@ export const Graphic = createComponent('span')({
         type={CanvasIconTypes.Graphic}
         as={Element}
         ref={ref}
-        {...mergeStyles(
-          elemProps,
-          graphicStencil({grow, height: convertSize(height), width: convertSize(width)})
-        )}
+        {...handleCsProp(elemProps, {
+          width: grow ? '100%' : 'auto',
+          '& svg': {
+            width: grow ? '100%' : width,
+            height: grow ? '100%' : height,
+          },
+        } as any)}
       />
     );
   },
