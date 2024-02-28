@@ -11,6 +11,8 @@ import {ListBox, ListProps} from '@workday/canvas-kit-react/collection';
 import {useReturnFocus, useFocusRedirect} from '@workday/canvas-kit-react/popup';
 
 import {useMenuModel} from './useMenuModel';
+import {cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export interface MenuListProps<T = any>
   extends Omit<ExtractProps<typeof ListBox, never>, 'children'> {
@@ -43,7 +45,7 @@ export const MenuList = createSubcomponent('div')({
       background={commonColors.background}
       borderRadius="zero"
       padding="zero"
-      marginY="xxs"
+      marginY={cssVar(system.space.x2)}
       gap="zero"
       overflowY="auto"
       flexDirection={model.state.orientation === 'vertical' ? 'column' : 'row'}
