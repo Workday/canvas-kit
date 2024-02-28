@@ -10,4 +10,3 @@ export * from './status-indicator';
 export * from './text-area';
 export * from './text-input';
 export * from './radio';
-export * from './table';
