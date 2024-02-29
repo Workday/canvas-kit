@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.18](https://github.com/Workday/canvas-kit/releases/tag/v10.3.18) (2024-02-28)
+
+### Styling
+
+- fix: Fix stencil types to handle vars and deeply nested styles ([#2617](https://github.com/Workday/canvas-kit/pull/2617)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v10.3.17](https://github.com/Workday/canvas-kit/releases/tag/v10.3.17) (2024-02-26)
 
 ### Components
