@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.19](https://github.com/Workday/canvas-kit/releases/tag/v10.3.19) (2024-03-01)
+
+### Components
+
+- fix(button): Fix icon colors in buttons and SegmentedControl ([#2623](https://github.com/Workday/canvas-kit/pull/2623)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  This change may trigger a visual regression with certain icons in buttons and `SegmentedControl` buttons. This change is intentional and fixes an accidental regression between v9 and v10. There should be no other breaking changes.
+
+
 ## [v10.3.18](https://github.com/Workday/canvas-kit/releases/tag/v10.3.18) (2024-02-28)
 
 ### Styling
