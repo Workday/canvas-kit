@@ -31,14 +31,14 @@ const tertiaryStyles = createStyles({
   [buttonVars.default.border]: 'transparent',
   [buttonVars.default.borderRadius]: system.shape.x1,
   [buttonVars.default.label]: brand.primary.base,
-  [systemIconStencil.vars.fillColor]: base.blackPepper400,
+  [systemIconStencil.vars.color]: base.blackPepper400,
   '&:focus-visible, &.focus': {
     [buttonVars.focus.background]: 'transparent',
     [buttonVars.focus.border]: 'transparent',
     [buttonVars.focus.label]: brand.primary.base,
     [buttonVars.focus.boxShadowInner]: brand.common.focusOutline,
     [buttonVars.focus.boxShadowOuter]: brand.common.focusOutline,
-    [systemIconStencil.vars.fillColor]: base.blackPepper400,
+    [systemIconStencil.vars.color]: base.blackPepper400,
     ...focusRing({
       width: 2,
       separation: 0,
@@ -50,13 +50,13 @@ const tertiaryStyles = createStyles({
     [buttonVars.hover.background]: base.soap300,
     [buttonVars.hover.border]: 'transparent',
     [buttonVars.hover.label]: brand.primary.dark,
-    [systemIconStencil.vars.fillColor]: base.blackPepper400,
+    [systemIconStencil.vars.color]: base.blackPepper400,
   },
   '&:active, &.active': {
     [buttonVars.active.background]: base.soap400,
     [buttonVars.active.border]: 'transparent',
     [buttonVars.active.label]: brand.primary.darkest,
-    [systemIconStencil.vars.fillColor]: base.blackPepper500,
+    [systemIconStencil.vars.color]: base.blackPepper500,
   },
   '&:disabled, &.disabled': {
     [buttonVars.disabled.background]: 'transparent',
@@ -69,18 +69,18 @@ const tertiaryStyles = createStyles({
 export const tertiaryButtonModifiers = createModifiers({
   isThemeable: {
     true: createStyles({
-      [systemIconStencil.vars.fillColor]: brand.primary.base,
+      [systemIconStencil.vars.color]: brand.primary.base,
       '&:focus-visible, &.focus': {
-        [systemIconStencil.vars.fillColor]: brand.primary.base,
+        [systemIconStencil.vars.color]: brand.primary.base,
       },
       '&:hover, &.hover': {
-        [systemIconStencil.vars.fillColor]: brand.primary.dark,
+        [systemIconStencil.vars.color]: brand.primary.dark,
       },
       '&:active, &.active': {
-        [systemIconStencil.vars.fillColor]: brand.primary.darkest,
+        [systemIconStencil.vars.color]: brand.primary.darkest,
       },
       '&:disabled, &.disabled': {
-        [systemIconStencil.vars.fillColor]: brand.primary.base,
+        [systemIconStencil.vars.color]: brand.primary.base,
       },
     }),
   },
@@ -89,12 +89,12 @@ export const tertiaryButtonModifiers = createModifiers({
       [buttonVars.default.background]: 'transparent',
       [buttonVars.default.border]: 'transparent',
       [buttonVars.default.label]: base.frenchVanilla100,
-      [systemIconStencil.vars.fillColor]: base.frenchVanilla100,
+      [systemIconStencil.vars.color]: base.frenchVanilla100,
       '&:focus-visible, &.focus': {
         [buttonVars.hover.background]: base.frenchVanilla100,
         [buttonVars.hover.border]: 'transparent',
         [buttonVars.hover.label]: base.blackPepper400,
-        [systemIconStencil.vars.fillColor]: base.blackPepper400,
+        [systemIconStencil.vars.color]: base.blackPepper400,
         ...focusRing({
           inset: 'inner',
           width: 2,
@@ -107,13 +107,13 @@ export const tertiaryButtonModifiers = createModifiers({
         [buttonVars.focus.background]: base.frenchVanilla100,
         [buttonVars.focus.border]: 'transparent',
         [buttonVars.focus.label]: base.blackPepper400,
-        [systemIconStencil.vars.fillColor]: base.blackPepper400,
+        [systemIconStencil.vars.color]: base.blackPepper400,
       },
       '&:active, &.active': {
         [buttonVars.active.background]: base.soap200,
         [buttonVars.active.border]: 'transparent',
         [buttonVars.active.label]: base.blackPepper400,
-        [systemIconStencil.vars.fillColor]: base.blackPepper400,
+        [systemIconStencil.vars.color]: base.blackPepper400,
       },
 
       '&:disabled, &.disabled': {
@@ -121,7 +121,7 @@ export const tertiaryButtonModifiers = createModifiers({
         [buttonVars.disabled.background]: 'transparent',
         [buttonVars.disabled.border]: base.frenchVanilla100,
         [buttonVars.disabled.label]: base.frenchVanilla100,
-        [systemIconStencil.vars.fillColor]: base.frenchVanilla100,
+        [systemIconStencil.vars.color]: base.frenchVanilla100,
       },
     }),
   },

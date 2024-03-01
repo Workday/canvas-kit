@@ -7,7 +7,11 @@ import {cssVar, createStencil, handleCsProp, px2rem, createVars} from '@workday/
 import {base} from '@workday/canvas-tokens-web';
 import {Svg, SvgProps, svgStencil, transformColorNameToToken} from './Svg';
 
-/** @deprecated */
+/**
+ * @deprecated
+ * Interface `SystemIconStyles` will be removed in a future version.
+ * `accent`, `color`, background props will be moved inside `GraphicProps`.
+ */
 export interface SystemIconStyles {
   /**
    * The accent color of the SystemIcon. This overrides `color`.
@@ -63,6 +67,9 @@ export interface SystemIconStyles {
   colorHover?: string;
   /**
    * The fill color of the SystemIcon. This overrides `color`.
+   * @deprecated
+   * `fill` is deprecated and will be removed in a future version.
+   * Please use `color` and specify `accent` color if you want `accent` to be different from `color`.
    */
   fill?: string;
   /**
@@ -160,16 +167,16 @@ export const systemIconStencil = createStencil({
      * of the time, this is the only color you need to change. Icons also have an accent layer. If you
      * wish to change the accent layer independently, also set the `accentColor` variable
      */
-    fillColor: '',
+    color: '',
     accentColor: '',
     backgroundColor: 'transparent',
   },
-  base: ({accentColor, backgroundColor, fillColor}) => ({
+  base: ({accentColor, backgroundColor, color}) => ({
     '& .wd-icon-fill': {
-      fill: cssVar(fillColor, base.licorice200),
+      fill: cssVar(color, base.licorice200),
     },
     '& .wd-icon-accent, & .wd-icon-accent2': {
-      fill: cssVar(accentColor, cssVar(fillColor, base.licorice200)),
+      fill: cssVar(accentColor, cssVar(color, base.licorice200)),
     },
     '& .wd-icon-background': {
       fill: backgroundColor,
@@ -178,13 +185,16 @@ export const systemIconStencil = createStencil({
     '&:where(:hover, .hover) .wd-icon-fill': {
       fill: cssVar(
         deprecatedSystemIconVars.fillHover,
-        cssVar(deprecatedSystemIconVars.colorHover, cssVar(fillColor, base.licorice200))
+        cssVar(deprecatedSystemIconVars.colorHover, cssVar(color, base.licorice200))
       ),
     },
     '&:where(:hover, .hover) .wd-icon-accent, & .wd-icon-accent2': {
       fill: cssVar(
         deprecatedSystemIconVars.accentHover,
-        cssVar(deprecatedSystemIconVars.colorHover, cssVar(accentColor, base.licorice200))
+        cssVar(
+          deprecatedSystemIconVars.colorHover,
+          cssVar(accentColor, cssVar(color, base.licorice200))
+        )
       ),
     },
     '&:where(:hover, .hover) .wd-icon-background': {
@@ -221,7 +231,7 @@ export const SystemIcon = createComponent('span')({
         {...handleCsProp(elemProps, [
           systemIconStencil({
             size: typeof size === 'number' ? px2rem(size) : size,
-            fillColor: transformColorNameToToken(fill || color),
+            color: transformColorNameToToken(fill || color),
             accentColor: transformColorNameToToken(accent || color),
             backgroundColor: transformColorNameToToken(background),
           }),

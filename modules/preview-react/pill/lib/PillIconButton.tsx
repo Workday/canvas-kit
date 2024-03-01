@@ -67,7 +67,7 @@ const StyledIconButton = styled(BaseButton)<StyledType & PillIconButtonProps>({
     [buttonVars.disabled.background]: colors.soap100,
     [buttonVars.disabled.label]: colors.licorice100,
     [buttonVars.disabled.border]: 'transparent',
-    [systemIconStencil.vars.fillColor]: colors.licorice100,
+    [systemIconStencil.vars.color]: colors.licorice100,
   },
 });
 

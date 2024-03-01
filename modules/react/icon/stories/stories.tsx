@@ -104,7 +104,7 @@ storiesOf('Tokens/Icon', module)
     <div className="story">
       <Graphic src={graphicExample} />
       <br />
-      <Graphic src={graphicExample} width={80} />
+      <Graphic src={graphicExample} width={120} />
       <div style={{width: 100}}>
         <Graphic src={graphicExample} grow={true} />
       </div>

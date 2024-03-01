@@ -105,7 +105,7 @@ export const StyledTabItem = styled(Box.as('button'))<StyledType & Pick<TabsItem
       backgroundColor: colors.soap200,
       color: colors.blackPepper400,
 
-      [systemIconStencil.vars.fillColor]: iconColors.hover,
+      [systemIconStencil.vars.color]: iconColors.hover,
     },
 
     '&:focus': {
@@ -115,18 +115,18 @@ export const StyledTabItem = styled(Box.as('button'))<StyledType & Pick<TabsItem
 
     '&:disabled, &[aria-disabled]': {
       color: colors.licorice100,
-      [systemIconStencil.vars.fillColor]: iconColors.disabled,
+      [systemIconStencil.vars.color]: iconColors.disabled,
       '&:hover': {
         cursor: 'auto',
         backgroundColor: `transparent`,
-        [systemIconStencil.vars.fillColor]: iconColors.disabled,
+        [systemIconStencil.vars.color]: iconColors.disabled,
       },
     },
 
     '&[aria-selected=true]': {
       color: theme.canvas.palette.primary.main,
       cursor: 'default',
-      [systemIconStencil.vars.fillColor]: theme.canvas.palette.primary.main,
+      [systemIconStencil.vars.color]: theme.canvas.palette.primary.main,
       '&:after': {
         position: 'absolute',
         height: space.xxxs,

@@ -142,7 +142,7 @@ const baseButtonStyles = createStyles({
     boxShadow: 'none',
     opacity: cssVar(buttonVars.disabled.opacity, '1'),
   },
-  [systemIconStencil.vars.fillColor]: base.blackPepper400,
+  [systemIconStencil.vars.color]: base.blackPepper400,
   '&:focus-visible, &.focus': {
     backgroundColor: cssVar(buttonVars.focus.background, 'transparent'),
     borderColor: cssVar(buttonVars.focus.border, 'transparent'),

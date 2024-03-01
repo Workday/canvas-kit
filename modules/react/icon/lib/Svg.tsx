@@ -19,7 +19,8 @@ export interface SvgProps extends BoxProps {
 
 export const svgStencil = createStencil({
   vars: {
-    size: 'auto',
+    /** set width and height of svg element */
+    size: '',
   },
   base: ({size}) => ({
     boxSizing: 'border-box',

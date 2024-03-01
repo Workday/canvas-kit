@@ -51,7 +51,7 @@ export const ExternalHyperlink = createComponent('a')({
         role="img"
         aria-label={iconLabel}
         size={iconSize}
-        cs={{'& svg': {minWidth: minIconSize, minHeight: minIconSize}} as any}
+        cs={{'& svg': {minWidth: minIconSize, minHeight: minIconSize}}}
       />
     </Anchor>
   ),
