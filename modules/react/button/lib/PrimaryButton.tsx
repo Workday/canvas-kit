@@ -26,7 +26,7 @@ const primaryStyles = createStyles({
   [buttonVars.default.borderRadius]: system.shape.round,
   [buttonVars.default.label]: brand.primary.accent,
   [systemIconStencil.vars.color]: brand.primary.accent,
-  '&:focus-visible, .focus': {
+  '&:focus-visible, &.focus': {
     [buttonVars.focus.background]: brand.primary.base,
     [buttonVars.focus.border]: 'transparent',
     [buttonVars.focus.label]: brand.primary.accent,
@@ -40,8 +40,7 @@ const primaryStyles = createStyles({
     [buttonVars.hover.label]: brand.primary.accent,
     [systemIconStencil.vars.color]: brand.primary.accent,
   },
-
-  '&:acitve, &.acitve': {
+  '&:active, &.active': {
     [buttonVars.active.background]: brand.primary.darkest,
     [buttonVars.active.border]: 'transparent',
     [buttonVars.active.label]: brand.primary.accent,
@@ -63,24 +62,24 @@ export const primaryButtonModifiers = createModifiers({
       [buttonVars.default.borderRadius]: system.shape.round,
       [buttonVars.default.label]: base.blackPepper400,
       [systemIconStencil.vars.color]: base.blackPepper400,
-      '&:focus-visible, .focus': {
+      '&:focus-visible, &.focus': {
         [buttonVars.focus.background]: base.frenchVanilla100,
         [buttonVars.focus.label]: base.blackPepper400,
         [buttonVars.focus.boxShadowInner]: base.blackPepper400,
         [buttonVars.focus.boxShadowOuter]: base.frenchVanilla100,
         [systemIconStencil.vars.color]: base.blackPepper400,
       },
-      '&:hover, .hover': {
+      '&:hover, &.hover': {
         [buttonVars.hover.background]: base.soap300,
         [buttonVars.hover.label]: base.blackPepper500,
         [systemIconStencil.vars.color]: base.blackPepper500,
       },
-      '&:active, .active': {
+      '&:active, &.active': {
         [buttonVars.active.background]: base.soap400,
         [buttonVars.active.label]: base.blackPepper500,
         [systemIconStencil.vars.color]: base.blackPepper500,
       },
-      '&:disabled, .disabled': {
+      '&:disabled, &.disabled': {
         [buttonVars.disabled.background]: base.frenchVanilla100,
         [buttonVars.disabled.label]: base.blackPepper400,
         [systemIconStencil.vars.color]: base.blackPepper400,

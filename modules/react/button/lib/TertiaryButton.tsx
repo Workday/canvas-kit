@@ -91,9 +91,9 @@ export const tertiaryButtonModifiers = createModifiers({
       [buttonVars.default.label]: base.frenchVanilla100,
       [systemIconStencil.vars.color]: base.frenchVanilla100,
       '&:focus-visible, &.focus': {
-        [buttonVars.hover.background]: base.frenchVanilla100,
-        [buttonVars.hover.border]: 'transparent',
-        [buttonVars.hover.label]: base.blackPepper400,
+        [buttonVars.focus.background]: base.frenchVanilla100,
+        [buttonVars.focus.border]: 'transparent',
+        [buttonVars.focus.label]: base.blackPepper400,
         [systemIconStencil.vars.color]: base.blackPepper400,
         ...focusRing({
           inset: 'inner',
@@ -104,9 +104,9 @@ export const tertiaryButtonModifiers = createModifiers({
         }),
       },
       '&:hover, &.hover': {
-        [buttonVars.focus.background]: base.frenchVanilla100,
-        [buttonVars.focus.border]: 'transparent',
-        [buttonVars.focus.label]: base.blackPepper400,
+        [buttonVars.hover.background]: base.frenchVanilla100,
+        [buttonVars.hover.border]: 'transparent',
+        [buttonVars.hover.label]: base.blackPepper400,
         [systemIconStencil.vars.color]: base.blackPepper400,
       },
       '&:active, &.active': {
@@ -115,7 +115,6 @@ export const tertiaryButtonModifiers = createModifiers({
         [buttonVars.active.label]: base.blackPepper400,
         [systemIconStencil.vars.color]: base.blackPepper400,
       },
-
       '&:disabled, &.disabled': {
         // Disabled Styles
         [buttonVars.disabled.background]: 'transparent',

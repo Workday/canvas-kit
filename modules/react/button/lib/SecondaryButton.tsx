@@ -28,34 +28,34 @@ const secondaryStyles = createStyles({
   [buttonVars.default.label]: base.blackPepper400,
   [systemIconStencil.vars.color]: base.blackPepper400,
   // Focus Styles
-  [buttonVars.focus.background]: 'transparent',
-  [buttonVars.focus.border]: base.blackPepper400,
-  [buttonVars.focus.label]: base.blackPepper400,
-  [buttonVars.focus.boxShadowInner]: base.frenchVanilla100,
-  [buttonVars.focus.boxShadowOuter]: brand.common.focusOutline,
   '&:focus-visible, &.focus': {
+    [buttonVars.focus.background]: 'transparent',
+    [buttonVars.focus.border]: base.blackPepper400,
+    [buttonVars.focus.label]: base.blackPepper400,
+    [buttonVars.focus.boxShadowInner]: base.frenchVanilla100,
+    [buttonVars.focus.boxShadowOuter]: brand.common.focusOutline,
     [systemIconStencil.vars.color]: base.blackPepper400,
   },
   // Hover Styles
-  [buttonVars.hover.background]: base.blackPepper400,
-  [buttonVars.hover.border]: base.blackPepper400,
-  [buttonVars.hover.label]: brand.primary.accent,
   '&:hover, &.hover': {
+    [buttonVars.hover.background]: base.blackPepper400,
+    [buttonVars.hover.border]: base.blackPepper400,
+    [buttonVars.hover.label]: brand.primary.accent,
     [systemIconStencil.vars.color]: brand.primary.accent,
   },
   // Active Styles
-  [buttonVars.active.background]: base.blackPepper500,
-  [buttonVars.active.border]: base.blackPepper500,
-  [buttonVars.active.label]: brand.primary.accent,
   '&:active, &.active': {
+    [buttonVars.active.background]: base.blackPepper500,
+    [buttonVars.active.border]: base.blackPepper500,
+    [buttonVars.active.label]: brand.primary.accent,
     [systemIconStencil.vars.color]: brand.primary.accent,
   },
   // Disabled Styles
-  [buttonVars.disabled.background]: 'transparent',
-  [buttonVars.disabled.border]: base.blackPepper400,
-  [buttonVars.disabled.label]: base.blackPepper400,
-  [buttonVars.disabled.opacity]: '0.4',
   '&:disabled, &.disabled': {
+    [buttonVars.disabled.background]: 'transparent',
+    [buttonVars.disabled.border]: base.blackPepper400,
+    [buttonVars.disabled.label]: base.blackPepper400,
+    [buttonVars.disabled.opacity]: '0.4',
     [systemIconStencil.vars.color]: base.blackPepper400,
   },
 });
@@ -69,33 +69,33 @@ export const secondaryButtonModifiers = createModifiers({
       [buttonVars.default.label]: base.frenchVanilla100,
       [systemIconStencil.vars.color]: base.frenchVanilla100,
       // Focus Styles
-      [buttonVars.focus.background]: base.frenchVanilla100,
-      [buttonVars.focus.border]: base.frenchVanilla100,
-      [buttonVars.focus.label]: base.blackPepper400,
-      [buttonVars.focus.boxShadowInner]: base.blackPepper400,
-      [buttonVars.focus.boxShadowOuter]: base.frenchVanilla100,
       '&:focus-visible, &.focus': {
+        [buttonVars.focus.background]: base.frenchVanilla100,
+        [buttonVars.focus.border]: base.frenchVanilla100,
+        [buttonVars.focus.label]: base.blackPepper400,
+        [buttonVars.focus.boxShadowInner]: base.blackPepper400,
+        [buttonVars.focus.boxShadowOuter]: base.frenchVanilla100,
         [systemIconStencil.vars.color]: base.blackPepper400,
       },
       // Hover Styles
-      [buttonVars.hover.background]: base.soap300,
-      [buttonVars.hover.border]: base.soap300,
-      [buttonVars.hover.label]: base.blackPepper500,
       '&:hover, &.hover': {
+        [buttonVars.hover.background]: base.soap300,
+        [buttonVars.hover.border]: base.soap300,
+        [buttonVars.hover.label]: base.blackPepper500,
         [systemIconStencil.vars.color]: base.blackPepper500,
       },
       // Active Styles
-      [buttonVars.active.background]: base.soap400,
-      [buttonVars.active.border]: base.soap400,
-      [buttonVars.active.label]: base.blackPepper500,
       '&:active, &.active': {
+        [buttonVars.active.background]: base.soap400,
+        [buttonVars.active.border]: base.soap400,
+        [buttonVars.active.label]: base.blackPepper500,
         [systemIconStencil.vars.color]: base.blackPepper500,
       },
       // Disabled Styles
-      [buttonVars.disabled.background]: 'transparent',
-      [buttonVars.disabled.border]: base.frenchVanilla100,
-      [buttonVars.disabled.label]: base.frenchVanilla100,
       '&:disabled, &.disabled': {
+        [buttonVars.disabled.background]: 'transparent',
+        [buttonVars.disabled.border]: base.frenchVanilla100,
+        [buttonVars.disabled.label]: base.frenchVanilla100,
         [systemIconStencil.vars.color]: base.frenchVanilla100,
       },
     }),
