@@ -7036,6 +7036,20 @@
         "__isArgsStory": false
       }
     },
+    "testing-buttons-segmented-control--segmented-control-button-states": {
+      "id": "testing-buttons-segmented-control--segmented-control-button-states",
+      "name": "Segmented Control Button States",
+      "title": "Testing/Buttons/Segmented Control",
+      "importPath": "./modules/react/segmented-control/stories/stories_VisualTesting.tsx",
+      "kind": "Testing/Buttons/Segmented Control",
+      "story": "Segmented Control Button States",
+      "parameters": {
+        "fileName": "./modules/react/segmented-control/stories/stories_VisualTesting.tsx",
+        "framework": "react",
+        "__id": "testing-buttons-segmented-control--segmented-control-button-states",
+        "__isArgsStory": false
+      }
+    },
     "testing-buttons-segmented-control--segmented-control-states": {
       "id": "testing-buttons-segmented-control--segmented-control-states",
       "name": "Segmented Control States",
