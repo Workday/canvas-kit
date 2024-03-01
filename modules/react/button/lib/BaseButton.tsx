@@ -148,11 +148,25 @@ const baseButtonStyles = createStyles({
     boxShadow: 'none',
     opacity: cssVar(buttonVars.disabled.opacity, '1'),
   },
+  /*
+  '& span .wd-icon-fill, & span .wd-icon-accent, & span .wd-icon-accent2': {
+    transitionDuration: '40ms',
+    fill: cssVar(buttonVars.default.icon, base.blackPepper400),
+  },
+  '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
+    fill: cssVar(buttonVars.default.icon, base.blackPepper400),
+  },
+  */
   '&:focus-visible, &.focus': {
     backgroundColor: cssVar(buttonVars.focus.background, 'transparent'),
     borderColor: cssVar(buttonVars.focus.border, 'transparent'),
     color: cssVar(buttonVars.focus.label, base.blackPepper400),
     [systemIconStencil.vars.color]: cssVar(buttonVars.focus.icon, base.blackPepper400),
+    /* 
+    '& span .wd-icon-fill, & span .wd-icon-accent, & span .wd-icon-accent2': {
+      fill: cssVar(buttonVars.focus.icon, base.blackPepper400),
+    },
+    */
     ...focusRing({
       width: 2,
       separation: 2,
@@ -165,6 +179,11 @@ const baseButtonStyles = createStyles({
     borderColor: cssVar(buttonVars.hover.border, 'transparent'),
     color: cssVar(buttonVars.hover.label, base.blackPepper500),
     [systemIconStencil.vars.color]: cssVar(buttonVars.hover.icon, base.blackPepper500),
+    /* 
+    '& span .wd-icon-fill, & span .wd-icon-accent, & span .wd-icon-accent2': {
+      fill: cssVar(buttonVars.hover.icon, base.blackPepper500),
+    },
+    */
   },
   '&:hover:active': {transitionDuration: '40ms'},
   '&:active, &.active': {
@@ -172,12 +191,22 @@ const baseButtonStyles = createStyles({
     borderColor: cssVar(buttonVars.active.border, 'transparent'),
     color: cssVar(buttonVars.active.label, base.blackPepper400),
     [systemIconStencil.vars.color]: cssVar(buttonVars.active.icon, base.blackPepper400),
+    /* 
+    '& span .wd-icon-fill, & span .wd-icon-accent, & span .wd-icon-accent2': {
+      fill: cssVar(buttonVars.active.icon, base.blackPepper400),
+    },
+    */
   },
   '&:disabled, &.disabled': {
     backgroundColor: cssVar(buttonVars.disabled.background, 'transparent'),
     borderColor: cssVar(buttonVars.disabled.border, 'transparent'),
     color: cssVar(buttonVars.disabled.label, base.blackPepper400),
     [systemIconStencil.vars.color]: cssVar(buttonVars.disabled.icon, base.blackPepper400),
+    /* 
+    '& span .wd-icon-fill, & span .wd-icon-accent, & span .wd-icon-accent2': {
+      fill: cssVar(buttonVars.disabled.icon, base.blackPepper400),
+    },
+    */
   },
 });
 
