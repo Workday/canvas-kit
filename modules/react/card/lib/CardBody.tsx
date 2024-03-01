@@ -1,15 +1,18 @@
 import * as React from 'react';
-import {type} from '@workday/canvas-kit-react/tokens';
+
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
+import {BoxProps} from '@workday/canvas-kit-react/layout';
+import {Subtext} from '@workday/canvas-kit-react/text';
+
+export interface CardBodyProps extends BoxProps {}
 
 export const CardBody = createComponent('div')({
   displayName: 'Card.Body',
-  Component: ({children, ...elemProps}: BoxProps, ref, Element) => {
+  Component: ({children, ...elemProps}: CardBodyProps, ref, Element) => {
     return (
-      <Box ref={ref} as={Element} {...type.levels.subtext.large} {...elemProps}>
+      <Subtext size="large" ref={ref} as={Element} {...elemProps}>
         {children}
-      </Box>
+      </Subtext>
     );
   },
 });
