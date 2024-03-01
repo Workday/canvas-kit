@@ -2,7 +2,7 @@ import React from 'react';
 
 import {focusRing, styled, StyledType, createSubcomponent} from '@workday/canvas-kit-react/common';
 
-import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
+import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {usePillModel} from './usePillModel';
 import {xSmallIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
@@ -45,22 +45,30 @@ const StyledIconButton = styled(BaseButton)<StyledType & PillIconButtonProps>({
   [buttonVars.default.border]: 'transparent',
   [buttonVars.default.label]: colors.blackPepper400,
 
-  [buttonVars.hover.background]: colors.soap300,
-  [buttonVars.hover.border]: 'transparent',
-  [buttonVars.hover.label]: colors.blackPepper400,
+  '&:focus-visible, &.focus': {
+    [buttonVars.focus.background]: colors.soap300,
+    [buttonVars.focus.border]: 'transparent',
+    [buttonVars.focus.label]: colors.blackPepper400,
+  },
 
-  [buttonVars.focus.background]: colors.soap300,
-  [buttonVars.focus.border]: 'transparent',
-  [buttonVars.focus.label]: colors.blackPepper400,
+  '&:hover, &.hover': {
+    [buttonVars.hover.background]: colors.soap300,
+    [buttonVars.hover.border]: 'transparent',
+    [buttonVars.hover.label]: colors.blackPepper400,
+  },
 
-  [buttonVars.active.background]: colors.soap500,
-  [buttonVars.active.border]: 'transparent',
-  [buttonVars.active.label]: colors.blackPepper400,
+  '&:active, &.active': {
+    [buttonVars.active.background]: colors.soap500,
+    [buttonVars.active.border]: 'transparent',
+    [buttonVars.active.label]: colors.blackPepper400,
+  },
 
-  [buttonVars.disabled.background]: colors.soap100,
-  [buttonVars.disabled.label]: colors.licorice100,
-  [buttonVars.disabled.border]: 'transparent',
-  [buttonVars.disabled.icon]: colors.licorice100,
+  '&:disabled, &.disabled': {
+    [buttonVars.disabled.background]: colors.soap100,
+    [buttonVars.disabled.label]: colors.licorice100,
+    [buttonVars.disabled.border]: 'transparent',
+    [systemIconStencil.vars.fillColor]: colors.licorice100,
+  },
 });
 
 export const PillIconButton = createSubcomponent('button')({

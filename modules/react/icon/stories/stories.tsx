@@ -60,6 +60,11 @@ storiesOf('Tokens/Icon', module)
       <SystemIcon icon={activityStreamIcon} background={base.cinnamon500} />
       <SystemIcon icon={activityStreamIcon} color={base.berrySmoothie400} />
       <SystemIcon
+        icon={activityStreamIcon}
+        color={base.berrySmoothie400}
+        colorHover={base.berrySmoothie600}
+      />
+      <SystemIcon
         className="custom-class"
         icon={activityStreamIcon}
         accent={base.frenchVanilla100}

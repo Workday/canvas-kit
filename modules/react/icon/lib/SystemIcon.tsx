@@ -3,7 +3,7 @@ import {iconColors} from '@workday/canvas-kit-react/tokens';
 import {CanvasSystemIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
 import {createComponent, getColor} from '@workday/canvas-kit-react/common';
-import {cssVar, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {cssVar, createStencil, handleCsProp, px2rem, createVars} from '@workday/canvas-kit-styling';
 import {base} from '@workday/canvas-tokens-web';
 import {Svg, SvgProps, svgStencil, transformColorNameToToken} from './Svg';
 
@@ -15,16 +15,32 @@ export interface SystemIconStyles {
   accent?: string;
   /**
    * The accent color of the SystemIcon on hover. This overrides `colorHover`.
+   * @deprecated
+   * `accentHover` is deprecated and will be removed in a future version. Please use the
+   * following instead in your style overrides:
+   * ```tsx
+   * '&:hover': {
+   *   [systemIconStencil.vars.accent]: desiredAccentHoverColor
+   * }
+   * ```
    */
   accentHover?: string;
   /**
    * The background color of the SystemIcon.
    * @default transparent
    */
-  background?: string & {};
+  background?: string;
   /**
    * The background color of the SystemIcon on hover.
    * @default transparent
+   * @deprecated
+   * `backgroundHover` is deprecated and will be removed in a future version. Please use the
+   * following instead in your style overrides:
+   * ```tsx
+   * '&:hover': {
+   *   [systemIconStencil.vars.background]: desiredBackgroundHoverColor
+   * }
+   * ```
    */
   backgroundHover?: string;
   /**
@@ -35,6 +51,14 @@ export interface SystemIconStyles {
   /**
    * The hover color of the SystemIcon. This defines `accentHover` and `fillHover`. `colorHover` may be overwritten by `accentHover` and `fillHover`.
    * @default base.licorice200
+   * @deprecated
+   * `colorHover` is deprecated and will be removed in a future version. Please use the
+   * following instead in your style overrides:
+   * ```tsx
+   * '&:hover': {
+   *   [systemIconStencil.vars.color]: desiredColorHoverColor
+   * }
+   * ```
    */
   colorHover?: string;
   /**
@@ -43,6 +67,14 @@ export interface SystemIconStyles {
   fill?: string;
   /**
    * The fill color of the SystemIcon on hover. This overrides `colorHover`.
+   * @deprecated
+   * `fillHover` is deprecated and will be removed in a future version. Please use the
+   * following instead in your style overrides:
+   * ```tsx
+   * '&:hover': {
+   *   [systemIconStencil.vars.fill]: desiredFillHoverColor
+   * }
+   * ```
    */
   fillHover?: string;
 }
@@ -60,7 +92,20 @@ export interface SystemIconProps
   size?: number | string;
 }
 
-/** @deprecated */
+/**
+ * @deprecated
+ * This style utility function is deprecated and will be removed in a future version. We'll track
+ * usage over time to prevent unnecessary burden on upgrading. Most of the time, this function
+ * is used in conjunction with styling `SystemIcon`. There are a few ways to override the colors
+ * used in `SystemIcon`.
+ *
+ * - Pass props directly to the `SystemIcon` component: `<SystemIcon color={color} {...etc} />
+ * - Style overrides using the `systemIconStencil`:
+ *   ```tsx
+ *   // styling container
+ *
+ *   ```
+ */
 export const systemIconStyles = ({
   accent,
   accentHover,
@@ -91,71 +136,68 @@ export const systemIconStyles = ({
   },
 });
 
+/**
+ * @deprecated These variables are being used for backward compatibility with existing hover props.
+ * Please use the following instead:
+ * ```tsx
+ * '&:hover': {
+ *   [systemIconStencil.vars.color]: desiredHoverColor
+ * }
+ * ```
+ */
+const deprecatedSystemIconVars = createVars(
+  'colorHover',
+  'fillHover',
+  'accentHover',
+  'backgroundHover'
+);
+
 export const systemIconStencil = createStencil({
+  // extends: svgStencil,
   vars: {
-    fillColor: `${base.licorice200}`,
-    accentColor: `${base.licorice200}`,
+    /**
+     * This will set the icon's color (both `.wd-icon-fill` and `.wd-icon-accent` SVG layers). Most
+     * of the time, this is the only color you need to change. Icons also have an accent layer. If you
+     * wish to change the accent layer independently, also set the `accentColor` variable
+     */
+    fillColor: '',
+    accentColor: '',
     backgroundColor: 'transparent',
   },
   base: ({accentColor, backgroundColor, fillColor}) => ({
     '& .wd-icon-fill': {
-      fill: fillColor,
+      fill: cssVar(fillColor, base.licorice200),
     },
     '& .wd-icon-accent, & .wd-icon-accent2': {
-      fill: accentColor,
+      fill: cssVar(accentColor, cssVar(fillColor, base.licorice200)),
     },
     '& .wd-icon-background': {
       fill: backgroundColor,
     },
+    // will be removed eventually
+    '&:where(:hover, .hover) .wd-icon-fill': {
+      fill: cssVar(
+        deprecatedSystemIconVars.fillHover,
+        cssVar(deprecatedSystemIconVars.colorHover, cssVar(fillColor, base.licorice200))
+      ),
+    },
+    '&:where(:hover, .hover) .wd-icon-accent, & .wd-icon-accent2': {
+      fill: cssVar(
+        deprecatedSystemIconVars.accentHover,
+        cssVar(deprecatedSystemIconVars.colorHover, cssVar(accentColor, base.licorice200))
+      ),
+    },
+    '&:where(:hover, .hover) .wd-icon-background': {
+      fill: cssVar(deprecatedSystemIconVars.backgroundHover, backgroundColor),
+    },
   }),
 });
-
-/**
- * @deprecated Function should be removed with hover color props
- * */
-const getHoverStyles = ({
-  accentHover,
-  colorHover,
-  fillHover,
-  backgroundHover,
-}: Pick<
-  SystemIconStyles,
-  'accentHover' | 'backgroundHover' | 'colorHover' | 'fillHover'
->): /* CSProps['cs'] should replace any after stencil styles fixed */ any => {
-  const hoverFillColor = fillHover || colorHover;
-  const hoverAccentColor = accentHover || colorHover;
-
-  if (hoverFillColor) {
-    return {
-      '&:hover': {
-        [systemIconStencil.vars.fillColor]: cssVar(hoverFillColor),
-      },
-    };
-  }
-
-  if (hoverAccentColor) {
-    return {
-      '&:hover': {
-        [systemIconStencil.vars.accentColor]: cssVar(hoverAccentColor),
-      },
-    };
-  }
-
-  if (backgroundHover) {
-    return {
-      '&:hover': {
-        [systemIconStencil.vars.backgroundColor]: cssVar(backgroundHover),
-      },
-    };
-  }
-
-  return '';
-};
 
 export const SystemIcon = createComponent('span')({
   displayName: 'SystemIcon',
   Component: (
     {
+      size,
       background,
       backgroundHover,
       color,
@@ -165,7 +207,6 @@ export const SystemIcon = createComponent('span')({
       accentHover,
       fill,
       fillHover,
-      size,
       ...elemProps
     }: SystemIconProps,
     ref,
@@ -179,17 +220,17 @@ export const SystemIcon = createComponent('span')({
         ref={ref}
         {...handleCsProp(elemProps, [
           systemIconStencil({
+            size: typeof size === 'number' ? px2rem(size) : size,
             fillColor: transformColorNameToToken(fill || color),
             accentColor: transformColorNameToToken(accent || color),
             backgroundColor: transformColorNameToToken(background),
           }),
-          getHoverStyles({
-            accentHover: transformColorNameToToken(accentHover),
-            backgroundHover: transformColorNameToToken(backgroundHover),
-            colorHover: transformColorNameToToken(colorHover),
-            fillHover: transformColorNameToToken(fillHover),
-          }),
-          {[svgStencil.vars.size]: typeof size === 'number' ? px2rem(size) : size},
+          {
+            [deprecatedSystemIconVars.colorHover]: colorHover && cssVar(colorHover),
+            [deprecatedSystemIconVars.fillHover]: fillHover && cssVar(fillHover),
+            [deprecatedSystemIconVars.accentHover]: accentHover && cssVar(accentHover),
+            [deprecatedSystemIconVars.backgroundHover]: backgroundHover && cssVar(backgroundHover),
+          },
         ])}
       />
     );
