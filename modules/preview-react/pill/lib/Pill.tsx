@@ -68,6 +68,7 @@ const StyledBasePill = styled(BaseButton.as('button'))<StyledType & PillProps>(
     [buttonVars.default.background]: colors.soap300,
     [buttonVars.default.border]: colors.licorice200,
     [buttonVars.default.label]: colors.blackPepper400,
+    [systemIconStencil.vars.color]: colors.licorice200,
     button: {
       [systemIconStencil.vars.color]: colors.licorice200,
     },
@@ -75,6 +76,7 @@ const StyledBasePill = styled(BaseButton.as('button'))<StyledType & PillProps>(
       [buttonVars.focus.background]: colors.soap300,
       [buttonVars.focus.border]: colors.blueberry400,
       [buttonVars.focus.label]: colors.blackPepper400,
+      [systemIconStencil.vars.color]: colors.licorice500,
       button: {
         [systemIconStencil.vars.color]: colors.licorice500,
       },
@@ -88,6 +90,7 @@ const StyledBasePill = styled(BaseButton.as('button'))<StyledType & PillProps>(
       [buttonVars.hover.background]: colors.soap400,
       [buttonVars.hover.border]: colors.licorice400,
       [buttonVars.hover.label]: colors.blackPepper400,
+      [systemIconStencil.vars.color]: colors.licorice500,
       button: {
         [systemIconStencil.vars.color]: colors.licorice500,
       },
@@ -96,6 +99,7 @@ const StyledBasePill = styled(BaseButton.as('button'))<StyledType & PillProps>(
       [buttonVars.active.background]: colors.soap500,
       [buttonVars.active.border]: colors.licorice500,
       [buttonVars.active.label]: colors.blackPepper400,
+      [systemIconStencil.vars.color]: colors.licorice500,
       button: {
         [systemIconStencil.vars.color]: colors.licorice500,
       },
@@ -105,6 +109,7 @@ const StyledBasePill = styled(BaseButton.as('button'))<StyledType & PillProps>(
       [buttonVars.disabled.border]: colors.licorice100,
       [buttonVars.disabled.label]: colors.licorice100,
       [buttonVars.disabled.opacity]: '1',
+      [systemIconStencil.vars.color]: colors.licorice100,
       button: {
         [systemIconStencil.vars.color]: colors.licorice100,
       },

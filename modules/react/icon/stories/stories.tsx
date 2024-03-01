@@ -93,6 +93,7 @@ storiesOf('Tokens/Icon', module)
       <SystemIcon icon={activityStreamIcon} size={48} />
       <SystemIconCircle icon={activityStreamIcon} />
       <SystemIconCircle icon={activityStreamIcon} shouldMirror={true} />
+      <SystemIconCircle icon={activityStreamIcon} size={120} shouldMirror={true} />
       <SystemIconCircle icon={activityStreamIcon} background={'blueberry400'} />
       <SystemIconCircle icon={activityStreamIcon} background={'blueberry400'} shouldMirror={true} />
     </div>

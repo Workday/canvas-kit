@@ -38,9 +38,8 @@ const systemIconCircleStencil = createStencil({
     containerSize: '',
     backgroundColor: '',
     iconColor: '',
-    iconSize: '',
   },
-  base: ({backgroundColor, containerSize, iconColor, iconSize}) => ({
+  base: ({backgroundColor, containerSize, iconColor}) => ({
     background: cssVar(backgroundColor, base.soap200),
     display: 'flex',
     alignItems: 'center',
@@ -52,7 +51,7 @@ const systemIconCircleStencil = createStencil({
     overflow: 'hidden',
     width: cssVar(containerSize, system.space.x10),
     height: cssVar(containerSize, system.space.x10),
-    [systemIconStencil.vars.size]: cssVar(iconSize, calc.multiply(system.space.x10, 0.625)),
+    [systemIconStencil.vars.size]: calc.multiply(cssVar(containerSize, system.space.x10), 0.625),
     [systemIconStencil.vars.color]: iconColor,
     '& img': {
       width: '100%',
@@ -76,10 +75,9 @@ export const SystemIconCircle = createComponent('span')({
     return (
       <div
         {...systemIconCircleStencil({
-          size: typeof size === 'number' ? px2rem(size) : size,
+          containerSize: typeof size === 'number' ? px2rem(size) : size,
           backgroundColor: transformColorNameToToken(background),
           iconColor,
-          iconSize: typeof size === 'number' ? px2rem(size * 0.625) : undefined,
         })}
       >
         <SystemIcon as={Element} ref={ref} icon={icon} shouldMirror={shouldMirror} />
