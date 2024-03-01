@@ -153,7 +153,7 @@ const deprecatedSystemIconVars = createVars(
 );
 
 export const systemIconStencil = createStencil({
-  // extends: svgStencil,
+  extends: svgStencil,
   vars: {
     /**
      * This will set the icon's color (both `.wd-icon-fill` and `.wd-icon-accent` SVG layers). Most
