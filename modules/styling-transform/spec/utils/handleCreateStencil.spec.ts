@@ -83,6 +83,23 @@ describe('handleCreateStencil', () => {
     expect(result).toContain('styles: "--css-button-color:red;padding:12px;"');
   });
 
+  it('should not parse variables in the base styles if the value is an empty string', () => {
+    const program = createProgramFromSource(`
+    import {createStencil} from '@workday/canvas-kit-styling';
+
+    const buttonStencil = createStencil({
+      vars: {
+        color: ''
+      },
+      base: {padding: 12}
+    })
+  `);
+
+    const result = transform(program, 'test.ts', withDefaultContext(program.getTypeChecker())); //?
+
+    expect(result).toContain('styles: "padding:12px;"');
+  });
+
   it('should handle parsing variables in base styles via an ArrowFunction and ParenthesizedExpression', () => {
     const program = createProgramFromSource(`
       import {createStencil} from '@workday/canvas-kit-styling';
