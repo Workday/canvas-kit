@@ -64,6 +64,7 @@ export const buttonVars = {
     'border',
     'boxShadowInner',
     'boxShadowOuter',
+    'icon',
     'label',
     'opacity',
     'borderRadius'
@@ -73,6 +74,7 @@ export const buttonVars = {
     'border',
     'boxShadowInner',
     'boxShadowOuter',
+    'icon',
     'label',
     'opacity',
     'borderRadius'
@@ -82,6 +84,7 @@ export const buttonVars = {
     'border',
     'boxShadowInner',
     'boxShadowOuter',
+    'icon',
     'label',
     'opacity',
     'borderRadius'
@@ -91,6 +94,7 @@ export const buttonVars = {
     'border',
     'boxShadowInner',
     'boxShadowOuter',
+    'icon',
     'label',
     'opacity',
     'borderRadius'
@@ -100,6 +104,7 @@ export const buttonVars = {
     'border',
     'boxShadowInner',
     'boxShadowOuter',
+    'icon',
     'label',
     'opacity',
     'borderRadius'
@@ -135,6 +140,7 @@ const baseButtonStyles = createStyles({
   position: 'relative',
   verticalAlign: 'middle',
   overflow: 'hidden',
+  [systemIconStencil.vars.color]: cssVar(buttonVars.default.icon, base.blackPepper400),
   transition:
     'box-shadow 120ms linear, border 120ms linear, background-color 120ms linear, color 120ms linear',
   '&:disabled, &:disabled:active, &.disabled': {
@@ -142,7 +148,6 @@ const baseButtonStyles = createStyles({
     boxShadow: 'none',
     opacity: cssVar(buttonVars.disabled.opacity, '1'),
   },
-  [systemIconStencil.vars.color]: base.blackPepper400,
   '&:focus-visible, &.focus': {
     backgroundColor: cssVar(buttonVars.focus.background, 'transparent'),
     borderColor: cssVar(buttonVars.focus.border, 'transparent'),

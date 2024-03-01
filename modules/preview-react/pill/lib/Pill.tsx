@@ -51,14 +51,6 @@ const pillBaseStyles: CSSObject = {
 const StyledBasePill = styled(BaseButton.as('button'))<StyledType & PillProps>(
   {
     ...pillBaseStyles,
-
-    '&:focus-visible': {
-      'span[data-count="ck-pill-count"]': {
-        borderTop: `1px solid ${colors.blueberry400}`,
-        borderBottom: `1px solid ${colors.blueberry400}`,
-        borderRight: `1px solid ${colors.blueberry400}`,
-      },
-    },
     '&:active, &:active:hover, &:active:focus': {
       'span[data-count="ck-pill-count"]': {
         backgroundColor: colors.soap600,
@@ -76,31 +68,46 @@ const StyledBasePill = styled(BaseButton.as('button'))<StyledType & PillProps>(
     [buttonVars.default.background]: colors.soap300,
     [buttonVars.default.border]: colors.licorice200,
     [buttonVars.default.label]: colors.blackPepper400,
-    [systemIconStencil.vars.color]: colors.licorice200,
+    button: {
+      [systemIconStencil.vars.color]: colors.licorice200,
+    },
     '&:focus-visible, &.focus': {
       [buttonVars.focus.background]: colors.soap300,
       [buttonVars.focus.border]: colors.blueberry400,
       [buttonVars.focus.label]: colors.blackPepper400,
-      [systemIconStencil.vars.color]: colors.licorice500,
+      button: {
+        [systemIconStencil.vars.color]: colors.licorice500,
+      },
+      'span[data-count="ck-pill-count"]': {
+        borderTop: `1px solid ${colors.blueberry400}`,
+        borderBottom: `1px solid ${colors.blueberry400}`,
+        borderRight: `1px solid ${colors.blueberry400}`,
+      },
     },
     '&:hover, &.hover': {
       [buttonVars.hover.background]: colors.soap400,
       [buttonVars.hover.border]: colors.licorice400,
       [buttonVars.hover.label]: colors.blackPepper400,
-      [systemIconStencil.vars.color]: colors.licorice500,
+      button: {
+        [systemIconStencil.vars.color]: colors.licorice500,
+      },
     },
     '&:active, &.active': {
       [buttonVars.active.background]: colors.soap500,
       [buttonVars.active.border]: colors.licorice500,
       [buttonVars.active.label]: colors.blackPepper400,
-      [systemIconStencil.vars.color]: colors.licorice500,
+      button: {
+        [systemIconStencil.vars.color]: colors.licorice500,
+      },
     },
     '&:disabled, &.disabled': {
       [buttonVars.disabled.background]: colors.soap100,
       [buttonVars.disabled.border]: colors.licorice100,
       [buttonVars.disabled.label]: colors.licorice100,
       [buttonVars.disabled.opacity]: '1',
-      [systemIconStencil.vars.color]: colors.licorice100,
+      button: {
+        [systemIconStencil.vars.color]: colors.licorice100,
+      },
     },
   },
 
