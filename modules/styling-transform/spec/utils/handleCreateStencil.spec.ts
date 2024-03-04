@@ -95,7 +95,7 @@ describe('handleCreateStencil', () => {
     })
   `);
 
-    const result = transform(program, 'test.ts', withDefaultContext(program.getTypeChecker())); //?
+    const result = transform(program, 'test.ts', withDefaultContext(program.getTypeChecker()));
 
     expect(result).toContain('styles: "padding:12px;"');
   });
