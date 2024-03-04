@@ -147,7 +147,7 @@ const baseButtonStyles = createStyles({
     boxShadow: 'none',
     opacity: cssVar(buttonVars.disabled.opacity, '1'),
   },
-  '& span .wd-icon-fill': {
+  '& span .wd-icon-fill, & span .wd-icon-accent, & span .wd-icon-accent2': {
     transitionDuration: '40ms',
     fill: cssVar(buttonVars.default.icon, base.blackPepper400),
   },
@@ -158,10 +158,7 @@ const baseButtonStyles = createStyles({
     backgroundColor: cssVar(buttonVars.focus.background, 'transparent'),
     borderColor: cssVar(buttonVars.focus.border, 'transparent'),
     color: cssVar(buttonVars.focus.label, base.blackPepper400),
-    '& span .wd-icon-fill': {
-      fill: cssVar(buttonVars.focus.icon, base.blackPepper400),
-    },
-    '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
+    '& span .wd-icon-fill, & span .wd-icon-accent, & span .wd-icon-accent2': {
       fill: cssVar(buttonVars.focus.icon, base.blackPepper400),
     },
     ...focusRing({
@@ -175,10 +172,7 @@ const baseButtonStyles = createStyles({
     backgroundColor: cssVar(buttonVars.hover.background, base.blackPepper500),
     borderColor: cssVar(buttonVars.hover.border, 'transparent'),
     color: cssVar(buttonVars.hover.label, base.blackPepper500),
-    '& span .wd-icon-fill': {
-      fill: cssVar(buttonVars.hover.icon, base.blackPepper500),
-    },
-    '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
+    '& span .wd-icon-fill, & span .wd-icon-accent, & span .wd-icon-accent2': {
       fill: cssVar(buttonVars.hover.icon, base.blackPepper500),
     },
   },
@@ -187,10 +181,7 @@ const baseButtonStyles = createStyles({
     backgroundColor: cssVar(buttonVars.active.background, 'transparent'),
     borderColor: cssVar(buttonVars.active.border, 'transparent'),
     color: cssVar(buttonVars.active.label, base.blackPepper400),
-    '& span .wd-icon-fill': {
-      fill: cssVar(buttonVars.active.icon, base.blackPepper400),
-    },
-    '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
+    '& span .wd-icon-fill, & span .wd-icon-accent, & span .wd-icon-accent2': {
       fill: cssVar(buttonVars.active.icon, base.blackPepper400),
     },
   },
@@ -198,10 +189,7 @@ const baseButtonStyles = createStyles({
     backgroundColor: cssVar(buttonVars.disabled.background, 'transparent'),
     borderColor: cssVar(buttonVars.disabled.border, 'transparent'),
     color: cssVar(buttonVars.disabled.label, base.blackPepper400),
-    '& span .wd-icon-fill': {
-      fill: cssVar(buttonVars.disabled.icon, base.blackPepper400),
-    },
-    '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
+    '& span .wd-icon-fill, & span .wd-icon-accent, & span .wd-icon-accent2': {
       fill: cssVar(buttonVars.disabled.icon, base.blackPepper400),
     },
   },
