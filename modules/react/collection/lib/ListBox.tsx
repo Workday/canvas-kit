@@ -6,12 +6,12 @@ import {
   ExtractProps,
 } from '@workday/canvas-kit-react/common';
 import {Box, Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 import {useListModel} from './useListModel';
 import {useListRenderItems} from './useListRenderItem';
 import {useListItemRegister} from './useListItemRegister';
-import {createStencil} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
 
 export interface ListBoxProps<T = any> extends Omit<ExtractProps<typeof Flex, never>, 'children'> {
   children?: React.ReactNode | ((item: T, index: number) => React.ReactNode);
@@ -97,10 +97,8 @@ export const ListBox = createContainer('ul')({
     Element,
     model
   ) => {
-    // We're moving `marginY` to the container to not interfere with the virtualization size. We set
+    // We're removing `marginY, marginBottom, overflowY, marginTo` from elemProps and applying them to the container as to not interfere with the virtualization size. We set
     // the `marginY` on the Flex to `0` to avoid inaccurate scrollbars
-
-    // TODO figure out what style props should go to which `Box`
     return (
       <div
         ref={model.state.containerRef}
