@@ -493,10 +493,10 @@ export type CSToPropsInput =
   | undefined
   | CS
   | CsToPropsReturn
-  | Properties<string | number>
+  | CSSObjectWithVars
   | CSToPropsInput[];
 
-export type CsToPropsReturn = {className?: string; style?: Properties<string | number>};
+export type CsToPropsReturn = {className?: string; style?: CSSObjectWithVars};
 /**
  * A function that takes in a single input, or an array. The type of the input is either:
  *
@@ -1025,7 +1025,7 @@ export interface Stencil<
 type VariableValuesStencil<
   V extends Record<string, string> | Record<string, Record<string, string>>
 > = V extends Record<string, string>
-  ? {[K in keyof V]?: V[K]}
+  ? {[K in keyof V]?: string}
   : {[K1 in keyof V]?: {[K2 in keyof V[K1]]: string}};
 
 function onlyDefined<T>(input: T | undefined): input is T {
