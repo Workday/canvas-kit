@@ -1,9 +1,9 @@
 import React from 'react';
 
 import {createElemPropsHook, createSubcomponent} from '@workday/canvas-kit-react/common';
-import {useMenuModel} from '@workday/canvas-kit-react/menu';
+import {useMenuModel, menuListStencil} from '@workday/canvas-kit-react/menu';
 import {ListBox, ListBoxProps} from '@workday/canvas-kit-react/collection';
-import {system, base} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 import {useComboboxModel} from './hooks/useComboboxModel';
 import {createStencil, cssVar} from '@workday/canvas-kit-styling';
@@ -25,22 +25,8 @@ export const useComboboxMenuList = createElemPropsHook(useMenuModel)(model => {
 });
 
 const comoboxMenuListStencil = createStencil({
-  base: {
-    borderRadius: system.shape.zero,
-    gap: system.space.zero,
-    background: base.frenchVanilla100,
-    padding: system.space.zero,
-  },
-  modifiers: {
-    orientation: {
-      vertical: {
-        flexDirection: 'column',
-      },
-      horizontal: {
-        flexDirection: 'row',
-      },
-    },
-  },
+  base: {},
+  extends: menuListStencil,
 });
 
 export const ComboboxMenuList = createSubcomponent('ul')({

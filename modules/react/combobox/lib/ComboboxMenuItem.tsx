@@ -19,9 +19,7 @@ import {createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
-export interface ComboboxMenuItemProps {
-  children: React.ReactNode;
-}
+export interface ComboboxMenuItemProps extends ExtractProps<typeof StyledMenuItem, never> {}
 
 /**
  * This hook sets up accessibility and behavior of a {@link ComboboxMenuItem Combobox.Menu.Item}
@@ -87,7 +85,7 @@ export const ComboboxMenuItem = createSubcomponent('li')({
 })<ComboboxMenuItemProps>(({children, ...elemProps}, Element) => {
   return (
     <OverflowTooltip placement="left">
-      <StyledMenuItem as={Element} {...mergeStyles(elemProps as any, comboboxMenuItemStencil())}>
+      <StyledMenuItem as={Element} {...mergeStyles(elemProps, comboboxMenuItemStencil())}>
         {children}
       </StyledMenuItem>
     </OverflowTooltip>

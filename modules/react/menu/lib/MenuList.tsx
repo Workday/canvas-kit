@@ -33,7 +33,7 @@ export const useMenuList = composeHooks(
   useFocusRedirect
 );
 
-const menuListStencil = createStencil({
+export const menuListStencil = createStencil({
   base: {
     background: base.frenchVanilla100,
     borderRadius: system.shape.zero,

@@ -52,7 +52,7 @@ export const MenuCard = createSubcomponent('div')({
   displayName: 'Menu.Card',
   modelHook: useMenuModel,
   elemPropsHook: useMenuCard,
-})<MenuCardProps>(({minWidth = px2rem(1), ...elemProps}, Element, model) => {
+})<MenuCardProps>(({minWidth, ...elemProps}, Element, model) => {
   const transformOrigin = React.useMemo(() => {
     return getTransformFromPlacement(model.state.placement || 'bottom');
   }, [model.state.placement]);
@@ -63,7 +63,7 @@ export const MenuCard = createSubcomponent('div')({
       {...mergeStyles(
         elemProps,
         menuCardStencil({
-          minWidth: typeof minWidth === 'number' ? px2rem(minWidth) : minWidth,
+          minWidth: typeof minWidth === 'number' ? px2rem(minWidth as number) : minWidth,
           transformOriginVertical: transformOrigin.vertical,
           transformOriginHorizontal: transformOrigin.horizontal,
         })
