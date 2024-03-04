@@ -17,7 +17,7 @@ import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 import {useComboboxModel} from './hooks/useComboboxModel';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {mergeStyles} from '../../layout';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 export interface ComboboxMenuItemProps {
   children: React.ReactNode;
@@ -68,8 +68,8 @@ const comboboxMenuItemIconStencil = createStencil({
 
 export const ComboboxMenuItemIcon = createSubcomponent('span')({
   modelHook: useComboboxModel,
-})<ExtractProps<typeof SystemIcon>>(({...elemProps}, Element) => {
-  return <SystemIcon {...mergeStyles(elemProps, comboboxMenuItemIconStencil())} />;
+})<ExtractProps<typeof SystemIcon>>((elemProps, Element) => {
+  return <SystemIcon as={Element} {...mergeStyles(elemProps, comboboxMenuItemIconStencil())} />;
 });
 
 const comboboxMenuItemStencil = createStencil({

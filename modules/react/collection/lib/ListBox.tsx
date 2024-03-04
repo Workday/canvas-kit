@@ -102,7 +102,7 @@ export const ListBox = createContainer('ul')({
 
     // TODO figure out what style props should go to which `Box`
     return (
-      <Box
+      <div
         ref={model.state.containerRef}
         {...mergeStyles(
           {maxHeight, marginBottom: marginY, marginTop: marginY},
@@ -112,7 +112,7 @@ export const ListBox = createContainer('ul')({
         <Flex as={Element} {...mergeStyles(elemProps, listBoxStencil())}>
           {useListRenderItems(model, elemProps.children)}
         </Flex>
-      </Box>
+      </div>
     );
   }
 );

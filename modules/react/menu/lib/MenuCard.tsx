@@ -31,7 +31,7 @@ export const menuCardStencil = createStencil({
     display: 'flex',
     flexDirection: 'column',
     transition: `transform ease-out 150ms`,
-    padding: '0px',
+    padding: system.space.zero,
     maxWidth: calc.subtract('100vw', system.space.x8),
     boxShadow: system.depth[3],
     minWidth: minWidth,
@@ -63,7 +63,7 @@ export const MenuCard = createSubcomponent('div')({
       {...mergeStyles(
         elemProps,
         menuCardStencil({
-          minWidth: typeof minWidth === 'string' ? minWidth : px2rem(minWidth),
+          minWidth: typeof minWidth === 'number' ? px2rem(minWidth) : minWidth,
           transformOriginVertical: transformOrigin.vertical,
           transformOriginHorizontal: transformOrigin.horizontal,
         })
