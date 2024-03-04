@@ -1,11 +1,6 @@
 import React, {useState} from 'react';
 import {AccessibleHide, AriaLiveRegion, useUniqueId} from '@workday/canvas-kit-react/common';
-import {
-  notificationsIcon,
-  inboxIcon,
-  assistantIcon,
-  userIcon,
-} from '@workday/canvas-system-icons-web';
+import {notificationsIcon, inboxIcon, assistantIcon} from '@workday/canvas-system-icons-web';
 import {space} from '@workday/canvas-kit-react/tokens';
 import {SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
 import {Flex} from '@workday/canvas-kit-react/layout';
@@ -92,9 +87,6 @@ export const IconButtonsWithLiveBadges = () => {
         <AssistantLiveBadge cnt={assistant} />
         <NotificationsLiveBadge cnt={notifications} />
         <MyTasksLiveBadge cnt={counter} />
-        <Tooltip title="Profile">
-          <TertiaryButton icon={userIcon} />
-        </Tooltip>
       </Flex>
       <Flex padding={space.s} gap={space.s} as="main">
         <SecondaryButton onClick={handleAssistant}>Add a Message</SecondaryButton>
