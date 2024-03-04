@@ -12,7 +12,7 @@ import {system, base} from '@workday/canvas-tokens-web';
 
 import {useMenuModel} from './useMenuModel';
 import {createStencil, calc, px2rem} from '@workday/canvas-kit-styling';
-import {mergeStyles} from '../../layout';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 export interface MenuCardProps extends ExtractProps<typeof Card, never> {
   children?: React.ReactNode;

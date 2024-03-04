@@ -12,7 +12,7 @@ import {useReturnFocus, useFocusRedirect} from '@workday/canvas-kit-react/popup'
 import {useMenuModel} from './useMenuModel';
 import {createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
-import {mergeStyles} from '../../layout';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 export interface MenuListProps<T = any>
   extends Omit<ExtractProps<typeof ListBox, never>, 'children'> {
