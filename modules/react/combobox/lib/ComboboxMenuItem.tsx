@@ -69,9 +69,6 @@ const comboboxMenuItemIconStencil = createStencil({
 
 export const ComboboxMenuItemIcon = createSubcomponent('span')({
   modelHook: useComboboxModel,
-  subComponents: {
-    Icon: styled(SystemIcon)({alignSelf: 'start'}),
-  },
 })<ExtractProps<typeof SystemIcon>>(({...elemProps}, Element) => {
   return <SystemIcon {...mergeStyles(elemProps, comboboxMenuItemIconStencil())} />;
 });
