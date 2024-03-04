@@ -35,13 +35,17 @@ export const useListBox = createElemPropsHook(useListModel)(model => {
 });
 
 const listBoxContainerStencil = createStencil({
-  base: {},
+  base: {
+    boxSizing: 'border-box',
+  },
   modifiers: {
     orientation: {
       vertical: {
         overflowY: 'auto',
       },
-      horizontal: {},
+      horizontal: {
+        overflowY: undefined,
+      },
     },
   },
 });
@@ -49,6 +53,8 @@ const listBoxContainerStencil = createStencil({
 const listBoxStencil = createStencil({
   base: {
     flexDirection: 'column',
+    marginTop: system.space.zero,
+    marginBottom: system.space.zero,
   },
 });
 
@@ -86,7 +92,11 @@ export const ListBox = createContainer('ul')({
     Item: ListBoxItem,
   },
 })<ListBoxProps>(
-  ({height, maxHeight, marginY, marginBottom, overflowY, ...elemProps}, Element, model) => {
+  (
+    {height, maxHeight, marginY, marginBottom, overflowY, marginTop, ...elemProps},
+    Element,
+    model
+  ) => {
     // We're moving `marginY` to the container to not interfere with the virtualization size. We set
     // the `marginY` on the Flex to `0` to avoid inaccurate scrollbars
 
@@ -95,15 +105,11 @@ export const ListBox = createContainer('ul')({
       <Box
         ref={model.state.containerRef}
         {...mergeStyles(
-          {maxHeight, marginY},
+          {maxHeight, marginBottom: marginY, marginTop: marginY},
           listBoxContainerStencil({orientation: model.state.orientation})
         )}
       >
-        <Flex
-          as={Element}
-          {...mergeStyles(elemProps, listBoxStencil())}
-          style={{marginTop: cssVar(system.space.zero), marginBottom: cssVar(system.space.zero)}}
-        >
+        <Flex as={Element} {...mergeStyles(elemProps, listBoxStencil())}>
           {useListRenderItems(model, elemProps.children)}
         </Flex>
       </Box>
