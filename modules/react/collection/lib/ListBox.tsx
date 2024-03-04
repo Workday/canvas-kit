@@ -5,12 +5,13 @@ import {
   createSubcomponent,
   ExtractProps,
 } from '@workday/canvas-kit-react/common';
-import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {Box, Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 
 import {useListModel} from './useListModel';
 import {useListRenderItems} from './useListRenderItem';
 import {useListItemRegister} from './useListItemRegister';
-import {handleCsProp} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export interface ListBoxProps<T = any> extends Omit<ExtractProps<typeof Flex, never>, 'children'> {
   children?: React.ReactNode | ((item: T, index: number) => React.ReactNode);
@@ -31,6 +32,24 @@ export const useListBox = createElemPropsHook(useListModel)(model => {
       height: model.state.isVirtualized ? model.state.UNSTABLE_virtual.totalSize : undefined,
     },
   };
+});
+
+const listBoxContainerStencil = createStencil({
+  base: {},
+  modifiers: {
+    orientation: {
+      vertical: {
+        overflowY: 'auto',
+      },
+      horizontal: {},
+    },
+  },
+});
+
+const listBoxStencil = createStencil({
+  base: {
+    flexDirection: 'column',
+  },
 });
 
 /**
@@ -75,17 +94,16 @@ export const ListBox = createContainer('ul')({
     return (
       <Box
         ref={model.state.containerRef}
-        {...handleCsProp(
-          {},
-          {
-            maxHeight: maxHeight,
-            marginBottom: marginY,
-            marginTop: marginY,
-            overflowY: model.state.orientation === 'vertical' ? 'auto' : undefined,
-          }
+        {...mergeStyles(
+          {maxHeight, marginY},
+          listBoxContainerStencil({orientation: model.state.orientation})
         )}
       >
-        <Flex as={Element} flexDirection="column" {...elemProps} marginY="zero">
+        <Flex
+          as={Element}
+          {...mergeStyles(elemProps, listBoxStencil())}
+          style={{marginTop: cssVar(system.space.zero), marginBottom: cssVar(system.space.zero)}}
+        >
           {useListRenderItems(model, elemProps.children)}
         </Flex>
       </Box>
