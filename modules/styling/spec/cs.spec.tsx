@@ -35,7 +35,7 @@ describe('createStyles', () => {
     it('should accept an object of CSS Properties', () => {
       type Input = Exclude<
         Parameters<typeof createStyles>[0],
-        string | number | boolean | SerializedStyles
+        string | number | boolean | SerializedStyles | undefined
       >;
       type PositionProperty = Input['position'];
       const temp: PositionProperty = 'absolute';
@@ -538,9 +538,12 @@ describe('createStyles', () => {
 
       // type signature of stencil call expression
       type Arg = Parameters<typeof myStencil>[0];
-      expectTypeOf<Arg>().toMatchTypeOf<{
-        size?: 'large';
-      }>();
+      expectTypeOf<Arg>().toMatchTypeOf<
+        | undefined
+        | {
+            size?: 'large';
+          }
+      >();
     });
 
     it('should set the `modifiers` property with the className of the modifier', () => {
@@ -663,9 +666,9 @@ describe('createStyles', () => {
         base: {},
       });
 
-      type Options = Parameters<typeof myStencil>[0];
+      type Options = Exclude<Parameters<typeof myStencil>[0], undefined>;
 
-      expectTypeOf<Options['foo']>().toEqualTypeOf<string>();
+      expectTypeOf<Options['foo']>().toEqualTypeOf<string | undefined>();
 
       // make sure we can call the function with a string
       myStencil({
@@ -783,7 +786,7 @@ describe('createStyles', () => {
         compound: [{modifiers: {size: 'large', grow: true}, styles: {}}],
       });
 
-      type Args = Parameters<typeof myStencil>[0];
+      type Args = Exclude<Parameters<typeof myStencil>[0], undefined>;
 
       expectTypeOf<Args>().toHaveProperty('grow');
       expectTypeOf<Args['grow']>().toEqualTypeOf<boolean | undefined>();
@@ -855,7 +858,7 @@ describe('createStyles', () => {
         expectTypeOf(extendedStencil.modifiers.extra.true).toEqualTypeOf<string>();
 
         // calling the stencil
-        type Args = Parameters<typeof extendedStencil>[0];
+        type Args = Exclude<Parameters<typeof extendedStencil>[0], undefined>;
         expectTypeOf<Args>().toEqualTypeOf<{
           size?: 'large';
           extra?: boolean;
@@ -906,7 +909,7 @@ describe('createStyles', () => {
         expect(className.split(' ')).toHaveProperty('length', 5);
 
         // calling the stencil
-        type Args = Parameters<typeof extendedStencil>[0];
+        type Args = Exclude<Parameters<typeof extendedStencil>[0], undefined>;
         expectTypeOf<Args>().toEqualTypeOf<{
           size?: 'large';
           extra?: boolean;
