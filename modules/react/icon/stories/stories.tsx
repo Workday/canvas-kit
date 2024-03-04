@@ -57,7 +57,7 @@ storiesOf('Tokens/Icon', module)
   .addParameters({component: SystemIcon})
   .add('System Icon', () => (
     <div className="story">
-      <SystemIcon icon={activityStreamIcon} background={base.cinnamon500} />
+      <SystemIcon icon={activityStreamIcon} />
       <SystemIcon icon={activityStreamIcon} color={base.berrySmoothie400} />
       <SystemIcon
         icon={activityStreamIcon}
@@ -94,8 +94,12 @@ storiesOf('Tokens/Icon', module)
       <SystemIconCircle icon={activityStreamIcon} />
       <SystemIconCircle icon={activityStreamIcon} shouldMirror={true} />
       <SystemIconCircle icon={activityStreamIcon} size={120} shouldMirror={true} />
-      <SystemIconCircle icon={activityStreamIcon} background={'blueberry400'} />
-      <SystemIconCircle icon={activityStreamIcon} background={'blueberry400'} shouldMirror={true} />
+      <SystemIconCircle icon={activityStreamIcon} background={base.blueberry400} />
+      <SystemIconCircle
+        icon={activityStreamIcon}
+        background={base.blueberry400}
+        shouldMirror={true}
+      />
     </div>
   ));
 
