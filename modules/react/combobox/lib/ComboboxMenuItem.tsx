@@ -5,7 +5,6 @@ import {
   createElemPropsHook,
   createSubcomponent,
   ExtractProps,
-  styled,
 } from '@workday/canvas-kit-react/common';
 import {StyledMenuItem, useMenuModel} from '@workday/canvas-kit-react/menu';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
