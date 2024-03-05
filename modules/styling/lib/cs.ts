@@ -948,10 +948,27 @@ export function getInstance(): typeof _instance {
 
 /**
  * Creates a custom instance of Emotion CSS. If this function is never called, the instance will be
- * what gets imported from `@emotion/css`
+ * what gets imported from `@emotion/css`. This function must be called before any Canvas Kit
+ * component is imported or before any other `@workday/canvas-kit-styling` function is called. All
+ * the style utility functions need an instance and will automatically create one if one isn't
+ * already created.
+ *
+ * The style utilities inject styles as soon as they are called which means an instance needs to be
+ * created before any Canvas Kit components are even imported. Your application bootstrap must
+ * import a file that imports `@workday/canvas-kit-styling` and calls `createInstance` _before_ any
+ * other Canvas Kit components are imported.
  */
 export const createInstance: typeof _createInstance = options => {
-  _instance = _createInstance({key: 'css', ...options});
+  if (!_instance) {
+    _instance = _createInstance({key: 'css', ...options});
+  } else {
+    // @ts-ignore
+    if (process && process.env.NODE_ENV === 'development') {
+      console.warn(
+        'An instance has already been created. `createInstance` cannot be called after styles have already been created. Canvas Kit styles are created immediately, so this function must be called before any Canvas Kit components are even imported.'
+      );
+    }
+  }
 
   return _instance;
 };
