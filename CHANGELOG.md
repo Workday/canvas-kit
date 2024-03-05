@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.20](https://github.com/Workday/canvas-kit/releases/tag/v10.3.20) (2024-03-04)
+
+### Components
+
+- fix: Move selected item when scrolling via keyboard in Select ([#2609](https://github.com/Workday/canvas-kit/pull/2609)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v10.3.19](https://github.com/Workday/canvas-kit/releases/tag/v10.3.19) (2024-03-01)
 
 ### Components
