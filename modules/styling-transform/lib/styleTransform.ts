@@ -11,6 +11,7 @@ import {handlePx2Rem} from './utils/handlePx2Rem';
 import {handleCssVar} from './utils/handleCssVar';
 import {Config, NodeTransformer, ObjectTransform, TransformerContext} from './utils/types';
 import {handleKeyframes} from './utils/handleKeyframes';
+import {handleInjectGlobal} from './utils/handleInjectGlobal';
 
 export type NestedStyleObject = {[key: string]: string | NestedStyleObject};
 
@@ -44,6 +45,7 @@ const defaultTransformers = [
   handleCreateVars,
   handleCreateStyles,
   handleCreateStencil,
+  handleInjectGlobal,
 ];
 
 export default function styleTransformer(
