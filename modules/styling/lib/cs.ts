@@ -963,10 +963,6 @@ export function getCache() {
   return getInstance().cache;
 }
 
-// The following code is lifted from
-// https://github.com/emotion-js/emotion/blob/01cca604ca93c5fd3958c41045ecbcac72b65480/packages/css/src/create-instance.js
-// to support custom caches
-
 /**
  * Create static keyframes. Use as a drop-in replacement to `keyframes` found in `@emotion/css` or
  * `@emotion/react`
@@ -977,5 +973,8 @@ export function keyframes<ID extends string>(
   return getInstance().keyframes(...(args as any)) as ID;
 }
 
+/**
+ * Allows injecting of global styles.
+ */
 export const injectGlobal: typeof EmotionCSS.injectGlobal = (...args: any[]) =>
   getInstance().injectGlobal(...args);
