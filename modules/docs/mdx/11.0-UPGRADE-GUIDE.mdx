@@ -25,6 +25,7 @@ any questions.
   - [Checkbox](#checkbox)
   - [Count Badge](#count-badge)
   - [Form Field Preview](#form-field-preview)
+  - [Icons](#icons)
   - [Radio (Preview)](#radio-preview)
   - [Switch](#switch)
   - [Table (Preview)](#table-preview)
@@ -33,7 +34,6 @@ any questions.
   - [Main](#main)
   - [Preview](#preview)
   - [Labs](#labs)
-
 
 ## Codemod
 
@@ -102,33 +102,36 @@ finished.
 
 **PR:** [#2600](https://github.com/Workday/canvas-kit/pull/2600)
 
-We've promoted the `Table` compound component in [Preview](#preview) to [Main](#main). This replaces the existing `Table` component with a compound component
-and will consist of a new compound component API.
+We've promoted the `Table` compound component in [Preview](#preview) to [Main](#main). This replaces
+the existing `Table` component with a compound component and will consist of a new compound
+component API.
 
 > `rowState` prop is no longer a part of the `Table` component.
 
-In v10, the `Table` component in [Main](#main) only exposed a `Table`  and `TableRow` component to build tables.
+In v10, the `Table` component in [Main](#main) only exposed a `Table` and `TableRow` component to
+build tables.
 
 In v11, `Table` now exposes every subcomponent of a semantic HTML
-[Table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table). While more verbose, it provides more flexibility for customization.
+[Table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table). While more verbose, it
+provides more flexibility for customization.
 
-See below for examples of the differences between the v10 `Table` and the v11 `Table` compound component.
-
+See below for examples of the differences between the v10 `Table` and the v11 `Table` compound
+component.
 
 v10:
 
 ```tsx
 <Table>
-	<thead>
-		<TableRow header={true}>
-			<th>Header Text</th>
-		</TableRow>
-	</thead>
-	<tbody>
-		<TableRow>
-			<td>Cell Text</td>
-		</TableRow>
-	</tbody>
+  <thead>
+    <TableRow header={true}>
+      <th>Header Text</th>
+    </TableRow>
+  </thead>
+  <tbody>
+    <TableRow>
+      <td>Cell Text</td>
+    </TableRow>
+  </tbody>
 </Table>
 ```
 
@@ -136,24 +139,26 @@ v11:
 
 ```tsx
 <Table>
-	<Table.Head>
-		<Table.Row>
-			<Table.Header>Header Text</Table.Header>
-		</Table.Row>
-	</Table.Head>
-	<Table.Body>
-		<Table.Row>
-			<Table.Cell>Cell Text</Table.Cell>
-		</Table.Row>
-	</Table.Body>
+  <Table.Head>
+    <Table.Row>
+      <Table.Header>Header Text</Table.Header>
+    </Table.Row>
+  </Table.Head>
+  <Table.Body>
+    <Table.Row>
+      <Table.Cell>Cell Text</Table.Cell>
+    </Table.Row>
+  </Table.Body>
 </Table>
 ```
 
+Please refer to the
+[Table examples](https://workday.github.io/canvas-kit/?path=/story/components-containers-table--basic)
+for how to implement new tables.
 
-Please refer to the [Table examples](https://workday.github.io/canvas-kit/?path=/story/components-containers-table--basic) for how
-to implement new tables.
-
-> **NOTE:** If you were using the [Preview](#preview) `Table` compound component, then you will need to update your import from `"@workday/canvas-kit-preview-react/table"` to `"@workday/canvas-kit-react/table"`.
+> **NOTE:** If you were using the [Preview](#preview) `Table` compound component, then you will need
+> to update your import from `"@workday/canvas-kit-preview-react/table"` to
+> `"@workday/canvas-kit-react/table"`.
 
 ## Deprecations
 
@@ -420,9 +425,12 @@ no longer extends the `Box` component, however, it still supports Emotion `style
 
 **PR:** [#2542](https://github.com/Workday/canvas-kit/pull/2542)
 
-`Checkbox` now uses [Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and our [new styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api). The component now supports the `cs`
-prop, but otherwise the API has not changed. It should behave identically as it did in previous
-versions.
+`Checkbox` now uses
+[Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
+our
+[new styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
+The component now supports the `cs` prop, but otherwise the API has not changed. It should behave
+identically as it did in previous versions.
 
 ### Count Badge
 
@@ -481,6 +489,86 @@ import {TextInput} from '@workday/canvas-kit-react/text-input';
 ```
 
 🤖 The codemod will handle the change of `hasError` to `error` for you automatically.
+
+### Icons
+
+All icon components, `Svg`, `SystemIcon`, `SystemIconCircle`, `AccentIcon`, `AppletIcon`, `Graphic`,
+now use
+[Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
+our
+[new styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
+The component now supports the `cs` prop, but otherwise the API has not changed. It should behave
+identically as it did in previous versions.
+
+The `styles` prop has been removed from icon components.
+
+🤖 The codemod will handle the change of `styles` to `cs` for you automatically.
+
+#### AccentIcon
+
+`AccentIconStyles` prop has been deprecated and will be merged with `AccentIconProps` in a future
+version. `accentIconStyles` has been deprecated and will be removed in a future version as a part of
+implementation of stencils and new tokens. Consider to use `accentIconStencil` to get styles or
+class name.
+
+#### AppletIcon
+
+`AppletIconStyles` prop has been deprecated and will be merged with `AppletIconProps` in a future
+version. `appletIconStyles` has been deprecated and will be removed in a future version as a part of
+implementation of stencils and new tokens. Consider to use `appletIconStencil` to get styles or
+class name.
+
+#### Graphic
+
+`GraphicStyles` prop has been deprecated and will be merged with `GraphicProps` in a future version.
+`graphicStyles` has been deprecated and will be removed in a future version as a part of
+implementation of stencils and new tokens. Consider to use `graphicStencil` to get styles or class
+name.
+
+#### SystemIcon
+
+`SystemIconStyles` prop has been deprecated and will be merged with `SystemIconProps` in a future
+version.
+
+`accentHover` is deprecated and will be removed in a future version. Please use the following
+instead in your style overrides:
+
+```tsx
+'&:hover': {
+  [systemIconStencil.vars.accent]: desiredAccentHoverColor
+}
+```
+
+`backgroundHover` is deprecated and will be removed in a future version. Please use the following
+instead in your style overrides:
+
+```tsx
+'&:hover': {
+  [systemIconStencil.vars.background]: desiredBackgroundHoverColor
+}
+```
+
+`fillHover` is deprecated and will be removed in a future version. Please use the following instead
+in your style overrides:
+
+```tsx
+'&:hover': {
+  [systemIconStencil.vars.fill]: desiredFillHoverColor
+}
+```
+
+`fill` is deprecated and will be removed in a future version. Please use `color` and specify
+`accent` color if you want `accent` to be different from `color`.
+
+```tsx
+'&:hover': {
+  [systemIconStencil.vars.fill]: desiredFillHoverColor
+}
+```
+
+`systemIconStyles` has been deprecated and will be removed in a future version as a part of
+implementation of stencils and new tokens. Consider to use `systemIconStencil` to get styles or
+class name.
 
 ### Radio (Preview)
 
