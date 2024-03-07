@@ -194,7 +194,7 @@ jobs:
                 ```
                 git branch -D merge/${{needs.get-branch-names.outputs.branch}}-into-${{ needs.get-branch-names.outputs.next-branch }} || true
                 git fetch upstream
-                git checkout merge/${{needs.get-branch-names.outputs.branch}}-into-${{ needs.get-branch-names.outputs.next-branch }}
+                git checkout --track upstream/merge/${{needs.get-branch-names.outputs.branch}}-into-${{ needs.get-branch-names.outputs.next-branch }}
                 git pull upstream merge/${{needs.get-branch-names.outputs.branch}}-into-${{ needs.get-branch-names.outputs.next-branch }} -f
                 node utils/forward-merge.js
                 ```

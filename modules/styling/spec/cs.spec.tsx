@@ -4,7 +4,7 @@ import React from 'react';
 import {expectTypeOf} from 'expect-type';
 import {Properties} from 'csstype';
 import {SerializedStyles} from '@emotion/serialize';
-import {css, cache} from '@emotion/css';
+import {css} from '@emotion/css';
 import {jsx, CacheProvider} from '@emotion/react';
 import styled from '@emotion/styled';
 import {render as rtlRender, screen} from '@testing-library/react';
@@ -22,8 +22,10 @@ import {
   handleCsProp,
   keyframes,
   CSProps,
+  getCache,
 } from '../lib/cs';
 
+const cache = getCache();
 // We need to force Emotion's cache wrapper to use the cache from `@emotion/css` for tests to pass
 const CacheWrapper = props => <CacheProvider value={cache} {...props} />;
 // @ts-ignore We want the types to be the same, but I don't care to fix the error

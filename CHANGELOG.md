@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.21](https://github.com/Workday/canvas-kit/releases/tag/v10.3.21) (2024-03-06)
+
+### Infrastructure
+
+- fix: Update forward merge to track remote branch ([#2627](https://github.com/Workday/canvas-kit/pull/2627)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- chore: Add nonce support to styling ([#2629](https://github.com/Workday/canvas-kit/pull/2629)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  This change does not introduce any breaking changes, but creating a custom Emotion instance can introduce a breaking change. A custom instance should only be used if all instances of Canvas Kit on the page are above the version this change is released in and no application code is imported directly from `@emotion/css`. This change updates all internal Canvas Kit styling to use the Emotion instance created in `@workday/canvas-kit-styling`. If no custom instance is created, the one created by `@emotion/css` will be used. If the default instance is used, there should be no breaking changes, but everyone should update their application code to use styling functions from `@workday/canvas-kit-styling` and not `@emotion/css`. SSR using `@emotion/css` is unaffected since server to client hydration only cares about the cache key ("css") and the style's hash, which should be the same even with a custom cache instance.
+
+
+## [v10.3.20](https://github.com/Workday/canvas-kit/releases/tag/v10.3.20) (2024-03-04)
+
+### Components
+
+- fix: Move selected item when scrolling via keyboard in Select ([#2609](https://github.com/Workday/canvas-kit/pull/2609)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v10.3.19](https://github.com/Workday/canvas-kit/releases/tag/v10.3.19) (2024-03-01)
 
 ### Components
