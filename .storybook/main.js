@@ -127,8 +127,6 @@ module.exports = {
       ...config.resolve,
       alias: {
         ...config.resolve.alias,
-        '@emotion/core': '@emotion/react',
-        'emotion-theming': '@emotion/react',
       },
     };
 
@@ -145,8 +143,6 @@ module.exports = {
     plugins: [
       ...options.plugins,
       '@babel/plugin-transform-modules-commonjs',
-      // Needed temporarily until https://github.com/storybookjs/storybook/issues/14805 is resolved
-      ['@babel/plugin-proposal-private-property-in-object', {loose: true}],
     ],
     presets: [
       ...options.presets,

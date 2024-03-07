@@ -1,0 +1,3 @@
+version: 2
+updates:
+  target-branch: 'dependabot-updates-24-03'
