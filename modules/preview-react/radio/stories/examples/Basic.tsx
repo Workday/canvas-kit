@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 import {Flex} from '@workday/canvas-kit-react/layout';
 
@@ -15,8 +15,15 @@ export const Basic = () => {
 
   return (
     <Flex flexDirection="column">
-      <FormField label="Choose Your Pizza Crust" useFieldset={true}>
-        <RadioGroup name="pizza-crust" onChange={handleChange} width="200px" value={value}>
+      <FormField as="fieldset">
+        <FormField.Label as="legend">Choose Your Pizza Crust</FormField.Label>
+        <FormField.Input
+          as={RadioGroup}
+          name="pizza-crust"
+          onChange={handleChange}
+          width="200px"
+          value={value}
+        >
           <RadioGroup.RadioButton value="deep-dish">Deep dish</RadioGroup.RadioButton>
           <RadioGroup.RadioButton value="thin">Thin</RadioGroup.RadioButton>
           <RadioGroup.RadioButton value="gluten-free">Gluten free</RadioGroup.RadioButton>
@@ -24,7 +31,7 @@ export const Basic = () => {
           <RadioGroup.RadioButton value="custom">
             Butter - the best thing to put on bread
           </RadioGroup.RadioButton>
-        </RadioGroup>
+        </FormField.Input>
       </FormField>
       Value selected: {value}
     </Flex>
