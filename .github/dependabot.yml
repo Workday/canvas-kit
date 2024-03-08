@@ -2,4 +2,4 @@
 # https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
 version: 2
 updates:
-  target-branch: 'dependabot-updates-24-03'
+  target-branch: 'master'
