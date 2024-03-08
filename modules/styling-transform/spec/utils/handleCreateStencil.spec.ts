@@ -83,6 +83,23 @@ describe('handleCreateStencil', () => {
     expect(result).toContain('styles: "--css-button-color:red;padding:12px;"');
   });
 
+  it('should not parse variables in the base styles if the value is an empty string', () => {
+    const program = createProgramFromSource(`
+    import {createStencil} from '@workday/canvas-kit-styling';
+
+    const buttonStencil = createStencil({
+      vars: {
+        color: ''
+      },
+      base: {padding: 12}
+    })
+  `);
+
+    const result = transform(program, 'test.ts', withDefaultContext(program.getTypeChecker()));
+
+    expect(result).toContain('styles: "padding:12px;"');
+  });
+
   it('should handle parsing variables in base styles via an ArrowFunction and ParenthesizedExpression', () => {
     const program = createProgramFromSource(`
       import {createStencil} from '@workday/canvas-kit-styling';
@@ -302,5 +319,119 @@ describe('handleCreateStencil', () => {
     expect(styles['test.css']).toContainEqual(
       compileCSS('.css-button--size-title-small{font-size:var(--title-small);}')
     );
+  });
+
+  describe('extended stencil', () => {
+    const program = createProgramFromSource(`
+      import {createStencil} from '@workday/canvas-kit-styling';
+
+      const baseStencil = createStencil({
+        vars: {
+          color: 'red',
+        },
+        base: {
+          padding: 5
+        },
+        modifiers: {
+          position: {
+            start: {
+              paddingInlineStart: 5
+            },
+            end: {
+              paddingInlineEnd: 5
+            }
+          },
+          size: {
+            large: {
+              padding: 15
+            },
+          },
+        },
+        compound: [
+          {
+            modifiers: {size: 'large', position: 'start'},
+            styles: {
+              paddingInlineStart: 10
+            }
+          }
+        ],
+      });
+
+      const extendedStencil = createStencil({
+        extends: baseStencil,
+        vars: {
+          background: 'blue',
+        },
+        base: {
+
+        },
+        modifiers: {
+          extra: {
+            true: {
+              margin: 5
+            },
+          },
+        },
+        compound: [
+          {
+            modifiers: {
+              size: 'large',
+              position: 'start',
+              extra: true
+            },
+            styles: {
+              margin: 10,
+              paddingInlineStart: 5
+            }
+          }
+        ],
+      });
+    `);
+
+    const styles = {};
+
+    transform(program, 'test.ts', withDefaultContext(program.getTypeChecker(), {styles}));
+
+    it('should extract base styles', () => {
+      expect(styles['test.css']).toContainEqual(
+        compileCSS('.css-base {--css-base-color: red; padding: 5px;}')
+      );
+    });
+
+    it('should extract a base modifier style', () => {
+      expect(styles['test.css']).toContainEqual(
+        compileCSS('.css-base--position-start { padding-inline-start: 5px;}')
+      );
+      expect(styles['test.css']).toContainEqual(
+        compileCSS('.css-base--position-end { padding-inline-end: 5px;}')
+      );
+      expect(styles['test.css']).toContainEqual(
+        compileCSS('.css-base--size-large { padding: 15px;}')
+      );
+    });
+
+    it('should extract a base compound modifier style', () => {
+      expect(styles['test.css']).toContainEqual(
+        compileCSS('.css-base--size-large.css-base--position-start { padding-inline-start: 10px;}')
+      );
+    });
+
+    it('should extract an extended base style', () => {
+      expect(styles['test.css']).toContainEqual(
+        compileCSS('.css-extended { --css-extended-background: blue;}')
+      );
+    });
+
+    it('should extract an extended modifier style', () => {
+      expect(styles['test.css']).toContainEqual(compileCSS('.css-extended--extra { margin: 5px;}'));
+    });
+
+    it('should extract an extended compound modifier with base modifier names and extended modifier names', () => {
+      expect(styles['test.css']).toContainEqual(
+        compileCSS(
+          '.css-extended.css-base--size-large.css-base--position-start.css-extended--extra {margin: 10px; padding-inline-start: 5px;}'
+        )
+      );
+    });
   });
 });

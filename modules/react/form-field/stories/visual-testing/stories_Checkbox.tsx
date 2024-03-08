@@ -87,6 +87,11 @@ export const InverseCheckboxStates = () => (
             {value: true, label: 'Indeterminate'},
             {value: false, label: ''},
           ],
+          error: [
+            {value: undefined, label: ''},
+            {value: Checkbox.ErrorType.Alert, label: 'Alert'},
+            {value: Checkbox.ErrorType.Error, label: 'Error'},
+          ],
         },
         props => {
           if (props.indeterminate && !props.checked) {
