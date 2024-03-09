@@ -313,6 +313,40 @@ Notice the stencil adds all the class names that match the base, modifiers, and 
 
 <ExampleCodeBlock code={CreateStencil} />
 
+### Variables and Modifiers with same keys
+
+It is possible to have a variable and modifier sharing the same key. The Stencil will accept either
+the modifier option or a string. The value will be sent as a variable regardless while the modifer
+will only match if it is a valid modifer key.
+
+```tsx
+const myStencil = createStencil({
+  vars: {
+    width: '10px',
+  },
+  base({width}): {
+    return {
+      width: width
+    }
+  },
+  modifiers: {
+    width: {
+      zero: {
+        width: '0', // overrides base styles
+      },
+    },
+  },
+})
+
+// `'zero'` is part of autocomplete
+myStencil({width: 'zero'});
+// returns {className: 'css-base css--width-zero', styles: { '--width': 'zero'}}
+
+// width also accepts a string
+myStencil({width: '10px'});
+// returns {className: 'css-base', styles: { '--width': '10px'}}
+```
+
 ### `keyframes`
 
 The `keyframes` function re-exports the [Emotion CSS keyframes](https://emotion.sh/docs/keyframes)
