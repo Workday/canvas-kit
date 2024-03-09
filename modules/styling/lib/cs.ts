@@ -753,8 +753,13 @@ export type StencilCompoundConfig<M> = {
   styles: SerializedStyles | CSSObjectWithVars;
 };
 
-type ModifierValuesStencil<M extends StencilModifierConfig> = {
-  [P in keyof M]?: MaybeBoolean<keyof M[P]>;
+type ModifierValuesStencil<
+  M extends StencilModifierConfig,
+  V extends Record<string, string> | Record<string, Record<string, string>> = {}
+> = {
+  [P in keyof M]?: P extends keyof V
+    ? MaybeBoolean<keyof M[P]> | (string & {}) // If both modifiers and variables define the same key, the value can be either a modifier or a string
+    : MaybeBoolean<keyof M[P]>;
 };
 
 export interface StencilConfig<
@@ -852,7 +857,7 @@ export type Stencil<
   V extends Record<string, string> | Record<string, Record<string, string>>,
   ID extends string = never
 > = {
-  (modifiers?: ModifierValuesStencil<M> & VariableValuesStencil<V>): {
+  (modifiers?: ModifierValuesStencil<M, V> & VariableValuesStencil<V>): {
     className: string;
     style?: Record<string, string>;
   };
