@@ -70,7 +70,7 @@
     "jest-axe": "^3.4.0",
     "jest-junit": "^13.0.0",
     "lerna": "^5.6.2",
-    "lint-staged": "8.0.5",
+    "lint-staged": "^14.0.1",
     "markdown-to-jsx": "^6.10.3",
     "mkdirp": "^1.0.3",
     "node-fetch": "^3.1.0",
@@ -118,23 +118,9 @@
     "cypress:run": "cypress run"
   },
   "lint-staged": {
-    "linters": {
-      "*.{ts,tsx}": [
-        "yarn format",
-        "git add"
-      ],
-      "*.json": [
-        "node utils/check-mismatched-dependencies.js",
-        "git add"
-      ],
-      "*.{js,jsx,json,md}": [
-        "git add"
-      ],
-      "yarn.lock": [
-        "node utils/check-lockfile.js",
-        "git add"
-      ]
-    }
+      "*.{ts,tsx}": "yarn format",
+      "*.json": "node utils/check-mismatched-dependencies.js",
+      "yarn.lock": "node utils/check-lockfile.js"
   },
   "workspaces": [
     "modules/**"
