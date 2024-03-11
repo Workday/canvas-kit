@@ -31,7 +31,7 @@ export const Error = () => {
   };
 
   return (
-    <TextArea hasError={hasError} orientation="vertical">
+    <TextArea error={hasError ? 'error' : undefined} orientation="vertical">
       <TextArea.Label>A three letter word</TextArea.Label>
       <TextArea.Field onChange={handleChange} value={value} />
       <TextArea.Hint paddingTop={space.xxs}>{hint}</TextArea.Hint>

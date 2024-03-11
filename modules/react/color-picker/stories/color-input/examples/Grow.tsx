@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {ColorInput} from '@workday/canvas-kit-react/color-picker';
 
 export const Grow = () => {
@@ -10,8 +10,9 @@ export const Grow = () => {
   };
 
   return (
-    <FormField grow={true} label="Background Color">
-      <ColorInput onChange={handleChange} value={value} />
+    <FormField cs={{width: '100%'}}>
+      <FormField.Label>Background Color</FormField.Label>
+      <FormField.Input cs={{width: '100%'}} as={ColorInput} onChange={handleChange} value={value} />
     </FormField>
   );
 };
