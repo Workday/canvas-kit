@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.22](https://github.com/Workday/canvas-kit/releases/tag/v10.3.22) (2024-03-11)
+
+### Infrastructure
+
+- chore: Create scorecard.yml ([#2632](https://github.com/Workday/canvas-kit/pull/2632)) ([@mannycarrera4](https://github.com/mannycarrera4))
+- chore: Addressing vulnerabilities and critical issues ([#2634](https://github.com/Workday/canvas-kit/pull/2634)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+### Styling
+
+- fix(stencil): TypeScript support for variable/modifier with same key ([#2635](https://github.com/Workday/canvas-kit/pull/2635)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v10.3.21](https://github.com/Workday/canvas-kit/releases/tag/v10.3.21) (2024-03-06)
 
 ### Infrastructure

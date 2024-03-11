@@ -770,6 +770,48 @@ describe('createStyles', () => {
       expect(found).toEqual(true);
     });
 
+    it('should handle both variables and modifiers sharing the same key', () => {
+      const myStencil = createStencil({
+        vars: {
+          width: '10px',
+          height: '10px',
+        },
+        base({width}) {
+          return {width: width};
+        },
+        modifiers: {
+          width: {
+            zero: {
+              width: '0',
+            },
+          },
+          foo: {
+            true: {},
+          },
+        },
+      });
+
+      myStencil({width: '12px'});
+
+      type Arg = Exclude<Parameters<typeof myStencil>[0], undefined>;
+      expectTypeOf<Arg>().toHaveProperty('width');
+      expectTypeOf<Arg['width']>().toMatchTypeOf<(string & {}) | 'zero' | undefined>();
+
+      const result = myStencil({width: '70px', height: '10px'});
+      expect(result).toHaveProperty('style');
+      expect(result.style).toHaveProperty(myStencil.vars.width, '70px');
+
+      // only match the base
+      expect(result.className).toEqual(myStencil.base);
+
+      const result2 = myStencil({width: 'zero', height: '10px'});
+      expect(result2).toHaveProperty('style');
+      expect(result2.style).toHaveProperty(myStencil.vars.width, 'zero');
+
+      // match base and width modifier
+      expect(result2.className).toEqual(`${myStencil.base} ${myStencil.modifiers.width.zero}`);
+    });
+
     it('should convert "true" modifiers into boolean', () => {
       const myStencil = createStencil({
         vars: {
