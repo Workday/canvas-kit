@@ -37,7 +37,7 @@ jobs:
 
       - name: Extract next branch name
         id: extract-next-branch
-        uses: Workday/canvas-kit-actions/get-next-branch@v1
+        uses: Workday/canvas-kit-actions/get-next-branch@38458d8f53521968d38ad2b839fe442fe3046c6a # v1
         with:
           branch: ${{github.ref_name}}
 
@@ -57,7 +57,7 @@ jobs:
       ## First, we'll checkout the repository. We don't persist credentials because we need a
       ## Personal Access Token to push on a branch that is protected. See
       ## https://github.com/cycjimmy/semantic-release-action#basic-usage
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
         with:
           persist-credentials: false
           ref: ${{needs.get-branch-names.outputs.next-branch}} # checkout the next branch
@@ -71,7 +71,7 @@ jobs:
 
       ## If the previous step passed, push the verified commit directly to the next branch
       - name: Push changes
-        uses: ad-m/github-push-action@master
+        uses: ad-m/github-push-action@9870d48124da805820c70ebc6ba563c715551019 # master
         with:
           github_token: ${{ secrets.GH_RW_TOKEN }}
           branch: refs/heads/${{ needs.get-branch-names.outputs.next-branch }}
@@ -87,12 +87,12 @@ jobs:
       ## First, we'll checkout the repository. We don't persist credentials because we need a
       ## Personal Access Token to push on a branch that is protected. See
       ## https://github.com/cycjimmy/semantic-release-action#basic-usage
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
         with:
           persist-credentials: false
           fetch-depth: 0 # Needed to do merges
 
-      - uses: Workday/canvas-kit-actions/install@v1
+      - uses: Workday/canvas-kit-actions/install@38458d8f53521968d38ad2b839fe442fe3046c6a # v1
         with:
           node_version: 16.x
 
@@ -129,7 +129,7 @@ jobs:
 
       - name: Cache Build
         id: build-cache
-        uses: actions/cache/@v2
+        uses: actions/cache/@8492260343ad570701412c2f464a5877dc76bace # v2
         with:
           path: docs
           key: ${{ runner.os }}-build-${{ github.sha }}
@@ -160,7 +160,7 @@ jobs:
 
       ## Push both the commit and tag created by Lerna's version command using a PAT
       - name: Push changes
-        uses: ad-m/github-push-action@master
+        uses: ad-m/github-push-action@9870d48124da805820c70ebc6ba563c715551019 # master
         with:
           github_token: ${{ secrets.GH_RW_TOKEN }}
           branch: refs/heads/${{ needs.get-branch-names.outputs.next-branch }}
@@ -176,7 +176,7 @@ jobs:
 
     steps:
       ## If we've failed any previous step, we'll need to create a PR instead
-      - uses: NicholasBoll/action-forward-merge-pr@main
+      - uses: NicholasBoll/action-forward-merge-pr@6a7157396435c4e8b993977451170f41f0878d58 # main
         with:
           token: ${{secrets.GH_RW_TOKEN}} # use PAT to force GH Actions to run the PR verify. The regular token will not
           branches: support+master,master+prerelease/minor,prerelease/minor+prerelease/major

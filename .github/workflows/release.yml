@@ -25,16 +25,16 @@ jobs:
       ## First, we'll checkout the repository. We don't persist credentials because we need a
       ## Personal Access Token to push on a branch that is protected. See
       ## https://github.com/cycjimmy/semantic-release-action#basic-usage
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
         with:
           persist-credentials: false
           fetch-depth: 0 # Used for conventional commit ranges
 
-      - uses: Workday/canvas-kit-actions/install@v1
+      - uses: Workday/canvas-kit-actions/install@38458d8f53521968d38ad2b839fe442fe3046c6a # v1
         with:
           node_version: 16.x
 
-      - uses: Workday/canvas-kit-actions/release@v1
+      - uses: Workday/canvas-kit-actions/release@38458d8f53521968d38ad2b839fe442fe3046c6a # v1
         with:
           gh_token: ${{ secrets.GITHUB_TOKEN }}
           gh_rw_token: ${{ secrets.GH_RW_TOKEN }}
@@ -42,7 +42,7 @@ jobs:
           chromatic_project_token: ${{ secrets.CHROMATIC_APP_CODE }}
           version: ${{ inputs.version || 'patch' }}
 
-      - uses: Workday/canvas-kit-actions/report-failure@v1
+      - uses: Workday/canvas-kit-actions/report-failure@38458d8f53521968d38ad2b839fe442fe3046c6a # v1
         if: failure()
         with:
           slackWebhook: ${{ secrets.SLACK_WEBHOOK }}

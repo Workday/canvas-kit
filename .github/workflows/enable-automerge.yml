@@ -11,6 +11,6 @@ jobs:
 
     steps:
     - name: Enable Automerge
-      uses: Workday/canvas-kit-actions/enable-automerge@v1
+      uses: Workday/canvas-kit-actions/enable-automerge@38458d8f53521968d38ad2b839fe442fe3046c6a # v1
       with:
         token: ${{ secrets.GH_RW_TOKEN }}

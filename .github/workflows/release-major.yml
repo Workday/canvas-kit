@@ -8,14 +8,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
         with:
           persist-credentials: false
           fetch-depth: 0 # Needed to do a proper push
 
       # Update support to point to the current major version
       - name: Push changes
-        uses: ad-m/github-push-action@master
+        uses: ad-m/github-push-action@9870d48124da805820c70ebc6ba563c715551019 # master
         with:
           github_token: ${{ secrets.GH_RW_TOKEN }}
           branch: support
@@ -32,12 +32,12 @@ jobs:
       - name: Pull changes >> prerelease/major -> master
         run: git pull origin prerelease/major
 
-      - uses: Workday/canvas-kit-actions/install@v1
+      - uses: Workday/canvas-kit-actions/install@38458d8f53521968d38ad2b839fe442fe3046c6a # v1
         with:
           node_version: 16.x
 
       # Run the release job to publish the next major version to npm
-      - uses: Workday/canvas-kit-actions/release@v1
+      - uses: Workday/canvas-kit-actions/release@38458d8f53521968d38ad2b839fe442fe3046c6a # v1
         with:
           gh_token: ${{ secrets.GITHUB_TOKEN }}
           gh_rw_token: ${{ secrets.GH_RW_TOKEN }}
@@ -48,14 +48,14 @@ jobs:
 
       # Update prerelease/minor to point to the next major release.
       - name: Push changes
-        uses: ad-m/github-push-action@master
+        uses: ad-m/github-push-action@9870d48124da805820c70ebc6ba563c715551019 # master
         with:
           github_token: ${{ secrets.GH_RW_TOKEN }}
           branch: prerelease/minor
 
       # Update prerelease/major with the changes from prerelease/minor which include the major release version bump.
       - name: Push changes
-        uses: ad-m/github-push-action@master
+        uses: ad-m/github-push-action@9870d48124da805820c70ebc6ba563c715551019 # master
         with:
           github_token: ${{ secrets.GH_RW_TOKEN }}
           branch: prerelease/major

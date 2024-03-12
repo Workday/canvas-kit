@@ -30,7 +30,7 @@ jobs:
     if: github.event_name == 'issues' && (github.event.action == 'opened' || github.event.action == 'reopened')
     steps:
       - name: Move issue to ${{ env.new }}
-        uses: leonsteinhaeuser/project-beta-automations@v2.0.1
+        uses: leonsteinhaeuser/project-beta-automations@7f947733020ee03daa363d16ea1223717b132f11 # v2.0.1
         with:
           gh_token: ${{ env.gh_project_token }}
           organization: ${{ env.gh_organization }}
@@ -43,7 +43,7 @@ jobs:
     if: github.event_name == 'issues' && github.event.action == 'closed'
     steps:
       - name: Moved issue to ${{ env.done }}
-        uses: leonsteinhaeuser/project-beta-automations@v2.0.1
+        uses: leonsteinhaeuser/project-beta-automations@7f947733020ee03daa363d16ea1223717b132f11 # v2.0.1
         with:
           gh_token: ${{ env.gh_project_token }}
           organization: ${{ env.gh_organization }}
@@ -57,7 +57,7 @@ jobs:
     steps:
       - name: Add Issue to Contribution Board
         if: github.event.label.name == 'good first issue' || github.event.label.name == 'help wanted'
-        uses: leonsteinhaeuser/project-beta-automations@v2.0.1
+        uses: leonsteinhaeuser/project-beta-automations@7f947733020ee03daa363d16ea1223717b132f11 # v2.0.1
         with:
           gh_token: ${{ env.gh_project_token }}
           organization: ${{ env.gh_organization }}
@@ -67,7 +67,7 @@ jobs:
           custom_field_values: '[{\"name\": \"Contributions\",\"type\": \"single_select\",\"value\": \"Yes\"}]'
       - name: Move Issue to ${{ env.in_review }}
         if: github.event.label.name == 'ready for review'
-        uses: leonsteinhaeuser/project-beta-automations@v2.0.1
+        uses: leonsteinhaeuser/project-beta-automations@7f947733020ee03daa363d16ea1223717b132f11 # v2.0.1
         with:
           gh_token: ${{ env.gh_project_token }}
           organization: ${{ env.gh_organization }}
@@ -76,7 +76,7 @@ jobs:
           status_value: ${{ env.in_review }}
       - name: Add Issue Type - Bug
         if: github.event.label.name == 'bug'
-        uses: leonsteinhaeuser/project-beta-automations@v2.0.1
+        uses: leonsteinhaeuser/project-beta-automations@7f947733020ee03daa363d16ea1223717b132f11 # v2.0.1
         with:
           gh_token: ${{ env.gh_project_token }}
           organization: ${{ env.gh_organization }}
@@ -86,7 +86,7 @@ jobs:
           custom_field_values: '[{\"name\": \"Type\",\"type\": \"single_select\",\"value\": \"🐛 Bug\"}]'
       - name: Add Issue Type - Epic
         if: github.event.label.name == 'epic'
-        uses: leonsteinhaeuser/project-beta-automations@v2.0.1
+        uses: leonsteinhaeuser/project-beta-automations@7f947733020ee03daa363d16ea1223717b132f11 # v2.0.1
         with:
           gh_token: ${{ env.gh_project_token }}
           organization: ${{ env.gh_organization }}
@@ -96,7 +96,7 @@ jobs:
           custom_field_values: '[{\"name\": \"Type\",\"type\": \"single_select\",\"value\": \"⚓️ Epic\"}]'
       - name: Add Issue Type - Spike
         if: github.event.label.name == 'spike'
-        uses: leonsteinhaeuser/project-beta-automations@v2.0.1
+        uses: leonsteinhaeuser/project-beta-automations@7f947733020ee03daa363d16ea1223717b132f11 # v2.0.1
         with:
           gh_token: ${{ env.gh_project_token }}
           organization: ${{ env.gh_organization }}
@@ -106,7 +106,7 @@ jobs:
           custom_field_values: '[{\"name\": \"Type\",\"type\": \"single_select\",\"value\": \"🏐 Spike\"}]'
       - name: Add Issue Type - Infrastructure
         if: github.event.label.name == 'infra'
-        uses: leonsteinhaeuser/project-beta-automations@v2.0.1
+        uses: leonsteinhaeuser/project-beta-automations@7f947733020ee03daa363d16ea1223717b132f11 # v2.0.1
         with:
           gh_token: ${{ env.gh_project_token }}
           organization: ${{ env.gh_organization }}
@@ -121,7 +121,7 @@ jobs:
     steps:
       - name: Move PR to Current Sprint
         if: startsWith(github.head_ref, 'merge/') || startsWith(github.head_ref, 'dependabot/')
-        uses: leonsteinhaeuser/project-beta-automations@v2.0.1
+        uses: leonsteinhaeuser/project-beta-automations@7f947733020ee03daa363d16ea1223717b132f11 # v2.0.1
         with:
           gh_token: ${{ env.gh_project_token }}
           organization: ${{ env.gh_organization }}

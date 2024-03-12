@@ -8,7 +8,7 @@ jobs:
   automate-project-columns:
     runs-on: ubuntu-latest
     steps:
-      - uses: alex-page/github-project-automation-plus@v0.2.4
+      - uses: alex-page/github-project-automation-plus@9e65c91a9f43f1ea344d1f1695d515024a56788f # v0.2.4
         with:
           project: Backlog
           column: Open
