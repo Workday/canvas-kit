@@ -9,11 +9,8 @@ import {base} from '@workday/canvas-tokens-web';
 import {Svg, SvgProps, svgStencil, transformColorNameToToken} from './Svg';
 
 /**
- * @deprecated
- * Interface `AccentIconStyles` will be removed in a future version.
- * All props will be moved inside `AccentIconProps`.
- * Consider to use the new tokens set to set `color` prop: `color={base.blueberry500}`.
- * */
+ * @deprecated Interface `AccentIconStyles` will be removed in a future version. All props will be moved inside `AccentIconProps`. Consider to use the new tokens set to set `color` prop: `color={base.blueberry500}`.
+ */
 export interface AccentIconStyles {
   /**
    * The fill color of the AccentIcon.
@@ -41,9 +38,7 @@ export interface AccentIconProps extends AccentIconStyles, Omit<SvgProps, 'src' 
 }
 
 /**
- * @deprecated
- * `accentIconStyles` will be removed in in a future version as a part of implementation of stencils and new tokens.
- * Consider to use `accentIconStencil` instead.
+ * @deprecated `accentIconStyles` will be removed in in a future version as a part of implementation of stencils and new tokens. Consider to use `accentIconStencil` instead.
  */
 export const accentIconStyles = ({
   color = colors.blueberry500,

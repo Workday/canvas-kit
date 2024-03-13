@@ -8,9 +8,7 @@ import {base} from '@workday/canvas-tokens-web';
 import {Svg, SvgProps, svgStencil, transformColorNameToToken} from './Svg';
 
 /**
- * @deprecated
- * Interface `SystemIconStyles` will be removed in a future version.
- * `accent`, `color`, background props will be moved inside `GraphicProps`.
+ * @deprecated Interface `SystemIconStyles` will be removed in a future version. `accent`, `color`, background props will be moved inside `GraphicProps`.
  */
 export interface SystemIconStyles {
   /**
@@ -19,9 +17,7 @@ export interface SystemIconStyles {
   accent?: string;
   /**
    * The accent color of the SystemIcon on hover. This overrides `colorHover`.
-   * @deprecated
-   * `accentHover` is deprecated and will be removed in a future version. Please use the
-   * following instead in your style overrides:
+   * @deprecated `accentHover` is deprecated and will be removed in a future version. Please use the following instead in your style overrides:
    * ```tsx
    * '&:hover': {
    *   [systemIconStencil.vars.accent]: desiredAccentHoverColor
@@ -37,9 +33,7 @@ export interface SystemIconStyles {
   /**
    * The background color of the SystemIcon on hover.
    * @default transparent
-   * @deprecated
-   * `backgroundHover` is deprecated and will be removed in a future version. Please use the
-   * following instead in your style overrides:
+   * @deprecated `backgroundHover` is deprecated and will be removed in a future version. Please use the following instead in your style overrides:
    * ```tsx
    * '&:hover': {
    *   [systemIconStencil.vars.background]: desiredBackgroundHoverColor
@@ -55,9 +49,7 @@ export interface SystemIconStyles {
   /**
    * The hover color of the SystemIcon. This defines `accentHover` and `fillHover`. `colorHover` may be overwritten by `accentHover` and `fillHover`.
    * @default base.licorice200
-   * @deprecated
-   * `colorHover` is deprecated and will be removed in a future version. Please use the
-   * following instead in your style overrides:
+   * @deprecated `colorHover` is deprecated and will be removed in a future version. Please use the following instead in your style overrides:
    * ```tsx
    * '&:hover': {
    *   [systemIconStencil.vars.color]: desiredColorHoverColor
@@ -67,16 +59,12 @@ export interface SystemIconStyles {
   colorHover?: string;
   /**
    * The fill color of the SystemIcon. This overrides `color`.
-   * @deprecated
-   * `fill` is deprecated and will be removed in a future version.
-   * Please use `color` and specify `accent` color if you want `accent` to be different from `color`.
+   * @deprecated `fill` is deprecated and will be removed in a future version. Please use `color` and specify `accent` color if you want `accent` to be different from `color`.
    */
   fill?: string;
   /**
    * The fill color of the SystemIcon on hover. This overrides `colorHover`.
-   * @deprecated
-   * `fillHover` is deprecated and will be removed in a future version. Please use the
-   * following instead in your style overrides:
+   * @deprecated `fillHover` is deprecated and will be removed in a future version. Please use the following instead in your style overrides:
    * ```tsx
    * '&:hover': {
    *   [systemIconStencil.vars.fill]: desiredFillHoverColor
@@ -100,12 +88,7 @@ export interface SystemIconProps
 }
 
 /**
- * @deprecated
- * This style utility function is deprecated and will be removed in a future version. We'll track
- * usage over time to prevent unnecessary burden on upgrading. Most of the time, this function
- * is used in conjunction with styling `SystemIcon`. There are a few ways to override the colors
- * used in `SystemIcon`.
- *
+ * @deprecated This style utility function is deprecated and will be removed in a future version. We'll track usage over time to prevent unnecessary burden on upgrading. Most of the time, this function is used in conjunction with styling `SystemIcon`. There are a few ways to override the colors used in `SystemIcon`.
  * - Pass props directly to the `SystemIcon` component: `<SystemIcon color={color} {...etc} />
  * - Style overrides using the `systemIconStencil`:
  *   ```tsx
@@ -144,8 +127,7 @@ export const systemIconStyles = ({
 });
 
 /**
- * @deprecated These variables are being used for backward compatibility with existing hover props.
- * Please use the following instead:
+ * @deprecated These variables are being used for backward compatibility with existing hover props. Please use the following instead:
  * ```tsx
  * '&:hover': {
  *   [systemIconStencil.vars.color]: desiredHoverColor

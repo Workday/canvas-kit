@@ -497,10 +497,17 @@ and `Graphic` now use our new
 [Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
 [new styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
 
-Components now support the `cs` prop, instead of removed `styles` prop.
+- Components now support the `cs` prop. -`styles` prop has been removed.
 
-**Note: Passing token name to a prop will be not supported in a future version. Instead of
-`color="blueberry100"` consider using actual token `color={base.blueberry100}`**
+**Note: Passing a token name to a style prop will be not supported in a future major version.**
+
+```tsx
+// This will no longer be supported in a future major version
+<SystemIcon color="blueberry400" .../>
+
+// Use new tokens instead.
+<SystemIcon color={base.blueberry400} .../>
+```
 
 🤖 The codemod will handle the change of `styles` to `cs` for you automatically.
 
@@ -581,16 +588,16 @@ const MyComponent = StyledRadioButton('div')({
 
 #### Icon
 
-Only impact Canvas Kit. `Icon` component has been removed and no longer used in icons. It was
-replaced by `Svg` and icon stencils extend `svgStencil`.
+This change only impacts internal Canvas Kit code. `Icon` component has been removed and no longer
+used in icons. It was replaced by `Svg` and icon stencils extend `svgStencil`.
 
 #### SystemIcon
 
 - `SystemIconStyles` prop has been deprecated and will be merged with `SystemIconProps` in a future
   version.
 
-- `accentHover` is deprecated and will be removed in a future version. Please use the following
-  instead in your style overrides:
+- `accentHover` is deprecated and will be removed in a future version. Please use the following when
+  overriding styles:
 
 ```tsx
 '&:hover': {
@@ -599,7 +606,7 @@ replaced by `Svg` and icon stencils extend `svgStencil`.
 ```
 
 - `backgroundHover` is deprecated and will be removed in a future version. Please use the following
-  instead in your style overrides:
+  when overriding styles:
 
 ```tsx
 '&:hover': {
@@ -607,8 +614,8 @@ replaced by `Svg` and icon stencils extend `svgStencil`.
 }
 ```
 
-- `fillHover` is deprecated and will be removed in a future version. Please use the following
-  instead in your style overrides:
+- `fillHover` is deprecated and will be removed in a future version. Please use the following when
+  overriding styles:
 
 ```tsx
 '&:hover': {

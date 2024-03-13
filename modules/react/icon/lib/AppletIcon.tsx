@@ -8,10 +8,8 @@ import {handleCsProp, createStencil, px2rem, cssVar} from '@workday/canvas-kit-s
 import {base} from '@workday/canvas-tokens-web';
 
 /**
- * @deprecated
- * Interface `AppletIconStyles` will be removed in a future version.
- * All props will be moved inside `AppletIconProps`.
- * */
+ * @deprecated Interface `AppletIconStyles` will be removed in a future version. All props will be moved inside `AppletIconProps`.
+ */
 export interface AppletIconStyles {
   /**
    * The icon color hue. Must use a member of the `AppletIcon.Colors` static enum.
@@ -21,10 +19,8 @@ export interface AppletIconStyles {
 }
 
 /**
- * @deprecated
- * `appletIconStyles` will be removed in in a future version as a part of implementation of stencils and new tokens.
- * Consider to use `appletIconStencil` instead.
- * */
+ * @deprecated `appletIconStyles` will be removed in in a future version as a part of implementation of stencils and new tokens. Consider to use `appletIconStencil` instead.
+ */
 export const appletIconStyles = ({
   color = BrandingColor.Blueberry,
 }: AppletIconStyles): CSSObject => {

@@ -6,23 +6,19 @@ import {createComponent} from '@workday/canvas-kit-react/common';
 import {createStencil, createVars, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 
 /**
- * @deprecated
- * Interface `GraphicStyles` will be removed in a future version.
- * `grow` prop will be moved inside `GraphicProps`.
- * */
+ * @deprecated Interface `GraphicStyles` will be removed in a future version. `grow` prop will be moved inside `GraphicProps`.
+ */
 export interface GraphicStyles {
   /**
    * The width of the Graphic in `px`. The Graphic's `width` takes precedence over its `height` in order to preserve its proportions.
    * @default width of graphic
-   * @deprecated
-   * Use `cs` to set width, `cs={{"& svg": {width: '1rem'}}}`
+   * @deprecated Use `cs` to set width, `cs={{"& svg": {width: '1rem'}}}`
    */
   width?: number | string;
   /**
    * The height of the Graphic in `px`. If the Graphic's `height` is set, its `width` will be set to `100%`.
    * @default height of graphic
-   * @deprecated
-   * Use `cs` to set height, `cs={{"& svg": {height: '1rem'}}}`
+   * @deprecated Use `cs` to set height, `cs={{"& svg": {height: '1rem'}}}`
    */
   height?: number | string;
   /**
@@ -40,9 +36,7 @@ export interface GraphicProps extends GraphicStyles, Pick<SvgProps, 'shouldMirro
 }
 
 /**
- * @deprecated
- * `graphicStyles` will be removed in in a future version as a part of implementation of stencils and new tokens.
- * Consider to use `graphicStencil` instead.
+ * @deprecated `graphicStyles` will be removed in in a future version as a part of implementation of stencils and new tokens. Consider to use `graphicStencil` instead.
  */
 export const graphicStyles = ({width, height, grow}: GraphicStyles): CSSObject => {
   if (grow) {
@@ -75,8 +69,7 @@ export const graphicStyles = ({width, height, grow}: GraphicStyles): CSSObject =
 };
 
 /**
- * @deprecated
- * Part of supporting deprecated `height` and `width` props
+ * @deprecated Part of supporting deprecated `height` and `width` props
  */
 const graphicVars = createVars('height', 'width');
 
