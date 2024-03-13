@@ -3,8 +3,7 @@ import {Theme, ThemeProvider, CacheProvider} from '@emotion/react';
 import {InputProvider} from './InputProvider';
 import {defaultCanvasTheme, PartialEmotionCanvasTheme, useTheme} from './theming';
 import {brand} from '@workday/canvas-tokens-web';
-import {cache} from '@emotion/css';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {createStyles, getCache} from '@workday/canvas-kit-styling';
 
 export interface CanvasProviderProps {
   theme?: PartialEmotionCanvasTheme;
@@ -89,6 +88,7 @@ export const CanvasProvider = ({
   ...props
 }: CanvasProviderProps & React.HTMLAttributes<HTMLElement>) => {
   const elemProps = useCanvasThemeToCssVars(theme, props);
+  const cache = getCache();
   return (
     <CacheProvider value={cache}>
       <ThemeProvider theme={theme as Theme}>
