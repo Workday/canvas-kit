@@ -249,19 +249,6 @@ type ToString<T> = string & T;
  * DefaultedVarsMapToCSSVarNames<{foo: { bar: 'red' }}, 'my-id'> = { foo: { bar: '--my-id-red' }}
  * ```
  */
-// export type DefaultedVarsMapToCSSVarNames<
-//   V extends DefaultedVarsShape,
-//   ID extends string | never
-// > = [ID] extends [never]
-//   ? V extends Record<string, string>
-//     ? Record<keyof V, string>
-//     : {[K in keyof V]: Record<keyof V[K], string>}
-//   : // map type. If the ID is known from the style optimizer, use static keys using string template literals instead of `string`
-//     {
-//       [K in keyof V]: V[K] extends Record<string, string>
-//         ? DefaultedVarsMapToCSSVarNames<V[K], `${ID}-${ToString<K>}`> // TypeScript doesn't know K is a string here and will throw an error, so we have to coerce it
-//         : CSSVarName<ID, K>;
-//     };
 export type DefaultedVarsMapToCSSVarNames<
   V extends DefaultedVarsShape,
   ID extends string | never

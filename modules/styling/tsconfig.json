@@ -1,11 +1,4 @@
 {
   "extends": "../../tsconfig.json",
-  "exclude": ["node_modules", "ts-tmp", "dist", "**/spec", "**/stories"],
-  "compilerOptions": {
-    "plugins": [
-      {
-        "transform": "../styling-transform/lib/styleTransform.ts"
-      }
-    ]
-  }
+  "exclude": ["node_modules", "ts-tmp", "dist", "**/spec", "**/stories"]
 }
