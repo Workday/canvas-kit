@@ -492,51 +492,105 @@ import {TextInput} from '@workday/canvas-kit-react/text-input';
 
 ### Icons
 
-All icons components including `Svg`, `SystemIcon`, `SystemIconCircle`, `AccentIcon`, `AppletIcon` and `Graphic`
-now use our new
+All icons components including `Svg`, `SystemIcon`, `SystemIconCircle`, `AccentIcon`, `AppletIcon`
+and `Graphic` now use our new
 [Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
-our
 [new styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
-These components also supports the new `cs` prop, but otherwise the API has not changed. It should behave
-identically as it did in previous versions.
 
-**Note:The `styles` prop has been removed from icon components.**
+Components now support the `cs` prop, instead of removed `styles` prop.
+
+**Note: Passing token name to a prop will be not supported in a future version. Instead of
+`color="blueberry100"` consider using actual token `color={base.blueberry100}`**
 
 🤖 The codemod will handle the change of `styles` to `cs` for you automatically.
 
 #### AccentIcon
 
-`AccentIconStyles` prop has been deprecated and will be merged with `AccentIconProps` in a future
-version. `accentIconStyles` has been deprecated and will be removed in a future version as a part of
-implementation of stencils and new tokens. Consider to use `accentIconStencil` to get styles or
-class name.
+- `AccentIconStyles` prop has been deprecated and will be merged with `AccentIconProps` in a future
+  version.
+- `accentIconStyles` has been deprecated and will be removed in a future version as a part of
+  implementation of stencils and new tokens. Consider to use `accentIconStencil` to get styles or
+  class name.
+- `AccentIcon` supports `size` and `color` css variables, along with `size` and `color` props. Both
+  ways are supported:
+
+```tsx
+// set size or color by props
+<AccentIcon color={base.blueberry100} size={24} />;
+
+// set size or color by css vars
+import {accentIconStencil} from '@workday/canvas-kit-react/icon';
+
+const MyComponent = StyledRadioButton('div')({
+  [accentIconStencil.vars.color]: base.berrySmoothie100,
+  [accentIconStencil.vars.size]: '2rem',
+});
+
+<MyComponent>
+  <AccentIcon icon={myIcon} />
+</MyComponent>;
+```
 
 #### AppletIcon
 
-`AppletIconStyles` prop has been deprecated and will be merged with `AppletIconProps` in a future
-version. `appletIconStyles` has been deprecated and will be removed in a future version as a part of
-implementation of stencils and new tokens. Consider using `appletIconStencil` to get styles or
-class name.
+- `AppletIconStyles` prop has been deprecated and will be merged with `AppletIconProps` in a future
+  version.
+- `appletIconStyles` has been deprecated and will be removed in a future version as a part of
+  implementation of stencils and new tokens. Consider using `appletIconStencil` to get styles or
+  class name.
+- `AppletIcon` supports `size`, `color200`, `color300`, `color400` and `color500` css variables,
+  along with `size` and `color` props. Both ways are supported:
+
+```tsx
+// set size or color by props
+<AppletIcon color="blueberry" size={240} />;
+
+// set size or color by css vars
+import {appletIconStencil} from '@workday/canvas-kit-react/icon';
+
+const MyComponent = StyledRadioButton('div')({
+  [appletIconStencil.vars.size]: '2rem',
+  [appletIconStencil.vars.color200]: base.berrySmoothie200,
+  [appletIconStencil.vars.color300]: base.berrySmoothie300,
+  [appletIconStencil.vars.color400]: base.berrySmoothie400,
+  [appletIconStencil.vars.color500]: base.berrySmoothie500,
+});
+
+<MyComponent>
+  <AppletIcon icon={myIcon} />
+</MyComponent>;
+```
 
 #### Graphic
 
-`GraphicStyles` prop has been deprecated and will be merged with `GraphicProps` in a future version.
-`graphicStyles` has been deprecated and will be removed in a future version as a part of
-implementation of stencils and new tokens. Consider to use `graphicStencil` to get styles or class
-name.
+- `GraphicStyles` prop has been deprecated and will be merged with `GraphicProps` in a future
+  version.
+- `graphicStyles` has been deprecated and will be removed in a future version as a part of
+  implementation of stencils and new tokens. Consider to use `graphicStencil` to get styles or class
+  name.
+- `width` and `height` props has been deprecated and will be removed in a future version. Consider
+  using `cs` props instead to set svg sizes.
+
+```tsx
+// before
+<Graphic icon={myGraphic} width={160} />
+
+// after
+<Graphic icon={myGraphic} cs={{"& svg": {width: '10rem'}}} />
+```
 
 #### Icon
 
-Internal only. `Icon` component has been removed and no longer used in icons. It was replaced by
-`Svg` and icon stencils extend `svgStencil`.
+Only impact Canvas Kit. `Icon` component has been removed and no longer used in icons. It was
+replaced by `Svg` and icon stencils extend `svgStencil`.
 
 #### SystemIcon
 
-`SystemIconStyles` prop has been deprecated and will be merged with `SystemIconProps` in a future
-version.
+- `SystemIconStyles` prop has been deprecated and will be merged with `SystemIconProps` in a future
+  version.
 
-`accentHover` is deprecated and will be removed in a future version. Please use the following
-instead in your style overrides:
+- `accentHover` is deprecated and will be removed in a future version. Please use the following
+  instead in your style overrides:
 
 ```tsx
 '&:hover': {
@@ -544,8 +598,8 @@ instead in your style overrides:
 }
 ```
 
-`backgroundHover` is deprecated and will be removed in a future version. Please use the following
-instead in your style overrides:
+- `backgroundHover` is deprecated and will be removed in a future version. Please use the following
+  instead in your style overrides:
 
 ```tsx
 '&:hover': {
@@ -553,8 +607,8 @@ instead in your style overrides:
 }
 ```
 
-`fillHover` is deprecated and will be removed in a future version. Please use the following instead
-in your style overrides:
+- `fillHover` is deprecated and will be removed in a future version. Please use the following
+  instead in your style overrides:
 
 ```tsx
 '&:hover': {
@@ -562,8 +616,8 @@ in your style overrides:
 }
 ```
 
-`fill` is deprecated and will be removed in a future version. Please use `color` and specify
-`accent` color if you want `accent` to be different from `color`.
+- `fill` is deprecated and will be removed in a future version. Please use `color` and specify
+  `accent` color if you want `accent` to be different from `color`.
 
 ```tsx
 '&:hover': {
@@ -571,9 +625,35 @@ in your style overrides:
 }
 ```
 
-`systemIconStyles` has been deprecated and will be removed in a future version as a part of
-implementation of stencils and new tokens. Consider to use `systemIconStencil` to get styles or
-class name.
+- `systemIconStyles` has been deprecated and will be removed in a future version as a part of
+  implementation of stencils and new tokens. Consider to use `systemIconStencil` to get styles or
+  class name.
+
+- `SystemIcon` supports `size`, `color`, `accentColor` and `background` css variables, along with
+  props. Both ways are supported:
+
+```tsx
+// set size or color by props
+<SystemIcon color={base.blueberry100} size={24} />;
+
+// set size or color by css vars
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
+
+const MyComponent = StyledRadioButton('div')({
+  [accentIconStencil.vars.size]: '2rem',
+  [systemIconStencil.vars.color]: base.berrySmoothie400,
+  [systemIconStencil.vars.background]: base.frenchVanilla100,
+  // on hover:
+  '&:hover': {
+    [systemIconStencil.vars.color]: base.berrySmoothie500,
+    [systemIconStencil.vars.background]: 'transparent',
+  },
+});
+
+<MyComponent>
+  <SystemIcon icon={myIcon} />
+</MyComponent>;
+```
 
 ### Radio (Preview)
 

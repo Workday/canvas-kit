@@ -3,7 +3,7 @@ import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
 import {Svg, SvgProps} from './Svg';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, createVars, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, createVars, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 
 /**
  * @deprecated
@@ -83,8 +83,8 @@ const graphicVars = createVars('height', 'width');
 export const graphicStencil = createStencil({
   base: {
     '& svg': {
-      width: graphicVars.width,
-      height: graphicVars.height,
+      width: cssVar(graphicVars.width, '100%'),
+      height: cssVar(graphicVars.height, '100%'),
     },
   },
   modifiers: {
