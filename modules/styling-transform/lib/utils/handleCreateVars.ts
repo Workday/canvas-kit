@@ -6,7 +6,7 @@ import {getVarName} from './getVarName';
 import {makeEmotionSafe} from './makeEmotionSafe';
 import {NodeTransformer} from './types';
 
-export const handleCreateVars: NodeTransformer = (node, {prefix, variables}) => {
+export const handleCreateVars: NodeTransformer = (node, {prefix, variables, onlyLookahead}) => {
   /**
    * This will create a variable
    */
@@ -23,6 +23,10 @@ export const handleCreateVars: NodeTransformer = (node, {prefix, variables}) => 
     vars.forEach(v => {
       variables[`${id}-${makeEmotionSafe(v)}`] = `--${prefix}-${id}-${makeEmotionSafe(v)}`;
     });
+
+    if (onlyLookahead) {
+      return;
+    }
 
     return ts.factory.updateCallExpression(
       node,

@@ -34,8 +34,10 @@ function getTSConfig(basePath = '.') {
     const contents = ts.readConfigFile(tsconfigPath, ts.sys.readFile);
     if (contents.config) {
       // https://github.com/microsoft/TypeScript/issues/5276#issuecomment-149369652
-      config = ts.convertCompilerOptionsFromJson(contents.config.compilerOptions, tsconfigPath)
-        .options;
+      config = ts.convertCompilerOptionsFromJson(
+        contents.config.compilerOptions,
+        tsconfigPath
+      ).options;
     }
   }
 
@@ -102,7 +104,7 @@ function getPlugins(basePath, config) {
  * @returns {string[]}
  */
 function getFiles(basePath, config) {
-  const absolutePath = path.join(__dirname, path.relative(__dirname, path.dirname(basePath))); //?
+  const absolutePath = path.join(__dirname, path.relative(__dirname, path.dirname(basePath)));
   return glob.sync(absolutePath + '/' + config.glob, {ignore: config.ignore || undefined});
 }
 
@@ -115,8 +117,9 @@ function createDocProgram() {
   let program = ts.createProgram(files, tsConfig);
   let parser = new DocParser(program, plugins);
 
-  return {
+  const Doc = {
     parser,
+    program,
     update() {
       files = getFiles(path, config);
       // Update the program to force Typescript to reprocess our changed files. I
@@ -124,12 +127,14 @@ function createDocProgram() {
       // a way to tell Typescript to incrementally update only the changed file.
       // Typescript only supports "incremental" via building and type-checking
       // where I only want a program - I don't need to type check or emit...
-      program = ts.createProgram(files, tsConfig, undefined, program);
-      parser = new DocParser(program, plugins);
+      Doc.program = ts.createProgram(files, tsConfig, undefined, program);
+      Doc.parser = new DocParser(program, plugins);
 
-      return parser;
+      return Doc.parser;
     },
   };
+
+  return Doc;
 }
 
 module.exports.createDocProgram = createDocProgram;

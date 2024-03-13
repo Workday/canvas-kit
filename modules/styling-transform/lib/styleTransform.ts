@@ -50,7 +50,7 @@ const defaultTransformers = [
 
 export default function styleTransformer(
   program: ts.Program,
-  options?: Partial<StyleTransformerOptions>
+  {fallbackFiles = [], ...options}: Partial<StyleTransformerOptions> = {}
 ): ts.TransformerFactory<ts.SourceFile> {
   if (!configLoaded) {
     const configPath = getConfig(program.getCurrentDirectory());
@@ -63,14 +63,10 @@ export default function styleTransformer(
     configLoaded = true;
   }
 
-  const {
-    variables,
-    fallbackFiles = [],
-    transformers = defaultTransformers,
-    ...transformContext
-  } = withDefaultContext(program.getTypeChecker(), {...config, ...options});
-
-  const transform = handleTransformers(transformers);
+  const {variables, ...transformContext} = withDefaultContext(program.getTypeChecker(), {
+    ...config,
+    ...options,
+  });
 
   if (!loadedFallbacks) {
     const files = fallbackFiles
@@ -111,7 +107,7 @@ export default function styleTransformer(
         );
       }
 
-      const newNode = transform(node, {
+      const newNode = transformContext.transform(node, {
         variables: vars,
         ...transformContext,
       });
@@ -123,24 +119,26 @@ export default function styleTransformer(
   };
 }
 
-export function withDefaultContext<T extends TransformerContext>(
+export function withDefaultContext(
   checker: ts.TypeChecker,
-  input: Partial<T> = {}
-): T {
+  {transformers, ...input}: Partial<StyleTransformerOptions> = {}
+): TransformerContext {
   return {
     prefix: 'css',
     getPrefix: path => input.prefix || 'css',
     variables: {},
+    onlyLookahead: false,
     styles,
     keyframes,
     checker,
     getFileName: path => path.replace(/\.tsx?/, '.css'),
     objectTransforms: [] as ObjectTransform[],
+    transform: handleTransformers(transformers || defaultTransformers),
     ...input,
     propertyTransforms: [handleCalc, handlePx2Rem, handleCssVar].concat(
       input.propertyTransforms || []
     ),
-  } as T;
+  } as TransformerContext;
 }
 
 /**
