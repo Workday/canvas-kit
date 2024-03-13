@@ -16,78 +16,94 @@ export interface StatusIndicatorProps extends ExtractProps<typeof Flex, never> {
 }
 
 const statusIndicatorStencil = createStencil({
-  base: {
+  vars: {
+    color: '',
+  },
+  base: ({color}) => ({
     display: 'inline-flex',
     gap: system.space.x1,
     maxWidth: px2rem(200),
     alignItems: 'center',
     borderRadius: system.shape.half,
     height: px2rem(20),
-    padding: `${system.space.zero} ${px2rem(4)}`,
-  },
+    padding: `${system.space.zero} ${system.space.x1}}`,
+    color: color,
+    '& .wd-icon-fill': {
+      fill: color,
+    },
+    ':hover .wd-icon-fill': {
+      fill: color,
+    },
+    '& span': {
+      color: color,
+    },
+  }),
   modifiers: {
     gray: {
-      high: {
-        color: base.frenchVanilla100,
+      high: ({color}) => ({
+        [color]: base.frenchVanilla100,
         background: base.licorice300,
-      },
-      low: {
-        color: base.licorice400,
+      }),
+      low: ({color}) => ({
+        [color]: base.licorice400,
         background: base.soap300,
-      },
+      }),
     },
     orange: {
-      high: {
-        color: base.licorice500,
+      high: ({color}) => ({
+        [color]: base.licorice500,
         background: base.cantaloupe400,
-      },
-      low: {
-        color: base.toastedMarshmallow600,
+      }),
+      low: ({color}) => ({
+        [color]: base.toastedMarshmallow600,
         background: base.cantaloupe100,
-      },
+      }),
     },
     blue: {
-      high: {
-        color: base.frenchVanilla100,
+      high: ({color}) => ({
+        [color]: base.frenchVanilla100,
         background: base.blueberry400,
-      },
-      low: {
-        color: base.blueberry500,
+      }),
+      low: ({color}) => ({
+        [color]: base.blueberry500,
         background: base.blueberry100,
-      },
+      }),
     },
     green: {
-      high: {
-        color: base.frenchVanilla100,
+      high: ({color}) => ({
+        [color]: base.frenchVanilla100,
         background: base.greenApple600,
-      },
-      low: {
-        color: base.greenApple600,
+      }),
+      low: ({color}) => ({
+        [color]: base.greenApple600,
         background: base.greenApple100,
-      },
+      }),
     },
     red: {
-      high: {
-        color: base.frenchVanilla100,
+      high: ({color}) => ({
+        [color]: base.frenchVanilla100,
         background: base.cinnamon500,
-      },
-      low: {
-        color: base.cinnamon600,
+      }),
+      low: ({color}) => ({
+        [color]: base.cinnamon600,
         background: base.cinnamon100,
-      },
+      }),
     },
     transparent: {
-      high: {
+      high: ({color}) => ({
         opacity: 0.85,
-        color: base.frenchVanilla100,
+        [color]: base.frenchVanilla100,
         background: base.blackPepper600,
-      },
-      low: {
+      }),
+      low: ({color}) => ({
         opacity: 0.85,
-        color: base.frenchVanilla100,
+        [color]: base.frenchVanilla100,
         background: base.blackPepper600,
-      },
+      }),
     },
+  },
+  defaultModifiers: {
+    gray: 'low',
   },
 });
 
