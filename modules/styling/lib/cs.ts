@@ -1,9 +1,11 @@
-import {cache, css, keyframes as keyframesEmotion} from '@emotion/css';
-import {getRegisteredStyles} from '@emotion/utils';
-import {serializeStyles, SerializedStyles, CSSObject, Keyframes} from '@emotion/serialize';
+import * as EmotionCSS from '@emotion/css';
+import _createInstance from '@emotion/css/create-instance';
+import {serializeStyles, Keyframes, SerializedStyles, CSSObject} from '@emotion/serialize';
 import {Properties} from 'csstype';
 
 import {generateUniqueId} from './uniqueId';
+
+let _instance: ReturnType<typeof _createInstance>;
 
 export const createStylesCache: Record<string, boolean> = {};
 
@@ -29,6 +31,8 @@ export type StyleProps =
 // Casting the types here for internal use only.
 // We can remove this when CSSType supports CSS custom properties
 type CastStyleProps = Exclude<StyleProps, CSSObjectWithVars> | CSSObject;
+
+type DefaultedVarsShape = Record<string, string> | Record<string, Record<string, string>>;
 
 /**
  * Wrap all unwrapped CSS Variables. For example, `{padding: '--foo'}` will be replaced with
@@ -174,14 +178,13 @@ export function createVars<T extends string, ID extends string>(input: {
   args: T[];
 }): CsVars<T, ID>;
 export function createVars<T extends string>(...args: T[]): CsVars<T, never>;
-export function createVars<
-  T extends Record<string, string> | Record<string, Record<string, string>>,
-  ID extends string = never
->(input: T, id?: ID): DefaultedVars<T, ID>;
-export function createVars<
-  T extends string | Record<string, string> | Record<string, Record<string, string>>,
-  ID extends string
->(...args: T[]): any {
+export function createVars<T extends DefaultedVarsShape, ID extends string = never>(
+  input: T,
+  id?: ID
+): DefaultedVars<T, ID>;
+export function createVars<T extends string | DefaultedVarsShape, ID extends string>(
+  ...args: T[]
+): any {
   const arg0 = args[0];
   if (typeof arg0 === 'object' && !(arg0 as any).id) {
     // this is a defaulted var
@@ -215,10 +218,18 @@ type MakeEmotionSafe<T extends string> = T extends `${infer S}label` ? `${S}labe
 type CSSVarName<ID extends string, Name> = `--${ID}-${MakeEmotionSafe<ToString<Name>>}`;
 
 /**
- * For custom themes that do not overwrite every default.
+ * For custom themes that do not overwrite every default. This is the type given to stencil
+ * functions where everything is optional.
  */
 type OptionalVars<T> = {
   [P in keyof T]?: T[P] extends string ? string : OptionalVars<T[P]>; // coerce CSS Variables to a string to allow any overrides in the function
+};
+
+/**
+ * Vars passed to style config functions. The values will always be strings.
+ */
+type RequiredVars<T> = {
+  [P in keyof T]: T[P] extends string ? string : RequiredVars<T[P]>; // coerce CSS Variables to a string to allow any overrides in the function
 };
 
 type ToString<T> = string & T;
@@ -239,12 +250,12 @@ type ToString<T> = string & T;
  * ```
  */
 export type DefaultedVarsMapToCSSVarNames<
-  V extends Record<string, string> | Record<string, Record<string, string>>,
+  V extends DefaultedVarsShape,
   ID extends string | never
 > = [ID] extends [never]
   ? V extends Record<string, string>
-    ? Record<keyof V, string>
-    : {[K in keyof V]: Record<keyof V[K], string>}
+    ? {[K in keyof V]: V[K]}
+    : {[K in keyof V]: {[K2 in keyof V[K]]: V[K][K2]}}
   : // map type. If the ID is known from the style optimizer, use static keys using string template literals instead of `string`
     {
       [K in keyof V]: V[K] extends Record<string, string>
@@ -272,10 +283,7 @@ type ExtractValue<T, K> = K extends keyof T
  * DefaultedVarsMap<{foo: { bar: 'red' }}, 'my-id'> = { foo: { '--my-id-bar': 'red' }}
  * ```
  */
-export type DefaultedVarsMap<
-  V extends Record<string, string> | Record<string, Record<string, string>>,
-  ID extends string
-> = {
+export type DefaultedVarsMap<V extends DefaultedVarsShape, ID extends string> = {
   $$defaults: [ID] extends [never] // test if `ID` extends `never`.
     ? Record<string, string> // it does. It means we don't know the ID and`Record<string, string>` is as accurate as we can get
     : V extends Record<string, string> // it does not. ID is a string and we need to test what the structure looks like
@@ -285,24 +293,28 @@ export type DefaultedVarsMap<
     : {[K in FlattenObjectKeys<V> as CSSVarName<ID, K>]: ExtractValue<V, K>};
 };
 
-type DefaultedVars<
-  V extends Record<string, string> | Record<string, Record<string, string>>,
-  ID extends string
-> = DefaultedVarsMapToCSSVarNames<V, ID> & DefaultedVarsMap<V, ID> & DefaultVarsFn<V>;
+type DefaultedVars<V extends DefaultedVarsShape, ID extends string> = DefaultedVarsMapToCSSVarNames<
+  V,
+  ID
+> &
+  DefaultedVarsMap<V, ID> &
+  DefaultVarsFn<V>;
 
 type StencilDefaultVars<
-  V extends Record<string, string> | Record<string, Record<string, string>>,
+  V extends DefaultedVarsShape,
   E extends BaseStencil<any, any, any, any> = never,
   ID extends string = never
-> = [E] extends [BaseStencil<any, infer VE, any, infer IDE>]
+> = [E] extends [never]
+  ? DefaultedVars<V, ID>
+  : E extends BaseStencil<any, infer VE, any, infer IDE>
   ? DefaultedVarsMapToCSSVarNames<VE, IDE> &
       DefaultedVarsMap<VE, IDE> &
       DefaultedVarsMapToCSSVarNames<V, ID> &
       DefaultedVarsMap<V, ID> &
       DefaultVarsFn<V>
-  : DefaultedVars<V, ID>;
+  : never;
 
-type DefaultVarsFn<V extends Record<string, string> | Record<string, Record<string, string>>> = {
+type DefaultVarsFn<V extends DefaultedVarsShape> = {
   (input: OptionalVars<V>): Record<string, string>;
 };
 
@@ -312,10 +324,10 @@ type FlattenObjectKeys<T extends Record<string, any>, K = keyof T> = K extends s
     : `${ToString<K>}`
   : never;
 
-export function createDefaultedVars<
-  T extends Record<string, string> | Record<string, Record<string, string>>,
-  ID extends string = never
->(input: T, id?: ID): DefaultedVars<T, ID> {
+export function createDefaultedVars<T extends DefaultedVarsShape, ID extends string = never>(
+  input: T,
+  id?: ID
+): DefaultedVars<T, ID> {
   const localId = id || generateUniqueId();
 
   const result: DefaultedVars<{}, string> = input => {
@@ -512,6 +524,8 @@ export type CsToPropsReturn = {className?: string; style?: CSSObjectWithVars};
  * @returns
  */
 export function csToProps(input: CSToPropsInput): CsToPropsReturn {
+  const instance = getInstance();
+
   // input is a string, so it must only be a class name
   if (typeof input === 'string') {
     return {className: input};
@@ -547,7 +561,7 @@ export function csToProps(input: CSToPropsInput): CsToPropsReturn {
     }
 
     if (hasStaticStyles) {
-      const className = css(staticStyles);
+      const className = instance.css(staticStyles);
       return {style: cssVars, className};
     }
     return {style: input};
@@ -624,6 +638,7 @@ export interface CSProps {
 export function createStyles(
   ...args: ({name: string; styles: string} | StyleProps | string)[]
 ): string {
+  const instance = getInstance();
   return args
     .map(input => {
       if (typeof input === 'string') {
@@ -632,7 +647,7 @@ export function createStyles(
 
       // If we were called with a {name, styles} object, it must be optimized. We'll shortcut here
       if (typeof input === 'object' && input.name) {
-        return css.call(null, input as CastStyleProps);
+        return instance.css(input as CastStyleProps);
       }
 
       const convertedStyles = convertAllProperties(input);
@@ -657,8 +672,8 @@ export function createStyles(
       // Without this "fix", anyone using the Emotion babel plugin would get different results than
       // intended when styles are merged.
       const name = generateUniqueId();
-      createStylesCache[`${cache.key}-${name}`] = true;
-      return css.call(null, {name, styles});
+      createStylesCache[`${instance.cache.key}-${name}`] = true;
+      return instance.css({name, styles});
     })
     .join(' ');
 }
@@ -735,6 +750,8 @@ export function handleCsProp<
   localCs?: CSToPropsInput
 ): Omit<T, 'cs'> {
   const {cs, style, className, ...restProps} = elemProps;
+  const instance = getInstance();
+
   // We are going to track if any runtime styles are detected
   let shouldRuntimeMergeStyles = false;
 
@@ -755,12 +772,13 @@ export function handleCsProp<
   // `@emotion/styled` and `@emotion/react` respectively that merge styles in a similar manner.
   // - https://github.com/emotion-js/emotion/blob/f3b268f7c52103979402da919c9c0dd3f9e0e189/packages/styled/src/base.js#L120C51-L138
   // - https://github.com/emotion-js/emotion/blob/f3b268f7c52103979402da919c9c0dd3f9e0e189/packages/react/src/emotion-element.js#L102-L116
-  (returnProps.className || '').split(' ').forEach(name => {
+  const returnClassNames = (returnProps.className || '').split(' ');
+  returnClassNames.forEach(name => {
     // Here we detect if a className is associated with Emotion's cache. Styles created via
     // `createStyles` do not need special runtime merge treatment, but `@emotion/react` and
     // `@emotion/styled` do. The `createStylesCache` tracks all styles injected into the cache via
     // `createStyles`, so those are filtered out.
-    if (!createStylesCache[name] && cache.registered[name]) {
+    if (!createStylesCache[name] && instance.cache.registered[name]) {
       shouldRuntimeMergeStyles = true;
     }
   });
@@ -770,25 +788,7 @@ export function handleCsProp<
   // If runtime styles are detected, we need to do extra work to ensure styles merge according to
   // the rules of Emotion's runtime.
   if (shouldRuntimeMergeStyles) {
-    const registeredStyles: string[] = [];
-
-    // We are using the raw `css` instead of `createStyles` because `css` uses style hashing and
-    // `createStyles` generates a new ID every time. We could use `createStyles` here, but it would
-    // be more wasteful and new styles would be generated each React render cycle. `css` is safe to
-    // use inside a render function while `createStyles` should always be used outside the React
-    // render cycle. The following is `@emotion/utils` and it mutates the passed in
-    // `registeredStyles` array. It uses the cache of registered styles and the original className.
-    // It returns a string with found registered class names removed.
-    returnProps.className = getRegisteredStyles(
-      cache.registered,
-      registeredStyles,
-      returnProps.className || ''
-    );
-
-    // The `className` is mutated again, but with a brand new CSS class name of all the merged
-    // registered styles. This is how Emotion merges styles from the `css` prop and `styled`
-    // components.
-    returnProps.className += css(registeredStyles);
+    returnProps.className = getInstance().cx(returnClassNames);
   }
 
   return {
@@ -798,19 +798,21 @@ export function handleCsProp<
 }
 
 type StylesReturn<
-  V extends Record<string, string> | Record<string, Record<string, string>> = {},
+  V extends DefaultedVarsShape = {},
   E extends BaseStencil<any, any, any, any> = never
 > =
   | SerializedStyles
   | CSSObjectWithVars
   | ((
-      vars: [E] extends [BaseStencil<any, infer VE, any, any>]
-        ? OptionalVars<VE & V>
-        : OptionalVars<V>
+      vars: [E] extends [never]
+        ? RequiredVars<V>
+        : [E] extends [BaseStencil<any, infer VE, any, any>]
+        ? RequiredVars<VE & V>
+        : never
     ) => SerializedStyles | CSSObjectWithVars);
 
 export type StencilModifierConfig<
-  V extends Record<string, string> | Record<string, Record<string, string>> = {},
+  V extends DefaultedVarsShape = {},
   E extends BaseStencil<any, any, any, any> = never
 > = Record<string, Record<string, StylesReturn<V, E>>>;
 
@@ -819,13 +821,18 @@ export type StencilCompoundConfig<M> = {
   styles: SerializedStyles | CSSObjectWithVars;
 };
 
-type ModifierValuesStencil<M extends StencilModifierConfig<any, any>> = {
-  [P in keyof M]?: MaybeBoolean<keyof M[P]>;
+type ModifierValuesStencil<
+  M extends StencilModifierConfig<any, any>,
+  V extends DefaultedVarsShape = {}
+> = {
+  [P in keyof M]?: P extends keyof V
+    ? MaybeBoolean<keyof M[P]> | (string & {}) // If both modifiers and variables define the same key, the value can be either a modifier or a string
+    : MaybeBoolean<keyof M[P]>;
 };
 
 export interface StencilConfig<
   M extends Record<string, Record<string, StylesReturn<V, E>>>,
-  V extends Record<string, string> | Record<string, Record<string, string>> = {},
+  V extends DefaultedVarsShape = {},
   E extends BaseStencil<any, any, any, any> = never,
   ID extends string | never = never
 > {
@@ -980,14 +987,13 @@ export interface StencilConfig<
   defaultModifiers?: {[K in keyof M]?: keyof M[K]};
 }
 
-type StencilModifierReturn<
-  M extends StencilModifierConfig<V>,
-  V extends Record<string, string> | Record<string, Record<string, string>>
-> = {[K1 in keyof M]: {[K2 in keyof M[K1]]: string}};
+type StencilModifierReturn<M extends StencilModifierConfig<V>, V extends DefaultedVarsShape> = {
+  [K1 in keyof M]: {[K2 in keyof M[K1]]: string};
+};
 
 export interface BaseStencil<
   M extends StencilModifierConfig<V>,
-  V extends Record<string, string> | Record<string, Record<string, string>>,
+  V extends DefaultedVarsShape,
   E extends BaseStencil<any, any, any, any> = never,
   ID extends string = never
 > {
@@ -999,14 +1005,14 @@ export interface BaseStencil<
 
 export interface Stencil<
   M extends StencilModifierConfig<V, E>,
-  V extends Record<string, string> | Record<string, Record<string, string>>,
+  V extends DefaultedVarsShape,
   E extends BaseStencil<any, any, any, any> = never,
   ID extends string = never
 > extends BaseStencil<M, V, E, ID> {
   (
     // If this stencil extends another stencil, merge the inputs
     options?: [E] extends [never]
-      ? ModifierValuesStencil<M> & VariableValuesStencil<V>
+      ? ModifierValuesStencil<M, V> & VariableValuesStencil<V>
       : E extends BaseStencil<infer ME, infer VE, any, any>
       ? ModifierValuesStencil<ME & M> & VariableValuesStencil<VE & V>
       : never
@@ -1022,9 +1028,7 @@ export interface Stencil<
   defaultModifiers: {[K in keyof M]?: keyof M[K]};
 }
 
-type VariableValuesStencil<
-  V extends Record<string, string> | Record<string, Record<string, string>>
-> = V extends Record<string, string>
+type VariableValuesStencil<V extends DefaultedVarsShape> = V extends Record<string, string>
   ? {[K in keyof V]?: string}
   : {[K1 in keyof V]?: {[K2 in keyof V[K1]]: string}};
 
@@ -1038,7 +1042,7 @@ function onlyDefined<T>(input: T | undefined): input is T {
  */
 export function createStencil<
   M extends StencilModifierConfig<V>,
-  V extends Record<string, string> | Record<string, Record<string, string>> = {},
+  V extends DefaultedVarsShape = {},
   E extends BaseStencil<any, any, any, any> = never, // use BaseStencil to avoid infinite loops
   ID extends string = never
 >(config: StencilConfig<M, V, E, ID>, id?: ID): Stencil<M, V, E, ID> {
@@ -1120,8 +1124,64 @@ export function createStencil<
   return stencil;
 }
 
+/**
+ * Gets the current Emotion CSS instance, falling back to the one from `@emotion/css` if one wasn't
+ * already created. This allows a custom cache to be created as an opt-in
+ */
+export function getInstance(): typeof _instance {
+  if (!_instance) {
+    _instance = EmotionCSS;
+  }
+
+  return _instance;
+}
+
+/**
+ * Creates a custom instance of Emotion CSS. If this function is never called, the instance will be
+ * what gets imported from `@emotion/css`. This function must be called before any Canvas Kit
+ * component is imported or before any other `@workday/canvas-kit-styling` function is called. All
+ * the style utility functions need an instance and will automatically create one if one isn't
+ * already created.
+ *
+ * The style utilities inject styles as soon as they are called which means an instance needs to be
+ * created before any Canvas Kit components are even imported. Your application bootstrap must
+ * import a file that imports `@workday/canvas-kit-styling` and calls `createInstance` _before_ any
+ * other Canvas Kit components are imported.
+ */
+export const createInstance: typeof _createInstance = options => {
+  if (!_instance) {
+    _instance = _createInstance({key: 'css', ...options});
+  } else {
+    // @ts-ignore
+    if (process && process.env.NODE_ENV === 'development') {
+      console.warn(
+        'An instance has already been created. `createInstance` cannot be called after styles have already been created. Canvas Kit styles are created immediately, so this function must be called before any Canvas Kit components are even imported.'
+      );
+    }
+  }
+
+  return _instance;
+};
+
+/**
+ * Returns the cache used by all style utilities
+ */
+export function getCache() {
+  return getInstance().cache;
+}
+
+/**
+ * Create static keyframes. Use as a drop-in replacement to `keyframes` found in `@emotion/css` or
+ * `@emotion/react`
+ */
 export function keyframes<ID extends string>(
   ...args: ({name: ID; styles: string} | StyleProps | TemplateStringsArray)[]
 ): ID {
-  return keyframesEmotion(...(args as any)) as ID;
+  return getInstance().keyframes(...(args as any)) as ID;
 }
+
+/**
+ * Allows injecting of global styles.
+ */
+export const injectGlobal: typeof EmotionCSS.injectGlobal = (...args: any[]) =>
+  getInstance().injectGlobal(...args);
