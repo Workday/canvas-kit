@@ -102,6 +102,9 @@ const statusIndicatorStencil = createStencil({
       },
     },
   },
+  defaultModifiers: {
+    gray: 'low',
+  },
 });
 
 /**
