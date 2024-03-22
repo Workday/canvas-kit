@@ -105,7 +105,13 @@ describe('handleCreateStencil', () => {
   it('should handle dynamic key with stencil variables for nested key', () => {
     const program = createProgramFromSource(`
     import {createStencil} from '@workday/canvas-kit-styling';
-    import {systemIconStencil} from '@workday/canvas-kit-react/icon'
+
+    const systemIconStencil = createStencil({
+      vars: {
+        size: '2rem',
+      },
+      base: {}
+    });
 
     const buttonStencil = createStencil({
       base: {
@@ -116,7 +122,7 @@ describe('handleCreateStencil', () => {
 
     const result = transform(program, 'test.ts', withDefaultContext(program.getTypeChecker()));
 
-    expect(result).toContain('styles: "--system-icon-vars-size:1rem;"');
+    expect(result).toContain('styles: "--css-system-icon-size:1rem;"');
   });
 
   it('should handle parsing variables in base styles via an ArrowFunction and ParenthesizedExpression', () => {
