@@ -27,7 +27,7 @@ export interface TextProps extends BoxProps {
   variant?: 'error' | 'hint' | 'inverse';
 }
 
-const textStencil = createStencil({
+export const textStencil = createStencil({
   base: {},
   modifiers: {
     typeLevel: {
