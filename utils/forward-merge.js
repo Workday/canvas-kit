@@ -177,8 +177,8 @@ async function main() {
   }
 
   // fix any dependency mismatches of dependencies in the mono repo
-  const files = await glob('modules/*/package.json'); //?
-  const monoDependencies = await getMonoDependencies(files); //?
+  const files = await glob('modules/*/package.json');
+  const monoDependencies = await getMonoDependencies(files);
 
   for (const file of files) {
     const contents = (await fs.readFile(file)).toString();
@@ -247,7 +247,7 @@ async function updateChangelog() {
     }
   } while (lines.length);
 
-  const sortedReleases = orderBy(releases, 'date', 'desc'); //?
+  const sortedReleases = orderBy(releases, 'date', 'desc');
 
   const contents = [
     ...header,

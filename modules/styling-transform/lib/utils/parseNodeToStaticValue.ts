@@ -46,7 +46,6 @@ export function parseNodeToStaticValue(
   // a.b
   if (ts.isPropertyAccessExpression(node)) {
     const varName = getCSSVariableKey(getPropertyAccessExpressionText(node));
-
     if (variables[varName]) {
       return variables[varName];
     }
@@ -56,6 +55,11 @@ export function parseNodeToStaticValue(
     }
   }
 
+  if (ts.isComputedPropertyName(node) && ts.isIdentifier(node.expression)) {
+    const varName = node.expression.text;
+
+    return variables[varName];
+  }
   // [a.b]
   if (ts.isComputedPropertyName(node) && ts.isPropertyAccessExpression(node.expression)) {
     const varName = getCSSVariableKey(getPropertyAccessExpressionText(node.expression));
@@ -66,6 +70,10 @@ export function parseNodeToStaticValue(
 
     if (keyframes[varName]) {
       return keyframes[varName];
+    }
+
+    if (varName) {
+      return `--${varName}`;
     }
   }
 

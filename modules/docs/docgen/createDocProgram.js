@@ -34,8 +34,10 @@ function getTSConfig(basePath = '.') {
     const contents = ts.readConfigFile(tsconfigPath, ts.sys.readFile);
     if (contents.config) {
       // https://github.com/microsoft/TypeScript/issues/5276#issuecomment-149369652
-      config = ts.convertCompilerOptionsFromJson(contents.config.compilerOptions, tsconfigPath)
-        .options;
+      config = ts.convertCompilerOptionsFromJson(
+        contents.config.compilerOptions,
+        tsconfigPath
+      ).options;
     }
   }
 
@@ -102,7 +104,7 @@ function getPlugins(basePath, config) {
  * @returns {string[]}
  */
 function getFiles(basePath, config) {
-  const absolutePath = path.join(__dirname, path.relative(__dirname, path.dirname(basePath))); //?
+  const absolutePath = path.join(__dirname, path.relative(__dirname, path.dirname(basePath)));
   return glob.sync(absolutePath + '/' + config.glob, {ignore: config.ignore || undefined});
 }
 

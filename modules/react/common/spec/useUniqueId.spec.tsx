@@ -8,7 +8,6 @@ describe('useUniqueId.ts', () => {
     it('should generate a unique id each call', () => {
       const id = generateUniqueId();
       expect(generateUniqueId()).not.toEqual(id);
-      console.log(id);
     });
 
     it('should always start with a letter', () => {
