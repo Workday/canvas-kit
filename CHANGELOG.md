@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.40](https://github.com/Workday/canvas-kit/releases/tag/v9.1.40) (2024-03-22)
+
+### Components
+
+- fix: Revert overflow calculation until we find a better solution ([#2651](https://github.com/Workday/canvas-kit/pull/2651)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  Reverting the sub pixel calculation on the overflow logic until we find a better solution.
 ## [v10.3.22](https://github.com/Workday/canvas-kit/releases/tag/v10.3.22) (2024-03-11)
 
 ### Infrastructure
@@ -85,6 +91,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Infrastructure
 
 - ci: Fix forward-merge version conflicts ([#2568](https://github.com/Workday/canvas-kit/pull/2568)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Fix resolve-package-json merge file ([#2575](https://github.com/Workday/canvas-kit/pull/2575)) ([@NicholasBoll](https://github.com/NicholasBoll))
 
 
 ## [v10.3.12](https://github.com/Workday/canvas-kit/releases/tag/v10.3.12) (2024-02-12)
