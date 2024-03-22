@@ -912,7 +912,7 @@ describe('docParser', () => {
           foo: Foo
         };
       `);
-      const docs = parse(program, 'test.ts'); //?
+      const docs = parse(program, 'test.ts');
 
       expect(docs).toHaveProperty('0.name', 'Bar');
       expect(docs).toHaveProperty('0.type.kind', 'type');
