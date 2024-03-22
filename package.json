@@ -4,21 +4,14 @@
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@babel/core": "^7.8.0",
-    "@babel/plugin-proposal-class-properties": "^7.13.0",
-    "@babel/plugin-proposal-private-property-in-object": "^7.14.0",
     "@babel/plugin-transform-modules-commonjs": "^7.2.0",
     "@babel/plugin-transform-runtime": "^7.4.4",
     "@babel/preset-env": "^7.8.0",
     "@babel/preset-react": "^7.8.0",
     "@babel/preset-typescript": "^7.1.0",
-    "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.1.0",
-    "@emotion/babel-plugin": "^11.9.2",
     "@emotion/eslint-plugin": "^11.7.0",
     "@emotion/is-prop-valid": "^1.1.1",
     "@storybook/addon-essentials": "^6.5.9",
-    "@storybook/addon-postcss": "^2.0.0",
     "@storybook/addon-storysource": "^6.5.9",
     "@storybook/components": "^6.5.9",
     "@storybook/react": "^6.5.9",
@@ -38,21 +31,14 @@
     "@types/react-dom": "^18.0.5",
     "@types/react-test-renderer": "^16.9.0",
     "@types/react-transition-group": "^2.9.2",
+    "@types/stylis": "^4.2.0",
     "@typescript-eslint/eslint-plugin": "^5.10.1",
     "@typescript-eslint/parser": "^5.10.1",
-    "autoprefixer": "^9.5.0",
     "axe-core": "^3.4.0",
-    "babel-jest": "^26.0.1",
-    "babel-loader": "^8.1.0",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "chalk": "4.1.2",
-    "commitizen": "^4.0.4",
     "common-tags": "^1.8.0",
     "conventional-changelog-conventionalcommits": "^4.6.1",
     "core-js": "^3.5.0",
-    "css-loader": "^3.2.0",
-    "css-mqpacker": "^7.0.0",
-    "cssstats": "^3.3.0",
     "cypress": "^9.2.1",
     "cypress-axe": "^0.5.1",
     "cypress-keyboard-plugin": "^1.0.3",
@@ -63,7 +49,6 @@
     "cz-conventional-changelog": "^2.1.0",
     "depcheck": "^0.9.2",
     "emoji-js": "^3.4.1",
-    "emotion-theming": "^10.0.10",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.3.0",
     "eslint-plugin-compat": "next",
@@ -84,37 +69,27 @@
     "jest": "^27.4.7",
     "jest-axe": "^3.4.0",
     "jest-junit": "^13.0.0",
-    "lerna": "^3.22.1",
-    "lint-staged": "8.0.5",
+    "lerna": "^5.6.2",
+    "lint-staged": "^14.0.1",
     "markdown-to-jsx": "^6.10.3",
     "mkdirp": "^1.0.3",
     "node-fetch": "^3.1.0",
     "npm-run-all": "^4.1.5",
-    "postcss-banner": "^3.0.1",
-    "postcss-discard-duplicates": "^4.0.2",
-    "postcss-inline-svg": "^3.1.1",
-    "postcss-loader": "^2.1.4",
-    "prettier": "^1.19.0",
+    "prettier": "^2.2.0",
     "prismjs": "^1.23.0",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "replace-in-files": "^2.0.3",
     "rimraf": "^2.6.3",
-    "rollup": "^1.16.2",
-    "rollup-plugin-commonjs": "^10.0.0",
-    "rollup-plugin-node-resolve": "^5.1.0",
-    "rollup-plugin-terser": "^5.0.0",
-    "sass": "^1.61.0",
-    "sass-loader": "^10.0.0",
     "semver": "^7.3.2",
     "string-replace-loader": "2.3.0",
-    "style-loader": "^1.0.0",
     "ts-loader": "^6.2.0",
+    "ttypescript": "^1.5.15",
     "typescript": "4.2",
     "yargs": "^16.2.0"
   },
   "scripts": {
-    "start": "node utils/download-fonts.js && node --max-old-space-size=2048 node_modules/.bin/start-storybook -p 9001 -c .storybook -s ./public",
+    "start": "node utils/download-fonts.js && node --max-old-space-size=4096 node_modules/.bin/start-storybook -p 9001 -c .storybook -s ./public",
     "watch": "TSC_NONPOLLING_WATCHER=1 lerna run watch --parallel --stream",
     "clean": "lerna run clean",
     "depcheck": "lerna run depcheck",
@@ -126,9 +101,7 @@
     "promote-component": "./utils/promote-component.js",
     "precommit": "lint-staged",
     "chromatic": "chromatic",
-    "commit": "git-cz",
-    "commitmsg": "commitlint --edit $HUSKY_GIT_PARAMS",
-    "build-storybook": "node utils/download-fonts.js && build-storybook -c .storybook -o docs -s ./public ",
+    "build-storybook": "node utils/download-fonts.js && NODE_OPTIONS=--max_old_space_size=4096 build-storybook -c .storybook -o docs -s ./public",
     "lint": "node utils/check-lockfile.js && node utils/check-mismatched-dependencies.js && eslint -c ./.eslintrc.js --ext=jsx,ts,tsx .",
     "typecheck": "npm-run-all --parallel typecheck:src typecheck:cypress typecheck:types typecheck:specs typecheck:stories",
     "typecheck:src": "lerna run typecheck:src",
@@ -144,29 +117,10 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run"
   },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
   "lint-staged": {
-    "linters": {
-      "*.{ts,tsx}": [
-        "yarn format",
-        "git add"
-      ],
-      "*.json": [
-        "node utils/check-mismatched-dependencies.js",
-        "git add"
-      ],
-      "*.{js,jsx,json,md}": [
-        "git add"
-      ],
-      "yarn.lock": [
-        "node utils/check-lockfile.js",
-        "git add"
-      ]
-    }
+      "*.{ts,tsx}": "yarn format",
+      "*.json": "node utils/check-mismatched-dependencies.js",
+      "yarn.lock": "node utils/check-lockfile.js"
   },
   "workspaces": [
     "modules/**"
@@ -174,6 +128,10 @@
   "browserslist": "> 5%, last 2 firefox versions, last 2 chrome versions, last 2 safari versions, last 2 edge versions, Firefox ESR, not ie 11",
   "dependencies": {
     "@emotion/react": "^11.7.1",
-    "@emotion/styled": "^11.6.0"
+    "@emotion/styled": "^11.6.0",
+    "@workday/canvas-accent-icons-web": "^3.0.9",
+    "@workday/canvas-applet-icons-web": "^2.0.9",
+    "@workday/canvas-system-icons-web": "^3.0.0",
+    "@workday/canvas-tokens-web": "^1.0.0"
   }
 }

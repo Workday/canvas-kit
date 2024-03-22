@@ -13,7 +13,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {Flex} from '@workday/canvas-kit-react/layout';
 
-import {useBanner, useBannerModel, useThemedPalette} from './hooks';
+import {useBannerModel, useThemedPalette} from './hooks';
 
 import {BannerIcon} from './BannerIcon';
 import {BannerLabel} from './BannerLabel';
@@ -70,7 +70,6 @@ const styles: CSSProperties = {
 export const Banner = createContainer('button')({
   displayName: 'Banner',
   modelHook: useBannerModel,
-  elemPropsHook: useBanner,
   subComponents: {
     /**
      * `Banner.Icon` is a styled {@link SystemIcon}. The icon defaults to exclamationTriangleIcon or

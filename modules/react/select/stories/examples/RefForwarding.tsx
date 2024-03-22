@@ -1,29 +1,44 @@
 import React from 'react';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {Select, SelectOption} from '@workday/canvas-kit-react/select';
+import {Select} from '@workday/canvas-kit-react/select';
+
+const options = [
+  'E-mail',
+  'Phone',
+  'Fax',
+  'Mail',
+  'Mobile Phone',
+  'The Ontologically Anthropocentric Sensory Immersive Simulation',
+];
 
 export const RefForwarding = () => {
   const [value, setValue] = React.useState('medium');
-  const ref = React.useRef(null);
+  const ref = React.useRef<HTMLInputElement>(null);
 
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
   };
 
   const handleClick = () => {
-    ref.current.focus();
+    if (ref && ref.current) {
+      console.log(ref);
+      ref.current.focus();
+    }
   };
 
   return (
     <>
-      <FormField label="Pizza Size">
-        <Select onChange={handleChange} ref={ref} value={value}>
-          <SelectOption label="Small" value="small" />
-          <SelectOption label="Medium" value="medium" />
-          <SelectOption label="Large" value="large" />
-        </Select>
-      </FormField>
+      <Select items={options}>
+        <FormField label="Contact">
+          <Select.Input ref={ref} onChange={e => handleChange(e)} />
+          <Select.Popper>
+            <Select.Card>
+              <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
+            </Select.Card>
+          </Select.Popper>
+        </FormField>
+      </Select>
       <PrimaryButton onClick={handleClick}>Focus Select</PrimaryButton>
     </>
   );

@@ -33,7 +33,7 @@ together.
 ```tsx
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import {jsx} from '@emotion/core';
+import {jsx} from '@emotion/react';
 import {ComponentStyles, useThemeRTL} from '@workday/canvas-kit-labs-react/common';
 import {space} from '@workday/canvas-kit-react/tokens';
 const styles: ComponentStyles = {
@@ -80,7 +80,7 @@ alerts, but use them in combination with icons or hint text.
 ```tsx
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import {jsx} from '@emotion/core';
+import {jsx} from '@emotion/react';
 import React from 'react';
 import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
 import {useThemedRing} from '@workday/canvas-kit-labs-react/common';

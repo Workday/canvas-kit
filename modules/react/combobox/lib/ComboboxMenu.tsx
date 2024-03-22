@@ -3,10 +3,11 @@ import React from 'react';
 import {createSubcomponent} from '@workday/canvas-kit-react/common';
 import {Menu} from '@workday/canvas-kit-react/menu';
 
-import {useComboboxModel} from './useComboboxModel';
+import {useComboboxModel} from './hooks/useComboboxModel';
 import {ComboboxMenuList} from './ComboboxMenuList';
 import {ComboboxMenuItem} from './ComboboxMenuItem';
 import {ComboboxCard} from './ComboboxCard';
+import {ComboboxMenuPopper} from './ComboboxPopper';
 
 export interface ComboboxMenuProps {
   /**
@@ -23,9 +24,9 @@ export const ComboboxMenu = createSubcomponent()({
      * {@link ComboboxInput Combobox.Input}. It renders a `div` element that is portalled to the
      * `document.body` which is controlled by the {@link PopupStack}. The `PopupStack` is not part
      * of React. This means no extra props given to this component will be forwarded to the `div`
-     * element, but the `ref` will be forwarded.
+     * element, but the `ref` will be forwarded. Also fallback placements for the popper with be either `top` or `bottom`.
      */
-    Popper: Menu.Popper,
+    Popper: ComboboxMenuPopper,
     /**
      * The combobox menu list follows the Collections API. A list can either contain static items or
      * a render prop and `items` to the model.

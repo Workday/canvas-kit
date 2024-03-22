@@ -1,5 +1,5 @@
 import {createElemPropsHook} from '@workday/canvas-kit-react/common';
-import {useListModel} from '@workday/canvas-kit-react/collection';
+import {useListModel, Item} from '@workday/canvas-kit-react/collection';
 
 /**
  * This elemProps hook allows for children values to be considered identifiers if the children are
@@ -27,9 +27,9 @@ import {useListModel} from '@workday/canvas-kit-react/collection';
  * ```
  */
 export const useListItemAllowChildStrings = createElemPropsHook(useListModel)(
-  (_, __, elemProps: {'data-id'?: string; children?: React.ReactNode} = {}) => {
+  (_, __, elemProps: {'data-id'?: string; children?: React.ReactNode; item?: Item<any>} = {}) => {
     const props: {'data-id'?: string} = {};
-    if (!elemProps['data-id'] && typeof elemProps.children === 'string') {
+    if (!elemProps['data-id'] && !elemProps.item && typeof elemProps.children === 'string') {
       props['data-id'] = elemProps.children;
     }
 
