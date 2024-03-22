@@ -63,7 +63,7 @@ export function getPaletteColorsForFocusRing(
  * alerts, but use them in combination with icons or hint text.
  * ```tsx
  * // Add here jsx pragma to use css
- * import {jsx} from '@emotion/core';
+ * import {jsx} from '@emotion/react';
  * import React from 'react';
  * import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
  * import {useThemedRing} from '@workday/canvas-kit-react/common';

@@ -1,4 +1,3 @@
-import {css} from '@emotion/css';
 import {CSToPropsInput, handleCsProp} from '@workday/canvas-kit-styling';
 import {boxStyleFn} from '../Box';
 import {backgroundStyleFnConfigs} from './background';
@@ -71,20 +70,13 @@ export function mergeStyles<T extends {}>(
     return result;
   }, {});
 
-  // We need to determine if style props have been used. If they have, we need to merge all the CSS
-  // classes into a single class name in the order that the class names are listed. This variable
-  // will collect the CSS class name created by Emotion if we detect style props.
-  let stylePropsClassName = '';
+  let styles = {};
 
   // We have style props. We need to create style and merge with our `csToProps` to get the correct
   // merging order for styles
   if (shouldRuntimeMergeStyles) {
-    const styles = boxStyleFn(styleProps);
-    stylePropsClassName = css(styles);
+    styles = boxStyleFn(styleProps);
   }
 
-  return handleCsProp(elemProps, [localCs, stylePropsClassName]) as Omit<
-    T,
-    'cs' | keyof CommonStyleProps
-  >;
+  return handleCsProp(elemProps, [localCs, styles]) as Omit<T, 'cs' | keyof CommonStyleProps>;
 }

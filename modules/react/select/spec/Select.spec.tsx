@@ -3,7 +3,7 @@ import {render, fireEvent} from '@testing-library/react';
 
 import {Select} from '../lib/Select';
 
-describe.only('Select', () => {
+describe('Select', () => {
   const cb = jest.fn();
 
   const role = 'combobox';

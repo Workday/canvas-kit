@@ -4,7 +4,7 @@ import React from 'react';
 import {expectTypeOf} from 'expect-type';
 import {Properties} from 'csstype';
 import {SerializedStyles} from '@emotion/serialize';
-import {css, cache} from '@emotion/css';
+import {css} from '@emotion/css';
 import {jsx, CacheProvider} from '@emotion/react';
 import styled from '@emotion/styled';
 import {render as rtlRender, screen} from '@testing-library/react';
@@ -21,8 +21,11 @@ import {
   createStencil,
   handleCsProp,
   keyframes,
+  CSProps,
+  getCache,
 } from '../lib/cs';
 
+const cache = getCache();
 // We need to force Emotion's cache wrapper to use the cache from `@emotion/css` for tests to pass
 const CacheWrapper = props => <CacheProvider value={cache} {...props} />;
 // @ts-ignore We want the types to be the same, but I don't care to fix the error
@@ -155,6 +158,11 @@ describe('createStyles', () => {
       const myVars = createVars('color');
 
       expect(myVars({color: 'red'})).toHaveProperty(myVars.color, 'red');
+    });
+
+    it('should return a function that takes in an object with the values and return a style object with wrapped css prop', () => {
+      const myVars = createVars('color');
+      expect(myVars({color: '--my-var'})).toHaveProperty(myVars.color, 'var(--my-var)');
     });
 
     it('should make types Emotion safe when ID is known', () => {
@@ -643,6 +651,24 @@ describe('createStyles', () => {
       expect(myStencil).toHaveProperty('vars.color', expect.stringMatching(/--[a-z0-9]+-color/));
     });
 
+    it('should coerce a variable input to a type of string', () => {
+      const myStencil = createStencil({
+        vars: {
+          foo: '--base-color' as '--base-color',
+        },
+        base: {},
+      });
+
+      type Options = Parameters<typeof myStencil>[0];
+
+      expectTypeOf<Options['foo']>().toEqualTypeOf<string>();
+
+      // make sure we can call the function with a string
+      myStencil({
+        foo: '--another-color',
+      });
+    });
+
     it('should return access to variables with an ID for use in other components', () => {
       const myStencil = createStencil(
         {
@@ -659,6 +685,20 @@ describe('createStyles', () => {
       expectTypeOf(myStencil.vars.color).toEqualTypeOf<'--foo-color'>();
 
       expect(myStencil).toHaveProperty('vars.color', expect.stringMatching(/--foo-color/));
+    });
+
+    it('should return a function that takes in an object with the values and wrap passed css variables', () => {
+      const myStencil = createStencil({
+        vars: {
+          color: 'red',
+        },
+        base: {},
+      });
+
+      expect(myStencil({color: '--my-var'}).style).toHaveProperty(
+        myStencil.vars.color,
+        'var(--my-var)'
+      );
     });
 
     it('should handle variables and pass them to the base function', () => {
@@ -720,6 +760,46 @@ describe('createStyles', () => {
       }
       expect(found).toEqual(true);
     });
+
+    it('should handle both variables and modifiers sharing the same key', () => {
+      const myStencil = createStencil({
+        vars: {
+          width: '10px',
+          height: '10px',
+        },
+        base({width}) {
+          return {width: width};
+        },
+        modifiers: {
+          width: {
+            zero: {
+              width: '0',
+            },
+          },
+          foo: {
+            true: {},
+          },
+        },
+      });
+
+      type Arg = Parameters<typeof myStencil>[0];
+      expectTypeOf<Arg>().toHaveProperty('width');
+      expectTypeOf<Arg['width']>().toMatchTypeOf<(string & {}) | 'zero' | undefined>();
+
+      const result = myStencil({width: '70px', height: '10px'});
+      expect(result).toHaveProperty('style');
+      expect(result.style).toHaveProperty(myStencil.vars.width, '70px');
+
+      // only match the base
+      expect(result.className).toEqual(myStencil.base);
+
+      const result2 = myStencil({width: 'zero', height: '10px'});
+      expect(result2).toHaveProperty('style');
+      expect(result2.style).toHaveProperty(myStencil.vars.width, 'zero');
+
+      // match base and width modifier
+      expect(result2.className).toEqual(`${myStencil.base} ${myStencil.modifiers.width.zero}`);
+    });
   });
 });
 
@@ -753,6 +833,11 @@ describe('handleCsProp', () => {
     expect(returnProps).toHaveProperty('style', {position: 'absolute'});
   });
 
+  it('should handle deeply nested styles', () => {
+    // make sure there's no type error
+    handleCsProp({}, {'&:hover': {padding: 10}});
+  });
+
   it('should allow overriding via the style attribute', () => {
     render(<BaseComponent style={{padding: padding.styleAttribute}} />);
 
@@ -772,6 +857,15 @@ describe('handleCsProp', () => {
     // class name, but both class names should be listed
     expect(screen.getByTestId('base')).toHaveClass(baseStyles);
     expect(screen.getByTestId('base')).toHaveClass(overrideStyles);
+  });
+
+  it('should allow deeply nested styles in the cs prop', () => {
+    interface Props extends CSProps {}
+
+    const MyComponent = (props: Props) => null;
+
+    // no assertion, just make sure there's no type error
+    const temp = <MyComponent cs={{'&:hover': {padding: 10}}} />;
   });
 
   it('should allow the css prop to override base styles', () => {
