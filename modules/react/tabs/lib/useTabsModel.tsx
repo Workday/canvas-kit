@@ -54,13 +54,11 @@ export const useTabsModel = createModelHook({
   const getId = config.getId || defaultGetId;
   const modality = useModalityType();
 
-  const items = config.items;
 
   const model = useOverflowListModel(
     useOverflowListModel.mergeConfig(config, {
       shouldCalculateOverflow: modality !== 'touch',
       orientation: config.orientation || 'horizontal',
-      items,
       onRegisterItem(data) {
         if (!initialSelectedRef.current) {
           initialSelectedRef.current = getId(data.item);
@@ -95,9 +93,10 @@ export const useTabsModel = createModelHook({
   };
 
   const overflowItems = React.useMemo(
-    () => (items ? items.filter(item => state.hiddenIds.includes(getId(item))) : undefined),
+    () =>
+      config.items ? config.items.filter(item => state.hiddenIds.includes(getId(item))) : undefined,
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [state.hiddenIds, items]
+    [state.hiddenIds, config.items]
   );
 
   const events = {

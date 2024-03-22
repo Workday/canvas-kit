@@ -312,3 +312,95 @@ The HTML will look something like this:
 Notice the stencil adds all the class names that match the base, modifiers, and compound modifiers.
 
 <ExampleCodeBlock code={CreateStencil} />
+
+### Variables and Modifiers with same keys
+
+It is possible to have a variable and modifier sharing the same key. The Stencil will accept either
+the modifier option or a string. The value will be sent as a variable regardless while the modifer
+will only match if it is a valid modifer key.
+
+```tsx
+const myStencil = createStencil({
+  vars: {
+    width: '10px',
+  },
+  base({width}): {
+    return {
+      width: width
+    }
+  },
+  modifiers: {
+    width: {
+      zero: {
+        width: '0', // overrides base styles
+      },
+    },
+  },
+})
+
+// `'zero'` is part of autocomplete
+myStencil({width: 'zero'});
+// returns {className: 'css-base css--width-zero', styles: { '--width': 'zero'}}
+
+// width also accepts a string
+myStencil({width: '10px'});
+// returns {className: 'css-base', styles: { '--width': '10px'}}
+```
+
+### `keyframes`
+
+The `keyframes` function re-exports the [Emotion CSS keyframes](https://emotion.sh/docs/keyframes)
+function, but is compatible with a custom Emotion instance and is understood by the Static style
+transformer.
+
+### `injectGlobal`
+
+The `injectGlobal` function re-exports the
+[Emotion CSS injectGlobal](https://emotion.sh/docs/@emotion/css#global-styles) function, but is
+compatible with a custom Emotion instance and is understood by the Static style transformer.
+
+## Custom Emotion instance
+
+Static style injection happens during the parsing stages of the files. This means when you `import`
+a component that uses static styling, the styles are injected immediately. This happens way before
+rendering, so using the Emotion [CacheProvider](https://emotion.sh/docs/cache-provider) does not
+work. A custom instance must be created _before_ any style utilities are called - during the
+bootstrapping phase of an application. We don't have a working example because it requires an
+isolated application, but here's an example adding a `nonce` to an application:
+
+```tsx
+// bootstrap-styles.ts
+import {createInstance} from '@workday/canvas-kit-styling';
+
+// assuming this file is being called via a `script` tag and that
+// script tag has a `nonce` attribute set from the server
+createInstance({nonce: document.currentScript.nonce});
+
+// index.ts
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+// call the bootstrap in the import list. This has the side-effect
+// of creating an instance
+import './bootstrap-styles';
+
+import App from './App';
+
+const root = ReactDOM.createRoot(document.querySelector('#root'));
+
+root.render(<App />);
+
+// App.tsx
+import React from 'react';
+
+// The following will create and inject styles. We cannot adjust
+// the Emotion instance after this import
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
+
+// if we call `createInstance` here, we'll get a warning in
+// development mode
+
+export default () => {
+  return <PrimaryButton>Button</PrimaryButton>;
+};
+```

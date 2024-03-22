@@ -130,7 +130,7 @@ export const getNextPage: NavigationRequestor = (index, {state}) => {
 };
 
 const getItem: (id: string, model: NavigationInput) => Item<Generic> = (id, {state}) => {
-  const item = id ? state.items.find(item => item.id === id) : state.items[0]; // no id, return first item
+  const item = state.items.find(item => item.id === id) || state.items[0]; // no id, return first item
   assert(item, `Item not found: ${id}`);
   return item;
 };
