@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createModifiers, createStencil, createStyles} from '@workday/canvas-kit-styling';
+import {createStencil} from '@workday/canvas-kit-styling';
 import {mergeStyles, BoxProps} from '@workday/canvas-kit-react/layout';
 
 type TypeSize = 'large' | 'medium' | 'small';
