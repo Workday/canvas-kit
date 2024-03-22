@@ -8,7 +8,10 @@ import {getVarName} from './getVarName';
 import {slugify} from '@workday/canvas-kit-styling';
 
 export const handleCreateStyles: NodeTransformer = (node, context) => {
-  const {checker, prefix, getFileName} = context;
+  const {checker, prefix, getFileName, onlyLookahead} = context;
+  if (onlyLookahead) {
+    return;
+  }
   /**
    * Check if the node is a call expression that looks like:
    *

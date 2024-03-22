@@ -11,6 +11,10 @@ export type TransformerContext = {
   objectTransforms: ObjectTransform[];
   propertyTransforms: PropertyTransform[];
   fileName: string;
+  /** Instructs transformers to only look ahead for symbols and not transform or inject styles */
+  onlyLookahead: boolean;
+  transform: NodeTransformer;
+  extractCSS: boolean;
 };
 
 export type NestedStyleObject = {[key: string]: number | string | NestedStyleObject};

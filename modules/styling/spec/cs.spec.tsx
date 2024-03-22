@@ -885,7 +885,7 @@ describe('createStyles', () => {
           baseStencil.modifiers.size.large
         );
         expect(extendedStencil.modifiers).toHaveProperty('extra.true');
-        extendedStencil({size: 'large'}); //?
+        extendedStencil({size: 'large'});
 
         expect(extendedStencil({size: 'large'})).toHaveProperty(
           'className',
@@ -946,9 +946,9 @@ describe('createStyles', () => {
           ],
         });
 
-        extendedStencil({color: 'blue', background: 'red'}); //?
+        extendedStencil({color: 'blue', background: 'red'});
 
-        const {className} = extendedStencil({size: 'large'}); //?
+        const {className} = extendedStencil({size: 'large'});
 
         expect(className.split(' ')).toHaveProperty('length', 5);
 

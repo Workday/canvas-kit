@@ -14,7 +14,7 @@ import {isImportedFromStyling} from './isImportedFromStyling';
  * Handle all arguments of the CallExpression `createStencil()`
  */
 export const handleCreateStencil: NodeTransformer = (node, context) => {
-  const {checker, prefix, variables, getFileName} = context;
+  const {checker, prefix, variables, getFileName, onlyLookahead} = context;
   /**
    * This will match whenever a `createStencil()` call expression is encountered. It will loop
    * over all the config to extract variables and styles.
@@ -103,6 +103,10 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
         varsConfig.initializer.properties.forEach(variable => {
           extractVariables(variable);
         });
+      }
+
+      if (onlyLookahead) {
+        return;
       }
 
       const configProperties = config.properties.map((property, index, properties) => {

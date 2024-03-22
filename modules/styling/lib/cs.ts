@@ -647,6 +647,7 @@ export function createStyles(
 
       // If we were called with a {name, styles} object, it must be optimized. We'll shortcut here
       if (typeof input === 'object' && input.name) {
+        createStylesCache[`${instance.cache.key}-${input.name}`] = true;
         return instance.css(input as CastStyleProps);
       }
 
@@ -1101,7 +1102,7 @@ export function createStencil<
 
   const stencil: Stencil<M, V, E, ID> = ((input: {}) => {
     const inputModifiers = {...composes?.defaultModifiers, ...defaultModifiers, ...input};
-    const composesReturn = composes?.(inputModifiers as any); //?
+    const composesReturn = composes?.(inputModifiers as any);
     return {
       className: [
         composesReturn?.className,
