@@ -32,60 +32,60 @@ const textModifiers = createModifiers({
     // Title level styles
     'title.large': createStyles({
       ...system.type.title.large,
-      color: base.blackPepper400,
+      color: system.color.text.strong,
     }),
     'title.medium': createStyles({
       ...system.type.title.medium,
-      color: base.blackPepper400,
+      color: system.color.text.strong,
     }),
     'title.small': createStyles({
       ...system.type.title.small,
-      color: base.blackPepper400,
+      color: system.color.text.strong,
     }),
     // Heading level styles
     'heading.large': createStyles({
       ...system.type.heading.large,
-      color: base.blackPepper400,
+      color: system.color.text.strong,
     }),
     'heading.medium': createStyles({
       ...system.type.heading.medium,
-      color: base.blackPepper400,
+      color: system.color.text.strong,
     }),
     'heading.small': createStyles({
       ...system.type.heading.small,
-      color: base.blackPepper400,
+      color: system.color.text.strong,
     }),
     // Body level styles
     'body.large': createStyles({
       ...system.type.body.large,
-      color: base.blackPepper300,
+      color: system.color.text.default,
     }),
     'body.medium': createStyles({
       ...system.type.body.medium,
-      color: base.blackPepper300,
+      color: system.color.text.default,
     }),
     'body.small': createStyles({
       ...system.type.body.small,
-      color: base.blackPepper300,
+      color: system.color.text.default,
     }),
     // Subtext level styles
     'subtext.large': createStyles({
       ...system.type.subtext.large,
-      color: base.blackPepper300,
+      color: system.color.text.default,
     }),
     'subtext.medium': createStyles({
       ...system.type.subtext.medium,
-      color: base.blackPepper300,
+      color: system.color.text.default,
     }),
     'subtext.small': createStyles({
       ...system.type.subtext.small,
-      color: base.blackPepper300,
+      color: system.color.text.default,
     }),
   },
   variant: {
-    error: createStyles({color: base.cinnamon500}),
-    hint: createStyles({color: base.licorice300}),
-    inverse: createStyles({color: base.frenchVanilla100}),
+    error: createStyles({color: system.color.text.critical.default}),
+    hint: createStyles({color: system.color.text.hint}),
+    inverse: createStyles({color: system.color.text.inverse}),
   },
 });
 
