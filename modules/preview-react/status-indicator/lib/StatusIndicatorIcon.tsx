@@ -1,14 +1,18 @@
 import React from 'react';
 
-import {createElemPropsHook, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {createComponent, createElemPropsHook} from '@workday/canvas-kit-react/common';
+import {colors} from '@workday/canvas-kit-react/tokens';
 
 import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
 import {useStatusIndicatorModel} from './hooks';
 
 export interface StatusIndicatorIconProps extends SystemIconProps {}
 
-import {colors} from '@workday/canvas-kit-react/tokens';
-
+/**
+ * ### ⚠️ We've deprecated `statusIndicatorColors` for StatusIndicator because it's now directly handeled by Style Utility. ⚠️
+ * Please consider using [`StatusIndicator`](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator--basic) instead.
+ * @deprecated
+ */
 export const statusIndicatorColors = {
   gray: {
     high: {
@@ -72,6 +76,11 @@ export const statusIndicatorColors = {
   },
 };
 
+/**
+ * ### ⚠️ We've deprecated `useStatusIndicatorIcon` for StatusIndicatorIcon because it's now directly handeled by Style Utility. ⚠️
+ * Please consider using [`StatusIndicatorIcon`](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator--icon) instead.
+ * @deprecated
+ */
 export const useStatusIndicatorIcon = createElemPropsHook(useStatusIndicatorModel)(({state}) => {
   const colors = statusIndicatorColors[state.variant][state.emphasis];
   return {
@@ -80,9 +89,9 @@ export const useStatusIndicatorIcon = createElemPropsHook(useStatusIndicatorMode
   };
 });
 
-export const StatusIndicatorIcon = createSubcomponent('span')({
-  modelHook: useStatusIndicatorModel,
-  elemPropsHook: useStatusIndicatorIcon,
-})<StatusIndicatorIconProps>((elemProps, Element, model) => {
-  return <SystemIcon as={Element} size={20} role="img" {...elemProps} />;
+export const StatusIndicatorIcon = createComponent('span')({
+  displayName: 'StatusIndicatorIcon',
+  Component: (elemProps: SystemIconProps, ref, Element) => {
+    return <SystemIcon as={Element} size={20} role="img" {...elemProps} />;
+  },
 });
