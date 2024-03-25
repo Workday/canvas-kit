@@ -1,0 +1,8 @@
+on:
+  pull_request_target:
+    types:
+      - opened
+
+ready for review:
+  - changed-files:
+      - any-glob-to-any-file: ['yarn.lock']
