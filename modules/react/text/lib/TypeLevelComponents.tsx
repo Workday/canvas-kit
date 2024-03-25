@@ -1,6 +1,9 @@
 import * as React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {Text, TextProps} from './Text';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
+
+type Size = 'large' | 'medium' | 'small';
 
 /**
  * Prop interface for type level specific components:
@@ -10,7 +13,7 @@ export interface TypeLevelProps extends Omit<TextProps, 'typeLevel'> {
   /**
    * Each type level has three sizes: `large`, `medium`, and `small`.
    */
-  size: 'large' | 'medium' | 'small';
+  size: Size;
 }
 
 /**
@@ -41,7 +44,7 @@ export const Subtext = createComponent('p')({
   displayName: 'Subtext',
   Component: ({size, ...elemProps}: TypeLevelProps, ref, Element) => {
     const typeLevel = `subtext.${size}` as TextProps['typeLevel'];
-    return <Text ref={ref} as={Element} typeLevel={typeLevel} {...elemProps} />;
+    return <Text ref={ref} as={Element} typeLevel={typeLevel} {...mergeStyles(elemProps)} />;
   },
 });
 
@@ -73,7 +76,7 @@ export const BodyText = createComponent('p')({
   displayName: 'BodyText',
   Component: ({size, ...elemProps}: TypeLevelProps, ref, Element) => {
     const typeLevel = `body.${size}` as TextProps['typeLevel'];
-    return <Text ref={ref} as={Element} typeLevel={typeLevel} {...elemProps} />;
+    return <Text ref={ref} as={Element} typeLevel={typeLevel} {...mergeStyles(elemProps)} />;
   },
 });
 
@@ -105,7 +108,7 @@ export const Heading = createComponent('h2')({
   displayName: 'Heading',
   Component: ({size, ...elemProps}: TypeLevelProps, ref, Element) => {
     const typeLevel = `heading.${size}` as TextProps['typeLevel'];
-    return <Text ref={ref} as={Element} typeLevel={typeLevel} {...elemProps} />;
+    return <Text ref={ref} as={Element} typeLevel={typeLevel} {...mergeStyles(elemProps)} />;
   },
 });
 
@@ -137,6 +140,6 @@ export const Title = createComponent('h1')({
   displayName: 'Title',
   Component: ({size, ...elemProps}: TypeLevelProps, ref, Element) => {
     const typeLevel = `title.${size}` as TextProps['typeLevel'];
-    return <Text ref={ref} as={Element} typeLevel={typeLevel} {...elemProps} />;
+    return <Text ref={ref} as={Element} typeLevel={typeLevel} {...mergeStyles(elemProps)} />;
   },
 });
