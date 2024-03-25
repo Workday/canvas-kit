@@ -921,7 +921,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     const type = checker.getTypeAtLocation(node);
     if (symbol) {
       if (type.getFlags() & ts.TypeFlags.Instantiable) {
-        symbol.name; //?
+        symbol.name;
         // It is a generic type
         return {kind: 'generic', name: symbol?.name};
       }
