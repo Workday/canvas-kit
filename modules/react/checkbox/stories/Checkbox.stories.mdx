@@ -1,6 +1,7 @@
 import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
 
 import {Checkbox} from '@workday/canvas-kit-react/checkbox/lib/Checkbox.tsx';
+import {InformationHighlight} from '@workday/canvas-kit-docs';
 
 import {Alert} from './examples/Alert';
 import {Basic} from './examples/Basic';
@@ -28,6 +29,18 @@ yarn add @workday/canvas-kit-react
 ```
 
 ## Usage
+
+<InformationHighlight style={{margin: '1.5rem 0'}}>
+  <InformationHighlight.Icon />
+  <InformationHighlight.Heading>Note</InformationHighlight.Heading>
+  <InformationHighlight.Body>
+    These examples are using FormField from Preview. We can plan to promote this component to the
+    Main package in a future major version.
+  </InformationHighlight.Body>
+  <InformationHighlight.Link href="https://workday.github.io/canvas-kit/?path=/docs/preview-inputs-form-field--basic">
+    View Form Field (Preview) Documentation
+  </InformationHighlight.Link>
+</InformationHighlight>
 
 ### Basic Example
 
@@ -67,13 +80,10 @@ Checkbox supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html
 
 <ExampleCodeBlock code={RefForwarding} />
 
-### Label Position
+### Label Position Horizontal
 
-If Form Field is being used, set its `labelPosition` prop to designate the position of the label
-relative to the Checkbox. `labelPosition` accepts the following values:
-
-- `FormField.LabelPosition.Top` (Default)
-- `FormField.LabelPosition.Left`
+Set the `orientation` prop of the Form Field to designate the position of the label relative to the
+input component. By default, the orientation will be set to `vertical`.
 
 <ExampleCodeBlock code={LabelPosition} />
 

@@ -17,7 +17,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {Box, FlexProps} from '@workday/canvas-kit-react/layout';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {
   useListItemRegister,
   useListItemRovingFocus,
@@ -104,9 +104,8 @@ export const StyledTabItem = styled(Box.as('button'))<StyledType & Pick<TabsItem
     '&:hover, &:focus': {
       backgroundColor: colors.soap200,
       color: colors.blackPepper400,
-      '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
-        fill: iconColors.hover,
-      },
+
+      [systemIconStencil.vars.color]: iconColors.hover,
     },
 
     '&:focus': {
@@ -116,24 +115,18 @@ export const StyledTabItem = styled(Box.as('button'))<StyledType & Pick<TabsItem
 
     '&:disabled, &[aria-disabled]': {
       color: colors.licorice100,
-      '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
-        fill: iconColors.disabled,
-      },
+      [systemIconStencil.vars.color]: iconColors.disabled,
       '&:hover': {
         cursor: 'auto',
         backgroundColor: `transparent`,
-        '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
-          fill: iconColors.disabled,
-        },
+        [systemIconStencil.vars.color]: iconColors.disabled,
       },
     },
 
     '&[aria-selected=true]': {
       color: theme.canvas.palette.primary.main,
       cursor: 'default',
-      '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
-        fill: theme.canvas.palette.primary.main,
-      },
+      [systemIconStencil.vars.color]: theme.canvas.palette.primary.main,
       '&:after': {
         position: 'absolute',
         height: space.xxxs,

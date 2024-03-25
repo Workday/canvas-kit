@@ -5,7 +5,9 @@ import {
   createSubcomponent,
   ExtractProps,
 } from '@workday/canvas-kit-react/common';
-import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {Box, Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 import {useListModel} from './useListModel';
 import {useListRenderItems} from './useListRenderItem';
@@ -30,6 +32,30 @@ export const useListBox = createElemPropsHook(useListModel)(model => {
       height: model.state.isVirtualized ? model.state.UNSTABLE_virtual.totalSize : undefined,
     },
   };
+});
+
+const listBoxContainerStencil = createStencil({
+  base: {
+    boxSizing: 'border-box',
+  },
+  modifiers: {
+    orientation: {
+      vertical: {
+        overflowY: 'auto',
+      },
+      horizontal: {
+        overflowY: undefined,
+      },
+    },
+  },
+});
+
+const listBoxStencil = createStencil({
+  base: {
+    flexDirection: 'column',
+    marginTop: system.space.zero,
+    marginBottom: system.space.zero,
+  },
 });
 
 /**
@@ -65,21 +91,26 @@ export const ListBox = createContainer('ul')({
      */
     Item: ListBoxItem,
   },
-})<ListBoxProps>(({height, maxHeight, marginY, ...elemProps}, Element, model) => {
-  // We're moving `marginY` to the container to not interfere with the virtualization size. We set
-  // the `marginY` on the Flex to `0` to avoid inaccurate scrollbars
-
-  // TODO figure out what style props should go to which `Box`
-  return (
-    <Box
-      ref={model.state.containerRef}
-      marginY={marginY}
-      maxHeight={maxHeight}
-      overflowY={model.state.orientation === 'vertical' ? 'auto' : undefined}
-    >
-      <Flex as={Element} flexDirection="column" {...elemProps} marginY={0}>
-        {useListRenderItems(model, elemProps.children)}
-      </Flex>
-    </Box>
-  );
-});
+})<ListBoxProps>(
+  (
+    {height, maxHeight, marginY, marginBottom, overflowY, marginTop, ...elemProps},
+    Element,
+    model
+  ) => {
+    // We're removing `marginY, marginBottom, overflowY, marginTo` from elemProps and applying them to the container as to not interfere with the virtualization size. We set
+    // the `marginY` on the Flex to `0` to avoid inaccurate scrollbars
+    return (
+      <div
+        ref={model.state.containerRef}
+        {...mergeStyles(
+          {maxHeight, marginBottom: marginY, marginTop: marginY},
+          listBoxContainerStencil({orientation: model.state.orientation})
+        )}
+      >
+        <Flex as={Element} {...mergeStyles(elemProps, listBoxStencil())}>
+          {useListRenderItems(model, elemProps.children)}
+        </Flex>
+      </div>
+    );
+  }
+);

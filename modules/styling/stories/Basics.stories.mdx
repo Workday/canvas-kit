@@ -91,6 +91,7 @@ Here's a simplified example:
 const myStencil = createStencil({
   vars: {
     defaultColor: 'red' // default value
+    nonDefaultedColor: '', // will allow for uninitialization
   },
   base: ({defaultColor}) => {
     color: defaultColor // `defaultColor` is '--abc123-defaultColor', not 'red'
@@ -137,6 +138,35 @@ variables. Variables are useful if you want to expose changing properties regard
 For example, Buttons use variables for colors of all states (hover, active, focus, disabled, and
 nested icons). Without variables, overriding the focus color would require deeply nested selector
 overrides.
+
+#### Cascading Variables
+
+Notice the `nonDefaultedColor` is not included in the base styles like `defaultColor` was. If a
+variable has an empty string, it will can be uninitialized. Stencil variables with a default value
+will create a "cascade barrier". A cascade barrier prevents the variable from "leaking" into the
+component. For example, if a `Card` component was rendered within another `Card` component, the
+variables from the parent `Card` would not leak into the child `Card` component. But there are times
+where a component expects a parent component to set a CSS variable and that it should cascade to the
+component. An example of this is the relationship between `SystemIcon` and `Button`. The `Button`
+components set the `SystemIcon` variables and they should cascade into the `SystemIcon` component.
+
+**Note:** Non-cascade variables _could_ be initialized. If you use uninitialized variables, be sure
+to use a fallback in your styles.
+
+```tsx
+const myStencil = createStencil({
+  vars: {
+    color: '', // uninitialized
+  },
+  base({color}) {
+    return {
+      // provide a fallback. A uninitialized CSS variable will fall back to `initial`.
+      // for the `color` CSS property, that's most likely black (default text color)
+      color: cssVar(color, 'red'),
+    };
+  },
+});
+```
 
 #### Nested Variables
 
