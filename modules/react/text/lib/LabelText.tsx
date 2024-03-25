@@ -29,17 +29,22 @@ export interface TypeLabelProps extends BoxProps {
 }
 
 const labelTextStencil = createStencil({
+  extends: textStencil,
   base: {
     ...system.type.subtext.large,
     color: system.color.text.default,
   },
-  extends: textStencil,
   modifiers: {
     disabled: {
       true: {
         cursor: 'default',
         color: system.color.text.disabled,
       },
+    },
+    variant: {
+      inverse: {color: system.color.text.inverse},
+      error: {color: system.color.text.critical.default},
+      hint: {color: system.color.text.hint},
     },
   },
   compound: [
