@@ -4,7 +4,7 @@ import {buttonVars} from './BaseButton';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStyles, createModifiers} from '@workday/canvas-kit-styling';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {brand, system} from '@workday/canvas-tokens-web';
 import {Button, ButtonProps} from './Button';
 import {systemIconStencil} from '../../icon';
 
@@ -23,40 +23,40 @@ export interface SecondaryButtonProps extends ButtonProps {
 const secondaryStyles = createStyles({
   // Default Styles
   [buttonVars.default.background]: 'transparent',
-  [buttonVars.default.border]: base.blackPepper400,
+  [buttonVars.default.border]: system.color.border.contrast.default,
   [buttonVars.default.borderRadius]: system.shape.round,
-  [buttonVars.default.label]: base.blackPepper400,
-  [systemIconStencil.vars.color]: base.blackPepper400,
+  [buttonVars.default.label]: system.color.fg.strong,
+  [systemIconStencil.vars.color]: system.color.fg.strong,
   // Focus Styles
   '&:focus-visible, &.focus': {
     [buttonVars.focus.background]: 'transparent',
-    [buttonVars.focus.border]: base.blackPepper400,
-    [buttonVars.focus.label]: base.blackPepper400,
-    [buttonVars.focus.boxShadowInner]: base.frenchVanilla100,
+    [buttonVars.focus.border]: system.color.border.contrast.default,
+    [buttonVars.focus.label]: system.color.fg.strong,
+    [buttonVars.focus.boxShadowInner]: system.color.fg.inverse,
     [buttonVars.focus.boxShadowOuter]: brand.common.focusOutline,
-    [systemIconStencil.vars.color]: base.blackPepper400,
+    [systemIconStencil.vars.color]: system.color.fg.strong,
   },
   // Hover Styles
   '&:hover, &.hover': {
-    [buttonVars.hover.background]: base.blackPepper400,
-    [buttonVars.hover.border]: base.blackPepper400,
+    [buttonVars.hover.background]: system.color.bg.contrast.default,
+    [buttonVars.hover.border]: system.color.border.contrast.default,
     [buttonVars.hover.label]: brand.primary.accent,
     [systemIconStencil.vars.color]: brand.primary.accent,
   },
   // Active Styles
   '&:active, &.active': {
-    [buttonVars.active.background]: base.blackPepper500,
-    [buttonVars.active.border]: base.blackPepper500,
+    [buttonVars.active.background]: system.color.bg.contrast.strong,
+    [buttonVars.active.border]: system.color.border.contrast.strong,
     [buttonVars.active.label]: brand.primary.accent,
     [systemIconStencil.vars.color]: brand.primary.accent,
   },
   // Disabled Styles
   '&:disabled, &.disabled': {
     [buttonVars.disabled.background]: 'transparent',
-    [buttonVars.disabled.border]: base.blackPepper400,
-    [buttonVars.disabled.label]: base.blackPepper400,
+    [buttonVars.disabled.border]: system.color.border.contrast.default,
+    [buttonVars.disabled.label]: system.color.fg.strong,
     [buttonVars.disabled.opacity]: '0.4',
-    [systemIconStencil.vars.color]: base.blackPepper400,
+    [systemIconStencil.vars.color]: system.color.fg.strong,
   },
 });
 
@@ -65,38 +65,38 @@ export const secondaryButtonModifiers = createModifiers({
     inverse: createStyles({
       // Default Styles
       [buttonVars.default.background]: 'transparent',
-      [buttonVars.default.border]: base.frenchVanilla100,
-      [buttonVars.default.label]: base.frenchVanilla100,
-      [systemIconStencil.vars.color]: base.frenchVanilla100,
+      [buttonVars.default.border]: system.color.border.inverse,
+      [buttonVars.default.label]: system.color.fg.inverse,
+      [systemIconStencil.vars.color]: system.color.fg.inverse,
       // Focus Styles
       '&:focus-visible, &.focus': {
-        [buttonVars.focus.background]: base.frenchVanilla100,
-        [buttonVars.focus.border]: base.frenchVanilla100,
-        [buttonVars.focus.label]: base.blackPepper400,
-        [buttonVars.focus.boxShadowInner]: base.blackPepper400,
-        [buttonVars.focus.boxShadowOuter]: base.frenchVanilla100,
-        [systemIconStencil.vars.color]: base.blackPepper400,
+        [buttonVars.focus.background]: system.color.bg.default,
+        [buttonVars.focus.border]: system.color.border.inverse,
+        [buttonVars.focus.label]: system.color.fg.strong,
+        [buttonVars.focus.boxShadowInner]: system.color.fg.strong,
+        [buttonVars.focus.boxShadowOuter]: system.color.fg.inverse,
+        [systemIconStencil.vars.color]: system.color.fg.strong,
       },
       // Hover Styles
       '&:hover, &.hover': {
-        [buttonVars.hover.background]: base.soap300,
-        [buttonVars.hover.border]: base.soap300,
-        [buttonVars.hover.label]: base.blackPepper500,
-        [systemIconStencil.vars.color]: base.blackPepper500,
+        [buttonVars.hover.background]: system.color.bg.alt.default,
+        [buttonVars.hover.border]: system.color.bg.alt.default,
+        [buttonVars.hover.label]: system.color.fg.stronger,
+        [systemIconStencil.vars.color]: system.color.fg.stronger,
       },
       // Active Styles
       '&:active, &.active': {
-        [buttonVars.active.background]: base.soap400,
-        [buttonVars.active.border]: base.soap400,
-        [buttonVars.active.label]: base.blackPepper500,
-        [systemIconStencil.vars.color]: base.blackPepper500,
+        [buttonVars.active.background]: system.color.bg.alt.strong,
+        [buttonVars.active.border]: system.color.bg.alt.strong,
+        [buttonVars.active.label]: system.color.fg.stronger,
+        [systemIconStencil.vars.color]: system.color.fg.stronger,
       },
       // Disabled Styles
       '&:disabled, &.disabled': {
         [buttonVars.disabled.background]: 'transparent',
-        [buttonVars.disabled.border]: base.frenchVanilla100,
-        [buttonVars.disabled.label]: base.frenchVanilla100,
-        [systemIconStencil.vars.color]: base.frenchVanilla100,
+        [buttonVars.disabled.border]: system.color.border.inverse,
+        [buttonVars.disabled.label]: system.color.fg.inverse,
+        [systemIconStencil.vars.color]: system.color.fg.inverse,
       },
     }),
   },

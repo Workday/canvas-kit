@@ -4,7 +4,7 @@ import {buttonVars} from './BaseButton';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {brand, system} from '@workday/canvas-tokens-web';
 import {Button, ButtonProps} from './Button';
 import {systemIconStencil} from '../../icon';
 
@@ -26,7 +26,7 @@ const deleteStyles = createStyles({
     [buttonVars.focus.border]: 'transparent',
     [buttonVars.focus.label]: brand.error.accent,
     [systemIconStencil.vars.color]: brand.error.accent,
-    [buttonVars.focus.boxShadowInner]: base.frenchVanilla100,
+    [buttonVars.focus.boxShadowInner]: system.color.fg.inverse,
     [buttonVars.focus.boxShadowOuter]: brand.common.focusOutline,
   },
   '&:hover, &.hover': {
