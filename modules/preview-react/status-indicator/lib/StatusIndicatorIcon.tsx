@@ -4,7 +4,7 @@ import {createComponent, createElemPropsHook} from '@workday/canvas-kit-react/co
 import {colors} from '@workday/canvas-kit-react/tokens';
 
 import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
-import { useStatusIndicatorModel } from './hooks';
+import {useStatusIndicatorModel} from './hooks';
 
 export interface StatusIndicatorIconProps extends SystemIconProps {}
 
