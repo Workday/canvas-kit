@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createModifiers, createStyles} from '@workday/canvas-kit-styling';
+import {createStencil} from '@workday/canvas-kit-styling';
 import {mergeStyles, BoxProps} from '@workday/canvas-kit-react/layout';
 
 type TypeSize = 'large' | 'medium' | 'small';
@@ -27,65 +27,68 @@ export interface TextProps extends BoxProps {
   variant?: 'error' | 'hint' | 'inverse';
 }
 
-const textModifiers = createModifiers({
-  typeLevel: {
-    // Title level styles
-    'title.large': createStyles({
-      ...system.type.title.large,
-      color: base.blackPepper400,
-    }),
-    'title.medium': createStyles({
-      ...system.type.title.medium,
-      color: base.blackPepper400,
-    }),
-    'title.small': createStyles({
-      ...system.type.title.small,
-      color: base.blackPepper400,
-    }),
-    // Heading level styles
-    'heading.large': createStyles({
-      ...system.type.heading.large,
-      color: base.blackPepper400,
-    }),
-    'heading.medium': createStyles({
-      ...system.type.heading.medium,
-      color: base.blackPepper400,
-    }),
-    'heading.small': createStyles({
-      ...system.type.heading.small,
-      color: base.blackPepper400,
-    }),
-    // Body level styles
-    'body.large': createStyles({
-      ...system.type.body.large,
-      color: base.blackPepper300,
-    }),
-    'body.medium': createStyles({
-      ...system.type.body.medium,
-      color: base.blackPepper300,
-    }),
-    'body.small': createStyles({
-      ...system.type.body.small,
-      color: base.blackPepper300,
-    }),
-    // Subtext level styles
-    'subtext.large': createStyles({
-      ...system.type.subtext.large,
-      color: base.blackPepper300,
-    }),
-    'subtext.medium': createStyles({
-      ...system.type.subtext.medium,
-      color: base.blackPepper300,
-    }),
-    'subtext.small': createStyles({
-      ...system.type.subtext.small,
-      color: base.blackPepper300,
-    }),
-  },
-  variant: {
-    error: createStyles({color: base.cinnamon500}),
-    hint: createStyles({color: base.licorice300}),
-    inverse: createStyles({color: base.frenchVanilla100}),
+export const textStencil = createStencil({
+  base: {},
+  modifiers: {
+    typeLevel: {
+      // Title level styles
+      'title.large': {
+        ...system.type.title.large,
+        color: system.color.text.strong,
+      },
+      'title.medium': {
+        ...system.type.title.medium,
+        color: system.color.text.strong,
+      },
+      'title.small': {
+        ...system.type.title.small,
+        color: system.color.text.strong,
+      },
+      // Heading level styles
+      'heading.large': {
+        ...system.type.heading.large,
+        color: system.color.text.strong,
+      },
+      'heading.medium': {
+        ...system.type.heading.medium,
+        color: system.color.text.strong,
+      },
+      'heading.small': {
+        ...system.type.heading.small,
+        color: system.color.text.strong,
+      },
+      // Body level styles
+      'body.large': {
+        ...system.type.body.large,
+        color: system.color.text.default,
+      },
+      'body.medium': {
+        ...system.type.body.medium,
+        color: system.color.text.default,
+      },
+      'body.small': {
+        ...system.type.body.small,
+        color: system.color.text.default,
+      },
+      // Subtext level styles
+      'subtext.large': {
+        ...system.type.subtext.large,
+        color: system.color.text.default,
+      },
+      'subtext.medium': {
+        ...system.type.subtext.medium,
+        color: system.color.text.default,
+      },
+      'subtext.small': {
+        ...system.type.subtext.small,
+        color: system.color.text.default,
+      },
+    },
+    variant: {
+      error: {color: system.color.text.critical.default},
+      hint: {color: system.color.text.hint},
+      inverse: {color: system.color.text.inverse},
+    },
   },
 });
 
@@ -124,7 +127,7 @@ export const Text = createComponent('span')({
   displayName: 'Text',
   Component: ({children, typeLevel, variant, ...elemProps}: TextProps, ref, Element) => {
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, textModifiers({typeLevel, variant}))}>
+      <Element ref={ref} {...mergeStyles(elemProps, textStencil({typeLevel, variant}))}>
         {children}
       </Element>
     );
