@@ -93,8 +93,8 @@ export const tertiaryButtonModifiers = createModifiers({
       '&:focus-visible, &.focus': {
         [buttonVars.focus.background]: system.color.bg.default,
         [buttonVars.focus.border]: 'transparent',
-        [buttonVars.focus.label]: system.color.fg.contrast.strong,
-        [systemIconStencil.vars.color]: system.color.fg.contrast.strong,
+        [buttonVars.focus.label]: system.color.fg.strong,
+        [systemIconStencil.vars.color]: system.color.fg.strong,
         ...focusRing({
           inset: 'inner',
           width: 2,
