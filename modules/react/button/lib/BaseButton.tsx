@@ -5,9 +5,15 @@ import {ButtonLabel} from '../lib/parts/ButtonLabel';
 
 import {createComponent, GrowthBehavior, focusRing} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStyles, createVars, cssVar, createModifiers} from '@workday/canvas-kit-styling';
+import {
+  createStyles,
+  createVars,
+  cssVar,
+  createModifiers,
+  createStencil,
+} from '@workday/canvas-kit-styling';
 import {SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {brand, system} from '@workday/canvas-tokens-web';
 import {ButtonColors, ButtonSizes, IconPositions} from './types';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 
@@ -114,99 +120,72 @@ export const buttonVars = {
 /**
  * Base styles for Buttons.
  */
-const baseButtonStyles = createStyles({
-  fontFamily: '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif',
-  fontSize: '0.875rem',
-  lineHeight: 'normal',
-  letterSpacing: '0.015rem',
-  fontWeight: 'bold',
-  backgroundColor: cssVar(buttonVars.default.background, 'transparent'),
-  color: cssVar(buttonVars.default.label, base.blackPepper400),
-  borderWidth: '1px',
-  borderStyle: 'solid',
-  gap: system.space.x2,
-  borderColor: cssVar(buttonVars.default.border, 'transparent'),
-  cursor: 'pointer',
-  display: 'inline-flex',
-  boxShadow: 'none',
-  alignItems: 'center',
-  justifyContent: 'center',
-  boxSizing: 'border-box',
-  outline: '2px transparent',
-  whiteSpace: 'nowrap',
-  WebkitFontSmoothing: 'antialiased',
-  MozOsxFontSmoothing: 'grayscale',
-  borderRadius: cssVar(buttonVars.default.borderRadius, system.shape.round),
-  position: 'relative',
-  verticalAlign: 'middle',
-  overflow: 'hidden',
-  [systemIconStencil.vars.color]: cssVar(buttonVars.default.icon, base.blackPepper400),
-  transition:
-    'box-shadow 120ms linear, border 120ms linear, background-color 120ms linear, color 120ms linear',
-  '&:disabled, &:disabled:active, &.disabled': {
-    cursor: 'default',
+const baseButtonStyles = createStencil({
+  base: {
+    fontFamily: '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif',
+    fontSize: '0.875rem',
+    lineHeight: 'normal',
+    letterSpacing: '0.015rem',
+    fontWeight: 'bold',
+    backgroundColor: cssVar(buttonVars.default.background, 'transparent'),
+    color: cssVar(buttonVars.default.label, system.color.fg.strong),
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    gap: system.space.x2,
+    borderColor: cssVar(buttonVars.default.border, 'transparent'),
+    cursor: 'pointer',
+    display: 'inline-flex',
     boxShadow: 'none',
-    opacity: cssVar(buttonVars.disabled.opacity, '1'),
-  },
-  /*
-  '& span .wd-icon-fill, & span .wd-icon-accent, & span .wd-icon-accent2': {
-    transitionDuration: '40ms',
-    fill: cssVar(buttonVars.default.icon, base.blackPepper400),
-  },
-  '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
-    fill: cssVar(buttonVars.default.icon, base.blackPepper400),
-  },
-  */
-  '&:focus-visible, &.focus': {
-    backgroundColor: cssVar(buttonVars.focus.background, 'transparent'),
-    borderColor: cssVar(buttonVars.focus.border, 'transparent'),
-    color: cssVar(buttonVars.focus.label, base.blackPepper400),
-    [systemIconStencil.vars.color]: cssVar(buttonVars.focus.icon, base.blackPepper400),
-    /* 
-    '& span .wd-icon-fill, & span .wd-icon-accent, & span .wd-icon-accent2': {
-      fill: cssVar(buttonVars.focus.icon, base.blackPepper400),
+    alignItems: 'center',
+    justifyContent: 'center',
+    boxSizing: 'border-box',
+    outline: '2px transparent',
+    whiteSpace: 'nowrap',
+    WebkitFontSmoothing: 'antialiased',
+    MozOsxFontSmoothing: 'grayscale',
+    borderRadius: cssVar(buttonVars.default.borderRadius, system.shape.round),
+    position: 'relative',
+    verticalAlign: 'middle',
+    overflow: 'hidden',
+    [systemIconStencil.vars.color]: cssVar(buttonVars.default.icon, system.color.fg.strong),
+    transition:
+      'box-shadow 120ms linear, border 120ms linear, background-color 120ms linear, color 120ms linear',
+    '&:disabled, &:disabled:active, &.disabled': {
+      cursor: 'default',
+      boxShadow: 'none',
+      opacity: cssVar(buttonVars.disabled.opacity, '1'),
     },
-    */
-    ...focusRing({
-      width: 2,
-      separation: 2,
-      innerColor: cssVar(buttonVars.focus.boxShadowInner, base.frenchVanilla100),
-      outerColor: cssVar(buttonVars.focus.boxShadowOuter, brand.primary.base),
-    }),
-  },
-  '&:hover, &.hover': {
-    backgroundColor: cssVar(buttonVars.hover.background, base.blackPepper500),
-    borderColor: cssVar(buttonVars.hover.border, 'transparent'),
-    color: cssVar(buttonVars.hover.label, base.blackPepper500),
-    [systemIconStencil.vars.color]: cssVar(buttonVars.hover.icon, base.blackPepper500),
-    /* 
-    '& span .wd-icon-fill, & span .wd-icon-accent, & span .wd-icon-accent2': {
-      fill: cssVar(buttonVars.hover.icon, base.blackPepper500),
+    '&:focus-visible, &.focus': {
+      backgroundColor: cssVar(buttonVars.focus.background, 'transparent'),
+      borderColor: cssVar(buttonVars.focus.border, 'transparent'),
+      color: cssVar(buttonVars.focus.label, system.color.fg.strong),
+      [systemIconStencil.vars.color]: cssVar(buttonVars.focus.icon, system.color.fg.strong),
+      ...focusRing({
+        width: 2,
+        separation: 2,
+        innerColor: cssVar(buttonVars.focus.boxShadowInner, system.color.fg.inverse),
+        outerColor: cssVar(buttonVars.focus.boxShadowOuter, brand.primary.base),
+      }),
     },
-    */
-  },
-  '&:hover:active': {transitionDuration: '40ms'},
-  '&:active, &.active': {
-    backgroundColor: cssVar(buttonVars.active.background, 'transparent'),
-    borderColor: cssVar(buttonVars.active.border, 'transparent'),
-    color: cssVar(buttonVars.active.label, base.blackPepper400),
-    [systemIconStencil.vars.color]: cssVar(buttonVars.active.icon, base.blackPepper400),
-    /* 
-    '& span .wd-icon-fill, & span .wd-icon-accent, & span .wd-icon-accent2': {
-      fill: cssVar(buttonVars.active.icon, base.blackPepper400),
+    '&:hover, &.hover': {
+      backgroundColor: cssVar(buttonVars.hover.background, system.color.bg.contrast.strong),
+      borderColor: cssVar(buttonVars.hover.border, 'transparent'),
+      color: cssVar(buttonVars.hover.label, system.color.fg.stronger),
+      [systemIconStencil.vars.color]: cssVar(buttonVars.hover.icon, system.color.fg.stronger),
     },
-    */
-  },
-  '&:disabled, &.disabled': {
-    backgroundColor: cssVar(buttonVars.disabled.background, 'transparent'),
-    borderColor: cssVar(buttonVars.disabled.border, 'transparent'),
-    color: cssVar(buttonVars.disabled.label, base.blackPepper400),
-    [systemIconStencil.vars.color]: cssVar(buttonVars.disabled.icon, base.blackPepper400),
-    /* 
-    '& span .wd-icon-fill, & span .wd-icon-accent, & span .wd-icon-accent2': {
-      fill: cssVar(buttonVars.disabled.icon, base.blackPepper400),
+    '&:hover:active': {transitionDuration: '40ms'},
+    '&:active, &.active': {
+      backgroundColor: cssVar(buttonVars.active.background, 'transparent'),
+      borderColor: cssVar(buttonVars.active.border, 'transparent'),
+      color: cssVar(buttonVars.active.label, system.color.fg.strong),
+      [systemIconStencil.vars.color]: cssVar(buttonVars.active.icon, system.color.fg.strong),
     },
-    */
+    '&:disabled, &.disabled': {
+      backgroundColor: cssVar(buttonVars.disabled.background, 'transparent'),
+      borderColor: cssVar(buttonVars.disabled.border, 'transparent'),
+      color: cssVar(buttonVars.disabled.label, system.color.fg.strong),
+      [systemIconStencil.vars.color]: cssVar(buttonVars.disabled.icon, system.color.fg.strong),
+    },
   },
 });
 
@@ -330,7 +309,7 @@ export const BaseButton = createComponent('button')({
         ref={ref}
         type="button"
         {...mergeStyles(elemProps, [
-          baseButtonStyles,
+          baseButtonStyles(),
           buttonModifiers({
             size: size,
             iconPosition: getIconPosition(size, iconPosition, children),
