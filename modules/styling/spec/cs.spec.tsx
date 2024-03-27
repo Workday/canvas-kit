@@ -771,27 +771,35 @@ describe('createStyles', () => {
     });
 
     it('should handle both variables and modifiers sharing the same key', () => {
-      const myStencil = createStencil({
-        vars: {
-          width: '10px',
-          height: '10px',
-        },
-        base({width}) {
-          return {width: width};
-        },
-        modifiers: {
-          width: {
-            zero: {
-              width: '0',
+      const myStencil = createStencil(
+        {
+          vars: {
+            width: '10px',
+            height: '10px',
+          },
+          base({width}) {
+            return {width: width};
+          },
+          modifiers: {
+            width: {
+              zero: {
+                width: '0',
+              },
+            },
+            foo: {
+              true: {
+                name: 'foo',
+                styles: 'overflow:scroll',
+              },
             },
           },
-          foo: {
-            true: {},
-          },
         },
-      });
+        'cnvs-my'
+      );
 
       myStencil({width: '12px'});
+
+      myStencil({foo: true}); //?
 
       type Arg = Exclude<Parameters<typeof myStencil>[0], undefined>;
       expectTypeOf<Arg>().toHaveProperty('width');

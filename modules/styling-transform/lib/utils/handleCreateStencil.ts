@@ -144,15 +144,15 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
                 property.initializer,
                 property.initializer.properties.map(modifierProperty => {
                   if (
+                    ts.isPropertyAssignment(modifierProperty) &&
                     modifierProperty.name &&
                     ts.isIdentifier(modifierProperty.name) &&
-                    ts.isPropertyAssignment(modifierProperty) &&
                     ts.isObjectLiteralExpression(modifierProperty.initializer)
                   ) {
                     // modifier value
                     return ts.factory.updatePropertyAssignment(
                       modifierProperty,
-                      property.name,
+                      modifierProperty.name,
                       ts.factory.updateObjectLiteralExpression(
                         modifierProperty.initializer,
                         modifierProperty.initializer.properties.map(modifier => {
@@ -341,7 +341,7 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
 
       return ts.factory.updateCallExpression(node, node.expression, undefined, [
         ts.factory.updateObjectLiteralExpression(config, configProperties),
-        ts.factory.createStringLiteral(stencilName),
+        ts.factory.createStringLiteral(`${prefix}-${stencilName}`),
       ]);
     }
   }

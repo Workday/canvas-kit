@@ -19,9 +19,9 @@ describe('handleCreateStencil', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts');
+    const result = transform(program, 'test.ts'); //?
 
-    expect(result).toContain('}, "button")');
+    expect(result).toContain('}, "cnvs-button")');
   });
 
   it('should add a variable to the cache when the arguments are strings', () => {
@@ -322,75 +322,78 @@ describe('handleCreateStencil', () => {
   });
 
   describe('extended stencil', () => {
-    const program = createProgramFromSource(`
-      import {createStencil} from '@workday/canvas-kit-styling';
-
-      const baseStencil = createStencil({
-        vars: {
-          color: 'red',
-        },
-        base: {
-          padding: 5
-        },
-        modifiers: {
-          position: {
-            start: {
-              paddingInlineStart: 5
-            },
-            end: {
-              paddingInlineEnd: 5
-            }
-          },
-          size: {
-            large: {
-              padding: 15
-            },
-          },
-        },
-        compound: [
-          {
-            modifiers: {size: 'large', position: 'start'},
-            styles: {
-              paddingInlineStart: 10
-            }
-          }
-        ],
-      });
-
-      const extendedStencil = createStencil({
-        extends: baseStencil,
-        vars: {
-          background: 'blue',
-        },
-        base: {
-
-        },
-        modifiers: {
-          extra: {
-            true: {
-              margin: 5
-            },
-          },
-        },
-        compound: [
-          {
-            modifiers: {
-              size: 'large',
-              position: 'start',
-              extra: true
-            },
-            styles: {
-              margin: 10,
-              paddingInlineStart: 5
-            }
-          }
-        ],
-      });
-    `);
-
+    let program: ts.Program;
     const styles = {};
 
-    transform(program, 'test.ts', withDefaultContext(program.getTypeChecker(), {styles}));
+    beforeAll(() => {
+      program = createProgramFromSource(`
+        import {createStencil} from '@workday/canvas-kit-styling';
+
+        const baseStencil = createStencil({
+          vars: {
+            color: 'red',
+          },
+          base: {
+            padding: 5
+          },
+          modifiers: {
+            position: {
+              start: {
+                paddingInlineStart: 5
+              },
+              end: {
+                paddingInlineEnd: 5
+              }
+            },
+            size: {
+              large: {
+                padding: 15
+              },
+            },
+          },
+          compound: [
+            {
+              modifiers: {size: 'large', position: 'start'},
+              styles: {
+                paddingInlineStart: 10
+              }
+            }
+          ],
+        });
+
+        const extendedStencil = createStencil({
+          extends: baseStencil,
+          vars: {
+            background: 'blue',
+          },
+          base: {
+
+          },
+          modifiers: {
+            extra: {
+              true: {
+                margin: 5
+              },
+            },
+          },
+          compound: [
+            {
+              modifiers: {
+                size: 'large',
+                position: 'start',
+                extra: true
+              },
+              styles: {
+                margin: 10,
+                paddingInlineStart: 5
+              }
+            }
+          ],
+        });
+      `);
+
+      transform(program, 'test.ts', withDefaultContext(program.getTypeChecker(), {styles}));
+    });
 
     it('should extract base styles', () => {
       expect(styles['test.css']).toContainEqual(
