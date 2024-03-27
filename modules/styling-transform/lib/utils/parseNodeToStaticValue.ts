@@ -59,10 +59,15 @@ export function parseNodeToStaticValue(
   if (ts.isComputedPropertyName(node) && ts.isIdentifier(node.expression)) {
     const varName = node.expression.text;
 
-    if (variables[varName]) {
-      return variables[varName];
+    const value =
+      getValueFromProcessedNodes(varName, context) ||
+      getValueFromAliasedSymbol(node, varName, context);
+
+    if (value) {
+      return value;
     }
   }
+
   // [a.b]
   if (ts.isComputedPropertyName(node) && ts.isPropertyAccessExpression(node.expression)) {
     const varName = getCSSVariableKey(getPropertyAccessExpressionText(node.expression));
