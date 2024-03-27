@@ -374,9 +374,7 @@ describe('Popup', () => {
 
       context('when the "Delete" button has focus and the tab key is pressed', () => {
         beforeEach(() => {
-          cy.findByRole('button', {name: 'Delete'})
-            .focus()
-            .realPress('Tab');
+          cy.findByRole('button', {name: 'Delete'}).focus().realPress('Tab');
         });
 
         it('should hide the popup', () => {
@@ -399,9 +397,7 @@ describe('Popup', () => {
     // means we'll have to manually add `scrollIntoView` to get Cypress to scroll only where we want
     context('when the "Open Popup" is clicked', {scrollBehavior: false}, () => {
       beforeEach(() => {
-        cy.findByRole('button', {name: 'Open Popup'})
-          .scrollIntoView()
-          .click();
+        cy.findByRole('button', {name: 'Open Popup'}).scrollIntoView().click();
       });
 
       context('when the user clicks outside', () => {
@@ -416,9 +412,7 @@ describe('Popup', () => {
 
       context('when the user clicks the input', () => {
         beforeEach(() => {
-          cy.findByRole('textbox', {name: 'Name'})
-            .scrollIntoView()
-            .click();
+          cy.findByRole('textbox', {name: 'Name'}).scrollIntoView().click();
         });
 
         it('should not focus the "Open Popup" button', () => {
@@ -610,7 +604,7 @@ describe('Popup', () => {
     });
   });
 
-  context.only(`given the [Testing/Popups/Popup, ComboboxWithinPopup] example is rendered`, () => {
+  context(`given the [Testing/Popups/Popup, ComboboxWithinPopup] example is rendered`, () => {
     beforeEach(() => {
       h.stories.load('Testing/Popups/Popup', 'ComboboxWithinPopup');
     });
@@ -627,9 +621,7 @@ describe('Popup', () => {
       context('when is open and the first item is clicked', () => {
         beforeEach(() => {
           cy.findByRole('combobox').click();
-          cy.findAllByRole('option')
-            .eq(0)
-            .click();
+          cy.findAllByRole('option').eq(0).click();
         });
 
         it('should not close the popup on select', () => {
@@ -673,9 +665,7 @@ describe('Popup', () => {
           context(`when the preferred placement is set to ${io.placement}`, () => {
             beforeEach(() => {
               if (io.isMovedToSide) {
-                cy.findByTestId(`slide-${io.placement}`)
-                  .type('500')
-                  .trigger('change');
+                cy.findByTestId(`slide-${io.placement}`).type('500').trigger('change');
               }
               cy.findByRole('button', {name: io.placement}).click();
               cy.scrollTo(io.x, io.y);
