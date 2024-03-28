@@ -9,8 +9,26 @@ import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 import {BaseButton} from '@workday/canvas-kit-react/button';
 
 import {PaginationContext} from './usePaginationModel';
+import isPropValid from '@emotion/is-prop-valid';
 
-const StyledPageButton = styled(BaseButton)<{toggled?: boolean}>(
+// const StyledPageButton =
+//   styled(BaseButton) <
+//   {shouldForwardProp: prop => isPropValid(prop) && prop !== 'toggled'} >
+//   ({
+//     minWidth: space.l,
+//     width: space.l,
+//     borderRadius: borderRadius.circle,
+//     height: space.l,
+//   },
+//   ({toggled}) => {
+//     return {
+//       fontWeight: toggled ? 700 : 'normal',
+//     };
+//   });
+
+const StyledPageButton = styled(BaseButton, {
+  shouldForwardProp: prop => prop !== 'toggled',
+})<{toggled?: boolean}>(
   {
     minWidth: space.l,
     width: space.l,
