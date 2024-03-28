@@ -20,7 +20,7 @@ export interface PrimaryButtonProps extends ButtonProps {
   variant?: 'inverse';
 }
 
-const primaryStyles = createStencil({
+const primaryButton = createStencil({
   base: {
     [buttonVars.default.background]: brand.primary.base,
     [buttonVars.default.border]: 'transparent',
@@ -97,7 +97,7 @@ export const PrimaryButton = createComponent('button')({
       <Button
         as={Element}
         ref={ref}
-        {...mergeStyles(elemProps, [primaryStyles(), primaryButtonModifiers({variant: variant})])}
+        {...mergeStyles(elemProps, [primaryButton(), primaryButtonModifiers({variant: variant})])}
       >
         {children}
       </Button>

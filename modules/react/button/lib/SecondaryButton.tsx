@@ -3,7 +3,7 @@ import * as React from 'react';
 import {buttonVars} from './BaseButton';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStyles, createModifiers} from '@workday/canvas-kit-styling';
+import {createStyles, createModifiers, createStencil} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 import {Button, ButtonProps} from './Button';
 import {systemIconStencil} from '../../icon';
@@ -20,43 +20,45 @@ export interface SecondaryButtonProps extends ButtonProps {
   variant?: 'inverse';
 }
 
-const secondaryStyles = createStyles({
-  // Default Styles
-  [buttonVars.default.background]: 'transparent',
-  [buttonVars.default.border]: system.color.border.contrast.default,
-  [buttonVars.default.borderRadius]: system.shape.round,
-  [buttonVars.default.label]: system.color.fg.strong,
-  [systemIconStencil.vars.color]: system.color.fg.strong,
-  // Focus Styles
-  '&:focus-visible, &.focus': {
-    [buttonVars.focus.background]: 'transparent',
-    [buttonVars.focus.border]: system.color.border.contrast.default,
-    [buttonVars.focus.label]: system.color.fg.strong,
-    [buttonVars.focus.boxShadowInner]: system.color.fg.inverse,
-    [buttonVars.focus.boxShadowOuter]: brand.common.focusOutline,
+const secondaryButton = createStencil({
+  base: {
+    // Default Styles
+    [buttonVars.default.background]: 'transparent',
+    [buttonVars.default.border]: system.color.border.contrast.default,
+    [buttonVars.default.borderRadius]: system.shape.round,
+    [buttonVars.default.label]: system.color.fg.strong,
     [systemIconStencil.vars.color]: system.color.fg.strong,
-  },
-  // Hover Styles
-  '&:hover, &.hover': {
-    [buttonVars.hover.background]: system.color.bg.contrast.default,
-    [buttonVars.hover.border]: system.color.border.contrast.default,
-    [buttonVars.hover.label]: brand.primary.accent,
-    [systemIconStencil.vars.color]: brand.primary.accent,
-  },
-  // Active Styles
-  '&:active, &.active': {
-    [buttonVars.active.background]: system.color.bg.contrast.strong,
-    [buttonVars.active.border]: system.color.border.contrast.strong,
-    [buttonVars.active.label]: brand.primary.accent,
-    [systemIconStencil.vars.color]: brand.primary.accent,
-  },
-  // Disabled Styles
-  '&:disabled, &.disabled': {
-    [buttonVars.disabled.background]: 'transparent',
-    [buttonVars.disabled.border]: system.color.border.contrast.default,
-    [buttonVars.disabled.label]: system.color.fg.strong,
-    [buttonVars.disabled.opacity]: '0.4',
-    [systemIconStencil.vars.color]: system.color.fg.strong,
+    // Focus Styles
+    '&:focus-visible, &.focus': {
+      [buttonVars.focus.background]: 'transparent',
+      [buttonVars.focus.border]: system.color.border.contrast.default,
+      [buttonVars.focus.label]: system.color.fg.strong,
+      [buttonVars.focus.boxShadowInner]: system.color.fg.inverse,
+      [buttonVars.focus.boxShadowOuter]: brand.common.focusOutline,
+      [systemIconStencil.vars.color]: system.color.fg.strong,
+    },
+    // Hover Styles
+    '&:hover, &.hover': {
+      [buttonVars.hover.background]: system.color.bg.contrast.default,
+      [buttonVars.hover.border]: system.color.border.contrast.default,
+      [buttonVars.hover.label]: brand.primary.accent,
+      [systemIconStencil.vars.color]: brand.primary.accent,
+    },
+    // Active Styles
+    '&:active, &.active': {
+      [buttonVars.active.background]: system.color.bg.contrast.strong,
+      [buttonVars.active.border]: system.color.border.contrast.strong,
+      [buttonVars.active.label]: brand.primary.accent,
+      [systemIconStencil.vars.color]: brand.primary.accent,
+    },
+    // Disabled Styles
+    '&:disabled, &.disabled': {
+      [buttonVars.disabled.background]: 'transparent',
+      [buttonVars.disabled.border]: system.color.border.contrast.default,
+      [buttonVars.disabled.label]: system.color.fg.strong,
+      [buttonVars.disabled.opacity]: '0.4',
+      [systemIconStencil.vars.color]: system.color.fg.strong,
+    },
   },
 });
 
@@ -109,7 +111,10 @@ export const SecondaryButton = createComponent('button')({
       <Button
         as={Element}
         ref={ref}
-        {...mergeStyles(elemProps, [secondaryStyles, secondaryButtonModifiers({variant: variant})])}
+        {...mergeStyles(elemProps, [
+          secondaryButton(),
+          secondaryButtonModifiers({variant: variant}),
+        ])}
       >
         {children}
       </Button>

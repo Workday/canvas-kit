@@ -120,7 +120,7 @@ export const buttonVars = {
 /**
  * Base styles for Buttons.
  */
-const baseButtonStyles = createStencil({
+const baseButton = createStencil({
   base: {
     fontFamily: '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif',
     fontSize: '0.875rem',
@@ -309,7 +309,7 @@ export const BaseButton = createComponent('button')({
         ref={ref}
         type="button"
         {...mergeStyles(elemProps, [
-          baseButtonStyles(),
+          baseButton(),
           buttonModifiers({
             size: size,
             iconPosition: getIconPosition(size, iconPosition, children),

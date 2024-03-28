@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {buttonVars, getIconPosition} from './BaseButton';
 import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
-import {createStyles, createModifiers} from '@workday/canvas-kit-styling';
+import {createStyles, createModifiers, createStencil} from '@workday/canvas-kit-styling';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {system, brand} from '@workday/canvas-tokens-web';
 import {borderRadius, space} from '@workday/canvas-kit-react/tokens';
@@ -22,47 +22,49 @@ export interface TertiaryButtonProps extends ButtonProps {
   isThemeable?: boolean;
 }
 
-const tertiaryStyles = createStyles({
-  paddingInline: system.space.x2,
-  minWidth: 'auto',
-  textDecoration: 'underline',
-  border: 0,
-  [buttonVars.default.background]: 'transparent',
-  [buttonVars.default.border]: 'transparent',
-  [buttonVars.default.borderRadius]: system.shape.x1,
-  [buttonVars.default.label]: brand.primary.base,
-  [systemIconStencil.vars.color]: system.color.fg.strong,
-  '&:focus-visible, &.focus': {
-    [buttonVars.focus.background]: 'transparent',
-    [buttonVars.focus.border]: 'transparent',
-    [buttonVars.focus.label]: brand.primary.base,
-    [buttonVars.focus.boxShadowInner]: brand.common.focusOutline,
-    [buttonVars.focus.boxShadowOuter]: brand.common.focusOutline,
+const tertiaryButton = createStencil({
+  base: {
+    paddingInline: system.space.x2,
+    minWidth: 'auto',
+    textDecoration: 'underline',
+    border: 0,
+    [buttonVars.default.background]: 'transparent',
+    [buttonVars.default.border]: 'transparent',
+    [buttonVars.default.borderRadius]: system.shape.x1,
+    [buttonVars.default.label]: brand.primary.base,
     [systemIconStencil.vars.color]: system.color.fg.strong,
-    ...focusRing({
-      width: 2,
-      separation: 0,
-      innerColor: system.color.fg.inverse,
-      outerColor: brand.common.focusOutline,
-    }),
-  },
-  '&:hover, &.hover': {
-    [buttonVars.hover.background]: system.color.bg.alt.default,
-    [buttonVars.hover.border]: 'transparent',
-    [buttonVars.hover.label]: brand.primary.dark,
-    [systemIconStencil.vars.color]: system.color.fg.strong,
-  },
-  '&:active, &.active': {
-    [buttonVars.active.background]: system.color.bg.alt.strong,
-    [buttonVars.active.border]: 'transparent',
-    [buttonVars.active.label]: brand.primary.darkest,
-    [systemIconStencil.vars.color]: system.color.fg.stronger,
-  },
-  '&:disabled, &.disabled': {
-    [buttonVars.disabled.background]: 'transparent',
-    [buttonVars.disabled.border]: 'transparent',
-    [buttonVars.disabled.label]: brand.primary.base,
-    [buttonVars.disabled.opacity]: '0.4',
+    '&:focus-visible, &.focus': {
+      [buttonVars.focus.background]: 'transparent',
+      [buttonVars.focus.border]: 'transparent',
+      [buttonVars.focus.label]: brand.primary.base,
+      [buttonVars.focus.boxShadowInner]: brand.common.focusOutline,
+      [buttonVars.focus.boxShadowOuter]: brand.common.focusOutline,
+      [systemIconStencil.vars.color]: system.color.fg.strong,
+      ...focusRing({
+        width: 2,
+        separation: 0,
+        innerColor: system.color.fg.inverse,
+        outerColor: brand.common.focusOutline,
+      }),
+    },
+    '&:hover, &.hover': {
+      [buttonVars.hover.background]: system.color.bg.alt.default,
+      [buttonVars.hover.border]: 'transparent',
+      [buttonVars.hover.label]: brand.primary.dark,
+      [systemIconStencil.vars.color]: system.color.fg.strong,
+    },
+    '&:active, &.active': {
+      [buttonVars.active.background]: system.color.bg.alt.strong,
+      [buttonVars.active.border]: 'transparent',
+      [buttonVars.active.label]: brand.primary.darkest,
+      [systemIconStencil.vars.color]: system.color.fg.stronger,
+    },
+    '&:disabled, &.disabled': {
+      [buttonVars.disabled.background]: 'transparent',
+      [buttonVars.disabled.border]: 'transparent',
+      [buttonVars.disabled.label]: brand.primary.base,
+      [buttonVars.disabled.opacity]: '0.4',
+    },
   },
 });
 
@@ -182,7 +184,7 @@ export const TertiaryButton = createComponent('button')({
         iconPosition={iconPosition}
         size={size}
         {...mergeStyles(elemProps, [
-          tertiaryStyles,
+          tertiaryButton(),
           tertiaryButtonModifiers({
             isThemeable: (isThemeable || baseIconPosition !== 'only') as any,
             variant: variant,
