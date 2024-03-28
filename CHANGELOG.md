@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.24](https://github.com/Workday/canvas-kit/releases/tag/v10.3.24) (2024-03-22)
+
+### Infrastructure
+
+- fix: Fix issue with dynamic keys in stencils for style parser ([#2661](https://github.com/Workday/canvas-kit/pull/2661)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
 ## [v10.3.23](https://github.com/Workday/canvas-kit/releases/tag/v10.3.23) (2024-03-22)
 
 ### Components
