@@ -1,8 +1,9 @@
 import * as React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {textStencil} from './Text';
 
 /**
  * @deprecated ⚠️ `TypeLabelProps` has been deprecated and will be removed in a future major version.
@@ -28,75 +29,22 @@ export interface TypeLabelProps extends BoxProps {
 }
 
 const labelTextStencil = createStencil({
+  extends: textStencil,
   base: {
     ...system.type.subtext.large,
-    color: base.blackPepper300,
+    color: system.color.text.default,
   },
   modifiers: {
-    typeLevel: {
-      // Title level styles
-      'title.large': {
-        ...system.type.title.large,
-        color: base.blackPepper400,
-      },
-      'title.medium': {
-        ...system.type.title.medium,
-        color: base.blackPepper400,
-      },
-      'title.small': {
-        ...system.type.title.small,
-        color: base.blackPepper400,
-      },
-      // Heading level styles
-      'heading.large': {
-        ...system.type.heading.large,
-        color: base.blackPepper400,
-      },
-      'heading.medium': {
-        ...system.type.heading.medium,
-        color: base.blackPepper400,
-      },
-      'heading.small': {
-        ...system.type.heading.small,
-        color: base.blackPepper400,
-      },
-      // Body level styles
-      'body.large': {
-        ...system.type.body.large,
-        color: base.blackPepper300,
-      },
-      'body.medium': {
-        ...system.type.body.medium,
-        color: base.blackPepper300,
-      },
-      'body.small': {
-        ...system.type.body.small,
-        color: base.blackPepper300,
-      },
-      // Subtext level styles
-      'subtext.large': {
-        ...system.type.subtext.large,
-        color: base.blackPepper300,
-      },
-      'subtext.medium': {
-        ...system.type.subtext.medium,
-        color: base.blackPepper300,
-      },
-      'subtext.small': {
-        ...system.type.subtext.small,
-        color: base.blackPepper300,
-      },
-    },
-    variant: {
-      error: {color: base.cinnamon500},
-      hint: {color: base.licorice300},
-      inverse: {color: base.frenchVanilla100},
-    },
     disabled: {
       true: {
         cursor: 'default',
-        color: base.licorice100,
+        color: system.color.text.disabled,
       },
+    },
+    variant: {
+      inverse: {color: system.color.text.inverse},
+      error: {color: system.color.text.critical.default},
+      hint: {color: system.color.text.hint},
     },
   },
   compound: [
@@ -104,7 +52,7 @@ const labelTextStencil = createStencil({
       modifiers: {variant: 'inverse', disabled: true},
       styles: {
         opacity: system.opacity.disabled,
-        color: base.frenchVanilla100,
+        color: system.color.text.inverse,
       },
     },
   ],
