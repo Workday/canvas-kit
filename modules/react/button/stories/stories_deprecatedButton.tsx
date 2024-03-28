@@ -1,12 +1,21 @@
 import * as React from 'react';
-import {storiesOf} from '@storybook/react';
+import {Meta, StoryObj} from '@storybook/react';
 
 import {deprecated_Button as Button} from '@workday/canvas-kit-react/button';
 
-storiesOf('Components/Buttons/Deprecated', module)
-  .addParameters({component: Button})
-  .addParameters({ReadmePath: 'react/button'})
-  .add('Primary', () => (
+const meta: Meta<typeof Button> = {
+  title: 'Components/Buttons/Deprecated',
+  component: Button,
+  parameters: {
+    ReadmePath: 'react/button',
+  },
+};
+
+export default meta;
+
+export const Primary: StoryObj = {
+  name: 'Primary',
+  render: () => (
     <div className="story">
       <h3>Large Primary</h3>
       <Button variant="primary">Primary Button</Button>
@@ -35,8 +44,12 @@ storiesOf('Components/Buttons/Deprecated', module)
         Growing Primary Button
       </Button>
     </div>
-  ))
-  .add('Secondary', () => (
+  ),
+};
+
+export const Secondary: StoryObj = {
+  name: 'Secondary',
+  render: () => (
     <div className="story">
       <h3>Large Secondary</h3>
       <Button variant="secondary">Secondary Button</Button>
@@ -65,8 +78,12 @@ storiesOf('Components/Buttons/Deprecated', module)
         Growing Secondary Button
       </Button>
     </div>
-  ))
-  .add('Delete', () => (
+  ),
+};
+
+export const Delete: StoryObj = {
+  name: 'Delete',
+  render: () => (
     <div className="story">
       <h3>Large Delete</h3>
       <Button variant="delete">Delete Button</Button>
@@ -95,4 +112,5 @@ storiesOf('Components/Buttons/Deprecated', module)
         Growing Delete Button
       </Button>
     </div>
-  ));
+  ),
+};

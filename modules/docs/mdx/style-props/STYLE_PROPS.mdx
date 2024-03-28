@@ -1,4 +1,5 @@
 import {StylePropsTable} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock} from '../../../../utils/storybook';
 // style props for tables
 import {
   backgroundStyleFnConfigs,
@@ -15,22 +16,10 @@ import {
   spaceStyleFnConfigs,
   textStyleFnConfigs,
 } from '@workday/canvas-kit-react/layout';
-// examples
-import {BackgroundExample} from './examples/Background';
-import {BorderExample} from './examples/Border';
-import {ColorExample} from './examples/Color';
-import {DepthExample} from './examples/Depth';
-import {FlexExample} from './examples/Flex';
-import {FlexItemExample} from './examples/FlexItem';
-import {GridExample} from './examples/Grid';
-import {GridItemExample} from './examples/GridItem';
-import {LayoutExample} from './examples/Layout';
-import {OtherExample} from './examples/Other';
-import {PositionExample} from './examples/Position';
-import {SpaceExample} from './examples/Space';
-import {TextExample} from './examples/Text';
 
-<Meta title="Features/Style Props" />
+import * as StylePropsStories from './styleProps.stories';
+
+<Meta title="Features/Style Props" of={StylePropsStories} />
 
 # Style Props
 
@@ -60,7 +49,7 @@ supported.
 
 Background style props allow you to adjust the background styles of components.
 
-<ExampleCodeBlock code={BackgroundExample} />
+<ExampleCodeBlock of={StylePropsStories.Background} />
 
 <StylePropsTable styleProps={backgroundStyleFnConfigs} />
 
@@ -68,7 +57,7 @@ Background style props allow you to adjust the background styles of components.
 
 Border style props allow you to adjust the border styles of components.
 
-<ExampleCodeBlock code={BorderExample} />
+<ExampleCodeBlock of={StylePropsStories.Border} />
 
 <StylePropsTable styleProps={borderStyleFnConfigs} />
 
@@ -76,7 +65,7 @@ Border style props allow you to adjust the border styles of components.
 
 Color style props allow you to adjust the color styles of components.
 
-<ExampleCodeBlock code={ColorExample} />
+<ExampleCodeBlock of={StylePropsStories.Color} />
 
 <StylePropsTable styleProps={colorStyleFnConfigs} />
 
@@ -84,7 +73,7 @@ Color style props allow you to adjust the color styles of components.
 
 Depth style props allow you to adjust the depth styles of components.
 
-<ExampleCodeBlock code={DepthExample} />
+<ExampleCodeBlock of={StylePropsStories.Depth} />
 
 <StylePropsTable styleProps={depthStyleFnConfigs} />
 
@@ -92,7 +81,7 @@ Depth style props allow you to adjust the depth styles of components.
 
 Flex style props allow you to adjust the flex styles of components.
 
-<ExampleCodeBlock code={FlexExample} />
+<ExampleCodeBlock of={StylePropsStories.Flex} />
 
 <StylePropsTable styleProps={flexStyleFnConfigs} />
 
@@ -100,7 +89,7 @@ Flex style props allow you to adjust the flex styles of components.
 
 Flex item style props allow you to adjust the flex item styles of components.
 
-<ExampleCodeBlock code={FlexItemExample} />
+<ExampleCodeBlock of={StylePropsStories.FlexItem} />
 
 <StylePropsTable styleProps={flexItemStyleFnConfigs} />
 
@@ -108,7 +97,7 @@ Flex item style props allow you to adjust the flex item styles of components.
 
 Grid style props allow you to adjust the grid styles of components.
 
-<ExampleCodeBlock code={GridExample} />
+<ExampleCodeBlock of={StylePropsStories.Grid} />
 
 <StylePropsTable styleProps={gridStyleFnConfigs} />
 
@@ -116,7 +105,7 @@ Grid style props allow you to adjust the grid styles of components.
 
 Grid item style props allow you to adjust the grid item styles of components.
 
-<ExampleCodeBlock code={GridItemExample} />
+<ExampleCodeBlock of={StylePropsStories.GridItem} />
 
 <StylePropsTable styleProps={gridItemStyleFnConfigs} />
 
@@ -124,7 +113,7 @@ Grid item style props allow you to adjust the grid item styles of components.
 
 Layout style props allow you to adjust the layout styles of components.
 
-<ExampleCodeBlock code={LayoutExample} />
+<ExampleCodeBlock of={StylePropsStories.Layout} />
 
 <StylePropsTable styleProps={layoutStyleFnConfigs} />
 
@@ -132,7 +121,7 @@ Layout style props allow you to adjust the layout styles of components.
 
 Other style props allow you to adjust the other, miscellaneous styles of components.
 
-<ExampleCodeBlock code={OtherExample} />
+<ExampleCodeBlock of={StylePropsStories.Other} />
 
 <StylePropsTable styleProps={otherStyleFnConfigs} />
 
@@ -140,7 +129,7 @@ Other style props allow you to adjust the other, miscellaneous styles of compone
 
 Position style props allow you to adjust the position styles of components.
 
-<ExampleCodeBlock code={PositionExample} />
+<ExampleCodeBlock of={StylePropsStories.Position} />
 
 <StylePropsTable styleProps={positionStyleFnConfigs} />
 
@@ -148,7 +137,7 @@ Position style props allow you to adjust the position styles of components.
 
 Space style props allow you to adjust the space styles of components.
 
-<ExampleCodeBlock code={SpaceExample} />
+<ExampleCodeBlock of={StylePropsStories.Space} />
 
 <StylePropsTable styleProps={spaceStyleFnConfigs} />
 
@@ -156,6 +145,6 @@ Space style props allow you to adjust the space styles of components.
 
 Text style props allow you to adjust the text styles of components.
 
-<ExampleCodeBlock code={TextExample} />
+<ExampleCodeBlock of={StylePropsStories.Text} />
 
 <StylePropsTable styleProps={textStyleFnConfigs} />

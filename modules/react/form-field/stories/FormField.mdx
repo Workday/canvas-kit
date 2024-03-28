@@ -1,0 +1,125 @@
+import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import * as FormFieldStories from './FormField.stories';
+
+<Meta of={FormFieldStories} />
+
+# Canvas Kit Form Field
+
+<StatusIndicator variant="red">
+  <StatusIndicator.Label>Deprecated</StatusIndicator.Label>
+</StatusIndicator>
+
+`FormField` in Main has been deprecated and will be removed in a future major version. Please use
+[`FormField` in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-inputs-form-field--basic)
+instead.
+
+Form Field allows users to wrap input components to make them accessible and adds complementary
+labels and error messages.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+Form Field should be used in tandem with most Canvas Kit input components to ensure they meet
+accessibility standards.
+
+Here's an example of Form Field being used with [Text Input](/components/inputs/text-input/).
+
+<ExampleCodeBlock of={FormFieldStories.Basic} />
+
+### Custom Input id
+
+Form Field will automatically generate an HTML `id` for its input element to link it to the
+correponding label. Alternatively, you may set the `inputId` prop of the Form Field to specify a
+custom `id` for the input element.
+
+<ExampleCodeBlock of={FormFieldStories.CustomInputId} />
+
+### Grouping Inputs
+
+Set the `useFieldset` prop of the Form Field to `true` to indicate that it includes multiple input
+components. In this case, the Form Field will use
+[the method prescribed by the WAI](https://www.w3.org/WAI/tutorials/forms/grouping/) and render
+itself using a `fieldset` and a `legend`.
+
+`useFieldset` must be set to `true` when wrapping a [Radio Group](/components/inputs/radio/) since
+Radio Groups contain multiple Radio Buttons.
+
+<ExampleCodeBlock of={FormFieldStories.GroupingInputs} />
+
+### Grow
+
+Set the `grow` prop of the Form Field to `true` to configure it (including the wrapped input
+component) to expand to the width of its container.
+
+<ExampleCodeBlock of={FormFieldStories.Grow} />
+
+### Hint
+
+Set the `hintText` prop of the Form Field to display a short message below the input component.
+
+<ExampleCodeBlock of={FormFieldStories.Hint} />
+
+### Label Position
+
+Set the `labelPosition` prop of the Form Field to designate the position of the label relative to
+the input component. `labelPosition` accepts the following values:
+
+- `FormField.LabelPosition.Top` (Default)
+- `FormField.LabelPosition.Left`
+
+<ExampleCodeBlock of={FormFieldStories.LabelPosition} />
+
+### Required
+
+Set the `required` prop of the Form Field to `true` to indicate that the field is required. Labels
+for required fields are suffixed by a red asterisk.
+
+<ExampleCodeBlock of={FormFieldStories.Required} />
+
+### Error States
+
+Set the `error` prop of the Form Field to indicate it has an error. `error` accepts the following
+values:
+
+- `FormField.ErrorType.Alert`
+- `FormField.ErrorType.Error`
+
+The `hintText` and `hintId` props of the Form Field are required if `error` is defined. Set
+`hintText` to the error message you would like to display and `hintId` to the HTML `id` you would
+like to assign to that message (`hintId` is used to link the error message to its corresponding
+input element to meet accessibility standards).
+
+#### Alert
+
+<ExampleCodeBlock of={FormFieldStories.Alert} />
+
+Set the `alertLabel` prop of the Form Field to override the default "Alert" prefix of the hint. This
+is generally only used for translations.
+
+<ExampleCodeBlock of={FormFieldStories.AlertLabel} />
+
+#### Error
+
+<ExampleCodeBlock of={FormFieldStories.Error} />
+
+Set the `errorLabel` prop of the Form Field to override the default "Error" prefix of the hint. This
+is generally only used for translations.
+
+<ExampleCodeBlock of={FormFieldStories.ErrorLabel} />
+
+## Component API
+
+<SymbolDoc name="FormField" fileName="/react/" />
+
+Undocumented props are spread to the outermost element rendered by Form Field.
+
+## Specifications
+
+<Specifications file="FormField.spec.ts" name="Form Field" />

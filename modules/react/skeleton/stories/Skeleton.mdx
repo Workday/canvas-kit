@@ -1,0 +1,74 @@
+import {SymbolDoc} from '@workday/canvas-kit-docs';
+import * as SkeletonStories from './Skeleton.stories';
+
+<Meta of={SkeletonStories} />
+
+# Canvas Kit Skeleton
+
+A Skeleton is a low-fidelity visual placeholder that represents the loading of interface elements
+before they have displayed on the page. Appearing as a blank version of the incoming content, it
+mitigates focus on the loading process and improves the user’s perceived load time.
+
+[> Workday Design Reference](https://design.workday.com/components/indicators/skeleton-loader)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+Skeleton includes a container `Skeleton` component and the following subcomponents:
+`Skeleton.Header`, `Skeleton.Text`, and `Skeleton.Shape`. Each subcomponent can be used as a
+placeholder for a particular type of content.
+
+Here's an example of how you might compose Skeleton components (along with non-Skeleton components
+such as `Box` and `Flex`) to create a loading placeholder for a piece of content comprised of an
+icon, a heading, and some text.
+
+<ExampleCodeBlock of={SkeletonStories.Basic} />
+
+And here's an example that simulates how that Skeleton might work in practice.
+
+<ExampleCodeBlock of={SkeletonStories.Simulation} />
+
+Press the **Simulate Loading** button to simulate the loading of the content (customize the loading
+time using the **Load Time** field), or check the **Loading** check box to force the Skeleton to
+display.
+
+### Color
+
+All Skeleton subcomponents accept a `backgroundColor` prop which can be used to specify the color of
+the subcomponent. This is generally only recommended to be used for dark or gray backgrounds to
+ensure the Skeleton components are visible.
+
+<ExampleCodeBlock of={SkeletonStories.Color} />
+
+### Text
+
+`Skeleton.Text` renders a placeholder for text content such as paragraphs. Each placeholder line has
+a width of `100%` and a fixed height of `21px`, with the last line having a width of `60%` if there
+are multiple lines.
+
+<ExampleCodeBlock of={SkeletonStories.Text} />
+
+### Header
+
+`Skeleton.Header` renders a placeholder for header content such as headings.
+
+<ExampleCodeBlock of={SkeletonStories.Header} />
+
+### Shape
+
+`Skeleton.Shape` renders a placeholder for graphic elements such as icons, avatars and small images.
+Set the `height`, `width`, and `borderRadius` props of the `Skeleton.Shape` to create various
+rectangular and circular shapes.
+
+<ExampleCodeBlock of={SkeletonStories.Shape} />
+
+## Component API
+
+<SymbolDoc name="Skeleton" fileName="/react/" />

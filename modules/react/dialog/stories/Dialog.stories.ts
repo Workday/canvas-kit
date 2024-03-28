@@ -1,0 +1,28 @@
+import {Meta, StoryObj} from '@storybook/react';
+import {ExampleCodeBlock} from '../../../../utils/storybook';
+import mdxDoc from './Dialog.mdx';
+
+import {Dialog} from '@workday/canvas-kit-react/dialog';
+import {Basic as BasicExample} from './examples/Basic';
+import {Focus as FocusExample} from './examples/Focus';
+
+export default {
+  title: 'Components/Popups/Dialog',
+  component: Dialog,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      page: mdxDoc,
+      components: {ExampleCodeBlock},
+    },
+  },
+} as Meta<typeof Dialog>;
+
+type Story = StoryObj<typeof Dialog>;
+
+export const Basic: Story = {
+  render: BasicExample,
+};
+export const Focus: Story = {
+  render: FocusExample,
+};

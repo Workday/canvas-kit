@@ -1,0 +1,33 @@
+import {SymbolDoc} from '@workday/canvas-kit-docs';
+import * as BodyTextStories from './BodyText.stories';
+
+<Meta of={BodyTextStories} />
+
+# Canvas Kit Body Text
+
+`BodyText` provides a simple way to render body-level text with built-in support for Canvas type
+tokens.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+`BodyText` is a Type Level component (along with [`Title`](/components/text/title/),
+[`Heading`](/components/text/heading/), and [`Subtext`](/components/text/subtext/)) built on top of
+[`Text`](/components/text/text/) which provides a simple way to render body-level text according to
+the [Canvas type hierarchy](/tokens/type/#type-styles).
+
+`BodyText` renders a `<p>` element by default with styles equivalent to `type.levels.body[size]`.
+You may override the rendered element using the `as` prop.
+
+<ExampleCodeBlock of={BodyTextStories.Basic} />
+
+## Component API
+
+<SymbolDoc name="BodyText" fileName="/react/" />

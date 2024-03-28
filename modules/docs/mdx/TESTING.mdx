@@ -234,9 +234,7 @@ out. This is most confusing to those who approach Cypress commands as Promises.
 For example, imagine the following Cypress code:
 
 ```ts
-cy.get('body')
-  .contains('button', 'Delete Item')
-  .click();
+cy.get('body').contains('button', 'Delete Item').click();
 
 cy.get('[data-testid="MyResult"]').should('contain', 'Success!');
 ```
@@ -308,19 +306,6 @@ solutions like [knobs](https://github.com/storybookjs/storybook/tree/next/addons
 
 To make a story runnable in Chromatic for visual testing, add the following to the story's parameter
 list:
-
-```tsx
-// default Storybook API
-storiesOf('Some Category', module)
-  .add('My Visual Story', () => {
-    /** story contents */
-  })
-  .addParameter({
-    chromatic: {
-      disable: false,
-    },
-  });
-```
 
 ```tsx
 // CSF - All stories in file

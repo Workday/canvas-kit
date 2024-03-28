@@ -1,0 +1,29 @@
+import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import * as SegmentedControlStories from './SegmentedControl.stories';
+
+<Meta of={SegmentedControlStories} />
+
+# Canvas Kit Segmented Control
+
+A linear set of two or more segments, each of which functions as a mutually exclusive button. This
+is a [_controlled_](https://reactjs.org/docs/forms.html#controlled-components) component.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+Here is a basic example of a Segmented Control with multiple nested `Button`s. **Note:** while
+managing state using a unique `value` for each `Button` child is encouraged, you can also use
+indexes and omit the `value` field. It is strongly recommended to not mix these two methods.
+
+<ExampleCodeBlock of={SegmentedControlStories.Basic} />
+
+## Component API
+
+<SymbolDoc name="SegmentedControl" fileName="/react/" />

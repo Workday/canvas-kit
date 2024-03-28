@@ -1,0 +1,61 @@
+import {SymbolDoc} from '@workday/canvas-kit-docs';
+import * as CountBadgeStories from './CountBadge.stories';
+
+<Meta of={CountBadgeStories} />
+
+# Canvas Kit Count Badge
+
+`CountBadge` provides a quantity-based summary with dynamic values.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+The following section provides examples for common use cases. Please be sure to also read the
+Accessibility section below.
+
+### Basic
+
+In the example below, we're rendering a basic `CountBadge` with its `default` and `inverse`
+variants. The `inverse` variant is intended for darker backgrounds to create more contrast.
+
+<ExampleCodeBlock of={CountBadgeStories.Basic} />
+
+### Custom Limit
+
+By default, `CountBadge`'s limit is set to `1000`. Once the count reaches the limit, the badge will
+format the number: `1000` becomes `999+`. The default limit is largely arbitrary and intended to
+prevent unexpected overflow. You should choose a limit based on your specific use case and consider
+the user's experience. For example, someone looking for a new job finds there are `99+` new
+opportunities. Or perhaps someone returns from extended leave and is overwhelmed by `999+` unread
+messages on their first day back.
+
+<ExampleCodeBlock of={CountBadgeStories.CustomLimit} />
+
+### Notification Badge
+
+Notifications are a major use case for `CountBadge`. Remember that any `CountBadge` with a
+live-updating value should be announced to screen readers with an `aria-live` region and an
+`aria-label` on the button to provide additional context, as in the example below. Please also read
+the Accessibility guidance below this example for aditional information.
+
+<ExampleCodeBlock of={CountBadgeStories.NotificationBadge} />
+
+## Accessibility
+
+A common use case for `CountBadge` is displaying notifications, but there are other situations where
+they will have live-updated values. There are several accessibility concerns you'll want to keep in
+mind:
+
+- The button should have an aria-label that updates with the count
+- The elements inside the button should have `aria-hidden`
+- The live region should be outside the button
+- The live region should be visually hidden and only contain text
+
+## Component API
+
+<SymbolDoc name="CountBadge" fileName="/react/" />

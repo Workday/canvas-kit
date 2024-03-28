@@ -1,0 +1,145 @@
+import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import * as TextInputStories from './TextInput.stories';
+
+<Meta of={TextInputStories} />
+
+# Canvas Kit Text Input
+
+<StatusIndicator variant="red">
+  <StatusIndicator.Label>Deprecated</StatusIndicator.Label>
+</StatusIndicator>
+
+`TextInput` in Preview has been deprecated and will be removed in a future major version. Please use
+[`FormField` in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-inputs-form-field--basic)
+instead.
+
+Text Inputs allow users to enter words or characters without styling.
+
+[> Workday Design Reference](https://design.workday.com/components/inputs/text-input)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-preview-react
+```
+
+## Usage
+
+### Basic Example
+
+<ExampleCodeBlock of={TextInputStories.Basic} />
+
+### Disabled
+
+Use `TextInput.Field`s `disabled` prop to prevent users from interacting with it.
+
+<ExampleCodeBlock of={TextInputStories.Disabled} />
+
+### Placeholder
+
+Use `TextInput.Field`s `placeholder` prop to display a sample of its expected format or value before
+a value has been provided.
+
+<ExampleCodeBlock of={TextInputStories.Placeholder} />
+
+### Required
+
+Use `TextInput.Field`'s `isRequired` prop (or use with the `useTextInputModel` hook) to indicate
+that the field is required. This will also add a red asterisk to `TextInput.Label`.
+
+<ExampleCodeBlock of={TextInputStories.Required} />
+
+### Read Only
+
+Use `TextInput.Field`'s `readOnly` prop to indicate that the field can not be changed. We reccommend
+setting the background and border color to tranparent and the cursor to default to help inform users
+of the immutiblity.
+
+<ExampleCodeBlock of={TextInputStories.ReadOnly} />
+
+### Hidden Input
+
+Set `TextInput.Field`'s `type` prop to `hidden` to completly hide a field while still submitting its
+value, often used for things like security tokens. Note: You will likely need to manually
+set`aria-describedby={undefined}`and`id={undefined}`
+
+<ExampleCodeBlock of={TextInputStories.HiddenInput} />
+
+### Ref Forwarding
+
+All the TextInput subcomponents support
+[ref forwarding](https://reactjs.org/docs/forwarding-refs.html). e.g. TextInput.Field will forward
+`ref` to its underlying `<input type="text">` element.
+
+<ExampleCodeBlock of={TextInputStories.RefForwarding} />
+
+### Grow
+
+There are lots of ways to accomplish this. The TextInput.Field extends from Box so it is easy to
+extend full width, e.g. setting width prop to 100%, or you can set the `alignItems` prop to
+`stretch` on `TextInput`, etc.
+
+<ExampleCodeBlock of={TextInputStories.Grow} />
+
+### Label Position
+
+Use the `orientation` property to set `TextInput.Label`'s position. You can override the default
+spacing using the `gap` prop. Below are examples of both positions:
+
+#### Horizontal
+
+<ExampleCodeBlock of={TextInputStories.LabelPositionHorizontal} />
+
+#### Vertical
+
+<ExampleCodeBlock of={TextInputStories.LabelPositionVertical} />
+
+### Visually Hiding The Label
+
+If your label is just for screen reader users you can use the `accessibleHide` utility class from
+`@workday/canvas-kit-react/common`. You will likely want to set the `gap` prop on `TextInput` to
+`zero`.
+
+<ExampleCodeBlock of={TextInputStories.HiddenLabel} />
+
+### Type
+
+Use `TextInput.Field`'s `type` prop to customize the input type, e.g. `password`, `email`, etc.
+
+<ExampleCodeBlock of={TextInputStories.Password} />
+
+### Error States
+
+Use the `hasError` property from `useTextInputModel` to set the `TextInput` to the Error state. If
+you have an accompanying hint you can use the TextInput.Hint subcomponent.
+
+#### Errors
+
+<ExampleCodeBlock of={TextInputStories.Error} />
+
+#### Themed Errors
+
+<ExampleCodeBlock of={TextInputStories.ThemedError} />
+
+### Other Visual States
+
+Use the `useThemedRing` hook to change the visual state of the input field.
+
+#### Alerts
+
+<ExampleCodeBlock of={TextInputStories.Alert} />
+
+#### Themed Alerts
+
+If the your theme's `main` color doesn't meet accessibility contrast, the `darkest` color will be
+used in an outer ring.
+
+<ExampleCodeBlock of={TextInputStories.ThemedAlert} />
+
+## Component API
+
+<SymbolDoc name="TextInput" fileName="/preview-react/" />
+
+## Specifications
+
+<Specifications file="TextInputPreview.spec.ts" name="Text Input" />

@@ -1,0 +1,52 @@
+import {SymbolDoc} from '@workday/canvas-kit-docs';
+import * as CardStories from './card.stories';
+
+<Meta of={CardStories} />
+
+# Canvas Kit Card
+
+A Card is a preview that serves as an entry point to more detailed information. Card is a
+presentational [compound component](/getting-started/for-developers/resources/compound-components/)
+used as a building block for other components such as [Popup](/components/popups/popup/) and
+[Modal](/components/popups/modal/).
+
+[> Workday Design Reference](https://design.workday.com/components/containers/cards)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+Card includes a container `Card` component and the following subcomponents: `Card.Body` and
+`Card.Heading`.
+
+<ExampleCodeBlock of={CardStories.Basic} />
+
+### Depth
+
+`Card` extends from `Box` so it supports all of
+[Box's style props](/components/layout/box/#style-props). This includes `depth`, which changes the
+Card's perceived "height" above the page surface by adjusting its box shadow. `Card` has a default
+depth of `1`.
+
+Here's an example of a `Card` with a increased `depth` of `2`.
+
+<ExampleCodeBlock of={CardStories.Depth} />
+
+### Padding
+
+Set the `padding` prop of the `Card` (again, supported via `Box`) to adjust its padding. Card has a
+default padding of `x8` (`4rem` or `32px`).
+
+Here's an example of a `Card` with a reduced padding of `x3` (`0.75rem` or `12px`).
+
+<ExampleCodeBlock of={CardStories.Padding} />
+
+## Component API
+
+<SymbolDoc name="Card" fileName="/react/" />

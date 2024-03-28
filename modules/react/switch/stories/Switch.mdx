@@ -1,0 +1,83 @@
+import {SymbolDoc, Specifications, InformationHighlight} from '@workday/canvas-kit-docs';
+import * as SwitchStories from './Switch.stories';
+
+<Meta of={SwitchStories} />
+
+# Canvas Kit Switch
+
+Switch is a selection control that is used to switch between two potential states.
+
+[> Workday Design Reference](https://design.workday.com/components/inputs/switch)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+<InformationHighlight style={{margin: '1.5rem 0'}}>
+  <InformationHighlight.Icon />
+  <InformationHighlight.Heading>Note</InformationHighlight.Heading>
+  <InformationHighlight.Body>
+    These examples are using FormField from Preview. We can plan to promote this component to the
+    Main package in a future major version.
+  </InformationHighlight.Body>
+  <InformationHighlight.Link href="https://workday.github.io/canvas-kit/?path=/docs/preview-inputs-form-field--basic">
+    View Form Field (Preview) Documentation
+  </InformationHighlight.Link>
+</InformationHighlight>
+
+### Basic Example
+
+Switch should be used in tandem with [Form Field](/components/inputs/form-field/) to meet
+accessibility standards.
+
+<ExampleCodeBlock of={SwitchStories.Basic} />
+
+### Disabled
+
+Set the `disabled` prop of the Switch to prevent users from interacting with it.
+
+<ExampleCodeBlock of={SwitchStories.Disabled} />
+
+### Ref Forwarding
+
+Switch supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will forward
+`ref` to its underlying `<input type="checkbox">` element.
+
+<ExampleCodeBlock of={SwitchStories.RefForwarding} />
+
+### Label Position Horizontal
+
+Set the `orientation` prop of the Form Field to designate the position of the label relative to the
+input component. By default, the orientation will be set to `vertical`.
+
+<ExampleCodeBlock of={SwitchStories.LabelPosition} />
+
+### Error States
+
+Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Alert` or
+`FormField.ErrorType.Error` to set the Switch to the Alert or Error state, respectively. You will
+also need to set the `hintId` and `hintText` props on the Form Field to meet accessibility
+standards.
+
+The `error` prop may be applied directly to the Switch with a value of `Switch.ErrorType.Alert` or
+`Switch.ErrorType.Error` if Form Field is not being used.
+
+#### Alert
+
+<ExampleCodeBlock of={SwitchStories.Alert} />
+
+#### Error
+
+<ExampleCodeBlock of={SwitchStories.Error} />
+
+## Component API
+
+<SymbolDoc name="Switch" fileName="/react/" />
+
+## Specifications
+
+<Specifications file="Switch.spec.ts" name="Switch" />
