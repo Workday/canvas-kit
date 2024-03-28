@@ -4,7 +4,7 @@ import {buttonVars} from './BaseButton';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStyles, createModifiers} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 import {Button, ButtonProps} from './Button';
 import {systemIconStencil} from '../../icon';
 
@@ -80,7 +80,7 @@ export const secondaryButtonModifiers = createModifiers({
       // Hover Styles
       '&:hover, &.hover': {
         [buttonVars.hover.background]: system.color.bg.alt.default,
-        [buttonVars.hover.border]: system.color.bg.alt.default,
+        [buttonVars.hover.border]: base.soap300,
         [buttonVars.hover.label]: system.color.fg.stronger,
         [systemIconStencil.vars.color]: system.color.fg.stronger,
       },
