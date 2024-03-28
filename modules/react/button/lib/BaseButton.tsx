@@ -6,7 +6,7 @@ import {ButtonLabel} from '../lib/parts/ButtonLabel';
 import {createComponent, GrowthBehavior, focusRing} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStyles, createVars, cssVar, createModifiers} from '@workday/canvas-kit-styling';
-import {SystemIconProps} from '@workday/canvas-kit-react/icon';
+import {SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 import {ButtonColors, ButtonSizes, IconPositions} from './types';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
@@ -140,6 +140,7 @@ const baseButtonStyles = createStyles({
   position: 'relative',
   verticalAlign: 'middle',
   overflow: 'hidden',
+  [systemIconStencil.vars.color]: cssVar(buttonVars.default.icon, base.blackPepper400),
   transition:
     'box-shadow 120ms linear, border 120ms linear, background-color 120ms linear, color 120ms linear',
   '&:disabled, &:disabled:active, &.disabled': {
@@ -147,6 +148,7 @@ const baseButtonStyles = createStyles({
     boxShadow: 'none',
     opacity: cssVar(buttonVars.disabled.opacity, '1'),
   },
+  /*
   '& span .wd-icon-fill, & span .wd-icon-accent, & span .wd-icon-accent2': {
     transitionDuration: '40ms',
     fill: cssVar(buttonVars.default.icon, base.blackPepper400),
@@ -154,13 +156,17 @@ const baseButtonStyles = createStyles({
   '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
     fill: cssVar(buttonVars.default.icon, base.blackPepper400),
   },
+  */
   '&:focus-visible, &.focus': {
     backgroundColor: cssVar(buttonVars.focus.background, 'transparent'),
     borderColor: cssVar(buttonVars.focus.border, 'transparent'),
     color: cssVar(buttonVars.focus.label, base.blackPepper400),
+    [systemIconStencil.vars.color]: cssVar(buttonVars.focus.icon, base.blackPepper400),
+    /* 
     '& span .wd-icon-fill, & span .wd-icon-accent, & span .wd-icon-accent2': {
       fill: cssVar(buttonVars.focus.icon, base.blackPepper400),
     },
+    */
     ...focusRing({
       width: 2,
       separation: 2,
@@ -172,26 +178,35 @@ const baseButtonStyles = createStyles({
     backgroundColor: cssVar(buttonVars.hover.background, base.blackPepper500),
     borderColor: cssVar(buttonVars.hover.border, 'transparent'),
     color: cssVar(buttonVars.hover.label, base.blackPepper500),
+    [systemIconStencil.vars.color]: cssVar(buttonVars.hover.icon, base.blackPepper500),
+    /* 
     '& span .wd-icon-fill, & span .wd-icon-accent, & span .wd-icon-accent2': {
       fill: cssVar(buttonVars.hover.icon, base.blackPepper500),
     },
+    */
   },
   '&:hover:active': {transitionDuration: '40ms'},
   '&:active, &.active': {
     backgroundColor: cssVar(buttonVars.active.background, 'transparent'),
     borderColor: cssVar(buttonVars.active.border, 'transparent'),
     color: cssVar(buttonVars.active.label, base.blackPepper400),
+    [systemIconStencil.vars.color]: cssVar(buttonVars.active.icon, base.blackPepper400),
+    /* 
     '& span .wd-icon-fill, & span .wd-icon-accent, & span .wd-icon-accent2': {
       fill: cssVar(buttonVars.active.icon, base.blackPepper400),
     },
+    */
   },
   '&:disabled, &.disabled': {
     backgroundColor: cssVar(buttonVars.disabled.background, 'transparent'),
     borderColor: cssVar(buttonVars.disabled.border, 'transparent'),
     color: cssVar(buttonVars.disabled.label, base.blackPepper400),
+    [systemIconStencil.vars.color]: cssVar(buttonVars.disabled.icon, base.blackPepper400),
+    /* 
     '& span .wd-icon-fill, & span .wd-icon-accent, & span .wd-icon-accent2': {
       fill: cssVar(buttonVars.disabled.icon, base.blackPepper400),
     },
+    */
   },
 });
 

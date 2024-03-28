@@ -49,7 +49,7 @@
     "@workday/canvas-kit-react": "^10.3.25",
     "@workday/canvas-kit-styling": "^10.3.25",
     "@workday/canvas-system-icons-web": "^3.0.0",
-    "@workday/canvas-tokens-web": "^1.0.0",
+    "@workday/canvas-tokens-web": "^1.2.0",
     "@workday/design-assets-types": "^0.2.8"
   },
   "devDependencies": {
