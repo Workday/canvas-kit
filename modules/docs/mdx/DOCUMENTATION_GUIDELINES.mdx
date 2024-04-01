@@ -44,18 +44,21 @@ Import components which will be used to render documentation in the MDX file.
 The Specifications import is optional; only include it if the Specifications
 section exists (see below).
 -->
+
 import {Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
 
 <!--
 Import the component so we can pass it into the Storybook Meta tag (see
 below).
 -->
+
 import {[Component]} from '@workday/canvas-kit-[preview-|labs-]react/[component]';
 
-<!-- Import component examples -->
-import {Basic} from './examples/Basic';
-import {AnotherExample} from './examples/AnotherExample';
-import ...
+<!--
+MDX file should refer to *.stories.ts/js file with CSF stories
+-->
+
+import \* as ComponentStories from './Component.stories'
 
 <!--
 Use the Storybook Meta tag to designate where to display the component in the
@@ -63,7 +66,7 @@ Storybook navigation hierarchy. The title prop specifies where to show the
 component in the hierarchy. The component prop is required to get the component
 to show up at the end of that path.
 -->
-<Meta title="Components/[desired/storybook/path]" component={[Component]} />
+<Meta of={ComponentStories} />
 
 # Canvas Kit [Component]
 
@@ -82,12 +85,14 @@ to include for a given component. Try to include enough examples to illustrate
 all common use cases and anything which may not be obvious based on the
 component API.
 -->
+
 ## Usage
 
 <!--
 Every component should have a basic example as its first example in the Usage
 section. Title the section "Basic Example" for consistency.
 -->
+
 ### Basic Example
 
 Description of the Basic Example.
@@ -96,19 +101,20 @@ Description of the Basic Example.
 Every example should include an ExampleCodeBlock which renders the example
 along with its associated code.
 -->
-<ExampleCodeBlock code={Basic} />
+<ExampleCodeBlock of={ComponentStories.Basic} />
 
 <!--
 Feel free to include supplemental or follow-up information about the example
 underneath the ExampleCodeBlock (if necessary).
 -->
+
 More information about the Basic Example.
 
 ### Another Example
 
 Description of Another Example.
 
-<ExampleCodeBlock code={AnotherExample} />
+<ExampleCodeBlock code={ComponentStories.AnotherExample} />
 
 ### More Examples...
 
@@ -118,6 +124,7 @@ the component's JSDocs. This includes descriptions and props tables for the
 component, as well as its subcomponents if it's a compound component.
 Documentation for the model will also be included if the component has a model.
 -->
+
 ## Component API
 
 <!--
@@ -131,6 +138,7 @@ The Specifications section is optional. Only include it if the component has
 Cypress integration tests (i.e., a spec.ts file in the cypress/integration
 folder).
 -->
+
 ## Specifications
 
 <Specifications file="[Component].spec.ts" name="[Component]" />
@@ -151,18 +159,12 @@ you'll then follow the same document structure defined above with slight modific
 
 ````md
 <!-- Only import SymbolDescription if necessary (see below) -->
+
 import {Specifications, SymbolDoc, SymbolDescription} from '@workday/canvas-kit-docs';
 
-<!-- Import component examples -->
-import {Component1Example} from './examples/Component1Example';
-import {Component2Example} from './examples/Component2Example';
-import ...
+import \* as ComponentFamilyStories from './Component.stories'
 
-<!--
-We are unable to use the component prop here since a component family
-represents multiple components.
--->
-<Meta title="Components/[desired/storybook/path]" />
+<Meta of={ComponentFamilyStories} />
 
 # Canvas Kit [ComponentFamily]
 
@@ -180,11 +182,13 @@ component family will not have a Basic Example. Instead, it will have one
 section for each component in the family; each section will contain one or
 more examples for that particular component.
 -->
+
 ## Usage
 
 <!--
 Each section is named after the component.
 -->
+
 ### Component1
 
 <!--
@@ -198,7 +202,7 @@ reduce duplicate content between the Usage and Component API sections.
 
 Description of Component1Example.
 
-<ExampleCodeBlock code={Component1Example} />
+<ExampleCodeBlock of={ComponentFamilyStories.Component1Example} />
 
 More information about Component1Example.
 
@@ -206,13 +210,14 @@ More information about Component1Example.
 If necessary, you may add more examples for a single component within that
 component's Usage section.
 -->
+
 #### Another Component1 Example
 
 ### Component2
 
 Description of Component2Example.
 
-<ExampleCodeBlock code={Component2Example} />
+<ExampleCodeBlock of={ComponentFamilyStories.Component2Example} />
 
 ### More Components...
 
@@ -220,6 +225,7 @@ Description of Component2Example.
 You may include more examples at the end of the Usage section for examples
 which are not comopnent-specific and apply to every component in the family.
 -->
+
 ### More Examples...
 
 <!--
@@ -227,6 +233,7 @@ Unlike the Component API section for a single component, the Component API
 section for a component family will include multiple SymbolDocs, one for each
 component in the family.
 -->
+
 ## Component API
 
 <SymbolDoc name="[Component1]" fileName="/[preview-|labs-]react/" />
@@ -237,6 +244,7 @@ component in the family.
 Typically, all components within a family will share the same specifications
 file.
 -->
+
 ## Specifications
 
 <Specifications file="[ComponentFamily].spec.ts" name="[ComponentFamily]" />

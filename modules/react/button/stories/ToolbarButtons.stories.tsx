@@ -20,7 +20,6 @@ const meta: Meta<typeof ToolbarIconButton> = {
 export default meta;
 
 export const ToolbarIconButtonStory: StoryObj = {
-  name: 'Toolbar Icon Button',
   render: () => {
     const [toggled, setToggled] = React.useState<boolean | undefined>();
     const handleToggle = () => {
@@ -45,7 +44,6 @@ export const ToolbarIconButtonStory: StoryObj = {
 };
 
 export const ToolbarDropdownButtonStory: StoryObj = {
-  name: 'Toolbar Dropdown Button',
   render: () => (
     <div className="story">
       <h3>Toolbar Dropdown Button</h3>

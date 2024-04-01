@@ -1,5 +1,7 @@
-import React, {useState, ReactNode, ReactElement, FC, ChangeEvent} from 'react';
+import React, {ReactNode, ReactElement, FC, ChangeEvent} from 'react';
 import {Meta, StoryObj} from '@storybook/react';
+import {ExampleCodeBlock} from '../../../../utils/storybook';
+import mdxDoc from './Combobox.mdx';
 
 import {
   Combobox,
@@ -16,10 +18,10 @@ const autocompleteResult = (
   disabled: boolean
 ): ReactElement<MenuItemProps> => (
   <StyledMenuItem isDisabled={disabled}>
-    Result{' '}
+    Result
     <span>
       num<span>ber</span>
-    </span>{' '}
+    </span>
     {textModifier}
   </StyledMenuItem>
 );
@@ -42,55 +44,60 @@ const groupOfResults = (
   items: simpleAutoComplete(count, showDisabledItems, 10),
 });
 
-export const Autocomplete: FC<
+const Autocomplete: FC<
   Omit<ComboboxProps, 'children'> & {
     group?: boolean;
     showDisabledItems?: boolean;
   }
-> = {
-  render: ({showClearButton, group, showDisabledItems = false, ...props}) => {
-    const [currentText, setCurrentText] = React.useState('');
+> = ({showClearButton, group, showDisabledItems = false, ...props}) => {
+  const [currentText, setCurrentText] = React.useState('');
 
-    const autocompleteCallback = (event: ChangeEvent<HTMLInputElement>): void => {
-      setCurrentText(event.target.value);
-    };
+  const autocompleteCallback = (event: ChangeEvent<HTMLInputElement>): void => {
+    setCurrentText(event.target.value);
+  };
 
-    const textLength = currentText.length;
-    const groupLength = Math.floor(textLength / 2);
+  const textLength = currentText.length;
+  const groupLength = Math.floor(textLength / 2);
 
-    return (
-      <Combobox
-        autocompleteItems={
-          group
-            ? [
-                groupOfResults(groupLength, showDisabledItems, <em>Animals</em>),
-                groupOfResults(Math.min(1, groupLength), showDisabledItems, 'Cars'),
-              ]
-            : simpleAutoComplete(textLength, showDisabledItems, 10)
-        }
-        onChange={autocompleteCallback}
-        showClearButton={showClearButton == null ? true : showClearButton}
-        labelId="autocomplete-123"
-        initialValue="Test"
-        {...props}
-      >
-        <TextInput placeholder="Autocomplete" />
-      </Combobox>
-    );
-  },
+  return (
+    <Combobox
+      autocompleteItems={
+        group
+          ? [
+              groupOfResults(groupLength, showDisabledItems, <em>Animals</em>),
+              groupOfResults(Math.min(1, groupLength), showDisabledItems, 'Cars'),
+            ]
+          : simpleAutoComplete(textLength, showDisabledItems, 10)
+      }
+      onChange={autocompleteCallback}
+      showClearButton={showClearButton == null ? true : showClearButton}
+      labelId="autocomplete-123"
+      initialValue="Test"
+      {...props}
+    >
+      <TextInput placeholder="Autocomplete" />
+    </Combobox>
+  );
 };
 
 const meta: Meta<typeof Combobox> = {
   title: 'Labs/Combobox',
   component: Combobox,
+  tags: ['autodocs'],
   parameters: {
     ReadmePath: 'labs-react/combobox',
+    docs: {
+      page: mdxDoc,
+      components: {
+        ExampleCodeBlock,
+      },
+    },
   },
 };
 
 export default meta;
 
-export const AutocompleteStory: StoryObj = {
+export const Basic: StoryObj = {
   name: 'Autocomplete',
   render: () => (
     <FormField id="autocomplete-123" label="Autocomplete example">
@@ -99,8 +106,7 @@ export const AutocompleteStory: StoryObj = {
   ),
 };
 
-export const GrowStory: StoryObj = {
-  name: 'Grow',
+export const Grow: StoryObj = {
   render: () => (
     <FormField grow={true} id="autocomplete-123" label="Grow example">
       <Autocomplete />
@@ -108,8 +114,7 @@ export const GrowStory: StoryObj = {
   ),
 };
 
-export const NoClearButtonStory: StoryObj = {
-  name: 'No clear button',
+export const NoClearButton: StoryObj = {
   render: () => (
     <FormField id="autocomplete-123" label="No clear button">
       <Autocomplete showClearButton={false} />
@@ -117,8 +122,7 @@ export const NoClearButtonStory: StoryObj = {
   ),
 };
 
-export const GroupOfResultStory: StoryObj = {
-  name: 'Group of results',
+export const GroupOfResult: StoryObj = {
   render: () => (
     <FormField id="autocomplete-123" label="Group of results">
       <Autocomplete group={true} />
@@ -126,8 +130,7 @@ export const GroupOfResultStory: StoryObj = {
   ),
 };
 
-export const DisabledItemStory: StoryObj = {
-  name: 'Disabled item',
+export const DisabledItem: StoryObj = {
   render: () => (
     <FormField id="autocomplete-123" label="Group of results">
       <Autocomplete showDisabledItems={true} />
@@ -135,8 +138,7 @@ export const DisabledItemStory: StoryObj = {
   ),
 };
 
-export const RTLStory: StoryObj = {
-  name: 'RTL',
+export const RTL: StoryObj = {
   render: () => (
     <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
       <FormField id="rtl-autocomplete-123" label="RTL Autocomplete example">
