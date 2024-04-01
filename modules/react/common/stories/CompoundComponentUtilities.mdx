@@ -1,12 +1,6 @@
-import {Meta} from '@storybook/addon-docs';
-import {Specifications} from '@workday/canvas-kit-docs';
-import {CreateModelHook} from './examples/CreateModelHook';
-import {CreateContainer} from './examples/CreateContainer';
-import {CreateSubcomponent} from './examples/CreateSubcomponent';
-import {CreateElemPropsHook} from './examples/CreateElemPropsHook';
-import {CreateComponent} from './examples/CreateComponent';
+import * as UtilitiesStories from './CompoundComponentUtilities.stories';
 
-<Meta title="Hooks and Utilities/Compound Components" />
+<Meta of={UtilitiesStories} />
 
 # Compound Component Utilities
 
@@ -32,7 +26,7 @@ used.
 `createComponent` is great to use if you want to create quick compound components or you need to set
 up components with `ref` forwarding.
 
-<ExampleCodeBlock code={CreateComponent} />
+<ExampleCodeBlock of={UtilitiesStories.CreateComponent} />
 
 # createModelHook
 
@@ -67,7 +61,7 @@ export const useDisclosureModel = createModelHook({
 });
 ```
 
-<ExampleCodeBlock code={CreateModelHook} />
+<ExampleCodeBlock of={UtilitiesStories.CreateModelHook} />
 
 Typescript will infer all config from the returned `state`, `events`, `defaultConfig` and the
 `requiredConfig`.
@@ -234,7 +228,7 @@ export const Disclosure = createContainer('div')({
 });
 ```
 
-<ExampleCodeBlock code={CreateContainer} />
+<ExampleCodeBlock of={UtilitiesStories.CreateContainer} />
 
 ## createSubcomponent
 
@@ -281,7 +275,7 @@ export const DisclosureTarget = createSubcomponent('button')({
 });
 ```
 
-<ExampleCodeBlock code={CreateSubcomponent} />
+<ExampleCodeBlock of={UtilitiesStories.CreateSubcomponent} />
 
 # createElemPropsHook
 
@@ -329,4 +323,4 @@ export const DisclosureContent = createSubcomponent('div')({
 });
 ```
 
-<ExampleCodeBlock code={CreateElemPropsHook} />
+<ExampleCodeBlock of={UtilitiesStories.CreateElemPropsHook} />

@@ -9,7 +9,7 @@ const processDocs = process.env.SKIP_DOCGEN !== 'true';
 const config: StorybookConfig = {
   framework: '@storybook/react-webpack5',
   staticDirs: ['../public'],
-  stories: ['../modules/docs/mdx/**/*.mdx', '../modules/**/*.stories.@(js|jsx|ts|tsx)'],
+  stories: ['../modules/**/mdx/*.mdx', '../modules/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
     {
       name: '@storybook/addon-essentials',

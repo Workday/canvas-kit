@@ -2,12 +2,10 @@ import {Meta, StoryObj} from '@storybook/react';
 import {ExampleCodeBlock} from '../../../../utils/storybook';
 import mdxDoc from './Testing.mdx';
 
-import {Testing} from '@workday/canvas-kit-react/testing';
-import {Basic as BasicExample} from './examples/Basic';
+import {Basic} from './examples/Basic';
 
 export default {
   title: 'Hooks and Utilities/Testing',
-  component: Testing,
   tags: ['autodocs'],
   parameters: {
     docs: {
@@ -15,10 +13,10 @@ export default {
       components: {ExampleCodeBlock},
     },
   },
-} as Meta<typeof Testing>;
+} as Meta;
 
-type Story = StoryObj<typeof Testing>;
+type Story = StoryObj;
 
-export const Basic: Story = {
-  render: BasicExample,
+export const Docs: Story = {
+  render: Basic,
 };

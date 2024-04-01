@@ -1,17 +1,13 @@
 import {SymbolDoc} from '@workday/canvas-kit-docs';
+import * as BasicsStories from './Basics.stories';
 
-import {CreateStyles} from './examples/CreateStyles';
-import {CreateVars} from './examples/CreateVars';
-import {CreateModifiers} from './examples/CreateModifiers';
-import {CreateStencil} from './examples/CreateStencil';
-
-<Meta title="Styling/Basics" />
+<Meta of={BasicsStories} />
 
 ## Usage
 
 <SymbolDoc name="createStyles" />
 
-<ExampleCodeBlock code={CreateStyles} />
+<ExampleCodeBlock of={BasicsStories.CreateStyles} />
 
 In this example, the HTML will look like:
 
@@ -33,8 +29,7 @@ We're using `className` for simplicity here. Most components will use the `cs` p
 versatility.
 
 <SymbolDoc name="createVars" />
-
-<ExampleCodeBlock code={CreateVars} />
+<ExampleCodeBlock of={BasicsStories.CreateVars} />
 
 In this example, the HTML will look like:
 
@@ -55,8 +50,6 @@ And the CSS will look like:
 
 <SymbolDoc name="createModifiers" />
 
-<ExampleCodeBlock code={CreateModifiers} />
-
 ## Create Stencil
 
 Stencils are a reusable function that returns `style` and `className` props in an object. A Stencil
@@ -66,6 +59,7 @@ component, a stencil should be created for each subcomponet. If your component i
 component, a stencil can have nested styles.
 
 <SymbolDoc name="createStencil" />
+<ExampleCodeBlock of={BasicsStories.CreateStencil} />
 
 ## Concepts
 
@@ -341,4 +335,4 @@ The HTML will look something like this:
 
 Notice the stencil adds all the class names that match the base, modifiers, and compound modifiers.
 
-<ExampleCodeBlock code={CreateStencil} />
+<ExampleCodeBlock of={BasicsStories.CreateStencil} />

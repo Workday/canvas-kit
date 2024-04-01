@@ -8,7 +8,6 @@ import {Card} from '@workday/canvas-kit-react/card';
 
 const meta: Meta = {
   title: 'Features/Theming',
-  tags: ['autodocs'],
   parameters: {
     ReadmePath: 'react/common',
   },
@@ -17,7 +16,6 @@ const meta: Meta = {
 export default meta;
 
 export const Direction: StoryObj = {
-  name: 'Direction',
   render: () => (
     <div className="story">
       <section className="story">

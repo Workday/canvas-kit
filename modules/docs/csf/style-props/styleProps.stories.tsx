@@ -1,6 +1,7 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
+import {StylePropsTable} from '@workday/canvas-kit-docs';
 import {ExampleCodeBlock} from '../../../../utils/storybook';
+import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
 
 import mdxDoc from './STYLE_PROPS.mdx';
 
@@ -27,56 +28,60 @@ export default {
       page: mdxDoc,
       components: {
         ExampleCodeBlock,
+        StylePropsTable,
       },
     },
   },
-  excludeStories: ['STYLE_PROPS'],
-} as Meta<typeof Expandable>;
+} as Meta;
 
-export const Background = BackgroundExample;
+export const Background: StoryObj = {
+  render: BackgroundExample,
+};
 
-export const Border = BorderExample;
+export const Border: StoryObj = {
+  render: BorderExample,
+};
 
-export const Color = {
+export const Color: StoryObj = {
   render: ColorExample,
 };
 
-export const Depth = {
+export const Depth: StoryObj = {
   render: DepthExample,
 };
 
-export const Flex = {
+export const Flex: StoryObj = {
   render: FlexExample,
 };
 
-export const FlexItem = {
+export const FlexItem: StoryObj = {
   render: FlexItemExample,
 };
 
-export const Grid = {
+export const Grid: StoryObj = {
   render: GridExample,
 };
 
-export const GridItem = {
+export const GridItem: StoryObj = {
   render: GridItemExample,
 };
 
-export const Layout = {
+export const Layout: StoryObj = {
   render: LayoutExample,
 };
 
-export const Other = {
+export const Other: StoryObj = {
   render: OtherExample,
 };
 
-export const Position = {
+export const Position: StoryObj = {
   render: PositionExample,
 };
 
-export const Space = {
+export const Space: StoryObj = {
   render: SpaceExample,
 };
 
-export const Text = {
+export const Text: StoryObj = {
   render: TextExample,
 };

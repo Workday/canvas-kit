@@ -6,7 +6,7 @@ import {TextInput} from '@workday/canvas-kit-react/text-input';
 
 const ImportedIcons = Object.keys(CanvasAccenttIcons);
 
-const allIcons = ImportedIcons.filter(icon => icon !== 'CanvasAccenttIcons');
+const allIcons = ImportedIcons.filter(icon => icon !== 'CanvasAccentIcons');
 
 export const AccentIconList = () => {
   const [value, setValue] = React.useState('');

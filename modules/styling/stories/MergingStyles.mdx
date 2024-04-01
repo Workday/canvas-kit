@@ -1,6 +1,7 @@
 import {SymbolDoc} from '@workday/canvas-kit-docs';
+import * as MergingStylesStories from './MergingStyles.stories';
 
-<Meta title="Styling/Mergiing Styles" />
+<Meta of={MergingStylesStories} />
 
 ## Style Merging
 
@@ -103,7 +104,7 @@ new `StyleSheet` with a new class name and add that class name to the element.
 
 The following example shows this style merging.
 
-<ExampleCodeBlock code={StylingOverrides} />
+<ExampleCodeBlock of={MergingStylesStories.Docs} />
 
 CSS style property merging works by
 [CSS specificity](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity). If two matching

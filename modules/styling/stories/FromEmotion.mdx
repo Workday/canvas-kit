@@ -1,8 +1,6 @@
-import {EmotionButton} from './examples/EmotionButton';
-import {ManualStylesButton} from './examples/ManualStylesButton';
-import {StylingButton} from './examples/StylingButton';
+import * as FromEmotionStories from './FromEmotion.stories';
 
-<Meta title="Styling/Converting From Emotion" />
+<Meta of={FromEmotionStories} />
 
 # Converting from @emotion/styled
 
@@ -13,7 +11,7 @@ step through the differences.
 
 ## Button using `@emotion/styled`
 
-<ExampleCodeBlock code={EmotionButton} />
+<ExampleCodeBlock code={FromEmotionStories.EmotionButton} />
 
 If we inspect each button, we'll notice each has a different class name. They all look like
 `css-{hash}`:
@@ -130,7 +128,7 @@ This works because CSS Custom Properties cascade values. The `style` attribute d
 element directly. This is a runtime in React that allows us to change a style without a new style
 block - the styles can be static, but we can still have variable property values.
 
-<ExampleCodeBlock code={ManualStylesButton} />
+<ExampleCodeBlock code={FromEmotionStories.ManualStylesButton} />
 
 ## Button using all utilities
 
@@ -175,4 +173,4 @@ myVars({color: 'red'}) // {'--{hash}-color': 'red'}
 <div style={myVars({color: 'red'})} /> // <div style="--{hash}-color: red;">
 ```
 
-<ExampleCodeBlock code={StylingButton} />
+<ExampleCodeBlock code={FromEmotionStories.StylingButton} />

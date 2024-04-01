@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Canvas, Story, Source} from '@storybook/blocks';
 // import {createStencil} from '@workday/canvas-kit-styling';
 
-export const ExampleCodeBlock = ({of: story}: any) => {
+export const ExampleCodeBlock = ({of: story, children}: any) => {
   const [open, setOpen] = React.useState(false);
   const expandedClassName = open ? ' example-code-block--expanded' : '';
 
