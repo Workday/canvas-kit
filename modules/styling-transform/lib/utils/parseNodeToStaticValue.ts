@@ -56,6 +56,13 @@ export function parseNodeToStaticValue(
     }
   }
 
+  if (ts.isComputedPropertyName(node) && ts.isIdentifier(node.expression)) {
+    const varName = node.expression.text;
+
+    if (variables[varName]) {
+      return variables[varName];
+    }
+  }
   // [a.b]
   if (ts.isComputedPropertyName(node) && ts.isPropertyAccessExpression(node.expression)) {
     const varName = getCSSVariableKey(getPropertyAccessExpressionText(node.expression));
@@ -153,6 +160,10 @@ function getCSSVariableKey(text: string): string {
 function getPropertyAccessExpressionText(node: ts.PropertyAccessExpression): string {
   if (ts.isIdentifier(node.name)) {
     if (ts.isIdentifier(node.expression)) {
+      if (node.name.text === 'vars') {
+        // skip vars in name for stencil generated variables
+        return `${node.expression.text}`;
+      }
       return `${node.expression.text}.${node.name.text}`;
     }
     if (ts.isPropertyAccessExpression(node.expression)) {

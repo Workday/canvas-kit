@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.25](https://github.com/Workday/canvas-kit/releases/tag/v10.3.25) (2024-03-28)
+
+### Actions
+
+- fix: Update scorecard.yml ([#2664](https://github.com/Workday/canvas-kit/pull/2664)) ([@mannycarrera4](https://github.com/mannycarrera4))
+
+
+## [v10.3.24](https://github.com/Workday/canvas-kit/releases/tag/v10.3.24) (2024-03-22)
+
+### Infrastructure
+
+- fix: Fix issue with dynamic keys in stencils for style parser ([#2661](https://github.com/Workday/canvas-kit/pull/2661)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v10.3.23](https://github.com/Workday/canvas-kit/releases/tag/v10.3.23) (2024-03-22)
+
+### Components
+
+- fix: Revert overflow calculation until we find a better solution ([#2651](https://github.com/Workday/canvas-kit/pull/2651)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  Reverting the sub pixel calculation on the overflow logic until we find a better solution.
+
+### Dependencies
+
+- chore: Addressing dependency issues ([#2639](https://github.com/Workday/canvas-kit/pull/2639)) ([@josh-bagwell](https://github.com/josh-bagwell))
+- fix: Fixed yarnrc ([#2640](https://github.com/Workday/canvas-kit/pull/2640)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+### Tests
+
+- test: Remove dot only from tests  ([#2644](https://github.com/Workday/canvas-kit/pull/2644)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v9.1.40](https://github.com/Workday/canvas-kit/releases/tag/v9.1.40) (2024-03-22)
+
+### Components
+
+- fix: Revert overflow calculation until we find a better solution ([#2651](https://github.com/Workday/canvas-kit/pull/2651)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  Reverting the sub pixel calculation on the overflow logic until we find a better solution.
 ## [v10.3.22](https://github.com/Workday/canvas-kit/releases/tag/v10.3.22) (2024-03-11)
 
 ### Infrastructure
@@ -85,6 +122,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Infrastructure
 
 - ci: Fix forward-merge version conflicts ([#2568](https://github.com/Workday/canvas-kit/pull/2568)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Fix resolve-package-json merge file ([#2575](https://github.com/Workday/canvas-kit/pull/2575)) ([@NicholasBoll](https://github.com/NicholasBoll))
 
 
 ## [v10.3.12](https://github.com/Workday/canvas-kit/releases/tag/v10.3.12) (2024-02-12)
