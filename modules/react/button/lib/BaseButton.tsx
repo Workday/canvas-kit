@@ -55,7 +55,7 @@ export interface ButtonContainerProps extends Partial<SystemIconProps>, GrowthBe
  */
 export interface BaseButtonProps extends Omit<ButtonContainerProps, 'ref'> {}
 
-const buttonColorPropVars = {
+export const buttonColorPropVars = {
   default: createVars(
     'background',
     'border',
