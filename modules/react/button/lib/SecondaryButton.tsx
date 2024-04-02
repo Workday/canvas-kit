@@ -1,12 +1,11 @@
 import * as React from 'react';
 
-import {buttonVars} from './BaseButton';
+import {baseButtonStencil} from './BaseButton';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStyles, createModifiers, createStencil} from '@workday/canvas-kit-styling';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 import {Button, ButtonProps} from './Button';
-import {systemIconStencil} from '../../icon';
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
 /**
  * Extends all the style properties from Box to our buttons as well as props from ButtonProps.
@@ -20,101 +19,104 @@ export interface SecondaryButtonProps extends ButtonProps {
   variant?: 'inverse';
 }
 
-const secondaryButton = createStencil({
+const secondaryButtonStencil = createStencil({
+  extends: baseButtonStencil,
   base: {
-    // Default Styles
-    [buttonVars.default.background]: 'transparent',
-    [buttonVars.default.border]: system.color.border.contrast.default,
-    [buttonVars.default.borderRadius]: system.shape.round,
-    [buttonVars.default.label]: system.color.fg.strong,
+    // Base Styles
+    [baseButtonStencil.vars.background]: 'transparent',
+    [baseButtonStencil.vars.border]: system.color.border.contrast.default,
+    [baseButtonStencil.vars.borderRadius]: system.shape.round,
+    [baseButtonStencil.vars.label]: system.color.fg.strong,
     [systemIconStencil.vars.color]: system.color.fg.strong,
     // Focus Styles
     '&:focus-visible, &.focus': {
-      [buttonVars.focus.background]: 'transparent',
-      [buttonVars.focus.border]: system.color.border.contrast.default,
-      [buttonVars.focus.label]: system.color.fg.strong,
-      [buttonVars.focus.boxShadowInner]: system.color.fg.inverse,
-      [buttonVars.focus.boxShadowOuter]: brand.common.focusOutline,
+      [baseButtonStencil.vars.background]: 'transparent',
+      [baseButtonStencil.vars.border]: system.color.border.contrast.default,
+      [baseButtonStencil.vars.label]: system.color.fg.strong,
+      [baseButtonStencil.vars.boxShadowInner]: system.color.fg.inverse,
+      [baseButtonStencil.vars.boxShadowOuter]: brand.common.focusOutline,
       [systemIconStencil.vars.color]: system.color.fg.strong,
     },
     // Hover Styles
     '&:hover, &.hover': {
-      [buttonVars.hover.background]: system.color.bg.contrast.default,
-      [buttonVars.hover.border]: system.color.border.contrast.default,
-      [buttonVars.hover.label]: brand.primary.accent,
+      [baseButtonStencil.vars.background]: system.color.bg.contrast.default,
+      [baseButtonStencil.vars.border]: system.color.border.contrast.default,
+      [baseButtonStencil.vars.label]: brand.primary.accent,
       [systemIconStencil.vars.color]: brand.primary.accent,
     },
     // Active Styles
     '&:active, &.active': {
-      [buttonVars.active.background]: system.color.bg.contrast.strong,
-      [buttonVars.active.border]: system.color.border.contrast.strong,
-      [buttonVars.active.label]: brand.primary.accent,
+      [baseButtonStencil.vars.background]: system.color.bg.contrast.strong,
+      [baseButtonStencil.vars.border]: system.color.border.contrast.strong,
+      [baseButtonStencil.vars.label]: brand.primary.accent,
       [systemIconStencil.vars.color]: brand.primary.accent,
     },
     // Disabled Styles
     '&:disabled, &.disabled': {
-      [buttonVars.disabled.background]: 'transparent',
-      [buttonVars.disabled.border]: system.color.border.contrast.default,
-      [buttonVars.disabled.label]: system.color.fg.strong,
-      [buttonVars.disabled.opacity]: '0.4',
+      [baseButtonStencil.vars.background]: 'transparent',
+      [baseButtonStencil.vars.border]: system.color.border.contrast.default,
+      [baseButtonStencil.vars.label]: system.color.fg.strong,
+      [baseButtonStencil.vars.opacity]: '0.4',
       [systemIconStencil.vars.color]: system.color.fg.strong,
     },
   },
-});
-
-export const secondaryButtonModifiers = createModifiers({
-  variant: {
-    inverse: createStyles({
-      // Default Styles
-      [buttonVars.default.background]: 'transparent',
-      [buttonVars.default.border]: system.color.border.inverse,
-      [buttonVars.default.label]: system.color.fg.inverse,
-      [systemIconStencil.vars.color]: system.color.fg.inverse,
-      // Focus Styles
-      '&:focus-visible, &.focus': {
-        [buttonVars.focus.background]: system.color.bg.default,
-        [buttonVars.focus.border]: system.color.border.inverse,
-        [buttonVars.focus.label]: system.color.fg.strong,
-        [buttonVars.focus.boxShadowInner]: system.color.fg.strong,
-        [buttonVars.focus.boxShadowOuter]: system.color.fg.inverse,
-        [systemIconStencil.vars.color]: system.color.fg.strong,
-      },
-      // Hover Styles
-      '&:hover, &.hover': {
-        [buttonVars.hover.background]: system.color.bg.alt.default,
-        [buttonVars.hover.border]: base.soap300,
-        [buttonVars.hover.label]: system.color.fg.stronger,
-        [systemIconStencil.vars.color]: system.color.fg.stronger,
-      },
-      // Active Styles
-      '&:active, &.active': {
-        [buttonVars.active.background]: system.color.bg.alt.strong,
-        [buttonVars.active.border]: system.color.bg.alt.strong,
-        [buttonVars.active.label]: system.color.fg.stronger,
-        [systemIconStencil.vars.color]: system.color.fg.stronger,
-      },
-      // Disabled Styles
-      '&:disabled, &.disabled': {
-        [buttonVars.disabled.background]: 'transparent',
-        [buttonVars.disabled.border]: system.color.border.inverse,
-        [buttonVars.disabled.label]: system.color.fg.inverse,
+  modifiers: {
+    variant: {
+      inverse: {
+        // Default Styles
+        [baseButtonStencil.vars.background]: 'transparent',
+        [baseButtonStencil.vars.border]: system.color.border.inverse,
+        [baseButtonStencil.vars.label]: system.color.fg.inverse,
         [systemIconStencil.vars.color]: system.color.fg.inverse,
+        // Focus Styles
+        '&:focus-visible, &.focus': {
+          [baseButtonStencil.vars.background]: system.color.bg.default,
+          [baseButtonStencil.vars.border]: system.color.border.inverse,
+          [baseButtonStencil.vars.label]: system.color.fg.strong,
+          [baseButtonStencil.vars.boxShadowInner]: system.color.fg.strong,
+          [baseButtonStencil.vars.boxShadowOuter]: system.color.fg.inverse,
+          [systemIconStencil.vars.color]: system.color.fg.strong,
+        },
+        // Hover Styles
+        '&:hover, &.hover': {
+          [baseButtonStencil.vars.background]: system.color.bg.alt.default,
+          [baseButtonStencil.vars.border]: base.soap300,
+          [baseButtonStencil.vars.label]: system.color.fg.stronger,
+          [systemIconStencil.vars.color]: system.color.fg.stronger,
+        },
+        // Active Styles
+        '&:active, &.active': {
+          [baseButtonStencil.vars.background]: system.color.bg.alt.strong,
+          [baseButtonStencil.vars.border]: base.soap400,
+          [baseButtonStencil.vars.label]: system.color.fg.stronger,
+          [systemIconStencil.vars.color]: system.color.fg.stronger,
+        },
+        // Disabled Styles
+        '&:disabled, &.disabled': {
+          [baseButtonStencil.vars.background]: 'transparent',
+          [baseButtonStencil.vars.border]: system.color.border.inverse,
+          [baseButtonStencil.vars.label]: system.color.fg.inverse,
+          [systemIconStencil.vars.color]: system.color.fg.inverse,
+        },
       },
-    }),
+    },
   },
 });
 
 export const SecondaryButton = createComponent('button')({
   displayName: 'SecondaryButton',
-  Component: ({children, variant, ...elemProps}: SecondaryButtonProps, ref, Element) => {
+  Component: (
+    {children, variant, size, iconPosition, ...elemProps}: SecondaryButtonProps,
+    ref,
+    Element
+  ) => {
     return (
       <Button
         as={Element}
         ref={ref}
-        {...mergeStyles(elemProps, [
-          secondaryButton(),
-          secondaryButtonModifiers({variant: variant}),
-        ])}
+        size={size}
+        iconPosition={iconPosition}
+        {...handleCsProp(elemProps, secondaryButtonStencil({size, variant, iconPosition}))}
       >
         {children}
       </Button>

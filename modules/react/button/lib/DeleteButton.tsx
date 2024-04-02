@@ -1,12 +1,11 @@
 import * as React from 'react';
 
-import {buttonVars} from './BaseButton';
+import {baseButtonStencil} from './BaseButton';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil} from '@workday/canvas-kit-styling';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 import {Button, ButtonProps} from './Button';
-import {systemIconStencil} from '../../icon';
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
 /**
  * Extends all the style properties from Box to our buttons as well as props from ButtonProps.
@@ -15,38 +14,44 @@ import {systemIconStencil} from '../../icon';
  */
 export interface DeleteButtonProps extends ButtonProps {}
 
-const deleteButton = createStencil({
+const deleteButtonStencil = createStencil({
+  extends: baseButtonStencil,
   base: {
-    [buttonVars.default.background]: brand.error.base,
-    [buttonVars.default.border]: 'transparent',
-    [buttonVars.default.borderRadius]: system.shape.round,
-    [buttonVars.default.label]: brand.error.accent,
+    // Base Styles
+    [baseButtonStencil.vars.background]: brand.error.base,
+    [baseButtonStencil.vars.border]: 'transparent',
+    [baseButtonStencil.vars.borderRadius]: system.shape.round,
+    [baseButtonStencil.vars.label]: brand.error.accent,
     [systemIconStencil.vars.color]: brand.error.accent,
+    // Focus Styles
     '&:focus-visible, &.focus': {
-      [buttonVars.focus.background]: brand.error.base,
-      [buttonVars.focus.border]: 'transparent',
-      [buttonVars.focus.label]: brand.error.accent,
+      [baseButtonStencil.vars.background]: brand.error.base,
+      [baseButtonStencil.vars.border]: 'transparent',
+      [baseButtonStencil.vars.label]: brand.error.accent,
       [systemIconStencil.vars.color]: brand.error.accent,
-      [buttonVars.focus.boxShadowInner]: system.color.fg.inverse,
-      [buttonVars.focus.boxShadowOuter]: brand.common.focusOutline,
+      [baseButtonStencil.vars.boxShadowInner]: system.color.fg.inverse,
+      [baseButtonStencil.vars.boxShadowOuter]: brand.common.focusOutline,
     },
+    // Hover Styles
     '&:hover, &.hover': {
-      [buttonVars.hover.background]: brand.error.dark,
-      [buttonVars.hover.border]: 'transparent',
-      [buttonVars.hover.label]: brand.error.accent,
+      [baseButtonStencil.vars.background]: brand.error.dark,
+      [baseButtonStencil.vars.border]: 'transparent',
+      [baseButtonStencil.vars.label]: brand.error.accent,
       [systemIconStencil.vars.color]: brand.error.accent,
     },
+    // Active Styles
     '&:active, &.active': {
-      [buttonVars.active.background]: brand.error.darkest,
-      [buttonVars.active.border]: 'transparent',
-      [buttonVars.active.label]: brand.error.accent,
+      [baseButtonStencil.vars.background]: brand.error.darkest,
+      [baseButtonStencil.vars.border]: 'transparent',
+      [baseButtonStencil.vars.label]: brand.error.accent,
       [systemIconStencil.vars.color]: brand.error.accent,
     },
+    // Disabled Styles
     '&:disabled, &.disabled': {
-      [buttonVars.disabled.background]: brand.error.base,
-      [buttonVars.disabled.label]: brand.error.accent,
+      [baseButtonStencil.vars.background]: brand.error.base,
+      [baseButtonStencil.vars.label]: brand.error.accent,
       [systemIconStencil.vars.color]: brand.error.accent,
-      [buttonVars.disabled.opacity]: '0.4',
+      [baseButtonStencil.vars.opacity]: '0.4',
     },
   },
 });
@@ -58,9 +63,15 @@ const deleteButton = createStencil({
  */
 export const DeleteButton = createComponent('button')({
   displayName: 'DeleteButton',
-  Component: ({children, size, ...elemProps}: DeleteButtonProps, ref, Element) => {
+  Component: ({children, size, iconPosition, ...elemProps}: DeleteButtonProps, ref, Element) => {
     return (
-      <Button as={Element} ref={ref} size={size} {...mergeStyles(elemProps, [deleteButton()])}>
+      <Button
+        as={Element}
+        ref={ref}
+        size={size}
+        iconPosition={iconPosition}
+        {...handleCsProp(elemProps, deleteButtonStencil({size, iconPosition}))}
+      >
         {children}
       </Button>
     );
