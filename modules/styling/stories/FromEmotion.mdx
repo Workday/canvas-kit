@@ -11,7 +11,7 @@ step through the differences.
 
 ## Button using `@emotion/styled`
 
-<ExampleCodeBlock code={FromEmotionStories.EmotionButton} />
+<ExampleCodeBlock of={FromEmotionStories.EmotionButton} />
 
 If we inspect each button, we'll notice each has a different class name. They all look like
 `css-{hash}`:
@@ -128,7 +128,7 @@ This works because CSS Custom Properties cascade values. The `style` attribute d
 element directly. This is a runtime in React that allows us to change a style without a new style
 block - the styles can be static, but we can still have variable property values.
 
-<ExampleCodeBlock code={FromEmotionStories.ManualStylesButton} />
+<ExampleCodeBlock of={FromEmotionStories.ManualStylesButton} />
 
 ## Button using all utilities
 
@@ -173,4 +173,4 @@ myVars({color: 'red'}) // {'--{hash}-color': 'red'}
 <div style={myVars({color: 'red'})} /> // <div style="--{hash}-color: red;">
 ```
 
-<ExampleCodeBlock code={FromEmotionStories.StylingButton} />
+<ExampleCodeBlock of={FromEmotionStories.StylingButton} />

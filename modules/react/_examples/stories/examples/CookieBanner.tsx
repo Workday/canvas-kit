@@ -17,7 +17,7 @@ const CookieBanner = createComponent('div')({
   subComponents: {Item: CookieBannerItem},
 });
 
-export const Basic = () => {
+export const BasicExample = () => {
   const DefaultNotice = `We use cookies to ensure that we give you the best experience on our website. 
     If you continue without changing your settings, we'll assume that you are willing to receive cookies.`;
 

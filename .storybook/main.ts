@@ -29,19 +29,10 @@ const config: StorybookConfig = {
     defaultName: 'Docs',
   },
   typescript: {
-    skipBabel: true,
     check: false,
     reactDocgen: false, // we'll handle this ourselves
   },
   webpackFinal: async config => {
-    config.module?.rules?.push({
-      test: /\.(ts|tsx)$/,
-      loader: require.resolve('babel-loader'),
-      options: {
-        presets: [['@babel/preset-react', {typescript: true}]],
-      },
-    });
-
     // Get the specifications object and replace with a real object in the spec.ts file
     if (processDocs) {
       const specs = await getSpecifications();
@@ -122,7 +113,7 @@ const config: StorybookConfig = {
 
     // Load the whole example code of story files to display in docs.
     config.module?.rules?.push({
-      test: /examples\/.*\.tsx?$/,
+      test: /\/examples\/.*\.tsx?$/,
       include: [modulesPath],
       use: [
         {

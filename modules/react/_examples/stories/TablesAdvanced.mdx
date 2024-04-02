@@ -1,10 +1,6 @@
-import {Table} from '@workday/canvas-kit-react/table';
+import * as TablesAdvancedStories from './TablesAdvanced.stories';
 
-import {SelectableRows} from './examples/Table/WithSelectableRows';
-import {ExpandableRows} from './examples/Table/WithExpandableRows';
-import {SortableColumnHeaders} from './examples/Table/WithSortableColumnHeaders';
-
-<Meta title="Examples/Tables/Advanced" component={Table} />
+<Meta of={TablesAdvancedStories} />
 
 ## Advanced Table Examples
 
@@ -36,15 +32,15 @@ table is added to the table just after the expanded row.
   patterns and logical reading order of content rendered to the screen.
 - Outlining hierarchy in a data table is not supported for screen readers in this example.
 
-<ExampleCodeBlock code={ExpandableRows} />
+<ExampleCodeBlock of={TablesAdvancedStories.ExpandableRows} />
 
 ### Selectable Rows
 
-Developed by the Workday accessibility team, using a `Checkbox` labeled "Select All" inside of a table
-column header can be a confusing experience for screen reader users. Screen readers will
+Developed by the Workday accessibility team, using a `Checkbox` labeled "Select All" inside of a
+table column header can be a confusing experience for screen reader users. Screen readers will
 automatically announce the "Select All" column header each time users are reading any cell in
-column 1. For instance, the `Checkbox` in row 4 is decidedly not going to select all of the rows. Here
-is what we did about it:
+column 1. For instance, the `Checkbox` in row 4 is decidedly not going to select all of the rows.
+Here is what we did about it:
 
 - We intentionally rendered row 1, column 1 as a standard `<td>` element so screen readers won't
   automatically announce "Select All" while reading cells in column 1.
@@ -59,7 +55,7 @@ is what we did about it:
   rendered column 1 as row headers, then reading down column 2 (Topping Name) sounded redundant
   because the `Checkbox` names in column 1 are identical to the Topping Name in column 2.
 
-<ExampleCodeBlock code={SelectableRows} />
+<ExampleCodeBlock of={TablesAdvancedStories.SelectableRows} />
 
 ### Sortable Column Headers
 
@@ -82,4 +78,4 @@ distracting, and makes it harder to understand the data.
   focused on the tabular data in the table. It may be more reliable to use an `aria-label` string on
   the button that describes the column name and sort state together.
 
-<ExampleCodeBlock code={SortableColumnHeaders} />
+<ExampleCodeBlock of={TablesAdvancedStories.SortableColumnHeaders} />

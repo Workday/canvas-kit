@@ -19,6 +19,6 @@ export default {
 
 type Story = StoryObj<typeof Combobox>;
 
-export const Docs: Story = {
+export const Autocomplete: Story = {
   render: AutocompleteExample,
 };

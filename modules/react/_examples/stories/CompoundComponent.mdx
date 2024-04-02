@@ -1,6 +1,6 @@
-import {Template} from './examples/compoundComponent/CustomCard';
+import * as CompoundComponentStories from './CompoundComponent.stories';
 
-<Meta title="Examples/CompoundComponent" />
+<Meta of={CompoundComponentStories} />
 
 # Canvas Kit Examples
 
@@ -12,4 +12,4 @@ can dramatically simplify state handling and gives you easy access to things lik
 For more complex examples,
 [see the creating-compound-components guide](https://workday.github.io/canvas-kit/?path=/docs/guides-creating-compound-components--page).
 
-<ExampleCodeBlock code={Template} />
+<ExampleCodeBlock of={CompoundComponentStories.Basic} />

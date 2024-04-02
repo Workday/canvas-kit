@@ -1,13 +1,17 @@
-import {Basic} from './examples/GlobalHeader';
+import * as HeadersStories from './Headers.stories';
 
-<Meta title="Examples/GlobalHeader" />
+<Meta of={HeadersStories} />
 
 # Canvas Kit Examples
 
-## GlobalHeader
+## Global Header
 
 Developers building internal Workday applications will likely not need to create this component.
 However, if you're building components to be used outside of Workday, this is a helpful reference
 for building a global navigation header that looks like our internal `GlobalHeader`.
 
-<ExampleCodeBlock code={Basic} />
+<ExampleCodeBlock of={HeadersStories.GlobalHeader} />
+
+## Page Header
+
+<ExampleCodeBlock of={HeadersStories.PageHeader} />

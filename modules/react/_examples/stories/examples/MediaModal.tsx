@@ -48,7 +48,7 @@ const Media = createComponent('div')({
   },
 });
 
-export const Basic = () => {
+export const BasicExample = () => {
   return (
     <Modal>
       <Modal.Target>Open Media Modal</Modal.Target>

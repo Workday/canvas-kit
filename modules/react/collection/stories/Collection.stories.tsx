@@ -56,9 +56,9 @@ export const DataLoader = {
   render: DataLoaderExample,
 };
 
-export const BasicVirtual = {
-  render: BasicVirtualExample,
-};
+// export const BasicVirtual = {
+//   render: BasicVirtualExample,
+// };
 
 export const IdentifiedItems = {
   render: IdentifiedItemsExample,

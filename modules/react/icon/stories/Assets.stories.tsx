@@ -6,7 +6,7 @@ import mdxDoc from './Assets.mdx';
 import {SystemIconList as SystemIconListExample} from './examples/IconList';
 import {AppletIconList as AppletIconListExample} from './examples/AppletIconList';
 import {AccentIconList as AccentIconListExample} from './examples/AccentIconList';
-import {Overview} from './examples/Overview';
+import {OverviewExample} from './examples/Overview';
 
 export default {
   title: 'Assets/Icons',
@@ -21,8 +21,8 @@ export default {
   },
 } as Meta;
 
-export const Docs = {
-  render: Overview,
+export const Overview = {
+  render: OverviewExample,
 };
 
 export const SystemIconList = {

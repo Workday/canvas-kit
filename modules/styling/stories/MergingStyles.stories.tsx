@@ -5,7 +5,7 @@ import {ExampleCodeBlock} from '../../../utils/storybook';
 import mdxDoc from './MergingStyles.mdx';
 
 // examples
-import {StylingOverrides} from './examples/StylingOverrides';
+import {StylingOverrides as StylingOverridesExample} from './examples/StylingOverrides';
 
 export default {
   title: 'Styling/Mergiing Styles',
@@ -20,6 +20,6 @@ export default {
   },
 } as Meta;
 
-export const Docs: StoryObj = {
-  render: StylingOverrides,
+export const StylingOverrides: StoryObj = {
+  render: StylingOverridesExample,
 };

@@ -1,13 +1,6 @@
-import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import * as HyperlinkStories from './Hyperlink.stories';
 
-import {Hyperlink, ExternalHyperlink} from '@workday/canvas-kit-react/button';
-
-import {Link} from './examples/Hyperlink';
-import {LinkInverse} from './examples/HyperlinkInverse';
-import {ExternalLink} from './examples/ExternalHyperlink';
-import {ExternalLinkInverse} from './examples/ExternalHyperlinkInverse';
-
-<Meta title="Components/Buttons/Hyperlink" />
+<Meta of={HyperlinkStories} />
 
 # Canvas Kit Hyperlinks
 
@@ -28,14 +21,14 @@ yarn add @workday/canvas-kit-react
 `Hyperlink`s should be used when you want to navigate away from the current page or to an anchor on
 the current page.
 
-<ExampleCodeBlock code={Link} />
+<ExampleCodeBlock of={HyperlinkStories.Link} />
 
 #### Inverse
 
 `Hyperlink`s also have an `inverse` variant. Use this variant when you need to place a `Hyperlink`
 on a dark or colorful background such as `blueberry400`.
 
-<ExampleCodeBlock code={LinkInverse} />
+<ExampleCodeBlock of={HyperlinkStories.LinkInverse} />
 
 ### Component API
 
@@ -48,12 +41,12 @@ users know about the behavior by adding an icon, `extLinkIcon`. By default, the 
 "Opens link in new window". You can override `aria-label` of the icon by using the `iconLabel` prop.
 This override will be needed for translations.
 
-<ExampleCodeBlock code={ExternalLink} />
+<ExampleCodeBlock of={HyperlinkStories.ExternalLink} />
 
 `ExternalHyperlink`s also have an `inverse` variant. Use this variant when you need to place the
 link on a dark or colorful background such as `blueberry400`.
 
-<ExampleCodeBlock code={ExternalLinkInverse} />
+<ExampleCodeBlock of={HyperlinkStories.ExternalLinkInverse} />
 
 ### Component API
 

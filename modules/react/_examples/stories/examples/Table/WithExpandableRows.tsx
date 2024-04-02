@@ -3,7 +3,7 @@ import React from 'react';
 import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
 import {Table} from '@workday/canvas-kit-react/table';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
-import {createComponent, generateUniqueId} from '@workday/canvas-kit-react/common';
+import {generateUniqueId} from '@workday/canvas-kit-react/common';
 import {Heading, Subtext} from '@workday/canvas-kit-react/text';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {createStyles} from '@workday/canvas-kit-styling';
@@ -189,31 +189,28 @@ function ExpandableRow({data}: RowProps) {
   );
 }
 
-export const ExpandableRows = createComponent()({
-  displayName: 'ExpandableRows',
-  Component: () => {
-    return (
-      <>
-        <Heading as="h3" id={headingID} size="small">
-          Showroom Inventory
-        </Heading>
-        <Table aria-labelledby={headingID}>
-          <Table.Head>
-            <Table.Row gridTemplateColumns="4rem repeat(4, 1fr)">
-              <Table.Cell></Table.Cell>
-              <Table.Header scope="col">Make</Table.Header>
-              <Table.Header scope="col">Model</Table.Header>
-              <Table.Header scope="col">Year</Table.Header>
-              <Table.Header scope="col">Price</Table.Header>
-            </Table.Row>
-          </Table.Head>
-          <Table.Body>
-            {autoData.map(item => (
-              <ExpandableRow key={item.id} data={item} />
-            ))}
-          </Table.Body>
-        </Table>
-      </>
-    );
-  },
-});
+export const ExpandableRows = () => {
+  return (
+    <>
+      <Heading as="h3" id={headingID} size="small">
+        Showroom Inventory
+      </Heading>
+      <Table aria-labelledby={headingID}>
+        <Table.Head>
+          <Table.Row gridTemplateColumns="4rem repeat(4, 1fr)">
+            <Table.Cell></Table.Cell>
+            <Table.Header scope="col">Make</Table.Header>
+            <Table.Header scope="col">Model</Table.Header>
+            <Table.Header scope="col">Year</Table.Header>
+            <Table.Header scope="col">Price</Table.Header>
+          </Table.Row>
+        </Table.Head>
+        <Table.Body>
+          {autoData.map(item => (
+            <ExpandableRow key={item.id} data={item} />
+          ))}
+        </Table.Body>
+      </Table>
+    </>
+  );
+};
