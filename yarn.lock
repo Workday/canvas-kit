@@ -5048,10 +5048,10 @@
   dependencies:
     "@workday/design-assets-types" "0.2.8"
 
-"@workday/canvas-tokens-web@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@workday/canvas-tokens-web/-/canvas-tokens-web-1.0.0.tgz#4bab2d0f2fe52ecbbcd2731f0463c70942ae7f5e"
-  integrity sha512-VooVwG2wmL4VG/pNlw7IuzSsFkg3q3Y4oFuYvuVYGS5ZftX7uej1rq67dNzayhfnRDlMfo0Gv74LuRs355HtHg==
+"@workday/canvas-tokens-web@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-tokens-web/-/canvas-tokens-web-1.2.0.tgz#cde1030b933355a78e02a4ae3f3e1f469ef188bb"
+  integrity sha512-0AEW7zPjFoIfHg2bhMDYry/pCclxfiDf6RvwZ8Mt98xRPPugsw2EP0x1CcFaUTzoF7GaQUGxHeXgGgy3oKXAkw==
 
 "@workday/design-assets-types@0.2.10":
   version "0.2.10"
@@ -13886,7 +13886,7 @@ pnp-webpack-plugin@1.6.4:
   dependencies:
     ts-pnp "^1.1.6"
 
-polished@^4.1.3, polished@^4.2.2:
+polished@^4.2.2:
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/polished/-/polished-4.2.2.tgz#2529bb7c3198945373c52e34618c8fe7b1aa84d1"
   integrity sha512-Sz2Lkdxz6F2Pgnpi9U5Ng/WdWAUZxmHrNPoVlm3aAemxoy2Qy7LGjQg4uf8qKelDAUW94F4np3iH2YPf2qefcQ==
