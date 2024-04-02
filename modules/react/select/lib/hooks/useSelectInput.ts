@@ -54,13 +54,45 @@ export const useSelectInput = composeHooks(
           model.state.selectedIds[0]
         ) {
           const value = model.navigation.getItem(model.state.selectedIds[0], model).id;
-          if (model.state.inputRef.current.value !== value) {
+          if (
+            model.state.selectedIds[0] !== value &&
+            model.state.inputRef.current.value !== value
+          ) {
             // Programmatically dispatch an onChange once items are loaded. This account for when a consumer wants an initial selected item and they're loading them from a server.
             dispatchInputEvent(model.state.inputRef.current, value);
           }
         }
+        if (!model.state.selectedIds[0] && textInputRef.current?.value) {
+          dispatchInputEvent(textInputRef.current, '');
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [model.state.inputRef, model.state.items.length]);
+
+      // This effect is a copy of what is in useComboboxInput. In this case, we need access to `textInputRef` instead of `model.state.inputRef`
+      // since it points to the visual input and not the hidden input. This allows scroll to index to work
+      React.useEffect(() => {
+        if (model.state.cursorId && model.state.visibility === 'visible') {
+          const item = model.navigation.getItem(model.state.cursorId, model);
+          if (model.state.isVirtualized && item) {
+            model.state.UNSTABLE_virtual.scrollToIndex(item.index);
+          } else {
+            const listboxId = textInputRef.current?.getAttribute('aria-controls');
+            if (listboxId) {
+              const menuItem = document.querySelector(
+                `[id="${listboxId}"] [data-id="${model.state.cursorId}"]`
+              );
+              if (menuItem) {
+                requestAnimationFrame(() => {
+                  menuItem.scrollIntoView({block: 'nearest'});
+                });
+              }
+            }
+          }
+        }
+
+        // we only want to run this effect if the cursor, visibility and selectedIds change and not any other time
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, [model.state.cursorId, model.state.selectedIds, model.state.visibility]);
 
       return {
         onKeyDown(event: React.KeyboardEvent) {

@@ -4,7 +4,7 @@ import React from 'react';
 import {expectTypeOf} from 'expect-type';
 import {Properties} from 'csstype';
 import {SerializedStyles} from '@emotion/serialize';
-import {css, cache} from '@emotion/css';
+import {css} from '@emotion/css';
 import {jsx, CacheProvider} from '@emotion/react';
 import styled from '@emotion/styled';
 import {render as rtlRender, screen} from '@testing-library/react';
@@ -22,8 +22,10 @@ import {
   handleCsProp,
   keyframes,
   CSProps,
+  getCache,
 } from '../lib/cs';
 
+const cache = getCache();
 // We need to force Emotion's cache wrapper to use the cache from `@emotion/css` for tests to pass
 const CacheWrapper = props => <CacheProvider value={cache} {...props} />;
 // @ts-ignore We want the types to be the same, but I don't care to fix the error
@@ -757,6 +759,46 @@ describe('createStyles', () => {
         }
       }
       expect(found).toEqual(true);
+    });
+
+    it('should handle both variables and modifiers sharing the same key', () => {
+      const myStencil = createStencil({
+        vars: {
+          width: '10px',
+          height: '10px',
+        },
+        base({width}) {
+          return {width: width};
+        },
+        modifiers: {
+          width: {
+            zero: {
+              width: '0',
+            },
+          },
+          foo: {
+            true: {},
+          },
+        },
+      });
+
+      type Arg = Parameters<typeof myStencil>[0];
+      expectTypeOf<Arg>().toHaveProperty('width');
+      expectTypeOf<Arg['width']>().toMatchTypeOf<(string & {}) | 'zero' | undefined>();
+
+      const result = myStencil({width: '70px', height: '10px'});
+      expect(result).toHaveProperty('style');
+      expect(result.style).toHaveProperty(myStencil.vars.width, '70px');
+
+      // only match the base
+      expect(result.className).toEqual(myStencil.base);
+
+      const result2 = myStencil({width: 'zero', height: '10px'});
+      expect(result2).toHaveProperty('style');
+      expect(result2.style).toHaveProperty(myStencil.vars.width, 'zero');
+
+      // match base and width modifier
+      expect(result2.className).toEqual(`${myStencil.base} ${myStencil.modifiers.width.zero}`);
     });
   });
 });
