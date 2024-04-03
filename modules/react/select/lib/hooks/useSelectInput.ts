@@ -143,7 +143,8 @@ export const useSelectInput = composeHooks(
         // Account for the case where an initial item is selected when the Select first renders
         defaultValue:
           model.state.selectedIds.length > 0 && model.state.items.length > 0
-            ? model.navigation.getItem(model.state.selectedIds[0], model).textValue
+            ? model.navigation.getItem(model.state.selectedIds[0], model).textValue ||
+              model.state.value
             : undefined,
       } as const;
     }
