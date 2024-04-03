@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.26](https://github.com/Workday/canvas-kit/releases/tag/v10.3.26) (2024-04-02)
+
+### Actions
+
+- chore: Automate reviewer lottery for yarn lock changes ([#2667](https://github.com/Workday/canvas-kit/pull/2667)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v10.3.25](https://github.com/Workday/canvas-kit/releases/tag/v10.3.25) (2024-03-28)
+
+### Actions
+
+- fix: Update scorecard.yml ([#2664](https://github.com/Workday/canvas-kit/pull/2664)) ([@mannycarrera4](https://github.com/mannycarrera4))
+
+
 ## [v10.3.24](https://github.com/Workday/canvas-kit/releases/tag/v10.3.24) (2024-03-22)
 
 ### Infrastructure

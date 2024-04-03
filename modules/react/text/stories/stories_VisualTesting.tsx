@@ -14,7 +14,7 @@ const inverseBackground = createStyles({
 });
 
 export default withSnapshotsEnabled({
-  title: 'Testing/Containers/Text',
+  title: 'Testing/Text',
   component: Text,
 });
 
