@@ -19,7 +19,7 @@ import {useSelectModel} from './useSelectModel';
  */
 export const useSelectInput = composeHooks(
   createElemPropsHook(useSelectModel)(
-    (model, ref, elemProps: {keySofar?: string; placeholder?: string} = {}) => {
+    (model, ref, elemProps: {keySofar?: string; placeholder?: string; value?: string} = {}) => {
       const {elementRef} = useLocalRef<HTMLInputElement>(ref as any);
       const textInputRef = React.useRef<HTMLInputElement>(null);
 
@@ -130,6 +130,9 @@ export const useSelectInput = composeHooks(
         },
         textInputProps: {
           ref: textInputRef,
+          value: elemProps.value
+            ? model.navigation.getItem(model.state.selectedIds[0], model).textValue
+            : undefined,
         },
         ref: elementRef,
 
