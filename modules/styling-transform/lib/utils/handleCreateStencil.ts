@@ -5,8 +5,8 @@ import {slugify} from '@workday/canvas-kit-styling';
 import {getVarName} from './getVarName';
 import {makeEmotionSafe} from './makeEmotionSafe';
 import {parseObjectToStaticValue} from './parseObjectToStaticValue';
-import {compileCSS, createStyleObjectNode, serializeStyles} from './createStyleObjectNode';
-import {parseNodeToStaticValue} from './parseNodeToStaticValue';
+import {createStyleObjectNode, serializeStyles} from './createStyleObjectNode';
+import {getValueFromAliasedSymbol, parseNodeToStaticValue} from './parseNodeToStaticValue';
 import {NestedStyleObject, NodeTransformer, TransformerContext} from './types';
 import {isImportedFromStyling} from './isImportedFromStyling';
 
@@ -14,7 +14,7 @@ import {isImportedFromStyling} from './isImportedFromStyling';
  * Handle all arguments of the CallExpression `createStencil()`
  */
 export const handleCreateStencil: NodeTransformer = (node, context) => {
-  const {checker, prefix, variables, getFileName, onlyLookahead} = context;
+  const {checker, prefix, variables} = context;
   /**
    * This will match whenever a `createStencil()` call expression is encountered. It will loop
    * over all the config to extract variables and styles.
@@ -26,25 +26,8 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
     node.expression.text === 'createStencil' &&
     isImportedFromStyling(node.expression, checker)
   ) {
-    const fileName = getFileName(node.expression.getSourceFile()?.fileName);
     const config = node.arguments[0];
 
-    /**
-     * Stencils can define variables that are used in style object functions. Inside those
-     * functions, the full variable name is not used, but rather destructured. We'll create
-     * temporary local variables for these style object functions.
-     *
-     * For example:
-     * ```ts
-     * const myStencil = createStencil({
-     *   vars: { color: 'red' },
-     *   base: ({color}) => ({
-     *     color: color
-     *   })
-     * })
-     * ```
-     */
-    const tempVariables: Record<string, string> = {};
     // We need to keep track of stencil variables and values to automatically merge into the base
     // styles
     const stencilVariables: Record<string, string> = {};
@@ -62,7 +45,36 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
           property.name.text === 'extends' &&
           ts.isIdentifier(property.initializer)
         ) {
-          return getClassName(property.initializer.text, context);
+          const className = getClassName(property.initializer.text, context);
+          const extendsStencilName = className.split('-').slice(1).join('-');
+
+          if (
+            !Object.values(context.styles).reduce((result, fileStyles) => {
+              return (
+                result ||
+                fileStyles.reduce((_, rule) => {
+                  if (rule.includes(`.${className}`)) {
+                    return true;
+                  }
+                  return result;
+                }, false)
+              );
+            }, false)
+          ) {
+            // Process the extended stencil since those styles haven't been processed yet
+            getValueFromAliasedSymbol(property.initializer, '', context);
+          }
+
+          // attach all variables from extends stencil
+          Object.keys(context.variables).forEach(key => {
+            if (key.startsWith(`${extendsStencilName}-`)) {
+              // We want to copy a new entry into variables that is the extended stencil with the same variable name as the base variable name
+              context.variables[key.replace(extendsStencilName, stencilName)] =
+                context.variables[key];
+            }
+          });
+
+          return className;
         }
         return result;
       }, '');
@@ -88,7 +100,6 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
           variables[`${varName}`] = varValue;
 
           variables[makeEmotionSafe(node.name.text)] = varValue;
-          tempVariables[makeEmotionSafe(node.name.text)] = varValue;
 
           // Evaluate the variable defaults
           const value = parseNodeToStaticValue(node.initializer, context).toString();
@@ -105,24 +116,20 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
         });
       }
 
-      if (onlyLookahead) {
-        return;
-      }
-
       const configProperties = config.properties.map((property, index, properties) => {
         if (property.name && ts.isIdentifier(property.name)) {
           // base config object
           if (property.name.text === 'base') {
-            const styleObj = parseStyleBlock(property, context);
+            const styleObj = parseStyleBlock(property, context, stencilName);
 
             if (styleObj) {
               const initializer = createStyleReplacementNode(
+                property,
                 {
                   ...stencilVariables,
                   ...styleObj,
                 },
                 getClassName(getVarName(property.name), context),
-                fileName,
                 context
               );
 
@@ -156,13 +163,13 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
                       ts.factory.updateObjectLiteralExpression(
                         modifierProperty.initializer,
                         modifierProperty.initializer.properties.map(modifier => {
-                          const styleObj = parseStyleBlock(modifier, context);
+                          const styleObj = parseStyleBlock(modifier, context, stencilName);
 
                           if (styleObj && modifier.name && Object.keys(styleObj).length) {
                             const initializer = createStyleReplacementNode(
+                              modifier,
                               styleObj,
                               getClassName(getVarName(modifier.name), context),
-                              fileName,
                               context
                             );
                             return updateStyleProperty(modifier, initializer);
@@ -288,10 +295,9 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
                           ts.isIdentifier(compoundProperty.name) &&
                           compoundProperty.name.text === 'styles'
                         ) {
-                          const styleObj = parseStyleBlock(compoundProperty, context);
+                          const styleObj = parseStyleBlock(compoundProperty, context, stencilName);
 
                           if (styleObj) {
-                            const serialized = serializeStyles(styleObj);
                             // We need to inject compound style selectors into a file. We'll compound the
                             // selectors with multiple class names. This will increase specificity of compound
                             // selectors. This will be harder to override and we don't increase specificity in
@@ -299,16 +305,13 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
                             // isn't known to anyone. It seems unreasonable to expect CSS users to remember to
                             // add compound modifier class names. We'll make it so it is easier to author
                             // components in CSS and let them sort the specificity issues.
+                            const serialized = serializeStyles(
+                              compoundProperty,
+                              styleObj,
+                              `${selectors.join('')}{%s}`,
+                              context
+                            );
 
-                            if (serialized) {
-                              const {styles} = context;
-
-                              const styleOutput = compileCSS(
-                                `${selectors.join('')}{${serialized.styles}}`
-                              );
-                              styles[fileName] = styles[fileName] || [];
-                              styles[fileName].push(styleOutput);
-                            }
                             const initializer = createStyleObjectNode(
                               serialized.styles,
                               serialized.name
@@ -333,12 +336,6 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
         return property;
       });
 
-      // remove all our temp variables
-      // eslint-disable-next-line guard-for-in
-      for (const key in tempVariables) {
-        delete variables[key];
-      }
-
       return ts.factory.updateCallExpression(node, node.expression, undefined, [
         ts.factory.updateObjectLiteralExpression(config, configProperties),
         ts.factory.createStringLiteral(`${prefix}-${stencilName}`),
@@ -355,18 +352,25 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
  */
 function parseStyleBlock(
   property: ts.ObjectLiteralElementLike,
-  context: TransformerContext
+  context: TransformerContext,
+  stencilName: string
 ): NestedStyleObject | undefined {
   let styleObj: NestedStyleObject | undefined;
   if (ts.isPropertyAssignment(property)) {
     if (ts.isObjectLiteralExpression(property.initializer)) {
-      styleObj = parseObjectToStaticValue(property.initializer, context);
+      styleObj = parseObjectToStaticValue(property.initializer, {
+        ...context,
+        variableScope: `${stencilName}-`,
+      });
     }
 
     if (isFunctionLikeDeclaration(property.initializer)) {
       const returnNode = getReturnStatement(property.initializer);
       if (returnNode) {
-        styleObj = parseObjectToStaticValue(returnNode, context);
+        styleObj = parseObjectToStaticValue(returnNode, {
+          ...context,
+          variableScope: `${stencilName}-`,
+        });
       }
     }
   }
@@ -374,7 +378,10 @@ function parseStyleBlock(
   if (isFunctionLikeDeclaration(property)) {
     const returnNode = getReturnStatement(property);
     if (returnNode) {
-      styleObj = parseObjectToStaticValue(returnNode, context);
+      styleObj = parseObjectToStaticValue(returnNode, {
+        ...context,
+        variableScope: `${stencilName}-`,
+      });
     }
   }
 
@@ -408,15 +415,12 @@ function isFunctionLikeDeclaration(node: ts.Node): node is ts.FunctionLikeDeclar
 }
 
 function createStyleReplacementNode(
+  node: ts.Node,
   styleObj: NestedStyleObject,
   className: string,
-  fileName: string,
-  {styles}: TransformerContext
+  context: TransformerContext
 ) {
-  const serialized = serializeStyles(styleObj);
-  const styleOutput = compileCSS(`.${className}{${serialized.styles}}`);
-  styles[fileName] = styles[fileName] || [];
-  styles[fileName].push(styleOutput);
+  const serialized = serializeStyles(node, styleObj, `.${className}{%s}`, context);
 
   return createStyleObjectNode(serialized.styles, serialized.name);
 }

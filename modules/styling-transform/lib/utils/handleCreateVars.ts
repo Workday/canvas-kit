@@ -4,9 +4,11 @@ import {slugify} from '@workday/canvas-kit-styling';
 
 import {getVarName} from './getVarName';
 import {makeEmotionSafe} from './makeEmotionSafe';
-import {NodeTransformer} from './types';
+import {NodeTransformer, TransformerContext} from './types';
 
-export const handleCreateVars: NodeTransformer = (node, {prefix, variables, onlyLookahead}) => {
+export const handleCreateVars: NodeTransformer = (node, context) => {
+  const {prefix} = context;
+
   /**
    * This will create a variable
    */
@@ -15,18 +17,7 @@ export const handleCreateVars: NodeTransformer = (node, {prefix, variables, only
     ts.isIdentifier(node.expression) &&
     node.expression.text === 'createVars'
   ) {
-    const id = slugify(getVarName(node)).replace('-vars', '');
-    const vars = node.arguments
-      .map(arg => ts.isStringLiteral(arg) && arg.text)
-      .filter(Boolean) as string[];
-
-    vars.forEach(v => {
-      variables[`${id}-${makeEmotionSafe(v)}`] = `--${prefix}-${id}-${makeEmotionSafe(v)}`;
-    });
-
-    if (onlyLookahead) {
-      return;
-    }
+    const {id, vars} = addVars(node, context);
 
     return ts.factory.updateCallExpression(
       node,
@@ -53,5 +44,46 @@ export const handleCreateVars: NodeTransformer = (node, {prefix, variables, only
     );
   }
 
+  /**
+   * Check to see if this node is an ObjectLiteralExpression with properties with `createVars`
+   * values.
+   *
+   * ```ts
+   * const foo = {
+   *   bar: createVars('color')
+   * }
+   * ```
+   *
+   * This happens when variables are imported from other files. We don't need to transform this, but
+   * we'll need to add variables for property parsing.
+   */
+  if (ts.isObjectLiteralExpression(node)) {
+    node.properties.forEach(property => {
+      if (
+        ts.isPropertyAssignment(property) &&
+        ts.isCallExpression(property.initializer) &&
+        ts.isIdentifier(property.initializer.expression) &&
+        property.initializer.expression.text === 'createVars'
+      ) {
+        addVars(property.initializer, context);
+      }
+    });
+  }
+
   return;
 };
+
+function addVars(node: ts.CallExpression, context: TransformerContext) {
+  const {prefix, variables} = context;
+
+  const id = slugify(getVarName(node)).replace('-vars', '');
+  const vars = node.arguments
+    .map(arg => ts.isStringLiteral(arg) && arg.text)
+    .filter(Boolean) as string[];
+
+  vars.forEach(v => {
+    variables[`${id}-${makeEmotionSafe(v)}`] = `--${prefix}-${id}-${makeEmotionSafe(v)}`;
+  });
+
+  return {id, vars};
+}

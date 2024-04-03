@@ -1034,7 +1034,11 @@ type VariableValuesStencil<V extends DefaultedVarsShape> = V extends Record<stri
   : {[K1 in keyof V]?: {[K2 in keyof V[K1]]: string}};
 
 function onlyDefined<T>(input: T | undefined): input is T {
-  return !(input === undefined);
+  return !!input;
+}
+
+function onlyUnique<T>(value: any, index: number, array: T[]) {
+  return array.indexOf(value) === index;
 }
 
 /**
@@ -1082,9 +1086,25 @@ export function createStencil<
       )
     : () => '';
 
-  Object.keys(composesModifier).forEach(key => {
+  Object.keys(composesModifier).forEach(modifier => {
     // @ts-ignore
-    _modifiers[key] = composesModifier[key];
+    Object.keys(composesModifier[modifier]).forEach(value => {
+      // @ts-ignore
+      if (!_modifiers[modifier]) {
+        // @ts-ignore
+        _modifiers[modifier] = {};
+      }
+
+      // @ts-ignore
+      _modifiers[modifier][value] = [
+        // @ts-ignore
+        composesModifier[modifier][value],
+        // @ts-ignore
+        _modifiers[modifier][value],
+      ]
+        .filter(onlyDefined)
+        .join(' ');
+    });
   });
 
   const _compound = compound
@@ -1110,7 +1130,10 @@ export function createStencil<
         _modifiers(inputModifiers),
         compound ? _compound(inputModifiers) : '',
       ]
-        .filter(v => v) // filter out empty strings
+        .filter(onlyDefined) // filter out empty strings
+        .join(' ')
+        .split(' ')
+        .filter(onlyUnique)
         .join(' '),
       style: {...composesReturn?.style, ..._vars(input || {})},
     };

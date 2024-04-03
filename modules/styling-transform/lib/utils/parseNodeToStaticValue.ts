@@ -221,7 +221,7 @@ function getStyleValueFromTemplateExpression(
 /**
  * Get a value from an aliased symbol, if it exists. An aliased symbol comes from
  */
-function getValueFromAliasedSymbol(
+export function getValueFromAliasedSymbol(
   node: ts.Node,
   varName: string,
   context: TransformerContext
@@ -229,12 +229,15 @@ function getValueFromAliasedSymbol(
   const {checker, transform} = context;
   let symbolNode: ts.Node | undefined;
 
-  if (ts.isPropertyAccessExpression(node) && ts.isIdentifier(node.name)) {
-    symbolNode = node.expression;
-  }
   if (ts.isIdentifier(node)) {
+    // base case is the node is an identifier
     symbolNode = node;
   }
+
+  if (ts.isPropertyAccessExpression(node) && ts.isIdentifier(node.name)) {
+    return getValueFromAliasedSymbol(node.expression, varName, context);
+  }
+
   if (ts.isComputedPropertyName(node)) {
     return getValueFromAliasedSymbol(node.expression, varName, context);
   }
@@ -254,7 +257,8 @@ function getValueFromAliasedSymbol(
     // If there is an aliased symbol and it is a variable declaration, try to resolve the
     if (declaration && hasExpression(declaration)) {
       if (declaration.initializer) {
-        transform(declaration.initializer, {...context, onlyLookahead: true});
+        declaration.initializer.getText(); //?
+        transform(declaration.initializer, context);
 
         return getValueFromProcessedNodes(varName, context);
       }
@@ -263,14 +267,14 @@ function getValueFromAliasedSymbol(
 }
 
 function getValueFromProcessedNodes(varName: string, context: TransformerContext): string | void {
-  const {variables, keyframes} = context;
+  const {variables} = context;
 
   if (variables[varName]) {
     return variables[varName];
   }
 
-  if (keyframes[varName]) {
-    return keyframes[varName];
+  if (context.variableScope && variables[`${context.variableScope}${varName}`]) {
+    return variables[`${context.variableScope}${varName}`];
   }
 }
 

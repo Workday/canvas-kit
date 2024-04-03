@@ -21,8 +21,8 @@ export interface StyleTransformerOptions extends TransformerContext {
 }
 
 let vars: TransformerContext['variables'] = {};
-let keyframes: TransformerContext['keyframes'] = {};
 let styles: TransformerContext['styles'] = {};
+let cache: TransformerContext['cache'] = {};
 let loadedFallbacks = false;
 let configLoaded = false;
 let config: Config = {};
@@ -33,7 +33,7 @@ let config: Config = {};
 export function _reset() {
   vars = {};
   styles = {};
-  keyframes = {};
+  cache = {};
   loadedFallbacks = false;
 }
 
@@ -127,10 +127,10 @@ export function withDefaultContext(
     prefix: 'css',
     getPrefix: path => input.prefix || 'css',
     variables: {},
-    onlyLookahead: false,
     styles,
-    keyframes,
+    cache,
     checker,
+    extractCSS: false,
     getFileName: path => path.replace(/\.tsx?/, '.css'),
     objectTransforms: [] as ObjectTransform[],
     transform: handleTransformers(transformers || defaultTransformers),
@@ -158,7 +158,7 @@ export function transform(
   return printer.printFile(
     ts
       .transform(source, [styleTransformer(program, options)])
-      .transformed.find(s => s.fileName === fileName) || source
+      .transformed.find(s => s.fileName === source.fileName) || source
   );
 }
 

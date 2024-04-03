@@ -12,10 +12,6 @@ export const handleCalc = createPropertyTransform((node, context) => {
     node.expression.expression.text === 'calc' &&
     ts.isIdentifier(node.expression.name)
   ) {
-    if (context.onlyLookahead) {
-      return;
-    }
-
     function toStaticValue(node: ts.Node) {
       return parseNodeToStaticValue(node, context);
     }
