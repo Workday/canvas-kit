@@ -30,6 +30,7 @@ export const useSelectInput = composeHooks(
           Object.getPrototypeOf(textInputRef.current),
           'value'
         );
+
         if (nativeInputValue && nativeInputValue.set) {
           nativeInputValue.set.call(textInputRef.current, value);
         }
@@ -54,15 +55,21 @@ export const useSelectInput = composeHooks(
           model.state.selectedIds[0]
         ) {
           const value = model.navigation.getItem(model.state.selectedIds[0], model).id;
+          // console.log('in useeffect', value);
+
           if (
             model.state.selectedIds[0] !== value &&
             model.state.inputRef.current.value !== value
           ) {
+            console.log(' in here >>>>>>');
+            // elemProps.value = value;
             // Programmatically dispatch an onChange once items are loaded. This account for when a consumer wants an initial selected item and they're loading them from a server.
             dispatchInputEvent(model.state.inputRef.current, value);
           }
         }
         if (!model.state.selectedIds[0] && textInputRef.current?.value) {
+          console.log(' in here');
+
           dispatchInputEvent(textInputRef.current, '');
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -93,6 +100,7 @@ export const useSelectInput = composeHooks(
         // we only want to run this effect if the cursor, visibility and selectedIds change and not any other time
         // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [model.state.cursorId, model.state.selectedIds, model.state.visibility]);
+      console.log(textInputRef.current);
 
       return {
         onKeyDown(event: React.KeyboardEvent) {
@@ -132,6 +140,8 @@ export const useSelectInput = composeHooks(
           ref: textInputRef,
           value: elemProps.value
             ? model.navigation.getItem(model.state.selectedIds[0], model).textValue
+            : model.state.selectedIds.length > 0 && model.state.items.length > 0
+            ? model.navigation.getItem(model.state.selectedIds[0], model).textValue
             : undefined,
         },
         ref: elementRef,
@@ -139,8 +149,7 @@ export const useSelectInput = composeHooks(
         // Account for the case where an initial item is selected when the Select first renders
         defaultValue:
           model.state.selectedIds.length > 0 && model.state.items.length > 0
-            ? model.navigation.getItem(model.state.selectedIds[0], model).textValue ||
-              model.state.value
+            ? model.navigation.getItem(model.state.selectedIds[0], model).textValue
             : undefined,
       } as const;
     }
