@@ -733,6 +733,19 @@ longer extends the `Box` component, however, it still supports Emotion `styled` 
 Type level components: `Title`, `Heading`, `BodyText` and `Subtext`, have not been changed since
 they extend the `Text` component. These changes do not affect the components API.
 
+### StatusIndicator (Preview)
+
+**PR:** [#2620] https://github.com/Workday/canvas-kit/pull/2620
+
+`StatusIndicator` now uses
+[Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
+our
+[new styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
+The component now supports the `cs` prop, but otherwise the API has not changed. It should behave
+identically as it did in previous versions.
+- statusIndicatorColors has been deprecated and will be removed in a future version as a part of implementation of stencils and new tokens
+- useStatusIndicatorIcon has been deprecated and will be removed in a future version as a part of implementation of stencils and new tokens
+
 ## Glossary
 
 ### Main
