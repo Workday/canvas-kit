@@ -151,6 +151,7 @@ export const baseButtonStencil = createStencil({
       buttonColorPropVars.default.borderRadius,
       cssVar(borderRadius, system.shape.round)
     ),
+    position: 'relative',
     verticalAlign: 'middle',
     overflow: 'hidden',
     [systemIconStencil.vars.color]: cssVar(

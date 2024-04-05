@@ -2,10 +2,11 @@ import * as React from 'react';
 
 import {baseButtonStencil} from './BaseButton';
 import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
-import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {createStencil} from '@workday/canvas-kit-styling';
 import {system, brand} from '@workday/canvas-tokens-web';
 import {Button, ButtonProps} from './Button';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {mergeStyles} from '../../layout';
 
 /**
  * Extends all the style properties from Box to our buttons as well as props from ButtonProps.
@@ -254,7 +255,7 @@ export const TertiaryButton = createComponent('button')({
         icon={icon}
         iconPosition={iconPosition}
         size={size}
-        {...handleCsProp(
+        {...mergeStyles(
           elemProps,
           tertiaryButtonStencil({
             isThemeable: (isThemeable || baseIconPosition !== 'only') as any,
