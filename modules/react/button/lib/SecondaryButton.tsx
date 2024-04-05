@@ -2,10 +2,11 @@ import * as React from 'react';
 
 import {baseButtonStencil} from './BaseButton';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {createStencil} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 import {Button, ButtonProps} from './Button';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {mergeStyles} from '../../layout';
 
 /**
  * Extends all the style properties from Box to our buttons as well as props from ButtonProps.
@@ -116,7 +117,7 @@ export const SecondaryButton = createComponent('button')({
         ref={ref}
         size={size}
         iconPosition={iconPosition}
-        {...handleCsProp(elemProps, secondaryButtonStencil({size, variant, iconPosition}))}
+        {...mergeStyles(elemProps, secondaryButtonStencil({size, variant, iconPosition}))}
       >
         {children}
       </Button>
