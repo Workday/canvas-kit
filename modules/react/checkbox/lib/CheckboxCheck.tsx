@@ -30,9 +30,9 @@ const checkboxCheckStencil = createStencil({
   modifiers: {
     checked: {
       true: {
+        [systemIconStencil.vars.color]: cssVar(brand.primary.accent, system.color.icon.inverse),
         opacity: system.opacity.full,
         transform: 'scale(1)',
-        [systemIconStencil.vars.color]: cssVar(brand.primary.accent, system.color.bg.default),
       },
     },
     indeterminate: {
@@ -43,20 +43,16 @@ const checkboxCheckStencil = createStencil({
     },
     variant: {
       inverse: {
+        [systemIconStencil.vars.color]: cssVar(
+          brand.primary.base,
+          system.color.icon.primary.default
+        ),
         '& > div': {
           backgroundColor: cssVar(brand.primary.base, system.color.bg.primary.default),
         },
       },
     },
   },
-  compound: [
-    {
-      modifiers: {checked: true, variant: 'inverse'},
-      styles: {
-        [systemIconStencil.vars.color]: cssVar(brand.primary.accent, system.color.bg.default),
-      },
-    },
-  ],
 });
 
 const indeterminateBoxStencil = createStencil({
