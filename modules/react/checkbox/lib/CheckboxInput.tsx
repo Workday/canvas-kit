@@ -198,7 +198,7 @@ const checkboxInputStencil = createStencil({
         '&:where(:checked, :indeterminate) ~ div:first-of-type': {
           borderColor: 'transparent',
           boxShadow: `
-            0 0 0 ${px2rem(2)} ${base.frenchVanilla100},
+            0 0 0 ${px2rem(2)} ${system.color.fg.inverse},
             0 0 0 ${px2rem(4)} ${checkboxStatusColorVars.inner},
             0 0 0 ${px2rem(5)} ${checkboxStatusColorVars.outer}`,
         },

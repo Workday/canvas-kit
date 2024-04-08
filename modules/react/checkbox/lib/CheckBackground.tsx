@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {createComponent, ErrorType} from '@workday/canvas-kit-react/common';
 import {calc, createStencil, createVars, px2rem, cssVar} from '@workday/canvas-kit-styling';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {brand, system} from '@workday/canvas-tokens-web';
 
 interface CheckBackgroundProps {
   children: React.ReactNode;
@@ -24,7 +24,7 @@ const checkboxBackgroundStencil = createStencil({
     position: 'absolute',
     transition: 'border 200ms ease, background 200ms',
     width: calc.add(system.space.x4, px2rem(2)),
-    border: `${px2rem(1)} solid ${base.licorice200}`,
+    border: `${px2rem(1)} solid ${system.color.fg.muted.soft}`,
   },
   modifiers: {
     error: {
