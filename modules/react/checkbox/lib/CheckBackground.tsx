@@ -8,12 +8,12 @@ interface CheckBackgroundProps {
   error?: ErrorType;
 }
 
-export const backgroundVars = createVars('inner', 'outer');
+export const checkboxStatusColorVars = createVars('inner', 'outer');
 
 const checkboxBackgroundStencil = createStencil({
   base: {
     alignItems: 'center',
-    backgroundColor: base.frenchVanilla100,
+    backgroundColor: system.color.bg.default,
     borderRadius: system.shape.half,
     boxSizing: 'border-box',
     display: 'flex',
@@ -29,12 +29,21 @@ const checkboxBackgroundStencil = createStencil({
   modifiers: {
     error: {
       error: {
-        [backgroundVars.inner]: cssVar(brand.error.base, base.cinnamon500),
-        [backgroundVars.outer]: 'transparent',
+        [checkboxStatusColorVars.inner]: cssVar(
+          brand.error.base,
+          system.color.border.critical.default
+        ),
+        [checkboxStatusColorVars.outer]: 'transparent',
       },
       alert: {
-        [backgroundVars.inner]: cssVar(brand.alert.base, base.cantaloupe600),
-        [backgroundVars.outer]: cssVar(brand.alert.darkest, base.cantaloupe400),
+        [checkboxStatusColorVars.inner]: cssVar(
+          brand.alert.base,
+          system.color.border.caution.strong
+        ),
+        [checkboxStatusColorVars.outer]: cssVar(
+          brand.alert.darkest,
+          system.color.border.caution.default
+        ),
       },
     },
   },
