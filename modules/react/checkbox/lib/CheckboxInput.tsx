@@ -71,7 +71,7 @@ const checkboxInputStencil = createStencil({
       cursor: 'pointer',
     },
 
-    '&:where(:hover, .hover) ~ span:first-of-type': {
+    '&:where(:hover,.hover) ~ span:first-of-type': {
       boxShadow: `0 0 0 ${px2rem(7)} ${base.soap200}`,
     },
 
