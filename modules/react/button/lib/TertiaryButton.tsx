@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {baseButtonStencil} from './BaseButton';
 import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
-import {createStencil} from '@workday/canvas-kit-styling';
+import {calc, createStencil} from '@workday/canvas-kit-styling';
 import {system, brand} from '@workday/canvas-tokens-web';
 import {Button, ButtonProps} from './Button';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
@@ -145,7 +145,7 @@ const tertiaryButtonStencil = createStencil({
     {
       modifiers: {size: 'large', iconPosition: 'only'},
       styles: {
-        minWidth: `calc(${system.space.x4} * 3)`,
+        minWidth: calc.multiply(system.space.x4, 3),
       },
     },
     {
