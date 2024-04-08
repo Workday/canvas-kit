@@ -310,7 +310,7 @@ export const baseButtonStencil = createStencil({
     {
       modifiers: {size: 'medium', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: calc.multiply(system.space.x4, 5),
+        paddingInlineStart: calc.multiply(system.space.x1, 5),
         paddingInlineEnd: system.space.x6,
       },
     },
@@ -318,7 +318,7 @@ export const baseButtonStencil = createStencil({
       modifiers: {size: 'medium', iconPosition: 'end'},
       styles: {
         paddingInlineStart: system.space.x6,
-        paddingInlineEnd: calc.multiply(system.space.x4, 5),
+        paddingInlineEnd: calc.multiply(system.space.x1, 5),
       },
     },
     {
