@@ -51,7 +51,7 @@ const deleteButtonStencil = createStencil({
       [baseButtonStencil.vars.background]: brand.error.base,
       [baseButtonStencil.vars.label]: brand.error.accent,
       [systemIconStencil.vars.color]: brand.error.accent,
-      [baseButtonStencil.vars.opacity]: '0.4',
+      [baseButtonStencil.vars.opacity]: system.opacity.disabled,
     },
   },
 });

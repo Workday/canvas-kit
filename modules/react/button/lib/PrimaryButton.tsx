@@ -57,7 +57,7 @@ const primaryButtonStencil = createStencil({
       [baseButtonStencil.vars.background]: brand.primary.base,
       [baseButtonStencil.vars.border]: 'transparent',
       [baseButtonStencil.vars.label]: brand.primary.accent,
-      [baseButtonStencil.vars.opacity]: '0.4',
+      [baseButtonStencil.vars.opacity]: system.opacity.disabled,
       [systemIconStencil.vars.color]: brand.primary.accent,
     },
   },

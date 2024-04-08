@@ -68,7 +68,7 @@ const tertiaryButtonStencil = createStencil({
       [baseButtonStencil.vars.background]: 'transparent',
       [baseButtonStencil.vars.border]: 'transparent',
       [baseButtonStencil.vars.label]: brand.primary.base,
-      [baseButtonStencil.vars.opacity]: '0.4',
+      [baseButtonStencil.vars.opacity]: system.opacity.disabled,
     },
   },
   modifiers: {

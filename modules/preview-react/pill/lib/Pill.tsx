@@ -11,7 +11,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {BoxProps, boxStyleFn, Flex} from '@workday/canvas-kit-react/layout';
 import {borderRadius, colors, space, type} from '@workday/canvas-kit-react/tokens';
-import {handleCsProp, CSProps} from '@workday/canvas-kit-styling';
+import {handleCsProp, CSProps, px2rem} from '@workday/canvas-kit-styling';
 
 import {usePillModel} from './usePillModel';
 
@@ -81,9 +81,9 @@ const StyledBasePill = styled(BaseButton.as('button'))<StyledType & PillProps>(
         [systemIconStencil.vars.color]: colors.licorice500,
       },
       'span[data-count="ck-pill-count"]': {
-        borderTop: `1px solid ${colors.blueberry400}`,
-        borderBottom: `1px solid ${colors.blueberry400}`,
-        borderRight: `1px solid ${colors.blueberry400}`,
+        borderTop: `${px2rem(1)} solid ${colors.blueberry400}`,
+        borderBottom: `${px2rem(1)} solid ${colors.blueberry400}`,
+        borderRight: `${px2rem(1)} solid ${colors.blueberry400}`,
       },
     },
     '&:hover, &.hover': {
@@ -177,7 +177,7 @@ const StyledReadOnlyPill = styled(StyledNonInteractivePill)<StyledType>({
   [buttonColorPropVars.focus.background]: 'transparent',
   [buttonColorPropVars.active.background]: 'transparent',
   [buttonColorPropVars.disabled.background]: 'transparent',
-  border: `1px solid ${colors.licorice200}`,
+  border: `${px2rem(1)} solid ${colors.licorice200}`,
 });
 
 /**

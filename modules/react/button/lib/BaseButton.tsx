@@ -4,7 +4,7 @@ import {ButtonLabelIcon} from '../lib/parts/ButtonLabelIcon';
 import {ButtonLabel} from '../lib/parts/ButtonLabel';
 
 import {createComponent, GrowthBehavior, focusRing} from '@workday/canvas-kit-react/common';
-import {cssVar, createStencil, px2rem, createVars} from '@workday/canvas-kit-styling';
+import {cssVar, createStencil, px2rem, createVars, calc} from '@workday/canvas-kit-styling';
 import {SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {brand, system} from '@workday/canvas-tokens-web';
 import {ButtonColors, ButtonSizes, IconPositions} from './types';
@@ -127,7 +127,7 @@ export const baseButtonStencil = createStencil({
     fontSize: '0.875rem',
     lineHeight: 'normal',
     letterSpacing: '0.015rem',
-    fontWeight: 'bold',
+    fontWeight: system.fontWeight.bold,
     backgroundColor: cssVar(
       buttonColorPropVars.default.background,
       cssVar(background, 'transparent')
@@ -163,7 +163,7 @@ export const baseButtonStencil = createStencil({
     '&:disabled, &:disabled:active, &.disabled': {
       cursor: 'default',
       boxShadow: 'none',
-      opacity: cssVar(buttonColorPropVars.default.opacity, cssVar(opacity, '1')),
+      opacity: cssVar(buttonColorPropVars.default.opacity, cssVar(opacity, system.opacity.full)),
     },
     // Focus Styles
     '&:focus-visible, &.focus': {
@@ -274,7 +274,7 @@ export const baseButtonStencil = createStencil({
     },
     // IconPosition Styles
     iconPosition: {
-      only: {padding: 0},
+      only: {padding: system.space.zero},
       start: {},
       end: {},
     },
@@ -284,7 +284,7 @@ export const baseButtonStencil = createStencil({
     {
       modifiers: {size: 'large', iconPosition: 'only'},
       styles: {
-        minWidth: `calc(${system.space.x4} * 3)`,
+        minWidth: calc.multiply(system.space.x4, 3),
       },
     },
     {
@@ -310,7 +310,7 @@ export const baseButtonStencil = createStencil({
     {
       modifiers: {size: 'medium', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: `calc(${system.space.x1} * 5)`,
+        paddingInlineStart: calc.multiply(system.space.x4, 5),
         paddingInlineEnd: system.space.x6,
       },
     },
@@ -318,7 +318,7 @@ export const baseButtonStencil = createStencil({
       modifiers: {size: 'medium', iconPosition: 'end'},
       styles: {
         paddingInlineStart: system.space.x6,
-        paddingInlineEnd: `calc(${system.space.x1} * 5)`,
+        paddingInlineEnd: calc.multiply(system.space.x4, 5),
       },
     },
     {

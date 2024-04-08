@@ -57,7 +57,7 @@ const secondaryButtonStencil = createStencil({
       [baseButtonStencil.vars.background]: 'transparent',
       [baseButtonStencil.vars.border]: system.color.border.contrast.default,
       [baseButtonStencil.vars.label]: system.color.fg.strong,
-      [baseButtonStencil.vars.opacity]: '0.4',
+      [baseButtonStencil.vars.opacity]: system.opacity.disabled,
       [systemIconStencil.vars.color]: system.color.fg.strong,
     },
   },
