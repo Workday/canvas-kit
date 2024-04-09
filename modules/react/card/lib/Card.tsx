@@ -2,8 +2,8 @@ import * as React from 'react';
 
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {mergeStyles, BoxProps} from '@workday/canvas-kit-react/layout';
-import {createStyles} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 import {CardHeading} from './CardHeading';
 import {CardBody} from './CardBody';
@@ -15,12 +15,15 @@ export interface CardProps extends BoxProps {
   children?: React.ReactNode;
 }
 
-const cardBaseStyles = createStyles({
-  boxShadow: system.depth[1],
-  padding: system.space.x8,
-  backgroundColor: base.frenchVanilla100,
-  border: `0.0625rem solid ${base.soap500}`,
-  borderRadius: system.shape.x2,
+// .cnvs-card
+export const cardStencil = createStencil({
+  base: {
+    boxShadow: system.depth[1],
+    padding: system.space.x8,
+    backgroundColor: system.color.bg.default,
+    border: `${px2rem(1)} solid ${system.color.border.container}`,
+    borderRadius: system.shape.x2,
+  },
 });
 
 /**
@@ -39,7 +42,7 @@ export const Card = createComponent('div')({
   displayName: 'Card',
   Component: ({children, ...elemProps}: CardProps, ref, Element) => {
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, cardBaseStyles)}>
+      <Element ref={ref} {...mergeStyles(elemProps, cardStencil())}>
         {children}
       </Element>
     );
