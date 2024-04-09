@@ -1,6 +1,6 @@
 import React from 'react';
 import {LoadingDots} from '@workday/canvas-kit-react/loading-dots';
-import {canvas} from '@workday/canvas-kit-react/tokens';
+import {base, system} from '@workday/canvas-tokens-web';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {createStyles} from '@workday/canvas-kit-styling';
@@ -9,8 +9,8 @@ import {AccessibleHide, AriaLiveRegion} from '@workday/canvas-kit-react/common';
 export const Accessible = () => {
   const [loadingState, setLoadingState] = React.useState('idle');
   const loadingStyles = createStyles({
-    backgroundColor: canvas.colors.licorice300,
-    padding: '1rem',
+    backgroundColor: base.licorice300,
+    padding: system.space.x3,
   });
 
   React.useEffect(() => {
@@ -26,7 +26,7 @@ export const Accessible = () => {
   };
 
   return (
-    <Flex gap={canvas.space.s}>
+    <Flex gap={`var(${system.space.x4})`}>
       <SecondaryButton onClick={handleLoad}>Start</SecondaryButton>
       <AriaLiveRegion aria-label="Loading">
         {loadingState === 'loading' && (
