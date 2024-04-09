@@ -14,6 +14,10 @@ import {
 } from '@workday/canvas-kit-react/combobox';
 import {useSelectModel} from './useSelectModel';
 
+function noop() {
+  // Do nothing
+}
+
 /**
  * `useSelectInput` extends {@link useComboboxInput useComboboxInput}  and {@link useComboboxKeyboardTypeAhead useComboboxKeyboardTypeAhead} and adds type ahead functionality and Select-specific [keyboard support](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/).
  */
@@ -55,6 +59,18 @@ export const useSelectInput = composeHooks(
           model.state.selectedIds[0]
         ) {
           const value = model.navigation.getItem(model.state.selectedIds[0], model).id;
+
+          // force the hidden input to have the correct value
+          if (model.state.inputRef.current.value !== value) {
+            const nativeInputValue = Object.getOwnPropertyDescriptor(
+              Object.getPrototypeOf(model.state.inputRef.current),
+              'value'
+            );
+
+            if (nativeInputValue && nativeInputValue.set) {
+              nativeInputValue.set.call(model.state.inputRef.current, value);
+            }
+          }
 
           if (
             model.state.selectedIds[0] !== value &&
@@ -132,20 +148,13 @@ export const useSelectInput = composeHooks(
         },
         textInputProps: {
           ref: textInputRef,
-          value: elemProps.value
-            ? model.navigation.getItem(model.state.selectedIds[0], model).textValue
-            : model.state.selectedIds.length > 0 && model.state.items.length > 0
-            ? model.navigation.getItem(model.state.selectedIds[0], model).textValue
-            : undefined,
+          onChange: noop,
+          value:
+            model.state.selectedIds.length > 0 && model.state.items.length > 0
+              ? model.navigation.getItem(model.state.selectedIds[0], model).textValue
+              : '',
         },
         ref: elementRef,
-
-        // Account for the case where an initial item is selected when the Select first renders
-        defaultValue:
-          model.state.selectedIds.length > 0 && model.state.items.length > 0
-            ? model.navigation.getItem(model.state.selectedIds[0], model).textValue ||
-              model.state.value
-            : undefined,
       } as const;
     }
   ),
