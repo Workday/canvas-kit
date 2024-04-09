@@ -72,7 +72,7 @@ const checkboxInputStencil = createStencil({
     },
 
     '&:where(:hover,.hover) ~ span:first-of-type': {
-      boxShadow: `0 0 0 ${px2rem(7)} ${base.soap200}`,
+      boxShadow: `0 0 0 ${px2rem(7)} ${system.color.bg.alt.soft}`,
     },
 
     // Disabled State
