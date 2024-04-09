@@ -55,7 +55,7 @@ const deleteButtonStencil = createStencil({
 /**
  * Use sparingly for destructive actions that will result in data loss, can’t be undone, or will
  * have significant consequences. They commonly appear in confirmation dialogs as the final
- * confirmation before deleting.
+ * confirmation before being deleted.
  */
 export const DeleteButton = createComponent('button')({
   displayName: 'DeleteButton',
