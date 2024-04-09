@@ -6,7 +6,7 @@ import {
   ExtractProps,
 } from '@workday/canvas-kit-react/common';
 import {Box, Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStencil} from '@workday/canvas-kit-styling';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {useListModel} from './useListModel';
@@ -102,8 +102,14 @@ export const ListBox = createContainer('ul')({
     return (
       <div
         ref={model.state.containerRef}
-        {...mergeStyles(
-          {maxHeight, marginBottom: marginY, marginTop: marginY},
+        {...handleCsProp(
+          {
+            style: {
+              maxHeight,
+              marginBottom: marginY || marginBottom,
+              marginTop: marginY || marginBottom,
+            },
+          },
           listBoxContainerStencil({orientation: model.state.orientation})
         )}
       >
