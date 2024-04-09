@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {ErrorType, createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, cssVar, calc, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, calc, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
@@ -30,7 +30,7 @@ const checkboxCheckStencil = createStencil({
   modifiers: {
     checked: {
       true: {
-        [systemIconStencil.vars.color]: cssVar(brand.primary.accent, system.color.icon.inverse),
+        [systemIconStencil.vars.color]: brand.primary.accent,
         opacity: system.opacity.full,
         transform: 'scale(1)',
       },
@@ -43,12 +43,9 @@ const checkboxCheckStencil = createStencil({
     },
     variant: {
       inverse: {
-        [systemIconStencil.vars.color]: cssVar(
-          brand.primary.base,
-          system.color.icon.primary.default
-        ),
+        [systemIconStencil.vars.color]: brand.primary.base,
         '& > div': {
-          backgroundColor: cssVar(brand.primary.base, system.color.bg.primary.default),
+          backgroundColor: brand.primary.base,
         },
       },
     },
@@ -59,7 +56,7 @@ const indeterminateBoxStencil = createStencil({
   base: {
     width: px2rem(10),
     height: calc.divide(system.space.x1, 2),
-    backgroundColor: cssVar(brand.primary.accent, system.color.bg.default),
+    backgroundColor: brand.primary.accent,
   },
 });
 

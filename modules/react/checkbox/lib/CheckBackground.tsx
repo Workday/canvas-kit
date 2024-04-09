@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {createComponent, ErrorType} from '@workday/canvas-kit-react/common';
-import {calc, createStencil, createVars, px2rem, cssVar} from '@workday/canvas-kit-styling';
+import {calc, createStencil, createVars, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 
 interface CheckBackgroundProps {
@@ -29,21 +29,12 @@ const checkboxBackgroundStencil = createStencil({
   modifiers: {
     error: {
       error: {
-        [checkboxStatusColorVars.inner]: cssVar(
-          brand.error.base,
-          system.color.border.critical.default
-        ),
+        [checkboxStatusColorVars.inner]: brand.error.base,
         [checkboxStatusColorVars.outer]: 'transparent',
       },
       alert: {
-        [checkboxStatusColorVars.inner]: cssVar(
-          brand.alert.base,
-          system.color.border.caution.strong
-        ),
-        [checkboxStatusColorVars.outer]: cssVar(
-          brand.alert.darkest,
-          system.color.border.caution.default
-        ),
+        [checkboxStatusColorVars.inner]: brand.alert.base,
+        [checkboxStatusColorVars.outer]: brand.alert.darkest,
       },
     },
   },

@@ -9,7 +9,7 @@ import {
   px2rem,
   CSProps,
 } from '@workday/canvas-kit-styling';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {brand, system} from '@workday/canvas-tokens-web';
 import {checkboxStatusColorVars} from './CheckBackground';
 
 export interface CheckboxProps extends CSProps {
@@ -90,8 +90,8 @@ const checkboxInputStencil = createStencil({
       opacity: system.opacity.full,
     },
     '&:disabled:where(:checked, :indeterminate) ~ div:first-of-type': {
-      borderColor: cssVar(brand.primary.light, base.blueberry200),
-      backgroundColor: cssVar(brand.primary.light, system.color.bg.primary.soft),
+      borderColor: brand.primary.light,
+      backgroundColor: brand.primary.light,
     },
 
     // Focus State
@@ -99,7 +99,7 @@ const checkboxInputStencil = createStencil({
       outline: 'none',
     },
     '&:where(:focus-visible, .focus) ~ div:first-of-type': {
-      borderColor: cssVar(brand.primary.base, system.color.border.primary.default),
+      borderColor: brand.primary.base,
       borderWidth: px2rem(2),
       boxShadow: 'none',
       ...focusRing({
@@ -115,9 +115,9 @@ const checkboxInputStencil = createStencil({
             width: 2,
             separation: 2,
             animate: false,
-            outerColor: cssVar(brand.common.focusOutline, system.color.border.primary.default),
+            outerColor: cssVar(brand.common.focusOutline),
           }),
-          borderColor: cssVar(brand.primary.base, system.color.border.primary.default),
+          borderColor: brand.primary.base,
           borderWidth: px2rem(2),
           span: {
             marginInlineStart: calc.negate(px2rem(7)),

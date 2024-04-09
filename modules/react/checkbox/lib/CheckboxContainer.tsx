@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {CSProps, calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {CSProps, calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import {LabelText} from '@workday/canvas-kit-react/text';
 
@@ -31,7 +31,7 @@ const checkboxContainerStencil = createStencil({
       alignSelf: 'flex-start',
     },
     '& > label': {
-      paddingInlineStart: cssVar(system.space.x3),
+      paddingInlineStart: system.space.x3,
     },
   },
 });
