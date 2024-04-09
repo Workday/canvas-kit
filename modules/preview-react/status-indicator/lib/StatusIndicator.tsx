@@ -1,13 +1,13 @@
 import React from 'react';
 
-import {ExtractProps, createContainer} from '@workday/canvas-kit-react/common';
-import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {StatusIndicatorIcon} from './StatusIndicatorIcon';
-import {StatusIndicatorLabel} from './StatusIndicatorLabel';
-import {useStatusIndicatorModel} from './hooks';
+import {ExtractProps, createContainer, createElemPropsHook} from '@workday/canvas-kit-react/common';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
+import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {StatusIndicatorIcon, statusIndicatorColors} from './StatusIndicatorIcon';
+import {StatusIndicatorLabel} from './StatusIndicatorLabel';
+import {useStatusIndicatorModel} from './hooks';
 
 export interface StatusIndicatorProps extends ExtractProps<typeof Flex, never> {
   /**
@@ -29,82 +29,92 @@ const statusIndicatorStencil = createStencil({
   modifiers: {
     gray: {
       high: {
-        color: base.frenchVanilla100,
-        [systemIconStencil.vars.color]: base.frenchVanilla100,
-        background: base.licorice300,
+        color: system.color.static.white,
+        [systemIconStencil.vars.color]: system.color.static.white,
+        background: system.color.static.gray.default,
       },
       low: {
-        color: base.licorice400,
-        [systemIconStencil.vars.color]: base.licorice400,
-        background: base.soap300,
+        color: system.color.static.gray.strong,
+        [systemIconStencil.vars.color]: system.color.static.gray.strong,
+        background: system.color.static.gray.soft,
       },
     },
     orange: {
       high: {
-        color: base.licorice500,
-        [systemIconStencil.vars.color]: base.licorice500,
+        color: system.color.static.gray.stronger,
+        [systemIconStencil.vars.color]: system.color.static.gray.stronger,
         background: base.cantaloupe400,
       },
       low: {
-        color: base.toastedMarshmallow600,
-        [systemIconStencil.vars.color]: base.toastedMarshmallow600,
-        background: base.cantaloupe100,
+        color: system.color.static.gold.stronger,
+        [systemIconStencil.vars.color]: system.color.static.gold.stronger,
+        background: system.color.static.orange.soft,
       },
     },
     blue: {
       high: {
-        color: base.frenchVanilla100,
-        [systemIconStencil.vars.color]: base.frenchVanilla100,
-        background: base.blueberry400,
+        color: system.color.static.white,
+        [systemIconStencil.vars.color]: system.color.static.white,
+        background: system.color.static.blue.default,
       },
       low: {
-        color: base.blueberry500,
-        [systemIconStencil.vars.color]: base.blueberry500,
-        background: base.blueberry100,
+        color: system.color.text.primary.strong,
+        [systemIconStencil.vars.color]: system.color.icon.primary.strong,
+        background: system.color.static.blue.soft,
       },
     },
     green: {
       high: {
-        color: base.frenchVanilla100,
-        [systemIconStencil.vars.color]: base.frenchVanilla100,
-        background: base.greenApple600,
+        color: system.color.static.white,
+        [systemIconStencil.vars.color]: system.color.static.white,
+        background: system.color.static.green.strong,
       },
       low: {
-        color: base.greenApple600,
-        [systemIconStencil.vars.color]: base.greenApple600,
-        background: base.greenApple100,
+        color: system.color.static.green.strong,
+        [systemIconStencil.vars.color]: system.color.static.green.strong,
+        background: system.color.static.green.soft,
       },
     },
     red: {
       high: {
-        color: base.frenchVanilla100,
-        [systemIconStencil.vars.color]: base.frenchVanilla100,
-        background: base.cinnamon500,
+        color: system.color.static.white,
+        [systemIconStencil.vars.color]: system.color.static.white,
+        background: system.color.static.red.default,
       },
       low: {
-        color: base.cinnamon600,
-        [systemIconStencil.vars.color]: base.cinnamon600,
-        background: base.cinnamon100,
+        color: system.color.static.red.strong,
+        [systemIconStencil.vars.color]: system.color.static.red.strong,
+        background: system.color.static.red.soft,
       },
     },
     transparent: {
       high: {
-        opacity: 0.85,
-        color: base.frenchVanilla100,
-        [systemIconStencil.vars.color]: base.frenchVanilla100,
-        background: base.blackPepper600,
+        color: system.color.static.white,
+        [systemIconStencil.vars.color]: system.color.static.white,
+        background: system.color.bg.overlay,
       },
       low: {
-        opacity: 0.85,
-        color: base.frenchVanilla100,
-        [systemIconStencil.vars.color]: base.frenchVanilla100,
-        background: base.blackPepper600,
+        color: system.color.static.white,
+        [systemIconStencil.vars.color]: system.color.static.white,
+        background: system.color.bg.overlay,
       },
     },
   },
   defaultModifiers: {
     gray: 'low',
   },
+});
+
+/**
+ * @deprecated ⚠️ We've deprecated `useStatusIndicator` for StatusIndicator because it's now directly handeled by the `statusIndicatorStencil`.
+ */
+export const useStatusIndicator = createElemPropsHook(useStatusIndicatorModel)(({state}) => {
+  const colors = statusIndicatorColors[state.variant][state.emphasis];
+  return {
+    opacity: state.variant === 'transparent' ? '0.85' : undefined,
+    color: colors.text,
+    background: colors.background,
+  };
 });
 
 /**

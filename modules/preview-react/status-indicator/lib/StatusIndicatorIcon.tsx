@@ -1,17 +1,14 @@
 import React from 'react';
 
-import {createComponent, createElemPropsHook} from '@workday/canvas-kit-react/common';
+import {createElemPropsHook, createComponent} from '@workday/canvas-kit-react/common';
 import {colors} from '@workday/canvas-kit-react/tokens';
-
 import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
 import {useStatusIndicatorModel} from './hooks';
 
 export interface StatusIndicatorIconProps extends SystemIconProps {}
 
 /**
- * ### ⚠️ We've deprecated `statusIndicatorColors` for StatusIndicator because it's now directly handeled by Style Utility. ⚠️
- * Please consider using [`StatusIndicator`](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator--basic) instead.
- * @deprecated
+ * @deprecated ⚠️ We've deprecated `statusIndicatorColors` for StatusIndicator because it's now directly handeled by the `statusIndicatorStencil`.
  */
 export const statusIndicatorColors = {
   gray: {
@@ -77,9 +74,7 @@ export const statusIndicatorColors = {
 };
 
 /**
- * ### ⚠️ We've deprecated `useStatusIndicatorIcon` for StatusIndicatorIcon because it's now directly handeled by Style Utility. ⚠️
- * Please consider using [`StatusIndicatorIcon`](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator--icon) instead.
- * @deprecated
+ * @deprecated ⚠️ We've deprecated `useStatusIndicatorIcon` for StatusIndicatorIcon because it's now directly handeled by the `statusIndicatorStencil`.
  */
 export const useStatusIndicatorIcon = createElemPropsHook(useStatusIndicatorModel)(({state}) => {
   const colors = statusIndicatorColors[state.variant][state.emphasis];
@@ -92,6 +87,6 @@ export const useStatusIndicatorIcon = createElemPropsHook(useStatusIndicatorMode
 export const StatusIndicatorIcon = createComponent('span')({
   displayName: 'StatusIndicatorIcon',
   Component: (elemProps: SystemIconProps, ref, Element) => {
-    return <SystemIcon as={Element} size={20} role="img" {...elemProps} />;
+    return <SystemIcon as={Element} ref={ref} size={20} role="img" {...elemProps} />;
   },
 });

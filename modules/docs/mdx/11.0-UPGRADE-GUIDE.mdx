@@ -19,6 +19,10 @@ any questions.
   - [Label Text](#label-text)
   - [Text Area (Preview)](#text-area-preview)
   - [Text Input (Preview)](#text-input-preview)
+  - [Status Indicator model](#status-indicator-model)
+    - [statusIndicatorColors](#statusIndicatorColors)
+    - [useStatusIndicator](#useStatusIndicator)
+    - [useStatusIndicatorIcon](#useStatusIndicatorIcon)
 - [Component Style Updates](#component-style-updates)
 - [Component Token Updates](#component-token-updates)
 - [Component Updates](#component-updates)
@@ -213,6 +217,27 @@ We've deprecated `TextInput` from [Preview](#preview) in favor of our compound c
 in [Preview](#preview). Please use
 [`FormField`](https://workday.github.io/canvas-kit/?path=//docs/preview-inputs-form-field--basic)
 instead.
+
+---
+
+### Status Indicator model
+
+**PR:** [#2472](https://github.com/Workday/canvas-kit/pull/2620)
+
+#### statusIndicatorColors
+
+We've deprecated `statusIndicatorColors` for StatusIndicator because it's now directly handeled by
+the `statusIndicatorStencil`.
+
+#### useStatusIndicator
+
+We've deprecated `useStatusIndicator` for StatusIndicator because it's now directly handeled by the
+`statusIndicatorStencil`.
+
+#### useStatusIndicator
+
+We've deprecated `useStatusIndicatorIcon` for StatusIndicatorIcon because it's now directly handeled
+by the `statusIndicatorStencil`.
 
 ---
 
@@ -743,8 +768,11 @@ our
 [new styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
 The component now supports the `cs` prop, but otherwise the API has not changed. It should behave
 identically as it did in previous versions.
-- statusIndicatorColors has been deprecated and will be removed in a future version as a part of implementation of stencils and new tokens
-- useStatusIndicatorIcon has been deprecated and will be removed in a future version as a part of implementation of stencils and new tokens
+
+- statusIndicatorColors has been deprecated and will be removed in a future version as a part of
+  implementation of stencils and new tokens
+- useStatusIndicatorIcon has been deprecated and will be removed in a future version as a part of
+  implementation of stencils and new tokens
 
 ## Glossary
 
