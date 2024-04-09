@@ -381,6 +381,50 @@ describe('handleCreateStencil', () => {
         compileCSS('.css-button--size-title-small{font-size:var(--title-small);}')
       );
     });
+
+    it('should handle the "label" var name, making it safe for Emotion', () => {
+      const program = createProgramFromSource(`
+        import {createStencil} from '@workday/canvas-kit-styling';
+
+        const buttonStencil = createStencil({
+          vars: {
+            label: 'red'
+          },
+          base({label}) {
+            return {
+              color: label
+            }
+          },
+          modifiers: {
+            size: {
+              'title.large': {fontSize: '--title-large'},
+              'title.small': {fontSize: '--title-small'}
+            },
+          }
+        })
+      `);
+
+      const styles = {};
+      const sourceFile = program.getSourceFile('test.ts');
+      const node = findNodes(sourceFile, 'createStencil', ts.isCallExpression)[0];
+
+      handleCreateStencil(node, withDefaultContext(program.getTypeChecker(), {styles}));
+
+      // base
+      expect(styles['test.css']).toContainEqual(
+        compileCSS(
+          '.css-button{--css-button-label-emotion-safe:red;color:var(--css-button-label-emotion-safe);}'
+        )
+      );
+
+      // modifiers
+      expect(styles['test.css']).toContainEqual(
+        compileCSS('.css-button--size-title-large{font-size:var(--title-large);}')
+      );
+      expect(styles['test.css']).toContainEqual(
+        compileCSS('.css-button--size-title-small{font-size:var(--title-small);}')
+      );
+    });
   });
 
   describe('when importing variables from another stencil', () => {
