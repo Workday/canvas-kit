@@ -25,7 +25,7 @@ export interface ButtonContainerProps extends Partial<SystemIconProps>, GrowthBe
   size?: ButtonSizes;
   /**
    * The icon of the Button.
-   * Note: not displayed at `small` size
+   * Note: Not displayed at `small` size
    */
   icon?: CanvasSystemIcon;
   /**
