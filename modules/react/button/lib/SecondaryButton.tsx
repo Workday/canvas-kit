@@ -81,7 +81,7 @@ const secondaryButtonStencil = createStencil({
         // Hover Styles
         '&:hover, &.hover': {
           [baseButtonStencil.vars.background]: system.color.bg.alt.default,
-          [baseButtonStencil.vars.border]: base.soap300,
+          [baseButtonStencil.vars.border]: system.color.border.input.inverse,
           [baseButtonStencil.vars.label]: system.color.fg.stronger,
           [systemIconStencil.vars.color]: system.color.fg.stronger,
         },

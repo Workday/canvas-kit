@@ -19,14 +19,12 @@ const deleteButtonStencil = createStencil({
   base: {
     // Base Styles
     [baseButtonStencil.vars.background]: brand.error.base,
-    [baseButtonStencil.vars.border]: 'transparent',
     [baseButtonStencil.vars.borderRadius]: system.shape.round,
     [baseButtonStencil.vars.label]: brand.error.accent,
     [systemIconStencil.vars.color]: brand.error.accent,
     // Focus Styles
     '&:focus-visible, &.focus': {
       [baseButtonStencil.vars.background]: brand.error.base,
-      [baseButtonStencil.vars.border]: 'transparent',
       [baseButtonStencil.vars.label]: brand.error.accent,
       [systemIconStencil.vars.color]: brand.error.accent,
       [baseButtonStencil.vars.boxShadowInner]: system.color.fg.inverse,
@@ -35,14 +33,12 @@ const deleteButtonStencil = createStencil({
     // Hover Styles
     '&:hover, &.hover': {
       [baseButtonStencil.vars.background]: brand.error.dark,
-      [baseButtonStencil.vars.border]: 'transparent',
       [baseButtonStencil.vars.label]: brand.error.accent,
       [systemIconStencil.vars.color]: brand.error.accent,
     },
     // Active Styles
     '&:active, &.active': {
       [baseButtonStencil.vars.background]: brand.error.darkest,
-      [baseButtonStencil.vars.border]: 'transparent',
       [baseButtonStencil.vars.label]: brand.error.accent,
       [systemIconStencil.vars.color]: brand.error.accent,
     },

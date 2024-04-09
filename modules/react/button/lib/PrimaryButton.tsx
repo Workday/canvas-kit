@@ -25,14 +25,13 @@ const primaryButtonStencil = createStencil({
   base: {
     // Base Styles
     [baseButtonStencil.vars.background]: brand.primary.base,
-    [baseButtonStencil.vars.border]: 'transparent',
+    // [baseButtonStencil.vars.border]: 'transparent',
     [baseButtonStencil.vars.borderRadius]: system.shape.round,
     [baseButtonStencil.vars.label]: brand.primary.accent,
     [systemIconStencil.vars.color]: brand.primary.accent,
     // Focus Styles
     '&:focus-visible, &.focus': {
       [baseButtonStencil.vars.background]: brand.primary.base,
-      [baseButtonStencil.vars.border]: 'transparent',
       [baseButtonStencil.vars.label]: brand.primary.accent,
       [baseButtonStencil.vars.boxShadowInner]: system.color.border.inverse,
       [baseButtonStencil.vars.boxShadowOuter]: brand.common.focusOutline,
@@ -41,21 +40,18 @@ const primaryButtonStencil = createStencil({
     // Hover Styles
     '&:hover, &.hover': {
       [baseButtonStencil.vars.background]: brand.primary.dark,
-      [baseButtonStencil.vars.border]: 'transparent',
       [baseButtonStencil.vars.label]: brand.primary.accent,
       [systemIconStencil.vars.color]: brand.primary.accent,
     },
     // Active Styles
     '&:active, &.active': {
       [baseButtonStencil.vars.background]: brand.primary.darkest,
-      [baseButtonStencil.vars.border]: 'transparent',
       [baseButtonStencil.vars.label]: brand.primary.accent,
       [systemIconStencil.vars.color]: brand.primary.accent,
     },
     // Disabled Styles
     '&:disabled, &.disabled': {
       [baseButtonStencil.vars.background]: brand.primary.base,
-      [baseButtonStencil.vars.border]: 'transparent',
       [baseButtonStencil.vars.label]: brand.primary.accent,
       [baseButtonStencil.vars.opacity]: system.opacity.disabled,
       [systemIconStencil.vars.color]: brand.primary.accent,
