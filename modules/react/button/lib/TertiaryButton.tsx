@@ -18,7 +18,6 @@ export interface TertiaryButtonProps extends ButtonProps {
    * Variant has an option for `inverse` which will inverse the styling
    */
   variant?: 'inverse';
-  isThemeable?: boolean;
 }
 
 const tertiaryButtonStencil = createStencil({
@@ -32,14 +31,14 @@ const tertiaryButtonStencil = createStencil({
     [baseButtonStencil.vars.background]: 'transparent',
     [baseButtonStencil.vars.borderRadius]: system.shape.x1,
     [baseButtonStencil.vars.label]: brand.primary.base,
-    [systemIconStencil.vars.color]: system.color.fg.strong,
+    [systemIconStencil.vars.color]: brand.primary.base,
     // Focus Styles
     '&:focus-visible, &.focus': {
       [baseButtonStencil.vars.background]: 'transparent',
       [baseButtonStencil.vars.label]: brand.primary.base,
       [baseButtonStencil.vars.boxShadowInner]: brand.common.focusOutline,
       [baseButtonStencil.vars.boxShadowOuter]: brand.common.focusOutline,
-      [systemIconStencil.vars.color]: system.color.fg.strong,
+      [systemIconStencil.vars.color]: brand.primary.base,
       ...focusRing({
         width: 2,
         separation: 0,
@@ -51,38 +50,44 @@ const tertiaryButtonStencil = createStencil({
     '&:hover, &.hover': {
       [baseButtonStencil.vars.background]: system.color.bg.alt.default,
       [baseButtonStencil.vars.label]: brand.primary.dark,
-      [systemIconStencil.vars.color]: system.color.fg.strong,
+      [systemIconStencil.vars.color]: brand.primary.dark,
     },
     // Active Styles
     '&:active, &.active': {
       [baseButtonStencil.vars.background]: system.color.bg.alt.strong,
       [baseButtonStencil.vars.label]: brand.primary.darkest,
-      [systemIconStencil.vars.color]: system.color.fg.stronger,
+      [systemIconStencil.vars.color]: brand.primary.darkest,
     },
     // Disabled Styles
     '&:disabled, &.disabled': {
       [baseButtonStencil.vars.background]: 'transparent',
       [baseButtonStencil.vars.label]: brand.primary.base,
       [baseButtonStencil.vars.opacity]: system.opacity.disabled,
+      [systemIconStencil.vars.color]: brand.primary.base,
     },
   },
   modifiers: {
-    isThemeable: {
-      true: {
-        [systemIconStencil.vars.color]: brand.primary.base,
+    // IconPosition Styles
+    iconPosition: {
+      only: {
+        padding: 0,
+        borderRadius: system.shape.round,
+        [systemIconStencil.vars.color]: system.color.fg.strong,
         '&:focus-visible, &.focus': {
-          [systemIconStencil.vars.color]: brand.primary.base,
+          [systemIconStencil.vars.color]: system.color.fg.strong,
         },
         '&:hover, &.hover': {
-          [systemIconStencil.vars.color]: brand.primary.dark,
+          [systemIconStencil.vars.color]: system.color.fg.strong,
         },
         '&:active, &.active': {
-          [systemIconStencil.vars.color]: brand.primary.darkest,
+          [systemIconStencil.vars.color]: system.color.fg.stronger,
         },
         '&:disabled, &.disabled': {
-          [systemIconStencil.vars.color]: brand.primary.base,
+          [systemIconStencil.vars.color]: system.color.fg.strong,
         },
       },
+      start: {},
+      end: {},
     },
     variant: {
       // Inverse Styles
@@ -122,12 +127,6 @@ const tertiaryButtonStencil = createStencil({
           [systemIconStencil.vars.color]: system.color.fg.inverse,
         },
       },
-    },
-    // IconPosition Styles
-    iconPosition: {
-      only: {padding: 0, borderRadius: system.shape.round},
-      start: {},
-      end: {},
     },
   },
   // Compound Modifier Styles
@@ -218,15 +217,7 @@ const tertiaryButtonStencil = createStencil({
 export const TertiaryButton = createComponent('button')({
   displayName: 'TertiaryButton',
   Component: (
-    {
-      children,
-      icon,
-      size = 'medium',
-      isThemeable,
-      variant,
-      iconPosition,
-      ...elemProps
-    }: TertiaryButtonProps,
+    {children, icon, size = 'medium', variant, iconPosition, ...elemProps}: TertiaryButtonProps,
     ref,
     Element
   ) => {
@@ -248,7 +239,6 @@ export const TertiaryButton = createComponent('button')({
         {...mergeStyles(
           elemProps,
           tertiaryButtonStencil({
-            isThemeable: (isThemeable || baseIconPosition !== 'only') as any,
             variant,
             size,
             iconPosition: baseIconPosition,
