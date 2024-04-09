@@ -104,7 +104,7 @@ export function createProgramFromSource(...args: any[]) {
     // This should be kept up to date with getSourceFile()
     fileExists: fileName => {
       return (
-        !!sourceFiles.find(s => s.fileName === getLocalFileName(sources, fileName)) ||
+        sourceFiles.some(s => s.fileName === getLocalFileName(sources, fileName)) ||
         ts.sys.fileExists(fileName)
       );
     },

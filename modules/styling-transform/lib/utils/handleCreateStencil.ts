@@ -49,17 +49,9 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
           const extendsStencilName = className.split('-').slice(1).join('-');
 
           if (
-            !Object.values(context.styles).reduce((result, fileStyles) => {
-              return (
-                result ||
-                fileStyles.reduce((_, rule) => {
-                  if (rule.includes(`.${className}`)) {
-                    return true;
-                  }
-                  return result;
-                }, false)
-              );
-            }, false)
+            !Object.values(context.styles).some(fileStyles => {
+              return fileStyles.some(rule => rule.includes(`.${className}`));
+            })
           ) {
             // Process the extended stencil since those styles haven't been processed yet
             getValueFromAliasedSymbol(property.initializer, '', context);
