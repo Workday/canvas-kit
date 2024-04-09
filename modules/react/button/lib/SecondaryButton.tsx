@@ -72,7 +72,7 @@ const secondaryButtonStencil = createStencil({
         // Focus Styles
         '&:focus-visible, &.focus': {
           [baseButtonStencil.vars.background]: system.color.bg.default,
-          [baseButtonStencil.vars.border]: system.color.border.inverse,
+          [baseButtonStencil.vars.border]: 'transparent',
           [baseButtonStencil.vars.label]: system.color.fg.strong,
           [baseButtonStencil.vars.boxShadowInner]: system.color.fg.strong,
           [baseButtonStencil.vars.boxShadowOuter]: system.color.fg.inverse,
@@ -81,14 +81,14 @@ const secondaryButtonStencil = createStencil({
         // Hover Styles
         '&:hover, &.hover': {
           [baseButtonStencil.vars.background]: system.color.bg.alt.default,
-          [baseButtonStencil.vars.border]: system.color.border.input.inverse,
+          [baseButtonStencil.vars.border]: 'transparent',
           [baseButtonStencil.vars.label]: system.color.fg.stronger,
           [systemIconStencil.vars.color]: system.color.fg.stronger,
         },
         // Active Styles
         '&:active, &.active': {
           [baseButtonStencil.vars.background]: system.color.bg.alt.strong,
-          [baseButtonStencil.vars.border]: base.soap400,
+          [baseButtonStencil.vars.border]: 'transparent',
           [baseButtonStencil.vars.label]: system.color.fg.stronger,
           [systemIconStencil.vars.color]: system.color.fg.stronger,
         },

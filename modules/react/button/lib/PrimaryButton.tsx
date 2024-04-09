@@ -25,7 +25,6 @@ const primaryButtonStencil = createStencil({
   base: {
     // Base Styles
     [baseButtonStencil.vars.background]: brand.primary.base,
-    // [baseButtonStencil.vars.border]: 'transparent',
     [baseButtonStencil.vars.borderRadius]: system.shape.round,
     [baseButtonStencil.vars.label]: brand.primary.accent,
     [systemIconStencil.vars.color]: brand.primary.accent,
