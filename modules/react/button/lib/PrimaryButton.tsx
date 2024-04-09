@@ -32,7 +32,7 @@ const primaryButtonStencil = createStencil({
     '&:focus-visible, &.focus': {
       [baseButtonStencil.vars.background]: brand.primary.base,
       [baseButtonStencil.vars.label]: brand.primary.accent,
-      [baseButtonStencil.vars.boxShadowInner]: system.color.border.inverse,
+      [baseButtonStencil.vars.boxShadowInner]: system.color.fg.inverse,
       [baseButtonStencil.vars.boxShadowOuter]: brand.common.focusOutline,
       [systemIconStencil.vars.color]: brand.primary.accent,
     },
@@ -62,7 +62,7 @@ const primaryButtonStencil = createStencil({
       inverse: {
         [baseButtonStencil.vars.background]: system.color.bg.default,
         [baseButtonStencil.vars.borderRadius]: system.shape.round,
-        [baseButtonStencil.vars.label]: system.color.text.strong,
+        [baseButtonStencil.vars.label]: system.color.fg.strong,
         [systemIconStencil.vars.color]: system.color.fg.strong,
         // Focus Styles
         '&:focus-visible, &.focus': {

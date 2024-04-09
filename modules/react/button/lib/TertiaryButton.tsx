@@ -28,7 +28,7 @@ const tertiaryButtonStencil = createStencil({
     paddingInline: system.space.x2,
     minWidth: 'auto',
     textDecoration: 'underline',
-    border: 0,
+    border: system.space.zero,
     [baseButtonStencil.vars.background]: 'transparent',
     [baseButtonStencil.vars.borderRadius]: system.shape.x1,
     [baseButtonStencil.vars.label]: brand.primary.base,
