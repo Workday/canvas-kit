@@ -3,8 +3,6 @@ import {SymbolDoc} from '@workday/canvas-kit-docs';
 import {Card} from '@workday/canvas-kit-react/card';
 
 import {Basic} from './examples/Basic';
-import {Depth} from './examples/Depth';
-import {Padding} from './examples/Padding';
 
 <Meta title="Components/Containers/Card" component={Card} />
 
@@ -32,25 +30,11 @@ Card includes a container `Card` component and the following subcomponents: `Car
 
 <ExampleCodeBlock code={Basic} />
 
-### Depth
+## Stencils
 
-`Card` extends from `Box` so it supports all of
-[Box's style props](/components/layout/box/#style-props). This includes `depth`, which changes the
-Card's perceived "height" above the page surface by adjusting its box shadow. `Card` has a default
-depth of `1`.
+You can also use Card stencils to apply and extend styles.
 
-Here's an example of a `Card` with a increased `depth` of `2`.
 
-<ExampleCodeBlock code={Depth} />
-
-### Padding
-
-Set the `padding` prop of the `Card` (again, supported via `Box`) to adjust its padding. Card has a
-default padding of `x8` (`4rem` or `32px`).
-
-Here's an example of a `Card` with a reduced padding of `x3` (`0.75rem` or `12px`).
-
-<ExampleCodeBlock code={Padding} />
 
 ## Component API
 
