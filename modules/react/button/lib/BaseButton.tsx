@@ -203,8 +203,8 @@ export const baseButtonStencil = createStencil({
         system.color.fg.stronger
       ),
     },
-    // Active Styles
     '&:hover:active': {transitionDuration: '40ms'},
+    // Active Styles
     '&:active, &.active': {
       backgroundColor: cssVar(
         buttonColorPropVars.active.background,
