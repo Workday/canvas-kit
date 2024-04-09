@@ -3,8 +3,11 @@ const createCompiler = require('@storybook/addon-docs/mdx-compiler-plugin');
 
 const modulesPath = path.resolve(__dirname, '../modules');
 const getSpecifications = require('../modules/docs/utils/get-specifications');
+const {createDocProgram} = require('../modules/docs/docgen/createDocProgram');
 
 const processDocs = process.env.SKIP_DOCGEN !== 'true';
+
+const Doc = createDocProgram();
 
 module.exports = {
   stories: [
@@ -64,8 +67,18 @@ module.exports = {
         include: [modulesPath],
         exclude: /examples|stories|spec|codemod|docs/,
         loaders: [
+          // loaders are run in reverse order. symbol-doc-loader needs to be done first
+          {
+            loader: path.resolve(__dirname, 'style-transform-loader'),
+            options: {
+              Doc,
+            },
+          },
           {
             loader: path.resolve(__dirname, 'symbol-doc-loader'),
+            options: {
+              Doc,
+            },
           },
         ],
         enforce: 'pre',

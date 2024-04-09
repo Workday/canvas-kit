@@ -1,10 +1,13 @@
 import React from 'react';
 
-import {ExtractProps, createContainer, createElemPropsHook} from '@workday/canvas-kit-react/common';
-import {Flex} from '@workday/canvas-kit-react/layout';
-import {StatusIndicatorIcon, statusIndicatorColors} from './StatusIndicatorIcon';
+import {ExtractProps, createContainer} from '@workday/canvas-kit-react/common';
+import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {StatusIndicatorIcon} from './StatusIndicatorIcon';
 import {StatusIndicatorLabel} from './StatusIndicatorLabel';
 import {useStatusIndicatorModel} from './hooks';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 export interface StatusIndicatorProps extends ExtractProps<typeof Flex, never> {
   /**
@@ -13,13 +16,95 @@ export interface StatusIndicatorProps extends ExtractProps<typeof Flex, never> {
   children: React.ReactNode;
 }
 
-export const useStatusIndicator = createElemPropsHook(useStatusIndicatorModel)(({state}) => {
-  const colors = statusIndicatorColors[state.variant][state.emphasis];
-  return {
-    opacity: state.variant === 'transparent' ? '0.85' : undefined,
-    color: colors.text,
-    background: colors.background,
-  };
+const statusIndicatorStencil = createStencil({
+  base: {
+    display: 'inline-flex',
+    gap: system.space.x1,
+    maxWidth: px2rem(200),
+    alignItems: 'center',
+    borderRadius: system.shape.half,
+    height: px2rem(20),
+    padding: `${system.space.zero} ${system.space.x1}}`,
+  },
+  modifiers: {
+    gray: {
+      high: {
+        color: base.frenchVanilla100,
+        [systemIconStencil.vars.color]: base.frenchVanilla100,
+        background: base.licorice300,
+      },
+      low: {
+        color: base.licorice400,
+        [systemIconStencil.vars.color]: base.licorice400,
+        background: base.soap300,
+      },
+    },
+    orange: {
+      high: {
+        color: base.licorice500,
+        [systemIconStencil.vars.color]: base.licorice500,
+        background: base.cantaloupe400,
+      },
+      low: {
+        color: base.toastedMarshmallow600,
+        [systemIconStencil.vars.color]: base.toastedMarshmallow600,
+        background: base.cantaloupe100,
+      },
+    },
+    blue: {
+      high: {
+        color: base.frenchVanilla100,
+        [systemIconStencil.vars.color]: base.frenchVanilla100,
+        background: base.blueberry400,
+      },
+      low: {
+        color: base.blueberry500,
+        [systemIconStencil.vars.color]: base.blueberry500,
+        background: base.blueberry100,
+      },
+    },
+    green: {
+      high: {
+        color: base.frenchVanilla100,
+        [systemIconStencil.vars.color]: base.frenchVanilla100,
+        background: base.greenApple600,
+      },
+      low: {
+        color: base.greenApple600,
+        [systemIconStencil.vars.color]: base.greenApple600,
+        background: base.greenApple100,
+      },
+    },
+    red: {
+      high: {
+        color: base.frenchVanilla100,
+        [systemIconStencil.vars.color]: base.frenchVanilla100,
+        background: base.cinnamon500,
+      },
+      low: {
+        color: base.cinnamon600,
+        [systemIconStencil.vars.color]: base.cinnamon600,
+        background: base.cinnamon100,
+      },
+    },
+    transparent: {
+      high: {
+        opacity: 0.85,
+        color: base.frenchVanilla100,
+        [systemIconStencil.vars.color]: base.frenchVanilla100,
+        background: base.blackPepper600,
+      },
+      low: {
+        opacity: 0.85,
+        color: base.frenchVanilla100,
+        [systemIconStencil.vars.color]: base.frenchVanilla100,
+        background: base.blackPepper600,
+      },
+    },
+  },
+  defaultModifiers: {
+    gray: 'low',
+  },
 });
 
 /**
@@ -35,7 +120,6 @@ export const useStatusIndicator = createElemPropsHook(useStatusIndicatorModel)((
 export const StatusIndicator = createContainer('div')({
   displayName: 'StatusIndicator',
   modelHook: useStatusIndicatorModel,
-  elemPropsHook: useStatusIndicator,
   subComponents: {
     /**
      * `StatusIndicator.Label` renders {@link Text} under the hood. It will apply an ellipsis if its
@@ -58,18 +142,13 @@ export const StatusIndicator = createContainer('div')({
   },
 })<StatusIndicatorProps>(({children, ...elemProps}, Element, model) => {
   return (
-    <Flex
-      gap="xxxs"
-      as={Element}
-      maxWidth={200}
-      paddingX="xxxs"
-      display="inline-flex"
-      alignItems="center"
-      height={20}
-      borderRadius="s"
-      {...elemProps}
+    <Element
+      {...mergeStyles(
+        elemProps,
+        statusIndicatorStencil({[model.state.variant]: model.state.emphasis})
+      )}
     >
       {children}
-    </Flex>
+    </Element>
   );
 });

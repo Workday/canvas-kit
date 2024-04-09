@@ -3,7 +3,7 @@ import React from 'react';
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {plusIcon} from '@workday/canvas-system-icons-web';
 
@@ -32,11 +32,13 @@ export const FormModal = () => {
           <Modal.CloseIcon aria-label="Close" />
           <Modal.Heading>New User</Modal.Heading>
           <Modal.Body>
-            <FormField label="First Name">
-              <TextInput name="first" />
+            <FormField>
+              <FormField.Label>First Name</FormField.Label>
+              <FormField.Input as={TextInput} name="first" />
             </FormField>
-            <FormField label="Last Name">
-              <TextInput name="last" />
+            <FormField>
+              <FormField.Label>Last Name</FormField.Label>
+              <FormField.Input as={TextInput} name="last" />
             </FormField>
           </Modal.Body>
           <Flex gap="s" padding="xxs" marginTop="xxs">
