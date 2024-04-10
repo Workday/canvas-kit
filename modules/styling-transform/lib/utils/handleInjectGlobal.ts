@@ -1,43 +1,38 @@
 import ts from 'typescript';
 
-import {NestedStyleObject, NodeTransformer, TransformerContext} from './types';
-import {parseNodeToStaticValue} from './parseNodeToStaticValue';
-import {getVarName} from './getVarName';
-import {createStyleObjectNode, serializeStyles} from './createStyleObjectNode';
 import {isImportedFromStyling} from './isImportedFromStyling';
 import {parseObjectToStaticValue} from './parseObjectToStaticValue';
+import {createStyleObjectNode, serializeStyles} from './createStyleObjectNode';
+import {NestedStyleObject, NodeTransformer, TransformerContext} from './types';
+import {parseNodeToStaticValue} from './parseNodeToStaticValue';
 
-export const handleKeyframes: NodeTransformer = (node, context) => {
+export const handleInjectGlobal: NodeTransformer = (node, context) => {
   const {checker} = context;
-  // keyframes`css`
+
   if (
     ts.isTaggedTemplateExpression(node) &&
     ts.isIdentifier(node.tag) &&
-    node.tag.text === 'keyframes' &&
+    node.tag.text === 'injectGlobal' &&
     isImportedFromStyling(node.tag, checker)
   ) {
-    // parseNodeToStaticValue can parse templates. Pass it through there to get a single static string
     const styleObj = parseNodeToStaticValue(node.template, context).toString();
-    const identifierName = getVarName(node);
 
     return ts.factory.createCallExpression(node.tag, undefined, [
-      createStyleReplacementNode(node, styleObj, identifierName, context),
+      createStyleReplacementNode(node, styleObj, context),
     ]);
   }
 
-  // keyframes({})
   if (
     ts.isCallExpression(node) &&
     ts.isIdentifier(node.expression) &&
-    node.expression.text === 'keyframes' &&
+    node.expression.text === 'injectGlobal' &&
     isImportedFromStyling(node.expression, checker)
   ) {
     if (ts.isObjectLiteralExpression(node.arguments[0])) {
       const styleObj = parseObjectToStaticValue(node.arguments[0], context);
-      const identifierName = getVarName(node);
 
       return ts.factory.updateCallExpression(node, node.expression, undefined, [
-        createStyleReplacementNode(node, styleObj, identifierName, context),
+        createStyleReplacementNode(node, styleObj, context),
       ]);
     }
   }
@@ -48,13 +43,9 @@ export const handleKeyframes: NodeTransformer = (node, context) => {
 function createStyleReplacementNode(
   node: ts.Node,
   styleObj: NestedStyleObject | string,
-  identifierName: string,
   context: TransformerContext
 ) {
-  const serialized = serializeStyles(node, styleObj, `@keyframes animation-%n{%s}`, context);
-  const animationName = `animation-${serialized.name}`;
-
-  context.variables[identifierName] = animationName;
+  const serialized = serializeStyles(node, styleObj, '%s', context);
 
   return createStyleObjectNode(serialized.styles, serialized.name);
 }

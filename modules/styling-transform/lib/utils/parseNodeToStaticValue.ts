@@ -19,7 +19,7 @@ export function parseNodeToStaticValue(
   node: ts.Node,
   context: TransformerContext
 ): string | number {
-  const {checker, variables, keyframes} = context;
+  const {checker} = context;
 
   const value = handlePropertyTransforms(node, context);
   if (value) {
@@ -47,12 +47,24 @@ export function parseNodeToStaticValue(
   if (ts.isPropertyAccessExpression(node)) {
     const varName = getCSSVariableKey(getPropertyAccessExpressionText(node));
 
-    if (variables[varName]) {
-      return variables[varName];
-    }
+    const value =
+      getValueFromProcessedNodes(varName, context) ||
+      getValueFromAliasedSymbol(node, varName, context);
 
-    if (keyframes[varName]) {
-      return keyframes[varName];
+    if (value) {
+      return value;
+    }
+  }
+
+  if (ts.isComputedPropertyName(node) && ts.isIdentifier(node.expression)) {
+    const varName = node.expression.text;
+
+    const value =
+      getValueFromProcessedNodes(varName, context) ||
+      getValueFromAliasedSymbol(node, varName, context);
+
+    if (value) {
+      return value;
     }
   }
 
@@ -60,12 +72,12 @@ export function parseNodeToStaticValue(
   if (ts.isComputedPropertyName(node) && ts.isPropertyAccessExpression(node.expression)) {
     const varName = getCSSVariableKey(getPropertyAccessExpressionText(node.expression));
 
-    if (variables[varName]) {
-      return variables[varName];
-    }
+    const value =
+      getValueFromProcessedNodes(varName, context) ||
+      getValueFromAliasedSymbol(node, varName, context);
 
-    if (keyframes[varName]) {
-      return keyframes[varName];
+    if (value) {
+      return value;
     }
   }
 
@@ -83,12 +95,12 @@ export function parseNodeToStaticValue(
    * moving on. This typically happens in stencils.
    */
   if (ts.isIdentifier(node)) {
-    if (variables[node.text]) {
-      return variables[node.text];
-    }
+    const value =
+      getValueFromProcessedNodes(node.text, context) ||
+      getValueFromAliasedSymbol(node, node.text, context);
 
-    if (keyframes[node.text]) {
-      return keyframes[node.text];
+    if (value) {
+      return value;
     }
   }
 
@@ -153,6 +165,10 @@ function getCSSVariableKey(text: string): string {
 function getPropertyAccessExpressionText(node: ts.PropertyAccessExpression): string {
   if (ts.isIdentifier(node.name)) {
     if (ts.isIdentifier(node.expression)) {
+      if (node.name.text === 'vars') {
+        // skip vars in name for stencil generated variables
+        return `${node.expression.text}`;
+      }
       return `${node.expression.text}.${node.name.text}`;
     }
     if (ts.isPropertyAccessExpression(node.expression)) {
@@ -200,4 +216,69 @@ function getStyleValueFromTemplateExpression(
   }
 
   return '';
+}
+
+/**
+ * Get a value from an aliased symbol, if it exists. An aliased symbol comes from
+ */
+export function getValueFromAliasedSymbol(
+  node: ts.Node,
+  varName: string,
+  context: TransformerContext
+): string | void {
+  const {checker, transform} = context;
+  let symbolNode: ts.Node | undefined;
+
+  if (ts.isIdentifier(node)) {
+    // base case is the node is an identifier
+    symbolNode = node;
+  }
+
+  if (ts.isPropertyAccessExpression(node) && ts.isIdentifier(node.name)) {
+    return getValueFromAliasedSymbol(node.expression, varName, context);
+  }
+
+  if (ts.isComputedPropertyName(node)) {
+    return getValueFromAliasedSymbol(node.expression, varName, context);
+  }
+
+  if (symbolNode) {
+    const symbol = checker.getSymbolAtLocation(symbolNode);
+    let declaration: ts.Declaration | undefined;
+
+    if (symbol?.valueDeclaration) {
+      // If the symbol has a value declaration, we'll use that declaration
+      declaration = symbol.valueDeclaration;
+    } else if (symbol && symbol.getFlags() & ts.SymbolFlags.Alias) {
+      // If the symbol does not have a value declaration, we'll check if there's a aliased symbol
+      // linking to the value declaration.
+      declaration = checker.getAliasedSymbol(symbol).valueDeclaration;
+    }
+    // If there is an aliased symbol and it is a variable declaration, try to resolve the
+    if (declaration && hasExpression(declaration)) {
+      if (declaration.initializer) {
+        declaration.initializer.getText(); //?
+        transform(declaration.initializer, context);
+
+        return getValueFromProcessedNodes(varName, context);
+      }
+    }
+  }
+}
+
+function getValueFromProcessedNodes(varName: string, context: TransformerContext): string | void {
+  const safeVarName = makeEmotionSafe(varName);
+  const {variables} = context;
+
+  if (variables[safeVarName]) {
+    return variables[safeVarName];
+  }
+
+  if (context.variableScope && variables[`${context.variableScope}${safeVarName}`]) {
+    return variables[`${context.variableScope}${safeVarName}`];
+  }
+}
+
+function hasExpression(node: ts.Node): node is ts.Node & {initializer: ts.Expression} {
+  return 'initializer' in node;
 }

@@ -19,13 +19,15 @@ any questions.
   - [Label Text](#label-text)
   - [Text Area (Preview)](#text-area-preview)
   - [Text Input (Preview)](#text-input-preview)
+- [Component Style Updates](#component-style-updates)
+- [Component Token Updates](#component-token-updates)
 - [Component Updates](#component-updates)
-  - [Component Style Updates](#component-style-updates)
   - [Card](#card)
   - [Checkbox](#checkbox)
   - [Combobox](#combobox)
   - [Count Badge](#count-badge)
   - [Form Field Preview](#form-field-preview)
+  - [Icons](#icons)
   - [Radio (Preview)](#radio-preview)
   - [Select](#select)
   - [Switch](#switch)
@@ -35,7 +37,6 @@ any questions.
   - [Main](#main)
   - [Preview](#preview)
   - [Labs](#labs)
-
 
 ## Codemod
 
@@ -104,33 +105,36 @@ finished.
 
 **PR:** [#2600](https://github.com/Workday/canvas-kit/pull/2600)
 
-We've promoted the `Table` compound component in [Preview](#preview) to [Main](#main). This replaces the existing `Table` component with a compound component
-and will consist of a new compound component API.
+We've promoted the `Table` compound component in [Preview](#preview) to [Main](#main). This replaces
+the existing `Table` component with a compound component and will consist of a new compound
+component API.
 
 > `rowState` prop is no longer a part of the `Table` component.
 
-In v10, the `Table` component in [Main](#main) only exposed a `Table`  and `TableRow` component to build tables.
+In v10, the `Table` component in [Main](#main) only exposed a `Table` and `TableRow` component to
+build tables.
 
 In v11, `Table` now exposes every subcomponent of a semantic HTML
-[Table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table). While more verbose, it provides more flexibility for customization.
+[Table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table). While more verbose, it
+provides more flexibility for customization.
 
-See below for examples of the differences between the v10 `Table` and the v11 `Table` compound component.
-
+See below for examples of the differences between the v10 `Table` and the v11 `Table` compound
+component.
 
 v10:
 
 ```tsx
 <Table>
-	<thead>
-		<TableRow header={true}>
-			<th>Header Text</th>
-		</TableRow>
-	</thead>
-	<tbody>
-		<TableRow>
-			<td>Cell Text</td>
-		</TableRow>
-	</tbody>
+  <thead>
+    <TableRow header={true}>
+      <th>Header Text</th>
+    </TableRow>
+  </thead>
+  <tbody>
+    <TableRow>
+      <td>Cell Text</td>
+    </TableRow>
+  </tbody>
 </Table>
 ```
 
@@ -138,24 +142,26 @@ v11:
 
 ```tsx
 <Table>
-	<Table.Head>
-		<Table.Row>
-			<Table.Header>Header Text</Table.Header>
-		</Table.Row>
-	</Table.Head>
-	<Table.Body>
-		<Table.Row>
-			<Table.Cell>Cell Text</Table.Cell>
-		</Table.Row>
-	</Table.Body>
+  <Table.Head>
+    <Table.Row>
+      <Table.Header>Header Text</Table.Header>
+    </Table.Row>
+  </Table.Head>
+  <Table.Body>
+    <Table.Row>
+      <Table.Cell>Cell Text</Table.Cell>
+    </Table.Row>
+  </Table.Body>
 </Table>
 ```
 
+Please refer to the
+[Table examples](https://workday.github.io/canvas-kit/?path=/story/components-containers-table--basic)
+for how to implement new tables.
 
-Please refer to the [Table examples](https://workday.github.io/canvas-kit/?path=/story/components-containers-table--basic) for how
-to implement new tables.
-
-> **NOTE:** If you were using the [Preview](#preview) `Table` compound component, then you will need to update your import from `"@workday/canvas-kit-preview-react/table"` to `"@workday/canvas-kit-react/table"`.
+> **NOTE:** If you were using the [Preview](#preview) `Table` compound component, then you will need
+> to update your import from `"@workday/canvas-kit-preview-react/table"` to
+> `"@workday/canvas-kit-react/table"`.
 
 ## Deprecations
 
@@ -210,9 +216,7 @@ instead.
 
 ---
 
-## Component Updates
-
-### Component Style Updates
+## Component Style Updates
 
 These changes are to address discrepancies that were found between Canvas Kit Design Specs and
 Canvas Kit.
@@ -409,6 +413,14 @@ See below:
   </Table.Body>
 </Table>
 
+### Component Token Updates
+
+The following components have been updated to use our [new system tokens](insert link).
+
+- Text
+
+## Component Updates
+
 ### Card
 
 **PR:** [#2471](https://github.com/Workday/canvas-kit/pull/2471)
@@ -436,8 +448,7 @@ identically as it did in previous versions.
 `Combobox` has been refactored to use our
 [new styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api)
 and [tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs). The
-component now supports the `cs` prop, but otherwise the API has not changed. It should behave
-identically as it did in previous versions.
+component now supports the `cs` prop, but otherwise the API has not changed.
 
 ### Count Badge
 
@@ -497,6 +508,178 @@ import {TextInput} from '@workday/canvas-kit-react/text-input';
 
 🤖 The codemod will handle the change of `hasError` to `error` for you automatically.
 
+### Icons
+
+All icons components including `Svg`, `SystemIcon`, `SystemIconCircle`, `AccentIcon`, `AppletIcon`
+and `Graphic` now use our new
+[Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
+[new styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
+
+- Components now support the `cs` prop. -`styles` prop has been removed.
+
+**Note: Passing a token name to a style prop will be not supported in a future major version.**
+
+```tsx
+// This will no longer be supported in a future major version
+<SystemIcon color="blueberry400" .../>
+
+// Use new tokens instead.
+<SystemIcon color={base.blueberry400} .../>
+```
+
+🤖 The codemod will handle the change of `styles` to `cs` for you automatically.
+
+#### AccentIcon
+
+- `AccentIconStyles` prop has been deprecated and will be merged with `AccentIconProps` in a future
+  version.
+- `accentIconStyles` has been deprecated and will be removed in a future version as a part of
+  implementation of stencils and new tokens. Consider to use `accentIconStencil` to get styles or
+  class name.
+- `AccentIcon` supports `size` and `color` css variables, along with `size` and `color` props. Both
+  ways are supported:
+
+```tsx
+// set size or color by props
+<AccentIcon color={base.blueberry100} size={24} />;
+
+// set size or color by css vars
+import {accentIconStencil} from '@workday/canvas-kit-react/icon';
+
+const MyComponent = StyledRadioButton('div')({
+  [accentIconStencil.vars.color]: base.berrySmoothie100,
+  [accentIconStencil.vars.size]: '2rem',
+});
+
+<MyComponent>
+  <AccentIcon icon={myIcon} />
+</MyComponent>;
+```
+
+#### AppletIcon
+
+- `AppletIconStyles` prop has been deprecated and will be merged with `AppletIconProps` in a future
+  version.
+- `appletIconStyles` has been deprecated and will be removed in a future version as a part of
+  implementation of stencils and new tokens. Consider using `appletIconStencil` to get styles or
+  class name.
+- `AppletIcon` supports `size`, `color200`, `color300`, `color400` and `color500` css variables,
+  along with `size` and `color` props. Both ways are supported:
+
+```tsx
+// set size or color by props
+<AppletIcon color="blueberry" size={240} />;
+
+// set size or color by css vars
+import {appletIconStencil} from '@workday/canvas-kit-react/icon';
+
+const MyComponent = StyledRadioButton('div')({
+  [appletIconStencil.vars.size]: '2rem',
+  [appletIconStencil.vars.color200]: base.berrySmoothie200,
+  [appletIconStencil.vars.color300]: base.berrySmoothie300,
+  [appletIconStencil.vars.color400]: base.berrySmoothie400,
+  [appletIconStencil.vars.color500]: base.berrySmoothie500,
+});
+
+<MyComponent>
+  <AppletIcon icon={myIcon} />
+</MyComponent>;
+```
+
+#### Graphic
+
+- `GraphicStyles` prop has been deprecated and will be merged with `GraphicProps` in a future
+  version.
+- `graphicStyles` has been deprecated and will be removed in a future version as a part of
+  implementation of stencils and new tokens. Consider to use `graphicStencil` to get styles or class
+  name.
+- `width` and `height` props has been deprecated and will be removed in a future version. Consider
+  using `cs` props instead to set svg sizes.
+
+```tsx
+// before
+<Graphic icon={myGraphic} width={160} />
+
+// after
+<Graphic icon={myGraphic} cs={{"& svg": {width: '10rem'}}} />
+```
+
+#### Icon
+
+This change only impacts internal Canvas Kit code. `Icon` component has been removed and no longer
+used in icons. It was replaced by `Svg` and icon stencils extend `svgStencil`.
+
+#### SystemIcon
+
+- `SystemIconStyles` prop has been deprecated and will be merged with `SystemIconProps` in a future
+  version.
+
+- `accentHover` is deprecated and will be removed in a future version. Please use the following when
+  overriding styles:
+
+```tsx
+'&:hover': {
+  [systemIconStencil.vars.accent]: desiredAccentHoverColor
+}
+```
+
+- `backgroundHover` is deprecated and will be removed in a future version. Please use the following
+  when overriding styles:
+
+```tsx
+'&:hover': {
+  [systemIconStencil.vars.background]: desiredBackgroundHoverColor
+}
+```
+
+- `fillHover` is deprecated and will be removed in a future version. Please use the following when
+  overriding styles:
+
+```tsx
+'&:hover': {
+  [systemIconStencil.vars.fill]: desiredFillHoverColor
+}
+```
+
+- `fill` is deprecated and will be removed in a future version. Please use `color` and specify
+  `accent` color if you want `accent` to be different from `color`.
+
+```tsx
+'&:hover': {
+  [systemIconStencil.vars.fill]: desiredFillHoverColor
+}
+```
+
+- `systemIconStyles` has been deprecated and will be removed in a future version as a part of
+  implementation of stencils and new tokens. Consider to use `systemIconStencil` to get styles or
+  class name.
+
+- `SystemIcon` supports `size`, `color`, `accentColor` and `background` css variables, along with
+  props. Both ways are supported:
+
+```tsx
+// set size or color by props
+<SystemIcon color={base.blueberry100} size={24} />;
+
+// set size or color by css vars
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
+
+const MyComponent = StyledRadioButton('div')({
+  [accentIconStencil.vars.size]: '2rem',
+  [systemIconStencil.vars.color]: base.berrySmoothie400,
+  [systemIconStencil.vars.background]: base.frenchVanilla100,
+  // on hover:
+  '&:hover': {
+    [systemIconStencil.vars.color]: base.berrySmoothie500,
+    [systemIconStencil.vars.background]: 'transparent',
+  },
+});
+
+<MyComponent>
+  <SystemIcon icon={myIcon} />
+</MyComponent>;
+```
+
 ### Radio (Preview)
 
 **PR:** [#2546](https://github.com/Workday/canvas-kit/pull/2546)
@@ -549,6 +732,19 @@ and [tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-st
 longer extends the `Box` component, however, it still supports Emotion `styled` and style props.
 Type level components: `Title`, `Heading`, `BodyText` and `Subtext`, have not been changed since
 they extend the `Text` component. These changes do not affect the components API.
+
+### StatusIndicator (Preview)
+
+**PR:** [#2620] https://github.com/Workday/canvas-kit/pull/2620
+
+`StatusIndicator` now uses
+[Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
+our
+[new styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
+The component now supports the `cs` prop, but otherwise the API has not changed. It should behave
+identically as it did in previous versions.
+- statusIndicatorColors has been deprecated and will be removed in a future version as a part of implementation of stencils and new tokens
+- useStatusIndicatorIcon has been deprecated and will be removed in a future version as a part of implementation of stencils and new tokens
 
 ## Glossary
 

@@ -11,6 +11,7 @@ import {handlePx2Rem} from './utils/handlePx2Rem';
 import {handleCssVar} from './utils/handleCssVar';
 import {Config, NodeTransformer, ObjectTransform, TransformerContext} from './utils/types';
 import {handleKeyframes} from './utils/handleKeyframes';
+import {handleInjectGlobal} from './utils/handleInjectGlobal';
 
 export type NestedStyleObject = {[key: string]: string | NestedStyleObject};
 
@@ -20,8 +21,8 @@ export interface StyleTransformerOptions extends TransformerContext {
 }
 
 let vars: TransformerContext['variables'] = {};
-let keyframes: TransformerContext['keyframes'] = {};
 let styles: TransformerContext['styles'] = {};
+let cache: TransformerContext['cache'] = {};
 let loadedFallbacks = false;
 let configLoaded = false;
 let config: Config = {};
@@ -32,7 +33,7 @@ let config: Config = {};
 export function _reset() {
   vars = {};
   styles = {};
-  keyframes = {};
+  cache = {};
   loadedFallbacks = false;
 }
 
@@ -44,11 +45,12 @@ const defaultTransformers = [
   handleCreateVars,
   handleCreateStyles,
   handleCreateStencil,
+  handleInjectGlobal,
 ];
 
 export default function styleTransformer(
   program: ts.Program,
-  options?: Partial<StyleTransformerOptions>
+  {fallbackFiles = [], ...options}: Partial<StyleTransformerOptions> = {}
 ): ts.TransformerFactory<ts.SourceFile> {
   if (!configLoaded) {
     const configPath = getConfig(program.getCurrentDirectory());
@@ -61,14 +63,10 @@ export default function styleTransformer(
     configLoaded = true;
   }
 
-  const {
-    variables,
-    fallbackFiles = [],
-    transformers = defaultTransformers,
-    ...transformContext
-  } = withDefaultContext(program.getTypeChecker(), {...config, ...options});
-
-  const transform = handleTransformers(transformers);
+  const {variables, ...transformContext} = withDefaultContext(program.getTypeChecker(), {
+    ...config,
+    ...options,
+  });
 
   if (!loadedFallbacks) {
     const files = fallbackFiles
@@ -109,7 +107,7 @@ export default function styleTransformer(
         );
       }
 
-      const newNode = transform(node, {
+      const newNode = transformContext.transform(node, {
         variables: vars,
         ...transformContext,
       });
@@ -121,24 +119,26 @@ export default function styleTransformer(
   };
 }
 
-export function withDefaultContext<T extends TransformerContext>(
+export function withDefaultContext(
   checker: ts.TypeChecker,
-  input: Partial<T> = {}
-): T {
+  {transformers, ...input}: Partial<StyleTransformerOptions> = {}
+): TransformerContext {
   return {
     prefix: 'css',
     getPrefix: path => input.prefix || 'css',
     variables: {},
     styles,
-    keyframes,
+    cache,
     checker,
+    extractCSS: false,
     getFileName: path => path.replace(/\.tsx?/, '.css'),
     objectTransforms: [] as ObjectTransform[],
+    transform: handleTransformers(transformers || defaultTransformers),
     ...input,
     propertyTransforms: [handleCalc, handlePx2Rem, handleCssVar].concat(
       input.propertyTransforms || []
     ),
-  } as T;
+  } as TransformerContext;
 }
 
 /**
@@ -158,7 +158,7 @@ export function transform(
   return printer.printFile(
     ts
       .transform(source, [styleTransformer(program, options)])
-      .transformed.find(s => s.fileName === fileName) || source
+      .transformed.find(s => s.fileName === source.fileName) || source
   );
 }
 
