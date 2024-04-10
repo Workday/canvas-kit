@@ -24,7 +24,8 @@ Cypress.Commands.overwrite('visit', (originalFn, urlOrOptions, inputOptions = {}
   if (typeof urlOrOptions === 'object') {
     options = urlOrOptions;
   } else {
-    options = {url: urlOrOptions, ...inputOptions};
+    // @ts-ignore
+    options = {url: urlOrOptions as string, ...inputOptions};
   }
 
   return originalFn({
@@ -128,7 +129,7 @@ export const haveAriaLabel = (text: string) => ($target: JQuery) => {
   }
 };
 
-function isKeyOf<T>(obj: T, key: any): key is keyof T {
+function isKeyOf<T extends object>(obj: T, key: any): key is keyof T {
   return typeof key === 'string' && key in obj;
 }
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Canvas, Story, Source} from '@storybook/blocks';
+import {Canvas, Story, Source, SourceState} from '@storybook/blocks';
 
 export const ExampleCodeBlock = ({of: story, name}: any) => {
   const isOpened = story?.parameters?.source?.isOpened || false;
@@ -12,7 +12,7 @@ export const ExampleCodeBlock = ({of: story, name}: any) => {
   return (
     <div className={'example-code-block' + expandedClassName}>
       <div style={{position: 'relative'}}>
-        <Canvas withSource="none">
+        <Canvas withSource={SourceState.NONE}>
           <Story of={story} />
         </Canvas>
         <div

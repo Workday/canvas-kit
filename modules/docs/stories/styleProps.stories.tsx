@@ -1,9 +1,8 @@
 import {Meta, StoryObj} from '@storybook/react';
 import {StylePropsTable} from '@workday/canvas-kit-docs';
-import {ExampleCodeBlock} from '../../../../utils/storybook';
-import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
+import {ExampleCodeBlock} from '../../../utils/storybook';
 
-import mdxDoc from './STYLE_PROPS.mdx';
+import mdxDoc from '../mdx/style-props/STYLE_PROPS.mdx';
 
 // examples
 import {BackgroundExample} from './examples/Background';
