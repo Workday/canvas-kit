@@ -146,7 +146,7 @@ const checkboxInputStencil = createStencil({
           backgroundColor: system.color.bg.default,
         },
         '&:disabled ~ div:first-of-type': {
-          backgroundColor: system.color.border.input.inverse,
+          backgroundColor: system.color.bg.alt.default,
           opacity: system.opacity.disabled,
         },
         '&:disabled:where(:checked, :indeterminate) ~ div:first-of-type': {
