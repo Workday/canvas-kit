@@ -18,7 +18,7 @@ export interface TertiaryButtonProps extends ButtonProps {
    * Variant has an option for `inverse` which will inverse the styling
    */
   variant?: 'inverse';
-  isThemeable: boolean;
+  isThemeable?: boolean;
 }
 
 const tertiaryButtonStencil = createStencil({
