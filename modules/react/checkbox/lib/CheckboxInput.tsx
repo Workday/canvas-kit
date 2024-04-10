@@ -161,8 +161,8 @@ const checkboxInputStencil = createStencil({
             width: 2,
             separation: 0,
             animate: false,
-            innerColor: cssVar(system.color.border.contrast.default),
-            outerColor: cssVar(system.color.border.inverse),
+            innerColor: cssVar(system.color.fg.strong),
+            outerColor: cssVar(system.color.fg.inverse),
           }),
         },
         '&:checked:focus-visible, &:checked.focus, &:indeterminate:focus-visible, &:indeterminate.focus':
