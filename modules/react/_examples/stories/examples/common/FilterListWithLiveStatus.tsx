@@ -3,8 +3,8 @@ import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
 import {BodyText, Heading} from '@workday/canvas-kit-react/text';
 import {AriaLiveRegion} from '@workday/canvas-kit-react/common';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {colors} from '@workday/canvas-kit-react/tokens';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {system, base} from '@workday/canvas-tokens-web';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 
 const fruits = [
   'Apples',
@@ -18,16 +18,16 @@ const fruits = [
 ];
 
 const liveRegionStyle = createStyles({
-  border: `{px2rem(1)} solid ${colors.cantaloupe400}`,
-  backgroundColor: colors.cantaloupe100,
-  padding: {system.space.x2},
+  border: `${px2rem(1)} solid ${base.cantaloupe400}`,
+  backgroundColor: base.cantaloupe100,
+  padding: system.space.x2,
 });
 
 const listStyles = {paddingLeft: '0px'};
 
 const listItemStyles = createStyles({
   listStyle: 'none',
-  paddingLeft: {system.space.zero},
+  paddingLeft: system.space.zero,
 });
 
 let filteredFruits = fruits;
