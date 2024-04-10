@@ -24,7 +24,7 @@ const checkboxBackgroundStencil = createStencil({
     position: 'absolute',
     transition: 'border 200ms ease, background 200ms',
     width: calc.add(system.space.x4, px2rem(2)),
-    border: `${px2rem(1)} solid ${system.color.fg.muted.soft}`,
+    border: `${px2rem(1)} solid ${system.color.border.default}`,
   },
   modifiers: {
     error: {
