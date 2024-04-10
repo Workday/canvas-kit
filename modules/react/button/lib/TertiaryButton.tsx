@@ -18,6 +18,7 @@ export interface TertiaryButtonProps extends ButtonProps {
    * Variant has an option for `inverse` which will inverse the styling
    */
   variant?: 'inverse';
+  isThemeable: boolean;
 }
 
 const tertiaryButtonStencil = createStencil({
@@ -88,6 +89,23 @@ const tertiaryButtonStencil = createStencil({
       },
       start: {},
       end: {},
+    },
+    isThemeable: {
+      true: {
+        [systemIconStencil.vars.color]: brand.primary.base,
+        '&:focus-visible, &.focus': {
+          [systemIconStencil.vars.color]: brand.primary.base,
+        },
+        '&:hover, &.hover': {
+          [systemIconStencil.vars.color]: brand.primary.dark,
+        },
+        '&:active, &.active': {
+          [systemIconStencil.vars.color]: brand.primary.darkest,
+        },
+        '&:disabled, &.disabled': {
+          [systemIconStencil.vars.color]: brand.primary.base,
+        },
+      },
     },
     variant: {
       // Inverse Styles
@@ -217,7 +235,15 @@ const tertiaryButtonStencil = createStencil({
 export const TertiaryButton = createComponent('button')({
   displayName: 'TertiaryButton',
   Component: (
-    {children, icon, size = 'medium', variant, iconPosition, ...elemProps}: TertiaryButtonProps,
+    {
+      children,
+      icon,
+      size = 'medium',
+      isThemeable,
+      variant,
+      iconPosition,
+      ...elemProps
+    }: TertiaryButtonProps,
     ref,
     Element
   ) => {
@@ -241,6 +267,7 @@ export const TertiaryButton = createComponent('button')({
           tertiaryButtonStencil({
             variant,
             size,
+            isThemeable: (isThemeable || baseIconPosition !== 'only') as any,
             iconPosition: baseIconPosition,
           })
         )}
