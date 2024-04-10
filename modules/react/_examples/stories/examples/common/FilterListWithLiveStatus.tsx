@@ -27,7 +27,7 @@ const listStyles = {paddingLeft: '0px'};
 
 const listItemStyles = createStyles({
   listStyle: 'none',
-  paddingLeft: '0px',
+  paddingLeft: {system.space.zero},
 });
 
 let filteredFruits = fruits;
