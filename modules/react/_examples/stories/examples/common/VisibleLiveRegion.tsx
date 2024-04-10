@@ -4,13 +4,14 @@ import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {Text} from '@workday/canvas-kit-react/text';
-import {colors, space} from '@workday/canvas-kit-react/tokens';
+import {system, base} from '@workday/canvas-tokens-web';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 
-const liveRegionStyle = {
-  border: `1px solid ${colors.cantaloupe400}`,
-  backgroundColor: colors.cantaloupe100,
-  padding: space.s,
-};
+const liveRegionStyle = createStyles({
+  border: `${px2rem(1)} solid ${base.cantaloupe400}`,
+  backgroundColor: base.cantaloupe100,
+  padding: system.space.x4,
+});
 
 export const VisibleLiveRegion = () => {
   const [message, setMessage] = useState('This is an ARIA Live Region!');
@@ -22,10 +23,10 @@ export const VisibleLiveRegion = () => {
 
   return (
     <>
-      <AriaLiveRegion style={liveRegionStyle}>
-        <Text>{message}</Text>
+      <AriaLiveRegion>
+        <Text cs={liveRegionStyle}>{message}</Text>
       </AriaLiveRegion>
-      <Flex margin={`${space.s} 0`} gap={space.s} alignItems="flex-end">
+      <Flex gap={`var(${system.space.x4})`} alignItems="flex-end">
         <TextInput orientation="vertical">
           <TextInput.Label>Type your message:</TextInput.Label>
           <TextInput.Field ref={inputRef} />

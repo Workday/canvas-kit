@@ -3,7 +3,7 @@ import {AriaLiveRegion, AccessibleHide} from '@workday/canvas-kit-react/common';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {system, base} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 export const HiddenLiveRegion = () => {
   const [message, setMessage] = useState('This is an ARIA Live Region!');
