@@ -20,7 +20,7 @@ const fruits = [
 const liveRegionStyle = createStyles({
   border: `{px2rem(1)} solid ${colors.cantaloupe400}`,
   backgroundColor: colors.cantaloupe100,
-  padding: '0.5rem',
+  padding: {system.space.x2},
 });
 
 const listStyles = {paddingLeft: '0px'};
