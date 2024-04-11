@@ -4,8 +4,10 @@ import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {Flex, Box} from '@workday/canvas-kit-react/layout';
+import {useUniqueId} from '@workday/canvas-kit-react/common';
 
 export const CustomFocus = () => {
+  const longDescID = useUniqueId();
   const ref = React.useRef<HTMLInputElement>(null);
   const [value, setValue] = React.useState('');
   const model = useModalModel({
@@ -20,11 +22,11 @@ export const CustomFocus = () => {
     <Modal model={model}>
       <Modal.Target as={PrimaryButton}>Acknowledge License</Modal.Target>
       <Modal.Overlay>
-        <Modal.Card>
+        <Modal.Card aria-describedby={longDescID}>
           <Modal.CloseIcon aria-label="Close" />
           <Modal.Heading>Acknowledge License</Modal.Heading>
           <Modal.Body>
-            <Box as="p" marginTop={0} marginBottom="m">
+            <Box as="p" id={longDescID} marginTop={0} marginBottom="m">
               Enter your initials to acknowledge the license.
             </Box>
             <FormField label="Initials" style={{marginBottom: 0}}>

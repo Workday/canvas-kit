@@ -14,7 +14,6 @@ import {
 import {colors, borderRadius, inputColors} from '@workday/canvas-kit-react/tokens';
 
 import {SelectProps} from './Select';
-import {buttonBorderWidth} from './SelectBase';
 import {MenuPlacement, MenuVisibility} from './types';
 
 interface SelectMenuProps
@@ -229,6 +228,9 @@ const generatePopperOptions = (
   };
 };
 
+/**
+ * @deprecated ⚠️ `SelectMenu` in Preview has been deprecated and will be removed in a future major version. Please use [`Select` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) instead.
+ */
 export const SelectMenu = ({
   buttonRef,
   children,
@@ -251,7 +253,7 @@ export const SelectMenu = ({
 
   const handleWidthChange = useCallback(() => {
     if (buttonRef && buttonRef.current && visibility !== 'closed') {
-      const newMenuWidth = buttonRef.current.clientWidth + 2 * buttonBorderWidth;
+      const newMenuWidth = buttonRef.current.clientWidth + 2;
       setWidth(newMenuWidth);
     }
   }, [buttonRef, visibility]);

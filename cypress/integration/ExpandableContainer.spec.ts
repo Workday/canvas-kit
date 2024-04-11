@@ -15,12 +15,7 @@ describe('ExpandableContainer', () => {
     });
 
     it('should have aria-expanded set to false', () => {
-      cy.findByRole('button')
-        .should(
-          'have.attr',
-          'aria-expanded',
-          'false'
-        );
+      cy.findByRole('button').should('have.attr', 'aria-expanded', 'false');
     });
 
     it('should not show expanded content', () => {
@@ -33,12 +28,7 @@ describe('ExpandableContainer', () => {
       });
 
       it('should set aria-expanded to true', () => {
-        cy.findByRole('button')
-          .should(
-            'have.attr',
-            'aria-expanded',
-            'true'
-          );
+        cy.findByRole('button').should('have.attr', 'aria-expanded', 'true');
       });
 
       it('should show expanded content', () => {
@@ -62,12 +52,7 @@ describe('ExpandableContainer', () => {
         });
 
         it('should have aria-expanded set to false', () => {
-          cy.findByRole('button')
-            .should(
-              'have.attr',
-              'aria-expanded',
-              'false'
-          );
+          cy.findByRole('button').should('have.attr', 'aria-expanded', 'false');
         });
       });
     });

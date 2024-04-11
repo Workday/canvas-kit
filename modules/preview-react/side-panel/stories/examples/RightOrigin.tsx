@@ -21,21 +21,23 @@ const RightPanel = () => {
     expanded ? 'expanded' : 'collapsed'
   );
 
+  const expandedContent = (
+    <Flex alignItems="center" justifyContent="flex-end" paddingY="s" paddingX="s">
+      <Text as="h3" typeLevel="body.large" color="licorice500" fontWeight="bold" {...labelProps}>
+        Tasks Panel
+      </Text>
+    </Flex>
+  );
+
   return (
     <StyledSidePanel {...panelProps} onStateTransition={setPanelState} origin="right">
       <SidePanel.ToggleButton {...controlProps} />
-      {panelState === 'expanded' && (
-        <Flex alignItems="center" justifyContent="flex-end" paddingY="s" paddingX="s">
-          <Text
-            as="h3"
-            typeLevel="body.large"
-            color="licorice500"
-            fontWeight="bold"
-            {...labelProps}
-          >
-            Tasks Panel
-          </Text>
-        </Flex>
+      {panelState === 'expanded' ? (
+        expandedContent
+      ) : (
+        <Text hidden {...labelProps}>
+          Tasks Panel
+        </Text>
       )}
     </StyledSidePanel>
   );

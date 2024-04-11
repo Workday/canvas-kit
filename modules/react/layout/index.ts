@@ -1,4 +1,5 @@
 export * from './lib/Box';
+export * from './lib/utils/mergeStyles';
 export * from './lib/utils/background';
 export * from './lib/utils/border';
 export * from './lib/utils/color';
@@ -16,7 +17,7 @@ export {AllStyleProps, CommonStyleProps} from './lib/utils/styleProps';
 export * from './lib/utils/text';
 export * from './lib/Flex';
 export * from './lib/Grid';
-export type { FlexStyleProps } from './lib/utils/flex';
-export type { GridStyleProps } from './lib/utils/grid';
-export type { GridItemStyleProps, gridItemStyleFnConfigs } from './lib/utils/gridItem';
+export type {FlexStyleProps} from './lib/utils/flex';
+export type {GridStyleProps} from './lib/utils/grid';
+export {GridItemStyleProps, gridItemStyleFnConfigs} from './lib/utils/gridItem';
 export * from './lib/utils/systemProps';

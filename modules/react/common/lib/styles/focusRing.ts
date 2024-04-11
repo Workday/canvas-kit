@@ -1,6 +1,6 @@
-import {keyframes, Theme, CSSObject} from '@emotion/react';
-import {canvas} from '@workday/canvas-kit-react/tokens';
-import {defaultCanvasTheme} from '../theming/index';
+import {Theme, CSSObject} from '@emotion/react';
+import {cssVar} from '@workday/canvas-kit-styling';
+import {base, brand} from '@workday/canvas-tokens-web';
 
 interface FocusRingOptions {
   width?: number;
@@ -20,13 +20,20 @@ interface FocusRingOptions {
 function calculateFocusRing({
   width,
   separation,
-  animate,
   inset,
   innerColor,
   outerColor,
 }: Required<Omit<FocusRingOptions, 'memoize' | 'inset'>> &
   Pick<FocusRingOptions, 'inset'>): CSSObject {
   let boxShadow, innerWidth, outerWidth;
+  if (innerColor && innerColor.startsWith('--')) {
+    // eslint-disable-next-line no-param-reassign
+    innerColor = cssVar(innerColor);
+  }
+  if (outerColor && outerColor.startsWith('--')) {
+    // eslint-disable-next-line no-param-reassign
+    outerColor = cssVar(outerColor);
+  }
 
   switch (inset) {
     case 'outer':
@@ -46,15 +53,6 @@ function calculateFocusRing({
       outerWidth = width + separation;
       boxShadow = `0 0 0 ${innerWidth}px ${innerColor}, 0 0 0 ${outerWidth}px ${outerColor}`;
       break;
-  }
-
-  if (animate) {
-    const fadeIn = keyframes({
-      '0%': {boxShadow},
-      '100%': {boxShadow},
-    });
-
-    return {animation: `${fadeIn} 100ms`, boxShadow};
   }
 
   return {boxShadow};
@@ -88,10 +86,9 @@ export function focusRing(options: FocusRingOptions = {}, theme?: Theme): CSSObj
     width = 2,
     separation = 0,
     animate = true,
-    innerColor = canvas.colors.frenchVanilla100,
-    outerColor = theme && theme.canvas
-      ? theme.canvas.palette.common.focusOutline
-      : defaultCanvasTheme.palette.common.focusOutline,
+    // hard code CSS fallbacks for dynamic styles that don't use the static style transform
+    innerColor = cssVar(base.frenchVanilla100, 'rgba(255,255,255,1)'),
+    outerColor = cssVar(brand.common.focusOutline, 'rgba(8,117,225,1)'),
     inset,
   } = options;
 

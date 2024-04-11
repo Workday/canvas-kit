@@ -71,7 +71,7 @@ const List = styled('ul')({
 /**
  * `DeprecatedMenu` renders a styled `<ul role="menu">` element within a {@link Card} and follows
  * the [Active Menu
- * pattern](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/examples/menu-button-actions-active-descendant/)
+ * pattern](https://www.w3.org/TR/wai-aria-practices/examples/menu-button/menu-button-actions-active-descendant.html)
  * using `aria-activedescendant`.
  *
  * Undocumented props are spread to the underlying `<ul>` element.
@@ -94,7 +94,7 @@ export class DeprecatedMenu extends React.Component<DeprecatedMenuProps, Depreca
     // We track the active menu item by index so we can avoid setting a bunch of refs
     // for doing things like selecting an item by first character (or really calling .focus() at all)
     // It allows us to use the activedescendant design pattern
-    // https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/examples/menu-button-actions-active-descendant/
+    // https://www.w3.org/TR/wai-aria-practices/examples/menu-button/menu-button-actions-active-descendant.html
     this.state = {
       selectedItemIndex: selected,
     };
@@ -117,7 +117,7 @@ export class DeprecatedMenu extends React.Component<DeprecatedMenuProps, Depreca
 
   componentDidMount() {
     console.warn(
-      `This component is being deprecated and will be removed in Canvas Kit V9.\n
+      `This component is being deprecated and will be removed in a future major version.\n
       For more information, please see the V8 upgrade guide:\n
       https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page
       `
@@ -266,9 +266,9 @@ export class DeprecatedMenu extends React.Component<DeprecatedMenuProps, Depreca
         case ' ':
         case 'Enter':
           nextSelectedIndex = this.state.selectedItemIndex;
-          const child = interactiveItems[this.state.selectedItemIndex] as React.ReactElement<
-            DeprecatedMenuItemProps
-          >;
+          const child = interactiveItems[
+            this.state.selectedItemIndex
+          ] as React.ReactElement<DeprecatedMenuItemProps>;
           this.handleClick(event, child.props);
           isShortcut = true;
           break;
@@ -324,11 +324,7 @@ export class DeprecatedMenu extends React.Component<DeprecatedMenuProps, Depreca
       if (!child || typeof child === 'boolean') {
         character = '';
       } else if (typeof child === 'string' || typeof child === 'number') {
-        character = child
-          .toString()
-          .trim()
-          .substring(0, 1)
-          .toLowerCase();
+        character = child.toString().trim().substring(0, 1).toLowerCase();
       } else if (Array.isArray(child) && child[0]) {
         // TODO test React.ReactNodeArray
         character = getFirstCharacter(child[0]);

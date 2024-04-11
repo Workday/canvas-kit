@@ -130,117 +130,113 @@ export const getNextPage: NavigationRequestor = (index, {state}) => {
 };
 
 const getItem: (id: string, model: NavigationInput) => Item<Generic> = (id, {state}) => {
-  const item = id ? state.items.find(item => item.id === id) : state.items[0]; // no id, return first item
+  const item = state.items.find(item => item.id === id) || state.items[0]; // no id, return first item
   assert(item, `Item not found: ${id}`);
   return item;
 };
 
-export const getWrappingOffsetItem = (offset: number) => (
-  index: number,
-  {state}: NavigationInput,
-  tries = state.items.length
-): number => {
-  if (Number.isNaN(index)) {
-    // we have no valid index. If the offset is positive, we'll return the first item
-    if (offset === 1) {
-      return getFirst(index, {state});
-    }
-    if (offset === -1) {
-      return getLast(index, {state});
-    }
-  }
-  const items = state.items;
-
-  let nextIndex = index + offset;
-
-  // calculate idealLength as in if the grid was a perfect rectangle
-  const rows = Math.ceil(items.length / state.columnCount);
-  const idealLength = rows * state.columnCount;
-  if (nextIndex < 0) {
-    if (offset === -1) {
-      // if the offset is -1, we want to wrap to the end
-      nextIndex = items.length - 1;
-    } else {
-      // if the offset is smaller than -1, we want to wrap by column
-      if (idealLength + nextIndex >= items.length) {
-        // we'll overflow the grid because there isn't enough items. Move `nextIndex` up so we wrap in
-        // the right spot
-        nextIndex -= state.columnCount;
+export const getWrappingOffsetItem =
+  (offset: number) =>
+  (index: number, {state}: NavigationInput, tries = state.items.length): number => {
+    if (Number.isNaN(index)) {
+      // we have no valid index. If the offset is positive, we'll return the first item
+      if (offset === 1) {
+        return getFirst(index, {state});
       }
-      nextIndex = idealLength + nextIndex;
+      if (offset === -1) {
+        return getLast(index, {state});
+      }
     }
-  } else if (nextIndex >= items.length) {
-    if (offset === 1) {
-      // if the offset is 1, we want to wrap to the beginning
+    const items = state.items;
+
+    let nextIndex = index + offset;
+
+    // calculate idealLength as in if the grid was a perfect rectangle
+    const rows = Math.ceil(items.length / state.columnCount);
+    const idealLength = rows * state.columnCount;
+    if (nextIndex < 0) {
+      if (offset === -1) {
+        // if the offset is -1, we want to wrap to the end
+        nextIndex = items.length - 1;
+      } else {
+        // if the offset is smaller than -1, we want to wrap by column
+        if (idealLength + nextIndex >= items.length) {
+          // we'll overflow the grid because there isn't enough items. Move `nextIndex` up so we wrap in
+          // the right spot
+          nextIndex -= state.columnCount;
+        }
+        nextIndex = idealLength + nextIndex;
+      }
+    } else if (nextIndex >= items.length) {
+      if (offset === 1) {
+        // if the offset is 1, we want to wrap to the beginning
+        nextIndex = 0;
+      } else {
+        // if the offset is larger than 1, we want to wrap by column
+        if (nextIndex - idealLength < 0) {
+          // we're going to overflow the grid because there isn't enough items. Move `nextIndex` down to
+          // the missing item in the next row. This way we'll end up wrapping in the right spot
+          nextIndex += state.columnCount;
+        }
+        nextIndex = nextIndex - idealLength;
+      }
+    }
+
+    if (items.length > 1 && state.nonInteractiveIds.includes(items[nextIndex].id) && tries > 0) {
+      // The next item is disabled, try again, but only if we haven't already tried everything.
+      // Avoid an infinite loop with `tries`
+      return getWrappingOffsetItem(offset)(nextIndex, {state}, tries - 1);
+    }
+
+    return nextIndex;
+  };
+
+export const getOffsetItem =
+  (offset: number) =>
+  (index: number, {state}: NavigationInput, tries = state.items.length): number => {
+    const {items, columnCount} = state;
+
+    let nextIndex = index + offset;
+
+    if (Math.abs(offset) < columnCount) {
+      // if we're here, the columnCount is non-zero and the absolute value of offset is less than the
+      // column count. We don't want to wrap, so we'll bound within the row
+
+      const currentIndexInRow = index % columnCount;
+      const nextIndexInRow = nextIndex - index + currentIndexInRow;
+      if (nextIndexInRow >= columnCount || nextIndexInRow < 0) {
+        nextIndex = index;
+      }
+    } else if (columnCount) {
+      // if we're here, there's a column count, but the offset will move into another row. We need to
+      // bound to row values
+      const nextRow = Math.floor(nextIndex / columnCount);
+
+      if (nextRow < 0 || nextRow >= columnCount) {
+        nextIndex = index;
+      }
+
+      // make sure we don't go out of bounds if the grid isn't a perfect rectangle
+      if (nextIndex > items.length - 1) {
+        nextIndex = index;
+      }
+    }
+
+    // make sure we're always in bounds
+    if (nextIndex < 0) {
       nextIndex = 0;
-    } else {
-      // if the offset is larger than 1, we want to wrap by column
-      if (nextIndex - idealLength < 0) {
-        // we're going to overflow the grid because there isn't enough items. Move `nextIndex` down to
-        // the missing item in the next row. This way we'll end up wrapping in the right spot
-        nextIndex += state.columnCount;
-      }
-      nextIndex = nextIndex - idealLength;
-    }
-  }
-
-  if (items.length > 1 && state.nonInteractiveIds.includes(items[nextIndex].id) && tries > 0) {
-    // The next item is disabled, try again, but only if we haven't already tried everything.
-    // Avoid an infinite loop with `tries`
-    return getWrappingOffsetItem(offset)(nextIndex, {state}, tries - 1);
-  }
-
-  return nextIndex;
-};
-
-export const getOffsetItem = (offset: number) => (
-  index: number,
-  {state}: NavigationInput,
-  tries = state.items.length
-): number => {
-  const {items, columnCount} = state;
-
-  let nextIndex = index + offset;
-
-  if (Math.abs(offset) < columnCount) {
-    // if we're here, the columnCount is non-zero and the absolute value of offset is less than the
-    // column count. We don't want to wrap, so we'll bound within the row
-
-    const currentIndexInRow = index % columnCount;
-    const nextIndexInRow = nextIndex - index + currentIndexInRow;
-    if (nextIndexInRow >= columnCount || nextIndexInRow < 0) {
-      nextIndex = index;
-    }
-  } else if (columnCount) {
-    // if we're here, there's a column count, but the offset will move into another row. We need to
-    // bound to row values
-    const nextRow = Math.floor(nextIndex / columnCount);
-
-    if (nextRow < 0 || nextRow >= columnCount) {
-      nextIndex = index;
+    } else if (nextIndex >= items.length) {
+      nextIndex = items.length - 1;
     }
 
-    // make sure we don't go out of bounds if the grid isn't a perfect rectangle
-    if (nextIndex > items.length - 1) {
-      nextIndex = index;
+    if (state.nonInteractiveIds.includes(items[nextIndex].id) && tries > 0) {
+      // The next item is disabled, try again, but only if we haven't already tried everything.
+      // Avoid an infinite loop with `tries`
+      return getOffsetItem(offset)(nextIndex, {state}, tries - 1);
     }
-  }
 
-  // make sure we're always in bounds
-  if (nextIndex < 0) {
-    nextIndex = 0;
-  } else if (nextIndex >= items.length) {
-    nextIndex = items.length - 1;
-  }
-
-  if (state.nonInteractiveIds.includes(items[nextIndex].id) && tries > 0) {
-    // The next item is disabled, try again, but only if we haven't already tried everything.
-    // Avoid an infinite loop with `tries`
-    return getOffsetItem(offset)(nextIndex, {state}, tries - 1);
-  }
-
-  return nextIndex;
-};
+    return nextIndex;
+  };
 
 /**
  * The default navigation manager of lists. This navigation manager will wrap around when the edge

@@ -7,7 +7,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {Menu} from '@workday/canvas-kit-react/menu';
 
-import {useComboboxModel} from './useComboboxModel';
+import {useComboboxModel} from './hooks/useComboboxModel';
 
 export interface ComboboxCardProps extends ExtractProps<typeof Menu.Card> {}
 

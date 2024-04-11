@@ -1,136 +1,250 @@
-import * as React from 'react';
+import React from 'react';
 import {
-  createComponent,
-  StyledType,
-  GrowthBehavior,
-  ErrorType,
-  errorRing,
-  styled,
+  createSubcomponent,
+  ExtractProps,
+  createContainer,
   Themeable,
 } from '@workday/canvas-kit-react/common';
-import {
-  colors,
-  borderRadius,
-  inputColors,
-  spaceNumbers,
-  type,
-  space,
-} from '@workday/canvas-kit-react/tokens';
-import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {SelectOption} from './SelectOption';
+import {Combobox} from '@workday/canvas-kit-react/combobox';
 
-export interface SelectProps extends Themeable, GrowthBehavior {
+import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
+import {useSelectModel} from './hooks/useSelectModel';
+import {useSelectCard} from './hooks/useSelectCard';
+import {useSelectInput} from './hooks/useSelectInput';
+import {CanvasSystemIcon} from '@workday/design-assets-types';
+import {createStyles, CSProps} from '@workday/canvas-kit-styling';
+
+export interface SelectInputProps extends ExtractProps<typeof TextInput>, CSProps {
   /**
-   * The SelectOption children of the Select (must be at least two).
+   * The Icon to render at the start of the `input`. Use this prop if your options
+   * include icons that you would like to render in the `input` when selected.
+   * ** Note:An option must be selected in order to render and icon.**
    */
-  children: React.ReactElement<SelectOption> | React.ReactElement<SelectOption>[];
-  /**
-   * If true, set the Select to the disabled state.
-   * @default false
-   */
-  disabled?: boolean;
-  /**
-   * The type of error associated with the Select (if applicable).
-   */
-  error?: ErrorType;
-  /**
-   * The function called when the Select state changes.
-   */
-  onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  /**
-   * The value of the Select.
-   */
-  value?: string;
+  inputStartIcon?: CanvasSystemIcon;
 }
 
-const StyledSelect = styled('select')<SelectProps & StyledType>(
-  {
-    ...type.levels.subtext.large,
-    border: `1px solid ${inputColors.border}`,
-    display: 'block',
-    backgroundColor: inputColors.background,
-    borderRadius: borderRadius.m,
-    boxSizing: 'border-box',
-    height: space.xl,
-    minWidth: 280,
-    transition: '0.2s box-shadow, 0.2s border-color',
-    padding: spaceNumbers.xxs,
-    margin: 0, // Fix Safari
-    MozAppearance: 'none', // FF bugfix: hide arrow so it doesn't show under ours
-    WebkitAppearance: 'none',
-    '&::placeholder': {
-      color: inputColors.placeholder,
-    },
-    '&:hover': {
-      borderColor: inputColors.hoverBorder,
-    },
-    '&:focus:not([disabled])': {
-      borderColor: inputColors.focusBorder,
-      boxShadow: `inset 0 0 0 1px ${inputColors.focusBorder}`,
-      outline: 'none',
-    },
-    '&:disabled': {
-      backgroundColor: inputColors.disabled.background,
-      borderColor: inputColors.disabled.border,
-      color: inputColors.disabled.text,
-      '&::placeholder': {
-        color: inputColors.disabled.text,
-      },
-    },
-  },
-  ({error}) => ({
-    ...errorRing(error),
-  }),
-  ({grow}) =>
-    grow && {
-      width: '100%',
-    }
-);
-
-const SelectDropdownIcon = styled(SystemIcon)({
-  position: 'absolute',
-  top: space.xxxs,
-  right: space.xxxs,
-  padding: space.xxxs,
-  pointerEvents: 'none',
-  '& path': {
-    transition: '100ms fill',
+const selectInputStyles = createStyles({
+  caretColor: 'transparent',
+  cursor: 'default',
+  '&::selection': {
+    backgroundColor: 'transparent',
   },
 });
 
-const SelectWrapper = styled('div')<Pick<SelectProps, 'grow' | 'disabled'>>(
-  {
-    position: 'relative',
-  },
-  ({grow}) => ({
-    display: grow ? 'block' : 'inline-block',
-  }),
-  ({disabled}) => ({
-    '& span': {
-      backgroundColor: disabled ? colors.soap100 : colors.frenchVanilla100,
+const hiddenSelectStyles = createStyles({
+  position: 'absolute',
+  top: 0,
+  bottom: 0,
+  left: 0,
+  right: 0,
+  opacity: 0,
+  cursor: 'default',
+  pointerEvents: 'none',
+});
+
+export const SelectInput = createSubcomponent(TextInput)({
+  modelHook: useSelectModel,
+  elemPropsHook: useSelectInput,
+})<SelectInputProps>(
+  (
+    {
+      placeholder = 'Choose an option',
+      inputStartIcon,
+      error,
+      textInputProps,
+      disabled,
+      ref,
+      onChange,
+      onInput,
+      onFocus,
+      value,
+      name,
+      ...elemProps
     },
-    '&:hover path': {
-      fill: disabled ? undefined : colors.licorice500,
-    },
-  })
+    Element,
+    model
+  ) => {
+    return (
+      <InputGroup>
+        {inputStartIcon && model.state.selectedIds.length > 0 && (
+          <InputGroup.InnerStart pointerEvents="none">
+            <SystemIcon icon={inputStartIcon} />
+          </InputGroup.InnerStart>
+        )}
+        {/* Hidden input to handle ids */}
+        <InputGroup.Input
+          error={error}
+          disabled={disabled}
+          className={hiddenSelectStyles}
+          tabIndex={-1}
+          aria-hidden={true}
+          onChange={onChange}
+          onInput={onInput}
+          value={value}
+          onFocus={onFocus}
+          name={name}
+          ref={ref}
+        />
+        {/* Visual input */}
+        <InputGroup.Input
+          as={Element}
+          disabled={disabled}
+          placeholder={placeholder}
+          error={error}
+          {...textInputProps}
+          {...mergeStyles(elemProps, [selectInputStyles])}
+        />
+        <InputGroup.InnerEnd position="absolute" pointerEvents="none">
+          <SystemIcon icon={caretDownSmallIcon} />
+        </InputGroup.InnerEnd>
+      </InputGroup>
+    );
+  }
 );
 
-export const Select = createComponent('select')({
-  displayName: 'Select',
-  Component: ({disabled = false, grow, children, ...elemProps}: SelectProps, ref, Element) => (
-    <SelectWrapper grow={grow} disabled={disabled}>
-      <StyledSelect as={Element} disabled={disabled} grow={grow} ref={ref} {...elemProps}>
-        {children}
-      </StyledSelect>
-      <SelectDropdownIcon
-        icon={caretDownSmallIcon}
-        color={disabled ? colors.licorice100 : colors.licorice200}
-        colorHover={disabled ? colors.licorice100 : colors.licorice500}
-      />
-    </SelectWrapper>
-  ),
+export const SelectItem = createSubcomponent('li')({
+  modelHook: useSelectModel,
   subComponents: {
-    ErrorType,
+    Icon: Combobox.Menu.Item.Icon,
   },
+})<ExtractProps<typeof Combobox.Menu.Item>>(({children, ...elemProps}, Element, _model) => {
+  return (
+    <Combobox.Menu.Item role="option" as={Element} {...elemProps}>
+      {children}
+    </Combobox.Menu.Item>
+  );
+});
+
+export const SelectCard = createSubcomponent('div')({
+  modelHook: useSelectModel,
+  elemPropsHook: useSelectCard,
+})<ExtractProps<typeof Combobox.Menu.Card>>(({children, ...elemProps}, Element) => {
+  return (
+    <Combobox.Menu.Card maxHeight={300} as={Element} {...elemProps}>
+      {children}
+    </Combobox.Menu.Card>
+  );
+});
+
+export interface SelectProps extends Themeable, ExtractProps<typeof Combobox> {}
+/**
+ * Use `Select` to allow users to choose an option from a list or type characters to select a matching option.
+ *
+ * **Note: `Select` must wrap `FormField` and `FormField` must wrap all `Select` children to ensure proper accessibility. **
+ *
+ * ```tsx
+ * <Select items={options}>
+ *  <FormField label="Your Label">
+ *    <Select.Input onChange={e => handleChange(e)} id="contact-select" />
+ *    <Select.Popper>
+ *      <Select.Card>
+ *        <Select.List>
+ *          {item => <Select.Item>{item.id}</Select.Item>}
+ *        </Select.List>
+ *      </Select.Card>
+ *      </Select.Popper>
+ *    </FormField>
+ * </Select>
+ * ```
+ */
+export const Select = createContainer()({
+  displayName: 'Select',
+  modelHook: useSelectModel,
+  subComponents: {
+    /**
+     * `Select.Input` renders a {@link ComboboxMenu Combobox.Input} that handles keyboard navigation and interaction defined by [WAI](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/).
+     * This component can either be [controlled or uncontrolled](https://react.dev/learn/sharing-state-between-components#controlled-and-uncontrolled-components).
+     *
+     * ```tsx
+     * <Select items={options}>
+     *   <FormField label="Contact">
+     *     <Select.Input onChange={(event) => handleChange(event)}>
+     *     ...
+     *   </FormField>
+     * </Select>
+     * ```
+     */
+    Input: SelectInput,
+    /**
+     * `Select.Popper` renders a {@link ComboboxPopper Combobox.Menu.Popper}. You have access to all `Popper` props.
+     *
+     * ```tsx
+     * <Select item={options}>
+     *  <FormField label="Your Label">
+     *    <Select.Input onChange={(event) => handleChange(event)}>
+     *    <Select.Popper>
+     *    ...
+     *    </Select.Popper>
+     *  </FormField>
+     * </Select>
+     * ```
+     */
+    Popper: Combobox.Menu.Popper,
+    /**
+     * `Select.Card` renders a {@link ComboboxCard Combobox.Card}. You have access to all `Card` props.
+     *
+     * **Note: The card will be the width of its corresponding `Select.Input`**.
+     *
+     * ```tsx
+     * <Select item={options}>
+     *  <FormField label="Your Label">
+     *    <Select.Input onChange={(event) => handleChange(event)}>
+     *    <Select.Popper>
+     *      <Select.Card>
+     *        ...
+     *      </Select.Card>
+     *    </Select.Popper>
+     *  </FormField>
+     * </Select>
+     * ```
+     */
+    Card: SelectCard,
+    /**
+     * `Select.List` renders a {@link ComboboxMenuList Combobox.Menu.List}. You have access to all `ListBox` props.
+     *
+     * ```tsx
+     * <Select item={options}>
+     *  <FormField label="Your Label">
+     *    <Select.Input onChange={(event) => handleChange(event)}>
+     *    <Select.Popper>
+     *      <Select.Card>
+     *        <Select.List>
+     *          {(item) => <Select.Item>{item}</Select.Item>}
+     *        </Select.List
+     *      </Select.Card>
+     *    </Select.Popper>
+     *  </FormField>
+     * </Select>
+     * ```
+     */
+    List: Combobox.Menu.List,
+    /**
+     * `Select.Item` renders a {@link ComboboxMenuItem Combobox.Menu.Item} with aria role of `option`. You can optionally render a `Icon`.
+     *
+     * ```tsx
+     * <Select item={options}>
+     *  <FormField label="Your Label">
+     *    <Select.Input onChange={(event) => handleChange(event)}>
+     *      <Select.Popper>
+     *        <Select.Card>
+     *          <Select.List>
+     *            {(item) => <Select.Item><Select.Item.Icon icon={icon} />{item}</Select.Item>}
+     *          </Select.List
+     *        </Select.Card>
+     *      </Select.Popper>
+     *  </FormField>
+     * </Select>
+     * ```
+     */
+    Item: SelectItem,
+  },
+})<SelectProps>(({children, ...elemProps}, _, model) => {
+  return (
+    <Combobox model={model} {...elemProps}>
+      {children}
+    </Combobox>
+  );
 });
