@@ -1,0 +1,789 @@
+import {Meta} from '@storybook/addon-docs';
+import {Table} from '@workday/canvas-kit-react/table';
+import {base, brand} from '@workday/canvas-tokens-web';
+import {cssVar} from '@workday/canvas-kit-styling';
+
+<Meta title="Guides/Upgrade Guides/v11.0" />
+
+# Canvas Kit 11.0 Upgrade Guide
+
+This guide contains an overview of the changes in Canvas Kit v11. Please
+[reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have
+any questions.
+
+- [Codemod](#codemod)
+- [Component Promotions](#component-promotions)
+  - [Table](#table)
+- [Deprecations](#deprecations)
+  - [Form Field (Main)](#form-field-main)
+  - [Label Text](#label-text)
+  - [Text Area (Preview)](#text-area-preview)
+  - [Text Input (Preview)](#text-input-preview)
+- [Component Style Updates](#component-style-updates)
+- [Component Token Updates](#component-token-updates)
+- [Component Updates](#component-updates)
+  - [Card](#card)
+  - [Checkbox](#checkbox)
+  - [Combobox](#combobox)
+  - [Count Badge](#count-badge)
+  - [Form Field Preview](#form-field-preview)
+  - [Icons](#icons)
+  - [Radio (Preview)](#radio-preview)
+  - [Select](#select)
+  - [Switch](#switch)
+  - [Table (Preview)](#table-preview)
+  - [Text](#text)
+- [Glossary](#glossary)
+  - [Main](#main)
+  - [Preview](#preview)
+  - [Labs](#labs)
+
+## Codemod
+
+We've provided a [codemod](https://github.com/Workday/canvas-kit/tree/master/modules/codemod) to
+automatically update your code to work with most of the breaking changes in v11. **Breaking changes
+handled by the codemod are marked with 🤖 in the Upgrade Guide.**
+
+A codemod is a script that makes programmatic transformations on your codebase by traversing the
+[AST](https://www.codeshiftcommunity.com/docs/understanding-asts), identifying patterns, and making
+prescribed changes. This greatly decreases opportunities for error and reduces the number of manual
+updates, which allows you to focus on changes that need your attention. **We highly recommend you
+use the codemod for these reasons.**
+
+If you're new to running codemods or if it's been a minute since you've used one, there are a few
+things you'll want to keep in mind.
+
+- Our codemods are meant to be run sequentially. For example, if you're using v7 of Canvas Kit,
+  you'll need to run the v8 and v9 codemod before you run v11.
+- The codemod will update your code to be compatible with the specified version, but it will **not**
+  remove outdated dependencies or upgrade dependencies to the latest version. You'll need to upgrade
+  dependencies on your own.
+  - We recommend upgrading dependencies before running the codemod.
+  - Always review your `package.json` files to make sure your dependency versions look correct.
+- The codemod will not handle every breaking change in v11. You will likely need to make some manual
+  changes to be compatible. Use our Upgrade Guide as a checklist.
+- Codemods are not bulletproof.
+  - Conduct a thorough PR and QA review of all changes to ensure no regressions were introduced.
+  - As a safety precaution, we recommend committing the changes from the codemod as a single
+    isolated commit (separate from other changes) so you can roll back more easily if necessary.
+
+We're here to help! Automatic changes to your codebase can feel scary. You can always reach out to
+our team. We'd be very happy to walk you through the process to set you up for success.
+
+### Instructions
+
+The easiest way to run our codemod is to use `npx`.
+
+```sh
+> npx @workday/canvas-kit-codemod v11 [path]
+```
+
+Be sure to provide specific directories that need to be updated via the `[path]` argument. This
+decreases the amount of AST the codemod needs to traverse and reduces the chances of the script
+having an error. For example, if your source code lives in `src/`, use `src/` as your `[path]`. Or,
+if you have a monorepo with three packages using Canvas Kit, provide those specific packages as your
+`[path]`.
+
+Alternatively, if you're unable to run the codemod successfully using `npx`, you can install the
+codemod package as a dev dependency, run it with `yarn`, and then remove the package after you're
+finished.
+
+```sh
+> yarn add @workday/canvas-kit-codemod --dev
+> yarn canvas-kit-codemod v11 [path]
+> yarn remove @workday/canvas-kit-codemod
+```
+
+> The codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` files. You'll need to manually edit
+> other file types (`.json`, `.mdx`, `.md`, etc.). You may need to run your linter after executing
+> the codemod, as its resulting formatting (spacing, quotes, etc.) may not match your project
+> conventions.
+
+## Component Promotions
+
+### Table
+
+**PR:** [#2600](https://github.com/Workday/canvas-kit/pull/2600)
+
+We've promoted the `Table` compound component in [Preview](#preview) to [Main](#main). This replaces
+the existing `Table` component with a compound component and will consist of a new compound
+component API.
+
+> `rowState` prop is no longer a part of the `Table` component.
+
+In v10, the `Table` component in [Main](#main) only exposed a `Table` and `TableRow` component to
+build tables.
+
+In v11, `Table` now exposes every subcomponent of a semantic HTML
+[Table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table). While more verbose, it
+provides more flexibility for customization.
+
+See below for examples of the differences between the v10 `Table` and the v11 `Table` compound
+component.
+
+v10:
+
+```tsx
+<Table>
+  <thead>
+    <TableRow header={true}>
+      <th>Header Text</th>
+    </TableRow>
+  </thead>
+  <tbody>
+    <TableRow>
+      <td>Cell Text</td>
+    </TableRow>
+  </tbody>
+</Table>
+```
+
+v11:
+
+```tsx
+<Table>
+  <Table.Head>
+    <Table.Row>
+      <Table.Header>Header Text</Table.Header>
+    </Table.Row>
+  </Table.Head>
+  <Table.Body>
+    <Table.Row>
+      <Table.Cell>Cell Text</Table.Cell>
+    </Table.Row>
+  </Table.Body>
+</Table>
+```
+
+Please refer to the
+[Table examples](https://workday.github.io/canvas-kit/?path=/story/components-containers-table--basic)
+for how to implement new tables.
+
+> **NOTE:** If you were using the [Preview](#preview) `Table` compound component, then you will need
+> to update your import from `"@workday/canvas-kit-preview-react/table"` to
+> `"@workday/canvas-kit-react/table"`.
+
+## Deprecations
+
+We add the [@deprecated](https://jsdoc.app/tags-deprecated.html) JSDoc tag to code we plan to remove
+in a future major release. This signals consumers to migrate to a more stable alternative before the
+deprecated code is removed.
+
+### Form Field Main
+
+**PR:** [#2472](https://github.com/Workday/canvas-kit/pull/2472)
+
+We've deprecated `FormField` from [Main](#main) in favor of our compound component `FormField` in
+[Preview](#preview). Please use
+[`FormField`](https://workday.github.io/canvas-kit/?path=//docs/preview-inputs-form-field--basic)
+instead.
+
+---
+
+### Label Text
+
+**PR:** [#2455](https://github.com/Workday/canvas-kit/pull/2455)
+
+We've deprecated `LabelText` from [Main](#main) in favor of our compound component `FormField.Label`
+in [Preview](#preview). Please use
+[`FormField.Label`](https://workday.github.io/canvas-kit/?path=//docs/preview-inputs-form-field--basic)
+instead.
+
+If you still want to use a `label` element outside of the context of a form, you can use `Text`
+instead.
+
+---
+
+### Text Area Preview
+
+**PR:** [#2472](https://github.com/Workday/canvas-kit/pull/2472)
+
+We've deprecated `TextArea` from [Preview](#preview) in favor of our compound component `FormField`
+in [Preview](#preview). Please use
+[`FormField`](https://workday.github.io/canvas-kit/?path=//docs/preview-inputs-form-field--basic)
+instead.
+
+---
+
+### Text Input Preview
+
+**PR:** [#2472](https://github.com/Workday/canvas-kit/pull/2472)
+
+We've deprecated `TextInput` from [Preview](#preview) in favor of our compound component `FormField`
+in [Preview](#preview). Please use
+[`FormField`](https://workday.github.io/canvas-kit/?path=//docs/preview-inputs-form-field--basic)
+instead.
+
+---
+
+## Component Style Updates
+
+These changes are to address discrepancies that were found between Canvas Kit Design Specs and
+Canvas Kit.
+
+We've made some small styling updates to: `Table`, `Checkbox`, `Radio`, `SecondaryButton`,
+`TertiaryButton`, `DeleteButton`, `TextInput` and `TextArea`.
+
+**PR:** [#2485](https://github.com/Workday/canvas-kit/pull/2485)
+
+See below:
+
+<Table>
+  <Table.Head>
+    <Table.Row>
+      <Table.Header scope="col">Component</Table.Header>
+      <Table.Header scope="col">Variant</Table.Header>
+      <Table.Header scope="col">psuedo Class</Table.Header>
+      <Table.Header scope="col">Property</Table.Header>
+      <Table.Header scope="col">v10 Value</Table.Header>
+      <Table.Header scope="col">v11 Value</Table.Header>
+    </Table.Row>
+  </Table.Head>
+  <Table.Body>
+    <Table.Row>
+      <Table.Cell>Table (Header)</Table.Cell>
+      <Table.Cell />
+      <Table.Cell />
+      <Table.Cell>borderColor</Table.Cell>
+      <Table.Cell backgroundColor="soap400">soap400</Table.Cell>
+      <Table.Cell backgroundColor="soap500">soap500</Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>Checkbox</Table.Cell>
+      <Table.Cell />
+      <Table.Cell>disabled</Table.Cell>
+      <Table.Cell>borderColor</Table.Cell>
+      <Table.Cell backgroundColor="soap600">soap600</Table.Cell>
+      <Table.Cell color="frenchVanilla100" backgroundColor="licorice100">
+        licorice100
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>Checkbox</Table.Cell>
+      <Table.Cell>Inverse</Table.Cell>
+      <Table.Cell>disabled</Table.Cell>
+      <Table.Cell>borderColor</Table.Cell>
+      <Table.Cell backgroundColor="soap600">soap600</Table.Cell>
+      <Table.Cell color="frenchVanilla100" backgroundColor="licorice100">
+        licorice100
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>Radio</Table.Cell>
+      <Table.Cell />
+      <Table.Cell>disabled</Table.Cell>
+      <Table.Cell>borderColor</Table.Cell>
+      <Table.Cell backgroundColor="soap600">soap600</Table.Cell>
+      <Table.Cell color="frenchVanilla100" backgroundColor="licorice100">
+        licorice100
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>SecondaryButton</Table.Cell>
+      <Table.Cell>Inverse</Table.Cell>
+      <Table.Cell>focus</Table.Cell>
+      <Table.Cell>color</Table.Cell>
+      <Table.Cell color="frenchVanilla100" backgroundColor="blackPepper500">
+        blackPepper500
+      </Table.Cell>
+      <Table.Cell color="frenchVanilla100" backgroundColor="blackPepper400">
+        blackPepper400
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>SecondaryButton</Table.Cell>
+      <Table.Cell>Inverse</Table.Cell>
+      <Table.Cell>focus</Table.Cell>
+      <Table.Cell>boxShdaow (Inner Color)</Table.Cell>
+      <Table.Cell color="frenchVanilla100" backgroundColor="blackPepper500">
+        blackPepper500
+      </Table.Cell>
+      <Table.Cell color="frenchVanilla100" backgroundColor="blackPepper400">
+        blackPepper400
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>SecondaryButton (Icon)</Table.Cell>
+      <Table.Cell>Inverse</Table.Cell>
+      <Table.Cell>focus</Table.Cell>
+      <Table.Cell>fill</Table.Cell>
+      <Table.Cell color="frenchVanilla100" backgroundColor="blackPepper500">
+        blackPepper500
+      </Table.Cell>
+      <Table.Cell color="frenchVanilla100" backgroundColor="blackPepper400">
+        blackPepper400
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>TertiaryButton</Table.Cell>
+      <Table.Cell />
+      <Table.Cell>hover</Table.Cell>
+      <Table.Cell>backgroundColor</Table.Cell>
+      <Table.Cell backgroundColor="soap200">soap200</Table.Cell>
+      <Table.Cell backgroundColor="soap300">soap300</Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>TertiaryButton</Table.Cell>
+      <Table.Cell />
+      <Table.Cell>active</Table.Cell>
+      <Table.Cell>backgroundColor</Table.Cell>
+      <Table.Cell backgroundColor="soap300">soap300</Table.Cell>
+      <Table.Cell backgroundColor="soap400">soap400</Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>TertiaryButton</Table.Cell>
+      <Table.Cell />
+      <Table.Cell>active</Table.Cell>
+      <Table.Cell>color</Table.Cell>
+      <Table.Cell color="frenchVanilla100" backgroundColor={cssVar(brand.primary.dark)}>
+        primary.dark
+      </Table.Cell>
+      <Table.Cell color="frenchVanilla100" backgroundColor={cssVar(brand.primary.darkest)}>
+        primary.darkest
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>TertiaryButton</Table.Cell>
+      <Table.Cell />
+      <Table.Cell>disabled</Table.Cell>
+      <Table.Cell>borderColor</Table.Cell>
+      <Table.Cell backgroundColor="frenchVanilla100">frenchVanilla100</Table.Cell>
+      <Table.Cell backgroundColor="transparent">transparent</Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>TertiaryButton (Icon Only)</Table.Cell>
+      <Table.Cell />
+      <Table.Cell>focus</Table.Cell>
+      <Table.Cell>fill</Table.Cell>
+      <Table.Cell color="frenchVanilla100" backgroundColor="blackPepper500">
+        blackPepper500
+      </Table.Cell>
+      <Table.Cell color="frenchVanilla100" backgroundColor="blackPepper400">
+        blackPepper400
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>TertiaryButton (Icon Only)</Table.Cell>
+      <Table.Cell />
+      <Table.Cell>hover</Table.Cell>
+      <Table.Cell>fill</Table.Cell>
+      <Table.Cell color="frenchVanilla100" backgroundColor="blackPepper500">
+        blackPepper500
+      </Table.Cell>
+      <Table.Cell color="frenchVanilla100" backgroundColor="blackPepper400">
+        blackPepper400
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>DeleteButton</Table.Cell>
+      <Table.Cell />
+      <Table.Cell>disabled</Table.Cell>
+      <Table.Cell>backgroundColor</Table.Cell>
+      <Table.Cell backgroundColor={cssVar(brand.error.light)}>error.light</Table.Cell>
+      <Table.Cell backgroundColor="rgba(222,46,33,0.4)">error.base</Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>DeleteButton</Table.Cell>
+      <Table.Cell />
+      <Table.Cell>disabled</Table.Cell>
+      <Table.Cell>opacity</Table.Cell>
+      <Table.Cell>1</Table.Cell>
+      <Table.Cell>0.4</Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>TextInput</Table.Cell>
+      <Table.Cell />
+      <Table.Cell>disabled</Table.Cell>
+      <Table.Cell>borderColor</Table.Cell>
+      <Table.Cell backgroundColor="soap600">soap600</Table.Cell>
+      <Table.Cell color="frenchVanilla100" backgroundColor="licorice100">
+        licorice100
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>TextArea</Table.Cell>
+      <Table.Cell />
+      <Table.Cell>disabled</Table.Cell>
+      <Table.Cell>borderColor</Table.Cell>
+      <Table.Cell backgroundColor="soap600">soap600</Table.Cell>
+      <Table.Cell color="frenchVanilla100" backgroundColor="licorice100">
+        licorice100
+      </Table.Cell>
+    </Table.Row>
+  </Table.Body>
+</Table>
+
+### Component Token Updates
+
+The following components have been updated to use our [new system tokens](insert link).
+
+- Text
+
+## Component Updates
+
+### Card
+
+**PR:** [#2471](https://github.com/Workday/canvas-kit/pull/2471)
+
+`Card` and its subcomponents have been refactored to use our new
+[styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api)
+and [tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs). `Card`
+no longer extends the `Box` component, however, it still supports Emotion `styled` and style props.
+
+### Checkbox
+
+**PR:** [#2542](https://github.com/Workday/canvas-kit/pull/2542)
+
+`Checkbox` now uses
+[Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
+our
+[new styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
+The component now supports the `cs` prop, but otherwise the API has not changed. It should behave
+identically as it did in previous versions.
+
+### Combobox
+
+**PR:** [#2570](https://github.com/Workday/canvas-kit/pull/2570)
+
+`Combobox` has been refactored to use our
+[new styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api)
+and [tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs). The
+component now supports the `cs` prop, but otherwise the API has not changed.
+
+### Count Badge
+
+**PR:** [#2442](https://github.com/Workday/canvas-kit/pull/2442)
+
+`CountBadge` now uses `createComponent`,
+[Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs), and
+our new
+[styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
+The component API has not been changed, and it should behave identically as it did in previous
+versions.
+
+### Form Field (Preview)
+
+**PR:** [#2472](https://github.com/Workday/canvas-kit/pull/2472)
+
+`FormField` in [Preview](#preview) is a compound component and we intend to promote it in a future
+version to replace the `FormField` in [Main](#main). Because of this, we've refactored how errors
+are applied to `FormField` in [Preview](#preview) in order to match the API from the `FormField` in
+[Main](#main).
+
+- `hasError` prop on the `FormField` has been renamed to `error`.
+- `error` accepts `"error" | "alert" | ""` instead of a boolean value.
+- `orientation` prop defaults to `vertical` and is no longer required.
+- `FormField.Input` can be used by any `input`.
+- `FormField` does **not** support the `useFieldSet` prop that the `FormField` in [Main](#main)
+  does. In order to achieve the same behavior, set the `as` prop on the `FormField` element to
+  `fieldset` and the `as` prop of `FormField.Label` to `legend`.
+
+```tsx
+// v10 FormField in Preview
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+
+//...
+
+<FormField orientation="vertical" hasError={true}>
+  <FormField.Label>Password</FormField.Label>
+  <FormField.Input as={TextInput} type="password" value={value} onChange={handleChange} />
+  <FormField.Hint>Must Contain a number and a capital letter</FormField.Hint>
+</FormField>;
+
+// v11
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+
+//...
+
+<FormField error="error">
+  <FormField.Label>Password</FormField.Label>
+  <FormField.Container>
+    <FormField.Input as={TextInput} type="password" value={value} onChange={handleChange} />
+    <FormField.Hint>Must Contain a number and a capital letter</FormField.Hint>
+  </FormField.Container>
+</FormField>;
+```
+
+🤖 The codemod will handle the change of `hasError` to `error` for you automatically.
+
+### Icons
+
+All icons components including `Svg`, `SystemIcon`, `SystemIconCircle`, `AccentIcon`, `AppletIcon`
+and `Graphic` now use our new
+[Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
+[new styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
+
+- Components now support the `cs` prop. -`styles` prop has been removed.
+
+**Note: Passing a token name to a style prop will be not supported in a future major version.**
+
+```tsx
+// This will no longer be supported in a future major version
+<SystemIcon color="blueberry400" .../>
+
+// Use new tokens instead.
+<SystemIcon color={base.blueberry400} .../>
+```
+
+🤖 The codemod will handle the change of `styles` to `cs` for you automatically.
+
+#### AccentIcon
+
+- `AccentIconStyles` prop has been deprecated and will be merged with `AccentIconProps` in a future
+  version.
+- `accentIconStyles` has been deprecated and will be removed in a future version as a part of
+  implementation of stencils and new tokens. Consider to use `accentIconStencil` to get styles or
+  class name.
+- `AccentIcon` supports `size` and `color` css variables, along with `size` and `color` props. Both
+  ways are supported:
+
+```tsx
+// set size or color by props
+<AccentIcon color={base.blueberry100} size={24} />;
+
+// set size or color by css vars
+import {accentIconStencil} from '@workday/canvas-kit-react/icon';
+
+const MyComponent = StyledRadioButton('div')({
+  [accentIconStencil.vars.color]: base.berrySmoothie100,
+  [accentIconStencil.vars.size]: '2rem',
+});
+
+<MyComponent>
+  <AccentIcon icon={myIcon} />
+</MyComponent>;
+```
+
+#### AppletIcon
+
+- `AppletIconStyles` prop has been deprecated and will be merged with `AppletIconProps` in a future
+  version.
+- `appletIconStyles` has been deprecated and will be removed in a future version as a part of
+  implementation of stencils and new tokens. Consider using `appletIconStencil` to get styles or
+  class name.
+- `AppletIcon` supports `size`, `color200`, `color300`, `color400` and `color500` css variables,
+  along with `size` and `color` props. Both ways are supported:
+
+```tsx
+// set size or color by props
+<AppletIcon color="blueberry" size={240} />;
+
+// set size or color by css vars
+import {appletIconStencil} from '@workday/canvas-kit-react/icon';
+
+const MyComponent = StyledRadioButton('div')({
+  [appletIconStencil.vars.size]: '2rem',
+  [appletIconStencil.vars.color200]: base.berrySmoothie200,
+  [appletIconStencil.vars.color300]: base.berrySmoothie300,
+  [appletIconStencil.vars.color400]: base.berrySmoothie400,
+  [appletIconStencil.vars.color500]: base.berrySmoothie500,
+});
+
+<MyComponent>
+  <AppletIcon icon={myIcon} />
+</MyComponent>;
+```
+
+#### Graphic
+
+- `GraphicStyles` prop has been deprecated and will be merged with `GraphicProps` in a future
+  version.
+- `graphicStyles` has been deprecated and will be removed in a future version as a part of
+  implementation of stencils and new tokens. Consider to use `graphicStencil` to get styles or class
+  name.
+- `width` and `height` props has been deprecated and will be removed in a future version. Consider
+  using `cs` props instead to set svg sizes.
+
+```tsx
+// before
+<Graphic icon={myGraphic} width={160} />
+
+// after
+<Graphic icon={myGraphic} cs={{"& svg": {width: '10rem'}}} />
+```
+
+#### Icon
+
+This change only impacts internal Canvas Kit code. `Icon` component has been removed and no longer
+used in icons. It was replaced by `Svg` and icon stencils extend `svgStencil`.
+
+#### SystemIcon
+
+- `SystemIconStyles` prop has been deprecated and will be merged with `SystemIconProps` in a future
+  version.
+
+- `accentHover` is deprecated and will be removed in a future version. Please use the following when
+  overriding styles:
+
+```tsx
+'&:hover': {
+  [systemIconStencil.vars.accent]: desiredAccentHoverColor
+}
+```
+
+- `backgroundHover` is deprecated and will be removed in a future version. Please use the following
+  when overriding styles:
+
+```tsx
+'&:hover': {
+  [systemIconStencil.vars.background]: desiredBackgroundHoverColor
+}
+```
+
+- `fillHover` is deprecated and will be removed in a future version. Please use the following when
+  overriding styles:
+
+```tsx
+'&:hover': {
+  [systemIconStencil.vars.fill]: desiredFillHoverColor
+}
+```
+
+- `fill` is deprecated and will be removed in a future version. Please use `color` and specify
+  `accent` color if you want `accent` to be different from `color`.
+
+```tsx
+'&:hover': {
+  [systemIconStencil.vars.fill]: desiredFillHoverColor
+}
+```
+
+- `systemIconStyles` has been deprecated and will be removed in a future version as a part of
+  implementation of stencils and new tokens. Consider to use `systemIconStencil` to get styles or
+  class name.
+
+- `SystemIcon` supports `size`, `color`, `accentColor` and `background` css variables, along with
+  props. Both ways are supported:
+
+```tsx
+// set size or color by props
+<SystemIcon color={base.blueberry100} size={24} />;
+
+// set size or color by css vars
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
+
+const MyComponent = StyledRadioButton('div')({
+  [accentIconStencil.vars.size]: '2rem',
+  [systemIconStencil.vars.color]: base.berrySmoothie400,
+  [systemIconStencil.vars.background]: base.frenchVanilla100,
+  // on hover:
+  '&:hover': {
+    [systemIconStencil.vars.color]: base.berrySmoothie500,
+    [systemIconStencil.vars.background]: 'transparent',
+  },
+});
+
+<MyComponent>
+  <SystemIcon icon={myIcon} />
+</MyComponent>;
+```
+
+### Radio (Preview)
+
+**PR:** [#2546](https://github.com/Workday/canvas-kit/pull/2546)
+
+`Radio` and `RadioGroup` now use
+[Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
+our
+[new styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
+The component now supports the `cs` prop, but otherwise the API has not changed. It should behave
+identically as it did in previous versions.
+
+### Select
+
+**PR:** [#2570](https://github.com/Workday/canvas-kit/pull/2570)
+
+`Select` has been refactored to use our
+[new styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api)
+and [tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs). The
+component now supports the `cs` prop, but otherwise the API has not changed. It should behave
+
+### Switch
+
+**PR:** [#2583](https://github.com/Workday/canvas-kit/pull/2583)
+
+`Switch` now uses
+[Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
+our
+[new styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
+The component now supports the `cs` prop, but otherwise the API has not changed. It should behave
+identically as it did in previous versions.
+
+### Table (Preview)
+
+**PR:** [#2567](https://github.com/Workday/canvas-kit/pull/2567)
+
+`Table` now uses
+[Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
+our
+[new styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
+The component now supports the `cs` prop, but otherwise the API has not changed. It should behave
+identically as it did in previous versions.
+
+### Text
+
+**PR:** [#2455](https://github.com/Workday/canvas-kit/pull/2455)
+
+`Text` has been refactored to use our
+[new styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api)
+and [tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs). It no
+longer extends the `Box` component, however, it still supports Emotion `styled` and style props.
+Type level components: `Title`, `Heading`, `BodyText` and `Subtext`, have not been changed since
+they extend the `Text` component. These changes do not affect the components API.
+
+### StatusIndicator (Preview)
+
+**PR:** [#2620] https://github.com/Workday/canvas-kit/pull/2620
+
+`StatusIndicator` now uses
+[Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
+our
+[new styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
+The component now supports the `cs` prop, but otherwise the API has not changed. It should behave
+identically as it did in previous versions.
+- statusIndicatorColors has been deprecated and will be removed in a future version as a part of implementation of stencils and new tokens
+- useStatusIndicatorIcon has been deprecated and will be removed in a future version as a part of implementation of stencils and new tokens
+
+## Glossary
+
+### Main
+
+Our Main package of Canvas Kit tokens, components, and utilities at `@workday/canvas-kit-react` has
+undergone a full design and a11y review and is approved for use in product.
+
+Breaking changes to code in Main will only occur during major version updates and will always be
+communicated in advance and accompanied by migration strategies.
+
+---
+
+### Preview
+
+Our Preview package of Canvas Kit tokens, components, and utilities at
+`@workday/canvas-kit-preview-react` has undergone a full design and a11y review and is approved for
+use in product, but may not be up to the high code standards upheld in the [Main](#main) package.
+Preview is analagous to code in beta.
+
+Breaking changes are unlikely, but possible, and can be deployed to Preview at any time without
+triggering a major version update, though such changes will be communicated in advance and
+accompanied by migration strategies.
+
+Generally speaking, our goal is to eventually promote code from Preview to [Main](#main).
+Occasionally, a component with the same name will exist in both [Main](#main) and Preview (for
+example, see Segmented Control in [Preview](/components/buttons/segmented-control/) and
+[Main](https://d2krrudi3mmzzw.cloudfront.net/v8/?path=/docs/components-buttons-segmented-control--basic)).
+In these cases, Preview serves as a staging ground for an improved version of the component with a
+different API. The component in [Main](#main) will eventually be replaced with the one in Preview.
+
+---
+
+### Labs
+
+Our Labs package of Canvas Kit tokens, components, and utilities at `@workday/canvas-kit-labs-react`
+has **not** undergone a full design and a11y review. Labs serves as an incubator space for new and
+experimental code and is analagous to code in alpha.
+
+Breaking changes can be deployed to Labs at any time without triggering a major version update and
+may not be subject to the same rigor in communcation and migration strategies reserved for breaking
+changes in [Preview](#preview) and [Main](#main).

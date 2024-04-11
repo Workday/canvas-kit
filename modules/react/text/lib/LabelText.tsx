@@ -1,18 +1,66 @@
 import * as React from 'react';
-import {Property} from 'csstype';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {Text, TextProps} from './Text';
-import {inputColors} from '@workday/canvas-kit-react/tokens';
-
-export interface TypeLabelProps extends TextProps {
-  cursor?: Property.Cursor;
-  disabled?: boolean;
-}
+import {system} from '@workday/canvas-tokens-web';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {textStencil} from './Text';
 
 /**
- * This component is intended to be used for labeling input fields. It's built on top of the
- * {@link Text} component, so it has access to all `TextProps`. By default, it renders a semantic
- * `label` element.
+ * @deprecated ⚠️ `TypeLabelProps` has been deprecated and will be removed in a future major version.
+ */
+export interface TypeLabelProps extends BoxProps {
+  typeLevel?: `${keyof typeof system.type}.${'large' | 'medium' | 'small'}`;
+  /**
+   * Disabled state as a boolean
+   *
+   * ```tsx
+   * <LabelText disabled={true}>Error text</LabelText>
+   * ```
+   */
+  disabled?: boolean;
+  /**
+   * Type variant token names: `error`, `hint` or `inverse`.
+   *
+   * ```tsx
+   * <LabelText variant="error">Error text</LabelText>
+   * ```
+   */
+  variant?: 'error' | 'hint' | 'inverse';
+}
+
+const labelTextStencil = createStencil({
+  extends: textStencil,
+  base: {
+    ...system.type.subtext.large,
+    color: system.color.text.default,
+  },
+  modifiers: {
+    disabled: {
+      true: {
+        cursor: 'default',
+        color: system.color.text.disabled,
+      },
+    },
+    variant: {
+      inverse: {color: system.color.text.inverse},
+      error: {color: system.color.text.critical.default},
+      hint: {color: system.color.text.hint},
+    },
+  },
+  compound: [
+    {
+      modifiers: {variant: 'inverse', disabled: true},
+      styles: {
+        opacity: system.opacity.disabled,
+        color: system.color.text.inverse,
+      },
+    },
+  ],
+});
+
+/**
+ * This component is intended to be used for labeling input fields.
+ * By default, it renders a semantic `label` element.
  *
  * It also uses the `subtext.large` typeLevel by default:
  * - font-size: 14px (0.875rem)
@@ -25,20 +73,16 @@ export interface TypeLabelProps extends TextProps {
  *   <LabelText>Input Label Text</LabelText>
  * );
  * ```
+ *
+ * @deprecated ⚠️ `LabelText` has been deprecated and will be removed in a future major version. Please use [FormField.Label](https://workday.github.io/canvas-kit/?path=/docs/preview-inputs-form-field--basic) from Preview instead.
  */
 export const LabelText = createComponent('label')({
   displayName: 'Label',
-  Component: ({cursor, disabled, variant, ...elemProps}: TypeLabelProps, ref, Element) => {
+  Component: ({disabled, typeLevel, variant, ...elemProps}: TypeLabelProps, ref, Element) => {
     return (
-      <Text
+      <Element
         ref={ref}
-        as={Element}
-        typeLevel="subtext.large"
-        color={disabled && variant !== 'inverse' ? inputColors.disabled.text : undefined}
-        cursor={cursor && !disabled ? cursor : 'default'}
-        opacity={disabled && variant === 'inverse' ? '.4' : '1'}
-        variant={variant}
-        {...elemProps}
+        {...mergeStyles(elemProps, labelTextStencil({variant, disabled, typeLevel}))}
       />
     );
   },

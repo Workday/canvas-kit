@@ -7,7 +7,7 @@ import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 export const Overflow = () => {
   return (
     <OverflowTooltip>
-      <StatusIndicator tabIndex={0} maxWidth={100}>
+      <StatusIndicator tabIndex={0} style={{maxWidth: '6rem'}}>
         <StatusIndicator.Icon icon={uploadCloudIcon} />
         <StatusIndicator.Label>
           Your workbook is currently in process of saving

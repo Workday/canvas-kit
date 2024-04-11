@@ -3,13 +3,45 @@ import ts from 'typescript';
 export type TransformerContext = {
   checker: ts.TypeChecker;
   prefix: string;
+  getPrefix: (path: string) => string;
   variables: Record<string, string>;
-  keyframes: Record<string, string>;
+  /**
+   * Variable scoping allows for a variable lookup to match a predefined scope. For example, in
+   * stencils, the `base` config can take a function with the locally defined variable names.
+   *
+   * ```ts
+   * const myStencil = createStencil({
+   *   vars: {color: 'red'},
+   *   base({color}) {
+   *     return {
+   *       [color]: 'blue'
+   *     }
+   *   }
+   * })
+   * ```
+   *
+   * In this case, a variable lookup would fail because there's no global variable named `color`.
+   * There's a global variable named `my-color` which is the fully-qualified variable name. The
+   * stencil parser will add `my-` as a variable scoping when processing style attributes for
+   * variable lookup purposes.
+   */
+  variableScope?: string;
+  /**
+   * All styles will be collected here. These styles will then be flushed out to CSS files according
+   * to the `getFileName` function.
+   */
   styles: StylesOutput;
+  /**
+   * The cache is for idempotent style inserts. Styles are hashed based on file name and position in
+   * the file.
+   */
+  cache: Record<string, string>;
   getFileName: (path: string) => string;
   objectTransforms: ObjectTransform[];
   propertyTransforms: PropertyTransform[];
   fileName: string;
+  transform: NodeTransformer;
+  extractCSS: boolean;
 };
 
 export type NestedStyleObject = {[key: string]: number | string | NestedStyleObject};
@@ -102,6 +134,14 @@ export interface Config {
    * return new AST.
    */
   additionalTransforms?: NodeTransformer[];
+
+  /**
+   * Should the CSS be statically extracted into CSS files? If `true`, CSS files will be created
+   * according to the `getFileName` configuration. If `getFileName` is not defined, a CSS file will
+   * be created with the same name as the source file with a `.css` extension.
+   */
+  extractCSS?: boolean;
+
   /**
    * This will be called every time a style or keyframe needs to be injected into extracted style
    * files. By default, the file name will be the current file with the `.tsx` replaced with a
@@ -120,7 +160,20 @@ export interface Config {
    */
   objectTransforms?: ObjectTransform[];
 
+  /**
+   * Property transforms take an AST node that represents a style property value and turn it into a
+   * static string. The transform is static and will generate a CSS style string for injection
+   * directly into the browser (or CSS file). A string is the only valid return type. Returning
+   * `void` instructs the transform to move on to other transforms. Returning a string will
+   * short-circuit other property transforms or the default property transform.
+   */
   propertyTransforms?: PropertyTransform[];
+
+  /**
+   * Optional function for getting a prefix given a file path. This is useful if you want to have a
+   * different prefix for each module in a monorepo.
+   */
+  getPrefix?: (path: string) => string;
 }
 
 export type ObjectTransform = (
