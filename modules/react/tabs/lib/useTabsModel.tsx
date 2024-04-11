@@ -54,7 +54,6 @@ export const useTabsModel = createModelHook({
   const getId = config.getId || defaultGetId;
   const modality = useModalityType();
 
-
   const model = useOverflowListModel(
     useOverflowListModel.mergeConfig(config, {
       shouldCalculateOverflow: modality !== 'touch',
