@@ -42,6 +42,7 @@ const selectIconsStencil = createStencil({
     pointerEvents: 'none',
   },
 });
+
 const hiddenSelectInputStencil = createStencil({
   base: {
     position: 'absolute',
@@ -49,7 +50,7 @@ const hiddenSelectInputStencil = createStencil({
     bottom: system.space.zero,
     left: system.space.zero,
     right: system.space.zero,
-    opacity: 0,
+    opacity: system.opacity.zero,
     cursor: 'default',
     pointerEvents: 'none',
   },
