@@ -13,6 +13,12 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
+## [v9.1.41](https://github.com/Workday/canvas-kit/releases/tag/v9.1.41) (2024-04-10)
+
+### Infrastructure
+
+- chore: Pin Storybook CLI to v6 for extract docs script ([#2657](https://github.com/Workday/canvas-kit/pull/2657)) ([@alanbsmith](https://github.com/alanbsmith))
+- ci: Add @storybook/cli as a dev dependency ([#2691](https://github.com/Workday/canvas-kit/pull/2691)) ([@NicholasBoll](https://github.com/NicholasBoll))
 ## [v10.3.27](https://github.com/Workday/canvas-kit/releases/tag/v10.3.27) (2024-04-09)
 
 ### Components
