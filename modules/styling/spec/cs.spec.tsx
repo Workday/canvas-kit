@@ -32,7 +32,7 @@ const CacheWrapper = props => <CacheProvider value={cache} {...props} />;
 const render: typeof rtlRender = (ui, options) =>
   rtlRender(ui, {wrapper: CacheWrapper, ...options});
 
-describe('createStyles', () => {
+describe('cs', () => {
   describe('createStyles', () => {
     it('should accept an object of CSS Properties', () => {
       type Input = Exclude<
@@ -771,27 +771,35 @@ describe('createStyles', () => {
     });
 
     it('should handle both variables and modifiers sharing the same key', () => {
-      const myStencil = createStencil({
-        vars: {
-          width: '10px',
-          height: '10px',
-        },
-        base({width}) {
-          return {width: width};
-        },
-        modifiers: {
-          width: {
-            zero: {
-              width: '0',
+      const myStencil = createStencil(
+        {
+          vars: {
+            width: '10px',
+            height: '10px',
+          },
+          base({width}) {
+            return {width: width};
+          },
+          modifiers: {
+            width: {
+              zero: {
+                width: '0',
+              },
+            },
+            foo: {
+              true: {
+                name: 'foo',
+                styles: 'overflow:scroll',
+              },
             },
           },
-          foo: {
-            true: {},
-          },
         },
-      });
+        'cnvs-my'
+      );
 
       myStencil({width: '12px'});
+
+      myStencil({foo: true}); //?
 
       type Arg = Exclude<Parameters<typeof myStencil>[0], undefined>;
       expectTypeOf<Arg>().toHaveProperty('width');
@@ -885,7 +893,7 @@ describe('createStyles', () => {
           baseStencil.modifiers.size.large
         );
         expect(extendedStencil.modifiers).toHaveProperty('extra.true');
-        extendedStencil({size: 'large'}); //?
+        extendedStencil({size: 'large'});
 
         expect(extendedStencil({size: 'large'})).toHaveProperty(
           'className',
@@ -946,9 +954,9 @@ describe('createStyles', () => {
           ],
         });
 
-        extendedStencil({color: 'blue', background: 'red'}); //?
+        extendedStencil({color: 'blue', background: 'red'});
 
-        const {className} = extendedStencil({size: 'large'}); //?
+        const {className} = extendedStencil({size: 'large'});
 
         expect(className.split(' ')).toHaveProperty('length', 5);
 
@@ -1034,6 +1042,77 @@ describe('createStyles', () => {
         expect(extendedStencil).toHaveProperty('vars.color', '--base-color');
 
         expect(extendedStencil).toHaveProperty('vars.background', '--extended-background');
+      });
+
+      it('should extend, adding class names in the correct order', () => {
+        const baseStencil = createStencil(
+          {
+            base: {
+              color: 'red',
+            },
+            modifiers: {
+              size: {
+                large: {
+                  color: 'pink',
+                },
+                small: {
+                  color: 'lightgreen',
+                },
+              },
+              position: {
+                only: {},
+                start: {},
+              },
+            },
+            compound: [
+              {
+                modifiers: {size: 'large', position: 'only'},
+                styles: {},
+              },
+            ],
+          },
+          'base'
+        );
+
+        const extendedStencil = createStencil(
+          {
+            extends: baseStencil,
+            base: {
+              color: 'green',
+            },
+            modifiers: {
+              size: {
+                large: {},
+                small: {},
+              },
+            },
+            compound: [
+              {
+                modifiers: {size: 'large', position: 'only'},
+                styles: {
+                  color: 'var(--extended-compound-icon-only)',
+                },
+              },
+            ],
+          },
+          'extended'
+        );
+
+        expect(extendedStencil.base.split(' ')).toHaveLength(2);
+        expect(extendedStencil.base).toMatch(new RegExp(`^${baseStencil.base}`));
+        expect(extendedStencil.modifiers.size.large.split(' ')).toHaveLength(2);
+        expect(extendedStencil.modifiers.size.large).toMatch(
+          new RegExp(`^${baseStencil.modifiers.size.large}`)
+        );
+
+        // Expect all base styles, modifiers, and compound modifiers to be included
+        const {className} = extendedStencil({size: 'large', position: 'only'});
+        expect(className).toContain(baseStencil.base);
+        expect(className).toContain(baseStencil.modifiers.size.large);
+        expect(className).toContain(baseStencil.modifiers.position.only);
+
+        // baseStencil.base, baseStencil large, baseStencil only position, baseStencil compound, extendedStencil.base, extendedStencil large, extendedStencil compound
+        expect(className.split(' ')).toHaveLength(7);
       });
     });
   });

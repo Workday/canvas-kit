@@ -4,7 +4,7 @@ import {stripIndent} from 'common-tags';
 
 const expectTransform = expectTransformFactory(transform);
 
-describe.only('replaceStylesIconProp', () => {
+describe('replaceStylesIconProp', () => {
   it('should not change non-canvas imports', () => {
     const input = stripIndent`
             import {Svg} from '@workday/any-other-package';
@@ -35,7 +35,7 @@ describe.only('replaceStylesIconProp', () => {
   it('should rename styles to cs for Svg, SystemIcon, AccentIcon exported from the icon package', () => {
     const input = stripIndent`
         import {Svg, SystemIcon, AccentIcon} from '@workday/canvas-kit-react/icon'
-        
+
         <>
             <Svg styles={{padding: '1rem'}} />
             <SystemIcon styles={{padding: '1rem'}} />
@@ -58,7 +58,7 @@ describe.only('replaceStylesIconProp', () => {
   it('should rename styles to cs for Svg, SystemIcon, AccentIcon exported from the main package', () => {
     const input = stripIndent`
         import {Svg, SystemIcon, AccentIcon} from '@workday/canvas-kit-react'
-        
+
         <>
             <Svg styles={{padding: '1rem'}} />
             <SystemIcon styles={{padding: '1rem'}} />
@@ -107,7 +107,7 @@ describe.only('replaceStylesIconProp', () => {
         import {Svg} from '@workday/canvas-kit-react/icon';
 
         const StyledSvg = styled(Svg)({});
-        
+
         <StyledSvg styles={{padding: '1rem'}} />
     `;
 
@@ -115,7 +115,7 @@ describe.only('replaceStylesIconProp', () => {
         import {Svg} from '@workday/canvas-kit-react/icon';
 
         const StyledSvg = styled(Svg)({});
-        
+
         <StyledSvg cs={{padding: '1rem'}} />
     `;
     expectTransform(input, expected);
@@ -124,13 +124,13 @@ describe.only('replaceStylesIconProp', () => {
   it('should rename styles to cs for renamed components exported from the icon package', () => {
     const input = stripIndent`
         import {Svg as CanvasSvg} from '@workday/canvas-kit-react/icon';
-        
+
         <CanvasSvg styles={{padding: '1rem'}} />
     `;
 
     const expected = stripIndent`
         import {Svg as CanvasSvg} from '@workday/canvas-kit-react/icon';
-        
+
         <CanvasSvg cs={{padding: '1rem'}} />
     `;
     expectTransform(input, expected);
