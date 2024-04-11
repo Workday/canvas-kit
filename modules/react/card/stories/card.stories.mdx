@@ -3,6 +3,8 @@ import {SymbolDoc} from '@workday/canvas-kit-docs';
 import {Card} from '@workday/canvas-kit-react/card';
 
 import {Basic} from './examples/Basic';
+import {WithCustomStyles} from './examples/CustomStyles';
+import {WithStencils} from './examples/Stencils';
 
 <Meta title="Components/Containers/Card" component={Card} />
 
@@ -25,16 +27,22 @@ yarn add @workday/canvas-kit-react
 
 ### Basic Example
 
-Card includes a container `Card` component and the following subcomponents: `Card.Body` and
-`Card.Heading`.
+`Card` includes a container component and `Card.Body` and `Card.Heading` subcomponents.
 
 <ExampleCodeBlock code={Basic} />
 
+## Custom Styles
+
+You can customize `Card` styles by using the `cs` prop.
+
+<ExampleCodeBlock code={WithCustomStyles} />
+
 ## Stencils
 
-You can also use Card stencils to apply and extend styles.
+You can also use `Card` stencils to extend styles for your own custom components. This allows you to
+compose styles without using components directly. In the example below, we're extending `Card` stencils to create a custom `MenuCard` component.
 
-
+<ExampleCodeBlock code={WithStencils} />
 
 ## Component API
 
