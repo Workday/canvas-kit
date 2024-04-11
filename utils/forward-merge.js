@@ -285,7 +285,7 @@ function parseContents(lines) {
  * @param file {string}
  */
 async function resolveJsonFile(file) {
-  const contents = await fs.readFile(file).toString();
+  const contents = (await fs.readFile(file)).toString();
 
   await fs.writeFile(file, resolvePackageJson(contents));
 }
