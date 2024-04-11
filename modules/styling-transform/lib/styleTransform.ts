@@ -21,8 +21,8 @@ export interface StyleTransformerOptions extends TransformerContext {
 }
 
 let vars: TransformerContext['variables'] = {};
-let keyframes: TransformerContext['keyframes'] = {};
 let styles: TransformerContext['styles'] = {};
+let cache: TransformerContext['cache'] = {};
 let loadedFallbacks = false;
 let configLoaded = false;
 let config: Config = {};
@@ -33,7 +33,7 @@ let config: Config = {};
 export function _reset() {
   vars = {};
   styles = {};
-  keyframes = {};
+  cache = {};
   loadedFallbacks = false;
 }
 
@@ -50,7 +50,7 @@ const defaultTransformers = [
 
 export default function styleTransformer(
   program: ts.Program,
-  options?: Partial<StyleTransformerOptions>
+  {fallbackFiles = [], ...options}: Partial<StyleTransformerOptions> = {}
 ): ts.TransformerFactory<ts.SourceFile> {
   if (!configLoaded) {
     const configPath = getConfig(program.getCurrentDirectory());
@@ -63,14 +63,10 @@ export default function styleTransformer(
     configLoaded = true;
   }
 
-  const {
-    variables,
-    fallbackFiles = [],
-    transformers = defaultTransformers,
-    ...transformContext
-  } = withDefaultContext(program.getTypeChecker(), {...config, ...options});
-
-  const transform = handleTransformers(transformers);
+  const {variables, ...transformContext} = withDefaultContext(program.getTypeChecker(), {
+    ...config,
+    ...options,
+  });
 
   if (!loadedFallbacks) {
     const files = fallbackFiles
@@ -96,27 +92,22 @@ export default function styleTransformer(
     const visit: ts.Visitor = node => {
       if (!transformContext.fileName) {
         transformContext.fileName = node.getSourceFile()?.fileName;
+        transformContext.prefix = transformContext.getPrefix(transformContext.fileName);
       }
 
-      // disable for v10
-      // if (
-      //   ts.isSourceFile(node) &&
-      //   node.fileName !== 'test.ts' &&
-      //   transformContext.styles[transformContext.getFileName(node.fileName)]
-      // ) {
-      //   console.log(
-      //     'sourceFile:',
-      //     node.fileName,
-      //     '->',
-      //     transformContext.getFileName(node.fileName)
-      //   );
-      //   ts.sys.writeFile(
-      //     transformContext.getFileName(transformContext.getFileName(node.fileName)),
-      //     (transformContext.styles[transformContext.getFileName(node.fileName)] || []).join('\n')
-      //   );
-      // }
+      if (
+        ts.isSourceFile(node) &&
+        node.fileName !== 'test.ts' &&
+        transformContext.styles[transformContext.getFileName(node.fileName)] &&
+        transformContext.extractCSS
+      ) {
+        ts.sys.writeFile(
+          transformContext.getFileName(transformContext.getFileName(node.fileName)),
+          (transformContext.styles[transformContext.getFileName(node.fileName)] || []).join('\n')
+        );
+      }
 
-      const newNode = transform(node, {
+      const newNode = transformContext.transform(node, {
         variables: vars,
         ...transformContext,
       });
@@ -128,23 +119,26 @@ export default function styleTransformer(
   };
 }
 
-export function withDefaultContext<T extends TransformerContext>(
+export function withDefaultContext(
   checker: ts.TypeChecker,
-  input: Partial<T> = {}
-): T {
+  {transformers, ...input}: Partial<StyleTransformerOptions> = {}
+): TransformerContext {
   return {
     prefix: 'css',
+    getPrefix: path => input.prefix || 'css',
     variables: {},
     styles,
-    keyframes,
+    cache,
     checker,
+    extractCSS: false,
     getFileName: path => path.replace(/\.tsx?/, '.css'),
     objectTransforms: [] as ObjectTransform[],
+    transform: handleTransformers(transformers || defaultTransformers),
     ...input,
     propertyTransforms: [handleCalc, handlePx2Rem, handleCssVar].concat(
       input.propertyTransforms || []
     ),
-  } as T;
+  } as TransformerContext;
 }
 
 /**
@@ -164,7 +158,7 @@ export function transform(
   return printer.printFile(
     ts
       .transform(source, [styleTransformer(program, options)])
-      .transformed.find(s => s.fileName === fileName) || source
+      .transformed.find(s => s.fileName === source.fileName) || source
   );
 }
 

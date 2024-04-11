@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {Select} from '@workday/canvas-kit-react/select';
 import {Flex} from '@workday/canvas-kit-react/layout';
 
@@ -22,8 +22,9 @@ export const Basic = () => {
   return (
     <Flex flexDirection="column">
       <Select items={options}>
-        <FormField label="Contact">
-          <Select.Input onChange={handleChange} />
+        <FormField>
+          <FormField.Label>Contact</FormField.Label>
+          <FormField.Input as={Select.Input} onChange={handleChange} />
           <Select.Popper>
             <Select.Card>
               <Select.List>
