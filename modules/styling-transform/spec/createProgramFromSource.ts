@@ -35,6 +35,12 @@ export function cssVar(input: string): string;
 export function createStyles(...args: any[]): string;
 `;
 
+function getLocalFileName(sources: {filename: string}[], name: string): string | undefined {
+  return sources.find(
+    file => file.filename === name.replace(path.resolve(__dirname, '../../..') + '/', '')
+  )?.filename;
+}
+
 export function createProgramFromSource(source: string): ts.Program;
 export function createProgramFromSource(filename: string, source: string): ts.Program;
 export function createProgramFromSource(sources: {filename: string; source: string}[]): ts.Program;
@@ -65,7 +71,8 @@ export function createProgramFromSource(...args: any[]) {
   const customCompilerHost: ts.CompilerHost = {
     getSourceFile: (name, languageVersion) => {
       // Get the file from our mock list, but read source lib files
-      const mockedFile = sourceFiles.find(s => s.fileName === name);
+      const mockedFile = sourceFiles.find(s => s.fileName === getLocalFileName(sources, name));
+
       if (mockedFile) {
         return mockedFile;
       }
@@ -96,7 +103,10 @@ export function createProgramFromSource(...args: any[]) {
     getDirectories: path => ts.sys.getDirectories(path),
     // This should be kept up to date with getSourceFile()
     fileExists: fileName => {
-      return !!sourceFiles.find(s => s.fileName === fileName) || ts.sys.fileExists(fileName);
+      return (
+        sourceFiles.some(s => s.fileName === getLocalFileName(sources, fileName)) ||
+        ts.sys.fileExists(fileName)
+      );
     },
     readFile: fileName => ts.sys.readFile(fileName),
   };
