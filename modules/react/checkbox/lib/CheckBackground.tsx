@@ -15,7 +15,6 @@ const checkboxBackgroundStencil = createStencil({
     alignItems: 'center',
     backgroundColor: base.frenchVanilla100,
     borderRadius: system.shape.half,
-    boxSizing: 'border-box',
     display: 'flex',
     height: calc.add(system.space.x4, px2rem(2)),
     justifyContent: 'center',

@@ -118,7 +118,6 @@ const SwitchInput = createComponent('input')<SwitchProps>({
 
 const switchBackgroundStencil = createStencil({
   base: {
-    boxSizing: 'border-box',
     position: 'absolute',
     display: 'flex',
     alignItems: 'center',

@@ -39,7 +39,6 @@ const countBadgeStencil = createStencil({
     alignItems: 'center',
     animation: `${grow} 0.2s ease`,
     borderRadius: system.shape.round,
-    boxSizing: 'border-box',
     display: 'inline-flex',
     fontFamily: system.fontFamily.default,
     fontSize: system.fontSize.subtext.medium,

@@ -11,7 +11,6 @@ const tableRowStencil = createStencil({
     display: 'grid',
     gridAutoFlow: 'column',
     gridTemplateColumns: `repeat(${childrenVars.cellNumber}, minmax(10rem, 1fr))`,
-    boxSizing: 'border-box',
   },
 });
 
