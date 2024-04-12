@@ -5916,6 +5916,62 @@
         "__isArgsStory": false
       }
     },
+    "examples-arialiveregion--filter-list-with-live-status": {
+      "id": "examples-arialiveregion--filter-list-with-live-status",
+      "name": "Filter List With Live Status",
+      "title": "Examples/AriaLiveRegion",
+      "importPath": "./modules/react/_examples/stories/AriaLiveRegions.stories.mdx",
+      "kind": "Examples/AriaLiveRegion",
+      "story": "Filter List With Live Status",
+      "parameters": {
+        "fileName": "./modules/react/_examples/stories/AriaLiveRegions.stories.mdx",
+        "framework": "react",
+        "__id": "examples-arialiveregion--filter-list-with-live-status",
+        "__isArgsStory": false
+      }
+    },
+    "examples-arialiveregion--hidden-live-region": {
+      "id": "examples-arialiveregion--hidden-live-region",
+      "name": "Hidden Live Region",
+      "title": "Examples/AriaLiveRegion",
+      "importPath": "./modules/react/_examples/stories/AriaLiveRegions.stories.mdx",
+      "kind": "Examples/AriaLiveRegion",
+      "story": "Hidden Live Region",
+      "parameters": {
+        "fileName": "./modules/react/_examples/stories/AriaLiveRegions.stories.mdx",
+        "framework": "react",
+        "__id": "examples-arialiveregion--hidden-live-region",
+        "__isArgsStory": false
+      }
+    },
+    "examples-arialiveregion--text-input-with-live-error": {
+      "id": "examples-arialiveregion--text-input-with-live-error",
+      "name": "Text Input With Live Error",
+      "title": "Examples/AriaLiveRegion",
+      "importPath": "./modules/react/_examples/stories/AriaLiveRegions.stories.mdx",
+      "kind": "Examples/AriaLiveRegion",
+      "story": "Text Input With Live Error",
+      "parameters": {
+        "fileName": "./modules/react/_examples/stories/AriaLiveRegions.stories.mdx",
+        "framework": "react",
+        "__id": "examples-arialiveregion--text-input-with-live-error",
+        "__isArgsStory": false
+      }
+    },
+    "examples-arialiveregion--visible-live-region": {
+      "id": "examples-arialiveregion--visible-live-region",
+      "name": "Visible Live Region",
+      "title": "Examples/AriaLiveRegion",
+      "importPath": "./modules/react/_examples/stories/AriaLiveRegions.stories.mdx",
+      "kind": "Examples/AriaLiveRegion",
+      "story": "Visible Live Region",
+      "parameters": {
+        "fileName": "./modules/react/_examples/stories/AriaLiveRegions.stories.mdx",
+        "framework": "react",
+        "__id": "examples-arialiveregion--visible-live-region",
+        "__isArgsStory": false
+      }
+    },
     "examples-compoundcomponent--template": {
       "id": "examples-compoundcomponent--template",
       "name": "Template",
