@@ -1,13 +1,12 @@
 import React from 'react';
 
-import {ExtractProps, createContainer, createElemPropsHook} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {StatusIndicatorIcon, statusIndicatorColors} from './StatusIndicatorIcon';
+import {StatusIndicatorIcon} from './StatusIndicatorIcon';
 import {StatusIndicatorLabel} from './StatusIndicatorLabel';
-import {useStatusIndicatorModel} from './hooks';
 
 export interface StatusIndicatorProps extends ExtractProps<typeof Flex, never> {
   /**
@@ -43,6 +42,8 @@ const statusIndicatorStencil = createStencil({
       high: {
         color: system.color.static.gray.stronger,
         [systemIconStencil.vars.color]: system.color.static.gray.stronger,
+        // NOTE: system color token needs to be added
+        // should be system.color.static.orange.default, but it has wrong value now
         background: base.cantaloupe400,
       },
       low: {
@@ -106,18 +107,6 @@ const statusIndicatorStencil = createStencil({
 });
 
 /**
- * @deprecated ⚠️ We've deprecated `useStatusIndicator` for StatusIndicator because it's now directly handeled by the `statusIndicatorStencil`.
- */
-export const useStatusIndicator = createElemPropsHook(useStatusIndicatorModel)(({state}) => {
-  const colors = statusIndicatorColors[state.variant][state.emphasis];
-  return {
-    opacity: state.variant === 'transparent' ? '0.85' : undefined,
-    color: colors.text,
-    background: colors.background,
-  };
-});
-
-/**
  * `StatusIndicator` is a container component which renders an {@link Flex} under the hood to
  * apply spacing evenly between its children. It has a default maximum width of `200px`.
  *
@@ -127,9 +116,8 @@ export const useStatusIndicator = createElemPropsHook(useStatusIndicatorModel)((
  * </StatusIndicator>
  * ```
  */
-export const StatusIndicator = createContainer('div')({
+export const StatusIndicator = createComponent('div')({
   displayName: 'StatusIndicator',
-  modelHook: useStatusIndicatorModel,
   subComponents: {
     /**
      * `StatusIndicator.Label` renders {@link Text} under the hood. It will apply an ellipsis if its
@@ -150,15 +138,11 @@ export const StatusIndicator = createContainer('div')({
      */
     Icon: StatusIndicatorIcon,
   },
-})<StatusIndicatorProps>(({children, ...elemProps}, Element, model) => {
-  return (
-    <Element
-      {...mergeStyles(
-        elemProps,
-        statusIndicatorStencil({[model.state.variant]: model.state.emphasis})
-      )}
-    >
-      {children}
-    </Element>
-  );
+  Component: ({children, ...elemProps}: StatusIndicatorProps, ref, Element) => {
+    return (
+      <Element ref={ref} {...mergeStyles(elemProps, statusIndicatorStencil())}>
+        {children}
+      </Element>
+    );
+  },
 });
