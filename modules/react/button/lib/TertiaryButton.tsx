@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-import {baseButtonStencil} from './BaseButton';
+import {buttonStencil} from './BaseButton';
 import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
 import {calc, createStencil} from '@workday/canvas-kit-styling';
 import {system, brand} from '@workday/canvas-tokens-web';
 import {Button, ButtonProps} from './Button';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {mergeStyles} from '../../layout';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 /**
  * Extends all the style properties from Box to our buttons as well as props from ButtonProps.
@@ -22,23 +22,23 @@ export interface TertiaryButtonProps extends ButtonProps {
 }
 
 const tertiaryButtonStencil = createStencil({
-  extends: baseButtonStencil,
+  extends: buttonStencil,
   // Base Styles
   base: {
     paddingInline: system.space.x2,
     minWidth: 'auto',
     textDecoration: 'underline',
     border: system.space.zero,
-    [baseButtonStencil.vars.background]: 'transparent',
-    [baseButtonStencil.vars.borderRadius]: system.shape.x1,
-    [baseButtonStencil.vars.label]: brand.primary.base,
+    [buttonStencil.vars.background]: 'transparent',
+    [buttonStencil.vars.borderRadius]: system.shape.x1,
+    [buttonStencil.vars.label]: brand.primary.base,
     [systemIconStencil.vars.color]: brand.primary.base,
     // Focus Styles
     '&:focus-visible, &.focus': {
-      [baseButtonStencil.vars.background]: 'transparent',
-      [baseButtonStencil.vars.label]: brand.primary.base,
-      [baseButtonStencil.vars.boxShadowInner]: brand.common.focusOutline,
-      [baseButtonStencil.vars.boxShadowOuter]: brand.common.focusOutline,
+      [buttonStencil.vars.background]: 'transparent',
+      [buttonStencil.vars.label]: brand.primary.base,
+      [buttonStencil.vars.boxShadowInner]: brand.common.focusOutline,
+      [buttonStencil.vars.boxShadowOuter]: brand.common.focusOutline,
       [systemIconStencil.vars.color]: brand.primary.base,
       ...focusRing({
         width: 2,
@@ -49,21 +49,21 @@ const tertiaryButtonStencil = createStencil({
     },
     // Hover Styles
     '&:hover, &.hover': {
-      [baseButtonStencil.vars.background]: system.color.bg.alt.default,
-      [baseButtonStencil.vars.label]: brand.primary.dark,
+      [buttonStencil.vars.background]: system.color.bg.alt.default,
+      [buttonStencil.vars.label]: brand.primary.dark,
       [systemIconStencil.vars.color]: brand.primary.dark,
     },
     // Active Styles
     '&:active, &.active': {
-      [baseButtonStencil.vars.background]: system.color.bg.alt.strong,
-      [baseButtonStencil.vars.label]: brand.primary.darkest,
+      [buttonStencil.vars.background]: system.color.bg.alt.strong,
+      [buttonStencil.vars.label]: brand.primary.darkest,
       [systemIconStencil.vars.color]: brand.primary.darkest,
     },
     // Disabled Styles
     '&:disabled, &.disabled': {
-      [baseButtonStencil.vars.background]: 'transparent',
-      [baseButtonStencil.vars.label]: brand.primary.base,
-      [baseButtonStencil.vars.opacity]: system.opacity.disabled,
+      [buttonStencil.vars.background]: 'transparent',
+      [buttonStencil.vars.label]: brand.primary.base,
+      [buttonStencil.vars.opacity]: system.opacity.disabled,
       [systemIconStencil.vars.color]: brand.primary.base,
     },
   },
@@ -110,13 +110,13 @@ const tertiaryButtonStencil = createStencil({
     variant: {
       // Inverse Styles
       inverse: {
-        [baseButtonStencil.vars.background]: 'transparent',
-        [baseButtonStencil.vars.label]: system.color.fg.inverse,
+        [buttonStencil.vars.background]: 'transparent',
+        [buttonStencil.vars.label]: system.color.fg.inverse,
         [systemIconStencil.vars.color]: system.color.fg.inverse,
         // Focus Styles
         '&:focus-visible, &.focus': {
-          [baseButtonStencil.vars.background]: system.color.bg.default,
-          [baseButtonStencil.vars.label]: system.color.fg.strong,
+          [buttonStencil.vars.background]: system.color.bg.default,
+          [buttonStencil.vars.label]: system.color.fg.strong,
           [systemIconStencil.vars.color]: system.color.fg.strong,
           ...focusRing({
             inset: 'inner',
@@ -128,20 +128,20 @@ const tertiaryButtonStencil = createStencil({
         },
         // Hover Styles
         '&:hover, &.hover': {
-          [baseButtonStencil.vars.background]: system.color.bg.default,
-          [baseButtonStencil.vars.label]: system.color.fg.strong,
+          [buttonStencil.vars.background]: system.color.bg.default,
+          [buttonStencil.vars.label]: system.color.fg.strong,
           [systemIconStencil.vars.color]: system.color.fg.strong,
         },
         // Active Styles
         '&:active, &.active': {
-          [baseButtonStencil.vars.background]: system.color.bg.alt.soft,
-          [baseButtonStencil.vars.label]: system.color.fg.strong,
+          [buttonStencil.vars.background]: system.color.bg.alt.soft,
+          [buttonStencil.vars.label]: system.color.fg.strong,
           [systemIconStencil.vars.color]: system.color.fg.strong,
         },
         // Disabled Styles
         '&:disabled, &.disabled': {
-          [baseButtonStencil.vars.background]: 'transparent',
-          [baseButtonStencil.vars.label]: system.color.fg.inverse,
+          [buttonStencil.vars.background]: 'transparent',
+          [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: system.color.fg.inverse,
         },
       },

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {baseButtonStencil} from './BaseButton';
+import {buttonStencil} from './BaseButton';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
@@ -15,39 +15,39 @@ import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 export interface DeleteButtonProps extends ButtonProps {}
 
 const deleteButtonStencil = createStencil({
-  extends: baseButtonStencil,
+  extends: buttonStencil,
   base: {
     // Base Styles
-    [baseButtonStencil.vars.background]: brand.error.base,
-    [baseButtonStencil.vars.borderRadius]: system.shape.round,
-    [baseButtonStencil.vars.label]: brand.error.accent,
+    [buttonStencil.vars.background]: brand.error.base,
+    [buttonStencil.vars.borderRadius]: system.shape.round,
+    [buttonStencil.vars.label]: brand.error.accent,
     [systemIconStencil.vars.color]: brand.error.accent,
     // Focus Styles
     '&:focus-visible, &.focus': {
-      [baseButtonStencil.vars.background]: brand.error.base,
-      [baseButtonStencil.vars.label]: brand.error.accent,
+      [buttonStencil.vars.background]: brand.error.base,
+      [buttonStencil.vars.label]: brand.error.accent,
       [systemIconStencil.vars.color]: brand.error.accent,
-      [baseButtonStencil.vars.boxShadowInner]: system.color.fg.inverse,
-      [baseButtonStencil.vars.boxShadowOuter]: brand.common.focusOutline,
+      [buttonStencil.vars.boxShadowInner]: system.color.fg.inverse,
+      [buttonStencil.vars.boxShadowOuter]: brand.common.focusOutline,
     },
     // Hover Styles
     '&:hover, &.hover': {
-      [baseButtonStencil.vars.background]: brand.error.dark,
-      [baseButtonStencil.vars.label]: brand.error.accent,
+      [buttonStencil.vars.background]: brand.error.dark,
+      [buttonStencil.vars.label]: brand.error.accent,
       [systemIconStencil.vars.color]: brand.error.accent,
     },
     // Active Styles
     '&:active, &.active': {
-      [baseButtonStencil.vars.background]: brand.error.darkest,
-      [baseButtonStencil.vars.label]: brand.error.accent,
+      [buttonStencil.vars.background]: brand.error.darkest,
+      [buttonStencil.vars.label]: brand.error.accent,
       [systemIconStencil.vars.color]: brand.error.accent,
     },
     // Disabled Styles
     '&:disabled, &.disabled': {
-      [baseButtonStencil.vars.background]: brand.error.base,
-      [baseButtonStencil.vars.label]: brand.error.accent,
+      [buttonStencil.vars.background]: brand.error.base,
+      [buttonStencil.vars.label]: brand.error.accent,
       [systemIconStencil.vars.color]: brand.error.accent,
-      [baseButtonStencil.vars.opacity]: system.opacity.disabled,
+      [buttonStencil.vars.opacity]: system.opacity.disabled,
     },
   },
 });

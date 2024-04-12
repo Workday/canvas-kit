@@ -17,7 +17,7 @@ import {
 } from '@workday/canvas-kit-react/button';
 import {stateTableColumnProps} from './utils';
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
-import {Flex} from '../../../layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
 export default withSnapshotsEnabled({
   title: 'Testing/Buttons/Button/Color Overrides',

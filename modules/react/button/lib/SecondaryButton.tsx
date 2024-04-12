@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-import {baseButtonStencil} from './BaseButton';
+import {buttonStencil} from './BaseButton';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 import {Button, ButtonProps} from './Button';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {mergeStyles} from '../../layout';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 /**
  * Extends all the style properties from Box to our buttons as well as props from ButtonProps.
@@ -21,43 +21,43 @@ export interface SecondaryButtonProps extends ButtonProps {
 }
 
 const secondaryButtonStencil = createStencil({
-  extends: baseButtonStencil,
+  extends: buttonStencil,
   base: {
     // Base Styles
-    [baseButtonStencil.vars.background]: 'transparent',
-    [baseButtonStencil.vars.border]: system.color.border.contrast.default,
-    [baseButtonStencil.vars.borderRadius]: system.shape.round,
-    [baseButtonStencil.vars.label]: system.color.fg.strong,
+    [buttonStencil.vars.background]: 'transparent',
+    [buttonStencil.vars.border]: system.color.border.contrast.default,
+    [buttonStencil.vars.borderRadius]: system.shape.round,
+    [buttonStencil.vars.label]: system.color.fg.strong,
     [systemIconStencil.vars.color]: system.color.fg.strong,
     // Focus Styles
     '&:focus-visible, &.focus': {
-      [baseButtonStencil.vars.background]: 'transparent',
-      [baseButtonStencil.vars.border]: system.color.border.contrast.default,
-      [baseButtonStencil.vars.label]: system.color.fg.strong,
-      [baseButtonStencil.vars.boxShadowInner]: system.color.fg.inverse,
-      [baseButtonStencil.vars.boxShadowOuter]: brand.common.focusOutline,
+      [buttonStencil.vars.background]: 'transparent',
+      [buttonStencil.vars.border]: system.color.border.contrast.default,
+      [buttonStencil.vars.label]: system.color.fg.strong,
+      [buttonStencil.vars.boxShadowInner]: system.color.fg.inverse,
+      [buttonStencil.vars.boxShadowOuter]: brand.common.focusOutline,
       [systemIconStencil.vars.color]: system.color.fg.strong,
     },
     // Hover Styles
     '&:hover, &.hover': {
-      [baseButtonStencil.vars.background]: system.color.bg.contrast.default,
-      [baseButtonStencil.vars.border]: system.color.border.contrast.default,
-      [baseButtonStencil.vars.label]: brand.primary.accent,
+      [buttonStencil.vars.background]: system.color.bg.contrast.default,
+      [buttonStencil.vars.border]: system.color.border.contrast.default,
+      [buttonStencil.vars.label]: brand.primary.accent,
       [systemIconStencil.vars.color]: brand.primary.accent,
     },
     // Active Styles
     '&:active, &.active': {
-      [baseButtonStencil.vars.background]: system.color.bg.contrast.strong,
-      [baseButtonStencil.vars.border]: system.color.border.contrast.strong,
-      [baseButtonStencil.vars.label]: brand.primary.accent,
+      [buttonStencil.vars.background]: system.color.bg.contrast.strong,
+      [buttonStencil.vars.border]: system.color.border.contrast.strong,
+      [buttonStencil.vars.label]: brand.primary.accent,
       [systemIconStencil.vars.color]: brand.primary.accent,
     },
     // Disabled Styles
     '&:disabled, &.disabled': {
-      [baseButtonStencil.vars.background]: 'transparent',
-      [baseButtonStencil.vars.border]: system.color.border.contrast.default,
-      [baseButtonStencil.vars.label]: system.color.fg.strong,
-      [baseButtonStencil.vars.opacity]: system.opacity.disabled,
+      [buttonStencil.vars.background]: 'transparent',
+      [buttonStencil.vars.border]: system.color.border.contrast.default,
+      [buttonStencil.vars.label]: system.color.fg.strong,
+      [buttonStencil.vars.opacity]: system.opacity.disabled,
       [systemIconStencil.vars.color]: system.color.fg.strong,
     },
   },
@@ -65,38 +65,38 @@ const secondaryButtonStencil = createStencil({
     variant: {
       inverse: {
         // Default Styles
-        [baseButtonStencil.vars.background]: 'transparent',
-        [baseButtonStencil.vars.border]: system.color.border.inverse,
-        [baseButtonStencil.vars.label]: system.color.fg.inverse,
+        [buttonStencil.vars.background]: 'transparent',
+        [buttonStencil.vars.border]: system.color.border.inverse,
+        [buttonStencil.vars.label]: system.color.fg.inverse,
         [systemIconStencil.vars.color]: system.color.fg.inverse,
         // Focus Styles
         '&:focus-visible, &.focus': {
-          [baseButtonStencil.vars.background]: system.color.bg.default,
-          [baseButtonStencil.vars.border]: 'transparent',
-          [baseButtonStencil.vars.label]: system.color.fg.strong,
-          [baseButtonStencil.vars.boxShadowInner]: system.color.fg.strong,
-          [baseButtonStencil.vars.boxShadowOuter]: system.color.fg.inverse,
+          [buttonStencil.vars.background]: system.color.bg.default,
+          [buttonStencil.vars.border]: 'transparent',
+          [buttonStencil.vars.label]: system.color.fg.strong,
+          [buttonStencil.vars.boxShadowInner]: system.color.fg.strong,
+          [buttonStencil.vars.boxShadowOuter]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: system.color.fg.strong,
         },
         // Hover Styles
         '&:hover, &.hover': {
-          [baseButtonStencil.vars.background]: system.color.bg.alt.default,
-          [baseButtonStencil.vars.border]: 'transparent',
-          [baseButtonStencil.vars.label]: system.color.fg.stronger,
+          [buttonStencil.vars.background]: system.color.bg.alt.default,
+          [buttonStencil.vars.border]: 'transparent',
+          [buttonStencil.vars.label]: system.color.fg.stronger,
           [systemIconStencil.vars.color]: system.color.fg.stronger,
         },
         // Active Styles
         '&:active, &.active': {
-          [baseButtonStencil.vars.background]: system.color.bg.alt.strong,
-          [baseButtonStencil.vars.border]: 'transparent',
-          [baseButtonStencil.vars.label]: system.color.fg.stronger,
+          [buttonStencil.vars.background]: system.color.bg.alt.strong,
+          [buttonStencil.vars.border]: 'transparent',
+          [buttonStencil.vars.label]: system.color.fg.stronger,
           [systemIconStencil.vars.color]: system.color.fg.stronger,
         },
         // Disabled Styles
         '&:disabled, &.disabled': {
-          [baseButtonStencil.vars.background]: 'transparent',
-          [baseButtonStencil.vars.border]: system.color.border.inverse,
-          [baseButtonStencil.vars.label]: system.color.fg.inverse,
+          [buttonStencil.vars.background]: 'transparent',
+          [buttonStencil.vars.border]: system.color.border.inverse,
+          [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: system.color.fg.inverse,
         },
       },

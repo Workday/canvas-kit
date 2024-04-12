@@ -9,7 +9,7 @@ import {SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon
 import {brand, system} from '@workday/canvas-tokens-web';
 import {ButtonColors, ButtonSizes, IconPositions} from './types';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {mergeStyles} from '../../layout';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 export interface ButtonContainerProps extends Partial<SystemIconProps>, GrowthBehavior {
   /**
@@ -111,7 +111,7 @@ export const buttonColorPropVars = {
 /**
  * Base styles for Buttons.
  */
-export const baseButtonStencil = createStencil({
+export const buttonStencil = createStencil({
   vars: {
     background: '',
     border: '',
@@ -214,7 +214,7 @@ export const baseButtonStencil = createStencil({
       color: cssVar(buttonColorPropVars.active.label, cssVar(label, system.color.fg.strong)),
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.active.icon,
-        cssVar(system.color.fg.strong)
+        system.color.fg.strong
       ),
     },
     // Disabled Styles
@@ -387,7 +387,7 @@ export const BaseButton = createComponent('button')({
         ref={ref}
         type="button"
         {...mergeStyles(elemProps, [
-          baseButtonStencil({size, iconPosition}),
+          buttonStencil({size, iconPosition}),
           buttonColorPropVars.default(colors?.default || {}),
           buttonColorPropVars.focus(colors?.focus || {}),
           buttonColorPropVars.hover(colors?.hover || {}),
