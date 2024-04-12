@@ -35,7 +35,6 @@ export const menuCardStencil = createStencil({
     maxWidth: calc.subtract('100vw', system.space.x8),
     boxShadow: system.depth[3],
     minWidth: minWidth,
-    boxSizing: 'border-box',
     transformOrigin: `${transformOriginVertical} ${transformOriginHorizontal}`,
     // Allow overriding of animation in special cases
     '.wd-no-animation &': {

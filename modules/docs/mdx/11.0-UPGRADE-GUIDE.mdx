@@ -33,6 +33,8 @@ any questions.
   - [Switch](#switch)
   - [Table (Preview)](#table-preview)
   - [Text](#text)
+- [Style Utility Updates](#style-utility-updates)
+  - [createStencil](#createstencil)
 - [Glossary](#glossary)
   - [Main](#main)
   - [Preview](#preview)
@@ -760,8 +762,20 @@ our
 [new styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
 The component now supports the `cs` prop, but otherwise the API has not changed. It should behave
 identically as it did in previous versions.
-- statusIndicatorColors has been deprecated and will be removed in a future version as a part of implementation of stencils and new tokens
-- useStatusIndicatorIcon has been deprecated and will be removed in a future version as a part of implementation of stencils and new tokens
+
+- statusIndicatorColors has been deprecated and will be removed in a future version as a part of
+  implementation of stencils and new tokens
+- useStatusIndicatorIcon has been deprecated and will be removed in a future version as a part of
+  implementation of stencils and new tokens
+
+## Style Utility Updates
+
+### `createStencil`
+
+Stencils were updated to automatically add `box-sizing: border-box` to all stencils. If your stencil
+did not add this style already, it may change the way `width` works for the component. Our intent is
+to make all elements use border box layouts to make width calculations more predictable. This change
+may change the way your component works if you use the `width` style property.
 
 ## Glossary
 

@@ -47,7 +47,6 @@ const systemIconCircleStencil = createStencil({
     padding: system.space.zero,
     border: 'none',
     borderRadius: system.shape.round,
-    boxSizing: 'border-box',
     overflow: 'hidden',
     width: cssVar(containerSize, system.space.x10),
     height: cssVar(containerSize, system.space.x10),

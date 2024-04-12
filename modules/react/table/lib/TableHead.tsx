@@ -9,7 +9,6 @@ const tableHeadStencil = createStencil({
     display: 'grid',
     backgroundColor: base.soap100,
     minHeight: '3rem',
-    boxSizing: 'border-box',
     'th ': {
       '&:first-of-type': {
         borderInlineStart: 'none',
