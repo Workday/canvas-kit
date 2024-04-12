@@ -3,7 +3,7 @@ import {LoadingDots} from '@workday/canvas-kit-react/loading-dots';
 import {base, system} from '@workday/canvas-tokens-web';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {createStyles, cssVar} from '@workday/canvas-kit-styling';
 import {AccessibleHide, AriaLiveRegion} from '@workday/canvas-kit-react/common';
 
 export const Accessible = () => {
@@ -26,7 +26,7 @@ export const Accessible = () => {
   };
 
   return (
-    <Flex gap={`var(${system.space.x4})`}>
+    <Flex gap={cssVar(system.space.x4)}>
       <SecondaryButton onClick={handleLoad}>Start</SecondaryButton>
       <AriaLiveRegion aria-label="Loading">
         {loadingState === 'loading' && (
