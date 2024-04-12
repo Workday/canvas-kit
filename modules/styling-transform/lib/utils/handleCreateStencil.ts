@@ -119,6 +119,7 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
                 property,
                 {
                   ...stencilVariables,
+                  boxSizing: 'border-box',
                   ...styleObj,
                 },
                 getClassName(getVarName(property.name), context),

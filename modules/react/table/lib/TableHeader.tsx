@@ -15,7 +15,6 @@ const tableHeaderStencil = createStencil({
     padding: `${system.space.x2} ${system.space.x4}`,
     wordBreak: 'break-word',
     fontWeight: system.fontWeight.medium,
-    boxSizing: 'border-box',
   },
 });
 

@@ -1064,6 +1064,7 @@ export function createStencil<
   });
   const _base = createStyles({
     ..._vars.$$defaults,
+    boxSizing: 'border-box',
     ...(typeof base === 'function' ? base(_vars) : base),
   });
 
