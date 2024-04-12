@@ -9,7 +9,7 @@ import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 const formFieldHintStencil = createStencil({
   base: {
-    margin: `${system.space.x2} 0 0`,
+    margin: `${system.space.x2} ${system.space.zero} ${system.space.zero}`,
   },
   modifiers: {
     error: {

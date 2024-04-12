@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.31](https://github.com/Workday/canvas-kit/releases/tag/v10.3.31) (2024-04-11)
+
+### Documentation
+
+- docs: Clarify and correct Select docs ([#2684](https://github.com/Workday/canvas-kit/pull/2684)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v10.3.30](https://github.com/Workday/canvas-kit/releases/tag/v10.3.30) (2024-04-11)
 
 ### Infrastructure
