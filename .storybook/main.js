@@ -67,15 +67,15 @@ module.exports = {
         include: [modulesPath],
         exclude: /examples|stories|spec|codemod|docs/,
         loaders: [
-          // loaders are run in reverse order. symbol-doc-loader needs to be done first
+          // loaders are run in reverse order. style-transform-loader needs to be done first
           {
-            loader: path.resolve(__dirname, 'style-transform-loader'),
+            loader: path.resolve(__dirname, 'symbol-doc-loader'),
             options: {
               Doc,
             },
           },
           {
-            loader: path.resolve(__dirname, 'symbol-doc-loader'),
+            loader: path.resolve(__dirname, 'style-transform-loader'),
             options: {
               Doc,
             },
