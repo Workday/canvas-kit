@@ -5,7 +5,7 @@ import {handleCsProp, CSProps, createStencil} from '@workday/canvas-kit-styling'
 
 import {useFormFieldModel} from './hooks';
 
-const containerBaseStyles = createStencil({
+const formFieldContainerStencil = createStencil({
   base: {
     display: 'flex',
     flexDirection: 'column',
@@ -19,7 +19,7 @@ export const FormFieldContainer = createSubcomponent('div')({
   return (
     <Element
       data-width="ck-formfield-width"
-      {...handleCsProp(elemProps, [containerBaseStyles()])}
+      {...handleCsProp(elemProps, formFieldContainerStencil())}
     />
   );
 });
