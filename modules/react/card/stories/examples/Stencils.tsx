@@ -18,7 +18,6 @@ const menuCardHeroStencil = createStencil({
   base: {
     display: 'flex',
     alignItems: 'flex-end',
-    boxSizing: 'border-box',
     background: brand.gradient.primary,
     aspectRatio: '1',
     maxHeight: px2rem(80),
@@ -36,7 +35,6 @@ const MenuCardHero = createComponent('div')({
 
 const menuCardContentStencil = createStencil({
   base: {
-    boxSizing: 'border-box',
     display: 'flex',
     flexDirection: 'column',
     gap: system.space.x2,

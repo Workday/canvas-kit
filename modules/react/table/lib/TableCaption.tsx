@@ -9,7 +9,6 @@ const tableCaptionStencil = createStencil({
     display: 'flex',
     borderBottom: `${px2rem(1)} solid ${base.soap500}`,
     padding: `${system.space.x2} ${system.space.x4}`,
-    boxSizing: 'border-box',
   },
 });
 

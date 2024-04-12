@@ -22,7 +22,6 @@ export const svgStencil = createStencil({
     size: '',
   },
   base: ({size}) => ({
-    boxSizing: 'border-box',
     display: 'inline-block',
     '> svg': {
       display: 'block',

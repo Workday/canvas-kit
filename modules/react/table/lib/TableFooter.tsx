@@ -6,7 +6,6 @@ import {createStencil} from '@workday/canvas-kit-styling';
 const tableFooterStencil = createStencil({
   base: {
     display: 'grid',
-    boxSizing: 'border-box',
   },
 });
 
