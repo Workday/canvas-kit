@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.32](https://github.com/Workday/canvas-kit/releases/tag/v10.3.32) (2024-04-12)
+
+### Documentation
+
+- docs: Add new examples of new AriaLiveRegion component ([#2672](https://github.com/Workday/canvas-kit/pull/2672)) ([@williamjstanton](https://github.com/williamjstanton), [@RayRedGoose](https://github.com/RayRedGoose))
+
+
 ## [v10.3.31](https://github.com/Workday/canvas-kit/releases/tag/v10.3.31) (2024-04-11)
 
 ### Documentation
