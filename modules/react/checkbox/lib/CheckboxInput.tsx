@@ -10,7 +10,7 @@ import {
   CSProps,
 } from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
-import {checkboxStatusColorVars} from './CheckBackground';
+import {checkboxBackgroundStencil} from './CheckBackground';
 
 export interface CheckboxProps extends CSProps {
   /**
@@ -190,21 +190,21 @@ const checkboxInputStencil = createStencil({
     error: {
       true: {
         '&:not(:where(:focus-visible, .focus)) ~ div:first-of-type': {
-          borderColor: checkboxStatusColorVars.inner,
+          borderColor: checkboxBackgroundStencil.vars.errorRingColorInner,
           boxShadow: `
-            0 0 0 ${px2rem(1)} ${checkboxStatusColorVars.inner}, 
-            0 0 0 ${px2rem(2)} ${checkboxStatusColorVars.outer}`,
+            0 0 0 ${px2rem(1)} ${checkboxBackgroundStencil.vars.errorRingColorInner}, 
+            0 0 0 ${px2rem(2)} ${checkboxBackgroundStencil.vars.errorRingColorOuter}`,
         },
         '&:where(:checked, :indeterminate) ~ div:first-of-type': {
           borderColor: 'transparent',
           boxShadow: `
             0 0 0 ${px2rem(2)} ${system.color.fg.inverse},
-            0 0 0 ${px2rem(4)} ${checkboxStatusColorVars.inner},
-            0 0 0 ${px2rem(5)} ${checkboxStatusColorVars.outer}`,
+            0 0 0 ${px2rem(4)} ${checkboxBackgroundStencil.vars.errorRingColorInner},
+            0 0 0 ${px2rem(5)} ${checkboxBackgroundStencil.vars.errorRingColorOuter}`,
         },
         '&:not(:where(:checked, :indeterminate, :disabled, :focus-visible, .focus)):where(:hover, .hover, :active, .active) ~ div:first-of-type':
           {
-            borderColor: checkboxStatusColorVars.inner,
+            borderColor: checkboxBackgroundStencil.vars.errorRingColorInner,
           },
       },
     },

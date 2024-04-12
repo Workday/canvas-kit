@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {createComponent, ErrorType} from '@workday/canvas-kit-react/common';
-import {calc, createStencil, createVars, px2rem} from '@workday/canvas-kit-styling';
+import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 
 interface CheckBackgroundProps {
@@ -8,9 +8,11 @@ interface CheckBackgroundProps {
   error?: ErrorType;
 }
 
-export const checkboxStatusColorVars = createVars('inner', 'outer');
-
-const checkboxBackgroundStencil = createStencil({
+export const checkboxBackgroundStencil = createStencil({
+  vars: {
+    errorRingColorInner: '',
+    errorRingColorOuter: '',
+  },
   base: {
     alignItems: 'center',
     backgroundColor: system.color.bg.default,
@@ -28,14 +30,14 @@ const checkboxBackgroundStencil = createStencil({
   },
   modifiers: {
     error: {
-      error: {
-        [checkboxStatusColorVars.inner]: brand.error.base,
-        [checkboxStatusColorVars.outer]: 'transparent',
-      },
-      alert: {
-        [checkboxStatusColorVars.inner]: brand.alert.base,
-        [checkboxStatusColorVars.outer]: brand.alert.darkest,
-      },
+      error: ({errorRingColorInner, errorRingColorOuter}) => ({
+        [errorRingColorInner]: brand.error.base,
+        [errorRingColorOuter]: 'transparent',
+      }),
+      alert: ({errorRingColorInner, errorRingColorOuter}) => ({
+        [errorRingColorInner]: brand.alert.base,
+        [errorRingColorOuter]: brand.alert.darkest,
+      }),
     },
   },
 });
