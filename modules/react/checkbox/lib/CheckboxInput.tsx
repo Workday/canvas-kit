@@ -1,14 +1,7 @@
 import * as React from 'react';
 import {createComponent, focusRing, ErrorType} from '@workday/canvas-kit-react/common';
 
-import {
-  calc,
-  createStencil,
-  cssVar,
-  handleCsProp,
-  px2rem,
-  CSProps,
-} from '@workday/canvas-kit-styling';
+import {calc, createStencil, handleCsProp, px2rem, CSProps} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 import {checkboxBackgroundStencil} from './CheckBackground';
 
@@ -115,7 +108,7 @@ const checkboxInputStencil = createStencil({
             width: 2,
             separation: 2,
             animate: false,
-            outerColor: cssVar(brand.common.focusOutline),
+            outerColor: brand.common.focusOutline,
           }),
           borderColor: brand.primary.base,
           borderWidth: px2rem(2),
@@ -161,8 +154,8 @@ const checkboxInputStencil = createStencil({
             width: 2,
             separation: 0,
             animate: false,
-            innerColor: cssVar(system.color.fg.strong),
-            outerColor: cssVar(system.color.fg.inverse),
+            innerColor: system.color.fg.strong,
+            outerColor: system.color.fg.inverse,
           }),
         },
         '&:checked:focus-visible, &:checked.focus, &:indeterminate:focus-visible, &:indeterminate.focus':
@@ -172,8 +165,8 @@ const checkboxInputStencil = createStencil({
                 width: 2,
                 separation: 2,
                 animate: false,
-                innerColor: cssVar(system.color.fg.strong),
-                outerColor: cssVar(system.color.fg.inverse),
+                innerColor: system.color.fg.strong,
+                outerColor: system.color.fg.inverse,
               }),
               borderColor: system.color.border.inverse,
             },
