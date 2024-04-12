@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {ErrorType, createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, createStyles, cssVar, calc, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, calc, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import {CheckBackground} from './CheckBackground';
 
@@ -24,24 +24,26 @@ const checkboxCheckStencil = createStencil({
       marginInlineStart: calc.negate(px2rem(6)),
       transition: 'margin 200ms ease',
     },
-    opacity: 0,
+    opacity: system.opacity.zero,
     transform: 'scale(0.5)',
   },
   modifiers: {
     checked: {
       true: {
-        opacity: 1,
+        [systemIconStencil.vars.color]: brand.primary.accent,
+        opacity: system.opacity.full,
         transform: 'scale(1)',
       },
     },
     indeterminate: {
       true: {
-        opacity: 1,
+        opacity: system.opacity.full,
         transform: 'scale(1)',
       },
     },
     variant: {
       inverse: {
+        [systemIconStencil.vars.color]: brand.primary.base,
         '& > div': {
           backgroundColor: brand.primary.base,
         },
@@ -50,10 +52,12 @@ const checkboxCheckStencil = createStencil({
   },
 });
 
-const indeterminateBoxStyles = createStyles({
-  width: calc.add(system.space.x2, px2rem(2)),
-  height: calc.divide(system.space.x1, 2),
-  backgroundColor: brand.primary.accent,
+const indeterminateBoxStencil = createStencil({
+  base: {
+    width: px2rem(10),
+    height: calc.divide(system.space.x1, 2),
+    backgroundColor: brand.primary.accent,
+  },
 });
 
 export const CheckboxCheck = createComponent('div')({
@@ -63,16 +67,9 @@ export const CheckboxCheck = createComponent('div')({
       <CheckBackground error={error}>
         <div {...checkboxCheckStencil({checked, indeterminate, variant})}>
           {indeterminate ? (
-            <div className={indeterminateBoxStyles} />
+            <div {...indeterminateBoxStencil()} />
           ) : (
-            checked && (
-              <SystemIcon
-                icon={checkSmallIcon}
-                color={
-                  variant === 'inverse' ? cssVar(brand.primary.base) : cssVar(brand.primary.accent)
-                }
-              />
-            )
+            checked && <SystemIcon icon={checkSmallIcon} />
           )}
         </div>
       </CheckBackground>
