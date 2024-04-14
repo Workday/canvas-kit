@@ -6,19 +6,24 @@ import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {createStyles, cssVar} from '@workday/canvas-kit-styling';
 import {AccessibleHide, AriaLiveRegion} from '@workday/canvas-kit-react/common';
 
+const loadingStyles = createStyles({
+  backgroundColor: base.licorice300,
+  padding: system.space.x3,
+});
+
 export const Accessible = () => {
   const [loadingState, setLoadingState] = React.useState('idle');
-  const loadingStyles = createStyles({
-    backgroundColor: base.licorice300,
-    padding: system.space.x3,
-  });
 
   React.useEffect(() => {
-    if (loadingState === 'loading') {
-      setTimeout(() => {
+    const timer = setTimeout(() => {
+      if (loadingState === 'loading') {
         setLoadingState('success');
-      }, 4000);
-    }
+      }
+    }, 4000);
+
+    return () => {
+      clearTimeout(timer);
+    };
   }, [loadingState]);
 
   const handleLoad = () => {
