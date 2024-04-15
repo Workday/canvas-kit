@@ -59,15 +59,9 @@ const deleteButtonStencil = createStencil({
  */
 export const DeleteButton = createComponent('button')({
   displayName: 'DeleteButton',
-  Component: ({children, size, iconPosition, ...elemProps}: DeleteButtonProps, ref, Element) => {
+  Component: ({children, ...elemProps}: DeleteButtonProps, ref, Element) => {
     return (
-      <Button
-        as={Element}
-        ref={ref}
-        size={size}
-        iconPosition={iconPosition}
-        {...handleCsProp(elemProps, deleteButtonStencil({size, iconPosition}))}
-      >
+      <Button as={Element} ref={ref} {...handleCsProp(elemProps, deleteButtonStencil())}>
         {children}
       </Button>
     );
