@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.33](https://github.com/Workday/canvas-kit/releases/tag/v10.3.33) (2024-04-15)
+
+### Documentation
+
+- docs: Improve the "accessible" example of loading dots ([#2673](https://github.com/Workday/canvas-kit/pull/2673)) ([@williamjstanton](https://github.com/williamjstanton), [@RayRedGoose](https://github.com/RayRedGoose), [@NicholasBoll](https://github.com/NicholasBoll))
+  Accessible `LoadingDots` example has been updated, by changing background to a darker color that allows `soap400` to meet the minimum 3:1 contrast ratio and adding better screen reader support with the `AriaLiveRegion` component.
+
+
 ## [v10.3.32](https://github.com/Workday/canvas-kit/releases/tag/v10.3.32) (2024-04-12)
 
 ### Documentation
