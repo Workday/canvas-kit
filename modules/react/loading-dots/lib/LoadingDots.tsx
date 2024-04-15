@@ -15,7 +15,7 @@ const keyframesLoading = keyframes({
   },
 });
 
-const loadingDotStencil = createStencil({
+const singleLoadingDotStencil = createStencil({
   vars: {
     animationDurationMs: '40ms',
   },
