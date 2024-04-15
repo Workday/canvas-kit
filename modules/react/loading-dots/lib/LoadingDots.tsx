@@ -47,7 +47,7 @@ const singleLoadingDotStencil = createStencil({
 /**
  * The actual loading dot div.
  */
-const LoadingAnimationDot = () => <div {...loadingDotStencil()} />;
+const LoadingAnimationDot = () => <div {... singleLoadingDotStencil()} />;
 
 /**
  * A simple container for the loading dots.
