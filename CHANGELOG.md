@@ -3,6 +3,52 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.32](https://github.com/Workday/canvas-kit/releases/tag/v10.3.32) (2024-04-12)
+
+### Documentation
+
+- docs: Add new examples of new AriaLiveRegion component ([#2672](https://github.com/Workday/canvas-kit/pull/2672)) ([@williamjstanton](https://github.com/williamjstanton), [@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v10.3.31](https://github.com/Workday/canvas-kit/releases/tag/v10.3.31) (2024-04-11)
+
+### Documentation
+
+- docs: Clarify and correct Select docs ([#2684](https://github.com/Workday/canvas-kit/pull/2684)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v10.3.30](https://github.com/Workday/canvas-kit/releases/tag/v10.3.30) (2024-04-11)
+
+### Infrastructure
+
+- chore: Pin Storybook CLI to v6 for extract docs script ([#2657](https://github.com/Workday/canvas-kit/pull/2657)) ([@alanbsmith](https://github.com/alanbsmith))
+- ci: Add @storybook/cli as a dev dependency ([#2691](https://github.com/Workday/canvas-kit/pull/2691)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Fix package.json forward-merge resolution ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v10.3.29](https://github.com/Workday/canvas-kit/releases/tag/v10.3.29) (2024-04-11)
+
+
+
+
+## [v10.3.28](https://github.com/Workday/canvas-kit/releases/tag/v10.3.28) (2024-04-11)
+
+
+
+
+## [v9.1.41](https://github.com/Workday/canvas-kit/releases/tag/v9.1.41) (2024-04-10)
+
+### Infrastructure
+
+- chore: Pin Storybook CLI to v6 for extract docs script ([#2657](https://github.com/Workday/canvas-kit/pull/2657)) ([@alanbsmith](https://github.com/alanbsmith))
+- ci: Add @storybook/cli as a dev dependency ([#2691](https://github.com/Workday/canvas-kit/pull/2691)) ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v10.3.27](https://github.com/Workday/canvas-kit/releases/tag/v10.3.27) (2024-04-09)
+
+### Components
+
+- fix: Pass value to visual input in select ([#2676](https://github.com/Workday/canvas-kit/pull/2676)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v10.3.26](https://github.com/Workday/canvas-kit/releases/tag/v10.3.26) (2024-04-02)
 
 ### Actions
