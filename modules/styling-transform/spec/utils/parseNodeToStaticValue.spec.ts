@@ -184,7 +184,7 @@ describe('parseNodeToStaticValue', () => {
       parseNodeToStaticValue(
         node,
         withDefaultContext(program.getTypeChecker(), {
-          keyframes: {myAnimation: 'animation-abc123'},
+          variables: {myAnimation: 'animation-abc123'},
         })
       )
     ).toEqual('animation-abc123 1s ease');

@@ -1,18 +1,10 @@
 import * as React from 'react';
-import {
-  createComponent,
-  StyledType,
-  ErrorType,
-  focusRing,
-  mouseFocusBehavior,
-  getErrorColors,
-  styled,
-  Themeable,
-  useUniqueId,
-} from '@workday/canvas-kit-react/common';
-import {borderRadius, colors, depth, space} from '@workday/canvas-kit-react/tokens';
+import {createComponent, ErrorType, focusRing, useUniqueId} from '@workday/canvas-kit-react/common';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {base, brand, system} from '@workday/canvas-tokens-web';
+import {mergeStyles} from '../../layout';
 
-export interface SwitchProps extends Themeable {
+export interface SwitchProps {
   /**
    * If true, set the Switch to the on state.
    * @default false
@@ -42,123 +34,141 @@ export interface SwitchProps extends Themeable {
   error?: ErrorType;
 }
 
-const circleSize = space.xs;
-const switchWidth = space.l;
-const switchHeight = space.s;
-const switchTapArea = space.l;
-const translateLength = space.s;
-
-const SwitchContainer = styled('div')({
-  position: 'relative',
-  height: space.m,
-  width: switchTapArea,
+const switchContainerStencil = createStencil({
+  base: {
+    position: 'relative',
+    height: system.space.x6,
+    width: system.space.x8,
+  },
 });
 
-const SwitchInput = styled('input')<SwitchProps & StyledType>(
-  {
-    position: 'absolute',
-    height: space.m,
-    width: switchTapArea,
-    margin: 0,
-    marginLeft: space.xxxs,
-    borderRadius: borderRadius.circle,
-    opacity: 0,
-    display: 'block',
+const SwitchContainer = createComponent('div')({
+  displayName: 'SwitchContainer',
+  Component: ({children, ...elemProps}, ref, Element) => {
+    return (
+      <Element ref={ref} {...mergeStyles(elemProps, switchContainerStencil())}>
+        {children}
+      </Element>
+    );
   },
-  ({disabled}) => ({
-    cursor: disabled ? 'not-allowed' : 'pointer',
-  }),
-  ({error, theme}) => {
-    const errorColors = getErrorColors(error, theme);
+});
 
-    if (errorColors.outer === errorColors.inner) {
-      errorColors.outer = 'transparent';
-    }
-
-    const styles = {
-      '&:focus': {
-        outline: 'none',
-        '& ~ div:first-of-type': {
-          ...focusRing({separation: 2, animate: false}, theme),
-        },
-      },
+const switchInputStencil = createStencil({
+  base: {
+    display: 'flex',
+    position: 'absolute',
+    height: system.space.x6,
+    width: system.space.x8,
+    margin: system.space.zero,
+    marginLeft: system.space.x1,
+    borderRadius: system.shape.round,
+    opacity: '0',
+    cursor: 'pointer',
+    '&:checked, &.checked': {
       '& ~ div:first-of-type': {
-        boxShadow: `
-          0 0 0 2px ${colors.frenchVanilla100},
-          0 0 0 4px ${errorColors.inner},
-          0 0 0 5px ${errorColors.outer}`,
+        backgroundColor: brand.primary.base,
       },
-      '&:focus ~ div:first-of-type': {
-        ...focusRing({separation: 2, animate: false}, theme),
-      },
-    };
-    return {
-      ...styles,
-      // Error rings take precedence over focus
-      ...mouseFocusBehavior({
-        ...styles,
-        '&:focus ~ div:first-of-type, &:active ~ div:first-of-type': {
-          boxShadow: `
-            0 0 0 2px ${colors.frenchVanilla100},
-            0 0 0 4px ${errorColors.inner},
-            0 0 0 5px ${errorColors.outer}`,
+      '&:disabled, &.disabled': {
+        '& ~ div:first-of-type': {
+          backgroundColor: brand.primary.light,
         },
-      }),
-    };
-  }
-);
+      },
+    },
+    '&:disabled, &.disabled': {
+      cursor: 'not-allowed',
+      '& ~ div:first-of-type': {
+        backgroundColor: base.soap400,
+      },
+    },
+    '&:focus-visible, &:focus, &.focus': {
+      outline: 'none',
+      '& ~ div:first-of-type': {
+        ...focusRing({separation: 2, animate: false}),
+      },
+    },
+  },
+  modifiers: {
+    error: {
+      error: {
+        '& ~ div:first-of-type': {
+          boxShadow: `
+              0 0 0 ${px2rem(2)} ${base.frenchVanilla100},
+              0 0 0 ${system.space.x1} ${brand.error.base},
+              0 0 0 ${px2rem(5)} transparent`,
+        },
+      },
+      alert: {
+        '& ~ div:first-of-type': {
+          boxShadow: `
+          0 0 0 ${px2rem(2)} ${base.frenchVanilla100},
+          0 0 0 ${system.space.x1} ${brand.alert.base},
+          0 0 0 ${px2rem(5)} ${brand.alert.darkest}`,
+        },
+      },
+    },
+  },
+});
 
-const SwitchBackground = styled('div')<Pick<SwitchProps, 'checked' | 'disabled'>>(
-  {
-    boxSizing: 'border-box',
+const SwitchInput = createComponent('input')<SwitchProps>({
+  displayName: 'SwitchInput',
+  Component: ({error, ...elemProps}, ref, Element) => {
+    return <Element ref={ref} {...mergeStyles(elemProps, switchInputStencil({error}))} />;
+  },
+});
+
+const switchBackgroundStencil = createStencil({
+  base: {
     position: 'absolute',
     display: 'flex',
     alignItems: 'center',
     pointerEvents: 'none',
-    marginTop: space.xxxs,
-    width: switchWidth,
-    height: switchHeight,
-    borderRadius: borderRadius.circle,
-    padding: '0px 2px',
+    marginTop: system.space.x1,
+    width: system.space.x8,
+    height: system.space.x4,
+    borderRadius: system.shape.round,
+    padding: `${system.space.zero} ${px2rem(2)}`,
     transition: 'background-color 200ms ease',
+    backgroundColor: base.licorice200,
   },
-  ({
-    checked,
-    disabled,
-    theme: {
-      canvas: {
-        palette: {primary: themePrimary},
-      },
-    },
-  }) => {
-    if (checked) {
-      return {
-        backgroundColor: disabled ? themePrimary.light : themePrimary.main,
-      };
-    } else {
-      return {
-        backgroundColor: disabled ? colors.soap400 : colors.licorice200,
-      };
-    }
-  }
-);
+});
 
-const SwitchCircle = styled('div')<Pick<SwitchProps, 'checked' | 'theme'>>(
-  {
-    width: circleSize,
-    height: circleSize,
-    borderRadius: borderRadius.circle,
-    ...depth[1],
+const SwitchBackground = createComponent('div')({
+  displayName: 'SwitchBackground',
+  Component: ({children, ...elemProps}, ref, Element) => {
+    return (
+      <Element ref={ref} {...mergeStyles(elemProps, switchBackgroundStencil())}>
+        {children}
+      </Element>
+    );
+  },
+});
+
+const switchCircleStencil = createStencil({
+  base: {
+    width: system.space.x3,
+    height: system.space.x3,
+    borderRadius: system.shape.round,
+    boxShadow: system.depth[1],
     transition: 'transform 150ms ease',
     pointerEvents: 'none',
+    backgroundColor: brand.primary.accent,
+    transform: `translateX(${system.space.zero})`,
   },
-  ({theme}) => ({
-    backgroundColor: theme.canvas.palette.primary.contrast,
-  }),
-  ({checked}) => ({
-    transform: checked ? `translateX(${translateLength})` : 'translateX(0)',
-  })
-);
+  modifiers: {
+    checked: {
+      true: {
+        transform: `translateX(${system.space.x4})`,
+      },
+    },
+  },
+});
+
+const SwitchCircle = createComponent('div')<Pick<SwitchProps, 'checked'>>({
+  displayName: 'SwitchCircle',
+  Component: ({checked, ...elemProps}, ref, Element) => {
+    return <Element ref={ref} {...mergeStyles(elemProps, switchCircleStencil({checked}))} />;
+  },
+});
 
 export const Switch = createComponent('input')({
   displayName: 'Switch',
@@ -182,7 +192,7 @@ export const Switch = createComponent('input')({
           value={value}
           {...elemProps}
         />
-        <SwitchBackground checked={checked} disabled={disabled}>
+        <SwitchBackground>
           <SwitchCircle checked={checked} />
         </SwitchBackground>
       </SwitchContainer>

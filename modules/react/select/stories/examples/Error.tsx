@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {Select} from '@workday/canvas-kit-react/select';
 import {Flex} from '@workday/canvas-kit-react/layout';
 
@@ -21,12 +21,9 @@ export const Error = () => {
   return (
     <Flex flexDirection="column">
       <Select items={options} nonInteractiveIds={['Fax (disabled)']}>
-        <FormField
-          error={FormField.ErrorType.Error}
-          hintText="Fax is disabled. Please choose a different option."
-          label="Contact"
-        >
-          <Select.Input onChange={e => handleChange(e)} />
+        <FormField error="error">
+          <FormField.Label>Contact</FormField.Label>
+          <FormField.Input as={Select.Input} onChange={e => handleChange(e)} />
           <Select.Popper>
             <Select.Card>
               <Select.List>
@@ -38,6 +35,7 @@ export const Error = () => {
               </Select.List>
             </Select.Card>
           </Select.Popper>
+          <FormField.Hint>Fax is disabled. Please choose a different option.</FormField.Hint>
         </FormField>
       </Select>
       Selected Value: {value}

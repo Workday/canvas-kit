@@ -50,7 +50,7 @@ export const BreadcrumbsOverflowButton = createSubcomponent('button')({
         height={space.l}
         width={space.l}
         shouldMirror={useIsRTL()}
-        styles={{justifyContent: 'center', alignItems: 'center', display: 'inline-flex'}}
+        cs={{justifyContent: 'center', alignItems: 'center', display: 'inline-flex'}}
         aria-hidden
       />
     </Flex>
