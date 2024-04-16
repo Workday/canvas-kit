@@ -31,7 +31,7 @@ const ColorOverrideContainer = props => {
   );
 };
 
-export const ColorOverrideStates = (props: {theme?: PartialEmotionCanvasTheme}) => (
+const ColorOverrideStates = (props: {theme?: PartialEmotionCanvasTheme}) => (
   <StaticStates theme={props.theme}>
     <ComponentStatesTable
       rowProps={permutateProps(

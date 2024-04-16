@@ -55,6 +55,9 @@ export interface ButtonContainerProps extends Partial<SystemIconProps>, GrowthBe
  */
 export interface BaseButtonProps extends Omit<ButtonContainerProps, 'ref'> {}
 
+/**
+ * The purpose of this object is for the `colors` prop - to provide backwards compatibility with how we allowed color overrides in Emotion.
+ */
 export const buttonColorPropVars = {
   default: createVars(
     'background',

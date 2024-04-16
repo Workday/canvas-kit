@@ -425,6 +425,26 @@ See below:
         licorice100
       </Table.Cell>
     </Table.Row>
+    <Table.Row>
+      <Table.Cell>Switch</Table.Cell>
+      <Table.Cell />
+      <Table.Cell>disabled</Table.Cell>
+      <Table.Cell>opacity</Table.Cell>
+      <Table.Cell backgroundColor="frenchVanilla100">1</Table.Cell>
+      <Table.Cell backgroundColor="frenchVanilla100">
+        0.4
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>Switch</Table.Cell>
+      <Table.Cell />
+      <Table.Cell>disabled</Table.Cell>
+      <Table.Cell>backgroundColor</Table.Cell>
+      <Table.Cell backgroundColor="soap400">soap400</Table.Cell>
+      <Table.Cell color="frenchVanilla100" backgroundColor="licorice100">
+        licorice100
+      </Table.Cell>
+    </Table.Row>
   </Table.Body>
 </Table>
 
@@ -439,7 +459,8 @@ See below:
 and [tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs). The
 components now support the `cs` prop, but otherwise the API has not changed.
 
-> **Note**: The `border` color for `SecondaryButton` on the `focus` state is now `transparent` and may cause a small visual difference in visual tests.
+> #### Visual Breaking Change
+> The `border` color for `SecondaryButton` on the `focus` state is now `transparent` and may cause a small visual difference in visual tests.
 
 ### Card
 
@@ -828,3 +849,5 @@ experimental code and is analagous to code in alpha.
 Breaking changes can be deployed to Labs at any time without triggering a major version update and
 may not be subject to the same rigor in communcation and migration strategies reserved for breaking
 changes in [Preview](#preview) and [Main](#main).
+import { opacity } from "@workday/canvas-tokens-web/dist/es6/system"
+
