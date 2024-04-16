@@ -2,37 +2,40 @@ import React from 'react';
 import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {useRadioModel} from './hooks/useRadioModel';
 import {RadioLabelContext} from './RadioLabel';
-import {Text} from '@workday/canvas-kit-react/text';
+import {Text, textStencil} from '@workday/canvas-kit-react/text';
 import {createStencil} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 const radioTextStencil = createStencil({
+  extends: textStencil,
   base: {
-    ...system.type.subtext.large,
     cursor: 'pointer',
-    opacity: '1',
-    color: base.blackPepper300,
   },
   modifiers: {
     variant: {
       inverse: {
-        color: base.frenchVanilla100,
+        color: system.color.text.inverse,
       },
     },
     disabled: {
       true: {
         cursor: 'none',
-        color: base.licorice100,
+        color: system.color.text.disabled,
       },
     },
   },
   compound: [
     {
       modifiers: {variant: 'inverse', disabled: true},
-      styles: {color: base.frenchVanilla100, opacity: system.opacity.disabled},
+      styles: {
+        color: system.color.text.inverse,
+        opacity: system.opacity.disabled,
+      },
     },
   ],
+  // @ts-ignore
+  defaultModifiers: {typeLevel: 'subtext.large'},
 });
 
 export const RadioText = createSubcomponent('span')({
@@ -41,8 +44,6 @@ export const RadioText = createSubcomponent('span')({
 })(({children, ...elemProps}: ExtractProps<typeof Text>, Element) => {
   const {variant, disabled} = React.useContext(RadioLabelContext);
   return (
-    <Text as={Element} {...mergeStyles(elemProps, radioTextStencil({variant, disabled}))}>
-      {children}
-    </Text>
+    <Element {...mergeStyles(elemProps, radioTextStencil({variant, disabled}))}>{children}</Element>
   );
 });
