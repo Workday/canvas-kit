@@ -70,14 +70,14 @@ const switchInputStencil = createStencil({
       },
       '&:disabled, &.disabled': {
         '& ~ div:first-of-type': {
-          backgroundColor: brand.primary.light,
+          opacity: system.opacity.disabled,
         },
       },
     },
     '&:disabled, &.disabled': {
       cursor: 'not-allowed',
       '& ~ div:first-of-type': {
-        backgroundColor: base.soap400,
+        opacity: system.opacity.disabled,
       },
     },
     '&:focus-visible, &:focus, &.focus': {
@@ -92,7 +92,7 @@ const switchInputStencil = createStencil({
       error: {
         '& ~ div:first-of-type': {
           boxShadow: `
-              0 0 0 ${px2rem(2)} ${base.frenchVanilla100},
+              0 0 0 ${px2rem(2)} ${system.color.fg.inverse},
               0 0 0 ${system.space.x1} ${brand.error.base},
               0 0 0 ${px2rem(5)} transparent`,
         },
@@ -100,7 +100,7 @@ const switchInputStencil = createStencil({
       alert: {
         '& ~ div:first-of-type': {
           boxShadow: `
-          0 0 0 ${px2rem(2)} ${base.frenchVanilla100},
+          0 0 0 ${px2rem(2)} ${system.color.fg.inverse},
           0 0 0 ${system.space.x1} ${brand.alert.base},
           0 0 0 ${px2rem(5)} ${brand.alert.darkest}`,
         },
@@ -128,7 +128,7 @@ const switchBackgroundStencil = createStencil({
     borderRadius: system.shape.round,
     padding: `${system.space.zero} ${px2rem(2)}`,
     transition: 'background-color 200ms ease',
-    backgroundColor: base.licorice200,
+    backgroundColor: system.color.bg.muted.default,
   },
 });
 
