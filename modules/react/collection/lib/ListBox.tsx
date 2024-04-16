@@ -35,9 +35,7 @@ export const useListBox = createElemPropsHook(useListModel)(model => {
 });
 
 const listBoxContainerStencil = createStencil({
-  base: {
-    boxSizing: 'border-box',
-  },
+  base: {},
   modifiers: {
     orientation: {
       vertical: {

@@ -15,7 +15,6 @@ const tableCellStencil = createStencil({
     minHeight: '3.5rem',
     padding: `${system.space.x2} ${system.space.x4}`,
     wordBreak: 'break-word',
-    boxSizing: 'border-box',
   },
 });
 

@@ -42,6 +42,7 @@ const selectIconsStencil = createStencil({
     pointerEvents: 'none',
   },
 });
+
 const hiddenSelectInputStencil = createStencil({
   base: {
     position: 'absolute',
@@ -49,7 +50,7 @@ const hiddenSelectInputStencil = createStencil({
     bottom: system.space.zero,
     left: system.space.zero,
     right: system.space.zero,
-    opacity: 0,
+    opacity: system.opacity.zero,
     cursor: 'default',
     pointerEvents: 'none',
   },
@@ -187,7 +188,7 @@ export const Select = createContainer()({
      * `Select.Popper` renders a {@link ComboboxPopper Combobox.Menu.Popper}. You have access to all `Popper` props.
      *
      * ```tsx
-     * <Select item={options}>
+     * <Select items={options}>
      *  <FormField label="Your Label">
      *    <Select.Input onChange={(event) => handleChange(event)}>
      *    <Select.Popper>
@@ -204,7 +205,7 @@ export const Select = createContainer()({
      * **Note: The card will be the width of its corresponding `Select.Input`**.
      *
      * ```tsx
-     * <Select item={options}>
+     * <Select items={options}>
      *  <FormField label="Your Label">
      *    <Select.Input onChange={(event) => handleChange(event)}>
      *    <Select.Popper>
@@ -221,7 +222,7 @@ export const Select = createContainer()({
      * `Select.List` renders a {@link ComboboxMenuList Combobox.Menu.List}. You have access to all `ListBox` props.
      *
      * ```tsx
-     * <Select item={options}>
+     * <Select items={options}>
      *  <FormField label="Your Label">
      *    <Select.Input onChange={(event) => handleChange(event)}>
      *    <Select.Popper>
@@ -240,7 +241,7 @@ export const Select = createContainer()({
      * `Select.Item` renders a {@link ComboboxMenuItem Combobox.Menu.Item} with aria role of `option`. You can optionally render a `Icon`.
      *
      * ```tsx
-     * <Select item={options}>
+     * <Select items={options}>
      *  <FormField label="Your Label">
      *    <Select.Input onChange={(event) => handleChange(event)}>
      *      <Select.Popper>

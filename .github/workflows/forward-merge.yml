@@ -196,14 +196,16 @@ jobs:
                 git fetch upstream
                 git checkout --track upstream/merge/${{needs.get-branch-names.outputs.branch}}-into-${{ needs.get-branch-names.outputs.next-branch }}
                 git pull upstream merge/${{needs.get-branch-names.outputs.branch}}-into-${{ needs.get-branch-names.outputs.next-branch }} -f
+                git pull upstream ${{needs.get-branch-names.outputs.branch}}
                 node utils/forward-merge.js
                 ```
-            2. If the previous step succeeded, skip to step 3. Resolve conflicts manually. Then run the following.
+            2. If the previous step succeeded, skip to step 4.
+            3. Resolve conflicts manually. Then run the following.
                 ```
                 git add .
                 git commit -m "chore: Merge ${{needs.get-branch-names.outputs.branch}} into ${{ needs.get-branch-names.outputs.next-branch }}"
                 ```
-            3. Push the merge commit back to the pull request
+            4. Push the merge commit back to the pull request
                 ```
                 git push upstream merge/${{needs.get-branch-names.outputs.branch}}-into-${{ needs.get-branch-names.outputs.next-branch }}
                 ```

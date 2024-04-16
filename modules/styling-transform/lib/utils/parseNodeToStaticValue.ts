@@ -267,14 +267,15 @@ export function getValueFromAliasedSymbol(
 }
 
 function getValueFromProcessedNodes(varName: string, context: TransformerContext): string | void {
+  const safeVarName = makeEmotionSafe(varName);
   const {variables} = context;
 
-  if (variables[varName]) {
-    return variables[varName];
+  if (variables[safeVarName]) {
+    return variables[safeVarName];
   }
 
-  if (context.variableScope && variables[`${context.variableScope}${varName}`]) {
-    return variables[`${context.variableScope}${varName}`];
+  if (context.variableScope && variables[`${context.variableScope}${safeVarName}`]) {
+    return variables[`${context.variableScope}${safeVarName}`];
   }
 }
 

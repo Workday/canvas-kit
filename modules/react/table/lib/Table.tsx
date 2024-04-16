@@ -19,7 +19,6 @@ const tableStencil = createStencil({
     borderRadius: system.shape.x2,
     overflow: 'auto',
     color: base.blackPepper300,
-    boxSizing: 'border-box',
   },
 });
 

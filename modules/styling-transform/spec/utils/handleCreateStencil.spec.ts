@@ -64,6 +64,20 @@ describe('handleCreateStencil', () => {
       expect(variables).toHaveProperty('button-color', '--css-button-color');
     });
 
+    it('should add box-sizing to all stencils', () => {
+      const program = createProgramFromSource(`
+        import {createStencil} from '@workday/canvas-kit-styling';
+
+        const buttonStencil = createStencil({
+          base: {}
+        })
+      `);
+
+      const result = transform(program, 'test.ts');
+
+      expect(result).toContain('styles: "box-sizing:border-box;"');
+    });
+
     it('should parse base styles into statically optimized versions', () => {
       const program = createProgramFromSource(`
         import {createStencil} from '@workday/canvas-kit-styling';
@@ -77,7 +91,7 @@ describe('handleCreateStencil', () => {
 
       const result = transform(program, 'test.ts');
 
-      expect(result).toContain('styles: "padding:10px;"');
+      expect(result).toContain('styles: "box-sizing:border-box;padding:10px;"');
     });
 
     it('should handle parsing variables in base styles', () => {
@@ -94,7 +108,9 @@ describe('handleCreateStencil', () => {
 
       const result = transform(program, 'test.ts', withDefaultContext(program.getTypeChecker()));
 
-      expect(result).toContain('styles: "--css-button-color:red;padding:12px;"');
+      expect(result).toContain(
+        'styles: "--css-button-color:red;box-sizing:border-box;padding:12px;"'
+      );
     });
 
     it('should handle dynamic key with stencil variables', () => {
@@ -112,7 +128,7 @@ describe('handleCreateStencil', () => {
 
       const result = transform(program, 'test.ts', withDefaultContext(program.getTypeChecker()));
 
-      expect(result).toContain('styles: "--css-button-color:red;"');
+      expect(result).toContain('styles: "box-sizing:border-box;--css-button-color:red;"');
     });
     it('should not parse variables in the base styles if the value is an empty string', () => {
       const program = createProgramFromSource(`
@@ -129,9 +145,9 @@ describe('handleCreateStencil', () => {
       })
     `);
 
-      const result = transform(program, 'test.ts', withDefaultContext(program.getTypeChecker()));
+      const result = transform(program, 'test.ts', withDefaultContext(program.getTypeChecker())); //?
 
-      expect(result).toContain('styles: "--css-button-color:red;"');
+      expect(result).toContain('styles: "box-sizing:border-box;--css-button-color:red;"');
     });
 
     it('should handle dynamic key with stencil variables for nested key', () => {
@@ -150,9 +166,9 @@ describe('handleCreateStencil', () => {
       })
     `);
 
-      const result = transform(program, 'test.ts', withDefaultContext(program.getTypeChecker()));
+      const result = transform(program, 'test.ts', withDefaultContext(program.getTypeChecker())); //?
 
-      expect(result).toContain('styles: "--css-system-icon-size:1rem;"');
+      expect(result).toContain('styles: "box-sizing:border-box;--css-system-icon-size:1rem;"');
     });
 
     it('should handle parsing variables in base styles via an ArrowFunction and ParenthesizedExpression', () => {
@@ -274,7 +290,7 @@ describe('handleCreateStencil', () => {
       transform(program, 'test.ts', withDefaultContext(program.getTypeChecker(), {styles}));
 
       expect(styles['test.css']).toContainEqual(
-        compileCSS('.css-button{--css-button-color: red;}')
+        compileCSS('.css-button{--css-button-color: red;box-sizing:border-box;}')
       );
       expect(styles['test.css']).toContainEqual(
         compileCSS('.css-button--size-large{padding: 0.3125rem;}')
@@ -322,7 +338,9 @@ describe('handleCreateStencil', () => {
 
       // base
       expect(styles['test.css']).toContainEqual(
-        compileCSS('.css-button{--css-button-color:red;color:var(--css-button-color);}')
+        compileCSS(
+          '.css-button{--css-button-color:red;box-sizing:border-box;color:var(--css-button-color);}'
+        )
       );
 
       // modifiers
@@ -370,7 +388,53 @@ describe('handleCreateStencil', () => {
 
       // base
       expect(styles['test.css']).toContainEqual(
-        compileCSS('.css-button{--css-button-color:red;color:var(--css-button-color);}')
+        compileCSS(
+          '.css-button{--css-button-color:red;box-sizing:border-box;color:var(--css-button-color);}'
+        )
+      );
+
+      // modifiers
+      expect(styles['test.css']).toContainEqual(
+        compileCSS('.css-button--size-title-large{font-size:var(--title-large);}')
+      );
+      expect(styles['test.css']).toContainEqual(
+        compileCSS('.css-button--size-title-small{font-size:var(--title-small);}')
+      );
+    });
+
+    it('should handle the "label" var name, making it safe for Emotion', () => {
+      const program = createProgramFromSource(`
+        import {createStencil} from '@workday/canvas-kit-styling';
+
+        const buttonStencil = createStencil({
+          vars: {
+            label: 'red'
+          },
+          base({label}) {
+            return {
+              color: label
+            }
+          },
+          modifiers: {
+            size: {
+              'title.large': {fontSize: '--title-large'},
+              'title.small': {fontSize: '--title-small'}
+            },
+          }
+        })
+      `);
+
+      const styles = {};
+      const sourceFile = program.getSourceFile('test.ts');
+      const node = findNodes(sourceFile, 'createStencil', ts.isCallExpression)[0];
+
+      handleCreateStencil(node, withDefaultContext(program.getTypeChecker(), {styles}));
+
+      // base
+      expect(styles['test.css']).toContainEqual(
+        compileCSS(
+          '.css-button{--css-button-label-emotion-safe:red;box-sizing:border-box;color:var(--css-button-label-emotion-safe);}'
+        )
       );
 
       // modifiers
@@ -426,12 +490,12 @@ describe('handleCreateStencil', () => {
     });
 
     it('should apply the correct variable name to the styles', () => {
-      expect(result).toContain('styles: "--css-base-color:blue;');
+      expect(result).toContain('styles: "box-sizing:border-box;--css-base-color:blue;');
     });
 
     it('should inject the correct variable name to the CSS output', () => {
       expect(getFile(styles, 'test.css')).toContainEqual(
-        compileCSS('.css-extended { --css-base-color: blue; }')
+        compileCSS('.css-extended { box-sizing:border-box;--css-base-color: blue; }')
       );
     });
   });
@@ -501,12 +565,12 @@ describe('handleCreateStencil', () => {
     });
 
     it('should apply the correct variable name to the styles', () => {
-      expect(result).toContain('styles: "--css-base-color:purple;');
+      expect(result).toContain('styles: "box-sizing:border-box;--css-base-color:purple;');
     });
 
     it('should inject the correct variable name to the CSS output', () => {
       expect(getFile(styles, 'test.css')).toContainEqual(
-        compileCSS('.css-final { --css-base-color: purple; }')
+        compileCSS('.css-final { box-sizing:border-box;--css-base-color: purple; }')
       );
     });
 
@@ -518,14 +582,14 @@ describe('handleCreateStencil', () => {
       );
 
       expect(result).toContain(
-        'styles: "--css-extended-extendedColor:blue;--css-base-color:purple;'
+        'styles: "--css-extended-extendedColor:blue;box-sizing:border-box;--css-base-color:purple;'
       );
     });
 
     it('should inject the correct variable name to the CSS output', () => {
       expect(getFile(styles, 'extended.css')).toContainEqual(
         compileCSS(
-          '.css-extended { --css-extended-extendedColor: blue; --css-base-color: purple; }'
+          '.css-extended { --css-extended-extendedColor: blue; box-sizing:border-box; --css-base-color: purple; }'
         )
       );
     });
@@ -591,10 +655,10 @@ describe('handleCreateStencil', () => {
       withDefaultContext(program.getTypeChecker(), {styles})
     );
 
-    expect(result).toContain('styles: "--css-base-color:purple;"');
+    expect(result).toContain('styles: "box-sizing:border-box;--css-base-color:purple;"');
 
     expect(getFile(styles, 'test.css')).toContainEqual(
-      compileCSS('.css-final {--css-base-color: purple;}')
+      compileCSS('.css-final {box-sizing:border-box;--css-base-color: purple;}')
     );
   });
 
@@ -675,7 +739,7 @@ describe('handleCreateStencil', () => {
 
     it('should extract base styles', () => {
       expect(styles['test.css']).toContainEqual(
-        compileCSS('.css-base {--css-base-color: red; padding: 5px;}')
+        compileCSS('.css-base {--css-base-color: red; box-sizing:border-box; padding: 5px;}')
       );
     });
 
@@ -699,7 +763,7 @@ describe('handleCreateStencil', () => {
 
     it('should extract an extended base style', () => {
       expect(styles['test.css']).toContainEqual(
-        compileCSS('.css-extended { --css-extended-background: blue;}')
+        compileCSS('.css-extended { --css-extended-background: blue; box-sizing:border-box; }')
       );
     });
 
@@ -804,7 +868,7 @@ describe('handleCreateStencil', () => {
 
     it('should extract base styles', () => {
       expect(getFile(styles, 'base.css')).toContainEqual(
-        compileCSS('.css-base {--css-base-color: red; padding: 5px;}')
+        compileCSS('.css-base {--css-base-color: red; box-sizing:border-box; padding: 5px;}')
       );
     });
 
@@ -828,7 +892,7 @@ describe('handleCreateStencil', () => {
 
     it('should extract an extended base style', () => {
       expect(getFile(styles, 'test.css')).toContainEqual(
-        compileCSS('.css-extended { --css-extended-background: blue;}')
+        compileCSS('.css-extended { --css-extended-background: blue; box-sizing:border-box; }')
       );
     });
 

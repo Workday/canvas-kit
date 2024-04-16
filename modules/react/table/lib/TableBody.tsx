@@ -6,7 +6,6 @@ import {createStencil} from '@workday/canvas-kit-styling';
 const tableBodyStencil = createStencil({
   base: {
     display: 'grid',
-    boxSizing: 'border-box',
     'tr ': {
       '&:last-of-type': {
         'td, th': {

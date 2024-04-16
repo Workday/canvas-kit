@@ -18,8 +18,8 @@ export interface FormFieldProps extends FlexProps, GrowthBehavior {
 const formFieldStencil = createStencil({
   base: {
     border: 'none',
-    padding: 0,
-    margin: `0 0 ${system.space.x6}`,
+    padding: system.space.zero,
+    margin: `${system.space.zero} ${system.space.zero} ${system.space.x6}`,
   },
   modifiers: {
     grow: {
