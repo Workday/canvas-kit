@@ -19,6 +19,7 @@ any questions.
   - [Label Text](#label-text)
   - [Text Area (Preview)](#text-area-preview)
   - [Text Input (Preview)](#text-input-preview)
+- [Removals](#reemovals)
   - [Status Indicator model](#status-indicator-model)
     - [statusIndicatorColors](#statusIndicatorColors)
     - [useStatusIndicator](#useStatusIndicator)
@@ -220,24 +221,20 @@ instead.
 
 ---
 
+## Removals
+
 ### Status Indicator model
 
-**PR:** [#2472](https://github.com/Workday/canvas-kit/pull/2620)
+**PR:** [#2472](https://github.com/Workday/canvas-kit/pull/2700)
 
-#### statusIndicatorColors
+`StatusIndicator` model functionality has been updated and the next hooks has been removed:
 
-We've deprecated `statusIndicatorColors` for StatusIndicator because it's now directly handeled by
-the `statusIndicatorStencil`.
+- `useStatusIndicatorModel`
+- `useStatusIndicator`
+- `statusIndicatorColors`
+- `useStatusIndicatorIcon`
 
-#### useStatusIndicator
-
-We've deprecated `useStatusIndicator` for StatusIndicator because it's now directly handeled by the
-`statusIndicatorStencil`.
-
-#### useStatusIndicator
-
-We've deprecated `useStatusIndicatorIcon` for StatusIndicatorIcon because it's now directly handeled
-by the `statusIndicatorStencil`.
+There is no external usage found, so it's not breaking change.
 
 ---
 
@@ -766,13 +763,7 @@ they extend the `Text` component. These changes do not affect the components API
 [Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
 our
 [new styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
-The component now supports the `cs` prop, but otherwise the API has not changed. It should behave
-identically as it did in previous versions.
-
-- statusIndicatorColors has been deprecated and will be removed in a future version as a part of
-  implementation of stencils and new tokens
-- useStatusIndicatorIcon has been deprecated and will be removed in a future version as a part of
-  implementation of stencils and new tokens
+The component now supports the `cs` prop, but otherwise the API has not been changed.
 
 ## Glossary
 
