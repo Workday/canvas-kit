@@ -20,7 +20,7 @@ const radioTextStencil = createStencil({
     },
     disabled: {
       true: {
-        cursor: 'none',
+        cursor: 'default',
         color: system.color.text.disabled,
       },
     },
