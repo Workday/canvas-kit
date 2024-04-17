@@ -34,8 +34,9 @@ const radioTextStencil = createStencil({
       },
     },
   ],
-  // @ts-ignore
-  defaultModifiers: {typeLevel: 'subtext.large'},
+  defaultModifiers: {
+    typeLevel: 'subtext.large',
+  },
 });
 
 export const RadioText = createSubcomponent('span')({
