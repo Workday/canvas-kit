@@ -119,9 +119,9 @@
     "cypress:run": "cypress run"
   },
   "lint-staged": {
-      "*.{ts,tsx}": "yarn format",
-      "*.json": "node utils/check-mismatched-dependencies.js",
-      "yarn.lock": "node utils/check-lockfile.js"
+    "*.{ts,tsx}": "yarn format",
+    "*.json": "node utils/check-mismatched-dependencies.js",
+    "yarn.lock": "node utils/check-lockfile.js"
   },
   "workspaces": [
     "modules/**"
