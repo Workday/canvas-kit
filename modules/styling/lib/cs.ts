@@ -985,11 +985,19 @@ export interface StencilConfig<
    * Modifiers are optional. If you need a modifier to always be defined, a default modifier value
    * will be used when a modifier is `undefined`
    */
-  defaultModifiers?: {[K in keyof M]?: keyof M[K]};
+  defaultModifiers?: [E] extends [never]
+    ? StencilDefaultModifierReturn<M>
+    : E extends BaseStencil<infer ME, any, any, any>
+    ? StencilDefaultModifierReturn<M & ME>
+    : undefined;
 }
 
 type StencilModifierReturn<M extends StencilModifierConfig<V>, V extends DefaultedVarsShape> = {
   [K1 in keyof M]: {[K2 in keyof M[K1]]: string};
+};
+
+type StencilDefaultModifierReturn<M> = {
+  [K1 in keyof M]?: keyof M[K1];
 };
 
 export interface BaseStencil<
@@ -1026,7 +1034,9 @@ export interface Stencil<
   modifiers: [E] extends [BaseStencil<infer ME, infer VE, any, any>]
     ? StencilModifierReturn<ME & M, VE & V>
     : StencilModifierReturn<M, V>;
-  defaultModifiers: {[K in keyof M]?: keyof M[K]};
+  defaultModifiers: [E] extends [BaseStencil<infer ME, any, any, any>]
+    ? StencilDefaultModifierReturn<ME & M>
+    : StencilDefaultModifierReturn<M>;
 }
 
 type VariableValuesStencil<V extends DefaultedVarsShape> = V extends Record<string, string>
