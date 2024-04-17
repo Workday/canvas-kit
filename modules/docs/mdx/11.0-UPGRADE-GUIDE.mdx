@@ -20,8 +20,8 @@ any questions.
   - [Text Area (Preview)](#text-area-preview)
   - [Text Input (Preview)](#text-input-preview)
 - [Component Style Updates](#component-style-updates)
-- [Component Token Updates](#component-token-updates)
 - [Component Updates](#component-updates)
+  - [Buttons](#buttons)
   - [Card](#card)
   - [Checkbox](#checkbox)
   - [Combobox](#combobox)
@@ -244,14 +244,6 @@ See below:
   </Table.Head>
   <Table.Body>
     <Table.Row>
-      <Table.Cell>Table (Header)</Table.Cell>
-      <Table.Cell />
-      <Table.Cell />
-      <Table.Cell>borderColor</Table.Cell>
-      <Table.Cell backgroundColor="soap400">soap400</Table.Cell>
-      <Table.Cell backgroundColor="soap500">soap500</Table.Cell>
-    </Table.Row>
-    <Table.Row>
       <Table.Cell>Checkbox</Table.Cell>
       <Table.Cell />
       <Table.Cell>disabled</Table.Cell>
@@ -270,6 +262,22 @@ See below:
       <Table.Cell color="frenchVanilla100" backgroundColor="licorice100">
         licorice100
       </Table.Cell>
+    </Table.Row>
+		<Table.Row>
+      <Table.Cell>DeleteButton</Table.Cell>
+      <Table.Cell />
+      <Table.Cell>disabled</Table.Cell>
+      <Table.Cell>backgroundColor</Table.Cell>
+      <Table.Cell backgroundColor={cssVar(brand.error.light)}>error.light</Table.Cell>
+      <Table.Cell backgroundColor="rgba(222,46,33,0.4)">error.base</Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>DeleteButton</Table.Cell>
+      <Table.Cell />
+      <Table.Cell>disabled</Table.Cell>
+      <Table.Cell>opacity</Table.Cell>
+      <Table.Cell>1</Table.Cell>
+      <Table.Cell>0.4</Table.Cell>
     </Table.Row>
     <Table.Row>
       <Table.Cell>Radio</Table.Cell>
@@ -285,7 +293,19 @@ See below:
       <Table.Cell>SecondaryButton</Table.Cell>
       <Table.Cell>Inverse</Table.Cell>
       <Table.Cell>focus</Table.Cell>
-      <Table.Cell>color</Table.Cell>
+      <Table.Cell>border</Table.Cell>
+      <Table.Cell color="blackPepper400" backgroundColor="soap400">
+        soap400
+      </Table.Cell>
+      <Table.Cell color="blackPepper400" backgroundColor="transparent">
+        transparent
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>SecondaryButton</Table.Cell>
+      <Table.Cell>Inverse</Table.Cell>
+      <Table.Cell>focus</Table.Cell>
+      <Table.Cell>boxShdaow (Inner Color)</Table.Cell>
       <Table.Cell color="frenchVanilla100" backgroundColor="blackPepper500">
         blackPepper500
       </Table.Cell>
@@ -297,7 +317,7 @@ See below:
       <Table.Cell>SecondaryButton</Table.Cell>
       <Table.Cell>Inverse</Table.Cell>
       <Table.Cell>focus</Table.Cell>
-      <Table.Cell>boxShdaow (Inner Color)</Table.Cell>
+      <Table.Cell>color</Table.Cell>
       <Table.Cell color="frenchVanilla100" backgroundColor="blackPepper500">
         blackPepper500
       </Table.Cell>
@@ -316,6 +336,14 @@ See below:
       <Table.Cell color="frenchVanilla100" backgroundColor="blackPepper400">
         blackPepper400
       </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>Table (Header)</Table.Cell>
+      <Table.Cell />
+      <Table.Cell />
+      <Table.Cell>borderColor</Table.Cell>
+      <Table.Cell backgroundColor="soap400">soap400</Table.Cell>
+      <Table.Cell backgroundColor="soap500">soap500</Table.Cell>
     </Table.Row>
     <Table.Row>
       <Table.Cell>TertiaryButton</Table.Cell>
@@ -378,20 +406,14 @@ See below:
       </Table.Cell>
     </Table.Row>
     <Table.Row>
-      <Table.Cell>DeleteButton</Table.Cell>
+      <Table.Cell>TextArea</Table.Cell>
       <Table.Cell />
       <Table.Cell>disabled</Table.Cell>
-      <Table.Cell>backgroundColor</Table.Cell>
-      <Table.Cell backgroundColor={cssVar(brand.error.light)}>error.light</Table.Cell>
-      <Table.Cell backgroundColor="rgba(222,46,33,0.4)">error.base</Table.Cell>
-    </Table.Row>
-    <Table.Row>
-      <Table.Cell>DeleteButton</Table.Cell>
-      <Table.Cell />
-      <Table.Cell>disabled</Table.Cell>
-      <Table.Cell>opacity</Table.Cell>
-      <Table.Cell>1</Table.Cell>
-      <Table.Cell>0.4</Table.Cell>
+      <Table.Cell>borderColor</Table.Cell>
+      <Table.Cell backgroundColor="soap600">soap600</Table.Cell>
+      <Table.Cell color="frenchVanilla100" backgroundColor="licorice100">
+        licorice100
+      </Table.Cell>
     </Table.Row>
     <Table.Row>
       <Table.Cell>TextInput</Table.Cell>
@@ -403,26 +425,22 @@ See below:
         licorice100
       </Table.Cell>
     </Table.Row>
-    <Table.Row>
-      <Table.Cell>TextArea</Table.Cell>
-      <Table.Cell />
-      <Table.Cell>disabled</Table.Cell>
-      <Table.Cell>borderColor</Table.Cell>
-      <Table.Cell backgroundColor="soap600">soap600</Table.Cell>
-      <Table.Cell color="frenchVanilla100" backgroundColor="licorice100">
-        licorice100
-      </Table.Cell>
-    </Table.Row>
   </Table.Body>
 </Table>
 
-### Component Token Updates
-
-The following components have been updated to use our [new system tokens](insert link).
-
-- Text
-
 ## Component Updates
+
+### Buttons
+
+**PR:** [#2666](https://github.com/Workday/canvas-kit/pull/2666)
+
+`PrimaryButton`, `SecondaryButton`, `TertiaryButton` and `DeleteButton` have been refactored to use our
+[new styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api)
+and [tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs). The
+components now support the `cs` prop, but otherwise the API has not changed.
+
+> #### Visual Breaking Change
+> The `border` color for `SecondaryButton` on the `focus` state is now `transparent` and may cause a small visual difference in visual tests.
 
 ### Card
 
@@ -811,3 +829,5 @@ experimental code and is analagous to code in alpha.
 Breaking changes can be deployed to Labs at any time without triggering a major version update and
 may not be subject to the same rigor in communcation and migration strategies reserved for breaking
 changes in [Preview](#preview) and [Main](#main).
+import { opacity } from "@workday/canvas-tokens-web/dist/es6/system"
+
