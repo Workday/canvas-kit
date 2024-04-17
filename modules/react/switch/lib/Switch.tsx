@@ -128,7 +128,7 @@ const switchBackgroundStencil = createStencil({
     borderRadius: system.shape.round,
     padding: `${system.space.zero} ${px2rem(2)}`,
     transition: 'background-color 200ms ease',
-    backgroundColor: system.color.bg.muted.default,
+    backgroundColor: system.color.bg.muted.soft,
   },
 });
 
