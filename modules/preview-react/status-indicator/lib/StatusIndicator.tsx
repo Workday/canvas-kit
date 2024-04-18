@@ -42,9 +42,7 @@ const statusIndicatorStencil = createStencil({
       high: {
         color: system.color.static.gray.stronger,
         [systemIconStencil.vars.color]: system.color.static.gray.stronger,
-        // NOTE: system color token needs to be added
-        // should be system.color.static.orange.default, but it has wrong value now
-        background: base.cantaloupe400,
+        background: system.color.static.orange.default,
       },
       low: {
         color: system.color.static.gold.stronger,
