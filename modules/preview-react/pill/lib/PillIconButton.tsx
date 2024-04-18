@@ -7,7 +7,7 @@ import {usePillModel} from './usePillModel';
 import {xSmallIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {colors, space} from '@workday/canvas-kit-react/tokens';
-import {BaseButton, buttonVars} from '@workday/canvas-kit-react/button';
+import {BaseButton, buttonColorPropVars} from '@workday/canvas-kit-react/button';
 
 export interface PillIconButtonProps extends Omit<SystemIconProps, 'icon'> {
   /**
@@ -41,32 +41,32 @@ const StyledIconButton = styled(BaseButton)<StyledType & PillIconButtonProps>({
       innerColor: 'transparent',
     }),
   },
-  [buttonVars.default.background]: colors.soap300,
-  [buttonVars.default.border]: 'transparent',
-  [buttonVars.default.label]: colors.blackPepper400,
+  [buttonColorPropVars.default.background]: colors.soap300,
+  [buttonColorPropVars.default.border]: 'transparent',
+  [buttonColorPropVars.default.label]: colors.blackPepper400,
 
   '&:focus-visible, &.focus': {
-    [buttonVars.focus.background]: colors.soap300,
-    [buttonVars.focus.border]: 'transparent',
-    [buttonVars.focus.label]: colors.blackPepper400,
+    [buttonColorPropVars.focus.background]: colors.soap300,
+    [buttonColorPropVars.focus.border]: 'transparent',
+    [buttonColorPropVars.focus.label]: colors.blackPepper400,
   },
 
   '&:hover, &.hover': {
-    [buttonVars.hover.background]: colors.soap300,
-    [buttonVars.hover.border]: 'transparent',
-    [buttonVars.hover.label]: colors.blackPepper400,
+    [buttonColorPropVars.hover.background]: colors.soap300,
+    [buttonColorPropVars.hover.border]: 'transparent',
+    [buttonColorPropVars.hover.label]: colors.blackPepper400,
   },
 
   '&:active, &.active': {
-    [buttonVars.active.background]: colors.soap500,
-    [buttonVars.active.border]: 'transparent',
-    [buttonVars.active.label]: colors.blackPepper400,
+    [buttonColorPropVars.active.background]: colors.soap500,
+    [buttonColorPropVars.active.border]: 'transparent',
+    [buttonColorPropVars.active.label]: colors.blackPepper400,
   },
 
   '&:disabled, &.disabled': {
-    [buttonVars.disabled.background]: colors.soap100,
-    [buttonVars.disabled.label]: colors.licorice100,
-    [buttonVars.disabled.border]: 'transparent',
+    [buttonColorPropVars.disabled.background]: colors.soap100,
+    [buttonColorPropVars.disabled.label]: colors.licorice100,
+    [buttonColorPropVars.disabled.border]: 'transparent',
     [systemIconStencil.vars.color]: colors.licorice100,
   },
 });
