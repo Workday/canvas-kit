@@ -975,6 +975,35 @@ describe('cs', () => {
         });
       });
 
+      it('should set default modifiers using base modifiers', () => {
+        const baseStencil = createStencil({
+          base: {},
+          modifiers: {
+            size: {
+              large: {width: '100rem'},
+            },
+          },
+        });
+
+        const extendedStencil = createStencil({
+          extends: baseStencil,
+          base: {},
+          modifiers: {
+            extra: {
+              true: {},
+            },
+          },
+          defaultModifiers: {size: 'large'},
+        });
+
+        // calling the stencil
+        type Args = Exclude<Parameters<typeof extendedStencil>[0], undefined>;
+        expectTypeOf<Args>().toEqualTypeOf<{
+          size?: 'large';
+          extra?: boolean;
+        }>();
+      });
+
       it('should extend variables', () => {
         const baseStencil = createStencil({
           vars: {
