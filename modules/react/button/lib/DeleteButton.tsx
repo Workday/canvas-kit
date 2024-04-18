@@ -28,7 +28,7 @@ const deleteButtonStencil = createStencil({
       [buttonStencil.vars.background]: brand.error.base,
       [buttonStencil.vars.label]: brand.error.accent,
       [systemIconStencil.vars.color]: brand.error.accent,
-      [buttonStencil.vars.boxShadowInner]: system.color.fg.inverse,
+      [buttonStencil.vars.boxShadowInner]: system.color.border.inverse,
       [buttonStencil.vars.boxShadowOuter]: brand.common.focusOutline,
     },
     // Hover Styles
