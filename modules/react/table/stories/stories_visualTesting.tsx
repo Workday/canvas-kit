@@ -8,8 +8,8 @@ import {withSnapshotsEnabled} from '../../../../utils/storybook';
 import {Table} from '@workday/canvas-kit-react/table';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {Heading} from '@workday/canvas-kit-react/text';
-import {colors} from '@workday/canvas-kit-react/tokens';
 import {system} from '@workday/canvas-tokens-web';
+import {cssVar} from '@workday/canvas-kit-styling';
 
 export default {
   title: 'Testing/Containers/Table',
@@ -77,54 +77,54 @@ const FixedColumn = () => (
             position="sticky"
             left={system.space.zero}
             backgroundColor={system.color.bg.alt.softer}
-            borderRight={`1px solid ${system.color.border.divider}`}
+            borderRight={`1px solid ${cssVar(system.color.border.divider)}`}
           >
             Header
           </Table.Header>
           <Table.Header
-            borderRight={`1px solid ${system.color.border.divider}`}
+            borderRight={`1px solid ${cssVar(system.color.border.divider)}`}
             backgroundColor={system.color.bg.alt.softer}
           >
             Header
           </Table.Header>
           <Table.Header
-            borderRight={`1px solid ${system.color.border.divider}`}
+            borderRight={`1px solid ${cssVar(system.color.border.divider)}`}
             backgroundColor={system.color.bg.alt.softer}
           >
             Header
           </Table.Header>
           <Table.Header
-            borderRight={`1px solid ${system.color.border.divider}`}
+            borderRight={`1px solid ${cssVar(system.color.border.divider)}`}
             backgroundColor={system.color.bg.alt.softer}
           >
             Header
           </Table.Header>
           <Table.Header
-            borderRight={`1px solid ${system.color.border.divider}`}
+            borderRight={`1px solid ${cssVar(system.color.border.divider)}`}
             backgroundColor={system.color.bg.alt.softer}
           >
             Header
           </Table.Header>
           <Table.Header
-            borderRight={`1px solid ${system.color.border.divider}`}
+            borderRight={`1px solid ${cssVar(system.color.border.divider)}`}
             backgroundColor={system.color.bg.alt.softer}
           >
             Header
           </Table.Header>
           <Table.Header
-            borderRight={`1px solid ${system.color.border.divider}`}
+            borderRight={`1px solid ${cssVar(system.color.border.divider)}`}
             backgroundColor={system.color.bg.alt.softer}
           >
             Header
           </Table.Header>
           <Table.Header
-            borderRight={`1px solid ${system.color.border.divider}`}
+            borderRight={`1px solid ${cssVar(system.color.border.divider)}`}
             backgroundColor={system.color.bg.alt.softer}
           >
             Header
           </Table.Header>
           <Table.Header
-            borderRight={`1px solid ${system.color.border.divider}`}
+            borderRight={`1px solid ${cssVar(system.color.border.divider)}`}
             backgroundColor={system.color.bg.alt.softer}
           >
             Header
@@ -139,32 +139,32 @@ const FixedColumn = () => (
                 position="sticky"
                 left="0"
                 backgroundColor={system.color.bg.alt.softer}
-                borderRight={`1px solid ${system.color.border.divider}`}
+                borderRight={`1px solid ${cssVar(system.color.border.divider)}`}
               >
                 {item.header}
               </Table.Header>
-              <Table.Cell borderRight={`1px solid ${system.color.border.divider}`}>
+              <Table.Cell borderRight={`1px solid ${cssVar(system.color.border.divider)}`}>
                 {item.cell}
               </Table.Cell>
-              <Table.Cell borderRight={`1px solid ${system.color.border.divider}`}>
+              <Table.Cell borderRight={`1px solid ${cssVar(system.color.border.divider)}`}>
                 {item.cell}
               </Table.Cell>
-              <Table.Cell borderRight={`1px solid ${system.color.border.divider}`}>
+              <Table.Cell borderRight={`1px solid ${cssVar(system.color.border.divider)}`}>
                 {item.cell}
               </Table.Cell>
-              <Table.Cell borderRight={`1px solid ${system.color.border.divider}`}>
+              <Table.Cell borderRight={`1px solid ${cssVar(system.color.border.divider)}`}>
                 {item.cell}
               </Table.Cell>
-              <Table.Cell borderRight={`1px solid ${system.color.border.divider}`}>
+              <Table.Cell borderRight={`1px solid ${cssVar(system.color.border.divider)}`}>
                 {item.cell}
               </Table.Cell>
-              <Table.Cell borderRight={`1px solid ${system.color.border.divider}`}>
+              <Table.Cell borderRight={`1px solid ${cssVar(system.color.border.divider)}`}>
                 {item.cell}
               </Table.Cell>
-              <Table.Cell borderRight={`1px solid ${system.color.border.divider}`}>
+              <Table.Cell borderRight={`1px solid ${cssVar(system.color.border.divider)}`}>
                 {item.cell}
               </Table.Cell>
-              <Table.Cell borderRight={`1px solid ${system.color.border.divider}`}>
+              <Table.Cell borderRight={`1px solid ${cssVar(system.color.border.divider)}`}>
                 {item.cell}
               </Table.Cell>
             </Table.Row>
