@@ -231,14 +231,13 @@ instead.
 
 **PR:** [#2472](https://github.com/Workday/canvas-kit/pull/2700)
 
-`StatusIndicator` model functionality has been updated and the next hooks has been removed:
-
+As part of the refactor, we've removed the following exports that were primarily used to style the component:
 - `useStatusIndicatorModel`
 - `useStatusIndicator`
 - `statusIndicatorColors`
-- `useStatusIndicatorIcon`
+- `useStatusIndicatorIcon`.
 
-There is no external usage found, so it's not breaking change.
+Since there was no usage of these by our consumers, there should be no breaking changes.
 
 ---
 
