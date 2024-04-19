@@ -77,6 +77,7 @@ const tableHeaderStencil = createStencil({
       sticky: {
         position: 'sticky',
         left: system.space.zero,
+        zIndex: 2,
       },
     },
   },
@@ -89,7 +90,7 @@ const FixedColumn = () => (
       <Table.Head>
         <Table.Row>
           <Table.Header {...tableHeaderStencil({variant: 'sticky'})}>Header</Table.Header>
-          {[Array.from({length: 8})].map((_, i) => (
+          {Array.from({length: 7}).map((_, i) => (
             <Table.Header key={i} {...tableHeaderStencil()}>
               Header
             </Table.Header>
@@ -103,7 +104,7 @@ const FixedColumn = () => (
               <Table.Header {...tableHeaderStencil({variant: 'sticky'})}>
                 {item.header}
               </Table.Header>
-              {[Array.from({length: 8})].map((_, i) => (
+              {Array.from({length: 7}).map((_, i) => (
                 <Table.Cell key={i} {...tableHeaderStencil()}>
                   {item.cell}
                 </Table.Cell>
