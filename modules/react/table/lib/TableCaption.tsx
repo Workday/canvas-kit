@@ -2,12 +2,12 @@ import React from 'react';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 const tableCaptionStencil = createStencil({
   base: {
     display: 'flex',
-    borderBottom: `${px2rem(1)} solid ${base.soap500}`,
+    borderBottom: `${px2rem(1)} solid ${system.color.border.container}`,
     padding: `${system.space.x2} ${system.space.x4}`,
   },
 });
