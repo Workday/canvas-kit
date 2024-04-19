@@ -19,6 +19,11 @@ any questions.
   - [Label Text](#label-text)
   - [Text Area (Preview)](#text-area-preview)
   - [Text Input (Preview)](#text-input-preview)
+- [Removals](#removals)
+  - [Status Indicator model](#status-indicator-model)
+    - [statusIndicatorColors](#statusIndicatorColors)
+    - [useStatusIndicator](#useStatusIndicator)
+    - [useStatusIndicatorIcon](#useStatusIndicatorIcon)
 - [Component Style Updates](#component-style-updates)
 - [Component Updates](#component-updates)
   - [Buttons](#buttons)
@@ -31,6 +36,7 @@ any questions.
   - [Loading Dots](#loading-dots)
   - [Radio (Preview)](#radio-preview)
   - [Select](#select)
+  - [Status Indicator (Preview)](#status-indicator-preview)
   - [Switch](#switch)
   - [Table (Preview)](#table-preview)
   - [Text](#text)
@@ -219,6 +225,22 @@ instead.
 
 ---
 
+## Removals
+
+### Status Indicator model
+
+**PR:** [#2472](https://github.com/Workday/canvas-kit/pull/2700)
+
+As part of the refactor, we've removed the following exports that were primarily used to style the component:
+- `useStatusIndicatorModel`
+- `useStatusIndicator`
+- `statusIndicatorColors`
+- `useStatusIndicatorIcon`.
+
+Since there was no usage of these by our consumers, there should be no breaking changes.
+
+---
+
 ## Component Style Updates
 
 These changes are to address discrepancies that were found between Canvas Kit Design Specs and
@@ -263,7 +285,7 @@ See below:
         licorice100
       </Table.Cell>
     </Table.Row>
-		<Table.Row>
+    <Table.Row>
       <Table.Cell>DeleteButton</Table.Cell>
       <Table.Cell />
       <Table.Cell>disabled</Table.Cell>
@@ -434,13 +456,16 @@ See below:
 
 **PR:** [#2666](https://github.com/Workday/canvas-kit/pull/2666)
 
-`PrimaryButton`, `SecondaryButton`, `TertiaryButton` and `DeleteButton` have been refactored to use our
+`PrimaryButton`, `SecondaryButton`, `TertiaryButton` and `DeleteButton` have been refactored to use
+our
 [new styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api)
 and [tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs). The
 components now support the `cs` prop, but otherwise the API has not changed.
 
 > #### Visual Breaking Change
-> The `border` color for `SecondaryButton` on the `focus` state is now `transparent` and may cause a small visual difference in visual tests.
+>
+> The `border` color for `SecondaryButton` on the `focus` state is now `transparent` and may cause a
+> small visual difference in visual tests.
 
 ### Card
 
@@ -729,6 +754,22 @@ identically as it did in previous versions.
 [new styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api)
 and [tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs). The
 component now supports the `cs` prop, but otherwise the API has not changed. It should behave
+identically as it did in previous versions.
+
+### Status Indicator (Preview)
+
+**PR:** [#2620] https://github.com/Workday/canvas-kit/pull/2620
+
+`StatusIndicator` now uses
+[Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
+our
+[new styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
+The component now supports the `cs` prop, but otherwise the API has not been changed.
+
+> #### Visual Breaking Change
+> Opacity applied to the whole container has been removed for transparent variant and replace by
+> translucent color. By this change opacity has been changed from `0.85` to `0.84`, so there is
+> possibility of the small visual change.
 
 ### Switch
 
@@ -767,22 +808,6 @@ and [tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-st
 longer extends the `Box` component, however, it still supports Emotion `styled` and style props.
 Type level components: `Title`, `Heading`, `BodyText` and `Subtext`, have not been changed since
 they extend the `Text` component. These changes do not affect the components API.
-
-### StatusIndicator (Preview)
-
-**PR:** [#2620] https://github.com/Workday/canvas-kit/pull/2620
-
-`StatusIndicator` now uses
-[Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
-our
-[new styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
-The component now supports the `cs` prop, but otherwise the API has not changed. It should behave
-identically as it did in previous versions.
-
-- statusIndicatorColors has been deprecated and will be removed in a future version as a part of
-  implementation of stencils and new tokens
-- useStatusIndicatorIcon has been deprecated and will be removed in a future version as a part of
-  implementation of stencils and new tokens
 
 ## Style Utility Updates
 
@@ -833,6 +858,5 @@ experimental code and is analagous to code in alpha.
 
 Breaking changes can be deployed to Labs at any time without triggering a major version update and
 may not be subject to the same rigor in communcation and migration strategies reserved for breaking
-changes in [Preview](#preview) and [Main](#main).
-import { opacity } from "@workday/canvas-tokens-web/dist/es6/system"
-
+changes in [Preview](#preview) and [Main](#main). import { opacity } from
+"@workday/canvas-tokens-web/dist/es6/system"

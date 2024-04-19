@@ -1,15 +1,28 @@
 import React from 'react';
 
-import {ExtractProps, createContainer} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {StatusIndicatorIcon} from './StatusIndicatorIcon';
 import {StatusIndicatorLabel} from './StatusIndicatorLabel';
-import {useStatusIndicatorModel} from './hooks';
-import {createStencil, px2rem} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+
+export type StatusIndicatorVariant = 'gray' | 'orange' | 'blue' | 'green' | 'red' | 'transparent';
 
 export interface StatusIndicatorProps extends ExtractProps<typeof Flex, never> {
+  /**
+   * Defines the emphasis of the `StatusIndicator`.
+   * `high` emphasis will create more contrast between the background and text colors.
+   * `low` emphasis will create less contrast between the background and text colors.
+   * @default 'low'
+   */
+  emphasis?: 'high' | 'low';
+  /**
+   * Defines the color of the `StatusIndicator`.
+   * @default 'gray'
+   */
+  variant?: StatusIndicatorVariant;
   /**
    * Children of the `StatusIndicator`. Can contain a `StatusIndicator.Label` and optionally a `StatusIndicator.Icon`.
    */
@@ -29,81 +42,76 @@ const statusIndicatorStencil = createStencil({
   modifiers: {
     gray: {
       high: {
-        color: base.frenchVanilla100,
-        [systemIconStencil.vars.color]: base.frenchVanilla100,
-        background: base.licorice300,
+        color: system.color.static.white,
+        [systemIconStencil.vars.color]: system.color.static.white,
+        background: system.color.static.gray.default,
       },
       low: {
-        color: base.licorice400,
-        [systemIconStencil.vars.color]: base.licorice400,
-        background: base.soap300,
+        color: system.color.static.gray.strong,
+        [systemIconStencil.vars.color]: system.color.static.gray.strong,
+        background: system.color.static.gray.soft,
       },
     },
     orange: {
       high: {
-        color: base.licorice500,
-        [systemIconStencil.vars.color]: base.licorice500,
-        background: base.cantaloupe400,
+        color: system.color.static.gray.stronger,
+        [systemIconStencil.vars.color]: system.color.static.gray.stronger,
+        background: system.color.static.orange.default,
       },
       low: {
-        color: base.toastedMarshmallow600,
-        [systemIconStencil.vars.color]: base.toastedMarshmallow600,
-        background: base.cantaloupe100,
+        color: system.color.static.gold.stronger,
+        [systemIconStencil.vars.color]: system.color.static.gold.stronger,
+        background: system.color.static.orange.soft,
       },
     },
     blue: {
       high: {
-        color: base.frenchVanilla100,
-        [systemIconStencil.vars.color]: base.frenchVanilla100,
-        background: base.blueberry400,
+        color: system.color.static.white,
+        [systemIconStencil.vars.color]: system.color.static.white,
+        background: system.color.static.blue.default,
       },
       low: {
-        color: base.blueberry500,
-        [systemIconStencil.vars.color]: base.blueberry500,
-        background: base.blueberry100,
+        color: system.color.static.blue.strong,
+        [systemIconStencil.vars.color]: system.color.static.blue.strong,
+        background: system.color.static.blue.soft,
       },
     },
     green: {
       high: {
-        color: base.frenchVanilla100,
-        [systemIconStencil.vars.color]: base.frenchVanilla100,
-        background: base.greenApple600,
+        color: system.color.static.white,
+        [systemIconStencil.vars.color]: system.color.static.white,
+        background: system.color.static.green.strong,
       },
       low: {
-        color: base.greenApple600,
-        [systemIconStencil.vars.color]: base.greenApple600,
-        background: base.greenApple100,
+        color: system.color.static.green.strong,
+        [systemIconStencil.vars.color]: system.color.static.green.strong,
+        background: system.color.static.green.soft,
       },
     },
     red: {
       high: {
-        color: base.frenchVanilla100,
-        [systemIconStencil.vars.color]: base.frenchVanilla100,
-        background: base.cinnamon500,
+        color: system.color.static.white,
+        [systemIconStencil.vars.color]: system.color.static.white,
+        background: system.color.static.red.default,
       },
       low: {
-        color: base.cinnamon600,
-        [systemIconStencil.vars.color]: base.cinnamon600,
-        background: base.cinnamon100,
+        color: system.color.static.red.strong,
+        [systemIconStencil.vars.color]: system.color.static.red.strong,
+        background: system.color.static.red.soft,
       },
     },
     transparent: {
       high: {
-        opacity: 0.85,
-        color: base.frenchVanilla100,
-        [systemIconStencil.vars.color]: base.frenchVanilla100,
-        background: base.blackPepper600,
+        color: system.color.static.white,
+        [systemIconStencil.vars.color]: system.color.static.white,
+        background: system.color.bg.translucent,
       },
       low: {
-        opacity: 0.85,
-        color: base.frenchVanilla100,
-        [systemIconStencil.vars.color]: base.frenchVanilla100,
-        background: base.blackPepper600,
+        color: system.color.static.white,
+        [systemIconStencil.vars.color]: system.color.static.white,
+        background: system.color.bg.translucent,
       },
     },
-  },
-  defaultModifiers: {
-    gray: 'low',
   },
 });
 
@@ -117,9 +125,8 @@ const statusIndicatorStencil = createStencil({
  * </StatusIndicator>
  * ```
  */
-export const StatusIndicator = createContainer('div')({
+export const StatusIndicator = createComponent('div')({
   displayName: 'StatusIndicator',
-  modelHook: useStatusIndicatorModel,
   subComponents: {
     /**
      * `StatusIndicator.Label` renders {@link Text} under the hood. It will apply an ellipsis if its
@@ -140,15 +147,15 @@ export const StatusIndicator = createContainer('div')({
      */
     Icon: StatusIndicatorIcon,
   },
-})<StatusIndicatorProps>(({children, ...elemProps}, Element, model) => {
-  return (
-    <Element
-      {...mergeStyles(
-        elemProps,
-        statusIndicatorStencil({[model.state.variant]: model.state.emphasis})
-      )}
-    >
-      {children}
-    </Element>
-  );
+  Component: (
+    {emphasis = 'low', variant = 'gray', children, ...elemProps}: StatusIndicatorProps,
+    ref,
+    Element
+  ) => {
+    return (
+      <Element ref={ref} {...mergeStyles(elemProps, statusIndicatorStencil({[variant]: emphasis}))}>
+        {children}
+      </Element>
+    );
+  },
 });
