@@ -144,7 +144,7 @@ const checkboxInputStencil = createStencil({
         },
         '&:disabled:where(:checked, :indeterminate) ~ div:first-of-type': {
           borderColor: system.color.border.input.inverse,
-          backgroundColor: system.color.bg.alt.default,
+          backgroundColor: system.color.bg.default,
         },
 
         // Focus state for inverse variant
@@ -154,8 +154,8 @@ const checkboxInputStencil = createStencil({
             width: 2,
             separation: 0,
             animate: false,
-            innerColor: system.color.fg.strong,
-            outerColor: system.color.fg.inverse,
+            innerColor: system.color.border.contrast.default,
+            outerColor: system.color.border.inverse,
           }),
         },
         '&:checked:focus-visible, &:checked.focus, &:indeterminate:focus-visible, &:indeterminate.focus':
@@ -165,8 +165,8 @@ const checkboxInputStencil = createStencil({
                 width: 2,
                 separation: 2,
                 animate: false,
-                innerColor: system.color.fg.strong,
-                outerColor: system.color.fg.inverse,
+                innerColor: system.color.border.contrast.default,
+                outerColor: system.color.border.inverse,
               }),
               borderColor: system.color.border.inverse,
             },
@@ -185,13 +185,13 @@ const checkboxInputStencil = createStencil({
         '&:not(:where(:focus-visible, .focus)) ~ div:first-of-type': {
           borderColor: checkboxBackgroundStencil.vars.errorRingColorInner,
           boxShadow: `
-            0 0 0 ${px2rem(1)} ${checkboxBackgroundStencil.vars.errorRingColorInner}, 
+            0 0 0 ${px2rem(1)} ${checkboxBackgroundStencil.vars.errorRingColorInner},
             0 0 0 ${px2rem(2)} ${checkboxBackgroundStencil.vars.errorRingColorOuter}`,
         },
         '&:where(:checked, :indeterminate) ~ div:first-of-type': {
           borderColor: 'transparent',
           boxShadow: `
-            0 0 0 ${px2rem(2)} ${system.color.fg.inverse},
+            0 0 0 ${px2rem(2)} ${system.color.border.inverse},
             0 0 0 ${px2rem(4)} ${checkboxBackgroundStencil.vars.errorRingColorInner},
             0 0 0 ${px2rem(5)} ${checkboxBackgroundStencil.vars.errorRingColorOuter}`,
         },
