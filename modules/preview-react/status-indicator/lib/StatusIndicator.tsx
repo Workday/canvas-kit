@@ -2,13 +2,27 @@ import React from 'react';
 
 import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {StatusIndicatorIcon} from './StatusIndicatorIcon';
 import {StatusIndicatorLabel} from './StatusIndicatorLabel';
 
+export type StatusIndicatorVariant = 'gray' | 'orange' | 'blue' | 'green' | 'red' | 'transparent';
+
 export interface StatusIndicatorProps extends ExtractProps<typeof Flex, never> {
+  /**
+   * Defines the emphasis of the `StatusIndicator`.
+   * `high` emphasis will create more contrast between the background and text colors.
+   * `low` emphasis will create less contrast between the background and text colors.
+   * @default 'low'
+   */
+  emphasis?: 'high' | 'low';
+  /**
+   * Defines the color of the `StatusIndicator`.
+   * @default 'gray'
+   */
+  variant?: StatusIndicatorVariant;
   /**
    * Children of the `StatusIndicator`. Can contain a `StatusIndicator.Label` and optionally a `StatusIndicator.Icon`.
    */
@@ -99,9 +113,6 @@ const statusIndicatorStencil = createStencil({
       },
     },
   },
-  defaultModifiers: {
-    gray: 'low',
-  },
 });
 
 /**
@@ -136,9 +147,13 @@ export const StatusIndicator = createComponent('div')({
      */
     Icon: StatusIndicatorIcon,
   },
-  Component: ({children, ...elemProps}: StatusIndicatorProps, ref, Element) => {
+  Component: (
+    {emphasis = 'low', variant = 'gray', children, ...elemProps}: StatusIndicatorProps,
+    ref,
+    Element
+  ) => {
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, statusIndicatorStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, statusIndicatorStencil({[variant]: emphasis}))}>
         {children}
       </Element>
     );
