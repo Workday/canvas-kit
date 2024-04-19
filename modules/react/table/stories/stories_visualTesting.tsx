@@ -6,10 +6,10 @@ import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 // unreleased path
 import {Table} from '@workday/canvas-kit-react/table';
-import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {Heading} from '@workday/canvas-kit-react/text';
 import {system} from '@workday/canvas-tokens-web';
-import {createStencil, createStyles, cssVar} from '@workday/canvas-kit-styling';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 
 export default {
   title: 'Testing/Containers/Table',
@@ -70,7 +70,7 @@ const exampleData = [
 const tableHeaderStencil = createStencil({
   base: {
     backgroundColor: system.color.bg.alt.softer,
-    borderRight: `1px solid ${system.color.border.divider}`,
+    borderRight: `${px2rem(1)} solid ${system.color.border.divider}`,
   },
   modifiers: {
     variant: {
@@ -88,11 +88,11 @@ const FixedColumn = () => (
     <Table>
       <Table.Head>
         <Table.Row>
-          <Table.Header {...mergeStyles(tableHeaderStencil({variant: 'sticky'}))}>
-            Header
-          </Table.Header>
-          {[...Array(8).keys()].map(key => (
-            <Table.Header {...mergeStyles(tableHeaderStencil())}>Header</Table.Header>
+          <Table.Header {...tableHeaderStencil({variant: 'sticky'})}>Header</Table.Header>
+          {[Array.from({length: 8})].map((_, i) => (
+            <Table.Header key={i} {...tableHeaderStencil()}>
+              Header
+            </Table.Header>
           ))}
         </Table.Row>
       </Table.Head>
@@ -100,11 +100,13 @@ const FixedColumn = () => (
         {exampleData.map(item => (
           <>
             <Table.Row>
-              <Table.Header {...mergeStyles(tableHeaderStencil({variant: 'sticky'}))}>
+              <Table.Header {...tableHeaderStencil({variant: 'sticky'})}>
                 {item.header}
               </Table.Header>
-              {[...Array(8).keys()].map(key => (
-                <Table.Cell {...mergeStyles(tableHeaderStencil())}>{item.cell}</Table.Cell>
+              {[Array.from({length: 8})].map((_, i) => (
+                <Table.Cell key={i} {...tableHeaderStencil()}>
+                  {item.cell}
+                </Table.Cell>
               ))}
             </Table.Row>
           </>
