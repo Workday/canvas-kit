@@ -6,10 +6,10 @@ import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 // unreleased path
 import {Table} from '@workday/canvas-kit-react/table';
-import {Flex} from '@workday/canvas-kit-react/layout';
+import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Heading} from '@workday/canvas-kit-react/text';
 import {system} from '@workday/canvas-tokens-web';
-import {cssVar} from '@workday/canvas-kit-styling';
+import {createStencil, createStyles, cssVar} from '@workday/canvas-kit-styling';
 
 export default {
   title: 'Testing/Containers/Table',
@@ -67,106 +67,45 @@ const exampleData = [
   },
 ];
 
+const tableHeaderStencil = createStencil({
+  base: {
+    backgroundColor: system.color.bg.alt.softer,
+    borderRight: `1px solid ${system.color.border.divider}`,
+  },
+  modifiers: {
+    variant: {
+      sticky: {
+        position: 'sticky',
+        left: system.space.zero,
+      },
+    },
+  },
+});
+
 const FixedColumn = () => (
   <>
     <Heading size="small">Table Heading</Heading>
     <Table>
       <Table.Head>
         <Table.Row>
-          <Table.Header
-            position="sticky"
-            left={system.space.zero}
-            backgroundColor={system.color.bg.alt.softer}
-            borderRight={`1px solid ${cssVar(system.color.border.divider)}`}
-          >
+          <Table.Header {...mergeStyles(tableHeaderStencil({variant: 'sticky'}))}>
             Header
           </Table.Header>
-          <Table.Header
-            borderRight={`1px solid ${cssVar(system.color.border.divider)}`}
-            backgroundColor={system.color.bg.alt.softer}
-          >
-            Header
-          </Table.Header>
-          <Table.Header
-            borderRight={`1px solid ${cssVar(system.color.border.divider)}`}
-            backgroundColor={system.color.bg.alt.softer}
-          >
-            Header
-          </Table.Header>
-          <Table.Header
-            borderRight={`1px solid ${cssVar(system.color.border.divider)}`}
-            backgroundColor={system.color.bg.alt.softer}
-          >
-            Header
-          </Table.Header>
-          <Table.Header
-            borderRight={`1px solid ${cssVar(system.color.border.divider)}`}
-            backgroundColor={system.color.bg.alt.softer}
-          >
-            Header
-          </Table.Header>
-          <Table.Header
-            borderRight={`1px solid ${cssVar(system.color.border.divider)}`}
-            backgroundColor={system.color.bg.alt.softer}
-          >
-            Header
-          </Table.Header>
-          <Table.Header
-            borderRight={`1px solid ${cssVar(system.color.border.divider)}`}
-            backgroundColor={system.color.bg.alt.softer}
-          >
-            Header
-          </Table.Header>
-          <Table.Header
-            borderRight={`1px solid ${cssVar(system.color.border.divider)}`}
-            backgroundColor={system.color.bg.alt.softer}
-          >
-            Header
-          </Table.Header>
-          <Table.Header
-            borderRight={`1px solid ${cssVar(system.color.border.divider)}`}
-            backgroundColor={system.color.bg.alt.softer}
-          >
-            Header
-          </Table.Header>
+          {[...Array(8).keys()].map(key => (
+            <Table.Header {...mergeStyles(tableHeaderStencil())}>Header</Table.Header>
+          ))}
         </Table.Row>
       </Table.Head>
       <Table.Body>
         {exampleData.map(item => (
           <>
             <Table.Row>
-              <Table.Header
-                position="sticky"
-                left="0"
-                backgroundColor={system.color.bg.alt.softer}
-                borderRight={`1px solid ${cssVar(system.color.border.divider)}`}
-              >
+              <Table.Header {...mergeStyles(tableHeaderStencil({variant: 'sticky'}))}>
                 {item.header}
               </Table.Header>
-              <Table.Cell borderRight={`1px solid ${cssVar(system.color.border.divider)}`}>
-                {item.cell}
-              </Table.Cell>
-              <Table.Cell borderRight={`1px solid ${cssVar(system.color.border.divider)}`}>
-                {item.cell}
-              </Table.Cell>
-              <Table.Cell borderRight={`1px solid ${cssVar(system.color.border.divider)}`}>
-                {item.cell}
-              </Table.Cell>
-              <Table.Cell borderRight={`1px solid ${cssVar(system.color.border.divider)}`}>
-                {item.cell}
-              </Table.Cell>
-              <Table.Cell borderRight={`1px solid ${cssVar(system.color.border.divider)}`}>
-                {item.cell}
-              </Table.Cell>
-              <Table.Cell borderRight={`1px solid ${cssVar(system.color.border.divider)}`}>
-                {item.cell}
-              </Table.Cell>
-              <Table.Cell borderRight={`1px solid ${cssVar(system.color.border.divider)}`}>
-                {item.cell}
-              </Table.Cell>
-              <Table.Cell borderRight={`1px solid ${cssVar(system.color.border.divider)}`}>
-                {item.cell}
-              </Table.Cell>
+              {[...Array(8).keys()].map(key => (
+                <Table.Cell {...mergeStyles(tableHeaderStencil())}>{item.cell}</Table.Cell>
+              ))}
             </Table.Row>
           </>
         ))}

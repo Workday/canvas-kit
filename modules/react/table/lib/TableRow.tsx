@@ -1,8 +1,7 @@
 import React from 'react';
 import {GridProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {calc, createStencil, createVars} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {createStencil, createVars} from '@workday/canvas-kit-styling';
 
 const childrenVars = createVars('cellNumber');
 
@@ -11,10 +10,7 @@ const tableRowStencil = createStencil({
   base: {
     display: 'grid',
     gridAutoFlow: 'column',
-    gridTemplateColumns: `repeat(${childrenVars.cellNumber}, minmax(${calc.multiply(
-      system.space.x20,
-      2
-    )}, 1fr))`,
+    gridTemplateColumns: `repeat(${childrenVars.cellNumber}, minmax(10rem, 1fr))`,
   },
 });
 
