@@ -144,7 +144,7 @@ const checkboxInputStencil = createStencil({
         },
         '&:disabled:where(:checked, :indeterminate) ~ div:first-of-type': {
           borderColor: system.color.border.input.inverse,
-          backgroundColor: system.color.bg.alt.default,
+          backgroundColor: system.color.bg.default,
         },
 
         // Focus state for inverse variant
