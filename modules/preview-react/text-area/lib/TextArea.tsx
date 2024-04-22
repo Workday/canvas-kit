@@ -7,7 +7,7 @@ import {Flex} from '@workday/canvas-kit-react/layout';
 import {TextAreaField} from './TextAreaField';
 import {useTextInputModel} from '@workday/canvas-kit-preview-react/text-input';
 /**
- * @deprecated ⚠️ `TextAreaProps` in Preview has been deprecated and will be removed in a future major version. Please use [`FormField` in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-inputs-form-field--basic) instead.
+ * @deprecated ⚠️ `TextAreaProps` in Preview has been deprecated and will be removed in a future major version. Please use [`FormField`](https://workday.github.io/canvas-kit/?path=/story/preview-inputs-form-field--basic) in Preview instead.
  */
 export interface TextAreaProps extends ExtractProps<typeof FormField, never> {
   /**
@@ -17,7 +17,7 @@ export interface TextAreaProps extends ExtractProps<typeof FormField, never> {
 }
 
 /**
- * @deprecated ⚠️ `TextArea` in Preview has been deprecated and will be removed in a future major version. Please use [`FormField` in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-inputs-form-field--basic) instead.
+ * @deprecated ⚠️ `TextArea` in Preview has been deprecated and will be removed in a future major version. Please use [`FormField`](https://workday.github.io/canvas-kit/?path=/story/preview-inputs-form-field--basic) in Preview instead.
  */
 export const TextArea = createContainer('div')({
   displayName: 'TextArea',
