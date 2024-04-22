@@ -1,6 +1,7 @@
 import {Meta} from '@storybook/addon-docs';
 import {Table} from '@workday/canvas-kit-react/table';
 import {base, brand} from '@workday/canvas-tokens-web';
+import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
 import {cssVar} from '@workday/canvas-kit-styling';
 
 <Meta title="Guides/Upgrade Guides/v11.0" />
@@ -24,18 +25,11 @@ any questions.
     - [useStatusIndicatorIcon](#useStatusIndicatorIcon)
 - [Component Style Updates](#component-style-updates)
 - [Component Updates](#component-updates)
+  - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
   - [Buttons](#buttons)
-  - [Card](#card)
-  - [Checkbox](#checkbox)
-  - [Combobox](#combobox)
-  - [Count Badge](#count-badge)
   - [Form Field Preview](#form-field-preview)
   - [Icons](#icons)
-  - [Loading Dots](#loading-dots)
-  - [Radio (Preview)](#radio-preview)
-  - [Select](#select)
   - [Status Indicator (Preview)](#status-indicator-preview)
-  - [Switch](#switch)
   - [Table](#table)
   - [Text](#text)
 - [Style Utility Updates](#style-utility-updates)
@@ -408,62 +402,54 @@ Components affected: `Table`, `Checkbox`, `Radio`, `SecondaryButton`, `TertiaryB
 
 ## Component Updates
 
+### Styling API and CSS Tokens
+
+**PRs:** [#2666](https://github.com/Workday/canvas-kit/pull/2666),
+[#2471](https://github.com/Workday/canvas-kit/pull/2471),
+[#2542](https://github.com/Workday/canvas-kit/pull/2542),
+[#2570](https://github.com/Workday/canvas-kit/pull/2570),
+[#2442](https://github.com/Workday/canvas-kit/pull/2442),
+[#2472](https://github.com/Workday/canvas-kit/pull/2472),
+[#2685](https://github.com/Workday/canvas-kit/pull/2685),
+[#2615](https://github.com/Workday/canvas-kit/pull/2615),
+[#2699](https://github.com/Workday/canvas-kit/pull/2699),
+[#2546](https://github.com/Workday/canvas-kit/pull/2546),
+[#2570](https://github.com/Workday/canvas-kit/pull/2570),
+[#2620](https://github.com/Workday/canvas-kit/pull/2620),
+[#2583](https://github.com/Workday/canvas-kit/pull/2583),
+[#2567](https://github.com/Workday/canvas-kit/pull/2567),
+[#2455](https://github.com/Workday/canvas-kit/pull/2455)
+
+Several components have been refactored to use new
+[Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
+[styling API](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
+The React interface **has not changed**, but CSS variables are now used for dynamic properties.
+
+These components also supports our new `cs` prop for styling. Learn more about styling with `cs` in
+our [documentation](link-to-docs)
+
+The following components are affected: `PrimaryButton`, `SecondaryButton`,
+`TertiaryButton`,`DeleteButton`, `Card`, `CheckBox`, `Combobox`, `CountBadge`,
+`FormField (Preview)`, `Svg`, `SystemIcon`, `SystemIconCircle`, `AccentIcon`, `AppletIcon`,
+`Graphic`, `LoadingDots`, `Radio (Preview)`, `Select`, `StatusIndicator`, `Switch`, `Table` and
+`Text`
+
 ### Buttons
+
+<StatusIndicator variant="red" emphasis="low">
+  <StatusIndicator.Label>Visual Breaking Change</StatusIndicator.Label>
+</StatusIndicator>
 
 **PR:** [#2666](https://github.com/Workday/canvas-kit/pull/2666)
 
-`PrimaryButton`, `SecondaryButton`, `TertiaryButton` and `DeleteButton` have been refactored to use
-our
-[new styling API](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api)
-and [tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs). The
-components now support the `cs` prop, but otherwise the API has not changed.
-
-> #### Visual Breaking Change
->
-> The `border` color for `SecondaryButton` on the `focus` state is now `transparent` and may cause a
-> small visual difference in visual tests.
-
-### Card
-
-**PR:** [#2471](https://github.com/Workday/canvas-kit/pull/2471)
-
-`Card` and its subcomponents have been refactored to use our new
-[styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api)
-and [tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs). `Card`
-no longer extends the `Box` component, however, it still supports Emotion `styled` and style props.
-
-### Checkbox
-
-**PR:** [#2542](https://github.com/Workday/canvas-kit/pull/2542)
-
-`Checkbox` now uses
-[Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
-our
-[new styling API](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
-The component now supports the `cs` prop, but otherwise the API has not changed. It should behave
-identically as it did in previous versions.
-
-### Combobox
-
-**PR:** [#2570](https://github.com/Workday/canvas-kit/pull/2570)
-
-`Combobox` has been refactored to use our
-[new styling API](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api)
-and [tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs). The
-component now supports the `cs` prop, but otherwise the API has not changed.
-
-### Count Badge
-
-**PR:** [#2442](https://github.com/Workday/canvas-kit/pull/2442)
-
-`CountBadge` now uses `createComponent`,
-[Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs), and
-our new
-[styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
-The component API has not been changed, and it should behave identically as it did in previous
-versions.
+The `border` color for `SecondaryButton` on the `focus` state is now `transparent` and may cause a
+small visual difference in visual tests.
 
 ### Form Field (Preview)
+
+<StatusIndicator variant="red" emphasis="low">
+  <StatusIndicator.Label>Breaking Change</StatusIndicator.Label>
+</StatusIndicator>
 
 **PR:** [#2472](https://github.com/Workday/canvas-kit/pull/2472)
 
@@ -472,7 +458,7 @@ version to replace the `FormField` in [Main](#main). Because of this, we've refa
 are applied to `FormField` in [Preview](#preview) in order to match the API from the `FormField` in
 [Main](#main).
 
-- `hasError` prop has been renamed to `error`.
+- `hasError` prop has been renamed to `error`. **This is a breaking change**
 - `error` accepts `"error" | "alert" | ""` instead of a boolean value.
 - `orientation` prop defaults to `vertical` and is no longer required.
 - `FormField.Input` can be used by any of our inputs including `Select`, `TextInput`, `TextArea`,
@@ -516,11 +502,6 @@ to check your logic to make sure it sets the appropaite value to the prop.
 > alert states.
 
 ### Icons
-
-All icons components including `Svg`, `SystemIcon`, `SystemIconCircle`, `AccentIcon`, `AppletIcon`
-and `Graphic` now use our new
-[Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
-[new styling API](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
 
 - Components now support the `cs` prop. -`styles` prop has been removed.
 
@@ -687,67 +668,28 @@ const MyComponent = StyledRadioButton('div')({
 </MyComponent>;
 ```
 
-### Loading Dots
-
-`LoadingDots` now uses
-[Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
-our
-[new styling API](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
-The component now supports the `cs` prop, but otherwise the API has not changed. It should behave
-identically as it did in previous versions.
-
-### Radio (Preview)
-
-**PR:** [#2546](https://github.com/Workday/canvas-kit/pull/2546)
-
-`Radio` and `RadioGroup` now use
-[Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
-our
-[new styling API](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
-The component now supports the `cs` prop, but otherwise the API has not changed. It should behave
-identically as it did in previous versions.
-
-### Select
-
-**PR:** [#2570](https://github.com/Workday/canvas-kit/pull/2570)
-
-`Select` has been refactored to use our
-[new styling API](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api)
-and [tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs). The
-component now supports the `cs` prop, but otherwise the API has not changed. It should behave
-identically as it did in previous versions.
-
 ### Status Indicator (Preview)
+
+<StatusIndicator variant="red" emphasis="low">
+  <StatusIndicator.Label>Visual Breaking Change</StatusIndicator.Label>
+</StatusIndicator>
 
 **PR:** [#2620] https://github.com/Workday/canvas-kit/pull/2620
 
-`StatusIndicator` now uses
-[Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
-our
-[new styling API](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
-The component now supports the `cs` prop, but otherwise the API has not been changed.
-
-> #### Visual Breaking Change
->
-> Opacity applied to the whole container has been removed for transparent variant and replace by
-> translucent color. By this change opacity has been changed from `0.85` to `0.84`, so there is
-> possibility of the small visual change.
+Opacity applied to the whole container has been removed for the transparent variant and replace by a
+translucent color. Opacity has changed from `0.85` to `0.84`, so there is possibility of a small
+visual change.
 
 ### Switch
 
+<StatusIndicator variant="red" emphasis="low">
+  <StatusIndicator.Label>Visual Breaking Change</StatusIndicator.Label>
+</StatusIndicator>
+
 **PR:** [#2583](https://github.com/Workday/canvas-kit/pull/2583)
 
-`Switch` now uses
-[Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
-our
-[new styling API](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
-The component now supports the `cs` prop, but otherwise the API has not changed. It should behave
-identically as it did in previous versions.
-
-> #### Visual Breaking change
->
-> Switch no longer uses `theme.primary.light` as the background color for a disabled and checked
-> Switch. Instead, it uses `theme.primary.main` with an opacity of `0.4` to show a disabled state.
+Switch no longer uses `theme.primary.light` as the background color for a disabled and checked
+Switch. Instead, it uses `theme.primary.main` with an opacity of `0.4` to show a disabled state.
 
 ### Table
 
@@ -813,25 +755,13 @@ for how to implement new tables.
 > to update your import from `@workday/canvas-kit-preview-react/table` to
 > `@workday/canvas-kit-react/table`. This change is **not** handled by the codemod.
 
-#### **PR:** [#2567](https://github.com/Workday/canvas-kit/pull/2567)
-
-`Table` now uses
-[Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
-our
-[new styling API](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-stencil).
-
-- The `cs` prop
-
 ### Text
 
 **PR:** [#2455](https://github.com/Workday/canvas-kit/pull/2455)
 
-`Text` has been refactored to use our
-[new styling API](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api)
-and [tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs). It no
-longer extends the `Box` component, however, it still supports Emotion `styled` and style props.
-Type level components: `Title`, `Heading`, `BodyText` and `Subtext`, have not been changed since
-they extend the `Text` component. These changes do not affect the components API.
+`Text` no longer extends the `Box` component, however, it still supports Emotion `styled` and style
+props. Type level components: `Title`, `Heading`, `BodyText` and `Subtext`, have not been changed
+since they extend the `Text` component. These changes do not affect the components API.
 
 ## Style Utility Updates
 
