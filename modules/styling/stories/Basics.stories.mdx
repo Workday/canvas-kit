@@ -4,6 +4,7 @@ import {CreateStyles} from './examples/CreateStyles';
 import {CreateVars} from './examples/CreateVars';
 import {CreateModifiers} from './examples/CreateModifiers';
 import {CreateStencil} from './examples/CreateStencil';
+import {CSProp} from './examples/CSProp';
 
 <Meta title="Styling/Basics" />
 
@@ -388,6 +389,15 @@ transformer.
 The `injectGlobal` function re-exports the
 [Emotion CSS injectGlobal](https://emotion.sh/docs/@emotion/css#global-styles) function, but is
 compatible with a custom Emotion instance and is understood by the Static style transformer.
+
+## CS Prop
+
+The `cs` prop takes in a single, or an array of values that are created by the `cs` function, a
+string representing a CSS class name, or the return of the `createVars` function. It merges
+everything together and applies `className` and `style` attributes to a React element. The Box
+component has been extended to handle the cs prop. For example, the following plus proceeding code:
+
+<ExampleCodeBlock code={CSProp} />
 
 ## Custom Emotion instance
 
