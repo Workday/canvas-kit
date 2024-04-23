@@ -425,14 +425,15 @@ Several components have been refactored to use new
 [styling API](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
 The React interface **has not changed**, but CSS variables are now used for dynamic properties.
 
-These components also supports our new `cs` prop for styling. Learn more about styling with `cs` in
-our [documentation](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--cs-prop)
-
 The following components are affected: `PrimaryButton`, `SecondaryButton`,
 `TertiaryButton`,`DeleteButton`, `Card`, `CheckBox`, `Combobox`, `CountBadge`,
 `FormField (Preview)`, `Svg`, `SystemIcon`, `SystemIconCircle`, `AccentIcon`, `AppletIcon`,
 `Graphic`, `LoadingDots`, `Radio (Preview)`, `Select`, `StatusIndicator`, `Switch`, `Table` and
 `Text`
+
+> **Note:** These components also support our new `cs` prop for styling. Learn more about styling
+> with `cs` in our
+> [documentation](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--cs-prop).
 
 ### Buttons
 
@@ -443,14 +444,20 @@ The following components are affected: `PrimaryButton`, `SecondaryButton`,
 **PR:** [#2666](https://github.com/Workday/canvas-kit/pull/2666)
 
 The `border` color for `SecondaryButton` on the `focus` state is now `transparent` and may cause a
-small visual difference in visual tests. There should be no developer impact and the visual changes
-are safe to accept.
+small visual difference in visual tests.
+
+**There should be no developer impact and the visual changes are safe to accept**.
 
 ### Form Field (Preview)
 
-<StatusIndicator variant="red" emphasis="low">
-  <StatusIndicator.Label>Breaking Change</StatusIndicator.Label>
-</StatusIndicator>
+<div style={{display: 'inline-flex', gap: '.5rem'}}>
+  <StatusIndicator variant="red" emphasis="low">
+    <StatusIndicator.Label>Breaking Change</StatusIndicator.Label>
+  </StatusIndicator>
+  <StatusIndicator variant="green" emphasis="low">
+    <StatusIndicator.Label>🤖 Codemod Available</StatusIndicator.Label>
+  </StatusIndicator>
+</div>
 
 **PR:** [#2472](https://github.com/Workday/canvas-kit/pull/2472)
 
@@ -473,8 +480,6 @@ are applied to `FormField` in [Preview](#preview) in order to match the API from
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 
-//...
-
 <FormField orientation="vertical" hasError={true}>
   <FormField.Label>Password</FormField.Label>
   <FormField.Input as={TextInput} type="password" value={value} onChange={handleChange} />
@@ -484,8 +489,6 @@ import {TextInput} from '@workday/canvas-kit-react/text-input';
 // v11
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
-
-//...
 
 <FormField error="error">
   <FormField.Label>Password</FormField.Label>
@@ -504,9 +507,22 @@ to check your logic to make sure it sets the appropaite value to the prop.
 
 ### Icons
 
-- Components now support the `cs` prop. -`styles` prop has been removed.
+<div style={{display: 'inline-flex', gap: '.5rem'}}>
+  <StatusIndicator variant="red" emphasis="low">
+    <StatusIndicator.Label>Breaking Change</StatusIndicator.Label>
+  </StatusIndicator>
+  <StatusIndicator variant="green" emphasis="low">
+    <StatusIndicator.Label>🤖 Codemod Available</StatusIndicator.Label>
+  </StatusIndicator>
+</div>
 
-**Note: Passing a token name to a style prop will be not supported in a future major version.**
+`styles` prop has been removed. If you still need to style an Icon component, please use the `cs`
+prop.
+
+> **Note:** Passing a token name to a style prop will not be supported in a future major version.
+> Please use our
+> [Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs)
+> instead.
 
 ```tsx
 // This will no longer be supported in a future major version
@@ -715,7 +731,6 @@ provides more flexibility for customization.
 ```tsx
 // v10
 import {Table, TableRow} from '@workday/canvas-kit-react/table';
-//...
 
 <Table>
   <thead>
@@ -732,7 +747,6 @@ import {Table, TableRow} from '@workday/canvas-kit-react/table';
 
 // v11
 import {Table} from '@workday/canvas-kit-react/table';
-//...
 
 <Table>
   <Table.Head>
@@ -760,9 +774,9 @@ for how to implement new tables.
 
 **PR:** [#2455](https://github.com/Workday/canvas-kit/pull/2455)
 
-`Text` no longer extends the `Box` component, however, it still supports Emotion `styled` and style
-props. Type level components: `Title`, `Heading`, `BodyText` and `Subtext`, have not been changed
-since they extend the `Text` component. These changes do not affect the components API.
+- `Text` no longer extends the `Box` component, however, it still supports Emotion `styled` and
+  style props.
+- Type level components: `Title`, `Heading`, `BodyText` and `Subtext` remain unchanged.
 
 ## Style Utility Updates
 
