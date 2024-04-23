@@ -691,8 +691,9 @@ const MyComponent = StyledRadioButton('div')({
 **PR:** [#2620] https://github.com/Workday/canvas-kit/pull/2620
 
 Opacity which was applied to the whole container has been removed for the `transparent` variant and
-replaced by a translucent color. Opacity has changed from `0.85` to `0.84`. There is possibility of
-a small visual change and it should be accepted in visual regression tests.
+replaced by a translucent color. Opacity has changed from `0.85` to `0.84`.
+
+**There should be no developer impact and the visual changes are safe to accept**.
 
 ### Switch
 
@@ -707,12 +708,16 @@ Switch no longer uses `blueberry200` which was part of our theme object
 disabled. Now it uses `blueberry400` or `brand.base.primary` with an opacity of `0.4` for checked
 and disabled.
 
+**There should be no developer impact and the visual changes are safe to accept**.
+
 ### Table
 
 #### **PR:** [#2600](https://github.com/Workday/canvas-kit/pull/2600)
 
-We've promoted the `Table` in [Preview](#preview) to [Main](#main). It replaces the `Table` that was
-previously in [Main](#main).
+We've promoted `Table` from [Preview](#preview) to [Main](#main). It replaces the `Table` that was
+previously in [Main](#main) (for reference, see
+[`Table`](https://d2krrudi3mmzzw.cloudfront.net/v9/?path=/story/components-containers-table--basic)
+in [Main](#main) from v9).
 
 `Table` is a
 [compound component](https://workday.github.io/canvas-kit/?path=/docs/guides-compound-components--page)
