@@ -19,10 +19,7 @@ any questions.
   - [Text Area (Preview)](#text-area-preview)
   - [Text Input (Preview)](#text-input-preview)
 - [Removals](#removals)
-  - [Status Indicator model](#status-indicator-model)
-    - [statusIndicatorColors](#statusIndicatorColors)
-    - [useStatusIndicator](#useStatusIndicator)
-    - [useStatusIndicatorIcon](#useStatusIndicatorIcon)
+  - [Status Indicator (Preview) Utilities](#status-indicator-preview-utilities)
 - [Component Style Updates](#component-style-updates)
 - [Component Updates](#component-updates)
   - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
@@ -175,7 +172,7 @@ The following model hooks have also been deprecated:
 
 ## Removals
 
-### Status Indicator model
+### Status Indicator (Preview) Utilities
 
 **PR:** [#2472](https://github.com/Workday/canvas-kit/pull/2700)
 
@@ -187,18 +184,18 @@ style the component:
 - `statusIndicatorColors`
 - `useStatusIndicatorIcon`.
 
-Since there was no usage of these by our consumers, there should be no breaking changes.
+**There should be no developer impact.**
 
 ---
 
 ## Component Style Updates
 
+**PR:** [#2485](https://github.com/Workday/canvas-kit/pull/2485)
+
 The following changes address visual discrepancies between our design spec files and code.
 
 Components affected: `Table`, `Checkbox`, `Radio`, `SecondaryButton`, `TertiaryButton`,
 `DeleteButton`, `TextInput` and `TextArea`.
-
-**PR:** [#2485](https://github.com/Workday/canvas-kit/pull/2485)
 
 <Table>
   <Table.Head>
@@ -693,9 +690,9 @@ const MyComponent = StyledRadioButton('div')({
 
 **PR:** [#2620] https://github.com/Workday/canvas-kit/pull/2620
 
-Opacity applied to the whole container has been removed for the transparent variant and replace by a
-translucent color. Opacity has changed from `0.85` to `0.84`, so there is possibility of a small
-visual change.
+Opacity which was applied to the whole container has been removed for the `transparent` variant and
+replaced by a translucent color. Opacity has changed from `0.85` to `0.84`. There is possibility of
+a small visual change and it should be accepted in visual regression tests.
 
 ### Switch
 
@@ -705,8 +702,10 @@ visual change.
 
 **PR:** [#2583](https://github.com/Workday/canvas-kit/pull/2583)
 
-Switch no longer uses `theme.primary.light` as the background color for a disabled and checked
-Switch. Instead, it uses `theme.primary.main` with an opacity of `0.4` to show a disabled state.
+Switch no longer uses `blueberry200` which was part of our theme object
+`theme.palette.primary.light` for the background color to indicate a Switch that is checked and
+disabled. Now it uses `blueberry400` or `brand.base.primary` with an opacity of `0.4` for checked
+and disabled.
 
 ### Table
 
