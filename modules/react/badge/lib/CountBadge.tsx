@@ -37,7 +37,7 @@ const countBadgeStencil = createStencil({
   base: {
     alignItems: 'center',
     animation: `${grow} 0.2s ease`,
-    background: system.color.bg.critical.default,
+    background: system.color.static.red.default,
     borderRadius: system.shape.round,
     color: system.color.text.inverse,
     display: 'inline-flex',
@@ -57,7 +57,7 @@ const countBadgeStencil = createStencil({
       inverse: {
         background: system.color.bg.default,
         boxShadow: `0 ${px2rem(1)} ${px2rem(2)} rgba(0,0,0, 0.25)`,
-        color: system.color.bg.primary.default,
+        color: system.color.text.primary.default,
         textShadow: 'none',
       },
     },

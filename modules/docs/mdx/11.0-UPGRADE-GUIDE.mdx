@@ -231,7 +231,9 @@ instead.
 
 **PR:** [#2472](https://github.com/Workday/canvas-kit/pull/2700)
 
-As part of the refactor, we've removed the following exports that were primarily used to style the component:
+As part of the refactor, we've removed the following exports that were primarily used to style the
+component:
+
 - `useStatusIndicatorModel`
 - `useStatusIndicator`
 - `statusIndicatorColors`
@@ -507,6 +509,19 @@ our new
 The component API has not been changed, and it should behave identically as it did in previous
 versions.
 
+We also removed the `default` variant and consolidated those styles into the badge's base styles.
+This will not be a breaking change for most users. However, if you have a `CountBadge` with an
+explicit `default` variant, you'll see a TypeScript error. To resolve this, simply remove the
+variant prop.
+
+```tsx
+// Before (v10)
+<CountBadge variant="default" count={10} />
+
+// After (v11)
+<CountBadge count={10} />
+```
+
 ### Form Field (Preview)
 
 **PR:** [#2472](https://github.com/Workday/canvas-kit/pull/2472)
@@ -767,6 +782,7 @@ our
 The component now supports the `cs` prop, but otherwise the API has not been changed.
 
 > #### Visual Breaking Change
+>
 > Opacity applied to the whole container has been removed for transparent variant and replace by
 > translucent color. By this change opacity has been changed from `0.85` to `0.84`, so there is
 > possibility of the small visual change.
