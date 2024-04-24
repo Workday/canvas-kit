@@ -11,12 +11,14 @@ function negate(value: string, fallback?: string) {
 }
 
 const container = createStyles({
+  boxSizing: 'border-box',
   display: 'flex',
   flexDirection: 'column',
   gap: system.space.x4,
 });
 
 const controls = createStyles({
+  boxSizing: 'border-box',
   borderBottom: `solid 1px ${cssVar(base.soap400)}`,
   display: 'flex',
   gap: system.space.x1,
@@ -24,10 +26,12 @@ const controls = createStyles({
 });
 
 const notificationContainerStyles = createStyles({
+  boxSizing: 'border-box',
   position: 'relative',
 });
 
 const countBadgeStyles = createStyles({
+  boxSizing: 'border-box',
   position: 'absolute',
   top: negate(system.space.x4),
   insetInlineEnd: negate(system.space.x1),
