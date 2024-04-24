@@ -304,6 +304,18 @@ Components affected: `Table`, `Checkbox`, `Radio`, `SecondaryButton`, `TertiaryB
       </Table.Cell>
     </Table.Row>
     <Table.Row>
+      <Table.Cell>StatusIndicator (Preview)</Table.Cell>
+      <Table.Cell>transparent</Table.Cell>
+      <Table.Cell>focus</Table.Cell>
+      <Table.Cell>fill</Table.Cell>
+      <Table.Cell color="frenchVanilla100" backgroundColor="blackPepper500">
+        blackPepper500
+      </Table.Cell>
+      <Table.Cell color="frenchVanilla100" backgroundColor="blackPepper400">
+        blackPepper400
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
       <Table.Cell>Table (Header)</Table.Cell>
       <Table.Cell />
       <Table.Cell />
@@ -690,8 +702,8 @@ const MyComponent = StyledRadioButton('div')({
 
 **PR:** [#2620] https://github.com/Workday/canvas-kit/pull/2620
 
-Opacity which was applied to the whole container has been removed for the `transparent` variant and
-replaced by a translucent color. Opacity has changed from `0.85` to `0.84`.
+The `transparent` variant now uses `system.color.bg.translucent` which is a background color of
+black with an opacity of `0.84`.
 
 **There should be no developer impact and the visual changes are safe to accept**.
 
@@ -712,7 +724,11 @@ and disabled.
 
 ### Table
 
-#### **PR:** [#2600](https://github.com/Workday/canvas-kit/pull/2600)
+**PR:** [#2600](https://github.com/Workday/canvas-kit/pull/2600)
+
+<StatusIndicator variant="red" emphasis="low">
+  <StatusIndicator.Label>Breaking Change</StatusIndicator.Label>
+</StatusIndicator>
 
 We've promoted `Table` from [Preview](#preview) to [Main](#main). It replaces the `Table` that was
 previously in [Main](#main) (for reference, see
@@ -786,10 +802,20 @@ for how to implement new tables.
 
 ### `createStencil`
 
+**PR:** [#2697](https://github.com/Workday/canvas-kit/pull/2697)
+
+<StatusIndicator variant="red" emphasis="low">
+  <StatusIndicator.Label>Breaking Change</StatusIndicator.Label>
+</StatusIndicator>
+
 Stencils were updated to automatically add `box-sizing: border-box` to all stencils. If your stencil
 did not add this style already, it may change the way `width` works for the component. Our intent is
 to make all elements use border box layouts to make width calculations more predictable. This change
 may change the way your component works if you use the `width` style property.
+
+> **Note:** This is only a breaking change if you were using `createStencil` to apply margin and
+> padding without box-sizing. For reference, view box-sizing
+> [documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing).
 
 ## Glossary
 
