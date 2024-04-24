@@ -1,8 +1,9 @@
 import {Meta} from '@storybook/addon-docs';
 import {Table} from '@workday/canvas-kit-react/table';
-import {base, brand} from '@workday/canvas-tokens-web';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
 import {cssVar} from '@workday/canvas-kit-styling';
+import {Box} from '@workday/canvas-kit-react/layout';
 
 <Meta title="Guides/Upgrade Guides/v11.0" />
 
@@ -124,7 +125,6 @@ in [Preview](#preview) in context of a `FormField` instead.
 ```tsx
 //v10
 import {LabelText} from '@workday/canvas-kit-react/text';
-//...
 
 <form>
   <LabelText>Pizza</LabelText>
@@ -134,7 +134,6 @@ import {LabelText} from '@workday/canvas-kit-react/text';
 //v11
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
-//...
 
 <FormField>
   <FormField.Label>First Name</FormField.Label>
@@ -194,8 +193,8 @@ style the component:
 
 The following changes address visual discrepancies between our design spec files and code.
 
-Components affected: `Table`, `Checkbox`, `Radio`, `SecondaryButton`, `TertiaryButton`,
-`DeleteButton`, `TextInput` and `TextArea`.
+Components affected: `Table`, `Checkbox`, `Radio`, `SecondaryButton`, `StatusIndicator`, `Switch`,
+`TertiaryButton`, `DeleteButton`, `TextInput` and `TextArea`.
 
 <Table>
   <Table.Head>
@@ -214,8 +213,8 @@ Components affected: `Table`, `Checkbox`, `Radio`, `SecondaryButton`, `TertiaryB
       <Table.Cell />
       <Table.Cell>disabled</Table.Cell>
       <Table.Cell>borderColor</Table.Cell>
-      <Table.Cell backgroundColor="soap600">soap600</Table.Cell>
-      <Table.Cell color="frenchVanilla100" backgroundColor="licorice100">
+      <Table.Cell cs={{backgroundColor: cssVar(base.soap600)}}>soap600</Table.Cell>
+      <Table.Cell cs={{color: cssVar(base.frenchVanilla100), backgroundColor: cssVar(base.licorice100)}}>
         licorice100
       </Table.Cell>
     </Table.Row>
@@ -224,8 +223,8 @@ Components affected: `Table`, `Checkbox`, `Radio`, `SecondaryButton`, `TertiaryB
       <Table.Cell>Inverse</Table.Cell>
       <Table.Cell>disabled</Table.Cell>
       <Table.Cell>borderColor</Table.Cell>
-      <Table.Cell backgroundColor="soap600">soap600</Table.Cell>
-      <Table.Cell color="frenchVanilla100" backgroundColor="licorice100">
+      <Table.Cell cs={{backgroundColor: cssVar(base.soap600)}}>soap600</Table.Cell>
+      <Table.Cell cs={{color: cssVar(base.frenchVanilla100), backgroundColor: cssVar(base.licorice100)}}>
         licorice100
       </Table.Cell>
     </Table.Row>
@@ -234,8 +233,8 @@ Components affected: `Table`, `Checkbox`, `Radio`, `SecondaryButton`, `TertiaryB
       <Table.Cell />
       <Table.Cell>disabled</Table.Cell>
       <Table.Cell>backgroundColor</Table.Cell>
-      <Table.Cell backgroundColor={cssVar(brand.error.light)}>error.light</Table.Cell>
-      <Table.Cell backgroundColor="rgba(222,46,33,0.4)">error.base</Table.Cell>
+      <Table.Cell cs={{backgroundColor: cssVar(brand.error.light)}}>error.light</Table.Cell>
+      <Table.Cell cs={{backgroundColor: 'rgba(222,46,33,0.4)'}}>error.base</Table.Cell>
     </Table.Row>
     <Table.Row>
       <Table.Cell>DeleteButton</Table.Cell>
@@ -251,7 +250,7 @@ Components affected: `Table`, `Checkbox`, `Radio`, `SecondaryButton`, `TertiaryB
       <Table.Cell>disabled</Table.Cell>
       <Table.Cell>borderColor</Table.Cell>
       <Table.Cell backgroundColor="soap600">soap600</Table.Cell>
-      <Table.Cell color="frenchVanilla100" backgroundColor="licorice100">
+      <Table.Cell cs={{color: cssVar(base.frenchVanilla100), backgroundColor: cssVar(base.licorice100)}}>
         licorice100
       </Table.Cell>
     </Table.Row>
@@ -260,10 +259,10 @@ Components affected: `Table`, `Checkbox`, `Radio`, `SecondaryButton`, `TertiaryB
       <Table.Cell>Inverse</Table.Cell>
       <Table.Cell>focus</Table.Cell>
       <Table.Cell>border</Table.Cell>
-      <Table.Cell color="blackPepper400" backgroundColor="soap400">
+      <Table.Cell cs={{color: cssVar(base.blackPepper400), backgroundColor: cssVar(base.soap400)}}>
         soap400
       </Table.Cell>
-      <Table.Cell color="blackPepper400" backgroundColor="transparent">
+      <Table.Cell cs={{color: cssVar(base.blackPepper400), backgroundColor: 'transparent'}}>
         transparent
       </Table.Cell>
     </Table.Row>
@@ -272,10 +271,10 @@ Components affected: `Table`, `Checkbox`, `Radio`, `SecondaryButton`, `TertiaryB
       <Table.Cell>Inverse</Table.Cell>
       <Table.Cell>focus</Table.Cell>
       <Table.Cell>boxShdaow (Inner Color)</Table.Cell>
-      <Table.Cell color="frenchVanilla100" backgroundColor="blackPepper500">
+      <Table.Cell cs={{color: cssVar(base.frenchVanilla100), backgroundColor: cssVar(base.blackPepper500)}}>
         blackPepper500
       </Table.Cell>
-      <Table.Cell color="frenchVanilla100" backgroundColor="blackPepper400">
+      <Table.Cell cs={{color: cssVar(base.frenchVanilla100), backgroundColor: cssVar(base.blackPepper400)}}>
         blackPepper400
       </Table.Cell>
     </Table.Row>
@@ -284,10 +283,10 @@ Components affected: `Table`, `Checkbox`, `Radio`, `SecondaryButton`, `TertiaryB
       <Table.Cell>Inverse</Table.Cell>
       <Table.Cell>focus</Table.Cell>
       <Table.Cell>color</Table.Cell>
-      <Table.Cell color="frenchVanilla100" backgroundColor="blackPepper500">
+      <Table.Cell cs={{color: cssVar(base.frenchVanilla100), backgroundColor: cssVar(base.blackPepper500)}}>
         blackPepper500
       </Table.Cell>
-      <Table.Cell color="frenchVanilla100" backgroundColor="blackPepper400">
+      <Table.Cell cs={{color: cssVar(base.frenchVanilla100), backgroundColor: cssVar(base.blackPepper400)}}>
         blackPepper400
       </Table.Cell>
     </Table.Row>
@@ -296,23 +295,44 @@ Components affected: `Table`, `Checkbox`, `Radio`, `SecondaryButton`, `TertiaryB
       <Table.Cell>Inverse</Table.Cell>
       <Table.Cell>focus</Table.Cell>
       <Table.Cell>fill</Table.Cell>
-      <Table.Cell color="frenchVanilla100" backgroundColor="blackPepper500">
+      <Table.Cell cs={{color: cssVar(base.frenchVanilla100), backgroundColor: cssVar(base.blackPepper500)}}>
         blackPepper500
       </Table.Cell>
-      <Table.Cell color="frenchVanilla100" backgroundColor="blackPepper400">
+      <Table.Cell cs={{color: cssVar(base.frenchVanilla100), backgroundColor: cssVar(base.blackPepper400)}}>
         blackPepper400
       </Table.Cell>
     </Table.Row>
     <Table.Row>
       <Table.Cell>StatusIndicator (Preview)</Table.Cell>
       <Table.Cell>transparent</Table.Cell>
-      <Table.Cell>focus</Table.Cell>
-      <Table.Cell>fill</Table.Cell>
-      <Table.Cell color="frenchVanilla100" backgroundColor="blackPepper500">
-        blackPepper500
+      <Table.Cell></Table.Cell>
+      <Table.Cell>backgroundColor</Table.Cell>
+      <Table.Cell cs={{color: cssVar(base.frenchVanilla100), backgroundColor: cssVar(base.blackPepper500)}}>
+        blackPepper600
       </Table.Cell>
-      <Table.Cell color="frenchVanilla100" backgroundColor="blackPepper400">
-        blackPepper400
+      <Table.Cell cs={{backgroundColor: cssVar(system.color.bg.translucent), color: cssVar(base.frenchVanilla100)}}>
+        rgba(0,0,0,.84)
+      </Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>StatusIndicator (Preview)</Table.Cell>
+      <Table.Cell>transparent</Table.Cell>
+      <Table.Cell></Table.Cell>
+      <Table.Cell>opacity</Table.Cell>
+      <Table.Cell >0.85</Table.Cell>
+      <Table.Cell>
+        Removed
+      </Table.Cell>
+    </Table.Row>
+		<Table.Row>
+      <Table.Cell>Switch</Table.Cell>
+      <Table.Cell>Checked and Disabled</Table.Cell>
+      <Table.Cell></Table.Cell>
+      <Table.Cell>backgroundColor, opacity</Table.Cell>
+      <Table.Cell cs={{backgroundColor: cssVar(base.blueberry200)}}>blueberry200</Table.Cell>
+      <Table.Cell cs={{backgroundColor: 'rgba(8,117,225,.3)'}}>
+        backgroundColor: brand.primary.base
+				opacity: system.opacity.disabled
       </Table.Cell>
     </Table.Row>
     <Table.Row>
@@ -320,34 +340,34 @@ Components affected: `Table`, `Checkbox`, `Radio`, `SecondaryButton`, `TertiaryB
       <Table.Cell />
       <Table.Cell />
       <Table.Cell>borderColor</Table.Cell>
-      <Table.Cell backgroundColor="soap400">soap400</Table.Cell>
-      <Table.Cell backgroundColor="soap500">soap500</Table.Cell>
+      <Table.Cell cs={{backgroundColor: cssVar(base.soap400)}}>soap400</Table.Cell>
+      <Table.Cell cs={{backgroundColor: cssVar(base.soap500)}}>soap500</Table.Cell>
     </Table.Row>
     <Table.Row>
       <Table.Cell>TertiaryButton</Table.Cell>
       <Table.Cell />
       <Table.Cell>hover</Table.Cell>
       <Table.Cell>backgroundColor</Table.Cell>
-      <Table.Cell backgroundColor="soap200">soap200</Table.Cell>
-      <Table.Cell backgroundColor="soap300">soap300</Table.Cell>
+      <Table.Cell cs={{backgroundColor: cssVar(base.soap200)}}>soap200</Table.Cell>
+      <Table.Cell cs={{backgroundColor: cssVar(base.soap300)}}>soap300</Table.Cell>
     </Table.Row>
     <Table.Row>
       <Table.Cell>TertiaryButton</Table.Cell>
       <Table.Cell />
       <Table.Cell>active</Table.Cell>
       <Table.Cell>backgroundColor</Table.Cell>
-      <Table.Cell backgroundColor="soap300">soap300</Table.Cell>
-      <Table.Cell backgroundColor="soap400">soap400</Table.Cell>
+      <Table.Cell cs={{backgroundColor: cssVar(base.soap300)}}>soap300</Table.Cell>
+      <Table.Cell cs={{backgroundColor: cssVar(base.soap400)}}>soap400</Table.Cell>
     </Table.Row>
     <Table.Row>
       <Table.Cell>TertiaryButton</Table.Cell>
       <Table.Cell />
       <Table.Cell>active</Table.Cell>
       <Table.Cell>color</Table.Cell>
-      <Table.Cell color="frenchVanilla100" backgroundColor={cssVar(brand.primary.dark)}>
+      <Table.Cell cs={{color: cssVar(base.frenchVanilla100), backgroundColor: cssVar(brand.primary.dark)}}>
         primary.dark
       </Table.Cell>
-      <Table.Cell color="frenchVanilla100" backgroundColor={cssVar(brand.primary.darkest)}>
+      <Table.Cell cs={{color: cssVar(base.frenchVanilla100), backgroundColor: cssVar(brand.primary.darkest)}}>
         primary.darkest
       </Table.Cell>
     </Table.Row>
@@ -357,17 +377,17 @@ Components affected: `Table`, `Checkbox`, `Radio`, `SecondaryButton`, `TertiaryB
       <Table.Cell>disabled</Table.Cell>
       <Table.Cell>borderColor</Table.Cell>
       <Table.Cell backgroundColor="frenchVanilla100">frenchVanilla100</Table.Cell>
-      <Table.Cell backgroundColor="transparent">transparent</Table.Cell>
+      <Table.Cell cs={{backgroundColor: 'transparent'}}>transparent</Table.Cell>
     </Table.Row>
     <Table.Row>
       <Table.Cell>TertiaryButton (Icon Only)</Table.Cell>
       <Table.Cell />
       <Table.Cell>focus</Table.Cell>
       <Table.Cell>fill</Table.Cell>
-      <Table.Cell color="frenchVanilla100" backgroundColor="blackPepper500">
+      <Table.Cell cs={{color: cssVar(base.frenchVanilla100), backgroundColor: cssVar(base.blackPepper500)}}>
         blackPepper500
       </Table.Cell>
-      <Table.Cell color="frenchVanilla100" backgroundColor="blackPepper400">
+      <Table.Cell cs={{color: cssVar(base.frenchVanilla100), backgroundColor: cssVar(base.blackPepper400)}}>
         blackPepper400
       </Table.Cell>
     </Table.Row>
@@ -376,10 +396,10 @@ Components affected: `Table`, `Checkbox`, `Radio`, `SecondaryButton`, `TertiaryB
       <Table.Cell />
       <Table.Cell>hover</Table.Cell>
       <Table.Cell>fill</Table.Cell>
-      <Table.Cell color="frenchVanilla100" backgroundColor="blackPepper500">
+      <Table.Cell cs={{color: cssVar(base.frenchVanilla100), backgroundColor: cssVar(base.blackPepper500)}}>
         blackPepper500
       </Table.Cell>
-      <Table.Cell color="frenchVanilla100" backgroundColor="blackPepper400">
+      <Table.Cell cs={{color: cssVar(base.frenchVanilla100), backgroundColor: cssVar(base.blackPepper400)}}>
         blackPepper400
       </Table.Cell>
     </Table.Row>
@@ -389,7 +409,7 @@ Components affected: `Table`, `Checkbox`, `Radio`, `SecondaryButton`, `TertiaryB
       <Table.Cell>disabled</Table.Cell>
       <Table.Cell>borderColor</Table.Cell>
       <Table.Cell backgroundColor="soap600">soap600</Table.Cell>
-      <Table.Cell color="frenchVanilla100" backgroundColor="licorice100">
+      <Table.Cell cs={{color: cssVar(base.frenchVanilla100), backgroundColor: cssVar(base.licorice100)}}>
         licorice100
       </Table.Cell>
     </Table.Row>
@@ -398,11 +418,12 @@ Components affected: `Table`, `Checkbox`, `Radio`, `SecondaryButton`, `TertiaryB
       <Table.Cell />
       <Table.Cell>disabled</Table.Cell>
       <Table.Cell>borderColor</Table.Cell>
-      <Table.Cell backgroundColor="soap600">soap600</Table.Cell>
-      <Table.Cell color="frenchVanilla100" backgroundColor="licorice100">
+      <Table.Cell cs={{backgroundColor: cssVar(base.soap600)}}>soap600</Table.Cell>
+      <Table.Cell cs={{color: cssVar(base.frenchVanilla100), backgroundColor: cssVar(base.licorice100)}}>
         licorice100
       </Table.Cell>
     </Table.Row>
+
   </Table.Body>
 </Table>
 
@@ -700,7 +721,7 @@ const MyComponent = StyledRadioButton('div')({
   <StatusIndicator.Label>Visual Breaking Change</StatusIndicator.Label>
 </StatusIndicator>
 
-**PR:** [#2620] https://github.com/Workday/canvas-kit/pull/2620
+**PR:** [#2620](https://github.com/Workday/canvas-kit/pull/2620)
 
 The `transparent` variant now uses `system.color.bg.translucent` which is a background color of
 black with an opacity of `0.84`.
@@ -717,7 +738,7 @@ black with an opacity of `0.84`.
 
 Switch no longer uses `blueberry200` which was part of our theme object
 `theme.palette.primary.light` for the background color to indicate a Switch that is checked and
-disabled. Now it uses `blueberry400` or `brand.base.primary` with an opacity of `0.4` for checked
+disabled. Now, it uses `blueberry400` or `brand.base.primary` with an opacity of `0.4` for checked
 and disabled.
 
 **There should be no developer impact and the visual changes are safe to accept**.
