@@ -25,6 +25,7 @@ any questions.
 - [Component Updates](#component-updates)
   - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
   - [Buttons](#buttons)
+  - [CountBadge](#count-badge)
   - [Form Field Preview](#form-field-preview)
   - [Icons](#icons)
   - [Status Indicator (Preview)](#status-indicator-preview)
@@ -193,8 +194,18 @@ style the component:
 
 The following changes address visual discrepancies between our design spec files and code.
 
-Components affected: `Table`, `Checkbox`, `Radio`, `SecondaryButton`, `StatusIndicator`, `Switch`,
-`TertiaryButton`, `DeleteButton`, `TextInput` and `TextArea`.
+Components affected:
+
+- `Checkbox`
+- `DeleteButton`
+- `SecondaryButton`
+- `StatusIndicator`
+- `Switch`
+- `Table`
+- `TertiaryButton`
+- `TextArea`
+- `TextInput`
+- `Radio`
 
 <Table>
   <Table.Head>
@@ -448,18 +459,38 @@ Components affected: `Table`, `Checkbox`, `Radio`, `SecondaryButton`, `StatusInd
 [#2620](https://github.com/Workday/canvas-kit/pull/2620),
 [#2583](https://github.com/Workday/canvas-kit/pull/2583),
 [#2567](https://github.com/Workday/canvas-kit/pull/2567),
-[#2455](https://github.com/Workday/canvas-kit/pull/2455)
+[#2455](https://github.com/Workday/canvas-kit/pull/2455),
+[#2709](https://github.com/Workday/canvas-kit/pull/2709)
 
 Several components have been refactored to use new
 [Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
 [styling API](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
 The React interface **has not changed**, but CSS variables are now used for dynamic properties.
 
-The following components are affected: `PrimaryButton`, `SecondaryButton`,
-`TertiaryButton`,`DeleteButton`, `Card`, `CheckBox`, `Combobox`, `CountBadge`,
-`FormField (Preview)`, `Svg`, `SystemIcon`, `SystemIconCircle`, `AccentIcon`, `AppletIcon`,
-`Graphic`, `LoadingDots`, `Radio (Preview)`, `Select`, `StatusIndicator`, `Switch`, `Table` and
-`Text`
+The following components are affected:
+
+- `AccentIcon`
+- `AppletIcon`
+- `Card`
+- `CheckBox`
+- `Combobox`
+- `CountBadge`
+- `FormField (Preview)`
+- `DeleteButton`
+- `Graphic`
+- `LoadingDots`
+- `PrimaryButton`
+- `SecondaryButton`
+- `Radio (Preview)`
+- `Select`
+- `StatusIndicator`
+- `Svg`
+- `Switch`
+- `SystemIconCircle`
+- `SystemIcon`
+- `Table`
+- `TertiaryButton`
+- `Text`
 
 > **Note:** These components also support our new `cs` prop for styling. Learn more about styling
 > with `cs` in our
@@ -477,6 +508,16 @@ The `border` color for `SecondaryButton` on the `focus` state is now `transparen
 small visual difference in visual tests.
 
 **There should be no developer impact and the visual changes are safe to accept**.
+
+### Count Badge
+
+<StatusIndicator variant="red" emphasis="low">
+  <StatusIndicator.Label>Breaking Change</StatusIndicator.Label>
+</StatusIndicator>
+
+**PR:** [#2709](https://github.com/Workday/canvas-kit/pull/2709)
+
+- `default` has been removed from the `variant` type and is now the default for styles.
 
 ### Form Field (Preview)
 
@@ -646,8 +687,9 @@ used in icons. It was replaced by `Svg` and icon stencils extend `svgStencil`.
 
 #### SystemIcon
 
-- `SystemIconStyles` prop has been deprecated and will be merged with `SystemIconProps` in a future
-  version.
+- `SystemIconStyles` has been deprecated and will be removed in a future version as a part of
+  implementation of stencils and new tokens. Consider using systemIconStencil to get styles or class
+  name.
 
 - `accentHover` is deprecated and will be removed in a future version. Please use the following when
   overriding styles:
