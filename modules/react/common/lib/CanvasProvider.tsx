@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Theme, ThemeProvider, CacheProvider} from '@emotion/react';
 import {InputProvider} from './InputProvider';
 import {defaultCanvasTheme, PartialEmotionCanvasTheme, useTheme} from './theming';
-import {brand} from '@workday/canvas-tokens-web';
+import {brand, base} from '@workday/canvas-tokens-web';
 import {createStyles, getCache} from '@workday/canvas-kit-styling';
 
 export interface CanvasProviderProps {
@@ -11,41 +11,41 @@ export interface CanvasProviderProps {
 
 // copied from brand/_variables.css
 const defaultBranding = createStyles({
-  '--cnvs-brand-error-darkest': 'rgba(128,22,14,1)',
-  '--cnvs-brand-common-alert-inner': 'var(--cnvs-base-palette-cantaloupe-400)',
-  '--cnvs-brand-common-error-inner': 'var(--cnvs-base-palette-cinnamon-500)',
-  '--cnvs-brand-common-focus-outline': 'var(--cnvs-base-palette-blueberry-400)',
-  '--cnvs-brand-neutral-accent': 'var(--cnvs-base-palette-french-vanilla-100)',
-  '--cnvs-brand-neutral-darkest': 'var(--cnvs-base-palette-licorice-400)',
-  '--cnvs-brand-neutral-dark': 'var(--cnvs-base-palette-licorice-300)',
-  '--cnvs-brand-neutral-base': 'var(--cnvs-base-palette-soap-600)',
-  '--cnvs-brand-neutral-light': 'var(--cnvs-base-palette-soap-300)',
-  '--cnvs-brand-neutral-lightest': 'var(--cnvs-base-palette-soap-200)',
-  '--cnvs-brand-success-accent': 'var(--cnvs-base-palette-french-vanilla-100)',
-  '--cnvs-brand-success-darkest': 'var(--cnvs-base-palette-green-apple-600)',
-  '--cnvs-brand-success-dark': 'var(--cnvs-base-palette-green-apple-500)',
-  '--cnvs-brand-success-base': 'var(--cnvs-base-palette-green-apple-400)',
-  '--cnvs-brand-success-light': 'var(--cnvs-base-palette-green-apple-300)',
-  '--cnvs-brand-success-lightest': 'var(--cnvs-base-palette-green-apple-100)',
-  '--cnvs-brand-error-accent': 'var(--cnvs-base-palette-french-vanilla-100)',
-  '--cnvs-brand-error-dark': 'var(--cnvs-base-palette-cinnamon-600)',
-  '--cnvs-brand-error-base': 'var(--cnvs-base-palette-cinnamon-500)',
-  '--cnvs-brand-error-light': 'var(--cnvs-base-palette-cinnamon-200)',
-  '--cnvs-brand-error-lightest': 'var(--cnvs-base-palette-cinnamon-100)',
-  '--cnvs-brand-alert-accent': 'var(--cnvs-base-palette-french-vanilla-100)',
-  '--cnvs-brand-alert-darkest': 'var(--cnvs-base-palette-cantaloupe-600)',
-  '--cnvs-brand-alert-dark': 'var(--cnvs-base-palette-cantaloupe-500)',
-  '--cnvs-brand-alert-base': 'var(--cnvs-base-palette-cantaloupe-400)',
-  '--cnvs-brand-alert-light': 'var(--cnvs-base-palette-cantaloupe-200)',
-  '--cnvs-brand-alert-lightest': 'var(--cnvs-base-palette-cantaloupe-100)',
-  '--cnvs-brand-primary-accent': 'var(--cnvs-base-palette-french-vanilla-100)',
-  '--cnvs-brand-primary-darkest': 'var(--cnvs-base-palette-blueberry-600)',
-  '--cnvs-brand-primary-dark': 'var(--cnvs-base-palette-blueberry-500)',
-  '--cnvs-brand-primary-base': 'var(--cnvs-base-palette-blueberry-400)',
-  '--cnvs-brand-primary-light': 'var(--cnvs-base-palette-blueberry-200)',
-  '--cnvs-brand-primary-lightest': 'var(--cnvs-base-palette-blueberry-100)',
-  '--cnvs-brand-gradient-primary':
-    'linear-gradient(90deg, var(--cnvs-brand-primary-base) 0%, var(--cnvs-brand-primary-dark) 100%)',
+  [brand.error.darkest]: 'rgba(128,22,14,1)',
+  [brand.common.alertInner]: base.cantaloupe400,
+  [brand.common.errorInner]: base.cinnamon500,
+  [brand.common.focusOutline]: base.blueberry400,
+  [brand.neutral.accent]: base.frenchVanilla100,
+  [brand.neutral.darkest]: base.licorice400,
+  [brand.neutral.dark]: base.licorice300,
+  [brand.neutral.base]: base.soap600,
+  [brand.neutral.light]: base.soap300,
+  [brand.neutral.lightest]: base.soap200,
+  [brand.success.accent]: base.frenchVanilla100,
+  [brand.success.darkest]: base.greenApple600,
+  [brand.success.dark]: base.greenApple500,
+  [brand.success.base]: base.greenApple400,
+  [brand.success.light]: base.greenApple300,
+  [brand.success.lightest]: base.greenApple100,
+  [brand.error.accent]: base.frenchVanilla100,
+  [brand.error.dark]: base.cinnamon600,
+  [brand.error.base]: base.cinnamon500,
+  [brand.error.light]: base.cinnamon200,
+  [brand.error.lightest]: base.cinnamon100,
+  [brand.alert.accent]: base.frenchVanilla100,
+  [brand.alert.darkest]: base.cantaloupe600,
+  [brand.alert.dark]: base.cantaloupe500,
+  [brand.alert.base]: base.cantaloupe400,
+  [brand.alert.light]: base.cantaloupe200,
+  [brand.alert.lightest]: base.cantaloupe100,
+  [brand.primary.accent]: base.frenchVanilla100,
+  [brand.primary.darkest]: base.blueberry600,
+  [brand.primary.dark]: base.blueberry500,
+  [brand.primary.base]: base.blueberry400,
+  [brand.primary.light]: base.blueberry200,
+  [brand.primary.lightest]: base.blueberry100,
+  [brand.gradient
+    .primary]: `linear-gradient(90deg, ${brand.primary.base} 0%, ${brand.primary.dark} 100%)`,
 });
 
 const mappedKeys = {
