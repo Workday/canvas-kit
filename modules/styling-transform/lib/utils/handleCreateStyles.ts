@@ -1,14 +1,14 @@
 import ts from 'typescript';
 
 import {parseObjectToStaticValue, parseStyleObjFromType} from './parseObjectToStaticValue';
-import {compileCSS, createStyleObjectNode, serializeStyles} from './createStyleObjectNode';
+import {createStyleObjectNode, serializeStyles} from './createStyleObjectNode';
 import {NestedStyleObject, NodeTransformer, TransformerContext} from './types';
 import {isImportedFromStyling} from './isImportedFromStyling';
 import {getVarName} from './getVarName';
 import {slugify} from '@workday/canvas-kit-styling';
 
 export const handleCreateStyles: NodeTransformer = (node, context) => {
-  const {checker, prefix, getFileName} = context;
+  const {checker, prefix} = context;
   /**
    * Check if the node is a call expression that looks like:
    *
@@ -54,12 +54,11 @@ export const handleCreateStyles: NodeTransformer = (node, context) => {
       .replace('-true', '')}`;
 
     const newArguments = [...node.arguments].map(arg => {
-      const fileName = getFileName(node.expression.getSourceFile().fileName);
       // An `ObjectLiteralExpression` is an object like `{foo:'bar'}`:
       // https://ts-ast-viewer.com/#code/MYewdgzgLgBFCmBbADjAvDA3gKBjAZiCAFwwDkARgIYBOZ2AvkA
       if (ts.isObjectLiteralExpression(arg)) {
         const styleObj = parseObjectToStaticValue(arg, context);
-        return createStyleReplacementNode(styleObj, cssClassName, fileName, context);
+        return createStyleReplacementNode(node, styleObj, cssClassName, context);
       }
       // An Identifier is a variable. It could come from anywhere - imports, earlier
       // assignments, etc. The easiest thing to do is to ask the TypeScript type checker what
@@ -75,7 +74,7 @@ export const handleCreateStyles: NodeTransformer = (node, context) => {
         // The type must be a object
         const styleObj = parseStyleObjFromType(type, context);
 
-        return createStyleReplacementNode(styleObj, cssClassName, fileName, context);
+        return createStyleReplacementNode(node, styleObj, cssClassName, context);
       }
       return arg;
     });
@@ -87,15 +86,12 @@ export const handleCreateStyles: NodeTransformer = (node, context) => {
 };
 
 function createStyleReplacementNode(
+  node: ts.Node,
   styleObj: NestedStyleObject,
   className: string,
-  fileName: string,
-  {styles}: TransformerContext
+  context: TransformerContext
 ) {
-  const serialized = serializeStyles(styleObj);
-  const styleOutput = compileCSS(`.${className}{${serialized.styles}}`);
-  styles[fileName] = styles[fileName] || [];
-  styles[fileName].push(styleOutput);
+  const serialized = serializeStyles(node, styleObj, `.${className}{%s}`, context);
 
   return createStyleObjectNode(serialized.styles, serialized.name);
 }
