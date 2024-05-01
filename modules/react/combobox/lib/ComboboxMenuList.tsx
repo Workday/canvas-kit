@@ -1,11 +1,12 @@
 import React from 'react';
 
-import {commonColors} from '@workday/canvas-kit-react/tokens';
 import {createElemPropsHook, createSubcomponent} from '@workday/canvas-kit-react/common';
-import {useMenuModel} from '@workday/canvas-kit-react/menu';
+import {useMenuModel, menuListStencil} from '@workday/canvas-kit-react/menu';
 import {ListBox, ListBoxProps} from '@workday/canvas-kit-react/collection';
+import {system} from '@workday/canvas-tokens-web';
 
 import {useComboboxModel} from './hooks/useComboboxModel';
+import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 
 export interface ComboboxMenuListProps<T = any> extends ListBoxProps<T> {}
 
@@ -19,8 +20,12 @@ export const useComboboxMenuList = createElemPropsHook(useMenuModel)(model => {
     role: 'listbox',
     'aria-labelledby': model.state.id,
     id: `${model.state.id}-list`,
-    flexDirection: model.state.orientation === 'vertical' ? 'column' : 'row',
   } as const;
+});
+
+const comboboxMenuListStencil = createStencil({
+  base: {},
+  extends: menuListStencil,
 });
 
 export const ComboboxMenuList = createSubcomponent('ul')({
@@ -31,13 +36,8 @@ export const ComboboxMenuList = createSubcomponent('ul')({
     <ListBox
       as={Element}
       model={model}
-      background={commonColors.background}
-      borderRadius="zero"
-      padding="zero"
-      marginY="xxs"
-      gap="zero"
-      overflowY="auto"
-      {...elemProps}
+      marginY={cssVar(system.space.x2)}
+      {...handleCsProp(elemProps, comboboxMenuListStencil({orientation: model.state.orientation}))}
     >
       {children}
     </ListBox>

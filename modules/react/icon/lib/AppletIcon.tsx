@@ -2,9 +2,14 @@ import * as React from 'react';
 import {colors, BrandingColor, CanvasColor} from '@workday/canvas-kit-react/tokens';
 import {CanvasAppletIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
-import {Icon, IconProps} from './Icon';
+import {Svg, SvgProps, svgStencil} from './Svg';
 import {createComponent} from '@workday/canvas-kit-react/common';
+import {handleCsProp, createStencil, px2rem, cssVar} from '@workday/canvas-kit-styling';
+import {base} from '@workday/canvas-tokens-web';
 
+/**
+ * @deprecated Interface `AppletIconStyles` will be removed in a future version. All props will be moved inside `AppletIconProps`.
+ */
 export interface AppletIconStyles {
   /**
    * The icon color hue. Must use a member of the `AppletIcon.Colors` static enum.
@@ -13,6 +18,9 @@ export interface AppletIconStyles {
   color?: BrandingColor;
 }
 
+/**
+ * @deprecated `appletIconStyles` will be removed in in a future version as a part of implementation of stencils and new tokens. Consider to use `appletIconStencil` instead.
+ */
 export const appletIconStyles = ({
   color = BrandingColor.Blueberry,
 }: AppletIconStyles): CSSObject => {
@@ -55,7 +63,7 @@ export const appletIconStyles = ({
   };
 };
 
-export interface AppletIconProps extends AppletIconStyles, Pick<IconProps, 'shouldMirror'> {
+export interface AppletIconProps extends AppletIconStyles, Pick<SvgProps, 'shouldMirror' | 'cs'> {
   /**
    * The icon to display from `@workday/canvas-applet-icons-web`.
    */
@@ -67,23 +75,56 @@ export interface AppletIconProps extends AppletIconStyles, Pick<IconProps, 'shou
   size?: number;
 }
 
+export const appletIconStencil = createStencil({
+  extends: svgStencil,
+  vars: {
+    color200: '',
+    color300: '',
+    color400: '',
+    color500: '',
+  },
+  base: ({color200, color300, color400, color500, size}) => ({
+    [size]: px2rem(92),
+    '& .color-100': {
+      fill: base.frenchVanilla100,
+    },
+    '& .color-200': {
+      fill: cssVar(color200, base.blueberry200),
+    },
+    '& .color-300': {
+      fill: cssVar(color300, base.blueberry300),
+    },
+    '& .color-400': {
+      fill: cssVar(color400, base.blueberry400),
+    },
+    '& .color-400-alpha-20': {
+      fill: cssVar(color400, base.blueberry400),
+    },
+    '& .color-500': {
+      fill: cssVar(color500, base.blueberry400),
+    },
+  }),
+});
+
 export const AppletIcon = createComponent('span')({
   displayName: 'AppletIcon',
-  Component: (
-    {size = 92, icon, color, shouldMirror, ...elemProps}: AppletIconProps,
-    ref,
-    Element
-  ) => {
+  Component: ({size, icon, color, ...elemProps}: AppletIconProps, ref, Element) => {
+    const colors = color && {
+      color200: base[`${color}200` as const],
+      color300: base[`${color}300` as const],
+      color400: base[`${color}400` as const],
+      color500: base[`${color}500` as const],
+    };
+
     return (
-      <Icon
+      <Svg
         src={icon}
         type={CanvasIconTypes.Applet}
-        styles={appletIconStyles({color})}
         as={Element}
-        size={size}
         ref={ref}
-        shouldMirror={shouldMirror}
-        {...elemProps}
+        {...handleCsProp(elemProps, [
+          appletIconStencil({...colors, size: size ? px2rem(size) : undefined}),
+        ])}
       />
     );
   },

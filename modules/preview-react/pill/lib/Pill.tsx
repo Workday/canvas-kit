@@ -1,7 +1,7 @@
 import React from 'react';
 import {CSSObject} from '@emotion/react';
 
-import {BaseButton, buttonVars} from '@workday/canvas-kit-react/button';
+import {BaseButton, buttonColorPropVars} from '@workday/canvas-kit-react/button';
 import {
   createContainer,
   focusRing,
@@ -11,7 +11,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {BoxProps, boxStyleFn, Flex} from '@workday/canvas-kit-react/layout';
 import {borderRadius, colors, space, type} from '@workday/canvas-kit-react/tokens';
-import {handleCsProp, CSProps} from '@workday/canvas-kit-styling';
+import {handleCsProp, CSProps, px2rem} from '@workday/canvas-kit-styling';
 
 import {usePillModel} from './usePillModel';
 
@@ -20,6 +20,7 @@ import {PillIconButton} from './PillIconButton';
 import {PillCount} from './PillCount';
 import {PillAvatar} from './PillAvatar';
 import {PillLabel} from './PillLabel';
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
 export interface PillProps extends BoxProps {
   /**
@@ -50,14 +51,6 @@ const pillBaseStyles: CSSObject = {
 const StyledBasePill = styled(BaseButton.as('button'))<StyledType & PillProps>(
   {
     ...pillBaseStyles,
-
-    '&:focus': {
-      'span[data-count="ck-pill-count"]': {
-        borderTop: `1px solid ${colors.blueberry400}`,
-        borderBottom: `1px solid ${colors.blueberry400}`,
-        borderRight: `1px solid ${colors.blueberry400}`,
-      },
-    },
     '&:active, &:active:hover, &:active:focus': {
       'span[data-count="ck-pill-count"]': {
         backgroundColor: colors.soap600,
@@ -72,36 +65,59 @@ const StyledBasePill = styled(BaseButton.as('button'))<StyledType & PillProps>(
         },
       },
     }),
-    // Default Styles
-    [buttonVars.default.background]: colors.soap300,
-    [buttonVars.default.border]: colors.licorice200,
-    [buttonVars.default.label]: colors.blackPepper400,
-    [buttonVars.default.icon]: colors.licorice200,
-    // Hover Styles
-    [buttonVars.hover.background]: colors.soap400,
-    [buttonVars.hover.border]: colors.licorice400,
-    [buttonVars.hover.label]: colors.blackPepper400,
-    [buttonVars.hover.icon]: colors.licorice500,
-    // Focus Styles
-    [buttonVars.focus.background]: colors.soap300,
-    [buttonVars.focus.border]: colors.blueberry400,
-    [buttonVars.focus.label]: colors.blackPepper400,
-    [buttonVars.focus.icon]: colors.licorice500,
-    // Active Styles
-    [buttonVars.active.background]: colors.soap500,
-    [buttonVars.active.border]: colors.licorice500,
-    [buttonVars.active.label]: colors.blackPepper400,
-    [buttonVars.active.icon]: colors.licorice500,
-    // Disabled Styles
-    [buttonVars.disabled.background]: colors.soap100,
-    [buttonVars.disabled.border]: colors.licorice100,
-    [buttonVars.disabled.label]: colors.licorice100,
-    [buttonVars.disabled.opacity]: '1',
-    [buttonVars.disabled.icon]: colors.licorice100,
+    [buttonColorPropVars.default.background]: colors.soap300,
+    [buttonColorPropVars.default.border]: colors.licorice200,
+    [buttonColorPropVars.default.label]: colors.blackPepper400,
+    [systemIconStencil.vars.color]: colors.licorice200,
+    button: {
+      [systemIconStencil.vars.color]: colors.licorice200,
+    },
+    '&:focus-visible, &.focus': {
+      [buttonColorPropVars.focus.background]: colors.soap300,
+      [buttonColorPropVars.focus.border]: colors.blueberry400,
+      [buttonColorPropVars.focus.label]: colors.blackPepper400,
+      [systemIconStencil.vars.color]: colors.licorice500,
+      button: {
+        [systemIconStencil.vars.color]: colors.licorice500,
+      },
+      'span[data-count="ck-pill-count"]': {
+        borderTop: `${px2rem(1)} solid ${colors.blueberry400}`,
+        borderBottom: `${px2rem(1)} solid ${colors.blueberry400}`,
+        borderRight: `${px2rem(1)} solid ${colors.blueberry400}`,
+      },
+    },
+    '&:hover, &.hover': {
+      [buttonColorPropVars.hover.background]: colors.soap400,
+      [buttonColorPropVars.hover.border]: colors.licorice400,
+      [buttonColorPropVars.hover.label]: colors.blackPepper400,
+      [systemIconStencil.vars.color]: colors.licorice500,
+      button: {
+        [systemIconStencil.vars.color]: colors.licorice500,
+      },
+    },
+    '&:active, &.active': {
+      [buttonColorPropVars.active.background]: colors.soap500,
+      [buttonColorPropVars.active.border]: colors.licorice500,
+      [buttonColorPropVars.active.label]: colors.blackPepper400,
+      [systemIconStencil.vars.color]: colors.licorice500,
+      button: {
+        [systemIconStencil.vars.color]: colors.licorice500,
+      },
+    },
+    '&:disabled, &.disabled': {
+      [buttonColorPropVars.disabled.background]: colors.soap100,
+      [buttonColorPropVars.disabled.border]: colors.licorice100,
+      [buttonColorPropVars.disabled.label]: colors.licorice100,
+      [buttonColorPropVars.disabled.opacity]: '1',
+      [systemIconStencil.vars.color]: colors.licorice100,
+      button: {
+        [systemIconStencil.vars.color]: colors.licorice100,
+      },
+    },
   },
 
   ({variant}) => ({
-    '&:focus, &:focus-visible': {
+    '&:focus-visible, &:focus': {
       borderColor: variant === 'removable' ? undefined : colors.blueberry400,
       ...focusRing({
         width: 0,
@@ -116,25 +132,33 @@ const StyledBasePill = styled(BaseButton.as('button'))<StyledType & PillProps>(
 );
 
 const StyledNonInteractivePill = styled(StyledBasePill)<StyledType & CSProps>({
-  [buttonVars.default.background]: colors.soap300,
-  [buttonVars.default.border]: colors.licorice200,
-  [buttonVars.default.label]: colors.blackPepper400,
+  [buttonColorPropVars.default.background]: colors.soap300,
+  [buttonColorPropVars.default.border]: colors.licorice200,
+  [buttonColorPropVars.default.label]: colors.blackPepper400,
 
-  [buttonVars.hover.background]: colors.soap300,
-  [buttonVars.hover.border]: colors.licorice200,
-  [buttonVars.hover.label]: colors.blackPepper400,
+  '&:focus-visible, &.focus': {
+    [buttonColorPropVars.focus.background]: colors.soap300,
+    [buttonColorPropVars.focus.border]: colors.licorice200,
+    [buttonColorPropVars.focus.label]: colors.blackPepper400,
+  },
 
-  [buttonVars.focus.background]: colors.soap300,
-  [buttonVars.focus.border]: colors.licorice200,
-  [buttonVars.focus.label]: colors.blackPepper400,
+  '&:hover, &.hover': {
+    [buttonColorPropVars.hover.background]: colors.soap300,
+    [buttonColorPropVars.hover.border]: colors.licorice200,
+    [buttonColorPropVars.hover.label]: colors.blackPepper400,
+  },
 
-  [buttonVars.active.background]: colors.soap500,
-  [buttonVars.active.border]: colors.licorice500,
-  [buttonVars.active.label]: colors.blackPepper400,
+  '&:active, &.active': {
+    [buttonColorPropVars.active.background]: colors.soap500,
+    [buttonColorPropVars.active.border]: colors.licorice500,
+    [buttonColorPropVars.active.label]: colors.blackPepper400,
+  },
 
-  [buttonVars.disabled.background]: colors.soap100,
-  [buttonVars.disabled.label]: colors.licorice100,
-  [buttonVars.disabled.border]: colors.licorice100,
+  '&:disabled, &.disabled': {
+    [buttonColorPropVars.disabled.background]: colors.soap100,
+    [buttonColorPropVars.disabled.label]: colors.licorice100,
+    [buttonColorPropVars.disabled.border]: colors.licorice100,
+  },
   cursor: 'default',
   overflow: 'revert', // override BaseButton overflow styles so the click target exists outside the pill for removable
   position: 'relative',
@@ -148,12 +172,12 @@ const StyledNonInteractivePill = styled(StyledBasePill)<StyledType & CSProps>({
 });
 
 const StyledReadOnlyPill = styled(StyledNonInteractivePill)<StyledType>({
-  [buttonVars.default.background]: 'transparent',
-  [buttonVars.hover.background]: 'transparent',
-  [buttonVars.focus.background]: 'transparent',
-  [buttonVars.active.background]: 'transparent',
-  [buttonVars.disabled.background]: 'transparent',
-  border: `1px solid ${colors.licorice200}`,
+  [buttonColorPropVars.default.background]: 'transparent',
+  [buttonColorPropVars.hover.background]: 'transparent',
+  [buttonColorPropVars.focus.background]: 'transparent',
+  [buttonColorPropVars.active.background]: 'transparent',
+  [buttonColorPropVars.disabled.background]: 'transparent',
+  border: `${px2rem(1)} solid ${colors.licorice200}`,
 });
 
 /**

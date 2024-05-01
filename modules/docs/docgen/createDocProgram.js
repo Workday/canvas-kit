@@ -117,8 +117,9 @@ function createDocProgram() {
   let program = ts.createProgram(files, tsConfig);
   let parser = new DocParser(program, plugins);
 
-  return {
+  const Doc = {
     parser,
+    program,
     update() {
       files = getFiles(path, config);
       // Update the program to force Typescript to reprocess our changed files. I
@@ -126,12 +127,14 @@ function createDocProgram() {
       // a way to tell Typescript to incrementally update only the changed file.
       // Typescript only supports "incremental" via building and type-checking
       // where I only want a program - I don't need to type check or emit...
-      program = ts.createProgram(files, tsConfig, undefined, program);
-      parser = new DocParser(program, plugins);
+      Doc.program = ts.createProgram(files, tsConfig, undefined, program);
+      Doc.parser = new DocParser(program, plugins);
 
-      return parser;
+      return Doc.parser;
     },
   };
+
+  return Doc;
 }
 
 module.exports.createDocProgram = createDocProgram;

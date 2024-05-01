@@ -1,11 +1,11 @@
 import React from 'react';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
-import {FormField} from '@workday/canvas-kit-react/form-field';
-import {styled} from '@workday/canvas-kit-react/common';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {styled, StyledType} from '@workday/canvas-kit-react/common';
 import {colors} from '@workday/canvas-kit-react/tokens';
 
-const StyledFormField = styled(FormField)({
+const StyledFormField = styled(FormField)<StyledType>({
   legend: {
     color: colors.frenchVanilla100,
   },
@@ -23,12 +23,9 @@ export const Inverse = () => {
 
   return (
     <Box backgroundColor="blueberry400" padding="s">
-      <StyledFormField
-        label="Choose Your Pizza Crust"
-        labelPosition={FormField.LabelPosition.Top}
-        useFieldset={true}
-      >
-        <RadioGroup name="crust-inverse" onChange={handleChange} value={value}>
+      <StyledFormField as="fieldset">
+        <FormField.Label as="legend">Choose Your Pizza Crust</FormField.Label>
+        <FormField.Input as={RadioGroup} name="crust-inverse" onChange={handleChange} value={value}>
           <RadioGroup.RadioButton variant="inverse" value="deep-dish">
             Deep dish
           </RadioGroup.RadioButton>
@@ -41,7 +38,7 @@ export const Inverse = () => {
           <RadioGroup.RadioButton variant="inverse" value="cauliflower">
             Cauliflower
           </RadioGroup.RadioButton>
-        </RadioGroup>
+        </FormField.Input>
       </StyledFormField>
     </Box>
   );
