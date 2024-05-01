@@ -94,6 +94,7 @@ export const SelectInput = createSubcomponent(TextInput)({
           disabled={disabled}
           placeholder={placeholder}
           error={error}
+          onFocus={onFocus}
           {...textInputProps}
           {...mergeStyles(elemProps, [selectInputStyles])}
         />
