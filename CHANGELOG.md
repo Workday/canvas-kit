@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.35](https://github.com/Workday/canvas-kit/releases/tag/v10.3.35) (2024-05-01)
+
+### Components
+
+- fix: CanvasProvider should use JS tokens instead of hard-coded strings ([#2710](https://github.com/Workday/canvas-kit/pull/2710)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v10.3.34](https://github.com/Workday/canvas-kit/releases/tag/v10.3.34) (2024-05-01)
 
 ### Components
