@@ -562,6 +562,24 @@ describe('createStyles', () => {
       expect(typeof myStencil.modifiers.size.large).toEqual('string');
     });
 
+    it('should apply modifiers in the correct order regardless of the order they are defined when calling the stencil', () => {
+      const myStencil = createStencil({
+        base: {},
+        modifiers: {
+          size: {
+            large: {},
+          },
+          position: {
+            start: {},
+          },
+        },
+      });
+
+      expect(myStencil({position: 'start', size: 'large'}).className).toEqual(
+        `${myStencil.base} ${myStencil.modifiers.size.large} ${myStencil.modifiers.position.start}`
+      );
+    });
+
     it('should default modifiers if no modifier override is passed', () => {
       const myStencil = createStencil({
         base: {
