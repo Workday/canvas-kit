@@ -513,7 +513,12 @@ export function csToProps(input: CSToPropsInput): CsToPropsReturn {
   // object with `style` and `className` attributes to spread on an element
   return input.map(csToProps).reduce((result, val) => {
     return {
-      className: [result.className, val.className].filter(v => v).join(' '),
+      className: [result.className, val.className]
+        .filter(v => v)
+        .join(' ')
+        .split(' ')
+        .filter(onlyUnique)
+        .join(' '),
       style: {...result.style, ...val.style},
     };
   }, {} as CsToPropsReturn);
