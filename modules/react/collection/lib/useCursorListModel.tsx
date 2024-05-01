@@ -74,7 +74,7 @@ export type NavigationRequestor = (index: number, model: NavigationInput) => num
 /**
  * Get the first item in a list regardless of column count
  */
-export const getFirst: NavigationRequestor = (_, {state}) => 0;
+export const getFirst: NavigationRequestor = (_, {}) => 0;
 /**
  * Get the last item in a list regardless of column count
  */
