@@ -361,8 +361,8 @@ export type ModifierReturn<T extends ModifierConfig> = T &
  */
 export function createModifiers<M extends ModifierConfig>(input: M): ModifierReturn<M> {
   const modifierFn = (modifiers: Partial<ModifierValues<M>>) => {
-    return Object.keys(modifiers)
-      .filter(key => input[key] && (input as any)[key][modifiers[key]])
+    return Object.keys(input)
+      .filter(key => (input as any)[key][modifiers[key]])
       .map(key => (input as any)[key][modifiers[key]])
       .join(' ');
   };
@@ -877,6 +877,14 @@ type VariableValuesStencil<
   ? {[K in keyof V]?: string}
   : {[K1 in keyof V]?: {[K2 in keyof V[K1]]: string}};
 
+function onlyDefined<T>(input: T | undefined): input is T {
+  return !!input;
+}
+
+function onlyUnique<T>(value: any, index: number, array: T[]) {
+  return array.indexOf(value) === index;
+}
+  
 /**
  * Creates a reuseable Stencil for styling elements. It takes vars, base styles, modifiers, and
  * compound modifiers.
@@ -931,7 +939,10 @@ export function createStencil<
         modifiers ? _modifiers(inputModifiers) : '',
         compound ? _compound(inputModifiers) : '',
       ]
-        .filter(v => v) // filter out empty strings
+        .filter(onlyDefined) // filter out empty strings
+        .join(' ')
+        .split(' ')
+        .filter(onlyUnique)
         .join(' '),
       style: _vars(input || {}),
     };
