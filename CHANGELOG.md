@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.35](https://github.com/Workday/canvas-kit/releases/tag/v10.3.35) (2024-05-01)
+
+### Components
+
+- fix: CanvasProvider should use JS tokens instead of hard-coded strings ([#2710](https://github.com/Workday/canvas-kit/pull/2710)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v10.3.34](https://github.com/Workday/canvas-kit/releases/tag/v10.3.34) (2024-05-01)
+
+### Components
+
+- fix: Remove unused state parameter from getFirst in useCursorListModel ([#2713](https://github.com/Workday/canvas-kit/pull/2713)) ([@gbernert](https://github.com/gbernert), [@NicholasBoll](https://github.com/NicholasBoll), [@RayRedGoose](https://github.com/RayRedGoose))
+
+
 ## [v10.3.33](https://github.com/Workday/canvas-kit/releases/tag/v10.3.33) (2024-04-15)
 
 ### Documentation
