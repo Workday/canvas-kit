@@ -8,7 +8,7 @@ import {
 import {Combobox} from '@workday/canvas-kit-react/combobox';
 
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {mergeStyles, text} from '@workday/canvas-kit-react/layout';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {useSelectModel} from './hooks/useSelectModel';
@@ -84,7 +84,6 @@ export const SelectInput = createSubcomponent(TextInput)({
           onChange={onChange}
           onInput={onInput}
           value={value}
-          onFocus={onFocus}
           name={name}
           ref={ref}
         />
