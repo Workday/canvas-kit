@@ -145,7 +145,7 @@ describe('handleCreateStencil', () => {
       })
     `);
 
-      const result = transform(program, 'test.ts', withDefaultContext(program.getTypeChecker())); //?
+      const result = transform(program, 'test.ts', withDefaultContext(program.getTypeChecker()));
 
       expect(result).toContain('styles: "box-sizing:border-box;--css-button-color:red;"');
     });
@@ -166,7 +166,7 @@ describe('handleCreateStencil', () => {
       })
     `);
 
-      const result = transform(program, 'test.ts', withDefaultContext(program.getTypeChecker())); //?
+      const result = transform(program, 'test.ts', withDefaultContext(program.getTypeChecker()));
 
       expect(result).toContain('styles: "box-sizing:border-box;--css-system-icon-size:1rem;"');
     });

@@ -257,7 +257,7 @@ export function getValueFromAliasedSymbol(
     // If there is an aliased symbol and it is a variable declaration, try to resolve the
     if (declaration && hasExpression(declaration)) {
       if (declaration.initializer) {
-        declaration.initializer.getText(); //?
+        declaration.initializer.getText();
         transform(declaration.initializer, context);
 
         return getValueFromProcessedNodes(varName, context);
