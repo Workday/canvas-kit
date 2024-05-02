@@ -1,19 +1,20 @@
 import React from 'react';
 
-import {createStyles, createModifiers} from '@workday/canvas-kit-styling';
+import {createModifiers} from '@workday/canvas-kit-styling';
+import {px2rem} from '../../lib/px2rem';
 
 const myModifiers = createModifiers({
   size: {
-    large: createStyles({
+    large: {
       backgroundColor: 'lightgray',
-      width: 100,
-      height: 100,
-    }),
-    small: createStyles({
+      width: px2rem(100),
+      height: px2rem(100),
+    },
+    small: {
       backgroundColor: 'lightgray',
-      width: 50,
-      height: 50,
-    }),
+      width: px2rem(50),
+      height: px2rem(50),
+    },
   },
 });
 

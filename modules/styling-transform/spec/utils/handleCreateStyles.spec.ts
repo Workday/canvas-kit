@@ -51,6 +51,17 @@ describe('createStyles', () => {
     expect(result).toContain('createStyles(styles)');
   });
 
+  it('should add box-sizing to styles', () => {
+    const program = createProgramFromSource(`
+      import {createStyles} from '@workday/canvas-kit-styling';
+      const styles = createStyles({})
+    `);
+
+    const result = transform(program, 'test.ts');
+
+    expect(result).toContain('styles: "box-sizing:border-box;"');
+  });
+
   it('should parse simple objects with string values', () => {
     const program = createProgramFromSource(`
       import {createStyles, px2rem} from '@workday/canvas-kit-styling';
@@ -62,7 +73,7 @@ describe('createStyles', () => {
 
     const result = transform(program, 'test.ts');
 
-    expect(result).toContain('font-size:0.75rem;');
+    expect(result).toContain('box-sizing:border-box;font-size:0.75rem;');
   });
 
   it('should parse simple objects with numeric values', () => {
@@ -76,7 +87,7 @@ describe('createStyles', () => {
 
     const result = transform(program, 'test.ts');
 
-    expect(result).toContain('font-size:12px;');
+    expect(result).toContain('box-sizing:border-box;font-size:12px;');
   });
 
   it('should return an Emotion-optimized object', () => {
@@ -90,7 +101,9 @@ describe('createStyles', () => {
 
     const result = transform(program, 'test.ts');
 
-    expect(result).toMatch(/{ name: "[a-z0-9]+", styles: "font-size:12px;" }/);
+    expect(result).toMatch(
+      /{ name: "[a-z0-9]+", styles: "box-sizing:border-box;font-size:12px;" }/
+    );
   });
 
   it('should handle nested selectors', () => {
@@ -602,7 +615,7 @@ describe('createStyles', () => {
 
     expect(styles['test.css']).toContainEqual(
       compileCSS(
-        '.css-my-component{background-color:red;}.css-my-component:hover{background:blue;}'
+        '.css-my-component{box-sizing:border-box;background-color:red;}.css-my-component:hover{background:blue;}'
       )
     );
   });
@@ -632,7 +645,7 @@ describe('createStyles', () => {
 
     const result = transform(program, 'test.ts');
 
-    expect(result).toContain('styles: "color:var(--cnvs-source-foo)');
+    expect(result).toContain('styles: "box-sizing:border-box;color:var(--cnvs-source-foo)');
   });
 
   it('should process variable keys from another file if processing is out of order', () => {
@@ -660,7 +673,7 @@ describe('createStyles', () => {
 
     const result = transform(program, 'test.ts');
 
-    expect(result).toContain('styles: "--cnvs-source-foo:red;');
+    expect(result).toContain('styles: "box-sizing:border-box;--cnvs-source-foo:red;');
   });
 
   it('should process nested variable properties from another file if processing is out of order', () => {
@@ -688,7 +701,7 @@ describe('createStyles', () => {
 
     const result = transform(program, 'test.ts');
 
-    expect(result).toContain('styles: "color:var(--cnvs-source-default-foo)');
+    expect(result).toContain('styles: "box-sizing:border-box;color:var(--cnvs-source-default-foo)');
   });
 
   it('should process nested variable keys from another file if processing is out of order', () => {
@@ -716,6 +729,6 @@ describe('createStyles', () => {
 
     const result = transform(program, 'test.ts');
 
-    expect(result).toContain('styles: "--cnvs-source-default-foo:red;');
+    expect(result).toContain('styles: "box-sizing:border-box;--cnvs-source-default-foo:red;');
   });
 });

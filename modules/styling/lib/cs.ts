@@ -392,7 +392,9 @@ type ModifierValues<T extends ModifierConfig> = {
 
 type ModifierFn<T extends ModifierConfig> = (modifiers: Partial<ModifierValues<T>>) => string;
 
-export type ModifierReturn<T extends ModifierConfig> = T & ModifierFn<T>;
+export type ModifierReturn<T extends ModifierConfig> = {
+  [K1 in keyof T]: {[K2 in keyof T[K1]]: string};
+} & ModifierFn<T>;
 
 /**
  * Creates a modifier function that takes in a modifier config and will return a CSS class name that
@@ -405,8 +407,8 @@ export type ModifierReturn<T extends ModifierConfig> = T & ModifierFn<T>;
  * const myModifiers = createModifiers({
  *   // a modifier called 'size'
  *   size: {
- *     small: createStyles({ fontSize: 12 }),
- *     medium: createStyles({ fontSize: 14 })
+ *     small: { fontSize: 12 },
+ *     medium: { fontSize: 14 }
  *   }
  * })
  *
@@ -421,13 +423,21 @@ export function createModifiers<M extends ModifierConfig>(input: M): ModifierRet
   const modifierFn = (modifiers: Partial<ModifierValues<M>>) => {
     return Object.keys(modifiers)
       .filter(key => input[key] && (input as any)[key][modifiers[key]])
-      .map(key => (input as any)[key][modifiers[key]])
+      .map(key => (modifierFn as any)[key][modifiers[key]])
       .join(' ');
   };
 
   Object.keys(input).forEach(key => {
     // @ts-ignore TypeScript makes it a pain to deal with index types
-    modifierFn[key] = input[key];
+    if (!modifierFn[key]) {
+      // @ts-ignore
+      modifierFn[key] = {};
+    }
+
+    Object.keys(input[key]).forEach(innerKey => {
+      // @ts-ignore
+      modifierFn[key][innerKey] = createStyles('modifier', input[key][innerKey]);
+    });
   });
 
   return modifierFn as ModifierReturn<M>;
@@ -639,6 +649,12 @@ export function createStyles(
   ...args: ({name: string; styles: string} | StyleProps | string)[]
 ): string {
   const instance = getInstance();
+  const isModifier = args[0] === 'modifier';
+
+  if (isModifier) {
+    args.shift();
+  }
+
   return args
     .map(input => {
       if (typeof input === 'string') {
@@ -665,7 +681,11 @@ export function createStyles(
       // injected into the document's style sheets before `TertiaryButton.base` styles. This is due
       // to CSS specificity. If everything has the same specificity, last defined wins. More info:
       // https://codesandbox.io/s/stupefied-bartik-9c2jtd?file=/src/App.tsx
-      const {styles} = serializeStyles([convertedStyles as CastStyleProps]);
+
+      const {styles} = serializeStyles([
+        !isModifier ? {boxSizing: 'border-box'} : undefined,
+        convertedStyles as CastStyleProps,
+      ]);
 
       // use `css.call()` instead of `css()` to trick Emotion's babel plugin to not rewrite our code
       // to remove our generated Id for the name:
@@ -1074,7 +1094,6 @@ export function createStencil<
   });
   const _base = createStyles({
     ..._vars.$$defaults,
-    boxSizing: 'border-box',
     ...(typeof base === 'function' ? base(_vars) : base),
   });
 
@@ -1086,9 +1105,7 @@ export function createStencil<
           result[key] = Object.keys(modifiers[key]).reduce((result, modifierKey) => {
             const modifier = modifiers[key][modifierKey];
             // @ts-ignore
-            result[modifierKey] = createStyles(
-              typeof modifier === 'function' ? modifier(_vars) : modifier
-            );
+            result[modifierKey] = typeof modifier === 'function' ? modifier(_vars) : modifier;
             return result;
           }, {});
 
@@ -1125,7 +1142,7 @@ export function createStencil<
         compound.map(compoundModifier => {
           return {
             modifiers: compoundModifier.modifiers,
-            styles: createStyles(compoundModifier.styles),
+            styles: createStyles('modifier', compoundModifier.styles),
           };
         })
       )

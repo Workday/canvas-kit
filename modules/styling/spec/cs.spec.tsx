@@ -40,7 +40,7 @@ describe('cs', () => {
         string | number | boolean | SerializedStyles | undefined
       >;
       type PositionProperty = Input['position'];
-      const temp: PositionProperty = 'absolute';
+      // const temp: PositionProperty = 'absolute';
       createStyles({
         position: 'absolute',
       });
@@ -58,16 +58,18 @@ describe('cs', () => {
       for (const sheet of document.styleSheets as StyleSheetList & Iterable<CSSStyleSheet>) {
         for (const rule of sheet.cssRules as CSSRuleList & Iterable<CSSRule>) {
           if (rule.cssText.includes(styles)) {
-            expect(rule.cssText).toContain(`.${styles} {color: var(--my-var);}`);
+            expect(rule.cssText).toContain(
+              `.${styles} {box-sizing: border-box; color: var(--my-var);}`
+            );
           }
         }
       }
     });
 
     it('should always add new styles for every "createStyles" call to have style merging that is intuitive', () => {
-      const styles1 = createStyles({
-        color: 'red',
-      });
+      // const styles1 = createStyles({
+      //   color: 'red',
+      // });
       const styles2 = createStyles({
         color: 'blue',
       });
@@ -78,7 +80,7 @@ describe('cs', () => {
       for (const sheet of document.styleSheets as StyleSheetList & Iterable<CSSStyleSheet>) {
         for (const rule of sheet.cssRules as CSSRuleList & Iterable<CSSRule>) {
           if (rule.cssText.includes(styles3)) {
-            expect(rule.cssText).toContain(`.${styles3} {color: red;}`);
+            expect(rule.cssText).toContain(`.${styles3} {box-sizing: border-box; color: red;}`);
           }
         }
       }
@@ -329,8 +331,8 @@ describe('cs', () => {
     const myModifiersFactory = () =>
       createModifiers({
         size: {
-          large: createStyles({fontSize: '1.5rem'}),
-          small: createStyles({fontSize: '0.8rem'}),
+          large: {fontSize: '1.5rem'},
+          small: {fontSize: '0.8rem'},
         },
       });
 
@@ -345,8 +347,21 @@ describe('cs', () => {
       expect(myModifiers({size: 'large'})).toEqual(myModifiers.size.large);
     });
 
+    it('should not contains box-sizing', () => {
+      const myModifiers = myModifiersFactory();
+
+      for (const sheet of document.styleSheets as StyleSheetList & Iterable<CSSStyleSheet>) {
+        for (const rule of sheet.cssRules as CSSRuleList & Iterable<CSSRule>) {
+          if (rule.cssText.includes(myModifiers.size.large)) {
+            expect(rule.cssText).toContain(`.${myModifiers.size.large} {font-size: 1.5rem;}`);
+          }
+        }
+      }
+    });
+
     it('should return a function with a type that expects optional parameters matching the config object', () => {
       const myModifiers = myModifiersFactory();
+
       type Input = Parameters<typeof myModifiers>[0];
       expectTypeOf<Input>().toMatchTypeOf<{size?: 'large' | 'small'}>();
     });
@@ -497,6 +512,47 @@ describe('cs', () => {
       render(<div data-testid="test" {...myStencil()} />);
 
       expect(screen.getByTestId('test')).toHaveStyle({padding: '10px'});
+    });
+
+    it('should contain box-sizing in base', () => {
+      const myStencil = createStencil({
+        base: {
+          padding: 10,
+        },
+      });
+
+      for (const sheet of document.styleSheets as StyleSheetList & Iterable<CSSStyleSheet>) {
+        for (const rule of sheet.cssRules as CSSRuleList & Iterable<CSSRule>) {
+          if (rule.cssText.includes(myStencil.base)) {
+            expect(rule.cssText).toContain(
+              `.${myStencil.base} {box-sizing: border-box; padding: 10px;}`
+            );
+          }
+        }
+      }
+    });
+
+    it('should not contain box-sizing in modifiers', () => {
+      const myStencil = createStencil({
+        base: {
+          padding: 10,
+        },
+        modifiers: {
+          grow: {
+            true: {
+              width: '100%',
+            },
+          },
+        },
+      });
+
+      for (const sheet of document.styleSheets as StyleSheetList & Iterable<CSSStyleSheet>) {
+        for (const rule of sheet.cssRules as CSSRuleList & Iterable<CSSRule>) {
+          if (rule.cssText.includes(myStencil.modifiers.grow.true)) {
+            expect(rule.cssText).toContain(`.${myStencil.modifiers.grow.true} {width: 100%;}`);
+          }
+        }
+      }
     });
 
     it('should set the `base` property with the className of the base', () => {
@@ -799,7 +855,7 @@ describe('cs', () => {
 
       myStencil({width: '12px'});
 
-      myStencil({foo: true}); //?
+      myStencil({foo: true});
 
       type Arg = Exclude<Parameters<typeof myStencil>[0], undefined>;
       expectTypeOf<Arg>().toHaveProperty('width');

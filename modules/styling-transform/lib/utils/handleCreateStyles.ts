@@ -58,7 +58,13 @@ export const handleCreateStyles: NodeTransformer = (node, context) => {
       // https://ts-ast-viewer.com/#code/MYewdgzgLgBFCmBbADjAvDA3gKBjAZiCAFwwDkARgIYBOZ2AvkA
       if (ts.isObjectLiteralExpression(arg)) {
         const styleObj = parseObjectToStaticValue(arg, context);
-        return createStyleReplacementNode(node, styleObj, cssClassName, context);
+
+        return createStyleReplacementNode(
+          node,
+          {boxSizing: 'border-box', ...styleObj},
+          cssClassName,
+          context
+        );
       }
       // An Identifier is a variable. It could come from anywhere - imports, earlier
       // assignments, etc. The easiest thing to do is to ask the TypeScript type checker what
@@ -74,7 +80,12 @@ export const handleCreateStyles: NodeTransformer = (node, context) => {
         // The type must be a object
         const styleObj = parseStyleObjFromType(type, context);
 
-        return createStyleReplacementNode(node, styleObj, cssClassName, context);
+        return createStyleReplacementNode(
+          node,
+          {boxSizing: 'border-box', ...styleObj},
+          cssClassName,
+          context
+        );
       }
       return arg;
     });

@@ -16,30 +16,30 @@ const baseStyles = createStyles({
 
 const modifierStyles = {
   variant: {
-    primary: createStyles({
+    primary: {
       background: `var(--button-background-color, blue)`,
       color: 'white',
-    }),
-    secondary: createStyles({
+    },
+    secondary: {
       background: `var(--button-background-color, gray)`,
-    }),
-    danger: createStyles({
+    },
+    danger: {
       background: `var(--button-background-color, red)`,
-    }),
+    },
   },
   size: {
-    large: createStyles({
+    large: {
       fontSize: '1.4rem',
       height: '2rem',
-    }),
-    medium: createStyles({
+    },
+    medium: {
       fontSize: '1rem',
       height: '1.5rem',
-    }),
-    small: createStyles({
+    },
+    small: {
       fontSize: '0.8rem',
       height: '1.2rem',
-    }),
+    },
   },
 };
 

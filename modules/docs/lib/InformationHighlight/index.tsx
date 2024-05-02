@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {createContainer} from '@workday/canvas-kit-react/common';
-import {createModifiers, createStyles, cssVar} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 import {Base, BaseProps} from './Base';
@@ -16,29 +16,28 @@ interface InformationHighlightProps extends BaseProps {
   variant?: Variant;
 }
 
-const containerStyles = createStyles({
-  backgroundColor: base.soap100,
-  display: 'grid',
-  gridTemplateColumns: 'min-content',
-  columnGap: system.space.x4,
-  rowGap: system.space.x2,
-  padding: system.space.x4,
-  borderRadius: system.shape.x1,
-});
-
-const containerModifiers = createModifiers({
-  variant: {
-    emphasis: createStyles({
-      borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(base.blueberry400)}`,
-    }),
-    caution: createStyles({
-      borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(
-        base.cantaloupe400
-      )}`,
-    }),
-    attention: createStyles({
-      borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(base.cinnamon500)}`,
-    }),
+const informationHighlightStencil = createStencil({
+  base: {
+    backgroundColor: base.soap100,
+    display: 'grid',
+    gridTemplateColumns: 'min-content',
+    columnGap: system.space.x4,
+    rowGap: system.space.x2,
+    padding: system.space.x4,
+    borderRadius: system.shape.x1,
+  },
+  modifiers: {
+    variant: {
+      emphasis: {
+        borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(base.blueberry400)}`,
+      },
+      caution: {
+        borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(base.cantaloupe400)}`,
+      },
+      attention: {
+        borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(base.cinnamon500)}`,
+      },
+    },
   },
 });
 
@@ -55,7 +54,7 @@ export const InformationHighlight = createContainer('section')({
   return (
     <Base
       as={Element}
-      cs={[containerStyles, containerModifiers({variant: model.state.variant})]}
+      {...informationHighlightStencil({variant: model.state.variant})}
       {...props}
     />
   );
