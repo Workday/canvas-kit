@@ -1,66 +1,81 @@
 import * as React from 'react';
-import {keyframes} from '@emotion/react';
-import styled from '@emotion/styled';
-import {borderRadius, colors, fontFamily} from '@workday/canvas-kit-react/tokens';
+import {createComponent} from '@workday/canvas-kit-react/common';
+import {handleCsProp, CSProps, createStencil, px2rem, keyframes} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
-export interface CountBadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
+const grow = keyframes({
+  from: {
+    transform: 'scale(0.85)',
+  },
+  to: {
+    transform: 'scale(1.0)',
+  },
+});
+
+export interface CountBadgeProps extends CSProps {
+  /**
+   * Sets the count displayed in the badge
+   *
+   * @default 0
+   */
   count?: number;
+  /**
+   * Sets the maximum count to display before formatting the number.
+   * E.g. Given a count of `100` and a limit of `100`, the badge would display `99+`.
+   *
+   * @default 1000
+   */
   limit?: number;
-  variant?: 'default' | 'inverse';
+  /**
+   * Sets the variant of the Count Badge
+   */
+  variant?: 'inverse';
 }
 
-const variants = {
-  default: {
-    background: colors.cinnamon500,
-    color: colors.frenchVanilla100,
-    textShadow: '0 0 1px rgba(0,0,0, 0.35)',
-  },
-  inverse: {
-    background: colors.frenchVanilla100,
-    boxShadow: '0 1px 2px rgba(0,0,0, 0.25)',
-    color: colors.blueberry400,
-  },
-};
-
-const grow = keyframes`
-  from {
-    transform: scale(0.85);
-  }
-
-  to {
-    transform: scale(1.0);
-  }
-`;
-
-const Container = styled('span')<CountBadgeProps>(
-  {
+// .cnvs-count-badge
+const countBadgeStencil = createStencil({
+  base: {
     alignItems: 'center',
     animation: `${grow} 0.2s ease`,
-    borderRadius: borderRadius.circle,
-    boxSizing: 'border-box',
+    background: system.color.static.red.default,
+    borderRadius: system.shape.round,
+    color: system.color.text.inverse,
     display: 'inline-flex',
-    fontFamily,
-    fontSize: '12px',
-    fontWeight: 700,
-    height: '20px',
+    fontFamily: system.fontFamily.default,
+    fontSize: system.fontSize.subtext.medium,
+    fontWeight: system.fontWeight.bold,
+    height: px2rem(20),
     justifyContent: 'center',
-    lineHeight: '20px',
-    minWidth: '20px',
-    padding: '0 6.5px',
+    lineHeight: px2rem(20),
+    minWidth: px2rem(20),
+    padding: `0 ${px2rem(6.5)}`,
+    textShadow: `0 0 ${px2rem(1)} rgba(0,0,0, 0.35)`,
   },
-  ({variant = 'default'}) => ({
-    ...variants[variant],
-  })
-);
+  modifiers: {
+    variant: {
+      // .cnvs-count-badge--variant-inverse
+      inverse: {
+        background: system.color.bg.default,
+        boxShadow: `0 ${px2rem(1)} ${px2rem(2)} rgba(0,0,0, 0.25)`,
+        color: system.color.text.primary.default,
+        textShadow: 'none',
+      },
+    },
+  },
+});
 
-export const CountBadge = (props: CountBadgeProps) => {
-  const {variant = 'default', count = 0, limit = 1000, ...elemProps} = props;
+/**
+ * `CountBadge` provides a quantity-based summary with dynamic values.
+ */
+export const CountBadge = createComponent('span')({
+  displayName: 'NewCountBadge',
+  Component: ({count = 0, limit = 1000, variant, ...elemProps}: CountBadgeProps, ref, Element) => {
+    const formattedCount = count < limit ? `${count}` : `${limit - 1}+`;
 
-  const formattedCount = count < limit ? `${count}` : `${limit - 1}+`;
-
-  return (
-    <Container variant={variant} {...elemProps}>
-      {formattedCount}
-    </Container>
-  );
-};
+    return (
+      <Element ref={ref} {...handleCsProp(elemProps, [countBadgeStencil({variant})])}>
+        {formattedCount}
+      </Element>
+    );
+  },
+});

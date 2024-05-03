@@ -230,7 +230,7 @@ const RadioBackground = styled('div')<RadioProps>(
         ? colors.soap300
         : themePrimary.main
       : disabled
-      ? inputColors.disabled.border
+      ? colors.licorice100
       : variant === 'inverse'
       ? colors.soap300
       : inputColors.border,
