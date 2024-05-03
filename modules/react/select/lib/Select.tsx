@@ -8,7 +8,7 @@ import {
 import {Combobox} from '@workday/canvas-kit-react/combobox';
 
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
-import {mergeStyles, text} from '@workday/canvas-kit-react/layout';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {useSelectModel} from './hooks/useSelectModel';
