@@ -361,10 +361,11 @@ export type ModifierReturn<T extends ModifierConfig> = T &
  */
 export function createModifiers<M extends ModifierConfig>(input: M): ModifierReturn<M> {
   const modifierFn = (modifiers: Partial<ModifierValues<M>>) => {
-    return Object.keys(modifiers)
-      .filter(key => input[key] && (input as any)[key][modifiers[key]])
-      .map(key => (input as any)[key][modifiers[key]])
-      .join(' ');
+    return combineClassNames(
+      Object.keys(input)
+        .filter(key => (input as any)[key][modifiers[key]])
+        .map(key => (input as any)[key][modifiers[key]])
+    );
   };
 
   Object.keys(input).forEach(key => {
@@ -414,8 +415,8 @@ export function createCompoundModifiers<M extends ModifierConfig>(
   compound: CompoundModifier<M>[]
 ): ModifierReturn<M> {
   return (modifiers => {
-    return compound
-      .map(compoundModifier => {
+    return combineClassNames(
+      compound.map(compoundModifier => {
         const match = Object.keys(compoundModifier.modifiers).reduce(
           (result, compoundModifierKey) => {
             return (
@@ -430,8 +431,7 @@ export function createCompoundModifiers<M extends ModifierConfig>(
         }
         return '';
       })
-      .filter(v => v)
-      .join(' ');
+    );
   }) as ModifierReturn<M>;
 }
 
@@ -513,7 +513,7 @@ export function csToProps(input: CSToPropsInput): CsToPropsReturn {
   // object with `style` and `className` attributes to spread on an element
   return input.map(csToProps).reduce((result, val) => {
     return {
-      className: [result.className, val.className].filter(v => v).join(' '),
+      className: combineClassNames([result.className, val.className]),
       style: {...result.style, ...val.style},
     };
   }, {} as CsToPropsReturn);
@@ -872,6 +872,26 @@ type VariableValuesStencil<
   ? {[K in keyof V]?: string}
   : {[K1 in keyof V]?: {[K2 in keyof V[K1]]: string}};
 
+function onlyDefined<T>(input: T | undefined): input is T {
+  return !!input;
+}
+
+function onlyUnique<T>(value: any, index: number, array: T[]) {
+  return array.indexOf(value) === index;
+}
+
+/**
+ * Combines an array of space-delimited CSS class names into a single string of space-delimited
+ * class names. Duplicate class names are removed.
+ */
+function combineClassNames(input: (string | undefined)[]): string {
+  return input
+    .join(' ')
+    .split(' ')
+    .filter((s, i, a) => onlyDefined(s) && onlyUnique(s, i, a))
+    .join(' ');
+}
+  
 /**
  * Creates a reuseable Stencil for styling elements. It takes vars, base styles, modifiers, and
  * compound modifiers.
@@ -921,13 +941,11 @@ export function createStencil<
   const stencil: Stencil<M, V, ID> = input => {
     const inputModifiers = {...defaultModifiers, ...input};
     return {
-      className: [
+      className: combineClassNames([
         _base,
         modifiers ? _modifiers(inputModifiers) : '',
         compound ? _compound(inputModifiers) : '',
-      ]
-        .filter(v => v) // filter out empty strings
-        .join(' '),
+      ]),
       style: _vars(input || {}),
     };
   };
