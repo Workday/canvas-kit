@@ -4,6 +4,7 @@ import {
   ExtractProps,
   createContainer,
   Themeable,
+  useLocalRef,
 } from '@workday/canvas-kit-react/common';
 import {Combobox} from '@workday/canvas-kit-react/combobox';
 
@@ -59,7 +60,6 @@ export const SelectInput = createSubcomponent(TextInput)({
       ref,
       onChange,
       onInput,
-      onFocus,
       value,
       name,
       ...elemProps
@@ -67,6 +67,25 @@ export const SelectInput = createSubcomponent(TextInput)({
     Element,
     model
   ) => {
+    const {localRef, elementRef} = useLocalRef(ref);
+
+    // We need to create a proxy between the multiple inputs. We need to redirect a few methods to
+    // the visible input
+    React.useImperativeHandle(
+      elementRef,
+      () => {
+        localRef.current!.focus = (options?: FocusOptions) => {
+          textInputProps.ref.current!.focus(options);
+        };
+        localRef.current!.blur = () => {
+          textInputProps.ref.current!.blur();
+        };
+
+        return localRef.current!;
+      },
+      [textInputProps.ref, localRef]
+    );
+
     return (
       <InputGroup>
         {inputStartIcon && model.state.selectedIds.length > 0 && (
@@ -84,9 +103,8 @@ export const SelectInput = createSubcomponent(TextInput)({
           onChange={onChange}
           onInput={onInput}
           value={value}
-          onFocus={onFocus}
           name={name}
-          ref={ref}
+          ref={elementRef}
         />
         {/* Visual input */}
         <InputGroup.Input
