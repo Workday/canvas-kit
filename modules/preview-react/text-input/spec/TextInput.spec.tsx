@@ -142,7 +142,7 @@ describe('Text Input', () => {
           <TextInput.Field />
         </TextInput>
       );
-      const uniqueId = container.querySelector('input').getAttribute('id');
+      const uniqueId = container.querySelector('input')!.getAttribute('id');
       expect(container.querySelector('input')).toHaveAttribute('id', uniqueId);
     });
   });
