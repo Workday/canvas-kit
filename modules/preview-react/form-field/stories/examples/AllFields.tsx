@@ -7,17 +7,19 @@ import {Checkbox} from '@workday/canvas-kit-react/checkbox';
 import {Select} from '@workday/canvas-kit-react/select';
 import {TextArea} from '@workday/canvas-kit-react/text-area';
 import {Switch} from '@workday/canvas-kit-react/switch';
+import {calc, createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const parentContainerStyles = createStyles({
+  flexDirection: 'column',
+  gap: calc.subtract(system.space.x6, system.space.x1),
+  padding: calc.subtract(system.space.x10, system.space.x1),
+  borderRadius: system.space.x1,
+});
 
 export const AllFields = () => {
   return (
-    <Flex
-      cs={{
-        flexDirection: 'column',
-        gap: '20px',
-        padding: '36px',
-        borderRadius: '4px',
-      }}
-    >
+    <Flex cs={parentContainerStyles}>
       <FormField grow>
         <FormField.Label>First Name</FormField.Label>
         <FormField.Input as={TextInput} />

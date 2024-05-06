@@ -4,6 +4,23 @@ import {Table} from '@workday/canvas-kit-react/table';
 import {Heading} from '@workday/canvas-kit-react/text';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
+
+const styleOverrides = {
+  parentContainerStyles: createStyles({
+    marginBottom: system.space.x4,
+  }),
+  tableStyles: createStyles({
+    width: 690,
+  }),
+  tableHeaderStyles: createStyles({
+    position: 'sticky',
+    left: system.space.zero,
+    backgroundColor: base.soap100,
+    borderRight: `2px solid ${base.soap400}`,
+  }),
+};
 
 export const FixedColumn = () => {
   const headingID = useUniqueId();
@@ -77,19 +94,13 @@ export const FixedColumn = () => {
   ];
   return (
     <>
-      <Heading as="h3" id={headingID} size="small" marginBottom="s">
+      <Heading as="h3" id={headingID} size="small" cs={styleOverrides.parentContainerStyles}>
         Performance Car Specs
       </Heading>
-      <Table width={690} aria-labelledby={headingID} tabIndex={0}>
+      <Table cs={styleOverrides.tableStyles} aria-labelledby={headingID} tabIndex={0}>
         <Table.Head>
           <Table.Row>
-            <Table.Header
-              scope="col"
-              position="sticky"
-              left="0"
-              backgroundColor="soap100"
-              borderRight={`2px solid ${colors.soap400}`}
-            >
+            <Table.Header scope="col" cs={styleOverrides.tableHeaderStyles}>
               Make
             </Table.Header>
             <Table.Header scope="col">Model</Table.Header>
@@ -106,13 +117,7 @@ export const FixedColumn = () => {
           {exampleData.map(item => (
             <>
               <Table.Row>
-                <Table.Header
-                  scope="row"
-                  position="sticky"
-                  left="0"
-                  backgroundColor="soap100"
-                  borderRight={`2px solid ${colors.soap400}`}
-                >
+                <Table.Header scope="row" cs={styleOverrides.tableHeaderStyles}>
                   {item.make}
                 </Table.Header>
                 <Table.Cell>{item.model}</Table.Cell>

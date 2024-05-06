@@ -2,6 +2,12 @@ import React from 'react';
 
 import {Table} from '@workday/canvas-kit-react/table';
 import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
+
+const tableHeaderStyles = createStyles({
+  backgroundColor: base.soap100,
+});
 
 export const RightToLeft = () => {
   return (
@@ -10,10 +16,10 @@ export const RightToLeft = () => {
         <Table.Caption>משקאות קפה וגדלים</Table.Caption>
         <Table.Head>
           <Table.Row>
-            <Table.Header scope="col" backgroundColor="soap100">
+            <Table.Header scope="col" cs={tableHeaderStyles}>
               מַשׁקֶה
             </Table.Header>
-            <Table.Header scope="col" backgroundColor="soap100">
+            <Table.Header scope="col" cs={tableHeaderStyles}>
               גודל
             </Table.Header>
           </Table.Row>

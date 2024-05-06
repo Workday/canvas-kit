@@ -4,6 +4,12 @@ import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {useMount} from '@workday/canvas-kit-react/common';
+import {createStyles} from '@workday/canvas-kit-styling';
+
+const parentContainerStyles = createStyles({
+  flexDirection: 'column',
+  maxWidth: 300,
+});
 
 const movieListItems = [
   {
@@ -68,7 +74,7 @@ export const FetchingDynamicItems = () => {
   });
 
   return (
-    <Flex flexDirection="column" maxWidth={300}>
+    <Flex cs={parentContainerStyles}>
       <Select model={model}>
         <FormField label="Choose a Film">
           <Select.Input

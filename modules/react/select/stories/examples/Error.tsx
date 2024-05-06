@@ -2,6 +2,11 @@ import React from 'react';
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {Select} from '@workday/canvas-kit-react/select';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {createStyles} from '@workday/canvas-kit-styling';
+
+const parentContainerStyles = createStyles({
+  flexDirection: 'column',
+});
 
 const options = [
   'E-mail',
@@ -19,7 +24,7 @@ export const Error = () => {
     setValue(event.target.value);
   };
   return (
-    <Flex flexDirection="column">
+    <Flex cs={parentContainerStyles}>
       <Select items={options} nonInteractiveIds={['Fax (disabled)']}>
         <FormField error="error">
           <FormField.Label>Contact</FormField.Label>

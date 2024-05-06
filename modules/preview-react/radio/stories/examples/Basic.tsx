@@ -2,6 +2,11 @@ import React from 'react';
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {createStyles} from '@workday/canvas-kit-styling';
+
+const formfieldInputStyles = createStyles({
+  width: '200px',
+});
 
 export const Basic = () => {
   const [value, setValue] = React.useState<string | number>('deep-dish');
@@ -18,10 +23,10 @@ export const Basic = () => {
       <FormField as="fieldset">
         <FormField.Label as="legend">Choose Your Pizza Crust</FormField.Label>
         <FormField.Input
+          cs={formfieldInputStyles}
           as={RadioGroup}
           name="pizza-crust"
           onChange={handleChange}
-          width="200px"
           value={value}
         >
           <RadioGroup.RadioButton value="deep-dish">Deep dish</RadioGroup.RadioButton>

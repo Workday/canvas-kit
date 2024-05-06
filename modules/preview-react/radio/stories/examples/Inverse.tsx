@@ -4,11 +4,18 @@ import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {styled, StyledType} from '@workday/canvas-kit-react/common';
 import {colors} from '@workday/canvas-kit-react/tokens';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 const StyledFormField = styled(FormField)<StyledType>({
   legend: {
     color: colors.frenchVanilla100,
   },
+});
+
+const parentContainerStyles = createStyles({
+  backgroundColor: base.blueberry400,
+  padding: system.space.x4,
 });
 
 export const Inverse = () => {
@@ -22,7 +29,7 @@ export const Inverse = () => {
   };
 
   return (
-    <Box backgroundColor="blueberry400" padding="s">
+    <Box cs={parentContainerStyles}>
       <StyledFormField as="fieldset">
         <FormField.Label as="legend">Choose Your Pizza Crust</FormField.Label>
         <FormField.Input as={RadioGroup} name="crust-inverse" onChange={handleChange} value={value}>

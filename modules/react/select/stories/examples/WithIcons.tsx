@@ -8,6 +8,16 @@ import {
   uploadCloudIcon,
   userIcon,
 } from '@workday/canvas-system-icons-web';
+import {createStyles} from '@workday/canvas-kit-styling';
+
+const styleOverrides = {
+  formfieldInputStyles: createStyles({
+    width: '300px',
+  }),
+  selectCardStyles: createStyles({
+    maxHeight: '200px',
+  }),
+};
 
 const customOptions = [
   {text: 'Activity Stream', id: 'activity-stream', icon: activityStreamIcon},
@@ -28,11 +38,11 @@ export const WithIcons = () => {
           <FormField.Label>Contact</FormField.Label>
           <FormField.Input
             as={Select.Input}
-            width="300px"
+            cs={styleOverrides.formfieldInputStyles}
             inputStartIcon={selectedItem.value.icon}
           />
           <Select.Popper>
-            <Select.Card maxHeight="200px">
+            <Select.Card cs={styleOverrides.selectCardStyles}>
               {model.state.items.length > 0 && (
                 <Select.List>
                   {item => (

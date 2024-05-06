@@ -6,10 +6,15 @@ import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {createStyles, cssVar} from '@workday/canvas-kit-styling';
 import {AccessibleHide, AriaLiveRegion} from '@workday/canvas-kit-react/common';
 
-const loadingStyles = createStyles({
-  backgroundColor: base.licorice300,
-  padding: system.space.x3,
-});
+const styleOverrides = {
+  parentContainer: createStyles({
+    gap: system.space.x4,
+  }),
+  loadingStyles: createStyles({
+    backgroundColor: base.licorice300,
+    padding: system.space.x3,
+  }),
+};
 
 export const Accessible = () => {
   const [loadingState, setLoadingState] = React.useState('idle');
@@ -31,11 +36,11 @@ export const Accessible = () => {
   };
 
   return (
-    <Flex gap={cssVar(system.space.x4)}>
+    <Flex cs={styleOverrides.parentContainer}>
       <SecondaryButton onClick={handleLoad}>Start</SecondaryButton>
       <AriaLiveRegion aria-label="Loading">
         {loadingState === 'loading' && (
-          <LoadingDots className={loadingStyles} role="img" aria-label="Please wait..." />
+          <LoadingDots cs={styleOverrides.loadingStyles} role="img" aria-label="Please wait..." />
         )}
         {loadingState === 'success' && <AccessibleHide>Complete.</AccessibleHide>}
       </AriaLiveRegion>

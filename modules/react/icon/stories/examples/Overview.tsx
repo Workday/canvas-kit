@@ -8,6 +8,8 @@ import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
 
 import {AccentIcon, AppletIcon, SystemIcon, SystemIconCircle, Graphic} from '../../index';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 const graphicExample: CanvasGraphic = {
   name: 'badgeAchievement',
@@ -18,11 +20,22 @@ const graphicExample: CanvasGraphic = {
   tags: [],
 };
 
+const styleOverrides = {
+  container: createStyles({
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: system.space.x4,
+  }),
+  systemIconStyles: createStyles({
+    background: base.berrySmoothie100,
+  }),
+};
+
 export const Overview = () => (
-  <Flex flexDirection="row" alignItems="center" gap="s">
+  <Flex cs={styleOverrides.container}>
     <AccentIcon icon={shieldIcon} />
     <AppletIcon icon={benefitsIcon} />
-    <SystemIcon icon={activityStreamIcon} background="berrySmoothie100" />
+    <SystemIcon icon={activityStreamIcon} cs={styleOverrides.systemIconStyles} />
     <SystemIconCircle icon={activityStreamIcon} />
     <Graphic src={graphicExample} />
   </Flex>
