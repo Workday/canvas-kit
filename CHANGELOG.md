@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.36](https://github.com/Workday/canvas-kit/releases/tag/v10.3.36) (2024-05-03)
+
+### Components
+
+- fix: Style merging in compat mode ([#2719](https://github.com/Workday/canvas-kit/pull/2719)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  This fixes an issue where styles would merge incorrectly in compatibility mode. Compatibility mode is triggered when our component is augmented by a style prop, wrapped with `styled`, passed a `css` prop, or passed a `cs` prop with object styles. This fix ensures that `modifiers` via `createModifiers` or `createStencil` merge styles the same way in both static and compat modes. See the linked issue for more details.
+
+
 ## [v10.3.35](https://github.com/Workday/canvas-kit/releases/tag/v10.3.35) (2024-05-01)
 
 ### Components
