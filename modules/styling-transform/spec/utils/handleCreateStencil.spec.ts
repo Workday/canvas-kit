@@ -7,7 +7,7 @@ import {handleCreateStencil} from '../../lib/utils/handleCreateStencil';
 import {transform, withDefaultContext, _reset} from '../../lib/styleTransform';
 import {compileCSS} from '../../lib/utils/createStyleObjectNode';
 
-function getFile<K extends string, T extends Record<K, any>>(styles: T, name: string): T[K] {
+function getFile<K extends string, T extends Record<K, any>>(styles: T, name: string): T[K] | void {
   for (const style in styles) {
     if (style.includes(name)) {
       // @ts-ignore
@@ -49,10 +49,10 @@ describe('handleCreateStencil', () => {
         })
       `);
 
-      const sourceFile = program.getSourceFile('test.ts');
+      const sourceFile = program.getSourceFile('test.ts')!;
       const variables: Record<string, string> = {};
 
-      const node = findNodes(sourceFile, 'createStencil', ts.isCallExpression)[0];
+      const node = findNodes(sourceFile, 'createStencil', ts.isCallExpression)![0];
 
       handleCreateStencil(
         node,
@@ -331,8 +331,8 @@ describe('handleCreateStencil', () => {
       `);
 
       const styles = {};
-      const sourceFile = program.getSourceFile('test.ts');
-      const node = findNodes(sourceFile, 'createStencil', ts.isCallExpression)[0];
+      const sourceFile = program.getSourceFile('test.ts')!;
+      const node = findNodes(sourceFile, 'createStencil', ts.isCallExpression)![0];
 
       handleCreateStencil(node, withDefaultContext(program.getTypeChecker(), {styles}));
 
@@ -381,8 +381,8 @@ describe('handleCreateStencil', () => {
       `);
 
       const styles = {};
-      const sourceFile = program.getSourceFile('test.ts');
-      const node = findNodes(sourceFile, 'createStencil', ts.isCallExpression)[0];
+      const sourceFile = program.getSourceFile('test.ts')!;
+      const node = findNodes(sourceFile, 'createStencil', ts.isCallExpression)![0];
 
       handleCreateStencil(node, withDefaultContext(program.getTypeChecker(), {styles}));
 
@@ -425,8 +425,8 @@ describe('handleCreateStencil', () => {
       `);
 
       const styles = {};
-      const sourceFile = program.getSourceFile('test.ts');
-      const node = findNodes(sourceFile, 'createStencil', ts.isCallExpression)[0];
+      const sourceFile = program.getSourceFile('test.ts')!;
+      const node = findNodes(sourceFile, 'createStencil', ts.isCallExpression)![0];
 
       handleCreateStencil(node, withDefaultContext(program.getTypeChecker(), {styles}));
 

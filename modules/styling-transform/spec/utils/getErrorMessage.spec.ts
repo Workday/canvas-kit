@@ -14,8 +14,8 @@ describe('getErrorMessage', () => {
       };
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, 'baz', ts.isIdentifier)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, 'baz', ts.isIdentifier)![0];
 
     const ctx = withDefaultContext(program.getTypeChecker(), {});
 
