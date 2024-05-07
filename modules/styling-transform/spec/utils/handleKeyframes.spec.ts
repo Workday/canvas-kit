@@ -38,8 +38,8 @@ describe('handleKeyframes', () => {
     `);
 
     const variables = {};
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isTaggedTemplateExpression)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isTaggedTemplateExpression)![0];
 
     handleKeyframes(
       node,
@@ -91,8 +91,8 @@ describe('handleKeyframes', () => {
 
     const styles = {};
     const variables = {};
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, 'keyframes', ts.isCallExpression)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, 'keyframes', ts.isCallExpression)![0];
 
     handleKeyframes(node, withDefaultContext(program.getTypeChecker(), {styles, variables}));
 

@@ -10,15 +10,17 @@ import {
 import {render, fireEvent} from '@testing-library/react';
 import {ElementComponent} from '@workday/canvas-kit-react/common';
 
-([
-  PrimaryButton,
-  SecondaryButton,
-  TertiaryButton,
-  DeleteButton,
-  DeprecatedButton,
-  // We need to cast as `any` and cast as a specific button because TS will complain about no call signatures...
-] as any[]).forEach((ButtonComponent: ElementComponent<'button', ButtonProps>) => {
-  describe(ButtonComponent.displayName, () => {
+(
+  [
+    PrimaryButton,
+    SecondaryButton,
+    TertiaryButton,
+    DeleteButton,
+    DeprecatedButton,
+    // We need to cast as `any` and cast as a specific button because TS will complain about no call signatures...
+  ] as any[]
+).forEach((ButtonComponent: ElementComponent<'button', ButtonProps>) => {
+  describe(ButtonComponent.displayName!, () => {
     const cb = jest.fn();
     afterEach(() => {
       cb.mockReset();
@@ -66,7 +68,7 @@ import {ElementComponent} from '@workday/canvas-kit-react/common';
 
     describe('when rendered with a button ref', () => {
       it('should set the ref to the checkbox input element', () => {
-        const ref = {current: null};
+        const ref = {current: null as null | HTMLButtonElement};
 
         render(<ButtonComponent ref={ref} />);
 

@@ -1119,14 +1119,12 @@ export function createStencil<
       }
 
       // @ts-ignore
-      _modifiers[modifier][value] = [
+      _modifiers[modifier][value] = combineClassNames([
         // @ts-ignore
         composesModifier[modifier][value],
         // @ts-ignore
         _modifiers[modifier][value],
-      ]
-        .filter(onlyDefined)
-        .join(' ');
+      ]);
     });
   });
 
@@ -1152,16 +1150,13 @@ export function createStencil<
         _base,
         _modifiers(inputModifiers),
         compound ? _compound(inputModifiers) : '',
-      ])
-        .split(' ')
-        .filter(onlyUnique)
-        .join(' '),
+      ]),
       style: {...composesReturn?.style, ..._vars(input || {})},
     };
   }) as any;
 
   stencil.vars = _vars;
-  stencil.base = [composes?.base, _base].filter(onlyDefined).join(' ');
+  stencil.base = combineClassNames([composes?.base, _base]);
   stencil.modifiers = _modifiers as any; // The return type is conditional and TypeScript doesn't like that here
   stencil.defaultModifiers = {...composes?.defaultModifiers, ...defaultModifiers} as any;
   stencil.__extends = composes as any; // The return type is conditional and TypeScript doesn't like that here

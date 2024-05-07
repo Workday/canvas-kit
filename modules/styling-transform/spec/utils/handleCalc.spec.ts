@@ -15,8 +15,8 @@ describe('handleCalc', () => {
       calc.add('20px', '2rem')
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isCallExpression)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isCallExpression)![0];
 
     const result = handleCalc(node, withDefaultContext(program.getTypeChecker()));
 
@@ -30,8 +30,8 @@ describe('handleCalc', () => {
       calc.add(foo, '2rem')
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isCallExpression)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isCallExpression)![0];
 
     const result = handleCalc(node, withDefaultContext(program.getTypeChecker()));
 
@@ -43,8 +43,8 @@ describe('handleCalc', () => {
       calc.add(myVars.foo, '2rem')
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isCallExpression)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isCallExpression)![0];
 
     const result = handleCalc(
       node,
@@ -61,8 +61,8 @@ describe('handleCalc', () => {
       calc.subtract('20px', '2rem')
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isCallExpression)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isCallExpression)![0];
 
     const result = handleCalc(node, withDefaultContext(program.getTypeChecker()));
 
@@ -76,8 +76,8 @@ describe('handleCalc', () => {
       calc.subtract(foo, '2rem')
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isCallExpression)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isCallExpression)![0];
 
     const result = handleCalc(node, withDefaultContext(program.getTypeChecker()));
 
@@ -89,8 +89,8 @@ describe('handleCalc', () => {
       calc.subtract(myVars.foo, '2rem')
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isCallExpression)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isCallExpression)![0];
 
     const result = handleCalc(
       node,
@@ -107,8 +107,8 @@ describe('handleCalc', () => {
       calc.multiply('20px', '2')
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isCallExpression)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isCallExpression)![0];
 
     const result = handleCalc(node, withDefaultContext(program.getTypeChecker()));
 
@@ -122,8 +122,8 @@ describe('handleCalc', () => {
       calc.multiply(foo, '2')
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isCallExpression)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isCallExpression)![0];
 
     const result = handleCalc(node, withDefaultContext(program.getTypeChecker()));
 
@@ -135,8 +135,8 @@ describe('handleCalc', () => {
       calc.multiply(myVars.foo, '2')
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isCallExpression)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isCallExpression)![0];
 
     const result = handleCalc(
       node,
@@ -153,8 +153,8 @@ describe('handleCalc', () => {
       calc.divide('20px', '2')
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isCallExpression)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isCallExpression)![0];
 
     const result = handleCalc(node, withDefaultContext(program.getTypeChecker()));
 
@@ -168,8 +168,8 @@ describe('handleCalc', () => {
       calc.divide(foo, '2')
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isCallExpression)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isCallExpression)![0];
 
     const result = handleCalc(node, withDefaultContext(program.getTypeChecker()));
 
@@ -181,8 +181,8 @@ describe('handleCalc', () => {
       calc.divide(myVars.foo, '2')
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isCallExpression)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isCallExpression)![0];
 
     const result = handleCalc(
       node,
@@ -199,8 +199,8 @@ describe('handleCalc', () => {
       calc.negate('20px')
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isCallExpression)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isCallExpression)![0];
 
     const result = handleCalc(node, withDefaultContext(program.getTypeChecker()));
 
@@ -214,8 +214,8 @@ describe('handleCalc', () => {
       calc.negate(foo)
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isCallExpression)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isCallExpression)![0];
 
     const result = handleCalc(node, withDefaultContext(program.getTypeChecker()));
 
@@ -227,8 +227,8 @@ describe('handleCalc', () => {
       calc.negate(myVars.foo)
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isCallExpression)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isCallExpression)![0];
 
     const result = handleCalc(
       node,
