@@ -4,6 +4,7 @@ import {backgroundStyleFnConfigs} from './background';
 import {borderStyleFnConfigs} from './border';
 import {colorStyleFnConfigs} from './color';
 import {depthStyleFnConfigs} from './depth';
+import {flexStyleFnConfigs} from './flex';
 import {flexItemStyleFnConfigs} from './flexItem';
 import {gridItemStyleFnConfigs} from './gridItem';
 import {layoutStyleFnConfigs} from './layout';
@@ -19,6 +20,7 @@ const stylePropHash = [
   ...borderStyleFnConfigs,
   ...colorStyleFnConfigs,
   ...depthStyleFnConfigs,
+  ...flexStyleFnConfigs,
   ...flexItemStyleFnConfigs,
   ...gridItemStyleFnConfigs,
   ...layoutStyleFnConfigs,
