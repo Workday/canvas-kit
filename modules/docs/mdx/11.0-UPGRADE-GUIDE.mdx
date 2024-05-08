@@ -13,6 +13,30 @@ This guide contains an overview of the changes in Canvas Kit v11. Please
 [reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have
 any questions.
 
+## Why you should migrate
+
+Canvas Kit v11 is a transition into a new
+[styling future](https://github.com/Workday/canvas-kit/discussions/2265). Theming and building an in
+sync Canvas Kit CSS has been at the top of our minds. We've started using our new
+[Canvas Tokens Web](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs)
+package to take advantage of
+[CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) and
+provide semantic tokens that can translate to theming components.
+
+A note to the reader:
+
+- While we still support our old tokens from `@workday/canvas-kit-react/tokens` we encourage
+  consumers to start using our new tokens from `@workday/canvas-tokens-web`. You can find more info
+  in our [docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
+- In this release, we've introduced a
+  [new styling API](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-stencil).
+  This shouldn't effect the way you currently style your components. Because we're moving away from
+  Emotion, support for style props will eventually be removed, however, this API provide backwards
+  compatability. If you want to slowly move off of Emotion as well, you can style styling components
+  via the `cs` prop or our new styling utilities.
+
+## Table of contents
+
 - [Codemod](#codemod)
 - [Deprecations](#deprecations)
   - [Form Field (Main)](#form-field-main)
@@ -33,6 +57,7 @@ any questions.
   - [Text](#text)
 - [Style Utility Updates](#style-utility-updates)
   - [createStencil](#createstencil)
+- [Troubleshooting](#troubleshooting)
 - [Glossary](#glossary)
   - [Main](#main)
   - [Preview](#preview)
@@ -879,6 +904,27 @@ may change the way your component works if you use the `width` style property.
 > **Note:** This is only a breaking change if you were using `createStencil` to apply margin and
 > padding without box-sizing. For reference, view box-sizing
 > [documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing).
+
+## Troubleshooting
+
+### My styles seem broken
+
+Our components are reliant on our new Canvas Tokens Web package. Be sure you install
+`@workday/canvas-tokens-web`. For more information, reference our
+[Getting Started docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs)
+for this package.
+
+### Did you upgrade all Canvas Kit related packages
+
+In order for all the packages to work in harmony, you must upgrade all Canvas Kit packages that
+you're using at the same time, including:
+
+- `@workday/canvas-kit-react`
+- `@workday/canvas-kit-preview-react`
+- `@workday/canvas-kit-labs-react`
+- `@workday/canvas-kit-styling`
+- `@workday/canvas-kit-react-fonts`
+- `@workday/canvas-kit-docs`
 
 ## Glossary
 
