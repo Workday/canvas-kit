@@ -384,17 +384,17 @@
         "__isArgsStory": false
       }
     },
-    "styling-mergiing-styles--styling-overrides": {
-      "id": "styling-mergiing-styles--styling-overrides",
+    "styling-merging-styles--styling-overrides": {
+      "id": "styling-merging-styles--styling-overrides",
       "name": "Styling Overrides",
-      "title": "Styling/Mergiing Styles",
+      "title": "Styling/Merging Styles",
       "importPath": "./modules/styling/stories/MergingStyles.stories.mdx",
-      "kind": "Styling/Mergiing Styles",
+      "kind": "Styling/Merging Styles",
       "story": "Styling Overrides",
       "parameters": {
         "fileName": "./modules/styling/stories/MergingStyles.stories.mdx",
         "framework": "react",
-        "__id": "styling-mergiing-styles--styling-overrides",
+        "__id": "styling-merging-styles--styling-overrides",
         "__isArgsStory": false
       }
     },
