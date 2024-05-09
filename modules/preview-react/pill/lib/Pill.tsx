@@ -115,7 +115,7 @@ const StyledBasePill = styled(BaseButton)<StyledType & PillProps>(
   boxStyleFn
 );
 
-const StyledNonInteractivePill = styled(StyledBasePill)<StyledType & CSProps>({
+const StyledRemoveablePill = styled(StyledBasePill)<StyledType & CSProps>({
   [buttonStencil.vars.background]: colors.soap300,
   [buttonStencil.vars.border]: colors.licorice200,
   [buttonStencil.vars.label]: colors.blackPepper400,
@@ -126,6 +126,7 @@ const StyledNonInteractivePill = styled(StyledBasePill)<StyledType & CSProps>({
     [buttonStencil.vars.border]: colors.licorice200,
     [buttonStencil.vars.label]: colors.blackPepper400,
     [systemIconStencil.vars.backgroundColor]: colors.soap300,
+    boxShadow: 'none',
   },
 
   '&:hover, &.hover': {
@@ -153,7 +154,7 @@ const StyledNonInteractivePill = styled(StyledBasePill)<StyledType & CSProps>({
   position: 'relative',
 });
 
-const StyledReadOnlyPill = styled(StyledNonInteractivePill)<StyledType>({
+const StyledReadOnlyPill = styled(StyledRemoveablePill)<StyledType>({
   [buttonStencil.vars.background]: 'transparent',
   '&:hover, &.hover': {
     [buttonStencil.vars.background]: 'transparent',
@@ -308,7 +309,7 @@ export const Pill = createContainer('button')({
         </StyledBasePill>
       )}
       {variant === 'removable' && (
-        <StyledNonInteractivePill
+        <StyledRemoveablePill
           as={Element !== 'button' ? Element : 'span'}
           variant={variant}
           type={undefined}
@@ -322,7 +323,7 @@ export const Pill = createContainer('button')({
               return <Flex.Item key={index}>{child}</Flex.Item>;
             })}
           </Flex>
-        </StyledNonInteractivePill>
+        </StyledRemoveablePill>
       )}
     </>
   );
