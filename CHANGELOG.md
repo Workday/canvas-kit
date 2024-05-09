@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.38](https://github.com/Workday/canvas-kit/releases/tag/v10.3.38) (2024-05-09)
+
+### Documentation
+
+- docs: Fix typo in Merging Styles story name ([#2732](https://github.com/Workday/canvas-kit/pull/2732)) ([@josephnle](https://github.com/josephnle))
+
+
 ## [v10.3.37](https://github.com/Workday/canvas-kit/releases/tag/v10.3.37) (2024-05-03)
 
 ### Components
