@@ -1,9 +1,11 @@
 import {CSToPropsInput, handleCsProp} from '@workday/canvas-kit-styling';
 import {boxStyleFn} from '../Box';
+import {flex} from '../utils/flex';
 import {backgroundStyleFnConfigs} from './background';
 import {borderStyleFnConfigs} from './border';
 import {colorStyleFnConfigs} from './color';
 import {depthStyleFnConfigs} from './depth';
+import {flexStyleFnConfigs} from './flex';
 import {flexItemStyleFnConfigs} from './flexItem';
 import {gridItemStyleFnConfigs} from './gridItem';
 import {layoutStyleFnConfigs} from './layout';
@@ -19,6 +21,7 @@ const stylePropHash = [
   ...borderStyleFnConfigs,
   ...colorStyleFnConfigs,
   ...depthStyleFnConfigs,
+  ...flexStyleFnConfigs,
   ...flexItemStyleFnConfigs,
   ...gridItemStyleFnConfigs,
   ...layoutStyleFnConfigs,
@@ -75,7 +78,7 @@ export function mergeStyles<T extends {}>(
   // We have style props. We need to create style and merge with our `csToProps` to get the correct
   // merging order for styles
   if (shouldRuntimeMergeStyles) {
-    styles = boxStyleFn(styleProps);
+    styles = {...boxStyleFn(styleProps), ...flex(styleProps)};
   }
 
   return handleCsProp(elemProps, [localCs, styles]) as Omit<T, 'cs' | keyof CommonStyleProps>;

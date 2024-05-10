@@ -662,6 +662,73 @@ describe('handleCreateStencil', () => {
     );
   });
 
+  it('should use the correct prefix in extended stencils when the base stencil is from another prefix', () => {
+    _reset();
+    const styles = {};
+    const program = createProgramFromSource([
+      {
+        filename: 'test.ts',
+        source: `
+          import {createStencil} from '@workday/canvas-kit-styling';
+
+          import {baseStencil} from './base';
+
+          export const extendedStencil = createStencil({
+            extends: baseStencil,
+            vars: {
+              extendedColor: 'blue'
+            },
+            base({color}) {
+              return {
+                [color]: 'blue'
+              }
+            }
+          })
+        `,
+      },
+      {
+        filename: 'base.ts',
+        source: `
+          import {createStencil} from '@workday/canvas-kit-styling';
+
+          export const baseStencil = createStencil({
+            vars: {
+              color: 'red',
+            },
+            base: {
+              padding: 5
+            },
+          });
+
+          const test = createStencil({
+            vars: {
+              foo: 'bar'
+            }
+          }, 'base-base')
+        `,
+      },
+    ]);
+
+    const result = transform(
+      program,
+      'test.ts',
+      withDefaultContext(program.getTypeChecker(), {
+        styles,
+        getPrefix: p => (p.includes('base') ? 'base' : 'css'),
+      })
+    );
+
+    expect(result).toContain(
+      'styles: "--css-extended-extendedColor:blue;box-sizing:border-box;--base-base-color:blue;"'
+    );
+
+    expect(getFile(styles, 'test.css')).toContainEqual(
+      compileCSS(
+        '.css-extended {--css-extended-extendedColor:blue;box-sizing:border-box;--base-base-color:blue;}'
+      )
+    );
+  });
+
   describe('extended stencil', () => {
     let program: ts.Program;
     const styles = {};
