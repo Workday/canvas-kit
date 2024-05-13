@@ -3,7 +3,7 @@ import {LoadingDots} from '@workday/canvas-kit-react/loading-dots';
 import {base, system} from '@workday/canvas-tokens-web';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
-import {createStyles, cssVar} from '@workday/canvas-kit-styling';
+import {createStyles} from '@workday/canvas-kit-styling';
 import {AccessibleHide, AriaLiveRegion} from '@workday/canvas-kit-react/common';
 
 const styleOverrides = {
@@ -11,7 +11,7 @@ const styleOverrides = {
     gap: system.space.x4,
   }),
   loadingStyles: createStyles({
-    backgroundColor: base.licorice300,
+    backgroundColor: system.color.bg.muted.default,
     padding: system.space.x3,
   }),
 };

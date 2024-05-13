@@ -8,12 +8,12 @@ import {
   caretDownIcon,
 } from '@workday/canvas-system-icons-web';
 import {createStyles} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 const parentContainerStyles = createStyles({
   gap: system.space.x4,
   padding: system.space.x4,
-  backgroundColor: base.blueberry400,
+  backgroundColor: system.color.bg.primary.default,
 });
 
 export const SecondaryInverse = () => (

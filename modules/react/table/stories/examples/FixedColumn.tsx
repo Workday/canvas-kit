@@ -2,23 +2,22 @@ import React from 'react';
 
 import {Table} from '@workday/canvas-kit-react/table';
 import {Heading} from '@workday/canvas-kit-react/text';
-import {colors} from '@workday/canvas-kit-react/tokens';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
-import {createStyles} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 const styleOverrides = {
   parentContainerStyles: createStyles({
     marginBottom: system.space.x4,
   }),
   tableStyles: createStyles({
-    width: 690,
+    width: px2rem(690),
   }),
   tableHeaderStyles: createStyles({
     position: 'sticky',
     left: system.space.zero,
-    backgroundColor: base.soap100,
-    borderRight: `2px solid ${base.soap400}`,
+    backgroundColor: system.color.bg.alt.softer,
+    borderRight: `2px solid ${system.color.border.divider}`,
   }),
 };
 
