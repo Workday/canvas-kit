@@ -2,10 +2,10 @@ import React from 'react';
 
 import {Table} from '@workday/canvas-kit-react/table';
 import {createStyles} from '@workday/canvas-kit-styling';
-import {base} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 const tableHeaderStyles = createStyles({
-  backgroundColor: base.soap100,
+  backgroundColor: system.color.bg.alt.softer,
 });
 
 export const Basic = () => {

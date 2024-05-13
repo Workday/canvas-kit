@@ -4,14 +4,14 @@ import {Table} from '@workday/canvas-kit-react/table';
 import {Heading} from '@workday/canvas-kit-react/text';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
 import {createStyles} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 const styleOverrides = {
   parentContainerStyles: createStyles({
     marginBottom: system.space.x4,
   }),
   tableHeaderStyles: createStyles({
-    backgroundColor: base.soap100,
+    backgroundColor: system.color.bg.alt.softer,
   }),
 };
 

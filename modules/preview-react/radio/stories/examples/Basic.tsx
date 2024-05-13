@@ -2,10 +2,10 @@ import React from 'react';
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 
 const formfieldInputStyles = createStyles({
-  width: '200px',
+  width: px2rem(200),
 });
 
 export const Basic = () => {

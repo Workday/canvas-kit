@@ -2,12 +2,12 @@ import React from 'react';
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {base} from '@workday/canvas-tokens-web';
 
 const styleOverrides = {
   formfieldInputStyles: createStyles({
-    width: '200px',
+    width: px2rem(200),
   }),
   radioGroupLabelTextStyles: createStyles({
     color: base.berrySmoothie400,

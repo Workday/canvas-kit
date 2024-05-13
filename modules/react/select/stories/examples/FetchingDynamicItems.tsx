@@ -4,11 +4,11 @@ import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {useMount} from '@workday/canvas-kit-react/common';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 
 const parentContainerStyles = createStyles({
   flexDirection: 'column',
-  maxWidth: 300,
+  maxWidth: px2rem(300),
 });
 
 const movieListItems = [

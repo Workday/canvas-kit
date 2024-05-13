@@ -5,7 +5,7 @@ import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const styleOverrides = createStyles({
-  marginLeft: system.space.x8,
+  marginInlineLeft: system.space.x8,
   marginTop: system.space.x2,
 });
 

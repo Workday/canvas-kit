@@ -2,10 +2,10 @@ import React from 'react';
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {Select} from '@workday/canvas-kit-react/select';
 import {Box} from '@workday/canvas-kit-react/layout';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 
 const selectCardStyles = createStyles({
-  maxHeight: 200,
+  maxHeight: px2rem(200),
 });
 
 const cities = [

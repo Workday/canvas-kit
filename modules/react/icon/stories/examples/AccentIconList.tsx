@@ -3,7 +3,7 @@ import * as CanvasAccenttIcons from '@workday/canvas-accent-icons-web';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {AccentIcon} from '@workday/canvas-kit-react/icon';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const ImportedIcons = Object.keys(CanvasAccenttIcons);
@@ -16,12 +16,12 @@ const styleOverrides = {
     alignItems: 'center',
     gap: system.space.x6,
   }),
-  firstChildContainer: createStyles({
+  iconGroupContainer: createStyles({
     flexWrap: 'wrap',
   }),
-  secondChildContainer: createStyles({
+  individualIconContainer: createStyles({
     alignItems: 'center',
-    width: `max(320px,20%)`,
+    width: `max(${px2rem(320)},20%)`,
     flexDirection: 'row',
     gap: system.space.x3,
     padding: system.space.x3,
@@ -38,7 +38,7 @@ export const AccentIconList = () => {
   return (
     <Flex cs={styleOverrides.parentContainer}>
       <TextInput onKeyDown={e => handleSearch(e)} placeholder="Search for an icon" />
-      <Flex cs={styleOverrides.firstChildContainer}>
+      <Flex cs={styleOverrides.iconGroupContainer}>
         {allIcons
           .filter(icon => {
             if (value === '') {
@@ -49,7 +49,7 @@ export const AccentIconList = () => {
           })
           .map((singleIcon, index) => {
             return (
-              <Flex cs={styleOverrides.secondChildContainer} key={index}>
+              <Flex cs={styleOverrides.individualIconContainer} key={index}>
                 <Box>
                   <AccentIcon icon={CanvasAccenttIcons[singleIcon]} />
                 </Box>

@@ -17,7 +17,8 @@ import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
 import {LoadingDots} from '@workday/canvas-kit-react/loading-dots';
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 const colors = ['Red', 'Blue', 'Purple', 'Green', 'Pink'];
 const fruits = ['Apple', 'Orange', 'Banana', 'Grape', 'Lemon', 'Lime'];
@@ -47,7 +48,7 @@ const AutoCompleteInput = createSubcomponent(TextInput)({
 
 const styleOverrides = {
   inputGroupInner: createStyles({
-    width: 20,
+    width: px2rem(20),
     transition: 'opacity 100ms ease',
   }),
   loadingDots: createStyles({
@@ -55,7 +56,7 @@ const styleOverrides = {
     transform: 'scale(0.3)',
   }),
   comboboxMenuList: createStyles({
-    maxHeight: 200,
+    maxHeight: px2rem(200),
   }),
 };
 
@@ -112,7 +113,7 @@ export const Autocomplete = () => {
           <InputGroup.InnerEnd
             cs={styleOverrides.inputGroupInner}
             pointerEvents="none"
-            style={{opacity: loader.isLoading ? 1 : 0}}
+            style={{opacity: loader.isLoading ? system.opacity.full : system.opacity.zero}}
             data-loading={loader.isLoading}
           >
             <LoadingDots cs={styleOverrides.loadingDots} />
