@@ -155,6 +155,7 @@ export const useSelectInput = composeHooks(
               : '',
         },
         ref: elementRef,
+        'aria-haspopup': 'menu',
       } as const;
     }
   ),
