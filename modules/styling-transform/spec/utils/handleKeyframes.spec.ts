@@ -37,18 +37,18 @@ describe('handleKeyframes', () => {
       const buttonAnimation = keyframes\`\`
     `);
 
-    const keyframes = {};
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isTaggedTemplateExpression)[0];
+    const variables = {};
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isTaggedTemplateExpression)![0];
 
     handleKeyframes(
       node,
       withDefaultContext(program.getTypeChecker(), {
-        keyframes,
+        variables,
       })
     );
 
-    expect(keyframes).toHaveProperty(
+    expect(variables).toHaveProperty(
       'buttonAnimation',
       expect.stringMatching(/animation-[a-z0-9]+/)
     );
@@ -90,15 +90,20 @@ describe('handleKeyframes', () => {
     `);
 
     const styles = {};
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, 'keyframes', ts.isCallExpression)[0];
+    const variables = {};
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, 'keyframes', ts.isCallExpression)![0];
 
-    handleKeyframes(node, withDefaultContext(program.getTypeChecker(), {styles}));
+    handleKeyframes(node, withDefaultContext(program.getTypeChecker(), {styles, variables}));
 
     expect(styles['test.css']).toContainEqual(
       expect.stringMatching(
         /@keyframes animation-[a-z0-9]+\s+{\s+from\s+{\s+transform: scale\(0.85\);\s+}\s+to\s+{\s+transform: scale\(1.0\);\s+}\s+}/
       )
+    );
+    expect(variables).toHaveProperty(
+      'buttonAnimation',
+      expect.stringMatching(/animation-[a-z0-9]+/)
     );
   });
 });

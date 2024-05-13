@@ -14,8 +14,8 @@ describe('handleFocusRing', () => {
       focusRing()
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, 'focusRing')[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, 'focusRing')![0];
 
     const result = handleFocusRing(node, withDefaultContext(program.getTypeChecker()));
 
@@ -32,8 +32,8 @@ describe('handleFocusRing', () => {
       })
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, 'focusRing')[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, 'focusRing')![0];
 
     const result = handleFocusRing(
       node,

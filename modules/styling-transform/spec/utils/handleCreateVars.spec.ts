@@ -12,10 +12,10 @@ describe('handleCreateVars', () => {
       const myVars = createVars('color', 'background')
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
+    const sourceFile = program.getSourceFile('test.ts')!;
     const variables: Record<string, string> = {};
 
-    const node = findNodes(sourceFile, 'createVars', ts.isCallExpression)[0];
+    const node = findNodes(sourceFile, 'createVars', ts.isCallExpression)![0];
 
     handleCreateVars(
       node,
@@ -35,10 +35,10 @@ describe('handleCreateVars', () => {
       }
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
+    const sourceFile = program.getSourceFile('test.ts')!;
     const variables: Record<string, string> = {};
 
-    const node = findNodes(sourceFile, 'createVars', ts.isCallExpression)[0];
+    const node = findNodes(sourceFile, 'createVars', ts.isCallExpression)![0];
 
     handleCreateVars(
       node,

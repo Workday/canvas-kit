@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {PaginationModel} from '../types';
-import {LabelText} from '@workday/canvas-kit-react/text';
+import {Subtext} from '@workday/canvas-kit-react/text';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {PaginationContext} from '../usePaginationModel';
 
@@ -16,16 +16,16 @@ export const GoToLabel = createComponent('label')({
   Component({children, ...elemProps}: GoToLabelProps, ref, Element) {
     const model = React.useContext(PaginationContext);
     return (
-      <LabelText
+      <Subtext
         ref={ref}
         as={Element}
-        typeLevel="subtext.medium"
+        size="medium"
         variant="hint"
         whiteSpace="nowrap"
         {...elemProps}
       >
         {typeof children === 'function' ? children(model) : children}
-      </LabelText>
+      </Subtext>
     );
   },
 });

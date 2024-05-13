@@ -42,13 +42,13 @@ export function createProgramFromSource(...args: any[]) {
         (name.startsWith('lib')
           ? ts.createSourceFile(
               name,
-              ts.sys.readFile(`node_modules/typescript/lib/${name}`),
+              ts.sys.readFile(`node_modules/typescript/lib/${name}`)!,
               languageVersion
             )
           : name === 'node_modules/react.ts'
           ? ts.createSourceFile(
               name,
-              ts.sys.readFile(`node_modules/@types/react/index.d.ts`),
+              ts.sys.readFile(`node_modules/@types/react/index.d.ts`)!,
               languageVersion
             )
           : defaultCompilerHost.getSourceFile(name, languageVersion))

@@ -127,7 +127,7 @@ describe('Text Input', () => {
   describe('when rendered with an error', () => {
     it('the input should have aria-invalid for accessibility', () => {
       const {container} = render(
-        <TextInput orientation="vertical" hasError={true}>
+        <TextInput orientation="vertical" error="error">
           <TextInput.Field />
         </TextInput>
       );
@@ -142,7 +142,7 @@ describe('Text Input', () => {
           <TextInput.Field />
         </TextInput>
       );
-      const uniqueId = container.querySelector('input').getAttribute('id');
+      const uniqueId = container.querySelector('input')!.getAttribute('id');
       expect(container.querySelector('input')).toHaveAttribute('id', uniqueId);
     });
   });
