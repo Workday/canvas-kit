@@ -2,8 +2,7 @@ import React from 'react';
 
 import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {Card, cardStencil} from '@workday/canvas-kit-react/card';
-import {background} from '@workday/canvas-kit-react/layout';
+import {Card} from '@workday/canvas-kit-react/card';
 
 const myStencil = createStencil({
   base: {
