@@ -257,10 +257,14 @@ export function getValueFromAliasedSymbol(
     // If there is an aliased symbol and it is a variable declaration, try to resolve the
     if (declaration && hasExpression(declaration)) {
       if (declaration.initializer) {
-        declaration.initializer.getText(); //?
-        transform(declaration.initializer, context);
+        // Update the `prefix` to the alias declaration's source file.
+        const aliasFileContext = {
+          ...context,
+          prefix: context.getPrefix(declaration.getSourceFile().fileName),
+        };
+        transform(declaration.initializer, aliasFileContext);
 
-        return getValueFromProcessedNodes(varName, context);
+        return getValueFromProcessedNodes(varName, aliasFileContext);
       }
     }
   }

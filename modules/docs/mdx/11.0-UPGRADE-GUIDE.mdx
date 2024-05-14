@@ -544,6 +544,19 @@ small visual difference in visual tests.
 
 - `default` has been removed from the `variant` type and is now the default for styles.
 
+We also removed the `default` variant and consolidated those styles into the badge's base styles.
+This will not be a breaking change for most users. However, if you have a `CountBadge` with an
+explicit `default` variant, you'll see a TypeScript error. To resolve this, simply remove the
+variant prop.
+
+```tsx
+// Before (v10)
+<CountBadge variant="default" count={10} />
+
+// After (v11)
+<CountBadge count={10} />
+```
+
 ### Form Field (Preview)
 
 <div style={{display: 'inline-flex', gap: '.5rem'}}>

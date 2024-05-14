@@ -13,8 +13,8 @@ describe('handleCssVar', () => {
       cssVar('--some-var')
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, 'cssVar')[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, 'cssVar')![0];
 
     const result = handleCssVar(node, withDefaultContext(program.getTypeChecker()));
 
@@ -28,8 +28,8 @@ describe('handleCssVar', () => {
       cssVar(someVar)
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, 'cssVar')[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, 'cssVar')![0];
 
     const result = handleCssVar(node, withDefaultContext(program.getTypeChecker()));
 
@@ -41,8 +41,8 @@ describe('handleCssVar', () => {
       cssVar('--some-var', '--fallback')
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, 'cssVar')[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, 'cssVar')![0];
 
     const result = handleCssVar(node, withDefaultContext(program.getTypeChecker()));
 
@@ -54,8 +54,8 @@ describe('handleCssVar', () => {
       cssVar('--some-var', cssVar('--fallback', 'red'))
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, 'cssVar')[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, 'cssVar')![0];
 
     const result = handleCssVar(node, withDefaultContext(program.getTypeChecker()));
 
@@ -67,8 +67,8 @@ describe('handleCssVar', () => {
       cssVar('--some-var'))
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, 'cssVar')[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, 'cssVar')![0];
 
     const result = handleCssVar(
       node,

@@ -595,8 +595,8 @@ describe('createStyles', () => {
     `);
 
     const styles = {};
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, 'createStyles', ts.isCallExpression)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, 'createStyles', ts.isCallExpression)![0];
 
     handleCreateStyles(node, withDefaultContext(program.getTypeChecker(), {styles}));
 

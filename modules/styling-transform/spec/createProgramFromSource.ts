@@ -80,7 +80,7 @@ export function createProgramFromSource(...args: any[]) {
       if (name.startsWith('lib')) {
         return ts.createSourceFile(
           name,
-          ts.sys.readFile(`node_modules/typescript/lib/${name}`),
+          ts.sys.readFile(`node_modules/typescript/lib/${name}`)!,
           languageVersion
         );
       }

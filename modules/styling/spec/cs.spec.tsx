@@ -571,6 +571,24 @@ describe('cs', () => {
       expect(typeof myStencil.modifiers.size.large).toEqual('string');
     });
 
+    it('should apply modifiers in the correct order regardless of the order they are defined when calling the stencil', () => {
+      const myStencil = createStencil({
+        base: {},
+        modifiers: {
+          size: {
+            large: {},
+          },
+          position: {
+            start: {},
+          },
+        },
+      });
+
+      expect(myStencil({position: 'start', size: 'large'}).className).toEqual(
+        `${myStencil.base} ${myStencil.modifiers.size.large} ${myStencil.modifiers.position.start}`
+      );
+    });
+
     it('should default modifiers if no modifier override is passed', () => {
       const myStencil = createStencil({
         base: {
@@ -771,35 +789,25 @@ describe('cs', () => {
     });
 
     it('should handle both variables and modifiers sharing the same key', () => {
-      const myStencil = createStencil(
-        {
-          vars: {
-            width: '10px',
-            height: '10px',
-          },
-          base({width}) {
-            return {width: width};
-          },
-          modifiers: {
-            width: {
-              zero: {
-                width: '0',
-              },
+      const myStencil = createStencil({
+        vars: {
+          width: '10px',
+          height: '10px',
+        },
+        base({width}) {
+          return {width: width};
+        },
+        modifiers: {
+          width: {
+            zero: {
+              width: '0',
             },
-            foo: {
-              true: {
-                name: 'foo',
-                styles: 'overflow:scroll',
-              },
-            },
+          },
+          foo: {
+            true: {},
           },
         },
-        'cnvs-my'
-      );
-
-      myStencil({width: '12px'});
-
-      myStencil({foo: true}); //?
+      });
 
       type Arg = Exclude<Parameters<typeof myStencil>[0], undefined>;
       expectTypeOf<Arg>().toHaveProperty('width');

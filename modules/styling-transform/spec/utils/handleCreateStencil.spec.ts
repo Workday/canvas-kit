@@ -7,7 +7,7 @@ import {handleCreateStencil} from '../../lib/utils/handleCreateStencil';
 import {transform, withDefaultContext, _reset} from '../../lib/styleTransform';
 import {compileCSS} from '../../lib/utils/createStyleObjectNode';
 
-function getFile<K extends string, T extends Record<K, any>>(styles: T, name: string): T[K] {
+function getFile<K extends string, T extends Record<K, any>>(styles: T, name: string): T[K] | void {
   for (const style in styles) {
     if (style.includes(name)) {
       // @ts-ignore
@@ -49,10 +49,10 @@ describe('handleCreateStencil', () => {
         })
       `);
 
-      const sourceFile = program.getSourceFile('test.ts');
+      const sourceFile = program.getSourceFile('test.ts')!;
       const variables: Record<string, string> = {};
 
-      const node = findNodes(sourceFile, 'createStencil', ts.isCallExpression)[0];
+      const node = findNodes(sourceFile, 'createStencil', ts.isCallExpression)![0];
 
       handleCreateStencil(
         node,
@@ -331,8 +331,8 @@ describe('handleCreateStencil', () => {
       `);
 
       const styles = {};
-      const sourceFile = program.getSourceFile('test.ts');
-      const node = findNodes(sourceFile, 'createStencil', ts.isCallExpression)[0];
+      const sourceFile = program.getSourceFile('test.ts')!;
+      const node = findNodes(sourceFile, 'createStencil', ts.isCallExpression)![0];
 
       handleCreateStencil(node, withDefaultContext(program.getTypeChecker(), {styles}));
 
@@ -381,8 +381,8 @@ describe('handleCreateStencil', () => {
       `);
 
       const styles = {};
-      const sourceFile = program.getSourceFile('test.ts');
-      const node = findNodes(sourceFile, 'createStencil', ts.isCallExpression)[0];
+      const sourceFile = program.getSourceFile('test.ts')!;
+      const node = findNodes(sourceFile, 'createStencil', ts.isCallExpression)![0];
 
       handleCreateStencil(node, withDefaultContext(program.getTypeChecker(), {styles}));
 
@@ -425,8 +425,8 @@ describe('handleCreateStencil', () => {
       `);
 
       const styles = {};
-      const sourceFile = program.getSourceFile('test.ts');
-      const node = findNodes(sourceFile, 'createStencil', ts.isCallExpression)[0];
+      const sourceFile = program.getSourceFile('test.ts')!;
+      const node = findNodes(sourceFile, 'createStencil', ts.isCallExpression)![0];
 
       handleCreateStencil(node, withDefaultContext(program.getTypeChecker(), {styles}));
 
@@ -659,6 +659,73 @@ describe('handleCreateStencil', () => {
 
     expect(getFile(styles, 'test.css')).toContainEqual(
       compileCSS('.css-final {box-sizing:border-box;--css-base-color: purple;}')
+    );
+  });
+
+  it('should use the correct prefix in extended stencils when the base stencil is from another prefix', () => {
+    _reset();
+    const styles = {};
+    const program = createProgramFromSource([
+      {
+        filename: 'test.ts',
+        source: `
+          import {createStencil} from '@workday/canvas-kit-styling';
+
+          import {baseStencil} from './base';
+
+          export const extendedStencil = createStencil({
+            extends: baseStencil,
+            vars: {
+              extendedColor: 'blue'
+            },
+            base({color}) {
+              return {
+                [color]: 'blue'
+              }
+            }
+          })
+        `,
+      },
+      {
+        filename: 'base.ts',
+        source: `
+          import {createStencil} from '@workday/canvas-kit-styling';
+
+          export const baseStencil = createStencil({
+            vars: {
+              color: 'red',
+            },
+            base: {
+              padding: 5
+            },
+          });
+
+          const test = createStencil({
+            vars: {
+              foo: 'bar'
+            }
+          }, 'base-base')
+        `,
+      },
+    ]);
+
+    const result = transform(
+      program,
+      'test.ts',
+      withDefaultContext(program.getTypeChecker(), {
+        styles,
+        getPrefix: p => (p.includes('base') ? 'base' : 'css'),
+      })
+    );
+
+    expect(result).toContain(
+      'styles: "--css-extended-extendedColor:blue;box-sizing:border-box;--base-base-color:blue;"'
+    );
+
+    expect(getFile(styles, 'test.css')).toContainEqual(
+      compileCSS(
+        '.css-extended {--css-extended-extendedColor:blue;box-sizing:border-box;--base-base-color:blue;}'
+      )
     );
   });
 

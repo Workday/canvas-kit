@@ -1,6 +1,12 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["./jest/testing-library__jest-dom.d.ts", "./jest/verifyComponent.d.ts", "**/*.spec.tsx", "**/*.spec.ts","jest/setupTests.ts"],
+  "include": [
+    "./jest/testing-library__jest-dom.d.ts",
+    "./jest/verifyComponent.d.ts",
+    "**/*.spec.tsx",
+    "**/*.spec.ts",
+    "jest/setupTests.ts"
+  ],
   "exclude": ["cypress"],
   "compilerOptions": {
     "declaration": false,
@@ -10,7 +16,7 @@
     "preserveConstEnums": true,
     "allowUnreachableCode": false,
     "noImplicitAny": false,
-    "strictNullChecks": false,
+    "strictNullChecks": true,
     "noUnusedLocals": false,
     "types": ["jest"],
     "incremental": false
