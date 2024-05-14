@@ -9,12 +9,13 @@ import {createStyleObjectNode, serializeStyles} from './createStyleObjectNode';
 import {getValueFromAliasedSymbol, parseNodeToStaticValue} from './parseNodeToStaticValue';
 import {NestedStyleObject, NodeTransformer, TransformerContext} from './types';
 import {isImportedFromStyling} from './isImportedFromStyling';
+import {getHash} from './getHash';
 
 /**
  * Handle all arguments of the CallExpression `createStencil()`
  */
 export const handleCreateStencil: NodeTransformer = (node, context) => {
-  const {checker, prefix, variables} = context;
+  const {checker, prefix, names, extractedNames} = context;
   /**
    * This will match whenever a `createStencil()` call expression is encountered. It will loop
    * over all the config to extract variables and styles.
@@ -33,7 +34,7 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
     const stencilVariables: Record<string, string> = {};
 
     // Stencil name is the variable name
-    const stencilName = slugify(getVarName(node.expression)).replace('-stencil', '');
+    const stencilName = getVarName(node.expression);
 
     if (ts.isObjectLiteralExpression(config)) {
       const extendedFrom = config.properties.reduce((result, property) => {
@@ -46,7 +47,7 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
           ts.isIdentifier(property.initializer)
         ) {
           const className = getClassName(property.initializer.text, context);
-          const extendsStencilName = className.split('-').slice(1).join('-');
+          const extendsStencilName = property.initializer.text;
 
           if (
             !Object.values(context.styles).some(fileStyles => {
@@ -58,11 +59,10 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
           }
 
           // attach all variables from extends stencil
-          Object.keys(context.variables).forEach(key => {
-            if (key.startsWith(`${extendsStencilName}-`)) {
+          Object.keys(names).forEach(key => {
+            if (key.startsWith(`${extendsStencilName}.`)) {
               // We want to copy a new entry into variables that is the extended stencil with the same variable name as the base variable name
-              context.variables[key.replace(extendsStencilName, stencilName)] =
-                context.variables[key];
+              names[key.replace(extendsStencilName, stencilName)] = names[key];
             }
           });
 
@@ -81,30 +81,31 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
         );
       }) as ts.PropertyAssignment | undefined;
 
-      function extractVariables(node: ts.Node): any {
+      function extractNames(node: ts.Node): any {
         if (ts.isPropertyAssignment(node) && ts.isIdentifier(node.name)) {
           if (ts.isObjectLiteralExpression(node.initializer)) {
-            return node.initializer.properties.map(extractVariables);
+            return node.initializer.properties.map(extractNames);
           }
 
-          const varName = `${stencilName}-${makeEmotionSafe(node.name.text)}`;
-          const varValue = `--${prefix}-${varName}`;
-          variables[`${varName}`] = varValue;
+          const varName = getVarName(node.name);
+          const varValue = `--${getClassName(varName, context)}`;
+          names[varName] = `--${prefix}-${getHash(node.initializer, context)}`;
 
-          variables[makeEmotionSafe(node.name.text)] = varValue;
+          names[node.name.text] = names[varName];
+          extractedNames[names[varName]] = varValue;
 
           // Evaluate the variable defaults
           const value = parseNodeToStaticValue(node.initializer, context).toString();
           if (value) {
             // Only add the stencil variable if there's a value. An empty string means no default.
-            stencilVariables[varValue] = value;
+            stencilVariables[names[varName]] = value;
           }
         }
       }
 
       if (varsConfig && ts.isObjectLiteralExpression(varsConfig.initializer)) {
         varsConfig.initializer.properties.forEach(variable => {
-          extractVariables(variable);
+          extractNames(variable);
         });
       }
 
@@ -156,9 +157,13 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
                       ts.factory.updateObjectLiteralExpression(
                         modifierProperty.initializer,
                         modifierProperty.initializer.properties.map(modifier => {
-                          const styleObj = parseStyleBlock(modifier, context, stencilName);
+                          const styleObj = parseStyleBlock(
+                            modifier,
+                            context,
+                            getClassName(stencilName, context)
+                          );
 
-                          if (styleObj && modifier.name && Object.keys(styleObj).length) {
+                          if (styleObj && modifier.name) {
                             const initializer = createStyleReplacementNode(
                               modifier,
                               styleObj,
@@ -331,7 +336,7 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
 
       return ts.factory.updateCallExpression(node, node.expression, undefined, [
         ts.factory.updateObjectLiteralExpression(config, configProperties),
-        ts.factory.createStringLiteral(`${prefix}-${stencilName}`),
+        ts.factory.createStringLiteral(getClassName(stencilName, context)),
       ]);
     }
   }
@@ -353,7 +358,7 @@ function parseStyleBlock(
     if (ts.isObjectLiteralExpression(property.initializer)) {
       styleObj = parseObjectToStaticValue(property.initializer, {
         ...context,
-        variableScope: `${stencilName}-`,
+        nameScope: `${stencilName}-`,
       });
     }
 
@@ -362,7 +367,7 @@ function parseStyleBlock(
       if (returnNode) {
         styleObj = parseObjectToStaticValue(returnNode, {
           ...context,
-          variableScope: `${stencilName}-`,
+          nameScope: `${stencilName}-`,
         });
       }
     }
@@ -373,7 +378,7 @@ function parseStyleBlock(
     if (returnNode) {
       styleObj = parseObjectToStaticValue(returnNode, {
         ...context,
-        variableScope: `${stencilName}-`,
+        nameScope: `${stencilName}-`,
       });
     }
   }
@@ -413,15 +418,22 @@ function createStyleReplacementNode(
   className: string,
   context: TransformerContext
 ) {
+  const {prefix, names, extractedNames} = context;
   const serialized = serializeStyles(node, styleObj, `.${className}{%s}`, context);
+
+  const varName = getVarName(node);
+  const value = `${prefix}-${serialized.name}`;
+  names[varName] = value;
+  extractedNames[value] = getClassName(varName, context);
 
   return createStyleObjectNode(serialized.styles, serialized.name);
 }
 
-function getClassName(name: string, {prefix}: TransformerContext): string {
+export function getClassName(name: string, {prefix}: TransformerContext): string {
   return (
     `${prefix}-` +
     slugify(name)
+      .replace('-vars', '')
       .replace('-stencil', '')
       .replace('-base', '')
       .replace('-modifiers', '-')

@@ -261,9 +261,15 @@ describe('createStyles', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts');
+    const names = {};
 
-    expect(result).toContain('background-color:var(--cnvs-my-color);');
+    const result = transform(
+      program,
+      'test.ts',
+      withDefaultContext(program.getTypeChecker(), {names})
+    );
+
+    expect(result).toContain(`background-color:var(${names['myVars.color']});`);
   });
 
   it('should handle cssVar call expressions referencing nested variables', () => {
@@ -279,9 +285,15 @@ describe('createStyles', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts');
+    const names = {};
 
-    expect(result).toContain('background-color:var(--cnvs-my-colors-background);');
+    const result = transform(
+      program,
+      'test.ts',
+      withDefaultContext(program.getTypeChecker(), {names})
+    );
+
+    expect(result).toContain(`background-color:var(${names['myVars.colors.background']});`);
   });
 
   it('should handle css vars even without the cssVar call expressions referencing static variables', () => {
@@ -313,9 +325,15 @@ describe('createStyles', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts');
+    const names = {};
 
-    expect(result).toContain('background-color:var(--cnvs-my-colors-background);');
+    const result = transform(
+      program,
+      'test.ts',
+      withDefaultContext(program.getTypeChecker(), {names})
+    );
+
+    expect(result).toContain(`background-color:var(${names['myVars.colors.background']});`);
   });
 
   it('should handle ComputedPropertyName that are static', () => {
@@ -347,9 +365,15 @@ describe('createStyles', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts');
+    const names = {};
 
-    expect(result).toContain('--cnvs-my-color:red;');
+    const result = transform(
+      program,
+      'test.ts',
+      withDefaultContext(program.getTypeChecker(), {names})
+    ); //?
+
+    expect(result).toContain(`${names['myVars.color']}:red;`);
   });
 
   it('should slugify ComputedPropertyName with capital letters that is a variable created with createVars', () => {
@@ -363,9 +387,15 @@ describe('createStyles', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts');
+    const names = {};
 
-    expect(result).toContain('--cnvs-my-hoverColor:red;');
+    const result = transform(
+      program,
+      'test.ts',
+      withDefaultContext(program.getTypeChecker(), {names})
+    );
+
+    expect(result).toContain(`${names['myVars.hoverColor']}:red;`);
   });
 
   it('should slugify cssVars with capital letters that is a variable created with createVars', () => {
@@ -379,9 +409,15 @@ describe('createStyles', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts');
+    const names = {};
 
-    expect(result).toContain('background-color:var(--cnvs-my-hoverColor);');
+    const result = transform(
+      program,
+      'test.ts',
+      withDefaultContext(program.getTypeChecker(), {names})
+    );
+
+    expect(result).toContain(`background-color:var(${names['myVars.hoverColor']});`);
   });
 
   it('should handle ComputedPropertyName that is a variable created with createVars inside an object', () => {
@@ -397,9 +433,15 @@ describe('createStyles', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts');
+    const names = {};
 
-    expect(result).toContain('--cnvs-my-hover-color:red;');
+    const result = transform(
+      program,
+      'test.ts',
+      withDefaultContext(program.getTypeChecker(), {names})
+    );
+
+    expect(result).toContain(`${names['myVars.hover.color']}:red;`);
   });
 
   it('should handle fallback call expressions referencing static variables', () => {
@@ -413,9 +455,15 @@ describe('createStyles', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts');
+    const names = {};
 
-    expect(result).toContain('background-color:var(--cnvs-my-color, red);');
+    const result = transform(
+      program,
+      'test.ts',
+      withDefaultContext(program.getTypeChecker(), {names})
+    );
+
+    expect(result).toContain(`background-color:var(${names['myVars.color']}, red);`);
   });
 
   it('should handle fallback call expressions referencing other variables', () => {
@@ -429,9 +477,17 @@ describe('createStyles', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts');
+    const names = {};
 
-    expect(result).toContain('background-color:var(--cnvs-my-color, var(--cnvs-my-background));');
+    const result = transform(
+      program,
+      'test.ts',
+      withDefaultContext(program.getTypeChecker(), {names})
+    );
+
+    expect(result).toContain(
+      `background-color:var(${names['myVars.color']}, var(${names['myVars.background']}));`
+    );
   });
 
   it('should handle fallback variables if provided', () => {
@@ -443,7 +499,7 @@ describe('createStyles', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts', {variables: {'--var-1': 'red'}});
+    const result = transform(program, 'test.ts', {names: {'--var-1': 'red'}});
 
     expect(result).toContain('background-color:var(--var-1, red);');
   });
@@ -508,10 +564,16 @@ describe('createStyles', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts');
+    const names = {};
+
+    const result = transform(
+      program,
+      'test.ts',
+      withDefaultContext(program.getTypeChecker(), {names})
+    );
 
     expect(result).toContain('css-12345');
-    expect(result).toContain('border:1px solid var(--cnvs-my-borderColor);');
+    expect(result).toContain(`border:1px solid var(${names['myVars.borderColor']});`);
   });
 
   it('should handle template stings with multiple spans', () => {
@@ -525,28 +587,18 @@ describe('createStyles', () => {
       })
     `);
 
-    const result = transform(program, 'test.ts');
+    const names = {};
+
+    const result = transform(
+      program,
+      'test.ts',
+      withDefaultContext(program.getTypeChecker(), {names})
+    );
 
     expect(result).toContain('css-12345');
     expect(result).toContain(
-      'box-shadow:var(--cnvs-my-boxShadowInner) 0px 0px 0px 2px, var(--cnvs-my-boxShadowOuter) 0px 0px 0px 4px'
+      `box-shadow:var(${names['myVars.boxShadowInner']}) 0px 0px 0px 2px, var(${names['myVars.boxShadowOuter']}) 0px 0px 0px 4px`
     );
-  });
-
-  it('should make variables safe for Emotion', () => {
-    const program = createProgramFromSource(`
-      import {createStyles, createVars} from '@workday/canvas-kit-styling';
-
-      const myVars = createVars('label')
-
-      const styles = createStyles({
-        color: myVars.label
-      })
-    `);
-
-    const result = transform(program, 'test.ts');
-
-    expect(result).toContain('color:var(--cnvs-my-label-emotion-safe)');
   });
 
   it('should handle multiple arguments with an identifier of a type of an object literal', () => {
@@ -630,9 +682,15 @@ describe('createStyles', () => {
       },
     ]);
 
-    const result = transform(program, 'test.ts');
+    const names = {};
 
-    expect(result).toContain('styles: "color:var(--cnvs-source-foo)');
+    const result = transform(
+      program,
+      'test.ts',
+      withDefaultContext(program.getTypeChecker(), {names})
+    );
+
+    expect(result).toContain(`styles: "color:var(${names['sourceVars.foo']})`);
   });
 
   it('should process variable keys from another file if processing is out of order', () => {
@@ -658,9 +716,15 @@ describe('createStyles', () => {
       },
     ]);
 
-    const result = transform(program, 'test.ts');
+    const names = {};
 
-    expect(result).toContain('styles: "--cnvs-source-foo:red;');
+    const result = transform(
+      program,
+      'test.ts',
+      withDefaultContext(program.getTypeChecker(), {names})
+    );
+
+    expect(result).toContain(`styles: "${names['sourceVars.foo']}:red;`);
   });
 
   it('should process nested variable properties from another file if processing is out of order', () => {
@@ -686,9 +750,15 @@ describe('createStyles', () => {
       },
     ]);
 
-    const result = transform(program, 'test.ts');
+    const names = {};
 
-    expect(result).toContain('styles: "color:var(--cnvs-source-default-foo)');
+    const result = transform(
+      program,
+      'test.ts',
+      withDefaultContext(program.getTypeChecker(), {names})
+    );
+
+    expect(result).toContain(`styles: "color:var(${names['sourceVars.default.foo']})`);
   });
 
   it('should process nested variable keys from another file if processing is out of order', () => {
@@ -714,8 +784,14 @@ describe('createStyles', () => {
       },
     ]);
 
-    const result = transform(program, 'test.ts');
+    const names = {};
 
-    expect(result).toContain('styles: "--cnvs-source-default-foo:red;');
+    const result = transform(
+      program,
+      'test.ts',
+      withDefaultContext(program.getTypeChecker(), {names})
+    );
+
+    expect(result).toContain(`styles: "${names['sourceVars.default.foo']}:red;`);
   });
 });
