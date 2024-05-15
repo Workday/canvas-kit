@@ -89,7 +89,6 @@ export default function styleTransformer(
     for (const key in fallbackVars) {
       names[key] = fallbackVars[key];
     }
-    // vars = {...names, ...fallbackVars};
     loadedFallbacks = true;
   }
 
