@@ -1,6 +1,12 @@
 import React from 'react';
 
 import {Table} from '@workday/canvas-kit-react/table';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const tableHeaderStyles = createStyles({
+  backgroundColor: system.color.bg.alt.softer,
+});
 
 export const Basic = () => {
   return (
@@ -8,10 +14,10 @@ export const Basic = () => {
       <Table.Caption>Coffee Drinks and Sizes</Table.Caption>
       <Table.Head>
         <Table.Row>
-          <Table.Header scope="col" backgroundColor="soap100">
+          <Table.Header scope="col" cs={tableHeaderStyles}>
             Drink
           </Table.Header>
-          <Table.Header scope="col" backgroundColor="soap100">
+          <Table.Header scope="col" cs={tableHeaderStyles}>
             Size
           </Table.Header>
         </Table.Row>
