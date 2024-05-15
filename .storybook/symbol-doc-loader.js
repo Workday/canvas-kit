@@ -1,32 +1,23 @@
 // @ts-check
-const {createDocProgram} = require('../modules/docs/docgen/createDocProgram');
 const routes = require('./routes');
+const {getOptions} = require('loader-utils');
 
 const routeKeys = Object.keys(routes);
 
-// Tracks files that have been processed. If a file is already processed, it
-// means the file has been updated and we need to update the Typescript program
-// so the changes are reflected in our doc output. If we don't update the TS
-// program, the docs will be processed with the outdated cache of the file
-// contents.
-const filesProcessedMap = new Map();
-
 /** @typedef {import('webpack').loader.Loader} Loader */
 /** @typedef {import('webpack').loader.LoaderContext} LoaderContext */
-
-let {parser, update} = createDocProgram();
 
 /**
  * @this {LoaderContext}
  * @param {Parameters<Loader>[0]} source
  */
 function symbolDocLoader(source) {
-  if (filesProcessedMap.has(this.resourcePath)) {
-    parser = update();
-  }
-  filesProcessedMap.set(this.resourcePath, true);
+  const {
+    /** @type {any} */
+    Doc,
+  } = getOptions(this);
 
-  const docs = parser.getExportedSymbols(this.resourcePath);
+  const docs = Doc.parser.getExportedSymbols(this.resourcePath);
 
   return (
     source +

@@ -595,8 +595,8 @@ describe('createStyles', () => {
     `);
 
     const styles = {};
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, 'createStyles', ts.isCallExpression)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, 'createStyles', ts.isCallExpression)![0];
 
     handleCreateStyles(node, withDefaultContext(program.getTypeChecker(), {styles}));
 
@@ -605,5 +605,117 @@ describe('createStyles', () => {
         '.css-my-component{background-color:red;}.css-my-component:hover{background:blue;}'
       )
     );
+  });
+
+  it('should process variable properties from another file if processing is out of order', () => {
+    const program = createProgramFromSource([
+      {
+        filename: 'test.ts',
+        source: `
+          import {createStyles, createVars} from '@workday/canvas-kit-styling';
+          import { sourceVars } from './vars';
+
+          const myStyles = createStyles({
+            color: sourceVars.foo
+          })
+        `,
+      },
+      {
+        filename: 'vars.ts',
+        source: `
+          import {createVars} from '@workday/canvas-kit-styling';
+
+          export const sourceVars = createVars('foo', 'bar');
+        `,
+      },
+    ]);
+
+    const result = transform(program, 'test.ts');
+
+    expect(result).toContain('styles: "color:var(--cnvs-source-foo)');
+  });
+
+  it('should process variable keys from another file if processing is out of order', () => {
+    const program = createProgramFromSource([
+      {
+        filename: 'test.ts',
+        source: `
+          import {createStyles, createVars} from '@workday/canvas-kit-styling';
+          import { sourceVars } from './vars';
+
+          const myStyles = createStyles({
+            [sourceVars.foo]: 'red'
+          })
+        `,
+      },
+      {
+        filename: 'vars.ts',
+        source: `
+          import {createVars} from '@workday/canvas-kit-styling';
+
+          export const sourceVars = createVars('foo', 'bar');
+        `,
+      },
+    ]);
+
+    const result = transform(program, 'test.ts');
+
+    expect(result).toContain('styles: "--cnvs-source-foo:red;');
+  });
+
+  it('should process nested variable properties from another file if processing is out of order', () => {
+    const program = createProgramFromSource([
+      {
+        filename: 'test.ts',
+        source: `
+          import {createStyles, createVars} from '@workday/canvas-kit-styling';
+          import { sourceVars } from './vars';
+
+          const myStyles = createStyles({
+            color: sourceVars.default.foo
+          })
+        `,
+      },
+      {
+        filename: 'vars.ts',
+        source: `
+          import {createVars} from '@workday/canvas-kit-styling';
+
+          export const sourceVars = {default: createVars('foo', 'bar')};
+        `,
+      },
+    ]);
+
+    const result = transform(program, 'test.ts');
+
+    expect(result).toContain('styles: "color:var(--cnvs-source-default-foo)');
+  });
+
+  it('should process nested variable keys from another file if processing is out of order', () => {
+    const program = createProgramFromSource([
+      {
+        filename: 'test.ts',
+        source: `
+          import {createStyles, createVars} from '@workday/canvas-kit-styling';
+          import { sourceVars } from './vars';
+
+          const myStyles = createStyles({
+            [sourceVars.default.foo]: 'red'
+          })
+        `,
+      },
+      {
+        filename: 'vars.ts',
+        source: `
+          import {createVars} from '@workday/canvas-kit-styling';
+
+          export const sourceVars = {default: createVars('foo', 'bar')};
+        `,
+      },
+    ]);
+
+    const result = transform(program, 'test.ts');
+
+    expect(result).toContain('styles: "--cnvs-source-default-foo:red;');
   });
 });
