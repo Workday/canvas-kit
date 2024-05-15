@@ -48,7 +48,6 @@ A note to the reader:
 - [Component Style Updates](#component-style-updates)
 - [Component Updates](#component-updates)
   - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
-  - [Buttons](#buttons)
   - [CountBadge](#count-badge)
   - [Form Field Preview](#form-field-preview)
   - [Icons](#icons)
@@ -215,9 +214,14 @@ style the component:
 
 ## Component Style Updates
 
+<StatusIndicator variant="red" emphasis="low">
+  <StatusIndicator.Label>Visual Breaking Change</StatusIndicator.Label>
+</StatusIndicator>
+
 **PR:** [#2485](https://github.com/Workday/canvas-kit/pull/2485)
 
-The following changes address visual discrepancies between our design spec files and code.
+The following changes address visual discrepancies between our design spec files and code. These
+changes **should not** impact the layout or behavior of a component.
 
 Components affected:
 
@@ -520,19 +524,6 @@ The following components are affected:
 > **Note:** These components also support our new `cs` prop for styling. Learn more about styling
 > with `cs` in our
 > [documentation](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--cs-prop).
-
-### Buttons
-
-<StatusIndicator variant="red" emphasis="low">
-  <StatusIndicator.Label>Visual Breaking Change</StatusIndicator.Label>
-</StatusIndicator>
-
-**PR:** [#2666](https://github.com/Workday/canvas-kit/pull/2666)
-
-The `border` color for `SecondaryButton` on the `focus` state is now `transparent` and may cause a
-small visual difference in visual tests.
-
-**There should be no developer impact and the visual changes are safe to accept**.
 
 ### Count Badge
 
