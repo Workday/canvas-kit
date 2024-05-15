@@ -68,7 +68,7 @@ const countBadgeStencil = createStencil({
  * `CountBadge` provides a quantity-based summary with dynamic values.
  */
 export const CountBadge = createComponent('span')({
-  displayName: 'NewCountBadge',
+  displayName: 'CountBadge',
   Component: ({count = 0, limit = 1000, variant, ...elemProps}: CountBadgeProps, ref, Element) => {
     const formattedCount = count < limit ? `${count}` : `${limit - 1}+`;
 
