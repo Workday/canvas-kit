@@ -44,7 +44,7 @@ export function parseNodeToStaticValue(
 
   // a.b
   if (ts.isPropertyAccessExpression(node)) {
-    getPropertyAccessExpressionText(node); //?
+    getPropertyAccessExpressionText(node);
     const varName = getPropertyAccessExpressionText(node);
 
     const value =

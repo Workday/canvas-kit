@@ -7,8 +7,6 @@ import {NodeTransformer, TransformerContext} from './types';
 import {getHash} from './getHash';
 
 export const handleCreateVars: NodeTransformer = (node, context) => {
-  const {prefix} = context;
-
   /**
    * This will create a variable
    */
@@ -28,7 +26,7 @@ export const handleCreateVars: NodeTransformer = (node, context) => {
           [
             ts.factory.createPropertyAssignment(
               ts.factory.createIdentifier('id'),
-              ts.factory.createStringLiteral(`${prefix}-${id}`)
+              ts.factory.createStringLiteral(id)
             ),
             ts.factory.createPropertyAssignment(
               ts.factory.createIdentifier('args'),
@@ -75,6 +73,7 @@ export const handleCreateVars: NodeTransformer = (node, context) => {
 
 function addNames(node: ts.CallExpression, context: TransformerContext) {
   const {prefix, names, extractedNames} = context;
+  const hash = getHash(node, context);
 
   const varNamePrefix = getVarName(node);
   const vars = node.arguments
@@ -83,9 +82,9 @@ function addNames(node: ts.CallExpression, context: TransformerContext) {
 
   vars.forEach(v => {
     const varName = `${varNamePrefix}.${v}`;
-    names[varName] = `--${prefix}-${slugify(v)}-${getHash(node, context)}`;
+    names[varName] = `--${v}-${hash}`;
     extractedNames[names[varName]] = `--${prefix}-${slugify(varName).replace('-vars', '')}`;
   });
 
-  return {id: slugify(varNamePrefix).replace('-vars', ''), vars};
+  return {id: hash, vars};
 }

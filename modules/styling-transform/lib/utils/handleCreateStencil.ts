@@ -3,7 +3,6 @@ import ts from 'typescript';
 import {slugify} from '@workday/canvas-kit-styling';
 
 import {getVarName} from './getVarName';
-import {makeEmotionSafe} from './makeEmotionSafe';
 import {parseObjectToStaticValue} from './parseObjectToStaticValue';
 import {createStyleObjectNode, serializeStyles} from './createStyleObjectNode';
 import {getValueFromAliasedSymbol, parseNodeToStaticValue} from './parseNodeToStaticValue';
@@ -35,6 +34,7 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
 
     // Stencil name is the variable name
     const stencilName = getVarName(node.expression);
+    const stencilHash = getHash(node, context);
 
     if (ts.isObjectLiteralExpression(config)) {
       const extendedFrom = config.properties.reduce((result, property) => {
@@ -89,7 +89,10 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
 
           const varName = getVarName(node.name);
           const varValue = `--${getClassName(varName, context)}`;
-          names[varName] = `--${prefix}-${getHash(node.initializer, context)}`;
+          names[varName] = `--${node.name.text}-${slugify(stencilName).replace(
+            '-stencil',
+            ''
+          )}-${stencilHash}`;
 
           names[node.name.text] = names[varName];
           extractedNames[names[varName]] = varValue;
@@ -336,7 +339,9 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
 
       return ts.factory.updateCallExpression(node, node.expression, undefined, [
         ts.factory.updateObjectLiteralExpression(config, configProperties),
-        ts.factory.createStringLiteral(getClassName(stencilName, context)),
+        ts.factory.createStringLiteral(
+          `${slugify(stencilName).replace('-stencil', '')}-${stencilHash}`
+        ),
       ]);
     }
   }
@@ -358,7 +363,7 @@ function parseStyleBlock(
     if (ts.isObjectLiteralExpression(property.initializer)) {
       styleObj = parseObjectToStaticValue(property.initializer, {
         ...context,
-        nameScope: `${stencilName}-`,
+        nameScope: `${stencilName}.`,
       });
     }
 
@@ -367,7 +372,7 @@ function parseStyleBlock(
       if (returnNode) {
         styleObj = parseObjectToStaticValue(returnNode, {
           ...context,
-          nameScope: `${stencilName}-`,
+          nameScope: `${stencilName}.`,
         });
       }
     }
@@ -378,7 +383,7 @@ function parseStyleBlock(
     if (returnNode) {
       styleObj = parseObjectToStaticValue(returnNode, {
         ...context,
-        nameScope: `${stencilName}-`,
+        nameScope: `${stencilName}.`,
       });
     }
   }

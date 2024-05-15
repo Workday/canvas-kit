@@ -35,7 +35,7 @@ describe('handleCreateStencil', () => {
 
       const result = transform(program, 'test.ts');
 
-      expect(result).toContain('}, "cnvs-button")');
+      expect(result).toMatch(/}, "button-[a-z0-9]+"\)/);
     });
 
     it('should add a variable to the cache when the arguments are strings', () => {
@@ -48,15 +48,12 @@ describe('handleCreateStencil', () => {
           }
         })
       `);
-
-      const sourceFile = program.getSourceFile('test.ts')!;
       const names = {};
       const extractedNames = {};
 
-      const node = findNodes(sourceFile, 'createStencil', ts.isCallExpression)![0];
-
-      handleCreateStencil(
-        node,
+      const result = transform(
+        program,
+        'test.ts',
         withDefaultContext(program.getTypeChecker(), {
           names,
           extractedNames,
@@ -65,12 +62,15 @@ describe('handleCreateStencil', () => {
 
       expect(names).toHaveProperty(
         ['buttonStencil.vars.color'],
-        expect.stringMatching(/--css-[a-z0-9]+/)
+        expect.stringMatching(/--color-button-[a-z0-9]+/)
       );
       expect(extractedNames).toHaveProperty(
         names['buttonStencil.vars.color'],
         '--css-button-color'
       );
+
+      // ID of the variable and the stencil should be the same
+      expect(result).toContain(`${names['buttonStencil.vars.color'].replace('--color-', '')}`);
     });
 
     it('should add box-sizing to all stencils', () => {
@@ -751,7 +751,7 @@ describe('handleCreateStencil', () => {
     });
 
     it('should inject the correct variable name to the CSS output', () => {
-      getFile(styles, 'extended.css'); //?
+      getFile(styles, 'extended.css');
       expect(getFile(styles, 'extended.css')).toContainEqual(
         compileCSS(
           '.css-extended { --css-extended-extended-color: blue; box-sizing:border-box; --css-base-color: purple; }'

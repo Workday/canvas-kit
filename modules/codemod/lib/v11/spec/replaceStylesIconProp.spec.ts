@@ -29,7 +29,7 @@ describe('replaceStylesIconProp', () => {
                 <AccentIcon styles={{padding: '1rem'}} />
             </>
         `;
-    expectTransform(input, expected); //?
+    expectTransform(input, expected);
   });
 
   it('should rename styles to cs for Svg, SystemIcon, AccentIcon exported from the icon package', () => {
@@ -75,7 +75,7 @@ describe('replaceStylesIconProp', () => {
             <AccentIcon cs={{padding: '1rem'}} />
         </>
     `;
-    expectTransform(input, expected); //?
+    expectTransform(input, expected);
   });
 
   it('should handle value as variable', () => {

@@ -138,7 +138,7 @@ describe('cs', () => {
     it('should create an object with a key of the "color"', () => {
       const myVars = createVars('color');
 
-      expect(myVars).toHaveProperty('color', expect.stringMatching(/--.+-color/));
+      expect(myVars).toHaveProperty('color', expect.stringMatching(/--color-.+/));
     });
 
     it('should return a type object with keys matching each input', () => {
@@ -165,16 +165,9 @@ describe('cs', () => {
       expect(myVars({color: '--my-var'})).toHaveProperty(myVars.color, 'var(--my-var)');
     });
 
-    it('should make types Emotion safe when ID is known', () => {
-      const myVars = createVars({id: 'foo', args: ['label']});
-
-      type Input = (typeof myVars)['label'];
-      expectTypeOf<Input>().toMatchTypeOf<'--foo-label-emotion-safe'>();
-    });
-
     it('should type optimized style functions correctly so they can be consumed by other repositories', () => {
       const vars = createVars({id: 'foo', args: ['one']});
-      expectTypeOf(vars.one).toMatchTypeOf<'--foo-one'>();
+      expectTypeOf(vars.one).toMatchTypeOf<'--one-foo'>();
     });
 
     it('should handle an object configuration', () => {
@@ -205,9 +198,9 @@ describe('cs', () => {
         'foo'
       );
 
-      expect(myVars.color).toEqual('--foo-color');
+      expect(myVars.color).toEqual('--color-foo');
 
-      expectTypeOf(myVars.color).toEqualTypeOf<'--foo-color'>();
+      expectTypeOf(myVars.color).toEqualTypeOf<'--color-foo'>();
     });
 
     it('should pass the optional ID to each default', () => {
@@ -218,10 +211,10 @@ describe('cs', () => {
         'foo'
       );
 
-      expect(myVars.$$defaults).toHaveProperty('--foo-color', 'red');
+      expect(myVars.$$defaults).toHaveProperty('--color-foo', 'red');
 
       expectTypeOf(myVars.$$defaults).toEqualTypeOf<{
-        '--foo-color': 'red';
+        '--color-foo': 'red';
       }>();
     });
 
@@ -238,12 +231,12 @@ describe('cs', () => {
       expect(myVars).toHaveProperty('default');
       expect(myVars.default).toHaveProperty(
         'color',
-        expect.stringMatching(/--[a-z0-9]+-default-color/)
+        expect.stringMatching(/--default-color-[a-z0-9]+/)
       );
       expect(myVars).toHaveProperty('hover');
       expect(myVars.hover).toHaveProperty(
         'color',
-        expect.stringMatching(/--[a-z0-9]+-hover-color/)
+        expect.stringMatching(/--hover-color-[a-z0-9]+/)
       );
 
       expectTypeOf(myVars).toHaveProperty('default');
@@ -284,16 +277,16 @@ describe('cs', () => {
         },
         'foo'
       );
-
+      // BigO2023
       expect(myVars).toHaveProperty('default');
-      expect(myVars.default).toHaveProperty('color', expect.stringMatching('--foo-default-color'));
+      expect(myVars.default).toHaveProperty('color', expect.stringMatching('--default-color-foo'));
       expect(myVars).toHaveProperty('hover');
-      expect(myVars.hover).toHaveProperty('color', expect.stringMatching('--foo-hover-color'));
+      expect(myVars.hover).toHaveProperty('color', expect.stringMatching('--hover-color-foo'));
 
       expectTypeOf(myVars).toHaveProperty('default');
-      expectTypeOf(myVars.default).toEqualTypeOf<{color: '--foo-default-color'}>();
+      expectTypeOf(myVars.default).toEqualTypeOf<{color: '--default-color-foo'}>();
       expectTypeOf(myVars).toHaveProperty('hover');
-      expectTypeOf(myVars.hover).toEqualTypeOf<{color: '--foo-hover-color'}>();
+      expectTypeOf(myVars.hover).toEqualTypeOf<{color: '--hover-color-foo'}>();
     });
 
     it('should use the optional ID with nested variables in $$defaults', () => {
@@ -311,15 +304,15 @@ describe('cs', () => {
       );
 
       expect(myVars).toHaveProperty('$$defaults');
-      expect(myVars.$$defaults).toHaveProperty('--foo-default-color', 'blue');
-      expect(myVars.$$defaults).toHaveProperty('--foo-default-background', 'white');
-      expect(myVars.$$defaults).toHaveProperty('--foo-hover-color', 'red');
+      expect(myVars.$$defaults).toHaveProperty('--default-color-foo', 'blue');
+      expect(myVars.$$defaults).toHaveProperty('--default-background-foo', 'white');
+      expect(myVars.$$defaults).toHaveProperty('--hover-color-foo', 'red');
 
       expectTypeOf(myVars).toHaveProperty('$$defaults');
       expectTypeOf(myVars.$$defaults).toEqualTypeOf<{
-        '--foo-default-color': 'blue';
-        '--foo-default-background': 'white';
-        '--foo-hover-color': 'red';
+        '--default-color-foo': 'blue';
+        '--default-background-foo': 'white';
+        '--hover-color-foo': 'red';
       }>();
     });
   });
@@ -675,7 +668,7 @@ describe('cs', () => {
       expectTypeOf(myStencil.vars).toHaveProperty('color');
       expectTypeOf(myStencil.vars.color).toEqualTypeOf<string>();
 
-      expect(myStencil).toHaveProperty('vars.color', expect.stringMatching(/--[a-z0-9]+-color/));
+      expect(myStencil).toHaveProperty('vars.color', expect.stringMatching(/--color-[a-z0-9]+/));
     });
 
     it('should coerce a variable input to a type of string', () => {
@@ -709,9 +702,9 @@ describe('cs', () => {
 
       expectTypeOf(myStencil).toHaveProperty('vars');
       expectTypeOf(myStencil.vars).toHaveProperty('color');
-      expectTypeOf(myStencil.vars.color).toEqualTypeOf<'--foo-color'>();
+      expectTypeOf(myStencil.vars.color).toEqualTypeOf<'--color-foo'>();
 
-      expect(myStencil).toHaveProperty('vars.color', expect.stringMatching(/--foo-color/));
+      expect(myStencil).toHaveProperty('vars.color', expect.stringMatching(/--color-foo/));
     });
 
     it('should return a function that takes in an object with the values and wrap passed css variables', () => {
@@ -1031,13 +1024,13 @@ describe('cs', () => {
         expectTypeOf(extendedStencil.vars.color).toEqualTypeOf<string>();
         expect(extendedStencil).toHaveProperty(
           'vars.color',
-          expect.stringMatching(/--[0-9a-z]+-color/i)
+          expect.stringMatching(/--color-[0-9a-z]+/i)
         );
 
         expectTypeOf(extendedStencil.vars.background).toEqualTypeOf<string>();
         expect(extendedStencil).toHaveProperty(
           'vars.background',
-          expect.stringMatching(/--[0-9a-z]+-background/i)
+          expect.stringMatching(/--background-[0-9a-z]+/i)
         );
       });
 
@@ -1067,18 +1060,18 @@ describe('cs', () => {
           'extended'
         );
 
-        expectTypeOf(extendedStencil.vars.color).toEqualTypeOf<'--base-color'>();
-        expectTypeOf(extendedStencil.vars.background).toEqualTypeOf<'--extended-background'>();
-        expectTypeOf(extendedStencil.vars.$$defaults).toHaveProperty('--base-color');
-        expectTypeOf(extendedStencil.vars.$$defaults).toHaveProperty('--extended-background');
-        expectTypeOf(extendedStencil.vars.$$defaults['--base-color']).toMatchTypeOf<string>();
+        expectTypeOf(extendedStencil.vars.color).toEqualTypeOf<'--color-base'>();
+        expectTypeOf(extendedStencil.vars.background).toEqualTypeOf<'--background-extended'>();
+        expectTypeOf(extendedStencil.vars.$$defaults).toHaveProperty('--color-base');
+        expectTypeOf(extendedStencil.vars.$$defaults).toHaveProperty('--background-extended');
+        expectTypeOf(extendedStencil.vars.$$defaults['--color-base']).toMatchTypeOf<string>();
         expectTypeOf(
-          extendedStencil.vars.$$defaults['--extended-background']
+          extendedStencil.vars.$$defaults['--background-extended']
         ).toMatchTypeOf<string>();
 
-        expect(extendedStencil).toHaveProperty('vars.color', '--base-color');
+        expect(extendedStencil).toHaveProperty('vars.color', '--color-base');
 
-        expect(extendedStencil).toHaveProperty('vars.background', '--extended-background');
+        expect(extendedStencil).toHaveProperty('vars.background', '--background-extended');
       });
 
       it('should extend, adding class names in the correct order', () => {

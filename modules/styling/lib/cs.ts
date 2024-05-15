@@ -93,9 +93,9 @@ export type CS = string | Record<string, string>;
  *
  * // optimizer rewrites the code
  * const myVars = createVars<'color', 'myVars'>('color')
- * // type is now `{color: "--myVars-color"}`
+ * // type is now `{color: "--color-myVars"}`
  *
- * myVars.color // type is `--myVars-color`
+ * myVars.color // type is `--color-myVars`
  * ```
  *
  * This is so optimized variables can be used directly by the static parser downstream. The variable
@@ -104,7 +104,7 @@ export type CS = string | Record<string, string>;
 export type CsVarsMap<T extends string, ID extends string | never> = [ID] extends [never]
   ? Record<T, string>
   : // map type. If the ID is known from the style optimizer, use static keys using string template literals instead of `string`
-    {[K in T]: `--${ID}-${MakeEmotionSafe<K>}`};
+    {[K in T]: `--${K}-${ID}`};
 
 export type CsVars<T extends string, ID extends string | never> = CsVarsMap<T, ID> & {
   (input: Partial<Record<T, string>>): Record<T, string>;
@@ -117,7 +117,7 @@ export type CsVars<T extends string, ID extends string | never> = CsVarsMap<T, I
  * const myVars = createVars('color')
  *
  * const myStyles = createStyles({
- *   color: cssVar(myVars.color) // color: 'var(--{hash}-color)'
+ *   color: cssVar(myVars.color) // color: 'var(--color-{hash})'
  * })
  * ```
  *
@@ -125,7 +125,7 @@ export type CsVars<T extends string, ID extends string | never> = CsVarsMap<T, I
  * expect a CSS variable isn't defined.
  * ```ts
  * const myStyles = createStyles({
- *   color: cssVar(myVars.color, 'red') // color: 'var(--{hash}-color, red)'
+ *   color: cssVar(myVars.color, 'red') // color: 'var(--color-{hash}, red)'
  * })
  * ```
  *
@@ -140,18 +140,6 @@ export function cssVar(input: string, fallback?: string) {
 }
 
 /**
- * Util function to fix an issue with Emotion by
- * appending `EmotionIssue#3066` to end of css variable
- * See issue: [#3066](https://github.com/emotion-js/emotion/issues/3066)
- */
-const makeEmotionSafe = (key: string): string => {
-  if (key.endsWith('label')) {
-    return `${key}-emotion-safe`;
-  }
-  return key;
-};
-
-/**
  * Create temporary CSS variables to use in components. The CSS variable names will
  * be unique at runtime to avoid collisions. The return value is a function and a
  * Map. The function can be used to pass in values from JavaScript. The function will
@@ -162,14 +150,14 @@ const makeEmotionSafe = (key: string): string => {
  * const myVars = createVars('color', 'background')
  *
  * // 'color' is a typed property. The type is `string`
- * console.log(myVars.color) // `'var(--{hash}-color)'`
+ * console.log(myVars.color) // `'var(--color-{hash})'`
  *
  * // 'color' is a typed property. The type is `string?`
  * // The returned object can be assigned to the `style` property of an element
- * console.log(myVars({ color: 'red' })) //  `{'--{hash}-color': 'red'}`
+ * console.log(myVars({ color: 'red' })) //  `{'--color-{hash}': 'red'}`
  *
  * const div = document.createElement('div')
- * div.style = myVars({ color: 'red' }) // <div style="--{hash}-color: red;" />
+ * div.style = myVars({ color: 'red' }) // <div style="--color-{hash}: red;" />
  * ```
  */
 
@@ -206,16 +194,14 @@ export function createVars<T extends string | DefaultedVarsShape, ID extends str
 
   args.forEach(key => {
     // @ts-ignore
-    result[key] = `--${id}-${makeEmotionSafe(key)}`;
+    result[key] = `--${key}-${id}`;
   }, {});
 
   return result;
 }
 
-type MakeEmotionSafe<T extends string> = T extends `${infer S}label` ? `${S}label-emotion-safe` : T;
-
 // Type to create CSS Variable names based on JS names and ID
-type CSSVarName<ID extends string, Name> = `--${ID}-${MakeEmotionSafe<ToString<Name>>}`;
+type CSSVarName<ID extends string, Name> = `--${ToString<Name>}-${ID}`;
 
 /**
  * For custom themes that do not overwrite every default. This is the type given to stencil
@@ -244,9 +230,9 @@ type ToString<T> = string & T;
  * DefaultedVarsMapToCSSVarNames<{foo: { bar: 'red' }}> = Record<'foo', Record<'bar', string>>
  *
  * // ID known
- * DefaultedVarsMapToCSSVarNames<{foo: { bar: 'red' }}, 'my-id'> = { foo: '--my-id-red' }
+ * DefaultedVarsMapToCSSVarNames<{foo: { bar: 'red' }}, 'my-id'> = { foo: '--red-my-id' }
  * // ID known, nested
- * DefaultedVarsMapToCSSVarNames<{foo: { bar: 'red' }}, 'my-id'> = { foo: { bar: '--my-id-red' }}
+ * DefaultedVarsMapToCSSVarNames<{foo: { bar: 'red' }}, 'my-id'> = { foo: { bar: '--red-my-id' }}
  * ```
  */
 export type DefaultedVarsMapToCSSVarNames<
@@ -259,7 +245,7 @@ export type DefaultedVarsMapToCSSVarNames<
   : // map type. If the ID is known from the style optimizer, use static keys using string template literals instead of `string`
     {
       [K in keyof V]: V[K] extends Record<string, string>
-        ? DefaultedVarsMapToCSSVarNames<V[K], `${ID}-${ToString<K>}`> // TypeScript doesn't know K is a string here and will throw an error, so we have to coerce it
+        ? {[K2 in keyof V[K]]: CSSVarName<`${ToString<K2>}-${ID}`, K>} //DefaultedVarsMapToCSSVarNames<V[K], `${ToString<K>}-${ID}`> // TypeScript doesn't know K is a string here and will throw an error, so we have to coerce it
         : CSSVarName<ID, K>;
     };
 
@@ -278,9 +264,9 @@ type ExtractValue<T, K> = K extends keyof T
  *
  * ```ts
  * // ID known
- * DefaultedVarsMap<{foo: 'red'}, 'my-id'> = { '--my-id-foo': 'red' }
+ * DefaultedVarsMap<{foo: 'red'}, 'my-id'> = { '--foo-my-id': 'red' }
  * // ID known, nested
- * DefaultedVarsMap<{foo: { bar: 'red' }}, 'my-id'> = { foo: { '--my-id-bar': 'red' }}
+ * DefaultedVarsMap<{foo: { bar: 'red' }}, 'my-id'> = { foo: { '--bar-my-id': 'red' }}
  * ```
  */
 export type DefaultedVarsMap<V extends DefaultedVarsShape, ID extends string> = {
@@ -359,7 +345,7 @@ export function createDefaultedVars<T extends DefaultedVarsShape, ID extends str
   // eslint-disable-next-line guard-for-in
   for (const key in input) {
     if (typeof input[key] === 'string') {
-      const cssVarName = `--${localId}-${makeEmotionSafe(key)}`;
+      const cssVarName = `--${key}-${localId}`;
       (result as any)[key] = cssVarName;
       (result as any).$$defaults[cssVarName] = input[key];
     }
@@ -367,7 +353,7 @@ export function createDefaultedVars<T extends DefaultedVarsShape, ID extends str
       (result as any)[key] = {};
       for (const subKey in input[key]) {
         if (typeof input[key][subKey] === 'string') {
-          const cssVarName = `--${localId}-${key}-${makeEmotionSafe(subKey)}`;
+          const cssVarName = `--${key}-${subKey}-${localId}`;
           (result as any)[key][subKey] = cssVarName;
           (result as any).$$defaults[cssVarName] = input[key][subKey];
         }
@@ -515,7 +501,7 @@ export type CsToPropsReturn = {className?: string; style?: CSSObjectWithVars};
  * - `string` - it represents a CSS class name
  * - `undefined` - there is no value. This is provided for convenience for developers to not have to
  *   filter out undefined
- * - `{--{hash}-{varName}: {value}}` - a `Map` of CSS variable to values
+ * - `{--{varName}-{hash}: {value}}` - a `Map` of CSS variable to values
  * - `{style: ..., className: ...}` an object already returned by another `csToProps` function call
  *   (for nesting)
  * - An array containing any of the above. This will recurse over each entry to produce a single,
@@ -899,8 +885,8 @@ export interface StencilConfig<
    *
    * ```css
    * .css-button {
-   *   --css-button-color: red;
-   *   color: var(--css-button-color);
+   *   --color-button: red;
+   *   color: var(--color-button);
    * }
    * ```
    */

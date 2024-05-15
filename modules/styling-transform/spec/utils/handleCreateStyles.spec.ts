@@ -371,7 +371,7 @@ describe('createStyles', () => {
       program,
       'test.ts',
       withDefaultContext(program.getTypeChecker(), {names})
-    ); //?
+    );
 
     expect(result).toContain(`${names['myVars.color']}:red;`);
   });

@@ -26,10 +26,10 @@ describe('handleCreateVars', () => {
       })
     );
 
-    expect(names).toHaveProperty(['myVars.color'], expect.stringMatching(/--css-color-[a-z0-9]+/));
+    expect(names).toHaveProperty(['myVars.color'], expect.stringMatching(/--color-[a-z0-9]+/));
     expect(names).toHaveProperty(
       ['myVars.backgroundColor'],
-      expect.stringMatching(/--css-background-color-[a-z0-9]+/)
+      expect.stringMatching(/--backgroundColor-[a-z0-9]+/)
     );
 
     expect(extractedNames).toHaveProperty(names['myVars.color'], '--css-my-color');
@@ -44,10 +44,21 @@ describe('handleCreateVars', () => {
       const myVars = createVars('color', 'background')
     `);
 
-    const result = transform(program, 'test.ts');
+    const names = {};
+
+    const result = transform(
+      program,
+      'test.ts',
+      withDefaultContext(program.getTypeChecker(), {
+        names,
+      })
+    );
 
     expect(result).toContain(
-      'const myVars = createVars({ id: "cnvs-my", args: ["color", "background"] })'
+      `const myVars = createVars({ id: "${names['myVars.color'].replace(
+        '--color-',
+        ''
+      )}", args: ["color", "background"] })`
     );
   });
 
@@ -71,13 +82,10 @@ describe('handleCreateVars', () => {
         extractedNames,
       })
     );
-    expect(names).toHaveProperty(
-      ['myVars.foo.color'],
-      expect.stringMatching(/--css-color-[a-z0-9]+/)
-    );
+    expect(names).toHaveProperty(['myVars.foo.color'], expect.stringMatching(/--color-[a-z0-9]+/));
     expect(names).toHaveProperty(
       ['myVars.foo.backgroundColor'],
-      expect.stringMatching(/--css-background-color-[a-z0-9]+/)
+      expect.stringMatching(/--backgroundColor-[a-z0-9]+/)
     );
 
     expect(extractedNames).toHaveProperty(names['myVars.foo.color'], '--css-my-foo-color');
@@ -94,8 +102,21 @@ describe('handleCreateVars', () => {
       }
     `);
 
-    const result = transform(program, 'test.ts');
+    const names = {};
 
-    expect(result).toContain('foo: createVars({ id: "cnvs-my-foo", args: ["color"] })');
+    const result = transform(
+      program,
+      'test.ts',
+      withDefaultContext(program.getTypeChecker(), {
+        names,
+      })
+    );
+
+    expect(result).toContain(
+      `foo: createVars({ id: "${names['myVars.foo.color'].replace(
+        '--color-',
+        ''
+      )}", args: ["color"] })`
+    );
   });
 });
