@@ -8,14 +8,14 @@ import {
   uploadCloudIcon,
   userIcon,
 } from '@workday/canvas-system-icons-web';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 
 const styleOverrides = {
   formfieldInputStyles: createStyles({
-    width: '300px',
+    width: px2rem(300),
   }),
   selectCardStyles: createStyles({
-    maxHeight: '200px',
+    maxHeight: px2rem(200),
   }),
 };
 
