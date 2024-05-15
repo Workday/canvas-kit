@@ -1,0 +1,141 @@
+import {CustomButton} from './examples/CustomButton';
+import {CustomCard} from './examples/CustomCard';
+import {CustomIcon} from './examples/CustomIcon';
+import {CustomText} from './examples/CustomText';
+import {StyledButton} from './examples/StyledButton';
+
+<Meta title="Styling/How to style" />
+
+# How to style
+
+There are multiple methods available within Canvas Kit to handle a component's styles. The most
+suitable approach depends on your particular context. Here are the options:
+
+- Static or dynamic style css properties
+- CSS variables from the component stencil
+- Stencils extentions
+
+## Static or dynamic style css properties
+
+### `cs` prop
+
+Canvas Kit allows you to set style css properties through `cs` prop. Currently, `cs` prop is
+supported by Buttons, Cards, Form Field (preview) and its inputs, Count Badge, Icons, Text, Status
+Indicator (Preview), Loading Dots and Table.
+
+To change the styles of one single instance of a component, you can use one `cs` prop and place
+style object directly:
+
+```tsx
+import {cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+<Text cs={{textTransform: 'uppercase', margin: cssVar(system.space.x4)}}>My uppercased text</Text>;
+```
+
+For advanced and nested cases we suggest to use `createStyles` together with `cs` prop:
+
+```tsx
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const textStyles = createStyles({
+  margin: system.space.x4,
+  '&:hover': {
+    transform: 'scale(2)',
+  },
+  span: {
+    color: system.color.text.strong
+  }
+});
+
+<Text cs={textStyles}>
+  My uppercased text with
+  <span>{hover effect}</span>
+</Text>;
+```
+
+### `style` prop
+
+For dynamic css properties it's better for perfomance to use `style` prop instead of `cs` prop:
+
+```tsx
+const MyComponent = ({width}) => {
+  return (
+    <Text cs={{textTransform: 'uppercase'}} style={{width}}>
+      My uppercased text with
+    </Text>
+  );
+};
+```
+
+### `className` prop
+
+The `createStyles` function returns class name, so you can use it to set styles to your component:
+
+```tsx
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const textStyles = createStyles({
+  margin: system.space.x4,
+  '&:hover': {
+    transform: 'scale(2)',
+  },
+  span: {
+    color: system.color.text.strong,
+  },
+});
+
+<p className={textStyles}>My text</p>;
+```
+
+## CSS variables from the component stencil
+
+Some of Canvas components are built using stencils and support its own CSS variables. There is a
+list of these components:
+
+- Buttons have the next stencil variables: `background` as the background color, `border` as the
+  border color, `boxShadowInner` as the focus ring inner shadow color, `boxShadowOuter` the focus
+  ring outer shadow color, `label` as the label color, `opacity`, `borderRadius`
+
+- Icons have the next stencil variables: `width` to set svg width, `height` to set svg height,
+  `size` to set svg width and height with the same value.
+
+  - In addition to all icon variables `SystemIcon` also supports `color` to set color for
+    `.wd-icon-fill` and `.wd-icon-accent` (if `accentColor` is not provided), `accentColor` to set
+    color for `.wd-icon-accent`, `backgroundColor` to set color for svg background.
+
+  - In addition to all icon variables `AccentIcon` also supports `color` to set color for svg.
+
+  - In addition to all icon variables `AppletIcon` also supports `color200` to set color for
+    `.color-200`, `color300` to set color for `.color-300`, `color400` to set color for
+    `.color-400`, `color500` to set color for `.color-500`. Please note, these colors should be the
+    same color but different shades. For example, if `color200` has been change to `blueberry200`,
+    all others must be assigned to blueberry shades (300, 400, 500).
+
+You can reassign any CSS variable for the specific component or underlying components using `cs`
+prop:
+
+<ExampleCodeBlock code={StyledButton} />
+
+## Stencils extentions
+
+Base Button, Card, Svg and Text components share their setSyntheticTrailingComments, so you can
+build your component under it by extending stencil.
+
+### Custom Button
+
+<ExampleCodeBlock code={CustomButton} />
+
+### Custom Card
+
+<ExampleCodeBlock code={CustomCard} />
+
+### Custom Icon
+
+<ExampleCodeBlock code={CustomIcon} />
+
+### Custom Text
+
+<ExampleCodeBlock code={CustomText} />

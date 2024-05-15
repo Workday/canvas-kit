@@ -3,7 +3,7 @@ import {CanvasIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {validateIconType} from './utils';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStencil} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {base} from '@workday/canvas-tokens-web';
 
 export interface SvgProps extends BoxProps {
@@ -18,15 +18,19 @@ export interface SvgProps extends BoxProps {
 
 export const svgStencil = createStencil({
   vars: {
-    /** set width and height of svg element */
+    /** sets width of svg element */
+    width: '',
+    /** sets height of svg element */
+    height: '',
+    /** sets width and height of svg element */
     size: '',
   },
-  base: ({size}) => ({
+  base: ({width, height, size}) => ({
     display: 'inline-block',
     '> svg': {
       display: 'block',
-      width: size,
-      height: size,
+      width: cssVar(width, size),
+      height: cssVar(height, size),
     },
   }),
   modifiers: {

@@ -654,16 +654,6 @@ const MyComponent = StyledRadioButton('div')({
 - `graphicStyles` has been deprecated and will be removed in a future version as a part of
   implementation of stencils and new tokens. Consider to use `graphicStencil` to get styles or class
   name.
-- `width` and `height` props has been deprecated and will be removed in a future version. Consider
-  using `cs` props instead to set svg sizes.
-
-```tsx
-// before
-<Graphic icon={myGraphic} width={160} />
-
-// after
-<Graphic icon={myGraphic} cs={{"& svg": {width: '10rem'}}} />
-```
 
 #### Icon
 
