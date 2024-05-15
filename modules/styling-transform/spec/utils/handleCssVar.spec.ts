@@ -73,7 +73,7 @@ describe('handleCssVar', () => {
     const result = handleCssVar(
       node,
       withDefaultContext(program.getTypeChecker(), {
-        variables: {'--some-var': 'red'},
+        names: {'--some-var': 'red'},
       })
     );
 

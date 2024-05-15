@@ -20,7 +20,8 @@ export interface StyleTransformerOptions extends TransformerContext {
   transformers?: NodeTransformer[];
 }
 
-let vars: TransformerContext['variables'] = {};
+let vars: TransformerContext['names'] = {};
+let extractedNames: TransformerContext['extractedNames'] = {};
 let styles: TransformerContext['styles'] = {};
 let cache: TransformerContext['cache'] = {};
 let loadedFallbacks = false;
@@ -32,6 +33,7 @@ let config: Config = {};
  */
 export function _reset() {
   vars = {};
+  extractedNames = {};
   styles = {};
   cache = {};
   loadedFallbacks = false;
@@ -63,7 +65,7 @@ export default function styleTransformer(
     configLoaded = true;
   }
 
-  const {variables, ...transformContext} = withDefaultContext(program.getTypeChecker(), {
+  const {names, ...transformContext} = withDefaultContext(program.getTypeChecker(), {
     ...config,
     ...options,
   });
@@ -83,8 +85,10 @@ export default function styleTransformer(
     const fallbackVars = getVariablesFromFiles(files);
     console.log(`Found ${Object.keys(fallbackVars).length} variables.`);
 
-    // eslint-disable-next-line no-param-reassign
-    vars = {...variables, ...fallbackVars};
+    // eslint-disable-next-line guard-for-in
+    for (const key in fallbackVars) {
+      names[key] = fallbackVars[key];
+    }
     loadedFallbacks = true;
   }
 
@@ -108,7 +112,7 @@ export default function styleTransformer(
       }
 
       const newNode = transformContext.transform(node, {
-        variables: vars,
+        names,
         ...transformContext,
       });
 
@@ -126,7 +130,8 @@ export function withDefaultContext(
   return {
     prefix: 'css',
     getPrefix: path => input.prefix || 'css',
-    variables: {},
+    names: vars,
+    extractedNames,
     styles,
     cache,
     checker,

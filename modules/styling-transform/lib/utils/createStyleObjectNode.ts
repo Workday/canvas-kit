@@ -63,7 +63,7 @@ export function serializeStyles(
   template: string,
   context: TransformerContext
 ) {
-  const {getFileName, styles, cache} = context;
+  const {getFileName, styles, cache, names, extractedNames} = context;
   const fileName = getFileName(node.getSourceFile().fileName);
   const hash = getHash(node, context);
   const serialized = {...serializedStylesEmotion([input]), name: hash} as ReturnType<
@@ -74,8 +74,20 @@ export function serializeStyles(
     const styleOutput = compileCSS(
       template.replace('%s', serialized.styles).replace('%n', serialized.name)
     );
+
+    let extractedStyleOutput = styleOutput;
+
+    for (const key in names) {
+      if (extractedNames[names[key]]) {
+        // @ts-ignore replaceAll was added in es2021, but our lib versions don't go past es2019. replaceAll is available in node 15+
+        extractedStyleOutput = extractedStyleOutput.replaceAll(
+          names[key],
+          extractedNames[names[key]]
+        );
+      }
+    }
     styles[fileName] = styles[fileName] || [];
-    styles[fileName].push(styleOutput);
+    styles[fileName].push(extractedStyleOutput);
     cache[hash] = styleOutput;
   }
 
