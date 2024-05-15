@@ -31,7 +31,7 @@
   "homepage": "https://github.com/Workday/canvas-kit#readme",
   "dependencies": {
     "chalk": "4.1.2",
-    "jscodeshift": "^0.13.1",
+    "jscodeshift": "^0.14.0",
     "yargs": "^16.2.0"
   },
   "devDependencies": {
