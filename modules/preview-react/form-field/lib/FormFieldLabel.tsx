@@ -2,34 +2,17 @@ import React from 'react';
 
 import {createSubcomponent} from '@workday/canvas-kit-react/common';
 import {useFormFieldLabel, useFormFieldModel} from './hooks';
-import {createStencil, px2rem} from '@workday/canvas-kit-styling';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {createStencil, parentModifier, px2rem} from '@workday/canvas-kit-styling';
+import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {brand, system} from '@workday/canvas-tokens-web';
+import {formFieldStencil} from './formFieldStencil';
 
-export interface FormFieldLabelProps {
+export interface FormFieldLabelProps extends FlexProps {
   /**
    * The text of the label.
    */
   children: React.ReactNode;
-  /**
-   * Will style the text as disabled
-   */
-  disabled?: boolean;
-  /**
-   * Changes the color of the text
-   */
-  variant?: 'error' | 'hint' | 'inverse';
 }
-
-const formFieldLabelAsteriskStencil = createStencil({
-  base: {
-    fontSize: system.fontSize.body.large,
-    fontWeight: system.fontWeight.normal,
-    color: brand.error.base,
-    textDecoration: 'unset',
-    marginInlineStart: system.space.x1,
-  },
-});
 
 const formFieldLabelStencil = createStencil({
   base: {
@@ -41,63 +24,44 @@ const formFieldLabelStencil = createStencil({
     display: 'flex',
     alignItems: 'center',
     minWidth: px2rem(180),
-  },
-  modifiers: {
-    orientation: {
-      horizontal: {
-        float: 'left',
-        maxHeight: system.space.x10,
-      },
-      vertical: {
-        width: '100%',
-      },
+
+    // @ts-ignore The nested selectors don't like CSS variables yet
+    '& :where([data-element=asterisk])': {
+      display: 'none',
+      fontSize: system.fontSize.body.large,
+      fontWeight: system.fontWeight.normal,
+      color: brand.error.base,
+      textDecoration: 'unset',
+      marginInlineStart: system.space.x1,
     },
-    variant: {
-      error: {
-        color: system.color.text.critical.default,
-      },
-      hint: {
-        color: system.color.text.hint,
-      },
-      inverse: {
-        color: system.color.text.inverse,
-      },
+
+    // asterisk element
+    [parentModifier(formFieldStencil.modifiers.required.true)]: {
+      display: 'inline',
     },
-    disabled: {
-      true: {
-        cursor: 'default',
-        color: system.color.text.disabled,
-      },
+
+    // orientation modifier from parent FormField
+    [parentModifier(formFieldStencil.modifiers.orientation.horizontal)]: {
+      float: 'left',
+      maxHeight: system.space.x10,
+    },
+    [parentModifier(formFieldStencil.modifiers.orientation.vertical)]: {
+      width: '100%',
     },
   },
-  compound: [
-    {
-      modifiers: {variant: 'inverse', disabled: true},
-      styles: {
-        opacity: system.opacity.disabled,
-        color: system.color.text.inverse,
-      },
-    },
-  ],
 });
 
 export const FormFieldLabel = createSubcomponent('label')({
   displayName: 'FormField.Label',
   modelHook: useFormFieldModel,
   elemPropsHook: useFormFieldLabel,
-})<FormFieldLabelProps>(({children, disabled, variant, ...elemProps}, Element, model) => {
+})<FormFieldLabelProps>(({children, ...elemProps}, Element) => {
   return (
-    <Element
-      {...mergeStyles(elemProps, [
-        formFieldLabelStencil({orientation: model.state.orientation, disabled, variant}),
-      ])}
-    >
+    <Element {...mergeStyles(elemProps, formFieldLabelStencil())}>
       {children}
-      {model.state.isRequired && (
-        <span aria-hidden="true" {...formFieldLabelAsteriskStencil()}>
-          *
-        </span>
-      )}
+      <span data-element="asterisk" aria-hidden="true">
+        *
+      </span>
     </Element>
   );
 });
