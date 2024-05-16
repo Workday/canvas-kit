@@ -154,14 +154,9 @@ export interface StyledRadioButtonProps extends ExtractProps<typeof Box, 'input'
  */
 export const StyledRadioButton = createComponent('input')({
   displayName: 'Radio',
-  Component: ({...elemProps}: StyledRadioButtonProps, ref, Element) => {
+  Component: ({className, ...elemProps}: StyledRadioButtonProps, ref, Element) => {
     return (
-      <RadioInputWrapper
-        height="18px"
-        width="18px"
-        flex="0 0 auto"
-        {...elemProps} // This ensures our visual testing stories work properly
-      >
+      <RadioInputWrapper height="18px" width="18px" flex="0 0 auto" className={className}>
         <StyledRadioInput
           borderRadius="circle"
           position="absolute"
