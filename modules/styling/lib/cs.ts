@@ -1170,10 +1170,7 @@ export function createStencil<
         // will remain for the `parentModifier` function to still select on. We decided to add these
         // inert class names instead of adding `data-m-*` attributes because the output DOM looks
         // much cleaner and it saves bytes on the bundled output.
-        modifierClasses
-          .split(' ')
-          .map(c => c.replace('css-', ''))
-          .join(' '),
+        modifierClasses.replace(/css-/g, ''),
         compound ? _compound(inputModifiers) : '',
       ]),
       style: {...composesReturn?.style, ..._vars(input || {})},
