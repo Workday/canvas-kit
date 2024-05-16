@@ -6,25 +6,26 @@ import {StyledButton} from './examples/StyledButton';
 
 <Meta title="Styling/How Customize Styles" />
 
-# How to style
+# How To Customize Styles
 
-There are multiple methods available within Canvas Kit to handle a component's styles. The most
-suitable approach depends on your particular context. Here are the options:
+There are multiple ways to customize styles for our components within Canvas Kit. What approach you
+choose depends on your use case. Ranging from some simple overrides to fully custom solutions, here
+are the following options.
 
-- Static or dynamic style css properties
-- CSS variables from the component stencil
-- Stencils extentions
+- [Simple customization](#simple-customization)
+  - [Using `cs` Prop](using-cs-prop)
+  - [Using `createStyles`](using-createStyles)
+- [Leveraging Component CSS Variables](leveraging-component-css-variables)
+- Stencils Extentions
 
-## Static or dynamic style css properties
+## Simple Customization
 
-### `cs` prop
+### Using `cs` Prop
 
-Canvas Kit allows you to set style css properties through `cs` prop. Currently, `cs` prop is
-supported by Buttons, Cards, Form Field (preview) and its inputs, Count Badge, Icons, Text, Status
-Indicator (Preview), Loading Dots and Table.
-
-To change the styles of one single instance of a component, you can use one `cs` prop and place
-style object directly:
+The `cs` prop takes in a single, or an array of values that are created by the `cs` function, a
+string representing a CSS class name, or the return of the `createVars` function. It merges
+everything together and applies `className` and `style` attributes to a React element. Components
+that support the `cs` prop allow you to quickly update styles for simple customizations.
 
 ```tsx
 import {cssVar} from '@workday/canvas-kit-styling';
@@ -33,7 +34,12 @@ import {system} from '@workday/canvas-tokens-web';
 <Text cs={{textTransform: 'uppercase', margin: cssVar(system.space.x4)}}>My uppercased text</Text>;
 ```
 
-For advanced and nested cases we suggest to use `createStyles` together with `cs` prop:
+### Using `createStyles`
+
+`createStyles` creates CSS styles based on object-style input. It has a side-effect of adding CSS to
+the page and will return a space-delimitated string of CSS class names meant to be added to an
+element. This utilities also handles wrapping our tokens in `var(--${tokenName})`. Use this
+utilities when you have a more complex style object with possible nested selectors.
 
 ```tsx
 import {createStyles} from '@workday/canvas-kit-styling';
@@ -55,42 +61,11 @@ const textStyles = createStyles({
 </Text>;
 ```
 
-### `style` prop
+> **Note:** You don't need to wrap our token variables like `system.space.x4` in `cssVar` because
+> `createStyles` handles that for you. If you're in the context of the `cs` prop, you need to wrap
+> css variables.
 
-For dynamic css properties it's better for perfomance to use `style` prop instead of `cs` prop:
-
-```tsx
-const MyComponent = ({width}) => {
-  return (
-    <Text cs={{textTransform: 'uppercase'}} style={{width}}>
-      My uppercased text with
-    </Text>
-  );
-};
-```
-
-### `className` prop
-
-The `createStyles` function returns class name, so you can use it to set styles to your component:
-
-```tsx
-import {createStyles} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
-
-const textStyles = createStyles({
-  margin: system.space.x4,
-  '&:hover': {
-    transform: 'scale(2)',
-  },
-  span: {
-    color: system.color.text.strong,
-  },
-});
-
-<p className={textStyles}>My text</p>;
-```
-
-## CSS variables from the component stencil
+## Leveraging Component CSS Variables
 
 Some of Canvas components are built using stencils and support its own CSS variables. There is a
 list of these components:
