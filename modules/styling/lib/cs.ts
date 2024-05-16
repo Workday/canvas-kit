@@ -1163,6 +1163,12 @@ export function createStencil<
         composesReturn?.className,
         _base,
         modifierClasses,
+        // For compat mode, we need to add inert class names of modifiers where the `css-` prefix is
+        // removed. For example, `css-base css-mod-1` will become `css-base css-mod-1 mod-1`. The
+        // modifier class without the prefix will be ignored by the Emotion CSS `cx` function and
+        // will remain for the `parentModifier` function to still select on. We decided to add these
+        // inert class names instead of adding `data-m-*` attributes because the output DOM looks
+        // much cleaner and it saves bytes on the bundled output.
         modifierClasses
           .split(' ')
           .map(c => c.replace('css-', ''))

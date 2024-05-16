@@ -823,9 +823,6 @@ describe('cs', () => {
               width: '0',
             },
           },
-          foo: {
-            true: {},
-          },
         },
       });
 
