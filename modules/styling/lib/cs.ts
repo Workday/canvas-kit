@@ -1153,6 +1153,7 @@ export function createStencil<
     // Only override defaults if a value is defined
     for (const key in input) {
       if (input[key]) {
+        // @ts-ignore
         inputModifiers[key] = input[key];
       }
     }
