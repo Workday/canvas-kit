@@ -1050,6 +1050,26 @@ function combineClassNames(input: (string | undefined)[]): string {
 }
 
 /**
+ * This function is used in conjunction with Stencils to get a selector to match the current element
+ * and a parent modifier. The selector will match a parent element with a modifier applied and the current
+ * element. It should be used on the `base` config of a Stencil.
+ *
+ * ```ts
+ * const childStencil = createStencil({
+ *   base: {
+ *     // base styles
+ *     [parentModifier(parentStencil.modifiers.size.large)]: {
+ *       // maybe adjust padding of this element
+ *     }
+ *   }
+ * })
+ * ```
+ */
+export function parentModifier(value: string) {
+  return `.${value.replace('css-', '')} :where(&)`;
+}
+
+/**
  * Creates a reuseable Stencil for styling elements. It takes vars, base styles, modifiers, and
  * compound modifiers.
  */
@@ -1087,6 +1107,7 @@ export function createStencil<
             result[modifierKey] = createStyles(
               typeof modifier === 'function' ? modifier(_vars) : modifier
             );
+
             return result;
           }, {});
 
@@ -1127,14 +1148,25 @@ export function createStencil<
       )
     : () => '';
 
-  const stencil: Stencil<M, V, E, ID> = ((input: {}) => {
-    const inputModifiers = {...composes?.defaultModifiers, ...defaultModifiers, ...input};
+  const stencil: Stencil<M, V, E, ID> = ((input: Record<string, string>) => {
+    const inputModifiers = {...composes?.defaultModifiers, ...defaultModifiers};
+    // Only override defaults if a value is defined
+    for (const key in input) {
+      if (input[key]) {
+        inputModifiers[key] = input[key];
+      }
+    }
     const composesReturn = composes?.(inputModifiers as any);
+    const modifierClasses = _modifiers(inputModifiers);
     return {
       className: combineClassNames([
         composesReturn?.className,
         _base,
-        _modifiers(inputModifiers),
+        modifierClasses,
+        modifierClasses
+          .split(' ')
+          .map(c => c.replace('css-', ''))
+          .join(' '),
         compound ? _compound(inputModifiers) : '',
       ]),
       style: {...composesReturn?.style, ..._vars(input || {})},

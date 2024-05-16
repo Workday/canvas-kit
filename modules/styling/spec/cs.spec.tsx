@@ -529,7 +529,9 @@ describe('cs', () => {
 
       expect(screen.getByTestId('test1')).toHaveStyle({padding: '10px'});
       expect(screen.getByTestId('test2')).toHaveStyle({padding: '20px'});
-      expect(myStencil({size: 'large'}).className.split(' ')).toHaveLength(2);
+
+      expect(myStencil({size: 'large'}).className).toContain(myStencil.base);
+      expect(myStencil({size: 'large'}).className).toContain(myStencil.modifiers.size.large);
 
       // type signature of stencil call expression
       type Arg = Parameters<typeof myStencil>[0];
@@ -577,8 +579,27 @@ describe('cs', () => {
         },
       });
 
-      expect(myStencil({position: 'start', size: 'large'}).className).toEqual(
+      expect(myStencil({position: 'start', size: 'large'}).className).toContain(
         `${myStencil.base} ${myStencil.modifiers.size.large} ${myStencil.modifiers.position.start}`
+      );
+    });
+
+    it('should add the hash of the modifier to the className to handle parentModifier selectors in compat mode', () => {
+      const myStencil = createStencil({
+        base: {},
+        modifiers: {
+          size: {
+            large: {},
+          },
+        },
+      });
+
+      const {className} = myStencil({size: 'large'});
+
+      expect(className).toEqual(
+        `${myStencil.base} ${
+          myStencil.modifiers.size.large
+        } ${myStencil.modifiers.size.large.replace('css-', '')}`
       );
     });
 
@@ -653,7 +674,13 @@ describe('cs', () => {
       });
 
       // 4 class names - base, size, position, size-position
-      expect(myStencil({size: 'large', position: 'start'}).className.split(' ')).toHaveLength(4);
+      expect(myStencil({size: 'large', position: 'start'}).className.split(' ')).toHaveLength(6); // 4 + 2 modifier hashes
+      const {className} = myStencil({size: 'large', position: 'start'});
+
+      expect(className).toContain(myStencil.base);
+      expect(className).toContain(myStencil.modifiers.size.large);
+      expect(className).toContain(myStencil.modifiers.position.start);
+      // we don't have access to the compound modifier class name
     });
 
     it('should return access to variables for use in other components', () => {
@@ -818,7 +845,7 @@ describe('cs', () => {
       expect(result2.style).toHaveProperty(myStencil.vars.width, 'zero');
 
       // match base and width modifier
-      expect(result2.className).toEqual(`${myStencil.base} ${myStencil.modifiers.width.zero}`);
+      expect(result2.className).toContain(`${myStencil.base} ${myStencil.modifiers.width.zero}`);
     });
 
     it('should convert "true" modifiers into boolean', () => {
@@ -959,7 +986,13 @@ describe('cs', () => {
 
         const {className} = extendedStencil({size: 'large'});
 
-        expect(className.split(' ')).toHaveProperty('length', 5);
+        expect(className.split(' ')).toHaveProperty('length', 6); // 1 base + 1 extended + 1 size modifier + 2 compound modifiers + 1 modifier hash
+
+        expect(className).toContain(baseStencil.base);
+        extendedStencil.base.split(' ').forEach(c => {
+          expect(className).toContain(c);
+        });
+        expect(className).toContain(baseStencil.modifiers.size.large);
 
         // calling the stencil
         type Args = Exclude<Parameters<typeof extendedStencil>[0], undefined>;
@@ -1115,6 +1148,9 @@ describe('cs', () => {
                 large: {},
                 small: {},
               },
+              foo: {
+                bar: {},
+              },
             },
             compound: [
               {
@@ -1142,7 +1178,7 @@ describe('cs', () => {
         expect(className).toContain(baseStencil.modifiers.position.only);
 
         // baseStencil.base, baseStencil large, baseStencil only position, baseStencil compound, extendedStencil.base, extendedStencil large, extendedStencil compound
-        expect(className.split(' ')).toHaveLength(7);
+        expect(className.split(' ')).toHaveLength(10); // 7 + 3 modifier hashes
       });
     });
   });
