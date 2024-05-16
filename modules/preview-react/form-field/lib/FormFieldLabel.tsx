@@ -14,7 +14,7 @@ export interface FormFieldLabelProps extends FlexProps {
   children: React.ReactNode;
 }
 
-const formFieldLabelStencil = createStencil({
+export const formFieldLabelStencil = createStencil({
   base: {
     ...system.type.subtext.large,
     fontWeight: system.fontWeight.medium,
