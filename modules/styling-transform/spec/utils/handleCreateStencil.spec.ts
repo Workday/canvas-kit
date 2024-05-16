@@ -355,7 +355,7 @@ describe('handleCreateStencil', () => {
 
     it('should handle parsing modifiers with ObjectLiteralExpressions', () => {
       const program = createProgramFromSource(`
-        import {createStencil} from '@workday/canvas-kit-styling';
+        import {createStencil, parentModifier} from '@workday/canvas-kit-styling';
 
         const buttonStencil = createStencil({
           vars: {
@@ -369,12 +369,45 @@ describe('handleCreateStencil', () => {
             }
           }
         })
+
+        const childStencil = createStencil({
+          base: {
+            [parentModifier(buttonStencil.modifiers.size.large)]: {
+              color: 'blue',
+            }
+          }
+        })
       `);
 
-      const result = transform(program, 'test.ts', withDefaultContext(program.getTypeChecker()));
+      const styles = {};
+      const names = {};
+      const extractedNames = {};
+
+      const result = transform(
+        program,
+        'test.ts',
+        withDefaultContext(program.getTypeChecker(), {styles, names, extractedNames})
+      );
 
       expect(result).toMatch(/large: { name: "[0-9a-z]+", styles: "padding:20px;" }/);
       expect(result).toMatch(/small: { name: "[0-9a-z]+", styles: "padding:10px;" }/);
+
+      // runtime selector
+      expect(result).toContain(
+        `.${names['buttonStencil.modifiers.size.large'].replace('css-', '')} :where(&){color:blue;}`
+      );
+
+      // extracted selector
+      expect(getFile(styles, 'test.css')).toContainEqual(
+        compileCSS(`
+          .css-child {
+            box-sizing: border-box;
+          }
+          .css-button--size-large :where(.css-child) {
+            color: blue;
+          }
+      `)
+      );
     });
 
     it('should handle parsing modifiers with ObjectLiteralExpressions', () => {

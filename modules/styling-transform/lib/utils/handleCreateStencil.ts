@@ -14,7 +14,7 @@ import {getHash} from './getHash';
  * Handle all arguments of the CallExpression `createStencil()`
  */
 export const handleCreateStencil: NodeTransformer = (node, context) => {
-  const {checker, prefix, names, extractedNames} = context;
+  const {checker, names, extractedNames} = context;
   /**
    * This will match whenever a `createStencil()` call expression is encountered. It will loop
    * over all the config to extract variables and styles.
@@ -423,11 +423,11 @@ function createStyleReplacementNode(
   className: string,
   context: TransformerContext
 ) {
-  const {prefix, names, extractedNames} = context;
+  const {names, extractedNames} = context;
   const serialized = serializeStyles(node, styleObj, `.${className}{%s}`, context);
 
   const varName = getVarName(node);
-  const value = `${prefix}-${serialized.name}`;
+  const value = `css-${serialized.name}`;
   names[varName] = value;
   extractedNames[value] = getClassName(varName, context);
 

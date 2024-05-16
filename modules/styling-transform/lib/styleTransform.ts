@@ -12,6 +12,7 @@ import {handleCssVar} from './utils/handleCssVar';
 import {Config, NodeTransformer, ObjectTransform, TransformerContext} from './utils/types';
 import {handleKeyframes} from './utils/handleKeyframes';
 import {handleInjectGlobal} from './utils/handleInjectGlobal';
+import {handleParentModifier} from './utils/handleParentModifier';
 
 export type NestedStyleObject = {[key: string]: string | NestedStyleObject};
 
@@ -140,7 +141,7 @@ export function withDefaultContext(
     objectTransforms: [] as ObjectTransform[],
     transform: handleTransformers(transformers || defaultTransformers),
     ...input,
-    propertyTransforms: [handleCalc, handlePx2Rem, handleCssVar].concat(
+    propertyTransforms: [handleCalc, handlePx2Rem, handleCssVar, handleParentModifier].concat(
       input.propertyTransforms || []
     ),
   } as TransformerContext;
