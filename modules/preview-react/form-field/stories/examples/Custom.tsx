@@ -4,7 +4,7 @@ import {
   useFormFieldInput,
   useFormFieldLabel,
   useFormFieldModel,
-  useFormFieldOrientation,
+  formFieldStencil,
 } from '@workday/canvas-kit-preview-react/form-field';
 import {useModelContext} from '@workday/canvas-kit-react/common';
 import {Flex} from '@workday/canvas-kit-react/layout';
@@ -44,10 +44,8 @@ export const Custom = () => {
 
   const model = useFormFieldModel({isRequired: true});
 
-  const layoutProps = useFormFieldOrientation('vertical');
-
   return (
-    <Flex {...layoutProps}>
+    <Flex cs={formFieldStencil({orientation: 'vertical'})}>
       <Label model={model}>My Custom Field</Label>
       <Input model={model} value={value} onChange={handleChange} />
       <Hint model={model}>You can be anything</Hint>

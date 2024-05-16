@@ -21,7 +21,6 @@ export const formFieldStencil = createStencil({
       horizontal: {
         flexDirection: 'row',
         gap: system.space.x8,
-        alignItems: undefined,
       },
       vertical: {
         flexDirection: 'column',

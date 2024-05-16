@@ -1066,7 +1066,7 @@ function combineClassNames(input: (string | undefined)[]): string {
  * ```
  */
 export function parentModifier(value: string) {
-  return `.${value.replace('css-', '')} :where(&)`;
+  return `.${value.replace('css-', 'm')} :where(&)`;
 }
 
 /**
@@ -1170,7 +1170,7 @@ export function createStencil<
         // will remain for the `parentModifier` function to still select on. We decided to add these
         // inert class names instead of adding `data-m-*` attributes because the output DOM looks
         // much cleaner and it saves bytes on the bundled output.
-        modifierClasses.replace(/css-/g, ''),
+        modifierClasses.replace(/css-/g, 'm'),
         compound ? _compound(inputModifiers) : '',
       ]),
       style: {...composesReturn?.style, ..._vars(input || {})},

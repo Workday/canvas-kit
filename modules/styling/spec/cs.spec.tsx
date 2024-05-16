@@ -599,7 +599,7 @@ describe('cs', () => {
       expect(className).toEqual(
         `${myStencil.base} ${
           myStencil.modifiers.size.large
-        } ${myStencil.modifiers.size.large.replace('css-', '')}`
+        } ${myStencil.modifiers.size.large.replace('css-', 'm')}`
       );
     });
 

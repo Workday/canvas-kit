@@ -1,13 +1,17 @@
 import React from 'react';
 
-import {createSubcomponent} from '@workday/canvas-kit-react/common';
-import {useFormFieldLabel, useFormFieldModel} from './hooks';
+import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {createStencil, parentModifier, px2rem} from '@workday/canvas-kit-styling';
+import {Text, textStencil} from '@workday/canvas-kit-react/text';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {brand, system} from '@workday/canvas-tokens-web';
+
+import {useFormFieldLabel, useFormFieldModel} from './hooks';
 import {formFieldStencil} from './formFieldStencil';
 
-export interface FormFieldLabelProps extends FlexProps {
+export interface FormFieldLabelProps
+  extends FlexProps,
+    Omit<ExtractProps<typeof Text, never>, 'display'> {
   /**
    * The text of the label.
    */
@@ -15,8 +19,9 @@ export interface FormFieldLabelProps extends FlexProps {
 }
 
 export const formFieldLabelStencil = createStencil({
+  extends: textStencil,
+  // @ts-ignore Still weird about CSS variables
   base: {
-    ...system.type.subtext.large,
     fontWeight: system.fontWeight.medium,
     color: system.color.text.default,
     paddingInlineStart: system.space.zero,
@@ -25,7 +30,6 @@ export const formFieldLabelStencil = createStencil({
     alignItems: 'center',
     minWidth: px2rem(180),
 
-    // @ts-ignore The nested selectors don't like CSS variables yet
     '& :where([data-element=asterisk])': {
       display: 'none',
       fontSize: system.fontSize.body.large,
@@ -49,15 +53,18 @@ export const formFieldLabelStencil = createStencil({
       width: '100%',
     },
   },
+  defaultModifiers: {
+    typeLevel: 'subtext.large',
+  },
 });
 
 export const FormFieldLabel = createSubcomponent('label')({
   displayName: 'FormField.Label',
   modelHook: useFormFieldModel,
   elemPropsHook: useFormFieldLabel,
-})<FormFieldLabelProps>(({children, ...elemProps}, Element) => {
+})<FormFieldLabelProps>(({children, typeLevel, variant, ...elemProps}, Element) => {
   return (
-    <Element {...mergeStyles(elemProps, formFieldLabelStencil())}>
+    <Element {...mergeStyles(elemProps, formFieldLabelStencil({typeLevel, variant}))}>
       {children}
       <span data-element="asterisk" aria-hidden="true">
         *
