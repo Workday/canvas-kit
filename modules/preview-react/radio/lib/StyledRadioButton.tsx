@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
   StyledType,
   focusRing,
@@ -7,8 +8,9 @@ import {
 } from '@workday/canvas-kit-react/common';
 
 import {Box, Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {CSProps, calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {CSProps, calc, createStencil, px2rem, handleCsProp} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
+
 import {RadioLabelContext} from './RadioLabel';
 
 const radioWidth = 18;
@@ -214,7 +216,7 @@ const RadioInputWrapper = createComponent(Flex)<
   Component: ({children, variant, ...elemProps}: StyledRadioButtonProps, ref, Element) => {
     const {disabled} = React.useContext(RadioLabelContext);
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, radioInputWrapperStyles({variant, disabled}))}>
+      <Element ref={ref} {...handleCsProp(elemProps, radioInputWrapperStyles({variant, disabled}))}>
         {children}
       </Element>
     );
@@ -231,12 +233,22 @@ export interface StyledRadioButtonProps extends ExtractProps<typeof Box, 'input'
  */
 export const StyledRadioButton = createComponent('input')({
   displayName: 'Radio',
-  Component: ({...elemProps}: StyledRadioButtonProps, ref, Element) => {
+  Component: (
+    {className, variant, disabled, ...elemProps}: StyledRadioButtonProps,
+    ref,
+    Element
+  ) => {
     return (
-      <RadioInputWrapper
-        {...elemProps} // This ensures our visual testing stories work properly
-      >
-        <StyledRadioInput type="radio" {...elemProps} />
+      <RadioInputWrapper className={className} variant={variant} disabled={disabled}>
+        <StyledRadioInput
+          as={Element}
+          ref={ref}
+          type="radio"
+          className={className}
+          variant={variant}
+          disabled={disabled}
+          {...elemProps}
+        />
         <span className="cnvs-radio-check" />
       </RadioInputWrapper>
     );

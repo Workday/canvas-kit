@@ -394,7 +394,10 @@ describe('handleCreateStencil', () => {
 
       // runtime selector
       expect(result).toContain(
-        `.${names['buttonStencil.modifiers.size.large'].replace('css-', 'm')} :where(&){color:blue;}`
+        `.${names['buttonStencil.modifiers.size.large'].replace(
+          'css-',
+          'm'
+        )} :where(&){color:blue;}`
       );
 
       // extracted selector
