@@ -5,7 +5,7 @@ import {handleCsProp, CSProps, createStencil} from '@workday/canvas-kit-styling'
 
 import {useFormFieldModel} from './hooks';
 
-const formFieldContainerStencil = createStencil({
+export const formFieldContainerStencil = createStencil({
   base: {
     display: 'flex',
     flexDirection: 'column',

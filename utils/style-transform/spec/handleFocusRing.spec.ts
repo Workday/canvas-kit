@@ -38,7 +38,7 @@ describe('handleFocusRing', () => {
     const result = handleFocusRing(
       node,
       withDefaultContext(program.getTypeChecker(), {
-        variables: {'my-boxShadowInner': '--foo-bar'},
+        names: {'myVars.boxShadowInner': '--foo-bar'},
       })
     );
 
@@ -70,7 +70,7 @@ describe('handleFocusRing', () => {
       program,
       'test.ts',
       withDefaultContext(program.getTypeChecker(), {
-        variables: {
+        names: {
           '--foo-bar': 'red',
         },
         objectTransforms: [handleFocusRing],

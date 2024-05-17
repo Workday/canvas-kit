@@ -1,0 +1,51 @@
+.cnvs-default-branding {
+  --cnvs-brand-error-darkest: rgba(128,22,14,1);
+  --cnvs-brand-common-alert-inner: var(--cnvs-base-palette-cantaloupe-400);
+  --cnvs-brand-common-error-inner: var(--cnvs-base-palette-cinnamon-500);
+  --cnvs-brand-common-focus-outline: var(--cnvs-base-palette-blueberry-400);
+  --cnvs-brand-neutral-accent: var(--cnvs-base-palette-french-vanilla-100);
+  --cnvs-brand-neutral-darkest: var(--cnvs-base-palette-licorice-400);
+  --cnvs-brand-neutral-dark: var(--cnvs-base-palette-licorice-300);
+  --cnvs-brand-neutral-base: var(--cnvs-base-palette-soap-600);
+  --cnvs-brand-neutral-light: var(--cnvs-base-palette-soap-300);
+  --cnvs-brand-neutral-lightest: var(--cnvs-base-palette-soap-200);
+  --cnvs-brand-success-accent: var(--cnvs-base-palette-french-vanilla-100);
+  --cnvs-brand-success-darkest: var(--cnvs-base-palette-green-apple-600);
+  --cnvs-brand-success-dark: var(--cnvs-base-palette-green-apple-500);
+  --cnvs-brand-success-base: var(--cnvs-base-palette-green-apple-400);
+  --cnvs-brand-success-light: var(--cnvs-base-palette-green-apple-300);
+  --cnvs-brand-success-lightest: var(--cnvs-base-palette-green-apple-100);
+  --cnvs-brand-error-accent: var(--cnvs-base-palette-french-vanilla-100);
+  --cnvs-brand-error-dark: var(--cnvs-base-palette-cinnamon-600);
+  --cnvs-brand-error-base: var(--cnvs-base-palette-cinnamon-500);
+  --cnvs-brand-error-light: var(--cnvs-base-palette-cinnamon-200);
+  --cnvs-brand-error-lightest: var(--cnvs-base-palette-cinnamon-100);
+  --cnvs-brand-alert-accent: var(--cnvs-base-palette-french-vanilla-100);
+  --cnvs-brand-alert-darkest: var(--cnvs-base-palette-cantaloupe-600);
+  --cnvs-brand-alert-dark: var(--cnvs-base-palette-cantaloupe-500);
+  --cnvs-brand-alert-base: var(--cnvs-base-palette-cantaloupe-400);
+  --cnvs-brand-alert-light: var(--cnvs-base-palette-cantaloupe-200);
+  --cnvs-brand-alert-lightest: var(--cnvs-base-palette-cantaloupe-100);
+  --cnvs-brand-primary-accent: var(--cnvs-base-palette-french-vanilla-100);
+  --cnvs-brand-primary-darkest: var(--cnvs-base-palette-blueberry-600);
+  --cnvs-brand-primary-dark: var(--cnvs-base-palette-blueberry-500);
+  --cnvs-brand-primary-base: var(--cnvs-base-palette-blueberry-400);
+  --cnvs-brand-primary-light: var(--cnvs-base-palette-blueberry-200);
+  --cnvs-brand-primary-lightest: var(--cnvs-base-palette-blueberry-100);
+  --cnvs-brand-gradient-primary: linear-gradient(90deg, var(--cnvs-brand-primary-base) 0%, var(--cnvs-brand-primary-dark) 100%);
+}
+
+
+.cnvs-accessible-hide {
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: polygon(0px 0px, 0px 0px, 0px 0px, 0px 0px);
+  position: absolute;
+  overflow: hidden;
+  white-space: nowrap;
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+}
+

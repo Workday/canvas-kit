@@ -154,6 +154,7 @@ export const systemIconStencil = createStencil({
     backgroundColor: 'transparent',
   },
   base: ({accentColor, backgroundColor, color}) => ({
+    [backgroundColor]: 'transparent',
     '& .wd-icon-fill': {
       fill: cssVar(color, base.licorice200),
     },

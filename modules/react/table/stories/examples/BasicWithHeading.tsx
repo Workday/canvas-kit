@@ -3,22 +3,33 @@ import React from 'react';
 import {Table} from '@workday/canvas-kit-react/table';
 import {Heading} from '@workday/canvas-kit-react/text';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const styleOverrides = {
+  parentContainerStyles: createStyles({
+    marginBottom: system.space.x4,
+  }),
+  tableHeaderStyles: createStyles({
+    backgroundColor: system.color.bg.alt.softer,
+  }),
+};
 
 export const BasicWithHeading = () => {
   const headingID = useUniqueId();
 
   return (
     <>
-      <Heading as="h3" id={headingID} size="small" marginBottom="s">
+      <Heading as="h3" id={headingID} size="small" cs={styleOverrides.parentContainerStyles}>
         Pizza Toppings
       </Heading>
       <Table aria-labelledby={headingID}>
         <Table.Head>
           <Table.Row>
-            <Table.Header scope="col" backgroundColor="soap100">
+            <Table.Header scope="col" cs={styleOverrides.tableHeaderStyles}>
               Toppings
             </Table.Header>
-            <Table.Header scope="col" backgroundColor="soap100">
+            <Table.Header scope="col" cs={styleOverrides.tableHeaderStyles}>
               Amount
             </Table.Header>
           </Table.Row>

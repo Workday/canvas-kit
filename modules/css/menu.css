@@ -1,0 +1,45 @@
+.cnvs-menu-list {
+  box-sizing: border-box;
+  background: var(--cnvs-base-palette-french-vanilla-100);
+  border-radius: var(--cnvs-sys-shape-zero);
+  padding: var(--cnvs-sys-space-zero);
+  gap: var(--cnvs-sys-space-zero);
+}
+
+
+.cnvs-menu-list--orientation-vertical {
+  flex-direction: column;
+}
+
+
+.cnvs-menu-list--orientation-horizontal {
+  flex-direction: row;
+}
+
+
+.cnvs-menu-card {
+  --cnvs-menu-card-min-width: 0.0625rem;
+  --cnvs-menu-card-transform-origin-vertical: top;
+  --cnvs-menu-card-transform-origin-horizontal: left;
+  box-sizing: border-box;
+  font-family: var(--cnvs-base-font-family-50);
+  font-weight: var(--cnvs-base-font-weight-400);
+  line-height: var(--cnvs-base-line-height-100);
+  font-size: var(--cnvs-base-font-size-75);
+  letter-spacing: var(--cnvs-base-letter-spacing-150);
+  color: var(--cnvs-base-palette-black-pepper-300);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: transform ease-out 150ms;
+  padding: var(--cnvs-sys-space-zero);
+  max-width: calc(100vw - var(--cnvs-sys-space-x8));
+  box-shadow: var(--cnvs-sys-depth-3);
+  min-width: var(--cnvs-menu-card-min-width);
+  transform-origin: var(--cnvs-menu-card-transform-origin-vertical) var(--cnvs-menu-card-transform-origin-horizontal);
+}
+
+.wd-no-animation .cnvs-menu-card {
+  animation: none;
+}
+

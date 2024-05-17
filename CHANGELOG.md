@@ -3,6 +3,51 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.40](https://github.com/Workday/canvas-kit/releases/tag/v10.3.40) (2024-05-17)
+
+### Components
+
+- fix(radio): Spread props to input ([#2747](https://github.com/Workday/canvas-kit/pull/2747)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  StyledRadio was spreading props to the input and it's parent div. This change removed spreading prop to the parent div except for className.
+
+
+## [v9.1.42](https://github.com/Workday/canvas-kit/releases/tag/v9.1.42) (2024-05-17)
+
+### Components
+
+- fix(radio): Spread props to input ([#2747](https://github.com/Workday/canvas-kit/pull/2747)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  StyledRadio was spreading props to the input and it's parent div. This change removed spreading prop to the parent div except for className.
+
+### Infrastructure
+
+- ci: Fix package.json forward-merge resolution ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v10.3.39](https://github.com/Workday/canvas-kit/releases/tag/v10.3.39) (2024-05-15)
+
+### Documentation
+
+- docs: Fix typo ([#2738](https://github.com/Workday/canvas-kit/pull/2738)) ([@aarongarciah](https://github.com/aarongarciah))
+
+### Infrastructure
+
+- chore: SNYK Security upgrade jscodeshift from 0.13.1 to 0.14.0 ([#2739](https://github.com/Workday/canvas-kit/pull/2739)) ([@mannycarrera4](https://github.com/mannycarrera4))
+
+
+## [v10.3.38](https://github.com/Workday/canvas-kit/releases/tag/v10.3.38) (2024-05-09)
+
+### Documentation
+
+- docs: Fix typo in Merging Styles story name ([#2732](https://github.com/Workday/canvas-kit/pull/2732)) ([@josephnle](https://github.com/josephnle))
+
+
+## [v10.3.37](https://github.com/Workday/canvas-kit/releases/tag/v10.3.37) (2024-05-03)
+
+### Components
+
+- fix(select): Redirect focus to visual input ([#2723](https://github.com/Workday/canvas-kit/pull/2723)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v10.3.36](https://github.com/Workday/canvas-kit/releases/tag/v10.3.36) (2024-05-03)
 
 ### Components
