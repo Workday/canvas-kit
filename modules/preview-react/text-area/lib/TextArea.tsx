@@ -1,8 +1,8 @@
 import React from 'react';
 
 import {createContainer, ExtractProps} from '@workday/canvas-kit-react/common';
-import {FormField, useFormFieldOrientation} from '@workday/canvas-kit-preview-react/form-field';
-import {Flex} from '@workday/canvas-kit-react/layout';
+import {FormField, formFieldStencil} from '@workday/canvas-kit-preview-react/form-field';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 import {TextAreaField} from './TextAreaField';
 import {useTextInputModel} from '@workday/canvas-kit-preview-react/text-input';
@@ -17,7 +17,8 @@ export interface TextAreaProps extends ExtractProps<typeof FormField, never> {
 }
 
 /**
- * @deprecated ⚠️ `TextArea` in Preview has been deprecated and will be removed in a future major version. Please use [`FormField`](https://workday.github.io/canvas-kit/?path=/story/preview-inputs-form-field--basic) in Preview instead.
+ * @stencil formFieldStencil
+ * @deprecated ⚠️ `TextArea` in Preview has been deprecated and will be removed in a future major version. Please use [`FormField` in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-inputs-form-field--basic) instead.
  */
 export const TextArea = createContainer('div')({
   displayName: 'TextArea',
@@ -27,12 +28,20 @@ export const TextArea = createContainer('div')({
     Label: FormField.Label,
     Hint: FormField.Hint,
   },
-})<TextAreaProps>(({children, orientation = 'vertical', ...elemProps}, Element) => {
-  const layoutProps = useFormFieldOrientation(orientation);
-
+})<TextAreaProps>(({children, grow, orientation, ...elemProps}, Element, model) => {
   return (
-    <Flex as={Element} {...layoutProps} {...elemProps}>
+    <Element
+      {...mergeStyles(
+        elemProps,
+        formFieldStencil({
+          grow,
+          orientation,
+          error: model.state.error,
+          required: model.state.isRequired,
+        })
+      )}
+    >
       {children}
-    </Flex>
+    </Element>
   );
 });

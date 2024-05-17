@@ -2,7 +2,6 @@ import ts from 'typescript';
 
 import {slugify} from '@workday/canvas-kit-styling';
 
-import {makeEmotionSafe} from './makeEmotionSafe';
 import {getErrorMessage} from './getErrorMessage';
 import {TransformerContext} from './types';
 
@@ -45,7 +44,8 @@ export function parseNodeToStaticValue(
 
   // a.b
   if (ts.isPropertyAccessExpression(node)) {
-    const varName = getCSSVariableKey(getPropertyAccessExpressionText(node));
+    getPropertyAccessExpressionText(node);
+    const varName = getPropertyAccessExpressionText(node);
 
     const value =
       getValueFromProcessedNodes(varName, context) ||
@@ -70,7 +70,7 @@ export function parseNodeToStaticValue(
 
   // [a.b]
   if (ts.isComputedPropertyName(node) && ts.isPropertyAccessExpression(node.expression)) {
-    const varName = getCSSVariableKey(getPropertyAccessExpressionText(node.expression));
+    const varName = getPropertyAccessExpressionText(node.expression);
 
     const value =
       getValueFromProcessedNodes(varName, context) ||
@@ -79,6 +79,11 @@ export function parseNodeToStaticValue(
     if (value) {
       return value;
     }
+  }
+
+  // [`${a.b} &`]
+  if (ts.isComputedPropertyName(node) && ts.isTemplateExpression(node.expression)) {
+    return getStyleValueFromTemplateExpression(node.expression, context);
   }
 
   /**
@@ -154,7 +159,7 @@ function parseTypeToStaticValue(type: ts.Type): string | number | void {
 
 function getCSSVariableKey(text: string): string {
   const [id, name] = getVariableNameParts(text);
-  return `${slugify(id)}-${makeEmotionSafe(name)}`;
+  return `${slugify(id)}-${name}`;
 }
 
 /**
@@ -165,10 +170,6 @@ function getCSSVariableKey(text: string): string {
 function getPropertyAccessExpressionText(node: ts.PropertyAccessExpression): string {
   if (ts.isIdentifier(node.name)) {
     if (ts.isIdentifier(node.expression)) {
-      if (node.name.text === 'vars') {
-        // skip vars in name for stencil generated variables
-        return `${node.expression.text}`;
-      }
       return `${node.expression.text}.${node.name.text}`;
     }
     if (ts.isPropertyAccessExpression(node.expression)) {
@@ -184,7 +185,7 @@ function getVariableNameParts(input: string): [string, string] {
   // grab the last item in the array. This will also mutate the array, removing the last item
   const variable = parts.pop()!;
 
-  return [parts.join('.').replace(/(vars|stencil|styles)/i, ''), variable];
+  return [parts.join('.'), variable];
 }
 
 /**
@@ -271,15 +272,14 @@ export function getValueFromAliasedSymbol(
 }
 
 function getValueFromProcessedNodes(varName: string, context: TransformerContext): string | void {
-  const safeVarName = makeEmotionSafe(varName);
-  const {variables} = context;
+  const {names} = context;
 
-  if (variables[safeVarName]) {
-    return variables[safeVarName];
+  if (names[varName]) {
+    return names[varName];
   }
 
-  if (context.variableScope && variables[`${context.variableScope}${safeVarName}`]) {
-    return variables[`${context.variableScope}${safeVarName}`];
+  if (context.nameScope && names[`${context.nameScope}${varName}`]) {
+    return names[`${context.nameScope}${varName}`];
   }
 }
 

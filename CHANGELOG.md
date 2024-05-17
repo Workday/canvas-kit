@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.39](https://github.com/Workday/canvas-kit/releases/tag/v10.3.39) (2024-05-15)
+
+### Documentation
+
+- docs: Fix typo ([#2738](https://github.com/Workday/canvas-kit/pull/2738)) ([@aarongarciah](https://github.com/aarongarciah))
+
+### Infrastructure
+
+- chore: SNYK Security upgrade jscodeshift from 0.13.1 to 0.14.0 ([#2739](https://github.com/Workday/canvas-kit/pull/2739)) ([@mannycarrera4](https://github.com/mannycarrera4))
+
+
 ## [v10.3.38](https://github.com/Workday/canvas-kit/releases/tag/v10.3.38) (2024-05-09)
 
 ### Documentation

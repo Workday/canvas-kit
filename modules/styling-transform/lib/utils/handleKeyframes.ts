@@ -54,7 +54,7 @@ function createStyleReplacementNode(
   const serialized = serializeStyles(node, styleObj, `@keyframes animation-%n{%s}`, context);
   const animationName = `animation-${serialized.name}`;
 
-  context.variables[identifierName] = animationName;
+  context.names[identifierName] = animationName;
 
   return createStyleObjectNode(serialized.styles, serialized.name);
 }

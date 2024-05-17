@@ -79,18 +79,6 @@ describe('Text Input', () => {
     });
   });
 
-  describe('when rendered as required', () => {
-    it('should add an asterisk to the label to indicate that it is required', () => {
-      const {getByText} = render(
-        <TextInput orientation="vertical" isRequired={true}>
-          <TextInput.Label>Test</TextInput.Label>
-        </TextInput>
-      );
-
-      expect(getByText('*')).toHaveAttribute('aria-hidden', 'true');
-    });
-  });
-
   describe('when rendered a hint id', () => {
     it('the input and hint text should have matching ids for accessibility', () => {
       const hintId = 'hintId';

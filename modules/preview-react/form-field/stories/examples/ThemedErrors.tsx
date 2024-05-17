@@ -3,6 +3,12 @@ import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {CanvasProvider, PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 import {colors, space} from '@workday/canvas-kit-react/tokens';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const formFieldHintStyles = createStyles({
+  paddingTop: system.space.x2,
+});
 
 export const ThemedError = () => {
   const [value, setValue] = React.useState('');
@@ -29,7 +35,9 @@ export const ThemedError = () => {
       <FormField error={!value ? 'error' : undefined} isRequired={true} orientation="vertical">
         <FormField.Label>Email</FormField.Label>
         <FormField.Input as={TextInput} onChange={handleChange} value={value} />
-        <FormField.Hint paddingTop={space.xxs}>{!value && 'Please enter an email.'}</FormField.Hint>
+        <FormField.Hint cs={formFieldHintStyles}>
+          {!value && 'Please enter an email.'}
+        </FormField.Hint>
       </FormField>
     </CanvasProvider>
   );

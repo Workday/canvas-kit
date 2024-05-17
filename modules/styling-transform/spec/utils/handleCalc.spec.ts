@@ -49,7 +49,7 @@ describe('handleCalc', () => {
     const result = handleCalc(
       node,
       withDefaultContext(program.getTypeChecker(), {
-        variables: {'my-foo': '--foo'},
+        names: {'myVars.foo': '--foo'},
       })
     );
 
@@ -95,7 +95,7 @@ describe('handleCalc', () => {
     const result = handleCalc(
       node,
       withDefaultContext(program.getTypeChecker(), {
-        variables: {'my-foo': '--foo'},
+        names: {'myVars.foo': '--foo'},
       })
     );
 
@@ -141,7 +141,7 @@ describe('handleCalc', () => {
     const result = handleCalc(
       node,
       withDefaultContext(program.getTypeChecker(), {
-        variables: {'my-foo': '--foo'},
+        names: {'myVars.foo': '--foo'},
       })
     );
 
@@ -187,7 +187,7 @@ describe('handleCalc', () => {
     const result = handleCalc(
       node,
       withDefaultContext(program.getTypeChecker(), {
-        variables: {'my-foo': '--foo'},
+        names: {'myVars.foo': '--foo'},
       })
     );
 
@@ -233,7 +233,7 @@ describe('handleCalc', () => {
     const result = handleCalc(
       node,
       withDefaultContext(program.getTypeChecker(), {
-        variables: {'my-foo': '--foo'},
+        names: {'myVars.foo': '--foo'},
       })
     );
 

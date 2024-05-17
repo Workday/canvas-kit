@@ -196,7 +196,7 @@ describe('parseObjectToStaticValue', () => {
       parseObjectToStaticValue(
         node,
         withDefaultContext(program.getTypeChecker(), {
-          variables: {
+          names: {
             '--fallback': '12px',
           },
         })
@@ -220,7 +220,7 @@ describe('parseObjectToStaticValue', () => {
       parseObjectToStaticValue(
         node,
         withDefaultContext(program.getTypeChecker(), {
-          variables: {
+          names: {
             '--fallback': '12px',
           },
         })

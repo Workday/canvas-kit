@@ -32,7 +32,7 @@ describe('getVarName', () => {
 
     const node = findNodes(sourceFile, 'baz', ts.isPropertyAssignment)![0];
 
-    expect(getVarName(node)).toEqual('foo-bar-baz');
+    expect(getVarName(node)).toEqual('foo.bar.baz');
   });
 
   it('should get the correct CSS variable name of a nested PropertyAssignment with functions', () => {
@@ -49,7 +49,7 @@ describe('getVarName', () => {
 
     const node = findNodes(sourceFile, 'baz', ts.isPropertyAssignment)![0];
 
-    expect(getVarName(node)).toEqual('foo-bar-baz');
+    expect(getVarName(node)).toEqual('foo.bar.baz');
   });
 
   it('should get the correct CSS variable name of a nested PropertyAssignment with functions', () => {
@@ -66,6 +66,6 @@ describe('getVarName', () => {
 
     const node = findNodes(sourceFile, 'baz', ts.isPropertyAssignment)![0];
 
-    expect(getVarName(node.name)).toEqual('foo-bar-baz');
+    expect(getVarName(node.name)).toEqual('foo.bar.baz');
   });
 });

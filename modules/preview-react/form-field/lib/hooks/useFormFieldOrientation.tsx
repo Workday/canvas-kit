@@ -3,6 +3,8 @@ import {space} from '@workday/canvas-kit-react/tokens';
 
 /**
  * Adds the necessary layout props to a `FormField` component.
+ *
+ * @deprecated
  */
 export const useFormFieldOrientation = (orientation: 'horizontal' | 'vertical') => {
   let layoutProps: {

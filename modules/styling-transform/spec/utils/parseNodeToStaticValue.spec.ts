@@ -95,8 +95,8 @@ describe('parseNodeToStaticValue', () => {
       parseNodeToStaticValue(
         node,
         withDefaultContext(program.getTypeChecker(), {
-          variables: {
-            'foo-bar': '--css-foo-bar',
+          names: {
+            'foo.bar': '--css-foo-bar',
           },
         })
       )
@@ -147,8 +147,30 @@ describe('parseNodeToStaticValue', () => {
       parseNodeToStaticValue(
         node,
         withDefaultContext(program.getTypeChecker(), {
-          variables: {
-            'foo-bar': '--css-foo-bar',
+          names: {
+            'foo.bar': '--css-foo-bar',
+          },
+        })
+      )
+    ).toEqual('--css-foo-bar');
+  });
+
+  it('should return the string value of a ComputedPropertyName around a TemplateStringLiteral of a variable', () => {
+    const program = createProgramFromSource(`
+      const temp = {
+        [\`\${foo.bar\}\`]: 'baz'
+      }
+    `);
+
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isComputedPropertyName)![0];
+
+    expect(
+      parseNodeToStaticValue(
+        node,
+        withDefaultContext(program.getTypeChecker(), {
+          names: {
+            'foo.bar': '--css-foo-bar',
           },
         })
       )
@@ -184,7 +206,7 @@ describe('parseNodeToStaticValue', () => {
       parseNodeToStaticValue(
         node,
         withDefaultContext(program.getTypeChecker(), {
-          variables: {myAnimation: 'animation-abc123'},
+          names: {myAnimation: 'animation-abc123'},
         })
       )
     ).toEqual('animation-abc123 1s ease');
