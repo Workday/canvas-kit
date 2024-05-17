@@ -50,20 +50,20 @@ describe('handleParentModifier', () => {
   it('should add a mapping from the CSS class name to the hash to the names cache', () => {
     expect(names).toHaveProperty(
       names['buttonStencil.modifiers.size.large'],
-      names['buttonStencil.modifiers.size.large'].replace('css-', '')
+      names['buttonStencil.modifiers.size.large'].replace('css-', 'm')
     );
   });
 
   it('should add a mapping from the hash to the extracted CSS class name to the extractedNames cache', () => {
     expect(extractedNames).toHaveProperty(
-      names['buttonStencil.modifiers.size.large'].replace('css-', ''),
+      names['buttonStencil.modifiers.size.large'].replace('css-', 'm'),
       'css-button--size-large'
     );
   });
 
   it('should transform the runtime to include a selector with only the hash', () => {
     expect(result).toContain(
-      `.${names['buttonStencil.modifiers.size.large'].replace('css-', '')} :where(&){color:blue;}`
+      `.${names['buttonStencil.modifiers.size.large'].replace('css-', 'm')} :where(&){color:blue;}`
     );
   });
 

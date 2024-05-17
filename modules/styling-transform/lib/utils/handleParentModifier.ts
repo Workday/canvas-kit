@@ -14,7 +14,7 @@ export const handleParentModifier = createPropertyTransform((node, context) => {
     node.expression.expression.text === 'parentModifier'
   ) {
     const args = node.expression.arguments.map(arg => parseNodeToStaticValue(arg, context));
-    const hash = args[0].toString().replace('css-', '');
+    const hash = args[0].toString().replace('css-', 'm');
 
     // add a mapping from `css-{hash}` to `{hash}` for extraction string replacement
     names[args[0]] = hash;

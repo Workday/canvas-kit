@@ -1,37 +1,24 @@
 import React from 'react';
 
 import {createContainer, GrowthBehavior} from '@workday/canvas-kit-react/common';
-import {Flex, FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStencil} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 
-import {useFormFieldModel, useFormFieldOrientation} from './hooks';
+import {useFormFieldModel} from './hooks';
 import {FormFieldInput} from './FormFieldInput';
 import {FormFieldLabel} from './FormFieldLabel';
 import {FormFieldHint} from './FormFieldHint';
 import {FormFieldContainer} from './FormFieldContainer';
+import {formFieldStencil} from './formFieldStencil';
 
 export interface FormFieldProps extends FlexProps, GrowthBehavior {
+  /**
+   * The direction the child elements should stack
+   * @default vertical
+   */
+  orientation?: 'vertical' | 'horizontal';
   children: React.ReactNode;
 }
 
-const formFieldStencil = createStencil({
-  base: {
-    border: 'none',
-    padding: system.space.zero,
-    margin: `${system.space.zero} ${system.space.zero} ${system.space.x6}`,
-  },
-  modifiers: {
-    grow: {
-      true: {
-        width: '100%',
-        '[data-width="ck-formfield-width"]': {
-          width: '100%',
-        },
-      },
-    },
-  },
-});
 /**
  * Use `FormField` to wrap input components to make them accessible. You can customize the field
  * by passing in `TextInput`, `Select`, `RadioGroup` and other form elements to `FormField.Input` through the `as` prop.
@@ -42,6 +29,8 @@ const formFieldStencil = createStencil({
  *    <FormField.Input as={TextInput} value={value} onChange={(e) => console.log(e)} />
  *  </FormField>
  * ```
+ *
+ * @stencil formFieldStencil
  */
 export const FormField = createContainer('div')({
   displayName: 'FormField',
@@ -70,6 +59,8 @@ export const FormField = createContainer('div')({
      *    <FormField.Input as={TextInput} value={value} onChange={(e) => console.log(e)} />
      *  </FormField>
      * ```
+     *
+     * @stencil formFieldLabelStencil
      */
     Label: FormFieldLabel,
     /**
@@ -83,6 +74,8 @@ export const FormField = createContainer('div')({
      *    <FormField.Hint>This is your hint text</FormField.Hint>
      *  </FormField>
      * ```
+     *
+     * @stencil formFieldHintStencil
      */
     Hint: FormFieldHint,
     /**
@@ -97,19 +90,25 @@ export const FormField = createContainer('div')({
      *    </FormField.Container>
      *  </FormField>
      * ```
+     *
+     * @stencil formFieldContainerStencil
      */
     Container: FormFieldContainer,
   },
-})<FormFieldProps>(({children, ...elemProps}, Element, model) => {
-  const layoutProps = useFormFieldOrientation(model.state.orientation);
-
+})<FormFieldProps>(({children, grow, orientation, ...elemProps}, Element, model) => {
   return (
-    <Flex
-      as={Element}
-      {...layoutProps}
-      {...mergeStyles(elemProps, formFieldStencil({grow: elemProps.grow}))}
+    <Element
+      {...mergeStyles(
+        elemProps,
+        formFieldStencil({
+          grow,
+          orientation,
+          error: model.state.error,
+          required: model.state.isRequired,
+        })
+      )}
     >
       {children}
-    </Flex>
+    </Element>
   );
 });
