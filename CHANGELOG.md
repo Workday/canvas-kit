@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.42](https://github.com/Workday/canvas-kit/releases/tag/v9.1.42) (2024-05-17)
+
+### Components
+
+- fix(radio): Spread props to input ([#2747](https://github.com/Workday/canvas-kit/pull/2747)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  StyledRadio was spreading props to the input and it's parent div. This change removed spreading prop to the parent div except for className.
+
+### Infrastructure
+
+- ci: Fix package.json forward-merge resolution ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v9.1.41](https://github.com/Workday/canvas-kit/releases/tag/v9.1.41) (2024-04-10)
 
 ### Infrastructure
