@@ -2,55 +2,49 @@ import React from 'react';
 
 import {system} from '@workday/canvas-tokens-web';
 import {plusIcon} from '@workday/canvas-system-icons-web';
-import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {buttonStencil, BaseButtonProps} from '@workday/canvas-kit-react/button';
-import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {buttonStencil, PrimaryButton, PrimaryButtonProps} from '@workday/canvas-kit-react/button';
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Grid} from '@workday/canvas-kit-react/layout';
-import {Text} from '@workday/canvas-kit-react/text';
 
 const myButtonStencil = createStencil({
-  extends: buttonStencil,
-  base: ({background, borderRadius, label}) => ({
-    [background]: system.color.static.green.soft,
-    [label]: system.color.static.green.strong,
+  base: {
+    [buttonStencil.vars.background]: system.color.static.green.soft,
+    [buttonStencil.vars.label]: system.color.static.green.strong,
     [systemIconStencil.vars.color]: system.color.static.green.strong,
-    [borderRadius]: system.shape.half,
-    border: `3px solid transparent`,
+    [buttonStencil.vars.borderRadius]: system.shape.half,
+    border: `${px2rem(3)} solid transparent`,
     width: 'fit-content',
     '&:hover': {
-      border: `3px dotted ${system.color.static.green.strong}`,
+      [buttonStencil.vars.background]: system.color.static.green.default,
+      border: `${px2rem(3)} dotted ${system.color.static.green.strong}`,
       [systemIconStencil.vars.color]: system.color.static.green.strong,
     },
     '&:active': {
-      [background]: system.color.static.green.strong,
-      [label]: system.color.fg.inverse,
+      [buttonStencil.vars.background]: system.color.static.green.strong,
+      [buttonStencil.vars.label]: system.color.fg.inverse,
       [systemIconStencil.vars.color]: system.color.fg.inverse,
     },
-  }),
+  },
 });
 
 const MyButton = createComponent('button')({
-  Component: ({children, size, ...elemProps}: BaseButtonProps, ref, Element) => (
-    <Element ref={ref} {...handleCsProp(elemProps, myButtonStencil({size}))}>
+  Component: ({children, size, ...elemProps}: PrimaryButtonProps, ref, Element) => (
+    <PrimaryButton ref={ref} {...handleCsProp(elemProps, myButtonStencil({size}))}>
       {children}
-    </Element>
+    </PrimaryButton>
   ),
 });
 
 export const CustomButton = () => (
-  <Grid gridGap={4} gridTemplateColumns="repeat(3, 1fr)" alignItems="center">
-    <MyButton>
-      <Text>My Button</Text>
-      <SystemIcon icon={plusIcon} />
+  <Grid cs={{gap: px2rem(4), gridTemplateColumns: 'repeat(3, 1fr)', alignItems: 'center'}}>
+    <MyButton icon={plusIcon}>My Button</MyButton>
+    <MyButton size="medium" icon={plusIcon} iconPosition="end">
+      Medium My Button
     </MyButton>
-    <MyButton size="medium">
-      <Text>Medium My Button</Text>
-      <SystemIcon icon={plusIcon} />
-    </MyButton>
-    <MyButton size="large">
-      <Text>Large My Button</Text>
-      <SystemIcon icon={plusIcon} />
+    <MyButton size="large" icon={plusIcon}>
+      Large My Button
     </MyButton>
   </Grid>
 );

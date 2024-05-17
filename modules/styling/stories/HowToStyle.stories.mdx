@@ -4,7 +4,7 @@ import {CustomIcon} from './examples/CustomIcon';
 import {CustomText} from './examples/CustomText';
 import {StyledButton} from './examples/StyledButton';
 
-<Meta title="Styling/How Customize Styles" />
+<Meta title="Styling/ How to Customize Styles" />
 
 # How To Customize Styles
 
@@ -15,8 +15,8 @@ are the following options.
 - [Simple customization](#simple-customization)
   - [Using `cs` Prop](using-cs-prop)
   - [Using `createStyles`](using-createStyles)
-- [Leveraging Component CSS Variables](leveraging-component-css-variables)
-- Stencils Extentions
+- [Customizing Via Stencil Extension](customizing-via-stencil-extension) -
+  [Overriding Variables](overriding-variables)
 
 ## Simple Customization
 
@@ -28,8 +28,8 @@ everything together and applies `className` and `style` attributes to a React el
 that support the `cs` prop allow you to quickly update styles for simple customizations.
 
 ```tsx
-import {cssVar} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {value cssVar} from '@workday/canvas-kit-styling';
+import {value system} from '@workday/canvas-tokens-web';
 
 <Text cs={{textTransform: 'uppercase', margin: cssVar(system.space.x4)}}>My uppercased text</Text>;
 ```
@@ -65,43 +65,29 @@ const textStyles = createStyles({
 > `createStyles` handles that for you. If you're in the context of the `cs` prop, you need to wrap
 > css variables.
 
-## Leveraging Component CSS Variables
+## Customizing Via Stencil Extension
 
-Some of Canvas components are built using stencils and support its own CSS variables. There is a
-list of these components:
+Most of our components use
+[Stencils](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-stencil) to
+define styles. Similar to our models, Stencils are built to be flexibile, reusable and easy to
+modify.
 
-- Buttons have the next stencil variables: `background` as the background color, `border` as the
-  border color, `boxShadowInner` as the focus ring inner shadow color, `boxShadowOuter` the focus
-  ring outer shadow color, `label` as the label color, `opacity`, `borderRadius`
+### Overriding Variables
 
-- Icons have the next stencil variables: `width` to set svg width, `height` to set svg height,
-  `size` to set svg width and height with the same value.
+Often times, styles can be dynamic resulting in component Stencils exposing CSS variables that can
+be used to override styles. Our Buttons are a great example of how to do this.
 
-  - In addition to all icon variables `SystemIcon` also supports `color` to set color for
-    `.wd-icon-fill` and `.wd-icon-accent` (if `accentColor` is not provided), `accentColor` to set
-    color for `.wd-icon-accent`, `backgroundColor` to set color for svg background.
+In the example below, we're using the variables exposed by `buttonStencil` which is used to build
+our `PrimaryButton` and changing the variables to completely overrite styles for different visual
+states. Overriding styles in this way abstracts out the need to know the underlying dom structure of
+our Buttons while giving you access to style effectively and predictably.
 
-  - In addition to all icon variables `AccentIcon` also supports `color` to set color for svg.
-
-  - In addition to all icon variables `AppletIcon` also supports `color200` to set color for
-    `.color-200`, `color300` to set color for `.color-300`, `color400` to set color for
-    `.color-400`, `color500` to set color for `.color-500`. Please note, these colors should be the
-    same color but different shades. For example, if `color200` has been change to `blueberry200`,
-    all others must be assigned to blueberry shades (300, 400, 500).
-
-You can reassign any CSS variable for the specific component or underlying components using `cs`
-prop:
-
-<ExampleCodeBlock code={StyledButton} />
+<ExampleCodeBlock code={CustomButton} />
 
 ## Stencils extentions
 
 Base Button, Card, Svg and Text components share their setSyntheticTrailingComments, so you can
 build your component under it by extending stencil.
-
-### Custom Button
-
-<ExampleCodeBlock code={CustomButton} />
 
 ### Custom Card
 
