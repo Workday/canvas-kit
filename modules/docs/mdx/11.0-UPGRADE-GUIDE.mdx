@@ -13,10 +13,10 @@ This guide contains an overview of the changes in Canvas Kit v11. Please
 [reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have
 any questions.
 
-## Why you should migrate
+## Why You Should Upgrade
 
-Canvas Kit v11 is a transition into a new
-[styling future](https://github.com/Workday/canvas-kit/discussions/2265). Theming and building an in
+Canvas Kit v11 is transitioning into a
+[new way of styling](https://github.com/Workday/canvas-kit/discussions/2265). Theming and building an in
 sync Canvas Kit CSS has been at the top of our minds. We've started using our new
 [Canvas Tokens Web](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs)
 package to take advantage of
@@ -32,7 +32,7 @@ A note to the reader:
   [new styling API](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-stencil).
   This shouldn't effect the way you currently style your components. Because we're moving away from
   Emotion, support for style props will eventually be removed, however, this API provide backwards
-  compatability. If you want to slowly move off of Emotion as well, you can style styling components
+  compatability. If you want to slowly move off of Emotion as well, you can start styling components
   via the `cs` prop or our new styling utilities.
 
 ## Table of contents
@@ -166,7 +166,7 @@ import {TextInput} from '@workday/canvas-kit-react/text-input';
 </FormField>;
 ```
 
-If you still want to use a `label` element outside of the context of a form, you can use `Text`
+If you still want to use a `label` element outside of the context of a form, you can use our `Text` component
 instead.
 
 ---
@@ -177,7 +177,7 @@ instead.
 
 We've deprecated `TextArea` from [Preview](#preview). Please use
 [`FormField`](https://workday.github.io/canvas-kit/?path=//docs/preview-inputs-form-field--basic) in
-[Preview](#preview) instead.
+[Preview](#preview) with `TextArea` in [Main](#main) instead.
 
 ---
 
@@ -187,7 +187,7 @@ We've deprecated `TextArea` from [Preview](#preview). Please use
 
 We've deprecated `TextInput` from [Preview](#preview). Please use
 [`FormField`](https://workday.github.io/canvas-kit/?path=//docs/preview-inputs-form-field--basic) in
-[Preview](#preview) instead.
+[Preview](#preview) with `TextInput` in [Main](#main) instead.
 
 The following model hooks have also been deprecated:
 
@@ -491,7 +491,7 @@ Components affected:
 [#2455](https://github.com/Workday/canvas-kit/pull/2455),
 [#2709](https://github.com/Workday/canvas-kit/pull/2709)
 
-Several components have been refactored to use new
+Several components have been refactored to use our new
 [Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
 [styling API](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
 The React interface **has not changed**, but CSS variables are now used for dynamic properties.
@@ -626,20 +626,21 @@ prop.
 
 ```tsx
 // This will no longer be supported in a future major version
-<SystemIcon color="blueberry400" .../>
+<SystemIcon color="blueberry400" />
 
 // Use new tokens instead.
-<SystemIcon color={base.blueberry400} .../>
+import {base} from '@workday/canvas-tokens-web'
+<SystemIcon color={base.blueberry400} />
 ```
 
-🤖 The codemod will handle the change of `styles` to `cs` for you automatically.
+🤖 The codemod will handle the change of renaming `styles` to `cs` for you automatically.
 
 #### AccentIcon
 
 - `AccentIconStyles` prop has been deprecated and will be merged with `AccentIconProps` in a future
   version.
 - `accentIconStyles` has been deprecated and will be removed in a future version as a part of
-  implementation of stencils and new tokens. Consider to use `accentIconStencil` to get styles or
+  implementation of stencils and new tokens. Consider using `accentIconStencil` to get styles or
   class name.
 - `AccentIcon` supports `size` and `color` css variables, along with `size` and `color` props. Both
   ways are supported:
@@ -696,10 +697,10 @@ const MyComponent = StyledRadioButton('div')({
 - `GraphicStyles` prop has been deprecated and will be merged with `GraphicProps` in a future
   version.
 - `graphicStyles` has been deprecated and will be removed in a future version as a part of
-  implementation of stencils and new tokens. Consider to use `graphicStencil` to get styles or class
+  implementation of stencils and new tokens. Consider using `graphicStencil` to get styles or class
   name.
-- `width` and `height` props has been deprecated and will be removed in a future version. Consider
-  using `cs` props instead to set svg sizes.
+- `width` and `height` props have been deprecated and will be removed in a future version. Consider
+  using `cs` props instead to set `svg` sizes.
 
 ```tsx
 // before
@@ -711,13 +712,13 @@ const MyComponent = StyledRadioButton('div')({
 
 #### Icon
 
-This change only impacts internal Canvas Kit code. `Icon` component has been removed and no longer
-used in icons. It was replaced by `Svg` and icon stencils extend `svgStencil`.
+This change only impacts internal Canvas Kit code. `Icon` component has been removed and is no longer
+used to build our icons. It has been replaced by our `Svg` component. Most of our icons now extend styles from `svgStencil`.
 
 #### SystemIcon
 
 - `SystemIconStyles` has been deprecated and will be removed in a future version as a part of
-  implementation of stencils and new tokens. Consider using systemIconStencil to get styles or class
+  implementation of stencils and new tokens. Consider using `systemIconStencil` to get styles or class
   name.
 
 - `accentHover` is deprecated and will be removed in a future version. Please use the following when
@@ -757,7 +758,7 @@ used in icons. It was replaced by `Svg` and icon stencils extend `svgStencil`.
 ```
 
 - `systemIconStyles` has been deprecated and will be removed in a future version as a part of
-  implementation of stencils and new tokens. Consider to use `systemIconStencil` to get styles or
+  implementation of stencils and new tokens. Consider using `systemIconStencil` to get styles or
   class name.
 
 - `SystemIcon` supports `size`, `color`, `accentColor` and `background` css variables, along with
@@ -911,17 +912,17 @@ may change the way your component works if you use the `width` style property.
 
 ## Troubleshooting
 
-### My styles seem broken
+### My Styles Seem Broken?
 
 Our components are reliant on our new Canvas Tokens Web package. Be sure you install
 `@workday/canvas-tokens-web`. For more information, reference our
 [Getting Started docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs)
 for this package.
 
-### Did you upgrade all Canvas Kit related packages
+### Did You Upgrade All Canvas Kit Related Packages?
 
-In order for all the packages to work in harmony, you must upgrade all Canvas Kit packages that
-you're using at the same time, including:
+In order for all the packages to work in harmony, you must upgrade all Canvas Kit packages to the same version that
+you're using, including:
 
 - `@workday/canvas-kit-react`
 - `@workday/canvas-kit-preview-react`
