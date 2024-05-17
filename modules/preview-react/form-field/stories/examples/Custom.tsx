@@ -45,7 +45,7 @@ export const Custom = () => {
   const model = useFormFieldModel({isRequired: true});
 
   return (
-    <Flex cs={formFieldStencil({orientation: 'vertical'})}>
+    <Flex cs={formFieldStencil({orientation: 'horizontal'})}>
       <Label model={model}>My Custom Field</Label>
       <Input model={model} value={value} onChange={handleChange} />
       <Hint model={model}>You can be anything</Hint>

@@ -30,15 +30,6 @@ export const formFieldLabelStencil = createStencil({
     alignItems: 'center',
     minWidth: px2rem(180),
 
-    '& :where([data-element=asterisk])': {
-      display: 'none',
-      fontSize: system.fontSize.body.large,
-      fontWeight: system.fontWeight.normal,
-      color: brand.error.base,
-      textDecoration: 'unset',
-      marginInlineStart: system.space.x1,
-    },
-
     // asterisk
     [parentModifier(formFieldStencil.modifiers.required.true)]: {
       '&::after': {
@@ -73,9 +64,6 @@ export const FormFieldLabel = createSubcomponent('label')({
   return (
     <Element {...mergeStyles(elemProps, formFieldLabelStencil({typeLevel, variant}))}>
       {children}
-      {/* <span data-element="asterisk" aria-hidden="true">
-        *
-      </span> */}
     </Element>
   );
 });
