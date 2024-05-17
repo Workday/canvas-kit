@@ -1,0 +1,14 @@
+.cnvs-card {
+  box-sizing: border-box;
+  box-shadow: var(--cnvs-sys-depth-1);
+  padding: var(--cnvs-sys-space-x8);
+  background-color: var(--cnvs-sys-color-bg-default);
+  border: 0.0625rem solid var(--cnvs-sys-color-border-container);
+  border-radius: var(--cnvs-sys-shape-x2);
+}
+
+
+.cnvs-card-body {
+  box-sizing: border-box;
+}
+
