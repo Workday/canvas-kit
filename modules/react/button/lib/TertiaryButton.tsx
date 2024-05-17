@@ -1,256 +1,188 @@
 import * as React from 'react';
-import {
-  focusRing,
-  useTheme,
-  Themeable,
-  EmotionCanvasTheme,
-  createComponent,
-  styled,
-  StyledType,
-} from '@workday/canvas-kit-react/common';
-import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
-import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {ButtonColors, IconPositions, ButtonSizes} from './types';
-import {BaseButton, BaseButtonProps} from './BaseButton';
 
-export interface TertiaryButtonProps extends Themeable, BaseButtonProps {
+import {buttonVars, getIconPosition} from './BaseButton';
+import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
+import {createStyles, createModifiers} from '@workday/canvas-kit-styling';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {system, brand, base} from '@workday/canvas-tokens-web';
+import {borderRadius, space} from '@workday/canvas-kit-react/tokens';
+import {Button, ButtonProps} from './Button';
+
+/**
+ * Extends all the style properties from Box to our buttons as well as props from ButtonProps.
+ * We omit `ref` since all of our buttons use `createComponent` and already give access to `ref`.
+ * Use this type to extend and customize any one off buttons that you want full control over styling.
+ */
+export interface TertiaryButtonProps extends ButtonProps {
   /**
-   * The variant of the TertiaryButton.
+   * Variant has an option for `inverse` which will inverse the styling
    */
-  variant?: 'inverse' | undefined;
-  /**
-   * There are four button sizes: `extraSmall`, `small`, `medium`, and `large`.
-   * If no size is provided, it will default to `medium`.
-   */
-  size?: ButtonSizes;
-  /**
-   * Button icon positions can either be `start` or `end`.
-   * If no value is provided, it defaults to `start`.
-   */
-  iconPosition?: IconPositions;
-  /**
-   * The icon of the TertiaryButton.
-   */
-  icon?: CanvasSystemIcon;
-  /**
-   * The capitalization of the text in the button.
-   */
-  /**
-   * If set to `true`, transform the icon's x-axis to mirror the graphic
-   */
-  shouldMirrorIcon?: boolean;
-  /**
-   * If set to `true`, transform text to all letters uppercase
-   */
-  allCaps?: boolean;
-  children?: React.ReactNode;
-  /**
-   * If set to `true`, make icon button available to use theme colors instead of default
-   */
+  variant?: 'inverse';
   isThemeable?: boolean;
 }
 
-const getTertiaryButtonColors = (
-  variant: 'inverse' | undefined,
-  theme: EmotionCanvasTheme,
-  hasThemeStyles: boolean
-): ButtonColors => {
-  const {
-    canvas: {
-      palette: {primary: themePrimary},
-    },
-  } = theme;
-
-  if (variant === 'inverse') {
-    return {
-      default: {
-        background: 'transparent',
-        icon: colors.frenchVanilla100,
-        label: colors.frenchVanilla100,
-      },
-      hover: {
-        background: colors.frenchVanilla100,
-        icon: colors.blackPepper400,
-        label: colors.blackPepper400,
-      },
-      active: {
-        background: colors.soap200,
-        icon: colors.blackPepper400,
-        label: colors.blackPepper400,
-      },
-      focus: {
-        background: colors.frenchVanilla100,
-        icon: colors.blackPepper400,
-        label: colors.blackPepper400,
-        focusRing: focusRing(
-          {
-            separation: 2,
-            inset: 'inner',
-            innerColor: 'currentColor',
-            outerColor: colors.frenchVanilla100,
-          },
-          theme
-        ),
-      },
-      disabled: {
-        background: 'transparent',
-        icon: colors.frenchVanilla100,
-        label: colors.frenchVanilla100,
-      },
-    };
-  } else {
-    return {
-      default: {
-        icon: hasThemeStyles ? themePrimary.main : colors.blackPepper400,
-        label: themePrimary.main,
-      },
-      hover: {
-        background: colors.soap200,
-        icon: hasThemeStyles ? themePrimary.dark : colors.blackPepper500,
-        label: themePrimary.dark,
-      },
-      active: {
-        background: colors.soap300,
-        icon: hasThemeStyles ? themePrimary.dark : colors.blackPepper500,
-        label: themePrimary.dark,
-      },
-      focus: {
-        icon: hasThemeStyles ? themePrimary.main : colors.blackPepper500,
-        label: themePrimary.main,
-        focusRing: focusRing({innerColor: colors.blueberry400}, theme),
-      },
-      disabled: {
-        background: 'transparent',
-        icon: hasThemeStyles ? themePrimary.main : colors.blackPepper400,
-        label: themePrimary.main,
-      },
-    };
-  }
-};
-
-const StyledButtonLabel = styled(BaseButton.Label)({
+const tertiaryStyles = createStyles({
+  paddingInline: system.space.x2,
+  minWidth: 'auto',
   textDecoration: 'underline',
+  border: 0,
+  // Default Styles
+  [buttonVars.default.background]: 'transparent',
+  [buttonVars.default.border]: 'transparent',
+  [buttonVars.default.borderRadius]: system.shape.x1,
+  [buttonVars.default.label]: brand.primary.base,
+  [buttonVars.default.icon]: base.blackPepper400,
+  // Hover Styles
+  [buttonVars.hover.background]: base.soap200,
+  [buttonVars.hover.border]: 'transparent',
+  [buttonVars.hover.label]: brand.primary.dark,
+  [buttonVars.hover.icon]: base.blackPepper500,
+  // Focus Styles
+  [buttonVars.focus.background]: 'transparent',
+  [buttonVars.focus.border]: 'transparent',
+  [buttonVars.focus.label]: brand.primary.base,
+  [buttonVars.focus.icon]: base.blackPepper500,
+  [buttonVars.focus.boxShadowInner]: brand.common.focusOutline,
+  [buttonVars.focus.boxShadowOuter]: brand.common.focusOutline,
+  // Active Styles
+  [buttonVars.active.background]: base.soap300,
+  [buttonVars.active.border]: 'transparent',
+  [buttonVars.active.label]: brand.primary.dark,
+  [buttonVars.active.icon]: base.blackPepper500,
+  // Disabled Styles
+  [buttonVars.disabled.background]: 'transparent',
+  [buttonVars.disabled.border]: base.frenchVanilla100,
+  [buttonVars.disabled.label]: brand.primary.base,
+  [buttonVars.disabled.icon]: base.blackPepper400,
+  [buttonVars.disabled.opacity]: '0.4',
+
+  '&:focus-visible, &.focus': {
+    ...focusRing({
+      width: 2,
+      separation: 0,
+      innerColor: base.frenchVanilla100,
+      outerColor: brand.common.focusOutline,
+    }),
+  },
 });
 
-const StyledTertiaryButtonContainer = styled(BaseButton)<
-  StyledType & Pick<TertiaryButtonProps, 'allCaps'>
->(
-  {
-    border: '0',
+export const tertiaryButtonModifiers = createModifiers({
+  isThemeable: {
+    true: createStyles({
+      [buttonVars.default.icon]: brand.primary.base,
+      [buttonVars.hover.icon]: brand.primary.dark,
+      [buttonVars.focus.icon]: brand.primary.base,
+      [buttonVars.active.icon]: brand.primary.dark,
+      [buttonVars.disabled.icon]: brand.primary.base,
+    }),
   },
-  ({allCaps}) => ({
-    textTransform: allCaps ? 'uppercase' : undefined,
-  })
-);
+  variant: {
+    inverse: createStyles({
+      // Default Styles
+      [buttonVars.default.background]: 'transparent',
+      [buttonVars.default.border]: 'transparent',
+      [buttonVars.default.label]: base.frenchVanilla100,
+      [buttonVars.default.icon]: base.frenchVanilla100,
+      // Hover Styles
+      [buttonVars.hover.background]: base.frenchVanilla100,
+      [buttonVars.hover.border]: 'transparent',
+      [buttonVars.hover.label]: base.blackPepper400,
+      [buttonVars.hover.icon]: base.blackPepper400,
+      // Focus Styles
+      [buttonVars.focus.background]: base.frenchVanilla100,
+      [buttonVars.focus.border]: 'transparent',
+      [buttonVars.focus.label]: base.blackPepper400,
+      [buttonVars.focus.icon]: base.blackPepper400,
+      // Active Styles
+      [buttonVars.active.background]: base.soap200,
+      [buttonVars.active.border]: 'transparent',
+      [buttonVars.active.label]: base.blackPepper400,
+      [buttonVars.active.icon]: base.blackPepper400,
+      // Disabled Styles
+      [buttonVars.disabled.background]: 'transparent',
+      [buttonVars.disabled.border]: base.frenchVanilla100,
+      [buttonVars.disabled.label]: base.frenchVanilla100,
+      [buttonVars.disabled.icon]: base.frenchVanilla100,
 
-const getPaddingStyles = (
-  icon: CanvasSystemIcon | undefined,
-  iconPosition: 'start' | 'end',
-  children: React.ReactNode,
-  size: ButtonSizes
-): string => {
-  if (children) {
-    // if there is an icon on the left, add 4px extra padding to the right for visual balance
-    if (icon && iconPosition === 'start') {
-      if (size === 'extraSmall') {
-        return `0 ${space.xxs} 0 ${space.xxxs}`;
-      }
-      return `0 ${space.xs} 0 ${space.xxs}`;
-    }
-    // if there is an icon on the right, add 4px extra padding to the left for visual balance
-    if (icon && iconPosition === 'end') {
-      if (size === 'extraSmall') {
-        return `0 ${space.xxxs} 0 ${space.xxs}`;
-      }
-      return `0 ${space.xxs} 0 ${space.xs}`;
-    }
-    // if there is no icon, return the default padding
-    return `0 ${space.xxs}`;
-  } else {
-    return '0';
-  }
-};
+      '&:focus-visible, &.focus': {
+        ...focusRing({
+          inset: 'inner',
+          width: 2,
+          separation: 2,
+          innerColor: base.blackPepper400,
+          outerColor: base.frenchVanilla100,
+        }),
+      },
+    }),
+  },
+  iconPosition: {
+    largeOnly: createStyles({
+      borderRadius: borderRadius.circle,
+      padding: '0',
+      minWidth: `calc(${system.space.x4} * 3)`,
+    }),
+    largeStart: createStyles({
+      paddingInlineStart: space.xxs,
+      paddingInlineEnd: space.xs,
+    }),
+    largeEnd: createStyles({paddingInlineStart: space.xs, paddingInlineEnd: space.xxs}),
+    mediumOnly: createStyles({padding: '0', minWidth: space.xl, borderRadius: borderRadius.circle}),
+    mediumStart: createStyles({paddingInlineStart: space.xxs, paddingInlineEnd: space.xs}),
+    mediumEnd: createStyles({paddingInlineStart: space.xs, paddingInlineEnd: space.xxs}),
+    smallOnly: createStyles({padding: '0', minWidth: space.l, borderRadius: borderRadius.circle}),
+    smallStart: createStyles({paddingInlineStart: space.xxs, paddingInlineEnd: space.xs}),
+    smallEnd: createStyles({paddingInlineStart: space.xs, paddingInlineEnd: space.xxs}),
+    extraSmallOnly: createStyles({
+      padding: '0',
+      minWidth: space.m,
+      borderRadius: borderRadius.circle,
+    }),
+    extraSmallStart: createStyles({paddingInlineStart: space.xxxs, paddingInlineEnd: space.xxs}),
+    extraSmallEnd: createStyles({paddingInlineStart: space.xxs, paddingInlineEnd: space.xxxs}),
+  },
+});
 
-const getMinWidthStyles = (children: React.ReactNode, size: ButtonSizes): string => {
-  let minWidthNum;
-  switch (size) {
-    case 'large':
-      minWidthNum = '48px';
-      break;
-    case 'medium':
-      minWidthNum = space.xl;
-      break;
-    case 'small':
-      minWidthNum = space.l;
-      break;
-    case 'extraSmall':
-      minWidthNum = space.m;
-      break;
-    default:
-      minWidthNum = space.xl;
-      break;
-  }
-  return children ? 'auto' : minWidthNum;
-};
-
-/**
- * Tertiary Buttons have the lowest emphasis. Use for less important actions that the user may not
- * often be looking to do. Tertiary Buttons have lower prominence as its container is not visible
- * until it is interacted with. Use Tertiary Buttons for supplemental actions such as “View More”,
- * “Read More” or “Select a File”. Tertiary Buttons are frequently used on Cards.
- *
- * Tertiary Buttons have four sizes: `extraSmall`, `small`, `medium` and `large`. Icons are
- * supported for every size and can be positioned at the `start` or `end` with the `iconPosition`
- * prop.
- */
 export const TertiaryButton = createComponent('button')({
   displayName: 'TertiaryButton',
   Component: (
     {
-      size = 'medium',
-      iconPosition = 'start',
-      isThemeable = false,
-      variant,
       children,
       icon,
-      shouldMirrorIcon = false,
+      size = 'medium',
+      isThemeable,
+      variant,
+      iconPosition,
       ...elemProps
     }: TertiaryButtonProps,
     ref,
     Element
   ) => {
-    const theme = useTheme();
-    const hasThemeStyles = !!children || isThemeable;
+    const baseIconPosition = iconPosition
+      ? iconPosition
+      : icon
+      ? children
+        ? 'start'
+        : 'only'
+      : undefined;
 
     return (
-      <StyledTertiaryButtonContainer
-        ref={ref}
+      <Button
         as={Element}
-        colors={getTertiaryButtonColors(variant, theme, hasThemeStyles)}
+        ref={ref}
+        icon={icon}
+        iconPosition={iconPosition}
         size={size}
-        padding={getPaddingStyles(icon, iconPosition, children, size)}
-        minWidth={getMinWidthStyles(children, size)}
-        borderRadius={children ? borderRadius.m : borderRadius.circle}
-        {...elemProps}
+        {...mergeStyles(elemProps, [
+          tertiaryStyles,
+          tertiaryButtonModifiers({
+            isThemeable: (isThemeable || baseIconPosition !== 'only') as any,
+            variant: variant,
+            iconPosition: getIconPosition(size, baseIconPosition),
+          }),
+        ])}
       >
-        {icon && iconPosition === 'start' && (
-          <BaseButton.Icon
-            size={size}
-            iconPosition={iconPosition}
-            icon={icon}
-            shouldMirrorIcon={shouldMirrorIcon}
-          />
-        )}
-        {children && <StyledButtonLabel>{children}</StyledButtonLabel>}
-        {icon && iconPosition === 'end' && (
-          <BaseButton.Icon
-            size={size}
-            iconPosition={iconPosition}
-            icon={icon}
-            shouldMirrorIcon={shouldMirrorIcon}
-          />
-        )}
-      </StyledTertiaryButtonContainer>
+        {children}
+      </Button>
     );
   },
 });

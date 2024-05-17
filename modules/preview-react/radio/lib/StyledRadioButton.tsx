@@ -8,13 +8,12 @@ import {
   ExtractProps,
   Themeable,
 } from '@workday/canvas-kit-react/common';
-import {colors, inputColors, spaceNumbers, borderRadius} from '@workday/canvas-kit-react/tokens';
+import {colors, inputColors, space, borderRadius} from '@workday/canvas-kit-react/tokens';
 
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import isPropValid from '@emotion/is-prop-valid';
 
 const radioWidth = 18;
-const rippleRadius = (spaceNumbers.l - radioWidth) / 2;
 const radioHeight = 18;
 
 export interface StyledRadioButtonProps extends ExtractProps<typeof Box, 'input'>, Themeable {
@@ -113,12 +112,13 @@ const StyledRadioInput = styled(Box.as('input'))<StyledRadioButtonProps & Styled
     },
 
     ...mouseFocusBehavior({
-      '&:focus + .cnvs-radio-check, &:focus:hover + .cnvs-radio-check, &:focus:active + .cnvs-radio-check, &:focus:hover:checked + .cnvs-radio-check, &:focus:active:checked + .cnvs-radio-check': {
-        ...focusRing({
-          width: 0,
-          outerColor: variant === 'inverse' ? colors.frenchVanilla100 : themeFocusOutline,
-        }),
-      },
+      '&:focus + .cnvs-radio-check, &:focus:hover + .cnvs-radio-check, &:focus:active + .cnvs-radio-check, &:focus:hover:checked + .cnvs-radio-check, &:focus:active:checked + .cnvs-radio-check':
+        {
+          ...focusRing({
+            width: 0,
+            outerColor: variant === 'inverse' ? colors.frenchVanilla100 : themeFocusOutline,
+          }),
+        },
     }),
   })
 );
@@ -142,7 +142,9 @@ const RadioInputWrapper = styled(Flex, {
       opacity: variant === 'inverse' ? '0.4' : '1',
     },
     '&:hover:before': {
-      boxShadow: !disabled ? `0 0 0 ${rippleRadius}px ${colors.soap200}` : undefined,
+      boxShadow: !disabled
+        ? `0 0 0 calc((${space.l} - ${radioWidth}px) / 2) ${colors.soap200}`
+        : undefined,
     },
   })
 );

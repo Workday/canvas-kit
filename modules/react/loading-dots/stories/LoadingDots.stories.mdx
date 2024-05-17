@@ -29,7 +29,19 @@ yarn add @workday/canvas-kit-react
 
 <ExampleCodeBlock code={RTL} />
 
-### Accessible Example
+### Adding screen reader support to loading animations
+
+Sometimes, letting users know when content has finished loading is just as important as asking users
+to "please wait" while content is loading. The disappearance of an animation is information that
+might need description. In this example, we are using `AriaLiveRegion` and `AccessibleHide`
+components included in Canvas to describe both the appearance and disappearance of `LoadingDots`.
+
+- When idle, render an empty live region
+- When loading, render `LoadingDots` inside the live region,
+- When complete, render `AccessibleHide` inside the live region expressing "Complete!"
+- We can assign a name to `AriaLiveRegion` component by passing in `aria-label="Loading"`
+- We can declare `LoadingDots` a labeled graphic by passing `role="img"` and
+  `aria-label="Please wait..."` into the component
 
 <ExampleCodeBlock code={Accessible} />
 

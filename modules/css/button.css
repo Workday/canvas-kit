@@ -1,0 +1,570 @@
+.cnvs-button {
+  box-sizing: border-box;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  font-size: 0.875rem;
+  line-height: normal;
+  letter-spacing: 0.015rem;
+  font-weight: var(--cnvs-sys-font-weight-bold);
+  background-color: var(--cnvs-button-color-prop-default-background, var(--cnvs-button-background, transparent));
+  color: var(--cnvs-button-color-prop-default-label, var(--cnvs-button-label, var(--cnvs-sys-color-fg-strong)));
+  border-width: 0.0625rem;
+  border-style: solid;
+  gap: var(--cnvs-sys-space-x2);
+  border-color: var(--cnvs-button-color-prop-default-border, var(--cnvs-button-border, transparent));
+  cursor: pointer;
+  display: inline-flex;
+  box-shadow: none;
+  align-items: center;
+  justify-content: center;
+  outline: 0.125rem transparent;
+  white-space: nowrap;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  border-radius: var(--cnvs-button-color-prop-default-border-radius, var(--cnvs-button-border-radius, var(--cnvs-sys-shape-round)));
+  position: relative;
+  vertical-align: middle;
+  overflow: hidden;
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-default-icon, var(--cnvs-sys-color-fg-strong));
+  transition: box-shadow 120ms linear,border 120ms linear,background-color 120ms linear,color 120ms linear;
+}
+
+.cnvs-button:disabled, .cnvs-button:disabled:active, .cnvs-button.disabled {
+  cursor: default;
+  box-shadow: none;
+  opacity: var(--cnvs-button-color-prop-default-opacity, var(--cnvs-button-opacity, var(--cnvs-sys-opacity-full)));
+}
+
+.cnvs-button:focus-visible, .cnvs-button.focus {
+  background-color: var(--cnvs-button-color-prop-focus-background, var(--cnvs-button-background, transparent));
+  border-color: var(--cnvs-button-color-prop-focus-border, var(--cnvs-button-border, transparent));
+  color: var(--cnvs-button-color-prop-focus-label, var(--cnvs-button-label, var(--cnvs-sys-color-fg-strong)));
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-focus-icon, var(--cnvs-sys-color-fg-strong));
+  box-shadow: 0 0 0 2px var(--cnvs-button-color-prop-focus-box-shadow-inner, var(--cnvs-button-box-shadow-inner, var(--cnvs-sys-color-border-inverse))),0 0 0 4px var(--cnvs-button-color-prop-focus-box-shadow-outer, var(--cnvs-button-box-shadow-outer, var(--cnvs-brand-primary-base)));
+}
+
+.cnvs-button:hover, .cnvs-button.hover {
+  background-color: var(--cnvs-button-color-prop-hover-background, var(--cnvs-button-background, var(--cnvs-sys-color-bg-contrast-strong)));
+  border-color: var(--cnvs-button-color-prop-hover-border, var(--cnvs-button-border, transparent));
+  color: var(--cnvs-button-color-prop-hover-label, var(--cnvs-button-label, var(--cnvs-sys-color-fg-stronger)));
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-hover-icon, var(--cnvs-sys-color-fg-stronger));
+}
+
+.cnvs-button:hover:active {
+  transition-duration: 40ms;
+}
+
+.cnvs-button:active, .cnvs-button.active {
+  background-color: var(--cnvs-button-color-prop-active-background, var(--cnvs-button-background, transparent));
+  border-color: var(--cnvs-button-color-prop-active-border, var(--cnvs-button-border, transparent));
+  color: var(--cnvs-button-color-prop-active-label, var(--cnvs-button-label, var(--cnvs-sys-color-fg-strong)));
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-active-icon, var(--cnvs-sys-color-fg-strong));
+}
+
+.cnvs-button:disabled, .cnvs-button.disabled {
+  background-color: var(--cnvs-button-color-prop-disabled-background, var(--cnvs-button-background, transparent));
+  border-color: var(--cnvs-button-color-prop-disabled-border, var(--cnvs-button-border, transparent));
+  color: var(--cnvs-button-color-prop-disabled-label, var(--cnvs-button-label, var(--cnvs-sys-color-fg-strong)));
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-disabled-icon, var(--cnvs-sys-color-fg-strong));
+}
+
+
+.cnvs-button--size-large {
+  font-family: var(--cnvs-base-font-family-50);
+  font-weight: var(--cnvs-sys-font-weight-bold);
+  line-height: var(--cnvs-base-line-height-150);
+  font-size: var(--cnvs-base-font-size-100);
+  letter-spacing: var(--cnvs-base-letter-spacing-200);
+  height: 3rem;
+  padding-inline: var(--cnvs-sys-space-x8);
+  min-width: 7rem;
+}
+
+
+.cnvs-button--size-medium {
+  font-family: var(--cnvs-base-font-family-50);
+  font-weight: var(--cnvs-sys-font-weight-bold);
+  line-height: var(--cnvs-base-line-height-100);
+  font-size: var(--cnvs-base-font-size-75);
+  letter-spacing: var(--cnvs-base-letter-spacing-150);
+  min-width: 6rem;
+  padding-inline: var(--cnvs-sys-space-x6);
+  height: var(--cnvs-sys-space-x10);
+}
+
+
+.cnvs-button--size-small {
+  font-family: var(--cnvs-base-font-family-50);
+  font-weight: var(--cnvs-sys-font-weight-bold);
+  line-height: var(--cnvs-base-line-height-100);
+  font-size: var(--cnvs-base-font-size-75);
+  letter-spacing: var(--cnvs-base-letter-spacing-150);
+  height: var(--cnvs-sys-space-x8);
+  min-width: var(--cnvs-sys-space-x20);
+  padding-inline: var(--cnvs-sys-space-x4);
+  gap: var(--cnvs-sys-space-x1);
+}
+
+
+.cnvs-button--size-extra-small {
+  font-family: var(--cnvs-base-font-family-50);
+  font-weight: var(--cnvs-sys-font-weight-bold);
+  line-height: var(--cnvs-base-line-height-50);
+  font-size: var(--cnvs-base-font-size-50);
+  letter-spacing: var(--cnvs-base-letter-spacing-100);
+  height: var(--cnvs-sys-space-x6);
+  min-width: auto;
+  padding-inline: var(--cnvs-sys-space-x3);
+  gap: var(--cnvs-sys-space-x1);
+}
+
+
+.cnvs-button--icon-position-only {
+  padding: var(--cnvs-sys-space-zero);
+}
+
+
+
+
+.cnvs-button--size-large.cnvs-button--icon-position-only {
+  min-width: calc(var(--cnvs-sys-space-x4) * 3);
+}
+
+
+.cnvs-button--size-large.cnvs-button--icon-position-start {
+  padding-inline-start: var(--cnvs-sys-space-x6);
+  padding-inline-end: var(--cnvs-sys-space-x8);
+}
+
+
+.cnvs-button--size-large.cnvs-button--icon-position-end {
+  padding-inline-start: var(--cnvs-sys-space-x8);
+  padding-inline-end: var(--cnvs-sys-space-x6);
+}
+
+
+.cnvs-button--size-medium.cnvs-button--icon-position-only {
+  min-width: var(--cnvs-sys-space-x10);
+}
+
+
+.cnvs-button--size-medium.cnvs-button--icon-position-start {
+  padding-inline-start: calc(var(--cnvs-sys-space-x1) * 5);
+  padding-inline-end: var(--cnvs-sys-space-x6);
+}
+
+
+.cnvs-button--size-medium.cnvs-button--icon-position-end {
+  padding-inline-start: var(--cnvs-sys-space-x6);
+  padding-inline-end: calc(var(--cnvs-sys-space-x1) * 5);
+}
+
+
+.cnvs-button--size-small.cnvs-button--icon-position-only {
+  min-width: var(--cnvs-sys-space-x8);
+}
+
+
+.cnvs-button--size-small.cnvs-button--icon-position-start {
+  padding-inline-start: var(--cnvs-sys-space-x3);
+  padding-inline-end: var(--cnvs-sys-space-x4);
+}
+
+
+.cnvs-button--size-small.cnvs-button--icon-position-end {
+  padding-inline-start: var(--cnvs-sys-space-x4);
+  padding-inline-end: var(--cnvs-sys-space-x3);
+}
+
+
+.cnvs-button--size-extraSmall.cnvs-button--icon-position-only {
+  min-width: var(--cnvs-sys-space-x6);
+}
+
+
+.cnvs-button--size-extraSmall.cnvs-button--icon-position-start {
+  padding-inline-start: var(--cnvs-sys-space-x2);
+  padding-inline-end: var(--cnvs-sys-space-x3);
+}
+
+
+.cnvs-button--size-extraSmall.cnvs-button--icon-position-end {
+  padding-inline-start: var(--cnvs-sys-space-x3);
+  padding-inline-end: var(--cnvs-sys-space-x2);
+}
+
+
+.cnvs-delete-button {
+  box-sizing: border-box;
+  --cnvs-button-background: var(--cnvs-brand-error-base);
+  --cnvs-button-border-radius: var(--cnvs-sys-shape-round);
+  --cnvs-button-label: var(--cnvs-brand-error-accent);
+  --cnvs-system-icon-color: var(--cnvs-brand-error-accent);
+}
+
+.cnvs-delete-button:focus-visible, .cnvs-delete-button.focus {
+  --cnvs-button-background: var(--cnvs-brand-error-base);
+  --cnvs-button-label: var(--cnvs-brand-error-accent);
+  --cnvs-system-icon-color: var(--cnvs-brand-error-accent);
+  --cnvs-button-box-shadow-inner: var(--cnvs-sys-color-border-inverse);
+  --cnvs-button-box-shadow-outer: var(--cnvs-brand-common-focus-outline);
+}
+
+.cnvs-delete-button:hover, .cnvs-delete-button.hover {
+  --cnvs-button-background: var(--cnvs-brand-error-dark);
+  --cnvs-button-label: var(--cnvs-brand-error-accent);
+  --cnvs-system-icon-color: var(--cnvs-brand-error-accent);
+}
+
+.cnvs-delete-button:active, .cnvs-delete-button.active {
+  --cnvs-button-background: var(--cnvs-brand-error-darkest);
+  --cnvs-button-label: var(--cnvs-brand-error-accent);
+  --cnvs-system-icon-color: var(--cnvs-brand-error-accent);
+}
+
+.cnvs-delete-button:disabled, .cnvs-delete-button.disabled {
+  --cnvs-button-background: var(--cnvs-brand-error-base);
+  --cnvs-button-label: var(--cnvs-brand-error-accent);
+  --cnvs-system-icon-color: var(--cnvs-brand-error-accent);
+  --cnvs-button-opacity: var(--cnvs-sys-opacity-disabled);
+}
+
+
+.cnvs-tertiary-button {
+  box-sizing: border-box;
+  padding-inline: var(--cnvs-sys-space-x2);
+  min-width: auto;
+  text-decoration: underline;
+  border: var(--cnvs-sys-space-zero);
+  --cnvs-button-background: transparent;
+  --cnvs-button-border-radius: var(--cnvs-sys-shape-x1);
+  --cnvs-button-label: var(--cnvs-brand-primary-base);
+  --cnvs-system-icon-color: var(--cnvs-brand-primary-base);
+}
+
+.cnvs-tertiary-button:focus-visible, .cnvs-tertiary-button.focus {
+  --cnvs-button-background: transparent;
+  --cnvs-button-label: var(--cnvs-brand-primary-base);
+  --cnvs-button-box-shadow-inner: var(--cnvs-brand-common-focus-outline);
+  --cnvs-button-box-shadow-outer: var(--cnvs-brand-common-focus-outline);
+  --cnvs-system-icon-color: var(--cnvs-brand-primary-base);
+  box-shadow: 0 0 0 0px var(--cnvs-sys-color-border-inverse),0 0 0 2px var(--cnvs-brand-common-focus-outline);
+}
+
+.cnvs-tertiary-button:hover, .cnvs-tertiary-button.hover {
+  --cnvs-button-background: var(--cnvs-sys-color-bg-alt-default);
+  --cnvs-button-label: var(--cnvs-brand-primary-dark);
+  --cnvs-system-icon-color: var(--cnvs-brand-primary-dark);
+}
+
+.cnvs-tertiary-button:active, .cnvs-tertiary-button.active {
+  --cnvs-button-background: var(--cnvs-sys-color-bg-alt-strong);
+  --cnvs-button-label: var(--cnvs-brand-primary-darkest);
+  --cnvs-system-icon-color: var(--cnvs-brand-primary-darkest);
+}
+
+.cnvs-tertiary-button:disabled, .cnvs-tertiary-button.disabled {
+  --cnvs-button-background: transparent;
+  --cnvs-button-label: var(--cnvs-brand-primary-base);
+  --cnvs-button-opacity: var(--cnvs-sys-opacity-disabled);
+  --cnvs-system-icon-color: var(--cnvs-brand-primary-base);
+}
+
+
+.cnvs-tertiary-button--icon-position-only {
+  padding: 0;
+  border-radius: var(--cnvs-sys-shape-round);
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-strong);
+}
+
+.cnvs-tertiary-button--icon-position-only:focus-visible, .cnvs-tertiary-button--icon-position-only.focus {
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-strong);
+}
+
+.cnvs-tertiary-button--icon-position-only:hover, .cnvs-tertiary-button--icon-position-only.hover {
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-strong);
+}
+
+.cnvs-tertiary-button--icon-position-only:active, .cnvs-tertiary-button--icon-position-only.active {
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-stronger);
+}
+
+.cnvs-tertiary-button--icon-position-only:disabled, .cnvs-tertiary-button--icon-position-only.disabled {
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-strong);
+}
+
+
+
+
+.cnvs-tertiary-button--is-themeable {
+  --cnvs-system-icon-color: var(--cnvs-brand-primary-base);
+}
+
+.cnvs-tertiary-button--is-themeable:focus-visible, .cnvs-tertiary-button--is-themeable.focus {
+  --cnvs-system-icon-color: var(--cnvs-brand-primary-base);
+}
+
+.cnvs-tertiary-button--is-themeable:hover, .cnvs-tertiary-button--is-themeable.hover {
+  --cnvs-system-icon-color: var(--cnvs-brand-primary-dark);
+}
+
+.cnvs-tertiary-button--is-themeable:active, .cnvs-tertiary-button--is-themeable.active {
+  --cnvs-system-icon-color: var(--cnvs-brand-primary-darkest);
+}
+
+.cnvs-tertiary-button--is-themeable:disabled, .cnvs-tertiary-button--is-themeable.disabled {
+  --cnvs-system-icon-color: var(--cnvs-brand-primary-base);
+}
+
+
+.cnvs-tertiary-button--variant-inverse {
+  --cnvs-button-background: transparent;
+  --cnvs-button-label: var(--cnvs-sys-color-fg-inverse);
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-inverse);
+}
+
+.cnvs-tertiary-button--variant-inverse:focus-visible, .cnvs-tertiary-button--variant-inverse.focus {
+  --cnvs-button-background: var(--cnvs-sys-color-bg-default);
+  --cnvs-button-label: var(--cnvs-sys-color-fg-strong);
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-strong);
+  box-shadow: inset 0 0 0 2px var(--cnvs-sys-color-border-contrast-default),0 0 0 2px var(--cnvs-sys-color-border-inverse);
+}
+
+.cnvs-tertiary-button--variant-inverse:hover, .cnvs-tertiary-button--variant-inverse.hover {
+  --cnvs-button-background: var(--cnvs-sys-color-bg-default);
+  --cnvs-button-label: var(--cnvs-sys-color-fg-strong);
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-strong);
+}
+
+.cnvs-tertiary-button--variant-inverse:active, .cnvs-tertiary-button--variant-inverse.active {
+  --cnvs-button-background: var(--cnvs-sys-color-bg-alt-soft);
+  --cnvs-button-label: var(--cnvs-sys-color-fg-strong);
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-strong);
+}
+
+.cnvs-tertiary-button--variant-inverse:disabled, .cnvs-tertiary-button--variant-inverse.disabled {
+  --cnvs-button-background: transparent;
+  --cnvs-button-label: var(--cnvs-sys-color-fg-inverse);
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-inverse);
+}
+
+
+.cnvs-tertiary-button.cnvs-button--size-large.cnvs-button--icon-position-only {
+  min-width: calc(var(--cnvs-sys-space-x4) * 3);
+}
+
+
+.cnvs-tertiary-button.cnvs-button--size-large.cnvs-button--icon-position-start {
+  padding-inline-start: var(--cnvs-sys-space-x2);
+  padding-inline-end: var(--cnvs-sys-space-x3);
+}
+
+
+.cnvs-tertiary-button.cnvs-button--size-large.cnvs-button--icon-position-end {
+  padding-inline-start: var(--cnvs-sys-space-x3);
+  padding-inline-end: var(--cnvs-sys-space-x2);
+}
+
+
+.cnvs-tertiary-button.cnvs-button--size-medium.cnvs-button--icon-position-only {
+  min-width: var(--cnvs-sys-space-x10);
+}
+
+
+.cnvs-tertiary-button.cnvs-button--size-medium.cnvs-button--icon-position-start {
+  padding-inline-start: var(--cnvs-sys-space-x2);
+  padding-inline-end: var(--cnvs-sys-space-x3);
+}
+
+
+.cnvs-tertiary-button.cnvs-button--size-medium.cnvs-button--icon-position-end {
+  padding-inline-start: var(--cnvs-sys-space-x3);
+  padding-inline-end: var(--cnvs-sys-space-x2);
+}
+
+
+.cnvs-tertiary-button.cnvs-button--size-small.cnvs-button--icon-position-only {
+  min-width: var(--cnvs-sys-space-x8);
+}
+
+
+.cnvs-tertiary-button.cnvs-button--size-small.cnvs-button--icon-position-start {
+  padding-inline-start: var(--cnvs-sys-space-x2);
+  padding-inline-end: var(--cnvs-sys-space-x3);
+}
+
+
+.cnvs-tertiary-button.cnvs-button--size-small.cnvs-button--icon-position-end {
+  padding-inline-start: var(--cnvs-sys-space-x3);
+  padding-inline-end: var(--cnvs-sys-space-x2);
+}
+
+
+.cnvs-tertiary-button.cnvs-button--size-extra-small.cnvs-button--icon-position-only {
+  min-width: var(--cnvs-sys-space-x6);
+}
+
+
+.cnvs-tertiary-button.cnvs-button--size-extra-small.cnvs-button--icon-position-start {
+  padding-inline-start: var(--cnvs-sys-space-x1);
+  padding-inline-end: var(--cnvs-sys-space-x2);
+}
+
+
+.cnvs-tertiary-button.cnvs-button--size-extra-small.cnvs-button--icon-position-end {
+  padding-inline-start: var(--cnvs-sys-space-x2);
+  padding-inline-end: var(--cnvs-sys-space-x1);
+}
+
+
+.cnvs-secondary-button {
+  box-sizing: border-box;
+  --cnvs-button-background: transparent;
+  --cnvs-button-border: var(--cnvs-sys-color-border-contrast-default);
+  --cnvs-button-border-radius: var(--cnvs-sys-shape-round);
+  --cnvs-button-label: var(--cnvs-sys-color-fg-strong);
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-strong);
+}
+
+.cnvs-secondary-button:focus-visible, .cnvs-secondary-button.focus {
+  --cnvs-button-background: transparent;
+  --cnvs-button-border: var(--cnvs-sys-color-border-contrast-default);
+  --cnvs-button-label: var(--cnvs-sys-color-fg-strong);
+  --cnvs-button-box-shadow-inner: var(--cnvs-sys-color-border-inverse);
+  --cnvs-button-box-shadow-outer: var(--cnvs-brand-common-focus-outline);
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-strong);
+}
+
+.cnvs-secondary-button:hover, .cnvs-secondary-button.hover {
+  --cnvs-button-background: var(--cnvs-sys-color-bg-contrast-default);
+  --cnvs-button-border: var(--cnvs-sys-color-border-contrast-default);
+  --cnvs-button-label: var(--cnvs-brand-primary-accent);
+  --cnvs-system-icon-color: var(--cnvs-brand-primary-accent);
+}
+
+.cnvs-secondary-button:active, .cnvs-secondary-button.active {
+  --cnvs-button-background: var(--cnvs-sys-color-bg-contrast-strong);
+  --cnvs-button-border: var(--cnvs-sys-color-border-contrast-strong);
+  --cnvs-button-label: var(--cnvs-brand-primary-accent);
+  --cnvs-system-icon-color: var(--cnvs-brand-primary-accent);
+}
+
+.cnvs-secondary-button:disabled, .cnvs-secondary-button.disabled {
+  --cnvs-button-background: transparent;
+  --cnvs-button-border: var(--cnvs-sys-color-border-contrast-default);
+  --cnvs-button-label: var(--cnvs-sys-color-fg-strong);
+  --cnvs-button-opacity: var(--cnvs-sys-opacity-disabled);
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-strong);
+}
+
+
+.cnvs-secondary-button--variant-inverse {
+  --cnvs-button-background: transparent;
+  --cnvs-button-border: var(--cnvs-sys-color-border-inverse);
+  --cnvs-button-label: var(--cnvs-sys-color-fg-inverse);
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-inverse);
+}
+
+.cnvs-secondary-button--variant-inverse:focus-visible, .cnvs-secondary-button--variant-inverse.focus {
+  --cnvs-button-background: var(--cnvs-sys-color-bg-default);
+  --cnvs-button-border: transparent;
+  --cnvs-button-label: var(--cnvs-sys-color-fg-strong);
+  --cnvs-button-box-shadow-inner: var(--cnvs-sys-color-border-contrast-default);
+  --cnvs-button-box-shadow-outer: var(--cnvs-sys-color-border-inverse);
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-strong);
+}
+
+.cnvs-secondary-button--variant-inverse:hover, .cnvs-secondary-button--variant-inverse.hover {
+  --cnvs-button-background: var(--cnvs-sys-color-bg-alt-default);
+  --cnvs-button-border: transparent;
+  --cnvs-button-label: var(--cnvs-sys-color-fg-stronger);
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-stronger);
+}
+
+.cnvs-secondary-button--variant-inverse:active, .cnvs-secondary-button--variant-inverse.active {
+  --cnvs-button-background: var(--cnvs-sys-color-bg-alt-strong);
+  --cnvs-button-border: transparent;
+  --cnvs-button-label: var(--cnvs-sys-color-fg-stronger);
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-stronger);
+}
+
+.cnvs-secondary-button--variant-inverse:disabled, .cnvs-secondary-button--variant-inverse.disabled {
+  --cnvs-button-background: transparent;
+  --cnvs-button-border: var(--cnvs-sys-color-border-inverse);
+  --cnvs-button-label: var(--cnvs-sys-color-fg-inverse);
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-inverse);
+}
+
+
+.cnvs-primary-button {
+  box-sizing: border-box;
+  --cnvs-button-background: var(--cnvs-brand-primary-base);
+  --cnvs-button-border-radius: var(--cnvs-sys-shape-round);
+  --cnvs-button-label: var(--cnvs-brand-primary-accent);
+  --cnvs-system-icon-color: var(--cnvs-brand-primary-accent);
+}
+
+.cnvs-primary-button:focus-visible, .cnvs-primary-button.focus {
+  --cnvs-button-background: var(--cnvs-brand-primary-base);
+  --cnvs-button-label: var(--cnvs-brand-primary-accent);
+  --cnvs-button-box-shadow-inner: var(--cnvs-sys-color-border-inverse);
+  --cnvs-button-box-shadow-outer: var(--cnvs-brand-common-focus-outline);
+  --cnvs-system-icon-color: var(--cnvs-brand-primary-accent);
+}
+
+.cnvs-primary-button:hover, .cnvs-primary-button.hover {
+  --cnvs-button-background: var(--cnvs-brand-primary-dark);
+  --cnvs-button-label: var(--cnvs-brand-primary-accent);
+  --cnvs-system-icon-color: var(--cnvs-brand-primary-accent);
+}
+
+.cnvs-primary-button:active, .cnvs-primary-button.active {
+  --cnvs-button-background: var(--cnvs-brand-primary-darkest);
+  --cnvs-button-label: var(--cnvs-brand-primary-accent);
+  --cnvs-system-icon-color: var(--cnvs-brand-primary-accent);
+}
+
+.cnvs-primary-button:disabled, .cnvs-primary-button.disabled {
+  --cnvs-button-background: var(--cnvs-brand-primary-base);
+  --cnvs-button-label: var(--cnvs-brand-primary-accent);
+  --cnvs-button-opacity: var(--cnvs-sys-opacity-disabled);
+  --cnvs-system-icon-color: var(--cnvs-brand-primary-accent);
+}
+
+
+.cnvs-primary-button--variant-inverse {
+  --cnvs-button-background: var(--cnvs-sys-color-bg-default);
+  --cnvs-button-border-radius: var(--cnvs-sys-shape-round);
+  --cnvs-button-label: var(--cnvs-sys-color-fg-strong);
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-strong);
+}
+
+.cnvs-primary-button--variant-inverse:focus-visible, .cnvs-primary-button--variant-inverse.focus {
+  --cnvs-button-background: var(--cnvs-sys-color-bg-default);
+  --cnvs-button-label: var(--cnvs-sys-color-fg-strong);
+  --cnvs-button-box-shadow-inner: var(--cnvs-sys-color-border-contrast-default);
+  --cnvs-button-box-shadow-outer: var(--cnvs-sys-color-border-inverse);
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-strong);
+}
+
+.cnvs-primary-button--variant-inverse:hover, .cnvs-primary-button--variant-inverse.hover {
+  --cnvs-button-background: var(--cnvs-sys-color-bg-alt-default);
+  --cnvs-button-label: var(--cnvs-sys-color-fg-stronger);
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-stronger);
+}
+
+.cnvs-primary-button--variant-inverse:active, .cnvs-primary-button--variant-inverse.active {
+  --cnvs-button-background: var(--cnvs-sys-color-bg-alt-strong);
+  --cnvs-button-label: var(--cnvs-sys-color-fg-stronger);
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-stronger);
+}
+
+.cnvs-primary-button--variant-inverse:disabled, .cnvs-primary-button--variant-inverse.disabled {
+  --cnvs-button-background: var(--cnvs-sys-color-bg-default);
+  --cnvs-button-label: var(--cnvs-sys-color-fg-strong);
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-strong);
+}
+
+
+
+
+

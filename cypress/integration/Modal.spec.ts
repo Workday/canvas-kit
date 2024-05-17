@@ -99,11 +99,7 @@ describe('Modal', () => {
           });
 
           it('should trap focus inside the modal element', () => {
-            cy.tab()
-              .should('contain', 'Acknowledge')
-              .tab()
-              .should('contain', 'Cancel')
-              .tab();
+            cy.tab().should('contain', 'Acknowledge').tab().should('contain', 'Cancel').tab();
             cy.findByRole('dialog', {name: 'MIT License'})
               .findByRole('button', {name: 'Close'})
               .should('have.focus');
@@ -375,10 +371,8 @@ describe('Modal', () => {
         cy.checkA11y();
       });
 
-      it('should transfer focus to the header element', () => {
-        cy.findByRole('dialog', {name: 'Delete Item'})
-          .pipe(h.modal.getTitle)
-          .should('have.focus');
+      it('should transfer focus to the cancel button', () => {
+        cy.findByRole('button', {name: 'Cancel'}).should('have.focus');
       });
 
       context('the modal', () => {
@@ -409,22 +403,19 @@ describe('Modal', () => {
           });
         });
 
-        it('should transfer focus to the header element', () => {
-          cy.findByRole('dialog', {name: 'Delete Item'})
-            .pipe(h.modal.getTitle)
-            .should('have.focus');
+        it('should transfer focus to the cancel button', () => {
+          cy.findByRole('button', {name: 'Cancel'}).should('have.focus');
         });
 
         it('should trap focus inside the modal element', () => {
-          cy.findByRole('dialog', {name: 'Delete Item'})
-            .pipe(h.modal.getTitle)
-            .should('have.focus');
+          cy.findByRole('button', {name: 'Cancel'}).should('have.focus');
           cy.tab()
             .should('contain', 'Delete')
             .tab()
-            .should('contain', 'Cancel')
-            .tab();
-          cy.focused().should('have.text', 'Delete');
+            .should('contain', 'Delete Item')
+            .tab()
+            .should('contain', 'Cancel');
+          cy.focused().should('have.text', 'Cancel');
         });
       });
 
@@ -695,11 +686,7 @@ describe('Modal', () => {
         // skipping because the cy.tab plugin isn't capable of starting inside an iframe. We have to test this manually
         context.skip('when the Tab key is pressed', () => {
           beforeEach(() => {
-            cy.get('iframe')
-              .its('0.contentDocument.body')
-              .then(cy.wrap)
-              .focused()
-              .tab();
+            cy.get('iframe').its('0.contentDocument.body').then(cy.wrap).focused().tab();
           });
 
           it('should focus on the close button', () => {

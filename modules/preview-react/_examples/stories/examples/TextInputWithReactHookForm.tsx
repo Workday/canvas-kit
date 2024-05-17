@@ -6,6 +6,8 @@ import {object, SchemaOf, string} from 'yup';
 import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {TertiaryButton, PrimaryButton} from '@workday/canvas-kit-react/button';
+import {Select} from '@workday/canvas-kit-react/select';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {visibleIcon, invisibleIcon} from '@workday/canvas-system-icons-web';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
 
@@ -13,7 +15,7 @@ type YupValidationResolver = <T extends {}>(
   validationSchema: SchemaOf<T>
 ) => (data: T) => Promise<{values: T; errors: {}} | {values: {}; errors: FieldErrorsImpl<T>}>;
 
-const useYupValidationResolver: any = validationSchema => {
+const useYupValidationResolver: YupValidationResolver = validationSchema => {
   return React.useCallback(
     async data => {
       try {
@@ -42,21 +44,26 @@ const useYupValidationResolver: any = validationSchema => {
 interface LoginSchema {
   email: string;
   password: string;
+  role: string;
 }
 
 const passwordMinimum = 8;
 const passwordHint = `Password should be of minimum ${passwordMinimum} characters length`;
 const emailRequired = 'Email is required';
 const passwordRequired = 'Password is required';
+const roleRequired = 'Role is required';
 
 const validationSchema: SchemaOf<LoginSchema> = object({
-  email: string()
-    .email('Enter a valid email')
-    .required(emailRequired),
-  password: string()
-    .min(passwordMinimum, passwordHint)
-    .required(passwordRequired),
+  email: string().email('Enter a valid email').required(emailRequired),
+  password: string().min(passwordMinimum, passwordHint).required(passwordRequired),
+  role: string().required(roleRequired),
 });
+
+const options = [
+  {id: '1', label: 'Developer'},
+  {id: '2', label: 'Designer'},
+  {id: '3', label: 'Product Manager'},
+];
 
 export const TextInputWithReactHookForm = () => {
   const {
@@ -67,6 +74,7 @@ export const TextInputWithReactHookForm = () => {
     defaultValues: {
       email: 'example@baz.com',
       password: 'foobarbaz',
+      role: '',
     },
     resolver: useYupValidationResolver(validationSchema),
     mode: 'onTouched',
@@ -90,8 +98,24 @@ export const TextInputWithReactHookForm = () => {
   };
 
   return (
-    <form onSubmit={onSubmit} action=".">
+    <form onSubmit={onSubmit} action="." noValidate={true}>
       <Flex gap="xs" flexDirection="column" alignItems="flex-start">
+        <FormField orientation="vertical" isRequired={true} hasError={!!errors.role}>
+          <Select items={options} getTextValue={item => item.label}>
+            <FormField.Label>What is your role?</FormField.Label>
+            <FormField.Input as={Select.Input} {...register('role')} width="280px" />
+            <Select.Popper>
+              <Select.Card>
+                <Select.List maxHeight={200}>
+                  {item => {
+                    return <Select.Item>{item.label}</Select.Item>;
+                  }}
+                </Select.List>
+              </Select.Card>
+            </Select.Popper>
+            <FormField.Hint>{errors.role?.message}</FormField.Hint>
+          </Select>
+        </FormField>
         <TextInput orientation="vertical" isRequired={true} hasError={!!errors.email}>
           <TextInput.Label>Email</TextInput.Label>
           <TextInput.Field

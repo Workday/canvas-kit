@@ -1,193 +1,101 @@
 import * as React from 'react';
 
-import {colors} from '@workday/canvas-kit-react/tokens';
-import {
-  GrowthBehavior,
-  useTheme,
-  Themeable,
-  EmotionCanvasTheme,
-  createComponent,
-  focusRing,
-} from '@workday/canvas-kit-react/common';
-import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {ButtonColors, ButtonSizes, IconPositions} from './types';
-import {BaseButton, BaseButtonProps, getMinWidthStyles, getPaddingStyles} from './BaseButton';
-
-export interface SecondaryButtonProps extends Themeable, GrowthBehavior, BaseButtonProps {
-  /**
-   * The variant of the SecondaryButton.
-   * @default undefined
-   */
-  variant?: 'inverse' | undefined;
-  /**
-   * There are four button sizes: `extraSmall`, `small`, `medium`, and `large`.
-   * If no size is provided, it will default to `medium`.
-   *
-   * @default 'medium'
-   */
-  size?: ButtonSizes;
-  /**
-   * The icon of the Button.
-   * Note: not displayed at `small` size
-   */
-  icon?: CanvasSystemIcon;
-  /**
-   * Button icon positions can either be `start` or `end`.
-   * If no value is provided, it defaults to `start`.
-   * @default 'start'
-   */
-  iconPosition?: IconPositions;
-  /**
-   * If set to `true`, transform the icon's x-axis to mirror the graphic
-   * @default false
-   */
-  shouldMirrorIcon?: boolean;
-  children?: React.ReactNode;
-}
+import {buttonVars} from './BaseButton';
+import {createComponent} from '@workday/canvas-kit-react/common';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {createStyles, createModifiers} from '@workday/canvas-kit-styling';
+import {base, brand, system} from '@workday/canvas-tokens-web';
+import {Button, ButtonProps} from './Button';
 
 /**
- * Secondary Buttons have a medium level of emphasis. Use them for non-critical actions. Secondary
- * Buttons can be used on most pages without restrictions and work well for multiple actions of
- * equal weight. They can be used in conjunction with a Primary Button or independently.
- *
- * Secondary Buttons have four sizes: `extraSmall`, `small`, `medium`, and `large`. Icons are
- * supported for every size and can be positioned at the `start` or `end` with the `iconPosition`
- * prop.
+ * Extends all the style properties from Box to our buttons as well as props from ButtonProps.
+ * We omit `ref` since all of our buttons use `createComponent` and already give access to `ref`.
+ * Use this type to extend and customize any one off buttons that you want full control over styling.
  */
-export const SecondaryButton = createComponent('button')({
-  displayName: 'SecondaryButton',
-  Component: (
-    {
-      size = 'medium',
-      iconPosition = 'start',
-      variant,
-      icon,
-      shouldMirrorIcon = false,
-      children,
-      ...elemProps
-    }: SecondaryButtonProps,
-    ref,
-    Element
-  ) => {
-    const theme = useTheme();
+export interface SecondaryButtonProps extends ButtonProps {
+  /**
+   * Variant has an option for `inverse` which will inverse the styling
+   */
+  variant?: 'inverse';
+}
 
-    return (
-      <BaseButton
-        ref={ref}
-        size={size}
-        colors={getSecondaryButtonColors(variant, theme)}
-        padding={getPaddingStyles(children, size, icon, iconPosition)}
-        minWidth={getMinWidthStyles(children, size)}
-        as={Element}
-        {...elemProps}
-      >
-        {icon && iconPosition === 'start' && (
-          <BaseButton.Icon
-            size={size}
-            iconPosition={iconPosition}
-            icon={icon}
-            shouldMirrorIcon={shouldMirrorIcon}
-          />
-        )}
-        {children && <BaseButton.Label>{children}</BaseButton.Label>}
-        {icon && iconPosition === 'end' && (
-          <BaseButton.Icon
-            size={size}
-            iconPosition={iconPosition}
-            icon={icon}
-            shouldMirrorIcon={shouldMirrorIcon}
-          />
-        )}
-      </BaseButton>
-    );
+const secondaryStyles = createStyles({
+  // Default Styles
+  [buttonVars.default.background]: 'transparent',
+  [buttonVars.default.border]: base.blackPepper400,
+  [buttonVars.default.borderRadius]: system.shape.round,
+  [buttonVars.default.label]: base.blackPepper400,
+  [buttonVars.default.icon]: base.blackPepper400,
+  // Hover Styles
+  [buttonVars.hover.background]: base.blackPepper400,
+  [buttonVars.hover.border]: base.blackPepper400,
+  [buttonVars.hover.label]: brand.primary.accent,
+  [buttonVars.hover.icon]: brand.primary.accent,
+  // Focus Styles
+  [buttonVars.focus.background]: 'transparent',
+  [buttonVars.focus.border]: base.blackPepper400,
+  [buttonVars.focus.label]: base.blackPepper400,
+  [buttonVars.focus.icon]: base.blackPepper400,
+  [buttonVars.focus.boxShadowInner]: base.frenchVanilla100,
+  [buttonVars.focus.boxShadowOuter]: brand.common.focusOutline,
+  // Active Styles
+  [buttonVars.active.background]: base.blackPepper500,
+  [buttonVars.active.border]: base.blackPepper500,
+  [buttonVars.active.label]: brand.primary.accent,
+  [buttonVars.active.icon]: brand.primary.accent,
+  // Disabled Styles
+  [buttonVars.disabled.background]: 'transparent',
+  [buttonVars.disabled.border]: base.blackPepper400,
+  [buttonVars.disabled.label]: base.blackPepper400,
+  [buttonVars.disabled.opacity]: '0.4',
+  [buttonVars.disabled.icon]: base.blackPepper400,
+});
+
+export const secondaryButtonModifiers = createModifiers({
+  variant: {
+    inverse: createStyles({
+      // Default Styles
+      [buttonVars.default.background]: 'transparent',
+      [buttonVars.default.border]: base.frenchVanilla100,
+      [buttonVars.default.label]: base.frenchVanilla100,
+      [buttonVars.default.icon]: base.frenchVanilla100,
+      // Hover Styles
+      [buttonVars.hover.background]: base.soap300,
+      [buttonVars.hover.border]: base.soap300,
+      [buttonVars.hover.label]: base.blackPepper500,
+      [buttonVars.hover.icon]: base.blackPepper500,
+      // Focus Styles
+      [buttonVars.focus.background]: base.frenchVanilla100,
+      [buttonVars.focus.border]: base.frenchVanilla100,
+      [buttonVars.focus.label]: base.blackPepper500,
+      [buttonVars.focus.icon]: base.blackPepper500,
+      [buttonVars.focus.boxShadowInner]: base.blackPepper500,
+      [buttonVars.focus.boxShadowOuter]: base.frenchVanilla100,
+      // Active Styles
+      [buttonVars.active.background]: base.soap400,
+      [buttonVars.active.border]: base.soap400,
+      [buttonVars.active.label]: base.blackPepper500,
+      [buttonVars.active.icon]: base.blackPepper500,
+      // Disabled Styles
+      [buttonVars.disabled.background]: 'transparent',
+      [buttonVars.disabled.border]: base.frenchVanilla100,
+      [buttonVars.disabled.label]: base.frenchVanilla100,
+      [buttonVars.disabled.icon]: base.frenchVanilla100,
+    }),
   },
 });
 
-export const getSecondaryButtonColors = (
-  variant: 'inverse' | undefined,
-  theme: EmotionCanvasTheme
-): ButtonColors => {
-  const {
-    canvas: {
-      palette: {primary: themePrimary},
-    },
-  } = theme;
-
-  switch (variant) {
-    case undefined:
-    default:
-      return {
-        default: {
-          background: 'transparent',
-          border: colors.blackPepper400,
-          icon: colors.blackPepper400,
-          label: colors.blackPepper400,
-        },
-        hover: {
-          background: colors.blackPepper400,
-          border: colors.blackPepper400,
-          icon: themePrimary.contrast,
-          label: themePrimary.contrast,
-        },
-        active: {
-          background: colors.blackPepper500,
-          border: colors.blackPepper500,
-          icon: themePrimary.contrast,
-          label: themePrimary.contrast,
-        },
-        focus: {
-          border: colors.blackPepper400,
-          icon: colors.blackPepper400,
-          label: colors.blackPepper400,
-        },
-        // Identical to 'default' styles. ButtonContainer will set opacity to 40%
-        disabled: {
-          background: 'transparent',
-          border: colors.blackPepper400,
-          icon: colors.blackPepper400,
-          label: colors.blackPepper400,
-        },
-      };
-    case 'inverse':
-      return {
-        default: {
-          background: 'transparent',
-          border: colors.frenchVanilla100,
-          icon: colors.frenchVanilla100,
-          label: colors.frenchVanilla100,
-        },
-        hover: {
-          background: colors.soap300,
-          border: colors.soap300,
-          icon: colors.blackPepper500,
-          label: colors.blackPepper500,
-        },
-        active: {
-          background: colors.soap400,
-          border: colors.soap400,
-          icon: colors.blackPepper500,
-          label: colors.blackPepper500,
-        },
-        focus: {
-          background: colors.frenchVanilla100,
-          icon: colors.blackPepper500,
-          label: colors.blackPepper500,
-          focusRing: focusRing(
-            {
-              separation: 2,
-              innerColor: 'currentColor',
-              outerColor: colors.frenchVanilla100,
-            },
-            theme
-          ),
-        },
-        // Identical to inverse 'default' styles. ButtonContainer will set opacity to 40%
-        disabled: {
-          background: 'transparent',
-          border: colors.frenchVanilla100,
-          icon: colors.frenchVanilla100,
-          label: colors.frenchVanilla100,
-        },
-      };
-  }
-};
+export const SecondaryButton = createComponent('button')({
+  displayName: 'SecondaryButton',
+  Component: ({children, variant, ...elemProps}: SecondaryButtonProps, ref, Element) => {
+    return (
+      <Button
+        as={Element}
+        ref={ref}
+        {...mergeStyles(elemProps, [secondaryStyles, secondaryButtonModifiers({variant: variant})])}
+      >
+        {children}
+      </Button>
+    );
+  },
+});
