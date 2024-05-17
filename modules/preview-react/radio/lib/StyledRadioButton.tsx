@@ -11,6 +11,7 @@ import {
 import {colors, inputColors, spaceNumbers, borderRadius} from '@workday/canvas-kit-react/tokens';
 
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import isPropValid from '@emotion/is-prop-valid';
 
 const radioWidth = 18;
 const rippleRadius = (spaceNumbers.l - radioWidth) / 2;
@@ -122,7 +123,9 @@ const StyledRadioInput = styled(Box.as('input'))<StyledRadioButtonProps & Styled
   })
 );
 
-const RadioInputWrapper = styled(Flex)<Pick<StyledRadioButtonProps, 'disabled' | 'variant'>>(
+const RadioInputWrapper = styled(Flex, {
+  shouldForwardProp: prop => isPropValid(prop) && prop !== 'disabled' && prop !== 'variant',
+})<Pick<StyledRadioButtonProps, 'variant' | 'disabled'>>(
   {
     // Hover Ripple element
     '::before': {
@@ -154,13 +157,19 @@ export interface StyledRadioButtonProps extends ExtractProps<typeof Box, 'input'
  */
 export const StyledRadioButton = createComponent('input')({
   displayName: 'Radio',
-  Component: ({...elemProps}: StyledRadioButtonProps, ref, Element) => {
+  Component: (
+    {className, variant, disabled, ...elemProps}: StyledRadioButtonProps,
+    ref,
+    Element
+  ) => {
     return (
       <RadioInputWrapper
         height="18px"
         width="18px"
         flex="0 0 auto"
-        {...elemProps} // This ensures our visual testing stories work properly
+        className={className}
+        variant={variant}
+        disabled={disabled}
       >
         <StyledRadioInput
           borderRadius="circle"
@@ -169,6 +178,9 @@ export const StyledRadioButton = createComponent('input')({
           as={Element}
           type="radio"
           ref={ref}
+          className={className}
+          variant={variant}
+          disabled={disabled}
           {...elemProps}
         />
         <span className="cnvs-radio-check"></span>
