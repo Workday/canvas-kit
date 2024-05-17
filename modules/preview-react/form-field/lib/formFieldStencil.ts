@@ -29,11 +29,7 @@ export const formFieldStencil = createStencil({
       },
     },
     required: {
-      true: {
-        '& [data-element=asterisk]': {
-          display: 'block',
-        },
-      },
+      true: {},
     },
     error: {
       error: {},

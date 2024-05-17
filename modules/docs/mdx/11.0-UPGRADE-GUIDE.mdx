@@ -524,7 +524,8 @@ variant prop.
 
 ### Form Field (Preview)
 
-**PR:** [#2472](https://github.com/Workday/canvas-kit/pull/2472)
+**PR:** [#2472](https://github.com/Workday/canvas-kit/pull/2472),
+[#2746](https://github.com/Workday/canvas-kit/pull/2746)
 
 `FormField` in [Preview](#preview) is a compound component and we intend to promote it in a future
 version to replace the `FormField` in [Main](#main). Because of this, we've refactored how errors
@@ -538,6 +539,26 @@ are applied to `FormField` in [Preview](#preview) in order to match the API from
 - `FormField` does **not** support the `useFieldSet` prop that the `FormField` in [Main](#main)
   does. In order to achieve the same behavior, set the `as` prop on the `FormField` element to
   `fieldset` and the `as` prop of `FormField.Label` to `legend`.
+- The required asterisk is now a pseudo element. While the asterisk was never read out loud by
+  screen readers, Testing Library required it in the `*ByLabelText` query. `*ByRole` uses the w3c
+  [accessible name calculation specification](https://www.w3.org/TR/accname-1.2/), but
+  `*ByLabelText` uses
+  [textContent](https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent). Additional
+  information: https://github.com/testing-library/dom-testing-library/issues/929
+
+  v10:
+
+  ```ts
+  screen.getByLabelText('Email*'); // Email is a required field and asterisk is included in name
+  screen.getByRole('textbox', {name: 'Email'}); // correctly ignores the `*`
+  ```
+
+  v11:
+
+  ```ts
+  screen.getByLabelText('Email');
+  screen.getByRole('textbox', {name: 'Email'});
+  ```
 
 ```tsx
 // v10 FormField in Preview
