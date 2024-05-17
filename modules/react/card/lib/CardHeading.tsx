@@ -1,32 +1,38 @@
 import * as React from 'react';
+
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {BoxProps} from '@workday/canvas-kit-react/layout';
-import {Text} from '@workday/canvas-kit-react/text';
+import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {textStencil} from '@workday/canvas-kit-react/text';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export interface CardHeadingProps extends BoxProps {
   /**
    * The id of the Card heading. Tie this to an `aria-labelledby` for accessibility.
    */
   id?: string;
-
   children?: React.ReactNode;
 }
+
+// .cnvs-card-heading
+export const cardHeadingStencil = createStencil({
+  extends: textStencil,
+  base: {
+    color: system.color.text.strong,
+    fontWeight: system.fontWeight.bold,
+    marginBottom: system.space.x6,
+    marginTop: system.space.zero,
+  },
+  defaultModifiers: {typeLevel: 'body.large'},
+});
 
 export const CardHeading = createComponent('h3')({
   displayName: 'Card.Heading',
   Component: ({children, ...elemProps}: CardHeadingProps, ref, Element) => {
     return (
-      <Text
-        ref={ref}
-        typeLevel="body.large"
-        fontWeight="bold"
-        marginBottom="m"
-        marginTop={0}
-        as={Element}
-        {...elemProps}
-      >
+      <Element ref={ref} {...mergeStyles(elemProps, cardHeadingStencil())}>
         {children}
-      </Text>
+      </Element>
     );
   },
 });
