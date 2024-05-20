@@ -44,7 +44,6 @@
     "react": ">=16.14"
   },
   "dependencies": {
-    "@emotion/is-prop-valid": "^1.1.1",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@workday/canvas-kit-react": "^10.3.40",
