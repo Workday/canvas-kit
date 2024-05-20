@@ -12,91 +12,101 @@ There are multiple ways to customize styles for our components within Canvas Kit
 choose depends on your use case. Ranging from some simple overrides to fully custom solutions, here
 are the following options.
 
-- [Simple customization](#simple-customization)
-  - [Using `cs` Prop](using-cs-prop)
-  - [Using `createStyles`](using-createStyles)
-- [Customizing Via Stencil Extension](customizing-via-stencil-extension) -
-  [Overriding Variables](overriding-variables)
+- [Styles](#styles)
+- [Stencils](#stencils)
 
-## Simple Customization
+## Styles
 
-### Using `cs` Prop
+### Use `createStyles` With `cs` If
 
-The `cs` prop takes in a single, or an array of values that are created by the `cs` function, a
-string representing a CSS class name, or the return of the `createVars` function. It merges
-everything together and applies `className` and `style` attributes to a React element. Components
-that support the `cs` prop allow you to quickly update styles for simple customizations.
+Use `createStyles` in tandem with `cs` prop when you're overriding static styles and making small
+modifications to an existing Canvas Kit component like padding, color and flex properties. Take our
+`Text` component as an example.
 
 ```tsx
-import {value cssVar} from '@workday/canvas-kit-styling';
-import {value system} from '@workday/canvas-tokens-web';
+import {createStyles} from '@Workday/canvas-kit-styling';
+import {system} from '@Workday/canvas-tokens-web';
+import {Text} from '@Workday/canvas-kit-react/text';
 
-<Text cs={{textTransform: 'uppercase', margin: cssVar(system.space.x4)}}>My uppercased text</Text>;
+const uppercaseTextStyles = createStyles({
+  textTransform: 'uppercase',
+  margin: system.space.x4
+})
+//...
+<Text cs={uppercaseTextStyles}>My uppercased text</Text>;
 ```
 
-### Using `createStyles`
+> **Note:** `createStyles` handles wrapping our token variables in `var(--${tokenName})`
 
-`createStyles` creates CSS styles based on object-style input. It has a side-effect of adding CSS to
-the page and will return a space-delimitated string of CSS class names meant to be added to an
-element. This utilities also handles wrapping our tokens in `var(--${tokenName})`. Use this
-utilities when you have a more complex style object with possible nested selectors.
+## Stencils
+
+### Use Stencils If
+
+Use `createStencil` when you're creating reusable component styles that can either be dynamic,
+modified by props, or extended. `createStencil` allows you to compose your styles in a predictable
+way.
 
 ```tsx
-import {createStyles} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
-
-const textStyles = createStyles({
-  margin: system.space.x4,
-  '&:hover': {
-    transform: 'scale(2)',
+export const buttonStencil = createStencil({
+  vars: {
+    backgroundColor: '',
+    textColor: '',
   },
-  span: {
-    color: system.color.text.strong
-  }
+  base: ({backgroundColor, textColor}) => ({
+    backgroundColor: cssVar(backgroundColor, base.berrySmoothie400),
+    borderRadius: system.shape.x1,
+    color: cssVar(textColor, base.frenchVanilla100),
+    border: `1px solid transparent`,
+    alignSelf: 'center',
+    cursor: 'pointer',
+    '&:hover': {
+      backgroundColor: cssVar(backgroundColor, base.berrySmoothie500),
+    },
+    '&:active': {
+      backgroundColor: cssVar(backgroundColor, base.berrySmoothie600),
+    },
+  }),
+  modifiers: {
+    size: {
+      small: {
+        padding: system.sapce.x2,
+      },
+      medium: {
+        padding: system.space.x4,
+      },
+    },
+  },
 });
-
-<Text cs={textStyles}>
-  My uppercased text with
-  <span>{hover effect}</span>
-</Text>;
+// Reusable Button Component
+export const Button = createComponent('button')({
+  Component({size = 'small', children, ...elemProps}: ButtonProps, ref, Element) {
+    return (
+      <Element ref={ref} {...handleCsProp(elemProps, buttonStencil({size: size}))}>
+        {children}
+      </Element>
+    );
+  },
+});
 ```
 
-> **Note:** You don't need to wrap our token variables like `system.space.x4` in `cssVar` because
-> `createStyles` handles that for you. If you're in the context of the `cs` prop, you need to wrap
-> css variables.
+> **Note:** We're using `handleCsProp` which handles the merging of `className`, `style` and `cs`
+> prop correctly.
 
-## Customizing Via Stencil Extension
-
-Most of our components use
-[Stencils](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-stencil) to
-define styles. Similar to our models, Stencils are built to be flexibile, reusable and easy to
-modify.
-
-### Overriding Variables
+### Overriding Stencil Variables
 
 Often times, styles can be dynamic resulting in component Stencils exposing CSS variables that can
-be used to override styles. Our Buttons are a great example of how to do this.
-
-In the example below, we're using the variables exposed by `buttonStencil` which is used to build
-our `PrimaryButton` and changing the variables to completely overrite styles for different visual
-states. Overriding styles in this way abstracts out the need to know the underlying dom structure of
-our Buttons while giving you access to style effectively and predictably.
+be used to override styles. Our Buttons are a great example of how to do this. In the example below,
+we're using the variables exposed by `buttonStencil` which is used to build our `PrimaryButton`,
+`SecondaryButton`, `TertiaryButton`'s and changing the variables to completely overrite styles for
+different visual states. Overriding styles in this way abstracts out the need to know the underlying
+dom structure of our Buttons while giving you access to style effectively and predictably.
 
 <ExampleCodeBlock code={CustomButton} />
 
-## Stencils extentions
-
-Base Button, Card, Svg and Text components share their setSyntheticTrailingComments, so you can
-build your component under it by extending stencil.
-
-### Custom Card
-
-<ExampleCodeBlock code={CustomCard} />
-
-### Custom Icon
+Here's another example of using stencil variables to customize styles with our icons:
 
 <ExampleCodeBlock code={CustomIcon} />
 
-### Custom Text
+### Stencils extentions
 
-<ExampleCodeBlock code={CustomText} />
+<ExampleCodeBlock code={CustomCard} />
