@@ -37,9 +37,8 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
     const stencilHash = getHash(node, context);
 
     if (ts.isObjectLiteralExpression(config)) {
-      const extendedFrom = config.properties.reduce((result, property) => {
+      config.properties.forEach(property => {
         if (
-          !result &&
           ts.isPropertyAssignment(property) &&
           property.name &&
           ts.isIdentifier(property.name) &&
@@ -65,11 +64,8 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
               names[key.replace(extendsStencilName, stencilName)] = names[key];
             }
           });
-
-          return className;
         }
-        return result;
-      }, '');
+      });
 
       // get variables first
       const varsConfig = config.properties.find(property => {
@@ -167,10 +163,19 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
                           );
 
                           if (styleObj && modifier.name) {
+                            const stencilClassName = getClassName(stencilName, context);
+                            const fullModifierName = getClassName(
+                              getVarName(modifier.name),
+                              context
+                            );
+                            const className = `${stencilClassName}.${fullModifierName.replace(
+                              `${stencilClassName}--`,
+                              ''
+                            )}`;
                             const initializer = createStyleReplacementNode(
                               modifier,
                               styleObj,
-                              getClassName(getVarName(modifier.name), context),
+                              className,
                               context
                             );
                             return updateStyleProperty(modifier, initializer);
@@ -215,11 +220,7 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
                   if (ts.isObjectLiteralExpression(element)) {
                     const selectors: string[] = [];
 
-                    // If the stencil is an extension, we need to add the stencil name to
-                    // the select to not accidentally match the base stencil
-                    if (extendedFrom) {
-                      selectors.push(`.${getClassName(stencilName, context)}`);
-                    }
+                    selectors.push(`.${getClassName(stencilName, context)}`);
 
                     return ts.factory.updateObjectLiteralExpression(
                       element,
@@ -250,41 +251,18 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
                         ) {
                           compoundProperty.initializer.properties.forEach(modifier => {
                             if (ts.isPropertyAssignment(modifier)) {
-                              //
-                              let modifierName = '';
+                              let className = '';
                               if (ts.isIdentifier(modifier.name)) {
-                                modifierName += `${modifier.name.text}-`;
+                                className = slugify(modifier.name.text);
                               }
 
-                              let className = `.${getClassName(
-                                getVarName(modifier.initializer),
-                                context
-                              )}`;
+                              // The initializer should either be the `true` keyword or a string
+                              // literal. We don't add `-true` to the name.
                               if (ts.isStringLiteral(modifier.initializer)) {
-                                modifierName = modifierName + '-' + modifier.initializer.text;
                                 className += `-${modifier.initializer.text}`;
                               }
-                              modifierName = slugify(modifierName);
 
-                              let classNameOverride = '';
-                              if (extendedFrom) {
-                                // search for this modifier in the styles object
-                                Object.values(context.styles).forEach(fileStyles => {
-                                  return fileStyles.forEach(rule => {
-                                    if (rule.includes(`.${extendedFrom}--${modifierName} `)) {
-                                      const match = rule.match(/(\.[a-z0-9-]+)\s/);
-                                      if (match) {
-                                        classNameOverride = match[1];
-                                      }
-                                    }
-                                  });
-                                });
-                              }
-                              if (classNameOverride) {
-                                selectors.push(classNameOverride);
-                              } else {
-                                selectors.push(className);
-                              }
+                              selectors.push(className);
                             }
                           });
                           return compoundProperty;
@@ -309,7 +287,7 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
                             const serialized = serializeStyles(
                               compoundProperty,
                               styleObj,
-                              `${selectors.join('')}{%s}`,
+                              `${selectors.join('.')}{%s}`,
                               context
                             );
 
