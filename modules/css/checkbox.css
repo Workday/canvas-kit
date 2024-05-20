@@ -226,15 +226,3 @@
   padding-inline-start: var(--cnvs-sys-space-x3);
 }
 
-
-.cnvs-checkbox-ripple {
-  box-sizing: border-box;
-  border-radius: var(--cnvs-sys-shape-round);
-  box-shadow: none;
-  height: calc(var(--cnvs-sys-space-x4) + 0.125rem);
-  width: calc(var(--cnvs-sys-space-x4) + 0.125rem);
-  transition: box-shadow 150ms ease-out;
-  position: absolute;
-  pointer-events: none;
-}
-

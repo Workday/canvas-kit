@@ -1,8 +1,3 @@
-.cnvs-combobox-menu-list {
-  box-sizing: border-box;
-}
-
-
 .cnvs-combobox-menu-item-icon {
   box-sizing: border-box;
   align-self: start;
@@ -12,5 +7,10 @@
 .cnvs-combobox-menu-item {
   box-sizing: border-box;
   min-height: var(--cnvs-sys-space-x10);
+}
+
+
+.cnvs-combobox-menu-list {
+  box-sizing: border-box;
 }
 

@@ -136,15 +136,14 @@
 }
 
 
-.cnvs-preview-radio-input-wrapper {
+.cnvs-preview-radio-input-wrapper-styles {
   box-sizing: border-box;
-  display: flex;
   height: 1.125rem;
   width: 1.125rem;
   flex: 0 0 auto;
 }
 
-.cnvs-preview-radio-input-wrapper ::before {
+.cnvs-preview-radio-input-wrapper-styles ::before {
   content: '';
   position: absolute;
   border-radius: var(--cnvs-sys-shape-round);
@@ -155,17 +154,17 @@
   opacity: var(--cnvs-sys-opacity-full);
 }
 
-.cnvs-preview-radio-input-wrapper:hover:before, .cnvs-preview-radio-input-wrapper.hover:before {
+.cnvs-preview-radio-input-wrapper-styles:hover:before, .cnvs-preview-radio-input-wrapper-styles.hover:before {
   box-shadow: 0 0 0 calc(var(--cnvs-sys-space-x2) - 0.0625rem) var(--cnvs-sys-color-bg-alt-soft);
 }
 
 
-.cnvs-preview-radio-input-wrapper--variant-inverse ::before {
+.cnvs-preview-radio-input-wrapper-styles--variant-inverse ::before {
   opacity: var(--cnvs-sys-opacity-disabled);
 }
 
 
-.cnvs-preview-radio-input-wrapper--disabled:hover:before, .cnvs-preview-radio-input-wrapper--disabled.hover:before {
+.cnvs-preview-radio-input-wrapper-styles--disabled:hover:before, .cnvs-preview-radio-input-wrapper-styles--disabled.hover:before {
   box-shadow: none;
   cursor: auto;
 }
@@ -173,7 +172,6 @@
 
 .cnvs-preview-radio-label {
   box-sizing: border-box;
-  display: flex;
   align-items: flex-start;
   min-height: var(--cnvs-sys-space-x6);
   position: relative;
@@ -184,6 +182,11 @@
 .cnvs-preview-radio-text {
   box-sizing: border-box;
   cursor: pointer;
+}
+
+
+.cnvs-preview-radio-text--variant-inverse {
+  color: var(--cnvs-sys-color-text-inverse);
 }
 
 
