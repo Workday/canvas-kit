@@ -394,7 +394,10 @@ describe('handleCreateStencil', () => {
 
       // runtime selector
       expect(result).toContain(
-        `.${names['buttonStencil.modifiers.size.large'].replace('css-', 'm')} :where(&){color:blue;}`
+        `.${names['buttonStencil.modifiers.size.large'].replace(
+          'css-',
+          'm'
+        )} :where(&){color:blue;}`
       );
 
       // extracted selector
@@ -438,7 +441,7 @@ describe('handleCreateStencil', () => {
         compileCSS('.css-button{--css-button-color: red;box-sizing:border-box;}')
       );
       expect(styles['test.css']).toContainEqual(
-        compileCSS('.css-button--size-large{padding: 0.3125rem;}')
+        compileCSS('.css-button.size-large{padding: 0.3125rem;}')
       );
     });
 
@@ -490,16 +493,16 @@ describe('handleCreateStencil', () => {
 
       // modifiers
       expect(styles['test.css']).toContainEqual(
-        compileCSS('.css-button--size-large{padding:30px;}')
+        compileCSS('.css-button.size-large{padding:30px;}')
       );
       expect(styles['test.css']).toContainEqual(
-        compileCSS('.css-button--size-small{padding:10px;}')
+        compileCSS('.css-button.size-small{padding:10px;}')
       );
-      expect(styles['test.css']).toContainEqual(compileCSS('.css-button--inverse{color:while;}'));
+      expect(styles['test.css']).toContainEqual(compileCSS('.css-button.inverse{color:while;}'));
 
       // compound
       expect(styles['test.css']).toContainEqual(
-        compileCSS('.css-button--size-large.css-button--inverse{padding:40px;}')
+        compileCSS('.css-button.size-large.inverse{padding:40px;}')
       );
     });
 
@@ -540,10 +543,10 @@ describe('handleCreateStencil', () => {
 
       // modifiers
       expect(styles['test.css']).toContainEqual(
-        compileCSS('.css-button--size-title-large{font-size:var(--title-large);}')
+        compileCSS('.css-button.size-title-large{font-size:var(--title-large);}')
       );
       expect(styles['test.css']).toContainEqual(
-        compileCSS('.css-button--size-title-small{font-size:var(--title-small);}')
+        compileCSS('.css-button.size-title-small{font-size:var(--title-small);}')
       );
     });
 
@@ -584,10 +587,10 @@ describe('handleCreateStencil', () => {
 
       // modifiers
       expect(styles['test.css']).toContainEqual(
-        compileCSS('.css-button--size-title-large{font-size:var(--title-large);}')
+        compileCSS('.css-button.size-title-large{font-size:var(--title-large);}')
       );
       expect(styles['test.css']).toContainEqual(
-        compileCSS('.css-button--size-title-small{font-size:var(--title-small);}')
+        compileCSS('.css-button.size-title-small{font-size:var(--title-small);}')
       );
     });
   });
@@ -949,7 +952,7 @@ describe('handleCreateStencil', () => {
             padding: 5
           },
           modifiers: {
-            position: {
+            iconPosition: {
               start: {
                 paddingInlineStart: 5
               },
@@ -965,7 +968,7 @@ describe('handleCreateStencil', () => {
           },
           compound: [
             {
-              modifiers: {size: 'large', position: 'start'},
+              modifiers: {size: 'large', iconPosition: 'start'},
               styles: {
                 paddingInlineStart: 10
               }
@@ -982,6 +985,14 @@ describe('handleCreateStencil', () => {
 
           },
           modifiers: {
+            iconPosition: {
+              start: {
+                paddingInlineState: 0
+              },
+              end: {
+                paddingInlineEnd: 0
+              }
+            },
             extra: {
               true: {
                 margin: 5
@@ -992,7 +1003,7 @@ describe('handleCreateStencil', () => {
             {
               modifiers: {
                 size: 'large',
-                position: 'start',
+                iconPosition: 'start',
                 extra: true
               },
               styles: {
@@ -1015,19 +1026,19 @@ describe('handleCreateStencil', () => {
 
     it('should extract a base modifier style', () => {
       expect(styles['test.css']).toContainEqual(
-        compileCSS('.css-base--position-start { padding-inline-start: 5px;}')
+        compileCSS('.css-base.icon-position-start { padding-inline-start: 5px;}')
       );
       expect(styles['test.css']).toContainEqual(
-        compileCSS('.css-base--position-end { padding-inline-end: 5px;}')
+        compileCSS('.css-base.icon-position-end { padding-inline-end: 5px;}')
       );
       expect(styles['test.css']).toContainEqual(
-        compileCSS('.css-base--size-large { padding: 15px;}')
+        compileCSS('.css-base.size-large { padding: 15px;}')
       );
     });
 
     it('should extract a base compound modifier style', () => {
       expect(styles['test.css']).toContainEqual(
-        compileCSS('.css-base--size-large.css-base--position-start { padding-inline-start: 10px;}')
+        compileCSS('.css-base.size-large.icon-position-start { padding-inline-start: 10px;}')
       );
     });
 
@@ -1038,13 +1049,13 @@ describe('handleCreateStencil', () => {
     });
 
     it('should extract an extended modifier style', () => {
-      expect(styles['test.css']).toContainEqual(compileCSS('.css-extended--extra { margin: 5px;}'));
+      expect(styles['test.css']).toContainEqual(compileCSS('.css-extended.extra { margin: 5px;}'));
     });
 
     it('should extract an extended compound modifier with base modifier names and extended modifier names', () => {
       expect(styles['test.css']).toContainEqual(
         compileCSS(
-          '.css-extended.css-base--size-large.css-base--position-start.css-extended--extra {margin: 10px; padding-inline-start: 5px;}'
+          '.css-extended.size-large.icon-position-start.extra {margin: 10px; padding-inline-start: 5px;}'
         )
       );
     });
@@ -1081,7 +1092,7 @@ describe('handleCreateStencil', () => {
                 {
                   modifiers: {
                     size: 'large',
-                    position: 'start',
+                    iconPosition: 'start',
                     extra: true
                   },
                   styles: {
@@ -1106,7 +1117,7 @@ describe('handleCreateStencil', () => {
                 padding: 5
               },
               modifiers: {
-                position: {
+                iconPosition: {
                   start: {
                     paddingInlineStart: 5
                   },
@@ -1122,7 +1133,7 @@ describe('handleCreateStencil', () => {
               },
               compound: [
                 {
-                  modifiers: {size: 'large', position: 'start'},
+                  modifiers: {size: 'large', iconPosition: 'start'},
                   styles: {
                     paddingInlineStart: 10
                   }
@@ -1144,19 +1155,19 @@ describe('handleCreateStencil', () => {
 
     it('should extract a base modifier style', () => {
       expect(getFile(styles, 'base.css')).toContainEqual(
-        compileCSS('.css-base--position-start { padding-inline-start: 5px;}')
+        compileCSS('.css-base.icon-position-start { padding-inline-start: 5px;}')
       );
       expect(getFile(styles, 'base.css')).toContainEqual(
-        compileCSS('.css-base--position-end { padding-inline-end: 5px;}')
+        compileCSS('.css-base.icon-position-end { padding-inline-end: 5px;}')
       );
       expect(getFile(styles, 'base.css')).toContainEqual(
-        compileCSS('.css-base--size-large { padding: 15px;}')
+        compileCSS('.css-base.size-large { padding: 15px;}')
       );
     });
 
     it('should extract a base compound modifier style', () => {
       expect(getFile(styles, 'base.css')).toContainEqual(
-        compileCSS('.css-base--size-large.css-base--position-start { padding-inline-start: 10px;}')
+        compileCSS('.css-base.size-large.icon-position-start { padding-inline-start: 10px;}')
       );
     });
 
@@ -1168,14 +1179,14 @@ describe('handleCreateStencil', () => {
 
     it('should extract an extended modifier style', () => {
       expect(getFile(styles, 'test.css')).toContainEqual(
-        compileCSS('.css-extended--extra { margin: 5px;}')
+        compileCSS('.css-extended.extra { margin: 5px;}')
       );
     });
 
     it('should extract an extended compound modifier with base modifier names and extended modifier names', () => {
       expect(getFile(styles, 'test.css')).toContainEqual(
         compileCSS(
-          '.css-extended.css-base--size-large.css-base--position-start.css-extended--extra {margin: 10px; padding-inline-start: 5px;}'
+          '.css-extended.size-large.icon-position-start.extra {margin: 10px; padding-inline-start: 5px;}'
         )
       );
     });
