@@ -1,7 +1,6 @@
 import {CustomButton} from './examples/CustomButton';
 import {CustomCard} from './examples/CustomCard';
 import {CustomIcon} from './examples/CustomIcon';
-import {CustomText} from './examples/CustomText';
 import {StyledButton} from './examples/StyledButton';
 
 <Meta title="Styling/ How to Customize Styles" />
@@ -42,9 +41,9 @@ const uppercaseTextStyles = createStyles({
 
 ### Use Stencils If
 
-Use `createStencil` when you're creating reusable component styles that can either be dynamic,
-modified by props, or extended. `createStencil` allows you to compose your styles in a predictable
-way.
+Stencils help you organize the styling of reusable components into base styles, modifiers, and
+variables. The organization makes it more natural to produce static and clean CSS with optional
+extraction into CSS files.
 
 ```tsx
 export const buttonStencil = createStencil({
@@ -92,21 +91,13 @@ export const Button = createComponent('button')({
 > **Note:** We're using `handleCsProp` which handles the merging of `className`, `style` and `cs`
 > prop correctly.
 
-### Overriding Stencil Variables
+## Stencils For Reusable Components
 
-Often times, styles can be dynamic resulting in component Stencils exposing CSS variables that can
-be used to override styles. Our Buttons are a great example of how to do this. In the example below,
-we're using the variables exposed by `buttonStencil` which is used to build our `PrimaryButton`,
-`SecondaryButton`, `TertiaryButton`'s and changing the variables to completely overrite styles for
-different visual states. Overriding styles in this way abstracts out the need to know the underlying
-dom structure of our Buttons while giving you access to style effectively and predictably.
+Stencils allow you compose component styles that need to handle modifiers (variants) while also
+exposing variables that can be modified.
 
 <ExampleCodeBlock code={CustomButton} />
 
 Here's another example of using stencil variables to customize styles with our icons:
 
 <ExampleCodeBlock code={CustomIcon} />
-
-### Stencils extentions
-
-<ExampleCodeBlock code={CustomCard} />

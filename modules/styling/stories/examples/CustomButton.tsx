@@ -4,11 +4,17 @@ import {system} from '@workday/canvas-tokens-web';
 import {plusIcon} from '@workday/canvas-system-icons-web';
 import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {buttonStencil, PrimaryButton, PrimaryButtonProps} from '@workday/canvas-kit-react/button';
+import {
+  BaseButton,
+  buttonStencil,
+  PrimaryButton,
+  PrimaryButtonProps,
+} from '@workday/canvas-kit-react/button';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Grid} from '@workday/canvas-kit-react/layout';
 
 const myButtonStencil = createStencil({
+  extends: buttonStencil,
   base: {
     [buttonStencil.vars.background]: system.color.static.green.soft,
     [buttonStencil.vars.label]: system.color.static.green.strong,
@@ -27,13 +33,26 @@ const myButtonStencil = createStencil({
       [systemIconStencil.vars.color]: system.color.fg.inverse,
     },
   },
+  modifiers: {
+    size: {
+      small: {
+        padding: system.space.x4,
+      },
+      medium: {
+        padding: system.space.x6,
+      },
+      large: {
+        padding: system.space.x8,
+      },
+    },
+  },
 });
 
 const MyButton = createComponent('button')({
   Component: ({children, size, ...elemProps}: PrimaryButtonProps, ref, Element) => (
-    <PrimaryButton ref={ref} {...handleCsProp(elemProps, myButtonStencil({size}))}>
+    <Element ref={ref} {...handleCsProp(elemProps, myButtonStencil({size}))}>
       {children}
-    </PrimaryButton>
+    </Element>
   ),
 });
 
