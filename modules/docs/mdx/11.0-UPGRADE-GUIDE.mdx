@@ -16,8 +16,8 @@ any questions.
 ## Why You Should Upgrade
 
 Canvas Kit v11 is transitioning into a
-[new way of styling](https://github.com/Workday/canvas-kit/discussions/2265). Theming and building an in
-sync Canvas Kit CSS has been at the top of our minds. We've started using our new
+[new way of styling](https://github.com/Workday/canvas-kit/discussions/2265). Theming and building
+an in sync Canvas Kit CSS has been at the top of our minds. We've started using our new
 [Canvas Tokens Web](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs)
 package to take advantage of
 [CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) and
@@ -166,8 +166,8 @@ import {TextInput} from '@workday/canvas-kit-react/text-input';
 </FormField>;
 ```
 
-If you still want to use a `label` element outside of the context of a form, you can use our `Text` component
-instead.
+If you still want to use a `label` element outside of the context of a form, you can use our `Text`
+component instead.
 
 ---
 
@@ -647,11 +647,11 @@ prop.
 
 ```tsx
 // This will no longer be supported in a future major version
-<SystemIcon color="blueberry400" />
+<SystemIcon color="blueberry400" />;
 
 // Use new tokens instead.
-import {base} from '@workday/canvas-tokens-web'
-<SystemIcon color={base.blueberry400} />
+import {base} from '@workday/canvas-tokens-web';
+<SystemIcon color={base.blueberry400} />;
 ```
 
 🤖 The codemod will handle the change of renaming `styles` to `cs` for you automatically.
@@ -720,27 +720,18 @@ const MyComponent = StyledRadioButton('div')({
 - `graphicStyles` has been deprecated and will be removed in a future version as a part of
   implementation of stencils and new tokens. Consider using `graphicStencil` to get styles or class
   name.
-- `width` and `height` props have been deprecated and will be removed in a future version. Consider
-  using `cs` props instead to set `svg` sizes.
-
-```tsx
-// before
-<Graphic icon={myGraphic} width={160} />
-
-// after
-<Graphic icon={myGraphic} cs={{"& svg": {width: '10rem'}}} />
-```
 
 #### Icon
 
-This change only impacts internal Canvas Kit code. `Icon` component has been removed and is no longer
-used to build our icons. It has been replaced by our `Svg` component. Most of our icons now extend styles from `svgStencil`.
+This change only impacts internal Canvas Kit code. `Icon` component has been removed and is no
+longer used to build our icons. It has been replaced by our `Svg` component. Most of our icons now
+extend styles from `svgStencil`.
 
 #### SystemIcon
 
 - `SystemIconStyles` has been deprecated and will be removed in a future version as a part of
-  implementation of stencils and new tokens. Consider using `systemIconStencil` to get styles or class
-  name.
+  implementation of stencils and new tokens. Consider using `systemIconStencil` to get styles or
+  class name.
 
 - `accentHover` is deprecated and will be removed in a future version. Please use the following when
   overriding styles:
@@ -942,8 +933,8 @@ for this package.
 
 ### Did You Upgrade All Canvas Kit Related Packages?
 
-In order for all the packages to work in harmony, you must upgrade all Canvas Kit packages to the same version that
-you're using, including:
+In order for all the packages to work in harmony, you must upgrade all Canvas Kit packages to the
+same version that you're using, including:
 
 - `@workday/canvas-kit-react`
 - `@workday/canvas-kit-preview-react`
