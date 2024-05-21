@@ -8,7 +8,7 @@ const myIconStencil = createStencil({
   base: {
     [systemIconStencil.vars.color]: system.color.icon.primary.default,
     [systemIconStencil.vars.accentColor]: system.color.icon.critical.default,
-    [systemIconStencil.vars.size]: '1rem',
+    [systemIconStencil.vars.size]: system.space.x4,
   },
 });
 
