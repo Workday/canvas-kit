@@ -81,8 +81,10 @@ your custom icon using System Icon styles and add other styles to it.
 Before v11 one way of reusing System Icon styles was using Emotion or `systemIconStyles` function:
 
 ```tsx
+// before v11
 import {systemIconStyles} from '@workday/canvas-kit-react';
 
+// old way of styling with Emotion styled
 const StyledNavIcon = styled('span')(({size, iconStyles}){
   display: 'inline-flex',
   pointerEvents: 'unset',
@@ -96,6 +98,8 @@ const StyledNavIcon = styled('span')(({size, iconStyles}){
 });
 
 const NavIcon = ({iconColor, iconHover, iconBackground, iconBackgroundHover, icon, size}) => {
+  // old way of styling with systemIconStyles function
+  // systemIconStyles is deprecated in v11
   const iconStyles = systemIconStyles({
     fill: iconColor,
     fillHover: iconHover,
@@ -103,7 +107,7 @@ const NavIcon = ({iconColor, iconHover, iconBackground, iconBackgroundHover, ico
     backgroundHover: iconBackgroundHover,
   });
 
-  // insert icon function here
+  // insert icon function used by platform or any other functionality here
 
   return (
     <StyledNavIcon
@@ -118,6 +122,9 @@ const NavIcon = ({iconColor, iconHover, iconBackground, iconBackgroundHover, ico
 Now it's possible to extend `systemIconStencil` to reuse its styles:
 
 ```tsx
+// after v11
+import {createStencil} from '@workday/canvas-kit-styling';
+
 const navIconStencil = createStencil({
   extends: systemIconStencil,
   vars: {
@@ -133,8 +140,8 @@ const navIconStencil = createStencil({
     margin: `${system.space.x1} ${system.space.x1} 0 0`,
     padding: '0',
     '&:hover, &.hover': {
-      // systemIconStencil doesn't have hover specific icons
-      // so we reassigned color and background using pseudo-selector
+      // systemIconStencil doesn't have hover specific variables
+      // so we reassigned color and backgroundColor using pseudo-selector
       [systemIconStencil.vars.color]: fillHover,
       [systemIconStencil.vars.backgroundColor]: backgroundHover,
     },
@@ -150,10 +157,10 @@ const NavIcon = ({
   size,
   ...elemProps
 }) => {
-  // insert icon function here
+  // insert icon function used by platform or any other functionality here
 
   return (
-    <StyledNavIcon
+    <span
       icon={icon}
       {...handleCsProp(
         elemProps,
