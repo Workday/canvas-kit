@@ -1,7 +1,8 @@
 import * as React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {Text, TextProps} from './Text';
+import {TextProps, textStencil} from './Text';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {createStencil} from '@workday/canvas-kit-styling';
 
 type Size = 'large' | 'medium' | 'small';
 
@@ -15,6 +16,11 @@ export interface TypeLevelProps extends Omit<TextProps, 'typeLevel'> {
    */
   size: Size;
 }
+
+const subtextStencil = createStencil({
+  extends: textStencil,
+  base: {},
+});
 
 /**
  * This component is intended to be used for small subtext content or in tight spaces.
@@ -42,10 +48,15 @@ export interface TypeLevelProps extends Omit<TextProps, 'typeLevel'> {
  */
 export const Subtext = createComponent('p')({
   displayName: 'Subtext',
-  Component: ({size, ...elemProps}: TypeLevelProps, ref, Element) => {
+  Component: ({size, variant, ...elemProps}: TypeLevelProps, ref, Element) => {
     const typeLevel = `subtext.${size}` as TextProps['typeLevel'];
-    return <Text ref={ref} as={Element} typeLevel={typeLevel} {...mergeStyles(elemProps)} />;
+    return <Element ref={ref} {...mergeStyles(elemProps, subtextStencil({typeLevel, variant}))} />;
   },
+});
+
+const bodyTextStencil = createStencil({
+  extends: textStencil,
+  base: {},
 });
 
 /**
@@ -74,10 +85,15 @@ export const Subtext = createComponent('p')({
  */
 export const BodyText = createComponent('p')({
   displayName: 'BodyText',
-  Component: ({size, ...elemProps}: TypeLevelProps, ref, Element) => {
+  Component: ({size, variant, ...elemProps}: TypeLevelProps, ref, Element) => {
     const typeLevel = `body.${size}` as TextProps['typeLevel'];
-    return <Text ref={ref} as={Element} typeLevel={typeLevel} {...mergeStyles(elemProps)} />;
+    return <Element ref={ref} {...mergeStyles(elemProps, bodyTextStencil({typeLevel, variant}))} />;
   },
+});
+
+const headingStencil = createStencil({
+  extends: textStencil,
+  base: {},
 });
 
 /**
@@ -106,10 +122,15 @@ export const BodyText = createComponent('p')({
  */
 export const Heading = createComponent('h2')({
   displayName: 'Heading',
-  Component: ({size, ...elemProps}: TypeLevelProps, ref, Element) => {
+  Component: ({size, variant, ...elemProps}: TypeLevelProps, ref, Element) => {
     const typeLevel = `heading.${size}` as TextProps['typeLevel'];
-    return <Text ref={ref} as={Element} typeLevel={typeLevel} {...mergeStyles(elemProps)} />;
+    return <Element ref={ref} {...mergeStyles(elemProps, headingStencil({typeLevel, variant}))} />;
   },
+});
+
+const titleStencil = createStencil({
+  extends: textStencil,
+  base: {},
 });
 
 /**
@@ -138,8 +159,8 @@ export const Heading = createComponent('h2')({
  */
 export const Title = createComponent('h1')({
   displayName: 'Title',
-  Component: ({size, ...elemProps}: TypeLevelProps, ref, Element) => {
+  Component: ({size, variant, ...elemProps}: TypeLevelProps, ref, Element) => {
     const typeLevel = `title.${size}` as TextProps['typeLevel'];
-    return <Text ref={ref} as={Element} typeLevel={typeLevel} {...mergeStyles(elemProps)} />;
+    return <Element ref={ref} {...mergeStyles(elemProps, titleStencil({typeLevel, variant}))} />;
   },
 });
