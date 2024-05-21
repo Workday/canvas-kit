@@ -105,6 +105,15 @@ function parsePropertyToStaticValue(node: ts.Node, context: TransformerContext):
     }
   }
 
+  // { name }
+  if (ts.isShorthandPropertyAssignment(node)) {
+    const key = node.name.text;
+
+    styleObj[key] = parseNodeToStaticValue(node.name, context).toString() || '';
+
+    return styleObj;
+  }
+
   // { ...value }
   if (ts.isSpreadAssignment(node)) {
     // Spread assignments are a bit complicated to use the AST to figure out, so we'll ask the
