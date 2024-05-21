@@ -353,6 +353,46 @@ describe('handleCreateStencil', () => {
       );
     });
 
+    it('should handle parsing variables in base styles via a MethodDeclaration with a ShorthandPropertyAssignment', () => {
+      const program = createProgramFromSource(`
+        import {createStencil} from '@workday/canvas-kit-styling';
+
+        const buttonStencil = createStencil({
+          vars: {
+            color: 'red'
+          },
+          base({color}) {
+            return {
+              color,
+              padding: 12
+            }
+          }
+        })
+      `);
+
+      const names = {};
+      const styles = {};
+
+      const result = transform(
+        program,
+        'test.ts',
+        withDefaultContext(program.getTypeChecker(), {styles, names})
+      );
+
+      expect(result).toContain(
+        `${names['buttonStencil.vars.color']}:red;box-sizing:border-box;color:var(${names['buttonStencil.vars.color']});padding:12px;`
+      );
+
+      expect(styles['test.css']).toContainEqual(
+        compileCSS(`.css-button {
+          --css-button-color: red;
+          box-sizing: border-box;
+          color: var(--css-button-color);
+          padding: 12px;
+        }`)
+      );
+    });
+
     it('should handle parsing modifiers with ObjectLiteralExpressions', () => {
       const program = createProgramFromSource(`
         import {createStencil, parentModifier} from '@workday/canvas-kit-styling';
