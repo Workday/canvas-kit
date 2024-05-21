@@ -161,6 +161,26 @@ describe('parseObjectToStaticValue', () => {
     });
   });
 
+  it('should handle a ShorthandPropertyAssignment when the Identifier is a known name', () => {
+    const program = createProgramFromSource(`
+      const foo = {
+        margin,
+      }
+    `);
+
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isObjectLiteralExpression)![0];
+
+    expect(
+      parseObjectToStaticValue(
+        node,
+        withDefaultContext(program.getTypeChecker(), {names: {margin: '12px'}})
+      )
+    ).toEqual({
+      margin: '12px',
+    });
+  });
+
   it('should return the result of the spread operator with a call expression that can return a statically analyzed return', () => {
     const program = createProgramFromSource(`
       const makeFontSize = <T extends string>(input: T): { fontSize: T} => {
