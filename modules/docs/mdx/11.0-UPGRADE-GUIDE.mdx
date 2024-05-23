@@ -25,9 +25,9 @@ provide semantic tokens that can translate to theming components.
 
 A note to the reader:
 
-- While we still support our old tokens from `@workday/canvas-kit-react/tokens` we encourage
-  consumers to start using our new tokens from `@workday/canvas-tokens-web`. You can find more info
-  in our [docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
+- While we still support our old tokens from `@workday/canvas-kit-react/tokens` in v11, you must
+  install our new tokens from `@workday/canvas-tokens-web`. You can find more info in our
+  [docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
 - In this release, we've introduced a
   [new styling API](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-stencil).
   This shouldn't effect the way you currently style your components. Because we're moving away from
@@ -37,6 +37,7 @@ A note to the reader:
 
 ## Table of contents
 
+- [Canvas Tokens](#canvas-tokens)
 - [Codemod](#codemod)
 - [Deprecations](#deprecations)
   - [Form Field (Main)](#form-field-main)
@@ -61,6 +62,15 @@ A note to the reader:
   - [Main](#main)
   - [Preview](#preview)
   - [Labs](#labs)
+
+## Canvas Tokens
+
+In v11, all the components listed in this guide have started using our new
+[Canvas Tokens Web](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
+In v10, we provided token fallbacks so that a component would not be missing a token/value if the tokens were not defined. In v11 you must add `@workday/canvas-tokens-web` to ensure our
+components are properly styled and the variables are defined. For more information on installing and
+using, please reference our tokens
+[docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
 
 ## Codemod
 
