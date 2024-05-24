@@ -1,5 +1,5 @@
 import React from 'react';
-import {GridProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {Grid, GridProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {createStencil, createVars} from '@workday/canvas-kit-styling';
 
@@ -29,12 +29,13 @@ export const TableRow = createComponent('tr')({
     const childrenArray = validChildren(children).length;
 
     return (
-      <Element
+      <Grid
+        as={Element}
         ref={ref}
         {...mergeStyles(elemProps, [tableRowStencil(), {[childrenVars.cellNumber]: childrenArray}])}
       >
         {children}
-      </Element>
+      </Grid>
     );
   },
 });
