@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.0.1](https://github.com/Workday/canvas-kit/releases/tag/v11.0.1) (2024-05-24)
+
+### Documentation
+
+- fix: Add explicit info about tokens ([#2754](https://github.com/Workday/canvas-kit/pull/2754)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@josh-bagwell](https://github.com/josh-bagwell))
+
+
 ## [v11.0.0](https://github.com/Workday/canvas-kit/releases/tag/v11.0.0) (2024-05-22)
 
 ### BREAKING CHANGES
