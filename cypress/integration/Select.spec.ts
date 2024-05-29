@@ -238,7 +238,7 @@ describe('Select', () => {
     });
   });
 
-  context.only(`given the "Basic" story is rendered`, () => {
+  context(`given the "Basic" story is rendered`, () => {
     beforeEach(() => {
       h.stories.load('Components/Inputs/Select', 'Basic');
     });
