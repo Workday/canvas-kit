@@ -219,10 +219,13 @@ export const SystemIcon = createComponent('span')({
             backgroundColor: transformColorNameToToken(background),
           }),
           {
-            [deprecatedSystemIconVars.colorHover]: colorHover && cssVar(colorHover),
-            [deprecatedSystemIconVars.fillHover]: fillHover && cssVar(fillHover),
-            [deprecatedSystemIconVars.accentHover]: accentHover && cssVar(accentHover),
-            [deprecatedSystemIconVars.backgroundHover]: backgroundHover && cssVar(backgroundHover),
+            [deprecatedSystemIconVars.colorHover]:
+              colorHover && transformColorNameToToken(colorHover),
+            [deprecatedSystemIconVars.fillHover]: fillHover && transformColorNameToToken(fillHover),
+            [deprecatedSystemIconVars.accentHover]:
+              accentHover && transformColorNameToToken(accentHover),
+            [deprecatedSystemIconVars.backgroundHover]:
+              backgroundHover && transformColorNameToToken(backgroundHover),
           },
         ])}
       />

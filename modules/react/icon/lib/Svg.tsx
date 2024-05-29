@@ -45,8 +45,13 @@ export const svgStencil = createStencil({
 /** @deprecated */
 export const transformColorNameToToken = (color?: string) => {
   if (color && color in base) {
-    return base[color as keyof typeof base];
+    return cssVar(base[color as keyof typeof base]);
   }
+
+  if (color?.startsWith('--')) {
+    return cssVar(color);
+  }
+
   return color;
 };
 
