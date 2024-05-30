@@ -271,4 +271,40 @@ describe('createModelHook', () => {
       shouldSelect?: (value: string, state: {baz: string}) => boolean;
     }>();
   });
+
+  it('should override defaultConfig values with `undefined` if `undefined` is allowed', () => {
+    const useTestModel = createModelHook({
+      defaultConfig: {
+        foo: undefined,
+      },
+    })(config => {
+      return {state: {foo: config.foo}, events: {}};
+    });
+
+    const {result} = renderHook(() =>
+      useTestModel({
+        foo: undefined,
+      })
+    );
+
+    expect(result.current.state).toHaveProperty('foo', undefined);
+  });
+
+  it('should not override defaultConfig values with `undefined` if `undefined` is not allowed', () => {
+    const useTestModel = createModelHook({
+      defaultConfig: {
+        foo: 'foo',
+      },
+    })(config => {
+      return {state: {foo: config.foo}, events: {}};
+    });
+
+    const {result} = renderHook(() =>
+      useTestModel({
+        foo: undefined,
+      })
+    );
+
+    expect(result.current.state).toHaveProperty('foo', 'foo');
+  });
 });
