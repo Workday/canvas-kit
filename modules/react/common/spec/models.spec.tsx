@@ -293,7 +293,7 @@ describe('createModelHook', () => {
   it('should not override defaultConfig values with `undefined` if `undefined` is not allowed', () => {
     const useTestModel = createModelHook({
       defaultConfig: {
-        foo: 'foo',
+        foo: 'bar',
       },
     })(config => {
       return {state: {foo: config.foo}, events: {}};
@@ -305,6 +305,6 @@ describe('createModelHook', () => {
       })
     );
 
-    expect(result.current.state).toHaveProperty('foo', 'foo');
+    expect(result.current.state).toHaveProperty('foo', 'bar');
   });
 });
