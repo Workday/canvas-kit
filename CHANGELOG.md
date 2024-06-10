@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.42](https://github.com/Workday/canvas-kit/releases/tag/v10.3.42) (2024-06-10)
+
+### Components
+
+- fix(select): Update aria-haspopup to 'menu' ([#2760](https://github.com/Workday/canvas-kit/pull/2760)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v10.3.41](https://github.com/Workday/canvas-kit/releases/tag/v10.3.41) (2024-06-10)
+
+### Components
+
+- fix: Prevent undefined from overriding model defaultConfig ([#2766](https://github.com/Workday/canvas-kit/pull/2766)) ([@NicholasBoll](https://github.com/NicholasBoll))
 ## [v11.0.5](https://github.com/Workday/canvas-kit/releases/tag/v11.0.5) (2024-06-10)
 
 ### Components
