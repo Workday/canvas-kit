@@ -243,6 +243,22 @@ describe('Select', () => {
       h.stories.load('Components/Inputs/Select', 'Basic');
     });
 
+    it('should have a combobox role', () => {
+      cy.findByRole('combobox').should('have.attr', 'role', 'combobox');
+    });
+
+    it('should have an `aria-popup="menu"`', () => {
+      cy.findByRole('combobox').should('have.attr', 'aria-haspopup', 'menu');
+    });
+
+    it('should have an `aria-expanded="false"`', () => {
+      cy.findByRole('combobox').should('have.attr', 'aria-expanded', 'false');
+    });
+
+    it('should have an `aria-autocomplete="list"`', () => {
+      cy.findByRole('combobox').should('have.attr', 'aria-autocomplete', 'list');
+    });
+
     context('when the menu is opened', () => {
       beforeEach(() => {
         cy.findByRole('combobox').focus().realType('{downarrow}');
