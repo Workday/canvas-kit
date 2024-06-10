@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.0.4](https://github.com/Workday/canvas-kit/releases/tag/v11.0.4) (2024-06-10)
+
+### Dependencies
+
+- chore: Updated Canvas Tokens Web Dependency to version 2.0.0 ([#2762](https://github.com/Workday/canvas-kit/pull/2762)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
 ## [v11.0.3](https://github.com/Workday/canvas-kit/releases/tag/v11.0.3) (2024-05-28)
 
 ### Components
