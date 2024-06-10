@@ -3,10 +3,16 @@ import React from 'react';
 import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
 import {uploadCloudIcon} from '@workday/canvas-system-icons-web';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const parentContainerStyles = createStyles({
+  gap: system.space.x4,
+});
 
 export const Emphasis = () => {
   return (
-    <Flex gap="s">
+    <Flex cs={parentContainerStyles}>
       <StatusIndicator emphasis="high">
         <StatusIndicator.Icon icon={uploadCloudIcon} />
         <StatusIndicator.Label>High Emphasis</StatusIndicator.Label>

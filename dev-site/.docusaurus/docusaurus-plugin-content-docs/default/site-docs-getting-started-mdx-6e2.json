@@ -1,0 +1,24 @@
+{
+  "id": "GettingStarted",
+  "title": "Introduction",
+  "description": "This project provides a set of components for the Workday Canvas Design System that can be used to",
+  "source": "@site/docs/GettingStarted.mdx",
+  "sourceDirName": ".",
+  "slug": "/GettingStarted",
+  "permalink": "/docs/GettingStarted",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/GettingStarted.mdx",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "displayed_sidebar": "componentsSidebar",
+    "sidebar_position": 1
+  },
+  "sidebar": "componentsSidebar",
+  "next": {
+    "title": "Button",
+    "permalink": "/docs/button"
+  }
+}

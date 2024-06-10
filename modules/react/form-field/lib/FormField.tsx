@@ -10,7 +10,9 @@ import {
 import {Hint} from './Hint';
 import {Label} from './Label';
 import {FormFieldLabelPosition, FormFieldLabelPositionBehavior} from './types';
-
+/**
+ * @deprecated ⚠️ `FormFieldProps` in Main has been deprecated and will be removed in a future major version. Please use [`FormField` in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-inputs-form-field--basic) instead.
+ */
 export interface FormFieldProps
   extends Themeable,
     React.HTMLAttributes<HTMLDivElement>,
@@ -136,7 +138,9 @@ const FormFieldInputContainer = styled('div')<GrowthBehavior & FormFieldLabelPos
     };
   }
 );
-
+/**
+ * @deprecated ⚠️ `FormField` in Main has been deprecated and will be removed in a future major version. Please use [`FormField` in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-inputs-form-field--basic) instead.
+ */
 export class FormField extends React.Component<React.PropsWithChildren<FormFieldProps>> {
   static LabelPosition = FormFieldLabelPosition;
   static ErrorType = ErrorType;
