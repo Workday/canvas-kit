@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.0.5](https://github.com/Workday/canvas-kit/releases/tag/v11.0.5) (2024-06-10)
+
+### Components
+
+- fix: Fix backwards compatibility for hover state colors in System Icon ([#2764](https://github.com/Workday/canvas-kit/pull/2764)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
 ## [v11.0.4](https://github.com/Workday/canvas-kit/releases/tag/v11.0.4) (2024-06-10)
 
 ### Dependencies
