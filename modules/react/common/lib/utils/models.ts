@@ -531,10 +531,21 @@ export const createModelHook = <TDefaultConfig extends {}, TRequiredConfig exten
     const configRef = React.useRef<Record<string, any>>({});
     const eventsRef = React.useRef<Record<string, any>>({});
 
-    const {state, events, ...rest} = fnRef.current({
-      ...defaultConfig,
-      ...config,
-    });
+    // We want to apply defaults, but if we merge config together using a spread, a value of
+    // `undefined` will override which will cause issues when config values are not expected to be
+    // undefined
+    const finalConfig: Record<string, any> = {...defaultConfig};
+    for (const key in config || {}) {
+      if (
+        config[key] !== undefined ||
+        // @ts-ignore if `defaultConfig` has a property of `key`, it has `key` in the index signature. Come on, TypeScript
+        (defaultConfig.hasOwnProperty(key) && defaultConfig[key] === undefined)
+      ) {
+        finalConfig[key] = config[key];
+      }
+    }
+
+    const {state, events, ...rest} = fnRef.current(finalConfig);
 
     // update all the refs with current values
     stateRef.current = state;

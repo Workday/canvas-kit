@@ -22,6 +22,10 @@ function noop() {
  * `useSelectInput` extends {@link useComboboxInput useComboboxInput}  and {@link useComboboxKeyboardTypeAhead useComboboxKeyboardTypeAhead} and adds type ahead functionality and Select-specific [keyboard support](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/).
  */
 export const useSelectInput = composeHooks(
+  useComboboxInput,
+  useComboboxKeyboardTypeAhead,
+  useComboboxResetCursorToSelected,
+  useComboboxMoveCursorToSelected,
   createElemPropsHook(useSelectModel)(
     (model, ref, elemProps: {keySofar?: string; placeholder?: string; value?: string} = {}) => {
       const {elementRef} = useLocalRef<HTMLInputElement>(ref as any);
@@ -155,11 +159,8 @@ export const useSelectInput = composeHooks(
               : '',
         },
         ref: elementRef,
+        'aria-haspopup': 'menu',
       } as const;
     }
-  ),
-  useComboboxKeyboardTypeAhead,
-  useComboboxResetCursorToSelected,
-  useComboboxMoveCursorToSelected,
-  useComboboxInput
+  )
 );

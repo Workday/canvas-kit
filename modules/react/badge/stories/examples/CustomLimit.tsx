@@ -6,12 +6,14 @@ import {createStyles, cssVar} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 const columnStyles = createStyles({
+  boxSizing: 'border-box',
   display: 'flex',
   flexDirection: 'column',
   gap: system.space.x4,
 });
 
 const controls = createStyles({
+  boxSizing: 'border-box',
   borderBottom: `solid 1px ${cssVar(base.soap400)}`,
   display: 'flex',
   gap: system.space.x1,
@@ -19,11 +21,13 @@ const controls = createStyles({
 });
 
 const defaultBackground = createStyles({
+  boxSizing: 'border-box',
   backgroundColor: base.frenchVanilla100,
   padding: system.space.x4,
 });
 
 const inverseBackground = createStyles({
+  boxSizing: 'border-box',
   backgroundColor: base.blueberry400,
   padding: system.space.x4,
 });

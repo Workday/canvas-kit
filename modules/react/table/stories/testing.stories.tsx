@@ -6,7 +6,8 @@ import {StaticStates} from '@workday/canvas-kit-react/testing';
 import {Table} from '@workday/canvas-kit-react/table';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {Heading} from '@workday/canvas-kit-react/text';
-import {colors} from '@workday/canvas-kit-react/tokens';
+import {system} from '@workday/canvas-tokens-web';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 
 export default {
   title: 'Testing/Containers/Table',
@@ -69,66 +70,48 @@ const exampleData = [
   },
 ];
 
+const tableHeaderStencil = createStencil({
+  base: {
+    backgroundColor: system.color.bg.alt.softer,
+    borderRight: `${px2rem(1)} solid ${system.color.border.divider}`,
+  },
+  modifiers: {
+    variant: {
+      sticky: {
+        position: 'sticky',
+        left: system.space.zero,
+        zIndex: 2,
+      },
+    },
+  },
+});
+
 const FixedColumn = () => (
   <>
     <Heading size="small">Table Heading</Heading>
     <Table>
       <Table.Head>
         <Table.Row>
-          <Table.Header
-            position="sticky"
-            left="0"
-            backgroundColor="soap100"
-            borderRight={`1px solid ${colors.soap400}`}
-          >
-            Header
-          </Table.Header>
-          <Table.Header borderRight={`1px solid ${colors.soap400}`} backgroundColor="soap100">
-            Header
-          </Table.Header>
-          <Table.Header borderRight={`1px solid ${colors.soap400}`} backgroundColor="soap100">
-            Header
-          </Table.Header>
-          <Table.Header borderRight={`1px solid ${colors.soap400}`} backgroundColor="soap100">
-            Header
-          </Table.Header>
-          <Table.Header borderRight={`1px solid ${colors.soap400}`} backgroundColor="soap100">
-            Header
-          </Table.Header>
-          <Table.Header borderRight={`1px solid ${colors.soap400}`} backgroundColor="soap100">
-            Header
-          </Table.Header>
-          <Table.Header borderRight={`1px solid ${colors.soap400}`} backgroundColor="soap100">
-            Header
-          </Table.Header>
-          <Table.Header borderRight={`1px solid ${colors.soap400}`} backgroundColor="soap100">
-            Header
-          </Table.Header>
-          <Table.Header borderRight={`1px solid ${colors.soap400}`} backgroundColor="soap100">
-            Header
-          </Table.Header>
+          <Table.Header {...tableHeaderStencil({variant: 'sticky'})}>Header</Table.Header>
+          {Array.from({length: 7}).map((_, i) => (
+            <Table.Header key={i} {...tableHeaderStencil()}>
+              Header
+            </Table.Header>
+          ))}
         </Table.Row>
       </Table.Head>
       <Table.Body>
         {exampleData.map(item => (
           <>
             <Table.Row>
-              <Table.Header
-                position="sticky"
-                left="0"
-                backgroundColor="soap100"
-                borderRight={`1px solid ${colors.soap400}`}
-              >
+              <Table.Header {...tableHeaderStencil({variant: 'sticky'})}>
                 {item.header}
               </Table.Header>
-              <Table.Cell borderRight={`1px solid ${colors.soap400}`}>{item.cell}</Table.Cell>
-              <Table.Cell borderRight={`1px solid ${colors.soap400}`}>{item.cell}</Table.Cell>
-              <Table.Cell borderRight={`1px solid ${colors.soap400}`}>{item.cell}</Table.Cell>
-              <Table.Cell borderRight={`1px solid ${colors.soap400}`}>{item.cell}</Table.Cell>
-              <Table.Cell borderRight={`1px solid ${colors.soap400}`}>{item.cell}</Table.Cell>
-              <Table.Cell borderRight={`1px solid ${colors.soap400}`}>{item.cell}</Table.Cell>
-              <Table.Cell borderRight={`1px solid ${colors.soap400}`}>{item.cell}</Table.Cell>
-              <Table.Cell borderRight={`1px solid ${colors.soap400}`}>{item.cell}</Table.Cell>
+              {Array.from({length: 7}).map((_, i) => (
+                <Table.Cell key={i} {...tableHeaderStencil()}>
+                  {item.cell}
+                </Table.Cell>
+              ))}
             </Table.Row>
           </>
         ))}

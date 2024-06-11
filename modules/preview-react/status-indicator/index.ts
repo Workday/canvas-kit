@@ -1,2 +1,1 @@
-export * from './lib/StatusIndicator';
-export * from './lib/hooks/useStatusIndicatorModel';
+export {StatusIndicator, StatusIndicatorProps, StatusIndicatorVariant} from './lib/StatusIndicator';

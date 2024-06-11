@@ -14,6 +14,7 @@ import {
   ExtractProps,
   createContainer,
   Themeable,
+  useLocalRef,
 } from '@workday/canvas-kit-react/common';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -42,6 +43,7 @@ const selectIconsStencil = createStencil({
     pointerEvents: 'none',
   },
 });
+
 const hiddenSelectInputStencil = createStencil({
   base: {
     position: 'absolute',
@@ -49,7 +51,7 @@ const hiddenSelectInputStencil = createStencil({
     bottom: system.space.zero,
     left: system.space.zero,
     right: system.space.zero,
-    opacity: 0,
+    opacity: system.opacity.zero,
     cursor: 'default',
     pointerEvents: 'none',
   },
@@ -70,7 +72,6 @@ export const SelectInput = createSubcomponent(TextInput)({
       ref,
       onChange,
       onInput,
-      onFocus,
       value,
       name,
       ...elemProps
@@ -78,6 +79,25 @@ export const SelectInput = createSubcomponent(TextInput)({
     Element,
     model
   ) => {
+    const {localRef, elementRef} = useLocalRef(ref);
+
+    // We need to create a proxy between the multiple inputs. We need to redirect a few methods to
+    // the visible input
+    React.useImperativeHandle(
+      elementRef,
+      () => {
+        localRef.current!.focus = (options?: FocusOptions) => {
+          textInputProps.ref.current!.focus(options);
+        };
+        localRef.current!.blur = () => {
+          textInputProps.ref.current!.blur();
+        };
+
+        return localRef.current!;
+      },
+      [textInputProps.ref, localRef]
+    );
+
     return (
       <InputGroup data-width="ck-formfield-width">
         {inputStartIcon && model.state.selectedIds.length > 0 && (
@@ -94,9 +114,8 @@ export const SelectInput = createSubcomponent(TextInput)({
           onChange={onChange}
           onInput={onInput}
           value={value}
-          onFocus={onFocus}
           name={name}
-          ref={ref}
+          ref={elementRef}
           {...hiddenSelectInputStencil()}
         />
         {/* Visual input */}
@@ -187,7 +206,7 @@ export const Select = createContainer()({
      * `Select.Popper` renders a {@link ComboboxPopper Combobox.Menu.Popper}. You have access to all `Popper` props.
      *
      * ```tsx
-     * <Select item={options}>
+     * <Select items={options}>
      *  <FormField label="Your Label">
      *    <Select.Input onChange={(event) => handleChange(event)}>
      *    <Select.Popper>
@@ -204,7 +223,7 @@ export const Select = createContainer()({
      * **Note: The card will be the width of its corresponding `Select.Input`**.
      *
      * ```tsx
-     * <Select item={options}>
+     * <Select items={options}>
      *  <FormField label="Your Label">
      *    <Select.Input onChange={(event) => handleChange(event)}>
      *    <Select.Popper>
@@ -221,7 +240,7 @@ export const Select = createContainer()({
      * `Select.List` renders a {@link ComboboxMenuList Combobox.Menu.List}. You have access to all `ListBox` props.
      *
      * ```tsx
-     * <Select item={options}>
+     * <Select items={options}>
      *  <FormField label="Your Label">
      *    <Select.Input onChange={(event) => handleChange(event)}>
      *    <Select.Popper>
@@ -240,7 +259,7 @@ export const Select = createContainer()({
      * `Select.Item` renders a {@link ComboboxMenuItem Combobox.Menu.Item} with aria role of `option`. You can optionally render a `Icon`.
      *
      * ```tsx
-     * <Select item={options}>
+     * <Select items={options}>
      *  <FormField label="Your Label">
      *    <Select.Input onChange={(event) => handleChange(event)}>
      *      <Select.Popper>

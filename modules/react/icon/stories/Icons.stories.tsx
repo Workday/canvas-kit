@@ -123,7 +123,7 @@ export const GraphicStory = {
       <div style={{width: 100}}>
         <Graphic src={graphicExample} grow={true} />
       </div>
-      <div style={{width: 100}}>
+      <div style={{width: 400}}>
         <Graphic src={graphicExample} grow={true} shouldMirror={true} />
       </div>
     </div>

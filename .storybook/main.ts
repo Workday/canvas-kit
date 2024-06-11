@@ -74,13 +74,13 @@ const config: StorybookConfig = {
         use: [
           // loaders are run in reverse order. symbol-doc-loader needs to be done first
           {
-            loader: path.resolve(__dirname, 'style-transform-loader'),
+            loader: path.resolve(__dirname, 'symbol-doc-loader'),
             options: {
               Doc,
             },
           },
           {
-            loader: path.resolve(__dirname, 'symbol-doc-loader'),
+            loader: path.resolve(__dirname, 'style-transform-loader'),
             options: {
               Doc,
             },

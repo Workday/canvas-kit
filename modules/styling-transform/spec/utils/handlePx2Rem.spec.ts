@@ -13,8 +13,8 @@ describe('handlePx2Rem', () => {
       px2rem(20)
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, 'px2rem')[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, 'px2rem')![0];
 
     const result = handlePx2Rem(node, withDefaultContext(program.getTypeChecker()));
 
@@ -26,8 +26,8 @@ describe('handlePx2Rem', () => {
       px2rem(20, 10)
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, 'px2rem')[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, 'px2rem')![0];
 
     const result = handlePx2Rem(node, withDefaultContext(program.getTypeChecker()));
 

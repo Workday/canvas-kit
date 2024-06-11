@@ -261,6 +261,9 @@ We've converted `Select` into a
 a flexible API and access to its internals via its subcomponents.
 
 ```tsx
+import {Select} from '@workday/canvas-kit-react/select';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+
 // v9
 <FormField label="Pizza Size">
   <Select onChange={handleChange} value={value}>
@@ -272,6 +275,9 @@ a flexible API and access to its internals via its subcomponents.
 ```
 
 ```tsx
+import {Select} from '@workday/canvas-kit-react/select';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+
 // v10
 <Select items={['Small', 'Medium', 'Large']}>
   <FormField label="Pizza Size" inputId="pizza">
@@ -289,7 +295,13 @@ a flexible API and access to its internals via its subcomponents.
 </Select>
 ```
 
-Unlike the
+Notice that `Select` is now outside the `FormField`. This is due to the update in `Select` and how
+the `FormField` in main applies attributes. Previously, `Select` was a styled native `<select>`
+input and `FormField` applied attributes automatically to that input. The new `Select` is solely a
+React context provider for its subcomponents. `FormField` needs `Select.Input` to be a direct child
+to apply attributes correctly.
+
+Also, unlike the
 [Select in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-select-left-label--default),
 this component does not have a border around its menu.
 

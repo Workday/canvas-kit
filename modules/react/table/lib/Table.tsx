@@ -9,17 +9,16 @@ import {TableCell} from './TableCell';
 import {TableFooter} from './TableFooter';
 import {TableCaption} from './TableCaption';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 const tableStencil = createStencil({
   base: {
     ...system.type.subtext.large,
     display: 'grid',
-    border: `${px2rem(1)} solid ${base.soap500}`,
+    border: `${px2rem(1)} solid ${system.color.border.container}`,
     borderRadius: system.shape.x2,
     overflow: 'auto',
-    color: base.blackPepper300,
-    boxSizing: 'border-box',
+    color: system.color.text.default,
   },
 });
 

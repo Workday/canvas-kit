@@ -1,15 +1,14 @@
 import React from 'react';
 import {GridProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil} from '@workday/canvas-kit-styling';
-import {base} from '@workday/canvas-tokens-web';
+import {calc, createStencil} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 const tableHeadStencil = createStencil({
   base: {
     display: 'grid',
-    backgroundColor: base.soap100,
-    minHeight: '3rem',
-    boxSizing: 'border-box',
+    backgroundColor: system.color.bg.alt.softer,
+    minHeight: calc.subtract(system.space.x16, system.space.x4),
     'th ': {
       '&:first-of-type': {
         borderInlineStart: 'none',

@@ -22,30 +22,22 @@ yarn add @workday/canvas-kit-react
 
 ### Basic Example
 
-Card includes a container `Card` component and the following subcomponents: `Card.Body` and
-`Card.Heading`.
+`Card` includes a container component and `Card.Body` and `Card.Heading` subcomponents.
 
 <ExampleCodeBlock of={CardStories.Basic} />
 
-### Depth
+### Custom Styles
 
-`Card` extends from `Box` so it supports all of
-[Box's style props](/components/layout/box/#style-props). This includes `depth`, which changes the
-Card's perceived "height" above the page surface by adjusting its box shadow. `Card` has a default
-depth of `1`.
+Card and its subcomponents support custom styling via the `cs` prop. For more information, check our
+["How To Customize Styles"](https://workday.github.io/canvas-kit/?path=/docs/styling-how-to-customize-styles--page).
 
-Here's an example of a `Card` with a increased `depth` of `2`.
+## Stencils
 
-<ExampleCodeBlock of={CardStories.Depth} />
-
-### Padding
-
-Set the `padding` prop of the `Card` (again, supported via `Box`) to adjust its padding. Card has a
-default padding of `x8` (`4rem` or `32px`).
+You can also use `Card` stencils to extend styles for your own custom components. This allows you to
+compose styles without using components directly. In the example below, we're extending `Card`
+stencils to create a custom `MenuCard` component.
 
 Here's an example of a `Card` with a reduced padding of `x3` (`0.75rem` or `12px`).
-
-<ExampleCodeBlock of={CardStories.Padding} />
 
 ## Component API
 

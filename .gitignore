@@ -33,3 +33,6 @@ junit.xml
 # cypress
 cypress/videos
 cypress/screenshots
+
+# css
+.css

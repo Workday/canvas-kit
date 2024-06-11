@@ -34,8 +34,8 @@ versatility.
 In this example, the HTML will look like:
 
 ```html
-<div class="css-4iptxs" style="--c6kna-background: gray;"></div>
-<div class="css-4iptxs" style="--c6kna-background: blue;"></div>
+<div class="css-4iptxs" style="--background-c6kna: gray;"></div>
+<div class="css-4iptxs" style="--background-c6kna: blue;"></div>
 ```
 
 And the CSS will look like:
@@ -44,7 +44,7 @@ And the CSS will look like:
 .css-4iptxs {
   width: 100px;
   height: 100px;
-  background-color: var(--c6kna-background);
+  background-color: var(--background-c6kna);
 }
 ```
 
@@ -88,11 +88,11 @@ const myStencil = createStencil({
     nonDefaultedColor: '', // will allow for uninitialization
   },
   base: ({defaultColor}) => {
-    color: defaultColor // `defaultColor` is '--abc123-defaultColor', not 'red'
+    color: defaultColor // `defaultColor` is '--defaultColor-abc123', not 'red'
   }
 })
 
-const elemProps = myStencil({color: 'blue'}) // {style: {'--abc123-defaultColor': 'blue'}}
+const elemProps = myStencil({color: 'blue'}) // {style: {'--defaultColor-abc123': 'blue'}}
 
 <div {...elemProps} />
 ```
@@ -102,11 +102,11 @@ This will produce the following HTML:
 ```html
 <style>
   .css-abc123 {
-    --abc123-defaultColor: red;
-    color: var(--abc123-defaultColor);
+    --defaultColor-abc123: red;
+    color: var(--defaultColor-abc123);
   }
 </style>
-<div class="css-123abc" style="--abc123-defaultColor: blue;"></div>
+<div class="css-123abc" style="--defaultColor-abc123: blue;"></div>
 ```
 
 The element will have a `color` property of `'blue'` because the element style is the highest
@@ -115,12 +115,12 @@ like the following:
 
 ```
 element.style {
-  --abc123-defaultColor: blue;
+  --defaultColor-abc123: blue;
 }
 
 .css-abc123 {
-  --abc123-defaultColor: red;
-  color: var(--abc123-defaultColor); // blue
+  --defaultColor-abc123: red;
+  color: var(--defaultColor-abc123); // blue
 }
 ```
 
@@ -297,9 +297,9 @@ const buttonStencil = createStencil({
   ],
 });
 
-<div {...myStencil()} />
-<div {...myStencil({size: 'small'})} />
-<div {...myStencil({size: 'small', iconPosition: 'end'})} />
+<div {...buttonStencil()} />
+<div {...buttonStencil({size: 'small'})} />
+<div {...buttonStencil({size: 'small', iconPosition: 'end'})} />
 ```
 
 The HTML will look something like this:
@@ -344,7 +344,7 @@ the modifier option or a string. The value will be sent as a variable regardless
 will only match if it is a valid modifer key.
 
 ```tsx
-const myStencil = createStencil({
+const buttonStencil = createStencil({
   vars: {
     width: '10px',
   },
@@ -364,11 +364,11 @@ const myStencil = createStencil({
 
 // `'zero'` is part of autocomplete
 myStencil({width: 'zero'});
-// returns {className: 'css-base css--width-zero', styles: { '--width': 'zero'}}
+// returns {className: 'css-button css-button--width-zero', styles: { '--button-width': 'zero'}}
 
 // width also accepts a string
 myStencil({width: '10px'});
-// returns {className: 'css-base', styles: { '--width': '10px'}}
+// returns {className: 'css-button', styles: { '--button-width': '10px'}}
 ```
 
 ### `keyframes`
@@ -382,6 +382,15 @@ transformer.
 The `injectGlobal` function re-exports the
 [Emotion CSS injectGlobal](https://emotion.sh/docs/@emotion/css#global-styles) function, but is
 compatible with a custom Emotion instance and is understood by the Static style transformer.
+
+## CS Prop
+
+The `cs` prop takes in a single, or an array of values that are created by the `cs` function, a
+string representing a CSS class name, or the return of the `createVars` function. It merges
+everything together and applies `className` and `style` attributes to a React element. The Box
+component has been extended to handle the cs prop. For example, the following plus proceeding code:
+
+{/* <ExampleCodeBlock code={CSProp} /> */}
 
 ## Custom Emotion instance
 

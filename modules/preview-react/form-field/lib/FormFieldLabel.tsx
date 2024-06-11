@@ -1,97 +1,69 @@
 import React from 'react';
 
-import {createSubcomponent} from '@workday/canvas-kit-react/common';
-import {type} from '@workday/canvas-kit-react/tokens';
-import {Text} from '@workday/canvas-kit-react/text';
-import {useFormFieldLabel, useFormFieldModel} from './hooks';
-import {createStencil, createStyles} from '@workday/canvas-kit-styling';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {createStencil, parentModifier, px2rem} from '@workday/canvas-kit-styling';
+import {Text, textStencil} from '@workday/canvas-kit-react/text';
+import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {brand, system} from '@workday/canvas-tokens-web';
 
-export interface FormFieldLabelProps {
+import {useFormFieldLabel, useFormFieldModel} from './hooks';
+import {formFieldStencil} from './formFieldStencil';
+
+export interface FormFieldLabelProps
+  extends FlexProps,
+    Omit<ExtractProps<typeof Text, never>, 'display'> {
   /**
    * The text of the label.
    */
   children: React.ReactNode;
-  /**
-   * Will style the text as disabled
-   */
-  disabled?: boolean;
-  /**
-   * Changes the color of the text
-   */
-  variant?: 'error' | 'hint' | 'inverse';
 }
 
-const asteriskStyles = createStyles({
-  marginInlineStart: system.space.x1,
-  fontSize: type.properties.fontSizes[20],
-  fontWeight: type.properties.fontWeights.regular,
-  textDecoration: 'unset',
-  color: brand.error.base,
-});
-
-const labelStencil = createStencil({
+export const formFieldLabelStencil = createStencil({
+  extends: textStencil,
+  // @ts-ignore Still weird about CSS variables
   base: {
-    ...system.type.subtext.large,
     fontWeight: system.fontWeight.medium,
-    color: base.blackPepper300,
-    paddingInlineStart: 0,
+    color: system.color.text.default,
+    paddingInlineStart: system.space.zero,
     marginBottom: system.space.x1,
     display: 'flex',
     alignItems: 'center',
-    minWidth: '180px',
+    minWidth: px2rem(180),
+
+    // asterisk
+    [parentModifier(formFieldStencil.modifiers.required.true)]: {
+      '&::after': {
+        content: '"*"',
+        fontSize: system.fontSize.body.large,
+        fontWeight: system.fontWeight.normal,
+        color: brand.error.base,
+        textDecoration: 'unset',
+        marginInlineStart: system.space.x1,
+      },
+    },
+
+    // orientation modifier from parent FormField
+    [parentModifier(formFieldStencil.modifiers.orientation.horizontal)]: {
+      float: 'left',
+      maxHeight: system.space.x10,
+    },
+    [parentModifier(formFieldStencil.modifiers.orientation.vertical)]: {
+      width: '100%',
+    },
   },
-  modifiers: {
-    orientation: {
-      horizontal: {
-        float: 'left',
-        maxHeight: system.space.x10,
-      },
-      vertical: {
-        width: '100%',
-      },
-    },
-    variant: {
-      error: {color: base.cinnamon500},
-      hint: {color: base.licorice300},
-      inverse: {color: base.frenchVanilla100},
-    },
-    disabled: {
-      true: {
-        cursor: 'default',
-        color: base.licorice100,
-      },
-    },
+  defaultModifiers: {
+    typeLevel: 'subtext.large',
   },
-  compound: [
-    {
-      modifiers: {variant: 'inverse', disabled: true},
-      styles: {
-        opacity: system.opacity.disabled,
-        color: base.frenchVanilla100,
-      },
-    },
-  ],
 });
 
 export const FormFieldLabel = createSubcomponent('label')({
   displayName: 'FormField.Label',
   modelHook: useFormFieldModel,
   elemPropsHook: useFormFieldLabel,
-})<FormFieldLabelProps>(({children, disabled, variant, ...elemProps}, Element, model) => {
+})<FormFieldLabelProps>(({children, typeLevel, variant, ...elemProps}, Element) => {
   return (
-    <Element
-      {...mergeStyles(elemProps, [
-        labelStencil({orientation: model.state.orientation, disabled, variant}),
-      ])}
-    >
+    <Element {...mergeStyles(elemProps, formFieldLabelStencil({typeLevel, variant}))}>
       {children}
-      {model.state.isRequired && (
-        <Text cs={asteriskStyles} aria-hidden="true">
-          *
-        </Text>
-      )}
     </Element>
   );
 });

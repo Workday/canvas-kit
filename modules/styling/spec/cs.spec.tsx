@@ -138,7 +138,7 @@ describe('cs', () => {
     it('should create an object with a key of the "color"', () => {
       const myVars = createVars('color');
 
-      expect(myVars).toHaveProperty('color', expect.stringMatching(/--.+-color/));
+      expect(myVars).toHaveProperty('color', expect.stringMatching(/--color-.+/));
     });
 
     it('should return a type object with keys matching each input', () => {
@@ -165,16 +165,9 @@ describe('cs', () => {
       expect(myVars({color: '--my-var'})).toHaveProperty(myVars.color, 'var(--my-var)');
     });
 
-    it('should make types Emotion safe when ID is known', () => {
-      const myVars = createVars({id: 'foo', args: ['label']});
-
-      type Input = (typeof myVars)['label'];
-      expectTypeOf<Input>().toMatchTypeOf<'--foo-label-emotion-safe'>();
-    });
-
     it('should type optimized style functions correctly so they can be consumed by other repositories', () => {
       const vars = createVars({id: 'foo', args: ['one']});
-      expectTypeOf(vars.one).toMatchTypeOf<'--foo-one'>();
+      expectTypeOf(vars.one).toMatchTypeOf<'--one-foo'>();
     });
 
     it('should handle an object configuration', () => {
@@ -205,9 +198,9 @@ describe('cs', () => {
         'foo'
       );
 
-      expect(myVars.color).toEqual('--foo-color');
+      expect(myVars.color).toEqual('--color-foo');
 
-      expectTypeOf(myVars.color).toEqualTypeOf<'--foo-color'>();
+      expectTypeOf(myVars.color).toEqualTypeOf<'--color-foo'>();
     });
 
     it('should pass the optional ID to each default', () => {
@@ -218,10 +211,10 @@ describe('cs', () => {
         'foo'
       );
 
-      expect(myVars.$$defaults).toHaveProperty('--foo-color', 'red');
+      expect(myVars.$$defaults).toHaveProperty('--color-foo', 'red');
 
       expectTypeOf(myVars.$$defaults).toEqualTypeOf<{
-        '--foo-color': 'red';
+        '--color-foo': 'red';
       }>();
     });
 
@@ -238,12 +231,12 @@ describe('cs', () => {
       expect(myVars).toHaveProperty('default');
       expect(myVars.default).toHaveProperty(
         'color',
-        expect.stringMatching(/--[a-z0-9]+-default-color/)
+        expect.stringMatching(/--default-color-[a-z0-9]+/)
       );
       expect(myVars).toHaveProperty('hover');
       expect(myVars.hover).toHaveProperty(
         'color',
-        expect.stringMatching(/--[a-z0-9]+-hover-color/)
+        expect.stringMatching(/--hover-color-[a-z0-9]+/)
       );
 
       expectTypeOf(myVars).toHaveProperty('default');
@@ -284,16 +277,16 @@ describe('cs', () => {
         },
         'foo'
       );
-
+      // BigO2023
       expect(myVars).toHaveProperty('default');
-      expect(myVars.default).toHaveProperty('color', expect.stringMatching('--foo-default-color'));
+      expect(myVars.default).toHaveProperty('color', expect.stringMatching('--default-color-foo'));
       expect(myVars).toHaveProperty('hover');
-      expect(myVars.hover).toHaveProperty('color', expect.stringMatching('--foo-hover-color'));
+      expect(myVars.hover).toHaveProperty('color', expect.stringMatching('--hover-color-foo'));
 
       expectTypeOf(myVars).toHaveProperty('default');
-      expectTypeOf(myVars.default).toEqualTypeOf<{color: '--foo-default-color'}>();
+      expectTypeOf(myVars.default).toEqualTypeOf<{color: '--default-color-foo'}>();
       expectTypeOf(myVars).toHaveProperty('hover');
-      expectTypeOf(myVars.hover).toEqualTypeOf<{color: '--foo-hover-color'}>();
+      expectTypeOf(myVars.hover).toEqualTypeOf<{color: '--hover-color-foo'}>();
     });
 
     it('should use the optional ID with nested variables in $$defaults', () => {
@@ -311,15 +304,15 @@ describe('cs', () => {
       );
 
       expect(myVars).toHaveProperty('$$defaults');
-      expect(myVars.$$defaults).toHaveProperty('--foo-default-color', 'blue');
-      expect(myVars.$$defaults).toHaveProperty('--foo-default-background', 'white');
-      expect(myVars.$$defaults).toHaveProperty('--foo-hover-color', 'red');
+      expect(myVars.$$defaults).toHaveProperty('--default-color-foo', 'blue');
+      expect(myVars.$$defaults).toHaveProperty('--default-background-foo', 'white');
+      expect(myVars.$$defaults).toHaveProperty('--hover-color-foo', 'red');
 
       expectTypeOf(myVars).toHaveProperty('$$defaults');
       expectTypeOf(myVars.$$defaults).toEqualTypeOf<{
-        '--foo-default-color': 'blue';
-        '--foo-default-background': 'white';
-        '--foo-hover-color': 'red';
+        '--default-color-foo': 'blue';
+        '--default-background-foo': 'white';
+        '--hover-color-foo': 'red';
       }>();
     });
   });
@@ -536,7 +529,9 @@ describe('cs', () => {
 
       expect(screen.getByTestId('test1')).toHaveStyle({padding: '10px'});
       expect(screen.getByTestId('test2')).toHaveStyle({padding: '20px'});
-      expect(myStencil({size: 'large'}).className.split(' ')).toHaveLength(2);
+
+      expect(myStencil({size: 'large'}).className).toContain(myStencil.base);
+      expect(myStencil({size: 'large'}).className).toContain(myStencil.modifiers.size.large);
 
       // type signature of stencil call expression
       type Arg = Parameters<typeof myStencil>[0];
@@ -569,6 +564,43 @@ describe('cs', () => {
 
       expect(myStencil).toHaveProperty('modifiers.size.large');
       expect(typeof myStencil.modifiers.size.large).toEqual('string');
+    });
+
+    it('should apply modifiers in the correct order regardless of the order they are defined when calling the stencil', () => {
+      const myStencil = createStencil({
+        base: {},
+        modifiers: {
+          size: {
+            large: {},
+          },
+          position: {
+            start: {},
+          },
+        },
+      });
+
+      expect(myStencil({position: 'start', size: 'large'}).className).toContain(
+        `${myStencil.base} ${myStencil.modifiers.size.large} ${myStencil.modifiers.position.start}`
+      );
+    });
+
+    it('should add the hash of the modifier to the className to handle parentModifier selectors in compat mode', () => {
+      const myStencil = createStencil({
+        base: {},
+        modifiers: {
+          size: {
+            large: {},
+          },
+        },
+      });
+
+      const {className} = myStencil({size: 'large'});
+
+      expect(className).toEqual(
+        `${myStencil.base} ${
+          myStencil.modifiers.size.large
+        } ${myStencil.modifiers.size.large.replace('css-', 'm')}`
+      );
     });
 
     it('should default modifiers if no modifier override is passed', () => {
@@ -642,7 +674,13 @@ describe('cs', () => {
       });
 
       // 4 class names - base, size, position, size-position
-      expect(myStencil({size: 'large', position: 'start'}).className.split(' ')).toHaveLength(4);
+      expect(myStencil({size: 'large', position: 'start'}).className.split(' ')).toHaveLength(6); // 4 + 2 modifier hashes
+      const {className} = myStencil({size: 'large', position: 'start'});
+
+      expect(className).toContain(myStencil.base);
+      expect(className).toContain(myStencil.modifiers.size.large);
+      expect(className).toContain(myStencil.modifiers.position.start);
+      // we don't have access to the compound modifier class name
     });
 
     it('should return access to variables for use in other components', () => {
@@ -657,7 +695,7 @@ describe('cs', () => {
       expectTypeOf(myStencil.vars).toHaveProperty('color');
       expectTypeOf(myStencil.vars.color).toEqualTypeOf<string>();
 
-      expect(myStencil).toHaveProperty('vars.color', expect.stringMatching(/--[a-z0-9]+-color/));
+      expect(myStencil).toHaveProperty('vars.color', expect.stringMatching(/--color-[a-z0-9]+/));
     });
 
     it('should coerce a variable input to a type of string', () => {
@@ -691,9 +729,9 @@ describe('cs', () => {
 
       expectTypeOf(myStencil).toHaveProperty('vars');
       expectTypeOf(myStencil.vars).toHaveProperty('color');
-      expectTypeOf(myStencil.vars.color).toEqualTypeOf<'--foo-color'>();
+      expectTypeOf(myStencil.vars.color).toEqualTypeOf<'--color-foo'>();
 
-      expect(myStencil).toHaveProperty('vars.color', expect.stringMatching(/--foo-color/));
+      expect(myStencil).toHaveProperty('vars.color', expect.stringMatching(/--color-foo/));
     });
 
     it('should return a function that takes in an object with the values and wrap passed css variables', () => {
@@ -771,35 +809,22 @@ describe('cs', () => {
     });
 
     it('should handle both variables and modifiers sharing the same key', () => {
-      const myStencil = createStencil(
-        {
-          vars: {
-            width: '10px',
-            height: '10px',
-          },
-          base({width}) {
-            return {width: width};
-          },
-          modifiers: {
-            width: {
-              zero: {
-                width: '0',
-              },
-            },
-            foo: {
-              true: {
-                name: 'foo',
-                styles: 'overflow:scroll',
-              },
+      const myStencil = createStencil({
+        vars: {
+          width: '10px',
+          height: '10px',
+        },
+        base({width}) {
+          return {width: width};
+        },
+        modifiers: {
+          width: {
+            zero: {
+              width: '0',
             },
           },
         },
-        'cnvs-my'
-      );
-
-      myStencil({width: '12px'});
-
-      myStencil({foo: true}); //?
+      });
 
       type Arg = Exclude<Parameters<typeof myStencil>[0], undefined>;
       expectTypeOf<Arg>().toHaveProperty('width');
@@ -817,7 +842,7 @@ describe('cs', () => {
       expect(result2.style).toHaveProperty(myStencil.vars.width, 'zero');
 
       // match base and width modifier
-      expect(result2.className).toEqual(`${myStencil.base} ${myStencil.modifiers.width.zero}`);
+      expect(result2.className).toContain(`${myStencil.base} ${myStencil.modifiers.width.zero}`);
     });
 
     it('should convert "true" modifiers into boolean', () => {
@@ -958,7 +983,13 @@ describe('cs', () => {
 
         const {className} = extendedStencil({size: 'large'});
 
-        expect(className.split(' ')).toHaveProperty('length', 5);
+        expect(className.split(' ')).toHaveProperty('length', 6); // 1 base + 1 extended + 1 size modifier + 2 compound modifiers + 1 modifier hash
+
+        expect(className).toContain(baseStencil.base);
+        extendedStencil.base.split(' ').forEach(c => {
+          expect(className).toContain(c);
+        });
+        expect(className).toContain(baseStencil.modifiers.size.large);
 
         // calling the stencil
         type Args = Exclude<Parameters<typeof extendedStencil>[0], undefined>;
@@ -973,6 +1004,35 @@ describe('cs', () => {
         extendedStencil({
           extra: true,
         });
+      });
+
+      it('should set default modifiers using base modifiers', () => {
+        const baseStencil = createStencil({
+          base: {},
+          modifiers: {
+            size: {
+              large: {width: '100rem'},
+            },
+          },
+        });
+
+        const extendedStencil = createStencil({
+          extends: baseStencil,
+          base: {},
+          modifiers: {
+            extra: {
+              true: {},
+            },
+          },
+          defaultModifiers: {size: 'large'},
+        });
+
+        // calling the stencil
+        type Args = Exclude<Parameters<typeof extendedStencil>[0], undefined>;
+        expectTypeOf<Args>().toEqualTypeOf<{
+          size?: 'large';
+          extra?: boolean;
+        }>();
       });
 
       it('should extend variables', () => {
@@ -994,13 +1054,13 @@ describe('cs', () => {
         expectTypeOf(extendedStencil.vars.color).toEqualTypeOf<string>();
         expect(extendedStencil).toHaveProperty(
           'vars.color',
-          expect.stringMatching(/--[0-9a-z]+-color/i)
+          expect.stringMatching(/--color-[0-9a-z]+/i)
         );
 
         expectTypeOf(extendedStencil.vars.background).toEqualTypeOf<string>();
         expect(extendedStencil).toHaveProperty(
           'vars.background',
-          expect.stringMatching(/--[0-9a-z]+-background/i)
+          expect.stringMatching(/--background-[0-9a-z]+/i)
         );
       });
 
@@ -1030,18 +1090,18 @@ describe('cs', () => {
           'extended'
         );
 
-        expectTypeOf(extendedStencil.vars.color).toEqualTypeOf<'--base-color'>();
-        expectTypeOf(extendedStencil.vars.background).toEqualTypeOf<'--extended-background'>();
-        expectTypeOf(extendedStencil.vars.$$defaults).toHaveProperty('--base-color');
-        expectTypeOf(extendedStencil.vars.$$defaults).toHaveProperty('--extended-background');
-        expectTypeOf(extendedStencil.vars.$$defaults['--base-color']).toMatchTypeOf<string>();
+        expectTypeOf(extendedStencil.vars.color).toEqualTypeOf<'--color-base'>();
+        expectTypeOf(extendedStencil.vars.background).toEqualTypeOf<'--background-extended'>();
+        expectTypeOf(extendedStencil.vars.$$defaults).toHaveProperty('--color-base');
+        expectTypeOf(extendedStencil.vars.$$defaults).toHaveProperty('--background-extended');
+        expectTypeOf(extendedStencil.vars.$$defaults['--color-base']).toMatchTypeOf<string>();
         expectTypeOf(
-          extendedStencil.vars.$$defaults['--extended-background']
+          extendedStencil.vars.$$defaults['--background-extended']
         ).toMatchTypeOf<string>();
 
-        expect(extendedStencil).toHaveProperty('vars.color', '--base-color');
+        expect(extendedStencil).toHaveProperty('vars.color', '--color-base');
 
-        expect(extendedStencil).toHaveProperty('vars.background', '--extended-background');
+        expect(extendedStencil).toHaveProperty('vars.background', '--background-extended');
       });
 
       it('should extend, adding class names in the correct order', () => {
@@ -1085,6 +1145,9 @@ describe('cs', () => {
                 large: {},
                 small: {},
               },
+              foo: {
+                bar: {},
+              },
             },
             compound: [
               {
@@ -1112,7 +1175,7 @@ describe('cs', () => {
         expect(className).toContain(baseStencil.modifiers.position.only);
 
         // baseStencil.base, baseStencil large, baseStencil only position, baseStencil compound, extendedStencil.base, extendedStencil large, extendedStencil compound
-        expect(className.split(' ')).toHaveLength(7);
+        expect(className.split(' ')).toHaveLength(10); // 7 + 3 modifier hashes
       });
     });
   });

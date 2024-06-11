@@ -12,8 +12,8 @@ describe('parseNodeToStaticValue', () => {
       'foo'
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isStringLiteral)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isStringLiteral)![0];
 
     expect(parseNodeToStaticValue(node, withDefaultContext(program.getTypeChecker()))).toEqual(
       'foo'
@@ -25,8 +25,8 @@ describe('parseNodeToStaticValue', () => {
       12
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isNumericLiteral)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isNumericLiteral)![0];
 
     expect(parseNodeToStaticValue(node, withDefaultContext(program.getTypeChecker()))).toEqual(12);
   });
@@ -36,8 +36,8 @@ describe('parseNodeToStaticValue', () => {
       const foo = 'bar';
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isIdentifier)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isIdentifier)![0];
 
     expect(parseNodeToStaticValue(node, withDefaultContext(program.getTypeChecker()))).toEqual(
       'bar'
@@ -49,8 +49,8 @@ describe('parseNodeToStaticValue', () => {
       const foo = 12;
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isIdentifier)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isIdentifier)![0];
 
     expect(parseNodeToStaticValue(node, withDefaultContext(program.getTypeChecker()))).toEqual(12);
   });
@@ -62,8 +62,8 @@ describe('parseNodeToStaticValue', () => {
       foo.bar
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isPropertyAccessExpression)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isPropertyAccessExpression)![0];
 
     expect(parseNodeToStaticValue(node, withDefaultContext(program.getTypeChecker()))).toEqual(
       'baz'
@@ -77,8 +77,8 @@ describe('parseNodeToStaticValue', () => {
       foo.bar.baz
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isPropertyAccessExpression)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isPropertyAccessExpression)![0];
 
     expect(parseNodeToStaticValue(node, withDefaultContext(program.getTypeChecker()))).toEqual(12);
   });
@@ -88,15 +88,15 @@ describe('parseNodeToStaticValue', () => {
       foo.bar
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isPropertyAccessExpression)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isPropertyAccessExpression)![0];
 
     expect(
       parseNodeToStaticValue(
         node,
         withDefaultContext(program.getTypeChecker(), {
-          variables: {
-            'foo-bar': '--css-foo-bar',
+          names: {
+            'foo.bar': '--css-foo-bar',
           },
         })
       )
@@ -110,8 +110,8 @@ describe('parseNodeToStaticValue', () => {
       foo[1]
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isElementAccessExpression)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isElementAccessExpression)![0];
 
     expect(parseNodeToStaticValue(node, withDefaultContext(program.getTypeChecker()))).toEqual(
       '12px'
@@ -125,8 +125,8 @@ describe('parseNodeToStaticValue', () => {
       foo[0]
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isElementAccessExpression)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isElementAccessExpression)![0];
 
     expect(parseNodeToStaticValue(node, withDefaultContext(program.getTypeChecker()))).toEqual(
       '12px'
@@ -140,15 +140,37 @@ describe('parseNodeToStaticValue', () => {
       }
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isComputedPropertyName)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isComputedPropertyName)![0];
 
     expect(
       parseNodeToStaticValue(
         node,
         withDefaultContext(program.getTypeChecker(), {
-          variables: {
-            'foo-bar': '--css-foo-bar',
+          names: {
+            'foo.bar': '--css-foo-bar',
+          },
+        })
+      )
+    ).toEqual('--css-foo-bar');
+  });
+
+  it('should return the string value of a ComputedPropertyName around a TemplateStringLiteral of a variable', () => {
+    const program = createProgramFromSource(`
+      const temp = {
+        [\`\${foo.bar\}\`]: 'baz'
+      }
+    `);
+
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isComputedPropertyName)![0];
+
+    expect(
+      parseNodeToStaticValue(
+        node,
+        withDefaultContext(program.getTypeChecker(), {
+          names: {
+            'foo.bar': '--css-foo-bar',
           },
         })
       )
@@ -164,8 +186,8 @@ describe('parseNodeToStaticValue', () => {
       }
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isComputedPropertyName)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isComputedPropertyName)![0];
 
     expect(parseNodeToStaticValue(node, withDefaultContext(program.getTypeChecker()))).toEqual(
       '--bar'
@@ -177,14 +199,14 @@ describe('parseNodeToStaticValue', () => {
       \`\${myAnimation} 1s ease\`
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isTemplateExpression)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isTemplateExpression)![0];
 
     expect(
       parseNodeToStaticValue(
         node,
         withDefaultContext(program.getTypeChecker(), {
-          variables: {myAnimation: 'animation-abc123'},
+          names: {myAnimation: 'animation-abc123'},
         })
       )
     ).toEqual('animation-abc123 1s ease');

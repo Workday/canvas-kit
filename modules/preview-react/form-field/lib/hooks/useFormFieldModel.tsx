@@ -9,11 +9,6 @@ export const useFormFieldModel = createModelHook({
      */
     error: undefined as undefined | 'error' | 'alert',
     /**
-     * The direction the child elements should stack
-     * @default vertical
-     */
-    orientation: 'vertical' as 'vertical' | 'horizontal',
-    /**
      * Optional `id` provided to `FormField`'s subcomponents as HTML attributes:
      * - `FormField.Input` will set `aria-describedby` to `hint-${id}`
      * - `FormField.Input` will set `id` to `input-${id}`

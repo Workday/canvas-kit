@@ -2,12 +2,12 @@ import React from 'react';
 
 import {focusRing, styled, StyledType, createSubcomponent} from '@workday/canvas-kit-react/common';
 
-import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
 import {usePillModel} from './usePillModel';
 import {xSmallIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {colors, space} from '@workday/canvas-kit-react/tokens';
-import {BaseButton, buttonVars} from '@workday/canvas-kit-react/button';
+import {BaseButton, buttonStencil} from '@workday/canvas-kit-react/button';
 
 export interface PillIconButtonProps extends Omit<SystemIconProps, 'icon'> {
   /**
@@ -26,6 +26,9 @@ const StyledIconButton = styled(BaseButton)<StyledType & PillIconButtonProps>({
   marginInlineEnd: '-7px', // visually pull in the pill to the right size
   marginInlineStart: `-2px`, // visually create space between label and the button
   overflow: 'visible',
+  [buttonStencil.vars.background]: colors.soap300,
+  [buttonStencil.vars.border]: 'transparent',
+  [buttonStencil.vars.label]: colors.blackPepper400,
   '::after': {
     content: '""',
     height: space.l,
@@ -36,38 +39,32 @@ const StyledIconButton = styled(BaseButton)<StyledType & PillIconButtonProps>({
     margin: 0,
     pointerEvents: 'all',
   },
-  '&.focus, &:focus-visible': {
+
+  '&:focus-visible, &.focus': {
     ...focusRing({
       innerColor: 'transparent',
     }),
-  },
-  [buttonVars.default.background]: colors.soap300,
-  [buttonVars.default.border]: 'transparent',
-  [buttonVars.default.label]: colors.blackPepper400,
-
-  '&:focus-visible, &.focus': {
-    [buttonVars.focus.background]: colors.soap300,
-    [buttonVars.focus.border]: 'transparent',
-    [buttonVars.focus.label]: colors.blackPepper400,
+    [buttonStencil.vars.background]: colors.soap300,
+    [buttonStencil.vars.border]: 'transparent',
+    [buttonStencil.vars.label]: colors.blackPepper400,
   },
 
   '&:hover, &.hover': {
-    [buttonVars.hover.background]: colors.soap300,
-    [buttonVars.hover.border]: 'transparent',
-    [buttonVars.hover.label]: colors.blackPepper400,
+    [buttonStencil.vars.background]: colors.soap300,
+    [buttonStencil.vars.border]: 'transparent',
+    [buttonStencil.vars.label]: colors.blackPepper400,
   },
 
   '&:active, &.active': {
-    [buttonVars.active.background]: colors.soap500,
-    [buttonVars.active.border]: 'transparent',
-    [buttonVars.active.label]: colors.blackPepper400,
+    [buttonStencil.vars.background]: colors.soap500,
+    [buttonStencil.vars.border]: 'transparent',
+    [buttonStencil.vars.label]: colors.blackPepper400,
   },
 
   '&:disabled, &.disabled': {
-    [buttonVars.disabled.background]: colors.soap100,
-    [buttonVars.disabled.label]: colors.licorice100,
-    [buttonVars.disabled.border]: 'transparent',
-    [systemIconStencil.vars.color]: colors.licorice100,
+    [buttonStencil.vars.background]: colors.soap100,
+    [buttonStencil.vars.label]: colors.licorice100,
+    [buttonStencil.vars.border]: 'transparent',
   },
 });
 

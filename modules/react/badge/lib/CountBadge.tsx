@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {handleCsProp, CSProps, createStencil, px2rem, keyframes} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 const grow = keyframes({
   from: {
@@ -28,18 +28,18 @@ export interface CountBadgeProps extends CSProps {
   limit?: number;
   /**
    * Sets the variant of the Count Badge
-   *
-   * @default 'default'
    */
-  variant?: 'default' | 'inverse';
+  variant?: 'inverse';
 }
 
+// .cnvs-count-badge
 const countBadgeStencil = createStencil({
   base: {
     alignItems: 'center',
     animation: `${grow} 0.2s ease`,
+    background: system.color.static.red.default,
     borderRadius: system.shape.round,
-    boxSizing: 'border-box',
+    color: system.color.text.inverse,
     display: 'inline-flex',
     fontFamily: system.fontFamily.default,
     fontSize: system.fontSize.subtext.medium,
@@ -49,18 +49,16 @@ const countBadgeStencil = createStencil({
     lineHeight: px2rem(20),
     minWidth: px2rem(20),
     padding: `0 ${px2rem(6.5)}`,
+    textShadow: `0 0 ${px2rem(1)} rgba(0,0,0, 0.35)`,
   },
   modifiers: {
     variant: {
-      default: {
-        background: base.cinnamon500,
-        color: base.frenchVanilla100,
-        textShadow: `0 0 ${px2rem(1)} rgba(0,0,0, 0.35)`,
-      },
+      // .cnvs-count-badge--variant-inverse
       inverse: {
-        background: base.frenchVanilla100,
+        background: system.color.bg.default,
         boxShadow: `0 ${px2rem(1)} ${px2rem(2)} rgba(0,0,0, 0.25)`,
-        color: base.blueberry400,
+        color: system.color.text.primary.default,
+        textShadow: 'none',
       },
     },
   },
@@ -70,12 +68,8 @@ const countBadgeStencil = createStencil({
  * `CountBadge` provides a quantity-based summary with dynamic values.
  */
 export const CountBadge = createComponent('span')({
-  displayName: 'NewCountBadge',
-  Component: (
-    {count = 0, limit = 1000, variant = 'default', ...elemProps}: CountBadgeProps,
-    ref,
-    Element
-  ) => {
+  displayName: 'CountBadge',
+  Component: ({count = 0, limit = 1000, variant, ...elemProps}: CountBadgeProps, ref, Element) => {
     const formattedCount = count < limit ? `${count}` : `${limit - 1}+`;
 
     return (

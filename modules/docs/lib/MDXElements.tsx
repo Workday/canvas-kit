@@ -1,7 +1,7 @@
 //@ts-ignore
 import {useMDXComponents} from '@mdx-js/react';
 import React from 'react';
-import MarkdownToJSX from 'markdown-to-jsx';
+import SyntaxHighlighter from 'react-syntax-highlighter';
 
 import {createComponent} from '@workday/canvas-kit-react';
 import {HeadingLevelContext, SymbolDialog} from './widgetUtils';

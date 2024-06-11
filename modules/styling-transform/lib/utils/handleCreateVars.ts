@@ -3,12 +3,10 @@ import ts from 'typescript';
 import {slugify} from '@workday/canvas-kit-styling';
 
 import {getVarName} from './getVarName';
-import {makeEmotionSafe} from './makeEmotionSafe';
 import {NodeTransformer, TransformerContext} from './types';
+import {getHash} from './getHash';
 
 export const handleCreateVars: NodeTransformer = (node, context) => {
-  const {prefix} = context;
-
   /**
    * This will create a variable
    */
@@ -17,7 +15,7 @@ export const handleCreateVars: NodeTransformer = (node, context) => {
     ts.isIdentifier(node.expression) &&
     node.expression.text === 'createVars'
   ) {
-    const {id, vars} = addVars(node, context);
+    const {id, vars} = addNames(node, context);
 
     return ts.factory.updateCallExpression(
       node,
@@ -28,7 +26,7 @@ export const handleCreateVars: NodeTransformer = (node, context) => {
           [
             ts.factory.createPropertyAssignment(
               ts.factory.createIdentifier('id'),
-              ts.factory.createStringLiteral(`${prefix}-${id}`)
+              ts.factory.createStringLiteral(id)
             ),
             ts.factory.createPropertyAssignment(
               ts.factory.createIdentifier('args'),
@@ -54,8 +52,8 @@ export const handleCreateVars: NodeTransformer = (node, context) => {
    * }
    * ```
    *
-   * This happens when variables are imported from other files. We don't need to transform this, but
-   * we'll need to add variables for property parsing.
+   * This happens when names are imported from other files. We don't need to transform this, but
+   * we'll need to add names for property parsing.
    */
   if (ts.isObjectLiteralExpression(node)) {
     node.properties.forEach(property => {
@@ -65,7 +63,7 @@ export const handleCreateVars: NodeTransformer = (node, context) => {
         ts.isIdentifier(property.initializer.expression) &&
         property.initializer.expression.text === 'createVars'
       ) {
-        addVars(property.initializer, context);
+        addNames(property.initializer, context);
       }
     });
   }
@@ -73,17 +71,20 @@ export const handleCreateVars: NodeTransformer = (node, context) => {
   return;
 };
 
-function addVars(node: ts.CallExpression, context: TransformerContext) {
-  const {prefix, variables} = context;
+function addNames(node: ts.CallExpression, context: TransformerContext) {
+  const {prefix, names, extractedNames} = context;
+  const hash = getHash(node, context);
 
-  const id = slugify(getVarName(node)).replace('-vars', '');
+  const varNamePrefix = getVarName(node);
   const vars = node.arguments
     .map(arg => ts.isStringLiteral(arg) && arg.text)
     .filter(Boolean) as string[];
 
   vars.forEach(v => {
-    variables[`${id}-${makeEmotionSafe(v)}`] = `--${prefix}-${id}-${makeEmotionSafe(v)}`;
+    const varName = `${varNamePrefix}.${v}`;
+    names[varName] = `--${v}-${hash}`;
+    extractedNames[names[varName]] = `--${prefix}-${slugify(varName).replace('-vars', '')}`;
   });
 
-  return {id, vars};
+  return {id: hash, vars};
 }

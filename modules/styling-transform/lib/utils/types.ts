@@ -4,7 +4,40 @@ export type TransformerContext = {
   checker: ts.TypeChecker;
   prefix: string;
   getPrefix: (path: string) => string;
-  variables: Record<string, string>;
+  /**
+   * Name and value pairs for things that cannot be statically resolved via the type system. The
+   * name is resolved via `getPropertyAccessExpressionText` and the value can be anything. It should
+   * be whatever you want the runtime value to be, which is usually a hash. For example:
+   *
+   * ```ts
+   * const myVars = createVars('color');
+   *
+   * color: myVars.color
+   * ```
+   *
+   * The type of `myVars.color` is `string`, but both in runtime and transpile time, the
+   * `myVars.color` is resolved to a hard value. The `names` cache is a lookup to that value. The
+   * `names` cache does not track the AST of `color`, so `const {color} = myVars` will not work. The
+   * key comes from `getPropertyAccessExpressionText` which replaces `.` with `-`.
+   */
+  names: Record<string, string>;
+  /**
+   * Extracted names is a mapping from `names` to a value that will be output to CSS. If you add an
+   * entry to `names`, add an entry to `extractedNames` where the `key` of `extractedNames` is the
+   * `value` of `names`.
+   *
+   * For example:
+   * ```ts
+   * // names
+   * { "myVars.foo": "--css-12345" },
+   * // extractedNames
+   * { "--css-12345": "--css-my-vars-foo" }
+   * ```
+   *
+   * The value in `names` will be used for transformation of TypeScript files into JavaScript files.
+   * The `extractedNames` will be used for the output CSS files.
+   */
+  extractedNames: Record<string, string>;
   /**
    * Variable scoping allows for a variable lookup to match a predefined scope. For example, in
    * stencils, the `base` config can take a function with the locally defined variable names.
@@ -20,12 +53,11 @@ export type TransformerContext = {
    * })
    * ```
    *
-   * In this case, a variable lookup would fail because there's no global variable named `color`.
-   * There's a global variable named `my-color` which is the fully-qualified variable name. The
-   * stencil parser will add `my-` as a variable scoping when processing style attributes for
-   * variable lookup purposes.
+   * In this case, a name lookup would fail because there's no global name named `color`. There's a
+   * global name named `my-color` which is the fully-qualified name. The stencil parser will add
+   * `my-` as a name scoping when processing style attributes for name lookup purposes.
    */
-  variableScope?: string;
+  nameScope?: string;
   /**
    * All styles will be collected here. These styles will then be flushed out to CSS files according
    * to the `getFileName` function.

@@ -93,9 +93,9 @@ export type CS = string | Record<string, string>;
  *
  * // optimizer rewrites the code
  * const myVars = createVars<'color', 'myVars'>('color')
- * // type is now `{color: "--myVars-color"}`
+ * // type is now `{color: "--color-myVars"}`
  *
- * myVars.color // type is `--myVars-color`
+ * myVars.color // type is `--color-myVars`
  * ```
  *
  * This is so optimized variables can be used directly by the static parser downstream. The variable
@@ -104,7 +104,7 @@ export type CS = string | Record<string, string>;
 export type CsVarsMap<T extends string, ID extends string | never> = [ID] extends [never]
   ? Record<T, string>
   : // map type. If the ID is known from the style optimizer, use static keys using string template literals instead of `string`
-    {[K in T]: `--${ID}-${MakeEmotionSafe<K>}`};
+    {[K in T]: `--${K}-${ID}`};
 
 export type CsVars<T extends string, ID extends string | never> = CsVarsMap<T, ID> & {
   (input: Partial<Record<T, string>>): Record<T, string>;
@@ -117,7 +117,7 @@ export type CsVars<T extends string, ID extends string | never> = CsVarsMap<T, I
  * const myVars = createVars('color')
  *
  * const myStyles = createStyles({
- *   color: cssVar(myVars.color) // color: 'var(--{hash}-color)'
+ *   color: cssVar(myVars.color) // color: 'var(--color-{hash})'
  * })
  * ```
  *
@@ -125,7 +125,7 @@ export type CsVars<T extends string, ID extends string | never> = CsVarsMap<T, I
  * expect a CSS variable isn't defined.
  * ```ts
  * const myStyles = createStyles({
- *   color: cssVar(myVars.color, 'red') // color: 'var(--{hash}-color, red)'
+ *   color: cssVar(myVars.color, 'red') // color: 'var(--color-{hash}, red)'
  * })
  * ```
  *
@@ -140,18 +140,6 @@ export function cssVar(input: string, fallback?: string) {
 }
 
 /**
- * Util function to fix an issue with Emotion by
- * appending `EmotionIssue#3066` to end of css variable
- * See issue: [#3066](https://github.com/emotion-js/emotion/issues/3066)
- */
-const makeEmotionSafe = (key: string): string => {
-  if (key.endsWith('label')) {
-    return `${key}-emotion-safe`;
-  }
-  return key;
-};
-
-/**
  * Create temporary CSS variables to use in components. The CSS variable names will
  * be unique at runtime to avoid collisions. The return value is a function and a
  * Map. The function can be used to pass in values from JavaScript. The function will
@@ -162,14 +150,14 @@ const makeEmotionSafe = (key: string): string => {
  * const myVars = createVars('color', 'background')
  *
  * // 'color' is a typed property. The type is `string`
- * console.log(myVars.color) // `'var(--{hash}-color)'`
+ * console.log(myVars.color) // `'var(--color-{hash})'`
  *
  * // 'color' is a typed property. The type is `string?`
  * // The returned object can be assigned to the `style` property of an element
- * console.log(myVars({ color: 'red' })) //  `{'--{hash}-color': 'red'}`
+ * console.log(myVars({ color: 'red' })) //  `{'--color-{hash}': 'red'}`
  *
  * const div = document.createElement('div')
- * div.style = myVars({ color: 'red' }) // <div style="--{hash}-color: red;" />
+ * div.style = myVars({ color: 'red' }) // <div style="--color-{hash}: red;" />
  * ```
  */
 
@@ -206,16 +194,14 @@ export function createVars<T extends string | DefaultedVarsShape, ID extends str
 
   args.forEach(key => {
     // @ts-ignore
-    result[key] = `--${id}-${makeEmotionSafe(key)}`;
+    result[key] = `--${key}-${id}`;
   }, {});
 
   return result;
 }
 
-type MakeEmotionSafe<T extends string> = T extends `${infer S}label` ? `${S}label-emotion-safe` : T;
-
 // Type to create CSS Variable names based on JS names and ID
-type CSSVarName<ID extends string, Name> = `--${ID}-${MakeEmotionSafe<ToString<Name>>}`;
+type CSSVarName<ID extends string, Name> = `--${ToString<Name>}-${ID}`;
 
 /**
  * For custom themes that do not overwrite every default. This is the type given to stencil
@@ -244,9 +230,9 @@ type ToString<T> = string & T;
  * DefaultedVarsMapToCSSVarNames<{foo: { bar: 'red' }}> = Record<'foo', Record<'bar', string>>
  *
  * // ID known
- * DefaultedVarsMapToCSSVarNames<{foo: { bar: 'red' }}, 'my-id'> = { foo: '--my-id-red' }
+ * DefaultedVarsMapToCSSVarNames<{foo: { bar: 'red' }}, 'my-id'> = { foo: '--red-my-id' }
  * // ID known, nested
- * DefaultedVarsMapToCSSVarNames<{foo: { bar: 'red' }}, 'my-id'> = { foo: { bar: '--my-id-red' }}
+ * DefaultedVarsMapToCSSVarNames<{foo: { bar: 'red' }}, 'my-id'> = { foo: { bar: '--red-my-id' }}
  * ```
  */
 export type DefaultedVarsMapToCSSVarNames<
@@ -259,7 +245,7 @@ export type DefaultedVarsMapToCSSVarNames<
   : // map type. If the ID is known from the style optimizer, use static keys using string template literals instead of `string`
     {
       [K in keyof V]: V[K] extends Record<string, string>
-        ? DefaultedVarsMapToCSSVarNames<V[K], `${ID}-${ToString<K>}`> // TypeScript doesn't know K is a string here and will throw an error, so we have to coerce it
+        ? {[K2 in keyof V[K]]: CSSVarName<`${ToString<K2>}-${ID}`, K>} //DefaultedVarsMapToCSSVarNames<V[K], `${ToString<K>}-${ID}`> // TypeScript doesn't know K is a string here and will throw an error, so we have to coerce it
         : CSSVarName<ID, K>;
     };
 
@@ -278,9 +264,9 @@ type ExtractValue<T, K> = K extends keyof T
  *
  * ```ts
  * // ID known
- * DefaultedVarsMap<{foo: 'red'}, 'my-id'> = { '--my-id-foo': 'red' }
+ * DefaultedVarsMap<{foo: 'red'}, 'my-id'> = { '--foo-my-id': 'red' }
  * // ID known, nested
- * DefaultedVarsMap<{foo: { bar: 'red' }}, 'my-id'> = { foo: { '--my-id-bar': 'red' }}
+ * DefaultedVarsMap<{foo: { bar: 'red' }}, 'my-id'> = { foo: { '--bar-my-id': 'red' }}
  * ```
  */
 export type DefaultedVarsMap<V extends DefaultedVarsShape, ID extends string> = {
@@ -359,7 +345,7 @@ export function createDefaultedVars<T extends DefaultedVarsShape, ID extends str
   // eslint-disable-next-line guard-for-in
   for (const key in input) {
     if (typeof input[key] === 'string') {
-      const cssVarName = `--${localId}-${makeEmotionSafe(key)}`;
+      const cssVarName = `--${key}-${localId}`;
       (result as any)[key] = cssVarName;
       (result as any).$$defaults[cssVarName] = input[key];
     }
@@ -367,7 +353,7 @@ export function createDefaultedVars<T extends DefaultedVarsShape, ID extends str
       (result as any)[key] = {};
       for (const subKey in input[key]) {
         if (typeof input[key][subKey] === 'string') {
-          const cssVarName = `--${localId}-${key}-${makeEmotionSafe(subKey)}`;
+          const cssVarName = `--${key}-${subKey}-${localId}`;
           (result as any)[key][subKey] = cssVarName;
           (result as any).$$defaults[cssVarName] = input[key][subKey];
         }
@@ -419,10 +405,11 @@ export type ModifierReturn<T extends ModifierConfig> = T & ModifierFn<T>;
  */
 export function createModifiers<M extends ModifierConfig>(input: M): ModifierReturn<M> {
   const modifierFn = (modifiers: Partial<ModifierValues<M>>) => {
-    return Object.keys(modifiers)
-      .filter(key => input[key] && (input as any)[key][modifiers[key]])
-      .map(key => (input as any)[key][modifiers[key]])
-      .join(' ');
+    return combineClassNames(
+      Object.keys(input)
+        .filter(key => (input as any)[key][modifiers[key]])
+        .map(key => (input as any)[key][modifiers[key]])
+    );
   };
 
   Object.keys(input).forEach(key => {
@@ -472,8 +459,8 @@ export function createCompoundModifiers<M extends ModifierConfig>(
   compound: CompoundModifier<M>[]
 ): ModifierFn<M> {
   return modifiers => {
-    return compound
-      .map(compoundModifier => {
+    return combineClassNames(
+      compound.map(compoundModifier => {
         const match = Object.keys(compoundModifier.modifiers).reduce(
           (result, compoundModifierKey) => {
             return (
@@ -488,8 +475,7 @@ export function createCompoundModifiers<M extends ModifierConfig>(
         }
         return '';
       })
-      .filter(v => v)
-      .join(' ');
+    );
   };
 }
 
@@ -515,7 +501,7 @@ export type CsToPropsReturn = {className?: string; style?: CSSObjectWithVars};
  * - `string` - it represents a CSS class name
  * - `undefined` - there is no value. This is provided for convenience for developers to not have to
  *   filter out undefined
- * - `{--{hash}-{varName}: {value}}` - a `Map` of CSS variable to values
+ * - `{--{varName}-{hash}: {value}}` - a `Map` of CSS variable to values
  * - `{style: ..., className: ...}` an object already returned by another `csToProps` function call
  *   (for nesting)
  * - An array containing any of the above. This will recurse over each entry to produce a single,
@@ -571,7 +557,7 @@ export function csToProps(input: CSToPropsInput): CsToPropsReturn {
   // object with `style` and `className` attributes to spread on an element
   return input.map(csToProps).reduce((result, val) => {
     return {
-      className: [result.className, val.className].filter(v => v).join(' '),
+      className: combineClassNames([result.className, val.className]),
       style: {...result.style, ...val.style},
     };
   }, {} as CsToPropsReturn);
@@ -899,8 +885,8 @@ export interface StencilConfig<
    *
    * ```css
    * .css-button {
-   *   --css-button-color: red;
-   *   color: var(--css-button-color);
+   *   --color-button: red;
+   *   color: var(--color-button);
    * }
    * ```
    */
@@ -985,11 +971,19 @@ export interface StencilConfig<
    * Modifiers are optional. If you need a modifier to always be defined, a default modifier value
    * will be used when a modifier is `undefined`
    */
-  defaultModifiers?: {[K in keyof M]?: keyof M[K]};
+  defaultModifiers?: [E] extends [never]
+    ? StencilDefaultModifierReturn<M>
+    : E extends BaseStencil<infer ME, any, any, any>
+    ? StencilDefaultModifierReturn<M & ME>
+    : undefined;
 }
 
 type StencilModifierReturn<M extends StencilModifierConfig<V>, V extends DefaultedVarsShape> = {
   [K1 in keyof M]: {[K2 in keyof M[K1]]: string};
+};
+
+type StencilDefaultModifierReturn<M> = {
+  [K1 in keyof M]?: keyof M[K1];
 };
 
 export interface BaseStencil<
@@ -1026,7 +1020,9 @@ export interface Stencil<
   modifiers: [E] extends [BaseStencil<infer ME, infer VE, any, any>]
     ? StencilModifierReturn<ME & M, VE & V>
     : StencilModifierReturn<M, V>;
-  defaultModifiers: {[K in keyof M]?: keyof M[K]};
+  defaultModifiers: [E] extends [BaseStencil<infer ME, any, any, any>]
+    ? StencilDefaultModifierReturn<ME & M>
+    : StencilDefaultModifierReturn<M>;
 }
 
 type VariableValuesStencil<V extends DefaultedVarsShape> = V extends Record<string, string>
@@ -1039,6 +1035,38 @@ function onlyDefined<T>(input: T | undefined): input is T {
 
 function onlyUnique<T>(value: any, index: number, array: T[]) {
   return array.indexOf(value) === index;
+}
+
+/**
+ * Combines an array of space-delimited CSS class names into a single string of space-delimited
+ * class names. Duplicate class names are removed.
+ */
+function combineClassNames(input: (string | undefined)[]): string {
+  return input
+    .join(' ')
+    .split(' ')
+    .filter((s, i, a) => onlyDefined(s) && onlyUnique(s, i, a))
+    .join(' ');
+}
+
+/**
+ * This function is used in conjunction with Stencils to get a selector to match the current element
+ * and a parent modifier. The selector will match a parent element with a modifier applied and the current
+ * element. It should be used on the `base` config of a Stencil.
+ *
+ * ```ts
+ * const childStencil = createStencil({
+ *   base: {
+ *     // base styles
+ *     [parentModifier(parentStencil.modifiers.size.large)]: {
+ *       // maybe adjust padding of this element
+ *     }
+ *   }
+ * })
+ * ```
+ */
+export function parentModifier(value: string) {
+  return `.${value.replace('css-', 'm')} :where(&)`;
 }
 
 /**
@@ -1064,6 +1092,7 @@ export function createStencil<
   });
   const _base = createStyles({
     ..._vars.$$defaults,
+    boxSizing: 'border-box',
     ...(typeof base === 'function' ? base(_vars) : base),
   });
 
@@ -1078,6 +1107,7 @@ export function createStencil<
             result[modifierKey] = createStyles(
               typeof modifier === 'function' ? modifier(_vars) : modifier
             );
+
             return result;
           }, {});
 
@@ -1096,14 +1126,12 @@ export function createStencil<
       }
 
       // @ts-ignore
-      _modifiers[modifier][value] = [
+      _modifiers[modifier][value] = combineClassNames([
         // @ts-ignore
         composesModifier[modifier][value],
         // @ts-ignore
         _modifiers[modifier][value],
-      ]
-        .filter(onlyDefined)
-        .join(' ');
+      ]);
     });
   });
 
@@ -1120,27 +1148,37 @@ export function createStencil<
       )
     : () => '';
 
-  const stencil: Stencil<M, V, E, ID> = ((input: {}) => {
-    const inputModifiers = {...composes?.defaultModifiers, ...defaultModifiers, ...input};
+  const stencil: Stencil<M, V, E, ID> = ((input: Record<string, string>) => {
+    const inputModifiers = {...composes?.defaultModifiers, ...defaultModifiers};
+    // Only override defaults if a value is defined
+    for (const key in input) {
+      if (input[key]) {
+        // @ts-ignore
+        inputModifiers[key] = input[key];
+      }
+    }
     const composesReturn = composes?.(inputModifiers as any);
+    const modifierClasses = _modifiers(inputModifiers);
     return {
-      className: [
+      className: combineClassNames([
         composesReturn?.className,
         _base,
-        _modifiers(inputModifiers),
+        modifierClasses,
+        // For compat mode, we need to add inert class names of modifiers where the `css-` prefix is
+        // removed. For example, `css-base css-mod-1` will become `css-base css-mod-1 mod-1`. The
+        // modifier class without the prefix will be ignored by the Emotion CSS `cx` function and
+        // will remain for the `parentModifier` function to still select on. We decided to add these
+        // inert class names instead of adding `data-m-*` attributes because the output DOM looks
+        // much cleaner and it saves bytes on the bundled output.
+        modifierClasses.replace(/css-/g, 'm'),
         compound ? _compound(inputModifiers) : '',
-      ]
-        .filter(onlyDefined) // filter out empty strings
-        .join(' ')
-        .split(' ')
-        .filter(onlyUnique)
-        .join(' '),
+      ]),
       style: {...composesReturn?.style, ..._vars(input || {})},
     };
   }) as any;
 
   stencil.vars = _vars;
-  stencil.base = [composes?.base, _base].filter(onlyDefined).join(' ');
+  stencil.base = combineClassNames([composes?.base, _base]);
   stencil.modifiers = _modifiers as any; // The return type is conditional and TypeScript doesn't like that here
   stencil.defaultModifiers = {...composes?.defaultModifiers, ...defaultModifiers} as any;
   stencil.__extends = composes as any; // The return type is conditional and TypeScript doesn't like that here

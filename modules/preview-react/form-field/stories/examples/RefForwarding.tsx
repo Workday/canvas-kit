@@ -4,6 +4,14 @@ import {Flex} from '@workday/canvas-kit-react/layout';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const parentContainerStyles = createStyles({
+  gap: system.space.x1,
+  alignItems: 'flex-start',
+  flexDirection: 'column',
+});
 
 export const RefForwarding = () => {
   const [value, setValue] = React.useState('');
@@ -18,7 +26,7 @@ export const RefForwarding = () => {
   };
 
   return (
-    <Flex gap="xxxs" alignItems="flex-start" flexDirection="column">
+    <Flex cs={parentContainerStyles}>
       <FormField>
         <FormField.Label>Email</FormField.Label>
         <FormField.Input as={TextInput} onChange={handleChange} value={value} ref={ref} />

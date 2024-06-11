@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
-import {Svg, SvgProps} from './Svg';
+import {Svg, SvgProps, svgStencil} from './Svg';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, createVars, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 
 /**
  * @deprecated Interface `GraphicStyles` will be removed in a future version. `grow` prop will be moved inside `GraphicProps`.
@@ -12,13 +12,11 @@ export interface GraphicStyles {
   /**
    * The width of the Graphic in `px`. The Graphic's `width` takes precedence over its `height` in order to preserve its proportions.
    * @default width of graphic
-   * @deprecated Use `cs` to set width, `cs={{"& svg": {width: '1rem'}}}`
    */
   width?: number | string;
   /**
    * The height of the Graphic in `px`. If the Graphic's `height` is set, its `width` will be set to `100%`.
    * @default height of graphic
-   * @deprecated Use `cs` to set height, `cs={{"& svg": {height: '1rem'}}}`
    */
   height?: number | string;
   /**
@@ -68,26 +66,14 @@ export const graphicStyles = ({width, height, grow}: GraphicStyles): CSSObject =
   return {};
 };
 
-/**
- * @deprecated Part of supporting deprecated `height` and `width` props
- */
-const graphicVars = createVars('height', 'width');
-
 export const graphicStencil = createStencil({
-  base: {
-    '& svg': {
-      width: cssVar(graphicVars.width, '100%'),
-      height: cssVar(graphicVars.height, '100%'),
-    },
-  },
+  extends: svgStencil,
+  base: {},
   modifiers: {
     grow: {
       true: {
         width: '100%',
-        '& svg': {
-          width: '100%',
-          height: '100%',
-        },
+        [svgStencil.vars.width]: '100%',
       },
     },
   },
@@ -101,13 +87,14 @@ export const Graphic = createComponent('span')({
         type={CanvasIconTypes.Graphic}
         as={Element}
         ref={ref}
-        {...handleCsProp(elemProps, [
-          graphicStencil({grow}),
-          {
-            [graphicVars.height]: typeof height === 'number' ? px2rem(height) : height,
-            [graphicVars.width]: typeof width === 'number' ? px2rem(width) : width,
-          },
-        ])}
+        {...handleCsProp(
+          elemProps,
+          graphicStencil({
+            grow,
+            width: typeof width === 'number' ? px2rem(width) : width,
+            height: typeof height === 'number' ? px2rem(height) : height,
+          })
+        )}
       />
     );
   },

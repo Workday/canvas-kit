@@ -4,12 +4,12 @@ import {ButtonLabelIcon} from '../lib/parts/ButtonLabelIcon';
 import {ButtonLabel} from '../lib/parts/ButtonLabel';
 
 import {createComponent, GrowthBehavior, focusRing} from '@workday/canvas-kit-react/common';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStyles, createVars, cssVar, createModifiers} from '@workday/canvas-kit-styling';
+import {cssVar, createStencil, px2rem, createVars, calc} from '@workday/canvas-kit-styling';
 import {SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {brand, system} from '@workday/canvas-tokens-web';
 import {ButtonColors, ButtonSizes, IconPositions} from './types';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 export interface ButtonContainerProps extends Partial<SystemIconProps>, GrowthBehavior {
   /**
@@ -25,7 +25,7 @@ export interface ButtonContainerProps extends Partial<SystemIconProps>, GrowthBe
   size?: ButtonSizes;
   /**
    * The icon of the Button.
-   * Note: not displayed at `small` size
+   * Note: Not displayed at `small` size
    */
   icon?: CanvasSystemIcon;
   /**
@@ -56,10 +56,20 @@ export interface ButtonContainerProps extends Partial<SystemIconProps>, GrowthBe
 export interface BaseButtonProps extends Omit<ButtonContainerProps, 'ref'> {}
 
 /**
- * Temporary css variables to be used across all Buttons.
+ * The purpose of this object is for the `colors` prop - to provide backwards compatibility with how we allowed color overrides in Emotion.
  */
-export const buttonVars = {
+export const buttonColorPropVars = {
   default: createVars(
+    'background',
+    'border',
+    'boxShadowInner',
+    'boxShadowOuter',
+    'icon',
+    'label',
+    'opacity',
+    'borderRadius'
+  ),
+  focus: createVars(
     'background',
     'border',
     'boxShadowInner',
@@ -89,16 +99,6 @@ export const buttonVars = {
     'opacity',
     'borderRadius'
   ),
-  focus: createVars(
-    'background',
-    'border',
-    'boxShadowInner',
-    'boxShadowOuter',
-    'icon',
-    'label',
-    'opacity',
-    'borderRadius'
-  ),
   disabled: createVars(
     'background',
     'border',
@@ -114,200 +114,260 @@ export const buttonVars = {
 /**
  * Base styles for Buttons.
  */
-const baseButtonStyles = createStyles({
-  fontFamily: '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif',
-  fontSize: '0.875rem',
-  lineHeight: 'normal',
-  letterSpacing: '0.015rem',
-  fontWeight: 'bold',
-  backgroundColor: cssVar(buttonVars.default.background, 'transparent'),
-  color: cssVar(buttonVars.default.label, base.blackPepper400),
-  borderWidth: '1px',
-  borderStyle: 'solid',
-  gap: system.space.x2,
-  borderColor: cssVar(buttonVars.default.border, 'transparent'),
-  cursor: 'pointer',
-  display: 'inline-flex',
-  boxShadow: 'none',
-  alignItems: 'center',
-  justifyContent: 'center',
-  boxSizing: 'border-box',
-  outline: '2px transparent',
-  whiteSpace: 'nowrap',
-  WebkitFontSmoothing: 'antialiased',
-  MozOsxFontSmoothing: 'grayscale',
-  borderRadius: cssVar(buttonVars.default.borderRadius, system.shape.round),
-  position: 'relative',
-  verticalAlign: 'middle',
-  overflow: 'hidden',
-  [systemIconStencil.vars.color]: cssVar(buttonVars.default.icon, base.blackPepper400),
-  transition:
-    'box-shadow 120ms linear, border 120ms linear, background-color 120ms linear, color 120ms linear',
-  '&:disabled, &:disabled:active, &.disabled': {
-    cursor: 'default',
+export const buttonStencil = createStencil({
+  vars: {
+    background: '',
+    border: '',
+    boxShadowInner: '',
+    boxShadowOuter: '',
+    label: '',
+    opacity: '',
+    borderRadius: '',
+  },
+  base: ({background, border, boxShadowInner, boxShadowOuter, label, opacity, borderRadius}) => ({
+    // Default Styles
+    fontFamily: '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif',
+    fontSize: '0.875rem',
+    lineHeight: 'normal',
+    letterSpacing: '0.015rem',
+    fontWeight: system.fontWeight.bold,
+    backgroundColor: cssVar(
+      buttonColorPropVars.default.background,
+      cssVar(background, 'transparent')
+    ),
+    color: cssVar(buttonColorPropVars.default.label, cssVar(label, system.color.fg.strong)),
+    borderWidth: px2rem(1),
+    borderStyle: 'solid',
+    gap: system.space.x2,
+    borderColor: cssVar(buttonColorPropVars.default.border, cssVar(border, 'transparent')),
+    cursor: 'pointer',
+    display: 'inline-flex',
     boxShadow: 'none',
-    opacity: cssVar(buttonVars.disabled.opacity, '1'),
-  },
-  /*
-  '& span .wd-icon-fill, & span .wd-icon-accent, & span .wd-icon-accent2': {
-    transitionDuration: '40ms',
-    fill: cssVar(buttonVars.default.icon, base.blackPepper400),
-  },
-  '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
-    fill: cssVar(buttonVars.default.icon, base.blackPepper400),
-  },
-  */
-  '&:focus-visible, &.focus': {
-    backgroundColor: cssVar(buttonVars.focus.background, 'transparent'),
-    borderColor: cssVar(buttonVars.focus.border, 'transparent'),
-    color: cssVar(buttonVars.focus.label, base.blackPepper400),
-    [systemIconStencil.vars.color]: cssVar(buttonVars.focus.icon, base.blackPepper400),
-    /* 
-    '& span .wd-icon-fill, & span .wd-icon-accent, & span .wd-icon-accent2': {
-      fill: cssVar(buttonVars.focus.icon, base.blackPepper400),
+    alignItems: 'center',
+    justifyContent: 'center',
+    boxSizing: 'border-box',
+    outline: `${px2rem(2)} transparent`,
+    whiteSpace: 'nowrap',
+    WebkitFontSmoothing: 'antialiased',
+    MozOsxFontSmoothing: 'grayscale',
+    borderRadius: cssVar(
+      buttonColorPropVars.default.borderRadius,
+      cssVar(borderRadius, system.shape.round)
+    ),
+    position: 'relative',
+    verticalAlign: 'middle',
+    overflow: 'hidden',
+    [systemIconStencil.vars.color]: cssVar(
+      buttonColorPropVars.default.icon,
+      system.color.fg.strong
+    ),
+    transition:
+      'box-shadow 120ms linear, border 120ms linear, background-color 120ms linear, color 120ms linear',
+    '&:disabled, &:disabled:active, &.disabled': {
+      cursor: 'default',
+      boxShadow: 'none',
+      opacity: cssVar(buttonColorPropVars.default.opacity, cssVar(opacity, system.opacity.full)),
     },
-    */
-    ...focusRing({
-      width: 2,
-      separation: 2,
-      innerColor: cssVar(buttonVars.focus.boxShadowInner, base.frenchVanilla100),
-      outerColor: cssVar(buttonVars.focus.boxShadowOuter, brand.primary.base),
-    }),
-  },
-  '&:hover, &.hover': {
-    backgroundColor: cssVar(buttonVars.hover.background, base.blackPepper500),
-    borderColor: cssVar(buttonVars.hover.border, 'transparent'),
-    color: cssVar(buttonVars.hover.label, base.blackPepper500),
-    [systemIconStencil.vars.color]: cssVar(buttonVars.hover.icon, base.blackPepper500),
-    /* 
-    '& span .wd-icon-fill, & span .wd-icon-accent, & span .wd-icon-accent2': {
-      fill: cssVar(buttonVars.hover.icon, base.blackPepper500),
+    // Focus Styles
+    '&:focus-visible, &.focus': {
+      backgroundColor: cssVar(
+        buttonColorPropVars.focus.background,
+        cssVar(background, 'transparent')
+      ),
+      borderColor: cssVar(buttonColorPropVars.focus.border, cssVar(border, 'transparent')),
+      color: cssVar(buttonColorPropVars.focus.label, cssVar(label, system.color.fg.strong)),
+      [systemIconStencil.vars.color]: cssVar(
+        buttonColorPropVars.focus.icon,
+        system.color.fg.strong
+      ),
+      ...focusRing({
+        width: 2,
+        separation: 2,
+        innerColor: cssVar(
+          buttonColorPropVars.focus.boxShadowInner,
+          cssVar(boxShadowInner, system.color.border.inverse)
+        ),
+        outerColor: cssVar(
+          buttonColorPropVars.focus.boxShadowOuter,
+          cssVar(boxShadowOuter, brand.primary.base)
+        ),
+      }),
     },
-    */
-  },
-  '&:hover:active': {transitionDuration: '40ms'},
-  '&:active, &.active': {
-    backgroundColor: cssVar(buttonVars.active.background, 'transparent'),
-    borderColor: cssVar(buttonVars.active.border, 'transparent'),
-    color: cssVar(buttonVars.active.label, base.blackPepper400),
-    [systemIconStencil.vars.color]: cssVar(buttonVars.active.icon, base.blackPepper400),
-    /* 
-    '& span .wd-icon-fill, & span .wd-icon-accent, & span .wd-icon-accent2': {
-      fill: cssVar(buttonVars.active.icon, base.blackPepper400),
+    // Hover Styles
+    '&:hover, &.hover': {
+      backgroundColor: cssVar(
+        buttonColorPropVars.hover.background,
+        cssVar(background, system.color.bg.contrast.strong)
+      ),
+      borderColor: cssVar(buttonColorPropVars.hover.border, cssVar(border, 'transparent')),
+      color: cssVar(buttonColorPropVars.hover.label, cssVar(label, system.color.fg.stronger)),
+      [systemIconStencil.vars.color]: cssVar(
+        buttonColorPropVars.hover.icon,
+        system.color.fg.stronger
+      ),
     },
-    */
-  },
-  '&:disabled, &.disabled': {
-    backgroundColor: cssVar(buttonVars.disabled.background, 'transparent'),
-    borderColor: cssVar(buttonVars.disabled.border, 'transparent'),
-    color: cssVar(buttonVars.disabled.label, base.blackPepper400),
-    [systemIconStencil.vars.color]: cssVar(buttonVars.disabled.icon, base.blackPepper400),
-    /* 
-    '& span .wd-icon-fill, & span .wd-icon-accent, & span .wd-icon-accent2': {
-      fill: cssVar(buttonVars.disabled.icon, base.blackPepper400),
+    '&:hover:active': {transitionDuration: '40ms'},
+    // Active Styles
+    '&:active, &.active': {
+      backgroundColor: cssVar(
+        buttonColorPropVars.active.background,
+        cssVar(background, 'transparent')
+      ),
+      borderColor: cssVar(buttonColorPropVars.active.border, cssVar(border, 'transparent')),
+      color: cssVar(buttonColorPropVars.active.label, cssVar(label, system.color.fg.strong)),
+      [systemIconStencil.vars.color]: cssVar(
+        buttonColorPropVars.active.icon,
+        system.color.fg.strong
+      ),
     },
-    */
+    // Disabled Styles
+    '&:disabled, &.disabled': {
+      backgroundColor: cssVar(
+        buttonColorPropVars.disabled.background,
+        cssVar(background, 'transparent')
+      ),
+      borderColor: cssVar(buttonColorPropVars.disabled.border, cssVar(border, 'transparent')),
+      color: cssVar(buttonColorPropVars.disabled.label, cssVar(label, system.color.fg.strong)),
+      [systemIconStencil.vars.color]: cssVar(
+        buttonColorPropVars.disabled.icon,
+        system.color.fg.strong
+      ),
+    },
+  }),
+  modifiers: {
+    /**
+     * Button modifiers that will overwrite the base styles of Buttons.
+     * - `Size`: These modifiers will dictate a size of a Button and has a set of styles to associated with it.
+     * - `iconPosition`: These modifiers will override the existing `Size` styles. These are specific to icon locations
+     * within a button or if there is only an icon and no text.
+     */
+    size: {
+      large: {
+        ...system.type.body.small,
+        fontWeight: system.fontWeight.bold,
+        height: px2rem(48),
+        paddingInline: system.space.x8,
+        minWidth: px2rem(112),
+      },
+      medium: {
+        ...system.type.subtext.large,
+        fontWeight: system.fontWeight.bold,
+        minWidth: px2rem(96),
+        paddingInline: system.space.x6,
+        height: system.space.x10,
+      },
+      small: {
+        ...system.type.subtext.large,
+        fontWeight: system.fontWeight.bold,
+        height: system.space.x8,
+        minWidth: system.space.x20,
+        paddingInline: system.space.x4,
+        gap: system.space.x1,
+      },
+      extraSmall: {
+        ...system.type.subtext.medium,
+        fontWeight: system.fontWeight.bold,
+        height: system.space.x6,
+        minWidth: 'auto',
+        paddingInline: system.space.x3,
+        gap: system.space.x1,
+      },
+    },
+    // IconPosition Styles
+    iconPosition: {
+      only: {padding: system.space.zero},
+      start: {},
+      end: {},
+    },
   },
+  // Compound Modifier Styles
+  compound: [
+    {
+      modifiers: {size: 'large', iconPosition: 'only'},
+      styles: {
+        minWidth: calc.multiply(system.space.x4, 3),
+      },
+    },
+    {
+      modifiers: {size: 'large', iconPosition: 'start'},
+      styles: {
+        paddingInlineStart: system.space.x6,
+        paddingInlineEnd: system.space.x8,
+      },
+    },
+    {
+      modifiers: {size: 'large', iconPosition: 'end'},
+      styles: {
+        paddingInlineStart: system.space.x8,
+        paddingInlineEnd: system.space.x6,
+      },
+    },
+    {
+      modifiers: {size: 'medium', iconPosition: 'only'},
+      styles: {
+        minWidth: system.space.x10,
+      },
+    },
+    {
+      modifiers: {size: 'medium', iconPosition: 'start'},
+      styles: {
+        paddingInlineStart: calc.multiply(system.space.x1, 5),
+        paddingInlineEnd: system.space.x6,
+      },
+    },
+    {
+      modifiers: {size: 'medium', iconPosition: 'end'},
+      styles: {
+        paddingInlineStart: system.space.x6,
+        paddingInlineEnd: calc.multiply(system.space.x1, 5),
+      },
+    },
+    {
+      modifiers: {size: 'small', iconPosition: 'only'},
+      styles: {
+        minWidth: system.space.x8,
+      },
+    },
+    {
+      modifiers: {size: 'small', iconPosition: 'start'},
+      styles: {
+        paddingInlineStart: system.space.x3,
+        paddingInlineEnd: system.space.x4,
+      },
+    },
+    {
+      modifiers: {size: 'small', iconPosition: 'end'},
+      styles: {
+        paddingInlineStart: system.space.x4,
+        paddingInlineEnd: system.space.x3,
+      },
+    },
+    {
+      modifiers: {size: 'extraSmall', iconPosition: 'only'},
+      styles: {
+        minWidth: system.space.x6,
+      },
+    },
+    {
+      modifiers: {size: 'extraSmall', iconPosition: 'start'},
+      styles: {
+        paddingInlineStart: system.space.x2,
+        paddingInlineEnd: system.space.x3,
+      },
+    },
+    {
+      modifiers: {size: 'extraSmall', iconPosition: 'end'},
+      styles: {
+        paddingInlineStart: system.space.x3,
+        paddingInlineEnd: system.space.x2,
+      },
+    },
+  ],
 });
 
 /**
- * Button modifiers that will overwrite the base styles of Buttons.
- * - `Size`: These modifiers will dictate a size of a Button and has a set of styles to associated with it.
- * - `iconPosition`: These modifiers will override the existing `Size` styles. These are specific to icon locations
- * within a button or if there is only an icon and no text.
- */
-export const buttonModifiers = createModifiers({
-  size: {
-    large: createStyles({
-      fontSize: system.space.x4,
-      lineHeight: system.space.x6,
-      letterSpacing: '0.01rem',
-      height: '48px',
-      paddingInline: system.space.x8,
-      minWidth: '112px',
-    }),
-    medium: createStyles({
-      fontSize: '0.875rem',
-      letterSpacing: '0.015rem',
-      minWidth: '96px',
-      paddingInline: system.space.x6,
-      height: system.space.x10,
-    }),
-    small: createStyles({
-      fontSize: '0.875rem',
-      letterSpacing: '0.015rem',
-      height: system.space.x8,
-      minWidth: system.space.x20,
-      paddingInline: system.space.x4,
-      gap: system.space.x1,
-    }),
-    extraSmall: createStyles({
-      fontSize: '0.75rem',
-      lineHeight: system.space.x4,
-      letterSpacing: '0.02rem',
-      height: system.space.x6,
-      minWidth: 'auto',
-      paddingInline: system.space.x3,
-      gap: system.space.x1,
-    }),
-  },
-  iconPosition: {
-    largeOnly: createStyles({
-      padding: '0',
-      minWidth: `calc(${system.space.x4} * 3)`,
-    }),
-    largeStart: createStyles({
-      paddingInlineStart: system.space.x6,
-      paddingInlineEnd: system.space.x8,
-    }),
-    largeEnd: createStyles({
-      paddingInlineStart: system.space.x8,
-      paddingInlineEnd: system.space.x6,
-    }),
-    mediumOnly: createStyles({padding: '0', minWidth: system.space.x10}),
-    mediumStart: createStyles({
-      paddingInlineStart: `calc(${system.space.x1} * 5)`,
-      paddingInlineEnd: system.space.x6,
-    }),
-    mediumEnd: createStyles({
-      paddingInlineStart: system.space.x6,
-      paddingInlineEnd: `calc(${system.space.x1} * 5)`,
-    }),
-    smallOnly: createStyles({padding: '0', minWidth: system.space.x8}),
-    smallStart: createStyles({
-      paddingInlineStart: system.space.x3,
-      paddingInlineEnd: system.space.x4,
-    }),
-    smallEnd: createStyles({
-      paddingInlineStart: system.space.x4,
-      paddingInlineEnd: system.space.x3,
-    }),
-    extraSmallOnly: createStyles({padding: '0', minWidth: system.space.x6}),
-    extraSmallStart: createStyles({
-      paddingInlineStart: system.space.x2,
-      paddingInlineEnd: system.space.x3,
-    }),
-    extraSmallEnd: createStyles({
-      paddingInlineStart: system.space.x3,
-      paddingInlineEnd: system.space.x2,
-    }),
-  },
-});
-
-export function capitalize(string: string = '') {
-  return string.charAt(0).toUpperCase() + string.substring(1);
-}
-
-export function getIconPosition(
-  size?: keyof typeof buttonModifiers.size,
-  iconPosition?: IconPositions,
-  children?: React.ReactNode
-): keyof typeof buttonModifiers.iconPosition {
-  return `${size}${capitalize(iconPosition)}` as keyof typeof buttonModifiers.iconPosition;
-}
-
-/**
- * The base button which all other buttons are built.
+ * The base button which which is the foundation of all Button variants (`PrimaryButton`,
+ * `SecondaryButton`, `TertiaryButton`, `DeleteButton`, `ToolbarIconButton` and `ToolbarDropdownButton`).
  */
 export const BaseButton = createComponent('button')({
   displayName: 'BaseButton',
@@ -330,16 +390,12 @@ export const BaseButton = createComponent('button')({
         ref={ref}
         type="button"
         {...mergeStyles(elemProps, [
-          baseButtonStyles,
-          buttonModifiers({
-            size: size,
-            iconPosition: getIconPosition(size, iconPosition, children),
-          }),
-          buttonVars.default(colors?.default || {}),
-          buttonVars.focus(colors?.focus || {}),
-          buttonVars.hover(colors?.hover || {}),
-          buttonVars.active(colors?.active || {}),
-          buttonVars.disabled(colors?.disabled || {}),
+          buttonStencil({size, iconPosition}),
+          buttonColorPropVars.default(colors?.default || {}),
+          buttonColorPropVars.focus(colors?.focus || {}),
+          buttonColorPropVars.hover(colors?.hover || {}),
+          buttonColorPropVars.active(colors?.active || {}),
+          buttonColorPropVars.disabled(colors?.disabled || {}),
         ])}
       >
         {children}
