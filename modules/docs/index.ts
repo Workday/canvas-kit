@@ -1,3 +1,4 @@
+export {CodeExamplePreview} from './lib/CodeExamplePreview';
 export * from './lib/specs';
 export * from './lib/InformationHighlight';
 export * from './lib/Specifications';
