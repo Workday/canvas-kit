@@ -11,6 +11,10 @@ const allVersions = [
     documentation: 'https://github.com/Workday/canvas-kit',
   },
   {
+    versionNumber: 10, // This is support, update this when we release v11
+    documentation: 'https://d2krrudi3mmzzw.cloudfront.net/v10/?path=/docs/welcome--page',
+  },
+  {
     versionNumber: 9, // This is support, update this when we release v11
     documentation: 'https://d2krrudi3mmzzw.cloudfront.net/v9/?path=/docs/welcome--page',
   },

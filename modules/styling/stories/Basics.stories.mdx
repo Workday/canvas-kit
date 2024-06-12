@@ -1,8 +1,6 @@
 import {SymbolDoc} from '@workday/canvas-kit-docs';
 
 import {CreateStyles} from './examples/CreateStyles';
-import {CreateVars} from './examples/CreateVars';
-import {CreateModifiers} from './examples/CreateModifiers';
 import {CreateStencil} from './examples/CreateStencil';
 import {CSProp} from './examples/CSProp';
 
@@ -32,31 +30,6 @@ The CSS will look like this:
 
 We're using `className` for simplicity here. Most components will use the `cs` prop instead for more
 versatility.
-
-<SymbolDoc name="createVars" />
-
-<ExampleCodeBlock code={CreateVars} />
-
-In this example, the HTML will look like:
-
-```html
-<div class="css-4iptxs" style="--background-c6kna: gray;"></div>
-<div class="css-4iptxs" style="--background-c6kna: blue;"></div>
-```
-
-And the CSS will look like:
-
-```css
-.css-4iptxs {
-  width: 100px;
-  height: 100px;
-  background-color: var(--background-c6kna);
-}
-```
-
-<SymbolDoc name="createModifiers" />
-
-<ExampleCodeBlock code={CreateModifiers} />
 
 ## Create Stencil
 
