@@ -1,4 +1,14 @@
-import {Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
+import {CodeExamplePreview, Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
+import {Basic} from './examples/Basic';
+import {NamedTabs} from './examples/NamedTabs';
+import {RightToLeft} from './examples/RightToLeft';
+import {OverflowTabs} from './examples/OverflowTabs';
+import {DisabledTab} from './examples/DisabledTab';
+import {Icons} from './examples/Icons';
+import {SinglePanel} from './examples/SinglePanel';
+import {AlternativeTabStop} from './examples/AlternativeTabStop';
+import {HoistedModel} from './examples/HoistedModel';
+import {DynamicTabs} from './examples/DynamicTabs';
 import * as TabsStories from './Tabs.stories';
 
 <Meta of={TabsStories} />
@@ -28,7 +38,7 @@ in a variety of ways: `Tabs.List`, `Tabs.Item` and `Tabs.Panel`. It follows the
 In this example, we set up a basic `Tabs` component with five tabs. This example uses a static API
 that does not support overflow.
 
-<ExampleCodeBlock of={TabsStories.Basic} />
+<CodeExamplePreview code={Basic} />
 
 ### Overflow Tabs
 
@@ -43,7 +53,7 @@ The dynamic API takes in any object, but since nothing is known about your objec
 [render prop](https://reactjs.org/docs/render-props.html) is necessary to instruct a list how it
 should render.
 
-<ExampleCodeBlock of={TabsStories.OverflowTabs} />
+<CodeExamplePreview code={OverflowTabs} />
 
 ### Hoisted Model
 
@@ -56,7 +66,7 @@ and provides direct access to its `state` and `events` outside of the `Tabs` com
 In this example, we set up external observation of the model state and create an external button to
 trigger an event to change the active tab.
 
-<ExampleCodeBlock of={TabsStories.HoistedModel} />
+<CodeExamplePreview code={HoistedModel} />
 
 ### Named Tabs
 
@@ -64,25 +74,25 @@ trigger an event to change the active tab.
 `onActivate` callback. This example is identical to the Basic Example, but with tabs named using
 `data-id` for the `Tabs.Item` and `Tabs.Panel` subcomponents.
 
-<ExampleCodeBlock of={TabsStories.NamedTabs} />
+<CodeExamplePreview code={NamedTabs} />
 
 ### Right-to-Left (RTL)
 
 `Tabs` supports right-to-left languages when specified in the `CanvasProvider` `theme`.
 
-<ExampleCodeBlock of={TabsStories.RightToLeft} />
+<CodeExamplePreview code={RightToLeft} />
 
 ### Disabled Tab
 
 Set the `disabled` prop of a `Tabs.Item` to `true` to disable it.
 
-<ExampleCodeBlock of={TabsStories.DisabledTab} />
+<CodeExamplePreview code={DisabledTab} />
 
 ### Tab Icons
 
 Tabs can have icons. Use the `Icon` and `Text` subcomponents.
 
-<ExampleCodeBlock of={TabsStories.Icons} />
+<CodeExamplePreview code={Icons} />
 
 ### Alternative Tab Stop
 
@@ -90,7 +100,7 @@ By default, tab panels are focusable for accessibility. If the contents of a tab
 focusable element, you may disable this default behavior by setting the `tabIndex` prop of
 `Tabs.Panel` to `undefined`. This example has a tab panel with a focusable button.
 
-<ExampleCodeBlock of={TabsStories.AlternativeTabStop} />
+<CodeExamplePreview code={AlternativeTabStop} />
 
 ### Single Tab Panel
 
@@ -101,7 +111,7 @@ attributes and callbacks can be found in the prop tables below for each subcompo
 In this example, we use a hoisted model and the `activeTab` property of the state to show content
 from the `contents` object.
 
-<ExampleCodeBlock of={TabsStories.SinglePanel} />
+<CodeExamplePreview code={SinglePanel} />
 
 ### Dynamic Tabs
 
@@ -110,7 +120,7 @@ of a tab. If not defined, by default it will append tabs to the end. In this exa
 stored as an array in the state, and we have a fixed tab at the end that can add new tabs to that
 array.
 
-<ExampleCodeBlock of={TabsStories.DynamicTabs} />
+<CodeExamplePreview code={DynamicTabs} />
 
 ## Component API
 

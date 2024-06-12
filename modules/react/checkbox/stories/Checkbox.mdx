@@ -1,4 +1,19 @@
-import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {
+  CodeExamplePreview,
+  SymbolDoc,
+  Specifications,
+  InformationHighlight,
+} from '@workday/canvas-kit-docs';
+import {Alert} from './examples/Alert';
+import {Basic} from './examples/Basic';
+import {Inverse} from './examples/Inverse';
+import {Disabled} from './examples/Disabled';
+import {Error} from './examples/Error';
+import {Indeterminate} from './examples/Indeterminate';
+import {LabelPosition} from './examples/LabelPosition';
+import {RefForwarding} from './examples/RefForwarding';
+import {Required} from './examples/Required';
+
 import * as CheckboxStories from './Checkbox.stories';
 
 <Meta of={CheckboxStories} />
@@ -36,19 +51,19 @@ Checkbox may be used on its own without [Form Field](/components/inputs/form-fie
 includes a `<label>` with a `for` attribute referencing the underlying `<input type="checkbox">`
 element.
 
-<ExampleCodeBlock of={CheckboxStories.Basic} />
+<CodeExamplePreview code={Basic} />
 
 ### Inverse
 
 Checkbox with inverse variation
 
-<ExampleCodeBlock of={CheckboxStories.Inverse} />
+<CodeExamplePreview code={Inverse} />
 
 ### Disabled
 
 Set the `disabled` prop of the Checkbox to prevent users from interacting with it.
 
-<ExampleCodeBlock of={CheckboxStories.Disabled} />
+<CodeExamplePreview code={Disabled} />
 
 ### Indeterminate
 
@@ -59,28 +74,28 @@ A common use case for an indeterminate Checkbox is when the value of a parent Ch
 on a number of child Checkboxes. The parent Checkbox is set to the indeterminate state if some (but
 not all) of its children are checked.
 
-<ExampleCodeBlock of={CheckboxStories.Indeterminate} />
+<CodeExamplePreview code={Indeterminate} />
 
 ### Ref Forwarding
 
 Checkbox supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will forward
 `ref` to its underlying `<input type="checkbox">` element.
 
-<ExampleCodeBlock of={CheckboxStories.RefForwarding} />
+<CodeExamplePreview code={RefForwarding} />
 
 ### Label Position Horizontal
 
 Set the `orientation` prop of the Form Field to designate the position of the label relative to the
 input component. By default, the orientation will be set to `vertical`.
 
-<ExampleCodeBlock of={CheckboxStories.LabelPosition} />
+<CodeExamplePreview code={LabelPosition} />
 
 ### Required
 
 Set the `required` prop of a wrapping Form Field to `true` to indicate that the field is required.
 Labels for required fields are suffixed by a red asterisk.
 
-<ExampleCodeBlock of={CheckboxStories.Required} />
+<CodeExamplePreview code={Required} />
 
 ### Error States
 
@@ -95,11 +110,11 @@ or `Checkbox.ErrorType.Error` if Form Field is not being used.
 
 #### Alert
 
-<ExampleCodeBlock of={CheckboxStories.Alert} />
+<CodeExamplePreview code={Alert} />
 
 #### Error
 
-<ExampleCodeBlock of={CheckboxStories.Error} />
+<CodeExamplePreview code={Error} />
 
 ### Custom Styles
 

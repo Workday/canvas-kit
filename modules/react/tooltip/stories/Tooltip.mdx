@@ -1,5 +1,14 @@
-import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {CodeExamplePreview, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
 import * as TooltipStories from './Tooltip.stories';
+import {Default} from './examples/Default';
+import {CustomContent} from './examples/CustomContent';
+import {DelayedTooltip} from './examples/DelayedTooltip';
+import {DescribeType} from './examples/DescribeType';
+import {Muted} from './examples/Muted';
+import {Placements} from './examples/Placements';
+import {Ellipsis} from './examples/Ellipsis';
+import {LineClamp} from './examples/LineClamp';
+import {UseTooltip} from './examples/UseTooltip';
 
 <Meta of={TooltipStories} />
 
@@ -52,7 +61,7 @@ icon. This labels the button for both sighted users and screen readers. A toolti
 `aria-label` to child elements for the accessibility tree and a visual tooltip during mouse hover
 and focus events.
 
-<ExampleCodeBlock of={TooltipStories.Default} />
+<CodeExamplePreview code={Default} />
 
 ### Describing an Element
 
@@ -61,7 +70,7 @@ provide ancillary information, the `type` can be set to `describe`. This will ad
 to the target element. This will allow screen reader users to hear the name of the control that is
 being focused and the ancillary tooltip information.
 
-<ExampleCodeBlock of={TooltipStories.DescribeType} />
+<CodeExamplePreview code={DescribeType} />
 
 ### Muted Tooltips
 
@@ -69,7 +78,7 @@ If a tooltip does not need to be visible to screen reader users, or you handle a
 tooltip yourself, you can set the `type` to `muted`. This will not add any special ARIA attributes
 to the target element.
 
-<ExampleCodeBlock of={TooltipStories.Muted} />
+<CodeExamplePreview code={Muted} />
 
 ### Custom Content
 
@@ -78,14 +87,14 @@ formatting. The content will lose all semantic meaning when read by a screen rea
 content or a focusable element is needed by your UI, a tooltip is not a good choice. Consider using
 a dialog instead.
 
-<ExampleCodeBlock of={TooltipStories.CustomContent} />
+<CodeExamplePreview code={CustomContent} />
 
 ### Delayed Tooltip
 
 The default delay for showing and hiding a tooltip are 300ms and 100ms, respectively. You can
 control the length of the delay by providing custom `showDelay` and `hideDelay` in ms.
 
-<ExampleCodeBlock of={TooltipStories.DelayedTooltip} />
+<CodeExamplePreview code={DelayedTooltip} />
 
 ### Placements
 
@@ -93,7 +102,7 @@ The tooltip allows for a `placement` configuration. The tooltip uses
 [PopperJS](https://popper.js.org/) to position tooltips, so any valid PopperJS placement is valid
 for tooltips.
 
-<ExampleCodeBlock of={TooltipStories.Placements} />
+<CodeExamplePreview code={Placements} />
 
 ### Tooltips on overflowing content
 
@@ -137,7 +146,7 @@ If truncation is required, here are a few guidelines to insure minimal impact on
 Canvas Kit Buttons have this style applied to the text inside them. `OverflowTooltip` in combination
 with a max-width can show a tooltip only when overflow is detected:
 
-<ExampleCodeBlock of={TooltipStories.Ellipsis} />
+<CodeExamplePreview code={Ellipsis} />
 
 ### Line Clamp
 
@@ -154,7 +163,7 @@ element.scrollWidth > element.clientWidth || element.scrollHeight > element.clie
 Here's an example using the `-webkit-line-clamp` property (multi-line ellipsis which works in all
 browsers):
 
-<ExampleCodeBlock of={TooltipStories.LineClamp} />
+<CodeExamplePreview code={LineClamp} />
 
 Other truncation techniques should be supported as well, even JavaScript ones as long as overflow is
 triggered somehow and detectable differences in scroll size and client size.
@@ -166,7 +175,7 @@ The `Tooltip` component is a combination of the `TooltipContainer` (a styled ele
 behavior is required, these sub-components can be composed in a custom container element. This
 example uses those parts directly while being functionally equivalent to the original basic example.
 
-<ExampleCodeBlock of={TooltipStories.UseTooltip} />
+<CodeExamplePreview code={UseTooltip} />
 
 ## Component API
 

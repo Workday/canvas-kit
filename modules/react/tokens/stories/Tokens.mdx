@@ -1,4 +1,7 @@
+import {CodeExamplePreview, InformationHighlight} from '@workday/canvas-kit-docs';
 import * as TokenStories from './Tokens.stories';
+import {BorderRadius, Space, Depth, Colors, Type} from './examples/Tokens';
+import {Overview} from './examples/Overview';
 
 <Meta of={TokenStories} />
 
@@ -19,13 +22,13 @@ import * as TokenStories from './Tokens.stories';
 Tokens are the smallest pieces of our Design System with the primary function of storing UI
 information. They enable building components and patterns with consistency across our platforms.
 
-<ExampleCodeBlock of={TokenStories.Docs} />
+<CodeExamplePreview code={Overview} />
 
 ## Border Radius
 
 ### Usage
 
-<ExampleCodeBlock of={TokenStories.BorderRadius} />
+<CodeExamplePreview code={BorderRadius} />
 
 ## Colors
 
@@ -34,7 +37,7 @@ with six shades in each color set.
 
 ### Usage
 
-<ExampleCodeBlock of={TokenStories.Colors} />
+<CodeExamplePreview code={Colors} />
 
 ## Depth
 
@@ -43,7 +46,7 @@ predictability within the Canvas user interface.
 
 ### Usage
 
-<ExampleCodeBlock of={TokenStories.Depth} />
+<CodeExamplePreview code={Depth} />
 
 ## Space
 
@@ -51,7 +54,7 @@ This guide will help you make decisions when spacing elements in your designs us
 
 ### Usage
 
-<ExampleCodeBlock of={TokenStories.Space} />
+<CodeExamplePreview code={Space} />
 
 ## Type
 
@@ -60,4 +63,4 @@ through our products.
 
 ### Usage
 
-<ExampleCodeBlock of={TokenStories.Type} />
+<CodeExamplePreview code={Type} />

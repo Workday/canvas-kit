@@ -1,4 +1,4 @@
-import {SymbolDoc} from '@workday/canvas-kit-docs';
+import {CodeExamplePreview, SymbolDoc} from '@workday/canvas-kit-docs';
 import {LoadingSparkles} from '@workday/canvas-kit-preview-react/loading-sparkles';
 import * as LoadingSparklesStories from './LoadingSparkles.stories';
 
@@ -37,11 +37,11 @@ In the example, we wrapped `LoadingSparkles` inside our `AriaLiveRegion` compone
 you should not have multiple ARIA live regions on the page at once. If you already have a live
 region, consider sending these loading messages there instead of adding another region.
 
-<ExampleCodeBlock of={LoadingSparklesStories.Basic} />
+<CodeExamplePreview code={Basic} />
 
 ### Right-to-Left (RTL)
 
-<ExampleCodeBlock of={LoadingSparklesStories.RTL} />
+<CodeExamplePreview code={RTL} />
 
 ## Component API
 

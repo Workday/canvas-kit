@@ -1,5 +1,5 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {ExampleCodeBlock} from '../../../../utils/storybook';
+
 import mdxDoc from './Heading.mdx';
 
 import {Heading} from '@workday/canvas-kit-react/text';
@@ -13,7 +13,6 @@ export default {
   parameters: {
     docs: {
       page: mdxDoc,
-      components: {ExampleCodeBlock},
     },
   },
 } as Meta<typeof Heading>;

@@ -1,9 +1,8 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {ExampleCodeBlock} from '../../../../utils/storybook';
+
 import mdxDoc from './Checkbox.mdx';
 
 import {Checkbox} from '@workday/canvas-kit-react/checkbox';
-import {InformationHighlight} from '@workday/canvas-kit-docs';
 
 import {Alert as AlertExample} from './examples/Alert';
 import {Basic as BasicExample} from './examples/Basic';
@@ -22,7 +21,6 @@ export default {
   parameters: {
     docs: {
       page: mdxDoc,
-      components: {ExampleCodeBlock, InformationHighlight},
     },
   },
 } as Meta<typeof Checkbox>;

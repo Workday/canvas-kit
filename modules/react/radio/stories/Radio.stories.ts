@@ -1,8 +1,6 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {ExampleCodeBlock} from '../../../../utils/storybook';
-import mdxDoc from './Radio.mdx';
 
-import {InformationHighlight} from '@workday/canvas-kit-docs';
+import mdxDoc from './Radio.mdx';
 
 import {Radio} from '@workday/canvas-kit-react/radio';
 
@@ -23,7 +21,6 @@ export default {
   parameters: {
     docs: {
       page: mdxDoc,
-      components: {ExampleCodeBlock, InformationHighlight},
     },
   },
 } as Meta<typeof Radio>;

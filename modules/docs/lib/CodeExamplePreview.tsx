@@ -1,8 +1,10 @@
 import React from 'react';
-import MarkdownToJSX from 'markdown-to-jsx';
-import {BaseButton, buttonStencil} from '@workday/canvas-kit-react/button';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import {purebasic} from 'react-syntax-highlighter/dist/esm/styles/hljs';
+
+import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {Card} from '@workday/canvas-kit-react/card';
-import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const cardStencil = createStencil({
@@ -14,17 +16,11 @@ const cardStencil = createStencil({
     },
     '[data-part="code-block"]': {
       display: 'none',
-      marginTop: system.space.x1,
+      marginTop: calc.divide(system.space.x1, 2),
       boxShadow: system.depth[1],
       borderRadius: system.shape.x1,
     },
     '[data-part="code-toggle-btn"]': {
-      [buttonStencil.vars.borderRadius]: system.shape.x1,
-      borderTop: `${px2rem(1)} solid ${system.color.border.divider}`,
-      borderLeft: `${px2rem(1)} solid ${system.color.border.divider}`,
-      '&:hover': {
-        [buttonStencil.vars.background]: 'transparent',
-      },
       position: 'absolute',
       right: calc.negate(px2rem(1)),
       bottom: calc.negate(px2rem(1)),
@@ -35,6 +31,12 @@ const cardStencil = createStencil({
       true: {
         '[data-part="code-block"]': {
           display: 'block',
+          borderTopLeftRadius: system.shape.zero,
+          borderTopRightRadius: system.shape.zero,
+        },
+        '[data-part="example-block"]': {
+          borderBottomLeftRadius: system.shape.zero,
+          borderBottomRightRadius: system.shape.zero,
         },
       },
     },
@@ -43,24 +45,37 @@ const cardStencil = createStencil({
 
 export const CodeExamplePreview = ({code}: any) => {
   const [isCodeDisplayed, setCodeDisplayed] = React.useState(false);
-  console.log(code);
+
   return (
     <div {...cardStencil({opened: isCodeDisplayed})}>
       <Card data-part="example-block">
         <Card.Body>
           {React.createElement(code)}
-          <BaseButton
-            size="extraSmall"
-            onClick={() => setCodeDisplayed(!isCodeDisplayed)}
-            data-part="code-toggle-btn"
-          >
-            {!isCodeDisplayed ? 'Show Code' : 'Hide Code'}
-          </BaseButton>
+          {code && (
+            <TertiaryButton
+              size="extraSmall"
+              onClick={() => setCodeDisplayed(!isCodeDisplayed)}
+              data-part="code-toggle-btn"
+            >
+              {!isCodeDisplayed ? 'Show Code' : 'Hide Code'}
+            </TertiaryButton>
+          )}
         </Card.Body>
       </Card>
       <Card data-part="code-block">
         <Card.Body>
-          <MarkdownToJSX children={`\`\`\`tsx\n${code.__RAW__}\n\`\`\``} />
+          {code && (
+            <SyntaxHighlighter
+              language="typescript"
+              style={purebasic}
+              customStyle={{
+                background: 'transparent',
+                fontSize: cssVar(system.fontSize.subtext.large),
+                lineHeight: cssVar(system.lineHeight.subtext.large),
+              }}
+              children={code.__RAW__}
+            />
+          )}
         </Card.Body>
       </Card>
     </div>

@@ -1,5 +1,10 @@
-import {SymbolDoc} from '@workday/canvas-kit-docs';
+import {CodeExamplePreview, SymbolDoc} from '@workday/canvas-kit-docs';
 import * as SearchFormStories from './SearchForm.stories';
+import {Basic} from './examples/Basic';
+import {CustomTheme} from './examples/CustomTheme';
+import {Grow} from './examples/Grow';
+import {RTL} from './examples/RTL';
+import {Theming} from './examples/Theming';
 
 <Meta of={SearchFormStories} />
 
@@ -22,24 +27,24 @@ You will most likely use `SearchForm` within the context of a `Header` component
 to see its functionality as a standalone component. Below is a basic example that filters results
 based on search input.
 
-<ExampleCodeBlock of={SearchFormStories.Basic} />
+<CodeExamplePreview code={Basic} />
 
 ### Grow
 
 If you'd like `SearchForm` to grow to the width of its container, set the `grow` prop to `true`.
 
-<ExampleCodeBlock of={SearchFormStories.Grow} />
+<CodeExamplePreview code={Grow} />
 
 ### Theming
 
 `SearchForm` can be themed to use one of the preset `SearchThemes`: `Light`, `Dark`, or
 `Transparent`. Below is an example of `SearchForm` using the `Dark` theme.
 
-<ExampleCodeBlock of={SearchFormStories.Theming} />
+<CodeExamplePreview code={Theming} />
 
 You can also provide more specific theming values by providing specific `SearchThemeAttributes`.
 
-<ExampleCodeBlock of={SearchFormStories.CustomTheme} />
+<CodeExamplePreview code={CustomTheme} />
 
 Below is a table of attributes that can be supplied to `SearchForm`:
 
@@ -50,7 +55,7 @@ Below is a table of attributes that can be supplied to `SearchForm`:
 `SearchForm` provides bidirectional support out of the box. You shouldn't need to provide any
 additional configuration.
 
-<ExampleCodeBlock of={SearchFormStories.RTL} />
+<CodeExamplePreview code={RTL} />
 
 ## Component API
 

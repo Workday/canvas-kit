@@ -1,6 +1,5 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {ExampleCodeBlock} from '../../../../utils/storybook';
-import {InformationHighlight} from '@workday/canvas-kit-docs';
+
 import mdxDoc from './TextInput.mdx';
 
 import {TextInput} from '@workday/canvas-kit-react/text-input';
@@ -23,7 +22,6 @@ export default {
   parameters: {
     docs: {
       page: mdxDoc,
-      components: {ExampleCodeBlock, InformationHighlight},
     },
   },
 } as Meta<typeof TextInput>;

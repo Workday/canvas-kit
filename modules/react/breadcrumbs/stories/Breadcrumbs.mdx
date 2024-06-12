@@ -1,4 +1,9 @@
-import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {CodeExamplePreview, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {Basic} from './examples/Basic';
+import {OverflowBreadcrumbs} from './examples/Overflow';
+import {RTLOverflowList} from './examples/RTL';
+import {CurrentItemTruncation} from './examples/CurrentItemTruncation';
+import {LinkTruncation} from './examples/LinkTruncation';
 import * as BreadcrumbsStories from './Breadcrumbs.stories';
 
 <Meta of={BreadcrumbsStories} />
@@ -31,7 +36,7 @@ with little additional configuration. As seen in the example below, you don't ne
 accessibility attributes, because they are baked into the component. You only need to add
 `aria-label` attribute to a `nav` component through a `aria-label` prop of `Breadcrumbs`.
 
-<ExampleCodeBlock of={BreadcrumbsStories.Basic} />
+<CodeExamplePreview code={Basic} />
 
 Note that all links require an `href` to be properly identified.
 
@@ -44,7 +49,7 @@ dynamic API handles the React `key` for you based on the item's identifier. The 
 either an `id` on each item object or a `getId` function that returns an identifier based on the
 item. The example below uses an `id` property on each item.
 
-<ExampleCodeBlock of={BreadcrumbsStories.OverflowBreadcrumbs} />
+<CodeExamplePreview code={OverflowBreadcrumbs} />
 
 The dynamic API takes in any object, but since nothing is known about your object, a
 [render prop](https://reactjs.org/docs/render-props.html) is necessary to instruct a list how it
@@ -58,7 +63,7 @@ managing the length of link text. The `maxWidth` is set to `350px` by default an
 needed. Note that tooltips will only render when text is truncated. The example below uses a
 `maxWidth` of `150px`.
 
-<ExampleCodeBlock of={BreadcrumbsStories.LinkTruncation} />
+<CodeExamplePreview code={LinkTruncation} />
 
 ### Item Truncation
 
@@ -69,7 +74,7 @@ adjusted as needed. Normally, this is a non-focusable element; when truncated, h
 `tabIndex` to `0` to enable the tooltip to appear on keyboard focus. Note that tooltips will only
 render when text is truncated. The example below uses a `maxWidth` of `100px`.
 
-<ExampleCodeBlock of={BreadcrumbsStories.CurrentItemTruncation} />
+<CodeExamplePreview code={CurrentItemTruncation} />
 
 ### Right-to-Left (RTL)
 
@@ -77,7 +82,7 @@ render when text is truncated. The example below uses a `maxWidth` of `100px`.
 direction in your application's Canvas theme, you don't need to do anything else to make it work.
 All you need to supply is the translated text for items and ARIA labels.
 
-<ExampleCodeBlock of={BreadcrumbsStories.RTLOverflowList} />
+<CodeExamplePreview code={RTLOverflowList} />
 
 ### Handling Redirects
 

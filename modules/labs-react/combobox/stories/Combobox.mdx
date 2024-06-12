@@ -1,4 +1,12 @@
-import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {CodeExamplePreview, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+
+import {Basic} from './examples/Basic';
+import {DisabledItem} from './examples/DisabledItem';
+import {GroupOfResult} from './examples/GroupOfResult';
+import {Grow} from './examples/Grow';
+import {NoClearButton} from './examples/NoClearButton';
+import {RTL} from './examples/RTL';
+
 import * as ComboboxStories from './Combobox.stories';
 
 <Meta of={ComboboxStories} />
@@ -24,24 +32,24 @@ yarn add @workday/canvas-kit-react
 
 ### Autocomplete
 
-<ExampleCodeBlock of={ComboboxStories.Basic} />
+<CodeExamplePreview code={Basic} />
 
 ### Grow
 
-<ExampleCodeBlock of={ComboboxStories.Grow} />
+<CodeExamplePreview code={Grow} />
 
 ### No Clear Button
 
-<ExampleCodeBlock of={ComboboxStories.NoClearButton} />
+<CodeExamplePreview code={NoClearButton} />
 
 ### Group Of Result
 
-<ExampleCodeBlock of={ComboboxStories.GroupOfResult} />
+<CodeExamplePreview code={GroupOfResult} />
 
 ### Disabled Item
 
-<ExampleCodeBlock of={ComboboxStories.DisabledItem} />
+<CodeExamplePreview code={DisabledItem} />
 
 ### RTL
 
-<ExampleCodeBlock of={ComboboxStories.RTL} />
+<CodeExamplePreview code={RTL} />

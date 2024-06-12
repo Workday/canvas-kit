@@ -1,4 +1,11 @@
-import {SymbolDoc} from '@workday/canvas-kit-docs';
+import {CodeExamplePreview, SymbolDoc} from '@workday/canvas-kit-docs';
+import {Basic} from './examples/Basic';
+import {CustomRange} from './examples/CustomRange';
+import {JumpControls} from './examples/JumpControls';
+import {GoToForm} from './examples/GoToForm';
+import {HoistedModel} from './examples/HoistedModel';
+import {ResponsiveRange} from './examples/ResponsiveRange';
+import {RTL} from './examples/RTL';
 import * as PaginationStories from './pagination.stories';
 
 <Meta of={PaginationStories} />
@@ -28,7 +35,7 @@ In this example, we set up a basic `Pagination` component with the default range
 well as step controls (`Pagination.StepToPreviousButton` and `Pagination.StepToNextButton`) that
 allow you to move to the previous page or the next page.
 
-<ExampleCodeBlock of={PaginationStories.Basic} />
+<CodeExamplePreview code={Basic} />
 
 Note that you must include `Pagination.AdditionalDetails` to meet accessibility standards (with one
 exception, see [`Pagination.AdditionalDetails`](#paginationadditionaldetails) for more information).
@@ -48,40 +55,40 @@ and provides direct access to its `state` and `events` outside of the `Paginatio
 In this example, we set up external observation of the model state and create an external button to
 trigger an event to change the current page.
 
-<ExampleCodeBlock of={PaginationStories.HoistedModel} />
+<CodeExamplePreview code={HoistedModel} />
 
 ### Jump Controls
 
 This example adds jump controls (`Pagination.JumpToFirstButton` and `Pagination.JumpToLastButton`)
 that allow you to skip to the first and last pages in the range.
 
-<ExampleCodeBlock of={PaginationStories.JumpControls} />
+<CodeExamplePreview code={JumpControls} />
 
 ### GoTo Form
 
 This example adds a form (`Pagination.GoToForm`) that allows you to skip to a specific page within
 the range.
 
-<ExampleCodeBlock of={PaginationStories.GoToForm} />
+<CodeExamplePreview code={GoToForm} />
 
 ### Right-to-Left (RTL)
 
 `Pagination` supports right-to-left languages when specified in the `CanvasProvider` `theme`.
 
-<ExampleCodeBlock of={PaginationStories.RTL} />
+<CodeExamplePreview code={RTL} />
 
 ### Custom Range
 
 This example uses a custom range that allows you to control the width of the component.
 
-<ExampleCodeBlock of={PaginationStories.CustomRange} />
+<CodeExamplePreview code={CustomRange} />
 
 ### Responsive Range
 
 In some situations, you might want to adjust Pagination's range based on the width of the container.
 You can use `useResizeObserver` to accomplish this as in the example below.
 
-<ExampleCodeBlock of={PaginationStories.ResponsiveRange} />
+<CodeExamplePreview code={ResponsiveRange} />
 
 ## Component API
 

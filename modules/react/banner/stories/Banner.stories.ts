@@ -1,5 +1,5 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {ExampleCodeBlock} from '../../../../utils/storybook';
+
 import mdxDoc from './Banner.mdx';
 
 import {Banner} from '@workday/canvas-kit-react/banner';
@@ -22,7 +22,6 @@ export default {
   parameters: {
     docs: {
       page: mdxDoc,
-      components: {ExampleCodeBlock},
     },
   },
 } as Meta<typeof Banner>;

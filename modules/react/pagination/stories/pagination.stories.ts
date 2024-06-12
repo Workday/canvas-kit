@@ -1,5 +1,5 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {ExampleCodeBlock} from '../../../../utils/storybook';
+
 import mdxDoc from './pagination.mdx';
 
 import {Pagination} from '@workday/canvas-kit-react/pagination';
@@ -19,7 +19,6 @@ export default {
   parameters: {
     docs: {
       page: mdxDoc,
-      components: {ExampleCodeBlock},
     },
   },
 } as Meta<typeof Pagination>;

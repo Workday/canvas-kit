@@ -1,4 +1,7 @@
-import {SymbolDoc} from '@workday/canvas-kit-docs';
+import {CodeExamplePreview, SymbolDoc} from '@workday/canvas-kit-docs';
+import {Basic} from './examples/Text/Basic';
+import {TypeLevel} from './examples/Text/TypeLevel';
+import {Variant} from './examples/Text/Variant';
 import * as TextStories from './Text.stories';
 
 <Meta of={TextStories} />
@@ -25,7 +28,7 @@ as `margin` and `padding`, as well as text styling props such as `fontSize` and 
 `Text` renders a `<span>` element by default. You may override the rendered element using the `as`
 prop.
 
-<ExampleCodeBlock of={TextStories.Basic} />
+<CodeExamplePreview code={Basic} />
 
 ### Type Level and Variant
 
@@ -34,12 +37,12 @@ prop.
 
 `typeLevel` hooks into the [Canvas type hierarchy](/tokens/type/#type-styles).
 
-<ExampleCodeBlock of={TextStories.TypeLevel} />
+<CodeExamplePreview code={TypeLevel} />
 
 `variant` allows you to layer [additional styling](/tokens/type/#variants) to aid users'
 understanding of the text being rendered.
 
-<ExampleCodeBlock of={TextStories.Variant} />
+<CodeExamplePreview code={Variant} />
 
 ### Custom Styles
 

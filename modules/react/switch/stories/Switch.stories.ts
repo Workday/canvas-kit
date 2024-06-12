@@ -1,8 +1,6 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {ExampleCodeBlock} from '../../../../utils/storybook';
-import mdxDoc from './Switch.mdx';
 
-import {InformationHighlight} from '@workday/canvas-kit-docs';
+import mdxDoc from './Switch.mdx';
 
 import {Switch} from '@workday/canvas-kit-react/switch';
 
@@ -20,7 +18,6 @@ export default {
   parameters: {
     docs: {
       page: mdxDoc,
-      components: {ExampleCodeBlock, InformationHighlight},
     },
   },
 } as Meta<typeof Switch>;

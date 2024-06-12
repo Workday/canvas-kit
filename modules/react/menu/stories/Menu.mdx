@@ -1,4 +1,7 @@
-import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {CodeExamplePreview, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {Basic} from './examples/Basic';
+import {ContextMenu} from './examples/ContextMenu';
+import {Icons} from './examples/Icons';
 import * as MenuStories from './Menu.stories';
 
 <Meta of={MenuStories} />
@@ -22,7 +25,7 @@ yarn add @workday/canvas-kit-react
 `Menu` is typically triggered by an action such as pressing a button. The `Menu` comes with a
 `Target` subcomponent and a Popup.
 
-<ExampleCodeBlock of={MenuStories.Basic} />
+<CodeExamplePreview code={Basic} />
 
 `Menu` will automatically focus on the cursor item (first item by default). The `Menu` uses a menu
 model which composes a list model and a popup model and sets up accessibility features for you.
@@ -42,7 +45,7 @@ using roving tabindex. Below is table of supported keyboard shortcuts and associ
 
 ### Context Menu
 
-<ExampleCodeBlock of={MenuStories.ContextMenu} />
+<CodeExamplePreview code={ContextMenu} />
 
 ### Icons
 
@@ -53,7 +56,7 @@ component will jump to an item based on the keys the user types. If the user typ
 component will jump to the first item that starts with a "C". This functionality requires knowledge
 about the text of the item.
 
-<ExampleCodeBlock of={MenuStories.Icons} />
+<CodeExamplePreview code={Icons} />
 
 ## Component API
 

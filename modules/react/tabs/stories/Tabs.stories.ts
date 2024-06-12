@@ -1,5 +1,5 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {ExampleCodeBlock} from '../../../../utils/storybook';
+
 import mdxDoc from './Tabs.mdx';
 
 import {Tabs} from '@workday/canvas-kit-react/tabs';
@@ -22,7 +22,6 @@ export default {
   parameters: {
     docs: {
       page: mdxDoc,
-      components: {ExampleCodeBlock},
     },
   },
 } as Meta<typeof Tabs>;

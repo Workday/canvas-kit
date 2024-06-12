@@ -1,4 +1,12 @@
-import {SymbolDoc} from '@workday/canvas-kit-docs';
+import {CodeExamplePreview, SymbolDoc} from '@workday/canvas-kit-docs';
+
+import {WithReadOnly} from './examples/WithReadOnly';
+import {WithAvatar} from './examples/WithAvatar';
+import {Basic} from './examples/Basic';
+import {WithCount} from './examples/WithCount';
+import {WithRemovable} from './examples/WithRemovable';
+import {WithList} from './examples/WithList';
+
 import * as PillStories from './Pill.stories';
 
 <Meta of={PillStories} />
@@ -32,21 +40,21 @@ You can render an icon inside the `Pill` with `Pill.Icon`. It will render a `plu
 but it can be customized by providing an icon to the `icon` prop. Because it uses `SystemIcon` under
 the hood, you also have to all `SystemIconProps`.
 
-<ExampleCodeBlock of={PillStories.Basic} />
+<CodeExamplePreview code={Basic} />
 
 #### Avatar
 
 You can render an avatar image inside the `Pill` with `Pill.Avatar`. It should appear before the
 `Pill` text. Because it uses `Avatar` under the hood, you also have access to all `AvatarProps`.
 
-<ExampleCodeBlock of={PillStories.WithAvatar} />
+<CodeExamplePreview code={WithAvatar} />
 
 #### Count
 
 The count appears after the label. It is usually associated with the label. If you have a category,
 the count will dirrectly correlate to that category.
 
-<ExampleCodeBlock of={PillStories.WithCount} />
+<CodeExamplePreview code={WithCount} />
 
 ### Read Only
 
@@ -58,7 +66,7 @@ non-interactive element that is used to display information.
 > an ellipsis and render an OverflowTooltip on hover and focus. This max width can be changed by
 > providing a `maxWidth` prop on the Pill.
 
-<ExampleCodeBlock of={PillStories.WithReadOnly} />
+<CodeExamplePreview code={WithReadOnly} />
 
 ### Removable Pills
 
@@ -80,7 +88,7 @@ element.
 The default icon for `Pill.IconButton` is `xSmallIcon` but this can also be overwritten by passing
 an `icon` prop to `Pill.IconButton`
 
-<ExampleCodeBlock of={PillStories.WithRemovable} />
+<CodeExamplePreview code={WithRemovable} />
 
 ### List of Pills
 
@@ -90,7 +98,7 @@ skills.
 In order to achieve this, use our `Flex` component to wrap each `Pill` and space them out
 accordingly.
 
-<ExampleCodeBlock of={PillStories.WithList} />
+<CodeExamplePreview code={WithList} />
 
 ## Component API
 

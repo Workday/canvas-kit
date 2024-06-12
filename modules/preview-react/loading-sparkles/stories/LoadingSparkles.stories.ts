@@ -1,5 +1,4 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {ExampleCodeBlock} from '../../../../utils/storybook';
 import mdxDoc from './LoadingSparkles.mdx';
 import {LoadingSparkles} from '@workday/canvas-kit-preview-react/loading-sparkles';
 
@@ -14,7 +13,6 @@ export default {
   parameters: {
     docs: {
       page: mdxDoc,
-      components: {ExampleCodeBlock},
     },
   },
 } as Meta<typeof LoadingSparkles>;

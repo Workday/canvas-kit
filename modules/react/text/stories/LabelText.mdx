@@ -1,4 +1,8 @@
-import {SymbolDoc} from '@workday/canvas-kit-docs';
+import {CodeExamplePreview, SymbolDoc} from '@workday/canvas-kit-docs';
+import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
+import {Basic} from './examples/LabelText/Basic';
+import {Cursor} from './examples/LabelText/Cursor';
+import {Disabled} from './examples/LabelText/Disabled';
 import * as LabelTextStories from './LabelText.stories';
 
 <Meta of={LabelTextStories} />
@@ -28,21 +32,21 @@ yarn add @workday/canvas-kit-react
 `LabelText` renders a `<label>` element. This component is deprecated in favor of `FormField.Label`
 since it should be used in tandem with form elements.
 
-<ExampleCodeBlock of={LabelTextStories.Basic} />
+<CodeExamplePreview code={Basic} />
 
 ### Cursor
 
 Set the `cursor` prop to render a particular cursor when the mouse pointer is hovering over the
 label.
 
-<ExampleCodeBlock of={LabelTextStories.Cursor} />
+<CodeExamplePreview code={Cursor} />
 
 ### Disabled
 
 Set the `disabled` prop to provide a visual cue that the label and its associated element are
 disabled.
 
-<ExampleCodeBlock of={LabelTextStories.Disabled} />
+<CodeExamplePreview code={Disabled} />
 
 ## Component API
 

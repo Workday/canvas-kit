@@ -1,7 +1,5 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {ExampleCodeBlock} from '../../../../utils/storybook';
 import {DeprecatedMenu} from '@workday/canvas-kit-preview-react/menu';
-import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
 import mdxDoc from './Menu.mdx';
 // examples
 
@@ -19,7 +17,6 @@ export default {
   parameters: {
     docs: {
       page: mdxDoc,
-      components: {ExampleCodeBlock, StatusIndicator},
     },
   },
 } as Meta<typeof DeprecatedMenu>;

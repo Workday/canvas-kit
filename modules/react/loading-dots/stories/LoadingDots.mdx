@@ -1,3 +1,7 @@
+import {CodeExamplePreview} from '@workday/canvas-kit-docs';
+import {Basic} from './examples/Basic';
+import {RTL} from './examples/RTL';
+import {Accessible} from './examples/Accessible';
 import * as LoadingDotsStories from './LoadingDots.stories';
 
 <Meta of={LoadingDotsStories} />
@@ -19,11 +23,11 @@ yarn add @workday/canvas-kit-react
 
 ### Basic Example
 
-<ExampleCodeBlock of={LoadingDotsStories.Basic} />
+<CodeExamplePreview code={Basic} />
 
 ### Right-to-Left (RTL)
 
-<ExampleCodeBlock of={LoadingDotsStories.RTL} />
+<CodeExamplePreview code={RTL} />
 
 ### Custom Styles
 
@@ -44,7 +48,7 @@ components included in Canvas to describe both the appearance and disappearance 
 - We can declare `LoadingDots` a labeled graphic by passing `role="img"` and
   `aria-label="Please wait..."` into the component
 
-<ExampleCodeBlock of={LoadingDotsStories.Accessible} />
+<CodeExamplePreview code={Accessible} />
 
 ## Props
 

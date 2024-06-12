@@ -1,9 +1,8 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {ExampleCodeBlock} from '../../../../utils/storybook';
+
 import mdxDoc from './FormField.mdx';
 
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
 
 import {Alert as AlertExample} from './examples/Alert';
 import {AlertLabel as AlertLabelExample} from './examples/AlertLabel';
@@ -24,7 +23,6 @@ export default {
   parameters: {
     docs: {
       page: mdxDoc,
-      components: {ExampleCodeBlock, StatusIndicator},
     },
   },
 } as Meta<typeof FormField>;

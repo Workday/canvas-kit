@@ -1,4 +1,15 @@
-import {SymbolDoc, Specifications, InformationHighlight} from '@workday/canvas-kit-docs';
+import {
+  CodeExamplePreview,
+  SymbolDoc,
+  Specifications,
+  InformationHighlight,
+} from '@workday/canvas-kit-docs';
+import {Alert} from './examples/Alert';
+import {Basic} from './examples/Basic';
+import {Disabled} from './examples/Disabled';
+import {Error} from './examples/Error';
+import {LabelPosition} from './examples/LabelPosition';
+import {RefForwarding} from './examples/RefForwarding';
 import * as SwitchStories from './Switch.stories';
 
 <Meta of={SwitchStories} />
@@ -34,27 +45,27 @@ yarn add @workday/canvas-kit-react
 Switch should be used in tandem with [Form Field](/components/inputs/form-field/) to meet
 accessibility standards.
 
-<ExampleCodeBlock of={SwitchStories.Basic} />
+<CodeExamplePreview code={Basic} />
 
 ### Disabled
 
 Set the `disabled` prop of the Switch to prevent users from interacting with it.
 
-<ExampleCodeBlock of={SwitchStories.Disabled} />
+<CodeExamplePreview code={Disabled} />
 
 ### Ref Forwarding
 
 Switch supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will forward
 `ref` to its underlying `<input type="checkbox">` element.
 
-<ExampleCodeBlock of={SwitchStories.RefForwarding} />
+<CodeExamplePreview code={RefForwarding} />
 
 ### Label Position Horizontal
 
 Set the `orientation` prop of the Form Field to designate the position of the label relative to the
 input component. By default, the orientation will be set to `vertical`.
 
-<ExampleCodeBlock of={SwitchStories.LabelPosition} />
+<CodeExamplePreview code={LabelPosition} />
 
 ### Error States
 
@@ -68,11 +79,11 @@ The `error` prop may be applied directly to the Switch with a value of `Switch.E
 
 #### Alert
 
-<ExampleCodeBlock of={SwitchStories.Alert} />
+<CodeExamplePreview code={Alert} />
 
 #### Error
 
-<ExampleCodeBlock of={SwitchStories.Error} />
+<CodeExamplePreview code={Error} />
 
 ### Custom Styles
 

@@ -1,5 +1,4 @@
 import {Meta} from '@storybook/react';
-import {ExampleCodeBlock} from '../../../../utils/storybook';
 
 import mdxDoc from './Assets.mdx';
 
@@ -14,9 +13,6 @@ export default {
   parameters: {
     docs: {
       page: mdxDoc,
-      components: {
-        ExampleCodeBlock,
-      },
     },
   },
 } as Meta;

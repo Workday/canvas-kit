@@ -1,5 +1,7 @@
-import {Grid} from '@workday/canvas-kit-react/layout';
-
+import {CodeExamplePreview} from '@workday/canvas-kit-docs';
+import {Basic} from './examples/Grid/Basic';
+import {GridLayout} from './examples/Grid/GridLayout';
+import {GridLayoutInteractive} from './examples/Grid/GridLayoutInteractive';
 import * as GridStories from './Grid.stories';
 
 <Meta of={GridStories} />
@@ -35,7 +37,7 @@ we're able to arrange them by referencing their names in the parent `Grid` conta
 uses a 12-column grid with `SideBar` occupying three columns and `BodyContent` occupying the
 remaining nine.
 
-<ExampleCodeBlock of={GridStories.Basic} />
+<CodeExamplePreview code={Basic} />
 
 ### Using Grid Items
 
@@ -56,14 +58,14 @@ adjust accordingly.
 > tab order or the order it is read in by a screen reader. Learn more about
 > [CSS Grid layout and accessibility](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/CSS_Grid_Layout_and_Accessibility).
 
-<ExampleCodeBlock of={GridStories.GridLayoutInteractive} />
+<CodeExamplePreview code={GridLayoutInteractive} />
 
 Let's look at another `Grid.Item` example. Below, we have a `Grid` container with two rows: one with
 seven elements and another with two elements. Each row is a `Grid.Item` that wraps a nested `Grid`.
 This allows you to use `Grid.Item` to place a layout where needed. Here, we use `gridRowStart` to
 place the row with elements 3 through 7 before the row with elements 1 and 2.
 
-<ExampleCodeBlock of={GridStories.GridLayout} />
+<CodeExamplePreview code={GridLayout} />
 
 ### Grid vs. Flex vs. Box
 

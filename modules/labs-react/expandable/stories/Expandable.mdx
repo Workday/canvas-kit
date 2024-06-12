@@ -1,4 +1,12 @@
-import {SymbolDoc} from '@workday/canvas-kit-docs';
+import {CodeExamplePreview, SymbolDoc} from '@workday/canvas-kit-docs';
+
+import {StartIcon} from './examples/StartIcon';
+import {EndIcon} from './examples/EndIcon';
+import {Avatar} from './examples/Avatar';
+import {Depth} from './examples/Depth';
+import {RTL} from './examples/RTL';
+import {LongTitle} from './examples/LongTitle';
+import {HoistedModel} from './examples/HoistedModel';
 
 import * as ExpandableStories from './Expandable.stories';
 
@@ -23,7 +31,7 @@ For a basic expandable container with a chevron icon before the title, place`Exp
 `Expandable.Icon` with a value of `start`. `Expandable.Icon` will use a right chevron icon when
 collapsed and a down chevron icon when expanded.
 
-<ExampleCodeBlock of={ExpandableStories.StartIcon} />
+<CodeExamplePreview code={StartIcon} />
 
 ### End Icon
 
@@ -32,7 +40,7 @@ For an expandable container with a chevron icon after the title, place `Expandab
 `Expandable.Icon` with a value of `end`. `Expandable.Icon` will use a down chevron icon when
 collapsed and an up chevron icon when expanded.
 
-<ExampleCodeBlock of={ExpandableStories.EndIcon} />
+<CodeExamplePreview code={EndIcon} />
 
 ### With Avatar
 
@@ -41,27 +49,27 @@ To include an avatar image, `Expandable.Avatar` should be placed between `Expand
 to `Expandable.Icon` depending on whether the `Expandable.Icon` is placed before or after
 `Expandable.Title`.
 
-<ExampleCodeBlock of={ExpandableStories.Avatar} />
+<CodeExamplePreview code={Avatar} />
 
 ### Right to Left (RTL)
 
 Expandable container has bidirectional support and should function as expected with RTL languages as
 long as the content direction is set in your Canvas theme.
 
-<ExampleCodeBlock of={ExpandableStories.RTL} />
+<CodeExamplePreview code={RTL} />
 
 ### Depth
 
 The `depth` prop passed to `Expandable` allows you to adjust the visual elevation of a component
 using our depth tokens.
 
-<ExampleCodeBlock of={ExpandableStories.Depth} />
+<CodeExamplePreview code={Depth} />
 
 ### Title Wrap
 
 Long titles will wrap to the next line and increase the height of the container.
 
-<ExampleCodeBlock of={ExpandableStories.LongTitle} />
+<CodeExamplePreview code={LongTitle} />
 
 You can also have direct access to the model if
 
@@ -70,7 +78,7 @@ You can also have direct access to the model if
 If you you need direct access to the model, you can hoist it with the `useExpandableModel` hook. In
 the example below, we're hoisting the models to expand and collapse all three containers at once.
 
-<ExampleCodeBlock of={ExpandableStories.HoistedModel} />
+<CodeExamplePreview code={HoistedModel} />
 
 ## Component API
 

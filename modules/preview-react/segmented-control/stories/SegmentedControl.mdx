@@ -1,5 +1,14 @@
-import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {CodeExamplePreview, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
 import * as SegmentedControlStories from './SegmentedControl.stories';
+
+import {Basic} from './examples/Basic';
+import {Disabled} from './examples/Disabled';
+import {TextAndIcon} from './examples/TextAndIcon';
+import {TextOnly} from './examples/TextOnly';
+import {Sizes} from './examples/Sizes';
+import {Vertical} from './examples/Vertical';
+import {RTL} from './examples/RTL';
+import {Dynamic} from './examples/Dynamic';
 
 <Meta of={SegmentedControlStories} />
 
@@ -28,7 +37,7 @@ The example below contains a `SegmentedControl` with four icon-only buttons. Eac
 using a `SegmentedControl.Item` and is paired with a tooltip describing the button's function. Only
 one button can be active at a time.
 
-<ExampleCodeBlock of={SegmentedControlStories.Basic} />
+<CodeExamplePreview code={Basic} />
 
 Note that you must provide `SegmentedControl.List` with an `aria-label` prop for accessibility
 reasons.
@@ -53,21 +62,21 @@ The icon-only variation is the only variation which supports a vertical orientat
 the default horizontal orientation. Set the `orientation` prop of `SegmentedControl` to `vertical`
 to configure the component to render vertically.
 
-<ExampleCodeBlock of={SegmentedControlStories.Vertical} />
+<CodeExamplePreview code={Vertical} />
 
 #### Text-Only
 
 To render a text-only `SegmentedControl`, omit the `icon` prop from `SegmentedControl.Item` and
 provide it with text content.
 
-<ExampleCodeBlock of={SegmentedControlStories.TextOnly} />
+<CodeExamplePreview code={TextOnly} />
 
 #### Text-and-Icon
 
 To render a text-and-icon `SegmentedControl`, apply the `icon` prop to `SegmentedControl.Item` and
 provide it with text content.
 
-<ExampleCodeBlock of={SegmentedControlStories.TextAndIcon} />
+<CodeExamplePreview code={TextAndIcon} />
 
 ### Sizes
 
@@ -77,19 +86,19 @@ provide it with text content.
 - `medium` (Default)
 - `large`
 
-<ExampleCodeBlock of={SegmentedControlStories.Sizes} />
+<CodeExamplePreview code={Sizes} />
 
 ### Disabled
 
 Set the `disabled` prop of `SegmentedControl` to disable the entire component including its buttons.
 
-<ExampleCodeBlock of={SegmentedControlStories.Disabled} />
+<CodeExamplePreview code={Disabled} />
 
 ### Right-to-Left (RTL)
 
 `SegmentedControl` supports right-to-left languages when specified in the `CanvasProvider` `theme`.
 
-<ExampleCodeBlock of={SegmentedControlStories.RTL} />
+<CodeExamplePreview code={RTL} />
 
 ### Dynamic Items
 
@@ -98,7 +107,7 @@ Set the `disabled` prop of `SegmentedControl` to disable the entire component in
 of statically providing the JSX for each `SegmentedControl.Item`, you pass an array of `items` in
 the `model` state and provide a render function to display the items.
 
-<ExampleCodeBlock of={SegmentedControlStories.Dynamic} />
+<CodeExamplePreview code={Dynamic} />
 
 ## Component API
 

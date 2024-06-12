@@ -1,5 +1,5 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {ExampleCodeBlock} from '../../../../utils/storybook';
+
 import mdxDoc from './Breadcrumbs.mdx';
 
 import {Breadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
@@ -17,7 +17,6 @@ export default {
   parameters: {
     docs: {
       page: mdxDoc,
-      components: {ExampleCodeBlock},
     },
   },
 } as Meta<typeof Breadcrumbs>;

@@ -1,5 +1,4 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {ExampleCodeBlock} from '../../../../utils/storybook';
 import mdxDoc from './Pill.mdx';
 
 import {Pill} from '@workday/canvas-kit-preview-react/pill';
@@ -18,7 +17,6 @@ export default {
   parameters: {
     docs: {
       page: mdxDoc,
-      components: {ExampleCodeBlock},
     },
   },
 } as Meta<typeof Pill>;

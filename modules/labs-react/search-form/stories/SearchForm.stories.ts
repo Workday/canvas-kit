@@ -1,5 +1,4 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {ExampleCodeBlock, withAutodocsEnabled} from '../../../../utils/storybook';
 import {SearchForm} from '@workday/canvas-kit-labs-react/search-form';
 import mdxDoc from './SearchForm.mdx';
 // examples
@@ -16,9 +15,6 @@ const meta: Meta<typeof SearchForm> = {
   parameters: {
     docs: {
       page: mdxDoc,
-      components: {
-        ExampleCodeBlock,
-      },
     },
   },
 };

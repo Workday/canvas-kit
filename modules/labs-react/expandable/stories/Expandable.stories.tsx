@@ -1,5 +1,4 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {ExampleCodeBlock} from '../../../../utils/storybook';
 import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
 import mdxDoc from './Expandable.mdx';
 // examples
@@ -18,7 +17,6 @@ export default {
   parameters: {
     docs: {
       page: mdxDoc,
-      components: {ExampleCodeBlock},
     },
   },
 } as Meta<typeof Expandable>;

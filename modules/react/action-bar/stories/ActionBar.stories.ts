@@ -1,5 +1,4 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {ExampleCodeBlock} from '../../../../utils/storybook';
 import mdxDoc from './ActionBar.mdx';
 
 import {ActionBar} from '@workday/canvas-kit-react/action-bar';
@@ -17,7 +16,6 @@ export default {
   parameters: {
     docs: {
       page: mdxDoc,
-      components: {ExampleCodeBlock},
     },
   },
 } as Meta<typeof ActionBar>;

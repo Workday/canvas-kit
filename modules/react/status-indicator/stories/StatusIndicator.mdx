@@ -1,13 +1,19 @@
-import {SymbolDoc} from '@workday/canvas-kit-docs';
+import {CodeExamplePreview, SymbolDoc} from '@workday/canvas-kit-docs';
+import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
+
+import {Basic} from './examples/Basic';
+import {Icon} from './examples/Icon';
+import {Emphasis} from './examples/Emphasis';
+import {MaxWidth} from './examples/MaxWidth';
 import * as StatusIndicatorStories from './StatusIndicator.stories';
 
 <Meta of={StatusIndicatorStories} />
 
 # Canvas Kit Status Indicator
 
-<PreviewStatusIndicator variant="red">
-  <PreviewStatusIndicator.Label>Deprecated</PreviewStatusIndicator.Label>
-</PreviewStatusIndicator>
+<StatusIndicator variant="red">
+  <StatusIndicator.Label>Deprecated</StatusIndicator.Label>
+</StatusIndicator>
 
 `StatusIndicator` in Main has been deprecated and will be removed in a future major version. Please
 use
@@ -28,7 +34,7 @@ yarn add @workday/canvas-kit-react
 
 ### Basic Example
 
-<ExampleCodeBlock of={StatusIndicatorStories.Basic} />
+<CodeExamplePreview code={Basic} />
 
 Note that the `type` prop is required (there is no default value). `type` accepts the following
 values:
@@ -50,7 +56,7 @@ accepts the following values:
 - `StatusIndicator.Emphasis.High` (Default)
 - `StatusIndicator.Emphasis.Low`
 
-<ExampleCodeBlock of={StatusIndicatorStories.Emphasis} />
+<CodeExamplePreview code={Emphasis} />
 
 Note that the `High` and `Low` emphasis levels are identical for `Transparent` Status Indicators.
 
@@ -59,7 +65,7 @@ Note that the `High` and `Low` emphasis levels are identical for `Transparent` S
 Set the `icon` prop of the Status Indicator to a Canvas System Icon to display that icon beside the
 label.
 
-<ExampleCodeBlock of={StatusIndicatorStories.Icon} />
+<CodeExamplePreview code={Icon} />
 
 ### Max Width
 
@@ -70,7 +76,7 @@ Avoid truncation wherever possible by using shorter text in Status Indicators. I
 truncation is necessary, you should use an `OverflowTooltip`. For the full text to be accessible
 when you do this, you should make the tooltip focusable with `tabIndex`.
 
-<ExampleCodeBlock of={StatusIndicatorStories.MaxWidth} />
+<CodeExamplePreview code={MaxWidth} />
 
 ## Component API
 

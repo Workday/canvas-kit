@@ -1,9 +1,7 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {ExampleCodeBlock} from '../../../../utils/storybook';
 import mdxDoc from './TextInput.mdx';
 
 import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
-import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
 
 import {Basic as BasicExample} from './examples/Basic';
 import {Disabled as DisabledExample} from './examples/Disabled';
@@ -29,7 +27,6 @@ export default {
   parameters: {
     docs: {
       page: mdxDoc,
-      components: {ExampleCodeBlock, StatusIndicator},
     },
   },
 } as Meta<typeof TextInput>;

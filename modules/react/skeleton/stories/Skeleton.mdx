@@ -1,4 +1,10 @@
-import {SymbolDoc} from '@workday/canvas-kit-docs';
+import {CodeExamplePreview, SymbolDoc} from '@workday/canvas-kit-docs';
+import {Basic} from './examples/Basic';
+import {Color} from './examples/Color';
+import {Header} from './examples/Header';
+import {Shape} from './examples/Shape';
+import {Simulation} from './examples/Simulation';
+import {Text} from './examples/Text';
 import * as SkeletonStories from './Skeleton.stories';
 
 <Meta of={SkeletonStories} />
@@ -29,11 +35,11 @@ Here's an example of how you might compose Skeleton components (along with non-S
 such as `Box` and `Flex`) to create a loading placeholder for a piece of content comprised of an
 icon, a heading, and some text.
 
-<ExampleCodeBlock of={SkeletonStories.Basic} />
+<CodeExamplePreview code={Basic} />
 
 And here's an example that simulates how that Skeleton might work in practice.
 
-<ExampleCodeBlock of={SkeletonStories.Simulation} />
+<CodeExamplePreview code={Simulation} />
 
 Press the **Simulate Loading** button to simulate the loading of the content (customize the loading
 time using the **Load Time** field), or check the **Loading** check box to force the Skeleton to
@@ -45,7 +51,7 @@ All Skeleton subcomponents accept a `backgroundColor` prop which can be used to 
 the subcomponent. This is generally only recommended to be used for dark or gray backgrounds to
 ensure the Skeleton components are visible.
 
-<ExampleCodeBlock of={SkeletonStories.Color} />
+<CodeExamplePreview code={Color} />
 
 ### Text
 
@@ -53,13 +59,13 @@ ensure the Skeleton components are visible.
 a width of `100%` and a fixed height of `21px`, with the last line having a width of `60%` if there
 are multiple lines.
 
-<ExampleCodeBlock of={SkeletonStories.Text} />
+<CodeExamplePreview code={Text} />
 
 ### Header
 
 `Skeleton.Header` renders a placeholder for header content such as headings.
 
-<ExampleCodeBlock of={SkeletonStories.Header} />
+<CodeExamplePreview code={Header} />
 
 ### Shape
 
@@ -67,7 +73,7 @@ are multiple lines.
 Set the `height`, `width`, and `borderRadius` props of the `Skeleton.Shape` to create various
 rectangular and circular shapes.
 
-<ExampleCodeBlock of={SkeletonStories.Shape} />
+<CodeExamplePreview code={Shape} />
 
 ## Component API
 

@@ -1,9 +1,8 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {ExampleCodeBlock} from '../../../../utils/storybook';
+
 import mdxDoc from './StatusIndicator.mdx';
 
 import {StatusIndicator} from '@workday/canvas-kit-react/status-indicator';
-import {StatusIndicator as PreviewStatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
 
 import {Basic as BasicExample} from './examples/Basic';
 import {Icon as IconExample} from './examples/Icon';
@@ -17,7 +16,6 @@ export default {
   parameters: {
     docs: {
       page: mdxDoc,
-      components: {ExampleCodeBlock, PreviewStatusIndicator},
     },
   },
 } as Meta<typeof StatusIndicator>;

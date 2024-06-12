@@ -1,5 +1,4 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {ExampleCodeBlock} from '../../../../utils/storybook';
 import mdxDoc from './SegmentedControl.mdx';
 
 import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
@@ -20,7 +19,6 @@ export default {
   parameters: {
     docs: {
       page: mdxDoc,
-      components: {ExampleCodeBlock},
     },
   },
 } as Meta<typeof SegmentedControl>;

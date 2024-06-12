@@ -1,6 +1,4 @@
 import {Meta} from '@storybook/react';
-import {InformationHighlight} from '@workday/canvas-kit-docs';
-import {ExampleCodeBlock} from '../../../../utils/storybook';
 
 import mdxDoc from './Tokens.mdx';
 
@@ -19,10 +17,6 @@ export default {
   parameters: {
     docs: {
       page: mdxDoc,
-      components: {
-        ExampleCodeBlock,
-        InformationHighlight,
-      },
     },
   },
 } as Meta;

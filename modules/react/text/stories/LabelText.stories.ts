@@ -1,5 +1,5 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {ExampleCodeBlock} from '../../../../utils/storybook';
+
 import mdxDoc from './LabelText.mdx';
 
 import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
@@ -15,7 +15,6 @@ export default {
   parameters: {
     docs: {
       page: mdxDoc,
-      components: {ExampleCodeBlock, StatusIndicator},
     },
   },
 } as Meta<typeof LabelText>;

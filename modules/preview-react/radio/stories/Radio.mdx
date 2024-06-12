@@ -1,4 +1,17 @@
-import {SymbolDoc} from '@workday/canvas-kit-docs';
+import {CodeExamplePreview, SymbolDoc} from '@workday/canvas-kit-docs';
+
+import {Basic} from './examples/Basic';
+import {Alert} from './examples/Alert';
+import {Error} from './examples/Error';
+import {Inverse} from './examples/Inverse';
+import {LabelPosition} from './examples/LabelPosition';
+import {NoValue} from './examples/NoValue';
+import {RefForwarding} from './examples/RefForwarding';
+import {Disabled} from './examples/Disabled';
+import {Required} from './examples/Required';
+import {Custom} from './examples/Custom';
+import {StandaloneRadio} from './examples/StandaloneRadio';
+
 import * as RadioStories from './Radio.stories';
 
 <Meta of={RadioStories} />
@@ -30,7 +43,7 @@ provide an `onChange` handler to the `RadioGroup` to track the selected value as
 `useFieldset` prop is set to `true` to meet accessibility standards. This ensures the `label` text
 from `FormField` is attached to the `RadioGroup` and read out as a group for voiceover.
 
-<ExampleCodeBlock of={RadioStories.Basic} />
+<CodeExamplePreview code={Basic} />
 
 Our example uses [React state](<(https://react.dev/learn/state-a-components-memory)>) to track the
 value of the `RadioGroup`.
@@ -43,35 +56,35 @@ value of the `RadioGroup`.
 Set the `variant` prop of `RadioGroup.RadioButton` to `inverse` to ensure proper contrast on dark
 backgrounds.
 
-<ExampleCodeBlock of={RadioStories.Inverse} />
+<CodeExamplePreview code={Inverse} />
 
 ### Radio Group with No Value
 
 Omit the `value` prop from `RadioGroup` to render the group with no selected
 `RadioGroup.RadioButton`.
 
-<ExampleCodeBlock of={RadioStories.NoValue} />
+<CodeExamplePreview code={NoValue} />
 
 ### Ref Forwarding
 
 `RadioGroup.RadioButton` supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html).
 It will forward `ref` to its underlying `<input type="radio">` element.
 
-<ExampleCodeBlock of={RadioStories.RefForwarding} />
+<CodeExamplePreview code={RefForwarding} />
 
 ### Label Position
 
 Set the `orientation` prop of the Form Field to designate the position of the label relative to the
 input component. By default, the orientation will be set to `vertical`.
 
-<ExampleCodeBlock of={RadioStories.LabelPosition} />
+<CodeExamplePreview code={LabelPosition} />
 
 ### Required
 
 Set the `required` prop of the wrapping `FormField` to `true` to indicate that the field is
 required. Labels for required fields are suffixed by a red asterisk.
 
-<ExampleCodeBlock of={RadioStories.Required} />
+<CodeExamplePreview code={Required} />
 
 ### Disabled
 
@@ -79,21 +92,21 @@ Set the `disabled` prop of `RadioGroup.RadioButton` to prevent users from intera
 careful not to disable a pre-selected radio button as this will block keyboard access to the entire
 `RadioGroup`.
 
-<ExampleCodeBlock of={RadioStories.Disabled} />
+<CodeExamplePreview code={Disabled} />
 
 ### Custom Radio Button
 
 Use `RadioGroup.Label` instead of `RadioGroup.RadioButton` if you need direct access to the label
 and the radio input. This will allow you to apply custom styling to the text and radio input.
 
-<ExampleCodeBlock of={RadioStories.Custom} />
+<CodeExamplePreview code={Custom} />
 
 ### Standalone Radio Button
 
 Use `StyledRadioButton` when you want a styled radio button on its own without using `RadioGroup`.
 You will need to handle behavior and accessibility.
 
-<ExampleCodeBlock of={RadioStories.StandaloneRadio} />
+<CodeExamplePreview code={StandaloneRadio} />
 
 Use `RadioGroup.Label` when you want more control styling the text and radio input but still want
 some behavior handled for you.
@@ -111,13 +124,13 @@ associated to the `RadioGroup` and read out by voiceover.
 
 Use the alert state when a selection is valid but there is additional information.
 
-<ExampleCodeBlock of={RadioStories.Alert} />
+<CodeExamplePreview code={Alert} />
 
 #### Error
 
 Use the error state when the selection is no longer valid.
 
-<ExampleCodeBlock of={RadioStories.Error} />
+<CodeExamplePreview code={Error} />
 
 ### React Hook Form
 

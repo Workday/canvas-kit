@@ -1,5 +1,14 @@
-import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {
+  CodeExamplePreview,
+  InformationHighlight,
+  SymbolDoc,
+  Specifications,
+} from '@workday/canvas-kit-docs';
 import * as ColorPreviewStories from './ColorPreview.stories';
+
+import {Basic} from './examples/Basic';
+import {LabelPosition} from './examples/LabelPosition';
+import {RefForwarding} from './examples/RefForwarding';
 
 <Meta of={ColorPreviewStories} />
 
@@ -31,21 +40,21 @@ yarn add @workday/canvas-kit-react
 
 ### Basic Example
 
-<ExampleCodeBlock of={ColorPreviewStories.Basic} />
+<CodeExamplePreview code={Basic} />
 
 ### Ref Forwarding
 
 Color Preview supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will
 forward `ref` to its underlying `<input type="text">` element.
 
-<ExampleCodeBlock of={ColorPreviewStories.RefForwarding} />
+<CodeExamplePreview code={RefForwarding} />
 
 ### Label Position Horizontal
 
 Set the `orientation` prop of the Form Field to designate the position of the label relative to the
 input component. By default, the orientation will be set to `vertical`.
 
-<ExampleCodeBlock of={ColorPreviewStories.LabelPosition} />
+<CodeExamplePreview code={LabelPosition} />
 
 ## Component API
 

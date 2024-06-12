@@ -1,4 +1,5 @@
-import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {CodeExamplePreview, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {Basic} from './examples/Basic';
 import * as SegmentedControlStories from './SegmentedControl.stories';
 
 <Meta of={SegmentedControlStories} />
@@ -22,7 +23,7 @@ Here is a basic example of a Segmented Control with multiple nested `Button`s. *
 managing state using a unique `value` for each `Button` child is encouraged, you can also use
 indexes and omit the `value` field. It is strongly recommended to not mix these two methods.
 
-<ExampleCodeBlock of={SegmentedControlStories.Basic} />
+<CodeExamplePreview code={Basic} />
 
 ## Component API
 

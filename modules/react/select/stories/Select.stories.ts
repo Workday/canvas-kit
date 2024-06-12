@@ -1,8 +1,6 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {ExampleCodeBlock} from '../../../../utils/storybook';
-import mdxDoc from './Select.mdx';
 
-import {InformationHighlight} from '@workday/canvas-kit-docs';
+import mdxDoc from './Select.mdx';
 
 import {Select} from '@workday/canvas-kit-react/select';
 
@@ -30,7 +28,6 @@ export default {
   parameters: {
     docs: {
       page: mdxDoc,
-      components: {ExampleCodeBlock, InformationHighlight},
     },
   },
 } as Meta<typeof Select>;

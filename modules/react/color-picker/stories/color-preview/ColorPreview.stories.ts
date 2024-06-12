@@ -1,9 +1,7 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {ExampleCodeBlock} from '../../../../../utils/storybook';
 import mdxDoc from './ColorPreview.mdx';
 
 import {ColorPreview} from '@workday/canvas-kit-react/color-picker';
-import {InformationHighlight} from '@workday/canvas-kit-docs';
 
 import {Basic as BasicExample} from './examples/Basic';
 import {LabelPosition as LabelPositionExample} from './examples/LabelPosition';
@@ -16,7 +14,6 @@ export default {
   parameters: {
     docs: {
       page: mdxDoc,
-      components: {ExampleCodeBlock, InformationHighlight},
     },
   },
 } as Meta<typeof ColorPreview>;

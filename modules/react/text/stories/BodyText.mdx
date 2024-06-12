@@ -1,4 +1,5 @@
-import {SymbolDoc} from '@workday/canvas-kit-docs';
+import {CodeExamplePreview, SymbolDoc} from '@workday/canvas-kit-docs';
+import {Basic} from './examples/BodyText/Basic';
 import * as BodyTextStories from './BodyText.stories';
 
 <Meta of={BodyTextStories} />
@@ -26,7 +27,7 @@ the [Canvas type hierarchy](/tokens/type/#type-styles).
 `BodyText` renders a `<p>` element by default with styles equivalent to `type.levels.body[size]`.
 You may override the rendered element using the `as` prop.
 
-<ExampleCodeBlock of={BodyTextStories.Basic} />
+<CodeExamplePreview code={Basic} />
 
 ### Custom Styles
 

@@ -1,5 +1,4 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {ExampleCodeBlock} from '../../../../utils/storybook';
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import mdxDoc from './FormField.mdx';
 // examples
@@ -25,7 +24,6 @@ export default {
   parameters: {
     docs: {
       page: mdxDoc,
-      components: {ExampleCodeBlock},
     },
   },
 } as Meta<typeof FormField>;
