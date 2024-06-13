@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Box} from '@workday/canvas-kit-react/layout';
 
-export const TextExample = () => (
+export const Text = () => (
   <Box padding="m" border="solid 4px" borderColor="blueberry300" color="blackPepper500">
     <Box as="h3" fontSize="large" fontWeight="bold" margin="zero">
       The Elements of Typographic Style

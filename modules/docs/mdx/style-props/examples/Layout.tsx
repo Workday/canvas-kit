@@ -9,7 +9,7 @@ const baseStyles = {
   alignItems: 'flex-start',
 };
 
-export const LayoutExample = () => (
+export const Layout = () => (
   <Flex alignItems="flex-end">
     <Flex
       backgroundColor="cinnamon300"

@@ -4,7 +4,7 @@ export function deepMerge<T, S>(target: T, source: S): T & S {
     return source as T & S;
   }
 
-  Object.keys(source).forEach(key => {
+  Object.keys(source as object).forEach(key => {
     const targetValue = target[key as keyof T];
     const sourceValue = source[key as keyof S];
 

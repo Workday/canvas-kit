@@ -96,4 +96,12 @@ module.exports = {
     curly: 'error',
     radix: 'error',
   },
+  overrides: [
+    {
+      files: ['**/*.stories.tsx'],
+      rules: {
+        'react-hooks/rules-of-hooks': 'off',
+      },
+    },
+  ],
 };

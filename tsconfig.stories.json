@@ -12,7 +12,7 @@
     "noImplicitAny": false,
     "strictNullChecks": false,
     "noUnusedLocals": false,
-    "types": [],
+    "types": ["mdx"],
     "incremental": false,
     "skipLibCheck": true
   }

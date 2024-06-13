@@ -13,6 +13,7 @@ const depCheckOptions = {
     '@testing-library/react',
     '@testing-library/react-hooks',
     '@storybook/react',
+    '@workday/canvas-kit-docs',
     'expect-type',
     'react',
     'react-dom',

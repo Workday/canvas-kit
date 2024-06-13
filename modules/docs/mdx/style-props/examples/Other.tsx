@@ -10,7 +10,7 @@ const baseStyles = {
   padding: 'xs',
 };
 
-export const OtherExample = () => (
+export const Other = () => (
   <Box>
     <Box
       backgroundColor="cinnamon300"

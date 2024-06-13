@@ -18,6 +18,43 @@
     margin-top: 48px !important;
     padding-bottom: 16px;
   }
+
+  .docblock-code-toggle {
+    margin: 0;
+    border: 0 none;
+    padding: 4px 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: #2e3438;
+    background: #ffffff;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 700;
+    border-top: 1px solid hsla(203, 50%, 30%, 0.15);
+    border-left: 1px solid hsla(203, 50%, 30%, 0.15);
+    margin-left: -1px;
+    border-radius: 4px 0 0 0;
+  }
+  .docblock-code-toggle:focus {
+    box-shadow: rgb(30, 167, 253) 0px -3px 0px 0px inset;
+    outline: none 0px;
+  }
+
+  .example-code-block .sbdocs-preview {
+    margin-bottom: 4px !important;
+  }
+
+  .example-code-block--expanded .sbdocs-preview {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+
+  .example-code-block .docblock-source {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    margin-top: 0 !important;
+  }
 </style>
 <!-- preload fonts for Chromatic -->
 <link rel="preload" href="Roboto-Light.ttf" as="font" type="font/ttf" crossorigin />

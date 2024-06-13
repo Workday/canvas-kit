@@ -9,7 +9,7 @@ const baseStyles = {
   padding: 'xs',
 };
 
-export const PositionExample = () => {
+export const Position = () => {
   return (
     <>
       <Box

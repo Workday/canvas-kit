@@ -6,7 +6,7 @@ const baseStyles = {
   padding: 'xs',
 };
 
-export const GridItemExample = () => (
+export const GridItem = () => (
   <Grid
     gridGap="xs"
     gridTemplateColumns="1fr 3fr"

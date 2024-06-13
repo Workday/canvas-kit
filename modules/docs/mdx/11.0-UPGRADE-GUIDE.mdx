@@ -67,9 +67,10 @@ A note to the reader:
 
 In v11, all the components listed in this guide have started using our new
 [Canvas Tokens Web](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
-In v10, we provided token fallbacks so that a component would not be missing a token/value if the tokens were not defined. In v11 you must add `@workday/canvas-tokens-web` to ensure our
-components are properly styled and the variables are defined. For more information on installing and
-using, please reference our tokens
+In v10, we provided token fallbacks so that a component would not be missing a token/value if the
+tokens were not defined. In v11 you must add `@workday/canvas-tokens-web` to ensure our components
+are properly styled and the variables are defined. For more information on installing and using,
+please reference our tokens
 [docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
 
 ## Codemod
@@ -355,7 +356,7 @@ Components affected:
     <Table.Row>
       <Table.Cell>StatusIndicator (Preview)</Table.Cell>
       <Table.Cell>transparent</Table.Cell>
-      <Table.Cell></Table.Cell>
+      <Table.Cell/>
       <Table.Cell>backgroundColor</Table.Cell>
       <Table.Cell cs={{color: cssVar(base.frenchVanilla100), backgroundColor: cssVar(base.blackPepper500)}}>
         blackPepper600
@@ -367,7 +368,7 @@ Components affected:
     <Table.Row>
       <Table.Cell>StatusIndicator (Preview)</Table.Cell>
       <Table.Cell>transparent</Table.Cell>
-      <Table.Cell></Table.Cell>
+      <Table.Cell/>
       <Table.Cell>opacity</Table.Cell>
       <Table.Cell >0.85</Table.Cell>
       <Table.Cell>
@@ -377,7 +378,7 @@ Components affected:
 		<Table.Row>
       <Table.Cell>Switch</Table.Cell>
       <Table.Cell>Checked and Disabled</Table.Cell>
-      <Table.Cell></Table.Cell>
+      <Table.Cell/>
       <Table.Cell>backgroundColor, opacity</Table.Cell>
       <Table.Cell cs={{backgroundColor: cssVar(base.blueberry200)}}>blueberry200</Table.Cell>
       <Table.Cell cs={{backgroundColor: 'rgba(8,117,225,.3)'}}>
@@ -993,5 +994,4 @@ experimental code and is analagous to code in alpha.
 
 Breaking changes can be deployed to Labs at any time without triggering a major version update and
 may not be subject to the same rigor in communcation and migration strategies reserved for breaking
-changes in [Preview](#preview) and [Main](#main). import { opacity } from
-"@workday/canvas-tokens-web/dist/es6/system"
+changes in [Preview](#preview) and [Main](#main).

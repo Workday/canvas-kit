@@ -228,7 +228,13 @@ export const createEvents =
  */
 export type Generic = any;
 
-export type ModelExtras<TDefaultConfig, TRequiredConfig, TState, TEvents, TModel> = {
+export type ModelExtras<
+  TDefaultConfig,
+  TRequiredConfig,
+  TState,
+  TEvents extends Record<string, any>,
+  TModel
+> = {
   /** Default config of the model. Useful when composing models to reused config */
   defaultConfig: TDefaultConfig;
   /** Required config of the model. Useful when composing models to reused config */
@@ -287,10 +293,12 @@ export type ModelFn<TDefaultConfig, TRequiredConfig, TModel> = TModel extends {
   state: infer TState;
   events: infer TEvents;
 }
-  ? (<TT_Special_Generic>( // special generic used by post processing to handle generic models
-      config?: Partial<TDefaultConfig> & TRequiredConfig & ToEventConfig<TState, TEvents>
-    ) => TModel) &
-      ModelExtras<TDefaultConfig, TRequiredConfig, TState, TEvents, TModel>
+  ? TEvents extends Record<string, any>
+    ? (<TT_Special_Generic>( // special generic used by post processing to handle generic models
+        config?: Partial<TDefaultConfig> & TRequiredConfig & ToEventConfig<TState, TEvents>
+      ) => TModel) &
+        ModelExtras<TDefaultConfig, TRequiredConfig, TState, TEvents, TModel>
+    : never
   : never;
 
 /**

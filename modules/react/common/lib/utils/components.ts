@@ -538,7 +538,7 @@ export const createComponent =
     const ReturnedComponent = React.forwardRef<E, P & {as?: React.ElementType}>(
       ({as: asOverride, ...props}, ref) => {
         return Component(
-          props as P,
+          props as any,
           ref as ExtractRef<E>,
           // Cast to `any` to avoid: "ts(2345): Type 'undefined' is not assignable to type 'E extends
           // undefined ? never : E'" I'm not sure I can actually cast to this conditional type and it

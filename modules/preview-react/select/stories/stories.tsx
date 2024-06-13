@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {storiesOf} from '@storybook/react';
+import {Meta, StoryObj} from '@storybook/react';
 import {controlComponent} from '../../../../utils/storybook';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {
@@ -96,20 +96,37 @@ export const customRenderSelected: RenderSelectedFunction = option => {
   );
 };
 
-storiesOf('Preview/Select/Top Label', module)
-  .addParameters({component: Select})
-  .addParameters({ReadmePath: 'preview-react/select'})
-  .add('Default', () => (
+const meta: Meta<typeof Select> = {
+  title: 'Preview/Select',
+  component: Select,
+  parameters: {
+    ReadmePath: 'preview-react/select',
+  },
+};
+
+export default meta;
+
+export const TopLabelDefault: StoryObj = {
+  name: 'Top Label/Default',
+  render: () => (
     <FormField label="Label" inputId="select-default">
       {controlComponent(<Select name="contact" options={options} />)}
     </FormField>
-  ))
-  .add('Default with Simple Options (Strings)', () => (
+  ),
+};
+
+export const TopLabelDefaultWithSimpleOptions: StoryObj = {
+  name: 'Top Label/Default with Simple Options (Strings)',
+  render: () => (
     <FormField label="Label" inputId="select-default-simple">
       {controlComponent(<Select name="state" options={simpleOptions} />)}
     </FormField>
-  ))
-  .add('Default with Custom Options Data', () => (
+  ),
+};
+
+export const TopLabelDefaultWithCustomOptionsData: StoryObj = {
+  name: 'Top Label/Default with Custom Options Data',
+  render: () => (
     <FormField label="Label" inputId="select-default-custom">
       {controlComponent(
         <Select
@@ -120,18 +137,30 @@ storiesOf('Preview/Select/Top Label', module)
         />
       )}
     </FormField>
-  ))
-  .add('Scrollable', () => (
+  ),
+};
+
+export const TopLabelScrollable: StoryObj = {
+  name: 'Top Label/Scrollable',
+  render: () => (
     <FormField label="Label" inputId="select-scrollable">
       {controlComponent(<Select name="city" options={manyOptions} />)}
     </FormField>
-  ))
-  .add('Disabled', () => (
+  ),
+};
+
+export const TopLabelDisabled: StoryObj = {
+  name: 'Top Label/Disabled',
+  render: () => (
     <FormField label="Label" inputId="select-disabled">
       {controlComponent(<Select name="contact" options={options} disabled={true} />)}
     </FormField>
-  ))
-  .add('Alert', () => (
+  ),
+};
+
+export const TopLabelAlert: StoryObj = {
+  name: 'Top Label/Alert',
+  render: () => (
     <FormField
       label="Label"
       inputId="select-alert"
@@ -141,8 +170,12 @@ storiesOf('Preview/Select/Top Label', module)
     >
       {controlComponent(<Select name="contact" options={options} />)}
     </FormField>
-  ))
-  .add('Error', () => (
+  ),
+};
+
+export const TopLabelError: StoryObj = {
+  name: 'Top Label/Error',
+  render: () => (
     <FormField
       label="Label"
       inputId="select-error"
@@ -152,22 +185,30 @@ storiesOf('Preview/Select/Top Label', module)
     >
       {controlComponent(<Select name="contact" options={options} />)}
     </FormField>
-  ))
-  .add('Grow', () => (
+  ),
+};
+
+export const TopLabelGrow: StoryObj = {
+  name: 'Top Label/Grow',
+  render: () => (
     <FormField label="Label" inputId="select-grow" grow={true}>
       {controlComponent(<Select name="contact" options={options} />)}
     </FormField>
-  ));
+  ),
+};
 
-storiesOf('Preview/Select/Left Label', module)
-  .addParameters({component: Select})
-  .addParameters({ReadmePath: 'preview-react/select'})
-  .add('Default', () => (
+export const LeftLabelDefault: StoryObj = {
+  name: 'Left Label/Default',
+  render: () => (
     <FormField labelPosition={FormField.LabelPosition.Left} label="Label" inputId="select-default">
       {controlComponent(<Select name="contact" options={options} />)}
     </FormField>
-  ))
-  .add('Default with Simple Options (Strings)', () => (
+  ),
+};
+
+export const LeftLabelDefaultWithSimpleOptions: StoryObj = {
+  name: 'Left Label/Default with Simple Options (Strings)',
+  render: () => (
     <FormField
       labelPosition={FormField.LabelPosition.Left}
       label="Label"
@@ -175,8 +216,12 @@ storiesOf('Preview/Select/Left Label', module)
     >
       {controlComponent(<Select name="state" options={simpleOptions} />)}
     </FormField>
-  ))
-  .add('Default with Custom Options Data', () => (
+  ),
+};
+
+export const LeftLabelDefaultWithCustomOptionsData: StoryObj = {
+  name: 'Left Label/Default with Custom Options Data',
+  render: () => (
     <FormField
       labelPosition={FormField.LabelPosition.Left}
       label="Label"
@@ -191,8 +236,12 @@ storiesOf('Preview/Select/Left Label', module)
         />
       )}
     </FormField>
-  ))
-  .add('Scrollable', () => (
+  ),
+};
+
+export const LeftLabelScrollable: StoryObj = {
+  name: 'Left Label/Scrollable',
+  render: () => (
     <FormField
       labelPosition={FormField.LabelPosition.Left}
       label="Label"
@@ -200,13 +249,21 @@ storiesOf('Preview/Select/Left Label', module)
     >
       {controlComponent(<Select name="city" options={manyOptions} />)}
     </FormField>
-  ))
-  .add('Disabled', () => (
+  ),
+};
+
+export const LeftLabelDisabled: StoryObj = {
+  name: 'Left Label/Disabled',
+  render: () => (
     <FormField labelPosition={FormField.LabelPosition.Left} label="Label" inputId="select-disabled">
       {controlComponent(<Select name="contact" options={options} disabled={true} />)}
     </FormField>
-  ))
-  .add('Alert', () => (
+  ),
+};
+
+export const LeftLabelAlert: StoryObj = {
+  name: 'Left Label/Alert',
+  render: () => (
     <FormField
       labelPosition={FormField.LabelPosition.Left}
       label="Label"
@@ -217,8 +274,12 @@ storiesOf('Preview/Select/Left Label', module)
     >
       {controlComponent(<Select name="contact" options={options} />)}
     </FormField>
-  ))
-  .add('Error', () => (
+  ),
+};
+
+export const LeftLabelError: StoryObj = {
+  name: 'Left Label/Error',
+  render: () => (
     <FormField
       labelPosition={FormField.LabelPosition.Left}
       label="Label"
@@ -229,8 +290,12 @@ storiesOf('Preview/Select/Left Label', module)
     >
       {controlComponent(<Select name="contact" options={options} />)}
     </FormField>
-  ))
-  .add('Grow', () => (
+  ),
+};
+
+export const LeftLabelGrow: StoryObj = {
+  name: 'Left Label/Grow',
+  render: () => (
     <FormField
       labelPosition={FormField.LabelPosition.Left}
       label="Label"
@@ -239,4 +304,5 @@ storiesOf('Preview/Select/Left Label', module)
     >
       {controlComponent(<Select name="contact" options={options} />)}
     </FormField>
-  ));
+  ),
+};

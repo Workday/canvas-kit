@@ -5,7 +5,6 @@
 const routes = {
   '/assets/accent-icons/': 'tokens-icon--accent-icon',
   '/assets/applet-icons/': 'tokens-icon--applet-icon',
-  '/assets/applet-icons/': 'tokens-icon--applet-icon',
   '/assets/system-icons/': 'tokens-icon--system-icon',
   '/components/buttons/action-bar/': 'components-buttons-action-bar--basic',
   '/components/buttons/button/': 'components-buttons--primary',

@@ -20,7 +20,8 @@ export function getObjectProxy<T extends {}>(
     return new Proxy(target, {
       get<T>(target: T, prop: string | symbol, receiver: any) {
         if (typeof (fallback as any)[prop] === 'object') {
-          return getObjectProxy(target[prop as keyof T], (fallback as any)[prop]);
+          // @ts-ignore
+          return getObjectProxy(target[prop], (fallback as any)[prop]);
         }
         const targetProp = target[prop as keyof T];
         if (targetProp !== undefined) {
