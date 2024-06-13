@@ -25,6 +25,7 @@ const sanitizeMdxFile = (inFile, outFile) => {
     const result = data
       // Remove storybook stuff
       .replace(/import {.*} from '@storybook\/addon-docs';/g, '')
+      .replace(/\n?import \* as \w+Stories from '\.\/\w+\.stories';\n?/g, '')
       .replace(/<Meta.* \/>\n/g, '')
       .replace(/^\s+|\s+$/g, '')
       // The replace below converts named imports from files in the examples
@@ -87,46 +88,6 @@ srcFolders.forEach(folder => {
 
       fs.mkdirSync(destDir, {recursive: true});
       sanitizeMdxFile(sourceMdx, destFile);
-
-      const storyName = sourceMdx
-        .split('/')
-        .find(i => i.includes('.mdx'))
-        .replace(/([\w-_]+)\.mdx/, (_, b) => b);
-
-      glob(storiesDir + `/${storyName}.stories.@(js|jsx|ts|tsx)`, {}, (err, files) => {
-        files.forEach(file => {
-          fs.readFile(file, 'utf8', (err, data) => {
-            if (err) {
-              return console.error(err);
-            }
-            const result = data
-              // The replace below converts named imports from files in the examples
-              // folder to default imports (this is required by canvas-site in order
-              // for examples to work). The regex specifically targets import
-              // statements which exist on on a single line, which is fine because
-              // example imports almost always fall on a single line. For example:
-              //
-              // import {FlexCard} from './examples/Flex/FlexCard';
-              //
-              // The line above will be converted (as desired) to:
-              //
-              // import FlexCard from './examples/Flex/FlexCard';
-              //
-              // This build process contains logic elsewhere to convert the named
-              // exports in those example files to default exports.
-              .replace(/import {\s?(\w+)\s?} from '\.\/examples/g, "import $1 from './examples")
-              .replace(
-                /import {\s?\w+ as (\w+)\s?} from '\.\/examples/g,
-                "import $1 from './examples"
-              );
-
-            fs.writeFile(path.join(destDir, path.basename(file)), result, 'utf8', err => {
-              if (err) return console.error(err);
-            });
-          });
-        });
-        // return files.forEach(file => fse.copySync(file, path.join(destDir, path.basename(file))));
-      });
 
       // Copy examples if they exist
       if (fs.existsSync(sourceExamplesDir)) {
