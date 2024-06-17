@@ -62,28 +62,25 @@ storiesOf('Components/Buttons/Toolbar', module)
           <Menu.Card>
             <Menu.List>
               <Menu.Item
-                aria-label="Expand All"
                 onClick={() => {
                   console.log('Expand All clicked');
                 }}
               >
-                First Item
+                Expand All
               </Menu.Item>
               <Menu.Item
-                aria-label="Expand to Leaf Level"
                 onClick={() => {
                   console.log('Expand to Leaf Level clicked');
                 }}
               >
-                Second Item
+                Expand to Leaf Level
               </Menu.Item>
               <Menu.Item
-                aria-label="Expand to nth Level"
                 onClick={() => {
                   console.log('Expand to nth Level clicked');
                 }}
               >
-                Third Item
+                Expand to nth Level
               </Menu.Item>
             </Menu.List>
           </Menu.Card>
