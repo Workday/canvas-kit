@@ -1310,6 +1310,20 @@
         "__isArgsStory": false
       }
     },
+    "components-buttons-toolbar--toolbar-dropdown-button-with-menu": {
+      "id": "components-buttons-toolbar--toolbar-dropdown-button-with-menu",
+      "name": "Toolbar Dropdown Button with Menu",
+      "title": "Components/Buttons/Toolbar",
+      "importPath": "./modules/react/button/stories/stories_ToolbarButtons.tsx",
+      "kind": "Components/Buttons/Toolbar",
+      "story": "Toolbar Dropdown Button with Menu",
+      "parameters": {
+        "fileName": "./modules/react/button/stories/stories_ToolbarButtons.tsx",
+        "framework": "react",
+        "__id": "components-buttons-toolbar--toolbar-dropdown-button-with-menu",
+        "__isArgsStory": false
+      }
+    },
     "components-buttons-toolbar--toolbar-icon-button": {
       "id": "components-buttons-toolbar--toolbar-icon-button",
       "name": "Toolbar Icon Button",
