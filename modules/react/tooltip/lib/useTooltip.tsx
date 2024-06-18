@@ -65,7 +65,7 @@ export function useTooltip<T extends Element = Element>({
    * - `label`: Sets the accessible name for the wrapped element. Use for icons or if tooltip
    *   `title` prop is the same as the text content of the wrapped element. E.g. TertiaryButton that renders an icon or
    *   Ellipsis tooltips.
-   * - `describe`: Sets `aria-describedby` of the wrapped element. Use if the tooltip has additional
+   * - `describe`: Sets `aria-description` strings for the wrapped element. Use if the tooltip has additional
    *   information about the target.
    * - `muted`: No effort is made to make the tooltip accessible to screen readers. Use if the
    *   tooltip contents are not useful to a screen reader or if you have handled accessibility of
@@ -135,7 +135,7 @@ export function useTooltip<T extends Element = Element>({
 
   const targetProps = {
     // extra description of the target element for assistive technology
-    'aria-describedby': type === 'describe' && visible ? id : undefined,
+    'aria-description': type === 'describe' ? titleText : undefined,
     // This will replace the accessible name of the target element
     'aria-label': type === 'label' ? titleText : undefined,
     onMouseEnter: onOpenFromTarget,
@@ -145,10 +145,11 @@ export function useTooltip<T extends Element = Element>({
     onBlur: onHide,
   };
 
+  // deprecate: I don't want to remove the aria-description string
   // remove `aria-describedby` if undefined to not override what's provided
-  if (targetProps['aria-describedby'] === undefined) {
-    delete targetProps['aria-describedby'];
-  }
+  // if (targetProps['aria-describedby'] === undefined) {
+  //   delete targetProps['aria-describedby'];
+  // }
 
   return {
     /** Mix these properties into the target element. **Must be an Element** */
