@@ -11,11 +11,14 @@ import {
   ExtractProps,
   useConstant,
   createSubcomponent,
+  createComponent,
 } from '@workday/canvas-kit-react/common';
-import {Flex, FlexStyleProps} from '@workday/canvas-kit-react/layout';
+import {Flex, FlexStyleProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 
 import {getTransformFromPlacement} from './getTransformFromPlacement';
 import {usePopupCard, usePopupModel} from './hooks';
+import {createStencil, createStyles, createVars} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export type FlexAndBoxProps = ExtractProps<typeof Card, never> & FlexStyleProps;
 export interface PopupCardProps extends FlexAndBoxProps {
@@ -23,7 +26,7 @@ export interface PopupCardProps extends FlexAndBoxProps {
 }
 
 const popupAnimation = (transformOrigin: TransformOrigin) => {
-  const translate = getTranslateFromOrigin(transformOrigin, space.xxs);
+  const translate = getTranslateFromOrigin(transformOrigin, space.xxl);
 
   return keyframes`
     0% {
@@ -37,6 +40,47 @@ const popupAnimation = (transformOrigin: TransformOrigin) => {
   `;
 };
 
+const popupCard = createStencil({
+  base: () => {
+    const translate = getTranslateFromOrigin(
+      {horizontal: 'left', vertical: 'top'},
+      system.space.x2
+    );
+    const animateVar = keyframes`
+    0% {
+      opacity: 0;
+      transform: translate(${translate.x}px, ${translate.y}px);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(0);
+    }
+  `;
+    return {
+      animation: `${animateVar}`,
+      animationDuration: '3s',
+      animationTimingFunction: 'ease-out',
+      [system.breakpoints.s]: {
+        // animation: popupAnimation(transformOrigin),
+        animationDuration: '150ms',
+        animationTimingFunction: 'ease-out',
+        transformOrigin: 'bottom center',
+      },
+    };
+  },
+});
+
+const StyledCard = createComponent(Card)({
+  displayName: 'StyledCard',
+  Component: ({children, ...elemprops}, ref, Element) => {
+    return (
+      <Element ref={ref} {...mergeStyles(elemprops, popupCard())}>
+        {children}
+      </Element>
+    );
+  },
+});
+
 const StyledPopupCard = styled(Card)<
   StyledType & {width?: number | string; transformOrigin?: TransformOrigin}
 >(({transformOrigin, theme}) => {
@@ -46,7 +90,7 @@ const StyledPopupCard = styled(Card)<
 
   return {
     animation: popupAnimation(transformOrigin),
-    animationDuration: '150ms',
+    animationDuration: '1s',
     animationTimingFunction: 'ease-out',
     transformOrigin: `${transformOrigin.vertical} ${transformOrigin.horizontal}`,
     [theme.canvas.breakpoints.down('s')]: {
