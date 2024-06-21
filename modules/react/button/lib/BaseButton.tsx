@@ -236,6 +236,12 @@ export const buttonModifiers = createModifiers({
       gap: system.space.x1,
     }),
   },
+  grow: {
+    true: createStyles({
+      width: '100%',
+      maxWidth: '100%',
+    }),
+  },
   iconPosition: {
     largeOnly: createStyles({
       padding: '0',
@@ -301,6 +307,7 @@ export const BaseButton = createComponent('button')({
       children,
       size,
       fillIcon,
+      grow,
       iconPosition,
       icon,
       colors,
@@ -318,6 +325,7 @@ export const BaseButton = createComponent('button')({
           baseButtonStyles,
           buttonModifiers({
             size: size,
+            grow: grow,
             iconPosition: getIconPosition(size, iconPosition, children),
           }),
           buttonVars.default(colors?.default || {}),
