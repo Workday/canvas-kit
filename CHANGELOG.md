@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.0.9](https://github.com/Workday/canvas-kit/releases/tag/v11.0.9) (2024-06-24)
+
+### Documentation
+
+- docs: Add v10 to versions table ([#2792](https://github.com/Workday/canvas-kit/pull/2792)) ([@sheelah](https://github.com/sheelah), Sheelah Brennan)
+
+
+## [v11.0.8](https://github.com/Workday/canvas-kit/releases/tag/v11.0.8) (2024-06-18)
+
+
+
+
+## [v11.0.7](https://github.com/Workday/canvas-kit/releases/tag/v11.0.7) (2024-06-17)
+
+### Documentation
+
+- chore: Add robust example in storybook for ToolbarDropdown button ([#2782](https://github.com/Workday/canvas-kit/pull/2782)) ([@NehaAhujaa](https://github.com/NehaAhujaa), Neha Ahuja)
+
+### Infrastructure
+
+- fix: Delete unused folder ([#2771](https://github.com/Workday/canvas-kit/pull/2771)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v11.0.6](https://github.com/Workday/canvas-kit/releases/tag/v11.0.6) (2024-06-10)
 
 ### Components
