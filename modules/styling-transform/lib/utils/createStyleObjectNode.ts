@@ -5,7 +5,8 @@ import {serialize, compile} from 'stylis';
 import {generateUniqueId} from '@workday/canvas-kit-styling';
 
 import {prettyStringify} from './stylisFns';
-import {NestedStyleObject} from './types';
+import {NestedStyleObject, TransformerContext} from './types';
+import {getHash} from './getHash';
 
 /**
  * Creates an AST node representation of the passed in `styleObj`, but in the format of `{name:
@@ -46,6 +47,49 @@ export function compileCSS(input: string): string {
   return serialize(compile(input), prettyStringify);
 }
 
-export function serializeStyles(input: NestedStyleObject | string) {
-  return serializedStylesEmotion([input]);
+/**
+ * Serialize styles and put them to style output. The styles will be serialized via Emotion. Returns
+ * the serialized styles.
+ * @param node
+ * @param input
+ * @param template The template for creating styles for static CSS. There are two placeholders: `%n`
+ * represents the hash name while `%s` represents the string styles.
+ * @param context
+ * @returns
+ */
+export function serializeStyles(
+  node: ts.Node,
+  input: NestedStyleObject | string,
+  template: string,
+  context: TransformerContext
+) {
+  const {getFileName, styles, cache, names, extractedNames} = context;
+  const fileName = getFileName(node.getSourceFile().fileName);
+  const hash = getHash(node, context);
+  const serialized = {...serializedStylesEmotion([input]), name: hash} as ReturnType<
+    typeof serializedStylesEmotion
+  >;
+
+  if (!cache[hash]) {
+    const styleOutput = compileCSS(
+      template.replace('%s', serialized.styles).replace('%n', serialized.name)
+    );
+
+    let extractedStyleOutput = styleOutput;
+
+    for (const key in names) {
+      if (extractedNames[names[key]]) {
+        // @ts-ignore replaceAll was added in es2021, but our lib versions don't go past es2019. replaceAll is available in node 15+
+        extractedStyleOutput = extractedStyleOutput.replaceAll(
+          names[key],
+          extractedNames[names[key]]
+        );
+      }
+    }
+    styles[fileName] = styles[fileName] || [];
+    styles[fileName].push(extractedStyleOutput);
+    cache[hash] = styleOutput;
+  }
+
+  return serialized;
 }

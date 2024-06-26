@@ -1,21 +1,22 @@
 import React from 'react';
+import {CanvasSystemIcon} from '@workday/design-assets-types';
+import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
+import {Combobox} from '@workday/canvas-kit-react/combobox';
+import {createStencil, createStyles, CSProps, px2rem} from '@workday/canvas-kit-styling';
+import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {useSelectCard} from './hooks/useSelectCard';
+import {useSelectInput} from './hooks/useSelectInput';
+import {useSelectModel} from './hooks/useSelectModel';
 import {
   createSubcomponent,
   ExtractProps,
   createContainer,
   Themeable,
+  useLocalRef,
 } from '@workday/canvas-kit-react/common';
-import {Combobox} from '@workday/canvas-kit-react/combobox';
-
-import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
-import {useSelectModel} from './hooks/useSelectModel';
-import {useSelectCard} from './hooks/useSelectCard';
-import {useSelectInput} from './hooks/useSelectInput';
-import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {createStyles, CSProps} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export interface SelectInputProps extends ExtractProps<typeof TextInput>, CSProps {
   /**
@@ -26,23 +27,34 @@ export interface SelectInputProps extends ExtractProps<typeof TextInput>, CSProp
   inputStartIcon?: CanvasSystemIcon;
 }
 
-const selectInputStyles = createStyles({
-  caretColor: 'transparent',
-  cursor: 'default',
-  '&::selection': {
-    backgroundColor: 'transparent',
+const selectInputStencil = createStencil({
+  base: {
+    caretColor: 'transparent',
+    cursor: 'default',
+    '&::selection': {
+      backgroundColor: 'transparent',
+    },
   },
 });
 
-const hiddenSelectStyles = createStyles({
-  position: 'absolute',
-  top: 0,
-  bottom: 0,
-  left: 0,
-  right: 0,
-  opacity: 0,
-  cursor: 'default',
-  pointerEvents: 'none',
+const selectIconsStencil = createStencil({
+  base: {
+    position: 'absolute',
+    pointerEvents: 'none',
+  },
+});
+
+const hiddenSelectInputStencil = createStencil({
+  base: {
+    position: 'absolute',
+    top: system.space.zero,
+    bottom: system.space.zero,
+    left: system.space.zero,
+    right: system.space.zero,
+    opacity: system.opacity.zero,
+    cursor: 'default',
+    pointerEvents: 'none',
+  },
 });
 
 export const SelectInput = createSubcomponent(TextInput)({
@@ -56,10 +68,10 @@ export const SelectInput = createSubcomponent(TextInput)({
       error,
       textInputProps,
       disabled,
+      width,
       ref,
       onChange,
       onInput,
-      onFocus,
       value,
       name,
       ...elemProps
@@ -67,10 +79,29 @@ export const SelectInput = createSubcomponent(TextInput)({
     Element,
     model
   ) => {
+    const {localRef, elementRef} = useLocalRef(ref);
+
+    // We need to create a proxy between the multiple inputs. We need to redirect a few methods to
+    // the visible input
+    React.useImperativeHandle(
+      elementRef,
+      () => {
+        localRef.current!.focus = (options?: FocusOptions) => {
+          textInputProps.ref.current!.focus(options);
+        };
+        localRef.current!.blur = () => {
+          textInputProps.ref.current!.blur();
+        };
+
+        return localRef.current!;
+      },
+      [textInputProps.ref, localRef]
+    );
+
     return (
-      <InputGroup>
+      <InputGroup data-width="ck-formfield-width">
         {inputStartIcon && model.state.selectedIds.length > 0 && (
-          <InputGroup.InnerStart pointerEvents="none">
+          <InputGroup.InnerStart {...selectIconsStencil()}>
             <SystemIcon icon={inputStartIcon} />
           </InputGroup.InnerStart>
         )}
@@ -78,15 +109,14 @@ export const SelectInput = createSubcomponent(TextInput)({
         <InputGroup.Input
           error={error}
           disabled={disabled}
-          className={hiddenSelectStyles}
           tabIndex={-1}
           aria-hidden={true}
           onChange={onChange}
           onInput={onInput}
           value={value}
-          onFocus={onFocus}
           name={name}
-          ref={ref}
+          ref={elementRef}
+          {...hiddenSelectInputStencil()}
         />
         {/* Visual input */}
         <InputGroup.Input
@@ -95,9 +125,9 @@ export const SelectInput = createSubcomponent(TextInput)({
           placeholder={placeholder}
           error={error}
           {...textInputProps}
-          {...mergeStyles(elemProps, [selectInputStyles])}
+          {...mergeStyles(elemProps, selectInputStencil())}
         />
-        <InputGroup.InnerEnd position="absolute" pointerEvents="none">
+        <InputGroup.InnerEnd {...selectIconsStencil()}>
           <SystemIcon icon={caretDownSmallIcon} />
         </InputGroup.InnerEnd>
       </InputGroup>
@@ -118,12 +148,16 @@ export const SelectItem = createSubcomponent('li')({
   );
 });
 
+const selectCardStyles = createStyles({
+  maxHeight: px2rem(300),
+});
+
 export const SelectCard = createSubcomponent('div')({
   modelHook: useSelectModel,
   elemPropsHook: useSelectCard,
 })<ExtractProps<typeof Combobox.Menu.Card>>(({children, ...elemProps}, Element) => {
   return (
-    <Combobox.Menu.Card maxHeight={300} as={Element} {...elemProps}>
+    <Combobox.Menu.Card as={Element} {...mergeStyles(elemProps, selectCardStyles)}>
       {children}
     </Combobox.Menu.Card>
   );
@@ -172,7 +206,7 @@ export const Select = createContainer()({
      * `Select.Popper` renders a {@link ComboboxPopper Combobox.Menu.Popper}. You have access to all `Popper` props.
      *
      * ```tsx
-     * <Select item={options}>
+     * <Select items={options}>
      *  <FormField label="Your Label">
      *    <Select.Input onChange={(event) => handleChange(event)}>
      *    <Select.Popper>
@@ -189,7 +223,7 @@ export const Select = createContainer()({
      * **Note: The card will be the width of its corresponding `Select.Input`**.
      *
      * ```tsx
-     * <Select item={options}>
+     * <Select items={options}>
      *  <FormField label="Your Label">
      *    <Select.Input onChange={(event) => handleChange(event)}>
      *    <Select.Popper>
@@ -206,7 +240,7 @@ export const Select = createContainer()({
      * `Select.List` renders a {@link ComboboxMenuList Combobox.Menu.List}. You have access to all `ListBox` props.
      *
      * ```tsx
-     * <Select item={options}>
+     * <Select items={options}>
      *  <FormField label="Your Label">
      *    <Select.Input onChange={(event) => handleChange(event)}>
      *    <Select.Popper>
@@ -225,7 +259,7 @@ export const Select = createContainer()({
      * `Select.Item` renders a {@link ComboboxMenuItem Combobox.Menu.Item} with aria role of `option`. You can optionally render a `Icon`.
      *
      * ```tsx
-     * <Select item={options}>
+     * <Select items={options}>
      *  <FormField label="Your Label">
      *    <Select.Input onChange={(event) => handleChange(event)}>
      *      <Select.Popper>

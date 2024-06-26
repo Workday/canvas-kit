@@ -25,7 +25,10 @@ export function findNodes<N extends (node: ts.Node) => boolean>(
   node.forEachChild(child => {
     // The AST doesn't have parent nodes, but they are required for testing purposes.
     (child as any).parent = node;
-    nodes.push(...findNodes(child, name, predicate));
+    const childNodes = findNodes(child, name, predicate);
+    if (childNodes) {
+      nodes.push(...childNodes);
+    }
   });
 
   return nodes as any;

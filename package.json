@@ -13,6 +13,7 @@
     "@emotion/is-prop-valid": "^1.1.1",
     "@storybook/addon-essentials": "^6.5.9",
     "@storybook/addon-storysource": "^6.5.9",
+    "@storybook/cli": "^6.5.9",
     "@storybook/components": "^6.5.9",
     "@storybook/react": "^6.5.9",
     "@storybook/source-loader": "^6.5.9",
@@ -118,9 +119,9 @@
     "cypress:run": "cypress run"
   },
   "lint-staged": {
-      "*.{ts,tsx}": "yarn format",
-      "*.json": "node utils/check-mismatched-dependencies.js",
-      "yarn.lock": "node utils/check-lockfile.js"
+    "*.{ts,tsx}": "yarn format",
+    "*.json": "node utils/check-mismatched-dependencies.js",
+    "yarn.lock": "node utils/check-lockfile.js"
   },
   "workspaces": [
     "modules/**"
@@ -132,6 +133,6 @@
     "@workday/canvas-accent-icons-web": "^3.0.9",
     "@workday/canvas-applet-icons-web": "^2.0.9",
     "@workday/canvas-system-icons-web": "^3.0.0",
-    "@workday/canvas-tokens-web": "^1.0.0"
+    "@workday/canvas-tokens-web": "^2.0.0"
   }
 }

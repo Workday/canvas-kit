@@ -32,7 +32,7 @@ jobs:
       - name: Build Storybook
         run: |
           yarn build-storybook --quiet
-          npx sb extract docs docs/stories.json
+          yarn sb extract docs docs/stories.json
 
       ## Build for packaging.
       - name: Build
