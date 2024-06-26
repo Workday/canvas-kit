@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.0.10](https://github.com/Workday/canvas-kit/releases/tag/v11.0.10) (2024-06-26)
+
+### Components
+
+- fix: Grow Prop Fix for Buttons ([#2790](https://github.com/Workday/canvas-kit/pull/2790)) ([@josh-bagwell](https://github.com/josh-bagwell), [@mannycarrera4](https://github.com/mannycarrera4))
+
+
 ## [v10.3.43](https://github.com/Workday/canvas-kit/releases/tag/v10.3.43) (2024-06-25)
 
 ### Components
