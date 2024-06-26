@@ -11,9 +11,9 @@ describe('getVarName', () => {
       const foo = 'bar';
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
+    const sourceFile = program.getSourceFile('test.ts')!;
 
-    const node = findNodes(sourceFile, 'foo', ts.isVariableDeclaration)[0];
+    const node = findNodes(sourceFile, 'foo', ts.isVariableDeclaration)![0];
 
     expect(getVarName(node)).toEqual('foo');
   });
@@ -28,11 +28,11 @@ describe('getVarName', () => {
       };
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
+    const sourceFile = program.getSourceFile('test.ts')!;
 
-    const node = findNodes(sourceFile, 'baz', ts.isPropertyAssignment)[0];
+    const node = findNodes(sourceFile, 'baz', ts.isPropertyAssignment)![0];
 
-    expect(getVarName(node)).toEqual('foo-bar-baz');
+    expect(getVarName(node)).toEqual('foo.bar.baz');
   });
 
   it('should get the correct CSS variable name of a nested PropertyAssignment with functions', () => {
@@ -45,11 +45,11 @@ describe('getVarName', () => {
       });
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
+    const sourceFile = program.getSourceFile('test.ts')!;
 
-    const node = findNodes(sourceFile, 'baz', ts.isPropertyAssignment)[0];
+    const node = findNodes(sourceFile, 'baz', ts.isPropertyAssignment)![0];
 
-    expect(getVarName(node)).toEqual('foo-bar-baz');
+    expect(getVarName(node)).toEqual('foo.bar.baz');
   });
 
   it('should get the correct CSS variable name of a nested PropertyAssignment with functions', () => {
@@ -62,10 +62,10 @@ describe('getVarName', () => {
       };
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
+    const sourceFile = program.getSourceFile('test.ts')!;
 
-    const node = findNodes(sourceFile, 'baz', ts.isPropertyAssignment)[0];
+    const node = findNodes(sourceFile, 'baz', ts.isPropertyAssignment)![0];
 
-    expect(getVarName(node.name)).toEqual('foo-bar-baz');
+    expect(getVarName(node.name)).toEqual('foo.bar.baz');
   });
 });

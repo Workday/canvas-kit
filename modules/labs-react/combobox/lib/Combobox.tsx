@@ -355,7 +355,7 @@ export const Combobox = ({
     const autoCompleteItemCount = interactiveAutocompleteItems.length;
     const firstItem = 0;
     const lastItem = autoCompleteItemCount - 1;
-    let nextIndex = null;
+    let nextIndex: number | null = null;
 
     setIsOpened(true);
 

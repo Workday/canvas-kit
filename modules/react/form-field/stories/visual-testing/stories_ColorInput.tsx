@@ -8,7 +8,7 @@ import {
 import {withSnapshotsEnabled, customColorTheme} from '../../../../../utils/storybook';
 
 import {ColorInput} from '@workday/canvas-kit-react/color-picker';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 
 export default withSnapshotsEnabled({
   title: 'Testing/Inputs/Color Picker/Color Input',
@@ -34,8 +34,8 @@ export const ColorInputStates = () => (
           ],
           error: [
             {value: undefined, label: ''},
-            {value: FormField.ErrorType.Alert, label: 'Alert'},
-            {value: FormField.ErrorType.Error, label: 'Error'},
+            {value: 'alert', label: 'Alert'},
+            {value: 'error', label: 'Error'},
           ],
         },
         props => {
@@ -71,7 +71,11 @@ export const ColorInputStates = () => (
         }
       )}
     >
-      {props => <ColorInput {...props} />}
+      {props => (
+        <FormField error={props.error}>
+          <FormField.Input as={ColorInput} {...props} />
+        </FormField>
+      )}
     </ComponentStatesTable>
   </StaticStates>
 );
