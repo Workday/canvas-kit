@@ -1,12 +1,7 @@
 import React, {useState} from 'react';
 import {Property} from 'csstype';
-import {
-  createComponent,
-  focusRing,
-  hideMouseFocus,
-  pickForegroundColor,
-} from '@workday/canvas-kit-react/common';
-import {cssVar, createStencil, px2rem, calc} from '@workday/canvas-kit-styling';
+import {createComponent, focusRing, hideMouseFocus} from '@workday/canvas-kit-react/common';
+import {cssVar, createStencil, calc} from '@workday/canvas-kit-styling';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {borderRadius} from '@workday/canvas-kit-react/tokens';
 import {SystemIconCircleSize, SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
@@ -37,9 +32,9 @@ export interface AvatarProps {
   variant?: 'light' | 'dark';
   /**
    * The size of the Avatar.
-   * @default `system.space.x8`
+   * @default `medium`
    */
-  size?: string | number;
+  size?: 'extraSmall' | 'small' | 'medium' | 'large' | 'extraLarge' | 'extraExtraLarge';
   /**
    * The alt text of the Avatar image. This prop is also used for the aria-label
    * @default Avatar
@@ -52,8 +47,7 @@ export interface AvatarProps {
 }
 
 const avatarContainerStencil = createStencil({
-  vars: {size: ''},
-  base: ({size}) => ({
+  base: {
     background: base.soap200,
     position: 'relative',
     display: 'flex',
@@ -64,8 +58,6 @@ const avatarContainerStencil = createStencil({
     overflow: 'hidden',
     cursor: 'default',
     borderRadius: system.shape.round,
-    width: cssVar(size, system.space.x8),
-    height: cssVar(size, system.space.x8),
     '&:not([disabled])': {
       '&:focus': {
         outline: 'none',
@@ -73,11 +65,49 @@ const avatarContainerStencil = createStencil({
       },
     },
     ...hideMouseFocus,
-  }),
+  },
   modifiers: {
+    variant: {
+      light: {
+        backgroundColor: system.color.bg.alt.default,
+      },
+      dark: {
+        backgroundColor: system.color.bg.primary.default,
+        [systemIconStencil.vars.color]: system.color.fg.inverse,
+      },
+    },
+    size: {
+      extraSmall: {
+        width: system.space.x4,
+        height: system.space.x4,
+      },
+      small: {
+        width: system.space.x6,
+        height: system.space.x6,
+      },
+      medium: {
+        width: system.space.x8,
+        height: system.space.x8,
+      },
+      large: {
+        width: system.space.x10,
+        height: system.space.x10,
+      },
+      extraLarge: {
+        width: system.space.x16,
+        height: system.space.x16,
+      },
+      extraExtraLarge: {
+        width: calc.multiply(system.space.x10, 3),
+        height: calc.multiply(system.space.x10, 3),
+      },
+    },
     hasOnClick: {
       true: {
         cursor: 'pointer',
+      },
+      false: {
+        cursor: 'default',
       },
     },
   },
@@ -90,7 +120,6 @@ const avatarIconStencil = createStencil({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    opacity: 1,
     width: cssVar(size, system.space.x8),
     height: cssVar(size, system.space.x8),
   }),
@@ -104,20 +133,47 @@ const avatarIconStencil = createStencil({
         [systemIconStencil.vars.color]: system.color.fg.inverse,
       },
     },
+    size: {
+      extraSmall: {
+        [systemIconStencil.vars.size]: calc.multiply(system.space.x4, 0.625),
+      },
+      small: {
+        [systemIconStencil.vars.size]: calc.multiply(system.space.x6, 0.625),
+      },
+      medium: {
+        [systemIconStencil.vars.size]: calc.multiply(system.space.x8, 0.625),
+      },
+      large: {
+        [systemIconStencil.vars.size]: calc.multiply(system.space.x10, 0.625),
+      },
+      extraLarge: {
+        [systemIconStencil.vars.size]: calc.multiply(system.space.x16, 0.625),
+      },
+      extraExtraLarge: {
+        [systemIconStencil.vars.size]: calc.multiply(calc.multiply(system.space.x10, 3), 0.625),
+      },
+    },
     isImageLoaded: {
       true: {
         opacity: 0,
       },
+      false: {
+        opacity: 1,
+      },
     },
+  },
+  defaultModifiers: {
+    isImageLoaded: 'false',
   },
 });
 
+// NOTE: Objectfit not working
 const avatarImageStencil = createStencil({
   vars: {objectFit: ''},
   base: ({objectFit}) => ({
+    position: 'absolute',
     width: '100%',
     height: '100%',
-    opacity: 1,
     borderRadius: borderRadius.circle,
     transition: 'opacity 150ms linear',
     objectFit: cssVar(objectFit, 'container'),
@@ -131,6 +187,9 @@ const avatarImageStencil = createStencil({
         opacity: 0,
       },
     },
+  },
+  defaultModifiers: {
+    isImageLoaded: 'false',
   },
 });
 
@@ -153,8 +212,7 @@ export const Avatar: AvatarOverload = createComponent('button')({
       setImageLoaded(false);
     }, [url]);
 
-    const backgroundFallback = background && !background.startsWith('--') ? background : '#F0F1F2';
-    const iconColor = pickForegroundColor(backgroundFallback, 'rgba(0,0,0,0.65)', '#fff');
+    // NOTE: Background color isn't dynamic - only default is variant light or dark
 
     return (
       <Element
@@ -163,31 +221,22 @@ export const Avatar: AvatarOverload = createComponent('button')({
         onClick={onClick}
         {...mergeStyles(elemProps, [
           avatarContainerStencil({
-            size: typeof size === 'number' ? px2rem(size) : size,
+            variant,
+            size,
             hasOnClick: onClick !== undefined,
           }),
         ])}
       >
-        {!imageLoaded && (
-          <div
-            {...systemIconCircleStencil({
-              containerSize: typeof size === 'number' ? px2rem(size) : size,
-              backgroundColor: background,
-              iconColor,
-            })}
-          >
-            <SystemIcon
-              icon={userIcon}
-              {...mergeStyles(elemProps, [
-                avatarIconStencil({
-                  variant,
-                  isImageLoaded: imageLoaded,
-                  size: typeof size === 'number' ? px2rem(size) : size,
-                }),
-              ])}
-            />
-          </div>
-        )}
+        <SystemIcon
+          icon={userIcon}
+          {...mergeStyles(elemProps, [
+            avatarIconStencil({
+              variant,
+              isImageLoaded: imageLoaded,
+              size,
+            }),
+          ])}
+        />
         {url && (
           <img
             {...mergeStyles(elemProps, [
@@ -204,30 +253,4 @@ export const Avatar: AvatarOverload = createComponent('button')({
       </Element>
     );
   },
-});
-
-const systemIconCircleStencil = createStencil({
-  vars: {
-    containerSize: '',
-    backgroundColor: '',
-    iconColor: '',
-  },
-  base: ({backgroundColor, containerSize, iconColor}) => ({
-    background: cssVar(backgroundColor, base.soap200),
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: system.space.zero,
-    border: 'none',
-    borderRadius: system.shape.round,
-    overflow: 'hidden',
-    width: cssVar(containerSize, system.space.x10),
-    height: cssVar(containerSize, system.space.x10),
-    [systemIconStencil.vars.size]: calc.multiply(cssVar(containerSize, system.space.x10), 0.625),
-    [systemIconStencil.vars.color]: iconColor,
-    '& img': {
-      width: '100%',
-      height: '100%',
-    },
-  }),
 });
