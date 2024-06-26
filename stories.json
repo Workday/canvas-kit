@@ -1030,6 +1030,20 @@
         "__isArgsStory": false
       }
     },
+    "components-buttons--grow": {
+      "id": "components-buttons--grow",
+      "name": "Grow",
+      "title": "Components/Buttons",
+      "importPath": "./modules/react/button/stories/button/Button.stories.mdx",
+      "kind": "Components/Buttons",
+      "story": "Grow",
+      "parameters": {
+        "fileName": "./modules/react/button/stories/button/Button.stories.mdx",
+        "framework": "react",
+        "__id": "components-buttons--grow",
+        "__isArgsStory": false
+      }
+    },
     "components-buttons--primary": {
       "id": "components-buttons--primary",
       "name": "Primary",
@@ -7035,6 +7049,20 @@
         "fileName": "./modules/react/button/stories/visual-testing/stories_ExternalHyperlink.tsx",
         "framework": "react",
         "__id": "testing-buttons-button-externalhyperlink--external-hyperlink-states",
+        "__isArgsStory": false
+      }
+    },
+    "testing-buttons-button-grow--button-grow": {
+      "id": "testing-buttons-button-grow--button-grow",
+      "name": "Button Grow",
+      "title": "Testing/Buttons/Button/Grow",
+      "importPath": "./modules/react/button/stories/visual-testing/stories_ButtonGrow.tsx",
+      "kind": "Testing/Buttons/Button/Grow",
+      "story": "Button Grow",
+      "parameters": {
+        "fileName": "./modules/react/button/stories/visual-testing/stories_ButtonGrow.tsx",
+        "framework": "react",
+        "__id": "testing-buttons-button-grow--button-grow",
         "__isArgsStory": false
       }
     },
