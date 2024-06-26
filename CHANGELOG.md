@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.0.11](https://github.com/Workday/canvas-kit/releases/tag/v11.0.11) (2024-06-26)
+
+### Infrastructure
+
+- chore: Update SNYK deps to non vulnerable versions ([#2784](https://github.com/Workday/canvas-kit/pull/2784)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  Fix some security issues found by SNYK in our codemod package.
+
+
 ## [v11.0.10](https://github.com/Workday/canvas-kit/releases/tag/v11.0.10) (2024-06-26)
 
 ### Components
