@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.0.11](https://github.com/Workday/canvas-kit/releases/tag/v11.0.11) (2024-06-26)
+
+### Infrastructure
+
+- chore: Update SNYK deps to non vulnerable versions ([#2784](https://github.com/Workday/canvas-kit/pull/2784)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  Fix some security issues found by SNYK in our codemod package.
+
+
+## [v11.0.10](https://github.com/Workday/canvas-kit/releases/tag/v11.0.10) (2024-06-26)
+
+### Components
+
+- fix: Grow Prop Fix for Buttons ([#2790](https://github.com/Workday/canvas-kit/pull/2790)) ([@josh-bagwell](https://github.com/josh-bagwell), [@mannycarrera4](https://github.com/mannycarrera4))
+
+
+## [v10.3.43](https://github.com/Workday/canvas-kit/releases/tag/v10.3.43) (2024-06-25)
+
+### Components
+
+- fix: Grow Prop Fix for Buttons ([#2790](https://github.com/Workday/canvas-kit/pull/2790)) ([@josh-bagwell](https://github.com/josh-bagwell), [@mannycarrera4](https://github.com/mannycarrera4))
 ## [v11.0.9](https://github.com/Workday/canvas-kit/releases/tag/v11.0.9) (2024-06-24)
 
 ### Documentation
