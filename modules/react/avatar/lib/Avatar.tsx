@@ -64,7 +64,8 @@ const avatarContainerStencil = createStencil({
         ...focusRing({separation: 2}),
       },
     },
-    ...hideMouseFocus,
+    // NOTE: Why does this break the build?
+    // ...hideMouseFocus,
   },
   modifiers: {
     variant: {
