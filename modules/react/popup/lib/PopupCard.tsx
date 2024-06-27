@@ -86,12 +86,6 @@ const popupCard = createStencil({
     animationDuration: '150ms',
     animationTimingFunction: 'ease-out',
     transformOrigin: `${transformOriginVertical} ${transformOriginHorizontal}`,
-    '@media (max-width: 320px)': {
-      animation: popupAnimation({vertical: 'bottom', horizontal: 'center'}),
-      animationDuration: '150ms',
-      animationTimingFunction: 'ease-out',
-      transformOrigin: 'bottom center',
-    },
     // Allow overriding of animation in special cases
     '.wd-no-animation &': {
       animation: 'none',
@@ -111,7 +105,13 @@ export const PopupCard = createSubcomponent('div')({
 
   return (
     <Card
-      cs={{animationName: popupAnimation(transformOrigin)}}
+      cs={{
+        animationName: popupAnimation(transformOrigin),
+        '@media (max-width: 320px)': {
+          transformOrigin: 'bottom center',
+          animationName: popupAnimation({vertical: 'top', horizontal: 'center'}),
+        },
+      }}
       {...mergeStyles(elemProps, [
         popupCard({
           transformOriginHorizontal: transformOrigin.horizontal,
