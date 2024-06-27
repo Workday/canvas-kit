@@ -1,13 +1,10 @@
 import * as React from 'react';
-import {keyframes} from '@emotion/react';
 
 import {Card} from '@workday/canvas-kit-react/card';
 import {space} from '@workday/canvas-kit-react/tokens';
 import {
-  styled,
   TransformOrigin,
   getTranslateFromOrigin,
-  StyledType,
   ExtractProps,
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
@@ -15,7 +12,7 @@ import {FlexStyleProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 
 import {getTransformFromPlacement} from './getTransformFromPlacement';
 import {usePopupCard, usePopupModel} from './hooks';
-import {createStencil, cssVar} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, keyframes} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export type FlexAndBoxProps = ExtractProps<typeof Card, never> & FlexStyleProps;
@@ -24,18 +21,20 @@ export interface PopupCardProps extends FlexAndBoxProps {
 }
 
 const popupAnimation = (transformOrigin: TransformOrigin) => {
-  const translate = getTranslateFromOrigin(transformOrigin, space.xl);
-
-  return keyframes`
-    0% {
-      opacity: 0;
-      transform: translate(${translate.x}px, ${translate.y}px);
-    }
-    100% {
-      opacity: 1;
-      transform: translate(0);
-    }
-  `;
+  const translate = getTranslateFromOrigin(transformOrigin, space.xxs);
+  /**
+   * Keyframe for the dots loading animation.
+   */
+  return keyframes({
+    '0%': {
+      opacity: 0,
+      transform: `translate(${translate.x}px, ${translate.y}px)`,
+    },
+    '100%': {
+      opacity: 1,
+      transform: 'translate(0)',
+    },
+  });
 };
 
 function getSpace(value?: string | number) {
@@ -84,7 +83,7 @@ const popupCard = createStencil({
     padding: system.space.x6,
     maxHeight: maxHeight,
     overflowY: 'auto',
-    animationDuration: '1s',
+    animationDuration: '150ms',
     animationTimingFunction: 'ease-out',
     transformOrigin: `${transformOriginVertical} ${transformOriginHorizontal}`,
     '@media (max-width: 320px)': {
@@ -100,31 +99,6 @@ const popupCard = createStencil({
   }),
 });
 
-const StyledPopupCard = styled(Card)<
-  StyledType & {width?: number | string; transformOrigin?: TransformOrigin}
->(({transformOrigin, theme}) => {
-  if (transformOrigin == null) {
-    return {};
-  }
-
-  return {
-    animation: popupAnimation(transformOrigin),
-    animationDuration: '1s',
-    animationTimingFunction: 'ease-out',
-    transformOrigin: `${transformOrigin.vertical} ${transformOrigin.horizontal}`,
-    [theme.canvas.breakpoints.down('s')]: {
-      animation: popupAnimation({vertical: 'bottom', horizontal: 'center'}),
-      animationDuration: '150ms',
-      animationTimingFunction: 'ease-out',
-      transformOrigin: 'bottom center',
-    },
-    // Allow overriding of animation in special cases
-    '.wd-no-animation &': {
-      animation: 'none',
-    },
-  };
-});
-
 export const PopupCard = createSubcomponent('div')({
   displayName: 'Popup.Card',
   modelHook: usePopupModel,
@@ -137,14 +111,13 @@ export const PopupCard = createSubcomponent('div')({
 
   return (
     <Card
-      animation={popupAnimation(transformOrigin)}
+      cs={{animationName: popupAnimation(transformOrigin)}}
       {...mergeStyles(elemProps, [
-        popupCard(),
+        popupCard({
+          transformOriginHorizontal: transformOrigin.horizontal,
+          transformOriginVertical: transformOrigin.vertical,
+        }),
         {[popupCard.vars.maxHeight]: cardMaxHeight},
-        {
-          [popupCard.vars.transformOriginHorizontal]: transformOrigin.horizontal,
-          [popupCard.vars.transformOriginVertical]: transformOrigin.vertical,
-        },
       ])}
     >
       {children}
