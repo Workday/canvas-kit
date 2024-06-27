@@ -3,7 +3,7 @@ import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {DeleteButton} from '@workday/canvas-kit-react/button';
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {Flex, Box} from '@workday/canvas-kit-react/layout';
-import {Select} from '@workday/canvas-kit-preview-react/select';
+import {Select} from '@workday/canvas-kit-react/select';
 
 export const ReturnFocus = () => {
   const ref = React.useRef<HTMLInputElement>(null);
@@ -18,24 +18,29 @@ export const ReturnFocus = () => {
 
   return (
     <Modal model={model}>
-      <FormField>
-        <FormField.Label>Choose an option</FormField.Label>
-        <FormField.Input
-          as={Select}
-          ref={ref}
-          options={['', 'Delete', 'Two']}
-          value={value}
-          onChange={e => {
-            const option = e.currentTarget.value;
-            if (option === 'Delete') {
-              model.events.show();
-              setValue('');
-            } else {
-              setValue(e.currentTarget.value);
-            }
-          }}
-        />
-      </FormField>
+      <Select items={['', 'Delete', 'Two']}>
+        <FormField>
+          <FormField.Label>Choose an option</FormField.Label>
+          <FormField.Input
+            as={Select.Input}
+            ref={ref}
+            onChange={e => {
+              const option = e.currentTarget.value;
+              if (option === 'Delete') {
+                model.events.show();
+                setValue('');
+              } else {
+                setValue(e.currentTarget.value);
+              }
+            }}
+          />
+          <Select.Popper>
+            <Select.Card>
+              <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
+            </Select.Card>
+          </Select.Popper>
+        </FormField>
+      </Select>
       <Modal.Overlay>
         <Modal.Card>
           <Modal.CloseIcon aria-label="Close" />
