@@ -28,6 +28,7 @@ const popupAnimation = (transformOrigin: TransformOrigin) => {
   return keyframes({
     '0%': {
       opacity: 0,
+      // @ts-ignore
       transform: `translate(${translate.x}, ${translate.y})`,
     },
     '100%': {
