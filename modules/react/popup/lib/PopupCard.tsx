@@ -28,11 +28,11 @@ const popupAnimation = (transformOrigin: TransformOrigin) => {
   return keyframes({
     '0%': {
       opacity: 0,
-      transform: `translate(${px2rem(translate.x)}, ${px2rem(translate.y)})`,
+      transform: `translate(${translate.x}, ${translate.y})`,
     },
     '100%': {
       opacity: 1,
-      transform: `translate(${system.space.zero})`,
+      transform: 'translate(0)',
     },
   });
 };

@@ -1,5 +1,6 @@
 import {CanvasSpaceValues} from '@workday/canvas-kit-react/tokens';
 import {TransformOrigin} from '../types';
+import {px2rem} from '@workday/canvas-kit-styling';
 
 type translateMapType = {
   x: {[key in TransformOrigin['horizontal']]: number};
@@ -32,7 +33,7 @@ export const getTranslateFromOrigin = (
   const distanceRem = distance.replace('rem', '');
   const calculatedDistance = Number(distanceRem) * 16;
   return {
-    x: translateMap.x[transformOrigin.horizontal] * parseInt(`${calculatedDistance}`, 10),
-    y: translateMap.y[transformOrigin.vertical] * parseInt(`${calculatedDistance}`, 10),
+    x: px2rem(translateMap.x[transformOrigin.horizontal] * parseInt(`${calculatedDistance}`, 10)),
+    y: px2rem(translateMap.y[transformOrigin.vertical] * parseInt(`${calculatedDistance}`, 10)),
   };
 };
