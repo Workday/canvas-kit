@@ -12,7 +12,7 @@ import {FlexStyleProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 
 import {getTransformFromPlacement} from './getTransformFromPlacement';
 import {usePopupCard, usePopupModel} from './hooks';
-import {createStencil, cssVar, keyframes} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, keyframes, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export type FlexAndBoxProps = ExtractProps<typeof Card, never> & FlexStyleProps;
@@ -28,11 +28,11 @@ const popupAnimation = (transformOrigin: TransformOrigin) => {
   return keyframes({
     '0%': {
       opacity: 0,
-      transform: `translate(${translate.x}px, ${translate.y}px)`,
+      transform: `translate(${px2rem(translate.x)}, ${px2rem(translate.y)})`,
     },
     '100%': {
       opacity: 1,
-      transform: 'translate(0)',
+      transform: `translate(${system.space.zero})`,
     },
   });
 };

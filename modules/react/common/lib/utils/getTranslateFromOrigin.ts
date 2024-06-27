@@ -27,7 +27,7 @@ const translateMap: translateMapType = {
  */
 export const getTranslateFromOrigin = (
   transformOrigin: TransformOrigin,
-  distance: CanvasSpaceValues | string
+  distance: CanvasSpaceValues
 ) => {
   const distanceRem = distance.replace('rem', '');
   const calculatedDistance = Number(distanceRem) * 16;
