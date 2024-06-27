@@ -3,7 +3,7 @@ import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {DeleteButton} from '@workday/canvas-kit-react/button';
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {Flex, Box} from '@workday/canvas-kit-react/layout';
-import {Select} from '@workday/canvas-kit-preview-react/select';
+import {Select} from '@workday/canvas-kit-react/select';
 
 export const ReturnFocus = () => {
   const ref = React.useRef<HTMLInputElement>(null);
