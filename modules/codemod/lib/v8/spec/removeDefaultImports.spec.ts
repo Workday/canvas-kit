@@ -69,7 +69,7 @@ describe('renameIconRefs', () => {
       import Breadcrumbs from '@workday/canvas-kit-preview-react/breadcrumbs';
       import ColorPicker from '@workday/canvas-kit-preview-react/color-picker';
       import Menu from '@workday/canvas-kit-preview-react/menu';
-      import Select from '@workday/canvas-kit-preview-react/select';
+      import Select from '@workday/canvas-kit-react/select';
       import SidePanel from '@workday/canvas-kit-preview-react/side-panel';
     `;
 
@@ -77,7 +77,7 @@ describe('renameIconRefs', () => {
       import { Breadcrumbs } from '@workday/canvas-kit-preview-react/breadcrumbs';
       import { ColorPicker } from '@workday/canvas-kit-preview-react/color-picker';
       import { Menu } from '@workday/canvas-kit-preview-react/menu';
-      import { Select } from '@workday/canvas-kit-preview-react/select';
+      import { Select } from '@workday/canvas-kit-react/select';
       import { SidePanel } from '@workday/canvas-kit-preview-react/side-panel';
     `;
 

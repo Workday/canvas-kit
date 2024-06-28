@@ -9,7 +9,6 @@ const renameDefaultMap = {
   '@workday/canvas-kit-preview-react/breadcrumbs': 'Breadcrumbs',
   '@workday/canvas-kit-preview-react/color-picker': 'ColorPicker',
   '@workday/canvas-kit-preview-react/menu': 'Menu',
-  '@workday/canvas-kit-preview-react/select': 'Select',
   '@workday/canvas-kit-preview-react/side-panel': 'SidePanel',
   '@workday/canvas-kit-react-fonts': 'fonts',
   '@workday/canvas-kit-react/toast': 'Toast',
