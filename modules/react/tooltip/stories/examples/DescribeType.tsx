@@ -1,36 +1,22 @@
 import React from 'react';
 
-import {DeleteButton} from '@workday/canvas-kit-react/button';
-import {Flex} from '@workday/canvas-kit-react/layout';
-import {Heading, Text} from '@workday/canvas-kit-react/text';
+import {DeleteButton, SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {alignTopIcon, trashIcon} from '@workday/canvas-system-icons-web';
-
-const files = ['Cover Letter.docx', 'Resume.docx', 'Portfolio.pptx', 'Portrait.png'];
-const listStyles = {
-  alignItems: 'center',
-  width: '35rem',
-};
-const deleteBtnStyle = {
-  marginLeft: 'auto',
-};
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {chartConfigIcon} from '@workday/canvas-system-icons-web';
 
 export const DescribeType = () => {
   return (
-    <>
-      <Heading size="medium">Uploaded Files:</Heading>
-      <Flex as="ul" gap="1rem" flexDirection="column">
-        {files.map(i => (
-          <Flex as="li" style={listStyles}>
-            <Text>{i}</Text>
-            <Tooltip type="describe" title={i}>
-              <DeleteButton icon={trashIcon} style={deleteBtnStyle}>
-                Delete
-              </DeleteButton>
-            </Tooltip>
-          </Flex>
-        ))}
-      </Flex>
-    </>
+    <Flex gap="s">
+      <Tooltip type="describe" title="Search using additional criteria">
+        <TertiaryButton icon={chartConfigIcon}>Advanced Search</TertiaryButton>
+      </Tooltip>
+      <Tooltip type="describe" title="Create saved search">
+        <SecondaryButton>Save</SecondaryButton>
+      </Tooltip>
+      <Tooltip type="describe" title="The service will restart after this action">
+        <DeleteButton>Delete</DeleteButton>
+      </Tooltip>
+    </Flex>
   );
 };
