@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Property} from 'csstype';
-import {createComponent, focusRing, hideMouseFocus} from '@workday/canvas-kit-react/common';
+import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
 import {cssVar, createStencil, calc} from '@workday/canvas-kit-styling';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {borderRadius} from '@workday/canvas-kit-react/tokens';
