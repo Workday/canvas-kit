@@ -33,7 +33,7 @@ export const getTranslateFromOrigin = (
   const distanceRem = distance.replace('rem', '');
   const calculatedDistance = Number(distanceRem) * 16;
   return {
-    x: px2rem(translateMap.x[transformOrigin.horizontal] * parseInt(`${calculatedDistance}`, 10)),
-    y: px2rem(translateMap.y[transformOrigin.vertical] * parseInt(`${calculatedDistance}`, 10)),
+    x: translateMap.x[transformOrigin.horizontal] * parseInt(`${calculatedDistance}`, 10),
+    y: translateMap.y[transformOrigin.vertical] * parseInt(`${calculatedDistance}`, 10),
   };
 };
