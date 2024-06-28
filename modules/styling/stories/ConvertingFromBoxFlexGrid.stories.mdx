@@ -1,0 +1,138 @@
+import {CustomButton} from './examples/CustomButton';
+import {CustomIcon} from './examples/CustomIcon';
+import {StyledButton} from './examples/StyledButton';
+
+<Meta title="Styling/Guides/Converting From Box Flex Grid" />
+
+# Back Story on Box, Flex and Grid
+
+When we introduced our layout components, we made it easy for our consumers to style via style
+props. The conveience was there, but the performance was lacking. Emotion did most of the heavy
+lifting and everything seemed fine until one of the contributors called out that they're
+[breaking up CSS-in-JS](https://dev.to/srmagura/why-were-breaking-up-wiht-css-in-js-4g9b). We were
+forced to think about the
+[future of styling](https://github.com/Workday/canvas-kit/discussions/2265) and what that meant for
+our consumers.
+
+Fast forward to v11, we made the concious effort to provide new
+[styling utilities](https://workday.github.io/canvas-kit/?path=/story/styling-why-canvas-styling--page).
+With those in mind, the way we style existing components and new ones has shifted including our
+layout components.
+
+Because of this shift, style props and with them, layout components will probably go away in favor
+of the new era of styling. The purpose of this document is to help guide you in that transition.
+
+## First Phase - Transition
+
+Refactor low-level, highly reusable components. If you use Box, Flex, or Grid and support style
+props, you can refactor them with `mergeStyles` and Stencils or `createStyles`. We created
+`mergeStyles` as a backwards-compatible style function that handles style props AND Stencils /
+`createStyles`. It will merge styles in the correct order and ensure you don’t have any unexpected
+regressions. If your components do not expose style props in their API, you can use `handleCsProp`
+instead of `mergeStyles`. This will also merge styles in the correct order but prevent style props
+from being used.
+
+```tsx
+// BEFORE refactoring
+import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
+
+interface ProfileCardProps extends FlexProps {}
+
+const ProfileCard = (props: ProfileCardProps) => {
+  return (
+    <Flex padding="s" {...props}>
+      My Profile Card
+    </Flex>
+  );
+};
+
+// AFTER refactoring
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {createStencil, CsProp} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+interface ProfileCardProps extends FlexProps, CsProp {}
+
+const profileCardStencil = createStencil({
+  base: {
+    // This would be a good oportunity to create a flexStencil that you can extend
+    display: 'flex',
+    padding: system.space.x4,
+  },
+});
+
+// Use createComponent to ensure `as` prop is still supported
+const ProfileCard = createComponent('div')({
+  displayName: 'ProfileCard',
+  Component: (props: ProfileCardProps, ref, Element) => {
+    return (
+      <Element ref={ref} {...mergeStyles(props, profileCardStencil())}>
+        My Profile Card
+      </Element>
+    );
+  },
+});
+
+// When you use ProfileCard, you can now style it via the cs prop
+const customStyles = createStyles({
+	background: system.color.bg.default
+})
+
+<ProfileCard cs={customStyles} />
+```
+
+## Phase 2 - More of Phase 1 Plus Complexity
+
+Refactor more complex components in the same way as phase 1. They’ll take more time individually,
+but you’ll likely have fewer of them, and you’ll have some wins from working on lower-level
+components first.
+
+```tsx
+// BEFORE refactoring
+import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
+import {styled} from '@workday/canvas-kit-react/common';
+import {space, colors} from '@workday/canvas-kit-react/tokens';
+
+interface ProfileCardProps extends FlexProps {
+  variant?: 'inverse';
+}
+
+const StyledCard = styled(Flex)<ProfileCardProps>(
+  {
+    padding: space.s,
+  },
+  ({inverse}) => {
+    return {
+      backgroundColor: inverse === 'inverse' ? colors.blackPepper400 : colors.frenchVanilla100,
+    };
+  }
+);
+
+const ProfileCard = (props: ProfileCardProps) => {
+  return <StyledCard {...props}>My Profile Card</StyledCard>;
+};
+
+// AFTER refactoring
+import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
+import {styled} from '@workday/canvas-kit-react/common';
+import {space, colors} from '@workday/canvas-kit-react/tokens';
+
+interface ProfileCardProps extends FlexProps {
+  variant?: 'inverse';
+}
+
+const StyledCard = styled(Flex)<ProfileCardProps>(
+  {
+    padding: space.s,
+  },
+  ({inverse}) => {
+    return {
+      backgroundColor: inverse === 'inverse' ? colors.blackPepper400 : colors.frenchVanilla100,
+    };
+  }
+);
+
+const ProfileCard = (props: ProfileCardProps) => {
+  return <StyledCard {...props}>My Profile Card</StyledCard>;
+};
+```

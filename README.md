@@ -25,7 +25,11 @@ implement user experiences consistent with
 
 **Installation**
 
-To get started using Canvas kit React first add or install the module to your existing React project
+To get started using Canvas kit React first add or install the module to your existing React
+project.
+
+> **Note:** As of v11, you must install our CSS variables. For more information, view our
+> [tokens docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
 
 ```sh
 yarn add @workday/canvas-kit-react
@@ -61,13 +65,14 @@ The Canvas Kit core team will take a look and discuss it with you.
 ## Contributing
 
 Want to contribute to Canvas Kit React? Please read our
-[contributing guidelines](https://workday.github.io/canvas-kit/?path=/docs/guides-contributing--page) to find out more and how to get
-started.
+[contributing guidelines](https://workday.github.io/canvas-kit/?path=/docs/guides-contributing--page)
+to find out more and how to get started.
 
 ## Maintaining
 
 If you're a Canvas Kit maintainer, please read our
-[maintaining docs](https://workday.github.io/canvas-kit/?path=/docs/guides-maintaining--page) to learn more about our processes.
+[maintaining docs](https://workday.github.io/canvas-kit/?path=/docs/guides-maintaining--page) to
+learn more about our processes.
 
 ## Open Development
 
