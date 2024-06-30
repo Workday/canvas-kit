@@ -136,7 +136,7 @@ describe('Tooltip', () => {
         cy.checkA11y();
       });
 
-      it('the "Delete" button should have an aria-describedby linking to the role="tooltip" element', () => {
+      it('the "Delete" button should have an accessible description equal to the tooltip text', () => {
         cy.findByRole('button', {name: 'Delete'}).should(
           'have.ariaDescription',
           'The service will restart after this action'
@@ -354,9 +354,7 @@ describe('Tooltip', () => {
           context(`when the preferred placement is set to ${io.placement}`, () => {
             beforeEach(() => {
               if (io.isMovedToSide) {
-                cy.findByTestId(`slide-${io.placement}`)
-                  .type('500')
-                  .trigger('change');
+                cy.findByTestId(`slide-${io.placement}`).type('500').trigger('change');
               }
               cy.findByRole('button', {name: io.placement}).click();
               cy.scrollTo(io.x, io.y);
