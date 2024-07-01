@@ -21,7 +21,7 @@ export interface PopupCardProps extends FlexAndBoxProps {
 }
 
 const popupAnimation = (transformOrigin: TransformOrigin) => {
-  const translate: any = getTranslateFromOrigin(transformOrigin, space.xxs);
+  const origin = getTranslateFromOrigin(transformOrigin, space.xxs);
   /**
    * Keyframe for the dots loading animation.
    */
@@ -29,7 +29,7 @@ const popupAnimation = (transformOrigin: TransformOrigin) => {
   return keyframes({
     '0%': {
       opacity: 0,
-      transform: `translate(${px2rem(translate.x)}, ${px2rem(translate.y)})`,
+      transform: `translate(${px2rem(origin.x)}, ${px2rem(origin.y)})`,
     },
     '100%': {
       opacity: 1,
