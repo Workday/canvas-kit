@@ -13,49 +13,49 @@ storiesOf('Components/Indicators/Avatar', module)
   .add('Light', () => (
     <div className="story">
       <h3>Extra-Extra Large</h3>
-      <Avatar as="div" size={Avatar.Size.xxl} />
+      <Avatar as="div" size={'extraExtraLarge'} />
       <h3>Extra Large</h3>
-      <Avatar as="div" size={Avatar.Size.xl} />
+      <Avatar as="div" size={'extraLarge'} />
       <h3>Large</h3>
-      <Avatar as="div" size={Avatar.Size.l} />
+      <Avatar as="div" size={'large'} />
       <h3>Medium</h3>
-      <Avatar as="div" size={Avatar.Size.m} />
+      <Avatar as="div" size={'medium'} />
       <h3>Small</h3>
-      <Avatar as="div" size={Avatar.Size.s} />
+      <Avatar as="div" size={'small'} />
       <h3>Extra Small</h3>
-      <Avatar as="div" size={Avatar.Size.xs} />
+      <Avatar as="div" size={'extraSmall'} />
     </div>
   ))
   .add('Dark', () => (
     <div className="story">
       <h3>Extra-Extra Large</h3>
-      <Avatar as="div" size={Avatar.Size.xxl} variant={Avatar.Variant.Dark} />
+      <Avatar as="div" size={'extraExtraLarge'} variant={'dark'} />
       <h3>Extra Large</h3>
-      <Avatar as="div" size={Avatar.Size.xl} variant={Avatar.Variant.Dark} />
+      <Avatar as="div" size={'extraLarge'} variant={'dark'} />
       <h3>Large</h3>
-      <Avatar as="div" size={Avatar.Size.l} variant={Avatar.Variant.Dark} />
+      <Avatar as="div" size={'large'} variant={'dark'} />
       <h3>Medium</h3>
-      <Avatar as="div" size={Avatar.Size.m} variant={Avatar.Variant.Dark} />
+      <Avatar as="div" size={'medium'} variant={'dark'} />
       <h3>Small</h3>
-      <Avatar as="div" size={Avatar.Size.s} variant={Avatar.Variant.Dark} />
+      <Avatar as="div" size={'small'} variant={'dark'} />
       <h3>Extra Small</h3>
-      <Avatar as="div" size={Avatar.Size.xs} variant={Avatar.Variant.Dark} />
+      <Avatar as="div" size={'extraSmall'} variant={'dark'} />
     </div>
   ))
   .add('Image', () => (
     <div className="story">
       <h3>Extra-Extra Large</h3>
-      <Avatar as="div" size={Avatar.Size.xxl} url={testAvatar} />
+      <Avatar as="div" size={'extraExtraLarge'} url={testAvatar} />
       <h3>Extra Large</h3>
-      <Avatar as="div" size={Avatar.Size.xl} url={testAvatar} />
+      <Avatar as="div" size={'extraLarge'} url={testAvatar} />
       <h3>Large</h3>
-      <Avatar as="div" size={Avatar.Size.l} url={testAvatar} />
+      <Avatar as="div" size={'large'} url={testAvatar} />
       <h3>Medium</h3>
-      <Avatar as="div" size={Avatar.Size.m} url={testAvatar} />
+      <Avatar as="div" size={'medium'} url={testAvatar} />
       <h3>Small</h3>
-      <Avatar as="div" size={Avatar.Size.s} url={testAvatar} />
+      <Avatar as="div" size={'small'} url={testAvatar} />
       <h3>Extra Small</h3>
-      <Avatar as="div" size={Avatar.Size.xs} url={testAvatar} />
+      <Avatar as="div" size={'extraSmall'} url={testAvatar} />
     </div>
   ))
   .add('Non-Square Image', () => (
@@ -63,11 +63,15 @@ storiesOf('Components/Indicators/Avatar', module)
       <h3>Original Rectangle Image</h3>
       <img alt="" src="https://placekitten.com/g/450/200" />
       <h3>Using Object Fit on a Rectangle Image</h3>
-      <Avatar as="div" size={200} url="https://placekitten.com/g/450/200" objectFit="contain" />
+      <Avatar as="div" url="https://placekitten.com/g/450/200" objectFit="contain" />
+      {/* NOTE: Need to make size dynamic */}
+      {/* <Avatar as="div" size={200} url="https://placekitten.com/g/450/200" objectFit="contain" /> */}
       <h3>Original Square Image</h3>
       <img alt="" src="https://placekitten.com/g/450/450" />
       <h3>Using a Square Image</h3>
-      <Avatar as="div" size={200} url="https://placekitten.com/g/450/450" />
+      <Avatar as="div" url="https://placekitten.com/g/450/450" />
+      {/* NOTE: Need to make size dynamic */}
+      {/* <Avatar as="div" size={200} url="https://placekitten.com/g/450/450" /> */}
     </div>
   ));
 
@@ -77,73 +81,49 @@ storiesOf('Components/Indicators/Avatar/Avatar Button', module)
   .add('Light', () => (
     <div className="story">
       <h3>Extra-Extra Large</h3>
-      <Avatar size={Avatar.Size.xxl} onClick={handleAvatarButtonClick} />
+      <Avatar size={'extraExtraLarge'} onClick={handleAvatarButtonClick} />
       <h3>Extra Large</h3>
-      <Avatar size={Avatar.Size.xl} onClick={handleAvatarButtonClick} />
+      <Avatar size={'extraLarge'} onClick={handleAvatarButtonClick} />
       <h3>Large</h3>
-      <Avatar size={Avatar.Size.l} onClick={handleAvatarButtonClick} />
+      <Avatar size={'large'} onClick={handleAvatarButtonClick} />
       <h3>Medium</h3>
-      <Avatar size={Avatar.Size.m} onClick={handleAvatarButtonClick} />
+      <Avatar size={'medium'} onClick={handleAvatarButtonClick} />
       <h3>Small</h3>
-      <Avatar size={Avatar.Size.s} onClick={handleAvatarButtonClick} />
+      <Avatar size={'small'} onClick={handleAvatarButtonClick} />
       <h3>Extra Small</h3>
-      <Avatar size={Avatar.Size.xs} onClick={handleAvatarButtonClick} />
+      <Avatar size={'extraSmall'} onClick={handleAvatarButtonClick} />
     </div>
   ))
   .add('Dark', () => (
     <div className="story">
       <h3>Extra-Extra Large</h3>
-      <Avatar
-        size={Avatar.Size.xxl}
-        variant={Avatar.Variant.Dark}
-        onClick={handleAvatarButtonClick}
-      />
+      <Avatar size={'extraExtraLarge'} variant={'dark'} onClick={handleAvatarButtonClick} />
       <h3>Extra Large</h3>
-      <Avatar
-        size={Avatar.Size.xl}
-        variant={Avatar.Variant.Dark}
-        onClick={handleAvatarButtonClick}
-      />
+      <Avatar size={'extraLarge'} variant={'dark'} onClick={handleAvatarButtonClick} />
       <h3>Large</h3>
-      <Avatar
-        size={Avatar.Size.l}
-        variant={Avatar.Variant.Dark}
-        onClick={handleAvatarButtonClick}
-      />
+      <Avatar size={'large'} variant={'dark'} onClick={handleAvatarButtonClick} />
       <h3>Medium</h3>
-      <Avatar
-        size={Avatar.Size.m}
-        variant={Avatar.Variant.Dark}
-        onClick={handleAvatarButtonClick}
-      />
+      <Avatar size={'medium'} variant={'dark'} onClick={handleAvatarButtonClick} />
       <h3>Small</h3>
-      <Avatar
-        size={Avatar.Size.s}
-        variant={Avatar.Variant.Dark}
-        onClick={handleAvatarButtonClick}
-      />
+      <Avatar size={'small'} variant={'dark'} onClick={handleAvatarButtonClick} />
       <h3>Extra Small</h3>
-      <Avatar
-        size={Avatar.Size.xs}
-        variant={Avatar.Variant.Dark}
-        onClick={handleAvatarButtonClick}
-      />
+      <Avatar size={'extraSmall'} variant={'dark'} onClick={handleAvatarButtonClick} />
     </div>
   ))
   .add('Image', () => (
     <div className="story">
       <h3>Extra-Extra Large</h3>
-      <Avatar size={Avatar.Size.xxl} url={testAvatar} onClick={handleAvatarButtonClick} />
+      <Avatar size={'extraExtraLarge'} url={testAvatar} onClick={handleAvatarButtonClick} />
       <h3>Extra Large</h3>
-      <Avatar size={Avatar.Size.xl} url={testAvatar} onClick={handleAvatarButtonClick} />
+      <Avatar size={'extraLarge'} url={testAvatar} onClick={handleAvatarButtonClick} />
       <h3>Large</h3>
-      <Avatar size={Avatar.Size.l} url={testAvatar} onClick={handleAvatarButtonClick} />
+      <Avatar size={'large'} url={testAvatar} onClick={handleAvatarButtonClick} />
       <h3>Medium</h3>
-      <Avatar size={Avatar.Size.m} url={testAvatar} onClick={handleAvatarButtonClick} />
+      <Avatar size={'medium'} url={testAvatar} onClick={handleAvatarButtonClick} />
       <h3>Small</h3>
-      <Avatar size={Avatar.Size.s} url={testAvatar} onClick={handleAvatarButtonClick} />
+      <Avatar size={'small'} url={testAvatar} onClick={handleAvatarButtonClick} />
       <h3>Extra Small</h3>
-      <Avatar size={Avatar.Size.xs} url={testAvatar} onClick={handleAvatarButtonClick} />
+      <Avatar size={'extraSmall'} url={testAvatar} onClick={handleAvatarButtonClick} />
       <h3>Broken Link</h3>
       <Avatar url="/fake/path/to/image.png" onClick={handleAvatarButtonClick} />
     </div>
