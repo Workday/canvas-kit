@@ -107,7 +107,7 @@ export const PopupCard = createSubcomponent('div')({
     <Card
       cs={{
         animationName: popupAnimation(transformOrigin),
-        '@media (max-width: 320px)': {
+        '@media (max-width: 767.5px)': {
           transformOrigin: 'bottom center',
           animationName: popupAnimation({vertical: 'top', horizontal: 'center'}),
         },
