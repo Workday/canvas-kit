@@ -12,7 +12,7 @@ import {FlexStyleProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 
 import {getTransformFromPlacement} from './getTransformFromPlacement';
 import {usePopupCard, usePopupModel} from './hooks';
-import {createStencil, cssVar, keyframes, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, keyframes} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export type FlexAndBoxProps = ExtractProps<typeof Card, never> & FlexStyleProps;
@@ -25,13 +25,14 @@ const popupAnimation = (transformOrigin: TransformOrigin) => {
   /**
    * Keyframe for the dots loading animation.
    */
-  const translateX = translate.x;
-  const translateY = translate.y;
+  // const translateX = translate.x;
+  // const translateY = translate.y;
 
   return keyframes({
     '0%': {
       opacity: 0,
-      transform: `translate(${px2rem(translateX)}, ${px2rem(translateY)})`,
+      translate: translate.x,
+      // transform: `translate(${px2rem(translateX)}, ${px2rem(translateY)})`,
     },
     '100%': {
       opacity: 1,
