@@ -25,13 +25,13 @@ const popupAnimation = (transformOrigin: TransformOrigin) => {
   /**
    * Keyframe for the dots loading animation.
    */
-  // const translateX = translate.x;
+  const translateX = translate.x;
   // const translateY = translate.y;
 
   return keyframes({
     '0%': {
       opacity: 0,
-      translate: translate.x,
+      translate: translateX,
       // transform: `translate(${px2rem(translateX)}, ${px2rem(translateY)})`,
     },
     '100%': {
