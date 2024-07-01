@@ -105,14 +105,16 @@ export const PopupCard = createSubcomponent('div')({
     return getTransformFromPlacement(model.state.placement || 'bottom');
   }, [model.state.placement]);
   const cardMaxHeight = getMaxHeight(elemProps.margin);
+  const animationName = popupAnimation(transformOrigin);
+  const animationNameResponsive = popupAnimation({vertical: 'top', horizontal: 'center'});
 
   return (
     <Card
       cs={{
-        animationName: popupAnimation(transformOrigin),
+        animationName: animationName,
         '@media (max-width: 767.5px)': {
           transformOrigin: 'bottom center',
-          animationName: popupAnimation({vertical: 'top', horizontal: 'center'}),
+          animationName: animationNameResponsive,
         },
       }}
       {...mergeStyles(elemProps, [
