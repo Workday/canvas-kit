@@ -15,29 +15,33 @@ const liveRegionStyle = createStyles({
   padding: system.space.x4,
   display: 'block',
   margin: system.space.x4 + ' 0',
+  width: '28rem',
 });
 
-export const VisibleLiveRegion = () => {
-  const [message, setMessage] = React.useState('This is an ARIA Live Region!');
+let liveRegionStr = 'This is an ARIA Live Region!';
 
-  // function handleChange(e) {}
+export const VisibleLiveRegion = () => {
+  const [message, setMessage] = React.useState('');
+
+  function handleChange(e) {
+    setMessage(e.target.value);
+  }
 
   function handleSendMessage(e) {
     e.preventDefault();
-    console.log('Message submitted');
-    // derive state: update live region string
-    // setState reset input ""
+    liveRegionStr = message;
+    setMessage('');
   }
 
   return (
     <>
       <AriaLiveRegion>
-        <Text cs={liveRegionStyle}>{message}</Text>
+        <Text cs={liveRegionStyle}>{liveRegionStr}</Text>
       </AriaLiveRegion>
-      <Flex as="form" onSubmit={handleSendMessage}>
+      <Flex as="form" onSubmit={handleSendMessage} alignItems="center" gap="s">
         <FormField>
           <FormField.Label>Type your message:</FormField.Label>
-          <FormField.Input as={TextInput} />
+          <FormField.Input as={TextInput} onChange={handleChange} value={message} />
         </FormField>
         <PrimaryButton type="submit">Send Message</PrimaryButton>
       </Flex>
