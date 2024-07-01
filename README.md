@@ -43,7 +43,7 @@ npm install @workday/canvas-kit-react
 import * as React from 'react';
 import {SecondaryButton} from '@workday/canvas-kit-react';
 
-export default() => <SecondaryButton>Button Label</SecondaryButton>;
+export default () => <SecondaryButton>Button Label</SecondaryButton>;
 ```
 
 ## Reporting a Bug
