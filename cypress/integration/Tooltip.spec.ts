@@ -138,7 +138,7 @@ describe('Tooltip', () => {
 
       it('the "Delete" button should have an accessible description equal to the tooltip text', () => {
         cy.findByRole('button', {name: 'Delete'}).should(
-          'have["aria-description"]',
+          'have.ariaDescription',
           'The service will restart after this action'
         );
       });
