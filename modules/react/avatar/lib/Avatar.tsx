@@ -47,6 +47,9 @@ export interface AvatarProps {
 }
 
 const avatarContainerStencil = createStencil({
+  vars: {
+    backgroundColor: '',
+  },
   base: {
     background: base.soap200,
     position: 'relative',
@@ -58,49 +61,77 @@ const avatarContainerStencil = createStencil({
     overflow: 'hidden',
     cursor: 'default',
     borderRadius: system.shape.round,
-    '&:not([disabled])': {
-      '&:focus': {
-        outline: 'none',
-        ...focusRing({separation: 2}),
-      },
+    '&:focus-visible:not([disabled]), &.focus:not([disabled])': {
+      outline: 'none',
+      ...focusRing({separation: 2}),
     },
-    // NOTE: Why does this break the build?
-    // ...hideMouseFocus,
+
+    ['& > [data-element-avatar-icon="true"]']: {
+      transition: 'opacity 150ms linear',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      // width: system.space.x8,
+      // height: system.space.x8,
+    },
   },
   modifiers: {
     variant: {
       light: {
         backgroundColor: system.color.bg.alt.default,
+        ['& [data-element-avatar-icon="true"]']: {
+          [systemIconStencil.vars.color]: system.color.fg.default,
+        },
       },
       dark: {
         backgroundColor: system.color.bg.primary.default,
-        [systemIconStencil.vars.color]: system.color.fg.inverse,
+        ['& [data-element-avatar-icon="true"]']: {
+          [systemIconStencil.vars.color]: system.color.fg.inverse,
+        },
       },
     },
     size: {
       extraSmall: {
         width: system.space.x4,
         height: system.space.x4,
+        ['& [data-element-avatar-icon="true"]']: {
+          [systemIconStencil.vars.size]: calc.multiply(system.space.x4, 0.625),
+        },
       },
       small: {
         width: system.space.x6,
         height: system.space.x6,
+        ['& [data-element-avatar-icon="true"]']: {
+          [systemIconStencil.vars.size]: calc.multiply(system.space.x6, 0.625),
+        },
       },
       medium: {
         width: system.space.x8,
         height: system.space.x8,
+        ['& [data-element-avatar-icon="true"]']: {
+          [systemIconStencil.vars.size]: calc.multiply(system.space.x8, 0.625),
+        },
       },
       large: {
         width: system.space.x10,
         height: system.space.x10,
+        ['& [data-element-avatar-icon="true"]']: {
+          [systemIconStencil.vars.size]: calc.multiply(system.space.x10, 0.625),
+        },
       },
       extraLarge: {
         width: system.space.x16,
         height: system.space.x16,
+        ['& [data-element-avatar-icon="true"]']: {
+          [systemIconStencil.vars.size]: calc.multiply(system.space.x16, 0.625),
+        },
       },
       extraExtraLarge: {
         width: calc.multiply(system.space.x10, 3),
         height: calc.multiply(system.space.x10, 3),
+        ['& [data-element-avatar-icon="true"]']: {
+          [systemIconStencil.vars.size]: calc.multiply(calc.multiply(system.space.x10, 3), 0.625),
+        },
       },
     },
     hasOnClick: {
@@ -111,59 +142,22 @@ const avatarContainerStencil = createStencil({
         cursor: 'default',
       },
     },
-  },
-});
-
-const avatarIconStencil = createStencil({
-  vars: {size: ''},
-  base: ({size}) => ({
-    transition: 'opacity 150ms linear',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: cssVar(size, system.space.x8),
-    height: cssVar(size, system.space.x8),
-  }),
-  modifiers: {
-    variant: {
-      light: {
-        backgroundColor: system.color.bg.alt.default,
-      },
-      dark: {
-        backgroundColor: system.color.bg.primary.default,
-        [systemIconStencil.vars.color]: system.color.fg.inverse,
-      },
-    },
-    size: {
-      extraSmall: {
-        [systemIconStencil.vars.size]: calc.multiply(system.space.x4, 0.625),
-      },
-      small: {
-        [systemIconStencil.vars.size]: calc.multiply(system.space.x6, 0.625),
-      },
-      medium: {
-        [systemIconStencil.vars.size]: calc.multiply(system.space.x8, 0.625),
-      },
-      large: {
-        [systemIconStencil.vars.size]: calc.multiply(system.space.x10, 0.625),
-      },
-      extraLarge: {
-        [systemIconStencil.vars.size]: calc.multiply(system.space.x16, 0.625),
-      },
-      extraExtraLarge: {
-        [systemIconStencil.vars.size]: calc.multiply(calc.multiply(system.space.x10, 3), 0.625),
-      },
-    },
     isImageLoaded: {
       true: {
-        opacity: 0,
+        ['& [data-element-avatar-icon="true"]']: {
+          opacity: 0,
+        },
       },
       false: {
-        opacity: 1,
+        ['& [data-element-avatar-icon="true"]']: {
+          opacity: 1,
+        },
       },
     },
   },
   defaultModifiers: {
+    variant: 'light',
+    size: 'medium',
     isImageLoaded: 'false',
   },
 });
@@ -228,16 +222,7 @@ export const Avatar: AvatarOverload = createComponent('button')({
           }),
         ])}
       >
-        <SystemIcon
-          icon={userIcon}
-          {...mergeStyles(elemProps, [
-            avatarIconStencil({
-              variant,
-              isImageLoaded: imageLoaded,
-              size,
-            }),
-          ])}
-        />
+        <SystemIcon icon={userIcon} data-element-avatar-icon />
         {url && (
           <img
             {...mergeStyles(elemProps, [
