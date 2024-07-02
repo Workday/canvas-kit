@@ -26,7 +26,7 @@ interface TranslatePosition {
 }
 
 const popupAnimation = (transformOrigin: TransformOrigin) => {
-  const translate: TranslatePosition = getTranslateFromOrigin(transformOrigin, space.xxs);
+  // const translate: TranslatePosition = getTranslateFromOrigin(transformOrigin, space.xxs);
   /**
    * Keyframe for the dots loading animation.
    */
@@ -35,7 +35,7 @@ const popupAnimation = (transformOrigin: TransformOrigin) => {
     styles: `
     0% {
       opacity: 0;
-      transform: translate(${translate.x}px, ${translate.y}px);
+      transform: translate(0px, 0px);
     }
     100% {
       opacity: 1;
