@@ -1,29 +1,44 @@
-import React, {useState, useRef} from 'react';
-import {AriaLiveRegion, AccessibleHide} from '@workday/canvas-kit-react/common';
+import React from 'react';
+
+import {AccessibleHide, AriaLiveRegion} from '@workday/canvas-kit-react/common';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {system} from '@workday/canvas-tokens-web';
+import {Text} from '@workday/canvas-kit-react/text';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+
+let liveRegionStr = '';
 
 export const HiddenLiveRegion = () => {
-  const [message, setMessage] = useState('This is an ARIA Live Region!');
-  const inputRef = useRef();
-  function handleSendMessage() {
-    setMessage(inputRef.current.value);
-    inputRef.current.value = '';
+  const [message, setMessage] = React.useState('');
+
+  function handleChange(e) {
+    setMessage(e.target.value);
+  }
+
+  function handleSendMessage(e) {
+    e.preventDefault();
+    liveRegionStr = message;
+    setMessage('');
   }
 
   return (
     <>
-      <Flex gap={`var(${system.space.x4})`} alignItems="flex-end">
-        <TextInput orientation="vertical">
-          <TextInput.Label>Type your message:</TextInput.Label>
-          <TextInput.Field ref={inputRef} />
-        </TextInput>
-        <PrimaryButton onClick={handleSendMessage}>Send Message</PrimaryButton>
+      <Flex
+        as="form"
+        aria-label="Hidden Live Region"
+        onSubmit={handleSendMessage}
+        alignItems="center"
+        gap="s"
+      >
+        <FormField>
+          <FormField.Label>Type your message:</FormField.Label>
+          <FormField.Input as={TextInput} onChange={handleChange} value={message} />
+        </FormField>
+        <PrimaryButton type="submit">Send Message</PrimaryButton>
       </Flex>
       <AriaLiveRegion>
-        <AccessibleHide>{message}</AccessibleHide>
+        <Text as={AccessibleHide}>{liveRegionStr}</Text>
       </AriaLiveRegion>
     </>
   );
