@@ -38,7 +38,13 @@ export const VisibleLiveRegion = () => {
       <AriaLiveRegion>
         <Text cs={liveRegionStyle}>{liveRegionStr}</Text>
       </AriaLiveRegion>
-      <Flex as="form" onSubmit={handleSendMessage} alignItems="center" gap="s">
+      <Flex
+        as="form"
+        aria-label="Visible Live Region"
+        onSubmit={handleSendMessage}
+        alignItems="center"
+        gap="s"
+      >
         <FormField>
           <FormField.Label>Type your message:</FormField.Label>
           <FormField.Input as={TextInput} onChange={handleChange} value={message} />
