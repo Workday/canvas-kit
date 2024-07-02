@@ -20,10 +20,10 @@ export interface PopupCardProps extends FlexAndBoxProps {
   children?: React.ReactNode;
 }
 
-interface TranslatePosition {
-  x: number;
-  y: number;
-}
+// interface TranslatePosition {
+//   x: number;
+//   y: number;
+// }
 
 const popupAnimation = (transformOrigin: TransformOrigin) => {
   // const translate: TranslatePosition = getTranslateFromOrigin(transformOrigin, space.xxs);
