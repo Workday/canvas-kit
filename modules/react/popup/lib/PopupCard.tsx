@@ -2,12 +2,16 @@ import * as React from 'react';
 
 import {Card} from '@workday/canvas-kit-react/card';
 import {space} from '@workday/canvas-kit-react/tokens';
-import {TransformOrigin, ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {
+  ExtractProps,
+  createSubcomponent,
+  getTranslateFromOrigin,
+} from '@workday/canvas-kit-react/common';
 import {FlexStyleProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 
 import {getTransformFromPlacement} from './getTransformFromPlacement';
 import {usePopupCard, usePopupModel} from './hooks';
-import {createStencil, cssVar, keyframes} from '@workday/canvas-kit-styling';
+import {createStencil, createVars, cssVar, keyframes} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export type FlexAndBoxProps = ExtractProps<typeof Card, never> & FlexStyleProps;
@@ -15,22 +19,18 @@ export interface PopupCardProps extends FlexAndBoxProps {
   children?: React.ReactNode;
 }
 
-// interface TranslatePosition {
-//   x: number;
-//   y: number;
-// }
+const translateVars = createVars('positionX', 'positionY');
 
-const popupAnimation = (transformOrigin: TransformOrigin) => {
-  // const translate: TranslatePosition = getTranslateFromOrigin(transformOrigin, space.xxs);
+const fadeIn =
   /**
    * Keyframe for the dots loading animation.
    */
-  return keyframes({
+  keyframes({
     name: 'fadeIn',
     styles: `
     0% {
-      opacity: 0;
-      transform: translate(0px, 0px);
+      opacity: 1;
+      transform: translate(${cssVar(translateVars.positionX)}, ${cssVar(translateVars.positionY)});
     }
     100% {
       opacity: 1;
@@ -38,7 +38,6 @@ const popupAnimation = (transformOrigin: TransformOrigin) => {
     }
   `,
   });
-};
 
 function getSpace(value?: string | number) {
   if (value && value in space) {
@@ -86,6 +85,8 @@ const popupCard = createStencil({
     padding: system.space.x6,
     maxHeight: maxHeight,
     overflowY: 'auto',
+    animation: `150ms ease-out ${fadeIn}`,
+    animationName: fadeIn,
     animationDuration: '150ms',
     animationTimingFunction: 'ease-out',
     transformOrigin: `${transformOriginVertical} ${transformOriginHorizontal}`,
@@ -93,7 +94,7 @@ const popupCard = createStencil({
     '.wd-no-animation &': {
       animation: 'none',
     },
-    '@media (max-width: 767.5px)': {
+    [`@media (max-width: ${system.breakpoints.s})`]: {
       transformOrigin: 'bottom center',
     },
   }),
@@ -107,24 +108,19 @@ export const PopupCard = createSubcomponent('div')({
   const transformOrigin = React.useMemo(() => {
     return getTransformFromPlacement(model.state.placement || 'bottom');
   }, [model.state.placement]);
+  const translate = getTranslateFromOrigin(transformOrigin, space.xxs);
   const cardMaxHeight = getMaxHeight(elemProps.margin);
-  const animationName = popupAnimation(transformOrigin);
-  const animationNameResponsive = popupAnimation({vertical: 'top', horizontal: 'center'});
 
   return (
     <Card
-      cs={{
-        animationName: animationName,
-        '@media (max-width: 767.5px)': {
-          animationName: animationNameResponsive,
-        },
-      }}
       {...mergeStyles(elemProps, [
         popupCard({
           transformOriginHorizontal: transformOrigin.horizontal,
           transformOriginVertical: transformOrigin.vertical,
         }),
         {[popupCard.vars.maxHeight]: cardMaxHeight},
+        {[translateVars.positionX]: translate.x + 'px'},
+        {[translateVars.positionY]: translate.y + 'px'},
       ])}
     >
       {children}
