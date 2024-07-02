@@ -1,21 +1,19 @@
 import * as React from 'react';
-import {keyframes} from '@emotion/react';
 
 import {Card} from '@workday/canvas-kit-react/card';
-import {space, type} from '@workday/canvas-kit-react/tokens';
+import {space} from '@workday/canvas-kit-react/tokens';
 import {
-  styled,
   TransformOrigin,
   getTranslateFromOrigin,
-  StyledType,
   ExtractProps,
-  useConstant,
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
-import {Flex, FlexStyleProps} from '@workday/canvas-kit-react/layout';
+import {FlexStyleProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 
 import {getTransformFromPlacement} from './getTransformFromPlacement';
 import {usePopupCard, usePopupModel} from './hooks';
+import {createStencil, cssVar, keyframes} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export type FlexAndBoxProps = ExtractProps<typeof Card, never> & FlexStyleProps;
 export interface PopupCardProps extends FlexAndBoxProps {
@@ -23,44 +21,24 @@ export interface PopupCardProps extends FlexAndBoxProps {
 }
 
 const popupAnimation = (transformOrigin: TransformOrigin) => {
-  const translate = getTranslateFromOrigin(transformOrigin, space.xxs);
+  const translate: {x: number; y: number} = getTranslateFromOrigin(transformOrigin, space.xxs);
+  /**
+   * Keyframe for the dots loading animation.
+   */
+  const translateX = translate.x;
+  const translateY = translate.y;
 
-  return keyframes`
-    0% {
-      opacity: 0;
-      transform: translate(${translate.x}px, ${translate.y}px);
-    }
-    100% {
-      opacity: 1;
-      transform: translate(0);
-    }
-  `;
+  return keyframes({
+    '0%': {
+      opacity: 0,
+      transform: `translate(${translateX}px, ${translateY}px)`,
+    },
+    '100%': {
+      opacity: 1,
+      transform: 'translate(0)',
+    },
+  });
 };
-
-const StyledPopupCard = styled(Card)<
-  StyledType & {width?: number | string; transformOrigin?: TransformOrigin}
->(({transformOrigin, theme}) => {
-  if (transformOrigin == null) {
-    return {};
-  }
-
-  return {
-    animation: popupAnimation(transformOrigin),
-    animationDuration: '150ms',
-    animationTimingFunction: 'ease-out',
-    transformOrigin: `${transformOrigin.vertical} ${transformOrigin.horizontal}`,
-    [theme.canvas.breakpoints.down('s')]: {
-      animation: popupAnimation({vertical: 'bottom', horizontal: 'center'}),
-      animationDuration: '150ms',
-      animationTimingFunction: 'ease-out',
-      transformOrigin: 'bottom center',
-    },
-    // Allow overriding of animation in special cases
-    '.wd-no-animation &': {
-      animation: 'none',
-    },
-  };
-});
 
 function getSpace(value?: string | number) {
   if (value && value in space) {
@@ -72,7 +50,7 @@ function getSpace(value?: string | number) {
 
 function getMaxHeight(margin?: string | number) {
   // set the default margin offset to space.xl
-  let marginOffset: string | number = space.xl;
+  let marginOffset: string | number = cssVar(system.space.x10);
 
   if (margin) {
     // parse the margin prop
@@ -91,33 +69,63 @@ function getMaxHeight(margin?: string | number) {
   return `calc(100vh - ${marginOffset})`;
 }
 
+const popupCard = createStencil({
+  vars: {
+    maxHeight: '',
+    transformOriginHorizontal: '',
+    transformOriginVertical: '',
+  },
+  base: ({maxHeight, transformOriginHorizontal, transformOriginVertical}) => ({
+    ...system.type.subtext.large,
+    display: 'flex',
+    position: 'relative',
+    maxWidth: `calc(100vw - ${system.space.x8})`,
+    flexDirection: 'column',
+    boxShadow: system.depth[5],
+    minHeight: system.space.zero,
+    padding: system.space.x6,
+    maxHeight: maxHeight,
+    overflowY: 'auto',
+    animationDuration: '150ms',
+    animationTimingFunction: 'ease-out',
+    transformOrigin: `${transformOriginVertical} ${transformOriginHorizontal}`,
+    // Allow overriding of animation in special cases
+    '.wd-no-animation &': {
+      animation: 'none',
+    },
+  }),
+});
+
 export const PopupCard = createSubcomponent('div')({
   displayName: 'Popup.Card',
   modelHook: usePopupModel,
   elemPropsHook: usePopupCard,
-})<PopupCardProps>(({children, ...elemProps}, Element, model) => {
+})<PopupCardProps>(({children, ref, ...elemProps}, Element, model) => {
   const transformOrigin = React.useMemo(() => {
     return getTransformFromPlacement(model.state.placement || 'bottom');
   }, [model.state.placement]);
+  const cardMaxHeight = getMaxHeight(elemProps.margin);
+  const animationName = popupAnimation(transformOrigin);
+  const animationNameResponsive = popupAnimation({vertical: 'top', horizontal: 'center'});
 
-  // As is a Flex that will render an element of `Element`
-  const As = useConstant(() => Flex.as(Element));
   return (
-    <StyledPopupCard
-      as={As}
-      transformOrigin={transformOrigin}
-      position="relative"
-      depth={5}
-      maxWidth={`calc(100vw - ${space.l})`}
-      flexDirection="column"
-      minHeight={0}
-      padding="m"
-      maxHeight={getMaxHeight(elemProps.margin)}
-      overflowY="auto"
-      {...type.levels.subtext.large}
-      {...elemProps}
+    <Card
+      cs={{
+        animationName: animationName,
+        '@media (max-width: 767.5px)': {
+          transformOrigin: 'bottom center',
+          animationName: animationNameResponsive,
+        },
+      }}
+      {...mergeStyles(elemProps, [
+        popupCard({
+          transformOriginHorizontal: transformOrigin.horizontal,
+          transformOriginVertical: transformOrigin.vertical,
+        }),
+        {[popupCard.vars.maxHeight]: cardMaxHeight},
+      ])}
     >
       {children}
-    </StyledPopupCard>
+    </Card>
   );
 });

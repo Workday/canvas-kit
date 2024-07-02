@@ -1,27 +1,22 @@
 import * as React from 'react';
 
-import {
-  createSubcomponent,
-  ExtractProps,
-  getTheme,
-  styled,
-  StyledType,
-} from '@workday/canvas-kit-react/common';
+import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {Popup} from '@workday/canvas-kit-react/popup';
-import {space} from '@workday/canvas-kit-react/tokens';
 
 import {useModalHeading, useModalModel} from './hooks';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 export interface ModalHeadingProps extends ExtractProps<typeof Popup.Heading, never> {}
 
-const ResponsiveModalHeading = styled(Popup.Heading)<ModalHeadingProps & StyledType>(({theme}) => {
-  const {canvas: canvasTheme} = getTheme(theme);
-  return {
-    [canvasTheme.breakpoints.down('s')]: {
-      marginBottom: space.zero,
-      padding: `${space.xxs} ${space.xxs} ${space.xxxs} ${space.xxs}`,
+const modalHeading = createStencil({
+  base: {
+    '@media (max-width: 767.5px)': {
+      marginBottom: system.space.zero,
+      padding: `${system.space.x2} ${system.space.x2} ${system.space.x1} ${system.space.x2}`,
     },
-  };
+  },
 });
 
 export const ModalHeading = createSubcomponent('h2')({
@@ -29,5 +24,5 @@ export const ModalHeading = createSubcomponent('h2')({
   modelHook: useModalModel,
   elemPropsHook: useModalHeading,
 })<ModalHeadingProps>((elemProps, Element) => {
-  return <ResponsiveModalHeading as={Element} {...elemProps} />;
+  return <Popup.Heading as={Element} {...mergeStyles(elemProps, modalHeading())} />;
 });

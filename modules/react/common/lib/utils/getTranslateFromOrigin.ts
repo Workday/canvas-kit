@@ -29,8 +29,10 @@ export const getTranslateFromOrigin = (
   transformOrigin: TransformOrigin,
   distance: CanvasSpaceValues
 ) => {
+  const distanceRem = distance.replace('rem', '');
+  const calculatedDistance = Number(distanceRem) * 16;
   return {
-    x: translateMap.x[transformOrigin.horizontal] * parseInt(distance, 10),
-    y: translateMap.y[transformOrigin.vertical] * parseInt(distance, 10),
+    x: translateMap.x[transformOrigin.horizontal] * parseInt(`${calculatedDistance}`, 10),
+    y: translateMap.y[transformOrigin.vertical] * parseInt(`${calculatedDistance}`, 10),
   };
 };
