@@ -12,7 +12,7 @@ import {FlexStyleProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 
 import {getTransformFromPlacement} from './getTransformFromPlacement';
 import {usePopupCard, usePopupModel} from './hooks';
-import {createStencil, cssVar, keyframes} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, keyframes, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export type FlexAndBoxProps = ExtractProps<typeof Card, never> & FlexStyleProps;
@@ -20,23 +20,28 @@ export interface PopupCardProps extends FlexAndBoxProps {
   children?: React.ReactNode;
 }
 
+interface TranslatePosition {
+  x: number;
+  y: number;
+}
+
 const popupAnimation = (transformOrigin: TransformOrigin) => {
-  const translate: {x: number; y: number} = getTranslateFromOrigin(transformOrigin, space.xxs);
+  const translate: TranslatePosition = getTranslateFromOrigin(transformOrigin, space.xxs);
   /**
    * Keyframe for the dots loading animation.
    */
-  const translateX = translate.x;
-  const translateY = translate.y;
-
   return keyframes({
-    '0%': {
-      opacity: 0,
-      transform: `translate(${translateX}px, ${translateY}px)`,
-    },
-    '100%': {
-      opacity: 1,
-      transform: 'translate(0)',
-    },
+    name: 'fadeIn',
+    styles: `
+    0% {
+      opacity: 0;
+      transform: translate(${translate.x}px, ${translate.y}px);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(0);
+    }
+  `,
   });
 };
 
@@ -93,6 +98,9 @@ const popupCard = createStencil({
     '.wd-no-animation &': {
       animation: 'none',
     },
+    '@media (max-width: 767.5px)': {
+      transformOrigin: 'bottom center',
+    },
   }),
 });
 
@@ -113,7 +121,6 @@ export const PopupCard = createSubcomponent('div')({
       cs={{
         animationName: animationName,
         '@media (max-width: 767.5px)': {
-          transformOrigin: 'bottom center',
           animationName: animationNameResponsive,
         },
       }}
