@@ -113,6 +113,7 @@ export const PopupCard = createSubcomponent('div')({
 
   return (
     <Card
+      ref={ref}
       {...mergeStyles(elemProps, [
         popupCard({
           transformOriginHorizontal: transformOrigin.horizontal,
