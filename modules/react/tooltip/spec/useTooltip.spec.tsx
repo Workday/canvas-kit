@@ -46,8 +46,7 @@ describe('useTooltip with type="describe"', () => {
     jest.advanceTimersByTime(300); // advance the timer by the amount of delay time
 
     expect(tooltip).toHaveAttribute('id');
-    const id = tooltip.getAttribute('id');
-    expect(target).toHaveAttribute('aria-describedby', id);
+    expect(target).toHaveAttribute('aria-description');
   });
   jest.clearAllTimers();
 });

@@ -1,0 +1,16 @@
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {ListOfUploadedFiles} from './examples/Tooltips/ListOfUploadedFiles';
+
+<Meta title="Examples/Tooltips" component={Tooltip} />
+
+# Accessible Tooltip Examples
+
+## Using descriptive tooltips for repeated text buttons
+
+In this example, the "Delete" buttons are used repeatedly to reference the multiple files that have
+been uploaded to the web app. The text buttons already have an accessible name (a.k.a. label)
+derived from the button's inner text. The `describe` tooltip can be useful for providing more
+in-context description for both low vision sighted users and screen reader users without overriding
+the button name "Delete".
+
+<ExampleCodeBlock code={ListOfUploadedFiles} />
