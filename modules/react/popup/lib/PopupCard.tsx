@@ -2,12 +2,7 @@ import * as React from 'react';
 
 import {Card} from '@workday/canvas-kit-react/card';
 import {space} from '@workday/canvas-kit-react/tokens';
-import {
-  TransformOrigin,
-  getTranslateFromOrigin,
-  ExtractProps,
-  createSubcomponent,
-} from '@workday/canvas-kit-react/common';
+import {TransformOrigin, ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {FlexStyleProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 
 import {getTransformFromPlacement} from './getTransformFromPlacement';
