@@ -112,7 +112,9 @@ const MenuContainer = styled(Card)({
   overflow: 'hidden',
 });
 
-const ResetButton = styled(TertiaryButton)<{shouldShow: boolean}>(
+const ResetButton = styled(TertiaryButton, {
+  shouldForwardProp: prop => prop !== 'shouldShow',
+})<{shouldShow: boolean}>(
   {
     position: 'absolute',
     margin: `auto ${space.xxxs}`,

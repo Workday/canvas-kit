@@ -21,7 +21,9 @@ export interface SkeletonTextProps {
   backgroundColor?: string;
 }
 
-const Line = styled('div')<
+const Line = styled('div', {
+  shouldForwardProp: prop => prop !== 'backgroundColor' && prop !== 'width',
+})<
   {
     backgroundColor: string;
     width: number | string;

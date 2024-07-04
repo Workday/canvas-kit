@@ -29,7 +29,12 @@ export interface ExpandableIconProps extends Omit<ExtractProps<typeof SystemIcon
   iconPosition?: IconPositions;
 }
 
-const StyledEndIcon = styled(SystemIcon)<{visible: boolean} & StyledType>(
+const omittedProps = ['visible'];
+const shouldForwardProp = (prop: string) => {
+  return !omittedProps.includes(prop);
+};
+
+const StyledEndIcon = styled(SystemIcon, {shouldForwardProp})<{visible: boolean} & StyledType>(
   {
     marginLeft: 'auto',
   },
@@ -41,7 +46,7 @@ const StyledEndIcon = styled(SystemIcon)<{visible: boolean} & StyledType>(
   })
 );
 
-const StyledStartIcon = styled(SystemIcon)<{visible: boolean} & StyledType>(
+const StyledStartIcon = styled(SystemIcon, {shouldForwardProp})<{visible: boolean} & StyledType>(
   {
     margin: `0 ${space.xxs} 0 0`,
     padding: space.xxxs,

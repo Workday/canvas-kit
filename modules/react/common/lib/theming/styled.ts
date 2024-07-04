@@ -10,28 +10,31 @@ const noop = (styles: any) => styles;
 type Interpolations = Array<any>;
 export type StyleRewriteFn = (obj?: CSSProperties) => CSSProperties | undefined;
 
-function styled<Props>(node: any) {
+interface ThemingStyledOptions {
+  shouldForwardProp?: (prop: any) => boolean;
+}
+
+function styled<Props>(node: any, options?: ThemingStyledOptions) {
   return (...args: Interpolation<Props>[]) => {
     const newArgs: Interpolations = args.map(
-      interpolation => (
-        props: Props & {theme: EmotionCanvasTheme & {_styleRewriteFn?: StyleRewriteFn}}
-      ) => {
-        props.theme = useTheme(props.theme);
-        const direction = props.theme.canvas.direction;
-        const maybeFlip = direction === ContentDirection.RTL ? rtlCSSJS : noop;
-        const maybeConvert = props.theme._styleRewriteFn || noop;
-        try {
-          if (typeof interpolation === 'function') {
-            return maybeFlip(maybeConvert(interpolation(props)) as CSSObject);
+      interpolation =>
+        (props: Props & {theme: EmotionCanvasTheme & {_styleRewriteFn?: StyleRewriteFn}}) => {
+          props.theme = useTheme(props.theme);
+          const direction = props.theme.canvas.direction;
+          const maybeFlip = direction === ContentDirection.RTL ? rtlCSSJS : noop;
+          const maybeConvert = props.theme._styleRewriteFn || noop;
+          try {
+            if (typeof interpolation === 'function') {
+              return maybeFlip(maybeConvert(interpolation(props)) as CSSObject);
+            }
+            return maybeFlip(maybeConvert(interpolation) as CSSObject);
+          } catch (e) {
+            return maybeConvert(interpolation);
           }
-          return maybeFlip(maybeConvert(interpolation) as CSSObject);
-        } catch (e) {
-          return maybeConvert(interpolation);
         }
-      }
     );
 
-    return emotionStyled(node)(newArgs);
+    return emotionStyled(node, options)(newArgs);
   };
 }
 

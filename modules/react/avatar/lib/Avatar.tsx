@@ -106,7 +106,9 @@ const StyledStack = styled('span')<Pick<AvatarProps, 'size'>>(
   })
 );
 
-const StyledIcon = styled(SystemIconCircle)<{isImageLoaded: boolean}>(
+const StyledIcon = styled(SystemIconCircle, {
+  shouldForwardProp: prop => prop !== 'isImageLoaded',
+})<{isImageLoaded: boolean}>(
   {
     transition: fadeTransition,
   },
@@ -115,7 +117,9 @@ const StyledIcon = styled(SystemIconCircle)<{isImageLoaded: boolean}>(
   })
 );
 
-const StyledImage = styled('img')<{isLoaded: boolean; objectFit?: Property.ObjectFit}>(
+const StyledImage = styled('img', {
+  shouldForwardProp: prop => prop !== 'isLoaded' && prop !== 'objectFit',
+})<{isLoaded: boolean; objectFit?: Property.ObjectFit}>(
   {
     width: '100%',
     height: '100%',

@@ -172,9 +172,9 @@ const SearchCombobox = styled(Combobox)({
   width: `100%`,
 });
 
-const SearchIcon = styled(TertiaryButton)<
-  Pick<SearchFormProps, 'isCollapsed'> & {isHidden: boolean}
->(({isCollapsed, isHidden}) => {
+const SearchIcon = styled(TertiaryButton, {
+  shouldForwardProp: prop => prop !== 'isHidden',
+})<Pick<SearchFormProps, 'isCollapsed'> & {isHidden: boolean}>(({isCollapsed, isHidden}) => {
   return {
     position: `absolute`,
     margin: isCollapsed ? `auto ${space.xxs}` : `auto ${space.xxxs}`,
