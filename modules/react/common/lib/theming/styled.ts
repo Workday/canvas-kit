@@ -6,10 +6,6 @@ import rtlCSSJS from 'rtl-css-js';
 
 const noop = (styles: any) => styles;
 
-// Pulled from https://github.com/emotion-js/emotion/blob/master/packages/styled-base/src/utils.js#L6 (not exported)
-type Interpolations = Array<any>;
-export type StyleRewriteFn = (obj?: CSSProperties) => CSSProperties | undefined;
-
 interface ThemingStyledOptions {
   shouldForwardProp?: (prop: any) => boolean;
 }
@@ -17,6 +13,10 @@ interface ThemingStyledOptions {
 export const filterOutProps = (omittedProps: string[]) => {
   return (prop: string) => !omittedProps.includes(prop);
 };
+
+// Pulled from https://github.com/emotion-js/emotion/blob/master/packages/styled-base/src/utils.js#L6 (not exported)
+type Interpolations = Array<any>;
+export type StyleRewriteFn = (obj?: CSSProperties) => CSSProperties | undefined;
 
 function styled<Props>(node: any, options?: ThemingStyledOptions) {
   return (...args: Interpolation<Props>[]) => {
