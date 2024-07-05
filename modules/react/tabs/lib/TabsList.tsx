@@ -9,6 +9,7 @@ import {
   useModalityType,
   styled,
   StyledType,
+  filterOutProps,
 } from '@workday/canvas-kit-react/common';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {
@@ -46,7 +47,7 @@ export const useTabsList = composeHooks(
 );
 
 const StyledStack = styled(Flex, {
-  shouldForwardProp: prop => prop !== 'maskImage',
+  shouldForwardProp: filterOutProps(['maskImage']),
 })<StyledType & {maskImage?: string}>(({maskImage}) => ({
   maskImage: maskImage,
 }));

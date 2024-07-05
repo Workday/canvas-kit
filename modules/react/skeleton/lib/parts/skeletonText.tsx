@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 
-import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
+import {createComponent, filterOutProps, StyledType} from '@workday/canvas-kit-react/common';
 import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 
 const TextContainer = styled('div')<StyledType>({
@@ -22,7 +22,7 @@ export interface SkeletonTextProps {
 }
 
 const Line = styled('div', {
-  shouldForwardProp: prop => prop !== 'backgroundColor' && prop !== 'width',
+  shouldForwardProp: filterOutProps('backgroundColor', 'width'),
 })<
   {
     backgroundColor: string;

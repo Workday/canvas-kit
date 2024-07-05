@@ -1,7 +1,12 @@
 import * as React from 'react';
 import {CSSObject} from '@emotion/styled';
 import {colors, space} from '@workday/canvas-kit-react/tokens';
-import {GrowthBehavior, styled, generateUniqueId} from '@workday/canvas-kit-react/common';
+import {
+  GrowthBehavior,
+  styled,
+  generateUniqueId,
+  filterOutProps,
+} from '@workday/canvas-kit-react/common';
 import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
 import {searchIcon, xIcon} from '@workday/canvas-system-icons-web';
 import {FormField, FormFieldLabelPosition} from '@workday/canvas-kit-react/form-field';
@@ -173,7 +178,7 @@ const SearchCombobox = styled(Combobox)({
 });
 
 const SearchIcon = styled(TertiaryButton, {
-  shouldForwardProp: prop => prop !== 'isHidden',
+  shouldForwardProp: filterOutProps(['isHidden']),
 })<Pick<SearchFormProps, 'isCollapsed'> & {isHidden: boolean}>(({isCollapsed, isHidden}) => {
   return {
     position: `absolute`,

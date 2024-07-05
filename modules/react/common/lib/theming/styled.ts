@@ -14,6 +14,10 @@ interface ThemingStyledOptions {
   shouldForwardProp?: (prop: any) => boolean;
 }
 
+export const filterOutProps = (omittedProps: string[]) => {
+  return (prop: string) => !omittedProps.includes(prop);
+};
+
 function styled<Props>(node: any, options?: ThemingStyledOptions) {
   return (...args: Interpolation<Props>[]) => {
     const newArgs: Interpolations = args.map(

@@ -6,6 +6,7 @@ import {
   styled,
   useIsRTL,
   useUniqueId,
+  filterOutProps,
 } from '@workday/canvas-kit-react/common';
 import {space, commonColors, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {Card} from '@workday/canvas-kit-react/card';
@@ -113,7 +114,7 @@ const MenuContainer = styled(Card)({
 });
 
 const ResetButton = styled(TertiaryButton, {
-  shouldForwardProp: prop => prop !== 'shouldShow',
+  shouldForwardProp: filterOutProps(['shouldShow']),
 })<{shouldShow: boolean}>(
   {
     position: 'absolute',
