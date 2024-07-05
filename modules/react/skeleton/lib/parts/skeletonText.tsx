@@ -22,7 +22,7 @@ export interface SkeletonTextProps {
 }
 
 const Line = styled('div', {
-  shouldForwardProp: filterOutProps('backgroundColor', 'width'),
+  shouldForwardProp: filterOutProps(['backgroundColor', 'width']),
 })<
   {
     backgroundColor: string;
