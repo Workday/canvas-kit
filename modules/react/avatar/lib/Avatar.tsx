@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Property} from 'csstype';
-import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
+import {createComponent, focusRing, pickForegroundColor} from '@workday/canvas-kit-react/common';
 import {cssVar, createStencil, calc} from '@workday/canvas-kit-styling';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {borderRadius} from '@workday/canvas-kit-react/tokens';
@@ -49,9 +49,11 @@ export interface AvatarProps {
 const avatarContainerStencil = createStencil({
   vars: {
     backgroundColor: '',
+    iconColor: '',
+    objectFit: '',
   },
-  base: {
-    background: base.soap200,
+  base: ({backgroundColor, objectFit}) => ({
+    background: backgroundColor,
     position: 'relative',
     display: 'flex',
     alignItems: 'center',
@@ -65,7 +67,6 @@ const avatarContainerStencil = createStencil({
       outline: 'none',
       ...focusRing({separation: 2}),
     },
-
     ['& > [data-element-avatar-icon="true"]']: {
       transition: 'opacity 150ms linear',
       display: 'flex',
@@ -74,17 +75,28 @@ const avatarContainerStencil = createStencil({
       // width: system.space.x8,
       // height: system.space.x8,
     },
-  },
+    ['& > [data-element-avatar-image="true"]']: {
+      position: 'absolute',
+      width: '100%',
+      height: '100%',
+      borderRadius: borderRadius.circle,
+      transition: 'opacity 150ms linear',
+      //NOTE: Cannot get typing to work with objectFit property.objectfit vs string
+      //objectFit: cssVar(objectFit, 'contain'),
+    },
+  }),
   modifiers: {
     variant: {
       light: {
-        backgroundColor: system.color.bg.alt.default,
+        // backgroundColor: system.color.bg.alt.default,
+        // NOTE: how to use iconColor for this color? needed for color contrast
         ['& [data-element-avatar-icon="true"]']: {
           [systemIconStencil.vars.color]: system.color.fg.default,
         },
       },
       dark: {
-        backgroundColor: system.color.bg.primary.default,
+        // backgroundColor: system.color.bg.primary.default,
+        // NOTE: how to use iconColor for this color? needed for color contrast
         ['& [data-element-avatar-icon="true"]']: {
           [systemIconStencil.vars.color]: system.color.fg.inverse,
         },
@@ -147,10 +159,16 @@ const avatarContainerStencil = createStencil({
         ['& [data-element-avatar-icon="true"]']: {
           opacity: 0,
         },
+        ['& [data-element-avatar-image="true"]']: {
+          opacity: 1,
+        },
       },
       false: {
         ['& [data-element-avatar-icon="true"]']: {
           opacity: 1,
+        },
+        ['& [data-element-avatar-image="true"]']: {
+          opacity: 0,
         },
       },
     },
@@ -158,32 +176,6 @@ const avatarContainerStencil = createStencil({
   defaultModifiers: {
     variant: 'light',
     size: 'medium',
-    isImageLoaded: 'false',
-  },
-});
-
-// NOTE: Objectfit not working
-const avatarImageStencil = createStencil({
-  vars: {objectFit: ''},
-  base: ({objectFit}) => ({
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
-    borderRadius: borderRadius.circle,
-    transition: 'opacity 150ms linear',
-    objectFit: cssVar(objectFit, 'container'),
-  }),
-  modifiers: {
-    isImageLoaded: {
-      true: {
-        opacity: 1,
-      },
-      false: {
-        opacity: 0,
-      },
-    },
-  },
-  defaultModifiers: {
     isImageLoaded: 'false',
   },
 });
@@ -207,7 +199,33 @@ export const Avatar: AvatarOverload = createComponent('button')({
       setImageLoaded(false);
     }, [url]);
 
-    // NOTE: Background color isn't dynamic - only default is variant light or dark
+    const getVariantBackgroundColor = (variant: 'light' | 'dark' | undefined) => {
+      switch (variant) {
+        case 'light':
+          return system.color.bg.alt.default;
+        case 'dark':
+          return system.color.bg.primary.default;
+        default:
+          return base.soap200;
+      }
+    };
+
+    const getBackgroundColor = (
+      background?: Property.BackgroundColor,
+      variant?: 'light' | 'dark'
+    ) => {
+      if (background) {
+        return background;
+      }
+      return getVariantBackgroundColor(variant);
+    };
+
+    const backgroundColor = getBackgroundColor(background, variant);
+    const iconColor = pickForegroundColor(
+      backgroundColor,
+      system.color.fg.inverse,
+      system.color.fg.default
+    );
 
     return (
       <Element
@@ -218,24 +236,16 @@ export const Avatar: AvatarOverload = createComponent('button')({
           avatarContainerStencil({
             variant,
             size,
+            objectFit,
+            backgroundColor,
+            iconColor,
+            isImageLoaded: imageLoaded,
             hasOnClick: onClick !== undefined,
           }),
         ])}
       >
         <SystemIcon icon={userIcon} data-element-avatar-icon />
-        {url && (
-          <img
-            {...mergeStyles(elemProps, [
-              avatarImageStencil({
-                isImageLoaded: imageLoaded,
-                objectFit,
-              }),
-            ])}
-            src={url}
-            alt={altText}
-            onLoad={loadImage}
-          />
-        )}
+        {url && <img data-element-avatar-image src={url} alt={altText} onLoad={loadImage} />}
       </Element>
     );
   },

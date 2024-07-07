@@ -13,7 +13,8 @@ storiesOf('Components/Indicators/Avatar', module)
   .add('Light', () => (
     <div className="story">
       <h3>Extra-Extra Large</h3>
-      <Avatar as="div" size={'extraExtraLarge'} />
+      {/* NOTE: For testing using background here */}
+      <Avatar as="div" size={'extraExtraLarge'} background="black" />
       <h3>Extra Large</h3>
       <Avatar as="div" size={'extraLarge'} />
       <h3>Large</h3>
