@@ -221,11 +221,11 @@ export const Avatar: AvatarOverload = createComponent('button')({
     };
 
     const backgroundColor = getBackgroundColor(background, variant);
-    const iconColor = pickForegroundColor(
-      backgroundColor,
-      system.color.fg.inverse,
-      system.color.fg.default
-    );
+    // const iconColor = pickForegroundColor(
+    //   backgroundColor,
+    //   system.color.fg.inverse,
+    //   system.color.fg.default
+    // );
 
     return (
       <Element
@@ -238,7 +238,7 @@ export const Avatar: AvatarOverload = createComponent('button')({
             size,
             objectFit,
             backgroundColor,
-            iconColor,
+            // iconColor,
             isImageLoaded: imageLoaded,
             hasOnClick: onClick !== undefined,
           }),
