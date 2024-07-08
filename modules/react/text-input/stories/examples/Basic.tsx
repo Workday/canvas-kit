@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import {css, jsx} from '@emotion/react';
+import {jsx} from '@emotion/react';
 import React from 'react';
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';

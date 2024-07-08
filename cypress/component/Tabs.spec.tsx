@@ -1,5 +1,3 @@
-import * as h from '../helpers';
-
 import * as React from 'react';
 import {Basic} from '../../modules/react/tabs/stories/examples/Basic';
 import {NamedTabs} from '../../modules/react/tabs/stories/examples/NamedTabs';

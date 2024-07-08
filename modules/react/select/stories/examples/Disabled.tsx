@@ -18,7 +18,7 @@ const options = [
 ];
 
 export const Disabled = () => {
-  const [value, setValue] = React.useState('');
+  const [_, setValue] = React.useState('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);

@@ -3,7 +3,6 @@ import {
   Light,
   Dark,
   Image,
-  NonSquareImage,
   LightButton,
   DarkButton,
   ImageButton,

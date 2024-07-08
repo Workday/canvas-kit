@@ -49,11 +49,3 @@ export function withSnapshotsEnabled<T extends Story<any> | StoriesDefaultExport
   };
   return x;
 }
-
-const a = {
-  parameters: {
-    chromatic: {
-      disable: false,
-    },
-  },
-};

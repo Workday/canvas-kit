@@ -8,7 +8,7 @@ const TooltipWithHook = ({type}: {type: 'label' | 'describe'}) => {
 
   return (
     <>
-      <button aria-describedby="originalDescribedById" {...targetProps}>
+      <button {...targetProps} aria-describedby="originalDescribedById">
         Hover
       </button>
       <TooltipContainer {...tooltipProps}>Tooltip Content</TooltipContainer>

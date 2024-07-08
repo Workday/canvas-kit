@@ -8,7 +8,6 @@ import {
   usePopupModel,
   useInitialFocus,
   useReturnFocus,
-  useFocusTrap,
 } from '@workday/canvas-kit-react/popup';
 import {menuGroupIcon} from '@workday/canvas-system-icons-web';
 

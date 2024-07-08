@@ -2,6 +2,7 @@ import * as React from 'react';
 import {Basic} from '../../modules/preview-react/segmented-control/stories/examples/Basic';
 import {Vertical} from '../../modules/preview-react/segmented-control/stories/examples/Vertical';
 import {RTL} from '../../modules/preview-react/segmented-control/stories/examples/RTL';
+import {Disabled} from '../../modules/preview-react/segmented-control/stories/examples/Disabled';
 
 describe('SegmentedControl', () => {
   [Basic, Vertical].forEach(Example => {
@@ -120,7 +121,7 @@ describe('SegmentedControl', () => {
 
   context('given the [Preview/Segmented Control, Disabled] story is rendered', () => {
     beforeEach(() => {
-      cy.loadStory('Preview/Segmented Control', 'Disabled');
+      cy.mount(<Disabled />);
     });
 
     context('all buttons should be disabled', () => {
