@@ -2,7 +2,8 @@
   "compilerOptions": {
     "lib": ["es2015", "es2017", "dom"],
     "strict": true,
-    "types": ["cypress", "@testing-library/cypress"]
+    "types": ["cypress", "@testing-library/cypress"],
+    "jsx": "react"
   },
-  "exclude": []
+  "exclude": ["node_modules"]
 }

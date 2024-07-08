@@ -9,6 +9,7 @@
     "@babel/preset-env": "^7.8.0",
     "@babel/preset-react": "^7.8.0",
     "@babel/preset-typescript": "^7.1.0",
+    "@cypress/webpack-preprocessor": "^6.0.2",
     "@emotion/eslint-plugin": "^11.7.0",
     "@emotion/is-prop-valid": "^1.1.1",
     "@storybook/addon-essentials": "7.6.17",
@@ -41,7 +42,7 @@
     "common-tags": "^1.8.0",
     "conventional-changelog-conventionalcommits": "^4.6.1",
     "core-js": "^3.5.0",
-    "cypress": "^9.4.0",
+    "cypress": "^13.13.0",
     "cypress-axe": "^0.5.1",
     "cypress-keyboard-plugin": "^1.0.3",
     "cypress-pipe": "^2.0.0",
@@ -137,6 +138,6 @@
     "@workday/canvas-accent-icons-web": "^3.0.9",
     "@workday/canvas-applet-icons-web": "^2.0.9",
     "@workday/canvas-system-icons-web": "^3.0.0",
-    "@workday/canvas-tokens-web": "^2.0.0"
+    "@workday/canvas-tokens-web": "^2.0.1"
   }
 }

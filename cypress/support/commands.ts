@@ -3,6 +3,8 @@ import * as axe from 'axe-core';
 // @ts-ignore There are no type definitions for this import
 import * as supports from 'ally.js/supports/supports';
 
+import '@testing-library/cypress/add-commands';
+
 declare global {
   interface Window {
     axe: typeof axe;

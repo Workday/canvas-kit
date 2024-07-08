@@ -1,196 +1,36 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-
-import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
-import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {DeleteButton, SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
-import {useMount} from '@workday/canvas-kit-react/common';
+import {DeleteButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Combobox} from '@workday/canvas-kit-react/combobox';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {
   Popup,
   useCloseOnOutsideClick,
   useCloseOnEscape,
-  useCloseOnTargetHidden,
   usePopupModel,
-  usePopupStack,
-  useBringToTopOnClick,
   useInitialFocus,
   useReturnFocus,
   useFocusTrap,
 } from '@workday/canvas-kit-react/popup';
-import {menuGroupIcon} from '@workday/canvas-system-icons-web';
+
+import {CloseOnTargetHiddenTest as CloseOnTargetHiddenTestExample} from './examples/CloseOnTargetHiddenTest';
+import {ReturnFocusTest as ReturnFocusTestExample} from './examples/ReturnFocusTest';
+import {MixedPopupTypes as MixedPopupTypesExample} from './examples/MixedPopupTypes';
+import {PopupWithNonHidablePopup as PopupWithNonHidablePopupExample} from './examples/PopupWithNonHidablePopup';
+import {TooltipReturnFocus as TooltipReturnFocusExample} from './examples/TooltipReturnFocus';
+import {ComboboxWithinPopup as ComboboxWithinPopupExample} from './examples/ComboboxWithinPopup';
 
 export default {
   title: 'Testing/Popups/Popup',
   component: Popup,
 };
 
-interface WindowProps {
-  top: number;
-  left: number;
-  heading: string;
-  children: React.ReactNode;
-  relativeNode: React.RefObject<HTMLDivElement>;
-}
-
-const Window = ({children, heading, relativeNode, top, left}: WindowProps) => {
-  const model = usePopupModel({
-    initialVisibility: 'visible',
-  });
-
-  usePopupStack(model.state.stackRef);
-  useBringToTopOnClick(model);
-
-  // position Window relative to a container
-  useMount(() => {
-    const element = model.state.stackRef.current;
-    const rect = relativeNode.current.getBoundingClientRect();
-    element.style.position = 'absolute';
-    element.style.top = `${top + rect.top}px`;
-    element.style.left = `${left + rect.left}px`;
-  });
-
-  return ReactDOM.createPortal(
-    <Popup model={model}>
-      <Popup.Card width={500}>
-        <Popup.Heading>{heading}</Popup.Heading>
-        <Popup.Body>{children}</Popup.Body>
-      </Popup.Card>
-    </Popup>,
-    model.state.stackRef.current
-  );
-};
-
-const TempPopup = ({
-  heading,
-  deleteText,
-  children,
-}: {
-  heading: string;
-  deleteText: string;
-  children: ({onClose}: {onClose: () => void}) => React.ReactNode;
-}) => {
-  const model = usePopupModel();
-
-  useInitialFocus(model);
-  useReturnFocus(model);
-  useCloseOnOutsideClick(model);
-  useCloseOnEscape(model);
-
-  return (
-    <Popup model={model}>
-      <Popup.Target as={DeleteButton} style={{marginRight: '16px'}}>
-        {deleteText}
-      </Popup.Target>
-      <Popup.Popper>
-        <Popup.Card width={400} padding="s">
-          <Popup.Heading>{heading}</Popup.Heading>
-          <Popup.Body>{children({onClose: model.events.hide})}</Popup.Body>
-        </Popup.Card>
-      </Popup.Popper>
-    </Popup>
-  );
-};
-
 export const MixedPopupTypes = {
-  render: () => {
-    const ref = React.useRef<HTMLDivElement>(null);
-
-    return (
-      <div ref={ref} style={{height: 420}}>
-        <Window heading="Window 1" top={50} left={50} relativeNode={ref}>
-          <Tooltip title="Really long tooltip showing how popup stacks overlap 1">
-            <span tabIndex={0}>Contents of Window 1</span>
-          </Tooltip>
-        </Window>
-        <Window heading="Window 2" top={100} left={250} relativeNode={ref}>
-          <Tooltip title="Really long tooltip showing how popup stacks overlap 2">
-            <span tabIndex={0}>Contents of Window 2</span>
-          </Tooltip>
-        </Window>
-        <Window heading="Window 4" top={300} left={250} relativeNode={ref}>
-          <div>
-            <Tooltip title="Really long tooltip showing how popup stacks overlap 3">
-              <span tabIndex={0}>Contents of Window 4</span>
-            </Tooltip>
-          </div>
-        </Window>
-        <Window heading="Window 3" top={200} left={75} relativeNode={ref}>
-          <div>
-            <Tooltip title="Really long tooltip showing how popup stacks overlap 4">
-              <span tabIndex={0} onClick={() => console.log('clicked')}>
-                Contents of Window 3
-              </span>
-            </Tooltip>
-            <div>
-              <TempPopup heading="Delete Item" deleteText="Delete Item">
-                {({onClose}) => (
-                  <>
-                    <div style={{marginBottom: '24px'}}>
-                      Are you sure you'd like to delete the item titled 'My Item'?
-                    </div>
-                    <TempPopup heading="Really Delete Item" deleteText="Delete">
-                      {({onClose}) => (
-                        <>
-                          <div style={{marginBottom: '24px'}}>
-                            Are you REALLY sure you'd like to delete the item titled 'My Item'?
-                          </div>
-
-                          <DeleteButton style={{marginRight: '16px'}} onClick={onClose}>
-                            Really Delete
-                          </DeleteButton>
-                          <SecondaryButton onClick={onClose}>Cancel</SecondaryButton>
-                        </>
-                      )}
-                    </TempPopup>
-                    <SecondaryButton onClick={onClose}>Cancel</SecondaryButton>
-                  </>
-                )}
-              </TempPopup>
-            </div>
-          </div>
-        </Window>
-      </div>
-    );
-  },
+  render: MixedPopupTypesExample,
 };
 
 export const PopupWithNonHidablePopup = {
-  render: () => {
-    const popup1 = usePopupModel();
-    const popup2 = usePopupModel();
-
-    useCloseOnOutsideClick(popup1);
-    useCloseOnEscape(popup1);
-
-    return (
-      <Flex gap="s">
-        <Popup model={popup1}>
-          <Popup.Target>Open Popup 1</Popup.Target>
-          <Popup.Popper>
-            <Popup.Card aria-label="Popup 1">
-              <Popup.CloseIcon aria-label="Close" size="small" />
-              <Popup.Body>
-                <p>Contents of Popup 1</p>
-                <Popup.Target model={popup2}>Open Popup 2</Popup.Target>
-              </Popup.Body>
-            </Popup.Card>
-          </Popup.Popper>
-        </Popup>
-        <Popup model={popup2}>
-          <Popup.Popper>
-            <Popup.Card aria-label="Popup 1">
-              <Popup.CloseIcon aria-label="Close" size="small" />
-              <Popup.Heading>Popup 2 (Not hidable on outside click)</Popup.Heading>
-              <Popup.Body>Contents of Popup 2</Popup.Body>
-            </Popup.Card>
-          </Popup.Popper>
-        </Popup>
-      </Flex>
-    );
-  },
+  render: PopupWithNonHidablePopupExample,
 };
 
 export const PopupWithBodyScroll = {
@@ -317,171 +157,17 @@ export const PopupWithBodyScroll = {
 };
 
 export const TooltipReturnFocus = {
-  render: () => {
-    const model = usePopupModel();
-
-    useCloseOnOutsideClick(model);
-    useCloseOnEscape(model);
-    useInitialFocus(model);
-    useReturnFocus(model);
-
-    return (
-      <Popup model={model}>
-        <Tooltip title="Open Popup">
-          <Popup.Target as={TertiaryButton} icon={menuGroupIcon} />
-        </Tooltip>
-        <Popup.Popper>
-          <Popup.Card>
-            <Popup.CloseIcon aria-label="Close" />
-            <Popup.Heading>Popup</Popup.Heading>
-            <Popup.Body>Contents</Popup.Body>
-          </Popup.Card>
-        </Popup.Popper>
-      </Popup>
-    );
-  },
+  render: TooltipReturnFocusExample,
 };
 
 export const ComboboxWithinPopup = {
-  render: () => {
-    const model = usePopupModel();
-
-    useCloseOnOutsideClick(model);
-    useCloseOnEscape(model);
-    useInitialFocus(model);
-    useReturnFocus(model);
-
-    return (
-      <Popup model={model}>
-        <Popup.Target as={SecondaryButton}>Open Popup</Popup.Target>
-        <Popup.Popper>
-          <Popup.Card>
-            <Popup.CloseIcon aria-label="Close" />
-            <Popup.Heading>Popup With Combobox</Popup.Heading>
-            <Popup.Body>
-              <FormField orientation="vertical">
-                <FormField.Label>Choose Your Food</FormField.Label>
-                <Combobox items={['Pizza', 'Cheeseburger', 'Fries', 'Hot Dog']}>
-                  <FormField.Input as={Combobox.Input} />
-                  <Combobox.Menu.Popper>
-                    <Combobox.Menu.Card>
-                      <Combobox.Menu.List>
-                        {item => <Combobox.Menu.Item>{item}</Combobox.Menu.Item>}
-                      </Combobox.Menu.List>
-                    </Combobox.Menu.Card>
-                  </Combobox.Menu.Popper>
-                </Combobox>
-              </FormField>
-            </Popup.Body>
-          </Popup.Card>
-        </Popup.Popper>
-      </Popup>
-    );
-  },
+  render: ComboboxWithinPopupExample,
 };
 
 export const ReturnFocusTest = {
-  render: () => {
-    const model = usePopupModel();
-
-    useCloseOnOutsideClick(model);
-    useCloseOnEscape(model);
-    useInitialFocus(model);
-    useReturnFocus(model);
-
-    return (
-      <div
-        style={{width: 400, height: 400, overflow: 'scroll', padding: 4}}
-        data-testid="scroll-area"
-      >
-        <div style={{width: 950}}>
-          <p style={{marginBottom: 400}}>Scroll down</p>
-          <p>Scroll right and click on the button</p>
-          <Popup model={model}>
-            <FormField id="return-focus-text-input" cs={{marginLeft: 400}}>
-              <FormField.Label>Name</FormField.Label>
-              <FormField.Input as={TextInput} />
-            </FormField>
-            <Popup.Target style={{marginBottom: 400, marginLeft: 410}} data-testid="target">
-              Open Popup
-            </Popup.Target>
-            <Popup.Popper>
-              <Popup.Card>
-                <Popup.CloseIcon aria-label="Close" />
-                <Popup.Body>
-                  <p>The "Open Popup" button should not receive focus if:</p>
-                  <ul>
-                    <li>You click on the input</li>
-                    <li>
-                      You scroll the container so that less than half of the "Open Popup" is showing
-                    </li>
-                    <li>
-                      <TertiaryButton
-                        data-testid="focus-text-input-link"
-                        onClick={() => {
-                          model.events.hide();
-                          document.getElementById('input-return-focus-text-input').focus();
-                        }}
-                      >
-                        You click this link
-                      </TertiaryButton>
-                    </li>
-                  </ul>
-                </Popup.Body>
-              </Popup.Card>
-            </Popup.Popper>
-          </Popup>
-        </div>
-      </div>
-    );
-  },
+  render: ReturnFocusTestExample,
 };
 
 export const CloseOnTargetHiddenTest = {
-  render: () => {
-    const model = usePopupModel();
-
-    useCloseOnEscape(model);
-    useCloseOnTargetHidden(model);
-
-    return (
-      <div
-        style={{width: 400, height: 400, overflow: 'scroll', padding: 4, position: 'relative'}}
-        data-testid="scroll-area"
-      >
-        <div style={{width: 950, height: 950}}>
-          <p style={{marginBottom: 400}}>Scroll down</p>
-          <p>Scroll right and click on the button</p>
-          <Popup model={model}>
-            <div
-              style={{
-                position: 'absolute',
-                width: 950,
-                height: 950,
-                display: 'flex',
-                top: 0,
-                left: 0,
-                justifyContent: 'center',
-              }}
-            >
-              <Popup.Target data-testid="target" style={{alignSelf: 'center'}}>
-                Open Popup
-              </Popup.Target>
-            </div>
-            <Popup.Popper>
-              <Popup.Card>
-                <Popup.CloseIcon aria-label="Close" />
-                <Popup.Body>
-                  <p>
-                    Scroll in any direction. The popup should close when at least 50% of the target
-                    button is hidden from view
-                  </p>
-                </Popup.Body>
-              </Popup.Card>
-            </Popup.Popper>
-          </Popup>
-        </div>
-      </div>
-    );
-  },
+  render: CloseOnTargetHiddenTestExample,
 };
