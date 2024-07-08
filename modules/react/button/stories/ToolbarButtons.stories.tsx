@@ -1,8 +1,9 @@
 import * as React from 'react';
 import {Meta, StoryObj} from '@storybook/react';
-import {activityStreamIcon, paragraphIcon} from '@workday/canvas-system-icons-web';
-
+import {activityStreamIcon, paragraphIcon, zoominIcon} from '@workday/canvas-system-icons-web';
 import {ToolbarIconButton, ToolbarDropdownButton} from '@workday/canvas-kit-react/button';
+import {Menu} from '@workday/canvas-kit-react/menu';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 
 const customElementStyles = {
   margin: '0 16px 0 8px',
@@ -46,13 +47,45 @@ export const ToolbarIconButtonStory: StoryObj = {
 export const ToolbarDropdownButtonStory: StoryObj = {
   render: () => (
     <div className="story">
-      <h3>Toolbar Dropdown Button</h3>
-      <ToolbarDropdownButton aria-label="Activity Stream" icon={paragraphIcon} />
-      <ToolbarDropdownButton aria-label="Activity Stream" icon={paragraphIcon} disabled={true} />
-      <h3>Custom Element Toolbar Dropdown Button</h3>
-      <ToolbarDropdownButton aria-label="Activity Stream">
-        <div style={customElementStyles}>Normal</div>
-      </ToolbarDropdownButton>
+      <h3>Toolbar Dropdown Button with Menu</h3>
+      <Menu>
+        <Tooltip title="Expand">
+          <Menu.Target
+            as={ToolbarDropdownButton}
+            icon={zoominIcon}
+            onClick={() => {
+              console.log('Expand icon clicked');
+            }}
+          ></Menu.Target>
+        </Tooltip>
+        <Menu.Popper>
+          <Menu.Card>
+            <Menu.List>
+              <Menu.Item
+                onClick={() => {
+                  console.log('Expand All clicked');
+                }}
+              >
+                Expand All
+              </Menu.Item>
+              <Menu.Item
+                onClick={() => {
+                  console.log('Expand to Leaf Level clicked');
+                }}
+              >
+                Expand to Leaf Level
+              </Menu.Item>
+              <Menu.Item
+                onClick={() => {
+                  console.log('Expand to nth Level clicked');
+                }}
+              >
+                Expand to nth Level
+              </Menu.Item>
+            </Menu.List>
+          </Menu.Card>
+        </Menu.Popper>
+      </Menu>
     </div>
   ),
 };

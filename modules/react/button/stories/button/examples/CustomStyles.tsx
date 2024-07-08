@@ -41,9 +41,24 @@ const myCustomStyles = createStyles({
   textTransform: 'uppercase',
 });
 
+const customColors = {
+  default: {
+    background: system.color.static.green.soft,
+    icon: system.color.static.green.strong,
+    label: system.color.static.green.strong,
+  },
+  hover: {
+    background: system.color.static.green.default,
+    icon: system.color.static.green.strong,
+  },
+};
+
 export const CustomStyles = () => (
   <Grid cs={{gap: px2rem(4), gridTemplateColumns: 'repeat(3, 1fr)', alignItems: 'center'}}>
     <MyCustomButton icon={plusIcon}>Styling Override Via Stencil Variables</MyCustomButton>
     <PrimaryButton cs={myCustomStyles}>Style Override Via Create Styles</PrimaryButton>
+    <PrimaryButton icon={plusIcon} colors={customColors}>
+      Styling Override Via Colors Prop
+    </PrimaryButton>
   </Grid>
 );
