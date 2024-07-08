@@ -1,5 +1,4 @@
 import {Meta} from '@storybook/react';
-import {ExampleCodeBlock} from './ExampleCodeBlock';
 
 export function withAutodocsEnabled(mdx: string, otherParams?: Meta['parameters']): Meta {
   return {
@@ -11,7 +10,6 @@ export function withAutodocsEnabled(mdx: string, otherParams?: Meta['parameters'
         page: mdx,
         components: {
           ...otherParams?.docs?.components,
-          ExampleCodeBlock,
         },
       },
     },
