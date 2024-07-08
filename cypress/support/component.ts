@@ -50,7 +50,7 @@ before(() => {
     rules: [
       {id: 'landmark-one-main', enabled: false}, // stories don't require navigation rules
       {id: 'page-has-heading-one', enabled: false}, // stories don't require a single heading
-      {id: 'region', enabled: false},
+      {id: 'region', enabled: false}, // examples don't required landmarks
     ],
   });
 });

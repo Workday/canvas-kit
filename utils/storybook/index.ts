@@ -9,4 +9,3 @@ export {withSnapshotsEnabled} from './withSnapshotsEnabled';
 export {default as CanvasProviderDecorator} from './CanvasProviderDecorator';
 export {PopperController, customViewport} from './PopperController';
 export * from './testingOnly';
-export {withAutodocsEnabled} from './withAutodocsEnabled';
