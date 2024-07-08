@@ -1,4 +1,4 @@
-import {CodeExamplePreview, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
 
 import {Basic} from './examples/Basic';
 import {Disabled} from './examples/Disabled';
@@ -45,27 +45,27 @@ yarn add @workday/canvas-kit-preview-react
 
 ### Basic Example
 
-<CodeExamplePreview code={Basic} />
+<ExampleCodeBlock code={Basic} />
 
 ### Disabled
 
 Use `TextInput.Field`s `disabled` prop to prevent users from interacting with it.
 
-<CodeExamplePreview code={Disabled} />
+<ExampleCodeBlock code={Disabled} />
 
 ### Placeholder
 
 Use `TextInput.Field`s `placeholder` prop to display a sample of its expected format or value before
 a value has been provided.
 
-<CodeExamplePreview code={Placeholder} />
+<ExampleCodeBlock code={Placeholder} />
 
 ### Required
 
 Use `TextInput.Field`'s `isRequired` prop (or use with the `useTextInputModel` hook) to indicate
 that the field is required. This will also add a red asterisk to `TextInput.Label`.
 
-<CodeExamplePreview code={Required} />
+<ExampleCodeBlock code={Required} />
 
 ### Read Only
 
@@ -73,7 +73,7 @@ Use `TextInput.Field`'s `readOnly` prop to indicate that the field can not be ch
 setting the background and border color to tranparent and the cursor to default to help inform users
 of the immutiblity.
 
-<CodeExamplePreview code={ReadOnly} />
+<ExampleCodeBlock code={ReadOnly} />
 
 ### Hidden Input
 
@@ -81,7 +81,7 @@ Set `TextInput.Field`'s `type` prop to `hidden` to completly hide a field while 
 value, often used for things like security tokens. Note: You will likely need to manually
 set`aria-describedby={undefined}`and`id={undefined}`
 
-<CodeExamplePreview code={HiddenInput} />
+<ExampleCodeBlock code={HiddenInput} />
 
 ### Ref Forwarding
 
@@ -89,7 +89,7 @@ All the TextInput subcomponents support
 [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). e.g. TextInput.Field will forward
 `ref` to its underlying `<input type="text">` element.
 
-<CodeExamplePreview code={RefForwarding} />
+<ExampleCodeBlock code={RefForwarding} />
 
 ### Grow
 
@@ -97,7 +97,7 @@ There are lots of ways to accomplish this. The TextInput.Field extends from Box 
 extend full width, e.g. setting width prop to 100%, or you can set the `alignItems` prop to
 `stretch` on `TextInput`, etc.
 
-<CodeExamplePreview code={Grow} />
+<ExampleCodeBlock code={Grow} />
 
 ### Label Position
 
@@ -106,11 +106,11 @@ spacing using the `gap` prop. Below are examples of both positions:
 
 #### Horizontal
 
-<CodeExamplePreview code={LabelPositionHorizontal} />
+<ExampleCodeBlock code={LabelPositionHorizontal} />
 
 #### Vertical
 
-<CodeExamplePreview code={LabelPositionVertical} />
+<ExampleCodeBlock code={LabelPositionVertical} />
 
 ### Visually Hiding The Label
 
@@ -118,13 +118,13 @@ If your label is just for screen reader users you can use the `accessibleHide` u
 `@workday/canvas-kit-react/common`. You will likely want to set the `gap` prop on `TextInput` to
 `zero`.
 
-<CodeExamplePreview code={HiddenLabel} />
+<ExampleCodeBlock code={HiddenLabel} />
 
 ### Type
 
 Use `TextInput.Field`'s `type` prop to customize the input type, e.g. `password`, `email`, etc.
 
-<CodeExamplePreview code={Password} />
+<ExampleCodeBlock code={Password} />
 
 ### Error States
 
@@ -133,11 +133,11 @@ you have an accompanying hint you can use the TextInput.Hint subcomponent.
 
 #### Errors
 
-<CodeExamplePreview code={Error} />
+<ExampleCodeBlock code={Error} />
 
 #### Themed Errors
 
-<CodeExamplePreview code={ThemedError} />
+<ExampleCodeBlock code={ThemedError} />
 
 ### Other Visual States
 
@@ -145,14 +145,14 @@ Use the `useThemedRing` hook to change the visual state of the input field.
 
 #### Alerts
 
-<CodeExamplePreview code={Alert} />
+<ExampleCodeBlock code={Alert} />
 
 #### Themed Alerts
 
 If the your theme's `main` color doesn't meet accessibility contrast, the `darkest` color will be
 used in an outer ring.
 
-<CodeExamplePreview code={ThemedAlert} />
+<ExampleCodeBlock code={ThemedAlert} />
 
 ## Component API
 

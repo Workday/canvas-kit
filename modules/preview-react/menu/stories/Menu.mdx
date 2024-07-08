@@ -1,4 +1,4 @@
-import {CodeExamplePreview, SymbolDoc} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
 import * as MenuStories from './Menu.stories';
 
 import {Basic} from './examples/Basic';
@@ -38,7 +38,7 @@ yarn add @workday/canvas-kit-preview-react
 `DeprecatedMenu` is typically triggered by an action such as pressing a button. Here's an example of
 how you might implement that behavior using a [`Popup`](/components/popups/popup/).
 
-<CodeExamplePreview code={Basic} />
+<ExampleCodeBlock code={Basic} />
 
 `DeprecatedMenu` will automatically assign focus to itself when it appears provided you set the
 `isOpen` prop correctly, so you do **not** need to use the `useInitialFocus` `Popup` hook. You
@@ -65,7 +65,7 @@ you'll need to add your own keyboard handling and aria attributes to the trigger
 
 ### Context Menu
 
-<CodeExamplePreview code={ContextMenu} />
+<ExampleCodeBlock code={ContextMenu} />
 
 ### Custom Menu Item
 
@@ -79,22 +79,22 @@ attributes:
 
 Below is an example:
 
-<CodeExamplePreview code={CustomMenuItem} />
+<ExampleCodeBlock code={CustomMenuItem} />
 
 ### Icons
 
-<CodeExamplePreview code={Icons} />
+<ExampleCodeBlock code={Icons} />
 
 ### Headers
 
 You can group menu items logically by adding a `isHeader` attribute on your `<MenuItems>`. To make
 your new items screen reader friendly add an `aria-label` around each grouped item.
 
-<CodeExamplePreview code={Headers} />
+<ExampleCodeBlock code={Headers} />
 
 ### Many Items
 
-<CodeExamplePreview code={ManyItems} />
+<ExampleCodeBlock code={ManyItems} />
 
 ## Component API
 

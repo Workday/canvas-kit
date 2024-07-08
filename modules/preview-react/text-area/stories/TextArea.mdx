@@ -1,4 +1,4 @@
-import {CodeExamplePreview, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
 
 import {Alert} from './examples/Alert';
 import {Basic} from './examples/Basic';
@@ -41,40 +41,40 @@ yarn add @workday/canvas-kit-preview-react
 
 ### Basic Example
 
-<CodeExamplePreview code={Basic} />
+<ExampleCodeBlock code={Basic} />
 
 ### Disabled
 
 Use `TextArea.Field`'s `disabled` prop to prevent users from interacting with the field.
 
-<CodeExamplePreview code={Disabled} />
+<ExampleCodeBlock code={Disabled} />
 
 ### Placeholder
 
 Use `TextArea.Field`'s `placeholder` prop to display a sample of its expected format or value before
 a value has been provided.
 
-<CodeExamplePreview code={Placeholder} />
+<ExampleCodeBlock code={Placeholder} />
 
 ### Required
 
 Use `TextArea.Field`'s `isRequired` prop (or use with the `useTextAreaModel` hook) to indicate that
 the field is required. This will also add a red asterisk to `TextArea.Label`.
 
-<CodeExamplePreview code={Required} />
+<ExampleCodeBlock code={Required} />
 
 ### Ref Forwarding
 
 `TextArea` supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will forward
 `ref` to its underlying `<textarea>` element.
 
-<CodeExamplePreview code={RefForwarding} />
+<ExampleCodeBlock code={RefForwarding} />
 
 ### Resize Constraints
 
 Use the `resize` css attribute to restrict resizing of it to certain dimensions.
 
-<CodeExamplePreview code={ResizeConstraints} />
+<ExampleCodeBlock code={ResizeConstraints} />
 
 ### Grow
 
@@ -82,7 +82,7 @@ There are lots of ways to accomplish this. The `TextArea.Field` extends from Box
 extend full width, e.g. setting width prop to 100%, or you can set the `alignItems` prop to
 `stretch` on `TextArea`, etc.
 
-<CodeExamplePreview code={Grow} />
+<ExampleCodeBlock code={Grow} />
 
 ### Label Position
 
@@ -91,11 +91,11 @@ spacing using the `gap` prop. Below are examples of both positions:
 
 #### Horizontal
 
-<CodeExamplePreview code={LabelPositionHorizontal} />
+<ExampleCodeBlock code={LabelPositionHorizontal} />
 
 #### Vertical
 
-<CodeExamplePreview code={LabelPositionVertical} />
+<ExampleCodeBlock code={LabelPositionVertical} />
 
 ### Visually Hiding The Label
 
@@ -103,14 +103,14 @@ If your label is just for screen reader users you can use the `accessibleHide` u
 `@workday/canvas-kit-react/common`. You will likely want to set the `gap` prop on `TextArea` to
 `zero`.
 
-<CodeExamplePreview code={HiddenLabel} />
+<ExampleCodeBlock code={HiddenLabel} />
 
 ### Error States
 
 Use the `hasError` property from `useTextAreaModel` to set the `TextArea` to the Error state. If you
 have an accompanying hint you can use the `TextArea.Hint` subcomponent.
 
-<CodeExamplePreview code={Error} />
+<ExampleCodeBlock code={Error} />
 
 ### Other Visual States
 
@@ -118,7 +118,7 @@ Use the `useThemedRing` hook to change the visual state of the `<textarea>` elem
 
 #### Alert
 
-<CodeExamplePreview code={Alert} />
+<ExampleCodeBlock code={Alert} />
 
 ## Component API
 

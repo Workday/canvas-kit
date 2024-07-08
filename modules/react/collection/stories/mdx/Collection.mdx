@@ -1,4 +1,4 @@
-import {CodeExamplePreview, SymbolDoc} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
 
 import {Basic} from './examples/Basic';
 import {StringChildren} from './examples/StringChildren';
@@ -38,7 +38,7 @@ The `ListBox` on its own isn't very useful. It registers each item with the mode
 to the model. The `ListBox` uses `useListRenderItems` which handles rendering static items as well
 as [dynamic items](#dynamic-items).
 
-<CodeExamplePreview code={Basic} />
+<ExampleCodeBlock code={Basic} />
 
 ### Identifying Items
 
@@ -48,7 +48,7 @@ A list item takes an optional `data-id` property that will be used to identify a
 override to a value of your choosing. This identifier will be used by other hooks to identify the
 item for selection, maintaining a cursor, or anything else.
 
-<CodeExamplePreview code={IdentifiedItems} />
+<ExampleCodeBlock code={IdentifiedItems} />
 
 ### Dynamic Items
 
@@ -66,7 +66,7 @@ config.
 Use strings when your data is a simple list of options. Each string value is used as the unique
 identifer.
 
-<CodeExamplePreview code={DynamicItemsStrings} />
+<ExampleCodeBlock code={DynamicItemsStrings} />
 
 ##### Array of Objects
 
@@ -74,7 +74,7 @@ Use objects when your data contains additional information. Each object must hav
 it's registered and searchable. Additional information such as icons or if the item is disabled can
 be included in the object and will be accessible in the render function.
 
-<CodeExamplePreview code={DynamicItemsObjects} />
+<ExampleCodeBlock code={DynamicItemsObjects} />
 
 > **Note: The `id` should match your text value for each item. This ensures proper selection of
 > items in components like `Select` and `Autocomplete`. If your `id` is different from your text
@@ -88,7 +88,7 @@ to ensure overflow. Virtualization uses absolute positioning of each item, which
 problems for popup menus. If your item count is low, pass `shouldVirtualize={false}` to disable
 virtualization.
 
-<CodeExamplePreview code={Virtualization} />
+<ExampleCodeBlock code={Virtualization} />
 
 ### DataLoader
 
@@ -101,7 +101,7 @@ The data loader also takes a model argument to know which model to create. The l
 model to handle asynchronous keyboard navigation and will return the configured model to you to pass
 along to the collection component.
 
-<CodeExamplePreview code={DataLoader} />
+<ExampleCodeBlock code={DataLoader} />
 
 #### Roving Tabindex
 
@@ -123,7 +123,7 @@ up/down arrows are pressed.
 **Note:** This example doesn't meet accessibility requirements. The list will have to have some type
 of context. Like "navigation list" or "menu list".
 
-<CodeExamplePreview code={RovingFocus} />
+<ExampleCodeBlock code={RovingFocus} />
 
 #### Selection
 
@@ -131,7 +131,7 @@ Lists support selection. `useSelectionItem` is applied to an item which adds an 
 the item to the `state.selectedIds`. The default selection manager is a single select. This example
 uses `ListBox` and creates a custom `SelectableItem` elemProps hook and component.
 
-<CodeExamplePreview code={Selection} />
+<ExampleCodeBlock code={Selection} />
 
 ### String Children
 
@@ -141,14 +141,14 @@ no `data-id` is provided to the item, the system will choose the registration in
 `'0'`, `'1'`, and so on. By passing `useListItemAllowChildStrings` to an item component, it will
 change this behavior to use the child text if no `data-id` is provided.
 
-<CodeExamplePreview code={StringChildren} />
+<ExampleCodeBlock code={StringChildren} />
 
 #### Multiple Selection
 
 The `selection` manager can be passed directly to the model configuration to handle different
 selection types. This example passes the `multiSelectionManager` to handle selecting multiple items.
 
-<CodeExamplePreview code={MultiSelection} />
+<ExampleCodeBlock code={MultiSelection} />
 
 ### Basic Grid
 
@@ -156,7 +156,7 @@ A grid is a two dimensional list. A `columnCount` config is added to inform how 
 of items. A grid is very similar to a list - it receives items as a single dimension list and uses
 the `columnCount` to determine keyboard navigation. Grids only support a single orientation.
 
-<CodeExamplePreview code={BasicGrid} />
+<ExampleCodeBlock code={BasicGrid} />
 
 #### Wrapping Grid
 
@@ -166,7 +166,7 @@ navigation managers, a non-wrapping `navigationManager` and the `wrappingNavigat
 following example passes the `wrappingNavigationManager` manager to the model. Observe how the
 cursor wraps around columns and rows when an edge of a column or row is encountered.
 
-<CodeExamplePreview code={WrappingGrid} />
+<ExampleCodeBlock code={WrappingGrid} />
 
 ## Component API
 

@@ -1,4 +1,4 @@
-import {CodeExamplePreview, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
 
 import {Basic} from './examples/Basic';
 import {WithoutCloseIcon} from './examples/WithoutCloseIcon';
@@ -32,7 +32,7 @@ yarn add @workday/canvas-kit-react
 The basic behavior of a modal is to hide all content from all users that is "behind" the modal
 dialog.
 
-<CodeExamplePreview code={Basic} />
+<ExampleCodeBlock code={Basic} />
 
 ### Without Close Icon
 
@@ -41,7 +41,7 @@ subcomponent. If you have a modal dialog that requires the user to accept instea
 an escape key or clicking outside the modal, you must create a new `PopupModel` without those
 behaviors and hand that model to the Modal dialog component.
 
-<CodeExamplePreview code={WithoutCloseIcon} />
+<ExampleCodeBlock code={WithoutCloseIcon} />
 
 ### Custom Focus
 
@@ -53,7 +53,7 @@ without having to navigate back up again. Sometimes, it is a better user experie
 different element. The following example shows how `initialFocusRef` can be used to change which
 element receives focus when the modal opens.
 
-<CodeExamplePreview code={CustomFocus} />
+<ExampleCodeBlock code={CustomFocus} />
 
 ### Return Focus
 
@@ -65,7 +65,7 @@ not suite your needs. The `Modal.Target` adds both a `ref` and an `onClick`. If 
 `returnFocusRef`, you only need to worry about the `onClick`. If you're using a menu, you might need
 to use a different callback. Calling `model.events.show()` will show the Modal.
 
-<CodeExamplePreview code={ReturnFocus} />
+<ExampleCodeBlock code={ReturnFocus} />
 
 ### Custom Target
 
@@ -80,7 +80,7 @@ requires a `label` prop.
 > with the target button first, you'll also need to use `React.forwardRef` in your target component.
 > Without this, the Modal will open at the top-left of the window instead of around the target.
 
-<CodeExamplePreview code={CustomTarget} />
+<ExampleCodeBlock code={CustomTarget} />
 
 ### Body Content Overflow
 
@@ -88,7 +88,7 @@ The Modal automatically handles overflowing content inside the `Modal.Body` elem
 larger than the browser's height will allow, the content will overflow with a scrollbar. You may
 need to restrict the height of your browser to observe the overflow.
 
-<CodeExamplePreview code={BodyOverflow} />
+<ExampleCodeBlock code={BodyOverflow} />
 
 ### Full overlay scrolling
 
@@ -99,14 +99,14 @@ If content is large, scrolling the entire overlay container is an option. Use th
 This has the effect of scrolling the heading, close button, and any action buttons. If this type of
 scrolling behavior is not desired, try the [Body Content Overflow](#body-content-overflow) method.
 
-<CodeExamplePreview code={FullOverflow} />
+<ExampleCodeBlock code={FullOverflow} />
 
 ### Form Modal
 
 The `Modal.Card` can be turned into a `form` element to make a form modal. The `model` should be
 hoisted to allow for form validation and allow you to control when the modal closes.
 
-<CodeExamplePreview code={FormModal} />
+<ExampleCodeBlock code={FormModal} />
 
 ## Component API
 

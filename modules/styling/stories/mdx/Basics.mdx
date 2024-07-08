@@ -1,4 +1,4 @@
-import {CodeExamplePreview, SymbolDoc, StylePropsTable} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, SymbolDoc, StylePropsTable} from '@workday/canvas-kit-docs';
 import {CreateStyles} from './examples/CreateStyles';
 import {CreateVars} from './examples/CreateVars';
 import {CreateModifiers} from './examples/CreateModifiers';
@@ -10,7 +10,7 @@ import {CreateStencil} from './examples/CreateStencil';
 
 <SymbolDoc name="createStyles" />
 
-<CodeExamplePreview code={CreateStyles} />
+<ExampleCodeBlock code={CreateStyles} />
 
 In this example, the HTML will look like:
 
@@ -32,7 +32,7 @@ We're using `className` for simplicity here. Most components will use the `cs` p
 versatility.
 
 <SymbolDoc name="createVars" />
-<CodeExamplePreview code={CreateVars} />
+<ExampleCodeBlock code={CreateVars} />
 
 In this example, the HTML will look like:
 
@@ -62,7 +62,7 @@ component, a stencil should be created for each subcomponet. If your component i
 component, a stencil can have nested styles.
 
 <SymbolDoc name="createStencil" />
-<CodeExamplePreview code={CreateStencil} />
+<ExampleCodeBlock code={CreateStencil} />
 
 ## Concepts
 
@@ -338,7 +338,7 @@ The HTML will look something like this:
 
 Notice the stencil adds all the class names that match the base, modifiers, and compound modifiers.
 
-<CodeExamplePreview code={CreateStencil} />
+<ExampleCodeBlock code={CreateStencil} />
 
 ### Variables and Modifiers with same keys
 

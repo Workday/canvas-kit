@@ -1,4 +1,4 @@
-import {CodeExamplePreview, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
 import * as SidePanelStories from './SidePanel.stories';
 
 import {Basic} from './examples/Basic';
@@ -40,7 +40,7 @@ of the `ToggleButton` as well as the direction of the expand / collapse animatio
 CSS Flexbox for layouts and using the provided components, you shouldn't have to provide any custom
 logic or styling for bidirecitonal support.
 
-<CodeExamplePreview code={Basic} />
+<ExampleCodeBlock code={Basic} />
 
 ### Hidden Name
 
@@ -48,7 +48,7 @@ logic or styling for bidirecitonal support.
 attribute. However, as seen in the example below, you can apply a `hidden` attribute to your label
 if you do not want it to be visible.
 
-<CodeExamplePreview code={HiddenName} />
+<ExampleCodeBlock code={HiddenName} />
 
 ### Alternate Variant
 
@@ -56,14 +56,14 @@ if you do not want it to be visible.
 `alternate` variant is 5, if `alternate` SidePanel has an overlay behavior the depth 6 should be
 used (this case is covered in the Examples section).
 
-<CodeExamplePreview code={AlternatePanel} />
+<ExampleCodeBlock code={AlternatePanel} />
 
 ### External Control
 
 Sometimes you'll want to control `SidePanel`'s' expand / collapse behavior from outside the
 component. In that case, you can use the `controlProps` supplied by the `useSidePanel` hook.
 
-<CodeExamplePreview code={ExternalControl} />
+<ExampleCodeBlock code={ExternalControl} />
 
 ### Right Origin
 
@@ -71,14 +71,14 @@ By default, `SidePanel` uses a `left` origin. This sets the `ToggleButton`'s pos
 as well as the direction of the animation. But you can set `SidePanel`'s origin to `"right"` to flip
 these. As with the left-origin panel, all right-origin styles have bidirecitonal support.
 
-<CodeExamplePreview code={RightOrigin} />
+<ExampleCodeBlock code={RightOrigin} />
 
 ### Always Open
 
 If you do not need `SidePanel`'s' expand / collapse behavior, you can simply omit the `controlProps`
 and `ToggleButton`.
 
-<CodeExamplePreview code={AlwaysOpen} />
+<ExampleCodeBlock code={AlwaysOpen} />
 
 The majority of `SidePanel`'s logic and funcitonality lives in this container component. Most of
 this functionality has been described in the examples above, but there a couple specific callbacks
@@ -89,7 +89,7 @@ worth mentioning here.
 The `onExpandedChange` callback is called when the boolean `expanded` state is updated. This is a
 handy way to hook into these updates to trigger side-effects. Below is an example:
 
-<CodeExamplePreview code={OnExpandedChange} />
+<ExampleCodeBlock code={OnExpandedChange} />
 
 ### onStateTransition
 
@@ -99,7 +99,7 @@ callback it called on all state transitions and returns the current transtion st
 of four `SidePanelTransitionStates`, `expanding`, `expanded`, `collapsing`, and `collapsed`. Below
 is an example:
 
-<CodeExamplePreview code={OnStateTransition} />
+<ExampleCodeBlock code={OnStateTransition} />
 
 ## Component API
 

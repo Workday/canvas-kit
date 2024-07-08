@@ -1,4 +1,4 @@
-import {CodeExamplePreview, SymbolDoc} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
 import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
 
 import {Basic} from './examples/Basic';
@@ -34,7 +34,7 @@ yarn add @workday/canvas-kit-react
 
 ### Basic Example
 
-<CodeExamplePreview code={Basic} />
+<ExampleCodeBlock code={Basic} />
 
 Note that the `type` prop is required (there is no default value). `type` accepts the following
 values:
@@ -56,7 +56,7 @@ accepts the following values:
 - `StatusIndicator.Emphasis.High` (Default)
 - `StatusIndicator.Emphasis.Low`
 
-<CodeExamplePreview code={Emphasis} />
+<ExampleCodeBlock code={Emphasis} />
 
 Note that the `High` and `Low` emphasis levels are identical for `Transparent` Status Indicators.
 
@@ -65,7 +65,7 @@ Note that the `High` and `Low` emphasis levels are identical for `Transparent` S
 Set the `icon` prop of the Status Indicator to a Canvas System Icon to display that icon beside the
 label.
 
-<CodeExamplePreview code={Icon} />
+<ExampleCodeBlock code={Icon} />
 
 ### Max Width
 
@@ -76,7 +76,7 @@ Avoid truncation wherever possible by using shorter text in Status Indicators. I
 truncation is necessary, you should use an `OverflowTooltip`. For the full text to be accessible
 when you do this, you should make the tooltip focusable with `tabIndex`.
 
-<CodeExamplePreview code={MaxWidth} />
+<ExampleCodeBlock code={MaxWidth} />
 
 ## Component API
 

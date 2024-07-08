@@ -1,4 +1,4 @@
-import {CodeExamplePreview, SymbolDoc} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
 
 import {Basic} from './examples/Basic';
 import {Alert} from './examples/Alert';
@@ -43,7 +43,7 @@ provide an `onChange` handler to the `RadioGroup` to track the selected value as
 `useFieldset` prop is set to `true` to meet accessibility standards. This ensures the `label` text
 from `FormField` is attached to the `RadioGroup` and read out as a group for voiceover.
 
-<CodeExamplePreview code={Basic} />
+<ExampleCodeBlock code={Basic} />
 
 Our example uses [React state](<(https://react.dev/learn/state-a-components-memory)>) to track the
 value of the `RadioGroup`.
@@ -56,35 +56,35 @@ value of the `RadioGroup`.
 Set the `variant` prop of `RadioGroup.RadioButton` to `inverse` to ensure proper contrast on dark
 backgrounds.
 
-<CodeExamplePreview code={Inverse} />
+<ExampleCodeBlock code={Inverse} />
 
 ### Radio Group with No Value
 
 Omit the `value` prop from `RadioGroup` to render the group with no selected
 `RadioGroup.RadioButton`.
 
-<CodeExamplePreview code={NoValue} />
+<ExampleCodeBlock code={NoValue} />
 
 ### Ref Forwarding
 
 `RadioGroup.RadioButton` supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html).
 It will forward `ref` to its underlying `<input type="radio">` element.
 
-<CodeExamplePreview code={RefForwarding} />
+<ExampleCodeBlock code={RefForwarding} />
 
 ### Label Position
 
 Set the `orientation` prop of the Form Field to designate the position of the label relative to the
 input component. By default, the orientation will be set to `vertical`.
 
-<CodeExamplePreview code={LabelPosition} />
+<ExampleCodeBlock code={LabelPosition} />
 
 ### Required
 
 Set the `required` prop of the wrapping `FormField` to `true` to indicate that the field is
 required. Labels for required fields are suffixed by a red asterisk.
 
-<CodeExamplePreview code={Required} />
+<ExampleCodeBlock code={Required} />
 
 ### Disabled
 
@@ -92,21 +92,21 @@ Set the `disabled` prop of `RadioGroup.RadioButton` to prevent users from intera
 careful not to disable a pre-selected radio button as this will block keyboard access to the entire
 `RadioGroup`.
 
-<CodeExamplePreview code={Disabled} />
+<ExampleCodeBlock code={Disabled} />
 
 ### Custom Radio Button
 
 Use `RadioGroup.Label` instead of `RadioGroup.RadioButton` if you need direct access to the label
 and the radio input. This will allow you to apply custom styling to the text and radio input.
 
-<CodeExamplePreview code={Custom} />
+<ExampleCodeBlock code={Custom} />
 
 ### Standalone Radio Button
 
 Use `StyledRadioButton` when you want a styled radio button on its own without using `RadioGroup`.
 You will need to handle behavior and accessibility.
 
-<CodeExamplePreview code={StandaloneRadio} />
+<ExampleCodeBlock code={StandaloneRadio} />
 
 Use `RadioGroup.Label` when you want more control styling the text and radio input but still want
 some behavior handled for you.
@@ -124,13 +124,13 @@ associated to the `RadioGroup` and read out by voiceover.
 
 Use the alert state when a selection is valid but there is additional information.
 
-<CodeExamplePreview code={Alert} />
+<ExampleCodeBlock code={Alert} />
 
 #### Error
 
 Use the error state when the selection is no longer valid.
 
-<CodeExamplePreview code={Error} />
+<ExampleCodeBlock code={Error} />
 
 ### React Hook Form
 

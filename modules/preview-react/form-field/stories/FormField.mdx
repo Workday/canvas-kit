@@ -1,4 +1,4 @@
-import {CodeExamplePreview, SymbolDoc} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
 import * as FormFieldStories from './FormField.stories';
 
 import {Basic} from './examples/Basic';
@@ -36,7 +36,7 @@ yarn add @workday/canvas-kit-preview-react
 Form Field should be used in tandem with most Canvas Kit input components to ensure they meet
 accessibility standards. The orientation of the label by default is `vertical`.
 
-<CodeExamplePreview code={Basic} />
+<ExampleCodeBlock code={Basic} />
 
 ### Error States
 
@@ -49,33 +49,33 @@ Set the `error` prop of the Form Field or define it in the model to indicate it 
 
 Use the alert state when a value is valid but there is additional information.
 
-<CodeExamplePreview code={Alert} />
+<ExampleCodeBlock code={Alert} />
 
 ### Error
 
 Use the error state when the value is no longer valid.
 
-<CodeExamplePreview code={Error} />
+<ExampleCodeBlock code={Error} />
 
 ### Disabled
 
 Set the `disabled` prop of `FormField.Input` to prevent users from interacting with it.
 
-<CodeExamplePreview code={Disabled} />
+<ExampleCodeBlock code={Disabled} />
 
 ### Hint
 
 Use `FormField.Hint` to display a short message below the input component and `FormField.Container`
 to ensure proper alignment.
 
-<CodeExamplePreview code={Hint} />
+<ExampleCodeBlock code={Hint} />
 
 ### Label Position Horizontal
 
 Set the `orientation` prop of the Form Field to designate the position of the label relative to the
 input component. By default, the orientation will be set to `vertical`.
 
-<CodeExamplePreview code={LabelPositionHorizontal} />
+<ExampleCodeBlock code={LabelPositionHorizontal} />
 
 ### Grow
 
@@ -84,7 +84,7 @@ component) to expand to the width of its container.
 
 **Note: This Prop is deprecated and will be removed in a future major version.**
 
-<CodeExamplePreview code={Grow} />
+<ExampleCodeBlock code={Grow} />
 
 ### Ref Forwarding
 
@@ -92,21 +92,21 @@ If you need full customization you can use the `FormField` behavior hooks to bui
 solution. It is also easy it work with custom components or third party libraries and get the CKR
 accessibility guarantees by using the `as` prop.
 
-<CodeExamplePreview code={RefForwarding} />
+<ExampleCodeBlock code={RefForwarding} />
 
 ### Required
 
 Set the `isRequired` prop of the Form Field to `true` to indicate that the field is required. Labels
 for required fields are suffixed by a red asterisk.
 
-<CodeExamplePreview code={Required} />
+<ExampleCodeBlock code={Required} />
 
 ### Field Set
 
 Set the `as` prop of the `FormField` to `fieldset` and the `as` prop of the `FormField.Label` to
 `legend` when using `RadioGroup` to ensure proper accessbility.
 
-<CodeExamplePreview code={FieldSet} />
+<ExampleCodeBlock code={FieldSet} />
 
 ### Custom
 
@@ -114,7 +114,7 @@ If you need full customization you can use the `FormField` behavior hooks to bui
 solution. It is also easy it work with custom components or third party libraries and get the CKR
 accessibility guarantees by using the `as` prop.
 
-<CodeExamplePreview code={Custom} />
+<ExampleCodeBlock code={Custom} />
 
 ### Custom id
 
@@ -122,21 +122,21 @@ Form Field will automatically generate an HTML `id` for its input element to lin
 correponding label. Alternatively, you may set the `id` prop of the Form Field to specify a custom
 `id` for the input element. The `id` will be appended by `input-${your-unique-id}`.
 
-<CodeExamplePreview code={CustomId} />
+<ExampleCodeBlock code={CustomId} />
 
 ### All Fields
 
 Form Field should allow you to use it with all `inputs` including `Select`, `TextInput`, `Checkbox`,
 `TextArea`, `Switch`, and `RadioGroup`.
 
-<CodeExamplePreview code={AllFields} />
+<ExampleCodeBlock code={AllFields} />
 
 ### Themed Errors
 
 You can theme your error rings by wrapping an input in a `CanvasProvider` and defining
 `focusOutline` and `error` properties on the `theme`.
 
-<CodeExamplePreview code={ThemedError} />
+<ExampleCodeBlock code={ThemedError} />
 
 ### Custom Styles
 

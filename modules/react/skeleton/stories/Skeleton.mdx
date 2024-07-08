@@ -1,4 +1,4 @@
-import {CodeExamplePreview, SymbolDoc} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
 import {Basic} from './examples/Basic';
 import {Color} from './examples/Color';
 import {Header} from './examples/Header';
@@ -35,11 +35,11 @@ Here's an example of how you might compose Skeleton components (along with non-S
 such as `Box` and `Flex`) to create a loading placeholder for a piece of content comprised of an
 icon, a heading, and some text.
 
-<CodeExamplePreview code={Basic} />
+<ExampleCodeBlock code={Basic} />
 
 And here's an example that simulates how that Skeleton might work in practice.
 
-<CodeExamplePreview code={Simulation} />
+<ExampleCodeBlock code={Simulation} />
 
 Press the **Simulate Loading** button to simulate the loading of the content (customize the loading
 time using the **Load Time** field), or check the **Loading** check box to force the Skeleton to
@@ -51,7 +51,7 @@ All Skeleton subcomponents accept a `backgroundColor` prop which can be used to 
 the subcomponent. This is generally only recommended to be used for dark or gray backgrounds to
 ensure the Skeleton components are visible.
 
-<CodeExamplePreview code={Color} />
+<ExampleCodeBlock code={Color} />
 
 ### Text
 
@@ -59,13 +59,13 @@ ensure the Skeleton components are visible.
 a width of `100%` and a fixed height of `21px`, with the last line having a width of `60%` if there
 are multiple lines.
 
-<CodeExamplePreview code={Text} />
+<ExampleCodeBlock code={Text} />
 
 ### Header
 
 `Skeleton.Header` renders a placeholder for header content such as headings.
 
-<CodeExamplePreview code={Header} />
+<ExampleCodeBlock code={Header} />
 
 ### Shape
 
@@ -73,7 +73,7 @@ are multiple lines.
 Set the `height`, `width`, and `borderRadius` props of the `Skeleton.Shape` to create various
 rectangular and circular shapes.
 
-<CodeExamplePreview code={Shape} />
+<ExampleCodeBlock code={Shape} />
 
 ## Component API
 

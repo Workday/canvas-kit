@@ -43,7 +43,7 @@ const cardStencil = createStencil({
   },
 });
 
-export const CodeExamplePreview = ({code}: any) => {
+export const ExampleCodeBlock = ({code}: any) => {
   const [isCodeDisplayed, setCodeDisplayed] = React.useState(false);
 
   return (

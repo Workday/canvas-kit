@@ -1,4 +1,4 @@
-import {CodeExamplePreview, SymbolDoc} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
 import {Basic} from './examples/Basic';
 import {Focus} from './examples/Focus';
 import * as DialogStories from './Dialog.stories';
@@ -28,7 +28,7 @@ Unlike Modal, Dialog does _not_ render the rest of the page inert while it is ac
 be used in situations where the task does not require immediate attention such as in the example
 below.
 
-<CodeExamplePreview code={Basic} />
+<ExampleCodeBlock code={Basic} />
 
 ### Focus Redirect
 
@@ -38,7 +38,7 @@ attention.
 
 The following example shows how Dialog manages focus in and out of the component.
 
-<CodeExamplePreview code={Focus} />
+<ExampleCodeBlock code={Focus} />
 
 Instead of trapping focus within the Dialog, it is effectively treated as an inline element next to
 its triggering `Dialog.Target` button. Tabbing out of the Dialog will close the popup and move focus

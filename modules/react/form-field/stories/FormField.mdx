@@ -1,4 +1,4 @@
-import {CodeExamplePreview, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
 import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
 import {Alert} from './examples/Alert';
 import {AlertLabel} from './examples/AlertLabel';
@@ -43,7 +43,7 @@ accessibility standards.
 
 Here's an example of Form Field being used with [Text Input](/components/inputs/text-input/).
 
-<CodeExamplePreview code={Basic} />
+<ExampleCodeBlock code={Basic} />
 
 ### Custom Input id
 
@@ -51,7 +51,7 @@ Form Field will automatically generate an HTML `id` for its input element to lin
 correponding label. Alternatively, you may set the `inputId` prop of the Form Field to specify a
 custom `id` for the input element.
 
-<CodeExamplePreview code={CustomInputId} />
+<ExampleCodeBlock code={CustomInputId} />
 
 ### Grouping Inputs
 
@@ -63,20 +63,20 @@ itself using a `fieldset` and a `legend`.
 `useFieldset` must be set to `true` when wrapping a [Radio Group](/components/inputs/radio/) since
 Radio Groups contain multiple Radio Buttons.
 
-<CodeExamplePreview code={GroupingInputs} />
+<ExampleCodeBlock code={GroupingInputs} />
 
 ### Grow
 
 Set the `grow` prop of the Form Field to `true` to configure it (including the wrapped input
 component) to expand to the width of its container.
 
-<CodeExamplePreview code={Grow} />
+<ExampleCodeBlock code={Grow} />
 
 ### Hint
 
 Set the `hintText` prop of the Form Field to display a short message below the input component.
 
-<CodeExamplePreview code={Hint} />
+<ExampleCodeBlock code={Hint} />
 
 ### Label Position
 
@@ -86,14 +86,14 @@ the input component. `labelPosition` accepts the following values:
 - `FormField.LabelPosition.Top` (Default)
 - `FormField.LabelPosition.Left`
 
-<CodeExamplePreview code={LabelPosition} />
+<ExampleCodeBlock code={LabelPosition} />
 
 ### Required
 
 Set the `required` prop of the Form Field to `true` to indicate that the field is required. Labels
 for required fields are suffixed by a red asterisk.
 
-<CodeExamplePreview code={Required} />
+<ExampleCodeBlock code={Required} />
 
 ### Error States
 
@@ -110,21 +110,21 @@ input element to meet accessibility standards).
 
 #### Alert
 
-<CodeExamplePreview code={Alert} />
+<ExampleCodeBlock code={Alert} />
 
 Set the `alertLabel` prop of the Form Field to override the default "Alert" prefix of the hint. This
 is generally only used for translations.
 
-<CodeExamplePreview code={AlertLabel} />
+<ExampleCodeBlock code={AlertLabel} />
 
 #### Error
 
-<CodeExamplePreview code={Error} />
+<ExampleCodeBlock code={Error} />
 
 Set the `errorLabel` prop of the Form Field to override the default "Error" prefix of the hint. This
 is generally only used for translations.
 
-<CodeExamplePreview code={ErrorLabel} />
+<ExampleCodeBlock code={ErrorLabel} />
 
 ## Component API
 

@@ -1,5 +1,5 @@
 import {
-  CodeExamplePreview,
+  ExampleCodeBlock,
   InformationHighlight,
   SymbolDoc,
   Specifications,
@@ -84,7 +84,7 @@ meet accessibility standards. This ensures the `label` text from `FormField` is 
 </Select>
 ```
 
-<CodeExamplePreview code={Basic} />
+<ExampleCodeBlock code={Basic} />
 
 Our example uses [React state](<(https://react.dev/learn/state-a-components-memory)>) to track the
 value of the `Select`.
@@ -104,27 +104,27 @@ trigger an event to change the selected item.
 the helper functions of `getId` or `getTextValue`. The collection system and the `Select` use these
 properties by default for keyboard navigation and selected the `id` based on the item clicked.**
 
-<CodeExamplePreview code={HoistedModel} />
+<ExampleCodeBlock code={HoistedModel} />
 
 ### Label Position Horizontal
 
 Set the `orientation` prop of the Form Field to designate the position of the label relative to the
 input component. By default, the orientation will be set to `vertical`.
 
-<CodeExamplePreview code={LabelPosition} />
+<ExampleCodeBlock code={LabelPosition} />
 
 ### Required
 
 Set the `required` prop of the wrapping `FormField` to `true` to indicate that the field is
 required. Labels for required fields are suffixed by a red asterisk.
 
-<CodeExamplePreview code={Required} />
+<ExampleCodeBlock code={Required} />
 
 ### Disabled
 
 Set the `disabled` prop of `Select.Input` to prevent users from interacting with it.
 
-<CodeExamplePreview code={Disabled} />
+<ExampleCodeBlock code={Disabled} />
 
 ### Disabled Items
 
@@ -141,7 +141,7 @@ In order to disable items and prevent users from interacting with them:
 The following example adds the string value of the items we want disable to `nonInteractiveIds` and
 sets `aria-disabled` for the disabled items.
 
-<CodeExamplePreview code={DisabledOptions} />
+<ExampleCodeBlock code={DisabledOptions} />
 
 ### With Icons
 
@@ -159,7 +159,7 @@ In order to render the icon for the selected item in the `Select.Input`:
 > **Note: `data-id` on `Select.Item` must match the `id` property in your array of objects. This
 > ensures proper keyboard handling and type-ahead.**
 
-<CodeExamplePreview code={WithIcons} />
+<ExampleCodeBlock code={WithIcons} />
 
 **Note: that `Select.Input` will only render an icon if an item is selected.**
 
@@ -168,21 +168,21 @@ In order to render the icon for the selected item in the `Select.Input`:
 Set the `grow` prop of the wrapping `FormField` to `true` to configure the `Select.Input` to expand
 to the width of its container.
 
-<CodeExamplePreview code={Grow} />
+<ExampleCodeBlock code={Grow} />
 
 ### Menu Height
 
 `Select.Card` has a default maximum height of `300px` to restrict the height of the dropdown menu.
 Set its `maxHeight` prop to override this value.
 
-<CodeExamplePreview code={MenuHeight} />
+<ExampleCodeBlock code={MenuHeight} />
 
 ### Ref Forwarding
 
 `Select.Input` supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will
 forward `ref` to its underlying `<input type="text" role="combobox">` element.
 
-<CodeExamplePreview code={RefForwarding} />
+<ExampleCodeBlock code={RefForwarding} />
 
 ### Error States
 
@@ -209,26 +209,26 @@ styled correctly.**
 
 Use the alert state when a selection is valid but there is additional information.
 
-<CodeExamplePreview code={Alert} />
+<ExampleCodeBlock code={Alert} />
 
 #### Error
 
 Use the error state when the selection is no longer valid.
 
-<CodeExamplePreview code={Error} />
+<ExampleCodeBlock code={Error} />
 
 ### Initial Selected Item
 
 You can set `initialSelectedIds` to the value that you want initially selected.
 
-<CodeExamplePreview code={InitialSelectedItem} />
+<ExampleCodeBlock code={InitialSelectedItem} />
 
 ### Placeholder
 
 You can change the placeholder text by passing in a string value to the `placeholder` attribute on
 the `Select.Input`.
 
-<CodeExamplePreview code={Placeholder} />
+<ExampleCodeBlock code={Placeholder} />
 
 ### Fetching Dynamic Items
 
@@ -240,7 +240,7 @@ load as well as displaying a placeholder indicating when items are loaded.
 properties of `id` or `text`. Using these helper functions sets the `serverId` to be `id` and
 `label` to be `text`.**
 
-<CodeExamplePreview code={FetchingDynamicItems} />
+<ExampleCodeBlock code={FetchingDynamicItems} />
 
 ### Complex
 
@@ -249,7 +249,7 @@ user be different than an id. In this example, `serverId` and `label` properties
 to `id` and `text` hence the usage of `getId` and `getTextValue`. If your object has the properties
 `text` and `id`, there would be no need for this.
 
-<CodeExamplePreview code={Complex} />
+<ExampleCodeBlock code={Complex} />
 
 **Note: By default, the identifier and text value are `id` and `text` properties respectively. If
 your data object for each item is different, provide a `getId` or `getTextValue` function to the

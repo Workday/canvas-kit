@@ -1,4 +1,4 @@
-import {CodeExamplePreview, Specifications} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, Specifications} from '@workday/canvas-kit-docs';
 
 import {CreateModelHook} from './examples/CreateModelHook';
 import {CreateContainer} from './examples/CreateContainer';
@@ -32,7 +32,7 @@ used.
 `createComponent` is great to use if you want to create quick compound components or you need to set
 up components with `ref` forwarding.
 
-<CodeExamplePreview code={CreateComponent} />
+<ExampleCodeBlock code={CreateComponent} />
 
 # createModelHook
 
@@ -67,7 +67,7 @@ export const useDisclosureModel = createModelHook({
 });
 ```
 
-<CodeExamplePreview code={CreateModelHook} />
+<ExampleCodeBlock code={CreateModelHook} />
 
 Typescript will infer all config from the returned `state`, `events`, `defaultConfig` and the
 `requiredConfig`.
@@ -234,7 +234,7 @@ export const Disclosure = createContainer('div')({
 });
 ```
 
-<CodeExamplePreview code={CreateContainer} />
+<ExampleCodeBlock code={CreateContainer} />
 
 ## createSubcomponent
 
@@ -281,7 +281,7 @@ export const DisclosureTarget = createSubcomponent('button')({
 });
 ```
 
-<CodeExamplePreview code={CreateSubcomponent} />
+<ExampleCodeBlock code={CreateSubcomponent} />
 
 # createElemPropsHook
 
@@ -329,4 +329,4 @@ export const DisclosureContent = createSubcomponent('div')({
 });
 ```
 
-<CodeExamplePreview code={CreateElemPropsHook} />
+<ExampleCodeBlock code={CreateElemPropsHook} />

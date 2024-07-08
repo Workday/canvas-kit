@@ -1,4 +1,4 @@
-import {CodeExamplePreview} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
 
 import {SelectableRows} from './examples/Table/WithSelectableRows';
 import {ExpandableRows} from './examples/Table/WithExpandableRows';
@@ -36,7 +36,7 @@ table is added to the table just after the expanded row.
   patterns and logical reading order of content rendered to the screen.
 - Outlining hierarchy in a data table is not supported for screen readers in this example.
 
-<CodeExamplePreview code={ExpandableRows} />
+<ExampleCodeBlock code={ExpandableRows} />
 
 ### Selectable Rows
 
@@ -59,7 +59,7 @@ Here is what we did about it:
   rendered column 1 as row headers, then reading down column 2 (Topping Name) sounded redundant
   because the `Checkbox` names in column 1 are identical to the Topping Name in column 2.
 
-<CodeExamplePreview code={SelectableRows} />
+<ExampleCodeBlock code={SelectableRows} />
 
 ### Sortable Column Headers
 
@@ -82,4 +82,4 @@ distracting, and makes it harder to understand the data.
   focused on the tabular data in the table. It may be more reliable to use an `aria-label` string on
   the button that describes the column name and sort state together.
 
-<CodeExamplePreview code={SortableColumnHeaders} />
+<ExampleCodeBlock code={SortableColumnHeaders} />

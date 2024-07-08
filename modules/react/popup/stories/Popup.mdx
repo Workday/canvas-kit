@@ -1,4 +1,4 @@
-import {CodeExamplePreview, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
 import {Basic} from './examples/Basic';
 import {InitialFocus} from './examples/InitialFocus';
 import {MultiplePopups} from './examples/MultiplePopups';
@@ -58,7 +58,7 @@ target element and adds `useCloseOnOutsideClick`, `useCloseOnEscape`, `useInitia
 `useReturnFocus` behaviors. You can read through the [hooks](#hooks) section to learn about all the
 popup behaviors. For accessibility, these behaviors should be included most of the time.
 
-<CodeExamplePreview code={Basic} />
+<ExampleCodeBlock code={Basic} />
 
 ### Initial Focus
 
@@ -68,7 +68,7 @@ the "OK" button with an `aria-describedby` pointing to the model's `id` state so
 properly announce the message of the popup when focus is changed to the button. By default, focus
 will be placed on the first focusable element when the popup is opened.
 
-<CodeExamplePreview code={InitialFocus} />
+<ExampleCodeBlock code={InitialFocus} />
 
 ### Focus Redirect
 
@@ -86,7 +86,7 @@ focus to the next appropriate element.
 > document.body to ensure proper rendering. You could use `portal=false` on the `Popper` component,
 > but that would risk incorrect rendering in all browsers.
 
-<CodeExamplePreview code={FocusRedirect} />
+<ExampleCodeBlock code={FocusRedirect} />
 
 ### Focus Trapping
 
@@ -101,7 +101,7 @@ continue.
 > cursors from breaking out. Modals should use additional techniques to truely "trap" focus into the
 > Popup to provide a consistent experience for all users.
 
-<CodeExamplePreview code={FocusTrap} />
+<ExampleCodeBlock code={FocusTrap} />
 
 ### Multiple Popups
 
@@ -110,7 +110,7 @@ unique model to each Popup. Below is an example of 2 different popups within the
 Since each Popup gets its own model, each Popup behaves independently. The same technique can be
 used for nested Popups.
 
-<CodeExamplePreview code={MultiplePopups} />
+<ExampleCodeBlock code={MultiplePopups} />
 
 ### Nested Popups
 
@@ -123,7 +123,7 @@ props that merge a click handler for both Popups by using `usePopupCloseButton` 
 parameter is props to be merged which will effectively hide both popups. Focus management is
 preserved.
 
-<CodeExamplePreview code={NestedPopups} />
+<ExampleCodeBlock code={NestedPopups} />
 
 ### Custom Target
 
@@ -138,7 +138,7 @@ requires a `label` prop.
 > with the target button first, you'll also need to use `React.forwardRef` in your target component.
 > Without this, the Popup will open at the top-left of the window instead of around the target.
 
-<CodeExamplePreview code={CustomTarget} />
+<ExampleCodeBlock code={CustomTarget} />
 
 ### Full Screen API
 
@@ -157,7 +157,7 @@ transferred automatically. If you do not handle this case, the popup may not ren
 example shows a popup that closes when fullscreen is entered/exited and another popup that transfers
 the popup's stack context when entering/exiting fullscreen.
 
-<CodeExamplePreview code={FullScreen} />
+<ExampleCodeBlock code={FullScreen} />
 
 ### RTL
 
@@ -165,7 +165,7 @@ The Popup component automatically handles right-to-left rendering.
 
 > **Note:** This example shows an inaccessible open card for demonstration purposes.
 
-<CodeExamplePreview code={RTL} />
+<ExampleCodeBlock code={RTL} />
 
 ## Component API
 

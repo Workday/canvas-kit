@@ -1,4 +1,4 @@
-import {CodeExamplePreview, SymbolDoc} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
 import {Basic} from './examples/Basic';
 import {BasicWithHeading} from './examples/BasicWithHeading';
 import {FixedColumn} from './examples/FixedColumn';
@@ -28,13 +28,13 @@ Users may not want to use a `caption` so they can import [Heading](/components/t
 [Text](/components/text/text/) instead. This will give the user more flexibility around the
 customization of the title/heading of their table.
 
-<CodeExamplePreview code={BasicWithHeading} />
+<ExampleCodeBlock code={BasicWithHeading} />
 
 ### Right to Left
 
 Table supports right-to-left languages when specified in the CanvasProvider theme.
 
-<CodeExamplePreview code={RightToLeft} />
+<ExampleCodeBlock code={RightToLeft} />
 
 ### Example with Caption
 
@@ -43,7 +43,7 @@ for
 [accessibility](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table#accessibility_concerns)
 purposes.
 
-<CodeExamplePreview code={Basic} />
+<ExampleCodeBlock code={Basic} />
 
 ### Fixed Column
 
@@ -51,7 +51,7 @@ Users may add styles to the `Table.Header` to render a fixed column. The example
 `width` to the `Table` to guarantee the fixed column is triggered, but you are free to omit the
 `width` if you would only like the fixed column to be triggered if necessary.
 
-<CodeExamplePreview code={FixedColumn} />
+<ExampleCodeBlock code={FixedColumn} />
 
 ### Advanced
 
