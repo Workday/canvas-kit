@@ -5,7 +5,7 @@ import {space} from '@workday/canvas-kit-react/tokens';
 import {
   ExtractProps,
   createSubcomponent,
-  getTranslateFromOrigin,
+  getTransformOrigin,
 } from '@workday/canvas-kit-react/common';
 import {FlexStyleProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 
@@ -21,23 +21,19 @@ export interface PopupCardProps extends FlexAndBoxProps {
 
 const translateVars = createVars('positionX', 'positionY');
 
-const fadeIn =
-  /**
-   * Keyframe for the dots loading animation.
-   */
-  keyframes({
-    name: 'fadeIn',
-    styles: `
-    0% {
-      opacity: 1;
-      transform: translate(${cssVar(translateVars.positionX)}, ${cssVar(translateVars.positionY)});
-    }
-    100% {
-      opacity: 1;
-      transform: translate(0);
-    }
-  `,
-  });
+/**
+ * Keyframe for the dots loading animation.
+ */
+const fadeIn = keyframes({
+  '0%': {
+    opacity: 1,
+    transform: `translate(${cssVar(translateVars.positionX)}, ${cssVar(translateVars.positionY)})`,
+  },
+  '100%': {
+    opacity: 1,
+    transform: `translate(0)`,
+  },
+});
 
 function getSpace(value?: string | number) {
   if (value && value in space) {
@@ -85,7 +81,6 @@ const popupCard = createStencil({
     padding: system.space.x6,
     maxHeight: maxHeight,
     overflowY: 'auto',
-    animation: `150ms ease-out ${fadeIn}`,
     animationName: fadeIn,
     animationDuration: '150ms',
     animationTimingFunction: 'ease-out',
@@ -108,7 +103,7 @@ export const PopupCard = createSubcomponent('div')({
   const transformOrigin = React.useMemo(() => {
     return getTransformFromPlacement(model.state.placement || 'bottom');
   }, [model.state.placement]);
-  const translate = getTranslateFromOrigin(transformOrigin, space.xxs);
+  const translate = getTransformOrigin(transformOrigin, cssVar(system.space.x2));
   const cardMaxHeight = getMaxHeight(elemProps.margin);
 
   return (
@@ -118,10 +113,9 @@ export const PopupCard = createSubcomponent('div')({
         popupCard({
           transformOriginHorizontal: transformOrigin.horizontal,
           transformOriginVertical: transformOrigin.vertical,
+          maxHeight: cardMaxHeight,
         }),
-        {[popupCard.vars.maxHeight]: cardMaxHeight},
-        {[translateVars.positionX]: translate.x + 'px'},
-        {[translateVars.positionY]: translate.y + 'px'},
+        translateVars({positionX: translate.x, positionY: translate.y}),
       ])}
     >
       {children}

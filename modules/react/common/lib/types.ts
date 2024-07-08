@@ -12,8 +12,8 @@ export interface GrowthBehavior {
  * TransformOrigin behavior for things like popups and tooltips
  */
 export interface TransformOrigin {
-  horizontal: 'left' | 'center' | 'right' | string;
-  vertical: 'top' | 'center' | 'bottom' | string;
+  horizontal: 'left' | 'center' | 'right';
+  vertical: 'top' | 'center' | 'bottom';
 }
 
 /**
