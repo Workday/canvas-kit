@@ -154,12 +154,8 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
         enabled: true,
         phase: 'afterWrite',
         fn({state}) {
-          if (placementRef.current !== state.placement) {
-            setPlacement(state.placement);
-            onPlacementChange?.(state.placement);
-            console.log('State:', state.placement);
-            console.log('PlacementRef:', placementRef.current);
-          }
+          setPlacement(state.placement);
+          onPlacementChange?.(state.placement);
         },
       };
     }, [setPlacement, onPlacementChange]);
