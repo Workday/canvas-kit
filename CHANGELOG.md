@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.0.12](https://github.com/Workday/canvas-kit/releases/tag/v11.0.12) (2024-07-08)
+
+### Components
+
+- fix: Fix backwards compatibility with colors prop for buttons ([#2816](https://github.com/Workday/canvas-kit/pull/2816)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+### Infrastructure
+
+- fix: Revert jscodeshift version ([#2813](https://github.com/Workday/canvas-kit/pull/2813)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v11.0.11](https://github.com/Workday/canvas-kit/releases/tag/v11.0.11) (2024-06-26)
 
 ### Infrastructure
