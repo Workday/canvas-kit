@@ -11,16 +11,6 @@ export default defineConfig({
 
   blockHosts: ['cdn.fontawesome.com'],
 
-  // e2e: {
-  //   // We've imported your old cypress plugins here.
-  //   // You may want to clean this up later by importing these.
-  //   setupNodeEvents(on, config) {
-  //     return require('./cypress/plugins/index.js')(on, config);
-  //   },
-  //   baseUrl: 'http://localhost:9001',
-  //   specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx}',
-  // },
-
   component: {
     specPattern: 'cypress/component/**/*.{js,jsx,ts,tsx}',
     devServer: {
@@ -30,5 +20,7 @@ export default defineConfig({
     setupNodeEvents(on) {
       on('file:preprocessor', webpack());
     },
+    viewportWidth: 1024,
+    viewportHeight: 768,
   },
 });
