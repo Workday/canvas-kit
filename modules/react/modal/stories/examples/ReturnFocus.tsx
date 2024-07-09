@@ -6,7 +6,7 @@ import {Flex, Box} from '@workday/canvas-kit-react/layout';
 import {Select} from '@workday/canvas-kit-react/select';
 
 export const ReturnFocus = () => {
-  const ref = React.useRef<HTMLInputElement>(null);
+  const ref = React.useRef(null);
   const [value, setValue] = React.useState('');
   const model = useModalModel({
     returnFocusRef: ref,
