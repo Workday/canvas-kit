@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.0.14](https://github.com/Workday/canvas-kit/releases/tag/v11.0.14) (2024-07-10)
+
+### Components
+
+- fix: Upgrade vulnerable packages for security ([#2812](https://github.com/Workday/canvas-kit/pull/2812)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v11.0.13](https://github.com/Workday/canvas-kit/releases/tag/v11.0.13) (2024-07-09)
 
 ### Components
