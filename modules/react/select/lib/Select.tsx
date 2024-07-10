@@ -74,12 +74,14 @@ export const SelectInput = createSubcomponent(TextInput)({
     React.useImperativeHandle(
       elementRef,
       () => {
-        localRef.current!.focus = (options?: FocusOptions) => {
-          textInputProps.ref.current!.focus(options);
-        };
-        localRef.current!.blur = () => {
-          textInputProps.ref.current!.blur();
-        };
+        if (localRef.current) {
+          localRef.current.focus = (options?: FocusOptions) => {
+            textInputProps.ref.current!.focus(options);
+          };
+          localRef.current.blur = () => {
+            textInputProps.ref.current!.blur();
+          };
+        }
 
         return localRef.current!;
       },
