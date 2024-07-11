@@ -7,9 +7,16 @@ import {
   relatedActionsVerticalIcon,
   caretDownIcon,
 } from '@workday/canvas-system-icons-web';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const parentContainerStyles = createStyles({
+  gap: system.space.x4,
+  padding: system.space.x4,
+});
 
 export const Secondary = () => (
-  <Flex gap="s" padding="s">
+  <Flex cs={parentContainerStyles}>
     <SecondaryButton>Secondary</SecondaryButton>
     <SecondaryButton icon={plusIcon} iconPosition="start">
       Secondary

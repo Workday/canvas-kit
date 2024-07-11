@@ -1,15 +1,21 @@
 import React from 'react';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
-import {FormField} from '@workday/canvas-kit-react/form-field';
-import {styled} from '@workday/canvas-kit-react/common';
-import {colors} from '@workday/canvas-kit-react/tokens';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
-const StyledFormField = styled(FormField)({
-  legend: {
-    color: colors.frenchVanilla100,
-  },
-});
+const styleOverrides = {
+  containerStyles: createStyles({
+    backgroundColor: system.color.bg.primary.default,
+    padding: system.space.x4,
+  }),
+  formFieldStyles: createStyles({
+    legend: {
+      color: system.color.text.inverse,
+    },
+  }),
+};
 
 export const Inverse = () => {
   const [value, setValue] = React.useState<string | number>('deep-dish');
@@ -22,13 +28,10 @@ export const Inverse = () => {
   };
 
   return (
-    <Box backgroundColor="blueberry400" padding="s">
-      <StyledFormField
-        label="Choose Your Pizza Crust"
-        labelPosition={FormField.LabelPosition.Top}
-        useFieldset={true}
-      >
-        <RadioGroup name="crust-inverse" onChange={handleChange} value={value}>
+    <Box cs={styleOverrides.containerStyles}>
+      <FormField cs={styleOverrides.formFieldStyles} as="fieldset">
+        <FormField.Label as="legend">Choose Your Pizza Crust</FormField.Label>
+        <FormField.Input as={RadioGroup} name="crust-inverse" onChange={handleChange} value={value}>
           <RadioGroup.RadioButton variant="inverse" value="deep-dish">
             Deep dish
           </RadioGroup.RadioButton>
@@ -41,8 +44,8 @@ export const Inverse = () => {
           <RadioGroup.RadioButton variant="inverse" value="cauliflower">
             Cauliflower
           </RadioGroup.RadioButton>
-        </RadioGroup>
-      </StyledFormField>
+        </FormField.Input>
+      </FormField>
     </Box>
   );
 };

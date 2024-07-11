@@ -1,6 +1,14 @@
 import React from 'react';
 import {Checkbox} from '@workday/canvas-kit-react/checkbox';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const styleOverrides = createStyles({
+  gap: system.space.x4,
+  backgroundColor: system.color.bg.primary.default,
+  padding: system.space.x4,
+});
 
 export const Inverse = () => {
   const [checked, setChecked] = React.useState(false);
@@ -10,7 +18,7 @@ export const Inverse = () => {
   };
 
   return (
-    <Flex gap="s" backgroundColor="blueberry400" padding="s">
+    <Flex cs={styleOverrides}>
       <Checkbox
         variant="inverse"
         checked={checked}
