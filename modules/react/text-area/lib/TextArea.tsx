@@ -8,7 +8,10 @@ import {
   styled,
   Themeable,
 } from '@workday/canvas-kit-react/common';
+import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {borderRadius, inputColors, space, type} from '@workday/canvas-kit-react/tokens';
+import {system, brand} from '@workday/canvas-tokens-web';
+export type ValueOf<T> = T[keyof T];
 
 export interface TextAreaProps extends Themeable, GrowthBehavior {
   /**
@@ -37,19 +40,19 @@ export interface TextAreaProps extends Themeable, GrowthBehavior {
    * The resize constraints of the TextArea.
    * @default TextArea.ResizeDirection.Both
    */
-  resize?: TextAreaResizeDirection;
+  resize?: ValueOf<typeof TextAreaResizeDirection>;
   /**
    * The value of the TextArea.
    */
   value?: any;
 }
 
-export enum TextAreaResizeDirection {
-  None = 'none',
-  Both = 'both',
-  Horizontal = 'horizontal',
-  Vertical = 'vertical',
-}
+export const TextAreaResizeDirection = {
+  None: 'none' as 'none',
+  Both: 'both' as 'both',
+  Horizontal: 'horizontal' as 'horizontal',
+  Vertical: 'vertical' as 'vertical',
+};
 
 const StyledTextArea = styled('textarea')<TextAreaProps & StyledType>(
   ({theme, error}) => ({
@@ -94,6 +97,52 @@ const StyledTextArea = styled('textarea')<TextAreaProps & StyledType>(
     resize: grow ? TextAreaResizeDirection.Vertical : resize,
   })
 );
+
+export const textAreaStencil = createStencil({
+  base: {
+    ...system.type.subtext.large,
+    display: 'block',
+    border: `${px2rem(1)} solid ${cssVar(system.color.border.input.default)}`,
+    backgroundColor: system.color.bg.default,
+    borderRadius: system.shape.x1,
+    boxSizing: 'border-box',
+    minHeight: system.space.x16,
+    minWidth: `calc((${cssVar(system.space.x20)} * ${px2rem(3)}) + ${cssVar(system.space.x10)})`,
+    transition: '0.2s box-shadow, 0.2s border-color',
+    padding: system.space.x2, // Compensate for border
+    margin: px2rem(0), // Fix Safari
+    '&::webkit-resizer': {
+      display: 'none',
+    },
+    '&::placeholder': {
+      color: system.color.text.hint,
+    },
+    '&:hover': {
+      borderColor: system.color.border.input.strong,
+    },
+    '&:focus-visible:not([disabled]), &.focus:not([disabled])': {
+      borderColor: brand.primary.base,
+      boxShadow: `inset 0 0 0 1px ${cssVar(brand.primary.base)}`,
+      outline: 'none',
+    },
+    '&:disabled, .disabled': {
+      backgroundColor: inputColors.disabled.background,
+      borderColor: system.color.border.input.strong,
+      color: inputColors.disabled.text,
+      '&::placeholder': {
+        color: inputColors.disabled.text,
+      },
+    },
+  },
+  modifiers: {
+    grow: {
+      true: {
+        width: '100%',
+        resize: 'vertical',
+      },
+    },
+  },
+});
 
 export const TextArea = createComponent('textarea')({
   displayName: 'TextArea',
