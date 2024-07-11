@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, fireEvent} from '@testing-library/react';
+import {render, screen} from '@testing-library/react';
 
 import {Select} from '../lib/Select';
 
@@ -14,7 +14,7 @@ describe('Select', () => {
 
   describe('when rendered with a single child', () => {
     it('should not throw an error', () => {
-      const {getAllByRole} = render(
+      render(
         <Select items={['Foo']} initialVisibility="visible">
           <Select.Input id="contact-select" />
           <Select.Popper>
@@ -28,13 +28,32 @@ describe('Select', () => {
           </Select.Popper>
         </Select>
       );
-      expect(getAllByRole('option')).toHaveLength(1);
+      expect(screen.getAllByRole('option')).toHaveLength(1);
+    });
+
+    it('should render in React Strict Mode', () => {
+      render(
+        <React.StrictMode>
+          <Select items={['Foo']} initialVisibility="visible">
+            <Select.Input id="contact-select" />
+            <Select.Popper>
+              <Select.Card maxHeight="200px">
+                <Select.List>
+                  {item => {
+                    return <Select.Item>{item}</Select.Item>;
+                  }}
+                </Select.List>
+              </Select.Card>
+            </Select.Popper>
+          </Select>
+        </React.StrictMode>
+      );
     });
   });
 
   describe('when rendered with disabled attribute', () => {
     it('should render a disabled select', () => {
-      const {getByRole} = render(
+      render(
         <Select items={['Foo']}>
           <Select.Input disabled id="contact-select" />
           <Select.Popper>
@@ -48,14 +67,14 @@ describe('Select', () => {
           </Select.Popper>
         </Select>
       );
-      expect(getByRole(role)).toHaveProperty('disabled', true);
+      expect(screen.getByRole(role)).toHaveProperty('disabled', true);
     });
   });
 
   describe('when rendered with a value', () => {
     it('it should render a select whose selected option matches value', () => {
       const selectedValue = 'Foo';
-      const {getAllByDisplayValue} = render(
+      render(
         <Select items={['Foo']} initialSelectedIds={['Foo']}>
           <Select.Input id="contact-select" />
           <Select.Popper>
@@ -69,7 +88,7 @@ describe('Select', () => {
           </Select.Popper>
         </Select>
       );
-      expect(getAllByDisplayValue(selectedValue)[0]).toBeDefined();
+      expect(screen.getAllByDisplayValue(selectedValue)[0]).toBeDefined();
     });
   });
 });
