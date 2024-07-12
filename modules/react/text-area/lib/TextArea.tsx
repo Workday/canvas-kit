@@ -64,6 +64,7 @@ export const textAreaStencil = createStencil({
     transition: '0.2s box-shadow, 0.2s border-color',
     padding: system.space.x2, // Compensate for border
     margin: px2rem(0), // Fix Safari
+    color: system.color.text.default,
     '&::webkit-resizer': {
       display: 'none',
     },
