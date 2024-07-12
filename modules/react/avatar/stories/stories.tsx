@@ -1,11 +1,19 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 
-import {Avatar} from '../index';
+import {Avatar, avatarStencil} from '../index';
 // @ts-ignore: Cannot find module error
 import testAvatar from './test-avatar.png';
+import {createStencil} from '@workday/canvas-kit-styling';
 
 const handleAvatarButtonClick = () => console.log('AvatarButton clicked');
+
+const customStyles = createStencil({
+  extends: avatarStencil,
+  base: {
+    [avatarStencil.vars.backgroundColor]: 'black',
+  },
+});
 
 storiesOf('Components/Indicators/Avatar', module)
   .addParameters({ReadmePath: 'react/avatar'})
@@ -13,8 +21,10 @@ storiesOf('Components/Indicators/Avatar', module)
   .add('Light', () => (
     <div className="story">
       <h3>Extra-Extra Large</h3>
+      foo
       {/* NOTE: For testing using background here */}
-      <Avatar as="div" size={'extraExtraLarge'} background="black" />
+      <Avatar as="div" size={200} />
+      <Avatar as="div" size={'extraExtraLarge'} {...customStyles()} />
       <h3>Extra Large</h3>
       <Avatar as="div" size={'extraLarge'} />
       <h3>Large</h3>

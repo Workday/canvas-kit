@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Property} from 'csstype';
 import {createComponent, focusRing, pickForegroundColor} from '@workday/canvas-kit-react/common';
-import {cssVar, createStencil, calc} from '@workday/canvas-kit-styling';
+import {cssVar, createStencil, calc, createVars, px2rem} from '@workday/canvas-kit-styling';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {borderRadius} from '@workday/canvas-kit-react/tokens';
 import {SystemIconCircleSize, SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
@@ -34,26 +34,27 @@ export interface AvatarProps {
    * The size of the Avatar.
    * @default `medium`
    */
-  size?: 'extraSmall' | 'small' | 'medium' | 'large' | 'extraLarge' | 'extraExtraLarge';
+  size?: 'extraSmall' | 'small' | 'medium' | 'large' | 'extraLarge' | 'extraExtraLarge' | number;
+  // size: SystemIconCircleSize | number;
   /**
    * The alt text of the Avatar image. This prop is also used for the aria-label
    * @default Avatar
    */
   altText?: string;
-  background?: string;
   url?: string;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   objectFit?: Property.ObjectFit;
 }
+export const avatarVars = createVars('background');
 
-const avatarContainerStencil = createStencil({
+export const avatarStencil = createStencil({
+  extends: systemIconStencil,
   vars: {
-    backgroundColor: '',
-    iconColor: '',
-    objectFit: '',
+    size: '',
+    objectFit: 'contain',
   },
-  base: ({backgroundColor, objectFit}) => ({
-    background: backgroundColor,
+  base: ({objectFit, size}) => ({
+    background: cssVar(avatarVars.background, system.color.bg.caution.default),
     position: 'relative',
     display: 'flex',
     alignItems: 'center',
@@ -63,6 +64,8 @@ const avatarContainerStencil = createStencil({
     overflow: 'hidden',
     cursor: 'default',
     borderRadius: system.shape.round,
+    width: cssVar(size),
+    height: cssVar(size),
     '&:focus-visible:not([disabled]), &.focus:not([disabled])': {
       outline: 'none',
       ...focusRing({separation: 2}),
@@ -81,21 +84,20 @@ const avatarContainerStencil = createStencil({
       height: '100%',
       borderRadius: borderRadius.circle,
       transition: 'opacity 150ms linear',
-      //NOTE: Cannot get typing to work with objectFit property.objectfit vs string
-      //objectFit: cssVar(objectFit, 'contain'),
+      objectFir: cssVar(objectFit),
     },
   }),
   modifiers: {
     variant: {
       light: {
-        // backgroundColor: system.color.bg.alt.default,
+        backgroundColor: system.color.bg.alt.default,
         // NOTE: how to use iconColor for this color? needed for color contrast
         ['& [data-element-avatar-icon="true"]']: {
           [systemIconStencil.vars.color]: system.color.fg.default,
         },
       },
       dark: {
-        // backgroundColor: system.color.bg.primary.default,
+        backgroundColor: system.color.bg.primary.default,
         // NOTE: how to use iconColor for this color? needed for color contrast
         ['& [data-element-avatar-icon="true"]']: {
           [systemIconStencil.vars.color]: system.color.fg.inverse,
@@ -172,18 +174,44 @@ const avatarContainerStencil = createStencil({
         },
       },
     },
+    // objectFit: {
+    //   contain: {
+    //     objectFit: 'contain',
+    //   },
+    //   fill: {
+    //     objectFit: 'fill',
+    //   },
+    //   cover: {
+    //     objectFit: 'cover',
+    //   },
+    //   ['scale-down']: {
+    //     objectFit: 'scale-down',
+    //   },
+    //   none: {
+    //     objectFit: 'none',
+    //   },
+    // },
   },
   defaultModifiers: {
     variant: 'light',
     size: 'medium',
     isImageLoaded: 'false',
+    objectFit: 'contain',
   },
 });
 
 export const Avatar: AvatarOverload = createComponent('button')({
   displayName: 'Avatar',
   Component: (
-    {variant, size, altText, url, onClick, objectFit, background, ...elemProps}: AvatarProps,
+    {
+      variant,
+      size = 'medium',
+      altText,
+      url,
+      onClick,
+      objectFit = 'contain',
+      ...elemProps
+    }: AvatarProps,
     ref,
     Element
   ) => {
@@ -199,28 +227,28 @@ export const Avatar: AvatarOverload = createComponent('button')({
       setImageLoaded(false);
     }, [url]);
 
-    const getVariantBackgroundColor = (variant: 'light' | 'dark' | undefined) => {
-      switch (variant) {
-        case 'light':
-          return system.color.bg.alt.default;
-        case 'dark':
-          return system.color.bg.primary.default;
-        default:
-          return base.soap200;
-      }
-    };
+    // const getVariantBackgroundColor = (variant: 'light' | 'dark' | undefined) => {
+    //   switch (variant) {
+    //     case 'light':
+    //       return system.color.bg.alt.default;
+    //     case 'dark':
+    //       return system.color.bg.primary.default;
+    //     default:
+    //       return base.soap200;
+    //   }
+    // };
 
-    const getBackgroundColor = (
-      background?: Property.BackgroundColor,
-      variant?: 'light' | 'dark'
-    ) => {
-      if (background) {
-        return background;
-      }
-      return getVariantBackgroundColor(variant);
-    };
+    // const getBackgroundColor = (
+    //   background?: Property.BackgroundColor,
+    //   variant?: 'light' | 'dark'
+    // ) => {
+    //   if (background) {
+    //     return background;
+    //   }
+    //   return getVariantBackgroundColor(variant);
+    // };
 
-    const backgroundColor = getBackgroundColor(background, variant);
+    // const backgroundColor = getBackgroundColor(background, variant);
     // const iconColor = pickForegroundColor(
     //   backgroundColor,
     //   system.color.fg.inverse,
@@ -233,12 +261,10 @@ export const Avatar: AvatarOverload = createComponent('button')({
         aria-label={altText}
         onClick={onClick}
         {...mergeStyles(elemProps, [
-          avatarContainerStencil({
+          avatarStencil({
             variant,
-            size,
+            size: typeof size === 'number' ? px2rem(size) : size,
             objectFit,
-            backgroundColor,
-            // iconColor,
             isImageLoaded: imageLoaded,
             hasOnClick: onClick !== undefined,
           }),
