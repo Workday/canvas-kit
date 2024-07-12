@@ -1,15 +1,11 @@
 import * as React from 'react';
 import {
   createComponent,
-  StyledType,
   GrowthBehavior,
   ErrorType,
-  errorRing,
-  styled,
   Themeable,
 } from '@workday/canvas-kit-react/common';
 import {createStencil, cssVar, px2rem, calc} from '@workday/canvas-kit-styling';
-import {borderRadius, inputColors, space, type} from '@workday/canvas-kit-react/tokens';
 import {system, brand} from '@workday/canvas-tokens-web';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 export type ValueOf<T> = T[keyof T];
@@ -54,50 +50,6 @@ export const TextAreaResizeDirection = {
   Horizontal: 'horizontal' as 'horizontal',
   Vertical: 'vertical' as 'vertical',
 };
-
-// const StyledTextArea = styled('textarea')<TextAreaProps & StyledType>(
-//   ({theme, error}) => ({
-//     ...type.levels.subtext.large,
-//     border: `1px solid ${inputColors.border}`,
-//     display: 'block',
-//     backgroundColor: inputColors.background,
-//     borderRadius: borderRadius.m,
-//     boxSizing: 'border-box',
-//     minHeight: space.xxl,
-//     minWidth: `calc((${space.xxxl} * 3) + ${space.xl})`,
-//     transition: '0.2s box-shadow, 0.2s border-color',
-//     padding: space.xxs, // Compensate for border
-//     margin: 0, // Fix Safari
-//     '&::webkit-resizer': {
-//       display: 'none',
-//     },
-//     '&::placeholder': {
-//       color: inputColors.placeholder,
-//     },
-//     '&:hover': {
-//       borderColor: inputColors.hoverBorder,
-//     },
-//     '&:focus:not([disabled])': {
-//       borderColor: theme.canvas.palette.common.focusOutline,
-//       boxShadow: `inset 0 0 0 1px ${theme.canvas.palette.common.focusOutline}`,
-//       outline: 'none',
-//     },
-//     '&:disabled': {
-//       backgroundColor: inputColors.disabled.background,
-//       borderColor: inputColors.disabled.border,
-//       color: inputColors.disabled.text,
-//       '&::placeholder': {
-//         color: inputColors.disabled.text,
-//       },
-//     },
-//     ...errorRing(error, theme),
-//   }),
-
-//   ({resize, grow}) => ({
-//     width: grow ? '100%' : undefined,
-//     resize: grow ? TextAreaResizeDirection.Vertical : resize,
-//   })
-// );
 
 export const textAreaStencil = createStencil({
   base: {
