@@ -155,22 +155,16 @@ export const textAreaStencil = createStencil({
         0 0 0 2px ${system.color.border.inverse},
         0 0 0 4px ${brand.common.focusOutline}`,
         },
-
-        // borderColor: brand.error.base,
       },
       alert: {
         borderColor: brand.alert.darkest,
-        boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.alert.darkest}, inset 0 0 0 ${px2rem(3)} ${
-          brand.alert.base
-        }`,
+        boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.alert.base}`,
         '&:hover, &.hover': {
           borderColor: brand.alert.darkest,
         },
         '&:focus-visible:not([disabled]), &.focus:not([disabled])': {
           borderColor: brand.alert.darkest,
-          boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.alert.darkest}, inset 0 0 0 ${px2rem(3)} ${
-            brand.alert.base
-          },
+          boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.alert.base},
         0 0 0 2px ${system.color.border.inverse},
         0 0 0 4px ${brand.common.focusOutline}`,
         },
