@@ -44,7 +44,7 @@ export const textInputStencil = createStencil({
     '&::placeholder': {
       color: system.color.text.hint,
     },
-    '&:hover': {
+    '&:hover, &.hover': {
       borderColor: system.color.border.input.strong,
     },
     '&:focus-visible:not([disabled]), &.focus:not([disabled])': {

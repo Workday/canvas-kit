@@ -5,8 +5,8 @@ import {
   ErrorType,
   Themeable,
 } from '@workday/canvas-kit-react/common';
-import {createStencil, cssVar, px2rem, calc} from '@workday/canvas-kit-styling';
-import {system, brand} from '@workday/canvas-tokens-web';
+import {createStencil, calc} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 import {textInputStencil} from '@workday/canvas-kit-react/text-input';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 export type ValueOf<T> = T[keyof T];
