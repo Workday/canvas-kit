@@ -50,7 +50,7 @@ const container = createStencil({
       alignItems: 'center',
       height: '100%',
     },
-    '@media (max-width: 767.5px)': {
+    [`@media (max-width: 48rem)`]: {
       height: '100%',
       '& > div': {
         alignItems: 'end',

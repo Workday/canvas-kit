@@ -89,11 +89,13 @@ const popupCard = createStencil({
     '.wd-no-animation &': {
       animation: 'none',
     },
-    [`@media (max-width: ${system.breakpoints.s})`]: {
+    [`@media screen and (max-width: 48rem)`]: {
       transformOrigin: 'bottom center',
     },
   }),
 });
+
+console.log(cssVar(system.breakpoints.s));
 
 export const PopupCard = createSubcomponent('div')({
   displayName: 'Popup.Card',
