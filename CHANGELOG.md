@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.0.15](https://github.com/Workday/canvas-kit/releases/tag/v11.0.15) (2024-07-11)
+
+### Components
+
+- fix(select): Add conditional for Select in React.StrictMode ([#2822](https://github.com/Workday/canvas-kit/pull/2822)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v10.3.44](https://github.com/Workday/canvas-kit/releases/tag/v10.3.44) (2024-07-10)
+
+### Components
+
+- fix(select): Add conditional for Select in React.StrictMode ([#2822](https://github.com/Workday/canvas-kit/pull/2822)) ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v11.0.14](https://github.com/Workday/canvas-kit/releases/tag/v11.0.14) (2024-07-10)
+
+### Components
+
+- fix: Upgrade vulnerable packages for security ([#2812](https://github.com/Workday/canvas-kit/pull/2812)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v11.0.13](https://github.com/Workday/canvas-kit/releases/tag/v11.0.13) (2024-07-09)
+
+### Components
+
+- fix: Prevent style-only props from being forwarded to elements ([#2819](https://github.com/Workday/canvas-kit/pull/2819)) ([@wainokray-ho](https://github.com/wainokray-ho))
+
+
+## [v11.0.12](https://github.com/Workday/canvas-kit/releases/tag/v11.0.12) (2024-07-08)
+
+### Components
+
+- fix: Fix backwards compatibility with colors prop for buttons ([#2816](https://github.com/Workday/canvas-kit/pull/2816)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+### Infrastructure
+
+- fix: Revert jscodeshift version ([#2813](https://github.com/Workday/canvas-kit/pull/2813)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v11.0.11](https://github.com/Workday/canvas-kit/releases/tag/v11.0.11) (2024-06-26)
 
 ### Infrastructure
