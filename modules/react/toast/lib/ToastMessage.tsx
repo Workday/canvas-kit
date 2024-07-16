@@ -3,8 +3,19 @@ import React from 'react';
 import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {useToastModel} from './hooks/useToastModel';
 import {Subtext} from '@workday/canvas-kit-react/text';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {system} from '@workday/canvas-tokens-web';
 
 export interface ToastMessageProps extends Omit<ExtractProps<typeof Subtext>, 'size'> {}
+
+const toastMessage = createStencil({
+  base: {
+    wordBreak: 'break-word',
+    marginTop: system.space.zero,
+    marginBottom: system.space.zero,
+  },
+});
 
 export const ToastMessage = createSubcomponent('p')({
   modelHook: useToastModel,
@@ -12,11 +23,9 @@ export const ToastMessage = createSubcomponent('p')({
   return (
     <Subtext
       size="large"
-      wordBreak="break-word"
-      marginY="zero"
       id={model.state.id}
       as={Element}
-      {...elemProps}
+      {...mergeStyles(elemProps, toastMessage())}
     >
       {children}
     </Subtext>
