@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
 import {Property} from 'csstype';
-import {createComponent, focusRing, pickForegroundColor} from '@workday/canvas-kit-react/common';
+import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
 import {cssVar, createStencil, calc, createVars, px2rem} from '@workday/canvas-kit-styling';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {borderRadius} from '@workday/canvas-kit-react/tokens';
 import {SystemIconCircleSize, SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
+
 import {userIcon} from '@workday/canvas-system-icons-web';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 /**
  * Used to get the props of the div version of an avatar
