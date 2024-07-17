@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.0.17](https://github.com/Workday/canvas-kit/releases/tag/v11.0.17) (2024-07-17)
+
+### Documentation
+
+- docs: Fixing and updating the AriaLiveRegion storybook examples ([#2818](https://github.com/Workday/canvas-kit/pull/2818)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton, [@mannycarrera4](https://github.com/mannycarrera4), [@josh-bagwell](https://github.com/josh-bagwell), manuel.carrera)
+
+
 ## [v11.0.16](https://github.com/Workday/canvas-kit/releases/tag/v11.0.16) (2024-07-17)
 
 ### Infrastructure
