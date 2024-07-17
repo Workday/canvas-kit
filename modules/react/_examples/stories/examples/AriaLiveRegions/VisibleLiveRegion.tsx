@@ -10,12 +10,12 @@ import {system, base} from '@workday/canvas-tokens-web';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 
 const liveRegionStyle = createStyles({
-  border: `${px2rem(1)} solid ${base.cantaloupe400}`,
-  backgroundColor: base.cantaloupe100,
+  border: `${px2rem(1)} solid ${system.color.border.caution.default}`,
+  backgroundColor: system.color.bg.caution.default,
   padding: system.space.x4,
   display: 'block',
   margin: system.space.x4 + ' 0',
-  width: '28rem',
+  width: calc.multiply(system.space.x16, 7),
 });
 
 let liveRegionStr = 'This is an ARIA Live Region!';
