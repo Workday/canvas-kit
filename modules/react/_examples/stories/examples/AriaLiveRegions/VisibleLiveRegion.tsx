@@ -7,7 +7,7 @@ import {Flex} from '@workday/canvas-kit-react/layout';
 import {Text} from '@workday/canvas-kit-react/text';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {system, base} from '@workday/canvas-tokens-web';
-import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {createStyles, px2rem, calc} from '@workday/canvas-kit-styling';
 
 const liveRegionStyle = createStyles({
   border: `${px2rem(1)} solid ${system.color.border.caution.default}`,
