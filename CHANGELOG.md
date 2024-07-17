@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.0.16](https://github.com/Workday/canvas-kit/releases/tag/v11.0.16) (2024-07-17)
+
+### Infrastructure
+
+- chore: SNYK Security upgrade markdown-to-jsx from 6.11.4 to 7.2.0 ([#2826](https://github.com/Workday/canvas-kit/pull/2826)) ([@mannycarrera4](https://github.com/mannycarrera4), [@snyk-bot](https://github.com/snyk-bot), manuel.carrera)
+
+
 ## [v11.0.15](https://github.com/Workday/canvas-kit/releases/tag/v11.0.15) (2024-07-11)
 
 ### Components
