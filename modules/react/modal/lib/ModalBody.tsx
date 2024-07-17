@@ -12,7 +12,7 @@ export interface ModalBodyProps extends ExtractProps<typeof Popup.Body, never> {
 
 const modalBody = createStencil({
   base: {
-    [`@media (max-width: 48rem)`]: {
+    '@media screen and (max-width: 768px)': {
       marginBottom: system.space.zero,
       padding: `${system.space.x1} ${system.space.x2} ${system.space.x2} ${system.space.x2}`,
     },

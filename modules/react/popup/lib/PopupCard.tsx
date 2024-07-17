@@ -89,7 +89,7 @@ const popupCard = createStencil({
     '.wd-no-animation &': {
       animation: 'none',
     },
-    [`@media screen and (max-width: 48rem)`]: {
+    '@media screen and (max-width: 768px)': {
       transformOrigin: 'bottom center',
     },
   }),

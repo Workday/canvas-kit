@@ -16,7 +16,7 @@ const modalCard = createStencil({
     width: calc.add(calc.multiply(system.space.x20, 5), system.space.x10),
     borderWidth: system.space.zero,
     boxShadow: system.depth[6],
-    [`@media (max-width: 48rem)`]: {
+    '@media screen and (max-width: 768px)': {
       margin: system.space.x4, // 16px all around margin on smaller screen sizes
       padding: system.space.x4, // brings total padding between edge and content to 24px
       borderRadius: system.space.x6, // 24px border radius on smaller devices.
