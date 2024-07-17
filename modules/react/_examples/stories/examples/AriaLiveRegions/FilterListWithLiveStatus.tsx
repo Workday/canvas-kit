@@ -6,7 +6,7 @@ import {Flex} from '@workday/canvas-kit-react/layout';
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {system, base} from '@workday/canvas-tokens-web';
-import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {createStyles, cssVar, px2rem} from '@workday/canvas-kit-styling';
 
 const fruits = [
   'Apples',
@@ -25,11 +25,17 @@ const liveRegionStyle = createStyles({
   padding: system.space.x2,
 });
 
-const listStyles = {paddingLeft: '0px'};
+const listStyles = createStyles({
+  paddingLeft: system.space.zero,
+});
 
 const listItemStyles = createStyles({
   listStyle: 'none',
   paddingLeft: system.space.zero,
+});
+
+const flexStyles = createStyles({
+  gap: system.space.x4,
 });
 
 let filteredFruits = fruits;
@@ -43,7 +49,7 @@ export const FilterListWithLiveStatus = () => {
 
   return (
     <>
-      <Flex gap="1rem">
+      <Flex cs={flexStyles}>
         <Heading size="small">Fruits</Heading>
         <AriaLiveRegion>
           <BodyText size="small" cs={liveRegionStyle}>
@@ -55,7 +61,7 @@ export const FilterListWithLiveStatus = () => {
         <FormField.Label>Filter Items:</FormField.Label>
         <FormField.Input as={TextInput} value={filter} onChange={handleFilter} />
       </FormField>
-      <ul style={listStyles}>
+      <ul className={listStyles}>
         {filteredFruits.map(i => (
           <BodyText size="small" as="li" cs={listItemStyles} key={i}>
             {i}

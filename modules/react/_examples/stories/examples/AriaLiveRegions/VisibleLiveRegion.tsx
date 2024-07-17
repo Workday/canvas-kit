@@ -14,8 +14,14 @@ const liveRegionStyle = createStyles({
   backgroundColor: system.color.bg.caution.default,
   padding: system.space.x4,
   display: 'block',
-  margin: system.space.x4 + ' 0',
+  marginBlockStart: system.space.x4,
+  marginBlockEnd: system.space.x4,
   width: calc.multiply(system.space.x16, 7),
+});
+
+const flexGapStyles = createStyles({
+  gap: system.space.x4,
+  alignItems: 'center',
 });
 
 let liveRegionStr = 'This is an ARIA Live Region!';
@@ -42,8 +48,7 @@ export const VisibleLiveRegion = () => {
         as="form"
         aria-label="Visible Live Region"
         onSubmit={handleSendMessage}
-        alignItems="center"
-        gap="s"
+        cs={flexGapStyles}
       >
         <FormField>
           <FormField.Label>Type your message:</FormField.Label>
