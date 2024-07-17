@@ -5,7 +5,7 @@ import {Delete} from '../../modules/react/button/stories/button/examples/Delete'
 describe('Button', () => {
   context('given primary buttons are rendered', () => {
     beforeEach(() => {
-      cy.mount(<Primary />);
+      cy.mount(<Primary aria-label="button" />);
     });
 
     it('should not have any axe errors', () => {
@@ -19,7 +19,7 @@ describe('Button', () => {
 
   context('given delete buttons are rendered', () => {
     beforeEach(() => {
-      cy.mount(<Delete />);
+      cy.mount(<Delete aria-label="delete" />);
     });
 
     it('should not have any axe errors', () => {

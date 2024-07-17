@@ -120,7 +120,7 @@
     "bump": "lerna version",
     "bump:prerelease": "lerna version prerelease --exact --preid",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:run": "cypress run --component"
   },
   "lint-staged": {
     "*.{ts,tsx}": "yarn format",
@@ -139,5 +139,10 @@
     "@workday/canvas-applet-icons-web": "^2.0.9",
     "@workday/canvas-system-icons-web": "^3.0.0",
     "@workday/canvas-tokens-web": "^2.0.1"
+  },
+  "resolutions": {
+    "ansi-regex": "3.0.1",
+    "braces": "3.0.3",
+    "micromatch":"4.0.6"
   }
 }

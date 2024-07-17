@@ -45,6 +45,7 @@ export const useOverflowListItemMeasure = createElemPropsHook(useOverflowListMod
     return {
       ref: elementRef,
       'aria-hidden': hidden || undefined,
+
       style: hidden ? hiddenStyles : {},
     };
   }
