@@ -69,6 +69,16 @@ storiesOf('Components/Indicators/Avatar', module)
       <h3>Using a Square Image</h3>
       <Avatar as="div" size={200} url="https://placekitten.com/g/450/450" />
     </div>
+  ))
+  .add('Lazy Loading', () => (
+    <div className="story">
+      {Array.from({length: 100}, (v, index) => (
+        <>
+          <Avatar as="div" size={Avatar.Size.xs} url={testAvatar + '?v=' + index} />
+          <br />
+        </>
+      ))}
+    </div>
   ));
 
 storiesOf('Components/Indicators/Avatar/Avatar Button', module)
