@@ -71,9 +71,7 @@ describe('mergeProps', () => {
     const target = {
       onClick: targetSpy,
     };
-    const source = {
-      onClick: undefined,
-    };
+    const source = {};
 
     const mergedProps = mergeProps(target, source);
     mergedProps.onClick({event: 'foo'});
