@@ -5,7 +5,7 @@ import {
   ErrorType,
   Themeable,
 } from '@workday/canvas-kit-react/common';
-import {createStencil, calc} from '@workday/canvas-kit-styling';
+import {createStencil, calc, cssVar} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import {textInputStencil} from '@workday/canvas-kit-react/text-input';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
@@ -46,14 +46,15 @@ export interface TextAreaProps extends Themeable, GrowthBehavior {
 }
 
 export const TextAreaResizeDirection = {
-  None: 'none' as 'none',
-  Both: 'both' as 'both',
-  Horizontal: 'horizontal' as 'horizontal',
-  Vertical: 'vertical' as 'vertical',
-};
+  None: 'none',
+  Both: 'both',
+  Horizontal: 'horizontal',
+  Vertical: 'vertical',
+} as const;
 
 export const textAreaStencil = createStencil({
   extends: textInputStencil,
+
   base: {
     minHeight: system.space.x16,
     minWidth: calc.add(calc.multiply(system.space.x20, 3), system.space.x10),
@@ -61,6 +62,7 @@ export const textAreaStencil = createStencil({
       display: 'none',
     },
   },
+
   modifiers: {
     resize: {
       both: {
@@ -76,6 +78,9 @@ export const textAreaStencil = createStencil({
         resize: 'none',
       },
     },
+  },
+  defaultModifiers: {
+    resize: 'both',
   },
 });
 

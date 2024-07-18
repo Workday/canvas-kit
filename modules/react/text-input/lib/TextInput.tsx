@@ -67,42 +67,43 @@ export const textInputStencil = createStencil({
         width: '100%',
         resize: 'vertical',
       },
+      false: {
+        width: 'initial',
+      },
     },
 
     error: {
       error: {
         borderColor: brand.error.base,
         boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.error.base}`,
-        '&:hover, &.hover': {
-          borderColor: brand.error.base,
-        },
+        '&:hover, &.hover, &:disabled, &.disabled, &:focus-visible:not([disabled]), &.focus:not([disabled])':
+          {
+            borderColor: brand.error.base,
+          },
         '&:focus-visible:not([disabled]), &.focus:not([disabled])': {
-          borderColor: brand.error.base,
-          boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.error.base},
-        0 0 0 2px ${system.color.border.inverse},
-        0 0 0 4px ${brand.common.focusOutline}`,
-        },
-        '&:disabled, .disabled': {
-          borderColor: brand.error.base,
+          boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.error.base}, 0 0 0 2px ${
+            system.color.border.inverse
+          }, 0 0 0 4px ${brand.common.focusOutline}`,
         },
       },
       alert: {
         borderColor: brand.alert.darkest,
         boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.alert.base}`,
-        '&:hover, &.hover': {
-          borderColor: brand.alert.darkest,
-        },
+        '&:hover, &.hover, &:disabled, &.disabled, &:focus-visible:not([disabled]), &.focus:not([disabled])':
+          {
+            borderColor: brand.alert.darkest,
+          },
+
         '&:focus-visible:not([disabled]), &.focus:not([disabled])': {
-          borderColor: brand.alert.darkest,
           boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.alert.base},
         0 0 0 2px ${system.color.border.inverse},
         0 0 0 4px ${brand.common.focusOutline}`,
         },
-        '&:disabled, .disabled': {
-          borderColor: brand.alert.darkest,
-        },
       },
     },
+  },
+  defaultModifiers: {
+    grow: 'false',
   },
 });
 
