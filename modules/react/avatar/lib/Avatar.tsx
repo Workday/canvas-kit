@@ -180,6 +180,7 @@ export const Avatar: AvatarOverload = React.forwardRef(
               onLoad={loadImage}
               isLoaded={imageLoaded}
               objectFit={objectFit}
+              loading="lazy"
             />
           </StyledStack>
         )}
