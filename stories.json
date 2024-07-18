@@ -1646,6 +1646,20 @@
         "__isArgsStory": false
       }
     },
+    "components-indicators-avatar--lazy-loading": {
+      "id": "components-indicators-avatar--lazy-loading",
+      "name": "Lazy Loading",
+      "title": "Components/Indicators/Avatar",
+      "importPath": "./modules/react/avatar/stories/stories.tsx",
+      "kind": "Components/Indicators/Avatar",
+      "story": "Lazy Loading",
+      "parameters": {
+        "fileName": "./modules/react/avatar/stories/stories.tsx",
+        "framework": "react",
+        "__id": "components-indicators-avatar--lazy-loading",
+        "__isArgsStory": false
+      }
+    },
     "components-indicators-avatar--light": {
       "id": "components-indicators-avatar--light",
       "name": "Light",
