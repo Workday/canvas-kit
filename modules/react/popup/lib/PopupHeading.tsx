@@ -12,7 +12,7 @@ export interface PopupHeadingProps extends ExtractProps<typeof Card.Heading, nev
   children?: React.ReactNode;
 }
 
-const popupHeading = createStencil({
+export const popupHeadingStencil = createStencil({
   base: {
     marginBottom: system.space.x2,
     padding: system.space.x2,
@@ -25,7 +25,7 @@ export const PopupHeading = createSubcomponent('h2')({
   elemPropsHook: usePopupHeading,
 })<PopupHeadingProps>(({children, ...elemProps}, Element) => {
   return (
-    <Card.Heading as={Element} {...mergeStyles(elemProps, popupHeading())}>
+    <Card.Heading as={Element} {...mergeStyles(elemProps, popupHeadingStencil())}>
       {children}
     </Card.Heading>
   );

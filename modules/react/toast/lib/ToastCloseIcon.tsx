@@ -6,7 +6,7 @@ import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 export interface ToastCloseIconProps extends ExtractProps<typeof Popup.CloseIcon, never> {}
 
-const toastCloseIcon = createStencil({
+export const toastCloseIconStencil = createStencil({
   base: {
     position: 'relative',
   },
@@ -20,7 +20,7 @@ export const ToastCloseIcon = createComponent('button')({
         as={Element}
         ref={ref}
         size="small"
-        {...mergeStyles(elemProps, toastCloseIcon())}
+        {...mergeStyles(elemProps, toastCloseIconStencil())}
       />
     );
   },

@@ -8,34 +8,32 @@ import {
   useForkRef,
 } from '@workday/canvas-kit-react/common';
 import {usePopupModel, usePopupStack} from '@workday/canvas-kit-react/popup';
-import {keyframes} from '@emotion/react';
 import {Box, BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {useModalModel} from './hooks';
-import {createStencil} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, keyframes} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export interface ModalOverlayProps extends BoxProps {}
 
-const fadeIn = () => {
-  return keyframes({
-    from: {
-      background: 'none',
-    },
-    to: {
-      background: `rgba(0,0,0, ${system.opacity.overlay})`,
-    },
-  });
-};
+const fadeIn = keyframes({
+  '0%': {
+    background: 'none',
+  },
+  '100%': {
+    background: cssVar(system.color.bg.overlay),
+  },
+});
 
-const container = createStencil({
+export const containerStencil = createStencil({
   base: {
     position: 'fixed',
     top: system.space.zero,
     left: system.space.zero,
     width: '100vw',
     height: '100vh',
-    background: `rgba(0,0,0, ${system.opacity.overlay})`,
+    background: system.color.bg.overlay,
     animationDuration: '0.3s',
+    animationName: fadeIn,
     // Allow overriding of animation in special cases
     '.wd-no-animation &': {
       animation: 'none',
@@ -77,7 +75,7 @@ const OpenModalOverlay = createSubcomponent('div')({
 })<ModalOverlayProps>((elemProps, Element, model) => {
   const windowSize = useWindowSize();
   const content = (
-    <Box cs={{animationName: fadeIn()}} {...mergeStyles(elemProps, container())}>
+    <Box {...mergeStyles(elemProps, containerStencil())}>
       {/* This centering container helps fix an issue with Chrome. Chrome doesn't normally do
       subpixel positioning, but seems to when using flexbox centering. This messes up Popper
       calculations inside the Modal. The centering container forces a "center" pixel calculation

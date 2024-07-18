@@ -11,7 +11,7 @@ import {mergeStyles} from '../../layout';
 
 export interface PopupCloseIconProps extends ExtractProps<typeof TertiaryButton, never> {}
 
-const popupCloseIcon = createStencil({
+export const popupCloseIconStencil = createStencil({
   base: {
     position: 'absolute',
     insetInlineEnd: system.space.x1,
@@ -30,7 +30,7 @@ export const PopupCloseIcon = createSubcomponent('button')({
       size="medium"
       icon={xIcon}
       type="button"
-      {...mergeStyles(elemProps, popupCloseIcon())}
+      {...mergeStyles(elemProps, popupCloseIconStencil())}
     />
   );
 });

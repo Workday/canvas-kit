@@ -9,7 +9,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 export interface ToastMessageProps extends Omit<ExtractProps<typeof Subtext>, 'size'> {}
 
-const toastMessage = createStencil({
+export const toastMessageStencil = createStencil({
   base: {
     wordBreak: 'break-word',
     marginTop: system.space.zero,
@@ -25,7 +25,7 @@ export const ToastMessage = createSubcomponent('p')({
       size="large"
       id={model.state.id}
       as={Element}
-      {...mergeStyles(elemProps, toastMessage())}
+      {...mergeStyles(elemProps, toastMessageStencil())}
     >
       {children}
     </Subtext>

@@ -8,7 +8,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 export interface ToastBodyProps extends ExtractProps<typeof Popup.Body> {}
 
-const toastBody = createStencil({
+export const toastBodyStencil = createStencil({
   base: {
     alignItems: 'flex-start',
     flexDirection: 'column',
@@ -24,7 +24,7 @@ export const ToastBody = createComponent('div')({
   displayName: 'Toast.Body',
   Component: ({children, ...elemProps}: ToastBodyProps, ref, Element) => {
     return (
-      <Flex ref={ref} as={Element} {...mergeStyles(elemProps, toastBody())}>
+      <Flex ref={ref} as={Element} {...mergeStyles(elemProps, toastBodyStencil())}>
         {children}
       </Flex>
     );

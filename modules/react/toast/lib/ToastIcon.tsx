@@ -7,16 +7,16 @@ import {system} from '@workday/canvas-tokens-web';
 
 export interface ToastIconProps extends Omit<SystemIconProps, 'colorHover'> {}
 
-const toastIcon = createStencil({
-  base: () => ({
+export const toastIconStencil = createStencil({
+  base: {
     alignSelf: 'start',
     margin: `${system.space.x4} ${system.space.x3}`,
-  }),
+  },
 });
 
 export const ToastIcon = createComponent('div')({
   displayName: 'Toast.Icon',
   Component: (elemProps: ToastIconProps, ref, Element) => {
-    return <SystemIcon ref={ref} as={Element} {...handleCsProp(elemProps, toastIcon())} />;
+    return <SystemIcon ref={ref} as={Element} {...handleCsProp(elemProps, toastIconStencil())} />;
   },
 });

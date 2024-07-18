@@ -7,7 +7,7 @@ import {createStencil} from '@workday/canvas-kit-styling';
 import {mergeStyles} from '../../layout';
 import {system} from '@workday/canvas-tokens-web';
 
-const popupBodyStyles = createStencil({
+export const popupBodyStencil = createStencil({
   base: {
     overflowY: 'auto',
     padding: system.space.x2,
@@ -18,5 +18,5 @@ export const PopupBody = createSubcomponent('div')({
   displayName: 'Popup.Body',
   modelHook: usePopupModel,
 })<ExtractProps<typeof Card.Body>>(elemProps => {
-  return <Card.Body {...mergeStyles(elemProps, popupBodyStyles())} />;
+  return <Card.Body {...mergeStyles(elemProps, popupBodyStencil())} />;
 });

@@ -64,7 +64,7 @@ function getMaxHeight(margin?: string | number) {
   return `calc(100vh - ${marginOffset})`;
 }
 
-const popupCard = createStencil({
+export const popupCardStencil = createStencil({
   vars: {
     maxHeight: '',
     transformOriginHorizontal: '',
@@ -95,8 +95,6 @@ const popupCard = createStencil({
   }),
 });
 
-console.log(cssVar(system.breakpoints.s));
-
 export const PopupCard = createSubcomponent('div')({
   displayName: 'Popup.Card',
   modelHook: usePopupModel,
@@ -112,7 +110,7 @@ export const PopupCard = createSubcomponent('div')({
     <Card
       ref={ref}
       {...mergeStyles(elemProps, [
-        popupCard({
+        popupCardStencil({
           transformOriginHorizontal: transformOrigin.horizontal,
           transformOriginVertical: transformOrigin.vertical,
           maxHeight: cardMaxHeight,

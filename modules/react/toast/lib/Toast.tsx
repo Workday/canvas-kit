@@ -47,7 +47,7 @@ const getAriaAttributes = (mode: string, id: string): React.HtmlHTMLAttributes<H
   }
 };
 
-const toast = createStencil({
+const toastStencil = createStencil({
   base: {
     display: 'flex',
     flexDirection: 'row',
@@ -112,7 +112,7 @@ export const Toast = createContainer('div')({
   return (
     <Popup.Card
       {...getAriaAttributes(model.state.mode, model.state.id)}
-      {...mergeStyles(elemProps, toast())}
+      {...mergeStyles(elemProps, toastStencil())}
     >
       {children}
     </Popup.Card>

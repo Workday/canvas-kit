@@ -10,7 +10,7 @@ import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 export interface ModalCardProps extends ExtractProps<typeof Popup.Card, never> {}
 
-const modalCard = createStencil({
+export const modalCardStencil = createStencil({
   base: {
     margin: system.space.x10,
     width: calc.add(calc.multiply(system.space.x20, 5), system.space.x10),
@@ -29,5 +29,5 @@ export const ModalCard = createSubcomponent('div')({
   modelHook: useModalModel,
   elemPropsHook: useModalCard,
 })<ModalCardProps>((elemProps, Element) => {
-  return <Popup.Card as={Element} {...mergeStyles(elemProps, modalCard())} />;
+  return <Popup.Card as={Element} {...mergeStyles(elemProps, modalCardStencil())} />;
 });

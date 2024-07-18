@@ -10,11 +10,11 @@ import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 export interface ModalHeadingProps extends ExtractProps<typeof Popup.Heading, never> {}
 
-const modalHeading = createStencil({
+export const modalHeadingStencil = createStencil({
   base: {
     '@media screen and (max-width: 768px)': {
       marginBottom: system.space.zero,
-      padding: `${system.space.x2} ${system.space.x2} ${system.space.x1} ${system.space.x2}`,
+      padding: `${system.space.x2} ${system.space.x2} ${system.space.x1}`,
     },
   },
 });
@@ -24,5 +24,5 @@ export const ModalHeading = createSubcomponent('h2')({
   modelHook: useModalModel,
   elemPropsHook: useModalHeading,
 })<ModalHeadingProps>((elemProps, Element) => {
-  return <Popup.Heading as={Element} {...mergeStyles(elemProps, modalHeading())} />;
+  return <Popup.Heading as={Element} {...mergeStyles(elemProps, modalHeadingStencil())} />;
 });
