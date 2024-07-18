@@ -11,6 +11,7 @@ import {
 } from '@workday/canvas-kit-react/popup';
 import {ColorPicker} from '@workday/canvas-kit-preview-react/color-picker';
 import {changeFocus} from '@workday/canvas-kit-react/common';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 
 export const ColorInputPopup = () => {
   const defaultColor = colors.blueberry400;
@@ -65,37 +66,40 @@ export const ColorInputPopup = () => {
 
   return (
     <Popup model={model}>
-      <Popup.Target
-        as={ColorInput}
-        onChange={e => setColorInputValue(e.target.value)}
-        onValidColorChange={color => {
-          setColorInputValidColor(color.toUpperCase());
-          setColor(color.toUpperCase());
-        }}
-        value={colorInputValue}
-        showCheck={colorInputValidColor === color || colorInputValue === color}
-        onFocus={model.events.show}
-        onBlur={onBlur}
-      />
-      <Popup.Popper>
-        <Popup.Card style={{marginTop: 8}} padding="s" depth={3}>
-          <Popup.Body>
-            <ColorPicker
-              resetColor={colors.blueberry400}
-              resetLabel={'Reset'}
-              onColorChange={color => {
-                setColorInputValue(color.toUpperCase());
-                setColor(color.toUpperCase());
-                model.events.hide();
-                model.state.targetRef.current?.focus();
-              }}
-              onColorReset={resetColor}
-              value={color}
-              colorSet={colorSet}
-            />
-          </Popup.Body>
-        </Popup.Card>
-      </Popup.Popper>
+      <FormField>
+        <FormField.Label>Choose a color</FormField.Label>
+        <FormField.Input
+          as={Popup.Target.as(ColorInput)}
+          onChange={e => setColorInputValue(e.target.value)}
+          onValidColorChange={color => {
+            setColorInputValidColor(color.toUpperCase());
+            setColor(color.toUpperCase());
+          }}
+          value={colorInputValue}
+          showCheck={colorInputValidColor === color || colorInputValue === color}
+          onFocus={model.events.show}
+          onBlur={onBlur}
+        />
+        <Popup.Popper>
+          <Popup.Card style={{marginTop: 8}} padding="s" depth={3}>
+            <Popup.Body>
+              <ColorPicker
+                resetColor={colors.blueberry400}
+                resetLabel={'Reset'}
+                onColorChange={color => {
+                  setColorInputValue(color.toUpperCase());
+                  setColor(color.toUpperCase());
+                  model.events.hide();
+                  model.state.targetRef.current?.focus();
+                }}
+                onColorReset={resetColor}
+                value={color}
+                colorSet={colorSet}
+              />
+            </Popup.Body>
+          </Popup.Card>
+        </Popup.Popper>
+      </FormField>
     </Popup>
   );
 };
