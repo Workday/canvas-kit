@@ -5,7 +5,7 @@ import {
   ErrorType,
   Themeable,
 } from '@workday/canvas-kit-react/common';
-import {createStencil, calc, cssVar} from '@workday/canvas-kit-styling';
+import {createStencil, calc} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import {textInputStencil} from '@workday/canvas-kit-react/text-input';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
@@ -54,7 +54,6 @@ export const TextAreaResizeDirection = {
 
 export const textAreaStencil = createStencil({
   extends: textInputStencil,
-
   base: {
     minHeight: system.space.x16,
     minWidth: calc.add(calc.multiply(system.space.x20, 3), system.space.x10),
