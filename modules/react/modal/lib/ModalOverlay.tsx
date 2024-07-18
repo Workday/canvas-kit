@@ -25,7 +25,10 @@ const fadeIn = keyframes({
 });
 
 export const containerStencil = createStencil({
-  base: {
+  vars: {
+    containerCenter: '',
+  },
+  base: ({containerCenter}) => ({
     position: 'fixed',
     top: system.space.zero,
     left: system.space.zero,
@@ -48,6 +51,7 @@ export const containerStencil = createStencil({
       justifyContent: 'center',
       alignItems: 'center',
       height: '100%',
+      width: containerCenter,
     },
     '@media screen and (max-width: 768px)': {
       height: '100%',
@@ -55,7 +59,7 @@ export const containerStencil = createStencil({
         alignItems: 'end',
       },
     },
-  },
+  }),
 });
 
 export const useModalOverlay = createElemPropsHook(usePopupModel)(({state}, ref) => {
@@ -74,16 +78,16 @@ const OpenModalOverlay = createSubcomponent('div')({
   elemPropsHook: useModalOverlay,
 })<ModalOverlayProps>((elemProps, Element, model) => {
   const windowSize = useWindowSize();
+  const containerCenter = windowSize.width % 2 === 1 ? 'calc(100vw - 1px)' : '100vw';
   const content = (
-    <Box {...mergeStyles(elemProps, containerStencil())}>
+    <Box {...mergeStyles(elemProps, containerStencil({containerCenter}))}>
       {/* This centering container helps fix an issue with Chrome. Chrome doesn't normally do
       subpixel positioning, but seems to when using flexbox centering. This messes up Popper
       calculations inside the Modal. The centering container forces a "center" pixel calculation
       by making sure the width is always an even number */}
       <Box
-        // make sure the centering container is an even number of pixels to avoid sub-pixel
-        // inaccuracies due to centering
-        cs={{width: windowSize.width % 2 === 1 ? 'calc(100vw - 1px)' : '100vw'}}
+      // make sure the centering container is an even number of pixels to avoid sub-pixel
+      // inaccuracies due to centering
       >
         {elemProps.children}
       </Box>
