@@ -12,8 +12,8 @@ export interface ToastMessageProps extends Omit<ExtractProps<typeof Subtext>, 's
 export const toastMessageStencil = createStencil({
   base: {
     wordBreak: 'break-word',
-    marginTop: system.space.zero,
-    marginBottom: system.space.zero,
+    marginBlockStart: system.space.zero,
+    marginBlockEnd: system.space.zero,
   },
 });
 

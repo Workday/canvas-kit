@@ -14,7 +14,7 @@ export interface PopupHeadingProps extends ExtractProps<typeof Card.Heading, nev
 
 export const popupHeadingStencil = createStencil({
   base: {
-    marginBottom: system.space.x2,
+    marginBlockEnd: system.space.x2,
     padding: system.space.x2,
   },
 });
