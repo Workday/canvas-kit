@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {TextArea} from '@workday/canvas-kit-react/text-area';
 
 export const Error = () => {
@@ -10,13 +10,10 @@ export const Error = () => {
   };
 
   return (
-    <FormField
-      error={FormField.ErrorType.Error}
-      hintId="hint-error"
-      hintText="Please enter your review."
-      label="Leave a Review"
-    >
-      <TextArea onChange={handleChange} value={value} />
+    <FormField error="error">
+      <FormField.Label>Leave a Review</FormField.Label>
+      <FormField.Input as={TextArea} onChange={handleChange} value={value} />
+      <FormField.Hint>Please enter your review.</FormField.Hint>
     </FormField>
   );
 };

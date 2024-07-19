@@ -1,35 +1,46 @@
 import React from 'react';
-import {Table, TableRow} from '@workday/canvas-kit-react/table';
 
-const columns = ['ID', 'Name', 'Position', 'Location'];
+import {Table} from '@workday/canvas-kit-react/table';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
-const rows = [
-  [1, 'Aidan Brown', 'Product Manager', 'San Francisco, CA'],
-  [2, 'Betty Chen', 'Product Designer', 'San Francisco, CA'],
-  [3, 'Helen Gonzalez', 'Application Developer', 'Portland, OR'],
-  [4, 'Timothy May', 'VP, Product Development', 'San Francisco, CA'],
-  [5, 'John Hours', 'Product Manager', 'New York, New York'],
-];
+const tableHeaderStyles = createStyles({
+  backgroundColor: system.color.bg.alt.softer,
+});
 
 export const Basic = () => {
   return (
     <Table>
-      <thead>
-        <TableRow header={true}>
-          {columns.map((col, i) => (
-            <th key={i}>{col}</th>
-          ))}
-        </TableRow>
-      </thead>
-      <tbody>
-        {rows.map((row, i) => (
-          <TableRow key={i}>
-            {row.map((cell, j) => (
-              <td key={j}>{cell}</td>
-            ))}
-          </TableRow>
-        ))}
-      </tbody>
+      <Table.Caption>Coffee Drinks and Sizes</Table.Caption>
+      <Table.Head>
+        <Table.Row>
+          <Table.Header scope="col" cs={tableHeaderStyles}>
+            Drink
+          </Table.Header>
+          <Table.Header scope="col" cs={tableHeaderStyles}>
+            Size
+          </Table.Header>
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
+        <Table.Row>
+          <Table.Cell>Espresso</Table.Cell>
+          <Table.Cell>1 oz</Table.Cell>
+        </Table.Row>
+        <Table.Row>
+          <Table.Cell>Macchiato</Table.Cell>
+          <Table.Cell>2 oz Espresso</Table.Cell>
+        </Table.Row>
+        <Table.Row>
+          <Table.Cell>Cortado</Table.Cell>
+          <Table.Cell>2 oz Espresso, 1 oz Foamed Milk</Table.Cell>
+        </Table.Row>
+        <Table.Row></Table.Row>
+        <Table.Row>
+          <Table.Cell>Cappuccino</Table.Cell>
+          <Table.Cell>2 oz Espresso, 2 oz Foamed Milk, 2 oz Steamed Milk</Table.Cell>
+        </Table.Row>
+      </Table.Body>
     </Table>
   );
 };

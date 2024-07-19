@@ -3,10 +3,11 @@ import {createModelHook, useUniqueId} from '@workday/canvas-kit-react/common';
 export const useFormFieldModel = createModelHook({
   defaultConfig: {
     /**
-     * Optional flag to denote if this field has an error to display. When true the `FormField.Input` will have
-     * `required` set to true, and usually some subcomponents will have a error color applied.
+     * Optional flag to denote if this field has an error or warning to display.
+     * If value is `error`: `aria-invalid` is added to the `FormField.Input` and the red error ring is added.
+     * If value is `alert`: A visual orange warning ring is added to the `FormField.Input`.
      */
-    hasError: false,
+    error: undefined as undefined | 'error' | 'alert',
     /**
      * Optional `id` provided to `FormField`'s subcomponents as HTML attributes:
      * - `FormField.Input` will set `aria-describedby` to `hint-${id}`
