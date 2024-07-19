@@ -3746,6 +3746,20 @@
         "__isArgsStory": false
       }
     },
+    "components-popups-popup--external-window": {
+      "id": "components-popups-popup--external-window",
+      "name": "External Window",
+      "title": "Components/Popups/Popup",
+      "importPath": "./modules/react/popup/stories/Popup.stories.mdx",
+      "kind": "Components/Popups/Popup",
+      "story": "External Window",
+      "parameters": {
+        "fileName": "./modules/react/popup/stories/Popup.stories.mdx",
+        "framework": "react",
+        "__id": "components-popups-popup--external-window",
+        "__isArgsStory": false
+      }
+    },
     "components-popups-popup--focus-redirect": {
       "id": "components-popups-popup--focus-redirect",
       "name": "Focus Redirect",
