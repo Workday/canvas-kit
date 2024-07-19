@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.46](https://github.com/Workday/canvas-kit/releases/tag/v10.3.46) (2024-07-19)
+
+### Components
+
+- fix: Popups render in the target's window ([#2829](https://github.com/Workday/canvas-kit/pull/2829)) ([@NicholasBoll](https://github.com/NicholasBoll), [@mannycarrera4](https://github.com/mannycarrera4))
+
+
+## [v10.3.45](https://github.com/Workday/canvas-kit/releases/tag/v10.3.45) (2024-07-18)
+
+### Components
+
+- fix(avatar): Lazy load avatar images ([#2834](https://github.com/Workday/canvas-kit/pull/2834)) ([@NicholasBoll](https://github.com/NicholasBoll))
 ## [v11.0.18](https://github.com/Workday/canvas-kit/releases/tag/v11.0.18) (2024-07-18)
 
 ### Components
