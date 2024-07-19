@@ -106,13 +106,11 @@ const ExternalWindowPortal = ({
       onWindowClose();
     };
 
-    // PopupStack.pushStackContext(newWindow.document.body);
 
     window.addEventListener('unload', closeWindow);
     newWindow?.addEventListener('unload', closeWindow);
 
     return () => {
-      // PopupStack.popStackContext(newWindow.document.body);
       window.removeEventListener('unload', closeWindow);
       newWindow?.removeEventListener('unload', closeWindow);
       newWindow?.close();
