@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {DeleteButton, SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
 import {useMount} from '@workday/canvas-kit-react/common';
@@ -351,9 +351,10 @@ export const ComboboxWithinPopup = () => {
           <Popup.CloseIcon aria-label="Close" />
           <Popup.Heading>Popup With Combobox</Popup.Heading>
           <Popup.Body>
-            <FormField label="Choose Your Food">
+            <FormField orientation="vertical">
+              <FormField.Label>Choose Your Food</FormField.Label>
               <Combobox items={['Pizza', 'Cheeseburger', 'Fries', 'Hot Dog']}>
-                <Combobox.Input as={TextInput} />
+                <FormField.Input as={Combobox.Input} />
                 <Combobox.Menu.Popper>
                   <Combobox.Menu.Card>
                     <Combobox.Menu.List>
@@ -387,8 +388,9 @@ export const ReturnFocusTest = () => {
         <p style={{marginBottom: 400}}>Scroll down</p>
         <p>Scroll right and click on the button</p>
         <Popup model={model}>
-          <FormField inputId="return-focus-text-input" label="Name" style={{marginLeft: 400}}>
-            <TextInput />
+          <FormField id="return-focus-text-input" cs={{marginLeft: 400}}>
+            <FormField.Label>Name</FormField.Label>
+            <FormField.Input as={TextInput} />
           </FormField>
           <Popup.Target style={{marginBottom: 400, marginLeft: 410}} data-testid="target">
             Open Popup
@@ -408,7 +410,7 @@ export const ReturnFocusTest = () => {
                       data-testid="focus-text-input-link"
                       onClick={() => {
                         model.events.hide();
-                        document.getElementById('return-focus-text-input').focus();
+                        document.getElementById('input-return-focus-text-input').focus();
                       }}
                     >
                       You click this link

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Property} from 'csstype';
-import {styled, focusRing, hideMouseFocus} from '@workday/canvas-kit-react/common';
+import {styled, focusRing, hideMouseFocus, filterOutProps} from '@workday/canvas-kit-react/common';
 import isPropValid from '@emotion/is-prop-valid';
 import {borderRadius, colors} from '@workday/canvas-kit-react/tokens';
 import {SystemIconCircle, SystemIconCircleSize} from '@workday/canvas-kit-react/icon';
@@ -106,7 +106,9 @@ const StyledStack = styled('span')<Pick<AvatarProps, 'size'>>(
   })
 );
 
-const StyledIcon = styled(SystemIconCircle)<{isImageLoaded: boolean}>(
+const StyledIcon = styled(SystemIconCircle, {
+  shouldForwardProp: filterOutProps(['isImageLoaded']),
+})<{isImageLoaded: boolean}>(
   {
     transition: fadeTransition,
   },
@@ -115,7 +117,9 @@ const StyledIcon = styled(SystemIconCircle)<{isImageLoaded: boolean}>(
   })
 );
 
-const StyledImage = styled('img')<{isLoaded: boolean; objectFit?: Property.ObjectFit}>(
+const StyledImage = styled('img', {
+  shouldForwardProp: filterOutProps(['isLoaded', 'objectFit']),
+})<{isLoaded: boolean; objectFit?: Property.ObjectFit}>(
   {
     width: '100%',
     height: '100%',
