@@ -93,7 +93,10 @@ function getChildPopups(item: PopupStackItem, items: PopupStackItem[]): PopupSta
 
 interface Stack {
   items: PopupStackItem[];
-  container?: () => HTMLElement;
+  /**
+   * Returns the container of a stack given an optional element.
+   */
+  container?: (element?: HTMLElement) => HTMLElement;
   zIndex: {
     min: number;
     max: number;
@@ -167,12 +170,27 @@ const setToWindow = (path: string, value: any) => {
   }
 };
 
+/**
+ * TODO: Remove this after v12 and use `stack.container(el)` directly. This is temporary to make
+ * sure Popups can open in new windows while supporting older versions of Canvas Kit AND full screen
+ * mode.
+ */
+const getContainer = (stack: Stack, element?: HTMLElement): HTMLElement => {
+  let stackContainer = stack.container?.();
+  if (stackContainer === document.body) {
+    // Here's the transitory code
+    stackContainer = element?.ownerDocument.body;
+  }
+
+  return stackContainer || document.body;
+};
+
 // We need to make sure only one stack is ever in use on the page - ever. If a stack is already
 // defined on the page, we need to use that one. Never, ever, ever change this variable name on
 // window
 const stack: Stack = getFromWindow('workday.__popupStack') || {
   description: 'Global popup stack from @workday/canvas-kit/popup-stack',
-  container: () => document.body,
+  container: el => el?.ownerDocument.body || document.body,
   items: [],
   zIndex: {min: 30, max: 50, getValue: getValue},
   _adapter: {},
@@ -235,7 +253,7 @@ export const PopupStack = {
       return;
     }
     stack.items.push(item);
-    (stack.container?.() || document.body).appendChild(item.element);
+    getContainer(stack, item.owner).appendChild(item.element);
 
     setZIndexOfElements(PopupStack.getElements());
   },
@@ -255,8 +273,9 @@ export const PopupStack = {
         stack._adapter.remove(element);
         return;
       }
+      const item = stack.items.find(item => item.element === element);
       stack.items = stack.items.filter(item => item.element !== element);
-      (stack.container?.() || document.body).removeChild(element);
+      getContainer(stack, item?.owner).removeChild(element);
 
       setZIndexOfElements(PopupStack.getElements(stack));
     }

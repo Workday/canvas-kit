@@ -10,6 +10,7 @@ import {FocusRedirect} from './examples/FocusRedirect';
 import {FocusTrap} from './examples/FocusTrap';
 import {RTL} from './examples/RTL';
 import {CustomTarget} from './examples/CustomTarget';
+import {ExternalWindow} from './examples/ExternalWindow';
 import {FullScreen} from './examples/FullScreen';
 
 <Meta title="Components/Popups/Popup" component={Popup} />
@@ -160,6 +161,16 @@ the popup's stack context when entering/exiting fullscreen.
 
 <ExampleCodeBlock code={FullScreen} />
 
+### Opening an external window
+
+A popup can open an external window. This isn't supported directly. The `Popup.Popper` subcomponent
+is replaced with a custom subcomponent that connects to the Popup model and controls the lifecycle
+of the extenal window. Be sure to connect the `unload` event of both the parent `window` and the
+external child `window` to the lifecycle of the Popup model to prevent memory leaks or zombie
+windows.
+
+<ExampleCodeBlock code={ExternalWindow} />
+
 ### RTL
 
 The Popup component automatically handles right-to-left rendering.
@@ -171,8 +182,8 @@ The Popup component automatically handles right-to-left rendering.
 ## Component API
 
 <>
-<SymbolDoc name="Popper" fileName="/react/" />
-<SymbolDoc name="Popup" fileName="/react/" />
+  <SymbolDoc name="Popper" fileName="/react/" />
+  <SymbolDoc name="Popup" fileName="/react/" />
 </>
 
 ## Hooks
