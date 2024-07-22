@@ -4,81 +4,62 @@ import ReactDOM from 'react-dom';
 import {
   createSubcomponent,
   createElemPropsHook,
-  StyledType,
   useWindowSize,
   useForkRef,
-  getTheme,
 } from '@workday/canvas-kit-react/common';
 import {usePopupModel, usePopupStack} from '@workday/canvas-kit-react/popup';
-import {keyframes} from '@emotion/react';
-import styled from '@emotion/styled';
-import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
+import {Box, BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {useModalModel} from './hooks';
+import {createStencil, cssVar, keyframes} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export interface ModalOverlayProps extends BoxProps {}
 
-const fadeIn = keyframes`
-  from {
-    background: none;
-  }
-  to {
-    background: rgba(0,0,0,0.65);
-  }
-`;
+const fadeIn = keyframes({
+  '0%': {
+    background: 'none',
+  },
+  '100%': {
+    background: cssVar(system.color.bg.overlay),
+  },
+});
 
-const Container = styled(Box)<StyledType>(
-  {
+export const modalOverlayContainerStencil = createStencil({
+  vars: {
+    containerCenter: '',
+  },
+  base: ({containerCenter}) => ({
     position: 'fixed',
-    top: 0,
-    left: 0,
+    top: system.space.zero,
+    left: system.space.zero,
     width: '100vw',
     height: '100vh',
-    background: 'rgba(0,0,0,0.65)',
-    animationName: `${fadeIn}`,
+    background: system.color.bg.overlay,
     animationDuration: '0.3s',
+    animationName: fadeIn,
     // Allow overriding of animation in special cases
     '.wd-no-animation &': {
       animation: 'none',
     },
-  },
-  ({theme}) => {
-    const {canvas: canvasTheme} = getTheme(theme);
-    return {
-      [canvasTheme.breakpoints.down('s')]: {
-        height: '100%',
-      },
-    };
-  }
-);
-
-// This centering container helps fix an issue with Chrome. Chrome doesn't normally do subpixel
-// positioning, but seems to when using flexbox centering. This messes up Popper calculations inside
-// the Modal. The centering container forces a "center" pixel calculation by making sure the width
-// is always an even number
-const ResponsiveContainer = styled('div')(({theme}) => {
-  const {canvas: canvasTheme} = getTheme(theme);
-  return {
-    maxHeight: '100%',
-    display: 'flex',
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
-    [canvasTheme.breakpoints.down('s')]: {
-      alignItems: 'end',
+    // Responsive Container
+    '& > div': {
+      maxHeight: '100%',
+      display: 'flex',
+      position: 'absolute',
+      left: system.space.zero,
+      top: system.space.zero,
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: '100%',
+      width: containerCenter,
     },
-  };
-});
-
-export const ModalOverlay = createSubcomponent('div')({
-  displayName: 'Modal.Overlay',
-  modelHook: useModalModel,
-})<ModalOverlayProps>((elemProps, Element, model) => {
-  return model.state.visibility !== 'hidden' ? (
-    <OpenModalOverlay as={Element} model={model} {...elemProps} />
-  ) : null;
+    '@media screen and (max-width: 768px)': {
+      height: '100%',
+      '& > div': {
+        alignItems: 'end',
+      },
+    },
+  }),
 });
 
 export const useModalOverlay = createElemPropsHook(usePopupModel)(({state}, ref) => {
@@ -97,18 +78,20 @@ const OpenModalOverlay = createSubcomponent('div')({
   elemPropsHook: useModalOverlay,
 })<ModalOverlayProps>((elemProps, Element, model) => {
   const windowSize = useWindowSize();
+  const containerCenter = windowSize.width % 2 === 1 ? 'calc(100vw - 1px)' : '100vw';
   const content = (
-    <Container as={Element} {...elemProps}>
-      <ResponsiveContainer
-        // make sure the centering container is an even number of pixels to avoid sub-pixel
-        // inaccuracies due to centering
-        style={{
-          width: windowSize.width % 2 === 1 ? 'calc(100vw - 1px)' : '100vw',
-        }}
+    <Box {...mergeStyles(elemProps, modalOverlayContainerStencil({containerCenter}))}>
+      {/* This centering container helps fix an issue with Chrome. Chrome doesn't normally do
+      subpixel positioning, but seems to when using flexbox centering. This messes up Popper
+      calculations inside the Modal. The centering container forces a "center" pixel calculation
+      by making sure the width is always an even number */}
+      <Box
+      // make sure the centering container is an even number of pixels to avoid sub-pixel
+      // inaccuracies due to centering
       >
         {elemProps.children}
-      </ResponsiveContainer>
-    </Container>
+      </Box>
+    </Box>
   );
 
   // only render something on the client
@@ -117,4 +100,13 @@ const OpenModalOverlay = createSubcomponent('div')({
   } else {
     return null;
   }
+});
+
+export const ModalOverlay = createSubcomponent('div')({
+  displayName: 'Modal.Overlay',
+  modelHook: useModalModel,
+})<ModalOverlayProps>((elemProps, Element, model) => {
+  return model.state.visibility !== 'hidden' ? (
+    <OpenModalOverlay as={Element} model={model} {...elemProps} />
+  ) : null;
 });

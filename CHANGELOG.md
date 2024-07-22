@@ -3,6 +3,67 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.0.20](https://github.com/Workday/canvas-kit/releases/tag/v11.0.20) (2024-07-22)
+
+
+
+
+## [v10.3.47](https://github.com/Workday/canvas-kit/releases/tag/v10.3.47) (2024-07-22)
+
+
+## [v11.0.19](https://github.com/Workday/canvas-kit/releases/tag/v11.0.19) (2024-07-19)
+
+### Components
+
+- fix(avatar): Lazy load avatar images ([#2834](https://github.com/Workday/canvas-kit/pull/2834)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- fix: Popups render in the target's window ([#2829](https://github.com/Workday/canvas-kit/pull/2829)) ([@NicholasBoll](https://github.com/NicholasBoll), [@mannycarrera4](https://github.com/mannycarrera4))
+
+
+## [v10.3.46](https://github.com/Workday/canvas-kit/releases/tag/v10.3.46) (2024-07-19)
+
+### Components
+
+- fix: Popups render in the target's window ([#2829](https://github.com/Workday/canvas-kit/pull/2829)) ([@NicholasBoll](https://github.com/NicholasBoll), [@mannycarrera4](https://github.com/mannycarrera4))
+
+
+## [v10.3.45](https://github.com/Workday/canvas-kit/releases/tag/v10.3.45) (2024-07-18)
+
+### Components
+
+- fix(avatar): Lazy load avatar images ([#2834](https://github.com/Workday/canvas-kit/pull/2834)) ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v11.0.18](https://github.com/Workday/canvas-kit/releases/tag/v11.0.18) (2024-07-18)
+
+### Components
+
+- fix(avatar): Lazy load avatar images ([#2833](https://github.com/Workday/canvas-kit/pull/2833)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v11.0.17](https://github.com/Workday/canvas-kit/releases/tag/v11.0.17) (2024-07-17)
+
+### Documentation
+
+- docs: Fixing and updating the AriaLiveRegion storybook examples ([#2818](https://github.com/Workday/canvas-kit/pull/2818)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton, [@mannycarrera4](https://github.com/mannycarrera4), [@josh-bagwell](https://github.com/josh-bagwell), manuel.carrera)
+
+
+## [v11.0.16](https://github.com/Workday/canvas-kit/releases/tag/v11.0.16) (2024-07-17)
+
+### Infrastructure
+
+- chore: SNYK Security upgrade markdown-to-jsx from 6.11.4 to 7.2.0 ([#2826](https://github.com/Workday/canvas-kit/pull/2826)) ([@mannycarrera4](https://github.com/mannycarrera4), [@snyk-bot](https://github.com/snyk-bot), manuel.carrera)
+
+
+## [v11.0.15](https://github.com/Workday/canvas-kit/releases/tag/v11.0.15) (2024-07-11)
+
+### Components
+
+- fix(select): Add conditional for Select in React.StrictMode ([#2822](https://github.com/Workday/canvas-kit/pull/2822)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v10.3.44](https://github.com/Workday/canvas-kit/releases/tag/v10.3.44) (2024-07-10)
+
+### Components
+
+- fix(select): Add conditional for Select in React.StrictMode ([#2822](https://github.com/Workday/canvas-kit/pull/2822)) ([@NicholasBoll](https://github.com/NicholasBoll))
 ## [v11.0.14](https://github.com/Workday/canvas-kit/releases/tag/v11.0.14) (2024-07-10)
 
 ### Components
