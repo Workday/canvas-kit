@@ -11,7 +11,7 @@ const handleAvatarButtonClick = () => console.log('AvatarButton clicked');
 const customStyles = createStencil({
   extends: avatarStencil,
   base: {
-    [avatarStencil.vars.backgroundColor]: 'black',
+    background: 'black',
   },
 });
 
@@ -21,9 +21,10 @@ storiesOf('Components/Indicators/Avatar', module)
   .add('Light', () => (
     <div className="story">
       <h3>Extra-Extra Large</h3>
-      foo
       {/* NOTE: For testing using background here */}
-      <Avatar as="div" size={200} />
+      With Number
+      <Avatar as="div" size={300} />
+      With String
       <Avatar as="div" size={'extraExtraLarge'} {...customStyles()} />
       <h3>Extra Large</h3>
       <Avatar as="div" size={'extraLarge'} />

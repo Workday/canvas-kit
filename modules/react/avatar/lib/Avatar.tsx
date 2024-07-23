@@ -35,7 +35,14 @@ export interface AvatarProps {
    * The size of the Avatar.
    * @default `medium`
    */
-  size?: 'extraSmall' | 'small' | 'medium' | 'large' | 'extraLarge' | 'extraExtraLarge' | number;
+  size?:
+    | 'extraSmall'
+    | 'small'
+    | 'medium'
+    | 'large'
+    | 'extraLarge'
+    | 'extraExtraLarge'
+    | (string & {});
   // size: SystemIconCircleSize | number;
   /**
    * The alt text of the Avatar image. This prop is also used for the aria-label
@@ -49,7 +56,6 @@ export interface AvatarProps {
 export const avatarVars = createVars('background');
 
 export const avatarStencil = createStencil({
-  extends: systemIconStencil,
   vars: {
     size: '',
     objectFit: 'contain',
@@ -71,36 +77,33 @@ export const avatarStencil = createStencil({
       outline: 'none',
       ...focusRing({separation: 2}),
     },
-    ['& > [data-element-avatar-icon="true"]']: {
+    ['& > [data-slot="avatar-icon"]']: {
       transition: 'opacity 150ms linear',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      // width: system.space.x8,
-      // height: system.space.x8,
+      [systemIconStencil.vars.size]: calc.multiply(size, 0.625),
     },
-    ['& > [data-element-avatar-image="true"]']: {
+    ['& > [data-slot="avatar-image"]']: {
       position: 'absolute',
       width: '100%',
       height: '100%',
       borderRadius: borderRadius.circle,
       transition: 'opacity 150ms linear',
-      objectFir: cssVar(objectFit),
+      // objectFit: cssVar(objectFit),
     },
   }),
   modifiers: {
     variant: {
       light: {
         backgroundColor: system.color.bg.alt.default,
-        // NOTE: how to use iconColor for this color? needed for color contrast
-        ['& [data-element-avatar-icon="true"]']: {
+        ['& [data-slot="avatar-icon"]']: {
           [systemIconStencil.vars.color]: system.color.fg.default,
         },
       },
       dark: {
         backgroundColor: system.color.bg.primary.default,
-        // NOTE: how to use iconColor for this color? needed for color contrast
-        ['& [data-element-avatar-icon="true"]']: {
+        ['& [data-slot="avatar-icon"]']: {
           [systemIconStencil.vars.color]: system.color.fg.inverse,
         },
       },
@@ -109,44 +112,76 @@ export const avatarStencil = createStencil({
       extraSmall: {
         width: system.space.x4,
         height: system.space.x4,
-        ['& [data-element-avatar-icon="true"]']: {
+        ['& [data-slot="avatar-icon"]']: {
           [systemIconStencil.vars.size]: calc.multiply(system.space.x4, 0.625),
         },
       },
       small: {
         width: system.space.x6,
         height: system.space.x6,
-        ['& [data-element-avatar-icon="true"]']: {
+        ['& [data-slot="avatar-icon"]']: {
           [systemIconStencil.vars.size]: calc.multiply(system.space.x6, 0.625),
         },
       },
       medium: {
         width: system.space.x8,
         height: system.space.x8,
-        ['& [data-element-avatar-icon="true"]']: {
+        ['& [data-slot="avatar-icon"]']: {
           [systemIconStencil.vars.size]: calc.multiply(system.space.x8, 0.625),
         },
       },
       large: {
         width: system.space.x10,
         height: system.space.x10,
-        ['& [data-element-avatar-icon="true"]']: {
+        ['& [data-slot="avatar-icon"]']: {
           [systemIconStencil.vars.size]: calc.multiply(system.space.x10, 0.625),
         },
       },
       extraLarge: {
         width: system.space.x16,
         height: system.space.x16,
-        ['& [data-element-avatar-icon="true"]']: {
+        ['& [data-slot="avatar-icon"]']: {
           [systemIconStencil.vars.size]: calc.multiply(system.space.x16, 0.625),
         },
       },
       extraExtraLarge: {
         width: calc.multiply(system.space.x10, 3),
         height: calc.multiply(system.space.x10, 3),
-        ['& [data-element-avatar-icon="true"]']: {
+        ['& [data-slot="avatar-icon"]']: {
           [systemIconStencil.vars.size]: calc.multiply(calc.multiply(system.space.x10, 3), 0.625),
         },
+      },
+    },
+    objectFit: {
+      contain: {
+        objectFit: 'contain',
+      },
+      fill: {
+        objectFit: 'fill',
+      },
+      cover: {
+        objectFit: 'cover',
+      },
+      ['scale-down']: {
+        objectFit: 'scale-down',
+      },
+      none: {
+        objectFit: 'none',
+      },
+      ['-moz-initial']: {
+        objectFit: '-moz-initial',
+      },
+      ['initial']: {
+        objectFit: 'initial',
+      },
+      ['inherit']: {
+        objectFit: 'inherit',
+      },
+      ['revert']: {
+        objectFit: 'revert',
+      },
+      ['unset']: {
+        objectFit: 'unset',
       },
     },
     hasOnClick: {
@@ -159,39 +194,22 @@ export const avatarStencil = createStencil({
     },
     isImageLoaded: {
       true: {
-        ['& [data-element-avatar-icon="true"]']: {
+        ['& [data-slot="avatar-icon"]']: {
           opacity: 0,
         },
-        ['& [data-element-avatar-image="true"]']: {
+        ['& [data-slot="avatar-image"]']: {
           opacity: 1,
         },
       },
       false: {
-        ['& [data-element-avatar-icon="true"]']: {
+        ['& [data-slot="avatar-icon"]']: {
           opacity: 1,
         },
-        ['& [data-element-avatar-image="true"]']: {
+        ['& [data-slot="avatar-image"]']: {
           opacity: 0,
         },
       },
     },
-    // objectFit: {
-    //   contain: {
-    //     objectFit: 'contain',
-    //   },
-    //   fill: {
-    //     objectFit: 'fill',
-    //   },
-    //   cover: {
-    //     objectFit: 'cover',
-    //   },
-    //   ['scale-down']: {
-    //     objectFit: 'scale-down',
-    //   },
-    //   none: {
-    //     objectFit: 'none',
-    //   },
-    // },
   },
   defaultModifiers: {
     variant: 'light',
@@ -271,8 +289,8 @@ export const Avatar: AvatarOverload = createComponent('button')({
           }),
         ])}
       >
-        <SystemIcon icon={userIcon} data-element-avatar-icon />
-        {url && <img data-element-avatar-image src={url} alt={altText} onLoad={loadImage} />}
+        <SystemIcon icon={userIcon} data-slot="avatar-icon" />
+        {url && <img data-slot="avatar-image" src={url} alt={altText} onLoad={loadImage} />}
       </Element>
     );
   },
