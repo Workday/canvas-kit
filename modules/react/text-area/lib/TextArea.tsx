@@ -86,15 +86,10 @@ export const textAreaStencil = createStencil({
 export const TextArea = createComponent('textarea')({
   displayName: 'TextArea',
   Component: (
-    {resize = TextAreaResizeDirection.Both, grow, ...elemProps}: TextAreaProps,
+    {resize = TextAreaResizeDirection.Both, grow, error, ...elemProps}: TextAreaProps,
     ref,
     Element
-  ) => (
-    <Element
-      ref={ref}
-      {...mergeStyles(elemProps, textAreaStencil({error: elemProps.error, grow, resize}))}
-    />
-  ),
+  ) => <Element ref={ref} {...mergeStyles(elemProps, textAreaStencil({error, grow, resize}))} />,
   subComponents: {
     ErrorType,
     ResizeDirection: TextAreaResizeDirection,
