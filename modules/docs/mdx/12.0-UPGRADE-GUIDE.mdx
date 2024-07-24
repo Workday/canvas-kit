@@ -1,0 +1,181 @@
+import {Meta} from '@storybook/addon-docs';
+import {Table} from '@workday/canvas-kit-react/table';
+import {base, brand, system} from '@workday/canvas-tokens-web';
+import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
+import {cssVar} from '@workday/canvas-kit-styling';
+import {Box} from '@workday/canvas-kit-react/layout';
+
+<Meta title="Guides/Upgrade Guides/v12.0" />
+
+# Canvas Kit 12.0 Upgrade Guide
+
+This guide contains an overview of the changes in Canvas Kit v12. Please
+[reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have
+any questions.
+
+## Why You Should Upgrade
+
+Canvas Kit v12 is transitioning into a
+[new way of styling](https://github.com/Workday/canvas-kit/discussions/2265). Theming and building
+an in sync Canvas Kit CSS has been at the top of our minds. We've started using our new
+[Canvas Tokens Web](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs)
+package to take advantage of
+[CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) and
+provide semantic tokens that can translate to theming components.
+
+A note to the reader:
+
+- While we still support our old tokens from `@workday/canvas-kit-react/tokens` in v12, you must
+  install our new tokens from `@workday/canvas-tokens-web`. You can find more info in our
+  [docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
+- In this release, we've introduced a
+  [new styling API](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-stencil).
+  This shouldn't effect the way you currently style your components. Because we're moving away from
+  Emotion, support for style props will eventually be removed, however, this API provide backwards
+  compatability. If you want to slowly move off of Emotion as well, you can start styling components
+  via the `cs` prop or our new styling utilities.
+
+## Table of contents
+
+- [Canvas Tokens](#canvas-tokens)
+- [Codemod](#codemod)
+- [Deprecations](#deprecations)
+- [Removals](#removals)
+  - [InputIconContainer](#inputiconcontainer)
+  - [Select (Preview)](#select-preview)
+- [Component Updates](#component-updates)
+  - [Popup, Dialog and Modal](#popup-dialog-and-modal)
+  - [Toast](#toast)
+- [Style Utility Updates](#style-utility-updates)
+  - [createStencil](#createstencil)
+- [Troubleshooting](#troubleshooting)
+- [Glossary](#glossary)
+  - [Main](#main)
+  - [Preview](#preview)
+  - [Labs](#labs)
+
+## Canvas Tokens
+
+In v12, all the components listed in this guide have started using our new
+[Canvas Tokens Web](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
+
+In v12 you must add `@workday/canvas-tokens-web` to ensure our components are properly styled and the
+variables are defined. For more information on installing and using, please reference our tokens
+[docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
+
+## Deprecations
+
+We add the [@deprecated](https://jsdoc.app/tags-deprecated.html) JSDoc tag to code we plan to remove
+in a future major release. This signals consumers to migrate to a more stable alternative before the
+deprecated code is removed.
+
+## Removals
+Removals are deletions from our codebase and you can no longer consume this component. We've either promoted or replaced a component or utility.
+
+### Select (Preview)
+
+**PR:** [#2796](https://github.com/Workday/canvas-kit/pull/2796)
+
+We've removed the `Select` component that was in Preview. Please use the compound [Select component from Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic).
+
+### InputIconContainer
+
+**PR:** [#2838](https://github.com/Workday/canvas-kit/pull/2838)
+
+We've removed `InputIconContainer` from Main. Please use [InputGroup](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-text-input--icons) from Main instead.
+
+---
+
+## Component Updates
+
+### Styling API and CSS Tokens
+
+Several components have been refactored to use our new
+[Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
+[styling API](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
+The React interface **has not changed**, but CSS variables are now used for dynamic properties.
+
+The following components are affected:
+
+- `Popup`
+- `Dialog`
+- `Modal`
+- `Toast`
+
+> **Note:** These components also support our new `cs` prop for styling. Learn more about styling
+> with `cs` in our
+> [documentation](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--cs-prop).
+
+### Popup, Dialog and Modal
+
+**PR:** [#2795](https://github.com/Workday/canvas-kit/pull/2795)
+
+### Toast
+
+**PR:** [#2795](https://github.com/Workday/canvas-kit/pull/2795)
+
+## Style Utility Updates
+
+## Troubleshooting
+
+### My Styles Seem Broken?
+
+Our components are reliant on our new Canvas Tokens Web package. Be sure you install
+`@workday/canvas-tokens-web`. For more information, reference our
+[Getting Started docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs)
+for this package.
+
+### Did You Upgrade All Canvas Kit Related Packages?
+
+In order for all the packages to work in harmony, you must upgrade all Canvas Kit packages to the
+same version that you're using, including:
+
+- `@workday/canvas-kit-react`
+- `@workday/canvas-kit-preview-react`
+- `@workday/canvas-kit-labs-react`
+- `@workday/canvas-kit-styling`
+- `@workday/canvas-kit-react-fonts`
+- `@workday/canvas-kit-docs`
+
+## Glossary
+
+### Main
+
+Our Main package of Canvas Kit tokens, components, and utilities at `@workday/canvas-kit-react` has
+undergone a full design and a11y review and is approved for use in product.
+
+Breaking changes to code in Main will only occur during major version updates and will always be
+communicated in advance and accompanied by migration strategies.
+
+---
+
+### Preview
+
+Our Preview package of Canvas Kit tokens, components, and utilities at
+`@workday/canvas-kit-preview-react` has undergone a full design and a11y review and is approved for
+use in product, but may not be up to the high code standards upheld in the [Main](#main) package.
+Preview is analagous to code in beta.
+
+Breaking changes are unlikely, but possible, and can be deployed to Preview at any time without
+triggering a major version update, though such changes will be communicated in advance and
+accompanied by migration strategies.
+
+Generally speaking, our goal is to eventually promote code from Preview to [Main](#main).
+Occasionally, a component with the same name will exist in both [Main](#main) and Preview (for
+example, see Segmented Control in [Preview](/components/buttons/segmented-control/) and
+[Main](https://d2krrudi3mmzzw.cloudfront.net/v8/?path=/docs/components-buttons-segmented-control--basic)).
+In these cases, Preview serves as a staging ground for an improved version of the component with a
+different API. The component in [Main](#main) will eventually be replaced with the one in Preview.
+
+---
+
+### Labs
+
+Our Labs package of Canvas Kit tokens, components, and utilities at `@workday/canvas-kit-labs-react`
+has **not** undergone a full design and a11y review. Labs serves as an incubator space for new and
+experimental code and is analagous to code in alpha.
+
+Breaking changes can be deployed to Labs at any time without triggering a major version update and
+may not be subject to the same rigor in communcation and migration strategies reserved for breaking
+changes in [Preview](#preview) and [Main](#main). import { opacity } from
+"@workday/canvas-tokens-web/dist/es6/system"
