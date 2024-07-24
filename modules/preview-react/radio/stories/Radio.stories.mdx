@@ -75,11 +75,8 @@ It will forward `ref` to its underlying `<input type="radio">` element.
 
 ### Label Position
 
-Set the `labelPosition` prop of the wrapping `FormField` to designate the position of the label
-relative to the `RadioGroup`. `labelPosition` accepts the following values:
-
-- `FormField.LabelPosition.Top` (Default)
-- `FormField.LabelPosition.Left`
+Set the `orientation` prop of the Form Field to designate the position of the label relative to the
+input component. By default, the orientation will be set to `vertical`.
 
 <ExampleCodeBlock code={LabelPosition} />
 
@@ -141,6 +138,12 @@ Use the error state when the selection is no longer valid.
 Using a form library like [React Hook Form](https://www.react-hook-form.com/) is a common use case.
 Reference this [CodeSandbox](https://codesandbox.io/s/radio-preview-with-react-hook-form-stn5vr) on
 how to use `RadioGroup` with React Hook Form.
+
+### Custom Styles
+
+Radio and its subcomponents support custom styling via the `cs` prop. For more information, check
+our
+["How To Customize Styles"](https://workday.github.io/canvas-kit/?path=/docs/styling-how-to-customize-styles--page).
 
 ## Component API
 

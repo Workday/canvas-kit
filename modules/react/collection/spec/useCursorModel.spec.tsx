@@ -26,8 +26,8 @@ type CursorListState = ReturnType<typeof useCursorListModel>['state'];
 const createState = (input: Partial<CursorListState>): CursorListState => {
   return {
     nonInteractiveIds: [],
-    ...(input as CursorListState),
-  };
+    ...input,
+  } as CursorListState;
 };
 
 const createItem = (id, index) => ({id, index, value: id, textValue: id});

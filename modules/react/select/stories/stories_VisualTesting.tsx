@@ -6,7 +6,7 @@ import {
   StaticStates,
 } from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled, customColorTheme} from '../../../../utils/storybook';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 
 import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
 
@@ -39,8 +39,8 @@ export const SelectStates = () => {
       <ComponentStatesTable
         rowProps={[
           {label: 'Default', props: {}},
-          {label: 'Alert', props: {error: FormField.ErrorType.Alert}},
-          {label: 'Error', props: {error: FormField.ErrorType.Error}},
+          {label: 'Alert', props: {error: 'alert'}},
+          {label: 'Error', props: {error: 'error'}},
         ]}
         columnProps={permutateProps(
           {
@@ -63,9 +63,10 @@ export const SelectStates = () => {
         )}
       >
         {props => (
-          <FormField label="Contact">
+          <FormField>
+            <FormField.Label>Contact</FormField.Label>
             <Select model={model}>
-              <Select.Input {...props} id="contact-select" />
+              <FormField.Input as={Select.Input} {...props} id="contact-select" />
               <Select.Popper>
                 <Select.Card maxHeight="200px">
                   {model.state.items.length > 0 && (
@@ -100,15 +101,16 @@ export const SelectOpenMenuStates = () => {
       <ComponentStatesTable
         rowProps={[
           {label: 'Default', props: {}},
-          {label: 'Alert', props: {error: FormField.ErrorType.Alert}},
-          {label: 'Error', props: {error: FormField.ErrorType.Error}},
+          {label: 'Alert', props: {error: 'alert'}},
+          {label: 'Error', props: {error: 'error'}},
         ]}
         columnProps={[{label: 'Default', props: {}}]}
       >
         {props => (
-          <FormField label="Contact" style={{marginBottom: '250px'}}>
+          <FormField cs={{marginBottom: '250px'}}>
+            <FormField.Label>Contact</FormField.Label>
             <Select model={model}>
-              <Select.Input {...props} id="contact-select" />
+              <FormField.Input as={Select.Input} {...props} id="contact-select" />
               <Select.Popper>
                 <Select.Card maxHeight="200px">
                   {!!model.state.items.length && (

@@ -10,5 +10,5 @@ export const FormFieldInput = createSubcomponent('input')({
   modelHook: useFormFieldModel,
   elemPropsHook: useFormFieldInput,
 })<ExtractProps<typeof Box, never>>((elemProps, Element) => {
-  return <Box as={Element} {...elemProps} />;
+  return <Box data-width="ck-formfield-width" as={Element} {...elemProps} />;
 });
