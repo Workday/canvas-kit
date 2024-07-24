@@ -16,7 +16,7 @@ import {
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {Popup, usePopupModel} from '@workday/canvas-kit-react/popup';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
-import {Flex} from '../../../layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
 const mainContentStyles = createStyles({
   padding: system.space.x4,
