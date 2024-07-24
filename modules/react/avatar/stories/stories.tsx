@@ -82,26 +82,26 @@ storiesOf('Components/Indicators/Avatar', module)
       <Avatar as="div" url="https://placehold.co/450x200/png" objectFit="contain" />
       {/* NOTE: Need to make size dynamic */}
       <h3>Object fit on a Rectangle Image using Dynamic Size</h3>
-      <Avatar as="div" size="200" url="https://placehold.co/450x200/png" objectFit="contain" />
+      <Avatar as="div" size="200px" url="https://placehold.co/450x200/png" objectFit="contain" />
       <h3>Original Square Image</h3>
       <img alt="" src="https://placehold.co/450x450/png" />
       <h3>Object fit on a Square Image</h3>
       <Avatar as="div" url="https://placehold.co/450x450/png" />
       {/* NOTE: Need to make size dynamic */}
       <h3>Object fit on a Square Image using Dynamic Size</h3>
-      <Avatar as="div" size="200" url="https://placehold.co/450x450/png" />
+      <Avatar as="div" size="200px" url="https://placehold.co/450x450/png" />
     </div>
   ))
   .add('Dynamic Size', () => (
     <div className="story">
-      <h3>300px</h3>
-      <Avatar as="div" size="300" />
-      <h3>400px</h3>
-      <Avatar as="div" size="400" />
-      <h3>500px</h3>
-      <Avatar as="div" size="500" />
-      <h3>600px</h3>
-      <Avatar as="div" size="600" />
+      <h3>30px</h3>
+      <Avatar as="div" size="30px" />
+      <h3>40px</h3>
+      <Avatar as="div" size="40px" />
+      <h3>3rem</h3>
+      <Avatar as="div" size="3rem" />
+      <h3>4rem</h3>
+      <Avatar as="div" size="4rem" />
     </div>
   ))
   .add('Lazy Loading', () => (

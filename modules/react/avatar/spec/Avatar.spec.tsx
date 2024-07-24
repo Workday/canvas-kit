@@ -48,10 +48,11 @@ describe('Avatar', () => {
     expect(container.firstChild).toHaveStyle(`backgroundColor: system.color.bg.primary.default}`);
   });
 
-  // NOTE: DYNAMIC NOT WORKING
   it('should apply the size class when size prop is specified', () => {
-    const {container} = render(<Avatar size="40" />);
-    expect(container.firstChild).toHaveStyle(`width: ${px2rem(40)}`);
+    const {container} = render(<Avatar size="40px" />);
+    expect(container.firstChild).toHaveStyle(
+      `width: calc.multiply(40px, 0.625); height: calc.multiply(40px, 0.625)}`
+    );
   });
 
   // NOTE: WORKING BUT COMPLAINING
