@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.48](https://github.com/Workday/canvas-kit/releases/tag/v10.3.48) (2024-07-24)
+
+### Documentation
+
+- fix: Fix Popup ExternalWindow example import ([#2841](https://github.com/Workday/canvas-kit/pull/2841)) ([@jamesfan](https://github.com/jamesfan))
 ## [v11.0.20](https://github.com/Workday/canvas-kit/releases/tag/v11.0.20) (2024-07-22)
 
 
