@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {render, fireEvent} from '@testing-library/react';
 import {Avatar} from '../lib/Avatar';
+import {px2rem} from '@workday/canvas-kit-styling';
 
 describe('Avatar', () => {
   it('should render a button element', () => {
@@ -8,11 +9,10 @@ describe('Avatar', () => {
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
 
-  // NOTE: Property 'as' is missing in type '{ id: string; }' but required in type '{ as: "div"; }'.
-  // it('should forward extra attributes to the container', () => {
-  //   const {getByRole} = render(<Avatar id="myAvatar" />);
-  //   expect(getByRole('button')).toHaveAttribute('id', 'myAvatar');
-  // });
+  it('should forward extra attributes to the container', () => {
+    const {getByRole} = render(<Avatar id="myAvatar" />);
+    expect(getByRole('button')).toHaveAttribute('id', 'myAvatar');
+  });
 
   it('should set the aria-label of the button with the altText prop', () => {
     const screen = render(<Avatar altText="My alt text" />);
@@ -45,23 +45,24 @@ describe('Avatar', () => {
 
   it('should apply the variant class when variant prop is specified', () => {
     const {container} = render(<Avatar variant="dark" />);
-    expect(container.firstChild).toHaveClass('dark');
+    expect(container.firstChild).toHaveStyle(`backgroundColor: system.color.bg.primary.default}`);
   });
 
-  // NOTE: Need to make size prop dynamic
-  // it('should apply the size class when size prop is specified', () => {
-  //   const {container} = render(<Avatar size={40} />);
-  //   expect(container.firstChild).toHaveStyle(`width: ${px2rem(40)}`);
-  // });
+  // NOTE: DYNAMIC NOT WORKING
+  it('should apply the size class when size prop is specified', () => {
+    const {container} = render(<Avatar size="40" />);
+    expect(container.firstChild).toHaveStyle(`width: ${px2rem(40)}`);
+  });
 
+  // NOTE: WORKING BUT COMPLAINING
   it('should set the background color when background prop is specified', () => {
     const {container} = render(<Avatar background="red" />);
     expect(container.firstChild).toHaveStyle('background: red');
   });
 
   it('should set the object fit of the image when objectFit prop is specified', () => {
-    const screen = render(<Avatar url="https://example.com/image.png" objectFit="cover" />);
-    expect(screen.getByRole('img')).toHaveStyle('object-fit: cover');
+    const {container} = render(<Avatar url="https://example.com/image.png" objectFit="cover" />);
+    expect(container.firstChild).toHaveStyle('object-fit: cover');
   });
 
   it('should hide the icon when the image is loaded', () => {

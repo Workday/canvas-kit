@@ -1,29 +1,13 @@
 import React, {useState} from 'react';
 import {Property} from 'csstype';
 import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
-import {cssVar, createStencil, calc, createVars, px2rem} from '@workday/canvas-kit-styling';
+import {cssVar, createStencil, calc, createVars} from '@workday/canvas-kit-styling';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {borderRadius} from '@workday/canvas-kit-react/tokens';
-import {SystemIconCircleSize, SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 
 import {userIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
-
-/**
- * Used to get the props of the div version of an avatar
- */
-type AvatarDivProps = Omit<AvatarProps, keyof React.ButtonHTMLAttributes<HTMLButtonElement>> &
-  React.HTMLAttributes<HTMLDivElement>;
-
-/**
- * Returns an overloaded functional component that uses button props by default.
- */
-type AvatarOverload = {
-  (props: {as: 'div'} & AvatarDivProps & {ref?: React.Ref<HTMLElement>}): React.ReactElement;
-  (props: Omit<AvatarProps, 'as'> & {ref?: React.Ref<HTMLButtonElement>}): React.ReactElement;
-  Variant: 'light' | 'dark';
-  Size: typeof SystemIconCircleSize;
-};
 
 export interface AvatarProps {
   /**
@@ -43,7 +27,6 @@ export interface AvatarProps {
     | 'extraLarge'
     | 'extraExtraLarge'
     | (string & {});
-  // size: SystemIconCircleSize | number;
   /**
    * The alt text of the Avatar image. This prop is also used for the aria-label
    * @default Avatar
@@ -58,9 +41,8 @@ export const avatarVars = createVars('background');
 export const avatarStencil = createStencil({
   vars: {
     size: '',
-    objectFit: 'contain',
   },
-  base: ({objectFit, size}) => ({
+  base: ({size}) => ({
     background: cssVar(avatarVars.background, system.color.bg.caution.default),
     position: 'relative',
     display: 'flex',
@@ -69,7 +51,6 @@ export const avatarStencil = createStencil({
     padding: 0,
     border: 0,
     overflow: 'hidden',
-    cursor: 'default',
     borderRadius: system.shape.round,
     width: cssVar(size),
     height: cssVar(size),
@@ -90,7 +71,6 @@ export const avatarStencil = createStencil({
       height: '100%',
       borderRadius: borderRadius.circle,
       transition: 'opacity 150ms linear',
-      // objectFit: cssVar(objectFit),
     },
   }),
   modifiers: {
@@ -152,6 +132,14 @@ export const avatarStencil = createStencil({
         },
       },
     },
+    elementType: {
+      div: {
+        cursor: 'default',
+      },
+      button: {
+        cursor: 'pointer',
+      },
+    },
     objectFit: {
       contain: {
         objectFit: 'contain',
@@ -184,14 +172,6 @@ export const avatarStencil = createStencil({
         objectFit: 'unset',
       },
     },
-    hasOnClick: {
-      true: {
-        cursor: 'pointer',
-      },
-      false: {
-        cursor: 'default',
-      },
-    },
     isImageLoaded: {
       true: {
         ['& [data-slot="avatar-icon"]']: {
@@ -219,18 +199,10 @@ export const avatarStencil = createStencil({
   },
 });
 
-export const Avatar: AvatarOverload = createComponent('button')({
+export const Avatar = createComponent('button')({
   displayName: 'Avatar',
   Component: (
-    {
-      variant,
-      size = 'medium',
-      altText,
-      url,
-      onClick,
-      objectFit = 'contain',
-      ...elemProps
-    }: AvatarProps,
+    {variant, size, altText, url, onClick, objectFit, ...elemProps}: AvatarProps,
     ref,
     Element
   ) => {
@@ -246,34 +218,6 @@ export const Avatar: AvatarOverload = createComponent('button')({
       setImageLoaded(false);
     }, [url]);
 
-    // const getVariantBackgroundColor = (variant: 'light' | 'dark' | undefined) => {
-    //   switch (variant) {
-    //     case 'light':
-    //       return system.color.bg.alt.default;
-    //     case 'dark':
-    //       return system.color.bg.primary.default;
-    //     default:
-    //       return base.soap200;
-    //   }
-    // };
-
-    // const getBackgroundColor = (
-    //   background?: Property.BackgroundColor,
-    //   variant?: 'light' | 'dark'
-    // ) => {
-    //   if (background) {
-    //     return background;
-    //   }
-    //   return getVariantBackgroundColor(variant);
-    // };
-
-    // const backgroundColor = getBackgroundColor(background, variant);
-    // const iconColor = pickForegroundColor(
-    //   backgroundColor,
-    //   system.color.fg.inverse,
-    //   system.color.fg.default
-    // );
-
     return (
       <Element
         ref={ref}
@@ -282,10 +226,10 @@ export const Avatar: AvatarOverload = createComponent('button')({
         {...mergeStyles(elemProps, [
           avatarStencil({
             variant,
-            size: typeof size === 'number' ? px2rem(size) : size,
+            size,
             objectFit,
             isImageLoaded: imageLoaded,
-            hasOnClick: onClick !== undefined,
+            elementType: Element,
           }),
         ])}
       >
