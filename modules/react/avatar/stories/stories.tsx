@@ -4,7 +4,7 @@ import {storiesOf} from '@storybook/react';
 import {Avatar} from '../index';
 // @ts-ignore: Cannot find module error
 import testAvatar from './test-avatar.png';
-import {createStencil} from '@workday/canvas-kit-styling';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {base} from '@workday/canvas-tokens-web';
 import {systemIconStencil} from '../../icon';
 
@@ -108,9 +108,9 @@ storiesOf('Components/Indicators/Avatar', module)
   .add('Dynamic Size', () => (
     <div className="story">
       <h3>30px</h3>
-      <Avatar as="div" size="30px" />
+      <Avatar as="div" size={px2rem(30)} />
       <h3>40px</h3>
-      <Avatar as="div" size="40px" />
+      <Avatar as="div" size={px2rem(40)} />
       <h3>3rem</h3>
       <Avatar as="div" size="3rem" />
       <h3>4rem</h3>
