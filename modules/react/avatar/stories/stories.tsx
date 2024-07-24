@@ -4,8 +4,29 @@ import {storiesOf} from '@storybook/react';
 import {Avatar} from '../index';
 // @ts-ignore: Cannot find module error
 import testAvatar from './test-avatar.png';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {base} from '@workday/canvas-tokens-web';
+import {systemIconStencil} from '../../icon';
 
 const handleAvatarButtonClick = () => console.log('AvatarButton clicked');
+
+const customBlueAvatarStencil = createStencil({
+  base: {
+    backgroundColor: base.berrySmoothie400,
+    ['[data-slot="avatar-icon"]']: {
+      [systemIconStencil.vars.color]: base.berrySmoothie100,
+    },
+  },
+});
+
+const customGreenAvatarStencil = createStencil({
+  base: {
+    backgroundColor: base.watermelon400,
+    ['[data-slot="avatar-icon"]']: {
+      [systemIconStencil.vars.color]: base.watermelon100,
+    },
+  },
+});
 
 storiesOf('Components/Indicators/Avatar', module)
   .addParameters({ReadmePath: 'react/avatar'})
@@ -44,18 +65,10 @@ storiesOf('Components/Indicators/Avatar', module)
   ))
   .add('Dynamic Background', () => (
     <div className="story">
-      <h3>Red</h3>
-      <Avatar as="div" size="extraExtraLarge" background="red" />
-      <h3>Orange</h3>
-      <Avatar as="div" size="extraLarge" background="orange" />
-      <h3>Yellow</h3>
-      <Avatar as="div" size="large" background="yellow" />
-      <h3>Green</h3>
-      <Avatar as="div" size="medium" background="green" />
       <h3>Blue</h3>
-      <Avatar as="div" size="small" background="blue" />
-      <h3>Violet</h3>
-      <Avatar as="div" size="extraSmall" background="violet" />
+      <Avatar as="div" size="extraExtraLarge" {...customBlueAvatarStencil()} />
+      <h3>Green</h3>
+      <Avatar as="div" size="extraLarge" {...customGreenAvatarStencil()} />
     </div>
   ))
   .add('Image', () => (

@@ -36,14 +36,13 @@ export interface AvatarProps {
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   objectFit?: Property.ObjectFit;
 }
-export const avatarVars = createVars('background');
 
 export const avatarStencil = createStencil({
   vars: {
     size: '',
   },
   base: ({size}) => ({
-    background: cssVar(avatarVars.background, system.color.bg.caution.default),
+    background: system.color.bg.caution.default,
     position: 'relative',
     display: 'flex',
     alignItems: 'center',
