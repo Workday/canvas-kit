@@ -113,7 +113,7 @@ export const TextInput = createComponent('input')({
     <Element
       type="text"
       ref={ref}
-      {...mergeStyles(
+      {...handleCsProp(
         elemProps,
         textInputStencil({width: typeof width === 'number' ? px2rem(width) : width, grow, error})
       )}
