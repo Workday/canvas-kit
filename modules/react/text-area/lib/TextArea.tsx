@@ -7,11 +7,6 @@ export type ValueOf<T> = T[keyof T];
 
 export interface TextAreaProps extends GrowthBehavior {
   /**
-   * If true, set the TextArea to the disabled state.
-   * @default false
-   */
-  // disabled?: boolean;
-  /**
    * The type of error associated with the TextArea (if applicable).
    */
   error?: ErrorType;
