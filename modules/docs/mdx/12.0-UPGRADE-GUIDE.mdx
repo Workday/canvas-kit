@@ -45,6 +45,7 @@ A note to the reader:
   - [Select (Preview)](#select-preview)
 - [Component Updates](#component-updates)
   - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
+  - [Text Area](#text-area)
 - [Style Utility Updates](#style-utility-updates)
   - [createStencil](#createstencil)
 - [Troubleshooting](#troubleshooting)
@@ -114,6 +115,22 @@ The following components are affected:
 > **Note:** These components also support our new `cs` prop for styling. Learn more about styling
 > with `cs` in our
 > [documentation](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--cs-prop).
+
+### Text Area
+
+**PR:** [#2825](https://github.com/Workday/canvas-kit/pull/2825)
+
+`TextAreaResizeDirection` is no longer a TypeScript enum, but a JavaScript object. This change does
+not effect runtime at all, but may cause TypeScript errors if you use `TextAreaResizeDirection` as a
+type.
+
+```tsx
+// v11
+interface MyProps { resize?: TextAreaResizeDirection }
+
+// 12 type ValueOf<T> = T[keyof T]; interface MyProps { resize?:
+ValueOf<typeof TextAreaResizeDirection> }
+```
 
 ## Troubleshooting
 
