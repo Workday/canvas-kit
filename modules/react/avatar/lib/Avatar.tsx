@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Property} from 'csstype';
 import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
-import {cssVar, createStencil, calc, createVars} from '@workday/canvas-kit-styling';
+import {cssVar, createStencil, calc} from '@workday/canvas-kit-styling';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {borderRadius} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
@@ -11,13 +11,13 @@ import {system} from '@workday/canvas-tokens-web';
 
 export interface AvatarProps {
   /**
-   * The variant of the Avatar default state. Accepts `Light` or `Dark`.
-   * @default 'light'
+   * The variant of the avatar if using a default image. Accepts "light" or "dark."
+   * @default "light"
    */
   variant?: 'light' | 'dark';
   /**
    * The size of the Avatar.
-   * @default `medium`
+   * @default "medium"
    */
   size?:
     | 'extraSmall'
@@ -28,12 +28,22 @@ export interface AvatarProps {
     | 'extraExtraLarge'
     | (string & {});
   /**
-   * The alt text of the Avatar image. This prop is also used for the aria-label
+   * The alt text of the Avatar image. This prop is also used for the aria-label.
    * @default Avatar
    */
   altText?: string;
+  /**
+   * The URL of the user's photo. Expects a square (1:1) photo
+   */
   url?: string;
+  /**
+   * An onClick function to pass to the underlying `<button>` element.
+   */
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  /**
+   * An objectFit property that can customize how to resize your image to fit its container.
+   * @default "contain"
+   */
   objectFit?: Property.ObjectFit;
 }
 
@@ -201,7 +211,7 @@ export const avatarStencil = createStencil({
 export const Avatar = createComponent('button')({
   displayName: 'Avatar',
   Component: (
-    {variant, size, altText, url, onClick, objectFit, ...elemProps}: AvatarProps,
+    {variant, size, altText = 'Avatar', url, onClick, objectFit, ...elemProps}: AvatarProps,
     ref,
     Element
   ) => {

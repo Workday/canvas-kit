@@ -243,7 +243,7 @@ const Template = props => (
         <TertiaryButton aria-label="messages" icon={assistantIcon} />
         <TertiaryButton aria-label="notifications" icon={notificationsIcon} />
         <TertiaryButton aria-label="inbox" icon={inboxIcon} />
-        <Avatar size={Avatar.Size.m} variant={Avatar.Variant.Light} />
+        <Avatar size="medium" variant="light" />
       </GlobalHeader.Item>
     </GlobalHeader>
     <SidePanelWrapper {...props} />
