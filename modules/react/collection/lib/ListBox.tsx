@@ -5,7 +5,7 @@ import {
   createSubcomponent,
   ExtractProps,
 } from '@workday/canvas-kit-react/common';
-import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {Box, Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 
 import {useListModel} from './useListModel';
 import {useListRenderItems} from './useListRenderItem';
@@ -13,6 +13,24 @@ import {useListItemRegister} from './useListItemRegister';
 
 export interface ListBoxProps<T = any> extends Omit<ExtractProps<typeof Flex, never>, 'children'> {
   children?: React.ReactNode | ((item: T, index: number) => React.ReactNode);
+  /**
+   * Set the margin top of the list box. You must use this prop and not style any other way. The
+   * `Menu` uses virtualization and needs margins to be set on the correct element. This ensure
+   * proper rendering. If a `marginTop` is not provided, the value falls back to `marginY`.
+   */
+  marginTop?: FlexProps['marginTop'];
+  /**
+   * Set the margin bottom of the list box. You must use this prop and not style any other way. The
+   * `Menu` uses virtualization and needs margins to be set on the correct element. This ensure
+   * proper rendering. If a `marginBottom` is not provided, the value falls back to `marginY`.
+   */
+  marginBottom?: FlexProps['marginBottom'];
+  /**
+   * Set the margin top and bottom of the list box. You must use this prop and not style any other way. The
+   * `Menu` uses virtualization and needs margins to be set on the correct element. This ensure
+   * proper rendering.
+   */
+  marginY?: FlexProps['marginY'];
 }
 
 export const ListBoxItem = createSubcomponent('li')({
@@ -65,21 +83,24 @@ export const ListBox = createContainer('ul')({
      */
     Item: ListBoxItem,
   },
-})<ListBoxProps>(({height, maxHeight, marginY, ...elemProps}, Element, model) => {
-  // We're moving `marginY` to the container to not interfere with the virtualization size. We set
-  // the `marginY` on the Flex to `0` to avoid inaccurate scrollbars
+})<ListBoxProps>(
+  ({height, maxHeight, marginTop, marginBottom, marginY, ...elemProps}, Element, model) => {
+    // We're moving `marginY` to the container to not interfere with the virtualization size. We set
+    // the `marginY` on the Flex to `0` to avoid inaccurate scrollbars
 
-  // TODO figure out what style props should go to which `Box`
-  return (
-    <Box
-      ref={model.state.containerRef}
-      marginY={marginY}
-      maxHeight={maxHeight}
-      overflowY={model.state.orientation === 'vertical' ? 'auto' : undefined}
-    >
-      <Flex as={Element} flexDirection="column" {...elemProps} marginY={0}>
-        {useListRenderItems(model, elemProps.children)}
-      </Flex>
-    </Box>
-  );
-});
+    // TODO figure out what style props should go to which `Box`
+    return (
+      <Box
+        ref={model.state.containerRef}
+        marginTop={marginTop ?? marginY}
+        marginBottom={marginBottom ?? marginY}
+        maxHeight={maxHeight}
+        overflowY={model.state.orientation === 'vertical' ? 'auto' : undefined}
+      >
+        <Flex as={Element} flexDirection="column" {...elemProps} marginY={0}>
+          {useListRenderItems(model, elemProps.children)}
+        </Flex>
+      </Box>
+    );
+  }
+);
