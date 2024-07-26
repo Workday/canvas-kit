@@ -60,12 +60,16 @@ export const avatarStencil = createStencil({
     padding: 0,
     border: 0,
     overflow: 'hidden',
+    cursor: 'default',
     borderRadius: system.shape.round,
     width: cssVar(size),
     height: cssVar(size),
     '&:focus-visible:not([disabled]), &.focus:not([disabled])': {
       outline: 'none',
       ...focusRing({separation: 2}),
+    },
+    ':is(button)': {
+      cursor: 'pointer',
     },
     ['& > [data-slot="avatar-icon"]']: {
       transition: 'opacity 150ms linear',
@@ -139,14 +143,6 @@ export const avatarStencil = createStencil({
         ['& [data-slot="avatar-icon"]']: {
           [systemIconStencil.vars.size]: calc.multiply(calc.multiply(system.space.x10, 3), 0.625),
         },
-      },
-    },
-    elementType: {
-      div: {
-        cursor: 'default',
-      },
-      button: {
-        cursor: 'pointer',
       },
     },
     objectFit: {
@@ -238,7 +234,6 @@ export const Avatar = createComponent('button')({
             size,
             objectFit,
             isImageLoaded: imageLoaded,
-            elementType: Element,
           }),
         ])}
       >
