@@ -1,7 +1,18 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {base} from '@workday/canvas-tokens-web';
+
+const styleOverrides = {
+  formfieldInputStyles: createStyles({
+    width: px2rem(200),
+  }),
+  radioGroupLabelTextStyles: createStyles({
+    color: base.berrySmoothie400,
+  }),
+};
 
 export const Custom = () => {
   const [value, setValue] = React.useState<string | number>('deep-dish');
@@ -15,21 +26,34 @@ export const Custom = () => {
 
   return (
     <Flex flexDirection="column">
-      <FormField label="Choose Your Pizza Crust" useFieldset={true}>
-        <RadioGroup name="pizza-crust-custom" onChange={handleChange} width="200px" value={value}>
+      <FormField as="fieldset">
+        <FormField.Label as="legend">Choose Your Pizza Crust</FormField.Label>
+        <FormField.Input
+          as={RadioGroup}
+          name="pizza-crust-custom"
+          onChange={handleChange}
+          cs={styleOverrides.formfieldInputStyles}
+          value={value}
+        >
           <RadioGroup.Label>
             <RadioGroup.Label.Input value="deep-dish" />
-            <RadioGroup.Label.Text color="berrySmoothie400">Deep dish</RadioGroup.Label.Text>
+            <RadioGroup.Label.Text cs={styleOverrides.radioGroupLabelTextStyles}>
+              Deep dish
+            </RadioGroup.Label.Text>
           </RadioGroup.Label>
           <RadioGroup.Label>
             <RadioGroup.Label.Input value="gluten-free" />
-            <RadioGroup.Label.Text color="berrySmoothie400">Gluten free</RadioGroup.Label.Text>
+            <RadioGroup.Label.Text cs={styleOverrides.radioGroupLabelTextStyles}>
+              Gluten free
+            </RadioGroup.Label.Text>
           </RadioGroup.Label>
           <RadioGroup.Label>
             <RadioGroup.Label.Input value="cauliflower" />
-            <RadioGroup.Label.Text color="berrySmoothie400">Cauliflower</RadioGroup.Label.Text>
+            <RadioGroup.Label.Text cs={styleOverrides.radioGroupLabelTextStyles}>
+              Cauliflower
+            </RadioGroup.Label.Text>
           </RadioGroup.Label>
-        </RadioGroup>
+        </FormField.Input>
       </FormField>
       Value selected: {value}
     </Flex>

@@ -4,7 +4,13 @@
 const {spawn} = require('child_process');
 const chalk = require('chalk');
 
-const {_: commands, path, ignoreConfig, ignorePattern, verbose} = require('yargs')
+const {
+  _: commands,
+  path,
+  ignoreConfig,
+  ignorePattern,
+  verbose,
+} = require('yargs')
   .scriptName('canvas-kit-codemod')
   .usage(chalk.bold.blueBright('$0 <transform> [path]'))
   .options({
@@ -61,6 +67,13 @@ const {_: commands, path, ignoreConfig, ignorePattern, verbose} = require('yargs
       describe: chalk.gray('The path to execute the transform in (recursively).'),
     });
   })
+  .command('v11 [path]', chalk.gray('Canvas Kit v10 > v11 upgrade transform'), yargs => {
+    yargs.positional('path', {
+      type: 'string',
+      default: '.',
+      describe: chalk.gray('The path to execute the transform in (recursively).'),
+    });
+  })
   .demandCommand(1, chalk.red.bold('You must provide a transform to apply.'))
   .strictCommands()
   .fail((msg, err, yargs) => {
@@ -84,9 +97,10 @@ const ignoreConfigArg = ignoreConfig ? `--ignore-config=${ignoreConfig}` : '';
 console.log(ignorePattern);
 
 console.log(chalk.blueBright(`\nApplying ${transform} transform to '${path}'\n`));
-const args = `-t ${__dirname}/dist/es6/${transform} ${path} --parser tsx --extensions js,jsx,ts,tsx ${ignoreConfigArg} --ignore-pattern=${ignorePattern} --verbose=${verbose}`.split(
-  ' '
-);
+const args =
+  `-t ${__dirname}/dist/es6/${transform} ${path} --parser tsx --extensions js,jsx,ts,tsx ${ignoreConfigArg} --ignore-pattern=${ignorePattern} --verbose=${verbose}`.split(
+    ' '
+  );
 
 const proc = spawn(`jscodeshift`, args);
 

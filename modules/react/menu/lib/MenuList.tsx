@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import {commonColors} from '@workday/canvas-kit-react/tokens';
 import {
   createSubcomponent,
   createElemPropsHook,
@@ -11,6 +10,8 @@ import {ListBox, ListProps} from '@workday/canvas-kit-react/collection';
 import {useReturnFocus, useFocusRedirect} from '@workday/canvas-kit-react/popup';
 
 import {useMenuModel} from './useMenuModel';
+import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 export interface MenuListProps<T = any>
   extends Omit<ExtractProps<typeof ListBox, never>, 'children'> {
@@ -31,6 +32,25 @@ export const useMenuList = composeHooks(
   useFocusRedirect
 );
 
+export const menuListStencil = createStencil({
+  base: {
+    background: base.frenchVanilla100,
+    borderRadius: system.shape.zero,
+    padding: system.space.zero,
+    gap: system.space.zero,
+  },
+  modifiers: {
+    orientation: {
+      vertical: {
+        flexDirection: 'column',
+      },
+      horizontal: {
+        flexDirection: 'row',
+      },
+    },
+  },
+});
+
 export const MenuList = createSubcomponent('div')({
   displayName: 'Menu.List',
   modelHook: useMenuModel,
@@ -40,14 +60,8 @@ export const MenuList = createSubcomponent('div')({
     <ListBox
       as={Element}
       model={model}
-      background={commonColors.background}
-      borderRadius="zero"
-      padding="zero"
-      marginY="xxs"
-      gap="zero"
-      overflowY="auto"
-      flexDirection={model.state.orientation === 'vertical' ? 'column' : 'row'}
-      {...elemProps}
+      marginY={cssVar(system.space.x2)}
+      {...handleCsProp(elemProps, menuListStencil({orientation: model.state.orientation}))}
     >
       {children}
     </ListBox>

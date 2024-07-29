@@ -17,6 +17,8 @@ import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
 import {LoadingDots} from '@workday/canvas-kit-react/loading-dots';
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 const colors = ['Red', 'Blue', 'Purple', 'Green', 'Pink'];
 const fruits = ['Apple', 'Orange', 'Banana', 'Grape', 'Lemon', 'Lime'];
@@ -43,6 +45,20 @@ const AutoCompleteInput = createSubcomponent(TextInput)({
 })<ExtractProps<typeof Combobox.Input, never>>((elemProps, Element) => {
   return <Combobox.Input as={Element} {...elemProps} />;
 });
+
+const styleOverrides = {
+  inputGroupInner: createStyles({
+    width: px2rem(20),
+    transition: 'opacity 100ms ease',
+  }),
+  loadingDots: createStyles({
+    display: 'flex',
+    transform: 'scale(0.3)',
+  }),
+  comboboxMenuList: createStyles({
+    maxHeight: px2rem(200),
+  }),
+};
 
 export const Autocomplete = () => {
   const {model, loader} = useComboboxLoader(
@@ -89,18 +105,18 @@ export const Autocomplete = () => {
   );
 
   return (
-    <FormField orientation="horizontal" hasError isRequired>
+    <FormField orientation="horizontal" isRequired>
       <FormField.Label>Fruit</FormField.Label>
       <Combobox model={model} onChange={event => console.log('input', event.currentTarget.value)}>
         <InputGroup>
           <InputGroup.Input as={FormField.Input.as(AutoCompleteInput)} />
           <InputGroup.InnerEnd
+            cs={styleOverrides.inputGroupInner}
             pointerEvents="none"
-            style={{opacity: loader.isLoading ? 1 : 0, transition: 'opacity 100ms ease'}}
-            width={20}
+            style={{opacity: loader.isLoading ? system.opacity.full : system.opacity.zero}}
             data-loading={loader.isLoading}
           >
-            <LoadingDots style={{display: 'flex', transform: 'scale(0.3)'}} />
+            <LoadingDots cs={styleOverrides.loadingDots} />
           </InputGroup.InnerEnd>
           <InputGroup.InnerEnd>
             <InputGroup.ClearButton data-testid="clear" />
@@ -112,7 +128,7 @@ export const Autocomplete = () => {
               <StyledMenuItem as="span">No Results Found</StyledMenuItem>
             )}
             {model.state.items.length > 0 && (
-              <Combobox.Menu.List maxHeight={200}>
+              <Combobox.Menu.List cs={styleOverrides.comboboxMenuList}>
                 {item => <Combobox.Menu.Item>{item}</Combobox.Menu.Item>}
               </Combobox.Menu.List>
             )}

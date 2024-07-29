@@ -3,15 +3,16 @@ import {
   createContainer,
   createElemPropsHook,
   createSubcomponent,
-  ExtractProps,
 } from '@workday/canvas-kit-react/common';
-import {Box, Flex, FlexProps} from '@workday/canvas-kit-react/layout';
+import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 import {useListModel} from './useListModel';
 import {useListRenderItems} from './useListRenderItem';
 import {useListItemRegister} from './useListItemRegister';
 
-export interface ListBoxProps<T = any> extends Omit<ExtractProps<typeof Flex, never>, 'children'> {
+export interface ListBoxProps<T = any> extends Omit<FlexProps, 'children'> {
   children?: React.ReactNode | ((item: T, index: number) => React.ReactNode);
   /**
    * Set the margin top of the list box. You must use this prop and not style any other way. The
@@ -37,8 +38,8 @@ export const ListBoxItem = createSubcomponent('li')({
   displayName: 'Item',
   modelHook: useListModel,
   elemPropsHook: useListItemRegister,
-})<ExtractProps<typeof Flex, never>>((elemProps, Element) => {
-  return <Box as={Element} {...elemProps} />;
+})<FlexProps>((elemProps, Element) => {
+  return <Element {...mergeStyles(elemProps)} />;
 });
 
 export const useListBox = createElemPropsHook(useListModel)(model => {
@@ -48,6 +49,29 @@ export const useListBox = createElemPropsHook(useListModel)(model => {
       height: model.state.isVirtualized ? model.state.UNSTABLE_virtual.totalSize : undefined,
     },
   };
+});
+
+const listBoxContainerStencil = createStencil({
+  base: {},
+  modifiers: {
+    orientation: {
+      vertical: {
+        overflowY: 'auto',
+      },
+      horizontal: {
+        overflowY: undefined,
+      },
+    },
+  },
+});
+
+const listBoxStencil = createStencil({
+  base: {
+    display: 'flex',
+    flexDirection: 'column',
+    marginTop: system.space.zero,
+    marginBottom: system.space.zero,
+  },
 });
 
 /**
@@ -84,23 +108,31 @@ export const ListBox = createContainer('ul')({
     Item: ListBoxItem,
   },
 })<ListBoxProps>(
-  ({height, maxHeight, marginTop, marginBottom, marginY, ...elemProps}, Element, model) => {
-    // We're moving `marginY` to the container to not interfere with the virtualization size. We set
+  (
+    {height, maxHeight, marginY, marginBottom, overflowY, marginTop, ...elemProps},
+    Element,
+    model
+  ) => {
+    // We're removing `marginY, marginBottom, overflowY, marginTo` from elemProps and applying them to the container as to not interfere with the virtualization size. We set
     // the `marginY` on the Flex to `0` to avoid inaccurate scrollbars
-
-    // TODO figure out what style props should go to which `Box`
     return (
-      <Box
+      <div
         ref={model.state.containerRef}
-        marginTop={marginTop ?? marginY}
-        marginBottom={marginBottom ?? marginY}
-        maxHeight={maxHeight}
-        overflowY={model.state.orientation === 'vertical' ? 'auto' : undefined}
+        {...handleCsProp(
+          {
+            style: {
+              maxHeight,
+              marginBottom: marginBottom ?? marginY,
+              marginTop: marginTop ?? marginY,
+            },
+          },
+          listBoxContainerStencil({orientation: model.state.orientation})
+        )}
       >
-        <Flex as={Element} flexDirection="column" {...elemProps} marginY={0}>
+        <Element {...mergeStyles(elemProps, listBoxStencil())}>
           {useListRenderItems(model, elemProps.children)}
-        </Flex>
-      </Box>
+        </Element>
+      </div>
     );
   }
 );

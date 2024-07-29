@@ -30,7 +30,7 @@ function wrapStyleObj(styleObj: NestedStyleObject, context: TransformerContext):
         styleObj[key] = wrapStyleObj(value, context);
       }
       if (typeof value === 'string') {
-        styleObj[key] = maybeWrapCSSVariables(value, context.variables);
+        styleObj[key] = maybeWrapCSSVariables(value, context.names);
       }
     }
   }
@@ -105,12 +105,20 @@ function parsePropertyToStaticValue(node: ts.Node, context: TransformerContext):
     }
   }
 
+  // { name }
+  if (ts.isShorthandPropertyAssignment(node)) {
+    const key = node.name.text;
+
+    styleObj[key] = parseNodeToStaticValue(node.name, context).toString() || '';
+
+    return styleObj;
+  }
+
   // { ...value }
   if (ts.isSpreadAssignment(node)) {
     // Spread assignments are a bit complicated to use the AST to figure out, so we'll ask the
     // TypeScript type checker.
     const type = context.checker.getTypeAtLocation(node.expression);
-    context.checker.typeToString(type);
     return parseStyleObjFromType(type, context);
   }
 
@@ -157,7 +165,7 @@ export function parseStyleObjFromType(type: ts.Type, context: TransformerContext
  */
 export function maybeWrapCSSVariables(
   input: string | number,
-  variables: Record<string, string>
+  names: Record<string, string>
 ): string | number {
   if (typeof input === 'number') {
     return input;
@@ -173,9 +181,9 @@ export function maybeWrapCSSVariables(
       }
 
       // find a possible fallback
-      const fallbackVariable = getFallbackVariable(variable, variables);
+      const fallbackVariable = getFallbackVariable(variable, names);
       const fallback = fallbackVariable
-        ? `, ${maybeWrapCSSVariables(fallbackVariable, variables)}`
+        ? `, ${maybeWrapCSSVariables(fallbackVariable, names)}`
         : '';
 
       // if this a var wrapper without a fallback
