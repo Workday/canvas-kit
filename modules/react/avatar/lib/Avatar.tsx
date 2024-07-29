@@ -227,7 +227,6 @@ export const Avatar = createComponent('button')({
       <Element
         ref={ref}
         aria-label={altText}
-        onClick={onClick}
         {...mergeStyles(elemProps, [
           avatarStencil({
             variant,
