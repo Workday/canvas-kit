@@ -11,29 +11,29 @@ import {system} from '@workday/canvas-tokens-web';
 
 export interface AvatarProps {
   /**
-   * The variant of the avatar if using a default image. Accepts "light" or "dark."
+   * The variant of the avatar. Use `light` on dark backgrounds and `dark` on light backgrounds.
    * @default "light"
    */
   variant?: 'light' | 'dark';
   /**
    * The size of the Avatar.
+   * - `extraExtraLarge`: 7.5rem x 7.5rem (120px  x 120px)
+   * - `extraLarge`: 4.5rem x 4.5 (64px x 64px)
+   * - `large`: 2.5rem x 2.5rem (40px x 40px)
+   * - `medium`: 2rem x 2rem (32px x 32px)
+   * - `small`: 1.5rem x 1.5rem (24px x 24px)
+   * - `small`: 1rem x 1rem (16px x 16px)
    * @default "medium"
    */
-  size?:
-    | 'extraSmall'
-    | 'small'
-    | 'medium'
-    | 'large'
-    | 'extraLarge'
-    | 'extraExtraLarge'
-    | (string & {});
+  size?: /** size of small */
+  'extraSmall' | 'small' | 'medium' | 'large' | 'extraLarge' | 'extraExtraLarge' | (string & {});
   /**
    * The alt text of the Avatar image. This prop is also used for the aria-label.
    * @default Avatar
    */
   altText?: string;
   /**
-   * The URL of the user's photo. Expects a square (1:1) photo
+   * The URL of the user's photo. For best fit, use square images.
    */
   url?: string;
   /**

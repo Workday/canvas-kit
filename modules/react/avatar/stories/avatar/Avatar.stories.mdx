@@ -1,5 +1,6 @@
 import {Specifications, SymbolDoc, SymbolDescription} from '@workday/canvas-kit-docs';
 
+import {Basic} from '../avatar/examples/Basic';
 import {Button} from '../avatar/examples/Button';
 import {Image} from '../avatar/examples/Image';
 import {LazyLoad} from '../avatar/examples/LazyLoad';
@@ -27,6 +28,13 @@ yarn add @workday/canvas-kit-react
 <SymbolDescription name="Avatar" fileName="/react/" />
 
 The example below shows multiple instances of a `Avatar` with various configurations.
+
+### Basic
+
+By default, the Avatar renders a `button` element. If yo'd like to change the default element, use
+the `as` prop.
+
+<ExampleCodeBlock code={Basic} />
 
 ### Button
 
