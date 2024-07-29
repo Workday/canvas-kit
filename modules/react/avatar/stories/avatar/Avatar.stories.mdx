@@ -1,16 +1,12 @@
 import {Specifications, SymbolDoc, SymbolDescription} from '@workday/canvas-kit-docs';
 
-import {DarkVariantDiv} from './examples/div/DarkVariantDiv';
-import {DynamicBackgroundColorDiv} from './examples/div/DynamicBackgroundColorDiv';
-import {DynamicSizeDiv} from './examples/div/DynamicSizeDiv';
-import {ImageDiv} from './examples/div/ImageDiv';
-import {LazyLoadDiv} from './examples/div/LazyLoadDiv';
-import {LightVariantDiv} from './examples/div/LightVariantDiv';
-import {ObjectFitDiv} from './examples/div/ObjectFitDiv';
-
-import {DarkVariantButton} from './examples/button/DarkVariantButton';
-import {ImageButton} from './examples/button/ImageButton.tsx';
-import {LightVariantButton} from './examples/button/LightVariantButton';
+import {Button} from '../avatar/examples/Button';
+import {Image} from '../avatar/examples/Image';
+import {LazyLoad} from '../avatar/examples/LazyLoad';
+import {ObjectFit} from '../avatar/examples/ObjectFit';
+import {Size} from '../avatar/examples/Size';
+import {Variant} from '../avatar/examples/Variant';
+import {DynamicBackground} from '../avatar/examples/DynamicBackground';
 
 <Meta title="Components/Avatar" />
 
@@ -30,69 +26,56 @@ yarn add @workday/canvas-kit-react
 
 <SymbolDescription name="Avatar" fileName="/react/" />
 
-The example below shows multiple instances of a `Avatar` with various configurations. Like many of
-our components, Avatar accepts an `as` prop, which lets you change the underlying semantic element
-to a `<div>`. This should be done with caution to ensure the best accessibility. Generally,
-`<button>` elements should be used for actions.
+The example below shows multiple instances of a `Avatar` with various configurations.
 
-### Variant and Size
+### Button
+
+Like many of our components, Avatar accepts an `as` prop, which lets you change the underlying
+semantic element to a `<div>`. This should be done with caution to ensure the best accessibility.
+Generally, `<button>` elements should be used for actions.
+
+<ExampleCodeBlock code={Button} />
+
+### Variant
 
 Avatar defaults to using a "light" `variant` property. You can change the `variant` prop to "dark"
 by including `variant="dark"`.
 
+<ExampleCodeBlock code={Variant} />
+
+### Size
+
 Avatar defaults to using a "medium" `size` property. You can change the `size` prop to various
 sizing options. See Component API for more details.
 
-#### As a `<div>`
+Additionally, you can explicitly specify the size you want for the Avatar in pixels or rems.
 
-<ExampleCodeBlock code={LightVariantDiv} />
-
-<ExampleCodeBlock code={DarkVariantDiv} />
-
-#### As a `<button>`
-
-<ExampleCodeBlock code={LightVariantButton} />
-
-<ExampleCodeBlock code={DarkVariantButton} />
+<ExampleCodeBlock code={Size} />
 
 ### Image
 
 Avatar will convert to an image avatar when the `url` prop is included with acceptable url.
 
-#### As a `<div>`
-
-<ExampleCodeBlock code={ImageDiv} />
-
-#### As a `<button>`
-
-<ExampleCodeBlock code={ImageButton} />
+<ExampleCodeBlock code={Image} />
 
 ### Object Fit
 
 Avatar defaults to using `contain` for object-fit. You can change this property to any other
 acceptable object-fit properties.
 
-<ExampleCodeBlock code={ObjectFitDiv} />
+<ExampleCodeBlock code={ObjectFit} />
 
 ### Lazy Load
 
 Example of implementing lazy load behavior with Avatar.
 
-<ExampleCodeBlock code={LazyLoadDiv} />
+<ExampleCodeBlock code={LazyLoad} />
 
-### Dynamic Behavior
-
-#### Dynamic Size
-
-For the `size` prop, you can explicitly specify the size you want for the Avatar.
-
-<ExampleCodeBlock code={DynamicSizeDiv} />
-
-#### Dynamic Color
+### Dynamic Color
 
 To change the background color of the Avatar, you can use our createStencil functionality.
 
-<ExampleCodeBlock code={DynamicBackgroundColorDiv} />
+<ExampleCodeBlock code={DynamicBackground} />
 
 ## Component API
 

@@ -2,7 +2,7 @@ import React from 'react';
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {px2rem} from '@workday/canvas-kit-styling';
 
-export const ObjectFitDiv = () => (
+export const ObjectFit = () => (
   <div className="story">
     <h3>Original Rectangle Image</h3>
     <img alt="" src="https://placehold.co/450x200/png" />
