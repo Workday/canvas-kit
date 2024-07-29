@@ -6,13 +6,13 @@ import {LazyLoad} from '../avatar/examples/LazyLoad';
 import {ObjectFit} from '../avatar/examples/ObjectFit';
 import {Size} from '../avatar/examples/Size';
 import {Variant} from '../avatar/examples/Variant';
-import {DynamicBackground} from '../avatar/examples/DynamicBackground';
+import {CustomStyles} from '../avatar/examples/CustomStyles';
 
-<Meta title="Components/Avatar" />
+<Meta title="Components/Indicators/Avatar" />
 
 # Canvas Kit Avatar
 
-A component showing a user's photo with a circular crop.
+Represents a person's profile.
 
 [> Workday Design Reference](https://canvas.workdaydesign.com/components/indicators/avatar)
 
@@ -45,7 +45,7 @@ by including `variant="dark"`.
 
 ### Size
 
-Avatar defaults to using a "medium" `size` property. You can change the `size` prop to various
+Avatar defaults to using a `"medium"` `size` property. You can change the `size` prop to various
 sizing options. See Component API for more details.
 
 Additionally, you can explicitly specify the size you want for the Avatar in pixels or rems.
@@ -61,7 +61,7 @@ Avatar will convert to an image avatar when the `url` prop is included with acce
 ### Object Fit
 
 Avatar defaults to using `contain` for object-fit. You can change this property to any other
-acceptable object-fit properties.
+acceptable `object-fit` properties.
 
 <ExampleCodeBlock code={ObjectFit} />
 
@@ -71,11 +71,11 @@ Example of implementing lazy load behavior with Avatar.
 
 <ExampleCodeBlock code={LazyLoad} />
 
-### Dynamic Color
+### Custom Styling
 
-To change the background color of the Avatar, you can use our createStencil functionality.
+To change the background color of the Avatar, you can use our `createStencil` functionality.
 
-<ExampleCodeBlock code={DynamicBackground} />
+<ExampleCodeBlock code={CustomStyles} />
 
 ## Component API
 

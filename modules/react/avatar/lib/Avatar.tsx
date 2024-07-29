@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Property} from 'csstype';
 import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
-import {cssVar, createStencil, calc} from '@workday/canvas-kit-styling';
+import {createStencil, calc} from '@workday/canvas-kit-styling';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {borderRadius} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
@@ -37,10 +37,6 @@ export interface AvatarProps {
    */
   url?: string;
   /**
-   * An onClick function to pass to the underlying `<button>` element.
-   */
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  /**
    * An objectFit property that can customize how to resize your image to fit its container.
    * @default "contain"
    */
@@ -62,8 +58,8 @@ export const avatarStencil = createStencil({
     overflow: 'hidden',
     cursor: 'default',
     borderRadius: system.shape.round,
-    width: cssVar(size),
-    height: cssVar(size),
+    width: size,
+    height: size,
     '&:focus-visible:not([disabled]), &.focus:not([disabled])': {
       outline: 'none',
       ...focusRing({separation: 2}),
@@ -147,34 +143,54 @@ export const avatarStencil = createStencil({
     },
     objectFit: {
       contain: {
-        objectFit: 'contain',
+        ['& [data-slot="avatar-image"]']: {
+          objectFit: 'contain',
+        },
       },
       fill: {
-        objectFit: 'fill',
+        ['& [data-slot="avatar-image"]']: {
+          objectFit: 'fill',
+        },
       },
       cover: {
-        objectFit: 'cover',
+        ['& [data-slot="avatar-image"]']: {
+          objectFit: 'cover',
+        },
       },
       ['scale-down']: {
-        objectFit: 'scale-down',
+        ['& [data-slot="avatar-image"]']: {
+          objectFit: 'scale-down',
+        },
       },
       none: {
-        objectFit: 'none',
+        ['& [data-slot="avatar-image"]']: {
+          objectFit: 'none',
+        },
       },
       ['-moz-initial']: {
-        objectFit: '-moz-initial',
+        ['& [data-slot="avatar-image"]']: {
+          objectFit: '-moz-initial',
+        },
       },
       ['initial']: {
-        objectFit: 'initial',
+        ['& [data-slot="avatar-image"]']: {
+          objectFit: 'initial',
+        },
       },
       ['inherit']: {
-        objectFit: 'inherit',
+        ['& [data-slot="avatar-image"]']: {
+          objectFit: 'inherit',
+        },
       },
       ['revert']: {
-        objectFit: 'revert',
+        ['& [data-slot="avatar-image"]']: {
+          objectFit: 'revert',
+        },
       },
       ['unset']: {
-        objectFit: 'unset',
+        ['& [data-slot="avatar-image"]']: {
+          objectFit: 'unset',
+        },
       },
     },
     isImageLoaded: {
@@ -207,7 +223,7 @@ export const avatarStencil = createStencil({
 export const Avatar = createComponent('button')({
   displayName: 'Avatar',
   Component: (
-    {variant, size, altText = 'Avatar', url, onClick, objectFit, ...elemProps}: AvatarProps,
+    {variant, size, altText = 'Avatar', url, objectFit, ...elemProps}: AvatarProps,
     ref,
     Element
   ) => {

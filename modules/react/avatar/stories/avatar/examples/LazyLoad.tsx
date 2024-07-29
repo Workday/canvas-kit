@@ -7,7 +7,7 @@ export const LazyLoad = () => (
   <div className="story">
     {Array.from({length: 5}, (v, index) => (
       <>
-        <Avatar as="div" size="medium" url={testAvatar + '?v=' + index} />
+        <Avatar key={index} as="div" size="medium" url={testAvatar + '?v=' + index} />
         <br />
       </>
     ))}

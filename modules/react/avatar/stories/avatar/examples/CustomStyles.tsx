@@ -1,7 +1,7 @@
 import React from 'react';
 import {Avatar} from '@workday/canvas-kit-react/avatar';
-import {createStencil} from '@workday/canvas-kit-styling';
-import {base} from '@workday/canvas-tokens-web';
+import {createStencil, createStyles} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 import {systemIconStencil} from '../../../../icon';
 
 const customBlueAvatarStencil = createStencil({
@@ -22,9 +22,14 @@ const customGreenAvatarStencil = createStencil({
   },
 });
 
-export const DynamicBackground = () => (
-  <div className="story">
-    <Avatar as="div" size="extraLarge" {...customBlueAvatarStencil()} />
-    <Avatar as="div" size="extraLarge" {...customGreenAvatarStencil()} />
+const containerStyles = createStyles({
+  display: 'inline-flex',
+  gap: system.space.x2,
+});
+
+export const CustomStyles = () => (
+  <div className={containerStyles}>
+    <Avatar as="div" {...customBlueAvatarStencil()} />
+    <Avatar as="div" {...customGreenAvatarStencil()} />
   </div>
 );
