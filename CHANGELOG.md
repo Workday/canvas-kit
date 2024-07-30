@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.0.22](https://github.com/Workday/canvas-kit/releases/tag/v11.0.22) (2024-07-29)
+
+### Documentation
+
+- docs: Fix stencil docs typo ([#2847](https://github.com/Workday/canvas-kit/pull/2847)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v11.0.21](https://github.com/Workday/canvas-kit/releases/tag/v11.0.21) (2024-07-24)
 
 ### Documentation
