@@ -73,7 +73,7 @@ describe('Avatar', () => {
 
   it('should set the object fit of the image when objectFit prop is specified', () => {
     const {container} = render(<Avatar url="https://example.com/image.png" objectFit="cover" />);
-    expect(container.firstChild).toHaveStyle('object-fit: cover');
+    expect(container.querySelector('[data-slot="avatar-image"]')).toHaveStyle('object-fit: cover');
   });
 
   it('should hide the icon when the image is loaded', () => {
