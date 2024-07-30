@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.49](https://github.com/Workday/canvas-kit/releases/tag/v10.3.49) (2024-07-29)
+
+### Components
+
+- fix: Support marginTop and marginBottom on ListBox ([#2844](https://github.com/Workday/canvas-kit/pull/2844)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v11.0.22](https://github.com/Workday/canvas-kit/releases/tag/v11.0.22) (2024-07-29)
 
 ### Documentation
@@ -10,6 +17,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - docs: Fix stencil docs typo ([#2847](https://github.com/Workday/canvas-kit/pull/2847)) ([@alanbsmith](https://github.com/alanbsmith))
 
 
+## [v10.3.48](https://github.com/Workday/canvas-kit/releases/tag/v10.3.48) (2024-07-24)
 ## [v11.0.21](https://github.com/Workday/canvas-kit/releases/tag/v11.0.21) (2024-07-24)
 
 ### Documentation
