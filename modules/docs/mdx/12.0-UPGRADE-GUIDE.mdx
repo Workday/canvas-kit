@@ -44,8 +44,8 @@ A note to the reader:
   - [InputIconContainer](#inputiconcontainer)
   - [Select (Preview)](#select-preview)
 - [Component Updates](#component-updates)
-  - [Popup, Dialog and Modal](#popup-dialog-and-modal)
-  - [Toast](#toast)
+  - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
+  - [Text Area](#text-area)
 - [Style Utility Updates](#style-utility-updates)
   - [createStencil](#createstencil)
 - [Troubleshooting](#troubleshooting)
@@ -59,8 +59,8 @@ A note to the reader:
 In v12, all the components listed in this guide have started using our new
 [Canvas Tokens Web](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
 
-In v12 you must add `@workday/canvas-tokens-web` to ensure our components are properly styled and the
-variables are defined. For more information on installing and using, please reference our tokens
+In v12 you must add `@workday/canvas-tokens-web` to ensure our components are properly styled and
+the variables are defined. For more information on installing and using, please reference our tokens
 [docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
 
 ## Deprecations
@@ -70,25 +70,33 @@ in a future major release. This signals consumers to migrate to a more stable al
 deprecated code is removed.
 
 ## Removals
-Removals are deletions from our codebase and you can no longer consume this component. We've either promoted or replaced a component or utility.
+
+Removals are deletions from our codebase and you can no longer consume this component. We've either
+promoted or replaced a component or utility.
 
 ### Select (Preview)
 
 **PR:** [#2796](https://github.com/Workday/canvas-kit/pull/2796)
 
-We've removed the `Select` component that was in Preview. Please use the compound [Select component from Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic).
+We've removed the `Select` component that was in Preview. Please use the compound
+[Select component from Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic).
 
 ### InputIconContainer
 
 **PR:** [#2838](https://github.com/Workday/canvas-kit/pull/2838)
 
-We've removed `InputIconContainer` from Main. Please use [InputGroup](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-text-input--icons) from Main instead.
+We've removed `InputIconContainer` from Main. Please use
+[InputGroup](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-text-input--icons)
+from Main instead.
 
 ---
 
 ## Component Updates
 
 ### Styling API and CSS Tokens
+
+**PRs:** [#2825](https://github.com/Workday/canvas-kit/pull/2825),
+[#2795](https://github.com/Workday/canvas-kit/pull/2795)
 
 Several components have been refactored to use our new
 [Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
@@ -97,24 +105,32 @@ The React interface **has not changed**, but CSS variables are now used for dyna
 
 The following components are affected:
 
-- `Popup`
 - `Dialog`
 - `Modal`
+- `Popup`
+- `TextArea`
+- `TextInput`
 - `Toast`
 
 > **Note:** These components also support our new `cs` prop for styling. Learn more about styling
 > with `cs` in our
 > [documentation](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--cs-prop).
 
-### Popup, Dialog and Modal
+### Text Area
 
-**PR:** [#2795](https://github.com/Workday/canvas-kit/pull/2795)
+**PR:** [#2825](https://github.com/Workday/canvas-kit/pull/2825)
 
-### Toast
+`TextAreaResizeDirection` is no longer a TypeScript enum, but a JavaScript object. This change does
+not effect runtime at all, but may cause TypeScript errors if you use `TextAreaResizeDirection` as a
+type.
 
-**PR:** [#2795](https://github.com/Workday/canvas-kit/pull/2795)
+```tsx
+// v11
+interface MyProps { resize?: TextAreaResizeDirection }
 
-## Style Utility Updates
+// 12 type ValueOf<T> = T[keyof T]; interface MyProps { resize?:
+ValueOf<typeof TextAreaResizeDirection> }
+```
 
 ## Troubleshooting
 
