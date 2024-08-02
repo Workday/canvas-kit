@@ -371,7 +371,7 @@ describe('Select', () => {
 
           context('the menu', () => {
             it('should set assistive focus to the fourth option down ("Mail") since focus will have skipped one disabled option ("Fax")', () => {
-              cy.findAllByRole('option').eq(3).should('have.attr', 'have.class', 'focus');
+              cy.findByRole('option', {name: 'Mail'}).should('have.class', 'focus');
             });
 
             it('should not have any item selected', () => {
@@ -566,7 +566,7 @@ describe('Select', () => {
 
           context('the menu', () => {
             it('should set assistive focus to the "Phone" option', () => {
-              cy.findAllByRole('option').eq(1).should('have.attr', 'aria-selected', 'true');
+              cy.findByRole('option', {name: 'Phone'}).should('have.class', 'focus');
             });
           });
 
@@ -577,7 +577,7 @@ describe('Select', () => {
 
             context('the menu', () => {
               it('should set assistive focus to the "Mail" option and skip disabled fax', () => {
-                cy.findAllByRole('option').eq(3).should('have.class', 'focus');
+                cy.findByRole('option', {name: 'Mail'}).should('have.class', 'focus');
               });
 
               it('should not have any item selected', () => {
