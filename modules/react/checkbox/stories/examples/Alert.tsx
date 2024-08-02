@@ -1,6 +1,6 @@
 import React from 'react';
 import {Checkbox} from '@workday/canvas-kit-react/checkbox';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 
 export const Alert = () => {
   const [checked, setChecked] = React.useState(false);
@@ -10,12 +10,16 @@ export const Alert = () => {
   };
 
   return (
-    <FormField
-      error={FormField.ErrorType.Alert}
-      hintId="hint-alert"
-      hintText="You must agree to the terms before proceeding"
-    >
-      <Checkbox checked={checked} label="I agree to the terms" onChange={handleChange} />
+    <FormField error="alert" orientation="horizontal">
+      <FormField.Container>
+        <FormField.Input
+          as={Checkbox}
+          checked={checked}
+          label="I agree to the terms"
+          onChange={handleChange}
+        />
+        <FormField.Hint>You must agree to the terms before proceeding</FormField.Hint>
+      </FormField.Container>
     </FormField>
   );
 };
