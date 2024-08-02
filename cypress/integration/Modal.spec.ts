@@ -69,11 +69,11 @@ describe('Modal', () => {
             cy.findByRole('dialog', {name: 'MIT License'}).should('have.attr', 'aria-labelledby');
           });
 
-          it('should have an aria-modal=true', () => {
+          it('should have an aria-modal=false', () => {
             cy.findByRole('dialog', {name: 'MIT License'}).should(
               'have.attr',
               'aria-modal',
-              'true'
+              'false'
             );
           });
 
@@ -483,11 +483,11 @@ describe('Modal', () => {
           );
         });
 
-        it('should have an aria-modal=true', () => {
+        it('should have an aria-modal=false', () => {
           cy.findByRole('dialog', {name: 'Acknowledge License'}).should(
             'have.attr',
             'aria-modal',
-            'true'
+            'false'
           );
         });
 
