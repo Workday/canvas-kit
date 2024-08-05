@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.51](https://github.com/Workday/canvas-kit/releases/tag/v10.3.51) (2024-08-05)
+
+### Accessibility
+
+- fix: Set aria-modal to false for better accessibility ([#2855](https://github.com/Workday/canvas-kit/pull/2855)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v10.3.50](https://github.com/Workday/canvas-kit/releases/tag/v10.3.50) (2024-08-05)
 
 ### Components
