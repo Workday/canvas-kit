@@ -2,7 +2,9 @@ import * as React from 'react';
 import {colors, space, type} from '@workday/canvas-kit-react/tokens';
 import {accessibleHide as accessibleHideCSS, styled} from '@workday/canvas-kit-react/common';
 import {FormFieldLabelPosition, FormFieldLabelPositionBehavior} from './types';
-
+/**
+ * @deprecated ⚠️ `LabelProps` in Main has been deprecated and will be removed in a future major version. Please use [`FormField` in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-inputs-form-field--basic) instead.
+ */
 export interface LabelProps extends FormFieldLabelPositionBehavior {
   /**
    * The position of the Label.
@@ -87,7 +89,9 @@ const LegendComponent = styled('legend')<LabelProps>(...labelStyles, ({labelPosi
 });
 
 const LabelComponent = styled('label')<LabelProps>(...labelStyles);
-
+/**
+ * @deprecated ⚠️ `Label` in Main has been deprecated and will be removed in a future major version. Please use [`FormField` in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-inputs-form-field--basic) instead.
+ */
 class Label extends React.Component<React.PropsWithChildren<LabelProps>> {
   static Position = FormFieldLabelPosition;
 
