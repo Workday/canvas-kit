@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.0.24](https://github.com/Workday/canvas-kit/releases/tag/v11.0.24) (2024-08-05)
+
+### Components
+
+- fix(SearchForm): Suppress forwarding props warning ([#2850](https://github.com/Workday/canvas-kit/pull/2850)) ([@thunguyen19](https://github.com/thunguyen19), Thu Nguyen)
+
+
 ## [v11.0.23](https://github.com/Workday/canvas-kit/releases/tag/v11.0.23) (2024-07-30)
 
 ### Components
