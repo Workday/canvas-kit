@@ -1,32 +1,50 @@
 import React from 'react';
 import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
-import {inputColors, colors} from '@workday/canvas-kit-react/tokens';
 import {useRadioModel} from './hooks/useRadioModel';
 import {RadioLabelContext} from './RadioLabel';
-import {Text} from '@workday/canvas-kit-react/text';
+import {Text, textStencil} from '@workday/canvas-kit-react/text';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
+
+const radioTextStencil = createStencil({
+  extends: textStencil,
+  base: {
+    cursor: 'pointer',
+  },
+  modifiers: {
+    variant: {
+      inverse: {
+        color: system.color.text.inverse,
+      },
+    },
+    disabled: {
+      true: {
+        cursor: 'default',
+        color: system.color.text.disabled,
+      },
+    },
+  },
+  compound: [
+    {
+      modifiers: {variant: 'inverse', disabled: true},
+      styles: {
+        color: system.color.text.inverse,
+        opacity: system.opacity.disabled,
+      },
+    },
+  ],
+  defaultModifiers: {
+    typeLevel: 'subtext.large',
+  },
+});
 
 export const RadioText = createSubcomponent('span')({
   displayName: 'RadioButton.Text',
   modelHook: useRadioModel,
 })(({children, ...elemProps}: ExtractProps<typeof Text>, Element) => {
-  const {disabled, variant} = React.useContext(RadioLabelContext);
-  const inverse = variant === 'inverse';
+  const {variant, disabled} = React.useContext(RadioLabelContext);
   return (
-    <Text
-      as={Element}
-      style={{
-        cursor: !disabled ? 'pointer' : undefined,
-        opacity: disabled && inverse ? '.4' : '1',
-        color: inverse
-          ? colors.frenchVanilla100
-          : disabled
-          ? inputColors.disabled.text
-          : elemProps.color,
-      }}
-      typeLevel="subtext.large"
-      {...elemProps}
-    >
-      {children}
-    </Text>
+    <Element {...mergeStyles(elemProps, radioTextStencil({variant, disabled}))}>{children}</Element>
   );
 });
