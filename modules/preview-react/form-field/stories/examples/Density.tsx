@@ -8,6 +8,7 @@ import {Title} from '@workday/canvas-kit-react/text';
 import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
 import {calc, createStyles, cssVar} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+import {FormFieldGroup} from '../../lib/FormFieldGroup';
 
 const formStyles = createStyles({
   marginBlockStart: system.space.x3,
@@ -69,9 +70,9 @@ export const Density = () => {
           <SegmentedControl.Item data-id="low">Low</SegmentedControl.Item>
         </SegmentedControl.List>
       </SegmentedControl>
-      <form className={formStyles}>
-        <fieldset className={fieldSetStyles}>
-          <legend>Update Your Address</legend>
+      <form action="#" className={formStyles}>
+        <FormFieldGroup className={fieldSetStyles} disabled>
+          <FormFieldGroup.Legend>Update Your Address</FormFieldGroup.Legend>
           <FormField grow cs={{marginBottom: densitySpacing}}>
             <FormField.Label>Choose Country</FormField.Label>
             <Select items={['Dominican Republic', 'Spain', 'United States']}>
@@ -211,7 +212,7 @@ export const Density = () => {
               />
             </FormField.Container>
           </FormField>
-        </fieldset>
+        </FormFieldGroup>
       </form>
     </div>
   );
