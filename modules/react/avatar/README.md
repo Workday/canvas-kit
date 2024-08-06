@@ -58,9 +58,6 @@ Default: "medium"
 
 ---
 
-#### `onClick: (e: React.MouseEvent<HTMLButtonElement>) => void`
-
-> An onClick function to pass to the underlying `<button>` element.
 
 ---
 
