@@ -45,9 +45,8 @@ A note to the reader:
   - [Select (Preview)](#select-preview)
 - [Component Updates](#component-updates)
   - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
+  - [Avatar](#avatar)
   - [Text Area](#text-area)
-- [Style Utility Updates](#style-utility-updates)
-  - [createStencil](#createstencil)
 - [Troubleshooting](#troubleshooting)
 - [Glossary](#glossary)
   - [Main](#main)
@@ -96,7 +95,8 @@ from Main instead.
 ### Styling API and CSS Tokens
 
 **PRs:** [#2825](https://github.com/Workday/canvas-kit/pull/2825),
-[#2795](https://github.com/Workday/canvas-kit/pull/2795)
+[#2795](https://github.com/Workday/canvas-kit/pull/2795),
+[#2793](https://github.com/Workday/canvas-kit/pull/2793)
 
 Several components have been refactored to use our new
 [Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
@@ -105,6 +105,7 @@ The React interface **has not changed**, but CSS variables are now used for dyna
 
 The following components are affected:
 
+- `Avatar`
 - `Dialog`
 - `Modal`
 - `Popup`
@@ -115,6 +116,15 @@ The following components are affected:
 > **Note:** These components also support our new `cs` prop for styling. Learn more about styling
 > with `cs` in our
 > [documentation](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--cs-prop).
+
+### Avatar
+
+- Avatar no longer uses `SystemIconCircle` for sizing.
+- `Avatar.Size` is no longer supported. The `size` prop type has change to accept the following:
+  `"extraExtraLarge" | "extraLarge" | "large" | "medium" | "small" | "extraSmall" | (string{})`
+- `Avatar.Variant` is no longer supported. Enum `AvatarVariant` has been removed. The `variant` type
+  prop now accepts `"dark" | "light"`
+- The `as` prop now accepts any element, not just `div`.
 
 ### Text Area
 
