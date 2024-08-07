@@ -18,7 +18,7 @@ export interface AvatarProps {
   /**
    * The size of the Avatar.
    * - `extraExtraLarge`: 7.5rem x 7.5rem (120px  x 120px)
-   * - `extraLarge`: 4.5rem x 4.5 (64px x 64px)
+   * - `extraLarge`: 4.5rem x 4.5rem (64px x 64px)
    * - `large`: 2.5rem x 2.5rem (40px x 40px)
    * - `medium`: 2rem x 2rem (32px x 32px)
    * - `small`: 1.5rem x 1.5rem (24px x 24px)
