@@ -110,8 +110,6 @@ export const Density = () => {
             <FormField.Input
               as={TextInput}
               cs={{paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight}}
-              value={value}
-              onChange={handleChange}
             />
           </FormField>
           <FormField grow cs={{marginBottom: densitySpacing}}>
@@ -119,8 +117,6 @@ export const Density = () => {
             <FormField.Input
               as={TextInput}
               cs={{paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight}}
-              value={value}
-              onChange={handleChange}
             />
           </FormField>
           <FormField grow cs={{marginBottom: densitySpacing}}>
@@ -128,8 +124,6 @@ export const Density = () => {
             <FormField.Input
               as={TextInput}
               cs={{paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight}}
-              value={value}
-              onChange={handleChange}
             />
           </FormField>
           <FormField grow cs={{marginBottom: densitySpacing}}>
@@ -137,8 +131,6 @@ export const Density = () => {
             <FormField.Input
               as={TextInput}
               cs={{paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight}}
-              value={value}
-              onChange={handleChange}
             />
           </FormField>
           <div className={sideBySideInputs}>
@@ -147,8 +139,6 @@ export const Density = () => {
               <FormField.Input
                 as={TextInput}
                 cs={{paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight}}
-                value={value}
-                onChange={handleChange}
               />
             </FormField>
             <FormField grow cs={{marginBottom: densitySpacing}}>
@@ -159,14 +149,12 @@ export const Density = () => {
                   {paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight},
                 ]}
                 as={TextInput}
-                value={value}
-                onChange={handleChange}
               />
             </FormField>
           </div>
           <FormField>
             <FormField.Label>Enable Fast Shipping</FormField.Label>
-            <FormField.Input as={Switch} value={value} onChange={handleChange} />
+            <FormField.Input as={Switch} />
           </FormField>
           <FormField grow cs={{marginBottom: densitySpacing}}>
             <FormField.Label>Credit Card</FormField.Label>
@@ -182,8 +170,6 @@ export const Density = () => {
                   height: inputHeight,
                   textAlign: 'center',
                 }}
-                value={value}
-                onChange={handleChange}
               />
               <FormField.Input
                 as={TextInput}
@@ -196,8 +182,6 @@ export const Density = () => {
                   height: inputHeight,
                   textAlign: 'center',
                 }}
-                value={value}
-                onChange={handleChange}
               />
               <FormField.Input
                 as={TextInput}
@@ -210,8 +194,6 @@ export const Density = () => {
                   height: inputHeight,
                   textAlign: 'center',
                 }}
-                value={value}
-                onChange={handleChange}
               />
               <FormField.Input
                 cs={{
@@ -224,8 +206,6 @@ export const Density = () => {
                 }}
                 placeholder="XXXX"
                 as={TextInput}
-                value={value}
-                onChange={handleChange}
               />
             </FormField.Container>
           </FormField>
