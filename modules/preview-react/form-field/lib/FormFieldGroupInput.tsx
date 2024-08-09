@@ -19,5 +19,5 @@ export const FormFieldGroupInput = createSubcomponent('input')({
   modelHook: useFormFieldModel,
   elemPropsHook: useFormFieldGroupInput,
 })((elemProps, Element) => {
-  return <Element data-width="ck-formfield-width" {...elemProps} />;
+  return <Element {...elemProps} />;
 });

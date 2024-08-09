@@ -40,7 +40,10 @@ export const FormFieldGroupList = createSubcomponent('div')({
   modelHook: useFormFieldModel,
 })<FormFieldGroupListProps>(({children, ...elemProps}, Element, model) => {
   return (
-    <Element {...handleCsProp(elemProps, formFieldGroupListStencil({error: model.state.error}))}>
+    <Element
+      data-width="ck-formfield-width"
+      {...handleCsProp(elemProps, formFieldGroupListStencil({error: model.state.error}))}
+    >
       {children}
     </Element>
   );

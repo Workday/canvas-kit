@@ -9,6 +9,7 @@ import {TextArea} from '@workday/canvas-kit-react/text-area';
 import {Switch} from '@workday/canvas-kit-react/switch';
 import {calc, createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+import {FormFieldGroup} from '../../lib/FormFieldGroup';
 
 const parentContainerStyles = createStyles({
   flexDirection: 'column',
@@ -47,27 +48,31 @@ export const AllFields = () => {
           </Select.Popper>
         </Select>
       </FormField>
-      <FormField as="fieldset" isRequired={true} error={'error'} orientation="horizontal" grow>
-        <FormField.Label as="legend">Radio Group Legend</FormField.Label>
-        <FormField.Container>
-          <FormField.Input as={RadioGroup}>
-            <RadioGroup.RadioButton value="deep-dish">Deep dish</RadioGroup.RadioButton>
-            <RadioGroup.RadioButton value="thin">Thin</RadioGroup.RadioButton>
-            <RadioGroup.RadioButton value="gluten-free">Gluten free</RadioGroup.RadioButton>
-            <RadioGroup.RadioButton value="cauliflower">Cauliflower</RadioGroup.RadioButton>
-            <RadioGroup.RadioButton value="butter">
-              Butter - the best thing to put on bread
-            </RadioGroup.RadioButton>
-          </FormField.Input>
-          <FormField.Hint>Error Message</FormField.Hint>
-        </FormField.Container>
-      </FormField>
-      <FormField as="fieldset" grow>
-        <FormField.Label as="legend">Checkbox Legend</FormField.Label>
-        <FormField.Input checked={true} as={Checkbox} label="Checkbox Label" />
-        <FormField.Input checked={false} as={Checkbox} label="Thin Crust" />
-        <FormField.Input checked={false} as={Checkbox} label="Extra Cheese" />
-      </FormField>
+      <FormFieldGroup error="error" orientation="horizontal" grow>
+        <FormFieldGroup.Legend>Choose Your Crust</FormFieldGroup.Legend>
+        <FormFieldGroup.Container>
+          <FormFieldGroup.List as={RadioGroup}>
+            <FormFieldGroup.Input as={RadioGroup.RadioButton} value="thin-crust">
+              Thin Crust
+            </FormFieldGroup.Input>
+            <FormFieldGroup.Input as={RadioGroup.RadioButton} value="hand-tossed">
+              Hand Tossed
+            </FormFieldGroup.Input>
+            <FormFieldGroup.Input as={RadioGroup.RadioButton} value="deep-dish">
+              Deep Dish
+            </FormFieldGroup.Input>
+            <FormFieldGroup.Input as={RadioGroup.RadioButton} value="cauliflower">
+              Cauliflower
+            </FormFieldGroup.Input>
+          </FormFieldGroup.List>
+        </FormFieldGroup.Container>
+      </FormFieldGroup>
+      <FormFieldGroup grow>
+        <FormFieldGroup.Legend>Checkbox Legend</FormFieldGroup.Legend>
+        <FormFieldGroup.Input checked={true} as={Checkbox} label="Checkbox Label" />
+        <FormFieldGroup.Input checked={false} as={Checkbox} label="Thin Crust" />
+        <FormFieldGroup.Input checked={false} as={Checkbox} label="Extra Cheese" />
+      </FormFieldGroup>
 
       <FormField orientation="horizontal" grow>
         <FormField.Label>Switch Label</FormField.Label>

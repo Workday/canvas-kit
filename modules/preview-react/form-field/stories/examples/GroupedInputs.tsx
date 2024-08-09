@@ -30,6 +30,11 @@ const toppings = [
   },
   {
     id: 3,
+    label: 'Pineapple',
+    checked: false,
+  },
+  {
+    id: 4,
     label: 'Mushrooms',
     checked: false,
   },
@@ -75,7 +80,7 @@ export const GroupedInputs = () => {
     <div>
       <h3>Choose your pizza options</h3>
       <form className={formStyles} onSubmit={handleSubmit}>
-        <FormFieldGroup error={error} id="foo123">
+        <FormFieldGroup error={error}>
           <FormFieldGroup.Legend>Choose Your Toppings</FormFieldGroup.Legend>
           <FormFieldGroup.List>
             {toppingsState.map(item => {
@@ -86,6 +91,7 @@ export const GroupedInputs = () => {
                   checked={item.checked}
                   value={item.label}
                   as={Checkbox}
+                  disabled={item.label === 'Pineapple' ? true : undefined}
                   label={item.label}
                 />
               );

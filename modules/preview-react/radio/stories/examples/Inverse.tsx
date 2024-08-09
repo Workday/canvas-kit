@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField, FormFieldGroup} from '@workday/canvas-kit-preview-react/form-field';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -29,23 +29,28 @@ export const Inverse = () => {
 
   return (
     <Box cs={styleOverrides.containerStyles}>
-      <FormField cs={styleOverrides.formFieldStyles} as="fieldset">
-        <FormField.Label as="legend">Choose Your Pizza Crust</FormField.Label>
-        <FormField.Input as={RadioGroup} name="crust-inverse" onChange={handleChange} value={value}>
-          <RadioGroup.RadioButton variant="inverse" value="deep-dish">
+      <FormFieldGroup cs={styleOverrides.formFieldStyles}>
+        <FormFieldGroup.Legend>Choose Your Pizza Crust</FormFieldGroup.Legend>
+        <FormFieldGroup.List
+          as={RadioGroup}
+          name="crust-inverse"
+          onChange={handleChange}
+          value={value}
+        >
+          <FormFieldGroup.Input as={RadioGroup.RadioButton} variant="inverse" value="deep-dish">
             Deep dish
-          </RadioGroup.RadioButton>
-          <RadioGroup.RadioButton variant="inverse" value="thin">
+          </FormFieldGroup.Input>
+          <FormFieldGroup.Input as={RadioGroup.RadioButton} variant="inverse" value="thin">
             Thin
-          </RadioGroup.RadioButton>
-          <RadioGroup.RadioButton variant="inverse" value="gluten-free">
+          </FormFieldGroup.Input>
+          <FormFieldGroup.Input as={RadioGroup.RadioButton} variant="inverse" value="gluten-free">
             Gluten free
-          </RadioGroup.RadioButton>
-          <RadioGroup.RadioButton variant="inverse" value="cauliflower">
+          </FormFieldGroup.Input>
+          <FormFieldGroup.Input as={RadioGroup.RadioButton} variant="inverse" value="cauliflower">
             Cauliflower
-          </RadioGroup.RadioButton>
-        </FormField.Input>
-      </FormField>
+          </FormFieldGroup.Input>
+        </FormFieldGroup.List>
+      </FormFieldGroup>
     </Box>
   );
 };

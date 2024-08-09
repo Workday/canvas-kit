@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormFieldGroup} from '@workday/canvas-kit-preview-react/form-field';
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
@@ -20,24 +20,32 @@ export const Basic = () => {
 
   return (
     <Flex flexDirection="column">
-      <FormField as="fieldset">
-        <FormField.Label as="legend">Choose Your Pizza Crust</FormField.Label>
-        <FormField.Input
+      <FormFieldGroup>
+        <FormFieldGroup.Legend>Choose Your Pizza Crust</FormFieldGroup.Legend>
+        <FormFieldGroup.List
           cs={formfieldInputStyles}
           as={RadioGroup}
           name="pizza-crust"
           onChange={handleChange}
           value={value}
         >
-          <RadioGroup.RadioButton value="deep-dish">Deep dish</RadioGroup.RadioButton>
-          <RadioGroup.RadioButton value="thin">Thin</RadioGroup.RadioButton>
-          <RadioGroup.RadioButton value="gluten-free">Gluten free</RadioGroup.RadioButton>
-          <RadioGroup.RadioButton value="cauliflower">Cauliflower</RadioGroup.RadioButton>
-          <RadioGroup.RadioButton value="custom">
+          <FormFieldGroup.Input as={RadioGroup.RadioButton} value="deep-dish">
+            Deep dish
+          </FormFieldGroup.Input>
+          <FormFieldGroup.Input as={RadioGroup.RadioButton} value="thin">
+            Thin
+          </FormFieldGroup.Input>
+          <FormFieldGroup.Input as={RadioGroup.RadioButton} value="gluten-free">
+            Gluten free
+          </FormFieldGroup.Input>
+          <FormFieldGroup.Input as={RadioGroup.RadioButton} value="cauliflower">
+            Cauliflower
+          </FormFieldGroup.Input>
+          <FormFieldGroup.Input as={RadioGroup.RadioButton} value="custom">
             Butter - the best thing to put on bread
-          </RadioGroup.RadioButton>
-        </FormField.Input>
-      </FormField>
+          </FormFieldGroup.Input>
+        </FormFieldGroup.List>
+      </FormFieldGroup>
       Value selected: {value}
     </Flex>
   );

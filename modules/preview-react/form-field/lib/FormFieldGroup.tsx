@@ -87,6 +87,7 @@ export const FormFieldGroup = createContainer('fieldset')({
           grow,
           orientation,
           error: model.state.error,
+          required: model.state.isRequired,
         })
       )}
     >
