@@ -16,7 +16,6 @@ import {Hint} from './examples/Hint';
 import {FieldSet} from './examples/FieldSet';
 import {Grow} from './examples/Grow';
 import {ThemedError} from './examples/ThemedErrors';
-import {Density} from './examples/Density';
 import {GroupedInputs} from './examples/GroupedInputs';
 
 <Meta title="Preview/Inputs/Form Field" component={FormField} />
@@ -33,18 +32,6 @@ yarn add @workday/canvas-kit-preview-react
 ```
 
 ## Usage
-
-### Density
-
-It can be done
-
-<ExampleCodeBlock code={Density} />
-
-### Group
-
-It can be done
-
-<ExampleCodeBlock code={GroupedInputs} />
 
 ### Basic
 
@@ -116,12 +103,20 @@ for required fields are suffixed by a red asterisk.
 
 <ExampleCodeBlock code={Required} />
 
-### Field Set
+### Grouped Inputs
 
-Set the `as` prop of the `FormField` to `fieldset` and the `as` prop of the `FormField.Label` to
-`legend` when using `RadioGroup` to ensure proper accessbility.
+Use `FormFieldGroup` when you have a group of inputs that need to be associated to one another, like
+`RadioGroup` or a group of `Checkbox`'s. `FormFieldGroup` renders a `fieldset` element and
+`FormFieldGroup.Legend` renders a `legend` element. These elements will allow for correct
+accessibility of grouped inputs.
 
-<ExampleCodeBlock code={FieldSet} />
+`FormFieldGroup` supports the same props of `FormField`:
+
+- `error`: `alert | error` Defines the error around the whole group of inputs.
+- `orientation`: `horizontal | vertical` Defines the legend placement.
+- `isRequired`: `true` Defines if a group like RadioGroup is required.
+
+<ExampleCodeBlock code={GroupedInputs} />
 
 ### Custom
 

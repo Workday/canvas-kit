@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField, FormFieldGroup} from '@workday/canvas-kit-preview-react/form-field';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {Select} from '@workday/canvas-kit-react/select';
@@ -8,7 +8,6 @@ import {Title} from '@workday/canvas-kit-react/text';
 import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
 import {calc, createStyles, cssVar} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {FormFieldGroup} from '../../lib/FormFieldGroup';
 
 const formStyles = createStyles({
   marginBlockStart: system.space.x3,

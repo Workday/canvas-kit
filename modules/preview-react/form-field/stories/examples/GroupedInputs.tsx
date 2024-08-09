@@ -13,7 +13,7 @@ const formStyles = createStyles({
 });
 
 const formButtonStyles = createStyles({
-  display: 'inline',
+  display: 'inline-flex',
   gap: system.space.x2,
 });
 
