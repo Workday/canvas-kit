@@ -60,7 +60,8 @@ export const FormFieldLabel = createSubcomponent('label')({
   displayName: 'FormField.Label',
   modelHook: useFormFieldModel,
   elemPropsHook: useFormFieldLabel,
-})<FormFieldLabelProps>(({children, typeLevel, variant, ...elemProps}, Element) => {
+})<FormFieldLabelProps>(({children, typeLevel, variant, ...elemProps}, Element, model) => {
+  console.log(model);
   return (
     <Element {...mergeStyles(elemProps, formFieldLabelStencil({typeLevel, variant}))}>
       {children}
