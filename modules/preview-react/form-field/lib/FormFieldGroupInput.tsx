@@ -1,17 +1,12 @@
-import {
-  createElemPropsHook,
-  createSubcomponent,
-  ExtractProps,
-} from '@workday/canvas-kit-react/common';
-import {Box} from '@workday/canvas-kit-react/layout';
+import {createElemPropsHook, createSubcomponent} from '@workday/canvas-kit-react/common';
 import React from 'react';
-import {useFormFieldGroupModel} from './hooks/useFormFieldGroupModel';
+import {useFormFieldModel} from './hooks';
 
 /**
  * Adds the necessary props to an `Input` component.
  * Used by the FormField.Input subcomponent and other input type components
  */
-export const useFormFieldGroupInput = createElemPropsHook(useFormFieldGroupModel)(({state}) => {
+export const useFormFieldGroupInput = createElemPropsHook(useFormFieldModel)(({state}) => {
   return {
     'aria-invalid': state.error === 'error' ? true : undefined,
     'aria-describedby': state.id ? `hint-${state.id}` : undefined,
@@ -21,8 +16,8 @@ export const useFormFieldGroupInput = createElemPropsHook(useFormFieldGroupModel
 
 export const FormFieldGroupInput = createSubcomponent('input')({
   displayName: 'FormField.Input',
-  modelHook: useFormFieldGroupModel,
+  modelHook: useFormFieldModel,
   elemPropsHook: useFormFieldGroupInput,
-})<ExtractProps<typeof Box, never>>((elemProps, Element) => {
-  return <Box data-width="ck-formfield-width" as={Element} {...elemProps} />;
+})((elemProps, Element) => {
+  return <Element data-width="ck-formfield-width" {...elemProps} />;
 });

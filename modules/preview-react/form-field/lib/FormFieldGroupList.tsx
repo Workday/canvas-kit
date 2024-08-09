@@ -6,7 +6,7 @@ import {FlexProps} from '@workday/canvas-kit-react/layout';
 import {createStencil, CSProps, calc, px2rem, handleCsProp} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 
-import {useFormFieldGroupModel} from './hooks/useFormFieldGroupModel';
+import {useFormFieldModel} from './hooks';
 
 export interface FormFieldGroupListProps extends CSProps, FlexProps {}
 
@@ -37,7 +37,7 @@ const formFieldGroupListStencil = createStencil({
 
 export const FormFieldGroupList = createSubcomponent('div')({
   displayName: 'FormFieldGroup.List',
-  modelHook: useFormFieldGroupModel,
+  modelHook: useFormFieldModel,
 })<FormFieldGroupListProps>(({children, ...elemProps}, Element, model) => {
   return (
     <Element {...handleCsProp(elemProps, formFieldGroupListStencil({error: model.state.error}))}>

@@ -4,14 +4,13 @@ import {createContainer, GrowthBehavior} from '@workday/canvas-kit-react/common'
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 
 import {FormFieldGroupList} from './FormFieldGroupList';
-import {FormFieldGroupLegend} from './FormFieldGroupLegend';
 import {FormFieldGroupInput} from './FormFieldGroupInput';
-import {useFormFieldGroupModel} from './hooks/useFormFieldGroupModel';
-import {FormFieldGroupHint} from './FormFieldGroupHint';
 import {FormField} from './FormField';
 
 import {createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+import {useFormFieldModel} from './hooks';
+import {formFieldStencil} from './formFieldStencil';
 
 export const formFieldGroupStencil = createStencil({
   base: {
@@ -56,13 +55,14 @@ export interface FormFieldGroupProps extends FlexProps, GrowthBehavior {
 }
 
 /**
- * Use `FormField` to wrap input components to make them accessible. You can customize the field
- * by passing in `TextInput`, `Select`, `RadioGroup` and other form elements to `FormField.Input` through the `as` prop.
+ * Use `FormField` to wrap a group of inputs to make them accessible. You can customize the field
  *
  * ```tsx
- * <FormField>
- *    <FormField.Label>First Name</FormField.Label>
- *    <FormField.Input as={TextInput} value={value} onChange={(e) => console.log(e)} />
+ * <FormFieldGroup>
+ *    <FormField.Legend>Choose a Pet</FormField.Label>
+ *    <FormField.List as={RadioGroup} />
+ *      <FromField.Group
+ *    </FormField.List>
  *  </FormField>
  * ```
  *
@@ -70,12 +70,12 @@ export interface FormFieldGroupProps extends FlexProps, GrowthBehavior {
  */
 export const FormFieldGroup = createContainer('fieldset')({
   displayName: 'FormFieldGroup',
-  modelHook: useFormFieldGroupModel,
+  modelHook: useFormFieldModel,
   subComponents: {
     Input: FormFieldGroupInput,
-    Legend: FormFieldGroupLegend,
+    Legend: FormField.Label.as('legend'),
     List: FormFieldGroupList,
-    Hint: FormFieldGroupHint,
+    Hint: FormField.Hint,
     Container: FormField.Container,
   },
 })<FormFieldGroupProps>(({children, grow, orientation, ...elemProps}, Element, model) => {
@@ -83,9 +83,10 @@ export const FormFieldGroup = createContainer('fieldset')({
     <Element
       {...mergeStyles(
         elemProps,
-        formFieldGroupStencil({
+        formFieldStencil({
           grow,
           orientation,
+          error: model.state.error,
         })
       )}
     >

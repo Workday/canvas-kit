@@ -1,20 +1,20 @@
 import React from 'react';
 import {FormFieldGroup} from '@workday/canvas-kit-preview-react/form-field';
-import {Flex} from '@workday/canvas-kit-react/layout';
-import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {Select} from '@workday/canvas-kit-react/select';
-import {Switch} from '@workday/canvas-kit-react/switch';
-import {Title} from '@workday/canvas-kit-react/text';
-import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
-import {calc, createStyles, cssVar} from '@workday/canvas-kit-styling';
+import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {system} from '@workday/canvas-tokens-web';
 
 import {Checkbox} from '@workday/canvas-kit-react/checkbox';
 import {RadioGroup} from '../../../radio';
+import {createStyles} from '@workday/canvas-kit-styling';
 
 const formStyles = createStyles({
   marginBlockStart: system.space.x3,
   marginBlockEnd: system.space.x3,
+});
+
+const formButtonStyles = createStyles({
+  display: 'inline',
+  gap: system.space.x2,
 });
 
 const toppings = [
@@ -35,9 +35,10 @@ const toppings = [
   },
 ];
 
-export const FormFieldGroupExample = () => {
+export const GroupedInputs = () => {
   const [toppingsState, setToppingsState] = React.useState(toppings);
   const [error, setError] = React.useState(undefined);
+  const [value, setValue] = React.useState<string>('');
   const [formData, setFormData] = React.useState({
     toppings: [],
     crust: '',
@@ -47,8 +48,6 @@ export const FormFieldGroupExample = () => {
       toppingsState.map(item => (item.id === id ? {...item, checked: !item.checked} : item))
     );
   };
-
-  const [value, setValue] = React.useState<string>('');
 
   const handleRadioChange = (e: React.ChangeEvent) => {
     const target = e.currentTarget;
@@ -76,7 +75,7 @@ export const FormFieldGroupExample = () => {
     <div>
       <h3>Choose your pizza options</h3>
       <form className={formStyles} onSubmit={handleSubmit}>
-        <FormFieldGroup error={'error'} id="foo123" orientation="horizontal">
+        <FormFieldGroup error={error} id="foo123">
           <FormFieldGroup.Legend>Choose Your Toppings</FormFieldGroup.Legend>
           <FormFieldGroup.List>
             {toppingsState.map(item => {
@@ -96,20 +95,53 @@ export const FormFieldGroupExample = () => {
             {error === 'error' && 'You must choose one topping'}
           </FormFieldGroup.Hint>
         </FormFieldGroup>
-        <FormFieldGroup error={'alert'} orientation="horizontal">
+        <FormFieldGroup error={error}>
           <FormFieldGroup.Legend>Choose Your Crust</FormFieldGroup.Legend>
-          <FormFieldGroup.List as={RadioGroup} onChange={handleRadioChange} value={value}>
-            <RadioGroup.RadioButton value="thin-crust">Thin Crust</RadioGroup.RadioButton>
-            <RadioGroup.RadioButton value="hand-tossed">Hand Tossed</RadioGroup.RadioButton>
-            <RadioGroup.RadioButton value="deep-dish">Deep Dish</RadioGroup.RadioButton>
-            <RadioGroup.RadioButton value="cauliflower">Cauliflower</RadioGroup.RadioButton>
-          </FormFieldGroup.List>
-          <FormFieldGroup.Hint>
-            {error === 'error' && 'You must choose a crust'}
-          </FormFieldGroup.Hint>
+          <FormFieldGroup.Container>
+            <FormFieldGroup.List as={RadioGroup} onChange={handleRadioChange} value={value}>
+              <FormFieldGroup.Input as={RadioGroup.RadioButton} value="thin-crust">
+                Thin Crust
+              </FormFieldGroup.Input>
+              <FormFieldGroup.Input as={RadioGroup.RadioButton} value="hand-tossed">
+                Hand Tossed
+              </FormFieldGroup.Input>
+              <FormFieldGroup.Input as={RadioGroup.RadioButton} value="deep-dish">
+                Deep Dish
+              </FormFieldGroup.Input>
+              <FormFieldGroup.Input as={RadioGroup.RadioButton} value="cauliflower">
+                Cauliflower
+              </FormFieldGroup.Input>
+            </FormFieldGroup.List>
+            <FormFieldGroup.Hint>
+              {error === 'error' ? 'You must choose a crust' : null}
+            </FormFieldGroup.Hint>
+          </FormFieldGroup.Container>
         </FormFieldGroup>
-        <button type="submit">Submit Your Choices</button>
+        <div className={formButtonStyles}>
+          <PrimaryButton type="submit">Submit Your Choices</PrimaryButton>
+          <SecondaryButton
+            onClick={() => {
+              setFormData({toppings: [], crust: ''});
+              setError(undefined);
+              setValue('');
+              setToppingsState(
+                toppingsState.map(item => {
+                  return {...item, checked: false};
+                })
+              );
+            }}
+          >
+            Reset Form
+          </SecondaryButton>
+        </div>
       </form>
+      <div>
+        <div>
+          Selected Toppings:{' '}
+          {!error && formData.toppings.map(item => (item.checked ? `${item.label} ` : null))}
+        </div>
+        <div>Selected Crust: {formData.crust}</div>
+      </div>
     </div>
   );
 };
