@@ -28,6 +28,18 @@ const zipCodeInput = createStyles({
   minWidth: '100px',
 });
 
+const selectHighCaretStyles = createStyles({
+  '& + [data-slot="select-caret-container"]': {
+    height: '32px',
+  },
+});
+
+const selectLowCaretStyles = createStyles({
+  '& + [data-slot="select-caret-container"]': {
+    height: '48px',
+  },
+});
+
 // high = 32px height on inputs, space between inputs is 16px
 // medium 40px height on inputs, space between inputs is 24px
 // low = 38px height on inputs, space between inputs is 32px
@@ -43,7 +55,6 @@ export const Density = () => {
     setValue(event.target.value);
   };
   const handleDensity = data => {
-    console.log(data);
     setDensity(data.id);
     if (data.id === 'high') {
       setInputHeight(cssVar(system.space.x8));
@@ -62,7 +73,7 @@ export const Density = () => {
 
   return (
     <div>
-      <Title size="small">Choose a Density</Title>
+      <Title size="small">Choose Your Density</Title>
       <SegmentedControl onSelect={data => handleDensity(data)}>
         <SegmentedControl.List aria-label="choose a density">
           <SegmentedControl.Item data-id="high">High</SegmentedControl.Item>
@@ -71,13 +82,20 @@ export const Density = () => {
         </SegmentedControl.List>
       </SegmentedControl>
       <form action="#" className={formStyles}>
-        <FormFieldGroup className={fieldSetStyles} disabled>
+        <FormFieldGroup className={fieldSetStyles}>
           <FormFieldGroup.Legend>Update Your Address</FormFieldGroup.Legend>
           <FormField grow cs={{marginBottom: densitySpacing}}>
             <FormField.Label>Choose Country</FormField.Label>
             <Select items={['Dominican Republic', 'Spain', 'United States']}>
               <FormField.Input
-                cs={{paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight}}
+                cs={[
+                  {paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight},
+                  density === 'high'
+                    ? selectHighCaretStyles
+                    : density === 'medium'
+                    ? null
+                    : selectLowCaretStyles,
+                ]}
                 placeholder="Choose a country"
                 as={Select.Input}
               />

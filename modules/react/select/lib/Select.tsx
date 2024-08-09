@@ -29,31 +29,28 @@ export interface SelectInputProps extends ExtractProps<typeof TextInput>, CSProp
 
 const selectInputStencil = createStencil({
   base: {
-    caretColor: 'transparent',
-    cursor: 'default',
-    '&::selection': {
-      backgroundColor: 'transparent',
+    '& [data-slot="select-visual-input"]': {
+      caretColor: 'transparent',
+      cursor: 'default',
+      '&::selection': {
+        backgroundColor: 'transparent',
+      },
     },
-  },
-});
 
-const selectIconsStencil = createStencil({
-  base: {
-    position: 'absolute',
-    pointerEvents: 'none',
-  },
-});
-
-const hiddenSelectInputStencil = createStencil({
-  base: {
-    position: 'absolute',
-    top: system.space.zero,
-    bottom: system.space.zero,
-    left: system.space.zero,
-    right: system.space.zero,
-    opacity: system.opacity.zero,
-    cursor: 'default',
-    pointerEvents: 'none',
+    '& [data-slot="select-start-icon-container"]': {
+      position: 'absolute',
+      pointerEvents: 'none',
+    },
+    '& [data-slot="select-hidden-input"]': {
+      position: 'absolute',
+      top: system.space.zero,
+      bottom: system.space.zero,
+      left: system.space.zero,
+      right: system.space.zero,
+      opacity: system.opacity.zero,
+      cursor: 'default',
+      pointerEvents: 'none',
+    },
   },
 });
 
@@ -101,10 +98,14 @@ export const SelectInput = createSubcomponent(TextInput)({
     );
 
     return (
-      <InputGroup data-width="ck-formfield-width">
+      <InputGroup
+        data-slot="select-input-container"
+        data-width="ck-formfield-width"
+        {...selectInputStencil()}
+      >
         {inputStartIcon && model.state.selectedIds.length > 0 && (
-          <InputGroup.InnerStart {...selectIconsStencil()}>
-            <SystemIcon icon={inputStartIcon} />
+          <InputGroup.InnerStart data-slot="select-start-icon-container">
+            <SystemIcon data-slot="select-start-icon" icon={inputStartIcon} />
           </InputGroup.InnerStart>
         )}
         {/* Hidden input to handle ids */}
@@ -118,7 +119,7 @@ export const SelectInput = createSubcomponent(TextInput)({
           value={value}
           name={name}
           ref={elementRef}
-          {...hiddenSelectInputStencil()}
+          data-slot="select-hidden-input"
         />
         {/* Visual input */}
         <InputGroup.Input
@@ -126,11 +127,12 @@ export const SelectInput = createSubcomponent(TextInput)({
           disabled={disabled}
           placeholder={placeholder}
           error={error}
+          data-slot="select-visual-input"
           {...textInputProps}
-          {...mergeStyles(elemProps, selectInputStencil())}
+          {...mergeStyles(elemProps)}
         />
-        <InputGroup.InnerEnd {...selectIconsStencil()}>
-          <SystemIcon icon={caretDownSmallIcon} />
+        <InputGroup.InnerEnd data-slot="select-caret-container">
+          <SystemIcon data-slot="select-caret-icon" icon={caretDownSmallIcon} />
         </InputGroup.InnerEnd>
       </InputGroup>
     );

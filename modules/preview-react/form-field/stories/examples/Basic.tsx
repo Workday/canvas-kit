@@ -12,7 +12,7 @@ export const Basic = () => {
 
   return (
     <Flex>
-      <FormField error="error">
+      <FormField>
         <FormField.Label>First Name</FormField.Label>
         <FormField.Input as={TextInput} value={value} onChange={handleChange} />
       </FormField>
