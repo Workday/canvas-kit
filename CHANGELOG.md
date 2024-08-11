@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.0.26](https://github.com/Workday/canvas-kit/releases/tag/v11.0.26) (2024-08-05)
+
+### Accessibility
+
+- fix: Set aria-modal to false for better accessibility ([#2855](https://github.com/Workday/canvas-kit/pull/2855)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v10.3.51](https://github.com/Workday/canvas-kit/releases/tag/v10.3.51) (2024-08-05)
+
+### Accessibility
+
+- fix: Set aria-modal to false for better accessibility ([#2855](https://github.com/Workday/canvas-kit/pull/2855)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+## [v11.0.25](https://github.com/Workday/canvas-kit/releases/tag/v11.0.25) (2024-08-05)
+
+### Components
+
+- fix(combobox): Use correct state for aria-selected ([#2849](https://github.com/Workday/canvas-kit/pull/2849)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  This change fixes `aria-selected` in `Combobox.Menu.Item` components, but this does change the visuals of what is considered "selected". If you have any visual tests that have a screenshot of a selected state, the visual regression will have to be updated. The same is true for DOM-based snapshot tests. `aria-selected="true"` will now be added when an item is selected and not just when the virtual cursor is on the item. If your snapshot captures this DOM state, the snapshot will have to be updated.
+
+
+## [v10.3.50](https://github.com/Workday/canvas-kit/releases/tag/v10.3.50) (2024-08-05)
+
+### Components
+
+- fix(combobox): Use correct state for aria-selected ([#2849](https://github.com/Workday/canvas-kit/pull/2849)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  This change fixes `aria-selected` in `Combobox.Menu.Item` components, but this does change the visuals of what is considered "selected". If you have any visual tests that have a screenshot of a selected state, the visual regression will have to be updated. The same is true for DOM-based snapshot tests. `aria-selected="true"` will now be added when an item is selected and not just when the virtual cursor is on the item. If your snapshot captures this DOM state, the snapshot will have to be updated.
 ## [v11.0.24](https://github.com/Workday/canvas-kit/releases/tag/v11.0.24) (2024-08-05)
 
 ### Components
