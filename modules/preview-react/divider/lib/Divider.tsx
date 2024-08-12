@@ -1,6 +1,13 @@
 import * as React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, handleCsProp, CSProps, calc, cssVar} from '@workday/canvas-kit-styling';
+import {
+  createStencil,
+  handleCsProp,
+  CSProps,
+  calc,
+  cssVar,
+  px2rem,
+} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export const dividerStencil = createStencil({
@@ -10,7 +17,7 @@ export const dividerStencil = createStencil({
   base: ({space}) => {
     return {
       display: 'block',
-      height: 1,
+      height: px2rem(1),
       border: 'none',
       borderTop: `1px solid ${system.color.border.divider}`,
       margin: `${calc.divide(space, 2)} 0`,
@@ -18,7 +25,12 @@ export const dividerStencil = createStencil({
   },
 });
 
-interface DividerProps extends CSProps {
+export interface DividerProps extends CSProps {
+  /**
+   * Applies top and bottom margin evenly. It divides the provided value by two and applies half to each end.
+   * E.g. `space="2rem"` would apply `1rem` margin to the top, and `1rem` margin to the bottom.
+   * @default `system.space.x4` (1rem)
+   */
   space?: string;
 }
 
@@ -39,14 +51,6 @@ interface DividerProps extends CSProps {
  * <Divider space={system.space.x2} />
  *
  * ```
- *
- * ## Accessibility
- *
- * Screen readers announce `<hr>` elements to alert users to a break in content. If you're using `Divider` as a purely decorative element and not a thematic break, you should use `aria-hidden` to prevent screen readers from announcing it.
- *
- * ```tsx
- * <Divider aria-hidden={true} />
- *```
  */
 export const Divider = createComponent('hr')({
   displayName: 'Divider',
