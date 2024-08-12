@@ -5,11 +5,12 @@ import {
   permutateProps,
   StaticStates,
 } from '@workday/canvas-kit-react/testing';
-import {withSnapshotsEnabled} from '../../../../utils/storybook';
-import {Avatar} from '../index';
+import {withSnapshotsEnabled} from '../../../../../utils/storybook';
+import {Avatar} from '../../index';
 
 // @ts-ignore: Cannot find module error
-import testAvatar from './test-avatar.png';
+import testAvatar from '../test-avatar.png';
+
 // eslint-disable-next-line no-empty-function
 const noop = () => {};
 
@@ -39,16 +40,16 @@ export const AvatarStates = () => (
       })}
       rowProps={permutateProps({
         variant: [
-          {value: Avatar.Variant.Light, label: 'Light'},
-          {value: Avatar.Variant.Dark, label: 'Dark'},
+          {label: 'Light', value: 'light'},
+          {label: 'Dark', value: 'dark'},
         ],
         size: [
-          {label: 'XS', value: Avatar.Size.xs},
-          {label: 'S', value: Avatar.Size.s},
-          {label: 'M', value: Avatar.Size.m},
-          {label: 'L', value: Avatar.Size.l},
-          {label: 'XL', value: Avatar.Size.xl},
-          {label: 'XXL', value: Avatar.Size.xxl},
+          {label: 'XS', value: 'extraSmall'},
+          {label: 'S', value: 'small'},
+          {label: 'M', value: 'medium'},
+          {label: 'L', value: 'large'},
+          {label: 'XL', value: 'extraLarge'},
+          {label: 'XXL', value: 'extraExtraLarge'},
         ],
         url: [
           {value: undefined, label: 'Placeholder'},
@@ -76,16 +77,16 @@ export const AvatarButtonStates = () => (
       })}
       rowProps={permutateProps({
         variant: [
-          {value: Avatar.Variant.Light, label: 'Light'},
-          {value: Avatar.Variant.Dark, label: 'Dark'},
+          {label: 'Light', value: 'light'},
+          {label: 'Dark', value: 'dark'},
         ],
         size: [
-          {label: 'XS', value: Avatar.Size.xs},
-          {label: 'S', value: Avatar.Size.s},
-          {label: 'M', value: Avatar.Size.m},
-          {label: 'L', value: Avatar.Size.l},
-          {label: 'XL', value: Avatar.Size.xl},
-          {label: 'XXL', value: Avatar.Size.xxl},
+          {label: 'XS', value: 'extraSmall'},
+          {label: 'S', value: 'small'},
+          {label: 'M', value: 'medium'},
+          {label: 'L', value: 'large'},
+          {label: 'XL', value: 'extraLarge'},
+          {label: 'XXL', value: 'extraExtraLarge'},
         ],
         url: [
           {value: undefined, label: 'Placeholder'},
