@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.0.27](https://github.com/Workday/canvas-kit/releases/tag/v11.0.27) (2024-08-12)
+
+### Components
+
+- fix(Checkbox): Remove console warning ([#2863](https://github.com/Workday/canvas-kit/pull/2863)) ([@thunguyen19](https://github.com/thunguyen19))
+
+
 ## [v11.0.26](https://github.com/Workday/canvas-kit/releases/tag/v11.0.26) (2024-08-05)
 
 ### Accessibility
