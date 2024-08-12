@@ -81,135 +81,132 @@ export const Density = () => {
         </SegmentedControl.List>
       </SegmentedControl>
       <form action="#" className={formStyles}>
-        <FormFieldGroup className={fieldSetStyles}>
-          <FormFieldGroup.Legend>Update Your Address</FormFieldGroup.Legend>
+        <FormField grow cs={{marginBottom: densitySpacing}}>
+          <FormField.Label>Choose Country</FormField.Label>
+          <Select items={['Dominican Republic', 'Spain', 'United States']}>
+            <FormField.Input
+              cs={[
+                {paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight},
+                density === 'high'
+                  ? selectHighCaretStyles
+                  : density === 'medium'
+                  ? null
+                  : selectLowCaretStyles,
+              ]}
+              placeholder="Choose a country"
+              as={Select.Input}
+            />
+            <Select.Popper>
+              <Select.Card>
+                <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
+              </Select.Card>
+            </Select.Popper>
+          </Select>
+        </FormField>
+        <FormField grow cs={{marginBottom: densitySpacing}}>
+          <FormField.Label>Full Name</FormField.Label>
+          <FormField.Input
+            as={TextInput}
+            cs={{paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight}}
+          />
+        </FormField>
+        <FormField grow cs={{marginBottom: densitySpacing}}>
+          <FormField.Label>Phone Number</FormField.Label>
+          <FormField.Input
+            as={TextInput}
+            cs={{paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight}}
+          />
+        </FormField>
+        <FormField grow cs={{marginBottom: densitySpacing}}>
+          <FormField.Label>Street Address</FormField.Label>
+          <FormField.Input
+            as={TextInput}
+            cs={{paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight}}
+          />
+        </FormField>
+        <FormField grow cs={{marginBottom: densitySpacing}}>
+          <FormField.Label>City</FormField.Label>
+          <FormField.Input
+            as={TextInput}
+            cs={{paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight}}
+          />
+        </FormField>
+        <div className={sideBySideInputs}>
           <FormField grow cs={{marginBottom: densitySpacing}}>
-            <FormField.Label>Choose Country</FormField.Label>
-            <Select items={['Dominican Republic', 'Spain', 'United States']}>
-              <FormField.Input
-                cs={[
-                  {paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight},
-                  density === 'high'
-                    ? selectHighCaretStyles
-                    : density === 'medium'
-                    ? null
-                    : selectLowCaretStyles,
-                ]}
-                placeholder="Choose a country"
-                as={Select.Input}
-              />
-              <Select.Popper>
-                <Select.Card>
-                  <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
-                </Select.Card>
-              </Select.Popper>
-            </Select>
-          </FormField>
-          <FormField grow cs={{marginBottom: densitySpacing}}>
-            <FormField.Label>Full Name</FormField.Label>
+            <FormField.Label>State</FormField.Label>
             <FormField.Input
               as={TextInput}
               cs={{paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight}}
             />
           </FormField>
           <FormField grow cs={{marginBottom: densitySpacing}}>
-            <FormField.Label>Phone Number</FormField.Label>
+            <FormField.Label>Zip Code</FormField.Label>
             <FormField.Input
+              cs={[
+                zipCodeInput,
+                {paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight},
+              ]}
               as={TextInput}
-              cs={{paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight}}
             />
           </FormField>
-          <FormField grow cs={{marginBottom: densitySpacing}}>
-            <FormField.Label>Street Address</FormField.Label>
+        </div>
+        <FormField>
+          <FormField.Label>Enable Fast Shipping</FormField.Label>
+          <FormField.Input as={Switch} />
+        </FormField>
+        <FormField grow cs={{marginBottom: densitySpacing}}>
+          <FormField.Label>Credit Card</FormField.Label>
+          <FormField.Container cs={{display: 'inline-flex', flexDirection: 'row', gap: '8px'}}>
             <FormField.Input
               as={TextInput}
-              cs={{paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight}}
+              placeholder="XXXX"
+              cs={{
+                minWidth: '80px',
+                maxWidth: '80px',
+                paddingTop: inputDensity,
+                paddingBottom: inputDensity,
+                height: inputHeight,
+                textAlign: 'center',
+              }}
             />
-          </FormField>
-          <FormField grow cs={{marginBottom: densitySpacing}}>
-            <FormField.Label>City</FormField.Label>
             <FormField.Input
               as={TextInput}
-              cs={{paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight}}
+              placeholder="XXXX"
+              cs={{
+                minWidth: '80px',
+                maxWidth: '80px',
+                paddingTop: inputDensity,
+                paddingBottom: inputDensity,
+                height: inputHeight,
+                textAlign: 'center',
+              }}
             />
-          </FormField>
-          <div className={sideBySideInputs}>
-            <FormField grow cs={{marginBottom: densitySpacing}}>
-              <FormField.Label>State</FormField.Label>
-              <FormField.Input
-                as={TextInput}
-                cs={{paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight}}
-              />
-            </FormField>
-            <FormField grow cs={{marginBottom: densitySpacing}}>
-              <FormField.Label>Zip Code</FormField.Label>
-              <FormField.Input
-                cs={[
-                  zipCodeInput,
-                  {paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight},
-                ]}
-                as={TextInput}
-              />
-            </FormField>
-          </div>
-          <FormField>
-            <FormField.Label>Enable Fast Shipping</FormField.Label>
-            <FormField.Input as={Switch} />
-          </FormField>
-          <FormField grow cs={{marginBottom: densitySpacing}}>
-            <FormField.Label>Credit Card</FormField.Label>
-            <FormField.Container cs={{display: 'inline-flex', flexDirection: 'row', gap: '8px'}}>
-              <FormField.Input
-                as={TextInput}
-                placeholder="XXXX"
-                cs={{
-                  minWidth: '80px',
-                  maxWidth: '80px',
-                  paddingTop: inputDensity,
-                  paddingBottom: inputDensity,
-                  height: inputHeight,
-                  textAlign: 'center',
-                }}
-              />
-              <FormField.Input
-                as={TextInput}
-                placeholder="XXXX"
-                cs={{
-                  minWidth: '80px',
-                  maxWidth: '80px',
-                  paddingTop: inputDensity,
-                  paddingBottom: inputDensity,
-                  height: inputHeight,
-                  textAlign: 'center',
-                }}
-              />
-              <FormField.Input
-                as={TextInput}
-                placeholder="XXXX"
-                cs={{
-                  minWidth: '80px',
-                  maxWidth: '80px',
-                  paddingTop: inputDensity,
-                  paddingBottom: inputDensity,
-                  height: inputHeight,
-                  textAlign: 'center',
-                }}
-              />
-              <FormField.Input
-                cs={{
-                  minWidth: '80px',
-                  maxWidth: '80px',
-                  paddingTop: inputDensity,
-                  paddingBottom: inputDensity,
-                  height: inputHeight,
-                  textAlign: 'center',
-                }}
-                placeholder="XXXX"
-                as={TextInput}
-              />
-            </FormField.Container>
-          </FormField>
-        </FormFieldGroup>
+            <FormField.Input
+              as={TextInput}
+              placeholder="XXXX"
+              cs={{
+                minWidth: '80px',
+                maxWidth: '80px',
+                paddingTop: inputDensity,
+                paddingBottom: inputDensity,
+                height: inputHeight,
+                textAlign: 'center',
+              }}
+            />
+            <FormField.Input
+              cs={{
+                minWidth: '80px',
+                maxWidth: '80px',
+                paddingTop: inputDensity,
+                paddingBottom: inputDensity,
+                height: inputHeight,
+                textAlign: 'center',
+              }}
+              placeholder="XXXX"
+              as={TextInput}
+            />
+          </FormField.Container>
+        </FormField>
       </form>
     </div>
   );

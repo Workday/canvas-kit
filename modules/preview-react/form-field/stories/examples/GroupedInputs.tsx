@@ -2,10 +2,12 @@ import React from 'react';
 import {FormFieldGroup} from '@workday/canvas-kit-preview-react/form-field';
 import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {system} from '@workday/canvas-tokens-web';
+import {Banner} from '@workday/canvas-kit-react/banner';
 
 import {Checkbox} from '@workday/canvas-kit-react/checkbox';
 import {RadioGroup} from '../../../radio';
 import {createStyles} from '@workday/canvas-kit-styling';
+import {AriaLiveRegion} from '@workday/canvas-kit-react/common';
 
 const formStyles = createStyles({
   marginBlockStart: system.space.x3,
@@ -40,10 +42,16 @@ const toppings = [
   },
 ];
 
+const bannerStyles = createStyles({
+  position: 'absolute',
+  right: 0,
+});
+
 export const GroupedInputs = () => {
   const [toppingsState, setToppingsState] = React.useState(toppings);
   const [error, setError] = React.useState(undefined);
   const [radioError, setRadioError] = React.useState(undefined);
+  const [showSuccess, setShowSuccess] = React.useState(false);
 
   const [value, setValue] = React.useState<string>('');
   const [formData, setFormData] = React.useState({
@@ -51,12 +59,18 @@ export const GroupedInputs = () => {
     crust: '',
   });
   const handleCheckboxCheck = id => {
+    if (error) {
+      setError(undefined);
+    }
     setToppingsState(
       toppingsState.map(item => (item.id === id ? {...item, checked: !item.checked} : item))
     );
   };
 
   const handleRadioChange = (e: React.ChangeEvent) => {
+    if (radioError) {
+      setRadioError(undefined);
+    }
     const target = e.currentTarget;
     if (target instanceof HTMLInputElement) {
       setValue(target.value);
@@ -69,12 +83,22 @@ export const GroupedInputs = () => {
       setRadioError('error');
       setError('error');
     } else if (toppingsState.some(item => !item.checked) && value === '') {
+      setError(undefined);
       setRadioError('error');
     } else if (value !== '' && toppingsState.every(item => !item.checked)) {
       setError('error');
+      setRadioError(undefined);
     } else {
       setError(undefined);
       setRadioError(undefined);
+    }
+    if (
+      error === undefined &&
+      radioError === undefined &&
+      toppingsState.some(item => item.checked) &&
+      value !== ''
+    ) {
+      setShowSuccess(true);
     }
     setFormData({
       toppings: toppingsState,
@@ -85,6 +109,29 @@ export const GroupedInputs = () => {
   return (
     <div>
       <h3>Choose your pizza options</h3>
+      <AriaLiveRegion role="alert">
+        <div style={{display: 'flex', gap: '40px'}}>
+          {error || radioError ? (
+            <Banner isSticky hasError className={bannerStyles}>
+              <Banner.Label>
+                {error && radioError
+                  ? 'At least one topping and crust selection is required'
+                  : error
+                  ? 'You must choose at least one topping'
+                  : radioError
+                  ? 'You must choose a crust'
+                  : ''}
+              </Banner.Label>
+            </Banner>
+          ) : null}
+          {showSuccess && (
+            <Banner isSticky className={bannerStyles}>
+              <Banner.Label>You've successfully submitted your pizza options.</Banner.Label>
+            </Banner>
+          )}
+        </div>
+      </AriaLiveRegion>
+
       <form className={formStyles} onSubmit={handleSubmit}>
         <FormFieldGroup error={error}>
           <FormFieldGroup.Legend>Choose Your Toppings</FormFieldGroup.Legend>
@@ -137,6 +184,7 @@ export const GroupedInputs = () => {
               setError(undefined);
               setValue('');
               setRadioError('');
+              setShowSuccess(false);
               setToppingsState(
                 toppingsState.map(item => {
                   return {...item, checked: false};
