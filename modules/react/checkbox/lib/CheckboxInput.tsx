@@ -223,8 +223,8 @@ const checkboxInputStencil = createStencil({
 
 export const CheckboxInput = createComponent('input')({
   displayName: 'CheckboxInput',
-  Component: ({variant, error, ...elemProps}: CheckboxProps, ref, Element) => {
-    const {checked, disabled, indeterminate} = elemProps;
+  Component: ({variant, error, indeterminate, ...elemProps}: CheckboxProps, ref, Element) => {
+    const {checked, disabled} = elemProps;
 
     return (
       <Element
