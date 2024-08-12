@@ -43,6 +43,8 @@ const toppings = [
 export const GroupedInputs = () => {
   const [toppingsState, setToppingsState] = React.useState(toppings);
   const [error, setError] = React.useState(undefined);
+  const [radioError, setRadioError] = React.useState(undefined);
+
   const [value, setValue] = React.useState<string>('');
   const [formData, setFormData] = React.useState({
     toppings: [],
@@ -63,12 +65,16 @@ export const GroupedInputs = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (value === '' || toppingsState.every(item => !item.checked)) {
-      console.log(' in here');
-
+    if (value === '' && toppingsState.every(item => !item.checked)) {
+      setRadioError('error');
+      setError('error');
+    } else if (toppingsState.some(item => !item.checked) && value === '') {
+      setRadioError('error');
+    } else if (value !== '' && toppingsState.every(item => !item.checked)) {
       setError('error');
     } else {
       setError(undefined);
+      setRadioError(undefined);
     }
     setFormData({
       toppings: toppingsState,
@@ -101,7 +107,7 @@ export const GroupedInputs = () => {
             {error === 'error' && 'You must choose one topping'}
           </FormFieldGroup.Hint>
         </FormFieldGroup>
-        <FormFieldGroup error={error}>
+        <FormFieldGroup error={radioError}>
           <FormFieldGroup.Legend>Choose Your Crust</FormFieldGroup.Legend>
           <FormFieldGroup.Container>
             <FormFieldGroup.List as={RadioGroup} onChange={handleRadioChange} value={value}>
@@ -119,7 +125,7 @@ export const GroupedInputs = () => {
               </FormFieldGroup.Input>
             </FormFieldGroup.List>
             <FormFieldGroup.Hint>
-              {error === 'error' ? 'You must choose a crust' : null}
+              {radioError === 'error' ? 'You must choose a crust' : null}
             </FormFieldGroup.Hint>
           </FormFieldGroup.Container>
         </FormFieldGroup>
@@ -130,6 +136,7 @@ export const GroupedInputs = () => {
               setFormData({toppings: [], crust: ''});
               setError(undefined);
               setValue('');
+              setRadioError('');
               setToppingsState(
                 toppingsState.map(item => {
                   return {...item, checked: false};
