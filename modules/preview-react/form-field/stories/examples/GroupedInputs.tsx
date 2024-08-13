@@ -106,6 +106,16 @@ export const GroupedInputs = () => {
     });
   };
 
+  React.useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (showSuccess) {
+        setShowSuccess(false);
+      }
+    }, 1500);
+
+    return () => clearTimeout(timeout);
+  }, [showSuccess]);
+
   return (
     <div>
       <h3>Choose your pizza options</h3>
