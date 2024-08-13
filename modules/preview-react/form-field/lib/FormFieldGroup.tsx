@@ -55,15 +55,16 @@ export interface FormFieldGroupProps extends FlexProps, GrowthBehavior {
 }
 
 /**
- * Use `FormField` to wrap a group of inputs to make them accessible. You can customize the field
+ * Use `FormFieldGroup` to wrap a group of inputs to make them accessible. `FormFieldGroup` will render a `fieldset` element with the purpose of grouping input controls.
  *
  * ```tsx
  * <FormFieldGroup>
  *    <FormField.Legend>Choose a Pet</FormField.Label>
- *    <FormField.List as={RadioGroup} />
- *      <FromField.Group
- *    </FormField.List>
- *  </FormField>
+ *    <FormFieldGroup.List as={RadioGroup} />
+ *      <FromFieldGroup.Input as={RadioGroup.RadioButton} value='dog'>Dog</FormFieldGroup.Input>
+ *      <FromFieldGroup.Input as={RadioGroup.RadioButton} value='cat'>Cat</FormFieldGroup.Input>
+ *    </FormFieldGroup.List>
+ *  </FormFieldGroup>
  * ```
  *
  * @stencil formFieldStencil
@@ -73,9 +74,58 @@ export const FormFieldGroup = createContainer('fieldset')({
   modelHook: useFormFieldModel,
   subComponents: {
     Input: FormFieldGroupInput,
+    /**
+     * `FormFieldGroup.Legend` will render a `legend` element. This element labels the contents of a `fieldset`.
+     *
+     * ```tsx
+     * <FormFieldGroup>
+     *    <FormFieldGroup.Legend>Choose a pet</FormField.Label>
+     *    //...
+     *  </FormFieldGroup>
+     * ```
+     *
+     * @stencil formFieldLabelStencil
+     */
     Legend: FormField.Label.as('legend'),
+    /**
+     * `FormFieldGroup.List` will render a `div`. This element is used to apply the visual error states around the group of inputs. It's contents will be your inputs.
+     */
     List: FormFieldGroupList,
+    /**
+     * `FormFieldGroup.Hint` will render any additional information you want to provide to the `FormFieldGroup`. If you
+     * set the `orientation` prop to `horizontal` you should use `FormFieldGroup.Container` to properly align the hint with your `FormField.List`.
+     *
+     * ```tsx
+     * <FormFieldGroup>
+     *    <FormFieldGroup.Legend>Choose a pet</FormFieldGroup.Legend>
+     *    <FormFieldGroup.List>
+     *      //...
+     *    <FormFieldGroup.List>
+     *    <FormField.Hint>This is your hint text</FormField.Hint>
+     *  </FormFieldGroup>
+     * ```
+     *
+     * @stencil formFieldHintStencil
+     */
     Hint: FormField.Hint,
+    /**
+     * `FormFieldGroup.Container` allows you to properly center `FormField.Legend` when the `orientation` is set to `horizontal` and there is hint text..
+     *
+     * ```tsx
+     * <FormFieldGroup orientation="horizontal">
+     *    <FormFieldGroup.Legend>Choose a pet</FormFieldGroup.Legend>
+     *    <FormFieldGroup.Container>
+     *      <FormFieldGroup.List>
+     *        <FromFieldGroup.Input as={RadioGroup.RadioButton} value='dog'>Dog</FormFieldGroup.Input>
+     *        <FromFieldGroup.Input as={RadioGroup.RadioButton} value='cat'>Cat</FormFieldGroup.Input>
+     *      </FormFieldGroup.List>
+     *      <FormFieldGroup.Hint>This is your hint text</FormField.Hint>
+     *    </FormFieldGroup.Container>
+     *  </FormFieldGroup>
+     * ```
+     *
+     * @stencil formFieldContainerStencil
+     */
     Container: FormField.Container,
   },
 })<FormFieldGroupProps>(({children, grow, orientation, ...elemProps}, Element, model) => {
