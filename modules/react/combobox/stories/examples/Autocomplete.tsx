@@ -72,6 +72,8 @@ export const Autocomplete = () => {
       // A load function that will be called by the loader. You must return a promise that returns
       // an object like `{items: [], total: 0}`. The `items` will be merged into the loader's cache
       async load({pageNumber, pageSize, filter}) {
+        console.log(new Error().stack);
+        console.log(`load: pageNumber: ${pageNumber}, pageSize: ${pageSize}, filter: ${filter}`);
         return new Promise<LoadReturn<string>>(resolve => {
           // simulate a server response by resolving after a period of time
           setTimeout(() => {
