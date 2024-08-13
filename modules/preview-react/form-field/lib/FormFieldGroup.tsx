@@ -64,7 +64,7 @@ export interface FormFieldGroupProps extends FlexProps, GrowthBehavior {
  *      <FromFieldGroup.Input as={RadioGroup.RadioButton} value='dog'>Dog</FormFieldGroup.Input>
  *      <FromFieldGroup.Input as={RadioGroup.RadioButton} value='cat'>Cat</FormFieldGroup.Input>
  *    </FormFieldGroup.List>
- *  </FormFieldGroup>
+ * </FormFieldGroup>
  * ```
  *
  * @stencil formFieldStencil
@@ -73,13 +73,29 @@ export const FormFieldGroup = createContainer('fieldset')({
   displayName: 'FormFieldGroup',
   modelHook: useFormFieldModel,
   subComponents: {
+    /**
+     * `FormFieldGroup.Input` will render any `inputs` passed to it via the `as` prop, including `TextInput`, `Select`, `Switch`, `TextArea`, `RadioGroup.RadioButton` or any custom input.
+     * `FormFieldGroup.Input` will apply `aria-invalid` when there is an error on `FromFieldGroup` or `aria-describedby` when an `id` is added on the `FormFieldGroup`.
+     *
+     * **Note: If you pass in a custom input that is *not* as Canvas Kit input, you will have to handle the `error` prop, validation and styling. For a custom approach, reference our Custom storybook example.**
+     *
+     * ```tsx
+     * <FormFieldGroup>
+     *    <FormField.Legend>Choose a Pet</FormField.Label>
+     *    <FormFieldGroup.List as={RadioGroup} />
+     *      <FromFieldGroup.Input as={RadioGroup.RadioButton} value='dog'>Dog</FormFieldGroup.Input>
+     *      <FromFieldGroup.Input as={RadioGroup.RadioButton} value='cat'>Cat</FormFieldGroup.Input>
+     *    </FormFieldGroup.List>
+     * </FormFieldGroup>
+     * ```
+     */
     Input: FormFieldGroupInput,
     /**
      * `FormFieldGroup.Legend` will render a `legend` element. This element labels the contents of a `fieldset`.
      *
      * ```tsx
      * <FormFieldGroup>
-     *    <FormFieldGroup.Legend>Choose a pet</FormField.Label>
+     *    <FormFieldGroup.Legend>Choose a pet</FormFieldGroup.Legend>
      *    //...
      *  </FormFieldGroup>
      * ```

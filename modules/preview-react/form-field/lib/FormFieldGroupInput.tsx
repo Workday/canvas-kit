@@ -10,7 +10,6 @@ export const useFormFieldGroupInput = createElemPropsHook(useFormFieldModel)(({s
   return {
     'aria-invalid': state.error === 'error' ? true : undefined,
     'aria-describedby': state.id ? `hint-${state.id}` : undefined,
-    // id: state.id ? `input-${state.id}` : undefined,
   };
 });
 
