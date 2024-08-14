@@ -25,7 +25,7 @@
     "@types/chroma-js": "^1.4.3",
     "@types/cypress-axe": "^0.4.0",
     "@types/emoji-js": "^3.4.0",
-    "@types/jest-axe": "^2.2.3",
+    "@types/jest-axe": "^3.5.9",
     "@types/lodash": "^4.14.136",
     "@types/markdown-to-jsx": "^6.9.0",
     "@types/node": "^14.0.0",
@@ -69,7 +69,7 @@
     "glob": "^7.1.6",
     "husky": "^0.14.3",
     "inquirer": "^7.0.0",
-    "jest": "^27.4.7",
+    "jest": "^29.7.0",
     "jest-axe": "^3.4.0",
     "jest-junit": "^13.0.0",
     "lerna": "^5.6.2",
@@ -116,7 +116,7 @@
     "typecheck:stories": "tsc -p tsconfig.stories.json --noEmit --incremental false",
     "format:prettier": "prettier --config=./.prettierrc.js --ignore-path=./.prettierignore \"**/*.{js,jsx,json,ts,tsx,md}\" --write",
     "format": "yarn eslint --ext=jsx,ts,tsx --fix -c .eslintrc-prettier.js",
-    "test": "TZ=UTC jest",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "bump": "lerna version",
     "bump:prerelease": "lerna version prerelease --exact --preid",
     "cypress:open": "cypress open",
@@ -138,11 +138,13 @@
     "@workday/canvas-accent-icons-web": "^3.0.9",
     "@workday/canvas-applet-icons-web": "^2.0.9",
     "@workday/canvas-system-icons-web": "^3.0.0",
-    "@workday/canvas-tokens-web": "^2.0.1"
+    "@workday/canvas-tokens-web": "^2.0.1",
+    "jest-environment-jsdom": "^29.7.0",
+    "ts-jest": "^29.2.4"
   },
   "resolutions": {
     "ansi-regex": "3.0.1",
     "braces": "3.0.3",
-    "micromatch":"4.0.6"
+    "micromatch": "4.0.6"
   }
 }
