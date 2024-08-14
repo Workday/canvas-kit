@@ -4,7 +4,6 @@ import {
   ExtractProps,
   createContainer,
   Themeable,
-  useLocalRef,
 } from '@workday/canvas-kit-react/common';
 import {Combobox} from '@workday/canvas-kit-react/combobox';
 
