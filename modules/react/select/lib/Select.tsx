@@ -67,27 +67,6 @@ export const SelectInput = createSubcomponent(TextInput)({
     Element,
     model
   ) => {
-    const {localRef, elementRef} = useLocalRef(ref);
-
-    // We need to create a proxy between the multiple inputs. We need to redirect a few methods to
-    // the visible input
-    React.useImperativeHandle(
-      elementRef,
-      () => {
-        if (localRef.current) {
-          localRef.current.focus = (options?: FocusOptions) => {
-            textInputProps.ref.current!.focus(options);
-          };
-          localRef.current.blur = () => {
-            textInputProps.ref.current!.blur();
-          };
-        }
-
-        return localRef.current!;
-      },
-      [textInputProps.ref, localRef]
-    );
-
     return (
       <InputGroup>
         {inputStartIcon && model.state.selectedIds.length > 0 && (
@@ -106,7 +85,7 @@ export const SelectInput = createSubcomponent(TextInput)({
           onInput={onInput}
           value={value}
           name={name}
-          ref={elementRef}
+          ref={ref}
         />
         {/* Visual input */}
         <InputGroup.Input
