@@ -104,6 +104,16 @@ describe('Select', () => {
           cy.findByRole('combobox').click();
         });
 
+        context('when the combobox is clicked', () => {
+          beforeEach(() => {
+            cy.findByRole('combobox').click();
+          });
+
+          it('should close the menu', () => {
+            cy.findByRole('listbox').should('not.exist');
+          });
+        });
+
         context(
           'when a character is typed (provided no other characters have been typed in the last 500ms), the select should advance assistive focus to the first matching option beyond the currently selected option (cycling back to the beginning of the options if necessary) and scroll that option into view',
           () => {

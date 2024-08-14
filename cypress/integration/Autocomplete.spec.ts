@@ -55,6 +55,16 @@ describe('Autocomplete', () => {
         cy.findByRole('combobox').click();
       });
 
+      context('when the combobox is clicked', () => {
+        beforeEach(() => {
+          cy.findByRole('combobox').click();
+        });
+
+        it('should close the menu', () => {
+          cy.findByRole('listbox').should('not.exist');
+        });
+      });
+
       it('should set the aria-owns to reference the listbox element', () => {
         cy.findByRole('combobox').should(haveAttrMatchingIdOf('aria-controls', '[role=listbox]'));
       });
