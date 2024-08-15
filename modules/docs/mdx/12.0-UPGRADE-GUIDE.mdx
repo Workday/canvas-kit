@@ -46,6 +46,7 @@ A note to the reader:
 - [Component Updates](#component-updates)
   - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
   - [Avatar](#avatar)
+  - [FormFieldGroup](#form-field-group)
   - [Text Area](#text-area)
 - [Troubleshooting](#troubleshooting)
 - [Glossary](#glossary)
@@ -125,6 +126,22 @@ The following components are affected:
 - `Avatar.Variant` is no longer supported. Enum `AvatarVariant` has been removed. The `variant` type
   prop now accepts `"dark" | "light"`
 - The `as` prop now accepts any element, not just `div`.
+
+### Form Field Group
+
+We've added a new component to the Preview package under FromField to allow users to group inputs
+without worrying about setting the `as` prop on the `FormField` component.
+
+Use `FormFieldGroup` when you have a group of inputs that need to be associated to one another, like
+`RadioGroup` or a group of `Checkbox`'s. `FormFieldGroup` renders a `fieldset` element and
+`FormFieldGroup.Legend` renders a `legend` element. These elements will allow for correct
+accessibility of grouped inputs.
+
+`FormFieldGroup` supports the same props of `FormField`:
+
+- `error`: `"alert" | "error"` Defines the error around the whole group of inputs.
+- `orientation`: `"horizontal" | "vertical"` Defines the legend placement.
+- `isRequired`: `true` Defines if a group like RadioGroup is required.
 
 ### Text Area
 
