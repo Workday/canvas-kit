@@ -1,10 +1,9 @@
 import React from 'react';
 import {FormField, FormFieldGroup} from '@workday/canvas-kit-preview-react/form-field';
-import {Flex} from '@workday/canvas-kit-react/layout';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {Select} from '@workday/canvas-kit-react/select';
 import {Switch} from '@workday/canvas-kit-react/switch';
-import {Heading, Title} from '@workday/canvas-kit-react/text';
+import {Heading} from '@workday/canvas-kit-react/text';
 import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
 import {calc, createStencil, createStyles, cssVar} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
@@ -76,7 +75,6 @@ const containerAlignmentStencil = createStencil({
 // low = 38px height on inputs, space between inputs is 32px
 
 export const Density = () => {
-  const [value, setValue] = React.useState('');
   const [density, setDensity] = React.useState('medium');
   const [densitySpacing, setDensitySpacing] = React.useState('');
   const [inputDensity, setInputDensity] = React.useState('');
@@ -201,59 +199,63 @@ export const Density = () => {
               <FormField.Label>Enable Fast Shipping</FormField.Label>
               <FormField.Input as={Switch} />
             </FormField>
-            <FormField grow cs={formFieldStyles}>
-              <FormField.Label>Credit Card</FormField.Label>
-              <FormField.Container cs={{display: 'inline-flex', flexDirection: 'row', gap: '8px'}}>
-                <FormField.Input
-                  as={TextInput}
-                  placeholder="XXXX"
-                  cs={{
-                    minWidth: '80px',
-                    maxWidth: '80px',
-                    paddingTop: inputDensity,
-                    paddingBottom: inputDensity,
-                    height: inputHeight,
-                    textAlign: 'center',
-                  }}
-                />
-                <FormField.Input
-                  as={TextInput}
-                  placeholder="XXXX"
-                  cs={{
-                    minWidth: '80px',
-                    maxWidth: '80px',
-                    paddingTop: inputDensity,
-                    paddingBottom: inputDensity,
-                    height: inputHeight,
-                    textAlign: 'center',
-                  }}
-                />
-                <FormField.Input
-                  as={TextInput}
-                  placeholder="XXXX"
-                  cs={{
-                    minWidth: '80px',
-                    maxWidth: '80px',
-                    paddingTop: inputDensity,
-                    paddingBottom: inputDensity,
-                    height: inputHeight,
-                    textAlign: 'center',
-                  }}
-                />
-                <FormField.Input
-                  cs={{
-                    minWidth: '80px',
-                    maxWidth: '80px',
-                    paddingTop: inputDensity,
-                    paddingBottom: inputDensity,
-                    height: inputHeight,
-                    textAlign: 'center',
-                  }}
-                  placeholder="XXXX"
-                  as={TextInput}
-                />
-              </FormField.Container>
-            </FormField>
+            <FormFieldGroup grow cs={formFieldStyles}>
+              <FormFieldGroup.Legend>Credit Card</FormFieldGroup.Legend>
+              <FormFieldGroup.Container
+                cs={{display: 'inline-flex', flexDirection: 'row', gap: '8px'}}
+              >
+                <FormFieldGroup.List>
+                  <FormFieldGroup.Input
+                    as={TextInput}
+                    placeholder="XXXX"
+                    cs={{
+                      minWidth: '80px',
+                      maxWidth: '80px',
+                      paddingTop: inputDensity,
+                      paddingBottom: inputDensity,
+                      height: inputHeight,
+                      textAlign: 'center',
+                    }}
+                  />
+                  <FormFieldGroup.Input
+                    as={TextInput}
+                    placeholder="XXXX"
+                    cs={{
+                      minWidth: '80px',
+                      maxWidth: '80px',
+                      paddingTop: inputDensity,
+                      paddingBottom: inputDensity,
+                      height: inputHeight,
+                      textAlign: 'center',
+                    }}
+                  />
+                  <FormFieldGroup.Input
+                    as={TextInput}
+                    placeholder="XXXX"
+                    cs={{
+                      minWidth: '80px',
+                      maxWidth: '80px',
+                      paddingTop: inputDensity,
+                      paddingBottom: inputDensity,
+                      height: inputHeight,
+                      textAlign: 'center',
+                    }}
+                  />
+                  <FormFieldGroup.Input
+                    cs={{
+                      minWidth: '80px',
+                      maxWidth: '80px',
+                      paddingTop: inputDensity,
+                      paddingBottom: inputDensity,
+                      height: inputHeight,
+                      textAlign: 'center',
+                    }}
+                    placeholder="XXXX"
+                    as={TextInput}
+                  />
+                </FormFieldGroup.List>
+              </FormFieldGroup.Container>
+            </FormFieldGroup>
           </div>
         </form>
       </div>
