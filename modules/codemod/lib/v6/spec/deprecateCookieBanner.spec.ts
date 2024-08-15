@@ -74,12 +74,10 @@ describe('Canvas Kit Deprecate CookieBanner Codemod', () => {
 
       const CustomCookieBanner = () => {
         return (
-          <DeprecatedCookieBanner
+          (<DeprecatedCookieBanner
             onAccept={() => console.log('accepted')}
             notice={DeprecatedCookieBanner.DefaultNotice}
-          >
-            Hello World
-          </DeprecatedCookieBanner>
+          >Hello World</DeprecatedCookieBanner>)
         );
       };
 

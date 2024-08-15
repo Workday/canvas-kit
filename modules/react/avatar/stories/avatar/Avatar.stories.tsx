@@ -1,4 +1,4 @@
-import {Meta, StoryObj} from '@storybook/react';
+import {Meta} from '@storybook/react';
 import mdxDoc from './Avatar.mdx';
 
 import {Basic as BasicExample} from './examples/Basic';
@@ -6,8 +6,8 @@ import {Button as ButtonExample} from './examples/Button';
 import {CustomStyles as CustomStylesExample} from './examples/CustomStyles';
 import {Image as ImageExample} from './examples/Image';
 import {LazyLoad as LazyLoadExample} from './examples/LazyLoad';
-
-import {Avatar} from '@workday/canvas-kit-react/avatar';
+import {ObjectFit as ObjectFitExample} from './examples/ObjectFit';
+import {Variant as VariantExample} from './examples/Variant';
 
 export default {
   title: 'Components/Indicators/Avatar',
@@ -37,4 +37,12 @@ export const Image = {
 
 export const LazyLoad = {
   render: LazyLoadExample,
+};
+
+export const ObjectFit = {
+  render: ObjectFitExample,
+};
+
+export const Variant = {
+  render: VariantExample,
 };
