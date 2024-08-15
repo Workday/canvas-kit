@@ -111,10 +111,23 @@ export const GroupedInputs = () => {
       if (showSuccess) {
         setShowSuccess(false);
       }
-    }, 1500);
+    }, 3000);
 
     return () => clearTimeout(timeout);
   }, [showSuccess]);
+
+  const handleReset = () => {
+    setFormData({toppings: [], crust: ''});
+    setError(undefined);
+    setValue('');
+    setRadioError('');
+    setShowSuccess(false);
+    setToppingsState(
+      toppingsState.map(item => {
+        return {...item, checked: false};
+      })
+    );
+  };
 
   return (
     <div>
@@ -188,22 +201,7 @@ export const GroupedInputs = () => {
         </FormFieldGroup>
         <div className={formButtonStyles}>
           <PrimaryButton type="submit">Submit Your Choices</PrimaryButton>
-          <SecondaryButton
-            onClick={() => {
-              setFormData({toppings: [], crust: ''});
-              setError(undefined);
-              setValue('');
-              setRadioError('');
-              setShowSuccess(false);
-              setToppingsState(
-                toppingsState.map(item => {
-                  return {...item, checked: false};
-                })
-              );
-            }}
-          >
-            Reset Form
-          </SecondaryButton>
+          <SecondaryButton onClick={() => handleReset()}>Reset Form</SecondaryButton>
         </div>
       </form>
       <div>

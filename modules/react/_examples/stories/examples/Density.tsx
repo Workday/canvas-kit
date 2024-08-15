@@ -4,14 +4,15 @@ import {Flex} from '@workday/canvas-kit-react/layout';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {Select} from '@workday/canvas-kit-react/select';
 import {Switch} from '@workday/canvas-kit-react/switch';
-import {Title} from '@workday/canvas-kit-react/text';
+import {Heading, Title} from '@workday/canvas-kit-react/text';
 import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
-import {calc, createStyles, cssVar} from '@workday/canvas-kit-styling';
+import {calc, createStencil, createStyles, cssVar} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const formStyles = createStyles({
   marginBlockStart: system.space.x3,
   marginBlockEnd: system.space.x3,
+  maxWidth: '600px',
 });
 
 const fieldSetStyles = createStyles({
@@ -39,6 +40,37 @@ const selectLowCaretStyles = createStyles({
   },
 });
 
+const formFieldStyles = createStyles({
+  marginBottom: system.space.zero,
+});
+
+const flexContainerStencil = createStencil({
+  vars: {
+    densityGap: '',
+  },
+  base: ({densityGap}) => ({
+    display: 'flex',
+    gap: densityGap,
+    flexDirection: 'column',
+  }),
+});
+
+const containerAlignmentStencil = createStencil({
+  base: {
+    display: 'flex',
+  },
+  modifiers: {
+    alignment: {
+      left: {
+        justifyContent: 'flex-start',
+      },
+      center: {
+        justifyContent: 'center',
+      },
+    },
+  },
+});
+
 // high = 32px height on inputs, space between inputs is 16px
 // medium 40px height on inputs, space between inputs is 24px
 // low = 38px height on inputs, space between inputs is 32px
@@ -49,10 +81,8 @@ export const Density = () => {
   const [densitySpacing, setDensitySpacing] = React.useState('');
   const [inputDensity, setInputDensity] = React.useState('');
   const [inputHeight, setInputHeight] = React.useState('');
+  const [containerAlignment, setContainerAlignment] = React.useState<'left' | 'center'>('left');
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
-  };
   const handleDensity = data => {
     setDensity(data.id);
     if (data.id === 'high') {
@@ -70,144 +100,163 @@ export const Density = () => {
     }
   };
 
+  const handleContainerAlignment = data => {
+    setContainerAlignment(data.id);
+  };
+
   return (
     <div>
-      <Title size="small">Choose Your Density</Title>
-      <SegmentedControl onSelect={data => handleDensity(data)}>
-        <SegmentedControl.List aria-label="choose a density">
-          <SegmentedControl.Item data-id="high">High</SegmentedControl.Item>
-          <SegmentedControl.Item data-id="medium">Medium</SegmentedControl.Item>
-          <SegmentedControl.Item data-id="low">Low</SegmentedControl.Item>
-        </SegmentedControl.List>
-      </SegmentedControl>
-      <form action="#" className={formStyles}>
-        <FormField grow cs={{marginBottom: densitySpacing}}>
-          <FormField.Label>Choose Country</FormField.Label>
-          <Select items={['Dominican Republic', 'Spain', 'United States']}>
-            <FormField.Input
-              cs={[
-                {paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight},
-                density === 'high'
-                  ? selectHighCaretStyles
-                  : density === 'medium'
-                  ? null
-                  : selectLowCaretStyles,
-              ]}
-              placeholder="Choose a country"
-              as={Select.Input}
-            />
-            <Select.Popper>
-              <Select.Card>
-                <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
-              </Select.Card>
-            </Select.Popper>
-          </Select>
-        </FormField>
-        <FormField grow cs={{marginBottom: densitySpacing}}>
-          <FormField.Label>Full Name</FormField.Label>
-          <FormField.Input
-            as={TextInput}
-            cs={{paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight}}
-          />
-        </FormField>
-        <FormField grow cs={{marginBottom: densitySpacing}}>
-          <FormField.Label>Phone Number</FormField.Label>
-          <FormField.Input
-            as={TextInput}
-            cs={{paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight}}
-          />
-        </FormField>
-        <FormField grow cs={{marginBottom: densitySpacing}}>
-          <FormField.Label>Street Address</FormField.Label>
-          <FormField.Input
-            as={TextInput}
-            cs={{paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight}}
-          />
-        </FormField>
-        <FormField grow cs={{marginBottom: densitySpacing}}>
-          <FormField.Label>City</FormField.Label>
-          <FormField.Input
-            as={TextInput}
-            cs={{paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight}}
-          />
-        </FormField>
-        <div className={sideBySideInputs}>
-          <FormField grow cs={{marginBottom: densitySpacing}}>
-            <FormField.Label>State</FormField.Label>
-            <FormField.Input
-              as={TextInput}
-              cs={{paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight}}
-            />
-          </FormField>
-          <FormField grow cs={{marginBottom: densitySpacing}}>
-            <FormField.Label>Zip Code</FormField.Label>
-            <FormField.Input
-              cs={[
-                zipCodeInput,
-                {paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight},
-              ]}
-              as={TextInput}
-            />
-          </FormField>
-        </div>
-        <FormField>
-          <FormField.Label>Enable Fast Shipping</FormField.Label>
-          <FormField.Input as={Switch} />
-        </FormField>
-        <FormField grow cs={{marginBottom: densitySpacing}}>
-          <FormField.Label>Credit Card</FormField.Label>
-          <FormField.Container cs={{display: 'inline-flex', flexDirection: 'row', gap: '8px'}}>
-            <FormField.Input
-              as={TextInput}
-              placeholder="XXXX"
-              cs={{
-                minWidth: '80px',
-                maxWidth: '80px',
-                paddingTop: inputDensity,
-                paddingBottom: inputDensity,
-                height: inputHeight,
-                textAlign: 'center',
-              }}
-            />
-            <FormField.Input
-              as={TextInput}
-              placeholder="XXXX"
-              cs={{
-                minWidth: '80px',
-                maxWidth: '80px',
-                paddingTop: inputDensity,
-                paddingBottom: inputDensity,
-                height: inputHeight,
-                textAlign: 'center',
-              }}
-            />
-            <FormField.Input
-              as={TextInput}
-              placeholder="XXXX"
-              cs={{
-                minWidth: '80px',
-                maxWidth: '80px',
-                paddingTop: inputDensity,
-                paddingBottom: inputDensity,
-                height: inputHeight,
-                textAlign: 'center',
-              }}
-            />
-            <FormField.Input
-              cs={{
-                minWidth: '80px',
-                maxWidth: '80px',
-                paddingTop: inputDensity,
-                paddingBottom: inputDensity,
-                height: inputHeight,
-                textAlign: 'center',
-              }}
-              placeholder="XXXX"
-              as={TextInput}
-            />
-          </FormField.Container>
-        </FormField>
-      </form>
+      <div>
+        <Heading size="small">Choose Your Density</Heading>
+        <SegmentedControl onSelect={data => handleDensity(data)} size="small">
+          <SegmentedControl.List aria-label="choose a density">
+            <SegmentedControl.Item data-id="high">High</SegmentedControl.Item>
+            <SegmentedControl.Item data-id="medium">Medium</SegmentedControl.Item>
+            <SegmentedControl.Item data-id="low">Low</SegmentedControl.Item>
+          </SegmentedControl.List>
+        </SegmentedControl>
+      </div>
+      <div>
+        <Heading size="small">Container Alignment</Heading>
+        <SegmentedControl onSelect={data => handleContainerAlignment(data)} size="small">
+          <SegmentedControl.List aria-label="choose a density">
+            <SegmentedControl.Item data-id="left">Left</SegmentedControl.Item>
+            <SegmentedControl.Item data-id="center">Center</SegmentedControl.Item>
+          </SegmentedControl.List>
+        </SegmentedControl>
+      </div>
+      <div {...containerAlignmentStencil({alignment: containerAlignment})}>
+        <form action="#" className={formStyles}>
+          <div {...flexContainerStencil({densityGap: densitySpacing})}>
+            <FormField grow cs={formFieldStyles}>
+              <FormField.Label>Choose Country</FormField.Label>
+              <Select items={['Dominican Republic', 'Spain', 'United States']}>
+                <FormField.Input
+                  cs={[
+                    {paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight},
+                    density === 'high'
+                      ? selectHighCaretStyles
+                      : density === 'medium'
+                      ? null
+                      : selectLowCaretStyles,
+                  ]}
+                  placeholder="Choose a country"
+                  as={Select.Input}
+                />
+                <Select.Popper>
+                  <Select.Card>
+                    <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
+                  </Select.Card>
+                </Select.Popper>
+              </Select>
+            </FormField>
+            <FormField grow cs={formFieldStyles}>
+              <FormField.Label>Full Name</FormField.Label>
+              <FormField.Input
+                as={TextInput}
+                cs={{paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight}}
+              />
+            </FormField>
+            <FormField grow cs={formFieldStyles}>
+              <FormField.Label>Phone Number</FormField.Label>
+              <FormField.Input
+                as={TextInput}
+                cs={{paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight}}
+              />
+            </FormField>
+            <FormField grow cs={formFieldStyles}>
+              <FormField.Label>Street Address</FormField.Label>
+              <FormField.Input
+                as={TextInput}
+                cs={{paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight}}
+              />
+            </FormField>
+            <FormField grow cs={formFieldStyles}>
+              <FormField.Label>City</FormField.Label>
+              <FormField.Input
+                as={TextInput}
+                cs={{paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight}}
+              />
+            </FormField>
+            <div className={sideBySideInputs}>
+              <FormField grow cs={formFieldStyles}>
+                <FormField.Label>State</FormField.Label>
+                <FormField.Input
+                  as={TextInput}
+                  cs={{paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight}}
+                />
+              </FormField>
+              <FormField grow cs={formFieldStyles}>
+                <FormField.Label>Zip Code</FormField.Label>
+                <FormField.Input
+                  cs={[
+                    zipCodeInput,
+                    {paddingTop: inputDensity, paddingBottom: inputDensity, height: inputHeight},
+                  ]}
+                  as={TextInput}
+                />
+              </FormField>
+            </div>
+            <FormField>
+              <FormField.Label>Enable Fast Shipping</FormField.Label>
+              <FormField.Input as={Switch} />
+            </FormField>
+            <FormField grow cs={formFieldStyles}>
+              <FormField.Label>Credit Card</FormField.Label>
+              <FormField.Container cs={{display: 'inline-flex', flexDirection: 'row', gap: '8px'}}>
+                <FormField.Input
+                  as={TextInput}
+                  placeholder="XXXX"
+                  cs={{
+                    minWidth: '80px',
+                    maxWidth: '80px',
+                    paddingTop: inputDensity,
+                    paddingBottom: inputDensity,
+                    height: inputHeight,
+                    textAlign: 'center',
+                  }}
+                />
+                <FormField.Input
+                  as={TextInput}
+                  placeholder="XXXX"
+                  cs={{
+                    minWidth: '80px',
+                    maxWidth: '80px',
+                    paddingTop: inputDensity,
+                    paddingBottom: inputDensity,
+                    height: inputHeight,
+                    textAlign: 'center',
+                  }}
+                />
+                <FormField.Input
+                  as={TextInput}
+                  placeholder="XXXX"
+                  cs={{
+                    minWidth: '80px',
+                    maxWidth: '80px',
+                    paddingTop: inputDensity,
+                    paddingBottom: inputDensity,
+                    height: inputHeight,
+                    textAlign: 'center',
+                  }}
+                />
+                <FormField.Input
+                  cs={{
+                    minWidth: '80px',
+                    maxWidth: '80px',
+                    paddingTop: inputDensity,
+                    paddingBottom: inputDensity,
+                    height: inputHeight,
+                    textAlign: 'center',
+                  }}
+                  placeholder="XXXX"
+                  as={TextInput}
+                />
+              </FormField.Container>
+            </FormField>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
