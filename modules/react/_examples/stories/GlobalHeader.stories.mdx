@@ -2,12 +2,18 @@ import {Basic} from './examples/GlobalHeader';
 
 <Meta title="Examples/GlobalHeader" />
 
-# Canvas Kit Examples
-
-## GlobalHeader
+# GlobalHeader Example
 
 Developers building internal Workday applications will likely not need to create this component.
 However, if you're building components to be used outside of Workday, this is a helpful reference
 for building a global navigation header that looks like our internal `GlobalHeader`.
+
+## Tooltip usage
+
+- The `default` variant Tooltip is used on all of the icon buttons, which will automatically set the
+  Tooltip's text to the accessible name. (`aria-label`)
+- The `describe` variant Tooltip is used instead on the "MENU" button because this is a text button.
+  The Tooltip's text "Global Navigation" will instead be assigned to the accessible description to
+  ensure that the visible button text "MENU" is not overriden.
 
 <ExampleCodeBlock code={Basic} />
