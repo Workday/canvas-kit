@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {styled, createComponent, dubLogoBlue} from '@workday/canvas-kit-react/common';
+import {styled, createComponent} from '@workday/canvas-kit-react/common';
 import {colors, depth, space, type} from '@workday/canvas-kit-react/tokens';
 
 import {
@@ -9,20 +9,27 @@ import {
   assistantIcon,
 } from '@workday/canvas-system-icons-web';
 
-import {TertiaryButton, Hyperlink} from '@workday/canvas-kit-react/button';
+import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 import {SearchForm} from '@workday/canvas-kit-labs-react/search-form';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 
 interface HeaderItemProps extends FlexProps {}
 
 export const Basic = () => (
   <GlobalHeader>
     <GlobalHeader.Item>
-      <TertiaryButton aria-label="menu" icon={justifyIcon} />
-      <Hyperlink>
-        <WorkdayLogo dangerouslySetInnerHTML={{__html: dubLogoBlue}} />
-      </Hyperlink>
+      <Tooltip title="Global Navigation" type="describe">
+        <TertiaryButton aria-label="menu" icon={justifyIcon}>
+          MENU
+        </TertiaryButton>
+      </Tooltip>
+      <Tooltip title="Workday Home">
+        <TertiaryButton>
+          <img src="https://design.workday.com/images/ck-dub-logo-blue.svg" alt="" />
+        </TertiaryButton>
+      </Tooltip>
     </GlobalHeader.Item>
     <GlobalHeader.Item margin="auto" width="100%" maxWidth={`calc(${space.xxxl} * 6)`}>
       <SearchForm onSubmit={() => 1} />
@@ -31,7 +38,7 @@ export const Basic = () => (
       <TertiaryButton aria-label="messages" icon={assistantIcon} />
       <TertiaryButton aria-label="notifications" icon={notificationsIcon} />
       <TertiaryButton aria-label="inbox" icon={inboxIcon} />
-      <Avatar size={Avatar.Size.m} variant={Avatar.Variant.Light} />
+      <Avatar />
     </GlobalHeader.Item>
   </GlobalHeader>
 );
@@ -61,5 +68,3 @@ const HeaderWrapper = styled('header')({
   ...depth[1],
   padding: space.xxs,
 });
-
-const WorkdayLogo = styled('span')({lineHeight: 0});
