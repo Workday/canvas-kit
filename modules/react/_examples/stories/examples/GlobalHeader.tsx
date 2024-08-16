@@ -35,10 +35,18 @@ export const Basic = () => (
       <SearchForm onSubmit={() => 1} />
     </GlobalHeader.Item>
     <GlobalHeader.Item>
-      <TertiaryButton aria-label="messages" icon={assistantIcon} />
-      <TertiaryButton aria-label="notifications" icon={notificationsIcon} />
-      <TertiaryButton aria-label="inbox" icon={inboxIcon} />
-      <Avatar />
+      <Tooltip title="Assistant">
+        <TertiaryButton icon={assistantIcon} />
+      </Tooltip>
+      <Tooltip title="Notifications">
+        <TertiaryButton icon={notificationsIcon} />
+      </Tooltip>
+      <Tooltip title="My Tasks">
+        <TertiaryButton icon={inboxIcon} />
+      </Tooltip>
+      <Tooltip title="Profile">
+        <Avatar />
+      </Tooltip>
     </GlobalHeader.Item>
   </GlobalHeader>
 );
