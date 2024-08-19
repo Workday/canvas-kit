@@ -14,8 +14,9 @@ const formStyles = createStyles({
   maxWidth: '600px',
 });
 
-const fieldSetStyles = createStyles({
-  maxWidth: '400px',
+const formFieldGroupListStyles = createStyles({
+  display: 'inline-flex',
+  flexDirection: 'row',
 });
 
 const sideBySideInputs = createStyles({
@@ -199,62 +200,59 @@ export const Density = () => {
               <FormField.Label>Enable Fast Shipping</FormField.Label>
               <FormField.Input as={Switch} />
             </FormField>
-            <FormFieldGroup grow cs={formFieldStyles}>
+            <FormFieldGroup cs={formFieldStyles}>
               <FormFieldGroup.Legend>Credit Card</FormFieldGroup.Legend>
-              <FormFieldGroup.Container
-                cs={{display: 'inline-flex', flexDirection: 'row', gap: '8px'}}
-              >
-                <FormFieldGroup.List>
-                  <FormFieldGroup.Input
-                    as={TextInput}
-                    placeholder="XXXX"
-                    cs={{
-                      minWidth: '80px',
-                      maxWidth: '80px',
-                      paddingTop: inputDensity,
-                      paddingBottom: inputDensity,
-                      height: inputHeight,
-                      textAlign: 'center',
-                    }}
-                  />
-                  <FormFieldGroup.Input
-                    as={TextInput}
-                    placeholder="XXXX"
-                    cs={{
-                      minWidth: '80px',
-                      maxWidth: '80px',
-                      paddingTop: inputDensity,
-                      paddingBottom: inputDensity,
-                      height: inputHeight,
-                      textAlign: 'center',
-                    }}
-                  />
-                  <FormFieldGroup.Input
-                    as={TextInput}
-                    placeholder="XXXX"
-                    cs={{
-                      minWidth: '80px',
-                      maxWidth: '80px',
-                      paddingTop: inputDensity,
-                      paddingBottom: inputDensity,
-                      height: inputHeight,
-                      textAlign: 'center',
-                    }}
-                  />
-                  <FormFieldGroup.Input
-                    cs={{
-                      minWidth: '80px',
-                      maxWidth: '80px',
-                      paddingTop: inputDensity,
-                      paddingBottom: inputDensity,
-                      height: inputHeight,
-                      textAlign: 'center',
-                    }}
-                    placeholder="XXXX"
-                    as={TextInput}
-                  />
-                </FormFieldGroup.List>
-              </FormFieldGroup.Container>
+
+              <FormFieldGroup.List cs={formFieldGroupListStyles}>
+                <FormFieldGroup.Input
+                  as={TextInput}
+                  placeholder="XXXX"
+                  cs={{
+                    minWidth: '80px',
+                    maxWidth: '80px',
+                    paddingTop: inputDensity,
+                    paddingBottom: inputDensity,
+                    height: inputHeight,
+                    textAlign: 'center',
+                  }}
+                />
+                <FormFieldGroup.Input
+                  as={TextInput}
+                  placeholder="XXXX"
+                  cs={{
+                    minWidth: '80px',
+                    maxWidth: '80px',
+                    paddingTop: inputDensity,
+                    paddingBottom: inputDensity,
+                    height: inputHeight,
+                    textAlign: 'center',
+                  }}
+                />
+                <FormFieldGroup.Input
+                  as={TextInput}
+                  placeholder="XXXX"
+                  cs={{
+                    minWidth: '80px',
+                    maxWidth: '80px',
+                    paddingTop: inputDensity,
+                    paddingBottom: inputDensity,
+                    height: inputHeight,
+                    textAlign: 'center',
+                  }}
+                />
+                <FormFieldGroup.Input
+                  cs={{
+                    minWidth: '80px',
+                    maxWidth: '80px',
+                    paddingTop: inputDensity,
+                    paddingBottom: inputDensity,
+                    height: inputHeight,
+                    textAlign: 'center',
+                  }}
+                  placeholder="XXXX"
+                  as={TextInput}
+                />
+              </FormFieldGroup.List>
             </FormFieldGroup>
           </div>
         </form>
