@@ -47,6 +47,7 @@ A note to the reader:
   - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
   - [Avatar](#avatar)
   - [FormFieldGroup](#form-field-group)
+  - [Select](#select)
   - [Text Area](#text-area)
 - [Troubleshooting](#troubleshooting)
 - [Glossary](#glossary)
@@ -121,10 +122,12 @@ The following components are affected:
 ### Avatar
 
 - Avatar no longer uses `SystemIconCircle` for sizing.
-- `Avatar.Size` is no longer supported. The `size` prop type has change to accept the following:
+- `Avatar.Size` is no longer supported.
+- The `size` prop type has change to accept the following:
   `"extraExtraLarge" | "extraLarge" | "large" | "medium" | "small" | "extraSmall" | (string{})`
-- `Avatar.Variant` is no longer supported. Enum `AvatarVariant` has been removed. The `variant` type
-  prop now accepts `"dark" | "light"`
+- `Avatar.Variant` is no longer supported.
+- Enum `AvatarVariant` has been removed.
+- The `variant` prop now accepts `"dark" | "light"`
 - The `as` prop now accepts any element, not just `div`.
 
 ### Form Field Group
@@ -142,6 +145,8 @@ accessibility of grouped inputs.
 - `error`: `"alert" | "error"` Defines the error around the whole group of inputs.
 - `orientation`: `"horizontal" | "vertical"` Defines the legend placement.
 - `isRequired`: `true` Defines if a group like RadioGroup is required.
+
+### Select
 
 ### Text Area
 
