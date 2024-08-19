@@ -1,13 +1,13 @@
-import {CSSObject} from '@emotion/styled';
 import * as React from 'react';
 import {CanvasIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {validateIconType} from './utils';
-import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
-import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
+import {createComponent} from '@workday/canvas-kit-react/common';
+import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {createStencil, cssVar} from '@workday/canvas-kit-styling';
+import {base} from '@workday/canvas-tokens-web';
 
 export interface SvgProps extends BoxProps {
   src: CanvasIcon;
-  styles?: CSSObject;
   type: CanvasIconTypes;
   /**
    * If set to `true`, transform the SVG's x-axis to mirror the graphic
@@ -16,22 +16,48 @@ export interface SvgProps extends BoxProps {
   shouldMirror?: boolean;
 }
 
-const StyledIconSpan = styled(Box.as('span'))<
-  StyledType & Pick<SvgProps, 'shouldMirror' | 'styles'>
->(
-  {
-    display: 'inline-block',
-    '> svg': {display: 'block'},
+export const svgStencil = createStencil({
+  vars: {
+    /** sets width of svg element */
+    width: '',
+    /** sets height of svg element */
+    height: '',
+    /** sets width and height of svg element */
+    size: '',
   },
-  ({shouldMirror, styles}) => ({
-    ...styles,
-    transform: shouldMirror ? 'scaleX(-1)' : undefined,
-  })
-);
+  base: ({width, height, size}) => ({
+    display: 'inline-block',
+    '> svg': {
+      display: 'block',
+      width: cssVar(width, size),
+      height: cssVar(height, size),
+    },
+  }),
+  modifiers: {
+    shouldMirror: {
+      true: {
+        transform: 'scaleX(-1)',
+      },
+    },
+  },
+});
+
+/** @deprecated */
+export const transformColorNameToToken = (color?: string) => {
+  if (color && color in base) {
+    return cssVar(base[color as keyof typeof base]);
+  }
+
+  if (color?.startsWith('--')) {
+    return cssVar(color);
+  }
+
+  return color;
+};
 
 export const Svg = createComponent('span')({
   displayName: 'Svg',
-  Component: ({src, type, ...elemProps}: SvgProps, ref, Element) => {
+  Component: ({shouldMirror, src, type, ...elemProps}: SvgProps, ref, Element) => {
     try {
       validateIconType(src, type);
     } catch (e) {
@@ -40,11 +66,10 @@ export const Svg = createComponent('span')({
     }
 
     return (
-      <StyledIconSpan
-        as={Element}
-        dangerouslySetInnerHTML={{__html: src.svg}}
-        {...elemProps}
+      <Element
         ref={ref}
+        dangerouslySetInnerHTML={{__html: src.svg}}
+        {...mergeStyles(elemProps, svgStencil({shouldMirror}))}
       />
     );
   },

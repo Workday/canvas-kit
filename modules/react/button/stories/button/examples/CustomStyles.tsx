@@ -1,85 +1,64 @@
 import React from 'react';
 
-import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {buttonStencil, PrimaryButton, PrimaryButtonProps} from '@workday/canvas-kit-react/button';
 import {Grid} from '@workday/canvas-kit-react/layout';
-import {plusIcon, caretDownIcon} from '@workday/canvas-system-icons-web';
-import {space, colors} from '@workday/canvas-kit-react/tokens';
-import {CanvasProvider} from '@workday/canvas-kit-react/common';
-import styled from '@emotion/styled';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {plusIcon} from '@workday/canvas-system-icons-web';
+import {createComponent} from '@workday/canvas-kit-react/common';
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {createStencil, createStyles, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
-const getDropdownColors = () => {
-  return {
-    default: {
-      background: colors.berrySmoothie400,
-      icon: colors.frenchVanilla100,
-      label: colors.frenchVanilla100,
+const myButtonStencil = createStencil({
+  base: {
+    [buttonStencil.vars.background]: system.color.static.green.soft,
+    [buttonStencil.vars.label]: system.color.static.green.strong,
+    [systemIconStencil.vars.color]: system.color.static.green.strong,
+    [buttonStencil.vars.borderRadius]: system.shape.half,
+    border: `${px2rem(3)} solid transparent`,
+    '&:hover': {
+      [buttonStencil.vars.background]: system.color.static.green.default,
+      border: `${px2rem(3)} dotted ${system.color.static.green.strong}`,
+      [systemIconStencil.vars.color]: system.color.static.green.strong,
     },
-    hover: {
-      background: colors.berrySmoothie500,
-      label: colors.frenchVanilla100,
+    '&:active': {
+      [buttonStencil.vars.background]: system.color.static.green.strong,
+      [buttonStencil.vars.label]: system.color.fg.inverse,
+      [systemIconStencil.vars.color]: system.color.fg.inverse,
     },
-    active: {},
-    focus: {},
-    disabled: {},
-  };
-};
-
-const StyledPrimaryButton = styled(PrimaryButton)({
-  height: space.l,
-  fontStyle: 'italic',
+  },
 });
 
-const customStyles = createStyles({
-  height: space.l,
-  fontStyle: 'italic',
+const MyCustomButton = createComponent('button')({
+  Component: ({children, size, ...elemProps}: PrimaryButtonProps, ref, Element) => (
+    <PrimaryButton ref={ref} {...handleCsProp(elemProps, myButtonStencil({size}))}>
+      {children}
+    </PrimaryButton>
+  ),
 });
 
-const customColorTheme = {
-  palette: {
-    primary: {
-      main: 'purple',
-      contrast: 'turquoise',
-    },
-    alert: {
-      main: 'coral',
-    },
-    error: {
-      main: 'crimson',
-    },
-    success: {
-      main: 'aquamarine',
-    },
-    neutral: {
-      main: 'gray',
-    },
-    common: {
-      focusOutline: 'turquoise',
-    },
+const myCustomStyles = createStyles({
+  padding: system.space.x4,
+  textTransform: 'uppercase',
+});
+
+const customColors = {
+  default: {
+    background: system.color.static.green.soft,
+    icon: system.color.static.green.strong,
+    label: system.color.static.green.strong,
+  },
+  hover: {
+    background: system.color.static.green.default,
+    icon: system.color.static.green.strong,
   },
 };
 
 export const CustomStyles = () => (
-  <Grid gridGap="s" padding="s" gridTemplateColumns="repeat(auto-fit, minmax(240px, 1fr))">
-    <PrimaryButton
-      padding={space.l}
-      border="3px dotted red"
-      backgroundColor="cyan"
-      color={colors.blackPepper400}
-    >
-      Styled with style properties
+  <Grid cs={{gap: px2rem(4), gridTemplateColumns: 'repeat(3, 1fr)', alignItems: 'center'}}>
+    <MyCustomButton icon={plusIcon}>Styling Override Via Stencil Variables</MyCustomButton>
+    <PrimaryButton cs={myCustomStyles}>Style Override Via Create Styles</PrimaryButton>
+    <PrimaryButton icon={plusIcon} colors={customColors}>
+      Styling Override Via Colors Prop
     </PrimaryButton>
-    <PrimaryButton colors={getDropdownColors()} icon={plusIcon} iconPosition="start">
-      Styled with colors prop
-    </PrimaryButton>
-    <StyledPrimaryButton icon={caretDownIcon} iconPosition="end">
-      Overwrite styles with emotion
-    </StyledPrimaryButton>
-    <PrimaryButton cs={customStyles} icon={caretDownIcon} iconPosition="end">
-      Overwrite styles with createStyles
-    </PrimaryButton>
-    <CanvasProvider theme={{canvas: customColorTheme}}>
-      <PrimaryButton>Custom Theme</PrimaryButton>
-    </CanvasProvider>
   </Grid>
 );
