@@ -341,6 +341,18 @@ describe('Select', () => {
         );
       });
     });
+    context('when a value is selected', () => {
+      beforeEach(() => {
+        cy.findByRole('combobox').focus();
+        cy.focused().realType('{downarrow}');
+      });
+      it('should select phone and the selected value should be visible', () => {
+        // Select Phone
+        cy.focused().realType('ph');
+        cy.focused().realType('{enter}');
+        cy.findByText('Selected Value: Phone');
+      });
+    });
   });
 
   context('given the "Disabled Options" story with a disabled option', () => {

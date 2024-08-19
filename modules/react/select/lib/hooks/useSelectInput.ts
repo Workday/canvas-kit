@@ -28,7 +28,6 @@ export const useSelectInput = composeHooks(
   useComboboxMoveCursorToSelected,
   createElemPropsHook(useSelectModel)(
     (model, ref, elemProps: {keySofar?: string; placeholder?: string; value?: string} = {}) => {
-      // const textInputRef = React.useRef<HTMLInputElement>(null);
       const {elementRef: textInputElementRef, localRef: textInputRef} = useLocalRef(
         // PopupModel says the targetRef is a `HTMLButtonElement`, but it is a `HTMLInputElement`
         model.state.targetRef as any as React.Ref<HTMLInputElement>
@@ -178,7 +177,6 @@ export const useSelectInput = composeHooks(
         },
         textInputProps: {
           ref: textInputElementRef,
-          onChange: noop,
           value:
             model.state.selectedIds.length > 0 && model.state.items.length > 0
               ? model.navigation.getItem(model.state.selectedIds[0], model).textValue
