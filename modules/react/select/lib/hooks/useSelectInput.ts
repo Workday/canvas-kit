@@ -14,10 +14,6 @@ import {
 } from '@workday/canvas-kit-react/combobox';
 import {useSelectModel} from './useSelectModel';
 
-function noop() {
-  // Do nothing
-}
-
 /**
  * `useSelectInput` extends {@link useComboboxInput useComboboxInput}  and {@link useComboboxKeyboardTypeAhead useComboboxKeyboardTypeAhead} and adds type ahead functionality and Select-specific [keyboard support](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/).
  */
