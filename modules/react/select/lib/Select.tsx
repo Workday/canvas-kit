@@ -95,12 +95,8 @@ export const SelectInput = createSubcomponent(TextInput)({
           onInput={onInput}
           value={value}
           name={name}
-<<<<<<< HEAD
           ref={ref}
-=======
-          ref={elementRef}
           {...hiddenSelectInputStencil()}
->>>>>>> upstream/master
         />
         {/* Visual input */}
         <InputGroup.Input
