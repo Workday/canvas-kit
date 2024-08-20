@@ -15,7 +15,7 @@ import {
 import {useSelectModel} from './useSelectModel';
 
 function noop() {
-  return;
+  // Do nothing
 }
 
 /**
