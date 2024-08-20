@@ -28,7 +28,6 @@ export const useSelectInput = composeHooks(
   useComboboxMoveCursorToSelected,
   createElemPropsHook(useSelectModel)(
     (model, ref, elemProps: {keySofar?: string; placeholder?: string; value?: string} = {}) => {
-      // const textInputRef = React.useRef<HTMLInputElement>(null);
       const {elementRef: textInputElementRef, localRef: textInputRef} = useLocalRef(
         // PopupModel says the targetRef is a `HTMLButtonElement`, but it is a `HTMLInputElement`
         model.state.targetRef as any as React.Ref<HTMLInputElement>
@@ -89,6 +88,7 @@ export const useSelectInput = composeHooks(
           model.state.selectedIds[0]
         ) {
           const value = model.navigation.getItem(model.state.selectedIds[0], model).id;
+          const oldValue = model.state.inputRef.current.value;
 
           // force the hidden input to have the correct value
           if (model.state.inputRef.current.value !== value) {
@@ -103,8 +103,8 @@ export const useSelectInput = composeHooks(
           }
 
           if (
-            model.state.selectedIds[0] !== value &&
-            model.state.inputRef.current.value !== value
+            model.state.selectedIds[0] !== oldValue &&
+            model.state.inputRef.current.value !== oldValue
           ) {
             // Programmatically dispatch an onChange once items are loaded. This account for when a consumer wants an initial selected item and they're loading them from a server.
             dispatchInputEvent(model.state.inputRef.current, value);
