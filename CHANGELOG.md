@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.53](https://github.com/Workday/canvas-kit/releases/tag/v10.3.53) (2024-08-20)
+
+### Components
+
+- fix: Update select to trigger onChange ([#2874](https://github.com/Workday/canvas-kit/pull/2874)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v10.3.52](https://github.com/Workday/canvas-kit/releases/tag/v10.3.52) (2024-08-14)
 
 ### Components
