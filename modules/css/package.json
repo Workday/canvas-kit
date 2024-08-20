@@ -1,0 +1,28 @@
+{
+  "name": "@workday/canvas-kit-css",
+  "version": "11.1.2",
+  "description": "The parent module that contains all Workday Canvas Kit CSS components",
+  "author": "Workday, Inc. (https://www.workday.com)",
+  "license": "Apache-2.0",
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/workday/canvas-kit.git",
+    "directory": "modules/css"
+  },
+  "files": [
+    "*/package.json",
+    "*.css"
+  ],
+  "scripts": {
+    "clean": "rimraf *.css",
+    "build": "node ../../utils/update-css-package-version.js"
+  },
+  "keywords": [
+    "canvas",
+    "canvas-kit",
+    "css",
+    "components",
+    "workday"
+  ]
+}

@@ -59,14 +59,14 @@ We can create modifers using `createStyles` and organize them in an object:
 const modifierStyles = {
   variant: {
     primary: createStyles({
-      background: `var(--button-background-color, blue)`,
+      background: `var(--background-color-button, blue)`,
       color: 'white',
     }),
     secondary: createStyles({
-      background: `var(--button-background-color, gray)`,
+      background: `var(--background-color-button, gray)`,
     }),
     danger: createStyles({
-      background: `var(--button-background-color, red)`,
+      background: `var(--background-color-button, red)`,
     }),
   },
   size: {
@@ -112,7 +112,7 @@ If you want to change the background color, you'll have to pass it using `style`
 ```jsx
 <button
   className={`${baseStyles} ${modifierStyles.size.large}`}
-  style={{'--background-button-color': 'orange'}}
+  style={{'--color-background-button': 'orange'}}
 >
   Orange Large
 </button>
@@ -121,7 +121,7 @@ If you want to change the background color, you'll have to pass it using `style`
 The output HTML will look like:
 
 ```html
-<button class="css-puxv12 css-puxv16" style="--background-button-color: orange;">
+<button class="css-puxv12 css-puxv16" style="--color-background-button: orange;">
   Orange Large
 </button>
 ```
@@ -166,13 +166,13 @@ myModifiers() // ''
 ```tsx
 const myVars = createVars('background', 'color')
 
-myVars.color // something like `--{hash}-color`
+myVars.color // something like `--color-{hash}`
 
 // the function knows what keys are allowed
-myVars({color: 'red'}) // {'--{hash}-color': 'red'}
+myVars({color: 'red'}) // {'--color-{hash}': 'red'}
 
 // in a component
-<div style={myVars({color: 'red'})} /> // <div style="--{hash}-color: red;">
+<div style={myVars({color: 'red'})} /> // <div style="--color-{hash}: red;">
 ```
 
 <ExampleCodeBlock code={StylingButton} />

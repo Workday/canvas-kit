@@ -239,7 +239,9 @@ describe('createHook', () => {
 
     const props = hook(emptyModel, {bar: 'baz'}, {current: divElement});
 
-    expectTypeOf(props).toEqualTypeOf<{foo: string} & {bar: string} & {ref: React.Ref<unknown>}>();
+    expectTypeOf(props).toEqualTypeOf<
+      {foo: string} & {bar: string} & {ref: React.Ref<unknown> | undefined}
+    >();
     expect(props).toEqual({foo: 'bar', bar: 'baz', ref: {current: divElement}});
   });
 
@@ -289,7 +291,7 @@ describe('createHook', () => {
 describe('useForkRef', () => {
   it('should set the current value of the second ref if the first ref is undefined', () => {
     const ref1 = undefined;
-    const ref2 = {current: null};
+    const ref2 = {current: 'foo'};
 
     const ref = useForkRef(ref1, ref2);
 
@@ -299,7 +301,7 @@ describe('useForkRef', () => {
   });
 
   it('should set the current value of the first ref if the second ref is undefined', () => {
-    const ref1 = {current: null};
+    const ref1 = {current: 'foo'};
     const ref2 = undefined;
 
     const ref = useForkRef(ref1, ref2);
@@ -310,8 +312,8 @@ describe('useForkRef', () => {
   });
 
   it('should set the current value of both refs if both refs are RefObjects', () => {
-    const ref1 = {current: null};
-    const ref2 = {current: null};
+    const ref1 = {current: 'ref1'};
+    const ref2 = {current: 'ref2'};
 
     const ref = useForkRef(ref1, ref2);
 
@@ -449,8 +451,9 @@ describe('composeHooks', () => {
     // This test is covering all previous tests, but with more hooks.
     // This test should only fail if the implementation doesn't handle more than 2 hooks
     const model = {state: {foo: 'bar'}, events: {}};
-    const hooks = [1, 2, 3, 4, 5, 6, 7, 8, 9].map(number => (myModel, props) =>
-      mergeProps({id: number, foo: number, [`hook${number}`]: model.state.foo}, props)
+    const hooks = [1, 2, 3, 4, 5, 6, 7, 8, 9].map(
+      number => (myModel, props) =>
+        mergeProps({id: number, foo: number, [`hook${number}`]: model.state.foo}, props)
     );
 
     const props = (composeHooks as any).apply(null, hooks as any)(myModel, {foo: 'baz'}, null);

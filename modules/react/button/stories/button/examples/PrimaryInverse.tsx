@@ -7,9 +7,17 @@ import {
   relatedActionsVerticalIcon,
   caretDownIcon,
 } from '@workday/canvas-system-icons-web';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const parentContainerStyles = createStyles({
+  gap: system.space.x4,
+  backgroundColor: system.color.bg.primary.default,
+  padding: system.space.x4,
+});
 
 export const PrimaryInverse = () => (
-  <Flex gap="s" backgroundColor="blueberry400" padding="s">
+  <Flex cs={parentContainerStyles}>
     <PrimaryButton variant="inverse">Primary</PrimaryButton>
     <PrimaryButton icon={plusIcon} iconPosition="start" variant="inverse">
       Primary
