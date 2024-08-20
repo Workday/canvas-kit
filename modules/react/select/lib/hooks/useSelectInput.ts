@@ -160,6 +160,7 @@ export const useSelectInput = composeHooks(
         },
         ref: elementRef,
         'aria-haspopup': 'menu',
+        keySofar: null,
       } as const;
     }
   )

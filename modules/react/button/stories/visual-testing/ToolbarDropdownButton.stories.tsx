@@ -43,7 +43,7 @@ const ToolbarDropdownButtonTest = (props: {theme?: PartialEmotionCanvasTheme}) =
   </React.Fragment>
 );
 
-export const ToolbarDropdownButtonStates = {render: <ToolbarDropdownButtonTest />};
+export const ToolbarDropdownButtonStates = {render: () => <ToolbarDropdownButtonTest />};
 
 export const ToolbarDropdownButtonThemedStates = {
   render: () => <ToolbarDropdownButtonTest theme={{canvas: customColorTheme}} />,

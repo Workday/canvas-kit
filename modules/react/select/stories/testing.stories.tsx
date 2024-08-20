@@ -34,113 +34,109 @@ const options = [
 
 const disabledItems = options.filter(item => item.disabled === true).map(item => item.id);
 
-export const SelectStates = {
-  render: () => {
-    const model = useSelectModel({
-      items: options,
-      nonInteractiveIds: disabledItems,
-    });
-    return (
-      <StaticStates>
-        <ComponentStatesTable
-          rowProps={[
-            {label: 'Default', props: {}},
-            {label: 'Alert', props: {error: 'alert'}},
-            {label: 'Error', props: {error: 'error'}},
-          ]}
-          columnProps={permutateProps(
-            {
-              className: [
-                {label: 'Default', value: ''},
-                {label: 'Hover', value: 'hover'},
-                {label: 'Focus', value: 'focus'},
-                {label: 'Focus Hover', value: 'focus hover'},
-                {label: 'Active', value: 'active'},
-                {label: 'Active Hover', value: 'active hover'},
-              ],
-              disabled: [
-                {label: '', value: false},
-                {label: 'Disabled', value: true},
-              ],
-            },
-            props => {
-              return !props.disabled || !props.className || props.className === 'hover';
-            }
-          )}
-        >
-          {props => (
-            <FormField>
-              <FormField.Label>Contact</FormField.Label>
-              <Select model={model}>
-                <FormField.Input as={Select.Input} {...props} id="contact-select" />
-                <Select.Popper>
-                  <Select.Card maxHeight="200px">
-                    {model.state.items.length > 0 && (
-                      <Select.List>
-                        {item => {
-                          return (
-                            <Select.Item aria-disabled={item.disabled ? item.disabled : undefined}>
-                              {item.id}
-                            </Select.Item>
-                          );
-                        }}
-                      </Select.List>
-                    )}
-                  </Select.Card>
-                </Select.Popper>
-              </Select>
-            </FormField>
-          )}
-        </ComponentStatesTable>
-      </StaticStates>
-    );
-  },
+export const SelectStates = () => {
+  const model = useSelectModel({
+    items: options,
+    nonInteractiveIds: disabledItems,
+  });
+  return (
+    <StaticStates>
+      <ComponentStatesTable
+        rowProps={[
+          {label: 'Default', props: {}},
+          {label: 'Alert', props: {error: 'alert'}},
+          {label: 'Error', props: {error: 'error'}},
+        ]}
+        columnProps={permutateProps(
+          {
+            className: [
+              {label: 'Default', value: ''},
+              {label: 'Hover', value: 'hover'},
+              {label: 'Focus', value: 'focus'},
+              {label: 'Focus Hover', value: 'focus hover'},
+              {label: 'Active', value: 'active'},
+              {label: 'Active Hover', value: 'active hover'},
+            ],
+            disabled: [
+              {label: '', value: false},
+              {label: 'Disabled', value: true},
+            ],
+          },
+          props => {
+            return !props.disabled || !props.className || props.className === 'hover';
+          }
+        )}
+      >
+        {props => (
+          <FormField>
+            <FormField.Label>Contact</FormField.Label>
+            <Select model={model}>
+              <FormField.Input as={Select.Input} {...props} id="contact-select" />
+              <Select.Popper>
+                <Select.Card maxHeight="200px">
+                  {model.state.items.length > 0 && (
+                    <Select.List>
+                      {item => {
+                        return (
+                          <Select.Item aria-disabled={item.disabled ? item.disabled : undefined}>
+                            {item.id}
+                          </Select.Item>
+                        );
+                      }}
+                    </Select.List>
+                  )}
+                </Select.Card>
+              </Select.Popper>
+            </Select>
+          </FormField>
+        )}
+      </ComponentStatesTable>
+    </StaticStates>
+  );
 };
 
-export const SelectOpenMenuStates = {
-  render: () => {
-    const model = useSelectModel({
-      items: options,
-      nonInteractiveIds: disabledItems,
-      initialVisibility: 'visible',
-    });
-    return (
-      <StaticStates>
-        <ComponentStatesTable
-          rowProps={[
-            {label: 'Default', props: {}},
-            {label: 'Alert', props: {error: 'alert'}},
-            {label: 'Error', props: {error: 'error'}},
-          ]}
-          columnProps={[{label: 'Default', props: {}}]}
-        >
-          {props => (
-            <FormField cs={{marginBottom: '250px'}}>
-              <FormField.Label>Contact</FormField.Label>
-              <Select model={model}>
-                <FormField.Input as={Select.Input} {...props} id="contact-select" />
-                <Select.Popper>
-                  <Select.Card maxHeight="200px">
-                    {!!model.state.items.length && (
-                      <Select.List>
-                        {item => {
-                          return (
-                            <Select.Item aria-disabled={item.disabled ? item.disabled : undefined}>
-                              {item.id}
-                            </Select.Item>
-                          );
-                        }}
-                      </Select.List>
-                    )}
-                  </Select.Card>
-                </Select.Popper>
-              </Select>
-            </FormField>
-          )}
-        </ComponentStatesTable>
-      </StaticStates>
-    );
-  },
+export const SelectOpenMenuStates = () => {
+  const model = useSelectModel({
+    items: options,
+    nonInteractiveIds: disabledItems,
+    initialVisibility: 'visible',
+  });
+  return (
+    <StaticStates>
+      <ComponentStatesTable
+        rowProps={[
+          {label: 'Default', props: {}},
+          {label: 'Alert', props: {error: 'alert'}},
+          {label: 'Error', props: {error: 'error'}},
+        ]}
+        columnProps={[{label: 'Default', props: {}}]}
+      >
+        {props => (
+          <FormField cs={{marginBottom: '250px'}}>
+            <FormField.Label>Contact</FormField.Label>
+            <Select model={model}>
+              <FormField.Input as={Select.Input} {...props} id="contact-select" />
+              <Select.Popper>
+                <Select.Card maxHeight="200px">
+                  {!!model.state.items.length && (
+                    <Select.List>
+                      {item => {
+                        return (
+                          <Select.Item aria-disabled={item.disabled ? item.disabled : undefined}>
+                            {item.id}
+                          </Select.Item>
+                        );
+                      }}
+                    </Select.List>
+                  )}
+                </Select.Card>
+              </Select.Popper>
+            </Select>
+          </FormField>
+        )}
+      </ComponentStatesTable>
+    </StaticStates>
+  );
 };
 
 const themedParameters = {
@@ -153,10 +149,10 @@ const themedParameters = {
 
 export const SelectThemedStates = {
   parameters: themedParameters,
-  render: SelectStates.render,
+  render: () => <SelectStates />,
 };
 
 export const SelectOpenMenuThemedStates = {
   parameters: themedParameters,
-  render: SelectOpenMenuStates.render,
+  render: () => <SelectOpenMenuStates />,
 };
