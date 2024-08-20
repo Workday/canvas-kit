@@ -88,7 +88,13 @@
           url(https://design.workdaycdn.com/beta/assets/fonts@1.0.0/roboto/ttf/RobotoMono-Regular.ttf)
             format('truetype');
       }
+
+      /* Disable transitions for Cypress*/
+      * {
+        transition: none !important;
+        animation-duration: 0s !important;
+      }
     </style>
-    <div data-cy-root></div>
+    <main data-cy-root></main>
   </body>
 </html>

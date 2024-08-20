@@ -1,12 +1,9 @@
-import {toHaveNoViolations} from 'jest-axe';
 import '@testing-library/jest-dom/extend-expect';
 import {verifyComponent} from './verifyComponent';
 import {jest} from '@jest/globals';
 
 import {setUniqueSeed, resetUniqueIdCount} from '@workday/canvas-kit-react/common';
 import {TextEncoder} from 'util';
-
-expect.extend(toHaveNoViolations);
 
 // add convenience variables to the global context
 (global as any).verifyComponent = verifyComponent;

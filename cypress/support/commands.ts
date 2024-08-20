@@ -12,7 +12,8 @@ declare global {
 }
 
 /**
- * Needed until https://github.com/avanslaars/cypress-axe/issues/10 is fixed
+ * Needed until https://github.com/avanslaars/cypress-axe/issues/10 is not fixed
+ * This is needed to inject axe to the page since it will not on it's own
  */
 Cypress.Commands.add('injectAxe', () => {
   cy.window({log: false}).then(window => {

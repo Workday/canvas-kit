@@ -52,6 +52,7 @@ before(() => {
       {id: 'page-has-heading-one', enabled: false}, // stories don't require a single heading
       {id: 'region', enabled: false}, // examples don't required landmarks
       {id: 'bypass', enabled: false}, // ignore page navigation
+      {id: 'html-has-lang', enabled: false}, // removes html-has-lang test from cypress
     ],
   });
 });
