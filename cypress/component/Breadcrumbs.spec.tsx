@@ -117,8 +117,8 @@ describe('Breadcrumbs', () => {
         cy.checkA11y();
       });
 
-      it('should have 7 items inside the "list"', () => {
-        cy.findByRole('list').findAllByRole('listitem').should('have.length', 7);
+      it('should have 8 items inside the "list"', () => {
+        cy.findByRole('list').findAllByRole('listitem').should('have.length', 8);
       });
 
       it('should have aria-expanded set to "false" on the dropdown button', () => {
@@ -138,8 +138,8 @@ describe('Breadcrumbs', () => {
           cy.findByRole('button', {name: '480px'}).click();
         });
 
-        it('should have 3 items inside the "list"', () => {
-          cy.findByRole('list').findAllByRole('listitem').should('have.length', 3);
+        it('should have 4 items inside the "list"', () => {
+          cy.findByRole('list').findAllByRole('listitem').should('have.length', 4);
         });
 
         context('when the "More" button is clicked', () => {
@@ -166,8 +166,8 @@ describe('Breadcrumbs', () => {
           cy.findByRole('button', {name: '250px'}).click();
         });
 
-        it('should have 2 list items inside the "list"', () => {
-          cy.findByRole('list').findAllByRole('listitem').should('have.length', 2);
+        it('should have 3 list items inside the "list"', () => {
+          cy.findByRole('list').findAllByRole('listitem').should('have.length', 3);
         });
 
         context('when the "More" button is clicked', () => {
@@ -195,7 +195,7 @@ describe('Breadcrumbs', () => {
         });
 
         it('should have 2 list items inside the "list"', () => {
-          cy.findByRole('list').findAllByRole('listitem').should('have.length', 1);
+          cy.findByRole('list').findAllByRole('listitem').should('have.length', 2);
         });
 
         context('when the "More" button is clicked', () => {

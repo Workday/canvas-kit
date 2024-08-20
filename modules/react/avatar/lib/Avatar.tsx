@@ -243,6 +243,7 @@ export const Avatar = createComponent('button')({
       <Element
         ref={ref}
         aria-label={altText}
+        role={Element === 'button' ? 'button' : 'img'}
         {...mergeStyles(elemProps, [
           avatarStencil({
             variant,
