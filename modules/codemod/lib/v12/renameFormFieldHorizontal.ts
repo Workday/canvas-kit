@@ -1,4 +1,3 @@
-import {type} from '@workday/canvas-kit-react/core';
 import {API, FileInfo, Options, JSXOpeningElement, JSXIdentifier} from 'jscodeshift';
 import {hasImportSpecifiers} from '../v6/utils';
 import {getImportRenameMap} from './utils/getImportRenameMap';
