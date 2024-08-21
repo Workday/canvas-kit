@@ -13,10 +13,10 @@ const autocompleteResult = (
   disabled: boolean
 ): ReactElement<MenuItemProps> => (
   <StyledMenuItem isDisabled={disabled}>
-    Result
+    Result{' '}
     <span>
       num<span>ber</span>
-    </span>
+    </span>{' '}
     {textModifier}
   </StyledMenuItem>
 );
