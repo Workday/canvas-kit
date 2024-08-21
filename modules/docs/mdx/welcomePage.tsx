@@ -14,7 +14,7 @@ import {version} from '../../../lerna.json';
 
 export const WelcomePage = () => {
   return (
-    <Flex flexDirection="column" gap="s">
+    <Flex flexDirection="column" gap="s" marginBottom="m">
       <Box borderRadius="m" overflow="hidden" position="relative">
         <Flex position="absolute" flexDirection="column" top="30%" left="10%">
           <Text

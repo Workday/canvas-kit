@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.54](https://github.com/Workday/canvas-kit/releases/tag/v10.3.54) (2024-08-21)
+
+### Documentation
+
+- docs: Update CanvasProvider info on install page ([#2878](https://github.com/Workday/canvas-kit/pull/2878)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@alanbsmith](https://github.com/alanbsmith))
 ## [v11.1.3](https://github.com/Workday/canvas-kit/releases/tag/v11.1.3) (2024-08-20)
 
 ### Components
