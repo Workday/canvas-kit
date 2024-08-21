@@ -178,7 +178,7 @@ const SearchCombobox = styled(Combobox)({
 });
 
 const SearchIcon = styled(TertiaryButton, {
-  shouldForwardProp: filterOutProps(['isHidden']),
+  shouldForwardProp: filterOutProps(['isHidden', 'isCollapsed']),
 })<Pick<SearchFormProps, 'isCollapsed'> & {isHidden: boolean}>(({isCollapsed, isHidden}) => {
   return {
     position: `absolute`,
@@ -192,28 +192,30 @@ const SearchIcon = styled(TertiaryButton, {
   };
 });
 
-const CloseButton = styled(TertiaryButton)<
-  Pick<SearchFormProps, 'isCollapsed'> & Pick<SearchFormState, 'showForm'>
->(({isCollapsed, showForm}) => {
-  const collapseStyles: CSSObject =
-    isCollapsed && showForm
-      ? {
-          display: 'inline-block',
-        }
-      : {
-          display: 'none',
-        };
+const CloseButton = styled(TertiaryButton, {
+  shouldForwardProp: filterOutProps(['isCollapsed', 'showForm']),
+})<Pick<SearchFormProps, 'isCollapsed'> & Pick<SearchFormState, 'showForm'>>(
+  ({isCollapsed, showForm}) => {
+    const collapseStyles: CSSObject =
+      isCollapsed && showForm
+        ? {
+            display: 'inline-block',
+          }
+        : {
+            display: 'none',
+          };
 
-  return {
-    position: `absolute`,
-    top: 0,
-    bottom: 0,
-    right: 0,
-    margin: `auto ${space.xxs}`,
-    zIndex: 3,
-    ...collapseStyles,
-  };
-});
+    return {
+      position: `absolute`,
+      top: 0,
+      bottom: 0,
+      right: 0,
+      margin: `auto ${space.xxs}`,
+      zIndex: 3,
+      ...collapseStyles,
+    };
+  }
+);
 
 const SearchField = styled(FormField)<
   Pick<SearchFormProps, 'isCollapsed' | 'grow' | 'height'> & Pick<SearchFormState, 'showForm'>

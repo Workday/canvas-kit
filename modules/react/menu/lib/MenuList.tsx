@@ -10,9 +10,8 @@ import {ListBox, ListProps} from '@workday/canvas-kit-react/collection';
 import {useReturnFocus, useFocusRedirect} from '@workday/canvas-kit-react/popup';
 
 import {useMenuModel} from './useMenuModel';
-import {createStencil, cssVar} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 export interface MenuListProps<T = any>
   extends Omit<ExtractProps<typeof ListBox, never>, 'children'> {
@@ -62,8 +61,7 @@ export const MenuList = createSubcomponent('div')({
       as={Element}
       model={model}
       marginY={cssVar(system.space.x2)}
-      overflowY="auto"
-      {...mergeStyles(elemProps, menuListStencil({orientation: model.state.orientation}))}
+      {...handleCsProp(elemProps, menuListStencil({orientation: model.state.orientation}))}
     >
       {children}
     </ListBox>

@@ -42,7 +42,7 @@ export const Modal = createContainer()({
     /**
      * The `Modal.Card` is wraps a {@link PopupCard Popup.Card} which wraps a {@link Card}. It is
      * the `role="dialog"` element and is uses `useModalCard` behavior hook which sets
-     * `aria-modal="true"` and sets the `aria-labelledby` that points to the `id` of the
+     * `aria-modal="false"` and sets the `aria-labelledby` that points to the `id` of the
      * {@link ModalHeading Modal.Heading}. If you don't use a `Modal.Heading`, add an `aria-label`
      * instead. The default element is a `div` and can be changed via the `as` prop.
      */

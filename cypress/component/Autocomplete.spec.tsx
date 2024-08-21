@@ -52,6 +52,16 @@ describe('Autocomplete', () => {
         cy.findByRole('combobox').click();
       });
 
+      context('when the combobox is clicked', () => {
+        beforeEach(() => {
+          cy.findByRole('combobox').click();
+        });
+
+        it('should close the menu', () => {
+          cy.findByRole('listbox').should('not.exist');
+        });
+      });
+
       it('should set the aria-owns to reference the listbox element', () => {
         cy.findByRole('combobox').should(haveAttrMatchingIdOf('aria-controls', '[role=listbox]'));
       });
@@ -62,6 +72,10 @@ describe('Autocomplete', () => {
 
       it('should not have activedescendant set', () => {
         cy.findByRole('combobox').should('not.have.attr', 'aria-activedescendant');
+      });
+
+      it('should not have visual focus on any element', () => {
+        cy.get('[role="option"].focus').should('not.exist');
       });
 
       it('should not have aria-selected=true on any elements', () => {
@@ -78,12 +92,16 @@ describe('Autocomplete', () => {
           cy.findAllByRole('combobox').should('not.have.attr', 'aria-activedescendant');
         });
 
+        it('should not have visual focus on the first item', () => {
+          cy.findAllByRole('option').eq(0).should('not.have.class', 'focus');
+        });
+
         it('should not set aria-selected to the first option', () => {
           cy.findAllByRole('option').eq(0).should('have.not.attr', 'aria-selected');
         });
       });
 
-      context('when a value is entered', () => {
+      context('when "Red" is typed', () => {
         beforeEach(() => {
           cy.findByRole('combobox').type('Red', {delay: 1});
           waitForAutocompleteReady();
@@ -136,8 +154,8 @@ describe('Autocomplete', () => {
             );
           });
 
-          it('should set aria-selected to the first option', () => {
-            cy.findAllByRole('option').eq(0).should('have.attr', 'aria-selected', 'true');
+          it('should set visual focus to the first option', () => {
+            cy.findAllByRole('option').eq(0).should('have.class', 'focus');
           });
 
           context('when the user presses the enter key', () => {
@@ -153,7 +171,7 @@ describe('Autocomplete', () => {
               cy.findByRole('listbox').should('not.exist');
             });
 
-            context('when the use hits the "2" key', () => {
+            context('when the user hits the "2" key', () => {
               beforeEach(() => {
                 cy.findAllByRole('combobox').type('2');
                 waitForAutocompleteReady();
@@ -169,6 +187,10 @@ describe('Autocomplete', () => {
 
               it.skip('should change the filtered results', () => {
                 cy.findByRole('option', {name: 'Red Apple 121'}).should('be.visible');
+              });
+
+              it('should set aria-selected to the first option', () => {
+                cy.findAllByRole('option').eq(0).should('have.attr', 'aria-selected', 'true');
               });
             });
           });
@@ -227,8 +249,12 @@ describe('Autocomplete', () => {
             );
           });
 
-          it('should set aria-selected to the second option', () => {
-            cy.findAllByRole('option').eq(1).should('have.attr', 'aria-selected', 'true');
+          it('should set visual focus on the second option', () => {
+            cy.findAllByRole('option').eq(1).should('have.class', 'focus');
+          });
+
+          it('should not have aria-selected=true on any elements', () => {
+            cy.get('[aria-selected=true]').should('not.exist');
           });
         });
 
@@ -250,8 +276,12 @@ describe('Autocomplete', () => {
               );
             });
 
-            it('should set aria-selected to the first option', () => {
-              cy.findAllByRole('option').eq(0).should('have.attr', 'aria-selected', 'true');
+            it('should set visual focus on the first option', () => {
+              cy.findAllByRole('option').eq(0).should('have.class', 'focus');
+            });
+
+            it('should not have aria-selected=true on any elements', () => {
+              cy.get('[aria-selected=true]').should('not.exist');
             });
           });
 
@@ -266,8 +296,12 @@ describe('Autocomplete', () => {
               );
             });
 
-            it('should set aria-selected to the last option', () => {
-              cy.findAllByRole('option').eq(3).should('have.attr', 'aria-selected', 'true');
+            it('should set visual focus on the last option', () => {
+              cy.findAllByRole('option').eq(3).should('have.class', 'focus');
+            });
+
+            it('should not have aria-selected=true on any elements', () => {
+              cy.get('[aria-selected=true]').should('not.exist');
             });
           });
 
@@ -282,8 +316,12 @@ describe('Autocomplete', () => {
               );
             });
 
-            it('should set aria-selected to the third option', () => {
-              cy.findAllByRole('option').eq(2).should('have.attr', 'aria-selected', 'true');
+            it('should set visual focus on the third option', () => {
+              cy.findAllByRole('option').eq(2).should('have.class', 'focus');
+            });
+
+            it('should not have aria-selected=true on any elements', () => {
+              cy.get('[aria-selected=true]').should('not.exist');
             });
           });
 
@@ -297,8 +335,12 @@ describe('Autocomplete', () => {
               );
             });
 
-            it('should set aria-selected to the first option', () => {
-              cy.findAllByRole('option').eq(0).should('have.attr', 'aria-selected', 'true');
+            it('should set visual focus on the first option', () => {
+              cy.findAllByRole('option').eq(0).should('have.class', 'focus');
+            });
+
+            it('should not have aria-selected=true on any elements', () => {
+              cy.get('[aria-selected=true]').should('not.exist');
             });
           });
         });
