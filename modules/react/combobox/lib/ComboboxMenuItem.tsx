@@ -44,7 +44,9 @@ export const useComboboxMenuItem = composeHooks(
       event.preventDefault();
     };
 
-    const selected = model.state.selectedIds.includes(id);
+    const selected =
+      (model.state.selectedIds === 'all' && !model.state.unselectedIds.includes(id)) ||
+      model.state.selectedIds.includes(id);
 
     return {
       role: 'option',
