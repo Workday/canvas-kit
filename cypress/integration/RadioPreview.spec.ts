@@ -68,7 +68,7 @@ describe('Radio Preview', () => {
     });
 
     it(`the "Deep dish" radio button should have an aria-describedby`, () => {
-      cy.findByLabelText('Deep dish').should('have.attr', 'aria-describedby', 'hint-alert');
+      cy.findByLabelText('Deep dish').should('have.attr', 'aria-describedby', 'hint-hint-alert');
     });
   });
 });

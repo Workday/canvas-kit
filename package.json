@@ -119,9 +119,9 @@
     "cypress:run": "cypress run"
   },
   "lint-staged": {
-      "*.{ts,tsx}": "yarn format",
-      "*.json": "node utils/check-mismatched-dependencies.js",
-      "yarn.lock": "node utils/check-lockfile.js"
+    "*.{ts,tsx}": "yarn format",
+    "*.json": "node utils/check-mismatched-dependencies.js",
+    "yarn.lock": "node utils/check-lockfile.js"
   },
   "workspaces": [
     "modules/**"
@@ -133,6 +133,11 @@
     "@workday/canvas-accent-icons-web": "^3.0.9",
     "@workday/canvas-applet-icons-web": "^2.0.9",
     "@workday/canvas-system-icons-web": "^3.0.0",
-    "@workday/canvas-tokens-web": "^1.0.0"
+    "@workday/canvas-tokens-web": "^2.0.0"
+  },
+  "resolutions": {
+    "ansi-regex": "3.0.1",
+    "braces": "3.0.3",
+    "micromatch":"4.0.6"
   }
 }

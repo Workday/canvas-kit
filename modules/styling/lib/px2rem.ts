@@ -6,6 +6,6 @@
  * // returns '0.125rem'
  * ```
  */
-export function px2rem(px: number, base = 16) {
+export function px2rem(px: number, base = 16): string {
   return `${px / base}rem`;
 }

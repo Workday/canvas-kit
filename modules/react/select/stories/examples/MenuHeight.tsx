@@ -1,7 +1,12 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {Select} from '@workday/canvas-kit-react/select';
 import {Box} from '@workday/canvas-kit-react/layout';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+
+const selectCardStyles = createStyles({
+  maxHeight: px2rem(200),
+});
 
 const cities = [
   'Atlanta (United States)',
@@ -38,11 +43,12 @@ const cities = [
 export const MenuHeight = () => {
   return (
     <Box>
-      <FormField label="Choose a City">
+      <FormField>
+        <FormField.Label>Choose a City</FormField.Label>
         <Select items={cities}>
-          <Select.Input />
+          <FormField.Input as={Select.Input} />
           <Select.Popper>
-            <Select.Card maxHeight={200}>
+            <Select.Card cs={selectCardStyles}>
               <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
             </Select.Card>
           </Select.Popper>

@@ -137,7 +137,7 @@ describe('FormField', () => {
           <input type="text" />
         </FormField>
       );
-      const uniqueId = container.querySelector('input').getAttribute('id');
+      const uniqueId = container.querySelector('input')!.getAttribute('id');
       expect(container.querySelector('input')).toHaveAttribute('id', uniqueId);
     });
   });

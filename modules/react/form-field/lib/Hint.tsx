@@ -2,7 +2,9 @@ import * as React from 'react';
 import {ErrorType, Themeable, styled} from '@workday/canvas-kit-react/common';
 import {space} from '@workday/canvas-kit-react/tokens';
 import {Subtext, Text} from '@workday/canvas-kit-react/text';
-
+/**
+ * @deprecated ⚠️ `HintProps` in Main has been deprecated and will be removed in a future major version. Please use [`FormField` in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-inputs-form-field--basic) instead.
+ */
 export interface HintProps extends Themeable, React.HTMLAttributes<HTMLParagraphElement> {
   /**
    * The type of error associated with the Hint (if applicable).
@@ -23,7 +25,9 @@ export interface HintProps extends Themeable, React.HTMLAttributes<HTMLParagraph
 const Message = styled(Subtext)<Pick<HintProps, 'error'>>(
   ({error, theme}) => error === ErrorType.Error && {color: theme.canvas.palette.error.main}
 );
-
+/**
+ * @deprecated ⚠️ `Hint` in Main has been deprecated and will be removed in a future major version. Please use [`FormField` in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-inputs-form-field--basic) instead.
+ */
 class Hint extends React.Component<HintProps> {
   static ErrorType = ErrorType;
 
