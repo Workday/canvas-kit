@@ -1,107 +1,67 @@
 import * as React from 'react';
-import {
-  createComponent,
-  StyledType,
-  GrowthBehavior,
-  ErrorType,
-  errorRing,
-  styled,
-  Themeable,
-} from '@workday/canvas-kit-react/common';
-import {borderRadius, inputColors, space, type} from '@workday/canvas-kit-react/tokens';
+import {createComponent, GrowthBehavior, ErrorType} from '@workday/canvas-kit-react/common';
+import {createStencil, calc, handleCsProp} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+import {textInputStencil} from '@workday/canvas-kit-react/text-input';
+export type ValueOf<T> = T[keyof T];
 
-export interface TextAreaProps extends Themeable, GrowthBehavior {
-  /**
-   * If true, set the TextArea to the disabled state.
-   * @default false
-   */
-  disabled?: boolean;
+export interface TextAreaProps extends GrowthBehavior {
   /**
    * The type of error associated with the TextArea (if applicable).
    */
   error?: ErrorType;
   /**
-   * The function called when the TextArea state changes.
-   */
-  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  /**
-   * The placeholder text of the TextArea.
-   */
-  placeholder?: string;
-  /**
-   * If true, set the TextArea to read-only. The user will be unable to interact with the TextArea.
-   * @default false
-   */
-  readOnly?: boolean;
-  /**
    * The resize constraints of the TextArea.
    * @default TextArea.ResizeDirection.Both
    */
-  resize?: TextAreaResizeDirection;
-  /**
-   * The value of the TextArea.
-   */
-  value?: any;
+  resize?: ValueOf<typeof TextAreaResizeDirection>;
 }
 
-export enum TextAreaResizeDirection {
-  None = 'none',
-  Both = 'both',
-  Horizontal = 'horizontal',
-  Vertical = 'vertical',
-}
+export const TextAreaResizeDirection = {
+  None: 'none',
+  Both: 'both',
+  Horizontal: 'horizontal',
+  Vertical: 'vertical',
+} as const;
 
-const StyledTextArea = styled('textarea')<TextAreaProps & StyledType>(
-  ({theme, error}) => ({
-    ...type.levels.subtext.large,
-    border: `1px solid ${inputColors.border}`,
-    display: 'block',
-    backgroundColor: inputColors.background,
-    borderRadius: borderRadius.m,
-    boxSizing: 'border-box',
-    minHeight: space.xxl,
-    minWidth: `calc((${space.xxxl} * 3) + ${space.xl})`,
-    transition: '0.2s box-shadow, 0.2s border-color',
-    padding: space.xxs, // Compensate for border
-    margin: 0, // Fix Safari
+export const textAreaStencil = createStencil({
+  extends: textInputStencil,
+  base: {
+    minHeight: system.space.x16,
+    minWidth: calc.add(calc.multiply(system.space.x20, 3), system.space.x10),
     '&::webkit-resizer': {
       display: 'none',
     },
-    '&::placeholder': {
-      color: inputColors.placeholder,
-    },
-    '&:hover': {
-      borderColor: inputColors.hoverBorder,
-    },
-    '&:focus:not([disabled])': {
-      borderColor: theme.canvas.palette.common.focusOutline,
-      boxShadow: `inset 0 0 0 1px ${theme.canvas.palette.common.focusOutline}`,
-      outline: 'none',
-    },
-    '&:disabled': {
-      backgroundColor: inputColors.disabled.background,
-      borderColor: inputColors.disabled.border,
-      color: inputColors.disabled.text,
-      '&::placeholder': {
-        color: inputColors.disabled.text,
+  },
+
+  modifiers: {
+    resize: {
+      both: {
+        resize: 'both',
+      },
+      horizontal: {
+        resize: 'horizontal',
+      },
+      vertical: {
+        resize: 'vertical',
+      },
+      none: {
+        resize: 'none',
       },
     },
-    ...errorRing(error, theme),
-  }),
-
-  ({resize, grow}) => ({
-    width: grow ? '100%' : undefined,
-    resize: grow ? TextAreaResizeDirection.Vertical : resize,
-  })
-);
+  },
+  defaultModifiers: {
+    resize: 'both',
+  },
+});
 
 export const TextArea = createComponent('textarea')({
   displayName: 'TextArea',
   Component: (
-    {resize = TextAreaResizeDirection.Both, grow, ...elemProps}: TextAreaProps,
+    {resize = TextAreaResizeDirection.Both, grow, error, ...elemProps}: TextAreaProps,
     ref,
     Element
-  ) => <StyledTextArea ref={ref} as={Element} grow={grow} resize={resize} {...elemProps} />,
+  ) => <Element ref={ref} {...handleCsProp(elemProps, textAreaStencil({error, grow, resize}))} />,
   subComponents: {
     ErrorType,
     ResizeDirection: TextAreaResizeDirection,
