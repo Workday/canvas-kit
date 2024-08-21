@@ -13,7 +13,7 @@ export const Hint = () => {
 
   return (
     <Flex>
-      <FormField orientation="horizontal">
+      <FormField orientation="horizontalStart">
         <FormField.Label>First Name</FormField.Label>
         <FormField.Container>
           <FormField.Input as={TextInput} value={value} onChange={handleChange} />

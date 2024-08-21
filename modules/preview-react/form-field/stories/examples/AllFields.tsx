@@ -47,7 +47,7 @@ export const AllFields = () => {
           </Select.Popper>
         </Select>
       </FormField>
-      <FormField as="fieldset" isRequired={true} error={'error'} orientation="horizontal" grow>
+      <FormField as="fieldset" isRequired={true} error={'error'} orientation="horizontalStart" grow>
         <FormField.Label as="legend">Radio Group Legend</FormField.Label>
         <FormField.Container>
           <FormField.Input as={RadioGroup}>
@@ -69,7 +69,7 @@ export const AllFields = () => {
         <FormField.Input checked={false} as={Checkbox} label="Extra Cheese" />
       </FormField>
 
-      <FormField orientation="horizontal" grow>
+      <FormField orientation="horizontalStart" grow>
         <FormField.Label>Switch Label</FormField.Label>
         <FormField.Input as={Switch} />
       </FormField>

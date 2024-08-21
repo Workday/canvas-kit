@@ -15,7 +15,7 @@ export interface FormFieldProps extends FlexProps, GrowthBehavior {
    * The direction the child elements should stack
    * @default vertical
    */
-  orientation?: 'vertical' | 'horizontal';
+  orientation?: 'vertical' | 'horizontalStart' | 'horizontalEnd';
   children: React.ReactNode;
 }
 
@@ -82,7 +82,7 @@ export const FormField = createContainer('div')({
      * `FormField.Container` allows you to properly center `FormField.Label` when the `orientation` is set to `horizontal` and there is hint text..
      *
      * ```tsx
-     * <FormField orientation="horizontal">
+     * <FormField orientation="horizontalStart">
      *    <FormField.Label>First Name</FormField.Label>
      *    <FormField.Container>
      *      <FormField.Input as={TextInput} value={value} onChange={(e) => console.log(e)} />
