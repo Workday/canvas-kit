@@ -9,7 +9,7 @@ import {TextArea} from '@workday/canvas-kit-react/text-area';
 import {Switch} from '@workday/canvas-kit-react/switch';
 import {calc, createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {FormFieldGroup} from '../../lib/FormFieldGroup';
+import {FormFieldGroup} from '@workday/canvas-kit-preview-react/form-field';
 
 const parentContainerStyles = createStyles({
   flexDirection: 'column',
