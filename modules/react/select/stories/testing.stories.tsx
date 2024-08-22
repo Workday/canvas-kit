@@ -104,15 +104,15 @@ export const SelectOpenMenuStates = () => {
   return (
     <StaticStates>
       <ComponentStatesTable
-        rowProps={[
+        rowProps={[{label: '', props: {}}]}
+        columnProps={[
           {label: 'Default', props: {}},
           {label: 'Alert', props: {error: 'alert'}},
           {label: 'Error', props: {error: 'error'}},
         ]}
-        columnProps={[{label: 'Default', props: {}}]}
       >
         {props => (
-          <FormField cs={{marginBottom: '250px'}}>
+          <FormField>
             <FormField.Label>Contact</FormField.Label>
             <Select model={model}>
               <FormField.Input as={Select.Input} {...props} id="contact-select" />
