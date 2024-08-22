@@ -79,7 +79,7 @@ describe('SegmentedControl', () => {
 
           context('when the space key is pressed', () => {
             beforeEach(() => {
-              cy.focused().type(' ');
+              cy.focused().realType(' ');
             });
 
             it('should not have "aria-pressed" on the first button', () => {
@@ -93,7 +93,7 @@ describe('SegmentedControl', () => {
 
           context('when the enter key is pressed', () => {
             beforeEach(() => {
-              cy.focused().type('{enter}');
+              cy.focused().realType('{enter}');
             });
 
             it('should not have "aria-pressed" on the first button', () => {
@@ -170,7 +170,7 @@ describe('SegmentedControl', () => {
 
         context('when the space key is pressed', () => {
           beforeEach(() => {
-            cy.focused().type(' ');
+            cy.focused().realType(' ');
           });
 
           it('should not have "aria-pressed" on the first button', () => {
@@ -184,7 +184,7 @@ describe('SegmentedControl', () => {
 
         context('when the enter key is pressed', () => {
           beforeEach(() => {
-            cy.focused().type('{enter}');
+            cy.focused().realType('{enter}');
           });
 
           it('should not have "aria-pressed" on the first button', () => {

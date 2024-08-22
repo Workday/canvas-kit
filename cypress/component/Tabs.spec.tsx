@@ -87,7 +87,7 @@ describe('Tabs', () => {
 
         context('when the right arrow key is pressed', () => {
           beforeEach(() => {
-            cy.focused().type('{rightarrow}');
+            cy.focused().realType('{rightarrow}');
           });
 
           it('should have tabindex=-1 on the first tab', () => {
@@ -104,7 +104,7 @@ describe('Tabs', () => {
 
           context('when the space key is pressed', () => {
             beforeEach(() => {
-              cy.focused().type(' ');
+              cy.focused().realType(' ');
             });
 
             it('should not have "aria-selected" on the first tab', () => {
@@ -126,7 +126,7 @@ describe('Tabs', () => {
 
           context('when the enter key is pressed', () => {
             beforeEach(() => {
-              cy.focused().type('{enter}');
+              cy.focused().realType('{enter}');
             });
 
             it('should not have "aria-selected" on the first tab', () => {
@@ -178,7 +178,7 @@ describe('Tabs', () => {
 
         context('when the left arrow is pressed', () => {
           beforeEach(() => {
-            cy.focused().type('{leftarrow}');
+            cy.focused().realType('{leftarrow}');
           });
 
           it('should have tabindex=-1 on the first tab', () => {
@@ -208,7 +208,7 @@ describe('Tabs', () => {
 
         context('when the right arrow key is pressed', () => {
           beforeEach(() => {
-            cy.focused().type('{rightarrow}');
+            cy.focused().realType('{rightarrow}');
           });
 
           it('should not have tabindex=-1 on the first tab', () => {
@@ -253,7 +253,7 @@ describe('Tabs', () => {
 
       context('when the right arrow key is pressed', () => {
         beforeEach(() => {
-          cy.focused().type('{rightarrow}');
+          cy.focused().realType('{rightarrow}');
         });
 
         it('should focus on the Disabled Tab', () => {
@@ -262,7 +262,7 @@ describe('Tabs', () => {
 
         context('when the enter key is pressed', () => {
           beforeEach(() => {
-            cy.focused().type('{enter}');
+            cy.focused().realType('{enter}');
           });
 
           it('should not set "[aria-selected=true]" on the Disabled Tab', () => {
@@ -297,7 +297,7 @@ describe('Tabs', () => {
 
       context('when the left arrow key is pressed', () => {
         beforeEach(() => {
-          cy.focused().type('{leftarrow}');
+          cy.focused().realType('{leftarrow}');
         });
 
         it('should focus on Tab 4', () => {
@@ -313,7 +313,7 @@ describe('Tabs', () => {
 
       context('then the Delete key is pressed', () => {
         beforeEach(() => {
-          cy.focused().type('{del}');
+          cy.focused().realType('{del}');
         });
 
         // Tab activation should move to the right if activated tab is removed
@@ -334,12 +334,12 @@ describe('Tabs', () => {
 
       context('then the left arrow key is pressed', () => {
         beforeEach(() => {
-          cy.focused().type('{leftarrow}');
+          cy.focused().realType('{leftarrow}');
         });
 
         context('then the Delete key is pressed', () => {
           beforeEach(() => {
-            cy.focused().type('{del}');
+            cy.focused().realType('{del}');
           });
 
           it('should remove "Tab 2"', () => {
@@ -362,7 +362,7 @@ describe('Tabs', () => {
 
           context('then the Delete key is pressed again', () => {
             beforeEach(() => {
-              cy.focused().type('{del}');
+              cy.focused().realType('{del}');
             });
 
             // Focus moves to the right if focused tab is deleted again
@@ -375,12 +375,12 @@ describe('Tabs', () => {
 
       context('then the left arrow key is pressed twice', () => {
         beforeEach(() => {
-          cy.focused().type('{leftarrow}{leftarrow}');
+          cy.focused().realType('{leftarrow}{leftarrow}');
         });
 
         context('then the Delete key is pressed', () => {
           beforeEach(() => {
-            cy.focused().type('{del}');
+            cy.focused().realType('{del}');
           });
 
           it('should remove "Tab 1"', () => {
@@ -428,7 +428,7 @@ describe('Tabs', () => {
 
       context('when the left arrow key is pressed', () => {
         beforeEach(() => {
-          cy.focused().type('{leftarrow}');
+          cy.focused().realType('{leftarrow}');
         });
 
         it('should have tabindex=-1 on the first tab', () => {
@@ -445,7 +445,7 @@ describe('Tabs', () => {
 
         context('when the space key is pressed', () => {
           beforeEach(() => {
-            cy.focused().type(' ');
+            cy.focused().realType(' ');
           });
 
           it('should not have "aria-selected" on the first tab', () => {
@@ -460,7 +460,7 @@ describe('Tabs', () => {
 
       context('when the right arrow is pressed', () => {
         beforeEach(() => {
-          cy.focused().type('{rightarrow}');
+          cy.focused().realType('{rightarrow}');
         });
 
         it('should have tabindex=-1 on the first tab', () => {
@@ -481,6 +481,7 @@ describe('Tabs', () => {
   context('when [Components/Containers/Tabs, OverflowTabs] story is rendered', () => {
     beforeEach(() => {
       cy.mount(<OverflowTabs />);
+      cy.wait(500);
     });
 
     it('should pass axe checks', () => {

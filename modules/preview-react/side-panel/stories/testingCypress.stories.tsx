@@ -53,7 +53,7 @@ export const AsAside = () => {
         </span>
         <SidePanel.ToggleButton {...controlProps} />
       </SidePanel>
-      <main>Main Content</main>
+      <div>Main Content</div>
     </Container>
   );
 };

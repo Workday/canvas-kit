@@ -51,7 +51,7 @@ describe('Menu', () => {
 
       context('when escape key is pressed', () => {
         beforeEach(() => {
-          cy.focused().type('{esc}');
+          cy.focused().realType('{esc}');
         });
 
         it('should have aria-expanded set to false', () => {
@@ -73,7 +73,7 @@ describe('Menu', () => {
 
       context('when down arrow key is pressed', () => {
         beforeEach(() => {
-          cy.focused().type('{downarrow}');
+          cy.focused().realType('{downarrow}');
         });
 
         it('should transfer focus to the second item', () => {
@@ -82,7 +82,7 @@ describe('Menu', () => {
 
         context('when the enter key is pressed', () => {
           beforeEach(() => {
-            cy.focused().type('{enter}');
+            cy.focused().realType('{enter}');
           });
 
           it('should have aria-expanded set to false', () => {
@@ -161,9 +161,9 @@ describe('Menu', () => {
         });
       });
 
-      context('when the user types a printable character "t"', () => {
+      context('when the user realTypes a printable character "t"', () => {
         beforeEach(() => {
-          cy.focused().type('t');
+          cy.focused().realType('t');
         });
 
         it.skip('should focus on the third item', () => {
@@ -173,7 +173,7 @@ describe('Menu', () => {
 
       context('when up arrow key is pressed', () => {
         beforeEach(() => {
-          cy.focused().type('{uparrow}');
+          cy.focused().realType('{uparrow}');
         });
 
         it('should focus on the last option', () => {
@@ -182,7 +182,7 @@ describe('Menu', () => {
 
         context('when the enter key is pressed', () => {
           beforeEach(() => {
-            cy.focused().type('{enter}');
+            cy.focused().realType('{enter}');
           });
 
           it('should not close the menu', () => {

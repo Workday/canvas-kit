@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Property} from 'csstype';
 import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
-import {createStencil, calc} from '@workday/canvas-kit-styling';
+import {createStencil, calc, CSProps} from '@workday/canvas-kit-styling';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {borderRadius} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
@@ -9,7 +9,7 @@ import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {userIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
-export interface AvatarProps {
+export interface AvatarProps extends CSProps {
   /**
    * The variant of the avatar. Use `light` on dark backgrounds and `dark` on light backgrounds.
    * @default "light"
