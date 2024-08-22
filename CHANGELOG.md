@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.55](https://github.com/Workday/canvas-kit/releases/tag/v10.3.55) (2024-08-22)
+
+### Components
+
+- fix(combobox): Show selected state when multiple is enabled ([#2882](https://github.com/Workday/canvas-kit/pull/2882)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v10.3.54](https://github.com/Workday/canvas-kit/releases/tag/v10.3.54) (2024-08-21)
 
 ### Documentation
