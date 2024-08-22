@@ -43,7 +43,7 @@ export const formFieldLabelStencil = createStencil({
     },
 
     // orientation modifier from parent FormField
-    [parentModifier(formFieldStencil.modifiers.orientation.horizontal)]: {
+    [parentModifier(formFieldStencil.modifiers.orientation.horizontalStart)]: {
       float: 'left',
       maxHeight: system.space.x10,
     },

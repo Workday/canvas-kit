@@ -1,11 +1,10 @@
 import {API, FileInfo, Options, JSXOpeningElement, JSXIdentifier} from 'jscodeshift';
 import {hasImportSpecifiers} from '../v6/utils';
 import {getImportRenameMap} from './utils/getImportRenameMap';
-const textInputPackage = '@workday/canvas-kit-preview-react/text-input';
-const textAreaPackage = '@workday/canvas-kit-preview-react/text-area';
+
 const formFieldPackage = '@workday/canvas-kit-preview-react/form-field';
-const packages = [textInputPackage, textAreaPackage, formFieldPackage];
-const packageImports = ['TextInput', 'FormField', 'TextArea'];
+const packages = [formFieldPackage];
+const packageImports = ['FormField'];
 
 export default function transformer(file: FileInfo, api: API, options: Options) {
   const j = api.jscodeshift;
@@ -38,22 +37,9 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     .forEach(nodePath => {
       nodePath.node.attributes?.forEach(attr => {
         if (attr.type === 'JSXAttribute') {
-          console.log(attr.name.name);
           if (attr.name.name === 'orientation') {
-            console.log(attr.value?.type);
             if (attr.value && attr.value.type === 'StringLiteral') {
-              console.log(attr.value.value);
-              const value = attr.value.value as any;
-              console.log(attr.value.value);
               attr.value = j.stringLiteral('horizontalStart');
-              console.log(attr.value.value); //?
-              // if (value.type === 'BooleanLiteral') {
-              //   if (value.value) {
-              //     attr.value = j.stringLiteral('error');
-              //   } else {
-              //     attr.value = j.jsxExpressionContainer(j.identifier('undefined'));
-              //   }
-              // }
             }
           }
         }
