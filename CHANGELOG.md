@@ -3,6 +3,106 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.1.4](https://github.com/Workday/canvas-kit/releases/tag/v11.1.4) (2024-08-21)
+
+### Documentation
+
+- docs: Update CanvasProvider info on install page ([#2878](https://github.com/Workday/canvas-kit/pull/2878)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v10.3.54](https://github.com/Workday/canvas-kit/releases/tag/v10.3.54) (2024-08-21)
+
+### Documentation
+
+- docs: Update CanvasProvider info on install page ([#2878](https://github.com/Workday/canvas-kit/pull/2878)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@alanbsmith](https://github.com/alanbsmith))
+## [v11.1.3](https://github.com/Workday/canvas-kit/releases/tag/v11.1.3) (2024-08-20)
+
+### Components
+
+- fix: Update select to trigger onChange ([#2874](https://github.com/Workday/canvas-kit/pull/2874)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v10.3.53](https://github.com/Workday/canvas-kit/releases/tag/v10.3.53) (2024-08-20)
+
+### Components
+
+- fix: Update select to trigger onChange ([#2874](https://github.com/Workday/canvas-kit/pull/2874)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+## [v11.1.2](https://github.com/Workday/canvas-kit/releases/tag/v11.1.2) (2024-08-20)
+
+
+
+
+## [v11.1.1](https://github.com/Workday/canvas-kit/releases/tag/v11.1.1) (2024-08-20)
+
+### Components
+
+- fix(select): Clicking the input closes the menu ([#2869](https://github.com/Workday/canvas-kit/pull/2869)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v10.3.52](https://github.com/Workday/canvas-kit/releases/tag/v10.3.52) (2024-08-14)
+
+### Components
+
+- fix(select): Clicking the input closes the menu ([#2869](https://github.com/Workday/canvas-kit/pull/2869)) ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v11.1.0](https://github.com/Workday/canvas-kit/releases/tag/v11.1.0) (2024-08-14)
+
+
+
+
+## [v11.0.27](https://github.com/Workday/canvas-kit/releases/tag/v11.0.27) (2024-08-12)
+
+### Components
+
+- fix(Checkbox): Remove console warning ([#2863](https://github.com/Workday/canvas-kit/pull/2863)) ([@thunguyen19](https://github.com/thunguyen19))
+
+
+## [v11.0.26](https://github.com/Workday/canvas-kit/releases/tag/v11.0.26) (2024-08-05)
+
+### Accessibility
+
+- fix: Set aria-modal to false for better accessibility ([#2855](https://github.com/Workday/canvas-kit/pull/2855)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v10.3.51](https://github.com/Workday/canvas-kit/releases/tag/v10.3.51) (2024-08-05)
+
+### Accessibility
+
+- fix: Set aria-modal to false for better accessibility ([#2855](https://github.com/Workday/canvas-kit/pull/2855)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+## [v11.0.25](https://github.com/Workday/canvas-kit/releases/tag/v11.0.25) (2024-08-05)
+
+### Components
+
+- fix(combobox): Use correct state for aria-selected ([#2849](https://github.com/Workday/canvas-kit/pull/2849)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  This change fixes `aria-selected` in `Combobox.Menu.Item` components, but this does change the visuals of what is considered "selected". If you have any visual tests that have a screenshot of a selected state, the visual regression will have to be updated. The same is true for DOM-based snapshot tests. `aria-selected="true"` will now be added when an item is selected and not just when the virtual cursor is on the item. If your snapshot captures this DOM state, the snapshot will have to be updated.
+
+
+## [v10.3.50](https://github.com/Workday/canvas-kit/releases/tag/v10.3.50) (2024-08-05)
+
+### Components
+
+- fix(combobox): Use correct state for aria-selected ([#2849](https://github.com/Workday/canvas-kit/pull/2849)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  This change fixes `aria-selected` in `Combobox.Menu.Item` components, but this does change the visuals of what is considered "selected". If you have any visual tests that have a screenshot of a selected state, the visual regression will have to be updated. The same is true for DOM-based snapshot tests. `aria-selected="true"` will now be added when an item is selected and not just when the virtual cursor is on the item. If your snapshot captures this DOM state, the snapshot will have to be updated.
+## [v11.0.24](https://github.com/Workday/canvas-kit/releases/tag/v11.0.24) (2024-08-05)
+
+### Components
+
+- fix(SearchForm): Suppress forwarding props warning ([#2850](https://github.com/Workday/canvas-kit/pull/2850)) ([@thunguyen19](https://github.com/thunguyen19), Thu Nguyen)
+
+
+## [v11.0.23](https://github.com/Workday/canvas-kit/releases/tag/v11.0.23) (2024-07-30)
+
+### Components
+
+- fix: Support marginTop and marginBottom on ListBox ([#2844](https://github.com/Workday/canvas-kit/pull/2844)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v10.3.49](https://github.com/Workday/canvas-kit/releases/tag/v10.3.49) (2024-07-29)
+
+### Components
+
+- fix: Support marginTop and marginBottom on ListBox ([#2844](https://github.com/Workday/canvas-kit/pull/2844)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v11.0.22](https://github.com/Workday/canvas-kit/releases/tag/v11.0.22) (2024-07-29)
 
 ### Documentation
@@ -10,6 +110,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - docs: Fix stencil docs typo ([#2847](https://github.com/Workday/canvas-kit/pull/2847)) ([@alanbsmith](https://github.com/alanbsmith))
 
 
+## [v10.3.48](https://github.com/Workday/canvas-kit/releases/tag/v10.3.48) (2024-07-24)
 ## [v11.0.21](https://github.com/Workday/canvas-kit/releases/tag/v11.0.21) (2024-07-24)
 
 ### Documentation

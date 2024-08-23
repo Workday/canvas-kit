@@ -45,7 +45,7 @@ export const useComboboxMenuItem = composeHooks(
       event.preventDefault();
     };
 
-    const selected = model.state.cursorId === id;
+    const selected = model.state.selectedIds[0] === id;
 
     return {
       role: 'option',
