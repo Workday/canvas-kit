@@ -10,8 +10,7 @@ import {createStyles} from '@workday/canvas-kit-styling';
 import {AriaLiveRegion} from '@workday/canvas-kit-react/common';
 
 const formStyles = createStyles({
-  marginBlockStart: system.space.x3,
-  marginBlockEnd: system.space.x3,
+  margin: `${system.space.zero} ${system.space.x3}`,
 });
 
 const formButtonStyles = createStyles({

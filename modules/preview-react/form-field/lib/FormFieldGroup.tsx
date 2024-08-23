@@ -90,7 +90,7 @@ export const FormFieldGroup = createContainer('fieldset')({
      */
     Hint: FormField.Hint,
     /**
-     * `FormFieldGroup.Container` allows you to properly center `FormField.Legend` when the `orientation` is set to `horizontal` and there is hint text..
+     * `FormFieldGroup.Container` allows you to properly center `FormField.Legend` when the `orientation` is set to `horizontal` and there is hint text.
      *
      * ```tsx
      * <FormFieldGroup orientation="horizontal">
