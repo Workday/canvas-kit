@@ -96,11 +96,14 @@ export const TextInputWithReactHookForm = () => {
     passwordCallbackRef(ref);
     passwordRef.current = ref;
   };
-
   return (
     <form onSubmit={onSubmit} action="." noValidate={true}>
       <Flex gap="xs" flexDirection="column" alignItems="flex-start">
-        <FormField orientation="vertical" isRequired={true} hasError={!!errors.role}>
+        <FormField
+          orientation="vertical"
+          isRequired={true}
+          error={!!errors.role ? 'error' : undefined}
+        >
           <Select items={options} getTextValue={item => item.label}>
             <FormField.Label>What is your role?</FormField.Label>
             <FormField.Input as={Select.Input} {...register('role')} width="280px" />
@@ -116,7 +119,11 @@ export const TextInputWithReactHookForm = () => {
             <FormField.Hint>{errors.role?.message}</FormField.Hint>
           </Select>
         </FormField>
-        <TextInput orientation="vertical" isRequired={true} hasError={!!errors.email}>
+        <TextInput
+          orientation="vertical"
+          isRequired={true}
+          error={!!errors.email ? 'error' : undefined}
+        >
           <TextInput.Label>Email</TextInput.Label>
           <TextInput.Field
             {...register('email')}
@@ -129,7 +136,7 @@ export const TextInputWithReactHookForm = () => {
           orientation="vertical"
           id={passwordId}
           isRequired={true}
-          hasError={!!errors.password}
+          error={!!errors.password ? 'error' : undefined}
         >
           <TextInput.Label>Password</TextInput.Label>
           <Flex gap="xxs">

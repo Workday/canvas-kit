@@ -56,10 +56,7 @@ export const Button = createComponent('button')({
         )}
         {children && <BaseButton.Label>{children}</BaseButton.Label>}
 
-        {icon && baseIconPosition === 'only' && (
-          <BaseButton.Icon size={size} icon={icon} shouldMirrorIcon={shouldMirrorIcon} />
-        )}
-        {icon && baseIconPosition === 'end' && (
+        {icon && baseIconPosition && ['only', 'end'].includes(baseIconPosition) && (
           <BaseButton.Icon size={size} icon={icon} shouldMirrorIcon={shouldMirrorIcon} />
         )}
       </BaseButton>
