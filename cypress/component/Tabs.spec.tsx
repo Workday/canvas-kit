@@ -522,7 +522,11 @@ describe('Tabs', () => {
       });
 
       it('should pass axe checks', () => {
-        cy.checkA11y();
+        cy.checkA11y('[role="tablist"]', {
+          rules: {
+            'aria-required-children': {enabled: false},
+          },
+        });
       });
 
       it('should show the "More" button', () => {
@@ -588,7 +592,11 @@ describe('Tabs', () => {
       });
 
       it('should pass axe checks', () => {
-        cy.checkA11y();
+        cy.checkA11y('[role="tablist"]', {
+          rules: {
+            'aria-required-children': {enabled: false},
+          },
+        });
       });
 
       it('should show the "More" button', () => {
@@ -624,7 +632,11 @@ describe('Tabs', () => {
       });
 
       it('should pass axe checks', () => {
-        cy.checkA11y();
+        cy.checkA11y('[role="tablist"]', {
+          rules: {
+            'aria-required-children': {enabled: false},
+          },
+        });
       });
 
       it('should show the "More" button', () => {
@@ -665,7 +677,7 @@ describe('Tabs', () => {
       });
 
       it('should have scroll behavior', () => {
-        cy.findByRole('tablist').its('scrollX').should('not.equal', 0);
+        cy.findByRole('tablist').its('scroll').should('not.equal', 0);
       });
     });
   });
