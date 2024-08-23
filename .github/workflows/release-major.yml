@@ -34,7 +34,7 @@ jobs:
 
       - uses: Workday/canvas-kit-actions/install@v1
         with:
-          node_version: 18.x
+          node_version: 16.x
 
       # Run the release job to publish the next major version to npm
       - uses: Workday/canvas-kit-actions/release@v1
