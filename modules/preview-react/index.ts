@@ -6,7 +6,6 @@ export * from './menu';
 export * from './pill';
 export * from './radio';
 export * from './segmented-control';
-export * from './select';
 export * from './side-panel';
 export * from './status-indicator';
 export * from './text-area';
