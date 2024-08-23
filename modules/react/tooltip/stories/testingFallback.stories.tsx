@@ -1,7 +1,5 @@
 import React from 'react';
-import {PopperController, customViewport} from '../../../../utils/storybook';
-import {Placement} from '@workday/canvas-kit-react/popup';
-import {Flex, Grid} from '@workday/canvas-kit-react/layout';
+import {Grid} from '@workday/canvas-kit-react/layout';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {calc, createStyles} from '@workday/canvas-kit-styling';
