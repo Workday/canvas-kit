@@ -104,6 +104,16 @@ describe('Select', () => {
           cy.findByRole('combobox').click();
         });
 
+        context('when the combobox is clicked', () => {
+          beforeEach(() => {
+            cy.findByRole('combobox').click();
+          });
+
+          it('should close the menu', () => {
+            cy.findByRole('listbox').should('not.exist');
+          });
+        });
+
         context(
           'when a character is typed (provided no other characters have been typed in the last 500ms), the select should advance assistive focus to the first matching option beyond the currently selected option (cycling back to the beginning of the options if necessary) and scroll that option into view',
           () => {
@@ -331,6 +341,18 @@ describe('Select', () => {
         );
       });
     });
+    context('when a value is selected', () => {
+      beforeEach(() => {
+        cy.findByRole('combobox').focus();
+        cy.focused().realType('{downarrow}');
+      });
+      it('should select phone and the selected value should be visible', () => {
+        // Select Phone
+        cy.focused().realType('ph');
+        cy.focused().realType('{enter}');
+        cy.findByText('Selected Value: Phone');
+      });
+    });
   });
 
   context('given the "Disabled Options" story with a disabled option', () => {
@@ -395,6 +417,23 @@ describe('Select', () => {
     context('the select input', () => {
       it('should be disabled', () => {
         cy.findByRole('combobox').should('be.disabled');
+      });
+    });
+  });
+
+  context(`given the "Complex" story is rendered`, () => {
+    beforeEach(() => {
+      h.stories.load('Components/Inputs/Select', 'Complex');
+      cy.findByRole('combobox').focus();
+      cy.focused().realType('{downarrow}');
+    });
+
+    context('when a value is selected with an id and text', () => {
+      it('should display the correct id and value of the selected Phone', () => {
+        cy.focused().realType('ph');
+        cy.focused().realType('{enter}');
+        cy.findByText('Id: phone');
+        cy.findByText('Value: Phone');
       });
     });
   });
