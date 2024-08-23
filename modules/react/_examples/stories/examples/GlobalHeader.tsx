@@ -1,5 +1,12 @@
 import * as React from 'react';
-import {styled, createComponent} from '@workday/canvas-kit-react/common';
+import {
+  styled,
+  composeHooks,
+  createComponent,
+  createElemPropsHook,
+  createSubcomponent,
+  ExtractProps,
+} from '@workday/canvas-kit-react/common';
 import {colors, depth, space, type} from '@workday/canvas-kit-react/tokens';
 
 import {
@@ -7,47 +14,41 @@ import {
   inboxIcon,
   justifyIcon,
   assistantIcon,
+  mailIcon,
 } from '@workday/canvas-system-icons-web';
 
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
-import {SearchForm} from '@workday/canvas-kit-labs-react/search-form';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {Combobox} from '@workday/canvas-kit-labs-react/combobox';
-import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {Combobox, useComboboxModel, useComboboxInput} from '@workday/canvas-kit-react/combobox';
+import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
 import {StyledMenuItem, MenuItemProps} from '@workday/canvas-kit-react/menu';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
 
 interface HeaderItemProps extends FlexProps {}
 
 const tasks = ['Request Time Off', 'Create Expense Report'];
 
-const autocompleteResult = (
-  textModifier: number,
-  disabled: boolean
-): React.ReactElement<MenuItemProps> => (
-  <StyledMenuItem isDisabled={disabled}>
-    Result{' '}
-    <span>
-      num<span>ber</span>
-    </span>{' '}
-    {textModifier}
-  </StyledMenuItem>
+const useAutocompleteInput = composeHooks(
+  createElemPropsHook(useComboboxModel)(model => {
+    return {
+      onKeyPress(event: React.KeyboardEvent) {
+        model.events.show(event);
+      },
+    };
+  }),
+  useComboboxInput
 );
 
-const simpleAutoComplete = (count: number, showDisabledItems, total = 5) =>
-  Array.apply(null, Array(count))
-    .map((_, i) => autocompleteResult(i, showDisabledItems && i === 0))
-    .splice(0, total);
+const AutoCompleteInput = createSubcomponent(TextInput)({
+  modelHook: useComboboxModel,
+  elemPropsHook: useAutocompleteInput,
+})<ExtractProps<typeof Combobox.Input, never>>((elemProps, Element) => {
+  return <Combobox.Input as={Element} {...elemProps} />;
+});
 
 export const Basic = () => {
-  const [currentText, setCurrentText] = React.useState('');
-  const textLength = currentText.length;
-
-  const autocompleteCallback = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setCurrentText(event.target.value);
-  };
-
   return (
     <GlobalHeader>
       <GlobalHeader.Item>
@@ -63,11 +64,18 @@ export const Basic = () => {
         </Tooltip>
       </GlobalHeader.Item>
       <GlobalHeader.Item margin="auto" width="100%" maxWidth={`calc(${space.xxxl} * 6)`}>
-        <Combobox
-          autocompleteItems={simpleAutoComplete(textLength, false, 10)}
-          onChange={autocompleteCallback}
-        >
-          <TextInput placeholder="Autocomplete" />
+        <Combobox>
+          <InputGroup>
+            <InputGroup.InnerStart>
+              <SystemIcon icon={mailIcon} />
+            </InputGroup.InnerStart>
+            <InputGroup.Input as={AutoCompleteInput} />
+          </InputGroup>
+          <Combobox.Menu.Popper>
+            <Combobox.Menu.Card>
+              <StyledMenuItem as="span">No Results Found</StyledMenuItem>
+            </Combobox.Menu.Card>
+          </Combobox.Menu.Popper>
         </Combobox>
       </GlobalHeader.Item>
       <GlobalHeader.Item>
