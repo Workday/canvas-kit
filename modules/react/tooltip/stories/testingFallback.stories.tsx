@@ -1,68 +1,92 @@
 import React from 'react';
 import {PopperController, customViewport} from '../../../../utils/storybook';
 import {Placement} from '@workday/canvas-kit-react/popup';
-import {Flex} from '@workday/canvas-kit-react/layout';
+import {Flex, Grid} from '@workday/canvas-kit-react/layout';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
+import {calc, createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export default {
   title: 'Testing/Popups/Tooltip',
   component: Tooltip,
-  parameters: {
-    viewport: {
-      viewports: customViewport,
-      defaultViewport: 'landscape',
-    },
-  },
 };
 
-export const TooltipWithFallbackPlacements = {
-  render: () => {
-    const [placement, setPlacement] = React.useState<Placement>('top');
-    const [marginLeftBtn, setMarginLeftBtn] = React.useState(0);
-    const [marginRightBtn, setMarginRightBtn] = React.useState(0);
+const grid = createStyles({
+  gridTemplateAreas: "'topButton topButton''leftButton rightButton''bottomButton bottomButton'",
+  height: calc.subtract('100vh', system.space.x16),
+  width: calc.subtract('100vw', system.space.x20),
+});
 
-    const handlePlacement = (placement: Placement) => {
-      setPlacement(placement);
-    };
+const topButton = createStyles({
+  gridArea: 'topButton',
+  justifySelf: 'center',
+});
+const rightButton = createStyles({
+  gridArea: 'rightButton',
+  justifySelf: 'right',
+  alignSelf: 'center',
+});
+const bottomButton = createStyles({
+  gridArea: 'bottomButton',
+  justifySelf: 'center',
+  alignSelf: 'end',
+  bottom: calc.subtract(system.space.x4, system.space.x10),
+});
+const leftButton = createStyles({
+  gridArea: 'leftButton',
+  justifySelf: 'left',
+  alignSelf: 'center',
+});
 
-    const handleMarginLeftBtn = (marginLeftBtn: number) => {
-      setMarginLeftBtn(marginLeftBtn);
-    };
-
-    const handleMarginRightBtn = (marginLeftBtn: number) => {
-      setMarginRightBtn(marginLeftBtn);
-    };
-
-    return (
-      <div style={{height: 1200}} data-testid="scroll-area-fallback-placement">
-        <PopperController
-          marginLeftBtn={marginLeftBtn}
-          marginRightBtn={marginRightBtn}
-          placement={placement}
-          onSetPlacement={handlePlacement}
-          onSetMarginLeftBtn={handleMarginLeftBtn}
-          onSetMarginRightBtn={handleMarginRightBtn}
+export const TooltipWithFallbackPlacements = () => {
+  return (
+    <div data-testid="scroll-area-fallback-placement">
+      <Grid cs={grid}>
+        <Tooltip
+          type="describe"
+          title={
+            <div>
+              This is a <em>custom</em> tooltip with <strong>custom HTML</strong>
+            </div>
+          }
         >
-          <Flex width="100%" marginTop={100} justifyContent="center" alignItems="start">
-            <React.Fragment>
-              <Tooltip
-                type="describe"
-                placement={placement}
-                title={
-                  <div>
-                    This is a <em>custom</em> tooltip with <strong>custom HTML</strong>
-                  </div>
-                }
-              >
-                <SecondaryButton style={{marginLeft: marginLeftBtn, marginRight: marginRightBtn}}>
-                  Hover Me
-                </SecondaryButton>
-              </Tooltip>
-            </React.Fragment>
-          </Flex>
-        </PopperController>
-      </div>
-    );
-  },
+          <SecondaryButton cs={topButton}>Placement Top</SecondaryButton>
+        </Tooltip>
+        <Tooltip
+          type="describe"
+          placement="left"
+          title={
+            <div>
+              This is a <em>custom</em> tooltip with <strong>custom HTML</strong>
+            </div>
+          }
+        >
+          <SecondaryButton cs={leftButton}>Placement Left</SecondaryButton>
+        </Tooltip>
+        <Tooltip
+          type="describe"
+          placement="right"
+          title={
+            <div>
+              This is a <em>custom</em> tooltip with <strong>custom HTML</strong>
+            </div>
+          }
+        >
+          <SecondaryButton cs={rightButton}>Placement Right</SecondaryButton>
+        </Tooltip>
+        <Tooltip
+          type="describe"
+          placement="bottom"
+          title={
+            <div>
+              This is a <em>custom</em> tooltip with <strong>custom HTML</strong>
+            </div>
+          }
+        >
+          <SecondaryButton cs={bottomButton}>Placement Bottom</SecondaryButton>
+        </Tooltip>
+      </Grid>
+    </div>
+  );
 };

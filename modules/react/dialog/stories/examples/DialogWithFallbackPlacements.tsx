@@ -5,6 +5,11 @@ import {Flex, Grid} from '@workday/canvas-kit-react/layout';
 import {calc, createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
+export default {
+  title: 'Testing/Popups/Dialog',
+  component: Dialog,
+};
+
 const grid = createStyles({
   gridTemplateAreas: "'topButton topButton''leftButton rightButton''bottomButton bottomButton'",
   height: calc.subtract('100vh', system.space.x16),
@@ -30,17 +35,6 @@ const leftButton = createStyles({
   justifySelf: 'left',
   alignSelf: 'center',
 });
-
-export default {
-  title: 'Testing/Popups/Dialog',
-  component: Dialog,
-  // parameters: {
-  //   viewport: {
-  //     viewports: customViewport,
-  //     defaultViewport: 'landscape',
-  //   },
-  // },
-};
 
 export const DialogWithFallbackPlacements = () => {
   return (
