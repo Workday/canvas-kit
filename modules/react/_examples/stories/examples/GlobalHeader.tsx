@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  styled,
   composeHooks,
   createComponent,
   createElemPropsHook,
@@ -8,13 +7,13 @@ import {
   ExtractProps,
 } from '@workday/canvas-kit-react/common';
 import {colors, depth, space, type} from '@workday/canvas-kit-react/tokens';
-
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {
   notificationsIcon,
   inboxIcon,
   justifyIcon,
   assistantIcon,
-  mailIcon,
+  searchIcon,
 } from '@workday/canvas-system-icons-web';
 
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
@@ -29,6 +28,33 @@ import {SystemIcon} from '@workday/canvas-kit-react/icon';
 interface HeaderItemProps extends FlexProps {}
 
 const tasks = ['Request Time Off', 'Create Expense Report'];
+
+const styleOverrides = {
+  headerWrapper: createStyles({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    boxSizing: 'border-box',
+    ...type.levels.subtext.large,
+    WebkitFontSmoothing: 'antialiased',
+    MozOsxFontSmoothing: 'grayscale',
+    backgroundColor: colors.frenchVanilla100,
+    ...depth[1],
+    padding: space.xxs,
+  }),
+  inputGroupInner: createStyles({
+    marginLeft: '1rem',
+    width: px2rem(20),
+    transition: 'opacity 100ms ease',
+  }),
+  comboboxInput: createStyles({
+    borderRadius: px2rem(1000),
+    width: '20rem',
+  }),
+  comboboxMenuList: createStyles({
+    maxHeight: px2rem(200),
+  }),
+};
 
 const useAutocompleteInput = composeHooks(
   createElemPropsHook(useComboboxModel)(model => {
@@ -66,10 +92,10 @@ export const Basic = () => {
       <GlobalHeader.Item margin="auto" width="100%" maxWidth={`calc(${space.xxxl} * 6)`}>
         <Combobox>
           <InputGroup>
-            <InputGroup.InnerStart>
-              <SystemIcon icon={mailIcon} />
+            <InputGroup.InnerStart cs={styleOverrides.inputGroupInner}>
+              <SystemIcon icon={searchIcon} />
             </InputGroup.InnerStart>
-            <InputGroup.Input as={AutoCompleteInput} />
+            <InputGroup.Input as={AutoCompleteInput} cs={styleOverrides.comboboxInput} />
           </InputGroup>
           <Combobox.Menu.Popper>
             <Combobox.Menu.Card>
@@ -105,19 +131,8 @@ const GlobalHeaderItem = createComponent('div')({
 
 const GlobalHeader = createComponent('header')({
   displayName: 'GlobalHeader',
-  Component: (props, ref, Element) => <HeaderWrapper ref={ref} as={Element} {...props} />,
+  Component: (props, ref, Element) => (
+    <header className={styleOverrides.headerWrapper} ref={ref} {...props} />
+  ),
   subComponents: {Item: GlobalHeaderItem},
-});
-
-const HeaderWrapper = styled('header')({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  boxSizing: 'border-box',
-  ...type.levels.subtext.large,
-  WebkitFontSmoothing: 'antialiased',
-  MozOsxFontSmoothing: 'grayscale',
-  backgroundColor: colors.frenchVanilla100,
-  ...depth[1],
-  padding: space.xxs,
 });
