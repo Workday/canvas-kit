@@ -27,7 +27,7 @@ import {SystemIcon} from '@workday/canvas-kit-react/icon';
 
 interface HeaderItemProps extends FlexProps {}
 
-const tasks = ['Request Time Off', 'Create Expense Report'];
+const tasks = ['Request Time Off', 'Create Expense Report', 'Change Benefits'];
 
 const styleOverrides = {
   headerWrapper: createStyles({
@@ -75,6 +75,18 @@ const AutoCompleteInput = createSubcomponent(TextInput)({
 });
 
 export const Basic = () => {
+  const [searchText, setSearchText] = React.useState('');
+  const filteredTasks = tasks.filter(i => {
+    if (searchText.trim() === '' || typeof searchText !== 'string') {
+      return true;
+    }
+    return i.toLowerCase().includes(searchText.trim().toLowerCase());
+  });
+
+  function handleChange(e) {
+    setSearchText(e.target.value);
+  }
+
   return (
     <GlobalHeader>
       <GlobalHeader.Item>
@@ -95,11 +107,24 @@ export const Basic = () => {
             <InputGroup.InnerStart cs={styleOverrides.inputGroupInner}>
               <SystemIcon icon={searchIcon} />
             </InputGroup.InnerStart>
-            <InputGroup.Input as={AutoCompleteInput} cs={styleOverrides.comboboxInput} />
+            <InputGroup.Input
+              as={AutoCompleteInput}
+              cs={styleOverrides.comboboxInput}
+              onChange={handleChange}
+              value={searchText}
+            />
           </InputGroup>
           <Combobox.Menu.Popper>
             <Combobox.Menu.Card>
-              <StyledMenuItem as="span">No Results Found</StyledMenuItem>
+              {filteredTasks.length === 0 ? (
+                <StyledMenuItem as="span">No Results Found</StyledMenuItem>
+              ) : (
+                filteredTasks.map(i => (
+                  <Combobox.Menu.List cs={styleOverrides.comboboxMenuList}>
+                    <Combobox.Menu.Item key={i}>{i}</Combobox.Menu.Item>
+                  </Combobox.Menu.List>
+                ))
+              )}
             </Combobox.Menu.Card>
           </Combobox.Menu.Popper>
         </Combobox>
