@@ -87,9 +87,9 @@ describe('Breadcrumbs', () => {
         });
 
         it('should move focus to the next link', () => {
-          getAllBreadcrumbsLink(1).focus();
+          cy.findAllByRole('link').eq(1).focus();
           cy.tab();
-          getAllBreadcrumbsLink(2).should('have.focus');
+          cy.findAllByRole('link').eq(2).should('have.focus');
         });
       });
     });
@@ -250,7 +250,7 @@ describe('Breadcrumbs', () => {
 
       context('when the dropdown menu is toggled with a keypress', () => {
         it('should set focus to the first menu item', () => {
-          getDropdownMenuItem(0).should('have.focus');
+          cy.findByRole('menuitem', {name: 'Second Link'}).should('have.focus');
         });
       });
 
@@ -260,7 +260,7 @@ describe('Breadcrumbs', () => {
         });
 
         it('should toggle focus to the second menu item on down keypress', () => {
-          getDropdownMenuItem(1).should('have.focus');
+          cy.findByRole('menuitem', {name: 'Third Link'}).should('have.focus');
         });
       });
 
@@ -283,7 +283,7 @@ describe('Breadcrumbs', () => {
         });
 
         it('should toggle focus to the next menu item on down keypress', () => {
-          getDropdownMenuItem(1).should('have.focus');
+          cy.findByRole('menuitem', {name: 'Third Link'}).should('have.focus');
         });
       });
 
@@ -295,7 +295,7 @@ describe('Breadcrumbs', () => {
 
         it('should toggle focus to the previous list item', () => {
           cy.focused().realType('{uparrow}');
-          getDropdownMenuItem(0).should('have.focus');
+          cy.findByRole('menuitem', {name: 'Second Link'}).should('have.focus');
         });
 
         it('should return focus from the first menu item to the last', () => {
