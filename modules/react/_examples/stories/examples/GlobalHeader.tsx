@@ -131,7 +131,7 @@ export const Basic = () => {
           </Tooltip>
         </GlobalHeader.Item>
         <GlobalHeader.Item margin="auto" width="100%" maxWidth={`calc(${space.xxxl} * 6)`}>
-          <Autocomplete />
+          <Autocomplete aria-label="Search Workday" />
         </GlobalHeader.Item>
         <GlobalHeader.Item>
           <Tooltip title="Assistant">
@@ -173,7 +173,7 @@ const GlobalHeader = createComponent('header')({
 
 const Autocomplete = createComponent('div')({
   displayName: 'Autocomplete',
-  Component: () => {
+  Component: props => {
     const [searchText, setSearchText] = React.useState('');
     const filteredTasks = tasks.filter(i => {
       if (searchText.trim() === '' || typeof searchText !== 'string') {
@@ -197,6 +197,7 @@ const Autocomplete = createComponent('div')({
             cs={styleOverrides.comboboxInput}
             onChange={handleChange}
             value={searchText}
+            {...props}
           />
         </InputGroup>
         <Combobox.Menu.Popper>
