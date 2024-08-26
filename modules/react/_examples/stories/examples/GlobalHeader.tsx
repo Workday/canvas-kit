@@ -1,10 +1,13 @@
 import * as React from 'react';
 import {
+  AccessibleHide,
+  AriaLiveRegion,
   composeHooks,
   createComponent,
   createElemPropsHook,
   createSubcomponent,
   ExtractProps,
+  useUniqueId,
 } from '@workday/canvas-kit-react/common';
 import {colors, depth, space, type} from '@workday/canvas-kit-react/tokens';
 import {system} from '@workday/canvas-tokens-web';
@@ -28,6 +31,9 @@ import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {CountBadge} from '@workday/canvas-kit-react/badge';
 
 interface HeaderItemProps extends FlexProps {}
+interface LiveCountBadgeProps extends FlexProps {
+  cnt: number;
+}
 
 const tasks = ['Request Time Off', 'Create Expense Report', 'Change Benefits'];
 
@@ -60,6 +66,10 @@ const styleOverrides = {
   comboboxMenuList: createStyles({
     maxHeight: px2rem(200),
   }),
+  menuButtonStyles: createStyles({
+    textDecoration: 'none',
+    color: colors.blackPepper500,
+  }),
   notificationContainerStyles: createStyles({
     boxSizing: 'border-box',
     position: 'relative',
@@ -69,6 +79,10 @@ const styleOverrides = {
     position: 'absolute',
     top: negate(system.space.x1),
     insetInlineEnd: negate(system.space.x1),
+  }),
+  actionButtonStyles: createStyles({
+    gap: space.s,
+    margin: space.s,
   }),
 };
 
@@ -91,12 +105,22 @@ const AutoCompleteInput = createSubcomponent(TextInput)({
 });
 
 export const Basic = () => {
+  const [notifications, setNotifications] = React.useState(0);
+
+  function handleAdd() {
+    setNotifications(prev => prev + 1);
+  }
+
+  function handleClear() {
+    setNotifications(0);
+  }
+
   return (
     <>
       <GlobalHeader>
         <GlobalHeader.Item>
           <Tooltip title="Global Navigation" type="describe">
-            <TertiaryButton aria-label="menu" icon={justifyIcon}>
+            <TertiaryButton icon={justifyIcon} cs={styleOverrides.menuButtonStyles}>
               MENU
             </TertiaryButton>
           </Tooltip>
@@ -114,12 +138,7 @@ export const Basic = () => {
             <TertiaryButton icon={assistantIcon} />
           </Tooltip>
 
-          <span className={styleOverrides.notificationContainerStyles}>
-            <Tooltip title="Notifications">
-              <TertiaryButton icon={notificationsIcon} />
-            </Tooltip>
-            <CountBadge count={3} limit={100} cs={styleOverrides.countBadgeStyles} />
-          </span>
+          <NotificationLiveBadge cnt={notifications} />
 
           <Tooltip title="My Tasks">
             <TertiaryButton icon={inboxIcon} />
@@ -129,9 +148,9 @@ export const Basic = () => {
           </Tooltip>
         </GlobalHeader.Item>
       </GlobalHeader>
-      <Flex gap="s" margin="s">
-        <SecondaryButton>Add notification</SecondaryButton>
-        <TertiaryButton>Clear</TertiaryButton>
+      <Flex cs={styleOverrides.actionButtonStyles}>
+        <SecondaryButton onClick={handleAdd}>Add notification</SecondaryButton>
+        <TertiaryButton onClick={handleClear}>Clear</TertiaryButton>
       </Flex>
     </>
   );
@@ -194,6 +213,29 @@ const Autocomplete = createComponent('div')({
           </Combobox.Menu.Card>
         </Combobox.Menu.Popper>
       </Combobox>
+    );
+  },
+});
+
+const NotificationLiveBadge = createComponent('span')({
+  displayName: 'NotificationLiveBadge',
+  Component: ({cnt = 0, ...props}: LiveCountBadgeProps) => {
+    const btnId = useUniqueId();
+
+    return (
+      <Flex cs={styleOverrides.notificationContainerStyles}>
+        <Tooltip title="Notifications">
+          <TertiaryButton id={btnId} icon={notificationsIcon} {...props} />
+        </Tooltip>
+        <AriaLiveRegion aria-labelledby={btnId}>
+          {cnt > 0 && (
+            <>
+              <CountBadge count={cnt} limit={100} cs={styleOverrides.countBadgeStyles} />
+              <AccessibleHide>New</AccessibleHide>
+            </>
+          )}
+        </AriaLiveRegion>
+      </Flex>
     );
   },
 });
