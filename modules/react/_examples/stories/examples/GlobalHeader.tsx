@@ -26,7 +26,7 @@ import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {Combobox, useComboboxModel, useComboboxInput} from '@workday/canvas-kit-react/combobox';
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
-import {StyledMenuItem, MenuItemProps} from '@workday/canvas-kit-react/menu';
+import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {CountBadge} from '@workday/canvas-kit-react/badge';
 
@@ -165,7 +165,7 @@ const GlobalHeaderItem = createComponent('div')({
 
 const GlobalHeader = createComponent('header')({
   displayName: 'GlobalHeader',
-  Component: (props, ref, Element) => (
+  Component: (props, ref) => (
     <header className={styleOverrides.headerWrapper} ref={ref} {...props} />
   ),
   subComponents: {Item: GlobalHeaderItem},
@@ -173,7 +173,7 @@ const GlobalHeader = createComponent('header')({
 
 const Autocomplete = createComponent('div')({
   displayName: 'Autocomplete',
-  Component: (props, ref, Element) => {
+  Component: () => {
     const [searchText, setSearchText] = React.useState('');
     const filteredTasks = tasks.filter(i => {
       if (searchText.trim() === '' || typeof searchText !== 'string') {
