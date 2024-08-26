@@ -221,16 +221,27 @@ const NotificationLiveBadge = createComponent('span')({
   displayName: 'NotificationLiveBadge',
   Component: ({cnt = 0, ...props}: LiveCountBadgeProps) => {
     const btnId = useUniqueId();
+    const badgeId = useUniqueId();
 
     return (
       <Flex cs={styleOverrides.notificationContainerStyles}>
         <Tooltip title="Notifications">
-          <TertiaryButton id={btnId} icon={notificationsIcon} {...props} />
+          <TertiaryButton
+            id={btnId}
+            icon={notificationsIcon}
+            aria-describedby={cnt > 0 ? badgeId : undefined}
+            {...props}
+          />
         </Tooltip>
         <AriaLiveRegion aria-labelledby={btnId}>
           {cnt > 0 && (
             <>
-              <CountBadge count={cnt} limit={100} cs={styleOverrides.countBadgeStyles} />
+              <CountBadge
+                id={badgeId}
+                count={cnt}
+                limit={100}
+                cs={styleOverrides.countBadgeStyles}
+              />
               <AccessibleHide>New</AccessibleHide>
             </>
           )}
