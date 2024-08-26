@@ -549,6 +549,7 @@ describe('Tabs', () => {
         context('when the Tab key is pressed', () => {
           beforeEach(() => {
             cy.focused().tab();
+            cy.wait(0);
           });
 
           it('should focus on the "More" button', () => {
