@@ -593,6 +593,8 @@ describe('Tabs', () => {
 
       it('should pass axe checks', () => {
         cy.checkA11y('[role="tablist"]', {
+          // This to skip the check for required-children since the overflow button is not accepted
+          // as a child of a "tablist". This is an issue within "tablist".
           rules: {
             'aria-required-children': {enabled: false},
           },

@@ -115,11 +115,7 @@ describe('Select', () => {
 
             context('the menu', () => {
               it('should scroll so that the "San Francisco (United States)" option is fully visible', () => {
-                cy.findByText('San Francisco (United States)').should(
-                  'have.attr',
-                  'aria-selected',
-                  'true'
-                );
+                cy.findByText('San Francisco (United States)').should('have.class', 'focus');
               });
             });
           });
@@ -132,11 +128,7 @@ describe('Select', () => {
 
             context('the menu', () => {
               it('should scroll so that the "San Mateo (United States)" option is fully visible', () => {
-                cy.findByText('San Mateo (United States)').should(
-                  'have.attr',
-                  'aria-selected',
-                  'true'
-                );
+                cy.findByText('San Mateo (United States)').should('have.class', 'focus');
               });
             });
           });
@@ -149,11 +141,7 @@ describe('Select', () => {
 
             context('the menu', () => {
               it('should scroll so that the "Dallas (United States)" option is fully visible', () => {
-                cy.findByText('Dallas (United States)').should(
-                  'have.attr',
-                  'aria-selected',
-                  'true'
-                );
+                cy.findByText('Dallas (United States)').should('have.class', 'focus');
               });
             });
           });
@@ -170,11 +158,7 @@ describe('Select', () => {
 
             context('the menu', () => {
               it('should set assistive focus to the "San Francisco (United States)" option', () => {
-                cy.findByText('San Francisco (United States)').should(
-                  'have.attr',
-                  'aria-selected',
-                  'true'
-                );
+                cy.findByText('San Francisco (United States)').should('have.class', 'focus');
               });
             });
           });
@@ -186,11 +170,7 @@ describe('Select', () => {
 
             context('the select input', () => {
               it('should set assistive focus to the "San Francisco (United States)" option', () => {
-                cy.findByText('San Francisco (United States)').should(
-                  'have.attr',
-                  'aria-selected',
-                  'true'
-                );
+                cy.findByText('San Francisco (United States)').should('have.class', 'focus');
               });
             });
           });
@@ -203,11 +183,7 @@ describe('Select', () => {
 
             context('the select input', () => {
               it('should set assistive focus to the "San Mateo (United States)" option', () => {
-                cy.findByText('San Mateo (United States)').should(
-                  'have.attr',
-                  'aria-selected',
-                  'true'
-                );
+                cy.findByText('San Mateo (United States)').should('have.class', 'focus');
               });
             });
           });
@@ -225,7 +201,7 @@ describe('Select', () => {
 
           context('the menu', () => {
             it('should scroll so that the "Dallas (United States)" option is centered in view', () => {
-              cy.findByText('Dallas (United States)').should('have.attr', 'aria-selected', 'true');
+              cy.findByText('Dallas (United States)').should('have.class', 'focus');
             });
           });
         });
@@ -261,7 +237,7 @@ describe('Select', () => {
 
       context('the menu', () => {
         it('should set assistive focus to the first option ("E-mail")', () => {
-          cy.findAllByRole('option').eq(0).should('have.attr', 'aria-selected', 'true');
+          cy.findAllByRole('option').eq(0).should('have.class', 'focus');
         });
       });
 
@@ -272,7 +248,7 @@ describe('Select', () => {
 
         context('the menu', () => {
           it('should set assistive focus to the second option ("Phone")', () => {
-            cy.findAllByRole('option').eq(1).should('have.attr', 'aria-selected', 'true');
+            cy.findAllByRole('option').eq(1).should('have.class', 'focus');
           });
         });
 
@@ -298,7 +274,7 @@ describe('Select', () => {
 
               context('the menu', () => {
                 it('should set assistive focus to the second option ("Phone") that is where the cursor was', () => {
-                  cy.findAllByRole('option').eq(1).should('have.attr', 'aria-selected', 'true');
+                  cy.findAllByRole('option').eq(1).should('have.class', 'focus');
                 });
               });
             });
@@ -331,7 +307,7 @@ describe('Select', () => {
 
         context('the menu', () => {
           it('should set assistive focus to second enabled option ("Phone")', () => {
-            cy.findAllByRole('option').eq(1).should('have.attr', 'aria-selected', 'true');
+            cy.findAllByRole('option').eq(1).should('have.class', 'focus');
           });
         });
 
@@ -342,7 +318,7 @@ describe('Select', () => {
 
           context('the menu', () => {
             it('should set assistive focus to the fourth option down ("Mail") since focus will have skipped one disabled option ("Fax")', () => {
-              cy.findAllByRole('option').eq(3).should('have.attr', 'aria-selected', 'true');
+              cy.findAllByRole('option').eq(3).should('have.class', 'focus');
             });
           });
         });
@@ -404,7 +380,7 @@ describe('Select', () => {
       });
       context('when Boulder is reached via the arrow key', () => {
         it('should show Boulder (United States)', () => {
-          cy.findByText('Boulder (United States)').should('have.attr', 'aria-selected', 'true');
+          cy.findByText('Boulder (United States)').should('have.class', 'focus');
           cy.findByText('Boulder (United States)').should('be.visible');
         });
       });
@@ -457,7 +433,7 @@ describe('Select', () => {
 
       context('the first option ("E-Mail")', () => {
         it('should have an aria-selected attribute set to "true"', () => {
-          cy.findAllByRole('option').eq(0).should('have.attr', 'aria-selected', 'true');
+          cy.findAllByRole('option').eq(0).should('have.class', 'focus');
         });
       });
 
@@ -490,7 +466,7 @@ describe('Select', () => {
 
           context('the menu', () => {
             it('should set assistive focus to the "Phone" option', () => {
-              cy.findByText('Phone').should('have.attr', 'aria-selected', 'true');
+              cy.findByText('Phone').should('have.class', 'focus');
             });
           });
         });
@@ -521,7 +497,7 @@ describe('Select', () => {
 
         context('the menu', () => {
           it('should set assistive focus to the "Phone" option', () => {
-            cy.findAllByRole('option').eq(1).should('have.attr', 'aria-selected', 'true');
+            cy.findAllByRole('option').eq(1).should('have.class', 'focus');
           });
         });
 
@@ -532,7 +508,7 @@ describe('Select', () => {
 
           context('the menu', () => {
             it('should set assistive focus to the "Mail" option and skip disabled fax', () => {
-              cy.findAllByRole('option').eq(3).should('have.attr', 'aria-selected', 'true');
+              cy.findAllByRole('option').eq(3).should('have.class', 'focus');
             });
           });
         });
@@ -550,7 +526,8 @@ describe('Select', () => {
         });
 
         it('should have E-Mail selected', () => {
-          cy.findAllByRole('option').eq(0).should('have.attr', 'aria-selected', 'true');
+          cy.wait(150);
+          cy.findAllByRole('option').eq(0).should('have.class', 'focus');
         });
       });
 
