@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {fireEvent, render} from '@testing-library/react';
+import {fireEvent, render, screen} from '@testing-library/react';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {ColorPicker, ColorPickerProps} from '@workday/canvas-kit-preview-react/color-picker';
 
@@ -85,6 +85,19 @@ describe('Color Picker', () => {
         fireEvent.click(reset);
         expect(onColorReset).toHaveBeenCalled();
       });
+    });
+  });
+  describe('accessibility', () => {
+    it('should have correct aria attributes', () => {
+      renderColorPicker({value: colors.blueberry400});
+      const swatchCinnamon = screen.getByRole('button', {name: /cinnamon200/});
+      const swatchBlueberry = screen.getByRole('button', {name: /blueberry400/});
+
+      expect(swatchCinnamon.getAttribute('aria-label')).toBe('cinnamon200');
+      expect(swatchBlueberry.getAttribute('aria-label')).toBe('blueberry400');
+
+      expect(swatchCinnamon).toHaveAttribute('aria-selected', 'false');
+      expect(swatchBlueberry).toHaveAttribute('aria-selected', 'true');
     });
   });
 });
