@@ -7,7 +7,8 @@ import {
   ExtractProps,
 } from '@workday/canvas-kit-react/common';
 import {colors, depth, space, type} from '@workday/canvas-kit-react/tokens';
-import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+import {createStyles, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {
   notificationsIcon,
   inboxIcon,
@@ -16,7 +17,7 @@ import {
   searchIcon,
 } from '@workday/canvas-system-icons-web';
 
-import {TertiaryButton} from '@workday/canvas-kit-react/button';
+import {SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
@@ -24,10 +25,15 @@ import {Combobox, useComboboxModel, useComboboxInput} from '@workday/canvas-kit-
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
 import {StyledMenuItem, MenuItemProps} from '@workday/canvas-kit-react/menu';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {CountBadge} from '@workday/canvas-kit-react/badge';
 
 interface HeaderItemProps extends FlexProps {}
 
 const tasks = ['Request Time Off', 'Create Expense Report', 'Change Benefits'];
+
+function negate(value: string, fallback?: string) {
+  return `calc(${cssVar(value, fallback)} * -1)`;
+}
 
 const styleOverrides = {
   headerWrapper: createStyles({
@@ -54,6 +60,16 @@ const styleOverrides = {
   comboboxMenuList: createStyles({
     maxHeight: px2rem(200),
   }),
+  notificationContainerStyles: createStyles({
+    boxSizing: 'border-box',
+    position: 'relative',
+  }),
+  countBadgeStyles: createStyles({
+    boxSizing: 'border-box',
+    position: 'absolute',
+    top: negate(system.space.x1),
+    insetInlineEnd: negate(system.space.x1),
+  }),
 };
 
 const useAutocompleteInput = composeHooks(
@@ -75,75 +91,49 @@ const AutoCompleteInput = createSubcomponent(TextInput)({
 });
 
 export const Basic = () => {
-  const [searchText, setSearchText] = React.useState('');
-  const filteredTasks = tasks.filter(i => {
-    if (searchText.trim() === '' || typeof searchText !== 'string') {
-      return true;
-    }
-    return i.toLowerCase().includes(searchText.trim().toLowerCase());
-  });
-
-  function handleChange(e) {
-    setSearchText(e.target.value);
-  }
-
   return (
-    <GlobalHeader>
-      <GlobalHeader.Item>
-        <Tooltip title="Global Navigation" type="describe">
-          <TertiaryButton aria-label="menu" icon={justifyIcon}>
-            MENU
-          </TertiaryButton>
-        </Tooltip>
-        <Tooltip title="Workday Home">
-          <TertiaryButton>
-            <img src="https://design.workday.com/images/ck-dub-logo-blue.svg" alt="" />
-          </TertiaryButton>
-        </Tooltip>
-      </GlobalHeader.Item>
-      <GlobalHeader.Item margin="auto" width="100%" maxWidth={`calc(${space.xxxl} * 6)`}>
-        <Combobox>
-          <InputGroup>
-            <InputGroup.InnerStart cs={styleOverrides.inputGroupInner}>
-              <SystemIcon icon={searchIcon} />
-            </InputGroup.InnerStart>
-            <InputGroup.Input
-              as={AutoCompleteInput}
-              cs={styleOverrides.comboboxInput}
-              onChange={handleChange}
-              value={searchText}
-            />
-          </InputGroup>
-          <Combobox.Menu.Popper>
-            <Combobox.Menu.Card>
-              {filteredTasks.length === 0 ? (
-                <StyledMenuItem as="span">No Results Found</StyledMenuItem>
-              ) : (
-                filteredTasks.map(i => (
-                  <Combobox.Menu.List cs={styleOverrides.comboboxMenuList}>
-                    <Combobox.Menu.Item key={i}>{i}</Combobox.Menu.Item>
-                  </Combobox.Menu.List>
-                ))
-              )}
-            </Combobox.Menu.Card>
-          </Combobox.Menu.Popper>
-        </Combobox>
-      </GlobalHeader.Item>
-      <GlobalHeader.Item>
-        <Tooltip title="Assistant">
-          <TertiaryButton icon={assistantIcon} />
-        </Tooltip>
-        <Tooltip title="Notifications">
-          <TertiaryButton icon={notificationsIcon} />
-        </Tooltip>
-        <Tooltip title="My Tasks">
-          <TertiaryButton icon={inboxIcon} />
-        </Tooltip>
-        <Tooltip title="Profile">
-          <Avatar />
-        </Tooltip>
-      </GlobalHeader.Item>
-    </GlobalHeader>
+    <>
+      <GlobalHeader>
+        <GlobalHeader.Item>
+          <Tooltip title="Global Navigation" type="describe">
+            <TertiaryButton aria-label="menu" icon={justifyIcon}>
+              MENU
+            </TertiaryButton>
+          </Tooltip>
+          <Tooltip title="Workday Home">
+            <TertiaryButton>
+              <img src="https://design.workday.com/images/ck-dub-logo-blue.svg" alt="" />
+            </TertiaryButton>
+          </Tooltip>
+        </GlobalHeader.Item>
+        <GlobalHeader.Item margin="auto" width="100%" maxWidth={`calc(${space.xxxl} * 6)`}>
+          <Autocomplete />
+        </GlobalHeader.Item>
+        <GlobalHeader.Item>
+          <Tooltip title="Assistant">
+            <TertiaryButton icon={assistantIcon} />
+          </Tooltip>
+
+          <span className={styleOverrides.notificationContainerStyles}>
+            <Tooltip title="Notifications">
+              <TertiaryButton icon={notificationsIcon} />
+            </Tooltip>
+            <CountBadge count={3} limit={100} cs={styleOverrides.countBadgeStyles} />
+          </span>
+
+          <Tooltip title="My Tasks">
+            <TertiaryButton icon={inboxIcon} />
+          </Tooltip>
+          <Tooltip title="Profile">
+            <Avatar />
+          </Tooltip>
+        </GlobalHeader.Item>
+      </GlobalHeader>
+      <Flex gap="s" margin="s">
+        <SecondaryButton>Add notification</SecondaryButton>
+        <TertiaryButton>Clear</TertiaryButton>
+      </Flex>
+    </>
   );
 };
 
@@ -160,4 +150,50 @@ const GlobalHeader = createComponent('header')({
     <header className={styleOverrides.headerWrapper} ref={ref} {...props} />
   ),
   subComponents: {Item: GlobalHeaderItem},
+});
+
+const Autocomplete = createComponent('div')({
+  displayName: 'Autocomplete',
+  Component: (props, ref, Element) => {
+    const [searchText, setSearchText] = React.useState('');
+    const filteredTasks = tasks.filter(i => {
+      if (searchText.trim() === '' || typeof searchText !== 'string') {
+        return true;
+      }
+      return i.toLowerCase().includes(searchText.trim().toLowerCase());
+    });
+
+    function handleChange(e) {
+      setSearchText(e.target.value);
+    }
+
+    return (
+      <Combobox>
+        <InputGroup>
+          <InputGroup.InnerStart cs={styleOverrides.inputGroupInner}>
+            <SystemIcon icon={searchIcon} />
+          </InputGroup.InnerStart>
+          <InputGroup.Input
+            as={AutoCompleteInput}
+            cs={styleOverrides.comboboxInput}
+            onChange={handleChange}
+            value={searchText}
+          />
+        </InputGroup>
+        <Combobox.Menu.Popper>
+          <Combobox.Menu.Card>
+            {filteredTasks.length === 0 ? (
+              <StyledMenuItem as="span">No Results Found</StyledMenuItem>
+            ) : (
+              filteredTasks.map(i => (
+                <Combobox.Menu.List cs={styleOverrides.comboboxMenuList}>
+                  <Combobox.Menu.Item key={i}>{i}</Combobox.Menu.Item>
+                </Combobox.Menu.List>
+              ))
+            )}
+          </Combobox.Menu.Card>
+        </Combobox.Menu.Popper>
+      </Combobox>
+    );
+  },
 });
