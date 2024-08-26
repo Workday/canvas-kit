@@ -13,10 +13,23 @@ export function getColor(value?: CanvasColor | string) {
   return value;
 }
 
+/**
+ * The function takes in a hex color value and returns its corresponding CanvasColor enum value.
+ * @param value a hex color value
+ * @returns the CanvasColor enum value
+ */
+
+export function getColorLabel(value: string) {
+  if (value in colorMap) {
+    return colorMap[value];
+  }
+  return value;
+}
+
 // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
 export const expandHex = (hex: string) => {
   const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-  return hex.replace(shorthandRegex, function(m: string, r: string, g: string, b: string) {
+  return hex.replace(shorthandRegex, function (m: string, r: string, g: string, b: string) {
     return r + r + g + g + b + b;
   });
 };
@@ -61,3 +74,9 @@ export const pickForegroundColor = (
   }
   return;
 };
+
+// A map of color hex values to color names
+const colorMap: {[key: string]: string} = Object.entries(colors).reduce((map, [key, value]) => {
+  map[`${value}` as string] = key;
+  return map;
+}, {} as {[key: string]: string});
