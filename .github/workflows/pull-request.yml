@@ -96,13 +96,13 @@ jobs:
         containers: [1, 2, 3, 4]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0 # Required to retrieve git history
 
       - uses: Workday/canvas-kit-actions/install@v1
         with:
-          node_version: 16.x
+          node_version: 20.x
 
       - name: Restore Build
         uses: actions/cache@v3
