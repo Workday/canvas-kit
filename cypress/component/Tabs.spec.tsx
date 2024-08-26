@@ -4,7 +4,7 @@ import {NamedTabs} from '../../modules/react/tabs/stories/examples/NamedTabs';
 import {DisabledTab} from '../../modules/react/tabs/stories/examples/DisabledTab';
 import {DynamicTabs} from '../../modules/react/tabs/stories/examples/DynamicTabs';
 import {RightToLeft} from '../../modules/react/tabs/stories/examples/RightToLeft';
-import {OverflowTabs} from '../../modules/react/tabs/stories/examples/OverflowTabs';
+// import {OverflowTabs} from '../../modules/react/tabs/stories/examples/OverflowTabs';
 
 describe('Tabs', () => {
   [Basic, NamedTabs].forEach(Example => {

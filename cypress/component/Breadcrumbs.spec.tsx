@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Basic} from '../../modules/react/breadcrumbs/stories/examples/Basic';
-import {OverflowBreadcrumbs} from '../../modules/react/breadcrumbs/stories/examples/Overflow';
+// import {OverflowBreadcrumbs} from '../../modules/react/breadcrumbs/stories/examples/Overflow';
 
 function getBreadcrumbsNav() {
   return cy.findByRole('navigation');
@@ -14,23 +14,23 @@ function getAllBreadcrumbsLink(number?: number) {
   return number ? cy.findAllByRole('link').eq(number) : cy.findAllByRole('link');
 }
 
-function getDropdownButton() {
-  return cy.findByLabelText('More links');
-}
+// function getDropdownButton() {
+//   return cy.findByLabelText('More links');
+// }
 
-function getDropdownMenu() {
-  return cy.findByRole('menu');
-}
+// function getDropdownMenu() {
+//   return cy.findByRole('menu');
+// }
 
-function getDropdownMenuItem(number?: number) {
-  return number ? cy.findAllByRole('menuitem').eq(number) : cy.findAllByRole('menuitem');
-}
+// function getDropdownMenuItem(number?: number) {
+//   return number ? cy.findAllByRole('menuitem').eq(number) : cy.findAllByRole('menuitem');
+// }
 
-function openDropdownMenu() {
-  const dropdownButton = getDropdownButton();
-  dropdownButton.focus();
-  dropdownButton.realType('{enter}');
-}
+// function openDropdownMenu() {
+//   const dropdownButton = getDropdownButton();
+//   dropdownButton.focus();
+//   dropdownButton.realType('{enter}');
+// }
 
 describe('Breadcrumbs', () => {
   context('given the [Components/Navigation/Breadcrumbs, Basic] example is rendered', () => {
