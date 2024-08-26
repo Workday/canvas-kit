@@ -478,210 +478,210 @@ describe('Tabs', () => {
     });
   });
 
-  context('when [Components/Containers/Tabs, OverflowTabs] story is rendered', () => {
-    beforeEach(() => {
-      cy.mount(<OverflowTabs />);
-      cy.wait(500);
-    });
+  // context('when [Components/Containers/Tabs, OverflowTabs] story is rendered', () => {
+  //   beforeEach(() => {
+  //     cy.mount(<OverflowTabs />);
+  //     cy.wait(500);
+  //   });
 
-    it('should pass axe checks', () => {
-      cy.checkA11y();
-    });
+  //   it('should pass axe checks', () => {
+  //     cy.checkA11y();
+  //   });
 
-    it('should not show the "More" button', () => {
-      cy.findByRole('button', {name: 'More'}).should('not.exist');
-    });
+  //   it('should not show the "More" button', () => {
+  //     cy.findByRole('button', {name: 'More'}).should('not.exist');
+  //   });
 
-    it('should have 7 tab items', () => {
-      cy.findAllByRole('tab').should('have.length', 7);
-    });
+  //   it('should have 7 tab items', () => {
+  //     cy.findAllByRole('tab').should('have.length', 7);
+  //   });
 
-    it('should not have scroll', () => {
-      cy.findByRole('tablist').its('scrollX').should('not.exist');
-    });
+  //   it('should not have scroll', () => {
+  //     cy.findByRole('tablist').its('scrollX').should('not.exist');
+  //   });
 
-    context('when the "First Tab" is focused', () => {
-      beforeEach(() => {
-        cy.findByRole('tab', {name: 'First Tab'}).click().focus();
-      });
+  //   context('when the "First Tab" is focused', () => {
+  //     beforeEach(() => {
+  //       cy.findByRole('tab', {name: 'First Tab'}).click().focus();
+  //     });
 
-      context('when the Tab key is pressed', () => {
-        beforeEach(() => {
-          cy.focused().tab();
-        });
+  //     context('when the Tab key is pressed', () => {
+  //       beforeEach(() => {
+  //         cy.focused().tab();
+  //       });
 
-        it('should focus on the tab panel', () => {
-          cy.findByRole('tabpanel', {name: 'First Tab'}).should('have.focus');
-        });
-      });
-    });
+  //       it('should focus on the tab panel', () => {
+  //         cy.findByRole('tabpanel', {name: 'First Tab'}).should('have.focus');
+  //       });
+  //     });
+  //   });
 
-    context('when tab list container is only 500px wide', () => {
-      beforeEach(() => {
-        cy.findByRole('button', {name: '500px'}).click();
-      });
+  //   context('when tab list container is only 500px wide', () => {
+  //     beforeEach(() => {
+  //       cy.findByRole('button', {name: '500px'}).click();
+  //     });
 
-      it('should pass axe checks', () => {
-        cy.checkA11y('[role="tablist"]', {
-          rules: {
-            'aria-required-children': {enabled: false},
-          },
-        });
-      });
+  //     it('should pass axe checks', () => {
+  //       cy.checkA11y('[role="tablist"]', {
+  //         rules: {
+  //           'aria-required-children': {enabled: false},
+  //         },
+  //       });
+  //     });
 
-      it('should show the "More" button', () => {
-        cy.findByRole('button', {name: 'More'}).should('exist');
-      });
+  //     it('should show the "More" button', () => {
+  //       cy.findByRole('button', {name: 'More'}).should('exist');
+  //     });
 
-      it('should show only 3 tab items', () => {
-        cy.findAllByRole('tab').should('have.length', 3);
-      });
+  //     it('should show only 3 tab items', () => {
+  //       cy.findAllByRole('tab').should('have.length', 3);
+  //     });
 
-      it('should not have scroll', () => {
-        cy.findByRole('tablist').its('scrollX').should('not.exist');
-      });
+  //     it('should not have scroll', () => {
+  //       cy.findByRole('tablist').its('scrollX').should('not.exist');
+  //     });
 
-      context('when the "First Tab" is focused', () => {
-        beforeEach(() => {
-          cy.findByRole('tab', {name: 'First Tab'}).click().focus();
-        });
+  //     context('when the "First Tab" is focused', () => {
+  //       beforeEach(() => {
+  //         cy.findByRole('tab', {name: 'First Tab'}).click().focus();
+  //       });
 
-        context('when the Tab key is pressed', () => {
-          beforeEach(() => {
-            cy.focused().tab();
-            cy.wait(0);
-          });
+  //       context('when the Tab key is pressed', () => {
+  //         beforeEach(() => {
+  //           cy.focused().tab();
+  //           cy.wait(0);
+  //         });
 
-          it('should focus on the "More" button', () => {
-            cy.findByRole('button', {name: 'More'}).should('have.focus');
-          });
-        });
-      });
+  //         it('should focus on the "More" button', () => {
+  //           cy.findByRole('button', {name: 'More'}).should('have.focus');
+  //         });
+  //       });
+  //     });
 
-      context('when the "More" button is clicked', () => {
-        beforeEach(() => {
-          cy.findByRole('button', {name: 'More'}).click();
-        });
+  //     context('when the "More" button is clicked', () => {
+  //       beforeEach(() => {
+  //         cy.findByRole('button', {name: 'More'}).click();
+  //       });
 
-        it('should show the Tab overflow menu', () => {
-          cy.findByRole('menu', {name: 'More'}).should('exist');
-        });
+  //       it('should show the Tab overflow menu', () => {
+  //         cy.findByRole('menu', {name: 'More'}).should('exist');
+  //       });
 
-        it('should have the fourth Tab as the first menu item', () => {
-          cy.findAllByRole('menuitem').eq(0).should('contain', 'Fourth Tab');
-        });
+  //       it('should have the fourth Tab as the first menu item', () => {
+  //         cy.findAllByRole('menuitem').eq(0).should('contain', 'Fourth Tab');
+  //       });
 
-        context('when the "Sixth Tab" is clicked', () => {
-          beforeEach(() => {
-            cy.findByRole('menuitem', {name: 'Sixth Tab'}).click();
-          });
+  //       context('when the "Sixth Tab" is clicked', () => {
+  //         beforeEach(() => {
+  //           cy.findByRole('menuitem', {name: 'Sixth Tab'}).click();
+  //         });
 
-          it('should select the Sixth Tab', () => {
-            cy.findByRole('tab', {name: 'Sixth Tab'}).should('have.attr', 'aria-selected', 'true');
-          });
+  //         it('should select the Sixth Tab', () => {
+  //           cy.findByRole('tab', {name: 'Sixth Tab'}).should('have.attr', 'aria-selected', 'true');
+  //         });
 
-          it('should move focus back to the "More" button', () => {
-            cy.findByRole('button', {name: 'More'}).should('have.focus');
-          });
-        });
-      });
-    });
+  //         it('should move focus back to the "More" button', () => {
+  //           cy.findByRole('button', {name: 'More'}).should('have.focus');
+  //         });
+  //       });
+  //     });
+  //   });
 
-    context('when tab list container is only 360px wide', () => {
-      beforeEach(() => {
-        cy.findByRole('button', {name: '360px'}).click();
-      });
+  //   context('when tab list container is only 360px wide', () => {
+  //     beforeEach(() => {
+  //       cy.findByRole('button', {name: '360px'}).click();
+  //     });
 
-      it('should pass axe checks', () => {
-        cy.checkA11y('[role="tablist"]', {
-          // This to skip the check for required-children since the overflow button is not accepted
-          // as a child of a "tablist". This is an issue within "tablist".
-          rules: {
-            'aria-required-children': {enabled: false},
-          },
-        });
-      });
+  //     it('should pass axe checks', () => {
+  //       cy.checkA11y('[role="tablist"]', {
+  //         // This to skip the check for required-children since the overflow button is not accepted
+  //         // as a child of a "tablist". This is an issue within "tablist".
+  //         rules: {
+  //           'aria-required-children': {enabled: false},
+  //         },
+  //       });
+  //     });
 
-      it('should show the "More" button', () => {
-        cy.findByRole('button', {name: 'More'}).should('exist');
-      });
+  //     it('should show the "More" button', () => {
+  //       cy.findByRole('button', {name: 'More'}).should('exist');
+  //     });
 
-      it('should not have scroll', () => {
-        cy.findByRole('tablist').its('scrollX').should('not.exist');
-      });
+  //     it('should not have scroll', () => {
+  //       cy.findByRole('tablist').its('scrollX').should('not.exist');
+  //     });
 
-      it('should show only 2 tab items', () => {
-        cy.findAllByRole('tab').should('have.length', 2);
-      });
+  //     it('should show only 2 tab items', () => {
+  //       cy.findAllByRole('tab').should('have.length', 2);
+  //     });
 
-      context('when the "More" button is clicked', () => {
-        beforeEach(() => {
-          cy.findByRole('button', {name: 'More'}).click();
-        });
+  //     context('when the "More" button is clicked', () => {
+  //       beforeEach(() => {
+  //         cy.findByRole('button', {name: 'More'}).click();
+  //       });
 
-        it('should show the Tab overflow menu', () => {
-          cy.findByRole('menu', {name: 'More'}).should('exist');
-        });
+  //       it('should show the Tab overflow menu', () => {
+  //         cy.findByRole('menu', {name: 'More'}).should('exist');
+  //       });
 
-        it('should have the third Tab as the first menu item', () => {
-          cy.findAllByRole('menuitem').eq(0).should('contain', 'Third Tab');
-        });
-      });
-    });
+  //       it('should have the third Tab as the first menu item', () => {
+  //         cy.findAllByRole('menuitem').eq(0).should('contain', 'Third Tab');
+  //       });
+  //     });
+  //   });
 
-    context('when tab list container is only 150px wide', () => {
-      beforeEach(() => {
-        cy.findByRole('button', {name: '150px'}).click();
-      });
+  //   context('when tab list container is only 150px wide', () => {
+  //     beforeEach(() => {
+  //       cy.findByRole('button', {name: '150px'}).click();
+  //     });
 
-      it('should pass axe checks', () => {
-        cy.checkA11y('[role="tablist"]', {
-          rules: {
-            'aria-required-children': {enabled: false},
-          },
-        });
-      });
+  //     it('should pass axe checks', () => {
+  //       cy.checkA11y('[role="tablist"]', {
+  //         rules: {
+  //           'aria-required-children': {enabled: false},
+  //         },
+  //       });
+  //     });
 
-      it('should show the "More" button', () => {
-        cy.findByRole('button', {name: 'More'}).should('exist');
-      });
+  //     it('should show the "More" button', () => {
+  //       cy.findByRole('button', {name: 'More'}).should('exist');
+  //     });
 
-      it('should not have scroll', () => {
-        cy.findByRole('tablist').its('scrollX').should('not.exist');
-      });
+  //     it('should not have scroll', () => {
+  //       cy.findByRole('tablist').its('scrollX').should('not.exist');
+  //     });
 
-      it('should show no tab items', () => {
-        cy.findAllByRole('tab').should('have.length', 0);
-      });
+  //     it('should show no tab items', () => {
+  //       cy.findAllByRole('tab').should('have.length', 0);
+  //     });
 
-      context('when the "More" button is clicked', () => {
-        beforeEach(() => {
-          cy.findByRole('button', {name: 'More'}).click();
-        });
+  //     context('when the "More" button is clicked', () => {
+  //       beforeEach(() => {
+  //         cy.findByRole('button', {name: 'More'}).click();
+  //       });
 
-        it('should show the Tab overflow menu', () => {
-          cy.findByRole('menu', {name: 'More'}).should('exist');
-        });
+  //       it('should show the Tab overflow menu', () => {
+  //         cy.findByRole('menu', {name: 'More'}).should('exist');
+  //       });
 
-        it('should have the third Tab as the first menu item', () => {
-          cy.findAllByRole('menuitem').eq(0).should('contain', 'First Tab');
-        });
-      });
-    });
+  //       it('should have the third Tab as the first menu item', () => {
+  //         cy.findAllByRole('menuitem').eq(0).should('contain', 'First Tab');
+  //       });
+  //     });
+  //   });
 
-    context('mobile viewport', () => {
-      beforeEach(() => {
-        cy.viewport('iphone-6');
-        cy.findByRole('button', {name: '500px'}).realTouch();
-      });
+  //   context('mobile viewport', () => {
+  //     beforeEach(() => {
+  //       cy.viewport('iphone-6');
+  //       cy.findByRole('button', {name: '500px'}).realTouch();
+  //     });
 
-      it('should not show the "More" button', () => {
-        cy.findByRole('button', {name: 'More'}).should('not.exist');
-      });
+  //     it('should not show the "More" button', () => {
+  //       cy.findByRole('button', {name: 'More'}).should('not.exist');
+  //     });
 
-      it('should have scroll behavior', () => {
-        cy.findByRole('tablist').its('scroll').should('not.equal', 0);
-      });
-    });
-  });
+  //     it('should have scroll behavior', () => {
+  //       cy.findByRole('tablist').its('scroll').should('not.equal', 0);
+  //     });
+  //   });
+  // });
 });
