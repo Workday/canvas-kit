@@ -1,10 +1,5 @@
 import * as React from 'react';
-import {
-  composeHooks,
-  createSubcomponent,
-  createElemPropsHook,
-  useIsRTL,
-} from '@workday/canvas-kit-react/common';
+import {composeHooks, createSubcomponent, useIsRTL} from '@workday/canvas-kit-react/common';
 import {
   useListItemRegister,
   useOverflowListItemMeasure,
