@@ -3,9 +3,14 @@ import {
   withDefaultContext,
   transform,
 } from '@workday/canvas-kit-styling-transform/testing';
+import {_reset} from '../../lib/styleTransform';
 import {compileCSS} from '../../lib/utils/createStyleObjectNode';
 
 describe('handleInjectGlobal', () => {
+  beforeEach(() => {
+    _reset();
+  });
+
   it('should transform an object using injectGlobal', () => {
     const program = createProgramFromSource(`
       import {injectGlobal} from '@workday/canvas-kit-styling';

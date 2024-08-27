@@ -17,7 +17,7 @@ import ts from 'typescript';
 export function getVarName(node: ts.Node, parts: string[] = []): string {
   // base case. Join all the parts
   if (!node.parent || node.kind === ts.SyntaxKind.VariableStatement) {
-    return parts.join('-');
+    return parts.join('.');
   }
 
   // Any node with a `name` property that is an identifier can add to the var name

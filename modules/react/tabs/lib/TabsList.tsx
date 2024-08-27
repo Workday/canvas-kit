@@ -9,6 +9,7 @@ import {
   useModalityType,
   styled,
   StyledType,
+  filterOutProps,
 } from '@workday/canvas-kit-react/common';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {
@@ -45,7 +46,9 @@ export const useTabsList = composeHooks(
   useListResetCursorOnBlur
 );
 
-const StyledStack = styled(Flex)<StyledType & {maskImage?: string}>(({maskImage}) => ({
+const StyledStack = styled(Flex, {
+  shouldForwardProp: filterOutProps(['maskImage']),
+})<StyledType & {maskImage?: string}>(({maskImage}) => ({
   maskImage: maskImage,
 }));
 
@@ -84,7 +87,7 @@ export const useTouchDirection = () => {
 
   React.useEffect(() => {
     let prevXPos = window.pageXOffset;
-    const handleTouchMove = function(e: TouchEvent) {
+    const handleTouchMove = function (e: TouchEvent) {
       const currXPos = e.touches[0].clientX;
       setIsDragging(true);
       if (currXPos > prevXPos) {
@@ -95,7 +98,7 @@ export const useTouchDirection = () => {
       prevXPos = currXPos;
       e.preventDefault();
     };
-    const handleDragEnd = function() {
+    const handleDragEnd = function () {
       setIsDragging(false);
     };
     window.addEventListener('touchmove', handleTouchMove);

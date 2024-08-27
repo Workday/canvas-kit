@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {Dialog} from '@workday/canvas-kit-react/dialog';
@@ -23,8 +23,9 @@ export const Basic = () => {
           <Dialog.CloseIcon aria-label="Close" />
           <Dialog.Heading paddingTop="m">Sign Up for 15% Off Your Next Order</Dialog.Heading>
           <Dialog.Body>
-            <FormField label="Email">
-              <TextInput onChange={handleChange} value={value} />
+            <FormField>
+              <FormField.Label>Email</FormField.Label>
+              <FormField.Input as={TextInput} onChange={handleChange} value={value} />
             </FormField>
           </Dialog.Body>
           <Flex gap="s" padding="xxs" marginTop="xxs">

@@ -1,7 +1,12 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {Select} from '@workday/canvas-kit-react/select';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {createStyles} from '@workday/canvas-kit-styling';
+
+const parentContainerStyles = createStyles({
+  flexDirection: 'column',
+});
 
 const options = [
   'E-mail',
@@ -20,17 +25,18 @@ export const Required = () => {
   };
 
   return (
-    <Flex flexDirection="column">
-      <Select items={options}>
-        <FormField label="Contact" required>
-          <Select.Input onChange={e => handleChange(e)} />
+    <Flex cs={parentContainerStyles}>
+      <FormField isRequired>
+        <Select items={options}>
+          <FormField.Label>Contact</FormField.Label>
+          <FormField.Input as={Select.Input} onChange={e => handleChange(e)} />
           <Select.Popper>
             <Select.Card>
               <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
             </Select.Card>
           </Select.Popper>
-        </FormField>
-      </Select>
+        </Select>
+      </FormField>
       Selected Value: {value}
     </Flex>
   );
