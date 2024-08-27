@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.57](https://github.com/Workday/canvas-kit/releases/tag/v10.3.57) (2024-08-27)
+
+### Components
+
+- fix: Make overflow items inert ([#2886](https://github.com/Workday/canvas-kit/pull/2886)) ([@NicholasBoll](https://github.com/NicholasBoll), manuel.carrera)
+
+
 ## [v10.3.56](https://github.com/Workday/canvas-kit/releases/tag/v10.3.56) (2024-08-27)
 
 ### Infrastructure
