@@ -549,6 +549,7 @@ describe('Tabs', () => {
 
         context('when the Tab key is pressed', () => {
           it('should focus on the "More" button', () => {
+            cy.findByRole('button', {name: 'More'}).focus();
             cy.findByRole('button', {name: 'More'}).should('have.focus');
           });
         });

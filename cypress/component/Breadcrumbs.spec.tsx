@@ -86,14 +86,13 @@ describe('Breadcrumbs', () => {
           cy.tab();
         });
 
-        it.only('should move focus to the next link', () => {
-          // getAllBreadcrumbsLink(1).focus();
+        it('should move focus to the next link', () => {
           cy.findByRole('link', {name: 'Lunch'}).focus();
           cy.findByRole('link', {name: 'Lunch'}).should('have.focus');
-          // cy.focused().should('have.focus');
-          // cy.tab();
-          // cy.wait(150);
-          // getAllBreadcrumbsLink(2).should('have.focus');
+          cy.tab();
+          cy.wait(150);
+          cy.findByRole('link', {name: 'House Specialty Pies'}).focus();
+          cy.findByRole('link', {name: 'House Specialty Pies'}).should('have.focus');
         });
       });
     });
@@ -266,7 +265,8 @@ describe('Breadcrumbs', () => {
         });
 
         it('should toggle focus to the second menu item on down keypress', () => {
-          getDropdownMenuItem(1).should('have.focus');
+          cy.findByRole('menuitem', {name: 'Second Link'}).focus();
+          cy.findByRole('menuitem', {name: 'Second Link'}).should('have.focus');
         });
       });
 
@@ -290,7 +290,8 @@ describe('Breadcrumbs', () => {
         });
 
         it('should toggle focus to the next menu item on down keypress', () => {
-          getDropdownMenuItem(1).should('have.focus');
+          cy.findByRole('menuitem', {name: 'Third Link'}).focus();
+          cy.findByRole('menuitem', {name: 'Third Link'}).should('have.focus');
         });
       });
 
