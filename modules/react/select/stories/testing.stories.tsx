@@ -9,6 +9,7 @@ import {customColorTheme} from '../../../../utils/storybook';
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 
 import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
+import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 
 export default {
   title: 'Testing/Inputs/Select',
@@ -34,13 +35,13 @@ const options = [
 
 const disabledItems = options.filter(item => item.disabled === true).map(item => item.id);
 
-export const SelectStates = () => {
+export const SelectStates = (props: {theme?: PartialEmotionCanvasTheme}) => {
   const model = useSelectModel({
     items: options,
     nonInteractiveIds: disabledItems,
   });
   return (
-    <StaticStates>
+    <StaticStates theme={props.theme}>
       <ComponentStatesTable
         rowProps={[
           {label: 'Default', props: {}},
@@ -95,14 +96,14 @@ export const SelectStates = () => {
   );
 };
 
-export const SelectOpenMenuStates = () => {
+export const SelectOpenMenuStates = (props: {theme?: PartialEmotionCanvasTheme}) => {
   const model = useSelectModel({
     items: options,
     nonInteractiveIds: disabledItems,
     initialVisibility: 'visible',
   });
   return (
-    <StaticStates>
+    <StaticStates theme={props.theme}>
       <ComponentStatesTable
         rowProps={[{label: '', props: {}}]}
         columnProps={[
@@ -148,11 +149,10 @@ const themedParameters = {
 };
 
 export const SelectThemedStates = {
-  parameters: themedParameters,
-  render: () => <SelectStates />,
+  render: () => <SelectStates theme={{canvas: customColorTheme}} />,
 };
 
 export const SelectOpenMenuThemedStates = {
   parameters: themedParameters,
-  render: () => <SelectOpenMenuStates />,
+  render: () => <SelectOpenMenuStates theme={{canvas: customColorTheme}} />,
 };
