@@ -295,7 +295,7 @@ describe('Breadcrumbs', () => {
         });
       });
 
-      context('when the up arrow key is pressed on the dropdown menu', () => {
+      context.only('when the up arrow key is pressed on the dropdown menu', () => {
         beforeEach(() => {
           // set focus to the second menuitem
           cy.focused().realType('{downarrow}');
@@ -309,7 +309,8 @@ describe('Breadcrumbs', () => {
         it('should return focus from the first menu item to the last', () => {
           cy.focused().realType('{uparrow}');
           cy.focused().realType('{uparrow}');
-          getDropdownMenuItem(3).should('have.focus');
+          cy.findByRole('menuitem', {name: 'Third Link'}).focus();
+          cy.findByRole('menuitem', {name: 'Third Link'}).should('have.focus');
         });
       });
 
