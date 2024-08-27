@@ -1,10 +1,5 @@
 import * as React from 'react';
-import {
-  composeHooks,
-  createSubcomponent,
-  createElemPropsHook,
-  useIsRTL,
-} from '@workday/canvas-kit-react/common';
+import {composeHooks, createSubcomponent, useIsRTL} from '@workday/canvas-kit-react/common';
 import {
   useListItemRegister,
   useOverflowListItemMeasure,
@@ -33,27 +28,7 @@ export interface BreadcrumbsItemProps extends FlexProps {
   'data-id'?: string;
 }
 
-export const useBreadcrumbsItem = composeHooks(
-  useOverflowListItemMeasure,
-  createElemPropsHook(useBreadcrumbsModel)(
-    (
-      {state},
-      _,
-      elemProps: {
-        'data-id'?: string;
-        item?: {id: string};
-      } = {}
-    ) => {
-      const [localId] = React.useState(elemProps['data-id'] || elemProps.item?.id || '');
-
-      return {
-        inert: state.nonInteractiveIds.includes(localId) ? '' : undefined,
-        disabled: undefined,
-      };
-    }
-  ),
-  useListItemRegister
-);
+export const useBreadcrumbsItem = composeHooks(useOverflowListItemMeasure, useListItemRegister);
 
 export const BreadcrumbsItem = createSubcomponent('li')({
   displayName: 'Breadcrumbs.Item',
