@@ -11,6 +11,7 @@ import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {
   useListItemAllowChildStrings,
   useListItemRegister,
+  isSelected,
 } from '@workday/canvas-kit-react/collection';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 
@@ -45,7 +46,7 @@ export const useComboboxMenuItem = composeHooks(
       event.preventDefault();
     };
 
-    const selected = model.state.selectedIds[0] === id;
+    const selected = isSelected(id, model.state);
 
     return {
       role: 'option',
