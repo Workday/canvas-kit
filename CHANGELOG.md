@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.58](https://github.com/Workday/canvas-kit/releases/tag/v10.3.58) (2024-08-27)
+
+### Components
+
+- fix(select): Forward ref to Select input ([#2892](https://github.com/Workday/canvas-kit/pull/2892)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v10.3.57](https://github.com/Workday/canvas-kit/releases/tag/v10.3.57) (2024-08-27)
 
 ### Components
