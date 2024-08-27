@@ -295,7 +295,7 @@ describe('Breadcrumbs', () => {
         });
       });
 
-      context.only('when the up arrow key is pressed on the dropdown menu', () => {
+      context('when the up arrow key is pressed on the dropdown menu', () => {
         beforeEach(() => {
           // set focus to the second menuitem
           cy.focused().realType('{downarrow}');
