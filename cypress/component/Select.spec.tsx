@@ -4,6 +4,8 @@ import {FetchingDynamicItems} from '../../modules/react/select/stories/examples/
 import {DisabledOptions} from '../../modules/react/select/stories/examples/DisabledOption';
 import {MenuHeight} from '../../modules/react/select/stories/examples/MenuHeight';
 import {Disabled} from '../../modules/react/select/stories/examples/Disabled';
+import {RefForwarding} from '../../modules/react/select/stories/examples/RefForwarding';
+import {Complex} from '../../modules/react/select/stories/examples/Complex';
 
 describe('Select', () => {
   context(`given the "Menu Height" story is rendered`, () => {
@@ -338,6 +340,39 @@ describe('Select', () => {
     context('the select input', () => {
       it('should be disabled', () => {
         cy.findByRole('combobox').should('be.disabled');
+      });
+    });
+  });
+
+  context.only(`given the "Ref Forwarding" story is rendered`, () => {
+    beforeEach(() => {
+      cy.mount(<RefForwarding />);
+    });
+
+    it('should not have any axe errors', () => {
+      cy.checkA11y();
+    });
+
+    context('the select input', () => {
+      it('should receive focus via ref forwarding when the button is clicked', () => {
+        cy.findByRole('button', {name: 'Focus Select'}).click();
+        cy.findByRole('combobox').should('have.focus');
+      });
+    });
+  });
+
+  context(`given the "Complex" story is rendered`, () => {
+    beforeEach(() => {
+      cy.mount(<Complex />);
+      cy.findByRole('combobox').focus();
+      cy.focused().realType('{downarrow}');
+    });
+    context('when a value is selected with an id and text', () => {
+      it('should display the correct id and value of the selected Phone', () => {
+        cy.focused().realType('ph');
+        cy.focused().realType('{enter}');
+        cy.findByText('Id: phone');
+        cy.findByText('Value: Phone');
       });
     });
   });

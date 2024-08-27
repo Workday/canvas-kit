@@ -90,7 +90,6 @@ describe('Breadcrumbs', () => {
           cy.findByRole('link', {name: 'Lunch'}).focus();
           cy.findByRole('link', {name: 'Lunch'}).should('have.focus');
           cy.tab();
-          cy.wait(150);
           cy.findByRole('link', {name: 'House Specialty Pies'}).focus();
           cy.findByRole('link', {name: 'House Specialty Pies'}).should('have.focus');
         });
