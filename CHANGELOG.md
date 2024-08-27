@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.56](https://github.com/Workday/canvas-kit/releases/tag/v10.3.56) (2024-08-27)
+
+### Infrastructure
+
+- fix: Enable styling compat mode to ensure proper style merging ([#2890](https://github.com/Workday/canvas-kit/pull/2890)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  We're seeing style merging issues when using createStyles or createStencil. It only happens when every style override of the element uses these utilities and @emotion/react or @emotion/styled is not used on the same element. These utilities rely on module execution order and we're having a few reports where modules are possibly executing out of order. In order to allow everyone to use createStyles and createStencil without worrying about style merge issues, we're going to enable compat mode all the time. We'll look into possible out-of-order execution issues in the future and plan to re-enable full static mode (for better performance) once we know why this is happening and have a proper workaround.
+  
+  For more information, please read our [discussion](https://github.com/Workday/canvas-kit/discussions/2893)
+
+
 ## [v10.3.55](https://github.com/Workday/canvas-kit/releases/tag/v10.3.55) (2024-08-22)
 
 ### Components
