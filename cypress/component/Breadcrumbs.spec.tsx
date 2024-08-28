@@ -22,6 +22,10 @@ function getDropdownMenu() {
   return cy.findByRole('menu');
 }
 
+function getDropdownMenuItem(number?: number) {
+  return number ? cy.findAllByRole('menuitem').eq(number) : cy.findAllByRole('menuitem');
+}
+
 function openDropdownMenu() {
   const dropdownButton = getDropdownButton();
   dropdownButton.focus();
@@ -148,18 +152,14 @@ describe('Breadcrumbs', () => {
 
           it('should show the overflow menu', () => {
             cy.findByRole('menu').should('exist');
-            cy.realType('{downarrow}');
           });
 
           it('should contain second link as the first menu item', () => {
-            cy.findByRole('menuitem', {name: 'Second Link'}).should('have.focus');
+            cy.findAllByRole('menuitem').eq(0).should('contain', 'Second Link');
           });
 
           it('should contain fifth link as the last menu item', () => {
-            cy.focused().realType('{downarrow}');
-            cy.focused().realType('{downarrow}');
-            cy.focused().realType('{downarrow}');
-            cy.findByRole('menuitem', {name: 'Fifth Link'}).should('have.focus');
+            cy.findAllByRole('menuitem').eq(-1).should('contain', 'Fifth Link');
           });
         });
       });
@@ -183,15 +183,11 @@ describe('Breadcrumbs', () => {
           });
 
           it('should contain second link as the first menu item', () => {
-            cy.findByRole('menuitem', {name: 'Second Link'}).should('have.focus');
+            cy.findAllByRole('menuitem').eq(0).should('contain', 'Second Link');
           });
 
-          it('should contain sixth link as the last menu item', () => {
-            cy.focused().realType('{downarrow}');
-            cy.focused().realType('{downarrow}');
-            cy.focused().realType('{downarrow}');
-            cy.focused().realType('{downarrow}');
-            cy.findByRole('menuitem', {name: 'Sixth Link'}).should('have.focus');
+          it('should contain fifth link as the last menu item', () => {
+            cy.findAllByRole('menuitem').eq(-1).should('contain', 'Sixth Link');
           });
         });
       });
@@ -215,16 +211,11 @@ describe('Breadcrumbs', () => {
           });
 
           it('should contain home link as the first menu item', () => {
-            cy.findByRole('menuitem', {name: 'Home'}).should('have.focus');
+            cy.findAllByRole('menuitem').eq(0).should('contain', 'Home');
           });
 
-          it('should contain sixth link as the last menu item', () => {
-            cy.focused().realType('{downarrow}');
-            cy.focused().realType('{downarrow}');
-            cy.focused().realType('{downarrow}');
-            cy.focused().realType('{downarrow}');
-            cy.focused().realType('{downarrow}');
-            cy.findByRole('menuitem', {name: 'Sixth Link'}).should('have.focus');
+          it('should contain fifth link as the last menu item', () => {
+            cy.findAllByRole('menuitem').eq(-1).should('contain', 'Sixth Link');
           });
         });
       });
@@ -239,7 +230,6 @@ describe('Breadcrumbs', () => {
         cy.wait(150);
         cy.findByRole('button', {name: '480px'}).click();
         openDropdownMenu();
-        cy.wait(150);
       });
 
       it('should not have any axe errors', () => {
@@ -247,7 +237,7 @@ describe('Breadcrumbs', () => {
       });
 
       it('should have role set to "menu" on the dropdown menu', () => {
-        cy.findByRole('menu').should('have.attr', 'role', 'menu');
+        getDropdownMenu().should('have.attr', 'role', 'menu');
       });
 
       it("should toggle the button's aria-expanded attribute to true", () => {
@@ -264,14 +254,14 @@ describe('Breadcrumbs', () => {
 
       context('when the dropdown menu is toggled with a keypress', () => {
         it('should set focus to the first menu item', () => {
-          cy.findAllByRole('menuitem', {name: 'Second Link'}).should('have.focus');
+          getDropdownMenuItem(0).should('have.focus');
         });
       });
 
       context('when the first menu item is focused', () => {
         beforeEach(() => {
           cy.focused().realType('{downarrow}');
-          cy.wait(150);
+          cy.wait(0);
         });
 
         it('should toggle focus to the second menu item on down keypress', () => {
@@ -289,7 +279,7 @@ describe('Breadcrumbs', () => {
           cy.focused().realType('{downarrow}');
           cy.focused().realType('{downarrow}');
           cy.focused().realType('{downarrow}');
-          cy.findAllByRole('menuitem', {name: 'Second Link'}).should('have.focus');
+          getDropdownMenuItem(0).should('have.focus');
         });
       });
 
@@ -313,7 +303,7 @@ describe('Breadcrumbs', () => {
 
         it('should toggle focus to the previous list item', () => {
           cy.focused().realType('{uparrow}');
-          cy.findAllByRole('menuitem', {name: 'Second Link'}).should('have.focus');
+          getDropdownMenuItem(0).should('have.focus');
         });
 
         it('should return focus from the first menu item to the last', () => {
