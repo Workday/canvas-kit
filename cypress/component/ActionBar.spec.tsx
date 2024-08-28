@@ -74,19 +74,20 @@ describe('ActionBar', () => {
     context('when action list container is only 420px wide', () => {
       beforeEach(() => {
         cy.findByRole('button', {name: '420px'}).click();
+        cy.findByRole('button', {name: '420px'}).should('have.attr', 'aria-pressed', 'true');
       });
 
       it('should have 3 buttons inside the "region"', () => {
         cy.findByRole('region').findAllByRole('button').should('have.length', 3);
       });
 
-      context('when the "Second Action" is focused', () => {
+      context('when the "Second Action" is focused and tab key is clicked', () => {
         beforeEach(() => {
           cy.findByRole('button', {name: 'Second Action'}).focus();
+          cy.focused().tab();
         });
 
-        it('When the tab key is clicked should focus on the "More" button', () => {
-          cy.focused().tab();
+        it('should focus on the "More" button', () => {
           cy.findByRole('button', {name: 'More actions'}).should('have.focus');
         });
       });
