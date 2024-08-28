@@ -344,7 +344,7 @@ describe('Select', () => {
     });
   });
 
-  context.only(`given the "Ref Forwarding" story is rendered`, () => {
+  context(`given the "Ref Forwarding" story is rendered`, () => {
     beforeEach(() => {
       cy.mount(<RefForwarding />);
     });

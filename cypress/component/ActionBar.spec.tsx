@@ -100,7 +100,7 @@ describe('ActionBar', () => {
           cy.findByRole('menu').should('exist');
         });
 
-        it.only('should contain Third Action', () => {
+        it('should contain Third Action', () => {
           cy.findAllByRole('menuitem').eq(0).should('contain', 'Third Action');
         });
       });
