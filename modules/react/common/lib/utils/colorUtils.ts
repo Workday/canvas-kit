@@ -16,7 +16,7 @@ export function getColor(value?: CanvasColor | string) {
 // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
 export const expandHex = (hex: string) => {
   const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-  return hex.replace(shorthandRegex, function (m: string, r: string, g: string, b: string) {
+  return hex.replace(shorthandRegex, function(m: string, r: string, g: string, b: string) {
     return r + r + g + g + b + b;
   });
 };
