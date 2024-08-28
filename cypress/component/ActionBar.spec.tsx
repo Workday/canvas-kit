@@ -85,7 +85,7 @@ describe('ActionBar', () => {
           cy.findByRole('button', {name: 'Second Action'}).focus();
         });
 
-        it.only('When the tab key is clicked should focus on the "More" button', () => {
+        it('When the tab key is clicked should focus on the "More" button', () => {
           cy.focused().tab();
           cy.findByRole('button', {name: 'More actions'}).should('have.focus');
         });
