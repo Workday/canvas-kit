@@ -1,11 +1,16 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
-import {focusRing, getColorLabel, mouseFocusBehavior} from '@workday/canvas-kit-react/common';
+import {focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react/common';
 import {ColorSwatch} from '@workday/canvas-kit-react/color-picker';
 
+export interface SwatchBookColorObject {
+  value: string;
+  label: string;
+}
+
 export interface SwatchBookProps {
-  colors: string[] | {value: string; label: string}[];
+  colors: (string | SwatchBookColorObject)[];
   value?: string;
   onSelect: (color: string) => void;
 }
@@ -61,9 +66,9 @@ const Container = styled('div')({
 export const SwatchBook = ({colors, value, onSelect}: SwatchBookProps) => {
   return (
     <Container>
-      {colors.map((color, index) => {
+      {colors.map((color: string | SwatchBookColorObject, index: number) => {
         const hexCode = typeof color === 'object' ? color.value : color;
-        const label = typeof color === 'object' ? color.label : getColorLabel(color);
+        const label = typeof color === 'object' ? color.label : color;
         const isSelected = value ? hexCode.toLowerCase() === value.toLowerCase() : false;
 
         const handleClick = () => onSelect(hexCode);
