@@ -680,7 +680,6 @@ context(`given the 'Iframe Test' story is rendered`, () => {
     context('when Shift + Tab key is pressed', () => {
       beforeEach(() => {
         cy.focused().tab({shift: true});
-        cy.wait(150);
       });
 
       it('should focus in the iframe', () => {

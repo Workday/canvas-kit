@@ -218,7 +218,7 @@ describe('Breadcrumbs', () => {
             cy.findByRole('menuitem', {name: 'Home'}).should('have.focus');
           });
 
-          it.only('should contain sixth link as the last menu item', () => {
+          it('should contain sixth link as the last menu item', () => {
             cy.focused().realType('{downarrow}');
             cy.focused().realType('{downarrow}');
             cy.focused().realType('{downarrow}');

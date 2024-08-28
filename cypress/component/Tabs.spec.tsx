@@ -621,7 +621,7 @@ describe('Tabs', () => {
         });
 
         it('should have the third Tab as the first menu item', () => {
-          cy.findAllByRole('menuitem').eq(0).should('contain', 'Third Tab');
+          cy.findByRole('menuitem', {name: 'Third Tab'}).should('have.focus');
         });
       });
     });
@@ -661,7 +661,7 @@ describe('Tabs', () => {
         });
 
         it('should have the third Tab as the first menu item', () => {
-          cy.findAllByRole('menuitem').eq(0).should('contain', 'First Tab');
+          cy.findByRole('menuitem', {name: 'First Tab'}).should('have.focus');
         });
       });
     });
