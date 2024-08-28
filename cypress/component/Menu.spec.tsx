@@ -6,6 +6,7 @@ describe('Menu', () => {
   context(`given the [Components/Popups/Menu, Basic] story is rendered`, () => {
     beforeEach(() => {
       cy.mount(<Basic />);
+      cy.wait(150);
     });
 
     it('should pass axe checks', () => {
@@ -83,6 +84,7 @@ describe('Menu', () => {
         context('when the enter key is pressed', () => {
           beforeEach(() => {
             cy.focused().realType('{enter}');
+            cy.wait(150);
           });
 
           it('should have aria-expanded set to false', () => {
@@ -128,6 +130,7 @@ describe('Menu', () => {
       context('when the fourth item is clicked', () => {
         beforeEach(() => {
           cy.contains('button', 'Fourth Item').click();
+          cy.wait(150);
         });
 
         it('should not close the menu', () => {
@@ -183,6 +186,7 @@ describe('Menu', () => {
         context('when the enter key is pressed', () => {
           beforeEach(() => {
             cy.focused().realType('{enter}');
+            cy.wait(150);
           });
 
           it('should not close the menu', () => {

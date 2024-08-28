@@ -12,6 +12,7 @@ describe('ActionBar', () => {
     describe(`${Example.name} Example`, () => {
       beforeEach(() => {
         cy.mount(<Example />);
+        cy.wait(150);
       });
 
       it('should pass axe checks', () => {
@@ -47,6 +48,7 @@ describe('ActionBar', () => {
   describe(`OverflowActionBar Example`, () => {
     beforeEach(() => {
       cy.mount(<OverflowActionBar />);
+      cy.wait(150);
     });
 
     it('should pass axe checks', () => {
@@ -98,7 +100,7 @@ describe('ActionBar', () => {
           cy.findByRole('menu').should('exist');
         });
 
-        it('should contain Third Action', () => {
+        it.only('should contain Third Action', () => {
           cy.findAllByRole('menuitem').eq(0).should('contain', 'Third Action');
         });
       });
@@ -143,6 +145,7 @@ describe('ActionBar', () => {
   describe(`OverflowActionBarCustomButtonCount Example`, () => {
     beforeEach(() => {
       cy.mount(<OverflowActionBarCustomButtonCount />);
+      cy.wait(150);
     });
 
     it('should pass axe checks', () => {

@@ -15,6 +15,7 @@ describe('Modal', () => {
   context(`given the Basic example is rendered`, () => {
     beforeEach(() => {
       cy.mount(<Basic />);
+      cy.wait(150);
     });
 
     it('should not have any axe errors', () => {
@@ -172,6 +173,7 @@ describe('Modal', () => {
 context(`given the [Testing/Popups/Modal, With Tooltips] story is rendered`, () => {
   beforeEach(() => {
     cy.mount(<WithTooltips />);
+    cy.wait(150);
   });
 
   context('when the modal is open', () => {
@@ -294,6 +296,7 @@ context(`given the [Testing/Popups/Modal, With Tooltips] story is rendered`, () 
 context(`given the [Testing/Popups/Modal, With Radio buttons] story is rendered`, () => {
   beforeEach(() => {
     cy.mount(<WithRadioButtons />);
+    cy.wait(150);
   });
 
   it('should not have any axe errors', () => {
@@ -322,6 +325,7 @@ context(`given the [Testing/Popups/Modal, With Radio buttons] story is rendered`
 context(`given the [Components/Popups/Modal, Without close icon] story is rendered`, () => {
   beforeEach(() => {
     cy.mount(<WithoutCloseIcon />);
+    cy.wait(150);
   });
 
   it('should not have any axe errors', () => {
@@ -448,6 +452,7 @@ context(`given the [Components/Popups/Modal, Without close icon] story is render
 context(`given the [Components/Popups/Modal, Custom focus] story is rendered`, () => {
   beforeEach(() => {
     cy.mount(<CustomFocus />);
+    cy.wait(150);
   });
 
   context('when button is focused', () => {
@@ -552,6 +557,7 @@ context(`given the [Components/Popups/Modal, Custom focus] story is rendered`, (
 context(`given the [Testing/Popups/Modal, StackedModals] story is rendered`, () => {
   beforeEach(() => {
     cy.mount(<StackedModals />);
+    cy.wait(150);
   });
 
   context('when both modals are opened', () => {
@@ -599,6 +605,7 @@ context(`given the [Testing/Popups/Modal, StackedModals] story is rendered`, () 
 context(`given the [Testing/Popups/Modal, ModalWithPopup] story is rendered`, () => {
   beforeEach(() => {
     cy.mount(<ModalWithPopup />);
+    cy.wait(150);
   });
 
   context('when both modal and popup are opened', () => {
@@ -630,6 +637,7 @@ context(`given the [Testing/Popups/Modal, ModalWithPopup] story is rendered`, ()
 context(`given the [Components/Popups/Modal, CustomTarget] example is rendered`, () => {
   beforeEach(() => {
     cy.mount(<CustomTarget />);
+    cy.wait(150);
   });
 
   context('when the "Open" button is clicked', () => {
@@ -661,6 +669,7 @@ context(`given the [Components/Popups/Modal, CustomTarget] example is rendered`,
 context(`given the 'Iframe Test' story is rendered`, () => {
   beforeEach(() => {
     cy.mount(<IframeTest />);
+    cy.wait(150);
   });
 
   context('when the modal is opened', () => {
@@ -671,6 +680,7 @@ context(`given the 'Iframe Test' story is rendered`, () => {
     context('when Shift + Tab key is pressed', () => {
       beforeEach(() => {
         cy.focused().tab({shift: true});
+        cy.wait(150);
       });
 
       it('should focus in the iframe', () => {
