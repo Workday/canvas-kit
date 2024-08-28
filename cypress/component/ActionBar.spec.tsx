@@ -83,7 +83,7 @@ describe('ActionBar', () => {
       context('when the "Second Action" is focused and tab key is clicked', () => {
         beforeEach(() => {
           cy.findByRole('button', {name: 'Second Action'}).focus();
-          cy.focused().tab();
+          cy.tab();
         });
 
         it('should focus on the "More" button', () => {
