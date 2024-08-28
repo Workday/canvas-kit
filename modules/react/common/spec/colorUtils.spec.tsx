@@ -1,5 +1,5 @@
 import {colors} from '@workday/canvas-kit-react/tokens';
-import {getColor, getColorLabel, pickForegroundColor} from '../index';
+import {getColor, pickForegroundColor} from '../index';
 
 describe('Color Utils methods', () => {
   describe('pickForegroundColor', () => {
@@ -45,18 +45,6 @@ describe('Color Utils methods', () => {
 
     it('should return correct hex value for color token', () => {
       expect(getColor(colors.peach300)).toEqual('#ff957a');
-    });
-  });
-  describe('getColorLabel', () => {
-    it('should return the correct label for a known color', () => {
-      const colorHex = colors.peach300;
-      const expectedLabel = 'peach300';
-      expect(getColorLabel(colorHex)).toEqual(expectedLabel);
-    });
-
-    it('should return the input value if the color is not in the map', () => {
-      const unknownColor = '#123456';
-      expect(getColorLabel(unknownColor)).toEqual(unknownColor);
     });
   });
 });
