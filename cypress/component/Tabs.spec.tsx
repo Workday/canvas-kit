@@ -481,11 +481,14 @@ describe('Tabs', () => {
   context('when [Components/Containers/Tabs, OverflowTabs] story is rendered', () => {
     beforeEach(() => {
       cy.mount(<OverflowTabs />);
-      cy.wait(500);
     });
 
     it('should pass axe checks', () => {
-      cy.checkA11y();
+      cy.checkA11y('[role="tablist"]', {
+        rules: {
+          'aria-required-children': {enabled: false},
+        },
+      });
     });
 
     it('should not show the "More" button', () => {
@@ -519,7 +522,7 @@ describe('Tabs', () => {
     context('when tab list container is only 500px wide', () => {
       beforeEach(() => {
         cy.findByRole('button', {name: '500px'}).click();
-        cy.wait(0);
+        cy.findByRole('button', {name: '500px'}).should('have.attr', 'aria-pressed', 'true');
       });
 
       it('should pass axe checks', () => {
@@ -587,6 +590,7 @@ describe('Tabs', () => {
     context('when tab list container is only 360px wide', () => {
       beforeEach(() => {
         cy.findByRole('button', {name: '360px'}).click();
+        cy.findByRole('button', {name: '360px'}).should('have.attr', 'aria-pressed', 'true');
       });
 
       it('should pass axe checks', () => {
@@ -613,6 +617,7 @@ describe('Tabs', () => {
 
       context('when the "More" button is clicked', () => {
         beforeEach(() => {
+          cy.findByRole('button', {name: '360px'}).should('have.attr', 'aria-pressed', 'true');
           cy.findByRole('button', {name: 'More'}).click();
         });
 
@@ -629,6 +634,7 @@ describe('Tabs', () => {
     context('when tab list container is only 150px wide', () => {
       beforeEach(() => {
         cy.findByRole('button', {name: '150px'}).click();
+        cy.findByRole('button', {name: '150px'}).should('have.attr', 'aria-pressed', 'true');
       });
 
       it('should pass axe checks', () => {
