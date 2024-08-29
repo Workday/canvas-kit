@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField, FormFieldGroup} from '@workday/canvas-kit-preview-react/form-field';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
@@ -9,7 +9,6 @@ import {TextArea} from '@workday/canvas-kit-react/text-area';
 import {Switch} from '@workday/canvas-kit-react/switch';
 import {calc, createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {FormFieldGroup} from '@workday/canvas-kit-preview-react/form-field';
 
 const parentContainerStyles = createStyles({
   flexDirection: 'column',
