@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.1.7](https://github.com/Workday/canvas-kit/releases/tag/v11.1.7) (2024-08-29)
+
+### Accessibility
+
+- fix(color-picker): Add support for a11y labels on color swatches  ([#2894](https://github.com/Workday/canvas-kit/pull/2894)) ([@wooksauce](https://github.com/wooksauce), Kiwook Kwon)
+
+
 ## [v11.1.6](https://github.com/Workday/canvas-kit/releases/tag/v11.1.6) (2024-08-27)
 
 ### Components
