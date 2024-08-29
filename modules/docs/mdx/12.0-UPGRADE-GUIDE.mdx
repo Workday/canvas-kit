@@ -64,6 +64,12 @@ In v12 you must add `@workday/canvas-tokens-web` to ensure our components are pr
 the variables are defined. For more information on installing and using, please reference our tokens
 [docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
 
+## Codemod
+
+In v12, we have done some infrastructure updates with moving to Webpack 5 and Storybook 7. With
+these updates has come some formatting issues after running our codemods. We recommend running a
+formatter to address the format issues that have been introduced in v12.
+
 ## Deprecations
 
 We add the [@deprecated](https://jsdoc.app/tags-deprecated.html) JSDoc tag to code we plan to remove
@@ -225,5 +231,5 @@ experimental code and is analagous to code in alpha.
 
 Breaking changes can be deployed to Labs at any time without triggering a major version update and
 may not be subject to the same rigor in communcation and migration strategies reserved for breaking
-changes in [Preview](#preview) and [Main](#main). import { opacity } from
-"@workday/canvas-tokens-web/dist/es6/system"
+changes in [Preview](#preview) and [Main](#main). `import { opacity } from
+"@workday/canvas-tokens-web/dist/es6/system"`

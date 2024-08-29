@@ -1132,7 +1132,10 @@ export function getFullJsDocComment(checker: ts.TypeChecker, symbol: ts.Symbol) 
   const tagMap: Record<string, string> = {};
 
   tags.forEach(tag => {
-    const trimmedText = (tag.text || '').trim();
+    const trimmedText = (tag.text || [])
+      .map(s => s.text)
+      .join('\n')
+      .trim();
     const currentValue = tagMap[tag.name];
     tagMap[tag.name] = currentValue ? currentValue + '\n' + trimmedText : trimmedText;
   });
@@ -1654,6 +1657,9 @@ function generateSignatureFromTypeNode(parser: DocParser, node: ts.Node): ts.Sig
       getTypeParameters() {
         return typeParameters;
       },
+      getTypeParameterAtPosition(pos: number) {
+        return typeParameters && typeParameters[pos];
+      },
       getReturnType() {
         return parser.checker.getTypeAtLocation(node.type || node);
       },
@@ -1665,7 +1671,7 @@ function generateSignatureFromTypeNode(parser: DocParser, node: ts.Node): ts.Sig
         const symbol = getSymbolFromNode(parser, node)!;
         return symbol.getJsDocTags();
       },
-    };
+    } as ts.Signature;
   }
 
   return undefined;
@@ -1714,7 +1720,11 @@ function getObjectValueFromType(parser: DocParser, type: ts.Type): Value {
 export function getDefaultFromTags(tags: ts.JSDocTagInfo[]): Value | undefined {
   for (const tag of tags) {
     if (tag.name === 'default') {
-      const text = (tag.text || '').replace('{', '').replace('}', '');
+      const text = (tag.text || [])
+        .map(s => s.text)
+        .join('\n')
+        .replace('{', '')
+        .replace('}', '');
       if (
         [
           'string',

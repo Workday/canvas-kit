@@ -24,6 +24,11 @@ export interface SelectInputProps extends ExtractProps<typeof TextInput>, CSProp
    * ** Note:An option must be selected in order to render and icon.**
    */
   inputStartIcon?: CanvasSystemIcon;
+  readonly textInputProps?: {
+    ref: React.Ref<HTMLInputElement>;
+    onChange: () => {};
+    value: string;
+  };
 }
 
 const selectInputStencil = createStencil({

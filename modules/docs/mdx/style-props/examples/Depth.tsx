@@ -10,7 +10,7 @@ const baseStyles = {
   padding: 'xs',
 };
 
-export const DepthExample = () => (
+export const Depth = () => (
   <>
     <Box backgroundColor="cinnamon300" depth={1} {...baseStyles}>
       Depth 1

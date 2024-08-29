@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.1.6](https://github.com/Workday/canvas-kit/releases/tag/v11.1.6) (2024-08-27)
+
+### Components
+
+- fix: Make overflow items inert ([#2886](https://github.com/Workday/canvas-kit/pull/2886)) ([@NicholasBoll](https://github.com/NicholasBoll), manuel.carrera)
+- fix(select): Forward ref to Select input ([#2892](https://github.com/Workday/canvas-kit/pull/2892)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+### Infrastructure
+
+- fix: Enable styling compat mode to ensure proper style merging ([#2890](https://github.com/Workday/canvas-kit/pull/2890)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  We're seeing style merging issues when using createStyles or createStencil. It only happens when every style override of the element uses these utilities and @emotion/react or @emotion/styled is not used on the same element. These utilities rely on module execution order and we're having a few reports where modules are possibly executing out of order. In order to allow everyone to use createStyles and createStencil without worrying about style merge issues, we're going to enable compat mode all the time. We'll look into possible out-of-order execution issues in the future and plan to re-enable full static mode (for better performance) once we know why this is happening and have a proper workaround.
+  
+  For more information, please read our [discussion](https://github.com/Workday/canvas-kit/discussions/2893)
+
+
+## [v10.3.58](https://github.com/Workday/canvas-kit/releases/tag/v10.3.58) (2024-08-27)
+
+### Components
+
+- fix(select): Forward ref to Select input ([#2892](https://github.com/Workday/canvas-kit/pull/2892)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v10.3.57](https://github.com/Workday/canvas-kit/releases/tag/v10.3.57) (2024-08-27)
+
+### Components
+
+- fix: Make overflow items inert ([#2886](https://github.com/Workday/canvas-kit/pull/2886)) ([@NicholasBoll](https://github.com/NicholasBoll), manuel.carrera)
+
+
+## [v10.3.56](https://github.com/Workday/canvas-kit/releases/tag/v10.3.56) (2024-08-27)
+
+### Infrastructure
+
+- fix: Enable styling compat mode to ensure proper style merging ([#2890](https://github.com/Workday/canvas-kit/pull/2890)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  We're seeing style merging issues when using createStyles or createStencil. It only happens when every style override of the element uses these utilities and @emotion/react or @emotion/styled is not used on the same element. These utilities rely on module execution order and we're having a few reports where modules are possibly executing out of order. In order to allow everyone to use createStyles and createStencil without worrying about style merge issues, we're going to enable compat mode all the time. We'll look into possible out-of-order execution issues in the future and plan to re-enable full static mode (for better performance) once we know why this is happening and have a proper workaround.
+  
+  For more information, please read our [discussion](https://github.com/Workday/canvas-kit/discussions/2893)
+## [v11.1.5](https://github.com/Workday/canvas-kit/releases/tag/v11.1.5) (2024-08-23)
+
+### Components
+
+- fix(combobox): Show selected state when multiple is enabled ([#2882](https://github.com/Workday/canvas-kit/pull/2882)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v10.3.55](https://github.com/Workday/canvas-kit/releases/tag/v10.3.55) (2024-08-22)
+
+### Components
+
+- fix(combobox): Show selected state when multiple is enabled ([#2882](https://github.com/Workday/canvas-kit/pull/2882)) ([@NicholasBoll](https://github.com/NicholasBoll))
 ## [v11.1.4](https://github.com/Workday/canvas-kit/releases/tag/v11.1.4) (2024-08-21)
 
 ### Documentation
