@@ -16,6 +16,7 @@ import {Hint as HintExample} from './examples/Hint';
 import {FieldSet as FieldSetExample} from './examples/FieldSet';
 import {Grow as GrowExample} from './examples/Grow';
 import {ThemedError as ThemedErrorExample} from './examples/ThemedErrors';
+import {GroupedInputs as GroupedInputsExample} from './examples/GroupedInputs';
 
 export default {
   title: 'Preview/Inputs/Form Field',
@@ -71,4 +72,8 @@ export const Grow: Story = {
 };
 export const ThemedError: Story = {
   render: ThemedErrorExample,
+};
+
+export const GroupedInputs: Story = {
+  render: GroupedInputsExample,
 };
