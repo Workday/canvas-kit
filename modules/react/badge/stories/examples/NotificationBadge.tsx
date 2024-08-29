@@ -59,7 +59,7 @@ export function NotificationBadge() {
               aria-describedby={!!count ? badgeID : undefined}
             />
           </Tooltip>
-          <AriaLiveRegion aria-label="New notifications">
+          <AriaLiveRegion aria-label={!!count ? 'New notifications' : undefined}>
             {!!count && <CountBadge id={badgeID} count={count} limit={100} cs={countBadgeStyles} />}
           </AriaLiveRegion>
         </span>
