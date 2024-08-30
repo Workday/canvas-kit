@@ -84,10 +84,10 @@ const error = toppingsState.every(item => !item.checked) ? 'error' : undefined;
 setRadioError(radioError);
 setError(error);
     if (
-      error === undefined &&
-      radioError === undefined &&
+      !error &&
+      !radioError &&
       toppingsState.some(item => item.checked) &&
-      value !== ''
+      value
     ) {
       setShowSuccess(true);
     }
