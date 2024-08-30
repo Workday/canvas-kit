@@ -36,6 +36,14 @@ const countBadgeStyles = createStyles({
   insetInlineEnd: negate(system.space.x1),
 });
 
+// Testing notes (Aug. 30, 2024):
+// Windows 11
+// JAWS 2024 + Chrome / Edge: "New notifications" once, then only the count change "2"
+// JAWS 2024 + FF: "New notifications" once, then describes nothing
+// NVDA + Chrome / Edge: Consistently describes "{X} New notifications"
+// NVDA + FF: Consistently describes count value only "{X}"
+// macOS v14.6.1
+// VoiceOver + Chrome / Safari: Consistently describes "New notifications {X}"
 export function NotificationBadge() {
   const [count, setCount] = React.useState(4);
   const badgeID = useUniqueId();
