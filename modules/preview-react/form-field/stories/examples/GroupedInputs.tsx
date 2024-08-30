@@ -78,19 +78,11 @@ export const GroupedInputs = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (value === '' && toppingsState.every(item => !item.checked)) {
-      setRadioError('error');
-      setError('error');
-    } else if (toppingsState.some(item => !item.checked) && value === '') {
-      setError(undefined);
-      setRadioError('error');
-    } else if (value !== '' && toppingsState.every(item => !item.checked)) {
-      setError('error');
-      setRadioError(undefined);
-    } else {
-      setError(undefined);
-      setRadioError(undefined);
-    }
+const radioError = !value && toppingsState.some(item => !item.checked) ? 'error' : undefined;
+const error = toppingsState.every(item => !item.checked) ? 'error' : undefined;
+
+setRadioError(radioError);
+setError(error);
     if (
       error === undefined &&
       radioError === undefined &&
