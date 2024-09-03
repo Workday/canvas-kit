@@ -27,10 +27,10 @@ export const Basic = () => {
             </Box>
           </Modal.Body>
           <Flex gap="s" padding="xxs" marginTop="xxs">
+            <Modal.CloseButton onClick={handleCancel}>Cancel</Modal.CloseButton>
             <Modal.CloseButton as={PrimaryButton} onClick={handleAcknowledge}>
               Acknowledge
             </Modal.CloseButton>
-            <Modal.CloseButton onClick={handleCancel}>Cancel</Modal.CloseButton>
           </Flex>
         </Modal.Card>
       </Modal.Overlay>

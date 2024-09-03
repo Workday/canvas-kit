@@ -51,10 +51,10 @@ export const ReturnFocus = () => {
             </Box>
           </Modal.Body>
           <Flex gap="s" padding="xxs" marginTop="xxs">
+            <Modal.CloseButton>Cancel</Modal.CloseButton>
             <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
               Delete
             </Modal.CloseButton>
-            <Modal.CloseButton>Cancel</Modal.CloseButton>
           </Flex>
         </Modal.Card>
       </Modal.Overlay>

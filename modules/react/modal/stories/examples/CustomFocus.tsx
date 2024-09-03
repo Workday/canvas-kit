@@ -40,10 +40,10 @@ export const CustomFocus = () => {
             </FormField>
           </Modal.Body>
           <Flex gap="s" padding="xxs" marginTop="xxs">
+            <Modal.CloseButton>Cancel</Modal.CloseButton>
             <Modal.CloseButton as={PrimaryButton} onClick={handleAcknowledge}>
               Acknowledge
             </Modal.CloseButton>
-            <Modal.CloseButton>Cancel</Modal.CloseButton>
           </Flex>
         </Modal.Card>
       </Modal.Overlay>
