@@ -16,7 +16,13 @@ export interface ButtonColors {
   hover?: ButtonStateColors;
   active?: ButtonStateColors;
   focus?: ButtonStateColors & {
+    /**
+     * FocusRing within focus, is deprecated and will not work with our current method of styling
+     * @deprecated
+     */
     focusRing?: CSSObject;
+    boxShadowInner?: string;
+    boxShadowOuter?: string;
   };
   disabled?: ButtonStateColors;
 }
