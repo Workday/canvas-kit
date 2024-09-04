@@ -20,10 +20,9 @@ interaction with the rest of the page. A Modal will render the rest of the page 
 Modal is dismissed. A Modal should be used when the user needs to presented with important
 information that must be interacted with before continuing interaction with the rest of the page.
 
->**Note: We recommend the primary action button (i.e. "Acknowledge", "Submit", "Accept", etc.) to be "end-aligned".
-> This would be "right-aligned" for a LTR (left-to-right) language and "left-algined" for a RTL (right-to-left) language.**
+>**Note: We recommend the main call-to-action button (i.e. "Acknowledge", "Submit", "Accept", etc.) be positioned after a non-call-to-action button (i.e. "Cancel", "Close", etc.)**
 
->**Using "start" and "end" reduces the confusion for RTL (right-to-left) or LTR (left-to-right) languages.**
+>**This allows a user to view all of their options when making a decision on which button to click for a Modal.**
 
 ## Installation
 
@@ -38,7 +37,7 @@ yarn add @workday/canvas-kit-react
 The basic behavior of a modal is to hide all content from all users that is "behind" the modal
 dialog.
 
-<ExampleCodeBlock code={Basic}/>
+<ExampleCodeBlock code={Basic} />
 
 ### Without Close Icon
 
