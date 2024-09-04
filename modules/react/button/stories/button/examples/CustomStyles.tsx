@@ -20,7 +20,9 @@ const getDropdownColors = () => {
       label: colors.frenchVanilla100,
     },
     active: {},
-    focus: {},
+    focus: {
+      boxShadowOuter: colors.berrySmoothie400,
+    },
     disabled: {},
   };
 };
