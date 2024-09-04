@@ -46,6 +46,7 @@ A note to the reader:
 - [Component Updates](#component-updates)
   - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
   - [Avatar](#avatar)
+  - [Form Field](#form-field)
   - [Text Area](#text-area)
 - [Troubleshooting](#troubleshooting)
 - [Glossary](#glossary)
@@ -102,7 +103,8 @@ from Main instead.
 
 **PRs:** [#2825](https://github.com/Workday/canvas-kit/pull/2825),
 [#2795](https://github.com/Workday/canvas-kit/pull/2795),
-[#2793](https://github.com/Workday/canvas-kit/pull/2793)
+[#2793](https://github.com/Workday/canvas-kit/pull/2793),
+[2881](https://github.com/Workday/canvas-kit/pull/2881)
 
 Several components have been refactored to use our new
 [Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
@@ -113,6 +115,7 @@ The following components are affected:
 
 - `Avatar`
 - `Dialog`
+- `FormField`
 - `Modal`
 - `Popup`
 - `TextArea`
@@ -131,6 +134,18 @@ The following components are affected:
 - `Avatar.Variant` is no longer supported. Enum `AvatarVariant` has been removed. The `variant` type
   prop now accepts `"dark" | "light"`
 - The `as` prop now accepts any element, not just `div`.
+
+### Form Field
+
+Previously, the FormField component’s `orientation` prop only accepted the values `vertical` and
+`horizontal` to align the label.
+
+We’ve updated the `orientation` prop on the FormField component to accept the following values:
+`vertical`, `horizontalStart` and `horizontalEnd`. If you previously had set `orientation` to
+`horizontal` a codemod will update this value to `orientation="horizontalStart"`.
+
+> **Note**: The horizontal alignment of start and end are relative to its container, meaning start
+> and end match the flex property of `flex-start` and `flex-end`.
 
 ### Text Area
 
@@ -209,5 +224,5 @@ experimental code and is analagous to code in alpha.
 
 Breaking changes can be deployed to Labs at any time without triggering a major version update and
 may not be subject to the same rigor in communcation and migration strategies reserved for breaking
-changes in [Preview](#preview) and [Main](#main). `import { opacity } from
-"@workday/canvas-tokens-web/dist/es6/system"`
+changes in [Preview](#preview) and [Main](#main).
+`import { opacity } from "@workday/canvas-tokens-web/dist/es6/system"`
