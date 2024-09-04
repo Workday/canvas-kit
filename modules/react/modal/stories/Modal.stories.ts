@@ -1,5 +1,4 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {Source, Canvas, Title} from '@storybook/blocks';
 
 import mdxDoc from './Modal.mdx';
 
