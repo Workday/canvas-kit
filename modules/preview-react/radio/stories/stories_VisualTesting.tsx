@@ -100,7 +100,7 @@ export const RadioStates = () => {
           columnProps={[
             {
               label: 'Left Label',
-              props: {label: 'Contact', labelPosition: 'horizontal'},
+              props: {label: 'Contact', labelPosition: 'horizontalStart'},
             },
             {
               label: 'Top Label',
@@ -115,6 +115,7 @@ export const RadioStates = () => {
               orientation={props.labelPosition}
               error={props.error}
             >
+              {props.labelPosition}
               <FormField.Label as="legend">{props.label}</FormField.Label>
               <FormField.Container>
                 {testGroup}
