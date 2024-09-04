@@ -99,7 +99,7 @@ export const RadioStates = {
             columnProps={[
               {
                 label: 'Left Label',
-                props: {label: 'Contact', labelPosition: 'horizontal'},
+                props: {label: 'Contact', labelPosition: 'horizontalStart'},
               },
               {
                 label: 'Top Label',
