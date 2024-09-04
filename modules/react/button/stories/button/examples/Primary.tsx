@@ -10,7 +10,7 @@ import {
 
 export const Primary = () => (
   <Flex gap="s" padding="s">
-    <PrimaryButton colors={{focus: {boxShadowInner: 'red'}}}>Primary</PrimaryButton>
+    <PrimaryButton>Primary</PrimaryButton>
     <PrimaryButton icon={plusIcon} iconPosition="start">
       Primary
     </PrimaryButton>
