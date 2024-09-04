@@ -31,6 +31,7 @@ export const StackedModals = () => {
                         Are you <em>really</em> sure you want to delete the item?
                       </p>
                       <Flex gap="s">
+                        <Modal.CloseButton>Cancel</Modal.CloseButton>
                         <Modal.CloseButton
                           as={DeleteButton}
                           onClick={event => {
@@ -40,7 +41,6 @@ export const StackedModals = () => {
                         >
                           Yes, Really Delete
                         </Modal.CloseButton>
-                        <Modal.CloseButton>Cancel</Modal.CloseButton>
                       </Flex>
                     </Modal.Body>
                   </Modal.Card>

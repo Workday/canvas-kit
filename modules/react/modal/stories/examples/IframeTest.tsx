@@ -14,8 +14,8 @@ export const IframeTest = () => {
           <Modal.Body>
             <p>Are you sure you want to delete the item?</p>
             <Flex gap="s">
-              <Modal.CloseButton as={DeleteButton}>Delete</Modal.CloseButton>
               <Modal.CloseButton>Cancel</Modal.CloseButton>
+              <Modal.CloseButton as={DeleteButton}>Delete</Modal.CloseButton>
             </Flex>
             <iframe srcDoc="<html><body>Hello, <b>world</b>.<button>iframe button 1</button><button>iframe button 2</button></body></html>" />
           </Modal.Body>

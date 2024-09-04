@@ -1,4 +1,5 @@
 import {Meta, StoryObj} from '@storybook/react';
+import {Source, Canvas, Title} from '@storybook/blocks';
 
 import mdxDoc from './Modal.mdx';
 
@@ -13,7 +14,20 @@ import {BodyOverflow as BodyOverflowExample} from './examples/BodyOverflow';
 import {FullOverflow as FullOverflowExample} from './examples/FullOverflow';
 import {FormModal as FormModalExample} from './examples/FormModal';
 
-export default {
+// export default {
+//   title: 'Components/Popups/Modal',
+//   component: Modal,
+//   tags: ['autodocs'],
+//   parameters: {
+//     docs: {
+//       page: mdxDoc,
+//     },
+//   },
+// } as Meta<typeof Modal>;
+
+// type Story = StoryObj<typeof Modal>;
+
+const meta: Meta<typeof Modal> = {
   title: 'Components/Popups/Modal',
   component: Modal,
   tags: ['autodocs'],
@@ -22,8 +36,9 @@ export default {
       page: mdxDoc,
     },
   },
-} as Meta<typeof Modal>;
+};
 
+export default meta;
 type Story = StoryObj<typeof Modal>;
 
 export const Basic: Story = {

@@ -42,6 +42,7 @@ export const ModalWithPopup = () => {
                     <Popup.Body>
                       <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
                       <Flex gap="s">
+                        <Popup.CloseButton>Cancel</Popup.CloseButton>
                         <Popup.CloseButton
                           as={DeleteButton}
                           onClick={event => {
@@ -51,7 +52,6 @@ export const ModalWithPopup = () => {
                         >
                           Yes, Really Delete
                         </Popup.CloseButton>
-                        <Popup.CloseButton>Cancel</Popup.CloseButton>
                       </Flex>
                     </Popup.Body>
                   </Popup.Card>
