@@ -151,7 +151,7 @@ export const RadioStates = {
 
       <h3>RadioGroup (wrapping)</h3>
       <div style={{maxWidth: 480}}>
-        <FormField orientation="horizontal" as="fieldset">
+        <FormField orientation="horizontalStart" as="fieldset">
           <FormField.Label as="legend">
             Really long label. Really long label. Really long label. Really long label. Really long
             label. Really long label.
