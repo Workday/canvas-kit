@@ -33,25 +33,27 @@ export const useSelectInput = composeHooks(
         model.state.targetRef as any as React.Ref<HTMLInputElement>
       );
 
-      const {localRef, elementRef} = useLocalRef(ref as React.Ref<HTMLInputElement>);
+      const {localRef: hiddenLocalRef, elementRef: hiddenElementRef} = useLocalRef(
+        ref as React.Ref<HTMLInputElement>
+      );
 
       // We need to create a proxy between the multiple inputs. We need to redirect a few methods to
       // the visible input
       React.useImperativeHandle(
-        elementRef,
+        hiddenElementRef,
         () => {
-          if (localRef.current) {
-            localRef.current.focus = (options?: FocusOptions) => {
+          if (hiddenLocalRef.current) {
+            hiddenLocalRef.current.focus = (options?: FocusOptions) => {
               textInputRef.current!.focus(options);
             };
-            localRef.current.blur = () => {
+            hiddenLocalRef.current.blur = () => {
               textInputRef.current!.blur();
             };
           }
 
-          return localRef.current!;
+          return hiddenLocalRef.current!;
         },
-        [textInputRef, localRef]
+        [textInputRef, hiddenLocalRef]
       );
 
       // Remap the Popup model's targetRef to be the visible ref. `ref` and `model.state.targetRef` are already linked. We have to override that.
@@ -172,6 +174,7 @@ export const useSelectInput = composeHooks(
         },
         onChange: handleOnChange,
         autoComplete: 'off',
+        ref: hiddenElementRef,
         // When the hidden input is focused, we want to show the focus/hover states of the input that sits below it.
         onFocus() {
           textInputRef.current?.focus();
@@ -185,6 +188,7 @@ export const useSelectInput = composeHooks(
               : '',
         },
         'aria-haspopup': 'menu',
+        keySoFar: null,
       } as const;
     }
   )

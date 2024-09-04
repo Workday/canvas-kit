@@ -1,7 +1,7 @@
 import React from 'react';
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 // @ts-ignore: Cannot find module error
-import testAvatar from '../../test-avatar.png';
+import testAvatar from './test-avatar.png';
 
 export const LazyLoad = () => (
   <div className="story">
