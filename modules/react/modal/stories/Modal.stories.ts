@@ -14,20 +14,7 @@ import {BodyOverflow as BodyOverflowExample} from './examples/BodyOverflow';
 import {FullOverflow as FullOverflowExample} from './examples/FullOverflow';
 import {FormModal as FormModalExample} from './examples/FormModal';
 
-// export default {
-//   title: 'Components/Popups/Modal',
-//   component: Modal,
-//   tags: ['autodocs'],
-//   parameters: {
-//     docs: {
-//       page: mdxDoc,
-//     },
-//   },
-// } as Meta<typeof Modal>;
-
-// type Story = StoryObj<typeof Modal>;
-
-const meta: Meta<typeof Modal> = {
+export default {
   title: 'Components/Popups/Modal',
   component: Modal,
   tags: ['autodocs'],
@@ -36,9 +23,8 @@ const meta: Meta<typeof Modal> = {
       page: mdxDoc,
     },
   },
-};
+} as Meta<typeof Modal>;
 
-export default meta;
 type Story = StoryObj<typeof Modal>;
 
 export const Basic: Story = {
