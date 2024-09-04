@@ -67,14 +67,14 @@ export const avatarStencil = createStencil({
     ':is(button)': {
       cursor: 'pointer',
     },
-    ['& > [data-slot="avatar-icon"]']: {
+    ['& > [data-part="avatar-icon"]']: {
       transition: 'opacity 150ms linear',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       [systemIconStencil.vars.size]: calc.multiply(size, 0.625),
     },
-    ['& > [data-slot="avatar-image"]']: {
+    ['& > [data-part="avatar-image"]']: {
       position: 'absolute',
       width: '100%',
       height: '100%',
@@ -86,13 +86,13 @@ export const avatarStencil = createStencil({
     variant: {
       light: {
         backgroundColor: system.color.bg.alt.default,
-        ['& [data-slot="avatar-icon"]']: {
+        ['& [data-part="avatar-icon"]']: {
           [systemIconStencil.vars.color]: system.color.fg.default,
         },
       },
       dark: {
         backgroundColor: system.color.bg.primary.default,
-        ['& [data-slot="avatar-icon"]']: {
+        ['& [data-part="avatar-icon"]']: {
           [systemIconStencil.vars.color]: system.color.fg.inverse,
         },
       },
@@ -101,112 +101,112 @@ export const avatarStencil = createStencil({
       extraSmall: {
         width: system.space.x4,
         height: system.space.x4,
-        ['& [data-slot="avatar-icon"]']: {
+        ['& [data-part="avatar-icon"]']: {
           [systemIconStencil.vars.size]: calc.multiply(system.space.x4, 0.625),
         },
       },
       small: {
         width: system.space.x6,
         height: system.space.x6,
-        ['& [data-slot="avatar-icon"]']: {
+        ['& [data-part="avatar-icon"]']: {
           [systemIconStencil.vars.size]: calc.multiply(system.space.x6, 0.625),
         },
       },
       medium: {
         width: system.space.x8,
         height: system.space.x8,
-        ['& [data-slot="avatar-icon"]']: {
+        ['& [data-part="avatar-icon"]']: {
           [systemIconStencil.vars.size]: calc.multiply(system.space.x8, 0.625),
         },
       },
       large: {
         width: system.space.x10,
         height: system.space.x10,
-        ['& [data-slot="avatar-icon"]']: {
+        ['& [data-part="avatar-icon"]']: {
           [systemIconStencil.vars.size]: calc.multiply(system.space.x10, 0.625),
         },
       },
       extraLarge: {
         width: system.space.x16,
         height: system.space.x16,
-        ['& [data-slot="avatar-icon"]']: {
+        ['& [data-part="avatar-icon"]']: {
           [systemIconStencil.vars.size]: calc.multiply(system.space.x16, 0.625),
         },
       },
       extraExtraLarge: {
         width: calc.multiply(system.space.x10, 3),
         height: calc.multiply(system.space.x10, 3),
-        ['& [data-slot="avatar-icon"]']: {
+        ['& [data-part="avatar-icon"]']: {
           [systemIconStencil.vars.size]: calc.multiply(calc.multiply(system.space.x10, 3), 0.625),
         },
       },
     },
     objectFit: {
       contain: {
-        ['& [data-slot="avatar-image"]']: {
+        ['& [data-part="avatar-image"]']: {
           objectFit: 'contain',
         },
       },
       fill: {
-        ['& [data-slot="avatar-image"]']: {
+        ['& [data-part="avatar-image"]']: {
           objectFit: 'fill',
         },
       },
       cover: {
-        ['& [data-slot="avatar-image"]']: {
+        ['& [data-part="avatar-image"]']: {
           objectFit: 'cover',
         },
       },
       ['scale-down']: {
-        ['& [data-slot="avatar-image"]']: {
+        ['& [data-part="avatar-image"]']: {
           objectFit: 'scale-down',
         },
       },
       none: {
-        ['& [data-slot="avatar-image"]']: {
+        ['& [data-part="avatar-image"]']: {
           objectFit: 'none',
         },
       },
       ['-moz-initial']: {
-        ['& [data-slot="avatar-image"]']: {
+        ['& [data-part="avatar-image"]']: {
           objectFit: '-moz-initial',
         },
       },
       ['initial']: {
-        ['& [data-slot="avatar-image"]']: {
+        ['& [data-part="avatar-image"]']: {
           objectFit: 'initial',
         },
       },
       ['inherit']: {
-        ['& [data-slot="avatar-image"]']: {
+        ['& [data-part="avatar-image"]']: {
           objectFit: 'inherit',
         },
       },
       ['revert']: {
-        ['& [data-slot="avatar-image"]']: {
+        ['& [data-part="avatar-image"]']: {
           objectFit: 'revert',
         },
       },
       ['unset']: {
-        ['& [data-slot="avatar-image"]']: {
+        ['& [data-part="avatar-image"]']: {
           objectFit: 'unset',
         },
       },
     },
     isImageLoaded: {
       true: {
-        ['& [data-slot="avatar-icon"]']: {
+        ['& [data-part="avatar-icon"]']: {
           opacity: 0,
         },
-        ['& [data-slot="avatar-image"]']: {
+        ['& [data-part="avatar-image"]']: {
           opacity: 1,
         },
       },
       false: {
-        ['& [data-slot="avatar-icon"]']: {
+        ['& [data-part="avatar-icon"]']: {
           opacity: 1,
         },
-        ['& [data-slot="avatar-image"]']: {
+        ['& [data-part="avatar-image"]']: {
           opacity: 0,
         },
       },
@@ -253,8 +253,8 @@ export const Avatar = createComponent('button')({
           }),
         ])}
       >
-        <SystemIcon icon={userIcon} data-slot="avatar-icon" />
-        {url && <img data-slot="avatar-image" src={url} alt={altText} onLoad={loadImage} />}
+        <SystemIcon icon={userIcon} data-part="avatar-icon" />
+        {url && <img data-part="avatar-image" src={url} alt={altText} onLoad={loadImage} />}
       </Element>
     );
   },

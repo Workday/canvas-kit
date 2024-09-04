@@ -33,7 +33,7 @@ export interface SelectInputProps extends ExtractProps<typeof TextInput>, CSProp
 
 const selectInputStencil = createStencil({
   base: {
-    '& [data-slot="select-visual-input"]': {
+    '& [data-part="select-visual-input"]': {
       caretColor: 'transparent',
       cursor: 'default',
       '&::selection': {
@@ -41,11 +41,11 @@ const selectInputStencil = createStencil({
       },
     },
 
-    '& [data-slot="select-start-icon-container"]': {
+    '& [data-part="select-start-icon-container"]': {
       position: 'absolute',
       pointerEvents: 'none',
     },
-    '& [data-slot="select-hidden-input"]': {
+    '& [data-part="select-hidden-input"]': {
       position: 'absolute',
       top: system.space.zero,
       bottom: system.space.zero,
@@ -82,13 +82,13 @@ export const SelectInput = createSubcomponent(TextInput)({
   ) => {
     return (
       <InputGroup
-        data-slot="select-input-container"
+        data-part="select-input-container"
         data-width="ck-formfield-width"
         {...selectInputStencil()}
       >
         {inputStartIcon && model.state.selectedIds.length > 0 && (
-          <InputGroup.InnerStart data-slot="select-start-icon-container">
-            <SystemIcon data-slot="select-start-icon" icon={inputStartIcon} />
+          <InputGroup.InnerStart data-part="select-start-icon-container">
+            <SystemIcon data-part="select-start-icon" icon={inputStartIcon} />
           </InputGroup.InnerStart>
         )}
         {/* Hidden input to handle ids */}
@@ -102,7 +102,7 @@ export const SelectInput = createSubcomponent(TextInput)({
           value={value}
           name={name}
           ref={ref}
-          data-slot="select-hidden-input"
+          data-part="select-hidden-input"
         />
         {/* Visual input */}
         <InputGroup.Input
@@ -110,12 +110,12 @@ export const SelectInput = createSubcomponent(TextInput)({
           disabled={disabled}
           placeholder={placeholder}
           error={error}
-          data-slot="select-visual-input"
+          data-part="select-visual-input"
           {...textInputProps}
           {...mergeStyles(elemProps)}
         />
-        <InputGroup.InnerEnd data-slot="select-caret-container">
-          <SystemIcon data-slot="select-caret-icon" icon={caretDownSmallIcon} />
+        <InputGroup.InnerEnd data-part="select-caret-container">
+          <SystemIcon data-part="select-caret-icon" icon={caretDownSmallIcon} />
         </InputGroup.InnerEnd>
       </InputGroup>
     );
