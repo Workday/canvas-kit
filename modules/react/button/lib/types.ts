@@ -17,12 +17,16 @@ export interface ButtonColors {
   active?: ButtonStateColors;
   focus?: ButtonStateColors & {
     /**
-     * FocusRing within focus, is deprecated in v12 and will not work with our current method of styling.
-     * This will be removed in a later version.
-     * @deprecated
+     * @deprecated `focusRing` within focus, is deprecated and will not work with our current method of styling. This will be removed in a later version. If you want to customize the focus ring, use `boxShadowInner` and `boxShadowOuter` to update the inner and outer colors of the focus ring. If you decide to use these, use with caution.
      */
     focusRing?: CSSObject;
+    /**
+     * Updates the color of the inner `box-shadow` within a focus ring.
+     */
     boxShadowInner?: string;
+    /**
+     * Updates the color of the outer `box-shadow` within a focus ring.
+     */
     boxShadowOuter?: string;
   };
   disabled?: ButtonStateColors;

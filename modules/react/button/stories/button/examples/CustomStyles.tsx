@@ -21,6 +21,7 @@ const getDropdownColors = () => {
     },
     active: {},
     focus: {
+      boxShadowInner: colors.berrySmoothie200,
       boxShadowOuter: colors.berrySmoothie400,
     },
     disabled: {},
