@@ -1,10 +1,10 @@
 import * as React from 'react';
 import {createComponent, GrowthBehavior, ErrorType} from '@workday/canvas-kit-react/common';
-import {createStencil, cssVar, px2rem, calc} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, px2rem, calc, CSProps} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
-export interface TextInputProps extends GrowthBehavior {
+export interface TextInputProps extends GrowthBehavior, CSProps {
   /**
    * The type of error associated with the TextInput (if applicable).
    */

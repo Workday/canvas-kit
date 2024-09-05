@@ -81,11 +81,7 @@ export const SelectInput = createSubcomponent(TextInput)({
     model
   ) => {
     return (
-      <InputGroup
-        data-part="select-input-container"
-        data-width="ck-formfield-width"
-        {...selectInputStencil()}
-      >
+      <InputGroup data-width="ck-formfield-width" {...selectInputStencil()}>
         {inputStartIcon && model.state.selectedIds.length > 0 && (
           <InputGroup.InnerStart data-part="select-start-icon-container">
             <SystemIcon data-part="select-start-icon" icon={inputStartIcon} />
