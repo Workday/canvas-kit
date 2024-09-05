@@ -17,7 +17,10 @@ export interface ButtonColors {
   active?: ButtonStateColors;
   focus?: ButtonStateColors & {
     /**
-     * @deprecated `focusRing` within focus, is deprecated and will not work with our current method of styling. This will be removed in a later version. If you want to customize the focus ring, use `boxShadowInner` and `boxShadowOuter` to update the inner and outer colors of the focus ring. Use with caution.
+     * @deprecated This option is no longer supported at run time and will be removed from the type interface in a v12. If you want to customize the focus ring, use `boxShadowInner` and `boxShadowOuter` to update the inner and outer colors of the focus ring. Use with caution.
+     * ```tsx
+     * colors={{focus: {boxShadowInner: COLOR_HERE}}}
+     * ```
      */
     focusRing?: CSSObject;
     /**
