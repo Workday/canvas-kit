@@ -17,7 +17,8 @@ export interface ButtonColors {
   active?: ButtonStateColors;
   focus?: ButtonStateColors & {
     /**
-     * FocusRing within focus, is deprecated and will not work with our current method of styling
+     * FocusRing within focus, is deprecated in v12 and will not work with our current method of styling.
+     * This will be removed in a later version.
      * @deprecated
      */
     focusRing?: CSSObject;
