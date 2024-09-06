@@ -14,8 +14,10 @@ export const Basic = () => {
     <Flex>
       <FormField orientation="horizontal">
         <FormField.Label>First Name</FormField.Label>
-        <FormField.Input as={TextInput} value={value} onChange={handleChange} />
-        <FormField.Hint>Test</FormField.Hint>
+        <FormField.Field cs={{gap: '12px'}}>
+          <FormField.Input as={TextInput} value={value} onChange={handleChange} />
+          <FormField.Hint>Test</FormField.Hint>
+        </FormField.Field>
       </FormField>
     </Flex>
   );

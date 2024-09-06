@@ -9,6 +9,7 @@ import {FormFieldLabel} from './FormFieldLabel';
 import {FormFieldHint} from './FormFieldHint';
 import {FormFieldContainer} from './FormFieldContainer';
 import {formFieldStencil} from './formFieldStencil';
+import {FormFieldField} from './FormFieldField';
 
 export interface FormFieldProps extends FlexProps, GrowthBehavior {
   /**
@@ -94,6 +95,7 @@ export const FormField = createContainer('div')({
      * @stencil formFieldContainerStencil
      */
     Container: FormFieldContainer,
+    Field: FormFieldField,
   },
 })<FormFieldProps>(({children, grow, orientation, ...elemProps}, Element, model) => {
   return (

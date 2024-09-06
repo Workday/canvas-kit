@@ -13,7 +13,6 @@ import {Custom as CustomExample} from './examples/Custom';
 import {CustomId as CustomIdExample} from './examples/CustomId';
 import {AllFields as AllFieldsExample} from './examples/AllFields';
 import {Hint as HintExample} from './examples/Hint';
-import {FieldSet as FieldSetExample} from './examples/FieldSet';
 import {Grow as GrowExample} from './examples/Grow';
 import {ThemedError as ThemedErrorExample} from './examples/ThemedErrors';
 import {GroupedInputs as GroupedInputsExample} from './examples/GroupedInputs';
@@ -63,9 +62,6 @@ export const AllFields: Story = {
 };
 export const Hint: Story = {
   render: HintExample,
-};
-export const FieldSet: Story = {
-  render: FieldSetExample,
 };
 export const Grow: Story = {
   render: GrowExample,
