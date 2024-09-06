@@ -1,5 +1,5 @@
 import {Meta} from '@storybook/addon-docs';
-import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {SymbolDoc, Specifications, InformationHighlight} from '@workday/canvas-kit-docs';
 
 import {Select} from '@workday/canvas-kit-react/select';
 
@@ -35,6 +35,18 @@ yarn add @workday/canvas-kit-react
 ```
 
 ## Usage
+
+<InformationHighlight style={{margin: '1.5rem 0'}}>
+  <InformationHighlight.Icon />
+  <InformationHighlight.Heading>Note</InformationHighlight.Heading>
+  <InformationHighlight.Body>
+    These examples are using FormField from Preview. We can plan to promote this component to the
+    Main package in a future major version.
+  </InformationHighlight.Body>
+  <InformationHighlight.Link href="https://workday.github.io/canvas-kit/?path=/docs/preview-inputs-form-field--basic">
+    View Form Field (Preview) Documentation
+  </InformationHighlight.Link>
+</InformationHighlight>
 
 ### Basic Example
 
@@ -85,13 +97,10 @@ properties by default for keyboard navigation and selected the `id` based on the
 
 <ExampleCodeBlock code={HoistedModel} />
 
-### Label Position
+### Label Position Horizontal
 
-Set the `labelPosition` prop of the wrapping `FormField` to designate the position of the label
-relative to the `Select`. `labelPosition` accepts the following values:
-
-- `FormField.LabelPosition.Top` (Default)
-- `FormField.LabelPosition.Left`
+Set the `orientation` prop of the Form Field to designate the position of the label relative to the
+input component. By default, the orientation will be set to `vertical`.
 
 <ExampleCodeBlock code={LabelPosition} />
 
@@ -226,9 +235,9 @@ properties of `id` or `text`. Using these helper functions sets the `serverId` t
 
 ### Complex
 
-When registering items in an array of objects, it's common to have the text that is displayed to the user be
-different than an id. In this example, `serverId` and `label` properties need to be remapped to
-`id` and `text` hence the usage of `getId` and `getTextValue`. If your object has the properties
+When registering items in an array of objects, it's common to have the text that is displayed to the
+user be different than an id. In this example, `serverId` and `label` properties need to be remapped
+to `id` and `text` hence the usage of `getId` and `getTextValue`. If your object has the properties
 `text` and `id`, there would be no need for this.
 
 <ExampleCodeBlock code={Complex} />
@@ -254,10 +263,10 @@ const items = [
 
 - `getId`: This is an optional function to return the id of an item. If not provided, the default
   function will return the `id` property from the object of each item. If you did not provide
-  `items`, do not override this function. Instead provide static
-  items via JSX. the list will create an internal array of items where `id` is the only property and
-  the default `getId` will return the desired result. **Note: If your array of objects has a
-  different property for `id`, like `serverId`, use this function to set the id.**
+  `items`, do not override this function. Instead provide static items via JSX. the list will create
+  an internal array of items where `id` is the only property and the default `getId` will return the
+  desired result. **Note: If your array of objects has a different property for `id`, like
+  `serverId`, use this function to set the id.**
 
   ```tsx
   const options = [{text: 'Pizza', serverId: 'pizza-1'}, {text: 'Cheeseburger', serverId: 'cheeseburger'}]
@@ -292,6 +301,12 @@ const items = [
     </FormField>
   </Select>
   ```
+
+### Custom Styles
+
+Select and its subcomponents support custom styling via the `cs` prop. For more information, check
+our
+["How To Customize Styles"](https://workday.github.io/canvas-kit/?path=/docs/styling-how-to-customize-styles--page).
 
 ## Component API
 
