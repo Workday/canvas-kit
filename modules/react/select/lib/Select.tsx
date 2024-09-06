@@ -2,7 +2,13 @@ import React from 'react';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {Combobox} from '@workday/canvas-kit-react/combobox';
-import {createStencil, createStyles, CSProps, px2rem} from '@workday/canvas-kit-styling';
+import {
+  createStencil,
+  createStyles,
+  CSProps,
+  handleCsProp,
+  px2rem,
+} from '@workday/canvas-kit-styling';
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
@@ -75,13 +81,24 @@ export const SelectInput = createSubcomponent(TextInput)({
       onInput,
       value,
       name,
+      cs,
+      style,
+      className,
       ...elemProps
     },
     Element,
     model
   ) => {
+    console.log(elemProps);
+    const hasFocus = className?.includes('focus');
+    const hasHover = className?.includes('hover');
+    const hasActive = className?.includes('active');
+    const hasDisabled = className?.includes('disabled');
     return (
-      <InputGroup data-width="ck-formfield-width" {...selectInputStencil()}>
+      <InputGroup
+        data-width="ck-formfield-width"
+        {...handleCsProp({cs, style, className}, selectInputStencil())}
+      >
         {inputStartIcon && model.state.selectedIds.length > 0 && (
           <InputGroup.InnerStart data-part="select-start-icon-container">
             <SystemIcon data-part="select-start-icon" icon={inputStartIcon} />
@@ -108,7 +125,12 @@ export const SelectInput = createSubcomponent(TextInput)({
           error={error}
           data-part="select-visual-input"
           {...textInputProps}
-          {...mergeStyles(elemProps)}
+          {...mergeStyles(elemProps, [
+            hasFocus ? 'focus' : undefined,
+            hasHover ? 'hover' : undefined,
+            hasActive ? 'active' : undefined,
+            hasDisabled ? 'disabled' : undefined,
+          ])}
         />
         <InputGroup.InnerEnd data-part="select-caret-container">
           <SystemIcon data-part="select-caret-icon" icon={caretDownSmallIcon} />

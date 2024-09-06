@@ -39,18 +39,34 @@ const creditCardInputStyles = createStyles({
   textAlign: 'center',
 });
 
-const selectCaretStencil = createStencil({
+const selectStencil = createStencil({
   base: {},
   modifiers: {
     density: {
       high: {
-        '& + [data-part="select-caret-container"]': {
+        '[data-part="select-visual-input"]': {
+          height: system.space.x8,
+          paddingTop: system.space.x1,
+          paddingBottom: system.space.x1,
+        },
+        '& [data-part="select-caret-container"]': {
           height: system.space.x8,
         },
       },
-      medium: {},
+      medium: {
+        '[data-part="select-visual-input"]': {
+          height: system.space.x10,
+          paddingTop: system.space.x2,
+          paddingBottom: system.space.x2,
+        },
+      },
       low: {
-        '& + [data-part="select-caret-container"]': {
+        '[data-part="select-visual-input"]': {
+          height: calc.add(system.space.x10, system.space.x2),
+          paddingTop: system.space.x3,
+          paddingBottom: system.space.x3,
+        },
+        '&  [data-part="select-caret-container"]': {
           height: calc.add(system.space.x10, system.space.x2),
         },
       },
@@ -158,11 +174,11 @@ export const Density = () => {
       <div {...containerAlignmentStencil({alignment: containerAlignment})}>
         <form action="#" className={formStyles}>
           <div {...flexContainerStencil({density})}>
-            <FormField grow cs={formFieldStyles}>
+            <FormField grow cs={[formFieldStyles]}>
               <FormField.Label>Choose Country</FormField.Label>
               <Select items={['Dominican Republic', 'Spain', 'United States']}>
                 <FormField.Input
-                  cs={[inputStencil({density}), selectCaretStencil({density})]}
+                  cs={selectStencil({density})}
                   placeholder="Choose a country"
                   as={Select.Input}
                 />
