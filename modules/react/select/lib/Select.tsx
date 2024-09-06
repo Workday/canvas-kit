@@ -168,7 +168,7 @@ export const SelectCard = createSubcomponent('div')({
   );
 });
 
-export interface SelectProps extends Themeable, ExtractProps<typeof Combobox> {}
+export interface SelectProps extends ExtractProps<typeof Combobox> {}
 /**
  * Use `Select` to allow users to choose an option from a list or type characters to select a matching option.
  *

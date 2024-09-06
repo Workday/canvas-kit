@@ -12,9 +12,10 @@ export const Basic = () => {
 
   return (
     <Flex>
-      <FormField>
+      <FormField orientation="horizontal">
         <FormField.Label>First Name</FormField.Label>
         <FormField.Input as={TextInput} value={value} onChange={handleChange} />
+        <FormField.Hint>Test</FormField.Hint>
       </FormField>
     </Flex>
   );
