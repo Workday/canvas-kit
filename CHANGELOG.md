@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.59](https://github.com/Workday/canvas-kit/releases/tag/v10.3.59) (2024-09-06)
+
+### Components
+
+- fix: Updated ButtonColors interface to deprecated focusRing from focus ([#2906](https://github.com/Workday/canvas-kit/pull/2906)) ([@josh-bagwell](https://github.com/josh-bagwell))
+  Deprecated the use of focusRing within focus in the colors prop on buttons as this does not work with our current styling methods. Added support for boxShadowInner and boxShadowOuter within focus in colors prop.
 ## [v11.1.7](https://github.com/Workday/canvas-kit/releases/tag/v11.1.7) (2024-08-29)
 
 ### Accessibility
