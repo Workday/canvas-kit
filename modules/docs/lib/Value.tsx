@@ -8,6 +8,7 @@ import {MdxJSToJSX} from './MDXElements';
 import {Table} from './Table';
 import {capitalize, IndentLevelContext, RenderContext, indent} from './widgetUtils';
 import {DescriptionTooltip} from './DescriptionTooltip';
+import {colors} from '@workday/canvas-kit-react/tokens';
 
 const widgets: Record<string, React.FC<ValueProps>> = {};
 
@@ -52,18 +53,19 @@ export const PropertiesInline = ({properties}: {properties: types.ObjectProperty
           <React.Fragment key={index}>
             <br />
             {indent(level + 1)}
-            {p.description ? (
+            {p.description || p.tags.deprecated ? (
               <DescriptionTooltip
                 type="describe"
                 style={{maxWidth: '50em'}}
-                title={<MdxJSToJSX>{p.description}</MdxJSToJSX>}
+                title={<MdxJSToJSX>{p.description || p.tags.deprecated}</MdxJSToJSX>}
               >
                 <span
                   className="token property"
                   style={{
                     cursor: 'pointer',
-                    textDecoration: 'underline',
+                    textDecoration: p.tags.deprecated ? 'line-through' : 'underline',
                     textDecorationStyle: 'dotted',
+                    color: p.tags.deprecated ? colors.cinnamon600 : colors.plum600,
                   }}
                 >
                   {p.name}
