@@ -734,8 +734,13 @@ export function handleCsProp<
   const {cs, style, className, ...restProps} = elemProps;
   const instance = getInstance();
 
-  // We are going to track if any runtime styles are detected
-  let shouldRuntimeMergeStyles = false;
+  // We're seeing style merging issues when using createStyles or createStencil. It only happens when
+  // every style override of the element uses these utilities and @emotion/react or @emotion/styled is not used on the same element.
+  // These utilities rely on module execution order and we're having a few reports where modules are possibly executing out of order.
+  // In order to allow everyone to use createStyles and createStencil without worrying about style merge issues, we're going
+  // to enable compat mode all the time. We'll look into possible out-of-order execution issues in the future and plan to re-enable
+  // full static mode (for better performance) once we know why this is happening and have a proper workaround.
+  let shouldRuntimeMergeStyles = true;
 
   // The order is intentional. The `className` should go first, then the `cs` prop. If we don't do
   // runtime merging, this order doesn't actually matter because the browser doesn't care the order

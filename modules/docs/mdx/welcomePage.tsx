@@ -9,27 +9,26 @@ import {ExternalHyperlink, Hyperlink} from '@workday/canvas-kit-react/button';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {rocketIcon, tokensIcon, shapesIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {system} from '@workday/canvas-tokens-web';
+import {cssVar} from '@workday/canvas-kit-styling';
 // @ts-ignore: Cannot find module error
 import {version} from '../../../lerna.json';
 
 export const WelcomePage = () => {
   return (
-    <Flex flexDirection="column" gap="s">
+    <Flex flexDirection="column" gap="s" marginBottom="m">
       <Box borderRadius="m" overflow="hidden" position="relative">
         <Flex position="absolute" flexDirection="column" top="30%" left="10%">
           <Text
             typeLevel="title.medium"
             color={colors.frenchVanilla100}
-            fontSize="6vmin"
-            marginBottom="s"
-            style={{lineHeight: '3vmin'}}
+            style={{lineHeight: '3vmin', fontSize: '6vmin', marginBottom: cssVar(system.space.x4)}}
           >
             Canvas Kit
           </Text>
           <Text
             typeLevel="body.large"
-            fontSize="3vmin"
-            style={{lineHeight: '2vw'}}
+            style={{lineHeight: '2vw', fontSize: '3vmin'}}
             color={colors.frenchVanilla100}
           >
             v{version}

@@ -28,8 +28,35 @@ export const useSelectInput = composeHooks(
   useComboboxMoveCursorToSelected,
   createElemPropsHook(useSelectModel)(
     (model, ref, elemProps: {keySofar?: string; placeholder?: string; value?: string} = {}) => {
-      const {elementRef} = useLocalRef<HTMLInputElement>(ref as any);
-      const textInputRef = React.useRef<HTMLInputElement>(null);
+      const {elementRef: textInputElementRef, localRef: textInputRef} = useLocalRef(
+        // PopupModel says the targetRef is a `HTMLButtonElement`, but it is a `HTMLInputElement`
+        model.state.targetRef as any as React.Ref<HTMLInputElement>
+      );
+
+      const {localRef: hiddenLocalRef, elementRef: hiddenElementRef} = useLocalRef(
+        ref as React.Ref<HTMLInputElement>
+      );
+
+      // We need to create a proxy between the multiple inputs. We need to redirect a few methods to
+      // the visible input
+      React.useImperativeHandle(
+        hiddenElementRef,
+        () => {
+          if (hiddenLocalRef.current) {
+            hiddenLocalRef.current.focus = (options?: FocusOptions) => {
+              textInputRef.current!.focus(options);
+            };
+            hiddenLocalRef.current.blur = () => {
+              textInputRef.current!.blur();
+            };
+          }
+
+          return hiddenLocalRef.current!;
+        },
+        [textInputRef, hiddenLocalRef]
+      );
+
+      // Remap the Popup model's targetRef to be the visible ref. `ref` and `model.state.targetRef` are already linked. We have to override that.
 
       // Update the text value of the input
       const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,6 +90,7 @@ export const useSelectInput = composeHooks(
           model.state.selectedIds[0]
         ) {
           const value = model.navigation.getItem(model.state.selectedIds[0], model).id;
+          const oldValue = model.state.inputRef.current.value;
 
           // force the hidden input to have the correct value
           if (model.state.inputRef.current.value !== value) {
@@ -77,8 +105,8 @@ export const useSelectInput = composeHooks(
           }
 
           if (
-            model.state.selectedIds[0] !== value &&
-            model.state.inputRef.current.value !== value
+            model.state.selectedIds[0] !== oldValue &&
+            model.state.inputRef.current.value !== oldValue
           ) {
             // Programmatically dispatch an onChange once items are loaded. This account for when a consumer wants an initial selected item and they're loading them from a server.
             dispatchInputEvent(model.state.inputRef.current, value);
@@ -146,20 +174,21 @@ export const useSelectInput = composeHooks(
         },
         onChange: handleOnChange,
         autoComplete: 'off',
+        ref: hiddenElementRef,
         // When the hidden input is focused, we want to show the focus/hover states of the input that sits below it.
         onFocus() {
           textInputRef.current?.focus();
         },
         textInputProps: {
-          ref: textInputRef,
+          ref: textInputElementRef,
           onChange: noop,
           value:
             model.state.selectedIds.length > 0 && model.state.items.length > 0
               ? model.navigation.getItem(model.state.selectedIds[0], model).textValue
               : '',
         },
-        ref: elementRef,
         'aria-haspopup': 'menu',
+        keySoFar: null,
       } as const;
     }
   )

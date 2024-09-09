@@ -13,6 +13,7 @@ const options = [
 ];
 
 export const RefForwarding = () => {
+  // @ts-ignore
   const [value, setValue] = React.useState('medium');
   const ref = React.useRef(null);
 
