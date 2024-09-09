@@ -107,34 +107,36 @@ export const Autocomplete = () => {
   return (
     <FormField orientation="horizontal" isRequired>
       <FormField.Label>Fruit</FormField.Label>
-      <Combobox model={model} onChange={event => console.log('input', event.currentTarget.value)}>
-        <InputGroup>
-          <InputGroup.Input as={FormField.Input.as(AutoCompleteInput)} />
-          <InputGroup.InnerEnd
-            cs={styleOverrides.inputGroupInner}
-            pointerEvents="none"
-            style={{opacity: loader.isLoading ? system.opacity.full : system.opacity.zero}}
-            data-loading={loader.isLoading}
-          >
-            <LoadingDots cs={styleOverrides.loadingDots} />
-          </InputGroup.InnerEnd>
-          <InputGroup.InnerEnd>
-            <InputGroup.ClearButton data-testid="clear" />
-          </InputGroup.InnerEnd>
-        </InputGroup>
-        <Combobox.Menu.Popper>
-          <Combobox.Menu.Card>
-            {model.state.items.length === 0 && (
-              <StyledMenuItem as="span">No Results Found</StyledMenuItem>
-            )}
-            {model.state.items.length > 0 && (
-              <Combobox.Menu.List cs={styleOverrides.comboboxMenuList}>
-                {item => <Combobox.Menu.Item>{item}</Combobox.Menu.Item>}
-              </Combobox.Menu.List>
-            )}
-          </Combobox.Menu.Card>
-        </Combobox.Menu.Popper>
-      </Combobox>
+      <FormField.Field>
+        <Combobox model={model} onChange={event => console.log('input', event.currentTarget.value)}>
+          <InputGroup>
+            <InputGroup.Input as={FormField.Input.as(AutoCompleteInput)} />
+            <InputGroup.InnerEnd
+              cs={styleOverrides.inputGroupInner}
+              pointerEvents="none"
+              style={{opacity: loader.isLoading ? system.opacity.full : system.opacity.zero}}
+              data-loading={loader.isLoading}
+            >
+              <LoadingDots cs={styleOverrides.loadingDots} />
+            </InputGroup.InnerEnd>
+            <InputGroup.InnerEnd>
+              <InputGroup.ClearButton data-testid="clear" />
+            </InputGroup.InnerEnd>
+          </InputGroup>
+          <Combobox.Menu.Popper>
+            <Combobox.Menu.Card>
+              {model.state.items.length === 0 && (
+                <StyledMenuItem as="span">No Results Found</StyledMenuItem>
+              )}
+              {model.state.items.length > 0 && (
+                <Combobox.Menu.List cs={styleOverrides.comboboxMenuList}>
+                  {item => <Combobox.Menu.Item>{item}</Combobox.Menu.Item>}
+                </Combobox.Menu.List>
+              )}
+            </Combobox.Menu.Card>
+          </Combobox.Menu.Popper>
+        </Combobox>
+      </FormField.Field>
     </FormField>
   );
 };

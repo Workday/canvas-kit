@@ -10,8 +10,9 @@ export const Alert = () => {
   };
 
   return (
-    <FormField error="alert" orientation="horizontal">
-      <FormField.Container>
+    <FormField error="alert">
+      <FormField.Label>Confirm</FormField.Label>
+      <FormField.Field>
         <FormField.Input
           as={Checkbox}
           checked={checked}
@@ -19,7 +20,7 @@ export const Alert = () => {
           onChange={handleChange}
         />
         <FormField.Hint>You must agree to the terms before proceeding</FormField.Hint>
-      </FormField.Container>
+      </FormField.Field>
     </FormField>
   );
 };

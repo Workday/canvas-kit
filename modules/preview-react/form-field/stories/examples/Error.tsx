@@ -15,10 +15,10 @@ export const Error = () => {
     <Flex>
       <FormField error="error">
         <FormField.Label>Password</FormField.Label>
-        <FormField.Container>
+        <FormField.Field>
           <FormField.Input as={TextInput} type="password" value={value} onChange={handleChange} />
           <FormField.Hint>Must Contain a number and a capital letter</FormField.Hint>
-        </FormField.Container>
+        </FormField.Field>
       </FormField>
     </Flex>
   );

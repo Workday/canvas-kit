@@ -12,7 +12,9 @@ export const Grow = () => {
   return (
     <FormField width="100%">
       <FormField.Label>Street Address</FormField.Label>
-      <FormField.Input width="100%" as={TextInput} onChange={handleChange} value={value} />
+      <FormField.Field>
+        <FormField.Input width="100%" as={TextInput} onChange={handleChange} value={value} />
+      </FormField.Field>
     </FormField>
   );
 };

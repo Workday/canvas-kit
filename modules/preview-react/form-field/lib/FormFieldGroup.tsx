@@ -90,24 +90,23 @@ export const FormFieldGroup = createContainer('fieldset')({
      */
     Hint: FormField.Hint,
     /**
-     * `FormFieldGroup.Container` allows you to properly center `FormField.Legend` when the `orientation` is set to `horizontal` and there is hint text.
+     * `FormFieldGroup.Field` allows you to properly align the legend to the group of inputs.
      *
      * ```tsx
      * <FormFieldGroup orientation="horizontal">
      *    <FormFieldGroup.Legend>Choose a pet</FormFieldGroup.Legend>
-     *    <FormFieldGroup.Container>
+     *    <FormFieldGroup.Field>
      *      <FormFieldGroup.List>
      *        <FromFieldGroup.Input as={RadioGroup.RadioButton} value='dog'>Dog</FormFieldGroup.Input>
      *        <FromFieldGroup.Input as={RadioGroup.RadioButton} value='cat'>Cat</FormFieldGroup.Input>
      *      </FormFieldGroup.List>
      *      <FormFieldGroup.Hint>This is your hint text</FormField.Hint>
-     *    </FormFieldGroup.Container>
+     *    </FormFieldGroup.Field>
      *  </FormFieldGroup>
      * ```
      *
-     * @stencil formFieldContainerStencil
      */
-    Container: FormField.Container,
+    Field: FormField.Field,
   },
 })<FormFieldGroupProps>(({children, grow, orientation, ...elemProps}, Element, model) => {
   return (

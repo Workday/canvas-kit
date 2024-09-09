@@ -78,17 +78,12 @@ export const GroupedInputs = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-const radioError = !value && toppingsState.some(item => !item.checked) ? 'error' : undefined;
-const error = toppingsState.every(item => !item.checked) ? 'error' : undefined;
+    const radioError = !value && toppingsState.some(item => !item.checked) ? 'error' : undefined;
+    const error = toppingsState.every(item => !item.checked) ? 'error' : undefined;
 
-setRadioError(radioError);
-setError(error);
-    if (
-      !error &&
-      !radioError &&
-      toppingsState.some(item => item.checked) &&
-      value
-    ) {
+    setRadioError(radioError);
+    setError(error);
+    if (!error && !radioError && toppingsState.some(item => item.checked) && value) {
       setShowSuccess(true);
     }
     setFormData({
@@ -170,7 +165,7 @@ setError(error);
         </FormFieldGroup>
         <FormFieldGroup error={radioError}>
           <FormFieldGroup.Legend>Choose Your Crust</FormFieldGroup.Legend>
-          <FormFieldGroup.Container>
+          <FormFieldGroup.Field>
             <FormFieldGroup.List as={RadioGroup} onChange={handleRadioChange} value={value}>
               <FormFieldGroup.Input as={RadioGroup.RadioButton} value="thin-crust">
                 Thin Crust
@@ -188,7 +183,7 @@ setError(error);
             <FormFieldGroup.Hint>
               {radioError === 'error' ? 'You must choose a crust' : null}
             </FormFieldGroup.Hint>
-          </FormFieldGroup.Container>
+          </FormFieldGroup.Field>
         </FormFieldGroup>
         <div className={formButtonStyles}>
           <PrimaryButton type="submit">Submit Your Choices</PrimaryButton>

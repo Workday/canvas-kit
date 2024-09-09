@@ -45,14 +45,16 @@ export const MenuHeight = () => {
     <Box>
       <FormField>
         <FormField.Label>Choose a City</FormField.Label>
-        <Select items={cities}>
-          <FormField.Input as={Select.Input} />
-          <Select.Popper>
-            <Select.Card cs={selectCardStyles}>
-              <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
-            </Select.Card>
-          </Select.Popper>
-        </Select>
+        <FormField.Field>
+          <Select items={cities}>
+            <FormField.Input as={Select.Input} />
+            <Select.Popper>
+              <Select.Card cs={selectCardStyles}>
+                <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
+              </Select.Card>
+            </Select.Popper>
+          </Select>
+        </FormField.Field>
       </FormField>
     </Box>
   );

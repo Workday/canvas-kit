@@ -22,34 +22,40 @@ export const AllFields = () => {
     <Flex cs={parentContainerStyles}>
       <FormField grow>
         <FormField.Label>First Name</FormField.Label>
-        <FormField.Input as={TextInput} />
+        <FormField.Field>
+          <FormField.Input as={TextInput} />
+        </FormField.Field>
       </FormField>
 
       <FormField isRequired={true} error="alert" grow>
         <FormField.Label>Email</FormField.Label>
-        <FormField.Container>
+        <FormField.Field>
           <FormField.Input as={TextInput} />
           <FormField.Hint>Hint text for your input</FormField.Hint>
-        </FormField.Container>
+        </FormField.Field>
       </FormField>
       <FormField grow>
         <FormField.Label>Text Area Label</FormField.Label>
-        <FormField.Input as={TextArea} />
+        <FormField.Field>
+          <FormField.Input as={TextArea} />
+        </FormField.Field>
       </FormField>
       <FormField error="error" grow>
         <FormField.Label>Choose a Crust</FormField.Label>
-        <Select items={['Pizza', 'Cheeseburger', 'Fries']}>
-          <FormField.Input as={Select.Input} />
-          <Select.Popper>
-            <Select.Card>
-              <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
-            </Select.Card>
-          </Select.Popper>
-        </Select>
+        <FormField.Field>
+          <Select items={['Pizza', 'Cheeseburger', 'Fries']}>
+            <FormField.Input as={Select.Input} />
+            <Select.Popper>
+              <Select.Card>
+                <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
+              </Select.Card>
+            </Select.Popper>
+          </Select>
+        </FormField.Field>
       </FormField>
       <FormFieldGroup error="error" orientation="horizontal" grow>
         <FormFieldGroup.Legend>Choose Your Crust</FormFieldGroup.Legend>
-        <FormFieldGroup.Container>
+        <FormFieldGroup.Field>
           <FormFieldGroup.List as={RadioGroup}>
             <FormFieldGroup.Input as={RadioGroup.RadioButton} value="thin-crust">
               Thin Crust
@@ -64,18 +70,24 @@ export const AllFields = () => {
               Cauliflower
             </FormFieldGroup.Input>
           </FormFieldGroup.List>
-        </FormFieldGroup.Container>
+        </FormFieldGroup.Field>
       </FormFieldGroup>
       <FormFieldGroup grow>
         <FormFieldGroup.Legend>Checkbox Legend</FormFieldGroup.Legend>
-        <FormFieldGroup.Input checked={true} as={Checkbox} label="Checkbox Label" />
-        <FormFieldGroup.Input checked={false} as={Checkbox} label="Thin Crust" />
-        <FormFieldGroup.Input checked={false} as={Checkbox} label="Extra Cheese" />
+        <FormField.Field>
+          <FormFieldGroup.List>
+            <FormFieldGroup.Input checked={true} as={Checkbox} label="Checkbox Label" />
+            <FormFieldGroup.Input checked={false} as={Checkbox} label="Thin Crust" />
+            <FormFieldGroup.Input checked={false} as={Checkbox} label="Extra Cheese" />
+          </FormFieldGroup.List>
+        </FormField.Field>
       </FormFieldGroup>
 
       <FormField orientation="horizontal" grow>
         <FormField.Label>Switch Label</FormField.Label>
-        <FormField.Input as={Switch} />
+        <FormField.Field>
+          <FormField.Input as={Switch} />
+        </FormField.Field>
       </FormField>
     </Flex>
   );

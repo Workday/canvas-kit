@@ -1,18 +1,14 @@
 import React from 'react';
 
 import {createSubcomponent} from '@workday/canvas-kit-react/common';
-import {handleCsProp, CSProps, createStencil, parentModifier} from '@workday/canvas-kit-styling';
+import {handleCsProp, CSProps, createStencil} from '@workday/canvas-kit-styling';
 
 import {useFormFieldModel} from './hooks';
-import {formFieldStencil} from './formFieldStencil';
 
 export const formFieldFieldStencil = createStencil({
   base: {
     display: 'flex',
     flexDirection: 'column',
-    // [parentModifier(formFieldStencil.modifiers.orientation.horizontal)]: {
-    //   flexDirection:
-    // },
   },
 });
 

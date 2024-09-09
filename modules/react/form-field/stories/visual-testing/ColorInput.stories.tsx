@@ -79,7 +79,9 @@ export const ColorInputStates = {
       >
         {props => (
           <FormField error={props.error}>
-            <FormField.Input as={ColorInput} {...props} />
+            <FormField.Field>
+              <FormField.Input as={ColorInput} {...props} />
+            </FormField.Field>
           </FormField>
         )}
       </ComponentStatesTable>

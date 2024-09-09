@@ -12,7 +12,14 @@ export const Grow = () => {
   return (
     <FormField cs={{width: '100%'}}>
       <FormField.Label>Background Color</FormField.Label>
-      <FormField.Input cs={{width: '100%'}} as={ColorInput} onChange={handleChange} value={value} />
+      <FormField.Field>
+        <FormField.Input
+          cs={{width: '100%'}}
+          as={ColorInput}
+          onChange={handleChange}
+          value={value}
+        />
+      </FormField.Field>
     </FormField>
   );
 };

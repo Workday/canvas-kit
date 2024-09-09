@@ -19,12 +19,14 @@ export const ValidColorChange = () => {
     <>
       <FormField>
         <FormField.Label>Background Color</FormField.Label>
-        <FormField.Input
-          as={ColorInput}
-          onChange={handleChange}
-          onValidColorChange={handleValidColorChange}
-          value={value}
-        />
+        <FormField.Field>
+          <FormField.Input
+            as={ColorInput}
+            onChange={handleChange}
+            onValidColorChange={handleValidColorChange}
+            value={value}
+          />
+        </FormField.Field>
       </FormField>
       <p style={type.levels.subtext.large}>Last valid color: {validColor}</p>
     </>

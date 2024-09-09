@@ -12,7 +12,9 @@ export const Required = () => {
   return (
     <FormField isRequired={true}>
       <FormField.Label>Leave a Review</FormField.Label>
-      <FormField.Input as={TextArea} onChange={handleChange} value={value} />
+      <FormField.Field>
+        <FormField.Input as={TextArea} onChange={handleChange} value={value} />
+      </FormField.Field>
     </FormField>
   );
 };

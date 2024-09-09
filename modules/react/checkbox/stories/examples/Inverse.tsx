@@ -3,6 +3,7 @@ import {Checkbox} from '@workday/canvas-kit-react/checkbox';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 
 const styleOverrides = createStyles({
   gap: system.space.x4,
@@ -19,12 +20,18 @@ export const Inverse = () => {
 
   return (
     <Flex cs={styleOverrides}>
-      <Checkbox
-        variant="inverse"
-        checked={checked}
-        label="I agree to the terms"
-        onChange={handleChange}
-      />
+      <FormField>
+        <FormField.Label>Confirm</FormField.Label>
+        <FormField.Field>
+          <FormField.Input
+            as={Checkbox}
+            variant="inverse"
+            checked={checked}
+            label="I agree to the terms"
+            onChange={handleChange}
+          />
+        </FormField.Field>
+      </FormField>
     </Flex>
   );
 };

@@ -6,7 +6,9 @@ export const LabelPosition = () => {
   return (
     <FormField orientation="horizontal">
       <FormField.Label>Background Color</FormField.Label>
-      <FormField.Input as={ColorPreview} value="#00ffcc" />
+      <FormField.Field>
+        <FormField.Input as={ColorPreview} value="#00ffcc" />
+      </FormField.Field>
     </FormField>
   );
 };

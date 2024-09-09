@@ -25,24 +25,26 @@ export const Error = () => {
   };
   return (
     <Flex cs={parentContainerStyles}>
-      <Select items={options} nonInteractiveIds={['Fax (disabled)']}>
-        <FormField error="error">
-          <FormField.Label>Contact</FormField.Label>
-          <FormField.Input as={Select.Input} onChange={e => handleChange(e)} />
-          <Select.Popper>
-            <Select.Card>
-              <Select.List>
-                {item => (
-                  <Select.Item aria-disabled={item === 'Fax (disabled)' ? true : undefined}>
-                    {item}
-                  </Select.Item>
-                )}
-              </Select.List>
-            </Select.Card>
-          </Select.Popper>
-          <FormField.Hint>Fax is disabled. Please choose a different option.</FormField.Hint>
-        </FormField>
-      </Select>
+      <FormField error="error">
+        <FormField.Label>Contact</FormField.Label>
+        <FormField.Field>
+          <Select items={options} nonInteractiveIds={['Fax (disabled)']}>
+            <FormField.Input as={Select.Input} onChange={e => handleChange(e)} />
+            <Select.Popper>
+              <Select.Card>
+                <Select.List>
+                  {item => (
+                    <Select.Item aria-disabled={item === 'Fax (disabled)' ? true : undefined}>
+                      {item}
+                    </Select.Item>
+                  )}
+                </Select.List>
+              </Select.Card>
+            </Select.Popper>
+            <FormField.Hint>Fax is disabled. Please choose a different option.</FormField.Hint>
+          </Select>
+        </FormField.Field>
+      </FormField>
       Selected Value: {value}
     </Flex>
   );

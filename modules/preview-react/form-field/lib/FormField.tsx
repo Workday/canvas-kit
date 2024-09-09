@@ -66,7 +66,7 @@ export const FormField = createContainer('div')({
     Label: FormFieldLabel,
     /**
      * `FormField.Hint` will render any additional information you want to provide to the `FormField.Input`. If you
-     * set the `orientation` prop to `horizontal` you should use `FormField.Container` to properly align the hint with your `FormField.Input`.
+     * set the `orientation` prop to `horizontal` you should use `FormField.Field` to properly align the hint with your `FormField.Input`.
      *
      * ```tsx
      * <FormField>
@@ -80,7 +80,7 @@ export const FormField = createContainer('div')({
      */
     Hint: FormFieldHint,
     /**
-     * `FormField.Container` allows you to properly center `FormField.Label` when the `orientation` is set to `horizontal` and there is hint text..
+     * `FormField.Field` allows you to properly center `FormField.Label` when the `orientation` is set to `horizontal` and there is hint text..
      *
      * ```tsx
      * <FormField orientation="horizontal">
@@ -93,8 +93,21 @@ export const FormField = createContainer('div')({
      * ```
      *
      * @stencil formFieldContainerStencil
+     * @deprecated `FormField.Container` is deprecated nad will be removed in a future major version. Please use `FormField.Field` to always wrap `FormField.Input` and `FormField.Hint` to always ensure correct label and input alignment.
      */
     Container: FormFieldContainer,
+    /**
+     * `FormField.Field` allows you to customize container alignment and styles when wrapping your input and hint text.
+     * ```tsx
+     * <FormField orientation="horizontal">
+     *    <FormField.Label>First Name</FormField.Label>
+     *    <FormField.Field>
+     *      <FormField.Input as={TextInput} value={value} onChange={(e) => console.log(e)} />
+     *      <FormField.Hint>This is your hint text</FormField.Hint>
+     *    </FormField.Field>
+     *  </FormField>
+     * ```
+     */
     Field: FormFieldField,
   },
 })<FormFieldProps>(({children, grow, orientation, ...elemProps}, Element, model) => {

@@ -12,7 +12,9 @@ export const LabelPositionHorizontal = () => {
   return (
     <FormField orientation="horizontal">
       <FormField.Label>Email</FormField.Label>
-      <FormField.Input as={TextInput} value={value} onChange={handleChange} />
+      <FormField.Field>
+        <FormField.Input as={TextInput} value={value} onChange={handleChange} />
+      </FormField.Field>
     </FormField>
   );
 };

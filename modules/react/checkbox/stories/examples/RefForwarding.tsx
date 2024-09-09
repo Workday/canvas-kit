@@ -2,6 +2,14 @@ import React from 'react';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Checkbox} from '@workday/canvas-kit-react/checkbox';
 import {Box} from '@workday/canvas-kit-react/layout';
+import {system} from '@workday/canvas-tokens-web';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+
+const boxStyles = createStyles({
+  display: 'flex',
+  flexDirection: 'column',
+});
 
 export const RefForwarding = () => {
   const [checked, setChecked] = React.useState(false);
@@ -17,13 +25,19 @@ export const RefForwarding = () => {
 
   return (
     <>
-      <Box marginBottom="s">
-        <Checkbox
-          checked={checked}
-          label="I agree to the terms"
-          onChange={handleChange}
-          ref={ref}
-        />
+      <Box cs={boxStyles}>
+        <FormField>
+          <FormField.Label>Confirm</FormField.Label>
+          <FormField.Field>
+            <FormField.Input
+              as={Checkbox}
+              checked={checked}
+              label="I agree to the terms"
+              onChange={handleChange}
+              ref={ref}
+            />
+          </FormField.Field>
+        </FormField>
       </Box>
       <PrimaryButton onClick={handleClick}>Check Agreement to Terms</PrimaryButton>
     </>

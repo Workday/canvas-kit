@@ -29,7 +29,9 @@ export const RefForwarding = () => {
     <Flex cs={parentContainerStyles}>
       <FormField>
         <FormField.Label>Email</FormField.Label>
-        <FormField.Input as={TextInput} onChange={handleChange} value={value} ref={ref} />
+        <FormField.Field>
+          <FormField.Input as={TextInput} onChange={handleChange} value={value} ref={ref} />
+        </FormField.Field>
       </FormField>
       <SecondaryButton onClick={handleClick}>Focus Text Input</SecondaryButton>
     </Flex>

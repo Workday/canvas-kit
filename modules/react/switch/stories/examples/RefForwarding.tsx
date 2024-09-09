@@ -19,7 +19,9 @@ export const RefForwarding = () => {
     <>
       <FormField>
         <FormField.Label>Dark Mode</FormField.Label>
-        <FormField.Input as={Switch} checked={checked} ref={ref} onChange={handleChange} />
+        <FormField>
+          <FormField.Input as={Switch} checked={checked} ref={ref} onChange={handleChange} />
+        </FormField>
       </FormField>
       <PrimaryButton onClick={handleClick}>Focus Switch</PrimaryButton>
     </>

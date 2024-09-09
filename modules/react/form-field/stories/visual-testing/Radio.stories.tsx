@@ -139,9 +139,9 @@ export const RadioStates = {
               <FormField.Label>{props.label}</FormField.Label>
               {testGroup}
               {props.orientation === 'horizontal' && (
-                <FormField.Container>
+                <FormField.Field>
                   {testGroup} {props.error && <FormField.Hint>hintText</FormField.Hint>}
-                </FormField.Container>
+                </FormField.Field>
               )}
               {props.error && <FormField.Hint>hintText</FormField.Hint>}
             </FormField>
@@ -156,7 +156,7 @@ export const RadioStates = {
             Really long label. Really long label. Really long label. Really long label. Really long
             label. Really long label.
           </FormField.Label>
-          {testGroup}
+          <FormField.Field>{testGroup}</FormField.Field>
         </FormField>
         <FormField as="fieldset">
           <FormField.Label as="legend">
@@ -167,7 +167,7 @@ export const RadioStates = {
             Really long label. Really long label. Really long label. Really long label. Really long
             label. Really long label. Really long label. Really long label.
           </FormField.Label>
-          {testGroup}
+          <FormField.Field>{testGroup}</FormField.Field>
         </FormField>
       </div>
     </div>

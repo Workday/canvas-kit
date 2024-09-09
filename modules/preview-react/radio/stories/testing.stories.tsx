@@ -115,12 +115,12 @@ export const RadioStates = {
                 error={props.error}
               >
                 <FormField.Label as="legend">{props.label}</FormField.Label>
-                <FormField.Container>
+                <FormField.Field>
                   {testGroup}
                   <FormField.Hint>
                     {typeof props.error !== 'undefined' ? hintText : undefined}
                   </FormField.Hint>
-                </FormField.Container>
+                </FormField.Field>
               </FormField>
             )}
           </ComponentStatesTable>
@@ -150,12 +150,12 @@ export const RadioStates = {
                 error={props.error}
               >
                 <FormField.Label as="legend">{props.label}</FormField.Label>
-                <FormField.Container>
+                <FormField.Field>
                   {testGroup}
                   <FormField.Hint>
                     {typeof props.error !== 'undefined' ? hintText : undefined}
                   </FormField.Hint>
-                </FormField.Container>
+                </FormField.Field>
               </FormField>
             )}
           </ComponentStatesTable>
@@ -167,7 +167,7 @@ export const RadioStates = {
               Really long label. Really long label. Really long label. Really long label. Really
               long label. Really long label.
             </FormField.Label>
-            <FormField.Container>{testGroup}</FormField.Container>
+            <FormField.Field>{testGroup}</FormField.Field>
           </FormField>
           <FormField as="fieldset">
             <FormField.Label as="legend">

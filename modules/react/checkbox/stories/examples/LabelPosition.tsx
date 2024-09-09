@@ -11,13 +11,15 @@ export const LabelPosition = () => {
 
   return (
     <FormField orientation="horizontal">
-      <FormField.Label>Terms</FormField.Label>
-      <FormField.Input
-        as={Checkbox}
-        checked={checked}
-        label="I agree to the terms"
-        onChange={handleChange}
-      />
+      <FormField.Label>Confirm</FormField.Label>
+      <FormField.Field>
+        <FormField.Input
+          as={Checkbox}
+          checked={checked}
+          label="I agree to the terms"
+          onChange={handleChange}
+        />
+      </FormField.Field>
     </FormField>
   );
 };
