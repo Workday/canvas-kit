@@ -46,6 +46,7 @@ A note to the reader:
 - [Component Updates](#component-updates)
   - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
   - [Avatar](#avatar)
+  - [FormField](#form-field)
   - [FormFieldGroup](#form-field-group)
   - [Select](#select)
   - [Text Area](#text-area)
@@ -136,6 +137,13 @@ The following components are affected:
 - The `variant` prop now accepts `"dark" | "light"`
 - The `as` prop now accepts any element, not just `div`.
 
+These changes should be handled by a codemod.
+
+### Form Field
+
+We've promoted FormField from Preview to Main. The following changes has been made to provide more
+flexibility and better explicit components when using inputs.
+
 ### Form Field Group
 
 We've added a new component to the Preview package under FromField to allow users to group inputs
@@ -164,10 +172,15 @@ type.
 
 ```tsx
 // v11
-interface MyProps { resize?: TextAreaResizeDirection }
+interface MyProps {
+  resize?: TextAreaResizeDirection;
+}
 
-// 12 type ValueOf<T> = T[keyof T]; interface MyProps { resize?:
-ValueOf<typeof TextAreaResizeDirection> }
+// 12
+type ValueOf<T> = T[keyof T];
+interface MyProps {
+  resize?: ValueOf<typeof TextAreaResizeDirection>;
+}
 ```
 
 ## Troubleshooting
@@ -231,5 +244,5 @@ experimental code and is analagous to code in alpha.
 
 Breaking changes can be deployed to Labs at any time without triggering a major version update and
 may not be subject to the same rigor in communcation and migration strategies reserved for breaking
-changes in [Preview](#preview) and [Main](#main). `import { opacity } from
-"@workday/canvas-tokens-web/dist/es6/system"`
+changes in [Preview](#preview) and [Main](#main).
+`import { opacity } from "@workday/canvas-tokens-web/dist/es6/system"`

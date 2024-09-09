@@ -15,12 +15,7 @@ import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {useSelectCard} from './hooks/useSelectCard';
 import {useSelectInput} from './hooks/useSelectInput';
 import {useSelectModel} from './hooks/useSelectModel';
-import {
-  createSubcomponent,
-  ExtractProps,
-  createContainer,
-  Themeable,
-} from '@workday/canvas-kit-react/common';
+import {createSubcomponent, ExtractProps, createContainer} from '@workday/canvas-kit-react/common';
 import {system} from '@workday/canvas-tokens-web';
 
 export interface SelectInputProps extends ExtractProps<typeof TextInput>, CSProps {
