@@ -19,13 +19,18 @@ export const CheckboxStates = () => (
     <ComponentStatesTable
       rowProps={permutateProps(
         {
-          checked: [
-            {value: true, label: 'Checked'},
-            {value: false, label: 'Unchecked'},
-          ],
-          indeterminate: [
-            {value: true, label: 'Indeterminate'},
-            {value: false, label: ''},
+          // checked: [
+          //   {value: true, label: 'Checked'},
+          //   {value: false, label: 'Unchecked'},
+          // ],
+          // indeterminate: [
+          //   {value: true, label: 'Indeterminate'},
+          //   {value: false, label: ''},
+          // ],
+          className: [
+            {value: 'checked indeterminate', label: 'Checked Indeterminate'},
+            {value: 'checked', label: 'Checked'},
+            {value: 'unchecked', label: 'Unchecked'},
           ],
           error: [
             {value: undefined, label: ''},
@@ -68,6 +73,7 @@ export const CheckboxStates = () => (
           {...props}
           onChange={() => {}} // eslint-disable-line no-empty-function
           label="Checkbox"
+          as="span"
         />
       )}
     </ComponentStatesTable>
@@ -79,13 +85,18 @@ export const InverseCheckboxStates = () => (
     <ComponentStatesTable
       rowProps={permutateProps(
         {
-          checked: [
-            {value: true, label: 'Checked'},
-            {value: false, label: 'Unchecked'},
-          ],
-          indeterminate: [
-            {value: true, label: 'Indeterminate'},
-            {value: false, label: ''},
+          // checked: [
+          //   {value: true, label: 'Checked'},
+          //   {value: false, label: 'Unchecked'},
+          // ],
+          // indeterminate: [
+          //   {value: true, label: 'Indeterminate'},
+          //   {value: false, label: ''},
+          // ],
+          className: [
+            {value: 'checked indeterminate', label: 'Checked Indeterminate'},
+            {value: 'checked', label: 'Checked'},
+            {value: 'unchecked', label: 'Unchecked'},
           ],
           error: [
             {value: undefined, label: ''},

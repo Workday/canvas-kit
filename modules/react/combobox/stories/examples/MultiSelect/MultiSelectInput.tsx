@@ -1,16 +1,20 @@
 import React from 'react';
 
+import {system} from '@workday/canvas-tokens-web';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
+
 import {
+  composeHooks,
   createElemPropsHook,
   createSubcomponent,
-  errorRing,
   useLocalRef,
 } from '@workday/canvas-kit-react/common';
 import {createStencil, CSProps, handleCsProp} from '@workday/canvas-kit-styling';
 import {InputGroup} from '@workday/canvas-kit-react/text-input';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {system} from '@workday/canvas-tokens-web';
+import {usePopupTarget} from '@workday/canvas-kit-react/popup';
+import {useListActiveDescendant} from '@workday/canvas-kit-react/collection';
+import {useComboboxListKeyboardHandler, useSetPopupWidth} from '@workday/canvas-kit-react/combobox';
 
 import {useMultiSelectModel} from './useMultiSelectModel';
 
@@ -23,7 +27,6 @@ export const multiSelectStencil = createStencil({
     boxSizing: 'border-box',
     minHeight: 40,
     transition: '0.2s box-shadow, 0.2s border-color',
-    padding: system.space.x2, // Compensate for border
     margin: 0, // Fix Safari
     // '&::placeholder': {
     //   color: system.color.fg.strong,
@@ -48,29 +51,38 @@ export const multiSelectStencil = createStencil({
     },
     '& [data-slot="input"]': {
       ...system.type.subtext.large,
+      backgroundColor: system.color.bg.transparent,
       border: 'none',
       outlineWidth: '0px',
+      padding: system.space.x2, // Compensate for border
+      borderRadius: system.shape.x1,
     },
   },
 });
 
-export const useMultiSelectInput = createElemPropsHook(useMultiSelectModel)((model, ref) => {
-  const {elementRef} = useLocalRef<HTMLInputElement>(ref as any);
+export const useMultiSelectInput = composeHooks(
+  createElemPropsHook(useMultiSelectModel)((model, ref) => {
+    const {elementRef} = useLocalRef<HTMLInputElement>(ref as any);
 
-  return {
-    role: 'combobox',
-    ref: elementRef,
-    'aria-haspopup': 'menu',
-    onClick(e: React.MouseEvent) {
-      console.log('click', model.state.visibility);
-      if (model.state.visibility === 'hidden') {
-        model.events.show(e);
-      } else if (model.state.visibility === 'visible') {
-        model.events.hide(e);
-      }
-    },
-  };
-});
+    return {
+      role: 'combobox',
+      ref: elementRef,
+      'aria-haspopup': 'menu' as const,
+      // onClick(e: React.MouseEvent) {
+      //   console.log('click', model.state.visibility);
+      //   if (model.state.visibility === 'hidden') {
+      //     model.events.show(e);
+      //   } else if (model.state.visibility === 'visible') {
+      //     model.events.hide(e);
+      //   }
+      // },
+    };
+  }),
+  useSetPopupWidth,
+  useListActiveDescendant,
+  useComboboxListKeyboardHandler,
+  usePopupTarget
+);
 
 export interface MultiSelectInputProps extends CSProps {}
 

@@ -4,9 +4,12 @@ import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 
+import {accessibilityIcon, accountsIcon} from '@workday/canvas-system-icons-web';
+
 import {system} from '@workday/canvas-tokens-web';
 
 import {MultiSelect} from './MultiSelect';
+import {Menu} from '../../../menu';
 
 const mainContentStyles = createStyles({
   padding: system.space.x4,
@@ -27,7 +30,13 @@ export const App = () => {
               <MultiSelect.Popper>
                 <MultiSelect.Card>
                   <MultiSelect.List>
-                    {item => <MultiSelect.Item>{item}</MultiSelect.Item>}
+                    {item => (
+                      <MultiSelect.Item>
+                        <Menu.Item.Icon icon={accessibilityIcon} />
+                        <Menu.Item.Text>{item}</Menu.Item.Text>
+                        <Menu.Item.Icon icon={accountsIcon} />
+                      </MultiSelect.Item>
+                    )}
                   </MultiSelect.List>
                 </MultiSelect.Card>
               </MultiSelect.Popper>

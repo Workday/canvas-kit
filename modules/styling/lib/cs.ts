@@ -653,11 +653,6 @@ export function createStyles(
       // https://codesandbox.io/s/stupefied-bartik-9c2jtd?file=/src/App.tsx
       const {styles} = serializeStyles([convertedStyles as CastStyleProps]);
 
-      // use `css.call()` instead of `css()` to trick Emotion's babel plugin to not rewrite our code
-      // to remove our generated Id for the name:
-      // https://github.com/emotion-js/emotion/blob/f3b268f7c52103979402da919c9c0dd3f9e0e189/packages/babel-plugin/src/utils/transform-expression-with-styles.js#L81-L82
-      // Without this "fix", anyone using the Emotion babel plugin would get different results than
-      // intended when styles are merged.
       const name = generateUniqueId();
       createStylesCache[`${instance.cache.key}-${name}`] = true;
       return instance.css({name, styles});
