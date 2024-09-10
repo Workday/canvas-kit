@@ -104,7 +104,7 @@ from Main instead.
 **PRs:** [#2825](https://github.com/Workday/canvas-kit/pull/2825),
 [#2795](https://github.com/Workday/canvas-kit/pull/2795),
 [#2793](https://github.com/Workday/canvas-kit/pull/2793),
-[2881](https://github.com/Workday/canvas-kit/pull/2881)
+[#2881](https://github.com/Workday/canvas-kit/pull/2881)
 
 Several components have been refactored to use our new
 [Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
@@ -145,7 +145,7 @@ We’ve updated the `orientation` prop on the FormField component to accept the 
 `horizontal` a codemod will update this value to `orientation="horizontalStart"`.
 
 > **Note**: The horizontal alignment of start and end are relative to its container, meaning start
-> and end match the flex property of `flex-start` and `flex-end`.
+> and end match the flex property of `flex-start` and `flex-end`. This is especially applicable for moving between RTL (right-to-left) and LTR (left-to-right) languages. 
 
 ### Text Area
 

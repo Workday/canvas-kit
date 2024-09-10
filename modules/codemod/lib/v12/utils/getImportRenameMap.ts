@@ -45,8 +45,6 @@ export function getImportRenameMap(
       return false;
     })
     .forEach(nodePath => {
-      // const StyledName = styled(OriginalName)({})
-      // const StyledName = styled(OriginalName)`` // Tagged template
       if (
         (nodePath.parent.value.type === 'CallExpression' ||
           nodePath.parent.value.type === 'TaggedTemplateExpression') &&

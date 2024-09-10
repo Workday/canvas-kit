@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {fireEvent, render} from '@testing-library/react';
+import {fireEvent, render, screen} from '@testing-library/react';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {ColorPicker, ColorPickerProps} from '@workday/canvas-kit-preview-react/color-picker';
 
@@ -49,6 +49,18 @@ describe('Color Picker', () => {
 
       expect(getByRole('textbox')).not.toBeNull();
     });
+
+    it('should work with color objects', () => {
+      const {getByRole} = renderColorPicker({
+        colorSet: [
+          {label: 'Cinnamon', value: colors.cinnamon200},
+          {label: 'Blueberry', value: colors.blueberry400},
+        ],
+        showCustomHexInput: true,
+      });
+
+      expect(getByRole('textbox')).not.toBeNull();
+    });
   });
 
   describe('reset button', () => {
@@ -85,6 +97,33 @@ describe('Color Picker', () => {
         fireEvent.click(reset);
         expect(onColorReset).toHaveBeenCalled();
       });
+    });
+  });
+  describe('accessibility', () => {
+    it('should have correct aria attributes', () => {
+      renderColorPicker({value: colors.blueberry400});
+      const swatchCinnamon = screen.getByRole('button', {name: /#fcc9c5/});
+      const swatchBlueberry = screen.getByRole('button', {name: /#0875e1/});
+
+      expect(swatchCinnamon).toHaveAttribute('aria-selected', 'false');
+      expect(swatchBlueberry).toHaveAttribute('aria-selected', 'true');
+
+      expect(swatchCinnamon.getAttribute('aria-label')).toBe('#fcc9c5');
+      expect(swatchBlueberry.getAttribute('aria-label')).toBe('#0875e1');
+    });
+    it('should use color labels when provided', () => {
+      renderColorPicker({
+        colorSet: [
+          {label: 'Cinnamon', value: colors.cinnamon200},
+          {label: 'Blueberry', value: colors.blueberry400},
+        ],
+        value: colors.cinnamon200,
+      });
+      const swatchCinnamon = screen.getByRole('button', {name: /Cinnamon/});
+      const swatchBlueberry = screen.getByRole('button', {name: /Blueberry/});
+
+      expect(swatchCinnamon.getAttribute('aria-label')).toBe('Cinnamon');
+      expect(swatchBlueberry.getAttribute('aria-label')).toBe('Blueberry');
     });
   });
 });
