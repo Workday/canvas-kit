@@ -25,7 +25,6 @@ export const formFieldLabelStencil = createStencil({
     fontWeight: system.fontWeight.medium,
     color: system.color.text.default,
     paddingInlineStart: system.space.zero,
-    marginBottom: system.space.x1,
     display: 'flex',
     alignItems: 'center',
     minWidth: px2rem(180),
@@ -44,12 +43,11 @@ export const formFieldLabelStencil = createStencil({
 
     // orientation modifier from parent FormField
     [parentModifier(formFieldStencil.modifiers.orientation.horizontalStart)]: {
-      float: 'left',
+      justifyContent: 'flex-start',
       maxHeight: system.space.x10,
     },
     // orientation modifier from parent FormField
     [parentModifier(formFieldStencil.modifiers.orientation.horizontalEnd)]: {
-      float: 'left',
       maxHeight: system.space.x10,
       justifyContent: 'flex-end',
     },
