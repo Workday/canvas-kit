@@ -1,149 +1,231 @@
 import React, {useState} from 'react';
 import {Property} from 'csstype';
-import {styled, focusRing, hideMouseFocus, filterOutProps} from '@workday/canvas-kit-react/common';
-import isPropValid from '@emotion/is-prop-valid';
-import {borderRadius, colors} from '@workday/canvas-kit-react/tokens';
-import {SystemIconCircle, SystemIconCircleSize} from '@workday/canvas-kit-react/icon';
+import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
+import {createStencil, calc, CSProps} from '@workday/canvas-kit-styling';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {borderRadius} from '@workday/canvas-kit-react/tokens';
+import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
+
 import {userIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
-export enum AvatarVariant {
-  Light,
-  Dark,
-}
-
-export interface AvatarProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface AvatarProps extends CSProps {
   /**
-   * The variant of the Avatar default state. Accepts `Light` or `Dark`.
-   * @default AvatarVariant.Light
+   * The variant of the avatar. Use `light` on dark backgrounds and `dark` on light backgrounds.
+   * @default "light"
    */
-  variant?: AvatarVariant;
+  variant?: 'light' | 'dark';
   /**
    * The size of the Avatar.
-   * @default SystemIconCircleSize.m
+   * - `extraExtraLarge`: 7.5rem x 7.5rem (120px  x 120px)
+   * - `extraLarge`: 4.5rem x 4.5rem (64px x 64px)
+   * - `large`: 2.5rem x 2.5rem (40px x 40px)
+   * - `medium`: 2rem x 2rem (32px x 32px)
+   * - `small`: 1.5rem x 1.5rem (24px x 24px)
+   * - `small`: 1rem x 1rem (16px x 16px)
+   * @default "medium"
    */
-  size?: SystemIconCircleSize | number;
+  size?: /** size of small */
+  'extraSmall' | 'small' | 'medium' | 'large' | 'extraLarge' | 'extraExtraLarge' | (string & {});
   /**
-   * The alt text of the Avatar image. This prop is also used for the aria-label
+   * The alt text of the Avatar image. This prop is also used for the aria-label.
    * @default Avatar
    */
   altText?: string;
   /**
-   * The url of the Avatar image.
+   * The URL of the user's photo. For best fit, use square images.
    */
   url?: string;
   /**
-   * The alternative container type for the button. Uses Emotion's special `as` prop.
-   * Will render an `div` tag instead of a `button` when defined.
-   */
-  as?: 'div';
-  /**
-   * The object-fit CSS property sets how the content of a replaced element,
-   * such as an `<img>` or `<video>`, should be resized to fit its container.
-   * See [object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit).
-   * If your image is not a square, you can use this property to ensure the image is rendered properly.
+   * An objectFit property that can customize how to resize your image to fit its container.
+   * @default "contain"
    */
   objectFit?: Property.ObjectFit;
 }
 
-/**
- * Used to get the props of the div version of an avatar
- */
-type AvatarDivProps = Omit<AvatarProps, keyof React.ButtonHTMLAttributes<HTMLButtonElement>> &
-  React.HTMLAttributes<HTMLDivElement>;
-
-/**
- * Returns an overloaded functional component that uses button props by default.
- */
-type AvatarOverload = {
-  (props: {as: 'div'} & AvatarDivProps & {ref?: React.Ref<HTMLElement>}): React.ReactElement;
-  (props: Omit<AvatarProps, 'as'> & {ref?: React.Ref<HTMLButtonElement>}): React.ReactElement;
-  Variant: typeof AvatarVariant;
-  Size: typeof SystemIconCircleSize;
-};
-
-const fadeTransition = 'opacity 150ms linear';
-
-const StyledContainer = styled('button', {
-  shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
-})<Pick<AvatarProps, 'size' | 'onClick'>>(
-  {
-    background: colors.soap200,
+export const avatarStencil = createStencil({
+  vars: {
+    size: '',
+  },
+  base: ({size}) => ({
+    background: system.color.bg.caution.default,
     position: 'relative',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 0,
     border: 0,
-    boxSizing: 'border-box',
     overflow: 'hidden',
-    borderRadius: borderRadius.circle,
-    '&:not([disabled])': {
-      '&:focus': {
-        outline: 'none',
-        ...focusRing({separation: 2}),
+    cursor: 'default',
+    borderRadius: system.shape.round,
+    width: size,
+    height: size,
+    '&:focus-visible:not([disabled]), &.focus:not([disabled])': {
+      outline: 'none',
+      ...focusRing({separation: 2}),
+    },
+    ':is(button)': {
+      cursor: 'pointer',
+    },
+    ['& > [data-slot="avatar-icon"]']: {
+      transition: 'opacity 150ms linear',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      [systemIconStencil.vars.size]: calc.multiply(size, 0.625),
+    },
+    ['& > [data-slot="avatar-image"]']: {
+      position: 'absolute',
+      width: '100%',
+      height: '100%',
+      borderRadius: borderRadius.circle,
+      transition: 'opacity 150ms linear',
+    },
+  }),
+  modifiers: {
+    variant: {
+      light: {
+        backgroundColor: system.color.bg.alt.default,
+        ['& [data-slot="avatar-icon"]']: {
+          [systemIconStencil.vars.color]: system.color.fg.default,
+        },
+      },
+      dark: {
+        backgroundColor: system.color.bg.primary.default,
+        ['& [data-slot="avatar-icon"]']: {
+          [systemIconStencil.vars.color]: system.color.fg.inverse,
+        },
       },
     },
-    ...hideMouseFocus,
+    size: {
+      extraSmall: {
+        width: system.space.x4,
+        height: system.space.x4,
+        ['& [data-slot="avatar-icon"]']: {
+          [systemIconStencil.vars.size]: calc.multiply(system.space.x4, 0.625),
+        },
+      },
+      small: {
+        width: system.space.x6,
+        height: system.space.x6,
+        ['& [data-slot="avatar-icon"]']: {
+          [systemIconStencil.vars.size]: calc.multiply(system.space.x6, 0.625),
+        },
+      },
+      medium: {
+        width: system.space.x8,
+        height: system.space.x8,
+        ['& [data-slot="avatar-icon"]']: {
+          [systemIconStencil.vars.size]: calc.multiply(system.space.x8, 0.625),
+        },
+      },
+      large: {
+        width: system.space.x10,
+        height: system.space.x10,
+        ['& [data-slot="avatar-icon"]']: {
+          [systemIconStencil.vars.size]: calc.multiply(system.space.x10, 0.625),
+        },
+      },
+      extraLarge: {
+        width: system.space.x16,
+        height: system.space.x16,
+        ['& [data-slot="avatar-icon"]']: {
+          [systemIconStencil.vars.size]: calc.multiply(system.space.x16, 0.625),
+        },
+      },
+      extraExtraLarge: {
+        width: calc.multiply(system.space.x10, 3),
+        height: calc.multiply(system.space.x10, 3),
+        ['& [data-slot="avatar-icon"]']: {
+          [systemIconStencil.vars.size]: calc.multiply(calc.multiply(system.space.x10, 3), 0.625),
+        },
+      },
+    },
+    objectFit: {
+      contain: {
+        ['& [data-slot="avatar-image"]']: {
+          objectFit: 'contain',
+        },
+      },
+      fill: {
+        ['& [data-slot="avatar-image"]']: {
+          objectFit: 'fill',
+        },
+      },
+      cover: {
+        ['& [data-slot="avatar-image"]']: {
+          objectFit: 'cover',
+        },
+      },
+      ['scale-down']: {
+        ['& [data-slot="avatar-image"]']: {
+          objectFit: 'scale-down',
+        },
+      },
+      none: {
+        ['& [data-slot="avatar-image"]']: {
+          objectFit: 'none',
+        },
+      },
+      ['-moz-initial']: {
+        ['& [data-slot="avatar-image"]']: {
+          objectFit: '-moz-initial',
+        },
+      },
+      ['initial']: {
+        ['& [data-slot="avatar-image"]']: {
+          objectFit: 'initial',
+        },
+      },
+      ['inherit']: {
+        ['& [data-slot="avatar-image"]']: {
+          objectFit: 'inherit',
+        },
+      },
+      ['revert']: {
+        ['& [data-slot="avatar-image"]']: {
+          objectFit: 'revert',
+        },
+      },
+      ['unset']: {
+        ['& [data-slot="avatar-image"]']: {
+          objectFit: 'unset',
+        },
+      },
+    },
+    isImageLoaded: {
+      true: {
+        ['& [data-slot="avatar-icon"]']: {
+          opacity: 0,
+        },
+        ['& [data-slot="avatar-image"]']: {
+          opacity: 1,
+        },
+      },
+      false: {
+        ['& [data-slot="avatar-icon"]']: {
+          opacity: 1,
+        },
+        ['& [data-slot="avatar-image"]']: {
+          opacity: 0,
+        },
+      },
+    },
   },
-  ({size}) => ({
-    height: size,
-    width: size,
-  }),
-  ({onClick}) => ({
-    cursor: onClick ? 'pointer' : 'default',
-  })
-);
-
-const StyledStack = styled('span')<Pick<AvatarProps, 'size'>>(
-  {
-    position: 'absolute',
-    top: 0,
-    left: 0,
+  defaultModifiers: {
+    variant: 'light',
+    size: 'medium',
+    isImageLoaded: 'false',
+    objectFit: 'contain',
   },
-  ({size}) => ({
-    height: size,
-    width: size,
-  })
-);
+});
 
-const StyledIcon = styled(SystemIconCircle, {
-  shouldForwardProp: filterOutProps(['isImageLoaded']),
-})<{isImageLoaded: boolean}>(
-  {
-    transition: fadeTransition,
-  },
-  ({isImageLoaded}) => ({
-    opacity: isImageLoaded ? 0 : 1,
-  })
-);
-
-const StyledImage = styled('img', {
-  shouldForwardProp: filterOutProps(['isLoaded', 'objectFit']),
-})<{isLoaded: boolean; objectFit?: Property.ObjectFit}>(
-  {
-    width: '100%',
-    height: '100%',
-    borderRadius: borderRadius.circle,
-    transition: fadeTransition,
-  },
-  ({isLoaded, objectFit}) => ({
-    opacity: isLoaded ? 1 : 0,
-    objectFit,
-  })
-);
-
-export const Avatar: AvatarOverload = React.forwardRef(
-  (
-    {
-      variant = AvatarVariant.Light,
-      size = SystemIconCircleSize.m,
-      altText = 'Avatar',
-      url,
-      onClick,
-      objectFit,
-      ...elemProps
-    }: AvatarProps,
-    ref: React.Ref<HTMLButtonElement>
+export const Avatar = createComponent('button')({
+  displayName: 'Avatar',
+  Component: (
+    {variant, size, altText = 'Avatar', url, objectFit, ...elemProps}: AvatarProps,
+    ref,
+    Element
   ) => {
     const [imageLoaded, setImageLoaded] = useState(false);
 
@@ -157,41 +239,23 @@ export const Avatar: AvatarOverload = React.forwardRef(
       setImageLoaded(false);
     }, [url]);
 
-    const background = variant === AvatarVariant.Dark ? colors.blueberry400 : colors.soap300;
-
     return (
-      <StyledContainer
-        size={size}
-        aria-label={altText}
-        onClick={onClick}
-        disabled={onClick ? false : true}
+      <Element
         ref={ref}
-        {...elemProps}
+        aria-label={altText}
+        role={Element === 'button' ? 'button' : 'img'}
+        {...mergeStyles(elemProps, [
+          avatarStencil({
+            variant,
+            size,
+            objectFit,
+            isImageLoaded: imageLoaded,
+          }),
+        ])}
       >
-        <StyledStack size={size}>
-          <StyledIcon
-            icon={userIcon}
-            background={background}
-            size={size}
-            isImageLoaded={imageLoaded}
-          />
-        </StyledStack>
-        {url && (
-          <StyledStack size={size}>
-            <StyledImage
-              src={url}
-              alt={altText}
-              onLoad={loadImage}
-              isLoaded={imageLoaded}
-              objectFit={objectFit}
-              loading="lazy"
-            />
-          </StyledStack>
-        )}
-      </StyledContainer>
+        <SystemIcon icon={userIcon} data-slot="avatar-icon" />
+        {url && <img data-slot="avatar-image" src={url} alt={altText} onLoad={loadImage} />}
+      </Element>
     );
-  }
-) as any; // AvatarProps and forwardRef signatures are incompatible, so we must force cast
-
-Avatar.Variant = AvatarVariant;
-Avatar.Size = SystemIconCircleSize;
+  },
+});
