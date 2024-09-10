@@ -40,6 +40,7 @@ A note to the reader:
 - [Canvas Tokens](#canvas-tokens)
 - [Codemod](#codemod)
 - [Deprecations](#deprecations)
+  - [Form Field Container](#form-field-container)
 - [Removals](#removals)
   - [InputIconContainer](#inputiconcontainer)
 - [Component Updates](#component-updates)
@@ -74,6 +75,32 @@ formatter to address the format issues that have been introduced in v12.
 We add the [@deprecated](https://jsdoc.app/tags-deprecated.html) JSDoc tag to code we plan to remove
 in a future major release. This signals consumers to migrate to a more stable alternative before the
 deprecated code is removed.
+
+### Form Field Container
+
+**PR:** [#2865](https://github.com/Workday/canvas-kit/pull/2865)
+
+We've deprecated `FormField.Container`. Please use `FormField.Field`.
+
+```tsx
+// v11
+<FormField>
+  <FormField.Label>Email</FormField.Label>
+  <FormField.Container>
+    <FormField.Input as={TextInput} />
+    <FormField.Hint>You must provide an email</FormField.Hint>
+  </FormField.Container>
+</FormField>
+
+// v12
+<FormField>
+  <FormField.Label>Email</FormField.Label>
+  <FormField.Field>
+    <FormField.Input as={TextInput} />
+    <FormField.Hint>You must provide an email</FormField.Hint>
+  </FormField.Field>
+</FormField>
+```
 
 ## Removals
 
@@ -119,6 +146,8 @@ The following components are affected:
 
 ### Avatar
 
+**PR** [#2793](https://github.com/Workday/canvas-kit/pull/2793)
+
 Avatar has been updated to use our new
 [styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-stencil).
 The following changes have been made to the API:
@@ -136,6 +165,8 @@ The following changes have been made to the API:
 type.
 
 ### Form Field
+
+**PR:** [#2865](https://github.com/Workday/canvas-kit/pull/2865)
 
 We've promoted FormField from [Preview](#preview) to [Main](#main). The following changes has been
 made to provide more flexibility and better explicit components when using inputs.
@@ -156,7 +187,29 @@ accessibility of grouped inputs.
 - `orientation`: `"horizontal" | "vertical"` Defines the legend placement.
 - `isRequired`: `true` Defines if a group like RadioGroup is required.
 
+#### Form Field Field
+
+We've added a new sub component to `FormField`, `FormField.Field`. This sub component is meant to
+ensure that the label is always aligned with the input regardless of the value of the `orientation`
+prop on `FormField`. This component should replace `FormField.Container` and always be used to
+ensure proper alignment. Our examples have been updated to reflect this.
+
+Although there is no codemod for this change and it's non breaking, we suggest moving towards adding
+this sub component when using `FormField`. This component also exists on `FormFieldGroup`.
+
+```tsx
+<FormField orientation="horizontal">
+  <FormField.Label>Email</FormField.Label>
+  <FormField.Field>
+    <FormField.Input as={TextInput} />
+    <FormField.Hint>You must provide an email</FormField.Hint>
+  </FormField.Field>
+</FormField>
+```
+
 ### Select
+
+**PR:** [#2865](https://github.com/Workday/canvas-kit/pull/2865)
 
 Parts of Select have been enhanced to improve overriding styles. There should be no change to the
 API or how the component is styled on the consumer end.
