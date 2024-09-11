@@ -101,7 +101,7 @@ export const FormField = createContainer('div')({
   if (process && process.env.NODE_ENV === 'development') {
     if (orientation === 'horizontal') {
       console.warn(
-        'FormField: Orientation options of "horizontal" is deprecated and will be removed in v13. Please update your types and value to use string literal of "horizontalStart". The following values will only be accepted in v13: "horizontalStart" | "horizontalEnd" | "vertical".'
+        'FormField: Orientation option of "horizontal" is deprecated and will be removed in v13. Please update your types and value to use the string literal of "horizontalStart". The following values will be accepted in v13: "horizontalStart" | "horizontalEnd" | "vertical".'
       );
     }
   }
