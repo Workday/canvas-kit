@@ -1,5 +1,5 @@
 import React from 'react';
-import {Avatar} from '@workday/canvas-kit-react/avatar';
+import {Avatar, AvatarVariant} from '@workday/canvas-kit-react/avatar';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -13,6 +13,6 @@ const containerStyles = createStyles({
 export const Basic = () => (
   <div className={containerStyles}>
     <Avatar onClick={handleAvatarButtonClick} />
-    <Avatar as="div" />
+    <Avatar as="div" variant={AvatarVariant.Dark} size={Avatar.Size.s} />
   </div>
 );

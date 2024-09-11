@@ -15,7 +15,7 @@ export interface FormFieldProps extends FlexProps, GrowthBehavior {
    * The direction the child elements should stack
    * @default vertical
    */
-  orientation?: 'vertical' | 'horizontalStart' | 'horizontalEnd';
+  orientation?: 'vertical' | 'horizontalStart' | 'horizontalEnd' | 'horizontal';
   children: React.ReactNode;
 }
 
@@ -96,13 +96,21 @@ export const FormField = createContainer('div')({
     Container: FormFieldContainer,
   },
 })<FormFieldProps>(({children, grow, orientation, ...elemProps}, Element, model) => {
+  // TODO: Remove this warning in v13 once we remove horizontal support in favor of horizontalStart and horizontalEnd.
+  if (process && process.env.NODE_ENV === 'development') {
+    if (orientation === 'horizontal') {
+      console.warn(
+        'FormField: Orientation options of "horizontal" is deprecated and will be removed in v13. Please update your types and value to use string literal of "horizontalStart". The following values will only be accepted in v13: "horizontalStart" | "horizontalEnd" | "vertical".'
+      );
+    }
+  }
   return (
     <Element
       {...mergeStyles(
         elemProps,
         formFieldStencil({
           grow,
-          orientation,
+          orientation: orientation === 'horizontal' ? 'horizontalStart' : orientation,
           error: model.state.error,
           required: model.state.isRequired,
         })
