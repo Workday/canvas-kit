@@ -27,7 +27,7 @@ export function createStyleObjectNode(styles: string, name?: string) {
     [
       ts.factory.createPropertyAssignment(
         ts.factory.createIdentifier('name'),
-        ts.factory.createStringLiteral(name || generateUniqueId()) // We might be using values that are resolved at runtime, but should still be static. We're only supporting the `cs` function running once per file, so a stable id based on a hash is not necessary
+        ts.factory.createStringLiteral(generateUniqueId()) // We might be using values that are resolved at runtime, but should still be static. We're only supporting the `cs` function running once per file, so a stable id based on a hash is not necessary
       ),
       ts.factory.createPropertyAssignment(
         ts.factory.createIdentifier('styles'),
