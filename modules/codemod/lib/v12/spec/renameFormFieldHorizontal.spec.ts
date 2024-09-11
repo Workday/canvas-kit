@@ -7,23 +7,15 @@ const expectTransform = expectTransformFactory(transform);
 describe('rename horizontal', () => {
   it('should not change non-canvas imports', () => {
     const input = stripIndent`
-            import {TextInput} from '@workday/any-other-package'
-            import {TextArea} from './text-area'
             import {FormField} from 'any-other-package'
             <>
-                <TextInput hasError={true} />
-                <TextArea hasError={true} />
                 <FormField hasError={true} />
             </>
         `;
 
     const expected = stripIndent`
-            import {TextInput} from '@workday/any-other-package'
-            import {TextArea} from './text-area'
             import {FormField} from 'any-other-package'
             <>
-                <TextInput hasError={true} />
-                <TextArea hasError={true} />
                 <FormField hasError={true} />
             </>
         `;
@@ -32,8 +24,6 @@ describe('rename horizontal', () => {
 
   it('should rename orientation horizontal to horizontalStart', () => {
     const input = stripIndent`
-        import {TextInput} from '@workday/canvas-kit-preview-react/text-input'
-        import {TextArea} from '@workday/canvas-kit-preview-react/text-area'
         import {FormField} from '@workday/canvas-kit-preview-react/form-field'
         <>
             <FormField orientation="horizontal" />
@@ -41,8 +31,6 @@ describe('rename horizontal', () => {
     `;
 
     const expected = stripIndent`
-        import {TextInput} from '@workday/canvas-kit-preview-react/text-input'
-        import {TextArea} from '@workday/canvas-kit-preview-react/text-area'
         import {FormField} from '@workday/canvas-kit-preview-react/form-field'
         <>
             <FormField orientation="horizontalStart" />
