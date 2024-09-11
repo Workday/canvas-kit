@@ -13,6 +13,6 @@ const containerStyles = createStyles({
 export const Basic = () => (
   <div className={containerStyles}>
     <Avatar onClick={handleAvatarButtonClick} />
-    <Avatar as="div" variant={AvatarVariant.Dark} size={Avatar.Size.s} />
+    <Avatar as="div" />
   </div>
 );
