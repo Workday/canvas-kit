@@ -128,12 +128,16 @@ The following components are affected:
 
 ### Avatar
 
-- Avatar no longer uses `SystemIconCircle` for sizing.
-- `Avatar.Size` is no longer supported. The `size` prop type has change to accept the following:
+- `Avatar.Size` has been deprecated. The `size` prop still accepts `Avatar.Size` in addition to the
+  following values:
   `"extraExtraLarge" | "extraLarge" | "large" | "medium" | "small" | "extraSmall" | (string{})`
-- `Avatar.Variant` is no longer supported. Enum `AvatarVariant` has been removed. The `variant` type
-  prop now accepts `"dark" | "light"`
+- `Avatar.Variant` has been deprecated. The `variant` prop still accepts `Avatar.Variant` in
+  addition to the following values: `"dark" | "light"`
 - The `as` prop now accepts any element, not just `div`.
+
+> **Note:** Both `Avatar.Size` and `Avatar.Variant` have been deprecated in favor of the new string
+> union types. You will see a console warn message while in development if you're still using this.
+> Please update your types and usage before v13.
 
 ### Form Field
 
@@ -150,8 +154,11 @@ We’ve updated the `orientation` prop on the FormField component to accept the 
 > and end match the flex property of `flex-start` and `flex-end`. This is especially applicable for
 > moving between RTL (right-to-left) and LTR (left-to-right) languages.
 
-🤖 The codemod will handle the change of `hasError` to `error` for you automatically. You may need
-to check your logic to make sure it sets the appropaite value to the prop.
+🤖 The codemod will handle the change of `orientation="horizontal"` to
+`orientation="horizontalStart"` if you're using the string literal values.
+
+> **Note:** Orientation "horizontal" has been deprecated. You will see a console warn message
+> suggesting to update your types and usage to `horizontalStart`, `horizontalEnd` or `vertical`.
 
 ### Text Area
 
