@@ -143,22 +143,20 @@ The following components are affected:
 
 **PR** [#2881](https://github.com/Workday/canvas-kit/pull/2881)
 
-Previously, the FormField component’s `orientation` prop only accepted the values `vertical` and
-`horizontal` to align the label.
-
-We’ve updated the `orientation` prop on the FormField component to accept the following values:
-`vertical`, `horizontalStart` and `horizontalEnd`. If you previously had set `orientation` to
-`horizontal` a codemod will update this value to `orientation="horizontalStart"`.
+The orientation prop on the `FormField` component will be updated to accept the following values:
+`vertical`, `horizontalStart`, and `horizontalEnd`. `horizontal` will still be accepted as a value
+in v12, but it will be deprecated and slated for removal in a future major release. These changes
+are intended to provide more flexibility with label alignments on `FormField` elements.
 
 > **Note**: The horizontal alignment of start and end are relative to its container, meaning start
 > and end match the flex property of `flex-start` and `flex-end`. This is especially applicable for
 > moving between RTL (right-to-left) and LTR (left-to-right) languages.
 
-🤖 The codemod will handle the change of `orientation="horizontal"` to
-`orientation="horizontalStart"` if you're using the string literal values.
-
 > **Note:** Orientation "horizontal" has been deprecated. You will see a console warn message
 > suggesting to update your types and usage to `horizontalStart`, `horizontalEnd` or `vertical`.
+
+🤖 The codemod will handle the change of `orientation="horizontal"` to
+`orientation="horizontalStart"` if you're using the string literal values.
 
 ### Text Area
 
