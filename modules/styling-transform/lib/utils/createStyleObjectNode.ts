@@ -6,7 +6,6 @@ import {generateUniqueId} from '@workday/canvas-kit-styling';
 
 import {prettyStringify} from './stylisFns';
 import {NestedStyleObject, TransformerContext} from './types';
-import {getHash} from './getHash';
 
 /**
  * Creates an AST node representation of the passed in `styleObj`, but in the format of `{name:
@@ -27,7 +26,7 @@ export function createStyleObjectNode(styles: string, name?: string) {
     [
       ts.factory.createPropertyAssignment(
         ts.factory.createIdentifier('name'),
-        ts.factory.createStringLiteral(generateUniqueId()) // We might be using values that are resolved at runtime, but should still be static. We're only supporting the `cs` function running once per file, so a stable id based on a hash is not necessary
+        ts.factory.createStringLiteral(name || generateUniqueId()) // We might be using values that are resolved at runtime, but should still be static. We're only supporting the `cs` function running once per file, so a stable id based on a hash is not necessary
       ),
       ts.factory.createPropertyAssignment(
         ts.factory.createIdentifier('styles'),
@@ -65,7 +64,7 @@ export function serializeStyles(
 ) {
   const {getFileName, styles, cache, names, extractedNames} = context;
   const fileName = getFileName(node.getSourceFile().fileName);
-  const hash = getHash(node, context);
+  const hash = generateUniqueId(); //getHash(node, context);
   const serialized = {...serializedStylesEmotion([input]), name: hash} as ReturnType<
     typeof serializedStylesEmotion
   >;
