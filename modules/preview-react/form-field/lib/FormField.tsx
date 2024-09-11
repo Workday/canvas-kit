@@ -13,7 +13,7 @@ import {formFieldStencil} from './formFieldStencil';
 //TODO: Remove `horizontal` option in v13 and the console warn message.
 export interface FormFieldProps extends FlexProps, GrowthBehavior {
   /**
-   * The direction the child elements should stack
+   * The direction the child elements should stack. In v13, `horizontal` will be removed. Please use `horizontalStart` or `horizontalEnd` for horizontal alignment.
    * @default vertical
    */
   orientation?: 'vertical' | 'horizontalStart' | 'horizontalEnd' | 'horizontal';
