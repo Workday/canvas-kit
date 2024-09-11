@@ -259,7 +259,7 @@ export const Avatar = createComponent('button')({
     if (process && process.env.NODE_ENV === 'development') {
       if (typeof variant === 'number') {
         console.warn(
-          'Avatar: Avatar.Variant is deprecated and will be removed in v13. Please use string literal of "light"  or "dark"'
+          'Avatar: Avatar.Variant is deprecated and will be removed in v13. Please use a string literal of "light"  or "dark"'
         );
       }
       if (typeof size === 'number') {
