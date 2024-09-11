@@ -10,6 +10,7 @@ import {FormFieldHint} from './FormFieldHint';
 import {FormFieldContainer} from './FormFieldContainer';
 import {formFieldStencil} from './formFieldStencil';
 
+//TODO: Remove `horizontal` option in v13 and the console warn message.
 export interface FormFieldProps extends FlexProps, GrowthBehavior {
   /**
    * The direction the child elements should stack
