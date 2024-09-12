@@ -8,6 +8,9 @@ export default defineConfig({
   retries: {
     runMode: 2,
   },
+  env: {
+    NODE_ENV: 'test', // or 'development', 'production', etc.
+  },
 
   blockHosts: ['cdn.fontawesome.com'],
 
