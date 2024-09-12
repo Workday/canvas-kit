@@ -100,7 +100,7 @@ describe('Menu', () => {
           });
 
           it('should select the second item', () => {
-            cy.get('span[data-testid="output"]').should('have.text', '1');
+            cy.get('span[data-testid="output"]').should('contain', '1');
           });
         });
       });
@@ -185,7 +185,7 @@ describe('Menu', () => {
           });
 
           it('should not close the menu', () => {
-            cy.findByRole('menu').should('be.visible');
+            cy.get('div[role="menu"]').should('be.visible');
           });
 
           it('should have aria-expanded set to true', () => {

@@ -622,7 +622,7 @@ describe('Tabs', () => {
           cy.get('[role="menu"]').should('exist');
         });
 
-        it.only('should have the third Tab as the first menu item', () => {
+        it('should have the third Tab as the first menu item', () => {
           cy.get('button[role="menuitem"]').first().should('have.text', 'Third Tab');
         });
       });
