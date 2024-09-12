@@ -53,7 +53,7 @@ export const CreateStencil = () => {
   };
   return (
     <>
-      <FormField orientation="horizontal">
+      <FormField orientation="horizontalStart">
         <FormField.Label>Color</FormField.Label>
         <FormField.Input as={ColorInput} value={value} onChange={onChange} />
       </FormField>

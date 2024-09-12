@@ -293,6 +293,14 @@ describe('Select', () => {
 
     context('when the menu is opened', () => {
       beforeEach(() => {
+        cy.window().then(win => {
+          // @ts-ignore mocking window process
+          win.process = {
+            env: {
+              NODE_ENV: 'development',
+            },
+          };
+        });
         cy.findByRole('combobox').focus().realType('{downarrow}');
       });
 
