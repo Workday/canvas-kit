@@ -10,6 +10,14 @@ import {Complex} from '../../modules/react/select/stories/examples/Complex';
 describe('Select', () => {
   context(`given the "Menu Height" story is rendered`, () => {
     beforeEach(() => {
+      cy.window().then(win => {
+        // @ts-ignore mocking window process
+        win.process = {
+          env: {
+            NODE_ENV: 'development',
+          },
+        };
+      });
       cy.mount(<MenuHeight />);
     });
 
@@ -213,6 +221,14 @@ describe('Select', () => {
 
   context(`given the "Basic" story is rendered`, () => {
     beforeEach(() => {
+      cy.window().then(win => {
+        // @ts-ignore mocking window process
+        win.process = {
+          env: {
+            NODE_ENV: 'development',
+          },
+        };
+      });
       cy.mount(<Basic />);
     });
 
@@ -288,11 +304,27 @@ describe('Select', () => {
 
   context('given the "Disabled Options" story with a disabled option', () => {
     beforeEach(() => {
+      cy.window().then(win => {
+        // @ts-ignore mocking window process
+        win.process = {
+          env: {
+            NODE_ENV: 'development',
+          },
+        };
+      });
       cy.mount(<DisabledOptions />);
     });
 
     context('when the menu is opened', () => {
       beforeEach(() => {
+        cy.window().then(win => {
+          // @ts-ignore mocking window process
+          win.process = {
+            env: {
+              NODE_ENV: 'development',
+            },
+          };
+        });
         cy.findByRole('combobox').focus().realType('{downarrow}');
       });
 
@@ -330,6 +362,14 @@ describe('Select', () => {
 
   context(`given the "Disabled" story is rendered`, () => {
     beforeEach(() => {
+      cy.window().then(win => {
+        // @ts-ignore mocking window process
+        win.process = {
+          env: {
+            NODE_ENV: 'development',
+          },
+        };
+      });
       cy.mount(<Disabled />);
     });
 
@@ -346,6 +386,14 @@ describe('Select', () => {
 
   context(`given the "Ref Forwarding" story is rendered`, () => {
     beforeEach(() => {
+      cy.window().then(win => {
+        // @ts-ignore mocking window process
+        win.process = {
+          env: {
+            NODE_ENV: 'development',
+          },
+        };
+      });
       cy.mount(<RefForwarding />);
     });
 
@@ -363,6 +411,14 @@ describe('Select', () => {
 
   context(`given the "Complex" story is rendered`, () => {
     beforeEach(() => {
+      cy.window().then(win => {
+        // @ts-ignore mocking window process
+        win.process = {
+          env: {
+            NODE_ENV: 'development',
+          },
+        };
+      });
       cy.mount(<Complex />);
       cy.findByRole('combobox').focus();
       cy.focused().realType('{downarrow}');
@@ -379,6 +435,14 @@ describe('Select', () => {
 
   context(`given the "FetchingDynamicItems" story is rendered`, () => {
     beforeEach(() => {
+      cy.window().then(win => {
+        // @ts-ignore mocking window process
+        win.process = {
+          env: {
+            NODE_ENV: 'development',
+          },
+        };
+      });
       cy.mount(<FetchingDynamicItems />);
     });
 
@@ -397,6 +461,14 @@ describe('Select', () => {
 
   context(`given the "MenuHeight" story is rendered`, () => {
     beforeEach(() => {
+      cy.window().then(win => {
+        // @ts-ignore mocking window process
+        win.process = {
+          env: {
+            NODE_ENV: 'development',
+          },
+        };
+      });
       cy.mount(<MenuHeight />);
     });
 
@@ -424,6 +496,14 @@ describe('Select', () => {
 
   context(`given the "Disabled Options" story is rendered`, () => {
     beforeEach(() => {
+      cy.window().then(win => {
+        // @ts-ignore mocking window process
+        win.process = {
+          env: {
+            NODE_ENV: 'development',
+          },
+        };
+      });
       cy.mount(<DisabledOptions />);
     });
 
