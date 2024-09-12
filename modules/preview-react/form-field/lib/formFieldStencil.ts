@@ -18,7 +18,11 @@ export const formFieldStencil = createStencil({
       },
     },
     orientation: {
-      horizontal: {
+      horizontalStart: {
+        flexDirection: 'row',
+        gap: system.space.x8,
+      },
+      horizontalEnd: {
         flexDirection: 'row',
         gap: system.space.x8,
       },
