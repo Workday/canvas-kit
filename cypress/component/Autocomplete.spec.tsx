@@ -16,6 +16,14 @@ function waitForAutocompleteReady() {
 describe('Autocomplete', () => {
   context(`given the 'Autocomplete' story is rendered`, () => {
     beforeEach(() => {
+      cy.window().then(win => {
+        // @ts-ignore mocking window process
+        win.process = {
+          env: {
+            NODE_ENV: 'development',
+          },
+        };
+      });
       cy.mount(<Autocomplete />);
     });
 
