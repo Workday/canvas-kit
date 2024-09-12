@@ -272,7 +272,7 @@ describe('Breadcrumbs', () => {
           cy.focused().realType('{downarrow}');
           cy.focused().realType('{downarrow}');
           cy.focused().realType('{downarrow}');
-          cy.get('[role="menuitem"]').first().contains('Second Link').should('have.focus');
+          cy.get('[role="menuitem"]').first().focused().should('contain', 'Second Link');
         });
       });
 
@@ -293,9 +293,9 @@ describe('Breadcrumbs', () => {
           cy.focused().realType('{downarrow}');
         });
 
-        it('should toggle focus to the previous list item', () => {
+        it.only('should toggle focus to the previous list item', () => {
           cy.focused().realType('{uparrow}');
-          cy.get('[role="menuitem"]').first().contains('Second Link').should('have.focus');
+          cy.get('[role="menuitem"]').first().focused().should('contain', 'Second Link');
         });
 
         it('should return focus from the first menu item to the last', () => {

@@ -623,7 +623,11 @@ describe('Tabs', () => {
         });
 
         it('should have the third Tab as the first menu item', () => {
-          cy.get('[role="menu"]').first().focused().should('contain', 'Third Tab');
+          cy.get('[role="menu"]').first().contains('Third Tab');
+        });
+
+        it('the third Tab as the first menu item should be focused', () => {
+          cy.get('[role="menu"]').first().contains('Third Tab').should('be.focused');
         });
       });
     });
