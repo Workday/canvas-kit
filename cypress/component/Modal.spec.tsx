@@ -451,8 +451,16 @@ context(`given the [Components/Popups/Modal, Without close icon] story is render
 
 context(`given the [Components/Popups/Modal, Custom focus] story is rendered`, () => {
   beforeEach(() => {
+    cy.window().then(win => {
+      // @ts-ignore mocking window process
+      win.process = {
+        env: {
+          NODE_ENV: 'development',
+        },
+      };
+    });
+
     cy.mount(<CustomFocus />);
-    cy.wait(150);
   });
 
   context('when button is focused', () => {
@@ -467,7 +475,9 @@ context(`given the [Components/Popups/Modal, Custom focus] story is rendered`, (
 
   context('when the target button is clicked', () => {
     beforeEach(() => {
-      cy.findByRole('button', {name: 'Acknowledge License'}).click();
+      cy.findByRole('button', {name: 'Acknowledge License'}).should('exist');
+      cy.findByRole('button', {name: 'Acknowledge License'}).focus();
+      cy.focused().click();
     });
 
     it('should open the modal', () => {
