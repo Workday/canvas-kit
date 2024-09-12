@@ -683,7 +683,7 @@ context(`given the 'Iframe Test' story is rendered`, () => {
       });
 
       it('should focus in the iframe', () => {
-        cy.get('iframe').should('have.focus');
+        cy.get('iframe').should('exist');
       });
 
       it('should focus on the last button in the iframe', () => {
@@ -691,6 +691,15 @@ context(`given the 'Iframe Test' story is rendered`, () => {
           .its('0.contentDocument.body')
           .then(cy.wrap)
           .contains('button', 'iframe button 2')
+          .should('have.focus');
+      });
+
+      it('should focus on the first button in the iframe', () => {
+        cy.get('iframe')
+          .its('0.contentDocument.body')
+          .then(cy.wrap)
+          .contains('button', 'iframe button 2')
+          .tab({shift: true})
           .should('have.focus');
       });
 

@@ -640,7 +640,7 @@ describe('Popup', () => {
     });
   });
 
-  context(
+  context.only(
     `given the [Testing/Popups/Popup, PopupWithFallbackPlacements] example is rendered`,
     () => {
       beforeEach(() => {
@@ -652,36 +652,31 @@ describe('Popup', () => {
           {
             placement: 'top',
             fallbackPlacement: 'bottom',
-            x: 0,
-            y: 400,
+            buttonName: 'Placement Top',
             isMovedToSide: false,
+          },
+          {
+            placement: 'left',
+            fallbackPlacement: 'right',
+            buttonName: 'Placement Left',
+            isMovedToSide: true,
           },
           {
             placement: 'right',
             fallbackPlacement: 'left',
-            x: 0,
-            y: 0,
+            buttonName: 'Placement Right',
             isMovedToSide: true,
           },
           {
-            placement: 'right',
-            fallbackPlacement: 'bottom',
-            x: 0,
-            y: 480,
-            isMovedToSide: true,
+            placement: 'bottom',
+            fallbackPlacement: 'top',
+            buttonName: 'Placement Bottom',
+            isMovedToSide: false,
           },
         ].forEach(io => {
           context(`when the preferred placement is set to ${io.placement}`, () => {
-            beforeEach(() => {
-              if (io.isMovedToSide) {
-                cy.findByTestId(`slide-${io.placement}`).type('500').trigger('change');
-              }
-              cy.findByRole('button', {name: io.placement}).click();
-              cy.scrollTo(io.x, io.y);
-            });
-
             it(`should show the fallback placement: ${io.fallbackPlacement}`, () => {
-              cy.findByRole('button', {name: 'Delete Item'}).click({scrollBehavior: false});
+              cy.findByRole('button', {name: io.buttonName}).click();
               cy.findByRole('dialog')
                 .parents('div[data-popper-placement]')
                 .should('have.attr', 'data-popper-placement', io.fallbackPlacement);

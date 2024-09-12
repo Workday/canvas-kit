@@ -180,7 +180,7 @@ describe('Menu', () => {
         });
 
         it('should focus on the last option', () => {
-          cy.findByRole('menuitem', {name: 'Fourth Item'}).should('have.focus');
+          cy.get('[role="menuitem"]').last().contains('Fourth Item').should('have.focus');
         });
 
         context('when the enter key is pressed', () => {
