@@ -7,9 +7,8 @@ import {
   useCloseOnOutsideClick,
   useInitialFocus,
   useReturnFocus,
-  Placement,
 } from '@workday/canvas-kit-react/popup';
-import {Box, Flex, Grid} from '@workday/canvas-kit-react/layout';
+import {Flex, Grid} from '@workday/canvas-kit-react/layout';
 import {createStyles, calc} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -64,7 +63,9 @@ export const PopupWithFallbackPlacements = () => {
               <Popup.Heading paddingTop="m">This is Popup heading</Popup.Heading>
               <Popup.Body>Are you sure you'd like to delete the item titled 'My Item'?</Popup.Body>
               <Flex gap="s" padding="xxs" marginTop="xxs">
-                <Popup.CloseButton as={DeleteButton}>Delete</Popup.CloseButton>
+                <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
+                  Delete
+                </Popup.CloseButton>
                 <Popup.CloseButton>Cancel</Popup.CloseButton>
               </Flex>
             </Popup.Card>
@@ -80,7 +81,9 @@ export const PopupWithFallbackPlacements = () => {
               <Popup.Heading paddingTop="m">This is Popup heading</Popup.Heading>
               <Popup.Body>Are you sure you'd like to delete the item titled 'My Item'?</Popup.Body>
               <Flex gap="s" padding="xxs" marginTop="xxs">
-                <Popup.CloseButton as={DeleteButton}>Delete</Popup.CloseButton>
+                <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
+                  Delete
+                </Popup.CloseButton>
                 <Popup.CloseButton>Cancel</Popup.CloseButton>
               </Flex>
             </Popup.Card>
@@ -96,7 +99,9 @@ export const PopupWithFallbackPlacements = () => {
               <Popup.Heading paddingTop="m">This is Popup heading</Popup.Heading>
               <Popup.Body>Are you sure you'd like to delete the item titled 'My Item'?</Popup.Body>
               <Flex gap="s" padding="xxs" marginTop="xxs">
-                <Popup.CloseButton as={DeleteButton}>Delete</Popup.CloseButton>
+                <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
+                  Delete
+                </Popup.CloseButton>
                 <Popup.CloseButton>Cancel</Popup.CloseButton>
               </Flex>
             </Popup.Card>
@@ -112,7 +117,9 @@ export const PopupWithFallbackPlacements = () => {
               <Popup.Heading paddingTop="m">This is Popup heading</Popup.Heading>
               <Popup.Body>Are you sure you'd like to delete the item titled 'My Item'?</Popup.Body>
               <Flex gap="s" padding="xxs" marginTop="xxs">
-                <Popup.CloseButton as={DeleteButton}>Delete</Popup.CloseButton>
+                <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
+                  Delete
+                </Popup.CloseButton>
                 <Popup.CloseButton>Cancel</Popup.CloseButton>
               </Flex>
             </Popup.Card>
