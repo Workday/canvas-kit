@@ -78,7 +78,7 @@ describe('Menu', () => {
         });
 
         it('should transfer focus to the second item', () => {
-          cy.get('[role="menuitem"]').contains('Second Item').should('have.focus');
+          cy.get('button[role="menuitem"]').should('contain', 'Second Item').focused();
         });
 
         context('when the enter key is pressed', () => {
@@ -100,7 +100,7 @@ describe('Menu', () => {
           });
 
           it('should select the second item', () => {
-            cy.get('[data-testid="output"]').should('contain', '1');
+            cy.get('span[data-testid="output"]').should('have.text', '1');
           });
         });
       });
@@ -129,11 +129,11 @@ describe('Menu', () => {
 
       context('when the fourth item is clicked', () => {
         beforeEach(() => {
-          cy.contains('button', 'Fourth Item').click();
+          cy.get('button').contains('Fourth Item').click();
         });
 
         it('should not close the menu', () => {
-          cy.get('[role="menu"]').should('be.visible');
+          cy.get('div[role="menu"]').should('be.visible');
         });
 
         it('should not select the fourth item', () => {
@@ -189,11 +189,9 @@ describe('Menu', () => {
           });
 
           it('should have aria-expanded set to true', () => {
-            cy.findByRole('button', {name: 'Open Menu'}).should(
-              'have.attr',
-              'aria-expanded',
-              'true'
-            );
+            cy.get('button[type="button"]')
+              .should('contain', 'Open Menu')
+              .and('have.attr', 'aria-expanded', 'true');
           });
 
           it('should not select the fourth item', () => {

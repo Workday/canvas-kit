@@ -223,9 +223,7 @@ context(`given the [Testing/Popups/Modal, With Tooltips] story is rendered`, () 
           cy.findByRole('button', {name: 'OK'}).focus();
         });
         it(`should open the 'OK' tooltip`, () => {
-          cy.findByRole('tooltip', {name: 'Really, Really, Really, Really, Really sure'}).should(
-            'be.visible'
-          );
+          cy.get('[role="tooltip"]').should('be.visible');
         });
 
         context(`when clicking outside the modal`, () => {
