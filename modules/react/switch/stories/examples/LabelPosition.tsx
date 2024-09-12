@@ -10,7 +10,7 @@ export const LabelPosition = () => {
   };
 
   return (
-    <FormField orientation="horizontal">
+    <FormField orientation="horizontalStart">
       <FormField.Label>Dark Mode</FormField.Label>
       <FormField.Field>
         <FormField.Input as={Switch} checked={checked} onChange={handleChange} />

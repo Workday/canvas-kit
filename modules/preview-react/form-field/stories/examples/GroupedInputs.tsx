@@ -163,7 +163,7 @@ export const GroupedInputs = () => {
             {error === 'error' && 'You must choose one topping'}
           </FormFieldGroup.Hint>
         </FormFieldGroup>
-        <FormFieldGroup error={radioError}>
+        <FormFieldGroup error={radioError} orientation="horizontalStart">
           <FormFieldGroup.Legend>Choose Your Crust</FormFieldGroup.Legend>
           <FormFieldGroup.Field>
             <FormFieldGroup.List as={RadioGroup} onChange={handleRadioChange} value={value}>

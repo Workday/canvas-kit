@@ -42,18 +42,37 @@ export const AllFields = () => {
       </FormField>
       <FormField error="error" grow>
         <FormField.Label>Choose a Crust</FormField.Label>
-        <FormField.Field>
-          <Select items={['Pizza', 'Cheeseburger', 'Fries']}>
-            <FormField.Input as={Select.Input} />
-            <Select.Popper>
-              <Select.Card>
-                <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
-              </Select.Card>
-            </Select.Popper>
-          </Select>
-        </FormField.Field>
+        <Select items={['Pizza', 'Cheeseburger', 'Fries']}>
+          <FormField.Input as={Select.Input} />
+          <Select.Popper>
+            <Select.Card>
+              <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
+            </Select.Card>
+          </Select.Popper>
+        </Select>
       </FormField>
-      <FormFieldGroup error="error" orientation="horizontal" grow>
+      <FormField as="fieldset" isRequired={true} error={'error'} orientation="horizontalStart" grow>
+        <FormField.Label as="legend">Radio Group Legend</FormField.Label>
+        <FormField.Container>
+          <FormField.Input as={RadioGroup}>
+            <RadioGroup.RadioButton value="deep-dish">Deep dish</RadioGroup.RadioButton>
+            <RadioGroup.RadioButton value="thin">Thin</RadioGroup.RadioButton>
+            <RadioGroup.RadioButton value="gluten-free">Gluten free</RadioGroup.RadioButton>
+            <RadioGroup.RadioButton value="cauliflower">Cauliflower</RadioGroup.RadioButton>
+            <RadioGroup.RadioButton value="butter">
+              Butter - the best thing to put on bread
+            </RadioGroup.RadioButton>
+          </FormField.Input>
+          <FormField.Hint>Error Message</FormField.Hint>
+        </FormField.Container>
+      </FormField>
+      <FormField as="fieldset" grow>
+        <FormField.Label as="legend">Checkbox Legend</FormField.Label>
+        <FormField.Input checked={true} as={Checkbox} label="Checkbox Label" />
+        <FormField.Input checked={false} as={Checkbox} label="Thin Crust" />
+        <FormField.Input checked={false} as={Checkbox} label="Extra Cheese" />
+      </FormField>
+      <FormFieldGroup error="error" orientation="horizontalStart" grow>
         <FormFieldGroup.Legend>Choose Your Crust</FormFieldGroup.Legend>
         <FormFieldGroup.Field>
           <FormFieldGroup.List as={RadioGroup}>
@@ -83,7 +102,7 @@ export const AllFields = () => {
         </FormField.Field>
       </FormFieldGroup>
 
-      <FormField orientation="horizontal" grow>
+      <FormField orientation="horizontalStart" grow>
         <FormField.Label>Switch Label</FormField.Label>
         <FormField.Field>
           <FormField.Input as={Switch} />

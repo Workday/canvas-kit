@@ -15,7 +15,7 @@ export interface FormFieldGroupProps extends FlexProps, GrowthBehavior {
    * The direction the child elements should stack
    * @default vertical
    */
-  orientation?: 'vertical' | 'horizontal';
+  orientation?: 'vertical' | 'horizontalStart' | 'horizontalEnd';
   children: React.ReactNode;
 }
 

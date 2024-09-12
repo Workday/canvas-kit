@@ -48,6 +48,7 @@ A note to the reader:
   - [Avatar](#avatar)
   - [FormField](#form-field)
   - [Select](#select)
+  - [Form Field](#form-field)
   - [Text Area](#text-area)
 - [Troubleshooting](#troubleshooting)
 - [Glossary](#glossary)
@@ -123,7 +124,8 @@ from Main instead.
 
 **PRs:** [#2825](https://github.com/Workday/canvas-kit/pull/2825),
 [#2795](https://github.com/Workday/canvas-kit/pull/2795),
-[#2793](https://github.com/Workday/canvas-kit/pull/2793)
+[#2793](https://github.com/Workday/canvas-kit/pull/2793),
+[#2881](https://github.com/Workday/canvas-kit/pull/2881)
 
 Several components have been refactored to use our new
 [Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
@@ -134,6 +136,7 @@ The following components are affected:
 
 - `Avatar`
 - `Dialog`
+- `FormField`
 - `Modal`
 - `Popup`
 - `TextArea`
@@ -152,24 +155,39 @@ Avatar has been updated to use our new
 [styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-stencil).
 The following changes have been made to the API:
 
-- Avatar no longer uses `SystemIconCircle` for sizing.
-- `Avatar.Size` is no longer supported.
-- The `size` prop type has change to accept the following:
+- `Avatar.Size` has been deprecated. The `size` prop still accepts `Avatar.Size` in addition to the
+  following values:
   `"extraExtraLarge" | "extraLarge" | "large" | "medium" | "small" | "extraSmall" | (string{})`
-- `Avatar.Variant` is no longer supported.
-- Enum `AvatarVariant` has been removed.
-- The `variant` prop now accepts `"dark" | "light"`
+- `Avatar.Variant` has been deprecated. The `variant` prop still accepts `Avatar.Variant` in
+  addition to the following values: `"dark" | "light"`
 - The `as` prop now accepts any element, not just `div`.
 
-🤖 The codemod will handle the change of updating the `size` prop and `variant` prop to the correct
-type.
+> **Note:** Both `Avatar.Size` and `Avatar.Variant` have been deprecated in favor of the new string
+> union types. You will see a console warn message while in development if you're still using this.
+> Please update your types and usage before v13.
 
 ### Form Field
 
-**PR:** [#2865](https://github.com/Workday/canvas-kit/pull/2865)
+**PRs:** [#2865](https://github.com/Workday/canvas-kit/pull/2865),
+[#2881](https://github.com/Workday/canvas-kit/pull/2881)
 
 We've promoted FormField from [Preview](#preview) to [Main](#main). The following changes has been
 made to provide more flexibility and better explicit components when using inputs.
+
+The orientation prop on the `FormField` component will be updated to accept the following values:
+`vertical`, `horizontalStart`, and `horizontalEnd`. `horizontal` will still be accepted as a value
+in v12, but it will be deprecated and slated for removal in a future major release. These changes
+are intended to provide more flexibility with label alignments on `FormField` elements.
+
+> **Note**: The horizontal alignment of start and end are relative to its container, meaning start
+> and end match the flex property of `flex-start` and `flex-end`. This is especially applicable for
+> moving between RTL (right-to-left) and LTR (left-to-right) languages.
+
+> **Note:** Orientation "horizontal" has been deprecated. You will see a console warn message
+> suggesting to update your types and usage to `horizontalStart`, `horizontalEnd` or `vertical`.
+
+🤖 The codemod will handle the change of `orientation="horizontal"` to
+`orientation="horizontalStart"` if you're using the string literal values.
 
 #### Form Field Group
 

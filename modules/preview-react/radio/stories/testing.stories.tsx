@@ -99,7 +99,7 @@ export const RadioStates = {
             columnProps={[
               {
                 label: 'Left Label',
-                props: {label: 'Contact', labelPosition: 'horizontal'},
+                props: {label: 'Contact', labelPosition: 'horizontalStart'},
               },
               {
                 label: 'Top Label',
@@ -162,7 +162,7 @@ export const RadioStates = {
         </StaticStates>
         <h3>RadioGroup (wrapping)</h3>
         <div style={{maxWidth: 480}}>
-          <FormField orientation="horizontal" as="fieldset">
+          <FormField orientation="horizontalStart" as="fieldset">
             <FormField.Label as="legend">
               Really long label. Really long label. Really long label. Really long label. Really
               long label. Really long label.

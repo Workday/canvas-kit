@@ -11,7 +11,7 @@ export const LabelPosition = () => {
   };
 
   return (
-    <FormField orientation="horizontal" as="fieldset">
+    <FormField orientation="horizontalStart" as="fieldset">
       <FormField.Label as="legend">Choose Your Pizza Crust</FormField.Label>
       <FormField.Input as={RadioGroup} name={useUniqueId()} onChange={handleChange} value={value}>
         <Radio label="Deep dish" value="deep-dish" />

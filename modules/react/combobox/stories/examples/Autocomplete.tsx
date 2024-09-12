@@ -105,7 +105,7 @@ export const Autocomplete = () => {
   );
 
   return (
-    <FormField orientation="horizontal" isRequired>
+    <FormField orientation="horizontalStart" isRequired>
       <FormField.Label>Fruit</FormField.Label>
       <FormField.Field>
         <Combobox model={model} onChange={event => console.log('input', event.currentTarget.value)}>
