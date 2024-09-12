@@ -9,7 +9,7 @@ export default defineConfig({
     runMode: 2,
   },
   env: {
-    NODE_ENV: 'test', // or 'development', 'production', etc.
+    NODE_ENV: 'development', // or 'development', 'production', etc.
   },
 
   blockHosts: ['cdn.fontawesome.com'],
