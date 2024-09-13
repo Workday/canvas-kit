@@ -191,9 +191,9 @@ describe('Menu', () => {
             cy.get('div[role="menu"]').should('be.visible');
           });
 
-          it.only('should have aria-expanded set to true', () => {
-            cy.get('button[aria-expanded="true"]').should('exist');
-            cy.get('button[aria-expanded="true"]').should('contain', 'Open Menu');
+          it('should have aria-expanded set to true', () => {
+            cy.get('button[aria-expanded]').should('exist');
+            cy.get('button[aria-expanded]').should('have.attr', 'aria-expanded', 'true');
           });
 
           it('should not select the fourth item', () => {

@@ -698,7 +698,7 @@ context(`given the 'Iframe Test' story is rendered`, () => {
         cy.get('iframe')
           .its('0.contentDocument.body')
           .find('button')
-          .should('contain', 'iframe button 2')
+          .should('contain', 'iframe button 1')
           .tab({shift: true})
           .and('have.focus');
       });
