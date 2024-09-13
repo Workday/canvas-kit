@@ -293,8 +293,9 @@ describe('Breadcrumbs', () => {
           cy.focused().realType('{downarrow}');
         });
 
-        it.only('should toggle focus to the previous list item', () => {
+        it('should toggle focus to the previous list item', () => {
           cy.focused().realType('{uparrow}');
+          cy.get('[role="menuitem"]').first().should('exist');
           cy.get('[role="menuitem"]').first().should('contain', 'Second Link').focused();
         });
 

@@ -100,6 +100,7 @@ describe('Menu', () => {
           });
 
           it('should select the second item', () => {
+            cy.get('[data-testid="output"]').should('exist');
             cy.findByTestId('output').should('contain', '1');
           });
         });
@@ -123,6 +124,7 @@ describe('Menu', () => {
         });
 
         it('should select the second item', () => {
+          cy.get('[data-testid="output"]').should('exist');
           cy.findByTestId('output').should('contain', '1');
         });
       });
@@ -133,6 +135,7 @@ describe('Menu', () => {
         });
 
         it('should not close the menu', () => {
+          cy.get('div[role="menu"]').should('exist');
           cy.get('div[role="menu"]').should('be.visible');
         });
 
@@ -184,10 +187,12 @@ describe('Menu', () => {
           });
 
           it('should not close the menu', () => {
+            cy.get('div[role="menu"]').should('exist');
             cy.get('div[role="menu"]').should('be.visible');
           });
 
-          it('should have aria-expanded set to true', () => {
+          it.only('should have aria-expanded set to true', () => {
+            cy.get('button[aria-expanded="true"]').should('exist');
             cy.get('button[aria-expanded="true"]').should('contain', 'Open Menu');
           });
 

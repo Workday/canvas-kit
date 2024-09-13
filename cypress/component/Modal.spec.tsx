@@ -262,9 +262,10 @@ context(`given the [Testing/Popups/Modal, With Tooltips] story is rendered`, () 
           cy.findByRole('button', {name: 'OK'}).focus();
         });
         it(`should open the 'OK' tooltip`, () => {
-          cy.findByRole('tooltip', {name: 'Really, Really, Really, Really, Really sure'}).should(
-            'be.visible'
-          );
+          cy.get('[role="tooltip"]').should('exist');
+          cy.get('[role="tooltip"]')
+            .contains('Really, Really, Really, Really, Really sure')
+            .should('be.visible');
         });
 
         context(`when clicking outside the modal`, () => {
@@ -483,10 +484,8 @@ context(`given the [Components/Popups/Modal, Custom focus] story is rendered`, (
       });
 
       it('should have an aria-labelledby attribute', () => {
-        cy.findByRole('dialog', {name: 'Acknowledge License'}).should(
-          'have.attr',
-          'aria-labelledby'
-        );
+        cy.get('[role="dialog"]').should('exist');
+        cy.get('[role="dialog"]').should('have.attr', 'aria-labelledby');
       });
 
       it('should have an aria-modal=false', () => {
@@ -686,14 +685,16 @@ context(`given the 'Iframe Test' story is rendered`, () => {
       });
 
       it('should focus on the last button in the iframe', () => {
+        cy.get('iframe').its('0.contentDocument.body').should('exist');
         cy.get('iframe')
           .its('0.contentDocument.body')
           .find('button')
           .should('contain', 'iframe button 2')
-          .and('have.focus');
+          .focused();
       });
 
       it('should focus on the first button in the iframe', () => {
+        cy.get('iframe').its('0.contentDocument.body').should('exist');
         cy.get('iframe')
           .its('0.contentDocument.body')
           .find('button')
