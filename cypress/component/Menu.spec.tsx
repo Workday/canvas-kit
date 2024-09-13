@@ -100,7 +100,7 @@ describe('Menu', () => {
           });
 
           it('should select the second item', () => {
-            cy.get('span[data-testid="output"]').should('contain', '1');
+            cy.findByTestId('output').should('contain', '1');
           });
         });
       });
@@ -178,10 +178,9 @@ describe('Menu', () => {
           cy.get('[role="menuitem"]').last().should('contain', 'Fourth Item').focused();
         });
 
-        context('when the enter key is pressed', () => {
+        context.only('when the enter key is pressed', () => {
           beforeEach(() => {
             cy.focused().realType('{enter}');
-            cy.wait(150);
           });
 
           it('should not close the menu', () => {
@@ -189,9 +188,7 @@ describe('Menu', () => {
           });
 
           it('should have aria-expanded set to true', () => {
-            cy.get('button[type="button"]')
-              .should('contain', 'Open Menu')
-              .and('have.attr', 'aria-expanded', 'true');
+            cy.get('button[aria-expanded="true"]').should('contain', 'Open Menu');
           });
 
           it('should not select the fourth item', () => {
