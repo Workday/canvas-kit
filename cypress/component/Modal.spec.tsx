@@ -688,18 +688,18 @@ context(`given the 'Iframe Test' story is rendered`, () => {
       it('should focus on the last button in the iframe', () => {
         cy.get('iframe')
           .its('0.contentDocument.body')
-          .then(cy.wrap)
-          .contains('button', 'iframe button 2')
-          .should('have.focus');
+          .find('button')
+          .should('contain', 'iframe button 2')
+          .and('have.focus');
       });
 
       it('should focus on the first button in the iframe', () => {
         cy.get('iframe')
           .its('0.contentDocument.body')
-          .then(cy.wrap)
-          .contains('button', 'iframe button 2')
+          .find('button')
+          .should('contain', 'iframe button 2')
           .tab({shift: true})
-          .should('have.focus');
+          .and('have.focus');
       });
 
       // skipping because the cy.tab plugin isn't capable of starting inside an iframe. We have to test this manually
@@ -709,7 +709,7 @@ context(`given the 'Iframe Test' story is rendered`, () => {
         });
 
         it('should focus on the close button', () => {
-          cy.findByRole('button', {name: 'Close'}).should('have.focus');
+          cy.get('button[aria-label="Close"]').should('have.focus');
         });
       });
     });

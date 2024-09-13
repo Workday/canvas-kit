@@ -178,7 +178,7 @@ describe('Menu', () => {
           cy.get('[role="menuitem"]').last().should('contain', 'Fourth Item').focused();
         });
 
-        context.only('when the enter key is pressed', () => {
+        context('when the enter key is pressed', () => {
           beforeEach(() => {
             cy.focused().realType('{enter}');
           });

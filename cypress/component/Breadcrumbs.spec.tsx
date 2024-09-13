@@ -295,7 +295,7 @@ describe('Breadcrumbs', () => {
 
         it.only('should toggle focus to the previous list item', () => {
           cy.focused().realType('{uparrow}');
-          cy.get('[role="menuitem"]').first().should('contain', 'Second Link').and('be.focused');
+          cy.get('[role="menuitem"]').first().should('contain', 'Second Link').focused();
         });
 
         it('should return focus from the first menu item to the last', () => {
