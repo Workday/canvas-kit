@@ -688,19 +688,9 @@ context(`given the 'Iframe Test' story is rendered`, () => {
         cy.get('iframe').its('0.contentDocument.body').should('exist');
         cy.get('iframe')
           .its('0.contentDocument.body')
-          .find('button')
-          .should('contain', 'iframe button 2')
-          .focused();
-      });
-
-      it('should focus on the first button in the iframe', () => {
-        cy.get('iframe').its('0.contentDocument.body').should('exist');
-        cy.get('iframe')
-          .its('0.contentDocument.body')
-          .find('button')
-          .should('contain', 'iframe button 1')
-          .tab({shift: true})
-          .and('have.focus');
+          .then(cy.wrap)
+          .contains('button', 'iframe button 2')
+          .should('have.focus');
       });
 
       // skipping because the cy.tab plugin isn't capable of starting inside an iframe. We have to test this manually

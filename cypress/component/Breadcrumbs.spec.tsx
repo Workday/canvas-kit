@@ -248,7 +248,8 @@ describe('Breadcrumbs', () => {
 
       context('when the dropdown menu is toggled with a keypress', () => {
         it('should set focus to the first menu item', () => {
-          cy.get('[role="menuitem"]').first().contains('Second Link').should('have.focus');
+          cy.get('[role="menuitem"]').first().should('exist');
+          cy.get('[role="menuitem"]').first().focused().should('contain', 'Second Link');
         });
       });
 
@@ -295,8 +296,8 @@ describe('Breadcrumbs', () => {
 
         it('should toggle focus to the previous list item', () => {
           cy.focused().realType('{uparrow}');
-          cy.get('[role="menuitem"]').first().should('exist');
-          cy.get('[role="menuitem"]').first().focused().should('contain', 'Second Link');
+          cy.focused().contains('Second Link').should('exist');
+          cy.focused().first().should('contain', 'Second Link');
         });
 
         it('should return focus from the first menu item to the last', () => {
