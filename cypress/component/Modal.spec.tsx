@@ -684,8 +684,7 @@ context(`given the 'Iframe Test' story is rendered`, () => {
         cy.get('iframe').should('exist');
       });
 
-      // Passes in local but flaky in CI. Temporarily skipped
-      it.skip('should focus on the last button in the iframe', () => {
+      it('should focus on the last button in the iframe', () => {
         cy.get('iframe').its('0.contentDocument.body').should('exist');
         cy.get('iframe')
           .its('0.contentDocument.body')

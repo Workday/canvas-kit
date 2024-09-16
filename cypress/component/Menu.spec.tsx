@@ -99,8 +99,7 @@ describe('Menu', () => {
             cy.findByRole('menu').should('not.exist');
           });
 
-          //Passes in local but flaky in CI. Temporarily skipped
-          it.skip('should select the second item', () => {
+          it('should select the second item', () => {
             cy.findByTestId('output').should('exist');
             cy.findByTestId('output').contains('1');
           });
@@ -124,8 +123,7 @@ describe('Menu', () => {
           cy.findByRole('menu').should('not.exist');
         });
 
-        //Passes in local but flaky in CI. Temporarily skipped
-        it.skip('should select the second item', () => {
+        it('should select the second item', () => {
           cy.findByTestId('output').should('exist');
           cy.findByTestId('output').contains('1');
         });
@@ -136,8 +134,7 @@ describe('Menu', () => {
           cy.get('button').contains('Fourth Item').click();
         });
 
-        // Passes in local but flaky in CI. Temporarily skipped
-        it.skip('should not close the menu', () => {
+        it('should not close the menu', () => {
           cy.get('[role="menu"]').should('exist');
           cy.get('[role="menu"]').should('be.visible');
         });
@@ -189,14 +186,12 @@ describe('Menu', () => {
             cy.focused().realType('{enter}');
           });
 
-          // Passes in local but flaky in CI. Temporarily skipped
-          it.skip('should not close the menu', () => {
+          it('should not close the menu', () => {
             cy.get('[role="menu"]').should('exist');
             cy.get('[role="menu"]').should('be.visible');
           });
 
-          // Passes in local but flaky in CI. Temporarily skipped
-          it.skip('should have aria-expanded set to true', () => {
+          it('should have aria-expanded set to true', () => {
             cy.get('button[aria-expanded]').should('exist');
             cy.get('button[aria-expanded="true"]').contains('Open Menu');
           });
