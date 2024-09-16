@@ -55,7 +55,7 @@
     "@emotion/styled": "^11.6.0",
     "@workday/canvas-kit-react": "^11.1.10",
     "@workday/canvas-system-icons-web": "^3.0.0",
-    "@workday/canvas-tokens-web": "^2.0.0",
-    "typescript": "4.2"
+    "@workday/canvas-tokens-web": "^2.0.1",
+    "typescript": "4.9"
   }
 }

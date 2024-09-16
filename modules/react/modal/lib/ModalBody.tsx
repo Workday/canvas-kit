@@ -1,32 +1,27 @@
 import * as React from 'react';
 
-import {
-  createSubcomponent,
-  ExtractProps,
-  getTheme,
-  styled,
-  StyledType,
-} from '@workday/canvas-kit-react/common';
+import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {Popup} from '@workday/canvas-kit-react/popup';
-import {space} from '@workday/canvas-kit-react/tokens';
 
 import {useModalModel} from './hooks';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 export interface ModalBodyProps extends ExtractProps<typeof Popup.Body, never> {}
 
-const ResponsiveModalBody = styled(Popup.Body)<ModalBodyProps & StyledType>(({theme}) => {
-  const {canvas: canvasTheme} = getTheme(theme);
-  return {
-    [canvasTheme.breakpoints.down('s')]: {
-      marginBottom: space.zero,
-      padding: `${space.xxxs} ${space.xxs} ${space.xxs} ${space.xxs}`,
+export const modalBodyStencil = createStencil({
+  base: {
+    '@media screen and (max-width: 768px)': {
+      marginBlockEnd: system.space.zero,
+      padding: `${system.space.x1} ${system.space.x2} ${system.space.x2}`,
     },
-  };
+  },
 });
 
 export const ModalBody = createSubcomponent('div')({
   displayName: 'Modal.Body',
   modelHook: useModalModel,
 })<ModalBodyProps>((elemProps, Element) => {
-  return <ResponsiveModalBody as={Element} {...elemProps} />;
+  return <Popup.Body as={Element} {...mergeStyles(elemProps, modalBodyStencil())} />;
 });

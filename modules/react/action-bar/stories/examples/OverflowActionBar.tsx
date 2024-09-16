@@ -54,16 +54,19 @@ export const OverflowActionBar = () => {
           </ActionBar.Menu.Popper>
         </ActionBar>
       </Box>
-      <hr />
-      <h4>Change Action Bar container size</h4>
-      <SegmentedControl onSelect={data => setContainerWidth(data.id)}>
-        <SegmentedControl.List aria-label="container width control" marginBottom="m">
-          <SegmentedControl.Item data-id="100%">100%</SegmentedControl.Item>
-          <SegmentedControl.Item data-id={`${breakpoints.m}px`}>Small</SegmentedControl.Item>
-          <SegmentedControl.Item data-id="420px">420px</SegmentedControl.Item>
-          <SegmentedControl.Item data-id={`${breakpoints.s}px`}>Extra Small</SegmentedControl.Item>
-        </SegmentedControl.List>
-      </SegmentedControl>
+      <footer>
+        <h4>Change Action Bar container size</h4>
+        <SegmentedControl onSelect={data => setContainerWidth(data.id)}>
+          <SegmentedControl.List role="group" aria-label="container width control" marginBottom="m">
+            <SegmentedControl.Item data-id="100%">100%</SegmentedControl.Item>
+            <SegmentedControl.Item data-id={`${breakpoints.m}px`}>Small</SegmentedControl.Item>
+            <SegmentedControl.Item data-id="420px">420px</SegmentedControl.Item>
+            <SegmentedControl.Item data-id={`${breakpoints.s}px`}>
+              Extra Small
+            </SegmentedControl.Item>
+          </SegmentedControl.List>
+        </SegmentedControl>
+      </footer>
     </div>
   );
 };

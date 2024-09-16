@@ -10,7 +10,7 @@ export const LabelPosition = () => {
   };
 
   return (
-    <FormField orientation="horizontal">
+    <FormField orientation="horizontalStart">
       <FormField.Label>Terms</FormField.Label>
       <FormField.Input
         as={Checkbox}
