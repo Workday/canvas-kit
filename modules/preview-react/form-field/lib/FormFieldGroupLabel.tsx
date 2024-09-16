@@ -62,7 +62,7 @@ export const formFieldGroupLabelStencil = createStencil({
   },
 });
 
-export const FormFieldGroupLabel = createSubcomponent('legend')({
+export const FormFieldGroupLabel = createSubcomponent('div')({
   displayName: 'FormField.Label',
   modelHook: useFormFieldModel,
   elemPropsHook: useFormFieldLabel,
@@ -70,7 +70,7 @@ export const FormFieldGroupLabel = createSubcomponent('legend')({
   return (
     <Element
       id={model.state.id}
-      // role="caption"
+      role="caption"
       {...mergeStyles(elemProps, formFieldGroupLabelStencil({typeLevel, variant}))}
     >
       {children}

@@ -35,7 +35,7 @@ export interface FormFieldGroupProps extends FlexProps, GrowthBehavior {
  *
  * @stencil formFieldStencil
  */
-export const FormFieldGroup = createContainer('fieldset')({
+export const FormFieldGroup = createContainer('div')({
   displayName: 'FormFieldGroup',
   modelHook: useFormFieldModel,
   subComponents: {
@@ -112,8 +112,8 @@ export const FormFieldGroup = createContainer('fieldset')({
 })<FormFieldGroupProps>(({children, grow, orientation, ...elemProps}, Element, model) => {
   return (
     <Element
-      role="group"
       aria-describedby={model.state.id}
+      role="group"
       {...mergeStyles(
         elemProps,
         formFieldStencil({
