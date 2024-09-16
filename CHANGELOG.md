@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.60](https://github.com/Workday/canvas-kit/releases/tag/v10.3.60) (2024-09-16)
+
+### Components
+
+- fix: Handle empty stack ref in useAssistiveHideSiblings ([#2920](https://github.com/Workday/canvas-kit/pull/2920)) ([@NicholasBoll](https://github.com/NicholasBoll))
 ## [v11.1.10](https://github.com/Workday/canvas-kit/releases/tag/v11.1.10) (2024-09-16)
 
 
