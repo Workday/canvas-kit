@@ -2,13 +2,7 @@ import React from 'react';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {Combobox} from '@workday/canvas-kit-react/combobox';
-import {
-  createStencil,
-  createStyles,
-  CSProps,
-  handleCsProp,
-  px2rem,
-} from '@workday/canvas-kit-styling';
+import {createStencil, createStyles, CSProps, px2rem} from '@workday/canvas-kit-styling';
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
@@ -34,28 +28,31 @@ export interface SelectInputProps extends ExtractProps<typeof TextInput>, CSProp
 
 const selectInputStencil = createStencil({
   base: {
-    '& [data-part="select-visual-input"]': {
-      caretColor: 'transparent',
-      cursor: 'default',
-      '&::selection': {
-        backgroundColor: 'transparent',
-      },
+    caretColor: 'transparent',
+    cursor: 'default',
+    '&::selection': {
+      backgroundColor: 'transparent',
     },
+  },
+});
 
-    '& [data-part="select-start-icon-container"]': {
-      position: 'absolute',
-      pointerEvents: 'none',
-    },
-    '& [data-part="select-hidden-input"]': {
-      position: 'absolute',
-      top: system.space.zero,
-      bottom: system.space.zero,
-      left: system.space.zero,
-      right: system.space.zero,
-      opacity: system.opacity.zero,
-      cursor: 'default',
-      pointerEvents: 'none',
-    },
+const selectIconsStencil = createStencil({
+  base: {
+    position: 'absolute',
+    pointerEvents: 'none',
+  },
+});
+
+const hiddenSelectInputStencil = createStencil({
+  base: {
+    position: 'absolute',
+    top: system.space.zero,
+    bottom: system.space.zero,
+    left: system.space.zero,
+    right: system.space.zero,
+    opacity: system.opacity.zero,
+    cursor: 'default',
+    pointerEvents: 'none',
   },
 });
 
@@ -84,18 +81,10 @@ export const SelectInput = createSubcomponent(TextInput)({
     Element,
     model
   ) => {
-    console.log(elemProps);
-    const hasFocus = className?.includes('focus');
-    const hasHover = className?.includes('hover');
-    const hasActive = className?.includes('active');
-    const hasDisabled = className?.includes('disabled');
     return (
-      <InputGroup
-        data-width="ck-formfield-width"
-        {...handleCsProp({cs, style, className}, selectInputStencil())}
-      >
+      <InputGroup data-width="ck-formfield-width">
         {inputStartIcon && model.state.selectedIds.length > 0 && (
-          <InputGroup.InnerStart data-part="select-start-icon-container">
+          <InputGroup.InnerStart data-part="select-start-icon-container" {...selectIconsStencil()}>
             <SystemIcon data-part="select-start-icon" icon={inputStartIcon} />
           </InputGroup.InnerStart>
         )}
@@ -111,6 +100,7 @@ export const SelectInput = createSubcomponent(TextInput)({
           name={name}
           ref={ref}
           data-part="select-hidden-input"
+          {...hiddenSelectInputStencil()}
         />
         {/* Visual input */}
         <InputGroup.Input
@@ -120,12 +110,7 @@ export const SelectInput = createSubcomponent(TextInput)({
           error={error}
           data-part="select-visual-input"
           {...textInputProps}
-          {...mergeStyles(elemProps, [
-            hasFocus ? 'focus' : undefined,
-            hasHover ? 'hover' : undefined,
-            hasActive ? 'active' : undefined,
-            hasDisabled ? 'disabled' : undefined,
-          ])}
+          {...mergeStyles(elemProps, selectInputStencil())}
         />
         <InputGroup.InnerEnd data-part="select-caret-container">
           <SystemIcon data-part="select-caret-icon" icon={caretDownSmallIcon} />

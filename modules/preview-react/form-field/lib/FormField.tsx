@@ -113,7 +113,7 @@ export const FormField = createContainer('div')({
   },
 })<FormFieldProps>(({children, grow, orientation, ...elemProps}, Element, model) => {
   // TODO: Remove this warning in v13 once we remove horizontal support in favor of horizontalStart and horizontalEnd.
-  if (process && process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === 'development') {
     if (orientation === 'horizontal') {
       console.warn(
         'FormField: Orientation option of "horizontal" is deprecated and will be removed in v13. Please update your types and value to use the string literal of "horizontalStart". The following values will be accepted in v13: "horizontalStart" | "horizontalEnd" | "vertical".'

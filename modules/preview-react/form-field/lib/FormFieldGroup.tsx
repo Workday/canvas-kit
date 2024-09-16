@@ -5,6 +5,7 @@ import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 
 import {FormFieldGroupList} from './FormFieldGroupList';
 import {FormFieldGroupInput} from './FormFieldGroupInput';
+import {FormFieldGroupLabel} from './FormFieldGroupLabel';
 import {FormField} from './FormField';
 
 import {useFormFieldModel} from './hooks';
@@ -67,7 +68,7 @@ export const FormFieldGroup = createContainer('fieldset')({
      *
      * @stencil formFieldLabelStencil
      */
-    Legend: FormField.Label.as('legend'),
+    Label: FormFieldGroupLabel,
     /**
      * `FormFieldGroup.List` will render a `div`. This element is used to apply the visual error states around the group of inputs. It's contents will be your inputs.
      */
@@ -111,6 +112,8 @@ export const FormFieldGroup = createContainer('fieldset')({
 })<FormFieldGroupProps>(({children, grow, orientation, ...elemProps}, Element, model) => {
   return (
     <Element
+      role="group"
+      aria-describedby={model.state.id}
       {...mergeStyles(
         elemProps,
         formFieldStencil({

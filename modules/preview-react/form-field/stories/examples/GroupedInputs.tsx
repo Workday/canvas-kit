@@ -143,7 +143,7 @@ export const GroupedInputs = () => {
 
       <form className={formStyles} onSubmit={handleSubmit}>
         <FormFieldGroup error={error}>
-          <FormFieldGroup.Legend>Choose Your Toppings</FormFieldGroup.Legend>
+          <FormFieldGroup.Label>Choose Your Toppings</FormFieldGroup.Label>
           <FormFieldGroup.List>
             {toppingsState.map(item => {
               return (
@@ -163,8 +163,8 @@ export const GroupedInputs = () => {
             {error === 'error' && 'You must choose one topping'}
           </FormFieldGroup.Hint>
         </FormFieldGroup>
-        <FormFieldGroup error={radioError} orientation="horizontalStart">
-          <FormFieldGroup.Legend>Choose Your Crust</FormFieldGroup.Legend>
+        <FormFieldGroup error={radioError}>
+          <FormFieldGroup.Label>Choose Your Crust</FormFieldGroup.Label>
           <FormFieldGroup.Field>
             <FormFieldGroup.List as={RadioGroup} onChange={handleRadioChange} value={value}>
               <FormFieldGroup.Input as={RadioGroup.RadioButton} value="thin-crust">

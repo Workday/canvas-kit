@@ -256,7 +256,7 @@ export const Avatar = createComponent('button')({
     }, [url]);
 
     // TODO: Remove this warning for a hard breaking change in v13
-    if (process && process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === 'development') {
       if (typeof variant === 'number') {
         console.warn(
           'Avatar: Avatar.Variant is deprecated and will be removed in v13. Please use a string literal of "light"  or "dark"'
