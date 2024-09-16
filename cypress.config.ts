@@ -21,7 +21,6 @@ export default defineConfig({
       NODE_ENV: 'development',
     },
     setupNodeEvents(on, config) {
-      console.log('>>>>', config);
       on('file:preprocessor', webpack());
     },
     viewportWidth: 1024,
