@@ -20,7 +20,7 @@ export const LabelPosition = () => {
   return (
     <Flex>
       <Select model={model}>
-        <FormField orientation="horizontal">
+        <FormField orientation="horizontalStart">
           <FormField.Label>Contact</FormField.Label>
           <FormField.Input as={Select.Input} />
           <Select.Popper>

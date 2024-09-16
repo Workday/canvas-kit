@@ -64,11 +64,11 @@ export const Simulation = () => {
   return (
     <Box>
       <Box marginBottom="l">
-        <FormField orientation="horizontal">
+        <FormField orientation="horizontalStart">
           <FormField.Label>Load Time</FormField.Label>
           <FormField.Input as={TextInput} onChange={onChangeLoadTime} value={loadTime} />
         </FormField>
-        <FormField orientation="horizontal">
+        <FormField orientation="horizontalStart">
           <FormField.Label>Loading</FormField.Label>
           <FormField.Input as={Checkbox} checked={loading} onChange={onChangeLoading} />
         </FormField>

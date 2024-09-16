@@ -5,7 +5,8 @@ import {Basic} from './examples/Basic';
 import {Alert} from './examples/Alert';
 import {Error} from './examples/Error';
 import {Disabled} from './examples/Disabled';
-import {LabelPositionHorizontal} from './examples/LabelPositionHorizontal';
+import {LabelPositionHorizontalStart} from './examples/LabelPositionHorizontalStart';
+import {LabelPositionHorizontalEnd} from './examples/LabelPositionHorizontalEnd';
 import {RefForwarding} from './examples/RefForwarding';
 import {Required} from './examples/Required';
 import {Custom} from './examples/Custom';
@@ -70,12 +71,19 @@ to ensure proper alignment.
 
 <ExampleCodeBlock code={Hint} />
 
-### Label Position Horizontal
+### Label Position
 
 Set the `orientation` prop of the Form Field to designate the position of the label relative to the
-input component. By default, the orientation will be set to `vertical`.
+input component. By default, the orientation will be set to `vertical`. If you want your label to be
+horizontal, you have two options: `horizontalStart` and `horizontalEnd`.
 
-<ExampleCodeBlock code={LabelPositionHorizontal} />
+If you want the position of the label at the start of the container, set orientation prop to `horizontalStart`.
+
+<ExampleCodeBlock code={LabelPositionHorizontalStart} />
+
+If you want the position of the label at the end of the container, set orientation prop to `horizontalEnd`.
+
+<ExampleCodeBlock code={LabelPositionHorizontalEnd} />
 
 ### Grow
 
