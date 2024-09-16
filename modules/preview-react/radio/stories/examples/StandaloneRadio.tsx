@@ -16,7 +16,7 @@ export const StandaloneRadio = () => {
   return (
     <Flex flexDirection="column">
       <FormFieldGroup as="fieldset">
-        <FormFieldGroup.Legend as="legend">Choose Your Pizza Crust</FormFieldGroup.Legend>
+        <FormFieldGroup.Label as="legend">Choose Your Pizza Crust</FormFieldGroup.Label>
         <Flex gap="m">
           <Flex as="label" gap="xs">
             <FormFieldGroup.Input

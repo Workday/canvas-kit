@@ -220,7 +220,7 @@ export const Density = () => {
               <FormField.Input as={Switch} />
             </FormField>
             <FormFieldGroup cs={formFieldStyles}>
-              <FormFieldGroup.Legend>Credit Card</FormFieldGroup.Legend>
+              <FormFieldGroup.Label>Credit Card</FormFieldGroup.Label>
 
               <FormFieldGroup.List cs={formFieldGroupListStyles}>
                 <FormFieldGroup.Input

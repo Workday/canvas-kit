@@ -77,11 +77,13 @@ Set the `orientation` prop of the Form Field to designate the position of the la
 input component. By default, the orientation will be set to `vertical`. If you want your label to be
 horizontal, you have two options: `horizontalStart` and `horizontalEnd`.
 
-If you want the position of the label at the start of the container, set orientation prop to `horizontalStart`.
+If you want the position of the label at the start of the container, set orientation prop to
+`horizontalStart`.
 
 <ExampleCodeBlock code={LabelPositionHorizontalStart} />
 
-If you want the position of the label at the end of the container, set orientation prop to `horizontalEnd`.
+If you want the position of the label at the end of the container, set orientation prop to
+`horizontalEnd`.
 
 <ExampleCodeBlock code={LabelPositionHorizontalEnd} />
 
@@ -113,7 +115,7 @@ for required fields are suffixed by a red asterisk.
 
 Use `FormFieldGroup` when you have a group of inputs that need to be associated to one another, like
 `RadioGroup` or a group of `Checkbox`'s. `FormFieldGroup` renders a `fieldset` element and
-`FormFieldGroup.Legend` renders a `legend` element. These elements will allow for correct
+`FormFieldGroup.Label` renders a `legend` element. These elements will allow for correct
 accessibility of grouped inputs.
 
 `FormFieldGroup` supports the same props of `FormField`:

@@ -21,7 +21,7 @@ export const RefForwarding = () => {
   return (
     <>
       <FormFieldGroup>
-        <FormFieldGroup.Legend>Choose Your Pizza Crust</FormFieldGroup.Legend>
+        <FormFieldGroup.Label>Choose Your Pizza Crust</FormFieldGroup.Label>
         <FormFieldGroup.List as={RadioGroup} name="crust-ref" onChange={handleChange} value={value}>
           <FormFieldGroup.Input as={RadioGroup.RadioButton} value="deep-dish">
             Deep dish

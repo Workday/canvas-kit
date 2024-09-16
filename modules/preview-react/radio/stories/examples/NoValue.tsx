@@ -13,7 +13,7 @@ export const NoValue = () => {
   };
   return (
     <FormFieldGroup>
-      <FormFieldGroup.Legend as="legend">Choose Your Pizza Crust</FormFieldGroup.Legend>
+      <FormFieldGroup.Label as="legend">Choose Your Pizza Crust</FormFieldGroup.Label>
       <FormFieldGroup.List
         as={RadioGroup}
         name="crust-no-value"

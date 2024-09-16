@@ -13,7 +13,7 @@ export const LabelPosition = () => {
   };
   return (
     <FormFieldGroup orientation="horizontalStart">
-      <FormFieldGroup.Legend>Choose Your Pizza Crust</FormFieldGroup.Legend>
+      <FormFieldGroup.Label>Choose Your Pizza Crust</FormFieldGroup.Label>
       <FormFieldGroup.List as={RadioGroup} name="crust-label" onChange={handleChange} value={value}>
         <FormFieldGroup.Input as={RadioGroup.RadioButton} value="deep-dish">
           Deep dish

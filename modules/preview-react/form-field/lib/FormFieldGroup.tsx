@@ -25,7 +25,7 @@ export interface FormFieldGroupProps extends FlexProps, GrowthBehavior {
  *
  * ```tsx
  * <FormFieldGroup>
- *    <FormField.Legend>Choose a Pet</FormField.Label>
+ *    <FormField.Label>Choose a Pet</FormField.Label>
  *    <FormFieldGroup.List as={RadioGroup} />
  *      <FromFieldGroup.Input as={RadioGroup.RadioButton} value='dog'>Dog</FormFieldGroup.Input>
  *      <FromFieldGroup.Input as={RadioGroup.RadioButton} value='cat'>Cat</FormFieldGroup.Input>
@@ -47,7 +47,7 @@ export const FormFieldGroup = createContainer('fieldset')({
      *
      * ```tsx
      * <FormFieldGroup>
-     *    <FormField.Legend>Choose a Pet</FormField.Label>
+     *    <FormField.Label>Choose a Pet</FormField.Label>
      *    <FormFieldGroup.List as={RadioGroup} />
      *      <FromFieldGroup.Input as={RadioGroup.RadioButton} value='dog'>Dog</FormFieldGroup.Input>
      *      <FromFieldGroup.Input as={RadioGroup.RadioButton} value='cat'>Cat</FormFieldGroup.Input>
@@ -57,11 +57,11 @@ export const FormFieldGroup = createContainer('fieldset')({
      */
     Input: FormFieldGroupInput,
     /**
-     * `FormFieldGroup.Legend` will render a `legend` element. This element labels the contents of a `fieldset`.
+     * `FormFieldGroup.Label` will render a `legend` element. This element labels the contents of a `fieldset`.
      *
      * ```tsx
      * <FormFieldGroup>
-     *    <FormFieldGroup.Legend>Choose a pet</FormFieldGroup.Legend>
+     *    <FormFieldGroup.Label>Choose a pet</FormFieldGroup.Label>
      *    //...
      *  </FormFieldGroup>
      * ```
@@ -79,7 +79,7 @@ export const FormFieldGroup = createContainer('fieldset')({
      *
      * ```tsx
      * <FormFieldGroup>
-     *    <FormFieldGroup.Legend>Choose a pet</FormFieldGroup.Legend>
+     *    <FormFieldGroup.Label>Choose a pet</FormFieldGroup.Label>
      *    <FormFieldGroup.List>
      *      //...
      *    <FormFieldGroup.List>
@@ -95,7 +95,7 @@ export const FormFieldGroup = createContainer('fieldset')({
      *
      * ```tsx
      * <FormFieldGroup orientation="horizontal">
-     *    <FormFieldGroup.Legend>Choose a pet</FormFieldGroup.Legend>
+     *    <FormFieldGroup.Label>Choose a pet</FormFieldGroup.Label>
      *    <FormFieldGroup.Field>
      *      <FormFieldGroup.List>
      *        <FromFieldGroup.Input as={RadioGroup.RadioButton} value='dog'>Dog</FormFieldGroup.Input>

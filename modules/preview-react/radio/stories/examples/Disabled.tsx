@@ -13,7 +13,7 @@ export const Disabled = () => {
   };
   return (
     <FormFieldGroup>
-      <FormFieldGroup.Legend>Choose Your Pizza Crust</FormFieldGroup.Legend>
+      <FormFieldGroup.Label>Choose Your Pizza Crust</FormFieldGroup.Label>
       <FormFieldGroup.List
         as={RadioGroup}
         name="crust-disabled"

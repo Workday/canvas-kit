@@ -73,7 +73,7 @@ export const AllFields = () => {
         <FormField.Input checked={false} as={Checkbox} label="Extra Cheese" />
       </FormField>
       <FormFieldGroup error="error" orientation="horizontalStart" grow>
-        <FormFieldGroup.Legend>Choose Your Crust</FormFieldGroup.Legend>
+        <FormFieldGroup.Label>Choose Your Crust</FormFieldGroup.Label>
         <FormFieldGroup.Field>
           <FormFieldGroup.List as={RadioGroup}>
             <FormFieldGroup.Input as={RadioGroup.RadioButton} value="thin-crust">
@@ -92,7 +92,7 @@ export const AllFields = () => {
         </FormFieldGroup.Field>
       </FormFieldGroup>
       <FormFieldGroup grow>
-        <FormFieldGroup.Legend>Checkbox Legend</FormFieldGroup.Legend>
+        <FormFieldGroup.Label>Checkbox Legend</FormFieldGroup.Label>
         <FormField.Field>
           <FormFieldGroup.List>
             <FormFieldGroup.Input checked={true} as={Checkbox} label="Checkbox Label" />

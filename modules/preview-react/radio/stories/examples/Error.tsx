@@ -14,7 +14,7 @@ export const Error = () => {
 
   return (
     <FormFieldGroup error="error">
-      <FormFieldGroup.Legend>Choose Your Pizza Crust</FormFieldGroup.Legend>
+      <FormFieldGroup.Label>Choose Your Pizza Crust</FormFieldGroup.Label>
       <FormFieldGroup.List as={RadioGroup} name="crust-error" onChange={handleChange} value={value}>
         <FormFieldGroup.Input as={RadioGroup.RadioButton} value="deep-dish">
           Deep dish

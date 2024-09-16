@@ -30,7 +30,7 @@ export const Inverse = () => {
   return (
     <Box cs={styleOverrides.containerStyles}>
       <FormFieldGroup cs={styleOverrides.formFieldStyles}>
-        <FormFieldGroup.Legend>Choose Your Pizza Crust</FormFieldGroup.Legend>
+        <FormFieldGroup.Label>Choose Your Pizza Crust</FormFieldGroup.Label>
         <FormFieldGroup.List
           as={RadioGroup}
           name="crust-inverse"
