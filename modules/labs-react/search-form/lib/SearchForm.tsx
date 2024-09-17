@@ -263,6 +263,9 @@ const SearchInput = styled(TextInput)<
     '&::placeholder': {
       color: inputColors.placeholderColor,
     },
+    '&:placeholder-shown': {
+      textOverflow: 'ellipsis',
+    },
     '&:not([disabled])': {
       '&:focus, &:active': {
         outline: 'none',
