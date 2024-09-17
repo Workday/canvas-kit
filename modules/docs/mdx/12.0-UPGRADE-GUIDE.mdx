@@ -81,7 +81,8 @@ deprecated code is removed.
 
 **PR:** [#2865](https://github.com/Workday/canvas-kit/pull/2865)
 
-We've deprecated `FormField.Container`. Please use `FormField.Field`.
+We've deprecated `FormField.Container`. Please use `FormField.Field`, this ensures proper label
+alignment regardless of the orientation.
 
 ```tsx
 // v11
@@ -136,7 +137,6 @@ The following components are affected:
 
 - `Avatar`
 - `Dialog`
-- `FormField`
 - `Modal`
 - `Popup`
 - `TextArea`
@@ -195,14 +195,12 @@ We've added a new component under FromField to allow users to group inputs witho
 setting the `as` prop on the `FormField` component.
 
 Use `FormFieldGroup` when you have a group of inputs that need to be associated to one another, like
-`RadioGroup` or a group of `Checkbox`'s. `FormFieldGroup` renders a `fieldset` element and
-`FormFieldGroup.Label` renders a `legend` element. These elements will allow for correct
-accessibility of grouped inputs.
+`RadioGroup` or a group of `Checkbox`'s. `FormFieldGroup`.
 
 `FormFieldGroup` supports the same props of `FormField`:
 
 - `error`: `"alert" | "error"` Defines the error around the whole group of inputs.
-- `orientation`: `"horizontal" | "vertical"` Defines the legend placement.
+- `orientation`: `"horizontalStart" | "horizontalEnd" | "vertical" `. Defines the label placement.
 - `isRequired`: `true` Defines if a group like RadioGroup is required.
 
 #### Form Field Field
@@ -228,9 +226,6 @@ this sub component when using `FormField`. This component also exists on `FormFi
 ### Select
 
 **PR:** [#2865](https://github.com/Workday/canvas-kit/pull/2865)
-
-Parts of Select have been enhanced to improve overriding styles. There should be no change to the
-API or how the component is styled on the consumer end.
 
 As we transition to use our CSS tokens to provide better theming capabilities and our new styling
 methods, we're moving away from components extending `Themeable`. `Themeable` has been removed from
