@@ -3,7 +3,7 @@ import {FormField, FormFieldGroup} from '@workday/canvas-kit-preview-react/form-
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {Select} from '@workday/canvas-kit-react/select';
 import {Switch} from '@workday/canvas-kit-react/switch';
-import {Heading} from '@workday/canvas-kit-react/text';
+import {Heading, Text} from '@workday/canvas-kit-react/text';
 import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
 import {calc, createStencil, createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
@@ -12,21 +12,84 @@ const formStyles = createStyles({
   marginBlockStart: system.space.x3,
   marginBlockEnd: system.space.x3,
   maxWidth: px2rem(600),
+  minWidth: 0,
 });
 
 const formFieldGroupListStyles = createStyles({
   display: 'inline-flex',
   flexDirection: 'row',
   padding: 0,
+  flexWrap: 'wrap',
 });
 
-const sideBySideInputs = createStyles({
-  display: 'inline-flex',
-  gap: system.space.x2,
+const sideBySideInputs = createStencil({
+  base: {
+    display: 'inline-flex',
+    gap: system.space.x2,
+    justifyContent: 'space-between',
+  },
+  modifiers: {
+    labelOrientation: {
+      horizontalStart: {
+        display: 'flex',
+        flexDirection: 'column',
+      },
+      horizontalEnd: {
+        display: 'flex',
+        flexDirection: 'column',
+      },
+      vertical: {
+        display: 'inline-flex',
+      },
+    },
+    density: {
+      high: {},
+      medium: {},
+      low: {},
+    },
+  },
+  compound: [
+    {
+      modifiers: {labelOrientation: 'horizontalStart', density: 'high'},
+      styles: {
+        gap: system.space.x4,
+      },
+    },
+    {
+      modifiers: {labelOrientation: 'horizontalStart', density: 'medium'},
+      styles: {
+        gap: system.space.x6,
+      },
+    },
+    {
+      modifiers: {labelOrientation: 'horizontalStart', density: 'low'},
+      styles: {
+        gap: system.space.x8,
+      },
+    },
+    {
+      modifiers: {labelOrientation: 'horizontalEnd', density: 'high'},
+      styles: {
+        gap: system.space.x4,
+      },
+    },
+    {
+      modifiers: {labelOrientation: 'horizontalEnd', density: 'medium'},
+      styles: {
+        gap: system.space.x6,
+      },
+    },
+    {
+      modifiers: {labelOrientation: 'horizontalEnd', density: 'low'},
+      styles: {
+        gap: system.space.x8,
+      },
+    },
+  ],
 });
 
 const zipCodeInput = createStyles({
-  minWidth: px2rem(100),
+  minWidth: px2rem(90),
 });
 
 const formFieldStyles = createStyles({
@@ -44,29 +107,23 @@ const selectStencil = createStencil({
   modifiers: {
     density: {
       high: {
-        '[data-part="select-visual-input"]': {
-          height: system.space.x8,
-          paddingTop: system.space.x1,
-          paddingBottom: system.space.x1,
-        },
-        '& [data-part="select-caret-container"]': {
+        height: system.space.x8,
+        paddingTop: system.space.x1,
+        paddingBottom: system.space.x1,
+        '& + div': {
           height: system.space.x8,
         },
       },
       medium: {
-        '[data-part="select-visual-input"]': {
-          height: system.space.x10,
-          paddingTop: system.space.x2,
-          paddingBottom: system.space.x2,
-        },
+        height: system.space.x10,
+        paddingTop: system.space.x2,
+        paddingBottom: system.space.x2,
       },
       low: {
-        '[data-part="select-visual-input"]': {
-          height: calc.add(system.space.x10, system.space.x2),
-          paddingTop: system.space.x3,
-          paddingBottom: system.space.x3,
-        },
-        '&  [data-part="select-caret-container"]': {
+        height: calc.add(system.space.x10, system.space.x2),
+        paddingTop: system.space.x3,
+        paddingBottom: system.space.x3,
+        '& + div': {
           height: calc.add(system.space.x10, system.space.x2),
         },
       },
@@ -75,7 +132,9 @@ const selectStencil = createStencil({
 });
 
 const inputStencil = createStencil({
-  base: {},
+  base: {
+    minWidth: px2rem(200),
+  },
   modifiers: {
     density: {
       high: {
@@ -102,6 +161,7 @@ const flexContainerStencil = createStencil({
   base: {
     display: 'flex',
     flexDirection: 'column',
+    minWidth: 0,
   },
   modifiers: {
     density: {
@@ -134,6 +194,19 @@ const containerAlignmentStencil = createStencil({
   },
 });
 
+const optionStyles = createStyles({
+  display: 'flex',
+  gap: system.space.x3,
+  flexDirection: 'column',
+});
+
+const optionItemStyles = createStyles({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: system.space.x3,
+  maxWidth: 'fit-content',
+});
+
 // high = 32px height on inputs, space between inputs is 16px
 // medium 40px height on inputs, space between inputs is 24px
 // low = 48px height on inputs, space between inputs is 32px
@@ -141,6 +214,9 @@ const containerAlignmentStencil = createStencil({
 export const Density = () => {
   const [density, setDensity] = React.useState<'high' | 'medium' | 'low'>('medium');
   const [containerAlignment, setContainerAlignment] = React.useState<'left' | 'center'>('left');
+  const [labelOrientation, setLabelOrientation] = React.useState<
+    'vertical' | 'horizontalStart' | 'horizontalEnd'
+  >('vertical');
 
   const handleDensity = data => {
     setDensity(data.id);
@@ -150,31 +226,51 @@ export const Density = () => {
     setContainerAlignment(data.id);
   };
 
+  const handleLabelOrientation = data => {
+    setLabelOrientation(data.id);
+  };
+
   return (
     <div>
-      <div>
-        <Heading size="small">Choose Your Density</Heading>
-        <SegmentedControl onSelect={data => handleDensity(data)} size="small">
-          <SegmentedControl.List aria-label="choose a density">
-            <SegmentedControl.Item data-id="high">High</SegmentedControl.Item>
-            <SegmentedControl.Item data-id="medium">Medium</SegmentedControl.Item>
-            <SegmentedControl.Item data-id="low">Low</SegmentedControl.Item>
-          </SegmentedControl.List>
-        </SegmentedControl>
+      <Heading size="small">Choose Your Density and Alignment</Heading>
+      <div className={optionStyles}>
+        <div className={optionItemStyles}>
+          <Text>Density</Text>
+          <SegmentedControl onSelect={data => handleDensity(data)} size="small">
+            <SegmentedControl.List aria-label="choose a density">
+              <SegmentedControl.Item data-id="high">High</SegmentedControl.Item>
+              <SegmentedControl.Item data-id="medium">Medium</SegmentedControl.Item>
+              <SegmentedControl.Item data-id="low">Low</SegmentedControl.Item>
+            </SegmentedControl.List>
+          </SegmentedControl>
+        </div>
+        <div className={optionItemStyles}>
+          <Text>Label Orientation</Text>
+          <SegmentedControl onSelect={data => handleLabelOrientation(data)} size="small">
+            <SegmentedControl.List aria-label="choose a label orientation">
+              <SegmentedControl.Item data-id="vertical">Vertical</SegmentedControl.Item>
+              <SegmentedControl.Item data-id="horizontalStart">
+                Horizontal Start
+              </SegmentedControl.Item>
+              <SegmentedControl.Item data-id="horizontalEnd">Horizontal End</SegmentedControl.Item>
+            </SegmentedControl.List>
+          </SegmentedControl>
+        </div>
+        <div className={optionItemStyles}>
+          <Text>Alignment</Text>
+          <SegmentedControl onSelect={data => handleContainerAlignment(data)} size="small">
+            <SegmentedControl.List aria-label="choose a density">
+              <SegmentedControl.Item data-id="left">Left</SegmentedControl.Item>
+              <SegmentedControl.Item data-id="center">Center</SegmentedControl.Item>
+            </SegmentedControl.List>
+          </SegmentedControl>
+        </div>
       </div>
-      <div>
-        <Heading size="small">Container Alignment</Heading>
-        <SegmentedControl onSelect={data => handleContainerAlignment(data)} size="small">
-          <SegmentedControl.List aria-label="choose a density">
-            <SegmentedControl.Item data-id="left">Left</SegmentedControl.Item>
-            <SegmentedControl.Item data-id="center">Center</SegmentedControl.Item>
-          </SegmentedControl.List>
-        </SegmentedControl>
-      </div>
+
       <div {...containerAlignmentStencil({alignment: containerAlignment})}>
         <form action="#" className={formStyles}>
           <div {...flexContainerStencil({density})}>
-            <FormField grow cs={[formFieldStyles]}>
+            <FormField orientation={labelOrientation} grow cs={[formFieldStyles]}>
               <FormField.Label>Choose Country</FormField.Label>
               <Select items={['Dominican Republic', 'Spain', 'United States']}>
                 <FormField.Input
@@ -189,37 +285,37 @@ export const Density = () => {
                 </Select.Popper>
               </Select>
             </FormField>
-            <FormField grow cs={formFieldStyles}>
+            <FormField grow orientation={labelOrientation} cs={formFieldStyles}>
               <FormField.Label>Full Name</FormField.Label>
               <FormField.Input as={TextInput} cs={inputStencil({density})} />
             </FormField>
-            <FormField grow cs={formFieldStyles}>
+            <FormField grow orientation={labelOrientation} cs={formFieldStyles}>
               <FormField.Label>Phone Number</FormField.Label>
               <FormField.Input as={TextInput} cs={inputStencil({density})} />
             </FormField>
-            <FormField grow cs={formFieldStyles}>
+            <FormField grow orientation={labelOrientation} cs={formFieldStyles}>
               <FormField.Label>Street Address</FormField.Label>
               <FormField.Input as={TextInput} cs={inputStencil({density})} />
             </FormField>
-            <FormField grow cs={formFieldStyles}>
+            <FormField grow orientation={labelOrientation} cs={formFieldStyles}>
               <FormField.Label>City</FormField.Label>
               <FormField.Input as={TextInput} cs={inputStencil({density})} />
             </FormField>
-            <div className={sideBySideInputs}>
-              <FormField grow cs={formFieldStyles}>
+            <div {...sideBySideInputs({labelOrientation: labelOrientation, density})}>
+              <FormField grow orientation={labelOrientation} cs={formFieldStyles}>
                 <FormField.Label>State</FormField.Label>
                 <FormField.Input as={TextInput} cs={inputStencil({density})} />
               </FormField>
-              <FormField grow cs={formFieldStyles}>
+              <FormField grow orientation={labelOrientation} cs={[formFieldStyles, {minWidth: 0}]}>
                 <FormField.Label>Zip Code</FormField.Label>
-                <FormField.Input cs={[zipCodeInput, inputStencil({density})]} as={TextInput} />
+                <FormField.Input cs={[inputStencil({density}), zipCodeInput]} as={TextInput} />
               </FormField>
             </div>
-            <FormField>
+            <FormField orientation={labelOrientation}>
               <FormField.Label>Enable Fast Shipping</FormField.Label>
               <FormField.Input as={Switch} />
             </FormField>
-            <FormFieldGroup cs={formFieldStyles}>
+            <FormFieldGroup cs={formFieldStyles} orientation={labelOrientation}>
               <FormFieldGroup.Label>Credit Card</FormFieldGroup.Label>
 
               <FormFieldGroup.List cs={formFieldGroupListStyles}>

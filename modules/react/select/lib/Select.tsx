@@ -73,9 +73,6 @@ export const SelectInput = createSubcomponent(TextInput)({
       onInput,
       value,
       name,
-      cs,
-      style,
-      className,
       ...elemProps
     },
     Element,

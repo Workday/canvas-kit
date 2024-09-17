@@ -112,7 +112,7 @@ export const FormFieldGroup = createContainer('div')({
 })<FormFieldGroupProps>(({children, grow, orientation, ...elemProps}, Element, model) => {
   return (
     <Element
-      aria-describedby={model.state.id}
+      aria-labelledby={model.state.id}
       role="group"
       {...mergeStyles(
         elemProps,

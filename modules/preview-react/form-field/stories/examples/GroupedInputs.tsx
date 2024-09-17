@@ -160,6 +160,7 @@ export const GroupedInputs = () => {
             })}
           </FormFieldGroup.List>
           <FormFieldGroup.Hint>
+            Some text
             {error === 'error' && 'You must choose one topping'}
           </FormFieldGroup.Hint>
         </FormFieldGroup>
