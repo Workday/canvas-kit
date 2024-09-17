@@ -166,7 +166,12 @@ export const GroupedInputs = () => {
         <FormFieldGroup error={radioError}>
           <FormFieldGroup.Label>Choose Your Crust</FormFieldGroup.Label>
           <FormFieldGroup.Field>
-            <FormFieldGroup.List as={RadioGroup} onChange={handleRadioChange} value={value}>
+            <FormFieldGroup.List
+              as={RadioGroup}
+              onChange={handleRadioChange}
+              value={value}
+              name="crust"
+            >
               <FormFieldGroup.Input as={RadioGroup.RadioButton} value="thin-crust">
                 Thin Crust
               </FormFieldGroup.Input>

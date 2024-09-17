@@ -70,7 +70,6 @@ export const FormFieldGroupLabel = createSubcomponent('div')({
   return (
     <Element
       id={model.state.id}
-      role="caption"
       {...mergeStyles(elemProps, formFieldGroupLabelStencil({typeLevel, variant}))}
     >
       {children}
