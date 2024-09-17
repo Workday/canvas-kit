@@ -16,7 +16,6 @@ describe('ActionBar', () => {
       });
 
       it.only('should pass axe checks', () => {
-        cy.log(process.env.NODE_ENV);
         cy.checkA11y();
       });
 
