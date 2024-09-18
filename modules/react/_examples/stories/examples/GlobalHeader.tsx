@@ -9,9 +9,8 @@ import {
   ExtractProps,
   useUniqueId,
 } from '@workday/canvas-kit-react/common';
-import {colors, depth, space, type} from '@workday/canvas-kit-react/tokens';
-import {system} from '@workday/canvas-tokens-web';
-import {createStyles, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
+import {calc, createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {
   notificationsIcon,
   inboxIcon,
@@ -37,27 +36,27 @@ interface LiveCountBadgeProps extends FlexProps {
 
 const tasks = ['Request Time Off', 'Create Expense Report', 'Change Benefits'];
 
-function negate(value: string, fallback?: string) {
-  return `calc(${cssVar(value, fallback)} * -1)`;
-}
-
 const styleOverrides = {
   headerWrapper: createStyles({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
     boxSizing: 'border-box',
-    ...type.levels.subtext.large,
+    ...system.type.subtext.large,
     WebkitFontSmoothing: 'antialiased',
     MozOsxFontSmoothing: 'grayscale',
-    backgroundColor: colors.frenchVanilla100,
-    ...depth[1],
-    padding: space.xxs,
+    backgroundColor: system.color.bg.default,
+    padding: system.space.x1,
   }),
   inputGroupInner: createStyles({
     marginLeft: '1rem',
     width: px2rem(20),
     transition: 'opacity 100ms ease',
+  }),
+  comboboxContainer: createStyles({
+    margin: 'auto',
+    width: '100%',
+    maxWidth: calc.multiply(system.space.x20, 6),
   }),
   comboboxInput: createStyles({
     borderRadius: px2rem(1000),
@@ -68,7 +67,7 @@ const styleOverrides = {
   }),
   menuButtonStyles: createStyles({
     textDecoration: 'none',
-    color: colors.blackPepper500,
+    color: base.blackPepper500,
   }),
   notificationContainerStyles: createStyles({
     boxSizing: 'border-box',
@@ -77,12 +76,12 @@ const styleOverrides = {
   countBadgeStyles: createStyles({
     boxSizing: 'border-box',
     position: 'absolute',
-    top: negate(system.space.x1),
-    insetInlineEnd: negate(system.space.x1),
+    top: calc.negate(system.space.x1),
+    insetInlineEnd: calc.negate(system.space.x1),
   }),
   actionButtonStyles: createStyles({
-    gap: space.s,
-    margin: space.s,
+    gap: system.space.x4,
+    margin: system.space.x4,
   }),
 };
 
@@ -130,7 +129,7 @@ export const Basic = () => {
             </TertiaryButton>
           </Tooltip>
         </GlobalHeader.Item>
-        <GlobalHeader.Item margin="auto" width="100%" maxWidth={`calc(${space.xxxl} * 6)`}>
+        <GlobalHeader.Item cs={styleOverrides.comboboxContainer}>
           <Autocomplete aria-label="Search Workday" />
         </GlobalHeader.Item>
         <GlobalHeader.Item>
@@ -159,7 +158,7 @@ export const Basic = () => {
 const GlobalHeaderItem = createComponent('div')({
   displayName: 'GlobalHeader.Item',
   Component: ({gap = 's', ...props}: HeaderItemProps, ref) => (
-    <Flex gap={gap} alignItems="center" marginX={space.xs} ref={ref} {...props} />
+    <Flex gap={gap} alignItems="center" marginX={system.space.x3} ref={ref} {...props} />
   ),
 });
 
