@@ -9,16 +9,15 @@ import {calc, createStencil, createStyles, px2rem} from '@workday/canvas-kit-sty
 import {system} from '@workday/canvas-tokens-web';
 
 const formStyles = createStyles({
-  marginBlockStart: system.space.x3,
-  marginBlockEnd: system.space.x3,
+  margin: `${system.space.x3} ${system.space.zero}`,
   maxWidth: px2rem(600),
-  minWidth: 0,
+  minWidth: system.space.zero,
 });
 
 const formFieldGroupListStyles = createStyles({
   display: 'inline-flex',
   flexDirection: 'row',
-  padding: 0,
+  padding: system.space.zero,
   flexWrap: 'wrap',
 });
 
@@ -93,7 +92,7 @@ const zipCodeInput = createStyles({
 });
 
 const zipCodeContainerStyles = createStyles({
-  minWidth: 0,
+  minWidth: system.space.zero,
 });
 
 const formFieldStencil = createStencil({
@@ -114,24 +113,9 @@ const formFieldStencil = createStencil({
 });
 
 const creditCardInputStyles = createStyles({
-  minWidth: px2rem(80),
-  maxWidth: px2rem(80),
+  width: calc.add(system.space.x10, system.space.x10),
+  minWidth: calc.add(system.space.x10, system.space.x10),
   textAlign: 'center',
-});
-
-const fastShippingSwitchStencil = createStencil({
-  base: {},
-  modifiers: {
-    density: {
-      high: {
-        '&:has(div)': {
-          border: '1px solid red',
-        },
-      },
-      medium: {},
-      low: {},
-    },
-  },
 });
 
 const selectStencil = createStencil({
@@ -140,21 +124,18 @@ const selectStencil = createStencil({
     density: {
       high: {
         height: system.space.x8,
-        paddingTop: system.space.x1,
-        paddingBottom: system.space.x1,
+        padding: `${system.space.x1} ${system.space.x2}`,
         '& + div': {
           height: system.space.x8,
         },
       },
       medium: {
         height: system.space.x10,
-        paddingTop: system.space.x2,
-        paddingBottom: system.space.x2,
+        padding: `${system.space.x2}`,
       },
       low: {
         height: calc.add(system.space.x10, system.space.x2),
-        paddingTop: system.space.x3,
-        paddingBottom: system.space.x3,
+        padding: `${system.space.x3} ${system.space.x2}`,
         '& + div': {
           height: calc.add(system.space.x10, system.space.x2),
         },
@@ -171,19 +152,16 @@ const inputStencil = createStencil({
     density: {
       high: {
         height: system.space.x8,
-        paddingTop: system.space.x1,
-        paddingBottom: system.space.x1,
+        padding: `${system.space.x1} ${system.space.x2}`,
       },
       medium: {
         height: system.space.x10,
-        paddingTop: system.space.x2,
-        paddingBottom: system.space.x2,
+        padding: `${system.space.x2}`,
       },
 
       low: {
         height: calc.add(system.space.x10, system.space.x2),
-        paddingTop: system.space.x3,
-        paddingBottom: system.space.x3,
+        padding: `${system.space.x3} ${system.space.x2}`,
       },
     },
   },
@@ -352,10 +330,7 @@ export const Density = () => {
                 <FormField.Input cs={[inputStencil({density}), zipCodeInput]} as={TextInput} />
               </FormField>
             </div>
-            <FormField
-              orientation={labelOrientation}
-              cs={[formFieldStencil({density}), fastShippingSwitchStencil({density})]}
-            >
+            <FormField orientation={labelOrientation} cs={formFieldStencil({density})}>
               <FormField.Label>Enable Fast Shipping</FormField.Label>
               <FormField.Field>
                 <FormField.Input as={Switch} />

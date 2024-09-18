@@ -5,7 +5,7 @@ import {system} from '@workday/canvas-tokens-web';
 import {Banner} from '@workday/canvas-kit-react/banner';
 
 import {Checkbox} from '@workday/canvas-kit-react/checkbox';
-import {RadioGroup} from '../../../radio';
+import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {AriaLiveRegion} from '@workday/canvas-kit-react/common';
 
