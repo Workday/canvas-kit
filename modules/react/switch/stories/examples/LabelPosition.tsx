@@ -14,7 +14,7 @@ export const LabelPosition = () => {
       <FormField.Label>Dark Mode</FormField.Label>
       <FormField.Field>
         <FormField.Input as={Switch} checked={checked} onChange={handleChange} />
-        <FormField.Hint>Switch to dark mode</FormField.Hint>
+        {/* <FormField.Hint>Switch to dark mode</FormField.Hint> */}
       </FormField.Field>
     </FormField>
   );
