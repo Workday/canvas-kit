@@ -3,8 +3,6 @@ import {ActionBar} from '@workday/canvas-kit-react/action-bar';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 
 export const Basic = () => {
-  console.log('env', process.env.NODE_ENV);
-  console.log(new Error().stack);
   return (
     <ActionBar>
       <ActionBar.List position="relative" as="section" aria-label="Basic example actions">
