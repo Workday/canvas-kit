@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 
 export const LabelPosition = () => {
@@ -12,17 +12,14 @@ export const LabelPosition = () => {
     }
   };
   return (
-    <FormField
-      label="Choose Your Pizza Crust"
-      labelPosition={FormField.LabelPosition.Left}
-      useFieldset={true}
-    >
-      <RadioGroup name="crust-label" onChange={handleChange} value={value}>
+    <FormField orientation="horizontal" as="fieldset">
+      <FormField.Label as="legend">Choose Your Pizza Crust</FormField.Label>
+      <FormField.Input as={RadioGroup} name="crust-label" onChange={handleChange} value={value}>
         <RadioGroup.RadioButton value="deep-dish">Deep dish</RadioGroup.RadioButton>
         <RadioGroup.RadioButton value="thin">Thin</RadioGroup.RadioButton>
         <RadioGroup.RadioButton value="gluten-free">Gluten free</RadioGroup.RadioButton>
         <RadioGroup.RadioButton value="cauliflower">Cauliflower</RadioGroup.RadioButton>
-      </RadioGroup>
+      </FormField.Input>
     </FormField>
   );
 };

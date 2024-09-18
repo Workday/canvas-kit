@@ -6,6 +6,7 @@ import {
   styled,
   useIsRTL,
   useUniqueId,
+  filterOutProps,
 } from '@workday/canvas-kit-react/common';
 import {space, commonColors, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {Card} from '@workday/canvas-kit-react/card';
@@ -112,7 +113,9 @@ const MenuContainer = styled(Card)({
   overflow: 'hidden',
 });
 
-const ResetButton = styled(TertiaryButton)<{shouldShow: boolean}>(
+const ResetButton = styled(TertiaryButton, {
+  shouldForwardProp: filterOutProps(['shouldShow']),
+})<{shouldShow: boolean}>(
   {
     position: 'absolute',
     margin: `auto ${space.xxxs}`,
@@ -355,7 +358,7 @@ export const Combobox = ({
     const autoCompleteItemCount = interactiveAutocompleteItems.length;
     const firstItem = 0;
     const lastItem = autoCompleteItemCount - 1;
-    let nextIndex = null;
+    let nextIndex: number | null = null;
 
     setIsOpened(true);
 
