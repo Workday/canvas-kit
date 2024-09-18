@@ -5,6 +5,7 @@ import {CSSObject} from '@emotion/styled';
 import {Icon, IconProps} from './Icon';
 import {createComponent, getColor} from '@workday/canvas-kit-react/common';
 import {SystemPropValues} from '@workday/canvas-kit-react/layout';
+import {cssVar} from '@workday/canvas-kit-styling';
 
 export interface SystemIconStyles {
   /**
@@ -61,30 +62,30 @@ export interface SystemIconProps
 export const systemIconStyles = ({
   accent,
   accentHover,
-  background = 'transparent',
-  backgroundHover = 'transparent',
-  color = iconColors.standard,
+  background = '',
+  backgroundHover = '',
+  color = '',
   colorHover = iconColors.hover,
   fill,
   fillHover,
 }: SystemIconStyles): CSSObject => ({
   '& .wd-icon-fill': {
-    fill: getColor(fill) || getColor(color),
+    fill: getColor(fill) || getColor(cssVar(color, iconColors.standard)),
   },
   ':hover .wd-icon-fill': {
     fill: getColor(fillHover) || getColor(colorHover),
   },
   '& .wd-icon-accent, & .wd-icon-accent2': {
-    fill: getColor(accent) || getColor(color),
+    fill: getColor(accent) || getColor(cssVar(color, iconColors.standard)),
   },
   ':hover .wd-icon-accent, :hover .wd-icon-accent2': {
     fill: getColor(accentHover) || getColor(colorHover),
   },
   '& .wd-icon-background': {
-    fill: getColor(background),
+    fill: getColor(cssVar(background, 'transparent')),
   },
   ':hover .wd-icon-background': {
-    fill: getColor(backgroundHover),
+    fill: getColor(cssVar(backgroundHover, 'transparent')),
   },
 });
 
