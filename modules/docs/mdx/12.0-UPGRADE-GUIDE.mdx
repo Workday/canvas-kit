@@ -195,7 +195,7 @@ We've added a new component under FromField to allow users to group inputs witho
 setting the `as` prop on the `FormField` component.
 
 Use `FormFieldGroup` when you have a group of inputs that need to be associated to one another, like
-`RadioGroup` or a group of `Checkbox`'s. `FormFieldGroup`.
+`RadioGroup` or a group of `Checkbox`'s.
 
 `FormFieldGroup` supports the same props of `FormField`:
 
@@ -205,10 +205,8 @@ Use `FormFieldGroup` when you have a group of inputs that need to be associated 
 
 #### Form Field Field
 
-We've added a new sub component to `FormField`, `FormField.Field`. This sub component is meant to
-ensure that the label is always aligned with the input regardless of the value of the `orientation`
-prop on `FormField`. This component should replace `FormField.Container` and always be used to
-ensure proper alignment. Our examples have been updated to reflect this.
+We've added a new sub-component to `FormField`, `FormField.Field`. This sub-component is meant to
+ensure that the label is always aligned with the input regardless of the `orientation` prop's value on `FormField`. This component should replace `FormField.Container` and always be used to ensure proper alignment. Our examples have been updated to reflect this.
 
 Although there is no codemod for this change and it's non breaking, we suggest moving towards adding
 this sub component when using `FormField`. This component also exists on `FormFieldGroup`.
