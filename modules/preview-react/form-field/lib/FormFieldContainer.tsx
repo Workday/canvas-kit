@@ -6,7 +6,7 @@ import {handleCsProp, CSProps, createStencil} from '@workday/canvas-kit-styling'
 import {useFormFieldModel} from './hooks';
 
 /**
- * @deprecated `formFieldContainerStencil` is deprecated nad will be removed in a future major version. Please use `FormField.Field` to always wrap `FormField.Input` and `FormField.Hint` to always ensure correct label and input alignment.
+ * @deprecated `formFieldContainerStencil` is deprecated and will be removed in a future major version. Please use `FormField.Field` to always wrap `FormField.Input` and `FormField.Hint` to always ensure correct label and input alignment.
  */
 export const formFieldContainerStencil = createStencil({
   base: {
