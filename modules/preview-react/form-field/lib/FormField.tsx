@@ -94,7 +94,7 @@ export const FormField = createContainer('div')({
      * ```
      *
      * @stencil formFieldContainerStencil
-     * @deprecated `FormField.Container` is deprecated nad will be removed in a future major version. Please use `FormField.Field` to always wrap `FormField.Input` and `FormField.Hint` to always ensure correct label and input alignment.
+     * @deprecated `FormField.Container` is deprecated and will be removed in a future major version. Please use `FormField.Field` to always wrap `FormField.Input` and `FormField.Hint` to always ensure correct label and input alignment.
      */
     Container: FormFieldContainer,
     /**
