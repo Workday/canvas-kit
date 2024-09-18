@@ -10,7 +10,7 @@ export const LabelPosition = () => {
   };
 
   return (
-    <FormField orientation="horizontal">
+    <FormField orientation="horizontalStart">
       <FormField.Label>Leave a Review</FormField.Label>
       <FormField.Input as={TextArea} onChange={handleChange} value={value} />
     </FormField>

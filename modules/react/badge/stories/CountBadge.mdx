@@ -43,10 +43,20 @@ messages on their first day back.
 
 ### Notification Badge
 
-Notifications are a major use case for `CountBadge`. Remember that any `CountBadge` with a
-live-updating value should be announced to screen readers with an `aria-live` region and an
-`aria-label` on the button to provide additional context, as in the example below. Please also read
-the Accessibility guidance below this example for aditional information.
+Notifications are a major use case for `CountBadge`. When the `CountBadge` value is updated in
+real-time, screen readers must be supported with an `AriaLiveRegion` that will automatically
+describe the change in the number of notifications. If the web app only updates `CountBadge` as part
+of another screen update, then this use of `AriaLiveRegion` is unnecessary and not recommended.
+
+#### Notes on accessibility for the example below
+
+- `Tooltip` is set on the `SecondaryButton` automatically applying the `aria-label` to the button.
+- `aria-describedby` property is conditionally set on the `SecondaryButton` when greater than zero
+  referencing a unique `id` for the `CountBadge` value .
+- `AriaLiveRegion` is used around the `CountBadge`, enabling screen readers to monitor changes in
+  value.
+- `aria-label` string is conditionally set on `AriaLiveRegion` when greater than zero, describing
+  "New notification"
 
 <ExampleCodeBlock code={NotificationBadge} />
 
@@ -54,17 +64,6 @@ the Accessibility guidance below this example for aditional information.
 
 Count Badge supports custom styling via the `cs` prop. For more information, check our
 ["How To Customize Styles"](https://workday.github.io/canvas-kit/?path=/docs/styling-how-to-customize-styles--page).
-
-## Accessibility
-
-A common use case for `CountBadge` is displaying notifications, but there are other situations where
-they will have live-updated values. There are several accessibility concerns you'll want to keep in
-mind:
-
-- The button should have an aria-label that updates with the count
-- The elements inside the button should have `aria-hidden`
-- The live region should be outside the button
-- The live region should be visually hidden and only contain text
 
 ## Component API
 

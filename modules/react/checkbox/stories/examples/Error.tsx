@@ -10,7 +10,7 @@ export const Error = () => {
   };
 
   return (
-    <FormField error="error" orientation="horizontal">
+    <FormField error="error" orientation="horizontalStart">
       <FormField.Container>
         <FormField.Input
           as={Checkbox}

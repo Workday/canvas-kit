@@ -46,6 +46,14 @@ declare global {
 Cypress.Commands.add('mount', mount);
 
 before(() => {
+  cy.window().then(win => {
+    // @ts-ignore mocking window for each test
+    win.process = {
+      env: {
+        NODE_ENV: 'development',
+      },
+    };
+  });
   cy.configureAxe({
     rules: [
       {id: 'landmark-one-main', enabled: false}, // stories don't require navigation rules
