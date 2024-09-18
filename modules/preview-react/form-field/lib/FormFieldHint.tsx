@@ -13,7 +13,6 @@ export const formFieldHintStencil = createStencil({
   extends: textStencil,
   base: {
     margin: `${system.space.x2} ${system.space.zero} ${system.space.zero}`,
-
     [parentModifier(formFieldStencil.modifiers.error.error)]: {
       color: brand.error.base,
     },

@@ -11,9 +11,9 @@ export const Grow = () => {
 
   return (
     <FormField>
-      <FormField.Label>Leave a Review</FormField.Label>
+      <FormField.Label>Leave a Review foo</FormField.Label>
       <FormField.Field>
-        <FormField.Input as={TextArea} grow onChange={handleChange} value={value} />
+        <FormField.Input as={TextArea} onChange={handleChange} value={value} />
       </FormField.Field>
     </FormField>
   );
