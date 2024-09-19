@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.1.13](https://github.com/Workday/canvas-kit/releases/tag/v11.1.13) (2024-09-19)
+
+### Components
+
+- fix: Allow inherit background color on system icon ([#2932](https://github.com/Workday/canvas-kit/pull/2932)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v11.1.12](https://github.com/Workday/canvas-kit/releases/tag/v11.1.12) (2024-09-18)
 
 ### Components
