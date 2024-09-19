@@ -28,33 +28,35 @@ export const formFieldGroupLabelStencil = createStencil({
     display: 'flex',
     alignItems: 'center',
     minWidth: px2rem(180),
-
-    // asterisk
-    [parentModifier(formFieldStencil.modifiers.required.true)]: {
-      '&::after': {
-        content: '"*"',
-        fontSize: system.fontSize.body.large,
-        fontWeight: system.fontWeight.normal,
-        color: brand.error.base,
-        textDecoration: 'unset',
-        marginInlineStart: system.space.x1,
+  },
+  modifiers: {
+    isRequired: {
+      true: {
+        // @ts-ignore fonts
+        '&::after': {
+          content: '"*"',
+          fontSize: system.fontSize.body.large,
+          fontWeight: system.fontWeight.normal,
+          color: brand.error.base,
+          textDecoration: 'unset',
+          marginInlineStart: system.space.x1,
+        },
       },
     },
-
-    // orientation modifier from parent FormField
-    [parentModifier(formFieldStencil.modifiers.orientation.horizontalStart)]: {
-      justifyContent: 'flex-start',
-      float: 'left',
-      maxHeight: system.space.x10,
-    },
-    // orientation modifier from parent FormField
-    [parentModifier(formFieldStencil.modifiers.orientation.horizontalEnd)]: {
-      maxHeight: system.space.x10,
-      float: 'left',
-      justifyContent: 'flex-end',
-    },
-    [parentModifier(formFieldStencil.modifiers.orientation.vertical)]: {
-      width: '100%',
+    orientation: {
+      vertical: {
+        width: '100%',
+      },
+      horizontalStart: {
+        justifyContent: 'flex-start',
+        float: 'left',
+        maxHeight: system.space.x10,
+      },
+      horizontalEnd: {
+        maxHeight: system.space.x10,
+        float: 'left',
+        justifyContent: 'flex-end',
+      },
     },
   },
   defaultModifiers: {
@@ -67,10 +69,19 @@ export const FormFieldGroupLabel = createSubcomponent('div')({
   modelHook: useFormFieldModel,
   elemPropsHook: useFormFieldLabel,
 })<FormFieldLabelProps>(({children, typeLevel, variant, ...elemProps}, Element, model) => {
+  console.log(model.state);
   return (
     <Element
       id={model.state.id}
-      {...mergeStyles(elemProps, formFieldGroupLabelStencil({typeLevel, variant}))}
+      {...mergeStyles(
+        elemProps,
+        formFieldGroupLabelStencil({
+          typeLevel,
+          variant,
+          orientation:
+            model.state.orientation === 'horizontal' ? 'horizontalStart' : model.state.orientation,
+        })
+      )}
     >
       {children}
     </Element>

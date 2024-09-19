@@ -120,13 +120,15 @@ export const FormField = createContainer('div')({
       );
     }
   }
+
   return (
     <Element
       {...mergeStyles(
         elemProps,
         formFieldStencil({
           grow,
-          orientation: orientation === 'horizontal' ? 'horizontalStart' : orientation,
+          orientation:
+            model.state.orientation === 'horizontal' ? 'horizontalStart' : model.state.orientation,
           error: model.state.error,
           required: model.state.isRequired,
         })

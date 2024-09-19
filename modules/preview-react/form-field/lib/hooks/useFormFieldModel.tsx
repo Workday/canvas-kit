@@ -24,6 +24,8 @@ export const useFormFieldModel = createModelHook({
      * `required` set to true, and an asterisk will be appended to the `FormField.Label`.
      */
     isRequired: false,
+
+    orientation: '' as 'vertical' | 'horizontal' | 'horizontalEnd' | 'horizontalStart',
   },
 })(config => {
   const id = useUniqueId(config.id);
