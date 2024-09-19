@@ -745,7 +745,7 @@ export function handleCsProp<
   // In order to allow everyone to use createStyles and createStencil without worrying about style merge issues, we're going
   // to enable compat mode all the time. We'll look into possible out-of-order execution issues in the future and plan to re-enable
   // full static mode (for better performance) once we know why this is happening and have a proper workaround.
-  let shouldRuntimeMergeStyles = true;
+  let shouldRuntimeMergeStyles = false;
 
   // The order is intentional. The `className` should go first, then the `cs` prop. If we don't do
   // runtime merging, this order doesn't actually matter because the browser doesn't care the order
