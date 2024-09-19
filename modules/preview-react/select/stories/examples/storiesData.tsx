@@ -1,6 +1,4 @@
 import * as React from 'react';
-import {storiesOf} from '@storybook/react';
-import {controlComponent} from '../../../../../utils/storybook';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {
   activityStreamIcon,
@@ -9,9 +7,7 @@ import {
   userIcon,
 } from '@workday/canvas-system-icons-web';
 import {colors, typeColors} from '@workday/canvas-kit-react/tokens';
-import {FormField} from '@workday/canvas-kit-react/form-field';
 import {
-  Select,
   RenderOptionFunction,
   RenderSelectedFunction,
 } from '@workday/canvas-kit-preview-react/select';
