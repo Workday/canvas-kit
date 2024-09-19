@@ -48,7 +48,7 @@ export const ExampleCodeBlock = ({code}: any) => {
 
   return (
     <div {...cardStencil({opened: isCodeDisplayed})}>
-      <Card data-part="example-block">
+      <Card data-part="example-block" className="sb-unstyled">
         <Card.Body>
           {React.createElement(code)}
           {code && (
