@@ -8,7 +8,7 @@ import {brand, system} from '@workday/canvas-tokens-web';
 
 import {useFormFieldLabel, useFormFieldModel} from './hooks';
 
-export interface FormFieldLabelProps
+export interface FormFieldGroupLabelProps
   extends FlexProps,
     Omit<ExtractProps<typeof Text, never>, 'display'> {
   /**
@@ -64,10 +64,10 @@ export const formFieldGroupLabelStencil = createStencil({
 });
 
 export const FormFieldGroupLabel = createSubcomponent('div')({
-  displayName: 'FormField.Label',
+  displayName: 'FormFieldGroup.Label',
   modelHook: useFormFieldModel,
   elemPropsHook: useFormFieldLabel,
-})<FormFieldLabelProps>(({children, typeLevel, variant, ...elemProps}, Element, model) => {
+})<FormFieldGroupLabelProps>(({children, typeLevel, variant, ...elemProps}, Element, model) => {
   return (
     <Element
       id={model.state.id}
