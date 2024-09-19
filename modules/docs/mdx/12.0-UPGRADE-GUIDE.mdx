@@ -39,6 +39,8 @@ A note to the reader:
 
 - [Canvas Tokens](#canvas-tokens)
 - [Codemod](#codemod)
+- [Styling Updates](#styling-updates)
+  - [Compatability Mode](#compatability-mode)
 - [Deprecations](#deprecations)
   - [Form Field Container](#form-field-container)
 - [Removals](#removals)
@@ -70,6 +72,12 @@ the variables are defined. For more information on installing and using, please 
 In v12, we have done some infrastructure updates with moving to Webpack 5 and Storybook 7. With
 these updates has come some formatting issues after running our codemods. We recommend running a
 formatter to address the format issues that have been introduced in v12.
+
+## Styling Updates
+
+### Compatability Mode
+
+In v12, we have addressed a style merge issue with removing forced compatibility mode. For more information on this change, please read our [discussion](https://github.com/Workday/canvas-kit/discussions/2893).
 
 ## Deprecations
 
@@ -224,8 +232,8 @@ the input regardless of the `orientation`prop's value on`FormField` or `FormFiel
 component should replace `FormField.Container` and always be used to ensure proper alignment of the
 label and hint text. Our examples have been updated to reflect this.
 
-Although there is no codemod for this change and it's non breaking, we suggest moving towards adding
-this sub component when using `FormField`. This component also exists on `FormFieldGroup`.
+Although there is no codemod for this change and it's non-breaking, we suggest moving towards adding
+this sub-component when using `FormField`. This component also exists on `FormFieldGroup`.
 
 ```tsx
 <FormField orientation="horizontal">
