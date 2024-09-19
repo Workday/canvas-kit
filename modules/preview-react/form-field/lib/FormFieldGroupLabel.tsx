@@ -1,13 +1,12 @@
 import React from 'react';
 
 import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
-import {createStencil, parentModifier, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {Text, textStencil} from '@workday/canvas-kit-react/text';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {brand, system} from '@workday/canvas-tokens-web';
 
 import {useFormFieldLabel, useFormFieldModel} from './hooks';
-import {formFieldStencil} from './formFieldStencil';
 
 export interface FormFieldLabelProps
   extends FlexProps,

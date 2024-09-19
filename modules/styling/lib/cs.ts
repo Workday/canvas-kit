@@ -1069,6 +1069,7 @@ function combineClassNames(input: (string | undefined)[]): string {
  *   }
  * })
  * ```
+ * @deprecated `parentModifier` is deprecated. While we support compat mode, we can't use `parentModifier`. If consumers pass in a style prop, this will created an unstable hash, breaking this function.
  */
 export function parentModifier(value: string) {
   return `.${value.replace('css-', 'm')} :where(&)`;
