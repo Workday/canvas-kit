@@ -12,6 +12,7 @@ import {CustomTarget as CustomTargetExample} from './examples/CustomTarget';
 import {BodyOverflow as BodyOverflowExample} from './examples/BodyOverflow';
 import {FullOverflow as FullOverflowExample} from './examples/FullOverflow';
 import {FormModal as FormModalExample} from './examples/FormModal';
+import {IframeTest as IFrameExample} from './examples/IframeTest';
 
 export default {
   title: 'Components/Popups/Modal',
@@ -49,4 +50,7 @@ export const FullOverflow: Story = {
 };
 export const FormModal: Story = {
   render: FormModalExample,
+};
+export const Iframe: Story = {
+  render: IFrameExample,
 };
