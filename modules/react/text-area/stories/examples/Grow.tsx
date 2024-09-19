@@ -10,7 +10,7 @@ export const Grow = () => {
   };
 
   return (
-    <FormField>
+    <FormField grow>
       <FormField.Label>Leave a Review foo</FormField.Label>
       <FormField.Field>
         <FormField.Input as={TextArea} onChange={handleChange} value={value} />
