@@ -22,29 +22,31 @@ export const Basic = () => {
     <Flex flexDirection="column">
       <FormFieldGroup>
         <FormFieldGroup.Label>Choose Your Pizza Crust</FormFieldGroup.Label>
-        <FormFieldGroup.List
-          cs={formfieldInputStyles}
-          as={RadioGroup}
-          name="pizza-crust"
-          onChange={handleChange}
-          value={value}
-        >
-          <FormFieldGroup.Input as={RadioGroup.RadioButton} value="deep-dish">
-            Deep dish
-          </FormFieldGroup.Input>
-          <FormFieldGroup.Input as={RadioGroup.RadioButton} value="thin">
-            Thin
-          </FormFieldGroup.Input>
-          <FormFieldGroup.Input as={RadioGroup.RadioButton} value="gluten-free">
-            Gluten free
-          </FormFieldGroup.Input>
-          <FormFieldGroup.Input as={RadioGroup.RadioButton} value="cauliflower">
-            Cauliflower
-          </FormFieldGroup.Input>
-          <FormFieldGroup.Input as={RadioGroup.RadioButton} value="custom">
-            Butter - the best thing to put on bread
-          </FormFieldGroup.Input>
-        </FormFieldGroup.List>
+        <FormFieldGroup.Field>
+          <FormFieldGroup.List
+            cs={formfieldInputStyles}
+            as={RadioGroup}
+            name="pizza-crust"
+            onChange={handleChange}
+            value={value}
+          >
+            <FormFieldGroup.Input as={RadioGroup.RadioButton} value="deep-dish">
+              Deep dish
+            </FormFieldGroup.Input>
+            <FormFieldGroup.Input as={RadioGroup.RadioButton} value="thin">
+              Thin
+            </FormFieldGroup.Input>
+            <FormFieldGroup.Input as={RadioGroup.RadioButton} value="gluten-free">
+              Gluten free
+            </FormFieldGroup.Input>
+            <FormFieldGroup.Input as={RadioGroup.RadioButton} value="cauliflower">
+              Cauliflower
+            </FormFieldGroup.Input>
+            <FormFieldGroup.Input as={RadioGroup.RadioButton} value="custom">
+              Butter - the best thing to put on bread
+            </FormFieldGroup.Input>
+          </FormFieldGroup.List>
+        </FormFieldGroup.Field>
       </FormFieldGroup>
       Value selected: {value}
     </Flex>

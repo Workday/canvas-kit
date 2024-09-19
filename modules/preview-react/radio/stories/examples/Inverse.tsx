@@ -29,28 +29,20 @@ export const Inverse = () => {
 
   return (
     <Box cs={styleOverrides.containerStyles}>
-      <FormFieldGroup cs={styleOverrides.formFieldStyles}>
-        <FormFieldGroup.Label>Choose Your Pizza Crust</FormFieldGroup.Label>
-        <FormFieldGroup.List
-          as={RadioGroup}
-          name="crust-inverse"
-          onChange={handleChange}
-          value={value}
-        >
-          <FormFieldGroup.Input as={RadioGroup.RadioButton} variant="inverse" value="deep-dish">
-            Deep dish
-          </FormFieldGroup.Input>
-          <FormFieldGroup.Input as={RadioGroup.RadioButton} variant="inverse" value="thin">
-            Thin
-          </FormFieldGroup.Input>
-          <FormFieldGroup.Input as={RadioGroup.RadioButton} variant="inverse" value="gluten-free">
-            Gluten free
-          </FormFieldGroup.Input>
-          <FormFieldGroup.Input as={RadioGroup.RadioButton} variant="inverse" value="cauliflower">
-            Cauliflower
-          </FormFieldGroup.Input>
-        </FormFieldGroup.List>
-      </FormFieldGroup>
+      <RadioGroup name="crust-inverse" onChange={handleChange} value={value}>
+        <RadioGroup.RadioButton variant="inverse" value="deep-dish">
+          Deep dish
+        </RadioGroup.RadioButton>
+        <RadioGroup.RadioButton variant="inverse" value="thin">
+          Thin
+        </RadioGroup.RadioButton>
+        <RadioGroup.RadioButton variant="inverse" value="gluten-free">
+          Gluten free
+        </RadioGroup.RadioButton>
+        <RadioGroup.RadioButton variant="inverse" value="cauliflower">
+          Cauliflower
+        </RadioGroup.RadioButton>
+      </RadioGroup>
     </Box>
   );
 };

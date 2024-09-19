@@ -11,25 +11,28 @@ import {FormField} from './FormField';
 import {useFormFieldModel} from './hooks';
 import {formFieldStencil} from './formFieldStencil';
 
+//TODO: Remove `horizontal` option in v13 and the console warn message.
 export interface FormFieldGroupProps extends FlexProps, GrowthBehavior {
   /**
-   * The direction the child elements should stack
+   * The direction the child elements should stack. In v13, `horizontal` will be removed. Please use `horizontalStart` or `horizontalEnd` for horizontal alignment.
    * @default vertical
    */
-  orientation?: 'vertical' | 'horizontalStart' | 'horizontalEnd';
+  orientation?: 'vertical' | 'horizontalStart' | 'horizontalEnd' | 'horizontal';
   children: React.ReactNode;
 }
 
 /**
- * Use `FormFieldGroup` to wrap a group of inputs to make them accessible. `FormFieldGroup` will render a `fieldset` element with the purpose of grouping input controls.
+ * Use `FormFieldGroup` to wrap a group of inputs to make them accessible.
  *
  * ```tsx
  * <FormFieldGroup>
- *    <FormField.Label>Choose a Pet</FormField.Label>
- *    <FormFieldGroup.List as={RadioGroup} />
- *      <FromFieldGroup.Input as={RadioGroup.RadioButton} value='dog'>Dog</FormFieldGroup.Input>
- *      <FromFieldGroup.Input as={RadioGroup.RadioButton} value='cat'>Cat</FormFieldGroup.Input>
- *    </FormFieldGroup.List>
+ *    <FormFieldGroup.Label>Choose a Pet</FormFieldGroup.Label>
+ *    <FormFiledGroup.Field>
+ *      <FormFieldGroup.List as={RadioGroup} />
+ *        <FromFieldGroup.Input as={RadioGroup.RadioButton} value='dog'>Dog</FormFieldGroup.Input>
+ *        <FromFieldGroup.Input as={RadioGroup.RadioButton} value='cat'>Cat</FormFieldGroup.Input>
+ *      </FormFieldGroup.List>
+ *    </FormFieldGroup.Field>
  * </FormFieldGroup>
  * ```
  *
@@ -40,7 +43,7 @@ export const FormFieldGroup = createContainer('div')({
   modelHook: useFormFieldModel,
   subComponents: {
     /**
-     * `FormFieldGroup.Input` will render any `inputs` passed to it via the `as` prop, including `TextInput`, `Select`, `Switch`, `TextArea`, `RadioGroup.RadioButton` or any custom input.
+     * `FormFieldGroup.Input` will render any `inputs` passed to it via the `as` prop. Use this component with checkboxes or radio inputs.
      * `FormFieldGroup.Input` will apply `aria-invalid` when there is an error on `FromFieldGroup` or `aria-describedby` when an `id` is added on the `FormFieldGroup`.
      *
      * **Note: If you pass in a custom input that is *not* as Canvas Kit input, you will have to handle the `error` prop, validation and styling. For a custom approach, reference our Custom storybook example.**
@@ -57,7 +60,7 @@ export const FormFieldGroup = createContainer('div')({
      */
     Input: FormFieldGroupInput,
     /**
-     * `FormFieldGroup.Label` will render a `legend` element. This element labels the contents of a `fieldset`.
+     * `FormFieldGroup.Label` this element labels the contents of the group of inputs..
      *
      * ```tsx
      * <FormFieldGroup>
@@ -74,8 +77,7 @@ export const FormFieldGroup = createContainer('div')({
      */
     List: FormFieldGroupList,
     /**
-     * `FormFieldGroup.Hint` will render any additional information you want to provide to the `FormFieldGroup`. If you
-     * set the `orientation` prop to `horizontal` you should use `FormFieldGroup.Container` to properly align the hint with your `FormField.List`.
+     * `FormFieldGroup.Hint` will render any additional information you want to provide to the `FormFieldGroup`.
      *
      * ```tsx
      * <FormFieldGroup>
@@ -94,7 +96,7 @@ export const FormFieldGroup = createContainer('div')({
      * `FormFieldGroup.Field` allows you to properly align the legend to the group of inputs.
      *
      * ```tsx
-     * <FormFieldGroup orientation="horizontal">
+     * <FormFieldGroup orientation="horizontalStart">
      *    <FormFieldGroup.Label>Choose a pet</FormFieldGroup.Label>
      *    <FormFieldGroup.Field>
      *      <FormFieldGroup.List>
@@ -118,7 +120,8 @@ export const FormFieldGroup = createContainer('div')({
         elemProps,
         formFieldStencil({
           grow,
-          orientation,
+          orientation:
+            model.state.orientation === 'horizontal' ? 'horizontalStart' : model.state.orientation,
           error: model.state.error,
           required: model.state.isRequired,
         })

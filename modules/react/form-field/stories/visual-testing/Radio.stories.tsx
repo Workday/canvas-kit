@@ -103,10 +103,10 @@ export const RadioStates = {
             <FormField as="fieldset" {...props}>
               <FormField.Label>{props.label}</FormField.Label>
               {props.orientation === 'horizontalStart' ? (
-                <FormField.Container>
+                <FormField.Field>
                   {testGroup}
                   {props.error && <FormField.Hint>hintText</FormField.Hint>}
-                </FormField.Container>
+                </FormField.Field>
               ) : (
                 <>
                   {testGroup}

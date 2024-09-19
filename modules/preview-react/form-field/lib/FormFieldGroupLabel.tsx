@@ -19,7 +19,7 @@ export interface FormFieldLabelProps
 
 export const formFieldGroupLabelStencil = createStencil({
   extends: textStencil,
-  // @ts-ignore Still weird about CSS variables
+  // @ts-ignore Still weird about CSS font variables
   base: {
     fontWeight: system.fontWeight.medium,
     color: system.color.text.default,
@@ -68,7 +68,6 @@ export const FormFieldGroupLabel = createSubcomponent('div')({
   modelHook: useFormFieldModel,
   elemPropsHook: useFormFieldLabel,
 })<FormFieldLabelProps>(({children, typeLevel, variant, ...elemProps}, Element, model) => {
-  console.log(model.state);
   return (
     <Element
       id={model.state.id}
@@ -77,6 +76,7 @@ export const FormFieldGroupLabel = createSubcomponent('div')({
         formFieldGroupLabelStencil({
           typeLevel,
           variant,
+          isRequired: model.state.isRequired as any,
           orientation:
             model.state.orientation === 'horizontal' ? 'horizontalStart' : model.state.orientation,
         })

@@ -14,20 +14,27 @@ export const LabelPosition = () => {
   return (
     <FormFieldGroup orientation="horizontalStart">
       <FormFieldGroup.Label>Choose Your Pizza Crust</FormFieldGroup.Label>
-      <FormFieldGroup.List as={RadioGroup} name="crust-label" onChange={handleChange} value={value}>
-        <FormFieldGroup.Input as={RadioGroup.RadioButton} value="deep-dish">
-          Deep dish
-        </FormFieldGroup.Input>
-        <FormFieldGroup.Input as={RadioGroup.RadioButton} value="thin">
-          Thin
-        </FormFieldGroup.Input>
-        <FormFieldGroup.Input as={RadioGroup.RadioButton} value="gluten-free">
-          Gluten free
-        </FormFieldGroup.Input>
-        <FormFieldGroup.Input as={RadioGroup.RadioButton} value="cauliflower">
-          Cauliflower
-        </FormFieldGroup.Input>
-      </FormFieldGroup.List>
+      <FormFieldGroup.Field>
+        <FormFieldGroup.List
+          as={RadioGroup}
+          name="crust-label"
+          onChange={handleChange}
+          value={value}
+        >
+          <FormFieldGroup.Input as={RadioGroup.RadioButton} value="deep-dish">
+            Deep dish
+          </FormFieldGroup.Input>
+          <FormFieldGroup.Input as={RadioGroup.RadioButton} value="thin">
+            Thin
+          </FormFieldGroup.Input>
+          <FormFieldGroup.Input as={RadioGroup.RadioButton} value="gluten-free">
+            Gluten free
+          </FormFieldGroup.Input>
+          <FormFieldGroup.Input as={RadioGroup.RadioButton} value="cauliflower">
+            Cauliflower
+          </FormFieldGroup.Input>
+        </FormFieldGroup.List>
+      </FormFieldGroup.Field>
     </FormFieldGroup>
   );
 };

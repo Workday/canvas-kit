@@ -5,8 +5,7 @@ import {useFormFieldModel} from './hooks';
 
 export interface FormFieldGroupInputProps extends CSProps {}
 /**
- * Adds the necessary props to an `Input` component.
- * Used by the FormField.Input subcomponent and other input type components
+ * Adds the necessary props to an `Input` component for grouped inputs.
  */
 export const useFormFieldGroupInput = createElemPropsHook(useFormFieldModel)(({state}) => {
   return {

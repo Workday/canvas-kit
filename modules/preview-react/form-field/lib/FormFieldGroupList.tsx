@@ -17,7 +17,7 @@ const formFieldGroupListStencil = createStencil({
     borderRadius: system.shape.x1,
     gap: system.space.x2,
     padding: `${px2rem(10)} ${system.space.x3} ${system.space.x2}`,
-    margin: `${calc.negate(system.space.x1)} ${calc.negate(system.space.x3)}`,
+    margin: `0 ${calc.negate(system.space.x3)}`,
     transition: '100ms box-shadow',
     width: 'fit-content',
   },

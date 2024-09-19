@@ -19,7 +19,7 @@ export interface FormFieldLabelProps
 
 export const formFieldLabelStencil = createStencil({
   extends: textStencil,
-  // @ts-ignore Still weird about CSS variables
+  // @ts-ignore Still weird about CSS font variables
   base: {
     fontWeight: system.fontWeight.medium,
     color: system.color.text.default,
@@ -31,7 +31,7 @@ export const formFieldLabelStencil = createStencil({
   modifiers: {
     isRequired: {
       true: {
-        // @ts-ignore fonts
+        // @ts-ignore Still weird about CSS font variables
         '&::after': {
           content: '"*"',
           fontSize: system.fontSize.body.large,
@@ -60,6 +60,7 @@ export const formFieldLabelStencil = createStencil({
   },
   defaultModifiers: {
     typeLevel: 'subtext.large',
+    isRequired: 'false',
   },
 });
 
@@ -76,7 +77,7 @@ export const FormFieldLabel = createSubcomponent('label')({
         formFieldLabelStencil({
           typeLevel,
           variant,
-          isRequired: model.state.isRequired ? 'true' : 'false',
+          isRequired: model.state.isRequired as any,
           orientation:
             model.state.orientation === 'horizontal' ? 'horizontalStart' : model.state.orientation,
         })

@@ -11,13 +11,14 @@ import {useFormFieldHint, useFormFieldModel} from './hooks';
 export const formFieldHintStencil = createStencil({
   extends: textStencil,
   base: {
-    margin: `${system.space.x2} ${system.space.zero} ${system.space.zero}`,
+    margin: system.space.zero,
   },
   modifiers: {
-    isRequired: {
-      true: {
+    error: {
+      error: {
         color: brand.error.base,
       },
+      alert: {},
     },
   },
   defaultModifiers: {
@@ -40,7 +41,7 @@ export const FormFieldHint = createSubcomponent('p')({
       <Element
         {...mergeStyles(
           elemProps,
-          formFieldHintStencil({typeLevel, variant, isRequired: model.state.isRequired})
+          formFieldHintStencil({typeLevel, variant, error: model.state.error})
         )}
       >
         {children}

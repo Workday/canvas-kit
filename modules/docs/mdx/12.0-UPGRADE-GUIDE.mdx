@@ -81,8 +81,9 @@ deprecated code is removed.
 
 **PR:** [#2865](https://github.com/Workday/canvas-kit/pull/2865)
 
-We've deprecated `FormField.Container`. Please use `FormField.Field`, this ensures proper label
-alignment regardless of the orientation.
+We've deprecated `FormField.Container`. Please use `FormField.Field` or `FormFieldGroup.Field` for
+grouped inputs, this ensures proper label alignment and spacing of inputs and hint text, regardless
+of the orientation.
 
 ```tsx
 // v11
@@ -174,10 +175,10 @@ The following changes have been made to the API:
 We've promoted FormField from [Preview](#preview) to [Main](#main). The following changes has been
 made to provide more flexibility and better explicit components when using inputs.
 
-The orientation prop on the `FormField` component will be updated to accept the following values:
-`vertical`, `horizontalStart`, and `horizontalEnd`. `horizontal` will still be accepted as a value
-in v12, but it will be deprecated and slated for removal in a future major release. These changes
-are intended to provide more flexibility with label alignments on `FormField` elements.
+- The orientation prop on the `FormField` component will be updated to accept the following values:
+  `vertical`, `horizontalStart`, and `horizontalEnd`. `horizontal` will still be accepted as a value
+  in v12, but it will be deprecated and slated for removal in a future major release. These changes
+  are intended to provide more flexibility with label alignments on `FormField` elements.
 
 > **Note**: The horizontal alignment of start and end are relative to its container, meaning start
 > and end match the flex property of `flex-start` and `flex-end`. This is especially applicable for
@@ -185,6 +186,17 @@ are intended to provide more flexibility with label alignments on `FormField` el
 
 > **Note:** Orientation "horizontal" has been deprecated. You will see a console warn message
 > suggesting to update your types and usage to `horizontalStart`, `horizontalEnd` or `vertical`.
+
+- `useFormFieldModel`: `orientation` has been added back into `useFormFieldModel`. While we still
+  support compat mode due to
+  [style merging issues](https://github.com/Workday/canvas-kit/discussions/2893), having orientation
+  on the model allows for proper styling of sub components.
+
+- Styles clean up. `FormField.Hint` and `FormField.Label` where using `margin` for spacing. We've
+  updated styles so that the containing element uses `gap` for proper spacing.
+
+> **Note:** If spacing seems off between the input and hint text, ensure you're using
+> `FormField.Field` wrappign your input and hint text.
 
 🤖 The codemod will handle the change of `orientation="horizontal"` to
 `orientation="horizontalStart"` if you're using the string literal values.
@@ -200,13 +212,17 @@ Use `FormFieldGroup` when you have a group of inputs that need to be associated 
 `FormFieldGroup` supports the same props of `FormField`:
 
 - `error`: `"alert" | "error"` Defines the error around the whole group of inputs.
-- `orientation`: `"horizontalStart" | "horizontalEnd" | "vertical" `. Defines the label placement.
-- `isRequired`: `true` Defines if a group like RadioGroup is required.
+- `orientation`: `"horizontalStart" | "horizontalEnd" | "vertical" | "horizontal" `. Defines the
+  label placement.
+- `isRequired`: `true` Defines if a group like `RadioGroup` is required.
 
 #### Form Field Field
 
-We've added a new sub-component to `FormField`, `FormField.Field`. This sub-component is meant to
-ensure that the label is always aligned with the input regardless of the `orientation` prop's value on `FormField`. This component should replace `FormField.Container` and always be used to ensure proper alignment. Our examples have been updated to reflect this.
+We've added a new sub-component to `FormField` and `FormFieldGroup`, `FormField.Field` and
+`FormFieldGroup.Field`. This sub-component is meant to ensure that the label is always aligned with
+the input regardless of the `orientation`prop's value on`FormField` or `FormFieldGroup`. This
+component should replace `FormField.Container` and always be used to ensure proper alignment of the
+label and hint text. Our examples have been updated to reflect this.
 
 Although there is no codemod for this change and it's non breaking, we suggest moving towards adding
 this sub component when using `FormField`. This component also exists on `FormFieldGroup`.

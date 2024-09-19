@@ -4,11 +4,13 @@ import {createSubcomponent} from '@workday/canvas-kit-react/common';
 import {handleCsProp, CSProps, createStencil} from '@workday/canvas-kit-styling';
 
 import {useFormFieldModel} from './hooks';
+import {system} from '@workday/canvas-tokens-web';
 
 export const formFieldFieldStencil = createStencil({
   base: {
     display: 'flex',
     flexDirection: 'column',
+    gap: system.space.x2,
   },
 });
 
