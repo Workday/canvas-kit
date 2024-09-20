@@ -54,6 +54,7 @@ before(() => {
       },
     };
   });
+
   cy.configureAxe({
     rules: [
       {id: 'landmark-one-main', enabled: false}, // stories don't require navigation rules

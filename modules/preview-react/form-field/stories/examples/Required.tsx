@@ -12,12 +12,14 @@ export const Required = () => {
   return (
     <FormField isRequired={true}>
       <FormField.Label>Email</FormField.Label>
-      <FormField.Input
-        as={TextInput}
-        placeholder="your@gmail.com"
-        onChange={handleChange}
-        value={value}
-      />
+      <FormField.Field>
+        <FormField.Input
+          as={TextInput}
+          placeholder="your@gmail.com"
+          onChange={handleChange}
+          value={value}
+        />
+      </FormField.Field>
     </FormField>
   );
 };

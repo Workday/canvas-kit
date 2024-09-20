@@ -12,8 +12,10 @@ export const Error = () => {
   return (
     <FormField error="error">
       <FormField.Label>Email</FormField.Label>
-      <FormField.Input as={TextInput} onChange={handleChange} value={value} />
-      <FormField.Hint>Please enter a valid email.</FormField.Hint>
+      <FormField.Field>
+        <FormField.Input as={TextInput} onChange={handleChange} value={value} />
+        <FormField.Hint>Please enter a valid email.</FormField.Hint>
+      </FormField.Field>
     </FormField>
   );
 };

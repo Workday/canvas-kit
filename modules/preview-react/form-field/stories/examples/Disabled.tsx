@@ -15,7 +15,9 @@ export const Disabled = () => {
     <Flex>
       <FormField>
         <FormField.Label>Email</FormField.Label>
-        <FormField.Input as={TextInput} value={value} disabled onChange={handleChange} />
+        <FormField.Field>
+          <FormField.Input as={TextInput} value={value} disabled onChange={handleChange} />
+        </FormField.Field>
       </FormField>
     </Flex>
   );

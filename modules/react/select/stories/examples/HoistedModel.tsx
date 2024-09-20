@@ -20,17 +20,19 @@ export const HoistedModel = () => {
 
   return (
     <>
-      <Select model={model}>
-        <FormField>
-          <FormField.Label>Contact</FormField.Label>
-          <FormField.Input as={Select.Input} />
-          <Select.Popper>
-            <Select.Card>
-              <Select.List>{item => <Select.Item>{item.text}</Select.Item>}</Select.List>
-            </Select.Card>
-          </Select.Popper>
-        </FormField>
-      </Select>
+      <FormField>
+        <FormField.Label>Contact</FormField.Label>
+        <FormField.Field>
+          <Select model={model}>
+            <FormField.Input as={Select.Input} />
+            <Select.Popper>
+              <Select.Card>
+                <Select.List>{item => <Select.Item>{item.text}</Select.Item>}</Select.List>
+              </Select.Card>
+            </Select.Popper>
+          </Select>
+        </FormField.Field>
+      </FormField>
       <BodyText size="small">Selected Value: {model.state.selectedIds[0]}</BodyText>
       <SecondaryButton
         onClick={() => {

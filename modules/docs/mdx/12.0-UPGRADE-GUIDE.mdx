@@ -42,12 +42,13 @@ A note to the reader:
 - [Styling Updates](#styling-updates)
   - [Compatability Mode](#compatability-mode)
 - [Deprecations](#deprecations)
+  - [Form Field Container](#form-field-container)
 - [Removals](#removals)
   - [InputIconContainer](#inputiconcontainer)
-  - [Select (Preview)](#select-preview)
 - [Component Updates](#component-updates)
   - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
   - [Avatar](#avatar)
+  - [Select](#select)
   - [Form Field](#form-field)
   - [Text Area](#text-area)
 - [Troubleshooting](#troubleshooting)
@@ -83,17 +84,38 @@ We add the [@deprecated](https://jsdoc.app/tags-deprecated.html) JSDoc tag to co
 in a future major release. This signals consumers to migrate to a more stable alternative before the
 deprecated code is removed.
 
+### Form Field Container
+
+**PR:** [#2865](https://github.com/Workday/canvas-kit/pull/2865)
+
+We've deprecated `FormField.Container`. Please use `FormField.Field` or `FormFieldGroup.Field` for
+grouped inputs, this ensures proper label alignment and spacing of inputs and hint text, regardless
+of the orientation.
+
+```tsx
+// v11
+<FormField>
+  <FormField.Label>Email</FormField.Label>
+  <FormField.Container>
+    <FormField.Input as={TextInput} />
+    <FormField.Hint>You must provide an email</FormField.Hint>
+  </FormField.Container>
+</FormField>
+
+// v12
+<FormField>
+  <FormField.Label>Email</FormField.Label>
+  <FormField.Field>
+    <FormField.Input as={TextInput} />
+    <FormField.Hint>You must provide an email</FormField.Hint>
+  </FormField.Field>
+</FormField>
+```
+
 ## Removals
 
 Removals are deletions from our codebase and you can no longer consume this component. We've either
 promoted or replaced a component or utility.
-
-### Select (Preview)
-
-**PR:** [#2796](https://github.com/Workday/canvas-kit/pull/2796)
-
-We've removed the `Select` component that was in Preview. Please use the compound
-[Select component from Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic).
 
 ### InputIconContainer
 
@@ -123,7 +145,6 @@ The following components are affected:
 
 - `Avatar`
 - `Dialog`
-- `FormField`
 - `Modal`
 - `Popup`
 - `TextArea`
@@ -135,6 +156,12 @@ The following components are affected:
 > [documentation](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--cs-prop).
 
 ### Avatar
+
+**PR** [#2793](https://github.com/Workday/canvas-kit/pull/2793)
+
+Avatar has been updated to use our new
+[styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-stencil).
+The following changes have been made to the API:
 
 - `Avatar.Size` has been deprecated. The `size` prop still accepts `Avatar.Size` in addition to the
   following values:
@@ -149,12 +176,16 @@ The following components are affected:
 
 ### Form Field
 
-**PR** [#2881](https://github.com/Workday/canvas-kit/pull/2881)
+**PRs:** [#2865](https://github.com/Workday/canvas-kit/pull/2865),
+[#2881](https://github.com/Workday/canvas-kit/pull/2881)
 
-The orientation prop on the `FormField` component will be updated to accept the following values:
-`vertical`, `horizontalStart`, and `horizontalEnd`. `horizontal` will still be accepted as a value
-in v12, but it will be deprecated and slated for removal in a future major release. These changes
-are intended to provide more flexibility with label alignments on `FormField` elements.
+We've promoted FormField from [Preview](#preview) to [Main](#main). The following changes has been
+made to provide more flexibility and better explicit components when using inputs.
+
+- The orientation prop on the `FormField` component will be updated to accept the following values:
+  `vertical`, `horizontalStart`, and `horizontalEnd`. `horizontal` will still be accepted as a value
+  in v12, but it will be deprecated and slated for removal in a future major release. These changes
+  are intended to provide more flexibility with label alignments on `FormField` elements.
 
 > **Note**: The horizontal alignment of start and end are relative to its container, meaning start
 > and end match the flex property of `flex-start` and `flex-end`. This is especially applicable for
@@ -163,8 +194,104 @@ are intended to provide more flexibility with label alignments on `FormField` el
 > **Note:** Orientation "horizontal" has been deprecated. You will see a console warn message
 > suggesting to update your types and usage to `horizontalStart`, `horizontalEnd` or `vertical`.
 
+- `useFormFieldModel`: `orientation` has been added back into `useFormFieldModel`. While we still
+  support compat mode due to
+  [style merging issues](https://github.com/Workday/canvas-kit/discussions/2893), having orientation
+  on the model allows for proper styling of sub components.
+
+- Styles clean up. `FormField.Hint` and `FormField.Label` where using `margin` for spacing. We've
+  updated styles so that the containing element uses `gap` for proper spacing.
+
+> **Note:** If spacing seems off between the input and hint text, ensure you're using
+> `FormField.Field` wrappign your input and hint text.
+
 🤖 The codemod will handle the change of `orientation="horizontal"` to
 `orientation="horizontalStart"` if you're using the string literal values.
+
+#### Form Field Group
+
+We've added a new component under `FromField` to allow users to group inputs without worrying about
+setting the `as` prop on the `FormField` component.
+
+Use `FormFieldGroup` when you have a group of inputs that need to be associated to one another, like
+`RadioGroup` or a group of `Checkbox`'s.
+
+`FormFieldGroup` supports the same props of `FormField`:
+
+- `error`: `"alert" | "error"` Defines the error around the whole group of inputs.
+- `orientation`: `"horizontalStart" | "horizontalEnd" | "vertical" | "horizontal" `. Defines the
+  label placement.
+- `isRequired`: `true` Defines if a group like `RadioGroup` is required.
+
+#### FormField Field
+
+We've added a new sub-component to `FormField` and `FormFieldGroup`, `FormField.Field` and
+`FormFieldGroup.Field`. This sub-component is meant to ensure that the label is always aligned with
+the input regardless of the `orientation`prop's value on`FormField` or `FormFieldGroup`. This
+component should replace `FormField.Container` and always be used to ensure proper alignment of the
+label and hint text. Our examples have been updated to reflect this.
+
+Although there is no codemod for this change and it's non-breaking, we suggest moving towards adding
+this sub-component when using `FormField`. This component also exists on `FormFieldGroup`.
+
+```tsx
+<FormField orientation="horizontal">
+  <FormField.Label>Email</FormField.Label>
+  <FormField.Field>
+    <FormField.Input as={TextInput} />
+    <FormField.Hint>You must provide an email</FormField.Hint>
+  </FormField.Field>
+</FormField>
+```
+
+### Select
+
+**PR:** [#2865](https://github.com/Workday/canvas-kit/pull/2865)
+
+As we transition to use our CSS tokens to provide better theming capabilities and our new styling
+methods, we're moving away from components extending `Themeable`. `Themeable` has been removed from
+`SelectProps.`
+
+If you wish to theme `Select` we suggest using the CanvasProvider to do so.
+
+```tsx
+const theme: PartialEmotionCanvasTheme = {
+  canvas: {
+    palette: {
+      common: {
+        focusOutline: 'pink',
+      },
+      primary: {
+        main: 'green',
+        light: 'lightgreen',
+      },
+    },
+  },
+};
+
+//...
+
+<CanvasProvider theme={theme}>
+  <Flex cs={parentContainerStyles}>
+    <Select items={options}>
+      <FormField>
+        <FormField.Label>Contact</FormField.Label>
+        <FormField.Input as={Select.Input} onChange={handleChange} />
+        <Select.Popper>
+          <Select.Card>
+            <Select.List>
+              {item => {
+                return <Select.Item>{item}</Select.Item>;
+              }}
+            </Select.List>
+          </Select.Card>
+        </Select.Popper>
+      </FormField>
+    </Select>
+    Selected Value: {value}
+  </Flex>
+</CanvasProvider>;
+```
 
 ### Text Area
 
@@ -176,10 +303,15 @@ type.
 
 ```tsx
 // v11
-interface MyProps { resize?: TextAreaResizeDirection }
+interface MyProps {
+  resize?: TextAreaResizeDirection;
+}
 
-// 12 type ValueOf<T> = T[keyof T]; interface MyProps { resize?:
-ValueOf<typeof TextAreaResizeDirection> }
+// 12
+type ValueOf<T> = T[keyof T];
+interface MyProps {
+  resize?: ValueOf<typeof TextAreaResizeDirection>;
+}
 ```
 
 ## Troubleshooting

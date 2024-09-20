@@ -27,15 +27,17 @@ export const Required = () => {
   return (
     <Flex cs={parentContainerStyles}>
       <FormField isRequired>
-        <Select items={options}>
-          <FormField.Label>Contact</FormField.Label>
-          <FormField.Input as={Select.Input} onChange={e => handleChange(e)} />
-          <Select.Popper>
-            <Select.Card>
-              <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
-            </Select.Card>
-          </Select.Popper>
-        </Select>
+        <FormField.Label>Contact</FormField.Label>
+        <FormField.Field>
+          <Select items={options}>
+            <FormField.Input as={Select.Input} onChange={e => handleChange(e)} />
+            <Select.Popper>
+              <Select.Card>
+                <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
+              </Select.Card>
+            </Select.Popper>
+          </Select>
+        </FormField.Field>
       </FormField>
       Selected Value: {value}
     </Flex>

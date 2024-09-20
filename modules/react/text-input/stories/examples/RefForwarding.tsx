@@ -19,7 +19,9 @@ export const RefForwarding = () => {
     <>
       <FormField>
         <FormField.Label>Email</FormField.Label>
-        <FormField.Input as={TextInput} onChange={handleChange} ref={ref} value={value} />
+        <FormField.Field>
+          <FormField.Input as={TextInput} onChange={handleChange} ref={ref} value={value} />
+        </FormField.Field>
       </FormField>
       <PrimaryButton onClick={handleClick}>Focus Text Input</PrimaryButton>
     </>

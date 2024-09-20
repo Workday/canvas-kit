@@ -34,10 +34,12 @@ export const ThemedError = () => {
     <CanvasProvider theme={theme}>
       <FormField error={!value ? 'error' : undefined} isRequired={true} orientation="vertical">
         <FormField.Label>Email</FormField.Label>
-        <FormField.Input as={TextInput} onChange={handleChange} value={value} />
-        <FormField.Hint cs={formFieldHintStyles}>
-          {!value && 'Please enter an email.'}
-        </FormField.Hint>
+        <FormField.Field>
+          <FormField.Input as={TextInput} onChange={handleChange} value={value} />
+          <FormField.Hint cs={formFieldHintStyles}>
+            {!value && 'Please enter an email.'}
+          </FormField.Hint>
+        </FormField.Field>
       </FormField>
     </CanvasProvider>
   );

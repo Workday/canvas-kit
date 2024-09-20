@@ -8,7 +8,7 @@ import {brand, system} from '@workday/canvas-tokens-web';
 
 import {useFormFieldLabel, useFormFieldModel} from './hooks';
 
-export interface FormFieldLabelProps
+export interface FormFieldGroupLabelProps
   extends FlexProps,
     Omit<ExtractProps<typeof Text, never>, 'display'> {
   /**
@@ -17,7 +17,7 @@ export interface FormFieldLabelProps
   children: React.ReactNode;
 }
 
-export const formFieldLabelStencil = createStencil({
+export const formFieldGroupLabelStencil = createStencil({
   extends: textStencil,
   // @ts-ignore Still weird about CSS font variables
   base: {
@@ -31,7 +31,7 @@ export const formFieldLabelStencil = createStencil({
   modifiers: {
     isRequired: {
       true: {
-        // @ts-ignore Still weird about CSS font variables
+        // @ts-ignore fonts
         '&::after': {
           content: '"*"',
           fontSize: system.fontSize.body.large,
@@ -43,6 +43,9 @@ export const formFieldLabelStencil = createStencil({
       },
     },
     orientation: {
+      vertical: {
+        width: '100%',
+      },
       horizontalStart: {
         justifyContent: 'flex-start',
         float: 'left',
@@ -53,27 +56,24 @@ export const formFieldLabelStencil = createStencil({
         float: 'left',
         justifyContent: 'flex-end',
       },
-      vertical: {
-        width: '100%',
-      },
     },
   },
   defaultModifiers: {
     typeLevel: 'subtext.large',
-    isRequired: 'false',
   },
 });
 
-export const FormFieldLabel = createSubcomponent('label')({
-  displayName: 'FormField.Label',
+export const FormFieldGroupLabel = createSubcomponent('div')({
+  displayName: 'FormFieldGroup.Label',
   modelHook: useFormFieldModel,
   elemPropsHook: useFormFieldLabel,
-})<FormFieldLabelProps>(({children, typeLevel, variant, ...elemProps}, Element, model) => {
+})<FormFieldGroupLabelProps>(({children, typeLevel, variant, ...elemProps}, Element, model) => {
   return (
     <Element
+      id={model.state.id}
       {...mergeStyles(
         elemProps,
-        formFieldLabelStencil({
+        formFieldGroupLabelStencil({
           typeLevel,
           variant,
           isRequired: model.state.isRequired as any,

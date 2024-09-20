@@ -14,7 +14,9 @@ export const Basic = () => {
     <Flex>
       <FormField>
         <FormField.Label>First Name</FormField.Label>
-        <FormField.Input as={TextInput} value={value} onChange={handleChange} />
+        <FormField.Field>
+          <FormField.Input as={TextInput} value={value} onChange={handleChange} />
+        </FormField.Field>
       </FormField>
     </Flex>
   );
