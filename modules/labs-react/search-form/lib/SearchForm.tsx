@@ -446,9 +446,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
             grow={grow}
             id={labelId}
             // inputId={`input-${labelId}`}
-            label={inputLabel}
-            labelPosition={FormFieldLabelPosition.Hidden}
-            useFieldset={false}
+            aria-label={inputLabel}
             isCollapsed={isCollapsed}
             showForm={this.state.showForm}
             height={height}
@@ -473,6 +471,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
                 height={height}
                 name="search"
                 autoComplete="off"
+                data-width="ck-formfield-width"
               />
             </SearchCombobox>
           </SearchField>
