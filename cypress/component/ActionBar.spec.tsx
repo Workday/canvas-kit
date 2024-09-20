@@ -15,7 +15,7 @@ describe('ActionBar', () => {
         cy.wait(150);
       });
 
-      it.only('should pass axe checks', () => {
+      it('should pass axe checks', () => {
         cy.checkA11y();
       });
 

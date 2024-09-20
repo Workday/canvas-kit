@@ -69,7 +69,6 @@ export const FormFieldLabel = createSubcomponent('label')({
   modelHook: useFormFieldModel,
   elemPropsHook: useFormFieldLabel,
 })<FormFieldLabelProps>(({children, typeLevel, variant, ...elemProps}, Element, model) => {
-  console.log(model.state.orientation);
   return (
     <Element
       {...mergeStyles(

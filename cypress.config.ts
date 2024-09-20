@@ -17,9 +17,6 @@ export default defineConfig({
       framework: 'react',
       bundler: 'webpack',
     },
-    env: {
-      NODE_ENV: 'development',
-    },
     setupNodeEvents(on, config) {
       on('file:preprocessor', webpack());
     },

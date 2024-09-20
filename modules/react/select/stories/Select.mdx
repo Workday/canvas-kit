@@ -318,54 +318,6 @@ Select and its subcomponents support custom styling via the `cs` prop. For more 
 our
 ["How To Customize Styles"](https://workday.github.io/canvas-kit/?path=/docs/styling-how-to-customize-styles--page).
 
-## Styling Parts
-
-There are part of select that although they are not surface by the compound component API, can still
-be styled via
-[data attributes](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes).
-
-We've added `data-part` attributes to dom elements so that you can style them if necessary. The
-following data attributes exist:
-
-{' '}
-
-<Table>
-  <Table.Caption>Data Parts</Table.Caption>
-  <Table.Head>
-    <Table.Row>
-      <Table.Header scope="col">Name</Table.Header>
-      <Table.Header scope="col">Element</Table.Header>
-      <Table.Header scope="col">CSS Selector</Table.Header>
-    </Table.Row>
-  </Table.Head>
-  <Table.Body>
-    <Table.Row>
-      <Table.Cell>"select-start-icon-container"</Table.Cell>
-      <Table.Cell>Select.Input</Table.Cell>
-      <Table.Cell>'[data-part="select-start-icon-container"]'</Table.Cell>
-    </Table.Row>
-    <Table.Row>
-      <Table.Cell>"select-start-icon" </Table.Cell>
-      <Table.Cell>Select.Input</Table.Cell>
-      <Table.Cell>'[data-part="select-start-icon"]'</Table.Cell>
-    </Table.Row>
-    <Table.Row>
-      <Table.Cell>"select-hidden-input"</Table.Cell>
-      <Table.Cell>Select.Input</Table.Cell>
-      <Table.Cell>'[data-part="select-hidden-input"]'`</Table.Cell>
-    </Table.Row>
-  </Table.Body>
-</Table>
-
-### How to Style
-
-```tsx
-const customSelectInputStyles = createStyles({
-  '[data-part="select-start-icon-container"]': {
-    height: system.space.x4,
-  },
-});
-```
 
 ## Component API
 
