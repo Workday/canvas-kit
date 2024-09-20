@@ -5,7 +5,7 @@ import {Subtext} from '@workday/canvas-kit-react/text';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
 
 export const NoValue = () => {
-  const [value, setValue] = React.useState<string | number>(0);
+  const [value, setValue] = React.useState<string | number>('');
 
   const handleChange = (value: string | number) => {
     setValue(value);

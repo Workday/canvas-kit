@@ -10,9 +10,12 @@ export const LabelPosition = () => {
   };
 
   return (
-    <FormField orientation="horizontal">
+    <FormField orientation="horizontalStart">
       <FormField.Label>Leave a Review</FormField.Label>
-      <FormField.Input as={TextArea} onChange={handleChange} value={value} />
+      <FormField.Field>
+        <FormField.Input as={TextArea} onChange={handleChange} value={value} />
+        <FormField.Hint>Message must be under 200 characters</FormField.Hint>
+      </FormField.Field>
     </FormField>
   );
 };

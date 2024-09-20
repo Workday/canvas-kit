@@ -13,12 +13,12 @@ export const Hint = () => {
 
   return (
     <Flex>
-      <FormField orientation="horizontal">
+      <FormField orientation="horizontalStart">
         <FormField.Label>First Name</FormField.Label>
-        <FormField.Container>
+        <FormField.Field>
           <FormField.Input as={TextInput} value={value} onChange={handleChange} />
           <FormField.Hint>Cannot contain numbers</FormField.Hint>
-        </FormField.Container>
+        </FormField.Field>
       </FormField>
     </Flex>
   );

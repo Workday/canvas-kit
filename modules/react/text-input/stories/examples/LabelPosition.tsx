@@ -10,9 +10,12 @@ export const LabelPosition = () => {
   };
 
   return (
-    <FormField orientation="horizontal">
+    <FormField orientation="horizontalStart">
       <FormField.Label>Email</FormField.Label>
-      <FormField.Input as={TextInput} onChange={handleChange} value={value} />
+      <FormField.Field>
+        <FormField.Input as={TextInput} onChange={handleChange} value={value} />
+        <FormField.Hint>Add a valid email</FormField.Hint>
+      </FormField.Field>
     </FormField>
   );
 };

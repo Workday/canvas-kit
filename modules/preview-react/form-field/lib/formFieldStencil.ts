@@ -15,10 +15,17 @@ export const formFieldStencil = createStencil({
         '[data-width="ck-formfield-width"]': {
           width: '100%',
         },
+        '&:has(div[data-width="ck-formfield-width"])': {
+          width: '100%',
+        },
       },
     },
     orientation: {
-      horizontal: {
+      horizontalStart: {
+        flexDirection: 'row',
+        gap: system.space.x8,
+      },
+      horizontalEnd: {
         flexDirection: 'row',
         gap: system.space.x8,
       },

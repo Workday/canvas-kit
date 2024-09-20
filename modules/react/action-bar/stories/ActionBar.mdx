@@ -1,0 +1,77 @@
+import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
+import {Basic} from './examples/Basic';
+import {Icons} from './examples/Icons';
+import {DeleteAction} from './examples/DeleteAction';
+import {OverflowActionBar} from './examples/OverflowActionBar';
+import {OverflowActionBarCustomButtonCount} from './examples/OverflowActionBarCustomButtonCount';
+import * as ActionBarStories from './ActionBar.stories';
+
+<Meta of={ActionBarStories} />
+
+# Canvas Kit Action Bar
+
+Action Bar is a [compound component](/getting-started/for-developers/resources/compound-components/)
+that contains primary and secondary actions related to a page or task.
+
+[> Workday Design Reference](https://design.workday.com/components/buttons/action-bar)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+`ActionBar` includes a container `ActionBar` component and the following subcomponent:
+`ActionBar.List` which should contains `ActionBar.Item`.
+
+In a basic example of an `ActionBar` there are two buttons. The primary action button should be used
+only once and left aligned if content is left to right, followed by secondary buttons. Tertiary
+buttons should not be used in the Action Bar.
+
+<ExampleCodeBlock code={Basic} />
+
+### Icons Example
+
+`ActionBar.Item` renders a `SecondaryButton` as default, so it's possible to use other Button props
+with `ActionBar.Item` such as `icon` or `size`.
+
+<ExampleCodeBlock code={Icons} />
+
+### Delete Action Example
+
+`ActionBar.Item` is a `SecondaryButton` by default but it's posible to change it to another element,
+such as `DeleteButton`, by using `as` prop.
+
+<ExampleCodeBlock code={DeleteAction} />
+
+### Overflow Example
+
+`ActionBar` container can contain up to 3 actions and an Overflow Menu if there are more than 3
+actions, the other remaining actions should be placed into an Overflow Menu that is launched by
+clicking the Overflow Button.
+
+Also, ActionBar is a responsive component based on the width of its container. If the rendered
+actions exceed the width of the `ActionBar.List`, an overflow menu will be rendered. This only works
+against the dynamic API where you give the `ActionBarModel` an array of items to be rendered. The
+dynamic API handles the React `key` for you based on the item's identifier. The dynamic API requires
+either an `id` on each item object or a `getId` function that returns an identifier based on the
+item. The below example uses an `id` property on each item.
+
+The dynamic API takes in any object, but since nothing is known about your object, a
+[render prop](https://reactjs.org/docs/render-props.html) is necessary to instruct a list how it
+should render.
+
+<ExampleCodeBlock code={OverflowActionBar} />
+
+The number of visible buttons can also be adjusted by using the model's `maximumVisible` attribute.
+You can change it from the default of 3 to any number greater than 1 and less than items.length.
+
+<ExampleCodeBlock code={OverflowActionBarCustomButtonCount} />
+
+## Component API
+
+<SymbolDoc name="ActionBar" fileName="/react/" />

@@ -9,7 +9,9 @@ export const Icons = () => {
   return (
     <FormField>
       <FormField.Label>Email</FormField.Label>
-      <InputGroupFormFieldForwarder />
+      <FormField.Field>
+        <InputGroupFormFieldForwarder />
+      </FormField.Field>
     </FormField>
   );
 };

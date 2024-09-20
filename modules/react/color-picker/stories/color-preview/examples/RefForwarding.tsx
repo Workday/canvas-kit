@@ -16,7 +16,9 @@ export const RefForwarding = () => {
     <>
       <FormField>
         <FormField.Label>Background Color</FormField.Label>
-        <FormField.Input as={ColorPreview} ref={ref} value="#00ffcc" />
+        <FormField.Field>
+          <FormField.Input as={ColorPreview} ref={ref} value="#00ffcc" />
+        </FormField.Field>
       </FormField>
       <p style={type.levels.subtext.large}>Width of Color Preview: {width}</p>
       <PrimaryButton onClick={handleClick}>Calculate Width of Color Preview</PrimaryButton>

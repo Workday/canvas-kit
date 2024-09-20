@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField, FormFieldGroup} from '@workday/canvas-kit-preview-react/form-field';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
@@ -22,19 +22,23 @@ export const AllFields = () => {
     <Flex cs={parentContainerStyles}>
       <FormField grow>
         <FormField.Label>First Name</FormField.Label>
-        <FormField.Input as={TextInput} />
+        <FormField.Field>
+          <FormField.Input as={TextInput} />
+        </FormField.Field>
       </FormField>
 
       <FormField isRequired={true} error="alert" grow>
         <FormField.Label>Email</FormField.Label>
-        <FormField.Container>
+        <FormField.Field>
           <FormField.Input as={TextInput} />
           <FormField.Hint>Hint text for your input</FormField.Hint>
-        </FormField.Container>
+        </FormField.Field>
       </FormField>
       <FormField grow>
         <FormField.Label>Text Area Label</FormField.Label>
-        <FormField.Input as={TextArea} />
+        <FormField.Field>
+          <FormField.Input as={TextArea} />
+        </FormField.Field>
       </FormField>
       <FormField error="error" grow>
         <FormField.Label>Choose a Crust</FormField.Label>
@@ -47,7 +51,7 @@ export const AllFields = () => {
           </Select.Popper>
         </Select>
       </FormField>
-      <FormField as="fieldset" isRequired={true} error={'error'} orientation="horizontal" grow>
+      <FormField as="fieldset" isRequired={true} error={'error'} orientation="horizontalStart" grow>
         <FormField.Label as="legend">Radio Group Legend</FormField.Label>
         <FormField.Container>
           <FormField.Input as={RadioGroup}>
@@ -68,10 +72,41 @@ export const AllFields = () => {
         <FormField.Input checked={false} as={Checkbox} label="Thin Crust" />
         <FormField.Input checked={false} as={Checkbox} label="Extra Cheese" />
       </FormField>
+      <FormFieldGroup error="error" orientation="horizontalStart" grow>
+        <FormFieldGroup.Label>Choose Your Crust</FormFieldGroup.Label>
+        <FormFieldGroup.Field>
+          <FormFieldGroup.List as={RadioGroup}>
+            <FormFieldGroup.Input as={RadioGroup.RadioButton} value="thin-crust">
+              Thin Crust
+            </FormFieldGroup.Input>
+            <FormFieldGroup.Input as={RadioGroup.RadioButton} value="hand-tossed">
+              Hand Tossed
+            </FormFieldGroup.Input>
+            <FormFieldGroup.Input as={RadioGroup.RadioButton} value="deep-dish">
+              Deep Dish
+            </FormFieldGroup.Input>
+            <FormFieldGroup.Input as={RadioGroup.RadioButton} value="cauliflower">
+              Cauliflower
+            </FormFieldGroup.Input>
+          </FormFieldGroup.List>
+        </FormFieldGroup.Field>
+      </FormFieldGroup>
+      <FormFieldGroup grow>
+        <FormFieldGroup.Label>Checkbox Legend</FormFieldGroup.Label>
+        <FormField.Field>
+          <FormFieldGroup.List>
+            <FormFieldGroup.Input checked={true} as={Checkbox} label="Checkbox Label" />
+            <FormFieldGroup.Input checked={false} as={Checkbox} label="Thin Crust" />
+            <FormFieldGroup.Input checked={false} as={Checkbox} label="Extra Cheese" />
+          </FormFieldGroup.List>
+        </FormField.Field>
+      </FormFieldGroup>
 
-      <FormField orientation="horizontal" grow>
+      <FormField orientation="horizontalStart" grow>
         <FormField.Label>Switch Label</FormField.Label>
-        <FormField.Input as={Switch} />
+        <FormField.Field>
+          <FormField.Input as={Switch} />
+        </FormField.Field>
       </FormField>
     </Flex>
   );

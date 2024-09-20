@@ -12,8 +12,10 @@ export const Alert = () => {
   return (
     <FormField error="alert">
       <FormField.Label>Background Color</FormField.Label>
-      <FormField.Input as={ColorInput} onChange={handleChange} value={value} />
-      <FormField.Hint>Please select a background color.</FormField.Hint>
+      <FormField.Field>
+        <FormField.Input as={ColorInput} onChange={handleChange} value={value} />
+        <FormField.Hint>Please select a background color.</FormField.Hint>
+      </FormField.Field>
     </FormField>
   );
 };

@@ -4,9 +4,11 @@ import {ColorPreview} from '@workday/canvas-kit-react/color-picker';
 
 export const LabelPosition = () => {
   return (
-    <FormField orientation="horizontal">
+    <FormField orientation="horizontalStart">
       <FormField.Label>Background Color</FormField.Label>
-      <FormField.Input as={ColorPreview} value="#00ffcc" />
+      <FormField.Field>
+        <FormField.Input as={ColorPreview} value="#00ffcc" />
+      </FormField.Field>
     </FormField>
   );
 };

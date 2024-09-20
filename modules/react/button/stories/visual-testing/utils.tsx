@@ -2,7 +2,6 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/react';
 import {CSSObject} from '@emotion/styled';
-import * as React from 'react';
 
 import * as systemIcons from '@workday/canvas-system-icons-web';
 
