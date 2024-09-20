@@ -9,6 +9,7 @@ import {FormFieldLabel} from './FormFieldLabel';
 import {FormFieldHint} from './FormFieldHint';
 import {FormFieldContainer} from './FormFieldContainer';
 import {formFieldStencil} from './formFieldStencil';
+import {FormFieldField} from './FormFieldField';
 
 //TODO: Remove `horizontal` option in v13 and the console warn message.
 export interface FormFieldProps extends FlexProps, GrowthBehavior {
@@ -66,7 +67,7 @@ export const FormField = createContainer('div')({
     Label: FormFieldLabel,
     /**
      * `FormField.Hint` will render any additional information you want to provide to the `FormField.Input`. If you
-     * set the `orientation` prop to `horizontal` you should use `FormField.Container` to properly align the hint with your `FormField.Input`.
+     * set the `orientation` prop to `horizontal` you should use `FormField.Field` to properly align the hint with your `FormField.Input`.
      *
      * ```tsx
      * <FormField>
@@ -80,7 +81,7 @@ export const FormField = createContainer('div')({
      */
     Hint: FormFieldHint,
     /**
-     * `FormField.Container` allows you to properly center `FormField.Label` when the `orientation` is set to `horizontal` and there is hint text..
+     * `FormField.Field` allows you to properly center `FormField.Label` when the `orientation` is set to `horizontal` and there is hint text..
      *
      * ```tsx
      * <FormField orientation="horizontalStart">
@@ -93,25 +94,41 @@ export const FormField = createContainer('div')({
      * ```
      *
      * @stencil formFieldContainerStencil
+     * @deprecated `FormField.Container` is deprecated and will be removed in a future major version. Please use `FormField.Field` to always wrap `FormField.Input` and `FormField.Hint` to always ensure correct label and input alignment.
      */
     Container: FormFieldContainer,
+    /**
+     * `FormField.Field` allows you to customize container alignment and styles when wrapping your input and hint text.
+     * ```tsx
+     * <FormField orientation="horizontal">
+     *    <FormField.Label>First Name</FormField.Label>
+     *    <FormField.Field>
+     *      <FormField.Input as={TextInput} value={value} onChange={(e) => console.log(e)} />
+     *      <FormField.Hint>This is your hint text</FormField.Hint>
+     *    </FormField.Field>
+     *  </FormField>
+     * ```
+     */
+    Field: FormFieldField,
   },
 })<FormFieldProps>(({children, grow, orientation, ...elemProps}, Element, model) => {
   // TODO: Remove this warning in v13 once we remove horizontal support in favor of horizontalStart and horizontalEnd.
-  if (process && process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === 'development') {
     if (orientation === 'horizontal') {
       console.warn(
         'FormField: Orientation option of "horizontal" is deprecated and will be removed in v13. Please update your types and value to use the string literal of "horizontalStart". The following values will be accepted in v13: "horizontalStart" | "horizontalEnd" | "vertical".'
       );
     }
   }
+
   return (
     <Element
       {...mergeStyles(
         elemProps,
         formFieldStencil({
           grow,
-          orientation: orientation === 'horizontal' ? 'horizontalStart' : orientation,
+          orientation:
+            model.state.orientation === 'horizontal' ? 'horizontalStart' : model.state.orientation,
           error: model.state.error,
           required: model.state.isRequired,
         })

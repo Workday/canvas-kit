@@ -8,9 +8,6 @@ export default defineConfig({
   retries: {
     runMode: 2,
   },
-  env: {
-    NODE_ENV: 'development', // or 'development', 'production', etc.
-  },
 
   blockHosts: ['cdn.fontawesome.com'],
 
@@ -20,7 +17,7 @@ export default defineConfig({
       framework: 'react',
       bundler: 'webpack',
     },
-    setupNodeEvents(on) {
+    setupNodeEvents(on, config) {
       on('file:preprocessor', webpack());
     },
     viewportWidth: 1024,

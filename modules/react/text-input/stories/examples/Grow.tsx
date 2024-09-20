@@ -10,9 +10,11 @@ export const Grow = () => {
   };
 
   return (
-    <FormField width="100%">
+    <FormField grow>
       <FormField.Label>Street Address</FormField.Label>
-      <FormField.Input width="100%" as={TextInput} onChange={handleChange} value={value} />
+      <FormField.Field>
+        <FormField.Input as={TextInput} onChange={handleChange} value={value} />
+      </FormField.Field>
     </FormField>
   );
 };

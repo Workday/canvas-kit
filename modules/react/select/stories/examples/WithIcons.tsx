@@ -34,28 +34,30 @@ export const WithIcons = () => {
   return (
     <Flex>
       <FormField>
-        <Select model={model}>
-          <FormField.Label>Contact</FormField.Label>
-          <FormField.Input
-            as={Select.Input}
-            cs={styleOverrides.formfieldInputStyles}
-            inputStartIcon={selectedItem.value.icon}
-          />
-          <Select.Popper>
-            <Select.Card cs={styleOverrides.selectCardStyles}>
-              {model.state.items.length > 0 && (
-                <Select.List>
-                  {item => (
-                    <Select.Item data-id={item.id}>
-                      <Select.Item.Icon icon={item.icon} />
-                      {item.text}
-                    </Select.Item>
-                  )}
-                </Select.List>
-              )}
-            </Select.Card>
-          </Select.Popper>
-        </Select>
+        <FormField.Label>Contact</FormField.Label>
+        <FormField.Field>
+          <Select model={model}>
+            <FormField.Input
+              as={Select.Input}
+              cs={styleOverrides.formfieldInputStyles}
+              inputStartIcon={selectedItem.value.icon}
+            />
+            <Select.Popper>
+              <Select.Card cs={styleOverrides.selectCardStyles}>
+                {model.state.items.length > 0 && (
+                  <Select.List>
+                    {item => (
+                      <Select.Item data-id={item.id}>
+                        <Select.Item.Icon icon={item.icon} />
+                        {item.text}
+                      </Select.Item>
+                    )}
+                  </Select.List>
+                )}
+              </Select.Card>
+            </Select.Popper>
+          </Select>
+        </FormField.Field>
       </FormField>
     </Flex>
   );

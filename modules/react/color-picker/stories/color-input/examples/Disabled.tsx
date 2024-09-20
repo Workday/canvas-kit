@@ -12,7 +12,9 @@ export const Disabled = () => {
   return (
     <FormField>
       <FormField.Label>Background Color</FormField.Label>
-      <FormField.Input as={ColorInput} disabled onChange={handleChange} value={value} />
+      <FormField.Field>
+        <FormField.Input as={ColorInput} disabled onChange={handleChange} value={value} />
+      </FormField.Field>
     </FormField>
   );
 };

@@ -12,12 +12,14 @@ export const ResizeConstraints = () => {
   return (
     <FormField>
       <FormField.Label>Leave a Review</FormField.Label>
-      <FormField.Input
-        as={TextArea}
-        onChange={handleChange}
-        resize={TextArea.ResizeDirection.Vertical}
-        value={value}
-      />
+      <FormField.Field>
+        <FormField.Input
+          as={TextArea}
+          onChange={handleChange}
+          resize={TextArea.ResizeDirection.Vertical}
+          value={value}
+        />
+      </FormField.Field>
     </FormField>
   );
 };

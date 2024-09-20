@@ -12,12 +12,14 @@ export const Placeholder = () => {
   return (
     <FormField>
       <FormField.Label>Leave a Review</FormField.Label>
-      <FormField.Input
-        as={TextArea}
-        onChange={handleChange}
-        placeholder="Let us know how we did!"
-        value={value}
-      />
+      <FormField.Field>
+        <FormField.Input
+          as={TextArea}
+          onChange={handleChange}
+          placeholder="Let us know how we did!"
+          value={value}
+        />
+      </FormField.Field>
     </FormField>
   );
 };

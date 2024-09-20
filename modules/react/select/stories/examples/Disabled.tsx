@@ -26,23 +26,25 @@ export const Disabled = () => {
 
   return (
     <Flex cs={parentContainerStyles}>
-      <Select items={options} nonInteractiveIds={['Fax (disabled)']}>
-        <FormField>
-          <FormField.Label>Contact</FormField.Label>
-          <FormField.Input as={Select.Input} disabled onChange={e => handleChange(e)} />
-          <Select.Popper>
-            <Select.Card>
-              <Select.List>
-                {item => (
-                  <Select.Item aria-disabled={item === 'Fax (disabled)' ? true : undefined}>
-                    {item}
-                  </Select.Item>
-                )}
-              </Select.List>
-            </Select.Card>
-          </Select.Popper>
-        </FormField>
-      </Select>
+      <FormField>
+        <FormField.Label>Contact</FormField.Label>
+        <FormField.Field>
+          <Select items={options} nonInteractiveIds={['Fax (disabled)']}>
+            <FormField.Input as={Select.Input} disabled onChange={e => handleChange(e)} />
+            <Select.Popper>
+              <Select.Card>
+                <Select.List>
+                  {item => (
+                    <Select.Item aria-disabled={item === 'Fax (disabled)' ? true : undefined}>
+                      {item}
+                    </Select.Item>
+                  )}
+                </Select.List>
+              </Select.Card>
+            </Select.Popper>
+          </Select>
+        </FormField.Field>
+      </FormField>
     </Flex>
   );
 };

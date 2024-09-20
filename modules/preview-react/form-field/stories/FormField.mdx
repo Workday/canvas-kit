@@ -13,9 +13,9 @@ import {Custom} from './examples/Custom';
 import {CustomId} from './examples/CustomId';
 import {AllFields} from './examples/AllFields';
 import {Hint} from './examples/Hint';
-import {FieldSet} from './examples/FieldSet';
 import {Grow} from './examples/Grow';
 import {ThemedError} from './examples/ThemedErrors';
+import {GroupedInputs} from './examples/GroupedInputs';
 
 <Meta of={FormFieldStories} />
 
@@ -66,8 +66,8 @@ Set the `disabled` prop of `FormField.Input` to prevent users from interacting w
 
 ### Hint
 
-Use `FormField.Hint` to display a short message below the input component and `FormField.Container`
-to ensure proper alignment.
+Use `FormField.Hint` to display a short message below the input component and `FormField.Field` to
+ensure proper alignment.
 
 <ExampleCodeBlock code={Hint} />
 
@@ -77,11 +77,13 @@ Set the `orientation` prop of the Form Field to designate the position of the la
 input component. By default, the orientation will be set to `vertical`. If you want your label to be
 horizontal, you have two options: `horizontalStart` and `horizontalEnd`.
 
-If you want the position of the label at the start of the container, set orientation prop to `horizontalStart`.
+If you want the position of the label at the start of the container, set orientation prop to
+`horizontalStart`.
 
 <ExampleCodeBlock code={LabelPositionHorizontalStart} />
 
-If you want the position of the label at the end of the container, set orientation prop to `horizontalEnd`.
+If you want the position of the label at the end of the container, set orientation prop to
+`horizontalEnd`.
 
 <ExampleCodeBlock code={LabelPositionHorizontalEnd} />
 
@@ -109,12 +111,20 @@ for required fields are suffixed by a red asterisk.
 
 <ExampleCodeBlock code={Required} />
 
-### Field Set
+### Grouped Inputs
 
-Set the `as` prop of the `FormField` to `fieldset` and the `as` prop of the `FormField.Label` to
-`legend` when using `RadioGroup` to ensure proper accessbility.
+Use `FormFieldGroup` when you have a group of inputs that need to be associated to one another, like
+`RadioGroup` or a group of `Checkbox`'s. `FormFieldGroup` renders a `fieldset` element and
+`FormFieldGroup.Label` renders a `legend` element. These elements will allow for correct
+accessibility of grouped inputs.
 
-<ExampleCodeBlock code={FieldSet} />
+`FormFieldGroup` supports the same props of `FormField`:
+
+- `error`: `"alert" | "error"` Defines the error around the whole group of inputs.
+- `orientation`: `"horizontal" | "vertical"` Defines the legend placement.
+- `isRequired`: `true` Defines if a group like RadioGroup is required.
+
+<ExampleCodeBlock code={GroupedInputs} />
 
 ### Custom
 

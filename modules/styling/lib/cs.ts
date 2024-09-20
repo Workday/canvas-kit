@@ -1069,6 +1069,7 @@ function combineClassNames(input: (string | undefined)[]): string {
  *   }
  * })
  * ```
+ * @deprecated `parentModifier` is deprecated. While we support compat mode, we can't use `parentModifier`. If consumers pass in a style prop, this will created an unstable hash, breaking this function.
  */
 export function parentModifier(value: string) {
   return `.${value.replace('css-', 'm')} :where(&)`;
@@ -1220,7 +1221,7 @@ export const createInstance: typeof _createInstance = options => {
     _instance = _createInstance({key: 'css', ...options});
   } else {
     // @ts-ignore
-    if (process && process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === 'development') {
       console.warn(
         'An instance has already been created. `createInstance` cannot be called after styles have already been created. Canvas Kit styles are created immediately, so this function must be called before any Canvas Kit components are even imported.'
       );

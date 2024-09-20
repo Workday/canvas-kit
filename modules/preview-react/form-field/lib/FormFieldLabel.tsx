@@ -1,13 +1,12 @@
 import React from 'react';
 
 import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
-import {createStencil, parentModifier, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {Text, textStencil} from '@workday/canvas-kit-react/text';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {brand, system} from '@workday/canvas-tokens-web';
 
 import {useFormFieldLabel, useFormFieldModel} from './hooks';
-import {formFieldStencil} from './formFieldStencil';
 
 export interface FormFieldLabelProps
   extends FlexProps,
@@ -20,7 +19,7 @@ export interface FormFieldLabelProps
 
 export const formFieldLabelStencil = createStencil({
   extends: textStencil,
-  // @ts-ignore Still weird about CSS variables
+  // @ts-ignore Still weird about CSS font variables
   base: {
     fontWeight: system.fontWeight.medium,
     color: system.color.text.default,
@@ -28,37 +27,40 @@ export const formFieldLabelStencil = createStencil({
     display: 'flex',
     alignItems: 'center',
     minWidth: px2rem(180),
-
-    // asterisk
-    [parentModifier(formFieldStencil.modifiers.required.true)]: {
-      '&::after': {
-        content: '"*"',
-        fontSize: system.fontSize.body.large,
-        fontWeight: system.fontWeight.normal,
-        color: brand.error.base,
-        textDecoration: 'unset',
-        marginInlineStart: system.space.x1,
+  },
+  modifiers: {
+    isRequired: {
+      true: {
+        // @ts-ignore Still weird about CSS font variables
+        '&::after': {
+          content: '"*"',
+          fontSize: system.fontSize.body.large,
+          fontWeight: system.fontWeight.normal,
+          color: brand.error.base,
+          textDecoration: 'unset',
+          marginInlineStart: system.space.x1,
+        },
       },
     },
-
-    // orientation modifier from parent FormField
-    [parentModifier(formFieldStencil.modifiers.orientation.horizontalStart)]: {
-      justifyContent: 'flex-start',
-      float: 'left',
-      maxHeight: system.space.x10,
-    },
-    // orientation modifier from parent FormField
-    [parentModifier(formFieldStencil.modifiers.orientation.horizontalEnd)]: {
-      maxHeight: system.space.x10,
-      float: 'left',
-      justifyContent: 'flex-end',
-    },
-    [parentModifier(formFieldStencil.modifiers.orientation.vertical)]: {
-      width: '100%',
+    orientation: {
+      horizontalStart: {
+        justifyContent: 'flex-start',
+        float: 'left',
+        maxHeight: system.space.x10,
+      },
+      horizontalEnd: {
+        maxHeight: system.space.x10,
+        float: 'left',
+        justifyContent: 'flex-end',
+      },
+      vertical: {
+        width: '100%',
+      },
     },
   },
   defaultModifiers: {
     typeLevel: 'subtext.large',
+    isRequired: 'false',
   },
 });
 
@@ -66,9 +68,20 @@ export const FormFieldLabel = createSubcomponent('label')({
   displayName: 'FormField.Label',
   modelHook: useFormFieldModel,
   elemPropsHook: useFormFieldLabel,
-})<FormFieldLabelProps>(({children, typeLevel, variant, ...elemProps}, Element) => {
+})<FormFieldLabelProps>(({children, typeLevel, variant, ...elemProps}, Element, model) => {
   return (
-    <Element {...mergeStyles(elemProps, formFieldLabelStencil({typeLevel, variant}))}>
+    <Element
+      {...mergeStyles(
+        elemProps,
+        formFieldLabelStencil({
+          typeLevel,
+          variant,
+          isRequired: model.state.isRequired as any,
+          orientation:
+            model.state.orientation === 'horizontal' ? 'horizontalStart' : model.state.orientation,
+        })
+      )}
+    >
       {children}
     </Element>
   );

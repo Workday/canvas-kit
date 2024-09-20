@@ -12,7 +12,9 @@ export const Disabled = () => {
   return (
     <FormField>
       <FormField.Label>Dark Mode</FormField.Label>
-      <FormField.Input disabled as={Switch} checked={checked} onChange={handleChange} />
+      <FormField.Field>
+        <FormField.Input disabled as={Switch} checked={checked} onChange={handleChange} />
+      </FormField.Field>
     </FormField>
   );
 };

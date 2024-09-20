@@ -19,7 +19,9 @@ export const RefForwarding = () => {
     <>
       <FormField>
         <FormField.Label>Background Color</FormField.Label>
-        <FormField.Input as={ColorInput} onChange={handleChange} ref={ref} value={value} />
+        <FormField.Field>
+          <FormField.Input as={ColorInput} onChange={handleChange} ref={ref} value={value} />
+        </FormField.Field>
       </FormField>
       <PrimaryButton onClick={handleClick}>Focus Color Input</PrimaryButton>
     </>

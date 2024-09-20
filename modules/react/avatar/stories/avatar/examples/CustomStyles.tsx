@@ -7,7 +7,7 @@ import {systemIconStencil} from '../../../../icon';
 const customBlueAvatarStencil = createStencil({
   base: {
     backgroundColor: base.berrySmoothie400,
-    ['[data-slot="avatar-icon"]']: {
+    ['[data-part="avatar-icon"]']: {
       [systemIconStencil.vars.color]: base.berrySmoothie100,
     },
   },
@@ -16,7 +16,7 @@ const customBlueAvatarStencil = createStencil({
 const customGreenAvatarStencil = createStencil({
   base: {
     backgroundColor: base.watermelon400,
-    ['[data-slot="avatar-icon"]']: {
+    ['[data-part="avatar-icon"]']: {
       [systemIconStencil.vars.color]: base.watermelon100,
     },
   },

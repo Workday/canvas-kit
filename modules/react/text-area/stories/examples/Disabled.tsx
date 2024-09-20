@@ -12,7 +12,9 @@ export const Disabled = () => {
   return (
     <FormField>
       <FormField.Label>Leave a Review</FormField.Label>
-      <FormField.Input as={TextArea} disabled onChange={handleChange} value={value} />
+      <FormField.Field>
+        <FormField.Input as={TextArea} disabled onChange={handleChange} value={value} />
+      </FormField.Field>
     </FormField>
   );
 };
