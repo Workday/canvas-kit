@@ -445,7 +445,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
           <SearchField
             grow={grow}
             id={labelId}
-            inputId={`input-${labelId}`}
+            // inputId={`input-${labelId}`}
             label={inputLabel}
             labelPosition={FormFieldLabelPosition.Hidden}
             useFieldset={false}

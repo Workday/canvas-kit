@@ -77,8 +77,11 @@ const Autocomplete: FC<
 
 export const Basic = () => {
   return (
-    <FormField id="autocomplete-123" label="Autocomplete example">
-      <Autocomplete />
+    <FormField id="autocomplete-123">
+      <FormField.Label>Autocomplete example</FormField.Label>
+      <FormField.Field>
+        <FormField.Input as={Autocomplete} />
+      </FormField.Field>
     </FormField>
   );
 };

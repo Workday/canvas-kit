@@ -70,15 +70,18 @@ const Autocomplete: FC<
       initialValue="Test"
       {...props}
     >
-      <TextInput placeholder="Autocomplete" />
+      <TextInput data-width="ck-formfield-width" placeholder="Autocomplete" />
     </Combobox>
   );
 };
 
 export const Grow = () => {
   return (
-    <FormField grow={true} id="autocomplete-123" label="Grow example">
-      <Autocomplete />
+    <FormField grow={true} id="autocomplete-123">
+      <FormField.Label>Grow example</FormField.Label>
+      <FormField.Field>
+        <FormField.Input as={Autocomplete} />
+      </FormField.Field>
     </FormField>
   );
 };
