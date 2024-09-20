@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.1.13](https://github.com/Workday/canvas-kit/releases/tag/v11.1.13) (2024-09-19)
+
+### Components
+
+- fix: Allow inherit background color on system icon ([#2932](https://github.com/Workday/canvas-kit/pull/2932)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v11.1.12](https://github.com/Workday/canvas-kit/releases/tag/v11.1.12) (2024-09-18)
+
+### Components
+
+- fix(search-form): Show ellipsis when placeholder overflows ([#2927](https://github.com/Workday/canvas-kit/pull/2927)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v10.3.61](https://github.com/Workday/canvas-kit/releases/tag/v10.3.61) (2024-09-17)
+
+### Components
+
+- fix(search-form): Show ellipsis when placeholder overflows ([#2927](https://github.com/Workday/canvas-kit/pull/2927)) ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v11.1.11](https://github.com/Workday/canvas-kit/releases/tag/v11.1.11) (2024-09-16)
+
+### Components
+
+- fix: Handle empty stack ref in useAssistiveHideSiblings ([#2920](https://github.com/Workday/canvas-kit/pull/2920)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v10.3.60](https://github.com/Workday/canvas-kit/releases/tag/v10.3.60) (2024-09-16)
+
+### Components
+
+- fix: Handle empty stack ref in useAssistiveHideSiblings ([#2920](https://github.com/Workday/canvas-kit/pull/2920)) ([@NicholasBoll](https://github.com/NicholasBoll))
 ## [v11.1.10](https://github.com/Workday/canvas-kit/releases/tag/v11.1.10) (2024-09-16)
 
 
