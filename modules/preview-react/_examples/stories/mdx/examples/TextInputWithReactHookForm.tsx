@@ -7,7 +7,7 @@ import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {TertiaryButton, PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Select} from '@workday/canvas-kit-react/select';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {visibleIcon, invisibleIcon} from '@workday/canvas-system-icons-web';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
 

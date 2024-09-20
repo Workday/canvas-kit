@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormFieldGroup} from '@workday/canvas-kit-preview-react/form-field';
+import {FormFieldGroup} from '@workday/canvas-kit-react/form-field';
 import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {system} from '@workday/canvas-tokens-web';
 import {Banner} from '@workday/canvas-kit-react/banner';

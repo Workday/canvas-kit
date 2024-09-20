@@ -24,14 +24,14 @@ describe('rename horizontal', () => {
 
   it('should rename orientation horizontal to horizontalStart', () => {
     const input = stripIndent`
-        import {FormField} from '@workday/canvas-kit-preview-react/form-field'
+        import {FormField} from '@workday/canvas-kit-react/form-field'
         <>
             <FormField orientation="horizontal" />
         </>
     `;
 
     const expected = stripIndent`
-        import {FormField} from '@workday/canvas-kit-preview-react/form-field'
+        import {FormField} from '@workday/canvas-kit-react/form-field'
         <>
             <FormField orientation="horizontalStart" />
         </>
@@ -41,7 +41,7 @@ describe('rename horizontal', () => {
 
   it('should change renamed FormField', () => {
     const input = stripIndent`
-        import {FormField as CanvasForm} from '@workday/canvas-kit-preview-react/form-field'
+        import {FormField as CanvasForm} from '@workday/canvas-kit-react/form-field'
 
         <>
             <CanvasForm orientation="horizontal" />
@@ -49,7 +49,7 @@ describe('rename horizontal', () => {
     `;
 
     const expected = stripIndent`
-        import {FormField as CanvasForm} from '@workday/canvas-kit-preview-react/form-field'
+        import {FormField as CanvasForm} from '@workday/canvas-kit-react/form-field'
 
         <>
             <CanvasForm orientation="horizontalStart" />
@@ -60,13 +60,13 @@ describe('rename horizontal', () => {
 
   it('should change styled FormField', () => {
     const input = stripIndent`
-        import {FormField} from '@workday/canvas-kit-preview-react/form-field'
+        import {FormField} from '@workday/canvas-kit-react/form-field'
         const StyledForm = styled(FormField)({color: "#000"});
         <StyledForm orientation="horizontal" />
     `;
 
     const expected = stripIndent`
-        import {FormField} from '@workday/canvas-kit-preview-react/form-field'
+        import {FormField} from '@workday/canvas-kit-react/form-field'
         const StyledForm = styled(FormField)({color: "#000"});
         <StyledForm orientation="horizontalStart" />
     `;

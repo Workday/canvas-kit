@@ -5,7 +5,7 @@ import {
   useFormFieldLabel,
   useFormFieldModel,
   formFieldStencil,
-} from '@workday/canvas-kit-preview-react/form-field';
+} from '@workday/canvas-kit-react/form-field';
 import {useModelContext} from '@workday/canvas-kit-react/common';
 import {Flex} from '@workday/canvas-kit-react/layout';
 

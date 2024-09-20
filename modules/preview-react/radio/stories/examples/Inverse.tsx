@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
-import {FormField, FormFieldGroup} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField, FormFieldGroup} from '@workday/canvas-kit-react/form-field';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 

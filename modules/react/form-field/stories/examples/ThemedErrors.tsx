@@ -1,6 +1,6 @@
 import React from 'react';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {CanvasProvider, PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 import {colors, space} from '@workday/canvas-kit-react/tokens';
 import {createStyles} from '@workday/canvas-kit-styling';

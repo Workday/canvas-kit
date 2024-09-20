@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormField, FormFieldGroup} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField, FormFieldGroup} from '@workday/canvas-kit-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {Select} from '@workday/canvas-kit-react/select';
 import {Switch} from '@workday/canvas-kit-react/switch';

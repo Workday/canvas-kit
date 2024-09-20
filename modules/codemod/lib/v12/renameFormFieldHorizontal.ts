@@ -2,7 +2,7 @@ import {API, FileInfo, Options, JSXOpeningElement, JSXIdentifier} from 'jscodesh
 import {hasImportSpecifiers} from '../v6/utils';
 import {getImportRenameMap} from './utils/getImportRenameMap';
 
-const formFieldPackage = '@workday/canvas-kit-preview-react/form-field';
+const formFieldPackage = '@workday/canvas-kit-react/form-field';
 const packages = [formFieldPackage];
 const packageImports = ['FormField'];
 

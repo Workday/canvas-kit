@@ -5,7 +5,7 @@ import {
   FormField,
   useFormFieldInput,
   useFormFieldModel,
-} from '@workday/canvas-kit-preview-react/form-field';
+} from '@workday/canvas-kit-react/form-field';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {

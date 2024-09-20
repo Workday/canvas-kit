@@ -13,7 +13,7 @@ import {
   useComboboxLoader,
   useComboboxInput,
 } from '@workday/canvas-kit-react/combobox';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
 import {LoadingDots} from '@workday/canvas-kit-react/loading-dots';
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';

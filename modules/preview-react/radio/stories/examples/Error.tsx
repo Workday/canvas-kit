@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormField, FormFieldGroup} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField, FormFieldGroup} from '@workday/canvas-kit-react/form-field';
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 
 export const Error = () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {Dialog} from '@workday/canvas-kit-react/dialog';
