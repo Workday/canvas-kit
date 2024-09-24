@@ -18,7 +18,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
 
   // getImportRenameMap utility will tell us if the file containsCanvasImports
   // and give us an importMap to track what identifiers we need to update
-  const {importMap, styledMap} = getImportRenameMap(j, root, '@workday/canvas-kit-preview-react');
+  const {importMap, styledMap} = getImportRenameMap(j, root, '@workday/canvas-kit-react');
 
   root
     .find(j.JSXOpeningElement, (value: JSXOpeningElement) => {

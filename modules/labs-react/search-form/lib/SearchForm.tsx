@@ -9,7 +9,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
 import {searchIcon, xIcon} from '@workday/canvas-system-icons-web';
-import {FormField, FormFieldLabelPosition} from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Combobox} from '@workday/canvas-kit-labs-react/combobox';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {searchThemes, SearchTheme, SearchThemeAttributes} from './themes';
