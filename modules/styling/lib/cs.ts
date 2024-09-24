@@ -36,9 +36,17 @@ type DefaultedVarsShape = Record<string, string> | Record<string, Record<string,
 
 /**
  * Wrap all unwrapped CSS Variables. For example, `{padding: '--foo'}` will be replaced with
- * `{padding: 'var(--foo)'}`. It also works on variables in the middle of the property.
+ * `{padding: 'var(--foo)'}`. It also works on variables in the middle of the property. Takes any
+ * string and returns a string with CSS variables wrapped if necesary.
+ * 
+ * ```ts
+ * maybeWrapCSSVariables('1rem'); // 1rem
+ * maybeWrapCSSVariables('--foo'); // var(--foo)
+ * maybeWrapCSSVariables('var(--foo); // var(--foo)
+ * maybeWrapCSSVariables('calc(--foo)'); // calc(var(--foo))
+ * ```
  */
-function maybeWrapCSSVariables(input: string): string {
+export function maybeWrapCSSVariables(input: string): string {
   // matches an string starting with `--` that isn't already wrapped in a `var()`. It tries to match
   // any character that isn't a valid separator in CSS
   return input.replace(
