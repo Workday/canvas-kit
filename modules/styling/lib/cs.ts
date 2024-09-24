@@ -42,7 +42,7 @@ type DefaultedVarsShape = Record<string, string> | Record<string, Record<string,
  * ```ts
  * maybeWrapCSSVariables('1rem'); // 1rem
  * maybeWrapCSSVariables('--foo'); // var(--foo)
- * maybeWrapCSSVariables('var(--foo); // var(--foo)
+ * maybeWrapCSSVariables('var(--foo)'); // var(--foo)
  * maybeWrapCSSVariables('calc(--foo)'); // calc(var(--foo))
  * ```
  */
