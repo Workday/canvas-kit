@@ -1,6 +1,7 @@
 import React from 'react';
 
-import {space} from '@workday/canvas-kit-react/tokens';
+import {maybeWrapCSSVariables} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 import {
   createContainer,
   createElemPropsHook,
@@ -198,11 +199,11 @@ export const InputGroup = createContainer('div')({
   // `offsetEnd` arrays
   React.Children.forEach(children, child => {
     if (React.isValidElement<any>(child) && child.type === InputGroupInnerStart) {
-      const width = child.props.width || space.xl;
+      const width = maybeWrapCSSVariables(child.props.width || system.space.x10);
       offsetsStart.push(width);
     }
     if (React.isValidElement<any>(child) && child.type === InputGroupInnerEnd) {
-      const width = child.props.width || space.xl;
+      const width = maybeWrapCSSVariables(child.props.width || system.space.x10);
       offsetsEnd.push(width);
     }
   });
