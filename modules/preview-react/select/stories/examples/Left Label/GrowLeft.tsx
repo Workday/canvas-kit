@@ -7,13 +7,11 @@ import {controlComponent} from '../../../../../../utils/storybook';
 
 export const GrowLeft = () => {
   return (
-    <FormField
-      labelPosition={FormField.LabelPosition.Left}
-      label="Label"
-      inputId="select-grow"
-      grow={true}
-    >
-      {controlComponent(<Select name="contact" options={options} />)}
+    <FormField orientation="horizontalStart" id="select-grow" grow={true}>
+      <FormField.Label>Label</FormField.Label>
+      <FormField.Field>
+        {controlComponent(<FormField.Input as={Select} name="contact" options={options} />)}
+      </FormField.Field>
     </FormField>
   );
 };

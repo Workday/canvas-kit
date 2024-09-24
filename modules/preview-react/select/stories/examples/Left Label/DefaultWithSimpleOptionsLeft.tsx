@@ -7,12 +7,11 @@ import {controlComponent} from '../../../../../../utils/storybook';
 
 export const DefaultWithSimpleOptionsLeft = () => {
   return (
-    <FormField
-      labelPosition={FormField.LabelPosition.Left}
-      label="Label"
-      inputId="select-default-simple"
-    >
-      {controlComponent(<Select name="state" options={simpleOptions} />)}
+    <FormField orientation="horizontal" id="select-default-simple">
+      <FormField.Label>Label</FormField.Label>
+      <FormField.Field>
+        {controlComponent(<FormField.Input as={Select} name="state" options={simpleOptions} />)}
+      </FormField.Field>
     </FormField>
   );
 };

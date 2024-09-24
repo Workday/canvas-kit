@@ -53,8 +53,13 @@ const SelectModal = () => {
           <Modal.Heading>Modal with Select</Modal.Heading>
           <Modal.Body>
             <p>The menu for this Select should break out of the Modal.</p>
-            <FormField label="Label" inputId="select-modal">
-              {controlComponent(<Select name="city" options={manyOptions} />)}
+            <FormField id="select-modal">
+              <FormField.Label>Label</FormField.Label>
+              <FormField.Field>
+                {controlComponent(
+                  <FormField.Input as={Select} name="city" options={manyOptions} />
+                )}
+              </FormField.Field>
             </FormField>
             <Flex gap="s">
               <Modal.CloseButton as={PrimaryButton}>Submit</Modal.CloseButton>
@@ -141,8 +146,11 @@ const BlurTest = () => {
           ? 'Clicked! Now click directly on the Select below (not the label)'
           : 'Click me first!'}
       </button>
-      <FormField label="Label (Bottom)" inputId="select-bottom" style={{marginTop: '10px'}}>
-        {controlComponent(<Select name="contact" options={options} />)}
+      <FormField id="select-bottom" cs={{marginTop: '10px'}}>
+        <FormField.Label>Label (Bottom)</FormField.Label>
+        <FormField.Field>
+          {controlComponent(<Select name="contact" options={options} />)}
+        </FormField.Field>
       </FormField>
     </>
   );
@@ -155,17 +163,30 @@ export const AccessibilityTest = () => (
         This Select has its <strong>aria-required</strong> prop set to true. When its listbox menu
         is opened, we expect aria-required to be set to "true" for the listbox.
       </p>
-      <FormField label="Label (aria-required)" inputId="select-aria-required" required={true}>
-        {controlComponent(
-          <Select name="select-aria-required" options={options} aria-required={true} />
-        )}
+      <FormField id="select-aria-required" isRequired={true}>
+        <FormField.Label>Label (aria-required)</FormField.Label>
+        <FormField.Field>
+          {controlComponent(
+            <FormField.Input
+              as={Select}
+              name="select-aria-required"
+              options={options}
+              aria-required={true}
+            />
+          )}
+        </FormField.Field>
       </FormField>
       <p>
         This Select has its <strong>required</strong> prop set to true. Again, when its listbox menu
         is opened, we expect aria-required to be set to "true" for the listbox.
       </p>
-      <FormField label="Label (required)" inputId="select-required" required={true}>
-        {controlComponent(<Select name="select-required" options={options} required={true} />)}
+      <FormField id="select-required" isRequired={true}>
+        <FormField.Label>Label (required)</FormField.Label>
+        <FormField.Field>
+          {controlComponent(
+            <FormField.Input as={Select} name="select-required" options={options} required={true} />
+          )}
+        </FormField.Field>
       </FormField>
     </Container>
   </div>
@@ -175,8 +196,13 @@ export const DisabledOptionsTest = () => (
   <div>
     <Container>
       <p>Disabled options may not be assistively focused using the keyboard.</p>
-      <FormField label="Label (Disabled Options)" inputId="select-disabled-options">
-        {controlComponent(<Select name="select-disabled-options" options={disabledOptions} />)}
+      <FormField id="select-disabled-options">
+        <FormField.Label>Label (Disabled Options)</FormField.Label>
+        <FormField.Field>
+          {controlComponent(
+            <FormField.Field as={Select} name="select-disabled-options" options={disabledOptions} />
+          )}
+        </FormField.Field>
       </FormField>
     </Container>
   </div>
@@ -189,16 +215,24 @@ export const PortalTest = () => (
         All gray-bordered containers on this page have their overflow set to hidden. Menus are
         rendered using portals and should break out of their containers.
       </p>
-      <FormField label="Label" inputId="select-default-top-label">
-        {controlComponent(<Select name="contact" options={options} />)}
+      <FormField id="select-default-top-label">
+        <FormField.Label>Label</FormField.Label>
+        <FormField.Field>
+          {controlComponent(<FormField.Input as={Select} name="contact" options={options} />)}
+        </FormField.Field>
       </FormField>
       <p>
         Menus for Select with grow set to true should resize automatically as the Select grows.
         Activate this menu and resize the window to see the menu grow to match the width of the
         Select.
       </p>
-      <FormField label="Label (Grow)" inputId="select-default-top-label-grow" grow={true}>
-        {controlComponent(<Select name="city" options={manyOptions} grow={true} />)}
+      <FormField id="select-default-top-label-grow" grow={true}>
+        <FormField.Label>Label (Grow)</FormField.Label>
+        <FormField.Field>
+          {controlComponent(
+            <FormField.Input as={Select} name="city" options={manyOptions} grow={true} />
+          )}
+        </FormField.Field>
       </FormField>
     </Container>
     <Container>
@@ -207,34 +241,34 @@ export const PortalTest = () => (
         to extend downwards. As you scroll down and space becomes available, the Menu will flip back
         downwards.
       </p>
-      <FormField label="Label" inputId="select-alert-top-label" error={FormField.ErrorType.Alert}>
-        {controlComponent(<Select name="contact" options={options} />)}
+      <FormField id="select-alert-top-label" error="alert">
+        <FormField.Label>Label</FormField.Label>
+        <FormField.Field>
+          {controlComponent(<FormField.Input as={Select} name="contact" options={options} />)}
+        </FormField.Field>
       </FormField>
-      <FormField
-        label="Label (Grow)"
-        inputId="select-alert-top-label-grow"
-        error={FormField.ErrorType.Alert}
-        grow={true}
-      >
-        {controlComponent(<Select grow={true} name="city" options={manyOptions} />)}
+      <FormField id="select-alert-top-label-grow" error="alert" grow={true}>
+        <FormField.Label>Label (Grow)</FormField.Label>
+        <FormField.Field>
+          {controlComponent(<Select grow={true} name="city" options={manyOptions} />)}
+        </FormField.Field>
       </FormField>
     </Container>
     <Container>
       <p>Menus should behave the same with left-labeled FormFields.</p>
-      <FormField
-        label="Label"
-        labelPosition={FormField.LabelPosition.Left}
-        inputId="select-default-left-label"
-      >
-        {controlComponent(<Select name="contact" options={options} />)}
+      <FormField orientation="horizontalStart" id="select-default-left-label">
+        <FormField.Label>Label</FormField.Label>
+        <FormField.Field>
+          {controlComponent(<FormField.Input as={Select} name="contact" options={options} />)}
+        </FormField.Field>
       </FormField>
-      <FormField
-        label="Label (Grow)"
-        labelPosition={FormField.LabelPosition.Left}
-        inputId="select-default-left-label-grow"
-        grow={true}
-      >
-        {controlComponent(<Select name="city" options={manyOptions} grow={true} />)}
+      <FormField orientation="horizontalStart" id="select-default-left-label-grow" grow={true}>
+        <FormField.Label>Label (Grow)</FormField.Label>
+        <FormField.Field>
+          {controlComponent(
+            <FormField.Input as={Select} name="city" options={manyOptions} grow={true} />
+          )}
+        </FormField.Field>
       </FormField>
     </Container>
     <Container>

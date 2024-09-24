@@ -7,19 +7,19 @@ import {controlComponent} from '../../../../../../utils/storybook';
 
 export const DefaultWithCustomOptionsLeft = () => {
   return (
-    <FormField
-      labelPosition={FormField.LabelPosition.Left}
-      label="Label"
-      inputId="select-default-custom"
-    >
-      {controlComponent(
-        <Select
-          name="icon"
-          options={customOptions}
-          renderOption={customRenderOption}
-          renderSelected={customRenderSelected}
-        />
-      )}
+    <FormField orientation="horizontal" id="select-default-custom">
+      <FormField.Label>Label</FormField.Label>
+      <FormField.Field>
+        {controlComponent(
+          <FormField.Input
+            as={Select}
+            name="icon"
+            options={customOptions}
+            renderOption={customRenderOption}
+            renderSelected={customRenderSelected}
+          />
+        )}
+      </FormField.Field>
     </FormField>
   );
 };
