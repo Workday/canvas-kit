@@ -5,6 +5,7 @@ import {
   space as spaceTokens,
   type as typeTokens,
 } from '@workday/canvas-kit-react/tokens';
+import {maybeWrapCSSVariables} from '@workday/canvas-kit-styling';
 
 import {CanvasSystemPropValues, SystemPropNames, SystemPropValues} from './systemProps';
 
@@ -18,8 +19,12 @@ export type StyleFns = {
   [key: string]: (value: unknown) => {};
 };
 
+function maybeWrapValue(input: string | number): string | number {
+  return typeof input === 'string' ? maybeWrapCSSVariables(input) : input;
+}
+
 const getColor = (value: SystemPropValues['color']) => {
-  return colorTokens[value] || value;
+  return colorTokens[value] || maybeWrapValue(value);
 };
 
 const getDepth = (value: SystemPropValues['depth']) => {
@@ -27,23 +32,32 @@ const getDepth = (value: SystemPropValues['depth']) => {
 };
 
 const getShape = (value: SystemPropValues['shape']) => {
-  return borderRadiusTokens[value as CanvasSystemPropValues['shape']] || value;
+  return borderRadiusTokens[value as CanvasSystemPropValues['shape']] || maybeWrapValue(value);
 };
 
 const getSpace = (value: SystemPropValues['space']) => {
-  return spaceTokens[value as CanvasSystemPropValues['space']] || value;
+  return spaceTokens[value as CanvasSystemPropValues['space']] || maybeWrapValue(value);
 };
 
 const getFont = (value: SystemPropValues['font']) => {
-  return typeTokens.properties.fontFamilies[value as CanvasSystemPropValues['font']] || value;
+  return (
+    typeTokens.properties.fontFamilies[value as CanvasSystemPropValues['font']] ||
+    maybeWrapValue(value)
+  );
 };
 
 const getFontSize = (value: SystemPropValues['fontSize'] | string) => {
-  return typeTokens.properties.fontSizes[value as CanvasSystemPropValues['fontSize']] || value;
+  return (
+    typeTokens.properties.fontSizes[value as CanvasSystemPropValues['fontSize']] ||
+    maybeWrapValue(value)
+  );
 };
 
 const getFontWeight = (value: SystemPropValues['fontWeight'] | string) => {
-  return typeTokens.properties.fontWeights[value as CanvasSystemPropValues['fontWeight']] || value;
+  return (
+    typeTokens.properties.fontWeights[value as CanvasSystemPropValues['fontWeight']] ||
+    maybeWrapValue(value)
+  );
 };
 
 export function buildStyleFns(styleFnConfigs: StyleFnConfig[]): StyleFns {

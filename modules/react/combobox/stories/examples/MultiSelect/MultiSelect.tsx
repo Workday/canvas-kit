@@ -21,7 +21,6 @@ export const MultiSelect = createContainer()({
     Item: MultiSelectItem,
   },
 })<MultiSelectProps>(({children, ...elemProps}, _, model) => {
-  console.log('model', model.state.selectedIds);
   return (
     <Combobox.Menu model={model} {...elemProps}>
       {children}

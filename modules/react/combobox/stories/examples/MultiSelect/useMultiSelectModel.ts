@@ -2,6 +2,7 @@ import React from 'react';
 
 import {createModelHook} from '@workday/canvas-kit-react/common';
 import {useComboboxModel} from '@workday/canvas-kit-react/combobox';
+import {useListModel, Item} from '@workday/canvas-kit-react/collection';
 
 /**
  * `SelectModel` extends the {@link ComboboxModel}. Selecting items from
@@ -20,7 +21,7 @@ import {useComboboxModel} from '@workday/canvas-kit-react/combobox';
 export const useMultiSelectModel = createModelHook({
   defaultConfig: {
     ...useComboboxModel.defaultConfig,
-    mode: 'multiple',
+    mode: 'multiple' as const,
     shouldVirtualize: false,
   },
   requiredConfig: {
@@ -28,5 +29,44 @@ export const useMultiSelectModel = createModelHook({
   },
   contextOverride: useComboboxModel.Context,
 })(config => {
-  return useComboboxModel(config);
+  const model = useComboboxModel(
+    useComboboxModel.mergeConfig(config, {
+      onHide() {
+        setSelectedItems(cachedSelected);
+      },
+    })
+  );
+  const [selectedItems, setSelectedItems] = React.useState<Item<any>[]>(() => {
+    return (config.initialSelectedIds === 'all' ? [] : config.initialSelectedIds).map(id =>
+      model.navigation.getItem(id, model)
+    );
+  });
+
+  const cachedSelected = React.useMemo(
+    () =>
+      (model.state.selectedIds === 'all' ? [] : model.state.selectedIds).map(id =>
+        model.navigation.getItem(id, model)
+      ),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [model.state.selectedIds]
+  );
+
+  const selected = useListModel({
+    orientation: 'horizontal',
+    onSelect({id}) {
+      model.events.select({id});
+    },
+    shouldVirtualize: false,
+    items: model.state.visibility === 'hidden' ? cachedSelected : selectedItems,
+  });
+
+  const state = {
+    ...model.state,
+  };
+
+  const events = {
+    ...model.events,
+  };
+
+  return {selected, ...model, state, events};
 });

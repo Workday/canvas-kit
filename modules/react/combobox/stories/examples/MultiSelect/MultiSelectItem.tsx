@@ -1,6 +1,5 @@
 import React from 'react';
 
-import {checkIcon} from '@workday/canvas-system-icons-web';
 import {handleCsProp} from '@workday/canvas-kit-styling';
 
 import {
@@ -10,7 +9,6 @@ import {
   ExtractProps,
 } from '@workday/canvas-kit-react/common';
 import {Combobox, useComboboxMenuItem} from '@workday/canvas-kit-react/combobox';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
 
 import {useMultiSelectModel} from './useMultiSelectModel';
@@ -30,11 +28,13 @@ export const MultiSelectItem = createSubcomponent('li')({
   subComponents: {
     Icon: Combobox.Menu.Item.Icon,
   },
-})<ExtractProps<typeof Combobox.Menu.Item>>(({children, ...elemProps}, Element, _model) => {
-  console.log('aria-selected', elemProps);
-  return (
-    <StyledMenuItem as={Element} {...handleCsProp(elemProps)}>
-      {children}
-    </StyledMenuItem>
-  );
-});
+})<ExtractProps<typeof Combobox.Menu.Item>>(
+  ({children, type = 'selectable', ...elemProps}, Element, _model) => {
+    console.log('aria-selected', elemProps);
+    return (
+      <StyledMenuItem as={Element} type={type} {...handleCsProp(elemProps)}>
+        {children}
+      </StyledMenuItem>
+    );
+  }
+);
