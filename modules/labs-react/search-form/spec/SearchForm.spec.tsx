@@ -4,7 +4,7 @@ import {render, screen, fireEvent} from '@testing-library/react';
 import {searchThemes, SearchTheme} from '../lib/themes';
 import chroma from 'chroma-js';
 
-describe('SearchForm', () => {
+describe.only('SearchForm', () => {
   const cb = jest.fn().mockImplementation((event: Event) => event);
 
   afterEach(() => {
@@ -60,7 +60,7 @@ describe('SearchForm', () => {
         inputLabel={inputLabelText}
       />
     );
-
+    console.log(expect(screen.getByRole('combobox')).toHaveValue(text)); //?
     expect(screen.getByRole('combobox', {name: inputLabelText})).toHaveValue(text);
     fireEvent.click(screen.getByLabelText(label));
     expect(screen.getByRole('combobox', {name: inputLabelText})).toHaveValue('');

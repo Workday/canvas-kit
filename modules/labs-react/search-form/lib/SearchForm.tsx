@@ -6,6 +6,8 @@ import {
   styled,
   generateUniqueId,
   filterOutProps,
+  accessibleHideStyles,
+  ExtractProps,
 } from '@workday/canvas-kit-react/common';
 import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
 import {searchIcon, xIcon} from '@workday/canvas-system-icons-web';
@@ -445,12 +447,13 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
           <SearchField
             grow={grow}
             id={labelId}
-            // inputId={`input-${labelId}`}
-            aria-label={inputLabel}
+            // id={labelId}
             isCollapsed={isCollapsed}
             showForm={this.state.showForm}
             height={height}
+            // data-foo="baz"
           >
+            <FormField.Label cs={accessibleHideStyles}>{inputLabel}</FormField.Label>
             <SearchCombobox
               initialValue={initialValue}
               clearButtonVariant={this.getIconButtonType()}
@@ -462,8 +465,10 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
               clearButtonAriaLabel={clearButtonAriaLabel}
               labelId={labelId}
             >
-              <SearchInput
-                ref={this.inputRef}
+              <FormField.Input
+                as={SearchInput}
+                data-foo="blah"
+                // ref={this.inputRef}
                 value={this.state.searchQuery}
                 placeholder={placeholder}
                 isCollapsed={isCollapsed}
@@ -471,7 +476,6 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
                 height={height}
                 name="search"
                 autoComplete="off"
-                data-width="ck-formfield-width"
               />
             </SearchCombobox>
           </SearchField>
