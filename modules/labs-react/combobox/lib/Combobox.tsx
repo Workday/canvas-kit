@@ -427,7 +427,6 @@ export const Combobox = ({
         React.InputHTMLAttributes<HTMLInputElement> & {ref: React.Ref<HTMLInputElement>}
     > & {css: CSSObject} = {
       type: 'text',
-      // id: componentId,
       grow: grow,
       value: value,
       ref: elementRef,

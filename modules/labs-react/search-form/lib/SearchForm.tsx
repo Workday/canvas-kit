@@ -55,7 +55,6 @@ export interface SearchFormProps extends GrowthBehavior, React.FormHTMLAttribute
   /**
    * The screenreader label text for the SearchForm text input.
    * @default Search
-   * @deprecated
    */
   inputLabel?: string;
   /**

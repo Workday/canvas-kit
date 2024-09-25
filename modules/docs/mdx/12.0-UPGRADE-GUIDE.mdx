@@ -48,8 +48,9 @@ A note to the reader:
 - [Component Updates](#component-updates)
   - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
   - [Avatar](#avatar)
-  - [Select](#select)
   - [Form Field](#form-field)
+  - [Search Form](#search-form)
+  - [Select](#select)
   - [Text Area](#text-area)
 - [Troubleshooting](#troubleshooting)
 - [Glossary](#glossary)
@@ -76,7 +77,9 @@ formatter to address the format issues that have been introduced in v12.
 
 ### Compatability Mode
 
-In v12, we have addressed a style merge issue with removing forced compatibility mode. For more information on this change, please read our [discussion](https://github.com/Workday/canvas-kit/discussions/2893).
+In v12, we have addressed a style merge issue with removing forced compatibility mode. For more
+information on this change, please read our
+[discussion](https://github.com/Workday/canvas-kit/discussions/2893).
 
 ## Deprecations
 
@@ -203,10 +206,65 @@ made to provide more flexibility and better explicit components when using input
   updated styles so that the containing element uses `gap` for proper spacing.
 
 > **Note:** If spacing seems off between the input and hint text, ensure you're using
-> `FormField.Field` wrappign your input and hint text.
+> `FormField.Field` wrapping your input and hint text.
+
+##### Breaking API Change
+
+The newly promoted `FormField` is a
+[compound component](https://workday.github.io/canvas-kit/?path=/docs/guides-compound-components--page).
+Due to the different APIs of the component, this change is **not codemodable**. The following shows
+an example of how to **update** your code to match the new compound component API.
+
+```tsx
+// v11 FormField in Main
+<FormField
+  error={FormField.ErrorType.Alert}
+  labelPosition={FormField.LabelPosition.Left}
+  useFieldSet={true}
+  required={true}
+  hintId="hint-alert"
+  hintText="Please enter a valid email."
+  label="Email"
+>
+  <TextInput onChange={handleChange} value={value} />
+</FormField>
+
+
+// v12 Newly promoted FormField from Preview to Main
+<FormField
+  error="error"
+  orientation="horizontalStart"
+  isRequired={true}
+>
+	<FormField.Label>Email</FormField.Label>
+	<FormField.Field>
+		<FormField.Input as={TextInput} onChange={handleChange} value={value} />
+		<FormField.Hint>Please enter a valid email.</FormField.Hint>
+	</FormField.Field>
+</FormField>
+```
+
+**Noticeable changes:**
+
+- `error` prop takes in the following values: `"error" | "alert"`.
+- `labelPosition` becomes `orientation` with the following values:
+  `"horizontal" | "horizontalStart" | "horizontalEnd" | "vertical"`.
+- `useFieldSet` is no longer valid. If you want to group inputs, use
+  [`FormFieldGroup`](#form-field-group) component.
+- `required` becomes `isRequired`.
+- `hintId` is no longer needed. The component handles associating the hint text, label and input
+  automatically. If you wish to have a unique `id`, you can add one onto the `FormField` element.
+- `hintText` is no longer a valid prop. Use `FormField.Hint` sub component.
+- `errorLabel` and `alertLabel` are no longer valid props. Customizing your hint text inside of
+  `FormField.Hint`.
+- `label` is no longer a valid prop. Use `FormField.Label` sub component to render your label text.
+- Instead of rendering an input, ensure you use `FormField.Input` with the `as` prop. This ensures
+  proper error handling and aria attributes for accessibility.
 
 🤖 The codemod will handle the change of `orientation="horizontal"` to
-`orientation="horizontalStart"` if you're using the string literal values.
+`orientation="horizontalStart"` if you're using the string literal values. It will also handle
+updating your imports from `@workday/canvas-kit-preview-react/form-field` to
+`@workday/canvas-kit-react/form-field`.
 
 #### Form Field Group
 
@@ -243,6 +301,14 @@ this sub-component when using `FormField`. This component also exists on `FormFi
   </FormField.Field>
 </FormField>
 ```
+
+### Search Form (Labs)
+
+**PRs:** [#2934](https://github.com/Workday/canvas-kit/pull/2934),
+
+`SearchForm` is now using the newly promoted `FormField` component. `SearchForm` now uses `labelId`
+to set the appropiate aria attributes and `id` on the underlying input element. There should be no
+visual breaking changes and the API remains the same.
 
 ### Select
 
