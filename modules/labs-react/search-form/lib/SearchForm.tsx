@@ -446,8 +446,6 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
           <SearchField
             grow={grow}
             id={labelId}
-            // inputId={`input-${labelId}`}
-            // useFieldset={false}
             isCollapsed={isCollapsed}
             showForm={this.state.showForm}
             height={height}
@@ -467,6 +465,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
               <FormField.Input
                 as={SearchInput}
                 ref={this.inputRef as any}
+                cs={{maxWidth: grow ? '100%' : maxWidth}}
                 value={this.state.searchQuery}
                 placeholder={placeholder}
                 isCollapsed={isCollapsed}

@@ -54,11 +54,9 @@ export const Basic = () => {
   return (
     <Flex minHeight={200} alignItems="flex-start" padding="xs">
       <SearchForm
-        inputLabel="foo"
         autocompleteItems={menuItems}
         onInputChange={filterMenuItems}
         onSubmit={handleSubmit}
-        isCollapsed
       />
     </Flex>
   );
