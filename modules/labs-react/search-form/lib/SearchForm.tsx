@@ -7,7 +7,6 @@ import {
   generateUniqueId,
   filterOutProps,
   accessibleHideStyles,
-  ExtractProps,
 } from '@workday/canvas-kit-react/common';
 import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
 import {searchIcon, xIcon} from '@workday/canvas-system-icons-web';
@@ -56,6 +55,7 @@ export interface SearchFormProps extends GrowthBehavior, React.FormHTMLAttribute
   /**
    * The screenreader label text for the SearchForm text input.
    * @default Search
+   * @deprecated
    */
   inputLabel?: string;
   /**
@@ -290,7 +290,6 @@ const SearchInput = styled(TextInput)<
 
 export class SearchForm extends React.Component<SearchFormProps, SearchFormState> {
   static Theme = SearchTheme;
-
   private inputRef = React.createRef<HTMLInputElement>();
   private openRef = React.createRef<HTMLButtonElement>();
   private defaultLabelId = generateUniqueId();
@@ -447,11 +446,11 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
           <SearchField
             grow={grow}
             id={labelId}
-            // id={labelId}
+            // inputId={`input-${labelId}`}
+            // useFieldset={false}
             isCollapsed={isCollapsed}
             showForm={this.state.showForm}
             height={height}
-            // data-foo="baz"
           >
             <FormField.Label cs={accessibleHideStyles}>{inputLabel}</FormField.Label>
             <SearchCombobox
@@ -467,8 +466,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
             >
               <FormField.Input
                 as={SearchInput}
-                data-foo="blah"
-                // ref={this.inputRef}
+                ref={this.inputRef as any}
                 value={this.state.searchQuery}
                 placeholder={placeholder}
                 isCollapsed={isCollapsed}
