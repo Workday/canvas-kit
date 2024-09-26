@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormField, FormFieldGroup} from '@workday/canvas-kit-react/form-field';
+import {FormFieldGroup} from '@workday/canvas-kit-react/form-field';
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 
 export const Error = () => {
@@ -35,7 +35,7 @@ export const Error = () => {
             Cauliflower
           </FormFieldGroup.Input>
         </FormFieldGroup.List>
-        <FormField.Hint>Deep dish is currently sold out.</FormField.Hint>
+        <FormFieldGroup.Hint>Deep dish is currently sold out.</FormFieldGroup.Hint>
       </FormFieldGroup.Field>
     </FormFieldGroup>
   );

@@ -19,7 +19,7 @@ import {ThemedError as ThemedErrorExample} from './examples/ThemedErrors';
 import {GroupedInputs as GroupedInputsExample} from './examples/GroupedInputs';
 
 export default {
-  title: 'Preview/Inputs/Form Field',
+  title: 'Components/Inputs/Form Field',
   component: FormField,
   tags: ['autodocs'],
   parameters: {
