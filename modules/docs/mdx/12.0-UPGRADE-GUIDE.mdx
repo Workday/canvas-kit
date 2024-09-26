@@ -204,8 +204,9 @@ made to provide more flexibility and better explicit components when using input
 > and end match the flex property of `flex-start` and `flex-end`. This is especially applicable for
 > moving between RTL (right-to-left) and LTR (left-to-right) languages.
 
-> **Note:** Orientation "horizontal" has been deprecated. You will see a console warn message
-> suggesting to update your types and usage to `horizontalStart`, `horizontalEnd` or `vertical`.
+> **Note:** Orientation `"horizontal"` has been deprecated. You will see a console warn message
+> suggesting to update your types and usage to `"horizontalStart"`, `"horizontalEnd"` or
+> `"vertical"`.
 
 - `useFormFieldModel`: `orientation` has been added back into `useFormFieldModel`. While we still
   support compat mode due to
@@ -265,7 +266,7 @@ an example of how to **update** your code to match the new compound component AP
 - `hintId` is no longer needed. The component handles associating the hint text, label and input
   automatically. If you wish to have a unique `id`, you can add one onto the `FormField` element.
 - `hintText` is no longer a valid prop. Use `FormField.Hint` sub component.
-- `errorLabel` and `alertLabel` are no longer valid props. Customizing your hint text inside of
+- `errorLabel` and `alertLabel` are no longer valid props. Customize your hint text inside of
   `FormField.Hint`.
 - `label` is no longer a valid prop. Use `FormField.Label` sub component to render your label text.
 - Instead of rendering an input, ensure you use `FormField.Input` with the `as` prop. This ensures
@@ -278,8 +279,8 @@ updating your imports from `@workday/canvas-kit-preview-react/form-field` to
 
 #### Form Field Group
 
-We've added a new component under `FromField` to allow users to group inputs without worrying about
-setting the `as` prop on the `FormField` component.
+We've added a new component to the `form-field` package to allow users to group inputs without
+worrying about setting the `as` prop on the `FormField` component.
 
 Use `FormFieldGroup` when you have a group of inputs that need to be associated to one another, like
 `RadioGroup` or a group of `Checkbox`'s.
