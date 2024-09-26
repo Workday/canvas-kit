@@ -18,7 +18,7 @@ describe('SearchForm', () => {
     fireEvent.submit(screen.getByRole('search', {name: inputLabelText}));
 
     expect(cb).toHaveBeenCalledTimes(0);
-    // expect(screen.getByRole('combobox', {name: inputLabelText})).toHaveFocus();
+    expect(screen.getByRole('combobox', {name: inputLabelText})).toHaveFocus();
   });
 
   test('Searching empty string should call callback, when allowEmptyStringSearch is true', () => {
@@ -60,7 +60,7 @@ describe('SearchForm', () => {
         inputLabel={inputLabelText}
       />
     );
-    console.log(expect(screen.getByRole('combobox')).toHaveValue(text)); //?
+
     expect(screen.getByRole('combobox', {name: inputLabelText})).toHaveValue(text);
     fireEvent.click(screen.getByLabelText(label));
     expect(screen.getByRole('combobox', {name: inputLabelText})).toHaveValue('');
@@ -96,7 +96,7 @@ describe('SearchForm', () => {
     const openButton = screen.getByLabelText(openLabel);
     const closeButton = screen.getByLabelText(closeLabel);
 
-    // expect(screen.queryByRole('combobox', {name: inputLabel})).toEqual(null);
+    expect(screen.queryByRole('combobox', {name: inputLabel})).toEqual(null);
     expect(closeButton).not.toBeVisible();
     expect(openButton).toBeVisible();
 
@@ -105,7 +105,7 @@ describe('SearchForm', () => {
     expect(screen.getByRole('combobox', {name: inputLabel})).toBeVisible();
     expect(closeButton).toBeVisible();
     expect(openButton).not.toBeVisible();
-    // expect(screen.getByRole('combobox', {name: inputLabel})).toHaveFocus();
+    expect(screen.getByRole('combobox', {name: inputLabel})).toHaveFocus();
 
     fireEvent.click(closeButton);
 
