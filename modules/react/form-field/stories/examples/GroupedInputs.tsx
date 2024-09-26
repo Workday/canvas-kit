@@ -142,7 +142,7 @@ export const GroupedInputs = () => {
       </AriaLiveRegion>
 
       <form className={formStyles} onSubmit={handleSubmit}>
-        <FormFieldGroup error={error}>
+        <FormFieldGroup error={error} isRequired>
           <FormFieldGroup.Label>Choose Your Toppings</FormFieldGroup.Label>
           <FormFieldGroup.List>
             {toppingsState.map(item => {
@@ -163,7 +163,7 @@ export const GroupedInputs = () => {
             {error === 'error' && 'You must choose one topping'}
           </FormFieldGroup.Hint>
         </FormFieldGroup>
-        <FormFieldGroup error={radioError}>
+        <FormFieldGroup error={radioError} isRequired>
           <FormFieldGroup.Label>Choose Your Crust</FormFieldGroup.Label>
           <FormFieldGroup.Field>
             <FormFieldGroup.List
