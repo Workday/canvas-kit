@@ -200,7 +200,7 @@ export const DisabledOptionsTest = () => (
         <FormField.Label>Label (Disabled Options)</FormField.Label>
         <FormField.Field>
           {controlComponent(
-            <FormField.Field as={Select} name="select-disabled-options" options={disabledOptions} />
+            <FormField.Input as={Select} name="select-disabled-options" options={disabledOptions} />
           )}
         </FormField.Field>
       </FormField>

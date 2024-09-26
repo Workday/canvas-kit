@@ -8,6 +8,7 @@ import {controlComponent} from '../../../../../../utils/storybook';
 export const Disabled = () => {
   return (
     <FormField id="select-disabled">
+      <FormField.Label>Label</FormField.Label>
       <FormField.Field>
         {controlComponent(
           <FormField.Input as={Select} name="contact" options={options} disabled={true} />
