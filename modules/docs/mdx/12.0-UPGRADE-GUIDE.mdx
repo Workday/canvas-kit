@@ -37,16 +37,16 @@ A note to the reader:
 - [Styling Updates](#styling-updates)
   - [Compatibility Mode](#compatibility-mode)
 - [Deprecations](#deprecations)
-  - [FormField Container](#formfield-container)
+  - [Form Field Container](#form-field-container)
 - [Removals](#removals)
   - [Input Icon Container](#input-icon-container)
 - [Component Updates](#component-updates)
   - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
   - [Avatar](#avatar)
   - [Select](#select)
-  - [FormField](#formfield)
-    - [FormField Group](#formfield-group)
-    - [FormField Field](#formfield-field)
+  - [Form Field](#form-field)
+    - [Form Field Group](#form-field-group)
+    - [Form Field Field](#form-field-field)
   - [Text Area](#text-area)
 - [Troubleshooting](#troubleshooting)
 - [Glossary](#glossary)
@@ -140,7 +140,7 @@ We add the [@deprecated](https://jsdoc.app/tags-deprecated.html) JSDoc tag to co
 in a future major release. This signals consumers to migrate to a more stable alternative before the
 deprecated code is removed.
 
-### FormField Container
+### Form Field Container
 
 **PR:** [#2865](https://github.com/Workday/canvas-kit/pull/2865)
 
@@ -232,7 +232,7 @@ The following changes have been made to the API:
 > union types. You will see a console warn message while in development if you're still using this.
 > Please update your types and usage before v13.
 
-### FormField
+### Form Field
 
 **PRs:** [#2865](https://github.com/Workday/canvas-kit/pull/2865),
 [#2881](https://github.com/Workday/canvas-kit/pull/2881)
@@ -266,7 +266,7 @@ made to provide more flexibility and better explicit components when using input
 🤖 The codemod will handle the change of `orientation="horizontal"` to
 `orientation="horizontalStart"` if you're using the string literal values.
 
-#### FormField Group
+#### Form Field Group
 
 We've added a new component under `FromField` to allow users to group inputs without worrying about
 setting the `as` prop on the `FormField` component.
@@ -281,7 +281,7 @@ Use `FormFieldGroup` when you have a group of inputs that need to be associated 
   label placement.
 - `isRequired`: `true` Defines if a group like `RadioGroup` is required.
 
-#### FormField Field
+#### Form Field Field
 
 We've added a new sub-component to `FormField` and `FormFieldGroup`, `FormField.Field` and
 `FormFieldGroup.Field`. This sub-component is meant to ensure that the label is always aligned with
