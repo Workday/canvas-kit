@@ -2,7 +2,7 @@ import React from 'react';
 
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Select} from '@workday/canvas-kit-preview-react/select';
-import {hintId, hintText, options} from '../storiesData';
+import {hintText, options} from '../storiesData';
 import {controlComponent} from '../../../../../../utils/storybook';
 
 export const Error = () => {
