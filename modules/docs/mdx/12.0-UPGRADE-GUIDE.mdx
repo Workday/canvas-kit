@@ -25,8 +25,8 @@ provide semantic tokens that can translate to theming components.
 
 A note to the reader:
 
-- While we still support our old tokens from `@workday/canvas-kit-react/tokens`, you must install
-  our new tokens from `@workday/canvas-tokens-web`. You can find more info in our
+- While we still support our old tokens from `@workday/canvas-kit-react/tokens`, **you must**
+  install our new tokens from `@workday/canvas-tokens-web`. You can find more info in our
   [docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
 
 ## Table of contents
@@ -59,9 +59,8 @@ A note to the reader:
 
 In v12, all the components listed in this guide have started using our new
 [Canvas Tokens Web](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
-
-In v12 you must add `@workday/canvas-tokens-web` to ensure our components are properly styled and
-the variables are defined. For more information on installing and using, please reference our tokens
+You must add `@workday/canvas-tokens-web` to ensure our components are properly styled and the
+variables are defined. For more information on installing and using, please reference our tokens
 [docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
 
 ## Codemod
@@ -202,6 +201,10 @@ Several components have been refactored to use our new
 [styling API](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
 The React interface **has not changed**, but CSS variables are now used for dynamic properties.
 
+> **Note:** These components also support our new `cs` prop for styling. Learn more about styling
+> with `cs` in our
+> [documentation](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--cs-prop).
+
 The following components are affected:
 
 - `Avatar`
@@ -211,10 +214,6 @@ The following components are affected:
 - `TextArea`
 - `TextInput`
 - `Toast`
-
-> **Note:** These components also support our new `cs` prop for styling. Learn more about styling
-> with `cs` in our
-> [documentation](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--cs-prop).
 
 ### Avatar
 
@@ -229,7 +228,7 @@ The following changes have been made to the API:
   `"extraExtraLarge" | "extraLarge" | "large" | "medium" | "small" | "extraSmall" | (string{})`
 - `Avatar.Variant` has been deprecated. The `variant` prop still accepts `Avatar.Variant` in
   addition to the following values: `"dark" | "light"`
-- The `as` prop now accepts any element, not just `div`.
+- The `as` prop now accepts any element, not just a `div`.
 
 > **Note:** Both `Avatar.Size` and `Avatar.Variant` have been deprecated in favor of the new string
 > union types. You will see a console warn message while in development if you're still using this.
@@ -254,9 +253,9 @@ We've promoted FormField from [Preview](#preview) to [Main](#main). The followin
 made to provide more flexibility and better explicit components when using inputs.
 
 - The orientation prop on the `FormField` component will be updated to accept the following values:
-  `vertical`, `horizontalStart`, and `horizontalEnd`. `horizontal` will still be accepted as a value
-  in v12, but it will be deprecated and slated for removal in a future major release. These changes
-  are intended to provide more flexibility with label alignments on `FormField` elements.
+  `"vertical"`, `"horizontalStart"`, and `"horizontalEnd"`. `"horizontal"` will still be accepted as
+  a value in v12, but it will be deprecated and slated for removal in a future major release. These
+  changes are intended to provide more flexibility with label alignments on `FormField` elements.
 
 > **Note**: The horizontal alignment of start and end are relative to its container, meaning start
 > and end match the flex property of `flex-start` and `flex-end`. This is especially applicable for
@@ -271,8 +270,13 @@ made to provide more flexibility and better explicit components when using input
   [style merging issues](https://github.com/Workday/canvas-kit/discussions/2893), having orientation
   on the model allows for proper styling of sub components.
 
-- Styles clean up. `FormField.Hint` and `FormField.Label` where using `margin` for spacing. We've
+- Styles clean up: `FormField.Hint` and `FormField.Label` where using `margin` for spacing. We've
   updated styles so that the containing element uses `gap` for proper spacing.
+
+- We've added a new
+  [example](https://workday.github.io/canvas-kit/?path=/docs/examples-forms-density-and-alignment--docs)
+  to our docs to showcase how our inputs can be styled in different environments like density and
+  container alignment.
 
 > **Note:** If spacing seems off between the input and hint text, ensure you're using
 > `FormField.Field` wrapping your input and hint text.
@@ -387,7 +391,7 @@ As we transition to use our CSS tokens to provide better theming capabilities an
 methods, we're moving away from components extending `Themeable`. `Themeable` has been removed from
 `SelectProps.`
 
-If you wish to theme `Select` we suggest using the CanvasProvider to do so.
+If you wish to theme `Select` we suggest using the `CanvasProvider` to do so.
 
 ```tsx
 const theme: PartialEmotionCanvasTheme = {
