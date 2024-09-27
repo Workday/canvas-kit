@@ -15,7 +15,7 @@ any questions.
 
 ## Why You Should Upgrade
 
-Canvas Kit v12 is transitioning into a
+Canvas Kit is transitioning into a
 [new way of styling](https://github.com/Workday/canvas-kit/discussions/2265). Theming and building
 an in sync Canvas Kit CSS has been at the top of our minds. We've started using our new
 [Canvas Tokens Web](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs)
@@ -25,30 +25,27 @@ provide semantic tokens that can translate to theming components.
 
 A note to the reader:
 
-- While we still support our old tokens from `@workday/canvas-kit-react/tokens` in v12, you must
-  install our new tokens from `@workday/canvas-tokens-web`. You can find more info in our
+- While we still support our old tokens from `@workday/canvas-kit-react/tokens`, you must install
+  our new tokens from `@workday/canvas-tokens-web`. You can find more info in our
   [docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
-- In this release, we've introduced a
-  [new styling API](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-stencil).
-  This shouldn't effect the way you currently style your components. Because we're moving away from
-  Emotion, support for style props will eventually be removed, however, this API provide backwards
-  compatability. If you want to slowly move off of Emotion as well, you can start styling components
-  via the `cs` prop or our new styling utilities.
 
 ## Table of contents
 
 - [Canvas Tokens](#canvas-tokens)
 - [Codemod](#codemod)
+  - [Instructions](#instructions)
 - [Styling Updates](#styling-updates)
-  - [Compatability Mode](#compatability-mode)
+  - [Compatibility Mode](#compatibility-mode)
 - [Deprecations](#deprecations)
   - [Form Field Container](#form-field-container)
 - [Removals](#removals)
-  - [InputIconContainer](#inputiconcontainer)
+  - [Input Icon Container](#input-icon-container)
 - [Component Updates](#component-updates)
   - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
   - [Avatar](#avatar)
   - [Form Field](#form-field)
+    - [Form Field Group](#form-field-group)
+    - [Form Field Field](#form-field-field)
   - [Search Form](#search-form)
   - [Select](#select)
   - [Text Area](#text-area)
@@ -69,13 +66,73 @@ the variables are defined. For more information on installing and using, please 
 
 ## Codemod
 
-In v12, we have done some infrastructure updates with moving to Webpack 5 and Storybook 7. With
-these updates has come some formatting issues after running our codemods. We recommend running a
-formatter to address the format issues that have been introduced in v12.
+We've provided a [codemod](https://github.com/Workday/canvas-kit/tree/master/modules/codemod) to
+automatically update your code to work with most of the breaking changes in v12. **Breaking changes
+handled by the codemod are marked with 🤖 in the Upgrade Guide.**
+
+> **Note: In v12, we have done some infrastructure updates with moving to Storybook 7, Webpack 5,
+> Typescript 4.9 and Cypress 13 . With these updates has come some formatting issues after running
+> our codemods. We recommend running a formatter to address the format issues that have been
+> introduced in v12.**
+
+A codemod is a script that makes programmatic transformations on your codebase by traversing the
+[AST](https://www.codeshiftcommunity.com/docs/understanding-asts), identifying patterns, and making
+prescribed changes. This greatly decreases opportunities for error and reduces the number of manual
+updates, which allows you to focus on changes that need your attention. **We highly recommend you
+use the codemod for these reasons.**
+
+If you're new to running codemods or if it's been a minute since you've used one, there are a few
+things you'll want to keep in mind.
+
+- Our codemods are meant to be run sequentially. For example, if you're using v8 of Canvas Kit,
+  you'll need to run the v9 codemod before you run v10 and so on.
+- The codemod will update your code to be compatible with the specified version, but it will **not**
+  remove outdated dependencies or upgrade dependencies to the latest version. You'll need to upgrade
+  dependencies on your own.
+  - We recommend upgrading dependencies before running the codemod.
+  - Always review your `package.json` files to make sure your dependency versions look correct.
+- The codemod will not handle every breaking change in v12. You will likely need to make some manual
+  changes to be compatible. Use our Upgrade Guide as a checklist.
+- Codemods are not bulletproof.
+  - Conduct a thorough PR and QA review of all changes to ensure no regressions were introduced.
+  - As a safety precaution, we recommend committing the changes from the codemod as a single
+    isolated commit (separate from other changes) so you can roll back more easily if necessary.
+
+We're here to help! Automatic changes to your codebase can feel scary. You can always reach out to
+our team. We'd be very happy to walk you through the process to set you up for success.
+
+### Instructions
+
+The easiest way to run our codemod is to use `npx` in your terminal.
+
+```sh
+npx @workday/canvas-kit-codemod v12 [path]
+```
+
+Be sure to provide specific directories that need to be updated via the `[path]` argument. This
+decreases the amount of AST the codemod needs to traverse and reduces the chances of the script
+having an error. For example, if your source code lives in `src/`, use `src/` as your `[path]`. Or,
+if you have a monorepo with three packages using Canvas Kit, provide those specific packages as your
+`[path]`.
+
+Alternatively, if you're unable to run the codemod successfully using `npx`, you can install the
+codemod package as a dev dependency, run it with `yarn`, and then remove the package after you're
+finished.
+
+```sh
+yarn add @workday/canvas-kit-codemod --dev
+yarn canvas-kit-codemod v12 [path]
+yarn remove @workday/canvas-kit-codemod
+```
+
+> **Note**: The codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` files. You'll need to
+> manually edit other file types (`.json`, `.mdx`, `.md`, etc.). You may need to run your linter
+> after executing the codemod, as its resulting formatting (spacing, quotes, etc.) may not match
+> your project conventions.
 
 ## Styling Updates
 
-### Compatability Mode
+### Compatibility Mode
 
 In v12, we have addressed a style merge issue with removing forced compatibility mode. For more
 information on this change, please read our
@@ -91,9 +148,9 @@ deprecated code is removed.
 
 **PR:** [#2865](https://github.com/Workday/canvas-kit/pull/2865)
 
-We've deprecated `FormField.Container`. Please use `FormField.Field` or `FormFieldGroup.Field` for
-grouped inputs, this ensures proper label alignment and spacing of inputs and hint text, regardless
-of the orientation.
+We've deprecated `FormField.Container` in v12. Please use `FormField.Field` or
+`FormFieldGroup.Field` for grouped inputs as this ensures proper label alignment and spacing of
+inputs and hint text, regardless of the orientation.
 
 ```tsx
 // v11
@@ -120,7 +177,7 @@ of the orientation.
 Removals are deletions from our codebase and you can no longer consume this component. We've either
 promoted or replaced a component or utility.
 
-### InputIconContainer
+### Input Icon Container
 
 **PR:** [#2838](https://github.com/Workday/canvas-kit/pull/2838)
 
@@ -134,10 +191,11 @@ from Main instead.
 
 ### Styling API and CSS Tokens
 
-**PRs:** [#2825](https://github.com/Workday/canvas-kit/pull/2825),
+**PRs:** [#2793](https://github.com/Workday/canvas-kit/pull/2793),
+[#2865](https://github.com/Workday/canvas-kit/pull/2865),
+[#2881](https://github.com/Workday/canvas-kit/pull/2881),
+[#2825](https://github.com/Workday/canvas-kit/pull/2825),
 [#2795](https://github.com/Workday/canvas-kit/pull/2795),
-[#2793](https://github.com/Workday/canvas-kit/pull/2793),
-[#2881](https://github.com/Workday/canvas-kit/pull/2881)
 
 Several components have been refactored to use our new
 [Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
@@ -292,7 +350,7 @@ Use `FormFieldGroup` when you have a group of inputs that need to be associated 
   label placement.
 - `isRequired`: `true` Defines if a group like `RadioGroup` is required.
 
-#### FormField Field
+#### Form Field Field
 
 We've added a new sub-component to `FormField` and `FormFieldGroup`, `FormField.Field` and
 `FormFieldGroup.Field`. This sub-component is meant to ensure that the label is always aligned with
@@ -384,7 +442,7 @@ interface MyProps {
   resize?: TextAreaResizeDirection;
 }
 
-// 12
+// v12
 type ValueOf<T> = T[keyof T];
 interface MyProps {
   resize?: ValueOf<typeof TextAreaResizeDirection>;
@@ -395,7 +453,7 @@ interface MyProps {
 
 ### My Styles Seem Broken?
 
-Our components are reliant on our new Canvas Tokens Web package. Be sure you install
+Our components are reliant on our new Canvas Tokens Web package. Be sure to install
 `@workday/canvas-tokens-web`. For more information, reference our
 [Getting Started docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs)
 for this package.
