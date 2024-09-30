@@ -3,12 +3,12 @@ import {createContainer} from '@workday/canvas-kit-react/common';
 import {createModifiers, createStyles, cssVar} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
-import {Base, BaseProps} from './Base';
-import {Heading} from './Heading';
-import {Body} from './Body';
-import {Icon} from './Icon';
-import {Link} from './Link';
-import {useInformationHighlightModel} from './modelHook';
+import {Base, BaseProps} from './lib/Base';
+import {Heading} from './lib/Heading';
+import {Body} from './lib/Body';
+import {Icon} from './lib/Icon';
+import {Link} from './lib/Link';
+import {useInformationHighlightModel} from './lib/modelHook';
 
 type Variant = 'emphasis' | 'caution' | 'attention';
 
@@ -32,9 +32,7 @@ const containerModifiers = createModifiers({
       borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(base.blueberry400)}`,
     }),
     caution: createStyles({
-      borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(
-        base.cantaloupe400
-      )}`,
+      borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(base.cantaloupe400)}`,
     }),
     attention: createStyles({
       borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(base.cinnamon500)}`,
