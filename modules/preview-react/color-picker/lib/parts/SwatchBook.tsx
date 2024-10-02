@@ -4,8 +4,13 @@ import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 import {focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react/common';
 import {ColorSwatch} from '@workday/canvas-kit-react/color-picker';
 
+export interface SwatchBookColorObject {
+  value: string;
+  label: string;
+}
+
 export interface SwatchBookProps {
-  colors: string[];
+  colors: (string | SwatchBookColorObject)[];
   value?: string;
   onSelect: (color: string) => void;
 }
@@ -58,26 +63,33 @@ const Container = styled('div')({
   margin: `0px -${space.xxs} -${space.xxs} 0px`,
 });
 
-export const SwatchBook = ({colors, value, onSelect}: SwatchBookProps) => (
-  <Container>
-    {colors.map((color, index) => {
-      const isSelected = value ? color.toLowerCase() === value.toLowerCase() : false;
+export const SwatchBook = ({colors, value, onSelect}: SwatchBookProps) => {
+  return (
+    <Container>
+      {colors.map((color: string | SwatchBookColorObject, index: number) => {
+        const hexCode = typeof color === 'object' ? color.value : color;
+        const label = typeof color === 'object' ? color.label : color;
+        const isSelected = value ? hexCode.toLowerCase() === value.toLowerCase() : false;
 
-      const handleClick = () => onSelect(color);
-      const handleKeyDown = (event: React.KeyboardEvent) =>
-        (event.key === 'Enter' || event.key === ' ') && onSelect(color);
+        const handleClick = () => onSelect(hexCode);
+        const handleKeyDown = (event: React.KeyboardEvent) =>
+          (event.key === 'Enter' || event.key === ' ') && onSelect(hexCode);
 
-      return (
-        <SwatchContainer
-          key={index + '-' + color}
-          onClick={handleClick}
-          onKeyDown={handleKeyDown}
-          tabIndex={0}
-          isSelected={isSelected}
-        >
-          <ColorSwatch color={color} showCheck={isSelected} />
-        </SwatchContainer>
-      );
-    })}
-  </Container>
-);
+        return (
+          <SwatchContainer
+            key={index + '-' + color}
+            onClick={handleClick}
+            onKeyDown={handleKeyDown}
+            tabIndex={0}
+            isSelected={isSelected}
+            role="button"
+            aria-label={label}
+            aria-selected={isSelected}
+          >
+            <ColorSwatch color={hexCode} showCheck={isSelected} />
+          </SwatchContainer>
+        );
+      })}
+    </Container>
+  );
+};

@@ -3,10 +3,31 @@ import * as CanvasIcons from '@workday/canvas-system-icons-web';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 const ImportedIcons = Object.keys(CanvasIcons);
 
 const allIcons = ImportedIcons.filter(icon => icon !== 'CanvasSystemIcons');
+
+const styleOverrides = {
+  parentContainer: createStyles({
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: system.space.x6,
+  }),
+  firstChildContainer: createStyles({
+    flexWrap: 'wrap',
+  }),
+  secondChildContainer: createStyles({
+    alignItems: 'center',
+    width: `max(320px,20%)`,
+    flexDirection: 'row',
+    gap: system.space.x3,
+    padding: system.space.x3,
+  }),
+};
+
 export const SystemIconList = () => {
   const [value, setValue] = React.useState('');
 
@@ -15,9 +36,9 @@ export const SystemIconList = () => {
   };
 
   return (
-    <Flex flexDirection="column" alignItems="center" gap="m">
+    <Flex cs={styleOverrides.parentContainer}>
       <TextInput onKeyDown={e => handleSearch(e)} placeholder="Search for an icon" />
-      <Flex flexWrap="wrap">
+      <Flex cs={styleOverrides.firstChildContainer}>
         {allIcons
           .filter(icon => {
             if (value === '') {
@@ -28,14 +49,7 @@ export const SystemIconList = () => {
           })
           .map((singleIcon, index) => {
             return (
-              <Flex
-                alignItems="center"
-                width={'max(320px,20%)'}
-                flexDirection="row"
-                gap="xs"
-                padding="xs"
-                key={index}
-              >
+              <Flex cs={styleOverrides.secondChildContainer} key={index}>
                 <Box>
                   <SystemIcon icon={CanvasIcons[singleIcon]} />
                 </Box>
