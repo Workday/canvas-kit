@@ -165,7 +165,7 @@ const baseButtonStyles = createStyles({
       width: 2,
       separation: 2,
       innerColor: cssVar(buttonVars.focus.boxShadowInner, base.frenchVanilla100),
-      outerColor: cssVar(buttonVars.focus.boxShadowOuter, brand.primary.base),
+      outerColor: cssVar(buttonVars.focus.boxShadowOuter, brand.common.focusOutline),
     }),
   },
   '&:hover, &.hover': {
