@@ -15,28 +15,13 @@ type Variant = 'emphasis' | 'caution' | 'attention';
 
 const iconStyles = {
   emphasis: {
-    accent: cssVar(base.blueberry400),
-    fill: cssVar(base.blueberry400),
-    background: 'none',
-    accentHover: cssVar(base.blueberry400),
-    fillHover: cssVar(base.blueberry400),
-    backgroundHover: 'none',
+    color: cssVar(base.blueberry400),
   },
   caution: {
-    accent: cssVar(base.blackPepper400),
-    fill: cssVar(base.blackPepper400),
-    background: 'none',
-    accentHover: cssVar(base.blackPepper400),
-    fillHover: cssVar(base.blackPepper400),
-    backgroundHover: 'none',
+    color: cssVar(base.blackPepper400),
   },
   attention: {
-    accent: cssVar(base.cinnamon500),
-    fill: cssVar(base.cinnamon500),
-    background: 'none',
-    accentHover: cssVar(base.cinnamon500),
-    fillHover: cssVar(base.cinnamon500),
-    backgroundHover: 'none',
+    color: cssVar(base.cinnamon500),
   },
 };
 
@@ -53,12 +38,12 @@ const defaultIcons = {
 export const Icon = createSubcomponent('span')({
   displayName: 'Icon',
   modelHook: useInformationHighlightModel,
-})(({icon, ...props}: IconProps, Element, model) => {
+})(({icon, ...props}: IconProps, Element) => {
   return (
     <SystemIcon
       as={Element}
-      icon={icon ? icon : defaultIcons[model.state.variant]}
-      {...iconStyles[model.state.variant]}
+      icon={icon ? icon : defaultIcons[props.variant]}
+      {...iconStyles[props.variant]}
       {...props}
     />
   );

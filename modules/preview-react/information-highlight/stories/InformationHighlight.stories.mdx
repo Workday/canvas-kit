@@ -2,8 +2,12 @@
 import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
 
 import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
-import {Basic} from './examples/Basic';
-import {Open} from './examples/Open';
+import {Body} from './examples/Body';
+import {Heading} from './examples/Heading';
+import {IconAttention} from './examples/Icon-attention'
+import {IconCaution} from './examples/Icon-caution'
+import {IconEmphasis} from './examples/Icon-emphasis'
+import {Link} from './examples/Link'
 
 <Meta title="Preview/Information Highlight" component={InformationHighlight} />
 
@@ -22,15 +26,31 @@ yarn add @workday/canvas-kit-react
 
 ### Basic Example
 
-Show and hide using a button.
 
-<ExampleCodeBlock code={Basic} />
+<ExampleCodeBlock code={Body} />
 
-### Start Open
+### Heading Example
 
 You can open your component by default using the `initialOpen` prop.
 
-<ExampleCodeBlock code={Open} />
+<ExampleCodeBlock code={Heading} />
+
+### Link Example
+
+<ExampleCodeBlock code={Link} />
+
+
+### Attention Example
+
+<ExampleCodeBlock code={IconAttention} />
+
+#### Caution Example
+
+<ExampleCodeBlock code={IconCaution} />
+
+### Emphasis Example
+
+<ExampleCodeBlock code={IconEmphasis} />
 
 ## Component API
 

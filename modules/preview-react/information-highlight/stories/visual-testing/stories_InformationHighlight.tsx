@@ -14,20 +14,34 @@ export const InformationHighlightStates = () => {
   return (
     <StaticStates>
       <ComponentStatesTable
-        columnProps={[{label: 'Default', props: {}}]}
+        columnProps={[
+          {label: 'Emphasis', props: {icon: 'emphasis'}},
+          {label: 'Caution', props: {icon: 'caution'}},
+          {label: 'Attention', props: {icon: 'attention'}},
+        ]}
         rowProps={[
+          {label: 'Empty', props: {}},
+          {label: 'Only Heading', props: {heading: 'Heading'}},
+          {label: 'Only Body', props: {body: 'this is a body of text'}},
+          {label: 'Only Link', props: {link: 'hypertext'}},
+          {label: 'Heading and Body', props: {heading: 'Heading', body: 'this is a body of text'}},
+          {label: 'Heading and Link', props: {heading: 'Heading', link: 'hypertext'}},
+          {label: 'Body and Link', props: {body: 'this is a body of text', link: 'hypertext'}},
           {
-            label: 'Closed',
-            props: {open: false},
-          },
-          {
-            label: 'Opened',
-            props: {open: true},
+            label: 'Heading, Body, and Link',
+            props: {heading: 'Heading', body: 'this is a body of text', link: 'hypertext'},
           },
         ]}
       >
-        {({open, ...props}) => {
-          return <InformationHighlight></InformationHighlight>;
+        {({props}) => {
+          const {heading, body, link} = props;
+          return (
+            <InformationHighlight>
+              <InformationHighlight.Heading>heading</InformationHighlight.Heading>
+              <InformationHighlight.Body>body</InformationHighlight.Body>
+              <InformationHighlight.Link>link</InformationHighlight.Link>
+            </InformationHighlight>
+          );
         }}
       </ComponentStatesTable>
     </StaticStates>
