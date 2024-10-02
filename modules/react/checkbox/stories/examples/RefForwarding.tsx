@@ -4,7 +4,7 @@ import {Checkbox} from '@workday/canvas-kit-react/checkbox';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {system} from '@workday/canvas-tokens-web';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 
 const boxStyles = createStyles({
   display: 'flex',

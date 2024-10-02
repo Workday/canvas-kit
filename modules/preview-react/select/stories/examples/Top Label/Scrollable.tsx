@@ -7,8 +7,9 @@ import {controlComponent} from '../../../../../../utils/storybook';
 
 export const Scrollable = () => {
   return (
-    <FormField label="Label" inputId="select-default">
-      {controlComponent(<Select name="contact" options={manyOptions} />)}
+    <FormField id="select-default">
+      <FormField.Label>Label</FormField.Label>
+      {controlComponent(<FormField.Input as={Select} name="contact" options={manyOptions} />)}
     </FormField>
   );
 };

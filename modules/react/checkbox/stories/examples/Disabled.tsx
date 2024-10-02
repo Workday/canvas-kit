@@ -1,6 +1,6 @@
 import React from 'react';
 import {Checkbox} from '@workday/canvas-kit-react/checkbox';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 
 export const Disabled = () => {
   const [checked, setChecked] = React.useState(false);

@@ -1,6 +1,6 @@
 import React from 'react';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -10,7 +10,7 @@ const formStyles = createStyles({
   flexDirection: 'column',
 });
 
-export const LabelPositionHorizontalStart = () => {
+export const LabelPositionHorizontalEnd = () => {
   const [value, setValue] = React.useState('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,11 +19,11 @@ export const LabelPositionHorizontalStart = () => {
 
   return (
     <form className={formStyles}>
-      <FormField orientation="horizontalStart">
+      <FormField orientation="horizontalEnd">
         <FormField.Label>Email</FormField.Label>
         <FormField.Input as={TextInput} value={value} onChange={handleChange} />
       </FormField>
-      <FormField orientation="horizontalStart">
+      <FormField orientation="horizontalEnd">
         <FormField.Label>Password</FormField.Label>
         <FormField.Input as={TextInput} type="password" />
       </FormField>

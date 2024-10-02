@@ -79,8 +79,11 @@ const Autocomplete: FC<
 export const RTL = () => {
   return (
     <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
-      <FormField id="rtl-autocomplete-123" label="RTL Autocomplete example">
-        <Autocomplete />
+      <FormField id="rtl-autocomplete-123">
+        <FormField.Label>RTL Autocomplete example</FormField.Label>
+        <FormField.Field>
+          <FormField.Input as={Autocomplete} />
+        </FormField.Field>
       </FormField>
     </CanvasProvider>
   );

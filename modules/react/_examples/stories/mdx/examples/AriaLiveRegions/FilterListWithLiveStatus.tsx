@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import {AriaLiveRegion} from '@workday/canvas-kit-react/common';
 import {BodyText, Heading} from '@workday/canvas-kit-react/text';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {system, base} from '@workday/canvas-tokens-web';
 import {createStyles, cssVar, px2rem} from '@workday/canvas-kit-styling';

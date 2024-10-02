@@ -7,8 +7,11 @@ import {controlComponent} from '../../../../../../utils/storybook';
 
 export const Grow = () => {
   return (
-    <FormField label="Label" inputId="select-grow" grow={true}>
-      {controlComponent(<Select name="contact" options={options} />)}
+    <FormField id="select-grow" grow={true}>
+      <FormField.Label>Label</FormField.Label>
+      <FormField.Field>
+        {controlComponent(<FormField.Input as={Select} name="contact" options={options} />)}
+      </FormField.Field>
     </FormField>
   );
 };

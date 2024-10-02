@@ -77,8 +77,11 @@ const Autocomplete: FC<
 
 export const GroupOfResult = () => {
   return (
-    <FormField id="autocomplete-123" label="Group of results">
-      <Autocomplete group={true} />
+    <FormField id="autocomplete-123">
+      <FormField.Label>Group of results</FormField.Label>
+      <FormField.Field>
+        <FormField.Input as={Autocomplete} group={true} />
+      </FormField.Field>
     </FormField>
   );
 };
