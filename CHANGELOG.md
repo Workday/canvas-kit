@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.62](https://github.com/Workday/canvas-kit/releases/tag/v10.3.62) (2024-10-02)
+
+### Components
+
+- fix: Update BaseButton to use correct theming color for focus ring ([#2942](https://github.com/Workday/canvas-kit/pull/2942)) ([@josh-bagwell](https://github.com/josh-bagwell))
+  Fixes theming for the `BaseButton` within `Pagination`.
+
+
 ## [v10.3.61](https://github.com/Workday/canvas-kit/releases/tag/v10.3.61) (2024-09-17)
 
 ### Components
