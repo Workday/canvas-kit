@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {createContainer, ExtractProps} from '@workday/canvas-kit-react/common';
-import {FormField, formFieldStencil} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField, formFieldStencil} from '@workday/canvas-kit-react/form-field';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 import {TextAreaField} from './TextAreaField';

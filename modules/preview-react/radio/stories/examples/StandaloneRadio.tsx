@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormFieldGroup} from '@workday/canvas-kit-preview-react/form-field';
+import {FormFieldGroup} from '@workday/canvas-kit-react/form-field';
 import {StyledRadioButton} from '@workday/canvas-kit-preview-react/radio';
 import {Flex} from '@workday/canvas-kit-react/layout';
 

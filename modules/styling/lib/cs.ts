@@ -415,8 +415,10 @@ export function createModifiers<M extends ModifierConfig>(input: M): ModifierRet
   const modifierFn = (modifiers: Partial<ModifierValues<M>>) => {
     return combineClassNames(
       Object.keys(input)
-        .filter(key => (input as any)[key][modifiers[key]])
-        .map(key => (input as any)[key][modifiers[key]])
+        .map(
+          key => (input as any)[key][modifiers[key]] || (modifiers[key] && (input as any)[key]._)
+        )
+        .filter(input => input) // only return defined class names
     );
   };
 

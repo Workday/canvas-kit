@@ -1,6 +1,6 @@
 import React from 'react';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {FormFieldGroup} from '@workday/canvas-kit-preview-react/form-field';
+import {FormFieldGroup} from '@workday/canvas-kit-react/form-field';
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 
 export const RefForwarding = () => {

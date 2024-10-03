@@ -7,8 +7,11 @@ import {controlComponent} from '../../../../../../utils/storybook';
 
 export const ScrollableLeft = () => {
   return (
-    <FormField labelPosition={FormField.LabelPosition.Left} label="Label" inputId="select-default">
-      {controlComponent(<Select name="contact" options={manyOptions} />)}
+    <FormField orientation="horizontalStart" id="select-default">
+      <FormField.Label>Label</FormField.Label>
+      <FormField.Field>
+        {controlComponent(<FormField.Input as={Select} name="contact" options={manyOptions} />)}
+      </FormField.Field>
     </FormField>
   );
 };

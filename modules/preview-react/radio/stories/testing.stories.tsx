@@ -6,7 +6,7 @@ import {
   permutateProps,
 } from '@workday/canvas-kit-react/testing';
 import {customColorTheme} from '../../../../utils/storybook';
-import {FormFieldGroup} from '@workday/canvas-kit-preview-react/form-field';
+import {FormFieldGroup} from '@workday/canvas-kit-react/form-field';
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 
 const hintText = 'Helpful text goes here.';

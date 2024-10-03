@@ -7,8 +7,11 @@ import {controlComponent} from '../../../../../../utils/storybook';
 
 export const Default = () => {
   return (
-    <FormField label="Label" inputId="select-default">
-      {controlComponent(<Select name="contact" options={options} />)}
+    <FormField id="select-default">
+      <FormField.Label>Label</FormField.Label>
+      <FormField.Field>
+        {controlComponent(<FormField.Input as={Select} name="contact" options={options} />)}
+      </FormField.Field>
     </FormField>
   );
 };

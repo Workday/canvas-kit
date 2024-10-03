@@ -25,7 +25,7 @@ provide semantic tokens that can translate to theming components.
 
 A note to the reader:
 
-- While we still support our old tokens from `@workday/canvas-kit-react/tokens`, you must
+- While we still support our old tokens from `@workday/canvas-kit-react/tokens`, **you must**
   install our new tokens from `@workday/canvas-tokens-web`. You can find more info in our
   [docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
 
@@ -43,10 +43,11 @@ A note to the reader:
 - [Component Updates](#component-updates)
   - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
   - [Avatar](#avatar)
-  - [Select](#select)
   - [Form Field](#form-field)
     - [Form Field Group](#form-field-group)
     - [Form Field Field](#form-field-field)
+  - [Search Form](#search-form)
+  - [Select](#select)
   - [Text Area](#text-area)
 - [Troubleshooting](#troubleshooting)
 - [Glossary](#glossary)
@@ -58,9 +59,8 @@ A note to the reader:
 
 In v12, all the components listed in this guide have started using our new
 [Canvas Tokens Web](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
-
-In v12 you must add `@workday/canvas-tokens-web` to ensure our components are properly styled and
-the variables are defined. For more information on installing and using, please reference our tokens
+**You must** add `@workday/canvas-tokens-web` to ensure our components are properly styled and the
+variables are defined. For more information on installing and using, please reference our tokens
 [docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
 
 ## Codemod
@@ -69,9 +69,10 @@ We've provided a [codemod](https://github.com/Workday/canvas-kit/tree/master/mod
 automatically update your code to work with most of the breaking changes in v12. **Breaking changes
 handled by the codemod are marked with 🤖 in the Upgrade Guide.**
 
-> **Note: In v12, we have done some infrastructure updates with moving to Storybook 7, Webpack 5, Typescript 4.9 and Cypress 13 . With
-these updates has come some formatting issues after running our codemods. We recommend running a
-formatter to address the format issues that have been introduced in v12.**
+> **Note: In v12, we have done some infrastructure updates with moving to Storybook 7, Webpack 5,
+> Typescript 4.9 and Cypress 13 . With these updates has come some formatting issues after running
+> our codemods. We recommend running a formatter to address the format issues that have been
+> introduced in v12.**
 
 A codemod is a script that makes programmatic transformations on your codebase by traversing the
 [AST](https://www.codeshiftcommunity.com/docs/understanding-asts), identifying patterns, and making
@@ -132,7 +133,9 @@ yarn remove @workday/canvas-kit-codemod
 
 ### Compatibility Mode
 
-In v12, we have addressed a style merge issue with removing forced compatibility mode. For more information on this change, please read our [discussion](https://github.com/Workday/canvas-kit/discussions/2893).
+In v12, we have addressed a style merge issue with removing forced compatibility mode. For more
+information on this change, please read our
+[discussion](https://github.com/Workday/canvas-kit/discussions/2893).
 
 ## Deprecations
 
@@ -144,9 +147,9 @@ deprecated code is removed.
 
 **PR:** [#2865](https://github.com/Workday/canvas-kit/pull/2865)
 
-We've deprecated `FormField.Container` in v12. Please use `FormField.Field` or `FormFieldGroup.Field` for
-grouped inputs as this ensures proper label alignment and spacing of inputs and hint text, regardless
-of the orientation.
+We've deprecated `FormField.Container` in v12. Please use `FormField.Field` or
+`FormFieldGroup.Field` for grouped inputs as this ensures proper label alignment and spacing of
+inputs and hint text, regardless of the orientation.
 
 ```tsx
 // v11
@@ -187,8 +190,7 @@ from Main instead.
 
 ### Styling API and CSS Tokens
 
-**PRs:**
-[#2793](https://github.com/Workday/canvas-kit/pull/2793),
+**PRs:** [#2793](https://github.com/Workday/canvas-kit/pull/2793),
 [#2865](https://github.com/Workday/canvas-kit/pull/2865),
 [#2881](https://github.com/Workday/canvas-kit/pull/2881),
 [#2825](https://github.com/Workday/canvas-kit/pull/2825),
@@ -199,6 +201,10 @@ Several components have been refactored to use our new
 [styling API](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
 The React interface **has not changed**, but CSS variables are now used for dynamic properties.
 
+> **Note:** These components also support our new `cs` prop for styling. Learn more about styling
+> with `cs` in our
+> [documentation](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--cs-prop).
+
 The following components are affected:
 
 - `Avatar`
@@ -208,10 +214,6 @@ The following components are affected:
 - `TextArea`
 - `TextInput`
 - `Toast`
-
-> **Note:** These components also support our new `cs` prop for styling. Learn more about styling
-> with `cs` in our
-> [documentation](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--cs-prop).
 
 ### Avatar
 
@@ -226,7 +228,7 @@ The following changes have been made to the API:
   `"extraExtraLarge" | "extraLarge" | "large" | "medium" | "small" | "extraSmall" | (string{})`
 - `Avatar.Variant` has been deprecated. The `variant` prop still accepts `Avatar.Variant` in
   addition to the following values: `"dark" | "light"`
-- The `as` prop now accepts any element, not just `div`.
+- The `as` prop now accepts any element, not just a `div`.
 
 > **Note:** Both `Avatar.Size` and `Avatar.Variant` have been deprecated in favor of the new string
 > union types. You will see a console warn message while in development if you're still using this.
@@ -234,42 +236,113 @@ The following changes have been made to the API:
 
 ### Form Field
 
+<div style={{display: 'inline-flex', gap: '.5rem'}}>
+  <StatusIndicator variant="red" emphasis="low">
+    <StatusIndicator.Label>Breaking Change</StatusIndicator.Label>
+  </StatusIndicator>
+  <StatusIndicator variant="green" emphasis="low">
+    <StatusIndicator.Label>🤖 Codemod Available</StatusIndicator.Label>
+  </StatusIndicator>
+</div>
+
 **PRs:** [#2865](https://github.com/Workday/canvas-kit/pull/2865),
-[#2881](https://github.com/Workday/canvas-kit/pull/2881)
+[#2881](https://github.com/Workday/canvas-kit/pull/2881),
+[#2934](https://github.com/Workday/canvas-kit/pull/2934)
 
 We've promoted FormField from [Preview](#preview) to [Main](#main). The following changes has been
 made to provide more flexibility and better explicit components when using inputs.
 
 - The orientation prop on the `FormField` component will be updated to accept the following values:
-  `vertical`, `horizontalStart`, and `horizontalEnd`. `horizontal` will still be accepted as a value
-  in v12, but it will be deprecated and slated for removal in a future major release. These changes
-  are intended to provide more flexibility with label alignments on `FormField` elements.
+  `"vertical"`, `"horizontalStart"`, and `"horizontalEnd"`. `"horizontal"` will still be accepted as
+  a value in v12, but it will be deprecated and slated for removal in a future major release. These
+  changes are intended to provide more flexibility with label alignments on `FormField` elements.
 
 > **Note**: The horizontal alignment of start and end are relative to its container, meaning start
 > and end match the flex property of `flex-start` and `flex-end`. This is especially applicable for
 > moving between RTL (right-to-left) and LTR (left-to-right) languages.
 
-> **Note:** Orientation "horizontal" has been deprecated. You will see a console warn message
-> suggesting to update your types and usage to `horizontalStart`, `horizontalEnd` or `vertical`.
+> **Note:** Orientation `"horizontal"` has been deprecated. You will see a console warn message
+> suggesting to update your types and usage to `"horizontalStart"`, `"horizontalEnd"` or
+> `"vertical"`.
 
 - `useFormFieldModel`: `orientation` has been added back into `useFormFieldModel`. While we still
   support compat mode due to
   [style merging issues](https://github.com/Workday/canvas-kit/discussions/2893), having orientation
   on the model allows for proper styling of sub components.
 
-- Styles clean up. `FormField.Hint` and `FormField.Label` where using `margin` for spacing. We've
+- Styles clean up: `FormField.Hint` and `FormField.Label` where using `margin` for spacing. We've
   updated styles so that the containing element uses `gap` for proper spacing.
 
+- We've added a new
+  [example](https://workday.github.io/canvas-kit/?path=/docs/examples-forms-density-and-alignment--docs)
+  to our docs to showcase how our inputs can be styled in different environments like density and
+  container alignment.
+
 > **Note:** If spacing seems off between the input and hint text, ensure you're using
-> `FormField.Field` wrappign your input and hint text.
+> `FormField.Field` wrapping your input and hint text.
+
+##### Breaking API Change
+
+The newly promoted `FormField` is a
+[compound component](https://workday.github.io/canvas-kit/?path=/docs/guides-compound-components--page).
+Due to the different APIs of the component, this change is **not codemodable**. The following shows
+an example of how to **update** your code to match the new compound component API.
+
+```tsx
+// v11 FormField in Main
+<FormField
+  error={FormField.ErrorType.Alert}
+  labelPosition={FormField.LabelPosition.Left}
+  useFieldSet={true}
+  required={true}
+  hintId="hint-alert"
+  hintText="Please enter a valid email."
+  label="Email"
+>
+  <TextInput onChange={handleChange} value={value} />
+</FormField>
+
+
+// v12 Newly promoted FormField from Preview to Main
+<FormField
+  error="error"
+  orientation="horizontalStart"
+  isRequired={true}
+>
+	<FormField.Label>Email</FormField.Label>
+	<FormField.Field>
+		<FormField.Input as={TextInput} onChange={handleChange} value={value} />
+		<FormField.Hint>Please enter a valid email.</FormField.Hint>
+	</FormField.Field>
+</FormField>
+```
+
+**Noticeable changes:**
+
+- `error` prop takes in the following values: `"error" | "alert"`.
+- `labelPosition` becomes `orientation` with the following values:
+  `"horizontal" | "horizontalStart" | "horizontalEnd" | "vertical"`.
+- `useFieldSet` is no longer valid. If you want to group inputs, use
+  [`FormFieldGroup`](#form-field-group) component.
+- `required` becomes `isRequired`.
+- `hintId` is no longer needed. The component handles associating the hint text, label and input
+  automatically. If you wish to have a unique `id`, you can add one onto the `FormField` element.
+- `hintText` is no longer a valid prop. Use `FormField.Hint` sub-component.
+- `errorLabel` and `alertLabel` are no longer valid props. Customize your hint text inside of
+  `FormField.Hint`.
+- `label` is no longer a valid prop. Use `FormField.Label` sub component to render your label text.
+- Instead of rendering an input, ensure you use `FormField.Input` with the `as` prop. This ensures
+  proper error handling and aria attributes for accessibility.
 
 🤖 The codemod will handle the change of `orientation="horizontal"` to
-`orientation="horizontalStart"` if you're using the string literal values.
+`orientation="horizontalStart"` if you're using the string literal values. It will also handle
+updating your imports from `@workday/canvas-kit-preview-react/form-field` to
+`@workday/canvas-kit-react/form-field`.
 
 #### Form Field Group
 
-We've added a new component under `FromField` to allow users to group inputs without worrying about
-setting the `as` prop on the `FormField` component.
+We've added a new component to the `FormField` package to allow users to group inputs without
+worrying about setting the `as` prop on the `FormField` component.
 
 Use `FormFieldGroup` when you have a group of inputs that need to be associated to one another, like
 `RadioGroup` or a group of `Checkbox`'s.
@@ -302,6 +375,14 @@ this sub-component when using `FormField`. This component also exists on `FormFi
 </FormField>
 ```
 
+### Search Form (Labs)
+
+**PRs:** [#2934](https://github.com/Workday/canvas-kit/pull/2934),
+
+`SearchForm` is now using the newly promoted `FormField` component. `SearchForm` now uses `labelId`
+to set the appropiate aria attributes and `id` on the underlying input element. There should be no
+visual breaking changes and the API remains the same.
+
 ### Select
 
 **PR:** [#2865](https://github.com/Workday/canvas-kit/pull/2865)
@@ -310,7 +391,7 @@ As we transition to use our CSS tokens to provide better theming capabilities an
 methods, we're moving away from components extending `Themeable`. `Themeable` has been removed from
 `SelectProps.`
 
-If you wish to theme `Select` we suggest using the CanvasProvider to do so.
+If you wish to theme `Select` we suggest using the `CanvasProvider` to do so.
 
 ```tsx
 const theme: PartialEmotionCanvasTheme = {

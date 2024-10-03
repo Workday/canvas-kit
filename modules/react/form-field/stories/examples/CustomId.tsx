@@ -1,9 +1,9 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 
-export const Grow = () => {
+export const CustomId = () => {
   const [value, setValue] = React.useState('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -12,9 +12,11 @@ export const Grow = () => {
 
   return (
     <Flex>
-      <FormField grow>
+      <FormField id="first-name">
         <FormField.Label>First Name</FormField.Label>
-        <FormField.Input as={TextInput} value={value} onChange={handleChange} />
+        <FormField.Field>
+          <FormField.Input as={TextInput} value={value} onChange={handleChange} />
+        </FormField.Field>
       </FormField>
     </Flex>
   );
