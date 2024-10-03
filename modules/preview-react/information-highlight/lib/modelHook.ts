@@ -1,10 +1,10 @@
 import {createModelHook} from '@workday/canvas-kit-react/common';
 
-export type Variant = 'emphasis' | 'caution' | 'attention';
+export type Variant = 'informational' | 'caution' | 'attention';
 
 export const useInformationHighlightModel = createModelHook({
   defaultConfig: {
-    variant: 'emphasis' as Variant,
+    variant: 'informational' as Variant,
   },
 })(config => {
   return {

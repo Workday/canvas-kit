@@ -7,17 +7,16 @@ import {Base, BaseProps} from './lib/Base';
 import {Heading} from './lib/Heading';
 import {Body} from './lib/Body';
 import {Icon} from './lib/Icon';
-import {Link} from './lib/Link';
+import {Button} from './lib/Button';
 import {useInformationHighlightModel} from './lib/modelHook';
 
-type Variant = 'emphasis' | 'caution' | 'attention';
+type Variant = 'informational' | 'caution' | 'attention';
 
 interface InformationHighlightProps extends BaseProps {
   variant?: Variant;
 }
 
 const containerStyles = createStyles({
-  backgroundColor: base.soap100,
   display: 'grid',
   gridTemplateColumns: 'min-content',
   columnGap: system.space.x4,
@@ -28,14 +27,17 @@ const containerStyles = createStyles({
 
 const containerModifiers = createModifiers({
   variant: {
-    emphasis: createStyles({
-      borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(base.blueberry400)}`,
+    informational: createStyles({
+      border: `solid ${cssVar(system.shape.half)} ${cssVar(base.blueberry400)}`,
+      backgroundColor: system.color.static.blue.soft,
     }),
     caution: createStyles({
-      borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(base.cantaloupe400)}`,
+      border: `solid ${cssVar(system.shape.half)} ${cssVar(base.cantaloupe400)}`,
+      backgroundColor: system.color.static.orange.soft,
     }),
     attention: createStyles({
-      borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(base.cinnamon500)}`,
+      border: `solid ${cssVar(system.shape.half)} ${cssVar(base.cinnamon500)}`,
+      backgroundColor: system.color.static.red.soft,
     }),
   },
 });
@@ -47,7 +49,7 @@ export const InformationHighlight = createContainer('section')({
     Icon: Icon,
     Heading: Heading,
     Body: Body,
-    Link: Link,
+    Button: Button,
   },
 })((props: InformationHighlightProps, Element, model) => {
   return (

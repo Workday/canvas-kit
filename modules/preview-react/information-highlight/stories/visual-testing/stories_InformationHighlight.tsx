@@ -34,12 +34,12 @@ export const InformationHighlightStates = () => {
         ]}
       >
         {({props}) => {
-          const {heading, body, link} = props;
+          const {heading, body, button} = props;
           return (
             <InformationHighlight>
               <InformationHighlight.Heading>heading</InformationHighlight.Heading>
               <InformationHighlight.Body>body</InformationHighlight.Body>
-              <InformationHighlight.Link>link</InformationHighlight.Link>
+              <InformationHighlight.Button>button</InformationHighlight.Button>
             </InformationHighlight>
           );
         }}

@@ -1,0 +1,108 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><title>Webpack App</title><meta name="viewport" content="width=device-width,initial-scale=1"/><style>html, body {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  * {
+    box-sizing: border-box;
+  }</style><script>/* globals window */
+  /* eslint-disable no-underscore-dangle */
+  try {
+    if (window.top !== window) {
+      window.__REACT_DEVTOOLS_GLOBAL_HOOK__ = window.top.__REACT_DEVTOOLS_GLOBAL_HOOK__;
+    }
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.warn('unable to connect to top frame for connecting dev tools');
+  }
+
+  window.onerror = function onerror(message, source, line, column, err) {
+    if (window.CONFIG_TYPE !== 'DEVELOPMENT') return;
+    // eslint-disable-next-line no-var, vars-on-top
+    var xhr = new window.XMLHttpRequest();
+    xhr.open('POST', '/runtime-error');
+    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    xhr.send(
+      JSON.stringify({
+        /* eslint-disable object-shorthand */
+        message: message,
+        source: source,
+        line: line,
+        column: column,
+        error: err && { message: err.message, name: err.name, stack: err.stack },
+        origin: 'manager',
+        /* eslint-enable object-shorthand */
+      })
+    );
+  };</script><link rel="icon" type="image/png" href="/canvas-kit-favicon.png" sizes="192x192"/><link rel="shortcut icon" href="/canvas-kit-favicon.ico"/><link href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500&display=swap" rel="stylesheet"/><script src="https://use.fontawesome.com/660238b999.js"></script><script>document.title = 'Canvas Kit Storybook';</script><style>[title^='_hidden_'] {
+    /* display: none !important; */
+  }</style><style>body {
+    font-family: "Roboto", sans-serif;
+    background: #e6f1ff !important;
+    font-size: 14px;
+  }
+  #storybook-explorer-tree {
+    font-family: "Roboto", sans-serif;
+  }
+  .sto-1ngr21r {
+    color: #0875e1 !important;
+    font-size: 20px;
+    font-family: "Roboto", sans-serif;
+  }
+
+  #storybook-explorer-menu svg {
+    color: #0875e1;
+  }
+
+  #storybook-explorer-menu button:focus,
+  #storybook-explorer-menu a[data-selected]:hover {
+    background-color: #a6d2ff;
+  }
+
+  #storybook-explorer-menu a[data-selected="true"],
+  #storybook-explorer-menu a[data-selected="true"]:hover {
+    background-color: #0875e1;
+    color: #e6f1ff;
+  }
+
+  #storybook-explorer-menu a[data-selected="true"] svg {
+    color: #d7eafc;
+  }
+
+  .sidebar-subheading button,
+  .sidebar-subheading span,
+  .sidebar-item span {
+      color: #5e6a75;
+  }
+
+  .os-content button:hover,
+  .os-content button:focus {
+    background-color: #a6d2ff;
+    color: #0875e1;
+  }
+
+  .os-content button:hover svg {
+    color: #0875e1;
+  }</style><style>#root[hidden],
+      #docs-root[hidden] {
+        display: none !important;
+      }</style></head><body><div id="root"></div><div id="docs-root"></div><script>window['CONFIG_TYPE'] = "PRODUCTION";
+          
+      
+          
+            window['LOGLEVEL'] = "info";
+          
+      
+          
+            window['FEATURES'] = {"postcss":true,"emotionAlias":false,"warnOnLegacyHierarchySeparator":true,"buildStoriesJson":false,"storyStoreV7":false,"modernInlineRender":false,"breakingChangesV7":false,"interactionsDebugger":false,"babelModeV7":false,"argTypeTargetsV7":false,"previewMdx2":false};
+          
+      
+          
+      
+          
+      
+          
+            window['DOCS_MODE'] = false;</script><script src="runtime~main.8aba5ec0c355ed79f4f7.manager.bundle.js"></script><script src="vendors~main.1c0af707d578741e60d7.manager.bundle.js"></script><script src="main.d693d1bf433e64f85de1.manager.bundle.js"></script></body></html>
