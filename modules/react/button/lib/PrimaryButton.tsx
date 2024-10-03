@@ -116,7 +116,7 @@ const primaryButtonStencil = createStencil({
 export const PrimaryButton = createComponent('button')({
   displayName: 'PrimaryButton',
   Component: (
-    {children, size, grow, iconPosition, variant, ...elemProps}: PrimaryButtonProps,
+    {children, size, iconPosition, variant, ...elemProps}: PrimaryButtonProps,
     ref,
     Element
   ) => {
@@ -125,7 +125,7 @@ export const PrimaryButton = createComponent('button')({
         as={Element}
         ref={ref}
         iconPosition={iconPosition}
-        {...mergeStyles(elemProps, primaryButtonStencil({size, grow, iconPosition, variant}))}
+        {...mergeStyles(elemProps, primaryButtonStencil({size, iconPosition, variant}))}
       >
         {children}
       </Button>
