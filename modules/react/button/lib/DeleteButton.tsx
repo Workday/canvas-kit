@@ -16,7 +16,6 @@ import {mergeStyles} from '@workday/canvas-kit-react/layout';
 export interface DeleteButtonProps extends ButtonProps {}
 
 const deleteButtonStencil = createStencil({
-  extends: buttonStencil,
   base: {
     // Base Styles
     [buttonStencil.vars.background]: brand.error.base,
@@ -60,14 +59,9 @@ const deleteButtonStencil = createStencil({
  */
 export const DeleteButton = createComponent('button')({
   displayName: 'DeleteButton',
-  Component: ({children, size, iconPosition, ...elemProps}: DeleteButtonProps, ref, Element) => {
+  Component: ({children, ...elemProps}: DeleteButtonProps, ref, Element) => {
     return (
-      <Button
-        as={Element}
-        ref={ref}
-        iconPosition={iconPosition}
-        {...mergeStyles(elemProps, deleteButtonStencil({size, iconPosition}))}
-      >
+      <Button as={Element} ref={ref} {...mergeStyles(elemProps, deleteButtonStencil())}>
         {children}
       </Button>
     );

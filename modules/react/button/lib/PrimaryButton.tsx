@@ -21,7 +21,6 @@ export interface PrimaryButtonProps extends ButtonProps {
 }
 
 const primaryButtonStencil = createStencil({
-  extends: buttonStencil,
   base: {
     // Base Styles
     [buttonStencil.vars.background]: brand.primary.base,
@@ -115,18 +114,9 @@ const primaryButtonStencil = createStencil({
 
 export const PrimaryButton = createComponent('button')({
   displayName: 'PrimaryButton',
-  Component: (
-    {children, size, iconPosition, variant, ...elemProps}: PrimaryButtonProps,
-    ref,
-    Element
-  ) => {
+  Component: ({children, variant, ...elemProps}: PrimaryButtonProps, ref, Element) => {
     return (
-      <Button
-        as={Element}
-        ref={ref}
-        iconPosition={iconPosition}
-        {...mergeStyles(elemProps, primaryButtonStencil({size, iconPosition, variant}))}
-      >
+      <Button as={Element} ref={ref} {...mergeStyles(elemProps, primaryButtonStencil({variant}))}>
         {children}
       </Button>
     );
