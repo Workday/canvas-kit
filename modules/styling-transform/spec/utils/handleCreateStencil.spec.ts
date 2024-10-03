@@ -485,6 +485,56 @@ describe('handleCreateStencil', () => {
       );
     });
 
+    it('should handle modifiers with fallthrough keys', () => {
+      const program = createProgramFromSource(`
+        import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+
+        const buttonStencil = createStencil({
+          vars: {
+            padding: ''
+          },
+          base: {},
+          modifiers: {
+            padding: {
+              large: {
+                padding: 40,
+              },
+              small: {
+                padding: 20,
+              }
+              _: ({ padding }) => ({
+                padding
+              })
+            }
+          }
+        })
+      `);
+
+      const styles = {};
+      const names = {};
+      const extractedNames = {};
+
+      const result = transform(
+        program,
+        'test.ts',
+        withDefaultContext(program.getTypeChecker(), {styles, names, extractedNames})
+      );
+
+      expect(result).toMatch(/base: { name: "[0-9a-z]+", styles: "box-sizing:border-box;" }/);
+      expect(result).toMatch(/large: { name: "[0-9a-z]+", styles: "padding:40px;" }/);
+      expect(result).toMatch(
+        /_: { name: "[0-9a-z]+", styles: "padding:var\(--padding-button-[a-z0-9]+\);" }/
+      );
+
+      expect(styles['test.css']).toContainEqual(compileCSS('.css-button{box-sizing:border-box;}'));
+      expect(styles['test.css']).toContainEqual(
+        compileCSS('.css-button.padding-large{padding: 40px;}')
+      );
+      expect(styles['test.css']).toContainEqual(
+        compileCSS('.css-button.padding{padding: var(--css-button-padding)}')
+      );
+    });
+
     it('should add to extracted styles', () => {
       const program = createProgramFromSource(`
         import {createStencil} from '@workday/canvas-kit-styling';

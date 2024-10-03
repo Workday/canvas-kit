@@ -36,9 +36,17 @@ type DefaultedVarsShape = Record<string, string> | Record<string, Record<string,
 
 /**
  * Wrap all unwrapped CSS Variables. For example, `{padding: '--foo'}` will be replaced with
- * `{padding: 'var(--foo)'}`. It also works on variables in the middle of the property.
+ * `{padding: 'var(--foo)'}`. It also works on variables in the middle of the property. Takes any
+ * string and returns a string with CSS variables wrapped if necesary.
+ * 
+ * ```ts
+ * maybeWrapCSSVariables('1rem'); // 1rem
+ * maybeWrapCSSVariables('--foo'); // var(--foo)
+ * maybeWrapCSSVariables('var(--foo)'); // var(--foo)
+ * maybeWrapCSSVariables('calc(--foo)'); // calc(var(--foo))
+ * ```
  */
-function maybeWrapCSSVariables(input: string): string {
+export function maybeWrapCSSVariables(input: string): string {
   // matches an string starting with `--` that isn't already wrapped in a `var()`. It tries to match
   // any character that isn't a valid separator in CSS
   return input.replace(
@@ -407,8 +415,10 @@ export function createModifiers<M extends ModifierConfig>(input: M): ModifierRet
   const modifierFn = (modifiers: Partial<ModifierValues<M>>) => {
     return combineClassNames(
       Object.keys(input)
-        .filter(key => (input as any)[key][modifiers[key]])
-        .map(key => (input as any)[key][modifiers[key]])
+        .map(
+          key => (input as any)[key][modifiers[key]] || (modifiers[key] && (input as any)[key]._)
+        )
+        .filter(input => input) // only return defined class names
     );
   };
 
@@ -745,7 +755,7 @@ export function handleCsProp<
   // In order to allow everyone to use createStyles and createStencil without worrying about style merge issues, we're going
   // to enable compat mode all the time. We'll look into possible out-of-order execution issues in the future and plan to re-enable
   // full static mode (for better performance) once we know why this is happening and have a proper workaround.
-  let shouldRuntimeMergeStyles = true;
+  let shouldRuntimeMergeStyles = false;
 
   // The order is intentional. The `className` should go first, then the `cs` prop. If we don't do
   // runtime merging, this order doesn't actually matter because the browser doesn't care the order
@@ -1069,6 +1079,7 @@ function combineClassNames(input: (string | undefined)[]): string {
  *   }
  * })
  * ```
+ * @deprecated `parentModifier` is deprecated. While we support compat mode, we can't use `parentModifier`. If consumers pass in a style prop, this will created an unstable hash, breaking this function.
  */
 export function parentModifier(value: string) {
   return `.${value.replace('css-', 'm')} :where(&)`;
@@ -1220,7 +1231,7 @@ export const createInstance: typeof _createInstance = options => {
     _instance = _createInstance({key: 'css', ...options});
   } else {
     // @ts-ignore
-    if (process && process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === 'development') {
       console.warn(
         'An instance has already been created. `createInstance` cannot be called after styles have already been created. Canvas Kit styles are created immediately, so this function must be called before any Canvas Kit components are even imported.'
       );
