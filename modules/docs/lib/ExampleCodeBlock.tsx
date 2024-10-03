@@ -60,10 +60,19 @@ export const ExampleCodeBlock = ({code}: any) => {
     setCopied(true);
     // @ts-ignore
     navigator.clipboard.writeText(textInput.current.textContent);
-    setTimeout(() => {
-      setCopied(false);
-    }, 2000);
   };
+
+  React.useEffect(() => {
+    if (copied === true) {
+      const copyCodeTimeout = setTimeout(() => {
+        setCopied(false);
+      }, 2000);
+
+      return () => {
+        clearTimeout(copyCodeTimeout);
+      };
+    }
+  }, [copied]);
 
   return (
     <div {...cardStencil({opened: isCodeDisplayed})}>
@@ -99,7 +108,7 @@ export const ExampleCodeBlock = ({code}: any) => {
               />
             </div>
           )}
-          <Tooltip title="Copy Source">
+          <Tooltip title={copied ? 'Copied!' : 'Copy Source Code'}>
             <TertiaryButton
               aria-label="Copy Code"
               size="large"
