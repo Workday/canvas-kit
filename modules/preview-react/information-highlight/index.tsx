@@ -28,15 +28,18 @@ const containerStyles = createStyles({
 const containerModifiers = createModifiers({
   variant: {
     informational: createStyles({
-      border: `solid ${cssVar(system.shape.half)} ${cssVar(base.blueberry400)}`,
+      border: `solid ${cssVar(system.shape.half)}`,
+      borderColor: `${cssVar(base.blueberry400)}`,
       backgroundColor: system.color.static.blue.soft,
     }),
     caution: createStyles({
-      border: `solid ${cssVar(system.shape.half)} ${cssVar(base.cantaloupe400)}`,
+      border: `solid ${cssVar(system.shape.half)}`,
+      borderColor: ` ${cssVar(base.cantaloupe400)}`,
       backgroundColor: system.color.static.orange.soft,
     }),
     attention: createStyles({
-      border: `solid ${cssVar(system.shape.half)} ${cssVar(base.cinnamon500)}`,
+      border: `solid ${cssVar(system.shape.half)}`,
+      borderColor: `${cssVar(base.cinnamon500)}`,
       backgroundColor: system.color.static.red.soft,
     }),
   },

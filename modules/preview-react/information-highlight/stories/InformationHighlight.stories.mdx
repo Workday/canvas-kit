@@ -9,13 +9,13 @@ import {IconCaution} from './examples/Icon-caution'
 import {IconInformational} from './examples/Icon-informational'
 import {Button} from './examples/Button'
 import {IconCustom} from './examples/Icon-custom'
+import {Basic} from './examples/Basic'
 
 <Meta title="Preview/Information Highlight" component={InformationHighlight} />
 
 # Information Highlight
 
-A layout that will separate out text or other information  to make it more prominent to the user
-
+An `Information Highlight` draws user attention to important details
 ## Installation
 
 ```sh
@@ -24,33 +24,47 @@ yarn add @workday/canvas-kit-react
 
 
 ## Usage
+`Information Highlight` should be used to call out important elements of the page. It has three emphases built in:
+Informational, Caution, and Attention. The emphases have different icons and colors to convey severity.
+If no emphasis is selected the layout will default to Informational.
 
 ### Basic Example
 
+The `Information Highlight` has props for `Icon`, `Heading`, `Body`, and `Button`
 
-<ExampleCodeBlock code={Body} />
+<ExampleCodeBlock code={Basic} />
 
 ### Heading Example
 
-You can open your component by default using the `initialOpen` prop.
-
+Only `Heading` used
 <ExampleCodeBlock code={Heading} />
 
-### Link Example
+### Body Example
+
+Only `Body` used
+
+<ExampleCodeBlock code={Body} />
+
+
+### Button Example
+
+We do not recommend using `Information Highlight` to only display a button
 
 <ExampleCodeBlock code={Button} />
 
 
-### Attention Example
+## Emphasis
 
+### Attention Example
+Attention should be used to warn users if certain actions will have destructive consequences
 <ExampleCodeBlock code={IconAttention} />
 
-#### Caution Example
-
+### Caution Example
+Caution should be used to warn users if a certain action will have unwanted consequences
 <ExampleCodeBlock code={IconCaution} />
 
-### Emphasis Example
-
+### Informational Example
+Informational should be used to provide extra details about information already on the page
 <ExampleCodeBlock code={IconInformational} />
 
 ### Custom Example

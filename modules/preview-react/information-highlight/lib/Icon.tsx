@@ -7,24 +7,24 @@ import {
   exclamationCircleIcon,
   exclamationTriangleIcon,
 } from '@workday/canvas-system-icons-web';
-import {base, system} from '@workday/canvas-tokens-web';
+import {base} from '@workday/canvas-tokens-web';
 import {useInformationHighlightModel} from './modelHook';
 
 type Variant = 'informational' | 'caution' | 'attention';
 
 const iconStyles = {
   informational: {
-    accent: system.color.static.white,
+    accent: cssVar(base.frenchVanilla100),
     background: cssVar(base.blueberry400),
     color: cssVar(base.blueberry400),
   },
   caution: {
-    accent: system.color.static.white,
+    accent: cssVar(base.frenchVanilla100),
     background: cssVar(base.cantaloupe400),
     color: cssVar(base.cantaloupe400),
   },
   attention: {
-    accent: system.color.static.white,
+    accent: cssVar(base.frenchVanilla100),
     background: cssVar(base.cinnamon500),
     color: cssVar(base.cinnamon500),
   },
@@ -43,12 +43,15 @@ const defaultIcons = {
 export const Icon = createSubcomponent('span')({
   displayName: 'Icon',
   modelHook: useInformationHighlightModel,
-})(({icon, ...props}: IconProps, Element, model) => {
+})(({icon, accent, color, ...props}: IconProps, Element, model) => {
   return (
     <SystemIcon
       as={Element}
       icon={icon ? icon : defaultIcons[model.state.variant]}
       {...iconStyles[model.state.variant]}
+      accent={accent ? accent : iconStyles[model.state.variant].accent}
+      color={color ? color : iconStyles[model.state.variant].color}
+      background={color ? color : iconStyles[model.state.variant].background}
       {...props}
     />
   );
