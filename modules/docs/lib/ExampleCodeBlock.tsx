@@ -55,24 +55,32 @@ export const ExampleCodeBlock = ({code}: any) => {
   const [isCodeDisplayed, setCodeDisplayed] = React.useState(false);
   const textInput = React.useRef(null);
   const [copied, setCopied] = React.useState(false);
+  const timer = React.useRef<ReturnType<typeof setTimeout>>();
 
   const onCopy = () => {
+    if (timer.current) {
+      clearTimeout(timer.current);
+    }
+    timer.current = setTimeout(() => {
+      setCopied(false);
+    }, 2000);
+
     setCopied(true);
     // @ts-ignore
     navigator.clipboard.writeText(textInput.current.textContent);
   };
 
-  React.useEffect(() => {
-    if (copied === true) {
-      const copyCodeTimeout = setTimeout(() => {
-        setCopied(false);
-      }, 2000);
+  // React.useEffect(() => {
+  //   if (copied) {
+  //     const copyCodeTimeout = setTimeout(() => {
+  //       setCopied(false);
+  //     }, 2000);
 
-      return () => {
-        clearTimeout(copyCodeTimeout);
-      };
-    }
-  }, [copied]);
+  //     return () => {
+  //       clearTimeout(copyCodeTimeout);
+  //     };
+  //   }
+  // }, [copied]);
 
   return (
     <div {...cardStencil({opened: isCodeDisplayed})}>
