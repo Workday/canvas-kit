@@ -1,6 +1,10 @@
 import React from 'react';
 
-import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/testing';
+import {
+  StaticStates,
+  ComponentStatesTable,
+  permutateProps,
+} from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 
 import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
@@ -14,32 +18,37 @@ export const InformationHighlightStates = () => {
   return (
     <StaticStates>
       <ComponentStatesTable
-        columnProps={[
-          {label: 'Emphasis', props: {icon: 'emphasis'}},
-          {label: 'Caution', props: {icon: 'caution'}},
-          {label: 'Attention', props: {icon: 'attention'}},
-        ]}
         rowProps={[
-          {label: 'Empty', props: {}},
-          {label: 'Only Heading', props: {heading: 'Heading'}},
-          {label: 'Only Body', props: {body: 'this is a body of text'}},
-          {label: 'Only Link', props: {link: 'hypertext'}},
-          {label: 'Heading and Body', props: {heading: 'Heading', body: 'this is a body of text'}},
-          {label: 'Heading and Link', props: {heading: 'Heading', link: 'hypertext'}},
-          {label: 'Body and Link', props: {body: 'this is a body of text', link: 'hypertext'}},
+          {label: 'Only Heading', props: {heading: true}},
+          {label: 'Only Body', props: {body: true}},
+          {label: 'Heading and Body', props: {heading: true, body: true}},
+          {label: 'Heading and Link', props: {heading: true, button: true}},
+          {label: 'Body and Link', props: {body: true, button: true}},
           {
             label: 'Heading, Body, and Link',
-            props: {heading: 'Heading', body: 'this is a body of text', link: 'hypertext'},
+            props: {heading: true, body: true, button: true},
           },
         ]}
+        columnProps={[
+          {label: 'Informational', props: {variant: 'informational'}},
+          {label: 'Caution', props: {variant: 'caution'}},
+          {label: 'Attention', props: {variant: 'attention'}},
+        ]}
       >
-        {({props}) => {
-          const {heading, body, button} = props;
+        {props => {
+          const {variant, heading, body, button} = props;
           return (
-            <InformationHighlight>
-              <InformationHighlight.Heading>heading</InformationHighlight.Heading>
-              <InformationHighlight.Body>body</InformationHighlight.Body>
-              <InformationHighlight.Button>button</InformationHighlight.Button>
+            <InformationHighlight variant={variant}>
+              <InformationHighlight.Icon variant={undefined} icon={undefined} />
+              {heading && <InformationHighlight.Heading>Lorem ipsum</InformationHighlight.Heading>}
+              {body && (
+                <InformationHighlight.Body>
+                  {' '}
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                  incididunt ut labore et dolore magna aliqua.{' '}
+                </InformationHighlight.Body>
+              )}
+              {button && <InformationHighlight.Button>Action</InformationHighlight.Button>}
             </InformationHighlight>
           );
         }}

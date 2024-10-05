@@ -24,8 +24,11 @@ export const IconCustom = () => {
         icon={chartIcon}
         color={cssVar(base.greenApple500)}
       />
-      <InformationHighlight.Heading> Booking Info </InformationHighlight.Heading>
-      <InformationHighlight.Body> No longer taking new appointments </InformationHighlight.Body>
+      <InformationHighlight.Heading> Layouts </InformationHighlight.Heading>
+      <InformationHighlight.Body>
+        {' '}
+        Layouts can be customized in a myriad of ways{' '}
+      </InformationHighlight.Body>
     </InformationHighlight>
   );
 };

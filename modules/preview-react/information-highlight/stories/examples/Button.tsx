@@ -5,7 +5,7 @@ import {InformationHighlight} from '@workday/canvas-kit-preview-react/informatio
 export const Button = () => {
   return (
     <InformationHighlight>
-      <InformationHighlight.Button> hypertext </InformationHighlight.Button>
+      <InformationHighlight.Button> Action </InformationHighlight.Button>
     </InformationHighlight>
   );
 };

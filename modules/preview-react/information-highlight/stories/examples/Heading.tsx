@@ -5,7 +5,7 @@ import {InformationHighlight} from '@workday/canvas-kit-preview-react/informatio
 export const Heading = () => {
   return (
     <InformationHighlight>
-      <InformationHighlight.Heading> No Reservations </InformationHighlight.Heading>
+      <InformationHighlight.Heading> Only Heading </InformationHighlight.Heading>
     </InformationHighlight>
   );
 };

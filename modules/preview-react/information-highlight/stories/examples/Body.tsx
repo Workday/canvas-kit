@@ -7,7 +7,7 @@ export const Body = () => {
     <InformationHighlight>
       <InformationHighlight.Body>
         {' '}
-        Booking is not avaliable from this page{' '}
+        Only the body of an information highlight{' '}
       </InformationHighlight.Body>
     </InformationHighlight>
   );

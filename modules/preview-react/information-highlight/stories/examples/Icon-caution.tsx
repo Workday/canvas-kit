@@ -6,8 +6,12 @@ export const IconCaution = () => {
   return (
     <InformationHighlight variant={'caution'}>
       <InformationHighlight.Icon variant={undefined} icon={undefined} />
-      <InformationHighlight.Heading> Booking Info </InformationHighlight.Heading>
-      <InformationHighlight.Body> No longer taking new appointments </InformationHighlight.Body>
+      <InformationHighlight.Heading> Select Complete Module </InformationHighlight.Heading>
+      <InformationHighlight.Body>
+        {' '}
+        If you exit instead of selecting complete module progress will not be saved, and progress
+        will show as incomplete/failed.
+      </InformationHighlight.Body>
     </InformationHighlight>
   );
 };

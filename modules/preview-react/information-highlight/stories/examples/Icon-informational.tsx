@@ -6,8 +6,11 @@ export const IconInformational = () => {
   return (
     <InformationHighlight variant={'informational'}>
       <InformationHighlight.Icon variant={undefined} icon={undefined} />
-      <InformationHighlight.Heading> Booking Info </InformationHighlight.Heading>
-      <InformationHighlight.Body> No longer taking new appointments </InformationHighlight.Body>
+      <InformationHighlight.Heading> Layouts </InformationHighlight.Heading>
+      <InformationHighlight.Body>
+        {' '}
+        Layouts can be used to draw important information to the clients attention{' '}
+      </InformationHighlight.Body>
     </InformationHighlight>
   );
 };
