@@ -48,7 +48,7 @@ export const textInputStencil = createStencil({
       boxShadow: `inset 0 0 0 1px ${cssVar(brand.common.focusOutline)}`,
       outline: 'none',
     },
-    '&is(:disabled, .disabled)': {
+    '&:is(:disabled, .disabled)': {
       backgroundColor: system.color.bg.alt.softer,
       borderColor: system.color.border.input.disabled,
       color: system.color.text.disabled,
