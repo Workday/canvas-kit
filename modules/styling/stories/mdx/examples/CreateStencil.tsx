@@ -2,7 +2,7 @@ import React from 'react';
 
 import {createStencil} from '@workday/canvas-kit-styling';
 import {ColorInput} from '@workday/canvas-kit-react/color-picker';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 
 const buttonStencil = createStencil({
   vars: {
@@ -53,7 +53,7 @@ export const CreateStencil = () => {
   };
   return (
     <>
-      <FormField orientation="horizontal">
+      <FormField orientation="horizontalStart">
         <FormField.Label>Color</FormField.Label>
         <FormField.Input as={ColorInput} value={value} onChange={onChange} />
       </FormField>

@@ -77,8 +77,11 @@ const Autocomplete: FC<
 
 export const NoClearButton = () => {
   return (
-    <FormField id="autocomplete-123" label="No clear button">
-      <Autocomplete showClearButton={false} />
+    <FormField id="autocomplete-123">
+      <FormField.Label>No clear button</FormField.Label>
+      <FormField.Field>
+        <FormField.Input as={Autocomplete} showClearButton={false} />
+      </FormField.Field>
     </FormField>
   );
 };

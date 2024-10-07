@@ -77,8 +77,11 @@ const Autocomplete: FC<
 
 export const DisabledItem = () => {
   return (
-    <FormField id="autocomplete-123" label="Group of results">
-      <Autocomplete showDisabledItems={true} />
+    <FormField id="autocomplete-123">
+      <FormField.Label>Group of results</FormField.Label>
+      <FormField.Field>
+        <FormField.Input as={Autocomplete} showDisabledItems={true} />
+      </FormField.Field>
     </FormField>
   );
 };

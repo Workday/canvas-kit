@@ -17,7 +17,7 @@ export default defineConfig({
       framework: 'react',
       bundler: 'webpack',
     },
-    setupNodeEvents(on) {
+    setupNodeEvents(on, config) {
       on('file:preprocessor', webpack());
     },
     viewportWidth: 1024,

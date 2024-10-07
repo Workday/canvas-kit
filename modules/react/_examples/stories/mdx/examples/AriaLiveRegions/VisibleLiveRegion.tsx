@@ -2,7 +2,7 @@ import React from 'react';
 
 import {AriaLiveRegion} from '@workday/canvas-kit-react/common';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {Text} from '@workday/canvas-kit-react/text';
 import {TextInput} from '@workday/canvas-kit-react/text-input';

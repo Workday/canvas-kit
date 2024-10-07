@@ -1,5 +1,6 @@
 import React from 'react';
 import {FormField} from '@workday/canvas-kit-react/form-field';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 
 export const Basic = () => {
@@ -10,8 +11,13 @@ export const Basic = () => {
   };
 
   return (
-    <FormField label="Email">
-      <TextInput onChange={handleChange} value={value} />
-    </FormField>
+    <Flex>
+      <FormField>
+        <FormField.Label>First Name</FormField.Label>
+        <FormField.Field>
+          <FormField.Input as={TextInput} value={value} onChange={handleChange} />
+        </FormField.Field>
+      </FormField>
+    </Flex>
   );
 };
