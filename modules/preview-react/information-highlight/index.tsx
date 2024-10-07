@@ -46,6 +46,20 @@ const containerModifiers = createModifiers({
 });
 
 export const InformationHighlight = createContainer('section')({
+  /**
+   * InformationHighlight takes in a variant or custom theme to determine the color of the
+   * background and border. The prebuilt variants are:
+   * 'informational' - blue
+   * 'caution' - orange
+   * 'attention' - red
+   * if a custom or prebuilt variant is not provided the system defaults to 'informational'
+   *
+   * ```tsx
+   * <InformationHighlight variant={'informational'}>
+   *   ....
+   *  </InformationHighlight>
+   *  ```
+   */
   displayName: 'InformationHighlight',
   modelHook: useInformationHighlightModel,
   subComponents: {

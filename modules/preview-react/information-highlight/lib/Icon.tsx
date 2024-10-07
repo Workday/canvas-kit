@@ -31,6 +31,12 @@ const iconStyles = {
 };
 
 export interface IconProps extends SystemIconProps {
+  /**
+   * Variant is used to determine if one of the three provided themes will be used for the icon
+   * 'informational' is the default blue theme with a lowercase letter i in a circle for the icon
+   * 'caution' is orange, with an exclamation point in a triangle
+   * 'attention' is red with an exclamation point in a circle
+   */
   variant: Variant;
 }
 
@@ -41,6 +47,17 @@ const defaultIcons = {
 };
 
 export const Icon = createSubcomponent('span')({
+  /** `InformationHighlight.Icon` renders {@link SystemIcon} under the hood. It's used as a decorative
+   * element to visually support the {@link InformationHighlight.Heading} or
+   * {@link InformationHighlight.Body} text. The accent color and general color of the icon can be
+   * customized to fit any color palette being used for the Information Highlight
+   *
+   *
+   * ```tsx
+   * <InformationHighlight.Icon icon={uploadCloudIcon} color:{cssVar(base.blueberry400)}
+   *   accent:{cssVar(base.frenchVanilla100)} />
+   * ```
+   */
   displayName: 'Icon',
   modelHook: useInformationHighlightModel,
 })(({icon, accent, color, ...props}: IconProps, Element, model) => {
