@@ -12,7 +12,7 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 
 export default {
   title: 'Testing/Inputs/Color Picker/Color Input',
-  component: Checkbox,
+  component: ColorInput,
   parameters: {
     chromatic: {
       disable: false,
