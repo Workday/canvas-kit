@@ -6,7 +6,6 @@ import {createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 import {Button, ButtonProps} from './Button';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 /**
  * Extends all the style properties from Box to our buttons as well as props from ButtonProps.
