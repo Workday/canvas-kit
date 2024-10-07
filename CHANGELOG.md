@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.1.15](https://github.com/Workday/canvas-kit/releases/tag/v11.1.15) (2024-10-07)
+
+### Infrastructure
+
+- fix: Remove extract docs in canary to prevent exceeding limit ([#2948](https://github.com/Workday/canvas-kit/pull/2948)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+### Styling
+
+- fix: Support false modifier values ([#2952](https://github.com/Workday/canvas-kit/pull/2952)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v11.1.14](https://github.com/Workday/canvas-kit/releases/tag/v11.1.14) (2024-10-02)
 
 ### Components
