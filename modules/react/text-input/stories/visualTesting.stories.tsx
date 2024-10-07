@@ -115,20 +115,43 @@ export const InputGroupStates = () => (
             end: [<span>4</span>, <span>5</span>, <span>6</span>],
           },
         },
+        {
+          label: 'ClearButton w/ value',
+          props: {
+            placeholder: 'Placeholder',
+            value: 'Some Value',
+            start: [],
+            end: [<InputGroup.ClearButton />],
+          },
+        },
+        {
+          label: 'ClearButton w/o value',
+          props: {
+            placeholder: '',
+            value: '',
+            start: [],
+            end: [<InputGroup.ClearButton />],
+          },
+        },
       ]}
       columnProps={[
         {label: 'LTR', props: {dir: 'ltr'}},
         {label: 'RTL', props: {dir: 'rtl'}},
       ]}
     >
-      {props => (
+      {({value, placeholder, ...props}) => (
         <CanvasProvider theme={{canvas: {direction: props.dir}}}>
           <InputGroup width={300}>
             {props.start &&
               props.start.map((start, index) => (
-                <InputGroup.InnerStart key={index}>{start}</InputGroup.InnerStart>
+                <InputGroup.InnerStart key={index} pointerEvents="none">
+                  {start}
+                </InputGroup.InnerStart>
               ))}
-            <InputGroup.Input value="Very Long Text. Very Long Text. Very Long Text." />
+            <InputGroup.Input
+              placeholder={placeholder}
+              value={value ?? 'Very Long Text. Very Long Text. Very Long Text.'}
+            />
             {props.end &&
               props.end.map((end, index) => (
                 <InputGroup.InnerEnd key={index}>{end}</InputGroup.InnerEnd>
