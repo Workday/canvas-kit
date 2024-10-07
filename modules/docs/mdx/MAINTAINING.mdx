@@ -1,12 +1,4 @@
-<Meta
-  title="Guides/Maintaining"
-  parameters={{
-    viewMode: 'docs',
-    previewTabs: {
-      canvas: {hidden: true},
-    },
-  }}
-/>
+<Meta title="Guides/Maintaining" />
 
 # Maintaining Canvas Kit
 
@@ -274,6 +266,10 @@ We use codemods to reduce friction for consumers as they make changes and do upg
 accompany major version releases since v5, and can also be released in minor releases if users want
 to apply some changes sooner.
 
+> **Note: In v12, we have done some infrastructure updates with moving to Webpack 5 and Storybook 7. With
+these updates has come some formatting issues after running our codemods. We recommend running a
+formatter to address the format issues that have been introduced in v12.**
+
 ### Add a New Codemod
 
 Adding a new codemod is pretty straightforward, but this guide will make sure you don't miss any
@@ -356,13 +352,10 @@ write.
 // modules/codemod/v10/spec/expectTransformFactory.spec.ts
 import {runInlineTest} from 'jscodeshift/dist/testUtils';
 
-export const expectTransformFactory = (fn: Function) => (
-  input: string,
-  expected: string,
-  options?: Record<string, any>
-) => {
-  return runInlineTest(fn, options, {source: input}, expected, {parser: 'tsx'});
-};
+export const expectTransformFactory =
+  (fn: Function) => (input: string, expected: string, options?: Record<string, any>) => {
+    return runInlineTest(fn, options, {source: input}, expected, {parser: 'tsx'});
+  };
 ```
 
 ```ts
@@ -454,8 +447,9 @@ Finally, be sure to notify users of the deprecation in the corresponding
 
 ### ${Deprecated Name}
 
-**PR:** [#${PR number where the deprecation took place}](https://github.com/Workday/canvas-kit/pull/${PR number})
+**PR:** [#${PR number where the deprecation took
+place}](https://github.com/Workday/canvas-kit/pull/${PR number})
 
-We've deprecated ${Deprecated Name} ${Optional: Include package name to disambiguate (e.g., "from Labs")} ${Provide a
-migration strategy}
+We've deprecated ${Deprecated Name} ${Optional: Include package name to disambiguate (e.g., "from
+Labs")} ${Provide a migration strategy}
 ```

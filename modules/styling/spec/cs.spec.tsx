@@ -348,6 +348,29 @@ describe('cs', () => {
       const myModifiers = myModifiersFactory();
       expectTypeOf(myModifiers.size).toMatchTypeOf<{large: CS; small: CS}>();
     });
+
+    describe('with a "_" modifier key', () => {
+      const myModifiersFactory = () =>
+        createModifiers({
+          size: {
+            large: createStyles({fontSize: '1.5rem'}),
+            small: createStyles({fontSize: '0.8rem'}),
+            _: createStyles({fontSize: 'var(--size)'}),
+          },
+        });
+
+      it('should not return any classes when "size" is not provided', () => {
+        const myModifiers = myModifiersFactory();
+
+        expect(myModifiers({})).toEqual('');
+      });
+
+      it('should return the CSS class of the "_" key when no other modifier matches and a matching modifier key is provided', () => {
+        const myModifiers = myModifiersFactory();
+
+        expect(myModifiers({size: 'foo' as any})).toEqual(myModifiers.size._);
+      });
+    });
   });
 
   describe('createCompoundModifiers', () => {
@@ -1330,9 +1353,7 @@ describe('handleCsProp', () => {
     expect(screen.getByTestId('base')).toHaveStyle({padding: padding.styleAttribute});
   });
 
-  // While we have compat mode enabled, we'll skip these tests. The class generated comes from emotion and
-  //we have no way of validating the correct class.
-  it.skip('should allow the cs prop to override base styles', () => {
+  it('should allow the cs prop to override base styles', () => {
     const overrideStyles = createStyles({
       padding: padding.createStyles,
     });

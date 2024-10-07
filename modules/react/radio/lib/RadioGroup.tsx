@@ -39,7 +39,7 @@ const Container = styled('div')<Pick<RadioGroupProps, 'error' | 'grow' | 'theme'
     boxSizing: 'border-box',
     borderRadius: borderRadius.m,
     padding: `${space.xxxs} ${space.xs}`,
-    margin: `-${space.xxxs} -${space.xs}`,
+    margin: `0 -${space.xs}`,
     '& > div': {
       margin: `${space.xxs} ${space.zero}`,
       alignItems: 'flex-start',

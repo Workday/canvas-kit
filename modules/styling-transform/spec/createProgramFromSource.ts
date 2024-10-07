@@ -14,9 +14,6 @@ function getConfig() {
   return options;
 }
 
-// keep this around for speed. A ts program can take a previous program and share caching
-let program: ts.Program;
-
 const styleSource = `
 export type CsVarsMap<T extends string, ID extends string | never> = [ID] extends [never]
   ? Record<T, string>
@@ -111,11 +108,10 @@ export function createProgramFromSource(...args: any[]) {
     readFile: fileName => ts.sys.readFile(fileName),
   };
 
-  program = ts.createProgram(
+  const program = ts.createProgram(
     sources.map(s => s.filename),
     config,
-    customCompilerHost,
-    program
+    customCompilerHost
   );
 
   return program;

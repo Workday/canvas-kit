@@ -1,4 +1,4 @@
-import {addons} from '@storybook/addons';
+import {addons} from '@storybook/preview-api';
 import theme from './theme';
 
 addons.setConfig({
