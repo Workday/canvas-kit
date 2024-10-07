@@ -61,7 +61,7 @@ const deleteButtonStencil = createStencil({
 export const DeleteButton = createComponent('button')({
   displayName: 'DeleteButton',
   Component: (
-    {children, size, iconPosition, grow, ...elemProps}: DeleteButtonProps,
+    {children, size, iconPosition, grow, cs, ...elemProps}: DeleteButtonProps,
     ref,
     Element
   ) => {
@@ -72,7 +72,8 @@ export const DeleteButton = createComponent('button')({
         size={size}
         grow={grow}
         iconPosition={iconPosition}
-        {...mergeStyles(elemProps, deleteButtonStencil({size, iconPosition}))}
+        cs={[deleteButtonStencil({size, iconPosition}), cs]}
+        {...elemProps}
       >
         {children}
       </Button>

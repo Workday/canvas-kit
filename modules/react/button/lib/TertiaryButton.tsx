@@ -291,6 +291,8 @@ export const TertiaryButton = createComponent('button')({
       size = 'medium',
       variant,
       iconPosition,
+      grow,
+      cs,
       ...elemProps
     }: TertiaryButtonProps,
     ref,
@@ -311,15 +313,18 @@ export const TertiaryButton = createComponent('button')({
         icon={icon}
         size={size}
         iconPosition={iconPosition}
-        {...mergeStyles(
-          elemProps,
+        grow={grow}
+        cs={[
           tertiaryButtonStencil({
             size,
             variant,
+            grow,
             isThemeable: (isThemeable || baseIconPosition !== 'only') as any,
             iconPosition: baseIconPosition,
-          })
-        )}
+          }),
+          cs,
+        ]}
+        {...elemProps}
       >
         {children}
       </Button>
