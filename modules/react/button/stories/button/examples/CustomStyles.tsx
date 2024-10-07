@@ -34,8 +34,8 @@ const myButtonStencil = createStencil({
 });
 
 const MyCustomButton = createComponent('button')({
-  Component: ({children, ...elemProps}: PrimaryButtonProps, ref, Element) => (
-    <PrimaryButton as={Element} ref={ref} {...handleCsProp(elemProps, myButtonStencil())}>
+  Component: ({children, cs, ...elemProps}: PrimaryButtonProps, ref, Element) => (
+    <PrimaryButton as={Element} ref={ref} cs={[myButtonStencil(), cs]} {...elemProps}>
       {children}
     </PrimaryButton>
   ),
