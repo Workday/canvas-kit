@@ -33,21 +33,22 @@ export const textInputStencil = createStencil({
     width: cssVar(width),
     minWidth: cssVar(width, calc.add(calc.multiply(system.space.x20, 3), system.space.x10)),
     color: system.color.text.default,
+    textOverflow: 'ellipsis',
     '::-ms-clear': {
       display: 'none',
     },
     '&::placeholder': {
       color: system.color.text.hint,
     },
-    '&:hover, &.hover': {
+    '&:is(:hover, .hover)': {
       borderColor: system.color.border.input.strong,
     },
-    '&:focus-visible:not([disabled]), &.focus:not([disabled])': {
+    '&:is(:focus-visible, .focus):where(:not([disabled]))': {
       borderColor: brand.common.focusOutline,
       boxShadow: `inset 0 0 0 1px ${cssVar(brand.common.focusOutline)}`,
       outline: 'none',
     },
-    '&:disabled, .disabled': {
+    '&is(:disabled, .disabled)': {
       backgroundColor: system.color.bg.alt.softer,
       borderColor: system.color.border.input.disabled,
       color: system.color.text.disabled,
@@ -71,11 +72,11 @@ export const textInputStencil = createStencil({
       error: {
         borderColor: brand.error.base,
         boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.error.base}`,
-        '&:hover, &.hover, &:disabled, &.disabled, &:focus-visible:not([disabled]), &.focus:not([disabled])':
+        '&:is(:hover, .hover, :disabled, .disabled, :focus-visible:not([disabled]), .focus:not([disabled]))':
           {
             borderColor: brand.error.base,
           },
-        '&:focus-visible:not([disabled]), &.focus:not([disabled])': {
+        '&:is(:focus-visible, .focus):not([disabled])': {
           boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.error.base}, 0 0 0 2px ${
             system.color.border.inverse
           }, 0 0 0 4px ${brand.common.focusOutline}`,
@@ -84,12 +85,12 @@ export const textInputStencil = createStencil({
       alert: {
         borderColor: brand.alert.darkest,
         boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.alert.base}`,
-        '&:hover, &.hover, &:disabled, &.disabled, &:focus-visible:not([disabled]), &.focus:not([disabled])':
+        '&:is(:hover, .hover, :disabled, .disabled, :focus-visible:not([disabled]), .focus:not([disabled]))':
           {
             borderColor: brand.alert.darkest,
           },
 
-        '&:focus-visible:not([disabled]), &.focus:not([disabled])': {
+        '&:is(:focus-visible, .focus):not([disabled])': {
           boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.alert.base},
         0 0 0 2px ${system.color.border.inverse},
         0 0 0 4px ${brand.common.focusOutline}`,
@@ -104,16 +105,18 @@ export const textInputStencil = createStencil({
 
 export const TextInput = createComponent('input')({
   displayName: 'TextInput',
-  Component: ({grow, error, width, ...elemProps}: TextInputProps, ref, Element) => (
-    <Element
-      type="text"
-      ref={ref}
-      {...mergeStyles(
-        elemProps,
-        textInputStencil({width: typeof width === 'number' ? px2rem(width) : width, grow, error})
-      )}
-    />
-  ),
+  Component: ({grow, error, width, ...elemProps}: TextInputProps, ref, Element) => {
+    return (
+      <Element
+        type="text"
+        ref={ref}
+        {...mergeStyles(
+          elemProps,
+          textInputStencil({width: typeof width === 'number' ? px2rem(width) : width, grow, error})
+        )}
+      />
+    );
+  },
   subComponents: {
     ErrorType,
   },
