@@ -21,6 +21,7 @@ export interface SecondaryButtonProps extends ButtonProps {
 }
 
 const secondaryButtonStencil = createStencil({
+  extends: buttonStencil,
   base: {
     // Base Styles
     [buttonStencil.vars.background]: 'transparent',
@@ -129,9 +130,20 @@ const secondaryButtonStencil = createStencil({
 
 export const SecondaryButton = createComponent('button')({
   displayName: 'SecondaryButton',
-  Component: ({children, variant, ...elemProps}: SecondaryButtonProps, ref, Element) => {
+  Component: (
+    {children, variant, size, iconPosition, grow, ...elemProps}: SecondaryButtonProps,
+    ref,
+    Element
+  ) => {
     return (
-      <Button as={Element} ref={ref} {...mergeStyles(elemProps, secondaryButtonStencil({variant}))}>
+      <Button
+        as={Element}
+        ref={ref}
+        iconPosition={iconPosition}
+        size={size}
+        grow={grow}
+        {...mergeStyles(elemProps, secondaryButtonStencil({variant, size, iconPosition, grow}))}
+      >
         {children}
       </Button>
     );
