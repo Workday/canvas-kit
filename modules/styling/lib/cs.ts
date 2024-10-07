@@ -1074,7 +1074,7 @@ export function parentModifier(value: string) {
  * compound modifiers.
  */
 export function createStencil<
-  M extends StencilModifierConfig<V> = {},
+  M extends StencilModifierConfig<V>, // TODO: default to `{}` and fix inference in `StyleReturn` types so that modifier style return functions give correct inference to variables
   V extends DefaultedVarsShape = {},
   E extends BaseStencil<any, any, any, any> = never, // use BaseStencil to avoid infinite loops
   ID extends string = never

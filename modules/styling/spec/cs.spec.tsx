@@ -845,6 +845,27 @@ describe('cs', () => {
       expect(result2.className).toContain(`${myStencil.base} ${myStencil.modifiers.width.zero}`);
     });
 
+    it('should infer variables within a modifier style return function', () => {
+      const myStencil = createStencil({
+        vars: {
+          width: '10px',
+          height: '10px',
+        },
+        base: {},
+        modifiers: {
+          width: {
+            zero: ({width}) => {
+              expectTypeOf(width).toEqualTypeOf<string>();
+
+              return {
+                width: width,
+              };
+            },
+          },
+        },
+      });
+    });
+
     it('should convert "true" modifiers into boolean', () => {
       const myStencil = createStencil({
         vars: {
@@ -1054,6 +1075,7 @@ describe('cs', () => {
       it('should apply true modifier styles', () => {
         const baseStencil = createStencil({
           base: {},
+          modifiers: {}, // TODO: Remove this requirement
         });
 
         const extendedStencil = createStencil({
@@ -1074,6 +1096,7 @@ describe('cs', () => {
       it('should apply false modifier styles', () => {
         const baseStencil = createStencil({
           base: {},
+          modifiers: {}, // TODO: Remove this requirement
         });
 
         const extendedStencil = createStencil({
