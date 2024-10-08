@@ -83,10 +83,14 @@ export const ComboboxMenuItem = createSubcomponent('li')({
   subComponents: {
     Icon: ComboboxMenuItemIcon,
   },
-})<ComboboxMenuItemProps>(({children, ...elemProps}, Element) => {
+})<ComboboxMenuItemProps>(({children, type = 'selectable', ...elemProps}, Element) => {
   return (
     <OverflowTooltip placement="left">
-      <StyledMenuItem as={Element} {...mergeStyles(elemProps, comboboxMenuItemStencil())}>
+      <StyledMenuItem
+        as={Element}
+        type={type}
+        {...mergeStyles(elemProps, comboboxMenuItemStencil())}
+      >
         {children}
       </StyledMenuItem>
     </OverflowTooltip>

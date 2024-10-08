@@ -77,7 +77,7 @@ export const menuItemStencil = createStencil({
     cursor: 'pointer',
     color: system.color.text.default,
     borderWidth: 0,
-    textAlign: 'left',
+    textAlign: 'start',
     transition: 'background-color 80ms, color 80ms',
     backgroundColor: 'inherit',
     minHeight: system.space.x10,
@@ -182,7 +182,7 @@ const MenuItemText = ({children}: React.PropsWithChildren) => {
 export const StyledMenuItem = createComponent('button')({
   displayName: 'MenuItem',
   Component: (
-    {children, type = 'actionable', isDisabled, ...elemProps}: MenuItemProps,
+    {children, type = 'selectable', isDisabled, ...elemProps}: MenuItemProps,
     ref,
     Element
   ) => {
@@ -244,7 +244,7 @@ export const MenuItem = createSubcomponent('button')({
     Icon: MenuItemIcon,
     Text: MenuItemText,
   },
-})<MenuItemProps>(({children, type = 'actionable', ...elemProps}, Element) => {
+})<MenuItemProps>(({children, ...elemProps}, Element) => {
   return (
     <OverflowTooltip placement="left">
       <StyledMenuItem as={Element} {...elemProps}>

@@ -46,10 +46,10 @@ A note to the reader:
   - [Form Field](#form-field)
     - [Form Field Group](#form-field-group)
     - [Form Field Field](#form-field-field)
+  - [Menu Item](#menu-item)
   - [Search Form](#search-form)
   - [Select](#select)
   - [Text Area](#text-area)
-  - [Menu Item](#menu-item)
 - [Troubleshooting](#troubleshooting)
 - [Glossary](#glossary)
   - [Main](#main)
@@ -376,6 +376,24 @@ this sub-component when using `FormField`. This component also exists on `FormFi
 </FormField>
 ```
 
+### Menu Item
+
+**PR: ** [2969](https://github.com/Workday/canvas-kit/pull/2969)
+
+`Menu.Item` was converted to use Stencils for styling and uses SystemIcon stencil variables to
+change icon color instead of deeply nested selectors. We also added a `type` prop that can be either
+`selectable` or `actionable`. The default for `Menu.Item` is `selectable`. If you wish to not show
+the selection checkmark, change the type to `actionable`.
+
+- `actionable` - used for menu items where the user performs an action rather than selecting. A
+  selected checkmark does not show for `actionable` menu items.
+- `selectable` - used for menu items where the user selects an option. A selected checkmark will
+  show. Note this may cause visual regression tests to trigger, but this is intended.
+
+We've deprecated the `isDisabled` prop. It didn't do anything in v10 or v11. It was part of the
+preview Menu deprecation, but was never hooked up. We mapped it to `aria-disabled` and added a
+deprecation comment to use `aria-disabled` instead.
+
 ### Search Form (Labs)
 
 **PRs:** [#2934](https://github.com/Workday/canvas-kit/pull/2934),
@@ -453,24 +471,6 @@ interface MyProps {
   resize?: ValueOf<typeof TextAreaResizeDirection>;
 }
 ```
-
-### Menu Item
-
-**PR: ** [2969](https://github.com/Workday/canvas-kit/pull/2969)
-
-`Menu.Item` was converted to use Stencils for styling and uses SystemIcon stencil variables to
-change icon color instead of deeply nested selectors. We also added a `type` prop that can be either
-`selectable` or `actionable`. The default for `Menu.Item` is `actionable`, while components with the
-primary function of selection (like `Select`) default to `selectable`.
-
-- `actionable` - used for menu items where the user performs an action rather than selecting. A
-  selected checkmark does not show for `actionable` menu items.
-- `selectable` - used for menu items where the user selects an option. A selected checkmark will
-  show. Note this may cause visual regression tests to trigger, but this is intended.
-
-We've deprecated the `isDisabled` prop. It didn't do anything in v10 or v11. It was part of the
-preview Menu deprecation, but was never hooked up. We mapped it to `aria-disabled` and added a
-deprecation comment to use `aria-disabled` instead.
 
 ## Troubleshooting
 
