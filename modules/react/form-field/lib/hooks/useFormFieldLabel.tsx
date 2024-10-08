@@ -7,6 +7,14 @@ import {useFormFieldModel} from './useFormFieldModel';
  */
 export const useFormFieldLabel = createElemPropsHook(useFormFieldModel)(({state}) => {
   return {
+    /**
+     * Provide an `for` attribute for `for/id` links between a `label/input` respectively
+     */
     htmlFor: `input-${state.id}`,
+    /**
+     * Provide an `id` attribute for `id/aria-labelledby` links between the label and any other
+     * element
+     */
+    id: `label-${state.id}`,
   };
 });
