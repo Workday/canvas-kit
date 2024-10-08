@@ -8,6 +8,11 @@ import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {createStencil, createStyles, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
+const customContainer = createStyles({
+  gap: system.space.x4,
+  maxWidth: 'max-content',
+});
+
 const myButtonStencil = createStencil({
   base: {
     [buttonStencil.vars.background]: system.color.static.green.soft,
@@ -19,11 +24,13 @@ const myButtonStencil = createStencil({
       [buttonStencil.vars.background]: system.color.static.green.strong,
       [buttonStencil.vars.boxShadowInner]: system.color.static.green.soft,
       [buttonStencil.vars.boxShadowOuter]: system.color.static.green.strong,
+      [systemIconStencil.vars.color]: system.color.icon.inverse,
     },
     '&:hover': {
       [buttonStencil.vars.background]: system.color.static.green.default,
       border: `${px2rem(3)} dotted ${system.color.static.green.strong}`,
       [systemIconStencil.vars.color]: system.color.static.green.strong,
+      [systemIconStencil.vars.color]: system.color.icon.inverse,
     },
     '&:active': {
       [buttonStencil.vars.background]: system.color.static.green.strong,
@@ -44,6 +51,28 @@ const MyCustomButton = createComponent('button')({
 const myCustomStyles = createStyles({
   padding: system.space.x4,
   textTransform: 'uppercase',
+  [buttonStencil.vars.background]: system.color.static.gray.soft,
+  [buttonStencil.vars.label]: system.color.static.gray.strong,
+  [systemIconStencil.vars.color]: system.color.static.gray.strong,
+  [buttonStencil.vars.borderRadius]: system.shape.x2,
+  [buttonStencil.vars.border]: system.color.static.gray.stronger,
+  '&:focus-visible': {
+    [buttonStencil.vars.background]: system.color.static.gray.strong,
+    [buttonStencil.vars.boxShadowInner]: system.color.static.gray.soft,
+    [buttonStencil.vars.boxShadowOuter]: system.color.static.gray.strong,
+    [systemIconStencil.vars.color]: system.color.icon.inverse,
+  },
+  '&:hover': {
+    [buttonStencil.vars.background]: system.color.static.gray.default,
+    [buttonStencil.vars.border]: `${px2rem(3)} dotted ${system.color.static.gray.strong}`,
+    [systemIconStencil.vars.color]: system.color.static.gray.strong,
+    [systemIconStencil.vars.color]: system.color.icon.inverse,
+  },
+  '&:active': {
+    [buttonStencil.vars.background]: system.color.static.gray.strong,
+    [buttonStencil.vars.label]: system.color.fg.inverse,
+    [systemIconStencil.vars.color]: system.color.fg.inverse,
+  },
 });
 
 const customColors = {
@@ -52,25 +81,27 @@ const customColors = {
     icon: system.color.static.orange.strong,
     label: system.color.static.orange.strong,
   },
-  hover: {
-    background: system.color.static.orange.default,
-    icon: system.color.static.orange.strong,
-  },
-  active: {
-    background: system.color.static.orange.strong,
-  },
   focus: {
     background: system.color.static.orange.strong,
     boxShadowInner: system.color.static.orange.soft,
     boxShadowOuter: system.color.static.orange.strong,
   },
+  hover: {
+    background: system.color.static.orange.default,
+    icon: system.color.icon.inverse,
+  },
+  active: {
+    background: system.color.static.orange.strong,
+  },
   disabled: {},
 };
 
 export const CustomStyles = () => (
-  <Grid cs={{gap: px2rem(4), gridTemplateColumns: 'repeat(3, 1fr)', alignItems: 'center'}}>
+  <Grid cs={customContainer}>
     <MyCustomButton icon={plusIcon}>Styling Override Via Stencil Variables</MyCustomButton>
-    <PrimaryButton cs={myCustomStyles}>Style Override Via Create Styles</PrimaryButton>
+    <MyCustomButton icon={plusIcon} cs={myCustomStyles}>
+      Style Override Via Create Styles
+    </MyCustomButton>
     <PrimaryButton icon={plusIcon} colors={customColors}>
       Styling Override Via Colors Prop
     </PrimaryButton>
