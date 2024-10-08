@@ -101,17 +101,25 @@ declare global {
 }
 
 export const haveAriaDescription = (text: string) => ($target: JQuery) => {
-  expect($target).to.have.attr('aria-describedby');
+  if ($target.attr('aria-describe')) {
+    expect($target).to.have.attr('aria-describe', text);
+  } else if ($target.attr('aria-describedby')) {
+    expect($target).to.have.attr('aria-describedby');
 
-  const id = $target.attr('aria-describedby');
-  const $descriptionEl = Cypress.$(`[id="${id}"]`);
-  if (!$descriptionEl.length) {
+    const id = $target.attr('aria-describedby');
+    const $descriptionEl = Cypress.$(`[id="${id}"]`);
+    if (!$descriptionEl.length) {
+      throw Error(
+        `Could not find an element with an id matching the aria-describedby: ${$target[0].outerHTML}`
+      );
+    }
+
+    expect($descriptionEl).to.have.text(text);
+  } else {
     throw Error(
-      `Could not find an element with an id matching the aria-describedby: ${$target[0].outerHTML}`
+      `Expected element to have an aria-describe or aria-describedby, but did not find one.`
     );
   }
-
-  expect($descriptionEl).to.have.text(text);
 };
 
 export const haveAriaLabel = (text: string) => ($target: JQuery) => {
@@ -123,6 +131,17 @@ export const haveAriaLabel = (text: string) => ($target: JQuery) => {
     if (!$labelledEl.length) {
       throw Error(
         `Could not found an element with an id matching the aria-labelledby:  ${$target[0].outerHTML}`
+      );
+    }
+
+    expect($labelledEl).to.have.text(text);
+  } else if ($target.attr('id')) {
+    const id = $target.attr('id');
+    console.log('id', id);
+    const $labelledEl = Cypress.$(`label[for="${id}"]`);
+    if (!$labelledEl.length) {
+      throw Error(
+        `Could not found an element with an id matching the for:  ${$target[0].outerHTML}`
       );
     }
 
