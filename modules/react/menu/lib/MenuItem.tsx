@@ -32,7 +32,7 @@ export interface MenuItemProps {
   /**
    * The label text of the MenuItem.
    */
-  children: React.ReactNode;
+  children?: React.ReactNode;
   /**
    * The semantic side effect of selecting a menu item. What is the intent when a user activates this
    * menu item?
