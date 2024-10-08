@@ -57,6 +57,12 @@ export interface MenuItemProps {
    * https://www.w3.org/WAI/ARIA/apg/practices/keyboard-interface/#kbd_disabled_controls
    */
   'aria-disabled'?: boolean;
+  /**
+   * If true, set the StyledMenuItem to the disabled state so it is not clickable.
+   * @default false
+   * @deprecated Use `aria-disabled` instead
+   */
+  isDisabled?: boolean;
 }
 
 export const menuItemStencil = createStencil({
@@ -175,10 +181,17 @@ const MenuItemText = ({children}: React.PropsWithChildren) => {
 
 export const StyledMenuItem = createComponent('button')({
   displayName: 'MenuItem',
-  Component: ({children, type = 'actionable', ...elemProps}: MenuItemProps, ref, Element) => {
-    console.log('type', type);
+  Component: (
+    {children, type = 'actionable', isDisabled, ...elemProps}: MenuItemProps,
+    ref,
+    Element
+  ) => {
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, menuItemStencil({type}))}>
+      <Element
+        ref={ref}
+        aria-disabled={isDisabled}
+        {...mergeStyles(elemProps, menuItemStencil({type}))}
+      >
         {typeof children === 'string' ? <MenuItemText>{children}</MenuItemText> : children}
       </Element>
     );
