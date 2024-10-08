@@ -25,7 +25,7 @@ export const useFormFieldModel = createModelHook({
      */
     isRequired: false,
 
-    orientation: '' as 'vertical' | 'horizontal' | 'horizontalEnd' | 'horizontalStart',
+    orientation: 'vertical' as 'vertical' | 'horizontal' | 'horizontalEnd' | 'horizontalStart',
   },
 })(config => {
   const id = useUniqueId(config.id);
