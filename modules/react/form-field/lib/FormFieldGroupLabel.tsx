@@ -6,8 +6,6 @@ import {Text, textStencil} from '@workday/canvas-kit-react/text';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {brand, system} from '@workday/canvas-tokens-web';
 
-import {useFormFieldLabel, useFormFieldModel} from './hooks';
-
 export interface FormFieldGroupLabelProps
   extends FlexProps,
     Omit<ExtractProps<typeof Text, never>, 'display'> {
