@@ -819,7 +819,7 @@ export type StencilCompoundConfig<M> = {
 };
 
 type ModifierValuesStencil<
-  M extends StencilModifierConfig<any, any>,
+  M extends StencilModifierConfig<any, any> = {},
   V extends DefaultedVarsShape = {}
 > = {
   [P in keyof M]?: P extends keyof V
@@ -997,8 +997,8 @@ type StencilDefaultModifierReturn<M> = {
 };
 
 export interface BaseStencil<
-  M extends StencilModifierConfig<V>,
-  V extends DefaultedVarsShape,
+  M extends StencilModifierConfig<V> = {},
+  V extends DefaultedVarsShape = {},
   E extends BaseStencil<any, any, any, any> = never,
   ID extends string = never
 > {
@@ -1009,8 +1009,8 @@ export interface BaseStencil<
 }
 
 export interface Stencil<
-  M extends StencilModifierConfig<V, E>,
-  V extends DefaultedVarsShape,
+  M extends StencilModifierConfig<V, E> = {},
+  V extends DefaultedVarsShape = {},
   E extends BaseStencil<any, any, any, any> = never,
   ID extends string = never
 > extends BaseStencil<M, V, E, ID> {
@@ -1085,7 +1085,7 @@ export function parentModifier(value: string) {
  * compound modifiers.
  */
 export function createStencil<
-  M extends StencilModifierConfig<V>,
+  M extends StencilModifierConfig<V>, // TODO: default to `{}` and fix inference in `StyleReturn` types so that modifier style return functions give correct inference to variables
   V extends DefaultedVarsShape = {},
   E extends BaseStencil<any, any, any, any> = never, // use BaseStencil to avoid infinite loops
   ID extends string = never
@@ -1163,7 +1163,7 @@ export function createStencil<
     const inputModifiers = {...composes?.defaultModifiers, ...defaultModifiers};
     // Only override defaults if a value is defined
     for (const key in input) {
-      if (input[key]) {
+      if (input[key] !== undefined) {
         // @ts-ignore
         inputModifiers[key] = input[key];
       }
