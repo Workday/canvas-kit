@@ -845,6 +845,27 @@ describe('cs', () => {
       expect(result2.className).toContain(`${myStencil.base} ${myStencil.modifiers.width.zero}`);
     });
 
+    it('should infer variables within a modifier style return function', () => {
+      const myStencil = createStencil({
+        vars: {
+          width: '10px',
+          height: '10px',
+        },
+        base: {},
+        modifiers: {
+          width: {
+            zero: ({width}) => {
+              expectTypeOf(width).toEqualTypeOf<string>();
+
+              return {
+                width: width,
+              };
+            },
+          },
+        },
+      });
+    });
+
     it('should convert "true" modifiers into boolean', () => {
       const myStencil = createStencil({
         vars: {
@@ -857,10 +878,14 @@ describe('cs', () => {
           },
           grow: {
             true: {},
+            false: {},
           },
         },
         // make sure boolean modifiers are valid in compound config
-        compound: [{modifiers: {size: 'large', grow: true}, styles: {}}],
+        compound: [
+          {modifiers: {size: 'large', grow: true}, styles: {}},
+          {modifiers: {size: 'large', grow: false}, styles: {}},
+        ],
       });
 
       type Args = Exclude<Parameters<typeof myStencil>[0], undefined>;
@@ -874,6 +899,36 @@ describe('cs', () => {
       myStencil({
         grow: true,
       });
+    });
+
+    it('should apply true styles', () => {
+      const myStencil = createStencil({
+        base: {},
+        modifiers: {
+          grow: {
+            true: {width: '100%'},
+            false: {width: '100px'},
+          },
+        },
+      });
+
+      const {className} = myStencil({grow: true});
+      expect(className).toContain(myStencil.modifiers.grow.true);
+    });
+
+    it('should apply false styles', () => {
+      const myStencil = createStencil({
+        base: {},
+        modifiers: {
+          grow: {
+            true: {width: '100%'},
+            false: {width: '100px'},
+          },
+        },
+      });
+
+      const {className} = myStencil({grow: false});
+      expect(className).toContain(myStencil.modifiers.grow.false);
     });
 
     describe('when extending', () => {
@@ -909,6 +964,7 @@ describe('cs', () => {
           modifiers: {
             extra: {
               true: {},
+              false: {},
             },
           },
         });
@@ -933,6 +989,8 @@ describe('cs', () => {
         expectTypeOf(extendedStencil.modifiers).toHaveProperty('extra');
         expectTypeOf(extendedStencil.modifiers.extra).toHaveProperty('true');
         expectTypeOf(extendedStencil.modifiers.extra.true).toEqualTypeOf<string>();
+        expectTypeOf(extendedStencil.modifiers.extra).toHaveProperty('false');
+        expectTypeOf(extendedStencil.modifiers.extra.false).toEqualTypeOf<string>();
 
         // calling the stencil
         type Args = Exclude<Parameters<typeof extendedStencil>[0], undefined>;
@@ -945,6 +1003,9 @@ describe('cs', () => {
         // while the actual function call fails
         extendedStencil({
           extra: true,
+        });
+        extendedStencil({
+          extra: false,
         });
       });
 
@@ -971,11 +1032,13 @@ describe('cs', () => {
           modifiers: {
             extra: {
               true: {},
+              false: {},
             },
           },
           compound: [
             {modifiers: {size: 'large'}, styles: {}},
             {modifiers: {size: 'large', extra: true}, styles: {}},
+            {modifiers: {size: 'large', extra: false}, styles: {}},
           ],
         });
 
@@ -1004,6 +1067,51 @@ describe('cs', () => {
         extendedStencil({
           extra: true,
         });
+        extendedStencil({
+          extra: false,
+        });
+      });
+
+      it('should apply true modifier styles', () => {
+        const baseStencil = createStencil({
+          base: {},
+          modifiers: {}, // TODO: Remove this requirement
+        });
+
+        const extendedStencil = createStencil({
+          extends: baseStencil,
+          base: {},
+          modifiers: {
+            grow: {
+              true: {width: '100%'},
+              false: {width: '100px'},
+            },
+          },
+        });
+
+        const {className} = extendedStencil({grow: true});
+        expect(className).toContain(extendedStencil.modifiers.grow.true);
+      });
+
+      it('should apply false modifier styles', () => {
+        const baseStencil = createStencil({
+          base: {},
+          modifiers: {}, // TODO: Remove this requirement
+        });
+
+        const extendedStencil = createStencil({
+          extends: baseStencil,
+          base: {},
+          modifiers: {
+            grow: {
+              true: {width: '100%'},
+              false: {width: '100px'},
+            },
+          },
+        });
+
+        const {className} = extendedStencil({grow: false});
+        expect(className).toContain(extendedStencil.modifiers.grow.false);
       });
 
       it('should set default modifiers using base modifiers', () => {
@@ -1222,7 +1330,9 @@ describe('handleCsProp', () => {
     expect(screen.getByTestId('base')).toHaveStyle({padding: padding.styleAttribute});
   });
 
-  it('should allow the cs prop to override base styles', () => {
+  // While we have compat mode enabled, we'll skip these tests. The class generated comes from emotion and
+  //we have no way of validating the correct class.
+  it.skip('should allow the cs prop to override base styles', () => {
     const overrideStyles = createStyles({
       padding: padding.createStyles,
     });

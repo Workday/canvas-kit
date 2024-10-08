@@ -3,6 +3,140 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.1.16](https://github.com/Workday/canvas-kit/releases/tag/v11.1.16) (2024-10-07)
+
+### Components
+
+- chore: Fixed Button Style Merge Issue ([#2951](https://github.com/Workday/canvas-kit/pull/2951)) ([@josh-bagwell](https://github.com/josh-bagwell), manuel.carrera)
+  Updates Button variants to fix merge style issue.
+
+
+## [v11.1.15](https://github.com/Workday/canvas-kit/releases/tag/v11.1.15) (2024-10-07)
+
+### Infrastructure
+
+- fix: Remove extract docs in canary to prevent exceeding limit ([#2948](https://github.com/Workday/canvas-kit/pull/2948)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+### Styling
+
+- fix: Support false modifier values ([#2952](https://github.com/Workday/canvas-kit/pull/2952)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v11.1.14](https://github.com/Workday/canvas-kit/releases/tag/v11.1.14) (2024-10-02)
+
+### Components
+
+- fix: Update BaseButton to use correct theming color for focus ring ([#2942](https://github.com/Workday/canvas-kit/pull/2942)) ([@josh-bagwell](https://github.com/josh-bagwell))
+  Fixes theming for the `BaseButton` within `Pagination`.
+
+
+## [v10.3.62](https://github.com/Workday/canvas-kit/releases/tag/v10.3.62) (2024-10-02)
+
+### Components
+
+- fix: Update BaseButton to use correct theming color for focus ring ([#2942](https://github.com/Workday/canvas-kit/pull/2942)) ([@josh-bagwell](https://github.com/josh-bagwell))
+  Fixes theming for the `BaseButton` within `Pagination`.
+## [v11.1.13](https://github.com/Workday/canvas-kit/releases/tag/v11.1.13) (2024-09-19)
+
+### Components
+
+- fix: Allow inherit background color on system icon ([#2932](https://github.com/Workday/canvas-kit/pull/2932)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v11.1.12](https://github.com/Workday/canvas-kit/releases/tag/v11.1.12) (2024-09-18)
+
+### Components
+
+- fix(search-form): Show ellipsis when placeholder overflows ([#2927](https://github.com/Workday/canvas-kit/pull/2927)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v10.3.61](https://github.com/Workday/canvas-kit/releases/tag/v10.3.61) (2024-09-17)
+
+### Components
+
+- fix(search-form): Show ellipsis when placeholder overflows ([#2927](https://github.com/Workday/canvas-kit/pull/2927)) ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v11.1.11](https://github.com/Workday/canvas-kit/releases/tag/v11.1.11) (2024-09-16)
+
+### Components
+
+- fix: Handle empty stack ref in useAssistiveHideSiblings ([#2920](https://github.com/Workday/canvas-kit/pull/2920)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v10.3.60](https://github.com/Workday/canvas-kit/releases/tag/v10.3.60) (2024-09-16)
+
+### Components
+
+- fix: Handle empty stack ref in useAssistiveHideSiblings ([#2920](https://github.com/Workday/canvas-kit/pull/2920)) ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v11.1.10](https://github.com/Workday/canvas-kit/releases/tag/v11.1.10) (2024-09-16)
+
+
+
+
+## [v11.1.9](https://github.com/Workday/canvas-kit/releases/tag/v11.1.9) (2024-09-16)
+
+### Documentation, examples
+
+- docs: Fixing NotificationBadge storybook example ([#2903](https://github.com/Workday/canvas-kit/pull/2903)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton)
+
+
+## [v11.1.8](https://github.com/Workday/canvas-kit/releases/tag/v11.1.8) (2024-09-06)
+
+### Components
+
+- fix: Updated ButtonColors interface to deprecated focusRing from focus ([#2906](https://github.com/Workday/canvas-kit/pull/2906)) ([@josh-bagwell](https://github.com/josh-bagwell))
+  Deprecated the use of focusRing within focus in the colors prop on buttons as this does not work with our current styling methods. Added support for boxShadowInner and boxShadowOuter within focus in colors prop.
+
+
+## [v10.3.59](https://github.com/Workday/canvas-kit/releases/tag/v10.3.59) (2024-09-06)
+
+### Components
+
+- fix: Updated ButtonColors interface to deprecated focusRing from focus ([#2906](https://github.com/Workday/canvas-kit/pull/2906)) ([@josh-bagwell](https://github.com/josh-bagwell))
+  Deprecated the use of focusRing within focus in the colors prop on buttons as this does not work with our current styling methods. Added support for boxShadowInner and boxShadowOuter within focus in colors prop.
+## [v11.1.7](https://github.com/Workday/canvas-kit/releases/tag/v11.1.7) (2024-08-29)
+
+### Accessibility
+
+- fix(color-picker): Add support for a11y labels on color swatches  ([#2894](https://github.com/Workday/canvas-kit/pull/2894)) ([@wooksauce](https://github.com/wooksauce), Kiwook Kwon)
+
+
+## [v11.1.6](https://github.com/Workday/canvas-kit/releases/tag/v11.1.6) (2024-08-27)
+
+### Components
+
+- fix: Make overflow items inert ([#2886](https://github.com/Workday/canvas-kit/pull/2886)) ([@NicholasBoll](https://github.com/NicholasBoll), manuel.carrera)
+- fix(select): Forward ref to Select input ([#2892](https://github.com/Workday/canvas-kit/pull/2892)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+### Infrastructure
+
+- fix: Enable styling compat mode to ensure proper style merging ([#2890](https://github.com/Workday/canvas-kit/pull/2890)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  We're seeing style merging issues when using createStyles or createStencil. It only happens when every style override of the element uses these utilities and @emotion/react or @emotion/styled is not used on the same element. These utilities rely on module execution order and we're having a few reports where modules are possibly executing out of order. In order to allow everyone to use createStyles and createStencil without worrying about style merge issues, we're going to enable compat mode all the time. We'll look into possible out-of-order execution issues in the future and plan to re-enable full static mode (for better performance) once we know why this is happening and have a proper workaround.
+  
+  For more information, please read our [discussion](https://github.com/Workday/canvas-kit/discussions/2893)
+
+
+## [v10.3.58](https://github.com/Workday/canvas-kit/releases/tag/v10.3.58) (2024-08-27)
+
+### Components
+
+- fix(select): Forward ref to Select input ([#2892](https://github.com/Workday/canvas-kit/pull/2892)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v10.3.57](https://github.com/Workday/canvas-kit/releases/tag/v10.3.57) (2024-08-27)
+
+### Components
+
+- fix: Make overflow items inert ([#2886](https://github.com/Workday/canvas-kit/pull/2886)) ([@NicholasBoll](https://github.com/NicholasBoll), manuel.carrera)
+
+
+## [v10.3.56](https://github.com/Workday/canvas-kit/releases/tag/v10.3.56) (2024-08-27)
+
+### Infrastructure
+
+- fix: Enable styling compat mode to ensure proper style merging ([#2890](https://github.com/Workday/canvas-kit/pull/2890)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  We're seeing style merging issues when using createStyles or createStencil. It only happens when every style override of the element uses these utilities and @emotion/react or @emotion/styled is not used on the same element. These utilities rely on module execution order and we're having a few reports where modules are possibly executing out of order. In order to allow everyone to use createStyles and createStencil without worrying about style merge issues, we're going to enable compat mode all the time. We'll look into possible out-of-order execution issues in the future and plan to re-enable full static mode (for better performance) once we know why this is happening and have a proper workaround.
+  
+  For more information, please read our [discussion](https://github.com/Workday/canvas-kit/discussions/2893)
 ## [v11.1.5](https://github.com/Workday/canvas-kit/releases/tag/v11.1.5) (2024-08-23)
 
 ### Components

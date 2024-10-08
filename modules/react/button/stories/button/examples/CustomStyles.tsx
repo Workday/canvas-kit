@@ -15,6 +15,11 @@ const myButtonStencil = createStencil({
     [systemIconStencil.vars.color]: system.color.static.green.strong,
     [buttonStencil.vars.borderRadius]: system.shape.half,
     border: `${px2rem(3)} solid transparent`,
+    '&:focus-visible': {
+      [buttonStencil.vars.background]: system.color.static.green.strong,
+      [buttonStencil.vars.boxShadowInner]: system.color.static.green.soft,
+      [buttonStencil.vars.boxShadowOuter]: system.color.static.green.strong,
+    },
     '&:hover': {
       [buttonStencil.vars.background]: system.color.static.green.default,
       border: `${px2rem(3)} dotted ${system.color.static.green.strong}`,
@@ -29,8 +34,8 @@ const myButtonStencil = createStencil({
 });
 
 const MyCustomButton = createComponent('button')({
-  Component: ({children, size, ...elemProps}: PrimaryButtonProps, ref, Element) => (
-    <PrimaryButton ref={ref} {...handleCsProp(elemProps, myButtonStencil({size}))}>
+  Component: ({children, cs, ...elemProps}: PrimaryButtonProps, ref, Element) => (
+    <PrimaryButton as={Element} ref={ref} cs={[myButtonStencil(), cs]} {...elemProps}>
       {children}
     </PrimaryButton>
   ),
@@ -43,14 +48,23 @@ const myCustomStyles = createStyles({
 
 const customColors = {
   default: {
-    background: system.color.static.green.soft,
-    icon: system.color.static.green.strong,
-    label: system.color.static.green.strong,
+    background: system.color.static.orange.soft,
+    icon: system.color.static.orange.strong,
+    label: system.color.static.orange.strong,
   },
   hover: {
-    background: system.color.static.green.default,
-    icon: system.color.static.green.strong,
+    background: system.color.static.orange.default,
+    icon: system.color.static.orange.strong,
   },
+  active: {
+    background: system.color.static.orange.strong,
+  },
+  focus: {
+    background: system.color.static.orange.strong,
+    boxShadowInner: system.color.static.orange.soft,
+    boxShadowOuter: system.color.static.orange.strong,
+  },
+  disabled: {},
 };
 
 export const CustomStyles = () => (

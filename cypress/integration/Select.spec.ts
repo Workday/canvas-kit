@@ -421,6 +421,23 @@ describe('Select', () => {
     });
   });
 
+  context.only(`given the "Ref Forwarding" story is rendered`, () => {
+    beforeEach(() => {
+      h.stories.load('Components/Inputs/Select', 'Ref Forwarding');
+    });
+
+    it('should not have any axe errors', () => {
+      cy.checkA11y();
+    });
+
+    context('the select input', () => {
+      it('should receive focus via ref forwarding when the button is clicked', () => {
+        cy.findByRole('button', {name: 'Focus Select'}).click();
+        cy.findByRole('combobox').should('have.focus');
+      });
+    });
+  });
+
   context(`given the "Complex" story is rendered`, () => {
     beforeEach(() => {
       h.stories.load('Components/Inputs/Select', 'Complex');
