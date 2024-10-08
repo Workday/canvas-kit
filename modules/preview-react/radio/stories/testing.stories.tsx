@@ -98,12 +98,16 @@ export const RadioStates = {
             })}
             columnProps={[
               {
-                label: 'Left Label',
+                label: 'Horizontal Start',
                 props: {label: 'Contact', labelPosition: 'horizontalStart'},
               },
               {
                 label: 'Top Label',
-                props: {label: 'Contact'},
+                props: {label: 'Contact', labelPosition: 'vertical'},
+              },
+              {
+                label: 'Horizontal End',
+                props: {label: 'Contact', labelPosition: 'horizontalEnd'},
               },
             ]}
           >
@@ -138,7 +142,7 @@ export const RadioStates = {
             ]}
           >
             {props => (
-              <FormFieldGroup id={hintId} orientation={props.labelPosition} error={props.error}>
+              <FormFieldGroup id={hintId} orientation={'vertical'} error={props.error}>
                 <FormFieldGroup.Label>{props.label}</FormFieldGroup.Label>
                 <FormFieldGroup.Field>
                   {testGroup}
