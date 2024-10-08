@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.1.16](https://github.com/Workday/canvas-kit/releases/tag/v11.1.16) (2024-10-07)
+
+### Components
+
+- chore: Fixed Button Style Merge Issue ([#2951](https://github.com/Workday/canvas-kit/pull/2951)) ([@josh-bagwell](https://github.com/josh-bagwell), manuel.carrera)
+  Updates Button variants to fix merge style issue.
+
+
 ## [v11.1.15](https://github.com/Workday/canvas-kit/releases/tag/v11.1.15) (2024-10-07)
 
 ### Infrastructure

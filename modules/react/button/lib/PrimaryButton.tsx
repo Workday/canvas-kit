@@ -6,7 +6,6 @@ import {createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 import {buttonColorPropVars, buttonStencil} from './BaseButton';
 import {Button, ButtonProps} from './Button';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 /**
  * Extends all the style properties from Box to our buttons as well as props from ButtonProps.
@@ -115,9 +114,21 @@ const primaryButtonStencil = createStencil({
 
 export const PrimaryButton = createComponent('button')({
   displayName: 'PrimaryButton',
-  Component: ({children, variant, ...elemProps}: PrimaryButtonProps, ref, Element) => {
+  Component: (
+    {children, variant, size, iconPosition, grow, cs, ...elemProps}: PrimaryButtonProps,
+    ref,
+    Element
+  ) => {
     return (
-      <Button as={Element} ref={ref} {...mergeStyles(elemProps, primaryButtonStencil({variant}))}>
+      <Button
+        as={Element}
+        ref={ref}
+        iconPosition={iconPosition}
+        size={size}
+        grow={grow}
+        cs={[primaryButtonStencil({variant, iconPosition, grow, size}), cs]}
+        {...elemProps}
+      >
         {children}
       </Button>
     );

@@ -24,6 +24,6 @@ export const Primary = () => (
     <PrimaryButton icon={caretDownIcon} iconPosition="end">
       Primary
     </PrimaryButton>
-    <PrimaryButton aria-label="related-actions" icon={relatedActionsVerticalIcon} />
+    <PrimaryButton aria-label="Related Actions" icon={relatedActionsVerticalIcon} />
   </Flex>
 );
