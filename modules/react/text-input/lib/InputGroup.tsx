@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {maybeWrapCSSVariables} from '@workday/canvas-kit-styling';
+import {createStencil, handleCsProp, maybeWrapCSSVariables} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import {
   createContainer,
@@ -10,9 +10,9 @@ import {
   dispatchInputEvent,
   ExtractProps,
   useForkRef,
-  useIsRTL,
 } from '@workday/canvas-kit-react/common';
-import {Flex} from '@workday/canvas-kit-react/layout';
+
+import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {xSmallIcon} from '@workday/canvas-system-icons-web';
 
@@ -29,39 +29,85 @@ export const useInputGroupModel = createModelHook({})(() => {
   };
 });
 
-export const InputGroupInnerStart = createSubcomponent('div')({
-  modelHook: useInputGroupModel,
-})<ExtractProps<typeof Flex, never>>((elemProps, Element) => {
-  return (
-    <Flex
-      as={Element}
-      position="absolute"
-      alignItems="center"
-      justifyContent="center"
-      height="xl"
-      width="xl"
-      {...elemProps}
-    />
-  );
+export const inputGroupInnerStencil = createStencil({
+  vars: {
+    /**
+     * Offset of the inner item. Set by the `InputGroup` and depends on siblings. Do not change this
+     * on your own.
+     */
+    insetInlineStart: 'initial',
+    /**
+     * Offset of the inner item. Set by the `InputGroup` and depends on siblings. Do not change this
+     * on your own.
+     */
+    insetInlineEnd: 'initial',
+    width: system.space.x10,
+    height: system.space.x10,
+    /**
+     * Some inner input group elements are decoration only and should not have pointer events
+     */
+    pointerEvents: '',
+  },
+  base: ({width, height, insetInlineStart, insetInlineEnd}) => ({
+    display: 'flex',
+    position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width,
+    height,
+    insetInlineStart,
+    insetInlineEnd,
+  }),
+  modifiers: {
+    pointerEvents: {
+      _: ({pointerEvents}) => ({pointerEvents}),
+    },
+  },
 });
 
-export const InputGroupInnerEnd = createSubcomponent('div')({
+const InputGroupInnerStart = createSubcomponent('div')({
   modelHook: useInputGroupModel,
-})<ExtractProps<typeof Flex, never>>((elemProps, Element) => {
-  return (
-    <Flex
-      as={Element}
-      position="absolute"
-      alignItems="center"
-      justifyContent="center"
-      height="xl"
-      width="xl"
-      {...elemProps}
-    />
-  );
-});
+})<ExtractProps<typeof Flex, never>>(
+  ({pointerEvents, insetInlineStart, insetInlineEnd, width, height, ...elemProps}, Element) => {
+    return (
+      <Element
+        {...mergeStyles(
+          elemProps,
+          inputGroupInnerStencil({
+            pointerEvents,
+            insetInlineStart: toPx(insetInlineStart),
+            insetInlineEnd: toPx(insetInlineEnd),
+            width: toPx(width),
+            height: toPx(height),
+          })
+        )}
+      />
+    );
+  }
+);
 
-const useInputGroupInput = createElemPropsHook(useInputGroupModel)((model, ref) => {
+const InputGroupInnerEnd = createSubcomponent('div')({
+  modelHook: useInputGroupModel,
+})<ExtractProps<typeof Flex, never>>(
+  ({pointerEvents, insetInlineStart, insetInlineEnd, width, height, ...elemProps}, Element) => {
+    return (
+      <Element
+        {...mergeStyles(
+          elemProps,
+          inputGroupInnerStencil({
+            pointerEvents,
+            insetInlineStart: insetInlineStart as string,
+            insetInlineEnd: insetInlineEnd as string,
+            width: toPx(width),
+            height: toPx(height),
+          })
+        )}
+      />
+    );
+  }
+);
+
+export const useInputGroupInput = createElemPropsHook(useInputGroupModel)((model, ref) => {
   const elementRef = useForkRef(ref, model.state.inputRef);
 
   return {
@@ -69,26 +115,46 @@ const useInputGroupInput = createElemPropsHook(useInputGroupModel)((model, ref) 
   };
 });
 
-export const InputGroupInput = createSubcomponent(TextInput)({
-  modelHook: useInputGroupModel,
-  elemPropsHook: useInputGroupInput,
-})<ExtractProps<typeof Flex, never>>((elemProps, Element) => {
-  return <Flex as={Element} width="100%" {...elemProps} />;
+export const inputGroupInputStencil = createStencil({
+  vars: {
+    paddingInlineStart: '',
+    paddingInlineEnd: '',
+  },
+  base: {
+    display: 'flex',
+    width: '100%',
+  },
+  modifiers: {
+    paddingInlineStart: {
+      _: ({paddingInlineStart}) => ({paddingInlineStart}),
+    },
+    paddingInlineEnd: {
+      _: ({paddingInlineEnd}) => ({paddingInlineEnd}),
+    },
+  },
 });
 
+const InputGroupInput = createSubcomponent(TextInput)({
+  modelHook: useInputGroupModel,
+  elemPropsHook: useInputGroupInput,
+})<ExtractProps<typeof Flex, never>>(
+  ({paddingInlineStart, paddingInlineEnd, ...elemProps}, Element) => {
+    return (
+      <Element
+        as={Element}
+        {...mergeStyles(
+          elemProps,
+          inputGroupInputStencil({
+            paddingInlineStart: toPx(paddingInlineStart),
+            paddingInlineEnd: toPx(paddingInlineEnd),
+          })
+        )}
+      />
+    );
+  }
+);
+
 export const useClearButton = createElemPropsHook(useInputGroupModel)(model => {
-  const [inputHasValue, setInputHasValue] = React.useState(false);
-
-  React.useLayoutEffect(() => {
-    const input = model.state.inputRef.current;
-
-    if (input) {
-      input.addEventListener('input', () => {
-        setInputHasValue(!!input.value);
-      });
-    }
-  }, [model.state.inputRef]);
-
   return {
     // This element does not need to be accessible via screen reader. The user can already clear
     // an input
@@ -98,7 +164,6 @@ export const useClearButton = createElemPropsHook(useInputGroupModel)(model => {
     icon: xSmallIcon,
     // "small" is needed to render correctly within a `TextInput`
     size: 'small',
-    transition: 'opacity 300ms ease',
     // prevent a focus change to the button. Focus should stay in the input.
     onMouseDown(event: React.MouseEvent) {
       event.preventDefault();
@@ -107,25 +172,22 @@ export const useClearButton = createElemPropsHook(useInputGroupModel)(model => {
       // This will clear the input's value
       dispatchInputEvent(model.state.inputRef.current, '');
     },
-    style: {
-      opacity: inputHasValue ? 1 : 0,
-      pointerEvents: inputHasValue ? 'auto' : 'none',
-    },
+    placeholder: '', // Make sure a placeholder attribute always exists for `:placeholder-shown`
   } as const;
 });
 
 /**
  * A clear input button. This can be a component later.
  */
-export const ClearButton = createSubcomponent(TertiaryButton)({
+const ClearButton = createSubcomponent(TertiaryButton)({
   modelHook: useInputGroupModel,
   elemPropsHook: useClearButton,
 })<ExtractProps<typeof TertiaryButton, never>>((elemProps, Element) => {
-  return <Element {...elemProps} />;
+  return <Element data-part="input-group-clear-button" {...handleCsProp(elemProps)} />;
 });
 
 // make sure we always use pixels if the input is a number - this is required for `calc`
-const toPx = (input: string | number): string => {
+const toPx = (input: string | number | undefined): string | undefined => {
   return typeof input === 'number' ? `${input}px` : input;
 };
 
@@ -140,6 +202,26 @@ const wrapInCalc = (values: (string | number)[]): string | number | undefined =>
   }
   return `calc(${values.map(toPx).join(' + ')})`;
 };
+
+export const inputGroupStencil = createStencil({
+  base: {
+    display: 'flex',
+    position: 'relative',
+
+    // Clear Button
+    '& :has([data-part="input-group-clear-button"])': {
+      transition: 'opacity 300ms ease',
+      opacity: 1,
+      pointerEvents: 'auto',
+    },
+
+    // Clear Button when a placeholder is being shown (no value)
+    '&:where(:has(input:placeholder-shown)) :has([data-part="input-group-clear-button"])': {
+      opacity: 0,
+      pointerEvents: 'none',
+    },
+  },
+});
 
 /**
  * An `InputGroup` is a container around a {@link TextInput} with optional inner start and end
@@ -167,7 +249,7 @@ export const InputGroup = createContainer('div')({
   subComponents: {
     /**
      * A component to show inside and at the start of the input. The input's padding will be
-     * adjusted to not overlap with this element. Use `width` (number of pixels only) to adjust the
+     * adjusted by the `InputGroup` to not overlap with this element. Use `width` to adjust the
      * width offset. The width defaults to 40px which is the correct width for icons or icon
      * buttons.
      */
@@ -179,9 +261,9 @@ export const InputGroup = createContainer('div')({
     Input: InputGroupInput,
     /**
      * A component to show inside and at the end of the input. The input's padding will be adjusted
-     * to not overlap with this element. Use `width` (number of pixels only) to adjust the width
-     * offset. The width defaults to 40px which is the correct width for icons or icon buttons
-     * within the input.
+     * by the `InputGroup` to not overlap with this element. Use `width` to adjust the width offset.
+     * The width defaults to 40px which is the correct width for icons or icon buttons within the
+     * input.
      */
     InnerEnd: InputGroupInnerEnd,
     /**
@@ -191,7 +273,6 @@ export const InputGroup = createContainer('div')({
     ClearButton: ClearButton,
   },
 })<ExtractProps<typeof Flex, never>>(({children, ...elemProps}, Element) => {
-  const isRTL = useIsRTL();
   const offsetsStart: (string | number)[] = [];
   const offsetsEnd: (string | number)[] = [];
 
@@ -222,30 +303,24 @@ export const InputGroup = createContainer('div')({
         });
       }
       if (child.type === InputGroupInnerStart) {
-        const offset = wrapInCalc(offsetsStart.slice(0, indexStart)) || 0;
+        const offset = wrapInCalc(offsetsStart.slice(0, indexStart)) || '0px';
         indexStart++;
 
         return React.cloneElement(child, {
-          left: isRTL ? undefined : offset,
-          right: isRTL ? offset : undefined,
+          insetInlineStart: offset,
         });
       }
       if (child.type === InputGroupInnerEnd) {
-        const offset = wrapInCalc(offsetsEnd.slice(indexEnd, -1)) || 0;
+        const offset = wrapInCalc(offsetsEnd.slice(indexEnd, -1)) || '0px';
         indexEnd++;
 
         return React.cloneElement(child, {
-          left: isRTL ? offset : undefined,
-          right: isRTL ? undefined : offset,
+          insetInlineEnd: offset,
         });
       }
     }
     return child;
   });
 
-  return (
-    <Flex as={Element} position="relative" {...elemProps}>
-      {mappedChildren}
-    </Flex>
-  );
+  return <Element {...mergeStyles(elemProps, inputGroupStencil())}>{mappedChildren}</Element>;
 });
