@@ -1,4 +1,4 @@
-import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
 import * as FormFieldStories from './FormField.stories';
 
 import {Basic} from './examples/Basic';
@@ -29,6 +29,43 @@ by passing in `TextInput`, `Select`, `RadioGroup` and other form elements to `Fo
 ```sh
 yarn add @workday/canvas-kit-react
 ```
+
+## Accessibility
+
+The `FormField` adds a `for` attribute to the `FormField.Label` (`<label>` element) element that
+matches the `id` attribute of the `FormField.Input` which is usually a `input` element. This both
+labels the input for screen readers and other assitive technology as well as will focus on the input
+when the user clicks on the label. If your form field input component is more complicated, the
+`FormField` will also add an `id` to the `FormField.Label` and an `aria-labelledby` to the
+`FormField.Input` component. You can then forward the `aria-labelledby` to whatever elements you
+need for the proper accessibility.
+
+For example, the DOM will look something like this:
+
+```html
+<div>
+  <label id="label-abc" for="input-abc">First Name</label>
+  <input id="input-abc" aria-labelledby="label-abc" />
+</div>
+```
+
+Some components, like `MultiSelect`, have an additional `role=listbox` element that also needs to
+link to the `label` element. The resulting DOM will look something like:
+
+```html
+<div>
+  <label id="label-abc" for="input-abc">States you've lived in</label>
+  <input id="input-abc" aria-labelledby="label-abc" role="combobox" ... />
+  <ul role="listbox" aria-labelledby="label-abc">
+    <li>Texas</li>
+    <li>California</li>
+  </ul>
+</div>
+```
+
+The `MultiSelect` component gets the `aria-labelledby` from the `FormField.Input` and forwards it to
+both the `input[role=combobox]` element and the `ul[role=listbox]` element so the screen reader
+knows the label for both is "States you've lived in".
 
 ## Usage
 
@@ -165,3 +202,7 @@ check our
 ## Component API
 
 <SymbolDoc name="FormField" fileName="/preview-react/" />
+
+## Specifications
+
+<Specifications file="FormField.spec.tsx" name="FormField" />

@@ -5,8 +5,7 @@ import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {Text, textStencil} from '@workday/canvas-kit-react/text';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {brand, system} from '@workday/canvas-tokens-web';
-
-import {useFormFieldLabel, useFormFieldModel} from './hooks';
+import {useFormFieldModel} from './hooks';
 
 export interface FormFieldGroupLabelProps
   extends FlexProps,
@@ -66,11 +65,10 @@ export const formFieldGroupLabelStencil = createStencil({
 export const FormFieldGroupLabel = createSubcomponent('div')({
   displayName: 'FormFieldGroup.Label',
   modelHook: useFormFieldModel,
-  elemPropsHook: useFormFieldLabel,
 })<FormFieldGroupLabelProps>(({children, typeLevel, variant, ...elemProps}, Element, model) => {
   return (
     <Element
-      id={model.state.id}
+      id={`label-${model.state.id}`}
       {...mergeStyles(
         elemProps,
         formFieldGroupLabelStencil({
