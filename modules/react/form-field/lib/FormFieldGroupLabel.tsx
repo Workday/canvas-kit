@@ -66,11 +66,10 @@ export const formFieldGroupLabelStencil = createStencil({
 export const FormFieldGroupLabel = createSubcomponent('div')({
   displayName: 'FormFieldGroup.Label',
   modelHook: useFormFieldModel,
-  elemPropsHook: useFormFieldLabel,
 })<FormFieldGroupLabelProps>(({children, typeLevel, variant, ...elemProps}, Element, model) => {
   return (
     <Element
-      id={model.state.id}
+      id={`label-${model.state.id}`}
       {...mergeStyles(
         elemProps,
         formFieldGroupLabelStencil({
