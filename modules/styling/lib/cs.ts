@@ -378,7 +378,7 @@ type ModifierConfig = Record<string, Record<string, CS>>;
  * Helper type to convert `'true'` into `true` for boolean modifiers which are a pain to type as a
  * prop.
  */
-type MaybeBoolean<T> = T extends 'true' ? boolean : T extends 'false' ? boolean : T;
+type MaybeBoolean<T> = T extends 'true' | 'false' ? T | boolean : T;
 
 type ModifierValues<T extends ModifierConfig> = {
   [P in keyof T]: MaybeBoolean<keyof T[P]>;
@@ -984,7 +984,7 @@ export interface StencilConfig<
   defaultModifiers?: [E] extends [never]
     ? StencilDefaultModifierReturn<M>
     : E extends BaseStencil<infer ME, any, any, any>
-    ? StencilDefaultModifierReturn<M & ME>
+    ? StencilDefaultModifierReturn<ME & M>
     : undefined;
 }
 

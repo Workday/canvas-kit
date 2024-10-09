@@ -10,6 +10,13 @@ export const useFormFieldInput = createElemPropsHook(useFormFieldModel)(({state}
     required: state.isRequired ? true : undefined,
     'aria-invalid': state.error === 'error' ? true : undefined,
     'aria-describedby': state.id ? `hint-${state.id}` : undefined,
+    /**
+     * Provide an `aria-labelledby` for fields that need access to `label` directly
+     */
+    'aria-labelledby': state.id ? `label-${state.id}` : undefined,
+    /**
+     * Provide an `id` to link the input via the `for` attribute on a `label`
+     */
     id: state.id ? `input-${state.id}` : undefined,
     error: state.error,
   };

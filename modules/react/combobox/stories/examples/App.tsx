@@ -2,7 +2,7 @@ import React from 'react';
 
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {createStyles} from '@workday/canvas-kit-styling';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 
 import {accessibilityIcon, accountsIcon} from '@workday/canvas-system-icons-web';
 
@@ -19,18 +19,6 @@ const mainContentStyles = createStyles({
 
 const items = ['Cheese', 'Olives', 'Onions', 'Pepperoni', 'Peppers'];
 
-const Container = styled('div')({
-  '& :where([data-part="test"])': {
-    backgroundColor: 'blue',
-  },
-});
-
-const Test = styled('div')(({backgroundColor}) => ({
-  backgroundColor,
-  width: 100,
-  height: 100,
-}));
-
 export const App = () => {
   const [color, setColor] = React.useState('red');
   return (
@@ -43,9 +31,6 @@ export const App = () => {
           }}
         >
           <main className={mainContentStyles}>
-            <Container>
-              <Test data-part="test" backgroundColor={color} />
-            </Container>
             <input value={color} onChange={event => setColor(event.currentTarget.value)} />
             <MultiSelect items={items}>
               <FormField orientation="horizontal">

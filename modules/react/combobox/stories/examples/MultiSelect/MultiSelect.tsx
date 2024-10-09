@@ -6,8 +6,9 @@ import {Combobox} from '@workday/canvas-kit-react/combobox';
 import {Menu} from '@workday/canvas-kit-react/menu';
 
 import {useMultiSelectModel} from './useMultiSelectModel';
-import {MultiSelectInput} from './MultiSelectInput';
+import {MultiSelectInput, MultiSelectSearchInput} from './MultiSelectInput';
 import {MultiSelectItem} from './MultiSelectItem';
+import {MultiSelectCard} from './MultiSelectCard';
 
 export interface MultiSelectProps {}
 
@@ -15,8 +16,9 @@ export const MultiSelect = createContainer()({
   modelHook: useMultiSelectModel,
   subComponents: {
     Input: MultiSelectInput,
+    SearchInput: MultiSelectSearchInput,
     Popper: Combobox.Menu.Popper,
-    Card: Combobox.Menu.Card,
+    Card: MultiSelectCard,
     List: Combobox.Menu.List,
     Item: MultiSelectItem,
   },

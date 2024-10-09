@@ -33,7 +33,8 @@ export const textInputStencil = createStencil({
     width: cssVar(width),
     minWidth: cssVar(width, calc.add(calc.multiply(system.space.x20, 3), system.space.x10)),
     color: system.color.text.default,
-    textOverflow: 'ellipsis',
+    textOverflow: 'ellipsis', // Always show ellipsis for long text inputs as long as it doesn't have focus
+
     '::-ms-clear': {
       display: 'none',
     },

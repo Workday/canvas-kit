@@ -61,15 +61,18 @@ export const multiSelectStencil = createStencil({
     },
 
     // @ts-ignore
-    '& :where([data-part="user-input"])': {
+    '& [data-part="user-input"]': {
       ...system.type.subtext.large,
       backgroundColor: system.color.bg.transparent,
-      border: 'none',
-      outlineWidth: '0px',
-      padding: system.space.x2, // Compensate for border
+      // padding: system.space.x2, // Compensate for border
       borderRadius: system.shape.x1,
 
-      '&:not([aria-autocomplete])': {
+      // Remove the focus ring - it is handled at the container level
+      border: 'none',
+      boxShadow: 'none',
+      outlineWidth: '0px',
+
+      '&:where(:not([aria-autocomplete]))': {
         caretColor: 'transparent',
         cursor: 'default',
         '&::selection': {
@@ -102,6 +105,15 @@ export const multiSelectStencil = createStencil({
       flexWrap: 'wrap',
     },
   },
+  parts: {
+    'user-input': {
+      // styles
+      // hover container
+      '&:hover': {},
+    },
+    // hover data-part
+    '& #:hover': {},
+  },
 });
 
 export const useMultiSelectInput = composeHooks(
@@ -128,7 +140,7 @@ export const useMultiSelectInput = composeHooks(
           }
         }
 
-        console.log('key', event.key);
+        // console.log('key', event.key);
         if (
           (event.key === 'ArrowDown' || event.key === 'ArrowUp') &&
           model.state.visibility === 'hidden'
@@ -207,15 +219,18 @@ const MultiSelectedItem = createSubcomponent('span')({
 
 export interface MultiSelectInputProps
   extends CSProps,
-    Pick<React.InputHTMLAttributes<HTMLInputElement>, 'disabled' | 'className'> {}
+    Pick<
+      React.InputHTMLAttributes<HTMLInputElement>,
+      'disabled' | 'className' | 'style' | 'aria-labelledby'
+    > {}
 
 export const MultiSelectInput = createSubcomponent(TextInput)({
   displayName: 'MultiSelect.Input',
   modelHook: useMultiSelectModel,
   elemPropsHook: useMultiSelectInput,
-})<MultiSelectInputProps>(({className, cs, disabled, ...elemProps}, Element, model) => {
+})<MultiSelectInputProps>(({className, cs, style, disabled, ...elemProps}, Element, model) => {
   return (
-    <div {...handleCsProp({className, cs}, multiSelectStencil({}))}>
+    <div {...handleCsProp({className, cs, style}, multiSelectStencil({}))}>
       <InputGroup>
         <InputGroup.Input
           data-part="form-input"
@@ -224,7 +239,7 @@ export const MultiSelectInput = createSubcomponent(TextInput)({
           aria-hidden={true}
         />
         <InputGroup.Input data-part="user-input" as={Element} {...elemProps} />
-        <InputGroup.InnerEnd pointerEvents="none" top="0">
+        <InputGroup.InnerEnd pointerEvents="none">
           <SystemIcon icon={caretDownSmallIcon} />
         </InputGroup.InnerEnd>
       </InputGroup>
@@ -244,35 +259,44 @@ export const MultiSelectSearchInput = createSubcomponent(TextInput)({
   displayName: 'MultiSelect.Input',
   modelHook: useMultiSelectModel,
   elemPropsHook: useMultiSelectInput,
-})<MultiSelectInputProps>(({className, cs, disabled, ...elemProps}, Element, model) => {
-  return (
-    <div {...handleCsProp({className, cs}, multiSelectStencil({}))}>
-      <InputGroup>
-        <InputGroup.InnerStart pointerEvents="none" width={system.space.x8}>
-          <SystemIcon icon={searchIcon} size={system.space.x4} />
-        </InputGroup.InnerStart>
-        <InputGroup.Input
-          data-part="form-input"
-          disabled={disabled}
-          tabIndex={-1}
-          aria-hidden={true}
-        />
-        <InputGroup.Input data-part="user-input" as={Element} {...elemProps} />
-        <InputGroup.InnerEnd width={system.space.x8}>
-          <InputGroup.ClearButton />
-        </InputGroup.InnerEnd>
-        <InputGroup.InnerEnd pointerEvents="none" top="0">
-          <SystemIcon icon={caretDownSmallIcon} />
-        </InputGroup.InnerEnd>
-      </InputGroup>
-      {model.selected.state.items.length ? (
-        <>
-          <div data-part="separator" />
-          <ListBox model={model.selected} as="div" role="listbox" aria-orientation="horizontal">
-            {item => <MultiSelectedItem>{item.textValue}</MultiSelectedItem>}
-          </ListBox>
-        </>
-      ) : null}
-    </div>
-  );
-});
+})<MultiSelectInputProps>(
+  ({className, cs, disabled, 'aria-labelledby': ariaLabelledBy, ...elemProps}, Element, model) => {
+    return (
+      <div {...handleCsProp({className, cs}, multiSelectStencil({}))}>
+        <InputGroup>
+          <InputGroup.InnerStart pointerEvents="none" width={system.space.x8}>
+            <SystemIcon icon={searchIcon} size={system.space.x4} />
+          </InputGroup.InnerStart>
+          <InputGroup.Input
+            data-part="form-input"
+            disabled={disabled}
+            tabIndex={-1}
+            aria-hidden={true}
+            aria-labelledby={ariaLabelledBy}
+          />
+          <InputGroup.Input data-part="user-input" as={Element} {...elemProps} />
+          <InputGroup.InnerEnd width={system.space.x8}>
+            <InputGroup.ClearButton />
+          </InputGroup.InnerEnd>
+          <InputGroup.InnerEnd pointerEvents="none">
+            <SystemIcon icon={caretDownSmallIcon} />
+          </InputGroup.InnerEnd>
+        </InputGroup>
+        {model.selected.state.items.length ? (
+          <>
+            <div data-part="separator" />
+            <ListBox
+              model={model.selected}
+              as="div"
+              role="listbox"
+              aria-orientation="horizontal"
+              aria-labelledby={ariaLabelledBy}
+            >
+              {item => <MultiSelectedItem>{item.textValue}</MultiSelectedItem>}
+            </ListBox>
+          </>
+        ) : null}
+      </div>
+    );
+  }
+);
