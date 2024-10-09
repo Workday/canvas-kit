@@ -80,8 +80,8 @@ export const CustomPlacement = {
             <Menu>
               <Menu.Card>
                 <Menu.List>
-                  <Menu.Item>{'Custom'}</Menu.Item>
-                  <Menu.Item>{'Placement'}</Menu.Item>
+                  <Menu.Item>Custom</Menu.Item>
+                  <Menu.Item>Placement</Menu.Item>
                 </Menu.List>
               </Menu.Card>
             </Menu>
