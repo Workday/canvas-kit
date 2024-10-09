@@ -96,8 +96,8 @@ describe('Autocomplete', () => {
           cy.findAllByRole('option').eq(0).should('not.have.class', 'focus');
         });
 
-        it('should not set aria-selected to the first option', () => {
-          cy.findAllByRole('option').eq(0).should('have.not.attr', 'aria-selected');
+        it('should set aria-selected=false to the first option', () => {
+          cy.findAllByRole('option').eq(0).should('have.attr', 'aria-selected', 'false');
         });
       });
 
