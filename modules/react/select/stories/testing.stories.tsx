@@ -103,40 +103,42 @@ export const SelectOpenMenuStates = (props: {theme?: PartialEmotionCanvasTheme})
     initialVisibility: 'visible',
   });
   return (
-    <StaticStates theme={props.theme}>
-      <ComponentStatesTable
-        rowProps={[{label: '', props: {}}]}
-        columnProps={[
-          {label: 'Default', props: {}},
-          {label: 'Alert', props: {error: 'alert'}},
-          {label: 'Error', props: {error: 'error'}},
-        ]}
-      >
-        {props => (
-          <FormField>
-            <FormField.Label>Contact</FormField.Label>
-            <Select model={model}>
-              <FormField.Input as={Select.Input} {...props} id="contact-select" />
-              <Select.Popper>
-                <Select.Card maxHeight="200px">
-                  {!!model.state.items.length && (
-                    <Select.List>
-                      {item => {
-                        return (
-                          <Select.Item aria-disabled={item.disabled ? item.disabled : undefined}>
-                            {item.id}
-                          </Select.Item>
-                        );
-                      }}
-                    </Select.List>
-                  )}
-                </Select.Card>
-              </Select.Popper>
-            </Select>
-          </FormField>
-        )}
-      </ComponentStatesTable>
-    </StaticStates>
+    <div style={{height: 400}}>
+      <StaticStates theme={props.theme}>
+        <ComponentStatesTable
+          rowProps={[{label: '', props: {}}]}
+          columnProps={[
+            {label: 'Default', props: {}},
+            {label: 'Alert', props: {error: 'alert'}},
+            {label: 'Error', props: {error: 'error'}},
+          ]}
+        >
+          {props => (
+            <FormField>
+              <FormField.Label>Contact</FormField.Label>
+              <Select model={model}>
+                <FormField.Input as={Select.Input} {...props} id="contact-select" />
+                <Select.Popper>
+                  <Select.Card maxHeight="200px">
+                    {!!model.state.items.length && (
+                      <Select.List>
+                        {item => {
+                          return (
+                            <Select.Item aria-disabled={item.disabled ? item.disabled : undefined}>
+                              {item.id}
+                            </Select.Item>
+                          );
+                        }}
+                      </Select.List>
+                    )}
+                  </Select.Card>
+                </Select.Popper>
+              </Select>
+            </FormField>
+          )}
+        </ComponentStatesTable>
+      </StaticStates>
+    </div>
   );
 };
 
