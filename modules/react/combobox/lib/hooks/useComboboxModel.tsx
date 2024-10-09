@@ -56,7 +56,19 @@ export const useComboboxModel = createModelHook({
   const menu = useMenuModel(
     useMenuModel.mergeConfig(config, {
       onSelect({id}) {
-        dispatchInputEvent(menu.state.targetRef.current, id);
+        dispatchInputEvent(
+          menu.state.targetRef.current,
+          // The IIFE helps organize logic
+          (() => {
+            // Get the next selection state by calling the selection
+            const selected = menu.selection.select(id, menu.state).selectedIds;
+            if (selected === 'all') {
+              return selected;
+            } else {
+              return selected.join(', ');
+            }
+          })()
+        );
       },
     })
   );

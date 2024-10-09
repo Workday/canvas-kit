@@ -38,7 +38,7 @@ type DefaultedVarsShape = Record<string, string> | Record<string, Record<string,
  * Wrap all unwrapped CSS Variables. For example, `{padding: '--foo'}` will be replaced with
  * `{padding: 'var(--foo)'}`. It also works on variables in the middle of the property. Takes any
  * string and returns a string with CSS variables wrapped if necesary.
- * 
+ *
  * ```ts
  * maybeWrapCSSVariables('1rem'); // 1rem
  * maybeWrapCSSVariables('--foo'); // var(--foo)

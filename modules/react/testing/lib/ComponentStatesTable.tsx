@@ -67,6 +67,10 @@ export const ComponentStatesTable = ({
                     {children({
                       ...row.props,
                       ...col.props,
+                      // join class names between rows and columns
+                      className: [row.props.className, col.props.className]
+                        .filter(c => c)
+                        .join(' '),
                     })}
                   </td>
                 );

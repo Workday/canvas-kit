@@ -252,6 +252,7 @@ export function useListLoader<
         if (config.shouldLoad && !config.shouldLoad(params, prevState)) {
           return false;
         }
+        console.log('shouldLoadIndex');
         load(params, loadRef.current, loadingRef.current)
           .then(updateItems)
           .then(() => {
@@ -296,6 +297,7 @@ export function useListLoader<
     if (config.shouldLoad && !config.shouldLoad(params, state)) {
       return;
     }
+    console.log('updateFilter', params);
     load(params, loadRef.current, loadingRef.current).then(updateItems);
   };
 
@@ -311,6 +313,7 @@ export function useListLoader<
     if (config.shouldLoad && !config.shouldLoad(params, state)) {
       return;
     }
+    console.log('updateSorter', params);
     load(params, loadRef.current, loadingRef.current).then(updateItems);
   };
 
@@ -337,6 +340,7 @@ export function useListLoader<
       if (shouldLoad && !shouldLoad(params, stateRef.current)) {
         return;
       }
+      console.log('pagesToLoad');
       load(params, loadRef.current, loadingRef.current).then(updateItems);
     });
 

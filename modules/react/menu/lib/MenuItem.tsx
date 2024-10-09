@@ -1,6 +1,10 @@
 import * as React from 'react';
 
 import {colors, iconColors, typeColors, space, type} from '@workday/canvas-kit-react/tokens';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
+import {checkSmallIcon} from '@workday/canvas-system-icons-web';
+
 import {
   createSubcomponent,
   styled,
@@ -8,10 +12,11 @@ import {
   composeHooks,
   createElemPropsHook,
   useLocalRef,
+  createComponent,
 } from '@workday/canvas-kit-react/common';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
-import {Box} from '@workday/canvas-kit-react/layout';
+import {Box, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {
   useListItemRegister,
   useListItemRovingFocus,
@@ -32,6 +37,18 @@ export interface MenuItemProps {
    */
   children: React.ReactNode;
   /**
+   * The semantic side effect of selecting a menu item. What is the intent when a user activates this
+   * menu item?
+   * - `selectable`: The menu item is intended to be an option that can be selected and retain a
+   *   selected state. It will be shown using selected styling when the menu is open. This should
+   *   be used for components like `Select` or `MultiSelect` or toolbars that have a few valid
+   *   options
+   *  - `actionable`: The menu item is intended to perform an action rather than selecting something.
+   *   This could be a navigation dropdown menu or creating a new user. There is no selected state
+   *   that is portrayed to the user because selection is not the intent of the item.
+   */
+  type?: 'selectable' | 'actionable';
+  /**
    * The name of the menu item. This name will be used in the `onSelect` callback in the model. If
    * this property is not provided, it will default to a string representation of the the zero-based
    * index of the Tab when it was initialized.
@@ -48,7 +65,127 @@ interface StyledMenuProps {
   isDisabled?: boolean;
 }
 
-export const StyledMenuItem = styled(Box.as('button'))<StyledType & StyledMenuProps>(
+export const menuItemStencil = createStencil({
+  base: {
+    ...system.type.subtext.large,
+    display: 'flex',
+    alignItems: 'center',
+    width: '100%',
+    gap: space.s,
+    padding: `${space.xxs} ${space.s}`,
+    boxSizing: 'border-box',
+    cursor: 'pointer',
+    color: system.color.text.default,
+    borderWidth: 0,
+    textAlign: 'left',
+    transition: 'background-color 80ms, color 80ms',
+    backgroundColor: 'inherit',
+    minHeight: system.space.x10,
+
+    // selected checkmark
+    '& :where([data-part="menu-item-selected"])': {
+      transition: 'opacity 80ms linear',
+      opacity: system.opacity.zero,
+    },
+
+    // if the menu item has children we need it to be displayed in flex
+    '&:where(:has(span))': {
+      display: 'flex',
+    },
+
+    // Hover styles
+    '&:is(.hover, :hover)': {
+      [systemIconStencil.vars.color]: system.color.icon.strong,
+      backgroundColor: brand.neutral.lightest,
+    },
+
+    // Focus styles
+    '&:is(.focus, :focus)': {
+      [systemIconStencil.vars.color]: brand.primary.accent,
+      outline: 'none',
+      backgroundColor: brand.primary.base,
+      color: systemIconStencil.vars.color,
+    },
+
+    // Disabled styles
+    '&:is(:disabled, [aria-disabled=true])': {
+      [systemIconStencil.vars.color]: 'color',
+      color: system.color.text.disabled,
+      cursor: 'default',
+
+      // Focus + Disabled
+      '&:where(.focus, :focus)': {
+        backgroundColor: brand.primary.light,
+      },
+    },
+
+    '& :where([data-part="menu-item-text"])': {
+      flexGrow: 1,
+      alignSelf: 'center',
+    },
+  },
+  modifiers: {
+    /**
+     * The semantic side effect of selecting a menu item. What is the intent when a user activates this
+     * menu item?
+     * - `selectable`: The menu item is intended to be an option that can be selected and retain a
+     *   selected state. It will be shown using selected styling when the menu is open. This should
+     *   be used for components like `Select` or `MultiSelect` or toolbars that have a few valid
+     *   options
+     *  - `actionable`: The menu item is intended to perform an action rather than selecting something.
+     *   This could be a navigation dropdown menu or creating a new user. There is no selected state
+     *   that is portrayed to the user because selection is not the intent of the item.
+     */
+    type: {
+      selectable: {
+        '&[aria-selected=true]': {
+          [systemIconStencil.vars.color]: brand.primary.dark,
+          color: systemIconStencil.vars.color,
+          backgroundColor: brand.primary.lightest,
+          '& :where([data-part="menu-item-selected"])': {
+            opacity: system.opacity.full,
+          },
+          '&:where(.focus, :focus)': {
+            [systemIconStencil.vars.color]: brand.primary.accent,
+            outline: 'none',
+            backgroundColor: brand.primary.base,
+            color: systemIconStencil.vars.color,
+          },
+        },
+      },
+      actionable: {
+        '& [data-part="menu-item-selected"]': {
+          display: 'none',
+        },
+      },
+    },
+  },
+});
+
+const MenuItemIcon = styled(SystemIcon)({alignSelf: 'start'});
+
+const MenuItemText = ({children}: React.PropsWithChildren) => {
+  return (
+    <>
+      <span data-part="menu-item-text">{children}</span>
+      <SystemIcon icon={checkSmallIcon} data-part="menu-item-selected" />
+    </>
+  );
+};
+
+export const StyledMenuItem = createComponent('button')({
+  displayName: 'MenuItem',
+  Component: ({children, type = 'actionable', ...elemProps}: MenuItemProps, ref, Element) => {
+    console.log('type', type);
+    return (
+      <Element ref={ref} {...mergeStyles(elemProps, menuItemStencil({type}))}>
+        {typeof children === 'string' ? <MenuItemText>{children}</MenuItemText> : children}
+      </Element>
+    );
+  },
+});
+
+export const StyledMenuItemOld = styled(Box.as('button'))<StyledType & StyledMenuProps>(
   ({theme}) => {
     return {
       ...type.levels.subtext.large,
@@ -181,13 +318,16 @@ export const MenuItem = createSubcomponent('button')({
   modelHook: useMenuModel,
   elemPropsHook: useMenuItem,
   subComponents: {
-    Icon: styled(SystemIcon)({alignSelf: 'start'}),
-    Text: styled('span')({flexGrow: 1, alignSelf: 'center'}),
+    Icon: MenuItemIcon,
+    Text: MenuItemText,
   },
-})<MenuItemProps>(({children, ...elemProps}, Element) => {
+})<MenuItemProps>(({children, type = 'actionable', ...elemProps}, Element) => {
   return (
     <OverflowTooltip placement="left">
-      <StyledMenuItem minHeight={space.xl} as={Element} {...elemProps}>
+      {/* <StyledMenuItem minHeight={space.xl} as={Element} {...elemProps}>
+        {children}
+      </StyledMenuItem> */}
+      <StyledMenuItem as={Element} {...elemProps}>
         {children}
       </StyledMenuItem>
     </OverflowTooltip>
