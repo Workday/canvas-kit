@@ -145,6 +145,7 @@
     "ansi-regex": "3.0.1",
     "braces": "3.0.3",
     "micromatch": "4.0.6",
-    "jscodeshift": "0.14.0"
+    "jscodeshift": "0.14.0",
+    "puppeteer-core": "^13.7.0"
   }
 }
