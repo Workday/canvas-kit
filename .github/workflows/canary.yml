@@ -26,10 +26,10 @@ jobs:
       ## Build Storybook and extract component stories for Storybook aggregation. This will be used
       ## for Chromatic rebaselining and publishing to GH Pages. Should be before `yarn build` since
       ## built assets mess up this command
-      #  removed yarn sb extract docs docs/stories.json because we were exceeding limit in CI, add this back in once we figure out how to extend the limit
       - name: Build Storybook
         run: |
           yarn build-storybook --quiet
+          yarn sb extract docs docs/stories.json
 
       ## Build for packaging.
       - name: Build
