@@ -2,8 +2,8 @@ import React from 'react';
 
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 
-import {Pill, usePillModel} from '@workday/canvas-kit-preview-react/pill';
-import {stateTableColumnProps} from '@workday/canvas-kit-react/button/stories/visual-testing/utils';
+import {Pill} from '@workday/canvas-kit-preview-react/pill';
+import {stateTableColumnProps} from '@workday/canvas-kit-react/button/stories/utils';
 // @ts-ignore: Cannot find module error
 import testAvatar from './examples/test-avatar.png';
 

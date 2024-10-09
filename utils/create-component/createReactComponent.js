@@ -17,7 +17,7 @@ const hooksIndex = require('./templates/react/hook.index');
 const mdxStories = require('./templates/react/stories.mdx');
 const basicStories = require('./templates/react/stories.basic');
 const openStories = require('./templates/react/stories.open');
-const testingStories = require('./templates/react/stories.visualTesting');
+const testingStories = require('./templates/react/visualTesting.stories');
 const ssr = require('./templates/react/SSR');
 const readme = require('./templates/react/readme');
 const tsconfig = require('./templates/react/tsconfig');
@@ -73,7 +73,14 @@ module.exports = (modulePath, name, description, prerelease, category) => {
     },
     mdxStories: {
       path: `stories/${pascalCaseName}.stories.mdx`,
-      contents: mdxStories(moduleName, storyPath, pascalCaseName, titleCaseName, prerelease, description),
+      contents: mdxStories(
+        moduleName,
+        storyPath,
+        pascalCaseName,
+        titleCaseName,
+        prerelease,
+        description
+      ),
     },
     basicStories: {
       path: `stories/examples/Basic.tsx`,
@@ -84,7 +91,7 @@ module.exports = (modulePath, name, description, prerelease, category) => {
       contents: openStories(moduleName, pascalCaseName),
     },
     testingStories: {
-      path: `stories/visual-testing/stories_${pascalCaseName}.tsx`,
+      path: `stories/visualTesting.stories.tsx`,
       contents: testingStories(moduleName, testingStoryPath, pascalCaseName, rootPath),
     },
     ssr: {

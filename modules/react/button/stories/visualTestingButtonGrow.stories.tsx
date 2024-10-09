@@ -1,5 +1,4 @@
 import React from 'react';
-import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 import {
   PrimaryButton,
   SecondaryButton,
@@ -8,9 +7,14 @@ import {
 } from '@workday/canvas-kit-react/button';
 import {Flex} from '@workday/canvas-kit-react/layout';
 
-export default withSnapshotsEnabled({
+export default {
   title: 'Testing/Buttons/Button/Grow',
-});
+  parameters: {
+    chromatic: {
+      disable: false,
+    },
+  },
+};
 
 export const ButtonGrow = () => (
   <Flex flexDirection="column" gap="xs">

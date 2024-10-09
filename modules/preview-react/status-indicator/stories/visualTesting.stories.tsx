@@ -6,7 +6,7 @@ import {
   StaticStates,
 } from '@workday/canvas-kit-react/testing';
 
-import {StatusIndicator} from '../../index';
+import {StatusIndicator} from '../index';
 import {uploadCloudIcon} from '@workday/canvas-system-icons-web';
 
 export default {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {customColorTheme} from '../../../../../utils/storybook';
+import {customColorTheme} from '../../../../utils/storybook';
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
 import {ToolbarIconButton} from '@workday/canvas-kit-react/button';
 import {Container, stateTableColumnProps} from './utils';

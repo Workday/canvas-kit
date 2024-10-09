@@ -3,7 +3,7 @@ import {ColorPicker} from '@workday/canvas-kit-preview-react/color-picker';
 
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/testing';
-import {InputInteraction as InputInteractionExample} from '../examples/InputInteraction';
+import {InputInteraction as InputInteractionExample} from './examples/InputInteraction';
 
 export default {
   title: 'Testing/Preview/Color Picker',

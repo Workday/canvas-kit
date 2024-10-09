@@ -6,7 +6,7 @@ import {
   permutateProps,
   StaticStates,
 } from '@workday/canvas-kit-react/testing';
-import {withSnapshotsEnabled, customColorTheme} from '../../../../../utils/storybook';
+import {customColorTheme} from '../../../../utils/storybook';
 import {
   PrimaryButton,
   SecondaryButton,
@@ -19,9 +19,14 @@ import {stateTableColumnProps} from './utils';
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
 import {Flex} from '@workday/canvas-kit-react/layout';
 
-export default withSnapshotsEnabled({
+export default {
   title: 'Testing/Buttons/Button/Color Overrides',
-});
+  parameters: {
+    chromatic: {
+      disable: false,
+    },
+  },
+};
 
 const ColorOverrideContainer = props => {
   return (

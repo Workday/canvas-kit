@@ -1,15 +1,19 @@
 import React from 'react';
 
 import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/testing';
-import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 
 import {Divider} from '@workday/canvas-kit-preview-react/divider';
 import {system} from '@workday/canvas-tokens-web';
 
-export default withSnapshotsEnabled({
+export default {
   title: 'Testing/Preview/Divider',
   component: Divider,
-});
+  parameters: {
+    chromatic: {
+      disable: false,
+    },
+  },
+};
 
 export const DividerStates = () => {
   return (

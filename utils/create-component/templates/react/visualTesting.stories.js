@@ -2,14 +2,18 @@ module.exports = (modulePath, storyPath, pascalCaseName, rootPath) => `
 import React from 'react';
 
 import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/testing';
-import {withSnapshotsEnabled} from '../../${rootPath}/utils/storybook';
 
 import {${pascalCaseName}} from '${modulePath}';
 
-export default withSnapshotsEnabled({
-  title: '${storyPath}',
+export default {
+  title: 'Testing/${storyPath}',
   component: ${pascalCaseName},
-});
+  parameters: {
+    chromatic: {
+      disable: false,
+    },
+  },
+};
 
 export const ${pascalCaseName}States = () => {
   return (

@@ -5,25 +5,25 @@ import {
   permutateProps,
   StaticStates,
 } from '@workday/canvas-kit-react/testing';
-import {withSnapshotsEnabled} from '../../../../../utils/storybook';
-import {Avatar} from '../../index';
+import {Avatar} from '../index';
 
 // @ts-ignore: Cannot find module error
-import testAvatar from '../test-avatar.png';
+import testAvatar from './avatar/examples/test-avatar.png';
 
 // eslint-disable-next-line no-empty-function
 const noop = () => {};
 
-export default withSnapshotsEnabled({
+export default {
   title: 'Testing/Indicators/Avatar',
   component: Avatar,
   parameters: {
     chromatic: {
+      disable: false,
       diffThreshold: 0.3, // Chrome downsizes images non-deterministically. From testing, 0.28 is the minimum.
       delay: 300, // Ensure we capture the image after loading and transition
     },
   },
-});
+};
 
 export const AvatarStates = () => (
   <StaticStates>

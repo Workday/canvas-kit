@@ -301,16 +301,15 @@ list:
 
 ```tsx
 // CSF - All stories in file
-export default withSnapshotsEnabled({
-  // CSF details (title, component, etc.)
-});
-
-// or CSF - Specific story
-export const MyVisualStory = () => {
-  // story contents
+export default {
+  title: 'Testing/<Category>/<Component>',
+  component: <ComponentName>,
+  parameters: {
+    chromatic: {
+      disable: false,
+    },
+  },
 };
-
-withSnapshotsEnabled(MyVisualStory);
 ```
 
 Not all visual states are application states (E.g. `focus`, `hover`, and `active` on a button

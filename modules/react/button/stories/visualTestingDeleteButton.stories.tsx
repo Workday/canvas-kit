@@ -5,7 +5,7 @@ import {
   permutateProps,
   StaticStates,
 } from '@workday/canvas-kit-react/testing';
-import {customColorTheme} from '../../../../../utils/storybook';
+import {customColorTheme} from '../../../../utils/storybook';
 import {DeleteButton} from '@workday/canvas-kit-react/button';
 import {trashIcon} from '@workday/canvas-system-icons-web';
 import {Container, stateTableColumnProps} from './utils';

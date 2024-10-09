@@ -1,7 +1,7 @@
 import React from 'react';
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 import {colors} from '@workday/canvas-kit-react/tokens';
-import {BodyText, Heading, LabelText, Subtext, Text, Title} from '../';
+import {BodyText, Heading, LabelText, Subtext, Text, Title} from '..';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {base} from '@workday/canvas-tokens-web';

@@ -5,7 +5,7 @@ import {
   permutateProps,
   StaticStates,
 } from '@workday/canvas-kit-react/testing';
-import {customColorTheme} from '../../../../../utils/storybook';
+import {customColorTheme} from '../../../../utils/storybook';
 import {playCircleIcon, relatedActionsVerticalIcon} from '@workday/canvas-system-icons-web';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Container, stateTableColumnProps} from './utils';
