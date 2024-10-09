@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import {createStencil} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
-import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 
 import {
   createSubcomponent,
