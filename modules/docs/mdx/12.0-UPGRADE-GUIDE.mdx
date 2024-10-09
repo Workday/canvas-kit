@@ -381,14 +381,11 @@ this sub-component when using `FormField`. This component also exists on `FormFi
 **PR: ** [2969](https://github.com/Workday/canvas-kit/pull/2969)
 
 `Menu.Item` was converted to use Stencils for styling and uses SystemIcon stencil variables to
-change icon color instead of deeply nested selectors. We also added a `type` prop that can be either
-`selectable` or `actionable`. The default for `Menu.Item` is `selectable`. If you wish to not show
-the selection checkmark, change the type to `actionable`.
-
-- `actionable` - used for menu items where the user performs an action rather than selecting. A
-  selected checkmark does not show for `actionable` menu items.
-- `selectable` - used for menu items where the user selects an option. A selected checkmark will
-  show. Note this may cause visual regression tests to trigger, but this is intended.
+change icon color instead of deeply nested selectors. We also added `Menu.Option` component for
+menus that have a selected visual state. `Menu.Option` will need more accessibility affordances that
+depend on the nature of your use of the `Menu` component. For example, `<Combobox>` and `<Select>`
+use `Menu.Option` and add keyboard events and `aria-*` attributes to function according to w3c
+specifications.
 
 We've deprecated the `isDisabled` prop. It didn't do anything in v10 or v11. It was part of the
 preview Menu deprecation, but was never hooked up. We mapped it to `aria-disabled` and added a
