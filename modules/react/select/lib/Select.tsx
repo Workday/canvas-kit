@@ -124,7 +124,7 @@ export const SelectItem = createSubcomponent('li')({
   },
 })<ExtractProps<typeof Combobox.Menu.Item>>(({children, ...elemProps}, Element, _model) => {
   return (
-    <Combobox.Menu.Item role="option" as={Element} {...elemProps}>
+    <Combobox.Menu.Item as={Element} {...elemProps}>
       {children}
     </Combobox.Menu.Item>
   );
