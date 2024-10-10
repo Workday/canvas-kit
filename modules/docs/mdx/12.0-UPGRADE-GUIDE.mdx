@@ -50,6 +50,7 @@ A note to the reader:
   - [Search Form](#search-form)
   - [Select](#select)
   - [Text Area](#text-area)
+  - [Text Input](#text-input)
 - [Troubleshooting](#troubleshooting)
 - [Glossary](#glossary)
   - [Main](#main)
@@ -248,7 +249,8 @@ The following changes have been made to the API:
 
 **PRs:** [#2865](https://github.com/Workday/canvas-kit/pull/2865),
 [#2881](https://github.com/Workday/canvas-kit/pull/2881),
-[#2934](https://github.com/Workday/canvas-kit/pull/2934)
+[#2934](https://github.com/Workday/canvas-kit/pull/2934),
+[2973](https://github.com/Workday/canvas-kit/pull/2973)
 
 We've promoted FormField from [Preview](#preview) to [Main](#main). The following changes has been
 made to provide more flexibility and better explicit components when using inputs.
@@ -296,6 +298,7 @@ an example of how to **update** your code to match the new compound component AP
   labelPosition={FormField.LabelPosition.Left}
   useFieldSet={true}
   required={true}
+	inputId='input-id'
   hintId="hint-alert"
   hintText="Please enter a valid email."
   label="Email"
@@ -306,9 +309,10 @@ an example of how to **update** your code to match the new compound component AP
 
 // v12 Newly promoted FormField from Preview to Main
 <FormField
-  error="error"
+  error="alert"
   orientation="horizontalStart"
   isRequired={true}
+	id='input-id'
 >
 	<FormField.Label>Email</FormField.Label>
 	<FormField.Field>
@@ -316,6 +320,34 @@ an example of how to **update** your code to match the new compound component AP
 		<FormField.Hint>Please enter a valid email.</FormField.Hint>
 	</FormField.Field>
 </FormField>
+```
+
+- `FormField.LabelPosition.Hidden` is no longer valid. If you still want to hide the label, use the
+  prop `isHidden`.
+
+```tsx
+// v11 FormField in Main
+<FormField
+  error={FormField.ErrorType.Alert}
+  labelPosition={FormField.LabelPosition.Hidden}
+  useFieldSet={true}
+  required={true}
+  inputId="input-id"
+  label="Search"
+>
+  <TextInput onChange={handleChange} value={value} />
+</FormField>;
+
+// v12 Newly promoted FormField from Preview to Main
+
+//...
+
+<FormField error="alert" orientation="horizontalStart" isRequired={true} id="input-id">
+  <FormField.Label isHidden>Search</FormField.Label>
+  <FormField.Field>
+    <FormField.Input as={TextInput} onChange={handleChange} value={value} />
+  </FormField.Field>
+</FormField>;
 ```
 
 **Noticeable changes:**
@@ -334,6 +366,10 @@ an example of how to **update** your code to match the new compound component AP
 - `label` is no longer a valid prop. Use `FormField.Label` sub component to render your label text.
 - Instead of rendering an input, ensure you use `FormField.Input` with the `as` prop. This ensures
   proper error handling and aria attributes for accessibility.
+- `inputId` is no longer a valid prop. Use `id` if you want a custom `id`, otherwise, the component
+  will handle generating a unique id to associate each element for accessibility.
+- `isHidden` has been added as a prop to `FormField.Label` in cases where you want to hide the label
+  while still meeting accessibility standards.
 
 🤖 The codemod will handle the change of `orientation="horizontal"` to
 `orientation="horizontalStart"` if you're using the string literal values. It will also handle
@@ -401,8 +437,7 @@ pass the interface that the `as` prop is pointing to.
 **PRs:** [#2934](https://github.com/Workday/canvas-kit/pull/2934),
 
 `SearchForm` is now using the newly promoted `FormField` component. `SearchForm` now uses `labelId`
-to set the appropiate aria attributes and `id` on the underlying input element. There should be no
-visual breaking changes and the API remains the same.
+to set the appropiate aria attributes and `id` on the underlying input element.
 
 ### Select
 
@@ -472,6 +507,66 @@ type ValueOf<T> = T[keyof T];
 interface MyProps {
   resize?: ValueOf<typeof TextAreaResizeDirection>;
 }
+```
+
+`Themeable` has been removed from `TextAreaProps`. If you wish to theme `TextArea`, use our
+`CanvasProvider` with the `theme` object.
+
+```tsx
+const theme: PartialEmotionCanvasTheme = {
+  canvas: {
+    palette: {
+      common: {
+        focusOutline: 'pink',
+      },
+      primary: {
+        main: 'green',
+        light: 'lightgreen',
+      },
+    },
+  },
+};
+
+//...
+
+<CanvasProvider theme={theme}>
+  <FormField>
+    <FormField.Label>Contact</FormField.Label>
+    <FormField.Input as={TextArea} onChange={handleChange} />
+  </FormField>
+</CanvasProvider>;
+```
+
+### Text Input
+
+**PR:** [#2825](https://github.com/Workday/canvas-kit/pull/2825)
+
+`Themeable` has been removed from `TextInputProps`. If you wish to theme `TextInput`, use our
+`CanvasProvider` with the `theme` object.
+
+```tsx
+const theme: PartialEmotionCanvasTheme = {
+  canvas: {
+    palette: {
+      common: {
+        focusOutline: 'pink',
+      },
+      primary: {
+        main: 'green',
+        light: 'lightgreen',
+      },
+    },
+  },
+};
+
+//...
+
+<CanvasProvider theme={theme}>
+  <FormField>
+    <FormField.Label>Contact</FormField.Label>
+    <FormField.Input as={TextInput} onChange={handleChange} />
+  </FormField>
+</CanvasProvider>;
 ```
 
 ## Troubleshooting

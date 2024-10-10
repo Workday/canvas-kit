@@ -1,3 +1,5 @@
+import {Markdown} from '@storybook/blocks';
+
 <Meta title="Guides/Upgrade Guides/v5.0" />
 
 # Canvas Kit 5.0 Upgrade Guide
@@ -122,56 +124,51 @@ updated as you expect.
   tokens in `@workday/canvas-kit-labs-react-core`, but some are using the Legacy type in
   `@workday/canvas-kit-react-core`.
 
-  | Beta Type (px)  | Responsive Type (rem)                     |
-  | --------------- | ----------------------------------------- |
-  | `brand1` (56px) | `levels.title.large` ( 3.5rem \ 56px)     |
-  | `brand2` (48px) | `levels.title.medium` ( 3rem \ 48px)      |
-  | `h1` (40px)     | `levels.title.small` ( 2.5rem \ 40px)     |
-  | `h2` (32px)     | `levels.heading.large` ( 2rem \ 32px)     |
-  | `h3` (24px)     | `levels.heading.small` ( 1.5rem \ 24px)   |
-  | `h4` (20px)     | `levels.body.large` ( 1.25rem \ 20px)     |
-  | `h5` (20px)     | `levels.body.large` ( 1.25rem \ 20px)     |
-  | `body` (16px)   | `levels.body.small` ( 1rem \ 16px)        |
-  | `body2` (14px)  | `levels.subtext.large` ( 0.875rem \ 14px) |
-  | `small` (13px)  | `levels.subtext.medium` ( 0.75rem \ 12px) |
-
-  | Legacy Type (px)  | Responsive Type (rem)                    |
-  | ----------------- | ---------------------------------------- |
-  | `dataViz1` (56px) | `levels.title.large` (3.5rem \ 56px)     |
-  | `dataViz2` (34px) | `levels.heading.large` (2rem \ 32px)     |
-  | `h1` (28px)       | `levels.heading.medium` (1.75rem \ 28px) |
-  | `h2` (24px)       | `levels.heading.small` (1.5rem \ 24px)   |
-  | `h3` (20px)       | `levels.body.large` (1.25rem,) \ 20px    |
-  | `h4` (16px)       | `levels.body.small` (1rem \ 16px)        |
-  | `h5` (16px)       | `levels.body.small` (1rem \ 16px)        |
-  | `body` (14px)     | `levels.subtext.large` (0.875rem \ 14px) |
-  | `body2` (13px)    | `levels.subtext.medium` (0.75rem \ 12px) |
-  | `small` (12px)    | `levels.subtext.medium` (0.75rem \ 12px) |
+<Markdown>{`
+| Legacy Type (px)  | Responsive Type (rem)                    |
+| ----------------- | ---------------------------------------- |
+| \`dataViz1\` (56px) | \`levels.title.large\` (3.5rem \ 56px)     |
+| \`dataViz2\` (34px) | \`levels.heading.large\` (2rem \ 32px)     |
+| \`h1\` (28px)       | \`levels.heading.medium\` (1.75rem \ 28px) |
+| \`h2\` (24px)       | \`levels.heading.small\` (1.5rem \ 24px)   |
+| \`h3\` (20px)       | \`levels.body.large\` (1.25rem,) \ 20px    |
+| \`h4\` (16px)       | \`levels.body.small\` (1rem \ 16px)        |
+| \`h5\` (16px)       | \`levels.body.small\` (1rem \ 16px)        |
+| \`body\` (14px)     | \`levels.subtext.large\` (0.875rem \ 14px) |
+| \`body2\` (13px)    | \`levels.subtext.medium\` (0.75rem \ 12px) |
+| \`small\` (12px)    | \`levels.subtext.medium\` (0.75rem \ 12px) |
+`}</Markdown>
 
 - 🤖 Property Updates
 
   All `fontFamily`, `fontSize`, and `fontWeight` property updates are handled by the codemod.
 
-  | CSS Property | Corresponding Token            | Notes                                                           |
+<Markdown>
+  {`| CSS Property | Corresponding Token            | Notes                                                           |
   | ------------ | ------------------------------ | --------------------------------------------------------------- |
-  | `fontFamily` | `type.properties.fontFamilies` | `default` (Roboto) and `monospace` (Roboto Mono) are available  |
-  | `fontSize`   | `type.properties.fontSizes`    | please consult the type hierarchies above to map values         |
-  | `fontWeight` | `type.properties.fontWeights`  | `regular` (400), `medium` (500), and `bold` (700) are available |
+  | \`fontFamily\` | \`type.properties.fontFamilies\` | \`default\` (Roboto) and \`monospace\` (Roboto Mono) are available  |
+  | \`fontSize\`   | \`type.properties.fontSizes\`    | please consult the type hierarchies above to map values         |
+  | \`fontWeight\` | \`type.properties.fontWeights\`  | \`regular\` (400), \`medium\` (500), and \`bold\` (700) are available |`}
+</Markdown>
 
 - 🤖 Variant Updates
 
   All `variant` updates _except `link`_ are handled by the codemod. Please see the
   [variants](#variants) section below for more information.
 
-  | Variant                | Transformation                                                                 | Notes                                   |
-  | ---------------------- | ------------------------------------------------------------------------------ | --------------------------------------- |
-  | `type.variant.error`   | `type.variants.error`                                                          | name change only                        |
-  | `type.variant.hint`    | `type.variants.hint`                                                           | name change only                        |
-  | `type.variant.inverse` | `type.variants.inverse`                                                        | name change only                        |
-  | `type.variant.button`  | `{fontWeight: type.properties.fontWeights.bold}`                               | variant deprecated, use type properties |
-  | `type.variant.caps`    | `{textTransform: 'uppercase', fontWeight: type.properties.fontWeights.medium}` | variant deprecated, use type properties |
-  | `type.variant.label`   | `{fontWeight: type.properties.fontWeights.medium}`                             | variant deprecated, use type properties |
-  | `type.variant.mono`    | `{fontFamily: type.properties.fontFamilies.monospace}`                         | variant deprecated, use type properties |
+<Markdown>
+  {`
+| Variant                | Transformation                                                                 | Notes                                   |
+| ---------------------- | ------------------------------------------------------------------------------ | --------------------------------------- |
+| \`type.variant.error\`   | \`type.variants.error\`                                                          | name change only                        |
+| \`type.variant.hint\`    | \`type.variants.hint\`                                                           | name change only                        |
+| \`type.variant.inverse\` | \`type.variants.inverse\`                                                        | name change only                        |
+| \`type.variant.button\`  | \`{fontWeight: type.properties.fontWeights.bold}\`                               | variant deprecated, use type properties |
+| \`type.variant.caps\`    | \`{textTransform: 'uppercase', fontWeight: type.properties.fontWeights.medium}\` | variant deprecated, use type properties |
+| \`type.variant.label\`   | \`{fontWeight: type.properties.fontWeights.medium}\`                             | variant deprecated, use type properties |
+| \`type.variant.mono\`    | \`{fontFamily: type.properties.fontFamilies.monospace}\`                         | variant deprecated, use type properties |
+`}
+</Markdown>
 
 #### Manual Updates
 
@@ -639,14 +636,20 @@ types (which were too generic) and their JSDoc hints.
 
 The following table describes each update:
 
+<Markdown>
+{`
 | Before                | After                     | Change Description               |
 | --------------------- | ------------------------- | -------------------------------- |
-| `spacing`             | `space`                   | name change only                 |
-| `spacingNumbers`      | `spaceNumbers`            | name change only                 |
-| `CanvasSpacing`       | `CanvasSpace`             | name change and improved types\* |
-| `CanvasSpacingValue`  | `CanvasSpaceValues`       | name change only                 |
-| `CanvasSpacingNumber` | `CanvasSpaceNumbers`      | name change and improved types\* |
-| `n/a`                 | `CanvasSpaceNumberValues` | new type!                        |
+| \`spacing\`             | \`space\`                   | name change only                 |
+| \`spacingNumbers\`      | \`spaceNumbers\`            | name change only                 |
+| \`CanvasSpacing\`       | \`CanvasSpace\`             | name change and improved types\* |
+| \`CanvasSpacingValue\`  | \`CanvasSpaceValues\`       | name change only                 |
+| \`CanvasSpacingNumber\` | \`CanvasSpaceNumbers\`      | name change and improved types\* |
+| \`n/a\`                 | \`CanvasSpaceNumberValues\` | new type!                        |
+
+`}
+
+</Markdown>
 
 \* Before, the types were too generic and not very useful. They now better reflect the values they
 represent.
@@ -1199,14 +1202,18 @@ Pass a `css` prop or a styled button instead to have a custom styled button. You
 
 If you were using `usePopup` before, here's a list of equivalent APIs:
 
+<Markdown>
+  {`
 | Before                                                                  | After                                 |
 | ----------------------------------------------------------------------- | ------------------------------------- |
-| `const { popperProps, targetProps, closePopup, stackRef } = usePopup()` | `const model = usePopupModel()`       |
-| `popperProps.open`                                                      | `model.state.visibility !== 'hidden'` |
-| `closePopup()`                                                          | `model.events.hide()`                 |
-| `stackRef` or `popperProps.ref`                                         | `model.state.stackRef`                |
-| `popperProps.anchorElement`                                             | `model.state.targetRef.current`       |
-| `targetProps.onClick`                                                   | `usePopupTarget(model).onClick`       |
+| \`const { popperProps, targetProps, closePopup, stackRef } = usePopup()\` | \`const model = usePopupModel()\`       |
+| \`popperProps.open\`                                                      | \`model.state.visibility !== 'hidden'\` |
+| \`closePopup()\`                                                          | \`model.events.hide()\`                 |
+| \`stackRef\` or \`popperProps.ref\`                                         | \`model.state.stackRef\`                |
+| \`popperProps.anchorElement\`                                             | \`model.state.targetRef.current\`       |
+| \`targetProps.onClick\`                                                   | \`usePopupTarget(model).onClick\`       |
+`}
+</Markdown>
 
 #### New Focus Management
 
@@ -1281,11 +1288,16 @@ model and behaviors, the following is equivalent:
 
 `Popup.Card` uses `Card`, which is now using `Box`. Consequently, the following props have changed:
 
+<Markdown>
+{`
 | Before                         | After                                      |
 | ------------------------------ | ------------------------------------------ |
-| `padding={Popup.Padding.zero}` | `padding="zero"` or `padding={space.zero}` |
-| `depth={depth[0]}`             | `depth={0}`                                |
-| `popupRef={ref}`               | `ref={ref}`                                |
+| \`padding={Popup.Padding.zero}\` | \`padding="zero"\` or \`padding={space.zero}\` |
+| \`depth={depth[0]}\`             | \`depth={0}\`                                |
+| \`popupRef={ref}\`               | \`ref={ref}\`                                |
+`}
+
+</Markdown>
 
 #### Transitioning
 
