@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v10.3.63](https://github.com/Workday/canvas-kit/releases/tag/v10.3.63) (2024-10-10)
+
+### Components
+
+- fix: Unbroken String Overflow Menu Item Fix ([#2975](https://github.com/Workday/canvas-kit/pull/2975)) ([@josh-bagwell](https://github.com/josh-bagwell))
+  A fix to Menu Item to break a long unbroken string for `Select`.
+
+
 ## [v10.3.62](https://github.com/Workday/canvas-kit/releases/tag/v10.3.62) (2024-10-02)
 
 ### Components
