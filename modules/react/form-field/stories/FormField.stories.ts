@@ -6,6 +6,7 @@ import {Basic as BasicExample} from './examples/Basic';
 import {Alert as AlertExample} from './examples/Alert';
 import {Error as ErrorExample} from './examples/Error';
 import {Disabled as DisabledExample} from './examples/Disabled';
+import {HiddenLabel as HiddenLabelExample} from './examples/HiddenLabel';
 import {LabelPositionHorizontalStart as LabelPositionHorizontalStartExample} from './examples/LabelPositionHorizontalStart';
 import {LabelPositionHorizontalEnd as LabelPositionHorizontalEndExample} from './examples/LabelPositionHorizontalEnd';
 import {RefForwarding as RefForwardingExample} from './examples/RefForwarding';
@@ -76,4 +77,8 @@ export const ThemedError: Story = {
 
 export const GroupedInputs: Story = {
   render: GroupedInputsExample,
+};
+
+export const HiddenLabel: Story = {
+  render: HiddenLabelExample,
 };

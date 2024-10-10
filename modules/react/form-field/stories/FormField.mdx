@@ -5,6 +5,7 @@ import {Basic} from './examples/Basic';
 import {Alert} from './examples/Alert';
 import {Error} from './examples/Error';
 import {Disabled} from './examples/Disabled';
+import {HiddenLabel} from './examples/HiddenLabel';
 import {LabelPositionHorizontalStart} from './examples/LabelPositionHorizontalStart';
 import {LabelPositionHorizontalEnd} from './examples/LabelPositionHorizontalEnd';
 import {RefForwarding} from './examples/RefForwarding';
@@ -185,6 +186,13 @@ Form Field should allow you to use it with all `inputs` including `Select`, `Tex
 `TextArea`, `Switch`, and `RadioGroup`.
 
 <ExampleCodeBlock code={AllFields} />
+
+### Hidden Label
+
+In cases where you want to hide the label but still meet accessibility standards, you can add
+`isHidden` on the `<FormField.Label`. This prop will visually hide the label.
+
+<ExampleCodeBlock code={HiddenLabel} />
 
 ### Themed Errors
 

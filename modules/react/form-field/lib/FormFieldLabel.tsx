@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {createSubcomponent, ExtractProps, accessibleHide} from '@workday/canvas-kit-react/common';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {Text, textStencil} from '@workday/canvas-kit-react/text';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
@@ -15,6 +15,10 @@ export interface FormFieldLabelProps
    * The text of the label.
    */
   children: React.ReactNode;
+  /**
+   * When true, will apply `accessibleHide` to the label. This is useful in cases where you still need accessibility but don't want to show the label, like a search input.
+   */
+  isHidden?: boolean;
 }
 
 export const formFieldLabelStencil = createStencil({
@@ -57,6 +61,11 @@ export const formFieldLabelStencil = createStencil({
         width: '100%',
       },
     },
+    isHidden: {
+      true: {
+        ...accessibleHide,
+      },
+    },
   },
   defaultModifiers: {
     typeLevel: 'subtext.large',
@@ -68,21 +77,26 @@ export const FormFieldLabel = createSubcomponent('label')({
   displayName: 'FormField.Label',
   modelHook: useFormFieldModel,
   elemPropsHook: useFormFieldLabel,
-})<FormFieldLabelProps>(({children, typeLevel, variant, ...elemProps}, Element, model) => {
-  return (
-    <Element
-      {...mergeStyles(
-        elemProps,
-        formFieldLabelStencil({
-          typeLevel,
-          variant,
-          isRequired: model.state.isRequired as any,
-          orientation:
-            model.state.orientation === 'horizontal' ? 'horizontalStart' : model.state.orientation,
-        })
-      )}
-    >
-      {children}
-    </Element>
-  );
-});
+})<FormFieldLabelProps>(
+  ({children, typeLevel, variant, isHidden, ...elemProps}, Element, model) => {
+    return (
+      <Element
+        {...mergeStyles(
+          elemProps,
+          formFieldLabelStencil({
+            typeLevel,
+            variant,
+            isHidden: isHidden ? 'true' : undefined,
+            isRequired: model.state.isRequired as any,
+            orientation:
+              model.state.orientation === 'horizontal'
+                ? 'horizontalStart'
+                : model.state.orientation,
+          })
+        )}
+      >
+        {children}
+      </Element>
+    );
+  }
+);
