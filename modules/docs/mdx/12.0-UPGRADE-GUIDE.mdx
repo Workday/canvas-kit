@@ -50,6 +50,7 @@ A note to the reader:
   - [Search Form](#search-form)
   - [Select](#select)
   - [Text Area](#text-area)
+  - [Text Input](#text-input)
 - [Troubleshooting](#troubleshooting)
 - [Glossary](#glossary)
   - [Main](#main)
@@ -432,8 +433,7 @@ pass the interface that the `as` prop is pointing to.
 **PRs:** [#2934](https://github.com/Workday/canvas-kit/pull/2934),
 
 `SearchForm` is now using the newly promoted `FormField` component. `SearchForm` now uses `labelId`
-to set the appropiate aria attributes and `id` on the underlying input element. There should be no
-visual breaking changes and the API remains the same.
+to set the appropiate aria attributes and `id` on the underlying input element.
 
 ### Select
 
@@ -504,6 +504,16 @@ interface MyProps {
   resize?: ValueOf<typeof TextAreaResizeDirection>;
 }
 ```
+
+`Themeable` has been removed from `TextAreaProps`. If you wish to theme `TextArea`, use our
+`CanvasProvider` with the `theme` object.
+
+### Text Input
+
+**PR:** [#2825](https://github.com/Workday/canvas-kit/pull/2825)
+
+`Themeable` has been removed from `TextInputProps`. If you wish to theme `TextInput`, use our
+`CanvasProvider` with the `theme` object.
 
 ## Troubleshooting
 
