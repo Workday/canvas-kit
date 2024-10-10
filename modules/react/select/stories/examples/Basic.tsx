@@ -10,6 +10,7 @@ const options = [
   'Mail',
   'Mobile Phone',
   'The Ontologically Anthropocentric Sensory Immersive Simulation',
+  'Thisisalongstringwithnobreaksandwillwrap',
 ];
 
 export const Basic = () => {
