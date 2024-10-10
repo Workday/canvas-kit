@@ -6,6 +6,7 @@ import {Menu} from '@workday/canvas-kit-react/menu';
 import {Basic as BasicExample} from './examples/Basic';
 import {ContextMenu as ContextMenuExample} from './examples/ContextMenu';
 import {Icons as IconsExample} from './examples/Icons';
+import {SelectableMenu as SelectableMenuExample} from './examples/SelectableMenu';
 
 export default {
   title: 'Components/Popups/Menu',
@@ -28,4 +29,7 @@ export const ContextMenu: Story = {
 };
 export const Icons: Story = {
   render: IconsExample,
+};
+export const SelectableMenu: Story = {
+  render: SelectableMenuExample,
 };

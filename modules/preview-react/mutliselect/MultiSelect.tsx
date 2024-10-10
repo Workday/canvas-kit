@@ -7,10 +7,9 @@ import {Menu} from '@workday/canvas-kit-react/menu';
 
 import {useMultiSelectModel} from './useMultiSelectModel';
 import {MultiSelectInput, MultiSelectSearchInput} from './MultiSelectInput';
-import {MultiSelectItem} from './MultiSelectItem';
 import {MultiSelectCard} from './MultiSelectCard';
 
-export interface MultiSelectProps {}
+export interface MultiSelectProps extends React.PropsWithChildren {}
 
 export const MultiSelect = createContainer()({
   modelHook: useMultiSelectModel,
@@ -20,7 +19,7 @@ export const MultiSelect = createContainer()({
     Popper: Combobox.Menu.Popper,
     Card: MultiSelectCard,
     List: Combobox.Menu.List,
-    Item: MultiSelectItem,
+    Item: Combobox.Menu.Item,
   },
 })<MultiSelectProps>(({children, ...elemProps}, _, model) => {
   return (

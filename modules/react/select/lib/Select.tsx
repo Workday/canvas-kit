@@ -19,11 +19,6 @@ export interface SelectInputProps extends ExtractProps<typeof TextInput>, CSProp
    * ** Note:An option must be selected in order to render and icon.**
    */
   inputStartIcon?: CanvasSystemIcon;
-  readonly textInputProps?: {
-    ref: React.Ref<HTMLInputElement>;
-    onChange: () => {};
-    value: string;
-  };
 }
 
 const selectInputStencil = createStencil({
@@ -61,20 +56,7 @@ export const SelectInput = createSubcomponent(TextInput)({
   elemPropsHook: useSelectInput,
 })<SelectInputProps>(
   (
-    {
-      placeholder = 'Choose an option',
-      inputStartIcon,
-      error,
-      textInputProps,
-      disabled,
-      width,
-      ref,
-      onChange,
-      onInput,
-      value,
-      name,
-      ...elemProps
-    },
+    {placeholder = 'Choose an option', inputStartIcon, formInputProps, width, ...elemProps},
     Element,
     model
   ) => {
@@ -87,26 +69,16 @@ export const SelectInput = createSubcomponent(TextInput)({
         )}
         {/* Hidden input to handle ids */}
         <InputGroup.Input
-          error={error}
-          disabled={disabled}
-          tabIndex={-1}
-          aria-hidden={true}
-          onChange={onChange}
-          onInput={onInput}
-          value={value}
-          name={name}
-          ref={ref}
           data-part="select-hidden-input"
+          {...formInputProps}
           {...hiddenSelectInputStencil()}
         />
         {/* Visual input */}
         <InputGroup.Input
           as={Element}
-          disabled={disabled}
           placeholder={placeholder}
-          error={error}
           data-part="select-visual-input"
-          {...textInputProps}
+          {...elemProps}
           {...mergeStyles(elemProps, selectInputStencil())}
         />
         <InputGroup.InnerEnd data-part="select-caret-container">
@@ -124,7 +96,7 @@ export const SelectItem = createSubcomponent('li')({
   },
 })<ExtractProps<typeof Combobox.Menu.Item>>(({children, ...elemProps}, Element, _model) => {
   return (
-    <Combobox.Menu.Item role="option" as={Element} {...elemProps}>
+    <Combobox.Menu.Item as={Element} {...elemProps}>
       {children}
     </Combobox.Menu.Item>
   );

@@ -7,6 +7,7 @@ import {Select} from '@workday/canvas-kit-react/select';
 import {Alert as AlertExample} from './examples/Alert';
 import {Basic as BasicExample} from './examples/Basic';
 import {Complex as ComplexExample} from './examples/Complex';
+import {Controlled as ControlledExample} from './examples/Controlled';
 import {Disabled as DisabledExample} from './examples/Disabled';
 import {DisabledOptions as DisabledOptionsExample} from './examples/DisabledOption';
 import {Error as ErrorExample} from './examples/Error';
@@ -42,6 +43,9 @@ export const Basic: Story = {
 };
 export const Complex: Story = {
   render: ComplexExample,
+};
+export const Controlled: Story = {
+  render: ControlledExample,
 };
 export const Disabled: Story = {
   render: DisabledExample,

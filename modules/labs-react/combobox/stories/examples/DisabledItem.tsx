@@ -1,17 +1,18 @@
 import React, {ReactNode, ReactElement, FC, ChangeEvent} from 'react';
+import {ExtractProps} from '@workday/canvas-kit-react/common';
 import {
   Combobox,
   ComboboxProps,
   ComboBoxMenuItemGroup,
 } from '@workday/canvas-kit-labs-react/combobox';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {StyledMenuItem, MenuItemProps} from '@workday/canvas-kit-react/menu';
+import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 
 const autocompleteResult = (
   textModifier: number,
   disabled: boolean
-): ReactElement<MenuItemProps> => (
+): ReactElement<ExtractProps<typeof StyledMenuItem>> => (
   <StyledMenuItem aria-disabled={disabled}>
     Result
     <span>

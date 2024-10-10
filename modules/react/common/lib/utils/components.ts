@@ -917,12 +917,12 @@ export function useModelContext<T>(
  * ```
  */
 export function composeHooks<
-  H1 extends BehaviorHook<any, {}>,
-  H2 extends BehaviorHook<any, {}>,
-  H3 extends BehaviorHook<any, {}>,
-  H4 extends BehaviorHook<any, {}>,
-  H5 extends BehaviorHook<any, {}>,
-  H6 extends BehaviorHook<any, {}>
+  H1 extends BaseHook<any, {}>,
+  H2 extends BaseHook<any, {}>,
+  H3 extends BaseHook<any, {}>,
+  H4 extends BaseHook<any, {}>,
+  H5 extends BaseHook<any, {}>,
+  H6 extends BaseHook<any, {}>
 >(
   hook1: H1,
   hook2: H2,
@@ -939,11 +939,22 @@ export function composeHooks<
       ? H4 extends BaseHook<any, infer O4>
         ? H5 extends BaseHook<any, infer O5>
           ? H6 extends BaseHook<any, infer O6>
-            ? BehaviorHook<M, O1 & O2 & O3 & O4 & O5 & O6>
-            : BehaviorHook<M, O1 & O2 & O3 & O4 & O5>
-          : BehaviorHook<M, O1 & O2 & O3 & O4>
-        : BehaviorHook<M, O1 & O2 & O3>
-      : BehaviorHook<M, O1 & O2>
+            ? BehaviorHook<
+                M,
+                O1 &
+                  RemoveNull<O2> &
+                  RemoveNull<O3> &
+                  RemoveNull<O4> &
+                  RemoveNull<O5> &
+                  RemoveNull<O6>
+              >
+            : BehaviorHook<
+                M,
+                O1 & RemoveNull<O2> & RemoveNull<O3> & RemoveNull<O4> & RemoveNull<O5>
+              >
+          : BehaviorHook<M, O1 & RemoveNull<O2> & RemoveNull<O3> & RemoveNull<O4>>
+        : BehaviorHook<M, O1 & RemoveNull<O2> & RemoveNull<O3>>
+      : BehaviorHook<M, O1 & RemoveNull<O2>>
     : never
   : never;
 export function composeHooks<M extends Model<any, any>, P extends {}, O extends {}>(

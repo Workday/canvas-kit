@@ -28,13 +28,11 @@ export const MultiSelectItem = createSubcomponent('li')({
   subComponents: {
     Icon: Combobox.Menu.Item.Icon,
   },
-})<ExtractProps<typeof Combobox.Menu.Item>>(
-  ({children, type = 'selectable', ...elemProps}, Element, _model) => {
-    console.log('aria-selected', elemProps);
-    return (
-      <StyledMenuItem as={Element} type={type} {...handleCsProp(elemProps)}>
-        {children}
-      </StyledMenuItem>
-    );
-  }
-);
+})<ExtractProps<typeof Combobox.Menu.Item>>(({children, ...elemProps}, Element, _model) => {
+  console.log('aria-selected', elemProps);
+  return (
+    <StyledMenuItem as={Element} {...handleCsProp(elemProps)}>
+      {children}
+    </StyledMenuItem>
+  );
+});

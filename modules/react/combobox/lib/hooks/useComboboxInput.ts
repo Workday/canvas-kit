@@ -70,7 +70,7 @@ export const useComboboxInput = composeHooks(
       },
       value: model.state.value,
       role: 'combobox',
-      'aria-haspopup': 'true' as React.AriaAttributes['aria-haspopup'],
+      'aria-haspopup': 'listbox' as React.AriaAttributes['aria-haspopup'],
       'aria-expanded': model.state.visibility === 'visible',
       'aria-autocomplete': 'list',
       'aria-controls': `${model.state.id}-list`,

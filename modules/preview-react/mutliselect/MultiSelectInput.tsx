@@ -7,6 +7,7 @@ import {
   composeHooks,
   createElemPropsHook,
   createSubcomponent,
+  dispatchInputEvent,
   useLocalRef,
 } from '@workday/canvas-kit-react/common';
 import {createStencil, CSProps, handleCsProp} from '@workday/canvas-kit-styling';
@@ -21,11 +22,16 @@ import {
   useListItemSelect,
   useListModel,
 } from '@workday/canvas-kit-react/collection';
-import {useComboboxListKeyboardHandler, useSetPopupWidth} from '@workday/canvas-kit-react/combobox';
+import {
+  useComboboxInput,
+  useComboboxInputConstrained,
+  useComboboxListKeyboardHandler,
+  useComboboxModel,
+  useSetPopupWidth,
+} from '@workday/canvas-kit-react/combobox';
 import {Pill} from '@workday/canvas-kit-preview-react/pill';
 
 import {useMultiSelectModel} from './useMultiSelectModel';
-import {MultiSelectItem} from './MultiSelectItem';
 
 export const multiSelectStencil = createStencil({
   base: {
@@ -118,25 +124,19 @@ export const multiSelectStencil = createStencil({
 
 export const useMultiSelectInput = composeHooks(
   createElemPropsHook(useMultiSelectModel)((model, ref) => {
-    const {elementRef} = useLocalRef<HTMLInputElement>(ref as any);
-
-    const {elementRef: userElementRef, localRef: userLocalRef} = useLocalRef(model.state.targetRef);
-    const {elementRef: formElementRef, localRef: formLocalRef} = useLocalRef(
-      ref as React.Ref<HTMLInputElement>
-    );
-
     return {
       onKeyDown(event: React.KeyboardEvent) {
-        if (
-          (event.key === 'Enter' || event.key === 'Space') &&
-          model.state.visibility === 'visible'
-        ) {
+        console.log('onKeyDown', event.key);
+        // Space bar key is hit and menu is open
+        if (event.key === ' ' && model.state.visibility === 'visible') {
           const id = model.state.cursorId;
+          // There are 2 modes. Search mode and navigation mode. Searching clears the cursor. Using
+          // the down arrow enables the cursor and thus navigation mode.
+          // - Navigation mode: toggle cursor item
+          // - Search mode: enter a space in the search
           if (id) {
             model.events.select({id});
-            // If enter key, prevents the form from being submitted while the select is open. If
-            // space key, prevents a space from being entered in the search input
-            // event.preventDefault();
+            event.preventDefault();
           }
         }
 
@@ -150,9 +150,8 @@ export const useMultiSelectInput = composeHooks(
           event.preventDefault();
         }
       },
-      role: 'combobox',
-      ref: elementRef,
       'aria-haspopup': 'listbox' as const,
+      onChange: e => console.log('user-input', e.currentTarget.value),
       // onClick(e: React.MouseEvent) {
       //   console.log('click', model.state.visibility);
       //   if (model.state.visibility === 'hidden') {
@@ -163,10 +162,8 @@ export const useMultiSelectInput = composeHooks(
       // },
     };
   }),
-  useSetPopupWidth,
-  useListActiveDescendant,
-  useComboboxListKeyboardHandler,
-  usePopupTarget
+  useComboboxInputConstrained,
+  useComboboxInput
 );
 
 const removeItem = <T extends unknown>(id: string, model: ReturnType<typeof useListModel>) => {
@@ -228,52 +225,59 @@ export const MultiSelectInput = createSubcomponent(TextInput)({
   displayName: 'MultiSelect.Input',
   modelHook: useMultiSelectModel,
   elemPropsHook: useMultiSelectInput,
-})<MultiSelectInputProps>(({className, cs, style, disabled, ...elemProps}, Element, model) => {
-  return (
-    <div {...handleCsProp({className, cs, style}, multiSelectStencil({}))}>
-      <InputGroup>
-        <InputGroup.Input
-          data-part="form-input"
-          disabled={disabled}
-          tabIndex={-1}
-          aria-hidden={true}
-        />
-        <InputGroup.Input data-part="user-input" as={Element} {...elemProps} />
-        <InputGroup.InnerEnd pointerEvents="none">
-          <SystemIcon icon={caretDownSmallIcon} />
-        </InputGroup.InnerEnd>
-      </InputGroup>
-      {model.selected.state.items.length ? (
-        <>
-          <div data-part="separator" />
-          <ListBox model={model.selected} as="div" role="listbox" aria-orientation="horizontal">
-            {item => <MultiSelectedItem>{item.textValue}</MultiSelectedItem>}
-          </ListBox>
-        </>
-      ) : null}
-    </div>
-  );
-});
+})<MultiSelectInputProps>(
+  (
+    {className, cs, style, 'aria-labelledby': ariaLabelledBy, formInputProps, ...elemProps},
+    Element,
+    model
+  ) => {
+    return (
+      <div {...handleCsProp({className, cs, style}, multiSelectStencil({}))}>
+        <InputGroup>
+          <InputGroup.Input data-part="form-input" {...formInputProps} />
+          <InputGroup.Input
+            data-part="user-input"
+            as={Element}
+            aria-labelledby={ariaLabelledBy}
+            readOnly
+            {...elemProps}
+          />
+          <InputGroup.InnerEnd pointerEvents="none">
+            <SystemIcon icon={caretDownSmallIcon} />
+          </InputGroup.InnerEnd>
+        </InputGroup>
+        {model.selected.state.items.length ? (
+          <>
+            <div data-part="separator" />
+            <ListBox
+              model={model.selected}
+              as="div"
+              role="listbox"
+              aria-orientation="horizontal"
+              aria-labelledby={ariaLabelledBy}
+            >
+              {item => <MultiSelectedItem>{item.textValue}</MultiSelectedItem>}
+            </ListBox>
+          </>
+        ) : null}
+      </div>
+    );
+  }
+);
 
 export const MultiSelectSearchInput = createSubcomponent(TextInput)({
   displayName: 'MultiSelect.Input',
   modelHook: useMultiSelectModel,
   elemPropsHook: useMultiSelectInput,
 })<MultiSelectInputProps>(
-  ({className, cs, disabled, 'aria-labelledby': ariaLabelledBy, ...elemProps}, Element, model) => {
+  ({className, cs, 'aria-labelledby': ariaLabelledBy, ...elemProps}, Element, model) => {
     return (
       <div {...handleCsProp({className, cs}, multiSelectStencil({}))}>
         <InputGroup>
           <InputGroup.InnerStart pointerEvents="none" width={system.space.x8}>
             <SystemIcon icon={searchIcon} size={system.space.x4} />
           </InputGroup.InnerStart>
-          <InputGroup.Input
-            data-part="form-input"
-            disabled={disabled}
-            tabIndex={-1}
-            aria-hidden={true}
-            aria-labelledby={ariaLabelledBy}
-          />
+          <InputGroup.Input data-part="form-input" aria-labelledby={ariaLabelledBy} />
           <InputGroup.Input data-part="user-input" as={Element} {...elemProps} />
           <InputGroup.InnerEnd width={system.space.x8}>
             <InputGroup.ClearButton />

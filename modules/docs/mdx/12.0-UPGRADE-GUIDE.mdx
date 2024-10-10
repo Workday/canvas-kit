@@ -46,6 +46,7 @@ A note to the reader:
   - [Form Field](#form-field)
     - [Form Field Group](#form-field-group)
     - [Form Field Field](#form-field-field)
+  - [Menu Item](#menu-item)
   - [Search Form](#search-form)
   - [Select](#select)
   - [Text Area](#text-area)
@@ -375,6 +376,26 @@ this sub-component when using `FormField`. This component also exists on `FormFi
   </FormField.Field>
 </FormField>
 ```
+
+### Menu Item
+
+**PR: ** [2969](https://github.com/Workday/canvas-kit/pull/2969)
+
+`Menu.Item` was converted to use Stencils for styling and uses SystemIcon stencil variables to
+change icon color instead of deeply nested selectors. We also added `Menu.Option` component for
+menus that have a selected visual state. `Menu.Option` will need more accessibility affordances that
+depend on the nature of your use of the `Menu` component. For example, `<Combobox>` and `<Select>`
+use `Menu.Option` and add keyboard events and `aria-*` attributes to function according to w3c
+specifications.
+
+We've deprecated the `isDisabled` prop. It didn't do anything in v10 or v11. It was part of the
+preview Menu deprecation, but was never hooked up. We mapped it to `aria-disabled` and added a
+deprecation comment to use `aria-disabled` instead.
+
+We've removed the `MenuItemProps` export from `@workday/canvas-kit-react/menu`. Use
+`ExtractProps<typeof Menu.Item, never>` instead. We don't mean to export prop interfaces of
+polymorphic components. The `never` means "don't add element props". The second parameter is used to
+pass the interface that the `as` prop is pointing to.
 
 ### Search Form (Labs)
 
