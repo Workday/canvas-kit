@@ -296,6 +296,7 @@ an example of how to **update** your code to match the new compound component AP
   labelPosition={FormField.LabelPosition.Left}
   useFieldSet={true}
   required={true}
+	inputId='input-id'
   hintId="hint-alert"
   hintText="Please enter a valid email."
   label="Email"
@@ -306,9 +307,10 @@ an example of how to **update** your code to match the new compound component AP
 
 // v12 Newly promoted FormField from Preview to Main
 <FormField
-  error="error"
+  error="alert"
   orientation="horizontalStart"
   isRequired={true}
+	id='input-id'
 >
 	<FormField.Label>Email</FormField.Label>
 	<FormField.Field>
@@ -316,6 +318,35 @@ an example of how to **update** your code to match the new compound component AP
 		<FormField.Hint>Please enter a valid email.</FormField.Hint>
 	</FormField.Field>
 </FormField>
+```
+
+- `FormField.LabelPosition.Hidden` is no longer valid. If you still want the label but not visible,
+  you can use `accessibleHideStyles`
+
+```tsx
+// v11 FormField in Main
+<FormField
+  error={FormField.ErrorType.Alert}
+  labelPosition={FormField.LabelPosition.Hidden}
+  useFieldSet={true}
+  required={true}
+  inputId="input-id"
+  label="Search"
+>
+  <TextInput onChange={handleChange} value={value} />
+</FormField>;
+
+// v12 Newly promoted FormField from Preview to Main
+import {accessibleHideStyles} from '@workday/canvas-kit-react/common';
+
+//...
+
+<FormField error="alert" orientation="horizontalStart" isRequired={true} id="input-id">
+  <FormField.Label cs={accessibleHideStyles}>Search</FormField.Label>
+  <FormField.Field>
+    <FormField.Input as={TextInput} onChange={handleChange} value={value} />
+  </FormField.Field>
+</FormField>;
 ```
 
 **Noticeable changes:**
