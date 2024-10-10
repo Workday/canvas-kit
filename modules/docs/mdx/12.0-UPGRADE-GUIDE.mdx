@@ -321,8 +321,8 @@ an example of how to **update** your code to match the new compound component AP
 </FormField>
 ```
 
-- `FormField.LabelPosition.Hidden` is no longer valid. If you still want the label but not visible,
-  you can use `accessibleHideStyles`
+- `FormField.LabelPosition.Hidden` is no longer valid. If you still want to hide the label, use
+  `isHidden`.
 
 ```tsx
 // v11 FormField in Main
@@ -338,12 +338,11 @@ an example of how to **update** your code to match the new compound component AP
 </FormField>;
 
 // v12 Newly promoted FormField from Preview to Main
-import {accessibleHideStyles} from '@workday/canvas-kit-react/common';
 
 //...
 
 <FormField error="alert" orientation="horizontalStart" isRequired={true} id="input-id">
-  <FormField.Label cs={accessibleHideStyles}>Search</FormField.Label>
+  <FormField.Label isHidden>Search</FormField.Label>
   <FormField.Field>
     <FormField.Input as={TextInput} onChange={handleChange} value={value} />
   </FormField.Field>
@@ -366,6 +365,10 @@ import {accessibleHideStyles} from '@workday/canvas-kit-react/common';
 - `label` is no longer a valid prop. Use `FormField.Label` sub component to render your label text.
 - Instead of rendering an input, ensure you use `FormField.Input` with the `as` prop. This ensures
   proper error handling and aria attributes for accessibility.
+- `inputId` is no longer a valid prop. Use `id` if you want a custom `id`, otherwise, the component
+  will handle generating a unique id to associate each element for accessibility.
+- `isHidden` has been added as a prop to `FormField.Label` in cases where you need to hide the
+  label.
 
 🤖 The codemod will handle the change of `orientation="horizontal"` to
 `orientation="horizontalStart"` if you're using the string literal values. It will also handle
