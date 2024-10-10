@@ -322,7 +322,8 @@ an example of how to **update** your code to match the new compound component AP
 </FormField>
 ```
 
-- `FormField.LabelPosition.Hidden` is no longer valid. If you still want to hide the label, use the prop `isHidden`.
+- `FormField.LabelPosition.Hidden` is no longer valid. If you still want to hide the label, use the
+  prop `isHidden`.
 
 ```tsx
 // v11 FormField in Main
@@ -367,7 +368,8 @@ an example of how to **update** your code to match the new compound component AP
   proper error handling and aria attributes for accessibility.
 - `inputId` is no longer a valid prop. Use `id` if you want a custom `id`, otherwise, the component
   will handle generating a unique id to associate each element for accessibility.
-- `isHidden` has been added as a prop to `FormField.Label` in cases where you want to hide the label while still meeting accessibility standards.
+- `isHidden` has been added as a prop to `FormField.Label` in cases where you want to hide the label
+  while still meeting accessibility standards.
 
 🤖 The codemod will handle the change of `orientation="horizontal"` to
 `orientation="horizontalStart"` if you're using the string literal values. It will also handle
@@ -510,12 +512,62 @@ interface MyProps {
 `Themeable` has been removed from `TextAreaProps`. If you wish to theme `TextArea`, use our
 `CanvasProvider` with the `theme` object.
 
+```tsx
+const theme: PartialEmotionCanvasTheme = {
+  canvas: {
+    palette: {
+      common: {
+        focusOutline: 'pink',
+      },
+      primary: {
+        main: 'green',
+        light: 'lightgreen',
+      },
+    },
+  },
+};
+
+//...
+
+<CanvasProvider theme={theme}>
+  <FormField>
+    <FormField.Label>Contact</FormField.Label>
+    <FormField.Input as={TextArea} onChange={handleChange} />
+  </FormField>
+</CanvasProvider>;
+```
+
 ### Text Input
 
 **PR:** [#2825](https://github.com/Workday/canvas-kit/pull/2825)
 
 `Themeable` has been removed from `TextInputProps`. If you wish to theme `TextInput`, use our
 `CanvasProvider` with the `theme` object.
+
+```tsx
+const theme: PartialEmotionCanvasTheme = {
+  canvas: {
+    palette: {
+      common: {
+        focusOutline: 'pink',
+      },
+      primary: {
+        main: 'green',
+        light: 'lightgreen',
+      },
+    },
+  },
+};
+
+//...
+
+<CanvasProvider theme={theme}>
+  <FormField>
+    <FormField.Label>Contact</FormField.Label>
+    <FormField.Input as={TextInput} onChange={handleChange} />
+  </FormField>
+</CanvasProvider>;
+```
 
 ## Troubleshooting
 
