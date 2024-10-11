@@ -40,7 +40,8 @@ A note to the reader:
   - [Form Field Container](#form-field-container)
 - [Removals](#removals)
   - [Input Icon Container](#input-icon-container)
-- [TypeScript](#typescript)
+- [Infrastructure](#infrastructure)
+  - [TypeScript](#typescript)
 - [Component Updates](#component-updates)
   - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
   - [Avatar](#avatar)
@@ -190,12 +191,16 @@ from Main instead.
 
 ---
 
-## TypeScript
+## Infrastructure
 
-We've upgrade to TypeScript 5.0 and make use of
+### TypeScript
+
+**PR:** [#2908](https://github.com/Workday/canvas-kit/pull/2908)
+
+We've upgraded to TypeScript 5.0 to make use of
 [const Type Parameters](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#const-type-parameters).
-You will need to upgrade to TypeScript 5.0+ to avoid TypeScript syntax errors. TypeScript does not
-follow semver, so 5.0 doesn't mean a large breaking change from 4.9. TypeScript doesn't have a
+You will need to upgrade to TypeScript 5.0+ to avoid any TypeScript syntax errors. TypeScript does
+not follow semver, so 5.0 doesn't mean a large breaking change from 4.9. TypeScript doesn't have a
 `x.10` release, they bump the `x.9` to `{x+1}.0`.
 
 ## Component Updates
