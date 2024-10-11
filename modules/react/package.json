@@ -58,10 +58,9 @@
     "csstype": "^3.0.2",
     "react-innertext": "^1.1.5",
     "react-virtual": "^2.10.4",
-    "resize-observer-polyfill": "^1.5.1",
     "rtl-css-js": "^1.14.1",
     "screenfull": "^5.2.0",
-    "use-resize-observer": "~7.0.1"
+    "use-resize-observer": "^9.1.0"
   },
   "devDependencies": {
     "@workday/canvas-accent-icons-web": "^3.0.0",
