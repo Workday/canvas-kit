@@ -63,6 +63,7 @@ export const StyledMenuItem = styled(Box.as('button'))<StyledType & StyledMenuPr
       borderWidth: 0,
       textAlign: 'left',
       transition: 'background-color 80ms, color 80ms',
+      overflowWrap: 'anywhere',
       '&:hover, &[aria-selected=true]': {
         backgroundColor: theme.canvas.palette.primary.lightest,
         color: colors.blackPepper300,
