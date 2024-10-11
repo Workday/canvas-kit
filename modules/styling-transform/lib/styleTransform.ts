@@ -120,7 +120,7 @@ export default function styleTransformer(
       return newNode || ts.visitEachChild(node, visit, context);
     };
 
-    return node => ts.visitNode(node, visit);
+    return (node => ts.visitNode(node, visit)) as ts.Transformer<ts.SourceFile>;
   };
 }
 

@@ -1,5 +1,31 @@
 import {mergeCallback} from './mergeCallback';
 
+export type KeysMatching<T, V> = {[K in keyof T]-?: T[K] extends V ? K : never}[keyof T];
+export type RemoveNulls<T> = Omit<T, KeysMatching<T, null>>;
+
+/**
+ * MergeProps will merge keys from `U` over `T` except when the value of `T` is `null`.
+ *
+ * ```ts
+ * MergeProps<
+ *   {foo: string, bar: string, baz: null},
+ *   {foo: string, bar: number, baz: string}
+ * > // { foo: string, bar: number, baz: null }
+ * ```
+ */
+export type MergeProps<T, U> = {
+  // merge keys from both `T` and `U`
+  [K in keyof T | keyof U]: K extends keyof T // test if key is in `T`
+    ? K extends keyof U // test if key is also in `U`
+      ? T[K] extends null // test if `T[K]` is `null`
+        ? null // `K` is in both `T` and `U` and `T[K]` is `null`, so return `null`
+        : U[K] // `K` is in both `T` and `U`, but isn't `null` in `T[K]`, so return `U[K]`
+      : T[K] // `K` is only in `T`, so return `T[K]`
+    : K extends keyof U // K is not in `T`, so test if it is in `U`. This should always match at this point, but there's no "else" in type ternaries
+    ? U[K] // K is only in `U`, so return `U[K]`
+    : never; // We should never get here, but type ternaries need all paths defined. `never` is usually used in these cases
+};
+
 // This file suppresses TS errors that come from merging interfaces of elements that aren't
 // determined within components. Element interfaces are determined only when used, so TS errors
 // aren't even useful here. Things get complicated when merging interfaces of callbacks.
@@ -12,11 +38,11 @@ import {mergeCallback} from './mergeCallback';
  * If `targetProps` has a `null` set, it will remove the prop from the `sourceProps`. This allows
  * passing of props from merged hooks to another without passing out to the final element props.
  */
-export function mergeProps<T extends object, S extends object>(
+export function mergeProps<const T extends object, const S extends object>(
   targetProps: T,
   sourceProps: S
-): S & T {
-  const returnProps = {...targetProps} as S & T;
+): RemoveNulls<MergeProps<T, S>> {
+  const returnProps = {...targetProps} as MergeProps<T, S>;
 
   for (const key in sourceProps) {
     if (sourceProps.hasOwnProperty(key)) {

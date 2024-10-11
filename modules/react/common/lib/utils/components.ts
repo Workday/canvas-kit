@@ -1,7 +1,7 @@
 import React from 'react';
 import {assert} from './assert';
 import {memoize} from './memoize';
-import {mergeProps} from './mergeProps';
+import {MergeProps, mergeProps, RemoveNulls} from './mergeProps';
 import {Model} from './models';
 
 /**
@@ -600,7 +600,7 @@ export const createComponent =
  */
 export const createElemPropsHook =
   <TModelHook extends (config: any) => Model<any, any>>(modelHook: TModelHook) =>
-  <PO extends {}, PI extends {}>(
+  <const PO extends {}, const PI extends {}>(
     fn: (
       model: TModelHook extends (config: any) => infer TModel ? TModel : Model<any, any>,
       ref?: React.Ref<unknown>,
@@ -614,6 +614,7 @@ export const createElemPropsHook =
       const props = mergeProps(fn(model, ref, elemProps || ({} as any)), elemProps || ({} as any));
       if (!props.hasOwnProperty('ref') && ref) {
         // This is the weird "incoming ref isn't in props, but outgoing ref is in props" thing
+        // @ts-ignore TS says `ref` isn't on `PO`, but we always add it anyways
         props.ref = ref;
       }
       return props;
@@ -664,6 +665,7 @@ export const createHook = <M extends Model<any, any>, PO extends {}, PI extends 
     const props = mergeProps(fn(model, ref, elemProps || ({} as any)), elemProps || ({} as any));
     if (!props.hasOwnProperty('ref') && ref) {
       // This is the weird "incoming ref isn't in props, but outgoing ref is in props" thing
+      // @ts-ignore TS says `ref` isn't on `PO`, but we always add it anyways
       props.ref = ref;
     }
     return props;
@@ -881,8 +883,12 @@ export function useModelContext<T>(
 /**
  * Compose many hooks together. Each hook should make a call to `mergeProps` which is automatically
  * done by `createElemPropsHook` and `createHook. Returns a function that will receive a model and
- * return props to be applied to a component. Hooks run from right to left, but props override from
- * left to right.
+ * return props to be applied to a component. Hooks run from last to first, but props override from
+ * first to last. This means the last hook will run first, passing `elemProps` to the next last
+ * hook. There is a special exception, which is `null`. `null` means "remove this prop" and the null
+ * handling takes precedence to the first. Take care when using `null` as it will remove props
+ * passed in even from the developer. It can be useful when passing data between composed hooks or
+ * then redirecting a prop somewhere else.
  *
  * For example:
  *
@@ -891,7 +897,8 @@ export function useModelContext<T>(
  *   console.log('useHook1', elemProps)
  *   return {
  *     a: 'useHook1',
- *     c: 'useHook1'
+ *     c: 'useHook1',
+ *     d: null, // remove the `d` prop
  *   }
  * })
  *
@@ -899,21 +906,25 @@ export function useModelContext<T>(
  *   console.log('useHook2', elemProps)
  *   return {
  *     b: 'useHook2',
- *     c: 'useHook2'
+ *     c: 'useHook2',
+ *     d: 'useHook2',
  *   }
  * })
  *
- * const useHook3 = composeHooks(useHook1, useHook2)
- * const props = composeHooks(model, { c: 'props' })
+ * const useHook3 = composeHooks(
+ *   useHook1, // run last, will have access to `useHook2`'s elemProps, but can remove a prop with `null`
+ *   useHook2 // run first and will override all of `useHook1`'s props
+ * )
+ * const props = useHook3(model, { c: 'props', d: 'props' })
  * console.log('props', props)
  * ```
  *
  * The output would be:
  *
  * ```ts
- * useHook2 {c: 'foo'}
- * useHook1 {b: 'useHook2', c: 'foo'}
- * props {a: 'useHook1', b: 'useHook2', c: 'foo'}
+ * useHook2 {c: 'props', d: 'props'}
+ * useHook1 {b: 'useHook2', c: 'props', d: 'props'}
+ * props {a: 'useHook1', b: 'useHook2', c: 'props', d: null}
  * ```
  */
 export function composeHooks<
@@ -922,7 +933,8 @@ export function composeHooks<
   H3 extends BaseHook<any, {}>,
   H4 extends BaseHook<any, {}>,
   H5 extends BaseHook<any, {}>,
-  H6 extends BaseHook<any, {}>
+  H6 extends BaseHook<any, {}>,
+  H7 extends BaseHook<any, {}>
 >(
   hook1: H1,
   hook2: H2,
@@ -930,6 +942,7 @@ export function composeHooks<
   hook4?: H4,
   hook5?: H5,
   hook6?: H6,
+  hook7?: H7,
   // TypeScript will only infer up to 6, but the types will still exist for those 6. The rest of the
   // hooks won't add to the interface, but that seems to be an okay fallback
   ...hooks: BehaviorHook<any, any>[]
@@ -939,22 +952,24 @@ export function composeHooks<
       ? H4 extends BaseHook<any, infer O4>
         ? H5 extends BaseHook<any, infer O5>
           ? H6 extends BaseHook<any, infer O6>
-            ? BehaviorHook<
-                M,
-                O1 &
-                  RemoveNull<O2> &
-                  RemoveNull<O3> &
-                  RemoveNull<O4> &
-                  RemoveNull<O5> &
-                  RemoveNull<O6>
-              >
-            : BehaviorHook<
-                M,
-                O1 & RemoveNull<O2> & RemoveNull<O3> & RemoveNull<O4> & RemoveNull<O5>
-              >
-          : BehaviorHook<M, O1 & RemoveNull<O2> & RemoveNull<O3> & RemoveNull<O4>>
-        : BehaviorHook<M, O1 & RemoveNull<O2> & RemoveNull<O3>>
-      : BehaviorHook<M, O1 & RemoveNull<O2>>
+            ? H7 extends BaseHook<any, infer O7>
+              ? BehaviorHook<
+                  M,
+                  RemoveNulls<
+                    MergeProps<
+                      O1,
+                      MergeProps<
+                        O2,
+                        MergeProps<O3, MergeProps<O4, MergeProps<O5, MergeProps<O6, O7>>>>
+                      >
+                    >
+                  >
+                >
+              : never
+            : never
+          : never
+        : never
+      : never
     : never
   : never;
 export function composeHooks<M extends Model<any, any>, P extends {}, O extends {}>(
