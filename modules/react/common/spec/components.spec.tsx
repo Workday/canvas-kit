@@ -16,6 +16,7 @@ import {
   createSubcomponent,
   createModelHook,
   useModelContext,
+  createElemPropsHook,
 } from '@workday/canvas-kit-react/common';
 
 describe('createComponent', () => {
@@ -427,7 +428,7 @@ describe('composeHooks', () => {
   });
 
   it('should call hook both callbacks', () => {
-    const props = composeHooks(hook1, hook2)(myModel, {}, null) as {onClick: Function};
+    const props = composeHooks(hook1, hook2)(myModel, {}, null) as any as {onClick: Function};
     props.onClick({event: 'foo'});
     expect(spy1).toHaveBeenCalled();
     expect(spy1).toHaveBeenCalledWith({event: 'foo'});
@@ -620,6 +621,25 @@ describe('composeHooks', () => {
       };
 
       expectTypeOf(props).toEqualTypeOf<Expected>();
+    });
+
+    it('should compose hooks with conflicting types with null values', () => {
+      const useModel = config => ({state: {}, events: {}});
+      const useHook1 = createElemPropsHook(useModel)(model => ({foo: 'bar', item: null}));
+      const useHook2 = createElemPropsHook(useModel)(model => ({bar: 'baz', item: 'test'}));
+
+      const useHookComposed = composeHooks(useHook1, useHook2);
+      const fakeModel = {state: {}, events: {}};
+
+      const elemProps = useHookComposed(useModel({}), {});
+
+      expect(elemProps).toEqual({foo: 'bar', bar: 'baz', item: null});
+
+      expectTypeOf(elemProps).toHaveProperty('foo');
+      expectTypeOf(elemProps.foo).toBeString();
+      expectTypeOf(elemProps).toHaveProperty('bar');
+      expectTypeOf(elemProps.bar).toBeString();
+      expectTypeOf(elemProps).toEqualTypeOf<{foo: 'bar'; bar: 'baz'}>();
     });
   });
 });

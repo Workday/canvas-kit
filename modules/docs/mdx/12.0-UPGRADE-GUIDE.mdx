@@ -40,6 +40,8 @@ A note to the reader:
   - [Form Field Container](#form-field-container)
 - [Removals](#removals)
   - [Input Icon Container](#input-icon-container)
+- [Infrastructure](#infrastructure)
+  - [TypeScript](#typescript)
 - [Component Updates](#component-updates)
   - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
   - [Avatar](#avatar)
@@ -51,6 +53,7 @@ A note to the reader:
   - [Select](#select)
   - [Text Area](#text-area)
   - [Text Input](#text-input)
+- [Utility Updates](#utility-updates)
 - [Troubleshooting](#troubleshooting)
 - [Glossary](#glossary)
   - [Main](#main)
@@ -72,7 +75,7 @@ automatically update your code to work with most of the breaking changes in v12.
 handled by the codemod are marked with 🤖 in the Upgrade Guide.**
 
 > **Note: In v12, we have done some infrastructure updates with moving to Storybook 7, Webpack 5,
-> Typescript 4.9 and Cypress 13 . With these updates has come some formatting issues after running
+> TypeScript 5.0 and Cypress 13 . With these updates has come some formatting issues after running
 > our codemods. We recommend running a formatter to address the format issues that have been
 > introduced in v12.**
 
@@ -187,6 +190,18 @@ We've removed `InputIconContainer` from Main. Please use
 from Main instead.
 
 ---
+
+## Infrastructure
+
+### TypeScript
+
+**PR:** [#2908](https://github.com/Workday/canvas-kit/pull/2908)
+
+We've upgraded to TypeScript 5.0 to make use of
+[const Type Parameters](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#const-type-parameters).
+You will need to upgrade to TypeScript 5.0+ to avoid any TypeScript syntax errors. TypeScript does
+not follow semver, so 5.0 doesn't mean a large breaking change from 4.9. TypeScript doesn't have a
+`x.10` release, they bump the `x.9` to `{x+1}.0`.
 
 ## Component Updates
 
@@ -568,6 +583,41 @@ const theme: PartialEmotionCanvasTheme = {
   </FormField>
 </CanvasProvider>;
 ```
+
+## Utility Updates
+
+**PR:** [#2908](https://github.com/Workday/canvas-kit/pull/2908)
+
+### `mergeProps`
+
+`mergeProps` had a bug where sometimes the returned props would be `never`. Also `mergeProps` would
+not narrow types which would require you to add `as const`. We fixed the type signature to more
+accurately reflect how `mergeProps` works. This may catch new type errors not caught before. There
+is no way to codemod this. Let us know if you need help fixing new type errors introduced by this
+change.
+
+More information: https://github.com/Workday/canvas-kit/discussions/2979
+
+### `createElemPropsHook`
+
+`createElemPropsHook` now uses
+[const Type Parameters](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#const-type-parameters)
+to narrow types in the object. This prevents requiring `as const` in some situations. This alone
+should fix bugs instead of introduce them.
+
+More information: https://github.com/Workday/canvas-kit/discussions/2979
+
+### `composeHooks`
+
+`composeHooks` uses `mergeProps` and suffered the same bugs. If any hook in the `composeHooks` chain
+used a `null` prop, the entire prop object returned was typed as `never`. This caused a bug where if
+the Component required a prop, it wasn't being provided by the composed hook. Some of our components
+manually added to the component's prop interface so the component's render function wouldn't
+complain. This has been fixed. This may be a breaking change where before the spread `elemProps` was
+`never`, so no type conflicts could exist with component props. Now all props are properly
+represented which may mean TypeScript is now catching bugs it didn't before.
+
+More information: https://github.com/Workday/canvas-kit/discussions/2979
 
 ## Troubleshooting
 
