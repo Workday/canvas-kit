@@ -75,8 +75,8 @@ describe('parseObjectToStaticValue', () => {
       }
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isObjectLiteralExpression)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isObjectLiteralExpression)![0];
 
     expect(parseObjectToStaticValue(node, withDefaultContext(program.getTypeChecker()))).toEqual({
       bar: '12px',
@@ -92,8 +92,8 @@ describe('parseObjectToStaticValue', () => {
       }
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isObjectLiteralExpression)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isObjectLiteralExpression)![0];
 
     expect(parseObjectToStaticValue(node, withDefaultContext(program.getTypeChecker()))).toEqual({
       '&:hover': {
@@ -113,8 +113,8 @@ describe('parseObjectToStaticValue', () => {
       const bar = { ...foo }
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isObjectLiteralExpression)[2];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isObjectLiteralExpression)![2];
 
     expect(parseObjectToStaticValue(node, withDefaultContext(program.getTypeChecker()))).toEqual({
       '&:hover': {
@@ -132,8 +132,8 @@ describe('parseObjectToStaticValue', () => {
       const bar = { ...foo }
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isObjectLiteralExpression)[1];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isObjectLiteralExpression)![1];
 
     expect(parseObjectToStaticValue(node, withDefaultContext(program.getTypeChecker()))).toEqual({
       color: 'var(--var-color)',
@@ -151,13 +151,33 @@ describe('parseObjectToStaticValue', () => {
       const bar = { ...foo }
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isObjectLiteralExpression)[2];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isObjectLiteralExpression)![2];
 
     expect(parseObjectToStaticValue(node, withDefaultContext(program.getTypeChecker()))).toEqual({
       '&:hover': {
         padding: '12px',
       },
+    });
+  });
+
+  it('should handle a ShorthandPropertyAssignment when the Identifier is a known name', () => {
+    const program = createProgramFromSource(`
+      const foo = {
+        margin,
+      }
+    `);
+
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isObjectLiteralExpression)![0];
+
+    expect(
+      parseObjectToStaticValue(
+        node,
+        withDefaultContext(program.getTypeChecker(), {names: {margin: '12px'}})
+      )
+    ).toEqual({
+      margin: '12px',
     });
   });
 
@@ -174,8 +194,8 @@ describe('parseObjectToStaticValue', () => {
       }
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isObjectLiteralExpression)[1];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isObjectLiteralExpression)![1];
 
     expect(parseObjectToStaticValue(node, withDefaultContext(program.getTypeChecker()))).toEqual({
       fontSize: '12px',
@@ -189,14 +209,14 @@ describe('parseObjectToStaticValue', () => {
       }
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isObjectLiteralExpression)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isObjectLiteralExpression)![0];
 
     expect(
       parseObjectToStaticValue(
         node,
         withDefaultContext(program.getTypeChecker(), {
-          variables: {
+          names: {
             '--fallback': '12px',
           },
         })
@@ -213,14 +233,14 @@ describe('parseObjectToStaticValue', () => {
       }
     `);
 
-    const sourceFile = program.getSourceFile('test.ts');
-    const node = findNodes(sourceFile, '', ts.isObjectLiteralExpression)[0];
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isObjectLiteralExpression)![0];
 
     expect(
       parseObjectToStaticValue(
         node,
         withDefaultContext(program.getTypeChecker(), {
-          variables: {
+          names: {
             '--fallback': '12px',
           },
         })

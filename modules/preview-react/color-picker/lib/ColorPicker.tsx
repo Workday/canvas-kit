@@ -3,11 +3,11 @@ import {checkIcon} from '@workday/canvas-system-icons-web';
 import {ColorInput} from '@workday/canvas-kit-react/color-picker';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import * as React from 'react';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import styled from '@emotion/styled';
 
 import {ResetButton} from './parts/ColorReset';
-import {SwatchBook} from './parts/SwatchBook';
+import {SwatchBook, SwatchBookColorObject} from './parts/SwatchBook';
 
 export interface ColorPickerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -21,7 +21,7 @@ export interface ColorPickerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * The array of colors to be rendered in the swatchbook.
    */
-  colorSet?: string[];
+  colorSet?: string[] | SwatchBookColorObject[];
   /**
    * If true, render an input for entering a custom hex color.
    * @default false
@@ -149,13 +149,19 @@ const HexColorInput = styled(ColorInput)({
   width: '168px',
 });
 
-const isCustomColor = (colors: string[], hexCode?: string) => {
+const isCustomColor = (colors: (string | SwatchBookColorObject)[], hexCode?: string) => {
   if (!hexCode) {
     return false;
   }
 
   const lowercaseHex = hexCode.toLowerCase();
-  return !colors.includes(lowercaseHex);
+  return !colors.some((color: string | SwatchBookColorObject) => {
+    if (typeof color === 'string') {
+      return color.toLowerCase() === lowercaseHex;
+    } else {
+      return color.value.toLowerCase() === lowercaseHex;
+    }
+  });
 };
 
 export const ColorPicker = ({
@@ -204,8 +210,10 @@ export const ColorPicker = ({
       <SwatchBook colors={colorSet} onSelect={onColorChange} value={value} />
       {showCustomHexInput && (
         <ColorInputWrapper onSubmit={onSubmit}>
-          <ColorInputAndLabel label={customHexInputLabel}>
-            <HexColorInput
+          <ColorInputAndLabel>
+            <FormField.Label>{customHexInputLabel}</FormField.Label>
+            <FormField.Input
+              as={HexColorInput}
               onChange={onCustomHexChange}
               onValidColorChange={onValidCustomHexChange}
               value={customHexValue}
