@@ -3,7 +3,7 @@ import {keyframes} from '@emotion/react';
 
 import {Card} from '@workday/canvas-kit-react/card';
 import {Checkbox} from '@workday/canvas-kit-react/checkbox';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {SystemIconCircle} from '@workday/canvas-kit-react/icon';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
@@ -64,11 +64,11 @@ export const Simulation = () => {
   return (
     <Box>
       <Box marginBottom="l">
-        <FormField orientation="horizontal">
+        <FormField orientation="horizontalStart">
           <FormField.Label>Load Time</FormField.Label>
           <FormField.Input as={TextInput} onChange={onChangeLoadTime} value={loadTime} />
         </FormField>
-        <FormField orientation="horizontal">
+        <FormField orientation="horizontalStart">
           <FormField.Label>Loading</FormField.Label>
           <FormField.Input as={Checkbox} checked={loading} onChange={onChangeLoading} />
         </FormField>

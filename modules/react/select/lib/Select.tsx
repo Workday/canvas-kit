@@ -9,12 +9,7 @@ import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {useSelectCard} from './hooks/useSelectCard';
 import {useSelectInput} from './hooks/useSelectInput';
 import {useSelectModel} from './hooks/useSelectModel';
-import {
-  createSubcomponent,
-  ExtractProps,
-  createContainer,
-  Themeable,
-} from '@workday/canvas-kit-react/common';
+import {createSubcomponent, ExtractProps, createContainer} from '@workday/canvas-kit-react/common';
 import {system} from '@workday/canvas-tokens-web';
 
 export interface SelectInputProps extends ExtractProps<typeof TextInput>, CSProps {
@@ -24,6 +19,11 @@ export interface SelectInputProps extends ExtractProps<typeof TextInput>, CSProp
    * ** Note:An option must be selected in order to render and icon.**
    */
   inputStartIcon?: CanvasSystemIcon;
+  readonly textInputProps?: {
+    ref: React.Ref<HTMLInputElement>;
+    onChange: () => {};
+    value: string;
+  };
 }
 
 const selectInputStencil = createStencil({
@@ -81,8 +81,8 @@ export const SelectInput = createSubcomponent(TextInput)({
     return (
       <InputGroup data-width="ck-formfield-width">
         {inputStartIcon && model.state.selectedIds.length > 0 && (
-          <InputGroup.InnerStart {...selectIconsStencil()}>
-            <SystemIcon icon={inputStartIcon} />
+          <InputGroup.InnerStart data-part="select-start-icon-container" {...selectIconsStencil()}>
+            <SystemIcon data-part="select-start-icon" icon={inputStartIcon} />
           </InputGroup.InnerStart>
         )}
         {/* Hidden input to handle ids */}
@@ -96,6 +96,7 @@ export const SelectInput = createSubcomponent(TextInput)({
           value={value}
           name={name}
           ref={ref}
+          data-part="select-hidden-input"
           {...hiddenSelectInputStencil()}
         />
         {/* Visual input */}
@@ -104,11 +105,12 @@ export const SelectInput = createSubcomponent(TextInput)({
           disabled={disabled}
           placeholder={placeholder}
           error={error}
+          data-part="select-visual-input"
           {...textInputProps}
           {...mergeStyles(elemProps, selectInputStencil())}
         />
-        <InputGroup.InnerEnd {...selectIconsStencil()}>
-          <SystemIcon icon={caretDownSmallIcon} />
+        <InputGroup.InnerEnd data-part="select-caret-container">
+          <SystemIcon data-part="select-caret-icon" icon={caretDownSmallIcon} />
         </InputGroup.InnerEnd>
       </InputGroup>
     );
@@ -122,7 +124,7 @@ export const SelectItem = createSubcomponent('li')({
   },
 })<ExtractProps<typeof Combobox.Menu.Item>>(({children, ...elemProps}, Element, _model) => {
   return (
-    <Combobox.Menu.Item role="option" as={Element} {...elemProps}>
+    <Combobox.Menu.Item as={Element} {...elemProps}>
       {children}
     </Combobox.Menu.Item>
   );
@@ -143,7 +145,7 @@ export const SelectCard = createSubcomponent('div')({
   );
 });
 
-export interface SelectProps extends Themeable, ExtractProps<typeof Combobox> {}
+export interface SelectProps extends ExtractProps<typeof Combobox> {}
 /**
  * Use `Select` to allow users to choose an option from a list or type characters to select a matching option.
  *

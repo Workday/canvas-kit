@@ -1,12 +1,6 @@
-<Meta
-  title="Guides/Upgrade Guides/v7.0"
-  parameters={{
-    viewMode: 'docs',
-    previewTabs: {
-      canvas: {hidden: true},
-    },
-  }}
-/>
+import {Markdown} from '@storybook/blocks';
+
+<Meta title="Guides/Upgrade Guides/v7.0" />
 
 # Canvas Kit 7.0 Upgrade Guide
 
@@ -569,15 +563,19 @@ To consolidate Button APIs, we've removed `IconButton` in favor of `SecondaryBut
 `TertiaryButton`. The following table shows how `IconButton` variants in v6 map to their
 corresponding buttons in v7.
 
-| v6 `IconButton` variant    | v7 button (and variant, if necessary)    |
+<Markdown>
+  {`
+| v6 \`IconButton\` variant    | v7 button (and variant, if necessary)    |
 | -------------------------- | ---------------------------------------- |
-| `circle` (default variant) | `TertiaryButton`                         |
-| `circleFilled`             | `SecondaryButton`                        |
-| `inverse`                  | `TertiaryButton` with `inverse` variant  |
-| `inverseFilled`            | `SecondaryButton` with `inverse` variant |
-| `plain`                    | Unsupported                              |
-| `square`                   | Unsupported                              |
-| `squareFilled`             | Unsupported                              |
+| \`circle\` (default variant) | \`TertiaryButton\`                         |
+| \`circleFilled\`             | \`SecondaryButton\`                        |
+| \`inverse\`                  | \`TertiaryButton\` with \`inverse\` variant  |
+| \`inverseFilled\`            | \`SecondaryButton\` with \`inverse\` variant |
+| \`plain\`                    | Unsupported                              |
+| \`square\`                   | Unsupported                              |
+| \`squareFilled\`             | Unsupported                              |
+`}
+</Markdown>
 
 > Note: See below for more information about how to manually migrate from
 > [unsupported v6 variants](#unsupported-iconbutton-variants).

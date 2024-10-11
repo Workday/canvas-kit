@@ -75,25 +75,29 @@ export const FetchingDynamicItems = () => {
 
   return (
     <Flex cs={parentContainerStyles}>
-      <Select model={model}>
-        <FormField label="Choose a Film">
-          <Select.Input
-            onChange={e => {
-              setId(e.target.value);
-            }}
-            placeholder={loadingStatus}
-          />
-          <Select.Popper>
-            <Select.Card>
-              <Select.List>
-                {item => {
-                  return <Select.Item>{item.label}</Select.Item>;
-                }}
-              </Select.List>
-            </Select.Card>
-          </Select.Popper>
-        </FormField>
-      </Select>
+      <FormField>
+        <FormField.Label>Choose a Film</FormField.Label>
+        <FormField.Field>
+          <Select model={model}>
+            <FormField.Input
+              as={Select.Input}
+              onChange={e => {
+                setId(e.target.value);
+              }}
+              placeholder={loadingStatus}
+            />
+            <Select.Popper>
+              <Select.Card>
+                <Select.List>
+                  {item => {
+                    return <Select.Item>{item.label}</Select.Item>;
+                  }}
+                </Select.List>
+              </Select.Card>
+            </Select.Popper>
+          </Select>
+        </FormField.Field>
+      </FormField>
       <div data-testid="selected-id">Selected Id: {id}</div>
       <div data-testid="selected-value">Selected value: {stringValue}</div>
       <PrimaryButton

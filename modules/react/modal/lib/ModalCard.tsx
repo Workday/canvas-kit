@@ -1,29 +1,27 @@
 import * as React from 'react';
 
-import {
-  createSubcomponent,
-  ExtractProps,
-  StyledType,
-  styled,
-  getTheme,
-} from '@workday/canvas-kit-react/common';
-import {space} from '@workday/canvas-kit-react/tokens';
+import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {Popup} from '@workday/canvas-kit-react/popup';
 
 import {useModalCard, useModalModel} from './hooks';
+import {calc, createStencil} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 export interface ModalCardProps extends ExtractProps<typeof Popup.Card, never> {}
 
-const ResponsiveModalCard = styled(Popup.Card)<ModalCardProps & StyledType>(({theme}) => {
-  const {canvas: canvasTheme} = getTheme(theme);
-  return {
-    margin: space.xl,
-    [canvasTheme.breakpoints.down('s')]: {
-      margin: space.s, // 16px all around margin on smaller screen sizes
-      padding: space.s, // brings total padding between edge and content to 24px
-      borderRadius: space.m, // 24px border radius on smaller devices.
+export const modalCardStencil = createStencil({
+  base: {
+    margin: system.space.x10,
+    width: calc.add(calc.multiply(system.space.x20, 5), system.space.x10),
+    borderWidth: system.space.zero,
+    boxShadow: system.depth[6],
+    '@media screen and (max-width: 768px)': {
+      margin: system.space.x4, // 16px all around margin on smaller screen sizes
+      padding: system.space.x4, // brings total padding between edge and content to 24px
+      borderRadius: system.space.x6, // 24px border radius on smaller devices.
     },
-  };
+  },
 });
 
 export const ModalCard = createSubcomponent('div')({
@@ -31,5 +29,5 @@ export const ModalCard = createSubcomponent('div')({
   modelHook: useModalModel,
   elemPropsHook: useModalCard,
 })<ModalCardProps>((elemProps, Element) => {
-  return <ResponsiveModalCard as={Element} width={440} borderWidth={0} depth={6} {...elemProps} />;
+  return <Popup.Card as={Element} {...mergeStyles(elemProps, modalCardStencil())} />;
 });

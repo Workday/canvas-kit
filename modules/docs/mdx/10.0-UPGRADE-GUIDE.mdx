@@ -1,4 +1,4 @@
-import {Meta} from '@storybook/addon-docs';
+import {Markdown} from '@storybook/blocks';
 
 <Meta title="Guides/Upgrade Guides/v10.0" />
 
@@ -162,6 +162,8 @@ updated on a 1:1 basis. None of the base values have changed, only the unit.
 The table below shows what each token value is, what it corresponds to, and what the new `rem` value
 is in `px`:
 
+<Markdown>
+  {`
 | px Value | rem Value | space Token |
 | -------- | --------- | ----------- |
 | 0        | 0         | zero        |
@@ -174,17 +176,23 @@ is in `px`:
 | 40px     | 2.5rem    | xl          |
 | 64px     | 4rem      | xxl         |
 | 80px     | 5rem      | xxxl        |
+`}
+</Markdown>
 
 You can convert a `px` value to a `rem` value by dividing your `px` value by `16`(if your default
 browser font size hasn't been updated, the value will be `16`).
 
 For example:
 
+<Markdown>
+  {`
 | Equation    | rem Value |
 | ----------- | --------- |
-| `16px/16px` | `1rem`    |
-| `32px/16px` | `2rem`    |
-| `8px/16px`  | `0.5rem`  |
+| \`16px/16px\` | \`1rem\`    |
+| \`32px/16px\` | \`2rem\`    |
+| \`8px/16px\`  | \`0.5rem\`  |
+`}
+</Markdown>
 
 #### Why Did We Make This Change?
 
@@ -273,7 +281,7 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
     <SelectOption label="Medium" value="medium" />
     <SelectOption label="Large" value="large" />
   </Select>
-</FormField>
+</FormField>;
 ```
 
 ```tsx
@@ -294,7 +302,7 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
       </Select.Card>
     </Select.Popper>
   </FormField>
-</Select>
+</Select>;
 ```
 
 Notice that `Select` is now outside the `FormField`. This is due to the update in `Select` and how
