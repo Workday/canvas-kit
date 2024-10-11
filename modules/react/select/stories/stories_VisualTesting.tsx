@@ -25,6 +25,10 @@ const options = [
     id: 'The Ontologically Anthropocentric Sensory Immersive Simulation',
     disabled: false,
   },
+  {
+    id: 'Thisisalongstringwithnobreaksandwillwrap',
+    disabled: false,
+  },
 ];
 
 const disabledItems = options.filter(item => item.disabled === true).map(item => item.id);
