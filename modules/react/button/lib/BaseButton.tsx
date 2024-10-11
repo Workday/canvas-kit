@@ -189,7 +189,7 @@ export const buttonStencil = createStencil({
         ),
         outerColor: cssVar(
           buttonColorPropVars.focus.boxShadowOuter,
-          cssVar(boxShadowOuter, brand.primary.base)
+          cssVar(boxShadowOuter, brand.common.focusOutline)
         ),
       }),
     },
@@ -271,6 +271,12 @@ export const buttonStencil = createStencil({
         minWidth: 'auto',
         paddingInline: system.space.x3,
         gap: system.space.x1,
+      },
+    },
+    grow: {
+      true: {
+        width: '100%',
+        maxWidth: '100%',
       },
     },
     // IconPosition Styles
@@ -376,6 +382,7 @@ export const BaseButton = createComponent('button')({
       children,
       size,
       fillIcon,
+      grow,
       iconPosition,
       icon,
       colors,
@@ -390,7 +397,7 @@ export const BaseButton = createComponent('button')({
         ref={ref}
         type="button"
         {...mergeStyles(elemProps, [
-          buttonStencil({size, iconPosition}),
+          buttonStencil({size, iconPosition, grow}),
           buttonColorPropVars.default(colors?.default || {}),
           buttonColorPropVars.focus(colors?.focus || {}),
           buttonColorPropVars.hover(colors?.hover || {}),

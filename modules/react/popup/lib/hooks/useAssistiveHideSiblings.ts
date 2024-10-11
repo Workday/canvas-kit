@@ -23,7 +23,7 @@ export const useAssistiveHideSiblings = createElemPropsHook(usePopupModel)(model
     }
 
     const siblings = [
-      ...((model.state.stackRef.current?.parentElement?.children as any) as HTMLElement[]),
+      ...((model.state.stackRef.current?.parentElement?.children || []) as HTMLElement[]),
     ].filter(el => el !== model.state.stackRef.current);
     const prevAriaHidden = siblings.map(el => el.getAttribute('aria-hidden'));
     siblings.forEach(el => {

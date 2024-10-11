@@ -151,10 +151,10 @@ export const systemIconStencil = createStencil({
      */
     color: '',
     accentColor: '',
-    backgroundColor: 'transparent',
+    backgroundColor: '',
   },
   base: ({accentColor, backgroundColor, color}) => ({
-    [backgroundColor]: 'transparent',
+    [backgroundColor]: cssVar(backgroundColor, 'transparent'),
     '& .wd-icon-fill': {
       fill: cssVar(color, base.licorice200),
     },
@@ -162,7 +162,7 @@ export const systemIconStencil = createStencil({
       fill: cssVar(accentColor, cssVar(color, base.licorice200)),
     },
     '& .wd-icon-background': {
-      fill: backgroundColor,
+      fill: cssVar(backgroundColor, 'transparent'),
     },
     // will be removed eventually
     '&:where(:hover, .hover) .wd-icon-fill': {
@@ -181,7 +181,10 @@ export const systemIconStencil = createStencil({
       ),
     },
     '&:where(:hover, .hover) .wd-icon-background': {
-      fill: cssVar(deprecatedSystemIconVars.backgroundHover, backgroundColor),
+      fill: cssVar(
+        deprecatedSystemIconVars.backgroundHover,
+        cssVar(backgroundColor, 'transparent')
+      ),
     },
   }),
 });

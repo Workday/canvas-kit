@@ -653,11 +653,6 @@ export function createStyles(
       // https://codesandbox.io/s/stupefied-bartik-9c2jtd?file=/src/App.tsx
       const {styles} = serializeStyles([convertedStyles as CastStyleProps]);
 
-      // use `css.call()` instead of `css()` to trick Emotion's babel plugin to not rewrite our code
-      // to remove our generated Id for the name:
-      // https://github.com/emotion-js/emotion/blob/f3b268f7c52103979402da919c9c0dd3f9e0e189/packages/babel-plugin/src/utils/transform-expression-with-styles.js#L81-L82
-      // Without this "fix", anyone using the Emotion babel plugin would get different results than
-      // intended when styles are merged.
       const name = generateUniqueId();
       createStylesCache[`${instance.cache.key}-${name}`] = true;
       return instance.css({name, styles});
@@ -739,8 +734,13 @@ export function handleCsProp<
   const {cs, style, className, ...restProps} = elemProps;
   const instance = getInstance();
 
-  // We are going to track if any runtime styles are detected
-  let shouldRuntimeMergeStyles = false;
+  // We're seeing style merging issues when using createStyles or createStencil. It only happens when
+  // every style override of the element uses these utilities and @emotion/react or @emotion/styled is not used on the same element.
+  // These utilities rely on module execution order and we're having a few reports where modules are possibly executing out of order.
+  // In order to allow everyone to use createStyles and createStencil without worrying about style merge issues, we're going
+  // to enable compat mode all the time. We'll look into possible out-of-order execution issues in the future and plan to re-enable
+  // full static mode (for better performance) once we know why this is happening and have a proper workaround.
+  let shouldRuntimeMergeStyles = true;
 
   // The order is intentional. The `className` should go first, then the `cs` prop. If we don't do
   // runtime merging, this order doesn't actually matter because the browser doesn't care the order
@@ -809,7 +809,7 @@ export type StencilCompoundConfig<M> = {
 };
 
 type ModifierValuesStencil<
-  M extends StencilModifierConfig<any, any>,
+  M extends StencilModifierConfig<any, any> = {},
   V extends DefaultedVarsShape = {}
 > = {
   [P in keyof M]?: P extends keyof V
@@ -987,8 +987,8 @@ type StencilDefaultModifierReturn<M> = {
 };
 
 export interface BaseStencil<
-  M extends StencilModifierConfig<V>,
-  V extends DefaultedVarsShape,
+  M extends StencilModifierConfig<V> = {},
+  V extends DefaultedVarsShape = {},
   E extends BaseStencil<any, any, any, any> = never,
   ID extends string = never
 > {
@@ -999,8 +999,8 @@ export interface BaseStencil<
 }
 
 export interface Stencil<
-  M extends StencilModifierConfig<V, E>,
-  V extends DefaultedVarsShape,
+  M extends StencilModifierConfig<V, E> = {},
+  V extends DefaultedVarsShape = {},
   E extends BaseStencil<any, any, any, any> = never,
   ID extends string = never
 > extends BaseStencil<M, V, E, ID> {
@@ -1074,7 +1074,7 @@ export function parentModifier(value: string) {
  * compound modifiers.
  */
 export function createStencil<
-  M extends StencilModifierConfig<V>,
+  M extends StencilModifierConfig<V>, // TODO: default to `{}` and fix inference in `StyleReturn` types so that modifier style return functions give correct inference to variables
   V extends DefaultedVarsShape = {},
   E extends BaseStencil<any, any, any, any> = never, // use BaseStencil to avoid infinite loops
   ID extends string = never
@@ -1152,7 +1152,7 @@ export function createStencil<
     const inputModifiers = {...composes?.defaultModifiers, ...defaultModifiers};
     // Only override defaults if a value is defined
     for (const key in input) {
-      if (input[key]) {
+      if (input[key] !== undefined) {
         // @ts-ignore
         inputModifiers[key] = input[key];
       }

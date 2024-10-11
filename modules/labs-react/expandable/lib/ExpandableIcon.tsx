@@ -3,6 +3,7 @@ import React from 'react';
 import {
   createSubcomponent,
   ExtractProps,
+  filterOutProps,
   styled,
   StyledType,
 } from '@workday/canvas-kit-react/common';
@@ -29,7 +30,9 @@ export interface ExpandableIconProps extends Omit<ExtractProps<typeof SystemIcon
   iconPosition?: IconPositions;
 }
 
-const StyledEndIcon = styled(SystemIcon)<{visible: boolean} & StyledType>(
+const StyledEndIcon = styled(SystemIcon, {
+  shouldForwardProp: filterOutProps(['visible']),
+})<{visible: boolean} & StyledType>(
   {
     marginLeft: 'auto',
   },
@@ -41,7 +44,9 @@ const StyledEndIcon = styled(SystemIcon)<{visible: boolean} & StyledType>(
   })
 );
 
-const StyledStartIcon = styled(SystemIcon)<{visible: boolean} & StyledType>(
+const StyledStartIcon = styled(SystemIcon, {
+  shouldForwardProp: filterOutProps(['visible']),
+})<{visible: boolean} & StyledType>(
   {
     margin: `0 ${space.xxs} 0 0`,
     padding: space.xxxs,

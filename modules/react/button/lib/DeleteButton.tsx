@@ -1,12 +1,11 @@
 import * as React from 'react';
 
-import {buttonStencil} from './BaseButton';
+import {buttonColorPropVars, buttonStencil} from './BaseButton';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 import {Button, ButtonProps} from './Button';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 /**
  * Extends all the style properties from Box to our buttons as well as props from ButtonProps.
@@ -22,12 +21,12 @@ const deleteButtonStencil = createStencil({
     [buttonStencil.vars.background]: brand.error.base,
     [buttonStencil.vars.borderRadius]: system.shape.round,
     [buttonStencil.vars.label]: brand.error.accent,
-    [systemIconStencil.vars.color]: brand.error.accent,
+    [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, brand.error.accent),
     // Focus Styles
     '&:focus-visible, &.focus': {
       [buttonStencil.vars.background]: brand.error.base,
       [buttonStencil.vars.label]: brand.error.accent,
-      [systemIconStencil.vars.color]: brand.error.accent,
+      [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, brand.error.accent),
       [buttonStencil.vars.boxShadowInner]: system.color.border.inverse,
       [buttonStencil.vars.boxShadowOuter]: brand.common.focusOutline,
     },
@@ -35,19 +34,19 @@ const deleteButtonStencil = createStencil({
     '&:hover, &.hover': {
       [buttonStencil.vars.background]: brand.error.dark,
       [buttonStencil.vars.label]: brand.error.accent,
-      [systemIconStencil.vars.color]: brand.error.accent,
+      [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.hover.icon, brand.error.accent),
     },
     // Active Styles
     '&:active, &.active': {
       [buttonStencil.vars.background]: brand.error.darkest,
       [buttonStencil.vars.label]: brand.error.accent,
-      [systemIconStencil.vars.color]: brand.error.accent,
+      [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.active.icon, brand.error.accent),
     },
     // Disabled Styles
     '&:disabled, &.disabled': {
       [buttonStencil.vars.background]: brand.error.base,
       [buttonStencil.vars.label]: brand.error.accent,
-      [systemIconStencil.vars.color]: brand.error.accent,
+      [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.disabled.icon, brand.error.accent),
       [buttonStencil.vars.opacity]: system.opacity.disabled,
     },
   },
@@ -60,9 +59,21 @@ const deleteButtonStencil = createStencil({
  */
 export const DeleteButton = createComponent('button')({
   displayName: 'DeleteButton',
-  Component: ({children, ...elemProps}: DeleteButtonProps, ref, Element) => {
+  Component: (
+    {children, size, iconPosition, grow, cs, ...elemProps}: DeleteButtonProps,
+    ref,
+    Element
+  ) => {
     return (
-      <Button as={Element} ref={ref} {...mergeStyles(elemProps, deleteButtonStencil())}>
+      <Button
+        as={Element}
+        ref={ref}
+        size={size}
+        grow={grow}
+        iconPosition={iconPosition}
+        cs={[deleteButtonStencil({size, iconPosition}), cs]}
+        {...elemProps}
+      >
         {children}
       </Button>
     );
