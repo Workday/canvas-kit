@@ -18,7 +18,7 @@ export interface NavigationManager {
    * and `Ctrl+End` for Grids. */
   getLast: NavigationRequestor;
   /** Get an item with the provided `id`. */
-  getItem: (id: string, model: NavigationInput) => Item<Generic>;
+  getItem: (id: string, model: NavigationInput) => Item<Generic> | undefined;
   /** Get the next item after the provided `id`. This will be called when the `Right` arrow key is
    * pressed for RTL languages and when the `Left` arrow is pressed for LTR languages. */
   getNext: NavigationRequestor;
@@ -129,10 +129,11 @@ export const getNextPage: NavigationRequestor = (index, {state}) => {
   return getLast(index, {state});
 };
 
-const getItem: (id: string, model: NavigationInput) => Item<Generic> = (id, {state}) => {
-  const item = state.items.find(item => item.id === id) || state.items[0]; // no id, return first item
-  assert(item, `Item not found: ${id}`);
-  return item;
+const getItem: (id: string, model: NavigationInput) => Item<Generic> | undefined = (
+  id,
+  {state}
+) => {
+  return state.items.find(item => item.id === id);
 };
 
 export const getWrappingOffsetItem =

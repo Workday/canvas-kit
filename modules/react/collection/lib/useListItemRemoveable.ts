@@ -41,28 +41,30 @@ export const useListItemRemove = createElemPropsHook(useCursorListModel)(
     React.useEffect(() => {
       if (keyElementRef.current) {
         const item = model.navigation.getItem(model.state.cursorId, model);
-        if (model.state.isVirtualized) {
-          model.state.UNSTABLE_virtual.scrollToIndex(item.index);
-        }
-
-        const selector = (id?: string) => {
-          return document.querySelector<HTMLElement>(`[data-focus-id="${`${id}-${item.id}`}"]`);
-        };
-
-        // In React concurrent mode, there could be several render attempts before the element we're
-        // looking for could be available in the DOM
-        retryEachFrame(() => {
-          // Attempt to extract the ID from the DOM element. This fixes issues where the server and client
-          // do not agree on a generated ID
-          const clientId = keyElementRef.current?.getAttribute('data-focus-id')?.split('-')[0];
-          const element = selector(clientId) || selector(model.state.id);
-
-          element?.focus();
-          if (element) {
-            keyElementRef.current = null;
+        if (item) {
+          if (model.state.isVirtualized) {
+            model.state.UNSTABLE_virtual.scrollToIndex(item.index);
           }
-          return !!element;
-        }, 5); // 5 should be enough, right?!
+
+          const selector = (id?: string) => {
+            return document.querySelector<HTMLElement>(`[data-focus-id="${`${id}-${item.id}`}"]`);
+          };
+
+          // In React concurrent mode, there could be several render attempts before the element we're
+          // looking for could be available in the DOM
+          retryEachFrame(() => {
+            // Attempt to extract the ID from the DOM element. This fixes issues where the server and client
+            // do not agree on a generated ID
+            const clientId = keyElementRef.current?.getAttribute('data-focus-id')?.split('-')[0];
+            const element = selector(clientId) || selector(model.state.id);
+
+            element?.focus();
+            if (element) {
+              keyElementRef.current = null;
+            }
+            return !!element;
+          }, 5); // 5 should be enough, right?!
+        }
       }
       // we only want to run this effect if the cursor changes and not any other time
       // eslint-disable-next-line react-hooks/exhaustive-deps

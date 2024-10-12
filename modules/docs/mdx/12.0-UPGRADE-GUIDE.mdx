@@ -53,6 +53,7 @@ A note to the reader:
   - [Select](#select)
   - [Text Area](#text-area)
   - [Text Input](#text-input)
+  - [Collections](#collections)
 - [Utility Updates](#utility-updates)
 - [Troubleshooting](#troubleshooting)
 - [Glossary](#glossary)
@@ -583,6 +584,13 @@ const theme: PartialEmotionCanvasTheme = {
   </FormField>
 </CanvasProvider>;
 ```
+
+### Collections
+
+The `navigation.getItem()` function can now return `undefined` instead of throwing an error when an
+item is not found. Throwing an error caused lots of problems when it came to dynamic data. This is a
+breaking change if your application uses `getItem`. It will now have to deal with the possibility of
+an `undefined`.
 
 ## Utility Updates
 
