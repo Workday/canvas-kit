@@ -89,7 +89,7 @@ export const useSelectInput = composeHooks(
           model.state.items.length > 0 &&
           model.state.selectedIds[0]
         ) {
-          const value = model.navigation.getItem(model.state.selectedIds[0], model).id;
+          const value = model.state.selectedIds[0];
           const oldValue = model.state.inputRef.current.value;
 
           // force the hidden input to have the correct value
@@ -184,7 +184,7 @@ export const useSelectInput = composeHooks(
           onChange: noop,
           value:
             model.state.selectedIds.length > 0 && model.state.items.length > 0
-              ? model.navigation.getItem(model.state.selectedIds[0], model).textValue
+              ? model.navigation.getItem(model.state.selectedIds[0], model)?.textValue || ''
               : '',
         },
         'aria-haspopup': 'menu',

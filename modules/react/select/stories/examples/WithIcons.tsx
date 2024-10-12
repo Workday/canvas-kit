@@ -40,7 +40,7 @@ export const WithIcons = () => {
             <FormField.Input
               as={Select.Input}
               cs={styleOverrides.formfieldInputStyles}
-              inputStartIcon={selectedItem.value.icon}
+              inputStartIcon={selectedItem?.value.icon}
             />
             <Select.Popper>
               <Select.Card cs={styleOverrides.selectCardStyles}>
