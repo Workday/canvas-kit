@@ -3,7 +3,7 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Select} from '@workday/canvas-kit-react/select';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {createStyles} from '@workday/canvas-kit-styling';
-import {SecondaryButton} from '../../../button';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 
 const parentContainerStyles = createStyles({
   flexDirection: 'column',
@@ -23,11 +23,11 @@ const options = [
 
 export const Controlled = () => {
   const [value, setValue] = React.useState('');
-  const [id, setId] = React.useState('');
+  const [label, setLabel] = React.useState('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setId(event.target.value);
-    setValue(options.find(item => item.serverId === event.target.value)!.label);
+    setValue(event.currentTarget.value);
+    setLabel(options.find(item => item.serverId === event.currentTarget.value)?.label || '');
   };
 
   return (
@@ -36,7 +36,7 @@ export const Controlled = () => {
         <FormField.Label>Contact</FormField.Label>
         <FormField.Field>
           <Select items={options} getId={item => item.serverId} getTextValue={item => item.label}>
-            <FormField.Input as={Select.Input} onChange={e => handleChange(e)} value={id} />
+            <FormField.Input as={Select.Input} onChange={handleChange} value={value} />
             <Select.Popper>
               <Select.Card>
                 <Select.List>{item => <Select.Item>{item.label}</Select.Item>}</Select.List>
@@ -45,19 +45,19 @@ export const Controlled = () => {
           </Select>
         </FormField.Field>
       </FormField>
-      <p>Id: {id}</p>
-      <p>Value: {value}</p>
+      <p>Id: {value}</p>
+      <p>Label: {label}</p>
       <Flex gap="s">
         <SecondaryButton
           onClick={e => {
-            setId('fax');
+            setValue('fax');
           }}
         >
           Set to "Fax"
         </SecondaryButton>
         <SecondaryButton
           onClick={e => {
-            setId('');
+            setValue('');
           }}
         >
           Clear

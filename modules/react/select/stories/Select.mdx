@@ -253,7 +253,9 @@ const items = [
 ### Controlled
 
 The Select can be a controlled input component by passing the `value` and `onChange` to either the
-`<Select>` component or the `<Select.Input>` component.
+`<Select>` component or the `<Select.Input>` component. Internally, the `Select.Input` watches for
+changes on the `value` React prop as well as the `value` DOM property and will update the model
+accordingly.
 
 <ExampleCodeBlock code={Controlled} />
 

@@ -6,6 +6,10 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {useComboboxModel} from './useComboboxModel';
 
+function onlyDefined<T>(input: T | undefined): input is T {
+  return !!input;
+}
+
 /**
  * A constrained combobox input can only offer values that are part of the provided list of `items`.
  * The default is an unconstrained. A constrained input should have both a form input that is hidden
@@ -37,11 +41,14 @@ export const useComboboxInputConstrained = createElemPropsHook(useComboboxModel)
       ref as React.Ref<HTMLInputElement>
     );
 
+    // Create React refs so we can get the current value inside an Effect without using those values
+    // as part of the dependency array.
     const modelNavigationRef = React.useRef(model.navigation);
     modelNavigationRef.current = model.navigation;
     const modelStateRef = React.useRef(model.state);
     modelStateRef.current = model.state;
 
+    // Watch the `value` prop passed from React props and update the model accordingly
     React.useLayoutEffect(() => {
       if (formLocalRef.current && typeof reactValue === 'string') {
         // const value = formLocalRef.current.value;
@@ -51,32 +58,23 @@ export const useComboboxInputConstrained = createElemPropsHook(useComboboxModel)
       }
     }, [reactValue, formLocalRef, model.events]);
 
+    // useImperativeHandle allows us to modify the `ref` before it is sent to the application,
+    // but after it is defined. We can add value watches, and redirect methods here.
     React.useImperativeHandle(
       formElementRef,
       () => {
-        console.log('formLocalRef', formLocalRef.current);
         if (formLocalRef.current) {
+          // Hook into the DOM `value` property of the form input element and update the model
+          // accordingly
           Object.defineProperty(formLocalRef.current, 'value', {
             get() {
               const value = Object.getOwnPropertyDescriptor(
                 Object.getPrototypeOf(formLocalRef.current),
                 'value'
               )?.get?.call(formLocalRef.current);
-              console.log('get', value);
               return value;
             },
             set(value: string) {
-              console.log(
-                'value',
-                value,
-                'model',
-                (modelStateRef.current.selectedIds === 'all'
-                  ? []
-                  : modelStateRef.current.selectedIds
-                ).join(', '),
-                'split',
-                value.split(', ')
-              );
               if (
                 formLocalRef.current &&
                 value !==
@@ -89,23 +87,35 @@ export const useComboboxInputConstrained = createElemPropsHook(useComboboxModel)
               }
             },
           });
+
+          // forward calls to `.focus()` and `.blur()` to the user input
+          formLocalRef.current.focus = (options?: FocusOptions) => {
+            userLocalRef.current!.focus(options);
+          };
+          formLocalRef.current.blur = () => {
+            userLocalRef.current!.blur();
+          };
         }
         return formLocalRef.current!;
       },
-      [formLocalRef, model.events]
+      [formLocalRef, userLocalRef, model.events]
     );
 
     // sync model selection state with inputs
     React.useLayoutEffect(() => {
       if (userLocalRef.current) {
-        const userValue = (
-          model.state.selectedIds === 'all'
-            ? []
-            : model.state.selectedIds.map(
-                id =>
-                  modelNavigationRef.current.getItem(id, {state: modelStateRef.current}).textValue
-              )
-        ).join(', ');
+        const userValue =
+          model.state.items.length === 0
+            ? ''
+            : (model.state.selectedIds === 'all'
+                ? []
+                : model.state.selectedIds
+                    .map(id =>
+                      modelNavigationRef.current.getItem(id, {state: modelStateRef.current})
+                    )
+                    .filter(onlyDefined)
+                    .map(item => item.textValue)
+              ).join(', ');
 
         if (userValue !== userLocalRef.current.value) {
           dispatchInputEvent(userLocalRef.current, userValue);
@@ -117,12 +127,11 @@ export const useComboboxInputConstrained = createElemPropsHook(useComboboxModel)
           ', '
         );
 
-        console.log('formValue', formValue, formLocalRef.current.value);
         if (formValue !== formLocalRef.current.value) {
           dispatchInputEvent(formLocalRef.current, formValue);
         }
       }
-    }, [model.state.selectedIds, formLocalRef, userLocalRef]);
+    }, [model.state.selectedIds, model.state.items, formLocalRef, userLocalRef]);
 
     // The props here will go to the user input.
     return {
@@ -138,7 +147,6 @@ export const useComboboxInputConstrained = createElemPropsHook(useComboboxModel)
       formInputProps: {
         disabled,
         tabIndex: -1,
-        // value: reactValue,s
         'aria-hidden': true,
         ref: formElementRef,
         onChange,

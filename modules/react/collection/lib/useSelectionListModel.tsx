@@ -107,7 +107,6 @@ export const useSelectionListModel = createModelHook({
      * inputs.
      */
     setSelectedIds(ids: 'all' | string[]) {
-      console.log('setSelectedIds', ids);
       setSelectedIds(ids);
     },
   };
