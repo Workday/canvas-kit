@@ -37,16 +37,16 @@ export const useMultiSelectModel = createModelHook({
     })
   );
   const [selectedItems, setSelectedItems] = React.useState<Item<any>[]>(() => {
-    return (config.initialSelectedIds === 'all' ? [] : config.initialSelectedIds).map(id =>
-      model.navigation.getItem(id, model)
-    );
+    return (config.initialSelectedIds === 'all' ? [] : config.initialSelectedIds)
+      .map(id => model.navigation.getItem(id, model))
+      .filter(item => item) as Item<any>[];
   });
 
   const cachedSelected = React.useMemo(
     () =>
-      (model.state.selectedIds === 'all' ? [] : model.state.selectedIds).map(id =>
-        model.navigation.getItem(id, model)
-      ),
+      (model.state.selectedIds === 'all' ? [] : model.state.selectedIds)
+        .map(id => model.navigation.getItem(id, model))
+        .filter(item => item) as Item<any>[],
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [model.state.selectedIds]
   );

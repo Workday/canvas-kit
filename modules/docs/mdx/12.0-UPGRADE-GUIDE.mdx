@@ -504,6 +504,10 @@ const theme: PartialEmotionCanvasTheme = {
 </CanvasProvider>;
 ```
 
+Select also received an overhaul to how it syncs the model and the external `value`. It is now
+controllable via `value` and `onChange` props as well as via the DOM `value` property on the
+`Select.Input`.
+
 ### Text Area
 
 **PR:** [#2825](https://github.com/Workday/canvas-kit/pull/2825)

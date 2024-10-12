@@ -231,6 +231,7 @@ export const MultiSelectInput = createSubcomponent(TextInput)({
     Element,
     model
   ) => {
+    console.log('elemProps', elemProps);
     return (
       <div {...handleCsProp({className, cs, style}, multiSelectStencil({}))}>
         <InputGroup>

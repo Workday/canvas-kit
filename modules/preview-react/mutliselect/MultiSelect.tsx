@@ -1,9 +1,7 @@
 import React from 'react';
 
 import {createContainer, createSubcomponent} from '@workday/canvas-kit-react/common';
-import {handleCsProp} from '@workday/canvas-kit-styling';
 import {Combobox} from '@workday/canvas-kit-react/combobox';
-import {Menu} from '@workday/canvas-kit-react/menu';
 
 import {useMultiSelectModel} from './useMultiSelectModel';
 import {MultiSelectInput, MultiSelectSearchInput} from './MultiSelectInput';
