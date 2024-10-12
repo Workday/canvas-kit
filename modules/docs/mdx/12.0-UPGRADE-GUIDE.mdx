@@ -457,7 +457,8 @@ to set the appropiate aria attributes and `id` on the underlying input element.
 
 ### Select
 
-**PR:** [#2865](https://github.com/Workday/canvas-kit/pull/2865)
+**PRs:** [#2865](https://github.com/Workday/canvas-kit/pull/2865),
+[#2983](https://github.com/Workday/canvas-kit/pull/2983)
 
 As we transition to use our CSS tokens to provide better theming capabilities and our new styling
 methods, we're moving away from components extending `Themeable`. `Themeable` has been removed from
@@ -503,6 +504,9 @@ const theme: PartialEmotionCanvasTheme = {
   </Flex>
 </CanvasProvider>;
 ```
+
+`Select` has been refactored to use `useComboboxInputConstrained` to sync the model and the `input`
+element regardless of the source. This makes the `Select` be a controllable component.
 
 ### Text Area
 
