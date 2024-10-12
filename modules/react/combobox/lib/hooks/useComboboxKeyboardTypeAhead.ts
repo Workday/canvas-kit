@@ -58,7 +58,9 @@ export const useComboboxKeyboardTypeAhead = createElemPropsHook(useComboboxModel
   };
 
   const currentItemIndex =
-    model.state.items.length > 0 ? model.navigation.getItem(model.state.cursorId, model).index : 0;
+    model.state.items.length > 0
+      ? model.navigation.getItem(model.state.cursorId, model)?.index || 0
+      : 0;
 
   const handleKeyboardTypeAhead = (key: string, numOptions: number) => {
     // If the starting point is beyond the list of options, reset it
