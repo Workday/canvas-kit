@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom/extend-expect';
 import {verifyComponent} from './verifyComponent';
 import {jest} from '@jest/globals';
+import {ResizeObserver} from '@juggle/resize-observer';
 
 import {setUniqueSeed, resetUniqueIdCount} from '@workday/canvas-kit-react/common';
 import {TextEncoder} from 'util';
@@ -16,4 +17,7 @@ import {TextEncoder} from 'util';
 beforeEach(() => {
   setUniqueSeed('a');
   resetUniqueIdCount();
+
+  // jsdom doesn't have a ResizeObserver. Use a polyfill: https://github.com/jsdom/jsdom/issues/3368
+  global.ResizeObserver = ResizeObserver;
 });
