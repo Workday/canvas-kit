@@ -1,5 +1,5 @@
 import React from 'react';
-import {assert, createModelHook, Generic} from '@workday/canvas-kit-react/common';
+import {createModelHook, Generic} from '@workday/canvas-kit-react/common';
 
 import {useBaseListModel, Item} from './useBaseListModel';
 
