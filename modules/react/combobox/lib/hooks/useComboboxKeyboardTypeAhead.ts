@@ -96,6 +96,8 @@ export const useComboboxKeyboardTypeAhead = createElemPropsHook(useComboboxModel
     }
   };
 
+  console.log('keySoFar', keyTypedSofar);
+
   return {
     onKeyDown(event: React.KeyboardEvent) {
       // Call type ahead excluding backspace

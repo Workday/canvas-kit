@@ -60,6 +60,8 @@ export const SelectInput = createSubcomponent(TextInput)({
     Element,
     model
   ) => {
+    // const test = useSelectInput(model, undefined, {});
+    console.log('props', elemProps.keySoFar);
     return (
       <InputGroup data-width="ck-formfield-width">
         {inputStartIcon && model.state.selectedIds.length > 0 && (

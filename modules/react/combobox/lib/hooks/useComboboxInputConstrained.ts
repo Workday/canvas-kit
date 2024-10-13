@@ -114,7 +114,7 @@ export const useComboboxInputConstrained = createElemPropsHook(useComboboxModel)
                       modelNavigationRef.current.getItem(id, {state: modelStateRef.current})
                     )
                     .filter(onlyDefined)
-                    .map(item => item.textValue)
+                    .map(item => item?.textValue)
               ).join(', ');
 
         if (userValue !== userLocalRef.current.value) {
