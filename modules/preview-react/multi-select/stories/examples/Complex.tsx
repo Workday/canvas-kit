@@ -8,7 +8,7 @@ import {accessibilityIcon, accountsIcon} from '@workday/canvas-system-icons-web'
 
 import {system} from '@workday/canvas-tokens-web';
 
-import {MultiSelect} from '@workday/canvas-kit-preview-react/mutliselect';
+import {MultiSelect} from '@workday/canvas-kit-preview-react/multi-select';
 import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 
 const mainContentStyles = createStyles({
@@ -24,7 +24,7 @@ const items = [
   {id: '5', text: 'Peppers'},
 ];
 
-export const App = () => {
+export const Complex = () => {
   const [color, setColor] = React.useState('red');
 
   const [value, setValue] = React.useState('1');

@@ -4,7 +4,6 @@ import mdxDoc from './Combobox.mdx';
 
 import {Combobox} from '@workday/canvas-kit-react/combobox';
 import {Autocomplete as AutocompleteExample} from './examples/Autocomplete';
-import {App as AppExample} from './examples/App';
 
 export default {
   title: 'Features/Combobox',
@@ -21,8 +20,4 @@ type Story = StoryObj<typeof Combobox>;
 
 export const Autocomplete: Story = {
   render: AutocompleteExample,
-};
-
-export const App: Story = {
-  render: AppExample,
 };
