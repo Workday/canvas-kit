@@ -211,8 +211,6 @@ export const inputGroupStencil = createStencil({
     // Clear Button
     '& :has([data-part="input-group-clear-button"])': {
       transition: 'opacity 300ms ease',
-      opacity: 1,
-      pointerEvents: 'auto',
     },
 
     // Clear Button when a placeholder is being shown (no value)
