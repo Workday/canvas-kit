@@ -112,6 +112,7 @@ export const useInputGroupInput = createElemPropsHook(useInputGroupModel)((model
 
   return {
     ref: elementRef,
+    placeholder: '', // Make sure a placeholder attribute always exists for `:placeholder-shown`
   };
 });
 
@@ -172,7 +173,6 @@ export const useClearButton = createElemPropsHook(useInputGroupModel)(model => {
       // This will clear the input's value
       dispatchInputEvent(model.state.inputRef.current, '');
     },
-    placeholder: '', // Make sure a placeholder attribute always exists for `:placeholder-shown`
   } as const;
 });
 
@@ -311,7 +311,7 @@ export const InputGroup = createContainer('div')({
         });
       }
       if (child.type === InputGroupInnerEnd) {
-        const offset = wrapInCalc(offsetsEnd.slice(indexEnd, -1)) || '0px';
+        const offset = wrapInCalc(offsetsEnd.slice(indexEnd + 1, offsetsEnd.length)) || '0px';
         indexEnd++;
 
         return React.cloneElement(child, {
