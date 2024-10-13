@@ -241,8 +241,8 @@ describe('Select', () => {
       cy.findByRole('combobox').should('have.attr', 'role', 'combobox');
     });
 
-    it('should have an `aria-popup="menu"`', () => {
-      cy.findByRole('combobox').should('have.attr', 'aria-haspopup', 'menu');
+    it('should have an `aria-popup="listbox"`', () => {
+      cy.findByRole('combobox').should('have.attr', 'aria-haspopup', 'listbox');
     });
 
     it('should have an `aria-expanded="false"`', () => {
