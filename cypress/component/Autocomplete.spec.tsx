@@ -19,8 +19,8 @@ describe('Autocomplete', () => {
       cy.mount(<Autocomplete />);
     });
 
-    it('should have aria-haspopup set to true', () => {
-      cy.findByRole('combobox').should('have.attr', 'aria-haspopup', 'true');
+    it('should have aria-haspopup set to listbox', () => {
+      cy.findByRole('combobox').should('have.attr', 'aria-haspopup', 'listbox');
     });
 
     it('should have aria-expanded set to false', () => {

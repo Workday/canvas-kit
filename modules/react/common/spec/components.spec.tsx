@@ -623,7 +623,7 @@ describe('composeHooks', () => {
       expectTypeOf(props).toEqualTypeOf<Expected>();
     });
 
-    it('should compose hooks with conflicting types with null values', () => {
+    it('should compose hooks with conflicting types with null values, removing null values', () => {
       const useModel = config => ({state: {}, events: {}});
       const useHook1 = createElemPropsHook(useModel)(model => ({foo: 'bar', item: null}));
       const useHook2 = createElemPropsHook(useModel)(model => ({bar: 'baz', item: 'test'}));
@@ -633,7 +633,7 @@ describe('composeHooks', () => {
 
       const elemProps = useHookComposed(useModel({}), {});
 
-      expect(elemProps).toEqual({foo: 'bar', bar: 'baz', item: null});
+      expect(elemProps).toEqual({foo: 'bar', bar: 'baz'});
 
       expectTypeOf(elemProps).toHaveProperty('foo');
       expectTypeOf(elemProps.foo).toBeString();

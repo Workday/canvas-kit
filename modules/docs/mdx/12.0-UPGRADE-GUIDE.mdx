@@ -45,6 +45,7 @@ A note to the reader:
 - [Component Updates](#component-updates)
   - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
   - [Avatar](#avatar)
+  - [Combobox](#combmbox)
   - [Form Field](#form-field)
     - [Form Field Group](#form-field-group)
     - [Form Field Field](#form-field-field)
@@ -251,6 +252,36 @@ The following changes have been made to the API:
 > **Note:** Both `Avatar.Size` and `Avatar.Variant` have been deprecated in favor of the new string
 > union types. You will see a console warn message while in development if you're still using this.
 > Please update your types and usage before v13.
+
+### Combobox
+
+**PR** [#2983](https://github.com/Workday/canvas-kit/pull/2983)
+
+The `useComboboxInput` hook, and the `Combobox.Input` component used to automatically update the
+input when an option was selected. This functionality has been split between
+`useComboboxInputArbitrary` and `useComboboxInputConstrained` depending on the combobox's value
+type. The `useComboboxInput` had the arbitrary functionality built in. This has been separated out.
+The `<Select>` component has been updated to use `useComboboxInputConstrained` hook and the
+`Autocomplete` example uses the `useComboboxInputArbitrary` hook. This is a breaking change if you
+use the `Combobox.Input` component directly. You'll have to either pass the
+`useComboboxInputArbitrary` elemProps hook directly to the `<Combbox.Input>` or create a new
+component composing them.
+
+```tsx
+// v11
+<Combobox>
+  <Combobox.Input />
+  // ...
+</Combobox>
+
+// v12
+<Combobox>
+  <Combobox.Input elemPropsHook={useComboboxInputArbitrary} />
+  // ...
+</Combobox>
+
+// Better - create a specialized component
+```
 
 ### Form Field
 
