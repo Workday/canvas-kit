@@ -1,5 +1,3 @@
-import {Markdown} from '@storybook/blocks';
-
 import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
 import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
 import * as MenuStories from './Menu.stories';
@@ -53,19 +51,15 @@ closing the `DeprecatedMenu`.
 using `aria-activedescendant`. Below is table of supported keyboard shortcuts and associated
 actions.
 
-<Markdown>
-  {`
 | Key                | Action                                                                                                                                           |
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| \`Enter\` or \`Space\` | Activates the menu item and then closes the menu                                                                                                 |
-| \`Escape\`           | Closes the menu                                                                                                                                  |
-| \`Up Arrow\`         | Moves focus to the previous menu item – if focus is on first menu item, it moves focus to the last menu item                                     |
-| \`Down Arrow\`       | Moves focus to the next menu item – if focus is on last menu item, it moves focus to the first menu item                                         |
-| \`Home\`             | Moves focus to the first menu item                                                                                                               |
-| \`End\`              | Moves focus to the last menu item                                                                                                                |
-| \`A-Z / a-z\`        | Moves focus to the next menu item with a label that starts with the typed character if such an menu item exists – otherwise, focus does not move |
-`}
-</Markdown>
+| `Enter` or `Space` | Activates the menu item and then closes the menu                                                                                                 |
+| `Escape`           | Closes the menu                                                                                                                                  |
+| `Up Arrow`         | Moves focus to the previous menu item – if focus is on first menu item, it moves focus to the last menu item                                     |
+| `Down Arrow`       | Moves focus to the next menu item – if focus is on last menu item, it moves focus to the first menu item                                         |
+| `Home`             | Moves focus to the first menu item                                                                                                               |
+| `End`              | Moves focus to the last menu item                                                                                                                |
+| `A-Z / a-z`        | Moves focus to the next menu item with a label that starts with the typed character if such an menu item exists – otherwise, focus does not move |
 
 Note that although `DeprecatedMenu` includes support for keyboard shortcuts for the menu itself,
 you'll need to add your own keyboard handling and aria attributes to the triggering button.

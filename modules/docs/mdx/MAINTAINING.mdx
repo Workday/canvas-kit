@@ -1,5 +1,3 @@
-import {Markdown} from '@storybook/blocks';
-
 <Meta title="Guides/Maintaining" />
 
 # Maintaining Canvas Kit
@@ -52,17 +50,13 @@ runs on `support`, `master`, and `prerelease/minor` branches. Forward merges for
 starts with `chore: Release`, and that's how the forward merge workflow identifies them. Forward
 merges will run on every merge to `prerelease/minor` regardless of the commit message.
 
-<Markdown>
-  {`
 | Run Forward Merge? | Branch             | Commit Message                          |
 | ------------------ | ------------------ | --------------------------------------- |
-| ✅                 | \`support\`          | \`chore: Release v6.8.14 [skip release]\` |
-| ⛔️                | \`support\`          | \`fix: Remove unused props\`              |
-| ✅                 | \`master\`           | \`chore: Release v7.3.0 [skip release]\`  |
-| ⛔️                | \`master\`           | \`fix: Update Popup types\`               |
-| ✅                 | \`prerelease/minor\` | \`feat: Add new Layout components\`       |
-`}
-</Markdown>
+| ✅                 | `support`          | `chore: Release v6.8.14 [skip release]` |
+| ⛔️                | `support`          | `fix: Remove unused props`              |
+| ✅                 | `master`           | `chore: Release v7.3.0 [skip release]`  |
+| ⛔️                | `master`           | `fix: Update Popup types`               |
+| ✅                 | `prerelease/minor` | `feat: Add new Layout components`       |
 
 If the forward merge workflow fails and cannot automatically merge the update to the next branch, it
 will generate a PR with instructions on how to handle the forward merge manually. For a more
