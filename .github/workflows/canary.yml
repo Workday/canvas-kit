@@ -34,6 +34,8 @@ jobs:
       ## Build for packaging.
       - name: Build
         run: yarn build
+        env:
+          TSP_SKIP_CACHE: true
 
       ## Publish prerelease to npm. Must be run after a build
       - name: Publish
