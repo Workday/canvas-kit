@@ -1,8 +1,6 @@
 const path = require('node:path');
 const remarkGfm = require('remark-gfm').default;
 
-console.log('remarkGFM', remarkGfm);
-
 const modulesPath = path.resolve(__dirname, '../modules');
 const getSpecifications = require('../modules/docs/utils/get-specifications');
 import {StorybookConfig} from '@storybook/react-webpack5';
