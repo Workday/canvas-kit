@@ -16,7 +16,7 @@ export const Icons = () => {
       <Menu.Popper>
         <Menu.Card>
           <Menu.List>
-            <Menu.Item data-text="First Item" aria-selected={true}>
+            <Menu.Item data-text="First Item">
               <Menu.Item.Icon icon={uploadCloudIcon} />
               <Menu.Item.Text>First Item</Menu.Item.Text>
             </Menu.Item>
@@ -24,7 +24,7 @@ export const Icons = () => {
               <Menu.Item.Icon icon={setupIcon} />
               <Menu.Item.Text>Second Item (with a really really really long label)</Menu.Item.Text>
             </Menu.Item>
-            <Menu.Item data-text="Third Item">
+            <Menu.Item aria-disabled data-text="Third Item">
               <Menu.Item.Icon icon={uploadCloudIcon} />
               <Menu.Item.Text>Third Item</Menu.Item.Text>
               <Menu.Item.Icon icon={taskContactIcon} />

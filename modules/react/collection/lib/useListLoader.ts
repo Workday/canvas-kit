@@ -252,7 +252,7 @@ export function useListLoader<
         if (config.shouldLoad && !config.shouldLoad(params, prevState)) {
           return false;
         }
-        console.log('shouldLoadIndex');
+
         load(params, loadRef.current, loadingRef.current)
           .then(updateItems)
           .then(() => {

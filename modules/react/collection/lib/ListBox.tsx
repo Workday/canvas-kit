@@ -56,8 +56,8 @@ const listBoxContainerStencil = createStencil({
     '& :where([data-part="list"])': {
       display: 'flex',
       flexDirection: 'column',
-      marginTop: system.space.zero,
-      marginBottom: system.space.zero,
+      marginBlockStart: system.space.zero,
+      marginBlockEnd: system.space.zero,
     },
   },
   modifiers: {

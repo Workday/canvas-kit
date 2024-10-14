@@ -47,7 +47,6 @@ export const multiSelectStencil = createStencil({
     '& [data-part="user-input"]': {
       ...system.type.subtext.large,
       backgroundColor: system.color.bg.transparent,
-      // padding: system.space.x2, // Compensate for border
       borderRadius: system.shape.x1,
 
       // Remove the focus ring - it is handled at the container level

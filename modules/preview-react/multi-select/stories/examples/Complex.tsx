@@ -12,7 +12,6 @@ const mainContentStyles = createStyles({
   padding: system.space.x4,
 });
 
-// const items = ['Cheese', 'Olives', 'Onions', 'Pepperoni', 'Peppers'];
 const items = [
   {id: '1', text: 'Cheese'},
   {id: '2', text: 'Olives'},
