@@ -281,6 +281,34 @@ component composing them.
 </Combobox>
 
 // Better - create a specialized component
+const useMyComboboxInput = composeHooks(
+  // or your own model that extends `useComboboxModel`
+  createElemPropsHook(useComboboxModel)(model => {
+    return {
+      // anything you need your input to do
+    }
+  }),
+  useComboboxInputArbitrary,
+  useComboboxInput
+)
+
+const MyComboboxInput = createSubcomponent(TextInput)({
+  // or your own model that extends `useComboboxModel`
+  modelHook: useComboboxModel,
+  elemPropsHook: useMyComboboxInput,
+})((elemProps, Element) => {
+  // return a TextInput
+  return <Element {...elemProps} />
+
+  // return an InputGroupgs
+  return (
+    <InputGroup>
+      <InputGroup.InnerStart>{/* Icon or something */}</InputGroup.InnerStart>
+      <InputGroup.Input as={Element} {...elemProps} />
+      <InputGroup.InnerEnd><InputGroup.ClearButton /></InputGroup.InnerEnd>
+    </InputGroup>
+  )
+})
 ```
 
 ### Form Field
@@ -537,7 +565,7 @@ const theme: PartialEmotionCanvasTheme = {
 ```
 
 `Select` has been refactored to use `useComboboxInputConstrained` to sync the model and the `input`
-element regardless of the source. This makes the `Select` be a controllable component.
+element regardless of the source. This makes the `Select` a controllable component.
 
 ### Text Area
 

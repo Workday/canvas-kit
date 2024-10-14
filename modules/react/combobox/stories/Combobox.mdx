@@ -30,13 +30,14 @@ pick from these values, but cannot input a value outside the options provided. C
 comboboxes use the [useComboboxInputConstrained](#usecomboboxinputconstrained) hook and often have
 two separate `input` elements.
 
-- user input - This is the visible input. It should contain user-friend values. Calls to `.focus()`
-  or `.blur()` are redirected to this input. Any prop passed to the `*.Input` component that is not
-  directly related to forms will be passed here (i.e. `data-testid`, `aria-*`, etc).
-- form input - This input is only visible to forms. The `value` will usually be server IDs. If the
-  combobox options don't have an ID and only use user values, the value of this input will be the
-  same as the user input. Any prop related to the function of forms will be passed here. For
-  exampple, the `name` attribute will be passed here. The `ref` will pointed to this element.
+- user input - This is the visible input and it should contain user-friendly values. Calls to
+  `.focus()` or `.blur()` are redirected to this input. Any prop passed to the `*.Input` component
+  that is not directly related to forms will be passed here (i.e. `data-testid`, `aria-*`, etc).
+
+- form input - This input is only visible to forms and the `value` will usually be server IDs. If
+  the combobox options don't have an ID and only use user values, the value of this input will be
+  the same as the user input. Any prop related to the function of forms will be passed here. For
+  example, the `name` attribute will be passed here. The `ref` will be pointed to this element.
 
 ### Arbitrary
 
