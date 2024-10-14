@@ -127,7 +127,9 @@ describe('Autocomplete', () => {
 
         context('when the clear button is clicked', () => {
           beforeEach(() => {
-            cy.get('[data-testid=clear]').click();
+            // Force click because Cypress gets confused if an element had `pointer-events; none` at any point
+            // in time, even if it doesn't at the point the click was attempted.
+            cy.get('[data-testid=clear]').click({force: true});
           });
 
           it('should clear the combobox', () => {
