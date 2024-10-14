@@ -15,6 +15,7 @@ const items = [
 ];
 
 export const Controlled = () => {
+  const formRef = React.useRef<HTMLFormElement>(null);
   const [value, setValue] = React.useState('1');
   const [label, setLabel] = React.useState('Cheese');
 
@@ -36,6 +37,7 @@ export const Controlled = () => {
           console.log('form submitted');
           e.preventDefault();
         }}
+        ref={formRef}
       >
         <Flex gap="s" flexDirection="column">
           <MultiSelect items={items}>
@@ -71,7 +73,7 @@ export const Controlled = () => {
             </SecondaryButton>
             <SecondaryButton
               onClick={e => {
-                const input = document.querySelector('[name=toppings]') as HTMLInputElement;
+                const input = formRef.current.querySelector('[name=toppings]') as HTMLInputElement;
                 input.value = '1, 2';
               }}
             >
