@@ -1,5 +1,5 @@
 import React from 'react';
-import {createModelHook, dispatchInputEvent} from '@workday/canvas-kit-react/common';
+import {createModelHook} from '@workday/canvas-kit-react/common';
 import {useMenuModel} from '@workday/canvas-kit-react/menu';
 
 /**
@@ -53,13 +53,7 @@ export const useComboboxModel = createModelHook({
 })(config => {
   const input = useInputModel(config);
 
-  const menu = useMenuModel(
-    useMenuModel.mergeConfig(config, {
-      onSelect({id}) {
-        dispatchInputEvent(menu.state.targetRef.current, id);
-      },
-    })
-  );
+  const menu = useMenuModel(config);
 
   const [width, setWidth] = React.useState(0);
 

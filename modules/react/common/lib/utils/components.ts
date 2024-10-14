@@ -980,6 +980,13 @@ export function composeHooks<M extends Model<any, any>, P extends {}, O extends 
       return hook(model, props, props.ref || ref);
     }, props);
 
+    // remove null props values
+    for (const key in returnProps) {
+      if (returnProps[key] === null) {
+        delete returnProps[key];
+      }
+    }
+
     if (!returnProps.hasOwnProperty('ref') && ref) {
       // This is the weird "incoming ref isn't in props, but outgoing ref is in props" thing
       returnProps.ref = ref;

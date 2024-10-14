@@ -9,7 +9,7 @@ import {useComboboxModel} from './useComboboxModel';
  * ```tsx
  * // Example for a `Select` input
  * export const useSelectInput = composeHooks(
- * createElemPropsHook(useComboboxModel)((model, ref, elemProps: {keySofar?: string} = {}) => {
+ * createElemPropsHook(useComboboxModel)((model, ref, elemProps: {keySoFar?: string} = {}) => {
  *  return {
  *    onKeyDown(event: React.KeyboardEvent) {
  *     // onKeyDown logic ...
@@ -22,17 +22,17 @@ import {useComboboxModel} from './useComboboxModel';
  * ```
  */
 export const useComboboxKeyboardTypeAhead = createElemPropsHook(useComboboxModel)(model => {
-  const keySofar = React.useRef('');
+  const keySoFar = React.useRef('');
   const timer = React.useRef<ReturnType<typeof setTimeout>>();
-  const [keyTypedSofar, setKeyTypedSofar] = React.useState(keySofar.current);
+  const [keyTypedSofar, setKeyTypedSofar] = React.useState(keySoFar.current);
 
   const startClearKeysSoFarTimer = () => {
     if (timer.current) {
       clearTimeout(timer.current);
     }
     timer.current = setTimeout(() => {
-      keySofar.current = '';
-      setKeyTypedSofar(keySofar.current);
+      keySoFar.current = '';
+      setKeyTypedSofar(keySoFar.current);
     }, 500);
   };
 
@@ -65,24 +65,24 @@ export const useComboboxKeyboardTypeAhead = createElemPropsHook(useComboboxModel
   const handleKeyboardTypeAhead = (key: string, numOptions: number) => {
     // If the starting point is beyond the list of options, reset it
     // to the beginning of the list
-    const startNumber = keySofar.current.length === 0 ? currentItemIndex + 1 : currentItemIndex;
+    const startNumber = keySoFar.current.length === 0 ? currentItemIndex + 1 : currentItemIndex;
 
     const start = startNumber === numOptions ? 0 : startNumber;
 
     // Keeps track of the current key types and adds to it
     // if you type `de` vs `d` for denver
-    keySofar.current += key;
-    setKeyTypedSofar(keySofar.current);
+    keySoFar.current += key;
+    setKeyTypedSofar(keySoFar.current);
     startClearKeysSoFarTimer();
 
     // First, look for a match from start to end
-    let matchIndex = getIndexByStartString(start, keySofar.current);
-    getIndexByStartString(start, keySofar.current);
+    let matchIndex = getIndexByStartString(start, keySoFar.current);
+    getIndexByStartString(start, keySoFar.current);
 
     // If a match isn't found between start and end, wrap the search
     // around and search again from the beginning (0) to start
     if (matchIndex === -1) {
-      matchIndex = getIndexByStartString(0, keySofar.current, start);
+      matchIndex = getIndexByStartString(0, keySoFar.current, start);
     }
 
     // A match was found...
@@ -107,7 +107,7 @@ export const useComboboxKeyboardTypeAhead = createElemPropsHook(useComboboxModel
       if (
         (event.key === 'Spacebar' || event.key === ' ') &&
         model.state.visibility === 'visible' &&
-        keySofar.current !== ''
+        keySoFar.current !== ''
       ) {
         // If the user is in the middle of typing a string, treat
         // space key as type-ahead rather than option selection
@@ -117,13 +117,13 @@ export const useComboboxKeyboardTypeAhead = createElemPropsHook(useComboboxModel
       if (
         (event.key === 'Spacebar' || event.key === ' ') &&
         model.state.visibility === 'hidden' &&
-        keySofar.current !== ''
+        keySoFar.current !== ''
       ) {
         // If the user is in the middle of typing a string, treat
         // space key as type-ahead rather than option selection
         handleKeyboardTypeAhead(' ', model.state.items.length);
       }
     },
-    keySofar: keyTypedSofar,
+    keySoFar: keyTypedSofar,
   };
 });
