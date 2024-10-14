@@ -95,7 +95,8 @@ and will be semantically correct in left-to-right and right-to-left languages.
 `InputGroup.InnerStart` and `InputGroup.InnerEnd` subcomponents can handle any child elements, but
 are built for icons. The default width is `40px`, which is perfect for icons. If you need to use
 something else, be sure to set the `width` property of `InputGroup.InnerStart` or
-`InputGroup.InnerEnd` to match the intended width of the element.
+`InputGroup.InnerEnd` to match the intended width of the element. Do not use the `cs` prop or any
+method to change width. The `width` prop is used to correctly position other inner elements.
 
 <ExampleCodeBlock code={Icons} />
 

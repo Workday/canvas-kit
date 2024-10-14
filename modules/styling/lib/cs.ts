@@ -46,18 +46,21 @@ type DefaultedVarsShape = Record<string, string> | Record<string, Record<string,
  * maybeWrapCSSVariables('calc(--foo)'); // calc(var(--foo))
  * ```
  */
-export function maybeWrapCSSVariables(input: string): string {
-  // matches an string starting with `--` that isn't already wrapped in a `var()`. It tries to match
-  // any character that isn't a valid separator in CSS
-  return input.replace(
-    /([a-z]*[ (]*)(--[^\s;,'})]+)/gi,
-    (match: string, prefix: string, variable: string) => {
-      if (prefix === 'var(') {
-        return match;
+export function maybeWrapCSSVariables<T>(input: T): T {
+  if (typeof input === 'string') {
+    // matches an string starting with `--` that isn't already wrapped in a `var()`. It tries to match
+    // any character that isn't a valid separator in CSS
+    return input.replace(
+      /([a-z]*[ (]*)(--[^\s;,'})]+)/gi,
+      (match: string, prefix: string, variable: string) => {
+        if (prefix === 'var(') {
+          return match;
+        }
+        return `${prefix}var(${variable})`;
       }
-      return `${prefix}var(${variable})`;
-    }
-  );
+    ) as T;
+  }
+  return input;
 }
 
 function convertProperty<T>(value: T): T {
@@ -549,9 +552,9 @@ export function csToProps(input: CSToPropsInput): CsToPropsReturn {
     const cssVars: Record<string, string> = {};
     for (const key in input) {
       if (key.startsWith('--')) {
-        cssVars[key] = (input as any)[key];
+        cssVars[key] = maybeWrapCSSVariables((input as any)[key] ?? '');
       } else {
-        (staticStyles as any)[key] = (input as any)[key];
+        (staticStyles as any)[key] = maybeWrapCSSVariables((input as any)[key] ?? '');
         hasStaticStyles = true;
       }
     }

@@ -90,29 +90,66 @@ export const InputGroupStates = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={[
-        {label: 'Start', props: {start: [<SystemIcon icon={searchIcon} size="small" />]}},
+        {
+          label: 'Start',
+          props: {
+            start: [
+              <InputGroup.InnerStart>
+                <SystemIcon icon={searchIcon} size="small" />
+              </InputGroup.InnerStart>,
+            ],
+          },
+        },
         {
           label: 'End',
           props: {
             end: [
-              <TertiaryButton role="presentation" icon={xSmallIcon} size="small" tabIndex={-1} />,
+              <InputGroup.InnerEnd>
+                <TertiaryButton role="presentation" icon={xSmallIcon} size="small" tabIndex={-1} />
+              </InputGroup.InnerEnd>,
             ],
           },
         },
         {
           label: 'Both',
           props: {
-            start: [<SystemIcon icon={searchIcon} size="small" />],
+            start: [
+              <InputGroup.InnerStart>
+                <SystemIcon icon={searchIcon} size="small" />
+              </InputGroup.InnerStart>,
+            ],
             end: [
-              <TertiaryButton role="presentation" icon={xSmallIcon} size="small" tabIndex={-1} />,
+              <InputGroup.InnerEnd>
+                <TertiaryButton role="presentation" icon={xSmallIcon} size="small" tabIndex={-1} />
+              </InputGroup.InnerEnd>,
             ],
           },
         },
         {
           label: 'Multiple',
           props: {
-            start: [<span>1</span>, <span>2</span>, <span>3</span>],
-            end: [<span>4</span>, <span>5</span>, <span>6</span>],
+            start: [
+              <InputGroup.InnerStart>
+                <span>1</span>
+              </InputGroup.InnerStart>,
+              <InputGroup.InnerStart>
+                <span>2</span>
+              </InputGroup.InnerStart>,
+              <InputGroup.InnerStart>
+                <span>3</span>
+              </InputGroup.InnerStart>,
+            ],
+            end: [
+              <InputGroup.InnerEnd>
+                <span>4</span>
+              </InputGroup.InnerEnd>,
+              <InputGroup.InnerEnd>
+                <span>5</span>
+              </InputGroup.InnerEnd>,
+              <InputGroup.InnerEnd>
+                <span>6</span>
+              </InputGroup.InnerEnd>,
+            ],
           },
         },
         {
@@ -121,7 +158,11 @@ export const InputGroupStates = () => (
             placeholder: 'Placeholder',
             value: 'Some Value',
             start: [],
-            end: [<InputGroup.ClearButton />],
+            end: [
+              <InputGroup.InnerEnd>
+                <InputGroup.ClearButton />
+              </InputGroup.InnerEnd>,
+            ],
           },
         },
         {
@@ -130,7 +171,27 @@ export const InputGroupStates = () => (
             placeholder: '',
             value: '',
             start: [],
-            end: [<InputGroup.ClearButton />],
+            end: [
+              <InputGroup.InnerEnd>
+                <InputGroup.ClearButton />
+              </InputGroup.InnerEnd>,
+            ],
+          },
+        },
+        {
+          label: 'Variable Width',
+          props: {
+            end: [
+              <InputGroup.InnerEnd width="10px" backgroundColor="blueberry200">
+                <span>1</span>
+              </InputGroup.InnerEnd>,
+              <InputGroup.InnerEnd width="20px" backgroundColor="cantaloupe200">
+                <span>2</span>
+              </InputGroup.InnerEnd>,
+              <InputGroup.InnerEnd width="30px" backgroundColor="greenApple200">
+                <span>3</span>
+              </InputGroup.InnerEnd>,
+            ],
           },
         },
       ]}
@@ -142,20 +203,12 @@ export const InputGroupStates = () => (
       {({value, placeholder, ...props}) => (
         <CanvasProvider theme={{canvas: {direction: props.dir}}}>
           <InputGroup width={300}>
-            {props.start &&
-              props.start.map((start, index) => (
-                <InputGroup.InnerStart key={index} pointerEvents="none">
-                  {start}
-                </InputGroup.InnerStart>
-              ))}
+            {props.start}
             <InputGroup.Input
               placeholder={placeholder}
               value={value ?? 'Very Long Text. Very Long Text. Very Long Text.'}
             />
-            {props.end &&
-              props.end.map((end, index) => (
-                <InputGroup.InnerEnd key={index}>{end}</InputGroup.InnerEnd>
-              ))}
+            {props.end}
           </InputGroup>
         </CanvasProvider>
       )}

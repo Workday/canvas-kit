@@ -19,8 +19,8 @@ describe('Autocomplete', () => {
       cy.mount(<Autocomplete />);
     });
 
-    it('should have aria-haspopup set to true', () => {
-      cy.findByRole('combobox').should('have.attr', 'aria-haspopup', 'true');
+    it('should have aria-haspopup set to listbox', () => {
+      cy.findByRole('combobox').should('have.attr', 'aria-haspopup', 'listbox');
     });
 
     it('should have aria-expanded set to false', () => {
@@ -127,7 +127,9 @@ describe('Autocomplete', () => {
 
         context('when the clear button is clicked', () => {
           beforeEach(() => {
-            cy.get('[data-testid=clear]').click();
+            // Force click because Cypress gets confused if an element had `pointer-events; none` at any point
+            // in time, even if it doesn't at the point the click was attempted.
+            cy.get('[data-testid=clear]').click({force: true});
           });
 
           it('should clear the combobox', () => {

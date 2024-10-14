@@ -69,14 +69,14 @@ export const useComboboxInput = composeHooks(
       },
       value: model.state.value,
       role: 'combobox',
-      'aria-haspopup': 'listbox' as React.AriaAttributes['aria-haspopup'],
+      'aria-haspopup': 'listbox',
       'aria-expanded': model.state.visibility === 'visible',
       'aria-autocomplete': 'list',
       'aria-controls': `${model.state.id}-list`,
       'aria-activedescendant': model.state.visibility === 'hidden' ? null : undefined, // Removes activedescendant on menu close
       id: model.state.id,
       ref: elementRef,
-    } as const;
+    };
   }),
   useSetPopupWidth,
   useComboboxInputOpenWithArrowKeys,
