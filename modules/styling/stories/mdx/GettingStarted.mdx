@@ -54,13 +54,13 @@ package. Add the following to your project's `tsconfig.json` file:
 ```
 
 This adds a list of plugins to use when transforming TypeScript files into JavaScript files. The
-[ttypescript](https://www.npmjs.com/package/ttypescript) projects uses the `plugins` when running
+[ts-patch](https://www.npmjs.com/package/ts-patch) projects uses the `plugins` when running
 transforms.
 
 ### Webpack
 
-You will need to transform TypeScript files using the `ttypescript` (note the extra `t`) which is
-the same as the TypeScript tanspiler except it uses TypeScript's
+You will need to transform TypeScript files using the `ts-patch` which is the same as the TypeScript
+tanspiler except it uses TypeScript's
 [transform API](https://levelup.gitconnected.com/writing-a-custom-typescript-ast-transformer-731e2b0b66e6)
 to transform code during compilation.
 
@@ -77,7 +77,7 @@ In your webpack config, you add the following:
         {
           loader: require.resolve('ts-loader'),
           options: {
-            compiler: 'ttypescript',
+            compiler: 'ts-patch/compiler',
           },
         },
         // OR awesome-typescript-loader

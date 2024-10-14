@@ -149,7 +149,7 @@ export function withDefaultContext(
 
 /**
  * This function is useful for tests or a custom build. The `styleTransformer` function is used by
- * the https://www.npmjs.com/package/ttypescript package.
+ * the https://www.npmjs.com/package/ts-patch package.
  */
 export function transform(
   program: ts.Program,
