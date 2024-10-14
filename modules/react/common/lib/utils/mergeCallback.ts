@@ -13,10 +13,14 @@
  */
 export function mergeCallback<T extends Function>(callback1: T, callback2?: Function): T {
   if (callback2) {
-    return (((...args: any[]) => {
-      callback1.apply(null, args);
-      callback2.apply(null, args);
-    }) as any) as T;
+    return ((...args: any[]) => {
+      const result = callback1.apply(null, args);
+      // Similar to if a prop returns `null`, returning `null` from a callback prevents further
+      // callbacks from being fired.
+      if (result !== null) {
+        callback2.apply(null, args);
+      }
+    }) as any as T;
   } else {
     return callback1;
   }

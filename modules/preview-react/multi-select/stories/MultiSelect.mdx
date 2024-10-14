@@ -1,0 +1,101 @@
+import {
+  ExampleCodeBlock,
+  InformationHighlight,
+  SymbolDoc,
+  Specifications,
+} from '@workday/canvas-kit-docs';
+
+import {Basic} from './examples/Basic';
+import {Complex} from './examples/Complex';
+import {Icons} from './examples/Icons';
+import {Controlled} from './examples/Controlled';
+import {Searching} from './examples/Searching';
+
+import * as MultiSelectStories from './MultiSelect.stories';
+
+<Meta of={MultiSelectStories} />
+
+# Canvas Kit MultiSelect
+
+MultiSelect inputs allow users to choose multiple options from a list of items.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-preview-react
+```
+
+## Usage
+
+### Basic Example
+
+`MultiSelect` supports a
+[dynamic API](/getting-started/for-developers/resources/collection-api/#dynamic-items) where you
+pass an array of items via the `items` prop and provide a render function to display the items. The
+items may be provided as an
+[array of strings](/getting-started/for-developers/resources/collection-api/#array-of-strings) or an
+[array of objects](/getting-started/for-developers/resources/collection-api/#array-of-objects).
+
+`MultiSelect` should be used in tandem with [Form Field](/components/inputs/form-field/) where the
+`MultiSelect` wraps the `FormField` element and the `FormField` element wraps the children of
+`MultiSelect` to meet accessibility standards. This ensures the `label` text from `FormField` is
+attached to the `MultiSelect.Input` and read out as a group for voiceover.
+
+```tsx
+<MultiSelect items={options}>
+  <FormField label="Your Label">
+    <MultiSelect.Input onChange={e => handleChange(e)} id="contact-multi-select" />
+    <MultiSelect.Popper>
+      <MultiSelect.Card>
+        <MultiSelect.List>
+          {item => <MultiSelect.Item>{item.id}</MultiSelect.Item>}
+        </MultiSelect.List>
+      </MultiSelect.Card>
+    </MultiSelect.Popper>
+  </FormField>
+</MultiSelect>
+```
+
+<ExampleCodeBlock code={Basic} />
+
+### Complex
+
+When registering items in an array of objects, it's common to have the text that is displayed to the
+user be different than an id. In this example, `serverId` and `label` properties need to be remapped
+to `id` and `text` hence the usage of `getId` and `getTextValue`. If your object has the properties
+`text` and `id`, there would be no need for this.
+
+<ExampleCodeBlock code={Complex} />
+
+### With Icons
+
+Use `MultiSelect.Item.Icon` to render an icon for a `MultiSelect.Item`. The `icon` prop for
+`MultiSelect.Item.Icon` accepts [system icons](/assets/system-icons/) from
+`@workday/canvas-system-icons-web`.
+
+> **Note: `data-id` on `MultiSelect.Item` must match the `id` property in your array of objects.
+> This ensures proper keyboard handling and type-ahead.**
+
+<ExampleCodeBlock code={Icons} />
+
+### Controlled
+
+The MultiSelect can be a controlled input component by passing the `value` and `onChange` to either
+the `<MultiSelect>` component or the `<MultiSelect.Input>` component. Internally, the
+`MultiSelect.Input` watches for changes on the `value` React prop as well as the `value` DOM
+property and will update the model accordingly.
+
+<ExampleCodeBlock code={Controlled} />
+
+### Searching
+
+A MultiSelect input can be used as a filter for results. Most likely this also means there are many
+items that may not be all be loaded from the server at once. The `useComboboxLoader` can be used to
+dynamically load items as the user navigates the available options.
+
+> **Note:** The behavior of search is experimental. The example should continue to work without
+> modification, but how the searchable input is presented to the user may change with user testing.
+> Don't rely too much on the exact behavior of the search input. For example, the search input may
+> be cleared when the user blurs the field.
+
+<ExampleCodeBlock code={Searching} />

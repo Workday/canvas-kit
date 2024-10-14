@@ -38,7 +38,7 @@ describe('Form Field', () => {
       });
     });
 
-    it.only('should link the input to the label name', () => {
+    it('should link the input to the label name', () => {
       cy.get('input').should('have.ariaLabel', 'First Name');
     });
 

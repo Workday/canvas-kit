@@ -914,7 +914,7 @@ describe('cs', () => {
       type Args = Exclude<Parameters<typeof myStencil>[0], undefined>;
 
       expectTypeOf<Args>().toHaveProperty('grow');
-      expectTypeOf<Args['grow']>().toEqualTypeOf<boolean | undefined>();
+      expectTypeOf<Args['grow']>().toEqualTypeOf<boolean | 'true' | 'false' | undefined>();
 
       // Make sure the function call passes type checks. Even though we tested the type parameter,
       // the actual function call may still fail type checks. We need to make sure type conditionals
@@ -1019,7 +1019,7 @@ describe('cs', () => {
         type Args = Exclude<Parameters<typeof extendedStencil>[0], undefined>;
         expectTypeOf<Args>().toEqualTypeOf<{
           size?: 'large';
-          extra?: boolean;
+          extra?: boolean | 'true' | 'false';
         }>();
 
         // make sure it actually works when calling it. The type test can pass via extracting parameters
@@ -1081,7 +1081,7 @@ describe('cs', () => {
         type Args = Exclude<Parameters<typeof extendedStencil>[0], undefined>;
         expectTypeOf<Args>().toEqualTypeOf<{
           size?: 'large';
-          extra?: boolean;
+          extra?: boolean | 'true' | 'false';
           color?: string;
           background?: string;
         }>();
@@ -1162,7 +1162,7 @@ describe('cs', () => {
         type Args = Exclude<Parameters<typeof extendedStencil>[0], undefined>;
         expectTypeOf<Args>().toEqualTypeOf<{
           size?: 'large';
-          extra?: boolean;
+          extra?: boolean | 'true';
         }>();
       });
 

@@ -28,5 +28,9 @@ export const useComboboxInputArbitrary = createElemPropsHook(useComboboxModel)((
 
   return {
     ref: elementRef,
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
+      model.onChange?.(event);
+      model.onFilterChange?.(event);
+    },
   };
 });

@@ -19,11 +19,8 @@ import {useSelectModel} from './useSelectModel';
  */
 export const useSelectInput = composeHooks(
   createElemPropsHook(useSelectModel)(
-    (model, _ref, elemProps: {keySoFar?: string; placeholder?: string; value?: string} = {}) => {
-      const {elementRef, localRef} = useLocalRef(
-        // PopupModel says the targetRef is a `HTMLButtonElement`, but it is a `HTMLInputElement`
-        model.state.targetRef as any as React.Ref<HTMLInputElement>
-      );
+    (model, ref, elemProps: {keySoFar?: string; placeholder?: string; value?: string} = {}) => {
+      const {elementRef, localRef} = useLocalRef(ref as React.Ref<HTMLInputElement>);
 
       useResizeObserver({
         ref: localRef,

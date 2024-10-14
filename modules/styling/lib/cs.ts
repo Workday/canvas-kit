@@ -37,7 +37,7 @@ type DefaultedVarsShape = Record<string, string> | Record<string, Record<string,
 /**
  * Wrap all unwrapped CSS Variables. For example, `{padding: '--foo'}` will be replaced with
  * `{padding: 'var(--foo)'}`. It also works on variables in the middle of the property. Takes any
- * string and returns a string with CSS variables wrapped if necesary.
+ * string and returns a string with CSS variables wrapped if necessary.
  *
  * ```ts
  * maybeWrapCSSVariables('1rem'); // 1rem
@@ -46,28 +46,25 @@ type DefaultedVarsShape = Record<string, string> | Record<string, Record<string,
  * maybeWrapCSSVariables('calc(--foo)'); // calc(var(--foo))
  * ```
  */
-export function maybeWrapCSSVariables<T>(input: T): T {
-  if (typeof input === 'string') {
-    // matches an string starting with `--` that isn't already wrapped in a `var()`. It tries to match
-    // any character that isn't a valid separator in CSS
-    return input.replace(
-      /([a-z]*[ (]*)(--[^\s;,'})]+)/gi,
-      (match: string, prefix: string, variable: string) => {
-        if (prefix === 'var(') {
-          return match;
-        }
-        return `${prefix}var(${variable})`;
+function maybeWrapCSSVariables(input: string): string {
+  // matches an string starting with `--` that isn't already wrapped in a `var()`. It tries to match
+  // any character that isn't a valid separator in CSS
+  return input.replace(
+    /([a-z]*[ (]*)(--[^\s;,'})]+)/gi,
+    (match: string, prefix: string, variable: string) => {
+      if (prefix === 'var(') {
+        return match;
       }
-    ) as T;
-  }
-  return input;
+      return `${prefix}var(${variable})`;
+    }
+  );
 }
 
-function convertProperty<T>(value: T): T {
+export function wrapProperty<T>(value: T): T {
   // Handle the case where the value is a variable without the `var()` wrapping function. It happens
   // enough that it makes sense to automatically wrap.
   if (typeof value === 'string') {
-    return maybeWrapCSSVariables(value) as any as T;
+    return maybeWrapCSSVariables(value) as T;
   }
   return value;
 }
@@ -76,17 +73,17 @@ function convertProperty<T>(value: T): T {
  * Walks through all the properties and values of a style and converts properties and/or values that
  * need special processing. An example might be using a CSS variable without a `var()` wrapping.
  */
-function convertAllProperties<T extends unknown>(obj: T): T {
+export function wrapAllProperties<T extends unknown>(obj: T): T {
   if (typeof obj === 'object') {
     const converted = {};
     for (const key in obj) {
       if ((obj as Object).hasOwnProperty(key)) {
-        (converted as any)[key] = convertAllProperties(obj[key]);
+        (converted as any)[key] = wrapAllProperties(obj[key]);
       }
     }
     return converted as T;
   }
-  return convertProperty(obj);
+  return wrapProperty(obj);
 }
 
 export type CS = string | Record<string, string>;
@@ -197,7 +194,7 @@ export function createVars<T extends string | DefaultedVarsShape, ID extends str
     args.forEach(key => {
       if (input[key as ToString<T>]) {
         // @ts-ignore TS complains about `key` not in object `{}`
-        vars[result[key]] = convertProperty(input[key]);
+        vars[result[key]] = wrapProperty(input[key]);
       }
     });
     return vars;
@@ -334,7 +331,7 @@ export function createDefaultedVars<T extends DefaultedVarsShape, ID extends str
       if (typeof (input as any)[key] === 'string') {
         if ((result as any)[key]) {
           // Don't add an undefined key
-          vars[(result as any)[key]] = convertProperty((input as any)[key]);
+          vars[(result as any)[key]] = wrapProperty((input as any)[key]);
         }
       }
       if (typeof (input as any)[key] === 'object') {
@@ -342,7 +339,7 @@ export function createDefaultedVars<T extends DefaultedVarsShape, ID extends str
           if (typeof (input as any)[key][subKey] === 'string') {
             // Don't add an undefined key
             if ((result as any)[key][subKey]) {
-              vars[(result as any)[key][subKey]] = convertProperty((input as any)[key][subKey]);
+              vars[(result as any)[key][subKey]] = wrapProperty((input as any)[key][subKey]);
             }
           }
         }
@@ -381,7 +378,7 @@ type ModifierConfig = Record<string, Record<string, CS>>;
  * Helper type to convert `'true'` into `true` for boolean modifiers which are a pain to type as a
  * prop.
  */
-type MaybeBoolean<T> = T extends 'true' ? boolean : T extends 'false' ? boolean : T;
+type MaybeBoolean<T> = T extends 'true' | 'false' ? T | boolean : T;
 
 type ModifierValues<T extends ModifierConfig> = {
   [P in keyof T]: MaybeBoolean<keyof T[P]>;
@@ -552,9 +549,9 @@ export function csToProps(input: CSToPropsInput): CsToPropsReturn {
     const cssVars: Record<string, string> = {};
     for (const key in input) {
       if (key.startsWith('--')) {
-        cssVars[key] = maybeWrapCSSVariables((input as any)[key] ?? '');
+        cssVars[key] = wrapAllProperties((input as any)[key]);
       } else {
-        (staticStyles as any)[key] = maybeWrapCSSVariables((input as any)[key] ?? '');
+        (staticStyles as any)[key] = wrapAllProperties((input as any)[key]);
         hasStaticStyles = true;
       }
     }
@@ -650,7 +647,7 @@ export function createStyles(
         return instance.css(input as CastStyleProps);
       }
 
-      const convertedStyles = convertAllProperties(input);
+      const convertedStyles = wrapAllProperties(input);
 
       // We want to call `serializeStyles` directly and ignore the hash generated so we can have
       // more predictable style merging. If 2 different files define the same style properties, the
@@ -987,7 +984,7 @@ export interface StencilConfig<
   defaultModifiers?: [E] extends [never]
     ? StencilDefaultModifierReturn<M>
     : E extends BaseStencil<infer ME, any, any, any>
-    ? StencilDefaultModifierReturn<M & ME>
+    ? StencilDefaultModifierReturn<ME & M>
     : undefined;
 }
 

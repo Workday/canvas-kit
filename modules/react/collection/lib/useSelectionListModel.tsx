@@ -105,7 +105,8 @@ export const useSelectionListModel = createModelHook({
     /**
      * Should be used with care and can be used to keep a model in sync with external controlled
      * inputs.
-     */ setSelectedIds(ids: 'all' | string[]) {
+     */
+    setSelectedIds(ids: 'all' | string[]) {
       setSelectedIds(ids);
     },
   };

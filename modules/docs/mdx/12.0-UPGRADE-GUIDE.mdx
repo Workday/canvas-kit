@@ -45,16 +45,17 @@ A note to the reader:
 - [Component Updates](#component-updates)
   - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
   - [Avatar](#avatar)
+  - [Collections](#collections)
   - [Combobox](#combmbox)
   - [Form Field](#form-field)
     - [Form Field Group](#form-field-group)
     - [Form Field Field](#form-field-field)
   - [Menu Item](#menu-item)
+  - [MultiSelect](#multiselect)
   - [Search Form](#search-form)
   - [Select](#select)
   - [Text Area](#text-area)
   - [Text Input](#text-input)
-  - [Collections](#collections)
 - [Utility Updates](#utility-updates)
 - [Troubleshooting](#troubleshooting)
 - [Glossary](#glossary)
@@ -489,9 +490,9 @@ this sub-component when using `FormField`. This component also exists on `FormFi
 
 ### Menu Item
 
-**PR: ** [2969](https://github.com/Workday/canvas-kit/pull/2969)
+**PR:** [2969](https://github.com/Workday/canvas-kit/pull/2969)
 
-`Menu.Item` was converted to use Stencils for styling and uses SystemIcon stencil variables to
+`Menu.Item` was converted to use Stencils for styling and uses `SystemIcon` stencil variables to
 change icon color instead of deeply nested selectors. We also added `Menu.Option` component for
 menus that have a selected visual state. `Menu.Option` will need more accessibility affordances that
 depend on the nature of your use of the `Menu` component. For example, `<Combobox>` and `<Select>`
@@ -506,6 +507,20 @@ We've removed the `MenuItemProps` export from `@workday/canvas-kit-react/menu`. 
 `ExtractProps<typeof Menu.Item, never>` instead. We don't mean to export prop interfaces of
 polymorphic components. The `never` means "don't add element props". The second parameter is used to
 pass the interface that the `as` prop is pointing to.
+
+`Menu.Item` no longer sets `aria-selected` since that attribute is not valid on a `role=menuitem`.
+The `Menu.Option` was added to support the role of a `role=option` for going inside a
+`role=listbox`. The `Combobox` family of components uses a `role=listbox` for menu options. The
+`Menu.Option` renders a checkmark for a visual indication of selected options.
+
+### MultiSelect
+
+**PR:** [2911](https://github.com/Workday/canvas-kit/pull/2911)
+
+Added the `MultiSelect` component to select more than one option from a list of options. The
+`MultiSelect` is similar in API to the `Select` component, except the values are comma delimited
+with a space. If the ids represented are `['1', '2']`, then the string value of the form field is
+`'1, 2'`.
 
 ### Search Form (Labs)
 
