@@ -64,7 +64,7 @@ export function wrapProperty<T>(value: T): T {
   // Handle the case where the value is a variable without the `var()` wrapping function. It happens
   // enough that it makes sense to automatically wrap.
   if (typeof value === 'string') {
-    return maybeWrapCSSVariables(value) as any as T;
+    return maybeWrapCSSVariables(value) as T;
   }
   return value;
 }
