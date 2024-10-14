@@ -552,9 +552,9 @@ export function csToProps(input: CSToPropsInput): CsToPropsReturn {
     const cssVars: Record<string, string> = {};
     for (const key in input) {
       if (key.startsWith('--')) {
-        cssVars[key] = maybeWrapCSSVariables((input as any)[key] || '');
+        cssVars[key] = maybeWrapCSSVariables((input as any)[key] ?? '');
       } else {
-        (staticStyles as any)[key] = maybeWrapCSSVariables((input as any)[key] || '');
+        (staticStyles as any)[key] = maybeWrapCSSVariables((input as any)[key] ?? '');
         hasStaticStyles = true;
       }
     }
