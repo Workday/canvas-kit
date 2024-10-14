@@ -493,7 +493,7 @@ this sub-component when using `FormField`. This component also exists on `FormFi
 
 **PR:** [2969](https://github.com/Workday/canvas-kit/pull/2969)
 
-`Menu.Item` was converted to use Stencils for styling and uses SystemIcon stencil variables to
+`Menu.Item` was converted to use Stencils for styling and uses `SystemIcon` stencil variables to
 change icon color instead of deeply nested selectors. We also added `Menu.Option` component for
 menus that have a selected visual state. `Menu.Option` will need more accessibility affordances that
 depend on the nature of your use of the `Menu` component. For example, `<Combobox>` and `<Select>`
@@ -508,6 +508,11 @@ We've removed the `MenuItemProps` export from `@workday/canvas-kit-react/menu`. 
 `ExtractProps<typeof Menu.Item, never>` instead. We don't mean to export prop interfaces of
 polymorphic components. The `never` means "don't add element props". The second parameter is used to
 pass the interface that the `as` prop is pointing to.
+
+`Menu.Item` no longer sets `aria-selected` since that attribute is not valid on a `role=menuitem`.
+The `Menu.Option` was added to support the role of a `role=option` for going inside a
+`role=listbox`. The `Combobox` family of components uses a `role=listbox` for menu options. The
+`Menu.Option` renders a checkmark for a visual indication of selected options.
 
 ### MultiSelect
 

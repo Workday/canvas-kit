@@ -51,7 +51,6 @@ export const useComboboxInputConstrained = createElemPropsHook(useComboboxModel)
     // Watch the `value` prop passed from React props and update the model accordingly
     React.useLayoutEffect(() => {
       if (formLocalRef.current && typeof reactValue === 'string') {
-        // const value = formLocalRef.current.value;
         if (reactValue !== formLocalRef.current.value) {
           model.events.setSelectedIds(reactValue ? reactValue.split(', ') : []);
         }

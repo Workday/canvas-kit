@@ -29,7 +29,6 @@ export const MultiSelectItem = createSubcomponent('li')({
     Icon: Combobox.Menu.Item.Icon,
   },
 })<ExtractProps<typeof Combobox.Menu.Item>>(({children, ...elemProps}, Element, _model) => {
-  console.log('aria-selected', elemProps);
   return (
     <StyledMenuItem as={Element} {...handleCsProp(elemProps)}>
       {children}

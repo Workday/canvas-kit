@@ -88,7 +88,6 @@ export const Searching = () => {
                 <FormField.Input
                   as={MultiSelect.SearchInput}
                   placeholder="Search"
-                  data-testid="foo"
                   name="toppings"
                   onChange={e => {
                     setValue(e.currentTarget.value);

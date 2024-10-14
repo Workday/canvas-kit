@@ -30,7 +30,7 @@ export const multiSelectStencil = createStencil({
     backgroundColor: system.color.bg.default,
     borderRadius: system.shape.x1,
     boxSizing: 'border-box',
-    minHeight: 40,
+    minHeight: system.space.x10,
     transition: '0.2s box-shadow, 0.2s border-color',
     margin: 0, // Fix Safari
 
@@ -171,7 +171,6 @@ export interface MultiSelectInputProps
     > {}
 
 export const MultiSelectInput = createSubcomponent(TextInput)({
-  displayName: 'MultiSelect.Input',
   modelHook: useMultiSelectModel,
   elemPropsHook: useMultiSelectInput,
 })<MultiSelectInputProps>(
@@ -215,7 +214,6 @@ export const MultiSelectInput = createSubcomponent(TextInput)({
 );
 
 export const MultiSelectSearchInput = createSubcomponent(TextInput)({
-  displayName: 'MultiSelect.Input',
   modelHook: useMultiSelectModel,
   elemPropsHook: useMultiSelectInput,
 })<MultiSelectInputProps>(

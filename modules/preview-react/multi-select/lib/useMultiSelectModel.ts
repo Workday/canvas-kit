@@ -5,7 +5,7 @@ import {useComboboxModel} from '@workday/canvas-kit-react/combobox';
 import {useListModel, Item} from '@workday/canvas-kit-react/collection';
 
 /**
- * `SelectModel` extends the {@link ComboboxModel}. Selecting items from
+ * `MultiSelectModel` extends the {@link ComboboxModel}. Selecting items from
  * the menu will dispatch an
  * [input](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event) event on the
  * input which should work with form libraries, automation and autofill.
@@ -13,9 +13,9 @@ import {useListModel, Item} from '@workday/canvas-kit-react/collection';
  * ```tsx
  * const model = useMultiSelectModel({items: ['Mobile', 'Phone', 'E-Mail']})
  *
- * <Select model={model}>
+ * <MultiSelect model={model}>
  *   ...
- * </Select>
+ * </MultiSelect>
  * ```
  */
 export const useMultiSelectModel = createModelHook({
@@ -57,6 +57,7 @@ export const useMultiSelectModel = createModelHook({
   );
   cachedSelectedRef.current = cachedSelected;
 
+  // The `listbox` of pills under the MultiSelect combobox input.
   const selected = useListModel({
     orientation: 'horizontal',
     onSelect({id}) {

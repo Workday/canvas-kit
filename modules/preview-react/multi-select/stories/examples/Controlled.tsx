@@ -44,7 +44,6 @@ export const Controlled = () => {
               <FormField.Input
                 as={MultiSelect.Input}
                 placeholder="Select Multiple"
-                data-testid="foo"
                 name="toppings"
                 onChange={handleOnChange}
                 value={value}

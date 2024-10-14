@@ -39,7 +39,6 @@ export const Complex = () => {
                 <FormField.Input
                   as={MultiSelect.Input}
                   placeholder="Select Multiple"
-                  data-testid="foo"
                   name="toppings"
                   onChange={e => {
                     const value = e.currentTarget.value;
