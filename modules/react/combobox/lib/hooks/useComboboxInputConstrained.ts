@@ -138,7 +138,10 @@ export const useComboboxInputConstrained = createElemPropsHook(useComboboxModel)
       ref: userElementRef,
       form: '', // We don't want the user input to be part of the form [elements](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/elements)
       value: null,
-      onChange: null,
+      onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
+        model.onFilterChange?.(event);
+        return null; // Prevent further `onChange` callbacks from firing
+      },
       name: null,
       disabled,
       /**
@@ -149,7 +152,10 @@ export const useComboboxInputConstrained = createElemPropsHook(useComboboxModel)
         tabIndex: -1,
         'aria-hidden': true,
         ref: formElementRef,
-        onChange,
+        onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
+          onChange?.(event);
+          model.onChange?.(event);
+        },
         name,
       },
     };

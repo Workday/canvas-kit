@@ -55,6 +55,10 @@ export function mergeProps<const T extends object, const S extends object>(
         // merge style objects
         // @ts-ignore TS complains that key might not be on targetProps, but typeof returns
         returnProps[key] = {...targetProps[key], ...sourceProps[key]};
+      } else if (key === 'ref' && sourceProps.hasOwnProperty('ref')) {
+        // refs should never be overridden. This doesn't happen normally, but happens with hook
+        // composition
+        (returnProps as any).ref = (returnProps as any).ref || (sourceProps as any).ref;
       } else if (
         typeof sourceProps[key] === 'function' &&
         // @ts-ignore TS complains that key might not be on targetProps, but typeof returns
@@ -69,10 +73,6 @@ export function mergeProps<const T extends object, const S extends object>(
         typeof targetProps[key] === 'function'
       ) {
         // we don't support removing callbacks via `undefined`, so do nothing here
-      } else if (key === 'ref' && sourceProps.hasOwnProperty('ref')) {
-        // refs should never be overridden. This doesn't happen normally, but happens with hook
-        // composition
-        (returnProps as any).ref = (returnProps as any).ref || (sourceProps as any).ref;
         // @ts-ignore Typescript complains that key might not exist in `targetProps` since we're iterating over sourceProps. At runtime this doesn't matter
       } else if (targetProps[key] === null) {
         // target props is trying to disable the prop for whatever reason. Consider `null` a "remove this prop"

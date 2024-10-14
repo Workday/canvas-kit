@@ -59,9 +59,8 @@ export const useComboboxLoader: typeof useListLoader = (config, modelHook) => {
         );
       },
       ...(modelHook.mergeConfig(config, {
-        onChange(event) {
+        onFilterChange(event) {
           const value = event.currentTarget.value;
-          console.log('onChange', value);
           debounce(() => list.loader.updateFilter(value), 150);
         },
       } as typeof useComboboxModel.TConfig) as typeof config),

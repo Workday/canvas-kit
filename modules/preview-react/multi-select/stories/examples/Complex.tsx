@@ -4,12 +4,9 @@ import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 
-import {accessibilityIcon, accountsIcon} from '@workday/canvas-system-icons-web';
-
 import {system} from '@workday/canvas-tokens-web';
 
 import {MultiSelect} from '@workday/canvas-kit-preview-react/multi-select';
-import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 
 const mainContentStyles = createStyles({
   padding: system.space.x4,
@@ -25,9 +22,8 @@ const items = [
 ];
 
 export const Complex = () => {
-  const [color, setColor] = React.useState('red');
-
-  const [value, setValue] = React.useState('1');
+  const [value, setValue] = React.useState('');
+  const [label, setLabel] = React.useState('');
   return (
     <CanvasProvider>
       <>
@@ -38,8 +34,7 @@ export const Complex = () => {
           }}
         >
           <main className={mainContentStyles}>
-            <input value={color} onChange={event => setColor(event.currentTarget.value)} />
-            <MultiSelect items={items}>
+            <MultiSelect items={items} getId={i => i.id} getTextValue={i => i.text}>
               <FormField orientation="horizontal">
                 <FormField.Label>Toppings</FormField.Label>
                 <FormField.Input
@@ -48,7 +43,14 @@ export const Complex = () => {
                   data-testid="foo"
                   name="toppings"
                   onChange={e => {
-                    setValue(e.currentTarget.value);
+                    const value = e.currentTarget.value;
+                    setValue(value);
+                    setLabel(
+                      value
+                        .split(', ')
+                        .map(item => items.find(i => i.id === item)?.text || 'Not Found')
+                        .join(', ')
+                    );
                   }}
                   value={value}
                 />
@@ -57,9 +59,7 @@ export const Complex = () => {
                     <MultiSelect.List>
                       {item => (
                         <MultiSelect.Item data-id={item.id}>
-                          <MultiSelect.Item.Icon icon={accessibilityIcon} />
                           <MultiSelect.Item.Text>{item.text}</MultiSelect.Item.Text>
-                          <MultiSelect.Item.Icon icon={accountsIcon} />
                         </MultiSelect.Item>
                       )}
                     </MultiSelect.List>
@@ -67,25 +67,10 @@ export const Complex = () => {
                 </MultiSelect.Popper>
               </FormField>
             </MultiSelect>
-            <SecondaryButton
-              onClick={e => {
-                setValue('1, 2, 3');
-              }}
-            >
-              Set to "Cheese, Olives, Onions" via React `value`
-            </SecondaryButton>
-            <SecondaryButton
-              onClick={e => {
-                const input = document.querySelector('[name=toppings]') as HTMLInputElement;
-                input.value = '1, 2';
-              }}
-            >
-              Set to "Cheese, Olives" via DOM `value`
-            </SecondaryButton>
-            <PrimaryButton type="submit">Submit</PrimaryButton>
           </main>
         </form>
-        <div>Selected: {value}</div>
+        <div>Selected IDs: {value}</div>
+        <div>Selected Labels: {label}</div>
       </>
     </CanvasProvider>
   );

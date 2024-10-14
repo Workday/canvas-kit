@@ -29,6 +29,7 @@ export const useMultiSelectModel = createModelHook({
   },
   contextOverride: useComboboxModel.Context,
 })(config => {
+  const cachedSelectedRef = React.useRef<Item<any>[]>([]);
   const model = useComboboxModel(
     useComboboxModel.mergeConfig(config, {
       onHide() {
@@ -42,14 +43,19 @@ export const useMultiSelectModel = createModelHook({
       .filter(item => item) as Item<any>[];
   });
 
-  const cachedSelected = React.useMemo(
+  const cachedSelected: Item<any>[] = React.useMemo(
     () =>
       (model.state.selectedIds === 'all' ? [] : model.state.selectedIds)
-        .map(id => model.navigation.getItem(id, model))
+        // try to find the item in the navigation. If it isn't there, maybe it is filtered out currently and we can find it from previous cached
+        .map(
+          id =>
+            model.navigation.getItem(id, model) || cachedSelectedRef.current.find(i => i.id === id)
+        )
         .filter(item => item) as Item<any>[],
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [model.state.selectedIds]
   );
+  cachedSelectedRef.current = cachedSelected;
 
   const selected = useListModel({
     orientation: 'horizontal',

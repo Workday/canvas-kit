@@ -7,28 +7,17 @@ import {
   composeHooks,
   createElemPropsHook,
   createSubcomponent,
-  dispatchInputEvent,
-  useLocalRef,
 } from '@workday/canvas-kit-react/common';
 import {createStencil, CSProps, handleCsProp} from '@workday/canvas-kit-styling';
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {usePopupTarget} from '@workday/canvas-kit-react/popup';
 import {
   ListBox,
-  useListActiveDescendant,
   useListItemRegister,
   useListItemRovingFocus,
-  useListItemSelect,
   useListModel,
 } from '@workday/canvas-kit-react/collection';
-import {
-  useComboboxInput,
-  useComboboxInputConstrained,
-  useComboboxListKeyboardHandler,
-  useComboboxModel,
-  useSetPopupWidth,
-} from '@workday/canvas-kit-react/combobox';
+import {useComboboxInput, useComboboxInputConstrained} from '@workday/canvas-kit-react/combobox';
 import {Pill} from '@workday/canvas-kit-preview-react/pill';
 
 import {useMultiSelectModel} from './useMultiSelectModel';
@@ -44,23 +33,11 @@ export const multiSelectStencil = createStencil({
     minHeight: 40,
     transition: '0.2s box-shadow, 0.2s border-color',
     margin: 0, // Fix Safari
-    // '&::placeholder': {
-    //   color: system.color.fg.strong,
-    // },
+
     '&:hover, &.hover': {
       borderColor: system.color.border.input.strong,
     },
-    // '&:focus-visible:not([disabled]), &.focus:not([disabled]), &:focus:not([disabled])': {
 
-    // },
-    // '&:disabled': {
-    //   backgroundColor: inputColors.disabled.background,
-    //   borderColor: inputColors.disabled.border,
-    //   color: inputColors.disabled.text,
-    //   '&::placeholder': {
-    //     color: inputColors.disabled.text,
-    //   },
-    // },
     '&:focus-within': {
       borderColor: system.color.border.primary.default,
       boxShadow: `inset 0 0 0 1px ${system.color.border.primary.default}`,
@@ -74,8 +51,8 @@ export const multiSelectStencil = createStencil({
       borderRadius: system.shape.x1,
 
       // Remove the focus ring - it is handled at the container level
-      border: 'none',
-      boxShadow: 'none',
+      border: 'none !important',
+      boxShadow: 'none !important',
       outlineWidth: '0px',
 
       '&:where(:not([aria-autocomplete]))': {
@@ -111,22 +88,12 @@ export const multiSelectStencil = createStencil({
       flexWrap: 'wrap',
     },
   },
-  parts: {
-    'user-input': {
-      // styles
-      // hover container
-      '&:hover': {},
-    },
-    // hover data-part
-    '& #:hover': {},
-  },
 });
 
 export const useMultiSelectInput = composeHooks(
   createElemPropsHook(useMultiSelectModel)((model, ref) => {
     return {
       onKeyDown(event: React.KeyboardEvent) {
-        console.log('onKeyDown', event.key);
         // Space bar key is hit and menu is open
         if (event.key === ' ' && model.state.visibility === 'visible') {
           const id = model.state.cursorId;
@@ -140,7 +107,6 @@ export const useMultiSelectInput = composeHooks(
           }
         }
 
-        // console.log('key', event.key);
         if (
           (event.key === 'ArrowDown' || event.key === 'ArrowUp') &&
           model.state.visibility === 'hidden'
@@ -150,16 +116,6 @@ export const useMultiSelectInput = composeHooks(
           event.preventDefault();
         }
       },
-      'aria-haspopup': 'listbox' as const,
-      onChange: e => console.log('user-input', e.currentTarget.value),
-      // onClick(e: React.MouseEvent) {
-      //   console.log('click', model.state.visibility);
-      //   if (model.state.visibility === 'hidden') {
-      //     model.events.show(e);
-      //   } else if (model.state.visibility === 'visible') {
-      //     model.events.hide(e);
-      //   }
-      // },
     };
   }),
   useComboboxInputConstrained,
@@ -170,15 +126,9 @@ const removeItem = <T extends unknown>(id: string, model: ReturnType<typeof useL
   const index = model.state.items.findIndex(item => item.id === model.state.cursorId);
   const nextIndex = index === model.state.items.length - 1 ? index - 1 : index + 1;
   const nextId = model.state.items[nextIndex].id;
-  console.log('nextId', id, nextId);
   if (model.state.cursorId === id) {
     // We're removing the currently focused item. Focus next item
     model.events.goTo({id: nextId});
-
-    // // wait for stabilization of state
-    // requestAnimationFrame(() => {
-    //   document.querySelector<HTMLElement>(`#${model.state.id}-${nextId}`)?.focus();
-    // });
   }
 };
 
@@ -205,7 +155,7 @@ const useMultiSelectedItem = composeHooks(
 const MultiSelectedItem = createSubcomponent('span')({
   modelHook: useListModel,
   elemPropsHook: useMultiSelectedItem,
-})(({children, ref, ...elemProps}, Element, model) => {
+})(({children, ref, ...elemProps}, Element) => {
   return (
     <Pill as={Element} variant="removable">
       {children}
@@ -231,7 +181,6 @@ export const MultiSelectInput = createSubcomponent(TextInput)({
     Element,
     model
   ) => {
-    console.log('elemProps', elemProps);
     return (
       <div {...handleCsProp({className, cs, style}, multiSelectStencil({}))}>
         <InputGroup>
@@ -271,16 +220,25 @@ export const MultiSelectSearchInput = createSubcomponent(TextInput)({
   modelHook: useMultiSelectModel,
   elemPropsHook: useMultiSelectInput,
 })<MultiSelectInputProps>(
-  ({className, cs, 'aria-labelledby': ariaLabelledBy, ...elemProps}, Element, model) => {
+  (
+    {className, cs, style, 'aria-labelledby': ariaLabelledBy, formInputProps, ref, ...elemProps},
+    Element,
+    model
+  ) => {
     return (
-      <div {...handleCsProp({className, cs}, multiSelectStencil({}))}>
+      <div {...handleCsProp({className, cs, style}, multiSelectStencil({}))}>
         <InputGroup>
           <InputGroup.InnerStart pointerEvents="none" width={system.space.x8}>
             <SystemIcon icon={searchIcon} size={system.space.x4} />
           </InputGroup.InnerStart>
-          <InputGroup.Input data-part="form-input" aria-labelledby={ariaLabelledBy} />
-          <InputGroup.Input data-part="user-input" as={Element} {...elemProps} />
-          <InputGroup.InnerEnd width={system.space.x8}>
+          <InputGroup.Input data-part="form-input" {...formInputProps} />
+          <InputGroup.Input
+            data-part="user-input"
+            as={Element}
+            aria-labelledby={ariaLabelledBy}
+            {...elemProps}
+          />
+          <InputGroup.InnerEnd>
             <InputGroup.ClearButton />
           </InputGroup.InnerEnd>
           <InputGroup.InnerEnd pointerEvents="none">

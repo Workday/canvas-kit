@@ -10,5 +10,6 @@ export * from './lib/hooks/useSetPopupWidth';
 export * from './lib/hooks/useComboboxKeyboardTypeAhead';
 export * from './lib/hooks/useComboboxListKeyboardHandler';
 export * from './lib/hooks/useComboboxInput';
+export * from './lib/hooks/useComboboxInputArbitrary';
 export * from './lib/hooks/useComboboxInputConstrained';
 export * from './lib/hooks/useComboboxResetCursorToSelected';

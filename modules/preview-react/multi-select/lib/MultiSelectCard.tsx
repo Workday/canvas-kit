@@ -19,7 +19,7 @@ export interface MultiSelectCardProps extends ExtractProps<typeof Menu.Card> {}
 export const useMultiSelectCard = createElemPropsHook(useMultiSelectModel)(model => {
   return {
     minWidth: calc.add(px2rem(model.state.width), px2rem(2)),
-  } as const;
+  };
 });
 
 export const MultiSelectCard = createSubcomponent('div')({

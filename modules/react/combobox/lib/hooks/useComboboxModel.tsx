@@ -13,6 +13,9 @@ export const useInputModel = createModelHook({
   defaultConfig: {
     value: undefined as string | undefined,
 
+    onFilterChange(event: React.ChangeEvent<HTMLInputElement>) {
+      return;
+    },
     onChange(event: React.ChangeEvent<HTMLInputElement>) {
       return;
     },
@@ -21,6 +24,7 @@ export const useInputModel = createModelHook({
   const inputRef = React.createRef<HTMLInputElement>();
 
   return {
+    onFilterChange: config.onFilterChange,
     onChange: config.onChange,
     state: {value: config.value, inputRef},
     events: {},
