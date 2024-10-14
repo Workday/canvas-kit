@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {createStencil, handleCsProp, maybeWrapCSSVariables} from '@workday/canvas-kit-styling';
+import {createStencil, handleCsProp, wrapProperty} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import {
   createContainer,
@@ -278,11 +278,11 @@ export const InputGroup = createContainer('div')({
   // `offsetEnd` arrays
   React.Children.forEach(children, child => {
     if (React.isValidElement<any>(child) && child.type === InputGroupInnerStart) {
-      const width = maybeWrapCSSVariables(child.props.width || system.space.x10);
+      const width = wrapProperty(child.props.width || system.space.x10);
       offsetsStart.push(width);
     }
     if (React.isValidElement<any>(child) && child.type === InputGroupInnerEnd) {
-      const width = maybeWrapCSSVariables(child.props.width || system.space.x10);
+      const width = wrapProperty(child.props.width || system.space.x10);
       offsetsEnd.push(width);
     }
   });

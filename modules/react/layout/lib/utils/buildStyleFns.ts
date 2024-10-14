@@ -5,7 +5,7 @@ import {
   space as spaceTokens,
   type as typeTokens,
 } from '@workday/canvas-kit-react/tokens';
-import {maybeWrapCSSVariables} from '@workday/canvas-kit-styling';
+import {wrapProperty} from '@workday/canvas-kit-styling';
 
 import {CanvasSystemPropValues, SystemPropNames, SystemPropValues} from './systemProps';
 
@@ -19,12 +19,8 @@ export type StyleFns = {
   [key: string]: (value: unknown) => {};
 };
 
-function maybeWrapValue(input: string | number): string | number {
-  return typeof input === 'string' ? maybeWrapCSSVariables(input) : input;
-}
-
 const getColor = (value: SystemPropValues['color']) => {
-  return colorTokens[value] || maybeWrapValue(value);
+  return colorTokens[value] || wrapProperty(value);
 };
 
 const getDepth = (value: SystemPropValues['depth']) => {
@@ -32,31 +28,31 @@ const getDepth = (value: SystemPropValues['depth']) => {
 };
 
 const getShape = (value: SystemPropValues['shape']) => {
-  return borderRadiusTokens[value as CanvasSystemPropValues['shape']] || maybeWrapValue(value);
+  return borderRadiusTokens[value as CanvasSystemPropValues['shape']] || wrapProperty(value);
 };
 
 const getSpace = (value: SystemPropValues['space']) => {
-  return spaceTokens[value as CanvasSystemPropValues['space']] || maybeWrapValue(value);
+  return spaceTokens[value as CanvasSystemPropValues['space']] || wrapProperty(value);
 };
 
 const getFont = (value: SystemPropValues['font']) => {
   return (
     typeTokens.properties.fontFamilies[value as CanvasSystemPropValues['font']] ||
-    maybeWrapValue(value)
+    wrapProperty(value)
   );
 };
 
 const getFontSize = (value: SystemPropValues['fontSize'] | string) => {
   return (
     typeTokens.properties.fontSizes[value as CanvasSystemPropValues['fontSize']] ||
-    maybeWrapValue(value)
+    wrapProperty(value)
   );
 };
 
 const getFontWeight = (value: SystemPropValues['fontWeight'] | string) => {
   return (
     typeTokens.properties.fontWeights[value as CanvasSystemPropValues['fontWeight']] ||
-    maybeWrapValue(value)
+    wrapProperty(value)
   );
 };
 

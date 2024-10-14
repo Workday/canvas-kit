@@ -18,6 +18,17 @@ export const Controlled = () => {
   const [value, setValue] = React.useState('1');
   const [label, setLabel] = React.useState('Cheese');
 
+  function handleOnChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const value = event.currentTarget.value;
+    setValue(value);
+    setLabel(
+      value
+        .split(', ')
+        .map(item => items.find(i => i.id === item)?.text || 'Not Found')
+        .join(', ')
+    );
+  }
+
   return (
     <>
       <form
@@ -35,16 +46,7 @@ export const Controlled = () => {
                 placeholder="Select Multiple"
                 data-testid="foo"
                 name="toppings"
-                onChange={e => {
-                  const value = e.currentTarget.value;
-                  setValue(value);
-                  setLabel(
-                    value
-                      .split(', ')
-                      .map(item => items.find(i => i.id === item)?.text || 'Not Found')
-                      .join(', ')
-                  );
-                }}
+                onChange={handleOnChange}
                 value={value}
               />
               <MultiSelect.Popper>
