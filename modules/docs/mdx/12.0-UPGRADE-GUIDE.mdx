@@ -693,41 +693,6 @@ represented which may mean TypeScript is now catching bugs it didn't before.
 
 More information: https://github.com/Workday/canvas-kit/discussions/2979
 
-## Utility Updates
-
-**PR:** [#2908](https://github.com/Workday/canvas-kit/pull/2908)
-
-### `mergeProps`
-
-`mergeProps` had a bug where sometimes the returned props would be `never`. Also `mergeProps` would
-not narrow types which would require you to add `as const`. We fixed the type signature to more
-accurately reflect how `mergeProps` works. This may catch new type errors not caught before. There
-is no way to codemod this. Let us know if you need help fixing new type errors introduced by this
-change.
-
-More information: https://github.com/Workday/canvas-kit/discussions/2979
-
-### `createElemPropsHook`
-
-`createElemPropsHook` now uses
-[const Type Parameters](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#const-type-parameters)
-to narrow types in the object. This prevents requiring `as const` in some situations. This alone
-should fix bugs instead of introduce them.
-
-More information: https://github.com/Workday/canvas-kit/discussions/2979
-
-### `composeHooks`
-
-`composeHooks` uses `mergeProps` and suffered the same bugs. If any hook in the `composeHooks` chain
-used a `null` prop, the entire prop object returned was typed as `never`. This caused a bug where if
-the Component required a prop, it wasn't being provided by the composed hook. Some of our components
-manually added to the component's prop interface so the component's render function wouldn't
-complain. This has been fixed. This may be a breaking change where before the spread `elemProps` was
-`never`, so no type conflicts could exist with component props. Now all props are properly
-represented which may mean TypeScript is now catching bugs it didn't before.
-
-More information: https://github.com/Workday/canvas-kit/discussions/2979
-
 ## Troubleshooting
 
 ### My Styles Seem Broken?
