@@ -137,7 +137,6 @@ export const haveAriaLabel = (text: string) => ($target: JQuery) => {
     expect($labelledEl).to.have.text(text);
   } else if ($target.attr('id')) {
     const id = $target.attr('id');
-    console.log('id', id);
     const $labelledEl = Cypress.$(`label[for="${id}"]`);
     if (!$labelledEl.length) {
       throw Error(
