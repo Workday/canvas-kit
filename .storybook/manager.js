@@ -1,6 +1,6 @@
-import {addons} from '@storybook/preview-api';
-import theme from './theme';
+import { addons } from '@storybook/manager-api';
+import canvasTheme from './theme';
 
 addons.setConfig({
-  theme,
+  theme: canvasTheme,
 });
