@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.1.17](https://github.com/Workday/canvas-kit/releases/tag/v11.1.17) (2024-10-11)
+
+### Components
+
+- fix: Unbroken String Overflow Menu Item Fix ([#2975](https://github.com/Workday/canvas-kit/pull/2975)) ([@josh-bagwell](https://github.com/josh-bagwell))
+  A fix to Menu Item to break a long unbroken string for `Select`.
+
+
+## [v10.3.63](https://github.com/Workday/canvas-kit/releases/tag/v10.3.63) (2024-10-10)
+
+### Components
+
+- fix: Unbroken String Overflow Menu Item Fix ([#2975](https://github.com/Workday/canvas-kit/pull/2975)) ([@josh-bagwell](https://github.com/josh-bagwell))
+  A fix to Menu Item to break a long unbroken string for `Select`.
+
+
+## [v11.1.16](https://github.com/Workday/canvas-kit/releases/tag/v11.1.16) (2024-10-07)
+
+### Components
+
+- chore: Fixed Button Style Merge Issue ([#2951](https://github.com/Workday/canvas-kit/pull/2951)) ([@josh-bagwell](https://github.com/josh-bagwell), manuel.carrera)
+  Updates Button variants to fix merge style issue.
+
+
+## [v11.1.15](https://github.com/Workday/canvas-kit/releases/tag/v11.1.15) (2024-10-07)
+
+### Infrastructure
+
+- fix: Remove extract docs in canary to prevent exceeding limit ([#2948](https://github.com/Workday/canvas-kit/pull/2948)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+### Styling
+
+- fix: Support false modifier values ([#2952](https://github.com/Workday/canvas-kit/pull/2952)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v10.3.62](https://github.com/Workday/canvas-kit/releases/tag/v10.3.62) (2024-10-02)
 ## [v11.1.14](https://github.com/Workday/canvas-kit/releases/tag/v11.1.14) (2024-10-02)
 
 ### Components
