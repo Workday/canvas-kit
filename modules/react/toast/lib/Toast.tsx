@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {createContainer, ExtractProps} from '@workday/canvas-kit-react/common';
-import {Flex} from '@workday/canvas-kit-react/layout';
 import {Popup} from '@workday/canvas-kit-react/popup';
 
 import {ToastCloseIcon} from './ToastCloseIcon';
@@ -10,6 +9,9 @@ import {ToastMessage} from './ToastMessage';
 import {ToastLink} from './ToastLink';
 import {ToastBody} from './ToastBody';
 import {useToastModel} from './hooks/useToastModel';
+import {calc, createStencil} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 export interface ToastProps extends Omit<ExtractProps<typeof Popup.Card, never>, 'model'> {}
 
@@ -44,6 +46,16 @@ const getAriaAttributes = (mode: string, id: string): React.HtmlHTMLAttributes<H
     }
   }
 };
+
+const toastStencil = createStencil({
+  base: {
+    display: 'flex',
+    flexDirection: 'row',
+    width: calc.add(calc.multiply(system.space.x20, 4), system.space.x10),
+    padding: system.space.zero,
+    gap: system.space.x1,
+  },
+});
 
 /**
  * Toast is a compound component that has different modes based on its contents. The modes add the proper aria attributes for accessibility
@@ -99,13 +111,8 @@ export const Toast = createContainer('div')({
 })<ToastProps>(({children, ...elemProps}, _, model) => {
   return (
     <Popup.Card
-      as={Flex}
-      width={360}
-      padding="0"
       {...getAriaAttributes(model.state.mode, model.state.id)}
-      flexDirection="row"
-      gap="xxxs"
-      {...elemProps}
+      {...mergeStyles(elemProps, toastStencil())}
     >
       {children}
     </Popup.Card>

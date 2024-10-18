@@ -4,9 +4,8 @@ import {
   CanvasProvider,
   PartialEmotionCanvasTheme,
 } from '@workday/canvas-kit-react/common';
-import {useArgs} from '@storybook/client-api';
 
-import {makeDecorator} from '@storybook/addons';
+import {makeDecorator, useArgs} from '@storybook/preview-api';
 
 export default makeDecorator({
   name: 'canvasProviderDecorator',

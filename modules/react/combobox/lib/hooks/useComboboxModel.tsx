@@ -1,5 +1,5 @@
 import React from 'react';
-import {createModelHook, dispatchInputEvent} from '@workday/canvas-kit-react/common';
+import {createModelHook} from '@workday/canvas-kit-react/common';
 import {useMenuModel} from '@workday/canvas-kit-react/menu';
 
 /**
@@ -13,6 +13,9 @@ export const useInputModel = createModelHook({
   defaultConfig: {
     value: undefined as string | undefined,
 
+    onFilterChange(event: React.ChangeEvent<HTMLInputElement>) {
+      return;
+    },
     onChange(event: React.ChangeEvent<HTMLInputElement>) {
       return;
     },
@@ -21,6 +24,7 @@ export const useInputModel = createModelHook({
   const inputRef = React.createRef<HTMLInputElement>();
 
   return {
+    onFilterChange: config.onFilterChange,
     onChange: config.onChange,
     state: {value: config.value, inputRef},
     events: {},
@@ -53,13 +57,7 @@ export const useComboboxModel = createModelHook({
 })(config => {
   const input = useInputModel(config);
 
-  const menu = useMenuModel(
-    useMenuModel.mergeConfig(config, {
-      onSelect({id}) {
-        dispatchInputEvent(menu.state.targetRef.current, id);
-      },
-    })
-  );
+  const menu = useMenuModel(config);
 
   const [width, setWidth] = React.useState(0);
 

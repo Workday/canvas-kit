@@ -120,7 +120,7 @@ export default function styleTransformer(
       return newNode || ts.visitEachChild(node, visit, context);
     };
 
-    return node => ts.visitNode(node, visit);
+    return (node => ts.visitNode(node, visit)) as ts.Transformer<ts.SourceFile>;
   };
 }
 
@@ -149,7 +149,7 @@ export function withDefaultContext(
 
 /**
  * This function is useful for tests or a custom build. The `styleTransformer` function is used by
- * the https://www.npmjs.com/package/ttypescript package.
+ * the https://www.npmjs.com/package/ts-patch package.
  */
 export function transform(
   program: ts.Program,
