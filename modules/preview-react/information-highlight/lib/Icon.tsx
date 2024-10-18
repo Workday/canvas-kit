@@ -8,11 +8,9 @@ import {
   exclamationTriangleIcon,
 } from '@workday/canvas-system-icons-web';
 import {base} from '@workday/canvas-tokens-web';
-import {useInformationHighlightModel} from './modelHook';
+import {useInformationHighlightModel, Variant} from './modelHook';
 
-type Variant = 'informational' | 'caution' | 'attention';
-
-const iconStyles = {
+const defaultIconStyles = {
   informational: {
     accent: cssVar(base.frenchVanilla100),
     background: cssVar(base.blueberry400),
@@ -30,6 +28,12 @@ const iconStyles = {
   },
 };
 
+const defaultIcons = {
+  informational: infoIcon,
+  caution: exclamationTriangleIcon,
+  attention: exclamationCircleIcon,
+};
+
 export interface IconProps extends SystemIconProps {
   /**
    * Variant is used to determine if one of the three provided themes will be used for the icon
@@ -39,12 +43,6 @@ export interface IconProps extends SystemIconProps {
    */
   variant: Variant;
 }
-
-const defaultIcons = {
-  informational: infoIcon,
-  caution: exclamationTriangleIcon,
-  attention: exclamationCircleIcon,
-};
 
 export const Icon = createSubcomponent('span')({
   /** `InformationHighlight.Icon` renders {@link SystemIcon} under the hood. It's used as a decorative
@@ -65,10 +63,9 @@ export const Icon = createSubcomponent('span')({
     <SystemIcon
       as={Element}
       icon={icon ? icon : defaultIcons[model.state.variant]}
-      {...iconStyles[model.state.variant]}
-      accent={accent ? accent : iconStyles[model.state.variant].accent}
-      color={color ? color : iconStyles[model.state.variant].color}
-      background={color ? color : iconStyles[model.state.variant].background}
+      accent={accent ? accent : defaultIconStyles[model.state.variant].accent}
+      color={color ? color : defaultIconStyles[model.state.variant].color}
+      background={color ? color : defaultIconStyles[model.state.variant].background}
       {...props}
     />
   );

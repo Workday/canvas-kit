@@ -8,9 +8,7 @@ import {Heading} from './lib/Heading';
 import {Body} from './lib/Body';
 import {Icon} from './lib/Icon';
 import {Button} from './lib/Button';
-import {useInformationHighlightModel} from './lib/modelHook';
-
-type Variant = 'informational' | 'caution' | 'attention';
+import {useInformationHighlightModel, Variant} from './lib/modelHook';
 
 interface InformationHighlightProps extends BaseProps {
   variant?: Variant;
