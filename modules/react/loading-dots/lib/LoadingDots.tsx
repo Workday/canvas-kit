@@ -45,10 +45,18 @@ const singleLoadingDotStencil = createStencil({
   }),
 });
 
+export interface LoadingDotsProps extends CSProps {
+  /**
+   * Applies backgroundColor to loading dots, intended for use with the circle variant design on grey/dark/image-based backgrounds.
+   * @default `system.color.bg.alt.strong`
+   */
+  backgroundColor?: string;
+}
+
 /**
  * The actual loading dot div.
  */
-const LoadingAnimationDot = ({backgroundColor}) => (
+const LoadingAnimationDot = ({backgroundColor}: LoadingDotsProps) => (
   <div {...singleLoadingDotStencil({backgroundColor})} />
 );
 
@@ -67,7 +75,7 @@ const loadingDotsStencil = createStencil({
  */
 export const LoadingDots = createComponent('div')({
   displayName: 'LoadingDots',
-  Component: ({backgroundColor, ...elemProps}: CSProps, ref, Element) => {
+  Component: ({backgroundColor, ...elemProps}: LoadingDotsProps, ref, Element) => {
     return (
       <Element ref={ref} {...handleCsProp(elemProps, loadingDotsStencil())}>
         <LoadingAnimationDot backgroundColor={backgroundColor} />
