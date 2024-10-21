@@ -154,12 +154,6 @@ const formFieldStencil = createStencil({
   ],
 });
 
-const creditCardInputStyles = createStyles({
-  width: calc.add(system.space.x10, system.space.x10),
-  minWidth: calc.add(system.space.x10, system.space.x10),
-  textAlign: 'center',
-});
-
 const selectStencil = createStencil({
   base: {},
   modifiers: {
@@ -187,7 +181,9 @@ const selectStencil = createStencil({
 });
 
 const inputStencil = createStencil({
-  base: {},
+  base: {
+    minWidth: px2rem(200),
+  },
   modifiers: {
     density: {
       high: {
@@ -204,6 +200,15 @@ const inputStencil = createStencil({
         padding: `${system.space.x3} ${system.space.x2}`,
       },
     },
+  },
+});
+
+const creditCardInputStencil = createStencil({
+  extends: inputStencil,
+  base: {
+    width: calc.add(system.space.x10, system.space.x10),
+    minWidth: calc.add(system.space.x10, system.space.x10),
+    textAlign: 'center',
   },
 });
 
@@ -409,20 +414,20 @@ export const Density = () => {
                   <FormFieldGroup.Input
                     as={TextInput}
                     placeholder="XXXX"
-                    cs={[inputStencil({density}), creditCardInputStyles]}
+                    cs={creditCardInputStencil({density})}
                   />
                   <FormFieldGroup.Input
                     as={TextInput}
                     placeholder="XXXX"
-                    cs={[inputStencil({density}), creditCardInputStyles]}
+                    cs={creditCardInputStencil({density})}
                   />
                   <FormFieldGroup.Input
                     as={TextInput}
                     placeholder="XXXX"
-                    cs={[inputStencil({density}), creditCardInputStyles]}
+                    cs={creditCardInputStencil({density})}
                   />
                   <FormFieldGroup.Input
-                    cs={[inputStencil({density}), creditCardInputStyles]}
+                    cs={creditCardInputStencil({density})}
                     placeholder="XXXX"
                     as={TextInput}
                   />
