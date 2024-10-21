@@ -1,11 +1,7 @@
 import React from 'react';
 
 import {createContainer, ExtractProps} from '@workday/canvas-kit-react/common';
-import {
-  FormField,
-  useFormFieldModel,
-  formFieldStencil,
-} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField, useFormFieldModel, formFieldStencil} from '@workday/canvas-kit-react/form-field';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 import {TextInputField} from './TextInputField';
@@ -39,7 +35,7 @@ export const TextInput = createContainer('div')({
           elemProps,
           formFieldStencil({
             grow,
-            orientation,
+            orientation: orientation === 'horizontal' ? 'horizontalStart' : orientation,
             error: model.state.error,
             required: model.state.isRequired,
           })

@@ -1,6 +1,6 @@
 import React from 'react';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
 import {BodyText} from '@workday/canvas-kit-react/text';
 
@@ -20,17 +20,19 @@ export const HoistedModel = () => {
 
   return (
     <>
-      <Select model={model}>
-        <FormField>
-          <FormField.Label>Contact</FormField.Label>
-          <FormField.Input as={Select.Input} />
-          <Select.Popper>
-            <Select.Card>
-              <Select.List>{item => <Select.Item>{item.text}</Select.Item>}</Select.List>
-            </Select.Card>
-          </Select.Popper>
-        </FormField>
-      </Select>
+      <FormField>
+        <FormField.Label>Contact</FormField.Label>
+        <FormField.Field>
+          <Select model={model}>
+            <FormField.Input as={Select.Input} />
+            <Select.Popper>
+              <Select.Card>
+                <Select.List>{item => <Select.Item>{item.text}</Select.Item>}</Select.List>
+              </Select.Card>
+            </Select.Popper>
+          </Select>
+        </FormField.Field>
+      </FormField>
       <BodyText size="small">Selected Value: {model.state.selectedIds[0]}</BodyText>
       <SecondaryButton
         onClick={() => {
