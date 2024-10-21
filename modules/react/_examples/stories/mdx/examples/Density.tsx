@@ -17,7 +17,6 @@ const formStyles = createStyles({
 const formFieldGroupListStyles = createStyles({
   display: 'inline-flex',
   flexDirection: 'row',
-  padding: system.space.zero,
   flexWrap: 'wrap',
 });
 
@@ -109,13 +108,50 @@ const formFieldStencil = createStencil({
         gap: system.space.x2,
       },
     },
+    labelOrientation: {
+      horizontalStart: {},
+      horizontalEnd: {},
+      vertical: {},
+    },
   },
-});
-
-const creditCardInputStyles = createStyles({
-  width: calc.add(system.space.x10, system.space.x10),
-  minWidth: calc.add(system.space.x10, system.space.x10),
-  textAlign: 'center',
+  compound: [
+    {
+      modifiers: {labelOrientation: 'horizontalStart', density: 'high'},
+      styles: {
+        gap: system.space.x4,
+      },
+    },
+    {
+      modifiers: {labelOrientation: 'horizontalStart', density: 'medium'},
+      styles: {
+        gap: system.space.x6,
+      },
+    },
+    {
+      modifiers: {labelOrientation: 'horizontalStart', density: 'low'},
+      styles: {
+        gap: system.space.x8,
+      },
+    },
+    {
+      modifiers: {labelOrientation: 'horizontalEnd', density: 'high'},
+      styles: {
+        gap: system.space.x4,
+      },
+    },
+    {
+      modifiers: {labelOrientation: 'horizontalEnd', density: 'medium'},
+      styles: {
+        gap: system.space.x6,
+      },
+    },
+    {
+      modifiers: {labelOrientation: 'horizontalEnd', density: 'low'},
+      styles: {
+        gap: system.space.x8,
+      },
+    },
+  ],
 });
 
 const selectStencil = createStencil({
@@ -164,6 +200,15 @@ const inputStencil = createStencil({
         padding: `${system.space.x3} ${system.space.x2}`,
       },
     },
+  },
+});
+
+const creditCardInputStencil = createStencil({
+  extends: inputStencil,
+  base: {
+    width: calc.add(system.space.x10, system.space.x10),
+    minWidth: calc.add(system.space.x10, system.space.x10),
+    textAlign: 'center',
   },
 });
 
@@ -283,7 +328,7 @@ export const Density = () => {
             <FormField
               orientation={labelOrientation}
               grow
-              cs={formFieldStencil({density})}
+              cs={formFieldStencil({density, labelOrientation})}
               id="foo"
             >
               <FormField.Label>Choose Country</FormField.Label>
@@ -300,67 +345,94 @@ export const Density = () => {
                 </Select.Popper>
               </Select>
             </FormField>
-            <FormField grow orientation={labelOrientation} cs={formFieldStencil({density})}>
+            <FormField
+              grow
+              orientation={labelOrientation}
+              cs={formFieldStencil({density, labelOrientation})}
+            >
               <FormField.Label>Full Name</FormField.Label>
               <FormField.Input as={TextInput} cs={inputStencil({density})} />
             </FormField>
-            <FormField grow orientation={labelOrientation} cs={formFieldStencil({density})}>
+            <FormField
+              grow
+              orientation={labelOrientation}
+              cs={formFieldStencil({density, labelOrientation})}
+            >
               <FormField.Label>Phone Number</FormField.Label>
               <FormField.Input as={TextInput} cs={inputStencil({density})} />
             </FormField>
-            <FormField grow orientation={labelOrientation} cs={formFieldStencil({density})}>
+            <FormField
+              grow
+              orientation={labelOrientation}
+              cs={formFieldStencil({density, labelOrientation})}
+            >
               <FormField.Label>Street Address</FormField.Label>
               <FormField.Input as={TextInput} cs={inputStencil({density})} />
             </FormField>
-            <FormField grow orientation={labelOrientation} cs={formFieldStencil({density})}>
+            <FormField
+              grow
+              orientation={labelOrientation}
+              cs={formFieldStencil({density, labelOrientation})}
+            >
               <FormField.Label>City</FormField.Label>
               <FormField.Input as={TextInput} cs={inputStencil({density})} />
             </FormField>
             <div {...sideBySideInputs({labelOrientation: labelOrientation, density})}>
-              <FormField grow orientation={labelOrientation} cs={formFieldStencil({density})}>
+              <FormField
+                grow
+                orientation={labelOrientation}
+                cs={formFieldStencil({density, labelOrientation})}
+              >
                 <FormField.Label>State</FormField.Label>
                 <FormField.Input as={TextInput} cs={inputStencil({density})} />
               </FormField>
               <FormField
                 grow
                 orientation={labelOrientation}
-                cs={[formFieldStencil({density}), zipCodeContainerStyles]}
+                cs={[formFieldStencil({density, labelOrientation}), zipCodeContainerStyles]}
               >
                 <FormField.Label>Zip Code</FormField.Label>
                 <FormField.Input cs={[inputStencil({density}), zipCodeInput]} as={TextInput} />
               </FormField>
             </div>
-            <FormField orientation={labelOrientation} cs={formFieldStencil({density})}>
+            <FormField
+              orientation={labelOrientation}
+              cs={formFieldStencil({density, labelOrientation})}
+            >
               <FormField.Label>Enable Fast Shipping</FormField.Label>
               <FormField.Field>
                 <FormField.Input as={Switch} />
               </FormField.Field>
             </FormField>
-            <FormFieldGroup cs={formFieldStencil({density})} orientation={labelOrientation}>
+            <FormFieldGroup
+              cs={formFieldStencil({density, labelOrientation})}
+              orientation={labelOrientation}
+            >
               <FormFieldGroup.Label>Credit Card</FormFieldGroup.Label>
-
-              <FormFieldGroup.List cs={formFieldGroupListStyles}>
-                <FormFieldGroup.Input
-                  as={TextInput}
-                  placeholder="XXXX"
-                  cs={[inputStencil({density}), creditCardInputStyles]}
-                />
-                <FormFieldGroup.Input
-                  as={TextInput}
-                  placeholder="XXXX"
-                  cs={[inputStencil({density}), creditCardInputStyles]}
-                />
-                <FormFieldGroup.Input
-                  as={TextInput}
-                  placeholder="XXXX"
-                  cs={[inputStencil({density}), creditCardInputStyles]}
-                />
-                <FormFieldGroup.Input
-                  cs={[inputStencil({density}), creditCardInputStyles]}
-                  placeholder="XXXX"
-                  as={TextInput}
-                />
-              </FormFieldGroup.List>
+              <FormFieldGroup.Field>
+                <FormFieldGroup.List cs={formFieldGroupListStyles}>
+                  <FormFieldGroup.Input
+                    as={TextInput}
+                    placeholder="XXXX"
+                    cs={creditCardInputStencil({density})}
+                  />
+                  <FormFieldGroup.Input
+                    as={TextInput}
+                    placeholder="XXXX"
+                    cs={creditCardInputStencil({density})}
+                  />
+                  <FormFieldGroup.Input
+                    as={TextInput}
+                    placeholder="XXXX"
+                    cs={creditCardInputStencil({density})}
+                  />
+                  <FormFieldGroup.Input
+                    cs={creditCardInputStencil({density})}
+                    placeholder="XXXX"
+                    as={TextInput}
+                  />
+                </FormFieldGroup.List>
+              </FormFieldGroup.Field>
             </FormFieldGroup>
           </div>
         </form>
