@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.0.2](https://github.com/Workday/canvas-kit/releases/tag/v12.0.2) (2024-10-21)
+
+### Infrastructure
+
+- fix: Remove duplicate keys from routes ([#2994](https://github.com/Workday/canvas-kit/pull/2994)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v12.0.1](https://github.com/Workday/canvas-kit/releases/tag/v12.0.1) (2024-10-21)
 
 ### Components
