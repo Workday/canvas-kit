@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.0.1](https://github.com/Workday/canvas-kit/releases/tag/v12.0.1) (2024-10-21)
+
+### Components
+
+- chore: Update deprecated urls to CodeshiftCommunity ([#2977](https://github.com/Workday/canvas-kit/pull/2977)) ([@danieldelcore](https://github.com/danieldelcore))
+- fix: Clean up Select file structure and move examples to main react ([#2992](https://github.com/Workday/canvas-kit/pull/2992)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v12.0.0](https://github.com/Workday/canvas-kit/releases/tag/v12.0.0) (2024-10-16)
 
 ### BREAKING CHANGES
