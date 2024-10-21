@@ -11,7 +11,7 @@ import {
 } from '@workday/canvas-kit-react/popup';
 import {ColorPicker} from '@workday/canvas-kit-preview-react/color-picker';
 import {changeFocus} from '@workday/canvas-kit-react/common';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 
 export const ColorInputPopup = () => {
   const defaultColor = colors.blueberry400;

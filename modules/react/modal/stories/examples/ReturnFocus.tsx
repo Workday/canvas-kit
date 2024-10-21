@@ -1,7 +1,7 @@
 import React from 'react';
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {DeleteButton} from '@workday/canvas-kit-react/button';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Flex, Box} from '@workday/canvas-kit-react/layout';
 import {Select} from '@workday/canvas-kit-react/select';
 

@@ -7,6 +7,7 @@ import {
 import {Alert} from './examples/Alert';
 import {Basic} from './examples/Basic';
 import {Complex} from './examples/Complex';
+import {Controlled} from './examples/Controlled';
 import {Disabled} from './examples/Disabled';
 import {DisabledOptions} from './examples/DisabledOption';
 import {Error} from './examples/Error';
@@ -21,6 +22,7 @@ import {FetchingDynamicItems} from './examples/FetchingDynamicItems';
 import {Placeholder} from './examples/Placeholder';
 import {InitialSelectedItem} from './examples/InitialSelectedItem';
 import * as SelectStories from './Select.stories';
+import {Table} from '@workday/canvas-kit-react/table';
 
 <Meta of={SelectStories} />
 
@@ -37,25 +39,6 @@ yarn add @workday/canvas-kit-react
 ```
 
 ## Usage
-
-<InformationHighlight style={{margin: '1.5rem 0'}}>
-  <InformationHighlight.Icon />
-
-{' '}
-
-<InformationHighlight.Heading>Note</InformationHighlight.Heading>
-
-{' '}
-
-<InformationHighlight.Body>
-  These examples are using FormField from Preview. We can plan to promote this component to the Main
-  package in a future major version.
-</InformationHighlight.Body>
-
-  <InformationHighlight.Link href="https://workday.github.io/canvas-kit/?path=/docs/preview-inputs-form-field--basic">
-    View Form Field (Preview) Documentation
-  </InformationHighlight.Link>
-</InformationHighlight>
 
 ### Basic Example
 
@@ -267,6 +250,16 @@ const items = [
   {/* etc */}
 </Select>;
 ```
+
+### Controlled
+
+The Select can be a
+[controlled input](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)
+component by passing the `value` and `onChange` to either the `<Select>` component or the
+`<Select.Input>` component. Internally, the `Select.Input` watches for changes on the `value` React
+prop as well as the `value` DOM property and will update the model accordingly.
+
+<ExampleCodeBlock code={Controlled} />
 
 ### When to use `getId`, or `getTextValue`
 

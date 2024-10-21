@@ -393,6 +393,46 @@ describe('handleCreateStencil', () => {
       );
     });
 
+    it('should wrap variable values with var() if necessary', () => {
+      const program = createProgramFromSource(`
+        import {createStencil} from '@workday/canvas-kit-styling';
+
+        const buttonStencil = createStencil({
+          vars: {
+            color: '--foo'
+          },
+          base({color}) {
+            return {
+              color,
+              padding: 12
+            }
+          }
+        })
+      `);
+
+      const names = {};
+      const styles = {};
+
+      const result = transform(
+        program,
+        'test.ts',
+        withDefaultContext(program.getTypeChecker(), {styles, names})
+      );
+
+      expect(result).toContain(
+        `${names['buttonStencil.vars.color']}:var(--foo);box-sizing:border-box;color:var(${names['buttonStencil.vars.color']});padding:12px;`
+      );
+
+      expect(styles['test.css']).toContainEqual(
+        compileCSS(`.css-button {
+          --css-button-color: var(--foo);
+          box-sizing: border-box;
+          color: var(--css-button-color);
+          padding: 12px;
+        }`)
+      );
+    });
+
     it('should handle parsing modifiers with ObjectLiteralExpressions', () => {
       const program = createProgramFromSource(`
         import {createStencil, parentModifier} from '@workday/canvas-kit-styling';
@@ -482,6 +522,56 @@ describe('handleCreateStencil', () => {
       );
       expect(styles['test.css']).toContainEqual(
         compileCSS('.css-button.size-large{padding: 0.3125rem;}')
+      );
+    });
+
+    it('should handle modifiers with fallthrough keys', () => {
+      const program = createProgramFromSource(`
+        import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+
+        const buttonStencil = createStencil({
+          vars: {
+            padding: ''
+          },
+          base: {},
+          modifiers: {
+            padding: {
+              large: {
+                padding: 40,
+              },
+              small: {
+                padding: 20,
+              }
+              _: ({ padding }) => ({
+                padding
+              })
+            }
+          }
+        })
+      `);
+
+      const styles = {};
+      const names = {};
+      const extractedNames = {};
+
+      const result = transform(
+        program,
+        'test.ts',
+        withDefaultContext(program.getTypeChecker(), {styles, names, extractedNames})
+      );
+
+      expect(result).toMatch(/base: { name: "[0-9a-z]+", styles: "box-sizing:border-box;" }/);
+      expect(result).toMatch(/large: { name: "[0-9a-z]+", styles: "padding:40px;" }/);
+      expect(result).toMatch(
+        /_: { name: "[0-9a-z]+", styles: "padding:var\(--padding-button-[a-z0-9]+\);" }/
+      );
+
+      expect(styles['test.css']).toContainEqual(compileCSS('.css-button{box-sizing:border-box;}'));
+      expect(styles['test.css']).toContainEqual(
+        compileCSS('.css-button.padding-large{padding: 40px;}')
+      );
+      expect(styles['test.css']).toContainEqual(
+        compileCSS('.css-button.padding{padding: var(--css-button-padding)}')
       );
     });
 

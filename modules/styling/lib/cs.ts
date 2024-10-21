@@ -36,7 +36,15 @@ type DefaultedVarsShape = Record<string, string> | Record<string, Record<string,
 
 /**
  * Wrap all unwrapped CSS Variables. For example, `{padding: '--foo'}` will be replaced with
- * `{padding: 'var(--foo)'}`. It also works on variables in the middle of the property.
+ * `{padding: 'var(--foo)'}`. It also works on variables in the middle of the property. Takes any
+ * string and returns a string with CSS variables wrapped if necessary.
+ *
+ * ```ts
+ * maybeWrapCSSVariables('1rem'); // 1rem
+ * maybeWrapCSSVariables('--foo'); // var(--foo)
+ * maybeWrapCSSVariables('var(--foo)'); // var(--foo)
+ * maybeWrapCSSVariables('calc(--foo)'); // calc(var(--foo))
+ * ```
  */
 function maybeWrapCSSVariables(input: string): string {
   // matches an string starting with `--` that isn't already wrapped in a `var()`. It tries to match
@@ -52,11 +60,11 @@ function maybeWrapCSSVariables(input: string): string {
   );
 }
 
-function convertProperty<T>(value: T): T {
+export function wrapProperty<T>(value: T): T {
   // Handle the case where the value is a variable without the `var()` wrapping function. It happens
   // enough that it makes sense to automatically wrap.
   if (typeof value === 'string') {
-    return maybeWrapCSSVariables(value) as any as T;
+    return maybeWrapCSSVariables(value) as T;
   }
   return value;
 }
@@ -65,17 +73,17 @@ function convertProperty<T>(value: T): T {
  * Walks through all the properties and values of a style and converts properties and/or values that
  * need special processing. An example might be using a CSS variable without a `var()` wrapping.
  */
-function convertAllProperties<T extends unknown>(obj: T): T {
+export function wrapAllProperties<T extends unknown>(obj: T): T {
   if (typeof obj === 'object') {
     const converted = {};
     for (const key in obj) {
       if ((obj as Object).hasOwnProperty(key)) {
-        (converted as any)[key] = convertAllProperties(obj[key]);
+        (converted as any)[key] = wrapAllProperties(obj[key]);
       }
     }
     return converted as T;
   }
-  return convertProperty(obj);
+  return wrapProperty(obj);
 }
 
 export type CS = string | Record<string, string>;
@@ -186,7 +194,7 @@ export function createVars<T extends string | DefaultedVarsShape, ID extends str
     args.forEach(key => {
       if (input[key as ToString<T>]) {
         // @ts-ignore TS complains about `key` not in object `{}`
-        vars[result[key]] = convertProperty(input[key]);
+        vars[result[key]] = wrapProperty(input[key]);
       }
     });
     return vars;
@@ -323,7 +331,7 @@ export function createDefaultedVars<T extends DefaultedVarsShape, ID extends str
       if (typeof (input as any)[key] === 'string') {
         if ((result as any)[key]) {
           // Don't add an undefined key
-          vars[(result as any)[key]] = convertProperty((input as any)[key]);
+          vars[(result as any)[key]] = wrapProperty((input as any)[key]);
         }
       }
       if (typeof (input as any)[key] === 'object') {
@@ -331,7 +339,7 @@ export function createDefaultedVars<T extends DefaultedVarsShape, ID extends str
           if (typeof (input as any)[key][subKey] === 'string') {
             // Don't add an undefined key
             if ((result as any)[key][subKey]) {
-              vars[(result as any)[key][subKey]] = convertProperty((input as any)[key][subKey]);
+              vars[(result as any)[key][subKey]] = wrapProperty((input as any)[key][subKey]);
             }
           }
         }
@@ -370,7 +378,7 @@ type ModifierConfig = Record<string, Record<string, CS>>;
  * Helper type to convert `'true'` into `true` for boolean modifiers which are a pain to type as a
  * prop.
  */
-type MaybeBoolean<T> = T extends 'true' ? boolean : T extends 'false' ? boolean : T;
+type MaybeBoolean<T> = T extends 'true' | 'false' ? T | boolean : T;
 
 type ModifierValues<T extends ModifierConfig> = {
   [P in keyof T]: MaybeBoolean<keyof T[P]>;
@@ -407,8 +415,10 @@ export function createModifiers<M extends ModifierConfig>(input: M): ModifierRet
   const modifierFn = (modifiers: Partial<ModifierValues<M>>) => {
     return combineClassNames(
       Object.keys(input)
-        .filter(key => (input as any)[key][modifiers[key]])
-        .map(key => (input as any)[key][modifiers[key]])
+        .map(
+          key => (input as any)[key][modifiers[key]] || (modifiers[key] && (input as any)[key]._)
+        )
+        .filter(input => input) // only return defined class names
     );
   };
 
@@ -539,9 +549,9 @@ export function csToProps(input: CSToPropsInput): CsToPropsReturn {
     const cssVars: Record<string, string> = {};
     for (const key in input) {
       if (key.startsWith('--')) {
-        cssVars[key] = (input as any)[key];
+        cssVars[key] = wrapAllProperties((input as any)[key]);
       } else {
-        (staticStyles as any)[key] = (input as any)[key];
+        (staticStyles as any)[key] = wrapAllProperties((input as any)[key]);
         hasStaticStyles = true;
       }
     }
@@ -637,7 +647,7 @@ export function createStyles(
         return instance.css(input as CastStyleProps);
       }
 
-      const convertedStyles = convertAllProperties(input);
+      const convertedStyles = wrapAllProperties(input);
 
       // We want to call `serializeStyles` directly and ignore the hash generated so we can have
       // more predictable style merging. If 2 different files define the same style properties, the
@@ -653,11 +663,6 @@ export function createStyles(
       // https://codesandbox.io/s/stupefied-bartik-9c2jtd?file=/src/App.tsx
       const {styles} = serializeStyles([convertedStyles as CastStyleProps]);
 
-      // use `css.call()` instead of `css()` to trick Emotion's babel plugin to not rewrite our code
-      // to remove our generated Id for the name:
-      // https://github.com/emotion-js/emotion/blob/f3b268f7c52103979402da919c9c0dd3f9e0e189/packages/babel-plugin/src/utils/transform-expression-with-styles.js#L81-L82
-      // Without this "fix", anyone using the Emotion babel plugin would get different results than
-      // intended when styles are merged.
       const name = generateUniqueId();
       createStylesCache[`${instance.cache.key}-${name}`] = true;
       return instance.css({name, styles});
@@ -745,7 +750,7 @@ export function handleCsProp<
   // In order to allow everyone to use createStyles and createStencil without worrying about style merge issues, we're going
   // to enable compat mode all the time. We'll look into possible out-of-order execution issues in the future and plan to re-enable
   // full static mode (for better performance) once we know why this is happening and have a proper workaround.
-  let shouldRuntimeMergeStyles = true;
+  let shouldRuntimeMergeStyles = false;
 
   // The order is intentional. The `className` should go first, then the `cs` prop. If we don't do
   // runtime merging, this order doesn't actually matter because the browser doesn't care the order
@@ -814,7 +819,7 @@ export type StencilCompoundConfig<M> = {
 };
 
 type ModifierValuesStencil<
-  M extends StencilModifierConfig<any, any>,
+  M extends StencilModifierConfig<any, any> = {},
   V extends DefaultedVarsShape = {}
 > = {
   [P in keyof M]?: P extends keyof V
@@ -979,7 +984,7 @@ export interface StencilConfig<
   defaultModifiers?: [E] extends [never]
     ? StencilDefaultModifierReturn<M>
     : E extends BaseStencil<infer ME, any, any, any>
-    ? StencilDefaultModifierReturn<M & ME>
+    ? StencilDefaultModifierReturn<ME & M>
     : undefined;
 }
 
@@ -992,8 +997,8 @@ type StencilDefaultModifierReturn<M> = {
 };
 
 export interface BaseStencil<
-  M extends StencilModifierConfig<V>,
-  V extends DefaultedVarsShape,
+  M extends StencilModifierConfig<V> = {},
+  V extends DefaultedVarsShape = {},
   E extends BaseStencil<any, any, any, any> = never,
   ID extends string = never
 > {
@@ -1004,8 +1009,8 @@ export interface BaseStencil<
 }
 
 export interface Stencil<
-  M extends StencilModifierConfig<V, E>,
-  V extends DefaultedVarsShape,
+  M extends StencilModifierConfig<V, E> = {},
+  V extends DefaultedVarsShape = {},
   E extends BaseStencil<any, any, any, any> = never,
   ID extends string = never
 > extends BaseStencil<M, V, E, ID> {
@@ -1069,6 +1074,7 @@ function combineClassNames(input: (string | undefined)[]): string {
  *   }
  * })
  * ```
+ * @deprecated `parentModifier` is deprecated. While we support compat mode, we can't use `parentModifier`. If consumers pass in a style prop, this will created an unstable hash, breaking this function.
  */
 export function parentModifier(value: string) {
   return `.${value.replace('css-', 'm')} :where(&)`;
@@ -1079,7 +1085,7 @@ export function parentModifier(value: string) {
  * compound modifiers.
  */
 export function createStencil<
-  M extends StencilModifierConfig<V>,
+  M extends StencilModifierConfig<V>, // TODO: default to `{}` and fix inference in `StyleReturn` types so that modifier style return functions give correct inference to variables
   V extends DefaultedVarsShape = {},
   E extends BaseStencil<any, any, any, any> = never, // use BaseStencil to avoid infinite loops
   ID extends string = never
@@ -1157,7 +1163,7 @@ export function createStencil<
     const inputModifiers = {...composes?.defaultModifiers, ...defaultModifiers};
     // Only override defaults if a value is defined
     for (const key in input) {
-      if (input[key]) {
+      if (input[key] !== undefined) {
         // @ts-ignore
         inputModifiers[key] = input[key];
       }
@@ -1220,7 +1226,7 @@ export const createInstance: typeof _createInstance = options => {
     _instance = _createInstance({key: 'css', ...options});
   } else {
     // @ts-ignore
-    if (process && process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === 'development') {
       console.warn(
         'An instance has already been created. `createInstance` cannot be called after styles have already been created. Canvas Kit styles are created immediately, so this function must be called before any Canvas Kit components are even imported.'
       );

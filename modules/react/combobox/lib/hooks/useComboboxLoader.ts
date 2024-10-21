@@ -59,7 +59,7 @@ export const useComboboxLoader: typeof useListLoader = (config, modelHook) => {
         );
       },
       ...(modelHook.mergeConfig(config, {
-        onChange(event) {
+        onFilterChange(event) {
           const value = event.currentTarget.value;
           debounce(() => list.loader.updateFilter(value), 150);
         },
