@@ -68,8 +68,8 @@ const routes = {
   '/whats-new/upgrade-guides/canvas-kit-v8-upgrade-guide/': 'guides-upgrade-guides-v8-0--docs',
   '/whats-new/upgrade-guides/canvas-v9-upgrade-guide/': 'guides-upgrade-guides-v9-0--docs',
   '/whats-new/upgrade-guides/canvas-v10-upgrade-guide/': 'guides-upgrade-guides-v10-0--docs',
-  '/whats-new/upgrade-guides/canvas-v10-upgrade-guide/': 'guides-upgrade-guides-v11-0--docs',
-  '/whats-new/upgrade-guides/canvas-v10-upgrade-guide/': 'guides-upgrade-guides-v12-0--docs',
+  '/whats-new/upgrade-guides/canvas-v11-upgrade-guide/': 'guides-upgrade-guides-v11-0--docs',
+  '/whats-new/upgrade-guides/canvas-v12-upgrade-guide/': 'guides-upgrade-guides-v12-0--docs',
 };
 
 module.exports = routes;
