@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.0.4](https://github.com/Workday/canvas-kit/releases/tag/v12.0.4) (2024-10-22)
+
+### Infrastructure
+
+- fix: Remove stale Github actions ([#2999](https://github.com/Workday/canvas-kit/pull/2999)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v12.0.3](https://github.com/Workday/canvas-kit/releases/tag/v12.0.3) (2024-10-22)
 
 ### Codemod
