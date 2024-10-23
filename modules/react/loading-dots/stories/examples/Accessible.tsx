@@ -1,6 +1,6 @@
 import React from 'react';
 import {LoadingDots} from '@workday/canvas-kit-react/loading-dots';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {createStyles} from '@workday/canvas-kit-styling';
@@ -11,8 +11,13 @@ const styleOverrides = {
     gap: system.space.x4,
   }),
   loadingStyles: createStyles({
-    backgroundColor: system.color.bg.muted.default,
-    padding: system.space.x3,
+    borderRadius: system.shape.round,
+    backgroundColor: system.color.bg.overlay,
+    height: 80,
+    width: 80,
+    alignItems: 'center',
+    justifyContent: 'center',
+    display: 'flex',
   }),
 };
 
@@ -40,7 +45,12 @@ export const Accessible = () => {
       <SecondaryButton onClick={handleLoad}>Start</SecondaryButton>
       <AriaLiveRegion aria-label="Loading">
         {loadingState === 'loading' && (
-          <LoadingDots cs={styleOverrides.loadingStyles} role="img" aria-label="Please wait..." />
+          <LoadingDots
+            cs={styleOverrides.loadingStyles}
+            backgroundColor={system.color.icon.inverse}
+            role="img"
+            aria-label="Please wait..."
+          />
         )}
         {loadingState === 'success' && <AccessibleHide>Complete.</AccessibleHide>}
       </AriaLiveRegion>
