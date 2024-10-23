@@ -24,6 +24,6 @@ export const Primary = () => (
     <PrimaryButton icon={caretDownIcon} iconPosition="end">
       Primary
     </PrimaryButton>
-    <PrimaryButton size="small" icon={relatedActionsVerticalIcon} />
+    <PrimaryButton icon={relatedActionsVerticalIcon} />
   </Flex>
 );
