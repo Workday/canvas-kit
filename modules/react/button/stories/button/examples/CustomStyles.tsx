@@ -67,6 +67,7 @@ const myCustomStyles = createStyles({
     [buttonStencil.vars.border]: `${px2rem(3)} dotted ${system.color.static.gray.strong}`,
     [systemIconStencil.vars.color]: system.color.static.gray.strong,
     [systemIconStencil.vars.color]: system.color.icon.inverse,
+    border: `${px2rem(3)} dotted ${system.color.static.gray.strong}`,
   },
   '&:active': {
     [buttonStencil.vars.background]: system.color.static.gray.strong,
