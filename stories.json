@@ -145,6 +145,18 @@
         "__isArgsStory": false
       }
     },
+    "components-buttons--custom-styles": {
+      "id": "components-buttons--custom-styles",
+      "name": "Custom Styles",
+      "title": "Components/Buttons",
+      "importPath": "./modules/react/button/stories/button/Button.stories.tsx",
+      "kind": "Components/Buttons",
+      "story": "Custom Styles",
+      "parameters": {
+        "fileName": "./modules/react/button/stories/button/Button.stories.tsx",
+        "__isArgsStory": false
+      }
+    },
     "components-buttons--delete": {
       "id": "components-buttons--delete",
       "name": "Delete",
