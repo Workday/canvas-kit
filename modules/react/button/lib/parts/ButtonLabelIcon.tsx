@@ -43,8 +43,8 @@ export const ButtonLabelIcon = createComponent('span')({
         size={iconSize}
         icon={icon}
         shouldMirror={shouldMirrorIcon}
-        width={size ? px2rem(iconSizes[size]) : iconSizes.large}
-        height={size ? px2rem(iconSizes[size]) : iconSizes.large}
+        width={px2rem(iconSize)}
+        height={px2rem(iconSize)}
         display="inline-block"
         {...elemProps}
       />
