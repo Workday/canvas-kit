@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.1.18](https://github.com/Workday/canvas-kit/releases/tag/v11.1.18) (2024-10-23)
+
+### Components
+
+- fix: Ensure button label icon uses rem ([#3001](https://github.com/Workday/canvas-kit/pull/3001)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v11.1.17](https://github.com/Workday/canvas-kit/releases/tag/v11.1.17) (2024-10-11)
 
 ### Components
