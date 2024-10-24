@@ -26,6 +26,11 @@ export const OverflowBreadcrumbs = () => {
   return (
     <div>
       <Box width={containerWidth} marginBottom="xl">
+        <div style={{display: 'flex', flexDirection: 'column'}}>
+          <span>Current Container Width: {containerWidth}</span>
+          <span>Overflow visibility: {model.menu.state.visibility}</span>
+        </div>
+        <hr />
         <Breadcrumbs model={model} aria-label="Breadcrumbs">
           <Breadcrumbs.List overflowButton={<Breadcrumbs.OverflowButton aria-label="More links" />}>
             {item =>
