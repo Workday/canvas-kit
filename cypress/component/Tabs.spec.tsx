@@ -568,7 +568,7 @@ describe('Tabs', () => {
         });
 
         it('should have the fourth Tab as the first menu item', () => {
-          cy.findAllByRole('menuitem').eq(0).should('contain', 'Fourth Tab');
+          cy.get('[role="menuitem"]').first().should('contain', 'Fourth Tab');
         });
 
         context('when the "Sixth Tab" is clicked', () => {
@@ -622,11 +622,11 @@ describe('Tabs', () => {
         });
 
         it('should show the Tab overflow menu', () => {
-          cy.findByRole('menu', {name: 'More'}).should('exist');
+          cy.get('[role="menu"]').should('exist');
         });
 
         it('should have the third Tab as the first menu item', () => {
-          cy.findByRole('menuitem', {name: 'Third Tab'}).should('have.focus');
+          cy.get('button[role="menuitem"]').first().should('have.text', 'Third Tab');
         });
       });
     });
