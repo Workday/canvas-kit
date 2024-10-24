@@ -49,6 +49,7 @@ export const OverflowBreadcrumbs = () => {
           </Breadcrumbs.Menu.Popper>
         </Breadcrumbs>
       </Box>
+      Current Container Width: {containerWidth}
       <hr />
       <h4>Change Breadcrumbs container size</h4>
       <SegmentedControl onSelect={data => setContainerWidth(data.id)}>

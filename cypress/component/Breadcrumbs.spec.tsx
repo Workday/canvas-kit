@@ -134,9 +134,11 @@ describe('Breadcrumbs', () => {
       context('when action list container is only 480px wide', () => {
         beforeEach(() => {
           cy.findByRole('button', {name: '480px'}).click();
+          cy.findByText('Current Container Width: 480px');
         });
 
         it('should have 4 items inside the "list"', () => {
+          // cy.findByText('Current Container Width: 480px');
           cy.findByRole('list').findAllByRole('listitem').should('have.length', 4);
         });
 
@@ -162,6 +164,7 @@ describe('Breadcrumbs', () => {
       context('when action list container is only 250px wide', () => {
         beforeEach(() => {
           cy.findByRole('button', {name: '250px'}).click();
+          cy.findByText('Current Container Width: 250px');
         });
 
         it('should have 3 list items inside the "list"', () => {
@@ -190,6 +193,7 @@ describe('Breadcrumbs', () => {
       context('when action list container is only 150px wide', () => {
         beforeEach(() => {
           cy.findByRole('button', {name: '150px'}).click();
+          cy.findByText('Current Container Width: 150px');
         });
 
         it('should have 2 list items inside the "list"', () => {
@@ -223,6 +227,7 @@ describe('Breadcrumbs', () => {
       beforeEach(() => {
         cy.mount(<OverflowBreadcrumbs />);
         cy.findByRole('button', {name: '480px'}).click();
+        cy.findByText('Current Container Width: 480px');
         openDropdownMenu();
       });
 
