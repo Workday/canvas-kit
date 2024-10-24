@@ -229,6 +229,7 @@ describe('Breadcrumbs', () => {
         cy.findByRole('button', {name: '480px'}).click();
         cy.findByText('Current Container Width: 480px');
         openDropdownMenu();
+        cy.findByText('Overflow visibility: visible');
       });
 
       it('should not have any axe errors', () => {
@@ -253,7 +254,6 @@ describe('Breadcrumbs', () => {
 
       context('when the dropdown menu is toggled with a keypress', () => {
         it('should set focus to the first menu item', () => {
-          cy.get('[role="menuitem"]').first().should('exist');
           cy.get('[role="menuitem"]').first().focused().should('contain', 'Second Link');
         });
       });
