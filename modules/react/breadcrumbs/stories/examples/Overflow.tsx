@@ -54,10 +54,6 @@ export const OverflowBreadcrumbs = () => {
           </Breadcrumbs.Menu.Popper>
         </Breadcrumbs>
       </Box>
-      <div style={{display: 'flex', flexDirection: 'column'}}>
-        <span>Current Container Width: {containerWidth}</span>
-        <span>Overflow visibility: {model.menu.state.visibility}</span>
-      </div>
       <hr />
       <h4>Change Breadcrumbs container size</h4>
       <SegmentedControl onSelect={data => setContainerWidth(data.id)}>
