@@ -297,6 +297,7 @@ describe('Breadcrumbs', () => {
         beforeEach(() => {
           // set focus to the second menuitem
           cy.focused().realType('{downarrow}');
+          cy.findByText('Overflow visibility: visible');
         });
 
         it('should toggle focus to the previous list item', () => {
