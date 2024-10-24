@@ -130,11 +130,7 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
       import { Flex } from '@workday/canvas-kit-react/layout';
 
       const CustomStack = () => {
-        return (
-          <Flex>
-            Hello World
-          </Flex>
-        );
+        return (<Flex>Hello World</Flex>);
       };
 
       const AnotherStack = (props) => {
@@ -188,11 +184,7 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
       import {Flex} from '@workday/canvas-kit-react/layout';
 
       const CustomHStack = () => {
-        return (
-          <Flex>
-            Hello World
-          </Flex>
-        );
+        return (<Flex>Hello World</Flex>);
       };
 
       const AnotherHStack = (props) => {
@@ -224,11 +216,7 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
       import {Flex} from '@workday/canvas-kit-react/layout';
 
       const CustomVStack = () => {
-        return (
-          <Flex flexDirection="column">
-            Hello World
-          </Flex>
-        );
+        return (<Flex flexDirection="column">Hello World</Flex>);
       };
 
       const AnotherVStack = (props) => {
@@ -276,9 +264,9 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
       import { CustomCard } from '../components/CustomCard';
 
       return (
-        <Flex gap="s">
+        (<Flex gap="s">
           <CustomCard spacing="s" />
-        </Flex>
+        </Flex>)
       );
       `;
 
