@@ -261,7 +261,6 @@ describe('Breadcrumbs', () => {
       context('when the first menu item is focused', () => {
         beforeEach(() => {
           cy.focused().realType('{downarrow}');
-          cy.wait(0);
         });
 
         it('should toggle focus to the second menu item on down keypress', () => {
@@ -286,7 +285,6 @@ describe('Breadcrumbs', () => {
       context('when the down arrow key is pressed on the dropdown menu', () => {
         beforeEach(() => {
           cy.focused().realType('{downarrow}');
-          cy.wait(0);
         });
 
         it('should toggle focus to the next menu item on down keypress', () => {
