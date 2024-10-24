@@ -189,7 +189,7 @@ export const buttonStencil = createStencil({
         ),
         outerColor: cssVar(
           buttonColorPropVars.focus.boxShadowOuter,
-          cssVar(boxShadowOuter, brand.primary.base)
+          cssVar(boxShadowOuter, brand.common.focusOutline)
         ),
       }),
     },

@@ -3,7 +3,7 @@ import {keyframes} from '@emotion/react';
 
 import {Card} from '@workday/canvas-kit-react/card';
 import {Checkbox} from '@workday/canvas-kit-react/checkbox';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {SystemIconCircle} from '@workday/canvas-kit-react/icon';
 import {TextInput} from '@workday/canvas-kit-react/text-input';

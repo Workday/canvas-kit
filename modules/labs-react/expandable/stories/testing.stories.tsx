@@ -13,8 +13,6 @@ const meta: Meta = withSnapshotsEnabled({
   component: Expandable,
 });
 
-console.log(meta);
-
 // export default meta;
 
 export default {

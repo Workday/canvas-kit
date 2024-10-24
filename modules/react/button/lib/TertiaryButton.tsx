@@ -6,7 +6,6 @@ import {calc, createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {system, brand} from '@workday/canvas-tokens-web';
 import {Button, ButtonProps} from './Button';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 /**
  * Extends all the style properties from Box to our buttons as well as props from ButtonProps.
@@ -291,6 +290,8 @@ export const TertiaryButton = createComponent('button')({
       size = 'medium',
       variant,
       iconPosition,
+      grow,
+      cs,
       ...elemProps
     }: TertiaryButtonProps,
     ref,
@@ -311,15 +312,18 @@ export const TertiaryButton = createComponent('button')({
         icon={icon}
         size={size}
         iconPosition={iconPosition}
-        {...mergeStyles(
-          elemProps,
+        grow={grow}
+        cs={[
           tertiaryButtonStencil({
-            variant,
             size,
+            variant,
+            grow,
             isThemeable: (isThemeable || baseIconPosition !== 'only') as any,
             iconPosition: baseIconPosition,
-          })
-        )}
+          }),
+          cs,
+        ]}
+        {...elemProps}
       >
         {children}
       </Button>

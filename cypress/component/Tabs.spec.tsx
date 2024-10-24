@@ -522,6 +522,7 @@ describe('Tabs', () => {
     context('when tab list container is only 500px wide', () => {
       beforeEach(() => {
         cy.findByRole('button', {name: '500px'}).click();
+        cy.findByRole('button', {name: '500px'}).should('have.attr', 'aria-pressed', 'true');
       });
 
       it('should pass axe checks', () => {
@@ -589,6 +590,7 @@ describe('Tabs', () => {
     context('when tab list container is only 360px wide', () => {
       beforeEach(() => {
         cy.findByRole('button', {name: '360px'}).click();
+        cy.findByRole('button', {name: '360px'}).should('have.attr', 'aria-pressed', 'true');
       });
 
       it('should pass axe checks', () => {
@@ -615,6 +617,7 @@ describe('Tabs', () => {
 
       context('when the "More" button is clicked', () => {
         beforeEach(() => {
+          cy.findByRole('button', {name: '360px'}).should('have.attr', 'aria-pressed', 'true');
           cy.findByRole('button', {name: 'More'}).click();
         });
 
@@ -631,6 +634,7 @@ describe('Tabs', () => {
     context('when tab list container is only 150px wide', () => {
       beforeEach(() => {
         cy.findByRole('button', {name: '150px'}).click();
+        cy.findByRole('button', {name: '150px'}).should('have.attr', 'aria-pressed', 'true');
       });
 
       it('should pass axe checks', () => {

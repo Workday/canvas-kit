@@ -1,6 +1,6 @@
 import React from 'react';
 import {Checkbox} from '@workday/canvas-kit-react/checkbox';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 
 export const Error = () => {
   const [checked, setChecked] = React.useState(false);
@@ -10,8 +10,9 @@ export const Error = () => {
   };
 
   return (
-    <FormField error="error" orientation="horizontalStart">
-      <FormField.Container>
+    <FormField error="error">
+      <FormField.Label>Confirm</FormField.Label>
+      <FormField.Field>
         <FormField.Input
           as={Checkbox}
           checked={checked}
@@ -19,7 +20,7 @@ export const Error = () => {
           onChange={handleChange}
         />
         <FormField.Hint>You must agree to the terms before proceeding</FormField.Hint>
-      </FormField.Container>
+      </FormField.Field>
     </FormField>
   );
 };

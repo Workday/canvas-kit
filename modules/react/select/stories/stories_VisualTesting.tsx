@@ -6,7 +6,7 @@ import {
   StaticStates,
 } from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled, customColorTheme} from '../../../../utils/storybook';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 
 import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
 
@@ -23,6 +23,10 @@ const options = [
   {id: 'Mobile Phone'},
   {
     id: 'The Ontologically Anthropocentric Sensory Immersive Simulation',
+    disabled: false,
+  },
+  {
+    id: 'Thisisalongstringwithnobreaksandwillwrap',
     disabled: false,
   },
 ];

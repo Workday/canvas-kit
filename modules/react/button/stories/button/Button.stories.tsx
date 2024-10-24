@@ -8,6 +8,7 @@ import {SecondaryInverse as SecondaryInverseExample} from './examples/SecondaryI
 import {Tertiary as TertiaryExample} from './examples/Tertiary';
 import {TertiaryInverse as TertiaryInverseExample} from './examples/TertiaryInverse';
 import {Delete as DeleteExample} from './examples/Delete';
+import {CustomStyles as CustomStylesExample} from './examples/CustomStyles';
 
 export default {
   title: 'Components/Buttons',
@@ -39,4 +40,7 @@ export const TertiaryInverse = {
 };
 export const Delete = {
   render: DeleteExample,
+};
+export const CustomStyles = {
+  render: CustomStylesExample,
 };

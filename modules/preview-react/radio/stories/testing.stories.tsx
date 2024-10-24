@@ -6,7 +6,7 @@ import {
   permutateProps,
 } from '@workday/canvas-kit-react/testing';
 import {customColorTheme} from '../../../../utils/storybook';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormFieldGroup} from '@workday/canvas-kit-react/form-field';
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 
 const hintText = 'Helpful text goes here.';
@@ -23,20 +23,20 @@ export default {
 };
 
 const testGroup = (
-  <FormField.Input as={RadioGroup} name="contact" value={'email'}>
-    <RadioGroup.RadioButton id="1" value="email">
+  <FormFieldGroup.List as={RadioGroup} name="contact" value={'email'}>
+    <FormFieldGroup.Input as={RadioGroup.RadioButton} id="1" value="email">
       Email
-    </RadioGroup.RadioButton>
-    <RadioGroup.RadioButton id="2" value="phone">
+    </FormFieldGroup.Input>
+    <FormFieldGroup.Input as={RadioGroup.RadioButton} id="2" value="phone">
       Phone
-    </RadioGroup.RadioButton>
-    <RadioGroup.RadioButton id="3" disabled={true} value="fax">
+    </FormFieldGroup.Input>
+    <FormFieldGroup.Input as={RadioGroup.RadioButton} id="3" disabled={true} value="fax">
       Fax (disabled)
-    </RadioGroup.RadioButton>
-    <RadioGroup.RadioButton id="4" value="mail">
+    </FormFieldGroup.Input>
+    <FormFieldGroup.Input as={RadioGroup.RadioButton} id="4" value="mail">
       "Mail (US Postal Service aka USPS), a longer than normal label"
-    </RadioGroup.RadioButton>
-  </FormField.Input>
+    </FormFieldGroup.Input>
+  </FormFieldGroup.List>
 );
 
 export const RadioStates = {
@@ -98,30 +98,29 @@ export const RadioStates = {
             })}
             columnProps={[
               {
-                label: 'Left Label',
+                label: 'Horizontal Start',
                 props: {label: 'Contact', labelPosition: 'horizontalStart'},
               },
               {
                 label: 'Top Label',
-                props: {label: 'Contact'},
+                props: {label: 'Contact', labelPosition: 'vertical'},
+              },
+              {
+                label: 'Horizontal End',
+                props: {label: 'Contact', labelPosition: 'horizontalEnd'},
               },
             ]}
           >
             {props => (
-              <FormField
-                as="fieldset"
-                id={hintId}
-                orientation={props.labelPosition}
-                error={props.error}
-              >
-                <FormField.Label as="legend">{props.label}</FormField.Label>
-                <FormField.Container>
+              <FormFieldGroup id={hintId} orientation={props.labelPosition} error={props.error}>
+                <FormFieldGroup.Label>{props.label}</FormFieldGroup.Label>
+                <FormFieldGroup.Field>
                   {testGroup}
-                  <FormField.Hint>
+                  <FormFieldGroup.Hint>
                     {typeof props.error !== 'undefined' ? hintText : undefined}
-                  </FormField.Hint>
-                </FormField.Container>
-              </FormField>
+                  </FormFieldGroup.Hint>
+                </FormFieldGroup.Field>
+              </FormFieldGroup>
             )}
           </ComponentStatesTable>
         </StaticStates>
@@ -143,43 +142,38 @@ export const RadioStates = {
             ]}
           >
             {props => (
-              <FormField
-                as="fieldset"
-                id={hintId}
-                orientation={props.labelPosition}
-                error={props.error}
-              >
-                <FormField.Label as="legend">{props.label}</FormField.Label>
-                <FormField.Container>
+              <FormFieldGroup id={hintId} orientation={'vertical'} error={props.error}>
+                <FormFieldGroup.Label>{props.label}</FormFieldGroup.Label>
+                <FormFieldGroup.Field>
                   {testGroup}
-                  <FormField.Hint>
+                  <FormFieldGroup.Hint>
                     {typeof props.error !== 'undefined' ? hintText : undefined}
-                  </FormField.Hint>
-                </FormField.Container>
-              </FormField>
+                  </FormFieldGroup.Hint>
+                </FormFieldGroup.Field>
+              </FormFieldGroup>
             )}
           </ComponentStatesTable>
         </StaticStates>
         <h3>RadioGroup (wrapping)</h3>
         <div style={{maxWidth: 480}}>
-          <FormField orientation="horizontalStart" as="fieldset">
-            <FormField.Label as="legend">
+          <FormFieldGroup orientation="horizontalStart">
+            <FormFieldGroup.Label>
               Really long label. Really long label. Really long label. Really long label. Really
               long label. Really long label.
-            </FormField.Label>
-            <FormField.Container>{testGroup}</FormField.Container>
-          </FormField>
-          <FormField as="fieldset">
-            <FormField.Label as="legend">
+            </FormFieldGroup.Label>
+            <FormFieldGroup.Field>{testGroup}</FormFieldGroup.Field>
+          </FormFieldGroup>
+          <FormFieldGroup>
+            <FormFieldGroup.Label>
               Really long label. Really long label. Really long label. Really long label. Really
               long label. Really long label. Really long label. Really long label. Really long
               label. Really long label. Really long label. Really long label. Really long label.
               Really long label. Really long label. Really long label. Really long label. Really
               long label. Really long label. Really long label. Really long label. Really long
               label. Really long label. Really long label. Really long label. Really long label.
-            </FormField.Label>
-            {testGroup}
-          </FormField>
+            </FormFieldGroup.Label>
+            <FormFieldGroup.Field>{testGroup}</FormFieldGroup.Field>
+          </FormFieldGroup>
         </div>
       </div>
     );

@@ -5,14 +5,14 @@ import {
   ComboBoxMenuItemGroup,
 } from '@workday/canvas-kit-labs-react/combobox';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {StyledMenuItem, MenuItemProps} from '@workday/canvas-kit-react/menu';
+import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
+import {CanvasProvider, ContentDirection, ExtractProps} from '@workday/canvas-kit-react/common';
 
 const autocompleteResult = (
   textModifier: number,
   disabled: boolean
-): ReactElement<MenuItemProps> => (
+): ReactElement<ExtractProps<typeof StyledMenuItem>> => (
   <StyledMenuItem isDisabled={disabled}>
     Result
     <span>
@@ -79,8 +79,11 @@ const Autocomplete: FC<
 export const RTL = () => {
   return (
     <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
-      <FormField id="rtl-autocomplete-123" label="RTL Autocomplete example">
-        <Autocomplete />
+      <FormField id="rtl-autocomplete-123">
+        <FormField.Label>RTL Autocomplete example</FormField.Label>
+        <FormField.Field>
+          <FormField.Input as={Autocomplete} />
+        </FormField.Field>
       </FormField>
     </CanvasProvider>
   );

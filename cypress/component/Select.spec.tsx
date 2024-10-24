@@ -117,7 +117,10 @@ describe('Select', () => {
 
             context('the menu', () => {
               it('should scroll so that the "San Francisco (United States)" option is fully visible', () => {
-                cy.findByText('San Francisco (United States)').should('have.class', 'focus');
+                cy.findByRole('option', {name: 'San Francisco (United States)'}).should(
+                  'have.class',
+                  'focus'
+                );
               });
             });
           });
@@ -130,7 +133,10 @@ describe('Select', () => {
 
             context('the menu', () => {
               it('should scroll so that the "San Mateo (United States)" option is fully visible', () => {
-                cy.findByText('San Mateo (United States)').should('have.class', 'focus');
+                cy.findByRole('option', {name: 'San Mateo (United States)'}).should(
+                  'have.class',
+                  'focus'
+                );
               });
             });
           });
@@ -143,7 +149,10 @@ describe('Select', () => {
 
             context('the menu', () => {
               it('should scroll so that the "Dallas (United States)" option is fully visible', () => {
-                cy.findByText('Dallas (United States)').should('have.class', 'focus');
+                cy.findByRole('option', {name: 'Dallas (United States)'}).should(
+                  'have.class',
+                  'focus'
+                );
               });
             });
           });
@@ -160,7 +169,10 @@ describe('Select', () => {
 
             context('the menu', () => {
               it('should set assistive focus to the "San Francisco (United States)" option', () => {
-                cy.findByText('San Francisco (United States)').should('have.class', 'focus');
+                cy.findByRole('option', {name: 'San Francisco (United States)'}).should(
+                  'have.class',
+                  'focus'
+                );
               });
             });
           });
@@ -172,7 +184,10 @@ describe('Select', () => {
 
             context('the select input', () => {
               it('should set assistive focus to the "San Francisco (United States)" option', () => {
-                cy.findByText('San Francisco (United States)').should('have.class', 'focus');
+                cy.findByRole('option', {name: 'San Francisco (United States)'}).should(
+                  'have.class',
+                  'focus'
+                );
               });
             });
           });
@@ -185,7 +200,10 @@ describe('Select', () => {
 
             context('the select input', () => {
               it('should set assistive focus to the "San Mateo (United States)" option', () => {
-                cy.findByText('San Mateo (United States)').should('have.class', 'focus');
+                cy.findByRole('option', {name: 'San Mateo (United States)'}).should(
+                  'have.class',
+                  'focus'
+                );
               });
             });
           });
@@ -203,7 +221,10 @@ describe('Select', () => {
 
           context('the menu', () => {
             it('should scroll so that the "Dallas (United States)" option is centered in view', () => {
-              cy.findByText('Dallas (United States)').should('have.class', 'focus');
+              cy.findByRole('option', {name: 'Dallas (United States)'}).should(
+                'have.class',
+                'focus'
+              );
             });
           });
         });
@@ -220,8 +241,8 @@ describe('Select', () => {
       cy.findByRole('combobox').should('have.attr', 'role', 'combobox');
     });
 
-    it('should have an `aria-popup="menu"`', () => {
-      cy.findByRole('combobox').should('have.attr', 'aria-haspopup', 'menu');
+    it('should have an `aria-popup="listbox"`', () => {
+      cy.findByRole('combobox').should('have.attr', 'aria-haspopup', 'listbox');
     });
 
     it('should have an `aria-expanded="false"`', () => {
@@ -423,8 +444,8 @@ describe('Select', () => {
       });
       context('when Boulder is reached via the arrow key', () => {
         it('should show Boulder (United States)', () => {
-          cy.findByText('Boulder (United States)').should('have.class', 'focus');
-          cy.findByText('Boulder (United States)').should('be.visible');
+          cy.findByRole('option', {name: 'Boulder (United States)'}).should('have.class', 'focus');
+          cy.findByRole('option', {name: 'Boulder (United States)'}).should('be.visible');
         });
       });
     });
@@ -483,7 +504,7 @@ describe('Select', () => {
       context(`when the "Phone" option (with the value "phone") is clicked`, () => {
         beforeEach(() => {
           cy.findByLabelText('Contact');
-          cy.findByText('Phone').click();
+          cy.findByRole('option', {name: 'Phone'}).click();
         });
 
         context('the select input', () => {
@@ -509,7 +530,7 @@ describe('Select', () => {
 
           context('the menu', () => {
             it('should set assistive focus to the "Phone" option', () => {
-              cy.findByText('Phone').should('have.class', 'focus');
+              cy.findByRole('option', {name: 'Phone'}).should('have.class', 'focus');
             });
           });
         });

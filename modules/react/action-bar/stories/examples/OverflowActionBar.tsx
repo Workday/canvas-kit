@@ -66,6 +66,7 @@ export const OverflowActionBar = () => {
             </SegmentedControl.Item>
           </SegmentedControl.List>
         </SegmentedControl>
+        <p>Selected: {containerWidth}</p>
       </footer>
     </div>
   );

@@ -2,7 +2,7 @@ import React from 'react';
 
 import {createStencil} from '@workday/canvas-kit-styling';
 import {ColorInput} from '@workday/canvas-kit-react/color-picker';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 
 const buttonStencil = createStencil({
   vars: {

@@ -1,10 +1,12 @@
 import * as React from 'react';
 import {CountBadge} from '@workday/canvas-kit-react/badge';
 import {SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
-import {accessibleHide} from '@workday/canvas-kit-react/common';
+import {AriaLiveRegion, useUniqueId} from '@workday/canvas-kit-react/common';
 import {createStyles, cssVar} from '@workday/canvas-kit-styling';
 import {notificationsIcon} from '@workday/canvas-system-icons-web';
 import {base, system} from '@workday/canvas-tokens-web';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
 function negate(value: string, fallback?: string) {
   return `calc(${cssVar(value, fallback)} * -1)`;
@@ -12,16 +14,13 @@ function negate(value: string, fallback?: string) {
 
 const container = createStyles({
   boxSizing: 'border-box',
-  display: 'flex',
   flexDirection: 'column',
   gap: system.space.x4,
 });
 
 const controls = createStyles({
   boxSizing: 'border-box',
-  borderBottom: `solid 1px ${cssVar(base.soap400)}`,
-  display: 'flex',
-  gap: system.space.x1,
+  gap: system.space.x2,
   padding: system.space.x1,
 });
 
@@ -33,40 +32,46 @@ const notificationContainerStyles = createStyles({
 const countBadgeStyles = createStyles({
   boxSizing: 'border-box',
   position: 'absolute',
-  top: negate(system.space.x4),
+  top: negate(system.space.x1),
   insetInlineEnd: negate(system.space.x1),
 });
 
-const accessibleHideStyles = createStyles(accessibleHide);
-
+// Testing notes (Aug. 30, 2024):
+// Windows 11
+// JAWS 2024 + Chrome / Edge: "New notifications" once, then only the count change "2"
+// JAWS 2024 + FF: "New notifications" once, then describes nothing
+// NVDA + Chrome / Edge: Consistently describes "{X} New notifications"
+// NVDA + FF: Consistently describes count value only "{X}"
+// macOS v14.6.1
+// VoiceOver + Chrome / Safari: Consistently describes "New notifications {X}"
 export function NotificationBadge() {
   const [count, setCount] = React.useState(4);
+  const badgeID = useUniqueId();
 
   return (
-    <div className={container}>
-      <div className={controls}>
+    <Flex cs={container}>
+      <Flex cs={controls}>
         <TertiaryButton size="small" onClick={() => setCount(count + 1)}>
           Add Notification
         </TertiaryButton>
         <TertiaryButton size="small" onClick={() => setCount(0)}>
           Clear
         </TertiaryButton>
-      </div>
-      <div>
+      </Flex>
+      <Flex>
         <span className={notificationContainerStyles}>
-          <SecondaryButton
-            aria-label={`Alerts ${count} new notifications`}
-            size="medium"
-            icon={notificationsIcon}
-          />
-          {!!count && (
-            <CountBadge count={count} limit={100} aria-hidden="true" cs={countBadgeStyles} />
-          )}
-          <div className={accessibleHideStyles} role="status" aria-live="polite" aria-atomic="true">
-            New notifications
-          </div>
+          <Tooltip title="Notifications">
+            <SecondaryButton
+              size="medium"
+              icon={notificationsIcon}
+              aria-describedby={!!count ? badgeID : undefined}
+            />
+          </Tooltip>
+          <AriaLiveRegion aria-label={!!count ? 'New notifications' : undefined}>
+            {!!count && <CountBadge id={badgeID} count={count} limit={100} cs={countBadgeStyles} />}
+          </AriaLiveRegion>
         </span>
-      </div>
-    </div>
+      </Flex>
+    </Flex>
   );
 }
