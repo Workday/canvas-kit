@@ -11,13 +11,8 @@ const styleOverrides = {
     gap: system.space.x4,
   }),
   loadingStyles: createStyles({
-    borderRadius: system.shape.round,
-    backgroundColor: system.color.bg.overlay,
-    height: 80,
-    width: 80,
-    alignItems: 'center',
-    justifyContent: 'center',
-    display: 'flex',
+    backgroundColor: system.color.bg.muted.default,
+    padding: system.space.x3,
   }),
 };
 
@@ -45,12 +40,7 @@ export const Accessible = () => {
       <SecondaryButton onClick={handleLoad}>Start</SecondaryButton>
       <AriaLiveRegion aria-label="Loading">
         {loadingState === 'loading' && (
-          <LoadingDots
-            cs={styleOverrides.loadingStyles}
-            backgroundColor={system.color.icon.inverse}
-            role="img"
-            aria-label="Please wait..."
-          />
+          <LoadingDots cs={styleOverrides.loadingStyles} role="img" aria-label="Please wait..." />
         )}
         {loadingState === 'success' && <AccessibleHide>Complete.</AccessibleHide>}
       </AriaLiveRegion>

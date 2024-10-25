@@ -7,6 +7,7 @@ import {LoadingDots} from '@workday/canvas-kit-react/loading-dots';
 import {Basic as BasicExample} from './examples/Basic';
 import {RTL as RTLExample} from './examples/RTL';
 import {Accessible as AccessibleExample} from './examples/Accessible';
+import {CircleVariant as CircleVariantExample} from './examples/CircleVariant';
 
 export default {
   title: 'Components/Indicators/Loading Dots',
@@ -29,4 +30,7 @@ export const RTL: Story = {
 };
 export const Accessible: Story = {
   render: AccessibleExample,
+};
+export const CircleVariant: Story = {
+  render: CircleVariantExample,
 };

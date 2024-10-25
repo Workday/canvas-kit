@@ -15,7 +15,7 @@ const keyframesLoading = keyframes({
   },
 });
 
-const singleLoadingDotStencil = createStencil({
+export const singleLoadingDotStencil = createStencil({
   vars: {
     animationDurationMs: '40ms',
     backgroundColor: system.color.bg.alt.strong,
