@@ -65,10 +65,7 @@ export const Density = () => {
   });
 
   return (
-    <CanvasProvider
-      theme={canvasTheme}
-      // customTheme={{density, containerAlignment, labelOrientation}}
-    >
+    <CanvasProvider theme={canvasTheme}>
       <Heading size="small">Choose Your Density and Alignment</Heading>
       <div className={optionStyles}>
         <div className={optionItemStyles}>

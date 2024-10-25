@@ -7,7 +7,6 @@ import {createStyles, getCache} from '@workday/canvas-kit-styling';
 
 export interface CanvasProviderProps {
   theme?: PartialEmotionCanvasTheme;
-  // customTheme?: {};
 }
 
 // copied from brand/_variables.css
@@ -85,8 +84,7 @@ export const useCanvasThemeToCssVars = (
 
 export const CanvasProvider = ({
   children,
-  theme = {canvas: defaultCanvasTheme},
-  // customTheme = {},
+  theme = {canvas: defaultCanvasTheme, custom: {}},
   ...props
 }: CanvasProviderProps & React.HTMLAttributes<HTMLElement>) => {
   const elemProps = useCanvasThemeToCssVars(theme, props);
@@ -113,7 +111,7 @@ export type CanvasProviderType = {
 };
 
 const CanvasThemeContext = React.createContext<CanvasProviderType>({
-  theme: {},
+  theme: {custom: {}},
 });
 export const useCanvasProvider = () => {
   return React.useContext(CanvasThemeContext);
