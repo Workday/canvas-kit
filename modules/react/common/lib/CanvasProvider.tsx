@@ -7,6 +7,7 @@ import {createStyles, getCache} from '@workday/canvas-kit-styling';
 
 export interface CanvasProviderProps {
   theme?: PartialEmotionCanvasTheme;
+  customTheme?: {};
 }
 
 // copied from brand/_variables.css
@@ -85,21 +86,37 @@ export const useCanvasThemeToCssVars = (
 export const CanvasProvider = ({
   children,
   theme = {canvas: defaultCanvasTheme},
+  customTheme = {},
   ...props
 }: CanvasProviderProps & React.HTMLAttributes<HTMLElement>) => {
   const elemProps = useCanvasThemeToCssVars(theme, props);
   const cache = getCache();
   return (
-    <CacheProvider value={cache}>
-      <ThemeProvider theme={theme as Theme}>
-        <InputProvider />
-        <div
-          dir={theme?.canvas?.direction || defaultCanvasTheme.direction}
-          {...(elemProps as React.HTMLAttributes<HTMLDivElement>)}
-        >
-          {children}
-        </div>
-      </ThemeProvider>
-    </CacheProvider>
+    <CanvasThemeContext.Provider value={{theme: theme, customTheme}}>
+      <CacheProvider value={cache}>
+        <ThemeProvider theme={theme as Theme}>
+          <InputProvider />
+          <div
+            dir={theme?.canvas?.direction || defaultCanvasTheme.direction}
+            {...(elemProps as React.HTMLAttributes<HTMLDivElement>)}
+          >
+            {children}
+          </div>
+        </ThemeProvider>
+      </CacheProvider>
+    </CanvasThemeContext.Provider>
   );
+};
+
+export type CanvasProviderType = {
+  theme: PartialEmotionCanvasTheme;
+  customTheme: {[key: string]: any};
+};
+
+const CanvasThemeContext = React.createContext<CanvasProviderType>({
+  theme: {},
+  customTheme: {},
+});
+export const useCanvasProvider = () => {
+  return React.useContext(CanvasThemeContext);
 };
