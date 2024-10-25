@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.0.6](https://github.com/Workday/canvas-kit/releases/tag/v12.0.6) (2024-10-24)
+
+### Components
+
+- fix: Ensure button label icon uses rem ([#3001](https://github.com/Workday/canvas-kit/pull/3001)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v11.1.18](https://github.com/Workday/canvas-kit/releases/tag/v11.1.18) (2024-10-23)
+
+### Components
+
+- fix: Ensure button label icon uses rem ([#3001](https://github.com/Workday/canvas-kit/pull/3001)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+## [v12.0.5](https://github.com/Workday/canvas-kit/releases/tag/v12.0.5) (2024-10-23)
+
+### Documentation
+
+- chore: Button CustomStyles Examples Cleanup ([#2918](https://github.com/Workday/canvas-kit/pull/2918)) ([@josh-bagwell](https://github.com/josh-bagwell), [@mannycarrera4](https://github.com/mannycarrera4))
+
+
 ## [v12.0.4](https://github.com/Workday/canvas-kit/releases/tag/v12.0.4) (2024-10-22)
 
 ### Infrastructure
