@@ -236,10 +236,12 @@ export interface CanvasTheme {
     only: (key: BreakpointFnParam) => string;
   };
   direction: ContentDirection;
+  // custom: {[key: string]: any};
 }
 
 /**
  * Indicates a component is themeable with a CanvasTheme
+ * @deprecated We shouldn't extend themeable anyone since it doesn't work with static styling
  */
 export interface Themeable {
   theme?: EmotionCanvasTheme;
@@ -254,10 +256,11 @@ type RecursivePartial<T> = {
 
 export type PartialCanvasTheme = RecursivePartial<CanvasTheme>;
 export type PartialCanvasThemePalette = RecursivePartial<CanvasThemePalette>;
-export type PartialEmotionCanvasTheme = {canvas?: PartialCanvasTheme};
+export type PartialEmotionCanvasTheme = {canvas?: PartialCanvasTheme; custom: {[key: string]: any}};
 declare module '@emotion/react' {
   export interface Theme {
     canvas: CanvasTheme;
+    custom: {[key: string]: any};
   }
 }
-export type EmotionCanvasTheme = {canvas: CanvasTheme};
+export type EmotionCanvasTheme = {canvas: CanvasTheme; custom: {[key: string]: any}};

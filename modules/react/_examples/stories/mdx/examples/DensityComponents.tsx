@@ -254,24 +254,28 @@ const containerAlignmentStencil = createStencil({
 // low = 48px height on inputs, space between inputs is 32px
 
 export const DensityComponents = () => {
-  const {customTheme} = useCanvasProvider();
+  const {theme} = useCanvasProvider();
+  console.log(theme.custom);
+  if (!theme.custom) {
+    return;
+  }
   return (
-    <div {...containerAlignmentStencil({alignment: customTheme.containerAlignment})}>
+    <div {...containerAlignmentStencil({alignment: theme.custom.containerAlignment})}>
       <form action="#" className={formStyles}>
-        <div {...flexContainerStencil({density: customTheme.density})}>
+        <div {...flexContainerStencil({density: theme.custom.density})}>
           <FormField
-            orientation={customTheme.labelOrientation}
+            orientation={theme.custom.labelOrientation}
             grow
             cs={formFieldStencil({
-              density: customTheme.density,
-              labelOrientation: customTheme.labelOrientation,
+              density: theme.custom.density,
+              labelOrientation: theme.custom.labelOrientation,
             })}
             id="foo"
           >
             <FormField.Label>Choose Country</FormField.Label>
             <Select items={['Dominican Republic', 'Spain', 'United States']}>
               <FormField.Input
-                cs={selectStencil({density: customTheme.density})}
+                cs={selectStencil({density: theme.custom.density})}
                 placeholder="Choose a country"
                 as={Select.Input}
               />
@@ -284,88 +288,88 @@ export const DensityComponents = () => {
           </FormField>
           <FormField
             grow
-            orientation={customTheme.labelOrientation}
+            orientation={theme.custom.labelOrientation}
             cs={formFieldStencil({
-              density: customTheme.density,
-              labelOrientation: customTheme.labelOrientation,
+              density: theme.custom.density,
+              labelOrientation: theme.custom.labelOrientation,
             })}
           >
             <FormField.Label>Full Name</FormField.Label>
-            <FormField.Input as={TextInput} cs={inputStencil({density: customTheme.density})} />
+            <FormField.Input as={TextInput} cs={inputStencil({density: theme.custom.density})} />
           </FormField>
           <FormField
             grow
-            orientation={customTheme.labelOrientation}
+            orientation={theme.custom.labelOrientation}
             cs={formFieldStencil({
-              density: customTheme.density,
-              labelOrientation: customTheme.labelOrientation,
+              density: theme.custom.density,
+              labelOrientation: theme.custom.labelOrientation,
             })}
           >
             <FormField.Label>Phone Number</FormField.Label>
-            <FormField.Input as={TextInput} cs={inputStencil({density: customTheme.density})} />
+            <FormField.Input as={TextInput} cs={inputStencil({density: theme.custom.density})} />
           </FormField>
           <FormField
             grow
-            orientation={customTheme.labelOrientation}
+            orientation={theme.custom.labelOrientation}
             cs={formFieldStencil({
-              density: customTheme.density,
-              labelOrientation: customTheme.labelOrientation,
+              density: theme.custom.density,
+              labelOrientation: theme.custom.labelOrientation,
             })}
           >
             <FormField.Label>Street Address</FormField.Label>
-            <FormField.Input as={TextInput} cs={inputStencil({density: customTheme.density})} />
+            <FormField.Input as={TextInput} cs={inputStencil({density: theme.custom.density})} />
           </FormField>
           <FormField
             grow
-            orientation={customTheme.labelOrientation}
+            orientation={theme.custom.labelOrientation}
             cs={formFieldStencil({
-              density: customTheme.density,
-              labelOrientation: customTheme.labelOrientation,
+              density: theme.custom.density,
+              labelOrientation: theme.custom.labelOrientation,
             })}
           >
             <FormField.Label>City</FormField.Label>
-            <FormField.Input as={TextInput} cs={inputStencil({density: customTheme.density})} />
+            <FormField.Input as={TextInput} cs={inputStencil({density: theme.custom.density})} />
           </FormField>
           <div
             {...sideBySideInputs({
-              labelOrientation: customTheme.labelOrientation,
-              density: customTheme.density,
+              labelOrientation: theme.custom.labelOrientation,
+              density: theme.custom.density,
             })}
           >
             <FormField
               grow
-              orientation={customTheme.labelOrientation}
+              orientation={theme.custom.labelOrientation}
               cs={formFieldStencil({
-                density: customTheme.density,
-                labelOrientation: customTheme.labelOrientation,
+                density: theme.custom.density,
+                labelOrientation: theme.custom.labelOrientation,
               })}
             >
               <FormField.Label>State</FormField.Label>
-              <FormField.Input as={TextInput} cs={inputStencil({density: customTheme.density})} />
+              <FormField.Input as={TextInput} cs={inputStencil({density: theme.custom.density})} />
             </FormField>
             <FormField
               grow
-              orientation={customTheme.labelOrientation}
+              orientation={theme.custom.labelOrientation}
               cs={[
                 formFieldStencil({
-                  density: customTheme.density,
-                  labelOrientation: customTheme.labelOrientation,
+                  density: theme.custom.density,
+                  labelOrientation: theme.custom.labelOrientation,
                 }),
                 zipCodeContainerStyles,
               ]}
             >
               <FormField.Label>Zip Code</FormField.Label>
               <FormField.Input
-                cs={[inputStencil({density: customTheme.density}), zipCodeInput]}
+                cs={[inputStencil({density: theme.custom.density}), zipCodeInput]}
                 as={TextInput}
               />
             </FormField>
           </div>
           <FormField
-            orientation={customTheme.labelOrientation}
+            orientation={theme.custom.labelOrientation}
             cs={formFieldStencil({
-              density: customTheme.density,
-              labelOrientation: customTheme.labelOrientation,
+              density: theme.custom.density,
+              labelOrientation: theme.custom.labelOrientation,
             })}
           >
             <FormField.Label>Enable Fast Shipping</FormField.Label>
@@ -375,10 +379,10 @@ export const DensityComponents = () => {
           </FormField>
           <FormFieldGroup
             cs={formFieldStencil({
-              density: customTheme.density,
-              labelOrientation: customTheme.labelOrientation,
+              density: theme.custom.density,
+              labelOrientation: theme.custom.labelOrientation,
             })}
-            orientation={customTheme.labelOrientation}
+            orientation={theme.custom.labelOrientation}
           >
             <FormFieldGroup.Label>Credit Card</FormFieldGroup.Label>
             <FormFieldGroup.Field>
@@ -386,20 +390,20 @@ export const DensityComponents = () => {
                 <FormFieldGroup.Input
                   as={TextInput}
                   placeholder="XXXX"
-                  cs={creditCardInputStencil({density: customTheme.density})}
+                  cs={creditCardInputStencil({density: theme.custom.density})}
                 />
                 <FormFieldGroup.Input
                   as={TextInput}
                   placeholder="XXXX"
-                  cs={creditCardInputStencil({density: customTheme.density})}
+                  cs={creditCardInputStencil({density: theme.custom.density})}
                 />
                 <FormFieldGroup.Input
                   as={TextInput}
                   placeholder="XXXX"
-                  cs={creditCardInputStencil({density: customTheme.density})}
+                  cs={creditCardInputStencil({density: theme.custom.density})}
                 />
                 <FormFieldGroup.Input
-                  cs={creditCardInputStencil({density: customTheme.density})}
+                  cs={creditCardInputStencil({density: theme.custom.density})}
                   placeholder="XXXX"
                   as={TextInput}
                 />

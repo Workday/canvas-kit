@@ -5,7 +5,11 @@ import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-cont
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import {DensityComponents} from './DensityComponents';
-import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {
+  CanvasProvider,
+  PartialEmotionCanvasTheme,
+  useTheme,
+} from '@workday/canvas-kit-react/common';
 
 const optionStyles = createStyles({
   display: 'flex',
@@ -43,8 +47,28 @@ export const Density = () => {
     setLabelOrientation(data.id);
   };
 
+  React.useEffect(() => {
+    setDensity('high');
+    setLabelOrientation('horizontalStart');
+    setContainerAlignment('left');
+  }, []);
+
+  const canvasTheme: PartialEmotionCanvasTheme = useTheme({
+    custom: {
+      density,
+      containerAlignment,
+      labelOrientation,
+    },
+    canvas: {
+      // Switch to `ContentDirection.RTL` to change direction
+    },
+  });
+
   return (
-    <CanvasProvider customTheme={{density, containerAlignment, labelOrientation}}>
+    <CanvasProvider
+      theme={canvasTheme}
+      // customTheme={{density, containerAlignment, labelOrientation}}
+    >
       <Heading size="small">Choose Your Density and Alignment</Heading>
       <div className={optionStyles}>
         <div className={optionItemStyles}>
