@@ -47,12 +47,6 @@ export const Density = () => {
     setLabelOrientation(data.id);
   };
 
-  React.useEffect(() => {
-    setDensity('high');
-    setLabelOrientation('horizontalStart');
-    setContainerAlignment('left');
-  }, []);
-
   const canvasTheme: PartialEmotionCanvasTheme = useTheme({
     custom: {
       density,

@@ -56,5 +56,4 @@ export const defaultCanvasTheme: CanvasTheme = {
     only,
   },
   direction: ContentDirection.LTR,
-  custom: {},
 };
