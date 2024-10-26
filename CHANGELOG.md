@@ -3,6 +3,54 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.0.6](https://github.com/Workday/canvas-kit/releases/tag/v12.0.6) (2024-10-24)
+
+### Components
+
+- fix: Ensure button label icon uses rem ([#3001](https://github.com/Workday/canvas-kit/pull/3001)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v11.1.18](https://github.com/Workday/canvas-kit/releases/tag/v11.1.18) (2024-10-23)
+
+### Components
+
+- fix: Ensure button label icon uses rem ([#3001](https://github.com/Workday/canvas-kit/pull/3001)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+## [v12.0.5](https://github.com/Workday/canvas-kit/releases/tag/v12.0.5) (2024-10-23)
+
+### Documentation
+
+- chore: Button CustomStyles Examples Cleanup ([#2918](https://github.com/Workday/canvas-kit/pull/2918)) ([@josh-bagwell](https://github.com/josh-bagwell), [@mannycarrera4](https://github.com/mannycarrera4))
+
+
+## [v12.0.4](https://github.com/Workday/canvas-kit/releases/tag/v12.0.4) (2024-10-22)
+
+### Infrastructure
+
+- fix: Remove stale Github actions ([#2999](https://github.com/Workday/canvas-kit/pull/2999)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.0.3](https://github.com/Workday/canvas-kit/releases/tag/v12.0.3) (2024-10-22)
+
+### Codemod
+
+- fix: Add codemod to main index file to export ([#2996](https://github.com/Workday/canvas-kit/pull/2996)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.0.2](https://github.com/Workday/canvas-kit/releases/tag/v12.0.2) (2024-10-21)
+
+### Infrastructure
+
+- fix: Remove duplicate keys from routes ([#2994](https://github.com/Workday/canvas-kit/pull/2994)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.0.1](https://github.com/Workday/canvas-kit/releases/tag/v12.0.1) (2024-10-21)
+
+### Components
+
+- chore: Update deprecated urls to CodeshiftCommunity ([#2977](https://github.com/Workday/canvas-kit/pull/2977)) ([@danieldelcore](https://github.com/danieldelcore))
+- fix: Clean up Select file structure and move examples to main react ([#2992](https://github.com/Workday/canvas-kit/pull/2992)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v12.0.0](https://github.com/Workday/canvas-kit/releases/tag/v12.0.0) (2024-10-16)
 
 ### BREAKING CHANGES
