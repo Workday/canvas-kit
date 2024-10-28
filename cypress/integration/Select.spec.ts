@@ -361,7 +361,7 @@ describe('Select', () => {
       });
       it('should select phone and the selected value should be visible', () => {
         // should open the menu
-        cy.findByRole('listbox');
+        cy.findByRole('listbox').should('exist');
       });
     });
   });
