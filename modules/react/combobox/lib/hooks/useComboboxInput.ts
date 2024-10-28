@@ -60,9 +60,8 @@ export const useComboboxInput = composeHooks(
         }
       },
       onBlur(event: React.FocusEvent) {
-        model.events.hide(event);
+        // model.events.hide(event);
       },
-      onChange: model.onChange,
       onClick(event: React.MouseEvent) {
         if (model.state.visibility === 'hidden') {
           model.events.setWidth(event.currentTarget.clientWidth);
@@ -70,14 +69,14 @@ export const useComboboxInput = composeHooks(
       },
       value: model.state.value,
       role: 'combobox',
-      'aria-haspopup': 'true' as React.AriaAttributes['aria-haspopup'],
+      'aria-haspopup': 'listbox',
       'aria-expanded': model.state.visibility === 'visible',
       'aria-autocomplete': 'list',
       'aria-controls': `${model.state.id}-list`,
       'aria-activedescendant': model.state.visibility === 'hidden' ? null : undefined, // Removes activedescendant on menu close
       id: model.state.id,
       ref: elementRef,
-    } as const;
+    };
   }),
   useSetPopupWidth,
   useComboboxInputOpenWithArrowKeys,

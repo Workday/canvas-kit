@@ -8,6 +8,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Components
 
 - fix: Update Select to open with spacebar ([#3006](https://github.com/Workday/canvas-kit/pull/3006)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@NicholasBoll](https://github.com/NicholasBoll))
+## [v12.0.6](https://github.com/Workday/canvas-kit/releases/tag/v12.0.6) (2024-10-24)
+
+### Components
+
+- fix: Ensure button label icon uses rem ([#3001](https://github.com/Workday/canvas-kit/pull/3001)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
 
 
 ## [v11.1.18](https://github.com/Workday/canvas-kit/releases/tag/v11.1.18) (2024-10-23)
@@ -15,6 +20,199 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Components
 
 - fix: Ensure button label icon uses rem ([#3001](https://github.com/Workday/canvas-kit/pull/3001)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+## [v12.0.5](https://github.com/Workday/canvas-kit/releases/tag/v12.0.5) (2024-10-23)
+
+### Documentation
+
+- chore: Button CustomStyles Examples Cleanup ([#2918](https://github.com/Workday/canvas-kit/pull/2918)) ([@josh-bagwell](https://github.com/josh-bagwell), [@mannycarrera4](https://github.com/mannycarrera4))
+
+
+## [v12.0.4](https://github.com/Workday/canvas-kit/releases/tag/v12.0.4) (2024-10-22)
+
+### Infrastructure
+
+- fix: Remove stale Github actions ([#2999](https://github.com/Workday/canvas-kit/pull/2999)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.0.3](https://github.com/Workday/canvas-kit/releases/tag/v12.0.3) (2024-10-22)
+
+### Codemod
+
+- fix: Add codemod to main index file to export ([#2996](https://github.com/Workday/canvas-kit/pull/2996)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.0.2](https://github.com/Workday/canvas-kit/releases/tag/v12.0.2) (2024-10-21)
+
+### Infrastructure
+
+- fix: Remove duplicate keys from routes ([#2994](https://github.com/Workday/canvas-kit/pull/2994)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.0.1](https://github.com/Workday/canvas-kit/releases/tag/v12.0.1) (2024-10-21)
+
+### Components
+
+- chore: Update deprecated urls to CodeshiftCommunity ([#2977](https://github.com/Workday/canvas-kit/pull/2977)) ([@danieldelcore](https://github.com/danieldelcore))
+- fix: Clean up Select file structure and move examples to main react ([#2992](https://github.com/Workday/canvas-kit/pull/2992)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.0.0](https://github.com/Workday/canvas-kit/releases/tag/v12.0.0) (2024-10-16)
+
+### BREAKING CHANGES
+
+- [#2793](https://github.com/Workday/canvas-kit/pull/2793) - Avatar no longer uses `SystemIconCircle` for sizing.
+  - `Avatar.Size` is no longer supported. The `size` prop type has change to accept the following: `"extraExtraLarge" | "extraLarge" | "large" | "medium" | "small" | "extraSmall" | (string{})`
+  - `Avatar.Variant` is no longer supported. Enum `AvatarVariant` has been removed. The `variant` type prop now accepts `"dark" | "light"`
+  - The `as` prop now accepts any element, not just `div`.
+- [#2674](https://github.com/Workday/canvas-kit/pull/2674) Codemods formatting have been updated and users will need to format their files after the codemod has been used.
+- [#2934](https://github.com/Workday/canvas-kit/pull/2934) The newly promoted `FormField` is a
+  [compound component](https://workday.github.io/canvas-kit/?path=/docs/guides-compound-components--page).
+  Due to the different APIs of the component, this change is **not codemodable**. The following shows
+  an example of how to **update** your code to match the new compound component API.
+  
+  ```tsx
+  // v11 FormField in Main
+  <FormField
+    error={FormField.ErrorType.Alert}
+    labelPosition={FormField.LabelPosition.Left}
+    useFieldSet={true}
+    required={true}
+    hintId="hint-alert"
+    hintText="Please enter a valid email."
+    label="Email"
+  >
+    <TextInput onChange={handleChange} value={value} />
+  </FormField>
+  
+  // v12 Newly promoted FormField from Preview to Main
+  <FormField
+    error="error"
+    orientation="horizontalStart"
+    isRequired={true}
+  >
+  	<FormField.Label>Email</FormField.Label>
+  	<FormField.Field>
+  		<FormField.Input as={TextInput} onChange={handleChange} value={value} />
+  		<FormField.Hint>Please enter a valid email.</FormField.Hint>
+  	</FormField.Field>
+  </FormField>
+  ```
+  
+  **Noticeable changes:**
+  
+  - `error` prop takes in the following values: `"error" | "alert"`.
+  - `labelPosition` becomes `orientation` with the following values:
+    `"horizontal" | "horizontalStart" | "horizontalEnd" | "vertical"`.
+  - `useFieldSet` is no longer valid. If you want to group inputs, use
+    [`FormFieldGroup`](#form-field-group) component.
+  - `required` becomes `isRequired`.
+  - `hintId` is no longer needed. The component handles associating the hint text, label and input
+    automatically. If you wish to have a unique `id`, you can add one onto the `FormField` element.
+  - `hintText` is no longer a valid prop. Use `FormField.Hint` sub component.
+  - `errorLabel` and `alertLabel` are no longer valid props. Customizing your hint text inside of
+    `FormField.Hint`.
+  - `label` is no longer a valid prop. Use `FormField.Label` sub component to render your label text.
+  - Instead of rendering an input, ensure you use `FormField.Input` with the `as` prop. This ensures
+    proper error handling and aria attributes for accessibility.
+- [#2969](https://github.com/Workday/canvas-kit/pull/2969) We've removed the `MenuItemProps` export from `@workday/canvas-kit-react/menu`. Use `ExtractProps<typeof Menu.Item, never>` instead. We don't mean to export prop interfaces of polymorphic components. The `never` means "don't add element props". The second parameter is used to pass the interface that the `as` prop is pointing to.
+- [#2980](https://github.com/Workday/canvas-kit/pull/2980) `elemProps` hooks using `composeHooks` have more accurate type signatures which may lead to new type errors. For information, view our [discussion](https://github.com/Workday/canvas-kit/discussions/2979).
+- [#2982](https://github.com/Workday/canvas-kit/pull/2982) A list model's `navigation.getItem()` can return `undefined` if no item is found. Previously it threw an error, which cause many problems. It is now up to the caller to decide what to do with an `undefined` return value
+
+### Components
+
+- chore: Removed Select in Preview ([#2796](https://github.com/Workday/canvas-kit/pull/2796)) ([@thunguyen19](https://github.com/thunguyen19), manuel.carrera, [@mannycarrera4](https://github.com/mannycarrera4))
+  We've removed the `Select` component that was in `@workday/canvas-kit-preview-react`. Please use the `Select` in Main (https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) which is a compound component and offers more flexibility.
+  
+  Thank You Picture 
+  
+  <img width="497" alt="image" src="https://github.com/Workday/canvas-kit/assets/32447341/3372b8dd-c963-4f7e-84bb-791f0889df57">
+- chore: Modal, Dialog, Popup and Toast Styles Refactor ([#2795](https://github.com/Workday/canvas-kit/pull/2795)) ([@josh-bagwell](https://github.com/josh-bagwell))
+  Updated `Modal, Dialog, Popup and Toast` to use new `system` tokens and style utilities.
+- chore: Removal of InputIconContainer ([#2838](https://github.com/Workday/canvas-kit/pull/2838)) ([@josh-bagwell](https://github.com/josh-bagwell))
+  We've removed `InputIconContainer` from Main. Please use [`InputGroup`](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-text-input--icons) from Main instead.
+- chore: Refactor TextArea and TextInput with new styling utilities ([#2825](https://github.com/Workday/canvas-kit/pull/2825)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@NicholasBoll](https://github.com/NicholasBoll))
+  We've updated `TextInput` and `TextArea` to use our new Tokens and styling utilities. The React interface **has not changed**, but CSS variables are now used for dynamic properties.
+- chore: Update Avatar to use createStencil and createComponent ([#2793](https://github.com/Workday/canvas-kit/pull/2793)) ([@kaconant](https://github.com/kaconant), krissy.conant, [@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  The Avatar component has been refactored to use our new tokens and styling utilities. The changes below highlight the breaking changes to the API.
+- feat: Add horizontal start and end label position for form field ([#2881](https://github.com/Workday/canvas-kit/pull/2881)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@josh-bagwell](https://github.com/josh-bagwell))
+  The orientation prop on the FormField component will be updated to accept the following values: `vertical`, `horizontalStart`, and `horizontalEnd`. `horizontal` will still be accepted as a value in v12, but it will be deprecated and slated for removal in a future major release. These changes are intended to provide more flexibility with label alignments on FormField elements.
+  
+  Instances where the orientation prop of the FormField component is set to `horizontal` will automatically default to `horizontalStart` via a codemod. A console warning message will also appear with a message to change the prop value to either horizontalStart or horizontalEnd.
+- chore: Updated unique id generation for classnames ([#2913](https://github.com/Workday/canvas-kit/pull/2913)) ([@josh-bagwell](https://github.com/josh-bagwell), [@mannycarrera4](https://github.com/mannycarrera4))
+- chore: Add FormFieldGroup component and density example ([#2865](https://github.com/Workday/canvas-kit/pull/2865)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@josh-bagwell](https://github.com/josh-bagwell), [@RayRedGoose](https://github.com/RayRedGoose))
+  - We've added a new `FormFieldGroup` component to use when grouping inputs like checkboxes and radio inputs that need to be associated to one another. Its API matches the `FormField` API where you have `error` prop as well as `id` `isRequired` and `orienation`.
+  
+  - `orientation` has been added back to `useFormFieldModel` to better support sub component styling.
+  
+  - Styles have been cleaned up to use `gap` for proper spacing between labels, inputs and hint text.
+  
+  - Added a new `FormField.Field` component to ensure proper alignment between label and inputs regardless of orientation and hint text. Ensure to wrap your inputs and hint text in this component.
+- chore: Revert Select Preview Removal ([#2933](https://github.com/Workday/canvas-kit/pull/2933)) ([@josh-bagwell](https://github.com/josh-bagwell))
+- feat(text-input): Support CSS Variables in InputGroup ([#2935](https://github.com/Workday/canvas-kit/pull/2935)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- feat: Promote FormField from Preview to Main ([#2934](https://github.com/Workday/canvas-kit/pull/2934)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@josh-bagwell](https://github.com/josh-bagwell))
+  We've promoted FormField from [Preview](#preview) to [Main](#main). The following changes have been
+  made to provide more flexibility and better explicit components when using inputs.
+  
+  - The orientation prop on the `FormField` component will be updated to accept the following values:
+    `vertical`, `horizontalStart`, and `horizontalEnd`. `horizontal` will still be accepted as a value
+    in v12, but it will be deprecated and slated for removal in a future major release. These changes
+    are intended to provide more flexibility with label alignments on `FormField` elements.
+  
+  > **Note**: The horizontal alignment of start and end are relative to its container, meaning start
+  > and end match the flex property of `flex-start` and `flex-end`. This is especially applicable for
+  > moving between RTL (right-to-left) and LTR (left-to-right) languages.
+  
+  > **Note:** Orientation "horizontal" has been deprecated. You will see a console warn message
+  > suggesting to update your types and usage to `horizontalStart`, `horizontalEnd` or `vertical`.
+  
+  - `useFormFieldModel`: `orientation` has been added back into `useFormFieldModel`. While we still
+    support compat mode due to
+    [style merging issues](https://github.com/Workday/canvas-kit/discussions/2893), having orientation
+    on the model allows for proper styling of sub components.
+  
+  - Styles clean up. `FormField.Hint` and `FormField.Label` where using `margin` for spacing. We've
+    updated styles so that the containing element uses `gap` for proper spacing.
+- fix: Add visual testing for inputs after form field promotion ([#2963](https://github.com/Workday/canvas-kit/pull/2963)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- chore(text-input): Convert `InputGroup` to use Stencils ([#2964](https://github.com/Workday/canvas-kit/pull/2964)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- feat(form-field): Add a11y links for non-input fields ([#2967](https://github.com/Workday/canvas-kit/pull/2967)) ([@NicholasBoll](https://github.com/NicholasBoll), manuel.carrera)
+- feat(menu): Add `MenuOption` and convert to MenuItem to Stencil ([#2969](https://github.com/Workday/canvas-kit/pull/2969)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- fix: Add isHidden to FormField label element ([#2973](https://github.com/Workday/canvas-kit/pull/2973)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@josh-bagwell](https://github.com/josh-bagwell))
+  If you want to hide the label but maintain accessibility, add the `isHidden` prop on the `FormField.Label` element.
+- fix: Fix mergeProps, createElemPropsHook, and composeHooks types ([#2980](https://github.com/Workday/canvas-kit/pull/2980)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- chore: Remove useResizeObserver hack ([#2981](https://github.com/Workday/canvas-kit/pull/2981)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- chore: Collection navigation getItem can return undefined ([#2982](https://github.com/Workday/canvas-kit/pull/2982)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- fix: Fix InputGroup inner end width calculations ([#2984](https://github.com/Workday/canvas-kit/pull/2984)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- refactor(select): Fix all syncing issues with the Select component ([#2983](https://github.com/Workday/canvas-kit/pull/2983)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- feat: Add a MultiSelect component ([#2911](https://github.com/Workday/canvas-kit/pull/2911)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Documentation
+
+- chore: Upgrade Guide Cleanup  ([#2936](https://github.com/Workday/canvas-kit/pull/2936)) ([@josh-bagwell](https://github.com/josh-bagwell))
+- chore: Fix for ExampleCodeBlock ([#2938](https://github.com/Workday/canvas-kit/pull/2938)) ([@josh-bagwell](https://github.com/josh-bagwell), manuel.carrera)
+- docs: Fix Markdown tables ([#2986](https://github.com/Workday/canvas-kit/pull/2986)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- chore: Storybook sidebar theme ([#2987](https://github.com/Workday/canvas-kit/pull/2987)) ([@jaclynjessup](https://github.com/jaclynjessup))
+
+### Infrastructure
+
+- chore: Upgrade Storybook and Webpack ([#2674](https://github.com/Workday/canvas-kit/pull/2674)) ([@RayRedGoose](https://github.com/RayRedGoose), [@NicholasBoll](https://github.com/NicholasBoll), manuel.carrera, [@josh-bagwell](https://github.com/josh-bagwell))
+  - In Storybook, each component now has a "Docs" page. This is dedicated to documentation of the component and has examples as it did before. 
+  - We now use the Cypress Component runner and not e2e.
+  - Codemod formatting has been updated with a dependency update and docs have been added to reflect the formatting issue. 
+  
+  The following have been upgraded:
+  - Storybook 7
+  - Webpack 5 
+  - Typescript 4.9
+  - Cypress 13
+- fix: Update comment for canary action ([#2950](https://github.com/Workday/canvas-kit/pull/2950)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- fix: Update routes path ([#2966](https://github.com/Workday/canvas-kit/pull/2966)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- fix: Try to fix canary build ([#2970](https://github.com/Workday/canvas-kit/pull/2970)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- ci: Fix build script ([#2985](https://github.com/Workday/canvas-kit/pull/2985)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Fix tspc command ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Styling
+
+- feat(styling): Add support for fallthrough modifiers ([#2944](https://github.com/Workday/canvas-kit/pull/2944)) ([@NicholasBoll](https://github.com/NicholasBoll))
 
 
 ## [v11.1.17](https://github.com/Workday/canvas-kit/releases/tag/v11.1.17) (2024-10-11)

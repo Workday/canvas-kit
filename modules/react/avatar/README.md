@@ -8,48 +8,6 @@ A component showing a user's photo with a circular crop.
 yarn add @workday/canvas-kit-react
 ```
 
-## Usage
-
-```tsx
-import * as React from 'react';
-import {Avatar, AvatarVariant} from '@workday/canvas-kit-react/avatar';
-
-// Basic button with click handler
-<Avatar onClick={someFunction} />
-
-// Rendering as a div instead of a button
-<Avatar as="div" />
-
-// Using static properties on Avatar
-<Avatar
-  size={Avatar.Size.xs}
-  variant={Avatar.Variant.Dark}
-/>
-
-// Using AvatarVariant import directly
-<Avatar size={Avatar.Size.xs} variant={AvatarVariant.Dark} />
-```
-
-## Static Properties
-
-#### `variant: AvatarVariant`
-
-```tsx
-<Avatar variant={Avatar.Variant.Dark} />
-```
-
----
-
-#### `Size: SystemIconCircleSize | number`
-
-```tsx
-<Avatar size={Avatar.Size.xs} />
-
-// Custom Size.
-// Note: Please use the predefined sizes as it works nicely with the Canvas Design System
-<Avatar size={48} />
-```
-
 ## Component Props
 
 ### Required
@@ -58,45 +16,54 @@ import {Avatar, AvatarVariant} from '@workday/canvas-kit-react/avatar';
 
 ### Optional
 
-#### `variant: AvatarVariant`
+#### `variant: "light" | "dark"`
 
 > The variant of the avatar if using a default image.
 
-Default: `AvatarVariant.Light`
+Default: "light"
 
-| Variant | Description                      |
+| String  | Description                      |
 | ------- | -------------------------------- |
-| `Light` | Light grey background, dark icon |
-| `Dark`  | Dark blue background, white icon |
+| "light" | Light grey background, dark icon |
+| "dark"  | Dark blue background, white icon |
 
 ---
 
-#### `size: SystemIconCircleSize | number`
+#### `size: "extraSmall" | "small" | "medium" | "large" | "extraLarge" | "extraExtraLarge" | (string & {})`
 
-> The diameter of the avatar in pixels
+> The diameter of the avatar in pixels. Can be given custom size as a string in either px or rem.
 
-Default: `Avatar.Size.m`
+Default: "medium"
 
-| Name  | Size (px) |
-| ----- | --------- |
-| `xs`  | 16        |
-| `s`   | 24        |
-| `m`   | 32        |
-| `l`   | 40        |
-| `xl`  | 64        |
-| `xxl` | 120       |
+| Name              | Size (px) |
+| ----------------- | --------- |
+| "extraSmall"      | 16        |
+| "small"           | 24        |
+| "medium"          | 32        |
+| "large"           | 40        |
+| "extraLarge"      | 64        |
+| "extraExtraLarge" | 120       |
 
 ---
 
 #### `altText: string`
 
-> Text describing what the avatar is showing.
+> The alt text of the Avatar image. This prop is also used for the aria-label.
 
 ---
 
 #### `url: string`
 
 > The URL of the user's photo. Expects a square (1:1) photo.
+
+---
+
+
+---
+
+#### `objectFit?: "contain" | "cover" | "fill" | "none" | "scale-down" | "-moz-initial" | "inherit" | "initial" | "revert" | "unset"`
+
+> An objectFit property that can customize how to resize your image to fit its container.
 
 ---
 
