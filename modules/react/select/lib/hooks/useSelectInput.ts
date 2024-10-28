@@ -149,7 +149,6 @@ export const useSelectInput = composeHooks(
           if (event.key !== 'Tab') {
             event.preventDefault();
           }
-          console.log(elemProps.keySofar);
 
           // Select should open if Spacebar is typed and nothing has been typed AND the menu is hidden
           if (
