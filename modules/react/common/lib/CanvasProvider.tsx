@@ -7,7 +7,14 @@ import {createStyles, getCache} from '@workday/canvas-kit-styling';
 
 export interface CanvasProviderProps {
   theme?: PartialEmotionCanvasTheme;
+  density?: 'low' | 'medium' | 'high' | undefined;
 }
+
+export const DensityContext = React.createContext<CanvasProviderProps['density']>('medium');
+
+export const useDensityContext = (): CanvasProviderProps['density'] => {
+  return React.useContext(DensityContext);
+};
 
 // copied from brand/_variables.css
 const defaultBranding = createStyles({
@@ -84,14 +91,15 @@ export const useCanvasThemeToCssVars = (
 
 export const CanvasProvider = ({
   children,
-  theme = {canvas: defaultCanvasTheme, custom: {}},
+  theme = {canvas: defaultCanvasTheme},
+  density = 'medium',
   ...props
 }: CanvasProviderProps & React.HTMLAttributes<HTMLElement>) => {
   const elemProps = useCanvasThemeToCssVars(theme, props);
   const cache = getCache();
   return (
-    <CanvasThemeContext.Provider value={{theme: theme}}>
-      <CacheProvider value={cache}>
+    <CacheProvider value={cache}>
+      <DensityContext.Provider value={density}>
         <ThemeProvider theme={theme as Theme}>
           <InputProvider />
           <div
@@ -101,18 +109,7 @@ export const CanvasProvider = ({
             {children}
           </div>
         </ThemeProvider>
-      </CacheProvider>
-    </CanvasThemeContext.Provider>
+      </DensityContext.Provider>
+    </CacheProvider>
   );
-};
-
-export type CanvasProviderType = {
-  theme: PartialEmotionCanvasTheme;
-};
-
-const CanvasThemeContext = React.createContext<CanvasProviderType>({
-  theme: {custom: {}},
-});
-export const useCanvasProvider = () => {
-  return React.useContext(CanvasThemeContext);
 };
