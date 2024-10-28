@@ -310,7 +310,7 @@ describe('Select', () => {
         cy.findByRole('combobox').focus();
         cy.focused().realType(' ');
       });
-      it('should select phone and the selected value should be visible', () => {
+      it('should open the menu', () => {
         // should open the menu
         cy.findByRole('listbox').should('exist');
       });
