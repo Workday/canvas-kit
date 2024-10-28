@@ -23,7 +23,6 @@ function noop() {
  */
 export const useSelectInput = composeHooks(
   useComboboxInput,
-  useComboboxKeyboardTypeAhead,
   useComboboxResetCursorToSelected,
   useComboboxMoveCursorToSelected,
   createElemPropsHook(useSelectModel)(
@@ -150,6 +149,7 @@ export const useSelectInput = composeHooks(
           if (event.key !== 'Tab') {
             event.preventDefault();
           }
+          console.log(elemProps.keySofar);
 
           // Select should open if Spacebar is typed and nothing has been typed AND the menu is hidden
           if (
@@ -190,5 +190,6 @@ export const useSelectInput = composeHooks(
         'aria-haspopup': 'menu',
       } as const;
     }
-  )
+  ),
+  useComboboxKeyboardTypeAhead
 );
