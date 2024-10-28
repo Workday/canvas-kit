@@ -353,6 +353,17 @@ describe('Select', () => {
         cy.findByText('Selected Value: Phone');
       });
     });
+
+    context('when spacebar is types and no value exists', () => {
+      beforeEach(() => {
+        cy.findByRole('combobox').focus();
+        cy.focused().realType(' ');
+      });
+      it('should select phone and the selected value should be visible', () => {
+        // should open the menu
+        cy.findByRole('listbox').should('exist');
+      });
+    });
   });
 
   context('given the "Disabled Options" story with a disabled option', () => {
@@ -421,7 +432,7 @@ describe('Select', () => {
     });
   });
 
-  context.only(`given the "Ref Forwarding" story is rendered`, () => {
+  context(`given the "Ref Forwarding" story is rendered`, () => {
     beforeEach(() => {
       h.stories.load('Components/Inputs/Select', 'Ref Forwarding');
     });

@@ -23,7 +23,6 @@ function noop() {
  */
 export const useSelectInput = composeHooks(
   useComboboxInput,
-  useComboboxKeyboardTypeAhead,
   useComboboxResetCursorToSelected,
   useComboboxMoveCursorToSelected,
   createElemPropsHook(useSelectModel)(
@@ -190,5 +189,6 @@ export const useSelectInput = composeHooks(
         'aria-haspopup': 'menu',
       } as const;
     }
-  )
+  ),
+  useComboboxKeyboardTypeAhead
 );
