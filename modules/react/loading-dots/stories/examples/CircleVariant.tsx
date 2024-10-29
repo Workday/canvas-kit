@@ -1,14 +1,17 @@
 import React from 'react';
-import {LoadingDots} from '@workday/canvas-kit-react/loading-dots';
+import {LoadingDots, loadingDotsStencil} from '@workday/canvas-kit-react/loading-dots';
 import {system} from '@workday/canvas-tokens-web';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {createStyles, createStencil} from '@workday/canvas-kit-styling';
 
 const styleOverrides = {
   parentContainer: createStyles({
     display: 'flex',
     gap: system.space.x4,
   }),
-  loadingStyles: createStyles({
+};
+
+const loadingStencil = createStencil({
+  base: {
     borderRadius: system.shape.round,
     backgroundColor: system.color.bg.overlay,
     height: 80,
@@ -16,13 +19,15 @@ const styleOverrides = {
     alignItems: 'center',
     justifyContent: 'center',
     display: 'flex',
-  }),
-};
+    [loadingDotsStencil.vars.loadingDotColor]: system.color.bg.alt.strong,
+    [loadingDotsStencil.vars.animationDurationMs]: '40ms',
+  },
+});
 
 export const CircleVariant = () => {
   return (
     <div className={styleOverrides.parentContainer}>
-      <LoadingDots cs={styleOverrides.loadingStyles} backgroundColor={system.color.icon.inverse} />
+      <LoadingDots cs={loadingStencil()} />
     </div>
   );
 };
