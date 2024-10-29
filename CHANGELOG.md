@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.1.19](https://github.com/Workday/canvas-kit/releases/tag/v11.1.19) (2024-10-28)
+
+### Components
+
+- fix: Update Select to open with spacebar ([#3006](https://github.com/Workday/canvas-kit/pull/3006)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@NicholasBoll](https://github.com/NicholasBoll))
 ## [v12.0.6](https://github.com/Workday/canvas-kit/releases/tag/v12.0.6) (2024-10-24)
 
 ### Components

@@ -305,6 +305,16 @@ describe('Select', () => {
         );
       });
     });
+    context('when spacebar is typed and no value exists', () => {
+      beforeEach(() => {
+        cy.findByRole('combobox').focus();
+        cy.focused().realType(' ');
+      });
+      it('should open the menu', () => {
+        // should open the menu
+        cy.findByRole('listbox').should('exist');
+      });
+    });
   });
 
   context('given the "Disabled Options" story with a disabled option', () => {
