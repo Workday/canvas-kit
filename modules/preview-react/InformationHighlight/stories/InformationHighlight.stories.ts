@@ -12,9 +12,11 @@ import {InformationalLow as InformationalLowExample} from './examples/informatio
 import {AttentionHigh as AttentionHighExample} from './examples/attentionHigh';
 import {CautionHigh as CautionHighExample} from './examples/cautionHigh';
 import {InformationalHigh as InformationalHighExample} from './examples/informationalHigh';
+import {IconAttentionHigh as IconAttentionHighExample} from './examples/customIconAttentionHigh';
+import {IconAttentionLow as IconAttentionLowExample} from './examples/customIconAttentionLow';
 
 export default {
-  title: 'Preview/InformationHighlight',
+  title: 'Preview/Information Highlight',
   component: InformationHighlight,
   tags: ['autodocs'],
   parameters: {
@@ -52,4 +54,10 @@ export const CautionHigh: Story = {
 };
 export const InformationalHigh: Story = {
   render: InformationalHighExample,
+};
+export const IconAttentionHigh: Story = {
+  render: IconAttentionHighExample,
+};
+export const IconAttentionLow: Story = {
+  render: IconAttentionLowExample,
 };

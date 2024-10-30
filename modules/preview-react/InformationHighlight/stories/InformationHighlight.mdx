@@ -14,6 +14,8 @@ import {AttentionLow} from './examples/attentionLow';
 import {InformationalHigh} from './examples/informationalHigh';
 import {CautionHigh} from './examples/cautionHigh';
 import {AttentionHigh} from './examples/attentionHigh';
+import {IconAttentionHigh} from './examples/customIconAttentionHigh';
+import {IconAttentionLow} from './examples/customIconAttentionLow';
 
 <Meta of={InformationHighlight} />
 
@@ -64,7 +66,15 @@ lower or higher contrast. If no variant or emphasis is selected the layout will 
 ### Attention
 <ExampleCodeBlock code={AttentionHigh} />
 
-## Partial and Custom Information Highlights
+## Partial Custom Information Highlights
+
+`Information Highlights` can use custom icons or be designed to only use certain features
+
+### Custom Icon: Attention, High Emphasis
+<ExampleCodeBlock code={IconAttentionHigh} />
+
+### Custom Icon: Attention, Low Emphasis
+<ExampleCodeBlock code={IconAttentionLow} />
 
 ### Body Only Example
 <ExampleCodeBlock code={Body} />
