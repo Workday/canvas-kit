@@ -1,15 +1,21 @@
 import React from 'react';
 
 import {InformationHighlight} from '@workday/canvas-kit-preview-react/InformationHighlight';
+import {ExternalHyperlink} from '@workday/canvas-kit-react/button';
 export const InformationalHigh = () => {
   return (
     <InformationHighlight variant={'informational'} emphasis={'high'}>
       <InformationHighlight.Icon icon={undefined} />
-      <InformationHighlight.Heading> Layouts </InformationHighlight.Heading>
+      <InformationHighlight.Heading> Information Highlight </InformationHighlight.Heading>
       <InformationHighlight.Body>
-        {' '}
-        Layouts can be used to draw important information to the clients attention{' '}
+        If you select the link below it will just reroute you back to this page
       </InformationHighlight.Body>
+      <InformationHighlight.Link
+        as={ExternalHyperlink}
+        href="https://workday.github.io/canvas-kit/?path=/docs/preview-information-highlight--docs"
+      >
+        View the Docs
+      </InformationHighlight.Link>
     </InformationHighlight>
   );
 };
