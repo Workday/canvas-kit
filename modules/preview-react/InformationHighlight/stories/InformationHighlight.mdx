@@ -1,0 +1,79 @@
+import {
+  ExampleCodeBlock,
+  SymbolDoc,
+  Specifications,
+} from '@workday/canvas-kit-docs';
+
+import * as InformationHighlight from './InformationHighlight.stories.ts';
+import { Basic } from './examples/Basic';
+import {Body} from './examples/Body';
+import {Heading} from './examples/Heading';
+import {InformationalLow} from './examples/informationalLow';
+import {CautionLow} from './examples/cautionLow';
+import {AttentionLow} from './examples/attentionLow';
+import {InformationalHigh} from './examples/informationalHigh';
+import {CautionHigh} from './examples/cautionHigh';
+import {AttentionHigh} from './examples/attentionHigh';
+
+<Meta of={InformationHighlight} />
+
+# Canvas Kit Information Highlight
+
+An `Information Highlight` draws user attention to important details
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-preview-react
+```
+
+## Usage
+`Information Highlight` should be used to call out important elements of the page. It has three variants and two emphases
+built in.
+
+Variants: Informational, Caution, Attention
+
+Emphasis: Low, High
+
+The variants have different icons and colors to convey severity, the emphasis changes the background color to have a
+lower or higher contrast. If no variant or emphasis is selected the layout will default to Informational, Low.
+
+### Basic Example
+<ExampleCodeBlock code={Basic} />
+
+
+## Low Emphasis Variants
+
+### Informational
+<ExampleCodeBlock code={InformationalLow} />
+
+### Caution
+<ExampleCodeBlock code={CautionLow} />
+
+### Attention
+<ExampleCodeBlock code={AttentionLow} />
+
+## High Emphasis Variants
+
+### Informational
+<ExampleCodeBlock code={InformationalHigh} />
+
+### Caution
+<ExampleCodeBlock code={CautionHigh} />
+
+### Attention
+<ExampleCodeBlock code={AttentionHigh} />
+
+## Partial and Custom Information Highlights
+
+### Body Only Example
+<ExampleCodeBlock code={Body} />
+
+### Heading Only Example
+<ExampleCodeBlock code={Heading} />
+
+
+
+
+
+
