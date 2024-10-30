@@ -24,7 +24,7 @@ const loadingStencil = createStencil({
   },
 });
 
-export const CircleVariant = () => {
+export const DarkBackgrounds = () => {
   return (
     <div className={styleOverrides.parentContainer}>
       <LoadingDots cs={loadingStencil()} />

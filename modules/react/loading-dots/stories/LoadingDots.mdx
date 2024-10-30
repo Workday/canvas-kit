@@ -2,7 +2,8 @@ import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
 import {Basic} from './examples/Basic';
 import {RTL} from './examples/RTL';
 import {Accessible} from './examples/Accessible';
-import {CircleVariant} from './examples/CircleVariant';
+import {DarkBackgrounds} from './examples/DarkBackgrounds';
+import {CustomShape} from './examples/CustomShape';
 import * as LoadingDotsStories from './LoadingDots.stories';
 
 <Meta of={LoadingDotsStories} />
@@ -30,14 +31,20 @@ yarn add @workday/canvas-kit-react
 
 <ExampleCodeBlock code={RTL} />
 
-### Circle Variant
+### Dark Backgrounds
 
-<ExampleCodeBlock code={CircleVariant} />
+<ExampleCodeBlock code={DarkBackgrounds} />
+
+### Custom Shape
+
+<ExampleCodeBlock code={CustomShape} />
 
 ### Custom Styles
 
 Loading Dots supports custom styling via the `cs` prop. For more information, check our
 ["How To Customize Styles"](https://workday.github.io/canvas-kit/?path=/docs/styling-how-to-customize-styles--page).
+
+Custom styling is also supported through the [Loading Dots documented props below](#props).
 
 ### Adding screen reader support to loading animations
 
@@ -57,5 +64,9 @@ components included in Canvas to describe both the appearance and disappearance 
 
 ## Props
 
-Loading Dots does not have any documented props. Undocumented props are spread to its outermost
-element.
+Loading Dots exposes the following props:
+
+- `loadingDotsColors`: Applies backgroundColor to loading dots, intended for use with the circle variant design on grey/dark/image-based backgrounds. Defaults to `system.color.bg.alt.strong`.
+- `animationDurationMs`: Duration of the loading animation. Defaults to `40ms`.
+
+Other undocumented props are spread to its outermost element.
