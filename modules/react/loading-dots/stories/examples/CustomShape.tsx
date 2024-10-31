@@ -12,19 +12,21 @@ const styleOverrides = {
 
 const loadingStencil = createStencil({
   base: {
-    backgroundColor: system.color.bg.muted.soft,
+    borderRadius: system.shape.round,
+    backgroundColor: system.color.bg.overlay,
     height: 80,
     width: 80,
     alignItems: 'center',
     justifyContent: 'center',
     display: 'flex',
+    [loadingDotsStencil.vars.loadingDotColor]: system.color.icon.inverse,
   },
 });
 
 export const CustomShape = () => {
   return (
     <div className={styleOverrides.parentContainer}>
-      <LoadingDots cs={loadingStencil()} loadingDotColor="red" animationDurationMs="100ms" />
+      <LoadingDots cs={loadingStencil()} />
     </div>
   );
 };

@@ -22,7 +22,7 @@ export interface LoadingDotsProps extends CSProps {
    */
   loadingDotColor?: string;
   /**
-   * Duration of the loading animation.
+   * Duration of the loading animation in milliseconds.
    * @default `40ms`
    */
   animationDurationMs?: string;
