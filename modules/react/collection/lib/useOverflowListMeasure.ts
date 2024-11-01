@@ -12,7 +12,10 @@ export const useOverflowListMeasure = createElemPropsHook(useOverflowListModel)(
   const localRef = React.useRef(null);
   const {ref: resizeRef} = useResizeObserver({
     ref: localRef,
-    onResize: model.events.setContainerWidth,
+    onResize:
+      model.state.orientation === 'horizontal'
+        ? model.events.setContainerWidth
+        : model.events.setContainerHeight,
   });
   const elementRef = useForkRef(ref, resizeRef);
 
