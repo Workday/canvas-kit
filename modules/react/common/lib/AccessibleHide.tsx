@@ -19,7 +19,7 @@ export const accessibleHide = {
   border: 0,
 } as const;
 
-const accessibleHideStyles = createStyles(accessibleHide);
+export const accessibleHideStyles = createStyles(accessibleHide);
 
 /**
  * A convenient component wrapper to visually hide content, while still making it accessible to screen readers

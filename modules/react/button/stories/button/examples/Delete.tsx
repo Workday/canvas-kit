@@ -20,6 +20,6 @@ export const Delete = () => (
     <DeleteButton icon={trashIcon} iconPosition="end">
       Delete
     </DeleteButton>
-    <DeleteButton icon={trashIcon} />
+    <DeleteButton aria-label="trash" icon={trashIcon} />
   </Flex>
 );

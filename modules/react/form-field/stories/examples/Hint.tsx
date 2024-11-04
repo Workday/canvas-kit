@@ -1,7 +1,8 @@
 import React from 'react';
 import {FormField} from '@workday/canvas-kit-react/form-field';
+
 import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {useUniqueId} from '@workday/canvas-kit-react/common';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
 export const Hint = () => {
   const [value, setValue] = React.useState('');
@@ -11,12 +12,14 @@ export const Hint = () => {
   };
 
   return (
-    <FormField
-      hintId={useUniqueId()}
-      hintText="This address will be shown as a shipping address option for future orders."
-      label="Address Name"
-    >
-      <TextInput onChange={handleChange} value={value} />
-    </FormField>
+    <Flex>
+      <FormField orientation="horizontalStart">
+        <FormField.Label>First Name</FormField.Label>
+        <FormField.Field>
+          <FormField.Input as={TextInput} value={value} onChange={handleChange} />
+          <FormField.Hint>Cannot contain numbers</FormField.Hint>
+        </FormField.Field>
+      </FormField>
+    </Flex>
   );
 };

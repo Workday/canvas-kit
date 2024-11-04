@@ -1,0 +1,66 @@
+import {ExampleCodeBlock, InformationHighlight} from '@workday/canvas-kit-docs';
+import * as TokenStories from './Tokens.stories';
+import {BorderRadius, Space, Depth, Colors, Type} from './examples/Tokens';
+import {Overview} from './examples/Overview';
+
+<Meta of={TokenStories} />
+
+# Tokens
+
+<InformationHighlight>
+  <InformationHighlight.Icon />
+  <InformationHighlight.Heading>New Tokens Package Available!</InformationHighlight.Heading>
+  <InformationHighlight.Body>
+    The tokens documented below are still available in Canvas Kit but are being replaced by our new
+    Canvas Tokens Web package. We encourage you to begin moving to our new tokens.
+  </InformationHighlight.Body>
+  <InformationHighlight.Link href="https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs">
+    View the Docs
+  </InformationHighlight.Link>
+</InformationHighlight>
+
+Tokens are the smallest pieces of our Design System with the primary function of storing UI
+information. They enable building components and patterns with consistency across our platforms.
+
+<ExampleCodeBlock code={Overview} />
+
+## Border Radius
+
+### Usage
+
+<ExampleCodeBlock code={BorderRadius} />
+
+## Colors
+
+Our color system enables consistency and recognition across many contexts. There are 27 sets of hues
+with six shades in each color set.
+
+### Usage
+
+<ExampleCodeBlock code={Colors} />
+
+## Depth
+
+Light and shadows are utilized to indicate a sense of depth. This establishes hierarchy and provides
+predictability within the Canvas user interface.
+
+### Usage
+
+<ExampleCodeBlock code={Depth} />
+
+## Space
+
+This guide will help you make decisions when spacing elements in your designs using our space Tokens
+
+### Usage
+
+<ExampleCodeBlock code={Space} />
+
+## Type
+
+Typography is at the core of our interface. With it, we create clear hierarchies that guide users
+through our products.
+
+### Usage
+
+<ExampleCodeBlock code={Type} />

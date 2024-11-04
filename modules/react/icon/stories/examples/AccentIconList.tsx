@@ -8,7 +8,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 const ImportedIcons = Object.keys(CanvasAccenttIcons);
 
-const allIcons = ImportedIcons.filter(icon => icon !== 'CanvasAccenttIcons');
+const allIcons = ImportedIcons.filter(icon => icon !== 'CanvasAccentIcons');
 
 const styleOverrides = {
   parentContainer: createStyles({

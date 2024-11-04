@@ -1,7 +1,7 @@
 import React from 'react';
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {Flex, Box} from '@workday/canvas-kit-react/layout';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
