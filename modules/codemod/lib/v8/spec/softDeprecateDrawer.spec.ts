@@ -64,7 +64,7 @@ describe('Canvas Kit Deprecate Drawer Codemod', () => {
     it('should properly transform Drawer JSX identifiers', () => {
       const input = `
       import {Drawer, DrawerDirection} from '@workday/canvas-kit-labs-react/drawer';
-  
+
       const CustomDrawer = () => {
         return (
           <Drawer openDirection={DrawerDirection.Left}>
@@ -80,13 +80,9 @@ describe('Canvas Kit Deprecate Drawer Codemod', () => {
 
       const expected = `
       import {DeprecatedDrawer, DeprecatedDrawerDirection} from '@workday/canvas-kit-labs-react/drawer';
-  
+
       const CustomDrawer = () => {
-        return (
-          <DeprecatedDrawer openDirection={DeprecatedDrawerDirection.Left}>
-            Hello World
-          </DeprecatedDrawer>
-        );
+        return (<DeprecatedDrawer openDirection={DeprecatedDrawerDirection.Left}>Hello World</DeprecatedDrawer>);
       };
 
       const AnotherDrawer = (props) => {
@@ -132,7 +128,7 @@ describe('Canvas Kit Deprecate Drawer Codemod', () => {
     it('should properly transform type reference identifiers', () => {
       const input = `
       import { DrawerProps } from '@workday/canvas-kit-labs-react/drawer';
-  
+
       type CustomDrawerProps = DrawerProps;
       interface AnotherDrawerProps extends DrawerProps {
         specialProp?: boolean;
@@ -140,7 +136,7 @@ describe('Canvas Kit Deprecate Drawer Codemod', () => {
       `;
       const expected = `
       import { DeprecatedDrawerProps } from '@workday/canvas-kit-labs-react/drawer';
-  
+
       type CustomDrawerProps = DeprecatedDrawerProps;
       interface AnotherDrawerProps extends DeprecatedDrawerProps {
         specialProp?: boolean;
@@ -153,7 +149,7 @@ describe('Canvas Kit Deprecate Drawer Codemod', () => {
     it('should properly transform type reference identifiers', () => {
       const input = `
       import { DrawerHeaderProps } from '@workday/canvas-kit-labs-react/drawer';
-  
+
       type CustomDrawerHeaderProps = DrawerHeaderProps;
       interface AnotherDrawerHeaderProps extends DrawerHeaderProps {
         specialProp?: boolean;
@@ -161,7 +157,7 @@ describe('Canvas Kit Deprecate Drawer Codemod', () => {
       `;
       const expected = `
       import { DeprecatedDrawerHeaderProps } from '@workday/canvas-kit-labs-react/drawer';
-  
+
       type CustomDrawerHeaderProps = DeprecatedDrawerHeaderProps;
       interface AnotherDrawerHeaderProps extends DeprecatedDrawerHeaderProps {
         specialProp?: boolean;

@@ -1,6 +1,6 @@
 import React from 'react';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 
 export const RefForwarding = () => {
@@ -19,7 +19,9 @@ export const RefForwarding = () => {
     <>
       <FormField>
         <FormField.Label>Email</FormField.Label>
-        <FormField.Input as={TextInput} onChange={handleChange} ref={ref} value={value} />
+        <FormField.Field>
+          <FormField.Input as={TextInput} onChange={handleChange} ref={ref} value={value} />
+        </FormField.Field>
       </FormField>
       <PrimaryButton onClick={handleClick}>Focus Text Input</PrimaryButton>
     </>
