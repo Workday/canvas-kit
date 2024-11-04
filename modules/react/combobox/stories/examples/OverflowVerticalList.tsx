@@ -222,7 +222,7 @@ const SidebarList = createSubcomponent('div')({
   return (
     <ResponsiveList
       as={Element}
-      cs={{gap: '40px'}}
+      gap="xs"
       depth={1}
       background={commonColors.background}
       borderTop={`solid 1px ${colors.soap400}`}
