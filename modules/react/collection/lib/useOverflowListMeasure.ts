@@ -14,7 +14,6 @@ import {useOverflowListModel} from './useOverflowListModel';
  * overflow detection.
  */
 export const useOverflowListMeasure = createElemPropsHook(useOverflowListModel)((model, ref) => {
-  // const localRef = React.useRef(null);
   const {elementRef, localRef} = useLocalRef(ref as React.Ref<HTMLElement>);
   const gapProperty = model.state.orientation === 'horizontal' ? 'columnGap' : 'rowGap';
 
