@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.1.20](https://github.com/Workday/canvas-kit/releases/tag/v11.1.20) (2024-11-04)
+
+### Components
+
+- fix: Add flex gap to overflow list calculations ([#3021](https://github.com/Workday/canvas-kit/pull/3021)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v11.1.19](https://github.com/Workday/canvas-kit/releases/tag/v11.1.19) (2024-10-28)
 
 ### Components
