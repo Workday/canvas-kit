@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.0.8](https://github.com/Workday/canvas-kit/releases/tag/v12.0.8) (2024-11-04)
+
+### Infrastructure
+
+- ci: Updated forward merge yml ([#3027](https://github.com/Workday/canvas-kit/pull/3027)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
 ## [v12.0.7](https://github.com/Workday/canvas-kit/releases/tag/v12.0.7) (2024-11-04)
 
 ### Components
