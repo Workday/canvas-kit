@@ -24,13 +24,6 @@ export const useOverflowListTarget = createElemPropsHook(useOverflowListModel)((
     if (localRef.current) {
       const styles = getComputedStyle(localRef.current);
 
-      // model.events.setOverflowTargetWidth({
-      //   width:
-      //     localRef.current.offsetWidth +
-      //     parseFloat(styles.marginLeft) +
-      //     parseFloat(styles.marginRight),
-      // });
-
       model.events.setOverflowTargetSize({
         width:
           localRef.current.offsetWidth +

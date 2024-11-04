@@ -5,17 +5,16 @@ import {useSelectionListModel} from './useSelectionListModel';
 import {Item} from './useBaseListModel';
 
 export function getHiddenIds(
-  containerWidth: number,
+  containerSize: number,
   containerGap: number,
-  overflowTargetWidth: number,
-  itemWidthCache: Record<string, number>,
+  overflowTargetSize: number,
+  itemSizeCache: Record<string, number>,
   selectedIds: string[] | 'all',
   items: Item<any>[]
 ): string[] {
   /** Allows us to prioritize showing the selected item */
   let selectedKey: undefined | string;
   /** Tally of combined item widths. We'll add items that fit until the container is full */
-  // let itemWidth = 0;
   let itemSize = 0;
   /** Tally ids that won't fit inside the container. These will be used by components to hide
    * elements that won't fit in the container */
@@ -31,37 +30,11 @@ export function getHiddenIds(
     }
   }
 
-  // if (
-  //   Object.keys(itemWidthCache).reduce((sum, key) => sum + itemWidthCache[key], 0) <= containerWidth
-  // ) {
-  //   // All items fit, return empty array
-  //   return [];
-  // } else if (selectedKey) {
-  //   if (itemWidthCache[selectedKey] + overflowTargetWidth > containerWidth) {
-  //     // If the selected item doesn't fit, only show overflow (all items hidden)
-  //     return Object.keys(itemWidthCache);
-  //   } else {
-  //     // at least the selected item and overflow target fit. Update our itemWidth with the sum
-  //     itemWidth += itemWidthCache[selectedKey] + overflowTargetWidth;
-  //   }
-  // } else {
-  //   itemWidth += overflowTargetWidth;
-  // }
-
-  // for (const key in itemWidthCache) {
-  //   if (key !== selectedKey) {
-  //     itemWidth += itemWidthCache[key];
-  //     if (itemWidth > containerWidth) {
-  //       hiddenIds.push(key);
-  //     }
-  //   }
-  // }
-
   if (
-    Object.keys(itemWidthCache).reduce(
-      (sum, key, index) => sum + itemWidthCache[key] + (index > 0 ? containerGap : 0),
+    Object.keys(itemSizeCache).reduce(
+      (sum, key, index) => sum + itemSizeCache[key] + (index > 0 ? containerGap : 0),
       0
-    ) <= containerWidth
+    ) <= containerSize
   ) {
     // All items fit, return empty array
     return [];
@@ -71,7 +44,7 @@ export function getHiddenIds(
       return Object.keys(itemSizeCache);
     } else {
       // at least the selected item and overflow target fit. Update our itemWidth with the sum
-      itemWidth += itemWidthCache[selectedKey] + overflowTargetWidth;
+      itemSize += itemSizeCache[selectedKey] + overflowTargetSize;
       shouldAddGap = true;
     }
   } else {
@@ -80,9 +53,9 @@ export function getHiddenIds(
 
   for (const key in itemSizeCache) {
     if (key !== selectedKey) {
-      itemWidth += itemWidthCache[key] + (shouldAddGap ? containerGap : 0);
+      itemSize += itemSizeCache[key] + (shouldAddGap ? containerGap : 0);
       shouldAddGap = true;
-      if (itemWidth > containerWidth) {
+      if (itemSize > containerSize) {
         hiddenIds.push(key);
       }
     }
@@ -91,69 +64,11 @@ export function getHiddenIds(
   return hiddenIds;
 }
 
-// export function getHiddenHeightIds(
-//   containerHeight: number,
-//   overflowTargetHeight: number,
-//   itemHeightCache: Record<string, number>,
-//   selectedIds: string[] | 'all',
-//   items?: Item<any>[]
-// ): string[] {
-//   console.log('this function called');
-//   /** Allows us to prioritize showing the selected item */
-//   let selectedKey: undefined | string;
-//   /** Tally of combined item Heights. We'll add items that fit until the container is full */
-//   let itemHeight = 0;
-//   /** Tally ids that won't fit inside the container. These will be used by components to hide
-//    * elements that won't fit in the container */
-//   const hiddenIds: string[] = [];
-//   if (selectedIds !== 'all' && selectedIds.length) {
-//     if (items?.length) {
-//       // If selectedIds[0] is not in items, use the first id from items
-//       selectedKey = items.find(item => item.id === selectedIds[0]) ? selectedIds[0] : items[0].id;
-//     } else {
-//       selectedKey = selectedIds[0];
-//     }
-//   }
-
-//   if (
-//     Object.keys(itemHeightCache).reduce((sum, key) => sum + itemHeightCache[key], 0) <=
-//     containerHeight
-//   ) {
-//     // All items fit, return empty array
-//     return [];
-//   } else if (selectedKey) {
-//     if (itemHeightCache[selectedKey] + overflowTargetHeight > containerHeight) {
-//       // If the selected item doesn't fit, only show overflow (all items hidden)
-//       return Object.keys(itemHeightCache);
-//     } else {
-//       // at least the selected item and overflow target fit. Update our itemHeight with the sum
-//       itemHeight += itemHeightCache[selectedKey] + overflowTargetHeight;
-//     }
-//   } else {
-//     itemHeight += overflowTargetHeight;
-//   }
-
-//   for (const key in itemHeightCache) {
-//     if (key !== selectedKey) {
-//       itemHeight += itemHeightCache[key];
-//       if (itemHeight > containerHeight) {
-//         hiddenIds.push(key);
-//       }
-//     }
-//   }
-
-//   console.log(hiddenIds);
-
-//   return hiddenIds;
-// }
-
 export const useOverflowListModel = createModelHook({
   defaultConfig: {
     ...useSelectionListModel.defaultConfig,
     initialHiddenIds: [] as string[],
     containerWidth: 0,
-    containerHeight: 0,
-    containerSize: 0,
     /**
      * Determines if overflow should actually occur. For example, touch devices are better at
      * side-scrolling than mouse devices. In these cases, it makes sense to disable overflowing.
@@ -166,13 +81,13 @@ export const useOverflowListModel = createModelHook({
   const shouldCalculateOverflow =
     config.shouldCalculateOverflow === undefined ? true : config.shouldCalculateOverflow;
   const [hiddenIds, setHiddenIds] = React.useState(config.initialHiddenIds);
-  const [itemWidthCache, setItemWidthCache] = React.useState<Record<string, number>>({});
-  const [containerWidth, setContainerWidth] = React.useState(0);
+  const [itemSizeCache, setItemSizeCache] = React.useState<Record<string, number>>({});
+  const [containerSize, setContainerSize] = React.useState(0);
   const [containerGap, setContainerGap] = React.useState(0);
-  const containerWidthRef = React.useRef(0);
-  const itemWidthCacheRef = React.useRef(itemWidthCache);
+  const containerSizeRef = React.useRef(0);
+  const itemSizeCacheRef = React.useRef(itemSizeCache);
   const [overflowTargetWidth, setOverflowTargetWidth] = React.useState(0);
-  const overflowTargetWidthRef = React.useRef(0);
+  const overflowTargetSizeRef = React.useRef(0);
 
   const internalHiddenIds = shouldCalculateOverflow ? hiddenIds : [];
 
@@ -188,8 +103,10 @@ export const useOverflowListModel = createModelHook({
   const state = {
     ...model.state,
     hiddenIds: internalHiddenIds,
-    itemWidthCache,
-    containerWidth,
+    itemSizeCache,
+    itemWidthCache: itemSizeCache,
+    containerSize,
+    containerWidth: containerSize,
     containerGap,
     overflowTargetWidth,
   };
@@ -199,117 +116,71 @@ export const useOverflowListModel = createModelHook({
     select(data: Parameters<typeof model.events.select>[0]) {
       const {selectedIds} = model.selection.select(data.id, state);
       const ids = getHiddenIds(
-        containerWidthRef.current,
+        containerSizeRef.current,
         containerGap,
-        overflowTargetWidthRef.current,
-        itemWidthCacheRef.current,
+        overflowTargetSizeRef.current,
+        itemSizeCacheRef.current,
         selectedIds,
         config.items
       );
+      model.events.select(data);
+
       setHiddenIds(ids);
-
-      // if (model.state.orientation === 'horizontal') {
-      //   const ids = getHiddenIds(
-      //     containerWidthRef.current,
-      //     overflowTargetWidthRef.current,
-      //     itemWidthCacheRef.current,
-      //     selectedIds,
-      //     config.items
-      //   );
-      //   model.events.select(data);
-
-      //   setHiddenIds(ids);
-      // } else {
-      //   console.log('SELECT>>');
-      //   const ids = getHiddenHeightIds(
-      //     containerHeightRef.current,
-      //     overflowTargetHeightRef.current,
-      //     itemHeightCacheRef.current,
-      //     selectedIds,
-      //     config.items
-      //   );
-      //   model.events.select(data);
-      //   // console.
-      //   setHiddenIds(ids);
-      // }
     },
     setContainerSize(data: {width?: number; height?: number}) {
       containerSizeRef.current =
         model.state.orientation === 'horizontal' ? data.width || 0 : data.height || 0;
-      if (model.state.orientation === 'horizontal') {
-        setContainerSize(data.width || 0);
-      } else {
-        setContainerSize(data.height || 0);
-      }
-
+      setContainerSize(containerSizeRef.current);
+      // setContainerGap(containerSizeRef.current);
       const ids = getHiddenIds(
-        containerWidthRef.current,
+        containerSizeRef.current,
         containerGap,
-        overflowTargetWidthRef.current,
-        itemWidthCacheRef.current,
+        overflowTargetSizeRef.current,
+        itemSizeCacheRef.current,
         state.selectedIds,
         config.items
       );
-
       setHiddenIds(ids);
+    },
+    setContainerWidth(data: {width?: number}) {
+      events.setContainerSize({width: data.width, height: 0});
     },
     setContainerGap(data: {size: number}) {
       setContainerGap(data.size);
 
       const ids = getHiddenIds(
-        containerWidthRef.current,
+        containerSizeRef.current,
         data.size,
-        overflowTargetWidthRef.current,
-        itemWidthCacheRef.current,
+        overflowTargetSizeRef.current,
+        itemSizeCacheRef.current,
         state.selectedIds,
         config.items
       );
 
       setHiddenIds(ids);
     },
-    // setContainerWidth(data: {width?: number}) {
-    //   containerWidthRef.current = data.width || 0;
-    //   setContainerWidth(data.width || 0);
-
-    //   const ids = getHiddenIds(
-    //     containerWidthRef.current,
-    //     overflowTargetWidthRef.current,
-    //     itemWidthCacheRef.current,
-    //     state.selectedIds,
-    //     config.items
-    //   );
-
-    //   setHiddenIds(ids);
-    // },
-
-    // setContainerHeight(data: {height?: number}) {
-    //   console.log('set container height', data.height);
-    //   containerHeightRef.current = data.height || 0;
-    //   setContainerHeight(data.height || 0);
-
-    //   const ids = getHiddenHeightIds(
-    //     containerHeightRef.current,
-    //     overflowTargetHeightRef.current,
-    //     itemHeightCacheRef.current,
-    //     state.selectedIds,
-    //     config.items
-    //   );
-
-    //   setHiddenIds(ids);
-    // },
     setOverflowTargetSize(data: {width: number; height: number}) {
       overflowTargetSizeRef.current =
-        model.state.orientation === 'horizontal' ? data.width : data.height;
-      setOverflowTargetSize(model.state.orientation === 'horizontal' ? data.width : data.height);
+        model.state.orientation === 'horizontal' ? data.width || 0 : data.height || 0;
+      setOverflowTargetWidth(overflowTargetSizeRef.current);
     },
-    // setOverflowTargetWidth(data: {width: number}) {
-    //   overflowTargetWidthRef.current = data.width;
-    //   setOverflowTargetWidth(data.width);
-    // },
-    // setOverflowTargetHeight(data: {height: number}) {
-    //   overflowTargetHeightRef.current = data.height;
-    //   setOverflowTargetHeight(data.height);
-    // },
+
+    /**
+     *
+     * @deprecated `setOverflowTargetWidth` is deprecated. Please use `setOverflowTargetSize` and pass in the `width` and set `height` to `0`.
+     */
+    setOverflowTargetWidth(data: {width: number}) {
+      overflowTargetSizeRef.current = data.width;
+      events.setOverflowTargetSize({width: overflowTargetSizeRef.current, height: 0});
+    },
+
+    /**
+     *
+     * @deprecated `addItemWidth` is deprecated. Please use `addItemSize` and set the `width`
+     */
+    addItemWidth(data: {id: string; width: number}) {
+      events.addItemSize({id: data.id, width: data.width, height: 0});
+    },
     addItemSize(data: {id: string; width: number; height: number}) {
       itemSizeCacheRef.current = {
         ...itemSizeCacheRef.current,
@@ -319,53 +190,16 @@ export const useOverflowListModel = createModelHook({
       setItemSizeCache(itemSizeCacheRef.current);
 
       const ids = getHiddenIds(
-        containerWidthRef.current,
+        containerSizeRef.current,
         containerGap,
-        overflowTargetWidthRef.current,
-        itemWidthCacheRef.current,
+        overflowTargetSizeRef.current,
+        itemSizeCacheRef.current,
         state.selectedIds,
         config.items
       );
 
       setHiddenIds(ids);
     },
-    // addItemWidth(data: {id: string; width: number}) {
-    //   itemWidthCacheRef.current = {
-    //     ...itemWidthCacheRef.current,
-    //     [data.id]: data.width,
-    //   };
-
-    //   setItemWidthCache(itemWidthCacheRef.current);
-
-    //   const ids = getHiddenIds(
-    //     containerWidthRef.current,
-    //     overflowTargetWidthRef.current,
-    //     itemWidthCacheRef.current,
-    //     state.selectedIds,
-    //     config.items
-    //   );
-
-    //   setHiddenIds(ids);
-    // },
-
-    // addItemHeight(data: {id: string; height: number}) {
-    //   itemHeightCacheRef.current = {
-    //     ...itemHeightCacheRef.current,
-    //     [data.id]: data.height,
-    //   };
-
-    //   setItemHeightCache(itemHeightCacheRef.current);
-
-    //   const ids = getHiddenIds(
-    //     containerHeightRef.current,
-    //     overflowTargetHeightRef.current,
-    //     itemHeightCacheRef.current,
-    //     state.selectedIds,
-    //     config.items
-    //   );
-
-    //   setHiddenIds(ids);
-    // },
     removeItemSize(data: {id: string}) {
       const newCache = {...itemSizeCacheRef.current};
       delete newCache[data.id];
@@ -373,10 +207,10 @@ export const useOverflowListModel = createModelHook({
       setItemSizeCache(itemSizeCacheRef.current);
 
       const ids = getHiddenIds(
-        containerWidthRef.current,
+        containerSizeRef.current,
         containerGap,
-        overflowTargetWidthRef.current,
-        itemWidthCacheRef.current,
+        overflowTargetSizeRef.current,
+        itemSizeCacheRef.current,
         state.selectedIds !== 'all'
           ? state.selectedIds.filter(sId => data.id !== sId)
           : state.selectedIds,
@@ -385,42 +219,13 @@ export const useOverflowListModel = createModelHook({
 
       setHiddenIds(ids);
     },
-    // removeItemWidth(data: {id: string}) {
-    //   const newCache = {...itemWidthCacheRef.current};
-    //   delete newCache[data.id];
-    //   itemWidthCacheRef.current = newCache;
-    //   setItemWidthCache(itemWidthCacheRef.current);
-
-    //   const ids = getHiddenIds(
-    //     containerWidthRef.current,
-    //     overflowTargetWidthRef.current,
-    //     itemWidthCacheRef.current,
-    //     state.selectedIds !== 'all'
-    //       ? state.selectedIds.filter(sId => data.id !== sId)
-    //       : state.selectedIds,
-    //     config.items
-    //   );
-
-    //   setHiddenIds(ids);
-    // },
-    // removeItemHeight(data: {id: string}) {
-    //   const newCache = {...itemHeightCacheRef.current};
-    //   delete newCache[data.id];
-    //   itemHeightCacheRef.current = newCache;
-    //   setItemHeightCache(itemHeightCacheRef.current);
-
-    //   const ids = getHiddenIds(
-    //     containerHeightRef.current,
-    //     overflowTargetHeightRef.current,
-    //     itemHeightCacheRef.current,
-    //     state.selectedIds !== 'all'
-    //       ? state.selectedIds.filter(sId => data.id !== sId)
-    //       : state.selectedIds,
-    //     config.items
-    //   );
-
-    //   setHiddenIds(ids);
-    // },
+    /**
+     *
+     * @deprecated `removeItemWidth` is deprecated. Please use `removeItemSize`.
+     */
+    removeItemWidth(data: {id: string}) {
+      events.removeItemSize({id: data.id});
+    },
     addHiddenKey(data: {id: string}) {
       setHiddenIds(ids => ids.concat(data.id));
     },

@@ -65,7 +65,7 @@ export const TabsList = createSubcomponent('div')({
       position="relative"
       borderBottom={`1px solid ${commonColors.divider}`}
       paddingX={modality === 'touch' ? 'zero' : 'm'}
-      gap="xs"
+      cs={{gap: '24px'}}
       maskImage={
         modality === 'touch' && touchStates.isDragging
           ? `linear-gradient(${

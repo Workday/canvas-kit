@@ -31,40 +31,17 @@ export const useOverflowListItemMeasure = createElemPropsHook(useOverflowListMod
           width:
             localRef.current.offsetWidth +
             parseFloat(styles.marginLeft) +
+            parseFloat(styles.marginLeft) +
             parseFloat(styles.marginRight),
           height:
             localRef.current.offsetWidth +
             parseFloat(styles.marginTop) +
             parseFloat(styles.marginBottom),
         });
-        // if (model.state.orientation === 'horizontal') {
-        //   model.events.addItemWidth({
-        //     id: name,
-        //     width:
-        //       localRef.current.offsetWidth +
-        //       parseFloat(styles.marginLeft) +
-        //       parseFloat(styles.marginRight),
-        //   });
-        // } else {
-        //   console.log('in here');
-        //   model.events.addItemHeight({
-        //     id: name,
-        //     height:
-        //       localRef.current.offsetWidth +
-        //       parseFloat(styles.marginTop) +
-        //       parseFloat(styles.marginBottom),
-        //   });
-        // }
       }
 
       return () => {
         model.events.removeItemSize({id: name});
-        // if (model.state.orientation === 'horizontal') {
-        //   model.events.removeItemWidth({id: name});
-        // } else {
-        //   console.log('remove item height', name);
-        //   model.events.removeItemHeight({id: name});
-        // }
       };
     });
 

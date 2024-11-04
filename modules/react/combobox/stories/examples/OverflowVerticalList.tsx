@@ -78,7 +78,7 @@ const useOverflowSidebar = createModelHook({
     })
   );
 
-  console.log(model.state.orientation);
+  // console.log(model.state.orientation);
 
   let hiddenIds = model.state.hiddenIds;
   let nonInteractiveIds = model.state.nonInteractiveIds;
@@ -92,9 +92,9 @@ const useOverflowSidebar = createModelHook({
       ? totalSize
       : config.maximumVisible;
 
-  console.log('max visible', maximumVisible);
-  console.log('totalSize', totalSize);
-  console.log('hiddenIdsLeng', model.state.hiddenIds);
+  // console.log('max visible', maximumVisible);
+  // console.log('totalSize', totalSize);
+  // console.log('hiddenIdsLeng', model.state.hiddenIds);
   if (totalSize - hiddenIds.length >= maximumVisible) {
     hiddenIds = items.slice(maximumVisible, totalSize).map(getId);
   }
@@ -198,10 +198,14 @@ interface SidebarListProps<T = any> extends Omit<ExtractProps<typeof Flex, never
 const ResponsiveList = styled(Flex)<SidebarListProps & StyledType>(({theme}) => {
   const {canvas: canvasTheme} = getTheme(theme);
   return {
+    '> *': {
+      flex: '0 0 auto',
+      // alignSelf: 'start',
+    },
     [canvasTheme.breakpoints.down('s')]: {
       padding: space.s,
       '> *': {
-        flex: 1,
+        flex: '0 0 auto',
         // alignSelf: 'start',
       },
     },
@@ -218,7 +222,7 @@ const SidebarList = createSubcomponent('div')({
   return (
     <ResponsiveList
       as={Element}
-      gap="m"
+      cs={{gap: '40px'}}
       depth={1}
       background={commonColors.background}
       borderTop={`solid 1px ${colors.soap400}`}
