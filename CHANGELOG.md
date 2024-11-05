@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.1.22](https://github.com/Workday/canvas-kit/releases/tag/v11.1.22) (2024-11-05)
+
+### Components
+
+- fix: SystemIcon supports rem by default ([#3031](https://github.com/Workday/canvas-kit/pull/3031)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v11.1.21](https://github.com/Workday/canvas-kit/releases/tag/v11.1.21) (2024-11-04)
 
 ### Components
