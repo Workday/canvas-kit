@@ -106,6 +106,9 @@ export const useOverflowListModel = createModelHook({
     itemSizeCache,
     itemWidthCache: itemSizeCache,
     containerSize,
+    /**
+    * @deprecated Use `containerSize` instead
+    */
     containerWidth: containerSize,
     containerGap,
     overflowTargetWidth,
