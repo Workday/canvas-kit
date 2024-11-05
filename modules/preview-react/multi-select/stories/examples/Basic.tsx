@@ -8,10 +8,14 @@ const items = ['Cheese', 'Olives', 'Onions', 'Pepperoni', 'Peppers'];
 export const Basic = () => {
   return (
     <>
-      <MultiSelect items={items}>
+      <MultiSelect items={items} initialSelectedIds={['Olives', 'Onions', 'Pepperoni']}>
         <FormField orientation="horizontal">
           <FormField.Label>Toppings</FormField.Label>
-          <FormField.Input as={MultiSelect.Input} placeholder="Select Multiple" />
+          <FormField.Input
+            as={MultiSelect.Input}
+            placeholder="Select Multiple"
+            removeLabel="Remove"
+          />
           <MultiSelect.Popper>
             <MultiSelect.Card>
               <MultiSelect.List>

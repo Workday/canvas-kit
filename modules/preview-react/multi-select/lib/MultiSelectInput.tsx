@@ -11,16 +11,11 @@ import {
 import {createStencil, CSProps, handleCsProp} from '@workday/canvas-kit-styling';
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {
-  ListBox,
-  useListItemRegister,
-  useListItemRovingFocus,
-  useListModel,
-} from '@workday/canvas-kit-react/collection';
 import {useComboboxInput, useComboboxInputConstrained} from '@workday/canvas-kit-react/combobox';
-import {Pill} from '@workday/canvas-kit-preview-react/pill';
 
 import {useMultiSelectModel} from './useMultiSelectModel';
+import {MultiSelectedItemProps} from './MultiSelectedItem';
+import {MultiSelectedList} from './MultiSelectedList';
 
 export const multiSelectStencil = createStencil({
   base: {
@@ -121,61 +116,28 @@ export const useMultiSelectInput = composeHooks(
   useComboboxInput
 );
 
-const removeItem = <T extends unknown>(id: string, model: ReturnType<typeof useListModel>) => {
-  const index = model.state.items.findIndex(item => item.id === model.state.cursorId);
-  const nextIndex = index === model.state.items.length - 1 ? index - 1 : index + 1;
-  const nextId = model.state.items[nextIndex].id;
-  if (model.state.cursorId === id) {
-    // We're removing the currently focused item. Focus next item
-    model.events.goTo({id: nextId});
-  }
-};
-
-const useMultiSelectedItem = composeHooks(
-  createElemPropsHook(useListModel)((model, ref, elemProps) => {
-    return {
-      onKeyDown(event: React.KeyboardEvent<HTMLElement>) {
-        const id = event.currentTarget.dataset.id || '';
-        if (event.key === 'Backspace' || event.key === 'Delete') {
-          model.events.select({id});
-          removeItem(id, model);
-        }
-      },
-      onClick(event: React.MouseEvent<HTMLElement>) {
-        const id = event.currentTarget.dataset.id || '';
-        model.events.select({id});
-      },
-    };
-  }),
-  useListItemRovingFocus,
-  useListItemRegister
-);
-
-const MultiSelectedItem = createSubcomponent('span')({
-  modelHook: useListModel,
-  elemPropsHook: useMultiSelectedItem,
-})(({children, ref, ...elemProps}, Element) => {
-  return (
-    <Pill as={Element} variant="removable">
-      {children}
-      <Pill.IconButton ref={ref} {...(elemProps as any)} />
-    </Pill>
-  );
-});
-
 export interface MultiSelectInputProps
   extends CSProps,
     Pick<
       React.InputHTMLAttributes<HTMLInputElement>,
       'disabled' | 'className' | 'style' | 'aria-labelledby'
-    > {}
+    >,
+    Pick<MultiSelectedItemProps, 'removeLabel'> {}
 
 export const MultiSelectInput = createSubcomponent(TextInput)({
   modelHook: useMultiSelectModel,
   elemPropsHook: useMultiSelectInput,
 })<MultiSelectInputProps>(
   (
-    {className, cs, style, 'aria-labelledby': ariaLabelledBy, formInputProps, ...elemProps},
+    {
+      className,
+      cs,
+      style,
+      'aria-labelledby': ariaLabelledBy,
+      removeLabel,
+      formInputProps,
+      ...elemProps
+    },
     Element,
     model
   ) => {
@@ -194,20 +156,7 @@ export const MultiSelectInput = createSubcomponent(TextInput)({
             <SystemIcon icon={caretDownSmallIcon} />
           </InputGroup.InnerEnd>
         </InputGroup>
-        {model.selected.state.items.length ? (
-          <>
-            <div data-part="separator" />
-            <ListBox
-              model={model.selected}
-              as="div"
-              role="listbox"
-              aria-orientation="horizontal"
-              aria-labelledby={ariaLabelledBy}
-            >
-              {item => <MultiSelectedItem>{item.textValue}</MultiSelectedItem>}
-            </ListBox>
-          </>
-        ) : null}
+        <MultiSelectedList removeLabel={removeLabel} />
       </div>
     );
   }
@@ -218,7 +167,16 @@ export const MultiSelectSearchInput = createSubcomponent(TextInput)({
   elemPropsHook: useMultiSelectInput,
 })<MultiSelectInputProps>(
   (
-    {className, cs, style, 'aria-labelledby': ariaLabelledBy, formInputProps, ref, ...elemProps},
+    {
+      className,
+      cs,
+      style,
+      'aria-labelledby': ariaLabelledBy,
+      removeLabel,
+      formInputProps,
+      ref,
+      ...elemProps
+    },
     Element,
     model
   ) => {
@@ -228,34 +186,25 @@ export const MultiSelectSearchInput = createSubcomponent(TextInput)({
           <InputGroup.InnerStart pointerEvents="none" width={system.space.x8}>
             <SystemIcon icon={searchIcon} size={system.space.x4} />
           </InputGroup.InnerStart>
-          <InputGroup.Input data-part="form-input" {...formInputProps} />
+          <InputGroup.Input
+            data-part="form-input"
+            placeholder={null as unknown as string} // do not use a placeholder for this input
+            {...formInputProps}
+          />
           <InputGroup.Input
             data-part="user-input"
             as={Element}
             aria-labelledby={ariaLabelledBy}
             {...elemProps}
           />
-          <InputGroup.InnerEnd>
+          <InputGroup.InnerEnd width={system.space.x4}>
             <InputGroup.ClearButton />
           </InputGroup.InnerEnd>
           <InputGroup.InnerEnd pointerEvents="none">
             <SystemIcon icon={caretDownSmallIcon} />
           </InputGroup.InnerEnd>
         </InputGroup>
-        {model.selected.state.items.length ? (
-          <>
-            <div data-part="separator" />
-            <ListBox
-              model={model.selected}
-              as="div"
-              role="listbox"
-              aria-orientation="horizontal"
-              aria-labelledby={ariaLabelledBy}
-            >
-              {item => <MultiSelectedItem>{item.textValue}</MultiSelectedItem>}
-            </ListBox>
-          </>
-        ) : null}
+        <MultiSelectedList removeLabel={removeLabel} />
       </div>
     );
   }
