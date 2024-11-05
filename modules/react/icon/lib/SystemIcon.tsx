@@ -4,7 +4,7 @@ import {CanvasSystemIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
 import {createComponent, getColor} from '@workday/canvas-kit-react/common';
 import {cssVar, createStencil, handleCsProp, px2rem, createVars} from '@workday/canvas-kit-styling';
-import {base} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 import {Svg, SvgProps, svgStencil, transformColorNameToToken} from './Svg';
 
 /**
@@ -153,7 +153,11 @@ export const systemIconStencil = createStencil({
     accentColor: '',
     backgroundColor: '',
   },
-  base: ({accentColor, backgroundColor, color}) => ({
+  base: ({size, width, height, accentColor, backgroundColor, color}) => ({
+    '& svg': {
+      width: cssVar(width, cssVar(size, system.space.x6)),
+      height: cssVar(height, cssVar(size, system.space.x6)),
+    },
     [backgroundColor]: cssVar(backgroundColor, 'transparent'),
     '& .wd-icon-fill': {
       fill: cssVar(color, base.licorice200),
