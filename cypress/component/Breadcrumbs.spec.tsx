@@ -18,14 +18,6 @@ function getDropdownButton() {
   return cy.findByLabelText('More links');
 }
 
-function getDropdownMenu() {
-  return cy.findByRole('menu');
-}
-
-function getDropdownMenuItem(number?: number) {
-  return number ? cy.findAllByRole('menuitem').eq(number) : cy.findAllByRole('menuitem');
-}
-
 function openDropdownMenu() {
   const dropdownButton = getDropdownButton();
   dropdownButton.focus();
@@ -113,7 +105,6 @@ describe('Breadcrumbs', () => {
     () => {
       beforeEach(() => {
         cy.mount(<OverflowBreadcrumbs />);
-        cy.wait(150);
       });
 
       it('should not have any axe errors', () => {
@@ -135,191 +126,189 @@ describe('Breadcrumbs', () => {
       it('should have aria-controls set to "menu" on the dropdown button', () => {
         getDropdownButton().should('have.attr', 'aria-controls', 'menu');
       });
-
-      context('when action list container is only 480px wide', () => {
-        beforeEach(() => {
-          cy.findByRole('button', {name: '480px'}).click();
-        });
-
-        it('should have 4 items inside the "list"', () => {
-          cy.findByRole('list').findAllByRole('listitem').should('have.length', 4);
-        });
-
-        context('when the "More" button is clicked', () => {
-          beforeEach(() => {
-            cy.findByRole('button', {name: 'More links'}).click();
-          });
-
-          it('should show the overflow menu', () => {
-            cy.findByRole('menu').should('exist');
-          });
-
-          it('should contain second link as the first menu item', () => {
-            cy.findAllByRole('menuitem').eq(0).should('contain', 'Second Link');
-          });
-
-          it('should contain fifth link as the last menu item', () => {
-            cy.findAllByRole('menuitem').eq(-1).should('contain', 'Fifth Link');
-          });
-        });
-      });
-
-      context('when action list container is only 250px wide', () => {
-        beforeEach(() => {
-          cy.findByRole('button', {name: '250px'}).click();
-        });
-
-        it('should have 3 list items inside the "list"', () => {
-          cy.findByRole('list').findAllByRole('listitem').should('have.length', 3);
-        });
-
-        context('when the "More" button is clicked', () => {
-          beforeEach(() => {
-            cy.findByRole('button', {name: 'More links'}).click();
-          });
-
-          it('should show the overflow menu', () => {
-            cy.findByRole('menu').should('exist');
-          });
-
-          it('should contain second link as the first menu item', () => {
-            cy.findAllByRole('menuitem').eq(0).should('contain', 'Second Link');
-          });
-
-          it('should contain fifth link as the last menu item', () => {
-            cy.findAllByRole('menuitem').eq(-1).should('contain', 'Sixth Link');
-          });
-        });
-      });
-
-      context('when action list container is only 150px wide', () => {
-        beforeEach(() => {
-          cy.findByRole('button', {name: '150px'}).click();
-        });
-
-        it('should have 2 list items inside the "list"', () => {
-          cy.findByRole('list').findAllByRole('listitem').should('have.length', 2);
-        });
-
-        context('when the "More" button is clicked', () => {
-          beforeEach(() => {
-            cy.findByRole('button', {name: 'More links'}).click();
-          });
-
-          it('should show the overflow menu', () => {
-            cy.findByRole('menu').should('exist');
-          });
-
-          it('should contain home link as the first menu item', () => {
-            cy.findAllByRole('menuitem').eq(0).should('contain', 'Home');
-          });
-
-          it('should contain fifth link as the last menu item', () => {
-            cy.findAllByRole('menuitem').eq(-1).should('contain', 'Sixth Link');
-          });
-        });
-      });
     }
   );
 
-  context(
-    'given the [Components/Navigation/Breadcrumbs, Overflow Breadcrumbs] menu is rendered',
-    () => {
+  context('when action list container is only 480px wide', () => {
+    beforeEach(() => {
+      cy.mount(<OverflowBreadcrumbs width="480px" />);
+    });
+
+    it('should have 4 items inside the "list"', () => {
+      cy.findByRole('list').findAllByRole('listitem').should('have.length', 4);
+    });
+
+    context('when the "More" button is clicked', () => {
       beforeEach(() => {
-        cy.mount(<OverflowBreadcrumbs />);
-        cy.wait(150);
-        cy.findByRole('button', {name: '480px'}).click();
-        openDropdownMenu();
+        cy.findByRole('button', {name: 'More links'}).click();
       });
 
-      it('should not have any axe errors', () => {
-        cy.checkA11y();
+      it('should show the overflow menu', () => {
+        cy.findByRole('menu').should('exist');
       });
 
-      it('should have role set to "menu" on the dropdown menu', () => {
-        getDropdownMenu().should('have.attr', 'role', 'menu');
+      it('should contain second link as the first menu item', () => {
+        cy.get('[role="menuitem"]').first().should('contain', 'Second Link');
       });
 
-      it("should toggle the button's aria-expanded attribute to true", () => {
-        getDropdownButton().should('have.attr', 'aria-expanded', 'true');
+      it('should contain fifth link as the last menu item', () => {
+        cy.get('[role="menuitem"]').last().should('contain', 'Fifth Link');
+      });
+    });
+  });
+
+  context('when action list container is only 250px wide', () => {
+    beforeEach(() => {
+      cy.mount(<OverflowBreadcrumbs width="250px" />);
+    });
+
+    it('should have 3 list items inside the "list"', () => {
+      cy.findByRole('list').findAllByRole('listitem').should('have.length', 3);
+    });
+
+    context('when the "More" button is clicked', () => {
+      beforeEach(() => {
+        cy.findByRole('button', {name: 'More links'}).click();
       });
 
-      it('should have role set to "menuitem" for dropdown item link', () => {
-        getDropdownMenu()
-          .find('a')
-          .each($link => {
-            expect($link).to.have.attr('role', 'menuitem');
-          });
+      it('should show the overflow menu', () => {
+        cy.findByRole('menu').should('exist');
       });
 
-      context('when the dropdown menu is toggled with a keypress', () => {
-        it('should set focus to the first menu item', () => {
-          getDropdownMenuItem(0).should('have.focus');
-        });
+      it('should contain second link as the first menu item', () => {
+        cy.get('[role="menuitem"]').first().should('contain', 'Second Link');
       });
 
-      context('when the first menu item is focused', () => {
-        beforeEach(() => {
-          cy.focused().realType('{downarrow}');
-          cy.wait(0);
-        });
+      it('should contain fifth link as the last menu item', () => {
+        cy.get('[role="menuitem"]').last().should('contain', 'Sixth Link');
+      });
+    });
+  });
 
-        it('should toggle focus to the second menu item on down keypress', () => {
-          cy.findByRole('menuitem', {name: 'Second Link'}).focus();
-          cy.findByRole('menuitem', {name: 'Second Link'}).should('have.focus');
-        });
+  context('when action list container is only 150px wide', () => {
+    beforeEach(() => {
+      cy.mount(<OverflowBreadcrumbs width="150px" />);
+    });
+
+    it('should have 2 list items inside the "list"', () => {
+      cy.findByRole('list').findAllByRole('listitem').should('have.length', 2);
+    });
+
+    context('when the "More" button is clicked', () => {
+      beforeEach(() => {
+        cy.findByRole('button', {name: 'More links'}).click();
       });
 
-      context('when the last menu item is focused', () => {
-        beforeEach(() => {
-          cy.focused().realType('{downarrow}');
-        });
-
-        it('should roll the focus back to the first menu item on down keypress', () => {
-          cy.focused().realType('{downarrow}');
-          cy.focused().realType('{downarrow}');
-          cy.focused().realType('{downarrow}');
-          getDropdownMenuItem(0).should('have.focus');
-        });
+      it('should show the overflow menu', () => {
+        cy.findByRole('menu').should('exist');
       });
 
-      context('when the down arrow key is pressed on the dropdown menu', () => {
-        beforeEach(() => {
-          cy.focused().realType('{downarrow}');
-          cy.wait(0);
-        });
-
-        it('should toggle focus to the next menu item on down keypress', () => {
-          cy.findByRole('menuitem', {name: 'Third Link'}).focus();
-          cy.findByRole('menuitem', {name: 'Third Link'}).should('have.focus');
-        });
+      it('should contain home link as the first menu item', () => {
+        cy.findAllByRole('menuitem').eq(0).should('contain', 'Home');
       });
 
-      context('when the up arrow key is pressed on the dropdown menu', () => {
-        beforeEach(() => {
-          // set focus to the second menuitem
-          cy.focused().realType('{downarrow}');
-        });
-
-        it('should toggle focus to the previous list item', () => {
-          cy.focused().realType('{uparrow}');
-          getDropdownMenuItem(0).should('have.focus');
-        });
-
-        it('should return focus from the first menu item to the last', () => {
-          cy.focused().realType('{uparrow}');
-          cy.focused().realType('{uparrow}');
-          cy.findByRole('menuitem', {name: 'Third Link'}).focus();
-          cy.findByRole('menuitem', {name: 'Third Link'}).should('have.focus');
-        });
+      it('should contain fifth link as the last menu item', () => {
+        cy.findAllByRole('menuitem').eq(-1).should('contain', 'Sixth Link');
       });
-
-      context('when the escape key is pressed on the dropdown menu', () => {
-        it('should return focus to the dropdown menu button', () => {
-          cy.focused().realType('{esc}');
-          getDropdownButton().should('have.focus');
-        });
-      });
-    }
-  );
+    });
+  });
 });
+
+context(
+  'given the [Components/Navigation/Breadcrumbs, Overflow Breadcrumbs] menu is rendered',
+  () => {
+    beforeEach(() => {
+      cy.mount(<OverflowBreadcrumbs width={'480px'} />);
+
+      openDropdownMenu();
+    });
+    it('should not have any axe errors', () => {
+      cy.checkA11y();
+    });
+
+    it('should have role set to "menu" on the dropdown menu', () => {
+      cy.findByRole('menu').should('have.attr', 'role', 'menu');
+    });
+
+    it("should toggle the button's aria-expanded attribute to true", () => {
+      getDropdownButton().should('have.attr', 'aria-expanded', 'true');
+    });
+
+    it('should have role set to "menuitem" for dropdown item link', () => {
+      cy.findByRole('menu')
+        .find('a')
+        .each($link => {
+          expect($link).to.have.attr('role', 'menuitem');
+        });
+    });
+
+    context('when the dropdown menu is toggled with a keypress', () => {
+      it('should set focus to the first menu item', () => {
+        cy.get('[role="menuitem"]').first().focused().should('contain', 'Second Link');
+      });
+    });
+
+    context('when the first menu item is focused', () => {
+      beforeEach(() => {
+        cy.focused().realType('{downarrow}');
+      });
+
+      it('should toggle focus to the second menu item on down keypress', () => {
+        cy.findByRole('menuitem', {name: 'Second Link'}).focus();
+        cy.findByRole('menuitem', {name: 'Second Link'}).should('have.focus');
+      });
+    });
+
+    context('when the last menu item is focused', () => {
+      beforeEach(() => {
+        cy.focused().realType('{downarrow}');
+      });
+
+      it('should roll the focus back to the first menu item on down keypress', () => {
+        cy.focused().realType('{downarrow}');
+        cy.focused().realType('{downarrow}');
+        cy.focused().realType('{downarrow}');
+        cy.get('[role="menuitem"]').first().should('contain', 'Second Link');
+      });
+    });
+
+    context('when the down arrow key is pressed on the dropdown menu', () => {
+      beforeEach(() => {
+        cy.focused().realType('{downarrow}');
+      });
+
+      it('should toggle focus to the next menu item on down keypress', () => {
+        cy.findByRole('menuitem', {name: 'Third Link'}).focus();
+        cy.findByRole('menuitem', {name: 'Third Link'}).should('have.focus');
+      });
+    });
+
+    context('when the up arrow key is pressed on the dropdown menu', () => {
+      beforeEach(() => {
+        // set focus to the second menuitem
+        cy.focused().realType('{downarrow}');
+        cy.findByText('Overflow visibility: visible');
+      });
+
+      it('should toggle focus to the previous list item', () => {
+        cy.focused().realType('{uparrow}');
+        cy.focused().contains('Second Link').should('exist');
+        cy.focused().first().should('contain', 'Second Link');
+      });
+
+      it('should return focus from the first menu item to the last', () => {
+        cy.focused().realType('{uparrow}');
+        cy.focused().realType('{uparrow}');
+        cy.findByRole('menuitem', {name: 'Third Link'}).focus();
+        cy.findByRole('menuitem', {name: 'Third Link'}).should('have.focus');
+      });
+    });
+
+    context('when the escape key is pressed on the dropdown menu', () => {
+      it('should return focus to the dropdown menu button', () => {
+        cy.focused().realType('{esc}');
+        getDropdownButton().should('have.focus');
+      });
+    });
+  }
+);
