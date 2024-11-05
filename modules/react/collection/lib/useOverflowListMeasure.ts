@@ -1,6 +1,11 @@
 import * as React from 'react';
 
-import {createElemPropsHook, useForkRef, useResizeObserver} from '@workday/canvas-kit-react/common';
+import {
+  createElemPropsHook,
+  useMountLayout,
+  useResizeObserver,
+  useLocalRef,
+} from '@workday/canvas-kit-react/common';
 
 import {useOverflowListModel} from './useOverflowListModel';
 
@@ -9,12 +14,21 @@ import {useOverflowListModel} from './useOverflowListModel';
  * overflow detection.
  */
 export const useOverflowListMeasure = createElemPropsHook(useOverflowListModel)((model, ref) => {
-  const localRef = React.useRef(null);
-  const {ref: resizeRef} = useResizeObserver({
+  const {elementRef, localRef} = useLocalRef(ref as React.Ref<HTMLElement>);
+  const gapProperty = model.state.orientation === 'horizontal' ? 'columnGap' : 'rowGap';
+
+  useResizeObserver({
     ref: localRef,
     onResize: model.events.setContainerWidth,
   });
-  const elementRef = useForkRef(ref, resizeRef);
+  useMountLayout(() => {
+    if (localRef.current) {
+      const styles = getComputedStyle(localRef.current);
+      model.events.setContainerGap({
+        size: styles.gap === 'normal' ? 0 : Number(styles[gapProperty].replace('px', '')),
+      });
+    }
+  });
 
   return {
     ref: elementRef,
