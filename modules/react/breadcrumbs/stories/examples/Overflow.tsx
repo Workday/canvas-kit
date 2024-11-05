@@ -22,7 +22,7 @@ export const OverflowBreadcrumbs = ({width = '100%'}) => {
 
   const model = useBreadcrumbsModel({items});
   const [containerWidth, setContainerWidth] = React.useState(width);
-
+  console.log('width', width);
   return (
     <div>
       <Box width={containerWidth} marginBottom="xl">
@@ -32,10 +32,7 @@ export const OverflowBreadcrumbs = ({width = '100%'}) => {
         </div>
         <hr />
         <Breadcrumbs model={model} aria-label="Breadcrumbs">
-          <Breadcrumbs.List
-            width={width}
-            overflowButton={<Breadcrumbs.OverflowButton aria-label="More links" />}
-          >
+          <Breadcrumbs.List overflowButton={<Breadcrumbs.OverflowButton aria-label="More links" />}>
             {item =>
               item.link ? (
                 <Breadcrumbs.Item>
@@ -59,7 +56,13 @@ export const OverflowBreadcrumbs = ({width = '100%'}) => {
       </Box>
       <hr />
       <h4>Change Breadcrumbs container size</h4>
-      <SegmentedControl onSelect={data => setContainerWidth(data.id)}>
+      <SegmentedControl
+        initialValue={width}
+        onSelect={data => {
+          console.log('you called?');
+          setContainerWidth(data.id);
+        }}
+      >
         <SegmentedControl.List aria-label="container width control" marginBottom="m">
           <SegmentedControl.Item data-id="100%">100%</SegmentedControl.Item>
           <SegmentedControl.Item data-id="480px">480px</SegmentedControl.Item>

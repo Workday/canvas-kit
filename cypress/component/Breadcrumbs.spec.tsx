@@ -218,7 +218,7 @@ context(
   'given the [Components/Navigation/Breadcrumbs, Overflow Breadcrumbs] menu is rendered',
   () => {
     beforeEach(() => {
-      cy.mount(<OverflowBreadcrumbs width={'480px'} />);
+      cy.mount(<OverflowBreadcrumbs width="480px" />);
 
       openDropdownMenu();
     });
