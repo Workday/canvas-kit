@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.0.9](https://github.com/Workday/canvas-kit/releases/tag/v12.0.9) (2024-11-04)
+
+### Components
+
+- fix: Add gap to overflow calculations ([#3029](https://github.com/Workday/canvas-kit/pull/3029)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v11.1.21](https://github.com/Workday/canvas-kit/releases/tag/v11.1.21) (2024-11-04)
+
+### Components
+
+- fix: Add gap to overflow calculations ([#3029](https://github.com/Workday/canvas-kit/pull/3029)) ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v12.0.8](https://github.com/Workday/canvas-kit/releases/tag/v12.0.8) (2024-11-04)
+
+### Infrastructure
+
+- ci: Updated forward merge yml ([#3027](https://github.com/Workday/canvas-kit/pull/3027)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
 ## [v12.0.7](https://github.com/Workday/canvas-kit/releases/tag/v12.0.7) (2024-11-04)
 
 ### Components
