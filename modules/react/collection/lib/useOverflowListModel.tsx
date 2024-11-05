@@ -145,6 +145,9 @@ export const useOverflowListModel = createModelHook({
       );
       setHiddenIds(ids);
     },
+    /**
+    * @deprecated Use `setContainerSize` instead and pass both `width` and `height`
+    */
     setContainerWidth(data: {width?: number}) {
       events.setContainerSize({width: data.width, height: 0});
     },
