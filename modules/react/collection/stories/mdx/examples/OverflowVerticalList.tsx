@@ -7,21 +7,17 @@ import {
   createSubcomponent,
   createSubModelElemPropsHook,
   ExtractProps,
-  getTheme,
-  styled,
-  StyledType,
 } from '@workday/canvas-kit-react/common';
 
 import {
   relatedActionsIcon,
   homeIcon,
   gearIcon,
-  inboxIcon,
-  infoIcon,
-  folderCloseIcon,
+  userIcon,
+  viewTeamIcon,
+  linkIcon,
+  mediaMylearningIcon,
 } from '@workday/canvas-system-icons-web';
-
-import colors, {commonColors} from '@workday/canvas-colors-web';
 import {
   defaultGetId,
   useListItemRegister,
@@ -30,20 +26,21 @@ import {
   useOverflowListMeasure,
   useOverflowListModel,
   useOverflowListTarget,
-} from '../../../collection';
-import {Menu, useMenuModel, useMenuTarget} from '../../../menu';
-import {SecondaryButton, SecondaryButtonProps, TertiaryButton} from '../../../button';
-import {Flex} from '../../../layout';
-import {space} from '../../../tokens';
+} from '@workday/canvas-kit-react/collection';
+import {Menu, useMenuModel, useMenuTarget} from '@workday/canvas-kit-react/menu';
+import {SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
+
+import {createStyles, CSProps, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {system} from '@workday/canvas-tokens-web';
 
 const sidebarItems = [
-  {id: '1', text: 'First Action', icon: homeIcon},
-  {id: '2', text: 'Second Action', icon: gearIcon},
-  {id: '3', text: 'Third Action', icon: inboxIcon},
-  {id: '4', text: 'Fourth Action', icon: infoIcon},
-  {id: '5', text: 'Fifth Action', icon: folderCloseIcon},
-  {id: '6', text: 'Sixth Action', icon: homeIcon},
-  {id: '7', text: 'Seventh Action', icon: gearIcon},
+  {id: '1', text: 'Home', icon: homeIcon},
+  {id: '2', text: 'Profile', icon: userIcon},
+  {id: '3', text: 'My Team', icon: viewTeamIcon},
+  {id: '4', text: 'External Links', icon: linkIcon},
+  {id: '5', text: 'Saved', icon: mediaMylearningIcon},
+  {id: '6', text: 'Settings', icon: gearIcon},
 ];
 
 const useOverflowSidebar = createModelHook({
@@ -62,7 +59,7 @@ const useOverflowSidebar = createModelHook({
      * Must be greater than 1 and less than items.length.
      * @default 3
      */
-    maximumVisible: 4,
+    maximumVisible: 3,
   },
   requiredConfig: useOverflowListModel.requiredConfig,
 })(config => {
@@ -78,8 +75,6 @@ const useOverflowSidebar = createModelHook({
     })
   );
 
-  // console.log(model.state.orientation);
-
   let hiddenIds = model.state.hiddenIds;
   let nonInteractiveIds = model.state.nonInteractiveIds;
   const totalSize = model.state.items.length;
@@ -92,9 +87,6 @@ const useOverflowSidebar = createModelHook({
       ? totalSize
       : config.maximumVisible;
 
-  // console.log('max visible', maximumVisible);
-  // console.log('totalSize', totalSize);
-  // console.log('hiddenIdsLeng', model.state.hiddenIds);
   if (totalSize - hiddenIds.length >= maximumVisible) {
     hiddenIds = items.slice(maximumVisible, totalSize).map(getId);
   }
@@ -148,7 +140,6 @@ const useOverflowSidebar = createModelHook({
 
 interface SidebarItemProps {
   children?: React.ReactNode;
-
   'data-id'?: string;
 }
 
@@ -158,13 +149,9 @@ const SidebarItem = createSubcomponent(TertiaryButton)({
   displayName: 'Sidebar.Item',
   modelHook: useOverflowSidebar,
   elemPropsHook: useSidebarItem,
-})<SidebarItemProps>((elemProps, Element) => {
+})<SidebarItemProps>(({...elemProps}, Element) => {
   return <Element {...elemProps} />;
 });
-
-interface ActionBarOverflowButtonProps extends SecondaryButtonProps {
-  'aria-label': string;
-}
 
 const useSidebarOverflowButton = composeHooks(
   createElemPropsHook(useOverflowSidebar)(() => ({
@@ -178,38 +165,40 @@ const SidebarOverflowButton = createSubcomponent('button')({
   displayName: 'Sidebar.OverflowButton',
   modelHook: useOverflowSidebar,
   elemPropsHook: useSidebarOverflowButton,
-})<ActionBarOverflowButtonProps>((elemProps, Element) => {
+})<ExtractProps<typeof SecondaryButton>>(({...elemProps}, Element) => {
   return (
     <SecondaryButton
       as={Element}
       icon={relatedActionsIcon}
+      size="small"
       cs={{flex: 0, overflow: 'visible'}}
       {...elemProps}
     />
   );
 });
 
-interface SidebarListProps<T = any> extends Omit<ExtractProps<typeof Flex, never>, 'children'> {
+interface SidebarListProps<T = any> extends CSProps {
   children: ((item: T, index: number) => React.ReactNode) | React.ReactNode;
 
   overflowButton?: React.ReactNode;
 }
 
-const ResponsiveList = styled(Flex)<SidebarListProps & StyledType>(({theme}) => {
-  const {canvas: canvasTheme} = getTheme(theme);
-  return {
-    '> *': {
-      flex: '0 0 auto',
-      // alignSelf: 'start',
-    },
-    [canvasTheme.breakpoints.down('s')]: {
-      padding: space.s,
-      '> *': {
-        flex: '0 0 auto',
-        // alignSelf: 'start',
-      },
-    },
-  };
+const resposiveListStyles = createStyles({
+  display: 'flex',
+  gap: system.space.x3,
+  depth: system.depth[1],
+  background: system.color.bg.default,
+  border: `solid 1px ${cssVar(system.color.border.container)}`,
+  position: 'relative',
+  bottom: 0,
+  left: 0,
+  flexDirection: 'column',
+  width: '60px',
+  alignItems: 'center',
+  right: 0,
+  '> *': {
+    flex: '0 0 auto',
+  },
 });
 
 const useSidebarList = useOverflowListMeasure;
@@ -220,25 +209,10 @@ const SidebarList = createSubcomponent('div')({
   elemPropsHook: useSidebarList,
 })<SidebarListProps>(({children, overflowButton, ...elemProps}, Element, model) => {
   return (
-    <ResponsiveList
-      as={Element}
-      gap="xs"
-      depth={1}
-      background={commonColors.background}
-      borderTop={`solid 1px ${colors.soap400}`}
-      padding={`${space.s} ${space.xl} `}
-      position="fixed"
-      bottom={0}
-      left={0}
-      flexDirection="column"
-      width="60px"
-      alignItems="center"
-      right={0}
-      {...elemProps}
-    >
+    <Element {...handleCsProp(elemProps, resposiveListStyles)}>
       {useListRenderItems(model, children)}
       {overflowButton}
-    </ResponsiveList>
+    </Element>
   );
 });
 
@@ -262,45 +236,52 @@ const Sidebar = createContainer()({
   return <Menu model={model.menu}>{children}</Menu>;
 });
 
-export const SidebarOverflowExample = () => {
+const containerStyles = createStyles({
+  boxSizing: 'border-box',
+  maxHeight: '100%',
+  display: 'flex',
+  flexDirection: 'row',
+  height: '90vh',
+});
+
+const menuCardStyles = createStyles({
+  maxHeight: 200,
+  maxWidth: 300,
+});
+
+export const OverflowVerticalList = () => {
   // useTheme is filling in the Canvas theme object if any keys are missing
 
   const model = useOverflowSidebar({
     items: sidebarItems,
     getId: item => item.id,
     getTextValue: item => item.text,
-    maximumVisible: 6,
+    maximumVisible: 5,
   });
 
   return (
     <>
-      <div
-        style={{
-          boxSizing: 'border-box',
-          maxHeight: '100%',
-          display: 'flex',
-          flexDirection: 'row',
-          height: '90vh',
-        }}
-      >
+      <div className={containerStyles}>
         <Sidebar model={model}>
           <Sidebar.List
-            position="relative"
-            as="div"
-            // minHeight="90vh"
-            overflowButton={<Sidebar.OverflowButton aria-label="More actions" />}
+            overflowButton={
+              <Tooltip title="More Actions">
+                <Sidebar.OverflowButton />
+              </Tooltip>
+            }
           >
             {(item: any, index) => (
-              <Sidebar.Item
-                icon={item.icon}
-                data-id={item.id}
-                aria-label={item.text}
-                onClick={() => console.log(item.id)}
-              ></Sidebar.Item>
+              <Tooltip title={item.text}>
+                <Sidebar.Item
+                  icon={item.icon}
+                  data-id={item.id}
+                  onClick={() => console.log(item.id)}
+                ></Sidebar.Item>
+              </Tooltip>
             )}
           </Sidebar.List>
           <Sidebar.Menu.Popper>
-            <Sidebar.Menu.Card maxWidth={300} maxHeight={200}>
+            <Sidebar.Menu.Card cs={menuCardStyles}>
               <Sidebar.Menu.List>
                 {(item: any) => (
                   <Sidebar.Menu.Item onClick={() => console.log(item.id)}>
@@ -311,7 +292,6 @@ export const SidebarOverflowExample = () => {
             </Sidebar.Menu.Card>
           </Sidebar.Menu.Popper>
         </Sidebar>
-        <div style={{border: '1px solid black', width: '60px'}}></div>
       </div>
     </>
   );
