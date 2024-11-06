@@ -158,7 +158,8 @@ describe('Tabs', () => {
             // verify the original intent is no longer a tab stop
             context('when shift + tab keys are pressed', () => {
               beforeEach(() => {
-                cy.wait(16); // wait a frame
+                // wait for tabindex to reset
+                cy.findByRole('tab', {name: 'First Tab'}).should('not.have.attr', 'tabindex', '-1');
                 cy.realPress(['Shift', 'Tab']);
               });
 
