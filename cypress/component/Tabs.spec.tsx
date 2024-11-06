@@ -75,7 +75,7 @@ describe('Tabs', () => {
 
         context('when the tab key is pressed', () => {
           beforeEach(() => {
-            cy.tab();
+            cy.realPress('Tab');
           });
 
           it('should move focus to the tabpanel', () => {
@@ -148,7 +148,7 @@ describe('Tabs', () => {
 
           context('when the tab key is pressed', () => {
             beforeEach(() => {
-              cy.tab();
+              cy.realPress('Tab');
             });
 
             it('should focus on the tab panel of the first tab', () => {
@@ -158,7 +158,7 @@ describe('Tabs', () => {
             // verify the original intent is no longer a tab stop
             context('when shift + tab keys are pressed', () => {
               beforeEach(() => {
-                cy.tab({shift: true});
+                cy.realPress(['Shift', 'Tab']);
               });
 
               it('should not have tabindex=-1 on the first tab', () => {
@@ -248,7 +248,7 @@ describe('Tabs', () => {
 
     context('when the first tab is active and focused', () => {
       beforeEach(() => {
-        cy.findByRole('tab', {name: 'First Tab'}).click().focus();
+        cy.findByRole('tab', {name: 'First Tab'}).click();
       });
 
       context('when the right arrow key is pressed', () => {
@@ -416,7 +416,7 @@ describe('Tabs', () => {
 
       context('when the tab key is pressed', () => {
         beforeEach(() => {
-          cy.tab();
+          cy.realPress('Tab');
         });
 
         it('should move focus to the tabpanel', () => {
@@ -547,12 +547,15 @@ describe('Tabs', () => {
 
       context('when the "First Tab" is focused', () => {
         beforeEach(() => {
-          cy.findByRole('tab', {name: 'First Tab'}).focus().tab();
+          cy.findByRole('tab', {name: 'First Tab'}).focus();
         });
 
         context('when the Tab key is pressed', () => {
+          beforeEach(() => {
+            cy.realPress('Tab');
+          });
+
           it('should focus on the "More" button', () => {
-            cy.findByRole('button', {name: 'More'}).focus();
             cy.findByRole('button', {name: 'More'}).should('have.focus');
           });
         });
