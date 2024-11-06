@@ -54,9 +54,6 @@ export function getHiddenIds(
   for (const key in itemSizeCache) {
     if (key !== selectedKey) {
       itemSize += itemSizeCache[key] + (shouldAddGap ? containerGap : 0);
-      console.log('itemSizeCache[key]', itemSizeCache[key]);
-      console.log('itemSize', itemSize);
-      console.log('containerSize', containerSize);
       shouldAddGap = true;
       if (itemSize > containerSize) {
         hiddenIds.push(key);
