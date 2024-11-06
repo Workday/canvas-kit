@@ -2,14 +2,6 @@ import * as React from 'react';
 import {Basic} from '../../modules/react/breadcrumbs/stories/examples/Basic';
 import {OverflowBreadcrumbs} from '../../modules/react/breadcrumbs/stories/examples/Overflow';
 
-function getBreadcrumbsNav() {
-  return cy.findByRole('navigation');
-}
-
-function getBreadcrumbsList() {
-  return cy.findByRole('list');
-}
-
 function getAllBreadcrumbsLink(number?: number) {
   return number ? cy.findAllByRole('link').eq(number) : cy.findAllByRole('link');
 }
@@ -25,7 +17,7 @@ describe('Breadcrumbs', () => {
     });
 
     it('should have an element with a role of "navigation"', () => {
-      getBreadcrumbsNav().should('be.visible');
+      cy.findByRole('navigation').should('be.visible');
     });
 
     it('should have an element with a label of "Breadcrumbs"', () => {
@@ -33,15 +25,15 @@ describe('Breadcrumbs', () => {
     });
 
     it('should have a role of "list" on the <ul> element', () => {
-      getBreadcrumbsList().should('be.visible');
+      cy.findByRole('list').should('be.visible');
     });
 
     it('should have list item elements inside the "list"', () => {
-      getBreadcrumbsList().get('li').should('be.visible');
+      cy.findByRole('list').get('li').should('be.visible');
     });
 
     it('should have "data-id" for list items', () => {
-      getBreadcrumbsList()
+      cy.findByRole('list')
         .find('li')
         .each($link => {
           expect($link).to.have.attr('data-id');
