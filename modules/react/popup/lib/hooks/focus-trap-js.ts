@@ -91,7 +91,7 @@ function tabTrappingKey(
   }
 
   if (!parentElem || !parentElem.contains) {
-    if (process && process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === 'development') {
       console.warn('focus-trap-js: parent element is not defined');
     }
     return false;

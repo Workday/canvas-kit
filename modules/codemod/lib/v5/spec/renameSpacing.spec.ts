@@ -79,14 +79,14 @@ describe('Canvas Kit Spacing Codemod', () => {
       it('should ignore files without canvas-kit imports', () => {
         const input = `
         import { spacing } from "@workday/canvas-space-web";
-        
+
         const styles = {
           padding: spacing.medium,
           margin: spacing.small,
         };`;
         const expected = `
         import { spacing } from "@workday/canvas-space-web";
-        
+
         const styles = {
           padding: spacing.medium,
           margin: spacing.small,
@@ -98,7 +98,7 @@ describe('Canvas Kit Spacing Codemod', () => {
       it('should properly transform spacing to space', () => {
         const input = `
         import { spacing } from "@workday/canvas-kit-react/core";
-    
+
         const styles = {
           height: spacing.xxl,
           margin: \`-\${spacing.xxs} -\${spacing.s} \${spacing.xxs}\`,
@@ -108,7 +108,7 @@ describe('Canvas Kit Spacing Codemod', () => {
 
         const expected = `
         import { space } from "@workday/canvas-kit-react/core";
-    
+
         const styles = {
           height: space.xxl,
           margin: \`-\${space.xxs} -\${space.s} \${space.xxs}\`,
@@ -122,7 +122,7 @@ describe('Canvas Kit Spacing Codemod', () => {
       it('should properly transform spacingNumbers to spaceNumbers', () => {
         const input = `
         import { spacingNumbers } from "@workday/canvas-kit-react/core";
-    
+
         const styles = {
           height: spacingNumbers.xl,
           margin: spacingNumbers.s,
@@ -132,7 +132,7 @@ describe('Canvas Kit Spacing Codemod', () => {
 
         const expected = `
         import { spaceNumbers } from "@workday/canvas-kit-react/core";
-    
+
         const styles = {
           height: spaceNumbers.xl,
           margin: spaceNumbers.s,
@@ -148,7 +148,7 @@ describe('Canvas Kit Spacing Codemod', () => {
       it('should properly transform spacing to space', () => {
         const input = `
         import { spacing } from "@workday/canvas-kit-react/core";
-    
+
         const BlueberryButtonStack = () => {
           return (
             <Stack spacing={spacing.m}>
@@ -161,14 +161,14 @@ describe('Canvas Kit Spacing Codemod', () => {
 
         const expected = `
         import { space } from "@workday/canvas-kit-react/core";
-    
+
         const BlueberryButtonStack = () => {
           return (
-            <Stack spacing={space.m}>
+            (<Stack spacing={space.m}>
               <button css={{background: colors.blueberry400, padding: space.m}}>
                 Click here
               </button>
-            </Stack>
+            </Stack>)
           );
         }`;
 
@@ -178,7 +178,7 @@ describe('Canvas Kit Spacing Codemod', () => {
       it('should properly transform spacingNumbers to spaceNumbers', () => {
         const input = `
         import { spacingNumbers } from "@workday/canvas-kit-react/core";
-    
+
         const BlueberryButtonStack = () => {
           return (
             <Stack spacing={spacingNumbers.m}>
@@ -191,14 +191,14 @@ describe('Canvas Kit Spacing Codemod', () => {
 
         const expected = `
         import { spaceNumbers } from "@workday/canvas-kit-react/core";
-    
+
         const BlueberryButtonStack = () => {
           return (
-            <Stack spacing={spaceNumbers.m}>
+            (<Stack spacing={spaceNumbers.m}>
               <button css={{background: colors.blueberry400, padding: spaceNumbers.m}}>
                 Click here
               </button>
-            </Stack>
+            </Stack>)
           );
         }`;
 
@@ -265,14 +265,14 @@ describe('Canvas Kit Spacing Codemod', () => {
     it('should properly transform CanvasSpacingValue to CanvasSpaceValues', () => {
       const input = `
       import { CanvasSpacingValue, space } from "@workday/canvas-kit-react/core"
-      
+
       type BoxStyleProps = {
         margin?: CanvasSpacingValue;
       }`;
 
       const expected = `
       import { CanvasSpaceValues, space } from "@workday/canvas-kit-react/core"
-      
+
       type BoxStyleProps = {
         margin?: CanvasSpaceValues;
       }

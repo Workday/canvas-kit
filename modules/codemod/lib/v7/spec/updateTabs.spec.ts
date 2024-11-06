@@ -25,11 +25,11 @@ describe('updateModelSignatures', () => {
 
       const Component = () => {
         return (
-          <Tabs>
+          (<Tabs>
             <Tabs.List>
               <Tabs.Item data-id="first">First</Tabs.Item>
             </Tabs.List>
-          </Tabs>
+          </Tabs>)
         );
       }
     `;
@@ -55,9 +55,9 @@ describe('updateModelSignatures', () => {
 
       const Component = () => {
         return (
-          <Tabs>
+          (<Tabs>
             <Tabs.Panel data-id="first">First Panel</Tabs.Panel>
-          </Tabs>
+          </Tabs>)
         );
       }
     `;
@@ -85,11 +85,11 @@ describe('updateModelSignatures', () => {
 
       const Component = () => {
         return (
-          <Tabs>
+          (<Tabs>
             <Tabs.List>
               {item => <Tabs.Item data-id={item.id}>{item.text}</Tabs.Item>}
             </Tabs.List>
-          </Tabs>
+          </Tabs>)
         );
       }
     `;
@@ -117,11 +117,11 @@ describe('updateModelSignatures', () => {
 
       const Component = () => {
         return (
-          <Tabs>
+          (<Tabs>
             <Tabs.Menu.List>
               {(item: MyTabItem) => <Tabs.Menu.Item data-id={item.id}>{item.text}</Tabs.Menu.Item>}
             </Tabs.Menu.List>
-          </Tabs>
+          </Tabs>)
         );
       }
     `;

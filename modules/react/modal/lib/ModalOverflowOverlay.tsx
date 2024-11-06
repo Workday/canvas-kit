@@ -1,18 +1,22 @@
 import * as React from 'react';
 
-import {createSubcomponent, ExtractProps, StyledType} from '@workday/canvas-kit-react/common';
+import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
 
 import {ModalOverlay} from './ModalOverlay';
-import styled from '@emotion/styled';
 import {useModalModel} from './hooks';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
-const StyledOverlay = styled(ModalOverlay)<StyledType>({
-  '& > div': {maxHeight: 'inherit'}, // reset maxHeight of centering div
+export const modalOverflowOverlayStencil = createStencil({
+  base: {
+    '& > div': {maxHeight: 'inherit'}, // reset maxHeight of centering div
+    overflow: 'hidden auto',
+  },
 });
 
 export const ModalOverflowOverlay = createSubcomponent('div')({
   displayName: 'Modal.OverflowOverlay',
   modelHook: useModalModel,
 })<ExtractProps<typeof ModalOverlay, never>>((elemProps, Element) => {
-  return <StyledOverlay as={Element} overflowX="hidden" overflowY="auto" {...elemProps} />;
+  return <ModalOverlay as={Element} {...mergeStyles(elemProps, modalOverflowOverlayStencil())} />;
 });
