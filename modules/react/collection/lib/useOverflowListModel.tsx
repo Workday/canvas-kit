@@ -54,6 +54,9 @@ export function getHiddenIds(
   for (const key in itemSizeCache) {
     if (key !== selectedKey) {
       itemSize += itemSizeCache[key] + (shouldAddGap ? containerGap : 0);
+      console.log('itemSizeCache[key]', itemSizeCache[key]);
+      console.log('itemSize', itemSize);
+      console.log('containerSize', containerSize);
       shouldAddGap = true;
       if (itemSize > containerSize) {
         hiddenIds.push(key);
@@ -105,13 +108,13 @@ export const useOverflowListModel = createModelHook({
     hiddenIds: internalHiddenIds,
     itemSizeCache,
     /**
-    * @deprecated Use `itemSizeCache` instead
-    */
+     * @deprecated Use `itemSizeCache` instead
+     */
     itemWidthCache: itemSizeCache,
     containerSize,
     /**
-    * @deprecated Use `containerSize` instead
-    */
+     * @deprecated Use `containerSize` instead
+     */
     containerWidth: containerSize,
     containerGap,
     overflowTargetWidth,
@@ -137,7 +140,8 @@ export const useOverflowListModel = createModelHook({
       containerSizeRef.current =
         model.state.orientation === 'horizontal' ? data.width || 0 : data.height || 0;
       setContainerSize(containerSizeRef.current);
-      // setContainerGap(containerSizeRef.current);
+      console.log(containerSizeRef.current);
+      console.log(containerGap);
       const ids = getHiddenIds(
         containerSizeRef.current,
         containerGap,
@@ -149,8 +153,8 @@ export const useOverflowListModel = createModelHook({
       setHiddenIds(ids);
     },
     /**
-    * @deprecated Use `setContainerSize` instead and pass both `width` and `height`
-    */
+     * @deprecated Use `setContainerSize` instead and pass both `width` and `height`
+     */
     setContainerWidth(data: {width?: number}) {
       events.setContainerSize({width: data.width, height: 0});
     },
@@ -195,6 +199,9 @@ export const useOverflowListModel = createModelHook({
         ...itemSizeCacheRef.current,
         [data.id]: model.state.orientation === 'horizontal' ? data.width : data.height,
       };
+
+      console.log('>>>size cache ref', data.height);
+      console.log('>>>size cache ref', data.width);
 
       setItemSizeCache(itemSizeCacheRef.current);
 

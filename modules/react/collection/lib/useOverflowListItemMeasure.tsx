@@ -31,10 +31,9 @@ export const useOverflowListItemMeasure = createElemPropsHook(useOverflowListMod
           width:
             localRef.current.offsetWidth +
             parseFloat(styles.marginLeft) +
-            parseFloat(styles.marginLeft) +
             parseFloat(styles.marginRight),
           height:
-            localRef.current.offsetWidth +
+            localRef.current.offsetHeight +
             parseFloat(styles.marginTop) +
             parseFloat(styles.marginBottom),
         });
