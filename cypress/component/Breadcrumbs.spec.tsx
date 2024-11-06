@@ -232,7 +232,7 @@ context(
     });
 
     context('when the dropdown menu is toggled with a keypress', () => {
-      it.only('should set focus to the first menu item', () => {
+      it('should set focus to the first menu item', () => {
         cy.findByRole('menuitem', {name: 'Second Link'}).focus();
         cy.findByRole('menuitem', {name: 'Second Link'}).should('have.focus');
       });
