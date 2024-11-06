@@ -104,6 +104,9 @@ export const useOverflowListModel = createModelHook({
     ...model.state,
     hiddenIds: internalHiddenIds,
     itemSizeCache,
+    /**
+    * @deprecated Use `itemSizeCache` instead
+    */
     itemWidthCache: itemSizeCache,
     containerSize,
     /**
