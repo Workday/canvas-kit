@@ -5,17 +5,17 @@ import {useSelectionListModel} from './useSelectionListModel';
 import {Item} from './useBaseListModel';
 
 export function getHiddenIds(
-  containerWidth: number,
+  containerSize: number,
   containerGap: number,
-  overflowTargetWidth: number,
-  itemWidthCache: Record<string, number>,
+  overflowTargetSize: number,
+  itemSizeCache: Record<string, number>,
   selectedIds: string[] | 'all',
   items: Item<any>[]
 ): string[] {
   /** Allows us to prioritize showing the selected item */
   let selectedKey: undefined | string;
   /** Tally of combined item widths. We'll add items that fit until the container is full */
-  let itemWidth = 0;
+  let itemSize = 0;
   /** Tally ids that won't fit inside the container. These will be used by components to hide
    * elements that won't fit in the container */
   const hiddenIds: string[] = [];
@@ -31,31 +31,31 @@ export function getHiddenIds(
   }
 
   if (
-    Object.keys(itemWidthCache).reduce(
-      (sum, key, index) => sum + itemWidthCache[key] + (index > 0 ? containerGap : 0),
+    Object.keys(itemSizeCache).reduce(
+      (sum, key, index) => sum + itemSizeCache[key] + (index > 0 ? containerGap : 0),
       0
-    ) <= containerWidth
+    ) <= containerSize
   ) {
     // All items fit, return empty array
     return [];
   } else if (selectedKey) {
-    if (itemWidthCache[selectedKey] + overflowTargetWidth > containerWidth) {
+    if (itemSizeCache[selectedKey] + overflowTargetSize > containerSize) {
       // If the selected item doesn't fit, only show overflow (all items hidden)
-      return Object.keys(itemWidthCache);
+      return Object.keys(itemSizeCache);
     } else {
       // at least the selected item and overflow target fit. Update our itemWidth with the sum
-      itemWidth += itemWidthCache[selectedKey] + overflowTargetWidth;
+      itemSize += itemSizeCache[selectedKey] + overflowTargetSize;
       shouldAddGap = true;
     }
   } else {
-    itemWidth += overflowTargetWidth;
+    itemSize += overflowTargetSize;
   }
 
-  for (const key in itemWidthCache) {
+  for (const key in itemSizeCache) {
     if (key !== selectedKey) {
-      itemWidth += itemWidthCache[key] + (shouldAddGap ? containerGap : 0);
+      itemSize += itemSizeCache[key] + (shouldAddGap ? containerGap : 0);
       shouldAddGap = true;
-      if (itemWidth > containerWidth) {
+      if (itemSize > containerSize) {
         hiddenIds.push(key);
       }
     }
@@ -81,13 +81,13 @@ export const useOverflowListModel = createModelHook({
   const shouldCalculateOverflow =
     config.shouldCalculateOverflow === undefined ? true : config.shouldCalculateOverflow;
   const [hiddenIds, setHiddenIds] = React.useState(config.initialHiddenIds);
-  const [itemWidthCache, setItemWidthCache] = React.useState<Record<string, number>>({});
-  const [containerWidth, setContainerWidth] = React.useState(0);
+  const [itemSizeCache, setItemSizeCache] = React.useState<Record<string, number>>({});
+  const [containerSize, setContainerSize] = React.useState(0);
   const [containerGap, setContainerGap] = React.useState(0);
-  const containerWidthRef = React.useRef(0);
-  const itemWidthCacheRef = React.useRef(itemWidthCache);
+  const containerSizeRef = React.useRef(0);
+  const itemSizeCacheRef = React.useRef(itemSizeCache);
   const [overflowTargetWidth, setOverflowTargetWidth] = React.useState(0);
-  const overflowTargetWidthRef = React.useRef(0);
+  const overflowTargetSizeRef = React.useRef(0);
 
   const internalHiddenIds = shouldCalculateOverflow ? hiddenIds : [];
 
@@ -103,8 +103,16 @@ export const useOverflowListModel = createModelHook({
   const state = {
     ...model.state,
     hiddenIds: internalHiddenIds,
-    itemWidthCache,
-    containerWidth,
+    itemSizeCache,
+    /**
+     * @deprecated Use `itemSizeCache` instead
+     */
+    itemWidthCache: itemSizeCache,
+    containerSize,
+    /**
+     * @deprecated Use `containerSize` instead
+     */
+    containerWidth: containerSize,
     containerGap,
     overflowTargetWidth,
   };
@@ -114,10 +122,10 @@ export const useOverflowListModel = createModelHook({
     select(data: Parameters<typeof model.events.select>[0]) {
       const {selectedIds} = model.selection.select(data.id, state);
       const ids = getHiddenIds(
-        containerWidthRef.current,
+        containerSizeRef.current,
         containerGap,
-        overflowTargetWidthRef.current,
-        itemWidthCacheRef.current,
+        overflowTargetSizeRef.current,
+        itemSizeCacheRef.current,
         selectedIds,
         config.items
       );
@@ -125,69 +133,93 @@ export const useOverflowListModel = createModelHook({
 
       setHiddenIds(ids);
     },
-    setContainerWidth(data: {width?: number}) {
-      containerWidthRef.current = data.width || 0;
-      setContainerWidth(data.width || 0);
-
+    setContainerSize(data: {width?: number; height?: number}) {
+      containerSizeRef.current =
+        model.state.orientation === 'horizontal' ? data.width || 0 : data.height || 0;
+      setContainerSize(containerSizeRef.current);
       const ids = getHiddenIds(
-        containerWidthRef.current,
+        containerSizeRef.current,
         containerGap,
-        overflowTargetWidthRef.current,
-        itemWidthCacheRef.current,
+        overflowTargetSizeRef.current,
+        itemSizeCacheRef.current,
         state.selectedIds,
         config.items
       );
-
       setHiddenIds(ids);
+    },
+    /**
+     * @deprecated Use `setContainerSize` instead and pass both `width` and `height`
+     */
+    setContainerWidth(data: {width?: number}) {
+      events.setContainerSize({width: data.width, height: 0});
     },
     setContainerGap(data: {size: number}) {
       setContainerGap(data.size);
 
       const ids = getHiddenIds(
-        containerWidthRef.current,
+        containerSizeRef.current,
         data.size,
-        overflowTargetWidthRef.current,
-        itemWidthCacheRef.current,
+        overflowTargetSizeRef.current,
+        itemSizeCacheRef.current,
         state.selectedIds,
         config.items
       );
 
       setHiddenIds(ids);
     },
-    setOverflowTargetWidth(data: {width: number}) {
-      overflowTargetWidthRef.current = data.width;
-      setOverflowTargetWidth(data.width);
+    setOverflowTargetSize(data: {width: number; height: number}) {
+      overflowTargetSizeRef.current =
+        model.state.orientation === 'horizontal' ? data.width || 0 : data.height || 0;
+      setOverflowTargetWidth(overflowTargetSizeRef.current);
     },
+
+    /**
+     *
+     * @deprecated `setOverflowTargetWidth` is deprecated. Please use `setOverflowTargetSize` and pass in the `width` and set `height` to `0`.
+     */
+    setOverflowTargetWidth(data: {width: number}) {
+      overflowTargetSizeRef.current = data.width;
+      events.setOverflowTargetSize({width: overflowTargetSizeRef.current, height: 0});
+    },
+
+    /**
+     *
+     * @deprecated `addItemWidth` is deprecated. Please use `addItemSize` and set the `width`
+     */
     addItemWidth(data: {id: string; width: number}) {
-      itemWidthCacheRef.current = {
-        ...itemWidthCacheRef.current,
-        [data.id]: data.width,
+      events.addItemSize({id: data.id, width: data.width, height: 0});
+    },
+    addItemSize(data: {id: string; width: number; height: number}) {
+      itemSizeCacheRef.current = {
+        ...itemSizeCacheRef.current,
+        [data.id]: model.state.orientation === 'horizontal' ? data.width : data.height,
       };
 
-      setItemWidthCache(itemWidthCacheRef.current);
+
+      setItemSizeCache(itemSizeCacheRef.current);
 
       const ids = getHiddenIds(
-        containerWidthRef.current,
+        containerSizeRef.current,
         containerGap,
-        overflowTargetWidthRef.current,
-        itemWidthCacheRef.current,
+        overflowTargetSizeRef.current,
+        itemSizeCacheRef.current,
         state.selectedIds,
         config.items
       );
 
       setHiddenIds(ids);
     },
-    removeItemWidth(data: {id: string}) {
-      const newCache = {...itemWidthCacheRef.current};
+    removeItemSize(data: {id: string}) {
+      const newCache = {...itemSizeCacheRef.current};
       delete newCache[data.id];
-      itemWidthCacheRef.current = newCache;
-      setItemWidthCache(itemWidthCacheRef.current);
+      itemSizeCacheRef.current = newCache;
+      setItemSizeCache(itemSizeCacheRef.current);
 
       const ids = getHiddenIds(
-        containerWidthRef.current,
+        containerSizeRef.current,
         containerGap,
-        overflowTargetWidthRef.current,
-        itemWidthCacheRef.current,
+        overflowTargetSizeRef.current,
+        itemSizeCacheRef.current,
         state.selectedIds !== 'all'
           ? state.selectedIds.filter(sId => data.id !== sId)
           : state.selectedIds,
@@ -195,6 +227,13 @@ export const useOverflowListModel = createModelHook({
       );
 
       setHiddenIds(ids);
+    },
+    /**
+     *
+     * @deprecated `removeItemWidth` is deprecated. Please use `removeItemSize`.
+     */
+    removeItemWidth(data: {id: string}) {
+      events.removeItemSize({id: data.id});
     },
     addHiddenKey(data: {id: string}) {
       setHiddenIds(ids => ids.concat(data.id));
