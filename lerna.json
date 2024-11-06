@@ -1,7 +1,5 @@
 {
-  "packages": [
-    "modules/**"
-  ],
+  "packages": ["modules/**"],
   "version": "12.0.9",
   "npmClient": "yarn",
   "useWorkspaces": true,
