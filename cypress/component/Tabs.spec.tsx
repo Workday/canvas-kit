@@ -158,6 +158,7 @@ describe('Tabs', () => {
             // verify the original intent is no longer a tab stop
             context('when shift + tab keys are pressed', () => {
               beforeEach(() => {
+                cy.wait(16); // wait a frame
                 cy.realPress(['Shift', 'Tab']);
               });
 
