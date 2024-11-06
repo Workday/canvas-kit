@@ -14,16 +14,6 @@ function getAllBreadcrumbsLink(number?: number) {
   return number ? cy.findAllByRole('link').eq(number) : cy.findAllByRole('link');
 }
 
-function getDropdownButton() {
-  return cy.findByLabelText('More links');
-}
-
-function openDropdownMenu() {
-  const dropdownButton = getDropdownButton();
-  dropdownButton.focus();
-  dropdownButton.realType('{enter}');
-}
-
 describe('Breadcrumbs', () => {
   context('given the [Components/Navigation/Breadcrumbs, Basic] example is rendered', () => {
     beforeEach(() => {
@@ -116,15 +106,15 @@ describe('Breadcrumbs', () => {
       });
 
       it('should have aria-expanded set to "false" on the dropdown button', () => {
-        getDropdownButton().should('have.attr', 'aria-expanded', 'false');
+        cy.findByLabelText('More links').should('have.attr', 'aria-expanded', 'false');
       });
 
       it('should have aria-haspopup set to "true" on the dropdown button', () => {
-        getDropdownButton().should('have.attr', 'aria-haspopup', 'true');
+        cy.findByLabelText('More links').should('have.attr', 'aria-haspopup', 'true');
       });
 
       it('should have aria-controls set to "menu" on the dropdown button', () => {
-        getDropdownButton().should('have.attr', 'aria-controls', 'menu');
+        cy.findByLabelText('More links').should('have.attr', 'aria-controls', 'menu');
       });
     }
   );
@@ -219,8 +209,7 @@ context(
   () => {
     beforeEach(() => {
       cy.mount(<OverflowBreadcrumbs width="480px" />);
-
-      openDropdownMenu();
+      cy.findByLabelText('More links').focus().realType('{enter}');
     });
     it('should not have any axe errors', () => {
       cy.checkA11y();
@@ -231,7 +220,7 @@ context(
     });
 
     it("should toggle the button's aria-expanded attribute to true", () => {
-      getDropdownButton().should('have.attr', 'aria-expanded', 'true');
+      cy.findByLabelText('More links').should('have.attr', 'aria-expanded', 'true');
     });
 
     it('should have role set to "menuitem" for dropdown item link', () => {
@@ -244,7 +233,7 @@ context(
 
     context('when the dropdown menu is toggled with a keypress', () => {
       it('should set focus to the first menu item', () => {
-        cy.get('[role="menuitem"]').first().focused().should('contain', 'Second Link');
+        cy.findByRole('menuitem', {name: 'Second Link'}).should('have.focus');
       });
     });
 
@@ -292,8 +281,8 @@ context(
 
       it('should toggle focus to the previous list item', () => {
         cy.focused().realType('{uparrow}');
-        cy.focused().contains('Second Link').should('exist');
-        cy.focused().first().should('contain', 'Second Link');
+        cy.findByRole('menuitem', {name: 'Second Link'}).focus();
+        cy.findByRole('menuitem', {name: 'Second Link'}).should('have.focus');
       });
 
       it('should return focus from the first menu item to the last', () => {
@@ -307,7 +296,7 @@ context(
     context('when the escape key is pressed on the dropdown menu', () => {
       it('should return focus to the dropdown menu button', () => {
         cy.focused().realType('{esc}');
-        getDropdownButton().should('have.focus');
+        cy.findByLabelText('More links').should('have.focus');
       });
     });
   }
