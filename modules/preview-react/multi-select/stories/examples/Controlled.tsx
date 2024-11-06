@@ -46,6 +46,7 @@ export const Controlled = () => {
               <FormField.Input
                 as={MultiSelect.Input}
                 placeholder="Select Multiple"
+                removeLabel="Remove"
                 name="toppings"
                 onChange={handleOnChange}
                 value={value}

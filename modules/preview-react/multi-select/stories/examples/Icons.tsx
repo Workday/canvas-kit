@@ -23,7 +23,11 @@ export const Icons = () => {
     <MultiSelect items={items}>
       <FormField orientation="horizontal">
         <FormField.Label>Controls</FormField.Label>
-        <FormField.Input as={MultiSelect.Input} placeholder="Select Multiple" />
+        <FormField.Input
+          as={MultiSelect.Input}
+          placeholder="Select Multiple"
+          removeLabel="Remove"
+        />
         <MultiSelect.Popper>
           <MultiSelect.Card>
             <MultiSelect.List>
