@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.0.10](https://github.com/Workday/canvas-kit/releases/tag/v12.0.10) (2024-11-06)
+
+### Components
+
+- fix: SystemIcon supports rem by default ([#3031](https://github.com/Workday/canvas-kit/pull/3031)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Dependencies
+
+- chore: SNYK Security upgrade jscodeshift from 0.14.0 to 17.1.0 ([#3016](https://github.com/Workday/canvas-kit/pull/3016)) ([@mannycarrera4](https://github.com/mannycarrera4), [@snyk-bot](https://github.com/snyk-bot), manuel.carrera)
+
+### Infrastructure
+
+- ci: Update node version in our github actions ([#3009](https://github.com/Workday/canvas-kit/pull/3009)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- fix: Fix Style transform stencil variable lookup ([#3038](https://github.com/Workday/canvas-kit/pull/3038)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v11.1.23](https://github.com/Workday/canvas-kit/releases/tag/v11.1.23) (2024-11-06)
+
+### Infrastructure
+
+- fix: Fix Style transform stencil variable lookup ([#3038](https://github.com/Workday/canvas-kit/pull/3038)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v11.1.22](https://github.com/Workday/canvas-kit/releases/tag/v11.1.22) (2024-11-05)
+
+### Components
+
+- fix: SystemIcon supports rem by default ([#3031](https://github.com/Workday/canvas-kit/pull/3031)) ([@NicholasBoll](https://github.com/NicholasBoll))
 ## [v12.0.9](https://github.com/Workday/canvas-kit/releases/tag/v12.0.9) (2024-11-04)
 
 ### Components
