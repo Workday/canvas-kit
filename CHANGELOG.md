@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.1.23](https://github.com/Workday/canvas-kit/releases/tag/v11.1.23) (2024-11-06)
+
+### Infrastructure
+
+- fix: Fix Style transform stencil variable lookup ([#3038](https://github.com/Workday/canvas-kit/pull/3038)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v11.1.22](https://github.com/Workday/canvas-kit/releases/tag/v11.1.22) (2024-11-05)
 
 ### Components
