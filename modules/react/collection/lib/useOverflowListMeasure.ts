@@ -19,7 +19,7 @@ export const useOverflowListMeasure = createElemPropsHook(useOverflowListModel)(
 
   useResizeObserver({
     ref: localRef,
-    onResize: model.events.setContainerWidth,
+    onResize: model.events.setContainerSize,
   });
   useMountLayout(() => {
     if (localRef.current) {
