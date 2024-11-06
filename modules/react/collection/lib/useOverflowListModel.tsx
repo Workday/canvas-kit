@@ -200,8 +200,6 @@ export const useOverflowListModel = createModelHook({
         [data.id]: model.state.orientation === 'horizontal' ? data.width : data.height,
       };
 
-      console.log('>>>size cache ref', data.height);
-      console.log('>>>size cache ref', data.width);
 
       setItemSizeCache(itemSizeCacheRef.current);
 
