@@ -137,8 +137,6 @@ export const useOverflowListModel = createModelHook({
       containerSizeRef.current =
         model.state.orientation === 'horizontal' ? data.width || 0 : data.height || 0;
       setContainerSize(containerSizeRef.current);
-      console.log(containerSizeRef.current);
-      console.log(containerGap);
       const ids = getHiddenIds(
         containerSizeRef.current,
         containerGap,
