@@ -685,8 +685,8 @@ context(`given the 'Iframe Test' story is rendered`, () => {
       });
 
       it('should focus on the last button in the iframe', () => {
-        cy.get('iframe').its('0.contentDocument.body').should('exist');
-        cy.get('iframe')
+        cy.findByRole('iframe').its('0.contentDocument.body').should('exist');
+        cy.findByRole('iframe')
           .its('0.contentDocument.body')
           .then(cy.wrap)
           .contains('button', 'iframe button 2')

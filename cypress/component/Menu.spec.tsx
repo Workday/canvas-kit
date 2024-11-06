@@ -100,8 +100,7 @@ describe('Menu', () => {
           });
 
           it('should select the second item', () => {
-            cy.findByTestId('output').should('exist');
-            cy.findByTestId('output').contains('1');
+            cy.findByTestId('output').should('exist').contains(1);
           });
         });
       });
@@ -135,8 +134,7 @@ describe('Menu', () => {
         });
 
         it('should not close the menu', () => {
-          cy.get('[role="menu"]').should('exist');
-          cy.get('[role="menu"]').should('be.visible');
+          cy.findByRole('menu').should('be.visible');
         });
 
         it('should not select the fourth item', () => {
@@ -187,8 +185,7 @@ describe('Menu', () => {
           });
 
           it('should not close the menu', () => {
-            cy.get('[role="menu"]').should('exist');
-            cy.get('[role="menu"]').should('be.visible');
+            cy.findByRole('menu').should('be.visible');
           });
 
           it('should have aria-expanded set to true', () => {
