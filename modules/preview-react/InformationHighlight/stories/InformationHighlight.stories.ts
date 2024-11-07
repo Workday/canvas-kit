@@ -14,6 +14,7 @@ import {CautionHigh as CautionHighExample} from './examples/cautionHigh';
 import {InformationalHigh as InformationalHighExample} from './examples/informationalHigh';
 import {IconAttentionHigh as IconAttentionHighExample} from './examples/customIconAttentionHigh';
 import {IconAttentionLow as IconAttentionLowExample} from './examples/customIconAttentionLow';
+import {RTL as RTLExample} from './examples/RTL';
 
 export default {
   title: 'Preview/Information Highlight',
@@ -60,4 +61,8 @@ export const IconAttentionHigh: Story = {
 };
 export const IconAttentionLow: Story = {
   render: IconAttentionLowExample,
+};
+
+export const RTL: Story = {
+  render: RTLExample,
 };
