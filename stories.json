@@ -865,6 +865,30 @@
         "__isArgsStory": false
       }
     },
+    "components-indicators-loading-dots--custom-color-and-animation": {
+      "id": "components-indicators-loading-dots--custom-color-and-animation",
+      "name": "Custom Color And Animation",
+      "title": "Components/Indicators/Loading Dots",
+      "importPath": "./modules/react/loading-dots/stories/LoadingDots.stories.ts",
+      "kind": "Components/Indicators/Loading Dots",
+      "story": "Custom Color And Animation",
+      "parameters": {
+        "fileName": "./modules/react/loading-dots/stories/LoadingDots.stories.ts",
+        "__isArgsStory": false
+      }
+    },
+    "components-indicators-loading-dots--custom-shape": {
+      "id": "components-indicators-loading-dots--custom-shape",
+      "name": "Custom Shape",
+      "title": "Components/Indicators/Loading Dots",
+      "importPath": "./modules/react/loading-dots/stories/LoadingDots.stories.ts",
+      "kind": "Components/Indicators/Loading Dots",
+      "story": "Custom Shape",
+      "parameters": {
+        "fileName": "./modules/react/loading-dots/stories/LoadingDots.stories.ts",
+        "__isArgsStory": false
+      }
+    },
     "components-indicators-loading-dots--rtl": {
       "id": "components-indicators-loading-dots--rtl",
       "name": "RTL",
