@@ -1,17 +1,12 @@
 import * as React from 'react';
 import {styled, StyledType} from '@workday/canvas-kit-react/common';
 import {colors, space, gradients, type} from '@workday/canvas-kit-react/tokens';
-import {SidePanel} from '@workday/canvas-kit-preview-react/side-panel';
+import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
 import {Flex, Box} from '@workday/canvas-kit-react/layout';
 import {BodyText, Subtext} from '@workday/canvas-kit-react/text';
 import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {birthdayIcon, ribbonIcon} from '@workday/canvas-system-icons-web';
-
-const StyledPanel = styled(SidePanel.as('nav'))({
-  backgroundColor: colors.soap200,
-  zIndex: 1,
-});
 
 const StyledExpandable = styled(Expandable.Target)({
   borderRadius: 0,
@@ -41,17 +36,13 @@ const bestsellers = [
   {value: 'Tiramisu', linkValue: '#Tiramisu'},
 ];
 
-const gettingStarted = [
-  'Extended Systems',
-  'Canvas Glossary',
-  'Frequently Asked Questions',
-  'Canvas Support',
-];
-
 export const WithNavigation = () => {
+  const {expanded, panelProps, labelProps, controlProps} = useSidePanel();
+
   return (
     <Flex height={800} position="relative" backgroundColor="frenchVanilla100">
-      <StyledPanel touched={true} variant="alternate">
+      <SidePanel {...panelProps}>
+        <SidePanel.ToggleButton {...controlProps} />
         <Flex as="ul" flexDirection="column" rowGap="zero" paddingInlineStart="zero">
           <Flex.Item as="li" listStyle="none">
             <Expandable padding="zero">
@@ -124,7 +115,7 @@ export const WithNavigation = () => {
             </Expandable>
           </Flex.Item>
         </Flex>
-      </StyledPanel>
+      </SidePanel>
     </Flex>
   );
 };
