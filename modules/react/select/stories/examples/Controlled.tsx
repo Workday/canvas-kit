@@ -36,7 +36,12 @@ export const Controlled = () => {
         <FormField.Label>Contact</FormField.Label>
         <FormField.Field>
           <Select items={options} getId={item => item.serverId} getTextValue={item => item.label}>
-            <FormField.Input as={Select.Input} onChange={handleChange} value={value} />
+            <FormField.Input
+              as={Select.Input}
+              onChange={handleChange}
+              value={value}
+              name="contact"
+            />
             <Select.Popper>
               <Select.Card>
                 <Select.List>{item => <Select.Item>{item.label}</Select.Item>}</Select.List>

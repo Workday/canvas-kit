@@ -26,16 +26,13 @@ export const useComboboxInput = composeHooks(
         if (model.state.isVirtualized && item) {
           model.state.UNSTABLE_virtual.scrollToIndex(item.index);
         } else {
-          const listboxId = model.state.inputRef.current?.getAttribute('aria-controls');
-          if (listboxId) {
-            const menuItem = document.querySelector(
-              `[id="${listboxId}"] [data-id="${model.state.cursorId}"]`
-            );
-            if (menuItem) {
-              requestAnimationFrame(() => {
-                menuItem.scrollIntoView({block: 'nearest'});
-              });
-            }
+          const menuItem = document.querySelector(
+            `[id="${model.state.id}-list"] [data-id="${model.state.cursorId}"]`
+          );
+          if (menuItem) {
+            requestAnimationFrame(() => {
+              menuItem.scrollIntoView({block: 'nearest'});
+            });
           }
         }
       }
