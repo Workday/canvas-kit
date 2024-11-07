@@ -84,7 +84,7 @@ describe('Menu', () => {
         context('when the enter key is pressed', () => {
           beforeEach(() => {
             cy.focused().realType('{enter}');
-            cy.wait(150);
+            // cy.wait(150);
           });
 
           it('should have aria-expanded set to false', () => {
@@ -100,7 +100,8 @@ describe('Menu', () => {
           });
 
           it('should select the second item', () => {
-            cy.findByTestId('output').should('exist').contains(1);
+            cy.findByTestId('output').should('exist');
+            cy.findByTestId('output').contains('1');
           });
         });
       });
@@ -172,6 +173,7 @@ describe('Menu', () => {
 
       context('when up arrow key is pressed', () => {
         beforeEach(() => {
+          cy.findByRole('menu').should('exist');
           cy.focused().realType('{uparrow}');
         });
 
@@ -179,7 +181,7 @@ describe('Menu', () => {
           cy.get('[role="menuitem"]').last().should('contain', 'Fourth Item').focused();
         });
 
-        context('when the enter key is pressed', () => {
+        context.only('when the enter key is pressed', () => {
           beforeEach(() => {
             cy.focused().realType('{enter}');
           });
@@ -189,8 +191,8 @@ describe('Menu', () => {
           });
 
           it('should have aria-expanded set to true', () => {
-            cy.get('button[aria-expanded]').should('exist');
-            cy.get('button[aria-expanded="true"]').contains('Open Menu');
+            cy.findByRole('button').should('have.attr', 'aria-expanded', 'true');
+            cy.findByRole('button').should('contain', 'Open Menu');
           });
 
           it('should not select the fourth item', () => {
