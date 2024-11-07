@@ -258,12 +258,12 @@ export function getValueFromAliasedSymbol(
 function getValueFromProcessedNodes(varName: string, context: TransformerContext): string | void {
   const {names} = context;
 
-  if (names[varName]) {
-    return names[varName];
-  }
-
   if (context.nameScope && names[`${context.nameScope}${varName}`]) {
     return names[`${context.nameScope}${varName}`];
+  }
+
+  if (names[varName]) {
+    return names[varName];
   }
 }
 

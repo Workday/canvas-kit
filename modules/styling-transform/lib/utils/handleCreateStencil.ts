@@ -341,7 +341,7 @@ function parseStyleBlock(
     if (ts.isObjectLiteralExpression(property.initializer)) {
       styleObj = parseObjectToStaticValue(property.initializer, {
         ...context,
-        nameScope: `${stencilName}.`,
+        nameScope: `${stencilName}.vars.`,
       });
     }
 
@@ -350,7 +350,7 @@ function parseStyleBlock(
       if (returnNode) {
         styleObj = parseObjectToStaticValue(returnNode, {
           ...context,
-          nameScope: `${stencilName}.`,
+          nameScope: `${stencilName}.vars.`,
         });
       }
     }
@@ -361,7 +361,7 @@ function parseStyleBlock(
     if (returnNode) {
       styleObj = parseObjectToStaticValue(returnNode, {
         ...context,
-        nameScope: `${stencilName}.`,
+        nameScope: `${stencilName}.vars.`,
       });
     }
   }
