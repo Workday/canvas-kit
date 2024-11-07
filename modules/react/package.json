@@ -65,5 +65,8 @@
   "devDependencies": {
     "@workday/canvas-accent-icons-web": "^3.0.0",
     "@workday/canvas-applet-icons-web": "^2.0.0"
+  },
+  "resolutions": {
+    "cross-spawn": "7.0.5"
   }
 }

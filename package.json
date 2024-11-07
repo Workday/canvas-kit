@@ -147,6 +147,7 @@
     "braces": "3.0.3",
     "micromatch": "4.0.6",
     "jscodeshift": "0.14.0",
-    "puppeteer-core": "^13.7.0"
+    "puppeteer-core": "^13.7.0",
+    "cross-spawn": "7.0.5"
   }
 }
