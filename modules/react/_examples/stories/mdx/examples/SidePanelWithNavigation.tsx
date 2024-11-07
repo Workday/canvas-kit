@@ -1,15 +1,15 @@
 import * as React from 'react';
 import {styled, StyledType} from '@workday/canvas-kit-react/common';
 import {colors, gradients, type} from '@workday/canvas-kit-react/tokens';
-import {system} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
 import {Flex, Box} from '@workday/canvas-kit-react/layout';
 import {BodyText, Heading, Subtext} from '@workday/canvas-kit-react/text';
 import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {birthdayIcon, ribbonIcon} from '@workday/canvas-system-icons-web';
-import {TertiaryButton} from '../../../../button';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 
 const StyledExpandable = styled(Expandable.Target)({
   borderRadius: 0,
@@ -40,6 +40,19 @@ const bestsellers = [
 ];
 
 const stylesOverride = {
+  navContainer: createStyles({
+    height: px2rem(800),
+    positio: 'relative',
+    backgroundColor: base.frenchVanilla100,
+  }),
+  accordionContainer: createStyles({
+    flexDirection: 'column',
+    rowGap: system.space.zero,
+    paddingInlineStart: system.space.zero,
+  }),
+  accordionSubText: createStyles({
+    margin: system.space.zero,
+  }),
   listContainer: createStyles({
     listStyle: 'none',
     padding: system.space.x4,
@@ -69,21 +82,19 @@ const ExpandedView = () => {
   return (
     <>
       <Heading size="small">Cake or Death</Heading>
-      <Flex as="ul" flexDirection="column" rowGap="zero" paddingInlineStart="zero">
-        <Flex.Item as="li" listStyle="none">
-          <Expandable padding="zero">
-            <StyledExpandable paddingTop="m" paddingBottom="xxs" paddingX="m" textAlign="center">
-              <SystemIcon icon={ribbonIcon} paddingRight="s" />
-              <Expandable.Title padding="zero">
-                <BodyText size="small" fontWeight="bold" color="blackpepper300" marginY="zero">
-                  Bestsellers
-                </BodyText>
-                <Subtext size="medium" color="blackpepper300" marginY="zero">
+      <Flex as="ul" cs={stylesOverride.accordionContainer}>
+        <Flex.Item as="li">
+          <Expandable>
+            <Expandable.Target>
+              <SystemIcon icon={ribbonIcon} />
+              <Expandable.Title>
+                Bestsellers
+                <Subtext size="medium" cs={stylesOverride.accordionSubText}>
                   Award winning sweet treats
                 </Subtext>
               </Expandable.Title>
               <Expandable.Icon iconPosition="end" />
-            </StyledExpandable>
+            </Expandable.Target>
             <Expandable.Content paddingY="zero" paddingX="zero" as="ul">
               {bestsellers.map(item => {
                 return (
@@ -105,7 +116,7 @@ const ExpandedView = () => {
             </Expandable.Content>
           </Expandable>
         </Flex.Item>
-        <Flex.Item as="li" listStyle="none">
+        <Flex.Item as="li">
           <Expandable padding="zero">
             <StyledExpandable paddingTop="m" paddingBottom="xxs" paddingX="m" textAlign="center">
               <SystemIcon icon={birthdayIcon} paddingRight="s" />
@@ -149,7 +160,7 @@ export const WithNavigation = () => {
   const {expanded, panelProps, labelProps, controlProps} = useSidePanel();
 
   return (
-    <Flex height={800} position="relative" backgroundColor="frenchVanilla100">
+    <Flex cs={stylesOverride.navContainer}>
       <SidePanel {...panelProps}>
         <SidePanel.ToggleButton {...controlProps} />
         {expanded ? <ExpandedView /> : <CompactView />}
