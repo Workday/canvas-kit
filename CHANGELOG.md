@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.1.1](https://github.com/Workday/canvas-kit/releases/tag/v12.1.1) (2024-11-08)
+
+### Dependencies
+
+- chore: SNYK Security upgrade chroma-js from 2.1.1 to 2.2.0 ([#3043](https://github.com/Workday/canvas-kit/pull/3043)) ([@mannycarrera4](https://github.com/mannycarrera4), [@snyk-bot](https://github.com/snyk-bot), manuel.carrera)
+
+
+## [v12.1.0](https://github.com/Workday/canvas-kit/releases/tag/v12.1.0) (2024-11-07)
+
+
+
+
 ## [v12.0.10](https://github.com/Workday/canvas-kit/releases/tag/v12.0.10) (2024-11-06)
 
 ### Components

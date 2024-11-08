@@ -1,7 +1,9 @@
-import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
 import {Basic} from './examples/Basic';
 import {RTL} from './examples/RTL';
 import {Accessible} from './examples/Accessible';
+import {CustomShape} from './examples/CustomShape';
+import {CustomColorAndAnimation} from './examples/CustomColorAndAnimation';
 import * as LoadingDotsStories from './LoadingDots.stories';
 
 <Meta of={LoadingDotsStories} />
@@ -11,7 +13,7 @@ import * as LoadingDotsStories from './LoadingDots.stories';
 Loading Dots make users aware that content is currently being loaded, processing, or that change
 will occur on the page.
 
-[> Workday Design Reference](https://design.workday.com/components/indicators/loading-dots)
+[> Workday Design Reference](https://canvas.workdaydesign.com/components/indicators/loading-dots/)
 
 ## Installation
 
@@ -29,10 +31,20 @@ yarn add @workday/canvas-kit-react
 
 <ExampleCodeBlock code={RTL} />
 
+### Custom Shape
+
+<ExampleCodeBlock code={CustomShape} />
+
+### Custom Color and Animation
+
+<ExampleCodeBlock code={CustomColorAndAnimation} />
+
 ### Custom Styles
 
 Loading Dots supports custom styling via the `cs` prop. For more information, check our
-["How To Customize Styles"](https://workday.github.io/canvas-kit/?path=/docs/styling-how-to-customize-styles--page).
+["How To Customize Styles"](https://workday.github.io/canvas-kit/?path=/docs/styling-how-to-customize-styles--docs).
+
+Custom styling is also supported through the [Loading Dots documented props below](#props).
 
 ### Adding screen reader support to loading animations
 
@@ -50,7 +62,6 @@ components included in Canvas to describe both the appearance and disappearance 
 
 <ExampleCodeBlock code={Accessible} />
 
-## Props
+## Component API
 
-Loading Dots does not have any documented props. Undocumented props are spread to its outermost
-element.
+<SymbolDoc name="LoadingDots" fileName="/react/" />

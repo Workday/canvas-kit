@@ -34,6 +34,10 @@ export const useMultiSelectModel = createModelHook({
     useComboboxModel.mergeConfig(config, {
       onHide() {
         setSelectedItems(cachedSelected);
+        model.events.goTo({id: ''});
+      },
+      onFilterChange() {
+        model.events.goTo({id: ''});
       },
     })
   );
@@ -60,7 +64,7 @@ export const useMultiSelectModel = createModelHook({
   // The `listbox` of pills under the MultiSelect combobox input.
   const selected = useListModel({
     orientation: 'horizontal',
-    onSelect({id}) {
+    onRemove({id}) {
       model.events.select({id});
     },
     shouldVirtualize: false,
@@ -75,5 +79,22 @@ export const useMultiSelectModel = createModelHook({
     ...model.events,
   };
 
-  return {selected, ...model, state, events};
+  return {
+    selected: {
+      ...selected,
+      state: {
+        ...selected.state,
+        cursorId: React.useMemo(
+          () =>
+            selected.state.items.find(item => item.id === selected.state.cursorId)
+              ? selected.state.cursorId
+              : selected.state.items[0]?.id || '',
+          [selected.state.items, selected.state.cursorId]
+        ),
+      },
+    },
+    ...model,
+    state,
+    events,
+  };
 });
