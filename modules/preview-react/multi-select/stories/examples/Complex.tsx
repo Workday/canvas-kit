@@ -39,6 +39,7 @@ export const Complex = () => {
                 <FormField.Input
                   as={MultiSelect.Input}
                   placeholder="Select Multiple"
+                  removeLabel="Remove"
                   name="toppings"
                   onChange={e => {
                     const value = e.currentTarget.value;
