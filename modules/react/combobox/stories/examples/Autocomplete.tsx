@@ -4,7 +4,6 @@ import {
   createElemPropsHook,
   createSubcomponent,
   composeHooks,
-  ExtractProps,
 } from '@workday/canvas-kit-react/common';
 import {LoadReturn} from '@workday/canvas-kit-react/collection';
 import {
@@ -12,12 +11,13 @@ import {
   useComboboxModel,
   useComboboxLoader,
   useComboboxInput,
+  useComboboxInputArbitrary,
 } from '@workday/canvas-kit-react/combobox';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
 import {LoadingDots} from '@workday/canvas-kit-react/loading-dots';
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
-import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const colors = ['Red', 'Blue', 'Purple', 'Green', 'Pink'];
@@ -36,29 +36,50 @@ const useAutocompleteInput = composeHooks(
       },
     };
   }),
+  useComboboxInputArbitrary,
   useComboboxInput
 );
+
+const loadingDotsStencil = createStencil({
+  base: {
+    transition: 'opacity 100ms ease',
+    '& [data-part="loading-dots"]': {
+      display: 'flex',
+      transform: 'scale(0.3)',
+    },
+  },
+  modifiers: {
+    isLoading: {
+      true: {
+        opacity: system.opacity.full,
+      },
+      false: {
+        opacity: system.opacity.zero,
+      },
+    },
+  },
+});
 
 const AutoCompleteInput = createSubcomponent(TextInput)({
   modelHook: useComboboxModel,
   elemPropsHook: useAutocompleteInput,
-})<ExtractProps<typeof Combobox.Input, never>>((elemProps, Element) => {
-  return <Combobox.Input as={Element} {...elemProps} />;
+})<{isLoading?: boolean}>(({isLoading, ...elemProps}, Element) => {
+  return (
+    <InputGroup>
+      <InputGroup.Input as={Element} {...elemProps} />
+      <InputGroup.InnerEnd
+        cs={loadingDotsStencil({isLoading})}
+        width={px2rem(20)}
+        data-loading={isLoading}
+      >
+        <LoadingDots data-part="loading-dots" />
+      </InputGroup.InnerEnd>
+      <InputGroup.InnerEnd>
+        <InputGroup.ClearButton data-testid="clear" />
+      </InputGroup.InnerEnd>
+    </InputGroup>
+  );
 });
-
-const styleOverrides = {
-  inputGroupInner: createStyles({
-    width: px2rem(20),
-    transition: 'opacity 100ms ease',
-  }),
-  loadingDots: createStyles({
-    display: 'flex',
-    transform: 'scale(0.3)',
-  }),
-  comboboxMenuList: createStyles({
-    maxHeight: px2rem(200),
-  }),
-};
 
 export const Autocomplete = () => {
   const {model, loader} = useComboboxLoader(
@@ -105,36 +126,25 @@ export const Autocomplete = () => {
   );
 
   return (
-    <FormField orientation="horizontal" isRequired>
+    <FormField orientation="horizontalStart" isRequired>
       <FormField.Label>Fruit</FormField.Label>
-      <Combobox model={model} onChange={event => console.log('input', event.currentTarget.value)}>
-        <InputGroup>
-          <InputGroup.Input as={FormField.Input.as(AutoCompleteInput)} />
-          <InputGroup.InnerEnd
-            cs={styleOverrides.inputGroupInner}
-            pointerEvents="none"
-            style={{opacity: loader.isLoading ? system.opacity.full : system.opacity.zero}}
-            data-loading={loader.isLoading}
-          >
-            <LoadingDots cs={styleOverrides.loadingDots} />
-          </InputGroup.InnerEnd>
-          <InputGroup.InnerEnd>
-            <InputGroup.ClearButton data-testid="clear" />
-          </InputGroup.InnerEnd>
-        </InputGroup>
-        <Combobox.Menu.Popper>
-          <Combobox.Menu.Card>
-            {model.state.items.length === 0 && (
-              <StyledMenuItem as="span">No Results Found</StyledMenuItem>
-            )}
-            {model.state.items.length > 0 && (
-              <Combobox.Menu.List cs={styleOverrides.comboboxMenuList}>
-                {item => <Combobox.Menu.Item>{item}</Combobox.Menu.Item>}
-              </Combobox.Menu.List>
-            )}
-          </Combobox.Menu.Card>
-        </Combobox.Menu.Popper>
-      </Combobox>
+      <FormField.Field>
+        <Combobox model={model} onChange={event => console.log('input', event.currentTarget.value)}>
+          <FormField.Input as={AutoCompleteInput} isLoading={loader.isLoading} />
+          <Combobox.Menu.Popper>
+            <Combobox.Menu.Card>
+              {model.state.items.length === 0 && (
+                <StyledMenuItem as="span">No Results Found</StyledMenuItem>
+              )}
+              {model.state.items.length > 0 && (
+                <Combobox.Menu.List maxHeight={px2rem(200)}>
+                  {item => <Combobox.Menu.Item>{item}</Combobox.Menu.Item>}
+                </Combobox.Menu.List>
+              )}
+            </Combobox.Menu.Card>
+          </Combobox.Menu.Popper>
+        </Combobox>
+      </FormField.Field>
     </FormField>
   );
 };

@@ -1,13 +1,13 @@
 {
   "name": "@workday/canvas-kit-styling-transform",
-  "version": "11.1.16",
+  "version": "12.1.1",
   "description": "The custom CSS in JS solution that takes JS styles and turns them into static CSS",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
-  "main": "dist/commonjs/index.js",
-  "module": "dist/es6/index.js",
+  "main": "index.js",
+  "module": "index.js",
   "sideEffects": false,
-  "types": "dist/es6/index.d.ts",
+  "types": "index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/workday/canvas-kit.git",
@@ -34,10 +34,11 @@
   ],
   "dependencies": {
     "@emotion/serialize": "^1.0.2",
-    "@workday/canvas-kit-styling": "^11.1.16",
-    "@workday/canvas-tokens-web": "^2.0.0",
+    "@workday/canvas-kit-styling": "^12.1.1",
+    "@workday/canvas-tokens-web": "^2.0.1",
     "stylis": "4.0.13",
-    "typescript": "4.2"
+    "ts-node": "^10.9.1",
+    "typescript": "5.0"
   },
   "devDependencies": {
     "common-tags": "^1.8.0"

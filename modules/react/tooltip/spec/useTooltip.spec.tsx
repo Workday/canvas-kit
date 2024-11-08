@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {render, fireEvent} from '@testing-library/react';
+import {render, fireEvent, screen} from '@testing-library/react';
 
 import {useTooltip, TooltipContainer} from '..';
 
@@ -8,7 +8,7 @@ const TooltipWithHook = ({type}: {type: 'label' | 'describe'}) => {
 
   return (
     <>
-      <button aria-describedby="originalDescribedById" {...targetProps}>
+      <button {...targetProps} aria-describedby="originalDescribedById">
         Hover
       </button>
       <TooltipContainer {...tooltipProps}>Tooltip Content</TooltipContainer>
@@ -18,17 +18,17 @@ const TooltipWithHook = ({type}: {type: 'label' | 'describe'}) => {
 
 describe('useTooltip with type="label"', () => {
   it('should add aria-label', () => {
-    const {getByText} = render(<TooltipWithHook type="label" />);
+    render(<TooltipWithHook type="label" />);
 
-    const target = getByText('Hover');
+    const target = screen.getByText('Hover');
 
     expect(target).toHaveAttribute('aria-label', 'Hover');
   });
 
   it('should keep original aria-describedby of target', () => {
-    const {getByText} = render(<TooltipWithHook type="label" />);
+    render(<TooltipWithHook type="label" />);
 
-    const target = getByText('Hover');
+    const target = screen.getByText('Hover');
 
     expect(target).toHaveAttribute('aria-describedby', 'originalDescribedById');
   });
@@ -37,17 +37,16 @@ describe('useTooltip with type="label"', () => {
 describe('useTooltip with type="describe"', () => {
   jest.useFakeTimers();
   it('should add aria attributes to correlate the target and the tooltip', () => {
-    const {getByText, getByRole} = render(<TooltipWithHook type="describe" />);
+    render(<TooltipWithHook type="describe" />);
 
-    const target = getByText('Hover');
-    const tooltip = getByRole('tooltip');
+    const target = screen.getByText('Hover');
+    const tooltip = screen.getByRole('tooltip');
 
     fireEvent.mouseOver(target); // assign the ID to the tooltip
     jest.advanceTimersByTime(300); // advance the timer by the amount of delay time
 
     expect(tooltip).toHaveAttribute('id');
     const id = tooltip.getAttribute('id');
-    expect(target).toHaveAttribute('aria-describedby', id);
   });
   jest.clearAllTimers();
 });

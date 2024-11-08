@@ -1,6 +1,6 @@
 import React from 'react';
 import {LoadingDots} from '@workday/canvas-kit-react/loading-dots';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {createStyles} from '@workday/canvas-kit-styling';
