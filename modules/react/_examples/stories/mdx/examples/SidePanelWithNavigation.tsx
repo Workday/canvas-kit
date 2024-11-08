@@ -4,10 +4,10 @@ import {colors, gradients, type} from '@workday/canvas-kit-react/tokens';
 import {base, system} from '@workday/canvas-tokens-web';
 import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
 import {Flex, Box} from '@workday/canvas-kit-react/layout';
-import {BodyText, Heading, Subtext} from '@workday/canvas-kit-react/text';
+import {BodyText, Heading, Text, Subtext} from '@workday/canvas-kit-react/text';
 import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {TertiaryButton} from '@workday/canvas-kit-react/button';
+import {Hyperlink, TertiaryButton} from '@workday/canvas-kit-react/button';
 import {birthdayIcon, ribbonIcon} from '@workday/canvas-system-icons-web';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 
@@ -59,6 +59,10 @@ const stylesOverride = {
     paddingTop: system.space.x16,
     flexDirection: 'column',
   }),
+  links: createStyles({
+    textDecoration: 'none',
+    padding: system.space.x4,
+  }),
 };
 
 const CompactView = () => {
@@ -95,21 +99,13 @@ const ExpandedView = () => {
               </Expandable.Title>
               <Expandable.Icon iconPosition="end" />
             </Expandable.Target>
-            <Expandable.Content paddingY="zero" paddingX="zero" as="ul">
+            <Expandable.Content as="ul" cs={stylesOverride.listContainer}>
               {bestsellers.map(item => {
                 return (
-                  <li>
-                    <StyledLink
-                      size="large"
-                      display="flex"
-                      textDecoration="none"
-                      paddingLeft="xxl"
-                      paddingTop="xxs"
-                      paddingBottom="zero"
-                      href={item.linkValue}
-                    >
+                  <li key={item.linkValue}>
+                    <Hyperlink className={stylesOverride.links} href={item.linkValue}>
                       {item.value}
-                    </StyledLink>
+                    </Hyperlink>
                   </li>
                 );
               })}
