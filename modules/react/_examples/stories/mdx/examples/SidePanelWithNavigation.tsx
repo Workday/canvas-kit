@@ -1,14 +1,12 @@
 import * as React from 'react';
-import {styled, StyledType} from '@workday/canvas-kit-react/common';
-import {colors, gradients, type} from '@workday/canvas-kit-react/tokens';
 import {base, system} from '@workday/canvas-tokens-web';
 import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
-import {Flex, Box} from '@workday/canvas-kit-react/layout';
-import {BodyText, Heading, Text, Subtext} from '@workday/canvas-kit-react/text';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {Heading, Subtext} from '@workday/canvas-kit-react/text';
 import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {Hyperlink, TertiaryButton} from '@workday/canvas-kit-react/button';
-import {birthdayIcon, ribbonIcon} from '@workday/canvas-system-icons-web';
+import {birthdayIcon, checkIcon, ribbonIcon} from '@workday/canvas-system-icons-web';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 
 const data = {
@@ -50,13 +48,19 @@ const stylesOverride = {
     textDecoration: 'none',
     padding: system.space.x4,
   }),
-};
-
-const handleClick = e => {
-  e.preventDefault();
+  linkCheck: createStyles({
+    marginLeft: 'auto',
+  }),
 };
 
 const Accordion = ({config}) => {
+  const [currentPage, setCurrentPage] = React.useState('');
+
+  const handleClick = e => {
+    e.preventDefault();
+    setCurrentPage(e.target.textContent);
+  };
+
   return (
     <Expandable>
       <Expandable.Target>
@@ -73,8 +77,15 @@ const Accordion = ({config}) => {
         {config.items.map(i => {
           return (
             <li key={i}>
-              <Flex as="a" className={stylesOverride.links} href="#" onClick={handleClick}>
+              <Flex
+                as="a"
+                href="#"
+                aria-current={i === currentPage ? 'true' : undefined}
+                className={stylesOverride.links}
+                onClick={handleClick}
+              >
                 {i}
+                {i === currentPage && <SystemIcon icon={checkIcon} cs={stylesOverride.linkCheck} />}
               </Flex>
             </li>
           );
@@ -119,7 +130,7 @@ export const WithNavigation = () => {
 
   return (
     <Flex cs={stylesOverride.navContainer}>
-      <SidePanel {...panelProps}>
+      <SidePanel as="nav" {...panelProps}>
         <Heading size="small" {...labelProps} hidden={!expanded ? true : undefined}>
           Cake or Death
         </Heading>
