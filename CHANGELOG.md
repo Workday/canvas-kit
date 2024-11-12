@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.1.2](https://github.com/Workday/canvas-kit/releases/tag/v12.1.2) (2024-11-12)
+
+### Documentation, Examples
+
+- docs: Refreshing GlobalHeader Storybook Example ([#2891](https://github.com/Workday/canvas-kit/pull/2891)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton, manuel.carrera)
+  Optional release note message. Changelog and release summaries will contain a pull request title. This section will add additional notes under that title. This section is not a summary, but something extra to point out in release notes. An example might be calling out breaking changes in a labs component or minor visual changes that need visual regression updates. Remove this section if no additional release notes are required.
+
+### Infrastructure
+
+- fix: Remove start server command from forward merge action ([#3040](https://github.com/Workday/canvas-kit/pull/3040)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.1.1](https://github.com/Workday/canvas-kit/releases/tag/v12.1.1) (2024-11-08)
+
+### Dependencies
+
+- chore: SNYK Security upgrade chroma-js from 2.1.1 to 2.2.0 ([#3043](https://github.com/Workday/canvas-kit/pull/3043)) ([@mannycarrera4](https://github.com/mannycarrera4), [@snyk-bot](https://github.com/snyk-bot), manuel.carrera)
+
+
 ## [v12.1.0](https://github.com/Workday/canvas-kit/releases/tag/v12.1.0) (2024-11-07)
 
 
