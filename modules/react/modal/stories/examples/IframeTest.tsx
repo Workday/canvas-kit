@@ -19,7 +19,7 @@ export const IframeTest = () => {
             </Flex>
             <iframe
               role="iframe"
-              srcDoc="<html><body>Hello, <b>world</b>.<button>iframe button 1</button><button>iframe button 2</button></body></html>"
+              srcDoc="<html><body>Hello, <b>world</b>.<button>iframe button 1</button><button data-testid='button2'>iframe button 2</button></body></html>"
             />
           </Modal.Body>
         </Modal.Card>

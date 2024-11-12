@@ -688,8 +688,7 @@ context(`given the 'Iframe Test' story is rendered`, () => {
         cy.findByRole('iframe').its('0.contentDocument.body').should('exist');
         cy.findByRole('iframe')
           .its('0.contentDocument.body')
-          .then(cy.wrap)
-          .contains('button', 'iframe button 2')
+          .findAllByTestId('button2')
           .should('have.focus');
       });
 
