@@ -1,17 +1,14 @@
-import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
+import {Basic} from './examples/GlobalHeader';
 
-import {Basic as PageHeaderBasic} from './examples/PageHeader';
-import {Basic as GlobalHeaderBasic} from './examples/GlobalHeader';
+<Meta title="Examples/GlobalHeader" />
 
-<Meta title="Examples/Headers" />
-
-# Canvas Kit Examples
-
-## Global Header
+# GlobalHeader Example
 
 Developers building internal Workday applications will likely not need to create this component.
 However, if you're building components to be used outside of Workday, this is a helpful reference
 for building a global navigation header that looks like our internal `GlobalHeader`.
+
+<ExampleCodeBlock code={Basic} />
 
 ## Tooltip usage
 
@@ -38,9 +35,3 @@ enhancements to support live, real-time announcements for screen readers:
   "new" that only screen reader users can access.
 - When the `<CountBadge>` is updated, then screen readers can automatically describe (in real-time)
   the name of the live region, "Notifications" and the text updated inside of it, "1 new".
-
-<ExampleCodeBlock code={GlobalHeaderBasic} />
-
-## Page Header
-
-<ExampleCodeBlock code={PageHeaderBasic} />

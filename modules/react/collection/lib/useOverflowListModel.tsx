@@ -195,7 +195,6 @@ export const useOverflowListModel = createModelHook({
         [data.id]: model.state.orientation === 'horizontal' ? data.width : data.height,
       };
 
-
       setItemSizeCache(itemSizeCacheRef.current);
 
       const ids = getHiddenIds(
