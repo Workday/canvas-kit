@@ -183,6 +183,7 @@ describe('Menu', () => {
 
         context.only('when the enter key is pressed', () => {
           beforeEach(() => {
+            cy.findByRole('menuitem', {name: 'Fourth Item'}).should('be.visible');
             cy.focused().realType('{enter}');
           });
 
