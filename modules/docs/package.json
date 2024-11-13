@@ -27,7 +27,7 @@
     "build:docs": "node ./utils/build-docs.js",
     "build:rebuild": "npm-run-all clean build",
     "build:specs": "node ./utils/build-specifications.js",
-    "build": "npm-run-all --parallel build:es6 build:mdx --parallel build:specs build:docs",
+    "build": "npm-run-all build:es6 build:mdx build:specs build:docs",
     "depcheck": "node ../../utils/check-dependencies-exist.js",
     "typecheck:src": "tsc -p . --noEmit --incremental false"
   },
