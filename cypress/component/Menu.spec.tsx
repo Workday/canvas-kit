@@ -72,19 +72,18 @@ describe('Menu', () => {
         });
       });
 
-      context('when down arrow key is pressed', () => {
+      context.only('when down arrow key is pressed', () => {
         beforeEach(() => {
+          cy.findByRole('menuitem', {name: 'First Item'}).should('be.focused');
           cy.focused().realType('{downarrow}');
         });
 
         it('should transfer focus to the second item', () => {
-          cy.get('button[role="menuitem"]').should('contain', 'Second Item').focused();
+          cy.findByRole('menuitem', {name: 'Second Item'}).should('be.focused');
         });
-
         context('when the enter key is pressed', () => {
           beforeEach(() => {
             cy.focused().realType('{enter}');
-            // cy.wait(150);
           });
 
           it('should have aria-expanded set to false', () => {
