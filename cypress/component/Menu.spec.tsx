@@ -131,7 +131,7 @@ describe('Menu', () => {
 
       context('when the fourth item is clicked', () => {
         beforeEach(() => {
-          cy.get('button').contains('Fourth Item').click();
+          cy.findByRole('menuitem', {name: 'Fourth Item'}).click();
         });
 
         it('should not close the menu', () => {
@@ -174,31 +174,37 @@ describe('Menu', () => {
       context('when up arrow key is pressed', () => {
         beforeEach(() => {
           cy.findByRole('menu').should('exist');
-          cy.focused().realType('{uparrow}');
+          cy.findByRole('menuitem', {name: 'First Item'})
+            .should('be.focused')
+            .realType('{uparrow}');
         });
 
         it('should focus on the last option', () => {
-          cy.get('[role="menuitem"]').last().should('contain', 'Fourth Item').focused();
+          cy.findByRole('menuitem', {name: 'Fourth Item'}).should('be.focused');
+        });
+      });
+
+      context('when the enter key is pressed', () => {
+        beforeEach(() => {
+          cy.findByRole('menu').should('exist');
+          cy.findByRole('menuitem', {name: 'First Item'})
+            .should('be.focused')
+            .realType('{uparrow}');
+          cy.findByRole('menuitem', {name: 'Fourth Item'}).should('be.visible');
+          cy.focused().realType('{enter}');
         });
 
-        context.only('when the enter key is pressed', () => {
-          beforeEach(() => {
-            cy.findByRole('menuitem', {name: 'Fourth Item'}).should('be.visible');
-            cy.focused().realType('{enter}');
-          });
+        it('should not close the menu', () => {
+          cy.findByRole('menu').should('be.visible');
+        });
 
-          it('should not close the menu', () => {
-            cy.findByRole('menu').should('be.visible');
-          });
+        it('should have aria-expanded set to true', () => {
+          cy.findByRole('button').should('have.attr', 'aria-expanded', 'true');
+          cy.findByRole('button').should('contain', 'Open Menu');
+        });
 
-          it('should have aria-expanded set to true', () => {
-            cy.findByRole('button').should('have.attr', 'aria-expanded', 'true');
-            cy.findByRole('button').should('contain', 'Open Menu');
-          });
-
-          it('should not select the fourth item', () => {
-            cy.findByTestId('output').should('not.contain', '4');
-          });
+        it('should not select the fourth item', () => {
+          cy.findByTestId('output').should('not.contain', '4');
         });
       });
     });
