@@ -72,7 +72,7 @@ describe('Menu', () => {
         });
       });
 
-      context.only('when down arrow key is pressed', () => {
+      context('when down arrow key is pressed', () => {
         beforeEach(() => {
           cy.findByRole('menuitem', {name: 'First Item'}).should('be.focused');
           cy.focused().realType('{downarrow}');
@@ -81,6 +81,7 @@ describe('Menu', () => {
         it('should transfer focus to the second item', () => {
           cy.findByRole('menuitem', {name: 'Second Item'}).should('be.focused');
         });
+
         context('when the enter key is pressed', () => {
           beforeEach(() => {
             cy.focused().realType('{enter}');
