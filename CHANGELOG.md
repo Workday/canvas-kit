@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.1.3](https://github.com/Workday/canvas-kit/releases/tag/v12.1.3) (2024-11-13)
+
+### Dependencies
+
+- chore: Upgrade storybook to 7.6.20 to fix vulnerabilities ([#3047](https://github.com/Workday/canvas-kit/pull/3047)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+### Infrastructure
+
+- fix: Prevent build step in modules from running in parallel ([#3053](https://github.com/Workday/canvas-kit/pull/3053)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v12.1.2](https://github.com/Workday/canvas-kit/releases/tag/v12.1.2) (2024-11-12)
 
 ### Documentation, Examples
