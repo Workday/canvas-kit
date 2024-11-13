@@ -99,7 +99,7 @@
     "clean": "lerna run clean",
     "depcheck": "lerna run depcheck",
     "prebuild": "yarn depcheck",
-    "build": "lerna run build",
+    "build": "lerna run build --maxWorkers 1",
     "build:rebuild": "lerna run build:rebuild",
     "create-module": "./utils/create-component/createComponent.js",
     "create-component": "./utils/create-component/createComponent.js",
