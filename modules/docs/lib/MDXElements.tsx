@@ -31,9 +31,9 @@ const Button = (props: any) => {
         <SymbolDialog
           value={{
             kind: 'symbol',
-            name: props.children[0],
+            name: props.children?.[0] || '',
             displayName: props['data-symbol'],
-            value: props.children[0],
+            value: props.children?.[0] || '',
           }}
         />
       </code>
