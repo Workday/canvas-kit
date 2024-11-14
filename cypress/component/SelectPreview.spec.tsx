@@ -190,7 +190,7 @@ describe('Select', () => {
 
         context('when the down arrow key is pressed', () => {
           beforeEach(() => {
-            cy.focused().realType('{downarrow}');
+            cy.realType('{downarrow}');
           });
 
           context('the select button', () => {
@@ -215,7 +215,8 @@ describe('Select', () => {
 
           context('when the down arrow key is pressed for a second time', () => {
             beforeEach(() => {
-              cy.focused().realType('{downarrow}');
+              // cy.findByRole('');
+              cy.realType('{downarrow}');
             });
 
             context('the menu', () => {
@@ -229,7 +230,7 @@ describe('Select', () => {
 
             context('when the down arrow key is pressed for a third time', () => {
               beforeEach(() => {
-                cy.focused().realType('{downarrow}');
+                cy.realType('{downarrow}');
               });
 
               context('the menu', () => {
@@ -272,7 +273,7 @@ describe('Select', () => {
 
                 context('when the menu is expanded again', () => {
                   beforeEach(() => {
-                    cy.focused().realType('{downarrow}');
+                    cy.realType('{downarrow}');
                   });
 
                   context('the menu', () => {
@@ -382,7 +383,7 @@ describe('Select', () => {
 
       context('when focus is advanced to the second option ("Phone")', () => {
         beforeEach(() => {
-          cy.focused().realType('{downarrow}');
+          cy.realType('{downarrow}');
         });
 
         context('the menu', () => {
@@ -398,7 +399,7 @@ describe('Select', () => {
           'when the menu is closed WITHOUT selecting the newly focused option ("Phone")',
           () => {
             beforeEach(() => {
-              cy.focused().realType('{esc}');
+              cy.realType('{esc}');
             });
 
             context('when the menu is re-opened AFTER it has fully closed', () => {
@@ -424,7 +425,7 @@ describe('Select', () => {
 
             context('when the menu is re-opened BEFORE it has fully closed', () => {
               beforeEach(() => {
-                cy.focused().realType('{downarrow}');
+                cy.realType('{downarrow}');
               });
 
               context('the menu', () => {
@@ -483,7 +484,7 @@ describe('Select', () => {
 
       context('when the down arrow key is pressed', () => {
         beforeEach(() => {
-          cy.focused().realType('{downarrow}');
+          cy.realType('{downarrow}');
         });
 
         context('the menu', () => {
@@ -497,7 +498,7 @@ describe('Select', () => {
 
         context('when the up arrow key is pressed', () => {
           beforeEach(() => {
-            cy.focused().realType('{uparrow}');
+            cy.realType('{uparrow}');
           });
 
           context('the menu', () => {
@@ -512,7 +513,7 @@ describe('Select', () => {
 
         context('when the down arrow key is pressed 2 more times', () => {
           beforeEach(() => {
-            cy.focused().realType('{downarrow}{downarrow}');
+            cy.realType('{downarrow}{downarrow}');
           });
 
           context('the menu', () => {
@@ -526,7 +527,7 @@ describe('Select', () => {
 
           context('when the down arrow key is pressed 2 more times', () => {
             beforeEach(() => {
-              cy.focused().realType('{downarrow}{downarrow}');
+              cy.realType('{downarrow}{downarrow}');
             });
 
             context('the menu', () => {
@@ -543,7 +544,7 @@ describe('Select', () => {
 
       context('when the Home key is pressed', () => {
         beforeEach(() => {
-          cy.focused().realType('{home}');
+          cy.realType('{home}');
         });
 
         context('the menu', () => {
@@ -558,7 +559,7 @@ describe('Select', () => {
 
       context('when the End key is pressed', () => {
         beforeEach(() => {
-          cy.focused().realType('{end}');
+          cy.realType('{end}');
         });
 
         context('the menu', () => {
