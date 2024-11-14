@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-docs",
-  "version": "12.1.2",
+  "version": "12.1.3",
   "description": "Documentation components of Canvas Kit components",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -27,7 +27,7 @@
     "build:docs": "node ./utils/build-docs.js",
     "build:rebuild": "npm-run-all clean build",
     "build:specs": "node ./utils/build-specifications.js",
-    "build": "npm-run-all --parallel build:es6 build:mdx --parallel build:specs build:docs",
+    "build": "npm-run-all build:es6 build:mdx build:specs build:docs",
     "depcheck": "node ../../utils/check-dependencies-exist.js",
     "typecheck:src": "tsc -p . --noEmit --incremental false"
   },
@@ -44,10 +44,10 @@
   "dependencies": {
     "@emotion/styled": "^11.6.0",
     "@storybook/csf": "0.0.1",
-    "@workday/canvas-kit-labs-react": "^12.1.2",
-    "@workday/canvas-kit-preview-react": "^12.1.2",
-    "@workday/canvas-kit-react": "^12.1.2",
-    "@workday/canvas-kit-styling": "^12.1.2",
+    "@workday/canvas-kit-labs-react": "^12.1.3",
+    "@workday/canvas-kit-preview-react": "^12.1.3",
+    "@workday/canvas-kit-react": "^12.1.3",
+    "@workday/canvas-kit-styling": "^12.1.3",
     "@workday/canvas-system-icons-web": "^3.0.0",
     "@workday/canvas-tokens-web": "^2.0.1",
     "markdown-to-jsx": "^7.2.0",
