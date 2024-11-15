@@ -6,8 +6,10 @@ import {Heading, Subtext} from '@workday/canvas-kit-react/text';
 import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {Hyperlink, TertiaryButton} from '@workday/canvas-kit-react/button';
+import {Menu} from '@workday/canvas-kit-react/menu';
 import {birthdayIcon, checkIcon, ribbonIcon} from '@workday/canvas-system-icons-web';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {Tooltip} from '../../../../tooltip';
 
 const data = {
   bestsellers: {
@@ -50,6 +52,9 @@ const stylesOverride = {
   }),
   linkCheck: createStyles({
     marginLeft: 'auto',
+  }),
+  flyOut: createStyles({
+    marginTop: '8rem',
   }),
 };
 
@@ -95,18 +100,35 @@ const Accordion = ({config}) => {
   );
 };
 
+const IconButtonMenu = ({config}) => {
+  return (
+    <Menu>
+      <Tooltip title={config.title} placement="right">
+        <Menu.Target as={TertiaryButton}>
+          <SystemIcon icon={config.icon} />
+        </Menu.Target>
+      </Tooltip>
+      <Menu.Popper placement="right">
+        <Menu.Card cs={stylesOverride.flyOut}>
+          <Menu.List>
+            {config.items.map(i => (
+              <Menu.Item>{i}</Menu.Item>
+            ))}
+          </Menu.List>
+        </Menu.Card>
+      </Menu.Popper>
+    </Menu>
+  );
+};
+
 const CompactView = () => {
   return (
     <Flex as="ul" cs={stylesOverride.listContainer}>
       <Flex.Item as="li">
-        <TertiaryButton>
-          <SystemIcon icon={ribbonIcon} />
-        </TertiaryButton>
+        <IconButtonMenu config={data.bestsellers} />
       </Flex.Item>
       <Flex.Item as="li">
-        <TertiaryButton>
-          <SystemIcon icon={birthdayIcon} />
-        </TertiaryButton>
+        <IconButtonMenu config={data.cakes} />
       </Flex.Item>
     </Flex>
   );
