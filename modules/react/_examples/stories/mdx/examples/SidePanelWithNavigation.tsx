@@ -2,7 +2,7 @@ import * as React from 'react';
 import {base, system} from '@workday/canvas-tokens-web';
 import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {Heading, Subtext} from '@workday/canvas-kit-react/text';
+import {Heading, Subtext, Text} from '@workday/canvas-kit-react/text';
 import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {Hyperlink, TertiaryButton} from '@workday/canvas-kit-react/button';
@@ -37,6 +37,10 @@ const stylesOverride = {
     rowGap: system.space.zero,
     paddingInlineStart: system.space.zero,
   }),
+  accordionIcon: createStyles({
+    verticalAlign: 'middle',
+    padding: system.space.x1,
+  }),
   accordionSubText: createStyles({
     margin: system.space.zero,
   }),
@@ -69,11 +73,11 @@ const Accordion = ({config}) => {
   return (
     <Expandable>
       <Expandable.Target>
-        <SystemIcon icon={config.icon} />
+        <SystemIcon cs={stylesOverride.accordionIcon} icon={config.icon} />
         <Expandable.Title>
           {config.title}
           <Subtext size="medium" cs={stylesOverride.accordionSubText}>
-            {config.subTitle}
+            {config.subtitle}
           </Subtext>
         </Expandable.Title>
         <Expandable.Icon iconPosition="end" />
@@ -154,7 +158,7 @@ export const WithNavigation = () => {
     <Flex cs={stylesOverride.navContainer}>
       <SidePanel as="nav" {...panelProps}>
         <Heading size="small" {...labelProps} hidden={!expanded ? true : undefined}>
-          Cake or Death
+          Cake or Death Bakery
         </Heading>
         <SidePanel.ToggleButton {...controlProps} />
         {expanded ? <ExpandedView /> : <CompactView />}
