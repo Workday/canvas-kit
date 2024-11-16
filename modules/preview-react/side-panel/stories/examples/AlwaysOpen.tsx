@@ -1,15 +1,25 @@
 import * as React from 'react';
-import {styled} from '@workday/canvas-kit-react/common';
-import {space} from '@workday/canvas-kit-react/tokens';
 import {AccentIcon} from '@workday/canvas-kit-react/icon';
 import {rocketIcon} from '@workday/canvas-accent-icons-web';
 import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {Text} from '@workday/canvas-kit-react/text';
+import {Heading} from '@workday/canvas-kit-react/text';
+import {base, system} from '@workday/canvas-tokens-web';
+import {createStyles} from '@workday/canvas-kit-styling';
 
-const StyledAccentIcon = styled(AccentIcon)({
-  marginRight: space.s,
-});
+const stylesOverride = {
+  accentIcon: createStyles({
+    marginRight: system.space.x4,
+  }),
+  panelContainer: createStyles({
+    alignItems: 'center',
+    paddingY: system.space.x4,
+    paddingX: system.space.x4,
+  }),
+  panelHeading: createStyles({
+    color: base.licorice500,
+  }),
+};
 
 export const AlwaysOpen = () => {
   const {panelProps, labelProps} = useSidePanel();
@@ -17,17 +27,11 @@ export const AlwaysOpen = () => {
   return (
     <Flex gap="s" height={320}>
       <SidePanel {...panelProps}>
-        <Flex alignItems="center" paddingY="s" paddingX="s">
-          <StyledAccentIcon icon={rocketIcon} />
-          <Text
-            as="h3"
-            typeLevel="body.large"
-            color="licorice500"
-            fontWeight="bold"
-            {...labelProps}
-          >
+        <Flex cs={stylesOverride.panelContainer}>
+          <AccentIcon icon={rocketIcon} cs={stylesOverride.accentIcon} />
+          <Heading size="large" cs={stylesOverride.panelHeading} {...labelProps}>
             Tasks Panel
-          </Text>
+          </Heading>
         </Flex>
       </SidePanel>
     </Flex>
