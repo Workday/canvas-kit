@@ -182,7 +182,7 @@ describe('Select', () => {
 
         context('when the down arrow key is pressed', () => {
           beforeEach(() => {
-            cy.realType('{downarrow}');
+            cy.findByRole('button', {name: 'Label'}).realType('{downarrow}');
           });
 
           context('the select button', () => {
@@ -205,7 +205,7 @@ describe('Select', () => {
             });
           });
 
-          context('when the down arrow key is pressed for a second time', () => {
+          context.only('when the down arrow key is pressed for a second time', () => {
             beforeEach(() => {
               cy.realType('{downarrow}');
             });
