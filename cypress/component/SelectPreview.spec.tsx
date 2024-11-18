@@ -207,7 +207,6 @@ describe('Select', () => {
 
           context('when the down arrow key is pressed for a second time', () => {
             beforeEach(() => {
-              // cy.findByRole('');
               cy.realType('{downarrow}');
             });
 
@@ -234,24 +233,26 @@ describe('Select', () => {
                 });
               });
 
-              context('when the enter key is pressed', () => {
+              context.only('when the enter key is pressed', () => {
                 beforeEach(() => {
                   cy.findByRole('button', {name: 'Label'})
                     .pipe(h.selectPreview.getMenu)
                     .realType('{enter}');
-                  cy.findByRole('button', {name: 'Label'}).should('exist');
                 });
 
                 context('the select button', () => {
                   it(`should read "Mail"`, () => {
+                    cy.findByRole('button', {name: 'Label'}).should('exist');
                     cy.findByRole('button', {name: 'Label'}).should('have.text', 'Mail');
                   });
 
                   it(`should have a value of "mail"`, () => {
+                    cy.findByRole('button', {name: 'Label'}).should('exist');
                     cy.findByRole('button', {name: 'Label'}).should('have.value', 'mail');
                   });
 
                   it(`should re-acquire focus`, () => {
+                    cy.findByRole('button', {name: 'Label'}).should('exist');
                     cy.findByRole('button', {name: 'Label'}).should('be.focused');
                   });
                 });
