@@ -7,7 +7,7 @@ import {controlComponent} from '../../../../../../utils/storybook';
 
 export const Alert = () => {
   return (
-    <FormField id="select-alert" error="error">
+    <FormField id="select-alert" error="alert">
       <FormField.Label>Label</FormField.Label>
       <FormField.Field>
         {controlComponent(<FormField.Input as={Select} name="contact" options={options} />)}
