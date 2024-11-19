@@ -59,7 +59,6 @@ export const OverflowBreadcrumbs = ({width = '100%'}) => {
       <SegmentedControl
         initialValue={width}
         onSelect={data => {
-          console.log('you called?');
           setContainerWidth(data.id);
         }}
       >
