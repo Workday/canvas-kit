@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.1.5](https://github.com/Workday/canvas-kit/releases/tag/v12.1.5) (2024-11-19)
+
+### Components
+
+- fix: Remove default modifier for formfield label ([#3055](https://github.com/Workday/canvas-kit/pull/3055)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v12.1.4](https://github.com/Workday/canvas-kit/releases/tag/v12.1.4) (2024-11-14)
 
 ### Documentation
