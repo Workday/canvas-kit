@@ -199,9 +199,7 @@ describe('Select', () => {
             });
 
             it('should have focus', () => {
-              cy.findByRole('button', {name: 'Label'})
-                .pipe(h.selectPreview.getMenu)
-                .should('be.focused');
+              cy.findByRole('listbox').should('have.focus');
             });
           });
 
@@ -502,7 +500,8 @@ describe('Select', () => {
 
         context('when the down arrow key is pressed 2 more times', () => {
           beforeEach(() => {
-            cy.realType('{downarrow}{downarrow}');
+            cy.realType('{downarrow}');
+            cy.realType('{downarrow}');
           });
 
           context('the menu', () => {
@@ -516,13 +515,13 @@ describe('Select', () => {
 
           context('when the down arrow key is pressed 2 more times', () => {
             beforeEach(() => {
-              cy.realType('{downarrow}{downarrow}');
+              cy.realType('{downarrow}');
+              cy.realType('{downarrow}');
             });
 
             context('the menu', () => {
               it('should set assistive focus to the first option down ("Mobile Phone") since the second option down ("Telegram", which also happens to be the last option) is disabled', () => {
-                cy.findByRole('button', {name: 'Label (Disabled Options)'})
-                  .pipe(h.selectPreview.getMenu)
+                cy.findByRole('listbox')
                   .pipe(getAssistiveFocus)
                   .should('have.text', 'Mobile Phone');
               });
@@ -597,7 +596,9 @@ describe('Select', () => {
 
           context('when "s{500ms delay}s" is typed', () => {
             beforeEach(() => {
-              cy.findByRole('button', {name: 'Label'}).realType('ss', {delay: 500});
+              cy.findByRole('button', {name: 'Label'}).realType('s');
+              cy.wait(1000);
+              cy.realType('s');
             });
 
             context('the select button', () => {
