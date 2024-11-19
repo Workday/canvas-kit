@@ -56,7 +56,9 @@ export const Basic = () => {
           </Flex>
         </SidePanel>
         <Flex as="main" cs={stylesOverride.mainContent}>
-          <p>Toggle the content direction</p>
+          <Text as="p" typeLevel="body.large">
+            Toggle the content direction
+          </Text>
           <SecondaryButton onClick={toggleDirection}>
             Set to {direction === 'ltr' ? 'Right-to-Left' : 'Left-to-Right'}
           </SecondaryButton>

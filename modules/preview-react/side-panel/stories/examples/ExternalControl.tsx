@@ -68,7 +68,9 @@ export const ExternalControl = () => {
         )}
       </SidePanel>
       <Flex as="main" cs={stylesOverride.main}>
-        <Text typeLevel="body.large">Control the panel externally</Text>
+        <Text as="p" typeLevel="body.large">
+          Control the panel externally
+        </Text>
         <SecondaryButton onClick={controlProps.onClick} aria-pressed={expanded}>
           Show Side Panel
         </SecondaryButton>

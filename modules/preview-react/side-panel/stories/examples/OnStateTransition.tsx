@@ -38,7 +38,9 @@ export const OnStateTransition = () => {
         <AccessibleHide {...labelProps}>Hidden Title</AccessibleHide>
       </SidePanel>
       <Flex as="main" cs={stylesOverride.main}>
-        <Text typeLevel="body.large">Side panel is {transitionState}.</Text>
+        <Text as="p" typeLevel="body.large">
+          Side panel is {transitionState}.
+        </Text>
       </Flex>
     </Flex>
   );

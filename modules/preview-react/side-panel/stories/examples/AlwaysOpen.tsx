@@ -45,7 +45,9 @@ export const AlwaysOpen = () => {
         </Flex>
       </SidePanel>
       <Flex as="main" cs={stylesOverride.mainContent}>
-        <Text typeLevel="body.large">This is the main content section.</Text>
+        <Text as="p" typeLevel="body.large">
+          This is the main content section.
+        </Text>
       </Flex>
     </Flex>
   );

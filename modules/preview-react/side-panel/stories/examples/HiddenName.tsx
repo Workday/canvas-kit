@@ -36,7 +36,9 @@ export const HiddenName = () => {
         <AccessibleHide {...labelProps}>Hidden Title</AccessibleHide>
       </SidePanel>
       <Flex as="main" cs={stylesOverride.main}>
-        <Text typeLevel="body.large">Side Panel with a hidden title text.</Text>
+        <Text as="p" typeLevel="body.large">
+          Side Panel with a hidden title text.
+        </Text>
       </Flex>
     </Flex>
   );

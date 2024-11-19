@@ -32,7 +32,9 @@ export const OnExpandedChange = () => {
         <AccessibleHide {...labelProps}>Hidden Title</AccessibleHide>
       </SidePanel>
       <Flex as="main" cs={stylesOverride.main}>
-        <Text typeLevel="body.large">Side panel is {expanded ? 'expanded' : 'collapsed'}.</Text>
+        <Text as="p" typeLevel="body.large">
+          Side panel is {expanded ? 'expanded' : 'collapsed'}.
+        </Text>
       </Flex>
     </Flex>
   );
