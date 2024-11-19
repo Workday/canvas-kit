@@ -48,7 +48,7 @@ export const AlternatePanel = () => {
           <Text as="p" typeLevel="body.large">
             Toggle the content direction
           </Text>
-          <SecondaryButton onClick={toggleDirection} role="button">
+          <SecondaryButton onClick={toggleDirection}>
             Set to {direction === 'ltr' ? 'Right-to-Left' : 'Left-to-Right'}
           </SecondaryButton>
         </Flex>
