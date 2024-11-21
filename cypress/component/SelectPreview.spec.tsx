@@ -180,9 +180,13 @@ describe('Select', () => {
           cy.findByRole('button', {name: 'Label'}).focus();
         });
 
+        it('the button should have focus', () => {
+          cy.findByRole('button', {name: 'Label'}).should('have.focus');
+        });
+
         context('when the down arrow key is pressed', () => {
           beforeEach(() => {
-            cy.findByRole('button', {name: 'Label'}).realType('{downarrow}');
+            cy.realType('{downarrow}');
           });
 
           context('the select button', () => {
@@ -571,6 +575,10 @@ describe('Select', () => {
     context('when the select button is focused', () => {
       beforeEach(() => {
         cy.findByRole('button', {name: 'Label'}).focus();
+      });
+
+      it('button should have focus', () => {
+        cy.findByRole('button', {name: 'Label'}).should('have.focus');
       });
 
       context(
