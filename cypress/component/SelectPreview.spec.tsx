@@ -209,10 +209,17 @@ describe('Select', () => {
             });
           });
 
+          it('the menu should have focus', () => {
+            cy.findByRole('button', {name: 'Label'})
+              .pipe(h.selectPreview.getMenu)
+              .should('have.focus');
+          });
+
           context('when the down arrow key is pressed for a second time', () => {
             beforeEach(() => {
               cy.findByRole('button', {name: 'Label'})
                 .pipe(h.selectPreview.getMenu)
+                .should('be.visible')
                 .realType('{downarrow}');
             });
 
@@ -229,6 +236,7 @@ describe('Select', () => {
               beforeEach(() => {
                 cy.findByRole('button', {name: 'Label'})
                   .pipe(h.selectPreview.getMenu)
+                  .should('be.visible')
                   .realType('{downarrow}');
               });
 
@@ -387,6 +395,7 @@ describe('Select', () => {
         beforeEach(() => {
           cy.findByRole('button', {name: 'Label'})
             .pipe(h.selectPreview.getMenu)
+            .should('be.visible')
             .realType('{downarrow}');
         });
 
@@ -490,6 +499,7 @@ describe('Select', () => {
         beforeEach(() => {
           cy.findByRole('button', {name: 'Label (Disabled Options)'})
             .pipe(h.selectPreview.getMenu)
+            .should('be.visible')
             .realType('{downarrow}');
         });
 
