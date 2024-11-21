@@ -186,7 +186,7 @@ describe('Select', () => {
 
         context('when the down arrow key is pressed', () => {
           beforeEach(() => {
-            cy.findByRole('button', {name: 'Label'}).realType('{downarrow}');
+            cy.findByRole('button', {name: 'Label'}).realPress('{downarrow}');
           });
 
           context('the select button', () => {
@@ -219,8 +219,7 @@ describe('Select', () => {
             beforeEach(() => {
               cy.findByRole('button', {name: 'Label'})
                 .pipe(h.selectPreview.getMenu)
-                .should('be.visible')
-                .realType('{downarrow}');
+                .realPress('{downarrow}');
             });
 
             context('the menu', () => {
@@ -236,8 +235,7 @@ describe('Select', () => {
               beforeEach(() => {
                 cy.findByRole('button', {name: 'Label'})
                   .pipe(h.selectPreview.getMenu)
-                  .should('be.visible')
-                  .realType('{downarrow}');
+                  .realPress('{downarrow}');
               });
 
               context('the menu', () => {
@@ -253,7 +251,7 @@ describe('Select', () => {
                 beforeEach(() => {
                   cy.findByRole('button', {name: 'Label'})
                     .pipe(h.selectPreview.getMenu)
-                    .realType('{enter}');
+                    .realPress('{enter}');
                 });
 
                 context('the select button', () => {
@@ -282,7 +280,7 @@ describe('Select', () => {
                   beforeEach(() => {
                     cy.findByRole('button', {name: 'Label'})
                       .pipe(h.selectPreview.getMenu)
-                      .realType('{downarrow}');
+                      .realPress('{downarrow}');
                   });
 
                   context('the menu', () => {
@@ -309,7 +307,7 @@ describe('Select', () => {
               beforeEach(() => {
                 cy.findByRole('button', {name: 'Label'})
                   .pipe(h.selectPreview.getMenu)
-                  .realType('{uparrow}');
+                  .realPress('{uparrow}');
               });
 
               context('the menu', () => {
@@ -326,7 +324,7 @@ describe('Select', () => {
 
         context('when the enter key is pressed', () => {
           beforeEach(() => {
-            cy.findByRole('button', {name: 'Label'}).realType('{enter}');
+            cy.findByRole('button', {name: 'Label'}).realPress('{enter}');
           });
 
           context('the select button', () => {
@@ -379,7 +377,7 @@ describe('Select', () => {
     context('when the menu is opened', () => {
       beforeEach(() => {
         cy.findByRole('button', {name: 'Label'}).focus();
-        cy.findByRole('button', {name: 'Label'}).realType('{downarrow}');
+        cy.findByRole('button', {name: 'Label'}).realPress('{downarrow}');
       });
 
       context('the menu', () => {
@@ -395,8 +393,7 @@ describe('Select', () => {
         beforeEach(() => {
           cy.findByRole('button', {name: 'Label'})
             .pipe(h.selectPreview.getMenu)
-            .should('be.visible')
-            .realType('{downarrow}');
+            .realPress('{downarrow}');
         });
 
         context('the menu', () => {
@@ -412,7 +409,7 @@ describe('Select', () => {
           'when the menu is closed WITHOUT selecting the newly focused option ("Phone")',
           () => {
             beforeEach(() => {
-              cy.realType('{esc}');
+              cy.realPress('{esc}');
             });
 
             context('when the menu is re-opened AFTER it has fully closed', () => {
@@ -423,7 +420,7 @@ describe('Select', () => {
                 cy.findByRole('button', {name: 'Label'})
                   .pipe(h.selectPreview.getMenu)
                   .should('not.exist');
-                cy.findByRole('button', {name: 'Label'}).focus().realType('{downarrow}');
+                cy.findByRole('button', {name: 'Label'}).focus().realPress('{downarrow}');
               });
 
               context('the menu', () => {
@@ -440,7 +437,7 @@ describe('Select', () => {
               beforeEach(() => {
                 cy.findByRole('button', {name: 'Label'})
                   .pipe(h.selectPreview.getMenu)
-                  .realType('{downarrow}');
+                  .realPress('{downarrow}');
               });
 
               context('the menu', () => {
@@ -484,7 +481,9 @@ describe('Select', () => {
 
     context('when the menu is opened', () => {
       beforeEach(() => {
-        cy.findByRole('button', {name: 'Label (Disabled Options)'}).focus().realType('{downarrow}');
+        cy.findByRole('button', {name: 'Label (Disabled Options)'})
+          .focus()
+          .realPress('{downarrow}');
       });
 
       context('the "Carrier Pigeon" option', () => {
@@ -499,8 +498,7 @@ describe('Select', () => {
         beforeEach(() => {
           cy.findByRole('button', {name: 'Label (Disabled Options)'})
             .pipe(h.selectPreview.getMenu)
-            .should('be.visible')
-            .realType('{downarrow}');
+            .realPress('{downarrow}');
         });
 
         context('the menu', () => {
@@ -514,7 +512,7 @@ describe('Select', () => {
 
         context('when the up arrow key is pressed', () => {
           beforeEach(() => {
-            cy.realType('{uparrow}');
+            cy.realPress('{uparrow}');
           });
 
           context('the menu', () => {
@@ -529,7 +527,8 @@ describe('Select', () => {
 
         context('when the down arrow key is pressed 2 more times', () => {
           beforeEach(() => {
-            cy.realType('{downarrow}{downarrow}');
+            cy.realPress('{downarrow}');
+            cy.realPress('{downarrow}');
           });
 
           context('the menu', () => {
@@ -543,7 +542,8 @@ describe('Select', () => {
 
           context('when the down arrow key is pressed 2 more times', () => {
             beforeEach(() => {
-              cy.realType('{downarrow}{downarrow}');
+              cy.realPress('{downarrow}');
+              cy.realPress('{downarrow}');
             });
 
             context('the menu', () => {
@@ -560,7 +560,7 @@ describe('Select', () => {
 
       context('when the Home key is pressed', () => {
         beforeEach(() => {
-          cy.realType('{home}');
+          cy.realPress('{home}');
         });
 
         context('the menu', () => {
@@ -575,7 +575,7 @@ describe('Select', () => {
 
       context('when the End key is pressed', () => {
         beforeEach(() => {
-          cy.realType('{end}');
+          cy.realPress('{end}');
         });
 
         context('the menu', () => {
@@ -609,7 +609,7 @@ describe('Select', () => {
         () => {
           context('when "s" is typed', () => {
             beforeEach(() => {
-              cy.findByRole('button', {name: 'Label'}).realType('s');
+              cy.findByRole('button', {name: 'Label'}).realPress('s');
             });
 
             context('the select button', () => {
