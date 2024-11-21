@@ -186,7 +186,7 @@ describe('Select', () => {
 
         context('when the down arrow key is pressed', () => {
           beforeEach(() => {
-            cy.realType('{downarrow}');
+            cy.findByRole('button', {name: 'Label'}).realType('{downarrow}');
           });
 
           context('the select button', () => {
@@ -211,7 +211,9 @@ describe('Select', () => {
 
           context('when the down arrow key is pressed for a second time', () => {
             beforeEach(() => {
-              cy.realType('{downarrow}');
+              cy.findByRole('button', {name: 'Label'})
+                .pipe(h.selectPreview.getMenu)
+                .realType('{downarrow}');
             });
 
             context('the menu', () => {
@@ -225,7 +227,9 @@ describe('Select', () => {
 
             context('when the down arrow key is pressed for a third time', () => {
               beforeEach(() => {
-                cy.realType('{downarrow}');
+                cy.findByRole('button', {name: 'Label'})
+                  .pipe(h.selectPreview.getMenu)
+                  .realType('{downarrow}');
               });
 
               context('the menu', () => {
@@ -268,7 +272,9 @@ describe('Select', () => {
 
                 context('when the menu is expanded again', () => {
                   beforeEach(() => {
-                    cy.realType('{downarrow}');
+                    cy.findByRole('button', {name: 'Label'})
+                      .pipe(h.selectPreview.getMenu)
+                      .realType('{downarrow}');
                   });
 
                   context('the menu', () => {
@@ -364,7 +370,8 @@ describe('Select', () => {
 
     context('when the menu is opened', () => {
       beforeEach(() => {
-        cy.findByRole('button', {name: 'Label'}).focus().realType('{downarrow}');
+        cy.findByRole('button', {name: 'Label'}).focus();
+        cy.findByRole('button', {name: 'Label'}).realType('{downarrow}');
       });
 
       context('the menu', () => {
@@ -378,7 +385,9 @@ describe('Select', () => {
 
       context('when focus is advanced to the second option ("Phone")', () => {
         beforeEach(() => {
-          cy.realType('{downarrow}');
+          cy.findByRole('button', {name: 'Label'})
+            .pipe(h.selectPreview.getMenu)
+            .realType('{downarrow}');
         });
 
         context('the menu', () => {
@@ -420,11 +429,13 @@ describe('Select', () => {
 
             context('when the menu is re-opened BEFORE it has fully closed', () => {
               beforeEach(() => {
-                cy.realType('{downarrow}');
+                cy.findByRole('button', {name: 'Label'})
+                  .pipe(h.selectPreview.getMenu)
+                  .realType('{downarrow}');
               });
 
               context('the menu', () => {
-                it('should still have assistive focus set to the second option ("Phone")', () => {
+                it.only('should still have assistive focus set to the second option ("Phone")', () => {
                   // Focus is shifting between the button and menu as we close
                   // and open the menu. It's important that we use getMenu rather
                   // than cy.focused() to ensure we obtain a reference to the menu.
@@ -477,7 +488,9 @@ describe('Select', () => {
 
       context('when the down arrow key is pressed', () => {
         beforeEach(() => {
-          cy.realType('{downarrow}');
+          cy.findByRole('button', {name: 'Label'})
+            .pipe(h.selectPreview.getMenu)
+            .realType('{downarrow}');
         });
 
         context('the menu', () => {
