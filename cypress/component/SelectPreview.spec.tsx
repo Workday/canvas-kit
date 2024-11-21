@@ -435,7 +435,7 @@ describe('Select', () => {
               });
 
               context('the menu', () => {
-                it.only('should still have assistive focus set to the second option ("Phone")', () => {
+                it('should still have assistive focus set to the second option ("Phone")', () => {
                   // Focus is shifting between the button and menu as we close
                   // and open the menu. It's important that we use getMenu rather
                   // than cy.focused() to ensure we obtain a reference to the menu.
@@ -488,7 +488,7 @@ describe('Select', () => {
 
       context('when the down arrow key is pressed', () => {
         beforeEach(() => {
-          cy.findByRole('button', {name: 'Label'})
+          cy.findByRole('button', {name: 'Label (Disabled Options)'})
             .pipe(h.selectPreview.getMenu)
             .realType('{downarrow}');
         });
