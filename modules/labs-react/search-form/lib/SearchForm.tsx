@@ -6,10 +6,11 @@ import {
   styled,
   generateUniqueId,
   filterOutProps,
+  accessibleHideStyles,
 } from '@workday/canvas-kit-react/common';
 import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
 import {searchIcon, xIcon} from '@workday/canvas-system-icons-web';
-import {FormField, FormFieldLabelPosition} from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Combobox} from '@workday/canvas-kit-labs-react/combobox';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {searchThemes, SearchTheme, SearchThemeAttributes} from './themes';
@@ -288,7 +289,6 @@ const SearchInput = styled(TextInput)<
 
 export class SearchForm extends React.Component<SearchFormProps, SearchFormState> {
   static Theme = SearchTheme;
-
   private inputRef = React.createRef<HTMLInputElement>();
   private openRef = React.createRef<HTMLButtonElement>();
   private defaultLabelId = generateUniqueId();
@@ -445,14 +445,11 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
           <SearchField
             grow={grow}
             id={labelId}
-            inputId={`input-${labelId}`}
-            label={inputLabel}
-            labelPosition={FormFieldLabelPosition.Hidden}
-            useFieldset={false}
             isCollapsed={isCollapsed}
             showForm={this.state.showForm}
             height={height}
           >
+            <FormField.Label cs={accessibleHideStyles}>{inputLabel}</FormField.Label>
             <SearchCombobox
               initialValue={initialValue}
               clearButtonVariant={this.getIconButtonType()}
@@ -464,8 +461,10 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
               clearButtonAriaLabel={clearButtonAriaLabel}
               labelId={labelId}
             >
-              <SearchInput
-                ref={this.inputRef}
+              <FormField.Input
+                as={SearchInput}
+                ref={this.inputRef as any}
+                cs={{maxWidth: grow ? '100%' : maxWidth}}
                 value={this.state.searchQuery}
                 placeholder={placeholder}
                 isCollapsed={isCollapsed}
