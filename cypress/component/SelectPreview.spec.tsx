@@ -186,6 +186,7 @@ describe('Select', () => {
 
         context('when the down arrow key is pressed', () => {
           beforeEach(() => {
+            cy.findByRole('button', {name: 'Label'}).should('have.focus');
             cy.findByRole('button', {name: 'Label'}).realPress('{downarrow}');
           });
 
@@ -217,6 +218,7 @@ describe('Select', () => {
 
           context('when the down arrow key is pressed for a second time', () => {
             beforeEach(() => {
+              cy.findByRole('button', {name: 'Label'}).should('exist');
               cy.findByRole('button', {name: 'Label'})
                 .pipe(h.selectPreview.getMenu)
                 .realPress('{downarrow}');
@@ -235,7 +237,8 @@ describe('Select', () => {
               beforeEach(() => {
                 cy.findByRole('button', {name: 'Label'})
                   .pipe(h.selectPreview.getMenu)
-                  .should('exist');
+                  .pipe(getAssistiveFocus)
+                  .should('have.text', 'Phone');
                 cy.findByRole('button', {name: 'Label'})
                   .pipe(h.selectPreview.getMenu)
                   .realPress('{downarrow}');
@@ -281,6 +284,7 @@ describe('Select', () => {
 
                 context('when the menu is expanded again', () => {
                   beforeEach(() => {
+                    cy.findByRole('button', {name: 'Label'}).should('exist');
                     cy.findByRole('button', {name: 'Label'})
                       .pipe(h.selectPreview.getMenu)
                       .realPress('{downarrow}');
@@ -633,8 +637,8 @@ describe('Select', () => {
 
           context('when "s{500ms delay}s" is typed', () => {
             beforeEach(() => {
-              cy.findByRole('button', {name: 'Label'}).realType('s', {delay: 500});
-              cy.findByRole('button', {name: 'Label'}).realType('s', {delay: 500});
+              cy.findByRole('button', {name: 'Label'}).type('s', {delay: 500});
+              cy.findByRole('button', {name: 'Label'}).type('s');
             });
 
             context('the select button', () => {
@@ -793,7 +797,10 @@ describe('Select', () => {
             beforeEach(() => {
               cy.findByRole('button', {name: 'Label'})
                 .pipe(h.selectPreview.getMenu)
-                .realType('sd', {delay: 500});
+                .realType('s', {delay: 500});
+              cy.findByRole('button', {name: 'Label'})
+                .pipe(h.selectPreview.getMenu)
+                .realType('d', {delay: 500});
             });
 
             context('the menu', () => {
