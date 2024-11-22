@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.1.24](https://github.com/Workday/canvas-kit/releases/tag/v11.1.24) (2024-11-22)
+
+### Components
+
+- fix: Deconstruct typelevel from props and pass to stencil ([#3059](https://github.com/Workday/canvas-kit/pull/3059)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v11.1.23](https://github.com/Workday/canvas-kit/releases/tag/v11.1.23) (2024-11-06)
 
 ### Infrastructure
