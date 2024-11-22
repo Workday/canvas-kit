@@ -640,7 +640,7 @@ describe('Popup', () => {
     });
   });
 
-  context.only(
+  context(
     `given the [Testing/Popups/Popup, PopupWithFallbackPlacements] example is rendered`,
     () => {
       beforeEach(() => {

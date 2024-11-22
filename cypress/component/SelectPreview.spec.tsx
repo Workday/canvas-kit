@@ -254,7 +254,7 @@ describe('Select', () => {
                 beforeEach(() => {
                   cy.findByRole('button', {name: 'Label'})
                     .pipe(h.selectPreview.getMenu)
-                    .realPress('{enter}');
+                    .type('{enter}');
                 });
 
                 context('the select button', () => {
@@ -412,7 +412,7 @@ describe('Select', () => {
           'when the menu is closed WITHOUT selecting the newly focused option ("Phone")',
           () => {
             beforeEach(() => {
-              cy.findByRole('button', {name: 'Label'}).type('{esc}');
+              cy.findByRole('button', {name: 'Label'}).realPress('{esc}');
             });
 
             context('when the menu is re-opened AFTER it has fully closed', () => {
@@ -528,8 +528,12 @@ describe('Select', () => {
 
         context('when the down arrow key is pressed 2 more times', () => {
           beforeEach(() => {
-            cy.realPress('{downarrow}');
-            cy.realPress('{downarrow}');
+            cy.findByRole('button', {name: 'Label (Disabled Options)'})
+              .pipe(h.selectPreview.getMenu)
+              .realPress('{downarrow}');
+            cy.findByRole('button', {name: 'Label (Disabled Options)'})
+              .pipe(h.selectPreview.getMenu)
+              .realPress('{downarrow}');
           });
 
           context('the menu', () => {
@@ -629,7 +633,8 @@ describe('Select', () => {
 
           context('when "s{500ms delay}s" is typed', () => {
             beforeEach(() => {
-              cy.findByRole('button', {name: 'Label'}).realType('ss', {delay: 500});
+              cy.findByRole('button', {name: 'Label'}).realType('s', {delay: 500});
+              cy.findByRole('button', {name: 'Label'}).realType('s', {delay: 500});
             });
 
             context('the select button', () => {

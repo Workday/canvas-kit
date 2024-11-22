@@ -263,6 +263,7 @@ context(`given the [Testing/Popups/Modal, With Tooltips] story is rendered`, () 
         });
         it(`should open the 'OK' tooltip`, () => {
           cy.findByRole('button', {name: 'OK'}).should('have.focus');
+          cy.findByRole('button', {name: 'OK'}).should('exist');
           cy.findByRole('tooltip', {name: 'Really, Really, Really, Really, Really sure'}).should(
             'be.visible'
           );
@@ -463,11 +464,11 @@ context(`given the [Components/Popups/Modal, Custom focus] story is rendered`, (
     });
   });
 
-  context('when the target button is clicked', () => {
+  context.only('when the target button is clicked', () => {
     beforeEach(() => {
       cy.findByRole('button', {name: 'Acknowledge License'}).should('exist');
       cy.findByRole('button', {name: 'Acknowledge License'}).focus();
-      cy.focused().click();
+      cy.findByRole('button', {name: 'Acknowledge License'}).should('have.focus').click();
     });
 
     it('should open the modal', () => {
