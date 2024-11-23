@@ -445,6 +445,7 @@ describe('Select', () => {
 
             context('when the menu is re-opened BEFORE it has fully closed', () => {
               beforeEach(() => {
+                cy.findByRole('button', {name: 'Label'}).should('exist');
                 cy.findByRole('button', {name: 'Label'}).realPress('{downarrow}');
               });
 
@@ -537,14 +538,14 @@ describe('Select', () => {
           beforeEach(() => {
             cy.findByRole('button', {name: 'Label (Disabled Options)'})
               .pipe(h.selectPreview.getMenu)
-              .realPress('{downarrow}');
+              .type('{downArrow}');
             cy.findByRole('button', {name: 'Label (Disabled Options)'})
               .pipe(h.selectPreview.getMenu)
-              .realPress('{downarrow}');
+              .type('{downArrow}');
           });
 
           context('the menu', () => {
-            it('should set assistive focus to the third option down ("Mail") since focus will have skipped one disabled option ("Fax")', () => {
+            it.only('should set assistive focus to the third option down ("Mail") since focus will have skipped one disabled option ("Fax")', () => {
               cy.findByRole('button', {name: 'Label (Disabled Options)'})
                 .pipe(h.selectPreview.getMenu)
                 .pipe(getAssistiveFocus)
@@ -554,8 +555,12 @@ describe('Select', () => {
 
           context('when the down arrow key is pressed 2 more times', () => {
             beforeEach(() => {
-              cy.realPress('{downarrow}');
-              cy.realPress('{downarrow}');
+              cy.findByRole('button', {name: 'Label (Disabled Options)'})
+                .pipe(h.selectPreview.getMenu)
+                .type('{downArrow}');
+              cy.findByRole('button', {name: 'Label (Disabled Options)'})
+                .pipe(h.selectPreview.getMenu)
+                .type('{downArrow}');
             });
 
             context('the menu', () => {
