@@ -545,7 +545,7 @@ describe('Select', () => {
           });
 
           context('the menu', () => {
-            it.only('should set assistive focus to the third option down ("Mail") since focus will have skipped one disabled option ("Fax")', () => {
+            it('should set assistive focus to the third option down ("Mail") since focus will have skipped one disabled option ("Fax")', () => {
               cy.findByRole('button', {name: 'Label (Disabled Options)'})
                 .pipe(h.selectPreview.getMenu)
                 .pipe(getAssistiveFocus)
