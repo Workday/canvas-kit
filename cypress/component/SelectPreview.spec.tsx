@@ -442,7 +442,7 @@ describe('Select', () => {
             context('when the menu is re-opened BEFORE it has fully closed', () => {
               beforeEach(() => {
                 cy.findByRole('button', {name: 'Label'}).should('exist');
-                cy.findByRole('button', {name: 'Label'}).type('{downArrow}');
+                cy.findByRole('button', {name: 'Label'}).realPress('{downarrow}');
               });
 
               context('the menu', () => {
