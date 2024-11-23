@@ -287,7 +287,7 @@ describe('Select', () => {
                     cy.findByRole('button', {name: 'Label'}).should('exist');
                     cy.findByRole('button', {name: 'Label'})
                       .pipe(h.selectPreview.getMenu)
-                      .realPress('{downarrow}');
+                      .type('{downArrow}');
                   });
 
                   context('the menu', () => {
@@ -653,7 +653,8 @@ describe('Select', () => {
 
           context('when "s{500ms delay}d" is typed', () => {
             beforeEach(() => {
-              cy.findByRole('button', {name: 'Label'}).realType('sd', {delay: 500});
+              cy.findByRole('button', {name: 'Label'}).realType('s', {delay: 500});
+              cy.findByRole('button', {name: 'Label'}).realType('d');
             });
 
             context('the select button', () => {
