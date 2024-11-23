@@ -221,7 +221,7 @@ describe('Select', () => {
               cy.findByRole('button', {name: 'Label'}).should('exist');
               cy.findByRole('button', {name: 'Label'})
                 .pipe(h.selectPreview.getMenu)
-                .type('{downArrow}');
+                .realPress('{downarrow}');
             });
 
             context('the menu', () => {
@@ -287,7 +287,7 @@ describe('Select', () => {
                     cy.findByRole('button', {name: 'Label'}).should('exist');
                     cy.findByRole('button', {name: 'Label'})
                       .pipe(h.selectPreview.getMenu)
-                      .type('{downArrow}');
+                      .realPress('{downarrow}');
                   });
 
                   context('the menu', () => {
@@ -301,9 +301,6 @@ describe('Select', () => {
 
                   context('the "Mail" option', () => {
                     it('should have an aria-selected attribute set to "true"', () => {
-                      cy.findByRole('button', {name: 'Label'})
-                        .pipe(h.selectPreview.getMenu)
-                        .should('exist');
                       cy.findByRole('button', {name: 'Label'})
                         .pipe(h.selectPreview.getOption('Mail'))
                         .should('have.attr', 'aria-selected', 'true');
@@ -445,7 +442,6 @@ describe('Select', () => {
 
             context('when the menu is re-opened BEFORE it has fully closed', () => {
               beforeEach(() => {
-                cy.findByRole('button', {name: 'Label'}).should('exist');
                 cy.findByRole('button', {name: 'Label'}).realPress('{downarrow}');
               });
 
@@ -538,10 +534,10 @@ describe('Select', () => {
           beforeEach(() => {
             cy.findByRole('button', {name: 'Label (Disabled Options)'})
               .pipe(h.selectPreview.getMenu)
-              .type('{downArrow}');
+              .realPress('{downarrow}');
             cy.findByRole('button', {name: 'Label (Disabled Options)'})
               .pipe(h.selectPreview.getMenu)
-              .type('{downArrow}');
+              .realPress('{downarrow}');
           });
 
           context('the menu', () => {
@@ -555,12 +551,8 @@ describe('Select', () => {
 
           context('when the down arrow key is pressed 2 more times', () => {
             beforeEach(() => {
-              cy.findByRole('button', {name: 'Label (Disabled Options)'})
-                .pipe(h.selectPreview.getMenu)
-                .type('{downArrow}');
-              cy.findByRole('button', {name: 'Label (Disabled Options)'})
-                .pipe(h.selectPreview.getMenu)
-                .type('{downArrow}');
+              cy.realPress('{downarrow}');
+              cy.realPress('{downarrow}');
             });
 
             context('the menu', () => {
@@ -577,10 +569,7 @@ describe('Select', () => {
 
       context('when the Home key is pressed', () => {
         beforeEach(() => {
-          cy.findByRole('button', {name: 'Label (Disabled Options)'}).should('exist');
-          cy.findByRole('button', {name: 'Label (Disabled Options)'})
-            .pipe(h.selectPreview.getMenu)
-            .realPress('{home}');
+          cy.realPress('{home}');
         });
 
         context('the menu', () => {
