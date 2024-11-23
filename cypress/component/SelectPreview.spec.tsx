@@ -313,7 +313,7 @@ describe('Select', () => {
                 .should('exist');
               cy.findByRole('button', {name: 'Label'})
                 .pipe(h.selectPreview.getMenu)
-                .type('{upArrow}');
+                .realPress('{uparrow}');
             });
 
             context('the menu', () => {
@@ -398,7 +398,7 @@ describe('Select', () => {
         beforeEach(() => {
           cy.findByRole('button', {name: 'Label'})
             .pipe(h.selectPreview.getMenu)
-            .realPress('{downarrow}');
+            .type('{downArrow}');
         });
 
         context('the menu', () => {
@@ -503,7 +503,7 @@ describe('Select', () => {
         beforeEach(() => {
           cy.findByRole('button', {name: 'Label (Disabled Options)'})
             .pipe(h.selectPreview.getMenu)
-            .realPress('{downarrow}');
+            .type('{downArrow}');
         });
 
         context('the menu', () => {
