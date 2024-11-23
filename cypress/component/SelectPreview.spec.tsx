@@ -206,6 +206,9 @@ describe('Select', () => {
             it('should have focus', () => {
               cy.findByRole('button', {name: 'Label'})
                 .pipe(h.selectPreview.getMenu)
+                .should('exist');
+              cy.findByRole('button', {name: 'Label'})
+                .pipe(h.selectPreview.getMenu)
                 .should('have.focus');
             });
           });
@@ -221,7 +224,7 @@ describe('Select', () => {
               cy.findByRole('button', {name: 'Label'}).should('exist');
               cy.findByRole('button', {name: 'Label'})
                 .pipe(h.selectPreview.getMenu)
-                .realPress('{downarrow}');
+                .type('{downArrow}');
             });
 
             context('the menu', () => {
@@ -241,7 +244,7 @@ describe('Select', () => {
                   .should('have.text', 'Phone');
                 cy.findByRole('button', {name: 'Label'})
                   .pipe(h.selectPreview.getMenu)
-                  .realPress('{downarrow}');
+                  .type('{downArrow}');
               });
 
               context('the menu', () => {
