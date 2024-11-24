@@ -86,7 +86,6 @@ describe('Select', () => {
         });
 
         it('should have focus', () => {
-          cy.findByRole('button', {name: 'Label'}).should('exist');
           cy.findByRole('button', {name: 'Label'})
             .pipe(h.selectPreview.getMenu)
             .should('have.focus');
