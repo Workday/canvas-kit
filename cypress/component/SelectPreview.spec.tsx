@@ -313,7 +313,7 @@ describe('Select', () => {
                 .should('exist');
               cy.findByRole('button', {name: 'Label'})
                 .pipe(h.selectPreview.getMenu)
-                .realPress('{uparrow}');
+                .type('{upArrow}');
             });
 
             context('the menu', () => {
@@ -382,7 +382,7 @@ describe('Select', () => {
     context('when the menu is opened', () => {
       beforeEach(() => {
         cy.findByRole('button', {name: 'Label'}).focus();
-        cy.findByRole('button', {name: 'Label'}).realPress('{downarrow}');
+        cy.findByRole('button', {name: 'Label'}).type('{downArrow}');
       });
 
       context('the menu', () => {
@@ -569,7 +569,10 @@ describe('Select', () => {
 
       context('when the Home key is pressed', () => {
         beforeEach(() => {
-          cy.realPress('{home}');
+          cy.findByRole('button', {name: 'Label (Disabled Options)'})
+            .pipe(h.selectPreview.getMenu)
+            .should('exist')
+            .type('{home}');
         });
 
         context('the menu', () => {
