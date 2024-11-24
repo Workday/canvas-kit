@@ -464,11 +464,9 @@ context(`given the [Components/Popups/Modal, Custom focus] story is rendered`, (
     });
   });
 
-  context.only('when the target button is clicked', () => {
+  context('when the target button is clicked', () => {
     beforeEach(() => {
-      cy.findByRole('button', {name: 'Acknowledge License'}).should('exist');
-      cy.findByRole('button', {name: 'Acknowledge License'}).focus();
-      cy.findByRole('button', {name: 'Acknowledge License'}).should('have.focus').click();
+      cy.findByRole('button', {name: 'Acknowledge License'}).focus().should('exist').click();
     });
 
     it('should open the modal', () => {
