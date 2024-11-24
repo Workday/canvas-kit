@@ -548,8 +548,11 @@ describe('Select', () => {
 
           context('when the down arrow key is pressed 2 more times', () => {
             beforeEach(() => {
-              cy.realPress('{downarrow}');
-              cy.realPress('{downarrow}');
+              cy.findByRole('button', {name: 'Label (Disabled Options)'})
+                .pipe(h.selectPreview.getMenu)
+                .should('exist')
+                .type('{downArrow}', {delay: 100})
+                .type('{downArrow}');
             });
 
             context('the menu', () => {
