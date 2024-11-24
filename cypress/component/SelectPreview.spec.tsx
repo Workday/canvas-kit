@@ -554,7 +554,7 @@ describe('Select', () => {
             });
 
             context('the menu', () => {
-              it.only('should set assistive focus to the first option down ("Mobile Phone") since the second option down ("Telegram", which also happens to be the last option) is disabled', () => {
+              it('should set assistive focus to the first option down ("Mobile Phone") since the second option down ("Telegram", which also happens to be the last option) is disabled', () => {
                 cy.findByRole('button', {name: 'Label (Disabled Options)'})
                   .pipe(h.selectPreview.getMenu)
                   .pipe(getAssistiveFocus)
