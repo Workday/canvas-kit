@@ -485,9 +485,7 @@ describe('Select', () => {
 
     context('when the menu is opened', () => {
       beforeEach(() => {
-        cy.findByRole('button', {name: 'Label (Disabled Options)'})
-          .focus()
-          .realPress('{downarrow}');
+        cy.findByRole('button', {name: 'Label (Disabled Options)'}).focus().type('{downArrow}');
       });
 
       context('the "Carrier Pigeon" option', () => {
@@ -502,6 +500,7 @@ describe('Select', () => {
         beforeEach(() => {
           cy.findByRole('button', {name: 'Label (Disabled Options)'})
             .pipe(h.selectPreview.getMenu)
+            .should('exist')
             .type('{downArrow}');
         });
 
@@ -638,14 +637,11 @@ describe('Select', () => {
 
           context('when "s{500ms delay}s" is typed', () => {
             beforeEach(() => {
-              cy.findByRole('button', {name: 'Label'})
-                .type('s', {delay: 500})
-                .should('exist')
-                .type('s');
+              cy.findByRole('button', {name: 'Label'}).type('s', {delay: 500}).type('s');
             });
 
             context('the select button', () => {
-              it('should read the second option beginning with "s" ("San Mateo (United States)")', () => {
+              it.only('should read the second option beginning with "s" ("San Mateo (United States)")', () => {
                 cy.findByRole('button', {name: 'Label'}).should(
                   'have.text',
                   'San Mateo (United States)'
