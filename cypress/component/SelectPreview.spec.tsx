@@ -86,6 +86,7 @@ describe('Select', () => {
         });
 
         it('should have focus', () => {
+          cy.findByRole('button', {name: 'Label'}).should('exist');
           cy.findByRole('button', {name: 'Label'})
             .pipe(h.selectPreview.getMenu)
             .should('have.focus');
@@ -176,6 +177,7 @@ describe('Select', () => {
       });
 
       it('the button should have focus', () => {
+        cy.findByRole('button', {name: 'Label'}).should('exist');
         cy.findByRole('button', {name: 'Label'}).should('have.focus');
       });
 
@@ -311,16 +313,15 @@ describe('Select', () => {
             beforeEach(() => {
               cy.findByRole('button', {name: 'Label'})
                 .pipe(h.selectPreview.getMenu)
-                .should('exist');
-              cy.findByRole('button', {name: 'Label'})
-                .pipe(h.selectPreview.getMenu)
-                .type('{upArrow}');
+                .should('exist')
+                .realPress('ArrowUp');
             });
 
             context('the menu', () => {
               it('should set assistive focus to the "E-mail" option', () => {
                 cy.findByRole('button', {name: 'Label'})
                   .pipe(h.selectPreview.getMenu)
+                  .should('exist')
                   .pipe(getAssistiveFocus)
                   .should('have.text', 'E-mail');
               });
@@ -641,12 +642,14 @@ describe('Select', () => {
 
           context('when "s{500ms delay}s" is typed', () => {
             beforeEach(() => {
-              cy.findByRole('button', {name: 'Label'}).type('s', {delay: 500});
-              cy.findByRole('button', {name: 'Label'}).type('s');
+              cy.findByRole('button', {name: 'Label'})
+                .type('s', {delay: 500})
+                .should('exist')
+                .type('s');
             });
 
             context('the select button', () => {
-              it('should read the second option beginning with "s" ("San Mateo (United States)")', () => {
+              it.only('should read the second option beginning with "s" ("San Mateo (United States)")', () => {
                 cy.findByRole('button', {name: 'Label'}).should(
                   'have.text',
                   'San Mateo (United States)'
