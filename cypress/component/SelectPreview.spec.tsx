@@ -214,9 +214,9 @@ describe('Select', () => {
 
         context('when the down arrow key is pressed for a second time', () => {
           beforeEach(() => {
-            cy.findByRole('button', {name: 'Label'}).should('exist');
             cy.findByRole('button', {name: 'Label'})
               .pipe(h.selectPreview.getMenu)
+              .should('exist')
               .type('{downArrow}');
           });
 
@@ -224,6 +224,7 @@ describe('Select', () => {
             it('should set assistive focus to the "Phone" option', () => {
               cy.findByRole('button', {name: 'Label'})
                 .pipe(h.selectPreview.getMenu)
+                .should('exist')
                 .pipe(getAssistiveFocus)
                 .should('have.text', 'Phone');
             });
