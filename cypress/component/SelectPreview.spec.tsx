@@ -649,7 +649,7 @@ describe('Select', () => {
             });
 
             context('the select button', () => {
-              it.only('should read the second option beginning with "s" ("San Mateo (United States)")', () => {
+              it('should read the second option beginning with "s" ("San Mateo (United States)")', () => {
                 cy.findByRole('button', {name: 'Label'}).should(
                   'have.text',
                   'San Mateo (United States)'
