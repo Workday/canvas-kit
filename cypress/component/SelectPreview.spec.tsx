@@ -301,23 +301,21 @@ describe('Select', () => {
             });
           });
 
-          it('should not be flaky when arrow key is pressed', () => {
-            context('when the up arrow key is pressed', () => {
-              beforeEach(() => {
+          context('when the up arrow key is pressed', () => {
+            beforeEach(() => {
+              cy.findByRole('button', {name: 'Label'})
+                .pipe(h.selectPreview.getMenu)
+                .should('exist')
+                .realPress('{uparrow}');
+            });
+
+            context('the menu', () => {
+              it('should set assistive focus to the "E-mail" option', () => {
                 cy.findByRole('button', {name: 'Label'})
                   .pipe(h.selectPreview.getMenu)
                   .should('exist')
-                  .realPress('{uparrow}');
-              });
-
-              context('the menu', () => {
-                it('should set assistive focus to the "E-mail" option', () => {
-                  cy.findByRole('button', {name: 'Label'})
-                    .pipe(h.selectPreview.getMenu)
-                    .should('exist')
-                    .pipe(getAssistiveFocus)
-                    .should('have.text', 'E-mail');
-                });
+                  .pipe(getAssistiveFocus)
+                  .should('have.text', 'E-mail');
               });
             });
           });
