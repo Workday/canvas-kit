@@ -198,17 +198,10 @@ describe('Select', () => {
           });
 
           it('should have focus', () => {
-            cy.findByRole('button', {name: 'Label'}).pipe(h.selectPreview.getMenu).should('exist');
             cy.findByRole('button', {name: 'Label'})
               .pipe(h.selectPreview.getMenu)
               .should('have.focus');
           });
-        });
-
-        it('the menu should have focus', () => {
-          cy.findByRole('button', {name: 'Label'})
-            .pipe(h.selectPreview.getMenu)
-            .should('have.focus');
         });
 
         context('when the down arrow key is pressed for a second time', () => {
