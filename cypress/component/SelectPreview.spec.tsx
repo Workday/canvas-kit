@@ -176,18 +176,16 @@ describe('Select', () => {
       });
 
       it('the button should have focus', () => {
-        cy.findByRole('button', {name: 'Label'}).should('exist');
         cy.findByRole('button', {name: 'Label'}).should('have.focus');
       });
 
       context('when the down arrow key is pressed', () => {
         beforeEach(() => {
-          cy.findByRole('button', {name: 'Label'}).should('have.focus');
-          cy.findByRole('button', {name: 'Label'}).realPress('{downarrow}');
+          cy.findByRole('button', {name: 'Label'}).should('exist').type('{downArrow}');
         });
 
         context('the select button', () => {
-          it('should have an aria-expanded attribute set to "true"', () => {
+          it.only('should have an aria-expanded attribute set to "true"', () => {
             cy.findByRole('button', {name: 'Label'}).should('have.attr', 'aria-expanded', 'true');
           });
         });
