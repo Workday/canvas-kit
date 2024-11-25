@@ -203,113 +203,119 @@ describe('Select', () => {
               .should('have.focus');
           });
         });
+      });
 
-        context('when the down arrow key is pressed for a second time', () => {
+      context('when the down arrow key is pressed for a second time', () => {
+        beforeEach(() => {
+          cy.findByRole('button', {name: 'Label'})
+            .should('exist')
+            .type('{downArrow}', {delay: 50})
+            .pipe(h.selectPreview.getMenu)
+            .type('{downArrow}');
+        });
+
+        context('the menu', () => {
+          it('should set assistive focus to the "Phone" option', () => {
+            cy.findByRole('button', {name: 'Label'})
+              .pipe(h.selectPreview.getMenu)
+              .should('exist')
+              .pipe(getAssistiveFocus)
+              .should('have.text', 'Phone');
+          });
+        });
+        context('when the up arrow key is pressed', () => {
           beforeEach(() => {
             cy.findByRole('button', {name: 'Label'})
               .pipe(h.selectPreview.getMenu)
               .should('exist')
-              .type('{downArrow}');
+              .type('{upArrow}');
           });
 
           context('the menu', () => {
-            it('should set assistive focus to the "Phone" option', () => {
+            it('should set assistive focus to the "E-mail" option', () => {
               cy.findByRole('button', {name: 'Label'})
                 .pipe(h.selectPreview.getMenu)
                 .should('exist')
                 .pipe(getAssistiveFocus)
-                .should('have.text', 'Phone');
+                .should('have.text', 'E-mail');
+            });
+          });
+        });
+      });
+
+      context('when the down arrow key is pressed for a third time', () => {
+        beforeEach(() => {
+          cy.findByRole('button', {name: 'Label'})
+            .should('exist')
+            .type('{downArrow}', {delay: 50})
+            .pipe(h.selectPreview.getMenu)
+            .type('{downArrow}', {delay: 50})
+            .type('{downArrow}');
+        });
+
+        context('the menu', () => {
+          it('should set assistive focus to the "Mail" option', () => {
+            cy.findByRole('button', {name: 'Label'})
+              .pipe(h.selectPreview.getMenu)
+              .pipe(getAssistiveFocus)
+              .should('have.text', 'Mail');
+          });
+        });
+      });
+
+      context('when the enter key is pressed', () => {
+        beforeEach(() => {
+          cy.findByRole('button', {name: 'Label'})
+            .should('exist')
+            .type('{downArrow}', {delay: 50})
+            .pipe(h.selectPreview.getMenu)
+            .type('{downArrow}', {delay: 50})
+            .type('{downArrow}', {delay: 50})
+            .type('{enter}');
+        });
+
+        context('the select button', () => {
+          it(`should read "Mail"`, () => {
+            cy.findByRole('button', {name: 'Label'}).should('have.text', 'Mail');
+          });
+
+          it(`should have a value of "mail"`, () => {
+            cy.findByRole('button', {name: 'Label'}).should('have.value', 'mail');
+          });
+
+          it(`should re-acquire focus`, () => {
+            cy.findByRole('button', {name: 'Label'}).should('have.focus');
+          });
+        });
+
+        context('the menu', () => {
+          it('should not be visible', () => {
+            cy.findByRole('button', {name: 'Label'})
+              .pipe(h.selectPreview.getMenu)
+              .should('not.exist');
+          });
+        });
+
+        context('when the menu is expanded again', () => {
+          beforeEach(() => {
+            cy.findByRole('button', {name: 'Label'}).should('exist').type('{downArrow}');
+          });
+
+          context('the menu', () => {
+            it('should set assistive focus to the "Mail" option', () => {
+              cy.findByRole('button', {name: 'Label'})
+                .pipe(h.selectPreview.getMenu)
+                .pipe(getAssistiveFocus)
+                .should('have.text', 'Mail');
             });
           });
 
-          context('when the down arrow key is pressed for a third time', () => {
-            beforeEach(() => {
+          context('the "Mail" option', () => {
+            it('should have an aria-selected attribute set to "true"', () => {
               cy.findByRole('button', {name: 'Label'})
                 .pipe(h.selectPreview.getMenu)
-                .should('exist')
-                .type('{downArrow}');
-            });
-
-            context('the menu', () => {
-              it('should set assistive focus to the "Mail" option', () => {
-                cy.findByRole('button', {name: 'Label'})
-                  .pipe(h.selectPreview.getMenu)
-                  .pipe(getAssistiveFocus)
-                  .should('have.text', 'Mail');
-              });
-            });
-
-            context('when the enter key is pressed', () => {
-              beforeEach(() => {
-                cy.findByRole('button', {name: 'Label'})
-                  .pipe(h.selectPreview.getMenu)
-                  .type('{enter}');
-              });
-
-              context('the select button', () => {
-                it(`should read "Mail"`, () => {
-                  cy.findByRole('button', {name: 'Label'}).should('have.text', 'Mail');
-                });
-
-                it(`should have a value of "mail"`, () => {
-                  cy.findByRole('button', {name: 'Label'}).should('have.value', 'mail');
-                });
-
-                it(`should re-acquire focus`, () => {
-                  cy.findByRole('button', {name: 'Label'}).should('have.focus');
-                });
-              });
-
-              context('the menu', () => {
-                it('should not be visible', () => {
-                  cy.findByRole('button', {name: 'Label'})
-                    .pipe(h.selectPreview.getMenu)
-                    .should('not.exist');
-                });
-              });
-
-              context('when the menu is expanded again', () => {
-                beforeEach(() => {
-                  cy.findByRole('button', {name: 'Label'}).should('exist').type('{downArrow}');
-                });
-
-                context('the menu', () => {
-                  it('should set assistive focus to the "Mail" option', () => {
-                    cy.findByRole('button', {name: 'Label'})
-                      .pipe(h.selectPreview.getMenu)
-                      .pipe(getAssistiveFocus)
-                      .should('have.text', 'Mail');
-                  });
-                });
-
-                context('the "Mail" option', () => {
-                  it('should have an aria-selected attribute set to "true"', () => {
-                    cy.findByRole('button', {name: 'Label'})
-                      .pipe(h.selectPreview.getMenu)
-                      .pipe(getAssistiveFocus)
-                      .should('have.attr', 'aria-selected', 'true');
-                  });
-                });
-              });
-            });
-          });
-
-          context('when the up arrow key is pressed', () => {
-            beforeEach(() => {
-              cy.findByRole('button', {name: 'Label'})
-                .pipe(h.selectPreview.getMenu)
-                .should('exist')
-                .realPress('{uparrow}');
-            });
-
-            context('the menu', () => {
-              it('should set assistive focus to the "E-mail" option', () => {
-                cy.findByRole('button', {name: 'Label'})
-                  .pipe(h.selectPreview.getMenu)
-                  .should('exist')
-                  .pipe(getAssistiveFocus)
-                  .should('have.text', 'E-mail');
-              });
+                .pipe(getAssistiveFocus)
+                .should('have.attr', 'aria-selected', 'true');
             });
           });
         });
