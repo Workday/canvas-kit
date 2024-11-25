@@ -375,8 +375,7 @@ describe('Select', () => {
 
     context('when the menu is opened', () => {
       beforeEach(() => {
-        cy.findByRole('button', {name: 'Label'}).focus();
-        cy.findByRole('button', {name: 'Label'}).type('{downArrow}');
+        cy.findByRole('button', {name: 'Label'}).focus().type('{downArrow}');
       });
 
       context('the menu', () => {
@@ -392,6 +391,7 @@ describe('Select', () => {
         beforeEach(() => {
           cy.findByRole('button', {name: 'Label'})
             .pipe(h.selectPreview.getMenu)
+            .should('exist')
             .type('{downArrow}');
         });
 
@@ -795,10 +795,8 @@ describe('Select', () => {
             beforeEach(() => {
               cy.findByRole('button', {name: 'Label'})
                 .pipe(h.selectPreview.getMenu)
-                .realType('s', {delay: 500});
-              cy.findByRole('button', {name: 'Label'})
-                .pipe(h.selectPreview.getMenu)
-                .realType('d', {delay: 500});
+                .type('s', {delay: 500})
+                .type('d');
             });
 
             context('the menu', () => {
@@ -886,7 +884,8 @@ describe('Select', () => {
             beforeEach(() => {
               cy.findByRole('button', {name: 'Label'})
                 .pipe(h.selectPreview.getMenu)
-                .realType('san m');
+                .type('san ', {delay: 100})
+                .type('m');
             });
 
             context('the menu', () => {
