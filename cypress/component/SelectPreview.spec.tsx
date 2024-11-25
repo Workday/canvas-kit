@@ -635,7 +635,7 @@ describe('Select', () => {
 
           context('when "s{500ms delay}s" is typed', () => {
             beforeEach(() => {
-              cy.findByRole('button', {name: 'Label'}).type('s', {delay: 500}).type('s');
+              cy.findByRole('button', {name: 'Label'}).should('exist').type('ss', {delay: 500});
             });
 
             context('the select button', () => {
@@ -795,8 +795,8 @@ describe('Select', () => {
             beforeEach(() => {
               cy.findByRole('button', {name: 'Label'})
                 .pipe(h.selectPreview.getMenu)
-                .type('s', {delay: 500})
-                .type('d');
+                .should('exist')
+                .type('sd', {delay: 500});
             });
 
             context('the menu', () => {
@@ -884,8 +884,7 @@ describe('Select', () => {
             beforeEach(() => {
               cy.findByRole('button', {name: 'Label'})
                 .pipe(h.selectPreview.getMenu)
-                .type('san ', {delay: 100})
-                .type('m');
+                .type('san m', {delay: 50});
             });
 
             context('the menu', () => {
