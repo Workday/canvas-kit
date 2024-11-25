@@ -277,10 +277,7 @@ describe('Select', () => {
 
               context('when the menu is expanded again', () => {
                 beforeEach(() => {
-                  cy.findByRole('button', {name: 'Label'}).should('exist');
-                  cy.findByRole('button', {name: 'Label'})
-                    .pipe(h.selectPreview.getMenu)
-                    .type('{downArrow}');
+                  cy.findByRole('button', {name: 'Label'}).should('exist').type('{downArrow}');
                 });
 
                 context('the menu', () => {
@@ -295,7 +292,8 @@ describe('Select', () => {
                 context('the "Mail" option', () => {
                   it('should have an aria-selected attribute set to "true"', () => {
                     cy.findByRole('button', {name: 'Label'})
-                      .pipe(h.selectPreview.getOption('Mail'))
+                      .pipe(h.selectPreview.getMenu)
+                      .pipe(getAssistiveFocus)
                       .should('have.attr', 'aria-selected', 'true');
                   });
                 });
