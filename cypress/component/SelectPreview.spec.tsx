@@ -185,7 +185,7 @@ describe('Select', () => {
         });
 
         context('the select button', () => {
-          it.only('should have an aria-expanded attribute set to "true"', () => {
+          it('should have an aria-expanded attribute set to "true"', () => {
             cy.findByRole('button', {name: 'Label'}).should('have.attr', 'aria-expanded', 'true');
           });
         });
