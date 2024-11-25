@@ -22,7 +22,6 @@ export const OverflowBreadcrumbs = ({width = '100%'}) => {
 
   const model = useBreadcrumbsModel({items});
   const [containerWidth, setContainerWidth] = React.useState(width);
-  console.log('width', width);
   return (
     <div>
       <Box width={containerWidth} marginBottom="xl">
