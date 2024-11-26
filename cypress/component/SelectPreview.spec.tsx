@@ -407,7 +407,7 @@ describe('Select', () => {
           'when the menu is closed WITHOUT selecting the newly focused option ("Phone")',
           () => {
             beforeEach(() => {
-              cy.findByRole('button', {name: 'Label'}).realPress('{esc}');
+              cy.focused().realType('{esc}');
             });
 
             context('when the menu is re-opened AFTER it has fully closed', () => {
@@ -417,8 +417,8 @@ describe('Select', () => {
                 // re-open while it's in the middle of closing)
                 cy.findByRole('button', {name: 'Label'})
                   .pipe(h.selectPreview.getMenu)
-                  .should('not.exist')
-                  .realPress('{downarrow}');
+                  .should('not.exist');
+                cy.findByRole('button', {name: 'Label'}).focus().realType('{downarrow}');
               });
 
               context('the menu', () => {
@@ -433,7 +433,7 @@ describe('Select', () => {
 
             context('when the menu is re-opened BEFORE it has fully closed', () => {
               beforeEach(() => {
-                cy.findByRole('button', {name: 'Label'}).should('exist').type('{downArrow}');
+                cy.focused().realType('{downarrow}');
               });
 
               context('the menu', () => {
