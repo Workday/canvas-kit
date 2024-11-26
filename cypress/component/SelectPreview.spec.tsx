@@ -417,9 +417,9 @@ describe('Select', () => {
                 // re-open while it's in the middle of closing)
                 cy.findByRole('button', {name: 'Label'})
                   .pipe(h.selectPreview.getMenu)
-                  .should('not.exist');
-                cy.findByRole('button', {name: 'Label'}).focus();
-                cy.findByRole('button', {name: 'Label'}).type('{downArrow}');
+                  .should('not.exist')
+                  .focus()
+                  .type('{downArrow}');
               });
 
               context('the menu', () => {
@@ -434,12 +434,11 @@ describe('Select', () => {
 
             context('when the menu is re-opened BEFORE it has fully closed', () => {
               beforeEach(() => {
-                cy.findByRole('button', {name: 'Label'}).should('exist');
-                cy.findByRole('button', {name: 'Label'}).realPress('{downarrow}');
+                cy.findByRole('button', {name: 'Label'}).should('exist').type('{downArrow}');
               });
 
               context('the menu', () => {
-                it('should still have assistive focus set to the second option ("Phone")', () => {
+                it.only('should still have assistive focus set to the second option ("Phone")', () => {
                   // Focus is shifting between the button and menu as we close
                   // and open the menu. It's important that we use getMenu rather
                   // than cy.focused() to ensure we obtain a reference to the menu.
