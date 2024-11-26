@@ -301,7 +301,7 @@ describe('Select', () => {
             cy.findByRole('button', {name: 'Label'}).realPress('{downarrow}');
           });
 
-          context.only('the menu', () => {
+          context('the menu', () => {
             it('should set assistive focus to the "Mail" option', () => {
               cy.findByRole('button', {name: 'Label'})
                 .pipe(h.selectPreview.getMenu)
