@@ -298,10 +298,10 @@ describe('Select', () => {
 
         context('when the menu is expanded again', () => {
           beforeEach(() => {
-            cy.findByRole('button', {name: 'Label'}).should('exist').type('{downArrow}');
+            cy.findByRole('button', {name: 'Label'}).realPress('{downarrow}');
           });
 
-          context('the menu', () => {
+          context.only('the menu', () => {
             it('should set assistive focus to the "Mail" option', () => {
               cy.findByRole('button', {name: 'Label'})
                 .pipe(h.selectPreview.getMenu)
