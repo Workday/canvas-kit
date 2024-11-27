@@ -2206,7 +2206,7 @@
       "story": "Overflow Breadcrumbs",
       "parameters": {
         "fileName": "./modules/react/breadcrumbs/stories/Breadcrumbs.stories.ts",
-        "__isArgsStory": false
+        "__isArgsStory": true
       }
     },
     "components-navigation-breadcrumbs--rtl-overflow-list": {
@@ -2444,6 +2444,18 @@
       "importPath": "./modules/react/modal/stories/Modal.stories.ts",
       "kind": "Components/Popups/Modal",
       "story": "Full Overflow",
+      "parameters": {
+        "fileName": "./modules/react/modal/stories/Modal.stories.ts",
+        "__isArgsStory": false
+      }
+    },
+    "components-popups-modal--iframe": {
+      "id": "components-popups-modal--iframe",
+      "name": "Iframe",
+      "title": "Components/Popups/Modal",
+      "importPath": "./modules/react/modal/stories/Modal.stories.ts",
+      "kind": "Components/Popups/Modal",
+      "story": "Iframe",
       "parameters": {
         "fileName": "./modules/react/modal/stories/Modal.stories.ts",
         "__isArgsStory": false
