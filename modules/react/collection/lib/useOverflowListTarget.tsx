@@ -30,7 +30,7 @@ export const useOverflowListTarget = createElemPropsHook(useOverflowListModel)((
           parseFloat(styles.marginLeft) +
           parseFloat(styles.marginRight),
         height:
-          localRef.current.offsetWidth +
+          localRef.current.offsetHeight +
           parseFloat(styles.marginTop) +
           parseFloat(styles.marginBottom),
       });
