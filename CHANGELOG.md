@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.1.7](https://github.com/Workday/canvas-kit/releases/tag/v12.1.7) (2024-11-27)
+
+### Test
+
+- test: Resolve Cypress Flaky fixes ([#3034](https://github.com/Workday/canvas-kit/pull/3034)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
+## [v12.1.6](https://github.com/Workday/canvas-kit/releases/tag/v12.1.6) (2024-11-25)
+
+### Components
+
+- fix: Deconstruct typelevel from props and pass to stencil ([#3059](https://github.com/Workday/canvas-kit/pull/3059)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v11.1.24](https://github.com/Workday/canvas-kit/releases/tag/v11.1.24) (2024-11-22)
+
+### Components
+
+- fix: Deconstruct typelevel from props and pass to stencil ([#3059](https://github.com/Workday/canvas-kit/pull/3059)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
 ## [v12.1.5](https://github.com/Workday/canvas-kit/releases/tag/v12.1.5) (2024-11-19)
 
 ### Components
