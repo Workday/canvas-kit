@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.1.7](https://github.com/Workday/canvas-kit/releases/tag/v12.1.7) (2024-11-27)
+
+### Test
+
+- test: Resolve Cypress Flaky fixes ([#3034](https://github.com/Workday/canvas-kit/pull/3034)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
 ## [v12.1.6](https://github.com/Workday/canvas-kit/releases/tag/v12.1.6) (2024-11-25)
 
 ### Components
