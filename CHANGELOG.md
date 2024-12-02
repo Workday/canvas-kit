@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.1.8](https://github.com/Workday/canvas-kit/releases/tag/v12.1.8) (2024-12-02)
+
+### Components
+
+- fix: Measure offsetHeight vertical overflow ([#3061](https://github.com/Workday/canvas-kit/pull/3061)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v12.1.7](https://github.com/Workday/canvas-kit/releases/tag/v12.1.7) (2024-11-27)
 
 ### Test
