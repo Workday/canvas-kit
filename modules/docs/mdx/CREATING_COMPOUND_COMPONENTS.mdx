@@ -9,24 +9,26 @@ document to learn about what a compound component is.
 This document will go through building a simplified Disclosure component to help solidify the
 concepts. We will cover:
 
-- [createComponent vs createContainer](#create-component-vs-create-container)
+- [Non Coordinated Components](#non-coordinated-components)
 - [Models](#models)
 - [Container Components](#disclosure-component)
 - [Sub-components](#disclosuretarget-component)
 - [Model Composition](#model-composition)
 - [Behavior hooks](#behavior-hooks)
 
-## `createComponent` vs `createContainer`
+## Non Coordinated Components
 
-When creating compound components, which factory function you choose depends on whether or not your
-component just renders an element or there is behavior that you want to expose like internal state
-and events.
+In most cases you'll create compound components that have a model and share information across sub
+components. However, in the case where information doesn't need to be shared, you'll create a non
+coordinated component. These components often represent some styled element with no associated role
+or behavior and don't rely on state and events such as a `Card`, `Flex` or `Button` component. Use
+`createComponent` factory function in these scenarios.
 
 ### `createComponent`
 
 Use `createComponent` when you want to create a rendered element with _no behavior_. This is useful
 for elements that you want to use for styling purposes like container elements, or sub components
-that are simple rendered elements. This utility function will wrap you component in a
+that are simple rendered elements. This utility function will wrap your component in a
 `React.ForwardRef` and allow you to add sub components as well.
 
 ```tsx
@@ -42,31 +44,6 @@ export const Card = createComponent('div')({
       </Box>
     );
   },
-});
-```
-
-### `createContainer`
-
-Use `createContainer` when you're building a compound component that might expose internal state and
-events that users might want access too. This is also useful of your sub components rely on the
-`model` for any state or events. `createContainer` requires a `model` to be defined, meaning your
-compound component has state and events.
-
-```tsx
-const Disclosure = createContainer()({
-  displayName: 'Disclosure',
-  modelHook: useDisclosureModel, // model defined that exposes state and events.
-})<DisclosureProps>(({children, ...elemProps}, Element, model) => {
-  return (
-    <button
-      onClick={() =>
-        model.state.visibility === 'visible' ? model.events.hide() : model.events.show()
-      }
-      {...elemProps}
-    >
-      {model.state.visibility === 'visible' ? 'close' : 'open'}
-    </button>
-  );
 });
 ```
 
