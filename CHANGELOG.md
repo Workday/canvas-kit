@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.1.9](https://github.com/Workday/canvas-kit/releases/tag/v12.1.9) (2024-12-04)
+
+### Documentation
+
+- docs: Add info to create compound component regarding createComponent ([#3057](https://github.com/Workday/canvas-kit/pull/3057)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v12.1.8](https://github.com/Workday/canvas-kit/releases/tag/v12.1.8) (2024-12-02)
 
 ### Components
