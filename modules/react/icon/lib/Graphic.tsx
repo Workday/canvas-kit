@@ -2,7 +2,7 @@ import * as React from 'react';
 import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
 import {Svg, SvgProps, svgStencil} from './Svg';
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {Image} from './Image';
 
@@ -33,6 +33,10 @@ export interface GraphicProps extends GraphicStyles, Pick<SvgProps, 'shouldMirro
    */
   src: CanvasGraphic | string;
 }
+
+type GraphicsImageProps = ExtractProps<typeof Image>;
+
+export type GraphicsImageOrSvgProps = GraphicProps | GraphicsImageProps;
 
 /**
  * @deprecated `graphicStyles` will be removed in in a future version as a part of implementation of stencils and new tokens. Consider to use `graphicStencil` instead.
@@ -67,6 +71,18 @@ export const graphicStyles = ({width, height, grow}: GraphicStyles): CSSObject =
   return {};
 };
 
+type GraphicImageProps = ExtractProps<typeof Image>;
+
+/**
+ * Returns an overloaded functional component that uses button props by default.
+ */
+type GraphicOverload = {
+  (props: {src: CanvasGraphic} & GraphicProps & {ref?: React.Ref<HTMLElement>}): React.ReactElement;
+  (
+    props: {src: string} & GraphicImageProps & {ref?: React.Ref<HTMLImageElement>}
+  ): React.ReactElement;
+};
+
 export const graphicStencil = createStencil({
   extends: svgStencil,
   base: {},
@@ -80,13 +96,9 @@ export const graphicStencil = createStencil({
   },
 });
 
-export const Graphic = createComponent('span')({
+export const Graphic: GraphicOverload = createComponent('span')({
   displayName: 'Graphic',
-  Component: (
-    {grow, width, height, src, shouldMirror, ...elemProps}: GraphicProps,
-    ref,
-    Element
-  ) => {
+  Component: ({src, ...elemProps}: GraphicProps, ref, Element) => {
     return (
       <>
         {typeof src === 'string' && typeof src !== 'object' ? (
@@ -100,9 +112,13 @@ export const Graphic = createComponent('span')({
             {...handleCsProp(
               elemProps,
               graphicStencil({
-                grow,
-                width: typeof width === 'number' ? px2rem(width) : width,
-                height: typeof height === 'number' ? px2rem(height) : height,
+                grow: elemProps.grow,
+                width:
+                  typeof elemProps.width === 'number' ? px2rem(elemProps.width) : elemProps.width,
+                height:
+                  typeof elemProps.height === 'number'
+                    ? px2rem(elemProps.height)
+                    : elemProps.height,
               })
             )}
           />

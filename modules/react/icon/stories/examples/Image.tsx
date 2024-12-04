@@ -32,6 +32,7 @@ export const Images = () => {
         src={
           'https://wd5.myworkday.com/wday/asset/canvas-graphics-web/5.0.7/wd-graphic-learning-welcome-desktop.svg'
         }
+        alt="foo"
       />
       <Image src="https://wd5.myworkday.com/wday/asset/canvas-graphics-web/5.0.7/wd-graphic-learning-welcome-desktop.svg" />
     </Flex>
