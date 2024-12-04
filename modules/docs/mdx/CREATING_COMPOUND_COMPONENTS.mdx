@@ -26,9 +26,9 @@ or behavior and don't rely on state and events such as a `Card`, `Flex` or `Butt
 ### `createComponent`
 
 Use `createComponent` when you want to create a rendered element with _no behavior_. This is useful
-for elements that you want to use for styling purposes like container elements, or sub components
+for elements that you want to use for styling purposes like container elements, or subcomponents
 that are simple rendered elements. This utility function will wrap your component in a
-`React.ForwardRef` and allow you to add sub components as well.
+`React.ForwardRef` and allow you to add subcomponents as well.
 
 ```tsx
 export const Card = createComponent('div')({
