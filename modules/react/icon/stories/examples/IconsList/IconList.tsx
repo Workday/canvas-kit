@@ -18,6 +18,8 @@ const styleOverrides = {
   }),
   firstChildContainer: createStyles({
     flexWrap: 'wrap',
+    maxHeight: 300,
+    overflowY: 'scroll',
   }),
   secondChildContainer: createStyles({
     alignItems: 'center',

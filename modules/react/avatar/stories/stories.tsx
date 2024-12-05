@@ -61,13 +61,13 @@ storiesOf('Components/Indicators/Avatar', module)
   .add('Non-Square Image', () => (
     <div className="story">
       <h3>Original Rectangle Image</h3>
-      <img alt="" src="https://placekitten.com/g/450/200" />
+      <img alt="" src="https://i.imgur.com/f3FZv3H.jpeg" />
       <h3>Using Object Fit on a Rectangle Image</h3>
-      <Avatar as="div" size={200} url="https://placekitten.com/g/450/200" objectFit="contain" />
+      <Avatar as="div" size={200} url="https://i.imgur.com/f3FZv3H.jpeg" objectFit="contain" />
       <h3>Original Square Image</h3>
-      <img alt="" src="https://placekitten.com/g/450/450" />
+      <img alt="" src="https://i.imgur.com/himSfZn.jpeg" height={200} width={200} />
       <h3>Using a Square Image</h3>
-      <Avatar as="div" size={200} url="https://placekitten.com/g/450/450" />
+      <Avatar as="div" size={200} url="https://i.imgur.com/himSfZn.jpeg" />
     </div>
   ))
   .add('Lazy Loading', () => (
