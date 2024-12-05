@@ -1,4 +1,5 @@
 
+import {SymbolDoc} from '@workday/canvas-kit-docs';
 import {Basic} from './examples/Image/Basic';
 
 <Meta title="Images and Icons/Image" />
@@ -17,6 +18,30 @@ yarn add @workday/canvas-kit-react
 
 ## Image
 
-The `Image` component is useful when trying to render raster files or images that need additional styling like aspect ratio or object fit.
+The `Image` component is useful when trying to render raster files or images that need additional styling like aspect ratio or object fit. It renders an `img` element and therefore you have access to all [attributes and props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img) of a native `img` tag.
 
 <ExampleCodeBlock code={Basic} />
+
+## Accessibility
+
+### Alt Text (alt):
+- Always provide descriptive alt text for images. This helps screen readers convey the purpose or content of the image to visually impaired users.
+- Use meaningful descriptions that explain the image's context in the UI.
+- If the image is decorative, use an empty alt attribute (alt=""), which signals assistive technologies to ignore the image.
+
+### Captioning (caption):
+
+- Include captions for images where additional explanatory text is required.
+- Captions should be used for graphs, charts, or any image requiring a detailed explanation.
+
+### Role and ARIA Attributes:
+
+- Avoid adding ARIA roles such as role="img" unless the component uses non-standard HTML elements.
+- Default `<img>` elements are already recognized as images.
+- Use ARIA attributes only when needed (e.g., aria-describedby for complex images with external descriptions).
+
+## API
+
+<SymbolDoc name="Image" fileName="/react/" />
+
+

@@ -13,7 +13,11 @@ const styleOverrides = {
 export const Basic = () => {
   return (
     <Flex cs={styleOverrides.parentContainer}>
-      <Image height={200} src="https://i.imgur.com/f3FZv3H.jpeg" style={{objectFit: 'cover'}} />
+      <Image
+        src="https://i.imgur.com/f3FZv3H.jpeg"
+        cs={{objectFit: 'cover', height: 200}}
+        alt="Image of a cat pretending to be a scientist with beakers and a chalkboard behind it"
+      />
     </Flex>
   );
 };
