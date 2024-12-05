@@ -3,10 +3,9 @@
 // and will rewrite the URL to point to the correct URL for the story. The Storybook key will be
 // rewritten to something like `?path=/docs/${id}`
 const routes = {
-  '/assets/accent-icons/': 'tokens-icon--accent-icon',
-  '/assets/applet-icons/': 'tokens-icon--applet-icon',
-  '/assets/applet-icons/': 'tokens-icon--applet-icon',
-  '/assets/system-icons/': 'tokens-icon--system-icon',
+  '/assets/accent-icons/': 'assets-icons-list--accent-icon-list',
+  '/assets/applet-icons/': 'assets-icons-list--applet-icon-list',
+  '/assets/system-icons/': 'assets-icons-list--applet-icon-list',
   '/components/buttons/action-bar/': 'components-buttons-action-bar--basic',
   '/components/buttons/button/': 'components-buttons--primary',
   '/components/buttons/segmented-control/': 'preview-segmented-control--basic',
