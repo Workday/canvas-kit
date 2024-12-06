@@ -116,5 +116,11 @@ storiesOf('Images and Icons/Icon', module)
       <div style={{width: 400}}>
         <Graphic src={graphicExample} grow={true} shouldMirror={true} />
       </div>
+      <div style={{height: 200}}>
+        <Graphic
+          height={200}
+          src="https://wd5.myworkday.com/wday/asset/canvas-graphics-web/5.0.7/wd-graphic-learning-welcome-desktop.svg"
+        />
+      </div>
     </div>
   ));

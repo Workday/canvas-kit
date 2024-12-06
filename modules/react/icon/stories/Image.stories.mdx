@@ -1,6 +1,7 @@
 
 import {SymbolDoc} from '@workday/canvas-kit-docs';
 import {Basic} from './examples/Image/Basic';
+import {FromFileSystem} from './examples/Image/FromFileSystem';
 
 <Meta title="Images and Icons/Image" />
 
@@ -16,11 +17,15 @@ yarn add @workday/canvas-kit-react
 
 ## Usage
 
-## Image
+## Basic
 
 The `Image` component is useful when trying to render raster files or images that need additional styling like aspect ratio or object fit. It renders an `img` element and therefore you have access to all [attributes and props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img) of a native `img` tag.
 
 <ExampleCodeBlock code={Basic} />
+
+## From File System
+
+<ExampleCodeBlock code={FromFileSystem} />
 
 ## Accessibility
 
