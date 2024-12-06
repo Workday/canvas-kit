@@ -19,7 +19,7 @@ const graphicExample: CanvasGraphic = {
   tags: [],
 };
 
-storiesOf('Tokens/Icon', module)
+storiesOf('Images and Icons/Icon', module)
   .addParameters({component: AccentIcon})
   .addParameters({ReadmePath: 'react/icon'})
   .add('Accent Icon', () => (
@@ -41,7 +41,7 @@ storiesOf('Tokens/Icon', module)
     </div>
   ));
 
-storiesOf('Tokens/Icon', module)
+storiesOf('Images and Icons/Icon', module)
   .addParameters({component: AppletIcon})
   .add('Applet Icon', () => (
     <div className="story">
@@ -53,7 +53,7 @@ storiesOf('Tokens/Icon', module)
     </div>
   ));
 
-storiesOf('Tokens/Icon', module)
+storiesOf('Images and Icons/Icon', module)
   .addParameters({component: SystemIcon})
   .add('System Icon', () => (
     <div className="story">
@@ -103,7 +103,7 @@ storiesOf('Tokens/Icon', module)
     </div>
   ));
 
-storiesOf('Tokens/Icon', module)
+storiesOf('Images and Icons/Icon', module)
   .addParameters({component: Graphic})
   .add('Graphic', () => (
     <div className="story">
@@ -115,6 +115,12 @@ storiesOf('Tokens/Icon', module)
       </div>
       <div style={{width: 400}}>
         <Graphic src={graphicExample} grow={true} shouldMirror={true} />
+      </div>
+      <div style={{height: 200}}>
+        <Graphic
+          height={200}
+          src="https://wd5.myworkday.com/wday/asset/canvas-graphics-web/5.0.7/wd-graphic-learning-welcome-desktop.svg"
+        />
       </div>
     </div>
   ));
