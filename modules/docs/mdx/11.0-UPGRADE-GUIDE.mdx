@@ -51,7 +51,9 @@ A note to the reader:
   - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
   - [CountBadge](#count-badge)
   - [Form Field Preview](#form-field-preview)
+	- [Graphic](#graphic)
   - [Icons](#icons)
+	- [Image](#image)
   - [Status Indicator (Preview)](#status-indicator-preview)
   - [Table](#table)
   - [Text](#text)
@@ -636,6 +638,12 @@ to check your logic to make sure it sets the appropaite value to the prop.
 > **Note:** If you use your own custom `input` you will need to handle the styling for error and
 > alert states.
 
+### Graphic
+
+**PR:** [#3062](https://github.com/Workday/canvas-kit/pull/3062)
+
+We've updated `Graphic` and its `src` prop to accept a `string` value to support images loaded from a CDN or SAS. The previous API is still supported.
+
 ### Icons
 
 <div style={{display: 'inline-flex', gap: '.5rem'}}>
@@ -808,6 +816,13 @@ const MyComponent = StyledRadioButton('div')({
   <SystemIcon icon={myIcon} />
 </MyComponent>;
 ```
+
+### Image
+
+**PR:** [#3062](https://github.com/Workday/canvas-kit/pull/3062)
+
+We've added a new `Image` component under the `@workday/canvas-kit-react/icon` package. This component renders an `img` element and is meant to be used when you need more control over the image attributes like aspect ratio or object fit.
+
 
 ### Status Indicator (Preview)
 
