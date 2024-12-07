@@ -8,8 +8,8 @@ const linkStyles = createStyles({
   ...system.type.subtext.large,
   gridColumn: '2',
   justifySelf: 'start',
-  color: `${cssVar(base.blueberry500)} !important`,
-  fontWeight: 500, // should use system.fontWeight.bold
+  color: `${cssVar(base.blackPepper300)} !important`,
+  fontWeight: system.fontWeight.bold,
 });
 
 export const Link = createComponent('div')({
