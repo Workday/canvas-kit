@@ -2,8 +2,9 @@ import * as React from 'react';
 import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
 import {Svg, SvgProps, svgStencil} from './Svg';
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {Image} from './Image';
 
 /**
  * @deprecated Interface `GraphicStyles` will be removed in a future version. `grow` prop will be moved inside `GraphicProps`.
@@ -30,8 +31,12 @@ export interface GraphicProps extends GraphicStyles, Pick<SvgProps, 'shouldMirro
   /**
    * The graphic to display from `@workday/canvas-graphics-web`.
    */
-  src: CanvasGraphic;
+  src: CanvasGraphic | string;
 }
+
+type GraphicsImageProps = ExtractProps<typeof Image>;
+
+export type GraphicsImageOrSvgProps = GraphicProps | GraphicsImageProps;
 
 /**
  * @deprecated `graphicStyles` will be removed in in a future version as a part of implementation of stencils and new tokens. Consider to use `graphicStencil` instead.
@@ -66,6 +71,18 @@ export const graphicStyles = ({width, height, grow}: GraphicStyles): CSSObject =
   return {};
 };
 
+type GraphicImageProps = ExtractProps<typeof Image>;
+
+/**
+ * Returns an overloaded functional component that uses Graphic props by default.
+ */
+type GraphicOverload = {
+  (props: {src: CanvasGraphic} & GraphicProps & {ref?: React.Ref<HTMLElement>}): React.ReactElement;
+  (
+    props: {src: string} & GraphicImageProps & {ref?: React.Ref<HTMLImageElement>}
+  ): React.ReactElement;
+};
+
 export const graphicStencil = createStencil({
   extends: svgStencil,
   base: {},
@@ -79,23 +96,34 @@ export const graphicStencil = createStencil({
   },
 });
 
-export const Graphic = createComponent('span')({
+export const Graphic: GraphicOverload = createComponent('span')({
   displayName: 'Graphic',
-  Component: ({grow, width, height, ...elemProps}: GraphicProps, ref, Element) => {
+  Component: ({src, ...elemProps}: GraphicProps, ref, Element) => {
     return (
-      <Svg
-        type={CanvasIconTypes.Graphic}
-        as={Element}
-        ref={ref}
-        {...handleCsProp(
-          elemProps,
-          graphicStencil({
-            grow,
-            width: typeof width === 'number' ? px2rem(width) : width,
-            height: typeof height === 'number' ? px2rem(height) : height,
-          })
+      <>
+        {typeof src === 'string' && typeof src !== 'object' ? (
+          <Image as={'img'} src={src} {...handleCsProp(elemProps)} />
+        ) : (
+          <Svg
+            type={CanvasIconTypes.Graphic}
+            as={Element}
+            ref={ref}
+            src={src}
+            {...handleCsProp(
+              elemProps,
+              graphicStencil({
+                grow: elemProps.grow,
+                width:
+                  typeof elemProps.width === 'number' ? px2rem(elemProps.width) : elemProps.width,
+                height:
+                  typeof elemProps.height === 'number'
+                    ? px2rem(elemProps.height)
+                    : elemProps.height,
+              })
+            )}
+          />
         )}
-      />
+      </>
     );
   },
 });

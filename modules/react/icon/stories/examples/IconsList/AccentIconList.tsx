@@ -1,14 +1,14 @@
 import React from 'react';
-import * as CanvasAppletIcons from '@workday/canvas-applet-icons-web';
+import * as CanvasAccenttIcons from '@workday/canvas-accent-icons-web';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
-import {AppletIcon} from '@workday/canvas-kit-react/icon';
+import {AccentIcon} from '@workday/canvas-kit-react/icon';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-const ImportedIcons = Object.keys(CanvasAppletIcons);
+const ImportedIcons = Object.keys(CanvasAccenttIcons);
 
-const allIcons = ImportedIcons.filter(icon => icon !== 'CanvasAppletIcons');
+const allIcons = ImportedIcons.filter(icon => icon !== 'CanvasAccenttIcons');
 
 const styleOverrides = {
   parentContainer: createStyles({
@@ -18,6 +18,8 @@ const styleOverrides = {
   }),
   iconGroupContainer: createStyles({
     flexWrap: 'wrap',
+    maxHeight: 300,
+    overflowY: 'scroll',
   }),
   individualIconContainer: createStyles({
     alignItems: 'center',
@@ -28,7 +30,7 @@ const styleOverrides = {
   }),
 };
 
-export const AppletIconList = () => {
+export const AccentIconList = () => {
   const [value, setValue] = React.useState('');
 
   const handleSearch = (e: any) => {
@@ -51,7 +53,7 @@ export const AppletIconList = () => {
             return (
               <Flex cs={styleOverrides.individualIconContainer} key={index}>
                 <Box>
-                  <AppletIcon icon={CanvasAppletIcons[singleIcon]} />
+                  <AccentIcon icon={CanvasAccenttIcons[singleIcon]} />
                 </Box>
                 <Box>{singleIcon}</Box>
               </Flex>
