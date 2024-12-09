@@ -75,7 +75,7 @@ describe('Tabs', () => {
 
         context('when the tab key is pressed', () => {
           beforeEach(() => {
-            cy.tab();
+            cy.realPress('Tab');
           });
 
           it('should move focus to the tabpanel', () => {
@@ -148,7 +148,7 @@ describe('Tabs', () => {
 
           context('when the tab key is pressed', () => {
             beforeEach(() => {
-              cy.tab();
+              cy.realPress('Tab');
             });
 
             it('should focus on the tab panel of the first tab', () => {
@@ -158,7 +158,9 @@ describe('Tabs', () => {
             // verify the original intent is no longer a tab stop
             context('when shift + tab keys are pressed', () => {
               beforeEach(() => {
-                cy.tab({shift: true});
+                // wait for tabindex to reset
+                cy.findByRole('tab', {name: 'First Tab'}).should('not.have.attr', 'tabindex', '-1');
+                cy.realPress(['Shift', 'Tab']);
               });
 
               it('should not have tabindex=-1 on the first tab', () => {
@@ -248,7 +250,7 @@ describe('Tabs', () => {
 
     context('when the first tab is active and focused', () => {
       beforeEach(() => {
-        cy.findByRole('tab', {name: 'First Tab'}).click().focus();
+        cy.findByRole('tab', {name: 'First Tab'}).click();
       });
 
       context('when the right arrow key is pressed', () => {
@@ -416,7 +418,7 @@ describe('Tabs', () => {
 
       context('when the tab key is pressed', () => {
         beforeEach(() => {
-          cy.tab();
+          cy.realPress('Tab');
         });
 
         it('should move focus to the tabpanel', () => {
@@ -547,12 +549,15 @@ describe('Tabs', () => {
 
       context('when the "First Tab" is focused', () => {
         beforeEach(() => {
-          cy.findByRole('tab', {name: 'First Tab'}).focus().tab();
+          cy.findByRole('tab', {name: 'First Tab'}).focus();
         });
 
         context('when the Tab key is pressed', () => {
+          beforeEach(() => {
+            cy.realPress('Tab');
+          });
+
           it('should focus on the "More" button', () => {
-            cy.findByRole('button', {name: 'More'}).focus();
             cy.findByRole('button', {name: 'More'}).should('have.focus');
           });
         });
@@ -568,7 +573,7 @@ describe('Tabs', () => {
         });
 
         it('should have the fourth Tab as the first menu item', () => {
-          cy.findAllByRole('menuitem').eq(0).should('contain', 'Fourth Tab');
+          cy.get('[role="menuitem"]').first().should('contain', 'Fourth Tab');
         });
 
         context('when the "Sixth Tab" is clicked', () => {
@@ -622,11 +627,11 @@ describe('Tabs', () => {
         });
 
         it('should show the Tab overflow menu', () => {
-          cy.findByRole('menu', {name: 'More'}).should('exist');
+          cy.get('[role="menu"]').should('exist');
         });
 
         it('should have the third Tab as the first menu item', () => {
-          cy.findByRole('menuitem', {name: 'Third Tab'}).should('have.focus');
+          cy.get('button[role="menuitem"]').first().should('have.text', 'Third Tab');
         });
       });
     });

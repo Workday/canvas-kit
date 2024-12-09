@@ -69,7 +69,6 @@ export const formFieldLabelStencil = createStencil({
   },
   defaultModifiers: {
     typeLevel: 'subtext.large',
-    isRequired: 'false',
   },
 });
 

@@ -3,6 +3,116 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.1.9](https://github.com/Workday/canvas-kit/releases/tag/v12.1.9) (2024-12-04)
+
+### Documentation
+
+- docs: Add info to create compound component regarding createComponent ([#3057](https://github.com/Workday/canvas-kit/pull/3057)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v12.1.8](https://github.com/Workday/canvas-kit/releases/tag/v12.1.8) (2024-12-02)
+
+### Components
+
+- fix: Measure offsetHeight vertical overflow ([#3061](https://github.com/Workday/canvas-kit/pull/3061)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.1.7](https://github.com/Workday/canvas-kit/releases/tag/v12.1.7) (2024-11-27)
+
+### Test
+
+- test: Resolve Cypress Flaky fixes ([#3034](https://github.com/Workday/canvas-kit/pull/3034)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
+## [v12.1.6](https://github.com/Workday/canvas-kit/releases/tag/v12.1.6) (2024-11-25)
+
+### Components
+
+- fix: Deconstruct typelevel from props and pass to stencil ([#3059](https://github.com/Workday/canvas-kit/pull/3059)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v11.1.24](https://github.com/Workday/canvas-kit/releases/tag/v11.1.24) (2024-11-22)
+
+### Components
+
+- fix: Deconstruct typelevel from props and pass to stencil ([#3059](https://github.com/Workday/canvas-kit/pull/3059)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+## [v12.1.5](https://github.com/Workday/canvas-kit/releases/tag/v12.1.5) (2024-11-19)
+
+### Components
+
+- fix: Remove default modifier for formfield label ([#3055](https://github.com/Workday/canvas-kit/pull/3055)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.1.4](https://github.com/Workday/canvas-kit/releases/tag/v12.1.4) (2024-11-14)
+
+### Documentation
+
+- chore: Updated README for CK ([#3052](https://github.com/Workday/canvas-kit/pull/3052)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
+## [v12.1.3](https://github.com/Workday/canvas-kit/releases/tag/v12.1.3) (2024-11-13)
+
+### Dependencies
+
+- chore: Upgrade storybook to 7.6.20 to fix vulnerabilities ([#3047](https://github.com/Workday/canvas-kit/pull/3047)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+### Infrastructure
+
+- fix: Prevent build step in modules from running in parallel ([#3053](https://github.com/Workday/canvas-kit/pull/3053)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.1.2](https://github.com/Workday/canvas-kit/releases/tag/v12.1.2) (2024-11-12)
+
+### Documentation, Examples
+
+- docs: Refreshing GlobalHeader Storybook Example ([#2891](https://github.com/Workday/canvas-kit/pull/2891)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton, manuel.carrera)
+  Optional release note message. Changelog and release summaries will contain a pull request title. This section will add additional notes under that title. This section is not a summary, but something extra to point out in release notes. An example might be calling out breaking changes in a labs component or minor visual changes that need visual regression updates. Remove this section if no additional release notes are required.
+
+### Infrastructure
+
+- fix: Remove start server command from forward merge action ([#3040](https://github.com/Workday/canvas-kit/pull/3040)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.1.1](https://github.com/Workday/canvas-kit/releases/tag/v12.1.1) (2024-11-08)
+
+### Dependencies
+
+- chore: SNYK Security upgrade chroma-js from 2.1.1 to 2.2.0 ([#3043](https://github.com/Workday/canvas-kit/pull/3043)) ([@mannycarrera4](https://github.com/mannycarrera4), [@snyk-bot](https://github.com/snyk-bot), manuel.carrera)
+
+
+## [v12.1.0](https://github.com/Workday/canvas-kit/releases/tag/v12.1.0) (2024-11-07)
+
+
+
+
+## [v12.0.10](https://github.com/Workday/canvas-kit/releases/tag/v12.0.10) (2024-11-06)
+
+### Components
+
+- fix: SystemIcon supports rem by default ([#3031](https://github.com/Workday/canvas-kit/pull/3031)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Dependencies
+
+- chore: SNYK Security upgrade jscodeshift from 0.14.0 to 17.1.0 ([#3016](https://github.com/Workday/canvas-kit/pull/3016)) ([@mannycarrera4](https://github.com/mannycarrera4), [@snyk-bot](https://github.com/snyk-bot), manuel.carrera)
+
+### Infrastructure
+
+- ci: Update node version in our github actions ([#3009](https://github.com/Workday/canvas-kit/pull/3009)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- fix: Fix Style transform stencil variable lookup ([#3038](https://github.com/Workday/canvas-kit/pull/3038)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v11.1.23](https://github.com/Workday/canvas-kit/releases/tag/v11.1.23) (2024-11-06)
+
+### Infrastructure
+
+- fix: Fix Style transform stencil variable lookup ([#3038](https://github.com/Workday/canvas-kit/pull/3038)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v11.1.22](https://github.com/Workday/canvas-kit/releases/tag/v11.1.22) (2024-11-05)
+
+### Components
+
+- fix: SystemIcon supports rem by default ([#3031](https://github.com/Workday/canvas-kit/pull/3031)) ([@NicholasBoll](https://github.com/NicholasBoll))
 ## [v12.0.9](https://github.com/Workday/canvas-kit/releases/tag/v12.0.9) (2024-11-04)
 
 ### Components

@@ -13,6 +13,7 @@ import {Selection} from './examples/Selection';
 import {MultiSelection} from './examples/MultiSelection';
 import {BasicGrid} from './examples/BasicGrid';
 import {WrappingGrid} from './examples/WrappingGrid';
+import {OverflowVerticalList} from './examples/OverflowVerticalList';
 
 <Meta title="Features/Collections" />
 
@@ -167,6 +168,16 @@ following example passes the `wrappingNavigationManager` manager to the model. O
 cursor wraps around columns and rows when an edge of a column or row is encountered.
 
 <ExampleCodeBlock code={WrappingGrid} />
+
+### Overflow Vertical List
+
+A List can overflow vertically or horizontally to account for responsive resizing or an overflow of
+items. Using multiple hooks from the Collection system like `useOverflowListModel` and ensuring that
+`orientation`is set to`vertical`, you can achieve vertical overflow lists. In the example below,
+when the window is resized vertically, items in the Sidebar will overflow into the "More Actions"
+button.
+
+<ExampleCodeBlock code={OverflowVerticalList} />
 
 ## Component API
 

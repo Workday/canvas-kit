@@ -94,7 +94,7 @@ jobs:
 
       - uses: Workday/canvas-kit-actions/install@v1
         with:
-          node_version: 16.x
+          node_version: 18.x
 
       ## A `yarn bump` will create a commit and a tag. We need to set up the git user to do this.
       ## We'll make that user be the github-actions user.
@@ -146,11 +146,8 @@ jobs:
       #     ignoreLastBuildOnBranch: ${{ needs.get-branch-names.outputs.next-branch }}
       #     debug: true
 
-      - name: Start Server
-        run: npx http-server docs -p 9001 & npx wait-on http://localhost:9001
-
       - name: Integration tests
-        run: yarn cypress run --component --record --parallel --env skip_storybook_test=true # skip the Storybook test during forward merges
+        run: yarn cypress run --component --record --parallel
         env:
           # Github Actions doesn't support encryption on forks
           # If these keys become compromised, we will rotate and disable these features

@@ -109,6 +109,16 @@ export const useSelectionListModel = createModelHook({
     setSelectedIds(ids: 'all' | string[]) {
       setSelectedIds(ids);
     },
+    /**
+     * The `remove` event can be called by Behavior Hooks based on user interaction. The `onRemove`
+     * can be added to the model config to signal the user wishes to remove the item in the list.
+     * The `remove` event requires the dynamic API where `items` are passed to the model. It is up
+     * to you to remove the item from the list. Focus redirection should be automatically managed,
+     * if necessary.
+     */
+    remove(data: {id: string; nextId?: string; event?: Event | React.SyntheticEvent}) {
+      // nothing to do here. It is a signal event
+    },
   };
 
   return {...cursor, state, events, selection};
