@@ -74,7 +74,7 @@ export const graphicStyles = ({width, height, grow}: GraphicStyles): CSSObject =
 type GraphicImageProps = ExtractProps<typeof Image>;
 
 /**
- * Returns an overloaded functional component that uses button props by default.
+ * Returns an overloaded functional component that uses Graphic props by default.
  */
 type GraphicOverload = {
   (props: {src: CanvasGraphic} & GraphicProps & {ref?: React.Ref<HTMLElement>}): React.ReactElement;
