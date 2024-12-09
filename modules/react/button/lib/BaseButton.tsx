@@ -180,6 +180,8 @@ export const buttonStencil = createStencil({
         buttonColorPropVars.focus.icon,
         system.color.fg.strong
       ),
+      outline: `${px2rem(2)} solid transparent`,
+      outlineOffset: px2rem(2),
       ...focusRing({
         width: 2,
         separation: 2,
