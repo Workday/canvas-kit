@@ -1,0 +1,99 @@
+import {
+  ExampleCodeBlock,
+  SymbolDoc,
+  Specifications,
+} from '@workday/canvas-kit-docs';
+
+import * as InformationHighlight from './InformationHighlight.stories.ts';
+import { Basic } from './examples/Basic';
+import {Body} from './examples/Body';
+import {Heading} from './examples/Heading';
+import {Informational} from './examples/informational';
+import {Caution} from './examples/caution';
+import {Attention} from './examples/attention';
+import {InformationalHigh} from './examples/informational';
+import {CautionHigh} from './examples/caution';
+import {AttentionHigh} from './examples/attention';
+import {IconAttentionHigh} from './examples/customIconAttention';
+import {IconAttentionLow} from './examples/customIconAttention';
+import {RTL} from './examples/RTL';
+
+<Meta of={InformationHighlight} />
+
+# Canvas Kit Information Highlight
+
+An `Information Highlight` draws user attention to important details
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-preview-react
+```
+
+## Usage
+`Information Highlight` should be used to call out important elements of the page. It has three variants and two emphases
+built in.
+
+Variants: Informational, Caution, Attention
+
+Emphasis: Low, High
+
+The variants have different icons and colors to convey severity, the emphasis changes the background color to have a
+lower or higher contrast. If no variant or emphasis is selected the layout will default to Informational, Low.
+
+### Basic Example
+<ExampleCodeBlock code={Basic} />
+
+
+## Low Emphasis Variants
+
+The low emphasis should be used when the information highlight is competing with other more important content on the page.
+It provides information in a way that is digestible but not distracting.
+
+### Informational
+<ExampleCodeBlock code={Informational} />
+
+### Caution
+<ExampleCodeBlock code={Caution} />
+
+### Attention
+<ExampleCodeBlock code={Attention} />
+
+## High Emphasis Variants
+
+High emphasis should be used when the information highlight is not competing with other important content on the page.
+It draws the user's attention and can emphasize importance.
+
+### Informational
+<ExampleCodeBlock code={InformationalHigh} />
+
+### Caution
+<ExampleCodeBlock code={CautionHigh} />
+
+### Attention
+<ExampleCodeBlock code={AttentionHigh} />
+
+## Partial Custom Information Highlights
+
+`Information Highlights` can use custom icons or be designed to only use certain features
+
+### Custom Icon: Attention, High Emphasis
+<ExampleCodeBlock code={IconAttentionHigh} />
+
+### Custom Icon: Attention, Low Emphasis
+<ExampleCodeBlock code={IconAttentionLow} />
+
+### Body Only Example
+<ExampleCodeBlock code={Body} />
+
+### Heading Only Example
+<ExampleCodeBlock code={Heading} />
+
+### RTL Example
+<ExampleCodeBlock code={RTL} />
+
+
+
+
+
+

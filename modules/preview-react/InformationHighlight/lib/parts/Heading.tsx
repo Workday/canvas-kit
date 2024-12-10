@@ -9,7 +9,7 @@ const headingStyles = createStyles({
   ...system.type.body.small,
   color: base.blackPepper400,
   gridColumn: '2',
-  fontWeight: 700, // should use system.fontWeight.bold
+  fontWeight: system.fontWeight.bold,
 });
 
 export const Heading = createComponent('div')({
