@@ -1,8 +1,13 @@
 import React from 'react';
-import {styled, createComponent, StyledType} from '@workday/canvas-kit-react/common';
+
+import {createComponent} from '@workday/canvas-kit-react/common';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {calc, createStencil, createStyles, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+
 import {extLinkIcon} from '@workday/canvas-system-icons-web';
-import {SystemIcon, systemIconStyles} from '@workday/canvas-kit-react/icon';
-import {Hyperlink, HyperlinkProps} from './Hyperlink';
+import {system} from '@workday/canvas-tokens-web';
+
+import {hyperlinkStencil, HyperlinkProps} from './Hyperlink';
 
 export interface ExternalHyperlinkProps extends HyperlinkProps {
   /**
@@ -13,25 +18,26 @@ export interface ExternalHyperlinkProps extends HyperlinkProps {
   iconLabel?: string;
 }
 
-const iconStyles = {
-  ...systemIconStyles({fill: 'currentColor', fillHover: 'currentColor'}),
-};
+const iconSize = '1em';
+const minIconSize = system.space.x4;
 
-const Anchor = styled(Hyperlink)<ExternalHyperlinkProps & StyledType>({
-  ...iconStyles,
-  display: 'inline-flex',
-  flexDirection: 'row',
-  alignItems: 'center',
+const externalHyperlinkStencil = createStencil({
+  extends: hyperlinkStencil,
+  base: {
+    display: 'inline-flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
 });
 
-const iconSize = '1em';
-const minIconSize = '16px';
-
-const StyledSystemIcon = styled(SystemIcon)<StyledType>({
-  ...iconStyles,
-  width: `calc(${iconSize} - 1px)`,
-  minWidth: `calc(${minIconSize} - 1px)`,
-  marginLeft: '2px',
+const externalHyperlinkIconStyles = createStyles({
+  width: calc.subtract(iconSize, px2rem(1)),
+  minWidth: calc.subtract(minIconSize, px2rem(1)),
+  marginInlineStart: px2rem(2),
+  '& svg': {
+    minWidth: minIconSize,
+    minHeight: minIconSize,
+  },
 });
 
 /**
@@ -41,18 +47,30 @@ const StyledSystemIcon = styled(SystemIcon)<StyledType>({
 export const ExternalHyperlink = createComponent('a')({
   displayName: 'ExternalHyperlink',
   Component: (
-    {children, iconLabel = 'Opens link in new window', ...elemProps}: ExternalHyperlinkProps,
-    ref
+    {
+      variant,
+      children,
+      iconLabel = 'Opens link in new window',
+      ...elemProps
+    }: ExternalHyperlinkProps,
+    ref,
+    Element
   ) => (
-    <Anchor ref={ref} target="_blank" rel="noreferrer" {...elemProps}>
+    <Element
+      ref={ref}
+      target="_blank"
+      rel="noreferrer"
+      {...handleCsProp(elemProps, externalHyperlinkStencil({variant}))}
+    >
       <span>{children}</span>
-      <StyledSystemIcon
+      <SystemIcon
         icon={extLinkIcon}
         role="img"
         aria-label={iconLabel}
         size={iconSize}
-        cs={{'& svg': {minWidth: minIconSize, minHeight: minIconSize}}}
+        color="currentColor"
+        cs={externalHyperlinkIconStyles}
       />
-    </Anchor>
+    </Element>
   ),
 });
