@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.1.11](https://github.com/Workday/canvas-kit/releases/tag/v12.1.11) (2024-12-10)
+
+### Documentation
+
+- fix: Fixes Broken Links from Storybook 7 Upgrade ([#3065](https://github.com/Workday/canvas-kit/pull/3065)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
 ## [v12.1.10](https://github.com/Workday/canvas-kit/releases/tag/v12.1.10) (2024-12-09)
 
 ### Documentation
