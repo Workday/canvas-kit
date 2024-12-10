@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.1.12](https://github.com/Workday/canvas-kit/releases/tag/v12.1.12) (2024-12-10)
+
+### Documentation
+
+- fix: Fixed Welcome Page ([#3069](https://github.com/Workday/canvas-kit/pull/3069)) ([@josh-bagwell](https://github.com/josh-bagwell))
+- fix: Addressed Versions Table Update ([#3071](https://github.com/Workday/canvas-kit/pull/3071)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
 ## [v12.1.11](https://github.com/Workday/canvas-kit/releases/tag/v12.1.11) (2024-12-10)
 
 ### Documentation
