@@ -42,20 +42,20 @@ const routes = {
   '/components/text/text/': 'components-text-text--basic',
   '/components/text/title/': 'components-text-title--basic',
   '/examples/layout/': 'examples-layouts--area-column-positioning',
-  '/getting-started/for-developers/contributing/': 'guides-contributing--page',
+  '/getting-started/for-developers/contributing/': 'guides-contributing--docs',
   '/getting-started/for-developers/resources/api-pattern-guidelines/':
-    'guides-api-pattern-guidelines--page',
+    'guides-api-pattern-guidelines--docs',
   '/getting-started/for-developers/resources/collection-api/': 'features-collections--basic',
   '/getting-started/for-developers/resources/compound-components/':
-    'guides-compound-components--page',
+    'guides-compound-components--docs',
   '/getting-started/for-developers/resources/creating-compound-components/':
-    'guides-creating-compound-components--page',
+    'guides-creating-compound-components--docs',
   '/getting-started/for-developers/resources/responsive-styling/':
     'features-responsive-styling--responsive-container',
   '/getting-started/for-developers/resources/style-props/':
     'features-style-props--background-example',
-  '/getting-started/for-developers/resources/testing/': 'guides-testing--page',
-  '/getting-started/introduction/': 'guides-getting-started--page',
+  '/getting-started/for-developers/resources/testing/': 'guides-testing--docs',
+  '/getting-started/introduction/': 'guides-getting-started--docs',
   '/tokens/color/': 'tokens--colors',
   '/tokens/depth/': 'tokens--depth',
   '/tokens/space/': 'tokens--space',

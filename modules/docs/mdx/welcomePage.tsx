@@ -73,7 +73,7 @@ export const WelcomePage = () => {
             as={Hyperlink}
             alignSelf="end"
             marginTop="xs"
-            href="https://workday.github.io/canvas-kit/?path=/docs/guides-getting-started--page"
+            href="https://workday.github.io/canvas-kit/?path=/docs/guides-getting-started--docs"
           >
             {' '}
             Getting Started Guide
