@@ -1,17 +1,16 @@
 import React from 'react';
 
-import {
-  StaticStates,
-  ComponentStatesTable,
-  permutateProps,
-} from '@workday/canvas-kit-react/testing';
-import {withSnapshotsEnabled} from '../../../../../utils/storybook';
-
+import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/testing';
 import {InformationHighlight} from '@workday/canvas-kit-preview-react/InformationHighlight';
 
 export default {
   title: 'Testing/Preview/Information Highlight',
   component: InformationHighlight,
+  parameters: {
+    chromatic: {
+      disable: false,
+    },
+  },
 };
 
 export const InformationHighlightStates = () => {
