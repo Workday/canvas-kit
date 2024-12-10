@@ -6,14 +6,19 @@ import {InformationHighlight} from '@workday/canvas-kit-preview-react/Informatio
 import {Basic as BasicExample} from './examples/Basic';
 import {Body as BodyExample} from './examples/Body';
 import {Heading as HeadingExample} from './examples/Heading';
-import {AttentionLow as AttentionLowExample} from './examples/attentionLow';
-import {CautionLow as CautionLowExample} from './examples/cautionLow';
-import {InformationalLow as InformationalLowExample} from './examples/informationalLow';
-import {AttentionHigh as AttentionHighExample} from './examples/attentionHigh';
-import {CautionHigh as CautionHighExample} from './examples/cautionHigh';
-import {InformationalHigh as InformationalHighExample} from './examples/informationalHigh';
-import {IconAttentionHigh as IconAttentionHighExample} from './examples/customIconAttentionHigh';
-import {IconAttentionLow as IconAttentionLowExample} from './examples/customIconAttentionLow';
+import {
+  Attention as AttentionLowExample,
+  AttentionHigh as AttentionHighExample,
+} from './examples/./attention';
+import {Caution as CautionLowExample, CautionHigh as CautionHighExample} from './examples/caution';
+import {
+  Informational as InformationalLowExample,
+  InformationalHigh as InformationalHighExample,
+} from './examples/informational';
+import {
+  IconAttentionLow as IconAttentionLowExample,
+  IconAttentionHigh as IconAttentionHighExample,
+} from './examples/customIconAttention';
 import {RTL as RTLExample} from './examples/RTL';
 
 export default {

@@ -8,14 +8,14 @@ import * as InformationHighlight from './InformationHighlight.stories.ts';
 import { Basic } from './examples/Basic';
 import {Body} from './examples/Body';
 import {Heading} from './examples/Heading';
-import {InformationalLow} from './examples/informationalLow';
-import {CautionLow} from './examples/cautionLow';
-import {AttentionLow} from './examples/attentionLow';
-import {InformationalHigh} from './examples/informationalHigh';
-import {CautionHigh} from './examples/cautionHigh';
-import {AttentionHigh} from './examples/attentionHigh';
-import {IconAttentionHigh} from './examples/customIconAttentionHigh';
-import {IconAttentionLow} from './examples/customIconAttentionLow';
+import {Informational} from './examples/informational';
+import {Caution} from './examples/caution';
+import {Attention} from './examples/attention';
+import {InformationalHigh} from './examples/informational';
+import {CautionHigh} from './examples/caution';
+import {AttentionHigh} from './examples/attention';
+import {IconAttentionHigh} from './examples/customIconAttention';
+import {IconAttentionLow} from './examples/customIconAttention';
 import {RTL} from './examples/RTL';
 
 <Meta of={InformationHighlight} />
@@ -47,16 +47,22 @@ lower or higher contrast. If no variant or emphasis is selected the layout will 
 
 ## Low Emphasis Variants
 
+The low emphasis should be used when the information highlight is competing with other more important content on the page.
+It provides information in a way that is digestible but not distracting.
+
 ### Informational
-<ExampleCodeBlock code={InformationalLow} />
+<ExampleCodeBlock code={Informational} />
 
 ### Caution
-<ExampleCodeBlock code={CautionLow} />
+<ExampleCodeBlock code={Caution} />
 
 ### Attention
-<ExampleCodeBlock code={AttentionLow} />
+<ExampleCodeBlock code={Attention} />
 
 ## High Emphasis Variants
+
+High emphasis should be used when the information highlight is not competing with other important content on the page.
+It draws the user's attention and can emphasize importance.
 
 ### Informational
 <ExampleCodeBlock code={InformationalHigh} />
