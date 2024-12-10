@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.1.10](https://github.com/Workday/canvas-kit/releases/tag/v12.1.10) (2024-12-09)
+
+### Documentation
+
+- docs: Use slash import in first example ([#3066](https://github.com/Workday/canvas-kit/pull/3066)) ([@vibdev](https://github.com/vibdev))
+
+
 ## [v12.1.9](https://github.com/Workday/canvas-kit/releases/tag/v12.1.9) (2024-12-04)
 
 ### Documentation

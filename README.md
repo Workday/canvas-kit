@@ -41,7 +41,7 @@ npm install @workday/canvas-kit-react
 
 ```tsx
 import * as React from 'react';
-import {SecondaryButton} from '@workday/canvas-kit-react';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 
 <SecondaryButton>Button Label</SecondaryButton>;
 ```
