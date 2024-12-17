@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.1.15](https://github.com/Workday/canvas-kit/releases/tag/v12.1.15) (2024-12-17)
+
+### Components
+
+- fix: Add pointer events none to Select caret ([#3079](https://github.com/Workday/canvas-kit/pull/3079)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v12.1.14](https://github.com/Workday/canvas-kit/releases/tag/v12.1.14) (2024-12-17)
 
 ### Components
