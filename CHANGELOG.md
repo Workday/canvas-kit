@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.1.14](https://github.com/Workday/canvas-kit/releases/tag/v12.1.14) (2024-12-17)
+
+### Components
+
+- fix(multi-select): Update selected state when pill is removed ([#3076](https://github.com/Workday/canvas-kit/pull/3076)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v12.1.13](https://github.com/Workday/canvas-kit/releases/tag/v12.1.13) (2024-12-16)
 
 
