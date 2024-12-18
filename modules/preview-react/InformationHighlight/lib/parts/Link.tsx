@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {ExternalHyperlink} from '@workday/canvas-kit-react/button';
+import {Hyperlink} from '@workday/canvas-kit-react/button';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {createStyles, cssVar} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
@@ -12,9 +12,9 @@ const linkStyles = createStyles({
   fontWeight: system.fontWeight.bold,
 });
 
-export const Link = createComponent('div')({
+export const Link = createComponent('a')({
   displayName: 'Link',
   Component: (props, ref, Element) => {
-    return <ExternalHyperlink as={Element} ref={ref} className={linkStyles} {...props} />;
+    return <Hyperlink as={Element} ref={ref} className={linkStyles} {...props} />;
   },
 });

@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {InformationHighlight} from '@workday/canvas-kit-preview-react/InformationHighlight';
-import {ExternalHyperlink} from '@workday/canvas-kit-react/button';
 
 export const Basic = () => {
   return (
@@ -13,12 +12,7 @@ export const Basic = () => {
         This is what an information highlight would look like with with the default settings and
         every field filled in{' '}
       </InformationHighlight.Body>
-      <InformationHighlight.Link
-        as={ExternalHyperlink}
-        href="https://workday.github.io/canvas-kit/?path=/docs/preview-information-highlight--docs"
-      >
-        View the Docs
-      </InformationHighlight.Link>
+      <InformationHighlight.Link href="#hyperlink">View the Docs</InformationHighlight.Link>
     </InformationHighlight>
   );
 };

@@ -10,9 +10,11 @@ const headingStyles = createStyles({
   color: base.blackPepper400,
   gridColumn: '2',
   fontWeight: system.fontWeight.bold,
+  marginTop: system.space.zero,
+  marginBottom: system.space.zero,
 });
 
-export const Heading = createComponent('div')({
+export const Heading = createComponent('h3')({
   displayName: 'Heading',
   Component: (props, ref, Element) => {
     return <Base as={Element} ref={ref} cs={headingStyles} {...props} />;
