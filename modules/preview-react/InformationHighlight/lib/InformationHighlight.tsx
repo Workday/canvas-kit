@@ -45,7 +45,7 @@ const informationHighlightStencil = createStencil({
         backgroundColor: base.sourLemon100,
       },
     },
-    attention: {
+    critical: {
       low: {
         borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(base.cinnamon400)}`,
         backgroundColor: base.soap100,

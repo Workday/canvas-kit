@@ -40,7 +40,7 @@ const iconStyles = {
       backgroundColor: cssVar(base.blackPepper400),
     }),
   },
-  attention: {
+  critical: {
     low: systemIconStencil({
       accentColor: cssVar(base.cinnamon500),
       color: cssVar(base.cinnamon500),
@@ -57,7 +57,7 @@ const iconStyles = {
 const defaultIcons = {
   informational: infoIcon,
   caution: exclamationTriangleIcon,
-  attention: exclamationCircleIcon,
+  critical: exclamationCircleIcon,
 };
 
 export const Icon = createSubcomponent('span')({

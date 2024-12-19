@@ -6,19 +6,10 @@ import {InformationHighlight} from '@workday/canvas-kit-preview-react/Informatio
 import {Basic as BasicExample} from './examples/Basic';
 import {Body as BodyExample} from './examples/Body';
 import {Heading as HeadingExample} from './examples/Heading';
-import {
-  Attention as AttentionLowExample,
-  AttentionHigh as AttentionHighExample,
-} from './examples/./attention';
-import {Caution as CautionLowExample, CautionHigh as CautionHighExample} from './examples/caution';
-import {
-  Informational as InformationalLowExample,
-  InformationalHigh as InformationalHighExample,
-} from './examples/informational';
-import {
-  IconAttentionLow as IconAttentionLowExample,
-  IconAttentionHigh as IconAttentionHighExample,
-} from './examples/customIconAttention';
+import {Critical as CriticalExamples} from './examples/./critical';
+import {Caution as CautionExamples} from './examples/caution';
+import {Informational as InformationalExamples} from './examples/informational';
+import {IconCritical as IconCriticalExamples} from './examples/customIconCritical';
 import {RTL as RTLExample} from './examples/RTL';
 
 export default {
@@ -43,31 +34,18 @@ export const Body: Story = {
 export const Heading: Story = {
   render: HeadingExample,
 };
-export const AttentionLow: Story = {
-  render: AttentionLowExample,
+export const Critical: Story = {
+  render: CriticalExamples,
 };
-export const CautionLow: Story = {
-  render: CautionLowExample,
+export const Caution: Story = {
+  render: CautionExamples,
 };
-export const InformationalLow: Story = {
-  render: InformationalLowExample,
+export const Informational: Story = {
+  render: InformationalExamples,
 };
-export const AttentionHigh: Story = {
-  render: AttentionHighExample,
+export const IconCritical: Story = {
+  render: IconCriticalExamples,
 };
-export const CautionHigh: Story = {
-  render: CautionHighExample,
-};
-export const InformationalHigh: Story = {
-  render: InformationalHighExample,
-};
-export const IconAttentionHigh: Story = {
-  render: IconAttentionHighExample,
-};
-export const IconAttentionLow: Story = {
-  render: IconAttentionLowExample,
-};
-
 export const RTL: Story = {
   render: RTLExample,
 };

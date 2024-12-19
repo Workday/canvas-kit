@@ -10,12 +10,8 @@ import {Body} from './examples/Body';
 import {Heading} from './examples/Heading';
 import {Informational} from './examples/informational';
 import {Caution} from './examples/caution';
-import {Attention} from './examples/attention';
-import {InformationalHigh} from './examples/informational';
-import {CautionHigh} from './examples/caution';
-import {AttentionHigh} from './examples/attention';
-import {IconAttentionHigh} from './examples/customIconAttention';
-import {IconAttentionLow} from './examples/customIconAttention';
+import {Critical} from './examples/critical';
+import {IconCritical} from './examples/customIconCritical';
 import {RTL} from './examples/RTL';
 
 <Meta of={InformationHighlight} />
@@ -45,10 +41,13 @@ lower or higher contrast. If no variant or emphasis is selected the layout will 
 <ExampleCodeBlock code={Basic} />
 
 
-## Low Emphasis Variants
+## Variants
+The following examples will show the low and high emphasis of the three variants.
 
-The low emphasis should be used when the information highlight is competing with other more important content on the page.
-It provides information in a way that is digestible but not distracting.
+Low Emphasis will be shown first, and should be used when there is other more important information on the page.
+
+High Emphasis will be shown second, and should be used when the `highlight` is not competing with other, more important information.
+
 
 ### Informational
 <ExampleCodeBlock code={Informational} />
@@ -56,27 +55,10 @@ It provides information in a way that is digestible but not distracting.
 ### Caution
 <ExampleCodeBlock code={Caution} />
 
-### Attention
-<ExampleCodeBlock code={Attention} />
 
-## High Emphasis Variants
+### Critical
+<ExampleCodeBlock code={Critical} />
 
-High emphasis should be used when the information highlight is not competing with other important content on the page.
-It draws the user's attention and can emphasize importance.
-
-### Informational
-<ExampleCodeBlock code={InformationalHigh} />
-
-### Caution
-<ExampleCodeBlock code={CautionHigh} />
-
-### Attention
-<ExampleCodeBlock code={AttentionHigh} />
-
-## Right-to-Left (RTL) Support
-
-`Information Highlight` is compatible with right-to-left (RTL) languages. The layout will automatically adjust to RTL
-if a custom theme with a direction of `ContentDirection.RTL` is provided.
 
 ### RTL Example
 <ExampleCodeBlock code={RTL} />
@@ -85,11 +67,8 @@ if a custom theme with a direction of `ContentDirection.RTL` is provided.
 
 `Information Highlights` can use custom icons or be designed to only use some of its components.
 
-### Custom Icon: Attention, High Emphasis
-<ExampleCodeBlock code={IconAttentionHigh} />
-
-### Custom Icon: Attention, Low Emphasis
-<ExampleCodeBlock code={IconAttentionLow} />
+### Custom Icon: Critical
+<ExampleCodeBlock code={IconCritical} />
 
 ### Body Only Example
 <ExampleCodeBlock code={Body} />

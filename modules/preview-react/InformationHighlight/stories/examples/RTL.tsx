@@ -1,7 +1,8 @@
 import React from 'react';
-
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {InformationHighlight} from '@workday/canvas-kit-preview-react/InformationHighlight';
 import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
+import {system} from '@workday/canvas-tokens-web';
 export const RTL = () => {
   const theme = {
     canvas: {
@@ -9,13 +10,35 @@ export const RTL = () => {
     },
   };
   return (
-    <CanvasProvider theme={theme}>
-      <InformationHighlight variant={'attention'} emphasis={'high'}>
-        <InformationHighlight.Icon icon={undefined} />
-        <InformationHighlight.Heading> انتباه! من اليمين إلى اليسار </InformationHighlight.Heading>
-        <InformationHighlight.Body>نحن ندعم اللغات من اليمين إلى اليسار</InformationHighlight.Body>
-        <InformationHighlight.Link href="#hyperlink">وثائق</InformationHighlight.Link>
-      </InformationHighlight>
-    </CanvasProvider>
+    <Flex flexDirection={'column'} gap={system.space.x2}>
+      Information Highlight also supports RTL Languages. To enable RTL, add a custom theme with
+      direction set to 'ContentDirection.RTL'
+      <CanvasProvider theme={theme}>
+        <InformationHighlight variant={'caution'} emphasis={'low'}>
+          <InformationHighlight.Icon icon={undefined} />
+          <InformationHighlight.Heading>
+            {' '}
+            انتباه! من اليمين إلى اليسار{' '}
+          </InformationHighlight.Heading>
+          <InformationHighlight.Body>
+            نحن ندعم اللغات من اليمين إلى اليسار
+          </InformationHighlight.Body>
+          <InformationHighlight.Link href="#hyperlink">وثائق</InformationHighlight.Link>
+        </InformationHighlight>
+      </CanvasProvider>
+      <CanvasProvider theme={theme}>
+        <InformationHighlight variant={'caution'} emphasis={'high'}>
+          <InformationHighlight.Icon icon={undefined} />
+          <InformationHighlight.Heading>
+            {' '}
+            انتباه! من اليمين إلى اليسار{' '}
+          </InformationHighlight.Heading>
+          <InformationHighlight.Body>
+            نحن ندعم اللغات من اليمين إلى اليسار
+          </InformationHighlight.Body>
+          <InformationHighlight.Link href="#hyperlink">وثائق</InformationHighlight.Link>
+        </InformationHighlight>
+      </CanvasProvider>
+    </Flex>
   );
 };
