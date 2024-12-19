@@ -44,6 +44,12 @@ const defaultBranding = createStyles({
   [brand.primary.base]: base.blueberry400,
   [brand.primary.light]: base.blueberry200,
   [brand.primary.lightest]: base.blueberry100,
+  [brand.action.accent]: base.frenchVanilla100,
+  [brand.action.darkest]: base.blueberry600,
+  [brand.action.dark]: base.blueberry500,
+  [brand.action.base]: base.blueberry400,
+  [brand.action.light]: base.blueberry200,
+  [brand.action.lightest]: base.blueberry100,
   [brand.gradient
     .primary]: `linear-gradient(90deg, ${brand.primary.base} 0%, ${brand.primary.dark} 100%)`,
 });
