@@ -10,7 +10,7 @@ export interface MultiSelectedListProps
   extends MultiSelectedItemProps,
     React.HTMLAttributes<HTMLDivElement> {}
 
-export const MultiSelectedList = createSubcomponent()({
+export const MultiSelectedList = createSubcomponent('div')({
   modelHook: useMultiSelectModel,
 })<MultiSelectedListProps>(({'aria-labelledby': ariaLabelledBy, removeLabel}, Element, model) => {
   return model.selected.state.items.length ? (
@@ -18,7 +18,7 @@ export const MultiSelectedList = createSubcomponent()({
       <div data-part="separator" />
       <ListBox
         model={model.selected}
-        as="div"
+        as={Element}
         role="listbox"
         aria-orientation="horizontal"
         aria-labelledby={ariaLabelledBy}
