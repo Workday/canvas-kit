@@ -5,7 +5,6 @@ import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const styleOverrides = createStyles({
-  gap: system.space.x4,
   backgroundColor: system.color.bg.primary.default,
   padding: system.space.x4,
 });

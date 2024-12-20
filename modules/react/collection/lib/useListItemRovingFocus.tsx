@@ -3,13 +3,7 @@ import {useIsRTL, createElemPropsHook} from '@workday/canvas-kit-react/common';
 
 import {useCursorListModel} from './useCursorListModel';
 import {keyboardEventToCursorEvents} from './keyUtils';
-
-// retry a function each frame so we don't rely on the timing mechanism of React's render cycle.
-const retryEachFrame = (cb: () => boolean, iterations: number) => {
-  if (cb() === false && iterations > 1) {
-    requestAnimationFrame(() => retryEachFrame(cb, iterations - 1));
-  }
-};
+import {focusOnCurrentCursor} from './focusOnCurrentCursor';
 
 /**
  * This elemProps hook is used for cursor navigation by using [Roving
@@ -33,34 +27,16 @@ export const useListItemRovingFocus = createElemPropsHook(useCursorListModel)(
     const stateRef = React.useRef(model.state);
     stateRef.current = model.state;
 
-    const keyElementRef = React.useRef<Element | null>(null);
+    const keyElementRef = React.useRef<HTMLElement | null>(null);
     const isRTL = useIsRTL();
 
     React.useEffect(() => {
+      // If the cursor change was triggered by this hook, we should change focus
       if (keyElementRef.current) {
-        const item = model.navigation.getItem(model.state.cursorId, model);
-        if (model.state.isVirtualized) {
-          model.state.UNSTABLE_virtual.scrollToIndex(item.index);
-        }
-
-        const selector = (id?: string) => {
-          return document.querySelector<HTMLElement>(`[data-focus-id="${`${id}-${item.id}`}"]`);
-        };
-
-        // In React concurrent mode, there could be several render attempts before the element we're
-        // looking for could be available in the DOM
-        retryEachFrame(() => {
-          // Attempt to extract the ID from the DOM element. This fixes issues where the server and client
-          // do not agree on a generated ID
-          const clientId = keyElementRef.current?.getAttribute('data-focus-id')?.split('-')[0];
-          const element = selector(clientId) || selector(model.state.id);
-
-          element?.focus();
-          if (element) {
-            keyElementRef.current = null;
-          }
-          return !!element;
-        }, 5); // 5 should be enough, right?!
+        focusOnCurrentCursor(model, model.state.cursorId, keyElementRef.current).then(() => {
+          // Reset key element since focus was successful
+          keyElementRef.current = null;
+        });
       }
       // we only want to run this effect if the cursor changes and not any other time
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -74,7 +50,7 @@ export const useListItemRovingFocus = createElemPropsHook(useCursorListModel)(
     }, [model.state.cursorId, model.state.items, model.events]);
 
     return {
-      onKeyDown(event: React.KeyboardEvent) {
+      onKeyDown(event: React.KeyboardEvent<HTMLElement>) {
         const handled = keyboardEventToCursorEvents(event, model, isRTL);
         if (handled) {
           event.preventDefault();
