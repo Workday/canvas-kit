@@ -42,5 +42,8 @@
     "build": "tsc -p tsconfig.es6.json",
     "test": "TZ=UTC jest -c ../../jest.config.js",
     "typecheck:src": "tsc -p . --noEmit --incremental false"
+  },
+  "resolutions": {
+    "recast": "0.20.4"
   }
 }
