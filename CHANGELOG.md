@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.1.25](https://github.com/Workday/canvas-kit/releases/tag/v11.1.25) (2024-12-20)
+
+### Dependencies
+
+- fix: Resolve recast dep from jscodeshift to remove extra parens ([#3083](https://github.com/Workday/canvas-kit/pull/3083)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v11.1.24](https://github.com/Workday/canvas-kit/releases/tag/v11.1.24) (2024-11-22)
 
 ### Components
