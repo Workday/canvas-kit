@@ -38,6 +38,7 @@ const statusIndicatorStencil = createStencil({
     borderRadius: system.shape.half,
     height: px2rem(20),
     padding: `${system.space.zero} ${system.space.x1}`,
+    outline: `${px2rem(1)} solid black`,
   },
   modifiers: {
     gray: {
