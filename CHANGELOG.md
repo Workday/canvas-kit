@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.1.16](https://github.com/Workday/canvas-kit/releases/tag/v12.1.16) (2024-12-20)
+
+### Components
+
+- fix(side-panel): Filter out invalid DOM prop ([#3080](https://github.com/Workday/canvas-kit/pull/3080)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Dependencies
+
+- fix: Resolve recast dep from jscodeshift to remove extra parens ([#3083](https://github.com/Workday/canvas-kit/pull/3083)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v11.1.26](https://github.com/Workday/canvas-kit/releases/tag/v11.1.26) (2024-12-20)
 
 ### Components
