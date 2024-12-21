@@ -235,6 +235,19 @@ export const buttonStencil = createStencil({
         system.color.fg.strong
       ),
     },
+    // for Windows high contrast desktop themes
+    '@media (prefers-contrast: more)': {
+      // Toggle Buttons (Segmented Control)
+      '&[aria-pressed="true"]': {
+        outline: `${px2rem(2)} solid transparent`,
+        outlineOffset: `-${px2rem(1)}`,
+      },
+      // Toggle Buttons && Focus (Segmented Control)
+      '&[aria-pressed="true"]:focus-visible, &[aria-pressed="true"].focus': {
+        outline: `${px2rem(4)} double transparent`,
+        outlineOffset: 0,
+      },
+    },
   }),
   modifiers: {
     /**
