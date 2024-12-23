@@ -109,7 +109,7 @@ export const StyledTabItem = styled(Box.as('button'))<StyledType & Pick<TabsItem
     },
 
     '&:focus': {
-      outline: `none`,
+      outline: `2px solid transparent`,
       ...focusRing({inset: 'outer', width: 0, separation: 2}, theme),
     },
 
@@ -129,7 +129,9 @@ export const StyledTabItem = styled(Box.as('button'))<StyledType & Pick<TabsItem
       [systemIconStencil.vars.color]: theme.canvas.palette.primary.main,
       '&:after': {
         position: 'absolute',
-        height: space.xxxs,
+        // height: space.xxxs,
+        // fallback for Windows high contrast theme
+        borderBottom: `${space.xxxs} solid transparent`,
         borderRadius: `${borderRadius.m} ${borderRadius.m} 0px 0px`,
         backgroundColor: theme.canvas.palette.primary.main,
         bottom: 0,
