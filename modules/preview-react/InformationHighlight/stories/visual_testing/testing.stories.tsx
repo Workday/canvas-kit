@@ -59,7 +59,7 @@ export const InformationHighlightStates = () => {
         columnProps={[
           {label: 'Informational', props: {variant: 'informational'}},
           {label: 'Caution', props: {variant: 'caution'}},
-          {label: 'Attention', props: {variant: 'attention'}},
+          {label: 'Critical', props: {variant: 'attention'}},
         ]}
       >
         {props => {
