@@ -6,10 +6,10 @@ import {InformationHighlight} from '@workday/canvas-kit-preview-react/Informatio
 import {Basic as BasicExample} from './examples/Basic';
 import {Body as BodyExample} from './examples/Body';
 import {Heading as HeadingExample} from './examples/Heading';
-import {Critical as CriticalExamples} from './examples/./critical';
-import {Caution as CautionExamples} from './examples/caution';
-import {Informational as InformationalExamples} from './examples/informational';
-import {IconCritical as IconCriticalExamples} from './examples/customIconCritical';
+import {Critical as CriticalExamples} from './examples/Critical';
+import {Caution as CautionExamples} from './examples/Caution';
+import {Informational as InformationalExamples} from './examples/Informational';
+import {IconCritical as IconCriticalExamples} from './examples/CustomIconCritical';
 import {RTL as RTLExample} from './examples/RTL';
 
 export default {
