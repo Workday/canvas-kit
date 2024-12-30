@@ -13,6 +13,10 @@ describe('Information Highlight', () => {
       it('should pass axe checks', () => {
         cy.checkA11y();
       });
+
+      it('should have an element with a role of "heading"', () => {
+        cy.findAllByRole('heading').should('be.visible');
+      });
     });
   });
 });
