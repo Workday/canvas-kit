@@ -11,8 +11,6 @@ export const RTL = () => {
   };
   return (
     <Flex flexDirection={'column'} gap={system.space.x2}>
-      Information Highlight also supports RTL Languages. To enable RTL, add a custom theme with
-      direction set to 'ContentDirection.RTL'
       <CanvasProvider theme={theme}>
         <InformationHighlight variant={'caution'} emphasis={'low'}>
           <InformationHighlight.Icon icon={undefined} />

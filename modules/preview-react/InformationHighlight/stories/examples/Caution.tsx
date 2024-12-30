@@ -6,8 +6,6 @@ import {system} from '@workday/canvas-tokens-web';
 export const Caution = () => {
   return (
     <Flex flexDirection={'column'} gap={system.space.x2}>
-      The Caution Variant is for “important to know” information, such as the potential consequences
-      of specific actions.
       <InformationHighlight variant={'caution'}>
         <InformationHighlight.Icon icon={undefined} />
         <InformationHighlight.Heading> Caution: Highlight Something </InformationHighlight.Heading>

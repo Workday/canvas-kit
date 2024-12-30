@@ -6,8 +6,6 @@ import {system} from '@workday/canvas-tokens-web';
 export const Critical = () => {
   return (
     <Flex flexDirection={'column'} gap={system.space.x2}>
-      The Critical Variant “must know” information that could otherwise cause failure if the user is
-      unaware
       <InformationHighlight variant={'critical'}>
         <InformationHighlight.Icon icon={undefined} />
         <InformationHighlight.Heading>
