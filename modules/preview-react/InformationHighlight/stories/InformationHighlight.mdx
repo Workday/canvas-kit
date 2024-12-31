@@ -18,7 +18,7 @@ import {RTL} from './examples/RTL';
 
 # Canvas Kit Information Highlight
 
-An `Information Highlight` draws user attention to important details
+A container to call out important information on a page or a section of a page that the user should be aware of.
 
 ## Installation
 
@@ -27,27 +27,42 @@ yarn add @workday/canvas-kit-preview-react
 ```
 
 ## Usage
-`Information Highlight` should be used to call out important elements of the page. It has three variants and two emphases
-built in.
 
-Variants: Informational, Caution, Attention
+`InformationHighlight` should be used to call out important information to the user and are paired with a meaningful
+ icon and color to differentiate information type. It should not be removed from the interface until some system or admin level action has been taken to do so.
 
-Emphasis: Low, High
+You can use an `InformationHighlight` to:
+- Prevent unwanted consequences from destructive actions
+- Reassure users in their next steps
+- Provide detail into information on the page
+- Show changes in page content
 
-The variants have different icons and colors to convey severity, the emphasis changes the background color to have a
-lower or higher contrast. If no variant or emphasis is selected the layout will default to Informational, Low.
-
+### When to Consider Something Else
+- Consider a [Banner](https://workday.github.io/canvas-kit/?path=/docs/components-indicators-banner--docs) if the message is about system-wide errors or alerts, or if the message appears in response to user action.
+- Consider a [Dialog](https://workday.github.io/canvas-kit/?path=/docs/components-popups-dialog--docs) if the message is critical and requires user action or decision before proceeding
+- Consider a [Toast](https://workday.github.io/canvas-kit/?path=/docs/components-popups-toast--docs) if the message is timely, such as communicating updates on the process of an application.
 ### Basic Example
 <ExampleCodeBlock code={Basic} />
 
 
 ## Variants
-The following examples will show the low and high emphasis of the three variants.
+`InformationHighlight` has three variants and each `variant` has two types of `emphasis`.
 
-Low Emphasis will be shown first, and should be used when there is other more important information on the page.
 
-High Emphasis will be shown second, and should be used when the `highlight` is not competing with other, more important information.
+Variants: `Informational`, `Caution`, `Critical`
 
+
+Emphasis: `Low`, `High`
+
+
+The variants have different icons and colors to convey severity and the emphasis changes the background color to have a
+ lower or higher contrast. If no `variant` or `emphasis` is selected the layout will default to
+  `Variant: Informational, Emphasis: Low`.
+
+
+The following examples will show the `Low` and `High` emphasis of the three variants.
+`Low` Emphasis will be shown first and should be used when there is other more important information on the page.
+`High` Emphasis will be shown second, and should be used when the highlight is not competing with other, more important information.
 
 ### Informational
 The Informational Variant is for “nice to have” information, such as related features or opportunities.
