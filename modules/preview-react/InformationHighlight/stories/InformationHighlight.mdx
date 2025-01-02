@@ -97,8 +97,15 @@ The Critical Variant “must know” information that could otherwise cause fail
 ### Heading Only Example
 <ExampleCodeBlock code={Heading} />
 
+### Accessible Use of the `as` Prop
+Like many of our components, `InformationHighlight` and it's subcomponents accept an `as` prop, which lets you change
+the underlying semantic element. For `InformationHighlight.Heading`, you can change the heading level if you were
+needing to define a different level of importance. This should be done with caution to ensure the best accessibility.
 
+## Component API
 
+<SymbolDoc name="InformationHighlight" fileName="/react/" />
 
+## Specifications
 
-
+<Specifications file="InformationHighlight.spec.tsx" name="InformationHighlight" />

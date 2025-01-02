@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {createSubcomponent} from '@workday/canvas-kit-react/common';
+import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {cssVar} from '@workday/canvas-kit-styling';
 import {
   infoIcon,
@@ -8,11 +8,10 @@ import {
   exclamationTriangleIcon,
 } from '@workday/canvas-system-icons-web';
 import {base} from '@workday/canvas-tokens-web';
-import {useInformationHighlightModel, Variant, Emphasis} from '../hooks/modelHook';
+import {useInformationHighlightModel} from '../hooks/modelHook';
 
-export interface IconProps extends SystemIconProps {
-  variant?: Variant;
-  emphasis?: Emphasis;
+export interface IconProps extends Omit<Partial<ExtractProps<typeof SystemIcon, never>>, 'icon'> {
+  icon?: SystemIconProps['icon'];
 }
 
 const iconStyles = {

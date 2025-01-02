@@ -7,7 +7,7 @@ export const Critical = () => {
   return (
     <Flex flexDirection={'column'} gap={system.space.x2}>
       <InformationHighlight variant={'critical'}>
-        <InformationHighlight.Icon icon={undefined} />
+        <InformationHighlight.Icon />
         <InformationHighlight.Heading>
           {' '}
           Attention! Highlight Something{' '}
@@ -18,7 +18,7 @@ export const Critical = () => {
         <InformationHighlight.Link href="#hyperlink">View the Docs</InformationHighlight.Link>
       </InformationHighlight>
       <InformationHighlight variant={'critical'} emphasis={'high'}>
-        <InformationHighlight.Icon icon={undefined} />
+        <InformationHighlight.Icon />
         <InformationHighlight.Heading>
           {' '}
           Attention! Highlight Something{' '}

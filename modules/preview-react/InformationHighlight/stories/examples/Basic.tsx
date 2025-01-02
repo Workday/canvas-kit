@@ -5,7 +5,7 @@ import {InformationHighlight} from '@workday/canvas-kit-preview-react/Informatio
 export const Basic = () => {
   return (
     <InformationHighlight>
-      <InformationHighlight.Icon variant={undefined} icon={undefined} />
+      <InformationHighlight.Icon />
       <InformationHighlight.Heading>Information Highlight</InformationHighlight.Heading>
       <InformationHighlight.Body>
         {' '}

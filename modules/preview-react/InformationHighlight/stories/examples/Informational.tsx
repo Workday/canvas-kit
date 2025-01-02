@@ -7,7 +7,7 @@ export const Informational = () => {
   return (
     <Flex flexDirection={'column'} gap={system.space.x2}>
       <InformationHighlight variant={'informational'}>
-        <InformationHighlight.Icon icon={undefined} />
+        <InformationHighlight.Icon />
         <InformationHighlight.Heading> Informational Highlight </InformationHighlight.Heading>
         <InformationHighlight.Body>
           If you select the link below it will just reroute you back to this page
@@ -15,7 +15,7 @@ export const Informational = () => {
         <InformationHighlight.Link href="#hyperlink">View the Docs</InformationHighlight.Link>
       </InformationHighlight>
       <InformationHighlight variant={'informational'} emphasis={'high'}>
-        <InformationHighlight.Icon icon={undefined} />
+        <InformationHighlight.Icon />
         <InformationHighlight.Heading> Informational Highlight </InformationHighlight.Heading>
         <InformationHighlight.Body>
           If you select the link below it will just reroute you back to this page

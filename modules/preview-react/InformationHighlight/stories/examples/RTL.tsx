@@ -13,7 +13,7 @@ export const RTL = () => {
     <Flex flexDirection={'column'} gap={system.space.x2}>
       <CanvasProvider theme={theme}>
         <InformationHighlight variant={'caution'} emphasis={'low'}>
-          <InformationHighlight.Icon icon={undefined} />
+          <InformationHighlight.Icon />
           <InformationHighlight.Heading>
             {' '}
             انتباه! من اليمين إلى اليسار{' '}
@@ -26,7 +26,7 @@ export const RTL = () => {
       </CanvasProvider>
       <CanvasProvider theme={theme}>
         <InformationHighlight variant={'caution'} emphasis={'high'}>
-          <InformationHighlight.Icon icon={undefined} />
+          <InformationHighlight.Icon />
           <InformationHighlight.Heading>
             {' '}
             انتباه! من اليمين إلى اليسار{' '}

@@ -7,7 +7,7 @@ export const Caution = () => {
   return (
     <Flex flexDirection={'column'} gap={system.space.x2}>
       <InformationHighlight variant={'caution'}>
-        <InformationHighlight.Icon icon={undefined} />
+        <InformationHighlight.Icon />
         <InformationHighlight.Heading> Caution: Highlight Something </InformationHighlight.Heading>
         <InformationHighlight.Body>
           If you select the link below it will just reroute you back to this page
@@ -15,7 +15,7 @@ export const Caution = () => {
         <InformationHighlight.Link href="#hyperlink">View the Docs</InformationHighlight.Link>
       </InformationHighlight>
       <InformationHighlight variant={'caution'} emphasis={'high'}>
-        <InformationHighlight.Icon icon={undefined} />
+        <InformationHighlight.Icon />
         <InformationHighlight.Heading> Caution: Highlight Something </InformationHighlight.Heading>
         <InformationHighlight.Body>
           If you select the link below it will just reroute you back to this page
