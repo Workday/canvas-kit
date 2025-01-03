@@ -13,7 +13,7 @@ const bodyStyles = createStyles({
 
 export const Body = createComponent('p')({
   displayName: 'Body',
-  Component: ({...elemProps}: ExtractProps<typeof Text>, ref, Element) => {
+  Component: ({...elemProps}: ExtractProps<typeof Text, never>, ref, Element) => {
     return <Text as={Element} ref={ref} {...handleCsProp(elemProps, bodyStyles)} />;
   },
 });

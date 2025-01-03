@@ -6,8 +6,7 @@ export const Body = () => {
   return (
     <InformationHighlight>
       <InformationHighlight.Body>
-        {' '}
-        Only the body of an information highlight{' '}
+        Only the body of an information highlight
       </InformationHighlight.Body>
     </InformationHighlight>
   );

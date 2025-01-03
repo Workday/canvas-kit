@@ -2,7 +2,7 @@ import * as React from 'react';
 import {createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {createStyles, handleCsProp} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
-import {Heading, TypeLevelProps} from '@workday/canvas-kit-react/text';
+import {Heading} from '@workday/canvas-kit-react/text';
 
 const headingStyles = createStyles({
   ...system.type.body.small,
@@ -14,9 +14,7 @@ const headingStyles = createStyles({
 });
 
 export interface InformationHighlightHeadingProps
-  extends Omit<Partial<ExtractProps<typeof Heading, never>>, 'size'> {
-  size?: TypeLevelProps['size'];
-}
+  extends Partial<ExtractProps<typeof Heading, never>> {}
 
 export const InformationHighlightHeading = createComponent('h3')({
   displayName: 'Heading',
