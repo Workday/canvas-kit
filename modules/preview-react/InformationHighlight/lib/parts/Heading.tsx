@@ -1,9 +1,8 @@
 import * as React from 'react';
-import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {createStyles, handleCsProp} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
-
-import {Base} from './Base';
+import {Heading, TypeLevelProps} from '@workday/canvas-kit-react/text';
 
 const headingStyles = createStyles({
   ...system.type.body.small,
@@ -14,9 +13,16 @@ const headingStyles = createStyles({
   marginBottom: system.space.zero,
 });
 
-export const Heading = createComponent('h3')({
+export interface InformationHighlightHeadingProps
+  extends Omit<Partial<ExtractProps<typeof Heading, never>>, 'size'> {
+  size?: TypeLevelProps['size'];
+}
+
+export const InformationHighlightHeading = createComponent('h3')({
   displayName: 'Heading',
-  Component: (props, ref, Element) => {
-    return <Base as={Element} ref={ref} cs={headingStyles} {...props} />;
+  Component: ({size = 'small', ...elemProps}: InformationHighlightHeadingProps, ref, Element) => {
+    return (
+      <Heading as={Element} ref={ref} size={size} {...handleCsProp(elemProps, headingStyles)} />
+    );
   },
 });

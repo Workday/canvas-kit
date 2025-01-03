@@ -66,7 +66,7 @@ export const InformationHighlightStates = () => {
           const {variant, heading, body, button, emphasis} = props;
           return (
             <InformationHighlight variant={variant} emphasis={emphasis}>
-              <InformationHighlight.Icon variant={undefined} icon={undefined} />
+              <InformationHighlight.Icon />
               {heading && <InformationHighlight.Heading>Lorem ipsum</InformationHighlight.Heading>}
               {body && (
                 <InformationHighlight.Body>

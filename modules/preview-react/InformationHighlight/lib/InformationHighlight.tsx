@@ -1,19 +1,15 @@
 import * as React from 'react';
 import {createContainer} from '@workday/canvas-kit-react/common';
-import {cssVar, createStencil} from '@workday/canvas-kit-styling';
+import {cssVar, createStencil, handleCsProp, CSProps} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
-import {Base, BaseProps} from './parts/Base';
-import {Heading} from './parts/Heading';
+import {InformationHighlightHeading} from './parts/Heading';
 import {Body} from './parts/Body';
 import {Icon} from './parts/Icon';
 import {Link} from './parts/Link';
-import {useInformationHighlightModel, Variant, Emphasis} from './hooks/modelHook';
+import {useInformationHighlightModel} from './hooks/useInformationHighlightModel';
 
-interface InformationHighlightProps extends BaseProps {
-  variant?: Variant;
-  emphasis?: Emphasis;
-}
+interface InformationHighlightProps extends CSProps {}
 
 const informationHighlightStencil = createStencil({
   base: {
@@ -63,16 +59,17 @@ export const InformationHighlight = createContainer('section')({
   modelHook: useInformationHighlightModel,
   subComponents: {
     Icon: Icon,
-    Heading: Heading,
+    Heading: InformationHighlightHeading,
     Body: Body,
     Link: Link,
   },
-})((props: InformationHighlightProps, Element, model) => {
+})(({...elemProps}: InformationHighlightProps, Element, model) => {
   return (
-    <Base
-      as={Element}
-      cs={informationHighlightStencil({[model.state.variant]: model.state.emphasis})}
-      {...props}
+    <Element
+      {...handleCsProp(
+        elemProps,
+        informationHighlightStencil({[model.state.variant]: model.state.emphasis})
+      )}
     />
   );
 });

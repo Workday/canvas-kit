@@ -1,57 +1,61 @@
 import * as React from 'react';
 import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
-import {cssVar} from '@workday/canvas-kit-styling';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {
   infoIcon,
   exclamationCircleIcon,
   exclamationTriangleIcon,
 } from '@workday/canvas-system-icons-web';
 import {base} from '@workday/canvas-tokens-web';
-import {useInformationHighlightModel} from '../hooks/modelHook';
+import {useInformationHighlightModel} from '../hooks/useInformationHighlightModel';
 
 export interface IconProps extends Omit<Partial<ExtractProps<typeof SystemIcon, never>>, 'icon'> {
   icon?: SystemIconProps['icon'];
 }
 
-const iconStyles = {
-  informational: {
-    low: systemIconStencil({
-      accentColor: cssVar(base.blueberry400),
-      color: cssVar(base.blueberry400),
-      backgroundColor: 'none',
-    }),
-    high: systemIconStencil({
-      accentColor: cssVar(base.frenchVanilla100),
-      color: cssVar(base.blueberry400),
-      backgroundColor: cssVar(base.blueberry400),
-    }),
+const informationIconStencil = createStencil({
+  extends: systemIconStencil,
+  base: {},
+  modifiers: {
+    informational: {
+      low: {
+        [systemIconStencil.vars.accentColor]: base.blueberry400,
+        [systemIconStencil.vars.color]: base.blueberry400,
+        [systemIconStencil.vars.backgroundColor]: 'none',
+      },
+      high: {
+        [systemIconStencil.vars.accentColor]: base.frenchVanilla100,
+        [systemIconStencil.vars.color]: base.blueberry400,
+        [systemIconStencil.vars.backgroundColor]: base.blueberry400,
+      },
+    },
+    caution: {
+      low: {
+        [systemIconStencil.vars.accentColor]: base.blackPepper400,
+        [systemIconStencil.vars.color]: base.blackPepper400,
+        [systemIconStencil.vars.backgroundColor]: 'none',
+      },
+      high: {
+        [systemIconStencil.vars.accentColor]: base.frenchVanilla100,
+        [systemIconStencil.vars.color]: base.blackPepper400,
+        [systemIconStencil.vars.backgroundColor]: base.blackPepper400,
+      },
+    },
+    critical: {
+      low: {
+        [systemIconStencil.vars.accentColor]: base.cinnamon500,
+        [systemIconStencil.vars.color]: base.cinnamon500,
+        [systemIconStencil.vars.backgroundColor]: 'none',
+      },
+      high: {
+        [systemIconStencil.vars.accentColor]: base.frenchVanilla100,
+        [systemIconStencil.vars.color]: base.cinnamon500,
+        [systemIconStencil.vars.backgroundColor]: base.cinnamon500,
+      },
+    },
   },
-  caution: {
-    low: systemIconStencil({
-      accentColor: cssVar(base.blackPepper400),
-      color: cssVar(base.blackPepper400),
-      backgroundColor: 'none',
-    }),
-    high: systemIconStencil({
-      accentColor: cssVar(base.frenchVanilla100),
-      color: cssVar(base.blackPepper400),
-      backgroundColor: cssVar(base.blackPepper400),
-    }),
-  },
-  critical: {
-    low: systemIconStencil({
-      accentColor: cssVar(base.cinnamon500),
-      color: cssVar(base.cinnamon500),
-      backgroundColor: 'none',
-    }),
-    high: systemIconStencil({
-      accentColor: cssVar(base.frenchVanilla100),
-      color: cssVar(base.cinnamon500),
-      backgroundColor: cssVar(base.cinnamon500),
-    }),
-  },
-};
+});
 
 const defaultIcons = {
   informational: infoIcon,
@@ -67,8 +71,10 @@ export const Icon = createSubcomponent('span')({
     <SystemIcon
       as={Element}
       icon={icon ? icon : defaultIcons[model.state.variant]}
-      {...iconStyles[model.state.variant][model.state.emphasis]}
-      {...props}
+      {...handleCsProp(
+        props,
+        informationIconStencil({[model.state.variant]: model.state.emphasis})
+      )}
     />
   );
 });
