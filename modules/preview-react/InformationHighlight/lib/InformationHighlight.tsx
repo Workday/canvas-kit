@@ -8,10 +8,11 @@ import {Body} from './parts/Body';
 import {Icon} from './parts/Icon';
 import {Link} from './parts/Link';
 import {useInformationHighlightModel} from './hooks/useInformationHighlightModel';
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
 interface InformationHighlightProps extends CSProps {}
 
-const informationHighlightStencil = createStencil({
+export const informationHighlightStencil = createStencil({
   base: {
     display: 'grid',
     gridTemplateColumns: 'min-content',
@@ -25,30 +26,60 @@ const informationHighlightStencil = createStencil({
       low: {
         borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(base.blueberry400)}`,
         backgroundColor: base.soap100,
+        '& [data-part="information-highlight-icon"]': {
+          [systemIconStencil.vars.accentColor]: base.blueberry400,
+          [systemIconStencil.vars.color]: base.blueberry400,
+          [systemIconStencil.vars.backgroundColor]: 'none',
+        },
       },
       high: {
         borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(base.blueberry400)}`,
         backgroundColor: base.blueberry100,
+        '& [data-part="information-highlight-icon"]': {
+          [systemIconStencil.vars.accentColor]: base.frenchVanilla100,
+          [systemIconStencil.vars.color]: base.blueberry400,
+          [systemIconStencil.vars.backgroundColor]: base.blueberry400,
+        },
       },
     },
     caution: {
       low: {
         borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(base.cantaloupe400)}`,
         backgroundColor: base.soap100,
+        '& [data-part="information-highlight-icon"]': {
+          [systemIconStencil.vars.accentColor]: base.blackPepper400,
+          [systemIconStencil.vars.color]: base.blackPepper400,
+          [systemIconStencil.vars.backgroundColor]: 'none',
+        },
       },
       high: {
         borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(base.cantaloupe400)}`,
         backgroundColor: base.sourLemon100,
+        '& [data-part="information-highlight-icon"]': {
+          [systemIconStencil.vars.accentColor]: base.frenchVanilla100,
+          [systemIconStencil.vars.color]: base.blackPepper400,
+          [systemIconStencil.vars.backgroundColor]: base.blackPepper400,
+        },
       },
     },
     critical: {
       low: {
         borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(base.cinnamon400)}`,
         backgroundColor: base.soap100,
+        '& [data-part="information-highlight-icon"]': {
+          [systemIconStencil.vars.accentColor]: base.cinnamon500,
+          [systemIconStencil.vars.color]: base.cinnamon500,
+          [systemIconStencil.vars.backgroundColor]: 'none',
+        },
       },
       high: {
         borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(base.cinnamon400)}`,
         backgroundColor: base.peach100,
+        '& [data-part="information-highlight-icon"]': {
+          [systemIconStencil.vars.accentColor]: base.frenchVanilla100,
+          [systemIconStencil.vars.color]: base.cinnamon500,
+          [systemIconStencil.vars.backgroundColor]: base.cinnamon500,
+        },
       },
     },
   },
