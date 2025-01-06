@@ -13,9 +13,9 @@ export const Critical = () => {
           Attention! Highlight Something{' '}
         </InformationHighlight.Heading>
         <InformationHighlight.Body>
-          If you select the link below it will just reroute you back to this page
+          If you select the button below it will just reroute you back to this page
         </InformationHighlight.Body>
-        <InformationHighlight.Link href="#hyperlink">View the Docs</InformationHighlight.Link>
+        <InformationHighlight.Button href="#hyperlink">View the Docs</InformationHighlight.Button>
       </InformationHighlight>
       <InformationHighlight variant={'critical'} emphasis={'high'}>
         <InformationHighlight.Icon />
@@ -24,9 +24,9 @@ export const Critical = () => {
           Attention! Highlight Something{' '}
         </InformationHighlight.Heading>
         <InformationHighlight.Body>
-          If you select the link below it will just reroute you back to this page
+          If you select the button below it will just reroute you back to this page
         </InformationHighlight.Body>
-        <InformationHighlight.Link href="#hyperlink">View the Docs</InformationHighlight.Link>
+        <InformationHighlight.Button href="#hyperlink">View the Docs</InformationHighlight.Button>
       </InformationHighlight>
     </Flex>
   );

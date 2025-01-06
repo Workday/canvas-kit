@@ -21,7 +21,7 @@ export const RTL = () => {
           <InformationHighlight.Body>
             نحن ندعم اللغات من اليمين إلى اليسار
           </InformationHighlight.Body>
-          <InformationHighlight.Link href="#hyperlink">وثائق</InformationHighlight.Link>
+          <InformationHighlight.Button href="#hyperlink">وثائق</InformationHighlight.Button>
         </InformationHighlight>
       </CanvasProvider>
       <CanvasProvider theme={theme}>
@@ -34,7 +34,7 @@ export const RTL = () => {
           <InformationHighlight.Body>
             نحن ندعم اللغات من اليمين إلى اليسار
           </InformationHighlight.Body>
-          <InformationHighlight.Link href="#hyperlink">وثائق</InformationHighlight.Link>
+          <InformationHighlight.Button href="#hyperlink">وثائق</InformationHighlight.Button>
         </InformationHighlight>
       </CanvasProvider>
     </Flex>

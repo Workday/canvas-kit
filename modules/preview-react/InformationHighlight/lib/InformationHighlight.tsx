@@ -6,7 +6,7 @@ import {base, system} from '@workday/canvas-tokens-web';
 import {InformationHighlightHeading} from './parts/Heading';
 import {Body} from './parts/Body';
 import {Icon} from './parts/Icon';
-import {Link} from './parts/Link';
+import {Button} from './parts/Button';
 import {useInformationHighlightModel} from './hooks/useInformationHighlightModel';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
@@ -92,7 +92,7 @@ export const InformationHighlight = createContainer('section')({
     Icon: Icon,
     Heading: InformationHighlightHeading,
     Body: Body,
-    Link: Link,
+    Button: Button,
   },
 })(({...elemProps}: InformationHighlightProps, Element, model) => {
   return (

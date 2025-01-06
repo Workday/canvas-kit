@@ -75,7 +75,7 @@ export const InformationHighlightStates = () => {
                   incididunt ut labore et dolore magna aliqua.{' '}
                 </InformationHighlight.Body>
               )}
-              {button && <InformationHighlight.Link>Action</InformationHighlight.Link>}
+              {button && <InformationHighlight.Button>Action</InformationHighlight.Button>}
             </InformationHighlight>
           );
         }}

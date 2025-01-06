@@ -10,17 +10,17 @@ export const Informational = () => {
         <InformationHighlight.Icon />
         <InformationHighlight.Heading> Informational Highlight </InformationHighlight.Heading>
         <InformationHighlight.Body>
-          If you select the link below it will just reroute you back to this page
+          If you select the button below it will just reroute you back to this page
         </InformationHighlight.Body>
-        <InformationHighlight.Link href="#hyperlink">View the Docs</InformationHighlight.Link>
+        <InformationHighlight.Button href="#hyperlink">View the Docs</InformationHighlight.Button>
       </InformationHighlight>
       <InformationHighlight variant={'informational'} emphasis={'high'}>
         <InformationHighlight.Icon />
         <InformationHighlight.Heading> Informational Highlight </InformationHighlight.Heading>
         <InformationHighlight.Body>
-          If you select the link below it will just reroute you back to this page
+          If you select the button below it will just reroute you back to this page
         </InformationHighlight.Body>
-        <InformationHighlight.Link href="#hyperlink">View the Docs</InformationHighlight.Link>
+        <InformationHighlight.Button href="#hyperlink">View the Docs</InformationHighlight.Button>
       </InformationHighlight>
     </Flex>
   );

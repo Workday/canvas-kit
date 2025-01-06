@@ -10,17 +10,17 @@ export const Caution = () => {
         <InformationHighlight.Icon />
         <InformationHighlight.Heading> Caution: Highlight Something </InformationHighlight.Heading>
         <InformationHighlight.Body>
-          If you select the link below it will just reroute you back to this page
+          If you select the button below, nothing will happen
         </InformationHighlight.Body>
-        <InformationHighlight.Link href="#hyperlink">View the Docs</InformationHighlight.Link>
+        <InformationHighlight.Button href="#hyperlink">View the Docs</InformationHighlight.Button>
       </InformationHighlight>
       <InformationHighlight variant={'caution'} emphasis={'high'}>
         <InformationHighlight.Icon />
         <InformationHighlight.Heading> Caution: Highlight Something </InformationHighlight.Heading>
         <InformationHighlight.Body>
-          If you select the link below it will just reroute you back to this page
+          If you select the button below, nothing will happen
         </InformationHighlight.Body>
-        <InformationHighlight.Link href="#hyperlink">View the Docs</InformationHighlight.Link>
+        <InformationHighlight.Button href="#hyperlink">View the Docs</InformationHighlight.Button>
       </InformationHighlight>
     </Flex>
   );
