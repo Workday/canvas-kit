@@ -7,6 +7,7 @@ import {InformationHighlightHeading} from './parts/Heading';
 import {Body} from './parts/Body';
 import {Icon} from './parts/Icon';
 import {Button} from './parts/Button';
+import {Link} from './parts/Link';
 import {useInformationHighlightModel} from './hooks/useInformationHighlightModel';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
@@ -93,6 +94,7 @@ export const InformationHighlight = createContainer('section')({
     Heading: InformationHighlightHeading,
     Body: Body,
     Button: Button,
+    Link: Link,
   },
 })(({...elemProps}: InformationHighlightProps, Element, model) => {
   return (

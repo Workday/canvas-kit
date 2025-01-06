@@ -10,17 +10,17 @@ export const Caution = () => {
         <InformationHighlight.Icon />
         <InformationHighlight.Heading> Caution: Highlight Something </InformationHighlight.Heading>
         <InformationHighlight.Body>
-          If you select the button below, nothing will happen
+          If you select the link below, nothing will happen
         </InformationHighlight.Body>
-        <InformationHighlight.Button href="#hyperlink">View the Docs</InformationHighlight.Button>
+        <InformationHighlight.Link href="#hyperlink">View the Docs</InformationHighlight.Link>
       </InformationHighlight>
       <InformationHighlight variant={'caution'} emphasis={'high'}>
         <InformationHighlight.Icon />
         <InformationHighlight.Heading> Caution: Highlight Something </InformationHighlight.Heading>
         <InformationHighlight.Body>
-          If you select the button below, nothing will happen
+          If you select the link below, nothing will happen
         </InformationHighlight.Body>
-        <InformationHighlight.Button href="#hyperlink">View the Docs</InformationHighlight.Button>
+        <InformationHighlight.Link href="#hyperlink">View the Docs</InformationHighlight.Link>
       </InformationHighlight>
     </Flex>
   );
