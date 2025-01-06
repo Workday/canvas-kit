@@ -53,8 +53,8 @@ export const informationHighlightStencil = createStencil({
         )}`,
         backgroundColor: system.color.bg.alt.soft,
         '& [data-part="information-highlight-icon"]': {
-          [systemIconStencil.vars.accentColor]: system.color.text.strong,
-          [systemIconStencil.vars.color]: system.color.text.strong,
+          [systemIconStencil.vars.accentColor]: system.color.fg.contrast.default,
+          [systemIconStencil.vars.color]: system.color.fg.contrast.default,
           [systemIconStencil.vars.backgroundColor]: 'none',
         },
       },
@@ -65,8 +65,8 @@ export const informationHighlightStencil = createStencil({
         backgroundColor: base.sourLemon100,
         '& [data-part="information-highlight-icon"]': {
           [systemIconStencil.vars.accentColor]: system.color.icon.inverse,
-          [systemIconStencil.vars.color]: system.color.text.strong,
-          [systemIconStencil.vars.backgroundColor]: system.color.text.strong,
+          [systemIconStencil.vars.color]: system.color.fg.contrast.default,
+          [systemIconStencil.vars.backgroundColor]: system.color.fg.contrast.default,
         },
       },
     },
