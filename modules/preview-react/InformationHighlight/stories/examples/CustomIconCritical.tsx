@@ -13,7 +13,7 @@ export const IconCritical = () => {
         <InformationHighlight.Body>
           A custom Icon can be added to the Information Highlight component
         </InformationHighlight.Body>
-        <InformationHighlight.Button href="#hyperlink">View the Docs</InformationHighlight.Button>
+        <InformationHighlight.Link href="#hyperlink">View the Docs</InformationHighlight.Link>
       </InformationHighlight>
       <InformationHighlight variant={'critical'} emphasis={'high'}>
         <InformationHighlight.Icon icon={chartIcon} />
@@ -21,7 +21,7 @@ export const IconCritical = () => {
         <InformationHighlight.Body>
           A custom Icon can be added to the Information Highlight component
         </InformationHighlight.Body>
-        <InformationHighlight.Button href="#hyperlink">View the Docs</InformationHighlight.Button>
+        <InformationHighlight.Link href="#hyperlink">View the Docs</InformationHighlight.Link>
       </InformationHighlight>
     </Flex>
   );

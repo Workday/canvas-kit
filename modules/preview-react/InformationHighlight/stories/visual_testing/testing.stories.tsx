@@ -20,11 +20,11 @@ export const InformationHighlightStates = () => {
         rowProps={[
           {
             label: 'Full Information Highlight Low Emphasis',
-            props: {heading: true, body: true, button: true, emphasis: 'low'},
+            props: {heading: true, body: true, link: true, emphasis: 'low'},
           },
           {
             label: 'Full Information Highlight High Emphasis',
-            props: {heading: true, body: true, button: true, emphasis: 'high'},
+            props: {heading: true, body: true, link: true, emphasis: 'high'},
           },
           {
             label: 'Heading and Body Low Emphasis',
@@ -37,17 +37,17 @@ export const InformationHighlightStates = () => {
 
           {
             label: 'Heading and Link Low Emphasis',
-            props: {heading: true, button: true, emphasis: 'low'},
+            props: {heading: true, link: true, emphasis: 'low'},
           },
           {
             label: 'Heading and Link High Emphasis',
-            props: {heading: true, button: true, emphasis: 'high'},
+            props: {heading: true, link: true, emphasis: 'high'},
           },
 
-          {label: 'Body and Link Low Emphasis', props: {body: true, button: true, emphasis: 'low'}},
+          {label: 'Body and Link Low Emphasis', props: {body: true, link: true, emphasis: 'low'}},
           {
             label: 'Body and Link High Emphasis',
-            props: {body: true, button: true, emphasis: 'high'},
+            props: {body: true, link: true, emphasis: 'high'},
           },
 
           {label: 'Only Heading Low Emphasis', props: {heading: true, emphasis: 'low'}},
@@ -63,7 +63,7 @@ export const InformationHighlightStates = () => {
         ]}
       >
         {props => {
-          const {variant, heading, body, button, emphasis} = props;
+          const {variant, heading, body, link, emphasis} = props;
           return (
             <InformationHighlight variant={variant} emphasis={emphasis}>
               <InformationHighlight.Icon />
@@ -75,7 +75,7 @@ export const InformationHighlightStates = () => {
                   incididunt ut labore et dolore magna aliqua.{' '}
                 </InformationHighlight.Body>
               )}
-              {button && <InformationHighlight.Button>Action</InformationHighlight.Button>}
+              {link && <InformationHighlight.Link>Link</InformationHighlight.Link>}
             </InformationHighlight>
           );
         }}

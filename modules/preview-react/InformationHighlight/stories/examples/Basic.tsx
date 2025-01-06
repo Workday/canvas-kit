@@ -12,7 +12,7 @@ export const Basic = () => {
         This is what an information highlight would look like with with the default settings and
         every field filled in{' '}
       </InformationHighlight.Body>
-      <InformationHighlight.Button href="#hyperlink">View the Docs</InformationHighlight.Button>
+      <InformationHighlight.Link href="#hyperlink">View the Docs</InformationHighlight.Link>
     </InformationHighlight>
   );
 };
