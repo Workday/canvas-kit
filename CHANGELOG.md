@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.2.1](https://github.com/Workday/canvas-kit/releases/tag/v12.2.1) (2025-01-07)
+
+### Components
+
+- fix: Added CKR Dub and Logo References to preview package ([#3093](https://github.com/Workday/canvas-kit/pull/3093)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
+## [v11.2.1](https://github.com/Workday/canvas-kit/releases/tag/v11.2.1) (2025-01-07)
+
+### Components
+
+- fix: Added CKR Dub and Logo References to preview package ([#3093](https://github.com/Workday/canvas-kit/pull/3093)) ([@josh-bagwell](https://github.com/josh-bagwell))
 ## [v12.2.0](https://github.com/Workday/canvas-kit/releases/tag/v12.2.0) (2025-01-07)
 
 ### Components
