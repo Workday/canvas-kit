@@ -1,0 +1,113 @@
+import {
+	ExampleCodeBlock,
+	Specifications,
+	SymbolDoc,
+	SymbolDescription,
+} from '@workday/canvas-kit-docs';
+
+import { Primary } from './examples/Primary';
+import { PrimaryInverse } from './examples/PrimaryInverse';
+import { Secondary } from './examples/Secondary';
+import { SecondaryInverse } from './examples/SecondaryInverse';
+import { Tertiary } from './examples/Tertiary';
+import { TertiaryInverse } from './examples/TertiaryInverse';
+import { Delete } from './examples/Delete';
+import { Grow } from './examples/Grow';
+import { CustomStyles } from './examples/CustomStyles';
+
+import * as ButtonStories from './Button.stories';
+
+<Meta of={ButtonStories} />
+
+# Canvas Kit Button
+
+Clickable button elements that extend the native `<button>` element with Canvas styling.
+
+[> Workday Design Reference](https://design.workday.com/components/buttons/buttons)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### PrimaryButton
+
+<SymbolDescription name="PrimaryButton" fileName="/react/" />
+
+The example below shows multiple instances of a `PrimaryButton` with various icon configurations.
+
+<ExampleCodeBlock code={Primary} />
+
+Primary Buttons also have an `inverse` variant. While it looks similar to the default Secondary
+Button, the default outline as well as the hover and focus states are different. Use this variant
+when you need to place a Primary Button on a dark or colorful background such as `blueberry400`.
+
+<ExampleCodeBlock code={PrimaryInverse} />
+
+### SecondaryButton
+
+<SymbolDescription name="SecondaryButton" fileName="/react/" />
+
+The example below shows multiple instances of a `SecondaryButton` with various icon configurations.
+
+<ExampleCodeBlock code={Secondary} />
+
+Secondary Buttons also have an `inverse` variant. Use this when you need to place a Secondary Button
+on a dark or colorful background such as `blueberry400`.
+
+<ExampleCodeBlock code={SecondaryInverse} />
+
+### TertiaryButton
+
+<SymbolDescription name="TertiaryButton" fileName="/react/" />
+
+The example below shows multiple instances of a `TertiaryButton` with various icon configurations.
+
+<ExampleCodeBlock code={Tertiary} />
+
+Tertiary Buttons also have an `inverse` variant. Use this when you need to place a Tertiary Button
+on a dark or colorful background such as `blueberry400`.
+
+<ExampleCodeBlock code={TertiaryInverse} />
+
+### DeleteButton
+
+<SymbolDescription name="DeleteButton" fileName="/react/" />
+
+<ExampleCodeBlock code={Delete} />
+
+### Grow Prop
+
+The example below shows the use of the `grow` prop on different variants of buttons. This will set
+the width of the button to the width of its container.
+
+<ExampleCodeBlock code={Grow} />
+
+### Custom Styles
+
+All of our buttons support custom styling via the `cs` prop. For more information, check our
+["How To Customize Styles"](https://workday.github.io/canvas-kit/?path=/docs/styling-how-to-customize-styles--docs)
+or view the example below.
+
+<ExampleCodeBlock code={CustomStyles} />
+
+### Accessible Use of the `as` Prop
+
+Like many of our components, Buttons accept an `as` prop, which lets you change the underlying
+semantic element - usually an `<a>`, or a `<button>`. This should be done with caution to ensure the
+best accessibility. Generally, `<button>` elements should be used for actions, and `<a>` elements
+should be used for navigation.
+
+## Component API
+
+<SymbolDoc name="PrimaryButton" fileName="/react/" />
+<SymbolDoc name="SecondaryButton" fileName="/react/" />
+<SymbolDoc name="TertiaryButton" fileName="/react/" />
+<SymbolDoc name="DeleteButton" fileName="/react/" />
+
+## Specifications
+
+<Specifications file="Button.spec.tsx" name="Button" />

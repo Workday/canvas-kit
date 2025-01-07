@@ -1,11 +1,11 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Radio, RadioGroup} from '@workday/canvas-kit-react/radio';
 import {Subtext} from '@workday/canvas-kit-react/text';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
 
 export const NoValue = () => {
-  const [value, setValue] = React.useState<string | number>(0);
+  const [value, setValue] = React.useState<string | number>('');
 
   const handleChange = (value: string | number) => {
     setValue(value);

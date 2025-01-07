@@ -1,17 +1,18 @@
 import * as React from 'react';
 
-import {colors, iconColors, typeColors, space, type} from '@workday/canvas-kit-react/tokens';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
+
 import {
   createSubcomponent,
-  styled,
-  StyledType,
   composeHooks,
   createElemPropsHook,
   useLocalRef,
+  createComponent,
 } from '@workday/canvas-kit-react/common';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
-import {Box} from '@workday/canvas-kit-react/layout';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {
   useListItemRegister,
   useListItemRovingFocus,
@@ -30,114 +31,120 @@ export interface MenuItemProps {
   /**
    * The label text of the MenuItem.
    */
-  children: React.ReactNode;
+  children?: React.ReactNode;
   /**
    * The name of the menu item. This name will be used in the `onSelect` callback in the model. If
    * this property is not provided, it will default to a string representation of the the zero-based
    * index of the Tab when it was initialized.
    */
   'data-id'?: string;
+  /**
+   * `aria-disabled` is used for keyboard and screen reader users to discover disabled content with
+   * the keyboard or screen reader caret tool. For more information, see
+   * https://www.w3.org/WAI/ARIA/apg/practices/keyboard-interface/#kbd_disabled_controls
+   */
   'aria-disabled'?: boolean;
-}
-
-interface StyledMenuProps {
   /**
    * If true, set the StyledMenuItem to the disabled state so it is not clickable.
    * @default false
+   * @deprecated Use `aria-disabled` instead
    */
   isDisabled?: boolean;
 }
 
-export const StyledMenuItem = styled(Box.as('button'))<StyledType & StyledMenuProps>(
-  ({theme}) => {
-    return {
-      ...type.levels.subtext.large,
-      display: 'grid',
-      alignItems: 'center',
-      width: '100%',
-      gap: space.s,
-      padding: `${space.xxs} ${space.s}`,
-      boxSizing: 'border-box',
-      cursor: 'pointer',
-      color: colors.blackPepper300,
-      borderWidth: 0,
-      textAlign: 'left',
-      transition: 'background-color 80ms, color 80ms',
-      overflowWrap: 'anywhere',
-      '&:hover, &[aria-selected=true]': {
-        backgroundColor: theme.canvas.palette.primary.lightest,
-        color: colors.blackPepper300,
-        '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
-          fill: iconColors.hover,
-        },
-        '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
-          fill: iconColors.hover,
-        },
+export const menuItemStencil = createStencil({
+  base: {
+    ...system.type.subtext.large,
+    display: 'flex',
+    alignItems: 'center',
+    width: '100%',
+    gap: system.space.x4,
+    padding: `${system.space.x2} ${system.space.x4}`,
+    boxSizing: 'border-box',
+    cursor: 'pointer',
+    color: system.color.fg.default,
+    borderWidth: 0,
+    textAlign: 'start',
+    transition: 'background-color 80ms, color 80ms',
+    backgroundColor: 'inherit',
+    minHeight: system.space.x10,
+    // We want the icon colors to be the same as the text color
+    [systemIconStencil.vars.color]: 'currentcolor',
+
+    // selected checkmark
+    '& :where([data-part="menu-item-selected"])': {
+      transition: 'opacity 80ms linear',
+      opacity: system.opacity.zero,
+    },
+
+    // if the menu item has children we need it to be displayed in flex
+    '&:where(:has(span))': {
+      display: 'flex',
+    },
+
+    // Selected styles
+    '&:is([aria-selected=true])': {
+      color: brand.primary.dark,
+      backgroundColor: brand.primary.lightest,
+    },
+
+    // Hover styles
+    '&:is(.hover, :hover)': {
+      color: system.color.fg.strong,
+      backgroundColor: brand.neutral.lightest,
+    },
+
+    // Focus styles
+    '&:is(.focus, :focus)': {
+      color: brand.primary.accent,
+      outline: 'none',
+      backgroundColor: brand.primary.base,
+    },
+
+    // Disabled styles
+    '&:is(:disabled, [aria-disabled=true])': {
+      color: system.color.text.disabled,
+      cursor: 'default',
+
+      // Focus + Disabled
+      '&:where(.focus, :focus)': {
+        backgroundColor: brand.primary.light,
       },
-      '&:focus, &.focus': {
-        outline: 'none',
-        backgroundColor: theme.canvas.palette.primary.main,
-        color: typeColors.inverse,
-        '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
-          fill: iconColors.inverse,
-        },
-        '*:hover .wd-icon-fill': {
-          fill: iconColors.inverse,
-        },
-        '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
-          fill: iconColors.inverse,
-        },
-      },
-      // We want the focus styles no matter what
-      [`[data-whatinput]`]: {
-        backgroundColor: 'inherit',
-        color: colors.blackPepper300,
-        '&:hover, &[aria-selected=true]': {
-          backgroundColor: theme.canvas.palette.primary.lightest,
-          '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
-            fill: iconColors.hover,
-          },
-        },
-        '&:focus, &.focus': {
-          '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
-            fill: iconColors.hover,
-          },
-        },
-      },
-      backgroundColor: 'inherit',
-      '&:disabled, &[aria-disabled=true]': {
-        color: colors.licorice100,
-        cursor: 'default',
-        '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
-          fill: iconColors.disabled,
-        },
-        '&:focus, &.focus': {
-          backgroundColor: colors.blueberry200,
-          '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
-            fill: iconColors.disabled,
-          },
-        },
-        '&:hover, &[aria-selected=true]': {
-          '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
-            fill: iconColors.disabled,
-          },
-          '*:hover .wd-icon-fill': {
-            fill: iconColors.disabled,
-          },
-        },
-      },
-    };
+    },
+
+    '& :where([data-part="menu-item-text"])': {
+      flexGrow: 1,
+      alignSelf: 'center',
+    },
+
+    '& :where([data-part="menu-icon-icon"])': {
+      alignSelf: 'start',
+    },
   },
-  ({children}) => {
-    if (typeof children === 'string') {
-      return {};
-    } else {
-      return {
-        display: 'flex',
-      };
-    }
-  }
-);
+});
+
+const MenuItemIcon = (elemProps: SystemIconProps) => {
+  return <SystemIcon data-part="menu-item-icon" {...elemProps} />;
+};
+
+const MenuItemText = ({children}: React.PropsWithChildren) => {
+  return <span data-part="menu-item-text">{children}</span>;
+};
+
+export const StyledMenuItem = createComponent('button')({
+  displayName: 'MenuItem',
+  Component: ({children, isDisabled, ...elemProps}: MenuItemProps, ref, Element) => {
+    return (
+      <Element
+        ref={ref}
+        aria-disabled={isDisabled}
+        {...mergeStyles(elemProps, menuItemStencil({}))}
+      >
+        {typeof children === 'string' ? <MenuItemText>{children}</MenuItemText> : children}
+      </Element>
+    );
+  },
+});
 
 export const useMenuItem = composeHooks(
   createElemPropsHook(useMenuModel)(
@@ -182,13 +189,13 @@ export const MenuItem = createSubcomponent('button')({
   modelHook: useMenuModel,
   elemPropsHook: useMenuItem,
   subComponents: {
-    Icon: styled(SystemIcon)({alignSelf: 'start'}),
-    Text: styled('span')({flexGrow: 1, alignSelf: 'center'}),
+    Icon: MenuItemIcon,
+    Text: MenuItemText,
   },
 })<MenuItemProps>(({children, ...elemProps}, Element) => {
   return (
     <OverflowTooltip placement="left">
-      <StyledMenuItem minHeight={space.xl} as={Element} {...elemProps}>
+      <StyledMenuItem as={Element} {...elemProps}>
         {children}
       </StyledMenuItem>
     </OverflowTooltip>
