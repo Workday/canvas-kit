@@ -31,7 +31,7 @@ const hyperlinkStencil = createStencil({
       color: system.color.text.primary.strong,
       background: system.color.bg.alt.soft,
     },
-    '&:focus': {
+    '&:focus, &.focus, &:focus-visible': {
       boxShadow: `0 0 0 2px ${cssVar(system.color.bg.primary.default)}`,
       outline: 'none',
     },
