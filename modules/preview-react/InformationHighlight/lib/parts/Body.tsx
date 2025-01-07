@@ -10,7 +10,7 @@ const informationHighlightBodyStencil = createStencil({
       ...system.type.subtext.large,
       color: system.color.text.strong,
       gridColumn: '2',
-      margin: `0 0 ${cssVar(system.space.x2)}`,
+      margin: `0 0 ${cssVar(system.space.x2)} 0`,
     };
   },
 });

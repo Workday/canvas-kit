@@ -27,7 +27,7 @@ const hyperlinkStencil = createStencil({
     padding: '0 2px',
     margin: '0 -2px',
     transition: 'color 0.15s,background-color 0.15s',
-    '&:hover': {
+    '&:hover, &.hover': {
       color: system.color.text.primary.strong,
       background: system.color.bg.alt.soft,
     },
@@ -35,7 +35,7 @@ const hyperlinkStencil = createStencil({
       boxShadow: `0 0 0 2px ${cssVar(system.color.bg.primary.default)}`,
       outline: 'none',
     },
-    '&:active': {
+    '&:active, &.active': {
       color: system.color.text.primary.stronger,
       background: system.color.bg.alt.default,
     },
@@ -44,14 +44,14 @@ const hyperlinkStencil = createStencil({
     variant: {
       inverse: {
         color: system.color.text.inverse,
-        '&:hover': {
+        '&:hover, &.hover': {
           color: system.color.text.inverse,
           background: 'rgba(255, 255, 255, 0.1)',
         },
-        '&:focus': {
+        '&:focus, &.focus, &:focus-visible': {
           boxShadow: `0 0 0 2px ${cssVar(system.color.text.inverse)}`,
         },
-        '&:active': {
+        '&:active, &.active': {
           color: system.color.text.primary.stronger,
           background: system.color.bg.alt.soft,
         },

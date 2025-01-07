@@ -6,5 +6,5 @@
 
 A information highlight component to highlight and prioritize content
 
-View the [documentation for Information Highlight](LINK_HERE)
+View the [documentation for Information Highlight](https://workday.github.io/canvas-kit/?path=/docs/preview-information-highlight--docs)
 on Storybook.
