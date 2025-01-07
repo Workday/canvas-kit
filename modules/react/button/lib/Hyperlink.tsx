@@ -22,7 +22,7 @@ const hyperlinkStencil = createStencil({
     textDecoration: 'underline',
     color: system.color.text.primary.default,
     cursor: 'pointer',
-    borderRadius: system.shape.x1,
+    borderRadius: system.shape.half,
     display: 'inline-block',
     padding: '0 2px',
     margin: '0 -2px',
