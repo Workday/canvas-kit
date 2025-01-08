@@ -3,6 +3,49 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.2.2](https://github.com/Workday/canvas-kit/releases/tag/v12.2.2) (2025-01-07)
+
+### Components
+
+- fix: Add overflowWrap on MenuItem ([#3094](https://github.com/Workday/canvas-kit/pull/3094)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.2.1](https://github.com/Workday/canvas-kit/releases/tag/v12.2.1) (2025-01-07)
+
+### Components
+
+- fix: Added CKR Dub and Logo References to preview package ([#3093](https://github.com/Workday/canvas-kit/pull/3093)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
+## [v11.2.1](https://github.com/Workday/canvas-kit/releases/tag/v11.2.1) (2025-01-07)
+
+### Components
+
+- fix: Added CKR Dub and Logo References to preview package ([#3093](https://github.com/Workday/canvas-kit/pull/3093)) ([@josh-bagwell](https://github.com/josh-bagwell))
+## [v12.2.0](https://github.com/Workday/canvas-kit/releases/tag/v12.2.0) (2025-01-07)
+
+### Components
+
+- feat: Update CKR Dub and Logo References ([#3089](https://github.com/Workday/canvas-kit/pull/3089)) ([@josh-bagwell](https://github.com/josh-bagwell))
+  Workday has new logos with updated colors. We've added these to the `preview` package for a smooth transition for consumers. 
+  
+  If you would like to consume these, here is the import:
+  ```tsx
+  import {dubLogoPrimary, dubLogoReversed} from '@workday/canvas-kit-preview-react/common'
+  ```
+
+
+## [v11.2.0](https://github.com/Workday/canvas-kit/releases/tag/v11.2.0) (2025-01-07)
+
+### Components
+
+- feat: Update CKR Dub and Logo References ([#3089](https://github.com/Workday/canvas-kit/pull/3089)) ([@josh-bagwell](https://github.com/josh-bagwell))
+  Workday has new logos with updated colors. We've added these to the `preview` package for a smooth transition for consumers. 
+  
+  If you would like to consume these, here is the import:
+  ```tsx
+  import {dubLogoPrimary, dubLogoReversed} from '@workday/canvas-kit-preview-react/common'
+  ```
 ## [v12.1.16](https://github.com/Workday/canvas-kit/releases/tag/v12.1.16) (2024-12-20)
 
 ### Components
