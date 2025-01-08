@@ -68,6 +68,7 @@ export const menuItemStencil = createStencil({
     transition: 'background-color 80ms, color 80ms',
     backgroundColor: 'inherit',
     minHeight: system.space.x10,
+    overflowWrap: 'anywhere',
     // We want the icon colors to be the same as the text color
     [systemIconStencil.vars.color]: 'currentcolor',
 
