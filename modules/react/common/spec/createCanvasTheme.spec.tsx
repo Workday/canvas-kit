@@ -3,7 +3,7 @@ import {defaultCanvasTheme, createCanvasTheme, PartialCanvasTheme} from '../lib/
 import {shiftColor} from '../lib/theming/createCanvasTheme';
 import {deepMerge} from '../lib/utils/deepMerge';
 
-describe.only('createCanvasTheme', () => {
+describe('createCanvasTheme', () => {
   test('calling without any input provides the default theme', () => {
     const theme = createCanvasTheme({});
 
