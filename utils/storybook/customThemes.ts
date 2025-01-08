@@ -6,6 +6,9 @@ export const customColorTheme: PartialCanvasTheme = {
       main: 'purple',
       contrast: 'turquoise',
     },
+    alert: {
+      main: 'coral',
+    },
     error: {
       main: 'crimson',
     },
@@ -29,6 +32,9 @@ export const customColorThemeWithAction: PartialCanvasTheme = {
     },
     action: {
       main: 'red',
+    },
+    alert: {
+      main: 'coral',
     },
     error: {
       main: 'crimson',
