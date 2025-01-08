@@ -33,6 +33,7 @@ const AllStatesMenuItem = () => (
         <Menu.Item className="focus hover">Focused & Hovered Item</Menu.Item>
         <Menu.Item aria-disabled={true}>Disabled Item</Menu.Item>
         <Menu.Item>Wrapped Text Item Wrapped Text Item Wrapped Text Item</Menu.Item>
+        <Menu.Item>Superlonglinethatshouldbreakonitsownwithouthavingtodoanythingspecial</Menu.Item>
         <Menu.Divider />
         <Menu.Item>Menu item between dividers</Menu.Item>
         <Menu.Divider />
