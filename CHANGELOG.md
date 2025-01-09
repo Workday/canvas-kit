@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.3.0](https://github.com/Workday/canvas-kit/releases/tag/v12.3.0) (2025-01-09)
+
+
+
+
 ## [v12.2.2](https://github.com/Workday/canvas-kit/releases/tag/v12.2.2) (2025-01-07)
 
 ### Components
