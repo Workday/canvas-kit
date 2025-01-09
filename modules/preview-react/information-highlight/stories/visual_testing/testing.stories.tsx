@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/testing';
-import {InformationHighlight} from '@workday/canvas-kit-preview-react/InformationHighlight';
+import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
 
 export default {
   title: 'Testing/Preview/Information Highlight',

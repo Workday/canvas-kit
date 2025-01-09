@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {Informational} from '../../modules/preview-react/InformationHighlight/stories/examples/Informational';
-import {Caution} from '../../modules/preview-react/InformationHighlight/stories/examples/Caution';
-import {Critical} from '../../modules/preview-react/InformationHighlight/stories/examples/Critical';
+import {Informational} from '../../modules/preview-react/information-highlight/stories/examples/Informational';
+import {Caution} from '../../modules/preview-react/information-highlight/stories/examples/Caution';
+import {Critical} from '../../modules/preview-react/information-highlight/stories/examples/Critical';
 
 describe('Information Highlight', () => {
   [Informational, Caution, Critical].forEach(Example => {
