@@ -10,7 +10,7 @@ import {
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
-import {Heading} from '../../../../text';
+import {Heading} from '@workday/canvas-kit-react/text';
 
 const parentContainerStyles = createStyles({
   gap: system.space.x4,
