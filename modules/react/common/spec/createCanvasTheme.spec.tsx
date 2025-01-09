@@ -23,10 +23,20 @@ describe('createCanvasTheme', () => {
     const input = {
       palette: {
         primary: palette,
+        action: palette,
       },
     };
     const theme = createCanvasTheme(input);
+
     const expected = {...defaultCanvasTheme};
+    expected.palette.action = {
+      lightest: 'orange',
+      light: 'orange',
+      main: 'orange',
+      dark: 'orange',
+      darkest: 'orange',
+      contrast: 'orange',
+    };
     expected.palette.primary = palette;
 
     expect(theme).toEqual(expected);
@@ -51,6 +61,15 @@ describe('createCanvasTheme', () => {
       contrast: '#494949',
     };
 
+    expected.palette.action = {
+      lightest: '#ffff7d',
+      light: '#ffd64a',
+      main: 'orange',
+      dark: '#c67600',
+      darkest: '#904a00',
+      contrast: '#494949',
+    };
+
     expect(theme).toEqual(expected);
   });
 
@@ -65,7 +84,40 @@ describe('createCanvasTheme', () => {
     const theme = createCanvasTheme(input);
     const expected = {...defaultCanvasTheme};
     expected.palette.primary.dark = 'black';
+    expected.palette.action.dark = 'black';
+    expect(theme).toEqual(expected);
+  });
 
+  test('calling with a custom palette with action colors should keep the default primary color and only set action', () => {
+    const input = {
+      palette: {
+        primary: {
+          dark: 'black',
+        },
+        action: {
+          dark: 'navy',
+        },
+      },
+    };
+    const theme = createCanvasTheme(input);
+    const expected = {...defaultCanvasTheme};
+    expected.palette.primary.dark = 'black';
+    expected.palette.action.dark = 'navy';
+    expect(theme).toEqual(expected);
+  });
+
+  test('if not action color is defined, it should default to primary color', () => {
+    const input = {
+      palette: {
+        primary: {
+          dark: 'black',
+        },
+      },
+    };
+    const theme = createCanvasTheme(input);
+    const expected = {...defaultCanvasTheme};
+    expected.palette.primary.dark = 'black';
+    expected.palette.action.dark = 'black';
     expect(theme).toEqual(expected);
   });
 

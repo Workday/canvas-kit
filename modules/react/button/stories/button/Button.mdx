@@ -14,6 +14,7 @@ import { TertiaryInverse } from './examples/TertiaryInverse';
 import { Delete } from './examples/Delete';
 import { Grow } from './examples/Grow';
 import { CustomStyles } from './examples/CustomStyles';
+import { ThemeOverrides } from './examples/ThemeOverrides';
 
 import * as ButtonStories from './Button.stories';
 
@@ -93,6 +94,12 @@ All of our buttons support custom styling via the `cs` prop. For more informatio
 or view the example below.
 
 <ExampleCodeBlock code={CustomStyles} />
+
+### Theme Overrides
+
+The most common way to theme our buttons is to pass a `theme` object at the root level of the application via the `CanvasProvider`. In the example below, our buttons use our `brand.action.**` tokens with the fallback being `brand.primary.**`.
+
+<ExampleCodeBlock code={ThemeOverrides} />
 
 ### Accessible Use of the `as` Prop
 
