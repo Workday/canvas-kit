@@ -2957,11 +2957,11 @@
       "id": "preview-information-highlight--basic",
       "name": "Basic",
       "title": "Preview/Information Highlight",
-      "importPath": "./modules/preview-react/InformationHighlight/stories/InformationHighlight.stories.ts",
+      "importPath": "./modules/preview-react/information-highlight/stories/InformationHighlight.stories.ts",
       "kind": "Preview/Information Highlight",
       "story": "Basic",
       "parameters": {
-        "fileName": "./modules/preview-react/InformationHighlight/stories/InformationHighlight.stories.ts",
+        "fileName": "./modules/preview-react/information-highlight/stories/InformationHighlight.stories.ts",
         "__isArgsStory": false
       }
     },
@@ -2969,11 +2969,11 @@
       "id": "preview-information-highlight--body",
       "name": "Body",
       "title": "Preview/Information Highlight",
-      "importPath": "./modules/preview-react/InformationHighlight/stories/InformationHighlight.stories.ts",
+      "importPath": "./modules/preview-react/information-highlight/stories/InformationHighlight.stories.ts",
       "kind": "Preview/Information Highlight",
       "story": "Body",
       "parameters": {
-        "fileName": "./modules/preview-react/InformationHighlight/stories/InformationHighlight.stories.ts",
+        "fileName": "./modules/preview-react/information-highlight/stories/InformationHighlight.stories.ts",
         "__isArgsStory": false
       }
     },
@@ -2981,11 +2981,11 @@
       "id": "preview-information-highlight--caution",
       "name": "Caution",
       "title": "Preview/Information Highlight",
-      "importPath": "./modules/preview-react/InformationHighlight/stories/InformationHighlight.stories.ts",
+      "importPath": "./modules/preview-react/information-highlight/stories/InformationHighlight.stories.ts",
       "kind": "Preview/Information Highlight",
       "story": "Caution",
       "parameters": {
-        "fileName": "./modules/preview-react/InformationHighlight/stories/InformationHighlight.stories.ts",
+        "fileName": "./modules/preview-react/information-highlight/stories/InformationHighlight.stories.ts",
         "__isArgsStory": false
       }
     },
@@ -2993,11 +2993,11 @@
       "id": "preview-information-highlight--critical",
       "name": "Critical",
       "title": "Preview/Information Highlight",
-      "importPath": "./modules/preview-react/InformationHighlight/stories/InformationHighlight.stories.ts",
+      "importPath": "./modules/preview-react/information-highlight/stories/InformationHighlight.stories.ts",
       "kind": "Preview/Information Highlight",
       "story": "Critical",
       "parameters": {
-        "fileName": "./modules/preview-react/InformationHighlight/stories/InformationHighlight.stories.ts",
+        "fileName": "./modules/preview-react/information-highlight/stories/InformationHighlight.stories.ts",
         "__isArgsStory": false
       }
     },
@@ -3005,11 +3005,11 @@
       "id": "preview-information-highlight--heading",
       "name": "Heading",
       "title": "Preview/Information Highlight",
-      "importPath": "./modules/preview-react/InformationHighlight/stories/InformationHighlight.stories.ts",
+      "importPath": "./modules/preview-react/information-highlight/stories/InformationHighlight.stories.ts",
       "kind": "Preview/Information Highlight",
       "story": "Heading",
       "parameters": {
-        "fileName": "./modules/preview-react/InformationHighlight/stories/InformationHighlight.stories.ts",
+        "fileName": "./modules/preview-react/information-highlight/stories/InformationHighlight.stories.ts",
         "__isArgsStory": false
       }
     },
@@ -3017,11 +3017,11 @@
       "id": "preview-information-highlight--icon-critical",
       "name": "Icon Critical",
       "title": "Preview/Information Highlight",
-      "importPath": "./modules/preview-react/InformationHighlight/stories/InformationHighlight.stories.ts",
+      "importPath": "./modules/preview-react/information-highlight/stories/InformationHighlight.stories.ts",
       "kind": "Preview/Information Highlight",
       "story": "Icon Critical",
       "parameters": {
-        "fileName": "./modules/preview-react/InformationHighlight/stories/InformationHighlight.stories.ts",
+        "fileName": "./modules/preview-react/information-highlight/stories/InformationHighlight.stories.ts",
         "__isArgsStory": false
       }
     },
@@ -3029,11 +3029,11 @@
       "id": "preview-information-highlight--informational",
       "name": "Informational",
       "title": "Preview/Information Highlight",
-      "importPath": "./modules/preview-react/InformationHighlight/stories/InformationHighlight.stories.ts",
+      "importPath": "./modules/preview-react/information-highlight/stories/InformationHighlight.stories.ts",
       "kind": "Preview/Information Highlight",
       "story": "Informational",
       "parameters": {
-        "fileName": "./modules/preview-react/InformationHighlight/stories/InformationHighlight.stories.ts",
+        "fileName": "./modules/preview-react/information-highlight/stories/InformationHighlight.stories.ts",
         "__isArgsStory": false
       }
     },
@@ -3041,11 +3041,11 @@
       "id": "preview-information-highlight--rtl",
       "name": "RTL",
       "title": "Preview/Information Highlight",
-      "importPath": "./modules/preview-react/InformationHighlight/stories/InformationHighlight.stories.ts",
+      "importPath": "./modules/preview-react/information-highlight/stories/InformationHighlight.stories.ts",
       "kind": "Preview/Information Highlight",
       "story": "RTL",
       "parameters": {
-        "fileName": "./modules/preview-react/InformationHighlight/stories/InformationHighlight.stories.ts",
+        "fileName": "./modules/preview-react/information-highlight/stories/InformationHighlight.stories.ts",
         "__isArgsStory": false
       }
     },
@@ -4469,11 +4469,11 @@
       "id": "testing-preview-information-highlight--information-highlight-states",
       "name": "Information Highlight States",
       "title": "Testing/Preview/Information Highlight",
-      "importPath": "./modules/preview-react/InformationHighlight/stories/visual_testing/testing.stories.tsx",
+      "importPath": "./modules/preview-react/information-highlight/stories/visual_testing/testing.stories.tsx",
       "kind": "Testing/Preview/Information Highlight",
       "story": "Information Highlight States",
       "parameters": {
-        "fileName": "./modules/preview-react/InformationHighlight/stories/visual_testing/testing.stories.tsx",
+        "fileName": "./modules/preview-react/information-highlight/stories/visual_testing/testing.stories.tsx",
         "__isArgsStory": false
       }
     },
