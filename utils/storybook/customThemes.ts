@@ -31,7 +31,7 @@ export const customColorThemeWithAction: PartialCanvasTheme = {
       contrast: 'turquoise',
     },
     action: {
-      main: 'red',
+      main: 'teal',
     },
     alert: {
       main: 'coral',
