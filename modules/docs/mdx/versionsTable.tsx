@@ -47,7 +47,13 @@ export const VersionTable = () => {
   React.useEffect(() => {
     let arr: VersionType[] = [];
     for (let i = minVersion; i <= currentMajorVersion; i++) {
-      arr.push({versionNumber: i, versionUrl: `https://canvas.workday.com/v${i}/`});
+      arr.push({
+        versionNumber: i,
+        versionUrl:
+          i === currentMajorVersion
+            ? 'https://canvas.workday.com/'
+            : `https://canvas.workday.com/v${i}/`,
+      });
     }
     setVersions(arr);
   }, []);
