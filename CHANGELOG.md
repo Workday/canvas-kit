@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.3.3](https://github.com/Workday/canvas-kit/releases/tag/v12.3.3) (2025-01-13)
+
+### Documentation
+
+- docs: Refreshing preview SidePanel storybook examples ([#3056](https://github.com/Workday/canvas-kit/pull/3056)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton)
+
+
 ## [v12.3.2](https://github.com/Workday/canvas-kit/releases/tag/v12.3.2) (2025-01-09)
 
 ### Components
