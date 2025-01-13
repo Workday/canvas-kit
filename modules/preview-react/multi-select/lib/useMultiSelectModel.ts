@@ -66,18 +66,11 @@ export const useMultiSelectModel = createModelHook({
     orientation: 'horizontal',
     onRemove({id}) {
       model.events.select({id});
+      setSelectedItems(cachedSelected.filter(item => item.id !== id));
     },
     shouldVirtualize: false,
     items: model.state.visibility === 'hidden' ? cachedSelected : selectedItems,
   });
-
-  const state = {
-    ...model.state,
-  };
-
-  const events = {
-    ...model.events,
-  };
 
   return {
     selected: {
@@ -94,7 +87,5 @@ export const useMultiSelectModel = createModelHook({
       },
     },
     ...model,
-    state,
-    events,
   };
 });

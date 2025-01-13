@@ -41,7 +41,7 @@ npm install @workday/canvas-kit-react
 
 ```tsx
 import * as React from 'react';
-import {SecondaryButton} from '@workday/canvas-kit-react';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 
 <SecondaryButton>Button Label</SecondaryButton>;
 ```
@@ -61,13 +61,14 @@ The Canvas Kit core team will take a look and discuss it with you.
 ## Contributing
 
 Want to contribute to Canvas Kit React? Please read our
-[contributing guidelines](https://workday.github.io/canvas-kit/?path=/docs/guides-contributing--page) to find out more and how to get
-started.
+[contributing guidelines](https://workday.github.io/canvas-kit/?path=/docs/guides-contributing--docs)
+to find out more and how to get started.
 
 ## Maintaining
 
 If you're a Canvas Kit maintainer, please read our
-[maintaining docs](https://workday.github.io/canvas-kit/?path=/docs/guides-maintaining--page) to learn more about our processes.
+[maintaining docs](https://workday.github.io/canvas-kit/?path=/docs/guides-maintaining--docs) to
+learn more about our processes.
 
 ## Open Development
 
@@ -79,7 +80,7 @@ process. Any and all issues are public and available for discussion.
 
 Canvas Kit follows [semantic versioning](https://semver.org/) and is enforced automatically by
 [conventional commits](https://www.conventionalcommits.org/) (see
-["Commit Message Format"](https://workday.github.io/canvas-kit/?path=/docs/guides-contributing--page#commit-message-format)).
+["Commit Message Format"](https://workday.github.io/canvas-kit/?path=/docs/guides-contributing--docs#commit-message-format)).
 
 Each module is independently versioned using [Lerna](https://github.com/lerna/lerna).
 
@@ -102,8 +103,8 @@ recommend against using it in production until the first stable version has been
 
 ## Developer Documentation
 
-- [Contributing](https://workday.github.io/canvas-kit/?path=/docs/guides-contributing--page)
-- [Code of Conduct](https://workday.github.io/canvas-kit/?path=/docs/guides-contributing--page#code-of-conduct)
+- [Contributing](https://workday.github.io/canvas-kit/?path=/docs/guides-contributing--docs)
+- [Code of Conduct](https://workday.github.io/canvas-kit/?path=/docs/guides-contributing--docs#code-of-conduct)
 - Upgrade Guides:
   - [v4.0 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v4-0--docs)
   - [v5.0 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v5-0--docs)
@@ -115,10 +116,10 @@ recommend against using it in production until the first stable version has been
   - [v11.0 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v11-0--docs)
   - [v12.0 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v12-0--docs)
 - Code Style / Best Practices:
-  - [API & Pattern Guidelines](https://workday.github.io/canvas-kit/?path=/docs/guides-api-pattern-guidelines--page)
-  - [Compound Components](https://workday.github.io/canvas-kit/?path=/docs/guides-compound-components--page)
-  - [Creating Compound Components](https://workday.github.io/canvas-kit/?path=/docs/guides-creating-compound-components--page)
-  - [Testing](https://workday.github.io/canvas-kit/?path=/docs/guides-testing--page)
+  - [API & Pattern Guidelines](https://workday.github.io/canvas-kit/?path=/docs/guides-api-pattern-guidelines--docs)
+  - [Compound Components](https://workday.github.io/canvas-kit/?path=/docs/guides-compound-components--docs)
+  - [Creating Compound Components](https://workday.github.io/canvas-kit/?path=/docs/guides-creating-compound-components--docs)
+  - [Testing](https://workday.github.io/canvas-kit/?path=/docs/guides-testing--docs)
 
 ## License
 

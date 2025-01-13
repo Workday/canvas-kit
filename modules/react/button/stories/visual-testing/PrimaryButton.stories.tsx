@@ -9,6 +9,7 @@ import {customColorTheme} from '../../../../../utils/storybook';
 import {playCircleIcon, relatedActionsVerticalIcon} from '@workday/canvas-system-icons-web';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Container, stateTableColumnProps} from './utils';
+import {customColorThemeWithAction} from '../../../../../utils/storybook/customThemes';
 
 export default {
   title: 'Testing/Buttons/Button/Primary Button',
@@ -97,6 +98,10 @@ export const PrimaryIconButtonStates = {
 
 export const PrimaryButtonThemedStates = {
   render: () => <PrimaryButtonTest theme={{canvas: customColorTheme}} />,
+};
+
+export const PrimaryButtonThemedActionStates = {
+  render: () => <PrimaryButtonTest theme={{canvas: customColorThemeWithAction}} />,
 };
 
 export const PrimaryIconButtonThemedStates = {

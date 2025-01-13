@@ -9,11 +9,42 @@ document to learn about what a compound component is.
 This document will go through building a simplified Disclosure component to help solidify the
 concepts. We will cover:
 
+- [Non Coordinated Components](#non-coordinated-components)
 - [Models](#models)
 - [Container Components](#disclosure-component)
 - [Sub-components](#disclosuretarget-component)
 - [Model Composition](#model-composition)
 - [Behavior hooks](#behavior-hooks)
+
+## Non Coordinated Components
+
+In most cases you'll create compound components that have a model and share information across subcomponents. However, in the case where information doesn't need to be shared, you can create a non
+coordinated component. These components often represent some styled element with no associated role
+or behavior and don't rely on state and events such as a `Card`, `Flex` or `Button` components. Use
+`createComponent` factory function in these scenarios.
+
+### `createComponent`
+
+Use `createComponent` when you want to create a rendered element with _no behavior_. This is useful
+for elements that you want to use for styling purposes like container elements, or subcomponents
+that are simple rendered elements. This utility function will wrap your component in a
+`React.ForwardRef` and allow you to add subcomponents as well.
+
+```tsx
+export const Card = createComponent('div')({
+  displayName: 'Card',
+  subComponents: {
+    Heading: CardHeading, // this is also using createComponent
+  },
+  Component: ({children, ...elemProps}: CardProps, ref, Element) => {
+    return (
+      <Box as={Element} {...elemProps} ref={ref}>
+        {children}
+      </Box>
+    );
+  },
+});
+```
 
 ## Models
 

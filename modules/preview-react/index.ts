@@ -1,4 +1,5 @@
 export * from './color-picker';
+export * from './common';
 export * from './divider';
 export * from './loading-sparkles';
 export * from './menu';
@@ -10,3 +11,4 @@ export * from './side-panel';
 export * from './status-indicator';
 export * from './text-area';
 export * from './text-input';
+export * from './information-highlight';

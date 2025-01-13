@@ -3,6 +3,165 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.3.2](https://github.com/Workday/canvas-kit/releases/tag/v12.3.2) (2025-01-09)
+
+### Components
+
+- fix: Rename index file to correctly export ([#3098](https://github.com/Workday/canvas-kit/pull/3098)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.3.1](https://github.com/Workday/canvas-kit/releases/tag/v12.3.1) (2025-01-09)
+
+### Components
+
+- fix: Update Information Highlight folder name for slash imports ([#3097](https://github.com/Workday/canvas-kit/pull/3097)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.3.0](https://github.com/Workday/canvas-kit/releases/tag/v12.3.0) (2025-01-09)
+
+
+
+
+## [v12.2.2](https://github.com/Workday/canvas-kit/releases/tag/v12.2.2) (2025-01-07)
+
+### Components
+
+- fix: Add overflowWrap on MenuItem ([#3094](https://github.com/Workday/canvas-kit/pull/3094)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.2.1](https://github.com/Workday/canvas-kit/releases/tag/v12.2.1) (2025-01-07)
+
+### Components
+
+- fix: Added CKR Dub and Logo References to preview package ([#3093](https://github.com/Workday/canvas-kit/pull/3093)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
+## [v11.2.1](https://github.com/Workday/canvas-kit/releases/tag/v11.2.1) (2025-01-07)
+
+### Components
+
+- fix: Added CKR Dub and Logo References to preview package ([#3093](https://github.com/Workday/canvas-kit/pull/3093)) ([@josh-bagwell](https://github.com/josh-bagwell))
+## [v12.2.0](https://github.com/Workday/canvas-kit/releases/tag/v12.2.0) (2025-01-07)
+
+### Components
+
+- feat: Update CKR Dub and Logo References ([#3089](https://github.com/Workday/canvas-kit/pull/3089)) ([@josh-bagwell](https://github.com/josh-bagwell))
+  Workday has new logos with updated colors. We've added these to the `preview` package for a smooth transition for consumers. 
+  
+  If you would like to consume these, here is the import:
+  ```tsx
+  import {dubLogoPrimary, dubLogoReversed} from '@workday/canvas-kit-preview-react/common'
+  ```
+
+
+## [v11.2.0](https://github.com/Workday/canvas-kit/releases/tag/v11.2.0) (2025-01-07)
+
+### Components
+
+- feat: Update CKR Dub and Logo References ([#3089](https://github.com/Workday/canvas-kit/pull/3089)) ([@josh-bagwell](https://github.com/josh-bagwell))
+  Workday has new logos with updated colors. We've added these to the `preview` package for a smooth transition for consumers. 
+  
+  If you would like to consume these, here is the import:
+  ```tsx
+  import {dubLogoPrimary, dubLogoReversed} from '@workday/canvas-kit-preview-react/common'
+  ```
+## [v12.1.16](https://github.com/Workday/canvas-kit/releases/tag/v12.1.16) (2024-12-20)
+
+### Components
+
+- fix(side-panel): Filter out invalid DOM prop ([#3080](https://github.com/Workday/canvas-kit/pull/3080)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Dependencies
+
+- fix: Resolve recast dep from jscodeshift to remove extra parens ([#3083](https://github.com/Workday/canvas-kit/pull/3083)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v11.1.26](https://github.com/Workday/canvas-kit/releases/tag/v11.1.26) (2024-12-20)
+
+### Components
+
+- fix(side-panel): Filter out invalid DOM prop ([#3080](https://github.com/Workday/canvas-kit/pull/3080)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v11.1.25](https://github.com/Workday/canvas-kit/releases/tag/v11.1.25) (2024-12-20)
+
+### Dependencies
+
+- fix: Resolve recast dep from jscodeshift to remove extra parens ([#3083](https://github.com/Workday/canvas-kit/pull/3083)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+## [v12.1.15](https://github.com/Workday/canvas-kit/releases/tag/v12.1.15) (2024-12-17)
+
+### Components
+
+- fix: Add pointer events none to Select caret ([#3079](https://github.com/Workday/canvas-kit/pull/3079)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.1.14](https://github.com/Workday/canvas-kit/releases/tag/v12.1.14) (2024-12-17)
+
+### Components
+
+- fix(multi-select): Update selected state when pill is removed ([#3076](https://github.com/Workday/canvas-kit/pull/3076)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v12.1.13](https://github.com/Workday/canvas-kit/releases/tag/v12.1.13) (2024-12-16)
+
+
+
+
+## [v12.1.12](https://github.com/Workday/canvas-kit/releases/tag/v12.1.12) (2024-12-10)
+
+### Documentation
+
+- fix: Fixed Welcome Page ([#3069](https://github.com/Workday/canvas-kit/pull/3069)) ([@josh-bagwell](https://github.com/josh-bagwell))
+- fix: Addressed Versions Table Update ([#3071](https://github.com/Workday/canvas-kit/pull/3071)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
+## [v12.1.11](https://github.com/Workday/canvas-kit/releases/tag/v12.1.11) (2024-12-10)
+
+### Documentation
+
+- fix: Fixes Broken Links from Storybook 7 Upgrade ([#3065](https://github.com/Workday/canvas-kit/pull/3065)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
+## [v12.1.10](https://github.com/Workday/canvas-kit/releases/tag/v12.1.10) (2024-12-09)
+
+### Documentation
+
+- docs: Use slash import in first example ([#3066](https://github.com/Workday/canvas-kit/pull/3066)) ([@vibdev](https://github.com/vibdev))
+
+
+## [v12.1.9](https://github.com/Workday/canvas-kit/releases/tag/v12.1.9) (2024-12-04)
+
+### Documentation
+
+- docs: Add info to create compound component regarding createComponent ([#3057](https://github.com/Workday/canvas-kit/pull/3057)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v12.1.8](https://github.com/Workday/canvas-kit/releases/tag/v12.1.8) (2024-12-02)
+
+### Components
+
+- fix: Measure offsetHeight vertical overflow ([#3061](https://github.com/Workday/canvas-kit/pull/3061)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.1.7](https://github.com/Workday/canvas-kit/releases/tag/v12.1.7) (2024-11-27)
+
+### Test
+
+- test: Resolve Cypress Flaky fixes ([#3034](https://github.com/Workday/canvas-kit/pull/3034)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
+## [v12.1.6](https://github.com/Workday/canvas-kit/releases/tag/v12.1.6) (2024-11-25)
+
+### Components
+
+- fix: Deconstruct typelevel from props and pass to stencil ([#3059](https://github.com/Workday/canvas-kit/pull/3059)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v11.1.24](https://github.com/Workday/canvas-kit/releases/tag/v11.1.24) (2024-11-22)
+
+### Components
+
+- fix: Deconstruct typelevel from props and pass to stencil ([#3059](https://github.com/Workday/canvas-kit/pull/3059)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
 ## [v12.1.5](https://github.com/Workday/canvas-kit/releases/tag/v12.1.5) (2024-11-19)
 
 ### Components

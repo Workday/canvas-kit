@@ -80,7 +80,7 @@ export const SelectInput = createSubcomponent(TextInput)({
           {...elemProps}
           {...mergeStyles(elemProps, selectInputStencil())}
         />
-        <InputGroup.InnerEnd data-part="select-caret-container">
+        <InputGroup.InnerEnd data-part="select-caret-container" {...selectIconsStencil()}>
           <SystemIcon data-part="select-caret-icon" icon={caretDownSmallIcon} />
         </InputGroup.InnerEnd>
       </InputGroup>

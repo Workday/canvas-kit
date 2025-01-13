@@ -9,6 +9,7 @@ import {Tertiary as TertiaryExample} from './examples/Tertiary';
 import {TertiaryInverse as TertiaryInverseExample} from './examples/TertiaryInverse';
 import {Delete as DeleteExample} from './examples/Delete';
 import {CustomStyles as CustomStylesExample} from './examples/CustomStyles';
+import {ThemeOverrides as ThemeOverridesExample} from './examples/ThemeOverrides';
 
 export default {
   title: 'Components/Buttons',
@@ -43,4 +44,8 @@ export const Delete = {
 };
 export const CustomStyles = {
   render: CustomStylesExample,
+};
+
+export const ThemeOverrides = {
+  render: ThemeOverridesExample,
 };

@@ -23,9 +23,9 @@ const statusIndicatorLabelStencil = createStencil({
 
 export const StatusIndicatorLabel = createComponent('span')({
   displayName: 'StatusIndicator.Label',
-  Component: ({children, ...elemProps}: StatusIndicatorLabelProps, ref, Element) => {
+  Component: ({children, typeLevel, ...elemProps}: StatusIndicatorLabelProps, ref, Element) => {
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, statusIndicatorLabelStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, statusIndicatorLabelStencil({typeLevel}))}>
         {children}
       </Element>
     );
