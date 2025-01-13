@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.3.2](https://github.com/Workday/canvas-kit/releases/tag/v12.3.2) (2025-01-09)
+
+### Components
+
+- fix: Rename index file to correctly export ([#3098](https://github.com/Workday/canvas-kit/pull/3098)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.3.1](https://github.com/Workday/canvas-kit/releases/tag/v12.3.1) (2025-01-09)
+
+### Components
+
+- fix: Update Information Highlight folder name for slash imports ([#3097](https://github.com/Workday/canvas-kit/pull/3097)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.3.0](https://github.com/Workday/canvas-kit/releases/tag/v12.3.0) (2025-01-09)
+
+
+
+
 ## [v12.2.2](https://github.com/Workday/canvas-kit/releases/tag/v12.2.2) (2025-01-07)
 
 ### Components
