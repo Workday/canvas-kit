@@ -1,130 +1,168 @@
 import * as React from 'react';
-import {styled, StyledType} from '@workday/canvas-kit-react/common';
-import {colors, space, gradients, type} from '@workday/canvas-kit-react/tokens';
-import {SidePanel} from '@workday/canvas-kit-preview-react/side-panel';
-import {Flex, Box} from '@workday/canvas-kit-react/layout';
-import {BodyText, Subtext} from '@workday/canvas-kit-react/text';
+import {base, system} from '@workday/canvas-tokens-web';
+import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {Heading, Subtext, Text} from '@workday/canvas-kit-react/text';
 import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {birthdayIcon, ribbonIcon} from '@workday/canvas-system-icons-web';
+import {Hyperlink, TertiaryButton} from '@workday/canvas-kit-react/button';
+import {Menu} from '@workday/canvas-kit-react/menu';
+import {birthdayIcon, checkIcon, ribbonIcon} from '@workday/canvas-system-icons-web';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {Tooltip} from '../../../../tooltip';
 
-const StyledPanel = styled(SidePanel.as('nav'))({
-  backgroundColor: colors.soap200,
-  zIndex: 1,
-});
-
-const StyledExpandable = styled(Expandable.Target)({
-  borderRadius: 0,
-  ':hover': {
-    backgroundColor: colors.soap500,
+const data = {
+  bestsellers: {
+    icon: ribbonIcon,
+    title: 'Best Sellers',
+    subtitle: 'Award winning sweet treats',
+    items: ['Mango Coco Sago', 'Matcha Creme Pie', 'Key Lime Cheesecake', 'Tiramisu'],
   },
-});
-
-const StyledLink = styled(Subtext.as('a'))<StyledType>({
-  color: colors.blackPepper300,
-  ':hover': {
-    backgroundColor: colors.soap500,
+  cakes: {
+    icon: birthdayIcon,
+    title: 'Custom Cakes',
+    subtitle: 'To celebrate your life milestones',
+    items: ['Anniversary', 'Birthday', 'Graduation', 'Wedding'],
   },
-});
+};
 
-const cakes = [
-  {value: 'Anniversary', linkValue: '#AnniversaryCakes'},
-  {value: 'Birthday', linkValue: '#BirthdayCakes'},
-  {value: 'Graduation', linkValue: '#GraduationCakes'},
-  {value: 'Wedding', linkValue: 'WeddingCakes'},
-];
+const stylesOverride = {
+  navContainer: createStyles({
+    height: px2rem(800),
+    positio: 'relative',
+    backgroundColor: base.frenchVanilla100,
+  }),
+  accordionContainer: createStyles({
+    flexDirection: 'column',
+    rowGap: system.space.zero,
+    paddingInlineStart: system.space.zero,
+  }),
+  accordionIcon: createStyles({
+    verticalAlign: 'middle',
+    padding: system.space.x1,
+  }),
+  accordionSubText: createStyles({
+    margin: system.space.zero,
+  }),
+  listContainer: createStyles({
+    listStyle: 'none',
+    padding: system.space.x4,
+    paddingTop: system.space.x16,
+    flexDirection: 'column',
+  }),
+  links: createStyles({
+    textDecoration: 'none',
+    padding: system.space.x4,
+  }),
+  linkCheck: createStyles({
+    marginLeft: 'auto',
+  }),
+  flyOut: createStyles({
+    marginTop: '8rem',
+  }),
+};
 
-const bestsellers = [
-  {value: 'Mango Coco Sago', linkValue: '#LemonRhubarbBars'},
-  {value: 'Matcha Creme Pie', linkValue: '#MatchaCremePie'},
-  {value: 'Key Lime Cheesecake', linkValue: '#KeyLimeCheesecake'},
-  {value: 'Tiramisu', linkValue: '#Tiramisu'},
-];
+const Accordion = ({config}) => {
+  const [currentPage, setCurrentPage] = React.useState('');
 
-const gettingStarted = [
-  'Extended Systems',
-  'Canvas Glossary',
-  'Frequently Asked Questions',
-  'Canvas Support',
-];
+  const handleClick = e => {
+    e.preventDefault();
+    setCurrentPage(e.target.textContent);
+  };
+
+  return (
+    <Expandable>
+      <Expandable.Target>
+        <SystemIcon cs={stylesOverride.accordionIcon} icon={config.icon} />
+        <Expandable.Title>
+          {config.title}
+          <Subtext size="medium" cs={stylesOverride.accordionSubText}>
+            {config.subtitle}
+          </Subtext>
+        </Expandable.Title>
+        <Expandable.Icon iconPosition="end" />
+      </Expandable.Target>
+      <Expandable.Content as="ul" cs={stylesOverride.listContainer}>
+        {config.items.map(i => {
+          return (
+            <li key={i}>
+              <Flex
+                as="a"
+                href="#"
+                aria-current={i === currentPage ? 'true' : undefined}
+                className={stylesOverride.links}
+                onClick={handleClick}
+              >
+                {i}
+                {i === currentPage && <SystemIcon icon={checkIcon} cs={stylesOverride.linkCheck} />}
+              </Flex>
+            </li>
+          );
+        })}
+      </Expandable.Content>
+    </Expandable>
+  );
+};
+
+const IconButtonMenu = ({config}) => {
+  return (
+    <Menu>
+      <Tooltip title={config.title} placement="right">
+        <Menu.Target as={TertiaryButton}>
+          <SystemIcon icon={config.icon} />
+        </Menu.Target>
+      </Tooltip>
+      <Menu.Popper placement="right">
+        <Menu.Card cs={stylesOverride.flyOut}>
+          <Menu.List>
+            {config.items.map(i => (
+              <Menu.Item>{i}</Menu.Item>
+            ))}
+          </Menu.List>
+        </Menu.Card>
+      </Menu.Popper>
+    </Menu>
+  );
+};
+
+const CompactView = () => {
+  return (
+    <Flex as="ul" cs={stylesOverride.listContainer}>
+      <Flex.Item as="li">
+        <IconButtonMenu config={data.bestsellers} />
+      </Flex.Item>
+      <Flex.Item as="li">
+        <IconButtonMenu config={data.cakes} />
+      </Flex.Item>
+    </Flex>
+  );
+};
+
+const ExpandedView = () => {
+  return (
+    <Flex as="ul" cs={stylesOverride.accordionContainer}>
+      <Flex.Item as="li">
+        <Accordion config={data.bestsellers} />
+      </Flex.Item>
+      <Flex.Item as="li">
+        <Accordion config={data.cakes} />
+      </Flex.Item>
+    </Flex>
+  );
+};
 
 export const WithNavigation = () => {
+  const {expanded, panelProps, labelProps, controlProps} = useSidePanel();
+
   return (
-    <Flex height={800} position="relative" backgroundColor="frenchVanilla100">
-      <StyledPanel touched={true} variant="alternate">
-        <Flex as="ul" flexDirection="column" rowGap="zero" paddingInlineStart="zero">
-          <Flex.Item as="li" listStyle="none">
-            <Expandable padding="zero">
-              <StyledExpandable paddingTop="m" paddingBottom="xxs" paddingX="m" textAlign="center">
-                <SystemIcon icon={ribbonIcon} paddingRight="s" />
-                <Expandable.Title padding="zero">
-                  <BodyText size="small" fontWeight="bold" color="blackpepper300" marginY="zero">
-                    Bestsellers
-                  </BodyText>
-                  <Subtext size="medium" color="blackpepper300" marginY="zero">
-                    Award winning sweet treats
-                  </Subtext>
-                </Expandable.Title>
-                <Expandable.Icon iconPosition="end" />
-              </StyledExpandable>
-              <Expandable.Content paddingY="zero" paddingX="zero" as="ul">
-                {bestsellers.map(item => {
-                  return (
-                    <li>
-                      <StyledLink
-                        size="large"
-                        display="flex"
-                        textDecoration="none"
-                        paddingLeft="xxl"
-                        paddingTop="xxs"
-                        paddingBottom="zero"
-                        href={item.linkValue}
-                      >
-                        {item.value}
-                      </StyledLink>
-                    </li>
-                  );
-                })}
-              </Expandable.Content>
-            </Expandable>
-          </Flex.Item>
-          <Flex.Item as="li" listStyle="none">
-            <Expandable padding="zero">
-              <StyledExpandable paddingTop="m" paddingBottom="xxs" paddingX="m" textAlign="center">
-                <SystemIcon icon={birthdayIcon} paddingRight="s" />
-                <Expandable.Title padding="zero">
-                  <BodyText size="small" fontWeight="bold" color="blackpepper300" marginY="zero">
-                    Custom Cakes
-                  </BodyText>
-                  <Subtext size="medium" color="blackpepper300" marginY="zero">
-                    To celebrate your life milestones
-                  </Subtext>
-                </Expandable.Title>
-                <Expandable.Icon iconPosition="end" />
-              </StyledExpandable>
-              <Expandable.Content paddingY="zero" paddingX="zero" as="ul">
-                {cakes.map(item => {
-                  return (
-                    <li>
-                      <StyledLink
-                        size="large"
-                        display="flex"
-                        textDecoration="none"
-                        paddingLeft="xxl"
-                        paddingTop="xxs"
-                        paddingBottom="zero"
-                        href={item.linkValue}
-                      >
-                        {item.value}
-                      </StyledLink>
-                    </li>
-                  );
-                })}
-              </Expandable.Content>
-            </Expandable>
-          </Flex.Item>
-        </Flex>
-      </StyledPanel>
+    <Flex cs={stylesOverride.navContainer}>
+      <SidePanel as="nav" {...panelProps}>
+        <Heading size="small" {...labelProps} hidden={!expanded ? true : undefined}>
+          Cake or Death Bakery
+        </Heading>
+        <SidePanel.ToggleButton {...controlProps} />
+        {expanded ? <ExpandedView /> : <CompactView />}
+      </SidePanel>
     </Flex>
   );
 };
