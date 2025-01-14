@@ -37,7 +37,12 @@ export const externalHyperlinkStencil = createStencil({
 export const ExternalHyperlink = createComponent('a')({
   displayName: 'ExternalHyperlink',
   Component: (
-    {children, iconLabel = 'Opens link in new window', ...elemProps}: ExternalHyperlinkProps,
+    {
+      children,
+      iconLabel = 'Opens link in new window',
+      variant,
+      ...elemProps
+    }: ExternalHyperlinkProps,
     ref,
     Element
   ) => (
@@ -45,7 +50,7 @@ export const ExternalHyperlink = createComponent('a')({
       ref={ref}
       target="_blank"
       rel="noreferrer"
-      {...handleCsProp(elemProps, externalHyperlinkStencil())}
+      {...handleCsProp(elemProps, externalHyperlinkStencil({variant}))}
     >
       <span data-part="external-hyperlink-children">{children}</span>
       <SystemIcon
