@@ -14,6 +14,7 @@ export interface ExternalHyperlinkProps extends HyperlinkProps {
    */
   iconLabel?: string;
 }
+const relativeToFontSizeIconSize = '1em';
 
 export const externalHyperlinkStencil = createStencil({
   extends: hyperlinkStencil,
@@ -23,8 +24,10 @@ export const externalHyperlinkStencil = createStencil({
     alignItems: 'center',
     '& [data-part="external-hyperlink-icon"]': {
       [systemIconStencil.vars.color]: 'currentColor',
-      width: calc.subtract(system.space.x4, px2rem(1)),
       minWidth: calc.subtract(system.space.x4, px2rem(1)),
+      // [systemIconStencil.vars.height]: calc.subtract(system.space.x4, px2rem(1)),
+      // [systemIconStencil.vars.width]: calc.subtract(system.space.x4, px2rem(1)),
+      minHeight: calc.subtract(system.space.x4, px2rem(1)),
       marginInlineStart: calc.subtract(system.space.x1, px2rem(2)),
     },
   },
@@ -58,8 +61,8 @@ export const ExternalHyperlink = createComponent('a')({
         role="img"
         aria-label={iconLabel}
         data-part="external-hyperlink-icon"
-        size={system.space.x4}
-        // cs={{'& svg': {minWidth: minIconSize, minHeight: minIconSize}}}
+        size={relativeToFontSizeIconSize}
+        cs={{'& svg': {minWidth: '16px', minHeight: '16px'}}}
       />
     </Element>
   ),
