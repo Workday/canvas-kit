@@ -23,16 +23,14 @@ export const skeletonTextStencil = createStencil({
   },
   base: ({backgroundColor}) => ({
     marginBottom: system.space.x6,
-    '& [data-part="skeleton-text-lines"], & [data-part="skeleton-text-single-or-last-line"]': {
+    '& [data-part="skeleton-text-lines"]': {
       backgroundColor: cssVar(backgroundColor, system.color.bg.alt.strong),
       height: px2rem(21),
       marginBlockEnd: system.space.x2,
       borderRadius: system.shape.half,
-    },
-    '& [data-part="skeleton-text-lines"]': {
       width: '100%',
     },
-    '& [data-part="skeleton-text-single-or-last-line"]': {
+    '& [data-part="skeleton-text-lines"]:last-child': {
       width: '60%',
     },
   }),
@@ -53,14 +51,7 @@ export const SkeletonText = createComponent('div')({
         )}
       >
         {lines.map((_value, index) => (
-          <div
-            data-part={
-              index < lineCount - 1 || lineCount === 1
-                ? 'skeleton-text-lines'
-                : 'skeleton-text-single-or-last-line'
-            }
-            key={index}
-          ></div>
+          <div data-part={'skeleton-text-lines'} key={index}></div>
         ))}
       </Element>
     );

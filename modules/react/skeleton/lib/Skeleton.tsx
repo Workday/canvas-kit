@@ -26,7 +26,7 @@ const fade = keyframes({
   to: {opacity: 1},
 });
 
-const skeletonStencil = createStencil({
+export const skeletonStencil = createStencil({
   base: () => ({
     animation: `${fade} 0.8s linear infinite alternate`,
     position: 'relative',
