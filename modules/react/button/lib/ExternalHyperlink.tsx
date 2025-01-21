@@ -42,12 +42,7 @@ export const externalHyperlinkStencil = createStencil({
 export const ExternalHyperlink = createComponent('a')({
   displayName: 'ExternalHyperlink',
   Component: (
-    {
-      children,
-      iconLabel = 'Opens link in new window',
-      variant,
-      ...elemProps
-    }: ExternalHyperlinkProps,
+    {children, iconLabel, variant, ...elemProps}: ExternalHyperlinkProps,
     ref,
     Element
   ) => (
