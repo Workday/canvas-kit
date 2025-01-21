@@ -24,9 +24,13 @@ export const externalHyperlinkStencil = createStencil({
     alignItems: 'center',
     '& [data-part="external-hyperlink-icon"]': {
       [systemIconStencil.vars.color]: 'currentColor',
-      [systemIconStencil.vars.height]: calc.subtract(system.space.x4, px2rem(1)),
-      [systemIconStencil.vars.width]: calc.subtract(system.space.x4, px2rem(1)),
+      width: calc.subtract(relativeToFontSizeIconSize, px2rem(1)),
+      minWidth: calc.subtract(system.space.x4, px2rem(1)),
       marginInlineStart: calc.subtract(system.space.x1, px2rem(2)),
+      '& > svg': {
+        minWidth: system.space.x4,
+        minHeight: system.space.x4,
+      },
     },
   },
 });
