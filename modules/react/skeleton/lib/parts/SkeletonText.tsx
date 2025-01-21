@@ -26,7 +26,7 @@ export const skeletonTextStencil = createStencil({
     '& [data-part="skeleton-text-lines"]': {
       backgroundColor: cssVar(backgroundColor, system.color.bg.alt.strong),
       height: px2rem(21),
-      marginBlockEnd: system.space.x2,
+      marginBlockEnd: system.space.x3,
       borderRadius: system.shape.half,
       width: '100%',
     },

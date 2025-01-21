@@ -27,7 +27,7 @@ export interface SkeletonShapeProps extends CSProps {
   backgroundColor?: string;
 }
 
-const skeletonShapeStencil = createStencil({
+export const skeletonShapeStencil = createStencil({
   vars: {
     width: '',
     height: '',
