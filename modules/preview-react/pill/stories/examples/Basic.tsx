@@ -14,7 +14,7 @@ export const Basic = () => {
           <Pill.Icon aria-label="Add user" />
           <Pill.Label>Regina Skeltor</Pill.Label>
         </Pill>
-        <Pill disabled maxWidth={60}>
+        <Pill disabled>
           <Pill.Icon aria-label="Add user" />
           <Pill.Label>Regina Skeltor</Pill.Label>
         </Pill>

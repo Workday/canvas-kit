@@ -12,7 +12,7 @@ export const WithCount = () => {
           Shoes
           <Pill.Count>30</Pill.Count>
         </Pill>
-        <Pill onClick={() => setText('The second pill is clicked!')} disabled>
+        <Pill disabled>
           Shoes
           <Pill.Count>30</Pill.Count>
         </Pill>

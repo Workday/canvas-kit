@@ -15,7 +15,7 @@ export const WithAvatar = () => {
           <Pill.Avatar url={testAvatar} />
           Regina Skeltor
         </Pill>
-        <Pill onClick={() => setText('The second pill is clicked!')} disabled maxWidth={50}>
+        <Pill disabled maxWidth={50}>
           <Pill.Avatar url={testAvatar} />
           Regina Skeltor
         </Pill>
