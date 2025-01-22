@@ -13,16 +13,22 @@ export const WithRemovable = () => {
       <Flex gap="xxs">
         <Pill variant="removable">
           Pink Shirts
-          <Pill.IconButton onClick={() => setText('The first pill is clicked!')} />
+          <Pill.IconButton
+            aria-label="Remove"
+            onClick={() => setText('The first pill is clicked!')}
+          />
         </Pill>
         <Pill variant="removable">
           <Pill.Avatar url={testAvatar} />
           Carolyn Grimaldi
-          <Pill.IconButton onClick={() => setText('The second pill is clicked!')} />
+          <Pill.IconButton
+            aria-label="Remove"
+            onClick={() => setText('The second pill is clicked!')}
+          />
         </Pill>
         <Pill variant="removable" disabled>
           <Pill.Label>This is a category that should not exist because it is too long</Pill.Label>
-          <Pill.IconButton />
+          <Pill.IconButton aria-label="Remove" />
         </Pill>
       </Flex>
       <BodyText size="medium">{text}</BodyText>

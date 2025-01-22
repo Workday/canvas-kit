@@ -1,10 +1,9 @@
 import React from 'react';
 
 import {BaseButton, buttonStencil} from '@workday/canvas-kit-react/button';
-import {createContainer, focusRing, styled, StyledType} from '@workday/canvas-kit-react/common';
-import {BoxProps, boxStyleFn, Flex} from '@workday/canvas-kit-react/layout';
-import {borderRadius, colors, space, type} from '@workday/canvas-kit-react/tokens';
-import {handleCsProp, CSProps, px2rem} from '@workday/canvas-kit-styling';
+import {createContainer, focusRing} from '@workday/canvas-kit-react/common';
+import {Box, BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {px2rem, createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 
 import {usePillModel} from './usePillModel';
 
@@ -14,6 +13,7 @@ import {PillCount} from './PillCount';
 import {PillAvatar} from './PillAvatar';
 import {PillLabel} from './PillLabel';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {base, system} from '@workday/canvas-tokens-web';
 
 export interface PillProps extends BoxProps {
   /**
@@ -21,154 +21,155 @@ export interface PillProps extends BoxProps {
    * @default 'default'
    */
   variant?: 'default' | 'readOnly' | 'removable';
+  /**
+   * Determines the max width of the pill. If the pill text is longer than the max width,
+   * text will be truncated and a tooltip will show the rest of the content when hovered over
+   */
+  maxWidth?: string | number;
 }
 
-const StyledBasePill = styled(BaseButton)<StyledType & PillProps>(
-  {
+export const pillStencil = createStencil({
+  vars: {
+    maxWidth: '',
+  },
+  extends: buttonStencil,
+  base: ({maxWidth}) => ({
     display: 'inline-flex',
     alignItems: 'center',
-    borderRadius: borderRadius.m,
+    borderRadius: system.shape.x1,
     flexShrink: 0,
-    ...type.levels.subtext.large,
-    color: colors.blackPepper400,
+    ...system.type.subtext.large,
+    color: system.color.text.strong,
     boxShadow: 'none',
     outline: 'none',
-    fontWeight: type.properties.fontWeights.medium,
+    fontWeight: system.fontWeight.medium,
     WebkitFontSmoothing: 'antialiased',
     MozOsxFontSmoothing: 'grayscale',
     width: 'fit-content',
-    padding: `2px ${space.xxs}`,
-    height: space.m,
+    padding: `${px2rem(2)} ${cssVar(system.space.x2)}`,
+    height: system.space.x6,
     position: 'relative',
-    'span[data-count="ck-pill-count"]': {
-      borderTop: `${px2rem(1)} solid transparent`,
-      borderBottom: `${px2rem(1)} solid transparent`,
-      borderRight: `${px2rem(1)} solid transparent`,
+    [buttonStencil.vars.background]: system.color.bg.alt.soft,
+    [buttonStencil.vars.border]: system.color.border.input.default,
+    [buttonStencil.vars.label]: system.color.text.strong,
+    [systemIconStencil.vars.color]: system.color.icon.default,
+    '& [data-part="pill-flex-container"]': {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: system.space.x1,
     },
-    [buttonStencil.vars.background]: colors.soap300,
-    [buttonStencil.vars.border]: colors.licorice200,
-    [buttonStencil.vars.label]: colors.blackPepper400,
-    [systemIconStencil.vars.color]: colors.licorice200,
-    // This style ensures the removable button icon changes when you hover over the pill and not just the removable PillButton
-    button: {
-      [systemIconStencil.vars.color]: colors.licorice200,
+    '& [data-part="pill-flex-item"]': {
+      display: 'inline-flex',
     },
+
+    '& [data-part="pill-label"]': {
+      maxWidth: maxWidth,
+    },
+
     '&:focus-visible, &.focus': {
-      [buttonStencil.vars.background]: colors.soap300,
-      [buttonStencil.vars.border]: colors.blueberry400,
-      [buttonStencil.vars.label]: colors.blackPepper400,
-      [systemIconStencil.vars.color]: colors.licorice500,
-      button: {
-        [systemIconStencil.vars.color]: colors.licorice500,
+      [buttonStencil.vars.background]: system.color.bg.alt.soft,
+      [buttonStencil.vars.border]: system.color.border.primary.default,
+      [buttonStencil.vars.label]: system.color.text.strong,
+      [systemIconStencil.vars.color]: system.color.icon.strong,
+
+      '& [data-part="pill-count"]': {
+        borderColor: system.color.border.primary.default,
       },
-      'span[data-count="ck-pill-count"]': {
-        borderColor: colors.blueberry400,
-      },
+      ...focusRing({
+        width: 0,
+        inset: 'inner',
+        innerColor: system.color.border.primary.default,
+        outerColor: system.color.border.primary.default,
+        separation: 1,
+      }),
     },
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: colors.soap400,
-      [buttonStencil.vars.border]: colors.licorice400,
-      [buttonStencil.vars.label]: colors.blackPepper400,
-      [systemIconStencil.vars.color]: colors.licorice500,
-      button: {
-        [systemIconStencil.vars.color]: colors.licorice500,
+      [buttonStencil.vars.background]: system.color.bg.alt.strong,
+      [buttonStencil.vars.border]: system.color.border.input.strong,
+      [buttonStencil.vars.label]: system.color.text.strong,
+      [systemIconStencil.vars.color]: system.color.icon.strong,
+      '& [data-part="pill-icon-button"]': {
+        [systemIconStencil.vars.color]: system.color.icon.strong,
       },
     },
     '&:active, &.active': {
-      [buttonStencil.vars.background]: colors.soap500,
-      [buttonStencil.vars.border]: colors.licorice500,
-      [buttonStencil.vars.label]: colors.blackPepper400,
-      [systemIconStencil.vars.color]: colors.licorice500,
-      button: {
-        [buttonStencil.vars.background]: colors.soap500,
-        [systemIconStencil.vars.color]: colors.licorice500,
+      [buttonStencil.vars.background]: system.color.bg.alt.stronger,
+      [buttonStencil.vars.border]: system.color.border.input.strong,
+      [buttonStencil.vars.label]: system.color.text.strong,
+      [systemIconStencil.vars.color]: system.color.icon.strong,
+      '& [data-part="pill-icon-button"]': {
+        [buttonStencil.vars.background]: system.color.bg.alt.stronger,
+        [systemIconStencil.vars.color]: system.color.icon.strong,
       },
-      'span[data-count="ck-pill-count"]': {
-        backgroundColor: colors.soap600,
+      '& [data-part="pill-count"]': {
+        backgroundColor: base.soap600,
         borderColor: 'transparent',
       },
     },
     '&:disabled, &.disabled': {
-      [buttonStencil.vars.background]: colors.soap100,
-      [buttonStencil.vars.border]: colors.licorice100,
-      [buttonStencil.vars.label]: colors.licorice100,
+      [buttonStencil.vars.background]: system.color.bg.alt.softer,
+      [buttonStencil.vars.border]: system.color.border.input.disabled,
+      [buttonStencil.vars.label]: system.color.text.disabled,
       [buttonStencil.vars.opacity]: '1',
-      [systemIconStencil.vars.color]: colors.licorice100,
-      button: {
-        [systemIconStencil.vars.color]: colors.licorice100,
+      [systemIconStencil.vars.color]: system.color.icon.soft,
+      '& [data-part="pill-count"]': {
+        backgroundColor: system.color.bg.alt.default,
+        borderColor: 'transparent',
+      },
+      '& [data-part="avatar-image"]': {
+        opacity: '.7',
       },
     },
-  },
-
-  ({variant}) => ({
-    '&:focus-visible, &.focus': {
-      borderColor: variant === 'removable' ? undefined : colors.blueberry400,
-      ...focusRing({
-        width: 0,
-        inset: 'inner',
-        innerColor: colors.blueberry400,
-        outerColor: colors.blueberry400,
-        separation: 1,
-      }),
-    },
   }),
-  boxStyleFn
-);
-
-const StyledRemoveablePill = styled(StyledBasePill)<StyledType & CSProps>({
-  [buttonStencil.vars.background]: colors.soap300,
-  [buttonStencil.vars.border]: colors.licorice200,
-  [buttonStencil.vars.label]: colors.blackPepper400,
-  [systemIconStencil.vars.backgroundColor]: colors.soap100,
-
-  '&:focus-visible, &.focus': {
-    [buttonStencil.vars.background]: colors.soap300,
-    [buttonStencil.vars.border]: colors.licorice200,
-    [buttonStencil.vars.label]: colors.blackPepper400,
-    [systemIconStencil.vars.backgroundColor]: colors.soap300,
-    boxShadow: 'none',
-  },
-
-  '&:hover, &.hover': {
-    [buttonStencil.vars.background]: colors.soap300,
-    [buttonStencil.vars.border]: colors.licorice200,
-    [buttonStencil.vars.label]: colors.blackPepper400,
-    [systemIconStencil.vars.backgroundColor]: colors.soap300,
-  },
-
-  '&:active, &.active': {
-    [buttonStencil.vars.background]: colors.soap500,
-    [buttonStencil.vars.border]: colors.licorice500,
-    [buttonStencil.vars.label]: colors.blackPepper400,
-    [systemIconStencil.vars.backgroundColor]: colors.soap500,
-  },
-
-  '&:disabled, &.disabled': {
-    [buttonStencil.vars.background]: colors.soap100,
-    [buttonStencil.vars.label]: colors.licorice100,
-    [buttonStencil.vars.border]: colors.licorice100,
-    [systemIconStencil.vars.backgroundColor]: colors.soap100,
-  },
-  cursor: 'default',
-  overflow: 'revert', // override BaseButton overflow styles so the click target exists outside the pill for removable
-  position: 'relative',
 });
 
-const StyledReadOnlyPill = styled(StyledRemoveablePill)<StyledType>({
-  [buttonStencil.vars.background]: 'transparent',
-  '&:hover, &.hover': {
-    [buttonStencil.vars.background]: 'transparent',
+export const removeablePillStencil = createStencil({
+  extends: pillStencil,
+  base: {
+    '&:focus-visible, &.focus': {
+      [buttonStencil.vars.background]: system.color.bg.alt.soft,
+      [buttonStencil.vars.border]: system.color.border.input.default,
+      [buttonStencil.vars.label]: system.color.text.strong,
+      boxShadow: 'none',
+    },
+    '&:hover, &.hover': {
+      [buttonStencil.vars.background]: system.color.bg.alt.soft,
+    },
+    '&:active, &.active': {
+      [buttonStencil.vars.background]: system.color.bg.alt.stronger,
+    },
+    '&:disabled, &.disabled': {
+      [buttonStencil.vars.background]: system.color.bg.alt.softer,
+      '& [data-part="pill-icon-button"]': {
+        [buttonStencil.vars.background]: system.color.bg.alt.softer,
+        [systemIconStencil.vars.color]: system.color.icon.soft,
+      },
+    },
+    cursor: 'default',
+    overflow: 'revert', // override BaseButton overflow styles so the click target exists outside the pill for removable
+    position: 'relative',
   },
-  '&:focus-visible, &.focus': {
+});
+
+export const readyOnlyPillStencil = createStencil({
+  extends: pillStencil,
+  base: {
+    border: `${px2rem(1)} solid ${cssVar(system.color.border.input.default)}`,
+    cursor: 'default',
     [buttonStencil.vars.background]: 'transparent',
+    '&:hover, &.hover': {
+      [buttonStencil.vars.background]: 'transparent',
+    },
+    '&:focus-visible, &.focus': {
+      [buttonStencil.vars.background]: 'transparent',
+    },
+    '&:active, &.active': {
+      [buttonStencil.vars.background]: 'transparent',
+    },
+    '&:disabled, &.disabled': {
+      [buttonStencil.vars.background]: 'transparent',
+    },
   },
-  '&:active, &.active': {
-    [buttonStencil.vars.background]: 'transparent',
-  },
-  '&:disabled, &.disabled': {
-    [buttonStencil.vars.background]: 'transparent',
-  },
-  border: `${px2rem(1)} solid ${colors.licorice200}`,
 });
 
 /**
@@ -199,7 +200,7 @@ const StyledReadOnlyPill = styled(StyledRemoveablePill)<StyledType>({
  * ```tsx
  * <Pill variant="removable">
  *   <Pill.Avatar /> Regina Skeltor
- *   <Pill.IconButton onClick={() => console.log('clicked')} />
+ *   <Pill.IconButton aria-label='Remove user' onClick={() => console.log('clicked')} />
  * </Pill>
  * ```
  *
@@ -210,7 +211,7 @@ const StyledReadOnlyPill = styled(StyledRemoveablePill)<StyledType>({
  * ```tsx
  * <Pill variant="removable">
  *   Shoes
- *   <Pill.IconButton onClick={() => console.log('handle remove')} />
+ *   <Pill.IconButton aria-label='Remove user' onClick={() => console.log('handle remove')} />
  * </Pill>
  * ```
  */
@@ -225,7 +226,7 @@ export const Pill = createContainer('button')({
      * <Pill variant="removable">
      *   <Pill.Avatar url={avatarUrl} />
      *   Regina Skeltor
-     *   <Pill.IconButton onClick={() => console.log('handle remove')} />
+     *   <Pill.IconButton aria-label='Remove user' onClick={() => console.log('handle remove')} />
      * </Pill>
      * ```
      */
@@ -262,7 +263,7 @@ export const Pill = createContainer('button')({
      * ```tsx
      * <Pill variant="removable">
      *   Pink Shirts
-     *   <Pill.IconButton onClick={() => console.warn('clicked')} />
+     *   <Pill.IconButton aria-label='Remove item' onClick={() => console.warn('clicked')} />
      * </Pill>
      * ```
      */
@@ -279,51 +280,66 @@ export const Pill = createContainer('button')({
      */
     Label: PillLabel,
   },
-})<PillProps>(({variant = 'default', maxWidth, ...elemProps}, Element, model) => {
+})<PillProps>(({variant = 'default', maxWidth = 200, ...elemProps}, Element, model) => {
+  const maxWidthCSSValue = typeof maxWidth === 'number' ? px2rem(maxWidth) : maxWidth;
   return (
     <>
       {variant === 'readOnly' && (
-        <StyledReadOnlyPill
+        <Box
           as={Element !== 'button' ? Element : 'span'}
           id={model.state.id}
-          maxWidth={model.state.maxWidth}
-          {...elemProps}
+          maxWidth={maxWidth}
+          {...mergeStyles(
+            elemProps,
+            readyOnlyPillStencil({
+              maxWidth: maxWidthCSSValue,
+            })
+          )}
         >
           <PillLabel>{elemProps.children}</PillLabel>
-        </StyledReadOnlyPill>
+        </Box>
       )}
       {variant === 'default' && (
-        <StyledBasePill as={Element} {...elemProps} disabled={model.state.disabled}>
-          <Flex gap="xxxs" display="inline-flex" alignItems="center">
+        <BaseButton
+          as={Element}
+          {...mergeStyles(elemProps, [
+            model.state.disabled ? 'disabled' : undefined,
+            pillStencil({
+              maxWidth: maxWidthCSSValue,
+            }),
+          ])}
+        >
+          <div data-part="pill-flex-container">
+            {React.Children.map(elemProps.children, (child, index) => {
+              if (typeof child === 'string') {
+                return <PillLabel key={index}>{child}</PillLabel>;
+              }
+              return <div data-part="pill-flex-item">{child}</div>;
+            })}
+          </div>
+        </BaseButton>
+      )}
+      {variant === 'removable' && (
+        <Box
+          as={Element !== 'button' ? Element : 'span'}
+          {...mergeStyles(elemProps, [
+            model.state.disabled ? 'disabled' : undefined,
+            removeablePillStencil({maxWidth: maxWidthCSSValue}),
+          ])}
+        >
+          <div data-part="pill-flex-container">
             {React.Children.map(elemProps.children, (child, index) => {
               if (typeof child === 'string') {
                 return <PillLabel key={index}>{child}</PillLabel>;
               }
               return (
-                <Flex.Item key={index} display="inline-flex">
+                <div data-part="pill-flex-item" key={index}>
                   {child}
-                </Flex.Item>
+                </div>
               );
             })}
-          </Flex>
-        </StyledBasePill>
-      )}
-      {variant === 'removable' && (
-        <StyledRemoveablePill
-          as={Element !== 'button' ? Element : 'span'}
-          variant={variant}
-          type={undefined}
-          {...handleCsProp(elemProps, [model.state.disabled ? 'disabled' : undefined])}
-        >
-          <Flex gap="xxxs" display="inline-flex" alignItems="center" justifyContent="center">
-            {React.Children.map(elemProps.children, (child, index) => {
-              if (typeof child === 'string') {
-                return <PillLabel key={index}>{child}</PillLabel>;
-              }
-              return <Flex.Item key={index}>{child}</Flex.Item>;
-            })}
-          </Flex>
-        </StyledRemoveablePill>
+          </div>
+        </Box>
       )}
     </>
   );

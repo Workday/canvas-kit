@@ -26,7 +26,10 @@ export const WithList = () => {
         return (
           <Pill key={index} variant="removable" marginBottom="xxs" marginInlineEnd="xxs">
             <Pill.Label>{cat}</Pill.Label>
-            <Pill.IconButton onClick={() => setItems(items.filter(i => i !== cat))} />
+            <Pill.IconButton
+              aria-label="Remove"
+              onClick={() => setItems(items.filter(i => i !== cat))}
+            />
           </Pill>
         );
       })}

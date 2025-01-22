@@ -1,13 +1,16 @@
 import React from 'react';
 
-import {focusRing, styled, StyledType, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {focusRing, createSubcomponent} from '@workday/canvas-kit-react/common';
 
-import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
+import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {usePillModel} from './usePillModel';
 import {xSmallIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {colors, space} from '@workday/canvas-kit-react/tokens';
+import {space} from '@workday/canvas-kit-react/tokens';
 import {BaseButton, buttonStencil} from '@workday/canvas-kit-react/button';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 export interface PillIconButtonProps extends Omit<SystemIconProps, 'icon'> {
   /**
@@ -22,49 +25,43 @@ export interface PillIconButtonProps extends Omit<SystemIconProps, 'icon'> {
   'aria-label'?: string;
 }
 
-const StyledIconButton = styled(BaseButton)<StyledType & PillIconButtonProps>({
-  marginInlineEnd: '-7px', // visually pull in the pill to the right size
-  marginInlineStart: `-2px`, // visually create space between label and the button
-  overflow: 'visible',
-  [buttonStencil.vars.background]: colors.soap300,
-  [buttonStencil.vars.border]: 'transparent',
-  [buttonStencil.vars.label]: colors.blackPepper400,
-  '::after': {
-    content: '""',
-    height: space.l,
-    width: space.l,
-    position: 'absolute',
-    left: '-7px',
-    bottom: '-7px',
-    margin: 0,
-    pointerEvents: 'all',
-  },
+const pillIconButtonStencil = createStencil({
+  extends: buttonStencil,
+  base: {
+    marginInlineEnd: '-7px', // visually pull in the pill to the right size
+    marginInlineStart: `-2px`, // visually create space between label and the button
+    borderRadius: system.shape.half,
+    height: 20,
+    width: 20,
+    padding: 0,
+    overflow: 'visible',
+    position: 'relative',
+    borderColor: 'transparent',
+    [buttonStencil.vars.background]: system.color.bg.alt.soft,
+    [systemIconStencil.vars.color]: system.color.icon.default,
+    '::after': {
+      content: '""',
+      height: space.l,
+      width: space.l,
+      position: 'absolute',
+      left: '-7px',
+      bottom: '-7px',
+      margin: 0,
+      pointerEvents: 'all',
+    },
 
-  '&:focus-visible, &.focus': {
-    ...focusRing({
-      innerColor: 'transparent',
-    }),
-    [buttonStencil.vars.background]: colors.soap300,
-    [buttonStencil.vars.border]: 'transparent',
-    [buttonStencil.vars.label]: colors.blackPepper400,
-  },
-
-  '&:hover, &.hover': {
-    [buttonStencil.vars.background]: colors.soap300,
-    [buttonStencil.vars.border]: 'transparent',
-    [buttonStencil.vars.label]: colors.blackPepper400,
-  },
-
-  '&:active, &.active': {
-    [buttonStencil.vars.background]: colors.soap500,
-    [buttonStencil.vars.border]: 'transparent',
-    [buttonStencil.vars.label]: colors.blackPepper400,
-  },
-
-  '&:disabled, &.disabled': {
-    [buttonStencil.vars.background]: colors.soap100,
-    [buttonStencil.vars.label]: colors.licorice100,
-    [buttonStencil.vars.border]: 'transparent',
+    '&:focus-visible, &.focus': {
+      borderColor: 'transparent',
+      ...focusRing({
+        innerColor: 'transparent',
+      }),
+    },
+    '&:hover, &.hover': {
+      border: 'transparent',
+    },
+    '&:disabled, &.disabled': {
+      borderColor: 'transparent',
+    },
   },
 });
 
@@ -72,31 +69,27 @@ export const PillIconButton = createSubcomponent('button')({
   modelHook: usePillModel,
 })<PillIconButtonProps>(
   (
-    {size, icon = xSmallIcon, maxWidth, children, 'aria-label': ariaLabel = 'remove', ...elemProps},
+    {size, icon = xSmallIcon, maxWidth, children, 'aria-label': ariaLabel = '', ...elemProps},
     Element,
     model
   ) => {
     return (
-      <StyledIconButton
-        borderRadius="s"
-        height={20}
-        width={20}
-        padding="zero"
+      <BaseButton
+        data-part="pill-icon-button"
+        as={Element}
         disabled={model.state.disabled}
         aria-labelledby={`removable-${model.state.id} label-${model.state.id}`}
-        as={Element}
-        position="relative"
-        {...elemProps}
+        {...mergeStyles(elemProps, pillIconButtonStencil())}
       >
         <SystemIcon
           aria-label={ariaLabel}
           id={`removable-${model.state.id}`}
           icon={icon}
-          size={space.m}
+          size={system.space.x6}
           aria-hidden // This works for Chrome but not needed in Safari
           role="img"
         />
-      </StyledIconButton>
+      </BaseButton>
     );
   }
 );

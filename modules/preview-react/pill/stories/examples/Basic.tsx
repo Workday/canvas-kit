@@ -11,11 +11,11 @@ export const Basic = () => {
     <Box>
       <Flex gap="xxs">
         <Pill onClick={() => setText('The first pill is clicked!')}>
-          <Pill.Icon />
+          <Pill.Icon aria-label="Add user" />
           <Pill.Label>Regina Skeltor</Pill.Label>
         </Pill>
-        <Pill onClick={() => setText('The second pill is clicked!')} disabled>
-          <Pill.Icon />
+        <Pill disabled maxWidth={60}>
+          <Pill.Icon aria-label="Add user" />
           <Pill.Label>Regina Skeltor</Pill.Label>
         </Pill>
       </Flex>

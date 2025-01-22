@@ -1,36 +1,38 @@
 import React from 'react';
 
-import {createSubcomponent, styled, StyledType} from '@workday/canvas-kit-react/common';
-import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
+import {createSubcomponent} from '@workday/canvas-kit-react/common';
+import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {OverflowTooltip, OverflowTooltipProps} from '@workday/canvas-kit-react/tooltip';
 
 import {usePillModel} from './usePillModel';
-import {colors} from '@workday/canvas-kit-react/tokens';
+
+import {createStencil} from '@workday/canvas-kit-styling';
 
 export interface PillLabelProps extends BoxProps {
   tooltipProps?: Omit<OverflowTooltipProps, 'children'>;
 }
-const StyledLabelContainer = styled(Box.as('span'))<StyledType>({
-  whiteSpace: 'nowrap',
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
-  display: 'block',
+
+export const pillLabelStencil = createStencil({
+  base: {
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    display: 'block',
+  },
 });
 
 export const PillLabel = createSubcomponent('span')({
   modelHook: usePillModel,
-})<PillLabelProps>(({tooltipProps, ...elemProps}, Element, model) => {
+})<PillLabelProps>(({tooltipProps, children, ...elemProps}, Element, model) => {
   return (
     <OverflowTooltip {...tooltipProps}>
-      <StyledLabelContainer
-        color={model.state.disabled ? colors.licorice100 : 'inherit'}
-        maxWidth={model.state.maxWidth}
-        as={Element}
+      <Element
+        data-part="pill-label"
         id={`label-${model.state.id}`}
-        {...elemProps}
+        {...mergeStyles(elemProps, pillLabelStencil())}
       >
-        {elemProps.children}
-      </StyledLabelContainer>
+        {children}
+      </Element>
     </OverflowTooltip>
   );
 });
