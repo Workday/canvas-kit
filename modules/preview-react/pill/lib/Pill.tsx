@@ -73,6 +73,7 @@ export const pillStencil = createStencil({
       [buttonStencil.vars.border]: system.color.border.primary.default,
       [buttonStencil.vars.label]: system.color.text.strong,
       [systemIconStencil.vars.color]: system.color.icon.strong,
+      borderColor: system.color.border.primary.default,
 
       '& [data-part="pill-count"]': {
         borderColor: system.color.border.primary.default,
