@@ -65,7 +65,9 @@ export const pillStencil = createStencil({
     '& [data-part="pill-label"]': {
       maxWidth: maxWidth,
     },
-
+    '& [data-part="avatar-image"]': {
+      cursor: 'pointer',
+    },
     '&:focus-visible, &.focus': {
       [buttonStencil.vars.background]: system.color.bg.alt.soft,
       [buttonStencil.vars.border]: system.color.border.primary.default,
