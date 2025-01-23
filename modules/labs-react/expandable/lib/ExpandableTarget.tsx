@@ -1,19 +1,11 @@
 import React from 'react';
 
-import {
-  createSubcomponent,
-  ExtractProps,
-  focusRing,
-  hideMouseFocus,
-  styled,
-  StyledType,
-} from '@workday/canvas-kit-react/common';
+import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {BaseButton, buttonStencil} from '@workday/canvas-kit-react/button';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Heading} from '@workday/canvas-kit-react/text';
-import {colors} from '@workday/canvas-kit-react/tokens';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
-
 import {useExpandableTarget} from './hooks/useExpandableTarget';
 import {useExpandableModel} from './hooks/useExpandableModel';
 
@@ -33,29 +25,19 @@ export interface ExpandableTargetProps extends ExtractProps<typeof Flex, never> 
 }
 
 export const expandableTargetStencil = createStencil({
+  extends: buttonStencil,
   base: {
-    cursor: 'pointer',
-    background: 'none',
-    border: 'none',
-    borderRadius: system.shape.x1,
+    [buttonStencil.vars.background]: system.color.bg.transparent,
+    [buttonStencil.vars.border]: system.color.bg.transparent,
+    [buttonStencil.vars.borderRadius]: system.shape.x1,
+    alignItems: 'flex-start',
     flexDirection: 'row',
+    justifyContent: 'start',
     padding: system.space.x2,
     width: '100%',
-    '&:focus': {
-      ...focusRing(),
-    },
     '&:hover': {
-      background: base.soap300,
+      [buttonStencil.vars.background]: system.color.bg.alt.default,
     },
-    // TODO: this isn't working, can't figure out why
-    // ...hideMouseFocus,
-  },
-});
-
-// QQ: can I merge this stencil into the one up above somehow...?
-export const expandableHeadingStencil = createStencil({
-  base: {
-    margin: 0,
   },
 });
 
@@ -64,16 +46,13 @@ export const ExpandableTarget = createSubcomponent('button')({
   elemPropsHook: useExpandableTarget,
 })<ExpandableTargetProps>(({children, headingLevel, ...elementProps}, Element) => {
   const button = (
-    <Flex as={Element} {...mergeStyles(elementProps, expandableTargetStencil())}>
+    <BaseButton as={Element} {...mergeStyles(elementProps, expandableTargetStencil())}>
       {children}
-    </Flex>
+    </BaseButton>
   );
 
-  // should I be using the CK Heading component...?
-  // I think it messing up font-size from 14 to 24 ...?
-  // maybe this doesn't matter - button styles override the heading!
-  return !!headingLevel ? (
-    <Heading size="small" as={headingLevel} cs={expandableHeadingStencil()}>
+  return headingLevel ? (
+    <Heading size="small" as={headingLevel} margin="0">
       {button}
     </Heading>
   ) : (
