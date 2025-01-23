@@ -18,6 +18,8 @@ any questions.
 
 - [Codemod](#codemod)
   - [Instructions](#instructions)
+- [Component Updates](#component-updates)
+  - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
 - [Troubleshooting](#troubleshooting)
 - [Glossary](#glossary)
   - [Main](#main)
@@ -85,6 +87,17 @@ yarn remove @workday/canvas-kit-codemod
 > after executing the codemod, as its resulting formatting (spacing, quotes, etc.) may not match
 > your project conventions.
 
+
+### Styling API and CSS Tokens
+
+Some components have been refactored to use our new
+[Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
+[styling API](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
+The React interface **has not changed**, but CSS variables are now used for dynamic properties.
+
+> **Note:** These components also support our new `cs` prop for styling. Learn more about styling
+> with `cs` in our
+> [documentation](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--cs-prop).
 
 ## Troubleshooting
 
