@@ -10,11 +10,9 @@ export interface ExternalHyperlinkProps extends HyperlinkProps {
   /**
    * Informs a screen reader user the link will open in a new window. It is read after the link text.
    * This value will need to be translated.
-   * @default 'Opens link in new window'
    */
-  iconLabel?: string;
+  iconLabel: string;
 }
-const relativeToFontSizeIconSize = '1em';
 
 export const externalHyperlinkStencil = createStencil({
   extends: hyperlinkStencil,
@@ -24,7 +22,7 @@ export const externalHyperlinkStencil = createStencil({
     alignItems: 'center',
     '& [data-part="external-hyperlink-icon"]': {
       [systemIconStencil.vars.color]: 'currentColor',
-      width: calc.subtract(relativeToFontSizeIconSize, px2rem(1)),
+      width: calc.subtract('1em', px2rem(1)),
       minWidth: calc.subtract(system.space.x4, px2rem(1)),
       marginInlineStart: calc.subtract(system.space.x1, px2rem(2)),
       '& > svg': {
@@ -58,7 +56,7 @@ export const ExternalHyperlink = createComponent('a')({
         role="img"
         aria-label={iconLabel}
         data-part="external-hyperlink-icon"
-        size={relativeToFontSizeIconSize}
+        size="1em"
       />
     </Element>
   ),
