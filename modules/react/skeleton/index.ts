@@ -1,1 +1,1 @@
-export {Skeleton} from './lib/skeleton';
+export {Skeleton} from './lib/Skeleton';
