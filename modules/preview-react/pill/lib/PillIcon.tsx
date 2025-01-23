@@ -7,6 +7,7 @@ import {usePillModel} from './usePillModel';
 import {plusIcon} from '@workday/canvas-system-icons-web';
 import {calc, createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 export interface PillIconProps extends Partial<SystemIconProps> {}
 
@@ -28,7 +29,7 @@ export const PillIcon = createSubcomponent('span')({
       size={20}
       role="img"
       icon={icon || plusIcon}
-      {...elemProps}
+      {...mergeStyles(elemProps, pillIconStencil())}
     />
   );
 });

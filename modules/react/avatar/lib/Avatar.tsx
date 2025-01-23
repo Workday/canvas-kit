@@ -268,7 +268,7 @@ export const Avatar = createComponent('button')({
         );
       }
     }
-    console.log('alt text', altText);
+
     return (
       <Element
         ref={ref}

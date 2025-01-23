@@ -36,7 +36,7 @@ const pillIconButtonStencil = createStencil({
     padding: 0,
     overflow: 'visible',
     position: 'relative',
-    borderColor: 'transparent',
+    [buttonStencil.vars.border]: 'transparent',
     [buttonStencil.vars.background]: system.color.bg.alt.soft,
     [systemIconStencil.vars.color]: system.color.icon.default,
     '::after': {
@@ -51,16 +51,16 @@ const pillIconButtonStencil = createStencil({
     },
 
     '&:focus-visible, &.focus': {
-      borderColor: 'transparent',
+      [buttonStencil.vars.border]: 'transparent',
       ...focusRing({
         innerColor: 'transparent',
       }),
     },
     '&:hover, &.hover': {
-      border: 'transparent',
+      [buttonStencil.vars.border]: 'transparent',
     },
     '&:disabled, &.disabled': {
-      borderColor: 'transparent',
+      [buttonStencil.vars.border]: 'transparent',
     },
   },
 });
