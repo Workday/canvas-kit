@@ -305,6 +305,7 @@ export const Pill = createContainer('button')({
       {variant === 'default' && (
         <BaseButton
           as={Element}
+          disabled={model.state.disabled}
           {...mergeStyles(elemProps, [
             model.state.disabled ? 'disabled' : undefined,
             pillStencil({
