@@ -30,7 +30,7 @@ const customPillStencil = createStencil({
   },
 });
 
-export const Basic = () => {
+export const CustomStyles = () => {
   return (
     <div>
       <Pill cs={customPillStencil()}>
