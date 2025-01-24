@@ -6,7 +6,7 @@ import ts from 'typescript';
  */
 export function isImportedFromStyling(node: ts.Node, checker: ts.TypeChecker) {
   const symbol = checker.getSymbolAtLocation(node);
-  const declaration = symbol?.valueDeclaration || symbol?.declarations[0];
+  const declaration = symbol?.valueDeclaration || symbol?.declarations?.[0];
 
   if (
     declaration &&

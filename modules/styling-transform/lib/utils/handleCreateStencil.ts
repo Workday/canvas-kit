@@ -3,7 +3,7 @@ import ts from 'typescript';
 import {slugify} from '@workday/canvas-kit-styling';
 
 import {getVarName} from './getVarName';
-import {parseObjectToStaticValue} from './parseObjectToStaticValue';
+import {maybeWrapCSSVariables, parseObjectToStaticValue} from './parseObjectToStaticValue';
 import {createStyleObjectNode, serializeStyles} from './createStyleObjectNode';
 import {getValueFromAliasedSymbol, parseNodeToStaticValue} from './parseNodeToStaticValue';
 import {NestedStyleObject, NodeTransformer, TransformerContext} from './types';
@@ -97,7 +97,7 @@ export const handleCreateStencil: NodeTransformer = (node, context) => {
           const value = parseNodeToStaticValue(node.initializer, context).toString();
           if (value) {
             // Only add the stencil variable if there's a value. An empty string means no default.
-            stencilVariables[names[varName]] = value;
+            stencilVariables[names[varName]] = String(maybeWrapCSSVariables(value, names));
           }
         }
       }
@@ -341,7 +341,7 @@ function parseStyleBlock(
     if (ts.isObjectLiteralExpression(property.initializer)) {
       styleObj = parseObjectToStaticValue(property.initializer, {
         ...context,
-        nameScope: `${stencilName}.`,
+        nameScope: `${stencilName}.vars.`,
       });
     }
 
@@ -350,7 +350,7 @@ function parseStyleBlock(
       if (returnNode) {
         styleObj = parseObjectToStaticValue(returnNode, {
           ...context,
-          nameScope: `${stencilName}.`,
+          nameScope: `${stencilName}.vars.`,
         });
       }
     }
@@ -361,7 +361,7 @@ function parseStyleBlock(
     if (returnNode) {
       styleObj = parseObjectToStaticValue(returnNode, {
         ...context,
-        nameScope: `${stencilName}.`,
+        nameScope: `${stencilName}.vars.`,
       });
     }
   }

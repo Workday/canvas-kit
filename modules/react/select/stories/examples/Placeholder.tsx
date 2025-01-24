@@ -26,20 +26,23 @@ export const Placeholder = () => {
 
   return (
     <Flex cs={parentContainerStyles}>
-      <Select items={options}>
-        <FormField label="Contact">
-          <Select.Input placeholder="Make a Selection" onChange={e => handleChange(e)} />
-          <Select.Popper>
-            <Select.Card>
-              <Select.List>
-                {item => {
-                  return <Select.Item>{item}</Select.Item>;
-                }}
-              </Select.List>
-            </Select.Card>
-          </Select.Popper>
-        </FormField>
-      </Select>
+      <FormField>
+        <FormField.Label>Contact</FormField.Label>
+        <FormField.Field>
+          <Select items={options}>
+            <Select.Input placeholder="Make a Selection" onChange={e => handleChange(e)} />
+            <Select.Popper>
+              <Select.Card>
+                <Select.List>
+                  {item => {
+                    return <Select.Item>{item}</Select.Item>;
+                  }}
+                </Select.List>
+              </Select.Card>
+            </Select.Popper>
+          </Select>
+        </FormField.Field>
+      </FormField>
       Selected Value: {value}
     </Flex>
   );

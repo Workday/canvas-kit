@@ -24,19 +24,21 @@ jobs:
 
       - uses: Workday/canvas-kit-actions/install@v1
         with:
-          node_version: 16.x
+          node_version: 18.x
 
       ## Build Storybook and extract component stories for Storybook aggregation. This will be used
       ## for Chromatic rebaselining and publishing to GH Pages. Should be before `yarn build` since
       ## built assets mess up this command
-      #  removed yarn sb extract docs docs/stories.json because we were exceeding limit in CI, add back in once we find more space
       - name: Build Storybook
         run: |
           yarn build-storybook --quiet
+          yarn sb extract docs docs/stories.json
 
       ## Build for packaging.
       - name: Build
         run: yarn build
+        env:
+          TSP_SKIP_CACHE: true
 
       ## Publish prerelease to npm. Must be run after a build
       - name: Publish

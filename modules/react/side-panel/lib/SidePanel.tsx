@@ -136,7 +136,7 @@ const ChildrenContainer = styled('div')<Pick<SidePanelProps, 'openWidth' | 'open
   })
 );
 
-const ToggleButton = styled(TertiaryButton)<
+const ToggleButton = styled(TertiaryButton, {shouldForwardProp: prop => prop !== 'openDirection'})<
   TertiaryButtonProps & Pick<SidePanelProps, 'openDirection'>
 >(
   {

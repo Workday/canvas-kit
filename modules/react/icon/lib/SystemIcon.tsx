@@ -4,7 +4,7 @@ import {CanvasSystemIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
 import {createComponent, getColor} from '@workday/canvas-kit-react/common';
 import {cssVar, createStencil, handleCsProp, px2rem, createVars} from '@workday/canvas-kit-styling';
-import {base} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 import {Svg, SvgProps, svgStencil, transformColorNameToToken} from './Svg';
 
 /**
@@ -49,7 +49,8 @@ export interface SystemIconStyles {
   /**
    * The hover color of the SystemIcon. This defines `accentHover` and `fillHover`. `colorHover` may be overwritten by `accentHover` and `fillHover`.
    * @default base.licorice200
-   * @deprecated `colorHover` is deprecated and will be removed in a future version. Please use the following instead in your style overrides:
+   * @deprecated `colorHover` is deprecated and will be removed in a future version. We have removed the default hover styles on SystemIcon. Please
+   * use the following instead in your style overrides:
    * ```tsx
    * '&:hover': {
    *   [systemIconStencil.vars.color]: desiredColorHoverColor
@@ -153,8 +154,11 @@ export const systemIconStencil = createStencil({
     accentColor: '',
     backgroundColor: '',
   },
-  base: ({accentColor, backgroundColor, color}) => ({
-    [backgroundColor]: cssVar(backgroundColor, 'transparent'),
+  base: ({size, width, height, accentColor, backgroundColor, color}) => ({
+    '& svg': {
+      width: cssVar(width, cssVar(size, system.space.x6)),
+      height: cssVar(height, cssVar(size, system.space.x6)),
+    },
     '& .wd-icon-fill': {
       fill: cssVar(color, base.licorice200),
     },
