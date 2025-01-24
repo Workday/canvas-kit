@@ -40,7 +40,10 @@ export const WelcomePage = () => {
         {' '}
         This project provides a set of components for the Workday Canvas Design System that can be
         used to implement user experiences consistent with{' '}
-        <ExternalHyperlink href="https://canvas.workdaydesign.com/">
+        <ExternalHyperlink
+          href="https://canvas.workdaydesign.com/"
+          iconLabel="Open docs in new window"
+        >
           Workday Design Principles.
         </ExternalHyperlink>
       </Text>
