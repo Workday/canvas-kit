@@ -114,6 +114,18 @@ The following components are affected:
 
 `iconLabel` is now a *required* prop. We've removed the default `aria-label` of `Opens link in new window`  to better support internationalization. You must provide a value to `iconLabel`.
 
+```tsx
+//v12
+<ExternalHyperlink href="https://workday.com">
+  External Hyperlink
+</ExternalHyperlink>
+
+//v13
+<ExternalHyperlink href="https://workday.com" iconLabel='Open link in new window'>
+  External Hyperlink
+</ExternalHyperlink>
+```
+
 
 ## Troubleshooting
 
