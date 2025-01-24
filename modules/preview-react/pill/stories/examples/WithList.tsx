@@ -1,7 +1,8 @@
 import React from 'react';
 
 import {Pill} from '@workday/canvas-kit-preview-react/pill';
-import {Flex} from '@workday/canvas-kit-react/layout';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 const data = [
   'Shoes',
@@ -17,14 +18,20 @@ const data = [
   'Jewelry',
 ];
 
+const flexWrapStyles = createStyles({
+  display: 'flex',
+  flexWrap: 'wrap',
+  gap: system.space.x2,
+});
+
 export const WithList = () => {
   const [items, setItems] = React.useState(data);
 
   return (
-    <Flex flexWrap="wrap">
+    <div className={flexWrapStyles}>
       {items.map((cat, index) => {
         return (
-          <Pill key={index} variant="removable" marginBottom="xxs" marginInlineEnd="xxs">
+          <Pill key={index} variant="removable">
             <Pill.Label>{cat}</Pill.Label>
             <Pill.IconButton
               aria-label="Remove"
@@ -33,6 +40,6 @@ export const WithList = () => {
           </Pill>
         );
       })}
-    </Flex>
+    </div>
   );
 };

@@ -3,7 +3,7 @@ import React from 'react';
 import {BaseButton, buttonStencil} from '@workday/canvas-kit-react/button';
 import {createContainer, focusRing} from '@workday/canvas-kit-react/common';
 import {Box, BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {px2rem, createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
+import {px2rem, createStencil, cssVar} from '@workday/canvas-kit-styling';
 
 import {usePillModel} from './usePillModel';
 

@@ -9,5 +9,5 @@ export interface PillAvatarProps extends AvatarProps {}
 export const PillAvatar = createSubcomponent('div')({
   modelHook: usePillModel,
 })<PillAvatarProps>(({...elemProps}: PillAvatarProps, Element, _model) => {
-  return <Avatar size={18} as={Element} altText={''} {...elemProps} />;
+  return <Avatar aria-hidden={true} size={18} as={Element} altText={''} {...elemProps} />;
 });
