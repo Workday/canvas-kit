@@ -26,9 +26,9 @@ export const ExpandableTitle = createComponent('div')({
   displayName: 'Expandable.Title',
   Component: ({children, ...elemProps}: ExpandableTitleProps, ref, Element) => {
     return (
-      <Box as={Element} ref={ref} {...mergeStyles(elemProps, expandableTitleStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, expandableTitleStencil())}>
         {children}
-      </Box>
+      </Element>
     );
   },
 });

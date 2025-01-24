@@ -27,9 +27,5 @@ export const ExpandableContent = createSubcomponent('div')({
   modelHook: useExpandableModel,
   elemPropsHook: useExpandableContent,
 })<ExpandableContentProps>(({children, ...elementProps}, Element) => {
-  return (
-    <Box as={Element} {...mergeStyles(elementProps, expandableContentStencil())}>
-      {children}
-    </Box>
-  );
+  return <Element {...mergeStyles(elementProps, expandableContentStencil())}>{children}</Element>;
 });
