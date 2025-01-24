@@ -22,6 +22,7 @@ export const externalHyperlinkStencil = createStencil({
     alignItems: 'center',
     '& [data-part="external-hyperlink-icon"]': {
       [systemIconStencil.vars.color]: 'currentColor',
+      [systemIconStencil.vars.size]: '1em',
       width: calc.subtract('1em', px2rem(1)),
       minWidth: calc.subtract(system.space.x4, px2rem(1)),
       marginInlineStart: calc.subtract(system.space.x1, px2rem(2)),
@@ -56,7 +57,6 @@ export const ExternalHyperlink = createComponent('a')({
         role="img"
         aria-label={iconLabel}
         data-part="external-hyperlink-icon"
-        size="1em"
       />
     </Element>
   ),
