@@ -10,7 +10,7 @@ import {
 } from '@workday/canvas-kit-react/testing';
 import {ExternalHyperlink} from '@workday/canvas-kit-react/button';
 import {Container} from './utils';
-import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {BodyText, Subtext} from '@workday/canvas-kit-react/text';
 
 export default {
