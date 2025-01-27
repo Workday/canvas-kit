@@ -1,66 +1,59 @@
 import React from 'react';
 
 import {focusRing, createSubcomponent} from '@workday/canvas-kit-react/common';
-
 import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {usePillModel} from './usePillModel';
 import {xSmallIcon} from '@workday/canvas-system-icons-web';
-import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {space} from '@workday/canvas-kit-react/tokens';
 import {BaseButton, buttonStencil} from '@workday/canvas-kit-react/button';
-import {createStencil} from '@workday/canvas-kit-styling';
+import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
-export interface PillIconButtonProps extends Omit<SystemIconProps, 'icon'> {
-  /**
-   * The system icon rendered by the button
-   * @default `xSmallIcon`
-   */
-  icon?: CanvasSystemIcon;
+export interface PillIconButtonProps extends Partial<SystemIconProps> {
   /**
    * The aria label for the removable icon
    * @default 'remove'
    */
-  'aria-label'?: string;
+  'aria-label': string;
 }
 
-const pillIconButtonStencil = createStencil({
+export const pillIconButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
-    marginInlineEnd: '-7px', // visually pull in the pill to the right size
-    marginInlineStart: `-2px`, // visually create space between label and the button
+    marginInlineEnd: calc.multiply(px2rem(7), '-1'), // visually pull in the pill to the right size  by -7px
+    marginInlineStart: calc.multiply(px2rem(2), '-1'), // visually create space between label and the button by -2px
     borderRadius: system.shape.half,
-    height: 20,
-    width: 20,
+    height: calc.add(system.space.x4, system.space.x1),
+    width: calc.add(system.space.x4, system.space.x1),
     padding: 0,
     overflow: 'visible',
     position: 'relative',
-    [buttonStencil.vars.border]: 'transparent',
+    [buttonStencil.vars.border]: system.color.border.transparent,
     [buttonStencil.vars.background]: system.color.bg.alt.soft,
     [systemIconStencil.vars.color]: system.color.icon.default,
+    [systemIconStencil.vars.size]: system.space.x6,
     '::after': {
       content: '""',
-      height: space.l,
-      width: space.l,
+      height: system.space.x8,
+      width: system.space.x8,
       position: 'absolute',
-      left: '-7px',
-      bottom: '-7px',
+      left: calc.multiply(px2rem(7), '-1'),
+      bottom: calc.multiply(px2rem(7), '-1'),
       margin: 0,
       pointerEvents: 'all',
     },
 
     '&:focus-visible, &.focus': {
-      [buttonStencil.vars.border]: 'transparent',
+      [buttonStencil.vars.border]: system.color.border.transparent,
       ...focusRing({
-        innerColor: 'transparent',
+        innerColor: system.color.border.transparent,
       }),
     },
     '&:hover, &.hover': {
-      [buttonStencil.vars.border]: 'transparent',
+      [buttonStencil.vars.border]: system.color.border.transparent,
     },
     '&:disabled, &.disabled': {
-      [buttonStencil.vars.border]: 'transparent',
+      [buttonStencil.vars.border]: system.color.border.transparent,
     },
   },
 });
@@ -68,11 +61,7 @@ const pillIconButtonStencil = createStencil({
 export const PillIconButton = createSubcomponent('button')({
   modelHook: usePillModel,
 })<PillIconButtonProps>(
-  (
-    {size, icon = xSmallIcon, maxWidth, children, 'aria-label': ariaLabel = '', ...elemProps},
-    Element,
-    model
-  ) => {
+  ({size, icon, children, 'aria-label': ariaLabel = '', ...elemProps}, Element, model) => {
     return (
       <BaseButton
         data-part="pill-icon-button"
@@ -84,8 +73,7 @@ export const PillIconButton = createSubcomponent('button')({
         <SystemIcon
           aria-label={ariaLabel}
           id={`removable-${model.state.id}`}
-          icon={icon}
-          size={system.space.x6}
+          icon={icon || xSmallIcon}
           aria-hidden // This works for Chrome but not needed in Safari
           role="img"
         />

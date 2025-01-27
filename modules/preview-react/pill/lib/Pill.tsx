@@ -118,7 +118,7 @@ export const pillStencil = createStencil({
         borderColor: 'transparent',
       },
       '& [data-part="avatar-image"]': {
-        opacity: '.7',
+        opacity: system.opacity.disabled,
       },
     },
   }),
@@ -244,13 +244,12 @@ export const Pill = createContainer('button')({
      */
     Count: PillCount,
     /**
-     * This component renders an `icon`. It not be used with the `default` styling – not `readOnly`
-     * or `removable` variants. By default it renders a `plusIcon` but it can be overridden by
-     * providing an icon to the `icon` prop.
+     * This component renders an `icon`. By default it renders a `plusIcon` but it can be overridden by
+     * providing an icon to the `icon` prop. You must provide an `aria-label` for the icon.
      *
      * ```tsx
      * <Pill onClick={() => console.warn('clicked')}>
-     *   <Pill.Icon />
+     *   <Pill.Icon aria-label='Add user' />
      *   <Pill.Label>Regina Skeltor</Pill.Label>
      * </Pill>
      * ```

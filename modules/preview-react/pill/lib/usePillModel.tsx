@@ -3,7 +3,7 @@ import {createModelHook, useUniqueId} from '@workday/canvas-kit-react/common';
 export const usePillModel = createModelHook({
   defaultConfig: {
     /**
-     * Use to disable a pill.
+     * Used to disable a pill and apply the correct styles.
      */
     disabled: false,
     /**

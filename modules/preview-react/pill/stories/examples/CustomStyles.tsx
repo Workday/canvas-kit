@@ -12,15 +12,22 @@ const customPillStencil = createStencil({
     [pillStencil.vars.border]: base.berrySmoothie500,
     [pillStencil.vars.label]: base.frenchVanilla100,
     [systemIconStencil.vars.color]: base.frenchVanilla100,
+    '& [data-part="pill-count"]': {
+      backgroundColor: base.berrySmoothie400,
+    },
     '&:hover, &.hover': {
       [pillStencil.vars.background]: base.berrySmoothie400,
       [pillStencil.vars.label]: base.frenchVanilla100,
       [systemIconStencil.vars.color]: base.frenchVanilla100,
     },
     '&:active, &.active': {
-      [pillStencil.vars.background]: 'red',
+      [pillStencil.vars.background]: base.berrySmoothie400,
       [pillStencil.vars.label]: base.frenchVanilla100,
       [systemIconStencil.vars.color]: base.frenchVanilla100,
+
+      '& [data-part="pill-count"]': {
+        backgroundColor: base.berrySmoothie400,
+      },
     },
     '&:disabled, &.disabled': {
       [pillStencil.vars.background]: 'cyan',
@@ -36,6 +43,7 @@ export const CustomStyles = () => {
       <Pill cs={customPillStencil()}>
         <Pill.Icon aria-label="Add user" />
         <Pill.Label>Custom Pill Color</Pill.Label>
+        <Pill.Count>10</Pill.Count>
       </Pill>
     </div>
   );

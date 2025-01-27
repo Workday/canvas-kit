@@ -13,9 +13,9 @@ export const pillCountStencil = createStencil({
     borderTopRightRadius: system.shape.x1,
     borderBottomLeftRadius: system.shape.zero,
     borderBottomRightRadius: system.shape.x1,
-    borderTop: `${px2rem(1)} solid transparent`,
-    borderBottom: `${px2rem(1)} solid transparent`,
-    borderRight: `${px2rem(1)} solid transparent`,
+    borderTop: `${px2rem(1)} solid  ${cssVar(system.color.border.transparent)}`,
+    borderBottom: `${px2rem(1)} solid ${cssVar(system.color.border.transparent)}`,
+    borderRight: `${px2rem(1)} solid ${cssVar(system.color.border.transparent)}`,
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -30,9 +30,13 @@ export const pillCountStencil = createStencil({
 
 export const PillCount = createComponent('span')({
   displayName: 'Pill.Count',
-  Component: ({children, ...elemProps}: PillCountProps, ref, Element) => {
+  Component: ({children, backgroundColor, ...elemProps}: PillCountProps, ref, Element) => {
     return (
-      <Element data-part="pill-count" ref={ref} {...mergeStyles(elemProps, pillCountStencil())}>
+      <Element
+        data-part="pill-count"
+        ref={ref}
+        {...mergeStyles(elemProps, pillCountStencil({backgroundColor}))}
+      >
         {children}
       </Element>
     );
