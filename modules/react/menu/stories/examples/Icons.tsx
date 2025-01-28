@@ -35,8 +35,8 @@ export const Icons = () => {
             </Menu.Item>
             <Menu.Divider />
             <Menu.Item data-text="Fifth Item (with divider)">
-              <Menu.Item.Icon cs={{color: 'red'}} icon={taskContactIcon} />
-              <Menu.Item.Text cs={{color: 'red'}}>Fifth Item (with divider)</Menu.Item.Text>
+              <Menu.Item.Icon icon={taskContactIcon} />
+              <Menu.Item.Text>Fifth Item (with divider)</Menu.Item.Text>
             </Menu.Item>
           </Menu.List>
         </Menu.Card>
