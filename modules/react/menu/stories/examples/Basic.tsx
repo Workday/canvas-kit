@@ -11,7 +11,7 @@ export const Basic = () => {
       <Menu.Popper>
         <Menu.Card>
           <Menu.List>
-            <Menu.Item>First Item</Menu.Item>
+            <Menu.Item cs={{backgroundColor: 'orange'}}>First Item</Menu.Item>
             <Menu.Item>Second Item</Menu.Item>
             <Menu.Divider />
             <Menu.Item>Third Item (with a really, really, really long label)</Menu.Item>
