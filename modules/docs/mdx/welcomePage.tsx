@@ -106,7 +106,6 @@ export const WelcomePage = () => {
               className={linkStyles}
               href="https://workday.github.io/canvas-kit/?path=/docs/guides-getting-started--docs"
             >
-              {' '}
               Getting Started Guide
             </Grid.Item>
           </Grid>
@@ -129,7 +128,6 @@ export const WelcomePage = () => {
               className={linkStyles}
               href="https://workday.github.io/canvas-kit/?path=/docs/tokens--overview"
             >
-              {' '}
               View Our Tokens
             </Grid.Item>
           </Grid>
@@ -152,7 +150,6 @@ export const WelcomePage = () => {
               className={linkStyles}
               href="https://workday.github.io/canvas-kit/?path=/docs/assets-icons--overview"
             >
-              {' '}
               View Assets
             </Grid.Item>
           </Grid>
