@@ -72,9 +72,8 @@ export const WelcomePage = () => {
           />
         </Box>
         <Text typeLevel="body.medium">
-          {' '}
           This project provides a set of components for the Workday Canvas Design System that can be
-          used to implement user experiences consistent with{' '}
+          used to implement user experiences consistent with
           <ExternalHyperlink
             href="https://canvas.workdaydesign.com/"
             iconLabel="Open docs in new window"
