@@ -15,7 +15,7 @@ export const pillIconStencil = createStencil({
   extends: systemIconStencil,
   base: {
     display: 'flex',
-    marginInlineStart: calc.multiply(system.space.x1, '-1'),
+    marginInlineStart: calc.negate(system.space.x1),
     [systemIconStencil.vars.size]: px2rem(20),
   },
 });
