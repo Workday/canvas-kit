@@ -10,9 +10,9 @@ export const menuDividerStencil = createStencil({
   base: {
     display: 'block',
     height: px2rem(1),
-    border: 0,
+    border: system.space.zero,
     borderTop: `${px2rem(1)} solid ${system.color.border.divider}`,
-    margin: `${system.space.x2} 0`,
+    margin: `${system.space.x2} ${system.space.zero}`,
   },
 });
 
