@@ -7,4 +7,4 @@ export {useMenuOption, menuOptionStencil} from './lib/MenuOption';
 export {useMenuList, menuListStencil} from './lib/MenuList';
 export {useMenuPopper} from './lib/MenuPopper';
 export {useMenuTarget, useMenuTargetContext} from './lib/MenuTarget';
-export {dividerStencil} from './lib/MenuDivider';
+export {menuDividerStencil} from './lib/MenuDivider';
