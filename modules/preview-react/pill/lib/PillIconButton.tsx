@@ -11,8 +11,7 @@ import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 export interface PillIconButtonProps extends Partial<SystemIconProps> {
   /**
-   * The aria label for the removable icon
-   * @default 'remove'
+   * The aria label for the removable icon. You must provide a valid string to represent the action.
    */
   'aria-label': string;
 }

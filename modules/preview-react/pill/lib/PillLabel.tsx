@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {createSubcomponent} from '@workday/canvas-kit-react/common';
+import {createSubcomponent, ellipsisStyles} from '@workday/canvas-kit-react/common';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {OverflowTooltip, OverflowTooltipProps} from '@workday/canvas-kit-react/tooltip';
 
@@ -14,10 +14,7 @@ export interface PillLabelProps extends BoxProps {
 
 export const pillLabelStencil = createStencil({
   base: {
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    display: 'block',
+    ...ellipsisStyles,
   },
 });
 
