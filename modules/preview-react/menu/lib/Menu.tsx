@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import {DeprecatedMenuItemProps} from './MenuItem';
 import {Card} from '@workday/canvas-kit-react/card';
 import {commonColors, space, borderRadius} from '@workday/canvas-kit-react/tokens';
-import {hideMouseFocus, GrowthBehavior, generateUniqueId} from '@workday/canvas-kit-react/common';
+import {GrowthBehavior, generateUniqueId} from '@workday/canvas-kit-react/common';
 
 /**
  * @deprecated ⚠️ `DeprecatedMenuProps` has been deprecated and will be removed in a future major version. Please use [Menu in Main](https://workday.github.io/canvas-kit/?path=/docs/components-popups-menu--basic) instead.
@@ -62,10 +62,9 @@ const List = styled('ul')({
   borderRadius: borderRadius.m,
   padding: 0,
   margin: `${space.xxs} 0`,
-  '&:focus': {
+  '&:focus-visible, &.focus': {
     outline: 'none',
   },
-  ...hideMouseFocus,
 });
 
 /**

@@ -4,7 +4,6 @@ import {
   createSubcomponent,
   ExtractProps,
   focusRing,
-  hideMouseFocus,
   styled,
   StyledType,
 } from '@workday/canvas-kit-react/common';
@@ -31,13 +30,12 @@ export interface ExpandableTargetProps extends ExtractProps<typeof Flex, never> 
 
 const StyledButton = styled(Flex.as('button'))<StyledType>({
   cursor: 'pointer',
-  '&:focus': {
+  '&:focus-visible, &.focus': {
     ...focusRing(),
   },
   '&:hover': {
     background: colors.soap300,
   },
-  ...hideMouseFocus,
 });
 
 const Heading = styled('h1')<StyledType>({
