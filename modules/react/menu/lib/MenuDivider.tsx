@@ -6,7 +6,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 export interface DividerProps extends CSProps {}
 
-export const dividerStencil = createStencil({
+export const menuDividerStencil = createStencil({
   base: {
     display: 'block',
     height: px2rem(1),
@@ -19,6 +19,6 @@ export const dividerStencil = createStencil({
 export const MenuDivider = createComponent('hr')({
   displayName: 'Menu.Divider',
   Component({...elemProps}: DividerProps, ref, Element) {
-    return <Element ref={ref} {...handleCsProp(elemProps, dividerStencil())} />;
+    return <Element ref={ref} {...handleCsProp(elemProps, menuDividerStencil())} />;
   },
 });
