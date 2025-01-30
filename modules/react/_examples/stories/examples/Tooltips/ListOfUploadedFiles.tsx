@@ -25,7 +25,7 @@ export const ListOfUploadedFiles = () => {
         {files.map(i => (
           <Flex as="li" style={listStyles}>
             <Text>{i}</Text>
-            <Tooltip type="describe" title={i}>
+            <Tooltip type="description" title={i}>
               <DeleteButton icon={trashIcon} style={deleteBtnStyle}>
                 Delete
               </DeleteButton>
