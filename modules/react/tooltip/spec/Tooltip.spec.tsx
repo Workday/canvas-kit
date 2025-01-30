@@ -28,9 +28,9 @@ describe('Tooltip', () => {
       fireEvent.mouseEnter(screen.getByText('Test Text')); // triggers the tooltip
 
       jest.advanceTimersByTime(300); // advance the timer by the amount of delay time
-      expect(screen.getByText('Test Text')).toHaveAttribute('aria-description');
+      expect(screen.getByText('Test Text')).toHaveAttribute('aria-describedby', 'a1');
 
-      expect(screen.getByRole('tooltip')).toHaveAttribute('id');
+      expect(screen.getByRole('tooltip')).toHaveAttribute('id', 'a1');
     });
     jest.clearAllTimers();
   });

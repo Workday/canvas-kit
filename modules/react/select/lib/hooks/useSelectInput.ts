@@ -4,48 +4,26 @@ import {
   createElemPropsHook,
   useLocalRef,
   useResizeObserver,
-  dispatchInputEvent,
 } from '@workday/canvas-kit-react/common';
 import {
   useComboboxInput,
+  useComboboxInputConstrained,
   useComboboxKeyboardTypeAhead,
   useComboboxMoveCursorToSelected,
   useComboboxResetCursorToSelected,
 } from '@workday/canvas-kit-react/combobox';
 import {useSelectModel} from './useSelectModel';
 
-function noop() {
-  // Do nothing
-}
-
 /**
  * `useSelectInput` extends {@link useComboboxInput useComboboxInput}  and {@link useComboboxKeyboardTypeAhead useComboboxKeyboardTypeAhead} and adds type ahead functionality and Select-specific [keyboard support](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/).
  */
 export const useSelectInput = composeHooks(
-  useComboboxInput,
-  useComboboxKeyboardTypeAhead,
-  useComboboxResetCursorToSelected,
-  useComboboxMoveCursorToSelected,
   createElemPropsHook(useSelectModel)(
-    (model, ref, elemProps: {keySofar?: string; placeholder?: string; value?: string} = {}) => {
-      const {elementRef} = useLocalRef<HTMLInputElement>(ref as any);
-      const textInputRef = React.useRef<HTMLInputElement>(null);
-
-      // Update the text value of the input
-      const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const value = model.navigation.getItem(event.target.value, model)?.textValue;
-        const nativeInputValue = Object.getOwnPropertyDescriptor(
-          Object.getPrototypeOf(textInputRef.current),
-          'value'
-        );
-
-        if (nativeInputValue && nativeInputValue.set) {
-          nativeInputValue.set.call(textInputRef.current, value);
-        }
-      };
+    (model, ref, elemProps: {keySoFar?: string; placeholder?: string; value?: string} = {}) => {
+      const {elementRef, localRef} = useLocalRef(ref as React.Ref<HTMLInputElement>);
 
       useResizeObserver({
-        ref: textInputRef,
+        ref: localRef,
         onResize: data => {
           if (model.state.visibility === 'visible') {
             // Width of the Input + 2px border + 8px padding
@@ -54,41 +32,6 @@ export const useSelectInput = composeHooks(
           }
         },
       });
-      // The intent is if items are loaded after the component is rendered, it will update the input with the value.
-      // **Note: We might need to watch for other things or how often we should do this**
-      React.useEffect(() => {
-        if (
-          model.state.inputRef.current &&
-          model.state.items.length > 0 &&
-          model.state.selectedIds[0]
-        ) {
-          const value = model.navigation.getItem(model.state.selectedIds[0], model).id;
-
-          // force the hidden input to have the correct value
-          if (model.state.inputRef.current.value !== value) {
-            const nativeInputValue = Object.getOwnPropertyDescriptor(
-              Object.getPrototypeOf(model.state.inputRef.current),
-              'value'
-            );
-
-            if (nativeInputValue && nativeInputValue.set) {
-              nativeInputValue.set.call(model.state.inputRef.current, value);
-            }
-          }
-
-          if (
-            model.state.selectedIds[0] !== value &&
-            model.state.inputRef.current.value !== value
-          ) {
-            // Programmatically dispatch an onChange once items are loaded. This account for when a consumer wants an initial selected item and they're loading them from a server.
-            dispatchInputEvent(model.state.inputRef.current, value);
-          }
-        }
-        if (!model.state.selectedIds[0] && textInputRef.current?.value) {
-          dispatchInputEvent(textInputRef.current, '');
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, [model.state.inputRef, model.state.items.length]);
 
       // This effect is a copy of what is in useComboboxInput. In this case, we need access to `textInputRef` instead of `model.state.inputRef`
       // since it points to the visual input and not the hidden input. This allows scroll to index to work
@@ -98,7 +41,7 @@ export const useSelectInput = composeHooks(
           if (model.state.isVirtualized && item) {
             model.state.UNSTABLE_virtual.scrollToIndex(item.index);
           } else {
-            const listboxId = textInputRef.current?.getAttribute('aria-controls');
+            const listboxId = localRef.current?.getAttribute('aria-controls');
             if (listboxId) {
               const menuItem = document.querySelector(
                 `[id="${listboxId}"] [data-id="${model.state.cursorId}"]`
@@ -126,7 +69,7 @@ export const useSelectInput = composeHooks(
           // Select should open if Spacebar is typed and nothing has been typed AND the menu is hidden
           if (
             event.key === 'Spacebar' ||
-            (event.key === ' ' && model.state.visibility === 'hidden' && elemProps?.keySofar === '')
+            (event.key === ' ' && model.state.visibility === 'hidden' && elemProps?.keySoFar === '')
           ) {
             model.events.show();
           }
@@ -136,7 +79,7 @@ export const useSelectInput = composeHooks(
             model.state.visibility === 'visible'
           ) {
             // If key so far is empty, they're done typing, select the item where the cursor is located and hide the menu
-            if (elemProps?.keySofar === '') {
+            if (elemProps?.keySoFar === '') {
               model.events.select({
                 id: model.state.cursorId,
               });
@@ -144,23 +87,15 @@ export const useSelectInput = composeHooks(
             }
           }
         },
-        onChange: handleOnChange,
         autoComplete: 'off',
-        // When the hidden input is focused, we want to show the focus/hover states of the input that sits below it.
-        onFocus() {
-          textInputRef.current?.focus();
-        },
-        textInputProps: {
-          ref: textInputRef,
-          onChange: noop,
-          value:
-            model.state.selectedIds.length > 0 && model.state.items.length > 0
-              ? model.navigation.getItem(model.state.selectedIds[0], model).textValue
-              : '',
-        },
+        keySoFar: null,
         ref: elementRef,
-        'aria-haspopup': 'menu',
-      } as const;
+      };
     }
-  )
+  ),
+  useComboboxKeyboardTypeAhead,
+  useComboboxResetCursorToSelected,
+  useComboboxMoveCursorToSelected,
+  useComboboxInputConstrained,
+  useComboboxInput
 );

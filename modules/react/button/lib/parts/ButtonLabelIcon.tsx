@@ -2,6 +2,7 @@ import React from 'react';
 import {ButtonSizes} from '../types';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
+import {px2rem} from '@workday/canvas-kit-styling';
 
 export interface ButtonLabelIconProps extends Partial<SystemIconProps> {
   /**
@@ -42,8 +43,8 @@ export const ButtonLabelIcon = createComponent('span')({
         size={iconSize}
         icon={icon}
         shouldMirror={shouldMirrorIcon}
-        width={size ? iconSizes[size] : iconSizes.large}
-        height={size ? iconSizes[size] : iconSizes.large}
+        width={px2rem(iconSize)}
+        height={px2rem(iconSize)}
         display="inline-block"
         {...elemProps}
       />

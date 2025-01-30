@@ -1,8 +1,10 @@
 {
+  "extends": "../tsconfig.json",
   "compilerOptions": {
-    "lib": ["es2015", "es2017", "dom"],
-    "strict": true,
-    "types": ["cypress", "@testing-library/cypress"]
+    "types": ["cypress", "@testing-library/cypress"],
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "noImplicitReturns": false
   },
   "exclude": []
 }

@@ -6,10 +6,11 @@ import {
   styled,
   generateUniqueId,
   filterOutProps,
+  accessibleHideStyles,
 } from '@workday/canvas-kit-react/common';
 import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
 import {searchIcon, xIcon} from '@workday/canvas-system-icons-web';
-import {FormField, FormFieldLabelPosition} from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Combobox} from '@workday/canvas-kit-labs-react/combobox';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {searchThemes, SearchTheme, SearchThemeAttributes} from './themes';
@@ -178,7 +179,7 @@ const SearchCombobox = styled(Combobox)({
 });
 
 const SearchIcon = styled(TertiaryButton, {
-  shouldForwardProp: filterOutProps(['isHidden']),
+  shouldForwardProp: filterOutProps(['isHidden', 'isCollapsed']),
 })<Pick<SearchFormProps, 'isCollapsed'> & {isHidden: boolean}>(({isCollapsed, isHidden}) => {
   return {
     position: `absolute`,
@@ -192,28 +193,30 @@ const SearchIcon = styled(TertiaryButton, {
   };
 });
 
-const CloseButton = styled(TertiaryButton)<
-  Pick<SearchFormProps, 'isCollapsed'> & Pick<SearchFormState, 'showForm'>
->(({isCollapsed, showForm}) => {
-  const collapseStyles: CSSObject =
-    isCollapsed && showForm
-      ? {
-          display: 'inline-block',
-        }
-      : {
-          display: 'none',
-        };
+const CloseButton = styled(TertiaryButton, {
+  shouldForwardProp: filterOutProps(['isCollapsed', 'showForm']),
+})<Pick<SearchFormProps, 'isCollapsed'> & Pick<SearchFormState, 'showForm'>>(
+  ({isCollapsed, showForm}) => {
+    const collapseStyles: CSSObject =
+      isCollapsed && showForm
+        ? {
+            display: 'inline-block',
+          }
+        : {
+            display: 'none',
+          };
 
-  return {
-    position: `absolute`,
-    top: 0,
-    bottom: 0,
-    right: 0,
-    margin: `auto ${space.xxs}`,
-    zIndex: 3,
-    ...collapseStyles,
-  };
-});
+    return {
+      position: `absolute`,
+      top: 0,
+      bottom: 0,
+      right: 0,
+      margin: `auto ${space.xxs}`,
+      zIndex: 3,
+      ...collapseStyles,
+    };
+  }
+);
 
 const SearchField = styled(FormField)<
   Pick<SearchFormProps, 'isCollapsed' | 'grow' | 'height'> & Pick<SearchFormState, 'showForm'>
@@ -268,6 +271,9 @@ const SearchInput = styled(TextInput)<
     '&::placeholder': {
       color: inputColors.placeholderColor,
     },
+    '&:placeholder-shown': {
+      textOverflow: 'ellipsis',
+    },
     '&:not([disabled])': {
       '&:focus, &:active': {
         outline: 'none',
@@ -283,7 +289,6 @@ const SearchInput = styled(TextInput)<
 
 export class SearchForm extends React.Component<SearchFormProps, SearchFormState> {
   static Theme = SearchTheme;
-
   private inputRef = React.createRef<HTMLInputElement>();
   private openRef = React.createRef<HTMLButtonElement>();
   private defaultLabelId = generateUniqueId();
@@ -440,14 +445,11 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
           <SearchField
             grow={grow}
             id={labelId}
-            inputId={`input-${labelId}`}
-            label={inputLabel}
-            labelPosition={FormFieldLabelPosition.Hidden}
-            useFieldset={false}
             isCollapsed={isCollapsed}
             showForm={this.state.showForm}
             height={height}
           >
+            <FormField.Label cs={accessibleHideStyles}>{inputLabel}</FormField.Label>
             <SearchCombobox
               initialValue={initialValue}
               clearButtonVariant={this.getIconButtonType()}
@@ -459,8 +461,10 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
               clearButtonAriaLabel={clearButtonAriaLabel}
               labelId={labelId}
             >
-              <SearchInput
-                ref={this.inputRef}
+              <FormField.Input
+                as={SearchInput}
+                ref={this.inputRef as any}
+                cs={{maxWidth: grow ? '100%' : maxWidth}}
                 value={this.state.searchQuery}
                 placeholder={placeholder}
                 isCollapsed={isCollapsed}

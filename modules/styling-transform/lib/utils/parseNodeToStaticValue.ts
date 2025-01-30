@@ -1,7 +1,5 @@
 import ts from 'typescript';
 
-import {slugify} from '@workday/canvas-kit-styling';
-
 import {getErrorMessage} from './getErrorMessage';
 import {TransformerContext} from './types';
 
@@ -157,11 +155,6 @@ function parseTypeToStaticValue(type: ts.Type): string | number | void {
   }
 }
 
-function getCSSVariableKey(text: string): string {
-  const [id, name] = getVariableNameParts(text);
-  return `${slugify(id)}-${name}`;
-}
-
 /**
  * A `PropertyExpression` is an expression with a dot in it. Like `a.b.c`. It may be nested. This
  * function will walk the AST and create a string like `a.b.c` to be passed on to variable name
@@ -177,15 +170,6 @@ function getPropertyAccessExpressionText(node: ts.PropertyAccessExpression): str
     }
   }
   return '';
-}
-
-function getVariableNameParts(input: string): [string, string] {
-  const parts = input.split('.');
-
-  // grab the last item in the array. This will also mutate the array, removing the last item
-  const variable = parts.pop()!;
-
-  return [parts.join('.'), variable];
 }
 
 /**
@@ -274,12 +258,12 @@ export function getValueFromAliasedSymbol(
 function getValueFromProcessedNodes(varName: string, context: TransformerContext): string | void {
   const {names} = context;
 
-  if (names[varName]) {
-    return names[varName];
-  }
-
   if (context.nameScope && names[`${context.nameScope}${varName}`]) {
     return names[`${context.nameScope}${varName}`];
+  }
+
+  if (names[varName]) {
+    return names[varName];
   }
 }
 

@@ -21,7 +21,7 @@ jobs:
 
       - uses: Workday/canvas-kit-actions/install@v1
         with:
-          node_version: 16.x
+          node_version: 18.x
 
       ## Build Storybook and extract component stories for Storybook aggregation. This will be used
       ## for Chromatic rebaselining and publishing to GH Pages. Should be before `yarn build` since
@@ -34,6 +34,8 @@ jobs:
       ## Build for packaging.
       - name: Build
         run: yarn build
+        env:
+          TSP_SKIP_CACHE: true
 
       ## Publish prerelease to npm. Must be run after a build
       - name: Publish

@@ -9,15 +9,10 @@ interface MarkdownProps {
   content: string;
 }
 
-export default class Markdown extends React.Component<MarkdownProps> {
+export default class<Markdown> extends React.Component<MarkdownProps> {
   render() {
     const convertedContent = emoji.replace_colons(this.props.content);
 
-    // We can remove the `div` wrapper when https://github.com/DefinitelyTyped/DefinitelyTyped/pull/40542 is merged
-    return (
-      <div className="markdown-body">
-        <MarkdownToJSX>{convertedContent}</MarkdownToJSX>
-      </div>
-    );
+    return <MarkdownToJSX>{convertedContent}</MarkdownToJSX>;
   }
 }

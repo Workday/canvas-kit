@@ -6,7 +6,6 @@ import {createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 import {buttonColorPropVars, buttonStencil} from './BaseButton';
 import {Button, ButtonProps} from './Button';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 /**
  * Extends all the style properties from Box to our buttons as well as props from ButtonProps.
@@ -24,38 +23,50 @@ const primaryButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
     // Base Styles
-    [buttonStencil.vars.background]: brand.primary.base,
+    [buttonStencil.vars.background]: cssVar(brand.action.base, brand.primary.base),
     [buttonStencil.vars.borderRadius]: system.shape.round,
-    [buttonStencil.vars.label]: brand.primary.accent,
-    [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, brand.primary.accent),
+    [buttonStencil.vars.label]: cssVar(brand.action.accent, brand.primary.accent),
+    [systemIconStencil.vars.color]: cssVar(
+      buttonColorPropVars.default.icon,
+      cssVar(brand.action.accent, brand.primary.accent)
+    ),
     // Focus Styles
     '&:focus-visible, &.focus': {
-      [buttonStencil.vars.background]: brand.primary.base,
-      [buttonStencil.vars.label]: brand.primary.accent,
+      [buttonStencil.vars.background]: cssVar(brand.action.base, brand.primary.base),
+      [buttonStencil.vars.label]: cssVar(brand.action.accent, brand.primary.accent),
       [buttonStencil.vars.boxShadowInner]: system.color.border.inverse,
       [buttonStencil.vars.boxShadowOuter]: brand.common.focusOutline,
-      [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, brand.primary.accent),
+      [systemIconStencil.vars.color]: cssVar(
+        buttonColorPropVars.focus.icon,
+        cssVar(brand.action.accent, brand.primary.accent)
+      ),
     },
     // Hover Styles
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: brand.primary.dark,
-      [buttonStencil.vars.label]: brand.primary.accent,
-      [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.hover.icon, brand.primary.accent),
+      [buttonStencil.vars.background]: cssVar(brand.action.dark, brand.primary.dark),
+      [buttonStencil.vars.label]: cssVar(brand.action.accent, brand.primary.accent),
+      [systemIconStencil.vars.color]: cssVar(
+        buttonColorPropVars.hover.icon,
+        cssVar(brand.action.accent, brand.primary.accent)
+      ),
     },
     // Active Styles
     '&:active, &.active': {
-      [buttonStencil.vars.background]: brand.primary.darkest,
-      [buttonStencil.vars.label]: brand.primary.accent,
-      [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.active.icon, brand.primary.accent),
+      [buttonStencil.vars.background]: cssVar(brand.action.darkest, brand.primary.darkest),
+      [buttonStencil.vars.label]: cssVar(brand.action.accent, brand.primary.accent),
+      [systemIconStencil.vars.color]: cssVar(
+        buttonColorPropVars.active.icon,
+        cssVar(brand.action.accent, brand.primary.accent)
+      ),
     },
     // Disabled Styles
     '&:disabled, &.disabled': {
-      [buttonStencil.vars.background]: brand.primary.base,
-      [buttonStencil.vars.label]: brand.primary.accent,
+      [buttonStencil.vars.background]: cssVar(brand.action.base, brand.primary.base),
+      [buttonStencil.vars.label]: cssVar(brand.action.accent, brand.primary.accent),
       [buttonStencil.vars.opacity]: system.opacity.disabled,
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.disabled.icon,
-        brand.primary.accent
+        cssVar(brand.action.accent, brand.primary.accent)
       ),
     },
   },
@@ -115,9 +126,21 @@ const primaryButtonStencil = createStencil({
 
 export const PrimaryButton = createComponent('button')({
   displayName: 'PrimaryButton',
-  Component: ({children, variant, ...elemProps}: PrimaryButtonProps, ref, Element) => {
+  Component: (
+    {children, variant, size, iconPosition, grow, cs, ...elemProps}: PrimaryButtonProps,
+    ref,
+    Element
+  ) => {
     return (
-      <Button as={Element} ref={ref} {...mergeStyles(elemProps, primaryButtonStencil({variant}))}>
+      <Button
+        as={Element}
+        ref={ref}
+        iconPosition={iconPosition}
+        size={size}
+        grow={grow}
+        cs={[primaryButtonStencil({variant, iconPosition, grow, size}), cs]}
+        {...elemProps}
+      >
         {children}
       </Button>
     );

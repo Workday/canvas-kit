@@ -14,7 +14,8 @@ import {HeadingLevelContext, SymbolDialog} from './widgetUtils';
 export const MDX = createComponent('div')({
   Component({children, ...elemProps}, _ref, Element) {
     const components = useMDXComponents();
-    return React.createElement(components[Element], elemProps, children);
+
+    return React.createElement(components[Element] || Element, elemProps, children);
   },
 });
 

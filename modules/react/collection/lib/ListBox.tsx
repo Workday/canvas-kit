@@ -3,9 +3,8 @@ import {
   createContainer,
   createElemPropsHook,
   createSubcomponent,
-  ExtractProps,
 } from '@workday/canvas-kit-react/common';
-import {Box, Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -13,16 +12,34 @@ import {useListModel} from './useListModel';
 import {useListRenderItems} from './useListRenderItem';
 import {useListItemRegister} from './useListItemRegister';
 
-export interface ListBoxProps<T = any> extends Omit<ExtractProps<typeof Flex, never>, 'children'> {
+export interface ListBoxProps<T = any> extends Omit<FlexProps, 'children'> {
   children?: React.ReactNode | ((item: T, index: number) => React.ReactNode);
+  /**
+   * Set the margin top of the list box. You must use this prop and not style any other way. The
+   * `Menu` uses virtualization and needs margins to be set on the correct element. This ensure
+   * proper rendering. If a `marginTop` is not provided, the value falls back to `marginY`.
+   */
+  marginTop?: FlexProps['marginTop'];
+  /**
+   * Set the margin bottom of the list box. You must use this prop and not style any other way. The
+   * `Menu` uses virtualization and needs margins to be set on the correct element. This ensure
+   * proper rendering. If a `marginBottom` is not provided, the value falls back to `marginY`.
+   */
+  marginBottom?: FlexProps['marginBottom'];
+  /**
+   * Set the margin top and bottom of the list box. You must use this prop and not style any other way. The
+   * `Menu` uses virtualization and needs margins to be set on the correct element. This ensure
+   * proper rendering.
+   */
+  marginY?: FlexProps['marginY'];
 }
 
 export const ListBoxItem = createSubcomponent('li')({
   displayName: 'Item',
   modelHook: useListModel,
   elemPropsHook: useListItemRegister,
-})<ExtractProps<typeof Flex, never>>((elemProps, Element) => {
-  return <Box as={Element} {...elemProps} />;
+})<FlexProps>((elemProps, Element) => {
+  return <Element {...mergeStyles(elemProps)} />;
 });
 
 export const useListBox = createElemPropsHook(useListModel)(model => {
@@ -35,7 +52,14 @@ export const useListBox = createElemPropsHook(useListModel)(model => {
 });
 
 const listBoxContainerStencil = createStencil({
-  base: {},
+  base: {
+    '& :where([data-part="list"])': {
+      display: 'flex',
+      flexDirection: 'column',
+      marginBlockStart: system.space.zero,
+      marginBlockEnd: system.space.zero,
+    },
+  },
   modifiers: {
     orientation: {
       vertical: {
@@ -43,16 +67,11 @@ const listBoxContainerStencil = createStencil({
       },
       horizontal: {
         overflowY: undefined,
+        '& :where([data-part="list"])': {
+          flexDirection: 'row',
+        },
       },
     },
-  },
-});
-
-const listBoxStencil = createStencil({
-  base: {
-    flexDirection: 'column',
-    marginTop: system.space.zero,
-    marginBottom: system.space.zero,
   },
 });
 
@@ -104,16 +123,16 @@ export const ListBox = createContainer('ul')({
           {
             style: {
               maxHeight,
-              marginBottom: marginY || marginBottom,
-              marginTop: marginY || marginBottom,
+              marginBottom: marginBottom ?? marginY,
+              marginTop: marginTop ?? marginY,
             },
           },
           listBoxContainerStencil({orientation: model.state.orientation})
         )}
       >
-        <Flex as={Element} {...mergeStyles(elemProps, listBoxStencil())}>
+        <Element {...mergeStyles(elemProps)} data-part="list">
           {useListRenderItems(model, elemProps.children)}
-        </Flex>
+        </Element>
       </div>
     );
   }
