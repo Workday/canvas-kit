@@ -146,6 +146,11 @@ export function useTooltip<T extends Element = Element>({
     onBlur: onHide,
   };
 
+  // remove `aria-describedby` if undefined to not override what's provided
+  if (targetProps['aria-describedby'] === undefined) {
+    delete targetProps['aria-describedby'];
+  }
+
   return {
     /** Mix these properties into the target element. **Must be an Element** */
     targetProps,
