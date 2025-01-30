@@ -9,7 +9,7 @@ interface MarkdownProps {
   content: string;
 }
 
-export default class<Markdown> extends React.Component<MarkdownProps> {
+export default class Markdown extends React.Component<MarkdownProps> {
   render() {
     const convertedContent = emoji.replace_colons(this.props.content);
 
