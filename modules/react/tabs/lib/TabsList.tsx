@@ -16,7 +16,7 @@ import {
 } from '@workday/canvas-kit-react/collection';
 
 import {useTabsModel} from './useTabsModel';
-import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export interface TabListProps<T = any> extends Omit<ExtractProps<typeof Flex, never>, 'children'> {
@@ -49,7 +49,7 @@ const tabsListStencil = createStencil({
   base: {
     display: 'flex',
     position: 'relative',
-    borderBottom: `1px solid ${commonColors.divider}`,
+    borderBottom: `1px solid ${system.color.border.divider}`,
     gap: system.space.x2,
     paddingInline: system.space.x6,
     maskImage: 'none',
@@ -76,9 +76,20 @@ const tabsListStencil = createStencil({
       modifiers: {
         modality: 'touch',
         isDragging: 'true',
+        direction: 'left',
       },
       styles: {
-        maskImage: `linear-gradient(to left, white 80%, transparent)`,
+        maskImage: 'linear-gradient(to left, white 80%, transparent)',
+      },
+    },
+    {
+      modifiers: {
+        modality: 'touch',
+        isDragging: 'true',
+        direction: 'right',
+      },
+      styles: {
+        maskImage: 'linear-gradient(to right, white 80%, transparent)',
       },
     },
   ],
@@ -92,6 +103,10 @@ export const TabsList = createSubcomponent('div')({
   ({children, overflowButton, ...elemProps}, Element, model) => {
     const modality = useModalityType();
     const touchStates = useTouchDirection();
+    console.log('Modality: ', modality);
+    console.log('Direction: ', touchStates.direction);
+    console.log('isDragging: ', touchStates.isDragging);
+
     return (
       <Element
         // maskImage={
@@ -119,7 +134,7 @@ export const TabsList = createSubcomponent('div')({
 
 export const useTouchDirection = () => {
   const [isDragging, setIsDragging] = React.useState(false);
-  const [touchDir, setTouchDirection] = React.useState('right');
+  const [touchDir, setTouchDirection] = React.useState<'right' | 'left' | undefined>('right');
 
   React.useEffect(() => {
     let prevXPos = window.pageXOffset;
