@@ -84,7 +84,6 @@ export interface TabsItemProps
 
 const tabItemStencil = createStencil({
   base: {
-    ...hideMouseFocus,
     ...system.type.subtext.large,
     fontWeight: system.fontWeight.medium,
     border: 'none',

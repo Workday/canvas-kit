@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import {commonColors} from '@workday/canvas-kit-react/tokens';
 import {
   composeHooks,
   createSubcomponent,
@@ -52,7 +51,7 @@ const tabsListStencil = createStencil({
     borderBottom: `1px solid ${system.color.border.divider}`,
     gap: system.space.x2,
     paddingInline: system.space.x6,
-    maskImage: 'none',
+    maskImage: 'linear-gradient(to right, white 80%, transparent)',
   },
   modifiers: {
     modality: {
@@ -70,12 +69,16 @@ const tabsListStencil = createStencil({
       left: {},
       right: {},
     },
+    currentScrollPos: {
+      true: {},
+      false: {},
+    },
   },
   compound: [
     {
       modifiers: {
         modality: 'touch',
-        isDragging: 'true',
+        isDragging: true,
         direction: 'left',
       },
       styles: {
@@ -85,7 +88,7 @@ const tabsListStencil = createStencil({
     {
       modifiers: {
         modality: 'touch',
-        isDragging: 'true',
+        isDragging: true,
         direction: 'right',
       },
       styles: {
@@ -103,9 +106,6 @@ export const TabsList = createSubcomponent('div')({
   ({children, overflowButton, ...elemProps}, Element, model) => {
     const modality = useModalityType();
     const touchStates = useTouchDirection();
-    console.log('Modality: ', modality);
-    console.log('Direction: ', touchStates.direction);
-    console.log('isDragging: ', touchStates.isDragging);
 
     return (
       <Element
