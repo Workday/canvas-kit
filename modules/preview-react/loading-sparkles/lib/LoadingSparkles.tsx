@@ -3,7 +3,7 @@ import {base, system} from '@workday/canvas-tokens-web';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {cssVar, px2rem, keyframes, createStencil} from '@workday/canvas-kit-styling';
+import {CSProps, cssVar, px2rem, keyframes, createStencil} from '@workday/canvas-kit-styling';
 
 import {sparkleIcon} from './sparkleIcon';
 
@@ -68,7 +68,7 @@ const loadingSparklesStencil = createStencil({
  */
 export const LoadingSparkles = createComponent('div')({
   displayName: 'LoadingSparkles',
-  Component: (elemProps, ref, Element) => {
+  Component: (elemProps: CSProps, ref, Element) => {
     return (
       <Element ref={ref} role="status" {...mergeStyles(elemProps, loadingSparklesStencil({}))}>
         <Sparkle />
