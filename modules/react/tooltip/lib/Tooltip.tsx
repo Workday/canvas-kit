@@ -16,6 +16,17 @@ export interface TooltipProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
   /**
    * This should be a string in most cases. HTML is supported, but only text is understood
    * by assistive technology. This is true for both `label` and `describe` modes.
+   *
+   * **Note:** If you use `description` type and want to pass `jsx`, it **must* be inline and **not** a component to ensure the inner text is properly translated.
+   *
+   * ```jsx
+   * // The text will be understood as: You must accept terms and conditions
+   * <Tooltip type="description" title={<span>You<i>must</i> accept terms and conditions</span>}/>
+   *
+   * // This will render a string including the html and will not be properly understood by voice over.
+   * const MyComponent = () => <span>You<i>must</i> accept terms and conditions</span>
+   * <Tooltip type="description" title={MyComponent/>
+   * ```
    */
   title: React.ReactNode;
   /**
