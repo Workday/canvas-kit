@@ -12,8 +12,6 @@ import {${pascalCaseName}} from '${modulePath}';
 import {Basic} from './examples/Basic';
 import {Open} from './examples/Open';
 
-<Meta title="${storyPath}" component={${pascalCaseName}} />
-
 # ${titleCaseName}
 
 ${description}

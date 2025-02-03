@@ -1,15 +1,16 @@
 import React from 'react';
-import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
-import {createStencil, CSProps} from '@workday/canvas-kit-styling';
-import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
+
+import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
+import {CSProps, createStencil} from '@workday/canvas-kit-styling';
+import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
+import {CanvasSystemIcon} from '@workday/design-assets-types';
 
 import {useSelectInput} from './hooks/useSelectInput';
 import {useSelectModel} from './hooks/useSelectModel';
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
-import {system} from '@workday/canvas-tokens-web';
 
 export interface SelectInputProps extends ExtractProps<typeof TextInput>, CSProps {
   /**

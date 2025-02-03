@@ -1,15 +1,14 @@
 import React from 'react';
-
-import {useForm, FieldErrorsImpl} from 'react-hook-form';
-import {object, SchemaOf, string} from 'yup';
+import {FieldErrorsImpl, useForm} from 'react-hook-form';
+import {SchemaOf, object, string} from 'yup';
 
 import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
-import {Flex} from '@workday/canvas-kit-react/layout';
-import {TertiaryButton, PrimaryButton} from '@workday/canvas-kit-react/button';
-import {Select} from '@workday/canvas-kit-react/select';
-import {FormField} from '@workday/canvas-kit-react/form-field';
-import {visibleIcon, invisibleIcon} from '@workday/canvas-system-icons-web';
+import {PrimaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {Select} from '@workday/canvas-kit-react/select';
+import {invisibleIcon, visibleIcon} from '@workday/canvas-system-icons-web';
 
 type YupValidationResolver = <T extends {}>(
   validationSchema: SchemaOf<T>

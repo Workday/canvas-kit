@@ -1,12 +1,12 @@
 import React from 'react';
+
 import {ComponentStatesTable} from '@workday/canvas-kit-react/testing';
+
 import {CountBadge} from '../index';
 
 export default {
   title: 'Testing/Indicators/Badge/CountBadge',
-  component: CountBadge,
   parameters: {
-    ReadmePath: 'react/badge',
     chromatic: {
       disable: false,
     },

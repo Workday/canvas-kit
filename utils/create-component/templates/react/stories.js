@@ -10,7 +10,6 @@ import {SecondaryButton} from '@workday/canvas-kit-react/button';
 
 export default {
   title: '${storyPath}',
-  component: ${pascalCaseName},
 };
 
 export const Default = () => (

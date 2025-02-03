@@ -15,7 +15,6 @@ const fontDelay = 150; // best guess for the font delay to prevent incorrect Chr
 
 export default {
   title: 'Testing/Containers/Tabs',
-  component: Tabs,
   parameters: {
     chromatic: {
       disable: false,

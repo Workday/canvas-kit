@@ -1,8 +1,8 @@
 export * from './lib/Select';
 
 export {
-  Option,
-  RenderableOption,
-  RenderOptionFunction,
-  RenderSelectedFunction,
+  type Option,
+  type RenderableOption,
+  type RenderOptionFunction,
+  type RenderSelectedFunction,
 } from './lib/SelectBase';

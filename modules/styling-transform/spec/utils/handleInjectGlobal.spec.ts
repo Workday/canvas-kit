@@ -1,9 +1,10 @@
 import {
   createProgramFromSource,
-  withDefaultContext,
   transform,
+  withDefaultContext,
 } from '@workday/canvas-kit-styling-transform/testing';
-import {_reset} from '../../lib/styleTransform';
+
+import {_reset} from '../../lib/styleTransform.js';
 import {compileCSS} from '../../lib/utils/createStyleObjectNode';
 
 describe('handleInjectGlobal', () => {

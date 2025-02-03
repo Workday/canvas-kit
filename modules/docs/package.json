@@ -7,6 +7,7 @@
   "main": "dist/commonjs/index.js",
   "module": "dist/es6/index.js",
   "sideEffects": true,
+  "type": "module",
   "types": "dist/es6/index.d.ts",
   "repository": {
     "type": "git",
@@ -43,7 +44,7 @@
   ],
   "dependencies": {
     "@emotion/styled": "^11.6.0",
-    "@storybook/csf": "0.0.1",
+    "@storybook/csf": "0.1.13",
     "@workday/canvas-kit-labs-react": "^12.1.16",
     "@workday/canvas-kit-preview-react": "^12.1.16",
     "@workday/canvas-kit-react": "^12.1.16",

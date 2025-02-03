@@ -1,21 +1,18 @@
 import * as React from 'react';
-import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
-
-import {
-  listViewIcon,
-  worksheetsIcon,
-  deviceTabletIcon,
-  percentageIcon,
-  cColumnClusteredIcon,
-} from '@workday/canvas-system-icons-web';
 
 import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
+import {
+  cColumnClusteredIcon,
+  deviceTabletIcon,
+  listViewIcon,
+  percentageIcon,
+  worksheetsIcon,
+} from '@workday/canvas-system-icons-web';
 
 export default {
   title: 'Testing/Buttons/Segmented Control',
-  component: SegmentedControl,
   parameters: {
-    ReadmePath: 'labs-react/header',
     chromatic: {
       disable: false,
     },

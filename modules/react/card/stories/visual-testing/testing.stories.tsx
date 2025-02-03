@@ -1,11 +1,10 @@
 import React from 'react';
-import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 
 import {Card} from '@workday/canvas-kit-react/card';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 
 export default {
   title: 'Testing/Containers/Card',
-  component: Card,
   parameters: {
     chromatic: {
       disable: false,

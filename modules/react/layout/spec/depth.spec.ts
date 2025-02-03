@@ -1,4 +1,4 @@
-import {DepthStyleProps} from '@workday/canvas-kit-react/layout';
+import {type DepthStyleProps} from '@workday/canvas-kit-react/layout';
 import {depth} from '../lib/utils/depth';
 
 describe('Depth Style Props Function', () => {

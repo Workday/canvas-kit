@@ -1,15 +1,15 @@
 import React from 'react';
+
+import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
 import {
   ComponentStatesTable,
-  permutateProps,
   StaticStates,
+  permutateProps,
 } from '@workday/canvas-kit-react/testing';
-import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
-import {gridIcon, listViewIcon, listDetailIcon} from '@workday/canvas-system-icons-web';
+import {gridIcon, listDetailIcon, listViewIcon} from '@workday/canvas-system-icons-web';
 
 export default {
   title: 'Testing/Preview/Segmented Control',
-  component: SegmentedControl,
   parameters: {
     chromatic: {
       disable: false,

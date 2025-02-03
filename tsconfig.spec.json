@@ -1,12 +1,6 @@
 {
   "extends": "./tsconfig.json",
-  "include": [
-    "./jest/testing-library__jest-dom.d.ts",
-    "./jest/verifyComponent.d.ts",
-    "**/*.spec.tsx",
-    "**/*.spec.ts",
-    "jest/setupTests.ts"
-  ],
+  "include": ["./jest/verifyComponent.d.ts", "**/*.spec.tsx", "**/*.spec.ts", "vitest.config.ts"],
   "exclude": ["cypress"],
   "compilerOptions": {
     "declaration": false,
@@ -18,7 +12,7 @@
     "noImplicitAny": false,
     "strictNullChecks": true,
     "noUnusedLocals": false,
-    "types": ["jest"],
+    "types": ["vitest/globals", "@testing-library/jest-dom"],
     "incremental": false
   }
 }

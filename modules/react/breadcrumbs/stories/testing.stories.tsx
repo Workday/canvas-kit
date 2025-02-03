@@ -1,13 +1,11 @@
 import React from 'react';
 
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
-import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/testing';
-
 import {Breadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
+import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 
 export default {
   title: 'Testing/Navigation/Breadcrumbs',
-  component: Breadcrumbs,
   parameters: {
     chromatic: {
       disable: false,

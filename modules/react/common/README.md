@@ -47,6 +47,7 @@ can find more information in the [theming documentation](./lib/theming/README.md
 
 ```tsx
 import * as React from 'react';
+
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
 
 <CanvasProvider>{/* All your components containing any Canvas components */}</CanvasProvider>;
@@ -72,7 +73,6 @@ import {CanvasProviderDecorator} from '../../../../utils/storybook';
 
 export default {
   title: 'MyComponent',
-  component: MyComponent,
   decorators: [CanvasProviderDecorator],
 };
 

@@ -5,7 +5,7 @@ import {CSSObject} from '@emotion/styled';
 import {createComponent, getColor} from '@workday/canvas-kit-react/common';
 import {cssVar, createStencil, handleCsProp, px2rem, createVars} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
-import {Svg, SvgProps, svgStencil, transformColorNameToToken} from './Svg';
+import {Svg, type SvgProps, svgStencil, transformColorNameToToken} from './Svg';
 
 /**
  * @deprecated Interface `SystemIconStyles` will be removed in a future version. `accent`, `color`, background props will be moved inside `GraphicProps`.

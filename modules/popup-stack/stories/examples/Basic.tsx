@@ -1,24 +1,22 @@
 import React from 'react';
 
-import {PopupStack} from '../lib/PopupStack';
+import {PopupStack} from '@workday/canvas-kit-popup-stack';
 
-export default {
-  title: 'Components/Popups/Popup Stack',
-  parameters: {
-    ReadmePath: 'popup-stack',
-  },
-};
-
-export const Default = () => {
+export const Basic = () => {
+  const containerRef = React.createRef<HTMLDivElement>();
   React.useEffect(() => {
     document.querySelector('#open-button').addEventListener('click', event => {
+      const {x, y} = containerRef.current.getBoundingClientRect();
       const number = document.body.querySelectorAll('.wdc-card').length;
       const div = document.createElement('div');
       div.className = 'example-popup';
       div.style.position = 'absolute';
       div.style.width = '200px';
-      div.style.top = `${70 + 30 * number}px`;
-      div.style.left = `${60 + 30 * number}px`;
+      div.style.background = 'white';
+      div.style.border = '1px black solid';
+      div.style.padding = '8px';
+      div.style.top = `${document.documentElement.scrollTop + y + 20 + 30 * number}px`;
+      div.style.left = `${x + 30 * number}px`;
 
       div.innerHTML = `
         <div class="wdc-card">
@@ -45,7 +43,7 @@ export const Default = () => {
   }, []); // do all DOM manipulation once
 
   return (
-    <div>
+    <div ref={containerRef} style={{position: 'relative'}}>
       <button className="wdc-btn" id="open-button">
         Create new popup stack item
       </button>

@@ -1,69 +1,33 @@
-import * as React from 'react';
-import {
-  homeIcon,
-  starIcon,
-  rocketIcon,
-  plusIcon,
-  justifyIcon,
-  assistantIcon,
-  notificationsIcon,
-  inboxIcon,
-} from '@workday/canvas-system-icons-web';
 import styled from '@emotion/styled';
+import * as React from 'react';
 
-import {colors, type, space, depth} from '@workday/canvas-kit-react/tokens';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {
-  TertiaryButton,
-  PrimaryButton,
-  Hyperlink,
-  SecondaryButton,
-} from '@workday/canvas-kit-react/button';
-import {SidePanel} from '@workday/canvas-kit-react/side-panel';
-import {SidePanelProps} from '../lib/SidePanel';
-
-import {
-  defaultCanvasTheme,
-  StyledType,
-  createComponent,
-  dubLogoBlue,
-} from '@workday/canvas-kit-react/common';
-import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 import {SearchForm} from '@workday/canvas-kit-labs-react/search-form';
 import {Avatar} from '@workday/canvas-kit-react/avatar';
+import {
+  Hyperlink,
+  PrimaryButton,
+  SecondaryButton,
+  TertiaryButton,
+} from '@workday/canvas-kit-react/button';
+import {StyledType, createComponent, dubLogoBlue} from '@workday/canvas-kit-react/common';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
+import {SidePanel} from '@workday/canvas-kit-react/side-panel';
 import {BodyText} from '@workday/canvas-kit-react/text';
+import {colors, depth, space, type} from '@workday/canvas-kit-react/tokens';
+import {
+  assistantIcon,
+  homeIcon,
+  inboxIcon,
+  justifyIcon,
+  notificationsIcon,
+  plusIcon,
+  rocketIcon,
+  starIcon,
+} from '@workday/canvas-system-icons-web';
 
 export default {
   title: 'Components/Containers/Side Panel',
-  component: SidePanel,
-  parameters: {ReadmePath: 'react/side-panel'},
-  argTypes: {
-    backgroundColor: {
-      options: {
-        white: SidePanel.BackgroundColor.White,
-        gray: SidePanel.BackgroundColor.Gray,
-        transparent: SidePanel.BackgroundColor.Transparent,
-      },
-      control: 'radio',
-    },
-    openWidth: {
-      control: 'number',
-    },
-    openDirection: {
-      options: {
-        left: SidePanel.OpenDirection.Left,
-        right: SidePanel.OpenDirection.Right,
-      },
-      control: 'radio',
-    },
-    breakpoint: {
-      control: 'number',
-    },
-    theme: {
-      control: 'object',
-      defaultValue: defaultCanvasTheme,
-    },
-  },
 };
 
 interface SidePanelState {
@@ -71,16 +35,6 @@ interface SidePanelState {
 }
 
 interface HeaderItemProps extends FlexProps {}
-
-const ListItem = styled('li')({
-  display: 'flex',
-  listStyle: 'none',
-  alignItems: 'end',
-  cursor: 'pointer',
-  '&:hover': {
-    backgroundColor: colors.soap300,
-  },
-});
 
 const UnorderedList = styled('ul')({
   paddingLeft: 0,
@@ -129,7 +83,7 @@ const HeaderWrapper = styled('header')<StyledType>({
 
 const WorkdayLogo = styled('span')({lineHeight: 0});
 
-class SidePanelWrapper extends React.Component<SidePanelProps, SidePanelState> {
+class SidePanelWrapper extends React.Component<{}, SidePanelState> {
   public state = {
     open: true,
   };
@@ -139,7 +93,6 @@ class SidePanelWrapper extends React.Component<SidePanelProps, SidePanelState> {
 
     return (
       <SidePanel
-        {...this.props}
         open={open}
         onToggleClick={this.onClick}
         onBreakpointChange={this.handleBreakpoint}
@@ -227,7 +180,7 @@ export const Default = () => (
   </div>
 );
 
-const Template = props => (
+export const Configurable = () => (
   <div style={{height: '67vh', position: 'relative'}}>
     <GlobalHeader>
       <GlobalHeader.Item>
@@ -246,14 +199,6 @@ const Template = props => (
         <Avatar size="medium" variant="light" />
       </GlobalHeader.Item>
     </GlobalHeader>
-    <SidePanelWrapper {...props} />
+    <SidePanelWrapper />
   </div>
 );
-
-export const Configurable = Template.bind({});
-(Configurable as any).args = {
-  backgroundColor: SidePanel.BackgroundColor.Gray,
-  openWidth: 300,
-  breakpoint: 768,
-  openDirection: SidePanel.OpenDirection.Left,
-};

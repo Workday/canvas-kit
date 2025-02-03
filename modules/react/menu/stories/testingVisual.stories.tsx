@@ -1,20 +1,18 @@
 import React from 'react';
 
 import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
+import {Flex} from '@workday/canvas-kit-react/layout';
+// unreleased path
+import {Menu} from '@workday/canvas-kit-react/menu';
 import {StaticStates} from '@workday/canvas-kit-react/testing';
 import {saveAsIcon} from '@workday/canvas-system-icons-web';
 
 import {customColorTheme} from '../../../../utils/storybook';
 
-// unreleased path
-import {Menu} from '@workday/canvas-kit-react/menu';
-import {Flex} from '@workday/canvas-kit-react/layout';
-
 const fontDelay = 150; // best guess for the font delay to prevent incorrect Chromatic regressions
 
 export default {
   title: 'Testing/Popups/Menu',
-  component: Menu,
   parameters: {
     chromatic: {
       disable: false,

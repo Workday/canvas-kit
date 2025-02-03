@@ -1,13 +1,13 @@
 import React from 'react';
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
+import {vscDarkPlus} from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {Card} from '@workday/canvas-kit-react/card';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
-import {vscDarkPlus} from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import {checkCircleIcon, copyIcon} from '@workday/canvas-system-icons-web';
-import {Tooltip} from '@workday/canvas-kit-react';
+import {system} from '@workday/canvas-tokens-web';
 
 const cardStencil = createStencil({
   base: {
@@ -15,6 +15,7 @@ const cardStencil = createStencil({
       boxShadow: system.depth[1],
       borderRadius: system.shape.x1,
       position: 'relative',
+      margin: `${system.space.x4} 0 ${system.space.x6}`,
     },
     '[data-part="code-block"]': {
       display: 'none',

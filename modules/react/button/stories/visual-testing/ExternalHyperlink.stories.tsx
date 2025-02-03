@@ -2,20 +2,21 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/react';
 import React from 'react';
+
+import {ExternalHyperlink} from '@workday/canvas-kit-react/button';
 import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {
   ComponentStatesTable,
-  permutateProps,
   StaticStates,
+  permutateProps,
 } from '@workday/canvas-kit-react/testing';
-import {ExternalHyperlink} from '@workday/canvas-kit-react/button';
-import {Container} from './utils';
-import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {BodyText, Subtext} from '@workday/canvas-kit-react/text';
+
+import {Container} from './utils';
 
 export default {
   title: 'Testing/Buttons/Button/ExternalHyperlink',
-  component: ExternalHyperlink,
   parameters: {
     chromatic: {
       disable: false,

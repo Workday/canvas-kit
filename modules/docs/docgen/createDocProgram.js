@@ -1,13 +1,13 @@
 // @ts-check
 
-const ts = require('typescript');
-const glob = require('glob');
-const path = require('path');
+import ts from 'typescript';
+import glob from 'glob';
+import path from 'path';
 
-// we use TS files, so tell node to register them
-require('ts-node').register({});
+// // we use TS files, so tell node to register them
+// require('ts-node').register({});
 
-const {DocParser} = require('./docParser');
+import {DocParser} from './docParser';
 
 /** @type {ts.CompilerOptions} */
 const defaultTSConfig = {};
@@ -108,7 +108,7 @@ function getFiles(basePath, config) {
   return glob.sync(absolutePath + '/' + config.glob, {ignore: config.ignore || undefined});
 }
 
-function createDocProgram() {
+export function createDocProgram() {
   const {path, config} = getConfig();
   const tsConfig = getTSConfig(path);
 
@@ -136,5 +136,3 @@ function createDocProgram() {
 
   return Doc;
 }
-
-module.exports.createDocProgram = createDocProgram;

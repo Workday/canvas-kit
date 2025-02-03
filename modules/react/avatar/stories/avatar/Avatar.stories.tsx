@@ -1,13 +1,14 @@
 import {Meta} from '@storybook/react';
+
 import mdxDoc from './Avatar.mdx';
 
-import {Basic as BasicExample} from './examples/Basic';
-import {Button as ButtonExample} from './examples/Button';
-import {CustomStyles as CustomStylesExample} from './examples/CustomStyles';
-import {Image as ImageExample} from './examples/Image';
-import {LazyLoad as LazyLoadExample} from './examples/LazyLoad';
-import {ObjectFit as ObjectFitExample} from './examples/ObjectFit';
-import {Variant as VariantExample} from './examples/Variant';
+export {Basic} from './examples/Basic';
+export {Button} from './examples/Button';
+export {CustomStyles} from './examples/CustomStyles';
+export {Image} from './examples/Image';
+export {LazyLoad} from './examples/LazyLoad';
+export {ObjectFit} from './examples/ObjectFit';
+export {Variant} from './examples/Variant';
 
 export default {
   title: 'Components/Indicators/Avatar',
@@ -17,32 +18,4 @@ export default {
       page: mdxDoc,
     },
   },
-} as Meta;
-
-export const Basic = {
-  render: BasicExample,
-};
-
-export const Button = {
-  render: ButtonExample,
-};
-
-export const CustomStyles = {
-  render: CustomStylesExample,
-};
-
-export const Image = {
-  render: ImageExample,
-};
-
-export const LazyLoad = {
-  render: LazyLoadExample,
-};
-
-export const ObjectFit = {
-  render: ObjectFitExample,
-};
-
-export const Variant = {
-  render: VariantExample,
-};
+} satisfies Meta;

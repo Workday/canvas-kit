@@ -1,4 +1,4 @@
-export {defaultGetId, Item} from './lib/useBaseListModel';
+export {defaultGetId, type Item} from './lib/useBaseListModel';
 export * from './lib/useListItemRegister';
 export * from './lib/useOverflowListMeasure';
 export * from './lib/useOverflowListItemMeasure';
@@ -18,7 +18,7 @@ export * from './lib/useListItemAllowChildStrings';
 export * from './lib/useListItemRemoveOnDeleteKey';
 export * from './lib/focusOnCurrentCursor';
 export * from './lib/listItemRemove';
-export {ListBox, ListBoxProps} from './lib/ListBox';
+export {ListBox, type ListBoxProps} from './lib/ListBox';
 export {keyboardEventToCursorEvents} from './lib/keyUtils';
 export {
   singleSelectionManager,

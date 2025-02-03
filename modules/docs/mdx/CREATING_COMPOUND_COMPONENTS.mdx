@@ -1,3 +1,5 @@
+import {Meta} from '@storybook/blocks';
+
 <Meta title="Guides/Creating Compound Components" />
 
 # Building a Compound Component
@@ -18,10 +20,11 @@ concepts. We will cover:
 
 ## Non Coordinated Components
 
-In most cases you'll create compound components that have a model and share information across subcomponents. However, in the case where information doesn't need to be shared, you can create a non
-coordinated component. These components often represent some styled element with no associated role
-or behavior and don't rely on state and events such as a `Card`, `Flex` or `Button` components. Use
-`createComponent` factory function in these scenarios.
+In most cases you'll create compound components that have a model and share information across
+subcomponents. However, in the case where information doesn't need to be shared, you can create a
+non coordinated component. These components often represent some styled element with no associated
+role or behavior and don't rely on state and events such as a `Card`, `Flex` or `Button` components.
+Use `createComponent` factory function in these scenarios.
 
 ### `createComponent`
 
@@ -744,24 +747,26 @@ import {createElemPropsHook, mergeProps} from '@workday/canvas-kit-react/common'
 import {useDisclosureModel} from './useDisclosureModel';
 import {useExpandableControls} from './useExpandableControls';
 
-export const useDisclosureTarget = createElemPropsHook(useDisclosureModel)(
-  (model, ref, elemProps) => {
-    const props = useExpandableControls(model, elemProps, ref);
+export const useDisclosureTarget = createElemPropsHook(useDisclosureModel)((
+  model,
+  ref,
+  elemProps
+) => {
+  const props = useExpandableControls(model, elemProps, ref);
 
-    return mergeProps(
-      {
-        onClick() {
-          if (model.state.visible) {
-            model.events.hide();
-          } else {
-            model.events.show();
-          }
-        },
+  return mergeProps(
+    {
+      onClick() {
+        if (model.state.visible) {
+          model.events.hide();
+        } else {
+          model.events.show();
+        }
       },
-      props
-    );
-  }
-);
+    },
+    props
+  );
+});
 ```
 
 Notice we still need to use `mergeProps` to compose the behavior of our two elemProps hooks?

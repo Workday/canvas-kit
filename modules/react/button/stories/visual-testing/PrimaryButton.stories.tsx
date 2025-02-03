@@ -1,18 +1,19 @@
 import React from 'react';
+
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 import {
   ComponentStatesTable,
-  permutateProps,
   StaticStates,
+  permutateProps,
 } from '@workday/canvas-kit-react/testing';
-import {customColorTheme} from '../../../../../utils/storybook';
 import {playCircleIcon, relatedActionsVerticalIcon} from '@workday/canvas-system-icons-web';
-import {PrimaryButton} from '@workday/canvas-kit-react/button';
+
+import {customColorTheme} from '../../../../../utils/storybook';
 import {Container, stateTableColumnProps} from './utils';
 
 export default {
   title: 'Testing/Buttons/Button/Primary Button',
-  component: PrimaryButton,
   parameters: {
     chromatic: {
       disable: false,

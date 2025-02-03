@@ -7,7 +7,7 @@ const placeholder = 'Test Text Area';
 const value = 'Test Text Area';
 
 describe('Text Area', () => {
-  const cb = jest.fn();
+  const cb = vi.fn();
   afterEach(() => {
     cb.mockReset();
   });

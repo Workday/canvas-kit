@@ -2,7 +2,7 @@ import * as React from 'react';
 import {colors, BrandingColor, CanvasColor} from '@workday/canvas-kit-react/tokens';
 import {CanvasAppletIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
-import {Svg, SvgProps, svgStencil} from './Svg';
+import {Svg, type SvgProps, svgStencil} from './Svg';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {handleCsProp, createStencil, px2rem, cssVar} from '@workday/canvas-kit-styling';
 import {base} from '@workday/canvas-tokens-web';

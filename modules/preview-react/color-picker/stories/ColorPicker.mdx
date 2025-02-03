@@ -1,0 +1,76 @@
+import {
+  ExampleCodeBlock,
+  InformationHighlight,
+  Specifications,
+  SymbolDoc,
+} from '@workday/canvas-kit-docs';
+
+# Canvas Kit React Color Picker
+
+This component is in Preview because it has not been converted to a
+[Compound Component](../../docs/mdx/COMPOUND_COMPONENTS.mdx) yet. There is also work other teams are
+doing on Color Picker that may replace this implementation.
+
+Color Picker is a popup for selecting a color.
+
+The Color Picker is designed to be used different contexts. The pattern shown below is one where the
+Color Picker is used as a popup from a button target by using hooks around the callbacks provided by
+the component.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-preview-react
+```
+
+## Usage
+
+```tsx
+import * as React from 'react';
+
+import {ColorPicker} from '@workday/canvas-kit-preview-react/color-picker';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
+import {Popper, Popup} from '@workday/canvas-kit-react/popup';
+import {colors} from '@workday/canvas-kit-react/tokens';
+
+const MyComponent: React.FunctionComponent = () => {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [color, setColor] = React.useState('');
+  const ref = React.useRef(null);
+
+  const toggleOpen = () => setIsOpen(!isOpen);
+
+  const handleSubmit = React.useCallback(
+    (submitColor: string) => {
+      setColor(submitColor.toUpperCase());
+      setIsOpen(false);
+    },
+    [setIsOpen]
+  );
+
+  return (
+    <>
+      <SecondaryButton ref={ref} variant="primary" onClick={toggleOpen}>
+        Toggle Color Picker
+      </SecondaryButton>
+      <Popper placement={'bottom'} open={isOpen} anchorElement={ref.current!}>
+        <Popup style={{marginTop: 8}} padding={PopupPadding.s}>
+          <ColorPicker
+            resetColor={colors.blueberry400}
+            resetLabel={'Reset'}
+            showCustomHexInput={true}
+            onColorChange={handleSubmit}
+            onColorReset={() => handleSubmit(colors.blueberry400)}
+            onSubmitClick={toggleOpen}
+            value={color}
+          />
+        </Popup>
+      </Popper>
+    </>
+  );
+};
+```
+
+## Component API
+
+<SymbolDoc name="ColorPicker" fileName="/preview-react/" />

@@ -1,12 +1,11 @@
 import React from 'react';
 
 import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
-import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 import {Popup, usePopupModel} from '@workday/canvas-kit-react/popup';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 
 export default {
   title: 'Testing/Popups/Popup',
-  component: Popup,
   parameters: {
     chromatic: {
       disable: false,

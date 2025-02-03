@@ -9,7 +9,7 @@ const renderCombobox = (props: ComboboxProps) => render(<Combobox {...props} />)
 describe('Combobox', () => {
   let defaultProps: ComboboxProps;
   const placeholderText = 'placeholder';
-  const cb = jest.fn().mockImplementation((event: Event) => event);
+  const cb = vi.fn().mockImplementation((event: Event) => event);
 
   beforeEach(() => {
     defaultProps = {

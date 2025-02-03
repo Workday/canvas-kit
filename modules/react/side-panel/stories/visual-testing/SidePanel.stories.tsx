@@ -1,15 +1,15 @@
 import React from 'react';
-import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
+
 import {
   SidePanel,
   SidePanelBackgroundColor,
   SidePanelOpenDirection,
 } from '@workday/canvas-kit-react/side-panel';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 import {space} from '@workday/canvas-kit-react/tokens';
 
 export default {
   title: 'Testing/Containers/Side Panel',
-  component: SidePanel,
   parameters: {
     chromatic: {
       disable: false,

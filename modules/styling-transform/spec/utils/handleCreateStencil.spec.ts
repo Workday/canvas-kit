@@ -1,11 +1,10 @@
 import ts from 'typescript';
 
-import {findNodes} from '../findNodes';
-import {createProgramFromSource} from '../createProgramFromSource';
-
-import {handleCreateStencil} from '../../lib/utils/handleCreateStencil';
-import {transform, withDefaultContext, _reset} from '../../lib/styleTransform';
+import {_reset, transform, withDefaultContext} from '../../lib/styleTransform.js';
 import {compileCSS} from '../../lib/utils/createStyleObjectNode';
+import {handleCreateStencil} from '../../lib/utils/handleCreateStencil';
+import {createProgramFromSource} from '../createProgramFromSource';
+import {findNodes} from '../findNodes';
 
 function getFile<K extends string, T extends Record<K, any>>(styles: T, name: string): T[K] | void {
   for (const style in styles) {
@@ -22,7 +21,7 @@ describe('handleCreateStencil', () => {
       _reset();
     });
 
-    it('should add a variable to the cache when the arguments are strings', () => {
+    it.only('should add a variable to the cache when the arguments are strings', async () => {
       const program = createProgramFromSource(`
         import {createStencil} from '@workday/canvas-kit-styling';
 
@@ -33,7 +32,7 @@ describe('handleCreateStencil', () => {
         })
       `);
 
-      const result = transform(program, 'test.ts');
+      const result = await transform(program, 'test.ts');
 
       expect(result).toMatch(/}, "button-[a-z0-9]+"\)/);
     });

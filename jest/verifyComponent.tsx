@@ -109,7 +109,7 @@ export function verifyComponent(
     for (const key in callbacks) {
       it(`should call the '${key}' callback when the '${callbacks[key]}' event is fired`, () => {
         const ref: React.RefObject<Element> = {current: null};
-        const fn = jest.fn();
+        const fn = vi.fn();
         render(<Test ref={ref} {...{[key]: fn}} />);
 
         fireEvent[callbacks[key]](ref.current!);

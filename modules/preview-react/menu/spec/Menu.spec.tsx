@@ -1,9 +1,13 @@
+import {fireEvent, render, screen} from '@testing-library/react';
 import * as React from 'react';
+
 import {DeprecatedMenu, DeprecatedMenuItem} from '../index';
-import {screen, render, fireEvent} from '@testing-library/react';
 
 describe('DeprecatedMenu', () => {
-  const cb = jest.fn();
+  const cb = vi.fn();
+  afterEach(() => {
+    cb.mockReset();
+  });
 
   it('should call the "onClick" event when an item is clicked', () => {
     render(
@@ -174,7 +178,7 @@ describe('DeprecatedMenu Accessibility', () => {
 });
 
 describe('DeprecatedMenu Keyboard Shortcuts', () => {
-  const cb = jest.fn();
+  const cb = vi.fn();
   afterEach(() => {
     cb.mockReset();
   });
@@ -296,9 +300,9 @@ describe('DeprecatedMenu Keyboard Shortcuts', () => {
   });
 
   it('should call the correct click event when headers are present', () => {
-    const one = jest.fn();
-    const two = jest.fn();
-    const three = jest.fn();
+    const one = vi.fn();
+    const two = vi.fn();
+    const three = vi.fn();
     render(
       <DeprecatedMenu>
         <DeprecatedMenuItem isHeader>Beginning</DeprecatedMenuItem>

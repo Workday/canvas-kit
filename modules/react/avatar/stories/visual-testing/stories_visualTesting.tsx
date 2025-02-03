@@ -2,12 +2,12 @@ import React from 'react';
 
 import {
   ComponentStatesTable,
-  permutateProps,
   StaticStates,
+  permutateProps,
 } from '@workday/canvas-kit-react/testing';
+
 import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 import {Avatar} from '../../index';
-
 // @ts-ignore: Cannot find module error
 import testAvatar from '../test-avatar.png';
 
@@ -16,7 +16,6 @@ const noop = () => {};
 
 export default withSnapshotsEnabled({
   title: 'Testing/Indicators/Avatar',
-  component: Avatar,
   parameters: {
     chromatic: {
       diffThreshold: 0.3, // Chrome downsizes images non-deterministically. From testing, 0.28 is the minimum.

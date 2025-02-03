@@ -1,6 +1,7 @@
-import * as React from 'react';
-import InputProvider, {InputType, InputEventType, inputEventMap} from '../lib/InputProvider';
 import {render} from '@testing-library/react';
+import * as React from 'react';
+
+import InputProvider, {InputEventType, InputType, inputEventMap} from '../lib/InputProvider';
 
 const testInput = (
   mockEvent: {type: string},
@@ -12,7 +13,7 @@ const testInput = (
   // I tried using `fireEvent`, but got a failure on a mouse-based pointer event.
   // This could be because `fireEvent` doesn't handle mouse-based point events very well
   const map: any = {};
-  window.addEventListener = jest.fn((event, cb) => {
+  window.addEventListener = vi.fn((event, cb) => {
     map[event] = cb;
   });
 

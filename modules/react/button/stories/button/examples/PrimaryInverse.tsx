@@ -2,12 +2,13 @@ import React from 'react';
 
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {createStyles} from '@workday/canvas-kit-styling';
 import {
+  caretDownIcon,
+  globeIcon,
   plusIcon,
   relatedActionsVerticalIcon,
-  caretDownIcon,
 } from '@workday/canvas-system-icons-web';
-import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const parentContainerStyles = createStyles({

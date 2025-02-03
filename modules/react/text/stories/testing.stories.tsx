@@ -1,10 +1,12 @@
 import React from 'react';
+
+import {Box} from '@workday/canvas-kit-react/layout';
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 import {colors} from '@workday/canvas-kit-react/tokens';
-import {BodyText, Heading, LabelText, Subtext, Text, Title} from '../';
-import {Box} from '@workday/canvas-kit-react/layout';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {base} from '@workday/canvas-tokens-web';
+
+import {BodyText, Heading, LabelText, Subtext, Text, Title} from '../';
 
 type TypeStateProp = {size: 'small' | 'medium' | 'large'; variant?: 'error' | 'hint' | 'inverse'};
 
@@ -14,7 +16,6 @@ const inverseBackground = createStyles({
 
 export default {
   title: 'Testing/Containers/Text',
-  component: Text,
   parameters: {
     chromatic: {
       disable: false,

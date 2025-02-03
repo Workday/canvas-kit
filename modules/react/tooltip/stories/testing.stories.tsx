@@ -8,7 +8,6 @@ import {StaticStates} from '@workday/canvas-kit-react/testing';
 
 export default {
   title: 'Testing/Popups/Tooltip',
-  component: Tooltip,
 };
 
 export const NonInteractive = {

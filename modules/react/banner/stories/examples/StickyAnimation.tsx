@@ -2,6 +2,7 @@
 /** @jsx jsx */
 import {jsx, keyframes} from '@emotion/react';
 import React from 'react';
+import {CSSInterpolation} from '@emotion/serialize';
 
 import {CSSProperties, space} from '@workday/canvas-kit-react/tokens';
 import {useTheme} from '@workday/canvas-kit-react/common';

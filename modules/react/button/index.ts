@@ -1,11 +1,11 @@
 export {
   DeprecatedButton as deprecated_Button,
-  DeprecatedButtonProps,
+  type DeprecatedButtonProps,
 } from './lib/deprecated_Button';
-export {ToolbarIconButton, ToolbarIconButtonProps} from './lib/ToolbarIconButton';
-export {ToolbarDropdownButton, ToolbarDropdownButtonProps} from './lib/ToolbarDropdownButton';
-export {Hyperlink, HyperlinkProps} from './lib/Hyperlink';
-export {ExternalHyperlink, ExternalHyperlinkProps} from './lib/ExternalHyperlink';
+export {ToolbarIconButton, type ToolbarIconButtonProps} from './lib/ToolbarIconButton';
+export {ToolbarDropdownButton, type ToolbarDropdownButtonProps} from './lib/ToolbarDropdownButton';
+export {Hyperlink, type HyperlinkProps} from './lib/Hyperlink';
+export {ExternalHyperlink, type ExternalHyperlinkProps} from './lib/ExternalHyperlink';
 export * from './lib/types';
 export * from './lib/PrimaryButton';
 export * from './lib/SecondaryButton';

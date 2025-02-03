@@ -1,34 +1,45 @@
+import styled from '@emotion/styled';
+import * as React from 'react';
+
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
+import {ColorInput} from '@workday/canvas-kit-react/color-picker';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {colors, space} from '@workday/canvas-kit-react/tokens';
 import {checkIcon} from '@workday/canvas-system-icons-web';
-import {ColorInput} from '@workday/canvas-kit-react/color-picker';
-import {SecondaryButton} from '@workday/canvas-kit-react/button';
-import * as React from 'react';
-import {FormField} from '@workday/canvas-kit-react/form-field';
-import styled from '@emotion/styled';
 
 import {ResetButton} from './parts/ColorReset';
 import {SwatchBook, SwatchBookColorObject} from './parts/SwatchBook';
 
 export interface ColorPickerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * The function called when the ColorPicker state changes.
+   * This handler is called when the user selects a color through either a mouse or keyboard event.
+   * It is called with the hex value of the color selected by the user, or with a custom hex value
+   * entered by the user in the custom input.
    */
   onColorChange: (color: string) => void;
   /**
-   * The value of the ColorPicker.
+   * The hex value of the color to display styled in a selected state. If the value doesn't match
+   * one of the available colors, the hex value will be displayed in the custom input.
    */
   value?: string;
   /**
-   * The array of colors to be rendered in the swatchbook.
+   * The hex values of the colors to display in the color picker grid. If no custom colors are
+   * provided, a default set will be rendered.
    */
   colorSet?: string[] | SwatchBookColorObject[];
   /**
-   * If true, render an input for entering a custom hex color.
+   * When `true` the `ColorInput` component and a submit button will be displayed at the bottom of
+   * the picker allowing the user to enter a custom hex value.
+   *
    * @default false
    */
   showCustomHexInput?: boolean;
   /**
-   * The label text of the custom hex input.
+   * The text to display abover the custom input. It is strongly recommended that consumers provide
+   * a properly globalized value.
+   *
+   * **Note:** This prop is only used when `showCustomHexInput` is `true`.
+   *
    * @default 'Custom Hex Color'
    */
   customHexInputLabel?: string;
@@ -38,21 +49,31 @@ export interface ColorPickerProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   submitLabel?: string;
   /**
-   * The function called when the submit icon is clicked.
+   * When this handler is provided, an action can be tied to clicking the check button provided.
+   * This handler is called when the check button is selected through a keyboard event only.
+   *
+   * **Note:** This prop is only used when `showCustomHexInput` is `true`.
    */
   onSubmitClick?: (event: React.FormEvent) => void;
   /**
-   * The function called when the color rest button is selected.
-   * It is required to be set for the reset button to render.
+   * When this handler is provided, a Reset button will be displayed at the top of the picker using
+   * the `resetLabel` provided. This handler is called when the reset button is selected through
+   * either a mouse or keyboard event.
    */
   onColorReset?: (color: string) => void;
   /**
-   * The color that the reset button resets to.
-   * It is required to be set for the reset button to render.
+   * The color to display as part of the Reset button. It is strongly recommended that consumers
+   * provide a properly globalized value.
+   *
+   * **Note:** This prop is only necessary when the `onColorReset` handler is provided.
    */
   resetColor?: string;
   /**
-   * The label text of the reset button.
+   * The text to display as part of the Reset button. It is strongly recommended that consumers
+   * provide a properly globalized value.
+   *
+   * **Note:** This prop is only necessary when the `onColorReset` handler is provided.
+   *
    * @default 'Reset'
    */
   resetLabel?: string;

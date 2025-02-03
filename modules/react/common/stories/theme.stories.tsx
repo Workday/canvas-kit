@@ -1,11 +1,20 @@
-import React from 'react';
 import styled from '@emotion/styled';
-import {Meta, StoryObj} from '@storybook/react';
-import {CanvasProvider} from '../index';
-import {CanvasTheme, CanvasThemePalette, Themeable} from '../lib/theming';
-import {colors, type, space, borderRadius} from '@workday/canvas-kit-react/tokens';
-import {useTheme} from '@workday/canvas-kit-react/common';
-import {StyledType} from '../lib/utils';
+import {Meta} from '@storybook/react';
+import React from 'react';
+
+import {
+  CanvasProvider,
+  CanvasTheme,
+  CanvasThemePalette,
+  StyledType,
+  Themeable,
+  useTheme,
+} from '@workday/canvas-kit-react/common';
+import {borderRadius, colors, space, type} from '@workday/canvas-kit-react/tokens';
+
+export default {
+  title: 'Features/Theming',
+} satisfies Meta;
 
 const Palettes = styled('div')({
   display: 'flex',
@@ -100,12 +109,12 @@ const StyledHeaderCustomTheme = styled('h1')({
 type PaletteKey = keyof CanvasTheme['palette'];
 type SwatchKey = keyof CanvasThemePalette;
 
-const ThemeDemo = (props: any) => {
+export const ThemeDemo = () => {
   const theme = useTheme();
   return (
     <div>
       <StyledHeaderDefaultTheme>Default Canvas Theme</StyledHeaderDefaultTheme>
-      <Palettes {...props}>
+      <Palettes>
         {Object.keys(theme.canvas.palette).map(name => {
           const palette = theme.canvas.palette[name as PaletteKey] as CanvasThemePalette;
           const bg = (palette.main && palette.main) || colors.soap200;
@@ -131,18 +140,4 @@ const ThemeDemo = (props: any) => {
       </CanvasProvider>
     </div>
   );
-};
-
-const meta: Meta = {
-  title: 'Features/Theming',
-  parameters: {
-    ReadmePath: 'react/common/lib/theming',
-  },
-};
-
-export default meta;
-
-export const Theme: StoryObj = {
-  name: 'Theme',
-  render: () => <ThemeDemo />,
 };

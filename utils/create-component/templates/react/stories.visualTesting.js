@@ -8,7 +8,6 @@ import {${pascalCaseName}} from '${modulePath}';
 
 export default withSnapshotsEnabled({
   title: '${storyPath}',
-  component: ${pascalCaseName},
 });
 
 export const ${pascalCaseName}States = () => {

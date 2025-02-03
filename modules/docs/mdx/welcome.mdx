@@ -1,8 +1,8 @@
-import Readme from '../../../README.md';
-import Markdown from '../../../utils/storybook/Markdown.tsx';
-import { WelcomePage } from './welcomePage';
-import { InstallBlock } from './installBlock';
-import { version } from '../../../lerna.json';
+import {Meta} from '@storybook/blocks';
+
+import {WelcomePage} from './welcomePage';
+import {InstallBlock} from './installBlock';
+import {version} from '../../../lerna.json';
 
 <Meta title="Welcome" />
 
@@ -40,9 +40,9 @@ export const App = () => {
   });
   return (
     <CanvasProvider theme={canvasTheme}>
-        <main>
-          <p>Get Started With Canvas Kit</p>
-        </main>
+      <main>
+        <p>Get Started With Canvas Kit</p>
+      </main>
     </CanvasProvider>
   );
 };

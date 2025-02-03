@@ -1,10 +1,11 @@
 import * as React from 'react';
-import {Modal} from '@workday/canvas-kit-react/modal';
-import {Box, BoxProps, Flex} from '@workday/canvas-kit-react/layout';
-import {Text} from '@workday/canvas-kit-react/text';
+
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {space} from '@workday/canvas-kit-react/tokens';
 import {createComponent} from '@workday/canvas-kit-react/common';
+import {Box, BoxProps, Flex} from '@workday/canvas-kit-react/layout';
+import {Modal} from '@workday/canvas-kit-react/modal';
+import {Text} from '@workday/canvas-kit-react/text';
+import {space} from '@workday/canvas-kit-react/tokens';
 
 const MediaImage = createComponent('img')({
   displayName: 'Media.Image',
@@ -57,7 +58,7 @@ export const BasicExample = () => {
           <Modal.CloseIcon aria-label="Close" size="small" />
           <Media>
             <Media.Image
-              src="https://www.theuiaa.org/wp-content/uploads/2017/11/RTM19-banner-web.jpg"
+              src="https://images.pexels.com/photos/2132180/pexels-photo-2132180.jpeg?auto=compress&cs=tinysrgb&w=800"
               alt="Sunrise in the mountains"
             />
           </Media>

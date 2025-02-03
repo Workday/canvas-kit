@@ -1,10 +1,12 @@
+import {Meta} from '@storybook/blocks';
+
 import {ExampleCodeBlock, Specifications} from '@workday/canvas-kit-docs';
 
-import {CreateModelHook} from './examples/CreateModelHook';
-import {CreateContainer} from './examples/CreateContainer';
-import {CreateSubcomponent} from './examples/CreateSubcomponent';
-import {CreateElemPropsHook} from './examples/CreateElemPropsHook';
 import {CreateComponent} from './examples/CreateComponent';
+import {CreateContainer} from './examples/CreateContainer';
+import {CreateElemPropsHook} from './examples/CreateElemPropsHook';
+import {CreateModelHook} from './examples/CreateModelHook';
+import {CreateSubcomponent} from './examples/CreateSubcomponent';
 
 <Meta title="Hooks and Utilities/Compound Components" />
 
@@ -49,6 +51,7 @@ Let's make a simple disclosure component as an example. This is how we'd use `cr
 
 ```tsx
 import {createModelHook} from '@workday/canvas-kit-react/common';
+
 export const useDisclosureModel = createModelHook({
   // This becomes the default values on the model
   defaultConfig: {
@@ -85,6 +88,7 @@ creating other models that share similar config.
 
 ```tsx
 import {createModelHook} from '@workday/canvas-kit-react/common';
+
 export const useExpandableModel = createModelHook({
   defaultConfig: {
     // extend the default config from the `useDisclosureModel`
@@ -123,6 +127,7 @@ the newly created model hook.
 
 ```tsx
 import {createModelHook} from '@workday/canvas-kit-react/common';
+
 export const useModalModel = createModelHook({
   defaultConfig: usePopupModel.defaultConfig,
   requiredConfig: usePopupModel.requiredConfig,
@@ -151,6 +156,7 @@ you want to merge them while getting the correct typings.
 
 ```tsx
 import {createModelHook} from '@workday/canvas-kit-react/common';
+
 export const useActionBarModel = createModelHook({
   defaultConfig: {
     // We define the config and use the typings that come from useMenuModel for when an action bar renders a menu
@@ -219,6 +225,7 @@ When building a component that has a model, you typically start with a container
 
 ```tsx
 import {createContainer} from '@workday/canvas-kit-react/common';
+
 interface DisclosureProps {}
 
 //... useDisclosureModel
@@ -253,8 +260,9 @@ root level so that you can use any state or events at a child component level.
   give it.
 
 ```tsx
-import {createSubcomponent} from '@workday/canvas-kit-react/common';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {createSubcomponent} from '@workday/canvas-kit-react/common';
+
 export interface DisclosureTargetProps {
   /**
    * The children of the `Expandable.Target`
@@ -294,7 +302,7 @@ component or `createSubcomponent` by adding it to the `elemPropsHook` property.
 ## Usage
 
 ```tsx
-import {createSubcomponent, createElemPropsHook} from '@workday/canvas-kit-react/common';
+import {createElemPropsHook, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {Box} from '@workday/canvas-kit-react/layout';
 
 export interface DisclosureContentProps extends BoxProps {

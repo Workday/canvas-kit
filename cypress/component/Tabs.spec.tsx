@@ -1,10 +1,11 @@
 import * as React from 'react';
+
 import {Basic} from '../../modules/react/tabs/stories/examples/Basic';
-import {NamedTabs} from '../../modules/react/tabs/stories/examples/NamedTabs';
 import {DisabledTab} from '../../modules/react/tabs/stories/examples/DisabledTab';
 import {DynamicTabs} from '../../modules/react/tabs/stories/examples/DynamicTabs';
-import {RightToLeft} from '../../modules/react/tabs/stories/examples/RightToLeft';
+import {NamedTabs} from '../../modules/react/tabs/stories/examples/NamedTabs';
 import {OverflowTabs} from '../../modules/react/tabs/stories/examples/OverflowTabs';
+import {RightToLeft} from '../../modules/react/tabs/stories/examples/RightToLeft';
 
 describe('Tabs', () => {
   [Basic, NamedTabs].forEach(Example => {
@@ -13,7 +14,7 @@ describe('Tabs', () => {
         cy.mount(<Example />);
       });
 
-      it('should pass axe checks', () => {
+      it('should pass axe checks 12', () => {
         cy.checkA11y();
       });
 
@@ -480,7 +481,7 @@ describe('Tabs', () => {
     });
   });
 
-  context('when [Components/Containers/Tabs, OverflowTabs] story is rendered', () => {
+  context('given the [Components/Containers/Tabs, OverflowTabs] story is rendered', () => {
     beforeEach(() => {
       cy.mount(<OverflowTabs />);
     });

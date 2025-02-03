@@ -1,11 +1,11 @@
 import * as React from 'react';
+
 import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 
 export default {
   title: 'Testing/Preview/Side Panel/Cypress',
-  component: SidePanel,
 };
 
 const Container = props => {

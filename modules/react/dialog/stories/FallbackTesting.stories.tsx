@@ -33,7 +33,6 @@ const leftButton = createStyles({
 
 export default {
   title: 'Testing/Popups/Dialog',
-  component: Dialog,
   // parameters: {
   //   viewport: {
   //     viewports: customViewport,

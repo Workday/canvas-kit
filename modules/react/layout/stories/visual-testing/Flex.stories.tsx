@@ -1,12 +1,11 @@
 import React from 'react';
 
-import {Flex} from '@workday/canvas-kit-react/layout';
 import {ContentDirection} from '@workday/canvas-kit-react/common';
-import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/testing';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 
 export default {
   title: 'Testing/Layout/Flex',
-  component: Flex,
   parameters: {
     chromatic: {
       disable: false,

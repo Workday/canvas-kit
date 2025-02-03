@@ -3,7 +3,7 @@ import {render, fireEvent} from '@testing-library/react';
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 
 describe('RadioInput', () => {
-  const cb = jest.fn();
+  const cb = vi.fn();
   afterEach(() => {
     cb.mockReset();
   });

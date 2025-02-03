@@ -1,8 +1,9 @@
 import React from 'react';
 
 import {createModelHook} from '@workday/canvas-kit-react/common';
-import {useSelectionListModel} from './useSelectionListModel';
+
 import {Item} from './useBaseListModel';
+import {useSelectionListModel} from './useSelectionListModel';
 
 export function getHiddenIds(
   containerSize: number,
@@ -134,6 +135,7 @@ export const useOverflowListModel = createModelHook({
       setHiddenIds(ids);
     },
     setContainerSize(data: {width?: number; height?: number}) {
+      console.log('setContainerSize', data);
       containerSizeRef.current =
         model.state.orientation === 'horizontal' ? data.width || 0 : data.height || 0;
       setContainerSize(containerSizeRef.current);

@@ -1,5 +1,6 @@
+import {fireEvent, render} from '@testing-library/react';
 import * as React from 'react';
-import {render, fireEvent} from '@testing-library/react';
+
 import {TextArea} from '../lib/TextArea';
 
 const id = 'Test Text Area';
@@ -7,7 +8,7 @@ const placeholder = 'Test Text Area';
 const value = 'Test Text Area';
 
 describe('Text Area', () => {
-  const cb = jest.fn();
+  const cb = vi.fn();
   afterEach(() => {
     cb.mockReset();
   });

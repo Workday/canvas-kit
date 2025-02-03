@@ -1,40 +1,19 @@
-import {Meta, StoryObj} from '@storybook/react';
-import {SearchForm} from '@workday/canvas-kit-labs-react/search-form';
-import mdxDoc from './SearchForm.mdx';
-// examples
-import {Basic as BasicExample} from './examples/Basic';
-import {CustomTheme as CustomThemeExample} from './examples/CustomTheme';
-import {Grow as GrowExample} from './examples/Grow';
-import {RTL as RTLExample} from './examples/RTL';
-import {Theming as ThemingExample} from './examples/Theming';
+import {Meta} from '@storybook/react';
 
-const meta: Meta<typeof SearchForm> = {
+import mdxDoc from './SearchForm.mdx';
+
+export {Basic} from './examples/Basic';
+export {CustomTheme} from './examples/CustomTheme';
+export {Grow} from './examples/Grow';
+export {RTL} from './examples/RTL';
+export {Theming} from './examples/Theming';
+
+export default {
   title: 'Labs/Search Form',
-  component: SearchForm,
   tags: ['autodocs'],
   parameters: {
     docs: {
       page: mdxDoc,
     },
   },
-};
-
-export default meta;
-
-type Story = StoryObj<typeof SearchForm>;
-
-export const Basic: Story = {
-  render: BasicExample,
-};
-export const CustomTheme: Story = {
-  render: CustomThemeExample,
-};
-export const Grow: Story = {
-  render: GrowExample,
-};
-export const RTL: Story = {
-  render: RTLExample,
-};
-export const Theming: Story = {
-  render: ThemingExample,
-};
+} satisfies Meta;

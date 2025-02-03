@@ -1,3 +1,5 @@
+import {Meta} from '@storybook/blocks';
+
 import {ExampleCodeBlock, SymbolDoc, StylePropsTable} from '@workday/canvas-kit-docs';
 import {CreateStyles} from './examples/CreateStyles';
 import {CreateVars} from './examples/CreateVars';
@@ -353,8 +355,8 @@ const buttonStencil = createStencil({
   },
   base({width}) {
     return {
-      width: width
-    }
+      width: width,
+    };
   },
   modifiers: {
     width: {
@@ -363,7 +365,7 @@ const buttonStencil = createStencil({
       },
     },
   },
-})
+});
 
 // `'zero'` is part of autocomplete
 myStencil({width: 'zero'});

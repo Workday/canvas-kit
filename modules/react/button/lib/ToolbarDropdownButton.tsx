@@ -12,7 +12,7 @@ import {
 import {ButtonColors} from './types';
 import {BaseButton} from './BaseButton';
 import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
-import {ToolbarIconButtonProps} from './ToolbarIconButton';
+import {type ToolbarIconButtonProps} from './ToolbarIconButton';
 import {brand} from '@workday/canvas-tokens-web';
 
 export interface ToolbarDropdownButtonProps

@@ -1,9 +1,11 @@
+import {fireEvent, render} from '@testing-library/react';
 import * as React from 'react';
-import {render, fireEvent} from '@testing-library/react';
-import {Avatar} from '../lib/Avatar';
+
 import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {base} from '@workday/canvas-tokens-web';
+
 import {systemIconStencil} from '../../icon';
+import {Avatar} from '../lib/Avatar';
 
 describe('Avatar', () => {
   it('should render a button element', () => {
@@ -34,7 +36,7 @@ describe('Avatar', () => {
   });
 
   it('should call onClick callback when clicked', () => {
-    const fn = jest.fn();
+    const fn = vi.fn();
     const screen = render(<Avatar onClick={fn} />);
     fireEvent.click(screen.getByRole('button'));
     expect(fn).toBeCalled();

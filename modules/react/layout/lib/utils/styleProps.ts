@@ -1,7 +1,7 @@
 import {BackgroundStyleProps} from './background';
 import {BorderStyleProps} from './border';
 import {ColorStyleProps} from './color';
-import {DepthStyleProps} from './depth';
+import {type DepthStyleProps} from './depth';
 import {FlexStyleProps} from './flex';
 import {FlexItemStyleProps} from './flexItem';
 import {GridStyleProps} from './grid';
@@ -9,7 +9,7 @@ import {GridItemStyleProps} from './gridItem';
 import {LayoutStyleProps} from './layout';
 import {OtherStyleProps} from './other';
 import {PositionStyleProps} from './position';
-import {SpaceStyleProps} from './space';
+import {type SpaceStyleProps} from './space';
 import {TextStyleProps} from './text';
 
 /**

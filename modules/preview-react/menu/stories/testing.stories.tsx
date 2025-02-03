@@ -1,11 +1,13 @@
 import React from 'react';
+
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 import {
-  uploadCloudIcon,
   extLinkIcon,
-  userIcon,
   taskContactIcon,
+  uploadCloudIcon,
+  userIcon,
 } from '@workday/canvas-system-icons-web';
+
 import {DeprecatedMenu, DeprecatedMenuItem, DeprecatedMenuItemProps} from '../index';
 
 // eslint-disable-next-line no-empty-function
@@ -13,7 +15,6 @@ const noop = () => {};
 
 export default {
   title: 'Testing/Preview/Menu',
-  component: DeprecatedMenu,
   parameters: {
     chromatic: {
       disable: false,

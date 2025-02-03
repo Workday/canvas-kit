@@ -11,7 +11,7 @@ myExport.parseObjectToStaticValue =
   require('./lib/utils/parseObjectToStaticValue').parseObjectToStaticValue;
 myExport.createObjectTransform = require('./lib/createObjectTransform').createObjectTransform;
 myExport.createPropertyTransform = require('./lib/createPropertyTransform').createPropertyTransform;
-myExport.withDefaultContext = require('./lib/styleTransform').withDefaultContext;
+myExport.withDefaultContext = require('./lib/styleTransform.js').withDefaultContext;
 myExport.getClassName = require('./lib/utils/handleCreateStencil').getClassName;
 myExport.styleTransformer = myExport;
 

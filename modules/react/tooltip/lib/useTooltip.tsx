@@ -1,29 +1,30 @@
 import * as React from 'react';
+
+import {useUniqueId} from '@workday/canvas-kit-react/common';
 import {
-  useCloseOnEscape,
   useAlwaysCloseOnOutsideClick,
-  usePopupModel,
+  useCloseOnEscape,
   useCloseOnFullscreenExit,
   useCloseOnTargetHidden,
+  usePopupModel,
 } from '@workday/canvas-kit-react/popup';
-import {useUniqueId} from '@workday/canvas-kit-react/common';
 
 const useIntentTimer = (fn: Function, waitMs: number = 0): {start(): void; clear(): void} => {
   const timer = React.useRef() as React.MutableRefObject<number | undefined>;
 
   const start = () => {
-    timer.current = window.setTimeout(fn, waitMs);
+    timer.current = setTimeout(fn, waitMs);
   };
 
   const clear = () => {
-    window.clearTimeout(timer.current);
+    clearTimeout(timer.current);
     timer.current = undefined;
   };
 
   // be sure to clear our timeout
   React.useEffect(() => {
     return () => {
-      window.clearTimeout(timer.current);
+      clearTimeout(timer.current);
     };
   }, [timer]);
 

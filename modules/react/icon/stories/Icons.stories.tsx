@@ -1,13 +1,13 @@
 import * as React from 'react';
+
 import {shieldIcon} from '@workday/canvas-accent-icons-web';
 import {benefitsIcon} from '@workday/canvas-applet-icons-web';
+import {colors} from '@workday/canvas-kit-react/tokens';
+import {activityStreamIcon} from '@workday/canvas-system-icons-web';
+import {base} from '@workday/canvas-tokens-web';
 import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
 
-import {colors} from '@workday/canvas-kit-react/tokens';
-import {AccentIcon, AppletIcon, SystemIcon, SystemIconCircle, Graphic} from '../index';
-import {activityStreamIcon} from '@workday/canvas-system-icons-web';
-
-import {base} from '@workday/canvas-tokens-web';
+import {AccentIcon, AppletIcon, Graphic, SystemIcon, SystemIconCircle} from '../index';
 
 const graphicExample: CanvasGraphic = {
   name: 'badgeAchievement',
@@ -24,8 +24,6 @@ export default {
 
 export const AccentIconStory = {
   name: 'Accent Icon',
-  component: AccentIcon,
-  parameters: {ReadmePath: 'react/icon'},
   render: () => (
     <div className="story">
       <AccentIcon icon={shieldIcon} />
@@ -48,7 +46,6 @@ export const AccentIconStory = {
 
 export const AppletIconStory = {
   name: 'Applet Icon',
-  component: AppletIcon,
   render: () => (
     <div className="story">
       <AppletIcon icon={benefitsIcon} />
@@ -62,7 +59,6 @@ export const AppletIconStory = {
 
 export const SystemIconStory = {
   name: 'System Icon',
-  component: SystemIcon,
   render: () => (
     <div className="story">
       <SystemIcon icon={activityStreamIcon} />
@@ -114,7 +110,6 @@ export const SystemIconStory = {
 
 export const GraphicStory = {
   name: 'Graphic',
-  component: Graphic,
   render: () => (
     <div className="story">
       <Graphic src={graphicExample} />

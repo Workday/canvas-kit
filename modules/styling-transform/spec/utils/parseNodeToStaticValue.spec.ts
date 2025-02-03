@@ -1,10 +1,9 @@
 import ts from 'typescript';
 
-import {findNodes} from '../findNodes';
-import {createProgramFromSource} from '../createProgramFromSource';
-
+import {withDefaultContext} from '../../lib/styleTransform.js';
 import {parseNodeToStaticValue} from '../../lib/utils/parseNodeToStaticValue';
-import {withDefaultContext} from '../../lib/styleTransform';
+import {createProgramFromSource} from '../createProgramFromSource';
+import {findNodes} from '../findNodes';
 
 describe('parseNodeToStaticValue', () => {
   it('should return the string value of a StringLiteral', () => {

@@ -1,26 +1,26 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import {customColorTheme} from '../../../../utils/storybook';
-import {ContentDirection, CanvasProvider, useTheme} from '@workday/canvas-kit-react/common';
-import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
+
 import {DeleteButton, PrimaryButton} from '@workday/canvas-kit-react/button';
+import {CanvasProvider, ContentDirection, useTheme} from '@workday/canvas-kit-react/common';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {
   Popup,
-  useCloseOnOutsideClick,
   useCloseOnEscape,
+  useCloseOnOutsideClick,
   usePopupModel,
 } from '@workday/canvas-kit-react/popup';
-import {Flex, Box} from '@workday/canvas-kit-react/layout';
 
-import {WithRadioButtons as WithRadioButtonsExample} from './examples/WithRadioButtons';
-import {StackedModals as StackedModalsExample} from './examples/StackedModals';
-import {WithTooltips as WithTooltipsExample} from './examples/WithTooltips';
-import {ModalWithPopup as ModalWithPopupExample} from './examples/ModalWithPopup';
+import {customColorTheme} from '../../../../utils/storybook';
 import {IframeTest as IframeTestExample} from './examples/IframeTest';
+import {ModalWithPopup as ModalWithPopupExample} from './examples/ModalWithPopup';
+import {StackedModals as StackedModalsExample} from './examples/StackedModals';
+import {WithRadioButtons as WithRadioButtonsExample} from './examples/WithRadioButtons';
+import {WithTooltips as WithTooltipsExample} from './examples/WithTooltips';
 
 export default {
   title: 'Testing/Popups/Modal',
-  component: Modal,
   parameters: {
     chromatic: {
       pauseAnimationAtEnd: true,

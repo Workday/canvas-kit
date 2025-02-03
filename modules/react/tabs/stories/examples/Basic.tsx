@@ -9,7 +9,7 @@ export const Basic = () => {
       <Tabs.List>
         <Tabs.Item>First Tab</Tabs.Item>
         <Tabs.Item>Second Tab</Tabs.Item>
-        <Tabs.Item>Third Tab</Tabs.Item>
+        <Tabs.Item>Third Tab Third Tab Third Tab Third Tab Third Tab Third Tab Third Tab</Tabs.Item>
         <Tabs.Item>Fourth Tab</Tabs.Item>
         <Tabs.Item>Fifth Tab</Tabs.Item>
       </Tabs.List>

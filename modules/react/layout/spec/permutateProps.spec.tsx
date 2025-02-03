@@ -2,7 +2,7 @@ import {ErrorType} from '@workday/canvas-kit-react/common';
 import {permutateProps} from '@workday/canvas-kit-react/testing';
 
 describe('Component States Table', () => {
-  const cb = jest.fn();
+  const cb = vi.fn();
   afterEach(() => {
     cb.mockReset();
   });

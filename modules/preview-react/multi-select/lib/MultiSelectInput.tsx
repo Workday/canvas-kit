@@ -1,24 +1,29 @@
 import React from 'react';
 
-import {system} from '@workday/canvas-tokens-web';
-import {caretDownSmallIcon, searchIcon} from '@workday/canvas-system-icons-web';
-
+import {useComboboxInput, useComboboxInputConstrained} from '@workday/canvas-kit-react/combobox';
 import {
   composeHooks,
   createElemPropsHook,
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
-import {createStencil, CSProps, handleCsProp} from '@workday/canvas-kit-styling';
-import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {useComboboxInput, useComboboxInputConstrained} from '@workday/canvas-kit-react/combobox';
+import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
+import {CSProps, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {caretDownSmallIcon, searchIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
-import {useMultiSelectModel} from './useMultiSelectModel';
 import {MultiSelectedItemProps} from './MultiSelectedItem';
 import {MultiSelectedList} from './MultiSelectedList';
+import {useMultiSelectModel} from './useMultiSelectModel';
 
 export const multiSelectStencil = createStencil({
-  base: {
+  vars: {
+    foo,
+  },
+  parts: {
+    separator: 'multi-select-part', // -> '[data-part="multi-select-part"]'
+  },
+  base: ({separatorPart}) => ({
     border: `1px solid ${system.color.border.input.default}`,
     display: 'flex',
     flexDirection: 'column',
@@ -69,7 +74,7 @@ export const multiSelectStencil = createStencil({
       pointerEvents: 'none',
     },
 
-    '& :where([data-part="separator"])': {
+    [`& :where(${separatorPart})`]: {
       backgroundColor: system.color.border.divider,
       height: 1,
       margin: `${system.space.zero} ${system.space.x2}`,
@@ -81,7 +86,7 @@ export const multiSelectStencil = createStencil({
       padding: system.space.x2,
       flexWrap: 'wrap',
     },
-  },
+  }),
 });
 
 export const useMultiSelectInput = composeHooks(

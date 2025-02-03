@@ -6,7 +6,7 @@ import {createComponent, getColor} from '@workday/canvas-kit-react/common';
 import {SystemPropValues} from '@workday/canvas-kit-react/layout';
 import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {base} from '@workday/canvas-tokens-web';
-import {Svg, SvgProps, svgStencil, transformColorNameToToken} from './Svg';
+import {Svg, type SvgProps, svgStencil, transformColorNameToToken} from './Svg';
 
 /**
  * @deprecated Interface `AccentIconStyles` will be removed in a future version. All props will be moved inside `AccentIconProps`. Consider to use the new tokens set to set `color` prop: `color={base.blueberry500}`.

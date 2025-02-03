@@ -1,5 +1,5 @@
+import {fireEvent, render, screen} from '@testing-library/react';
 import * as React from 'react';
-import {screen, render, fireEvent} from '@testing-library/react';
 
 import {SidePanel} from '../lib/SidePanel';
 
@@ -12,7 +12,7 @@ window.resizeBy = (x: number, y: number) => {
 };
 
 describe('SidePanel', () => {
-  const cb = jest.fn();
+  const cb = vi.fn();
   beforeEach(() => {
     window.resizeBy(1280, 1024);
   });
@@ -32,7 +32,7 @@ describe('SidePanel', () => {
   });
 
   it('should call "onBreakpointChange" when below the breakpoint and side panel is open', () => {
-    const mockFunction = jest.fn();
+    const mockFunction = vi.fn();
     render(
       <SidePanel breakpoint={1000} onBreakpointChange={mockFunction} open={true} onToggleClick={cb}>
         Hello World
@@ -43,7 +43,7 @@ describe('SidePanel', () => {
   });
 
   it('should call onBreakpointChange when above the breakpoint and side panel is closed', () => {
-    const mockFunction = jest.fn();
+    const mockFunction = vi.fn();
     render(
       <SidePanel breakpoint={800} onBreakpointChange={mockFunction} open={false} onToggleClick={cb}>
         Hello World

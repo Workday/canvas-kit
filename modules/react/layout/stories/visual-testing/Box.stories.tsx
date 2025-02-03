@@ -1,12 +1,11 @@
 import React from 'react';
 
+import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {ComponentStatesTable} from '@workday/canvas-kit-react/testing';
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
 
 export default {
   title: 'Testing/Layout/Box',
-  component: Box,
   parameters: {
     chromatic: {
       disable: false,

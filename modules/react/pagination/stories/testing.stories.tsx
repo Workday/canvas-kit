@@ -1,9 +1,9 @@
 import React from 'react';
+
 import {ContentDirection} from '@workday/canvas-kit-react/common';
-import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/testing';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 
 import {customColorTheme} from '../../../../utils/storybook';
-
 import {
   Pagination,
   getLastPage,
@@ -13,7 +13,6 @@ import {
 
 export default {
   title: 'Testing/Navigation/Pagination',
-  component: Pagination,
   parameters: {
     chromatic: {
       disable: false,

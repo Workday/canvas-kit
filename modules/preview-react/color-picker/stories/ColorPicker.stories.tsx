@@ -1,34 +1,24 @@
+import {Meta} from '@storybook/react';
 import React from 'react';
-import {Meta, StoryObj} from '@storybook/react';
+
 import {ColorPicker} from '@workday/canvas-kit-preview-react/color-picker';
 
-import {IconButtonPopup as IconButtonPopupExample} from './examples/IconButtonPopup';
-import {ColorInputPopup as ColorInputPopupExample} from './examples/ColorInputPopup';
+import mdxDoc from './ColorPicker.mdx';
+
+export {IconButtonPopup} from './examples/IconButtonPopup';
+export {ColorInputPopup} from './examples/ColorInputPopup';
 
 // eslint-disable-next-line no-empty-function
 const noop = () => {};
 
-const meta: Meta<typeof ColorPicker> = {
+export default {
   title: 'Preview/Color Picker',
-  component: ColorPicker,
+  tags: ['autodocs'],
   parameters: {
-    ReadmePath: 'preview-react/color-picker',
+    docs: {
+      page: mdxDoc,
+    },
   },
-};
+} satisfies Meta;
 
-export default meta;
-
-export const Default: StoryObj = {
-  name: 'Default',
-  render: () => <ColorPicker onColorChange={noop} />,
-};
-
-export const IconButtonPopup: StoryObj = {
-  name: 'Icon button Popup',
-  render: IconButtonPopupExample,
-};
-
-export const ColorInputPopup: StoryObj = {
-  name: 'Color Input Popup',
-  render: ColorInputPopupExample,
-};
+export const Basic = () => <ColorPicker onColorChange={noop} />;

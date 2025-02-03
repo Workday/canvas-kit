@@ -5,7 +5,6 @@ import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/test
 
 export default {
   title: 'Testing/Layout/Grid',
-  component: Grid,
   parameters: {
     chromatic: {
       disable: false,

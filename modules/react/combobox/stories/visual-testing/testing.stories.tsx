@@ -1,12 +1,10 @@
 import React from 'react';
 
-import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/testing';
-
 import {Combobox, useComboboxModel} from '@workday/canvas-kit-react/combobox';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 
 export default {
   title: 'Testing/Combobox',
-  component: Combobox,
   parameters: {
     chromatic: {
       disable: false,

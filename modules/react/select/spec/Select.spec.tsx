@@ -1,16 +1,15 @@
-import React from 'react';
 import {render, screen} from '@testing-library/react';
+import React from 'react';
 
 import {Select} from '../lib/Select';
 
 describe('Select', () => {
-  const cb = jest.fn();
-
-  const role = 'combobox';
-
+  const cb = vi.fn();
   afterEach(() => {
     cb.mockReset();
   });
+
+  const role = 'combobox';
 
   describe('when rendered with a single child', () => {
     it('should not throw an error', () => {

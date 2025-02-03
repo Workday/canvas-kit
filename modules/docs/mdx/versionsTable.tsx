@@ -1,6 +1,9 @@
 import React from 'react';
-import {Table} from '@workday/canvas-kit-react';
-import {StatusIndicator, StatusIndicatorVariant} from '@workday/canvas-kit-preview-react';
+import {Table} from '@workday/canvas-kit-react/table';
+import {
+  StatusIndicator,
+  StatusIndicatorVariant,
+} from '@workday/canvas-kit-preview-react/status-indicator';
 // @ts-ignore: Cannot find module error
 import {version} from '../../../lerna.json';
 

@@ -2,14 +2,14 @@ import React from 'react';
 
 import {
   ComponentStatesTable,
-  permutateProps,
   StaticStates,
+  permutateProps,
 } from '@workday/canvas-kit-react/testing';
+
 import {SidePanel} from '../index';
 
 export default {
   title: 'Testing/Preview/Side Panel',
-  component: SidePanel,
   parameters: {
     chromatic: {
       disable: false,

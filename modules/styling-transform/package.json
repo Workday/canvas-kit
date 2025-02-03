@@ -6,6 +6,16 @@
   "license": "Apache-2.0",
   "main": "index.js",
   "module": "index.js",
+  "exports": {
+    "./lib/*": "./lib/*",
+    ".": {
+      "node": "./index.ts",
+      "import": "./dist/es6/index.js",
+      "require": "./dist/commonjs/index.js",
+      "types": "./index.ts"
+    }
+  },
+  "type": "module",
   "sideEffects": false,
   "types": "index.d.ts",
   "repository": {

@@ -2,7 +2,7 @@ import React from 'react';
 import {styled, createComponent, StyledType} from '@workday/canvas-kit-react/common';
 import {extLinkIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon, systemIconStyles} from '@workday/canvas-kit-react/icon';
-import {Hyperlink, HyperlinkProps} from './Hyperlink';
+import {Hyperlink, type HyperlinkProps} from './Hyperlink';
 
 export interface ExternalHyperlinkProps extends HyperlinkProps {
   /**

@@ -1,16 +1,16 @@
 import React from 'react';
 
+import {deprecated_Button as DeprecatedButton} from '@workday/canvas-kit-react/button';
 import {
   ComponentStatesTable,
-  permutateProps,
   StaticStates,
+  permutateProps,
 } from '@workday/canvas-kit-react/testing';
-import {deprecated_Button as DeprecatedButton} from '@workday/canvas-kit-react/button';
+
 import {Container, stateTableColumnProps} from './utils';
 
 export default {
   title: 'Testing/Buttons/Button/Deprecated Button',
-  component: DeprecatedButton,
   parameters: {
     chromatic: {
       disable: false,

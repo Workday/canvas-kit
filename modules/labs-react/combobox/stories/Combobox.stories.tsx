@@ -1,50 +1,20 @@
-import {Meta, StoryObj} from '@storybook/react';
+import {Meta} from '@storybook/react';
+
 import mdxDoc from './Combobox.mdx';
 
-import {Combobox} from '@workday/canvas-kit-labs-react/combobox';
+export {Basic as Autocomplete} from './examples/Basic';
+export {DisabledItem} from './examples/DisabledItem';
+export {GroupOfResult} from './examples/GroupOfResult';
+export {Grow} from './examples/Grow';
+export {NoClearButton} from './examples/NoClearButton';
+export {RTL} from './examples/RTL';
 
-import {Basic as BasicExample} from './examples/Basic';
-import {DisabledItem as DisabledItemExample} from './examples/DisabledItem';
-import {GroupOfResult as GroupOfResultExample} from './examples/GroupOfResult';
-import {Grow as GrowExample} from './examples/Grow';
-import {NoClearButton as NoClearButtonExample} from './examples/NoClearButton';
-import {RTL as RTLExample} from './examples/RTL';
-
-const meta: Meta<typeof Combobox> = {
+export default {
   title: 'Labs/Combobox',
-  component: Combobox,
   tags: ['autodocs'],
   parameters: {
-    ReadmePath: 'labs-react/combobox',
     docs: {
       page: mdxDoc,
     },
   },
-};
-
-export default meta;
-
-export const Basic: StoryObj = {
-  name: 'Autocomplete',
-  render: BasicExample,
-};
-
-export const Grow: StoryObj = {
-  render: GrowExample,
-};
-
-export const NoClearButton: StoryObj = {
-  render: NoClearButtonExample,
-};
-
-export const GroupOfResult: StoryObj = {
-  render: GroupOfResultExample,
-};
-
-export const DisabledItem: StoryObj = {
-  render: DisabledItemExample,
-};
-
-export const RTL: StoryObj = {
-  render: RTLExample,
-};
+} satisfies Meta;
