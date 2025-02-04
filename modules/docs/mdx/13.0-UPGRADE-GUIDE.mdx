@@ -21,6 +21,7 @@ any questions.
 - [Component Updates](#component-updates)
   - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
   - [External Hyperlink](#external-hyperlink)
+  - [Pill](#pill)
 - [Troubleshooting](#troubleshooting)
 - [Glossary](#glossary)
   - [Main](#main)
@@ -106,6 +107,7 @@ The React interface **has not changed**, but CSS variables are now used for dyna
 The following components are affected:
 
 - `ExternalHyperlink`
+- `Pill`
 - `Menu`
 - `Skeleton`
 
@@ -126,6 +128,26 @@ The following components are affected:
   External Hyperlink
 </ExternalHyperlink>
 ```
+
+## Pill
+
+**PRs:** [#3104](https://github.com/Workday/canvas-kit/pull/3104)
+
+A few changes have been made to `Pill` to ensure proper accessibility and styles.
+
+- The border color on hover has been updated from `licorice400` to `licorice500` to match our design specs.
+
+##### Breaking Changes
+
+- `maxWidth` has been removed from the `usePillModel`. This config was used to style sub components. With the refactor to use `data-part` and stencils, it is no longer needed on the model. You can still apply `maxWidth` on the parent `<Pill>` element and the child elements will be styled accordingly.
+- `Pill.Icon` no longer has a default `aria-labe="add"`. You *must* provide an `aria-label` for `Pill.Icon` to ensure proper accessibility. Our examples have been updated to reflect this change.
+- `Pill.IconButton` now requires `aria-label` as a prop. The default `aria-label="remove"` was removed to ensure consumers pass a valid value.
+
+
+
+
+
+
 
 
 ## Troubleshooting
