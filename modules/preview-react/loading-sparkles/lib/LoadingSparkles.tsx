@@ -34,14 +34,14 @@ const LOADING_ANIMATION = keyframes({
  * An individual loading sparkle. ✨
  */
 const Sparkle = () => {
-  return <SystemIcon icon={sparkleIcon} size={cssVar(system.space.x3)} />;
+  return <SystemIcon data-part="sparkle" icon={sparkleIcon} size={cssVar(system.space.x3)} />;
 };
 
 const loadingSparklesStencil = createStencil({
   base: {
     display: 'inline-flex',
     gap: px2rem(1),
-    '> span': {
+    '& [data-part="sparkle"]': {
       animationDuration: `${ANIMATION_DURATION_MS}ms`,
       animationFillMode: 'both',
       animationIterationCount: 'infinite',
