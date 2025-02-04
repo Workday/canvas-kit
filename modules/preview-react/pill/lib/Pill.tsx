@@ -62,6 +62,13 @@ export const pillStencil = createStencil({
     '& [data-part="pill-flex-item"]': {
       display: 'inline-flex',
       overflow: 'hidden',
+      flex: '0 0 auto',
+      '&:has([data-part="pill-label"])': {
+        flex: '1 1 auto',
+      },
+    },
+    '&:has([data-part="pill-count"])': {
+      paddingInlineEnd: '22px',
     },
     '&:focus-visible, &.focus': {
       [buttonStencil.vars.background]: system.color.bg.alt.soft,
@@ -310,8 +317,9 @@ export const Pill = createContainer('button')({
             {React.Children.map(elemProps.children, (child, index) => {
               if (typeof child === 'string') {
                 return <PillLabel key={index}>{child}</PillLabel>;
+              } else {
+                return <div data-part="pill-flex-item">{child}</div>;
               }
-              return <div data-part="pill-flex-item">{child}</div>;
             })}
           </div>
         </BaseButton>

@@ -230,7 +230,7 @@ export const avatarStencil = createStencil({
   },
   defaultModifiers: {
     variant: 'light',
-    size: 'medium',
+    // size: 'medium',
     isImageLoaded: 'false',
     objectFit: 'contain',
   },
@@ -239,7 +239,7 @@ export const avatarStencil = createStencil({
 export const Avatar = createComponent('button')({
   displayName: 'Avatar',
   Component: (
-    {variant, size, altText = 'Avatar', url, objectFit, ...elemProps}: AvatarProps,
+    {variant, size = 'medium', altText = 'Avatar', url, objectFit, ...elemProps}: AvatarProps,
     ref,
     Element
   ) => {

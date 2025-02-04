@@ -9,21 +9,20 @@ import {mergeStyles} from '@workday/canvas-kit-react/layout';
 export interface PillAvatarProps extends AvatarProps {}
 
 export const pillAvatarStencil = createStencil({
-  extends: avatarStencil,
   base: {
     cursor: 'pointer',
     flex: '0 0 auto',
-    [avatarStencil.vars.size]: px2rem(18),
   },
 });
 
 export const PillAvatar = createSubcomponent('div')({
   modelHook: usePillModel,
-})<PillAvatarProps>(({...elemProps}: PillAvatarProps, Element, _model) => {
+})<PillAvatarProps>(({size, ...elemProps}: PillAvatarProps, Element, _model) => {
   return (
     <Avatar
       aria-hidden={true}
       as={Element}
+      size={px2rem(18)}
       altText={''}
       {...mergeStyles(elemProps, pillAvatarStencil())}
     />
