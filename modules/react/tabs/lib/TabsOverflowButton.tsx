@@ -13,6 +13,9 @@ import {useOverflowListTarget} from '@workday/canvas-kit-react/collection';
 import {useMenuTarget} from '@workday/canvas-kit-react/menu';
 import {useTabsModel} from './useTabsModel';
 import {StyledTabItem} from './TabsItem';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+import {mergeStyles} from '../../layout';
 
 export interface OverflowButtonProps {
   /**
@@ -20,6 +23,12 @@ export interface OverflowButtonProps {
    */
   children: React.ReactNode;
 }
+
+const TabsOverflowButtonStencil = createStencil({
+  base: {
+    gap: system.space.x1,
+  },
+});
 
 export const useTabsOverflowButton = composeHooks(
   createElemPropsHook(useTabsModel)(() => {
@@ -37,7 +46,11 @@ export const TabsOverflowButton = createSubcomponent('button')({
   elemPropsHook: useTabsOverflowButton,
 })<OverflowButtonProps>(({children, ...elemProps}, Element) => {
   return (
-    <StyledTabItem type="button" gap="xxxs" as={Element} {...elemProps}>
+    <StyledTabItem
+      type="button"
+      as={Element}
+      {...mergeStyles(elemProps, TabsOverflowButtonStencil())}
+    >
       <span>{children}</span>
       <SystemIcon icon={chevronDownSmallIcon} />
     </StyledTabItem>

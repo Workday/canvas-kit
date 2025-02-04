@@ -51,7 +51,7 @@ const tabsListStencil = createStencil({
     borderBottom: `1px solid ${system.color.border.divider}`,
     gap: system.space.x2,
     paddingInline: system.space.x6,
-    maskImage: 'linear-gradient(to right, white 80%, transparent)',
+    maskImage: 'none',
   },
   modifiers: {
     modality: {
@@ -109,13 +109,6 @@ export const TabsList = createSubcomponent('div')({
 
     return (
       <Element
-        // maskImage={
-        //   modality === 'touch' && touchStates.isDragging
-        //     ? `linear-gradient(${
-        //         touchStates.direction === 'left' ? 'to left' : 'to right'
-        //       }, white 80%, transparent)`
-        //     : undefined
-        // }
         {...mergeStyles(
           elemProps,
           tabsListStencil({
