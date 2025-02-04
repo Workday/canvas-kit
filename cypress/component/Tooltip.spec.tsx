@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {Default} from '../../modules/react/tooltip/stories/examples/Default';
 import {DescribeType} from '../../modules/react/tooltip/stories/examples/DescribeType';
+import {DescriptionType} from '../../modules/react/tooltip/stories/examples/DescriptionType';
 import {Muted} from '../../modules/react/tooltip/stories/examples/Muted';
 import {Ellipsis} from '../../modules/react/tooltip/stories/examples/Ellipsis';
 import {NonInteractive, Overflow} from '../../modules/react/tooltip/stories/testing.stories';
@@ -121,7 +122,7 @@ describe('Tooltip', () => {
       cy.checkA11y();
     });
 
-    it('the "Delete" button should not have an aria-describedby', () => {
+    it('the "Delete" button should not have an aria-describedby before hovering', () => {
       cy.findByRole('button', {name: 'Delete'}).should('not.have.attr', 'aria-describedby');
     });
 
@@ -141,6 +142,42 @@ describe('Tooltip', () => {
       it('the "Delete" button should have an aria-describedby linking to the role="tooltip" element', () => {
         cy.findByRole('button', {name: 'Delete'}).should(
           'have.ariaDescription',
+          'The service will restart after this action'
+        );
+      });
+    });
+  });
+
+  context('given the DescriptionType example is rendered', () => {
+    beforeEach(() => {
+      cy.mount(<DescriptionType />);
+    });
+
+    it('should not have any axe-core errors', () => {
+      cy.checkA11y();
+    });
+
+    it('the "Delete" button should have an aria-description before hovering', () => {
+      cy.findByRole('button', {name: 'Delete'}).should('have.attr', 'aria-description');
+    });
+
+    context('when the "Delete" button is hovered', () => {
+      beforeEach(() => {
+        cy.findByRole('button', {name: 'Delete'}).trigger('mouseover');
+      });
+
+      it('should show the tooltip', () => {
+        cy.findByRole('tooltip').should('be.visible');
+      });
+
+      it('should not have any axe-core errors', () => {
+        cy.checkA11y();
+      });
+
+      it('the "Delete" button should have an accessible description equal to the tooltip text', () => {
+        cy.findByRole('button', {name: 'Delete'}).should(
+          'have.attr',
+          'aria-description',
           'The service will restart after this action'
         );
       });

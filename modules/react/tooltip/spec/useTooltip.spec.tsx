@@ -3,7 +3,7 @@ import {render, fireEvent, screen} from '@testing-library/react';
 
 import {useTooltip, TooltipContainer} from '..';
 
-const TooltipWithHook = ({type}: {type: 'label' | 'describe'}) => {
+const TooltipWithHook = ({type}: {type: 'label' | 'describe' | 'description'}) => {
   const {targetProps, tooltipProps} = useTooltip({type, titleText: 'Hover'});
 
   return (
@@ -40,13 +40,26 @@ describe('useTooltip with type="describe"', () => {
     render(<TooltipWithHook type="describe" />);
 
     const target = screen.getByText('Hover');
-    const tooltip = screen.getByRole('tooltip');
 
     fireEvent.mouseOver(target); // assign the ID to the tooltip
     jest.advanceTimersByTime(300); // advance the timer by the amount of delay time
 
-    expect(tooltip).toHaveAttribute('id');
-    const id = tooltip.getAttribute('id');
+    expect(screen.getByText('Hover')).toHaveAttribute('aria-describedby', 'originalDescribedById');
+  });
+  jest.clearAllTimers();
+});
+
+describe('useTooltip with type="description"', () => {
+  jest.useFakeTimers();
+  it('should add aria attributes to correlate the target and the tooltip', () => {
+    render(<TooltipWithHook type="description" />);
+
+    const target = screen.getByText('Hover');
+
+    fireEvent.mouseOver(target); // assign the ID to the tooltip
+    jest.advanceTimersByTime(300); // advance the timer by the amount of delay time
+
+    expect(screen.getByText('Hover')).toHaveAttribute('aria-description', 'Hover');
   });
   jest.clearAllTimers();
 });
