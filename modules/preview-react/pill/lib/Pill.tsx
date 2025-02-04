@@ -34,10 +34,10 @@ export const pillStencil = createStencil({
   },
   extends: buttonStencil,
   base: ({maxWidth}) => ({
-    display: 'inline-flex',
+    display: 'flex',
+    flexDirection: 'row',
     alignItems: 'center',
     borderRadius: system.shape.x1,
-    flexShrink: 0,
     ...system.type.subtext.large,
     boxShadow: 'none',
     outline: 'none',
@@ -52,20 +52,16 @@ export const pillStencil = createStencil({
     [buttonStencil.vars.border]: system.color.border.input.default,
     [buttonStencil.vars.label]: system.color.text.strong,
     [systemIconStencil.vars.color]: system.color.icon.default,
+    maxWidth: maxWidth,
     '& [data-part="pill-flex-container"]': {
       display: 'inline-flex',
       alignItems: 'center',
       gap: system.space.x1,
+      overflow: 'hidden',
     },
     '& [data-part="pill-flex-item"]': {
       display: 'inline-flex',
-    },
-
-    '& [data-part="pill-label"]': {
-      maxWidth: maxWidth,
-    },
-    '& [data-part="avatar-image"]': {
-      cursor: 'pointer',
+      overflow: 'hidden',
     },
     '&:focus-visible, &.focus': {
       [buttonStencil.vars.background]: system.color.bg.alt.soft,
@@ -288,7 +284,7 @@ export const Pill = createContainer('button')({
         <Box
           as={Element !== 'button' ? Element : 'span'}
           id={model.state.id}
-          maxWidth={maxWidth}
+          // maxWidth={maxWidth}
           {...mergeStyles(
             elemProps,
             readyOnlyPillStencil({

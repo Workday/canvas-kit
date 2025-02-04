@@ -25,6 +25,7 @@ export const pillCountStencil = createStencil({
     marginInlineEnd: calc.negate(system.space.x2),
     marginInlineStart: system.space.x1,
     backgroundColor: system.color.bg.alt.stronger,
+    flex: '0 0 auto',
   },
 });
 

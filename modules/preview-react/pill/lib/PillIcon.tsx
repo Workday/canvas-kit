@@ -14,9 +14,10 @@ export interface PillIconProps extends Partial<SystemIconProps> {}
 export const pillIconStencil = createStencil({
   extends: systemIconStencil,
   base: {
-    display: 'flex',
+    // display: 'flex',
     marginInlineStart: calc.negate(system.space.x1),
     [systemIconStencil.vars.size]: px2rem(20),
+    flex: '0 0 auto',
   },
 });
 

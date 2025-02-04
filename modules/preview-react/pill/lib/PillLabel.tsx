@@ -14,7 +14,10 @@ export interface PillLabelProps extends BoxProps {
 
 export const pillLabelStencil = createStencil({
   base: {
-    ...ellipsisStyles,
+    flexShrink: 1,
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
   },
 });
 
