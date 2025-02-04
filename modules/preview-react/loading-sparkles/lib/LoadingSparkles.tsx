@@ -70,7 +70,7 @@ export const LoadingSparkles = createComponent('div')({
   displayName: 'LoadingSparkles',
   Component: (elemProps: CSProps, ref, Element) => {
     return (
-      <Element ref={ref} role="status" {...mergeStyles(elemProps, loadingSparklesStencil({}))}>
+      <Element ref={ref} role="status" {...mergeStyles(elemProps, loadingSparklesStencil())}>
         <Sparkle />
         <Sparkle />
         <Sparkle />
