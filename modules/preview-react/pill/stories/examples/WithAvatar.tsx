@@ -21,7 +21,7 @@ export const WithAvatar = () => {
           <Pill.Avatar url={testAvatar} />
           Regina Skeltor
         </Pill>
-        <Pill disabled maxWidth={50}>
+        <Pill disabled>
           <Pill.Avatar url={testAvatar} />
           Regina Skeltor
         </Pill>

@@ -3,7 +3,7 @@ import React from 'react';
 import {BaseButton, buttonStencil} from '@workday/canvas-kit-react/button';
 import {createContainer, focusRing} from '@workday/canvas-kit-react/common';
 import {Box, BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {px2rem, createStencil, cssVar} from '@workday/canvas-kit-styling';
+import {px2rem, createStencil, cssVar, calc} from '@workday/canvas-kit-styling';
 
 import {usePillModel} from './usePillModel';
 
@@ -67,8 +67,8 @@ export const pillStencil = createStencil({
         flex: '1 1 auto',
       },
     },
-    '&:has([data-part="pill-count"])': {
-      paddingInlineEnd: '22px',
+    '&:has([data-part="pill-count"]), &:has([data-part="pill-icon-button"])': {
+      paddingInlineEnd: calc.subtract(system.space.x6, px2rem(2)),
     },
     '&:focus-visible, &.focus': {
       [buttonStencil.vars.background]: system.color.bg.alt.soft,

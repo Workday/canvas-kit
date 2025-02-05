@@ -27,7 +27,10 @@ export const pillIconButtonStencil = createStencil({
     padding: 0,
     overflow: 'visible',
     flex: '0 0 auto',
-    position: 'relative',
+    position: 'absolute',
+    insetBlockStart: px2rem(1),
+    insetInlineEnd: system.space.x2,
+
     [buttonStencil.vars.border]: system.color.border.transparent,
     [buttonStencil.vars.background]: system.color.bg.alt.soft,
     [systemIconStencil.vars.color]: system.color.icon.default,

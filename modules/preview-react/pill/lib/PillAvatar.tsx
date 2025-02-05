@@ -10,7 +10,7 @@ export interface PillAvatarProps extends AvatarProps {}
 
 export const pillAvatarStencil = createStencil({
   base: {
-    cursor: 'pointer',
+    // cursor: 'pointer',
     flex: '0 0 auto',
   },
 });
@@ -22,7 +22,7 @@ export const PillAvatar = createSubcomponent('div')({
     <Avatar
       aria-hidden={true}
       as={Element}
-      size={px2rem(18)}
+      size={18}
       altText={''}
       {...mergeStyles(elemProps, pillAvatarStencil())}
     />
