@@ -48,25 +48,13 @@ export const pillStencil = createStencil({
     padding: `${px2rem(2)} ${cssVar(system.space.x2)}`,
     height: system.space.x6,
     position: 'relative',
+    gap: system.space.x1,
+    maxWidth: maxWidth,
     [buttonStencil.vars.background]: system.color.bg.alt.soft,
     [buttonStencil.vars.border]: system.color.border.input.default,
     [buttonStencil.vars.label]: system.color.text.strong,
     [systemIconStencil.vars.color]: system.color.icon.default,
-    maxWidth: maxWidth,
-    '& [data-part="pill-flex-container"]': {
-      display: 'inline-flex',
-      alignItems: 'center',
-      gap: system.space.x1,
-      overflow: 'hidden',
-    },
-    '& [data-part="pill-flex-item"]': {
-      display: 'inline-flex',
-      overflow: 'hidden',
-      flex: '0 0 auto',
-      '&:has([data-part="pill-label"])': {
-        flex: '1 1 auto',
-      },
-    },
+
     // '&:has([data-part="pill-count"]), &:has([data-part="pill-icon-button"])': {
     //   paddingInlineEnd: calc.add(system.space.x6, px2rem(2)),
     // },

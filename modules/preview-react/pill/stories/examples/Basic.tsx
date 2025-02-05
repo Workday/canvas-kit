@@ -16,11 +16,11 @@ export const Basic = () => {
   return (
     <div>
       <div className={flexStyles}>
-        <Pill onClick={() => setText('The first pill is clicked!')} maxWidth={80}>
+        <Pill onClick={() => setText('The first pill is clicked!')}>
           <Pill.Icon aria-label="Add user" />
           <Pill.Label>Regina Skeltor</Pill.Label>
         </Pill>
-        <Pill onClick={() => setText('The first pill is clicked!')} maxWidth={80}>
+        <Pill onClick={() => setText('The first pill is clicked!')}>
           <Pill.Label>Regina Skeltor</Pill.Label>
         </Pill>
         <Pill disabled>
