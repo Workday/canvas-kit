@@ -67,9 +67,9 @@ export const pillStencil = createStencil({
         flex: '1 1 auto',
       },
     },
-    '&:has([data-part="pill-count"]), &:has([data-part="pill-icon-button"])': {
-      paddingInlineEnd: calc.subtract(system.space.x6, px2rem(2)),
-    },
+    // '&:has([data-part="pill-count"]), &:has([data-part="pill-icon-button"])': {
+    //   paddingInlineEnd: calc.add(system.space.x6, px2rem(2)),
+    // },
     '&:focus-visible, &.focus': {
       [buttonStencil.vars.background]: system.color.bg.alt.soft,
       [buttonStencil.vars.border]: system.color.border.primary.default,
@@ -283,7 +283,7 @@ export const Pill = createContainer('button')({
      */
     Label: PillLabel,
   },
-})<PillProps>(({variant = 'default', maxWidth = 200, ...elemProps}, Element, model) => {
+})<PillProps>(({variant = 'default', maxWidth = 200, children, ...elemProps}, Element, model) => {
   const maxWidthCSSValue = typeof maxWidth === 'number' ? px2rem(maxWidth) : maxWidth;
   return (
     <>
@@ -299,7 +299,7 @@ export const Pill = createContainer('button')({
             })
           )}
         >
-          <PillLabel>{elemProps.children}</PillLabel>
+          <PillLabel>{children}</PillLabel>
         </Box>
       )}
       {variant === 'default' && (
@@ -313,15 +313,7 @@ export const Pill = createContainer('button')({
             }),
           ])}
         >
-          <div data-part="pill-flex-container">
-            {React.Children.map(elemProps.children, (child, index) => {
-              if (typeof child === 'string') {
-                return <PillLabel key={index}>{child}</PillLabel>;
-              } else {
-                return <div data-part="pill-flex-item">{child}</div>;
-              }
-            })}
-          </div>
+          {children}
         </BaseButton>
       )}
       {variant === 'removable' && (
@@ -332,18 +324,7 @@ export const Pill = createContainer('button')({
             removeablePillStencil({maxWidth: maxWidthCSSValue}),
           ])}
         >
-          <div data-part="pill-flex-container">
-            {React.Children.map(elemProps.children, (child, index) => {
-              if (typeof child === 'string') {
-                return <PillLabel key={index}>{child}</PillLabel>;
-              }
-              return (
-                <div data-part="pill-flex-item" key={index}>
-                  {child}
-                </div>
-              );
-            })}
-          </div>
+          {children}
         </Box>
       )}
     </>
