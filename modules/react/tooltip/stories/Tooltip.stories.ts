@@ -7,6 +7,7 @@ import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {Default as DefaultExample} from './examples/Default';
 import {CustomContent as CustomContentExample} from './examples/CustomContent';
 import {DelayedTooltip as DelayedTooltipExample} from './examples/DelayedTooltip';
+import {DescriptionType as DescriptionTypeExample} from './examples/DescriptionType';
 import {DescribeType as DescribeTypeExample} from './examples/DescribeType';
 import {Muted as MutedExample} from './examples/Muted';
 import {Placements as PlacementsExample} from './examples/Placements';
@@ -35,6 +36,9 @@ export const CustomContent: Story = {
 };
 export const DelayedTooltip: Story = {
   render: DelayedTooltipExample,
+};
+export const DescriptionType: Story = {
+  render: DescriptionTypeExample,
 };
 export const DescribeType: Story = {
   render: DescribeTypeExample,
