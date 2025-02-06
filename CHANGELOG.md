@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.3.5](https://github.com/Workday/canvas-kit/releases/tag/v12.3.5) (2025-01-28)
+
+### Documentation
+
+- chore: Update banner image on welcome page ([#3113](https://github.com/Workday/canvas-kit/pull/3113)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.3.4](https://github.com/Workday/canvas-kit/releases/tag/v12.3.4) (2025-01-28)
+
+
+
+
 ## [v12.3.3](https://github.com/Workday/canvas-kit/releases/tag/v12.3.3) (2025-01-13)
 
 ### Documentation
