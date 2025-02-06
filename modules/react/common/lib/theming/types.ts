@@ -37,7 +37,6 @@ export interface CanvasTheme {
     alert: CanvasThemePalette;
     success: CanvasThemePalette;
     neutral: CanvasThemePalette;
-    action: CanvasThemePalette;
   };
   /**
    * ### Theme Breakpoints
