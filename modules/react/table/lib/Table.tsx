@@ -1,5 +1,5 @@
 import React from 'react';
-import {GridProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {Flex, GridProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {TableHead} from './TableHead';
 import {TableBody} from './TableBody';
@@ -8,17 +8,66 @@ import {TableHeader} from './TableHeader';
 import {TableCell} from './TableCell';
 import {TableFooter} from './TableFooter';
 import {TableCaption} from './TableCaption';
-import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-const tableStencil = createStencil({
+export interface TableProps extends GridProps {
+  /**
+   * Variant has an option for `simple` which will have the Table act as a HTML Table without Grid styles.
+   */
+  variant?: 'html';
+}
+
+export const tableStencil = createStencil({
   base: {
     ...system.type.subtext.large,
     display: 'grid',
     border: `${px2rem(1)} solid ${system.color.border.container}`,
+    borderSpacing: system.space.zero,
     borderRadius: system.shape.x2,
     overflow: 'auto',
     color: system.color.text.default,
+  },
+  modifiers: {
+    variant: {
+      html: {
+        display: 'table',
+        overflow: 'scroll',
+        borderCollapse: 'separate',
+        border: 'none',
+        caption: {
+          display: 'table-caption',
+          borderBottom: 'none',
+        },
+        thead: {
+          display: 'table-header-group',
+        },
+        tbody: {
+          display: 'table-row-group',
+        },
+        'thead, tbody': {
+          textAlign: 'left',
+        },
+        'th, td': {
+          height: calc.add(system.space.x10, system.space.x4),
+          display: 'table-cell',
+          whiteSpace: 'nowrap',
+          wordBreak: 'keep-all',
+        },
+        tr: {
+          display: 'table-row',
+        },
+      },
+    },
+  },
+});
+
+const TableContainerStencil = createStencil({
+  base: {
+    overflow: 'auto',
+    width: 'min-content',
+    border: `${px2rem(1)} solid ${system.color.border.container}`,
+    borderRadius: system.shape.x2,
   },
 });
 
@@ -66,11 +115,21 @@ export default function App() {
  */
 export const Table = createComponent('table')({
   displayName: 'Table',
-  Component: ({children, ...elemProps}: GridProps, ref, Element) => {
+  Component: ({children, variant, ...elemProps}: TableProps, ref, Element) => {
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, tableStencil())}>
-        {children}
-      </Element>
+      <>
+        {variant === 'html' ? (
+          <Flex cs={TableContainerStencil()}>
+            <Element ref={ref} {...mergeStyles(elemProps, tableStencil({variant: variant}))}>
+              {children}
+            </Element>
+          </Flex>
+        ) : (
+          <Element ref={ref} {...mergeStyles(elemProps, tableStencil({variant: variant}))}>
+            {children}
+          </Element>
+        )}
+      </>
     );
   },
   subComponents: {

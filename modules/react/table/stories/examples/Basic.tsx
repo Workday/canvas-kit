@@ -10,7 +10,7 @@ const tableHeaderStyles = createStyles({
 
 export const Basic = () => {
   return (
-    <Table>
+    <Table variant="html">
       <Table.Caption>Coffee Drinks and Sizes</Table.Caption>
       <Table.Head>
         <Table.Row>

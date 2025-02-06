@@ -96,7 +96,12 @@ export const FixedColumn = () => {
       <Heading as="h3" id={headingID} size="small" cs={styleOverrides.parentContainerStyles}>
         Performance Car Specs
       </Heading>
-      <Table cs={styleOverrides.tableStyles} aria-labelledby={headingID} tabIndex={0}>
+      <Table
+        cs={styleOverrides.tableStyles}
+        aria-labelledby={headingID}
+        tabIndex={0}
+        variant="html"
+      >
         <Table.Head>
           <Table.Row>
             <Table.Header scope="col" cs={styleOverrides.tableHeaderStyles}>
