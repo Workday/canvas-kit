@@ -10,11 +10,13 @@ import {
 import {chevronUpIcon, chevronDownIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {useExpandableIcon} from './hooks/useExpandableIcon';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {IconPositions} from '@workday/canvas-kit-react/button';
 import {colors, space} from '@workday/canvas-kit-react/tokens';
 
 import {useExpandableModel} from './hooks/useExpandableModel';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 export interface ExpandableIconProps extends Omit<ExtractProps<typeof SystemIcon, never>, 'icon'> {
   /**
@@ -30,51 +32,56 @@ export interface ExpandableIconProps extends Omit<ExtractProps<typeof SystemIcon
   iconPosition?: IconPositions;
 }
 
-const StyledEndIcon = styled(SystemIcon, {
-  shouldForwardProp: filterOutProps(['visible']),
-})<{visible: boolean} & StyledType>(
-  {
-    marginLeft: 'auto',
-  },
-  ({visible}) => ({
-    transform: !visible ? 'rotate(-180deg)' : undefined,
-    padding: !visible
-      ? `${space.xxxs} ${space.xs} ${space.xxxs} ${space.xxxs}`
-      : `${space.xxxs} ${space.xxxs} ${space.xxxs} ${space.xs}`,
-  })
-);
-
-const StyledStartIcon = styled(SystemIcon, {
-  shouldForwardProp: filterOutProps(['visible']),
-})<{visible: boolean} & StyledType>(
-  {
-    margin: `0 ${space.xxs} 0 0`,
+export const expandableIconStencil = createStencil({
+  extends: systemIconStencil,
+  base: {
     padding: space.xxxs,
   },
-  ({visible}) => ({
-    transform: !visible ? 'rotate(-90deg)' : undefined,
-  })
-);
+  compound: [
+    {
+      modifiers: {position: 'end', isExpanded: false},
+      styles: {
+        marginLeft: 'auto',
+        transform: 'rotate(180deg)',
+        paddingRight: space.xs, // do I need these padding changes?
+      },
+    },
+    {
+      modifiers: {position: 'end', isExpanded: true},
+      styles: {
+        marginLeft: 'auto',
+        paddingLeft: space.xs, // do I need these padding changes?
+      },
+    },
+    {
+      modifiers: {position: 'start', isExpanded: false},
+      styles: {
+        marginRight: space.xxs,
+        transform: 'rotate(90deg)',
+      },
+    },
+    {
+      modifiers: {position: 'start', isExpanded: true},
+      styles: {
+        marginRight: space.xxs,
+        transform: 'rotate(180deg)',
+      },
+    },
+  ],
+});
 
 export const ExpandableIcon = createSubcomponent('span')({
   modelHook: useExpandableModel,
   elemPropsHook: useExpandableIcon,
-})<ExpandableIconProps>(({icon, visible, iconPosition = 'start', ...elementProps}, Element) =>
-  iconPosition === 'end' ? (
-    <StyledEndIcon
+})<ExpandableIconProps>(({icon, visible, iconPosition = 'start', ...elementProps}, Element) => {
+  return (
+    <SystemIcon
       as={Element}
-      fill={colors.licorice200}
       icon={icon || chevronUpIcon}
-      visible={visible}
-      {...elementProps}
+      {...mergeStyles(
+        elementProps,
+        expandableIconStencil({position: iconPosition, isExpanded: visible})
+      )}
     />
-  ) : (
-    <StyledStartIcon
-      as={Element}
-      fill={colors.licorice200}
-      icon={icon || chevronDownIcon}
-      visible={visible}
-      {...elementProps}
-    />
-  )
-);
+  );
+});
