@@ -15,7 +15,7 @@ export interface TableProps extends GridProps {
   /**
    * Variant has an option for `simple` which will have the Table act as a HTML Table without Grid styles.
    */
-  variant?: 'html';
+  variant?: 'standard';
 }
 
 export const tableStencil = createStencil({
@@ -30,7 +30,7 @@ export const tableStencil = createStencil({
   },
   modifiers: {
     variant: {
-      html: {
+      standard: {
         display: 'table',
         overflow: 'scroll',
         borderCollapse: 'separate',
@@ -118,7 +118,7 @@ export const Table = createComponent('table')({
   Component: ({children, variant, ...elemProps}: TableProps, ref, Element) => {
     return (
       <>
-        {variant === 'html' ? (
+        {variant === 'standard' ? (
           <Flex cs={TableContainerStencil()}>
             <Element ref={ref} {...mergeStyles(elemProps, tableStencil({variant: variant}))}>
               {children}

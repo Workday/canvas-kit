@@ -8,9 +8,9 @@ const tableHeaderStyles = createStyles({
   backgroundColor: system.color.bg.alt.softer,
 });
 
-export const Basic = () => {
+export const BasicStandardVariant = () => {
   return (
-    <Table>
+    <Table variant="standard">
       <Table.Caption>Coffee Drinks and Sizes</Table.Caption>
       <Table.Head>
         <Table.Row>
