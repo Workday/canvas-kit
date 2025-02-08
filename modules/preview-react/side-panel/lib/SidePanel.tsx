@@ -1,13 +1,19 @@
 import * as React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {
+  createStencil,
+  handleCsProp,
+  px2rem,
+  keyframes,
+  createVars,
+} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import {SidePanelContext} from './hooks';
 import {SidePanelToggleButton} from './SidePanelToggleButton';
-import {keyframes} from '@emotion/react';
 
 export type SidePanelVariant = 'standard' | 'alternate';
 export type SidePanelTransitionStates = 'collapsed' | 'collapsing' | 'expanded' | 'expanding';
+export type SidePanelOrigin = 'left' | 'right';
 
 export interface SidePanelProps {
   /**
@@ -32,7 +38,7 @@ export interface SidePanelProps {
    *
    * @default 'left'
    */
-  origin?: 'left' | 'right';
+  origin?: SidePanelOrigin;
   /**
    * The function called when the side panel's `expanded` state changes. States like `'collapsing'` and `'expanding'` are tracked in another callback: `onStateTransition`
    *
@@ -64,57 +70,36 @@ export interface SidePanelProps {
   onAnimationEnd?: React.AnimationEventHandler<HTMLElement>;
 }
 
-const createKeyframes = (from: number | string, to: number | string) => {
-  const normalized = {
-    from: typeof from === 'number' ? from + 'px' : from,
-    to: typeof to === 'number' ? to + 'px' : to,
-  };
+const sidePanelKeyframeExpandedVars = createVars('fromAnimationExpanded', 'toAnimationExpanded');
+const sidePanelKeyframeCollapsedVars = createVars('fromAnimationCollapsed', 'toAnimationCollapsed');
 
-  return keyframes`
-    from {
-      width: ${normalized.from};
-      min-width: ${normalized.from};
-      max-width: ${normalized.from};
-    } to {
-      width: ${normalized.to};
-      min-width: ${normalized.to};
-      max-width: ${normalized.to};
-    }
-  `;
-};
+const sidepaneExpandedlKeyFrames = keyframes({
+  from: {
+    width: sidePanelKeyframeExpandedVars.fromAnimationExpanded,
+    minWidth: sidePanelKeyframeExpandedVars.fromAnimationExpanded,
+    maxWidth: sidePanelKeyframeExpandedVars.fromAnimationExpanded,
+  },
+  to: {
+    width: sidePanelKeyframeExpandedVars.toAnimationExpanded,
+    minWidth: sidePanelKeyframeExpandedVars.toAnimationExpanded,
+    maxWidth: sidePanelKeyframeExpandedVars.toAnimationExpanded,
+  },
+});
 
-// const createKeyframes = (from: number | string, to: number | string) => {
-//   const fromWidth = typeof from === 'number' ? from + 'px' : from;
-//   const toWidth = typeof to === 'number' ? to + 'px' : to;
+const sidepaneCollapsedKeyFrames = keyframes({
+  from: {
+    width: sidePanelKeyframeCollapsedVars.fromAnimationCollapsed,
+    minWidth: sidePanelKeyframeCollapsedVars.fromAnimationCollapsed,
+    maxWidth: sidePanelKeyframeCollapsedVars.fromAnimationCollapsed,
+  },
+  to: {
+    width: sidePanelKeyframeCollapsedVars.toAnimationCollapsed,
+    minWidth: sidePanelKeyframeCollapsedVars.toAnimationCollapsed,
+    maxWidth: sidePanelKeyframeCollapsedVars.toAnimationCollapsed,
+  },
+});
 
-//   return keyframes({
-//     from: {
-//       width: '320px',
-//       minWidth: '320px',
-//       maxWidth: '320px',
-//     },
-//     to: {
-//       width: '64px',
-//       minWidth: '64px',
-//       maxWidth: '64px',
-//     },
-//   });
-
-//   // return keyframes({
-//   //   from: {
-//   //     width: fromWidth,
-//   //     minWidth: fromWidth,
-//   //     maxWidth: fromWidth,
-//   //   },
-//   //   to: {
-//   //     width: toWidth,
-//   //     minWidth: toWidth,
-//   //     maxWidth: toWidth,
-//   //   },
-//   // });
-// };
-
-const panelStencil = createStencil({
+export const panelStencil = createStencil({
   vars: {
     expandedWidth: '',
     collapsedWidth: '',
@@ -154,15 +139,19 @@ const panelStencil = createStencil({
   },
   compound: [
     {
-      modifiers: {touched: true, expanded: true},
+      modifiers: {touched: 'true', expanded: 'true'},
       styles: {
-        animation: `expand 200ms ease-out`,
+        animationName: sidepaneExpandedlKeyFrames,
+        animationDuration: '200ms',
+        animationTimingFunction: 'ease-out',
       },
     },
     {
-      modifiers: {touched: true, expanded: false},
+      modifiers: {touched: 'true', expanded: 'false'},
       styles: {
-        animation: `collapse 200ms ease-out`,
+        animationName: sidepaneCollapsedKeyFrames,
+        animationDuration: '200ms',
+        animationTimingFunction: 'ease-out',
       },
     },
   ],
@@ -204,18 +193,14 @@ export const SidePanel = createComponent('section')({
       }
     }, [state, onStateTransition]);
 
-    const motion = {
-      collapse: createKeyframes(expandedWidth, collapsedWidth),
-      expand: createKeyframes(collapsedWidth, expandedWidth),
-    };
-
     const handleAnimationEnd = (event: React.AnimationEvent<HTMLDivElement>) => {
       if (event.currentTarget === event.target) {
-        if (event.animationName === motion.collapse.name) {
+        console.log(sidepaneCollapsedKeyFrames);
+        if (event.animationName === sidepaneCollapsedKeyFrames) {
           setState('collapsed');
         }
 
-        if (event.animationName === motion.expand.name) {
+        if (event.animationName === sidepaneExpandedlKeyFrames) {
           setState('expanded');
         }
       }
@@ -228,8 +213,8 @@ export const SidePanel = createComponent('section')({
     const handleAnimationStart = (event: React.AnimationEvent<HTMLDivElement>) => {
       if (event.currentTarget === event.target) {
         if (
-          event.animationName === motion.collapse.name ||
-          event.animationName === motion.expand.name
+          event.animationName === sidepaneCollapsedKeyFrames ||
+          event.animationName === sidepaneExpandedlKeyFrames
         ) {
           setState(expanded ? 'expanding' : 'collapsing');
         }
@@ -245,18 +230,29 @@ export const SidePanel = createComponent('section')({
         ref={ref}
         onAnimationEnd={handleAnimationEnd}
         onAnimationStart={handleAnimationStart}
-        {...handleCsProp(
-          elemProps,
+        {...handleCsProp(elemProps, [
           panelStencil({
-            expanded: expanded,
-            touched: touched,
+            expanded: expanded ? 'true' : 'false',
+            touched: touched ? 'true' : 'false',
             variant: variant,
             expandedWidth:
               typeof expandedWidth === 'number' ? px2rem(expandedWidth) : expandedWidth,
             collapsedWidth:
               typeof collapsedWidth === 'number' ? px2rem(collapsedWidth) : collapsedWidth,
-          })
-        )}
+          }),
+          sidePanelKeyframeCollapsedVars({
+            fromAnimationCollapsed:
+              typeof expandedWidth === 'number' ? px2rem(expandedWidth) : expandedWidth,
+            toAnimationCollapsed:
+              typeof collapsedWidth === 'number' ? px2rem(collapsedWidth) : collapsedWidth,
+          }),
+          sidePanelKeyframeExpandedVars({
+            fromAnimationExpanded:
+              typeof collapsedWidth === 'number' ? px2rem(collapsedWidth) : collapsedWidth,
+            toAnimationExpanded:
+              typeof expandedWidth === 'number' ? px2rem(expandedWidth) : expandedWidth,
+          }),
+        ])}
       >
         <SidePanelContext.Provider
           value={{
