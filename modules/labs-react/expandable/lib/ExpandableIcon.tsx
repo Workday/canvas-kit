@@ -1,22 +1,15 @@
 import React from 'react';
 
-import {
-  createSubcomponent,
-  ExtractProps,
-  filterOutProps,
-  styled,
-  StyledType,
-} from '@workday/canvas-kit-react/common';
-import {chevronUpIcon, chevronDownIcon} from '@workday/canvas-system-icons-web';
+import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {chevronUpIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {useExpandableIcon} from './hooks/useExpandableIcon';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {IconPositions} from '@workday/canvas-kit-react/button';
-import {colors, space} from '@workday/canvas-kit-react/tokens';
-
 import {useExpandableModel} from './hooks/useExpandableModel';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {system} from '@workday/canvas-tokens-web';
 
 export interface ExpandableIconProps extends Omit<ExtractProps<typeof SystemIcon, never>, 'icon'> {
   /**
@@ -35,7 +28,7 @@ export interface ExpandableIconProps extends Omit<ExtractProps<typeof SystemIcon
 export const expandableIconStencil = createStencil({
   extends: systemIconStencil,
   base: {
-    padding: space.xxxs,
+    padding: system.space.x1,
   },
   compound: [
     {
@@ -43,27 +36,27 @@ export const expandableIconStencil = createStencil({
       styles: {
         marginLeft: 'auto',
         transform: 'rotate(180deg)',
-        paddingRight: space.xs, // do I need these padding changes?
+        paddingRight: system.space.x3, // do I need these padding changes?
       },
     },
     {
       modifiers: {position: 'end', isExpanded: true},
       styles: {
         marginLeft: 'auto',
-        paddingLeft: space.xs, // do I need these padding changes?
+        paddingLeft: system.space.x3, // do I need these padding changes?
       },
     },
     {
       modifiers: {position: 'start', isExpanded: false},
       styles: {
-        marginRight: space.xxs,
+        marginRight: system.space.x2,
         transform: 'rotate(90deg)',
       },
     },
     {
       modifiers: {position: 'start', isExpanded: true},
       styles: {
-        marginRight: space.xxs,
+        marginRight: system.space.x2,
         transform: 'rotate(180deg)',
       },
     },
