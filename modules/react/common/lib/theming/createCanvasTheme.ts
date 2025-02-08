@@ -80,13 +80,12 @@ function fillPalette(
 
 function calculateCanvasTheme(partialTheme: PartialCanvasTheme): CanvasTheme {
   const {palette = {}, breakpoints = {}, direction, ...extraFields} = partialTheme;
-  const {primary, alert, error, success, neutral, action, common = {}} = palette!;
+  const {primary, alert, error, success, neutral, common = {}} = palette!;
 
   const mergeable: PartialCanvasTheme = {
     palette: {
       common,
       primary: fillPalette(defaultCanvasTheme.palette.primary, primary),
-      action: fillPalette(defaultCanvasTheme.palette.primary, action || primary),
       alert: fillPalette(defaultCanvasTheme.palette.alert, alert),
       error: fillPalette(defaultCanvasTheme.palette.error, error),
       success: fillPalette(defaultCanvasTheme.palette.success, success),

@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.3.6](https://github.com/Workday/canvas-kit/releases/tag/v12.3.6) (2025-02-06)
+
+### Theming
+
+- fix: Remove action tokens from CanvasProvider to allow cascading ([#3125](https://github.com/Workday/canvas-kit/pull/3125)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  The `CanvasProvider` created a cascading barrier for our brand tokens. In the case where `brand.action.**` tokens are defined at the root level, say `:root` in a a CSS file, we want those tokens to cascade through the `CanvasProvider` down to our `PrimaryButton`'s.  To allow this, we've removed them from the `CanvasProvider` and `variables.css`.
+  - `@workday/canvas-tokens-web@2.1.1` **removed** `--cnvs-brand-action-**` tokens from our `variables.css` to ensure proper cascading of this token to theme our `PrimaryButton`'s.
+  - The `CanvasProvider` has **removed** defaulting `brand.action.**` for theming and is longer a valid theme property on `CanvasTheme` type. 
+  - In order to ensure proper cascading of the `--cnvs-brand-action-**` token, you **must** upgrade to the latest version of Canvas Kit `v12` **and** whomever is bootstrapping the `variables.css` **must** upgrade  `@workday/canvas-tokens-web` to `@2.1.1` to ensure correct theming.
+
+
+## [v12.3.5](https://github.com/Workday/canvas-kit/releases/tag/v12.3.5) (2025-01-28)
+
+### Documentation
+
+- chore: Update banner image on welcome page ([#3113](https://github.com/Workday/canvas-kit/pull/3113)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.3.4](https://github.com/Workday/canvas-kit/releases/tag/v12.3.4) (2025-01-28)
+
+
+
+
 ## [v12.3.3](https://github.com/Workday/canvas-kit/releases/tag/v12.3.3) (2025-01-13)
 
 ### Documentation

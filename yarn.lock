@@ -6158,10 +6158,10 @@
   dependencies:
     "@workday/design-assets-types" "0.2.8"
 
-"@workday/canvas-tokens-web@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.npmjs.org/@workday/canvas-tokens-web/-/canvas-tokens-web-2.1.0.tgz#3fa68416c003dd84a217909db556ab385360a34e"
-  integrity sha512-qDkhronvKRmautzHWLAlGYwI0UsrXmRN07EFCHPROFAbVglMdd1D3LIeP2ECtQ76qOcEVJM79vQJdwai4B9K7g==
+"@workday/canvas-tokens-web@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-tokens-web/-/canvas-tokens-web-2.1.1.tgz#d397b5fbbc22086e767812a6a76578b2439cf8fa"
+  integrity sha512-icsFntfDnqwlGZkAu9PNJs9ymLGZJG9o3j/a2+LXxIsr69PoE2XlNDKLGgHPXn0H9pHWHRgt6tVJk5mUTsCIgw==
 
 "@workday/design-assets-types@0.2.10":
   version "0.2.10"
@@ -15646,9 +15646,9 @@ statuses@2.0.1:
   integrity sha512-RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ==
 
 store2@^2.14.2:
-  version "2.14.3"
-  resolved "https://registry.yarnpkg.com/store2/-/store2-2.14.3.tgz#24077d7ba110711864e4f691d2af941ec533deb5"
-  integrity sha512-4QcZ+yx7nzEFiV4BMLnr/pRa5HYzNITX2ri0Zh6sT9EyQHbBHacC6YigllUPU9X3D0f/22QCgfokpKs52YRrUg==
+  version "2.14.4"
+  resolved "https://registry.yarnpkg.com/store2/-/store2-2.14.4.tgz#81b313abaddade4dcd7570c5cc0e3264a8f7a242"
+  integrity sha512-srTItn1GOvyvOycgxjAnPA63FZNwy0PTyUBFMHRM+hVFltAeoh0LmNBz9SZqUS9mMqGk8rfyWyXn3GH5ReJ8Zw==
 
 storybook@7.6.20:
   version "7.6.20"
@@ -15684,7 +15684,6 @@ string-replace-loader@^3.1.0:
     schema-utils "^3.0.0"
 
 "string-width-cjs@npm:string-width@^4.2.0", "string-width@^1.0.2 || 2 || 3 || 4", string-width@^4.2.3:
-  name string-width-cjs
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
@@ -16988,7 +16987,6 @@ wordwrap@^1.0.0:
   integrity sha1-J1hIEIkUVqQXHI0CJkQa3pDLyus=
 
 "wrap-ansi-cjs@npm:wrap-ansi@^7.0.0", wrap-ansi@^7.0.0:
-  name wrap-ansi-cjs
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
   integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
