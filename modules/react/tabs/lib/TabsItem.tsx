@@ -21,7 +21,7 @@ import {
   useListItemSelect,
   useOverflowListItemMeasure,
 } from '@workday/canvas-kit-react/collection';
-import {calc, createStencil} from '@workday/canvas-kit-styling';
+import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
 
 import {useTabsModel} from './useTabsModel';
 import {buttonStencil} from '@workday/canvas-kit-react/button';
@@ -91,8 +91,7 @@ const tabItemStencil = createStencil({
     minWidth: system.space.zero,
     alignItems: 'center',
     padding: `${system.space.x3} ${system.space.x4}`,
-    height: 52,
-    boxSizing: 'border-box',
+    height: px2rem(52),
     cursor: 'pointer',
     color: system.color.fg.muted.default,
     position: 'relative',
@@ -124,7 +123,7 @@ const tabItemStencil = createStencil({
     },
 
     '&:disabled, &[aria-disabled]': {
-      color: base.licorice100,
+      color: system.color.text.disabled,
       [systemIconStencil.vars.color]: system.color.fg.disabled,
       '&:hover': {
         cursor: 'auto',
@@ -145,7 +144,7 @@ const tabItemStencil = createStencil({
         bottom: system.space.zero,
         content: `''`,
         left: system.space.zero,
-        marginTop: `${calc.negate(calc.divide(system.space.x2, system.space.x1))}`,
+        marginBlockStart: `${calc.negate(calc.divide(system.space.x2, system.space.x1))}`,
         width: '100%',
       },
       '&:hover, &.hover, &:focus-visible, &.focus': {

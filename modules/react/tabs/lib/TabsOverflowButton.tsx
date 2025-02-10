@@ -15,7 +15,7 @@ import {useTabsModel} from './useTabsModel';
 import {StyledTabItem} from './TabsItem';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {mergeStyles} from '../../layout';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 export interface OverflowButtonProps {
   /**
@@ -24,7 +24,7 @@ export interface OverflowButtonProps {
   children: React.ReactNode;
 }
 
-const TabsOverflowButtonStencil = createStencil({
+const tabsOverflowButtonStencil = createStencil({
   base: {
     gap: system.space.x1,
   },
@@ -49,7 +49,7 @@ export const TabsOverflowButton = createSubcomponent('button')({
     <StyledTabItem
       type="button"
       as={Element}
-      {...mergeStyles(elemProps, TabsOverflowButtonStencil())}
+      {...mergeStyles(elemProps, tabsOverflowButtonStencil())}
     >
       <span>{children}</span>
       <SystemIcon icon={chevronDownSmallIcon} />

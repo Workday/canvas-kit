@@ -15,7 +15,7 @@ import {
 } from '@workday/canvas-kit-react/collection';
 
 import {useTabsModel} from './useTabsModel';
-import {createStencil} from '@workday/canvas-kit-styling';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export interface TabListProps<T = any> extends Omit<ExtractProps<typeof Flex, never>, 'children'> {
@@ -44,11 +44,11 @@ export const useTabsList = composeHooks(
   useListResetCursorOnBlur
 );
 
-const tabsListStencil = createStencil({
+export const tabsListStencil = createStencil({
   base: {
     display: 'flex',
     position: 'relative',
-    borderBottom: `1px solid ${system.color.border.divider}`,
+    borderBottom: `${px2rem(1)} solid ${system.color.border.divider}`,
     gap: system.space.x2,
     paddingInline: system.space.x6,
     maskImage: 'none',
