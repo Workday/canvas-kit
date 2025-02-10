@@ -97,7 +97,11 @@ or view the example below.
 
 ### Theme Overrides
 
-The most common way to theme our buttons is to pass a `theme` object at the root level of the application via the `CanvasProvider`. In the example below, our buttons use our `brand.action.**` tokens with the fallback being `brand.primary.**`.
+The most common way to theme our buttons is to pass a `theme` object at the root level of the application via the `CanvasProvider`. In the example below, our buttons use our `brand.action.**` tokens with the fallback being `brand.primary.**`. 
+
+> **Caution:** Setting `--cnvs-brand-action**` tokens at the `:root` CSS will override all `PrimaryButton` theme colors set at the `CanvasProvider` level.
+
+> **Note:** You should **not** individually theme components wrapping them with the `CanvasProvider`, but rather theme at the root level of the application.
 
 <ExampleCodeBlock code={ThemeOverrides} />
 
