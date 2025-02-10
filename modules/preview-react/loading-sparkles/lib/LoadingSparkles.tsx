@@ -2,7 +2,6 @@ import * as React from 'react';
 import {base, system} from '@workday/canvas-tokens-web';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {CSProps, cssVar, px2rem, keyframes, createStencil} from '@workday/canvas-kit-styling';
 
 import {sparkleIcon} from './sparkleIcon';
