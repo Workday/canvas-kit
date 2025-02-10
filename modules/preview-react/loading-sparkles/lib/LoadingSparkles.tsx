@@ -46,9 +46,7 @@ const loadingSparklesStencil = createStencil({
       animationIterationCount: 'infinite',
       animationName: LOADING_ANIMATION,
       animationTimingFunction: 'ease-in-out',
-      '.wd-sparkle-fill': {
-        fill: base.extendedDragonFruit400,
-      },
+      [systemIconStencil.vars.color]:  base.extendedDragonFruit400
       '&:nth-child(1)': {
         animationDelay: '0ms',
       },
