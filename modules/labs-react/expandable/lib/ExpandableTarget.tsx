@@ -5,7 +5,7 @@ import {BaseButton, buttonStencil} from '@workday/canvas-kit-react/button';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Heading} from '@workday/canvas-kit-react/text';
 import {createStencil} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 import {useExpandableTarget} from './hooks/useExpandableTarget';
 import {useExpandableModel} from './hooks/useExpandableModel';
 
