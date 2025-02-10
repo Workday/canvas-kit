@@ -279,7 +279,6 @@ export const Pill = createContainer('button')({
         <Box
           as={Element !== 'button' ? Element : 'span'}
           id={model.state.id}
-          // maxWidth={maxWidth}
           {...mergeStyles(
             elemProps,
             readyOnlyPillStencil({

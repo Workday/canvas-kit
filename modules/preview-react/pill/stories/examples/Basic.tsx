@@ -20,9 +20,6 @@ export const Basic = () => {
           <Pill.Icon aria-label="Add user" />
           <Pill.Label>Regina Skeltor</Pill.Label>
         </Pill>
-        <Pill onClick={() => setText('The first pill is clicked!')}>
-          <Pill.Label>Regina Skeltor</Pill.Label>
-        </Pill>
         <Pill disabled>
           <Pill.Icon aria-label="Add user" />
           <Pill.Label>Regina Skeltor</Pill.Label>

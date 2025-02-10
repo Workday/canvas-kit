@@ -18,7 +18,7 @@ export const WithRemovable = () => {
     <div>
       <div className={flexStyles}>
         <Pill variant="removable">
-          Pink Shirts
+          <Pill.Label>Pink Shirts</Pill.Label>
           <Pill.IconButton
             aria-label="Remove"
             onClick={() => setText('The first pill is clicked!')}
@@ -26,7 +26,7 @@ export const WithRemovable = () => {
         </Pill>
         <Pill variant="removable">
           <Pill.Avatar url={testAvatar} />
-          Carolyn Grimaldi
+          <Pill.Label>Carolyn Grimaldi</Pill.Label>
           <Pill.IconButton
             aria-label="Remove"
             onClick={() => setText('The second pill is clicked!')}
