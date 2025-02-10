@@ -13,11 +13,10 @@ export interface PillIconButtonProps extends Partial<SystemIconProps> {
   /**
    * The aria label for the removable icon. You must provide a valid string to represent the action.
    */
-  'aria-label': string;
+  'aria-label'?: string;
 }
 
 export const pillIconButtonStencil = createStencil({
-  extends: buttonStencil,
   base: {
     marginInlineEnd: calc.negate(px2rem(7)), // visually pull in the pill to the right size  by -7px
     marginInlineStart: calc.negate(px2rem(2)), // visually create space between label and the button by -2px
@@ -27,10 +26,6 @@ export const pillIconButtonStencil = createStencil({
     padding: 0,
     overflow: 'visible',
     flex: '0 0 auto',
-    // position: 'absolute',
-    // insetBlockStart: px2rem(1),
-    // insetInlineEnd: system.space.x2,
-
     [buttonStencil.vars.border]: system.color.border.transparent,
     [buttonStencil.vars.background]: system.color.bg.alt.soft,
     [systemIconStencil.vars.color]: system.color.icon.default,

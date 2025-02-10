@@ -1,16 +1,16 @@
 import React from 'react';
 
 import {createSubcomponent} from '@workday/canvas-kit-react/common';
-import {Avatar, AvatarProps, avatarStencil} from '@workday/canvas-kit-react/avatar';
+import {Avatar, AvatarProps} from '@workday/canvas-kit-react/avatar';
 import {usePillModel} from './usePillModel';
-import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil} from '@workday/canvas-kit-styling';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 export interface PillAvatarProps extends AvatarProps {}
 
 export const pillAvatarStencil = createStencil({
   base: {
-    // cursor: 'pointer',
+    cursor: 'pointer',
     flex: '0 0 auto',
   },
 });
