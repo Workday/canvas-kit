@@ -67,7 +67,6 @@ export const SelectInput = createSubcomponent(TextInput)({
       error,
       textInputProps,
       disabled,
-      width,
       ref,
       onChange,
       onInput,
