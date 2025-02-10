@@ -27,3 +27,5 @@ export const Primary = () => (
     <PrimaryButton aria-label="Related Actions" icon={relatedActionsVerticalIcon} />
   </Flex>
 );
+
+export default Primary;

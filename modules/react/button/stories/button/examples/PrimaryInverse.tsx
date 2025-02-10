@@ -28,3 +28,5 @@ export const PrimaryInverse = () => (
     <PrimaryButton icon={relatedActionsVerticalIcon} variant="inverse" />
   </Flex>
 );
+
+export default PrimaryInverse;
