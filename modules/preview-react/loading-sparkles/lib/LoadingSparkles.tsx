@@ -2,8 +2,7 @@ import * as React from 'react';
 import {base, system} from '@workday/canvas-tokens-web';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {CSProps, px2rem, keyframes, createStencil} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, handleCsProp, keyframes, px2rem} from '@workday/canvas-kit-styling';
 
 import {sparkleIcon} from './sparkleIcon';
 
@@ -70,7 +69,7 @@ export const LoadingSparkles = createComponent('div')({
   displayName: 'LoadingSparkles',
   Component: (elemProps: CSProps, ref, Element) => {
     return (
-      <Element ref={ref} role="status" {...mergeStyles(elemProps, loadingSparklesStencil())}>
+      <Element ref={ref} role="status" {...handleCsProp(elemProps, loadingSparklesStencil())}>
         <Sparkle />
         <Sparkle />
         <Sparkle />
