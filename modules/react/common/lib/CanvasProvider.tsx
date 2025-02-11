@@ -44,12 +44,6 @@ const defaultBranding = createStyles({
   [brand.primary.base]: base.blueberry400,
   [brand.primary.light]: base.blueberry200,
   [brand.primary.lightest]: base.blueberry100,
-  [brand.action.accent]: base.frenchVanilla100,
-  [brand.action.darkest]: base.blueberry600,
-  [brand.action.dark]: base.blueberry500,
-  [brand.action.base]: base.blueberry400,
-  [brand.action.light]: base.blueberry200,
-  [brand.action.lightest]: base.blueberry100,
   [brand.gradient
     .primary]: `linear-gradient(90deg, ${brand.primary.base} 0%, ${brand.primary.dark} 100%)`,
 });
@@ -71,22 +65,20 @@ export const useCanvasThemeToCssVars = (
   const className = (elemProps.className || '').split(' ').concat(defaultBranding).join(' ');
   const style = elemProps.style || {};
   const {palette} = filledTheme.canvas;
-  (['common', 'primary', 'error', 'alert', 'success', 'neutral', 'action'] as const).forEach(
-    color => {
-      if (color === 'common') {
-        // @ts-ignore
-        style[brand.common.focusOutline] = palette.common.focusOutline;
-      }
-      (['lightest', 'light', 'main', 'dark', 'darkest', 'contrast'] as const).forEach(key => {
-        // We only want to set custom colors if they do not match the default. The `defaultBranding` class will take care of the rest.
-        // @ts-ignore
-        if (palette[color][key] !== defaultCanvasTheme.palette[color][key]) {
-          // @ts-ignore
-          style[brand[color][mappedKeys[key]]] = palette[color][key];
-        }
-      });
+  (['common', 'primary', 'error', 'alert', 'success', 'neutral'] as const).forEach(color => {
+    if (color === 'common') {
+      // @ts-ignore
+      style[brand.common.focusOutline] = palette.common.focusOutline;
     }
-  );
+    (['lightest', 'light', 'main', 'dark', 'darkest', 'contrast'] as const).forEach(key => {
+      // We only want to set custom colors if they do not match the default. The `defaultBranding` class will take care of the rest.
+      // @ts-ignore
+      if (palette[color][key] !== defaultCanvasTheme.palette[color][key]) {
+        // @ts-ignore
+        style[brand[color][mappedKeys[key]]] = palette[color][key];
+      }
+    });
+  });
   return {...elemProps, className, style};
 };
 

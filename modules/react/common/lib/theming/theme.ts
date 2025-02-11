@@ -12,14 +12,6 @@ export const defaultCanvasTheme: CanvasTheme = {
       darkest: colors.blueberry600,
       contrast: colors.frenchVanilla100,
     },
-    action: {
-      lightest: colors.blueberry100,
-      light: colors.blueberry200,
-      main: colors.blueberry400,
-      dark: colors.blueberry500,
-      darkest: colors.blueberry600,
-      contrast: colors.frenchVanilla100,
-    },
     alert: {
       lightest: colors.cantaloupe100,
       light: colors.cantaloupe300,
