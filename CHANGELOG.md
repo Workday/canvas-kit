@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.3.7](https://github.com/Workday/canvas-kit/releases/tag/v12.3.7) (2025-02-11)
+
+### Components
+
+- fix: Ensure width is passed to Select input ([#3130](https://github.com/Workday/canvas-kit/pull/3130)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v11.2.2](https://github.com/Workday/canvas-kit/releases/tag/v11.2.2) (2025-02-10)
 
 ### Components
