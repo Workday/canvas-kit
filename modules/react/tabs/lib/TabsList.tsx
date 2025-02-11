@@ -49,7 +49,7 @@ export const tabsListStencil = createStencil({
     display: 'flex',
     position: 'relative',
     borderBottom: `${px2rem(1)} solid ${system.color.border.divider}`,
-    gap: system.space.x2,
+    gap: system.space.x3,
     paddingInline: system.space.x6,
     maskImage: 'none',
   },
