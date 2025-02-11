@@ -36,7 +36,7 @@ const Sparkle = () => {
   return <SystemIcon data-part="sparkle" icon={sparkleIcon} size={system.space.x3} />;
 };
 
-const loadingSparklesStencil = createStencil({
+export const loadingSparklesStencil = createStencil({
   base: {
     display: 'inline-flex',
     gap: px2rem(1),
