@@ -104,7 +104,7 @@ const tabItemStencil = createStencil({
 
     '&:has(span)': {
       display: 'flex',
-      gap: system.space.x2,
+      gap: system.space.zero,
     },
 
     '&:hover, &.hover, &:focus-visible, &.focus': {
