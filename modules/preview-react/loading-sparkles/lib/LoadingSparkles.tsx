@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {base, system} from '@workday/canvas-tokens-web';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {CSProps, createStencil, handleCsProp, keyframes, px2rem} from '@workday/canvas-kit-styling';
 
 import {sparkleIcon} from './sparkleIcon';
@@ -46,9 +46,7 @@ const loadingSparklesStencil = createStencil({
       animationIterationCount: 'infinite',
       animationName: LOADING_ANIMATION,
       animationTimingFunction: 'ease-in-out',
-      '.wd-sparkle-fill': {
-        fill: base.extendedDragonFruit400,
-      },
+      [systemIconStencil.vars.color]: base.extendedDragonFruit400,
       '&:nth-child(1)': {
         animationDelay: '0ms',
       },
