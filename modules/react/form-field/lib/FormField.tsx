@@ -1,253 +1,140 @@
-import * as React from 'react';
-import {space} from '@workday/canvas-kit-react/tokens';
-import {
-  GrowthBehavior,
-  ErrorType,
-  styled,
-  Themeable,
-  generateUniqueId,
-} from '@workday/canvas-kit-react/common';
-import {Hint} from './Hint';
-import {Label} from './Label';
-import {FormFieldLabelPosition, FormFieldLabelPositionBehavior} from './types';
-/**
- * @deprecated ⚠️ `FormFieldProps` in Main has been deprecated and will be removed in a future major version. Please use [`FormField` in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-inputs-form-field--basic) instead.
- */
-export interface FormFieldProps
-  extends Themeable,
-    React.HTMLAttributes<HTMLDivElement>,
-    GrowthBehavior {
+import React from 'react';
+
+import {createContainer, GrowthBehavior} from '@workday/canvas-kit-react/common';
+import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+
+import {useFormFieldModel} from './hooks';
+import {FormFieldInput} from './FormFieldInput';
+import {FormFieldLabel} from './FormFieldLabel';
+import {FormFieldHint} from './FormFieldHint';
+import {FormFieldContainer} from './FormFieldContainer';
+import {formFieldStencil} from './formFieldStencil';
+import {FormFieldField} from './FormFieldField';
+
+//TODO: Remove `horizontal` option in v13 and the console warn message.
+export interface FormFieldProps extends FlexProps, GrowthBehavior {
   /**
-   * The position of the FormField label.
-   * @default FormField.FormFieldLabelPosition.Top
+   * The direction the child elements should stack. In v13, `horizontal` will be removed. Please use `horizontalStart` or `horizontalEnd` for horizontal alignment.
+   * @default vertical
    */
-  labelPosition?: FormFieldLabelPosition;
-  /**
-   * The text of the FormField label.
-   */
-  label?: React.ReactNode;
-  /**
-   * The text of the message displayed below the input component. This is required if `error` is defined.
-   */
-  hintText?: React.ReactNode;
-  /**
-   * The HTML `id` of the message displayed below the input component. This is required for the `aria-describedby` accessibility attribute if `error` and `hintText` are defined.
-   */
-  hintId?: string;
-  /**
-   * The HTML `id` of the input component. If an `id` is not specified for the input, this will be used as it's `id`. This is referenced by the label's `htmlFor` attribute. This is required for accessiblity if `label` is defined.
-   */
-  inputId?: string;
-  /**
-   * The type of error associated with the FormField (if applicable). This is passed to the input component.
-   */
-  error?: ErrorType;
-  /**
-   * If true, style the FormField label to indicate that it is required.
-   * @default false
-   */
-  required?: boolean;
-  /**
-   * If true, render the FormField using a `fieldset` and a `legend` instead of a `div` and a `label`. This must be set to `true` if you're using a Radio Group inside of a FormField (for accessibility reasons).
-   * @default false
-   */
-  useFieldset?: boolean;
-  /**
-   * The input component wrapped by the FormField.
-   */
+  orientation?: 'vertical' | 'horizontalStart' | 'horizontalEnd' | 'horizontal';
   children: React.ReactNode;
-  /**
-   * The label for the error message hint text if `hintText` and `error` are defined. This prop should only be used for translating the default string 'Error'.
-   * @default 'Error'
-   */
-  errorLabel?: string;
-  /**
-   * The label for the alert message hint text if `hintText` and `error` are defined. This prop should only be used for translating the default string 'Alert'.
-   * @default 'Alert'
-   */
-  alertLabel?: string;
 }
 
-export interface FormFieldErrorBehavior {
-  error?: ErrorType;
-}
-
-// Use a fieldset element for accessible radio groups
-const FormFieldFieldsetContainer = styled('fieldset')<
-  GrowthBehavior & FormFieldLabelPositionBehavior
->(({grow, labelPosition}) => ({
-  display: labelPosition === FormFieldLabelPosition.Top ? 'inline-block' : 'flex',
-  flexGrow: grow ? 1 : undefined,
-  padding: 0,
-  border: 0,
-  margin: 0,
-  marginBottom: space.m,
-}));
-
-const FormFieldContainer = styled('div')<FormFieldLabelPositionBehavior & FormFieldProps>(
-  ({labelPosition, useFieldset, grow}) => {
-    if (useFieldset) {
-      return {
-        display: 'flex',
-      };
-    }
-
-    if (labelPosition === FormFieldLabelPosition.Left) {
-      return {
-        display: 'flex',
-        marginBottom: space.m,
-      };
-    }
-
-    return {
-      display: 'block',
-      marginBottom: space.m,
-      width: grow ? '100%' : 'inherit',
-    };
-  }
-);
-
-const FormFieldInputContainer = styled('div')<GrowthBehavior & FormFieldLabelPositionBehavior>(
-  ({grow, labelPosition}) => {
-    if (grow) {
-      if (
-        labelPosition === FormFieldLabelPosition.Left ||
-        labelPosition === FormFieldLabelPosition.Hidden
-      ) {
-        return {
-          flexGrow: 1,
-        };
-      }
-
-      return {
-        width: '100%',
-        display: 'block',
-      };
-    }
-
-    if (labelPosition === FormFieldLabelPosition.Left) {
-      return {
-        display: 'inline-flex',
-        alignItems: 'center',
-        flexWrap: 'wrap',
-      };
-    }
-
-    return {
-      display: 'inline-block',
-    };
-  }
-);
 /**
- * @deprecated ⚠️ `FormField` in Main has been deprecated and will be removed in a future major version. Please use [`FormField` in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-inputs-form-field--basic) instead.
+ * Use `FormField` to wrap input components to make them accessible. You can customize the field
+ * by passing in `TextInput`, `Select`, `RadioGroup` and other form elements to `FormField.Input` through the `as` prop.
+ *
+ * ```tsx
+ * <FormField>
+ *    <FormField.Label>First Name</FormField.Label>
+ *    <FormField.Input as={TextInput} value={value} onChange={(e) => console.log(e)} />
+ *  </FormField>
+ * ```
+ *
+ * @stencil formFieldStencil
  */
-export class FormField extends React.Component<React.PropsWithChildren<FormFieldProps>> {
-  static LabelPosition = FormFieldLabelPosition;
-  static ErrorType = ErrorType;
-
-  private inputId: string = this.props.inputId || generateUniqueId();
-
-  private renderChildren = (child: React.ReactNode): React.ReactNode => {
-    if (React.isValidElement(child)) {
-      const props: GrowthBehavior &
-        FormFieldErrorBehavior &
-        React.InputHTMLAttributes<HTMLInputElement> = {
-        ...child.props,
-      };
-
-      if (this.props.grow) {
-        props.grow = this.props.grow;
-      }
-
-      if (typeof this.props.error !== 'undefined') {
-        props.error = this.props.error;
-
-        if (this.props.error === ErrorType.Error) {
-          props['aria-invalid'] = true;
-        }
-      }
-
-      if (this.props.hintId) {
-        props['aria-describedby'] = this.props.hintId;
-      }
-
-      if (this.props.required) {
-        props.required = true;
-      }
-
-      props.id = this.inputId;
-
-      return React.cloneElement(child, props);
-    }
-
-    return child;
-  };
-
-  render() {
-    const {
-      errorLabel = 'Error',
-      alertLabel = 'Alert',
-      useFieldset = false,
-      labelPosition = FormField.LabelPosition.Top,
-      label,
-      hintText,
-      hintId,
-      inputId,
-      grow,
-      children,
-      error,
-      required,
-      ...elemProps
-    } = this.props;
-
-    const field = (
-      <>
-        {typeof label === 'string' ? (
-          <Label
-            labelPosition={labelPosition}
-            htmlFor={this.inputId}
-            isLegend={useFieldset}
-            required={required}
-            accessibleHide={labelPosition === FormFieldLabelPosition.Hidden}
-          >
-            {label}
-          </Label>
-        ) : (
-          label
-        )}
-        <FormFieldInputContainer grow={grow} labelPosition={labelPosition}>
-          {React.Children.map(children, this.renderChildren)}
-          {hintText && (
-            <Hint errorLabel={errorLabel} alertLabel={alertLabel} error={error} id={hintId}>
-              {hintText}
-            </Hint>
-          )}
-        </FormFieldInputContainer>
-      </>
-    );
-
-    if (useFieldset) {
-      return (
-        <FormFieldContainer useFieldset={useFieldset} labelPosition={labelPosition} {...elemProps}>
-          <FormFieldFieldsetContainer grow={grow} labelPosition={labelPosition}>
-            {field}
-          </FormFieldFieldsetContainer>
-        </FormFieldContainer>
-      );
-    } else {
-      return (
-        <FormFieldContainer
-          useFieldset={useFieldset}
-          labelPosition={labelPosition}
-          grow={grow}
-          {...elemProps}
-        >
-          {field}
-        </FormFieldContainer>
+export const FormField = createContainer('div')({
+  displayName: 'FormField',
+  modelHook: useFormFieldModel,
+  subComponents: {
+    /**
+     * `FormField.Input` will render any `inputs` passed to it via the `as` prop, including `TextInput`, `Select`, `Switch`, `TextArea`, `RadioGroup` or any custom input.
+     * `FromField.Input` will be associated with `FormField.Label` and `FormField.Hint` by a generated `id`. You can customize this `id` by passing `id` to `FormField`.
+     *
+     * **Note: If you pass in a custom input that is *not* as Canvas Kit input, you will have to handle the `error` prop, validation and styling. For a custom approach, reference our Custom storybook example.**
+     *
+     * ```tsx
+     *  <FormField id='my-unique-id'>
+     *    <FormField.Label>My Label Text</FormField.Label>
+     *    <FormField.Input as={TextInput} onChange={(e) => console.log(e)} />
+     *  <FormField>
+     * ```
+     */
+    Input: FormFieldInput,
+    /**
+     * `FormField.Label` will render a `label` element that has a matching `id` to the `FormField.Input`.
+     *
+     * ```tsx
+     * <FormField>
+     *    <FormField.Label>First Name</FormField.Label>
+     *    <FormField.Input as={TextInput} value={value} onChange={(e) => console.log(e)} />
+     *  </FormField>
+     * ```
+     *
+     * @stencil formFieldLabelStencil
+     */
+    Label: FormFieldLabel,
+    /**
+     * `FormField.Hint` will render any additional information you want to provide to the `FormField.Input`. If you
+     * set the `orientation` prop to `horizontal` you should use `FormField.Field` to properly align the hint with your `FormField.Input`.
+     *
+     * ```tsx
+     * <FormField>
+     *    <FormField.Label>First Name</FormField.Label>
+     *    <FormField.Input as={TextInput} value={value} onChange={(e) => console.log(e)} />
+     *    <FormField.Hint>This is your hint text</FormField.Hint>
+     *  </FormField>
+     * ```
+     *
+     * @stencil formFieldHintStencil
+     */
+    Hint: FormFieldHint,
+    /**
+     * `FormField.Field` allows you to properly center `FormField.Label` when the `orientation` is set to `horizontal` and there is hint text..
+     *
+     * ```tsx
+     * <FormField orientation="horizontalStart">
+     *    <FormField.Label>First Name</FormField.Label>
+     *    <FormField.Container>
+     *      <FormField.Input as={TextInput} value={value} onChange={(e) => console.log(e)} />
+     *      <FormField.Hint>This is your hint text</FormField.Hint>
+     *    </FormField.Container>
+     *  </FormField>
+     * ```
+     *
+     * @stencil formFieldContainerStencil
+     * @deprecated `FormField.Container` is deprecated and will be removed in a future major version. Please use `FormField.Field` to always wrap `FormField.Input` and `FormField.Hint` to always ensure correct label and input alignment.
+     */
+    Container: FormFieldContainer,
+    /**
+     * `FormField.Field` allows you to customize container alignment and styles when wrapping your input and hint text.
+     * ```tsx
+     * <FormField orientation="horizontal">
+     *    <FormField.Label>First Name</FormField.Label>
+     *    <FormField.Field>
+     *      <FormField.Input as={TextInput} value={value} onChange={(e) => console.log(e)} />
+     *      <FormField.Hint>This is your hint text</FormField.Hint>
+     *    </FormField.Field>
+     *  </FormField>
+     * ```
+     */
+    Field: FormFieldField,
+  },
+})<FormFieldProps>(({children, grow, orientation, ...elemProps}, Element, model) => {
+  // TODO: Remove this warning in v13 once we remove horizontal support in favor of horizontalStart and horizontalEnd.
+  if (process.env.NODE_ENV === 'development') {
+    if (orientation === 'horizontal') {
+      console.warn(
+        'FormField: Orientation option of "horizontal" is deprecated and will be removed in v13. Please update your types and value to use the string literal of "horizontalStart". The following values will be accepted in v13: "horizontalStart" | "horizontalEnd" | "vertical".'
       );
     }
   }
-}
 
-FormField.LabelPosition = FormFieldLabelPosition;
-FormField.ErrorType = ErrorType;
+  return (
+    <Element
+      {...mergeStyles(
+        elemProps,
+        formFieldStencil({
+          grow,
+          orientation:
+            model.state.orientation === 'horizontal' ? 'horizontalStart' : model.state.orientation,
+          error: model.state.error,
+          required: model.state.isRequired,
+        })
+      )}
+    >
+      {children}
+    </Element>
+  );
+});

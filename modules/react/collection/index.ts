@@ -13,7 +13,11 @@ export * from './lib/useListLoader';
 export * from './lib/useListModel';
 export * from './lib/useGridModel';
 export * from './lib/useListActiveDescendant';
+export * from './lib/useListItemActiveDescendant';
 export * from './lib/useListItemAllowChildStrings';
+export * from './lib/useListItemRemoveOnDeleteKey';
+export * from './lib/focusOnCurrentCursor';
+export * from './lib/listItemRemove';
 export {ListBox, ListBoxProps} from './lib/ListBox';
 export {keyboardEventToCursorEvents} from './lib/keyUtils';
 export {

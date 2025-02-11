@@ -1,0 +1,87 @@
+import {
+	ExampleCodeBlock,
+	SymbolDoc,
+	Specifications,
+	InformationHighlight,
+} from '@workday/canvas-kit-docs';
+import { Alert } from './examples/Alert';
+import { Basic } from './examples/Basic';
+import { Disabled } from './examples/Disabled';
+import { Error } from './examples/Error';
+import { LabelPosition } from './examples/LabelPosition';
+import { RefForwarding } from './examples/RefForwarding';
+import * as SwitchStories from './Switch.stories';
+
+<Meta of={SwitchStories} />
+
+# Canvas Kit Switch
+
+Switch is a selection control that is used to switch between two potential states.
+
+[> Workday Design Reference](https://design.workday.com/components/inputs/switch)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+Switch should be used in tandem with [Form Field](/components/inputs/form-field/) to meet
+accessibility standards.
+
+<ExampleCodeBlock code={Basic} />
+
+### Disabled
+
+Set the `disabled` prop of the Switch to prevent users from interacting with it.
+
+<ExampleCodeBlock code={Disabled} />
+
+### Ref Forwarding
+
+Switch supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will forward
+`ref` to its underlying `<input type="checkbox">` element.
+
+<ExampleCodeBlock code={RefForwarding} />
+
+### Label Position Horizontal
+
+Set the `orientation` prop of the Form Field to designate the position of the label relative to the
+input component. By default, the orientation will be set to `vertical`.
+
+<ExampleCodeBlock code={LabelPosition} />
+
+### Error States
+
+Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Alert` or
+`FormField.ErrorType.Error` to set the Switch to the Alert or Error state, respectively. You will
+also need to set the `hintId` and `hintText` props on the Form Field to meet accessibility
+standards.
+
+The `error` prop may be applied directly to the Switch with a value of `Switch.ErrorType.Alert` or
+`Switch.ErrorType.Error` if Form Field is not being used.
+
+#### Alert
+
+<ExampleCodeBlock code={Alert} />
+
+#### Error
+
+<ExampleCodeBlock code={Error} />
+
+### Custom Styles
+
+Switch supports custom styling via the `cs` prop. For more information, check our
+["How To Customize Styles"](https://workday.github.io/canvas-kit/?path=/docs/styling-how-to-customize-styles--docs).
+
+## Component API
+
+<SymbolDoc name="Switch" fileName="/react/" />
+
+## Specifications
+
+<Specifications file="Switch.spec.ts" name="Switch" />
