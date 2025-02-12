@@ -55,7 +55,7 @@ export const SelectInput = createSubcomponent(TextInput)({
   elemPropsHook: useSelectInput,
 })<SelectInputProps>(
   (
-    {placeholder = 'Choose an option', inputStartIcon, formInputProps, width, ...elemProps},
+    {placeholder = 'Choose an option', inputStartIcon, formInputProps, ...elemProps},
     Element,
     model
   ) => {

@@ -93,7 +93,7 @@ yarn remove @workday/canvas-kit-codemod
 
 ### Styling API and CSS Tokens
 
-**PRs:** [#3101](https://github.com/Workday/canvas-kit/pull/3101), [#3088](https://github.com/Workday/canvas-kit/pull/3088), [#3114](https://github.com/Workday/canvas-kit/pull/3114)
+**PRs:** [#3101](https://github.com/Workday/canvas-kit/pull/3101), [#3088](https://github.com/Workday/canvas-kit/pull/3088), [#3114](https://github.com/Workday/canvas-kit/pull/3114), [#3120](https://github.com/Workday/canvas-kit/pull/3120)
 
 Several components have been refactored to use our
 [Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
@@ -108,6 +108,7 @@ The following components are affected:
 
 - `ExternalHyperlink`
 - `Pill`
+- `LoadingSparkles`
 - `Menu`
 - `Skeleton`
 
@@ -142,13 +143,6 @@ A few changes have been made to `Pill` to ensure proper accessibility and styles
 - `maxWidth` has been removed from the `usePillModel`. This config was used to style sub components. With the refactor to use `data-part` and stencils, it is no longer needed on the model. You can still apply `maxWidth` on the parent `<Pill>` element and the child elements will be styled accordingly.
 - `Pill.Icon` no longer has a default `aria-labe="add"`. You *must* provide an `aria-label` for `Pill.Icon` to ensure proper accessibility. Our examples have been updated to reflect this change.
 - `Pill.IconButton` now requires `aria-label` as a prop. The default `aria-label="remove"` was removed to ensure consumers pass a valid value.
-
-
-
-
-
-
-
 
 ## Troubleshooting
 
