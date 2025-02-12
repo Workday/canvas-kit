@@ -84,6 +84,7 @@ export interface TabsItemProps
 const tabItemStencil = createStencil({
   base: {
     ...system.type.subtext.large,
+    fontFamily: `${system.fontFamily.default}, Arial`,
     fontWeight: system.fontWeight.medium,
     border: 'none',
     backgroundColor: 'transparent',
@@ -102,7 +103,7 @@ const tabItemStencil = createStencil({
     overflow: 'hidden',
     [systemIconStencil.vars.color]: system.color.fg.muted.soft,
 
-    '&:has(span)': {
+    '&:has([data-part="system-icon"]), &:has([data-part="ellipsis-text"])': {
       display: 'flex',
       gap: system.space.x2,
     },

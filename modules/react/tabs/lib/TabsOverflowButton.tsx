@@ -26,7 +26,7 @@ export interface OverflowButtonProps {
 
 const tabsOverflowButtonStencil = createStencil({
   base: {
-    '&:has(span)': {
+    '&:has([data-part="tabs-overflow-button-icon"])': {
       gap: system.space.zero,
     },
   },
@@ -54,7 +54,7 @@ export const TabsOverflowButton = createSubcomponent('button')({
       {...mergeStyles(elemProps, tabsOverflowButtonStencil())}
     >
       <span>{children}</span>
-      <SystemIcon icon={chevronDownSmallIcon} />
+      <SystemIcon data-part="tabs-overflow-button-icon" icon={chevronDownSmallIcon} />
     </StyledTabItem>
   );
 });
