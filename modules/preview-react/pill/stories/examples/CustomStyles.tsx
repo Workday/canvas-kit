@@ -8,21 +8,21 @@ import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
 const customPillStencil = createStencil({
   base: {
-    [pillStencil.vars.background]: base.berrySmoothie300,
-    [pillStencil.vars.border]: base.berrySmoothie500,
-    [pillStencil.vars.label]: base.frenchVanilla100,
+    backgroundColor: base.berrySmoothie300,
+    borderColor: base.berrySmoothie500,
+    color: base.frenchVanilla100,
     [systemIconStencil.vars.color]: base.frenchVanilla100,
     '& [data-part="pill-count"]': {
       backgroundColor: base.berrySmoothie400,
     },
     '&:hover, &.hover': {
-      [pillStencil.vars.background]: base.berrySmoothie400,
-      [pillStencil.vars.label]: base.frenchVanilla100,
+      backgroundColor: base.berrySmoothie400,
+      color: base.frenchVanilla100,
       [systemIconStencil.vars.color]: base.frenchVanilla100,
     },
     '&:active, &.active': {
-      [pillStencil.vars.background]: base.berrySmoothie400,
-      [pillStencil.vars.label]: base.frenchVanilla100,
+      backgroundColor: base.berrySmoothie400,
+      color: base.frenchVanilla100,
       [systemIconStencil.vars.color]: base.frenchVanilla100,
 
       '& [data-part="pill-count"]': {
@@ -30,8 +30,8 @@ const customPillStencil = createStencil({
       },
     },
     '&:disabled, &.disabled': {
-      [pillStencil.vars.background]: 'cyan',
-      [pillStencil.vars.label]: base.frenchVanilla100,
+      backgroundColor: base.berrySmoothie400,
+      color: base.frenchVanilla100,
       [systemIconStencil.vars.color]: base.frenchVanilla100,
     },
   },

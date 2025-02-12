@@ -32,7 +32,6 @@ export const pillStencil = createStencil({
   vars: {
     maxWidth: '',
   },
-  extends: buttonStencil,
   base: ({maxWidth}) => ({
     display: 'flex',
     flexDirection: 'row',
@@ -54,10 +53,6 @@ export const pillStencil = createStencil({
     [buttonStencil.vars.border]: system.color.border.input.default,
     [buttonStencil.vars.label]: system.color.text.strong,
     [systemIconStencil.vars.color]: system.color.icon.default,
-
-    // '&:has([data-part="pill-count"]), &:has([data-part="pill-icon-button"])': {
-    //   paddingInlineEnd: calc.add(system.space.x6, px2rem(2)),
-    // },
     '&:focus-visible, &.focus': {
       [buttonStencil.vars.background]: system.color.bg.alt.soft,
       [buttonStencil.vars.border]: system.color.border.primary.default,
