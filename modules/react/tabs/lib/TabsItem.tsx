@@ -100,7 +100,7 @@ const tabItemStencil = createStencil({
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
     overflow: 'hidden',
-    [systemIconStencil.vars.color]: system.color.fg.muted.default,
+    [systemIconStencil.vars.color]: system.color.fg.muted.soft,
 
     '&:has(span)': {
       display: 'flex',

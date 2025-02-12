@@ -27,7 +27,7 @@ export interface OverflowButtonProps {
 const tabsOverflowButtonStencil = createStencil({
   base: {
     '&:has(span)': {
-      gap: system.space.x1,
+      gap: system.space.zero,
     },
   },
 });
