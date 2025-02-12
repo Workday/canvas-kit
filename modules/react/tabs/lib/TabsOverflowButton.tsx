@@ -27,6 +27,7 @@ export interface OverflowButtonProps {
 const tabsOverflowButtonStencil = createStencil({
   base: {
     '&:has([data-part="tabs-overflow-button-icon"])': {
+      display: 'flex',
       gap: system.space.zero,
     },
   },
