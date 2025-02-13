@@ -84,7 +84,7 @@ export interface TabsItemProps
 const tabItemStencil = createStencil({
   base: {
     ...system.type.subtext.large,
-    fontFamily: `${system.fontFamily.default}, Helvetica Neue, Helvetica, Arial, sans-serif'`,
+    fontFamily: `${system.fontFamily.default}, Helvetica Neue, Helvetica, Arial, sans-serif`,
     fontWeight: system.fontWeight.medium,
     border: 'none',
     backgroundColor: 'transparent',
@@ -123,7 +123,7 @@ const tabItemStencil = createStencil({
       [systemIconStencil.vars.color]: system.color.icon.strong,
     },
 
-    '&:disabled, .disabled, &[aria-disabled]': {
+    '&:disabled, &.disabled, &[aria-disabled]': {
       color: system.color.text.disabled,
       [systemIconStencil.vars.color]: system.color.fg.disabled,
       '&:hover': {
