@@ -1309,6 +1309,22 @@ describe('cs', () => {
         expect(className.split(' ')).toHaveLength(10); // 7 + 3 modifier hashes
       });
     });
+    describe('when adding parts', () => {
+      it('should allow to add parts for data-part attributes', () => {
+        const myStencil = createStencil({
+          parts: {
+            separator: 'my-separator',
+          },
+          base: {},
+        });
+
+        expectTypeOf(myStencil).toHaveProperty('parts');
+        expectTypeOf(myStencil.parts).toHaveProperty('separator');
+        expectTypeOf(myStencil.parts.separator).toEqualTypeOf<string>();
+
+        expect(myStencil).toHaveProperty('parts.separator', expect.stringMatching('my-separator'));
+      });
+    });
   });
 });
 

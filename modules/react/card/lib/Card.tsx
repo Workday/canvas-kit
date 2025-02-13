@@ -17,13 +17,38 @@ export interface CardProps extends BoxProps {
 
 // .cnvs-card
 export const cardStencil = createStencil({
-  base: {
+  vars: {
+    separator: '',
+  },
+  parts: {
+    separator: 'card-separator',
+    bar: 'foo',
+  },
+  base: ({separatorPart}) => ({
     boxShadow: system.depth[1],
     padding: system.space.x8,
     backgroundColor: system.color.bg.default,
     border: `${px2rem(1)} solid ${system.color.border.container}`,
     borderRadius: system.shape.x2,
+    [`:has(${separatorPart})`]: {
+      backgroundColor: 'red',
+    },
+  }),
+});
+
+const testStencil = createStencil({
+  extends: cardStencil,
+  parts: {
+    test: 'test-part',
   },
+  base: ({separator, testPart, separatorPart}) => ({
+    [`:has(${separatorPart})`]: {
+      color: 'red',
+    },
+    [`:has(${testPart})`]: {
+      backgroundColor: 'blue',
+    },
+  }),
 });
 
 /**
@@ -42,7 +67,9 @@ export const Card = createComponent('div')({
   displayName: 'Card',
   Component: ({children, ...elemProps}: CardProps, ref, Element) => {
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, cardStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, testStencil())}>
+        <div data-part={testStencil.parts.separator}>foo</div>
+        <div data-part={testStencil.parts.test}>test</div>
         {children}
       </Element>
     );
