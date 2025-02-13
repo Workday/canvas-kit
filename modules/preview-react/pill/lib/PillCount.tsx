@@ -31,13 +31,9 @@ export const pillCountStencil = createStencil({
 
 export const PillCount = createComponent('span')({
   displayName: 'Pill.Count',
-  Component: ({children, backgroundColor, ...elemProps}: PillCountProps, ref, Element) => {
+  Component: ({children, ...elemProps}: PillCountProps, ref, Element) => {
     return (
-      <Element
-        data-part="pill-count"
-        ref={ref}
-        {...mergeStyles(elemProps, pillCountStencil({backgroundColor}))}
-      >
+      <Element data-part="pill-count" ref={ref} {...mergeStyles(elemProps, pillCountStencil())}>
         {children}
       </Element>
     );
