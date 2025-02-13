@@ -21,6 +21,7 @@ any questions.
 - [Component Updates](#component-updates)
   - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
   - [External Hyperlink](#external-hyperlink)
+  - [Tabs](#tabs)
 - [Troubleshooting](#troubleshooting)
 - [Glossary](#glossary)
   - [Main](#main)
@@ -92,7 +93,7 @@ yarn remove @workday/canvas-kit-codemod
 
 ### Styling API and CSS Tokens
 
-**PRs:** [#3101](https://github.com/Workday/canvas-kit/pull/3101), [#3088](https://github.com/Workday/canvas-kit/pull/3088), [#3114](https://github.com/Workday/canvas-kit/pull/3114), [#3120](https://github.com/Workday/canvas-kit/pull/3120)
+**PRs:** [#3101](https://github.com/Workday/canvas-kit/pull/3101), [#3088](https://github.com/Workday/canvas-kit/pull/3088), [#3114](https://github.com/Workday/canvas-kit/pull/3114), [#3119](https://github.com/Workday/canvas-kit/pull/3119), [#3120](https://github.com/Workday/canvas-kit/pull/3120)
 
 Several components have been refactored to use our
 [Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
@@ -109,6 +110,7 @@ The following components are affected:
 - `LoadingSparkles`
 - `Menu`
 - `Skeleton`
+- `Tabs`
 
 ## External Hyperlink
 
@@ -127,6 +129,14 @@ The following components are affected:
   External Hyperlink
 </ExternalHyperlink>
 ```
+
+## Tabs
+
+**PR:** [#3119](https://github.com/Workday/canvas-kit/pull/3119)
+
+- The `disabled` icon color has been updated to use `system.color.fg.disabled`. This has made the icon darker for better contrast. 
+
+**Note:** There should be no developer impact and the visual changes are safe to accept.
 
 ## Troubleshooting
 
