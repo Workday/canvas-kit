@@ -1325,6 +1325,35 @@ describe('cs', () => {
         expect(myStencil).toHaveProperty('parts.separator', expect.stringMatching('my-separator'));
       });
     });
+    it('should handle parts and pass them to the base function as [data-part=${part-value}]', () => {
+      const myStencil = createStencil({
+        parts: {
+          separator: 'my-separator',
+        },
+        base: ({separatorPart}) => ({
+          [`${separatorPart}`]: {},
+        }),
+      });
+
+      // `.toHaveStyle` doesn't work with variables and worse, it ALWAYS passes when passed anything
+      // other than a parsable color string. https://github.com/testing-library/jest-dom/issues/322
+      // We'll resort to iterating over injected styles instead.
+      let found = false;
+      for (const sheet of document.styleSheets as any as Iterable<CSSStyleSheet>) {
+        for (const rule of sheet.cssRules as any as Iterable<CSSRule>) {
+          if (rule.cssText.includes(myStencil.base)) {
+            if (rule.cssText.includes(myStencil.parts.separator)) {
+              expect(rule.cssText).toContain(
+                `${myStencil.base} [data-part="${myStencil.parts.separator}"]`
+              );
+            }
+
+            found = true;
+          }
+        }
+      }
+      expect(found).toEqual(true);
+    });
   });
 });
 
