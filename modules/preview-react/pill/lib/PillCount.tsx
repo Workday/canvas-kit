@@ -21,7 +21,7 @@ export const pillCountStencil = createStencil({
     justifyContent: 'center',
     height: px2rem(22),
     width: px2rem(22),
-    padding: `0 ${cssVar(system.space.x1)}`,
+    padding: `${system.space.zero} ${system.space.x1}`,
     marginInlineEnd: calc.negate(system.space.x2),
     marginInlineStart: system.space.x1,
     backgroundColor: system.color.bg.alt.stronger,
