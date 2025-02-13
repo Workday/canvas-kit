@@ -16,6 +16,7 @@ modules/**/dist
 modules/**/ts-tmp
 build/*
 *.tsbuildinfo
+.rollup.cache
 
 # intellij
 .idea

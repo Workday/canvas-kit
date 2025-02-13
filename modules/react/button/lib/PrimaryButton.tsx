@@ -4,6 +4,7 @@ import {createComponent} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
+
 import {buttonColorPropVars, buttonStencil} from './BaseButton';
 import {Button, ButtonProps} from './Button';
 
@@ -17,12 +18,15 @@ export interface PrimaryButtonProps extends ButtonProps {
    * Variant has an option for `inverse` which will inverse the styling
    */
   variant?: 'inverse';
+
+  foo6?: 'bar';
 }
 
 const primaryButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
     // Base Styles
+    margin: 10,
     [buttonStencil.vars.background]: brand.primary.base,
     [buttonStencil.vars.borderRadius]: system.shape.round,
     [buttonStencil.vars.label]: brand.primary.accent,

@@ -4,20 +4,9 @@
   "description": "The custom CSS in JS solution that takes JS styles and turns them into static CSS",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
-  "main": "index.js",
-  "module": "index.js",
-  "exports": {
-    "./lib/*": "./lib/*",
-    ".": {
-      "node": "./index.ts",
-      "import": "./dist/es6/index.js",
-      "require": "./dist/commonjs/index.js",
-      "types": "./index.ts"
-    }
-  },
-  "type": "module",
+  "main": "index.ts",
+  "module": "index.ts",
   "sideEffects": false,
-  "types": "index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/workday/canvas-kit.git",

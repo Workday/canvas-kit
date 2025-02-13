@@ -21,11 +21,7 @@ const config = createConfig({
       })
       .toLowerCase();
   },
-  fallbackFiles: [
-    '@workday/canvas-tokens-web/css/base/_variables.css',
-    '@workday/canvas-tokens-web/css/brand/_variables.css',
-    '@workday/canvas-tokens-web/css/system/_variables.css',
-  ],
+  fallbackFiles: [],
   objectTransforms: [handleFocusRing],
 });
 

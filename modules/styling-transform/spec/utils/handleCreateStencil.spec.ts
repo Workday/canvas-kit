@@ -21,7 +21,7 @@ describe('handleCreateStencil', () => {
       _reset();
     });
 
-    it.only('should add a variable to the cache when the arguments are strings', async () => {
+    it('should add a variable to the cache when the arguments are strings', () => {
       const program = createProgramFromSource(`
         import {createStencil} from '@workday/canvas-kit-styling';
 
@@ -32,7 +32,7 @@ describe('handleCreateStencil', () => {
         })
       `);
 
-      const result = await transform(program, 'test.ts');
+      const result = transform(program, 'test.ts');
 
       expect(result).toMatch(/}, "button-[a-z0-9]+"\)/);
     });

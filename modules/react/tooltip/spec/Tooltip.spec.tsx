@@ -1,5 +1,6 @@
 import {fireEvent, render, screen} from '@testing-library/react';
 import * as React from 'react';
+import {act} from 'react-dom/test-utils';
 
 import {Tooltip} from '..';
 
@@ -27,7 +28,9 @@ describe('Tooltip', () => {
 
       fireEvent.mouseEnter(screen.getByText('Test Text')); // triggers the tooltip
 
-      vi.advanceTimersByTime(300); // advance the timer by the amount of delay time
+      act(() => {
+        vi.advanceTimersByTime(300); // advance the timer by the amount of delay time
+      });
       expect(screen.getByText('Test Text')).toHaveAttribute('aria-describedby');
 
       const id = screen.getByText('Test Text').getAttribute('aria-describedby');
@@ -73,10 +76,14 @@ describe('Tooltip', () => {
 
       fireEvent.mouseEnter(screen.getByText('Test Text')); // triggers the tooltip
 
-      vi.advanceTimersByTime(300); // advance the timer by the amount less than delay time
+      act(() => {
+        vi.advanceTimersByTime(300); // advance the timer by the amount of delay time
+      });
       expect(screen.queryByText('Delayed Tooltip Text')).toBeNull(); // tooltip is not shown before the delay
 
-      vi.advanceTimersByTime(700); // advance the timer by the amount of total delay time
+      act(() => {
+        vi.advanceTimersByTime(700); // advance the timer by the amount of delay time
+      });
       expect(screen.getByText('Delayed Tooltip Text')).toBeInTheDocument();
     });
     vi.clearAllTimers();
@@ -93,14 +100,20 @@ describe('Tooltip', () => {
 
       fireEvent.mouseEnter(screen.getByText('Test Text')); // triggers the tooltip
 
-      vi.advanceTimersByTime(300); // advance the timer by the delay time
+      act(() => {
+        vi.advanceTimersByTime(300); // advance the timer by the amount of delay time
+      });
       expect(screen.getByText('Delayed Tooltip Text')).toBeInTheDocument();
 
       fireEvent.mouseLeave(screen.getByText('Test Text')); // triggers hiding the tooltip
-      vi.advanceTimersByTime(100); // advance the timer by the amount less than hide delay time
+      act(() => {
+        vi.advanceTimersByTime(100); // advance the timer by the amount of delay time
+      });
       expect(screen.getByText('Delayed Tooltip Text')).toBeInTheDocument(); // tooltip is still shown
 
-      vi.advanceTimersByTime(200); // advance the timer by the total amount of the hide delay time
+      act(() => {
+        vi.advanceTimersByTime(200); // advance the timer by the amount of delay time
+      });
       expect(screen.queryByText('Delayed Tooltip Text')).toBeNull(); // tooltip is hidden after the delay
     });
     vi.clearAllTimers();

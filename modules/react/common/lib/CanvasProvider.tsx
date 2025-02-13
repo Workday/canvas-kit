@@ -1,9 +1,11 @@
+import {CacheProvider, Theme, ThemeProvider} from '@emotion/react';
 import * as React from 'react';
-import {Theme, ThemeProvider, CacheProvider} from '@emotion/react';
-import {InputProvider} from './InputProvider';
-import {defaultCanvasTheme, PartialEmotionCanvasTheme, useTheme} from './theming';
-import {brand, base} from '@workday/canvas-tokens-web';
+
 import {createStyles, getCache} from '@workday/canvas-kit-styling';
+import {base, brand} from '@workday/canvas-tokens-web';
+
+import {InputProvider} from './InputProvider';
+import {PartialEmotionCanvasTheme, defaultCanvasTheme, useTheme} from './theming';
 
 export interface CanvasProviderProps {
   theme?: PartialEmotionCanvasTheme;
@@ -44,8 +46,8 @@ const defaultBranding = createStyles({
   [brand.primary.base]: base.blueberry400,
   [brand.primary.light]: base.blueberry200,
   [brand.primary.lightest]: base.blueberry100,
-  [brand.gradient
-    .primary]: `linear-gradient(90deg, ${brand.primary.base} 0%, ${brand.primary.dark} 100%)`,
+  [brand.gradient.primary]:
+    `linear-gradient(90deg, ${brand.primary.base} 0%, ${brand.primary.dark} 100%)`,
 });
 
 const mappedKeys = {
@@ -103,3 +105,6 @@ export const CanvasProvider = ({
     </CacheProvider>
   );
 };
+
+//
+console.log('CanvasProvider', CanvasProvider);

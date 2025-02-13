@@ -1,14 +1,42 @@
 import ts from 'typescript';
 
-import {_reset, transform, withDefaultContext} from '../../lib/styleTransform.js';
+// import {createDocProgram} from '@workday/canvas-kit-docs/docgen/createDocProgram';
+
+import {_reset, transform, withDefaultContext} from '../../lib/styleTransform';
 import {compileCSS} from '../../lib/utils/createStyleObjectNode';
 import {handleCreateStyles} from '../../lib/utils/handleCreateStyles';
 import {createProgramFromSource} from '../createProgramFromSource';
 import {findNodes} from '../findNodes';
 
+function getTSConfig(basePath = '.') {
+  const tsconfigPath = ts.findConfigFile(basePath, ts.sys.fileExists);
+
+  let config = {};
+  if (tsconfigPath) {
+    const contents = ts.readConfigFile(tsconfigPath, ts.sys.readFile);
+    if (contents.config) {
+      // https://github.com/microsoft/TypeScript/issues/5276#issuecomment-149369652
+      config = ts.convertCompilerOptionsFromJson(
+        contents.config.compilerOptions,
+        tsconfigPath
+      ).options;
+    }
+  }
+
+  return config;
+}
+
 describe('createStyles', () => {
+  // let Doc: ReturnType<typeof createDocProgram>;
+
   beforeEach(() => {
     _reset();
+  });
+
+  it.only('foo', () => {
+    const program = ts.createProgram(['modules/react/text/lib/Text.tsx'], getTSConfig());
+    const result = transform(program, 'modules/react/text/lib/Text.tsx');
+    console.log(result); //?
   });
 
   it('should parse string literals, passing them through', () => {

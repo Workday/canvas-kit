@@ -1,8 +1,7 @@
 // @ts-check
-
-import ts from 'typescript';
 import glob from 'glob';
 import path from 'path';
+import ts from 'typescript';
 
 // // we use TS files, so tell node to register them
 // require('ts-node').register({});

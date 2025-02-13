@@ -23,13 +23,19 @@ export function getObjectProxy<T extends {}>(
           // @ts-ignore
           return getObjectProxy(target[prop], (fallback as any)[prop]);
         }
-        const targetProp = target[prop as keyof T];
+        const targetProp = Reflect.get(target as {}, prop, receiver); //?
         if (targetProp !== undefined) {
           return targetProp;
         }
         return Reflect.get(fallback, prop, receiver);
       },
+      getOwnPropertyDescriptor(_target, prop) {
+        // the fallback has all the correct properties, so use the fallback for all property
+        // descriptors
+        return Reflect.getOwnPropertyDescriptor(fallback, prop); //Reflect.getOwnPropertyDescriptor(fallback, prop);
+      },
       ownKeys() {
+        // the fallback has all the correct properties, so use the fallback for all keys
         return Reflect.ownKeys(fallback);
       },
     }) as T;

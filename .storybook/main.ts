@@ -3,21 +3,26 @@ import {StorybookConfig} from '@storybook/react-vite';
 import {dirname, resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import remarkGfm from 'remark-gfm';
-import {createFilter, mergeConfig} from 'vite';
+import ts from 'typescript';
+import {ViteDevServer, createFilter, mergeConfig} from 'vite';
 
-import {parseSpecFile} from '@workday/canvas-kit-docs/utils/parseSpecFile';
+import {ExportedSymbol, Value} from '@workday/canvas-kit-docs/docgen/docTypes';
 import extractExports from '@workday/canvas-kit-docs/webpack/extract-exports';
+import styleTransformer from '@workday/canvas-kit-styling-transform';
 
-import {createDocProgram} from '../modules/docs/docgen/createDocProgram';
+import styleTransformerConfig from '../styling.config';
+import {vitePluginInlineSpecifications} from './vite-plugin-inline-specifications';
+// import typescriptPlugin from '@rollup/plugin-typescript';
+import {typescriptPlugin} from './vite-plugin-typescript-with-transformers';
 
-// const __dirname = dirname(fileURLToPath(import.meta.url));
-
-// const modulesPath = resolve(__dirname, '../modules');
 const processDocs = process.env.SKIP_DOCGEN !== 'true';
 
-console.log('creating doc program');
-const Doc = createDocProgram();
-console.log('finished doc program');
+const docsMap = new Map<string, ExportedSymbol<Value>[]>();
+let docsFlushed = false;
+
+function toSymbolArray(input: Map<string, ExportedSymbol<Value>[]>): ExportedSymbol<Value>[] {
+  return [...input].flatMap(([key, value]) => value);
+}
 
 const config: StorybookConfig = {
   framework: '@storybook/react-vite',
@@ -158,32 +163,19 @@ const config: StorybookConfig = {
   //   return config;
   // },
   viteFinal(config, options) {
-    console.log(config);
+    let server: ViteDevServer;
+    let symbols: ExportedSymbol[] = [];
+
     return mergeConfig(
       {
         plugins: [
           {
-            name: 'vite-plugin-inline-specs',
-            enforce: 'pre',
-            sequential: true,
-            async transform(code, id) {
-              if (/.mdx?$/.test(id)) {
-                const specRegEx = /\<Specifications(.+)file=[{'"]([^"'}]+)[}'"](.+)\/>/;
-                const specMatch = code.match(specRegEx);
-                if (specMatch) {
-                  const spec = await parseSpecFile(specMatch[2]).then(contents =>
-                    JSON.stringify(contents)
-                  );
-                  return code.replace(
-                    specRegEx,
-                    (_match: string, pre: string, _file: string, post: string) => {
-                      return `<Specifications${pre}initialSpecs={${spec}}${post}/>`; //?
-                    }
-                  );
-                }
-              }
+            name: 'vite-plugin-dev-server',
+            configureServer(_server) {
+              server = _server;
             },
           },
+          vitePluginInlineSpecifications(),
           {
             enforce: 'pre',
             ...mdx({
@@ -219,11 +211,86 @@ const config: StorybookConfig = {
                   : code;
 
                 return `${rewriteExampleSource}
-  ${exports.map(name => `${name}.__RAW__ = ${raw};`).join('\n')}
-  `;
+${exports.map(name => `${name}.__RAW__ = ${raw};`).join('\n')}
+`;
               }
             },
           },
+          {
+            name: 'vite-plugin-doc-injection',
+            sequential: true,
+            transform(code, id) {
+              if (/modules\/docs\/lib\/docs\.ts/.test(id)) {
+                docsFlushed = true;
+                const docsStr = JSON.stringify(toSymbolArray(docsMap), null, '  ');
+                return code.replace(
+                  '/* DOCS_REPLACED_BY_BUILD */',
+                  docsStr.substring(1, docsStr.length - 1)
+                ); // remove the square bracket on the ends;
+              }
+            },
+          },
+          processDocs
+            ? typescriptPlugin({
+                include: /modules\/.+\.tsx?/,
+                exclude: /examples|stories|spec|codemod|docs/,
+              })
+            : // ? typescriptPlugin({
+              //     include: /modules\/.+\.tsx?/,
+              //     exclude: /examples|stories|spec|codemod|docs/,
+              //     transformers: {
+              //       before: [
+              //         {
+              //           type: 'program',
+              //           factory: program => {
+              //             const docParser = createDocProgram(program);
+              //             return _context => {
+              //               return node => {
+              //                 if (server) {
+              //                   const fileName = node.getSourceFile().fileName;
+              //                   const symbols = docParser.getExportedSymbols(node);
+              //                   docsMap.set(fileName, symbols);
+
+              //                   if (docsFlushed) {
+              //                     server.ws.send('docs:update', symbols);
+              //                   }
+              //                 }
+              //                 return node;
+              //               };
+              //             };
+              //           },
+              //         },
+              //         {
+              //           type: 'program',
+              //           factory: program =>
+              //             styleTransformer(program, {...styleTransformerConfig, extractCSS: false}),
+              //         },
+              //       ],
+              //     },
+              //   })
+              undefined,
+          // {
+          //   name: 'vite-plugin-style-transform',
+          //   enforce: 'pre',
+
+          //   async transform(code, id) {
+          //     const fileFilter = createFilter(
+          //       /modules\/.+\.tsx?/,
+          //       /examples|stories|spec|codemod|docs/
+          //     );
+          //     if (fileFilter(id)) {
+          //       console.log('file', id);
+
+          //       const source = Doc.program.getSourceFile(id);
+          //       if (source) {
+          //         const printer = ts.createPrinter();
+          //         return printer.printFile(
+          //           ts.transform(source, transformers).transformed.find(s => s.fileName === id)!
+          //         );
+          //       }
+          //     }
+          //   },
+          // },
           // This transform is replaced by the MDX transform that inlines the files for builds
           // {
           //   name: 'vite-plugin-spec-transform',

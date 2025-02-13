@@ -10,7 +10,7 @@ const cjs = () => `
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "declaration": true,
-    "module": "commonjs",
+    "module": "es2020",
     "outDir": "dist/commonjs",
     "skipLibCheck": true,
     "tsBuildInfoFile": "./.build-info/tsconfig.cjs.tsbuildinfo"

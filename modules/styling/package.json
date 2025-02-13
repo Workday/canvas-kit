@@ -6,14 +6,7 @@
   "license": "Apache-2.0",
   "main": "dist/commonjs/index.js",
   "module": "dist/es6/index.js",
-  "exports": {
-    "node": "./index.ts",
-    "import": "./dist/es6/index.js",
-    "require": "./dist/commonjs/index.js",
-    "types": "./index.ts"
-  },
   "sideEffects": false,
-  "type": "module",
   "types": "dist/es6/index.d.ts",
   "repository": {
     "type": "git",

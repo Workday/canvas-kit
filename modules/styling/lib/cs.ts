@@ -997,7 +997,7 @@ type StencilDefaultModifierReturn<M> = {
 };
 
 export interface BaseStencil<
-  M extends StencilModifierConfig<V, P> = {},
+  M extends StencilModifierConfig<V> = {},
   V extends DefaultedVarsShape = {},
   E extends BaseStencil<any, any, any, any> = never,
   ID extends string = never,

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {ExportedSymbol, Value} from '../docgen/docTypes';
 
 export const GithubUrl = React.createContext('https://github.com/Workday/canvas-kit/');
@@ -59,6 +60,15 @@ export function updateDocs(updatedDocs: ExportedSymbol[]) {
   });
 }
 
+// Catch dev-mode docs
+if ((import.meta as any).hot) {
+  (import.meta as any).hot.on('docs:update', (data: ExportedSymbol[]) => {
+    console.log('updating docs', data);
+    updateDocs(data);
+  });
+}
+
 if (typeof window !== 'undefined') {
   (window as any).__updateDocs = updateDocs;
+  window.docs = docs;
 }

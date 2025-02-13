@@ -1,22 +1,25 @@
 import ts from 'typescript';
+
 import {
-  JSDoc,
   ExportedSymbol,
-  Value,
-  TypeParameter,
-  UnknownValue,
-  ObjectProperty,
+  FunctionParameter,
   FunctionValue,
   IndexSignatureValue,
-  FunctionParameter,
+  JSDoc,
+  ObjectProperty,
   PrimitiveValue,
+  TypeParameter,
+  UnknownValue,
+  Value,
 } from './docTypes';
 import {getExternalSymbol} from './getExternalSymbol';
 import t, {find} from './traverse';
 
 export class DocParser<T extends {kind: string} = any> {
   /** A shared reference to the Typescript type checker */
-  public checker: ts.TypeChecker;
+  // public checker: ts.TypeChecker;
+  public program: ts.Program;
+  public plugins: ParserPlugin<T>[];
 
   // track symbols to ensure we don't get stuck in an infinite loop
   public visitedTypeScriptSymbols: Record<string, ts.SyntaxKind> = {};
@@ -28,16 +31,28 @@ export class DocParser<T extends {kind: string} = any> {
    */
   public symbols: ExportedSymbol<Value | T>[] = [];
 
-  constructor(public program: ts.Program, public plugins: ParserPlugin<T>[] = []) {
-    this.checker = program.getTypeChecker();
+  constructor(_program: ts.Program, _plugins: ParserPlugin<T>[] = []) {
+    this.program = _program;
+    this.plugins = _plugins;
+  }
+
+  get checker() {
+    return this.program.getTypeChecker();
   }
 
   /**
    * Get all {@link ExportedSymbol}s from a file.
    */
-  getExportedSymbols(fileName: string): ExportedSymbol<T | Value>[] {
+  getExportedSymbols(sourceOrFilename: string | ts.SourceFile): ExportedSymbol<T | Value>[] {
     const symbols: ExportedSymbol[] = [];
-    const sourceFile = this.program.getSourceFile(fileName);
+    const sourceFile =
+      typeof sourceOrFilename === 'string'
+        ? this.program.getSourceFile(sourceOrFilename)
+        : sourceOrFilename;
+    const fileName =
+      typeof sourceOrFilename === 'string'
+        ? sourceOrFilename
+        : sourceOrFilename.getSourceFile().fileName;
     if (!sourceFile) return symbols;
 
     find(sourceFile, node => {
@@ -112,9 +127,12 @@ function getValueFromNode(parser: DocParser, node: ts.Node): Value {
   }
 
   return (
-    parser.plugins.reduce((result, fn) => {
-      return result || fn(node, parser);
-    }, undefined as Value | undefined) || _getValueFromNode(parser, node)
+    parser.plugins.reduce(
+      (result, fn) => {
+        return result || fn(node, parser);
+      },
+      undefined as Value | undefined
+    ) || _getValueFromNode(parser, node)
   );
 }
 
@@ -483,8 +501,8 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
       ((t.isIdentifier(node.name)
         ? node.name.text
         : t.isStringLiteral(node.name)
-        ? node.name.text
-        : '') as string);
+          ? node.name.text
+          : '') as string);
     return {
       kind: 'property',
       name,
@@ -1041,10 +1059,10 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     const isRequired = node.questionToken
       ? false
       : node.initializer
-      ? false
-      : symbol
-      ? !isOptional(symbol) && !includesUndefined(type)
-      : false;
+        ? false
+        : symbol
+          ? !isOptional(symbol) && !includesUndefined(type)
+          : false;
 
     const typeInfo = node.type
       ? getValueFromNode(parser, node.type)
@@ -1249,15 +1267,18 @@ export function getDefaultsFromObjectBindingParameter(
   node: ts.ParameterDeclaration
 ): Record<string, Value> {
   if (t.isObjectBindingPattern(node.name)) {
-    return node.name.elements.reduce((result, element) => {
-      if (t.isBindingElement(element) && t.isIdentifier(element.name) && element.initializer) {
-        const defaultValue = getValidDefaultFromNode(parser, element.initializer);
-        if (defaultValue) {
-          result[element.name.text] = defaultValue;
+    return node.name.elements.reduce(
+      (result, element) => {
+        if (t.isBindingElement(element) && t.isIdentifier(element.name) && element.initializer) {
+          const defaultValue = getValidDefaultFromNode(parser, element.initializer);
+          if (defaultValue) {
+            result[element.name.text] = defaultValue;
+          }
         }
-      }
-      return result;
-    }, {} as Record<string, Value>);
+        return result;
+      },
+      {} as Record<string, Value>
+    );
   }
 
   return {};

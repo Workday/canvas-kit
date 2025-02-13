@@ -17,13 +17,7 @@ import {MultiSelectedList} from './MultiSelectedList';
 import {useMultiSelectModel} from './useMultiSelectModel';
 
 export const multiSelectStencil = createStencil({
-  vars: {
-    foo,
-  },
-  parts: {
-    separator: 'multi-select-part', // -> '[data-part="multi-select-part"]'
-  },
-  base: ({separatorPart}) => ({
+  base: {
     border: `1px solid ${system.color.border.input.default}`,
     display: 'flex',
     flexDirection: 'column',
@@ -74,7 +68,7 @@ export const multiSelectStencil = createStencil({
       pointerEvents: 'none',
     },
 
-    [`& :where(${separatorPart})`]: {
+    '& :where([data-part="separator"])': {
       backgroundColor: system.color.border.divider,
       height: 1,
       margin: `${system.space.zero} ${system.space.x2}`,
@@ -86,7 +80,7 @@ export const multiSelectStencil = createStencil({
       padding: system.space.x2,
       flexWrap: 'wrap',
     },
-  }),
+  },
 });
 
 export const useMultiSelectInput = composeHooks(

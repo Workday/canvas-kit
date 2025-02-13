@@ -1,4 +1,4 @@
-import {PopupStack, PopupStackItem, resetStack, getValue} from '../lib/PopupStack';
+import {PopupStack, getValue, resetStack} from '../lib/PopupStack';
 
 describe('PopupStack', () => {
   afterEach(() => {
@@ -53,9 +53,11 @@ describe('PopupStack', () => {
     });
 
     describe('without elements', () => {
-      const element = document.createElement('div');
+      it('should not return true for elements not in the stack', () => {
+        const element = document.createElement('div');
 
-      expect(PopupStack.isTopmost(element)).toEqual(false);
+        expect(PopupStack.isTopmost(element)).toEqual(false);
+      });
     });
   });
 

@@ -62,7 +62,6 @@ export const useComboboxInputConstrained = createElemPropsHook(useComboboxModel)
   // but after it is defined. We can add value watches, and redirect methods here.
   React.useImperativeHandle(formElementRef, () => {
     if (formLocalRef.current) {
-      console.log('test', formLocalRef.current);
       // Hook into the DOM `value` property of the form input element and update the model
       // accordingly
       Object.defineProperty(formLocalRef.current, 'value', {
