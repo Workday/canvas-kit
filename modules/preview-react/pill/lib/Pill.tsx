@@ -32,6 +32,7 @@ export const pillStencil = createStencil({
   vars: {
     maxWidth: '',
   },
+  extends: buttonStencil,
   base: ({maxWidth}) => ({
     display: 'flex',
     flexDirection: 'row',
@@ -104,6 +105,9 @@ export const pillStencil = createStencil({
         borderColor: 'transparent',
       },
       '& [data-part="avatar-image"]': {
+        opacity: system.opacity.disabled,
+      },
+      '& [data-part="avatar-icon"]': {
         opacity: system.opacity.disabled,
       },
     },

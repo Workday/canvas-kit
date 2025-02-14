@@ -17,6 +17,7 @@ export interface PillIconButtonProps extends Partial<SystemIconProps> {
 }
 
 export const pillIconButtonStencil = createStencil({
+  extends: buttonStencil,
   base: {
     marginInlineEnd: calc.negate(px2rem(7)), // visually pull in the pill to the right size  by -7px
     marginInlineStart: calc.negate(px2rem(2)), // visually create space between label and the button by -2px

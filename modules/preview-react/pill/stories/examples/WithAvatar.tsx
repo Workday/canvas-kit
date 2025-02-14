@@ -19,11 +19,11 @@ export const WithAvatar = () => {
       <div className={flexStyles}>
         <Pill onClick={() => setText('The first pill is clicked!')}>
           <Pill.Avatar url={testAvatar} />
-          Regina Skeltor
+          <Pill.Label>Regina Skeltor</Pill.Label>
         </Pill>
         <Pill disabled>
-          <Pill.Avatar url={testAvatar} />
-          Regina Skeltor
+          <Pill.Avatar />
+          <Pill.Label>Regina Skeltor</Pill.Label>
         </Pill>
       </div>
       <BodyText size="medium">{text}</BodyText>

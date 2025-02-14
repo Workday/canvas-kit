@@ -142,7 +142,7 @@ A few changes have been made to `Pill` to ensure proper accessibility and styles
 
 ##### Breaking Changes
 
-- `maxWidth` has been removed from the `usePillModel`. This config was used to style sub components. With the refactor to use `data-part` and stencils, it is no longer needed on the model. You can still apply `maxWidth` on the parent `<Pill>` element and the child elements will be styled accordingly.
+- `maxWidth` has been removed from the `usePillModel`. This config was used to style sub components. With the refactor to use `data-part` and [stencils](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--docs#create-stencil), it is no longer needed on the model. You can still apply `maxWidth` on the parent `<Pill>` element and the child elements will be styled accordingly.
 - `Pill.Icon` no longer has a default `aria-labe="add"`. You *must* provide an `aria-label` for `Pill.Icon` to ensure proper accessibility. Our examples have been updated to reflect this change.
 - `Pill.IconButton` now requires `aria-label` as a prop. The default `aria-label="remove"` was removed to ensure consumers pass a valid value.
 

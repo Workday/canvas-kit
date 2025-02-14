@@ -210,27 +210,26 @@ export const avatarStencil = createStencil({
       },
     },
     isImageLoaded: {
-      true: {
-        ['& [data-part="avatar-icon"]']: {
-          opacity: 0,
-        },
-        ['& [data-part="avatar-image"]']: {
-          opacity: 1,
-        },
-      },
       false: {
         ['& [data-part="avatar-icon"]']: {
           opacity: 1,
         },
-        ['& [data-part="avatar-image"]']: {
+        ['& > [data-part="avatar-image"]']: {
           opacity: 0,
+        },
+      },
+      true: {
+        ['& [data-part="avatar-icon"]']: {
+          opacity: 0,
+        },
+        ['&  [data-part="avatar-image"]']: {
+          opacity: 1,
         },
       },
     },
   },
   defaultModifiers: {
     variant: 'light',
-    // size: 'medium',
     isImageLoaded: 'false',
     objectFit: 'contain',
   },

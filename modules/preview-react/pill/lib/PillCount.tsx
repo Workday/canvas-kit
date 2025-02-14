@@ -2,7 +2,7 @@ import React from 'react';
 
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export interface PillCountProps extends FlexProps {}
