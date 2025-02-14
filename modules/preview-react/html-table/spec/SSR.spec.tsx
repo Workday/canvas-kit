@@ -3,41 +3,41 @@
  */
 import React from 'react';
 import {renderToString} from 'react-dom/server';
-import {Table} from '..';
+import {HtmlTable} from '..';
 
-describe('Table', () => {
+describe('HtmlTable', () => {
   it('should render on a server without crashing', () => {
     const ssrRender = () =>
       renderToString(
-        <Table>
-          <Table.Caption>Table Caption</Table.Caption>
-          <Table.Head>
-            <Table.Row>
-              <Table.Header>Table Header</Table.Header>
-              <Table.Header>Table Header</Table.Header>
-            </Table.Row>
-          </Table.Head>
-          <Table.Body>
-            <Table.Row>
-              <Table.Header>Table Header</Table.Header>
-              <Table.Header>Table Header</Table.Header>
-            </Table.Row>
-            <Table.Row>
-              <Table.Header>Table Header</Table.Header>
-              <Table.Cell>Table Data Cell</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Header>Table Header</Table.Header>
-              <Table.Cell>Table Data Cell</Table.Cell>
-            </Table.Row>
-          </Table.Body>
-          <Table.Footer>
-            <Table.Row>
-              <Table.Header>Table Header</Table.Header>
-              <Table.Cell>Table Data Cell</Table.Cell>
-            </Table.Row>
-          </Table.Footer>
-        </Table>
+        <HtmlTable>
+          <HtmlTable.Caption>HtmlTable Caption</HtmlTable.Caption>
+          <HtmlTable.Head>
+            <HtmlTable.Row>
+              <HtmlTable.Header>HtmlTable Header</HtmlTable.Header>
+              <HtmlTable.Header>HtmlTable Header</HtmlTable.Header>
+            </HtmlTable.Row>
+          </HtmlTable.Head>
+          <HtmlTable.Body>
+            <HtmlTable.Row>
+              <HtmlTable.Header>HtmlTable Header</HtmlTable.Header>
+              <HtmlTable.Header>HtmlTable Header</HtmlTable.Header>
+            </HtmlTable.Row>
+            <HtmlTable.Row>
+              <HtmlTable.Header>HtmlTable Header</HtmlTable.Header>
+              <HtmlTable.Cell>HtmlTable Data Cell</HtmlTable.Cell>
+            </HtmlTable.Row>
+            <HtmlTable.Row>
+              <HtmlTable.Header>HtmlTable Header</HtmlTable.Header>
+              <HtmlTable.Cell>HtmlTable Data Cell</HtmlTable.Cell>
+            </HtmlTable.Row>
+          </HtmlTable.Body>
+          <HtmlTable.Footer>
+            <HtmlTable.Row>
+              <HtmlTable.Header>HtmlTable Header</HtmlTable.Header>
+              <HtmlTable.Cell>HtmlTable Data Cell</HtmlTable.Cell>
+            </HtmlTable.Row>
+          </HtmlTable.Footer>
+        </HtmlTable>
       );
     expect(ssrRender).not.toThrow();
   });
