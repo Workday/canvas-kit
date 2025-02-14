@@ -6,7 +6,6 @@ import {Table} from '@workday/canvas-kit-react/table';
 // Examples
 import {Basic as BasicExample} from './examples/Basic';
 import {BasicWithHeading as BasicWithHeadingExample} from './examples/BasicWithHeading';
-import {BasicStandardVariant as BasicStandardVariantExample} from './examples/BasicStandardVariant';
 import {FixedColumn as FixedColumnExample} from './examples/FixedColumn';
 import {RightToLeft as RightToLeftExample} from './examples/RightToLeft';
 
@@ -28,9 +27,6 @@ export const Basic: Story = {
 };
 export const BasicWithHeading: Story = {
   render: BasicWithHeadingExample,
-};
-export const BasicStandardVariant: Story = {
-  render: BasicStandardVariantExample,
 };
 export const FixedColumn: Story = {
   render: FixedColumnExample,
