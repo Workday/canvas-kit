@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.4.2](https://github.com/Workday/canvas-kit/releases/tag/v12.4.2) (2025-02-19)
+
+### Documentation
+
+- fix: Update tooltip mdx to correctly render ([#3139](https://github.com/Workday/canvas-kit/pull/3139)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v12.4.1](https://github.com/Workday/canvas-kit/releases/tag/v12.4.1) (2025-02-19)
 
 ### Documentation
