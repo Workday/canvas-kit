@@ -1,9 +1,9 @@
 import { ExampleCodeBlock, SymbolDoc } from '@workday/canvas-kit-docs';
 import { Basic } from './examples/Basic';
 import { BasicWithHeading } from './examples/BasicWithHeading';
-import { BasicStandardVariant } from './examples/BasicStandardVariant';
 import { FixedColumn } from './examples/FixedColumn';
 import { RightToLeft } from './examples/RightToLeft';
+import { StandardTable } from './examples/StandardTable'
 import * as TableStories from './Table.stories';
 
 <Meta of={TableStories} />
@@ -31,11 +31,10 @@ customization of the title/heading of their table.
 
 <ExampleCodeBlock code={BasicWithHeading} />
 
-### Basic Example with Standard Variant
+### Base Table Example
 
-Users may not want the [CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/grid) style features so they can use the `Standard` variant. This will give the user a basic html [Table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table). The `Standard` variant comes with a [Flex](https://developer.mozilla.org/en-US/docs/Web/CSS/flex) container that will wrap the Table and is for `overflow` and scrolling for larger Tables. 
 
-<ExampleCodeBlock code={BasicStandardVariant} />
+<ExampleCodeBlock code={BaseTableExample} />
 
 ### Right to Left
 

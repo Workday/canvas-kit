@@ -1,29 +1,136 @@
 import React from 'react';
-import {GridProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {GridProps, FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {TableHead} from './TableHead';
-import {TableBody} from './TableBody';
+import {BaseTable, baseTableStencil} from './BaseTable';
 import {TableRow} from './TableRow';
-import {TableHeader} from './TableHeader';
-import {TableCell} from './TableCell';
-import {TableFooter} from './TableFooter';
-import {TableCaption} from './TableCaption';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {baseTableBodyStencil} from './BaseTableBody';
+import {baseTableCaptionStencil} from './BaseTableCaption';
+import {baseTableCellStencil} from './BaseTableCell';
+import {baseTableHeadStencil} from './BaseTableHead';
+import {baseTableHeaderStencil} from './BaseTableHeader';
 import {system} from '@workday/canvas-tokens-web';
 
+export interface TableProps extends GridProps {}
+
 const tableStencil = createStencil({
+  extends: baseTableStencil,
   base: {
-    ...system.type.subtext.large,
     display: 'grid',
-    border: `${px2rem(1)} solid ${system.color.border.container}`,
-    borderRadius: system.shape.x2,
-    overflow: 'auto',
-    color: system.color.text.default,
+  },
+});
+
+const TableBodyStencil = createStencil({
+  extends: baseTableBodyStencil,
+  base: {
+    display: 'grid',
+  },
+});
+
+const TableCaptionStencil = createStencil({
+  extends: baseTableCaptionStencil,
+  base: {
+    display: 'flex',
+    borderBottom: `${px2rem(1)} solid ${system.color.border.container}`,
+  },
+});
+
+const TableCellStencil = createStencil({
+  extends: baseTableCellStencil,
+  base: {
+    display: 'grid',
+  },
+});
+
+const TableFooterStencil = createStencil({
+  base: {
+    display: 'grid',
+  },
+});
+
+const TableHeadStencil = createStencil({
+  extends: baseTableHeadStencil,
+  base: {
+    display: 'grid',
+  },
+});
+
+const TableHeaderStencil = createStencil({
+  extends: baseTableHeaderStencil,
+  base: {
+    display: 'grid',
+  },
+});
+
+export const TableBody = createComponent('tbody')({
+  displayName: 'Table.Body',
+  Component: ({children, ...elemProps}: GridProps, ref, Element) => {
+    return (
+      <Element ref={ref} {...mergeStyles(elemProps, TableBodyStencil())}>
+        {children}
+      </Element>
+    );
+  },
+});
+
+export const TableCaption = createComponent('caption')({
+  displayName: 'Table.Caption',
+  Component: ({children, ...elemProps}: FlexProps, ref, Element) => {
+    return (
+      <Element ref={ref} {...mergeStyles(elemProps, TableCaptionStencil())}>
+        {children}
+      </Element>
+    );
+  },
+});
+
+export const TableCell = createComponent('td')({
+  displayName: 'Table.Cell',
+  Component: ({children, ...elemProps}: GridProps, ref, Element) => {
+    return (
+      <Element ref={ref} {...mergeStyles(elemProps, TableCellStencil())}>
+        {children}
+      </Element>
+    );
+  },
+});
+
+export const TableFooter = createComponent('tfoot')({
+  displayName: 'Table.Footer',
+  Component: ({children, ...elemProps}: GridProps, ref, Element) => {
+    return (
+      <Element ref={ref} {...mergeStyles(elemProps, TableFooterStencil())}>
+        {children}
+      </Element>
+    );
+  },
+});
+
+export const TableHead = createComponent('thead')({
+  displayName: 'Table.Head',
+  Component: ({children, ...elemProps}: GridProps, ref, Element) => {
+    return (
+      <Element ref={ref} {...mergeStyles(elemProps, TableHeadStencil())}>
+        {children}
+      </Element>
+    );
+  },
+});
+
+export const TableHeader = createComponent('th')({
+  displayName: 'Table.Header',
+  Component: ({children, ...elemProps}: GridProps, ref, Element) => {
+    return (
+      <Element ref={ref} {...mergeStyles(elemProps, TableHeaderStencil())}>
+        {children}
+      </Element>
+    );
   },
 });
 
 /**
  * `Table` is a simple styled compound component that renders a [table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table) element. It is used to present information in a two-dimensional table comprised of rows and columns of cells containing data.
+ * `Table` is built off of `BaseTable` and is using [CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout) features.
  *
  *
  * ```tsx
@@ -66,11 +173,11 @@ export default function App() {
  */
 export const Table = createComponent('table')({
   displayName: 'Table',
-  Component: ({children, ...elemProps}: GridProps, ref, Element) => {
+  Component: ({children, ...elemProps}: TableProps, ref, Element) => {
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, tableStencil())}>
+      <BaseTable as={Element} ref={ref} {...mergeStyles(elemProps, tableStencil())}>
         {children}
-      </Element>
+      </BaseTable>
     );
   },
   subComponents: {

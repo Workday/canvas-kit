@@ -6,7 +6,7 @@ import {createStencil, createVars} from '@workday/canvas-kit-styling';
 const childrenVars = createVars('cellNumber');
 
 // Styles for rows including dynamic sizing for amount of cells within a row
-const tableRowStencil = createStencil({
+const TableRowStencil = createStencil({
   base: {
     display: 'grid',
     gridAutoFlow: 'column',
@@ -31,7 +31,7 @@ export const TableRow = createComponent('tr')({
     return (
       <Element
         ref={ref}
-        {...mergeStyles(elemProps, [tableRowStencil(), {[childrenVars.cellNumber]: childrenArray}])}
+        {...mergeStyles(elemProps, [TableRowStencil(), {[childrenVars.cellNumber]: childrenArray}])}
       >
         {children}
       </Element>
