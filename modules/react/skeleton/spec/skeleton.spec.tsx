@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {render} from '@testing-library/react';
-import {Skeleton} from '../lib/skeleton';
+import {Skeleton} from '../lib/Skeleton';
 
 describe('Skeleton', () => {
   it('should render', () => {
