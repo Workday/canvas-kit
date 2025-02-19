@@ -2737,6 +2737,18 @@
         "__isArgsStory": false
       }
     },
+    "components-popups-tooltip--description-type": {
+      "id": "components-popups-tooltip--description-type",
+      "name": "Description Type",
+      "title": "Components/Popups/Tooltip",
+      "importPath": "./modules/react/tooltip/stories/Tooltip.stories.ts",
+      "kind": "Components/Popups/Tooltip",
+      "story": "Description Type",
+      "parameters": {
+        "fileName": "./modules/react/tooltip/stories/Tooltip.stories.ts",
+        "__isArgsStory": false
+      }
+    },
     "components-popups-tooltip--ellipsis": {
       "id": "components-popups-tooltip--ellipsis",
       "name": "Ellipsis",
