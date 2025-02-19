@@ -59,6 +59,7 @@ const TableHeaderStencil = createStencil({
   extends: baseTableHeaderStencil,
   base: {
     display: 'grid',
+    alignItems: 'center',
   },
 });
 
