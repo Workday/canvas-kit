@@ -38,7 +38,7 @@ export const StylePropsTable = ({styleProps = []}: StylePropsTableProps) => {
                 const mdnUrl = `https://developer.mozilla.org/en-US/docs/Web/CSS/${formattedName}`;
                 return (
                   <Box display="inline-block" marginInlineEnd="xxxs">
-                    <ExternalHyperlink href={mdnUrl} key={i}>
+                    <ExternalHyperlink href={mdnUrl} key={i} iconLabel="Open link in new window">
                       {formattedName}
                     </ExternalHyperlink>
                   </Box>
