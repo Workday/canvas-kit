@@ -107,7 +107,7 @@ export const ExampleCodeBlock = ({code}: any) => {
         },
         template: 'node',
         title: `Demo`,
-        description: `This is a Canvas Kit component`,
+        description: `This is a Canvas Kit Demo. Edit and play around!`,
       },
 
       // Options
