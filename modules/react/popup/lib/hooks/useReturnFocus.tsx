@@ -24,7 +24,12 @@ function getScrollParent(element: HTMLElement): HTMLElement {
 function getFocusableElement(element: Element | null): Element | null {
   if (element === null || element === document.body || !element.parentElement) {
     return null;
-  } else if (isFocusable(element)) {
+  } else if (
+    isFocusable(element) ||
+    ['button', 'details', 'embed', 'iframe', 'select', 'textarea'].includes(
+      element.nodeName.toLowerCase()
+    )
+  ) {
     return element;
   }
 

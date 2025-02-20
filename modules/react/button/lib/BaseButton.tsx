@@ -169,7 +169,7 @@ export const buttonStencil = createStencil({
       opacity: cssVar(buttonColorPropVars.default.opacity, cssVar(opacity, system.opacity.full)),
     },
     // Focus Styles
-    '&:focus-visible, &.focus': {
+    '&:focus, &.focus': {
       backgroundColor: cssVar(
         buttonColorPropVars.focus.background,
         cssVar(background, 'transparent')
