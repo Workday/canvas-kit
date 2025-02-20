@@ -1,6 +1,7 @@
-//@ts-ignore
+/// <reference path="./types/custom-imports.d.ts" />
+
 import {defineConfig} from 'vite';
-//@ts-ignore
+
 import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
