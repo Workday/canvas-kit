@@ -22,7 +22,7 @@
     "skipLibCheck": true,
     "plugins": [
       {
-        "transform": "./modules/styling-transform/lib/styleTransform.ts"
+        "transform": "./modules/styling-transform"
       }
     ]
   },

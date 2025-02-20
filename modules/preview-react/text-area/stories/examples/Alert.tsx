@@ -22,7 +22,7 @@ export const Alert = () => {
     value.length < 3
       ? colors.greenApple600
       : value.length < 7
-      ? colors.cantaloupe600
+      ? colors.blackPepper300
       : colors.cinnamon500;
 
   return (
