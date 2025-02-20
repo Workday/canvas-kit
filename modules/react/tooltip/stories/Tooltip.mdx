@@ -1,8 +1,11 @@
 import {ExampleCodeBlock, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
+import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
 import * as TooltipStories from './Tooltip.stories';
 import {Default} from './examples/Default';
 import {CustomContent} from './examples/CustomContent';
 import {DelayedTooltip} from './examples/DelayedTooltip';
+import {DescriptionType} from './examples/DescriptionType';
 import {DescribeType} from './examples/DescribeType';
 import {Muted} from './examples/Muted';
 import {Placements} from './examples/Placements';
@@ -65,12 +68,39 @@ and focus events.
 
 ### Describing an Element
 
+<InformationHighlight variant={'caution'} className='sb-unstyled'>
+  <InformationHighlight.Icon />
+  <InformationHighlight.Heading> Caution: Describe type has been deprecated </InformationHighlight.Heading>
+  <InformationHighlight.Body>
+     Assistive technology may ignore <StatusIndicator variant='gray'><StatusIndicator.Label cs={{textTransform: 'lowercase'}}>type="describe"</StatusIndicator.Label></StatusIndicator> techniques based on verbosity settings. Please use <StatusIndicator cs={{textTransform: 'lowercase'}} variant='gray'><StatusIndicator.Label cs={{textTransform: 'lowercase'}}>type="description"</StatusIndicator.Label></StatusIndicator> on Tooltips.
+  </InformationHighlight.Body>
+</InformationHighlight>
+
 The default mode for a tooltip is to label content via `aria-label`. If a tooltip is meant to
 provide ancillary information, the `type` can be set to `describe`. This will add `aria-describedby`
 to the target element. This will allow screen reader users to hear the name of the control that is
 being focused and the ancillary tooltip information.
 
 <ExampleCodeBlock code={DescribeType} />
+
+### Description of an Element
+
+The default mode for a tooltip is to assign a name to the target element with an `aria-label`
+string. If a tooltip is meant to provide ancillary information, the `type` can be set to `description`.
+This will add `aria-description` strings to the target element instead. This variant is useful on
+text buttons and other components that already have a label or name. Use this type instead of `describe` to ensure proper aria attributes are added to the dom regardless if the tooltip is visible. 
+
+> **Note:** If you use `description` type and want to pass `jsx`, it **must* be inline and **not** a component to ensure the inner text is properly read by voiceover.
+>
+> ```jsx
+> // The text will be understood as: You must accept terms and conditions
+> <Tooltip type="description" title={<span>You<i>must</i> accept terms and conditions</span>}/>
+>
+> // This will render a string including the html and will not be properly understood by voice over.
+> const MyComponent = () => <span>You<i>must</i> accept terms and conditions</span>
+> <Tool
+
+<ExampleCodeBlock code={DescriptionType} />
 
 ### Muted Tooltips
 
