@@ -77,11 +77,11 @@ export const BaseTable = createComponent('table')({
   },
   subComponents: {
     /**
-     * `Table.Caption` renders a [caption](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/caption) element.
+     * `BaseTable.Caption` renders a [caption](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/caption) element.
      *
      *
      * ```tsx
-      import {Table} from '@workday/canvas-kit-react/table';
+      import {BaseTable} from '@workday/canvas-kit-react/table';
 
       export default function App() {
         return (
@@ -100,11 +100,11 @@ export const BaseTable = createComponent('table')({
     */
     Caption: BaseTableCaption,
     /**
-    * `Table.Head` renders a [thead](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/thead) element.
+    * `BaseTable.Head` renders a [thead](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/thead) element.
     *
     *
     * ```tsx
-    import {Table} from '@workday/canvas-kit-react/table';
+    import {BaseTable} from '@workday/canvas-kit-react/table';
 
     export default function App() {
       return (
@@ -122,11 +122,11 @@ export const BaseTable = createComponent('table')({
     */
     Head: BaseTableHead,
     /**
-     * `Table.Body` renders a [tbody](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tbody) element.
+     * `BaseTable.Body` renders a [tbody](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tbody) element.
      *
      *
      * ```tsx
-    import {Table} from '@workday/canvas-kit-react/table';
+    import {BaseTable} from '@workday/canvas-kit-react/table';
 
     export default function App() {
       return (
@@ -144,10 +144,10 @@ export const BaseTable = createComponent('table')({
     */
     Body: BaseTableBody,
     /**
-     * `Table.Row` renders a [tr](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tr) element.
+     * `BaseTable.Row` renders a [tr](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tr) element.
      *
      * ```tsx
-    import {Table} from '@workday/canvas-kit-react/table';
+    import {BaseTable} from '@workday/canvas-kit-react/table';
 
     export default function App() {
       return (
@@ -165,11 +165,11 @@ export const BaseTable = createComponent('table')({
     */
     Row: BaseTableRow,
     /**
-    * `Table.Header` renders a [th](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th) element.
+    * `BaseTable.Header` renders a [th](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th) element.
     *
     *
     * ```tsx
-    import {Table} from '@workday/canvas-kit-react/table';
+    import {BaseTable} from '@workday/canvas-kit-react/table';
 
     export default function App() {
       return (
@@ -187,11 +187,11 @@ export const BaseTable = createComponent('table')({
     */
     Header: BaseTableHeader,
     /**
-    * `Table.Cell` renders a [td](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/td) element.
+    * `BaseTable.Cell` renders a [td](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/td) element.
     *
     *
     * ```tsx
-    import {Table} from '@workday/canvas-kit-react/table';
+    import {BaseTable} from '@workday/canvas-kit-react/table';
 
     export default function App() {
       return (
@@ -209,11 +209,11 @@ export const BaseTable = createComponent('table')({
     */
     Cell: BaseTableCell,
     /**
-    * `Table.Footer` renders a [tfoot](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tfoot) element.
+    * `BaseTable.Footer` renders a [tfoot](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tfoot) element.
     *
     *
     * ```tsx
-    import {Table} from '@workday/canvas-kit-react/table';
+    import {BaseTable} from '@workday/canvas-kit-react/table';
 
     export default function App() {
       return (

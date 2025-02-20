@@ -20,14 +20,14 @@ const tableStencil = createStencil({
   },
 });
 
-const TableBodyStencil = createStencil({
+const tableBodyStencil = createStencil({
   extends: baseTableBodyStencil,
   base: {
     display: 'grid',
   },
 });
 
-const TableCaptionStencil = createStencil({
+const tableCaptionStencil = createStencil({
   extends: baseTableCaptionStencil,
   base: {
     display: 'flex',
@@ -35,27 +35,27 @@ const TableCaptionStencil = createStencil({
   },
 });
 
-const TableCellStencil = createStencil({
+const tableCellStencil = createStencil({
   extends: baseTableCellStencil,
   base: {
     display: 'grid',
   },
 });
 
-const TableFooterStencil = createStencil({
+const tableFooterStencil = createStencil({
   base: {
     display: 'grid',
   },
 });
 
-const TableHeadStencil = createStencil({
+const tableHeadStencil = createStencil({
   extends: baseTableHeadStencil,
   base: {
     display: 'grid',
   },
 });
 
-const TableHeaderStencil = createStencil({
+const tableHeaderStencil = createStencil({
   extends: baseTableHeaderStencil,
   base: {
     display: 'grid',
@@ -67,7 +67,7 @@ export const TableBody = createComponent('tbody')({
   displayName: 'Table.Body',
   Component: ({children, ...elemProps}: GridProps, ref, Element) => {
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, TableBodyStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, tableBodyStencil())}>
         {children}
       </Element>
     );
@@ -78,7 +78,7 @@ export const TableCaption = createComponent('caption')({
   displayName: 'Table.Caption',
   Component: ({children, ...elemProps}: FlexProps, ref, Element) => {
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, TableCaptionStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, tableCaptionStencil())}>
         {children}
       </Element>
     );
@@ -89,7 +89,7 @@ export const TableCell = createComponent('td')({
   displayName: 'Table.Cell',
   Component: ({children, ...elemProps}: GridProps, ref, Element) => {
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, TableCellStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, tableCellStencil())}>
         {children}
       </Element>
     );
@@ -100,7 +100,7 @@ export const TableFooter = createComponent('tfoot')({
   displayName: 'Table.Footer',
   Component: ({children, ...elemProps}: GridProps, ref, Element) => {
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, TableFooterStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, tableFooterStencil())}>
         {children}
       </Element>
     );
@@ -111,7 +111,7 @@ export const TableHead = createComponent('thead')({
   displayName: 'Table.Head',
   Component: ({children, ...elemProps}: GridProps, ref, Element) => {
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, TableHeadStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, tableHeadStencil())}>
         {children}
       </Element>
     );
@@ -122,7 +122,7 @@ export const TableHeader = createComponent('th')({
   displayName: 'Table.Header',
   Component: ({children, ...elemProps}: GridProps, ref, Element) => {
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, TableHeaderStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, tableHeaderStencil())}>
         {children}
       </Element>
     );
