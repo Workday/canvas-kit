@@ -7,14 +7,14 @@ import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import {vscDarkPlus} from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import {checkCircleIcon, copyIcon} from '@workday/canvas-system-icons-web';
-import {Tooltip} from '@workday/canvas-kit-react';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import sdk from '@stackblitz/sdk';
 import tsconfigFile from '!!raw-loader!./stackblitzFiles/tsconfig.json';
 import {packageJSONFile} from './stackblitzFiles/packageJSONFile';
 import indexHTMLFile from '!!raw-loader!./stackblitzFiles/index.html';
 import mainFile from '!!raw-loader!./stackblitzFiles/main.tsx';
 import viteConfigFile from '!!raw-loader!./stackblitzFiles/vite.config.ts';
-import eslintrc from '!!raw-loader!./stackblitzFiles/.eslintrc.cjs';
+import eslintrc from '!!raw-loader!./stackblitzFiles/.eslintrc.cjs.txt';
 import tsconfigNodeFile from '!!raw-loader!./stackblitzFiles/tsconfig.node.json';
 import appFile from '!!raw-loader!./stackblitzFiles/App.tsx';
 import viteEnvFile from '!!raw-loader!./stackblitzFiles/vite-env.d.ts';
@@ -31,7 +31,7 @@ const cardStencil = createStencil({
       boxShadow: system.depth[1],
       borderRadius: system.shape.x1,
     },
-    '[data-part="code-toggle-btn"]': {
+    '[data-part="code-toggle-stackblitz-btn-container"]': {
       position: 'absolute',
       right: calc.negate(px2rem(1)),
       bottom: calc.negate(px2rem(1)),
@@ -123,7 +123,7 @@ export const ExampleCodeBlock = ({code}: any) => {
         <Card.Body>
           {React.createElement(code)}
           {code && (
-            <div data-part="code-toggle-btn">
+            <div data-part="code-toggle-stackblitz-btn-container">
               <TertiaryButton size="extraSmall" onClick={() => openProjectInStackblitz()}>
                 ⚡️ Edit in Stackblitz
               </TertiaryButton>

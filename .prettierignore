@@ -4,4 +4,3 @@
 .idea
 .travis.yml
 ./docs
-modules/docs/lib/stackblitzFiles/.eslintrc.cjs

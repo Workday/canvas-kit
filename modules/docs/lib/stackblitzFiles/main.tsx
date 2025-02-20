@@ -1,14 +1,14 @@
 import * as React from 'react';
 import {createRoot} from 'react-dom/client';
-import {injectGlobal} from '@emotion/css';
 import {fonts} from '@workday/canvas-kit-react-fonts';
 import {system} from '@workday/canvas-tokens-web';
-import {cssVar} from '@workday/canvas-kit-styling';
+import {cssVar, injectGlobal} from '@workday/canvas-kit-styling';
 import {App} from './App';
 
 import '@workday/canvas-tokens-web/css/base/_variables.css';
 import '@workday/canvas-tokens-web/css/brand/_variables.css';
 import '@workday/canvas-tokens-web/css/system/_variables.css';
+
 //@ts-ignore
 injectGlobal({
   ...fonts,
