@@ -462,9 +462,9 @@ describe('Popup', () => {
         });
       });
 
-      context('when the user scrolls to the right', () => {
+      context('when the user scrolls to the left', () => {
         beforeEach(() => {
-          cy.findByTestId('scroll-area').scrollTo('right');
+          cy.findByTestId('scroll-area').scrollTo('left');
         });
 
         context('when the user clicks outside', () => {
