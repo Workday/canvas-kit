@@ -90,7 +90,6 @@ export const ExampleCodeBlock = ({code}: any) => {
   };
 
   const openProjectInStackblitz = () => {
-    console.log(code.__RAW__);
     sdk.openProject(
       {
         files: {
