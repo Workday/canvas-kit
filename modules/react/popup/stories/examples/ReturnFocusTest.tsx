@@ -2,7 +2,8 @@ import React from 'react';
 
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {TertiaryButton} from '@workday/canvas-kit-react/button';
+import {SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {
   Popup,
   useCloseOnOutsideClick,
@@ -33,9 +34,12 @@ export const ReturnFocusTest = () => {
             <FormField.Label>Name</FormField.Label>
             <FormField.Input as={TextInput} />
           </FormField>
-          <Popup.Target style={{marginBottom: 400, marginLeft: 410}} data-testid="target">
-            Open Popup
-          </Popup.Target>
+          <Flex style={{marginBottom: 400, marginLeft: 410}}>
+            <SecondaryButton id="return-focus-button-tabindex" tabIndex={-1}>
+              Button with TabIndex=-1
+            </SecondaryButton>
+            <Popup.Target data-testid="target">Open Popup</Popup.Target>
+          </Flex>
           <Popup.Popper>
             <Popup.Card>
               <Popup.CloseIcon aria-label="Close" />
