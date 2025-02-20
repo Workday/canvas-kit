@@ -1,14 +1,14 @@
-export const appFile = `import * as React from 'react';
+import * as React from 'react';
 import {
   CanvasProvider,
   ContentDirection,
   PartialEmotionCanvasTheme,
   useTheme,
 } from '@workday/canvas-kit-react/common';
-import { createStyles } from '@workday/canvas-kit-styling';
+import {createStyles} from '@workday/canvas-kit-styling';
 
 import {Demo} from './Demo';
-import { system } from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 const mainContentStyles = createStyles({
   padding: system.space.x4,
@@ -26,10 +26,9 @@ export const App = () => {
     <CanvasProvider theme={canvasTheme}>
       <>
         <main className={mainContentStyles}>
-          <Demo/>
+          <Demo />
         </main>
       </>
     </CanvasProvider>
   );
 };
-`;

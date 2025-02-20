@@ -9,15 +9,15 @@ import {vscDarkPlus} from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import {checkCircleIcon, copyIcon} from '@workday/canvas-system-icons-web';
 import {Tooltip} from '@workday/canvas-kit-react';
 import sdk from '@stackblitz/sdk';
-import {tsconfigFile} from './stackblitzFiles/tsconfigFile';
+import tsconfigFile from '!!raw-loader!./stackblitzFiles/tsconfig.json';
 import {packageJSONFile} from './stackblitzFiles/packageJSONFile';
-import {indexHTMLFile} from './stackblitzFiles/indexHTMLFile';
-import {mainFile} from './stackblitzFiles/mainFile';
-import {viteConfigFile} from './stackblitzFiles/viteConfigFile';
-import {eslintrc} from './stackblitzFiles/eslintrcFile';
-import {tsconfigNodeFile} from './stackblitzFiles/tsconfigNodeFile';
-import {appFile} from './stackblitzFiles/appFile';
-import {viteEnvFile} from './stackblitzFiles/viteEnvFile';
+import indexHTMLFile from '!!raw-loader!./stackblitzFiles/index.html';
+import mainFile from '!!raw-loader!./stackblitzFiles/main.tsx';
+import viteConfigFile from '!!raw-loader!./stackblitzFiles/vite.config.ts';
+import eslintrc from '!!raw-loader!./stackblitzFiles/.eslintrc.cjs';
+import tsconfigNodeFile from '!!raw-loader!./stackblitzFiles/tsconfig.node.json';
+import appFile from '!!raw-loader!./stackblitzFiles/App.tsx';
+import viteEnvFile from '!!raw-loader!./stackblitzFiles/vite-env.d.ts';
 
 const cardStencil = createStencil({
   base: {

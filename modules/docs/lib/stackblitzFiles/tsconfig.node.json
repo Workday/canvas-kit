@@ -1,4 +1,4 @@
-export const tsconfigNodeFile = `{
+{
   "compilerOptions": {
     "composite": true,
     "skipLibCheck": true,
@@ -9,4 +9,4 @@ export const tsconfigNodeFile = `{
   },
   "include": ["vite.config.ts"]
 }
-`;
+

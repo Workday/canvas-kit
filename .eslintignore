@@ -2,3 +2,5 @@ docs/
 jest/
 modules/**/dist
 node_modules
+modules/docs/lib/stackblitzFiles/.eslintrc.cjs
+modules/docs/lib/stackblitzFiles/packageJSONFile.ts

@@ -1,7 +1,7 @@
-modules/canvas-kit-react-core/lib/colors.ts
 **/CHANGELOG.md
 **/package.json
 .vscode
 .idea
 .travis.yml
 ./docs
+modules/docs/lib/stackblitzFiles/.eslintrc.cjs
