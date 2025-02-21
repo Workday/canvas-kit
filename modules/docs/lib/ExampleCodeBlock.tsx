@@ -7,7 +7,17 @@ import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import {vscDarkPlus} from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import {checkCircleIcon, copyIcon} from '@workday/canvas-system-icons-web';
-import {Tooltip} from '@workday/canvas-kit-react';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import sdk from '@stackblitz/sdk';
+import tsconfigFile from '!!raw-loader!./stackblitzFiles/tsconfig.json';
+import {packageJSONFile} from './stackblitzFiles/packageJSONFile';
+import indexHTMLFile from '!!raw-loader!./stackblitzFiles/index.html';
+import mainFile from '!!raw-loader!./stackblitzFiles/main.tsx';
+import viteConfigFile from '!!raw-loader!./stackblitzFiles/vite.config.ts';
+import eslintrc from '!!raw-loader!./stackblitzFiles/.eslintrc.cjs.txt';
+import tsconfigNodeFile from '!!raw-loader!./stackblitzFiles/tsconfig.node.json';
+import appFile from '!!raw-loader!./stackblitzFiles/App.tsx';
+import viteEnvFile from '!!raw-loader!./stackblitzFiles/vite-env.d.ts';
 
 const cardStencil = createStencil({
   base: {
@@ -21,10 +31,12 @@ const cardStencil = createStencil({
       boxShadow: system.depth[1],
       borderRadius: system.shape.x1,
     },
-    '[data-part="code-toggle-btn"]': {
+    '[data-part="code-toggle-stackblitz-btn-container"]': {
       position: 'absolute',
       right: calc.negate(px2rem(1)),
       bottom: calc.negate(px2rem(1)),
+      display: 'flex',
+      gap: system.space.x2,
     },
     '[data-part="copy-btn"]': {
       position: 'absolute',
@@ -70,17 +82,40 @@ export const ExampleCodeBlock = ({code}: any) => {
     navigator.clipboard.writeText(textInput.current.textContent);
   };
 
-  // React.useEffect(() => {
-  //   if (copied) {
-  //     const copyCodeTimeout = setTimeout(() => {
-  //       setCopied(false);
-  //     }, 2000);
+  /**
+   * `code` returns our examples. We need to rewrite them so that they export `Demo`.
+   */
+  const handleExampleRewrite = (code: any) => {
+    return code.replace(/\bexport\s+const\s+(\w+)\s*=/, `export const Demo =`);
+  };
 
-  //     return () => {
-  //       clearTimeout(copyCodeTimeout);
-  //     };
-  //   }
-  // }, [copied]);
+  const openProjectInStackblitz = () => {
+    sdk.openProject(
+      {
+        files: {
+          'src/Demo.tsx': handleExampleRewrite(code.__RAW__),
+          'src/vite-env-d.ts': viteEnvFile,
+          'src/App.tsx': appFile,
+          'tsconfig.node.json': tsconfigNodeFile,
+          '.eslintrc.js': eslintrc,
+          'vite.config.ts': viteConfigFile,
+          'src/main.tsx': mainFile,
+          'index.html': indexHTMLFile,
+          'tsconfig.json': tsconfigFile,
+          'package.json': packageJSONFile,
+        },
+        template: 'node',
+        title: `Demo`,
+        description: `This is a Canvas Kit Demo. Edit and play around!`,
+      },
+
+      // Options
+      {
+        newWindow: true,
+        openFile: 'src/Demo.tsx',
+      }
+    );
+  };
 
   return (
     <div {...cardStencil({opened: isCodeDisplayed})}>
@@ -88,13 +123,14 @@ export const ExampleCodeBlock = ({code}: any) => {
         <Card.Body>
           {React.createElement(code)}
           {code && (
-            <TertiaryButton
-              size="extraSmall"
-              onClick={() => setCodeDisplayed(!isCodeDisplayed)}
-              data-part="code-toggle-btn"
-            >
-              {!isCodeDisplayed ? 'Show Code' : 'Hide Code'}
-            </TertiaryButton>
+            <div data-part="code-toggle-stackblitz-btn-container">
+              <TertiaryButton size="extraSmall" onClick={() => openProjectInStackblitz()}>
+                ⚡️ Edit in Stackblitz
+              </TertiaryButton>
+              <TertiaryButton size="extraSmall" onClick={() => setCodeDisplayed(!isCodeDisplayed)}>
+                {!isCodeDisplayed ? 'Show Code' : 'Hide Code'}
+              </TertiaryButton>
+            </div>
           )}
         </Card.Body>
       </Card>
