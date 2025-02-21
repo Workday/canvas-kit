@@ -3,14 +3,14 @@ import {GridProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {createStencil, createVars} from '@workday/canvas-kit-styling';
 
-const childrenVars = createVars('cellNumber');
+const tableRowChildrenVars = createVars('cellNumber');
 
 // Styles for rows including dynamic sizing for amount of cells within a row
 const tableRowStencil = createStencil({
   base: {
     display: 'grid',
     gridAutoFlow: 'column',
-    gridTemplateColumns: `repeat(${childrenVars.cellNumber}, minmax(10rem, 1fr))`,
+    gridTemplateColumns: `repeat(${tableRowChildrenVars.cellNumber}, minmax(10rem, 1fr))`,
   },
 });
 
@@ -31,7 +31,10 @@ export const TableRow = createComponent('tr')({
     return (
       <Element
         ref={ref}
-        {...mergeStyles(elemProps, [tableRowStencil(), {[childrenVars.cellNumber]: childrenArray}])}
+        {...mergeStyles(elemProps, [
+          tableRowStencil(),
+          {[tableRowChildrenVars.cellNumber]: childrenArray},
+        ])}
       >
         {children}
       </Element>
