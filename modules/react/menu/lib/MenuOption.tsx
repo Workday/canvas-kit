@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {createStencil} from '@workday/canvas-kit-styling';
+import {createStencil, CSProps} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 
@@ -22,7 +22,7 @@ import {
 import {useMenuModel} from './useMenuModel';
 import {menuItemStencil} from './MenuItem';
 
-export interface MenuOptionProps {
+export interface MenuOptionProps extends CSProps {
   /**
    * Optionally pass index to menu item. This should be done if `Menu.Item` components were created
    * via a `Array::map` function. This index will ensure keyboard navigation works even if items are

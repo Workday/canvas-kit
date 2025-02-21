@@ -14,6 +14,8 @@ const StyledEllipsisComponent = styled('span')(ellipsisStyles);
 export const EllipsisText = createComponent('span')({
   displayName: 'EllipsisText',
   Component(elemProps = {}, ref, Element) {
-    return <StyledEllipsisComponent as={Element} ref={ref} {...elemProps} />;
+    return (
+      <StyledEllipsisComponent data-part="ellipsis-text" as={Element} ref={ref} {...elemProps} />
+    );
   },
 });
