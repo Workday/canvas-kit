@@ -2,32 +2,32 @@ import React from 'react';
 import {GridProps, FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {BaseTable, baseTableStencil} from './BaseTable';
-import {TableRow} from './TableRow';
+import {TableRow} from './parts/grid-table/TableRow';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
-import {baseTableBodyStencil} from './BaseTableBody';
-import {baseTableCaptionStencil} from './BaseTableCaption';
-import {baseTableCellStencil} from './BaseTableCell';
-import {baseTableHeadStencil} from './BaseTableHead';
-import {baseTableHeaderStencil} from './BaseTableHeader';
+import {baseTableBodyStencil} from './parts/BaseTableBody';
+import {baseTableCaptionStencil} from './parts/BaseTableCaption';
+import {baseTableCellStencil} from './parts/BaseTableCell';
+import {baseTableHeadStencil} from './parts/BaseTableHead';
+import {baseTableHeaderStencil} from './parts/BaseTableHeader';
 import {system} from '@workday/canvas-tokens-web';
 
 export interface TableProps extends GridProps {}
 
-const tableStencil = createStencil({
+export const tableStencil = createStencil({
   extends: baseTableStencil,
   base: {
     display: 'grid',
   },
 });
 
-const tableBodyStencil = createStencil({
+export const tableBodyStencil = createStencil({
   extends: baseTableBodyStencil,
   base: {
     display: 'grid',
   },
 });
 
-const tableCaptionStencil = createStencil({
+export const tableCaptionStencil = createStencil({
   extends: baseTableCaptionStencil,
   base: {
     display: 'flex',
@@ -35,27 +35,27 @@ const tableCaptionStencil = createStencil({
   },
 });
 
-const tableCellStencil = createStencil({
+export const tableCellStencil = createStencil({
   extends: baseTableCellStencil,
   base: {
     display: 'grid',
   },
 });
 
-const tableFooterStencil = createStencil({
+export const tableFooterStencil = createStencil({
   base: {
     display: 'grid',
   },
 });
 
-const tableHeadStencil = createStencil({
+export const tableHeadStencil = createStencil({
   extends: baseTableHeadStencil,
   base: {
     display: 'grid',
   },
 });
 
-const tableHeaderStencil = createStencil({
+export const tableHeaderStencil = createStencil({
   extends: baseTableHeaderStencil,
   base: {
     display: 'grid',

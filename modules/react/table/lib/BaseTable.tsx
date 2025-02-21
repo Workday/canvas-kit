@@ -1,13 +1,13 @@
 import React from 'react';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {BaseTableHead} from './BaseTableHead';
-import {BaseTableBody} from './BaseTableBody';
-import {BaseTableRow} from './BaseTableRow';
-import {BaseTableHeader} from './BaseTableHeader';
-import {BaseTableCell} from './BaseTableCell';
-import {BaseTableFooter} from './BaseTableFooter';
-import {BaseTableCaption} from './BaseTableCaption';
+import {BaseTableHead} from './parts/BaseTableHead';
+import {BaseTableBody} from './parts/BaseTableBody';
+import {BaseTableRow} from './parts/BaseTableRow';
+import {BaseTableHeader} from './parts/BaseTableHeader';
+import {BaseTableCell} from './parts/BaseTableCell';
+import {BaseTableFooter} from './parts/BaseTableFooter';
+import {BaseTableCaption} from './parts/BaseTableCaption';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
