@@ -8,7 +8,7 @@ const tableHeaderStyles = createStyles({
   backgroundColor: system.color.bg.alt.softer,
 });
 
-export const StandardTable = () => {
+export const BaseHtmlTable = () => {
   return (
     <BaseTable>
       <BaseTable.Caption>Coffee Drinks and Sizes</BaseTable.Caption>

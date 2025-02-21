@@ -5,4 +5,3 @@ export * from './BaseTableFooter';
 export * from './BaseTableHead';
 export * from './BaseTableHeader';
 export * from './BaseTableRow';
-export * from './grid-table/TableRow';

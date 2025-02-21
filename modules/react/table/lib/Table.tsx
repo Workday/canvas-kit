@@ -2,7 +2,7 @@ import React from 'react';
 import {GridProps, FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {BaseTable, baseTableStencil} from './BaseTable';
-import {TableRow} from './parts/grid-table/TableRow';
+import {TableRow} from './parts/css-grid-table/TableRow';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {baseTableBodyStencil} from './parts/BaseTableBody';
 import {baseTableCaptionStencil} from './parts/BaseTableCaption';
@@ -176,9 +176,9 @@ export const Table = createComponent('table')({
   displayName: 'Table',
   Component: ({children, ...elemProps}: TableProps, ref, Element) => {
     return (
-      <BaseTable as={Element} ref={ref} {...mergeStyles(elemProps, tableStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, tableStencil())}>
         {children}
-      </BaseTable>
+      </Element>
     );
   },
   subComponents: {
