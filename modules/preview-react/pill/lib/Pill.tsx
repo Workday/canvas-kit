@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {BaseButton, buttonStencil} from '@workday/canvas-kit-react/button';
-import {createContainer, ellipsisStyles, focusRing} from '@workday/canvas-kit-react/common';
+import {createContainer, focusRing} from '@workday/canvas-kit-react/common';
 import {Box, BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {px2rem, createStencil, cssVar} from '@workday/canvas-kit-styling';
 
@@ -34,10 +34,12 @@ export const pillStencil = createStencil({
     maxWidth: '',
   },
   base: ({maxWidth}) => ({
+    display: 'initial',
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: system.shape.x1,
     ...system.type.subtext.large,
+    lineHeight: system.lineHeight.subtext.small, // ensure correct line height when there's no elements and just text
     boxShadow: 'none',
     outline: 'none',
     fontWeight: system.fontWeight.medium,
@@ -58,6 +60,7 @@ export const pillStencil = createStencil({
     overflow: 'hidden',
     '&:has(span)': {
       display: 'flex',
+      lineHeight: system.lineHeight.subtext.large, // ensure correct line height
     },
     '&:focus-visible, &.focus': {
       [buttonStencil.vars.background]: system.color.bg.alt.soft,
@@ -207,7 +210,7 @@ export const Pill = createContainer('button')({
      * ```tsx
      * <Pill variant="removable">
      *   <Pill.Avatar url={avatarUrl} />
-     *   Regina Skeltor
+     *    <Pill.Label>Regina Skeltor</Pill.Label>
      *   <Pill.IconButton aria-label='Remove user' onClick={() => console.log('handle remove')} />
      * </Pill>
      * ```
@@ -218,7 +221,7 @@ export const Pill = createContainer('button')({
      *
      * ```tsx
      * <Pill onClick={() => console.warn('clicked')}>
-     *   Shoes
+     *    <Pill.Label>Shoes</Pill.Label>
      *   <Pill.Count>30</Pill.Count>
      * </Pill>
      * ```
@@ -243,7 +246,7 @@ export const Pill = createContainer('button')({
      *
      * ```tsx
      * <Pill variant="removable">
-     *   Pink Shirts
+     *   <Pill.Label>Pink Shirts</Pill.Label>
      *   <Pill.IconButton aria-label='Remove item' onClick={() => console.warn('clicked')} />
      * </Pill>
      * ```
@@ -251,7 +254,7 @@ export const Pill = createContainer('button')({
     IconButton: PillIconButton,
     /**
      * This component renders a `<span>` that automatically handles overflow by rendering a tooltip.
-     * There's no need to use this component directly since the overflow is handled for you automatically.
+     * There's no need to use this component directly since the overflow is handled for you automatically unless you have an icon or other element.
      *
      * ```tsx
      * <Pill variant="readOnly">
