@@ -4453,6 +4453,18 @@
         "__isArgsStory": false
       }
     },
+    "examples-forms--text-input-with-react-hook-form": {
+      "id": "examples-forms--text-input-with-react-hook-form",
+      "name": "Text Input With React Hook Form",
+      "title": "Examples/Forms",
+      "importPath": "./modules/preview-react/_examples/stories/mdx/FormLibraryExample.stories.ts",
+      "kind": "Examples/Forms",
+      "story": "Text Input With React Hook Form",
+      "parameters": {
+        "fileName": "./modules/preview-react/_examples/stories/mdx/FormLibraryExample.stories.ts",
+        "__isArgsStory": false
+      }
+    },
     "testing-preview-color-picker--color-picker-states": {
       "id": "testing-preview-color-picker--color-picker-states",
       "name": "Color Picker States",
