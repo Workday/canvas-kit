@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {BaseButton, buttonStencil} from '@workday/canvas-kit-react/button';
-import {createContainer, focusRing} from '@workday/canvas-kit-react/common';
+import {createContainer, ellipsisStyles, focusRing} from '@workday/canvas-kit-react/common';
 import {Box, BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {px2rem, createStencil, cssVar} from '@workday/canvas-kit-styling';
 
@@ -9,7 +9,7 @@ import {usePillModel} from './usePillModel';
 
 import {PillIcon} from './PillIcon';
 import {PillIconButton} from './PillIconButton';
-import {PillCount} from './PillCount';
+import {PillCount, pillCountStencil} from './PillCount';
 import {PillAvatar} from './PillAvatar';
 import {PillLabel} from './PillLabel';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
@@ -34,7 +34,6 @@ export const pillStencil = createStencil({
   },
   extends: buttonStencil,
   base: ({maxWidth}) => ({
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: system.shape.x1,
@@ -54,15 +53,20 @@ export const pillStencil = createStencil({
     [buttonStencil.vars.border]: system.color.border.input.default,
     [buttonStencil.vars.label]: system.color.text.strong,
     [systemIconStencil.vars.color]: system.color.icon.default,
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    '&:has(span)': {
+      display: 'flex',
+    },
     '&:focus-visible, &.focus': {
       [buttonStencil.vars.background]: system.color.bg.alt.soft,
       [buttonStencil.vars.border]: system.color.border.primary.default,
       [buttonStencil.vars.label]: system.color.text.strong,
       [systemIconStencil.vars.color]: system.color.icon.strong,
       borderColor: system.color.border.primary.default,
-      '& [data-part="pill-count"]': {
-        borderColor: system.color.border.primary.default,
-      },
+      [pillCountStencil.vars.borderColor]: system.color.border.primary.default,
+
       ...focusRing({
         width: 0,
         inset: 'inner',
@@ -76,23 +80,14 @@ export const pillStencil = createStencil({
       [buttonStencil.vars.border]: system.color.border.input.strong,
       [buttonStencil.vars.label]: system.color.text.strong,
       [systemIconStencil.vars.color]: system.color.icon.strong,
-      '& [data-part="pill-icon-button"]': {
-        [systemIconStencil.vars.color]: system.color.icon.strong,
-      },
     },
     '&:active, &.active': {
       [buttonStencil.vars.background]: system.color.bg.alt.stronger,
       [buttonStencil.vars.border]: system.color.border.input.strong,
       [buttonStencil.vars.label]: system.color.text.strong,
       [systemIconStencil.vars.color]: system.color.icon.strong,
-      '& [data-part="pill-icon-button"]': {
-        [buttonStencil.vars.background]: system.color.bg.alt.stronger,
-        [systemIconStencil.vars.color]: system.color.icon.strong,
-      },
-      '& [data-part="pill-count"]': {
-        backgroundColor: base.soap600,
-        borderColor: 'transparent',
-      },
+      [pillCountStencil.vars.backgroundColor]: base.soap600,
+      [pillCountStencil.vars.borderColor]: 'transparent',
     },
     '&:disabled, &.disabled': {
       [buttonStencil.vars.background]: system.color.bg.alt.softer,
@@ -100,10 +95,9 @@ export const pillStencil = createStencil({
       [buttonStencil.vars.label]: system.color.text.disabled,
       [buttonStencil.vars.opacity]: '1',
       [systemIconStencil.vars.color]: system.color.icon.soft,
-      '& [data-part="pill-count"]': {
-        backgroundColor: system.color.bg.alt.default,
-        borderColor: 'transparent',
-      },
+      [pillCountStencil.vars.backgroundColor]: system.color.bg.alt.default,
+      [pillCountStencil.vars.borderColor]: 'transparent',
+
       '& [data-part="avatar-image"]': {
         opacity: system.opacity.disabled,
       },
@@ -131,10 +125,7 @@ export const removeablePillStencil = createStencil({
     },
     '&:disabled, &.disabled': {
       [buttonStencil.vars.background]: system.color.bg.alt.softer,
-      '& [data-part="pill-icon-button"]': {
-        [buttonStencil.vars.background]: system.color.bg.alt.softer,
-        [systemIconStencil.vars.color]: system.color.icon.soft,
-      },
+      [systemIconStencil.vars.color]: system.color.icon.soft,
     },
     cursor: 'default',
     overflow: 'revert', // override BaseButton overflow styles so the click target exists outside the pill for removable
