@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.4.5](https://github.com/Workday/canvas-kit/releases/tag/v12.4.5) (2025-02-21)
+
+### Components
+
+- fix: Define stable ref reference in `useComboboxInputConstrained` ([#3145](https://github.com/Workday/canvas-kit/pull/3145)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v12.4.4](https://github.com/Workday/canvas-kit/releases/tag/v12.4.4) (2025-02-21)
 
 ### Documentation

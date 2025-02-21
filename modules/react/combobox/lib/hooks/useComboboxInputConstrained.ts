@@ -63,19 +63,20 @@ export const useComboboxInputConstrained = createElemPropsHook(useComboboxModel)
       formElementRef,
       () => {
         if (formLocalRef.current) {
+          const formElementRefStable = formLocalRef.current;
           // Hook into the DOM `value` property of the form input element and update the model
           // accordingly
-          Object.defineProperty(formLocalRef.current, 'value', {
+          Object.defineProperty(formElementRefStable, 'value', {
             get() {
               const value = Object.getOwnPropertyDescriptor(
-                Object.getPrototypeOf(formLocalRef.current),
+                Object.getPrototypeOf(formElementRefStable),
                 'value'
-              )?.get?.call(formLocalRef.current);
+              )?.get?.call(formElementRefStable);
               return value;
             },
             set(value: string) {
               if (
-                formLocalRef.current &&
+                formElementRefStable &&
                 value !==
                   (modelStateRef.current.selectedIds === 'all'
                     ? []
@@ -88,10 +89,10 @@ export const useComboboxInputConstrained = createElemPropsHook(useComboboxModel)
           });
 
           // forward calls to `.focus()` and `.blur()` to the user input
-          formLocalRef.current.focus = (options?: FocusOptions) => {
+          formElementRefStable.focus = (options?: FocusOptions) => {
             userLocalRef.current!.focus(options);
           };
-          formLocalRef.current.blur = () => {
+          formElementRefStable.blur = () => {
             userLocalRef.current!.blur();
           };
         }
