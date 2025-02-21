@@ -24,9 +24,6 @@ export const Basic = () => {
           <Pill.Icon aria-label="Add user" />
           <Pill.Label>Regina Skeltor</Pill.Label>
         </Pill>
-        <Pill onClick={() => setText('The first pill is clicked!')}>
-          Regina Skeltor Regina Skeltor Regina Skeltor Regina Skeltor
-        </Pill>
       </div>
       <BodyText size="medium">{text}</BodyText>
     </div>
