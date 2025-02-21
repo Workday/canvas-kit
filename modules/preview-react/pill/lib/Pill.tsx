@@ -29,10 +29,10 @@ export interface PillProps extends BoxProps {
 }
 
 export const pillStencil = createStencil({
+  extends: buttonStencil,
   vars: {
     maxWidth: '',
   },
-  extends: buttonStencil,
   base: ({maxWidth}) => ({
     flexDirection: 'row',
     alignItems: 'center',
