@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {BaseButton, buttonStencil} from '@workday/canvas-kit-react/button';
+import {buttonStencil} from '@workday/canvas-kit-react/button';
 import {createContainer, focusRing} from '@workday/canvas-kit-react/common';
 import {Box, BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {px2rem, createStencil, cssVar} from '@workday/canvas-kit-styling';
@@ -283,8 +283,7 @@ export const Pill = createContainer('button')({
         </Box>
       )}
       {variant === 'default' && (
-        <BaseButton
-          as={Element}
+        <Element
           disabled={model.state.disabled}
           {...mergeStyles(elemProps, [
             model.state.disabled ? 'disabled' : undefined,
@@ -294,7 +293,7 @@ export const Pill = createContainer('button')({
           ])}
         >
           {children}
-        </BaseButton>
+        </Element>
       )}
       {variant === 'removable' && (
         <Box
