@@ -139,14 +139,14 @@ The following components are affected:
 A few changes have been made to `Pill` to ensure proper accessibility and styles.
 
 - The border color on hover has been updated from `licorice400` to `licorice500` to match our design specs.
-- We've removed extra elements and leverage flex box to ensure only the label receives overflow styles. When maxWidth is set on the Pill the maxWidth is set for the whole Pill accurately. Before v13, the maxWidth wasn't calculating the width of all its elements and wasn't a true pixel value.
+- We've removed extra elements and leverage [flex box}(https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Flexbox) to ensure only the label receives overflow styles. When `maxWidth` is set, it is set on the parent `<Pill/>` element and the child elements will be styled accordingly. Before v13, `maxWidth` wasn't calculating the width of all its elements and wasn't a true pixel value.
 
 ##### Breaking Changes
 
-- `maxWidth` has been removed from the `usePillModel`. This config was used to style sub components. With the refactor to use `data-part` and [stencils](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--docs#create-stencil), it is no longer needed on the model. You can still apply `maxWidth` on the parent `<Pill>` element and the child elements will be styled accordingly.
-- `Pill.Icon` no longer has a default `aria-labe="add"`. You *must* provide an `aria-label` for `Pill.Icon` to ensure proper accessibility. Our examples have been updated to reflect this change.
-- `Pill.IconButton` no longer has a default `aria-label="remove"`. You *must* provide an `aria-label` for `Pill.IconButton` to ensure proper accessibility. Our examples have been updated to reflect this change.
-- `Pill.Label` is a required element when using other sub components like `Pill.Icon` to ensure that the label truncates correctly.
+- `maxWidth` has been removed from the `usePillModel`. This config was used to style sub-components. With the refactor to use `data-part` and [stencils](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--docs#create-stencil), it is no longer needed on the model. You can still apply `maxWidth` on the parent `<Pill>` element and the child elements will be styled accordingly.
+- `<Pill.Icon/>` no longer has a default `aria-label="add"`. You *must* provide an `aria-label` for `<Pill.Icon/>` to ensure proper accessibility. Our examples have been updated to reflect this change.
+- `<Pill.IconButton/>` no longer has a default `aria-label="remove"`. You *must* provide an `aria-label` for `<Pill.IconButton/>` to ensure proper accessibility. Our examples have been updated to reflect this change.
+- `<Pill.Label/>` is a *required* element when using other sub-components like `<Pill.Icon/>` to ensure that the label truncates correctly.
 
 ## Tabs
 
