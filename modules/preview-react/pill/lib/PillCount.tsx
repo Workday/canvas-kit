@@ -18,7 +18,7 @@ export const pillCountStencil = createStencil({
     borderEndStartRadius: system.shape.zero,
     borderEndEndRadius: system.shape.x1,
     borderWidth: px2rem(1),
-    borderInlineStartWidth: 0,
+    borderInlineStartWidth: system.space.zero,
     borderStyle: 'solid',
     borderColor: cssVar(borderColor, system.color.border.transparent),
     display: 'inline-flex',
