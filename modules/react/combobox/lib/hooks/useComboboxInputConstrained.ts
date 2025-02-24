@@ -95,6 +95,7 @@ export const useComboboxInputConstrained = createElemPropsHook(useComboboxModel)
           // allows reconfiguration, so we use `Object.defineProperty`.
           Object.defineProperty(formElement, 'focus', {
             configurable: true,
+            writable: true,
             get() {
               return (options: FocusOptions) => userElement!.focus(options);
             },
@@ -102,6 +103,7 @@ export const useComboboxInputConstrained = createElemPropsHook(useComboboxModel)
 
           Object.defineProperty(formElement, 'blur', {
             configurable: true,
+            writable: true,
             get() {
               return () => userElement!.blur();
             },
