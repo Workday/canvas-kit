@@ -4,7 +4,15 @@ import {benefitsIcon} from '@workday/canvas-applet-icons-web';
 import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
 
 import {colors} from '@workday/canvas-kit-react/tokens';
-import {AccentIcon, AppletIcon, SystemIcon, SystemIconCircle, Graphic} from '../index';
+import {
+  AccentIcon,
+  AppletIcon,
+  SystemIcon,
+  SystemIconCircle,
+  Graphic,
+  graphicStencil,
+  graphicImageStencil,
+} from '../index';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
 import {base} from '@workday/canvas-tokens-web';
@@ -16,6 +24,15 @@ const graphicExample: CanvasGraphic = {
   filename: 'wd-graphic-badge-achievement.svg',
   category: '',
   tags: [],
+};
+const graphicExampleWithURL: CanvasGraphic = {
+  name: 'badgeAchievement',
+  type: CanvasIconTypes.Graphic,
+  svg: '<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" class="wd-graphic wd-graphic-badge-achievement" focusable="false" role="presentation" viewBox="0 0 50 50"><g fill="none" fill-rule="nonzero" class="wd-icon-container"><circle cx="25" cy="25" r="25" fill="#FFC943"/><path fill="#FF7A45" d="M17 12h23l-4.373 7.5L40 27H17z"/><path fill="#656464" d="M15 12h2v31h-2z"/><circle cx="16" cy="11.5" r="1.5" fill="#656464"/></g></svg>',
+  filename: 'wd-graphic-badge-achievement.svg',
+  category: '',
+  tags: [],
+  url: 'https://wd5.myworkday.com/wday/asset/canvas-graphics-web/5.0.7/wd-graphic-learning-welcome-desktop.svg',
 };
 
 export default {
@@ -117,7 +134,7 @@ export const GraphicStory = {
   component: Graphic,
   render: () => (
     <div className="story">
-      <Graphic src={graphicExample} />
+      <Graphic src={graphicExample} cs={{width: 40}} />
       <br />
       <Graphic src={graphicExample} width={120} />
       <div style={{width: 100}}>
@@ -125,6 +142,9 @@ export const GraphicStory = {
       </div>
       <div style={{width: 400}}>
         <Graphic src={graphicExample} grow={true} shouldMirror={true} />
+      </div>
+      <div style={{width: 400}}>
+        <Graphic src={graphicExampleWithURL} shouldMirror={true} />
       </div>
     </div>
   ),
