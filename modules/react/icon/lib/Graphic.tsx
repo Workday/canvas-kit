@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
+import {CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
 import {Svg, SvgProps, svgStencil} from './Svg';
 import {createComponent} from '@workday/canvas-kit-react/common';
@@ -24,6 +24,16 @@ export interface GraphicStyles {
    * @default false
    */
   grow?: boolean;
+}
+
+export interface CanvasGraphic {
+  name: string;
+  type: CanvasIconTypes;
+  svg: string;
+  filename: string;
+  category?: string;
+  tags?: string[];
+  url?: string;
 }
 
 export interface GraphicProps extends GraphicStyles, Pick<SvgProps, 'shouldMirror'>, CSProps {
