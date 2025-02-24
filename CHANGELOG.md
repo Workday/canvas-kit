@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.4.6](https://github.com/Workday/canvas-kit/releases/tag/v12.4.6) (2025-02-24)
+
+### Components
+
+- fix(combobox): Use focus/blur reconfig vs rewrite for testing library ([#3147](https://github.com/Workday/canvas-kit/pull/3147)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v12.4.5](https://github.com/Workday/canvas-kit/releases/tag/v12.4.5) (2025-02-21)
 
 ### Components
