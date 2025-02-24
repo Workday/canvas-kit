@@ -3,6 +3,63 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.4.5](https://github.com/Workday/canvas-kit/releases/tag/v12.4.5) (2025-02-21)
+
+### Components
+
+- fix: Define stable ref reference in `useComboboxInputConstrained` ([#3145](https://github.com/Workday/canvas-kit/pull/3145)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.4.4](https://github.com/Workday/canvas-kit/releases/tag/v12.4.4) (2025-02-21)
+
+### Documentation
+
+- docs: Add stackblitz support to our example ([#3132](https://github.com/Workday/canvas-kit/pull/3132)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.4.3](https://github.com/Workday/canvas-kit/releases/tag/v12.4.3) (2025-02-20)
+
+### Components
+
+- fix(popup): Fix useReturnFocus to respect tabindex=-1 buttons ([#3141](https://github.com/Workday/canvas-kit/pull/3141)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v11.2.3](https://github.com/Workday/canvas-kit/releases/tag/v11.2.3) (2025-02-20)
+
+### Components
+
+- fix(popup): Fix useReturnFocus to respect tabindex=-1 buttons ([#3141](https://github.com/Workday/canvas-kit/pull/3141)) ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v12.4.2](https://github.com/Workday/canvas-kit/releases/tag/v12.4.2) (2025-02-19)
+
+### Documentation
+
+- fix: Update tooltip mdx to correctly render ([#3139](https://github.com/Workday/canvas-kit/pull/3139)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.4.1](https://github.com/Workday/canvas-kit/releases/tag/v12.4.1) (2025-02-19)
+
+### Documentation
+
+- fix: Add missing semicolon to tooltip mdx ([#3138](https://github.com/Workday/canvas-kit/pull/3138)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.4.0](https://github.com/Workday/canvas-kit/releases/tag/v12.4.0) (2025-02-19)
+
+
+
+
+## [v12.3.7](https://github.com/Workday/canvas-kit/releases/tag/v12.3.7) (2025-02-11)
+
+### Components
+
+- fix: Ensure width is passed to Select input ([#3130](https://github.com/Workday/canvas-kit/pull/3130)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v11.2.2](https://github.com/Workday/canvas-kit/releases/tag/v11.2.2) (2025-02-10)
+
+### Components
+
+- fix: Ensure width is passed to Select input ([#3130](https://github.com/Workday/canvas-kit/pull/3130)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
 ## [v12.3.6](https://github.com/Workday/canvas-kit/releases/tag/v12.3.6) (2025-02-06)
 
 ### Theming
