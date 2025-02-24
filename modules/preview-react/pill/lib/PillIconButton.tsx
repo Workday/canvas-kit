@@ -38,7 +38,7 @@ export const pillIconButtonStencil = createStencil({
       position: 'absolute',
       left: calc.negate(px2rem(7)),
       bottom: calc.negate(px2rem(7)),
-      margin: 0,
+      margin: system.space.zero,
       pointerEvents: 'all',
     },
 
