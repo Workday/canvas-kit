@@ -1,12 +1,11 @@
 import * as React from 'react';
-import {keyframes} from '@emotion/react';
-import styled from '@emotion/styled';
 
-import {accessibleHide, createComponent, StyledType} from '@workday/canvas-kit-react/common';
+import {accessibleHide, createComponent} from '@workday/canvas-kit-react/common';
+import {createStencil, handleCsProp, keyframes} from '@workday/canvas-kit-styling';
 
-import {SkeletonHeader} from './parts/skeletonHeader';
-import {SkeletonShape} from './parts/skeletonShape';
-import {SkeletonText} from './parts/skeletonText';
+import {SkeletonHeader} from './parts/SkeletonHeader';
+import {SkeletonShape} from './parts/SkeletonShape';
+import {SkeletonText} from './parts/SkeletonText';
 
 export interface SkeletonProps {
   /**
@@ -22,21 +21,22 @@ export interface SkeletonProps {
   children?: React.ReactNode;
 }
 
-const AccessibleHide = styled('div')(accessibleHide);
-
 const fade = keyframes({
   from: {opacity: 0.4},
   to: {opacity: 1},
 });
 
-const animation = `${fade} 0.8s linear infinite alternate`;
-
-const SkeletonAnimator = styled('div')<SkeletonProps & StyledType>({
-  animation,
-  overflow: 'hidden',
-  width: '100%',
-  height: '100%',
-  position: 'relative',
+export const skeletonStencil = createStencil({
+  base: () => ({
+    animation: `${fade} 0.8s linear infinite alternate`,
+    position: 'relative',
+    overflow: 'hidden',
+    height: '100%',
+    width: '100%',
+    '& [data-part="skeleton-accessible-hide"]': {
+      ...accessibleHide,
+    },
+  }),
 });
 
 /**
@@ -59,11 +59,10 @@ export const Skeleton = createComponent('div')({
     ref,
     Element
   ) => (
-    <SkeletonAnimator ref={ref} as={Element} {...elemProps}>
-      <AccessibleHide>{loadingAriaLabel}</AccessibleHide>
-
+    <Element ref={ref} {...handleCsProp(elemProps, skeletonStencil())}>
+      <div data-part="skeleton-accessible-hide">{loadingAriaLabel}</div>
       <div aria-hidden={true}>{children}</div>
-    </SkeletonAnimator>
+    </Element>
   ),
   subComponents: {
     /**
