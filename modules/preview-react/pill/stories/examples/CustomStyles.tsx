@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Pill, pillStencil} from '@workday/canvas-kit-preview-react/pill';
+import {Pill, pillCountStencil, pillStencil} from '@workday/canvas-kit-preview-react/pill';
 
 import {createStencil} from '@workday/canvas-kit-styling';
 import {base} from '@workday/canvas-tokens-web';
@@ -8,30 +8,27 @@ import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
 const customPillStencil = createStencil({
   base: {
-    backgroundColor: base.berrySmoothie300,
-    borderColor: base.berrySmoothie500,
-    color: base.frenchVanilla100,
+    [pillStencil.vars.background]: base.berrySmoothie300,
+    [pillStencil.vars.border]: base.berrySmoothie500,
+    [pillStencil.vars.label]: base.frenchVanilla100,
     [systemIconStencil.vars.color]: base.frenchVanilla100,
-    '& [data-part="pill-count"]': {
-      backgroundColor: base.berrySmoothie400,
-    },
+    [pillCountStencil.vars.backgroundColor]: base.berrySmoothie400,
+
     '&:hover, &.hover': {
-      backgroundColor: base.berrySmoothie400,
-      color: base.frenchVanilla100,
+      [pillStencil.vars.background]: base.berrySmoothie400,
+      [pillStencil.vars.label]: base.frenchVanilla100,
+      [pillCountStencil.vars.backgroundColor]: base.berrySmoothie500,
       [systemIconStencil.vars.color]: base.frenchVanilla100,
     },
     '&:active, &.active': {
-      backgroundColor: base.berrySmoothie400,
-      color: base.frenchVanilla100,
+      [pillStencil.vars.background]: base.berrySmoothie400,
+      [pillStencil.vars.label]: base.frenchVanilla100,
       [systemIconStencil.vars.color]: base.frenchVanilla100,
-
-      '& [data-part="pill-count"]': {
-        backgroundColor: base.berrySmoothie400,
-      },
+      [pillCountStencil.vars.backgroundColor]: base.berrySmoothie500,
     },
     '&:disabled, &.disabled': {
-      backgroundColor: base.berrySmoothie400,
-      color: base.frenchVanilla100,
+      [pillStencil.vars.background]: base.berrySmoothie400,
+      [pillStencil.vars.label]: base.frenchVanilla100,
       [systemIconStencil.vars.color]: base.frenchVanilla100,
     },
   },

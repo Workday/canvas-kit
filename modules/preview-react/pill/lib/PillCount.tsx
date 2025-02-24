@@ -38,7 +38,7 @@ export const PillCount = createComponent('span')({
   displayName: 'Pill.Count',
   Component: ({children, ...elemProps}: PillCountProps, ref, Element) => {
     return (
-      <Element data-part="pill-count" ref={ref} {...mergeStyles(elemProps, pillCountStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, pillCountStencil())}>
         {children}
       </Element>
     );

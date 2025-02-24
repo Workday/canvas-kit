@@ -4,7 +4,7 @@ import {focusRing, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {usePillModel} from './usePillModel';
 import {xSmallIcon} from '@workday/canvas-system-icons-web';
-import {BaseButton, buttonStencil} from '@workday/canvas-kit-react/button';
+import {buttonStencil} from '@workday/canvas-kit-react/button';
 import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
@@ -62,9 +62,7 @@ export const PillIconButton = createSubcomponent('button')({
 })<PillIconButtonProps>(
   ({size, icon, children, 'aria-label': ariaLabel = '', ...elemProps}, Element, model) => {
     return (
-      <BaseButton
-        data-part="pill-icon-button"
-        as={Element}
+      <Element
         disabled={model.state.disabled}
         aria-labelledby={`removable-${model.state.id} label-${model.state.id}`}
         {...mergeStyles(elemProps, pillIconButtonStencil())}
@@ -76,7 +74,7 @@ export const PillIconButton = createSubcomponent('button')({
           aria-hidden // This works for Chrome but not needed in Safari
           role="img"
         />
-      </BaseButton>
+      </Element>
     );
   }
 );

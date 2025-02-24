@@ -26,11 +26,7 @@ export const PillLabel = createSubcomponent('span')({
 })<PillLabelProps>(({tooltipProps, children, ...elemProps}, Element, model) => {
   return (
     <OverflowTooltip {...tooltipProps}>
-      <Element
-        data-part="pill-label"
-        id={`label-${model.state.id}`}
-        {...mergeStyles(elemProps, pillLabelStencil())}
-      >
+      <Element id={`label-${model.state.id}`} {...mergeStyles(elemProps, pillLabelStencil())}>
         {children}
       </Element>
     </OverflowTooltip>
