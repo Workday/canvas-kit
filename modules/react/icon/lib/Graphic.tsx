@@ -68,12 +68,7 @@ export const graphicStyles = ({width, height, grow}: GraphicStyles): CSSObject =
 
 export const graphicStencil = createStencil({
   extends: svgStencil,
-  base: {
-    '& [data-part="graphic-img"]': {
-      maxWidth: '100%',
-      maxHeight: '100%',
-    },
-  },
+  base: {},
   modifiers: {
     grow: {
       true: {
