@@ -4,7 +4,7 @@ import {stripIndent} from 'common-tags';
 
 const expectTransform = expectTransformFactory(transform);
 
-describe('renameHasError', () => {
+describe('Pill', () => {
   it('should not change non-canvas imports', () => {
     const input = stripIndent`
             import {Pill} from '@workday/any-other-package'
@@ -26,30 +26,76 @@ describe('renameHasError', () => {
     expectTransform(input, expected);
   });
 
-  //   it('should rename hasError to error and set the value to "error" for FormField, TextInput and TextArea', () => {
-  //     const input = stripIndent`
-  //         import {TextInput} from '@workday/canvas-kit-preview-react/text-input'
-  //         import {TextArea} from '@workday/canvas-kit-preview-react/text-area'
-  //         import {FormField} from '@workday/canvas-kit-preview-react/form-field'
-  //         <>
-  //             <TextInput hasError={true} />
-  //             <TextArea hasError={true} />
-  //             <FormField hasError={true} />
-  //         </>
-  //     `;
+  it('should not change if the only children of Pill is plain text', () => {
+    const input = stripIndent`
+          import {Pill} from '@workday/canvas-kit-preview-react/pill';
+          <>
+            <Pill>
+              Hello World
+            </Pill>
+          </>
+      `;
 
-  //     const expected = stripIndent`
-  //         import {TextInput} from '@workday/canvas-kit-preview-react/text-input'
-  //         import {TextArea} from '@workday/canvas-kit-preview-react/text-area'
-  //         import {FormField} from '@workday/canvas-kit-preview-react/form-field'
-  //         <>
-  //             <TextInput error="error" />
-  //             <TextArea error="error" />
-  //             <FormField error="error" />
-  //         </>
-  //     `;
-  //     expectTransform(input, expected);
-  //   });
+    const expected = stripIndent`
+          import {Pill} from '@workday/canvas-kit-preview-react/pill';
+          <>
+            <Pill>
+              Hello World
+            </Pill>
+          </>
+      `;
+    expectTransform(input, expected);
+  });
+  it('should wrap plain text in label if Pill.Icon is present', () => {
+    const input = stripIndent`
+          import {Pill} from '@workday/canvas-kit-preview-react/pill';
+          <>
+            <Pill>
+              {children}
+              <Pill.Icon />
+              <Pill.Icon />
+              <Pill.Avatar />
+              <Pill.IconButton />
+              <Pill.Count />
+            </Pill>
+            <Pill>
+              {'Some Name'}
+              <Pill.Icon />
+            </Pill>
+            <Pill>
+              {errors && <PillErrorIcon />}
+              All Filters
+              <Pill.Count>{num}</Pill.Count>
+            </Pill>
+          </>
+      `;
+
+    const expected = stripIndent`
+          import {Pill} from '@workday/canvas-kit-preview-react/pill';
+          <>
+            <>
+            <Pill>
+              <Pill.Label>{children}<Pill.Label>
+              <Pill.Icon />
+              <Pill.Icon />
+              <Pill.Avatar />
+              <Pill.IconButton />
+              <Pill.Count />
+            </Pill>
+            <Pill>
+              <Pill.Label>{'Some Name'}<Pill.Label>
+              <Pill.Icon />
+            </Pill>
+            <Pill>
+              {errors && <PillErrorIcon />}
+              <Pill.Label>All Filters<Pill.Label>
+              <Pill.Count>{num}</Pill.Count>
+            </Pill>
+          </>
+          </>
+      `;
+    expectTransform(input, expected);
+  });
   //   it('should rename rename hasError to error and handle ternary with variable', () => {
   //     const input = stripIndent`
   //         import {TextInput} from '@workday/canvas-kit-preview-react/text-input'

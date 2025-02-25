@@ -48,6 +48,12 @@ const ResponsiveList = styled(Flex)<ActionBarListProps & StyledType>(({theme}) =
   };
 });
 
+export actionBarListStencil = createStencil({
+  base: {
+    borderColor: system.color.border.divider
+  }
+})
+
 export const useActionBarList = useOverflowListMeasure;
 
 export const ActionBarList = createSubcomponent('div')({
