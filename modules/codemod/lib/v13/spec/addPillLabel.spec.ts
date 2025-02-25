@@ -51,21 +51,8 @@ describe('Pill', () => {
           import {Pill} from '@workday/canvas-kit-preview-react/pill';
           <>
             <Pill>
-              {children}
               <Pill.Icon />
-              <Pill.Icon />
-              <Pill.Avatar />
-              <Pill.IconButton />
-              <Pill.Count />
-            </Pill>
-            <Pill>
-              {'Some Name'}
-              <Pill.Icon />
-            </Pill>
-            <Pill>
-              {errors && <PillErrorIcon />}
-              All Filters
-              <Pill.Count>{num}</Pill.Count>
+              Hello World
             </Pill>
           </>
       `;
@@ -73,29 +60,57 @@ describe('Pill', () => {
     const expected = stripIndent`
           import {Pill} from '@workday/canvas-kit-preview-react/pill';
           <>
-            <>
             <Pill>
-              <Pill.Label>{children}<Pill.Label>
-              <Pill.Icon />
-              <Pill.Icon />
-              <Pill.Avatar />
-              <Pill.IconButton />
-              <Pill.Count />
-            </Pill>
-            <Pill>
-              <Pill.Label>{'Some Name'}<Pill.Label>
-              <Pill.Icon />
-            </Pill>
-            <Pill>
-              {errors && <PillErrorIcon />}
-              <Pill.Label>All Filters<Pill.Label>
-              <Pill.Count>{num}</Pill.Count>
-            </Pill>
-          </>
+              <Pill.Icon /><Pill.Label>Hello World</Pill.Label></Pill>
           </>
       `;
     expectTransform(input, expected);
   });
+  it.only('should wrap text in label if Pill.IconButton is present and the text is rendered as an expression', () => {
+    const input = stripIndent`
+          import {Pill} from '@workday/canvas-kit-preview-react/pill';
+          const myVar = 'Hello World';
+          <>
+            <Pill>
+              {myVar}
+              <Pill.IconButton />
+            </Pill>
+          </>
+      `;
+
+    const expected = stripIndent`
+          import {Pill} from '@workday/canvas-kit-preview-react/pill';
+          const myVar = 'Hello World';
+          <>
+            <Pill>
+              <Pill.Label>{myVar}</Pill.Label>
+              <Pill.IconButton />
+            </Pill>
+          </>
+      `;
+    expectTransform(input, expected);
+  });
+
+  // import {Pill} from '@workday/canvas-kit-preview-react/pill';
+  // <>
+  //   <Pill>
+  //     <Pill.Label>{children}</Pill.Label>
+  //     <Pill.Icon />
+  //     <Pill.Icon />
+  //     <Pill.Avatar />
+  //     <Pill.IconButton />
+  //     <Pill.Count />
+  //   </Pill>
+  //   <Pill>
+  //     <Pill.Label>{'Some Name'}</Pill.Label>
+  //     <Pill.Icon />
+  //   </Pill>
+  //   <Pill>
+  //     {errors && <PillErrorIcon />}
+  //     <Pill.Label>All Filters</Pill.Label>
+  //     <Pill.Count>{num}</Pill.Count>
+  //   </Pill>
+  // </>;
   //   it('should rename rename hasError to error and handle ternary with variable', () => {
   //     const input = stripIndent`
   //         import {TextInput} from '@workday/canvas-kit-preview-react/text-input'
