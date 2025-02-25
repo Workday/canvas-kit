@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {CanvasIconTypes} from '@workday/design-assets-types';
+import {CanvasIconTypes, CanvasGraphic as OldCanvasGraphic} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
 import {Svg, SvgProps, svgStencil} from './Svg';
 import {createComponent} from '@workday/canvas-kit-react/common';
@@ -29,7 +29,7 @@ export interface GraphicStyles {
 export interface CanvasGraphic {
   name: string;
   type: CanvasIconTypes;
-  svg: string;
+  svg?: string;
   filename: string;
   category?: string;
   tags?: string[];
@@ -106,7 +106,12 @@ export const graphicImageStencil = createStencil({
 
 export const Graphic = createComponent('span')({
   displayName: 'Graphic',
-  Component: ({grow, width, height, src, ...elemProps}: GraphicProps, ref, Element) => {
+  Component: (
+    {grow, width, height, src, shouldMirror, ...elemProps}: GraphicProps,
+    ref,
+    Element
+  ) => {
+    console.log(src.svg);
     return (
       <>
         {src.url ? (
@@ -122,12 +127,13 @@ export const Graphic = createComponent('span')({
           >
             <img data-part="graphic-img" src={src.url} alt="" />
           </Element>
-        ) : (
+        ) : typeof src.svg === 'string' && src.svg ? (
           <Svg
             type={CanvasIconTypes.Graphic}
             as={Element}
             ref={ref}
-            src={src}
+            shouldMirror={shouldMirror}
+            src={src as OldCanvasGraphic}
             {...handleCsProp(
               elemProps,
               graphicStencil({
@@ -137,7 +143,7 @@ export const Graphic = createComponent('span')({
               })
             )}
           />
-        )}
+        ) : null}
       </>
     );
   },
