@@ -6,10 +6,24 @@ import {useUniqueId, createModelHook, Generic} from '@workday/canvas-kit-react/c
 export type Orientation = 'horizontal' | 'vertical';
 
 export const defaultGetId = (item: any): string => {
+  if (process.env.NODE_ENV === 'development') {
+    if (typeof item === 'object' && item.id === undefined) {
+      console.warn(
+        "List item was an object, but no `getId` was passed to the model to inform the list where to find the item's identifier. Please pass a `getId` to the list model"
+      );
+    }
+  }
   return typeof item === 'string' ? item : item.id || '';
 };
 
 export const defaultGetTextValue = (item: any): string => {
+  if (process.env.NODE_ENV === 'development') {
+    if (typeof item === 'object' && item.id === undefined) {
+      console.warn(
+        "List item was an object, but no `getTextValue` was passed to the model to inform the list where to find the item's text value. The item's text value is used for accessibility. Please pass a `getTextValue` to the list model"
+      );
+    }
+  }
   return typeof item === 'string' ? item : item.text || item.id || '';
 };
 
