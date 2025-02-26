@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.4.8](https://github.com/Workday/canvas-kit/releases/tag/v12.4.8) (2025-02-26)
+
+### Documentation
+
+- docs: Fix Firefox hard-fail on markdown-to-jsx bug ([#3153](https://github.com/Workday/canvas-kit/pull/3153)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v12.4.7](https://github.com/Workday/canvas-kit/releases/tag/v12.4.7) (2025-02-25)
 
 ### Infrastructure
