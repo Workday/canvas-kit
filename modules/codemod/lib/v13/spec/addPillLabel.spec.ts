@@ -66,7 +66,7 @@ describe('Pill', () => {
       `;
     expectTransform(input, expected);
   });
-  it.only('should wrap text in label if Pill.IconButton is present and the text is rendered as an expression', () => {
+  it('should wrap text in label if Pill.IconButton is present and the text is rendered as an expression', () => {
     const input = stripIndent`
           import {Pill} from '@workday/canvas-kit-preview-react/pill';
           const myVar = 'Hello World';
@@ -85,6 +85,40 @@ describe('Pill', () => {
             <Pill>
               <Pill.Label>{myVar}</Pill.Label>
               <Pill.IconButton />
+            </Pill>
+          </>
+      `;
+    expectTransform(input, expected);
+  });
+  it('should wrap text in label if Pill.IconButton is present and the text is rendered as an expression', () => {
+    const input = stripIndent`
+          import {Pill} from '@workday/canvas-kit-preview-react/pill';
+          const myVar = 'Hello World';
+          <>
+            <Pill
+              margin="auto"
+              marginTop="xxl"
+              variant="readOnly"
+              backgroundColor="soap100"
+              data-automation-id="branding-banner-pill"
+            >
+              {getText('Some.Text')}
+            </Pill>
+          </>
+      `;
+
+    const expected = stripIndent`
+          import {Pill} from '@workday/canvas-kit-preview-react/pill';
+          const myVar = 'Hello World';
+          <>
+            <Pill
+              margin="auto"
+              marginTop="xxl"
+              variant="readOnly"
+              backgroundColor="soap100"
+              data-automation-id="branding-banner-pill"
+            >
+              {getText('Some.Text')}
             </Pill>
           </>
       `;

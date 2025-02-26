@@ -30,27 +30,20 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
       // Check if children contain at least one Pill.Icon or Pill.Avatar
       const hasPillSubcomponents =
         nodePath.node.children &&
-        nodePath.node.children.some(
-          child => {
-            if (child.type === 'JSXElement') {
-              if (child.openingElement.type === 'JSXOpeningElement') {
-                if (child.openingElement.name.property.type === 'JSXIdentifier') {
-                  return (
-                    child.openingElement.name.property.name === 'Icon' ||
-                    child.openingElement.name.property.name === 'Avatar' ||
-                    child.openingElement.name.property.name === 'IconButton' ||
-                    child.openingElement.name.property.name === 'Count'
-                  );
-                }
-                // return child.openingElement.name.property.name === 'Icon'; //?
-              }
-            }
+        nodePath.node.children.some(child => {
+          if (
+            child.type === 'JSXElement' &&
+            child.openingElement.type === 'JSXOpeningElement' &&
+            child.openingElement.name.type === 'JSXMemberExpression'
+          ) {
+            return (
+              child.openingElement.name?.property.name === 'Icon' ||
+              child.openingElement.name.property.name === 'Avatar' ||
+              child.openingElement.name.property.name === 'IconButton' ||
+              child.openingElement.name.property.name === 'Count'
+            );
           }
-          // j.JSXElement.check(child) &&
-          // j.JSXIdentifier.check(child.openingElement.name) &&
-          // (child.openingElement.name.name === 'Pill.Icon' ||
-          //   child.openingElement.name.name === 'Pill.Avatar')
-        );
+        });
 
       if (hasPillSubcomponents) {
         nodePath.node.children = nodePath.node.children?.map(child => {
