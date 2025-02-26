@@ -1,9 +1,9 @@
 import * as React from 'react';
-import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
+import {CanvasIconTypes, CanvasGraphic as OldCanvasGraphic} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
 import {Svg, SvgProps, svgStencil} from './Svg';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, CSProps, handleCsProp, number2rem} from '@workday/canvas-kit-styling';
 
 /**
  * @deprecated Interface `GraphicStyles` will be removed in a future version. `grow` prop will be moved inside `GraphicProps`.
@@ -26,7 +26,17 @@ export interface GraphicStyles {
   grow?: boolean;
 }
 
-export interface GraphicProps extends GraphicStyles, Pick<SvgProps, 'shouldMirror' | 'cs'> {
+export interface CanvasGraphic {
+  name: string;
+  type: CanvasIconTypes;
+  svg?: string;
+  filename: string;
+  category?: string;
+  tags?: string[];
+  url?: string;
+}
+
+export interface GraphicProps extends GraphicStyles, Pick<SvgProps, 'shouldMirror'>, CSProps {
   /**
    * The graphic to display from `@workday/canvas-graphics-web`.
    */
@@ -79,23 +89,62 @@ export const graphicStencil = createStencil({
   },
 });
 
+export const graphicImageStencil = createStencil({
+  vars: {
+    width: '',
+    height: '',
+  },
+  base: ({width, height}) => ({
+    width,
+    height,
+    '& [data-part="graphic-img"]': {
+      maxWidth: '100%',
+      maxHeight: '100%',
+    },
+  }),
+});
+
 export const Graphic = createComponent('span')({
   displayName: 'Graphic',
-  Component: ({grow, width, height, ...elemProps}: GraphicProps, ref, Element) => {
+  Component: (
+    {grow, width, height, src, shouldMirror, ...elemProps}: GraphicProps,
+    ref,
+    Element
+  ) => {
+    console.log(src.svg);
     return (
-      <Svg
-        type={CanvasIconTypes.Graphic}
-        as={Element}
-        ref={ref}
-        {...handleCsProp(
-          elemProps,
-          graphicStencil({
-            grow,
-            width: typeof width === 'number' ? px2rem(width) : width,
-            height: typeof height === 'number' ? px2rem(height) : height,
-          })
-        )}
-      />
+      <>
+        {src.url ? (
+          <Element
+            ref={ref}
+            {...handleCsProp(
+              elemProps,
+              graphicImageStencil({
+                width: number2rem(width),
+                height: number2rem(height),
+              })
+            )}
+          >
+            <img data-part="graphic-img" src={src.url} alt="" />
+          </Element>
+        ) : typeof src.svg === 'string' && src.svg ? (
+          <Svg
+            type={CanvasIconTypes.Graphic}
+            as={Element}
+            ref={ref}
+            shouldMirror={shouldMirror}
+            src={src as OldCanvasGraphic}
+            {...handleCsProp(
+              elemProps,
+              graphicStencil({
+                grow,
+                width: number2rem(width),
+                height: number2rem(height),
+              })
+            )}
+          />
+        ) : null}
+      </>
     );
   },
 });
