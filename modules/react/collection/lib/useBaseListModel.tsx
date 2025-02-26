@@ -5,7 +5,7 @@ import {useUniqueId, createModelHook, Generic} from '@workday/canvas-kit-react/c
 
 export type Orientation = 'horizontal' | 'vertical';
 
-export const defaultGetId = (item: any): string => {
+export const defaultGetId = (item: Generic): string => {
   if (process.env.NODE_ENV === 'development') {
     if (typeof item === 'object' && item.id === undefined) {
       console.warn(
@@ -16,9 +16,9 @@ export const defaultGetId = (item: any): string => {
   return typeof item === 'string' ? item : item.id || '';
 };
 
-export const defaultGetTextValue = (item: any): string => {
+export const defaultGetTextValue = (item: Generic): string => {
   if (process.env.NODE_ENV === 'development') {
-    if (typeof item === 'object' && item.id === undefined) {
+    if (typeof item === 'object' && item.text === undefined) {
       console.warn(
         "List item was an object, but no `getTextValue` was passed to the model to inform the list where to find the item's text value. The item's text value is used for accessibility. Please pass a `getTextValue` to the list model"
       );
@@ -98,15 +98,13 @@ export const useBaseListModel = createModelHook({
      * JSX, the list will create an internal array of items where `id` is the only property and the
      * default `getId` will return the desired result.
      */
-    getId: (item: Generic) =>
-      typeof item === 'string' ? item : item === undefined ? '' : (item.id as string),
+    getId: defaultGetId,
     /**
      * Optional function to return the text representation of an item. If not provided, the default
      * function will return the `text` property of the object of each item or an empty string if
      * there is no `text` property. If you did not provide `items`, do not override this function.
      */
-    getTextValue: (item: Generic) =>
-      (typeof item === 'string' ? item : item === undefined ? '' : item.text || '') as string,
+    getTextValue: defaultGetTextValue,
     /**
      * Array of all ids which are currently disabled. This is used for navigation to skip over items
      * which are not focusable.
