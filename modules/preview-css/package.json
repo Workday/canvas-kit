@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-preview-css",
-  "version": "12.3.3",
+  "version": "12.4.8",
   "description": "The parent module that contains all Workday Canvas Kit Preview CSS components",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",

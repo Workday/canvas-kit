@@ -4,13 +4,7 @@ import {jsx} from '@emotion/react';
 import * as React from 'react';
 
 import {borderRadius, CSSProperties, space, type} from '@workday/canvas-kit-react/tokens';
-import {
-  createContainer,
-  ExtractProps,
-  focusRing,
-  hideMouseFocus,
-  useIsRTL,
-} from '@workday/canvas-kit-react/common';
+import {createContainer, ExtractProps, focusRing, useIsRTL} from '@workday/canvas-kit-react/common';
 import {Flex} from '@workday/canvas-kit-react/layout';
 
 import {useBannerModel, useThemedPalette} from './hooks';
@@ -29,11 +23,10 @@ export interface BannerProps extends ExtractProps<typeof Flex, never> {
 const styles: CSSProperties = {
   cursor: 'pointer',
   transition: 'background-color 120ms',
-  '&:focus': {
+  '&:focus-visible, &.focus': {
     outline: 'none',
     ...focusRing({separation: 2}),
   },
-  ...hideMouseFocus,
 };
 
 /**

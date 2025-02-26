@@ -2,7 +2,7 @@
   "name": "@workday/canvas-kit-codemod",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
-  "version": "12.3.3",
+  "version": "12.4.8",
   "description": "A collection of codemods for use on Workday Canvas Kit packages.",
   "main": "dist/es6/index.js",
   "sideEffects": false,

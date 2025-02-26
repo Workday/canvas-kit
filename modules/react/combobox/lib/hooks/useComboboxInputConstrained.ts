@@ -62,20 +62,23 @@ export const useComboboxInputConstrained = createElemPropsHook(useComboboxModel)
     React.useImperativeHandle(
       formElementRef,
       () => {
-        if (formLocalRef.current) {
+        if (formLocalRef.current && userLocalRef.current) {
+          const formElement = formLocalRef.current;
+          const userElement = userLocalRef.current;
+
           // Hook into the DOM `value` property of the form input element and update the model
           // accordingly
-          Object.defineProperty(formLocalRef.current, 'value', {
+          Object.defineProperty(formElement, 'value', {
             get() {
               const value = Object.getOwnPropertyDescriptor(
-                Object.getPrototypeOf(formLocalRef.current),
+                Object.getPrototypeOf(formElement),
                 'value'
-              )?.get?.call(formLocalRef.current);
+              )?.get?.call(formElement);
               return value;
             },
             set(value: string) {
               if (
-                formLocalRef.current &&
+                formElement &&
                 value !==
                   (modelStateRef.current.selectedIds === 'all'
                     ? []
@@ -88,12 +91,20 @@ export const useComboboxInputConstrained = createElemPropsHook(useComboboxModel)
           });
 
           // forward calls to `.focus()` and `.blur()` to the user input
-          formLocalRef.current.focus = (options?: FocusOptions) => {
-            userLocalRef.current!.focus(options);
-          };
-          formLocalRef.current.blur = () => {
-            userLocalRef.current!.blur();
-          };
+          // https://github.com/testing-library/user-event/pull/1252 doesn't allow writable, but
+          // allows reconfiguration, so we use `Object.defineProperty`.
+          Object.defineProperty(formElement, 'focus', {
+            configurable: true,
+            writable: true,
+            value: (options: FocusOptions) => userElement!.focus(options),
+          });
+
+          Object.defineProperty(formElement, 'blur', {
+            configurable: true,
+            writable: true,
+            value: () => userElement!.blur(),
+          });
+          return formElement;
         }
         return formLocalRef.current!;
       },

@@ -79,6 +79,7 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^2.2.0",
     "prismjs": "^1.23.0",
+    "raw-loader": "^4.0.2",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-syntax-highlighter": "^15.5.0",
@@ -134,11 +135,12 @@
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
+    "@stackblitz/sdk": "^1.11.0",
     "@storybook/react-webpack5": "7.6.20",
     "@workday/canvas-accent-icons-web": "^3.0.9",
     "@workday/canvas-applet-icons-web": "^2.0.9",
     "@workday/canvas-system-icons-web": "^3.0.0",
-    "@workday/canvas-tokens-web": "^2.1.0",
+    "@workday/canvas-tokens-web": "^2.1.1",
     "jest-environment-jsdom": "^29.7.0",
     "ts-jest": "^29.2.4"
   },
@@ -147,6 +149,7 @@
     "braces": "3.0.3",
     "micromatch": "4.0.6",
     "jscodeshift": "0.14.0",
-    "puppeteer-core": "^13.7.0"
+    "puppeteer-core": "^13.7.0",
+    "loader-utils": "@1.4.1"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-popup-stack",
-  "version": "12.3.3",
+  "version": "12.4.8",
   "description": "Stack for managing popup UIs to coordinate global concerns like escape key handling and rendering order",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
