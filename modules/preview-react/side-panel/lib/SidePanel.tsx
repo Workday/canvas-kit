@@ -6,6 +6,7 @@ import {jsx, keyframes, CSSObject} from '@emotion/react';
 import {colors, depth} from '@workday/canvas-kit-react/tokens';
 import {SidePanelContext} from './hooks';
 import {SidePanelToggleButton} from './SidePanelToggleButton';
+import {px2rem} from '@workday/canvas-kit-styling';
 
 export type SidePanelVariant = 'standard' | 'alternate';
 export type SidePanelTransitionStates = 'collapsed' | 'collapsing' | 'expanded' | 'expanding';
@@ -99,6 +100,7 @@ const Panel = styled('section')({
   position: 'relative',
   boxSizing: 'border-box',
   height: '100%',
+  outline: `${px2rem(1)} solid transparent`,
 });
 
 export const SidePanel = createComponent('section')({

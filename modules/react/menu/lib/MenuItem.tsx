@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {createStencil} from '@workday/canvas-kit-styling';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 
 import {
@@ -98,8 +98,9 @@ export const menuItemStencil = createStencil({
     // Focus styles
     '&:is(.focus, :focus)': {
       color: brand.primary.accent,
-      outline: 'none',
       backgroundColor: brand.primary.base,
+      outline: `${px2rem(2)} solid transparent`,
+      outlineOffset: `-${px2rem(2)}`,
     },
 
     // Disabled styles

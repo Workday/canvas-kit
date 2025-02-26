@@ -10,6 +10,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {borderRadius, colors, inputColors, space} from '@workday/canvas-kit-react/tokens';
 import {LabelText} from '@workday/canvas-kit-react/text';
+import {px2rem} from '@workday/canvas-kit-styling';
 
 export interface RadioProps extends Themeable {
   /**
@@ -153,6 +154,8 @@ const RadioInput = styled('input')<RadioProps & StyledType>(
         borderWidth: '2px',
         borderColor: variant === 'inverse' ? colors.blackPepper400 : themeFocusOutline,
         boxShadow: 'none',
+        outline: `${px2rem(2)} solid transparent`,
+        outlineOffset: variant === 'inverse' ? '0' : '2px',
         ...focusRing({
           width: variant === 'inverse' ? 2 : 0,
           separation: 0,

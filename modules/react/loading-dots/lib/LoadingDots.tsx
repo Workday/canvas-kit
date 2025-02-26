@@ -1,7 +1,14 @@
 import * as React from 'react';
 import {system} from '@workday/canvas-tokens-web';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {handleCsProp, keyframes, CSProps, createStencil, calc} from '@workday/canvas-kit-styling';
+import {
+  handleCsProp,
+  keyframes,
+  CSProps,
+  createStencil,
+  calc,
+  px2rem,
+} from '@workday/canvas-kit-styling';
 
 /**
  * Keyframe for the dots loading animation.
@@ -42,6 +49,7 @@ export const loadingDotsStencil = createStencil({
       height: system.space.x4,
       fontSize: system.space.zero,
       borderRadius: system.shape.round,
+      outline: `${px2rem(2)} solid transparent`,
       transform: 'scale(0)',
       display: 'inline-block',
       animationName: keyframesLoading,

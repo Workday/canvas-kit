@@ -190,6 +190,13 @@ export const systemIconStencil = createStencil({
         cssVar(backgroundColor, 'transparent')
       ),
     },
+    // for Windows high contrast desktop themes
+    '@media (prefers-contrast: more)': {
+      '.wd-icon-fill, .wd-icon-accent': {
+        color: 'currentColor',
+        fill: 'currentColor',
+      },
+    },
   }),
 });
 
