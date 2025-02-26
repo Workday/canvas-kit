@@ -8,7 +8,7 @@ import {
   createElemPropsHook,
 } from '@workday/canvas-kit-react/common';
 import {getTransformFromPlacement} from '@workday/canvas-kit-react/popup';
-import {system, base} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 import {useMenuModel} from './useMenuModel';
 import {createStencil, calc, px2rem} from '@workday/canvas-kit-styling';
@@ -26,7 +26,7 @@ export const menuCardStencil = createStencil({
   },
   base: ({transformOriginVertical, transformOriginHorizontal, minWidth}) => ({
     ...system.type.subtext.large,
-    color: base.blackPepper300,
+    color: system.color.text.default,
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
