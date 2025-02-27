@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.4.9](https://github.com/Workday/canvas-kit/releases/tag/v12.4.9) (2025-02-27)
+
+### Documentation
+
+- docs: Fix BaseButton example ([#3158](https://github.com/Workday/canvas-kit/pull/3158)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v12.4.8](https://github.com/Workday/canvas-kit/releases/tag/v12.4.8) (2025-02-26)
 
 ### Documentation
