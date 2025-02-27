@@ -17,7 +17,7 @@ describe('Pill', () => {
         cy.checkA11y();
       });
 
-      it('should have two elements with a role of "button"', () => {
+      it('should render two pills with role "button"', () => {
         cy.findAllByRole('button').should('have.length', 2);
       });
 
