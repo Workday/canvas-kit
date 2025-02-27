@@ -12,6 +12,8 @@ import {useBannerModel, useThemedPalette} from './hooks';
 import {BannerIcon} from './BannerIcon';
 import {BannerLabel} from './BannerLabel';
 import {BannerActionText} from './BannerActionText';
+import {px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export interface BannerProps extends ExtractProps<typeof Flex, never> {
   /**
@@ -23,8 +25,9 @@ export interface BannerProps extends ExtractProps<typeof Flex, never> {
 const styles: CSSProperties = {
   cursor: 'pointer',
   transition: 'background-color 120ms',
+  outline: `${system.space.x1} solid transparent`,
   '&:focus-visible, &.focus': {
-    outline: 'none',
+    outline: `${px2rem(4)} double transparent`,
     ...focusRing({separation: 2}),
   },
 };
