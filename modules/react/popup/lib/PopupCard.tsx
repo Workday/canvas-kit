@@ -108,6 +108,7 @@ export const PopupCard = createSubcomponent('div')({
 
   return (
     <Card
+      as={Element}
       ref={ref}
       {...mergeStyles(elemProps, [
         popupCardStencil({
