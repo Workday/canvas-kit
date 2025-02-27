@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.4.10](https://github.com/Workday/canvas-kit/releases/tag/v12.4.10) (2025-02-27)
+
+### Components
+
+- fix: Addressed missing `as` prop on Popup.Card  ([#3157](https://github.com/Workday/canvas-kit/pull/3157)) ([@josh-bagwell](https://github.com/josh-bagwell))
+  Addressed issue with `Popup.Card`.
+
+
 ## [v12.4.9](https://github.com/Workday/canvas-kit/releases/tag/v12.4.9) (2025-02-27)
 
 ### Documentation
