@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.2.4](https://github.com/Workday/canvas-kit/releases/tag/v11.2.4) (2025-02-28)
+
+### Styling
+
+- fix: Support negative values ([#3160](https://github.com/Workday/canvas-kit/pull/3160)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v11.2.3](https://github.com/Workday/canvas-kit/releases/tag/v11.2.3) (2025-02-20)
 
 ### Components
