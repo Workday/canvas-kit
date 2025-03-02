@@ -34,29 +34,29 @@ export const expandableIconStencil = createStencil({
     {
       modifiers: {position: 'end', isExpanded: 'false'},
       styles: {
-        marginLeft: 'auto',
+        marginInlineStart: 'auto',
         transform: 'rotate(180deg)',
-        paddingRight: system.space.x3, // do I need these padding changes?
+        paddingInlineEnd: system.space.x3, // do I need these padding changes?
       },
     },
     {
       modifiers: {position: 'end', isExpanded: 'true'},
       styles: {
-        marginLeft: 'auto',
-        paddingLeft: system.space.x3, // do I need these padding changes?
+        marginInlineStart: 'auto',
+        paddingInlineStart: system.space.x3, // do I need these padding changes?
       },
     },
     {
       modifiers: {position: 'start', isExpanded: 'false'},
       styles: {
-        marginRight: system.space.x2,
+        marginInlineEnd: system.space.x2,
         transform: 'rotate(90deg)',
       },
     },
     {
       modifiers: {position: 'start', isExpanded: 'true'},
       styles: {
-        marginRight: system.space.x2,
+        marginInlineEnd: system.space.x2,
         transform: 'rotate(180deg)',
       },
     },
