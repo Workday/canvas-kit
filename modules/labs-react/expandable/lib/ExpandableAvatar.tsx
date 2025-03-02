@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {Avatar, AvatarProps} from '@workday/canvas-kit-react/avatar';
+import {Avatar, AvatarProps, avatarStencil} from '@workday/canvas-kit-react/avatar';
 import {system} from '@workday/canvas-tokens-web';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
@@ -9,6 +9,7 @@ import {mergeStyles} from '@workday/canvas-kit-react/layout';
 export interface ExpandableAvatarProps extends AvatarProps {}
 
 export const expandableAvatarStencil = createStencil({
+  extends: avatarStencil,
   base: {
     marginRight: system.space.x2,
     flexShrink: 0,
