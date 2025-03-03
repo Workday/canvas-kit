@@ -185,7 +185,6 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
           }
         }
       });
-      console.log(node.specifiers?.length);
 
       // if we removed all specifiers, remove the import
       if (!node.specifiers?.length) {

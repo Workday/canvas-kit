@@ -26,6 +26,7 @@ describe('createCanvasTheme', () => {
       },
     };
     const theme = createCanvasTheme(input);
+
     const expected = {...defaultCanvasTheme};
     expected.palette.primary = palette;
 
@@ -65,7 +66,6 @@ describe('createCanvasTheme', () => {
     const theme = createCanvasTheme(input);
     const expected = {...defaultCanvasTheme};
     expected.palette.primary.dark = 'black';
-
     expect(theme).toEqual(expected);
   });
 

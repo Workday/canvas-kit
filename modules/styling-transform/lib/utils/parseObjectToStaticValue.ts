@@ -137,6 +137,10 @@ export function parseStyleObjFromType(type: ts.Type, context: TransformerContext
   return type.getProperties().reduce((result, property) => {
     const declaration = property.valueDeclaration;
 
+    if (!declaration) {
+      return result;
+    }
+
     // we might have generics, so we'll use the type of the symbol instead of the type at the
     // declaration. This resolves generics like `T` into literal values if they exist.
     const propType = context.checker.getTypeOfSymbolAtLocation(property, declaration);

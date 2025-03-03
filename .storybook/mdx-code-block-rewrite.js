@@ -12,21 +12,17 @@ module.exports = function rewriteExampleCodeBlock(source) {
   const hasCanvas = /import {.*Canvas[,\s}]/.test(source);
   const hasStory = /import {.*Story[,\s}]/.test(source);
   const hasArgsTable = /import {.*ArgsTable[,\s}]/.test(source);
+  const hasSource = /import {.*Source[,\s}]/.test(source);
   const imports = [];
   if (!hasMeta) imports.push('Meta');
   if (!hasCanvas) imports.push('Canvas');
   if (!hasStory) imports.push('Story');
   if (!hasArgsTable) imports.push('ArgsTable');
+  if (!hasSource) imports.push('Source');
+
   return (
     (imports.length && hasSpecialBlocks
       ? `import {${imports.join(',')}} from '@storybook/addon-docs';\n\n`
-      : '') +
-    source
-      .replace(/\<ExampleCodeBlock code={([A-Za-z0-9]+)} \/\>/g, function replacer(match, p1, p2) {
-        return `<Canvas><Story name="${storyNameFromExport(
-          p1
-        )}" parameters={{storySource: {source: ${p1}.__RAW__}}}><${p1} /></Story></Canvas>`;
-      })
-      .replace(/\<PropsTable of=/g, '<ArgsTable of=')
+      : '') + source.replace(/\<PropsTable of=/g, '<ArgsTable of=')
   );
 };

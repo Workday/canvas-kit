@@ -3,6 +3,8 @@ import * as axe from 'axe-core';
 // @ts-ignore There are no type definitions for this import
 import * as supports from 'ally.js/supports/supports';
 
+import '@testing-library/cypress/add-commands';
+
 declare global {
   interface Window {
     axe: typeof axe;
@@ -10,7 +12,8 @@ declare global {
 }
 
 /**
- * Needed until https://github.com/avanslaars/cypress-axe/issues/10 is fixed
+ * Needed until https://github.com/avanslaars/cypress-axe/issues/10 is not fixed
+ * This is needed to inject axe to the page since it will not on it's own
  */
 Cypress.Commands.add('injectAxe', () => {
   cy.window({log: false}).then(window => {
@@ -24,7 +27,8 @@ Cypress.Commands.overwrite('visit', (originalFn, urlOrOptions, inputOptions = {}
   if (typeof urlOrOptions === 'object') {
     options = urlOrOptions;
   } else {
-    options = {url: urlOrOptions, ...inputOptions};
+    // @ts-ignore
+    options = {url: urlOrOptions as string, ...inputOptions};
   }
 
   return originalFn({
@@ -97,17 +101,25 @@ declare global {
 }
 
 export const haveAriaDescription = (text: string) => ($target: JQuery) => {
-  expect($target).to.have.attr('aria-describedby');
+  if ($target.attr('aria-describe')) {
+    expect($target).to.have.attr('aria-describe', text);
+  } else if ($target.attr('aria-describedby')) {
+    expect($target).to.have.attr('aria-describedby');
 
-  const id = $target.attr('aria-describedby');
-  const $descriptionEl = Cypress.$(`[id="${id}"]`);
-  if (!$descriptionEl.length) {
+    const id = $target.attr('aria-describedby');
+    const $descriptionEl = Cypress.$(`[id="${id}"]`);
+    if (!$descriptionEl.length) {
+      throw Error(
+        `Could not find an element with an id matching the aria-describedby: ${$target[0].outerHTML}`
+      );
+    }
+
+    expect($descriptionEl).to.have.text(text);
+  } else {
     throw Error(
-      `Could not find an element with an id matching the aria-describedby: ${$target[0].outerHTML}`
+      `Expected element to have an aria-describe or aria-describedby, but did not find one.`
     );
   }
-
-  expect($descriptionEl).to.have.text(text);
 };
 
 export const haveAriaLabel = (text: string) => ($target: JQuery) => {
@@ -123,12 +135,22 @@ export const haveAriaLabel = (text: string) => ($target: JQuery) => {
     }
 
     expect($labelledEl).to.have.text(text);
+  } else if ($target.attr('id')) {
+    const id = $target.attr('id');
+    const $labelledEl = Cypress.$(`label[for="${id}"]`);
+    if (!$labelledEl.length) {
+      throw Error(
+        `Could not found an element with an id matching the for:  ${$target[0].outerHTML}`
+      );
+    }
+
+    expect($labelledEl).to.have.text(text);
   } else {
     throw Error(`Expected element to have an aria-label or aria-labelledby, but did not find one.`);
   }
 };
 
-function isKeyOf<T>(obj: T, key: any): key is keyof T {
+function isKeyOf<T extends object>(obj: T, key: any): key is keyof T {
   return typeof key === 'string' && key in obj;
 }
 
