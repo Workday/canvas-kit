@@ -6,7 +6,7 @@ import {
   getTransformOrigin,
 } from '@workday/canvas-kit-react/common';
 
-import {createStencil, createVars, cssVar, keyframes} from '@workday/canvas-kit-styling';
+import {calc, createStencil, createVars, cssVar, keyframes} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 export interface TooltipContainerProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -73,7 +73,7 @@ export const tooltipContainerStencil = createStencil({
     '&:before': {
       content: '""',
       borderRadius: system.shape.x1,
-      zIndex: 1,
+      zIndex: '-1',
       margin: system.space.x1,
       backgroundColor: 'rgba(0,0,0,.85)',
       position: 'absolute',
@@ -116,7 +116,10 @@ export const tooltipContainerStencil = createStencil({
 export const TooltipContainer = createComponent('div')<TooltipContainerProps>({
   displayName: 'TooltipContainer',
   Component: ({children, transformOrigin = defaultTransformOrigin, ...elemProps}, ref, Element) => {
-    const translate = getTransformOrigin(transformOrigin, cssVar(system.space.x2));
+    const translate = getTransformOrigin(
+      transformOrigin || defaultTransformOrigin,
+      cssVar(system.space.x2)
+    );
     return (
       <Element
         ref={ref}
