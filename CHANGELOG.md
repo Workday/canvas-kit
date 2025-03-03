@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.4.10](https://github.com/Workday/canvas-kit/releases/tag/v12.4.10) (2025-02-27)
+
+### Components
+
+- fix: Addressed missing `as` prop on Popup.Card  ([#3157](https://github.com/Workday/canvas-kit/pull/3157)) ([@josh-bagwell](https://github.com/josh-bagwell))
+  Addressed issue with `Popup.Card`.
+
+
+## [v12.4.9](https://github.com/Workday/canvas-kit/releases/tag/v12.4.9) (2025-02-27)
+
+### Documentation
+
+- docs: Fix BaseButton example ([#3158](https://github.com/Workday/canvas-kit/pull/3158)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v12.4.8](https://github.com/Workday/canvas-kit/releases/tag/v12.4.8) (2025-02-26)
+
+### Documentation
+
+- docs: Fix Firefox hard-fail on markdown-to-jsx bug ([#3153](https://github.com/Workday/canvas-kit/pull/3153)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v12.4.7](https://github.com/Workday/canvas-kit/releases/tag/v12.4.7) (2025-02-25)
+
+### Infrastructure
+
+- fix(styling): Share a global Emotion instance between CK instances ([#3152](https://github.com/Workday/canvas-kit/pull/3152)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  This change shares an Emotion cache instance on the window object. This will fix style merge issues in edge cases where a bundle's base styles override override styles of another bundle. It is unlikely that anyone relies on this broken functionality, but if anyone does, styles may be different. This change will only affect style merging from this release on and will not affect any previous version, so it is an opt-in.
+
+
 ## [v12.4.6](https://github.com/Workday/canvas-kit/releases/tag/v12.4.6) (2025-02-24)
 
 ### Components
