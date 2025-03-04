@@ -31,6 +31,17 @@ describe('parseNodeToStaticValue', () => {
     expect(parseNodeToStaticValue(node, withDefaultContext(program.getTypeChecker()))).toEqual(12);
   });
 
+  it('should return the negative number value of a PrefixUnaryExpression NumericLiteral', () => {
+    const program = createProgramFromSource(`
+      -12
+    `);
+
+    const sourceFile = program.getSourceFile('test.ts')!;
+    const node = findNodes(sourceFile, '', ts.isPrefixUnaryExpression)![0];
+
+    expect(parseNodeToStaticValue(node, withDefaultContext(program.getTypeChecker()))).toEqual(-12);
+  });
+
   it('should return the string value of a string Identifier', () => {
     const program = createProgramFromSource(`
       const foo = 'bar';
