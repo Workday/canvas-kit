@@ -6,7 +6,7 @@ import {
   getTransformOrigin,
 } from '@workday/canvas-kit-react/common';
 
-import {calc, createStencil, createVars, cssVar, keyframes} from '@workday/canvas-kit-styling';
+import {createStencil, createVars, cssVar, keyframes} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 export interface TooltipContainerProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -73,7 +73,7 @@ export const tooltipContainerStencil = createStencil({
     '&:before': {
       content: '""',
       borderRadius: system.shape.x1,
-      zIndex: '-1',
+      zIndex: -1,
       margin: system.space.x1,
       backgroundColor: 'rgba(0,0,0,.85)',
       position: 'absolute',
@@ -136,20 +136,3 @@ export const TooltipContainer = createComponent('div')<TooltipContainerProps>({
     );
   },
 });
-
-// export const TooltipContainer = styled('div')<TooltipContainerProps>(
-
-//   ({transformOrigin = defaultTransformOrigin}) => {
-//     if (transformOrigin === null) {
-//       return {};
-//     }
-//     return {
-//       animation: tooltipAnimation(transformOrigin),
-//       animationDuration: '150ms',
-//       animationTimingFunction: 'ease-out',
-//       transformOrigin: transformOrigin
-//         ? `${transformOrigin.vertical} ${transformOrigin.horizontal}`
-//         : 'top center',
-//     };
-//   }
-// );
