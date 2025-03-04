@@ -5,7 +5,30 @@ import {Properties} from 'csstype';
 
 import {generateUniqueId} from './uniqueId';
 
-let _instance: ReturnType<typeof _createInstance>;
+function setGlobalInstance(
+  instance: ReturnType<typeof _createInstance>
+): ReturnType<typeof _createInstance> {
+  if (typeof window !== 'undefined') {
+    (window as any).workday = (window as any).workday || {};
+    (window as any).workday.__stylingCacheInstance = instance;
+  }
+  return instance;
+}
+
+/**
+ * There should only be a single global instance of an Emotion cache per page. Ideally,
+ * there's only once instance of Canvas Kit on the page, but that's not what happens in
+ * reality.  We'll use the window object to share an Emotion cache instance between any
+ * copies of Canvas Kit Styling to ensure consistent style merging.
+ *
+ */
+function getGlobalInstance(): ReturnType<typeof _createInstance> | undefined {
+  return typeof window !== 'undefined'
+    ? (window as any).workday?.__stylingCacheInstance
+    : undefined;
+}
+
+let _instance: ReturnType<typeof _createInstance> = getGlobalInstance()!;
 
 export const createStylesCache: Record<string, boolean> = {};
 
@@ -1203,7 +1226,7 @@ export function createStencil<
  */
 export function getInstance(): typeof _instance {
   if (!_instance) {
-    _instance = EmotionCSS;
+    _instance = setGlobalInstance(EmotionCSS);
   }
 
   return _instance;
@@ -1222,15 +1245,15 @@ export function getInstance(): typeof _instance {
  * other Canvas Kit components are imported.
  */
 export const createInstance: typeof _createInstance = options => {
-  if (!_instance) {
-    _instance = _createInstance({key: 'css', ...options});
-  } else {
+  if (_instance) {
     // @ts-ignore
     if (process.env.NODE_ENV === 'development') {
       console.warn(
         'An instance has already been created. `createInstance` cannot be called after styles have already been created. Canvas Kit styles are created immediately, so this function must be called before any Canvas Kit components are even imported.'
       );
     }
+  } else {
+    _instance = setGlobalInstance(_createInstance({key: 'css', ...options}));
   }
 
   return _instance;

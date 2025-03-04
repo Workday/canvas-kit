@@ -30,6 +30,7 @@ export const expandableTargetStencil = createStencil({
     [buttonStencil.vars.background]: system.color.bg.transparent,
     [buttonStencil.vars.border]: system.color.bg.transparent,
     [buttonStencil.vars.borderRadius]: system.shape.x1,
+    gap: 0,
     alignItems: 'flex-start',
     flexDirection: 'row',
     justifyContent: 'start',

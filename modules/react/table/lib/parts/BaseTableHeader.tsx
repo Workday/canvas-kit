@@ -1,13 +1,11 @@
 import React from 'react';
-import {GridProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-const tableHeaderStencil = createStencil({
+export const baseTableHeaderStencil = createStencil({
   base: {
-    display: 'grid',
-    alignItems: 'center',
     backgroundColor: system.color.bg.default,
     borderBottom: `${px2rem(1)} solid ${system.color.border.divider}`,
     justifyContent: 'start',
@@ -18,11 +16,11 @@ const tableHeaderStencil = createStencil({
   },
 });
 
-export const TableHeader = createComponent('th')({
+export const BaseTableHeader = createComponent('th')({
   displayName: 'Table.Header',
-  Component: ({children, ...elemProps}: GridProps, ref, Element) => {
+  Component: ({children, ...elemProps}: BoxProps, ref, Element) => {
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, tableHeaderStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, baseTableHeaderStencil())}>
         {children}
       </Element>
     );

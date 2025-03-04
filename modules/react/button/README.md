@@ -235,8 +235,8 @@ export const BasicButton = ({children, ...elemProps}: BasicButtonProps) => {
       {...elemProps}
     >
       <BaseButton.Label>{children}</BaseButton.Label>
-      <BaseButton.Icon icon={plusIcon}>
-    </StyledToggleButton>
+      <BaseButton.Icon icon={plusIcon} />
+    </BaseButton>
   );
 };
 ```
