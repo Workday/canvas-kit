@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.4.11](https://github.com/Workday/canvas-kit/releases/tag/v12.4.11) (2025-03-03)
+
+### Documentation
+
+- chore(collection): Add contextual message when ID can't be found ([#3155](https://github.com/Workday/canvas-kit/pull/3155)) ([@NicholasBoll](https://github.com/NicholasBoll), manuel.carrera)
+
+### Styling
+
+- fix: Support negative values ([#3160](https://github.com/Workday/canvas-kit/pull/3160)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v11.2.4](https://github.com/Workday/canvas-kit/releases/tag/v11.2.4) (2025-02-28)
+
+### Styling
+
+- fix: Support negative values ([#3160](https://github.com/Workday/canvas-kit/pull/3160)) ([@NicholasBoll](https://github.com/NicholasBoll))
 ## [v12.4.10](https://github.com/Workday/canvas-kit/releases/tag/v12.4.10) (2025-02-27)
 
 ### Components
