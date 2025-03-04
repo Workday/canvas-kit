@@ -25,19 +25,19 @@ export interface ExpandableTargetProps extends ExtractProps<typeof Flex, never> 
 }
 
 export const expandableTargetStencil = createStencil({
-  extends: buttonStencil,
   base: {
-    [buttonStencil.vars.background]: system.color.bg.transparent,
-    [buttonStencil.vars.border]: system.color.bg.transparent,
-    [buttonStencil.vars.borderRadius]: system.shape.x1,
-    gap: 0,
+    background: system.color.bg.transparent,
+    borderColor: system.color.bg.transparent,
+    borderRadius: system.shape.x1,
+    display: 'flex',
     alignItems: 'flex-start',
     flexDirection: 'row',
     justifyContent: 'start',
     padding: system.space.x2,
+    cursor: 'pointer',
     width: '100%',
     '&:hover': {
-      [buttonStencil.vars.background]: system.color.bg.alt.default,
+      backgroundColor: system.color.bg.alt.default,
     },
   },
 });
@@ -47,9 +47,7 @@ export const ExpandableTarget = createSubcomponent('button')({
   elemPropsHook: useExpandableTarget,
 })<ExpandableTargetProps>(({children, headingLevel, ...elementProps}, Element) => {
   const button = (
-    <BaseButton as={Element} {...mergeStyles(elementProps, expandableTargetStencil())}>
-      {children}
-    </BaseButton>
+    <Element {...mergeStyles(elementProps, expandableTargetStencil())}>{children}</Element>
   );
 
   return headingLevel ? (

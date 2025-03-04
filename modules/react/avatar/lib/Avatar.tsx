@@ -73,6 +73,7 @@ export const avatarStencil = createStencil({
     border: 0,
     overflow: 'hidden',
     cursor: 'default',
+    pointerEvents: 'none',
     borderRadius: system.shape.round,
     width: size,
     height: size,
@@ -82,6 +83,7 @@ export const avatarStencil = createStencil({
     },
     ':is(button)': {
       cursor: 'pointer',
+      pointerEvents: 'auto',
     },
     ['& > [data-part="avatar-icon"]']: {
       transition: 'opacity 150ms linear',
