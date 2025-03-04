@@ -35,7 +35,7 @@ export const expandableTargetStencil = createStencil({
     padding: system.space.x2,
     cursor: 'pointer',
     width: '100%',
-    '&:hover': {
+    '&:hover, &.hover': {
       backgroundColor: system.color.bg.alt.default,
     },
   },
