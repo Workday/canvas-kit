@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
-import {BaseButton, buttonStencil} from '@workday/canvas-kit-react/button';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Heading} from '@workday/canvas-kit-react/text';
 import {createStencil} from '@workday/canvas-kit-styling';
