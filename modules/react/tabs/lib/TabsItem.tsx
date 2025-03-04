@@ -127,7 +127,6 @@ export const StyledTabItem = styled(Box.as('button'))<StyledType & Pick<TabsItem
       [systemIconStencil.vars.color]: theme.canvas.palette.primary.main,
       '&:after': {
         position: 'absolute',
-        height: space.xxxs,
         // fallback for Windows high contrast theme
         borderBottom: `${space.xxxs} solid transparent`,
         borderRadius: `${borderRadius.m} ${borderRadius.m} 0px 0px`,
