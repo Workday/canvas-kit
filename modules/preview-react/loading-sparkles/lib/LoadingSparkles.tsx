@@ -67,6 +67,13 @@ const loadingSparklesIconStyles = createStyles({
   '&:nth-child(3)': {
     animationDelay: `calc(${ANIMATION_DURATION_MS}ms * (2/3))`,
   },
+  // for Windows high contrast desktop themes
+  '@media (prefers-contrast: more)': {
+    '.wd-sparkle-fill': {
+      color: 'currentColor',
+      fill: 'currentColor',
+    },
+  },
 });
 
 /**

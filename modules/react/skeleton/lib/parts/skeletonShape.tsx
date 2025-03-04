@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 
 import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
 import {colors, space} from '@workday/canvas-kit-react/tokens';
+import {px2rem} from '@workday/canvas-kit-styling';
 
 export interface SkeletonShapeProps {
   /**
@@ -31,6 +32,8 @@ const Shape = styled('div')<SkeletonShapeProps & StyledType>(
   ({backgroundColor, borderRadius, height, width}) => ({
     backgroundColor,
     borderRadius,
+    outline: `${px2rem(1)} solid transparent`,
+    outlineOffset: `-${px2rem(1)}`,
     height,
     width,
     marginBottom: space.s,
