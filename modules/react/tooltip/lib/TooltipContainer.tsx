@@ -6,8 +6,8 @@ import {
   getTransformOrigin,
 } from '@workday/canvas-kit-react/common';
 
-import {createStencil, createVars, cssVar, keyframes} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {calc, createStencil, createVars, cssVar, keyframes} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 export interface TooltipContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -60,13 +60,13 @@ export const tooltipContainerStencil = createStencil({
     display: 'inline-flex',
     position: 'relative',
     padding: system.space.x3,
-    color: base.frenchVanilla100,
+    color: system.color.text.inverse,
     animationName: tooltipAnimation,
     animationDuration: '150ms',
     animationTimingFunction: 'ease-out',
     transformOrigin: `${tooltipTransformOriginVertical} ${tooltipTransformOriginHorizontal}`,
     a: {
-      color: base.frenchVanilla100,
+      color: system.color.text.inverse,
       textDecoration: 'underline',
     },
     // use :before vs margin to increase the tooltip hit-box
@@ -75,7 +75,7 @@ export const tooltipContainerStencil = createStencil({
       borderRadius: system.shape.x1,
       zIndex: -1,
       margin: system.space.x1,
-      backgroundColor: 'rgba(0,0,0,.85)',
+      backgroundColor: system.color.bg.translucent,
       position: 'absolute',
       top: 0,
       left: 0,
@@ -85,9 +85,9 @@ export const tooltipContainerStencil = createStencil({
 
     // offset tooltips by 2 pixels when a keyboard focus ring is detected
     '[data-whatinput=keyboard] &': {
-      padding: `calc(${system.space.x4} - 0.125rem)`,
+      padding: `calc(${system.space.x4} - ${calc.divide(system.space.x1, 2)})`,
       '&:before': {
-        margin: `calc(${system.space.x1} + 0.125rem)`,
+        margin: `calc(${system.space.x1} + ${calc.divide(system.space.x1, 2)})`,
       },
     },
 
