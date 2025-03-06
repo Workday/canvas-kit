@@ -84,7 +84,7 @@ export const tooltipContainerStencil = createStencil({
     },
 
     // offset tooltips by 2 pixels when a keyboard focus ring is detected
-    '[data-whatinput=keyboard] &': {
+    'body:has(:focus-visible) &': {
       padding: `calc(${system.space.x4} - ${calc.divide(system.space.x1, 2)})`,
       '&:before': {
         margin: `calc(${system.space.x1} + ${calc.divide(system.space.x1, 2)})`,
