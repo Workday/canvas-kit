@@ -111,7 +111,6 @@ export const Graphic = createComponent('span')({
     ref,
     Element
   ) => {
-    console.log(src.svg);
     return (
       <>
         {src.url ? (
