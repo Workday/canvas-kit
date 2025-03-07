@@ -3,7 +3,7 @@ import {CanvasIconTypes, CanvasGraphic as OldCanvasGraphic} from '@workday/desig
 import {CSSObject} from '@emotion/styled';
 import {Svg, SvgProps, svgStencil} from './Svg';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, CSProps, handleCsProp, number2rem} from '@workday/canvas-kit-styling';
+import {createStencil, CSProps, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 
 /**
  * @deprecated Interface `GraphicStyles` will be removed in a future version. `grow` prop will be moved inside `GraphicProps`.
@@ -113,20 +113,21 @@ export const Graphic = createComponent('span')({
   ) => {
     return (
       <>
-        {src.url ? (
+        {typeof src.url === 'string' && src.url && (
           <Element
             ref={ref}
             {...handleCsProp(
               elemProps,
               graphicImageStencil({
-                width: number2rem(width),
-                height: number2rem(height),
+                width: px2rem(width),
+                height: px2rem(height),
               })
             )}
           >
             <img data-part="graphic-img" src={src.url} alt="" />
           </Element>
-        ) : typeof src.svg === 'string' && src.svg ? (
+        )}
+        {typeof src.svg === 'string' && src.svg && (
           <Svg
             type={CanvasIconTypes.Graphic}
             as={Element}
@@ -137,12 +138,12 @@ export const Graphic = createComponent('span')({
               elemProps,
               graphicStencil({
                 grow,
-                width: number2rem(width),
-                height: number2rem(height),
+                width: px2rem(width),
+                height: px2rem(height),
               })
             )}
           />
-        ) : null}
+        )}
       </>
     );
   },

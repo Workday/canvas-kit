@@ -126,7 +126,7 @@ export const GraphicStory = {
   component: Graphic,
   render: () => (
     <div className="story">
-      <Graphic src={graphicExample} cs={{width: 40}} />
+      <Graphic id="foo" src={graphicExample} />
       <br />
       <Graphic src={graphicExample} width={120} />
       <div style={{width: 100}}>
