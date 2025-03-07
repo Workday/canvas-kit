@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.4.12](https://github.com/Workday/canvas-kit/releases/tag/v12.4.12) (2025-03-07)
+
+### Components
+
+- fix: Remove console log ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v12.4.11](https://github.com/Workday/canvas-kit/releases/tag/v12.4.11) (2025-03-03)
 
 ### Documentation
