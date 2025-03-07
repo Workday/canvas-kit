@@ -1,4 +1,4 @@
-export {defaultGetId, Item} from './lib/useBaseListModel';
+export {defaultGetId, type Item, type Orientation} from './lib/useBaseListModel';
 export * from './lib/useListItemRegister';
 export * from './lib/useOverflowListMeasure';
 export * from './lib/useOverflowListItemMeasure';
@@ -18,11 +18,20 @@ export * from './lib/useListItemAllowChildStrings';
 export * from './lib/useListItemRemoveOnDeleteKey';
 export * from './lib/focusOnCurrentCursor';
 export * from './lib/listItemRemove';
-export {ListBox, ListBoxProps} from './lib/ListBox';
+export {ListBox, type ListBoxProps} from './lib/ListBox';
 export {keyboardEventToCursorEvents} from './lib/keyUtils';
 export {
   singleSelectionManager,
   multiSelectionManager,
   isSelected,
+  type SelectedIds,
+  type Selection,
+  type SelectionManager,
 } from './lib/useSelectionListModel';
-export {wrappingNavigationManager, navigationManager} from './lib/useCursorListModel';
+export {
+  wrappingNavigationManager,
+  navigationManager,
+  type NavigationManager,
+  type NavigationRequestor,
+} from './lib/useCursorListModel';
+export {VirtualItem, ScrollToOffsetOptions} from './lib/react-virtual';
