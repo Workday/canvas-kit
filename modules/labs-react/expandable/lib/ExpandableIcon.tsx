@@ -36,14 +36,14 @@ export const expandableIconStencil = createStencil({
       styles: {
         marginInlineStart: 'auto',
         transform: 'rotate(180deg)',
-        paddingInlineEnd: system.space.x3, // do I need these padding changes?
+        paddingInlineEnd: system.space.x3,
       },
     },
     {
       modifiers: {position: 'end', isExpanded: 'true'},
       styles: {
         marginInlineStart: 'auto',
-        paddingInlineStart: system.space.x3, // do I need these padding changes?
+        paddingInlineStart: system.space.x3,
       },
     },
     {
@@ -51,6 +51,9 @@ export const expandableIconStencil = createStencil({
       styles: {
         marginInlineEnd: system.space.x2,
         transform: 'rotate(90deg)',
+        ':dir(rtl)': {
+          transform: 'rotate(-90deg)',
+        },
       },
     },
     {
