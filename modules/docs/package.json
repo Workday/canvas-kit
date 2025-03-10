@@ -44,6 +44,7 @@
   "dependencies": {
     "@emotion/styled": "^11.6.0",
     "@storybook/csf": "0.0.1",
+    "@stackblitz/sdk": "^1.11.0",
     "@workday/canvas-kit-labs-react": "^12.4.13",
     "@workday/canvas-kit-preview-react": "^12.4.13",
     "@workday/canvas-kit-react": "^12.4.13",
