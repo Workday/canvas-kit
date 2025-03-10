@@ -13,7 +13,6 @@ import {SidePanelToggleButton} from './SidePanelToggleButton';
 
 export type SidePanelVariant = 'standard' | 'alternate';
 export type SidePanelTransitionStates = 'collapsed' | 'collapsing' | 'expanded' | 'expanding';
-export type SidePanelOrigin = 'left' | 'right';
 
 export interface SidePanelProps {
   /**
@@ -38,7 +37,7 @@ export interface SidePanelProps {
    *
    * @default 'left'
    */
-  origin?: SidePanelOrigin;
+  origin?: 'left' | 'right';
   /**
    * The function called when the side panel's `expanded` state changes. States like `'collapsing'` and `'expanding'` are tracked in another callback: `onStateTransition`
    *
@@ -107,7 +106,6 @@ export const panelStencil = createStencil({
   base: () => ({
     overflow: 'hidden',
     position: 'relative',
-    boxSizing: 'border-box',
     height: '100%',
   }),
   modifiers: {
