@@ -144,7 +144,7 @@ export const SidePanelToggleButton = createComponent('button')({
             elemProps,
             sidePanelToggleButtonStencil({
               state: context.state as SidePanelTransitionStates,
-              rtlOrigin: rtlOrigin,
+              rtlOrigin: rtlOrigin as 'left' | 'right',
             })
           )}
         />
