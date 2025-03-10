@@ -30,9 +30,20 @@ export const expandableIconStencil = createStencil({
   base: {
     padding: system.space.x1,
   },
+  modifiers: {
+    isExpanded: {
+      true: {},
+      false: {},
+    },
+    position: {
+      start: {},
+      end: {},
+      only: {},
+    },
+  },
   compound: [
     {
-      modifiers: {position: 'end', isExpanded: 'false'},
+      modifiers: {position: 'end', isExpanded: false},
       styles: {
         marginInlineStart: 'auto',
         transform: 'rotate(180deg)',
@@ -40,14 +51,14 @@ export const expandableIconStencil = createStencil({
       },
     },
     {
-      modifiers: {position: 'end', isExpanded: 'true'},
+      modifiers: {position: 'end', isExpanded: true},
       styles: {
         marginInlineStart: 'auto',
         paddingInlineStart: system.space.x3,
       },
     },
     {
-      modifiers: {position: 'start', isExpanded: 'false'},
+      modifiers: {position: 'start', isExpanded: false},
       styles: {
         marginInlineEnd: system.space.x2,
         transform: 'rotate(90deg)',
@@ -57,7 +68,7 @@ export const expandableIconStencil = createStencil({
       },
     },
     {
-      modifiers: {position: 'start', isExpanded: 'true'},
+      modifiers: {position: 'start', isExpanded: true},
       styles: {
         marginInlineEnd: system.space.x2,
         transform: 'rotate(180deg)',
@@ -76,7 +87,7 @@ export const ExpandableIcon = createSubcomponent('span')({
       icon={icon || chevronUpIcon}
       {...mergeStyles(
         elementProps,
-        expandableIconStencil({position: iconPosition, isExpanded: visible ? 'true' : 'false'})
+        expandableIconStencil({position: iconPosition, isExpanded: visible})
       )}
     />
   );
