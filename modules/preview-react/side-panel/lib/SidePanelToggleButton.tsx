@@ -6,7 +6,7 @@ import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {SidePanelContext} from './hooks';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {SidePanelOrigin, SidePanelTransitionStates} from './SidePanel';
+import {SidePanelTransitionStates} from './SidePanel';
 
 export interface SidePanelToggleButtonProps extends ExtractProps<typeof TertiaryButton, never> {
   /**
@@ -119,14 +119,14 @@ export const SidePanelToggleButton = createComponent('button')({
   }: SidePanelToggleButtonProps) {
     const context = React.useContext(SidePanelContext);
 
-    const useRTLOrigin = (): SidePanelOrigin => {
+    const useRTLOrigin = () => {
       const isRTL = useIsRTL();
       // if the direction is set to RTl, flip the origin
       if (isRTL) {
         return context.origin === 'left' ? 'right' : 'left';
       }
       // Otherwise, default to returning the origin
-      return context.origin as SidePanelOrigin;
+      return context.origin;
     };
 
     const rtlOrigin = useRTLOrigin();
