@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.4.13](https://github.com/Workday/canvas-kit/releases/tag/v12.4.13) (2025-03-10)
+
+### Documentation
+
+- docs: Add Snapshot serializers to ignore hashes ([#3166](https://github.com/Workday/canvas-kit/pull/3166)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v12.4.12](https://github.com/Workday/canvas-kit/releases/tag/v12.4.12) (2025-03-07)
 
 ### Components
