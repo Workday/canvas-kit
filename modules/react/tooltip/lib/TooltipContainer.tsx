@@ -99,16 +99,16 @@ export const tooltipContainerStencil = createStencil({
 
     // Fix offsets based on placement
     '[data-popper-placement="top-start"] &, [data-popper-placement="bottom-start"] &': {
-      left: `-${system.space.x1}`,
+      left: calc.negate(system.space.x1),
     },
     '[data-popper-placement="top-end"] &, [data-popper-placement="bottom-end"] &': {
-      right: `-${system.space.x1}`,
+      right: calc.negate(system.space.x1),
     },
     '[data-popper-placement="left-start"] &, [data-popper-placement="right-start"] &': {
-      top: `-${system.space.x1}`,
+      top: calc.negate(system.space.x1),
     },
     '[data-popper-placement="left-end"] &, [data-popper-placement="right-end"] &': {
-      bottom: `-${system.space.x1}`,
+      bottom: calc.negate(system.space.x1),
     },
   }),
 });
