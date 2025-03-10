@@ -28,6 +28,7 @@ export const expandableTargetStencil = createStencil({
     background: system.color.bg.transparent,
     borderColor: system.color.bg.transparent,
     borderRadius: system.shape.x1,
+    borderWidth: 0,
     display: 'flex',
     alignItems: 'flex-start',
     flexDirection: 'row',
