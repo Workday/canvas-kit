@@ -95,56 +95,48 @@ export const graphicImageStencil = createStencil({
     height: '',
   },
   base: ({width, height}) => ({
-    width,
-    height,
     '& [data-part="graphic-img"]': {
+      width,
+      height,
       maxWidth: '100%',
       maxHeight: '100%',
     },
   }),
+  modifiers: {
+    grow: {
+      true: {
+        '& [data-part="graphic-img"]': {
+          width: '100%',
+        },
+      },
+    },
+  },
 });
 
 export const Graphic = createComponent('span')({
   displayName: 'Graphic',
   Component: (
-    {grow, width, height, src, shouldMirror, ...elemProps}: GraphicProps,
+    {grow = false, width, height, src, shouldMirror, ...elemProps}: GraphicProps,
     ref,
     Element
   ) => {
     return (
-      <>
-        {typeof src.url === 'string' && src.url && (
-          <Element
-            ref={ref}
-            {...handleCsProp(
-              elemProps,
-              graphicImageStencil({
-                width: px2rem(width),
-                height: px2rem(height),
-              })
-            )}
-          >
-            <img data-part="graphic-img" src={src.url} alt="" />
-          </Element>
+      <Element
+        ref={ref}
+        {...handleCsProp(
+          elemProps,
+          graphicImageStencil({
+            grow,
+            width: typeof width === 'number' ? px2rem(width) : width,
+            height: typeof height === 'number' ? px2rem(height) : height,
+          })
         )}
-        {typeof src.svg === 'string' && src.svg && (
-          <Svg
-            type={CanvasIconTypes.Graphic}
-            as={Element}
-            ref={ref}
-            shouldMirror={shouldMirror}
-            src={src as OldCanvasGraphic}
-            {...handleCsProp(
-              elemProps,
-              graphicStencil({
-                grow,
-                width: px2rem(width),
-                height: px2rem(height),
-              })
-            )}
-          />
-        )}
-      </>
+      >
+        <img
+          data-part="graphic-img"
+          src={src.svg ? `data:image/svg+xml;base64,${btoa(src.svg)}` : src.url}
+        />
+      </Element>
     );
   },
 });
