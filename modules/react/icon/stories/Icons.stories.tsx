@@ -2,7 +2,6 @@ import * as React from 'react';
 import {shieldIcon} from '@workday/canvas-accent-icons-web';
 import {benefitsIcon} from '@workday/canvas-applet-icons-web';
 import {CanvasIconTypes, CanvasGraphic} from '@workday/design-assets-types';
-import {CanvasGraphic as CanvasGraphicWithUrl} from '@workday/canvas-kit-react/icon';
 
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {AccentIcon, AppletIcon, SystemIcon, SystemIconCircle, Graphic} from '../index';
@@ -18,12 +17,7 @@ const graphicExample: CanvasGraphic = {
   category: '',
   tags: [],
 };
-const graphicExampleWithURL: CanvasGraphicWithUrl = {
-  name: 'badgeAchievement',
-  type: CanvasIconTypes.Graphic,
-  filename: 'wd-graphic-badge-achievement.svg',
-  category: '',
-  tags: [],
+const graphicExampleWithURL = {
   url: 'https://wd5.myworkday.com/wday/asset/canvas-graphics-web/5.0.7/wd-graphic-learning-welcome-desktop.svg',
 };
 
@@ -133,10 +127,10 @@ export const GraphicStory = {
         <Graphic src={graphicExample} grow={true} />
       </div>
       <div style={{width: 400}}>
-        <Graphic src={graphicExample} grow={true} shouldMirror={true} />
+        <Graphic src={graphicExample} grow={true} />
       </div>
       <div style={{width: 400}}>
-        <Graphic src={graphicExampleWithURL} shouldMirror={true} />
+        <Graphic src={graphicExampleWithURL} />
       </div>
     </div>
   ),

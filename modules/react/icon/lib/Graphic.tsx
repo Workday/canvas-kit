@@ -1,9 +1,9 @@
 import * as React from 'react';
-import {CanvasIconTypes, CanvasGraphic as OldCanvasGraphic} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
-import {Svg, SvgProps, svgStencil} from './Svg';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, CSProps, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {svgStencil} from './Svg';
+import {createStencil, CSProps, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {BoxProps} from '../../layout';
 
 /**
  * @deprecated Interface `GraphicStyles` will be removed in a future version. `grow` prop will be moved inside `GraphicProps`.
@@ -26,21 +26,14 @@ export interface GraphicStyles {
   grow?: boolean;
 }
 
-export interface CanvasGraphic {
-  name: string;
-  type: CanvasIconTypes;
-  svg?: string;
-  filename: string;
-  category?: string;
-  tags?: string[];
-  url?: string;
-}
-
-export interface GraphicProps extends GraphicStyles, Pick<SvgProps, 'shouldMirror'>, CSProps {
-  /**
-   * The graphic to display from `@workday/canvas-graphics-web`.
-   */
-  src: CanvasGraphic;
+export interface GraphicProps extends CSProps {
+  height?: number | string;
+  width?: number | string;
+  grow?: boolean;
+  src: {
+    svg?: string;
+    url?: string;
+  };
 }
 
 /**
@@ -76,6 +69,9 @@ export const graphicStyles = ({width, height, grow}: GraphicStyles): CSSObject =
   return {};
 };
 
+/**
+ * @deprecated `graphicStencil` will be removed in a future version. Use `graphicImageStencil` instead.
+ */
 export const graphicStencil = createStencil({
   extends: svgStencil,
   base: {},
@@ -115,11 +111,7 @@ export const graphicImageStencil = createStencil({
 
 export const Graphic = createComponent('span')({
   displayName: 'Graphic',
-  Component: (
-    {grow = false, width, height, src, shouldMirror, ...elemProps}: GraphicProps,
-    ref,
-    Element
-  ) => {
+  Component: ({grow = false, width, height, src, ...elemProps}: GraphicProps, ref, Element) => {
     return (
       <Element
         ref={ref}
