@@ -25,7 +25,7 @@ export const MDX = createComponent('div')({
  */
 const Button = (props: any) => {
   const components = useMDXComponents();
-  if (props['data-symbol'] !== undefined) {
+  if (props['data-symbol'] !== undefined && props.children) {
     return (
       <code>
         <SymbolDialog
@@ -49,8 +49,8 @@ const Button = (props: any) => {
 function convertLinkToSymbolLinks(input: string): string {
   return input.replace(
     /{@link ([a-z0-9.]+)( [a-z0-9.]+)?}/gi,
-    (substr, symbol, text = '') =>
-      `<button href="#" data-symbol="${text.trim()}" class="token symbol">${symbol}</button>`
+    (_substr, symbol, text = '') =>
+      `<button data-symbol="${text.trim()}" className="token symbol">${symbol}</button>`
   );
 }
 

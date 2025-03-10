@@ -35,6 +35,15 @@ export function parseNodeToStaticValue(
     return parseFloat(node.text);
   }
 
+  // -12
+  if (
+    ts.isPrefixUnaryExpression(node) &&
+    node.operator === ts.SyntaxKind.MinusToken &&
+    ts.isNumericLiteral(node.operand)
+  ) {
+    return -parseFloat(node.operand.text);
+  }
+
   // undefined
   if (ts.isIdentifier(node) && node.text === 'undefined') {
     return 'undefined';
