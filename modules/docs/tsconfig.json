@@ -1,4 +1,4 @@
 {
   "extends": "../../tsconfig.json",
-  "exclude": ["node_modules", "ts-tmp", "dist", "**/spec", "**/fixtures", "**/stories"]
+  "exclude": ["node_modules", "ts-tmp", "dist", "**/spec", "**/fixtures", "**/stories", "**/lib/stackblitz"]
 }
