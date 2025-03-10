@@ -1,11 +1,10 @@
 import React from 'react';
-import {GridProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {createStencil} from '@workday/canvas-kit-styling';
 
-const tableBodyStencil = createStencil({
+export const baseTableBodyStencil = createStencil({
   base: {
-    display: 'grid',
     'tr ': {
       '&:last-of-type': {
         'td, th': {
@@ -29,11 +28,11 @@ const tableBodyStencil = createStencil({
   },
 });
 
-export const TableBody = createComponent('tbody')({
+export const BaseTableBody = createComponent('tbody')({
   displayName: 'Table.Body',
-  Component: ({children, ...elemProps}: GridProps, ref, Element) => {
+  Component: ({children, ...elemProps}: BoxProps, ref, Element) => {
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, tableBodyStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, baseTableBodyStencil())}>
         {children}
       </Element>
     );
