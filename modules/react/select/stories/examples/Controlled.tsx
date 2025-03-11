@@ -22,10 +22,11 @@ const options = [
 ];
 
 export const Controlled = () => {
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState('fax');
   const [label, setLabel] = React.useState('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('change', event.currentTarget.value);
     setValue(event.currentTarget.value);
     setLabel(options.find(item => item.serverId === event.currentTarget.value)?.label || '');
   };
@@ -35,7 +36,12 @@ export const Controlled = () => {
       <FormField>
         <FormField.Label>Contact</FormField.Label>
         <FormField.Field>
-          <Select items={options} getId={item => item.serverId} getTextValue={item => item.label}>
+          <Select
+            items={options}
+            getId={item => item.serverId}
+            getTextValue={item => item.label}
+            initialSelectedIds={[value]}
+          >
             <FormField.Input
               as={Select.Input}
               onChange={handleChange}

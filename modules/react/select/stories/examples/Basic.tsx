@@ -22,6 +22,7 @@ export const Basic = () => {
   const [value, setValue] = React.useState('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('change', event.currentTarget.value);
     setValue(event.target.value);
   };
 
@@ -30,7 +31,7 @@ export const Basic = () => {
       <FormField>
         <FormField.Label>Contact</FormField.Label>
         <FormField.Field>
-          <Select items={options}>
+          <Select items={options} initialSelectedIds={['Phone']}>
             <FormField.Input as={Select.Input} onChange={handleChange} />
             <Select.Popper>
               <Select.Card>

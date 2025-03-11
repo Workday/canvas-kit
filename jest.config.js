@@ -9,6 +9,8 @@ module.exports = {
   transformIgnorePatterns: ['<rootDir>/node_modules/'],
   clearMocks: true,
   reporters: ['default', ['jest-junit', {suiteName: 'Canvas Kit tests'}]],
-  testURL: 'http://localhost',
   setupFiles: ['core-js'],
+  testEnvironmentOptions: {
+    url: 'http://localhost',
+  },
 };
