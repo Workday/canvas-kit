@@ -5,7 +5,6 @@ import {Menu} from '@workday/canvas-kit-react/menu';
 
 import {useComboboxModel} from './hooks/useComboboxModel';
 import {ComboboxMenuList} from './ComboboxMenuList';
-import {ComboboxMenuItem} from './ComboboxMenuItem';
 import {ComboboxCard} from './ComboboxCard';
 import {ComboboxMenuPopper} from './ComboboxPopper';
 
@@ -54,7 +53,7 @@ export const ComboboxMenu = createSubcomponent()({
      * `Combobox.Menu.List` and will be passed to the optional `onSelect` callback of the
      * `ComboboxModel`. `Combobox.Menu.Item` can contain any HTML.
      */
-    Item: ComboboxMenuItem,
+    Item: Menu.Option,
     /**
      * `Combobox.Menu.Card` is a non-semantic element used to give the dropdown menu its distinct visual
      * cue that the dropdown menu is floating above other content. `Combobox.Menu.Card` usually contains a

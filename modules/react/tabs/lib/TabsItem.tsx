@@ -3,7 +3,6 @@ import * as React from 'react';
 import {colors, space, type, borderRadius, iconColors} from '@workday/canvas-kit-react/tokens';
 import {
   focusRing,
-  hideMouseFocus,
   styled,
   StyledType,
   slugify,
@@ -99,16 +98,14 @@ export const StyledTabItem = styled(Box.as('button'))<StyledType & Pick<TabsItem
     borderRadius: `${borderRadius.m} ${borderRadius.m} 0px 0px`,
     transition: 'background 150ms ease, color 150ms ease',
 
-    ...hideMouseFocus,
-
-    '&:hover, &:focus': {
+    '&:hover, &:focus-visible, &.hover, &.focus': {
       backgroundColor: colors.soap200,
       color: colors.blackPepper400,
 
       [systemIconStencil.vars.color]: iconColors.hover,
     },
 
-    '&:focus': {
+    '&:focus-visible, &.focus': {
       outline: `none`,
       ...focusRing({inset: 'outer', width: 0, separation: 2}, theme),
     },

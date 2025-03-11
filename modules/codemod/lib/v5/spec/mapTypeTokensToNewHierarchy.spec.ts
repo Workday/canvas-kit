@@ -1,5 +1,6 @@
 import {expectTransformFactory} from './expectTransformFactory';
 import transformer from '../mapTypeTokensToNewHierarchy';
+import {stripIndent} from 'common-tags';
 const context = describe;
 
 const expectTransform = expectTransformFactory(transformer);
@@ -403,7 +404,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         });
 
         it('should properly transform JSX styles', () => {
-          const input = `
+          const input = stripIndent`
             import canvas from '@workday/canvas-kit-react/tokens';
 
             const Buttons = () => {
@@ -418,12 +419,12 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
               );
             }
           `;
-          const expected = `
+          const expected = stripIndent`
             import canvas from '@workday/canvas-kit-react/tokens';
 
             const Buttons = () => {
               return (
-                <div>
+                (<div>
                   <button css={{
                     fontWeight: canvas.type.properties.fontWeights.bold
                   }}>button</button>
@@ -431,7 +432,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
                     fontWeight: canvas.type.properties.fontWeights.bold,
                     display: 'block'
                   }}>button</button>
-                </div>
+                </div>)
               );
             }
           `;
@@ -578,7 +579,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
 
             const Labels = () => {
               return (
-                <div>
+                (<div>
                   <label css={{
                     fontWeight: canvas.type.properties.fontWeights.medium
                   }}>label</label>
@@ -586,7 +587,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
                     fontWeight: canvas.type.properties.fontWeights.medium,
                     display: 'block'
                   }}>label</label>
-                </div>
+                </div>)
               );
             }
           `;
@@ -1101,7 +1102,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
 
             const Buttons = () => {
               return (
-                <div>
+                (<div>
                   <button css={{
                     fontWeight: canvasType.properties.fontWeights.bold
                   }}>button</button>
@@ -1109,7 +1110,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
                     fontWeight: canvasType.properties.fontWeights.bold,
                     display: 'block'
                   }}>button</button>
-                </div>
+                </div>)
               );
             }
           `;
@@ -1256,7 +1257,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
 
             const Labels = () => {
               return (
-                <div>
+                (<div>
                   <label css={{
                     fontWeight: canvasType.properties.fontWeights.medium
                   }}>label</label>
@@ -1264,7 +1265,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
                     fontWeight: canvasType.properties.fontWeights.medium,
                     display: 'block'
                   }}>label</label>
-                </div>
+                </div>)
               );
             }
           `;
@@ -1863,7 +1864,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
 
             const Buttons = () => {
               return (
-                <div>
+                (<div>
                   <button css={{
                     fontWeight: canvasType.properties.fontWeights.bold
                   }}>button</button>
@@ -1871,7 +1872,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
                     fontWeight: canvasType.properties.fontWeights.bold,
                     display: 'block'
                   }}>button</button>
-                </div>
+                </div>)
               );
             }
           `;
@@ -2018,7 +2019,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
 
             const Labels = () => {
               return (
-                <div>
+                (<div>
                   <label css={{
                     fontWeight: canvasType.properties.fontWeights.medium
                   }}>label</label>
@@ -2026,7 +2027,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
                     fontWeight: canvasType.properties.fontWeights.medium,
                     display: 'block'
                   }}>label</label>
-                </div>
+                </div>)
               );
             }
           `;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {createElemPropsHook} from '@workday/canvas-kit-react/common';
+import {createElemPropsHook, useMountLayout} from '@workday/canvas-kit-react/common';
 import {orientationKeyMap} from './keyUtils';
 import {useListModel} from './useListModel';
 
@@ -20,6 +20,15 @@ import {useListModel} from './useListModel';
  */
 export const useListResetCursorOnBlur = createElemPropsHook(useListModel)(({state, events}) => {
   const programmaticFocusRef = React.useRef(false);
+  const requestAnimationFrameRef = React.useRef(0);
+
+  useMountLayout(() => {
+    return () => {
+      // Cancelling the animation frame prevents React unmount errors
+      cancelAnimationFrame(requestAnimationFrameRef.current);
+    };
+  });
+
   return {
     onKeyDown(event: React.KeyboardEvent) {
       // Programmatic focus only on any focus change via keyboard
@@ -32,7 +41,12 @@ export const useListResetCursorOnBlur = createElemPropsHook(useListModel)(({stat
     },
     onBlur() {
       if (!programmaticFocusRef.current) {
-        events.goTo({id: state.selectedIds[0]});
+        // use an animation frame to wait for any other model changes that may happen on a blur
+        requestAnimationFrameRef.current = requestAnimationFrame(() => {
+          if (state.selectedIds[0] !== state.cursorId) {
+            events.goTo({id: state.selectedIds[0]});
+          }
+        });
       }
     },
   };
