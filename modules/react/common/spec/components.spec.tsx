@@ -185,6 +185,17 @@ describe('createContainer', () => {
 
     render(<ComposedComponent />);
   });
+
+  it('should accept an `ElementComponent`', () => {
+    const Component = createComponent('div')({
+      Component(props: {requiredProp: number}, ref, Element) {
+        return <Element />;
+      },
+    });
+
+    // There should be no TS error
+    const Subcomponent = createContainer(Component);
+  });
 });
 
 describe('createSubcomponent', () => {
@@ -210,6 +221,17 @@ describe('createSubcomponent', () => {
     })((props, Element) => <Element data-testid="test" {...props} />);
 
     expect(Component.as('button')).toBe(Component.as('button'));
+  });
+
+  it('should accept an `ElementComponent`', () => {
+    const Component = createComponent('div')({
+      Component(props: {requiredProp: number}, ref, Element) {
+        return <Element />;
+      },
+    });
+
+    // There should be no TS error
+    const Subcomponent = createSubcomponent(Component);
   });
 });
 
