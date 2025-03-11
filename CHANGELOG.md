@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.4.14](https://github.com/Workday/canvas-kit/releases/tag/v12.4.14) (2025-03-10)
+
+### Documentation
+
+- docs: Ensure stackblitz gets packaged with docs package ([#3167](https://github.com/Workday/canvas-kit/pull/3167)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.4.13](https://github.com/Workday/canvas-kit/releases/tag/v12.4.13) (2025-03-10)
+
+### Documentation
+
+- docs: Add Snapshot serializers to ignore hashes ([#3166](https://github.com/Workday/canvas-kit/pull/3166)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v12.4.12](https://github.com/Workday/canvas-kit/releases/tag/v12.4.12) (2025-03-07)
+
+### Components
+
+- fix: Remove console log ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v12.4.11](https://github.com/Workday/canvas-kit/releases/tag/v12.4.11) (2025-03-03)
 
 ### Documentation
