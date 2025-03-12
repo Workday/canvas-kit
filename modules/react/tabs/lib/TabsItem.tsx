@@ -26,6 +26,7 @@ import {
 } from '@workday/canvas-kit-react/collection';
 
 import {useTabsModel} from './useTabsModel';
+import {px2rem} from '@workday/canvas-kit-styling';
 export interface TabsItemProps
   extends ExtractProps<typeof Box, never>,
     Partial<Pick<FlexProps, 'gap'>> {
@@ -106,7 +107,7 @@ export const StyledTabItem = styled(Box.as('button'))<StyledType & Pick<TabsItem
     },
 
     '&:focus-visible, &.focus': {
-      outline: `none`,
+      outline: `${px2rem(2)} solid transparent`,
       ...focusRing({inset: 'outer', width: 0, separation: 2}, theme),
     },
 
@@ -126,7 +127,8 @@ export const StyledTabItem = styled(Box.as('button'))<StyledType & Pick<TabsItem
       [systemIconStencil.vars.color]: theme.canvas.palette.primary.main,
       '&:after': {
         position: 'absolute',
-        height: space.xxxs,
+        // fallback for Windows high contrast theme
+        borderBottom: `${space.xxxs} solid transparent`,
         borderRadius: `${borderRadius.m} ${borderRadius.m} 0px 0px`,
         backgroundColor: theme.canvas.palette.primary.main,
         bottom: 0,
