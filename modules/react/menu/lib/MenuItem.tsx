@@ -21,7 +21,7 @@ import {
 
 import {useMenuModel} from './useMenuModel';
 
-export interface MenuItemProps {
+export interface MenuItemProps extends CSProps {
   /**
    * Optionally pass index to menu item. This should be done if `Menu.Item` components were created
    * via a `Array::map` function. This index will ensure keyboard navigation works even if items are
