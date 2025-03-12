@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.4.19](https://github.com/Workday/canvas-kit/releases/tag/v12.4.19) (2025-03-12)
+
+### Components
+
+- fix: Ensure text visible when select model is hoisted ([#3189](https://github.com/Workday/canvas-kit/pull/3189)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v12.4.18](https://github.com/Workday/canvas-kit/releases/tag/v12.4.18) (2025-03-12)
 
 ### Infrastructure
