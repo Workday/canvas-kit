@@ -134,7 +134,6 @@ export const useBaseListModel = createModelHook({
   // passed instead of a stable reference.
   const getIdRef = React.useRef(defaultGetId);
   const getTextValueRef = React.useRef(defaultGetTextValue);
-  console.log('text value', defaultGetTextValue(config.items[0]));
 
   const getId = config.getId || defaultGetId;
   const getTextValue = config.getTextValue || config.getId || defaultGetTextValue;
