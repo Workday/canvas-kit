@@ -54,11 +54,15 @@ const contents = fs
 fs.writeFileSync(docsFilePath, contents);
 
 /**
- * The following ensures that the stackblitz files are copied to the dist folder.
+ * The following ensures that the stackblitz files are copied to the dist folder and that the current version is included.
  */
 // Source and destination base paths
 const sourceBase = path.join(__dirname, '../lib/stackblitzFiles');
 const destBase = path.join(__dirname, '../dist/es6/lib/stackblitzFiles');
+const rootPackageJsonPath = path.join(__dirname, '..', 'package.json');
+const searchPath = path.join(__dirname, '../dist/es6/lib/stackblitzFiles/packageJSONFile.ts');
+const rootPackageJson = JSON.parse(fs.readFileSync(rootPackageJsonPath, 'utf8'));
+const version = rootPackageJson.version || '0.0.0';
 
 // Ensure the destination directory exists
 if (!fs.existsSync(destBase)) {
@@ -98,37 +102,27 @@ glob(`${sourceBase}/**`, {dot: true}, (err, files) => {
         }
       });
     });
-});
 
-const rootPackageJsonPath = path.join(__dirname, '..', 'package.json');
-const searchPath = path.join(__dirname, '../dist/es6/lib/stackblitzFiles/packageJSONFile.ts');
+  glob(searchPath, (err, files) => {
+    if (err) {
+      console.error('Error finding files:', err);
+      return;
+    }
+    if (!files.length) {
+      console.error(
+        'No package.json files found in ./dist/es6/lib/stackblitzFiles/packageJSONFile.ts'
+      );
+      return;
+    }
 
-/**
- * Replace the version in the stackblitz files with the current version from the docs package.json file.
- */
-// Get version
-const rootPackageJson = JSON.parse(fs.readFileSync(rootPackageJsonPath, 'utf8'));
-const version = rootPackageJson.version || '0.0.0';
+    files.forEach(file => {
+      const content = fs.readFileSync(file, 'utf8');
+      const updatedContent = content
+        .replace(/\${version}/g, version)
+        .replace(`import {version} from '../../../../lerna.json';`, '');
 
-glob(searchPath, (err, files) => {
-  if (err) {
-    console.error('Error finding files:', err);
-    return;
-  }
-  if (!files.length) {
-    console.error(
-      'No package.json files found in ./dist/es6/lib/stackblitzFiles/packageJSONFile.ts'
-    );
-    return;
-  }
-
-  files.forEach(file => {
-    const content = fs.readFileSync(file, 'utf8');
-    const updatedContent = content
-      .replace(/\${version}/g, version)
-      .replace(`import {version} from '../../../../lerna.json';`, '');
-
-    fs.writeFileSync(file, updatedContent, 'utf8');
-    console.log(`Updated ${file} with version ${version}`);
+      fs.writeFileSync(file, updatedContent, 'utf8');
+      console.log(`Updated ${file} with version ${version}`);
+    });
   });
 });
