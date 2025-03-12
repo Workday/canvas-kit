@@ -42,6 +42,8 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
               child.openingElement.name.property.name === 'IconButton' ||
               child.openingElement.name.property.name === 'Count'
             );
+          } else {
+            return false;
           }
         });
 
