@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {shieldIcon} from '@workday/canvas-accent-icons-web';
 import {benefitsIcon} from '@workday/canvas-applet-icons-web';
-import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
+import {CanvasIconTypes, CanvasGraphic} from '@workday/design-assets-types';
 
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {AccentIcon, AppletIcon, SystemIcon, SystemIconCircle, Graphic} from '../index';
@@ -16,6 +16,9 @@ const graphicExample: CanvasGraphic = {
   filename: 'wd-graphic-badge-achievement.svg',
   category: '',
   tags: [],
+};
+const graphicExampleWithURL = {
+  url: 'https://wd5.myworkday.com/wday/asset/canvas-graphics-web/5.0.7/wd-graphic-learning-welcome-desktop.svg',
 };
 
 export default {
@@ -117,15 +120,40 @@ export const GraphicStory = {
   component: Graphic,
   render: () => (
     <div className="story">
-      <Graphic src={graphicExample} />
+      <h3>Default</h3>
+      <p>Using a local SVG</p>
+      <Graphic src={graphicExample} alt="A flag icon" />
       <br />
-      <Graphic src={graphicExample} width={120} />
+      <h3>Parent setting width with grow set to true</h3>
       <div style={{width: 100}}>
-        <Graphic src={graphicExample} grow={true} />
+        <Graphic src={graphicExample} grow={true} alt="A flag icon" />
       </div>
+      <h3>Parent setting width with grow set to true</h3>
       <div style={{width: 400}}>
-        <Graphic src={graphicExample} grow={true} shouldMirror={true} />
+        <Graphic src={graphicExample} grow={true} alt="A flag icon" />
       </div>
+      <h3>Passing in src type</h3>
+      <div style={{width: 400}}>
+        <Graphic src={graphicExampleWithURL} alt="A desktop image" />
+      </div>
+      <h3>Passing in a url</h3>
+      <div style={{width: 400}}>
+        <Graphic
+          src={{
+            url: 'https://raw.githubusercontent.com/gist/alanbsmith/244155135cbd05cdeac288f0236445e1/raw/59dc5fa911d64ecce8fc776c8c62481824c35bcb/magnifying-glass-canvas.svg',
+          }}
+          alt="A magnifying glass"
+        />
+      </div>
+      <h3>Custom Width</h3>
+      <p>Using a url SVG</p>
+      <Graphic
+        width={100}
+        alt="A magnifying glass"
+        src={{
+          url: 'https://raw.githubusercontent.com/gist/alanbsmith/244155135cbd05cdeac288f0236445e1/raw/59dc5fa911d64ecce8fc776c8c62481824c35bcb/magnifying-glass-canvas.svg',
+        }}
+      />
     </div>
   ),
 };
