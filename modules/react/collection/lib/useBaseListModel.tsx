@@ -6,7 +6,6 @@ import {useUniqueId, createModelHook, Generic} from '@workday/canvas-kit-react/c
 export type Orientation = 'horizontal' | 'vertical';
 
 export const defaultGetId = (item: Generic): string => {
-
   if (process.env.NODE_ENV === 'development') {
     if (typeof item === 'object' && item.id === undefined) {
       console.warn(
@@ -25,13 +24,7 @@ export const defaultGetTextValue = (item: Generic): string => {
       );
     }
   }
-  return item === undefined
-    ? ''
-    : typeof item === 'string'
-    ? item
-    : item === undefined
-    ? item.id || ''
-    : '';
+  return typeof item === 'string' ? item : item === undefined ? '' : item.text || '';
 };
 
 export interface Item<T> {
@@ -141,6 +134,7 @@ export const useBaseListModel = createModelHook({
   // passed instead of a stable reference.
   const getIdRef = React.useRef(defaultGetId);
   const getTextValueRef = React.useRef(defaultGetTextValue);
+  console.log('text value', defaultGetTextValue(config.items[0]));
 
   const getId = config.getId || defaultGetId;
   const getTextValue = config.getTextValue || config.getId || defaultGetTextValue;
