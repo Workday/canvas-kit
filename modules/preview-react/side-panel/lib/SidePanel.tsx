@@ -193,7 +193,6 @@ export const SidePanel = createComponent('section')({
 
     const handleAnimationEnd = (event: React.AnimationEvent<HTMLDivElement>) => {
       if (event.currentTarget === event.target) {
-        console.log(sidepaneCollapsedKeyFrames);
         if (event.animationName === sidepaneCollapsedKeyFrames) {
           setState('collapsed');
         }
