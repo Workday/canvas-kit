@@ -9,7 +9,7 @@ describe('Pill', () => {
     const input = stripIndent`
             import {Pill} from '@workday/any-other-package'
             <>
-                <Pill />
+                <Pill>Hello<Pill.Icon/></Pill>
                 <Pill />
                 <Pill />
             </>
@@ -18,7 +18,7 @@ describe('Pill', () => {
     const expected = stripIndent`
             import {Pill} from '@workday/any-other-package'
             <>
-                <Pill />
+                <Pill>Hello<Pill.Icon/></Pill>
                 <Pill />
                 <Pill />
             </>
@@ -41,6 +41,26 @@ describe('Pill', () => {
           <>
             <Pill>
               Hello World
+            </Pill>
+          </>
+      `;
+    expectTransform(input, expected);
+  });
+  it('should not change if Pill.Label exists', () => {
+    const input = stripIndent`
+          import {Pill} from '@workday/canvas-kit-preview-react/pill';
+          <>
+            <Pill>
+              <Pill.Label>Hello World</Pill.Label>
+            </Pill>
+          </>
+      `;
+
+    const expected = stripIndent`
+          import {Pill} from '@workday/canvas-kit-preview-react/pill';
+          <>
+            <Pill>
+              <Pill.Label>Hello World</Pill.Label>
             </Pill>
           </>
       `;

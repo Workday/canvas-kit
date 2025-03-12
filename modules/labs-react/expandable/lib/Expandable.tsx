@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {createContainer, ExtractProps} from '@workday/canvas-kit-react/common';
-import {Flex} from '@workday/canvas-kit-react/layout';
+import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 
 import {ExpandableContent} from './ExpandableContent';
 import {ExpandableTarget} from './ExpandableTarget';
@@ -9,6 +9,8 @@ import {ExpandableIcon} from './ExpandableIcon';
 import {ExpandableTitle} from './ExpandableTitle';
 import {ExpandableAvatar} from './ExpandableAvatar';
 import {useExpandableModel} from './hooks/useExpandableModel';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export interface ExpandableProps extends ExtractProps<typeof Flex, never> {
   /**
@@ -18,11 +20,20 @@ export interface ExpandableProps extends ExtractProps<typeof Flex, never> {
   children?: React.ReactNode;
 }
 
+export const expandableContainerStencil = createStencil({
+  base: {
+    display: 'flex',
+    flexDirection: 'column',
+    padding: system.space.x2,
+  },
+});
+
 /**
  * `Expandable` wraps an `Expandable.Target` and an `Expandable.Content`. By default, it provides a
  * `DisclosureModel` for its subcomponents. Alternatively, a model may be passed in using the
  * hoisted model pattern.
  */
+
 export const Expandable = createContainer('div')({
   displayName: 'Expandable',
   modelHook: useExpandableModel,
@@ -62,7 +73,5 @@ export const Expandable = createContainer('div')({
     Content: ExpandableContent,
   },
 })<ExpandableProps>(({children, ...elementProps}, Element) => (
-  <Flex as={Element} flexDirection={'column'} padding={'xxs'} {...elementProps}>
-    {children}
-  </Flex>
+  <Element {...mergeStyles(elementProps, expandableContainerStencil())}>{children}</Element>
 ));
