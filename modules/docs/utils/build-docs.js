@@ -60,7 +60,7 @@ fs.writeFileSync(docsFilePath, contents);
 const sourceBase = path.join(__dirname, '../lib/stackblitzFiles');
 const destBase = path.join(__dirname, '../dist/es6/lib/stackblitzFiles');
 const rootPackageJsonPath = path.join(__dirname, '..', 'package.json');
-const searchPath = path.join(__dirname, '../dist/es6/lib/stackblitzFiles/packageJSONFile.ts');
+const searchPath = path.join(__dirname, '../dist/es6/lib/stackblitzFiles/packageJSONFile*.{ts,js}');
 const rootPackageJson = JSON.parse(fs.readFileSync(rootPackageJsonPath, 'utf8'));
 const version = rootPackageJson.version || '0.0.0';
 
@@ -115,11 +115,14 @@ glob(`${sourceBase}/**`, {dot: true}, (err, files) => {
       return;
     }
 
+    console.log(files);
+
     files.forEach(file => {
       const content = fs.readFileSync(file, 'utf8');
       const updatedContent = content
         .replace(/\${version}/g, version)
-        .replace(`import {version} from '../../../../lerna.json';`, '');
+        .replace(`import {version} from '../../../../lerna.json';`, '')
+        .replace(`import { version } from '../../../../lerna.json';`, '');
 
       fs.writeFileSync(file, updatedContent, 'utf8');
       console.log(`Updated ${file} with version ${version}`);
