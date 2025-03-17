@@ -156,6 +156,7 @@ export const Graphic = createComponent('span')({
           data-part="graphic-img"
           src={src.svg ? `data:image/svg+xml;base64,${btoa(src.svg)}` : src.url}
           sizes={sizes}
+          srcSet={srcset}
           alt={alt}
         />
       </Element>
