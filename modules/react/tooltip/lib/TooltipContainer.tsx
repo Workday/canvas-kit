@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 
 import {borderRadius, colors, space, type} from '@workday/canvas-kit-react/tokens';
 import {TransformOrigin, getTranslateFromOrigin} from '@workday/canvas-kit-react/common';
+import {px2rem} from '@workday/canvas-kit-styling';
 
 const tooltipAnimation = (transformOrigin: TransformOrigin) => {
   const translate = getTranslateFromOrigin(transformOrigin, space.xxxs);
@@ -60,6 +61,8 @@ export const TooltipContainer = styled('div')<TooltipContainerProps>(
     ':before': {
       content: '""',
       borderRadius: borderRadius.m,
+      outline: `${px2rem(1)} solid transparent`,
+      outlineOffset: `-${px2rem(1)}`,
       zIndex: -1,
       margin: space.xxxs,
       backgroundColor: 'rgba(0,0,0,.85)',
