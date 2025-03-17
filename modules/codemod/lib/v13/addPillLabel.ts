@@ -1,5 +1,5 @@
-import {API, FileInfo, JSXElement, Options} from 'jscodeshift';
-import {getImportRenameMap} from '../v7/utils/getImportRenameMap';
+import {API, FileInfo, JSXElement, JSXIdentifier, JSXOpeningElement, Options} from 'jscodeshift';
+import {getImportRenameMap} from './utils/getImportRenameMap';
 import {hasImportSpecifiers} from '../v6/utils';
 
 const pillPackage = '@workday/canvas-kit-preview-react/pill';
@@ -8,15 +8,12 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
   const j = api.jscodeshift;
   const root = j(file.source);
 
+  // Skip transformation if Pill is not imported from the target package
   if (!hasImportSpecifiers(api, root, pillPackage, ['Pill'])) {
     return file.source;
   }
 
-  const {importMap, styledMap} = getImportRenameMap(
-    j,
-    root,
-    '@workday/canvas-kit-preview-react/pill'
-  );
+  const {importMap, styledMap} = getImportRenameMap(j, root, '@workday/canvas-kit-preview-react');
 
   root
     .find(
@@ -27,47 +24,54 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
           value.openingElement.name.name === styledMap.Pill)
     )
     .forEach(nodePath => {
-      // Check if children contain at least one Pill.Icon or Pill.Avatar
+      // Get the local name of the Pill component (e.g., Pill, MyPill, StyledPill)
+      const pillName = (nodePath.node.openingElement.name as JSXIdentifier).name;
+
+      // Check for subcomponents using the local Pill name
       const hasPillSubcomponents =
         nodePath.node.children &&
         nodePath.node.children.some(child => {
           if (
             child.type === 'JSXElement' &&
             child.openingElement.type === 'JSXOpeningElement' &&
-            child.openingElement.name.type === 'JSXMemberExpression'
+            child.openingElement.name.type === 'JSXMemberExpression' &&
+            child.openingElement.name.object.type === 'JSXIdentifier' &&
+            child.openingElement.name.object.name === pillName
           ) {
             return (
-              child.openingElement.name?.property.name === 'Icon' ||
+              child.openingElement.name.property.name === 'Icon' ||
               child.openingElement.name.property.name === 'Avatar' ||
               child.openingElement.name.property.name === 'IconButton' ||
               child.openingElement.name.property.name === 'Count'
             );
-          } else {
-            return false;
           }
+          return false;
         });
 
+      // If subcomponents are present, wrap text and expressions in Pill.Label
       if (hasPillSubcomponents) {
         nodePath.node.children = nodePath.node.children?.map(child => {
           if (child.type === 'JSXText' && child.value.trim() !== '') {
             return j.jsxElement(
-              j.jsxOpeningElement(j.jsxIdentifier('Pill.Label'), []),
-              j.jsxClosingElement(j.jsxIdentifier('Pill.Label')),
-              [j.jsxText(child.value)]
+              j.jsxOpeningElement(
+                j.jsxMemberExpression(j.jsxIdentifier(pillName), j.jsxIdentifier('Label')),
+                []
+              ),
+              j.jsxClosingElement(
+                j.jsxMemberExpression(j.jsxIdentifier(pillName), j.jsxIdentifier('Label'))
+              ),
+              [child]
             );
-          }
-          if (child.type === 'JSXExpressionContainer' && child.expression.type === 'Identifier') {
+          } else if (child.type === 'JSXExpressionContainer') {
             return j.jsxElement(
-              j.jsxOpeningElement(j.jsxIdentifier('Pill.Label'), []),
-              j.jsxClosingElement(j.jsxIdentifier('Pill.Label')),
-              [j.jsxExpressionContainer(child.expression)]
-            );
-          }
-          if (child.type === 'JSXExpressionContainer' && child.expression.type === 'Literal') {
-            return j.jsxElement(
-              j.jsxOpeningElement(j.jsxIdentifier('Pill.Label'), []),
-              j.jsxClosingElement(j.jsxIdentifier('Pill.Label')),
-              [j.literal(child.expression.value)]
+              j.jsxOpeningElement(
+                j.jsxMemberExpression(j.jsxIdentifier(pillName), j.jsxIdentifier('Label')),
+                []
+              ),
+              j.jsxClosingElement(
+                j.jsxMemberExpression(j.jsxIdentifier(pillName), j.jsxIdentifier('Label'))
+              ),
+              [child]
             );
           }
           return child;

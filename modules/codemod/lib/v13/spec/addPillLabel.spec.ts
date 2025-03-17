@@ -66,6 +66,93 @@ describe('Pill', () => {
       `;
     expectTransform(input, expected);
   });
+
+  it('should wrap plain text in label if Pill.Icon is present and imported from main Preview package', () => {
+    const input = stripIndent`
+          import {Pill} from '@workday/canvas-kit-preview-react';
+          <>
+            <Pill>
+              <Pill.Icon />
+              Hello World
+            </Pill>
+          </>
+      `;
+
+    const expected = stripIndent`
+          import {Pill} from '@workday/canvas-kit-preview-react';
+          <>
+            <Pill>
+              <Pill.Icon /><Pill.Label>Hello World</Pill.Label></Pill>
+          </>
+      `;
+    expectTransform(input, expected);
+  });
+
+  it('should wrap plain text in label if Pill.Icon is present and Pill is renamed at the import level', () => {
+    const input = stripIndent`
+          import {Pill as MyPill} from '@workday/canvas-kit-preview-react';
+          <>
+            <MyPill>
+              <MyPill.Icon />
+              Hello World
+            </MyPill>
+          </>
+      `;
+
+    const expected = stripIndent`
+          import {Pill as MyPill} from '@workday/canvas-kit-preview-react';
+          <>
+            <MyPill>
+              <MyPill.Icon /><MyPill.Label>Hello World</MyPill.Label></MyPill>
+          </>
+      `;
+    expectTransform(input, expected);
+  });
+
+  it('should change styled Pill', () => {
+    const input = stripIndent`
+        import {Pill} from '@workday/canvas-kit-preview-react/pill'
+        const StyledPill = styled(Pill)({color: "#000"});
+        <>
+          <StyledPill>
+            <StyledPill.Icon />
+            Hello World
+          </StyledPill>
+        </>
+    `;
+
+    const expected = stripIndent`
+        import {Pill} from '@workday/canvas-kit-preview-react/pill'
+        const StyledPill = styled(Pill)({color: "#000"});
+        <>
+          <StyledPill>
+            <StyledPill.Icon /><StyledPill.Label>Hello World</StyledPill.Label></StyledPill>
+        </>
+    `;
+    expectTransform(input, expected);
+  });
+
+  it('should wrap plain text in label if Pill.Icon is present and Pill is renamed at the import level', () => {
+    const input = stripIndent`
+          import {Pill as MyPill} from '@workday/canvas-kit-preview-react';
+          <>
+            <MyPill>
+              <MyPill.Icon />
+              Hello World
+            </MyPill>
+          </>
+      `;
+
+    const expected = stripIndent`
+          import {Pill as MyPill} from '@workday/canvas-kit-preview-react';
+          <>
+            <MyPill>
+              <MyPill.Icon /><MyPill.Label>Hello World</MyPill.Label></MyPill>
+          </>
+      `;
+    expectTransform(input, expected);
+  });
+
   it('should wrap plain text in label if Pill.Icon is present', () => {
     const input = stripIndent`
           import {Pill} from '@workday/canvas-kit-preview-react/pill';
