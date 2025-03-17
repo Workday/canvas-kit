@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.4.21](https://github.com/Workday/canvas-kit/releases/tag/v12.4.21) (2025-03-17)
+
+### Documentation
+
+- docs: Updated snapshot serializers doc with modifier class name use case ([#3193](https://github.com/Workday/canvas-kit/pull/3193)) ([@deno-inbox](https://github.com/deno-inbox), kaman.lam)
+
+
 ## [v12.4.20](https://github.com/Workday/canvas-kit/releases/tag/v12.4.20) (2025-03-13)
 
 ### Infrastructure
