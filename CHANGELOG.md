@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.4.22](https://github.com/Workday/canvas-kit/releases/tag/v12.4.22) (2025-03-17)
+
+### Documentation
+
+- fix: Ensure js files are updated as well for stackblitz build ([#3194](https://github.com/Workday/canvas-kit/pull/3194)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v12.4.21](https://github.com/Workday/canvas-kit/releases/tag/v12.4.21) (2025-03-17)
 
 ### Documentation
