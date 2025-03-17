@@ -39,7 +39,7 @@ export interface GraphicProps extends CSProps {
    */
   grow?: boolean;
   /**
-   * The source of the graphic. If `svg` is provided, it will create a Base64-encoded ASCII string from a binary string (i.e., a string in which each character in the string is treated as a byte of binary data) and pass it to an image `src`. If `url` is provided, it will be rendered as an image via the `src` property..
+   * The source of the graphic. If `svg` is provided, it will create a Base64-encoded ASCII string from a binary string (i.e., a string in which each character in the string is treated as a byte of binary data) and pass it to an image `src`. If `url` is provided, it will be rendered as an image via the `src` property.
    */
   src: {
     svg?: string;

@@ -86,7 +86,9 @@ export const ExampleCodeBlock = ({code}: any) => {
    * `code` returns our examples. We need to rewrite them so that they export `Demo`.
    */
   const handleExampleRewrite = (code: any) => {
-    return code.replace(/\bexport\s+const\s+(\w+)\s*=/, `export const Demo =`);
+    return code
+      .replace(/\bexport\s+const\s+(\w+)\s*=/, `export const Demo =`)
+      .replace(/export default/, 'export const Demo =');
   };
 
   const openProjectInStackblitz = () => {

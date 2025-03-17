@@ -6,7 +6,6 @@ import {useUniqueId, createModelHook, Generic} from '@workday/canvas-kit-react/c
 export type Orientation = 'horizontal' | 'vertical';
 
 export const defaultGetId = (item: Generic): string => {
-
   if (process.env.NODE_ENV === 'development') {
     if (typeof item === 'object' && item.id === undefined) {
       console.warn(
@@ -25,13 +24,7 @@ export const defaultGetTextValue = (item: Generic): string => {
       );
     }
   }
-  return item === undefined
-    ? ''
-    : typeof item === 'string'
-    ? item
-    : item === undefined
-    ? item.id || ''
-    : '';
+  return typeof item === 'string' ? item : item === undefined ? '' : item.text || '';
 };
 
 export interface Item<T> {
