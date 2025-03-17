@@ -103,7 +103,7 @@ const tabItemStencil = createStencil({
     overflow: 'hidden',
     [systemIconStencil.vars.color]: system.color.fg.muted.soft,
 
-    '&:has([data-part="system-icon"]), &:has([data-part="ellipsis-text"])': {
+    '&:has(span)': {
       display: 'flex',
       gap: system.space.x2,
     },

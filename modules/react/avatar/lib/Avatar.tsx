@@ -216,7 +216,7 @@ export const avatarStencil = createStencil({
         ['& [data-part="avatar-icon"]']: {
           opacity: 1,
         },
-        ['& [data-part="avatar-image"]']: {
+        ['& > [data-part="avatar-image"]']: {
           opacity: 0,
         },
       },
@@ -232,7 +232,6 @@ export const avatarStencil = createStencil({
   },
   defaultModifiers: {
     variant: 'light',
-    size: 'medium',
     isImageLoaded: 'false',
     objectFit: 'contain',
   },
@@ -241,7 +240,7 @@ export const avatarStencil = createStencil({
 export const Avatar = createComponent('button')({
   displayName: 'Avatar',
   Component: (
-    {variant, size, altText = 'Avatar', url, objectFit, ...elemProps}: AvatarProps,
+    {variant, size = 'medium', altText = 'Avatar', url, objectFit, ...elemProps}: AvatarProps,
     ref,
     Element
   ) => {
@@ -270,6 +269,7 @@ export const Avatar = createComponent('button')({
         );
       }
     }
+
     return (
       <Element
         ref={ref}
