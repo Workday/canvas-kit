@@ -198,6 +198,7 @@ export const systemIconStencil = createStencil({
       },
     },
   }),
+  modifiers: {},
 });
 
 export const SystemIcon = createComponent('span')({
@@ -225,6 +226,7 @@ export const SystemIcon = createComponent('span')({
         src={icon}
         type={CanvasIconTypes.System}
         ref={ref}
+        data-part="system-icon"
         {...handleCsProp(elemProps, [
           systemIconStencil({
             size: typeof size === 'number' ? px2rem(size) : size,
