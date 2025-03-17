@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.4.22](https://github.com/Workday/canvas-kit/releases/tag/v12.4.22) (2025-03-17)
+
+### Documentation
+
+- fix: Ensure js files are updated as well for stackblitz build ([#3194](https://github.com/Workday/canvas-kit/pull/3194)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.4.21](https://github.com/Workday/canvas-kit/releases/tag/v12.4.21) (2025-03-17)
+
+### Documentation
+
+- docs: Updated snapshot serializers doc with modifier class name use case ([#3193](https://github.com/Workday/canvas-kit/pull/3193)) ([@deno-inbox](https://github.com/deno-inbox), kaman.lam)
+
+
+## [v12.4.20](https://github.com/Workday/canvas-kit/releases/tag/v12.4.20) (2025-03-13)
+
+### Infrastructure
+
+- fix: Export collection types used in unexported models ([#3165](https://github.com/Workday/canvas-kit/pull/3165)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v12.4.19](https://github.com/Workday/canvas-kit/releases/tag/v12.4.19) (2025-03-12)
 
 ### Components
