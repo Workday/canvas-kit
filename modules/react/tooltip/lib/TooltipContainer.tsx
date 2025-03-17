@@ -6,7 +6,14 @@ import {
   getTransformOrigin,
 } from '@workday/canvas-kit-react/common';
 
-import {calc, createStencil, createVars, cssVar, keyframes} from '@workday/canvas-kit-styling';
+import {
+  calc,
+  createStencil,
+  createVars,
+  cssVar,
+  keyframes,
+  px2rem,
+} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 export interface TooltipContainerProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -73,6 +80,8 @@ export const tooltipContainerStencil = createStencil({
     '&:before': {
       content: '""',
       borderRadius: system.shape.x1,
+      outline: `${px2rem(1)} solid transparent`,
+      outlineOffset: `-${px2rem(1)}`,
       zIndex: -1,
       margin: system.space.x1,
       backgroundColor: system.color.bg.translucent,

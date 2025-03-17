@@ -237,6 +237,7 @@ export const createContainer =
     E extends
       | keyof JSX.IntrinsicElements
       | React.ComponentType
+      | ElementComponent<any, any>
       | ElementComponentM<any, any, any>
       | undefined = undefined
   >(
@@ -379,6 +380,7 @@ export const createSubcomponent =
     E extends
       | keyof JSX.IntrinsicElements
       | React.ComponentType
+      | ElementComponent<any, any>
       | ElementComponentM<any, any, any>
       | undefined = undefined
   >(
