@@ -125,10 +125,6 @@ export const GraphicStory = {
       <Graphic src={graphicExample} alt="A flag icon" />
       <br />
       <h3>Parent setting width with grow set to true</h3>
-      <div style={{width: 100}}>
-        <Graphic src={graphicExample} grow={true} alt="A flag icon" />
-      </div>
-      <h3>Parent setting width with grow set to true</h3>
       <div style={{width: 400}}>
         <Graphic src={graphicExample} grow={true} alt="A flag icon" />
       </div>
@@ -153,6 +149,16 @@ export const GraphicStory = {
         src={{
           url: 'https://raw.githubusercontent.com/gist/alanbsmith/244155135cbd05cdeac288f0236445e1/raw/59dc5fa911d64ecce8fc776c8c62481824c35bcb/magnifying-glass-canvas.svg',
         }}
+        srcset="https://raw.githubusercontent.com/gist/alanbsmith/244155135cbd05cdeac288f0236445e1/raw/59dc5fa911d64ecce8fc776c8c62481824c35bcb/magnifying-glass-canvas.svg, 2x"
+      />
+      <h3>Using srcset</h3>
+      <Graphic
+        alt="A magnifying glass"
+        width={400}
+        src={{
+          url: 'https://picsum.photos/400',
+        }}
+        srcset="https://picsum.photos/400 400w, https://picsum.photos/800 800w, https://picsum.photos/1200 1200w"
       />
     </div>
   ),
