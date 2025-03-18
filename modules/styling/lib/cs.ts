@@ -1216,7 +1216,11 @@ export function createStencil<
     };
   }) as any;
 
-  stencil.parts = {...composes?.parts, ..._parts} as P;
+  stencil.parts = (composes?.__parts ? {...composes.__parts, ..._parts} : _parts) as [E] extends [
+    BaseStencil<infer PE extends Record<string, string>, any, any, any, any>
+  ]
+    ? PE & P
+    : P;
   stencil.vars = _vars;
   stencil.base = combineClassNames([composes?.base, _base]);
   stencil.modifiers = _modifiers as any; // The return type is conditional and TypeScript doesn't like that here
