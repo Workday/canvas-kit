@@ -198,6 +198,7 @@ export const systemIconStencil = createStencil({
       },
     },
   }),
+  modifiers: {},
 });
 
 export const SystemIcon = createComponent('span')({
