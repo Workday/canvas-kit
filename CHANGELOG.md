@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.5.1](https://github.com/Workday/canvas-kit/releases/tag/v12.5.1) (2025-03-19)
+
+### Components
+
+- fix: Account for nodejs environemnts when encoding data ([#3200](https://github.com/Workday/canvas-kit/pull/3200)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v12.5.0](https://github.com/Workday/canvas-kit/releases/tag/v12.5.0) (2025-03-19)
 
 
