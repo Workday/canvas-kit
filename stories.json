@@ -421,6 +421,18 @@
         "__isArgsStory": false
       }
     },
+    "components-containers-table--base-html-table": {
+      "id": "components-containers-table--base-html-table",
+      "name": "Base Html Table",
+      "title": "Components/Containers/Table",
+      "importPath": "./modules/react/table/stories/Table.stories.ts",
+      "kind": "Components/Containers/Table",
+      "story": "Base Html Table",
+      "parameters": {
+        "fileName": "./modules/react/table/stories/Table.stories.ts",
+        "__isArgsStory": false
+      }
+    },
     "components-containers-table--fixed-column": {
       "id": "components-containers-table--fixed-column",
       "name": "Fixed Column",
