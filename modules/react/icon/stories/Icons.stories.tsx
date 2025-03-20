@@ -4,10 +4,18 @@ import {benefitsIcon} from '@workday/canvas-applet-icons-web';
 import {CanvasIconTypes, CanvasGraphic} from '@workday/design-assets-types';
 
 import {colors} from '@workday/canvas-kit-react/tokens';
-import {AccentIcon, AppletIcon, SystemIcon, SystemIconCircle, Graphic} from '../index';
+import {
+  AccentIcon,
+  AppletIcon,
+  SystemIcon,
+  SystemIconCircle,
+  Graphic,
+  graphicImageStencil,
+} from '../index';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
 import {base} from '@workday/canvas-tokens-web';
+import {createStyles} from '@workday/canvas-kit-styling';
 
 const graphicExample: CanvasGraphic = {
   name: 'badgeAchievement',
@@ -24,6 +32,10 @@ const graphicExampleWithURL = {
 export default {
   title: 'Tokens/Icon',
 };
+
+const customStyles = createStyles({
+  [graphicImageStencil.vars.height]: '105px',
+});
 
 export const AccentIconStory = {
   name: 'Accent Icon',
@@ -135,6 +147,16 @@ export const GraphicStory = {
       <h3>Passing in a url</h3>
       <div style={{width: 400}}>
         <Graphic
+          src={{
+            url: 'https://raw.githubusercontent.com/gist/alanbsmith/244155135cbd05cdeac288f0236445e1/raw/59dc5fa911d64ecce8fc776c8c62481824c35bcb/magnifying-glass-canvas.svg',
+          }}
+          alt="A magnifying glass"
+        />
+      </div>
+      <h3>Setting Height via stencil</h3>
+      <div>
+        <Graphic
+          cs={customStyles}
           src={{
             url: 'https://raw.githubusercontent.com/gist/alanbsmith/244155135cbd05cdeac288f0236445e1/raw/59dc5fa911d64ecce8fc776c8c62481824c35bcb/magnifying-glass-canvas.svg',
           }}
