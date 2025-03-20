@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {Basic} from '../../modules/react/checkbox/stories/examples/Basic';
 import {Alert} from '../../modules/react/checkbox/stories/examples/Alert';
 import {Error} from '../../modules/react/checkbox/stories/examples/Error';

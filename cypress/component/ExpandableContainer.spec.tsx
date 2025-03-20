@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {LongTitle} from '../../modules/labs-react/expandable/stories/examples/LongTitle';
 
 describe('ExpandableContainer', () => {

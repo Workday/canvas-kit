@@ -1,4 +1,3 @@
-import React from 'react';
 import styled, {CSSObject} from '@emotion/styled';
 
 import {createComponent} from './utils';

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import styled from '@emotion/styled';
 
 import {relatedActionsIcon} from '@workday/canvas-system-icons-web';

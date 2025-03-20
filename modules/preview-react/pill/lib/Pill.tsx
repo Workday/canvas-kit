@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {buttonStencil} from '@workday/canvas-kit-react/button';
 import {createContainer, focusRing} from '@workday/canvas-kit-react/common';
 import {Box, BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';

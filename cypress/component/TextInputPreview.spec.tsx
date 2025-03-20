@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {Basic} from '../../modules/preview-react/text-input/stories/examples/Basic';
 import {Alert} from '../../modules/preview-react/text-input/stories/examples/Alert';
 import {Error} from '../../modules/preview-react/text-input/stories/examples/Error';

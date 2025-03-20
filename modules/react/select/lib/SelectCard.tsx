@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {Combobox} from '@workday/canvas-kit-react/combobox';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';

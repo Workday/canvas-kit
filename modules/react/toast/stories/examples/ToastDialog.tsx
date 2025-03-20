@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {Toast} from '@workday/canvas-kit-react/toast';
 import {checkIcon} from '@workday/canvas-system-icons-web';
 

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {Basic} from '../../modules/preview-react/pill/stories/examples/Basic';
 import {WithAvatar} from '../../modules/preview-react/pill/stories/examples/WithAvatar';
 import {WithCount} from '../../modules/preview-react/pill/stories/examples/WithCount';

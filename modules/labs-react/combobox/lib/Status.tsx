@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import styled from '@emotion/styled';
 import {accessibleHide} from '@workday/canvas-kit-react/common';
 

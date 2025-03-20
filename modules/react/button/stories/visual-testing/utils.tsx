@@ -1,25 +1,24 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import {jsx} from '@emotion/react';
-import {CSSObject} from '@emotion/styled';
+import {createStyles} from '@workday/canvas-kit-styling';
 
 import * as systemIcons from '@workday/canvas-system-icons-web';
 
-const buttonLayout: CSSObject = {
+const buttonLayout = createStyles({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-};
+});
 
-const blueBackground: CSSObject = {
-  ...buttonLayout,
+const blueBackground = createStyles({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
   backgroundColor: '#0875e1',
   padding: '12px',
   borderRadius: '4px',
-};
+});
 
 export const Container = (props: any) => (
-  <div css={props.blue ? blueBackground : buttonLayout}>{props.children}</div>
+  <div className={props.blue ? blueBackground : buttonLayout}>{props.children}</div>
 );
 
 export const stateTableColumnProps = [

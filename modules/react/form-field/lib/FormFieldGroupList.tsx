@@ -1,4 +1,3 @@
-import React from 'react';
 import {createSubcomponent} from '@workday/canvas-kit-react/common';
 
 import {FlexProps} from '@workday/canvas-kit-react/layout';

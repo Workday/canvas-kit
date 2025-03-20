@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {Link} from '../../modules/react/button/stories/button/examples/Hyperlink';
 import {ExternalLink} from '../../modules/react/button/stories/button/examples/ExternalHyperlink';
 

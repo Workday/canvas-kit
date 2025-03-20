@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {createContainer, createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {Menu, useMenuModel} from '@workday/canvas-kit-react/menu';
 

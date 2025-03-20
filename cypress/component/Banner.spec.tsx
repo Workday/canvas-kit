@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {Error} from '../../modules/react/banner/stories/examples/Error';
 import {Sticky} from '../../modules/react/banner/stories/examples/Sticky';
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {px2rem} from '@workday/canvas-kit-styling';
 

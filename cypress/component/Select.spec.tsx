@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {Basic} from '../../modules/react/select/stories/examples/Basic';
 import {FetchingDynamicItems} from '../../modules/react/select/stories/examples/FetchingDynamicItems';
 import {DisabledOptions} from '../../modules/react/select/stories/examples/DisabledOption';

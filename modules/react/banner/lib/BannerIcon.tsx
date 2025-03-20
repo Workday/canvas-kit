@@ -1,4 +1,3 @@
-import React from 'react';
 import {space} from '@workday/canvas-kit-react/tokens';
 import {
   ExtractProps,

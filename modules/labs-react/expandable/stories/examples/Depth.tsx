@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
 import {space} from '@workday/canvas-kit-react/tokens';
 

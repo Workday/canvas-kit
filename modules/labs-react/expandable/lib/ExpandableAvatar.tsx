@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {Avatar, AvatarProps, avatarStencil} from '@workday/canvas-kit-react/avatar';
 import {system} from '@workday/canvas-tokens-web';

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {DialogWithFallbackPlacements} from '../../modules/react/dialog/stories/examples/DialogWithFallbackPlacements';
 
 describe('Dialog', () => {

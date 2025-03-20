@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {Basic} from '../../modules/react/color-picker/stories/color-input/examples/Basic';
 import {Alert} from '../../modules/react/color-picker/stories/color-input/examples/Alert';
 import {Error} from '../../modules/react/color-picker/stories/color-input/examples/Error';

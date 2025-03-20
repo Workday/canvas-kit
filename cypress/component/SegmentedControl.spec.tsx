@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {Basic} from '../../modules/preview-react/segmented-control/stories/examples/Basic';
 import {Vertical} from '../../modules/preview-react/segmented-control/stories/examples/Vertical';
 import {RTL} from '../../modules/preview-react/segmented-control/stories/examples/RTL';

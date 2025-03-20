@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {ActionBar} from '@workday/canvas-kit-react/action-bar';
 import {DeleteButton} from '@workday/canvas-kit-react/button';
 

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {Basic} from '../../modules/react/switch/stories/examples/Basic';
 import {Error} from '../../modules/react/switch/stories/examples/Error';
 import {Alert} from '../../modules/react/switch/stories/examples/Alert';

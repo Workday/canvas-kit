@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {Informational} from '../../modules/preview-react/information-highlight/stories/examples/Informational';
 import {Caution} from '../../modules/preview-react/information-highlight/stories/examples/Caution';
 import {Critical} from '../../modules/preview-react/information-highlight/stories/examples/Critical';

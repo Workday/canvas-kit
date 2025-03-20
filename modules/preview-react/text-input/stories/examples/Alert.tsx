@@ -1,6 +1,3 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import {jsx} from '@emotion/react';
 import React from 'react';
 import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
 import {useThemedRing} from '@workday/canvas-kit-react/common';
@@ -20,7 +17,7 @@ export const Alert = () => {
   return (
     <TextInput orientation="vertical">
       <TextInput.Label>Password</TextInput.Label>
-      <TextInput.Field css={alertStyles} onChange={handleChange} value={value} type="password" />
+      <TextInput.Field cs={alertStyles} onChange={handleChange} value={value} type="password" />
       <TextInput.Hint paddingTop={space.xxs}>
         <strong>Password Strength: </strong>
         {value.length < 3 ? (

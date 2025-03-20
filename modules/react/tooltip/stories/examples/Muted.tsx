@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 
 export const Muted = () => {

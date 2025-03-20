@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {Default} from '../../modules/react/tooltip/stories/examples/Default';
 import {DescribeType} from '../../modules/react/tooltip/stories/examples/DescribeType';
 import {DescriptionType} from '../../modules/react/tooltip/stories/examples/DescriptionType';

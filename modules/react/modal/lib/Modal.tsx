@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {createContainer, ExtractProps} from '@workday/canvas-kit-react/common';
 import {Dialog} from '@workday/canvas-kit-react/dialog';
 import {Popup} from '@workday/canvas-kit-react/popup';

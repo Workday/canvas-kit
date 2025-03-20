@@ -1,4 +1,3 @@
-import React from 'react';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {createStencil, CSProps} from '@workday/canvas-kit-styling';

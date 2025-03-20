@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {chevronUpIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
