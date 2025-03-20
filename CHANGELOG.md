@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.5.2](https://github.com/Workday/canvas-kit/releases/tag/v12.5.2) (2025-03-20)
+
+### Components
+
+- fix: Pass height and width to Graphic span element ([#3202](https://github.com/Workday/canvas-kit/pull/3202)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v12.5.1](https://github.com/Workday/canvas-kit/releases/tag/v12.5.1) (2025-03-19)
 
 ### Components
