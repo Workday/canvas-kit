@@ -12,7 +12,11 @@ const parentContainerStyles = createStyles({
 
 export const ExternalLinkInverse = () => (
   <Box cs={parentContainerStyles}>
-    <ExternalHyperlink href="https://workday.com" variant="inverse">
+    <ExternalHyperlink
+      href="https://workday.com"
+      variant="inverse"
+      iconLabel="Opens link in new window"
+    >
       Hyperlink
     </ExternalHyperlink>
   </Box>
