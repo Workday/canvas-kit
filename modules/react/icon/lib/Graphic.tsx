@@ -115,6 +115,9 @@ export const graphicImageStencil = createStencil({
     height: '',
   },
   base: ({width, height}) => ({
+    width,
+    height,
+    display: 'inline-block',
     '& [data-part="graphic-img"]': {
       width,
       height,
