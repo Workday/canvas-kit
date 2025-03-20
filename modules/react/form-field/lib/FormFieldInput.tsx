@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {Box, mergeStyles} from '@workday/canvas-kit-react/layout';
 

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
 import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import * as h from '../helpers';
 
 import {Basic} from '../../modules/react/popup/stories/examples/Basic';

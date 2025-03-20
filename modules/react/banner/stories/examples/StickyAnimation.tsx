@@ -1,6 +1,5 @@
-/** @jsxRuntime classic */
 /** @jsx jsx */
-import {jsx, keyframes} from '@emotion/react';
+import {jsx} from '@emotion/react';
 import React from 'react';
 
 import {CSSProperties, space} from '@workday/canvas-kit-react/tokens';
@@ -8,12 +7,13 @@ import {useTheme} from '@workday/canvas-kit-react/common';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {loopIcon} from '@workday/canvas-system-icons-web';
 import {Banner} from '@workday/canvas-kit-react/banner';
+import {createStyles} from '@workday/canvas-kit-styling';
 
-const containerStyles: CSSProperties = {
+const containerStyles = createStyles({
   position: 'absolute',
   right: 0,
   overflow: 'hidden',
-};
+});
 
 export const StickyAnimation = () => {
   const theme = useTheme();
@@ -47,7 +47,7 @@ export const StickyAnimation = () => {
 
   return (
     <Box height={64}>
-      <div css={containerStyles} ref={containerRef}>
+      <div className={containerStyles} ref={containerRef}>
         <div css={styles}>
           <Banner
             onClick={() => setRerun(r => r + 1)}

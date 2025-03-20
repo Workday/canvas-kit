@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
 import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
 

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {GroupOfResult} from '../../modules/labs-react/combobox/stories/examples/GroupOfResult';
 import {DisabledItem} from '../../modules/labs-react/combobox/stories/examples/DisabledItem';
 

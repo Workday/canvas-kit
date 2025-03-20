@@ -1,4 +1,3 @@
-import React from 'react';
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 
 export const Variant = () => (
