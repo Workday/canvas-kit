@@ -1,12 +1,10 @@
 import * as React from 'react';
-import styled from '@emotion/styled';
 
 import {relatedActionsIcon} from '@workday/canvas-system-icons-web';
 import {
   createElemPropsHook,
   composeHooks,
   createSubcomponent,
-  StyledType,
   createSubModelElemPropsHook,
 } from '@workday/canvas-kit-react/common';
 import {useOverflowListTarget} from '@workday/canvas-kit-react/collection';
@@ -14,13 +12,16 @@ import {useOverflowListTarget} from '@workday/canvas-kit-react/collection';
 import {useMenuTarget} from '@workday/canvas-kit-react/menu';
 import {useActionBarModel} from './useActionBarModel';
 import {SecondaryButton, SecondaryButtonProps} from '@workday/canvas-kit-react/button';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 
 export interface ActionBarOverflowButtonProps extends SecondaryButtonProps {
   'aria-label': string;
 }
 
-const StyledSecondaryButton = styled(SecondaryButton)<StyledType>({
-  flex: 0,
+const secondaryButtonStencil = createStencil({
+  base: {
+    flex: 0,
+  },
 });
 
 export const useActionBarOverflowButton = composeHooks(
@@ -36,5 +37,11 @@ export const ActionBarOverflowButton = createSubcomponent('button')({
   modelHook: useActionBarModel,
   elemPropsHook: useActionBarOverflowButton,
 })<ActionBarOverflowButtonProps>((elemProps, Element) => {
-  return <StyledSecondaryButton as={Element} icon={relatedActionsIcon} {...elemProps} />;
+  return (
+    <SecondaryButton
+      as={Element}
+      icon={relatedActionsIcon}
+      {...handleCsProp(elemProps, secondaryButtonStencil())}
+    />
+  );
 });
