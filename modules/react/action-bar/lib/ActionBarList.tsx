@@ -33,15 +33,16 @@ export interface ActionBarListProps<T = any>
 
 const responsiveListStencil = createStencil({
   base: {
+    display: 'flex',
     boxShadow: system.depth[1],
     gap: system.space.x4,
     background: system.color.bg.default,
-    borderTop: `solid 1px ${cssVar(system.color.border.divider)}`,
+    borderBlockStart: `solid 1px ${cssVar(system.color.border.divider)}`,
     padding: `${cssVar(system.space.x4)} ${cssVar(system.space.x10)} `,
     position: 'fixed',
-    bottom: 0,
-    left: 0,
-    right: 0,
+    insetBlockEnd: 0,
+    insetInlineStart: 0,
+    insetInlineEnd: 0,
     '@media (max-width: 767.5px)': {
       padding: system.space.x4,
       '> *': {
@@ -59,9 +60,9 @@ export const ActionBarList = createSubcomponent('div')({
   elemPropsHook: useActionBarList,
 })<ActionBarListProps>(({children, overflowButton, ...elemProps}, Element, model) => {
   return (
-    <Flex as={Element} {...mergeStyles(elemProps, responsiveListStencil())}>
+    <Element {...mergeStyles(elemProps, responsiveListStencil())}>
       {useListRenderItems(model, children)}
       {overflowButton}
-    </Flex>
+    </Element>
   );
 });
