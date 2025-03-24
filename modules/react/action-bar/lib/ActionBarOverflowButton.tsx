@@ -12,7 +12,8 @@ import {useOverflowListTarget} from '@workday/canvas-kit-react/collection';
 import {useMenuTarget} from '@workday/canvas-kit-react/menu';
 import {useActionBarModel} from './useActionBarModel';
 import {SecondaryButton, SecondaryButtonProps} from '@workday/canvas-kit-react/button';
-import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 export interface ActionBarOverflowButtonProps extends SecondaryButtonProps {
   'aria-label': string;
@@ -41,7 +42,7 @@ export const ActionBarOverflowButton = createSubcomponent('button')({
     <SecondaryButton
       as={Element}
       icon={relatedActionsIcon}
-      {...handleCsProp(elemProps, actionBarOverflowButtonStencil())}
+      {...mergeStyles(elemProps, actionBarOverflowButtonStencil())}
     />
   );
 });
