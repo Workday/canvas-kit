@@ -18,7 +18,7 @@ export interface ActionBarOverflowButtonProps extends SecondaryButtonProps {
   'aria-label': string;
 }
 
-const secondaryButtonStencil = createStencil({
+export const actionBarOverflowButtonStencil = createStencil({
   base: {
     flex: 0,
   },
@@ -41,7 +41,7 @@ export const ActionBarOverflowButton = createSubcomponent('button')({
     <SecondaryButton
       as={Element}
       icon={relatedActionsIcon}
-      {...handleCsProp(elemProps, secondaryButtonStencil())}
+      {...handleCsProp(elemProps, actionBarOverflowButtonStencil())}
     />
   );
 });

@@ -31,7 +31,7 @@ export interface ActionBarListProps<T = any>
   overflowButton?: React.ReactNode;
 }
 
-const responsiveListStencil = createStencil({
+export const actionBarListStencil = createStencil({
   base: {
     display: 'flex',
     boxShadow: system.depth[1],
@@ -60,7 +60,7 @@ export const ActionBarList = createSubcomponent('div')({
   elemPropsHook: useActionBarList,
 })<ActionBarListProps>(({children, overflowButton, ...elemProps}, Element, model) => {
   return (
-    <Element {...mergeStyles(elemProps, responsiveListStencil())}>
+    <Element {...mergeStyles(elemProps, actionBarListStencil())}>
       {useListRenderItems(model, children)}
       {overflowButton}
     </Element>
