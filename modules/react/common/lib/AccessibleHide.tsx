@@ -13,6 +13,7 @@ export const accessibleHide = {
   overflow: 'hidden',
   whiteSpace: 'nowrap',
   height: '1px',
+  minHeight: '1px',
   width: '1px',
   minWidth: '1px',
   margin: '-1px',
