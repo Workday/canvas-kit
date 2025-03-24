@@ -133,6 +133,18 @@ export const graphicImageStencil = createStencil({
   },
 });
 
+/**
+ * Account for nodejs environments. We use `btoa` which is a web api for encoding data and `Buffer` for nodejs environments.
+ * [`btoa` docs](https://developer.mozilla.org/en-US/docs/Web/API/Window/btoa)
+ * [`Buffer` docs](https://nodejs.org/api/buffer.html#buffers-and-character-encodings)
+ */
+export const base64Encoded = (str: string) => {
+  if (typeof window !== undefined) {
+    return btoa(str);
+  }
+  return Buffer.from(str, 'binary').toString('base64');
+};
+
 export const Graphic = createComponent('span')({
   displayName: 'Graphic',
   Component: (
@@ -154,7 +166,7 @@ export const Graphic = createComponent('span')({
       >
         <img
           data-part="graphic-img"
-          src={src.svg ? `data:image/svg+xml;base64,${btoa(src.svg)}` : src.url}
+          src={src.svg ? `data:image/svg+xml;base64,${base64Encoded(src.svg)}` : src.url}
           sizes={sizes}
           srcSet={srcset}
           alt={alt}
