@@ -14,6 +14,7 @@ export const accessibleHide = {
   whiteSpace: 'nowrap',
   height: '1px',
   width: '1px',
+  minWidth: '1px',
   margin: '-1px',
   padding: 0,
   border: 0,

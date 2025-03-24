@@ -64,7 +64,6 @@ export const formFieldLabelStencil = createStencil({
     isHidden: {
       true: {
         ...accessibleHide,
-        minWidth: px2rem(1),
       },
     },
   },
