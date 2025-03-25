@@ -9,17 +9,37 @@ describe('rename dub logos', () => {
     const input = stripIndent`
         import {dubLogoPrimary} from "@workday/canvas=kit-react/common"
         import {dubLogoBlue} from "@workday/some-other-library"
+        import {Grid} from "@workday/canvas=kit-react/layout"
         
-         <>
+        <>
+            <Grid dangerouslySetInnerHTML={{ __html: dubLogoBlue }} />
+        </>
+        `;
+
+    const expected = stripIndent`
+        import {dubLogoPrimary} from "@workday/canvas=kit-react/common"
+        import {dubLogoBlue} from "@workday/some-other-library"
+        import {Grid} from "@workday/canvas=kit-react/layout"
+
+        <>
+            <Grid dangerouslySetInnerHTML={{ __html: dubLogoBlue }} />
+        </>
+    `;
+    expectTransform(input, expected);
+  });
+  it('should not change non-canvas imports', () => {
+    const input = stripIndent`
+        export {default as DubLogoBlue} from './DubLogoBlue';
+        
+        <>
             <Grid dangerouslySetInnerHTML={{ __html: dubLogoBlue }} />
         </>
     `;
 
     const expected = stripIndent`
-        import {dubLogoPrimary} from "@workday/canvas=kit-react/common"
-        import {dubLogoBlue} from "@workday/some-other-library"
+        export {default as DubLogoBlue} from './DubLogoBlue';
 
-         <>
+        <>
             <Grid dangerouslySetInnerHTML={{ __html: dubLogoBlue }} />
         </>
     `;
