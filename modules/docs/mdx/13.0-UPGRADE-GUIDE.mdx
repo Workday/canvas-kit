@@ -23,6 +23,8 @@ any questions.
   - [External Hyperlink](#external-hyperlink)
   - [Pill](#pill)
   - [Tabs](#tabs)
+- [Infrastructure](#infrastructure)
+	- [Supporting react-jsx](#supoorting-react-jsx)
 - [Troubleshooting](#troubleshooting)
 - [Glossary](#glossary)
   - [Main](#main)
@@ -159,6 +161,20 @@ A few changes have been made to `Pill` to ensure proper accessibility and styles
 - The `disabled` icon color has been updated to use `system.color.fg.disabled`. This has made the icon darker for better contrast.
 
 **Note:** There should be no developer impact and the visual changes are safe to accept.
+
+## Infrastructure
+
+### Supporting `react-jsx`
+
+We've updated the `jsx` flag in our `tsconfig` to `react-jsx`. As part of this change, we've also updated our peer dependencies for our packages to a mininum of `react@17.0.0`. This change is to support Provide support for modern technologies like `vite` and esmodules.
+
+##### Breaking Changes
+
+If you're using `react@16.x.x`, you'll need to upgrade to `react@17.x.x` to use Canvas Kit v13.
+
+>**Note:** You'll need to update that way `jsx` transpiles. The automatic runtime feature, enabled through the `@babel/preset-react` preset with the `runtime: "automatic"` option, handles the importing of functions that JSX transpiles to.
+
+```sh
 
 ## Troubleshooting
 
