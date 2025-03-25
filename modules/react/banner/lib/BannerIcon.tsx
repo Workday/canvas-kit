@@ -1,12 +1,8 @@
 import React from 'react';
-import {space} from '@workday/canvas-kit-react/tokens';
-import {
-  ExtractProps,
-  createSubcomponent,
-  styled,
-  StyledType,
-} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 
 import {useBannerIcon, useBannerModel} from './hooks';
@@ -18,8 +14,8 @@ export interface BannerIconProps extends Omit<ExtractProps<typeof SystemIcon, ne
   icon?: CanvasSystemIcon;
 }
 
-const StyledBannerIcon = styled(SystemIcon)<StyledType>({
-  marginRight: space.xs,
+const systemBannerIconStyles = createStyles({
+  marginRight: system.space.x3,
 });
 
 export const BannerIcon = createSubcomponent('span')({
@@ -29,5 +25,5 @@ export const BannerIcon = createSubcomponent('span')({
 })<BannerIconProps>((elemProps, Element, model) => {
   const {icon, ...iconButtonProps} = elemProps;
 
-  return <StyledBannerIcon as={Element} icon={icon!} {...iconButtonProps} />;
+  return <SystemIcon cs={systemBannerIconStyles} icon={icon!} {...iconButtonProps} />;
 });
