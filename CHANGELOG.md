@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.5.3](https://github.com/Workday/canvas-kit/releases/tag/v12.5.3) (2025-03-25)
+
+### Components
+
+- fix: Ensure btoa is defined on window ([#3207](https://github.com/Workday/canvas-kit/pull/3207)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v12.5.2](https://github.com/Workday/canvas-kit/releases/tag/v12.5.2) (2025-03-20)
 
 ### Components
