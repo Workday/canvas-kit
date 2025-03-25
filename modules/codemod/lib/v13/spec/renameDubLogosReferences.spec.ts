@@ -7,15 +7,17 @@ const expectTransform = expectTransformFactory(transform);
 describe('rename dub logos', () => {
   it('should not change non-canvas imports', () => {
     const input = stripIndent`
-        import {dubLogoPrimary} from "@workday/some-other-library"
-
+        import {dubLogoPrimary} from "@workday/canvas=kit-react/common"
+        import {dubLogoBlue} from "@workday/some-other-library"
+        
          <>
             <Grid dangerouslySetInnerHTML={{ __html: dubLogoBlue }} />
         </>
     `;
 
     const expected = stripIndent`
-        import {dubLogoPrimary} from "@workday/some-other-library"
+        import {dubLogoPrimary} from "@workday/canvas=kit-react/common"
+        import {dubLogoBlue} from "@workday/some-other-library"
 
          <>
             <Grid dangerouslySetInnerHTML={{ __html: dubLogoBlue }} />
