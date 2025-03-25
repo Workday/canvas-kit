@@ -6,6 +6,7 @@ import {Basic} from './examples/Basic';
 import {WithCount} from './examples/WithCount';
 import {WithRemovable} from './examples/WithRemovable';
 import {WithList} from './examples/WithList';
+import {CustomStyles} from './examples/CustomStyles';
 
 import * as PillStories from './Pill.stories';
 
@@ -30,7 +31,7 @@ information to help with scanning and organization.
 
 ### Basic Pills
 
-By default a Pill is considered interactive, therefore it's default variant is `default`.All leading
+By default a Pill is considered interactive, therefore it's default variant is `default`. All leading
 elements (icons or avatars) are intended to be descriptive, helping support the label. Do not rely
 on the leading element to indicate the interaction behavior.
 
@@ -38,7 +39,11 @@ on the leading element to indicate the interaction behavior.
 
 You can render an icon inside the `Pill` with `Pill.Icon`. It will render a `plusIcon` by default,
 but it can be customized by providing an icon to the `icon` prop. Because it uses `SystemIcon` under
-the hood, you also have to all `SystemIconProps`.
+the hood, you also have access to all `SystemIconProps`.
+
+#### Accessibility
+
+You must provide an `aria-label` to the `Pill.Icon` for proper accessibility.
 
 <ExampleCodeBlock code={Basic} />
 
@@ -52,19 +57,15 @@ You can render an avatar image inside the `Pill` with `Pill.Avatar`. It should a
 #### Count
 
 The count appears after the label. It is usually associated with the label. If you have a category,
-the count will dirrectly correlate to that category.
+the count will directly correlate to that category.
 
 <ExampleCodeBlock code={WithCount} />
 
 ### Read Only
 
-If the `Pill` has `variant='readOnly'`, it will look like a read-only `Pill`. This is a
-non-interactive element that is used to display information.
+The `readOnly` variant is a non-interactive element that is used to display information. 
 
-> **_NOTE:_** `maxWidth` measures the width of the `Pill.Label` (or text) and not the width of the
-> entire `Pill`. By default, this `maxWidth` is set to `200px` and the text will be truncated with
-> an ellipsis and render an OverflowTooltip on hover and focus. This max width can be changed by
-> providing a `maxWidth` prop on the Pill.
+You can define a read only `Pill` by providing a `variant='readOnly'` prop.
 
 <ExampleCodeBlock code={WithReadOnly} />
 
@@ -99,6 +100,14 @@ In order to achieve this, use our `Flex` component to wrap each `Pill` and space
 accordingly.
 
 <ExampleCodeBlock code={WithList} />
+
+### Custom Styles
+
+`Pill` supports custom styling via the `cs` prop. For more information, check our
+["How To Customize Styles"](https://workday.github.io/canvas-kit/?path=/docs/styling-how-to-customize-styles--docs)
+or view the example below.
+
+<ExampleCodeBlock code={CustomStyles} />
 
 ## Component API
 

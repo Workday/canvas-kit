@@ -1,15 +1,10 @@
 import React from 'react';
 
-import {
-  createSubcomponent,
-  ExtractProps,
-  focusRing,
-  styled,
-  StyledType,
-} from '@workday/canvas-kit-react/common';
-import {Flex} from '@workday/canvas-kit-react/layout';
-import {colors} from '@workday/canvas-kit-react/tokens';
-
+import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {Heading} from '@workday/canvas-kit-react/text';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 import {useExpandableTarget} from './hooks/useExpandableTarget';
 import {useExpandableModel} from './hooks/useExpandableModel';
 
@@ -28,18 +23,23 @@ export interface ExpandableTargetProps extends ExtractProps<typeof Flex, never> 
   headingLevel?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 }
 
-const StyledButton = styled(Flex.as('button'))<StyledType>({
-  cursor: 'pointer',
-  '&:focus-visible, &.focus': {
-    ...focusRing(),
+export const expandableTargetStencil = createStencil({
+  base: {
+    background: system.color.bg.transparent,
+    borderColor: system.color.bg.transparent,
+    borderRadius: system.shape.x1,
+    borderWidth: 0,
+    display: 'flex',
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+    justifyContent: 'start',
+    padding: system.space.x2,
+    cursor: 'pointer',
+    width: '100%',
+    '&:hover, &.hover': {
+      backgroundColor: system.color.bg.alt.default,
+    },
   },
-  '&:hover': {
-    background: colors.soap300,
-  },
-});
-
-const Heading = styled('h1')<StyledType>({
-  margin: 0,
 });
 
 export const ExpandableTarget = createSubcomponent('button')({
@@ -47,19 +47,14 @@ export const ExpandableTarget = createSubcomponent('button')({
   elemPropsHook: useExpandableTarget,
 })<ExpandableTargetProps>(({children, headingLevel, ...elementProps}, Element) => {
   const button = (
-    <StyledButton
-      as={Element}
-      background="none"
-      border="none"
-      borderRadius="m"
-      flexDirection="row"
-      padding="xxs"
-      width="100%"
-      {...elementProps}
-    >
-      {children}
-    </StyledButton>
+    <Element {...mergeStyles(elementProps, expandableTargetStencil())}>{children}</Element>
   );
 
-  return !!headingLevel ? <Heading as={headingLevel}>{button}</Heading> : button;
+  return headingLevel ? (
+    <Heading size="small" as={headingLevel} margin="0">
+      {button}
+    </Heading>
+  ) : (
+    button
+  );
 });

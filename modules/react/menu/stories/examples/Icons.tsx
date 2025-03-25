@@ -31,7 +31,7 @@ export const Icons = () => {
             </Menu.Item>
             <Menu.Item data-text="User">
               <Menu.Item.Icon icon={userIcon} />
-              <Menu.Item.Text></Menu.Item.Text>
+              <Menu.Item.Text>User</Menu.Item.Text>
             </Menu.Item>
             <Menu.Divider />
             <Menu.Item data-text="Fifth Item (with divider)">
