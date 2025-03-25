@@ -29,7 +29,9 @@ describe('rename dub logos', () => {
         import {Grid} from '@workday/canvas-kit-react/layout'
 
          <>
-            <Grid dangerouslySetInnerHTML={{ __html: dubLogoBlue }} />
+            <Grid dangerouslySetInnerHTML={{
+          __html: isPrimary ? dubLogoBlue : dubLogoWhite,
+        }} />
         </>
     `;
 
@@ -38,7 +40,9 @@ describe('rename dub logos', () => {
         import {Grid} from '@workday/canvas-kit-react/layout'
 
          <>
-            <Grid dangerouslySetInnerHTML={{ __html: dubLogoPrimary }} />
+            <Grid dangerouslySetInnerHTML={{
+          __html: isPrimary ? dubLogoPrimary : dubLogoReversed,
+        }} />
         </>
     `;
     expectTransform(input, expected);

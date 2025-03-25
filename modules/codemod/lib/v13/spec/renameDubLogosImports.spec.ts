@@ -64,5 +64,22 @@ describe('renameDubLogos', () => {
 
       expectTransform(input, expected);
     });
+    it('should update renamed exports with use of local sources', () => {
+      const input = stripIndent`
+        import {dubLogoBlue as CanvasDubLogoBlue} from "@workday/canvas-kit-react/common";
+        import {dubLogoBlue} from "./my-common";
+
+        <Component logo={dubLogoBlue} />
+      `;
+
+      const expected = stripIndent`
+        import {dubLogoPrimary as CanvasDubLogoBlue} from "@workday/canvas-kit-react/common";
+        import {dubLogoBlue} from "./my-common";
+
+        <Component logo={dubLogoBlue} />
+      `;
+
+      expectTransform(input, expected);
+    });
   });
 });
