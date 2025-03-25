@@ -128,6 +128,7 @@ export const graphicImageStencil = createStencil({
   modifiers: {
     grow: {
       true: {
+        width: '100%',
         '& [data-part="graphic-img"]': {
           width: '100%',
         },
@@ -142,8 +143,8 @@ export const graphicImageStencil = createStencil({
  * [`Buffer` docs](https://nodejs.org/api/buffer.html#buffers-and-character-encodings)
  */
 export const base64Encoded = (str: string) => {
-  if (typeof window !== undefined) {
-    return btoa(str);
+  if (typeof window !== 'undefined' && typeof window.btoa === 'function') {
+    return window.btoa(str);
   }
   return Buffer.from(str, 'binary').toString('base64');
 };
