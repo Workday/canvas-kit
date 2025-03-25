@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.5.4](https://github.com/Workday/canvas-kit/releases/tag/v12.5.4) (2025-03-25)
+
+### Components
+
+- fix: Add minWidth and minHeight 1px to accessibleHide ([#3206](https://github.com/Workday/canvas-kit/pull/3206)) ([@toopham](https://github.com/toopham), Tu Pham)
+  isHidden prop in `FormField.Label` will now update the minWidth and minHeight to 1px.
+
+
 ## [v12.5.3](https://github.com/Workday/canvas-kit/releases/tag/v12.5.3) (2025-03-25)
 
 ### Components
