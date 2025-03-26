@@ -51,6 +51,14 @@ export const bannerStencil = createStencil({
         },
       },
     },
+    isSticky: {
+      true: {
+        width: px2rem(222),
+      },
+      false: {
+        width: px2rem(328),
+      },
+    },
   },
 });
 
@@ -135,9 +143,11 @@ export const Banner = createContainer('button')({
   return (
     <Flex
       as={Element}
-      width={model.state.isSticky ? px2rem(222) : px2rem(328)}
       {...borderStyleProps}
-      {...handleCsProp(elemProps, bannerStencil({hasErrors: model.state.hasError as any}))}
+      {...handleCsProp(
+        elemProps,
+        bannerStencil({hasErrors: model.state.hasError, isSticky: model.state.isSticky})
+      )}
     >
       {children}
     </Flex>
