@@ -5,8 +5,6 @@ import {useUniqueId, createModelHook, Generic} from '@workday/canvas-kit-react/c
 
 export type Orientation = 'horizontal' | 'vertical';
 
-export type ItemType = 'item' | 'group';
-
 export const defaultGetId = (item: Generic): string => {
   if (process.env.NODE_ENV === 'development') {
     if (typeof item === 'object' && item.id === undefined) {
