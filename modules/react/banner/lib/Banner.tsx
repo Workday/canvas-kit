@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-import {borderRadius, space, type} from '@workday/canvas-kit-react/tokens';
+import {borderRadius} from '@workday/canvas-kit-react/tokens';
 import {createContainer, ExtractProps, focusRing, useIsRTL} from '@workday/canvas-kit-react/common';
 import {Flex} from '@workday/canvas-kit-react/layout';
 
-import {useBannerModel, useThemedPalette} from './hooks';
+import {useBannerModel} from './hooks';
 
 import {BannerIcon} from './BannerIcon';
 import {BannerLabel} from './BannerLabel';
