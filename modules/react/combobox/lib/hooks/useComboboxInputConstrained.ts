@@ -31,8 +31,6 @@ export const useComboboxInputConstrained = createElemPropsHook(useComboboxModel)
       'disabled' | 'value' | 'onChange' | 'name'
     > = {}
   ) => {
-    const firstRenderRef = React.useRef(true);
-    console.log('firstRender', firstRenderRef.current);
     // The user element is what the user sees
     const {elementRef: userElementRef, localRef: userLocalRef} = useLocalRef(
       model.state.targetRef as React.Ref<HTMLInputElement>
@@ -87,7 +85,6 @@ export const useComboboxInputConstrained = createElemPropsHook(useComboboxModel)
                     : modelStateRef.current.selectedIds
                   ).join(', ')
               ) {
-                console.log('set', value);
                 model.events.setSelectedIds(value ? value.split(', ') : []);
               }
             },
@@ -130,8 +127,7 @@ export const useComboboxInputConstrained = createElemPropsHook(useComboboxModel)
                     .map(item => item.textValue)
               ).join(', ');
 
-        if (userValue !== userLocalRef.current.value && !firstRenderRef.current) {
-          console.log('dispatchUserValue', userValue, userLocalRef.current.value);
+        if (userValue !== userLocalRef.current.value) {
           dispatchInputEvent(userLocalRef.current, userValue);
         }
       }
@@ -141,13 +137,10 @@ export const useComboboxInputConstrained = createElemPropsHook(useComboboxModel)
           ', '
         );
 
-        if (formValue !== formLocalRef.current.value && !firstRenderRef.current) {
-          console.log('dispatchUserValue', formValue, formLocalRef.current.value);
-
+        if (formValue !== formLocalRef.current.value) {
           dispatchInputEvent(formLocalRef.current, formValue);
         }
       }
-      firstRenderRef.current = false;
     }, [model.state.selectedIds, model.state.items, formLocalRef, userLocalRef]);
 
     // The props here will go to the user input.

@@ -50,7 +50,5 @@ export const useMenuModel = createModelHook({
     ...popup.events,
   };
 
-  console.log('items', state.items);
-
   return {...list, ...popup, state, events};
 });

@@ -2,11 +2,10 @@ import * as React from 'react';
 import {iconColors} from '@workday/canvas-kit-react/tokens';
 import {CanvasSystemIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
-import {createComponent, createSubcomponent, getColor} from '@workday/canvas-kit-react/common';
+import {createComponent, getColor} from '@workday/canvas-kit-react/common';
 import {cssVar, createStencil, handleCsProp, px2rem, createVars} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 import {Svg, SvgProps, svgStencil, transformColorNameToToken} from './Svg';
-import {SystemIconCircle} from './SystemIconCircle';
 
 /**
  * @deprecated Interface `SystemIconStyles` will be removed in a future version. `accent`, `color`, background props will be moved inside `GraphicProps`.

@@ -35,31 +35,13 @@ export const defaultGetTextValue = (item: Generic): string => {
     : '';
 };
 
-export const defaultGetType = (item: Generic): ItemType => {
-  return item === undefined ? 'item' : typeof item === 'string' ? 'item' : item.type || 'item';
-};
-
-export const defaultGetItems = (item: Generic): (Item<Generic> | Group<Generic>)[] => {
-  return item === undefined ? [] : item.items || [];
-};
-
 export interface Item<T> {
-  type: 'item';
   index: number;
   id: string;
   value: T;
   /**
    * Used by components that allow jumping to an item based on typing
    */
-  textValue: string;
-}
-
-export interface Group<T> {
-  type: 'group';
-  index: number;
-  id: string;
-  value: T;
-  items: Item<T>[];
   textValue: string;
 }
 
@@ -132,14 +114,6 @@ export const useBaseListModel = createModelHook({
      */
     getTextValue: defaultGetTextValue,
     /**
-     * Optional function to return the type
-     */
-    getType: defaultGetType,
-    /**
-     * Optional function to return children from a group
-     */
-    getItems: defaultGetItems,
-    /**
      * Array of all ids which are currently disabled. This is used for navigation to skip over items
      * which are not focusable.
      */
@@ -168,13 +142,9 @@ export const useBaseListModel = createModelHook({
   // passed instead of a stable reference.
   const getIdRef = React.useRef(defaultGetId);
   const getTextValueRef = React.useRef(defaultGetTextValue);
-  const getTypeRef = React.useRef(defaultGetType);
-  const getItemsRef = React.useRef(defaultGetItems);
 
   getIdRef.current = config.getId || defaultGetId;
   getTextValueRef.current = config.getTextValue || config.getId || defaultGetTextValue;
-  getTypeRef.current = config.getType || defaultGetType;
-  getItemsRef.current = config.getItems || defaultGetItems;
 
   const [orientation] = React.useState(config.orientation || 'vertical');
   const [UNSTABLE_defaultItemHeight, setDefaultItemHeight] = React.useState(
@@ -183,39 +153,20 @@ export const useBaseListModel = createModelHook({
   const isVirtualized = config.shouldVirtualize && !!config.items?.length;
   const indexRef = React.useRef(0);
   const containerRef = React.useRef<HTMLDivElement>(null);
-  const items: (Item<Generic> | Group<Generic>)[] = React.useMemo(() => {
-    let itemIndex = 0;
-    function wrapItemsWithMetadata(items: Generic[]): (Item<Generic> | Group<Generic>)[] {
-      return items.map((item, index) => {
-        const type = getTypeRef.current(item);
-        console.log('type', type);
-        if (type === 'group') {
-          const groupIndex = itemIndex;
-          const items = wrapItemsWithMetadata(getItemsRef.current(item) as Item<Generic>[]);
-          return {
-            type: 'group',
-            id: getIdRef.current(item),
-            index: groupIndex,
-            value: item,
-            items,
-            textValue: getTextValueRef.current(item),
-          } as Group<Generic>;
-        }
-        itemIndex += 1;
+  const items: Item<Generic>[] = React.useMemo(
+    () =>
+      (config.items || []).map((item, index) => {
         return {
-          type: 'item',
           id: getIdRef.current(item),
-          index: itemIndex - 1,
+          index,
           value: item,
           textValue: getTextValueRef.current(item),
-        } as Item<Generic>;
-      });
-    }
-    return wrapItemsWithMetadata(config.items || []);
-  }, [config.items]);
+        };
+      }),
+    [config.items]
+  );
+  const [staticItems, setStaticItems] = React.useState<Item<Generic>[]>([]);
 
-  console.log('items', items);
-  const [staticItems, setStaticItems] = React.useState<(Item<Generic> | Group<Generic>)[]>([]);
   const UNSTABLE_virtual = useVirtual({
     size: items.length,
     parentRef: containerRef,
@@ -224,10 +175,8 @@ export const useBaseListModel = createModelHook({
     overscan: 3, // overscan of 3 helps rapid navigation
   });
 
-  console.log('virtual', UNSTABLE_virtual);
-
   // Force Typescript to recognize the `Generic` symbol
-  const genericState: {items: (Item<Generic> | Group<Generic>)[]} = {
+  const genericState: {items: Item<Generic>[]} = {
     items: items.length ? items : staticItems,
   };
 
@@ -248,12 +197,12 @@ export const useBaseListModel = createModelHook({
      * Register an item to the list. Takes in an identifier, a React.Ref and an optional index. This
      * should be called on component mount. This event is only called for static rendering.
      */
-    registerItem(data: Item<Generic> | Group<Generic>) {
+    registerItem(data: {id: string; textValue: string}) {
       indexRef.current++;
       setStaticItems(items => {
-        console.log('registering', data);
         return items.concat({
           ...data,
+          value: data,
           index: items.length,
         });
       });

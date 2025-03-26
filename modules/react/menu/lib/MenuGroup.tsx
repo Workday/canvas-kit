@@ -1,33 +1,26 @@
 import * as React from 'react';
 
-import {createStencil} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {createStencil, CSProps} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 import {
   createSubcomponent,
-  composeHooks,
   createElemPropsHook,
   createModelHook,
-  Generic,
   createContainer,
   useUniqueId,
-  useLocalRef,
-  useForkRef,
 } from '@workday/canvas-kit-react/common';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {
-  Item,
-  ItemType,
-  Group,
-  useListItemRegister,
-  useListModel,
-  VirtualItem,
-} from '@workday/canvas-kit-react/collection';
+import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 
-import {useMenuModel} from './useMenuModel';
+export interface MenuGroupHeaderProps extends CSProps, FlexProps {
+  /**
+   * The label text of the {@link MenuGroup Menu.Group}.
+   */
+  children?: React.ReactNode;
+}
 
-export interface MenuGroupProps {
+export interface MenuGroupProps extends CSProps, FlexProps {
   /**
    * Optionally pass index to menu item. This should be done if `Menu.Item` components were created
    * via a `Array::map` function. This index will ensure keyboard navigation works even if items are
@@ -80,7 +73,7 @@ const useMenuGroupModel = createModelHook({
   };
 });
 
-export const menuGroupStencil = createStencil({
+export const menuGroupHeadingStencil = createStencil({
   base: {
     ...system.type.subtext.large,
     display: 'flex',
@@ -93,48 +86,19 @@ export const menuGroupStencil = createStencil({
   },
 });
 
-const useListGroupRegister = createElemPropsHook(useListModel)(
-  (
-    {state, events},
-    ref,
-    elemProps: {
-      'data-id'?: string;
-      'data-text'?: string;
-      'data-type'?: ItemType;
-      children?: React.ReactNode;
-      index?: number;
-      disabled?: boolean;
-      item?: Item<any> | Group<any>;
-      virtual?: VirtualItem;
-    } = {}
-  ) => {
-    const elementRef = useForkRef(ref as React.Ref<HTMLElement>, elemProps.virtual?.measureRef);
-    return {
-      ref: elementRef,
-    };
-  }
-);
+export const useMenuGroup = createElemPropsHook(useMenuGroupModel)(model => {
+  return {
+    'data-type': 'group',
+    role: 'group',
+    'aria-labelledby': model.state.id,
+  };
+});
 
-export const useMenuGroup = composeHooks(
-  createElemPropsHook(useMenuGroupModel)(
-    (model, ref, elemProps: {'data-id': string} = {'data-id': ''}) => {
-      return {
-        'data-type': 'group',
-        role: 'group',
-        'aria-labelledby': model.state.id,
-      };
-    }
-  ),
-  useListGroupRegister
-);
-
-export const useMenuGroupHeading = createElemPropsHook(useMenuGroupModel)(
-  (model, ref, elemProps) => {
-    return {
-      id: model.state.id,
-    };
-  }
-);
+export const useMenuGroupHeading = createElemPropsHook(useMenuGroupModel)(model => {
+  return {
+    id: model.state.id,
+  };
+});
 
 const MenuGroupHeading = createSubcomponent('div')({
   modelHook: useMenuGroupModel,
@@ -142,7 +106,7 @@ const MenuGroupHeading = createSubcomponent('div')({
 })(({children, ...elemProps}, Element) => {
   return (
     <OverflowTooltip>
-      <Element {...mergeStyles(elemProps, menuGroupStencil())}>{children}</Element>
+      <Element {...mergeStyles(elemProps, menuGroupHeadingStencil())}>{children}</Element>
     </OverflowTooltip>
   );
 });
@@ -156,7 +120,7 @@ export const MenuGroup = createContainer('div')({
   },
 })<MenuGroupProps>(({children, title, ...elemProps}, Element) => {
   return (
-    <Element {...elemProps}>
+    <Element {...mergeStyles(elemProps)}>
       {title ? <MenuGroupHeading>{title}</MenuGroupHeading> : null}
       {children}
     </Element>

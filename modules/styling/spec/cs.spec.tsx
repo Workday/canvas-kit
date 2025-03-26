@@ -872,7 +872,6 @@ describe('cs', () => {
       const myStencil = createStencil({
         vars: {
           width: '10px',
-          /** */
           height: '10px',
         },
         base: {},

@@ -31,7 +31,7 @@ export const Basic = () => {
       <FormField>
         <FormField.Label>Contact</FormField.Label>
         <FormField.Field>
-          <Select items={options} initialSelectedIds={['Phone']}>
+          <Select items={options}>
             <FormField.Input as={Select.Input} onChange={handleChange} />
             <Select.Popper>
               <Select.Card>

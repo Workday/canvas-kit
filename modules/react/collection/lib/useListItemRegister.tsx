@@ -8,7 +8,7 @@ import {
   slugify,
 } from '@workday/canvas-kit-react/common';
 
-import {Item, Group, ItemType} from './useBaseListModel';
+import {Item} from './useBaseListModel';
 import {VirtualItem} from './react-virtual';
 import {useListModel} from './useListModel';
 
@@ -32,11 +32,10 @@ export const useListItemRegister = createElemPropsHook(useListModel)(
     elemProps: {
       'data-id'?: string;
       'data-text'?: string;
-      'data-type'?: ItemType;
       children?: React.ReactNode;
       index?: number;
       disabled?: boolean;
-      item?: Item<any> | Group<any>;
+      item?: Item<any>;
       virtual?: VirtualItem;
     } = {}
   ) => {
@@ -72,23 +71,15 @@ export const useListItemRegister = createElemPropsHook(useListModel)(
       if (state.items.find(item => item.id === itemId)) {
         return;
       }
-      const type = elemProps['data-type'] ? elemProps['data-type'] : 'item';
-
-      const item = {
+      events.registerItem({
         id: itemId,
-        type,
         textValue: elemProps['data-text']
           ? elemProps['data-text']
           : typeof elemProps.children === 'string'
           ? elemProps.children
           : '',
-      } as Item<any> | Group<any>;
+      });
 
-      if (type === 'group') {
-        (item as Group<any>).items = [];
-      }
-
-      events.registerItem(item);
       setLocalId(itemId);
 
       return () => {
