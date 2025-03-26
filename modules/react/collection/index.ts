@@ -1,4 +1,10 @@
-export {defaultGetId, type Item, type Orientation} from './lib/useBaseListModel';
+export {
+  defaultGetId,
+  type Item,
+  type Group,
+  type ItemType,
+  type Orientation,
+} from './lib/useBaseListModel';
 export * from './lib/useListItemRegister';
 export * from './lib/useOverflowListMeasure';
 export * from './lib/useOverflowListItemMeasure';

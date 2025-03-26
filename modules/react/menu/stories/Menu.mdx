@@ -3,6 +3,7 @@ import {Basic} from './examples/Basic';
 import {ContextMenu} from './examples/ContextMenu';
 import {Icons} from './examples/Icons';
 import {SelectableMenu} from './examples/SelectableMenu';
+import {Grouping} from './examples/Grouping';
 import * as MenuStories from './Menu.stories';
 
 <Meta of={MenuStories} />
@@ -71,6 +72,17 @@ behaviors depend on many other things. To see a full example of all these behavi
 `<Combobox>` and `<Select>` component source code as examples.
 
 <ExampleCodeBlock code={SelectableMenu} />
+
+### Grouping
+
+Grouping adds hierarchy and categorization to menu items. Group headers do not represent menu items
+and are not selectable with the keyboard or mouse.
+
+> **Note**: Grouping is not supported in virtual rendering. Menus by default have `shouldVirtualize`
+> set to `false`. Setting to `true` results in unspecified behavior. We use `react-virtual` which
+> doesn't support nested virtualization.
+
+<ExampleCodeBlock code={Grouping} />
 
 ## Component API
 

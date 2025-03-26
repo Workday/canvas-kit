@@ -11,10 +11,19 @@ import {
   Generic,
   createContainer,
   useUniqueId,
+  useLocalRef,
+  useForkRef,
 } from '@workday/canvas-kit-react/common';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {Item, useListItemRegister, useListModel} from '@workday/canvas-kit-react/collection';
+import {
+  Item,
+  ItemType,
+  Group,
+  useListItemRegister,
+  useListModel,
+  VirtualItem,
+} from '@workday/canvas-kit-react/collection';
 
 import {useMenuModel} from './useMenuModel';
 
@@ -84,14 +93,39 @@ export const menuGroupStencil = createStencil({
   },
 });
 
-export const useMenuGroup = createElemPropsHook(useMenuGroupModel)(
-  (model, ref, elemProps: {'data-id': string} = {'data-id': ''}) => {
+const useListGroupRegister = createElemPropsHook(useListModel)(
+  (
+    {state, events},
+    ref,
+    elemProps: {
+      'data-id'?: string;
+      'data-text'?: string;
+      'data-type'?: ItemType;
+      children?: React.ReactNode;
+      index?: number;
+      disabled?: boolean;
+      item?: Item<any> | Group<any>;
+      virtual?: VirtualItem;
+    } = {}
+  ) => {
+    const elementRef = useForkRef(ref as React.Ref<HTMLElement>, elemProps.virtual?.measureRef);
     return {
-      'data-type': 'group',
-      role: 'group',
-      'aria-labelledby': model.state.id,
+      ref: elementRef,
     };
   }
+);
+
+export const useMenuGroup = composeHooks(
+  createElemPropsHook(useMenuGroupModel)(
+    (model, ref, elemProps: {'data-id': string} = {'data-id': ''}) => {
+      return {
+        'data-type': 'group',
+        role: 'group',
+        'aria-labelledby': model.state.id,
+      };
+    }
+  ),
+  useListGroupRegister
 );
 
 export const useMenuGroupHeading = createElemPropsHook(useMenuGroupModel)(
