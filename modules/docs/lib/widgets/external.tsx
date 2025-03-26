@@ -1,4 +1,3 @@
-import React from 'react';
 import {ExternalHyperlink} from '@workday/canvas-kit-react/button';
 
 import {renderTypeParameters} from '../widgetUtils';
