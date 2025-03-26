@@ -20,6 +20,13 @@ export interface BannerProps extends ExtractProps<typeof Flex, never> {
 
 export const bannerStencil = createStencil({
   base: {
+    ...system.type.subtext.large,
+    fontWeight: system.fontWeight.medium,
+    padding: `${system.space.x2} ${system.space.x4}`,
+    border: '0',
+    display: 'flex',
+    alignItems: 'center',
+    textAlign: 'left',
     cursor: 'pointer',
     transition: 'background-color 120ms',
     outline: `${system.space.x1} solid transparent`,
@@ -31,11 +38,14 @@ export const bannerStencil = createStencil({
   modifiers: {
     hasErrors: {
       true: {
+        backgroundColor: brand.error.base,
+        color: brand.error.accent,
         '&:hover': {
           background: brand.error.dark,
         },
       },
       false: {
+        backgroundColor: brand.alert.base,
         '&:hover': {
           background: brand.alert.dark,
         },
@@ -109,8 +119,6 @@ export const Banner = createContainer('button')({
     ActionText: BannerActionText,
   },
 })<BannerProps>(({children, ...elemProps}, Element, model) => {
-  const palette = useThemedPalette(model.state.hasError ? 'error' : 'alert');
-
   const isRTL = useIsRTL();
   const borderBottomLeftRadius = isRTL ? 'borderBottomRightRadius' : 'borderBottomLeftRadius';
   const borderTopLeftRadius = isRTL ? 'borderTopRightRadius' : 'borderTopLeftRadius';
@@ -127,16 +135,7 @@ export const Banner = createContainer('button')({
   return (
     <Flex
       as={Element}
-      {...type.levels.subtext.large}
-      fontWeight="medium"
-      textAlign="left"
       width={model.state.isSticky ? px2rem(222) : px2rem(328)}
-      backgroundColor={palette.normal}
-      color={palette.contrast}
-      padding={`${space.xxs} ${space.s}`}
-      border="0"
-      display="flex"
-      alignItems="center"
       {...borderStyleProps}
       {...handleCsProp(elemProps, bannerStencil({hasErrors: model.state.hasError as any}))}
     >
