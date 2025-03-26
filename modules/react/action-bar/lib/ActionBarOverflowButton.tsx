@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import {relatedActionsIcon} from '@workday/canvas-system-icons-web';
 import {
   createElemPropsHook,

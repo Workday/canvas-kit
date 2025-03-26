@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {JumpControls} from '../../modules/react/pagination/stories/examples/JumpControls';
 import {CustomRange} from '../../modules/react/pagination/stories/examples/CustomRange';
 import {GoToForm} from '../../modules/react/pagination/stories/examples/GoToForm';

@@ -1,6 +1,3 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import {jsx} from '@emotion/react';
 import * as React from 'react';
 
 import {borderRadius, CSSProperties, space, type} from '@workday/canvas-kit-react/tokens';
@@ -131,7 +128,7 @@ export const Banner = createContainer('button')({
       display="flex"
       alignItems="center"
       {...borderStyleProps}
-      css={[styles, themedBackgroundStyles]}
+      cs={[styles, themedBackgroundStyles]}
       {...elemProps}
     >
       {children}
