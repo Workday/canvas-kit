@@ -3,6 +3,109 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.5.4](https://github.com/Workday/canvas-kit/releases/tag/v12.5.4) (2025-03-25)
+
+### Components
+
+- fix: Add minWidth and minHeight 1px to accessibleHide ([#3206](https://github.com/Workday/canvas-kit/pull/3206)) ([@toopham](https://github.com/toopham), Tu Pham)
+  isHidden prop in `FormField.Label` will now update the minWidth and minHeight to 1px.
+
+
+## [v12.5.3](https://github.com/Workday/canvas-kit/releases/tag/v12.5.3) (2025-03-25)
+
+### Components
+
+- fix: Ensure btoa is defined on window ([#3207](https://github.com/Workday/canvas-kit/pull/3207)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.5.2](https://github.com/Workday/canvas-kit/releases/tag/v12.5.2) (2025-03-20)
+
+### Components
+
+- fix: Pass height and width to Graphic span element ([#3202](https://github.com/Workday/canvas-kit/pull/3202)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.5.1](https://github.com/Workday/canvas-kit/releases/tag/v12.5.1) (2025-03-19)
+
+### Components
+
+- fix: Account for nodejs environemnts when encoding data ([#3200](https://github.com/Workday/canvas-kit/pull/3200)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.5.0](https://github.com/Workday/canvas-kit/releases/tag/v12.5.0) (2025-03-19)
+
+
+
+
+## [v12.4.23](https://github.com/Workday/canvas-kit/releases/tag/v12.4.23) (2025-03-17)
+
+
+
+
+## [v12.4.22](https://github.com/Workday/canvas-kit/releases/tag/v12.4.22) (2025-03-17)
+
+### Documentation
+
+- fix: Ensure js files are updated as well for stackblitz build ([#3194](https://github.com/Workday/canvas-kit/pull/3194)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.4.21](https://github.com/Workday/canvas-kit/releases/tag/v12.4.21) (2025-03-17)
+
+### Documentation
+
+- docs: Updated snapshot serializers doc with modifier class name use case ([#3193](https://github.com/Workday/canvas-kit/pull/3193)) ([@deno-inbox](https://github.com/deno-inbox), kaman.lam)
+
+
+## [v12.4.20](https://github.com/Workday/canvas-kit/releases/tag/v12.4.20) (2025-03-13)
+
+### Infrastructure
+
+- fix: Export collection types used in unexported models ([#3165](https://github.com/Workday/canvas-kit/pull/3165)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v12.4.19](https://github.com/Workday/canvas-kit/releases/tag/v12.4.19) (2025-03-12)
+
+### Components
+
+- fix: Ensure text visible when select model is hoisted ([#3189](https://github.com/Workday/canvas-kit/pull/3189)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.4.18](https://github.com/Workday/canvas-kit/releases/tag/v12.4.18) (2025-03-12)
+
+### Infrastructure
+
+- fix: Update the build script for the docs package to ensure stackblitz files exist in the dist folder. ([#3188](https://github.com/Workday/canvas-kit/pull/3188)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.4.17](https://github.com/Workday/canvas-kit/releases/tag/v12.4.17) (2025-03-12)
+
+
+
+
+## [v12.4.16](https://github.com/Workday/canvas-kit/releases/tag/v12.4.16) (2025-03-11)
+
+### Components
+
+- fix: Compound components should accept `ElementComponent` ([#3183](https://github.com/Workday/canvas-kit/pull/3183)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v11.2.5](https://github.com/Workday/canvas-kit/releases/tag/v11.2.5) (2025-03-11)
+
+### Components
+
+- fix: Compound components should accept `ElementComponent` ([#3183](https://github.com/Workday/canvas-kit/pull/3183)) ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v12.4.15](https://github.com/Workday/canvas-kit/releases/tag/v12.4.15) (2025-03-11)
+
+
+
+
+## [v12.4.14](https://github.com/Workday/canvas-kit/releases/tag/v12.4.14) (2025-03-10)
+
+### Documentation
+
+- docs: Ensure stackblitz gets packaged with docs package ([#3167](https://github.com/Workday/canvas-kit/pull/3167)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v12.4.13](https://github.com/Workday/canvas-kit/releases/tag/v12.4.13) (2025-03-10)
 
 ### Documentation

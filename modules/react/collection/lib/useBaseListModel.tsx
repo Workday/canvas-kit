@@ -24,13 +24,7 @@ export const defaultGetTextValue = (item: Generic): string => {
       );
     }
   }
-  return item === undefined
-    ? ''
-    : typeof item === 'string'
-    ? item
-    : item === undefined
-    ? item.id || ''
-    : '';
+  return typeof item === 'string' ? item : item === undefined ? '' : item.text || '';
 };
 
 export interface Item<T> {
