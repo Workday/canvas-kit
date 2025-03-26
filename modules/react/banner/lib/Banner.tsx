@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {borderRadius, CSSProperties, space, type} from '@workday/canvas-kit-react/tokens';
+import {borderRadius, space, type} from '@workday/canvas-kit-react/tokens';
 import {createContainer, ExtractProps, focusRing, useIsRTL} from '@workday/canvas-kit-react/common';
 import {Flex} from '@workday/canvas-kit-react/layout';
 
@@ -9,9 +9,8 @@ import {useBannerModel, useThemedPalette} from './hooks';
 import {BannerIcon} from './BannerIcon';
 import {BannerLabel} from './BannerLabel';
 import {BannerActionText} from './BannerActionText';
-import {px2rem} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
-
+import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
 export interface BannerProps extends ExtractProps<typeof Flex, never> {
   /**
    * Children of the Banner. Should contain a `<Banner.Label>` a <Banner.Icon> and an optional `<Banner.ActionText>`
@@ -19,15 +18,31 @@ export interface BannerProps extends ExtractProps<typeof Flex, never> {
   children?: React.ReactNode;
 }
 
-const styles: CSSProperties = {
-  cursor: 'pointer',
-  transition: 'background-color 120ms',
-  outline: `${system.space.x1} solid transparent`,
-  '&:focus-visible, &.focus': {
-    outline: `${px2rem(4)} double transparent`,
-    ...focusRing({separation: 2}),
+export const bannerStencil = createStencil({
+  base: {
+    cursor: 'pointer',
+    transition: 'background-color 120ms',
+    outline: `${system.space.x1} solid transparent`,
+    '&:focus-visible, &.focus': {
+      outline: `${px2rem(4)} double transparent`,
+      ...focusRing({separation: 2}),
+    },
   },
-};
+  modifiers: {
+    hasErrors: {
+      true: {
+        '&:hover': {
+          background: brand.error.dark,
+        },
+      },
+      false: {
+        '&:hover': {
+          background: brand.alert.dark,
+        },
+      },
+    },
+  },
+});
 
 /**
  * `Banner` is a container component rendered as a `<button>` element that is responsible for creating
@@ -95,11 +110,6 @@ export const Banner = createContainer('button')({
   },
 })<BannerProps>(({children, ...elemProps}, Element, model) => {
   const palette = useThemedPalette(model.state.hasError ? 'error' : 'alert');
-  const themedBackgroundStyles: CSSProperties = {
-    '&:hover': {
-      backgroundColor: palette.hover,
-    },
-  };
 
   const isRTL = useIsRTL();
   const borderBottomLeftRadius = isRTL ? 'borderBottomRightRadius' : 'borderBottomLeftRadius';
@@ -120,7 +130,7 @@ export const Banner = createContainer('button')({
       {...type.levels.subtext.large}
       fontWeight="medium"
       textAlign="left"
-      width={model.state.isSticky ? '222px' : '328px'}
+      width={model.state.isSticky ? px2rem(222) : px2rem(328)}
       backgroundColor={palette.normal}
       color={palette.contrast}
       padding={`${space.xxs} ${space.s}`}
@@ -128,8 +138,7 @@ export const Banner = createContainer('button')({
       display="flex"
       alignItems="center"
       {...borderStyleProps}
-      cs={[styles, themedBackgroundStyles]}
-      {...elemProps}
+      {...handleCsProp(elemProps, bannerStencil({hasErrors: model.state.hasError as any}))}
     >
       {children}
     </Flex>
