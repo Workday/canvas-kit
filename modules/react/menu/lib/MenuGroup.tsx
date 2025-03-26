@@ -22,36 +22,29 @@ export interface MenuGroupHeaderProps extends CSProps, FlexProps {
 
 export interface MenuGroupProps extends CSProps, FlexProps {
   /**
-   * Optionally pass index to menu item. This should be done if `Menu.Item` components were created
-   * via a `Array::map` function. This index will ensure keyboard navigation works even if items are
-   * inserted out of order.
-   */
-  index?: number;
-  /**
-   * The children of the `Menu.Group`. Should be {@link MenuGroupHeading Menu.Group.Heading} or {@link MenuItem Menu.Item}.
-   * If the `title` prop is provided, the `Menu.Group.Heading` is not needed.
+   * The children of the `Menu.Group`. Should be {@link MenuGroupHeading Menu.Group.Heading} or
+   * {@link MenuItem Menu.Item}. If the `title` prop is provided, the `Menu.Group.Heading` is not
+   * needed.
    */
   children?: React.ReactNode;
   /**
-   * The name of the menu item. This name will be used in the `onSelect` callback in the model. If
-   * this property is not provided, it will default to a string representation of the the zero-based
-   * index of the Tab when it was initialized.
-   */
-  'data-id'?: string;
-  /**
-   * `aria-disabled` is used for keyboard and screen reader users to discover disabled content with
-   * the keyboard or screen reader caret tool. For more information, see
-   * https://www.w3.org/WAI/ARIA/apg/practices/keyboard-interface/#kbd_disabled_controls
-   */
-  'aria-disabled'?: boolean;
-  /**
-   * If true, set the StyledMenuItem to the disabled state so it is not clickable.
-   * @default false
-   * @deprecated Use `aria-disabled` instead
-   */
-  isDisabled?: boolean;
-  /**
+   * Optional `Menu.Group` title. If a `title` is provided, a `Menu.Group.Heading` will be inserted
+   * with this prop being the `children`. If you wish more control over the styling of the
+   * `Menu.Group` heading, use the `<Menu.Group.Heading>` component directly and you'll have access
+   * to styling:
    *
+   * ```tsx
+   * // default
+   * <Menu.Group title="Group One">
+   *   <Menu.Item>Item One</Menu.Item>
+   * </Menu.Group>
+   *
+   * // direct access to the heading
+   * <Menu.Group>
+   *   <Menu.Group.Heading cs={...}>Group One</Menu.Group.Heading>
+   *   <Menu.Item>Item One</Menu.Item>
+   * </Menu.Group>
+   * ```
    */
   title?: string;
 }
