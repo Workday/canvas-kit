@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {Combobox} from '@workday/canvas-kit-react/combobox';
 import {useSelectModel} from './hooks/useSelectModel';
 import {ExtractProps, createContainer} from '@workday/canvas-kit-react/common';

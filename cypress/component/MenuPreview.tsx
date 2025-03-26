@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {Basic} from '../../modules/preview-react/menu/stories/examples/Basic';
 
 function getAssistiveFocus($menu: JQuery): JQuery {

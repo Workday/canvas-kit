@@ -1,4 +1,3 @@
-import React from 'react';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {ExternalHyperlink} from '@workday/canvas-kit-react';
 import {Table} from './Table';

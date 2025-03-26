@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {ConditionalTypeValue} from '../../docgen/docTypes';
 import {registerWidget, Value} from '../Value';
 
