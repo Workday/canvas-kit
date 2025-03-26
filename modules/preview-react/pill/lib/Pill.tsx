@@ -49,7 +49,7 @@ export const pillStencil = createStencil({
     position: 'relative',
     gap: system.space.x1,
     maxWidth: maxWidth,
-    [buttonStencil.vars.background]: system.color.bg.alt.soft,
+    [buttonStencil.vars.background]: system.color.bg.alt.default,
     [buttonStencil.vars.border]: system.color.border.input.default,
     [buttonStencil.vars.label]: system.color.text.strong,
     [systemIconStencil.vars.color]: system.color.icon.default,
