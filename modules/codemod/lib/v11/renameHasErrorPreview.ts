@@ -28,8 +28,6 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
           imported === (value.name as JSXIdentifier).name && packageImports.includes(original)
       );
 
-      console.log(isCorrectImport);
-
       const isCorrectStyled = Object.entries(styledMap).some(
         ([original, styled]) =>
           styled === (value.name as JSXIdentifier).name && packageImports.includes(original)
