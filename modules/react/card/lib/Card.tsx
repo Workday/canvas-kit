@@ -36,19 +36,6 @@ export const cardStencil = createStencil({
   }),
 });
 
-const testStencil = createStencil({
-  extends: cardStencil,
-  parts: {
-    test: 'test-part',
-  },
-  base: ({separator, testPart, separatorPart}) => ({
-    [`:has(${separatorPart})`]: {
-      color: 'red',
-    },
-    [`:has(${testPart})`]: {
-      backgroundColor: 'blue',
-    },
-  }),
 });
 
 /**
