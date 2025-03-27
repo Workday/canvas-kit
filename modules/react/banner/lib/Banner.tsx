@@ -133,14 +133,13 @@ export const Banner = createContainer('button')({
   },
 })<BannerProps>(({children, ...elemProps}, Element, model) => {
   return (
-    <Flex
-      as={Element}
+    <Element
       {...handleCsProp(
         elemProps,
         bannerStencil({hasErrors: model.state.hasError, isSticky: model.state.isSticky})
       )}
     >
       {children}
-    </Flex>
+    </Element>
   );
 });
