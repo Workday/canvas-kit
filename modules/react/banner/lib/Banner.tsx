@@ -40,13 +40,13 @@ export const bannerStencil = createStencil({
       true: {
         backgroundColor: brand.error.base,
         color: brand.error.accent,
-        '&:hover': {
+        '&:hover, &.hover': {
           background: brand.error.dark,
         },
       },
       false: {
         backgroundColor: brand.alert.base,
-        '&:hover': {
+        '&:hover, &.hover': {
           background: brand.alert.dark,
         },
       },
