@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {Basic} from '../../modules/react/avatar/stories/avatar/examples/Basic';
 import {Size} from '../../modules/react/avatar/stories/avatar/examples/Size';
 import {Variant} from '../../modules/react/avatar/stories/avatar/examples/Variant';

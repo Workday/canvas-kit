@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {QualifiedNameValue} from '../../docgen/docTypes';
 import {registerWidget, Value} from '../Value';
 
