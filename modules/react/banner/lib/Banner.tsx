@@ -1,7 +1,6 @@
 import * as React from 'react';
 
-import {borderRadius} from '@workday/canvas-kit-react/tokens';
-import {createContainer, ExtractProps, focusRing, useIsRTL} from '@workday/canvas-kit-react/common';
+import {createContainer, ExtractProps, focusRing} from '@workday/canvas-kit-react/common';
 import {Flex} from '@workday/canvas-kit-react/layout';
 
 import {useBannerModel} from './hooks';
@@ -27,6 +26,10 @@ export const bannerStencil = createStencil({
     display: 'flex',
     alignItems: 'center',
     textAlign: 'left',
+    borderStartStartRadius: system.shape.x1,
+    borderStartEndRadius: system.shape.x1,
+    borderEndStartRadius: system.shape.x1,
+    borderEndEndRadius: system.shape.x1,
     cursor: 'pointer',
     transition: 'background-color 120ms',
     outline: `${system.space.x1} solid transparent`,
@@ -54,6 +57,8 @@ export const bannerStencil = createStencil({
     isSticky: {
       true: {
         width: px2rem(222),
+        borderStartEndRadius: 0,
+        borderEndEndRadius: 0,
       },
       false: {
         width: px2rem(328),
@@ -127,23 +132,9 @@ export const Banner = createContainer('button')({
     ActionText: BannerActionText,
   },
 })<BannerProps>(({children, ...elemProps}, Element, model) => {
-  const isRTL = useIsRTL();
-  const borderBottomLeftRadius = isRTL ? 'borderBottomRightRadius' : 'borderBottomLeftRadius';
-  const borderTopLeftRadius = isRTL ? 'borderTopRightRadius' : 'borderTopLeftRadius';
-  const borderBottomRightRadius = isRTL ? 'borderBottomLeftRadius' : 'borderBottomRightRadius';
-  const borderTopRightRadius = isRTL ? 'borderTopLeftRadius' : 'borderTopRightRadius';
-
-  const borderStyleProps = {
-    [borderBottomLeftRadius]: borderRadius.m,
-    [borderTopLeftRadius]: borderRadius.m,
-    [borderBottomRightRadius]: model.state.isSticky ? 0 : borderRadius.m,
-    [borderTopRightRadius]: model.state.isSticky ? 0 : borderRadius.m,
-  };
-
   return (
     <Flex
       as={Element}
-      {...borderStyleProps}
       {...handleCsProp(
         elemProps,
         bannerStencil({hasErrors: model.state.hasError, isSticky: model.state.isSticky})
