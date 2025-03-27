@@ -10,6 +10,7 @@ import {MenuCard} from './MenuCard';
 import {MenuList} from './MenuList';
 import {MenuDivider} from './MenuDivider';
 import {MenuOption} from './MenuOption';
+import {MenuGroup} from './MenuGroup';
 
 export interface MenuProps {
   /**
@@ -100,6 +101,7 @@ export const Menu = createContainer()({
      * the model.
      */
     Item: MenuItem,
+    Group: MenuGroup,
     /**
      * A `Menu.Option` is similar to the `Menu.Item`, but has a `role=option` and works with
      * `aria-activedescendant` and is selectable with a selected checkmark. It adds the

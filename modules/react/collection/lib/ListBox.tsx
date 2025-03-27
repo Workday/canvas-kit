@@ -122,6 +122,7 @@ export const ListBox = createContainer('ul')({
         {...handleCsProp(
           {
             style: {
+              height,
               maxHeight,
               marginBottom: marginBottom ?? marginY,
               marginTop: marginTop ?? marginY,
