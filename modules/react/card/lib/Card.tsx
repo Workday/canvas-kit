@@ -30,9 +30,6 @@ export const cardStencil = createStencil({
     backgroundColor: system.color.bg.default,
     border: `${px2rem(1)} solid ${system.color.border.container}`,
     borderRadius: system.shape.x2,
-    [`:has(${separatorPart})`]: {
-      backgroundColor: 'red',
-    },
   }),
 });
 
