@@ -296,7 +296,7 @@ type DefaultedVars<V extends DefaultedVarsShape, ID extends string> = DefaultedV
 
 type StencilDefaultVars<
   V extends DefaultedVarsShape,
-  E extends BaseStencil<any, any, any, any> = never,
+  E extends BaseStencil<any, any, any, any, any> = never,
   ID extends string = never
 > = [E] extends [never]
   ? DefaultedVars<V, ID>
@@ -804,7 +804,7 @@ type StylesReturn<
   | ((
       vars: [E] extends [never]
         ? RequiredVars<V> & StencilVarsParts<P>
-        : [E] extends [BaseStencil<infer PE, any, infer VE, any, any>]
+        : [E] extends [BaseStencil<any, infer PE, infer VE, any, any>]
         ? RequiredVars<VE & V> & StencilVarsParts<PE & P>
         : never
     ) => SerializedStyles | CSSObjectWithVars);
@@ -812,7 +812,7 @@ type StylesReturn<
 export type StencilModifierConfig<
   P extends Record<string, string>,
   V extends DefaultedVarsShape = {},
-  E extends BaseStencil<any, any, any, any> = never
+  E extends BaseStencil<any, any, any, any, any> = never
 > = Record<string, Record<string, StylesReturn<P, V, E>>>;
 
 export type StencilCompoundConfig<M> = {
@@ -830,8 +830,8 @@ type ModifierValuesStencil<
 };
 
 export interface StencilConfig<
-  P extends Record<string, string>,
   M extends Record<string, Record<string, StylesReturn<P, V, E>>>,
+  P extends Record<string, string> = {},
   V extends DefaultedVarsShape = {},
   E extends BaseStencil<any, any, any, any, any> = never,
   ID extends string | never = never
@@ -978,7 +978,7 @@ export interface StencilConfig<
    */
   compound?: ([E] extends [never]
     ? StencilCompoundConfig<M>
-    : E extends BaseStencil<infer ME, any, any, any>
+    : E extends BaseStencil<infer ME, any, any, any, any>
     ? StencilCompoundConfig<ME & M>
     : never)[];
   /**
@@ -987,7 +987,7 @@ export interface StencilConfig<
    */
   defaultModifiers?: [E] extends [never]
     ? StencilDefaultModifierReturn<M>
-    : E extends BaseStencil<infer ME, any, any, any>
+    : E extends BaseStencil<infer ME, any, any, any, any>
     ? StencilDefaultModifierReturn<ME & M>
     : undefined;
 }
@@ -1004,8 +1004,8 @@ type StencilDefaultModifierReturn<M> = {
 };
 
 export interface BaseStencil<
-  P extends Record<string, string> = {},
   M extends StencilModifierConfig<P, V> = {},
+  P extends Record<string, string> = {},
   V extends DefaultedVarsShape = {},
   E extends BaseStencil<any, any, any, any, any> = never,
   ID extends string = never
@@ -1018,30 +1018,30 @@ export interface BaseStencil<
 }
 
 export interface Stencil<
-  P extends Record<string, string> = {},
   M extends StencilModifierConfig<P, V, E> = {},
+  P extends Record<string, string> = {},
   V extends DefaultedVarsShape = {},
-  E extends BaseStencil<any, any, any, any> = never,
+  E extends BaseStencil<any, any, any, any, any> = never,
   ID extends string = never
-> extends BaseStencil<P, M, V, E, ID> {
+> extends BaseStencil<M, P, V, E, ID> {
   (
     // If this stencil extends another stencil, merge the inputs
     options?: [E] extends [never]
       ? ModifierValuesStencil<M, V> & VariableValuesStencil<V>
-      : E extends BaseStencil<infer ME, infer VE, any, any>
+      : E extends BaseStencil<infer ME, any, infer VE, any, any>
       ? ModifierValuesStencil<ME & M> & VariableValuesStencil<VE & V>
       : never
   ): {
     className: string;
     style?: Record<string, string>;
   };
-  parts: [E] extends [BaseStencil<infer PE, any, any, any, any>] ? PE & P : P;
+  parts: [E] extends [BaseStencil<any, infer PE, any, any, any>] ? PE & P : P;
   vars: StencilDefaultVars<V, E, ID>;
   base: string;
-  modifiers: [E] extends [BaseStencil<any, infer ME, infer VE, any, any>]
+  modifiers: [E] extends [BaseStencil<infer ME, any, infer VE, any, any>]
     ? StencilModifierReturn<ME & M, VE & V>
     : StencilModifierReturn<M, V>;
-  defaultModifiers: [E] extends [BaseStencil<any, infer ME, any, any, any>]
+  defaultModifiers: [E] extends [BaseStencil<infer ME, any, any, any, any>]
     ? StencilDefaultModifierReturn<ME & M>
     : StencilDefaultModifierReturn<M>;
 }
@@ -1110,12 +1110,12 @@ function makeParts<const T extends Record<string, string>>(parts: T): StencilVar
  * compound modifiers.
  */
 export function createStencil<
-  const P extends Record<string, string>,
   M extends StencilModifierConfig<P, V>, // TODO: default to `{}` and fix inference in `StyleReturn` types so that modifier style return functions give correct inference to variables
+  const P extends Record<string, string> = {},
   V extends DefaultedVarsShape = {},
-  E extends BaseStencil<any, any, any, any> = never, // use BaseStencil to avoid infinite loops
+  E extends BaseStencil<any, any, any, any, any> = never, // use BaseStencil to avoid infinite loops
   ID extends string = never
->(config: StencilConfig<P, M, V, E, ID>, id?: ID): Stencil<P, M, V, E, ID> {
+>(config: StencilConfig<M, P, V, E, ID>, id?: ID): Stencil<M, P, V, E, ID> {
   const {parts, vars, base, modifiers, compound, defaultModifiers} = config;
   const composes = config.extends as unknown as Stencil<any, any> | undefined;
   const _parts = parts;
@@ -1187,7 +1187,7 @@ export function createStencil<
       )
     : () => '';
 
-  const stencil: Stencil<P, M, V, E, ID> = ((input: Record<string, string>) => {
+  const stencil: Stencil<M, P, V, E, ID> = ((input: Record<string, string>) => {
     const inputModifiers = {...composes?.defaultModifiers, ...defaultModifiers};
     // Only override defaults if a value is defined
     for (const key in input) {
@@ -1217,7 +1217,7 @@ export function createStencil<
   }) as any;
 
   stencil.parts = (composes?.__parts ? {...composes.__parts, ..._parts} : _parts) as [E] extends [
-    BaseStencil<infer PE extends Record<string, string>, any, any, any, any>
+    BaseStencil<any, infer PE extends Record<string, string>, any, any, any>
   ]
     ? PE & P
     : P;

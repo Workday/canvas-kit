@@ -1320,7 +1320,7 @@ describe('cs', () => {
 
         expectTypeOf(myStencil).toHaveProperty('parts');
         expectTypeOf(myStencil.parts).toHaveProperty('separator');
-        expectTypeOf(myStencil.parts.separator).toEqualTypeOf<string>();
+        expectTypeOf(myStencil.parts.separator).toEqualTypeOf<'my-separator'>();
 
         expect(myStencil).toHaveProperty('parts.separator', expect.stringMatching('my-separator'));
       });
