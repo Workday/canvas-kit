@@ -68,8 +68,6 @@ export const Card = createComponent('div')({
   Component: ({children, ...elemProps}: CardProps, ref, Element) => {
     return (
       <Element ref={ref} {...mergeStyles(elemProps, testStencil())}>
-        <div data-part={testStencil.parts.separator}>foo</div>
-        <div data-part={testStencil.parts.test}>test</div>
         {children}
       </Element>
     );
