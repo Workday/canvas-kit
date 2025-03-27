@@ -26,5 +26,11 @@ export const BannerIcon = createSubcomponent('span')({
 })<BannerIconProps>((elemProps, Element, model) => {
   const {icon, ...iconButtonProps} = elemProps;
 
-  return <SystemIcon icon={icon!} {...handleCsProp(iconButtonProps, systemBannerIconStencil())} />;
+  return (
+    <SystemIcon
+      as={Element}
+      icon={icon!}
+      {...handleCsProp(iconButtonProps, systemBannerIconStencil())}
+    />
+  );
 });

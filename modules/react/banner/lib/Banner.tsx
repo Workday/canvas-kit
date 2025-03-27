@@ -1,15 +1,16 @@
 import * as React from 'react';
 
 import {createContainer, ExtractProps, focusRing} from '@workday/canvas-kit-react/common';
-import {Flex} from '@workday/canvas-kit-react/layout';
+import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 
 import {useBannerModel} from './hooks';
 
 import {BannerIcon} from './BannerIcon';
 import {BannerLabel} from './BannerLabel';
 import {BannerActionText} from './BannerActionText';
-import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
+
 export interface BannerProps extends ExtractProps<typeof Flex, never> {
   /**
    * Children of the Banner. Should contain a `<Banner.Label>` a <Banner.Icon> and an optional `<Banner.ActionText>`
@@ -134,7 +135,7 @@ export const Banner = createContainer('button')({
 })<BannerProps>(({children, ...elemProps}, Element, model) => {
   return (
     <Element
-      {...handleCsProp(
+      {...mergeStyles(
         elemProps,
         bannerStencil({hasErrors: model.state.hasError, isSticky: model.state.isSticky})
       )}
