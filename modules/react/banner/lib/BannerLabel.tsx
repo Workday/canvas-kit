@@ -15,6 +15,7 @@ export interface BannerLabelProps extends ExtractProps<typeof Flex, never> {
 
 const bannerLabelStencil = createStencil({
   base: {
+    display: 'flex',
     flex: '1 1 0%',
   },
 });
