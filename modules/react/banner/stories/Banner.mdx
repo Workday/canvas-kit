@@ -1,0 +1,96 @@
+import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
+import {ActionText} from './examples/ActionText';
+import {Basic} from './examples/Basic';
+import {Error} from './examples/Error';
+import {IconBanner} from './examples/IconBanner';
+import {Sticky} from './examples/Sticky';
+import {ThemedAlert} from './examples/ThemedAlert';
+import {ThemedError} from './examples/ThemedError';
+import {RefForwarding} from './examples/RefForwarding';
+import {StickyAnimation} from './examples/StickyAnimation';
+import {StickyRTL} from './examples/StickyRTL';
+
+import * as BannerStories from './Banner.stories';
+
+<Meta of={BannerStories} />
+
+# Canvas Kit Banner
+
+`Banner` is a [compound component](/getting-started/for-developers/resources/compound-components/)
+used surface important information and feedback to the user about a task, action, or state.
+
+[> Workday Design Reference](https://design.workday.com/components/indicators/banners)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+Use the children of `Banner.Label` to set the main text for the `Banner`.
+
+<ExampleCodeBlock code={Basic} />
+
+### Action Text
+
+Use the children of `Banner.ActionText` to customize the action text contained in the `Banner`. The
+text has default value of `View All`.
+
+<ExampleCodeBlock code={ActionText} />
+
+### Error Type
+
+Set the `hasError` prop of the `Banner` to designate the severity of the message presented in the
+banner. This will change the defualt icon to `exclamationCircleIcon`.
+
+<ExampleCodeBlock code={Error} />
+
+### Icon Banner
+
+When only using an icon in the `Banner`, use our `Tooltip` component to both show a visible text
+alternative, and assign an `aria-label` string to the child `Banner`.
+
+<ExampleCodeBlock code={IconBanner} />
+
+### Sticky
+
+Set the `isSticky` prop of the `Banner` to display it along the right edge of the page. When true,
+the `Banner.ActionText` will be hidden. Some basic styles will be applied, but you will still need
+to manually set the css `position` value.
+
+<ExampleCodeBlock code={Sticky} />
+
+You can use keyframes to animate the `Banner` in.
+
+<ExampleCodeBlock code={StickyAnimation} />
+
+### RefForwarding
+
+`Banner` supports ref forwarding. It will forward ref to its underlying button element.
+
+<ExampleCodeBlock code={RefForwarding} />
+
+### Right-to-Left (RTL)
+
+Banner supports right-to-left languages when specified in the CanvasProvider theme.
+
+<ExampleCodeBlock code={StickyRTL} />
+
+### Themed Banners
+
+Banners use the `useThemedPalette` hook for themeing. By default, your alert theme is used. `main`
+will be used for the background, `dark` for the hover background, and `contrast` for the text.
+
+<ExampleCodeBlock code={ThemedAlert} />
+
+If you set the `hasError` prop, the banner will use your error theme.
+
+<ExampleCodeBlock code={ThemedError} />
+
+## Component API
+
+<SymbolDoc name="Banner" fileName="/react/" />

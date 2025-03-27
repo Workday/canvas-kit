@@ -9,7 +9,7 @@ export interface Breadcrumb {
   text: string;
 }
 
-export const OverflowBreadcrumbs = () => {
+export const OverflowBreadcrumbs = ({width = '100%'}) => {
   const [items] = React.useState<Breadcrumb[]>([
     {id: '1', text: 'Home', link: '/'},
     {id: '2', text: 'Second Link', link: '#'},
@@ -21,11 +21,15 @@ export const OverflowBreadcrumbs = () => {
   ]);
 
   const model = useBreadcrumbsModel({items});
-  const [containerWidth, setContainerWidth] = React.useState('350px');
-
+  const [containerWidth, setContainerWidth] = React.useState(width);
   return (
     <div>
       <Box width={containerWidth} marginBottom="xl">
+        <div style={{display: 'flex', flexDirection: 'column'}}>
+          <span>Current Container Width: {containerWidth}</span>
+          <span>Overflow visibility: {model.menu.state.visibility}</span>
+        </div>
+        <hr />
         <Breadcrumbs model={model} aria-label="Breadcrumbs">
           <Breadcrumbs.List overflowButton={<Breadcrumbs.OverflowButton aria-label="More links" />}>
             {item =>
@@ -51,7 +55,12 @@ export const OverflowBreadcrumbs = () => {
       </Box>
       <hr />
       <h4>Change Breadcrumbs container size</h4>
-      <SegmentedControl onSelect={data => setContainerWidth(data.id)}>
+      <SegmentedControl
+        initialValue={width}
+        onSelect={data => {
+          setContainerWidth(data.id);
+        }}
+      >
         <SegmentedControl.List aria-label="container width control" marginBottom="m">
           <SegmentedControl.Item data-id="100%">100%</SegmentedControl.Item>
           <SegmentedControl.Item data-id="480px">480px</SegmentedControl.Item>
