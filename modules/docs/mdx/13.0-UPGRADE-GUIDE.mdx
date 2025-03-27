@@ -23,6 +23,8 @@ any questions.
   - [External Hyperlink](#external-hyperlink)
   - [Pill](#pill)
   - [Tabs](#tabs)
+- [Brand Refresh](#brand-refresh)
+  - [Logo Updates](#logo-updates)
 - [Infrastructure](#infrastructure)
 	- [Supporting react-jsx](#supoorting-react-jsx)
 - [Troubleshooting](#troubleshooting)
@@ -121,7 +123,7 @@ The following components are affected:
 - `Tabs`
 - `Tooltip`
 
-## External Hyperlink
+### External Hyperlink
 
 **PR:** [#3101](https://github.com/Workday/canvas-kit/pull/3101)
 
@@ -139,7 +141,7 @@ The following components are affected:
 </ExternalHyperlink>
 ```
 
-## Pill
+### Pill
 
 **PRs:** [#3104](https://github.com/Workday/canvas-kit/pull/3104)
 
@@ -155,13 +157,59 @@ A few changes have been made to `Pill` to ensure proper accessibility and styles
 - `<Pill.IconButton/>` no longer has a default `aria-label="remove"`. You *must* provide an `aria-label` for `<Pill.IconButton/>` to ensure proper accessibility. Our examples have been updated to reflect this change.
 - `<Pill.Label/>` is a *required* element when using other sub-components like `<Pill.Icon/>` to ensure that the label truncates correctly.
 
-## Tabs
+### Tabs
 
 **PR:** [#3119](https://github.com/Workday/canvas-kit/pull/3119)
 
 - The `disabled` icon color has been updated to use `system.color.fg.disabled`. This has made the icon darker for better contrast.
 
 **Note:** There should be no developer impact and the visual changes are safe to accept.
+
+## Brand Refresh
+
+### Logo Updates
+
+We've removed the outdated Dub Logos in Main and promoted the new logos that were previously in our Preview package to Main as part of the brand refresh.
+
+| Old Logo Name | New Logo Name |
+| --------------- | ----------------- | 
+| dubLogoBlue | dubLogoPrimary | 
+| dubLogoWhite | dubLogoReversed | 
+| wdayLogoBlue | wdayLogoPrimary | 
+| wdayLogoWhite | wdayLogoReversed | 
+
+```tsx
+// In v12
+// Importing from Main common
+import {dubLogoBlue} from "@workday/canvas-kit-react/common"
+
+<div dangerouslySetInnerHTML={__html: dubLogoBlue} />
+
+// Importing from Preview common
+import {dubLogoPrimary} from "@workday/canvas-kit-preview-react/common"
+
+<div dangerouslySetInnerHTML={__html: dubLogoPrimary} />
+
+// In v13
+// New logos have been promoted to Main common AND renamed
+import {dubLogoPrimary} from "@workday/canvas-kit-preview-react/common"
+
+<div dangerouslySetInnerHTML={__html: dubLogoPrimary} />
+```
+
+🤖 The codemod will handle the change of `'dubLogoBlue', 'dubLogoWhite', 'wdayLogoBlue', 'wdayLogoWhite'` to
+`'dubLogoPrimary', 'dubLogoReversed', 'wdayLogoPrimary', 'wdayLogoReversed'` as shown above in the table. It will also handle
+updating your imports.
+
+From:
+```tsx
+import {dubLogoBlue} from "@workday/canvas-kit-react/common"
+```
+To:
+```tsx
+import {dubLogoPrimary} from "@workday/canvas-kit-react/common"
+```
+
 
 ## Infrastructure
 
