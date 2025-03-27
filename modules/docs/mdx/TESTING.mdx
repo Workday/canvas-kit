@@ -162,6 +162,40 @@ This will ensure snapshot tests have stable ids for each snapshot. It is still p
 changing if you add an additional component that uses id generation - subsequent ids will be
 different, but this will prevent snapshot tests that don't have any changes from showing diffs.
 
+The Canvas Kit Styling package uses CSS Variables and multiple class names with unique hashes.
+The following snapshot serializers handle styling. Setting unique seeds will not effect static style
+hashes because the styles are created before any test code is run. These serializers ignore the
+hashes instead.
+
+```ts
+// Handle `css-{hash}` class names
+const emotionClassnameRegex = /(css-[a-zA-Z0-9]{1,7})/g;
+expect.addSnapshotSerializer({
+  test: (val) => typeof val === "string" && emotionClassnameRegex.test(val),
+  print: (val) => {
+    return `"${val.replaceAll(emotionClassnameRegex, "css-xxxxx")}"`;
+  },
+});
+
+// Handle `m{hash}` class names
+const emotionModifierClassnameRegex = /^m[a-zA-Z0-9]{5,7}/g;
+expect.addSnapshotSerializer({
+  test: (val) => typeof val === "string" && emotionModifierClassnameRegex.test(val),
+  print: (val) => {
+    return `"${val.replaceAll(emotionModifierClassnameRegex, "m-xxxxx")}"`;
+  },
+});
+
+// Handle `--myVariableName-{hash}` CSS variables used by Stencils
+const cssVariableRegex = /(^--([a-zA-Z-]+)-[a-zA-Z0-9]{1,7})/g;
+expect.addSnapshotSerializer({
+  test: (val) => typeof val === "string" && cssVariableRegex.test(val),
+  print: (val) => {
+    return `"${val.replaceAll(cssVariableRegex, "--$2-xxxxx")}"`;
+  },
+});
+```
+
 ## Functional tests
 
 Canvas Kit uses [Cypress](https://cypress.io) for browser-based behavior testing (additional info:

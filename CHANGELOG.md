@@ -3,6 +3,233 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.5.5](https://github.com/Workday/canvas-kit/releases/tag/v12.5.5) (2025-03-27)
+
+### Components
+
+- fix(menu): Support vertical navigation in RTL document mode ([#3213](https://github.com/Workday/canvas-kit/pull/3213)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v11.2.6](https://github.com/Workday/canvas-kit/releases/tag/v11.2.6) (2025-03-26)
+
+### Components
+
+- fix(menu): Support vertical navigation in RTL document mode ([#3213](https://github.com/Workday/canvas-kit/pull/3213)) ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v12.5.4](https://github.com/Workday/canvas-kit/releases/tag/v12.5.4) (2025-03-25)
+
+### Components
+
+- fix: Add minWidth and minHeight 1px to accessibleHide ([#3206](https://github.com/Workday/canvas-kit/pull/3206)) ([@toopham](https://github.com/toopham), Tu Pham)
+  isHidden prop in `FormField.Label` will now update the minWidth and minHeight to 1px.
+
+
+## [v12.5.3](https://github.com/Workday/canvas-kit/releases/tag/v12.5.3) (2025-03-25)
+
+### Components
+
+- fix: Ensure btoa is defined on window ([#3207](https://github.com/Workday/canvas-kit/pull/3207)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.5.2](https://github.com/Workday/canvas-kit/releases/tag/v12.5.2) (2025-03-20)
+
+### Components
+
+- fix: Pass height and width to Graphic span element ([#3202](https://github.com/Workday/canvas-kit/pull/3202)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.5.1](https://github.com/Workday/canvas-kit/releases/tag/v12.5.1) (2025-03-19)
+
+### Components
+
+- fix: Account for nodejs environemnts when encoding data ([#3200](https://github.com/Workday/canvas-kit/pull/3200)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.5.0](https://github.com/Workday/canvas-kit/releases/tag/v12.5.0) (2025-03-19)
+
+
+
+
+## [v12.4.23](https://github.com/Workday/canvas-kit/releases/tag/v12.4.23) (2025-03-17)
+
+
+
+
+## [v12.4.22](https://github.com/Workday/canvas-kit/releases/tag/v12.4.22) (2025-03-17)
+
+### Documentation
+
+- fix: Ensure js files are updated as well for stackblitz build ([#3194](https://github.com/Workday/canvas-kit/pull/3194)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.4.21](https://github.com/Workday/canvas-kit/releases/tag/v12.4.21) (2025-03-17)
+
+### Documentation
+
+- docs: Updated snapshot serializers doc with modifier class name use case ([#3193](https://github.com/Workday/canvas-kit/pull/3193)) ([@deno-inbox](https://github.com/deno-inbox), kaman.lam)
+
+
+## [v12.4.20](https://github.com/Workday/canvas-kit/releases/tag/v12.4.20) (2025-03-13)
+
+### Infrastructure
+
+- fix: Export collection types used in unexported models ([#3165](https://github.com/Workday/canvas-kit/pull/3165)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v12.4.19](https://github.com/Workday/canvas-kit/releases/tag/v12.4.19) (2025-03-12)
+
+### Components
+
+- fix: Ensure text visible when select model is hoisted ([#3189](https://github.com/Workday/canvas-kit/pull/3189)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.4.18](https://github.com/Workday/canvas-kit/releases/tag/v12.4.18) (2025-03-12)
+
+### Infrastructure
+
+- fix: Update the build script for the docs package to ensure stackblitz files exist in the dist folder. ([#3188](https://github.com/Workday/canvas-kit/pull/3188)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.4.17](https://github.com/Workday/canvas-kit/releases/tag/v12.4.17) (2025-03-12)
+
+
+
+
+## [v12.4.16](https://github.com/Workday/canvas-kit/releases/tag/v12.4.16) (2025-03-11)
+
+### Components
+
+- fix: Compound components should accept `ElementComponent` ([#3183](https://github.com/Workday/canvas-kit/pull/3183)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v11.2.5](https://github.com/Workday/canvas-kit/releases/tag/v11.2.5) (2025-03-11)
+
+### Components
+
+- fix: Compound components should accept `ElementComponent` ([#3183](https://github.com/Workday/canvas-kit/pull/3183)) ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v12.4.15](https://github.com/Workday/canvas-kit/releases/tag/v12.4.15) (2025-03-11)
+
+
+
+
+## [v12.4.14](https://github.com/Workday/canvas-kit/releases/tag/v12.4.14) (2025-03-10)
+
+### Documentation
+
+- docs: Ensure stackblitz gets packaged with docs package ([#3167](https://github.com/Workday/canvas-kit/pull/3167)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.4.13](https://github.com/Workday/canvas-kit/releases/tag/v12.4.13) (2025-03-10)
+
+### Documentation
+
+- docs: Add Snapshot serializers to ignore hashes ([#3166](https://github.com/Workday/canvas-kit/pull/3166)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v12.4.12](https://github.com/Workday/canvas-kit/releases/tag/v12.4.12) (2025-03-07)
+
+### Components
+
+- fix: Remove console log ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v12.4.11](https://github.com/Workday/canvas-kit/releases/tag/v12.4.11) (2025-03-03)
+
+### Documentation
+
+- chore(collection): Add contextual message when ID can't be found ([#3155](https://github.com/Workday/canvas-kit/pull/3155)) ([@NicholasBoll](https://github.com/NicholasBoll), manuel.carrera)
+
+### Styling
+
+- fix: Support negative values ([#3160](https://github.com/Workday/canvas-kit/pull/3160)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v11.2.4](https://github.com/Workday/canvas-kit/releases/tag/v11.2.4) (2025-02-28)
+
+### Styling
+
+- fix: Support negative values ([#3160](https://github.com/Workday/canvas-kit/pull/3160)) ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v12.4.10](https://github.com/Workday/canvas-kit/releases/tag/v12.4.10) (2025-02-27)
+
+### Components
+
+- fix: Addressed missing `as` prop on Popup.Card  ([#3157](https://github.com/Workday/canvas-kit/pull/3157)) ([@josh-bagwell](https://github.com/josh-bagwell))
+  Addressed issue with `Popup.Card`.
+
+
+## [v12.4.9](https://github.com/Workday/canvas-kit/releases/tag/v12.4.9) (2025-02-27)
+
+### Documentation
+
+- docs: Fix BaseButton example ([#3158](https://github.com/Workday/canvas-kit/pull/3158)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v12.4.8](https://github.com/Workday/canvas-kit/releases/tag/v12.4.8) (2025-02-26)
+
+### Documentation
+
+- docs: Fix Firefox hard-fail on markdown-to-jsx bug ([#3153](https://github.com/Workday/canvas-kit/pull/3153)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v12.4.7](https://github.com/Workday/canvas-kit/releases/tag/v12.4.7) (2025-02-25)
+
+### Infrastructure
+
+- fix(styling): Share a global Emotion instance between CK instances ([#3152](https://github.com/Workday/canvas-kit/pull/3152)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  This change shares an Emotion cache instance on the window object. This will fix style merge issues in edge cases where a bundle's base styles override override styles of another bundle. It is unlikely that anyone relies on this broken functionality, but if anyone does, styles may be different. This change will only affect style merging from this release on and will not affect any previous version, so it is an opt-in.
+
+
+## [v12.4.6](https://github.com/Workday/canvas-kit/releases/tag/v12.4.6) (2025-02-24)
+
+### Components
+
+- fix(combobox): Use focus/blur reconfig vs rewrite for testing library ([#3147](https://github.com/Workday/canvas-kit/pull/3147)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v12.4.5](https://github.com/Workday/canvas-kit/releases/tag/v12.4.5) (2025-02-21)
+
+### Components
+
+- fix: Define stable ref reference in `useComboboxInputConstrained` ([#3145](https://github.com/Workday/canvas-kit/pull/3145)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.4.4](https://github.com/Workday/canvas-kit/releases/tag/v12.4.4) (2025-02-21)
+
+### Documentation
+
+- docs: Add stackblitz support to our example ([#3132](https://github.com/Workday/canvas-kit/pull/3132)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.4.3](https://github.com/Workday/canvas-kit/releases/tag/v12.4.3) (2025-02-20)
+
+### Components
+
+- fix(popup): Fix useReturnFocus to respect tabindex=-1 buttons ([#3141](https://github.com/Workday/canvas-kit/pull/3141)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v11.2.3](https://github.com/Workday/canvas-kit/releases/tag/v11.2.3) (2025-02-20)
+
+### Components
+
+- fix(popup): Fix useReturnFocus to respect tabindex=-1 buttons ([#3141](https://github.com/Workday/canvas-kit/pull/3141)) ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v12.4.2](https://github.com/Workday/canvas-kit/releases/tag/v12.4.2) (2025-02-19)
+
+### Documentation
+
+- fix: Update tooltip mdx to correctly render ([#3139](https://github.com/Workday/canvas-kit/pull/3139)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.4.1](https://github.com/Workday/canvas-kit/releases/tag/v12.4.1) (2025-02-19)
+
+### Documentation
+
+- fix: Add missing semicolon to tooltip mdx ([#3138](https://github.com/Workday/canvas-kit/pull/3138)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.4.0](https://github.com/Workday/canvas-kit/releases/tag/v12.4.0) (2025-02-19)
+
+
+
+
 ## [v12.3.7](https://github.com/Workday/canvas-kit/releases/tag/v12.3.7) (2025-02-11)
 
 ### Components
