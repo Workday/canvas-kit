@@ -29,6 +29,8 @@ const rightToLeftMap = {
   Left: 'Right',
   ArrowRight: 'ArrowLeft',
   Right: 'Left',
+  ArrowUp: 'ArrowUp',
+  ArrowDown: 'ArrowDown',
   Home: 'Home',
   End: 'End',
   PageDown: 'PageDown',
