@@ -17,22 +17,13 @@ export interface CardProps extends BoxProps {
 
 // .cnvs-card
 export const cardStencil = createStencil({
-  vars: {
-    separator: '',
-  },
-  parts: {
-    separator: 'card-separator',
-    bar: 'foo',
-  },
-  base: ({separatorPart}) => ({
+  base: {
     boxShadow: system.depth[1],
     padding: system.space.x8,
     backgroundColor: system.color.bg.default,
     border: `${px2rem(1)} solid ${system.color.border.container}`,
     borderRadius: system.shape.x2,
-  }),
-});
-
+  },
 });
 
 /**
@@ -51,7 +42,7 @@ export const Card = createComponent('div')({
   displayName: 'Card',
   Component: ({children, ...elemProps}: CardProps, ref, Element) => {
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, testStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, cardStencil())}>
         {children}
       </Element>
     );
