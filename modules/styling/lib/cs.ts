@@ -931,8 +931,8 @@ export interface StencilConfig<
    * const MyComponent = ({children, ...elemProps}) => {
    *   return (
    *     <button {...handleCsProp(elemProps, myButtonStencil())}>
-   *       <i data-part={myButtonStencil.parts.icon} />
-   *       <span data-part={myButtonStencil.parts.label}>{children}</span>
+   *       <i {...myButtonStencil.parts.icon} />
+   *       <span {...myButtonStencil.parts.label}>{children}</span>
    *     </button>
    *   )
    * }
