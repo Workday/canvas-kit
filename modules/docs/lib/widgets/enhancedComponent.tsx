@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
+import {Expandable} from '@workday/canvas-kit-react/expandable';
 
 import {defaultJSDoc} from '../../docgen/docParser';
 import {EnhancedComponentValue} from '../../docgen/plugins/customTypes';

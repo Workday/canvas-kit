@@ -1,5 +1,4 @@
-import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
-import {space} from '@workday/canvas-kit-react/tokens';
+import {Expandable} from '@workday/canvas-kit-react/expandable';
 
 export const Depth = () => {
   return (

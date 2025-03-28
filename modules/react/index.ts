@@ -12,6 +12,7 @@ export * from './combobox';
 export * from './common';
 export * from './dialog';
 export * from './disclosure';
+export * from './expandable';
 export * from './form-field';
 export * from './icon';
 export * from './layout';

@@ -1,4 +1,4 @@
-import {LongTitle} from '../../modules/labs-react/expandable/stories/examples/LongTitle';
+import {LongTitle} from '../../modules/react/expandable/stories/examples/LongTitle';
 
 describe('ExpandableContainer', () => {
   context(`given the [Labs/Expandable, Long Title] story is rendered`, () => {

@@ -2,19 +2,19 @@ import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common
 import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
-import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
+import {Expandable} from '@workday/canvas-kit-react/expandable';
 import {useDisclosureModel} from '@workday/canvas-kit-react/disclosure';
 import {Meta} from '@storybook/react';
 
 const meta: Meta = withSnapshotsEnabled({
-  title: 'Testing/Labs/Expandable',
+  title: 'Testing/Expandable',
   component: Expandable,
 });
 
 // export default meta;
 
 export default {
-  title: 'Testing/Labs/Expandable',
+  title: 'Testing/Containers/Expandable',
   component: Expandable,
   parameters: {
     chromatic: {
