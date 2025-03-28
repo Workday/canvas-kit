@@ -1,5 +1,5 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
+import {Expandable} from '@workday/canvas-kit-react/expandable';
 import mdxDoc from './Expandable.mdx';
 // examples
 import {StartIcon as StartIconExample} from './examples/StartIcon';
@@ -11,7 +11,7 @@ import {LongTitle as LongTitleExample} from './examples/LongTitle';
 import {HoistedModel as HoistedModelExample} from './examples/HoistedModel';
 
 export default {
-  title: 'Labs/Expandable',
+  title: 'Components/Containers/Expandable',
   component: Expandable,
   tags: ['autodocs'],
   parameters: {

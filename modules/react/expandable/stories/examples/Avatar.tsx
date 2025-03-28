@@ -1,4 +1,4 @@
-import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
+import {Expandable} from '@workday/canvas-kit-react/expandable';
 // @ts-ignore: Cannot find module error
 import testAvatar from './test-avatar.png';
 

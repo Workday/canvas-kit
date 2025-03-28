@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Expandable, useExpandableModel} from '@workday/canvas-kit-labs-react/expandable';
+import {Expandable, useExpandableModel} from '@workday/canvas-kit-react/expandable';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 
