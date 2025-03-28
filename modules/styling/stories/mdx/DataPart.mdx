@@ -1,0 +1,62 @@
+import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
+import {StylingOverrides} from './examples/StylingOverrides';
+
+<Meta title="Styling/Data Part" />
+
+## Styling Elements via Data Part
+
+When building compound components, it's common that a sub component might render multiple elements that may not be exposed to the compound component API. In the example below, `MyComponent
+`renders a body element, but only the parent div gets the styles applied and `elemProps` spread to it. In order to style the body element, you'd have to know the dom structure to target that specific element in order to style it.
+```tsx
+import {createStencil} from '@workday/canvas-kit-styling';
+
+const myComponentStencil = createStencil({
+  base: {
+	background: 'transparent',
+  }
+});
+const MyComponent = ({elemProps}) => {
+  return (
+	<div {...myComponentStencil() } {...elemProps}>
+	  <div className="my-component__body" />
+	</div>
+  );
+};
+```
+
+## Using `data-part` to Style Elements
+
+In order to style elements that are not exposed in the API, we can use the `data-part` attribute. This allows us to target specific elements in the component without having to know the dom structure. In the example below, we can use the `data-part` attribute to style the body element.
+
+```tsx
+import {createStencil} from '@workday/canvas-kit-styling';
+import {createStencil} from '@workday/canvas-kit-styling';
+
+const myComponentStencil = createStencil({
+  parts: {
+	body: 'my-component-body-element',
+  }
+  base: ({bodyPart}) => ({
+	background: 'transparent',
+	// this selector becomes `& ([data-part="my-component-body-element"])`
+	// which will target the body element
+	// and apply the styles to it
+	`& (${bodyPart})`: {
+	  background: 'red',
+	},
+  });
+});
+const MyComponent = ({elemProps}) => {
+  return (
+	<div {...myComponentStencil() } {...elemProps}>
+	  {/* The data-part attribute is added to the element and we can use a type safe way to target the element */}
+	  <div data-part={myComponentStencil.parts.body} className="my-component__body" />
+	</div>
+  );
+};
+```
+
+As a reusable component, you can use the `data-part` attribute to style elements that are not exposed in the API. Consumers can also use the type safe stencil to target that element to style it as well.
+
+>**Note:** While the `data-part` is a way to give access to elements in order to style, it should be used sparingly. The goal is to clean up the multiple uses of stencil within a file while giving consumers a type safe way to access elements that need styling.
+
