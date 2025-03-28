@@ -888,9 +888,59 @@ export interface StencilConfig<
    * extraction will use the base modifier name in the selector.
    */
   extends?: E;
+  /**
+   * A Stencil supports sub-elements called "parts". A part is modelled after the
+   * [::part()](https://developer.mozilla.org/en-US/docs/Web/CSS/::part) specification for shadow
+   * trees in web components. A part refers to a sub-element for styling purposes. Compound
+   * components should allow direct access to each semantic element, but sometimes a semantic
+   * element needs to contain sub-elements that are not semantic for styling purposes. A part is a
+   * style hook for these elements. A part allows for an explicit API for styling these elements so
+   * that style overriding doesn't need complicated CSS selectors to target them. The part API is a
+   * convenient wrapper to avoid magic stings. A part key should be short and descriptive - it
+   * represents the JS name of the part. The value should be more descriptive since it will become
+   * part of a CSS selector. For example, if the part key is "separator", the value should describe
+   * what stencil the separator belongs to. A unique name avoids naming collisions. If a
+   * `cardStencil` has a `separator` part and an `inputStencil` has a `separator` part, the value of
+   * each should be `card-separator` and `input-separator` respectively. If you do not uniquely set
+   * values, you can get unwanted CSS selector matching where the `inputStencil`'s part matches the
+   * CSS of the `cardStencil` if a `Card` component contains an `Input` component.
+   *
+   * ```ts
+   * const myButtonStencil = createStencil({
+   *   parts: {
+   *     icon: 'my-button-icon',
+   *     label: 'my-button-label'
+   *   },
+   *   base: ({iconPart}) => ({
+   *     padding: 10,
+   *     // other base styles
+   *
+   *     [iconPart]: { // '[data-part="my-icon"]'
+   *       // icon part styles
+   *     },
+   *     ':hover': {
+   *       // hover base styles
+   *       [iconPart]: {
+   *         // hover styles for icon part
+   *       }
+   *     },
+   *   })
+   * })
+   *
+   * The part can then be used in a component's render function.
+   * const MyComponent = ({children, ...elemProps}) => {
+   *   return (
+   *     <button {...handleCsProp(elemProps, myButtonStencil())}>
+   *       <i data-part={myButtonStencil.parts.icon} />
+   *       <span data-part={myButtonStencil.parts.label}>{children}</span>
+   *     </button>
+   *   )
+   * }
+   * ```
+   */
   parts?: P;
   /**
-   * A stencil can support CSS variables. Since CSS variables cascade by default, variables are
+   * A Stencil can support CSS variables. Since CSS variables cascade by default, variables are
    * defined with defaults. These defaults are added automatically to the `base` styles to prevent
    * CSS variables defined higher in the DOM tree from cascading into a component.
    *
@@ -1034,10 +1084,10 @@ export interface BaseStencil<
   ID extends string = never
 > {
   __extends?: E;
-  __parts?: P;
   __vars: V;
   __modifiers: M;
   __id: ID;
+  parts?: P;
 }
 
 export interface Stencil<
@@ -1239,7 +1289,7 @@ export function createStencil<
     };
   }) as any;
 
-  stencil.parts = (composes?.__parts ? {...composes.__parts, ..._parts} : _parts) as [E] extends [
+  stencil.parts = {...composes?.parts, ..._parts} as [E] extends [
     BaseStencil<any, infer PE extends Record<string, string>, any, any, any>
   ]
     ? PE & P
