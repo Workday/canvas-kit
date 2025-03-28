@@ -721,6 +721,28 @@ describe('cs', () => {
       expect(myStencil).toHaveProperty('vars.color', expect.stringMatching(/--color-[a-z0-9]+/));
     });
 
+    it('should return access to parts for data-part attributes', () => {
+      const myStencil = createStencil({
+        parts: {
+          separator: 'my-separator',
+        },
+        base: ({separatorPart}) => {
+          expectTypeOf(separatorPart).toEqualTypeOf<'[data-part="my-separator"]'>();
+
+          return {};
+        },
+      });
+
+      expectTypeOf(myStencil).toHaveProperty('parts');
+      expectTypeOf(myStencil.parts).toHaveProperty('separator');
+      expectTypeOf(myStencil.parts.separator).toEqualTypeOf<{'data-part': 'my-separator'}>();
+
+      expect(myStencil).toHaveProperty(
+        'parts.separator[data-part]',
+        expect.stringMatching('my-separator')
+      );
+    });
+
     it('should coerce a variable input to a type of string', () => {
       const myStencil = createStencil({
         vars: {
@@ -1195,6 +1217,54 @@ describe('cs', () => {
         );
       });
 
+      it('should return access to extended parts for data-part attributes', () => {
+        const baseStencil = createStencil({
+          parts: {
+            separator: 'base-separator',
+          },
+          base: ({separatorPart}) => {
+            expectTypeOf(separatorPart).toEqualTypeOf<'[data-part="base-separator"]'>();
+
+            return {};
+          },
+        });
+
+        const extendedStencil = createStencil({
+          parts: {
+            border: 'extended-border',
+          },
+          extends: baseStencil,
+          base: ({separatorPart, borderPart}) => {
+            expectTypeOf(separatorPart).toEqualTypeOf<'[data-part="base-separator"]'>();
+            expectTypeOf(borderPart).toEqualTypeOf<'[data-part="extended-border"]'>();
+
+            return {};
+          },
+        });
+
+        // base
+        expectTypeOf(extendedStencil).toHaveProperty('parts');
+        expectTypeOf(extendedStencil.parts).toHaveProperty('separator');
+        expectTypeOf(extendedStencil.parts.separator).toEqualTypeOf<{
+          'data-part': 'base-separator';
+        }>();
+        expect(extendedStencil).toHaveProperty(
+          'parts.separator[data-part]',
+          expect.stringMatching('base-separator')
+        );
+
+        // extended
+        expectTypeOf(extendedStencil).toHaveProperty('parts');
+        expectTypeOf(extendedStencil.parts).toHaveProperty('border');
+        expectTypeOf(extendedStencil.parts.border).toEqualTypeOf<{
+          'data-part': 'extended-border';
+        }>();
+        expect(extendedStencil).toHaveProperty(
+          'parts.border[data-part]',
+          expect.stringMatching('extended-border')
+        );
+      });
+
       it('should extend variables with IDs', () => {
         const baseStencil = createStencil(
           {
@@ -1308,6 +1378,36 @@ describe('cs', () => {
         // baseStencil.base, baseStencil large, baseStencil only position, baseStencil compound, extendedStencil.base, extendedStencil large, extendedStencil compound
         expect(className.split(' ')).toHaveLength(10); // 7 + 3 modifier hashes
       });
+    });
+
+    it('should handle parts and pass them to the base function as [data-part=${part-value}]', () => {
+      const myStencil = createStencil({
+        parts: {
+          separator: 'my-separator',
+        },
+        base: ({separatorPart}) => ({
+          [`${separatorPart}`]: {},
+        }),
+      });
+
+      // `.toHaveStyle` doesn't work with variables and worse, it ALWAYS passes when passed anything
+      // other than a parsable color string. https://github.com/testing-library/jest-dom/issues/322
+      // We'll resort to iterating over injected styles instead.
+      let found = false;
+      for (const sheet of document.styleSheets as any as Iterable<CSSStyleSheet>) {
+        for (const rule of sheet.cssRules as any as Iterable<CSSRule>) {
+          if (rule.cssText.includes(myStencil.base)) {
+            if (rule.cssText.includes(myStencil.parts.separator['data-part'])) {
+              expect(rule.cssText).toContain(
+                `${myStencil.base} [data-part="${myStencil.parts.separator['data-part']}"]`
+              );
+            }
+
+            found = true;
+          }
+        }
+      }
+      expect(found).toEqual(true);
     });
   });
 });
