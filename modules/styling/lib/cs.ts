@@ -1087,7 +1087,7 @@ export interface BaseStencil<
   __vars: V;
   __modifiers: M;
   __id: ID;
-  parts?: P;
+  __parts?: P;
 }
 
 export interface Stencil<
@@ -1108,7 +1108,9 @@ export interface Stencil<
     className: string;
     style?: Record<string, string>;
   };
-  parts: [E] extends [BaseStencil<any, infer PE, any, any, any>] ? PE & P : P;
+  parts: [E] extends [BaseStencil<any, infer PE, any, any, any>]
+    ? StencilPartProps<PE & P>
+    : StencilPartProps<P>;
   vars: StencilDefaultVars<V, E, ID>;
   base: string;
   modifiers: [E] extends [BaseStencil<infer ME, any, infer VE, any, any>]
@@ -1164,7 +1166,7 @@ export function parentModifier(value: string) {
   return `.${value.replace('css-', 'm')} :where(&)`;
 }
 
-type StencilVarsParts<T> = {
+export type StencilVarsParts<T> = {
   [K in keyof T as `${K & string}${Capitalize<'Part'>}`]: `[data-part="${T[K] & string}"]`;
 };
 
@@ -1176,6 +1178,21 @@ function makeParts<const T extends Record<string, string>>(parts: T): StencilVar
     (result as any)[`${key}Part`] = `[data-part="${parts[key]}"]`;
     return result;
   }, {} as StencilVarsParts<T>);
+}
+
+export type StencilPartProps<T> = {
+  [K in keyof T]: {'data-part': T[K]};
+};
+
+function makePartProps<const T extends Record<string, string>>(parts?: T): StencilPartProps<T> {
+  if (!parts) {
+    return {} as StencilPartProps<T>;
+  }
+
+  return Object.keys(parts).reduce((result, key: any) => {
+    (result as any)[key] = {'data-part': parts[key]};
+    return result;
+  }, {} as StencilPartProps<T>);
 }
 
 /**
@@ -1191,9 +1208,13 @@ export function createStencil<
 >(config: StencilConfig<M, P, V, E, ID>, id?: ID): Stencil<M, P, V, E, ID> {
   const {parts, vars, base, modifiers, compound, defaultModifiers} = config;
   const composes = config.extends as unknown as Stencil<any, any> | undefined;
-  const _parts = parts;
+  const _parts = makePartProps({...composes?.__parts, ...parts}) as [E] extends [
+    BaseStencil<any, infer PE extends Record<string, string>, any, any, any>
+  ]
+    ? StencilPartProps<PE & P>
+    : StencilPartProps<P>;
   const _vars = createDefaultedVars(vars || {}, id) as any; // The return type is conditional and TypeScript doesn't like that here
-  const _partsVars = makeParts({...composes?.parts, ...parts});
+  const _partsVars = makeParts({...composes?.__parts, ...parts});
 
   // combine the vars keys together
   Object.keys(composes?.vars || {}).forEach(key => {
@@ -1289,16 +1310,13 @@ export function createStencil<
     };
   }) as any;
 
-  stencil.parts = {...composes?.parts, ..._parts} as [E] extends [
-    BaseStencil<any, infer PE extends Record<string, string>, any, any, any>
-  ]
-    ? PE & P
-    : P;
+  stencil.parts = _parts;
   stencil.vars = _vars;
   stencil.base = combineClassNames([composes?.base, _base]);
   stencil.modifiers = _modifiers as any; // The return type is conditional and TypeScript doesn't like that here
   stencil.defaultModifiers = {...composes?.defaultModifiers, ...defaultModifiers} as any;
   stencil.__extends = composes as any; // The return type is conditional and TypeScript doesn't like that here
+  stencil.__parts = parts;
 
   return stencil;
 }

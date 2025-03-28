@@ -735,9 +735,12 @@ describe('cs', () => {
 
       expectTypeOf(myStencil).toHaveProperty('parts');
       expectTypeOf(myStencil.parts).toHaveProperty('separator');
-      expectTypeOf(myStencil.parts.separator).toEqualTypeOf<'my-separator'>();
+      expectTypeOf(myStencil.parts.separator).toEqualTypeOf<{'data-part': 'my-separator'}>();
 
-      expect(myStencil).toHaveProperty('parts.separator', expect.stringMatching('my-separator'));
+      expect(myStencil).toHaveProperty(
+        'parts.separator[data-part]',
+        expect.stringMatching('my-separator')
+      );
     });
 
     it('should coerce a variable input to a type of string', () => {
@@ -1242,18 +1245,22 @@ describe('cs', () => {
         // base
         expectTypeOf(extendedStencil).toHaveProperty('parts');
         expectTypeOf(extendedStencil.parts).toHaveProperty('separator');
-        expectTypeOf(extendedStencil.parts.separator).toEqualTypeOf<'base-separator'>();
+        expectTypeOf(extendedStencil.parts.separator).toEqualTypeOf<{
+          'data-part': 'base-separator';
+        }>();
         expect(extendedStencil).toHaveProperty(
-          'parts.separator',
+          'parts.separator[data-part]',
           expect.stringMatching('base-separator')
         );
 
         // extended
         expectTypeOf(extendedStencil).toHaveProperty('parts');
         expectTypeOf(extendedStencil.parts).toHaveProperty('border');
-        expectTypeOf(extendedStencil.parts.border).toEqualTypeOf<'extended-border'>();
+        expectTypeOf(extendedStencil.parts.border).toEqualTypeOf<{
+          'data-part': 'extended-border';
+        }>();
         expect(extendedStencil).toHaveProperty(
-          'parts.border',
+          'parts.border[data-part]',
           expect.stringMatching('extended-border')
         );
       });
@@ -1390,9 +1397,9 @@ describe('cs', () => {
       for (const sheet of document.styleSheets as any as Iterable<CSSStyleSheet>) {
         for (const rule of sheet.cssRules as any as Iterable<CSSRule>) {
           if (rule.cssText.includes(myStencil.base)) {
-            if (rule.cssText.includes(myStencil.parts.separator)) {
+            if (rule.cssText.includes(myStencil.parts.separator['data-part'])) {
               expect(rule.cssText).toContain(
-                `${myStencil.base} [data-part="${myStencil.parts.separator}"]`
+                `${myStencil.base} [data-part="${myStencil.parts.separator['data-part']}"]`
               );
             }
 
