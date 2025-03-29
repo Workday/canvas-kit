@@ -13,7 +13,7 @@ export interface BannerIconProps extends Omit<ExtractProps<typeof SystemIcon, ne
   icon?: CanvasSystemIcon;
 }
 
-const systemBannerIconStencil = createStencil({
+export const bannerIconStencil = createStencil({
   base: {
     marginInlineEnd: system.space.x3,
   },
@@ -31,7 +31,7 @@ export const BannerIcon = createSubcomponent('span')({
       as={Element}
       data-part={model.state.hasError ? 'exclamation-circle-icon' : 'exclamation-triangle-icon'}
       icon={icon!}
-      {...handleCsProp(iconButtonProps, systemBannerIconStencil())}
+      {...handleCsProp(iconButtonProps, bannerIconStencil())}
     />
   );
 });

@@ -36,7 +36,7 @@ export const bannerStencil = createStencil({
     transition: 'background-color 120ms',
     outline: `${system.space.x1} solid transparent`,
     '&:focus-visible, &.focus': {
-      outline: `${px2rem(4)} double transparent`,
+      outline: `${system.shape.x1} double transparent`,
       ...focusRing({separation: 2}),
     },
   },

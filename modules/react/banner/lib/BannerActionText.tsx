@@ -14,7 +14,7 @@ export interface BannerActionTextProps extends ExtractProps<typeof Box, never> {
   children?: React.ReactNode;
 }
 
-const actionBarTextStencil = createStencil({
+export const actionBarTextStencil = createStencil({
   base: {
     textDecoration: 'underline',
   },

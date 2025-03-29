@@ -13,7 +13,7 @@ export interface BannerLabelProps extends ExtractProps<typeof Flex, never> {
   children: React.ReactNode;
 }
 
-const bannerLabelStencil = createStencil({
+export const bannerLabelStencil = createStencil({
   base: {
     display: 'flex',
     flex: '1 1 0%',
