@@ -29,6 +29,7 @@ export const BannerIcon = createSubcomponent('span')({
   return (
     <SystemIcon
       as={Element}
+      data-part={model.state.hasError ? 'exclamation-circle-icon' : 'exclamation-triangle-icon'}
       icon={icon!}
       {...handleCsProp(iconButtonProps, systemBannerIconStencil())}
     />

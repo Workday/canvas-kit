@@ -10,6 +10,7 @@ import {BannerLabel} from './BannerLabel';
 import {BannerActionText} from './BannerActionText';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
 export interface BannerProps extends ExtractProps<typeof Flex, never> {
   /**
@@ -47,11 +48,22 @@ export const bannerStencil = createStencil({
         '&:hover, &.hover': {
           background: brand.error.dark,
         },
+        '& [data-part="exclamation-circle-icon"]': {
+          [systemIconStencil.vars.accentColor]: brand.error.accent,
+          [systemIconStencil.vars.color]: brand.error.accent,
+          [systemIconStencil.vars.backgroundColor]: 'none',
+        },
       },
       false: {
         backgroundColor: brand.alert.base,
+        color: system.color.fg.contrast.default,
         '&:hover, &.hover': {
           background: brand.alert.dark,
+        },
+        '& [data-part="exclamation-triangle-icon"]': {
+          [systemIconStencil.vars.accentColor]: system.color.fg.contrast.default,
+          [systemIconStencil.vars.color]: system.color.fg.contrast.default,
+          [systemIconStencil.vars.backgroundColor]: 'none',
         },
       },
     },
