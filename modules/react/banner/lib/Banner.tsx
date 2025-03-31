@@ -22,6 +22,7 @@ export interface BannerProps extends ExtractProps<typeof Flex, never> {
 export const bannerStencil = createStencil({
   base: {
     ...system.type.subtext.large,
+    fontFamily: `${system.fontFamily.default}, Helvetica Neue, Helvetica, Arial, sans-serif`,
     fontWeight: system.fontWeight.medium,
     padding: `${system.space.x2} ${system.space.x4}`,
     border: '0',
