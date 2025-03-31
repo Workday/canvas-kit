@@ -126,7 +126,7 @@ export const Banner = createContainer('button')({
      */
     Icon: BannerIcon,
     /**
-     * `Banner.Label` is a styled {@link Flex}. This component will get an id that will be used for
+     * `Banner.Label` is a div element with flex styles. This component will get an id that will be used for
      * the aria-describedby on the top level `<button>`.
      *
      * ```tsx
@@ -135,7 +135,7 @@ export const Banner = createContainer('button')({
      */
     Label: BannerLabel,
     /**
-     * `Banner.ActionText` is a styled {@link Box}. This component will get an id that will be used
+     * `Banner.ActionText` is a span element. This component will get an id that will be used
      * for the aria-labelledby on the top level `<button>`. This component will be visually hidden
      * when the model's `isSticky` prop is set to true.
      *
