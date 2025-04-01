@@ -319,11 +319,11 @@ type DefaultedVars<V extends DefaultedVarsShape, ID extends string> = DefaultedV
 
 type StencilDefaultVars<
   V extends DefaultedVarsShape,
-  E extends BaseStencil<any, any, any, any> = never,
+  E extends BaseStencil<any, any, any, any, any> = never,
   ID extends string = never
 > = [E] extends [never]
   ? DefaultedVars<V, ID>
-  : E extends BaseStencil<any, infer VE, any, infer IDE>
+  : E extends BaseStencil<any, any, infer VE, any, infer IDE>
   ? DefaultedVarsMapToCSSVarNames<VE, IDE> &
       DefaultedVarsMap<VE, IDE> &
       DefaultedVarsMapToCSSVarNames<V, ID> &
@@ -818,23 +818,25 @@ export function handleCsProp<
 }
 
 type StylesReturn<
+  P extends Record<string, string>,
   V extends DefaultedVarsShape = {},
-  E extends BaseStencil<any, any, any, any> = never
+  E extends BaseStencil<any, any, any, any, any> = never
 > =
   | SerializedStyles
   | CSSObjectWithVars
   | ((
       vars: [E] extends [never]
-        ? RequiredVars<V>
-        : [E] extends [BaseStencil<any, infer VE, any, any>]
-        ? RequiredVars<VE & V>
+        ? RequiredVars<V> & StencilVarsParts<P>
+        : [E] extends [BaseStencil<any, infer PE, infer VE, any, any>]
+        ? RequiredVars<VE & V> & StencilVarsParts<PE & P>
         : never
     ) => SerializedStyles | CSSObjectWithVars);
 
 export type StencilModifierConfig<
+  P extends Record<string, string>,
   V extends DefaultedVarsShape = {},
-  E extends BaseStencil<any, any, any, any> = never
-> = Record<string, Record<string, StylesReturn<V, E>>>;
+  E extends BaseStencil<any, any, any, any, any> = never
+> = Record<string, Record<string, StylesReturn<P, V, E>>>;
 
 export type StencilCompoundConfig<M> = {
   modifiers: {[K in keyof M]?: MaybeBoolean<keyof M[K]>};
@@ -842,18 +844,19 @@ export type StencilCompoundConfig<M> = {
 };
 
 type ModifierValuesStencil<
-  M extends StencilModifierConfig<any, any> = {},
+  M extends StencilModifierConfig<any, any, any> = {},
   V extends DefaultedVarsShape = {}
 > = {
-  [P in keyof M]?: P extends keyof V
-    ? MaybeBoolean<keyof M[P]> | (string & {}) // If both modifiers and variables define the same key, the value can be either a modifier or a string
-    : MaybeBoolean<keyof M[P]>;
+  [K in keyof M]?: K extends keyof V
+    ? MaybeBoolean<keyof M[K]> | (string & {}) // If both modifiers and variables define the same key, the value can be either a modifier or a string
+    : MaybeBoolean<keyof M[K]>;
 };
 
 export interface StencilConfig<
-  M extends Record<string, Record<string, StylesReturn<V, E>>>,
+  M extends Record<string, Record<string, StylesReturn<P, V, E>>>,
+  P extends Record<string, string> = {},
   V extends DefaultedVarsShape = {},
-  E extends BaseStencil<any, any, any, any> = never,
+  E extends BaseStencil<any, any, any, any, any> = never,
   ID extends string | never = never
 > {
   /**
@@ -886,7 +889,58 @@ export interface StencilConfig<
    */
   extends?: E;
   /**
-   * A stencil can support CSS variables. Since CSS variables cascade by default, variables are
+   * A Stencil supports sub-elements called "parts". A part is modelled after the
+   * [::part()](https://developer.mozilla.org/en-US/docs/Web/CSS/::part) specification for shadow
+   * trees in web components. A part refers to a sub-element for styling purposes. Compound
+   * components should allow direct access to each semantic element, but sometimes a semantic
+   * element needs to contain sub-elements that are not semantic for styling purposes. A part is a
+   * style hook for these elements. A part allows for an explicit API for styling these elements so
+   * that style overriding doesn't need complicated CSS selectors to target them. The part API is a
+   * convenient wrapper to avoid magic stings. A part key should be short and descriptive - it
+   * represents the JS name of the part. The value should be more descriptive since it will become
+   * part of a CSS selector. For example, if the part key is "separator", the value should describe
+   * what stencil the separator belongs to. A unique name avoids naming collisions. If a
+   * `cardStencil` has a `separator` part and an `inputStencil` has a `separator` part, the value of
+   * each should be `card-separator` and `input-separator` respectively. If you do not uniquely set
+   * values, you can get unwanted CSS selector matching where the `inputStencil`'s part matches the
+   * CSS of the `cardStencil` if a `Card` component contains an `Input` component.
+   *
+   * ```ts
+   * const myButtonStencil = createStencil({
+   *   parts: {
+   *     icon: 'my-button-icon',
+   *     label: 'my-button-label'
+   *   },
+   *   base: ({iconPart}) => ({
+   *     padding: 10,
+   *     // other base styles
+   *
+   *     [iconPart]: { // '[data-part="my-icon"]'
+   *       // icon part styles
+   *     },
+   *     ':hover': {
+   *       // hover base styles
+   *       [iconPart]: {
+   *         // hover styles for icon part
+   *       }
+   *     },
+   *   })
+   * })
+   *
+   * The part can then be used in a component's render function.
+   * const MyComponent = ({children, ...elemProps}) => {
+   *   return (
+   *     <button {...handleCsProp(elemProps, myButtonStencil())}>
+   *       <i {...myButtonStencil.parts.icon} />
+   *       <span {...myButtonStencil.parts.label}>{children}</span>
+   *     </button>
+   *   )
+   * }
+   * ```
+   */
+  parts?: P;
+  /**
+   * A Stencil can support CSS variables. Since CSS variables cascade by default, variables are
    * defined with defaults. These defaults are added automatically to the `base` styles to prevent
    * CSS variables defined higher in the DOM tree from cascading into a component.
    *
@@ -927,7 +981,7 @@ export interface StencilConfig<
   /**
    * Base styles. These styles will always be returned when the stencil is called
    */
-  base: StylesReturn<V, E>;
+  base: StylesReturn<P, V, E>;
   /**
    * Stencil modifiers. The styles of a modifier are returned if the stencil is called with a
    * modifier key that matches the modifier value. For example:
@@ -997,7 +1051,7 @@ export interface StencilConfig<
    */
   compound?: ([E] extends [never]
     ? StencilCompoundConfig<M>
-    : E extends BaseStencil<infer ME, any, any, any>
+    : E extends BaseStencil<infer ME, any, any, any, any>
     ? StencilCompoundConfig<ME & M>
     : never)[];
   /**
@@ -1006,12 +1060,15 @@ export interface StencilConfig<
    */
   defaultModifiers?: [E] extends [never]
     ? StencilDefaultModifierReturn<M>
-    : E extends BaseStencil<infer ME, any, any, any>
+    : E extends BaseStencil<infer ME, any, any, any, any>
     ? StencilDefaultModifierReturn<ME & M>
     : undefined;
 }
 
-type StencilModifierReturn<M extends StencilModifierConfig<V>, V extends DefaultedVarsShape> = {
+type StencilModifierReturn<
+  M extends StencilModifierConfig<any, V>,
+  V extends DefaultedVarsShape
+> = {
   [K1 in keyof M]: {[K2 in keyof M[K1]]: string};
 };
 
@@ -1020,40 +1077,46 @@ type StencilDefaultModifierReturn<M> = {
 };
 
 export interface BaseStencil<
-  M extends StencilModifierConfig<V> = {},
+  M extends StencilModifierConfig<P, V> = {},
+  P extends Record<string, string> = {},
   V extends DefaultedVarsShape = {},
-  E extends BaseStencil<any, any, any, any> = never,
+  E extends BaseStencil<any, any, any, any, any> = never,
   ID extends string = never
 > {
   __extends?: E;
   __vars: V;
   __modifiers: M;
   __id: ID;
+  __parts?: P;
 }
 
 export interface Stencil<
-  M extends StencilModifierConfig<V, E> = {},
+  M extends StencilModifierConfig<P, V, E> = {},
+  P extends Record<string, string> = {},
   V extends DefaultedVarsShape = {},
-  E extends BaseStencil<any, any, any, any> = never,
+  E extends BaseStencil<any, any, any, any, any> = never,
   ID extends string = never
-> extends BaseStencil<M, V, E, ID> {
+> extends BaseStencil<M, P, V, E, ID> {
   (
     // If this stencil extends another stencil, merge the inputs
     options?: [E] extends [never]
       ? ModifierValuesStencil<M, V> & VariableValuesStencil<V>
-      : E extends BaseStencil<infer ME, infer VE, any, any>
+      : E extends BaseStencil<infer ME, any, infer VE, any, any>
       ? ModifierValuesStencil<ME & M> & VariableValuesStencil<VE & V>
       : never
   ): {
     className: string;
     style?: Record<string, string>;
   };
+  parts: [E] extends [BaseStencil<any, infer PE, any, any, any>]
+    ? StencilPartProps<PE & P>
+    : StencilPartProps<P>;
   vars: StencilDefaultVars<V, E, ID>;
   base: string;
-  modifiers: [E] extends [BaseStencil<infer ME, infer VE, any, any>]
+  modifiers: [E] extends [BaseStencil<infer ME, any, infer VE, any, any>]
     ? StencilModifierReturn<ME & M, VE & V>
     : StencilModifierReturn<M, V>;
-  defaultModifiers: [E] extends [BaseStencil<infer ME, any, any, any>]
+  defaultModifiers: [E] extends [BaseStencil<infer ME, any, any, any, any>]
     ? StencilDefaultModifierReturn<ME & M>
     : StencilDefaultModifierReturn<M>;
 }
@@ -1103,19 +1166,55 @@ export function parentModifier(value: string) {
   return `.${value.replace('css-', 'm')} :where(&)`;
 }
 
+export type StencilVarsParts<T> = {
+  [K in keyof T as `${K & string}${Capitalize<'Part'>}`]: `[data-part="${T[K] & string}"]`;
+};
+
+function makeParts<const T extends Record<string, string>>(parts: T): StencilVarsParts<T> {
+  if (!parts) {
+    return {} as StencilVarsParts<T>;
+  }
+  return Object.keys(parts).reduce((result, key: any) => {
+    (result as any)[`${key}Part`] = `[data-part="${parts[key]}"]`;
+    return result;
+  }, {} as StencilVarsParts<T>);
+}
+
+export type StencilPartProps<T> = {
+  [K in keyof T]: {'data-part': T[K]};
+};
+
+function makePartProps<const T extends Record<string, string>>(parts?: T): StencilPartProps<T> {
+  if (!parts) {
+    return {} as StencilPartProps<T>;
+  }
+
+  return Object.keys(parts).reduce((result, key: any) => {
+    (result as any)[key] = {'data-part': parts[key]};
+    return result;
+  }, {} as StencilPartProps<T>);
+}
+
 /**
  * Creates a reuseable Stencil for styling elements. It takes vars, base styles, modifiers, and
  * compound modifiers.
  */
 export function createStencil<
-  M extends StencilModifierConfig<V>, // TODO: default to `{}` and fix inference in `StyleReturn` types so that modifier style return functions give correct inference to variables
+  M extends StencilModifierConfig<P, V>, // TODO: default to `{}` and fix inference in `StyleReturn` types so that modifier style return functions give correct inference to variables
+  const P extends Record<string, string> = {},
   V extends DefaultedVarsShape = {},
-  E extends BaseStencil<any, any, any, any> = never, // use BaseStencil to avoid infinite loops
+  E extends BaseStencil<any, any, any, any, any> = never, // use BaseStencil to avoid infinite loops
   ID extends string = never
->(config: StencilConfig<M, V, E, ID>, id?: ID): Stencil<M, V, E, ID> {
-  const {vars, base, modifiers, compound, defaultModifiers} = config;
+>(config: StencilConfig<M, P, V, E, ID>, id?: ID): Stencil<M, P, V, E, ID> {
+  const {parts, vars, base, modifiers, compound, defaultModifiers} = config;
   const composes = config.extends as unknown as Stencil<any, any> | undefined;
+  const _parts = makePartProps({...composes?.__parts, ...parts}) as [E] extends [
+    BaseStencil<any, infer PE extends Record<string, string>, any, any, any>
+  ]
+    ? StencilPartProps<PE & P>
+    : StencilPartProps<P>;
   const _vars = createDefaultedVars(vars || {}, id) as any; // The return type is conditional and TypeScript doesn't like that here
+  const _partsVars = makeParts({...composes?.__parts, ...parts});
 
   // combine the vars keys together
   Object.keys(composes?.vars || {}).forEach(key => {
@@ -1127,7 +1226,7 @@ export function createStencil<
   const _base = createStyles({
     ..._vars.$$defaults,
     boxSizing: 'border-box',
-    ...(typeof base === 'function' ? base(_vars) : base),
+    ...(typeof base === 'function' ? base({..._vars, ..._partsVars}) : base),
   });
 
   const composesModifier = composes?.modifiers || (() => '');
@@ -1139,7 +1238,7 @@ export function createStencil<
             const modifier = modifiers[key][modifierKey];
             // @ts-ignore
             result[modifierKey] = createStyles(
-              typeof modifier === 'function' ? modifier(_vars) : modifier
+              typeof modifier === 'function' ? modifier({..._vars, ..._partsVars}) : modifier
             );
 
             return result;
@@ -1182,7 +1281,7 @@ export function createStencil<
       )
     : () => '';
 
-  const stencil: Stencil<M, V, E, ID> = ((input: Record<string, string>) => {
+  const stencil: Stencil<M, P, V, E, ID> = ((input: Record<string, string>) => {
     const inputModifiers = {...composes?.defaultModifiers, ...defaultModifiers};
     // Only override defaults if a value is defined
     for (const key in input) {
@@ -1211,11 +1310,13 @@ export function createStencil<
     };
   }) as any;
 
+  stencil.parts = _parts;
   stencil.vars = _vars;
   stencil.base = combineClassNames([composes?.base, _base]);
   stencil.modifiers = _modifiers as any; // The return type is conditional and TypeScript doesn't like that here
   stencil.defaultModifiers = {...composes?.defaultModifiers, ...defaultModifiers} as any;
   stencil.__extends = composes as any; // The return type is conditional and TypeScript doesn't like that here
+  stencil.__parts = parts;
 
   return stencil;
 }
