@@ -17,14 +17,12 @@ export interface BannerActionTextProps extends ExtractProps<typeof Box, never> {
 export const actionBarTextStencil = createStencil({
   base: {
     textDecoration: 'underline',
+    display: 'inline',
   },
   modifiers: {
     isSticky: {
       true: {
         display: 'none',
-      },
-      false: {
-        display: 'inline',
       },
     },
   },
