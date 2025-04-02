@@ -1,4 +1,3 @@
-import React from 'react';
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {createStencil, createStyles} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';

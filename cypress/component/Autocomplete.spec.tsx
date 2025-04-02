@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {Autocomplete} from '../../modules/react/combobox/stories/examples/Autocomplete';
 
 const haveAttrMatchingIdOf = (name: string, selector: string) => ($el: JQuery) => {

@@ -77,6 +77,7 @@ export const avatarStencil = createStencil({
     border: 0,
     overflow: 'hidden',
     cursor: 'default',
+    pointerEvents: 'none',
     borderRadius: system.shape.round,
     width: size,
     height: size,
@@ -86,6 +87,7 @@ export const avatarStencil = createStencil({
     },
     ':is(button)': {
       cursor: 'pointer',
+      pointerEvents: 'auto',
     },
     [`& > ${iconPart}`]: {
       transition: 'opacity 150ms linear',
@@ -234,7 +236,6 @@ export const avatarStencil = createStencil({
   },
   defaultModifiers: {
     variant: 'light',
-    size: 'medium',
     isImageLoaded: 'false',
     objectFit: 'contain',
   },
@@ -243,7 +244,7 @@ export const avatarStencil = createStencil({
 export const Avatar = createComponent('button')({
   displayName: 'Avatar',
   Component: (
-    {variant, size, altText = 'Avatar', url, objectFit, ...elemProps}: AvatarProps,
+    {variant, size = 'medium', altText = 'Avatar', url, objectFit, ...elemProps}: AvatarProps,
     ref,
     Element
   ) => {
@@ -272,11 +273,11 @@ export const Avatar = createComponent('button')({
         );
       }
     }
+
     return (
       <Element
         ref={ref}
-        aria-label={altText}
-        role={Element === 'button' ? 'button' : 'img'}
+        aria-label={Element === 'button' ? altText : undefined}
         {...mergeStyles(elemProps, [
           avatarStencil({
             variant:

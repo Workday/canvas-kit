@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {

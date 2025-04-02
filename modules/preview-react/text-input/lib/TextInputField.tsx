@@ -1,7 +1,3 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import {jsx} from '@emotion/react';
-
 import {
   borderRadius,
   colors,
@@ -69,7 +65,7 @@ export const TextInputField = createSubcomponent('input')({
     <FormField.Input
       as="input"
       {...type.levels.subtext.large}
-      css={[baseStyles, focusStyles]}
+      cs={[baseStyles, focusStyles]}
       padding={space.xxs}
       margin={0}
       display="block"

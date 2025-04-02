@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {Basic} from '../../modules/preview-react/radio/stories/examples/Basic';
 import {Alert} from '../../modules/preview-react/radio/stories/examples/Alert';
 import {Error} from '../../modules/preview-react/radio/stories/examples/Error';
