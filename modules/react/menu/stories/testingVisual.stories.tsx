@@ -27,36 +27,43 @@ const AllStatesMenuItem = () => (
   <Menu initialSelectedIds={['selected']} initialCursorId="non-existent">
     <Menu.Card style={{animation: 'none', width: 300}}>
       <Menu.List>
-        <Menu.Item>Normal Item</Menu.Item>
-        <Menu.Item className="focus">Focused Item</Menu.Item>
-        <Menu.Item className="hover">Hovered Item</Menu.Item>
-        <Menu.Item className="focus hover">Focused & Hovered Item</Menu.Item>
-        <Menu.Item aria-disabled={true}>Disabled Item</Menu.Item>
-        <Menu.Item>Wrapped Text Item Wrapped Text Item Wrapped Text Item</Menu.Item>
-        <Menu.Item>Superlonglinethatshouldbreakonitsownwithouthavingtodoanythingspecial</Menu.Item>
-        <Menu.Divider />
-        <Menu.Item>Menu item between dividers</Menu.Item>
-        <Menu.Divider />
-        <Menu.Item>
-          <Menu.Item.Icon icon={saveAsIcon} />
-          <Menu.Item.Text>Item with Icon</Menu.Item.Text>
-        </Menu.Item>
-        <Menu.Item className="focus">
-          <Menu.Item.Icon icon={saveAsIcon} />
-          <Menu.Item.Text>Item with Icon (focused)</Menu.Item.Text>
-        </Menu.Item>
-        <Menu.Item className="hover">
-          <Menu.Item.Icon icon={saveAsIcon} />
-          <Menu.Item.Text>Item with Icon (hovered)</Menu.Item.Text>
-        </Menu.Item>
-        <Menu.Item className="focus hover">
-          <Menu.Item.Icon icon={saveAsIcon} />
-          <Menu.Item.Text>Item with Icon (focus & hovered)</Menu.Item.Text>
-        </Menu.Item>
-        <Menu.Item>
-          <Menu.Item.Icon icon={saveAsIcon} />
-          <Menu.Item.Text>Item with Icon Wrapped Text Wrapped Text</Menu.Item.Text>
-        </Menu.Item>
+        <Menu.Group title="Group Heading One">
+          <Menu.Item>Normal Item</Menu.Item>
+          <Menu.Item className="focus">Focused Item</Menu.Item>
+          <Menu.Item className="hover">Hovered Item</Menu.Item>
+          <Menu.Item className="focus hover">Focused & Hovered Item</Menu.Item>
+          <Menu.Item aria-disabled={true}>Disabled Item</Menu.Item>
+          <Menu.Item>Wrapped Text Item Wrapped Text Item Wrapped Text Item</Menu.Item>
+          <Menu.Item>
+            Superlonglinethatshouldbreakonitsownwithouthavingtodoanythingspecial
+          </Menu.Item>
+          <Menu.Divider />
+          <Menu.Item>Menu item between dividers</Menu.Item>
+          <Menu.Divider />
+          <Menu.Item>
+            <Menu.Item.Icon icon={saveAsIcon} />
+            <Menu.Item.Text>Item with Icon</Menu.Item.Text>
+          </Menu.Item>
+          <Menu.Item className="focus">
+            <Menu.Item.Icon icon={saveAsIcon} />
+            <Menu.Item.Text>Item with Icon (focused)</Menu.Item.Text>
+          </Menu.Item>
+          <Menu.Item className="hover">
+            <Menu.Item.Icon icon={saveAsIcon} />
+            <Menu.Item.Text>Item with Icon (hovered)</Menu.Item.Text>
+          </Menu.Item>
+          <Menu.Item className="focus hover">
+            <Menu.Item.Icon icon={saveAsIcon} />
+            <Menu.Item.Text>Item with Icon (focus & hovered)</Menu.Item.Text>
+          </Menu.Item>
+          <Menu.Item>
+            <Menu.Item.Icon icon={saveAsIcon} />
+            <Menu.Item.Text>Item with Icon Wrapped Text Wrapped Text</Menu.Item.Text>
+          </Menu.Item>
+        </Menu.Group>
+        <Menu.Group title="Group Heading Two">
+          <Menu.Item>Menu item for group two</Menu.Item>
+        </Menu.Group>
       </Menu.List>
     </Menu.Card>
   </Menu>
@@ -156,6 +163,25 @@ const AllStatesMenuOption = () => (
   </Menu>
 );
 
+const MenuWithGroups = () => {
+  return (
+    <Menu initialSelectedIds={['0']} initialCursorId="non-existent">
+      <Menu.Card style={{animation: 'none', width: 300}}>
+        <Menu.List>
+          <Menu.Group title="Group Heading One">
+            <Menu.Item className="focus">Group one, Item one (focused)</Menu.Item>
+            <Menu.Item className="hover">Group one, Item two (hovered)</Menu.Item>
+          </Menu.Group>
+          <Menu.Group title="Group Heading Two">
+            <Menu.Item>Group two, Item one</Menu.Item>
+            <Menu.Item>Group two, Item two</Menu.Item>
+          </Menu.Group>
+        </Menu.List>
+      </Menu.Card>
+    </Menu>
+  );
+};
+
 export const MenuOptionStates = {
   render: () => {
     return (
@@ -175,6 +201,27 @@ export const MenuOptionStates = {
             <h3>RTL</h3>
             <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
               <AllStatesMenuOption />
+            </CanvasProvider>
+          </div>
+        </Flex>
+      </StaticStates>
+    );
+  },
+};
+
+export const MenuGroups = {
+  render: () => {
+    return (
+      <StaticStates>
+        <Flex gap="xs">
+          <div>
+            <h3>LTR</h3>
+            <MenuWithGroups />
+          </div>
+          <div>
+            <h3>RTL</h3>
+            <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
+              <MenuWithGroups />
             </CanvasProvider>
           </div>
         </Flex>

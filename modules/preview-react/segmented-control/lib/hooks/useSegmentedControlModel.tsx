@@ -44,7 +44,7 @@ export const useSegmentedControlModel = createModelHook({
       items,
       onRegisterItem(data) {
         if (!initialSelectedRef.current) {
-          initialSelectedRef.current = getId(data.item);
+          initialSelectedRef.current = data.id;
           events.select({id: initialSelectedRef.current});
         }
       },

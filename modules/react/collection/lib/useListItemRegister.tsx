@@ -72,15 +72,14 @@ export const useListItemRegister = createElemPropsHook(useListModel)(
         return;
       }
       events.registerItem({
-        item: {
-          id: itemId,
-        },
+        id: itemId,
         textValue: elemProps['data-text']
           ? elemProps['data-text']
           : typeof elemProps.children === 'string'
           ? elemProps.children
           : '',
       });
+
       setLocalId(itemId);
 
       return () => {
