@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
-import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import {Text} from '@workday/canvas-kit-react/text';
 
@@ -10,12 +10,12 @@ const informationHighlightBodyStencil = createStencil({
       ...system.type.subtext.large,
       color: system.color.text.strong,
       gridColumn: '2',
-      margin: `0 0 ${cssVar(system.space.x2)} 0`,
+      marginBlockEnd: system.space.x2,
     };
   },
 });
 
-export const Body = createComponent('p')({
+export const Body = createComponent('div')({
   displayName: 'Body',
   Component: ({...elemProps}: ExtractProps<typeof Text, never>, ref, Element) => {
     return (
