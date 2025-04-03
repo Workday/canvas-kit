@@ -45,7 +45,6 @@ export interface AvatarProps extends CSProps {
     | number;
   /**
    * The alt text of the Avatar image. This prop is also used for the aria-label.
-   * @default Avatar
    */
   altText?: string;
   /**
@@ -243,7 +242,7 @@ export const avatarStencil = createStencil({
 export const Avatar = createComponent('button')({
   displayName: 'Avatar',
   Component: (
-    {variant, size, altText = 'Avatar', url, objectFit, ...elemProps}: AvatarProps,
+    {variant, size, altText, url, objectFit, ...elemProps}: AvatarProps,
     ref,
     Element
   ) => {
