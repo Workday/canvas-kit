@@ -12,11 +12,11 @@ export const WithAvatar = () => {
     <Box>
       <Flex gap="xxs">
         <Pill onClick={() => setText('The first pill is clicked!')}>
-          <Pill.Avatar url={testAvatar} />
+          <Pill.Avatar altText="Avatar" url={testAvatar} />
           Regina Skeltor
         </Pill>
         <Pill onClick={() => setText('The second pill is clicked!')} disabled maxWidth={50}>
-          <Pill.Avatar url={testAvatar} />
+          <Pill.Avatar altText="Avatar" url={testAvatar} />
           Regina Skeltor
         </Pill>
       </Flex>

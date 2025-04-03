@@ -16,7 +16,7 @@ export const WithRemovable = () => {
           <Pill.IconButton onClick={() => setText('The first pill is clicked!')} />
         </Pill>
         <Pill variant="removable">
-          <Pill.Avatar url={testAvatar} />
+          <Pill.Avatar altText="Avatar" url={testAvatar} />
           Carolyn Grimaldi
           <Pill.IconButton onClick={() => setText('The second pill is clicked!')} />
         </Pill>

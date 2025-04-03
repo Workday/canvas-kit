@@ -18,7 +18,7 @@ export const PillAvatar = createSubcomponent('div')({
       style={{opacity: model.state.disabled ? '.7' : '1'}}
       size={px2rem(18)}
       as={Element}
-      altText={undefined}
+      altText="Avatar"
       {...elemProps}
     ></Avatar>
   );
