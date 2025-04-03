@@ -29,7 +29,7 @@ const containerStyles = createStyles({
 
 export const CustomStyles = () => (
   <div className={containerStyles}>
-    <Avatar as="div" {...customBlueAvatarStencil()} />
-    <Avatar as="div" {...customGreenAvatarStencil()} />
+    <Avatar altText="Avatar" as="div" {...customBlueAvatarStencil()} />
+    <Avatar altText="Avatar" as="div" {...customGreenAvatarStencil()} />
   </div>
 );

@@ -149,7 +149,7 @@ export const Basic = () => {
             <TertiaryButton icon={inboxIcon} />
           </Tooltip>
           <Tooltip title="Profile">
-            <Avatar />
+            <Avatar altText="Avatar" />
           </Tooltip>
         </GlobalHeader.Item>
       </GlobalHeader>
