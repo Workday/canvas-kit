@@ -1,8 +1,13 @@
 import React from 'react';
 
 import {createElemPropsHook} from '@workday/canvas-kit-react/common';
+import {createStyles} from '@workday/canvas-kit-styling';
 
 import {usePopupModel} from './usePopupModel';
+
+const disableBodyScrollStyles = createStyles({
+  overflow: 'hidden !important',
+});
 
 /**
  * Disables body scroll by adding `overflow: hidden` to the body element. This effectively prevents
@@ -19,18 +24,10 @@ export const useDisableBodyScroll = createElemPropsHook(usePopupModel)(model => 
       return;
     }
 
-    const overflowY = document.body.style.overflowY;
-    const overflowX = document.body.style.overflowX;
-    const overflow = document.body.style.overflow;
-
-    document.body.style.overflow = 'hidden';
-    document.body.style.overflowY = 'hidden';
-    document.body.style.overflowX = 'hidden';
+    document.body.classList.add(disableBodyScrollStyles);
 
     return () => {
-      document.body.style.overflow = overflow;
-      document.body.style.overflowY = overflowY;
-      document.body.style.overflowX = overflowX;
+      document.body.classList.remove(disableBodyScrollStyles);
     };
   }, [visible]);
 
