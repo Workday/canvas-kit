@@ -252,6 +252,7 @@ export function useListLoader<
         if (config.shouldLoad && !config.shouldLoad(params, prevState)) {
           return false;
         }
+
         load(params, loadRef.current, loadingRef.current)
           .then(updateItems)
           .then(() => {
@@ -268,6 +269,8 @@ export function useListLoader<
 
   const model = modelHook(
     modelHook.mergeConfig(config, {
+      // Loaders should virtualize by default. If they do not, it is an infinite scroll list
+      shouldVirtualize: true,
       items,
       shouldGoToNext: shouldLoadIndex('getNext', 'goToNext'),
       shouldGoToPrevious: shouldLoadIndex('getPrevious', 'goToPrevious'),

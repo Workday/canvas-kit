@@ -49,7 +49,8 @@ export interface SystemIconStyles {
   /**
    * The hover color of the SystemIcon. This defines `accentHover` and `fillHover`. `colorHover` may be overwritten by `accentHover` and `fillHover`.
    * @default base.licorice200
-   * @deprecated `colorHover` is deprecated and will be removed in a future version. Please use the following instead in your style overrides:
+   * @deprecated `colorHover` is deprecated and will be removed in a future version. We have removed the default hover styles on SystemIcon. Please
+   * use the following instead in your style overrides:
    * ```tsx
    * '&:hover': {
    *   [systemIconStencil.vars.color]: desiredColorHoverColor
@@ -158,7 +159,6 @@ export const systemIconStencil = createStencil({
       width: cssVar(width, cssVar(size, system.space.x6)),
       height: cssVar(height, cssVar(size, system.space.x6)),
     },
-    [backgroundColor]: cssVar(backgroundColor, 'transparent'),
     '& .wd-icon-fill': {
       fill: cssVar(color, base.licorice200),
     },
@@ -189,6 +189,13 @@ export const systemIconStencil = createStencil({
         deprecatedSystemIconVars.backgroundHover,
         cssVar(backgroundColor, 'transparent')
       ),
+    },
+    // for Windows high contrast desktop themes
+    '@media (prefers-contrast: more)': {
+      '.wd-icon-fill, .wd-icon-accent': {
+        color: 'currentColor',
+        fill: 'currentColor',
+      },
     },
   }),
 });

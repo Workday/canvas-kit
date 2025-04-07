@@ -1,54 +1,54 @@
 import * as React from 'react';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
-import {
-  SidePanel,
-  useSidePanel,
-  SidePanelTransitionStates,
-} from '@workday/canvas-kit-preview-react/side-panel';
+import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {Text} from '@workday/canvas-kit-react/text';
+import {Heading, Text} from '@workday/canvas-kit-react/text';
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
+
 // local helper hook for setting content direction;
 import {useDirection} from './useDirection';
+
+const stylesOverride = {
+  viewport: createStyles({
+    height: px2rem(320),
+    backgroundColor: base.soap100,
+  }),
+  panel: createStyles({
+    alignItems: 'center',
+    paddingY: system.space.x4,
+    paddingX: system.space.x4,
+  }),
+  main: createStyles({
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    flex: 1,
+    flexBasis: 'auto',
+  }),
+};
 
 export const AlternatePanel = () => {
   const {direction, toggleDirection} = useDirection();
   const {expanded, panelProps, labelProps, controlProps} = useSidePanel();
-  const [panelState, setPanelState] = React.useState<SidePanelTransitionStates>(
-    expanded ? 'expanded' : 'collapsed'
-  );
-
-  const expandedContent = (
-    <Flex alignItems="center" paddingY="s" paddingX="s">
-      <Text as="h3" typeLevel="body.large" color="licorice500" fontWeight="bold" {...labelProps}>
-        Alternate Panel
-      </Text>
-    </Flex>
-  );
 
   return (
     <CanvasProvider theme={{canvas: {direction}}}>
-      <Flex height={320} backgroundColor="soap100">
-        <SidePanel {...panelProps} onStateTransition={setPanelState} variant="alternate">
+      <Flex cs={stylesOverride.viewport}>
+        <SidePanel {...panelProps} variant="alternate">
           <SidePanel.ToggleButton {...controlProps} />
-          {panelState === 'expanded' ? (
-            expandedContent
-          ) : (
-            <Text hidden {...labelProps}>
-              Tasks Panel
-            </Text>
-          )}
+          <Flex cs={stylesOverride.panel}>
+            <Heading size="small" hidden={!expanded ? true : undefined} {...labelProps}>
+              Alternate Panel
+            </Heading>
+          </Flex>
         </SidePanel>
-        <Flex
-          as="main"
-          alignItems="center"
-          justifyContent="center"
-          flexDirection="column"
-          flex={1}
-          flexBasis="auto"
-        >
-          <p>Toggle the content direction</p>
-          <SecondaryButton onClick={toggleDirection} role="button">
+        <Flex as="main" cs={stylesOverride.main}>
+          <Text as="p" typeLevel="body.large">
+            Toggle the content direction
+          </Text>
+          <SecondaryButton onClick={toggleDirection}>
             Set to {direction === 'ltr' ? 'Right-to-Left' : 'Left-to-Right'}
           </SecondaryButton>
         </Flex>

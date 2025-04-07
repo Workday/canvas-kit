@@ -26,16 +26,13 @@ export const useComboboxInput = composeHooks(
         if (model.state.isVirtualized && item) {
           model.state.UNSTABLE_virtual.scrollToIndex(item.index);
         } else {
-          const listboxId = model.state.inputRef.current?.getAttribute('aria-controls');
-          if (listboxId) {
-            const menuItem = document.querySelector(
-              `[id="${listboxId}"] [data-id="${model.state.cursorId}"]`
-            );
-            if (menuItem) {
-              requestAnimationFrame(() => {
-                menuItem.scrollIntoView({block: 'nearest'});
-              });
-            }
+          const menuItem = document.querySelector(
+            `[id="${model.state.id}-list"] [data-id="${model.state.cursorId}"]`
+          );
+          if (menuItem) {
+            requestAnimationFrame(() => {
+              menuItem.scrollIntoView({block: 'nearest'});
+            });
           }
         }
       }
@@ -60,9 +57,8 @@ export const useComboboxInput = composeHooks(
         }
       },
       onBlur(event: React.FocusEvent) {
-        model.events.hide(event);
+        // model.events.hide(event);
       },
-      onChange: model.onChange,
       onClick(event: React.MouseEvent) {
         if (model.state.visibility === 'hidden') {
           model.events.setWidth(event.currentTarget.clientWidth);
@@ -70,14 +66,14 @@ export const useComboboxInput = composeHooks(
       },
       value: model.state.value,
       role: 'combobox',
-      'aria-haspopup': 'true' as React.AriaAttributes['aria-haspopup'],
+      'aria-haspopup': 'listbox',
       'aria-expanded': model.state.visibility === 'visible',
       'aria-autocomplete': 'list',
       'aria-controls': `${model.state.id}-list`,
       'aria-activedescendant': model.state.visibility === 'hidden' ? null : undefined, // Removes activedescendant on menu close
       id: model.state.id,
       ref: elementRef,
-    } as const;
+    };
   }),
   useSetPopupWidth,
   useComboboxInputOpenWithArrowKeys,

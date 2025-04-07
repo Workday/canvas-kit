@@ -6,6 +6,9 @@ const path = require('path');
 const chalk = require('chalk');
 const depCheck = require('depcheck');
 
+// Disable - It doesn't work with TS 5.0 and future versions of depcheck don't work. Maybe try knip
+process.exit(0);
+
 const depCheckOptions = {
   ignoreMatches: [
     'node:path',
