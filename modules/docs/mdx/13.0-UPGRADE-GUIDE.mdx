@@ -20,6 +20,7 @@ any questions.
   - [Instructions](#instructions)
 - [Component Updates](#component-updates)
   - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
+  - [Expandable](#expandable)
   - [External Hyperlink](#external-hyperlink)
   - [Pill](#pill)
   - [Tabs](#tabs)
@@ -122,6 +123,22 @@ The following components are affected:
 - `Skeleton`
 - `Tabs`
 - `Tooltip`
+
+### Expandable
+
+**PR:** [#3213](https://github.com/Workday/canvas-kit/pull/3213)
+
+We've promoted `Expandable` from [Labs](#labs) to [Main](#main).
+
+```tsx
+// v12
+import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
+
+// v13
+import {Expandable} from '@workday/canvas-kit-react/expandable';
+```
+
+🤖 The codemod will handle the change of imports as shown above. 
 
 ### External Hyperlink
 

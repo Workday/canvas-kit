@@ -81,7 +81,7 @@ export const avatarStencil = createStencil({
     borderRadius: system.shape.round,
     width: size,
     height: size,
-    '&:focus-visible:not([disabled]), &.focus:not([disabled])': {
+    '&:focus-visible, &.focus': {
       outline: 'none',
       ...focusRing({separation: 2}),
     },
@@ -89,19 +89,24 @@ export const avatarStencil = createStencil({
       cursor: 'pointer',
       pointerEvents: 'auto',
     },
-    [`& > ${iconPart}`]: {
+    '&:disabled, &.disabled': {
+      opacity: system.opacity.disabled,
+    },
+    [iconPart]: {
       transition: 'opacity 150ms linear',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       [systemIconStencil.vars.size]: calc.multiply(size, 0.625),
+      opacity: 1,
     },
-    [`& > ${imagePart}`]: {
+    [imagePart]: {
       position: 'absolute',
       width: '100%',
       height: '100%',
       borderRadius: borderRadius.circle,
       transition: 'opacity 150ms linear',
+      opacity: 0,
     },
   }),
   modifiers: {
@@ -224,19 +229,10 @@ export const avatarStencil = createStencil({
           opacity: 1,
         },
       }),
-      false: ({iconPart, imagePart}) => ({
-        [iconPart]: {
-          opacity: 1,
-        },
-        [imagePart]: {
-          opacity: 0,
-        },
-      }),
     },
   },
   defaultModifiers: {
     variant: 'light',
-    isImageLoaded: 'false',
     objectFit: 'contain',
   },
 });
