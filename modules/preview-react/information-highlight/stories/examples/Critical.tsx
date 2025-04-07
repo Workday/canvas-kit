@@ -8,23 +8,17 @@ export const Critical = () => {
     <Flex flexDirection={'column'} gap={system.space.x2}>
       <InformationHighlight variant={'critical'}>
         <InformationHighlight.Icon />
-        <InformationHighlight.Heading>
-          {' '}
-          Attention! Highlight Something{' '}
-        </InformationHighlight.Heading>
+        <InformationHighlight.Heading>Attention! Highlight Something</InformationHighlight.Heading>
         <InformationHighlight.Body>
-          If you select the link below it will just reroute you back to this page
+          If you select the link below it will reroute you back to this page.
         </InformationHighlight.Body>
         <InformationHighlight.Link href="#hyperlink">View the Docs</InformationHighlight.Link>
       </InformationHighlight>
       <InformationHighlight variant={'critical'} emphasis={'high'}>
         <InformationHighlight.Icon />
-        <InformationHighlight.Heading>
-          {' '}
-          Attention! Highlight Something{' '}
-        </InformationHighlight.Heading>
+        <InformationHighlight.Heading>Attention! Highlight Something</InformationHighlight.Heading>
         <InformationHighlight.Body>
-          If you select the link below it will just reroute you back to this page
+          If you select the link below it will reroute you back to this page.
         </InformationHighlight.Body>
         <InformationHighlight.Link href="#hyperlink">View the Docs</InformationHighlight.Link>
       </InformationHighlight>
