@@ -22,8 +22,11 @@ export const PillAvatar = createSubcomponent('div')({
       aria-hidden={true}
       as={Element}
       size={px2rem(18)}
-      altText="Avatar"
-      {...mergeStyles(elemProps, pillAvatarStencil())}
+      altText='Avatar'
+      {...mergeStyles(elemProps, [
+        pillAvatarStencil(),
+        _model.state.disabled ? 'disabled' : undefined,
+      ])}
     />
   );
 });

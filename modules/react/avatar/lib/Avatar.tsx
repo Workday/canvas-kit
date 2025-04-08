@@ -62,7 +62,11 @@ export const avatarStencil = createStencil({
   vars: {
     size: '',
   },
-  base: ({size}) => ({
+  parts: {
+    icon: 'avatar-icon',
+    image: 'avatar-image',
+  },
+  base: ({size, iconPart, imagePart}) => ({
     background: system.color.bg.caution.default,
     position: 'relative',
     display: 'flex',
@@ -76,7 +80,7 @@ export const avatarStencil = createStencil({
     borderRadius: system.shape.round,
     width: size,
     height: size,
-    '&:focus-visible:not([disabled]), &.focus:not([disabled])': {
+    '&:focus-visible, &.focus': {
       outline: 'none',
       ...focusRing({separation: 2}),
     },
@@ -84,154 +88,150 @@ export const avatarStencil = createStencil({
       cursor: 'pointer',
       pointerEvents: 'auto',
     },
-    ['& > [data-part="avatar-icon"]']: {
+    '&:disabled, &.disabled': {
+      opacity: system.opacity.disabled,
+    },
+    [iconPart]: {
       transition: 'opacity 150ms linear',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       [systemIconStencil.vars.size]: calc.multiply(size, 0.625),
+      opacity: 1,
     },
-    ['& > [data-part="avatar-image"]']: {
+    [imagePart]: {
       position: 'absolute',
       width: '100%',
       height: '100%',
       borderRadius: borderRadius.circle,
       transition: 'opacity 150ms linear',
+      opacity: 0,
     },
   }),
   modifiers: {
     variant: {
-      light: {
+      light: ({iconPart}) => ({
         backgroundColor: system.color.bg.alt.default,
-        ['& [data-part="avatar-icon"]']: {
+        [iconPart]: {
           [systemIconStencil.vars.color]: system.color.fg.default,
         },
-      },
-      dark: {
+      }),
+      dark: ({iconPart}) => ({
         backgroundColor: system.color.bg.primary.default,
-        ['& [data-part="avatar-icon"]']: {
+        [iconPart]: {
           [systemIconStencil.vars.color]: system.color.fg.inverse,
         },
-      },
+      }),
     },
     size: {
-      extraSmall: {
+      extraSmall: ({iconPart}) => ({
         width: system.space.x4,
         height: system.space.x4,
-        ['& [data-part="avatar-icon"]']: {
+        [iconPart]: {
           [systemIconStencil.vars.size]: calc.multiply(system.space.x4, 0.625),
         },
-      },
-      small: {
+      }),
+      small: ({iconPart}) => ({
         width: system.space.x6,
         height: system.space.x6,
-        ['& [data-part="avatar-icon"]']: {
+        [iconPart]: {
           [systemIconStencil.vars.size]: calc.multiply(system.space.x6, 0.625),
         },
-      },
-      medium: {
+      }),
+      medium: ({iconPart}) => ({
         width: system.space.x8,
         height: system.space.x8,
-        ['& [data-part="avatar-icon"]']: {
+        [iconPart]: {
           [systemIconStencil.vars.size]: calc.multiply(system.space.x8, 0.625),
         },
-      },
-      large: {
+      }),
+      large: ({iconPart}) => ({
         width: system.space.x10,
         height: system.space.x10,
-        ['& [data-part="avatar-icon"]']: {
+        [iconPart]: {
           [systemIconStencil.vars.size]: calc.multiply(system.space.x10, 0.625),
         },
-      },
-      extraLarge: {
+      }),
+      extraLarge: ({iconPart}) => ({
         width: system.space.x16,
         height: system.space.x16,
-        ['& [data-part="avatar-icon"]']: {
+        [iconPart]: {
           [systemIconStencil.vars.size]: calc.multiply(system.space.x16, 0.625),
         },
-      },
-      extraExtraLarge: {
+      }),
+      extraExtraLarge: ({iconPart}) => ({
         width: calc.multiply(system.space.x10, 3),
         height: calc.multiply(system.space.x10, 3),
-        ['& [data-part="avatar-icon"]']: {
+        [iconPart]: {
           [systemIconStencil.vars.size]: calc.multiply(calc.multiply(system.space.x10, 3), 0.625),
         },
-      },
+      }),
     },
     objectFit: {
-      contain: {
-        ['& [data-part="avatar-image"]']: {
+      contain: ({imagePart}) => ({
+        [imagePart]: {
           objectFit: 'contain',
         },
-      },
-      fill: {
-        ['& [data-part="avatar-image"]']: {
+      }),
+      fill: ({imagePart}) => ({
+        [imagePart]: {
           objectFit: 'fill',
         },
-      },
-      cover: {
-        ['& [data-part="avatar-image"]']: {
+      }),
+      cover: ({imagePart}) => ({
+        [imagePart]: {
           objectFit: 'cover',
         },
-      },
-      ['scale-down']: {
-        ['& [data-part="avatar-image"]']: {
+      }),
+      ['scale-down']: ({imagePart}) => ({
+        [imagePart]: {
           objectFit: 'scale-down',
         },
-      },
-      none: {
-        ['& [data-part="avatar-image"]']: {
+      }),
+      none: ({imagePart}) => ({
+        [imagePart]: {
           objectFit: 'none',
         },
-      },
-      ['-moz-initial']: {
-        ['& [data-part="avatar-image"]']: {
+      }),
+      ['-moz-initial']: ({imagePart}) => ({
+        [imagePart]: {
           objectFit: '-moz-initial',
         },
-      },
-      ['initial']: {
-        ['& [data-part="avatar-image"]']: {
+      }),
+      ['initial']: ({imagePart}) => ({
+        [imagePart]: {
           objectFit: 'initial',
         },
-      },
-      ['inherit']: {
-        ['& [data-part="avatar-image"]']: {
+      }),
+      ['inherit']: ({imagePart}) => ({
+        [imagePart]: {
           objectFit: 'inherit',
         },
-      },
-      ['revert']: {
-        ['& [data-part="avatar-image"]']: {
+      }),
+      ['revert']: ({imagePart}) => ({
+        [imagePart]: {
           objectFit: 'revert',
         },
-      },
-      ['unset']: {
-        ['& [data-part="avatar-image"]']: {
+      }),
+      ['unset']: ({imagePart}) => ({
+        [imagePart]: {
           objectFit: 'unset',
         },
-      },
+      }),
     },
     isImageLoaded: {
-      false: {
-        ['& [data-part="avatar-icon"]']: {
-          opacity: 1,
-        },
-        ['& > [data-part="avatar-image"]']: {
+      true: ({iconPart, imagePart}) => ({
+        [iconPart]: {
           opacity: 0,
         },
-      },
-      true: {
-        ['& [data-part="avatar-icon"]']: {
-          opacity: 0,
-        },
-        ['& [data-part="avatar-image"]']: {
+        [imagePart]: {
           opacity: 1,
         },
-      },
+      }),
     },
   },
   defaultModifiers: {
     variant: 'light',
-    isImageLoaded: 'false',
     objectFit: 'contain',
   },
 });
@@ -287,8 +287,8 @@ export const Avatar = createComponent('button')({
           }),
         ])}
       >
-        <SystemIcon icon={userIcon} data-part="avatar-icon" />
-        {url && <img data-part="avatar-image" src={url} alt={altText} onLoad={loadImage} />}
+        <SystemIcon {...avatarStencil.parts.icon} icon={userIcon} />
+        {url && <img {...avatarStencil.parts.image} src={url} alt={altText} onLoad={loadImage} />}
       </Element>
     );
   },
