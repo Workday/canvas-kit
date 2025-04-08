@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.2.7](https://github.com/Workday/canvas-kit/releases/tag/v11.2.7) (2025-04-04)
+
+### Components
+
+- fix(popup): Nested Popups using `useDisableBodyScroll` ([#3225](https://github.com/Workday/canvas-kit/pull/3225)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  Popups using `useDisableBodyScroll`, including `Modal`s now use a CSS class conditionally applied to the `document.body` element instead of setting the `overflow: hidden;` style directly. `!important` is used to win over any other style applied to the `document.body`.
 ## [v12.5.5](https://github.com/Workday/canvas-kit/releases/tag/v12.5.5) (2025-03-27)
 
 ### Components
