@@ -19,6 +19,7 @@ any questions.
 - [Codemod](#codemod)
   - [Instructions](#instructions)
 - [Component Updates](#component-updates)
+	- [Avatar](#avatar)
   - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
   - [Expandable](#expandable)
   - [External Hyperlink](#external-hyperlink)
@@ -97,9 +98,19 @@ yarn remove @workday/canvas-kit-codemod
 
 ## Component Updates
 
+### Avatar
+
+**PRs:** [#3231](https://github.com/Workday/canvas-kit/pull/3231)
+
+A few changes have been made to `Avatar` to ensure proper accessibility.
+
+##### Breaking Changes
+
+- The `altText` prop no longer has a default of `"Avatar"`.  You *must* provide an `altText` for `<Avatar />, <Pill.Avatar />, <Expandable.Avatar />` to ensure proper accessibility. Our examples have been updated to reflect this change.
+
 ### Styling API and CSS Tokens
 
-**PRs:** [#3101](https://github.com/Workday/canvas-kit/pull/3101), [#3088](https://github.com/Workday/canvas-kit/pull/3088), [#3114](https://github.com/Workday/canvas-kit/pull/3114), [#3119](https://github.com/Workday/canvas-kit/pull/3119), [#3120](https://github.com/Workday/canvas-kit/pull/3120), [#3164](https://github.com/Workday/canvas-kit/pull/3164), [#3128](https://github.com/Workday/canvas-kit/pull/3128), [#3123](https://github.com/Workday/canvas-kit/pull/3123), [#3205](https://github.com/Workday/canvas-kit/pull/3205), [#3210](https://github.com/Workday/canvas-kit/pull/3210), [#3231](https://github.com/Workday/canvas-kit/pull/3231)
+**PRs:** [#3101](https://github.com/Workday/canvas-kit/pull/3101), [#3088](https://github.com/Workday/canvas-kit/pull/3088), [#3114](https://github.com/Workday/canvas-kit/pull/3114), [#3119](https://github.com/Workday/canvas-kit/pull/3119), [#3120](https://github.com/Workday/canvas-kit/pull/3120), [#3164](https://github.com/Workday/canvas-kit/pull/3164), [#3128](https://github.com/Workday/canvas-kit/pull/3128), [#3123](https://github.com/Workday/canvas-kit/pull/3123), [#3205](https://github.com/Workday/canvas-kit/pull/3205), [#3210](https://github.com/Workday/canvas-kit/pull/3210)
 
 Several components have been refactored to use our
 [Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
@@ -123,16 +134,6 @@ The following components are affected:
 - `Skeleton`
 - `Tabs`
 - `Tooltip`
-
-### Avatar
-
-**PRs:** [#3231](https://github.com/Workday/canvas-kit/pull/3231)
-
-A few changes have been made to `Avatar` to ensure proper accessibility.
-
-##### Breaking Changes
-
-- `altText` no longer has a default `altText="Avatar"`.  You *must* provide an `altText` for `<Avatar />, <Pill.Avatar />, <Expandable.Avatar />` to ensure proper accessibility. Our examples have been updated to reflect this change.
 
 ### Expandable
 
