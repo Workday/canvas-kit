@@ -23,7 +23,10 @@ export const PillAvatar = createSubcomponent('div')({
       as={Element}
       size={px2rem(18)}
       altText={''}
-      {...mergeStyles(elemProps, pillAvatarStencil())}
+      {...mergeStyles(elemProps, [
+        pillAvatarStencil(),
+        _model.state.disabled ? 'disabled' : undefined,
+      ])}
     />
   );
 });

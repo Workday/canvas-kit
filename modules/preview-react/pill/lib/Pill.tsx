@@ -98,13 +98,6 @@ export const pillStencil = createStencil({
       [systemIconStencil.vars.color]: system.color.icon.soft,
       [pillCountStencil.vars.backgroundColor]: system.color.bg.alt.default,
       [pillCountStencil.vars.borderColor]: 'transparent',
-
-      '& [data-part="avatar-image"]': {
-        opacity: system.opacity.disabled,
-      },
-      '& [data-part="avatar-icon"]': {
-        opacity: system.opacity.disabled,
-      },
     },
   }),
 });
