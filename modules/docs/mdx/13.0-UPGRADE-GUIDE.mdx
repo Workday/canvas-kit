@@ -99,7 +99,7 @@ yarn remove @workday/canvas-kit-codemod
 
 ### Styling API and CSS Tokens
 
-**PRs:** [#3101](https://github.com/Workday/canvas-kit/pull/3101), [#3088](https://github.com/Workday/canvas-kit/pull/3088), [#3114](https://github.com/Workday/canvas-kit/pull/3114), [#3119](https://github.com/Workday/canvas-kit/pull/3119), [#3120](https://github.com/Workday/canvas-kit/pull/3120), [#3164](https://github.com/Workday/canvas-kit/pull/3164), [#3128](https://github.com/Workday/canvas-kit/pull/3128), [#3123](https://github.com/Workday/canvas-kit/pull/3123), [#3205](https://github.com/Workday/canvas-kit/pull/3205), [#3210](https://github.com/Workday/canvas-kit/pull/3210)
+**PRs:** [#3101](https://github.com/Workday/canvas-kit/pull/3101), [#3088](https://github.com/Workday/canvas-kit/pull/3088), [#3114](https://github.com/Workday/canvas-kit/pull/3114), [#3119](https://github.com/Workday/canvas-kit/pull/3119), [#3120](https://github.com/Workday/canvas-kit/pull/3120), [#3164](https://github.com/Workday/canvas-kit/pull/3164), [#3128](https://github.com/Workday/canvas-kit/pull/3128), [#3123](https://github.com/Workday/canvas-kit/pull/3123), [#3205](https://github.com/Workday/canvas-kit/pull/3205), [#3210](https://github.com/Workday/canvas-kit/pull/3210), [#3231](https://github.com/Workday/canvas-kit/pull/3231)
 
 Several components have been refactored to use our
 [Canvas Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
@@ -124,6 +124,16 @@ The following components are affected:
 - `Tabs`
 - `Tooltip`
 
+### Avatar
+
+**PRs:** [#3231](https://github.com/Workday/canvas-kit/pull/3231)
+
+A few changes have been made to `Avatar` to ensure proper accessibility.
+
+##### Breaking Changes
+
+- `altText` no longer has a default `altText="Avatar"`.  You *must* provide an `altText` for `<Avatar />, <Pill.Avatar />, <Expandable.Avatar />` to ensure proper accessibility. Our examples have been updated to reflect this change.
+
 ### Expandable
 
 **PR:** [#3213](https://github.com/Workday/canvas-kit/pull/3213)
@@ -138,7 +148,7 @@ import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
 import {Expandable} from '@workday/canvas-kit-react/expandable';
 ```
 
-🤖 The codemod will handle the change of imports as shown above. 
+🤖 The codemod will handle the change of imports as shown above.
 
 ### External Hyperlink
 
@@ -189,11 +199,11 @@ A few changes have been made to `Pill` to ensure proper accessibility and styles
 We've removed the outdated Dub Logos in Main and promoted the new logos that were previously in our Preview package to Main as part of the brand refresh.
 
 | Old Logo Name | New Logo Name |
-| --------------- | ----------------- | 
-| dubLogoBlue | dubLogoPrimary | 
-| dubLogoWhite | dubLogoReversed | 
-| wdayLogoBlue | wdayLogoPrimary | 
-| wdayLogoWhite | wdayLogoReversed | 
+| --------------- | ----------------- |
+| dubLogoBlue | dubLogoPrimary |
+| dubLogoWhite | dubLogoReversed |
+| wdayLogoBlue | wdayLogoPrimary |
+| wdayLogoWhite | wdayLogoReversed |
 
 ```tsx
 // In v12
