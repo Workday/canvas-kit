@@ -8,7 +8,7 @@ import {useOverflowListModel} from './useOverflowListModel';
 const hiddenStyle = {
   position: 'absolute',
   left: -99999,
-};
+} as const;
 
 /**
  * This elemProps hook measures an overflow list target and reports it to an `OverflowListModel`.
@@ -24,11 +24,15 @@ export const useOverflowListTarget = createElemPropsHook(useOverflowListModel)((
     if (localRef.current) {
       const styles = getComputedStyle(localRef.current);
 
-      model.events.setOverflowTargetWidth({
+      model.events.setOverflowTargetSize({
         width:
           localRef.current.offsetWidth +
           parseFloat(styles.marginLeft) +
           parseFloat(styles.marginRight),
+        height:
+          localRef.current.offsetHeight +
+          parseFloat(styles.marginTop) +
+          parseFloat(styles.marginBottom),
       });
     }
   });

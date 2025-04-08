@@ -16,6 +16,17 @@ export interface TooltipProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
   /**
    * This should be a string in most cases. HTML is supported, but only text is understood
    * by assistive technology. This is true for both `label` and `describe` modes.
+   *
+   * **Note:** If you use `description` type and want to pass `jsx`, it **must* be inline and **not** a component to ensure the inner text is properly translated.
+   *
+   * ```jsx
+   * // The text will be understood as: You must accept terms and conditions
+   * <Tooltip type="description" title={<span>You<i>must</i> accept terms and conditions</span>}/>
+   *
+   * // This will render a string including the html and will not be properly understood by voice over.
+   * const MyComponent = () => <span>You<i>must</i> accept terms and conditions</span>
+   * <Tooltip type="description" title={MyComponent/>
+   * ```
    */
   title: React.ReactNode;
   /**
@@ -45,7 +56,7 @@ export interface TooltipProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
    * - `label`: Sets the accessible name for the wrapped element. Use for icons or if tooltip
    *   `title` prop is the same as the text content of the wrapped element. E.g. TertiaryButtons that render an icon or
    *   Ellipsis tooltips.
-   * - `describe`: Sets `aria-describedby` of the wrapped element. Use if the tooltip has additional
+   * - **Deprecated: `describe` is deprecated, please use `description`**.`describe`: Sets `aria-describedby` of the wrapped element. Use if the tooltip has additional
    *   information about the target.
    * - `muted`: No effort is made to make the tooltip accessible to screen readers. Use if the
    *   tooltip contents are not useful to a screen reader or if you have handled accessibility of
@@ -55,7 +66,7 @@ export interface TooltipProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
    * Consider an alternate way to inform a user of additional important information.
    * @default 'label'
    */
-  type?: 'label' | 'describe' | 'muted';
+  type?: 'label' | 'describe' | 'muted' | 'description';
   /**
    * Amount of time (in ms) to delay before showing the tooltip
    */

@@ -2,6 +2,7 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/react';
 import {render, screen} from '@testing-library/react';
+import {expectTypeOf} from 'expect-type';
 
 import {mergeProps} from '../lib/utils';
 
@@ -25,7 +26,35 @@ describe('mergeProps', () => {
       foo: 'baz',
     };
 
-    expect(mergeProps(target, source)).toEqual({foo: 'baz'});
+    const props = mergeProps(target, source);
+    expect(props).toEqual({foo: 'baz'});
+    expectTypeOf(props).toEqualTypeOf<{foo: string}>();
+  });
+
+  it('should override target props types with source props types', () => {
+    const target = {
+      foo: 'bar',
+    };
+    const source = {
+      foo: 1,
+    };
+
+    const props = mergeProps(target, source);
+    expect(props).toEqual({foo: 1});
+    expectTypeOf(props).toEqualTypeOf<{foo: number}>();
+  });
+
+  it('should override source prop when value of that prop is `null`', () => {
+    const target = {
+      foo: null,
+    };
+    const source = {
+      foo: 'foo',
+    };
+
+    const props = mergeProps(target, source); //?
+    expect(props).toEqual({foo: null});
+    expectTypeOf(props).toEqualTypeOf<{}>();
   });
 
   it('should call both callbacks of the same keys', () => {

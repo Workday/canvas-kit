@@ -6,7 +6,6 @@ import {generateUniqueId} from '@workday/canvas-kit-styling';
 
 import {prettyStringify} from './stylisFns';
 import {NestedStyleObject, TransformerContext} from './types';
-import {getHash} from './getHash';
 
 /**
  * Creates an AST node representation of the passed in `styleObj`, but in the format of `{name:
@@ -65,7 +64,7 @@ export function serializeStyles(
 ) {
   const {getFileName, styles, cache, names, extractedNames} = context;
   const fileName = getFileName(node.getSourceFile().fileName);
-  const hash = getHash(node, context);
+  const hash = generateUniqueId(); //getHash(node, context);
   const serialized = {...serializedStylesEmotion([input]), name: hash} as ReturnType<
     typeof serializedStylesEmotion
   >;

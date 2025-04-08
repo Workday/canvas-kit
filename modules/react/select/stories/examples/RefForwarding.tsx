@@ -1,6 +1,6 @@
 import React from 'react';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Select} from '@workday/canvas-kit-react/select';
 
 const options = [
@@ -13,6 +13,7 @@ const options = [
 ];
 
 export const RefForwarding = () => {
+  // @ts-ignore
   const [value, setValue] = React.useState('medium');
   const ref = React.useRef(null);
 
@@ -30,15 +31,17 @@ export const RefForwarding = () => {
   return (
     <>
       <FormField>
-        <Select items={options}>
-          <FormField.Label>Contact</FormField.Label>
-          <FormField.Input as={Select.Input} ref={ref} onChange={e => handleChange(e)} />
-          <Select.Popper>
-            <Select.Card>
-              <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
-            </Select.Card>
-          </Select.Popper>
-        </Select>
+        <FormField.Label>Contact</FormField.Label>
+        <FormField.Field>
+          <Select items={options}>
+            <FormField.Input as={Select.Input} ref={ref} onChange={e => handleChange(e)} />
+            <Select.Popper>
+              <Select.Card>
+                <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
+              </Select.Card>
+            </Select.Popper>
+          </Select>
+        </FormField.Field>
       </FormField>
       <PrimaryButton onClick={handleClick}>Focus Select</PrimaryButton>
     </>
