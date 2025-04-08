@@ -11,7 +11,7 @@ const containerStyles = createStyles({
 
 export const Basic = () => (
   <div className={containerStyles}>
-    <Avatar onClick={handleAvatarButtonClick} />
-    <Avatar as="div" />
+    <Avatar altText="Avatar" onClick={handleAvatarButtonClick} />
+    <Avatar altText="Avatar" as="div" />
   </div>
 );
