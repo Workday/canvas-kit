@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.2.8](https://github.com/Workday/canvas-kit/releases/tag/v11.2.8) (2025-04-08)
+
+### Components
+
+- fix(icon): Forward `elemProps` in `SystemIconCircle` ([#3228](https://github.com/Workday/canvas-kit/pull/3228)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v11.2.7](https://github.com/Workday/canvas-kit/releases/tag/v11.2.7) (2025-04-04)
 
 ### Components
