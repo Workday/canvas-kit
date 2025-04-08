@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.5.6](https://github.com/Workday/canvas-kit/releases/tag/v12.5.6) (2025-04-08)
+
+### Components
+
+- fix(popup): Nested Popups using `useDisableBodyScroll` ([#3225](https://github.com/Workday/canvas-kit/pull/3225)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  Popups using `useDisableBodyScroll`, including `Modal`s now use a CSS class conditionally applied to the `document.body` element instead of setting the `overflow: hidden;` style directly. `!important` is used to win over any other style applied to the `document.body`.
+- fix: Update InformationHighlight.Body to use div ([#3222](https://github.com/Workday/canvas-kit/pull/3222)) ([@alanbsmith](https://github.com/alanbsmith))
+  There are no visual changes because of this update. However, if you were relying on the `p` tag as an identifier for testing or other purposes, you'll need to adjust your implementation, as the underlying element is now a `div`. Additionally, if you'd like to keep a `p` tag around the `Body` text, you'll need to add it manually. Wrapping text in a `p` is not an accessibility requirement, but it can be helpful when you have multiple, separate content blocks.
+  
+  ```jsx
+  // before
+  <InformationHighlight.Body>
+    Body text goes here.
+    <ul>
+      <li>Point One</li>
+      <li>Point Two</li>
+      <li>Point Three</li>
+    </ul>
+  </InformationHighlight.Body>
+  
+  // after
+  <InformationHighlight.Body>
+    <p style={{ margin: 0 }}>Body text goes here.</p>
+    <ul>
+      <li>Point One</li>
+      <li>Point Two</li>
+      <li>Point Three</li>
+    </ul>
+  </InformationHighlight.Body>
+  ```
+
+
 ## [v11.2.7](https://github.com/Workday/canvas-kit/releases/tag/v11.2.7) (2025-04-04)
 
 ### Components
