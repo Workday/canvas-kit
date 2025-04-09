@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.5.8](https://github.com/Workday/canvas-kit/releases/tag/v12.5.8) (2025-04-09)
+
+### Infrastructure
+
+- ci: Fix forward merge workflow ([#3234](https://github.com/Workday/canvas-kit/pull/3234)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Fix Cypress cache location in forward merge script ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Fix forward-merge workflow again ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Fix forward merge again ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v11.2.12](https://github.com/Workday/canvas-kit/releases/tag/v11.2.12) (2025-04-09)
 
 ### Infrastructure
