@@ -133,7 +133,9 @@ A few changes have been made to `Avatar` to ensure proper accessibility.
 
 ##### Breaking Changes
 
-- The `altText` prop no longer has a default of `"Avatar"`.  You *must* provide an `altText` for `<Avatar />, <Pill.Avatar />, <Expandable.Avatar />` to ensure proper accessibility. Our examples have been updated to reflect this change.
+- The `altText` prop no longer has a default of `"Avatar"` for better internalization. The default was an English word (“Avatar”) and this has caused issues in the past with translations.
+
+>**Note:** You *must* provide an `altText` for `<Avatar />, <Pill.Avatar />, <Expandable.Avatar />` to ensure proper accessibility.  Our examples have been updated to reflect this change.
 
 ### Expandable
 
