@@ -282,7 +282,7 @@ export const Combobox = ({
     event: React.SyntheticEvent<Element, Event>,
     menuItemProps: any
   ): void => {
-    if (menuItemProps.isDisabled) {
+    if (menuItemProps.isDisabled || menuItemProps['aria-disabled']) {
       return;
     }
     setShowingAutocomplete(false);
@@ -390,7 +390,7 @@ export const Combobox = ({
         if (selectedAutocompleteIndex != null) {
           const item = interactiveAutocompleteItems[selectedAutocompleteIndex];
           handleAutocompleteClick(event, item.props);
-          if (item.props.isDisabled) {
+          if (item.props.isDisabled || item.props['aria-disabled']) {
             nextIndex = selectedAutocompleteIndex;
           }
           event.stopPropagation();
@@ -427,7 +427,6 @@ export const Combobox = ({
         React.InputHTMLAttributes<HTMLInputElement> & {ref: React.Ref<HTMLInputElement>}
     > & {css: CSSObject} = {
       type: 'text',
-      id: componentId,
       grow: grow,
       value: value,
       ref: elementRef,

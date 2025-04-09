@@ -13,13 +13,15 @@ export const accessibleHide = {
   overflow: 'hidden',
   whiteSpace: 'nowrap',
   height: '1px',
+  minHeight: '1px',
   width: '1px',
+  minWidth: '1px',
   margin: '-1px',
   padding: 0,
   border: 0,
 } as const;
 
-const accessibleHideStyles = createStyles(accessibleHide);
+export const accessibleHideStyles = createStyles(accessibleHide);
 
 /**
  * A convenient component wrapper to visually hide content, while still making it accessible to screen readers

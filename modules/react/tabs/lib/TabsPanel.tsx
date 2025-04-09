@@ -6,7 +6,6 @@ import {
   useMountLayout,
   createElemPropsHook,
   ExtractProps,
-  hideMouseFocus,
   StyledType,
   slugify,
 } from '@workday/canvas-kit-react/common';
@@ -36,7 +35,7 @@ export interface TabPanelProps extends ExtractProps<typeof Box, never> {
   tabIndex?: number;
 }
 
-const StyledTabsPanel = styled(Box)<StyledType>(hideMouseFocus);
+const StyledTabsPanel = styled(Box)<StyledType>();
 
 export const useTabsPanel = createElemPropsHook(useTabsModel)(
   ({state, events}, _, elemProps: {'data-id'?: string; item?: Item<any>} = {}) => {

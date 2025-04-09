@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Select} from '@workday/canvas-kit-react/select';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {createStyles} from '@workday/canvas-kit-styling';
@@ -25,18 +25,20 @@ export const Alert = () => {
   };
   return (
     <Flex cs={parentContainerStyles}>
-      <Select items={options}>
-        <FormField error="alert">
-          <FormField.Label>Contact</FormField.Label>
-          <FormField.Input as={Select.Input} onChange={e => handleChange(e)} id="alert-select" />
-          <Select.Popper>
-            <Select.Card>
-              <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
-            </Select.Card>
-          </Select.Popper>
-          <FormField.Hint>Please choose a form of contact.</FormField.Hint>
-        </FormField>
-      </Select>
+      <FormField error="alert">
+        <FormField.Label>Contact</FormField.Label>
+        <FormField.Field>
+          <Select items={options}>
+            <FormField.Input as={Select.Input} onChange={e => handleChange(e)} id="alert-select" />
+            <Select.Popper>
+              <Select.Card>
+                <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
+              </Select.Card>
+            </Select.Popper>
+            <FormField.Hint>Please choose a form of contact.</FormField.Hint>
+          </Select>
+        </FormField.Field>
+      </FormField>
       Selected value: {value}
     </Flex>
   );
