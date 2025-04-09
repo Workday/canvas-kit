@@ -44,7 +44,7 @@ export const useTabsPanel = createElemPropsHook(useTabsModel)(
     useMountLayout(() => {
       const defaultId = state.panelIndexRef.current;
       const itemId = localId || String(defaultId);
-      events.registerPanel({item: {id: itemId}, textValue: ''});
+      events.registerPanel({id: itemId, textValue: ''});
       setLocalId(itemId);
 
       return () => {
