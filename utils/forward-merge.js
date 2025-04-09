@@ -187,13 +187,7 @@ async function main() {
     await fs.writeFile(file, newContents, 'utf8');
   }
 
-  if (alreadyMerging) {
-    // already merging is a local dev
-    await spawn(`yarn install --production=false`);
-  } else {
-    // CI needs to set the Cypress cache folder
-    await spawn(`yarn install --production=false`, {env: {CYPRESS_CACHE_FOLDER: '.cache/cypress'}});
-  }
+  await spawn(`yarn install --production=false`);
 
   if (hasConflicts) {
     if (hasUnresolvedConflicts) {

@@ -108,6 +108,10 @@ jobs:
       - name: Forward merge
         run: node utils/forward-merge.js
 
+      - uses: Workday/canvas-kit-actions/install@v1
+        with:
+          node_version: 16.x
+
       - name: Git Log
         run: git log
 
