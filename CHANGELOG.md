@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.2.12](https://github.com/Workday/canvas-kit/releases/tag/v11.2.12) (2025-04-09)
+
+### Infrastructure
+
+- ci: Fix forward merge again ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v11.2.11](https://github.com/Workday/canvas-kit/releases/tag/v11.2.11) (2025-04-09)
 
 ### Infrastructure
