@@ -45,11 +45,11 @@ function splitArgs(/** @type {string} */ input) {
 }
 
 /**  */
-async function spawn(/** @type {string} */ cmd) {
+async function spawn(/** @type {string} */ cmd, /** @type {object} */ opts = undefined) {
   console.log(`Running: "${cmd}"`);
   const {name, args} = splitArgs(cmd);
 
-  const child = nodeSpawn(name, args);
+  const child = nodeSpawn(name, args, opts);
 
   for await (const chunk of child.stdout) {
     console.log(chunk.toString());
