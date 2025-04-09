@@ -20,6 +20,7 @@ any questions.
   - [Instructions](#instructions)
 - [Component Updates](#component-updates)
   - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
+  - [Avatar](#avatar)
   - [Expandable](#expandable)
   - [External Hyperlink](#external-hyperlink)
   - [Pill](#pill)
@@ -124,6 +125,18 @@ The following components are affected:
 - `Tabs`
 - `Tooltip`
 
+### Avatar
+
+**PR:** [#3231](https://github.com/Workday/canvas-kit/pull/3231)
+
+A few changes have been made to `Avatar` to ensure proper accessibility.
+
+##### Breaking Changes
+
+- The `altText` prop no longer has a default of `"Avatar"` for better internalization. The default was an English word (“Avatar”) and this has caused issues in the past with translations.
+
+>**Note:** You *must* provide an `altText` for `<Avatar />, <Pill.Avatar />, <Expandable.Avatar />` to ensure proper accessibility.  Our examples have been updated to reflect this change.
+
 ### Expandable
 
 **PR:** [#3213](https://github.com/Workday/canvas-kit/pull/3213)
@@ -138,7 +151,7 @@ import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
 import {Expandable} from '@workday/canvas-kit-react/expandable';
 ```
 
-🤖 The codemod will handle the change of imports as shown above. 
+🤖 The codemod will handle the change of imports as shown above.
 
 ### External Hyperlink
 
@@ -189,11 +202,11 @@ A few changes have been made to `Pill` to ensure proper accessibility and styles
 We've removed the outdated Dub Logos in Main and promoted the new logos that were previously in our Preview package to Main as part of the brand refresh.
 
 | Old Logo Name | New Logo Name |
-| --------------- | ----------------- | 
-| dubLogoBlue | dubLogoPrimary | 
-| dubLogoWhite | dubLogoReversed | 
-| wdayLogoBlue | wdayLogoPrimary | 
-| wdayLogoWhite | wdayLogoReversed | 
+| --------------- | ----------------- |
+| dubLogoBlue | dubLogoPrimary |
+| dubLogoWhite | dubLogoReversed |
+| wdayLogoBlue | wdayLogoPrimary |
+| wdayLogoWhite | wdayLogoReversed |
 
 ```tsx
 // In v12
