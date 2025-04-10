@@ -20,33 +20,47 @@ export interface SelectInputProps extends ExtractProps<typeof TextInput>, CSProp
 }
 
 const selectInputStencil = createStencil({
-  base: {
-    caretColor: 'transparent',
-    cursor: 'default',
-    '&::selection': {
-      backgroundColor: 'transparent',
+  parts: {
+    caret: 'select-caret-icon',
+    caretContainer: 'select-caret-container',
+    startIconContainer: 'select-start-icon-container',
+    startIcon: 'select-start-icon',
+    endIcon: 'select-end-icon',
+    hiddenInput: 'select-hidden-input',
+    visualInput: 'select-visual-input',
+  },
+  base: ({
+    hiddenInputPart,
+    startIconPart,
+    endIconPart,
+    visualInputPart,
+    caretContainerPart,
+    startIconContainerPart,
+  }) => ({
+    [`${hiddenInputPart}`]: {
+      position: 'absolute',
+      top: system.space.zero,
+      bottom: system.space.zero,
+      left: system.space.zero,
+      right: system.space.zero,
+      opacity: system.opacity.zero,
+      cursor: 'default',
+      pointerEvents: 'none',
+      minWidth: system.space.x1,
+      width: system.space.x1,
     },
-  },
-});
-
-const selectIconsStencil = createStencil({
-  base: {
-    position: 'absolute',
-    pointerEvents: 'none',
-  },
-});
-
-const hiddenSelectInputStencil = createStencil({
-  base: {
-    position: 'absolute',
-    top: system.space.zero,
-    bottom: system.space.zero,
-    left: system.space.zero,
-    right: system.space.zero,
-    opacity: system.opacity.zero,
-    cursor: 'default',
-    pointerEvents: 'none',
-  },
+    [`${startIconPart}, ${endIconPart}, ${caretContainerPart}, ${startIconContainerPart}`]: {
+      position: 'absolute',
+      pointerEvents: 'none',
+    },
+    [`${visualInputPart}`]: {
+      caretColor: 'transparent',
+      cursor: 'default',
+      '&::selection': {
+        backgroundColor: 'transparent',
+      },
+    },
+  }),
 });
 
 export const SelectInput = createSubcomponent(TextInput)({
@@ -59,28 +73,23 @@ export const SelectInput = createSubcomponent(TextInput)({
     model
   ) => {
     return (
-      <InputGroup data-width="ck-formfield-width">
+      <InputGroup data-width="ck-formfield-width" {...selectInputStencil()}>
         {inputStartIcon && model.state.selectedIds.length > 0 && (
-          <InputGroup.InnerStart data-part="select-start-icon-container" {...selectIconsStencil()}>
-            <SystemIcon data-part="select-start-icon" icon={inputStartIcon} />
+          <InputGroup.InnerStart {...selectInputStencil.parts.startIconContainer}>
+            <SystemIcon {...selectInputStencil.parts.startIcon} icon={inputStartIcon} />
           </InputGroup.InnerStart>
         )}
         {/* Hidden input to handle ids */}
-        <InputGroup.Input
-          data-part="select-hidden-input"
-          {...formInputProps}
-          {...hiddenSelectInputStencil()}
-        />
+        <InputGroup.Input {...selectInputStencil.parts.hiddenInput} {...formInputProps} />
         {/* Visual input */}
         <InputGroup.Input
           as={Element}
           placeholder={placeholder}
-          data-part="select-visual-input"
-          {...elemProps}
-          {...mergeStyles(elemProps, selectInputStencil())}
+          {...selectInputStencil.parts.visualInput}
+          {...mergeStyles(elemProps)}
         />
-        <InputGroup.InnerEnd data-part="select-caret-container" {...selectIconsStencil()}>
-          <SystemIcon data-part="select-caret-icon" icon={caretDownSmallIcon} />
+        <InputGroup.InnerEnd {...selectInputStencil.parts.caretContainer}>
+          <SystemIcon {...selectInputStencil.parts.caret} icon={caretDownSmallIcon} />
         </InputGroup.InnerEnd>
       </InputGroup>
     );
