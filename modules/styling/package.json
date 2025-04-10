@@ -43,7 +43,7 @@
     "styling"
   ],
   "peerDependencies": {
-    "react": ">=16.14"
+    "react": ">=17.0"
   },
   "dependencies": {
     "@emotion/css": "^11.7.1",

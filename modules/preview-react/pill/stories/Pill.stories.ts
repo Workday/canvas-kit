@@ -9,6 +9,7 @@ import {Basic as BasicExample} from './examples/Basic';
 import {WithCount as WithCountExample} from './examples/WithCount';
 import {WithRemovable as WithRemovableExample} from './examples/WithRemovable';
 import {WithList as WithListExample} from './examples/WithList';
+import {CustomStyles as CustomStylesExample} from './examples/CustomStyles';
 
 export default {
   title: 'Preview/Pill',
@@ -40,4 +41,8 @@ export const WithRemovable: Story = {
 };
 export const WithList: Story = {
   render: WithListExample,
+};
+
+export const CustomStyles: Story = {
+  render: CustomStylesExample,
 };

@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {Popup} from '@workday/canvas-kit-react/popup';
 

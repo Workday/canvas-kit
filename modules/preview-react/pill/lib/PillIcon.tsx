@@ -1,34 +1,32 @@
-import React from 'react';
-
 import {createSubcomponent} from '@workday/canvas-kit-react/common';
 
-import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
+import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {usePillModel} from './usePillModel';
 import {plusIcon} from '@workday/canvas-system-icons-web';
-import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {space} from '@workday/canvas-kit-react/tokens';
+import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
-export interface PillIconProps extends Omit<SystemIconProps, 'icon'> {
-  /**
-   * The system icon rendered by the component
-   * @default `plusIcon`
-   */
-  icon?: CanvasSystemIcon;
-}
+export interface PillIconProps extends Partial<SystemIconProps> {}
+
+export const pillIconStencil = createStencil({
+  extends: systemIconStencil,
+  base: {
+    marginInlineStart: calc.negate(system.space.x1),
+    [systemIconStencil.vars.size]: px2rem(20),
+    flex: '0 0 auto',
+  },
+});
 
 export const PillIcon = createSubcomponent('span')({
   modelHook: usePillModel,
-})<PillIconProps>(({size, icon, ...elemProps}, Element) => {
+})<PillIconProps>(({icon, ...elemProps}, Element) => {
   return (
     <SystemIcon
-      marginInlineStart={`-${space.xxxs}`} // remove excess margin from the start
-      display="flex"
       as={Element}
-      size={20}
       role="img"
-      aria-label="add"
       icon={icon || plusIcon}
-      {...elemProps}
+      {...mergeStyles(elemProps, pillIconStencil())}
     />
   );
 });

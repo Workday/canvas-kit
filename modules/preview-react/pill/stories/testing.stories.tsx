@@ -60,8 +60,8 @@ export const PillStates = () => {
         {({...props}) => {
           return (
             <Pill onClick={() => console.warn('clicked')} {...props}>
-              <Pill.Icon />
-              Regina Skeltor
+              <Pill.Icon aria-label="add" />
+              <Pill.Label>Regina Skeltor</Pill.Label>
             </Pill>
           );
         }}
@@ -85,8 +85,8 @@ export const PillStatesAvatar = () => {
         {({...props}) => {
           return (
             <Pill onClick={() => console.warn('clicked')} {...props}>
-              <Pill.Avatar url={testAvatar} />
-              Regina Skeltor
+              <Pill.Avatar altText="Avatar" url={testAvatar} />
+              <Pill.Label>Regina Skeltor</Pill.Label>
             </Pill>
           );
         }}
@@ -110,7 +110,7 @@ export const PillStatesCount = () => {
         {({count, ...props}) => {
           return (
             <Pill onClick={() => console.warn('clicked')} {...props}>
-              Shoes
+              <Pill.Label>Shoes</Pill.Label>
               <Pill.Count>30</Pill.Count>
             </Pill>
           );
@@ -143,9 +143,13 @@ export const RemovablePillStates = () => {
         {({avatar, maxWidth, ...props}) => {
           return (
             <Pill variant="removable" {...props}>
-              {avatar && <Pill.Avatar url={testAvatar} />}
-              {maxWidth ? 'This is a super long text that should overflow' : 'PillLabel'}
-              <Pill.IconButton {...props} />
+              {avatar && <Pill.Avatar altText="Avatar" url={testAvatar} />}
+              {maxWidth ? (
+                <Pill.Label>This is a super long text that should overflow</Pill.Label>
+              ) : (
+                <Pill.Label>PillLabel</Pill.Label>
+              )}
+              <Pill.IconButton aria-label="Remove" {...props} />
             </Pill>
           );
         }}

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {
   composeHooks,
   createElemPropsHook,
@@ -39,7 +37,7 @@ export const MultiSelectedItem = createSubcomponent('span')({
 })<MultiSelectedItemProps>(({children, removeLabel, ref, ...elemProps}, Element) => {
   return (
     <Pill as={Element} variant="removable">
-      {children}
+      <Pill.Label>{children}</Pill.Label>
       <Pill.IconButton aria-label={removeLabel} ref={ref} {...(elemProps as any)} />
     </Pill>
   );
