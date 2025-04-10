@@ -207,7 +207,6 @@ export const inputGroupStencil = createStencil({
   base: {
     display: 'flex',
     position: 'relative',
-    alignItems: 'center',
 
     // Clear Button
     '& :has([data-part="input-group-clear-button"])': {
