@@ -19,7 +19,7 @@ export interface SelectInputProps extends ExtractProps<typeof TextInput>, CSProp
   inputStartIcon?: CanvasSystemIcon;
 }
 
-const selectInputStencil = createStencil({
+export const selectInputStencil = createStencil({
   parts: {
     caret: 'select-caret-icon',
     caretContainer: 'select-caret-container',
