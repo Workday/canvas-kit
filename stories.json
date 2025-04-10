@@ -2377,6 +2377,18 @@
         "__isArgsStory": false
       }
     },
+    "components-popups-menu--grouping": {
+      "id": "components-popups-menu--grouping",
+      "name": "Grouping",
+      "title": "Components/Popups/Menu",
+      "importPath": "./modules/react/menu/stories/Menu.stories.ts",
+      "kind": "Components/Popups/Menu",
+      "story": "Grouping",
+      "parameters": {
+        "fileName": "./modules/react/menu/stories/Menu.stories.ts",
+        "__isArgsStory": false
+      }
+    },
     "components-popups-menu--icons": {
       "id": "components-popups-menu--icons",
       "name": "Icons",
@@ -5722,6 +5734,18 @@
       "story": "Dialog With Fallback Placements",
       "parameters": {
         "fileName": "./modules/react/dialog/stories/FallbackTesting.stories.tsx",
+        "__isArgsStory": false
+      }
+    },
+    "testing-popups-menu--menu-groups": {
+      "id": "testing-popups-menu--menu-groups",
+      "name": "Menu Groups",
+      "title": "Testing/Popups/Menu",
+      "importPath": "./modules/react/menu/stories/testingVisual.stories.tsx",
+      "kind": "Testing/Popups/Menu",
+      "story": "Menu Groups",
+      "parameters": {
+        "fileName": "./modules/react/menu/stories/testingVisual.stories.tsx",
         "__isArgsStory": false
       }
     },
