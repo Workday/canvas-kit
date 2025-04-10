@@ -37,7 +37,7 @@ export const selectInputStencil = createStencil({
     caretContainerPart,
     startIconContainerPart,
   }) => ({
-    [`${hiddenInputPart}`]: {
+    [hiddenInputPart]: {
       position: 'absolute',
       top: system.space.zero,
       bottom: system.space.zero,
@@ -53,7 +53,7 @@ export const selectInputStencil = createStencil({
       position: 'absolute',
       pointerEvents: 'none',
     },
-    [`${visualInputPart}`]: {
+    [visualInputPart]: {
       caretColor: 'transparent',
       cursor: 'default',
       '&::selection': {
