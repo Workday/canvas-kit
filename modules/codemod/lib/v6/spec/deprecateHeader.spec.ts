@@ -165,14 +165,14 @@ describe('Canvas Kit Deprecate Header Codemod', () => {
 
         const CustomGlobalHeader = (props) => {
           return (
-            <DeprecatedGlobalHeader
+            (<DeprecatedGlobalHeader
               brand={
                 <a href="#">
                   <DeprecatedDubLogoTitle themeColor={DeprecatedHeader.Theme.White} />
                 </a>
               }
               {...props}
-            />
+            />)
           );
         }
       `;

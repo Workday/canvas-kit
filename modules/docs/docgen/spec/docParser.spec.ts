@@ -1029,7 +1029,7 @@ describe('docParser', () => {
     expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.kind', 'property');
     expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.type.kind', 'primitive');
     expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.type.value', 'string');
-    expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.defaultValue', undefined);
+    expect(docs).not.toHaveProperty('0.type.parameters.0.type.properties.0.defaultValue');
   });
 
   it('should handle arrow functions with required parameters', () => {

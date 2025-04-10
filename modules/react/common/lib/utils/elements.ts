@@ -61,7 +61,7 @@ export const getFirstFocusableElement = (
 
   for (let i = 0; i < elements.length; i++) {
     const element = elements.item(i);
-    if (element && isKeyboardFocusable(element) && element.getAttribute('tabindex') !== '-1') {
+    if (element && isKeyboardFocusable(element)) {
       if (isRadioInput(element)) {
         const radioGroup = getRadioGroup(container, element);
 
@@ -95,7 +95,7 @@ export const getLastFocusableElement = (container: HTMLElement): Element[] | Ele
 
   for (let i = elements.length - 1; i >= 0; i--) {
     const element = elements.item(i);
-    if (element && isKeyboardFocusable(element) && element.getAttribute('tabindex') !== '-1') {
+    if (element && isKeyboardFocusable(element)) {
       if (isRadioInput(element)) {
         const radioGroup = getRadioGroup(container, element);
 

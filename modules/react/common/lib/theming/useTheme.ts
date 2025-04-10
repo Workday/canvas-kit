@@ -98,7 +98,7 @@ export function useTheme(theme?: PartialEmotionCanvasTheme): EmotionCanvasTheme 
         return getFilledTheme(contextTheme);
       }
     } catch (e) {
-      if (process && process.env.NODE_ENV === 'development') {
+      if (process.env.NODE_ENV === 'development') {
         console.warn(
           'useTheme: Context not supported or invalid. Please consider using `getTheme` function instead for `styled` or class components.'
         );

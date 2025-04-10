@@ -1,0 +1,251 @@
+import {ExampleCodeBlock, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {Basic} from './examples/Basic';
+import {InitialFocus} from './examples/InitialFocus';
+import {MultiplePopups} from './examples/MultiplePopups';
+import {NestedPopups} from './examples/NestedPopups';
+import {FocusRedirect} from './examples/FocusRedirect';
+import {FocusTrap} from './examples/FocusTrap';
+import {RTL} from './examples/RTL';
+import {CustomTarget} from './examples/CustomTarget';
+import {ExternalWindow} from './examples/ExternalWindow';
+import {FullScreen} from './examples/FullScreen';
+
+import * as PopupStories from './Popup.stories';
+
+<Meta of={PopupStories} />
+
+# Canvas Kit Popups
+
+A "popup" is a classification for a type of stacked UI element that appears "on top" of statically
+positioned content. Tooltips, Modals, Dropdown menus, etc are all examples of "popups". Canvas Kit
+has a "stack manager" system for managing these popups. Different types of popups have different
+requirements of behavior for UX and accessibility - we can call them behaviors, capabilities, or
+traits. Canvas Kit comes with a number of [behavioral hooks](#hooks) in the form of React Hooks.
+
+You should use the most semantic component for your use-case before using `Popup` directly, like
+`Modal`, which already has the correct behaviors built-in. If no component already exists that
+matches your use case, you can use `Popup` and use our [hooks](#hooks). The `Popup` component comes
+with a `Popup.Popper` subcomponent that positions a popup using [PopperJS](https://popper.js.org/)
+that registers a popup with the `PopupStack` automatically and sets the popup model's `placement`
+property. `Popup.Popper` component and hooks work with the stack management system for correct
+rendering and accessibility behavior. If you cannot use `Popup.Popper`, use the
+[usePopupStack](#usepoupstack) hook to properly register and deregister the popup at the correct
+time. If you cannot use our hooks, consider upgrading your component to use Hooks. If you cannot do
+that, you'll have to look up the `PopupStack` package for the direct API and have a look at the
+source code for our hooks into the `PopupStack` API.
+
+This package comes with everything you need to build Popup UIs.
+
+[Buttons](/components/buttons/button)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+The `Popup` component is a generic
+[Compound Component](/getting-started/for-developers/resources/compound-components/) that is used to
+build popup UIs that are not already covered by Canvas Kit.
+
+### Basic Example
+
+The Popup has no pre-defined behaviors built in, therefore the `usePopupModel` must always be used
+to create a new `model`. This `model` is then used by all behavior hooks to apply additional popup
+behaviors to the compound component group. The following example creates a typical popup around a
+target element and adds `useCloseOnOutsideClick`, `useCloseOnEscape`, `useInitialFocus`, and
+`useReturnFocus` behaviors. You can read through the [hooks](#hooks) section to learn about all the
+popup behaviors. For accessibility, these behaviors should be included most of the time.
+
+<ExampleCodeBlock code={Basic} />
+
+### Initial Focus
+
+If you want focus to move to a specific element when the popup is opened, set the `initialFocusRef`
+of the model. Check with accessibility before doing this. The following example sets the focus on
+the "OK" button with an `aria-describedby` pointing to the model's `id` state so screen readers
+properly announce the message of the popup when focus is changed to the button. By default, focus
+will be placed on the first focusable element when the popup is opened.
+
+<ExampleCodeBlock code={InitialFocus} />
+
+### Focus Redirect
+
+Focus management is important to accessibility of popup contents. The following example shows
+`useFocusRedirect` being used to manage focus in and out of a Popup. This is very useful for
+Dialog-style popups. Since `Popup.Popper` renders contents to the bottom of the document body,
+`aria-owns` is used for screen readers that support it. This effectively treats a Popup like it
+exists in between the buttons while it is opened. Screen readers will navigate the content as if the
+content was not portalled to the bottom of the document body. Focus redirection tries to treat the
+Popup as if it were inline to the document. Tabbing out of the Popup will close the Popup and move
+focus to the next appropriate element.
+
+> **Note**: Safari does not support `aria-owns`. This means that the contents of the Popup will
+> appears out of order to Safari + VoiceOver users. We render popups at the bottom of the
+> document.body to ensure proper rendering. You could use `portal=false` on the `Popper` component,
+> but that would risk incorrect rendering in all browsers.
+
+<ExampleCodeBlock code={FocusRedirect} />
+
+### Focus Trapping
+
+Focus trapping is similar to the [Focus Redirect](#focus-redirect) example, but will trap focus
+inside the popup instead of redirecting focus, it will be trapped inside the Popup. This is most
+useful for modal dialogs where the modal must be interacted with before normal interaction can
+continue.
+
+> **Note**: Using focus trapping outside a Modal context can give users a different experience
+> depending on how they interact with your application. Focus trapping will not prevent mouse users
+> from breaking out of a focus trap, nor will it prevent screen reader users from using virtual
+> cursors from breaking out. Modals should use additional techniques to truely "trap" focus into the
+> Popup to provide a consistent experience for all users.
+
+<ExampleCodeBlock code={FocusTrap} />
+
+### Multiple Popups
+
+If you need multiple Popups within the same component, you can create multiple models and pass a
+unique model to each Popup. Below is an example of 2 different popups within the same component.
+Since each Popup gets its own model, each Popup behaves independently. The same technique can be
+used for nested Popups.
+
+<ExampleCodeBlock code={MultiplePopups} />
+
+### Nested Popups
+
+If you need nested Popups within the same component, you can create multiple models and pass a
+unique model to each Popup. Popup comes with a `Popup.CloseButton` that uses a `Button` and adds
+props via the `usePopupCloseButton` hook to ensure the popups hides and focus is returned. The `as`
+can be used in a powerful way to do this by using `<Popup.CloseButton as={Popup.CloseButton}>` which
+will mix in click handlers from both popups. This is not very intuitive, however. You can create
+props that merge a click handler for both Popups by using `usePopupCloseButton` directly. The second
+parameter is props to be merged which will effectively hide both popups. Focus management is
+preserved.
+
+<ExampleCodeBlock code={NestedPopups} />
+
+### Custom Target
+
+It is common to have a custom target for your popup. Use the `as` prop to use your custom component.
+The `Popup.Target` element will add `onClick` and `ref` to the provided component. Your provided
+target component must forward the `onClick` to an element for the Popup to open. The `as` will cause
+`Popup.Target` to inherit the interface of your custom target component. This means any props your
+target requires, `Popup.Target` now also requires. The example below has a `MyTarget` component that
+requires a `label` prop.
+
+> **Note**: If your application needs to programmatically open a Popup without the user interacting
+> with the target button first, you'll also need to use `React.forwardRef` in your target component.
+> Without this, the Popup will open at the top-left of the window instead of around the target.
+
+<ExampleCodeBlock code={CustomTarget} />
+
+### Full Screen API
+
+By default, popups are created as children of the `document.body` element, but the `PopupStack`
+supports the [Fullscreen API](https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API). When
+fullscreen is entered, the `PopupStack` will automatically create a new stacking context for all
+future popups. Any existing popups will disappear, but not be removed. They disappear because the
+fullscreen API is only showing content within the fullscreen element. There are instances where a
+popup may not close when fullscreen is exited:
+
+- The escape key is used to exit fullscreen
+- There is a button to exit fullscreen, but the popup doesn't use `useCloseOnOutsideClick`
+
+If fullscreen is exited, popups within the fullscreen stacking context are not removed or
+transferred automatically. If you do not handle this case, the popup may not render correctly. This
+example shows a popup that closes when fullscreen is entered/exited and another popup that transfers
+the popup's stack context when entering/exiting fullscreen.
+
+<ExampleCodeBlock code={FullScreen} />
+
+### Opening an External Window
+
+A popup can open an external window. This isn't supported directly. The `Popup.Popper` subcomponent
+is replaced with a custom subcomponent that connects to the Popup model and controls the lifecycle
+of the extenal window. Be sure to connect the `unload` event of both the parent `window` and the
+external child `window` to the lifecycle of the Popup model to prevent memory leaks or zombie
+windows.
+
+<ExampleCodeBlock code={ExternalWindow} />
+
+### RTL
+
+The Popup component automatically handles right-to-left rendering.
+
+> **Note:** This example shows an inaccessible open card for demonstration purposes.
+
+<ExampleCodeBlock code={RTL} />
+
+## Component API
+
+<>
+  <SymbolDoc name="Popper" fileName="/react/" />
+
+  <SymbolDoc name="Popup" fileName="/react/" />
+</>
+
+## Hooks
+
+<>
+  <SymbolDoc name="usePopupStack" fileName="/react/" />
+
+{' '}
+
+<SymbolDoc name="useAssistiveHideSiblings" fileName="/react/" />
+
+{' '}
+
+<SymbolDoc name="useBringToTopOnClick" fileName="/react/" />
+
+{' '}
+
+<SymbolDoc name="useCloseOnEscape" fileName="/react/" />
+
+{' '}
+
+<SymbolDoc name="useCloseOnOutsideClick" fileName="/react/" />
+
+{' '}
+
+<SymbolDoc name="useAlwaysCloseOnOutsideClick" fileName="/react/" />
+
+{' '}
+
+<SymbolDoc name="useAlwaysCloseOnOutsideClick" fileName="/react/" />
+
+{' '}
+
+<SymbolDoc name="useCloseOnTargetHidden" fileName="/react/" />
+
+{' '}
+
+<SymbolDoc name="useDisableBodyScroll" fileName="/react/" />
+
+{' '}
+
+<SymbolDoc name="useFocusRedirect" fileName="/react/" />
+
+{' '}
+
+<SymbolDoc name="useFocusTrap" fileName="/react/" />
+
+{' '}
+
+<SymbolDoc name="useInitialFocus" fileName="/react/" />
+
+{' '}
+
+<SymbolDoc name="useReturnFocus" fileName="/react/" />
+
+{' '}
+
+<SymbolDoc name="useTransferOnFullscreenEnter" fileName="/react/" />
+
+  <SymbolDoc name="useTransferOnFullscreenExit" fileName="/react/" />
+</>
+
+## Specifications
+
+<Specifications file="Popup.spec.ts" name="Popup" />

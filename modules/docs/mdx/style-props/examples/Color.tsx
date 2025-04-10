@@ -9,28 +9,16 @@ const baseStyles = {
   padding: 'xs',
 };
 
-export const ColorExample = () => (
+export const Color = () => (
   <>
-  <Box
-    backgroundColor="cinnamon300"
-    color="blackPepper500"
-    {...baseStyles}
-  >
-    Cinnamon 300
-  </Box>
-  <Box
-    backgroundColor="sourLemon300"
-    color="blackPepper500"
-    {...baseStyles}
-  >
-    Sour Lemon 300
-  </Box>
-  <Box
-    backgroundColor="blueberry300"
-    color="blackPepper500"
-    {...baseStyles}
-  >
-    Blueberry 300
-  </Box>
+    <Box backgroundColor="cinnamon300" color="blackPepper500" {...baseStyles}>
+      Cinnamon 300
+    </Box>
+    <Box backgroundColor="sourLemon300" color="blackPepper500" {...baseStyles}>
+      Sour Lemon 300
+    </Box>
+    <Box backgroundColor="blueberry300" color="blackPepper500" {...baseStyles}>
+      Blueberry 300
+    </Box>
   </>
 );

@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {TextArea} from '@workday/canvas-kit-react/text-area';
 
 export const LabelPosition = () => {
@@ -10,9 +10,12 @@ export const LabelPosition = () => {
   };
 
   return (
-    <FormField orientation="horizontal">
+    <FormField orientation="horizontalStart">
       <FormField.Label>Leave a Review</FormField.Label>
-      <FormField.Input as={TextArea} onChange={handleChange} value={value} />
+      <FormField.Field>
+        <FormField.Input as={TextArea} onChange={handleChange} value={value} />
+        <FormField.Hint>Message must be under 200 characters</FormField.Hint>
+      </FormField.Field>
     </FormField>
   );
 };

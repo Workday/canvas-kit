@@ -94,7 +94,7 @@ interface ProfileCardProps {
 const ProfileCard = ({id, name, bio}: ProfileCardProps) => (
   <div className={profileCardStyles}>
     <Avatar
-      size={Avatar.Size.xl}
+      size="extraLarge"
       url={`https://avatars.githubusercontent.com/u/${id}?v=4`}
       altText={`${name}'s avatar`}
       className={profileCardAvatarStyles}

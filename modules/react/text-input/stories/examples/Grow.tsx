@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 
 export const Grow = () => {
@@ -10,9 +10,11 @@ export const Grow = () => {
   };
 
   return (
-    <FormField width="100%">
+    <FormField grow>
       <FormField.Label>Street Address</FormField.Label>
-      <FormField.Input width="100%" as={TextInput} onChange={handleChange} value={value} />
+      <FormField.Field>
+        <FormField.Input as={TextInput} onChange={handleChange} value={value} />
+      </FormField.Field>
     </FormField>
   );
 };

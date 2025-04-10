@@ -1,6 +1,22 @@
 import * as React from 'react';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
+import {Text} from '@workday/canvas-kit-react/text';
+import {AccessibleHide} from '@workday/canvas-kit-react/common';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+
+const stylesOverride = {
+  viewport: createStyles({
+    height: px2rem(320),
+  }),
+  main: createStyles({
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    flex: 1,
+    flexBasis: 'auto',
+  }),
+};
 
 export const OnExpandedChange = () => {
   const {expanded, panelProps, labelProps, controlProps} = useSidePanel();
@@ -10,15 +26,15 @@ export const OnExpandedChange = () => {
   };
 
   return (
-    <Flex height={320}>
+    <Flex cs={stylesOverride.viewport}>
       <SidePanel {...panelProps} onExpandedChange={handleExpandedChange}>
         <SidePanel.ToggleButton {...controlProps} />
-        <span hidden {...labelProps}>
-          custom side panel
-        </span>
+        <AccessibleHide {...labelProps}>Hidden Title</AccessibleHide>
       </SidePanel>
-      <Flex as="main" alignItems="center" justifyContent="center" flex={1} flexBasis="auto">
-        <p>Side panel is {expanded ? 'expanded' : 'collapsed'}.</p>
+      <Flex as="main" cs={stylesOverride.main}>
+        <Text as="p" typeLevel="body.large">
+          Side panel is {expanded ? 'expanded' : 'collapsed'}.
+        </Text>
       </Flex>
     </Flex>
   );

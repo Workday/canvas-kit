@@ -1,6 +1,6 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 
 export const Required = () => {
   const [value, setValue] = React.useState('');
@@ -10,8 +10,16 @@ export const Required = () => {
   };
 
   return (
-    <FormField label="Email" required={true}>
-      <TextInput onChange={handleChange} value={value} />
+    <FormField isRequired={true}>
+      <FormField.Label>Email</FormField.Label>
+      <FormField.Field>
+        <FormField.Input
+          as={TextInput}
+          placeholder="your@gmail.com"
+          onChange={handleChange}
+          value={value}
+        />
+      </FormField.Field>
     </FormField>
   );
 };
