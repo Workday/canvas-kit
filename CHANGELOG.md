@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v11.2.14](https://github.com/Workday/canvas-kit/releases/tag/v11.2.14) (2025-04-11)
+
+### Components
+
+- fix: Center InputGroup items ([#3245](https://github.com/Workday/canvas-kit/pull/3245)) ([@sharonsooyeon](https://github.com/sharonsooyeon), Sharon Kim)
 ## [v12.6.1](https://github.com/Workday/canvas-kit/releases/tag/v12.6.1) (2025-04-10)
 
 ### Infrastructure
