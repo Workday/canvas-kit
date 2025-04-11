@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import {BaseButton, ButtonContainerProps} from './BaseButton';
 import {createComponent} from '@workday/canvas-kit-react/common';
 

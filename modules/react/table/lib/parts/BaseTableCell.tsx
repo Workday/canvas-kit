@@ -1,4 +1,3 @@
-import React from 'react';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
