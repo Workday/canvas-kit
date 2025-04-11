@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormFieldGroup} from '@workday/canvas-kit-react/form-field';
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
@@ -26,35 +26,37 @@ export const Custom = () => {
 
   return (
     <Flex flexDirection="column">
-      <FormField as="fieldset">
-        <FormField.Label as="legend">Choose Your Pizza Crust</FormField.Label>
-        <FormField.Input
-          as={RadioGroup}
-          name="pizza-crust-custom"
-          onChange={handleChange}
-          cs={styleOverrides.formfieldInputStyles}
-          value={value}
-        >
-          <RadioGroup.Label>
-            <RadioGroup.Label.Input value="deep-dish" />
-            <RadioGroup.Label.Text cs={styleOverrides.radioGroupLabelTextStyles}>
-              Deep dish
-            </RadioGroup.Label.Text>
-          </RadioGroup.Label>
-          <RadioGroup.Label>
-            <RadioGroup.Label.Input value="gluten-free" />
-            <RadioGroup.Label.Text cs={styleOverrides.radioGroupLabelTextStyles}>
-              Gluten free
-            </RadioGroup.Label.Text>
-          </RadioGroup.Label>
-          <RadioGroup.Label>
-            <RadioGroup.Label.Input value="cauliflower" />
-            <RadioGroup.Label.Text cs={styleOverrides.radioGroupLabelTextStyles}>
-              Cauliflower
-            </RadioGroup.Label.Text>
-          </RadioGroup.Label>
-        </FormField.Input>
-      </FormField>
+      <FormFieldGroup>
+        <FormFieldGroup.Label>Choose Your Pizza Crust</FormFieldGroup.Label>
+        <FormFieldGroup.Field>
+          <FormFieldGroup.List
+            as={RadioGroup}
+            name="pizza-crust-custom"
+            onChange={handleChange}
+            cs={styleOverrides.formfieldInputStyles}
+            value={value}
+          >
+            <RadioGroup.Label>
+              <FormFieldGroup.Input as={RadioGroup.Label.Input} value="deep-dish" />
+              <RadioGroup.Label.Text cs={styleOverrides.radioGroupLabelTextStyles}>
+                Deep dish
+              </RadioGroup.Label.Text>
+            </RadioGroup.Label>
+            <RadioGroup.Label>
+              <FormFieldGroup.Input as={RadioGroup.Label.Input} value="gluten-free" />
+              <RadioGroup.Label.Text cs={styleOverrides.radioGroupLabelTextStyles}>
+                Gluten free
+              </RadioGroup.Label.Text>
+            </RadioGroup.Label>
+            <RadioGroup.Label>
+              <FormFieldGroup.Input as={RadioGroup.Label.Input} value="cauliflower" />
+              <RadioGroup.Label.Text cs={styleOverrides.radioGroupLabelTextStyles}>
+                Cauliflower
+              </RadioGroup.Label.Text>
+            </RadioGroup.Label>
+          </FormFieldGroup.List>
+        </FormFieldGroup.Field>
+      </FormFieldGroup>
       Value selected: {value}
     </Flex>
   );

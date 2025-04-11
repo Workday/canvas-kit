@@ -40,7 +40,7 @@ export const BreadcrumbsOverflowButton = createSubcomponent('button')({
   elemPropsHook: useBreadcrumbsOverflowButton,
 })<BreadcrumbsOverflowButtonProps>(({style, ...elemProps}, Element) => {
   return (
-    <Flex alignItems="center" {...style}>
+    <Flex as="li" alignItems="center" {...style}>
       <TertiaryButton as={Element} icon={relatedActionsIcon} {...elemProps} />
       <SystemIcon
         icon={chevronRightSmallIcon}

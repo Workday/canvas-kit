@@ -52,7 +52,14 @@ export const useListBox = createElemPropsHook(useListModel)(model => {
 });
 
 const listBoxContainerStencil = createStencil({
-  base: {},
+  base: {
+    '& :where([data-part="list"])': {
+      display: 'flex',
+      flexDirection: 'column',
+      marginBlockStart: system.space.zero,
+      marginBlockEnd: system.space.zero,
+    },
+  },
   modifiers: {
     orientation: {
       vertical: {
@@ -60,17 +67,11 @@ const listBoxContainerStencil = createStencil({
       },
       horizontal: {
         overflowY: undefined,
+        '& :where([data-part="list"])': {
+          flexDirection: 'row',
+        },
       },
     },
-  },
-});
-
-const listBoxStencil = createStencil({
-  base: {
-    display: 'flex',
-    flexDirection: 'column',
-    marginTop: system.space.zero,
-    marginBottom: system.space.zero,
   },
 });
 
@@ -121,6 +122,7 @@ export const ListBox = createContainer('ul')({
         {...handleCsProp(
           {
             style: {
+              height,
               maxHeight,
               marginBottom: marginBottom ?? marginY,
               marginTop: marginTop ?? marginY,
@@ -129,7 +131,7 @@ export const ListBox = createContainer('ul')({
           listBoxContainerStencil({orientation: model.state.orientation})
         )}
       >
-        <Element {...mergeStyles(elemProps, listBoxStencil())}>
+        <Element {...mergeStyles(elemProps)} data-part="list">
           {useListRenderItems(model, elemProps.children)}
         </Element>
       </div>
