@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {xIcon} from '@workday/canvas-system-icons-web';
 import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';

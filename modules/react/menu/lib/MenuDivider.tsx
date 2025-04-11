@@ -1,19 +1,22 @@
-import * as React from 'react';
-import styled from '@emotion/styled';
-import {colors, space} from '@workday/canvas-kit-react/tokens';
-import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
+import {createComponent} from '@workday/canvas-kit-react/common';
+import {createStencil, px2rem, handleCsProp, CSProps} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
-const Divider = styled('hr')<StyledType>({
-  display: 'block',
-  height: 1,
-  border: 0,
-  borderTop: `1px solid ${colors.soap400}`,
-  margin: `${space.xxs} 0`,
+export interface DividerProps extends CSProps {}
+
+export const menuDividerStencil = createStencil({
+  base: {
+    display: 'block',
+    height: px2rem(1),
+    border: system.space.zero,
+    borderTop: `${px2rem(1)} solid ${system.color.border.divider}`,
+    margin: `${system.space.x2} ${system.space.zero}`,
+  },
 });
 
 export const MenuDivider = createComponent('hr')({
   displayName: 'Menu.Divider',
-  Component(elemProps, ref, Element) {
-    return <Divider as={Element} ref={ref} {...elemProps} />;
+  Component({...elemProps}: DividerProps, ref, Element) {
+    return <Element ref={ref} {...handleCsProp(elemProps, menuDividerStencil())} />;
   },
 });
