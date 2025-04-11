@@ -45,7 +45,6 @@ export interface AvatarProps extends CSProps {
     | number;
   /**
    * The alt text of the Avatar image. This prop is also used for the aria-label.
-   * @default Avatar
    */
   altText?: string;
   /**
@@ -77,29 +76,36 @@ export const avatarStencil = createStencil({
     border: 0,
     overflow: 'hidden',
     cursor: 'default',
+    pointerEvents: 'none',
     borderRadius: system.shape.round,
     width: size,
     height: size,
-    '&:focus-visible:not([disabled]), &.focus:not([disabled])': {
+    '&:focus-visible, &.focus': {
       outline: 'none',
       ...focusRing({separation: 2}),
     },
     ':is(button)': {
       cursor: 'pointer',
+      pointerEvents: 'auto',
     },
-    [`& > ${iconPart}`]: {
+    '&:disabled, &.disabled': {
+      opacity: system.opacity.disabled,
+    },
+    [iconPart]: {
       transition: 'opacity 150ms linear',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       [systemIconStencil.vars.size]: calc.multiply(size, 0.625),
+      opacity: 1,
     },
-    [`& > ${imagePart}`]: {
+    [imagePart]: {
       position: 'absolute',
       width: '100%',
       height: '100%',
       borderRadius: borderRadius.circle,
       transition: 'opacity 150ms linear',
+      opacity: 0,
     },
   }),
   modifiers: {
@@ -222,20 +228,10 @@ export const avatarStencil = createStencil({
           opacity: 1,
         },
       }),
-      false: ({iconPart, imagePart}) => ({
-        [iconPart]: {
-          opacity: 1,
-        },
-        [imagePart]: {
-          opacity: 0,
-        },
-      }),
     },
   },
   defaultModifiers: {
     variant: 'light',
-    size: 'medium',
-    isImageLoaded: 'false',
     objectFit: 'contain',
   },
 });
@@ -243,7 +239,7 @@ export const avatarStencil = createStencil({
 export const Avatar = createComponent('button')({
   displayName: 'Avatar',
   Component: (
-    {variant, size, altText = 'Avatar', url, objectFit, ...elemProps}: AvatarProps,
+    {variant, size = 'medium', altText, url, objectFit, ...elemProps}: AvatarProps,
     ref,
     Element
   ) => {
@@ -272,11 +268,11 @@ export const Avatar = createComponent('button')({
         );
       }
     }
+
     return (
       <Element
         ref={ref}
-        aria-label={altText}
-        role={Element === 'button' ? 'button' : 'img'}
+        aria-label={Element === 'button' ? altText : undefined}
         {...mergeStyles(elemProps, [
           avatarStencil({
             variant:

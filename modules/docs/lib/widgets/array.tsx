@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {ArrayValue} from '../../docgen/docTypes';
 import {registerWidget, Value} from '../Value';
 import {RenderContext} from '../widgetUtils';
