@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.6.5](https://github.com/Workday/canvas-kit/releases/tag/v12.6.5) (2025-04-11)
+
+### Documentation
+
+- docs(table): Fix accessibility issue with selectable row example ([#3252](https://github.com/Workday/canvas-kit/pull/3252)) ([@JeffreyRuder](https://github.com/JeffreyRuder))
+
+
 ## [v12.6.4](https://github.com/Workday/canvas-kit/releases/tag/v12.6.4) (2025-04-11)
 
 ### Components
