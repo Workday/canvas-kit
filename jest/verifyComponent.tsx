@@ -1,5 +1,3 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
 import {jsx} from '@emotion/react';
 import React from 'react';
 import {render, fireEvent} from '@testing-library/react';
@@ -24,7 +22,6 @@ export function verifyComponent(
   describe(`verifyComponent "${Component.displayName}"`, () => {
     const Test = React.forwardRef(({...elemProps}: {as?: React.ElementType}, ref) => {
       const model = modelFn?.() || null;
-
       return <Component model={model} ref={ref} {...props} {...elemProps} />;
     });
 
@@ -93,7 +90,7 @@ export function verifyComponent(
         },
       };
 
-      render(<Test ref={ref} {...attrs} />);
+      render(jsx(Test, {ref, ...attrs}));
 
       expect(ref.current).toHaveStyle({
         top: '4px',

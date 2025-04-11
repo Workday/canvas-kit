@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
 import {Flex} from '@workday/canvas-kit-react/layout';
 
@@ -19,17 +19,20 @@ export const LabelPosition = () => {
 
   return (
     <Flex>
-      <Select model={model}>
-        <FormField orientation="horizontal">
-          <FormField.Label>Contact</FormField.Label>
-          <FormField.Input as={Select.Input} />
-          <Select.Popper>
-            <Select.Card>
-              <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
-            </Select.Card>
-          </Select.Popper>
-        </FormField>
-      </Select>
+      <FormField orientation="horizontalStart">
+        <FormField.Label>Contact</FormField.Label>
+        <FormField.Field>
+          <Select model={model}>
+            <FormField.Input as={Select.Input} />
+            <Select.Popper>
+              <Select.Card>
+                <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
+              </Select.Card>
+            </Select.Popper>
+            <FormField.Hint>Choose a form of contact</FormField.Hint>
+          </Select>
+        </FormField.Field>
+      </FormField>
     </Flex>
   );
 };

@@ -1,0 +1,52 @@
+import { ExampleCodeBlock, SymbolDoc } from '@workday/canvas-kit-docs';
+import * as CardStories from './card.stories';
+
+import { Basic } from './examples/Basic';
+import { WithCustomStyles } from './examples/CustomStyles';
+import { WithStencils } from './examples/Stencils';
+
+<Meta of={CardStories} />
+
+# Canvas Kit Card
+
+A Card is a preview that serves as an entry point to more detailed information. Card is a
+presentational [compound component](/getting-started/for-developers/resources/compound-components/)
+used as a building block for other components such as [Popup](/components/popups/popup/) and
+[Modal](/components/popups/modal/).
+
+[> Workday Design Reference](https://design.workday.com/components/containers/cards)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+`Card` includes a container component and `Card.Body` and `Card.Heading` subcomponents.
+
+<ExampleCodeBlock code={Basic} />
+
+### Custom Styles
+
+Card and its subcomponents support custom styling via the `cs` prop. For more information, check our
+["How To Customize Styles"](https://workday.github.io/canvas-kit/?path=/docs/styling-how-to-customize-styles--docs).
+
+<ExampleCodeBlock code={WithCustomStyles} />
+
+## Stencils
+
+You can also use `Card` stencils to extend styles for your own custom components. This allows you to
+compose styles without using components directly. In the example below, we're extending `Card`
+stencils to create a custom `MenuCard` component.
+
+Here's an example of a `Card` with a reduced padding of `x3` (`0.75rem` or `12px`).
+
+<ExampleCodeBlock code={WithStencils} />
+
+## Component API
+
+<SymbolDoc name="Card" fileName="/react/" />

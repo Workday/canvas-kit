@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 
 import {createComponent, filterOutProps, StyledType} from '@workday/canvas-kit-react/common';
 import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
+import {px2rem} from '@workday/canvas-kit-styling';
 
 const TextContainer = styled('div')<StyledType>({
   marginBottom: space.m,
@@ -33,6 +34,8 @@ const Line = styled('div', {
     backgroundColor,
     width,
     borderRadius: borderRadius.s,
+    outline: `${px2rem(1)} solid transparent`,
+    outlineOffset: `-${px2rem(1)}`,
     height: '21px',
     marginBottom: space.xs,
   };

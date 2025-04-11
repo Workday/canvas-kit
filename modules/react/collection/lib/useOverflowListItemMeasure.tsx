@@ -26,17 +26,21 @@ export const useOverflowListItemMeasure = createElemPropsHook(useOverflowListMod
     useMountLayout(() => {
       if (localRef.current) {
         const styles = getComputedStyle(localRef.current);
-        model.events.addItemWidth({
+        model.events.addItemSize({
           id: name,
           width:
             localRef.current.offsetWidth +
             parseFloat(styles.marginLeft) +
             parseFloat(styles.marginRight),
+          height:
+            localRef.current.offsetHeight +
+            parseFloat(styles.marginTop) +
+            parseFloat(styles.marginBottom),
         });
       }
 
       return () => {
-        model.events.removeItemWidth({id: name});
+        model.events.removeItemSize({id: name});
       };
     });
 
@@ -45,6 +49,7 @@ export const useOverflowListItemMeasure = createElemPropsHook(useOverflowListMod
     return {
       ref: elementRef,
       'aria-hidden': hidden || undefined,
+
       style: hidden ? hiddenStyles : {},
       inert: hidden ? '' : undefined,
     };

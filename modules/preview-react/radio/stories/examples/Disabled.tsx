@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormFieldGroup} from '@workday/canvas-kit-react/form-field';
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 
 export const Disabled = () => {
@@ -12,16 +12,29 @@ export const Disabled = () => {
     }
   };
   return (
-    <FormField as="fieldset">
-      <FormField.Label as="legend">Choose Your Pizza Crust</FormField.Label>
-      <FormField.Input as={RadioGroup} name="crust-disabled" onChange={handleChange} value={value}>
-        <RadioGroup.RadioButton value="deep-dish">Deep dish</RadioGroup.RadioButton>
-        <RadioGroup.RadioButton value="thin">Thin</RadioGroup.RadioButton>
-        <RadioGroup.RadioButton disabled value="gluten-free">
-          Gluten free (sold out)
-        </RadioGroup.RadioButton>
-        <RadioGroup.RadioButton value="cauliflower">Cauliflower</RadioGroup.RadioButton>
-      </FormField.Input>
-    </FormField>
+    <FormFieldGroup>
+      <FormFieldGroup.Label>Choose Your Pizza Crust</FormFieldGroup.Label>
+      <FormFieldGroup.Field>
+        <FormFieldGroup.List
+          as={RadioGroup}
+          name="crust-disabled"
+          onChange={handleChange}
+          value={value}
+        >
+          <FormFieldGroup.Input as={RadioGroup.RadioButton} value="deep-dish">
+            Deep dish
+          </FormFieldGroup.Input>
+          <FormFieldGroup.Input as={RadioGroup.RadioButton} value="thin">
+            Thin
+          </FormFieldGroup.Input>
+          <FormFieldGroup.Input as={RadioGroup.RadioButton} disabled value="gluten-free">
+            Gluten free (sold out)
+          </FormFieldGroup.Input>
+          <FormFieldGroup.Input as={RadioGroup.RadioButton} value="cauliflower">
+            Cauliflower
+          </FormFieldGroup.Input>
+        </FormFieldGroup.List>
+      </FormFieldGroup.Field>
+    </FormFieldGroup>
   );
 };

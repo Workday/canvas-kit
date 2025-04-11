@@ -19,7 +19,7 @@ jobs:
 
       - uses: Workday/canvas-kit-actions/install@v1
         with:
-          node_version: 16.x
+          node_version: 18.x
 
       - uses: Workday/canvas-kit-actions/release@v1
         with:

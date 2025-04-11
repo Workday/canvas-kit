@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {ColorInput} from '@workday/canvas-kit-react/color-picker';
 import {type} from '@workday/canvas-kit-react/tokens';
 
@@ -19,12 +19,14 @@ export const ValidColorChange = () => {
     <>
       <FormField>
         <FormField.Label>Background Color</FormField.Label>
-        <FormField.Input
-          as={ColorInput}
-          onChange={handleChange}
-          onValidColorChange={handleValidColorChange}
-          value={value}
-        />
+        <FormField.Field>
+          <FormField.Input
+            as={ColorInput}
+            onChange={handleChange}
+            onValidColorChange={handleValidColorChange}
+            value={value}
+          />
+        </FormField.Field>
       </FormField>
       <p style={type.levels.subtext.large}>Last valid color: {validColor}</p>
     </>
