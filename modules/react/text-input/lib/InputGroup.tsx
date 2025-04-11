@@ -243,7 +243,7 @@ export const InputGroup = createContainer('div')({
   });
 
   return (
-    <Flex as={Element} position="relative" {...elemProps}>
+    <Flex as={Element} position="relative" alignItems="center" {...elemProps}>
       {mappedChildren}
     </Flex>
   );
