@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.6.4](https://github.com/Workday/canvas-kit/releases/tag/v12.6.4) (2025-04-11)
+
+### Components
+
+- fix: Updates Switch to function with RTL ([#3250](https://github.com/Workday/canvas-kit/pull/3250)) ([@josh-bagwell](https://github.com/josh-bagwell))
+  Addresses RTL issue with Switch.
+
+
 ## [v11.2.15](https://github.com/Workday/canvas-kit/releases/tag/v11.2.15) (2025-04-11)
 
 ### Components
