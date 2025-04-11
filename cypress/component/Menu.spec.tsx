@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {Basic} from '../../modules/react/menu/stories/examples/Basic';
 import {MenuWithFallbackPlacements} from '../../modules/react/menu/stories/examples/MenuWithFallbackPlacements';
 
