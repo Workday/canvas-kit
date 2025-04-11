@@ -1,20 +1,17 @@
 import * as React from 'react';
 
-import {colors, space, type, borderRadius, iconColors} from '@workday/canvas-kit-react/tokens';
 import {
   focusRing,
-  styled,
-  StyledType,
   slugify,
   createElemPropsHook,
   composeHooks,
   ExtractProps,
-  ellipsisStyles,
   EllipsisText,
   createSubcomponent,
   useModalityType,
+  createComponent,
 } from '@workday/canvas-kit-react/common';
-import {Box, FlexProps} from '@workday/canvas-kit-react/layout';
+import {Box, FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {
@@ -24,9 +21,11 @@ import {
   useListItemSelect,
   useOverflowListItemMeasure,
 } from '@workday/canvas-kit-react/collection';
+import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
 
 import {useTabsModel} from './useTabsModel';
-import {px2rem} from '@workday/canvas-kit-styling';
+import {buttonStencil} from '@workday/canvas-kit-react/button';
+import {system, brand, base} from '@workday/canvas-tokens-web';
 export interface TabsItemProps
   extends ExtractProps<typeof Box, never>,
     Partial<Pick<FlexProps, 'gap'>> {
@@ -82,78 +81,91 @@ export interface TabsItemProps
   tabIndex?: number;
 }
 
-export const StyledTabItem = styled(Box.as('button'))<StyledType & Pick<TabsItemProps, 'gap'>>(
-  ({theme}) => ({
-    ...type.levels.subtext.large,
-    fontWeight: type.properties.fontWeights.medium,
+const tabItemStencil = createStencil({
+  base: {
+    ...system.type.subtext.large,
+    fontFamily: `${system.fontFamily.default}, Helvetica Neue, Helvetica, Arial, sans-serif`,
+    fontWeight: system.fontWeight.medium,
     border: 'none',
     backgroundColor: 'transparent',
     flex: '0 0 auto',
+    minWidth: system.space.zero,
     alignItems: 'center',
-    padding: `${space.xs} ${space.s}`,
-    height: 52,
-    boxSizing: 'border-box',
+    padding: `${system.space.x3} ${system.space.x4}`,
+    height: px2rem(52),
     cursor: 'pointer',
-    color: colors.licorice300,
+    color: system.color.fg.muted.default,
     position: 'relative',
-    borderRadius: `${borderRadius.m} ${borderRadius.m} 0px 0px`,
+    borderRadius: `${system.space.x1} ${system.space.x1} ${system.space.zero} ${system.space.zero}`,
     transition: 'background 150ms ease, color 150ms ease',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    [systemIconStencil.vars.color]: system.color.fg.muted.soft,
 
-    '&:hover, &:focus-visible, &.hover, &.focus': {
-      backgroundColor: colors.soap200,
-      color: colors.blackPepper400,
+    '&:has(span)': {
+      display: 'flex',
+      gap: system.space.x2,
+    },
 
-      [systemIconStencil.vars.color]: iconColors.hover,
+    '&:hover, &.hover, &:focus-visible, &.focus': {
+      backgroundColor: base.soap200,
+      color: base.blackPepper400,
+
+      [systemIconStencil.vars.color]: system.color.icon.strong,
     },
 
     '&:focus-visible, &.focus': {
-      outline: `${px2rem(2)} solid transparent`,
-      ...focusRing({inset: 'outer', width: 0, separation: 2}, theme),
+      outline: `none`,
+      ...focusRing({inset: 'outer', width: 0, separation: 2}),
+      [buttonStencil.vars.boxShadowInner]: system.color.border.inverse,
+      [buttonStencil.vars.boxShadowOuter]: brand.common.focusOutline,
+      [systemIconStencil.vars.color]: system.color.icon.strong,
     },
 
-    '&:disabled, &[aria-disabled]': {
-      color: colors.licorice100,
-      [systemIconStencil.vars.color]: iconColors.disabled,
+    '&:disabled, &.disabled, &[aria-disabled]': {
+      color: system.color.text.disabled,
+      [systemIconStencil.vars.color]: system.color.fg.disabled,
       '&:hover': {
         cursor: 'auto',
-        backgroundColor: `transparent`,
-        [systemIconStencil.vars.color]: iconColors.disabled,
+        backgroundColor: system.color.bg.transparent,
+        [systemIconStencil.vars.color]: system.color.fg.disabled,
       },
     },
 
     '&[aria-selected=true]': {
-      color: theme.canvas.palette.primary.main,
+      color: brand.primary.base,
       cursor: 'default',
-      [systemIconStencil.vars.color]: theme.canvas.palette.primary.main,
+      [systemIconStencil.vars.color]: brand.primary.base,
       '&:after': {
         position: 'absolute',
-        // fallback for Windows high contrast theme
-        borderBottom: `${space.xxxs} solid transparent`,
-        borderRadius: `${borderRadius.m} ${borderRadius.m} 0px 0px`,
-        backgroundColor: theme.canvas.palette.primary.main,
-        bottom: 0,
+        height: system.space.x1,
+        borderRadius: `${system.shape.x1} ${system.shape.x1} ${system.shape.zero} ${system.shape.zero}`,
+        backgroundColor: brand.primary.base,
+        bottom: system.space.zero,
         content: `''`,
-        left: 0,
-        marginTop: '-2px',
+        left: system.space.zero,
+        marginBlockStart: `${calc.negate(calc.divide(system.space.x2, system.space.x1))}`,
         width: '100%',
       },
-      '&:hover, &:focus': {
-        backgroundColor: `transparent`,
-        color: theme.canvas.palette.primary.main,
+      '&:hover, &.hover, &:focus-visible, &.focus': {
+        backgroundColor: system.color.bg.transparent,
+        color: brand.primary.base,
       },
     },
-  }),
-  ({children, gap = space.xxs}) => {
-    if (typeof children === 'string') {
-      return ellipsisStyles;
-    } else {
-      return {
-        display: 'flex',
-        gap,
-      };
-    }
-  }
-);
+  },
+});
+
+export const StyledTabItem = createComponent('button')<TabsItemProps>({
+  displayName: 'StyledTabItem',
+  Component: ({children, ...elemProps}, ref, Element) => {
+    return (
+      <Element ref={ref} {...mergeStyles(elemProps, tabItemStencil())}>
+        {children}
+      </Element>
+    );
+  },
+});
 
 export const useTabsItem = composeHooks(
   createElemPropsHook(useTabsModel)(({state}, _, elemProps: {'data-id'?: string} = {}) => {
