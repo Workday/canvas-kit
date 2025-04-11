@@ -45,7 +45,7 @@ const SelectableRow = createComponent('tr')({
             <Checkbox checked={rowData.checked} onChange={onSelect} />
           </Tooltip>
         </Table.Cell>
-        <Table.Cell cs={tableCellStyles} scope="row">
+        <Table.Cell as="th" cs={tableCellStyles} scope="row">
           {rowData.name}
         </Table.Cell>
         <Table.Cell cs={tableCellStyles}>{rowData.amount}</Table.Cell>
