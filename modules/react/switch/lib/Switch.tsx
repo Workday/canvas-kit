@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {createComponent, ErrorType, focusRing, useUniqueId} from '@workday/canvas-kit-react/common';
-import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 import {mergeStyles} from '../../layout';
 
@@ -158,6 +158,9 @@ const switchCircleStencil = createStencil({
     checked: {
       true: {
         transform: `translateX(${system.space.x4})`,
+        ':dir(rtl)': {
+          transform: `translateX(${calc.negate(system.space.x4)})`,
+        },
       },
     },
   },
