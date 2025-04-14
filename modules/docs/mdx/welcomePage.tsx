@@ -162,12 +162,12 @@ export const WelcomePage = () => {
         </Text>
         <InstallBlock
           command="yarn add"
-          packageName="@workday/canvas-kit-react @workday/canvas-tokens-web @workday/canvas-kit-react-fonts"
+          packageName="@workday/canvas-kit-react @workday/canvas-tokens-web"
         />
         or
         <InstallBlock
           command="npm install"
-          packageName="@workday/canvas-kit-react @workday/canvas-tokens-web @workday/canvas-kit-react-fonts"
+          packageName="@workday/canvas-kit-react @workday/canvas-tokens-web"
         />
       </div>
     </div>

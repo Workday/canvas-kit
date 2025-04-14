@@ -28,14 +28,18 @@ implement user experiences consistent with
 To get started using Canvas kit React first add or install the module to your existing React project
 
 ```sh
-yarn add @workday/canvas-kit-react @workday/canvas-tokens-web @workday/canvas-kit-react-fonts
+yarn add @workday/canvas-kit-react @workday/canvas-tokens-web
 ```
 
 or
 
 ```sh
-npm install @workday/canvas-kit-react @workday/canvas-tokens-web @workday/canvas-kit-react-fonts
+npm install @workday/canvas-kit-react @workday/canvas-tokens-web
 ```
+
+> **Note:** If your application does not already provide `Roboto` as a font, you can install
+> `@workday/canvas-kit-react-fonts`. The example below shows how to inject the fonts, but you can
+> omit this if you're already loading fonts.
 
 **Usage**
 
