@@ -23,6 +23,7 @@ any questions.
   - [Avatar](#avatar)
   - [Expandable](#expandable)
   - [External Hyperlink](#external-hyperlink)
+	- [Form Field and Form Field Group](#form-field-and-form-field-group)
   - [Pill](#pill)
   - [Tabs](#tabs)
 - [Brand Refresh](#brand-refresh)
@@ -171,9 +172,35 @@ import {Expandable} from '@workday/canvas-kit-react/expandable';
 </ExternalHyperlink>
 ```
 
+### Form Field and Form Field Group
+**PR:** [#3101](https://github.com/Workday/canvas-kit/pull/3101)
+
+The `orientation` prop on `FormField` component has been updated to remove the deprecated `horizontal` value. v12 had a codemod to update this value to `horizontalStart`. In v13, we've dropped `horizontal` as a value.` You must update your code to use `horizontalStart`.
+
+**Before in v12**
+```tsx
+<FormField orientation="horizontal">
+	<FormField.Label>Label</FormField.Label>
+	<FormField.Field>
+		<FormField.Input as={TextInput} />
+	<FormField.Field>
+</FormField>
+```
+
+**After in v13**
+```tsx
+<FormField orientation="horizontalStart">
+	<FormField.Label>Label</FormField.Label>
+	<FormField.Field>
+		<FormField.Input as={TextInput} />
+	<FormField.Field>
+</FormField>
+```
+
+
 ### Pill
 
-**PRs:** [#3104](https://github.com/Workday/canvas-kit/pull/3104)
+**PR:** [#3104](https://github.com/Workday/canvas-kit/pull/3104)
 
 A few changes have been made to `Pill` to ensure proper accessibility and styles.
 
