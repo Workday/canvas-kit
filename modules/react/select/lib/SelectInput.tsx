@@ -1,8 +1,7 @@
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
-import {createStencil, CSProps} from '@workday/canvas-kit-styling';
+import {createStencil, CSProps, handleCsProp} from '@workday/canvas-kit-styling';
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 
 import {useSelectInput} from './hooks/useSelectInput';
@@ -87,7 +86,7 @@ export const SelectInput = createSubcomponent(TextInput)({
           as={Element}
           placeholder={placeholder}
           {...selectInputStencil.parts.visualInput}
-          {...mergeStyles(elemProps)}
+          {...handleCsProp(elemProps)}
         />
         <InputGroup.InnerEnd {...selectInputStencil.parts.caretContainer}>
           <SystemIcon {...selectInputStencil.parts.caret} icon={caretDownSmallIcon} />
