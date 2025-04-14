@@ -46,9 +46,10 @@ export const selectInputStencil = createStencil({
       opacity: system.opacity.zero,
       cursor: 'default',
       pointerEvents: 'none',
-      minWidth: system.space.x1,
-      width: system.space.x1,
+      minWidth: '100%',
+      width: '100%',
     },
+
     [`${startIconPart}, ${endIconPart}, ${caretContainerPart}, ${startIconContainerPart}`]: {
       position: 'absolute',
       pointerEvents: 'none',
