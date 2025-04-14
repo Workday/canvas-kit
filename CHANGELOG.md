@@ -3,6 +3,45 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.6.5](https://github.com/Workday/canvas-kit/releases/tag/v12.6.5) (2025-04-11)
+
+### Documentation
+
+- docs(table): Fix accessibility issue with selectable row example ([#3252](https://github.com/Workday/canvas-kit/pull/3252)) ([@JeffreyRuder](https://github.com/JeffreyRuder))
+
+
+## [v12.6.4](https://github.com/Workday/canvas-kit/releases/tag/v12.6.4) (2025-04-11)
+
+### Components
+
+- fix: Updates Switch to function with RTL ([#3250](https://github.com/Workday/canvas-kit/pull/3250)) ([@josh-bagwell](https://github.com/josh-bagwell))
+  Addresses RTL issue with Switch.
+
+
+## [v11.2.15](https://github.com/Workday/canvas-kit/releases/tag/v11.2.15) (2025-04-11)
+
+### Components
+
+- fix: Updates Switch to function with RTL ([#3250](https://github.com/Workday/canvas-kit/pull/3250)) ([@josh-bagwell](https://github.com/josh-bagwell))
+  Addresses RTL issue with Switch.
+## [v12.6.3](https://github.com/Workday/canvas-kit/releases/tag/v12.6.3) (2025-04-11)
+
+
+
+
+## [v12.6.2](https://github.com/Workday/canvas-kit/releases/tag/v12.6.2) (2025-04-11)
+
+### Components
+
+- fix: Ensure hidden input in Select adjust size ([#3242](https://github.com/Workday/canvas-kit/pull/3242)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- fix: Center InputGroup items ([#3245](https://github.com/Workday/canvas-kit/pull/3245)) ([@sharonsooyeon](https://github.com/sharonsooyeon), Sharon Kim)
+
+
+## [v11.2.14](https://github.com/Workday/canvas-kit/releases/tag/v11.2.14) (2025-04-11)
+
+### Components
+
+- fix: Center InputGroup items ([#3245](https://github.com/Workday/canvas-kit/pull/3245)) ([@sharonsooyeon](https://github.com/sharonsooyeon), Sharon Kim)
 ## [v12.6.1](https://github.com/Workday/canvas-kit/releases/tag/v12.6.1) (2025-04-10)
 
 ### Infrastructure
