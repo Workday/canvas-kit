@@ -46,6 +46,8 @@ const hiddenSelectInputStencil = createStencil({
     opacity: system.opacity.zero,
     cursor: 'default',
     pointerEvents: 'none',
+    minWidth: '100%',
+    width: '100%',
   },
 });
 
