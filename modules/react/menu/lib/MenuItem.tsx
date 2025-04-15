@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {CSProps, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, px2rem, handleCsProp} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 
 import {
