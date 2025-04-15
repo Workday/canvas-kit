@@ -54,31 +54,6 @@ We've provided a [codemod](https://github.com/Workday/canvas-kit/tree/master/mod
 automatically update your code to work with most of the breaking changes in v13. **Breaking changes
 handled by the codemod are marked with 🤖 in the Upgrade Guide.**
 
-A codemod is a script that makes programmatic transformations on your codebase by traversing the
-[AST](https://www.codeshiftcommunity.com/docs/understanding-asts), identifying patterns, and making
-prescribed changes. This greatly decreases opportunities for error and reduces the number of manual
-updates, which allows you to focus on changes that need your attention. **We highly recommend you
-use the codemod for these reasons.**
-
-If you're new to running codemods or if it's been a minute since you've used one, there are a few
-things you'll want to keep in mind.
-
-- Our codemods are meant to be run sequentially. For example, if you're using v8 of Canvas Kit,
-  you'll need to run the v9 codemod before you run v10 and so on.
-- The codemod will update your code to be compatible with the specified version, but it will **not**
-  remove outdated dependencies or upgrade dependencies to the latest version. You'll need to upgrade
-  dependencies on your own.
-  - We recommend upgrading dependencies before running the codemod.
-  - Always review your `package.json` files to make sure your dependency versions look correct.
-- The codemod will not handle every breaking change in v13. You will likely need to make some manual
-  changes to be compatible. Use our Upgrade Guide as a checklist.
-- Codemods are not bulletproof.
-  - Conduct a thorough PR and QA review of all changes to ensure no regressions were introduced.
-  - As a safety precaution, we recommend committing the changes from the codemod as a single
-    isolated commit (separate from other changes) so you can roll back more easily if necessary.
-
-We're here to help! Automatic changes to your codebase can feel scary. You can always reach out to
-our team. We'd be very happy to walk you through the process to set you up for success.
 
 ### Instructions
 
@@ -104,10 +79,7 @@ yarn canvas-kit-codemod v13 [path]
 yarn remove @workday/canvas-kit-codemod
 ```
 
-> **Note**: The codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` files. You'll need to
-> manually edit other file types (`.json`, `.mdx`, `.md`, etc.). You may need to run your linter
-> after executing the codemod, as its resulting formatting (spacing, quotes, etc.) may not match
-> your project conventions.
+Having trouble running our codemods? View our [docs](https://workday.github.io/canvas-kit/?path=/docs/guides-codemods) for more information!
 
 ## Component Updates
 
@@ -290,9 +262,7 @@ import {dubLogoPrimary} from "@workday/canvas-kit-preview-react/common"
 <div dangerouslySetInnerHTML={__html: dubLogoPrimary} />
 ```
 
-> 🤖 The codemod will handle the change of `'dubLogoBlue', 'dubLogoWhite', 'wdayLogoBlue', 'wdayLogoWhite'` to
-> `'dubLogoPrimary', 'dubLogoReversed', 'wdayLogoPrimary', 'wdayLogoReversed'` as shown above in the table. It will also handle
-> updating your imports.
+> 🤖 The codemod will handle the renaming all the imports and updating the import path.
 
 
 ## Infrastructure
@@ -305,13 +275,12 @@ We've updated the `jsx` flag in our `tsconfig` to `react-jsx`. As part of this c
 
 If you're using `react@16.x.x`, you'll need to upgrade to `react@17.x.x` to use Canvas Kit v13.
 
-> **Note:** You'll need to update the way `jsx` transpiles. The automatic runtime feature, enabled through the `@babel/preset-react` preset with the `runtime: "automatic"` option, handles the importing of functions that JSX transpiles to.
+> **Note:** You'll need to update the way `jsx` transpiles. The automatic runtime feature, enabled through the `@babel/preset-react` preset with the `runtime: "automatic"` option. This handles the importing of functions that JSX transpiles to. For more information please [view Babel's docs](https://babeljs.io/docs/babel-preset-react#react-automatic-runtime) on automatic runtime for React.
 
 
 ## Troubleshooting
 
 - When upgrading to the latest major version of Canvas Kit, all related Canvas Kit packages should be updated at the same time:
-	- `"@workday/canvas-kit-docs": "^12.5.6"` -> `"@workday/canvas-kit-docs": "^13.0.0"`
 	- `"@workday/canvas-kit-react": "^12.5.6"` -> `"@workday/canvas-kit-react": "^13.0.0"`
 	- `"@workday/canvas-kit-styling": "^12.5.6"` -> `"@workday/canvas-kit-styling": "^13.0.0"`
 	- `"@workday/canvas-kit-preview-react": "^12.5.6"` -> `"@workday/canvas-kit-preview-react": "^13.0.0"`
