@@ -11,21 +11,21 @@ import { Box } from '@workday/canvas-kit-react/layout';
 
 This guide contains an overview of the changes in Canvas Kit v13. Please
 [reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have
-any questions.
+any questions. For common upgrade issues, please see the Troubleshooting section at the end of this doc.
 
 ## Why You Should Upgrade
 
 ### Improved Support for ESModules
 
-We've updated the `jsx` flag in our `tsconfig` to `react-jsx` to provide better support for newer technologies like `Vite`. As part of this change, we're also updated our peer dependencies of `React` to a minimum version of `17.0.0`.
+We've updated the `jsx` flag in our `tsconfig` to `react-jsx` to provide better support for newer technologies including `Vite`. As part of this change, we've also updated our `react` peer dependencies to a minimum version of `17.0.0`.
 
-### Refactored Components to Use our Styling API
+### Refactored Components to Use Our Styling API
 
-We've continued to refactor our component to use our new Styling API and CSS Tokens. This allows us to provide a more consistent styling experience across our components.
+We've continued refactoring our components to use our new Styling API and CSS Tokens. This allows us to provide a more consistent styling experience across our components.
 
-### Provide New Branding Logos
+### Provide New Brand Logos
 
-As part of a brand refresh, we now provided updated logos that reflect the new Workday branding.
+As part of Workday's brand refresh, we've updated our Workday logos to align with our new brand design.
 
 ## Table of contents
 
@@ -156,8 +156,8 @@ The following change has been made to `Avatar` to ensure proper accessibility.
 
 **After in v13**
 ```tsx
-// You must provide an altText that makes sense for the context in which the Avatar is used
-<Avatar altText="My Avatar" as="div" />
+// You must provide alt text to the `altText` prop. Please choose a apt description based on your `Avatar`'s usage.
+<Avatar altText="User profile avatar" as="div" />
 ```
 
 ### Expandable ⚡️
@@ -184,7 +184,7 @@ import {Expandable} from '@workday/canvas-kit-react/expandable';
 
 The following change has been made to `ExternalHyperlink` to ensure proper accessibility.
 
-- The `iconLabel` prop no longer has a default of `"Opens link in new window"`. The default was an English phrase (Opens link in new window) and this has caused issues in the past with translations.
+- The `iconLabel` prop no longer has a default of `"Opens link in new window"`. This default phrase caused some to accidentally omit translations which caused translation issues.
 
 >**Note:** You *must* provide an `iconLabel` for `<ExternalHyperlink />` to ensure proper accessibility.  Our examples have been updated to reflect this change.
 
@@ -208,27 +208,27 @@ The following change has been made to `ExternalHyperlink` to ensure proper acces
 A few changes have been made to `Pill` to ensure proper accessibility and styles.
 
 - The border color on hover has been updated from `licorice400` to `licorice500` to match our design specs.
-- We've removed extra elements and leverage [flex box](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Flexbox) to ensure only the label receives overflow styles.
-- When `maxWidth` is set, it is set on the parent `<Pill/>` element and the child elements will be styled accordingly. Before v13, `maxWidth` wasn't calculating the width of all its elements and wasn't a true pixel value.
+- We've removed extra elements and now use [flex box](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Flexbox) to ensure only the label receives text overflow styles when needed.
+- Setting `maxWidth` on the parent `<Pill/>` element now styles the child elements correctly. Before v13, `maxWidth` wasn't calculating the width of all its elements and wasn't a true pixel value.
 
 ##### Breaking Changes
 
 - `maxWidth` has been removed from the `usePillModel`. This config was used to style sub-components. With the refactor to use `data-part` and [stencils](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--docs#create-stencil), it is no longer needed on the model. You can still apply `maxWidth` on the parent `<Pill>` element and the child elements will be styled accordingly.
 - `<Pill.Icon/>` no longer has a default `aria-label="add"`. You *must* provide an `aria-label` for `<Pill.Icon/>` to ensure proper accessibility. Our examples have been updated to reflect this change.
 - `<Pill.IconButton/>` no longer has a default `aria-label="remove"`. You *must* provide an `aria-label` for `<Pill.IconButton/>` to ensure proper accessibility. Our examples have been updated to reflect this change.
-- `<Pill.Label/>` is a *required* element when using other sub-components like `<Pill.Icon/>` to ensure that the label truncates correctly.
+- `<Pill.Label/>` is a *required* element when using other subcomponents such as `<Pill.Icon/>` to ensure that the label truncates correctly.
 
 **Before in v12**
 ```tsx
 import {Pill, usePillModel} from '@workday/canvas-kit-preview-react/pill';
 
 const model = usePillModel({
-	maxWidth: 200,
+  maxWidth: 200,
 });
 
 <Pill model={model}>
-	<Pill.Icon />
-	Shoes
+  <Pill.Icon />
+  Shoes
 </Pill>
 ```
 
@@ -237,13 +237,13 @@ const model = usePillModel({
 import {Pill} from '@workday/canvas-kit-preview-react/pill';
 
 <Pill maxWidth={200}>
-	<Pill.Icon aria-label='Add Shoes' />
-	<Pill.Label>Shoes</Pill.Label>
+  <Pill.Icon aria-label='Add Shoes' />
+  <Pill.Label>Shoes</Pill.Label>
 </Pill>
 
 <Pill maxWidth={200}>
-	<Pill.Label>Shirts</Pill.Label>
-	<Pill.IconButton aria-label='Remove Shirts' />
+  <Pill.Label>Shirts</Pill.Label>
+  <Pill.IconButton aria-label='Remove Shirts' />
 </Pill>
 ```
 
@@ -255,7 +255,7 @@ import {Pill} from '@workday/canvas-kit-preview-react/pill';
 
 - The `disabled` icon color has been updated to use `system.color.fg.disabled`. This has made the icon darker for better contrast.
 
-> **Note:** There should be no developer impact and the visual changes are safe to accept.
+> **Note:** There should be no developer impact, and the visual changes are safe to accept.
 
 ## Brand Refresh ⚡️
 
@@ -316,7 +316,7 @@ If you're using `react@16.x.x`, you'll need to upgrade to `react@17.x.x` to use 
 	- `"@workday/canvas-kit-styling": "^12.5.6"` -> `"@workday/canvas-kit-styling": "^13.0.0"`
 	- `"@workday/canvas-kit-preview-react": "^12.5.6"` -> `"@workday/canvas-kit-preview-react": "^13.0.0"`
 	- `"@workday/canvas-kit-labs-react": "^12.5.6"` -> `"@workday/canvas-kit-labs-react": "^13.0.0"`
-- Our components rely on the `@workday/canvas-tokens-web` package to ensure correct styling and use of CSS variables. Ensure you're upgrading to the latest version and installing it correctly. For more information, view our [docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
+- Our components rely on the `@workday/canvas-tokens-web` package which provides our CSS variables and ensures the correct styling of our components. Make sure to upgrade to the latest version of Canvas Tokens Web and install it correctly. For more information, [view our docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
 
 ## Glossary
 
