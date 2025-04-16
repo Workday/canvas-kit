@@ -1,0 +1,60 @@
+<Meta title="Guides/Codemods" />
+
+# What is a Codemod?
+
+A codemod is a script that makes programmatic transformations on your codebase by traversing the
+[AST](https://www.codeshiftcommunity.com/docs/understanding-asts), identifying patterns, and making
+prescribed changes. This greatly decreases opportunities for error and reduces the number of manual
+updates, which allows you to focus on changes that need your attention. **We highly recommend you
+use the codemod for these reasons.**
+
+If you're new to running codemods or if it's been a minute since you've used one, there are a few
+things you'll want to keep in mind.
+
+- Our codemods are meant to be run sequentially. For example, if you're using v8 of Canvas Kit,
+  you'll need to run the v9 codemod before you run v10 and so on.
+- The codemod will update your code to be compatible with the specified version, but it will **not**
+  remove outdated dependencies or upgrade dependencies to the latest version. You'll need to upgrade
+  dependencies on your own.
+  - We recommend upgrading dependencies before running the codemod.
+  - Always review your `package.json` files to make sure your dependency versions look correct.
+- The codemod will not handle every breaking change in v13. You will likely need to make some manual
+  changes to be compatible. Use our Upgrade Guide as a checklist.
+- Codemods are not bulletproof.
+  - Conduct a thorough PR and QA review of all changes to ensure no regressions were introduced.
+  - As a safety precaution, we recommend committing the changes from the codemod as a single
+    isolated commit (separate from other changes) so you can roll back more easily if necessary.
+
+We're here to help! Automatic changes to your codebase can feel scary. You can always reach out to
+our team. We'd be very happy to walk you through the process to set you up for success.
+
+## Running a Codemod
+
+### Instructions
+
+The easiest way to run our codemod is to use `npx` in your terminal.
+
+```sh
+npx @workday/canvas-kit-codemod v${canvasKitMajorVersionNumber} [path]
+```
+
+Be sure to provide specific directories that need to be updated via the `[path]` argument. This
+decreases the amount of AST the codemod needs to traverse and reduces the chances of the script
+having an error. For example, if your source code lives in `src/`, use `src/` as your `[path]`. Or,
+if you have a monorepo with three packages using Canvas Kit, provide those specific packages as your
+`[path]`.
+
+Alternatively, if you're unable to run the codemod successfully using `npx`, you can install the
+codemod package as a dev dependency, run it with `yarn`, and then remove the package after you're
+finished.
+
+```sh
+yarn add @workday/canvas-kit-codemod --dev
+yarn canvas-kit-codemod v${canvasKitMajorVersion} [path]
+yarn remove @workday/canvas-kit-codemod
+```
+
+> **Note**: The codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` files. You'll need to
+> manually edit other file types (`.json`, `.mdx`, `.md`, etc.). You may need to run your linter
+> after executing the codemod, as its resulting formatting (spacing, quotes, etc.) may not match
+> your project conventions.

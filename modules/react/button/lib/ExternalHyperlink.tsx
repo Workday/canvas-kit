@@ -10,7 +10,7 @@ export interface ExternalHyperlinkProps extends HyperlinkProps {
    * Informs a screen reader user the link will open in a new window. It is read after the link text.
    * This value will need to be translated.
    */
-  iconLabel: string;
+  iconLabel?: string;
 }
 
 export const externalHyperlinkStencil = createStencil({

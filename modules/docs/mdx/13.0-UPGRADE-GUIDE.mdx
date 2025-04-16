@@ -11,8 +11,21 @@ import { Box } from '@workday/canvas-kit-react/layout';
 
 This guide contains an overview of the changes in Canvas Kit v13. Please
 [reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have
-any questions.
+any questions. For common upgrade issues, please see the Troubleshooting section at the end of this doc.
 
+## Why You Should Upgrade
+
+### Improved Support for ESModules
+
+We've updated the `jsx` flag in our `tsconfig` to `react-jsx` to provide better support for newer technologies including `Vite`. As part of this change, we've also updated our `react` peer dependencies to a minimum version of `17.0.0`.
+
+### Refactored Components to Use Our Styling API
+
+We've continued refactoring our components to use our new Styling API and CSS Tokens. This allows us to provide a more consistent styling experience across our components.
+
+### Provide New Brand Logos
+
+As part of Workday's brand refresh, we've updated our Workday logos to align with our new brand design.
 
 ## Table of contents
 
@@ -41,31 +54,6 @@ We've provided a [codemod](https://github.com/Workday/canvas-kit/tree/master/mod
 automatically update your code to work with most of the breaking changes in v13. **Breaking changes
 handled by the codemod are marked with 🤖 in the Upgrade Guide.**
 
-A codemod is a script that makes programmatic transformations on your codebase by traversing the
-[AST](https://www.codeshiftcommunity.com/docs/understanding-asts), identifying patterns, and making
-prescribed changes. This greatly decreases opportunities for error and reduces the number of manual
-updates, which allows you to focus on changes that need your attention. **We highly recommend you
-use the codemod for these reasons.**
-
-If you're new to running codemods or if it's been a minute since you've used one, there are a few
-things you'll want to keep in mind.
-
-- Our codemods are meant to be run sequentially. For example, if you're using v8 of Canvas Kit,
-  you'll need to run the v9 codemod before you run v10 and so on.
-- The codemod will update your code to be compatible with the specified version, but it will **not**
-  remove outdated dependencies or upgrade dependencies to the latest version. You'll need to upgrade
-  dependencies on your own.
-  - We recommend upgrading dependencies before running the codemod.
-  - Always review your `package.json` files to make sure your dependency versions look correct.
-- The codemod will not handle every breaking change in v13. You will likely need to make some manual
-  changes to be compatible. Use our Upgrade Guide as a checklist.
-- Codemods are not bulletproof.
-  - Conduct a thorough PR and QA review of all changes to ensure no regressions were introduced.
-  - As a safety precaution, we recommend committing the changes from the codemod as a single
-    isolated commit (separate from other changes) so you can roll back more easily if necessary.
-
-We're here to help! Automatic changes to your codebase can feel scary. You can always reach out to
-our team. We'd be very happy to walk you through the process to set you up for success.
 
 ### Instructions
 
@@ -91,14 +79,11 @@ yarn canvas-kit-codemod v13 [path]
 yarn remove @workday/canvas-kit-codemod
 ```
 
-> **Note**: The codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` files. You'll need to
-> manually edit other file types (`.json`, `.mdx`, `.md`, etc.). You may need to run your linter
-> after executing the codemod, as its resulting formatting (spacing, quotes, etc.) may not match
-> your project conventions.
+Having trouble running our codemods? View our [docs](https://workday.github.io/canvas-kit/?path=/docs/guides-codemods) for more information!
 
 ## Component Updates
 
-### Styling API and CSS Tokens
+### Styling API and CSS Tokens 💅
 
 **PRs:** [#3101](https://github.com/Workday/canvas-kit/pull/3101), [#3088](https://github.com/Workday/canvas-kit/pull/3088), [#3114](https://github.com/Workday/canvas-kit/pull/3114), [#3119](https://github.com/Workday/canvas-kit/pull/3119), [#3120](https://github.com/Workday/canvas-kit/pull/3120), [#3164](https://github.com/Workday/canvas-kit/pull/3164), [#3128](https://github.com/Workday/canvas-kit/pull/3128), [#3123](https://github.com/Workday/canvas-kit/pull/3123), [#3205](https://github.com/Workday/canvas-kit/pull/3205), [#3210](https://github.com/Workday/canvas-kit/pull/3210)
 
@@ -111,7 +96,7 @@ The React interface **has not changed**, but CSS variables are now used for dyna
 > with `cs` in our
 > [documentation](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--cs-prop).
 
-The following components are affected:
+The following components have been updated:
 
 - `ActionBar`
 - `Banner`
@@ -125,77 +110,126 @@ The following components are affected:
 - `Tabs`
 - `Tooltip`
 
-### Avatar
+### Avatar 🚨
 
 **PR:** [#3231](https://github.com/Workday/canvas-kit/pull/3231)
 
-A few changes have been made to `Avatar` to ensure proper accessibility.
-
-##### Breaking Changes
+The following change has been made to `Avatar` to ensure proper accessibility.
 
 - The `altText` prop no longer has a default of `"Avatar"` for better internalization. The default was an English word (“Avatar”) and this has caused issues in the past with translations.
 
 >**Note:** You *must* provide an `altText` for `<Avatar />, <Pill.Avatar />, <Expandable.Avatar />` to ensure proper accessibility.  Our examples have been updated to reflect this change.
 
-### Expandable
+**Before in v12**
+```tsx
+// Avatar component always had a default altText of "Avatar"
+<Avatar as="div" />
+```
+
+**After in v13**
+```tsx
+// You must provide alt text to the `altText` prop. Please choose a apt description based on your `Avatar`'s usage.
+<Avatar altText="User profile avatar" as="div" />
+```
+
+### Expandable ⚡️
 
 **PR:** [#3213](https://github.com/Workday/canvas-kit/pull/3213)
 
 We've promoted `Expandable` from [Labs](#labs) to [Main](#main).
 
+**Before in v12**
 ```tsx
-// v12
 import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
+```
 
-// v13
+**After in v13**
+```tsx
 import {Expandable} from '@workday/canvas-kit-react/expandable';
 ```
 
-🤖 The codemod will handle the change of imports as shown above.
+> 🤖 The codemod will handle the change of imports as shown above.
 
-### External Hyperlink
+### External Hyperlink 🚨
 
 **PR:** [#3101](https://github.com/Workday/canvas-kit/pull/3101)
 
-`iconLabel` is now a *required* prop. We've removed the default `aria-label` of `Opens link in new window`  to better support internationalization. You must provide a value to `iconLabel`.
+The following change has been made to `ExternalHyperlink` to ensure proper accessibility.
 
+- The `iconLabel` prop no longer has a default of `"Opens link in new window"`. This default phrase caused some to accidentally omit translations which caused translation issues.
+
+>**Note:** You *must* provide an `iconLabel` for `<ExternalHyperlink />` to ensure proper accessibility.  Our examples have been updated to reflect this change.
+
+**Before in v12**
 ```tsx
-//v12
 <ExternalHyperlink href="https://workday.com">
   External Hyperlink
 </ExternalHyperlink>
-
-//v13
-<ExternalHyperlink href="https://workday.com" iconLabel='Open link in new window'>
+```
+**After in v13**
+```tsx
+<ExternalHyperlink href="https://workday.com" iconLabel='Navigate to Workday'>
   External Hyperlink
 </ExternalHyperlink>
 ```
 
-### Pill
+### Pill (Preview) 🚨
 
-**PRs:** [#3104](https://github.com/Workday/canvas-kit/pull/3104)
+**PR:** [#3104](https://github.com/Workday/canvas-kit/pull/3104)
 
 A few changes have been made to `Pill` to ensure proper accessibility and styles.
 
 - The border color on hover has been updated from `licorice400` to `licorice500` to match our design specs.
-- We've removed extra elements and leverage [flex box}(https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Flexbox) to ensure only the label receives overflow styles. When `maxWidth` is set, it is set on the parent `<Pill/>` element and the child elements will be styled accordingly. Before v13, `maxWidth` wasn't calculating the width of all its elements and wasn't a true pixel value.
+- We've removed extra elements and now use [flex box](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Flexbox) to ensure only the label receives text overflow styles when needed.
+- Setting `maxWidth` on the parent `<Pill/>` element now styles the child elements correctly. Before v13, `maxWidth` wasn't calculating the width of all its elements and wasn't a true pixel value.
 
 ##### Breaking Changes
 
 - `maxWidth` has been removed from the `usePillModel`. This config was used to style sub-components. With the refactor to use `data-part` and [stencils](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--docs#create-stencil), it is no longer needed on the model. You can still apply `maxWidth` on the parent `<Pill>` element and the child elements will be styled accordingly.
 - `<Pill.Icon/>` no longer has a default `aria-label="add"`. You *must* provide an `aria-label` for `<Pill.Icon/>` to ensure proper accessibility. Our examples have been updated to reflect this change.
 - `<Pill.IconButton/>` no longer has a default `aria-label="remove"`. You *must* provide an `aria-label` for `<Pill.IconButton/>` to ensure proper accessibility. Our examples have been updated to reflect this change.
-- `<Pill.Label/>` is a *required* element when using other sub-components like `<Pill.Icon/>` to ensure that the label truncates correctly.
+- `<Pill.Label/>` is a *required* element when using other subcomponents such as `<Pill.Icon/>` to ensure that the label truncates correctly.
 
-### Tabs
+**Before in v12**
+```tsx
+import {Pill, usePillModel} from '@workday/canvas-kit-preview-react/pill';
+
+const model = usePillModel({
+  maxWidth: 200,
+});
+
+<Pill model={model}>
+  <Pill.Icon />
+  Shoes
+</Pill>
+```
+
+**After in v13**
+```tsx
+import {Pill} from '@workday/canvas-kit-preview-react/pill';
+
+<Pill maxWidth={200}>
+  <Pill.Icon aria-label='Add Shoes' />
+  <Pill.Label>Shoes</Pill.Label>
+</Pill>
+
+<Pill maxWidth={200}>
+  <Pill.Label>Shirts</Pill.Label>
+  <Pill.IconButton aria-label='Remove Shirts' />
+</Pill>
+```
+
+> 🤖 The codemod will handle the change adding `<Pill.Label/>` if `<Pill.Icon/>` or `<Pill.IconButton/>` is being used.
+
+### Tabs 💅
 
 **PR:** [#3119](https://github.com/Workday/canvas-kit/pull/3119)
 
 - The `disabled` icon color has been updated to use `system.color.fg.disabled`. This has made the icon darker for better contrast.
 
-**Note:** There should be no developer impact and the visual changes are safe to accept.
+> **Note:** There should be no developer impact, and the visual changes are safe to accept.
 
-## Brand Refresh
+## Brand Refresh ⚡️
 
 ### Logo Updates
 
@@ -208,8 +242,8 @@ We've removed the outdated Dub Logos in Main and promoted the new logos that wer
 | wdayLogoBlue | wdayLogoPrimary |
 | wdayLogoWhite | wdayLogoReversed |
 
+**Before in v12**
 ```tsx
-// In v12
 // Importing from Main common
 import {dubLogoBlue} from "@workday/canvas-kit-react/common"
 
@@ -219,31 +253,21 @@ import {dubLogoBlue} from "@workday/canvas-kit-react/common"
 import {dubLogoPrimary} from "@workday/canvas-kit-preview-react/common"
 
 <div dangerouslySetInnerHTML={__html: dubLogoPrimary} />
-
-// In v13
+```
+**After in v13**
+```tsx
 // New logos have been promoted to Main common AND renamed
 import {dubLogoPrimary} from "@workday/canvas-kit-preview-react/common"
 
 <div dangerouslySetInnerHTML={__html: dubLogoPrimary} />
 ```
 
-🤖 The codemod will handle the change of `'dubLogoBlue', 'dubLogoWhite', 'wdayLogoBlue', 'wdayLogoWhite'` to
-`'dubLogoPrimary', 'dubLogoReversed', 'wdayLogoPrimary', 'wdayLogoReversed'` as shown above in the table. It will also handle
-updating your imports.
-
-From:
-```tsx
-import {dubLogoBlue} from "@workday/canvas-kit-react/common"
-```
-To:
-```tsx
-import {dubLogoPrimary} from "@workday/canvas-kit-react/common"
-```
+> 🤖 The codemod will handle the renaming all the imports and updating the import path.
 
 
 ## Infrastructure
 
-### Supporting `react-jsx`
+### Supporting `react-jsx` 🚨
 
 We've updated the `jsx` flag in our `tsconfig` to `react-jsx`. As part of this change, we've also updated our peer dependencies for our packages to a minimum version of `react@17.0.0`. This change is to provide support for modern technologies like `vite` and ES modules.
 
@@ -251,11 +275,17 @@ We've updated the `jsx` flag in our `tsconfig` to `react-jsx`. As part of this c
 
 If you're using `react@16.x.x`, you'll need to upgrade to `react@17.x.x` to use Canvas Kit v13.
 
->**Note:** You'll need to update the way `jsx` transpiles. The automatic runtime feature, enabled through the `@babel/preset-react` preset with the `runtime: "automatic"` option, handles the importing of functions that JSX transpiles to.
+> **Note:** You'll need to update the way `jsx` transpiles. The automatic runtime feature, enabled through the `@babel/preset-react` preset with the `runtime: "automatic"` option. This handles the importing of functions that JSX transpiles to. For more information please [view Babel's docs](https://babeljs.io/docs/babel-preset-react#react-automatic-runtime) on automatic runtime for React.
 
-```sh
 
 ## Troubleshooting
+
+- When upgrading to the latest major version of Canvas Kit, all related Canvas Kit packages should be updated at the same time:
+	- `"@workday/canvas-kit-react": "^12.5.6"` -> `"@workday/canvas-kit-react": "^13.0.0"`
+	- `"@workday/canvas-kit-styling": "^12.5.6"` -> `"@workday/canvas-kit-styling": "^13.0.0"`
+	- `"@workday/canvas-kit-preview-react": "^12.5.6"` -> `"@workday/canvas-kit-preview-react": "^13.0.0"`
+	- `"@workday/canvas-kit-labs-react": "^12.5.6"` -> `"@workday/canvas-kit-labs-react": "^13.0.0"`
+- Our components rely on the `@workday/canvas-tokens-web` package which provides our CSS variables and ensures the correct styling of our components. Make sure to upgrade to the latest version of Canvas Tokens Web and install it correctly. For more information, [view our docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
 
 ## Glossary
 
