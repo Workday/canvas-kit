@@ -142,7 +142,6 @@ export const SidePanel = createComponent('section')({
 
     const handleAnimationEnd = (event: React.TransitionEvent<HTMLDivElement>) => {
       if (event.propertyName === 'width') {
-        console.log('animation end');
         if (state === 'expanding') {
           setState('expanded');
         } else if (state === 'collapsing') {
@@ -158,7 +157,7 @@ export const SidePanel = createComponent('section')({
         setState('collapsing');
       }
     };
-    console.log(state);
+
     return (
       <Element
         ref={ref}
@@ -166,7 +165,6 @@ export const SidePanel = createComponent('section')({
         {...handleCsProp(elemProps, [
           panelStencil({
             expanded: expanded,
-
             variant: variant,
             expandedWidth:
               typeof expandedWidth === 'number' ? px2rem(expandedWidth) : expandedWidth,
