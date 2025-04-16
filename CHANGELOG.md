@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.6.6](https://github.com/Workday/canvas-kit/releases/tag/v12.6.6) (2025-04-16)
+
+### Utils
+
+- fix: Ensure mergeProps merges class names ([#3255](https://github.com/Workday/canvas-kit/pull/3255)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v11.2.16](https://github.com/Workday/canvas-kit/releases/tag/v11.2.16) (2025-04-16)
+
+### Utils
+
+- fix: Ensure mergeProps merges class names ([#3255](https://github.com/Workday/canvas-kit/pull/3255)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v11.2.15](https://github.com/Workday/canvas-kit/releases/tag/v11.2.15) (2025-04-11)
 ## [v12.6.5](https://github.com/Workday/canvas-kit/releases/tag/v12.6.5) (2025-04-11)
 
 ### Documentation

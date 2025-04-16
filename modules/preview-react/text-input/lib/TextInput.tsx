@@ -35,7 +35,7 @@ export const TextInput = createContainer('div')({
           elemProps,
           formFieldStencil({
             grow,
-            orientation: orientation === 'horizontal' ? 'horizontalStart' : orientation,
+            orientation: orientation,
             error: model.state.error,
             required: model.state.isRequired,
           })

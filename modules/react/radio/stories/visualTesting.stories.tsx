@@ -90,7 +90,7 @@ export const RadioStates = () => (
         columnProps={[
           {
             label: 'Left Label',
-            props: {label: 'Contact', orientation: 'horizontal'},
+            props: {label: 'Contact', orientation: 'horizontalStart'},
           },
           {
             label: 'Top Label',
@@ -101,15 +101,17 @@ export const RadioStates = () => (
         {props => (
           <FormField as="fieldset" {...props}>
             <FormField.Label>{props.label}</FormField.Label>
-            {props.orientation === 'horizontal' ? (
-              <FormField.Container>
+            {props.orientation === 'horizontalStart' ? (
+              <FormField.Field>
                 {testGroup}
                 {props.error && <FormField.Hint>hintText</FormField.Hint>}
-              </FormField.Container>
+              </FormField.Field>
             ) : (
               <>
-                {testGroup}
-                {props.error && <FormField.Hint>hintText</FormField.Hint>}
+                <FormField.Field>
+                  {testGroup}
+                  {props.error && <FormField.Hint>hintText</FormField.Hint>}
+                </FormField.Field>
               </>
             )}
           </FormField>
@@ -150,7 +152,7 @@ export const RadioStates = () => (
 
     <h3>RadioGroup (wrapping)</h3>
     <div style={{maxWidth: 480}}>
-      <FormField orientation="horizontal" as="fieldset">
+      <FormField orientation="horizontalStart" as="fieldset">
         <FormField.Label as="legend">
           Really long label. Really long label. Really long label. Really long label. Really long
           label. Really long label.

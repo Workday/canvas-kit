@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {Pill, pillCountStencil, pillStencil} from '@workday/canvas-kit-preview-react/pill';
 
 import {createStencil} from '@workday/canvas-kit-styling';
