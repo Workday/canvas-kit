@@ -31,22 +31,32 @@ export const sidePanelToggleButtonStencil = createStencil({
       collapsing: {
         margin: 0,
         transform: `scaleX(1)`,
+        ':dir(rtl)': {
+          transform: `scaleX(-1)`,
+        },
       },
       collapsed: {
         margin: 'auto',
         insetInlineStart: 0,
         insetInlineEnd: 0,
         transform: `scaleX(1)`,
+        ':dir(rtl)': {
+          transform: `scaleX(-1)`,
+        },
       },
-
       expanded: {
         margin: 0,
-
         transform: `scaleX(-1)`,
+        ':dir(rtl)': {
+          transform: `scaleX(1)`,
+        },
       },
       expanding: {
         margin: 0,
         transform: `scaleX(-1)`,
+        ':dir(rtl)': {
+          transform: `scaleX(1)`,
+        },
       },
     },
   },
