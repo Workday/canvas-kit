@@ -3,10 +3,11 @@ import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {useSelectCard} from './hooks/useSelectCard';
 import {useSelectModel} from './hooks/useSelectModel';
 import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {menuCardStencil} from '@workday/canvas-kit-react/menu';
 
 export const selectCardStencil = createStencil({
   base: {
-    maxHeight: px2rem(300),
+    [menuCardStencil.vars.maxHeight]: px2rem(300),
   },
 });
 
