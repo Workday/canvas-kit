@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {DeleteButton} from '@workday/canvas-kit-react/button';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {trashIcon} from '@workday/canvas-system-icons-web';
