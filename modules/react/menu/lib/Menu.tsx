@@ -9,6 +9,8 @@ import {MenuItem} from './MenuItem';
 import {MenuCard} from './MenuCard';
 import {MenuList} from './MenuList';
 import {MenuDivider} from './MenuDivider';
+import {MenuOption} from './MenuOption';
+import {MenuGroup} from './MenuGroup';
 
 export interface MenuProps {
   /**
@@ -99,6 +101,16 @@ export const Menu = createContainer()({
      * the model.
      */
     Item: MenuItem,
+    Group: MenuGroup,
+    /**
+     * A `Menu.Option` is similar to the `Menu.Item`, but has a `role=option` and works with
+     * `aria-activedescendant` and is selectable with a selected checkmark. It adds the
+     * `aria-selected="true/false"` attribute. `Menu.Option` requires much more accessibility
+     * behavior composed into the `Menu.Target` and `Menu.List` component. The `Combobox` and
+     * `Select` components make use of the `Menu.Option`. See those components for a better idea of
+     * how behavior is composed.
+     */
+    Option: MenuOption,
     Divider: MenuDivider,
     /**
      * A `Menu.TargetContext` is the same as a {@link MenuTarget Menu.Target}, except it adds a
