@@ -11,7 +11,7 @@ const baseStyles = {
 
 export const Background = () => {
   return (
-    <>
+    <div>
       <Box backgroundColor="cinnamon300" {...baseStyles}>
         Cinnamon 300
       </Box>
@@ -21,6 +21,6 @@ export const Background = () => {
       <Box backgroundColor="blueberry300" {...baseStyles}>
         Blueberry 300
       </Box>
-    </>
+    </div>
   );
 };
