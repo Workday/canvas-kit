@@ -1,11 +1,9 @@
-import React from 'react';
-
 import {buttonStencil, PrimaryButton, PrimaryButtonProps} from '@workday/canvas-kit-react/button';
 import {Grid} from '@workday/canvas-kit-react/layout';
 import {plusIcon} from '@workday/canvas-system-icons-web';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {createStencil, createStyles, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const customContainer = createStyles({
