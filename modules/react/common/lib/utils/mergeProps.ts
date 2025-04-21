@@ -76,6 +76,9 @@ export function mergeProps<const T extends object, const S extends object>(
         // @ts-ignore Typescript complains that key might not exist in `targetProps` since we're iterating over sourceProps. At runtime this doesn't matter
       } else if (targetProps[key] === null) {
         // target props is trying to disable the prop for whatever reason. Consider `null` a "remove this prop"
+      } else if (key === 'className' && targetProps.hasOwnProperty(key)) {
+        // @ts-ignore merging class names
+        returnProps[key] = `${targetProps[key]} ${sourceProps[key]}`;
       } else {
         // @ts-ignore TS has more object constraint complaints that aren't useful here
         returnProps[key] = sourceProps[key];
