@@ -10,7 +10,7 @@ const baseStyles = {
 };
 
 export const Depth = () => (
-  <>
+  <div>
     <Box backgroundColor="cinnamon300" depth={1} {...baseStyles}>
       Depth 1
     </Box>
@@ -20,5 +20,5 @@ export const Depth = () => (
     <Box backgroundColor="blueberry300" depth={3} {...baseStyles}>
       Depth 3
     </Box>
-  </>
+  </div>
 );
