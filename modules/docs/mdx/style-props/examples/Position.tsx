@@ -10,7 +10,7 @@ const baseStyles = {
 
 export const Position = () => {
   return (
-    <>
+    <div>
       <Box
         backgroundColor="cinnamon300"
         left={0}
@@ -44,6 +44,6 @@ export const Position = () => {
       >
         Right
       </Box>
-    </>
+    </div>
   );
 };
