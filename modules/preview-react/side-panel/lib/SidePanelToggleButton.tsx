@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {createComponent, ExtractProps, useIsRTL} from '@workday/canvas-kit-react/common';
+import {createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {transformationImportIcon} from '@workday/canvas-system-icons-web';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
