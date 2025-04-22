@@ -1,7 +1,7 @@
 export {useMenuModel} from './lib/useMenuModel';
 export {Menu} from './lib/Menu';
 
-export {useMenuCard} from './lib/MenuCard';
+export {useMenuCard, menuCardStencil} from './lib/MenuCard';
 export {useMenuItem, menuItemStencil, StyledMenuItem} from './lib/MenuItem';
 export {useMenuOption} from './lib/MenuOption';
 export {useMenuList, menuListStencil} from './lib/MenuList';
