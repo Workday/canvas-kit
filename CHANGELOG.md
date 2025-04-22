@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.6.8](https://github.com/Workday/canvas-kit/releases/tag/v12.6.8) (2025-04-22)
+
+### Components
+
+- fix: PopupStack.contains recursively determines ownership ([#3262](https://github.com/Workday/canvas-kit/pull/3262)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  This should not negatively impact anyone. If your application relies on the broken functionality of `useAlwaysCloseOnOutsideClick`, your application may behave differently. If you have a workaround, the workaround will no longer be necessary.
+
+
 ## [v12.6.7](https://github.com/Workday/canvas-kit/releases/tag/v12.6.7) (2025-04-22)
 
 ### Documentation
