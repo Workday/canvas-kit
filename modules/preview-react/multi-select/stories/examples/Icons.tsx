@@ -21,7 +21,7 @@ const items = [
 export const Icons = () => {
   return (
     <MultiSelect items={items}>
-      <FormField orientation="horizontal">
+      <FormField orientation="horizontalStart">
         <FormField.Label>Controls</FormField.Label>
         <FormField.Input
           as={MultiSelect.Input}

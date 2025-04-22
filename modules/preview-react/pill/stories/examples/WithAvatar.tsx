@@ -3,24 +3,30 @@ import React from 'react';
 import {Pill} from '@workday/canvas-kit-preview-react/pill';
 // @ts-ignore: Cannot find module error
 import testAvatar from './test-avatar.png';
-import {Flex, Box} from '@workday/canvas-kit-react/layout';
 import {BodyText} from '@workday/canvas-kit-react/text';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const flexStyles = createStyles({
+  display: 'flex',
+  gap: system.space.x2,
+});
 
 export const WithAvatar = () => {
   const [text, setText] = React.useState('');
   return (
-    <Box>
-      <Flex gap="xxs">
+    <div>
+      <div className={flexStyles}>
         <Pill onClick={() => setText('The first pill is clicked!')}>
-          <Pill.Avatar url={testAvatar} />
-          Regina Skeltor
+          <Pill.Avatar altText="Avatar" url={testAvatar} />
+          <Pill.Label>Regina Skeltor</Pill.Label>
         </Pill>
-        <Pill onClick={() => setText('The second pill is clicked!')} disabled maxWidth={50}>
-          <Pill.Avatar url={testAvatar} />
-          Regina Skeltor
+        <Pill disabled>
+          <Pill.Avatar altText="Avatar" />
+          <Pill.Label>Regina Skeltor</Pill.Label>
         </Pill>
-      </Flex>
+      </div>
       <BodyText size="medium">{text}</BodyText>
-    </Box>
+    </div>
   );
 };

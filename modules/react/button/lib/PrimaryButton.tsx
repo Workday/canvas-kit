@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {createStencil, cssVar} from '@workday/canvas-kit-styling';

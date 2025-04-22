@@ -1,6 +1,3 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import {jsx} from '@emotion/react';
 import React from 'react';
 import {TextArea} from '@workday/canvas-kit-preview-react/text-area';
 import {useThemedRing} from '@workday/canvas-kit-react/common';
@@ -28,7 +25,7 @@ export const Alert = () => {
   return (
     <TextArea orientation="vertical">
       <TextArea.Label>Add a comment</TextArea.Label>
-      <TextArea.Field css={alertStyles} onChange={handleChange} value={value} />
+      <TextArea.Field cs={alertStyles} onChange={handleChange} value={value} />
       <TextArea.Hint paddingTop={space.xxs}>
         <strong>Character Limit: </strong>
         <Text color={hintColor}>{10 - value.length} Left</Text>

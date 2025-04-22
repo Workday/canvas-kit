@@ -1,4 +1,3 @@
-import * as React from 'react';
 import * as h from '../helpers';
 // Top Examples
 import {
