@@ -121,10 +121,11 @@ describe('PopupStack', () => {
     it('should return true when the owning element is the eventTarget', () => {
       const owner = document.createElement('div');
       const element = document.createElement('div');
+      const eventTarget = owner;
 
       PopupStack.add({element, owner});
 
-      expect(PopupStack.contains(element, owner)).toEqual(true);
+      expect(PopupStack.contains(element, eventTarget)).toEqual(true);
     });
 
     it('should return true when the owning element contains the eventTarget', () => {
@@ -136,6 +137,47 @@ describe('PopupStack', () => {
       PopupStack.add({element, owner});
 
       expect(PopupStack.contains(element, eventTarget)).toEqual(true);
+    });
+
+    it('should return true when the popup element owns another popup', () => {
+      const target1 = document.createElement('div');
+      const popup1 = document.createElement('div');
+
+      const target2 = document.createElement('div');
+      popup1.appendChild(target2);
+      const popup2 = document.createElement('div');
+
+      const eventTarget = document.createElement('div');
+      popup2.appendChild(eventTarget);
+
+      PopupStack.add({element: popup1, owner: target1});
+      PopupStack.add({element: popup2, owner: target2});
+
+      expect(PopupStack.contains(popup2, eventTarget)).toEqual(true);
+      expect(PopupStack.contains(popup1, eventTarget)).toEqual(true);
+    });
+
+    it('should return true when the popup element owns another popup that owns another popup', () => {
+      const target1 = document.createElement('div');
+      const target2 = document.createElement('div');
+      const target3 = document.createElement('div');
+
+      const popup1 = document.createElement('div');
+      popup1.appendChild(target2);
+      const popup2 = document.createElement('div');
+      popup2.appendChild(target3);
+      const popup3 = document.createElement('div');
+
+      const eventTarget = document.createElement('div');
+      popup3.appendChild(eventTarget);
+
+      PopupStack.add({element: popup1, owner: target1});
+      PopupStack.add({element: popup2, owner: target2});
+      PopupStack.add({element: popup3, owner: target3});
+
+      expect(PopupStack.contains(popup3, eventTarget)).toEqual(true);
+      expect(PopupStack.contains(popup2, eventTarget)).toEqual(true);
+      expect(PopupStack.contains(popup1, eventTarget)).toEqual(true);
     });
 
     it('should return false if the element is not in the stack', () => {

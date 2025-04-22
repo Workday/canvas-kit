@@ -289,7 +289,7 @@ export const useCursorListModel = createModelHook({
     /**
      * Initial cursor position. If not provided, the cursor will point to the first item in the list
      */
-    initialCursorId: '',
+    initialCursorId: '' as string | string[],
     /**
      * If this is set it will cause a wrapping of a list that will turn it into a grid
      * @default 0

@@ -369,26 +369,39 @@ export const PopupStack = {
     if (stack._adapter?.contains) {
       return stack._adapter.contains(element, eventTarget);
     }
+
+    // find the stack item that contains the event target
     const item = stack.items.find(i => i.element === element);
-
-    const containsOwnerOfAnotherPopupTargeted = stack.items.some(currentItem => {
-      return (
-        item?.element.contains(currentItem.owner || null) &&
-        (eventTarget === currentItem.owner ||
-          currentItem.owner?.contains(eventTarget) ||
-          currentItem.element.contains(eventTarget))
-      );
-    });
-
     if (item) {
-      return (
-        containsOwnerOfAnotherPopupTargeted ||
-        eventTarget === item.owner ||
-        item.owner?.contains(eventTarget) ||
-        element.contains(eventTarget)
-      );
+      return ownsElement(item, eventTarget);
     }
     return false;
+
+    function ownsElement(item: PopupStackItem, eventTarget: HTMLElement, depth = 0): boolean {
+      if (depth > 30) {
+        // Prevent infinite loop
+        return false;
+      }
+
+      // See if the event target is inside the popup element or the owner element
+      if (
+        item.element === eventTarget ||
+        item.owner === eventTarget ||
+        item.element.contains(eventTarget) ||
+        item.owner?.contains(eventTarget)
+      ) {
+        return true;
+      }
+
+      // Find the popup that has an owner element inside this popup
+      const owningPopup = stack.items.find(i => i.owner && item.element.contains(i.owner));
+      if (owningPopup) {
+        // Check if the event target is inside the owning popup
+        return ownsElement(owningPopup, eventTarget, depth + 1);
+      }
+
+      return false;
+    }
   },
 
   /**
