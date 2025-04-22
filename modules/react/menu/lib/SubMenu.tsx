@@ -49,7 +49,6 @@ const useSubMenuTargetItem = composeHooks(
   subModelHook(model => (model as any).UNSTABLE_parentModel!, useMenuItemFocus),
   subModelHook(model => (model as any).UNSTABLE_parentModel!, useMenuItemArrowReturn),
   subModelHook(model => (model as any).UNSTABLE_parentModel!, useListItemRovingFocus),
-  // useListItemRovingFocus,
   createElemPropsHook(useMenuModel)((model, ref) => {
     const elementRef = useForkRef(ref, model.state.targetRef);
     return {
@@ -57,7 +56,6 @@ const useSubMenuTargetItem = composeHooks(
     };
   }),
   subModelHook(model => (model as any).UNSTABLE_parentModel!, useListItemRegister),
-  // useListItemRegister,
   createElemPropsHook(useMenuModel)(model => {
     return {
       onMouseDown(event: React.MouseEvent) {
