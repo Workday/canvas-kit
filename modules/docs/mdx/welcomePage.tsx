@@ -159,9 +159,15 @@ export const WelcomePage = () => {
           To get started using Canvas Kit React first add or install the module to your existing
           React project
         </Text>
-        <InstallBlock command="yarn add" packageName="@workday/canvas-kit-react" />
+        <InstallBlock
+          command="yarn add"
+          packageName="@workday/canvas-kit-react @workday/canvas-tokens-web"
+        />
         or
-        <InstallBlock command="npm install" packageName="@workday/canvas-kit-react" />
+        <InstallBlock
+          command="npm install"
+          packageName="@workday/canvas-kit-react @workday/canvas-tokens-web"
+        />
       </div>
     </div>
   );
