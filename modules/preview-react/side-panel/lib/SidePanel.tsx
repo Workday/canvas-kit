@@ -165,7 +165,7 @@ export const SidePanel = createComponent('section')({
         {...handleCsProp(elemProps, [
           panelStencil({
             expanded,
-            variant: variant,
+            variant,
             expandedWidth:
               typeof expandedWidth === 'number' ? px2rem(expandedWidth) : expandedWidth,
             collapsedWidth:
