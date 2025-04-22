@@ -28,22 +28,83 @@ implement user experiences consistent with
 To get started using Canvas kit React first add or install the module to your existing React project
 
 ```sh
-yarn add @workday/canvas-kit-react
+yarn add @workday/canvas-kit-react @workday/canvas-tokens-web
 ```
 
 or
 
 ```sh
-npm install @workday/canvas-kit-react
+npm install @workday/canvas-kit-react @workday/canvas-tokens-web
 ```
+
+> **Note:** If your application does not already provide `Roboto` as a font, you can install
+> `@workday/canvas-kit-react-fonts`. The example below shows how to inject the fonts, but you can
+> omit this if you're already loading fonts.
 
 **Usage**
 
-```tsx
-import * as React from 'react';
-import {SecondaryButton} from '@workday/canvas-kit-react/button';
+To ensure fonts are loaded correctly, update your root `index.js` file.
 
-<SecondaryButton>Button Label</SecondaryButton>;
+```jsx
+import {createRoot} from 'react-dom/client';
+import {injectGlobal} from '@emotion/css';
+import {fonts} from '@workday/canvas-kit-react-fonts';
+import {system} from '@workday/canvas-tokens-web';
+import {cssVar} from '@workday/canvas-kit-styling';
+
+import '@workday/canvas-tokens-web/css/base/_variables.css';
+import '@workday/canvas-tokens-web/css/brand/_variables.css';
+import '@workday/canvas-tokens-web/css/system/_variables.css';
+
+import {App} from './App';
+
+injectGlobal({
+  ...fonts,
+  'html, body': {
+    fontFamily: cssVar(system.fontFamily.default),
+    margin: 0,
+    minHeight: '100vh',
+  },
+  '#root, #root < div': {
+    minHeight: '100vh',
+    ...system.type.body.small,
+  },
+});
+
+const container = document.getElementById('root')!;
+const root = createRoot(container);
+root.render(<App />);
+```
+
+The in your `App.js` you can set a global theme.
+
+```jsx
+import {
+  CanvasProvider,
+  ContentDirection,
+  PartialEmotionCanvasTheme,
+  useTheme,
+} from '@workday/canvas-kit-react/common';
+
+export const App = () => {
+  // useTheme is filling in the Canvas theme object if any keys are missing
+  const canvasTheme: PartialEmotionCanvasTheme = useTheme({
+    canvas: {
+      // Switch to `ContentDirection.RTL` to change direction
+      direction: ContentDirection.LTR,
+    },
+  });
+
+  return (
+    <CanvasProvider theme={canvasTheme}>
+      <>
+        <main>
+          <p>Get Started With Canvas Kit</p>
+        </main>
+      </>
+    </CanvasProvider>
+  );
+};
 ```
 
 ## Reporting a Bug
