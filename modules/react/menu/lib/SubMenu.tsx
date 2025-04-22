@@ -206,5 +206,4 @@ export const SubMenu = createSubcomponent()({
   );
   const Context = useMenuModel.Context;
   return <Context.Provider value={model}>{children}</Context.Provider>;
-  // return <>{children}</>;
 });
