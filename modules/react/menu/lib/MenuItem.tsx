@@ -169,9 +169,7 @@ export const useMenuItemArrowReturn = createElemPropsHook(useMenuModel)(model =>
   return {
     onKeyDown(event: React.KeyboardEvent) {
       const styles = getComputedStyle(event.currentTarget);
-      console.log('event.key', event.key, styles.direction, event.currentTarget);
       if (event.key === 'ArrowLeft' && styles.direction === 'ltr' && model.UNSTABLE_parentModel) {
-        console.log('hide');
         model.events.hide(event);
       }
     },

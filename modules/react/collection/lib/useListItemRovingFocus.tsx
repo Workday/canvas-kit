@@ -50,11 +50,6 @@ export const useListItemRovingFocus = createElemPropsHook(useListModel)(
         model.events.goTo({id: model.state.items[0].id});
       }
     }, [model.state.cursorId, model.state.items, model.events]);
-    console.log(
-      'useListItemRovingFocus',
-      model.state.cursorId,
-      model.state.cursorId === elemProps['data-id']
-    );
 
     return {
       onKeyDown(event: React.KeyboardEvent<HTMLElement>) {

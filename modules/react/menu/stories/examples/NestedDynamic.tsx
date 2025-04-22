@@ -67,11 +67,7 @@ export const NestedDynamic = () => {
       items={items}
       id="first-menu"
       getTextValue={item => item.label}
-      onHide={event => {
-        console.log('onHide', event);
-      }}
       onSelect={data => {
-        console.log('Selected:', data);
         setSelected(data.id);
       }}
     >

@@ -9,11 +9,7 @@ export const Nested = () => {
   return (
     <Menu
       id="first-menu"
-      onHide={event => {
-        console.log('onHide', event);
-      }}
       onSelect={data => {
-        console.log('Selected:', data);
         setSelected(data.id);
       }}
     >
