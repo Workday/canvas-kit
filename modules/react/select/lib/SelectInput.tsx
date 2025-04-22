@@ -86,7 +86,7 @@ export const SelectInput = createSubcomponent(TextInput)({
           as={Element}
           placeholder={placeholder}
           {...selectInputStencil.parts.visualInput}
-          {...handleCsProp(elemProps)}
+          {...elemProps}
         />
         <InputGroup.InnerEnd {...selectInputStencil.parts.caretContainer}>
           <SystemIcon {...selectInputStencil.parts.caret} icon={caretDownSmallIcon} />
