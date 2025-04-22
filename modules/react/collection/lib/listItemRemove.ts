@@ -1,3 +1,4 @@
+import {isCursor} from './useCursorListModel';
 import {useSelectionListModel} from './useSelectionListModel';
 
 export const listItemRemove = (
@@ -12,7 +13,7 @@ export const listItemRemove = (
   const index = model.state.items.findIndex(item => item.id === model.state.cursorId);
   const nextIndex = index === model.state.items.length - 1 ? index - 1 : index + 1;
   const nextId = model.state.items[nextIndex]?.id;
-  if (nextId && model.state.cursorId === id) {
+  if (nextId && isCursor(model.state, id)) {
     // We're removing the currently focused item. Focus next item
     model.events.goTo({id: nextId});
   }

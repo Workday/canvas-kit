@@ -14,6 +14,7 @@ import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-ki
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {
+  isCursor,
   useListItemRegister,
   useListItemRovingFocus,
   useListItemSelect,
@@ -183,13 +184,14 @@ export const useMenuItemFocus = createElemPropsHook(useMenuModel)(
     // focus on the item with the cursor
     React.useLayoutEffect(() => {
       if (model.state.mode === 'single') {
-        if (model.state.cursorId && model.state.cursorId === id) {
+        if (isCursor(model.state, id)) {
           // delay focus changes to allow PopperJS to position
           requestAnimationFrame(() => {
             localRef.current?.focus();
           });
         }
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id, localRef, model.state.cursorId, model.state.mode]);
     return {
       ref: elementRef,

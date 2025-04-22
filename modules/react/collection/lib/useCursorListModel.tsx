@@ -145,8 +145,10 @@ export const getCursor = (state: NavigationInput['state']): string =>
 /**
  * Check if the provided id is the current cursor id of a Collection model's state.
  */
-export const isCursor = (state: NavigationInput['state'], id: string): boolean =>
-  typeof state.cursorId === 'string' ? state.cursorId === id : state.cursorId.includes(id);
+export const isCursor = (state: NavigationInput['state'], id?: string): boolean =>
+  state.cursorId && typeof state.cursorId === 'string'
+    ? state.cursorId === id
+    : state.cursorId.includes(id as string);
 
 export const getWrappingOffsetItem =
   (offset: number) =>

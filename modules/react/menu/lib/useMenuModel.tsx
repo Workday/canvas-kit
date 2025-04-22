@@ -51,5 +51,11 @@ export const useMenuModel = createModelHook({
     ...popup.events,
   };
 
-  return {...list, ...popup, state, events, UNSTABLE_parentModel: config.UNSTABLE_parentModel};
+  return {
+    ...list,
+    ...popup,
+    state,
+    events,
+    UNSTABLE_parentModel: config.UNSTABLE_parentModel as ReturnType<typeof useListModel>,
+  };
 });

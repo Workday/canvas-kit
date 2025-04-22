@@ -1,7 +1,7 @@
 import React from 'react';
 import {useIsRTL, createElemPropsHook} from '@workday/canvas-kit-react/common';
 
-import {getCursor} from './useCursorListModel';
+import {getCursor, isCursor} from './useCursorListModel';
 import {keyboardEventToCursorEvents} from './keyUtils';
 import {focusOnCurrentCursor} from './focusOnCurrentCursor';
 import {useListModel} from './useListModel';
@@ -21,7 +21,7 @@ import {useListModel} from './useListModel';
 ```
  */
 export const useListItemRovingFocus = createElemPropsHook(useListModel)(
-  (model, _ref, elemProps: {'data-id'?: string; 'data-has-children'?: boolean} = {}) => {
+  (model, _ref, elemProps: {'data-id'?: string} = {}) => {
     // Create a ref out of state. We don't want to watch state on unmount, so we use a ref to get the
     // current value at the time of unmounting. Otherwise, `state.items` would be a cached value of an
     // empty array
@@ -63,11 +63,10 @@ export const useListItemRovingFocus = createElemPropsHook(useListModel)(
         model.events.goTo({id: elemProps['data-id']!});
       },
       'data-focus-id': `${model.state.id}-${elemProps['data-id']}`,
-      className:
-        model.state.cursorId && model.state.cursorId === elemProps['data-id'] ? 'focus' : undefined,
+      className: isCursor(model.state, elemProps['data-id']) ? 'focus' : undefined,
       tabIndex: !model.state.cursorId
         ? 0 // cursor isn't known yet, be safe and mark this as focusable
-        : !!elemProps['data-id'] && model.state.cursorId === elemProps['data-id']
+        : !!elemProps['data-id'] && isCursor(model.state, elemProps['data-id'])
         ? 0 // A name is known and cursor is here
         : -1, // A name is known an cursor is somewhere else
     };

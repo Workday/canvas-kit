@@ -27,7 +27,7 @@ export const useComboboxInput = composeHooks(
           model.state.UNSTABLE_virtual.scrollToIndex(item.index);
         } else {
           const menuItem = document.querySelector(
-            `[id="${model.state.id}-list"] [data-id="${model.state.cursorId}"]`
+            `[id="${model.state.id}-list"] [data-id="${getCursor(model.state)}"]`
           );
           if (menuItem) {
             requestAnimationFrame(() => {
@@ -44,7 +44,7 @@ export const useComboboxInput = composeHooks(
     return {
       onKeyDown(event: React.KeyboardEvent) {
         if (event.key === 'Enter' && !event.metaKey && model.state.visibility === 'visible') {
-          const element = document.querySelector(`[data-id="${model.state.cursorId}"]`);
+          const element = document.querySelector(`[data-id="${getCursor(model.state)}"]`);
           if (element && element?.getAttribute('aria-disabled') !== 'true') {
             model.events.select({id: getCursor(model.state)});
             if (model.state.mode === 'single') {

@@ -96,8 +96,6 @@ export const useListItemRegister = createElemPropsHook(useListModel)(
       ref: elementRef,
       'data-id': localId,
       disabled: elemProps.disabled || state.nonInteractiveIds.includes(localId) ? true : undefined,
-      // item: null, // remove `item` from prop list
-      // virtual: null, // remove `virtual` from prop list
       'aria-setsize': virtual ? state.UNSTABLE_virtual.totalSize : undefined,
       'aria-posinset': virtual ? item!.index + 1 : undefined,
       style,

@@ -45,7 +45,7 @@ export const useSelectInput = composeHooks(
             const listboxId = localRef.current?.getAttribute('aria-controls');
             if (listboxId) {
               const menuItem = document.querySelector(
-                `[id="${listboxId}"] [data-id="${model.state.cursorId}"]`
+                `[id="${listboxId}"] [data-id="${getCursor(model.state)}"]`
               );
               if (menuItem) {
                 requestAnimationFrame(() => {
