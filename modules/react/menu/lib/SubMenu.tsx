@@ -45,7 +45,32 @@ export const SubMenuPopper = createSubcomponent('div')({
   );
 });
 
-const useSubMenuTargetItem = composeHooks(
+const useIntentTimer = (fn: Function, waitMs: number = 0): {start(): void; clear(): void} => {
+  const timer = React.useRef() as React.MutableRefObject<number | undefined>;
+
+  const start = () => {
+    timer.current = window.setTimeout(fn, waitMs);
+  };
+
+  const clear = () => {
+    window.clearTimeout(timer.current);
+    timer.current = undefined;
+  };
+
+  // be sure to clear our timeout
+  React.useEffect(() => {
+    return () => {
+      window.clearTimeout(timer.current);
+    };
+  }, [timer]);
+
+  return {
+    start,
+    clear,
+  };
+};
+
+export const useSubMenuTargetItem = composeHooks(
   subModelHook(model => (model as any).UNSTABLE_parentModel!, useMenuItemFocus),
   subModelHook(model => (model as any).UNSTABLE_parentModel!, useMenuItemArrowReturn),
   subModelHook(model => (model as any).UNSTABLE_parentModel!, useListItemRovingFocus),
@@ -57,11 +82,23 @@ const useSubMenuTargetItem = composeHooks(
   }),
   subModelHook(model => (model as any).UNSTABLE_parentModel!, useListItemRegister),
   createElemPropsHook(useMenuModel)(model => {
+    const currentTargetIdRef = React.useRef<string>();
+    const mouseEnterTimer = useIntentTimer(() => {
+      model.UNSTABLE_parentModel.events.goTo({id: currentTargetIdRef.current || ''});
+      model.events.show(event);
+    }, 300);
     return {
       onMouseDown(event: React.MouseEvent) {
-        model.UNSTABLE_parentModel!.events.goTo({id: event.currentTarget.getAttribute('data-id')!});
+        model.UNSTABLE_parentModel.events.goTo({id: event.currentTarget.getAttribute('data-id')!});
       },
-      onClick: (event: React.MouseEvent) => {
+      onMouseEnter(event: React.MouseEvent) {
+        currentTargetIdRef.current = event.currentTarget.getAttribute('data-id')!;
+        mouseEnterTimer.start();
+      },
+      onMouseLeave(event: React.MouseEvent) {
+        mouseEnterTimer.clear();
+      },
+      onClick(event: React.MouseEvent) {
         // If we're wrapping a target component that doesn't handle ref forwarding, update the
         // `state.targetRef` manually. This ensures that custom target components don't need to handle
         // ref forwarding since ref forwarding is only really needed to programmatically open popups
@@ -92,7 +129,7 @@ const useSubMenuTargetItem = composeHooks(
   })
 );
 
-const SubMenuTargetItem = createSubcomponent('button')({
+export const SubMenuTargetItem = createSubcomponent('button')({
   modelHook: useMenuModel,
   elemPropsHook: useSubMenuTargetItem,
 })(({children, ...elemProps}, Element) => {
