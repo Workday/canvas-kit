@@ -1,5 +1,4 @@
 import React from 'react';
-import {chevronRightSmallIcon} from '@workday/canvas-system-icons-web';
 
 import {Menu} from '@workday/canvas-kit-react/menu';
 import {BodyText} from '@workday/canvas-kit-react/text';
@@ -16,6 +15,11 @@ type SubMenuItem = {
   children: (Item | SubMenuItem)[];
 };
 
+// This is a user-defined object. The structure uses `id` for the item identifier which is the
+// default key used by the collection system and therefore doesn't require a `getId` function to be
+// passed to the model. The `label` isn't the standard text value used by the collection system, so
+// a `getTextValue` function is required. The `type` and `children` aren't important at all to the
+// menu and are used in the template by the user-defined `renderItem` function.
 const items: (SubMenuItem | Item)[] = [
   {id: 'first-item', label: 'First Item'},
   {
@@ -30,7 +34,17 @@ const items: (SubMenuItem | Item)[] = [
         type: 'submenu',
         children: [
           {id: 'first-sub-sub-item', label: 'First Sub Sub Item'},
-          {id: 'second-sub-sub-item', label: 'Second Sub Sub Item'},
+          {
+            id: 'second-sub-sub-item',
+            type: 'submenu',
+            label: 'Second Sub Sub Item',
+            children: [
+              {id: 'first-sub-sub-sub-item', label: 'First Sub Sub Sub Item'},
+              {id: 'second-sub-sub-sub-item', label: 'Second Sub Sub Sub Item'},
+              {id: 'third-sub-sub-sub-item', label: 'Third Sub Sub Sub Item'},
+              {id: 'fourth-sub-sub-sub-item', label: 'Fourth Sub Sub Sub Item'},
+            ],
+          },
           {id: 'third-sub-sub-item', label: 'Third Sub Sub Item'},
           {id: 'fourth-sub-sub-item', label: 'Fourth Sub Sub Item'},
         ],
@@ -46,6 +60,8 @@ const items: (SubMenuItem | Item)[] = [
 export const NestedDynamic = () => {
   const [selected, setSelected] = React.useState('');
 
+  // defining this inline function allows use to recurse any nesting level defined by the `items`
+  // array.
   function renderItem(item: SubMenuItem | Item) {
     if (item.type === 'submenu') {
       return (
@@ -59,7 +75,7 @@ export const NestedDynamic = () => {
         </Menu.SubMenu>
       );
     }
-    return <Menu.Item key={item.id}>{item.label}</Menu.Item>;
+    return <Menu.Item>{item.label}</Menu.Item>;
   }
 
   return (

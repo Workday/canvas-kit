@@ -23,30 +23,8 @@ export const Nested = () => {
               <Menu.SubMenu.Popper>
                 <Menu.SubMenu.Card>
                   <Menu.SubMenu.List>
-                    <Menu.SubMenu.Item>First Sub Item</Menu.SubMenu.Item>
-                    <Menu.SubMenu id="third-submenu">
-                      <Menu.SubMenu.TargetItem data-id="second-sub-item">
-                        Second Sub Item
-                      </Menu.SubMenu.TargetItem>
-                      <Menu.SubMenu.Popper>
-                        <Menu.SubMenu.Card>
-                          <Menu.SubMenu.List>
-                            <Menu.SubMenu.Item data-id="first-sub-sub-item">
-                              First Sub Sub Item
-                            </Menu.SubMenu.Item>
-                            <Menu.SubMenu.Item data-id="second-sub-sub-item">
-                              Second Sub Sub Item
-                            </Menu.SubMenu.Item>
-                            <Menu.SubMenu.Item data-id="third-sub-sub-item">
-                              Third Sub Sub Item
-                            </Menu.SubMenu.Item>
-                            <Menu.SubMenu.Item data-id="fourth-sub-sub-item">
-                              Fourth Sub Sub Item
-                            </Menu.SubMenu.Item>
-                          </Menu.SubMenu.List>
-                        </Menu.SubMenu.Card>
-                      </Menu.SubMenu.Popper>
-                    </Menu.SubMenu>
+                    <Menu.SubMenu.Item data-id="first-sub-item">First Sub Item</Menu.SubMenu.Item>
+                    <Menu.SubMenu.Item data-id="second-sub-item">First Sub Item</Menu.SubMenu.Item>
                     <Menu.SubMenu.Item data-id="third-sub-item">Third Sub Item</Menu.SubMenu.Item>
                     <Menu.SubMenu.Item data-id="fourth-sub-item">Fourth Sub Item</Menu.SubMenu.Item>
                   </Menu.SubMenu.List>

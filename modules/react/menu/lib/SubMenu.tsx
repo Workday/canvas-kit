@@ -95,7 +95,7 @@ export const useSubMenuTargetItem = composeHooks(
         currentTargetIdRef.current = event.currentTarget.getAttribute('data-id')!;
         mouseEnterTimer.start();
       },
-      onMouseLeave(event: React.MouseEvent) {
+      onMouseLeave() {
         mouseEnterTimer.clear();
       },
       onClick(event: React.MouseEvent) {
