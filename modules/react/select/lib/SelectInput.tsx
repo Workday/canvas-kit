@@ -1,6 +1,6 @@
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
-import {createStencil, CSProps, handleCsProp} from '@workday/canvas-kit-styling';
+import {createStencil, CSProps} from '@workday/canvas-kit-styling';
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 
