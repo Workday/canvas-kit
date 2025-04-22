@@ -1,7 +1,7 @@
 import React from 'react';
 import {useIsRTL, createElemPropsHook} from '@workday/canvas-kit-react/common';
 
-import {useCursorListModel} from './useCursorListModel';
+import {getCursor, useCursorListModel} from './useCursorListModel';
 import {keyboardEventToCursorEvents} from './keyUtils';
 
 // retry a function each frame so we don't rely on the timing mechanism of React's render cycle.
@@ -40,7 +40,7 @@ export const useListItemRemove = createElemPropsHook(useCursorListModel)(
 
     React.useEffect(() => {
       if (keyElementRef.current) {
-        const item = model.navigation.getItem(model.state.cursorId, model);
+        const item = model.navigation.getItem(getCursor(model.state), model);
         if (item) {
           if (model.state.isVirtualized) {
             model.state.UNSTABLE_virtual.scrollToIndex(item.index);

@@ -1,7 +1,7 @@
 import React from 'react';
 import {useIsRTL, createElemPropsHook} from '@workday/canvas-kit-react/common';
 
-import {useCursorListModel} from './useCursorListModel';
+import {getCursor} from './useCursorListModel';
 import {keyboardEventToCursorEvents} from './keyUtils';
 import {focusOnCurrentCursor} from './focusOnCurrentCursor';
 import {useListModel} from './useListModel';
@@ -22,10 +22,6 @@ import {useListModel} from './useListModel';
  */
 export const useListItemRovingFocus = createElemPropsHook(useListModel)(
   (model, _ref, elemProps: {'data-id'?: string; 'data-has-children'?: boolean} = {}) => {
-    // const model =
-    //   elemProps['data-has-children'] && _model.UNSTABLE_parentModel
-    //     ? _model.UNSTABLE_parentModel
-    //     : _model;
     // Create a ref out of state. We don't want to watch state on unmount, so we use a ref to get the
     // current value at the time of unmounting. Otherwise, `state.items` would be a cached value of an
     // empty array
@@ -38,7 +34,7 @@ export const useListItemRovingFocus = createElemPropsHook(useListModel)(
     React.useEffect(() => {
       // If the cursor change was triggered by this hook, we should change focus
       if (keyElementRef.current) {
-        focusOnCurrentCursor(model, model.state.cursorId, keyElementRef.current).then(() => {
+        focusOnCurrentCursor(model, getCursor(model.state), keyElementRef.current).then(() => {
           // Reset key element since focus was successful
           keyElementRef.current = null;
         });

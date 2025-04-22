@@ -201,7 +201,7 @@ export const useMenuItemFocus = createElemPropsHook(useMenuModel)(
 
 function hideParent(model: ReturnType<typeof useMenuModel>) {
   if (model.UNSTABLE_parentModel) {
-    model.UNSTABLE_parentModel.events.hide();
+    (model.UNSTABLE_parentModel as any).events.hide();
     hideParent(model.UNSTABLE_parentModel as any);
   }
 }
@@ -211,7 +211,6 @@ export const useMenuItem = composeHooks(
     return {
       role: 'menuitem',
       onMouseDown(event: React.MouseEvent) {
-        console.log('mousedown', event.currentTarget.getAttribute('data-id'));
         model.events.goTo({id: event.currentTarget.getAttribute('data-id')!});
       },
       onClick:

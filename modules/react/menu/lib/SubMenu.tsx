@@ -1,20 +1,19 @@
 import React from 'react';
 
+import {chevronRightSmallIcon} from '@workday/canvas-system-icons-web';
+
 import {
   composeHooks,
-  createContainer,
   createElemPropsHook,
   createSubcomponent,
   ExtractProps,
   PropsWithModel,
   subModelHook,
-  useDefaultModel,
   useForkRef,
 } from '@workday/canvas-kit-react/common';
 
 import {useMenuModel} from './useMenuModel';
-import {defaultMenuPopperOptions, MenuPopper, useMenuPopper} from './MenuPopper';
-import {MenuTarget, useMenuTarget} from './MenuTarget';
+import {defaultMenuPopperOptions, useMenuPopper} from './MenuPopper';
 import {MenuItem, StyledMenuItem, useMenuItemArrowReturn, useMenuItemFocus} from './MenuItem';
 import {MenuCard} from './MenuCard';
 import {MenuList} from './MenuList';
@@ -22,13 +21,7 @@ import {MenuDivider} from './MenuDivider';
 import {MenuOption} from './MenuOption';
 import {MenuGroup} from './MenuGroup';
 import {useListItemRegister, useListItemRovingFocus} from '@workday/canvas-kit-react/collection';
-import {chevronRightSmallIcon} from '@workday/canvas-system-icons-web';
-import {
-  Popper,
-  useFocusRedirect,
-  usePopupTarget,
-  useReturnFocus,
-} from '@workday/canvas-kit-react/popup';
+import {Popper} from '@workday/canvas-kit-react/popup';
 
 type MenuModelConfig = (typeof useMenuModel)['TConfig'];
 
@@ -40,22 +33,6 @@ export interface SubMenuProps
    */
   children: React.ReactNode;
 }
-
-const useSubMenuList = composeHooks(useReturnFocus, useFocusRedirect);
-
-const SubMenuList = createSubcomponent('div')({
-  modelHook: useMenuModel,
-  elemPropsHook: useSubMenuList,
-  subComponents: {
-    List: MenuList,
-  },
-})(({children, ...elemProps}, Element, model) => {
-  return (
-    <Element role="menu" aria-orientation={model.state.orientation} {...elemProps}>
-      {children}
-    </Element>
-  );
-});
 
 export const SubMenuPopper = createSubcomponent('div')({
   modelHook: useMenuModel,
@@ -74,9 +51,6 @@ const useSubMenuTargetItem = composeHooks(
   subModelHook(model => (model as any).UNSTABLE_parentModel!, useListItemRovingFocus),
   // useListItemRovingFocus,
   createElemPropsHook(useMenuModel)((model, ref) => {
-    React.useEffect(() => {
-      console.log('useSubMenuTargetItem', model.state.targetRef.current);
-    }, []);
     const elementRef = useForkRef(ref, model.state.targetRef);
     return {
       ref: elementRef,
@@ -84,10 +58,9 @@ const useSubMenuTargetItem = composeHooks(
   }),
   subModelHook(model => (model as any).UNSTABLE_parentModel!, useListItemRegister),
   // useListItemRegister,
-  createElemPropsHook(useMenuModel)((model, ref) => {
+  createElemPropsHook(useMenuModel)(model => {
     return {
       onMouseDown(event: React.MouseEvent) {
-        console.log('mousedown', event.currentTarget.getAttribute('data-id'));
         model.UNSTABLE_parentModel!.events.goTo({id: event.currentTarget.getAttribute('data-id')!});
       },
       onClick: (event: React.MouseEvent) => {
@@ -98,7 +71,6 @@ const useSubMenuTargetItem = composeHooks(
         if (!(model.state.targetRef.current instanceof Element)) {
           (model.state.targetRef as React.MutableRefObject<any>).current = event.currentTarget;
         }
-        console.log('click');
         if (model.state.visibility !== 'hidden') {
           model.events.hide(event);
         } else {
@@ -113,7 +85,6 @@ const useSubMenuTargetItem = composeHooks(
             case 'ArrowRight':
             case 'Enter':
             case ' ':
-              console.log('show');
               model.events.show(event);
               break;
           }
@@ -220,7 +191,6 @@ export const SubMenu = createSubcomponent()({
     Popper: SubMenuPopper,
   },
 })<SubMenuProps>(({children, model: _model, ...props}, _Element, parentModel) => {
-  console.log('submenu', 'wtf?');
   const model = useMenuModel(
     useMenuModel.mergeConfig(props, {
       getId: parentModel.getId,
@@ -229,14 +199,10 @@ export const SubMenu = createSubcomponent()({
       mode: parentModel.state.mode,
       orientation: parentModel.state.orientation,
       onSelect(data) {
-        console.log('onSelect', data);
         parentModel.events.select(data);
       },
       onSelectAll() {
         parentModel.events.selectAll();
-      },
-      onHide(event) {
-        console.log('submenu hide', event);
       },
     })
   );

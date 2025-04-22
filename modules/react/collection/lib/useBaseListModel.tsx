@@ -27,16 +27,6 @@ export const defaultGetTextValue = (item: Generic): string => {
   return typeof item === 'string' ? item : item === undefined ? '' : item.text || '';
 };
 
-export const defaultGetType = (item: Generic): ItemType => {
-  return typeof item === 'string' ? 'item' : item === undefined ? 'item' : item.type || 'item';
-};
-
-export const defaultGetChildren = (item: Generic): Generic[] | undefined => {
-  return typeof item === 'string' ? undefined : item === undefined ? [] : item.children || [];
-};
-
-export type ItemType = 'item' | 'group' | 'submenu';
-
 export interface Item<T> {
   index: number;
   id: string;
@@ -45,8 +35,6 @@ export interface Item<T> {
    * Used by components that allow jumping to an item based on typing
    */
   textValue: string;
-  type: ItemType;
-  children?: Item<T>[];
 }
 
 // interface Collection<T> {
@@ -165,7 +153,6 @@ export const useBaseListModel = createModelHook({
           index,
           value: item,
           textValue: getTextValueRef.current(item),
-          type: 'item',
         };
       }),
     [config.items]
@@ -202,7 +189,7 @@ export const useBaseListModel = createModelHook({
      * Register an item to the list. Takes in an identifier, a React.Ref and an optional index. This
      * should be called on component mount. This event is only called for static rendering.
      */
-    registerItem(data: {id: string; textValue: string; type?: ItemType}) {
+    registerItem(data: {id: string; textValue: string}) {
       indexRef.current++;
       setStaticItems(items => {
         return items.concat({

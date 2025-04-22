@@ -136,6 +136,18 @@ const getItem: (id: string, model: NavigationInput) => Item<Generic> | undefined
   return state.items.find(item => item.id === id);
 };
 
+/**
+ * Get the current cursor id of a Collection model's state.
+ */
+export const getCursor = (state: NavigationInput['state']): string =>
+  typeof state.cursorId === 'string' ? state.cursorId : state.cursorId.slice(-1)[0] || '';
+
+/**
+ * Check if the provided id is the current cursor id of a Collection model's state.
+ */
+export const isCursor = (state: NavigationInput['state'], id: string): boolean =>
+  typeof state.cursorId === 'string' ? state.cursorId === id : state.cursorId.includes(id);
+
 export const getWrappingOffsetItem =
   (offset: number) =>
   (index: number, {state}: NavigationInput, tries = state.items.length): number => {

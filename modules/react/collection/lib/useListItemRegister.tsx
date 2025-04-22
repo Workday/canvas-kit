@@ -8,8 +8,6 @@ import {
   slugify,
 } from '@workday/canvas-kit-react/common';
 
-import {Item, ItemType} from './useBaseListModel';
-import {VirtualItem} from './react-virtual';
 import {useListModel} from './useListModel';
 import {ListRenderItemContext} from './useListRenderItem';
 
@@ -40,12 +38,10 @@ export const useListItemRegister = createElemPropsHook(useListModel)(
     } = {}
   ) => {
     const {state, events} = model;
-    // elemProps['data-has-children'] && model.UNSTABLE_parentModel
-    //   ? model.UNSTABLE_parentModel
-    //   : model;
+
     const {item, virtual} = React.useContext(ListRenderItemContext);
     const [localId, setLocalId] = React.useState(elemProps['data-id'] || item?.id || '');
-    console.log('useListItemRegister', localId, item, elemProps);
+
     const {localRef, elementRef} = useLocalRef(
       useForkRef(ref as React.Ref<HTMLElement>, virtual?.measureRef)
     );
@@ -81,7 +77,6 @@ export const useListItemRegister = createElemPropsHook(useListModel)(
 
       const registeredItem = {
         id: itemId,
-        type: elemProps['data-has-children'] ? 'submenu' : ('item' as ItemType),
         textValue: elemProps['data-text']
           ? elemProps['data-text']
           : typeof elemProps.children === 'string'

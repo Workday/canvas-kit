@@ -12,18 +12,13 @@ import {
 
 export const useMenuModel = createModelHook({
   defaultConfig: {
-    // Remove `UNSTABLE_parentModel` from the default config to avoid passing it to the model so we can add it as a different type
-    ...(({UNSTABLE_parentModel, ...rest}) => rest)(useListModel.defaultConfig),
-    // ...useListModel.defaultConfig,
+    ...useListModel.defaultConfig,
     ...usePopupModel.defaultConfig,
     /** Determines the default selection manager used as well as if the menu closes when an item is selected */
     mode: 'single' as 'single' | 'multiple',
     // don't virtualize menus by default to avoid oddities with card width
 
     shouldVirtualize: false,
-    UNSTABLE_parentModel: undefined as
-      | undefined
-      | (ReturnType<typeof usePopupModel> & ReturnType<typeof useListModel>),
   },
   requiredConfig: {
     ...useListModel.requiredConfig,
@@ -50,7 +45,6 @@ export const useMenuModel = createModelHook({
   useCloseOnEscape(popup);
 
   const state = {mode: config.mode, ...list.state, ...popup.state};
-  console.log('menu model', state.id, list.state.cursorId, state);
 
   const events = {
     ...list.events,

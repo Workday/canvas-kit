@@ -3,7 +3,7 @@ import React from 'react';
 import {composeHooks, createElemPropsHook, useForkRef} from '@workday/canvas-kit-react/common';
 import {usePopupTarget} from '@workday/canvas-kit-react/popup';
 
-import {useListActiveDescendant} from '@workday/canvas-kit-react/collection';
+import {getCursor, useListActiveDescendant} from '@workday/canvas-kit-react/collection';
 
 import {useComboboxModel} from './useComboboxModel';
 import {useComboboxInputOpenWithArrowKeys} from './useComboboxInputOpenWithArrowKeys';
@@ -22,7 +22,7 @@ export const useComboboxInput = composeHooks(
 
     React.useEffect(() => {
       if (model.state.cursorId && model.state.visibility === 'visible') {
-        const item = model.navigation.getItem(model.state.cursorId, model);
+        const item = model.navigation.getItem(getCursor(model.state), model);
         if (model.state.isVirtualized && item) {
           model.state.UNSTABLE_virtual.scrollToIndex(item.index);
         } else {
@@ -46,7 +46,7 @@ export const useComboboxInput = composeHooks(
         if (event.key === 'Enter' && !event.metaKey && model.state.visibility === 'visible') {
           const element = document.querySelector(`[data-id="${model.state.cursorId}"]`);
           if (element && element?.getAttribute('aria-disabled') !== 'true') {
-            model.events.select({id: model.state.cursorId});
+            model.events.select({id: getCursor(model.state)});
             if (model.state.mode === 'single') {
               model.events.hide(event);
             }

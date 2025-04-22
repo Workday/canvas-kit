@@ -39,17 +39,6 @@ export function useListRenderItems<T>(
                 {child}
               </ListRenderItemContext.Provider>
             );
-            // if (React.isValidElement(child)) {
-            //   return React.cloneElement(child as any, {
-            //     // We call this `virtual` instead of `virtualItem` to avoid a React render warning
-            //     // about capital letters in attributes. React thinks this will be applied to the DOM
-            //     // element even though we remove it later...
-            //     virtual,
-            //     key: item.id || item.index,
-            //     item,
-            //   });
-            // }
-            // return child;
           })
         : model.state.items.map(item => {
             const child = children(item.value, item.index);
@@ -58,14 +47,6 @@ export function useListRenderItems<T>(
                 {child}
               </ListRenderItemContext.Provider>
             );
-            // if (React.isValidElement(child)) {
-            //   console.log('useListRenderItems', item, child);
-            //   return React.cloneElement(child as any, {
-            //     key: item.id || item.index,
-            //     item,
-            //   });
-            // }
-            // return child;
           })
       : children;
 
