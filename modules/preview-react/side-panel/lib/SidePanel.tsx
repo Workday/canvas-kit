@@ -164,7 +164,7 @@ export const SidePanel = createComponent('section')({
         onTransitionEnd={handleAnimationEnd}
         {...handleCsProp(elemProps, [
           panelStencil({
-            expanded: expanded,
+            expanded,
             variant: variant,
             expandedWidth:
               typeof expandedWidth === 'number' ? px2rem(expandedWidth) : expandedWidth,
