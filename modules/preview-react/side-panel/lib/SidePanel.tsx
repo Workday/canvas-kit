@@ -59,7 +59,6 @@ export interface SidePanelProps {
    */
   touched: boolean;
   children?: React.ReactNode;
-  onAnimationStart?: React.TransitionEvent<HTMLElement>;
   onAnimationEnd?: React.TransitionEvent<HTMLElement>;
 }
 
@@ -113,7 +112,6 @@ export const SidePanel = createComponent('section')({
       expanded = true,
       expandedWidth = 320,
       onAnimationEnd,
-      onAnimationStart,
       onExpandedChange,
       onStateTransition,
       origin = 'left',
@@ -156,6 +154,7 @@ export const SidePanel = createComponent('section')({
       } else if (state === 'expanded' || state === 'expanding') {
         setState('collapsing');
       }
+      return undefined;
     };
 
     return (

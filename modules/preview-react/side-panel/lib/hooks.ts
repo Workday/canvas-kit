@@ -3,8 +3,7 @@ import * as React from 'react';
 export const SidePanelContext = React.createContext({
   state: 'expanded',
   origin: 'left' as 'left' | 'right',
-  // eslint-disable-next-line no-empty-function
-  handleAnimationStart: () => {},
+  handleAnimationStart: () => undefined,
 });
 
 import {useUniqueId} from '@workday/canvas-kit-react/common';
