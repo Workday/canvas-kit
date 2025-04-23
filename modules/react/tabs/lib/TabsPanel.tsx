@@ -9,7 +9,7 @@ import {
   StyledType,
   slugify,
 } from '@workday/canvas-kit-react/common';
-import {Item, ListRenderItemContext} from '@workday/canvas-kit-react/collection';
+import {ListRenderItemContext} from '@workday/canvas-kit-react/collection';
 import {Box} from '@workday/canvas-kit-react/layout';
 
 import {useTabsModel} from './useTabsModel';
