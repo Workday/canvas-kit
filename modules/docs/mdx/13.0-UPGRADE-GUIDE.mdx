@@ -94,7 +94,7 @@ yarn remove @workday/canvas-kit-codemod
 ```
 
 Having trouble running our codemods? View our
-[docs](https://workday.github.io/canvas-kit/?path=/docs/guides-codemods) for more information!
+[docs](https://workday.github.io/canvas-kit/?path=/docs/guides-codemods--docs) for more information!
 
 ## Component Updates
 
@@ -102,12 +102,12 @@ Having trouble running our codemods? View our
 
 Several components have been refactored to use our
 [Canvas tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) and
-[styling API](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-modifiers#createstyles-api).
+[styling API](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--docs#createstyles-api).
 The React interface **has not changed**, but Canvas Tokens are now used for dynamic properties.
 
 > **Note:** These components also support our `cs` prop for styling. Learn more about styling with
 > `cs` in our
-> [documentation](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--cs-prop).
+> [documentation](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--docs#cs-prop).
 
 The following components have been updated:
 
@@ -153,7 +153,7 @@ The following change has been made to `Avatar` to ensure proper accessibility.
 
 ### Expandable ⚡️
 
-**PR:** [#3213](https://github.com/Workday/canvas-kit/pull/3213)
+**PR:** [#3217](https://github.com/Workday/canvas-kit/pull/3217)
 
 We've promoted `Expandable` from [Labs](#labs) to [Main](#main).
 
@@ -199,7 +199,7 @@ The following change has been made to `ExternalHyperlink` to ensure proper acces
 
 ### Form Field and Form Field Group 🚨
 
-**PR:** [#3101](https://github.com/Workday/canvas-kit/pull/3101)
+**PR:** [#3254](https://github.com/Workday/canvas-kit/pull/3254)
 
 The `orientation` prop on the `FormField` component no longer accepts the deprecrated `horizontal`
 value. You must update your code to use `horizontalStart`. Our v12 release included a codemod to
@@ -295,7 +295,7 @@ import {Pill} from '@workday/canvas-kit-preview-react/pill';
 
 ### Side Panel (Preview) 🚨
 
-**PR:** [3258](https://github.com/Workday/canvas-kit/pull/3258)
+**PR:** [#3258](https://github.com/Workday/canvas-kit/pull/3258)
 
 When we supported IE 11 we needed to use  [CSS Animation](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animations/Using_CSS_animations) to support animation events. Since we dropped support for IE11, we can now use [CSS Transitions](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_transitions/Using_CSS_transitions) to animate the `width` of the `SidePanel` when it's expanding or collapsing.
 As part of this change, we also removed the `onAnimationStart` prop. Since moving to transitions, React doesn't support `onTransitionStart`, therefore the prop is no longer needed.
