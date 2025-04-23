@@ -19,17 +19,18 @@ any questions.
 - [Codemod](#codemod)
   - [Instructions](#instructions)
 - [Component Updates](#component-updates)
-  - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
-  - [Avatar](#avatar)
-  - [Expandable](#expandable)
-  - [External Hyperlink](#external-hyperlink)
+	- [Styling API and CSS Tokens](#styling-api-and-css-tokens)
+	- [Avatar](#avatar)
+	- [Expandable](#expandable)
+	- [External Hyperlink](#external-hyperlink)
 	- [Form Field and Form Field Group](#form-field-and-form-field-group)
-  - [Pill](#pill)
-  - [Tabs](#tabs)
+	- [Pill (Preview)](#pill-preview)
+	- [SidePanel (Preview)](#sidepanel-preview)
+	- [Tabs](#tabs)
 - [Brand Refresh](#brand-refresh)
   - [Logo Updates](#logo-updates)
 - [Infrastructure](#infrastructure)
-	- [Supporting react-jsx](#supoorting-react-jsx)
+	- [Supporting react-jsx](#supporting-react-jsx)
 - [Troubleshooting](#troubleshooting)
 - [Glossary](#glossary)
   - [Main](#main)
@@ -199,14 +200,14 @@ The `orientation` prop on `FormField` component has been updated to remove the d
 ```
 
 
-### Pill
+### Pill (Preview)
 
 **PR:** [#3104](https://github.com/Workday/canvas-kit/pull/3104)
 
 A few changes have been made to `Pill` to ensure proper accessibility and styles.
 
 - The border color on hover has been updated from `licorice400` to `licorice500` to match our design specs.
-- We've removed extra elements and leverage [flex box}(https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Flexbox) to ensure only the label receives overflow styles. When `maxWidth` is set, it is set on the parent `<Pill/>` element and the child elements will be styled accordingly. Before v13, `maxWidth` wasn't calculating the width of all its elements and wasn't a true pixel value.
+- We've removed extra elements and leverage [flex box](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Flexbox) to ensure only the label receives overflow styles. When `maxWidth` is set, it is set on the parent `<Pill/>` element and the child elements will be styled accordingly. Before v13, `maxWidth` wasn't calculating the width of all its elements and wasn't a true pixel value.
 
 ##### Breaking Changes
 
@@ -214,6 +215,13 @@ A few changes have been made to `Pill` to ensure proper accessibility and styles
 - `<Pill.Icon/>` no longer has a default `aria-label="add"`. You *must* provide an `aria-label` for `<Pill.Icon/>` to ensure proper accessibility. Our examples have been updated to reflect this change.
 - `<Pill.IconButton/>` no longer has a default `aria-label="remove"`. You *must* provide an `aria-label` for `<Pill.IconButton/>` to ensure proper accessibility. Our examples have been updated to reflect this change.
 - `<Pill.Label/>` is a *required* element when using other sub-components like `<Pill.Icon/>` to ensure that the label truncates correctly.
+
+### SidePanel (Preview)
+
+**PR:** [3258](https://github.com/Workday/canvas-kit/pull/3258)
+
+When we supported IE 11 we needed to use  [CSS Animation](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animations/Using_CSS_animations) to support animation events. Since we dropped support for IE11, we can now use [CSS Transitions](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_transitions/Using_CSS_transitions) to animate the `width` of the `SidePanel` when it's expanding or collapsing.
+As part of this change, we also removed the `onAnimationStart` prop. Since moving to transitions, React doesn't support `onTransitionStart`, therefore the prop is no longer needed.
 
 ### Tabs
 
@@ -281,7 +289,6 @@ If you're using `react@16.x.x`, you'll need to upgrade to `react@17.x.x` to use 
 
 >**Note:** You'll need to update the way `jsx` transpiles. The automatic runtime feature, enabled through the `@babel/preset-react` preset with the `runtime: "automatic"` option, handles the importing of functions that JSX transpiles to.
 
-```sh
 
 ## Troubleshooting
 

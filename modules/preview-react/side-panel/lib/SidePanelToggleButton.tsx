@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {createComponent, ExtractProps, useIsRTL} from '@workday/canvas-kit-react/common';
+import {createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {transformationImportIcon} from '@workday/canvas-system-icons-web';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
@@ -24,82 +24,73 @@ export const sidePanelToggleButtonStencil = createStencil({
     position: 'absolute',
     top: system.space.x6,
     width: system.space.x8,
+    insetInlineEnd: system.space.x4,
   },
   modifiers: {
     state: {
-      collapsed: {
-        margin: 'auto',
-        left: 0,
-        right: 0,
-      },
       collapsing: {
         margin: 0,
+        transform: `scaleX(1)`,
+        ':dir(rtl)': {
+          transform: `scaleX(-1)`,
+        },
+      },
+      collapsed: {
+        margin: 'auto',
+        insetInlineStart: 0,
+        insetInlineEnd: 0,
+        transform: `scaleX(1)`,
+        ':dir(rtl)': {
+          transform: `scaleX(-1)`,
+        },
       },
       expanded: {
         margin: 0,
+        transform: `scaleX(-1)`,
+        ':dir(rtl)': {
+          transform: `scaleX(1)`,
+        },
       },
       expanding: {
         margin: 0,
+        transform: `scaleX(-1)`,
+        ':dir(rtl)': {
+          transform: `scaleX(1)`,
+        },
       },
     },
-    rtlOrigin: {
+    origin: {
       left: {},
       right: {},
     },
   },
+
   compound: [
     {
-      modifiers: {state: 'collapsed', rtlOrigin: 'left'},
-      styles: {
-        transform: `scaleX(1)`,
-      },
-    },
-    {
-      modifiers: {state: 'collapsed', rtlOrigin: 'right'},
+      modifiers: {state: 'collapsed', origin: 'right'},
       styles: {
         transform: `scaleX(-1)`,
       },
     },
     {
-      modifiers: {state: 'collapsing', rtlOrigin: 'left'},
-      styles: {
-        transform: `scaleX(1)`,
-        right: system.space.x4,
-      },
-    },
-    {
-      modifiers: {state: 'collapsing', rtlOrigin: 'right'},
+      modifiers: {state: 'collapsing', origin: 'right'},
       styles: {
         transform: `scaleX(-1)`,
-        left: system.space.x4,
+        insetInlineStart: system.space.x4,
       },
     },
     {
-      modifiers: {state: 'expanded', rtlOrigin: 'left'},
-      styles: {
-        transform: `scaleX(-1)`,
-        right: system.space.x4,
-      },
-    },
-    {
-      modifiers: {state: 'expanded', rtlOrigin: 'right'},
+      modifiers: {state: 'expanded', origin: 'right'},
       styles: {
         transform: `scaleX(1)`,
-        left: system.space.x4,
+        insetInlineStart: system.space.x4,
       },
     },
     {
-      modifiers: {state: 'expanding', rtlOrigin: 'left'},
-      styles: {
-        transform: `scaleX(-1)`,
-        right: system.space.x4,
-      },
-    },
-    {
-      modifiers: {state: 'expanding', rtlOrigin: 'right'},
+      modifiers: {state: 'expanding', origin: 'right'},
       styles: {
         transform: `scaleX(1)`,
-        left: system.space.x4,
+        insetInlineStart: system.space.x4,
       },
     },
   ],
@@ -119,18 +110,6 @@ export const SidePanelToggleButton = createComponent('button')({
   }: SidePanelToggleButtonProps) {
     const context = React.useContext(SidePanelContext);
 
-    const useRTLOrigin = () => {
-      const isRTL = useIsRTL();
-      // if the direction is set to RTl, flip the origin
-      if (isRTL) {
-        return context.origin === 'left' ? 'right' : 'left';
-      }
-      // Otherwise, default to returning the origin
-      return context.origin;
-    };
-
-    const rtlOrigin = useRTLOrigin();
-
     return (
       <Tooltip
         title={context.state === 'collapsed' ? tooltipTextExpand : tooltipTextCollapse}
@@ -144,9 +123,14 @@ export const SidePanelToggleButton = createComponent('button')({
             elemProps,
             sidePanelToggleButtonStencil({
               state: context.state as SidePanelTransitionStates,
-              rtlOrigin: rtlOrigin,
+              origin: context.origin,
             })
           )}
+          onClick={event => {
+            //@ts-ignore this gets called from the useSidePanel hook.
+            elemProps.onClick?.(event);
+            context.handleAnimationStart();
+          }}
         />
       </Tooltip>
     );
