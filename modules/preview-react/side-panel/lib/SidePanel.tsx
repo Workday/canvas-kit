@@ -1,12 +1,6 @@
 import * as React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {
-  createStencil,
-  handleCsProp,
-  px2rem,
-  keyframes,
-  createVars,
-} from '@workday/canvas-kit-styling';
+import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import {SidePanelContext} from './hooks';
 import {SidePanelToggleButton} from './SidePanelToggleButton';
@@ -65,38 +59,8 @@ export interface SidePanelProps {
    */
   touched: boolean;
   children?: React.ReactNode;
-  onAnimationStart?: React.AnimationEventHandler<HTMLElement>;
-  onAnimationEnd?: React.AnimationEventHandler<HTMLElement>;
+  onAnimationEnd?: React.TransitionEvent<HTMLElement>;
 }
-
-const sidePanelKeyframeExpandedVars = createVars('fromAnimationExpanded', 'toAnimationExpanded');
-const sidePanelKeyframeCollapsedVars = createVars('fromAnimationCollapsed', 'toAnimationCollapsed');
-
-const sidepanelExpandedlKeyFrames = keyframes({
-  from: {
-    width: sidePanelKeyframeExpandedVars.fromAnimationExpanded,
-    minWidth: sidePanelKeyframeExpandedVars.fromAnimationExpanded,
-    maxWidth: sidePanelKeyframeExpandedVars.fromAnimationExpanded,
-  },
-  to: {
-    width: sidePanelKeyframeExpandedVars.toAnimationExpanded,
-    minWidth: sidePanelKeyframeExpandedVars.toAnimationExpanded,
-    maxWidth: sidePanelKeyframeExpandedVars.toAnimationExpanded,
-  },
-});
-
-const sidepanelCollapsedKeyFrames = keyframes({
-  from: {
-    width: sidePanelKeyframeCollapsedVars.fromAnimationCollapsed,
-    minWidth: sidePanelKeyframeCollapsedVars.fromAnimationCollapsed,
-    maxWidth: sidePanelKeyframeCollapsedVars.fromAnimationCollapsed,
-  },
-  to: {
-    width: sidePanelKeyframeCollapsedVars.toAnimationCollapsed,
-    minWidth: sidePanelKeyframeCollapsedVars.toAnimationCollapsed,
-    maxWidth: sidePanelKeyframeCollapsedVars.toAnimationCollapsed,
-  },
-});
 
 export const panelStencil = createStencil({
   vars: {
@@ -108,6 +72,7 @@ export const panelStencil = createStencil({
     position: 'relative',
     height: '100%',
     outline: `${px2rem(1)} solid transparent`,
+    transition: 'width ease-out 200ms, max-width ease-out 200ms',
   }),
   modifiers: {
     variant: {
@@ -136,24 +101,6 @@ export const panelStencil = createStencil({
       },
     },
   },
-  compound: [
-    {
-      modifiers: {touched: 'true', expanded: 'true'},
-      styles: {
-        animationName: sidepanelExpandedlKeyFrames,
-        animationDuration: '200ms',
-        animationTimingFunction: 'ease-out',
-      },
-    },
-    {
-      modifiers: {touched: 'true', expanded: 'false'},
-      styles: {
-        animationName: sidepanelCollapsedKeyFrames,
-        animationDuration: '200ms',
-        animationTimingFunction: 'ease-out',
-      },
-    },
-  ],
 });
 
 export const SidePanel = createComponent('section')({
@@ -165,7 +112,6 @@ export const SidePanel = createComponent('section')({
       expanded = true,
       expandedWidth = 320,
       onAnimationEnd,
-      onAnimationStart,
       onExpandedChange,
       onStateTransition,
       origin = 'left',
@@ -192,63 +138,37 @@ export const SidePanel = createComponent('section')({
       }
     }, [state, onStateTransition]);
 
-    const handleAnimationEnd = (event: React.AnimationEvent<HTMLDivElement>) => {
-      if (event.currentTarget === event.target) {
-        if (event.animationName === sidepanelCollapsedKeyFrames) {
+    const handleAnimationEnd = (event: React.TransitionEvent<HTMLDivElement>) => {
+      if (event.propertyName === 'width') {
+        if (state === 'expanding') {
+          setState('expanded');
+        } else if (state === 'collapsing') {
           setState('collapsed');
         }
-
-        if (event.animationName === sidepanelExpandedlKeyFrames) {
-          setState('expanded');
-        }
-      }
-
-      if (typeof onAnimationEnd !== 'undefined') {
-        onAnimationEnd(event);
       }
     };
 
-    const handleAnimationStart = (event: React.AnimationEvent<HTMLDivElement>) => {
-      if (event.currentTarget === event.target) {
-        if (
-          event.animationName === sidepanelCollapsedKeyFrames ||
-          event.animationName === sidepanelExpandedlKeyFrames
-        ) {
-          setState(expanded ? 'expanding' : 'collapsing');
-        }
+    const handleAnimationStart = () => {
+      if (state === 'collapsed' || state === 'collapsing') {
+        setState('expanding');
+      } else if (state === 'expanded' || state === 'expanding') {
+        setState('collapsing');
       }
-
-      if (typeof onAnimationStart !== 'undefined') {
-        onAnimationStart(event);
-      }
+      return undefined;
     };
 
     return (
       <Element
         ref={ref}
-        onAnimationEnd={handleAnimationEnd}
-        onAnimationStart={handleAnimationStart}
+        onTransitionEnd={handleAnimationEnd}
         {...handleCsProp(elemProps, [
           panelStencil({
-            expanded: expanded ? 'true' : 'false',
-            touched: touched ? 'true' : 'false',
-            variant: variant,
+            expanded,
+            variant,
             expandedWidth:
               typeof expandedWidth === 'number' ? px2rem(expandedWidth) : expandedWidth,
             collapsedWidth:
               typeof collapsedWidth === 'number' ? px2rem(collapsedWidth) : collapsedWidth,
-          }),
-          sidePanelKeyframeCollapsedVars({
-            fromAnimationCollapsed:
-              typeof expandedWidth === 'number' ? px2rem(expandedWidth) : expandedWidth,
-            toAnimationCollapsed:
-              typeof collapsedWidth === 'number' ? px2rem(collapsedWidth) : collapsedWidth,
-          }),
-          sidePanelKeyframeExpandedVars({
-            fromAnimationExpanded:
-              typeof collapsedWidth === 'number' ? px2rem(collapsedWidth) : collapsedWidth,
-            toAnimationExpanded:
-              typeof expandedWidth === 'number' ? px2rem(expandedWidth) : expandedWidth,
           }),
         ])}
       >
@@ -256,6 +176,7 @@ export const SidePanel = createComponent('section')({
           value={{
             state,
             origin,
+            handleAnimationStart,
           }}
         >
           {children}
