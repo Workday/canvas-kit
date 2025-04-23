@@ -59,7 +59,41 @@ export const sidePanelToggleButtonStencil = createStencil({
         },
       },
     },
+    origin: {
+      left: {},
+      right: {},
+    },
   },
+
+  compound: [
+    {
+      modifiers: {state: 'collapsed', origin: 'right'},
+      styles: {
+        transform: `scaleX(-1)`,
+      },
+    },
+    {
+      modifiers: {state: 'collapsing', origin: 'right'},
+      styles: {
+        transform: `scaleX(-1)`,
+        insetInlineStart: system.space.x4,
+      },
+    },
+    {
+      modifiers: {state: 'expanded', origin: 'right'},
+      styles: {
+        transform: `scaleX(1)`,
+        insetInlineStart: system.space.x4,
+      },
+    },
+    {
+      modifiers: {state: 'expanding', origin: 'right'},
+      styles: {
+        transform: `scaleX(1)`,
+        insetInlineStart: system.space.x4,
+      },
+    },
+  ],
 });
 
 /**
@@ -89,6 +123,7 @@ export const SidePanelToggleButton = createComponent('button')({
             elemProps,
             sidePanelToggleButtonStencil({
               state: context.state as SidePanelTransitionStates,
+              origin: context.origin,
             })
           )}
           onClick={event => {
