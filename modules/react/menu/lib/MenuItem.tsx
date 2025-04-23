@@ -195,6 +195,7 @@ export const useMenuItemFocus = createElemPropsHook(useMenuModel)(
     }, [id, localRef, model.state.cursorId, model.state.mode]);
     return {
       ref: elementRef,
+      className: isCursor(model.state, elemProps['data-id']) ? 'focus' : undefined,
     };
   }
 );
