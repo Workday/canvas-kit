@@ -26,22 +26,25 @@ const items: (SubmenuItem | Item)[] = [
   {
     id: 'second-item',
     label: 'Second Item',
-    type: 'Submenu',
+    type: 'submenu',
     children: [
       {id: 'first-sub-item', label: 'First Sub Item'},
       {
         id: 'second-sub-item',
         label: 'Second Sub Item',
-        type: 'Submenu',
+        type: 'submenu',
         children: [
           {id: 'first-sub-sub-item', label: 'First Sub Sub Item'},
           {
             id: 'second-sub-sub-item',
-            type: 'Submenu',
+            type: 'submenu',
             label: 'Second Sub Sub Item',
             children: [
               {id: 'first-sub-sub-sub-item', label: 'First Sub Sub Sub Item'},
-              {id: 'second-sub-sub-sub-item', label: 'Second Sub Sub Sub Item'},
+              {
+                id: 'second-sub-sub-sub-item',
+                label: 'Second Sub Sub Sub Item',
+              },
               {id: 'third-sub-sub-sub-item', label: 'Third Sub Sub Sub Item'},
               {id: 'fourth-sub-sub-sub-item', label: 'Fourth Sub Sub Sub Item'},
             ],
