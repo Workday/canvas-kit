@@ -12,7 +12,7 @@ type Item = {
 type SubmenuItem = {
   id: string;
   label: string;
-  type: 'Submenu';
+  type: 'submenu';
   children: (Item | SubmenuItem)[];
 };
 
@@ -64,7 +64,7 @@ export const NestedDynamic = () => {
   // defining this inline function allows use to recurse any nesting level defined by the `items`
   // array.
   function renderItem(item: SubmenuItem | Item) {
-    if (item.type === 'Submenu') {
+    if (item.type === 'submenu') {
       return (
         <Menu.Submenu id={item.id} items={item.children}>
           <Menu.Submenu.TargetItem>{item.label}</Menu.Submenu.TargetItem>
