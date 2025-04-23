@@ -1,5 +1,6 @@
 import React from 'react';
 import {createElemPropsHook} from '@workday/canvas-kit-react/common';
+import {getCursor} from '@workday/canvas-kit-react/collection';
 import {useComboboxModel} from './useComboboxModel';
 
 /**
@@ -9,15 +10,15 @@ import {useComboboxModel} from './useComboboxModel';
  * ```tsx
  * // Example for a `Select` input
  * export const useSelectInput = composeHooks(
- * createElemPropsHook(useComboboxModel)((model, ref, elemProps: {keySoFar?: string} = {}) => {
- *  return {
- *    onKeyDown(event: React.KeyboardEvent) {
- *     // onKeyDown logic ...
- *    },
- *  } as const;
- * }),
- * useComboboxKeyboardTypeAhead,
- * useComboboxInput
+ *   createElemPropsHook(useComboboxModel)((model, ref, elemProps: {keySoFar?: string} = {}) => {
+ *    return {
+ *      onKeyDown(event: React.KeyboardEvent) {
+ *       // onKeyDown logic ...
+ *      },
+ *    } as const;
+ *   }),
+ *   useComboboxKeyboardTypeAhead,
+ *   useComboboxInput
  * );
  * ```
  */
@@ -59,7 +60,7 @@ export const useComboboxKeyboardTypeAhead = createElemPropsHook(useComboboxModel
 
   const currentItemIndex =
     model.state.items.length > 0
-      ? model.navigation.getItem(model.state.cursorId, model)?.index || 0
+      ? model.navigation.getItem(getCursor(model.state), model)?.index || 0
       : 0;
 
   const handleKeyboardTypeAhead = (key: string, numOptions: number) => {

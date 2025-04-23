@@ -8,6 +8,8 @@ import {Grouping as GroupingExample} from './examples/Grouping';
 import {ContextMenu as ContextMenuExample} from './examples/ContextMenu';
 import {Icons as IconsExample} from './examples/Icons';
 import {SelectableMenu as SelectableMenuExample} from './examples/SelectableMenu';
+import {Nested as NestedExample} from './examples/Nested';
+import {NestedDynamic as NestedDynamicExample} from './examples/NestedDynamic';
 
 export default {
   title: 'Components/Popups/Menu',
@@ -36,4 +38,10 @@ export const Icons: Story = {
 };
 export const SelectableMenu: Story = {
   render: SelectableMenuExample,
+};
+export const Nested: Story = {
+  render: NestedExample,
+};
+export const NestedDynamic: Story = {
+  render: NestedDynamicExample,
 };

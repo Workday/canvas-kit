@@ -24,6 +24,7 @@ export const useMenuList = composeHooks(
     return {
       role: 'menu',
       'aria-labelledby': model.state.id,
+      'aria-orientation': model.state.orientation,
     };
   }),
   useReturnFocus,
