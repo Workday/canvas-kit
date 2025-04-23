@@ -2,17 +2,18 @@ import React from 'react';
 
 import {Menu} from '@workday/canvas-kit-react/menu';
 import {BodyText} from '@workday/canvas-kit-react/text';
+import {system} from '@workday/canvas-tokens-web';
 
 type Item = {
   type?: 'item';
   id: string;
   label: string;
 };
-type SubMenuItem = {
+type SubmenuItem = {
   id: string;
   label: string;
-  type: 'submenu';
-  children: (Item | SubMenuItem)[];
+  type: 'Submenu';
+  children: (Item | SubmenuItem)[];
 };
 
 // This is a user-defined object. The structure uses `id` for the item identifier which is the
@@ -20,23 +21,23 @@ type SubMenuItem = {
 // passed to the model. The `label` isn't the standard text value used by the collection system, so
 // a `getTextValue` function is required. The `type` and `children` aren't important at all to the
 // menu and are used in the template by the user-defined `renderItem` function.
-const items: (SubMenuItem | Item)[] = [
+const items: (SubmenuItem | Item)[] = [
   {id: 'first-item', label: 'First Item'},
   {
     id: 'second-item',
     label: 'Second Item',
-    type: 'submenu',
+    type: 'Submenu',
     children: [
       {id: 'first-sub-item', label: 'First Sub Item'},
       {
         id: 'second-sub-item',
         label: 'Second Sub Item',
-        type: 'submenu',
+        type: 'Submenu',
         children: [
           {id: 'first-sub-sub-item', label: 'First Sub Sub Item'},
           {
             id: 'second-sub-sub-item',
-            type: 'submenu',
+            type: 'Submenu',
             label: 'Second Sub Sub Item',
             children: [
               {id: 'first-sub-sub-sub-item', label: 'First Sub Sub Sub Item'},
@@ -62,17 +63,17 @@ export const NestedDynamic = () => {
 
   // defining this inline function allows use to recurse any nesting level defined by the `items`
   // array.
-  function renderItem(item: SubMenuItem | Item) {
-    if (item.type === 'submenu') {
+  function renderItem(item: SubmenuItem | Item) {
+    if (item.type === 'Submenu') {
       return (
-        <Menu.SubMenu id={item.id} items={item.children}>
-          <Menu.SubMenu.TargetItem>{item.label}</Menu.SubMenu.TargetItem>
-          <Menu.SubMenu.Popper>
-            <Menu.SubMenu.Card>
-              <Menu.SubMenu.List>{renderItem}</Menu.SubMenu.List>
-            </Menu.SubMenu.Card>
-          </Menu.SubMenu.Popper>
-        </Menu.SubMenu>
+        <Menu.Submenu id={item.id} items={item.children}>
+          <Menu.Submenu.TargetItem>{item.label}</Menu.Submenu.TargetItem>
+          <Menu.Submenu.Popper>
+            <Menu.Submenu.Card>
+              <Menu.Submenu.List>{renderItem}</Menu.Submenu.List>
+            </Menu.Submenu.Card>
+          </Menu.Submenu.Popper>
+        </Menu.Submenu>
       );
     }
     return <Menu.Item>{item.label}</Menu.Item>;
@@ -93,7 +94,7 @@ export const NestedDynamic = () => {
           <Menu.List>{renderItem}</Menu.List>
         </Menu.Card>
       </Menu.Popper>
-      <BodyText size="small" marginTop="s">
+      <BodyText size="small" cs={{marginBlockStart: system.space.x4}}>
         Selected: <span data-testid="output">{selected}</span>
       </BodyText>
     </Menu>

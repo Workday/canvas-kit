@@ -11,7 +11,7 @@ import {MenuList} from './MenuList';
 import {MenuDivider} from './MenuDivider';
 import {MenuOption} from './MenuOption';
 import {MenuGroup} from './MenuGroup';
-import {SubMenu} from './SubMenu';
+import {Submenu} from './Submenu';
 
 export interface MenuProps {
   /**
@@ -125,7 +125,7 @@ export const Menu = createContainer()({
      * this component will be forwarded to the `div` element, but the `ref` will be forwarded.
      */
     Popper: MenuPopper,
-    SubMenu: SubMenu,
+    Submenu: Submenu,
   },
 })<MenuProps>(({children}) => {
   return <>{children}</>;

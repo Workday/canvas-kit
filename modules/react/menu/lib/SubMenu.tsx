@@ -25,7 +25,7 @@ import {Popper} from '@workday/canvas-kit-react/popup';
 
 type MenuModelConfig = (typeof useMenuModel)['TConfig'];
 
-export interface SubMenuProps
+export interface SubmenuProps
   extends MenuModelConfig,
     PropsWithModel<ReturnType<typeof useMenuModel>> {
   /**
@@ -34,7 +34,7 @@ export interface SubMenuProps
   children: React.ReactNode;
 }
 
-export const SubMenuPopper = createSubcomponent('div')({
+export const SubmenuPopper = createSubcomponent('div')({
   modelHook: useMenuModel,
   elemPropsHook: useMenuPopper,
 })<ExtractProps<typeof Popper>>(({children, ...elemProps}) => {
@@ -70,7 +70,7 @@ const useIntentTimer = (fn: Function, waitMs: number = 0): {start(): void; clear
   };
 };
 
-export const useSubMenuTargetItem = composeHooks(
+export const useSubmenuTargetItem = composeHooks(
   subModelHook(model => (model as any).UNSTABLE_parentModel!, useMenuItemFocus),
   subModelHook(model => (model as any).UNSTABLE_parentModel!, useMenuItemArrowReturn),
   subModelHook(model => (model as any).UNSTABLE_parentModel!, useListItemRovingFocus),
@@ -129,9 +129,9 @@ export const useSubMenuTargetItem = composeHooks(
   })
 );
 
-export const SubMenuTargetItem = createSubcomponent('button')({
+export const SubmenuTargetItem = createSubcomponent('button')({
   modelHook: useMenuModel,
-  elemPropsHook: useSubMenuTargetItem,
+  elemPropsHook: useSubmenuTargetItem,
 })(({children, ...elemProps}, Element) => {
   return (
     <StyledMenuItem as={Element} {...elemProps}>
@@ -142,29 +142,26 @@ export const SubMenuTargetItem = createSubcomponent('button')({
 });
 
 /**
- * `Menu` is a combination of a popup and a list. It usually has some type of target element that
- * expands/collapses the menu and a `menu` role and and several `menuitem` roles. Focus is managed
- * using [roving tabindex](https://www.w3.org/WAI/ARIA/apg/practices/keyboard-interface/#kbd_roving_tabindex) for maximum
- * compatibility. A `Menu` can have two modes: `single` and `multiple`. This mode determines both
- * how many items can be selected as well as the default behavior when a `menuitem` is clicked. For
- * the `single` mode, selecting a `menuitem` will select and close the menu. For the `multiple`
- * mode, clicking a `menuitem` will toggle selection and will not close the menu.
+ * `Submenu` should be put in place of a `Menu.Item`. It will render a menu item that is the target
+ * for the submenu card.
  *
  * ```tsx
- * <Menu>
- *   <Menu.Target>Open</Menu.Target>
- *   <Menu.Popper>
- *     <Menu.Card>
- *       <Menu.List>
- *         <Menu.Item data-id="first">First Item</Menu.Item>
- *         <Menu.Item data-id="second">Second Item</Menu.Item>
- *       </Menu.List>
- *     </Menu.Card>
- *   </Menu.Popper>
- * </Menu>
+ * <Menu.Item>First Item</Menu.Item>
+ * <Menu.Submenu>
+ *   <Menu.Submenu.TargetItem>Second Item</Menu.Submenu.TargetItem>
+ *   <Menu.Submenu.Popper>
+ *     <Menu.Submenu.Card>
+ *       <Menu.Submenu.List>
+ *         <Menu.Submenu.Item data-id="first">First Sub Item</Menu.Submenu.Item>
+ *         <Menu.Submenu.Item data-id="second">Second Sub Item</Menu.Submenu.Item>
+ *       </Menu.Submenu.List>
+ *     </Menu.Submenu.Card>
+ *   </Menu.Submenu.Popper>
+ * </Menu.Submenu>
+ * </Menu.Item>Third Item</Menu.Item>
  * ```
  */
-export const SubMenu = createSubcomponent()({
+export const Submenu = createSubcomponent()({
   modelHook: useMenuModel,
   subComponents: {
     /**
@@ -175,37 +172,21 @@ export const SubMenu = createSubcomponent()({
     Card: MenuCard,
     /**
      * The menu list follows the Collections API. A list can either contain static items
-     * or a render prop and `items` to the model.
-     *
-     * ```tsx
-     * const MyComponent = () => {
-     *   const model = useMenuModel({
-     *     items: [
-     *       { id: 'first',  text: 'First Item' },
-     *       { id: 'second', text: 'Second Item' },
-     *     ]
-     *   })
-     *
-     *   return (
-     *     <Menu model={model}>
-     *       <Menu.List>
-     *         {(item) => <Menu.Item data-id={item.id}>{item.text}</Menu.Item>}
-     *       </Menu.List>
-     *     </Menu>
-     *   )
-     * }
-     * ```
+     * or a render prop and `items`. It is recommended that the `items` comes from a nested
+     * JavaScript object.
      */
     List: MenuList,
     /**
-     * A `Menu.Item` has an optional `data-id` prop that identifies the item in the `Menu.List` and
-     * will be passed to the optional `onSelect` callback of the `Menu` model. A `Menu.Item` can
-     * contain any HTML. If more complex HTML is provided, add `data-text` to the `Menu.Item`
-     * component if using the static API. If you're using the dynamic API, pass `getTextValue` to
-     * the model.
+     * If the static API is used, a `data-id` prop should be used to identify the item. If you're
+     * using the dynamic API, pass a `getId` and  `getTextValue` to the parent `Menu` the model.
      */
     Item: MenuItem,
-    TargetItem: SubMenuTargetItem,
+    /**
+     * The `Submenu.TargetItem` is similar to the `Menu.Item`, but represents both the target for
+     * the submenu and the item in the menu list. This should only be used once per `<Menu.Submenu>`
+     * component.
+     */
+    TargetItem: SubmenuTargetItem,
     Group: MenuGroup,
     /**
      * A `Menu.Option` is similar to the `Menu.Item`, but has a `role=option` and works with
@@ -223,9 +204,9 @@ export const SubMenu = createSubcomponent()({
      * {@link PopupStack}. The `PopupStack` is not part of React. This means no extra props given to
      * this component will be forwarded to the `div` element, but the `ref` will be forwarded.
      */
-    Popper: SubMenuPopper,
+    Popper: SubmenuPopper,
   },
-})<SubMenuProps>(({children, model: _model, ...props}, _Element, parentModel) => {
+})<SubmenuProps>(({children, model: _model, ...props}, _Element, parentModel) => {
   const model = useMenuModel(
     useMenuModel.mergeConfig(props, {
       getId: parentModel.getId,
