@@ -29,7 +29,7 @@ export const breadcrumbsListStencil = createStencil({
     margin: 0,
     display: 'inline-flex',
     alignItems: 'center',
-    minHeight: system.space.x8,
+    minHeight: system.space.x10,
     listStyle: 'none',
     width: '100%',
   },
