@@ -1,12 +1,11 @@
 import {chevronRightSmallIcon, relatedActionsIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {Flex, FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {FlexProps} from '@workday/canvas-kit-react/layout';
 import {
   composeHooks,
   createElemPropsHook,
   createSubcomponent,
   subModelHook,
-  useIsRTL,
 } from '@workday/canvas-kit-react/common';
 import {useOverflowListTarget} from '@workday/canvas-kit-react/collection';
 import {useMenuTarget} from '@workday/canvas-kit-react/menu';
