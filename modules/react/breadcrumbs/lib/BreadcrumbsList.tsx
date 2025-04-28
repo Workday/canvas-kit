@@ -1,9 +1,10 @@
 import * as React from 'react';
 
 import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
-import {Flex} from '@workday/canvas-kit-react/layout';
+import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {useOverflowListMeasure, useListRenderItems} from '@workday/canvas-kit-react/collection';
-import {space} from '@workday/canvas-kit-react/tokens';
+import {system} from '@workday/canvas-tokens-web';
+import {createStencil} from '@workday/canvas-kit-styling';
 import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 
 export interface BreadcrumbsListProps<T = any>
@@ -21,6 +22,19 @@ export interface BreadcrumbsListProps<T = any>
   children: ((item: T, index: number) => React.ReactNode) | React.ReactNode;
 }
 
+// Create a stencil for the breadcrumbs list
+export const breadcrumbsListStencil = createStencil({
+  base: {
+    padding: 0,
+    margin: 0,
+    display: 'inline-flex',
+    alignItems: 'center',
+    minHeight: system.space.x8,
+    listStyle: 'none',
+    width: '100%',
+  },
+});
+
 export const BreadcrumbsList = createSubcomponent('ul')({
   displayName: 'Breadcrumbs.List',
   modelHook: useBreadcrumbsModel,
@@ -30,21 +44,10 @@ export const BreadcrumbsList = createSubcomponent('ul')({
   const splitIndex = items.length - 2;
 
   return (
-    <Flex
-      as={Element}
-      padding="zero"
-      margin="zero"
-      display="inline-flex"
-      alignItems="center"
-      minHeight={space.xl}
-      listStyle="none"
-      role="list"
-      width="100%"
-      {...elemProps}
-    >
+    <Element role="list" {...mergeStyles(elemProps, breadcrumbsListStencil())}>
       {items.length ? items.slice(0, splitIndex) : items}
       {overflowButton}
       {items.length ? items.slice(splitIndex, items.length) : null}
-    </Flex>
+    </Element>
   );
 });
