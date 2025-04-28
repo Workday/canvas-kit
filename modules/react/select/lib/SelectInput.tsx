@@ -11,7 +11,7 @@ import {useSelectModel} from './hooks/useSelectModel';
 import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {system} from '@workday/canvas-tokens-web';
 
-export interface SelectInputProps extends ExtractProps<typeof TextInput>, CSProps {
+export interface SelectInputProps extends ExtractProps<typeof TextInput, never>, CSProps {
   /**
    * The Icon to render at the start of the `input`. Use this prop if your options
    * include icons that you would like to render in the `input` when selected.
