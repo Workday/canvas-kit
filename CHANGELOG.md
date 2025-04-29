@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.0.1](https://github.com/Workday/canvas-kit/releases/tag/v13.0.1) (2025-04-29)
+
+### Infrastructure
+
+- ci: Pad canary build ids with zeros ([#3271](https://github.com/Workday/canvas-kit/pull/3271)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v13.0.0](https://github.com/Workday/canvas-kit/releases/tag/v13.0.0) (2025-04-23)
 
 ### BREAKING CHANGES
