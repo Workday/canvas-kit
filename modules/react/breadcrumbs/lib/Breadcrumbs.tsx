@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {createContainer} from '@workday/canvas-kit-react/common';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Menu} from '@workday/canvas-kit-react/menu';
 import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 import {BreadcrumbsList} from './BreadcrumbsList';
@@ -9,8 +8,6 @@ import {BreadcrumbsItem} from './BreadcrumbsItem';
 import {BreadcrumbsLink} from './BreadcrumbsLink';
 import {BreadcrumbsCurrentItem} from './BreadcrumbsCurrentItem';
 import {BreadcrumbsMenu} from './BreadcrumbsMenu';
-import {createStencil} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
 
 export interface BreadcrumbsProps {
   /**
@@ -24,17 +21,6 @@ export interface BreadcrumbsProps {
    */
   children: React.ReactNode;
 }
-
-// Create a stencil for the breadcrumbs container
-export const breadcrumbsStencil = createStencil({
-  base: {
-    display: 'flex',
-    width: '100%',
-    alignItems: 'center',
-    padding: system.space.x2,
-    color: system.color.fg.default,
-  },
-});
 
 /**
  * `Breadcrumbs` is a container component that is responsible for creating a
@@ -178,7 +164,7 @@ export const Breadcrumbs = createContainer('nav')({
 })<BreadcrumbsProps>(({children, ...elemProps}, _, model) => {
   return (
     <Menu model={model.menu}>
-      <nav role="navigation" {...mergeStyles(elemProps, breadcrumbsStencil())}>
+      <nav role="navigation" {...elemProps}>
         {children}
       </nav>
     </Menu>
