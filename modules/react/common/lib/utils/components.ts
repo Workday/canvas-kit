@@ -77,8 +77,6 @@ type ExtractHTMLAttributes<T extends React.DetailedHTMLProps<any, any>> =
  * - `ExtractProps<typeof Card, 'aside'>`: `CardProps & React.HTMLAttributes<HTMLElement>`
  * - `ExtractProps<typeof Card, never>`: `CardProps`
  *
- * **Note:** The `never` means "don't include the default HTML attributes in the prop interface". The `as` prop is used to determine the final HTML attributes. Forgetting to use the `never` means the prop interfaces can be incompatible unintentionally, causing TypeScript issues for developers doing things we say is supported.
- *
  * @template TComponent The component you wish to extract props from. Needs 'typeof` in front:
  * `typeof Card`
  * @template TElement An optional override of the element that will be used. Define this if you use
