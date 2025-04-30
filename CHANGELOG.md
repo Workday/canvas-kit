@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.0.2](https://github.com/Workday/canvas-kit/releases/tag/v13.0.2) (2025-04-30)
+
+### Components
+
+- docs: Collection examples should use string ids ([#3268](https://github.com/Workday/canvas-kit/pull/3268)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+### Documentation
+
+- docs: Fixed menu doc page ([#3276](https://github.com/Workday/canvas-kit/pull/3276)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v13.0.1](https://github.com/Workday/canvas-kit/releases/tag/v13.0.1) (2025-04-29)
 
 ### Infrastructure
