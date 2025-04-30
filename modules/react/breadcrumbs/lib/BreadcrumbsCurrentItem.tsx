@@ -27,6 +27,7 @@ export const breadcrumbsCurrentItemStencil = createStencil({
   base: ({maxWidth}) => ({
     ...system.type.subtext.large,
     fontWeight: system.fontWeight.medium,
+    color: system.color.text.default,
     display: 'inline-block',
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
