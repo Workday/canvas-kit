@@ -2,7 +2,6 @@ import {createContainer, createComponent, ExtractProps} from '@workday/canvas-ki
 import {Menu, useMenuModel} from '@workday/canvas-kit-react/menu';
 import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 
-// Create a stencil for the breadcrumbs menu item
 export const breadcrumbsMenuItemStencil = createStencil({
   base: {
     textDecoration: 'none',
@@ -18,7 +17,6 @@ export const BreadcrumbsMenuItem = createComponent('a')({
   },
 });
 
-// Create a stencil for the breadcrumbs menu card
 export const breadcrumbsMenuCardStencil = createStencil({
   base: {
     width: px2rem(280),
@@ -27,7 +25,6 @@ export const breadcrumbsMenuCardStencil = createStencil({
   },
 });
 
-// Create a breadcrumbs menu card component
 export const BreadcrumbsMenuCard = (elemProps: ExtractProps<typeof Menu.Card, never>) => (
   <Menu.Card {...handleCsProp(elemProps, breadcrumbsMenuCardStencil())} />
 );

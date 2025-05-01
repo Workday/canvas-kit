@@ -19,7 +19,6 @@ export interface BreadcrumbsLinkProps extends React.AnchorHTMLAttributes<HTMLAnc
   tooltipProps?: OverflowTooltipProps | {};
 }
 
-// Create a stencil for the breadcrumbs link
 export const breadcrumbsLinkStencil = createStencil({
   vars: {
     maxWidth: '',
