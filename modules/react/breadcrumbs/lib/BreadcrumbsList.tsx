@@ -22,7 +22,6 @@ export interface BreadcrumbsListProps<T = any>
   children: ((item: T, index: number) => React.ReactNode) | React.ReactNode;
 }
 
-// Create a stencil for the breadcrumbs list
 export const breadcrumbsListStencil = createStencil({
   base: {
     padding: 0,

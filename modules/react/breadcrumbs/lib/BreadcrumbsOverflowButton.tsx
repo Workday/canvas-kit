@@ -24,7 +24,6 @@ export interface BreadcrumbsOverflowButtonProps extends TertiaryButtonProps {
   style?: FlexProps;
 }
 
-// Create a stencil for the overflow button container
 export const breadcrumbsOverflowButtonStencil = createStencil({
   parts: {
     overflowButton: 'breadcrumbs-overflow-button',

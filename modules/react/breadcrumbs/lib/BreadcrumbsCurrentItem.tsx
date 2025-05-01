@@ -19,7 +19,6 @@ export interface BreadcrumbsCurrentItemProps extends TextProps {
   tooltipProps?: OverflowTooltipProps;
 }
 
-// Create a stencil for the current breadcrumb item
 export const breadcrumbsCurrentItemStencil = createStencil({
   vars: {
     maxWidth: '',
