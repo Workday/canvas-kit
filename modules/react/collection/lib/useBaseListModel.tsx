@@ -227,5 +227,5 @@ export const useBaseListModel = createModelHook({
     },
   };
 
-  return {state, events, getId: config.getId};
+  return {state, events, getId: config.getId, getTextValue: config.getTextValue};
 });
