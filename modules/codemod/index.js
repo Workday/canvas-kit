@@ -88,7 +88,7 @@ const {
       describe: chalk.gray('The path to execute the transform in (recursively).'),
     });
   })
-  .command('v13 [path]', chalk.gray('Canvas Kit v13 > v14 upgrade transform'), yargs => {
+  .command('v14 [path]', chalk.gray('Canvas Kit v13 > v14 upgrade transform'), yargs => {
     yargs.positional('path', {
       type: 'string',
       default: '.',
