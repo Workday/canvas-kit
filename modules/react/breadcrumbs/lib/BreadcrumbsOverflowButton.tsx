@@ -63,7 +63,12 @@ export const BreadcrumbsOverflowButton = createSubcomponent('button')({
 })<BreadcrumbsOverflowButtonProps>(({style, ...elemProps}, Element) => {
   return (
     <li {...breadcrumbsOverflowButtonStencil()} {...style}>
-      <TertiaryButton as={Element} icon={relatedActionsIcon} {...handleCsProp(elemProps)} />
+      <TertiaryButton
+        as={Element}
+        icon={relatedActionsIcon}
+        {...breadcrumbsOverflowButtonStencil.parts.overflowButton}
+        {...handleCsProp(elemProps)}
+      />
       <SystemIcon
         icon={chevronRightSmallIcon}
         {...breadcrumbsOverflowButtonStencil.parts.chevronRightIcon}
