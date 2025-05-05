@@ -1,10 +1,10 @@
 import * as React from 'react';
 
 import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
-import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {useOverflowListMeasure, useListRenderItems} from '@workday/canvas-kit-react/collection';
 import {system} from '@workday/canvas-tokens-web';
-import {createStencil} from '@workday/canvas-kit-styling';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 
 export interface BreadcrumbsListProps<T = any>
@@ -43,7 +43,7 @@ export const BreadcrumbsList = createSubcomponent('ul')({
   const splitIndex = items.length - 2;
 
   return (
-    <Element role="list" {...mergeStyles(elemProps, breadcrumbsListStencil())}>
+    <Element role="list" {...handleCsProp(elemProps, breadcrumbsListStencil())}>
       {items.length ? items.slice(0, splitIndex) : items}
       {overflowButton}
       {items.length ? items.slice(splitIndex, items.length) : null}

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {createContainer} from '@workday/canvas-kit-react/common';
 import {Menu} from '@workday/canvas-kit-react/menu';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 import {BreadcrumbsList} from './BreadcrumbsList';
 import {BreadcrumbsOverflowButton} from './BreadcrumbsOverflowButton';
@@ -164,7 +165,7 @@ export const Breadcrumbs = createContainer('nav')({
 })<BreadcrumbsProps>(({children, ...elemProps}, _, model) => {
   return (
     <Menu model={model.menu}>
-      <nav role="navigation" {...elemProps}>
+      <nav role="navigation" {...mergeStyles(elemProps)}>
         {children}
       </nav>
     </Menu>
