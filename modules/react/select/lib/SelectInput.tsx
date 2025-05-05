@@ -55,26 +55,37 @@ const hiddenSelectInputStencil = createStencil({
 export const SelectInput = createSubcomponent(TextInput)({
   modelHook: useSelectModel,
   elemPropsHook: useSelectInput,
-})<SelectInputProps>(({inputStartIcon, formInputProps, ...elemProps}, Element, model) => {
-  return (
-    <InputGroup data-width="ck-formfield-width" {...selectInputStencil()}>
-      {inputStartIcon && model.state.selectedIds.length > 0 && (
-        <InputGroup.InnerStart {...selectInputStencil.parts.startIconContainer}>
-          <SystemIcon {...selectInputStencil.parts.startIcon} icon={inputStartIcon} />
-        </InputGroup.InnerStart>
-      )}
-      {/* Hidden input to handle ids */}
-      <InputGroup.Input {...selectInputStencil.parts.hiddenInput} {...formInputProps} />
-      {/* Visual input */}
-      <InputGroup.Input
-        as={Element}
-        placeholder="Choose an option"
-        {...selectInputStencil.parts.visualInput}
-        {...elemProps}
-      />
-      <InputGroup.InnerEnd {...selectInputStencil.parts.caretContainer}>
-        <SystemIcon {...selectInputStencil.parts.caret} icon={caretDownSmallIcon} />
-      </InputGroup.InnerEnd>
-    </InputGroup>
-  );
-});
+})<SelectInputProps>(
+  (
+    {placeholder = 'Choose an option', inputStartIcon, formInputProps, ...elemProps},
+    Element,
+    model
+  ) => {
+    return (
+      <InputGroup data-width="ck-formfield-width">
+        {inputStartIcon && model.state.selectedIds.length > 0 && (
+          <InputGroup.InnerStart data-part="select-start-icon-container" {...selectIconsStencil()}>
+            <SystemIcon data-part="select-start-icon" icon={inputStartIcon} />
+          </InputGroup.InnerStart>
+        )}
+        {/* Hidden input to handle ids */}
+        <InputGroup.Input
+          data-part="select-hidden-input"
+          {...formInputProps}
+          {...hiddenSelectInputStencil()}
+        />
+        {/* Visual input */}
+        <InputGroup.Input
+          as={Element}
+          placeholder={placeholder}
+          data-part="select-visual-input"
+          {...elemProps}
+          {...mergeStyles(elemProps, selectInputStencil())}
+        />
+        <InputGroup.InnerEnd data-part="select-caret-container" {...selectIconsStencil()}>
+          <SystemIcon data-part="select-caret-icon" icon={caretDownSmallIcon} />
+        </InputGroup.InnerEnd>
+      </InputGroup>
+    );
+  }
+);
