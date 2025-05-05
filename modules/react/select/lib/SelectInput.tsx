@@ -52,40 +52,34 @@ const hiddenSelectInputStencil = createStencil({
   },
 });
 
-export const SelectInput = createSubcomponent(TextInput)({
+export const SelectInput = createSubcomponent(TextInput.as('input'))({
   modelHook: useSelectModel,
   elemPropsHook: useSelectInput,
-})<SelectInputProps>(
-  (
-    {placeholder = 'Choose an option', inputStartIcon, formInputProps, ...elemProps},
-    Element,
-    model
-  ) => {
-    return (
-      <InputGroup data-width="ck-formfield-width">
-        {inputStartIcon && model.state.selectedIds.length > 0 && (
-          <InputGroup.InnerStart data-part="select-start-icon-container" {...selectIconsStencil()}>
-            <SystemIcon data-part="select-start-icon" icon={inputStartIcon} />
-          </InputGroup.InnerStart>
-        )}
-        {/* Hidden input to handle ids */}
-        <InputGroup.Input
-          data-part="select-hidden-input"
-          {...formInputProps}
-          {...hiddenSelectInputStencil()}
-        />
-        {/* Visual input */}
-        <InputGroup.Input
-          as={Element}
-          placeholder={placeholder}
-          data-part="select-visual-input"
-          {...elemProps}
-          {...mergeStyles(elemProps, selectInputStencil())}
-        />
-        <InputGroup.InnerEnd data-part="select-caret-container" {...selectIconsStencil()}>
-          <SystemIcon data-part="select-caret-icon" icon={caretDownSmallIcon} />
-        </InputGroup.InnerEnd>
-      </InputGroup>
-    );
-  }
-);
+})<SelectInputProps>(({inputStartIcon, formInputProps, ...elemProps}, Element, model) => {
+  return (
+    <InputGroup data-width="ck-formfield-width">
+      {inputStartIcon && model.state.selectedIds.length > 0 && (
+        <InputGroup.InnerStart data-part="select-start-icon-container" {...selectIconsStencil()}>
+          <SystemIcon data-part="select-start-icon" icon={inputStartIcon} />
+        </InputGroup.InnerStart>
+      )}
+      {/* Hidden input to handle ids */}
+      <InputGroup.Input
+        data-part="select-hidden-input"
+        {...formInputProps}
+        {...hiddenSelectInputStencil()}
+      />
+      {/* Visual input */}
+      <InputGroup.Input
+        as={Element}
+        placeholder="Choose an option" // This will get overridden by the placeholder prop on `Select.Input`
+        data-part="select-visual-input"
+        {...elemProps}
+        {...mergeStyles(elemProps, selectInputStencil())}
+      />
+      <InputGroup.InnerEnd data-part="select-caret-container" {...selectIconsStencil()}>
+        <SystemIcon data-part="select-caret-icon" icon={caretDownSmallIcon} />
+      </InputGroup.InnerEnd>
+    </InputGroup>
+  );
+});
