@@ -1,18 +1,20 @@
 import * as React from 'react';
 
-import {colors, type, space} from '@workday/canvas-kit-react/tokens';
-import {createSubcomponent, useIsRTL} from '@workday/canvas-kit-react/common';
+import {colors} from '@workday/canvas-kit-react/tokens';
+import {createSubcomponent} from '@workday/canvas-kit-react/common';
 import {Tooltip, TooltipProps} from '@workday/canvas-kit-react/tooltip';
 import {
+  buttonStencil,
+  buttonColorPropVars,
   BaseButton,
   ButtonContainerProps,
-  ButtonColors,
-  ButtonSizes,
 } from '@workday/canvas-kit-react/button';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {useSegmentedControlModel} from './hooks/useSegmentedControlModel';
 import {Text} from '@workday/canvas-kit-react/text';
 import {useSegmentedControlItem} from './hooks/useSegmentedControlItem';
+import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export interface ItemProps extends ButtonContainerProps {
   /**
@@ -52,112 +54,150 @@ export interface ItemProps extends ButtonContainerProps {
   tooltipProps?: Omit<TooltipProps, 'children'>;
 }
 
-const getMinWidthStyles = (children: React.ReactNode, size: ButtonSizes) => {
-  switch (size) {
-    case 'large':
-      return children ? '112px' : '48px';
-    case 'medium':
-      return children ? '96px' : space.xl;
-    case 'small':
-      return children ? space.xxxl : space.l;
-    case 'extraSmall':
-      return children ? 'auto' : space.m;
-    default:
-      return children ? '96px' : space.xl;
-  }
-};
+export const segmentedControlItemStencil = createStencil({
+  extends: buttonStencil,
+  base: {
+    ...system.type.subtext.large,
+    fontWeight: system.fontWeight.bold,
+    textAlign: 'left',
+    borderRadius: system.shape.x1,
+    gap: system.space.x1,
+    [buttonColorPropVars.default.background]: colors.soap200,
+    [buttonColorPropVars.default.border]: 'transparent',
+    [buttonColorPropVars.default.icon]: colors.licorice400,
+    [buttonColorPropVars.default.label]: colors.licorice400,
+    [buttonColorPropVars.hover.background]: colors.soap400,
+    [buttonColorPropVars.hover.border]: 'transparent',
+    [buttonColorPropVars.hover.icon]: colors.licorice400,
+    [buttonColorPropVars.hover.label]: colors.licorice400,
+    [buttonColorPropVars.active.background]: colors.soap400,
+    [buttonColorPropVars.active.border]: 'transparent',
+    [buttonColorPropVars.active.icon]: colors.licorice400,
+    [buttonColorPropVars.active.label]: colors.licorice400,
+    [buttonColorPropVars.focus.background]: colors.soap200,
+    [buttonColorPropVars.focus.border]: 'transparent',
+    [buttonColorPropVars.focus.icon]: colors.licorice400,
+    [buttonColorPropVars.focus.label]: colors.licorice400,
+    [buttonColorPropVars.disabled.background]: colors.soap200,
+    [buttonColorPropVars.disabled.opacity]: '1',
+    [buttonColorPropVars.disabled.icon]: colors.licorice400,
+    [buttonColorPropVars.disabled.border]: 'transparent',
+    [buttonColorPropVars.disabled.label]: colors.blackPepper400,
 
-const getButtonSize = (size: ButtonContainerProps['size']) => {
-  switch (size) {
-    case 'large':
-      return 'medium';
-    case 'medium':
-      return 'small';
-    case 'small':
-      return 'extraSmall';
-    default:
-      return 'medium';
-  }
-};
-
-const getIconButtonColors = (toggled?: boolean): ButtonColors => {
-  return {
-    default: {
-      background: toggled ? colors.frenchVanilla100 : colors.soap200,
-      border: toggled ? colors.licorice200 : 'transparent',
-      icon: toggled ? colors.blackPepper400 : colors.licorice400,
-      label: toggled ? colors.blackPepper400 : colors.licorice400,
+    "&[aria-pressed='true']": {
+      [buttonColorPropVars.default.background]: colors.frenchVanilla100,
+      [buttonColorPropVars.default.border]: colors.licorice200,
+      [buttonColorPropVars.default.icon]: colors.blackPepper400,
+      [buttonColorPropVars.default.label]: colors.blackPepper400,
+      [buttonColorPropVars.hover.background]: colors.frenchVanilla100,
+      [buttonColorPropVars.hover.border]: colors.licorice200,
+      [buttonColorPropVars.hover.icon]: colors.blackPepper400,
+      [buttonColorPropVars.hover.label]: colors.blackPepper400,
+      [buttonColorPropVars.active.background]: colors.frenchVanilla100,
+      [buttonColorPropVars.active.border]: colors.licorice200,
+      [buttonColorPropVars.focus.background]: colors.frenchVanilla100,
+      [buttonColorPropVars.focus.border]: colors.licorice200,
+      [buttonColorPropVars.focus.icon]: colors.blackPepper400,
+      [buttonColorPropVars.focus.label]: colors.blackPepper400,
+      [buttonColorPropVars.disabled.border]: colors.licorice200,
     },
-    hover: {
-      background: toggled ? colors.frenchVanilla100 : colors.soap400,
-      border: toggled ? colors.licorice200 : 'transparent',
-      icon: colors.licorice400,
-      label: colors.licorice400,
+    ':dir(rtl)': {
+      svg: {
+        transform: 'scaleX(-1)',
+      },
     },
-    active: {
-      background: toggled ? colors.frenchVanilla100 : colors.soap400,
-      border: toggled ? colors.licorice200 : 'transparent',
-      icon: colors.licorice400,
-      label: colors.licorice400,
+  },
+  modifiers: {
+    size: {
+      large: {
+        height: 'fit-content',
+        minWidth: system.space.x10,
+        paddingBlock: px2rem(9),
+        gap: system.space.x2,
+      },
+      medium: {
+        height: 'fit-content',
+        minWidth: system.space.x8,
+        paddingBlock: px2rem(5),
+      },
+      small: {
+        ...system.type.subtext.small,
+        fontWeight: system.fontWeight.bold,
+        height: 'fit-content',
+        minWidth: system.space.x8,
+        paddingBlock: px2rem(3),
+      },
     },
-    focus: {
-      background: toggled ? colors.frenchVanilla100 : colors.soap200,
-      border: toggled ? colors.licorice200 : 'transparent',
-      icon: toggled ? colors.blackPepper400 : colors.licorice400,
-      label: toggled ? colors.blackPepper400 : colors.licorice400,
+    variant: {
+      iconOnly: {},
+      textOnly: {},
+      iconWithText: {},
     },
-    disabled: {
-      background: colors.soap200,
-      opacity: '1',
-      icon: colors.licorice400,
-      border: toggled ? colors.licorice200 : 'transparent',
-      label: colors.blackPepper400,
+  },
+  compound: [
+    {
+      modifiers: {size: 'large', variant: 'iconOnly'},
+      styles: {
+        paddingInline: px2rem(9),
+      },
     },
-  };
-};
+    {
+      modifiers: {size: 'large', variant: 'iconWithText'},
+      styles: {
+        paddingInline: `${px2rem(20)} ${system.space.x6}`,
+      },
+    },
+    {
+      modifiers: {size: 'large', variant: 'textOnly'},
+      styles: {
+        paddingInline: system.space.x6,
+      },
+    },
+    {
+      modifiers: {size: 'medium', variant: 'iconOnly'},
+      styles: {
+        paddingInline: px2rem(5),
+      },
+    },
+    {
+      modifiers: {size: 'medium', variant: 'iconWithText'},
+      styles: {
+        paddingInline: `${system.space.x4} ${px2rem(20)}`,
+      },
+    },
+    {
+      modifiers: {size: 'medium', variant: 'textOnly'},
+      styles: {
+        paddingInline: px2rem(20),
+      },
+    },
+    {
+      modifiers: {size: 'small', variant: 'iconOnly'},
+      styles: {
+        paddingInline: px2rem(5),
+      },
+    },
+    {
+      modifiers: {size: 'small', variant: 'iconWithText'},
+      styles: {
+        paddingInline: `${system.space.x2} ${system.space.x3}`,
+      },
+    },
+    {
+      modifiers: {size: 'small', variant: 'textOnly'},
+      styles: {
+        paddingInline: system.space.x3,
+      },
+    },
+  ],
+});
 
-const getPaddingStyles = (
-  children: React.ReactNode,
-  size: ButtonContainerProps['size'],
-  icon: CanvasSystemIcon | undefined
-) => {
-  if (!children) {
-    return 0;
-  }
-
-  switch (size) {
-    case 'large':
-      return icon ? `0 ${space.m} 0 20px` : `0 ${space.m}`;
-
-    case 'medium':
-      return icon ? `0 20px 0 ${space.s}` : `0 ${space.s}`;
-
-    case 'small':
-      return icon ? `0 ${space.xs} 0 ${space.xxs}` : `0 ${space.xs}`;
-
-    default:
-      return icon ? `0 20px 0 ${space.s}` : `0 ${space.s}`;
-  }
-};
-
-const geButtonStyles = (size: ButtonSizes, children: React.ReactNode, icon?: CanvasSystemIcon) => {
-  const buttonSize = getButtonSize(size);
-  const minWidthValue = getMinWidthStyles(children, children ? size : buttonSize);
-
-  return {
-    height: getMinWidthStyles(false, buttonSize),
-    minWidth: minWidthValue,
-    padding: getPaddingStyles(children, size, icon),
-  };
-};
-
-const Container = ({
-  tooltipProps,
-  children,
-}: {
+type ContainerProps = {
   tooltipProps?: Omit<TooltipProps, 'children'>;
   children: React.ReactElement;
-}) => {
+};
+
+const Container = ({tooltipProps, children}: ContainerProps) => {
   return tooltipProps ? (
     <Tooltip {...tooltipProps}>{children}</Tooltip>
   ) : (
@@ -165,34 +205,32 @@ const Container = ({
   );
 };
 
+const getVariant = (icon: CanvasSystemIcon | undefined, children: React.ReactNode) => {
+  if (icon && children) {
+    return 'iconWithText';
+  } else if (!icon && children) {
+    return 'textOnly';
+  } else {
+    return 'iconOnly';
+  }
+};
+
 export const SegmentedControlItem = createSubcomponent('button')({
   displayName: 'SegmentedControl.Item',
   modelHook: useSegmentedControlModel,
   elemPropsHook: useSegmentedControlItem,
 })<ItemProps>(({children, icon, tooltipProps, ...elemProps}, Element, {state: {size}}) => {
-  const {color, ...textStyles} = type.levels.subtext[size === 'small' ? 'medium' : 'large'];
+  const variant = getVariant(icon, children);
+  const iconSize = size === 'small' ? 'extraSmall' : 'small';
 
   return (
     <Container tooltipProps={tooltipProps}>
       <BaseButton
         as={Element}
-        borderRadius="m"
-        colors={getIconButtonColors(elemProps['aria-pressed'])}
-        {...geButtonStyles(size, children, icon)}
-        {...elemProps}
+        {...handleCsProp(elemProps, segmentedControlItemStencil({size, variant}))}
       >
-        {icon && (
-          <BaseButton.Icon
-            size={size === 'small' ? 'extraSmall' : 'medium'}
-            icon={icon}
-            shouldMirrorIcon={useIsRTL()}
-          />
-        )}
-        {children && (
-          <Text {...textStyles} fontWeight="bold" textAlign="left">
-            {children}
-          </Text>
-        )}
+        {icon && <BaseButton.Icon icon={icon} size={iconSize} />}
+        {children && <Text>{children}</Text>}
       </BaseButton>
     </Container>
   );
