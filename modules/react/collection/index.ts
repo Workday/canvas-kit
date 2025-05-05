@@ -1,4 +1,4 @@
-export {defaultGetId, type Item} from './lib/useBaseListModel';
+export {defaultGetId, type Item, type Orientation} from './lib/useBaseListModel';
 export * from './lib/useListItemRegister';
 export * from './lib/useOverflowListMeasure';
 export * from './lib/useOverflowListItemMeasure';
@@ -24,5 +24,16 @@ export {
   singleSelectionManager,
   multiSelectionManager,
   isSelected,
+  type SelectedIds,
+  type Selection,
+  type SelectionManager,
 } from './lib/useSelectionListModel';
-export {wrappingNavigationManager, navigationManager} from './lib/useCursorListModel';
+export {
+  wrappingNavigationManager,
+  navigationManager,
+  type NavigationManager,
+  type NavigationRequestor,
+  getCursor,
+  isCursor,
+} from './lib/useCursorListModel';
+export {VirtualItem, ScrollToOffsetOptions} from './lib/react-virtual';

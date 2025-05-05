@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import {Basic} from '../../modules/react/tabs/stories/examples/Basic';
 import {DisabledTab} from '../../modules/react/tabs/stories/examples/DisabledTab';
 import {DynamicTabs} from '../../modules/react/tabs/stories/examples/DynamicTabs';

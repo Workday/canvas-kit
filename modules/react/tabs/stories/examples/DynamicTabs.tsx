@@ -1,5 +1,6 @@
 import React from 'react';
 
+import {isCursor} from '@workday/canvas-kit-react/collection';
 import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
 
 type Tab = {
@@ -32,14 +33,14 @@ export const DynamicTabs = () => {
    * @param id The id of the item that will be removed
    */
   const removeItem = <T extends unknown>(id: string, model: ReturnType<typeof useTabsModel>) => {
-    const index = model.state.items.findIndex(item => item.id === model.state.cursorId);
+    const index = model.state.items.findIndex(item => isCursor(model.state, item.id));
     const nextIndex = index === model.state.items.length - 1 ? index - 1 : index + 1;
     const nextId = model.state.items[nextIndex].id;
     if (model.state.selectedIds[0] === id) {
       // We're removing the currently selected item. Select next item
       model.events.select({id: nextId});
     }
-    if (model.state.cursorId === id) {
+    if (isCursor(model.state, id)) {
       // We're removing the currently focused item. Focus next item
       model.events.goTo({id: nextId});
 

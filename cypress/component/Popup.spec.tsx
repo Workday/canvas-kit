@@ -1,4 +1,3 @@
-import * as React from 'react';
 import * as h from '../helpers';
 
 import {Basic} from '../../modules/react/popup/stories/examples/Basic';
@@ -429,6 +428,16 @@ describe('Popup', () => {
         });
       });
 
+      context('when the user clicks on the tabindex button', () => {
+        beforeEach(() => {
+          cy.findByRole('button', {name: 'Button with TabIndex=-1'}).should('not.have.focus');
+        });
+
+        it('should not focus the "Open Popup" button', () => {
+          cy.findByRole('button', {name: 'Open Popup'}).should('not.have.focus');
+        });
+      });
+
       context('when the user scrolls to the top', () => {
         beforeEach(() => {
           cy.findByTestId('scroll-area').scrollTo('top');
@@ -461,9 +470,9 @@ describe('Popup', () => {
         });
       });
 
-      context('when the user scrolls to the right', () => {
+      context('when the user scrolls to the left', () => {
         beforeEach(() => {
-          cy.findByTestId('scroll-area').scrollTo('right');
+          cy.findByTestId('scroll-area').scrollTo('left');
         });
 
         context('when the user clicks outside', () => {

@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {createStencil, cssVar} from '@workday/canvas-kit-styling';
@@ -26,39 +24,50 @@ const primaryButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
     // Base Styles
-    margin: 10,
-    [buttonStencil.vars.background]: brand.primary.base,
+    [buttonStencil.vars.background]: cssVar(brand.action.base, brand.primary.base),
     [buttonStencil.vars.borderRadius]: system.shape.round,
-    [buttonStencil.vars.label]: brand.primary.accent,
-    [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, brand.primary.accent),
+    [buttonStencil.vars.label]: cssVar(brand.action.accent, brand.primary.accent),
+    [systemIconStencil.vars.color]: cssVar(
+      buttonColorPropVars.default.icon,
+      cssVar(brand.action.accent, brand.primary.accent)
+    ),
     // Focus Styles
     '&:focus-visible, &.focus': {
-      [buttonStencil.vars.background]: brand.primary.base,
-      [buttonStencil.vars.label]: brand.primary.accent,
+      [buttonStencil.vars.background]: cssVar(brand.action.base, brand.primary.base),
+      [buttonStencil.vars.label]: cssVar(brand.action.accent, brand.primary.accent),
       [buttonStencil.vars.boxShadowInner]: system.color.border.inverse,
       [buttonStencil.vars.boxShadowOuter]: brand.common.focusOutline,
-      [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, brand.primary.accent),
+      [systemIconStencil.vars.color]: cssVar(
+        buttonColorPropVars.focus.icon,
+        cssVar(brand.action.accent, brand.primary.accent)
+      ),
     },
     // Hover Styles
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: brand.primary.dark,
-      [buttonStencil.vars.label]: brand.primary.accent,
-      [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.hover.icon, brand.primary.accent),
+      [buttonStencil.vars.background]: cssVar(brand.action.dark, brand.primary.dark),
+      [buttonStencil.vars.label]: cssVar(brand.action.accent, brand.primary.accent),
+      [systemIconStencil.vars.color]: cssVar(
+        buttonColorPropVars.hover.icon,
+        cssVar(brand.action.accent, brand.primary.accent)
+      ),
     },
     // Active Styles
     '&:active, &.active': {
-      [buttonStencil.vars.background]: brand.primary.darkest,
-      [buttonStencil.vars.label]: brand.primary.accent,
-      [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.active.icon, brand.primary.accent),
+      [buttonStencil.vars.background]: cssVar(brand.action.darkest, brand.primary.darkest),
+      [buttonStencil.vars.label]: cssVar(brand.action.accent, brand.primary.accent),
+      [systemIconStencil.vars.color]: cssVar(
+        buttonColorPropVars.active.icon,
+        cssVar(brand.action.accent, brand.primary.accent)
+      ),
     },
     // Disabled Styles
     '&:disabled, &.disabled': {
-      [buttonStencil.vars.background]: brand.primary.base,
-      [buttonStencil.vars.label]: brand.primary.accent,
+      [buttonStencil.vars.background]: cssVar(brand.action.base, brand.primary.base),
+      [buttonStencil.vars.label]: cssVar(brand.action.accent, brand.primary.accent),
       [buttonStencil.vars.opacity]: system.opacity.disabled,
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.disabled.icon,
-        brand.primary.accent
+        cssVar(brand.action.accent, brand.primary.accent)
       ),
     },
   },

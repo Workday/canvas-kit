@@ -33,6 +33,7 @@ export const useMenuModel = createModelHook({
 
   const popup = usePopupModel(
     usePopupModel.mergeConfig(config, {
+      id: list.state.id,
       onHide() {
         // reset the index ref to 0 again so registration doesn't start where it left off
         list.state.indexRef.current = 0;
@@ -50,5 +51,11 @@ export const useMenuModel = createModelHook({
     ...popup.events,
   };
 
-  return {...list, ...popup, state, events};
+  return {
+    ...list,
+    ...popup,
+    state,
+    events,
+    UNSTABLE_parentModel: config.UNSTABLE_parentModel as ReturnType<typeof useListModel>,
+  };
 });

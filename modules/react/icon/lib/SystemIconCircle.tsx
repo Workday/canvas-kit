@@ -1,9 +1,9 @@
-import * as React from 'react';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon, SystemIconProps, systemIconStencil} from './SystemIcon';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {createComponent, pickForegroundColor} from '@workday/canvas-kit-react/common';
-import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {calc, createStencil, cssVar, px2rem, CSProps} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 import {transformColorNameToToken} from './Svg';
 
@@ -16,7 +16,7 @@ export enum SystemIconCircleSize {
   xxl = 120,
 }
 
-export interface SystemIconCircleProps extends Pick<SystemIconProps, 'shouldMirror'> {
+export interface SystemIconCircleProps extends CSProps, Pick<SystemIconProps, 'shouldMirror'> {
   /**
    * The background color of the SystemIconCircle from `@workday/canvas-colors-web`.
    * @default base.soap300
@@ -61,7 +61,11 @@ const systemIconCircleStencil = createStencil({
 
 export const SystemIconCircle = createComponent('span')({
   displayName: 'SystemIconCircle',
-  Component: ({background, size, icon, shouldMirror}: SystemIconCircleProps, ref, Element) => {
+  Component: (
+    {background, size, icon, shouldMirror, ...elemProps}: SystemIconCircleProps,
+    ref,
+    Element
+  ) => {
     // `pickForegroundColor` hasn't support to use css variables to generate foregroundColor
     const backgroundFallback =
       background && !background.startsWith('--') ? background : colors.soap200;
@@ -73,11 +77,14 @@ export const SystemIconCircle = createComponent('span')({
 
     return (
       <div
-        {...systemIconCircleStencil({
-          containerSize: typeof size === 'number' ? px2rem(size) : size,
-          backgroundColor: transformColorNameToToken(background),
-          iconColor,
-        })}
+        {...mergeStyles(
+          elemProps,
+          systemIconCircleStencil({
+            containerSize: typeof size === 'number' ? px2rem(size) : size,
+            backgroundColor: transformColorNameToToken(background),
+            iconColor,
+          })
+        )}
       >
         <SystemIcon as={Element} ref={ref} icon={icon} shouldMirror={shouldMirror} />
       </div>

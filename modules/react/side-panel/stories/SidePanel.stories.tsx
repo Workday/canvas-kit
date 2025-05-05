@@ -9,7 +9,7 @@ import {
   SecondaryButton,
   TertiaryButton,
 } from '@workday/canvas-kit-react/button';
-import {StyledType, createComponent, dubLogoBlue} from '@workday/canvas-kit-react/common';
+import {StyledType, createComponent, dubLogoPrimary} from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 import {SidePanel} from '@workday/canvas-kit-react/side-panel';
@@ -186,7 +186,7 @@ export const Configurable = () => (
       <GlobalHeader.Item>
         <TertiaryButton aria-label="menu" icon={justifyIcon} />
         <Hyperlink>
-          <WorkdayLogo dangerouslySetInnerHTML={{__html: dubLogoBlue}} />
+          <WorkdayLogo dangerouslySetInnerHTML={{__html: dubLogoPrimary}} />
         </Hyperlink>
       </GlobalHeader.Item>
       <GlobalHeader.Item margin="auto" width="100%" maxWidth={`calc(${space.xxxl} * 6)`}>

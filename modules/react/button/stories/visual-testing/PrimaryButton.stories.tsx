@@ -11,6 +11,8 @@ import {playCircleIcon, relatedActionsVerticalIcon} from '@workday/canvas-system
 
 import {customColorTheme} from '../../../../../utils/storybook';
 import {Container, stateTableColumnProps} from './utils';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {brand} from '@workday/canvas-tokens-web';
 
 export default {
   title: 'Testing/Buttons/Button/Primary Button',
@@ -20,6 +22,13 @@ export default {
     },
   },
 };
+
+const customActionTheme = createStyles({
+  [brand.action.base]: 'teal',
+  [brand.action.accent]: 'white',
+  [brand.action.dark]: 'hsla(180, 100%, 20%)',
+  [brand.action.darkest]: 'hsla(180, 100%, 16%)',
+});
 
 const PrimaryButtonTest = (props: {theme?: PartialEmotionCanvasTheme}) => (
   <StaticStates theme={props.theme}>
@@ -98,6 +107,14 @@ export const PrimaryIconButtonStates = {
 
 export const PrimaryButtonThemedStates = {
   render: () => <PrimaryButtonTest theme={{canvas: customColorTheme}} />,
+};
+
+export const PrimaryButtonThemedActionStates = {
+  render: () => (
+    <div className={customActionTheme}>
+      <PrimaryButtonTest theme={{canvas: customColorTheme}} />
+    </div>
+  ),
 };
 
 export const PrimaryIconButtonThemedStates = {

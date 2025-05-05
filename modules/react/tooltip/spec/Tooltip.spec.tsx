@@ -28,13 +28,10 @@ describe('Tooltip', () => {
 
       fireEvent.mouseEnter(screen.getByText('Test Text')); // triggers the tooltip
 
-      act(() => {
-        vi.advanceTimersByTime(300); // advance the timer by the amount of delay time
-      });
-      expect(screen.getByText('Test Text')).toHaveAttribute('aria-describedby');
+      vi.advanceTimersByTime(300); // advance the timer by the amount of delay time
+      expect(screen.getByText('Test Text')).toHaveAttribute('aria-describedby', 'a1');
 
-      const id = screen.getByText('Test Text').getAttribute('aria-describedby');
-      expect(screen.getByRole('tooltip')).toHaveAttribute('id', id);
+      expect(screen.getByRole('tooltip')).toHaveAttribute('id', 'a1');
     });
     vi.clearAllTimers();
   });

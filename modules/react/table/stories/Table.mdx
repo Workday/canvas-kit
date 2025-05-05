@@ -1,5 +1,6 @@
 import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
 
+import {BaseHtmlTable} from './examples/BaseHtmlTable';
 import {Basic} from './examples/Basic';
 import {BasicWithHeading} from './examples/BasicWithHeading';
 import {FixedColumn} from './examples/FixedColumn';
@@ -10,7 +11,8 @@ import {RightToLeft} from './examples/RightToLeft';
 `Table` is a simple styled compound component that renders a
 [table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table) element. It is used to
 present information in a two-dimensional table comprised of rows and columns of cells containing
-data.
+data. `Table` is built off of `BaseTable` and is using
+[CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout) features.
 
 ## Installation
 
@@ -50,6 +52,24 @@ Users may add styles to the `Table.Header` to render a fixed column. The example
 `width` if you would only like the fixed column to be triggered if necessary.
 
 <ExampleCodeBlock code={FixedColumn} />
+
+### Base Html Table Example
+
+If a user needs a standard HTML
+[table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table) with no
+[CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout) features, then they can
+use the `BaseTable` component.
+
+<ExampleCodeBlock code={BaseHtmlTable} />
+
+### Which Component Should I Use?
+
+> If a user wants [CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout)
+> features with their Table, then use the [Table](/components/containers/table/) component.
+
+> If a user **does not** want
+> [CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout) features with their
+> Table, then use the [BaseTable](/components/text/heading/) component.
 
 ### Advanced
 

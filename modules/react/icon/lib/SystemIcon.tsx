@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {iconColors} from '@workday/canvas-kit-react/tokens';
 import {CanvasSystemIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
@@ -190,7 +189,15 @@ export const systemIconStencil = createStencil({
         cssVar(backgroundColor, 'transparent')
       ),
     },
+    // for Windows high contrast desktop themes
+    '@media (prefers-contrast: more)': {
+      '.wd-icon-fill, .wd-icon-accent': {
+        color: 'currentColor',
+        fill: 'currentColor',
+      },
+    },
   }),
+  modifiers: {},
 });
 
 export const SystemIcon = createComponent('span')({

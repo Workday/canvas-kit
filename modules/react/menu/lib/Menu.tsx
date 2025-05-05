@@ -10,6 +10,8 @@ import {MenuCard} from './MenuCard';
 import {MenuList} from './MenuList';
 import {MenuDivider} from './MenuDivider';
 import {MenuOption} from './MenuOption';
+import {MenuGroup} from './MenuGroup';
+import {Submenu} from './Submenu';
 
 export interface MenuProps {
   /**
@@ -100,6 +102,7 @@ export const Menu = createContainer()({
      * the model.
      */
     Item: MenuItem,
+    Group: MenuGroup,
     /**
      * A `Menu.Option` is similar to the `Menu.Item`, but has a `role=option` and works with
      * `aria-activedescendant` and is selectable with a selected checkmark. It adds the
@@ -122,6 +125,7 @@ export const Menu = createContainer()({
      * this component will be forwarded to the `div` element, but the `ref` will be forwarded.
      */
     Popper: MenuPopper,
+    Submenu: Submenu,
   },
 })<MenuProps>(({children}) => {
   return <>{children}</>;

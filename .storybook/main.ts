@@ -314,7 +314,7 @@ ${exports.map(name => `${name}.__RAW__ = ${raw};`).join('\n')}
   // babel: async options => ({
   //   ...options,
   //   plugins: [...(options.plugins as [])],
-  //   presets: [...(options.presets as []), ['@babel/preset-react']],
+  //   presets: [...(options.presets as []), ['@babel/preset-react', {runtime: 'automatic'}]],
   // }),
 };
 

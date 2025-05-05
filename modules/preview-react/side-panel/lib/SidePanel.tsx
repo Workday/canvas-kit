@@ -1,9 +1,7 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
 import * as React from 'react';
-import {createComponent, styled} from '@workday/canvas-kit-react/common';
-import {jsx, keyframes, CSSObject} from '@emotion/react';
-import {colors, depth} from '@workday/canvas-kit-react/tokens';
+import {createComponent} from '@workday/canvas-kit-react/common';
+import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 import {SidePanelContext} from './hooks';
 import {SidePanelToggleButton} from './SidePanelToggleButton';
 
@@ -61,44 +59,48 @@ export interface SidePanelProps {
    */
   touched: boolean;
   children?: React.ReactNode;
-  onAnimationStart?: React.AnimationEventHandler<HTMLElement>;
-  onAnimationEnd?: React.AnimationEventHandler<HTMLElement>;
+  onAnimationEnd?: React.TransitionEvent<HTMLElement>;
 }
 
-const createKeyframes = (from: number | string, to: number | string) => {
-  const normalized = {
-    from: typeof from === 'number' ? from + 'px' : from,
-    to: typeof to === 'number' ? to + 'px' : to,
-  };
-
-  return keyframes`
-    from {
-      width: ${normalized.from};
-      min-width: ${normalized.from};
-      max-width: ${normalized.from};
-    } to {
-      width: ${normalized.to};
-      min-width: ${normalized.to};
-      max-width: ${normalized.to};
-    }
-  `;
-};
-
-const containerVariantStyle: Record<SidePanelVariant, CSSObject> = {
-  alternate: {
-    backgroundColor: colors.frenchVanilla100,
-    ...depth[5],
+export const panelStencil = createStencil({
+  vars: {
+    expandedWidth: '',
+    collapsedWidth: '',
   },
-  standard: {
-    backgroundColor: colors.soap100,
+  base: () => ({
+    overflow: 'hidden',
+    position: 'relative',
+    height: '100%',
+    outline: `${px2rem(1)} solid transparent`,
+    transition: 'width ease-out 200ms, max-width ease-out 200ms',
+  }),
+  modifiers: {
+    variant: {
+      alternate: {
+        backgroundColor: system.color.bg.default,
+        boxShadow: system.depth[5],
+      },
+      standard: {
+        backgroundColor: system.color.bg.alt.softer,
+      },
+    },
+    expanded: {
+      true: ({expandedWidth}) => ({
+        width: expandedWidth,
+        maxWidth: expandedWidth,
+      }),
+      false: ({collapsedWidth}) => ({
+        width: collapsedWidth,
+        maxWidth: collapsedWidth,
+      }),
+    },
+    touched: {
+      true: {},
+      false: {
+        animation: 'none',
+      },
+    },
   },
-};
-
-const Panel = styled('section')({
-  overflow: 'hidden',
-  position: 'relative',
-  boxSizing: 'border-box',
-  height: '100%',
 });
 
 export const SidePanel = createComponent('section')({
@@ -110,7 +112,6 @@ export const SidePanel = createComponent('section')({
       expanded = true,
       expandedWidth = 320,
       onAnimationEnd,
-      onAnimationStart,
       onExpandedChange,
       onStateTransition,
       origin = 'left',
@@ -137,71 +138,50 @@ export const SidePanel = createComponent('section')({
       }
     }, [state, onStateTransition]);
 
-    const motion = {
-      collapse: createKeyframes(expandedWidth, collapsedWidth),
-      expand: createKeyframes(collapsedWidth, expandedWidth),
-    };
-
-    const handleAnimationEnd = (event: React.AnimationEvent<HTMLDivElement>) => {
-      if (event.currentTarget === event.target) {
-        if (event.animationName === motion.collapse.name) {
+    const handleAnimationEnd = (event: React.TransitionEvent<HTMLDivElement>) => {
+      if (event.propertyName === 'width') {
+        if (state === 'expanding') {
+          setState('expanded');
+        } else if (state === 'collapsing') {
           setState('collapsed');
         }
-
-        if (event.animationName === motion.expand.name) {
-          setState('expanded');
-        }
-      }
-
-      if (typeof onAnimationEnd !== 'undefined') {
-        onAnimationEnd(event);
       }
     };
 
-    const handleAnimationStart = (event: React.AnimationEvent<HTMLDivElement>) => {
-      if (event.currentTarget === event.target) {
-        if (
-          event.animationName === motion.collapse.name ||
-          event.animationName === motion.expand.name
-        ) {
-          setState(expanded ? 'expanding' : 'collapsing');
-        }
+    const handleAnimationStart = () => {
+      if (state === 'collapsed' || state === 'collapsing') {
+        setState('expanding');
+      } else if (state === 'expanded' || state === 'expanding') {
+        setState('collapsing');
       }
-
-      if (typeof onAnimationStart !== 'undefined') {
-        onAnimationStart(event);
-      }
+      return undefined;
     };
 
     return (
-      <Panel
+      <Element
         ref={ref}
-        as={Element}
-        css={[
-          {
-            width: expanded ? expandedWidth : collapsedWidth,
-            maxWidth: expanded ? expandedWidth : collapsedWidth,
-            // mounted.current will be false on the first render, thus you won't get an unwanted animation here
-            // Will animate again if you force a re-render (like in Storybook)
-            animation: touched
-              ? `${expanded ? motion.expand : motion.collapse} 200ms ease-out`
-              : undefined,
-          },
-          containerVariantStyle[variant],
-        ]}
-        onAnimationEnd={handleAnimationEnd}
-        onAnimationStart={handleAnimationStart}
-        {...elemProps}
+        onTransitionEnd={handleAnimationEnd}
+        {...handleCsProp(elemProps, [
+          panelStencil({
+            expanded,
+            variant,
+            expandedWidth:
+              typeof expandedWidth === 'number' ? px2rem(expandedWidth) : expandedWidth,
+            collapsedWidth:
+              typeof collapsedWidth === 'number' ? px2rem(collapsedWidth) : collapsedWidth,
+          }),
+        ])}
       >
         <SidePanelContext.Provider
           value={{
             state,
             origin,
+            handleAnimationStart,
           }}
         >
           {children}
         </SidePanelContext.Provider>
-      </Panel>
+      </Element>
     );
   },
   subComponents: {

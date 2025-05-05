@@ -5,6 +5,7 @@ import mdxDoc from './Tooltip.mdx';
 export {Default} from './examples/Default';
 export {CustomContent} from './examples/CustomContent';
 export {DelayedTooltip} from './examples/DelayedTooltip';
+export {DescriptionType} from './examples/DescriptionType';
 export {DescribeType} from './examples/DescribeType';
 export {Muted} from './examples/Muted';
 export {Placements} from './examples/Placements';

@@ -108,6 +108,9 @@ jobs:
       - name: Forward merge
         run: node utils/forward-merge.js
 
+      - name: Update Cypress from merge
+        run: CYPRESS_CACHE_FOLDER=.cache/cypress yarn cypress install
+
       - name: Git Log
         run: git log
 
@@ -129,7 +132,7 @@ jobs:
 
       - name: Cache Build
         id: build-cache
-        uses: actions/cache/@v2
+        uses: actions/cache/@v3
         with:
           path: docs
           key: ${{ runner.os }}-build-${{ github.sha }}

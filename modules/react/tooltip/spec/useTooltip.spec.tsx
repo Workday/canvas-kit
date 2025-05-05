@@ -4,7 +4,7 @@ import {act} from 'react-dom/test-utils';
 
 import {TooltipContainer, useTooltip} from '..';
 
-const TooltipWithHook = ({type}: {type: 'label' | 'describe'}) => {
+const TooltipWithHook = ({type}: {type: 'label' | 'describe' | 'description'}) => {
   const {targetProps, tooltipProps} = useTooltip({type, titleText: 'Hover'});
 
   return (
@@ -41,15 +41,27 @@ describe('useTooltip with type="describe"', () => {
     render(<TooltipWithHook type="describe" />);
 
     const target = screen.getByText('Hover');
-    const tooltip = screen.getByRole('tooltip');
 
     fireEvent.mouseOver(target); // assign the ID to the tooltip
     act(() => {
       vi.advanceTimersByTime(300); // advance the timer by the amount of delay time
     });
 
-    expect(tooltip).toHaveAttribute('id');
-
     vi.useRealTimers();
+    expect(screen.getByText('Hover')).toHaveAttribute('aria-describedby', 'originalDescribedById');
+  });
+});
+
+describe('useTooltip with type="description"', () => {
+  vi.useFakeTimers();
+  it('should add aria attributes to correlate the target and the tooltip', () => {
+    render(<TooltipWithHook type="description" />);
+
+    const target = screen.getByText('Hover');
+
+    fireEvent.mouseOver(target); // assign the ID to the tooltip
+    vi.advanceTimersByTime(300); // advance the timer by the amount of delay time
+
+    expect(screen.getByText('Hover')).toHaveAttribute('aria-description', 'Hover');
   });
 });

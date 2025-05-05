@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Grid} from '@workday/canvas-kit-react/layout';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';

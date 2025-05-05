@@ -2,12 +2,14 @@ import {Meta} from '@storybook/react';
 
 import mdxDoc from './Pill.mdx';
 
+// examples
 export {WithReadOnly} from './examples/WithReadOnly';
 export {WithAvatar} from './examples/WithAvatar';
 export {Basic} from './examples/Basic';
 export {WithCount} from './examples/WithCount';
 export {WithRemovable} from './examples/WithRemovable';
 export {WithList} from './examples/WithList';
+export {CustomStyles} from './examples/CustomStyles';
 
 export default {
   title: 'Preview/Pill',

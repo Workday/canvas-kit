@@ -5,12 +5,26 @@ import {useUniqueId, createModelHook, Generic} from '@workday/canvas-kit-react/c
 
 export type Orientation = 'horizontal' | 'vertical';
 
-export const defaultGetId = (item: any): string => {
-  return typeof item === 'string' ? item : item.id || '';
+export const defaultGetId = (item: Generic): string => {
+  if (process.env.NODE_ENV === 'development') {
+    if (typeof item === 'object' && item.id === undefined) {
+      console.warn(
+        "List item was an object, but no `getId` was passed to the model to inform the list where to find the item's identifier. Please pass a `getId` to the list model"
+      );
+    }
+  }
+  return item === undefined ? '' : typeof item === 'string' ? item : item.id || '';
 };
 
-export const defaultGetTextValue = (item: any): string => {
-  return typeof item === 'string' ? item : item.text || item.id || '';
+export const defaultGetTextValue = (item: Generic): string => {
+  if (process.env.NODE_ENV === 'development') {
+    if (typeof item === 'object' && item.text === undefined) {
+      console.warn(
+        "List item was an object, but no `getTextValue` was passed to the model to inform the list where to find the item's text value. The item's text value is used for accessibility. Please pass a `getTextValue` to the list model"
+      );
+    }
+  }
+  return typeof item === 'string' ? item : item === undefined ? '' : item.text || '';
 };
 
 export interface Item<T> {
@@ -84,15 +98,13 @@ export const useBaseListModel = createModelHook({
      * JSX, the list will create an internal array of items where `id` is the only property and the
      * default `getId` will return the desired result.
      */
-    getId: (item: Generic) =>
-      typeof item === 'string' ? item : item === undefined ? '' : (item.id as string),
+    getId: defaultGetId,
     /**
      * Optional function to return the text representation of an item. If not provided, the default
      * function will return the `text` property of the object of each item or an empty string if
      * there is no `text` property. If you did not provide `items`, do not override this function.
      */
-    getTextValue: (item: Generic) =>
-      (typeof item === 'string' ? item : item === undefined ? '' : item.text || '') as string,
+    getTextValue: defaultGetTextValue,
     /**
      * Array of all ids which are currently disabled. This is used for navigation to skip over items
      * which are not focusable.
@@ -123,10 +135,8 @@ export const useBaseListModel = createModelHook({
   const getIdRef = React.useRef(defaultGetId);
   const getTextValueRef = React.useRef(defaultGetTextValue);
 
-  const getId = config.getId || defaultGetId;
-  const getTextValue = config.getTextValue || config.getId || defaultGetTextValue;
-  getIdRef.current = getId;
-  getTextValueRef.current = getTextValue;
+  getIdRef.current = config.getId || defaultGetId;
+  getTextValueRef.current = config.getTextValue || config.getId || defaultGetTextValue;
 
   const [orientation] = React.useState(config.orientation || 'vertical');
   const [UNSTABLE_defaultItemHeight, setDefaultItemHeight] = React.useState(
@@ -148,6 +158,7 @@ export const useBaseListModel = createModelHook({
     [config.items]
   );
   const [staticItems, setStaticItems] = React.useState<Item<Generic>[]>([]);
+
   const UNSTABLE_virtual = useVirtual({
     size: items.length,
     parentRef: containerRef,
@@ -178,14 +189,13 @@ export const useBaseListModel = createModelHook({
      * Register an item to the list. Takes in an identifier, a React.Ref and an optional index. This
      * should be called on component mount. This event is only called for static rendering.
      */
-    registerItem(data: {item: Generic; textValue: string}) {
+    registerItem(data: {id: string; textValue: string}) {
       indexRef.current++;
       setStaticItems(items => {
         return items.concat({
-          id: getId(data.item),
-          value: data.item,
+          ...data,
+          value: data,
           index: items.length,
-          textValue: data.textValue,
         });
       });
     },
@@ -196,8 +206,8 @@ export const useBaseListModel = createModelHook({
     unregisterItem(data: {id: string}) {
       setStaticItems(items => {
         // this extra `if` ensures reference stability for no-ops
-        if (items.find(item => getId(item.value) === data.id)) {
-          return items.filter(item => getId(item.value) !== data.id);
+        if (items.find(item => item.id === data.id)) {
+          return items.filter(item => item.id !== data.id);
         } else {
           return items;
         }
@@ -217,5 +227,5 @@ export const useBaseListModel = createModelHook({
     },
   };
 
-  return {state, events, getId};
+  return {state, events, getId: config.getId, getTextValue: config.getTextValue};
 });
