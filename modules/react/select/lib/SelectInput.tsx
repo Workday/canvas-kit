@@ -52,7 +52,7 @@ const hiddenSelectInputStencil = createStencil({
   },
 });
 
-export const SelectInput = createSubcomponent(TextInput.as('input'))({
+export const SelectInput = createSubcomponent(TextInput)({
   modelHook: useSelectModel,
   elemPropsHook: useSelectInput,
 })<SelectInputProps>(({inputStartIcon, formInputProps, ...elemProps}, Element, model) => {
