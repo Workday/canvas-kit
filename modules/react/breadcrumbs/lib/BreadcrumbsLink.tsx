@@ -1,11 +1,11 @@
 import React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {Hyperlink} from '@workday/canvas-kit-react/button';
+import {Hyperlink, HyperlinkProps} from '@workday/canvas-kit-react/button';
 import {OverflowTooltip, OverflowTooltipProps} from '@workday/canvas-kit-react/tooltip';
 import {system} from '@workday/canvas-tokens-web';
 import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 
-export interface BreadcrumbsLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface BreadcrumbsLinkProps extends HyperlinkProps {
   /**
    * The href url of the anchor tag
    */
@@ -34,20 +34,20 @@ export const breadcrumbsLinkStencil = createStencil({
 
 export const BreadcrumbsLink = createComponent('a')({
   displayName: 'Breadcrumbs.Link',
-  Component: ({
-    maxWidth = 350,
-    href,
-    tooltipProps = {},
-    children,
-    ...props
-  }: BreadcrumbsLinkProps) => {
+  Component: (
+    {maxWidth = 350, href, tooltipProps = {}, children, ...elemProps}: BreadcrumbsLinkProps,
+    ref,
+    Element
+  ) => {
     return (
       <OverflowTooltip {...tooltipProps}>
         <Hyperlink
           href={href}
+          ref={ref}
+          as={Element}
           role="link"
           {...handleCsProp(
-            props,
+            elemProps,
             breadcrumbsLinkStencil({
               maxWidth: typeof maxWidth === 'number' ? px2rem(maxWidth) : maxWidth,
             })
