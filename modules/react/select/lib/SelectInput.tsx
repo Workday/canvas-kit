@@ -9,7 +9,7 @@ import {useSelectModel} from './hooks/useSelectModel';
 import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {system} from '@workday/canvas-tokens-web';
 
-export interface SelectInputProps extends ExtractProps<typeof TextInput>, CSProps {
+export interface SelectInputProps extends ExtractProps<typeof TextInput, never>, CSProps {
   /**
    * The Icon to render at the start of the `input`. Use this prop if your options
    * include icons that you would like to render in the `input` when selected.
@@ -66,32 +66,26 @@ export const selectInputStencil = createStencil({
 export const SelectInput = createSubcomponent(TextInput)({
   modelHook: useSelectModel,
   elemPropsHook: useSelectInput,
-})<SelectInputProps>(
-  (
-    {placeholder = 'Choose an option', inputStartIcon, formInputProps, ...elemProps},
-    Element,
-    model
-  ) => {
-    return (
-      <InputGroup data-width="ck-formfield-width" {...selectInputStencil()}>
-        {inputStartIcon && model.state.selectedIds.length > 0 && (
-          <InputGroup.InnerStart {...selectInputStencil.parts.startIconContainer}>
-            <SystemIcon {...selectInputStencil.parts.startIcon} icon={inputStartIcon} />
-          </InputGroup.InnerStart>
-        )}
-        {/* Hidden input to handle ids */}
-        <InputGroup.Input {...selectInputStencil.parts.hiddenInput} {...formInputProps} />
-        {/* Visual input */}
-        <InputGroup.Input
-          as={Element}
-          placeholder={placeholder}
-          {...selectInputStencil.parts.visualInput}
-          {...elemProps}
-        />
-        <InputGroup.InnerEnd {...selectInputStencil.parts.caretContainer}>
-          <SystemIcon {...selectInputStencil.parts.caret} icon={caretDownSmallIcon} />
-        </InputGroup.InnerEnd>
-      </InputGroup>
-    );
-  }
-);
+})<SelectInputProps>(({inputStartIcon, formInputProps, ...elemProps}, Element, model) => {
+  return (
+    <InputGroup data-width="ck-formfield-width" {...selectInputStencil()}>
+      {inputStartIcon && model.state.selectedIds.length > 0 && (
+        <InputGroup.InnerStart {...selectInputStencil.parts.startIconContainer}>
+          <SystemIcon {...selectInputStencil.parts.startIcon} icon={inputStartIcon} />
+        </InputGroup.InnerStart>
+      )}
+      {/* Hidden input to handle ids */}
+      <InputGroup.Input {...selectInputStencil.parts.hiddenInput} {...formInputProps} />
+      {/* Visual input */}
+      <InputGroup.Input
+        as={Element}
+        placeholder="Choose an option"
+        {...selectInputStencil.parts.visualInput}
+        {...elemProps}
+      />
+      <InputGroup.InnerEnd {...selectInputStencil.parts.caretContainer}>
+        <SystemIcon {...selectInputStencil.parts.caret} icon={caretDownSmallIcon} />
+      </InputGroup.InnerEnd>
+    </InputGroup>
+  );
+});
