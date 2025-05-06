@@ -67,19 +67,19 @@ export const segmentedControlItemStencil = createStencil({
     [buttonColorPropVars.default.label]: system.color.static.gray.strong,
 
     [buttonColorPropVars.hover.background]: system.color.bg.alt.strong,
-    // [buttonColorPropVars.hover.border]: system.color.border.transparent,
+    [buttonColorPropVars.hover.border]: system.color.border.transparent,
     [buttonColorPropVars.hover.icon]: system.color.text.strong,
     [buttonColorPropVars.hover.label]: system.color.text.strong,
 
     [buttonColorPropVars.active.background]: system.color.bg.alt.strong,
     [buttonColorPropVars.active.border]: system.color.border.transparent,
-    // [buttonColorPropVars.active.icon]: system.color.text.strong,
-    // [buttonColorPropVars.active.label]: system.color.text.strong,
+    [buttonColorPropVars.active.icon]: system.color.text.strong,
+    [buttonColorPropVars.active.label]: system.color.text.strong,
 
-    // [buttonColorPropVars.focus.background]: system.color.bg.alt.soft,
-    // [buttonColorPropVars.focus.border]: system.color.border.transparent,
-    // [buttonColorPropVars.focus.icon]: system.color.static.gray.strong,
-    // [buttonColorPropVars.focus.label]: system.color.static.gray.strong,
+    [buttonColorPropVars.focus.background]: system.color.bg.alt.soft,
+    [buttonColorPropVars.focus.border]: system.color.border.transparent,
+    [buttonColorPropVars.focus.icon]: system.color.static.gray.strong,
+    [buttonColorPropVars.focus.label]: system.color.static.gray.strong,
 
     "&[aria-pressed='true']": {
       [buttonColorPropVars.default.background]: system.color.bg.default,
@@ -87,18 +87,22 @@ export const segmentedControlItemStencil = createStencil({
       [buttonColorPropVars.default.icon]: system.color.text.strong,
       [buttonColorPropVars.default.label]: system.color.text.strong,
 
-      // [buttonColorPropVars.hover.background]: system.color.bg.default,
-      // [buttonColorPropVars.hover.border]: colors.licorice200,
-      // [buttonColorPropVars.hover.icon]: colors.blackPepper400,
-      // [buttonColorPropVars.hover.label]: colors.blackPepper400,
+      [buttonColorPropVars.hover.background]: system.color.bg.default,
+      [buttonColorPropVars.hover.border]: system.color.border.input.default,
+      [buttonColorPropVars.hover.icon]: system.color.text.strong,
+      [buttonColorPropVars.hover.label]: system.color.text.strong,
 
-      // [buttonColorPropVars.active.background]: system.color.bg.default,
-      // [buttonColorPropVars.active.border]: colors.licorice200,
-      // [buttonColorPropVars.focus.background]: system.color.bg.default,
-      // [buttonColorPropVars.focus.border]: colors.licorice200,
-      // [buttonColorPropVars.focus.icon]: colors.blackPepper400,
-      // [buttonColorPropVars.focus.label]: colors.blackPepper400,
-      // [buttonColorPropVars.disabled.border]: colors.licorice200,
+      [buttonColorPropVars.active.background]: system.color.bg.default,
+      [buttonColorPropVars.active.border]: system.color.border.input.default,
+
+      [buttonColorPropVars.focus.background]: system.color.bg.default,
+      [buttonColorPropVars.focus.border]: system.color.border.input.default,
+      [buttonColorPropVars.focus.icon]: system.color.text.strong,
+      [buttonColorPropVars.focus.label]: system.color.text.strong,
+
+      [buttonColorPropVars.disabled.background]: system.color.bg.default,
+      [buttonColorPropVars.disabled.border]: system.color.border.input.default,
+      [buttonColorPropVars.disabled.border]: system.color.border.input.default,
     },
     ':dir(rtl)': {
       svg: {
