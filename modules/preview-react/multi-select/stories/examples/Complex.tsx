@@ -34,7 +34,7 @@ export const Complex = () => {
         >
           <main className={mainContentStyles}>
             <MultiSelect items={items} getId={i => i.id} getTextValue={i => i.text}>
-              <FormField orientation="horizontal">
+              <FormField orientation="horizontalStart">
                 <FormField.Label>Toppings</FormField.Label>
                 <FormField.Input
                   as={MultiSelect.Input}

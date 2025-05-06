@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {Box} from '@workday/canvas-kit-react/layout';
 
 const baseStyles = {
@@ -10,7 +9,7 @@ const baseStyles = {
 };
 
 export const Color = () => (
-  <>
+  <div>
     <Box backgroundColor="cinnamon300" color="blackPepper500" {...baseStyles}>
       Cinnamon 300
     </Box>
@@ -20,5 +19,5 @@ export const Color = () => (
     <Box backgroundColor="blueberry300" color="blackPepper500" {...baseStyles}>
       Blueberry 300
     </Box>
-  </>
+  </div>
 );

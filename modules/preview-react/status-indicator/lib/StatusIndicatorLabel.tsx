@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {TextProps, textStencil} from '@workday/canvas-kit-react/text';
 import {createStencil} from '@workday/canvas-kit-styling';
