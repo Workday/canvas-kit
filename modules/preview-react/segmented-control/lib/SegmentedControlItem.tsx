@@ -71,8 +71,8 @@ export const segmentedControlItemStencil = createStencil({
     [buttonColorPropVars.hover.icon]: system.color.text.strong,
     [buttonColorPropVars.hover.label]: system.color.text.strong,
 
-    // [buttonColorPropVars.active.background]: system.color.bg.alt.strong,
-    // [buttonColorPropVars.active.border]: system.color.border.transparent,
+    [buttonColorPropVars.active.background]: system.color.bg.alt.strong,
+    [buttonColorPropVars.active.border]: system.color.border.transparent,
     // [buttonColorPropVars.active.icon]: system.color.text.strong,
     // [buttonColorPropVars.active.label]: system.color.text.strong,
 
@@ -124,7 +124,7 @@ export const segmentedControlItemStencil = createStencil({
         fontWeight: system.fontWeight.bold,
         height: 'fit-content',
         minWidth: system.space.x6,
-        paddingBlock: px2rem(3),
+        paddingBlock: px2rem(2),
       },
     },
     variant: {
@@ -173,7 +173,7 @@ export const segmentedControlItemStencil = createStencil({
     {
       modifiers: {size: 'small', variant: 'iconOnly'},
       styles: {
-        paddingInline: px2rem(3),
+        paddingInline: px2rem(2),
       },
     },
     {
