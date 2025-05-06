@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import {colors} from '@workday/canvas-kit-react/tokens';
 import {createSubcomponent} from '@workday/canvas-kit-react/common';
 import {Tooltip, TooltipProps} from '@workday/canvas-kit-react/tooltip';
 import {
@@ -62,44 +61,45 @@ export const segmentedControlItemStencil = createStencil({
     textAlign: 'left',
     borderRadius: system.shape.x1,
     gap: system.space.x1,
-    [buttonColorPropVars.default.background]: colors.soap200,
-    [buttonColorPropVars.default.border]: 'transparent',
-    [buttonColorPropVars.default.icon]: colors.licorice400,
-    [buttonColorPropVars.default.label]: colors.licorice400,
-    [buttonColorPropVars.hover.background]: colors.soap400,
-    [buttonColorPropVars.hover.border]: 'transparent',
-    [buttonColorPropVars.hover.icon]: colors.licorice400,
-    [buttonColorPropVars.hover.label]: colors.licorice400,
-    [buttonColorPropVars.active.background]: colors.soap400,
-    [buttonColorPropVars.active.border]: 'transparent',
-    [buttonColorPropVars.active.icon]: colors.licorice400,
-    [buttonColorPropVars.active.label]: colors.licorice400,
-    [buttonColorPropVars.focus.background]: colors.soap200,
-    [buttonColorPropVars.focus.border]: 'transparent',
-    [buttonColorPropVars.focus.icon]: colors.licorice400,
-    [buttonColorPropVars.focus.label]: colors.licorice400,
-    [buttonColorPropVars.disabled.background]: colors.soap200,
-    [buttonColorPropVars.disabled.opacity]: '1',
-    [buttonColorPropVars.disabled.icon]: colors.licorice400,
-    [buttonColorPropVars.disabled.border]: 'transparent',
-    [buttonColorPropVars.disabled.label]: colors.blackPepper400,
+
+    [buttonColorPropVars.default.background]: system.color.bg.alt.soft,
+    [buttonColorPropVars.default.border]: system.color.border.transparent,
+    [buttonColorPropVars.default.icon]: system.color.static.gray.strong,
+    [buttonColorPropVars.default.label]: system.color.static.gray.strong,
+
+    [buttonColorPropVars.hover.background]: system.color.bg.alt.strong,
+    // [buttonColorPropVars.hover.border]: system.color.border.transparent,
+    [buttonColorPropVars.hover.icon]: system.color.text.strong,
+    [buttonColorPropVars.hover.label]: system.color.text.strong,
+
+    // [buttonColorPropVars.active.background]: system.color.bg.alt.strong,
+    // [buttonColorPropVars.active.border]: system.color.border.transparent,
+    // [buttonColorPropVars.active.icon]: system.color.text.strong,
+    // [buttonColorPropVars.active.label]: system.color.text.strong,
+
+    // [buttonColorPropVars.focus.background]: system.color.bg.alt.soft,
+    // [buttonColorPropVars.focus.border]: system.color.border.transparent,
+    // [buttonColorPropVars.focus.icon]: system.color.static.gray.strong,
+    // [buttonColorPropVars.focus.label]: system.color.static.gray.strong,
 
     "&[aria-pressed='true']": {
-      [buttonColorPropVars.default.background]: colors.frenchVanilla100,
-      [buttonColorPropVars.default.border]: colors.licorice200,
-      [buttonColorPropVars.default.icon]: colors.blackPepper400,
-      [buttonColorPropVars.default.label]: colors.blackPepper400,
-      [buttonColorPropVars.hover.background]: colors.frenchVanilla100,
-      [buttonColorPropVars.hover.border]: colors.licorice200,
-      [buttonColorPropVars.hover.icon]: colors.blackPepper400,
-      [buttonColorPropVars.hover.label]: colors.blackPepper400,
-      [buttonColorPropVars.active.background]: colors.frenchVanilla100,
-      [buttonColorPropVars.active.border]: colors.licorice200,
-      [buttonColorPropVars.focus.background]: colors.frenchVanilla100,
-      [buttonColorPropVars.focus.border]: colors.licorice200,
-      [buttonColorPropVars.focus.icon]: colors.blackPepper400,
-      [buttonColorPropVars.focus.label]: colors.blackPepper400,
-      [buttonColorPropVars.disabled.border]: colors.licorice200,
+      [buttonColorPropVars.default.background]: system.color.bg.default,
+      [buttonColorPropVars.default.border]: system.color.border.input.default,
+      [buttonColorPropVars.default.icon]: system.color.text.strong,
+      [buttonColorPropVars.default.label]: system.color.text.strong,
+
+      // [buttonColorPropVars.hover.background]: system.color.bg.default,
+      // [buttonColorPropVars.hover.border]: colors.licorice200,
+      // [buttonColorPropVars.hover.icon]: colors.blackPepper400,
+      // [buttonColorPropVars.hover.label]: colors.blackPepper400,
+
+      // [buttonColorPropVars.active.background]: system.color.bg.default,
+      // [buttonColorPropVars.active.border]: colors.licorice200,
+      // [buttonColorPropVars.focus.background]: system.color.bg.default,
+      // [buttonColorPropVars.focus.border]: colors.licorice200,
+      // [buttonColorPropVars.focus.icon]: colors.blackPepper400,
+      // [buttonColorPropVars.focus.label]: colors.blackPepper400,
+      // [buttonColorPropVars.disabled.border]: colors.licorice200,
     },
     ':dir(rtl)': {
       svg: {
