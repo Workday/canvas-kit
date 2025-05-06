@@ -1,0 +1,16 @@
+import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
+
+import {BaseExample} from './examples/BaseExample';
+
+
+<Meta title="Hooks and Utilities/Common" />
+
+# Common
+The Common package contains a collection of components and utilities that serve as the foundation for building robust features across other packages.
+
+## Base
+
+The `Base` component is a low level component that automatically handles the [`cs`](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--docs#cs-prop) prop for you and style merging via [`handleCsProp`](https://workday.github.io/canvas-kit/?path=/docs/styling-merging-styles--docs#handlecsprop).
+As we transition away from supporting `Box` and `Flex` due to their support of [style props](https://workday.github.io/canvas-kit/?path=/docs/features-style-props--docs), `Base` is recommended when needing a container element where simple styles need to be applied.
+
+<ExampleCodeBlock code={BaseExample} />
