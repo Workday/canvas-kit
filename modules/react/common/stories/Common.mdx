@@ -14,3 +14,41 @@ The `Base` component is a low level component that automatically handles the [`c
 As we transition away from supporting `Box` and `Flex` due to their support of [style props](https://workday.github.io/canvas-kit/?path=/docs/features-style-props--docs), `Base` is recommended when needing a container element where simple styles need to be applied.
 
 <ExampleCodeBlock code={BaseExample} />
+
+### Transitioning from `Box` and `Flex` to `Base`
+
+> `Box` and `Flex` where great, why are you moving away from them?
+
+To be more specific, _style props_ are going away. And because `Box`, `Flex`, and `Grid` primarily exist to expose style props, they will almost certainly be removed as well.
+
+The two main reasons for this change:
+- Emotion’s runtime for dynamic styling is very expensive, and with the improvements to CSS, we can no longer justify that cost.
+- Moving to static styling allows us to export our styles to Canvas Kit CSS so teams who do not use React can have 1:1 styling with what’s available in Canvas Kit React.
+
+**Before, using Flex**
+
+```tsx
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {system} from '@workday/canvas-tokens-web';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
+//...
+
+<Flex flexDirection='row' gap={system.space.x2}>
+  <PrimaryButton>Button 1</PrimaryButton>
+  <PrimaryButton>Button 2</PrimaryButton>
+</Flex>
+```
+
+**After, using Base**
+
+```tsx
+import {Base} from '@workday/canvas-kit-react/common';
+import {system} from '@workday/canvas-tokens-web';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
+//...
+
+<Base cs={{display: 'inline-flex', gap: system.space.x2}}>
+  <PrimaryButton>Button 1</PrimaryButton>
+  <PrimaryButton>Button 2</PrimaryButton>
+</Base>
+```
