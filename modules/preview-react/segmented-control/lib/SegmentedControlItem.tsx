@@ -61,7 +61,6 @@ export const segmentedControlItemStencil = createStencil({
     textAlign: 'left',
     borderRadius: system.shape.x1,
     gap: system.space.x1,
-
     [buttonColorPropVars.default.background]: system.color.bg.alt.soft,
     [buttonColorPropVars.default.border]: system.color.border.transparent,
     [buttonColorPropVars.default.icon]: system.color.static.gray.strong,
@@ -124,7 +123,7 @@ export const segmentedControlItemStencil = createStencil({
         ...system.type.subtext.small,
         fontWeight: system.fontWeight.bold,
         height: 'fit-content',
-        minWidth: system.space.x8,
+        minWidth: system.space.x6,
         paddingBlock: px2rem(3),
       },
     },
@@ -174,7 +173,7 @@ export const segmentedControlItemStencil = createStencil({
     {
       modifiers: {size: 'small', variant: 'iconOnly'},
       styles: {
-        paddingInline: px2rem(5),
+        paddingInline: px2rem(3),
       },
     },
     {
