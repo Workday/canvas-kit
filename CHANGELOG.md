@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.6.9](https://github.com/Workday/canvas-kit/releases/tag/v12.6.9) (2025-05-06)
+
+### Components
+
+- fix(select): Remove excess props from `SelectInputProps` ([#3269](https://github.com/Workday/canvas-kit/pull/3269)) ([@NicholasBoll](https://github.com/NicholasBoll), manuel.carrera, [@mannycarrera4](https://github.com/mannycarrera4))
 ## [v13.0.2](https://github.com/Workday/canvas-kit/releases/tag/v13.0.2) (2025-04-30)
 
 ### Components
