@@ -8,16 +8,21 @@ import {BaseExample} from './mdx/examples/BaseExample';
 # Common
 The Common package contains a collection of components and utilities that serve as the foundation for building robust features across other packages.
 
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
 ## Base
 
 The `Base` component is a low level component that automatically handles the [`cs`](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--docs#cs-prop) prop for you and style merging via [`handleCsProp`](https://workday.github.io/canvas-kit/?path=/docs/styling-merging-styles--docs#handlecsprop).
 As we transition away from supporting `Box` and `Flex` due to their support of [style props](https://workday.github.io/canvas-kit/?path=/docs/features-style-props--docs), `Base` is recommended when needing a container element where simple styles need to be applied.
 
-<ExampleCodeBlock code={BaseExample} />
-
 ### Usage
 
 Use `Base` when you need to style a container element or you're building a complex component that is **not reusable**.
+
 
 ```tsx
 import {Base} from '@workday/canvas-kit-react/common';
@@ -43,6 +48,10 @@ const AppHeader = ({children, headerText, other, props}) => {
   )
 }
 ```
+
+### Basic Example
+
+<ExampleCodeBlock code={BaseExample} />
 
 ### Transitioning from `Box` and `Flex` to `Base`
 
