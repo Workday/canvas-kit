@@ -15,6 +15,35 @@ As we transition away from supporting `Box` and `Flex` due to their support of [
 
 <ExampleCodeBlock code={BaseExample} />
 
+### Usage
+
+Use `Base` when you need to style a container element or you're building a complex component that is **not reusable**.
+
+```tsx
+import {Base} from '@workday/canvas-kit-react/common';
+import {system} from '@workday/canvas-tokens-web';
+import {createStyles} from '@workday/canvas-kit-styling';
+
+const headerStyles = createStyles({
+	fontSize: system.fontSizes.xl,
+	fontWeight: system.fontWeights.bold,
+	color: system.color.text.primary,
+});
+
+// Base+cs
+const AppHeader = ({children, headerText, other, props}) => {
+
+  return (
+    <Base cs={{margin: system.space.x2}}>
+      <Base as="h2" data-testid="my-header" cs={headerStyles}>{headerText}</Base>
+      <Base cs={someOtherContainerStyles}>
+        // ...
+      </Base>
+    </Base>
+  )
+}
+```
+
 ### Transitioning from `Box` and `Flex` to `Base`
 
 > `Box` and `Flex` where great, why are you moving away from them?
@@ -52,3 +81,4 @@ import {PrimaryButton} from '@workday/canvas-kit-react/button';
   <PrimaryButton>Button 2</PrimaryButton>
 </Base>
 ```
+
