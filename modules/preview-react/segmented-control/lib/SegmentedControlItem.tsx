@@ -115,37 +115,31 @@ export const segmentedControlItemStencil = createStencil({
     size: {
       large: {
         height: 'fit-content',
-        minWidth: system.space.x10,
         paddingBlock: px2rem(9),
         gap: system.space.x2,
       },
       medium: {
         height: 'fit-content',
-        minWidth: system.space.x8,
         paddingBlock: px2rem(5),
       },
       small: {
         ...system.type.subtext.medium,
         fontWeight: system.fontWeight.bold,
         height: 'fit-content',
-        minWidth: system.space.x6,
         paddingBlock: px2rem(2),
       },
     },
     variant: {
       iconOnly: {},
-      textOnly: {
-        minWidth: 'fit-content',
-      },
-      iconWithText: {
-        minWidth: 'fit-content',
-      },
+      textOnly: {},
+      iconWithText: {},
     },
   },
   compound: [
     {
       modifiers: {size: 'large', variant: 'iconOnly'},
       styles: {
+        minWidth: system.space.x10,
         paddingInline: px2rem(9),
       },
     },
@@ -165,6 +159,7 @@ export const segmentedControlItemStencil = createStencil({
       modifiers: {size: 'medium', variant: 'iconOnly'},
       styles: {
         paddingInline: px2rem(5),
+        minWidth: system.space.x8,
       },
     },
     {
@@ -183,6 +178,7 @@ export const segmentedControlItemStencil = createStencil({
       modifiers: {size: 'small', variant: 'iconOnly'},
       styles: {
         paddingInline: px2rem(2),
+        minWidth: system.space.x6,
       },
     },
     {
