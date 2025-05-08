@@ -1,106 +1,89 @@
 import {
   BaseButton,
-  ButtonColors,
-  ButtonSizes,
   ButtonContainerProps,
+  buttonColorPropVars,
 } from '@workday/canvas-kit-react/button';
-import {
-  createComponent,
-  mouseFocusBehavior,
-  styled,
-  StyledType,
-} from '@workday/canvas-kit-react/common';
+import {createComponent} from '@workday/canvas-kit-react/common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {colors, borderRadius, space} from '@workday/canvas-kit-react/tokens';
+import {calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 
-const getIconButtonColors = (toggled?: boolean): ButtonColors => {
-  return {
-    default: {
-      background: toggled ? colors.blueberry400 : colors.soap200,
-      icon: toggled ? colors.frenchVanilla100 : colors.licorice200,
-    },
-    hover: {
-      background: toggled ? colors.blueberry400 : colors.soap300,
-      icon: toggled ? colors.frenchVanilla100 : colors.licorice500,
-    },
-    active: {
-      background: toggled ? colors.blueberry400 : colors.soap500,
-      icon: toggled ? colors.frenchVanilla100 : colors.licorice500,
-    },
-    focus: {
-      background: toggled ? colors.blueberry400 : colors.soap200,
-      icon: toggled ? colors.frenchVanilla100 : colors.licorice500,
-      border: toggled ? 'transparent' : colors.soap500,
-    },
-    disabled: {
-      background: toggled ? colors.soap100 : colors.soap100,
-      border: colors.soap500,
-      icon: colors.soap600,
-      opacity: '1',
-    },
-  };
-};
-
-const getSizeStyles = (size?: ButtonSizes) => {
-  const sizeValue =
-    size === 'large' ? `calc(${space.xl} + ${space.xxs})` : size === 'small' ? space.l : space.xl;
-
-  return {
-    width: sizeValue,
-    height: sizeValue,
-  };
-};
-
-const StyledButton = styled(BaseButton)<ButtonContainerProps & StyledType>(
-  {
-    borderRadius: borderRadius.zero,
-    border: `1px solid ${colors.soap500}`,
+const segmentedControlButtonStencil = createStencil({
+  base: {
+    borderRadius: system.shape.zero,
+    border: `${px2rem(1)} solid ${system.color.border.container}`,
     borderLeft: 'none',
     minWidth: 'auto',
 
+    [buttonColorPropVars.default.background]: system.color.bg.alt.soft,
+    [buttonColorPropVars.default.icon]: system.color.icon.default,
+    [buttonColorPropVars.hover.background]: system.color.bg.alt.default,
+    [buttonColorPropVars.hover.icon]: system.color.icon.strong,
+    [buttonColorPropVars.active.background]: system.color.bg.alt.stronger,
+    [buttonColorPropVars.active.icon]: system.color.icon.strong,
+    [buttonColorPropVars.focus.background]: system.color.bg.alt.soft,
+    [buttonColorPropVars.focus.icon]: system.color.icon.strong,
+    [buttonColorPropVars.focus.border]: system.color.border.container,
+    [buttonColorPropVars.disabled.background]: system.color.bg.alt.softer,
+    [buttonColorPropVars.disabled.border]: system.color.border.container,
+    [buttonColorPropVars.disabled.icon]: base.soap600,
+    [buttonColorPropVars.disabled.opacity]: system.opacity.full,
+
     '&:first-of-type': {
-      borderRadius: `${borderRadius.m} 0 0 ${borderRadius.m}`,
-      borderLeft: `1px solid ${colors.soap500}`,
+      borderRadius: `${system.shape.x1} 0 0 ${system.shape.x1}`,
+      borderLeft: `1px solid ${system.color.border.container}`,
     },
+
     '&:last-of-type': {
-      borderRadius: `0 ${borderRadius.m} ${borderRadius.m} 0`,
+      borderRadius: `0 ${system.shape.x1} ${system.shape.x1} 0`,
     },
+
     '&[aria-pressed="true"]': {
-      borderColor: `${colors.blueberry400} !important`,
+      borderColor: `${brand.primary.base} !important`,
+
+      [buttonColorPropVars.default.background]: brand.primary.base,
+      [buttonColorPropVars.default.icon]: system.color.icon.inverse,
+      [buttonColorPropVars.hover.background]: brand.primary.base,
+      [buttonColorPropVars.hover.icon]: system.color.icon.inverse,
+      [buttonColorPropVars.active.background]: brand.primary.base,
+      [buttonColorPropVars.active.icon]: system.color.icon.inverse,
+      [buttonColorPropVars.focus.background]: brand.primary.base,
+      [buttonColorPropVars.focus.icon]: system.color.icon.inverse,
+      [buttonColorPropVars.focus.border]: system.color.border.transparent,
+      [buttonColorPropVars.disabled.background]: system.color.bg.alt.softer,
+      [buttonColorPropVars.disabled.border]: system.color.border.container,
+      [buttonColorPropVars.disabled.icon]: base.soap600,
+      [buttonColorPropVars.disabled.opacity]: system.opacity.full,
+
       '&:hover, &:focus:hover': {
-        background: colors.blueberry400,
+        background: brand.primary.base,
       },
     },
-    '&:focus': {
-      borderRadius: borderRadius.m,
+
+    '&:focus-visible, &.focus': {
+      borderRadius: system.shape.x1,
       zIndex: 1,
-      animation: 'none', // reset focusRing animation
-      transition: 'all 120ms, border-radius 1ms',
-      ...mouseFocusBehavior({
-        '&': {
-          borderRadius: borderRadius.zero,
-          '&:first-of-type': {
-            borderRadius: `${borderRadius.m} 0 0 ${borderRadius.m}`,
-          },
-          '&:last-of-type': {
-            borderRadius: `0 ${borderRadius.m} ${borderRadius.m} 0`,
-          },
-        },
-      }),
+      animation: 'none',
+      transition: 'all 120ms border-radius 1ms',
     },
   },
-  ({theme}) => ({
-    '[aria-pressed="true"]': {
-      borderColor: theme.canvas.palette.primary.main,
-      '&:hover, &:focus:hover': {
-        background: theme.canvas.palette.primary.main,
+  modifiers: {
+    size: {
+      small: {
+        width: system.space.x8,
+        height: system.space.x8,
+      },
+      medium: {
+        width: system.space.x10,
+        height: system.space.x10,
+      },
+      large: {
+        width: calc.add(system.space.x10, system.space.x2),
+        height: calc.add(system.space.x10, system.space.x2),
       },
     },
-  }),
-  ({size}: ButtonContainerProps) => ({
-    ...getSizeStyles(size),
-  })
-);
+  },
+});
 
 export interface SegmentedControlButtonProps extends ButtonContainerProps {
   toggled?: boolean;
@@ -113,17 +96,15 @@ export const SegmentedControlButton = createComponent('button')({
   displayName: 'Button',
   Component: ({value, icon, toggled, ...props}: SegmentedControlButtonProps, ref, Element) => {
     return (
-      <StyledButton
+      <BaseButton
         as={Element}
+        ref={ref}
         aria-pressed={toggled}
         value={value}
-        colors={getIconButtonColors(toggled)}
-        fillIcon={toggled}
-        ref={ref}
-        {...props}
+        {...handleCsProp(props, segmentedControlButtonStencil({size: props.size || 'medium'}))}
       >
         <BaseButton.Icon size={props.size || 'large'} icon={icon} />
-      </StyledButton>
+      </BaseButton>
     );
   },
 });
