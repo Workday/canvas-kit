@@ -82,6 +82,12 @@ export const segmentedControlItemStencil = createStencil({
     [buttonColorPropVars.focus.icon]: system.color.static.gray.strong,
     [buttonColorPropVars.focus.label]: system.color.static.gray.strong,
 
+    [buttonColorPropVars.disabled.background]: system.color.bg.alt.soft,
+    [buttonColorPropVars.disabled.border]: system.color.border.input.default,
+    [buttonColorPropVars.disabled.icon]: system.color.static.gray.strong,
+    [buttonColorPropVars.disabled.label]: system.color.static.gray.strong,
+    [buttonColorPropVars.disabled.opacity]: system.opacity.disabled,
+
     "&[aria-pressed='true']": {
       [buttonColorPropVars.default.background]: system.color.bg.default,
       [buttonColorPropVars.default.border]: system.color.border.input.default,
@@ -103,7 +109,9 @@ export const segmentedControlItemStencil = createStencil({
 
       [buttonColorPropVars.disabled.background]: system.color.bg.default,
       [buttonColorPropVars.disabled.border]: system.color.border.input.default,
-      [buttonColorPropVars.disabled.border]: system.color.border.input.default,
+      [buttonColorPropVars.disabled.opacity]: system.opacity.disabled,
+      [buttonColorPropVars.disabled.icon]: system.color.text.strong,
+      [buttonColorPropVars.disabled.label]: system.color.text.strong,
     },
     ':dir(rtl)': {
       svg: {
