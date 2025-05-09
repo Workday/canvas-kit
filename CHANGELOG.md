@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.6.10](https://github.com/Workday/canvas-kit/releases/tag/v12.6.10) (2025-05-09)
+
+### Components
+
+- fix: Ensure disabled is passed to MultiSelect sub components so input plus options are disabled ([#3295](https://github.com/Workday/canvas-kit/pull/3295)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v12.6.9](https://github.com/Workday/canvas-kit/releases/tag/v12.6.9) (2025-05-06)
 
 ### Components
