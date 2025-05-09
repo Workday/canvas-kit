@@ -1,14 +1,9 @@
 import * as React from 'react';
 import {Meta, StoryObj} from '@storybook/react';
-import {activityStreamIcon, paragraphIcon, zoominIcon} from '@workday/canvas-system-icons-web';
+import {activityStreamIcon, zoominIcon} from '@workday/canvas-system-icons-web';
 import {ToolbarIconButton, ToolbarDropdownButton} from '@workday/canvas-kit-react/button';
 import {Menu} from '@workday/canvas-kit-react/menu';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-
-const customElementStyles = {
-  margin: '0 16px 0 8px',
-  fontSize: 14,
-};
 
 const meta: Meta<typeof ToolbarIconButton> = {
   title: 'Components/Buttons/Toolbar',
