@@ -73,7 +73,14 @@ module.exports = (modulePath, name, description, prerelease, category) => {
     },
     mdxStories: {
       path: `stories/${pascalCaseName}.stories.mdx`,
-      contents: mdxStories(moduleName, storyPath, pascalCaseName, titleCaseName, prerelease, description),
+      contents: mdxStories(
+        moduleName,
+        storyPath,
+        pascalCaseName,
+        titleCaseName,
+        prerelease,
+        description
+      ),
     },
     basicStories: {
       path: `stories/examples/Basic.tsx`,
@@ -94,6 +101,9 @@ module.exports = (modulePath, name, description, prerelease, category) => {
     readme: {
       path: 'README.md',
       contents: readme(name, description, prerelease),
+    },
+    spec: {
+      path: `spec/${pascalCaseName}.spec.tsx`,
     },
     tsconfigSpec: {
       path: 'spec/tsconfig.json',

@@ -44,6 +44,8 @@ export function subscribe(listener: Subscription): Unsubscribe {
 }
 
 export function updateDocs(updatedDocs: ExportedSymbol[]) {
+  console.log('updating docs', updateDocs);
+
   updatedDocs.forEach(doc => {
     const foundIndex = docs.findIndex(d => d.fileName === doc.fileName && d.name === doc.name);
     if (foundIndex !== -1) {
@@ -70,5 +72,5 @@ if ((import.meta as any).hot) {
 
 if (typeof window !== 'undefined') {
   (window as any).__updateDocs = updateDocs;
-  window.docs = docs;
+  (window as any).docs = docs;
 }

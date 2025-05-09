@@ -6,6 +6,7 @@ import remarkGfm from 'remark-gfm';
 import ts from 'typescript';
 import {ViteDevServer, createFilter, mergeConfig} from 'vite';
 
+import {createWatchDocProgram} from '@workday/canvas-kit-docs/docgen/createDocProgram';
 import {ExportedSymbol, Value} from '@workday/canvas-kit-docs/docgen/docTypes';
 import extractExports from '@workday/canvas-kit-docs/webpack/extract-exports';
 import styleTransformer from '@workday/canvas-kit-styling-transform';
@@ -165,6 +166,7 @@ const config: StorybookConfig = {
   viteFinal(config, options) {
     let server: ViteDevServer;
     let symbols: ExportedSymbol[] = [];
+    const createDocProgram = createWatchDocProgram();
 
     return mergeConfig(
       {
@@ -231,44 +233,57 @@ ${exports.map(name => `${name}.__RAW__ = ${raw};`).join('\n')}
             },
           },
           processDocs
-            ? typescriptPlugin({
-                include: /modules\/.+\.tsx?/,
-                exclude: /examples|stories|spec|codemod|docs/,
-              })
-            : // ? typescriptPlugin({
+            ? // typescriptPlugin({
               //     include: /modules\/.+\.tsx?/,
               //     exclude: /examples|stories|spec|codemod|docs/,
-              //     transformers: {
-              //       before: [
-              //         {
-              //           type: 'program',
-              //           factory: program => {
-              //             const docParser = createDocProgram(program);
-              //             return _context => {
-              //               return node => {
-              //                 if (server) {
-              //                   const fileName = node.getSourceFile().fileName;
-              //                   const symbols = docParser.getExportedSymbols(node);
-              //                   docsMap.set(fileName, symbols);
-
-              //                   if (docsFlushed) {
-              //                     server.ws.send('docs:update', symbols);
-              //                   }
-              //                 }
-              //                 return node;
-              //               };
-              //             };
-              //           },
-              //         },
-              //         {
-              //           type: 'program',
-              //           factory: program =>
-              //             styleTransformer(program, {...styleTransformerConfig, extractCSS: false}),
-              //         },
-              //       ],
-              //     },
               //   })
-              undefined,
+              // :
+              typescriptPlugin({
+                include: /modules\/.+\.tsx?/,
+                exclude: /examples|stories|spec|codemod|docs/,
+                transformers: [
+                  program => {
+                    const docParser = createDocProgram(program);
+                    return _context => {
+                      return node => {
+                        if (ts.isSourceFile(node)) {
+                          console.log('doc gen', node.fileName);
+                        }
+                        if (server) {
+                          const fileName = node.getSourceFile().fileName;
+                          const symbols = docParser.getExportedSymbols(node);
+                          docsMap.set(fileName, symbols);
+
+                          if (docsFlushed) {
+                            server.ws.send('docs:update', symbols);
+                          }
+                        }
+                        return node;
+                      };
+                    };
+                  },
+                  program => {
+                    return styleTransformer(program, {
+                      ...styleTransformerConfig,
+                      extractCSS: false,
+                    });
+                  },
+                ],
+              })
+            : undefined,
+          processDocs
+            ? {
+                name: 'vite-plugin-inject-docs',
+                transform(code, id) {
+                  if (docsMap.get(id)) {
+                    return (
+                      code +
+                      `\nconsole.log('updating', window.__updateDocs);window.__updateDocs?.(${JSON.stringify(docsMap.get(id))});`
+                    );
+                  }
+                },
+              }
+            : undefined,
           // {
           //   name: 'vite-plugin-style-transform',
           //   enforce: 'pre',

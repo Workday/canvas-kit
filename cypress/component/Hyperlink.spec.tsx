@@ -1,8 +1,8 @@
-import {Link} from '../../modules/react/button/stories/button/examples/Hyperlink';
+import {Link} from '../../modules/react/button/stories/button/Hyperlink.stories';
 import {ExternalLink} from '../../modules/react/button/stories/button/examples/ExternalHyperlink';
 
 describe('Hyperlink', () => {
-  context('given internal hyperlinks are rendered', () => {
+  context(`given the [Components/Hyperlink, ${Link.name}] story is rendered`, () => {
     beforeEach(() => {
       cy.mount(<Link />);
     });
@@ -16,7 +16,7 @@ describe('Hyperlink', () => {
     });
   });
 
-  context('given external hyperlinks are rendered', () => {
+  context(`given the [Components/Hyperlink, ${ExternalLink.name}] story is rendered`, () => {
     beforeEach(() => {
       cy.mount(<ExternalLink />);
     });

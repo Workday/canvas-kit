@@ -13,16 +13,17 @@ import {Button, ButtonProps} from './Button';
  */
 export interface PrimaryButtonProps extends ButtonProps {
   /**
-   * Variant has an option for `inverse` which will inverse the styling
+   * Boo! Variant has an option for `inverse` which will inverse the styling
    */
   variant?: 'inverse';
-
-  foo6?: 'bar';
 }
+
+const myMargin = 10;
 
 const primaryButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
+    margin: myMargin,
     // Base Styles
     [buttonStencil.vars.background]: cssVar(brand.action.base, brand.primary.base),
     [buttonStencil.vars.borderRadius]: system.shape.round,

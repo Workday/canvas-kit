@@ -33,23 +33,67 @@ export async function parseSpecFile(file: string): Promise<FileBlock | null> {
     const contents = await fs
       .readFile(path.join(__dirname, '../../..', fileName))
       .then(contents => contents.toString())
-      .then(contents =>
-        contents.replace(/import (.+) from .+/g, (substr: string, imports: string) => {
-          if (imports.includes('{')) {
-            return `const ${imports.replace(/[{}]/g, '')} = () => {}`;
-          }
-          if (/react/g.test(imports)) {
-            return `const React = {createElement: () => {}}`;
-          }
-          return '';
-        })
-      ) // remove imports
+      .then(contents => {
+        // We need to remove the import statements from the file contents and replace them with
+        // `const` declarations so that we can run the file contents through `eval()`. We will
+        // assume all imports within the spec files are functions or objects with function keys.
+        // For example, `import {render} from '@testing-library/react'; render(<div />);`
+        //
+        // The following will transform code like this:
+        // ```tsx
+        // // input
+        // import React from 'react';
+        // import {render} from '@testing-library/react';
+        // import {
+        //  Default,
+        //  Disabled,
+        // } from './examples';
+        //
+        // // output
+        // const React = new Proxy(noop, {get() { return noop }});
+        // const render = noop;
+        // const Default = noop;
+        // const Disabled = noop;
+        // ```
+        // This is required so the spec contents can be run through `eval()`. `noop` and all
+        // `describe`, `it`, etc will be defined in the context of the `eval()` call.
+
+        return contents
+          .replace(/import\s\*\sas/g, 'import') // Remove `import * as`
+          .replace(/^import\s+([\s\S]+?)\s+from\s+.+;?/gm, (_substr: string, imports: string) => {
+            if (imports.includes('{')) {
+              return imports //?
+                .replace(/\n/g, '') // Remove newlines
+                .replace(/[{}]/g, '') // Remove curly braces
+                .replace(/,/g, '') // Remove commas
+                .trim() // Trim whitespace
+                .replace(/[\s]+/g, ' ') // Normalize spaces
+                .split(' ') // Split into individual imports
+                .map(i => `const ${i} = myImport('${i}');`) // Map to `const` declarations
+                .join('\n'); // Join with newlines
+            }
+            return `const ${imports} = new Proxy(noop, {get(target, prop) { if (prop === 'name') { return '${imports}'; } return noop; }});`;
+          });
+      })
       .then(contents => typescript.transpile(contents, {jsx: typescript.JsxEmit.React}))
       .then(contents => {
         let children: (DescribeBlock | ItBlock)[] = [];
 
         // eslint-disable-next-line no-empty-function
         const noop = () => {};
+
+        const myImport = (name: string) =>
+          new Proxy(noop, {
+            get(target, prop) {
+              if (prop === 'name') {
+                return name;
+              }
+              return noop;
+            },
+          });
+
+        // call `myImport` to keep TS happy. It is used inside our eval, but TS doesn't know about it.
+        myImport('myImport');
 
         // define for the eval()
         // @ts-ignore
@@ -89,6 +133,7 @@ export async function parseSpecFile(file: string): Promise<FileBlock | null> {
           };
           children.push(obj);
         };
+
         it.skip = noop;
         it.only = noop;
 

@@ -10,7 +10,7 @@ const getCheckbox = () => {
 
 describe('Checkbox', () => {
   [Basic, Alert, Error].forEach(Example => {
-    context(`given the '${Example.name}' example is rendered`, () => {
+    context(`given the [Components/Inputs/Checkbox, ${Example.name}] story is rendered`, () => {
       beforeEach(() => {
         cy.mount(<Example />);
       });
@@ -31,7 +31,7 @@ describe('Checkbox', () => {
     });
   });
 
-  context(`given the 'Disabled' example is rendered`, () => {
+  context(`given the [Components/Inputs/Checkbox, ${Disabled.name}] story is rendered`, () => {
     beforeEach(() => {
       cy.mount(<Disabled />);
     });
@@ -45,7 +45,7 @@ describe('Checkbox', () => {
     });
   });
 
-  context(`given the 'Indeterminate' story is rendered`, () => {
+  context(`given the [Components/Inputs/Checkbox, ${Indeterminate.name}] story is rendered`, () => {
     beforeEach(() => {
       cy.mount(<Indeterminate />);
     });

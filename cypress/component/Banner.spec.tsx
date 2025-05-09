@@ -3,7 +3,7 @@ import {Sticky} from '../../modules/react/banner/stories/examples/Sticky';
 
 describe('Banner', () => {
   [Error, Sticky].forEach(Example => {
-    context(`${Example.name} Example`, () => {
+    context(`given the [Components/Indicators/Banner, ${Example.name}] is rendered`, () => {
       beforeEach(() => {
         cy.mount(<Example />);
       });

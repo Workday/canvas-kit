@@ -12,14 +12,15 @@ export function vitePluginInlineSpecifications(): PluginOption {
     sequential: true,
     async transform(code, id) {
       if (/.mdx?$/.test(id)) {
-        const specRegEx = /\<Specifications(.+)file=[{'"]([^"'}]+)[}'"](.+)\/>/;
+        const specRegEx = /<Specifications([\s\S]*?)file=[{'"]([^"'}]+)[}'"]([\s\S]*?)\/>/m;
         const specMatch = code.match(specRegEx);
         if (specMatch) {
+          console.log('id', id, specMatch[2]);
           const spec = await parseSpecFile(specMatch[2]).then(contents => JSON.stringify(contents));
           return code.replace(
             specRegEx,
             (_match: string, pre: string, _file: string, post: string) => {
-              return `<Specifications${pre}initialSpecs={${spec}}${post}/>`; //?
+              return `<Specifications${pre} file="${specMatch[2]}" initialSpecs={${spec}}${post}/>`; //?
             }
           );
         }

@@ -1,20 +1,22 @@
-module.exports = (modulePath, storyPath, pascalCaseName, prerelease) => `import React from 'react';
+module.exports = ({modulePath, storyPath, pascalCaseName, prerelease}) => `import {Meta} from '@storybook/react';
 
-\`\`\`sh
-yarn add @workday/canvas-kit-${prerelease && prerelease + '-'}react
-\`\`\`
+import mdxDoc from './${pascalCaseName}.mdx';
 
-
-import {${pascalCaseName}} from '${modulePath}';
-import {SecondaryButton} from '@workday/canvas-kit-react/button';
+export {Basic} from './examples/Basic';
+export {Button} from './examples/Button';
+export {Size} from './examples/Size';
+export {CustomStyles} from './examples/CustomStyles';
+export {Image} from './examples/Image';
+export {LazyLoad} from './examples/LazyLoad';
+export {ObjectFit} from './examples/ObjectFit';
+export {Variant} from './examples/Variant';
 
 export default {
-  title: '${storyPath}',
-};
-
-export const Default = () => (
-  <${pascalCaseName}>
-    <${pascalCaseName}.Target as={SecondaryButton}>Toggle</${pascalCaseName}.Target>
-    <${pascalCaseName}.Content>Content</${pascalCaseName}.Content>
-  </${pascalCaseName}>
-);`;
+  title: 'Components/Indicators/Avatar',
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      page: mdxDoc,
+    },
+  },
+} satisfies Meta;

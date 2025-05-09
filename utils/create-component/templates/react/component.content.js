@@ -1,4 +1,4 @@
-module.exports = pascalCaseName => `
+module.exports = ({pascalCaseName}) => `
 import React from 'react';
 
 import {

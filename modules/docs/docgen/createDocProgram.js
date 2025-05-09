@@ -135,3 +135,21 @@ export function createDocProgram() {
 
   return Doc;
 }
+
+/**
+ * Create a DocParser suitable for watchable mode. The `program` will be the program from a
+ * TypeScript BuildProgram. The `update` method updates the docParser with the updated program that
+ * has updated files.
+ */
+export function createWatchDocProgram() {
+  const {path, config} = getConfig();
+  const plugins = getPlugins(path, config);
+
+  /** @type {DocParser} */
+  let parser; // = new DocParser(program, plugins);
+
+  /**
+   * @param {ts.Program} program The updated program from the BuildProgram
+   */
+  return program => new DocParser(program, plugins);
+}

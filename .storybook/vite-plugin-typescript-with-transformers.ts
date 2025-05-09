@@ -1,10 +1,13 @@
-import {
+import ts, {
   type CompilerOptions,
   type CustomTransformers,
   type ParsedCommandLine,
   type Program,
 } from 'typescript';
 import {type Plugin, type PluginOption, createFilter} from 'vite';
+
+import {createDocProgram} from '../modules/docs/docgen/createDocProgram';
+import {mergeTransformers} from './vitePluginTypescriptCustomTransforms';
 
 type Filepath = string;
 type InvalidateModule = () => void;
@@ -21,7 +24,9 @@ export interface Options {
   /** Specify TypeScript compiler options. Can not be used with tsconfigPath. */
   compilerOptions?: CompilerOptions;
 
-  transformers?: (program: Program) => CustomTransformers;
+  transformers?: ((
+    program: Program
+  ) => ts.TransformerFactory<ts.SourceFile> | ts.CustomTransformerFactory)[];
 }
 
 /** Get the contents of the tsconfig in the system */
@@ -36,11 +41,17 @@ export async function getTSConfigFile(tsconfigPath: string): Promise<Partial<Par
   return ts.parseJsonConfigFileContent(configFile.config, ts.sys, basePath, {}, tsconfigPath);
 }
 
+const formatHost: ts.FormatDiagnosticsHost = {
+  getCanonicalFileName: path => path,
+  getCurrentDirectory: ts.sys.getCurrentDirectory,
+  getNewLine: () => ts.sys.newLine,
+};
+
 const startWatch = async (
   compilerOptions: CompilerOptions,
   tsconfigPath: string,
-  onProgramCreatedOrUpdated: (program: Program) => void
-) => {
+  onProgramCreatedOrUpdated: (program: ts.BuilderProgram) => void
+): Promise<[ts.BuilderProgram, () => void]> => {
   const {default: ts} = await import('typescript');
 
   const host = ts.createWatchCompilerHost(
@@ -48,9 +59,17 @@ const startWatch = async (
     compilerOptions,
     ts.sys,
     ts.createSemanticDiagnosticsBuilderProgram,
-    undefined,
-    () => {
+    (diagnostic: ts.Diagnostic) => {
+      console.error(
+        'Error',
+        diagnostic.code,
+        ':',
+        ts.flattenDiagnosticMessageText(diagnostic.messageText, formatHost.getNewLine())
+      );
+    },
+    (diagnostic: ts.Diagnostic) => {
       /* suppress message */
+      console.info('diagnostic', ts.formatDiagnostic(diagnostic, formatHost));
     }
   );
   host.afterProgramCreate = program => {
@@ -58,12 +77,12 @@ const startWatch = async (
 
     const origEmit = program.emit;
 
-    onProgramCreatedOrUpdated(program.getProgram());
+    onProgramCreatedOrUpdated(program);
   };
 
-  return new Promise<[Program, CloseWatch]>(resolve => {
+  return new Promise<[ts.BuilderProgram, CloseWatch]>(resolve => {
     const watch = ts.createWatchProgram(host);
-    resolve([watch.getProgram().getProgram(), watch.close]);
+    resolve([watch.getProgram(), watch.close]);
   });
 };
 
@@ -90,9 +109,26 @@ const getCompilerOptions = async (config: Options, tsconfigPath: string) => {
   return compilerOptions;
 };
 
+// async function createProgram(
+//   compilerOptions: CompilerOptions,
+//   tsconfigPath: string,
+//   onProgramCreatedOrUpdated: (program: ts.BuilderProgram) => void
+// ) {
+//   // const {default: ts} = await import('typescript');
+
+//   // get files from the tsconfig
+//   const docProgram = createDocProgram();
+
+//   setTimeout(() => {
+//     onProgramCreatedOrUpdated(docProgram.program);
+//   }, 0);
+
+//   return [docProgram.program, () => {}] as const;
+// }
+
 export function typescriptPlugin(config: Options = {}): Plugin {
   console.log('typescriptPlugin');
-  let tsProgram: Program;
+  let tsProgram: ts.BuilderProgram;
   let compilerOptions: CompilerOptions;
   let filter: ReturnType<(typeof import('vite'))['createFilter']>;
   const moduleInvalidationQueue: Map<Filepath, InvalidateModule> = new Map();
@@ -128,17 +164,35 @@ export function typescriptPlugin(config: Options = {}): Plugin {
       }
       const {default: ts} = await import('typescript');
 
-      const output = ts.transpileModule(src, {
-        compilerOptions,
-        // transformers: config.transformers?.(tsProgram),
-      });
+      // const output = ts.transpileModule(src, {
+      //   compilerOptions: {
+      //     ...compilerOptions,
+      //     jsx: id.endsWith('ts') ? ts.JsxEmit.None : compilerOptions.jsx,
+      //   },
+      //   transformers: config.transformers
+      //     ? {before: [config.transformers.before[0].factory(tsProgram)]}
+      //     : // ? mergeTransformers(tsProgram, config.transformers)
+      //       undefined,
+      // });
 
-      console.log('id', id, output.outputText);
+      const printer = ts.createPrinter(compilerOptions);
 
-      return {
-        code: output.outputText,
-        map: output.sourceMapText,
-      };
+      const transformers = config.transformers?.map(t => t(tsProgram.getProgram())) || [];
+
+      const sourceFile =
+        tsProgram.getSourceFile(id) || ts.createSourceFile(id, '', ts.ScriptTarget.ES2019);
+      return printer.printFile(
+        ts
+          .transform(sourceFile, transformers, compilerOptions)
+          .transformed.find(s => s.fileName === id) || sourceFile
+      );
+
+      // return '';
+      // return output.outputText + '\n\n// compiled by typescript\n';
+      // return {
+      //   code: output.outputText,
+      //   map: output.sourceMapText,
+      // };
     },
 
     closeBundle() {

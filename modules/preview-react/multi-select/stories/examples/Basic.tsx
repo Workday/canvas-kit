@@ -1,7 +1,8 @@
 import React from 'react';
 
-import {FormField} from '@workday/canvas-kit-react/form-field';
 import {MultiSelect} from '@workday/canvas-kit-preview-react/multi-select';
+import {ErrorType} from '@workday/canvas-kit-react/common';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 
 const items = ['Cheese', 'Olives', 'Onions', 'Pepperoni', 'Peppers'];
 
@@ -15,6 +16,7 @@ export const Basic = () => {
             as={MultiSelect.Input}
             placeholder="Select Multiple"
             removeLabel="Remove"
+            error={ErrorType.Error}
           />
           <MultiSelect.Popper>
             <MultiSelect.Card>

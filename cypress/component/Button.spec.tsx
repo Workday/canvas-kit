@@ -2,7 +2,7 @@ import {Primary} from '../../modules/react/button/stories/button/examples/Primar
 import {Delete} from '../../modules/react/button/stories/button/examples/Delete';
 
 describe('Button', () => {
-  context('given primary buttons are rendered', () => {
+  context(`given the [Components/Buttons, ${Primary.name}] story is rendered`, () => {
     beforeEach(() => {
       cy.mount(<Primary aria-label="button" />);
     });
@@ -16,7 +16,7 @@ describe('Button', () => {
     });
   });
 
-  context('given delete buttons are rendered', () => {
+  context(`given the [Components/Buttons, ${Delete.name}] story is rendered`, () => {
     beforeEach(() => {
       cy.mount(<Delete aria-label="delete" />);
     });

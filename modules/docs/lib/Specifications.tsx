@@ -2,7 +2,7 @@
 import {toId} from '@storybook/csf';
 import React from 'react';
 
-import {Hyperlink} from '@workday/canvas-kit-react/button';
+import {ExternalHyperlink, Hyperlink} from '@workday/canvas-kit-react/button';
 import {Table} from '@workday/canvas-kit-react/table';
 
 import {type FileBlock} from '../utils/parseSpecFile';
@@ -13,7 +13,7 @@ function useFetchSpecification({file, initialSpecs}: {file: string; initialSpecs
   const [specs, setSpecs] = React.useState(initialSpecs);
 
   React.useEffect(() => {
-    if (file) {
+    if (file && !initialSpecs) {
       import(/* @vite-ignore */ file).then(({default: contents}: {default: FileBlock}) => {
         setSpecs(contents);
       });
@@ -93,8 +93,9 @@ export const Specifications = ({file, name, initialSpecs}: SpecificationsProps) 
     if (!input) {
       return `Could not find a "given". Check the spec file.`;
     }
+    console.log('given', input);
 
-    const matches = input.match(/(.*)(\[[A-Za-z/\s]+), ([A-Za-z\s]+)\](.*)/);
+    const matches = input.match(/(.*)"?(\[[A-Za-z/\s]+)"?, ([A-Za-z\s]+)\](.*)/);
     if (matches == null) {
       return input;
     }
@@ -151,7 +152,12 @@ export const Specifications = ({file, name, initialSpecs}: SpecificationsProps) 
           ))}
         </Table.Body>
       </Table>
-      Source: <Hyperlink href={`${githubUrl}blob/${githubBranch}/${file}`}>{file}</Hyperlink>
+      <p>
+        Source:{' '}
+        <ExternalHyperlink href={`${githubUrl}blob/${githubBranch}/${file}`}>
+          {file}
+        </ExternalHyperlink>
+      </p>
     </div>
   ) : null;
 };

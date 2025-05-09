@@ -1,11 +1,11 @@
-module.exports = (
+module.exports = ({
   modulePath,
   storyPath,
   pascalCaseName,
   titleCaseName,
   prerelease,
-  description
-) => `
+  description,
+}) => `
 import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
 
 import {${pascalCaseName}} from '${modulePath}';
@@ -40,4 +40,8 @@ You can open your component by default using the \`initialOpen\` prop.
 ## Component API
 
 <SymbolDoc name="${pascalCaseName}" hideDescription />
+
+## Specifications
+
+<Specifications file="./cypress/component/${pascalCaseName}.spec.tsx" name="${pascalCaseName}" />
 `;

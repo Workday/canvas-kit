@@ -4,6 +4,7 @@ import mdxDoc from './Avatar.mdx';
 
 export {Basic} from './examples/Basic';
 export {Button} from './examples/Button';
+export {Size} from './examples/Size';
 export {CustomStyles} from './examples/CustomStyles';
 export {Image} from './examples/Image';
 export {LazyLoad} from './examples/LazyLoad';

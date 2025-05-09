@@ -9,7 +9,7 @@ import {ObjectFit} from '../../modules/react/avatar/stories/avatar/examples/Obje
 
 describe('Avatar', () => {
   [Basic, Size, Variant, CustomStyles].forEach(Example => {
-    context(`${Example.name} Example`, () => {
+    describe(`given the [Components/Indicators/Avatar, ${Example.name}] story is rendered`, () => {
       beforeEach(() => {
         cy.mount(<Example />);
       });
@@ -21,7 +21,7 @@ describe('Avatar', () => {
   });
 
   [Image, Button, LazyLoad, ObjectFit].forEach(Example => {
-    context(`${Example.name} Example`, () => {
+    describe(`given the [Components/Indicators/Avatar, ${Example.name}] story is rendered`, () => {
       beforeEach(() => {
         cy.mount(<Example />);
       });

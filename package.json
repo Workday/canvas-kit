@@ -80,7 +80,6 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^3.4.2",
     "prismjs": "^1.23.0",
-    "raw-loader": "^4.0.2",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-syntax-highlighter": "^15.5.0",
@@ -101,7 +100,7 @@
   "scripts": {
     "start": "node utils/download-fonts.mjs && node ./node_modules/storybook/core/cli/bin/index.js dev -p 9001 -c .storybook",
     "watch": "TSC_NONPOLLING_WATCHER=1 lerna run watch --parallel --stream",
-    "clean": "lerna run clean",
+    "clean": "yarn run clean",
     "depcheck": "lerna run depcheck",
     "prebuild": "yarn depcheck",
     "build": "lerna run build",

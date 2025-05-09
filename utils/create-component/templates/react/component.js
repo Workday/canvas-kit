@@ -1,4 +1,4 @@
-module.exports = (pascalCaseName, titleCaseName) => `
+module.exports = ({pascalCaseName, titleCaseName}) => `
 import React from 'react';
 
 import {createContainer, ExtractProps} from '@workday/canvas-kit-react/common';

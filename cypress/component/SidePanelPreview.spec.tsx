@@ -14,7 +14,7 @@ describe('Side Panel', () => {
     {name: 'AsDiv', role: 'region', example: AsDiv},
   ].forEach(story => {
     const Example = story.example;
-    context(`given the "${story.name}" story is rendered`, () => {
+    context(`given the [${story.name}] story is rendered`, () => {
       beforeEach(() => {
         cy.mount(<Example />);
       });
