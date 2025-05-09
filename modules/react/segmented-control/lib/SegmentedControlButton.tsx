@@ -12,7 +12,7 @@ const segmentedControlButtonStencil = createStencil({
   base: {
     borderRadius: system.shape.zero,
     border: `${px2rem(1)} solid ${system.color.border.container}`,
-    borderLeft: 'none',
+    borderInlineStart: 'none',
     minWidth: 'auto',
 
     [buttonColorPropVars.default.background]: system.color.bg.alt.soft,
@@ -31,7 +31,7 @@ const segmentedControlButtonStencil = createStencil({
 
     '&:first-of-type': {
       borderRadius: `${system.shape.x1} 0 0 ${system.shape.x1}`,
-      borderLeft: `1px solid ${system.color.border.container}`,
+      borderInlineStart: `${px2rem(1)} solid ${system.color.border.container}`,
     },
 
     '&:last-of-type': {

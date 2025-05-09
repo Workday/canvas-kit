@@ -58,7 +58,7 @@ export const segmentedControlItemStencil = createStencil({
   base: {
     ...system.type.subtext.large,
     fontWeight: system.fontWeight.bold,
-    textAlign: 'left',
+    textAlign: 'start',
     borderRadius: system.shape.x1,
     gap: system.space.x1,
 
