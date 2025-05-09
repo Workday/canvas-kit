@@ -20,7 +20,6 @@ export const Basic = () => {
         icon={listViewIcon}
         value="list-view"
         onClick={e => console.log('Existing TertiaryButton onClick callback')}
-        id="test"
       />
       <SegmentedControl.Button icon={worksheetsIcon} value="table-view" disabled={true} />
       <SegmentedControl.Button

@@ -42,6 +42,7 @@ export const parameters = {
         prefix('guides-', '1'),
         prefix('guides-getting-started', '1'),
         prefix('styling', '2'),
+        prefix('styling-overview', '1'),
         prefix('styling-why-canvas-styling', '2'),
         prefix('features-', '3'),
         prefix('tokens-', '4'),
