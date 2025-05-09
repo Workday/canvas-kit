@@ -1,18 +1,9 @@
 import * as React from 'react';
-import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
-import {
-  focusRing,
-  useTheme,
-  Themeable,
-  EmotionCanvasTheme,
-  createComponent,
-  styled,
-  StyledType,
-} from '@workday/canvas-kit-react/common';
-import {ButtonColors} from './types';
-import {BaseButton} from './BaseButton';
+import {focusRing, Themeable, createComponent} from '@workday/canvas-kit-react/common';
+import {BaseButton, buttonColorPropVars} from './BaseButton';
 import {TertiaryButtonProps} from './TertiaryButton';
-import {brand} from '@workday/canvas-tokens-web';
+import {base, brand, system} from '@workday/canvas-tokens-web';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 
 export interface ToolbarIconButtonProps
   extends Omit<TertiaryButtonProps, 'size' | 'variant'>,
@@ -22,19 +13,45 @@ export interface ToolbarIconButtonProps
   shouldMirrorIcon?: boolean;
 }
 
-const StyledToolbarIconButton = styled(BaseButton)<StyledType & ToolbarIconButtonProps>({
-  ['& .wd-icon']: {
-    display: 'inline-block',
-    width: 20,
-    height: 20,
-  },
-  '&:focus-visible, &.focus': {
-    ...focusRing({
-      width: 2,
-      separation: 0,
-      innerColor: 'transparent',
-      outerColor: brand.common.focusOutline,
-    }),
+export const toolbarIconButtonStencil = createStencil({
+  base: {
+    minWidth: system.space.x8,
+    padding: system.space.zero,
+    height: system.space.x8,
+    borderRadius: system.shape.x1,
+
+    [buttonColorPropVars.default.icon]: system.color.icon.default,
+    [buttonColorPropVars.default.background]: system.color.bg.transparent,
+    [buttonColorPropVars.hover.icon]: system.color.icon.strong,
+    [buttonColorPropVars.hover.background]: system.color.bg.alt.default,
+    [buttonColorPropVars.active.icon]: system.color.icon.strong,
+    [buttonColorPropVars.active.background]: system.color.bg.alt.stronger,
+    [buttonColorPropVars.focus.icon]: system.color.icon.default,
+    [buttonColorPropVars.focus.background]: system.color.bg.transparent,
+    [buttonColorPropVars.disabled.icon]: base.soap600,
+    [buttonColorPropVars.disabled.background]: system.color.bg.transparent,
+
+    "&[aria-pressed='true']": {
+      [buttonColorPropVars.default.icon]: brand.primary.base,
+      [buttonColorPropVars.default.background]: brand.primary.lightest,
+      [buttonColorPropVars.hover.icon]: brand.primary.dark,
+      [buttonColorPropVars.hover.background]: system.color.bg.alt.default,
+      [buttonColorPropVars.active.icon]: brand.primary.dark,
+      [buttonColorPropVars.active.background]: system.color.bg.alt.stronger,
+      [buttonColorPropVars.focus.icon]: brand.primary.base,
+      [buttonColorPropVars.focus.background]: brand.primary.lightest,
+      [buttonColorPropVars.disabled.icon]: brand.primary.light,
+      [buttonColorPropVars.disabled.background]: brand.primary.lightest,
+    },
+
+    '&:focus-visible, &.focus': {
+      ...focusRing({
+        width: 2,
+        separation: 0,
+        innerColor: system.color.bg.transparent,
+        outerColor: brand.common.focusOutline,
+      }),
+    },
   },
 });
 
@@ -42,9 +59,6 @@ export const ToolbarIconButton = createComponent('button')({
   displayName: 'ToolbarIconButton',
   Component: (
     {
-      // TODO: Fix useTheme and make it a real hook
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      theme = useTheme(),
       onToggleChange,
       icon,
       shouldMirrorIcon = false,
@@ -69,53 +83,16 @@ export const ToolbarIconButton = createComponent('button')({
     }, [toggled, onToggleChange]);
 
     return (
-      <StyledToolbarIconButton
+      <BaseButton
         ref={ref}
         as={Element}
-        colors={getToolbarIconButtonColors(theme, toggled)}
-        size={'small'}
+        size="small"
         fillIcon={toggled}
         aria-pressed={toggled}
-        padding="zero"
-        minWidth={space.l}
-        width={space.l}
-        height={space.l}
-        borderRadius={borderRadius.m}
-        {...elemProps}
+        {...handleCsProp(elemProps, toolbarIconButtonStencil())}
       >
         {icon ? <BaseButton.Icon icon={icon} shouldMirrorIcon={shouldMirrorIcon} /> : children}
-      </StyledToolbarIconButton>
+      </BaseButton>
     );
   },
 });
-
-const getToolbarIconButtonColors = (theme: EmotionCanvasTheme, toggled?: boolean): ButtonColors => {
-  const {
-    canvas: {
-      palette: {primary: themePrimary},
-    },
-  } = theme;
-  return {
-    default: {
-      icon: toggled ? themePrimary.main : colors.licorice200,
-      background: toggled ? themePrimary.lightest : 'transparent',
-    },
-    hover: {
-      icon: toggled ? themePrimary.dark : colors.licorice500,
-      background: colors.soap300,
-    },
-    active: {
-      icon: toggled ? themePrimary.dark : colors.licorice500,
-      background: colors.soap500,
-    },
-    focus: {
-      icon: toggled ? themePrimary.main : colors.licorice200,
-      background: toggled ? themePrimary.lightest : 'transparent',
-    },
-    disabled: {
-      icon: toggled ? themePrimary.light : colors.soap600,
-      background: toggled ? themePrimary.lightest : 'transparent',
-      opacity: '1',
-    },
-  };
-};
