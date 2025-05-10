@@ -17,6 +17,12 @@ interface CountryData {
   population: number;
 }
 
+interface ColumnFilters {
+  country: string;
+  capital: string;
+  population: string;
+}
+
 const countryData: CountryData[] = [
   {country: 'Australia', capital: 'Canberra', population: 25690000},
   {country: 'Bahamas', capital: 'Nassau', population: 407906},
@@ -46,11 +52,20 @@ const textStyles = createStyles({
 
 interface FilterableColumnHeaderProps {
   label: string;
+  onFilter: (filterObject: {filterText: string; column: string}) => void;
 }
 
 const FilterableColumnHeader = createComponent('th')({
   displayName: 'FilterableColumnHeader',
-  Component: ({label}: FilterableColumnHeaderProps, ref) => {
+  Component: ({label, onFilter}: FilterableColumnHeaderProps, ref) => {
+    const [inputVal, setInputVal] = React.useState('');
+
+    function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+      const newVal = e.target.value;
+      setInputVal(newVal);
+      onFilter({filterText: newVal, column: label.toLowerCase()});
+    }
+
     return (
       <Table.Header scope="col">
         <Dialog>
@@ -63,7 +78,12 @@ const FilterableColumnHeader = createComponent('th')({
               <Dialog.Body>
                 <FormField>
                   <FormField.Label>{label}</FormField.Label>
-                  <FormField.Input as={TextInput} type="search" />
+                  <FormField.Input
+                    as={TextInput}
+                    type="search"
+                    onChange={handleChange}
+                    value={inputVal}
+                  />
                 </FormField>
               </Dialog.Body>
               <Flex>
@@ -78,14 +98,25 @@ const FilterableColumnHeader = createComponent('th')({
 });
 
 export const FilterableColumnHeaders = () => {
+  const [colFilters, setColFilters] = React.useState({country: '', capital: '', population: ''});
+
+  let typingDelay: NodeJS.Timeout;
+  function handleColFilters({filterText, column}) {
+    clearTimeout(typingDelay);
+    typingDelay = setTimeout(() => {
+      console.log(`Column: ${column} filter: ${filterText}`);
+      // run filtering logic here!
+    }, 400);
+  }
+
   return (
     <Table maxHeight="40rem">
       <Table.Caption>Population Listed by Country (2021)</Table.Caption>
       <Table.Head>
         <Table.Row>
-          <FilterableColumnHeader label="Country" />
-          <FilterableColumnHeader label="Capital" />
-          <FilterableColumnHeader label="Population" />
+          <FilterableColumnHeader label="Country" onFilter={handleColFilters} />
+          <FilterableColumnHeader label="Capital" onFilter={handleColFilters} />
+          <FilterableColumnHeader label="Population" onFilter={handleColFilters} />
         </Table.Row>
       </Table.Head>
       <Table.Body>
