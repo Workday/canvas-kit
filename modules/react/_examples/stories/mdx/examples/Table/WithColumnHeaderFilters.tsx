@@ -1,9 +1,15 @@
 import React from 'react';
+import {Dialog} from '@workday/canvas-kit-react/dialog';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {PrimaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
 import {Table} from '@workday/canvas-kit-react/table';
 import {Text} from '@workday/canvas-kit-react/text';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {createComponent} from '../../../../../common';
+import {createComponent} from '@workday/canvas-kit-react/common';
+import {Tooltip} from '../../../../../tooltip';
 
 interface CountryData {
   country: string;
@@ -38,12 +44,36 @@ const textStyles = createStyles({
   paddingInlineStart: system.space.x3,
 });
 
-// interface filterableColumnHeaderProps {}
+interface FilterableColumnHeaderProps {
+  label: string;
+}
 
 const FilterableColumnHeader = createComponent('th')({
   displayName: 'FilterableColumnHeader',
-  Component: (/* {props}: filterableColumnHeaderProps, ref */) => {
-    return <Table.Header scope="col">HELLO WORLD!</Table.Header>;
+  Component: ({label}: FilterableColumnHeaderProps, ref) => {
+    return (
+      <Table.Header scope="col">
+        <Dialog>
+          <Tooltip title="Filter" type="description">
+            <Dialog.Target as={TertiaryButton}>{label}</Dialog.Target>
+          </Tooltip>
+          <Dialog.Popper>
+            <Dialog.Card>
+              <Dialog.Heading>Filter</Dialog.Heading>
+              <Dialog.Body>
+                <FormField>
+                  <FormField.Label>{label}</FormField.Label>
+                  <FormField.Input as={TextInput} type="search" />
+                </FormField>
+              </Dialog.Body>
+              <Flex>
+                <Dialog.CloseButton as={PrimaryButton}>Done</Dialog.CloseButton>
+              </Flex>
+            </Dialog.Card>
+          </Dialog.Popper>
+        </Dialog>
+      </Table.Header>
+    );
   },
 });
 
@@ -53,9 +83,9 @@ export const FilterableColumnHeaders = () => {
       <Table.Caption>Population Listed by Country (2021)</Table.Caption>
       <Table.Head>
         <Table.Row>
-          <FilterableColumnHeader />
-          <FilterableColumnHeader />
-          <FilterableColumnHeader />
+          <FilterableColumnHeader label="Country" />
+          <FilterableColumnHeader label="Capital" />
+          <FilterableColumnHeader label="Population" />
         </Table.Row>
       </Table.Head>
       <Table.Body>
