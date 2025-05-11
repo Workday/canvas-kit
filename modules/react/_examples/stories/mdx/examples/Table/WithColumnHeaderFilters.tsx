@@ -6,21 +6,15 @@ import {PrimaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
 import {Table} from '@workday/canvas-kit-react/table';
 import {Text} from '@workday/canvas-kit-react/text';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {Tooltip} from '../../../../../tooltip';
 
 interface CountryData {
   country: string;
   capital: string;
   population: number;
-}
-
-interface ColumnFilters {
-  country: string;
-  capital: string;
-  population: string;
 }
 
 const countryData: CountryData[] = [
@@ -97,15 +91,41 @@ const FilterableColumnHeader = createComponent('th')({
   },
 });
 
+function filterTableData(data: CountryData[], filters) {
+  return data.filter(item => {
+    for (const key in filters) {
+      if (filters.hasOwnProperty(key) && filters[key]) {
+        const filterText = filters[key].toLowerCase();
+        const itemValue = String(item[key]).toLowerCase();
+        if (!itemValue.includes(filterText)) {
+          return false;
+        }
+      }
+    }
+    return true;
+  });
+}
+
 export const FilterableColumnHeaders = () => {
   const [colFilters, setColFilters] = React.useState({country: '', capital: '', population: ''});
+
+  React.useEffect(() => {
+    const filteredData = filterTableData(countryData, colFilters);
+    console.log(filteredData);
+  }, [colFilters]);
 
   let typingDelay: NodeJS.Timeout;
   function handleColFilters({filterText, column}) {
     clearTimeout(typingDelay);
     typingDelay = setTimeout(() => {
-      console.log(`Column: ${column} filter: ${filterText}`);
-      // run filtering logic here!
+      // console.log(`Column: ${column} filter: ${filterText}`);
+      setColFilters(prev => {
+        // convert population string to number
+        // if column = population then convert filterText to number
+        const newState = {...prev, [column]: filterText};
+        // console.log(newState);
+        return newState;
+      });
     }, 400);
   }
 
