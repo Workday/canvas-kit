@@ -17,7 +17,7 @@ import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {createComponent, useUniqueId} from '@workday/canvas-kit-react/common';
+import {AriaLiveRegion, createComponent, useUniqueId} from '@workday/canvas-kit-react/common';
 import {funnelIcon} from '@workday/canvas-system-icons-web';
 
 interface CountryData {
@@ -51,6 +51,10 @@ const countryData: CountryData[] = [
 
 const textStyles = createStyles({
   paddingInlineStart: system.space.x3,
+});
+
+const liveRegionStyles = createStyles({
+  paddingLeft: system.space.x4,
 });
 
 interface FilterableColumnHeaderProps {
@@ -155,7 +159,12 @@ export const FilterableColumnHeaders = () => {
 
   return (
     <Table maxHeight="40rem">
-      <Table.Caption>Population Listed by Country (2021)</Table.Caption>
+      <Table.Caption>
+        Population Listed by Country (2021)
+        <AriaLiveRegion cs={liveRegionStyles}>
+          Showing {filteredData.length} of {countryData.length} items
+        </AriaLiveRegion>
+      </Table.Caption>
       <Table.Head>
         <Table.Row>
           <FilterableColumnHeader label="Country" onFilter={handleColFilters} />
