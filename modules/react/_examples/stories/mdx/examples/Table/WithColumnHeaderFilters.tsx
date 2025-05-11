@@ -22,7 +22,7 @@ import {createComponent, useUniqueId} from '@workday/canvas-kit-react/common';
 interface CountryData {
   country: string;
   capital: string;
-  population: number;
+  population: string;
 }
 
 const countryData: CountryData[] = [
@@ -114,7 +114,7 @@ const FilterableColumnHeader = createComponent('th')({
   },
 });
 
-function filterTableData(data: CountryData[], filters) {
+function filterTableData(data: CountryData[], filters: CountryData) {
   return data.filter(item => {
     for (const key in filters) {
       if (filters.hasOwnProperty(key) && filters[key]) {
@@ -130,23 +130,23 @@ function filterTableData(data: CountryData[], filters) {
 }
 
 export const FilterableColumnHeaders = () => {
-  const [colFilters, setColFilters] = React.useState({country: '', capital: '', population: ''});
+  const [filteredData, setFilteredData] = React.useState(countryData);
+  const [colFilters, setColFilters] = React.useState<CountryData>({
+    country: '',
+    capital: '',
+    population: '',
+  });
 
   React.useEffect(() => {
-    const filteredData = filterTableData(countryData, colFilters);
-    console.log(filteredData);
+    setFilteredData(filterTableData(countryData, colFilters));
   }, [colFilters]);
 
   let typingDelay: NodeJS.Timeout;
   function handleColFilters({filterText, column}) {
     clearTimeout(typingDelay);
     typingDelay = setTimeout(() => {
-      // console.log(`Column: ${column} filter: ${filterText}`);
       setColFilters(prev => {
-        // convert population string to number
-        // if column = population then convert filterText to number
         const newState = {...prev, [column]: filterText};
-        // console.log(newState);
         return newState;
       });
     }, 400);
@@ -163,7 +163,7 @@ export const FilterableColumnHeaders = () => {
         </Table.Row>
       </Table.Head>
       <Table.Body>
-        {countryData.map(item => {
+        {filteredData.map(item => {
           return (
             <Table.Row key={item.country}>
               <Table.Header scope="row">
