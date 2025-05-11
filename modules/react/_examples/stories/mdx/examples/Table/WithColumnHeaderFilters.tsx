@@ -18,6 +18,7 @@ import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import {createComponent, useUniqueId} from '@workday/canvas-kit-react/common';
+import {funnelIcon} from '@workday/canvas-system-icons-web';
 
 interface CountryData {
   country: string;
@@ -83,8 +84,8 @@ const FilterableColumnHeader = createComponent('th')({
     return (
       <Table.Header scope="col" aria-owns={targetId + ' ' + popupId}>
         <Popup model={filterPopupModel}>
-          <Tooltip title="Filter" type="description">
-            <Popup.Target as={TertiaryButton} id={targetId}>
+          <Tooltip title={`Filter${inputVal !== '' ? `ed: "${inputVal}"` : ''}`} type="description">
+            <Popup.Target as={TertiaryButton} id={targetId} icon={funnelIcon} iconPosition="end">
               {label}
             </Popup.Target>
           </Tooltip>
