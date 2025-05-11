@@ -1,7 +1,15 @@
 import React from 'react';
-import {Dialog} from '@workday/canvas-kit-react/dialog';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {FormField} from '@workday/canvas-kit-react/form-field';
+import {
+  Popup,
+  usePopupModel,
+  useCloseOnOutsideClick,
+  useCloseOnEscape,
+  useInitialFocus,
+  useReturnFocus,
+  useFocusRedirect,
+} from '@workday/canvas-kit-react/popup';
 import {PrimaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
 import {Table} from '@workday/canvas-kit-react/table';
 import {Text} from '@workday/canvas-kit-react/text';
@@ -9,7 +17,7 @@ import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useUniqueId} from '@workday/canvas-kit-react/common';
 
 interface CountryData {
   country: string;
@@ -53,6 +61,18 @@ const FilterableColumnHeader = createComponent('th')({
   displayName: 'FilterableColumnHeader',
   Component: ({label, onFilter}: FilterableColumnHeaderProps, ref) => {
     const [inputVal, setInputVal] = React.useState('');
+    const targetId = useUniqueId();
+    const popupId = useUniqueId();
+    const initialFocusRef = React.useRef(null);
+    const filterPopupModel = usePopupModel({
+      initialFocusRef,
+    });
+
+    useCloseOnOutsideClick(filterPopupModel);
+    useCloseOnEscape(filterPopupModel);
+    useInitialFocus(filterPopupModel);
+    useFocusRedirect(filterPopupModel);
+    useReturnFocus(filterPopupModel);
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
       const newVal = e.target.value;
@@ -61,31 +81,34 @@ const FilterableColumnHeader = createComponent('th')({
     }
 
     return (
-      <Table.Header scope="col">
-        <Dialog>
+      <Table.Header scope="col" aria-owns={targetId + ' ' + popupId}>
+        <Popup model={filterPopupModel}>
           <Tooltip title="Filter" type="description">
-            <Dialog.Target as={TertiaryButton}>{label}</Dialog.Target>
+            <Popup.Target as={TertiaryButton} id={targetId}>
+              {label}
+            </Popup.Target>
           </Tooltip>
-          <Dialog.Popper>
-            <Dialog.Card>
-              <Dialog.Heading>Filter</Dialog.Heading>
-              <Dialog.Body>
+          <Popup.Popper>
+            <Popup.Card id={popupId}>
+              <Popup.Heading>Filter</Popup.Heading>
+              <Popup.Body>
                 <FormField>
                   <FormField.Label>{label}</FormField.Label>
                   <FormField.Input
                     as={TextInput}
                     type="search"
+                    ref={initialFocusRef}
                     onChange={handleChange}
                     value={inputVal}
                   />
                 </FormField>
-              </Dialog.Body>
+              </Popup.Body>
               <Flex>
-                <Dialog.CloseButton as={PrimaryButton}>Done</Dialog.CloseButton>
+                <Popup.CloseButton as={PrimaryButton}>Done</Popup.CloseButton>
               </Flex>
-            </Dialog.Card>
-          </Dialog.Popper>
-        </Dialog>
+            </Popup.Card>
+          </Popup.Popper>
+        </Popup>
       </Table.Header>
     );
   },
