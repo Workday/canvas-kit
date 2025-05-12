@@ -15,6 +15,9 @@ import {Combobox} from '@workday/canvas-kit-labs-react/combobox';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {searchThemes, SearchTheme, SearchThemeAttributes} from './themes';
 import chroma from 'chroma-js';
+import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 export interface SearchFormProps extends GrowthBehavior, React.FormHTMLAttributes<HTMLFormElement> {
   /**
@@ -123,59 +126,131 @@ const formCollapsedBackground = colors.frenchVanilla100;
 const maxWidth = 480;
 const minWidth = 120;
 
-const StyledSearchForm = styled('form')<
-  Pick<SearchFormProps, 'isCollapsed' | 'rightAlign' | 'grow'> & Pick<SearchFormState, 'showForm'>
->(
-  {
+// const StyledSearchForm = styled('form')<
+//   Pick<SearchFormProps, 'isCollapsed' | 'rightAlign' | 'grow'> & Pick<SearchFormState, 'showForm'>
+// >(
+//   {
+//     position: 'relative',
+//     flexGrow: 1,
+//     display: 'flex',
+//     alignItems: 'center',
+//     marginLeft: space.m,
+//     minWidth: minWidth,
+//   },
+//   ({isCollapsed, showForm, rightAlign, grow}) => {
+//     const collapseStyles: CSSObject = isCollapsed
+//       ? {
+//           top: 0,
+//           right: 0,
+//           left: 0,
+//           bottom: 0,
+//           margin: 0,
+//           position: showForm ? 'absolute' : 'relative',
+//           backgroundColor: showForm ? formCollapsedBackground : 'rgba(0, 0, 0, 0)',
+//           transition: 'background-color 120ms',
+//           maxWidth: showForm ? 'none' : `calc(${space.xl} + ${space.xxs})`,
+//           minWidth: `calc(${space.xl} + ${space.xs})`,
+//           overflow: showForm ? 'visible' : 'hidden',
+//           zIndex: 1,
+//         }
+//       : {};
+//     const rightAlignStyles: CSSObject = rightAlign
+//       ? {
+//           textAlign: 'right',
+//           maxWidth: grow ? '100%' : maxWidth,
+//         }
+//       : {};
+//     return {...rightAlignStyles, ...collapseStyles};
+//   }
+// );
+
+const searchFormStencil = createStencil({
+  vars: {
+    minWidth: px2rem(120),
+    maxWidth: px2rem(480),
+    height: system.space.x10,
+  },
+  parts: {
+    searchContainer: 'search-form-container',
+    combobox: 'search-form-combobox',
+    closeButton: 'search-form-close-button',
+  },
+  base: ({minWidth, searchContainerPart, height, comboboxPart, closeButtonPart}) => ({
     position: 'relative',
     flexGrow: 1,
     display: 'flex',
     alignItems: 'center',
-    marginLeft: space.m,
-    minWidth: minWidth,
+    marginInlineStart: system.space.x6,
+    minWidth,
+    maxWidth,
+    [searchContainerPart]: {
+      position: `relative`,
+      display: 'flex',
+      alignItems: 'center',
+      width: `100%`,
+      textAlign: 'left',
+      minHeight: height,
+    },
+    [comboboxPart]: {
+      width: `100%`,
+    },
+    [closeButtonPart]: {
+      position: `absolute`,
+      top: 0,
+      bottom: 0,
+      right: 0,
+      margin: `auto ${system.space.x2}`,
+      zIndex: 3,
+      display: 'none',
+    },
+  }),
+  modifiers: {
+    isCollapsed: {
+      true: {
+        top: 0,
+        right: 0,
+        left: 0,
+        bottom: 0,
+        margin: 0,
+        position: 'relative',
+        backgroundColor: 'rgba(0, 0, 0, 0)',
+        transition: 'background-color 120ms',
+        maxWidth: calc.add(system.space.x10, system.space.x2),
+        minWidth: calc.add(system.space.x10, system.space.x3),
+        overflow: 'hidden',
+        zIndex: 1,
+      },
+      false: {},
+    },
+    rightAlign: {
+      true: {
+        textAlign: 'right',
+      },
+    },
+    showForm: {
+      true: {},
+      false: {},
+    },
+    grow: {
+      true: {
+        maxWidth: '100%',
+      },
+    },
   },
-  ({isCollapsed, showForm, rightAlign, grow}) => {
-    const collapseStyles: CSSObject = isCollapsed
-      ? {
-          top: 0,
-          right: 0,
-          left: 0,
-          bottom: 0,
-          margin: 0,
-          position: showForm ? 'absolute' : 'relative',
-          backgroundColor: showForm ? formCollapsedBackground : 'rgba(0, 0, 0, 0)',
-          transition: 'background-color 120ms',
-          maxWidth: showForm ? 'none' : `calc(${space.xl} + ${space.xxs})`,
-          minWidth: `calc(${space.xl} + ${space.xs})`,
-          overflow: showForm ? 'visible' : 'hidden',
-          zIndex: 1,
-        }
-      : {};
-    const rightAlignStyles: CSSObject = rightAlign
-      ? {
-          textAlign: 'right',
-          maxWidth: grow ? '100%' : maxWidth,
-        }
-      : {};
-    return {...rightAlignStyles, ...collapseStyles};
-  }
-);
-
-const SearchContainer = styled('div')<Pick<SearchFormProps, 'height'>>(
-  {
-    position: `relative`,
-    display: 'flex',
-    alignItems: 'center',
-    width: `100%`,
-    textAlign: 'left',
-  },
-  ({height}) => ({
-    minHeight: height,
-  })
-);
-
-const SearchCombobox = styled(Combobox)({
-  width: `100%`,
+  compound: [
+    {
+      modifiers: {showForm: true, isCollapsed: true},
+      styles: {
+        position: 'absolute',
+        backgroundColor: system.color.bg.default,
+        maxWidth: 'none',
+        overflow: 'visible',
+        '& [data-part="search-form-close-button"]': {
+          display: 'inline-block',
+        },
+      },
+    },
+  ],
 });
 
 const SearchIcon = styled(TertiaryButton, {
@@ -192,31 +267,6 @@ const SearchIcon = styled(TertiaryButton, {
     display: isHidden ? 'none' : 'flex',
   };
 });
-
-const CloseButton = styled(TertiaryButton, {
-  shouldForwardProp: filterOutProps(['isCollapsed', 'showForm']),
-})<Pick<SearchFormProps, 'isCollapsed'> & Pick<SearchFormState, 'showForm'>>(
-  ({isCollapsed, showForm}) => {
-    const collapseStyles: CSSObject =
-      isCollapsed && showForm
-        ? {
-            display: 'inline-block',
-          }
-        : {
-            display: 'none',
-          };
-
-    return {
-      position: `absolute`,
-      top: 0,
-      bottom: 0,
-      right: 0,
-      margin: `auto ${space.xxs}`,
-      zIndex: 3,
-      ...collapseStyles,
-    };
-  }
-);
 
 const SearchField = styled(FormField)<
   Pick<SearchFormProps, 'isCollapsed' | 'grow' | 'height'> & Pick<SearchFormState, 'showForm'>
@@ -412,18 +462,24 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
     } = this.props;
 
     return (
-      <StyledSearchForm
+      <form
         role="search"
         action="."
-        rightAlign={rightAlign}
-        grow={grow}
         aria-labelledby={labelId}
-        isCollapsed={isCollapsed}
         onSubmit={this.handleSubmit}
-        showForm={this.state.showForm}
-        {...elemProps}
+        id="foo"
+        {...mergeStyles(
+          elemProps,
+          searchFormStencil({
+            grow,
+            rightAlign,
+            isCollapsed,
+            showForm: this.state.showForm,
+            height: typeof height === 'number' ? px2rem(height) : height,
+          })
+        )}
       >
-        <SearchContainer height={height}>
+        <div {...searchFormStencil.parts.searchContainer}>
           <SearchIcon
             aria-label={submitAriaLabel}
             icon={searchIcon}
@@ -450,7 +506,8 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
             height={height}
           >
             <FormField.Label cs={accessibleHideStyles}>{inputLabel}</FormField.Label>
-            <SearchCombobox
+            <Combobox
+              id="foo"
               initialValue={initialValue}
               clearButtonVariant={this.getIconButtonType()}
               autocompleteItems={autocompleteItems}
@@ -460,6 +517,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
               showClearButton={!isCollapsed && showClearButton}
               clearButtonAriaLabel={clearButtonAriaLabel}
               labelId={labelId}
+              {...searchFormStencil.parts.combobox}
             >
               <FormField.Input
                 as={SearchInput}
@@ -473,18 +531,24 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
                 name="search"
                 autoComplete="off"
               />
-            </SearchCombobox>
+            </Combobox>
           </SearchField>
-          <CloseButton
+          <TertiaryButton
+            icon={xIcon}
+            aria-label={closeButtonAriaLabel}
+            onClick={this.closeCollapsedSearch}
+            {...searchFormStencil.parts.closeButton}
+          />
+          {/* <CloseButton
             aria-label={closeButtonAriaLabel}
             icon={xIcon}
             isCollapsed={isCollapsed}
             showForm={this.state.showForm}
             onClick={this.closeCollapsedSearch}
             type="button"
-          />
-        </SearchContainer>
-      </StyledSearchForm>
+          /> */}
+        </div>
+      </form>
     );
   }
 }
