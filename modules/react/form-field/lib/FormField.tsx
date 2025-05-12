@@ -111,7 +111,7 @@ export const FormField = createContainer('div')({
      */
     Field: FormFieldField,
   },
-})<FormFieldProps>(({children, grow, orientation, ...elemProps}, Element, model) => {
+})<FormFieldProps>(({children, grow, orientation, error, ...elemProps}, Element, model) => {
   // TODO: Remove this warning in v13 once we remove horizontal support in favor of horizontalStart and horizontalEnd.
   if (process.env.NODE_ENV === 'development') {
     if (orientation === 'horizontal') {
@@ -120,6 +120,7 @@ export const FormField = createContainer('div')({
       );
     }
   }
+  console.log('error', error);
 
   return (
     <Element

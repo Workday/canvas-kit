@@ -9,9 +9,10 @@ export const Basic = () => {
   return (
     <>
       <MultiSelect items={items} initialSelectedIds={['Olives', 'Onions', 'Pepperoni']}>
-        <FormField orientation="horizontal">
+        <FormField orientation="horizontal" error="error">
           <FormField.Label>Toppings</FormField.Label>
           <FormField.Input
+            disabled
             as={MultiSelect.Input}
             placeholder="Select Multiple"
             removeLabel="Remove"
@@ -27,6 +28,8 @@ export const Basic = () => {
               </MultiSelect.List>
             </MultiSelect.Card>
           </MultiSelect.Popper>
+
+          <FormField.Hint>Please select at least four toppings.</FormField.Hint>
         </FormField>
       </MultiSelect>
     </>
