@@ -104,18 +104,18 @@ export const segmentedControlItemStencil = createStencil({
   modifiers: {
     size: {
       large: {
-        height: 'fit-content',
+        height: system.space.x10,
         paddingBlock: px2rem(9),
         gap: system.space.x2,
       },
       medium: {
-        height: 'fit-content',
+        height: system.space.x8,
         paddingBlock: px2rem(5),
       },
       small: {
         ...system.type.subtext.medium,
         fontWeight: system.fontWeight.bold,
-        height: 'fit-content',
+        height: system.space.x6,
         paddingBlock: px2rem(2),
       },
     },
