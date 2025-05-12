@@ -1,9 +1,10 @@
 import * as React from 'react';
 import {focusRing, Themeable, createComponent} from '@workday/canvas-kit-react/common';
-import {BaseButton, buttonColorPropVars} from './BaseButton';
+import {BaseButton, buttonStencil} from './BaseButton';
 import {TertiaryButtonProps} from './TertiaryButton';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
 export interface ToolbarIconButtonProps
   extends Omit<TertiaryButtonProps, 'size' | 'variant'>,
@@ -14,43 +15,56 @@ export interface ToolbarIconButtonProps
 }
 
 export const toolbarIconButtonStencil = createStencil({
+  extends: buttonStencil,
   base: {
     minWidth: system.space.x8,
     padding: system.space.zero,
     height: system.space.x8,
-    borderRadius: system.shape.x1,
-
-    [buttonColorPropVars.default.icon]: system.color.icon.default,
-    [buttonColorPropVars.default.background]: system.color.bg.transparent,
-    [buttonColorPropVars.hover.icon]: system.color.icon.strong,
-    [buttonColorPropVars.hover.background]: system.color.bg.alt.default,
-    [buttonColorPropVars.active.icon]: system.color.icon.strong,
-    [buttonColorPropVars.active.background]: system.color.bg.alt.stronger,
-    [buttonColorPropVars.focus.icon]: system.color.icon.default,
-    [buttonColorPropVars.focus.background]: system.color.bg.transparent,
-    [buttonColorPropVars.disabled.icon]: base.soap600,
-    [buttonColorPropVars.disabled.background]: system.color.bg.transparent,
-
-    "&[aria-pressed='true']": {
-      [buttonColorPropVars.default.icon]: brand.primary.base,
-      [buttonColorPropVars.default.background]: brand.primary.lightest,
-      [buttonColorPropVars.hover.icon]: brand.primary.dark,
-      [buttonColorPropVars.hover.background]: system.color.bg.alt.default,
-      [buttonColorPropVars.active.icon]: brand.primary.dark,
-      [buttonColorPropVars.active.background]: system.color.bg.alt.stronger,
-      [buttonColorPropVars.focus.icon]: brand.primary.base,
-      [buttonColorPropVars.focus.background]: brand.primary.lightest,
-      [buttonColorPropVars.disabled.icon]: brand.primary.light,
-      [buttonColorPropVars.disabled.background]: brand.primary.lightest,
-    },
+    [buttonStencil.vars.borderRadius]: system.shape.x1,
+    [systemIconStencil.vars.color]: system.color.icon.default,
 
     '&:focus-visible, &.focus': {
+      [systemIconStencil.vars.color]: system.color.icon.default,
       ...focusRing({
         width: 2,
         separation: 0,
         innerColor: system.color.bg.transparent,
         outerColor: brand.common.focusOutline,
       }),
+    },
+
+    '&:hover, &.hover': {
+      [buttonStencil.vars.background]: system.color.bg.alt.default,
+      [systemIconStencil.vars.color]: system.color.icon.strong,
+    },
+
+    '&:active, &.active': {
+      [buttonStencil.vars.background]: system.color.bg.alt.stronger,
+    },
+
+    '&:disabled, &.disabled': {
+      [buttonStencil.vars.background]: system.color.bg.transparent,
+      [systemIconStencil.vars.color]: base.soap600,
+    },
+
+    "&[aria-pressed='true']": {
+      [systemIconStencil.vars.color]: brand.primary.base,
+      [buttonStencil.vars.background]: brand.primary.lightest,
+
+      '&:hover, &.hover': {
+        [buttonStencil.vars.background]: system.color.bg.alt.default,
+        [systemIconStencil.vars.color]: brand.primary.dark,
+      },
+
+      '&:active, &.active': {
+        [buttonStencil.vars.background]: system.color.bg.alt.stronger,
+        [systemIconStencil.vars.color]: brand.primary.dark,
+      },
+
+      '&:disabled, &.disabled': {
+        [buttonStencil.vars.background]: brand.primary.lightest,
+        [systemIconStencil.vars.color]: brand.primary.light,
+      },
     },
   },
 });
@@ -75,10 +89,8 @@ export const ToolbarIconButton = createComponent('button')({
     React.useEffect(() => {
       if (isInitialMount.current) {
         isInitialMount.current = false;
-      } else {
-        if (toggled && typeof onToggleChange === 'function') {
-          onToggleChange(toggled);
-        }
+      } else if (toggled && typeof onToggleChange === 'function') {
+        onToggleChange(toggled);
       }
     }, [toggled, onToggleChange]);
 

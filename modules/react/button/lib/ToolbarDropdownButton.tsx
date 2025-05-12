@@ -2,14 +2,16 @@ import {focusRing, Themeable, createComponent} from '@workday/canvas-kit-react/c
 import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 import {calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {BaseButton, buttonColorPropVars} from './BaseButton';
+import {BaseButton, buttonStencil} from './BaseButton';
 import {ToolbarIconButtonProps} from './ToolbarIconButton';
+import {systemIconStencil} from '../../icon';
 
 export interface ToolbarDropdownButtonProps
   extends Omit<ToolbarIconButtonProps, 'toggled' | 'onToggleChange'>,
     Themeable {}
 
 export const toolbarDropdownButtonStencil = createStencil({
+  extends: buttonStencil,
   parts: {
     chevron: 'toolbar-dropdown-btn-arrow',
     customIcon: 'toolbar-dropdown-btn-custom-icon',
@@ -17,28 +19,13 @@ export const toolbarDropdownButtonStencil = createStencil({
   base: ({chevronPart, customIconPart}) => ({
     padding: system.space.zero,
     minWidth: system.space.x8,
-    borderRadius: system.shape.x1,
     gap: system.space.zero,
-    [buttonColorPropVars.default.icon]: system.color.icon.default,
-    [buttonColorPropVars.hover.icon]: system.color.icon.strong,
-    [buttonColorPropVars.hover.background]: system.color.bg.alt.default,
-    [buttonColorPropVars.active.icon]: system.color.icon.strong,
-    [buttonColorPropVars.active.background]: system.color.bg.alt.stronger,
-    [buttonColorPropVars.focus.icon]: system.color.icon.default,
-    [buttonColorPropVars.focus.background]: system.color.bg.transparent,
-    [buttonColorPropVars.disabled.icon]: base.soap600,
-    [buttonColorPropVars.disabled.background]: system.color.bg.transparent,
-    [buttonColorPropVars.disabled.opacity]: system.opacity.full,
+    [buttonStencil.vars.borderRadius]: system.shape.x1,
+    [systemIconStencil.vars.color]: system.color.icon.default,
 
-    [customIconPart]: {
-      marginLeft: system.space.x1,
-      marginRight: calc.negate(px2rem(2)),
-    },
-    [chevronPart]: {
-      margin: 0,
-      marginRight: px2rem(2),
-    },
     '&:focus-visible, &.focus': {
+      [buttonStencil.vars.background]: system.color.bg.transparent,
+      [systemIconStencil.vars.color]: system.color.icon.default,
       ...focusRing({
         width: 2,
         separation: 0,
@@ -46,7 +33,42 @@ export const toolbarDropdownButtonStencil = createStencil({
         outerColor: brand.common.focusOutline,
       }),
     },
+
+    '&:hover, &.hover': {
+      [buttonStencil.vars.background]: system.color.bg.alt.default,
+      [systemIconStencil.vars.color]: system.color.icon.strong,
+    },
+
+    '&:active, &.active': {
+      [buttonStencil.vars.background]: system.color.bg.alt.stronger,
+      [systemIconStencil.vars.color]: system.color.icon.strong,
+    },
+
+    '&:disabled, &.disabled': {
+      [buttonStencil.vars.background]: system.color.bg.transparent,
+      [systemIconStencil.vars.color]: base.soap600,
+    },
+
+    [customIconPart]: {
+      marginInlineStart: system.space.x1,
+      marginInlineEnd: calc.negate(px2rem(2)),
+    },
+
+    [chevronPart]: {
+      margin: 0,
+      marginInlineEnd: px2rem(2),
+    },
   }),
+  modifiers: {
+    shouldMirrorIcon: {
+      true: ({customIconPart}) => ({
+        [customIconPart]: {
+          marginInlineEnd: 0,
+          marginInlineStart: px2rem(2),
+        },
+      }),
+    },
+  },
 });
 
 export const ToolbarDropdownButton = createComponent('button')({
@@ -61,7 +83,7 @@ export const ToolbarDropdownButton = createComponent('button')({
         ref={ref}
         as={Element}
         size="small"
-        {...handleCsProp(elemProps, toolbarDropdownButtonStencil())}
+        {...handleCsProp(elemProps, toolbarDropdownButtonStencil({shouldMirrorIcon}))}
       >
         {icon ? (
           <BaseButton.Icon
