@@ -14,7 +14,7 @@ const segmentedControlButtonStencil = createStencil({
     [buttonStencil.vars.background]: system.color.bg.alt.soft,
     [buttonStencil.vars.border]: system.color.border.container,
     [buttonStencil.vars.borderRadius]: system.shape.zero,
-    [systemIconStencil.vars.color]: system.color.icon.default,
+    [systemIconStencil.vars.color]: system.color.fg.muted.soft,
 
     '&:hover, &.hover': {
       [buttonStencil.vars.background]: system.color.bg.alt.default,
@@ -42,7 +42,7 @@ const segmentedControlButtonStencil = createStencil({
     '&[aria-pressed="true"]': {
       [buttonStencil.vars.background]: brand.primary.base,
       [buttonStencil.vars.border]: brand.primary.base,
-      [systemIconStencil.vars.color]: system.color.icon.inverse,
+      [systemIconStencil.vars.color]: system.color.fg.inverse,
 
       '&:first-of-type': {
         borderInlineStartColor: brand.primary.base,

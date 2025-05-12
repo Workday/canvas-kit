@@ -58,47 +58,45 @@ export const segmentedControlItemStencil = createStencil({
     gap: system.space.x1,
 
     [buttonStencil.vars.borderRadius]: system.shape.x1,
-    [buttonStencil.vars.label]: system.color.static.gray.strong,
-    [systemIconStencil.vars.color]: system.color.static.gray.strong,
+    [buttonStencil.vars.label]: system.color.fg.muted.strong,
+    [systemIconStencil.vars.color]: system.color.fg.muted.strong,
 
     '&:hover, &.hover': {
       [buttonStencil.vars.background]: system.color.bg.alt.strong,
-      [buttonStencil.vars.label]: system.color.text.strong,
-      [systemIconStencil.vars.color]: system.color.text.strong,
+      [buttonStencil.vars.label]: system.color.fg.muted.strong,
+      [systemIconStencil.vars.color]: system.color.fg.muted.strong,
     },
 
     '&:active, &.active': {
       [buttonStencil.vars.background]: system.color.bg.alt.strong,
-      [buttonStencil.vars.label]: system.color.text.strong,
-      [systemIconStencil.vars.color]: system.color.text.strong,
+      [buttonStencil.vars.label]: system.color.fg.muted.strong,
+      [systemIconStencil.vars.color]: system.color.fg.muted.strong,
     },
 
     '&:focus-visible, &.focus': {
-      [buttonStencil.vars.label]: system.color.static.gray.strong,
-      [systemIconStencil.vars.color]: system.color.static.gray.strong,
+      [buttonStencil.vars.label]: system.color.fg.muted.strong,
+      [systemIconStencil.vars.color]: system.color.fg.muted.strong,
     },
 
     '&:disabled, &.disabled': {
       [buttonStencil.vars.background]: system.color.bg.alt.soft,
-      [buttonStencil.vars.label]: system.color.static.gray.strong,
-      [systemIconStencil.vars.color]: system.color.static.gray.strong,
     },
 
     "&[aria-pressed='true']": {
       [buttonStencil.vars.background]: system.color.bg.default,
       [buttonStencil.vars.border]: system.color.border.input.default,
-      [systemIconStencil.vars.color]: system.color.text.strong,
-      [buttonStencil.vars.label]: system.color.text.strong,
+      [systemIconStencil.vars.color]: system.color.fg.strong,
+      [buttonStencil.vars.label]: system.color.fg.strong,
 
       '&:hover, &.hover': {
-        [systemIconStencil.vars.color]: system.color.text.strong,
-        [buttonStencil.vars.label]: system.color.text.strong,
+        [systemIconStencil.vars.color]: system.color.fg.strong,
+        [buttonStencil.vars.label]: system.color.fg.strong,
       },
 
       '&:disabled, &.disabled': {
         [buttonStencil.vars.border]: system.color.border.input.default,
-        [buttonStencil.vars.label]: system.color.text.strong,
-        [systemIconStencil.vars.color]: system.color.text.strong,
+        [buttonStencil.vars.label]: system.color.fg.strong,
+        [systemIconStencil.vars.color]: system.color.fg.strong,
       },
     },
     ':dir(rtl)': {
