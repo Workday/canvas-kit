@@ -59,6 +59,11 @@ export const multiSelectInputStencil = createStencil({
       },
     },
 
+    '&:has(:disabled, .disabled)': {
+      borderColor: system.color.border.input.disabled,
+      color: system.color.text.disabled,
+    },
+
     '& :where([data-part="form-input"])': {
       position: 'absolute',
       top: system.space.zero,
@@ -174,6 +179,7 @@ export const MultiSelectInput = createSubcomponent(TextInput)({
       error,
       'aria-labelledby': ariaLabelledBy,
       removeLabel,
+      disabled,
       formInputProps,
       ...elemProps
     },
@@ -190,6 +196,7 @@ export const MultiSelectInput = createSubcomponent(TextInput)({
             as={Element}
             aria-labelledby={ariaLabelledBy}
             readOnly
+            disabled={disabled}
             error={error}
             {...elemProps}
           />
@@ -197,7 +204,7 @@ export const MultiSelectInput = createSubcomponent(TextInput)({
             <SystemIcon icon={caretDownSmallIcon} />
           </InputGroup.InnerEnd>
         </InputGroup>
-        <MultiSelectedList removeLabel={removeLabel} />
+        <MultiSelectedList disabled={disabled} removeLabel={removeLabel} />
       </div>
     );
   }
@@ -216,6 +223,7 @@ export const MultiSelectSearchInput = createSubcomponent(TextInput)({
       removeLabel,
       formInputProps,
       ref,
+      disabled,
       ...elemProps
     },
     Element,
@@ -236,6 +244,8 @@ export const MultiSelectSearchInput = createSubcomponent(TextInput)({
             data-part="user-input"
             as={Element}
             aria-labelledby={ariaLabelledBy}
+            disabled={disabled}
+            error={error}
             {...elemProps}
           />
           <InputGroup.InnerEnd width={system.space.x4}>
@@ -245,7 +255,7 @@ export const MultiSelectSearchInput = createSubcomponent(TextInput)({
             <SystemIcon icon={caretDownSmallIcon} />
           </InputGroup.InnerEnd>
         </InputGroup>
-        <MultiSelectedList removeLabel={removeLabel} />
+        <MultiSelectedList removeLabel={removeLabel} disabled={disabled} />
       </div>
     );
   }
