@@ -1,14 +1,14 @@
-import {focusRing, Themeable, createComponent} from '@workday/canvas-kit-react/common';
-import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {brand, system} from '@workday/canvas-tokens-web';
 import {calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
+import {focusRing, createComponent} from '@workday/canvas-kit-react/common';
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
+
 import {BaseButton, buttonStencil} from './BaseButton';
 import {ToolbarIconButtonProps} from './ToolbarIconButton';
-import {systemIconStencil} from '../../icon';
 
 export interface ToolbarDropdownButtonProps
-  extends Omit<ToolbarIconButtonProps, 'toggled' | 'onToggleChange'>,
-    Themeable {}
+  extends Omit<ToolbarIconButtonProps, 'toggled' | 'onToggleChange'> {}
 
 export const toolbarDropdownButtonStencil = createStencil({
   extends: buttonStencil,

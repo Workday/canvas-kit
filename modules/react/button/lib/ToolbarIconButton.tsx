@@ -1,14 +1,12 @@
 import * as React from 'react';
-import {focusRing, Themeable, createComponent} from '@workday/canvas-kit-react/common';
+import {focusRing, createComponent} from '@workday/canvas-kit-react/common';
 import {BaseButton, buttonStencil} from './BaseButton';
 import {TertiaryButtonProps} from './TertiaryButton';
 import {brand, system} from '@workday/canvas-tokens-web';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
-export interface ToolbarIconButtonProps
-  extends Omit<TertiaryButtonProps, 'size' | 'variant'>,
-    Themeable {
+export interface ToolbarIconButtonProps extends Omit<TertiaryButtonProps, 'size' | 'variant'> {
   onToggleChange?: (toggled: boolean | undefined) => void;
   toggled?: boolean;
   shouldMirrorIcon?: boolean;
