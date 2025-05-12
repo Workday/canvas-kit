@@ -1,8 +1,8 @@
-import {BaseButton, ButtonContainerProps, buttonStencil} from '@workday/canvas-kit-react/button';
-import {createComponent} from '@workday/canvas-kit-react/common';
-import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
+import {BaseButton, ButtonContainerProps, buttonStencil} from '@workday/canvas-kit-react/button';
+import {calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {CanvasSystemIcon} from '@workday/design-assets-types';
+import {createComponent} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
 const segmentedControlButtonStencil = createStencil({
