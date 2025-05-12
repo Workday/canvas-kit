@@ -2,7 +2,7 @@ import * as React from 'react';
 import {focusRing, Themeable, createComponent} from '@workday/canvas-kit-react/common';
 import {BaseButton, buttonStencil} from './BaseButton';
 import {TertiaryButtonProps} from './TertiaryButton';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {brand, system} from '@workday/canvas-tokens-web';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
@@ -21,21 +21,21 @@ export const toolbarIconButtonStencil = createStencil({
     padding: system.space.zero,
     height: system.space.x8,
     [buttonStencil.vars.borderRadius]: system.shape.x1,
-    [systemIconStencil.vars.color]: system.color.icon.default,
+    [systemIconStencil.vars.color]: system.color.fg.muted.soft,
 
     '&:focus-visible, &.focus': {
-      [systemIconStencil.vars.color]: system.color.icon.default,
+      [systemIconStencil.vars.color]: system.color.fg.muted.soft,
       ...focusRing({
         width: 2,
         separation: 0,
-        innerColor: system.color.bg.transparent,
+        innerColor: system.color.border.transparent,
         outerColor: brand.common.focusOutline,
       }),
     },
 
     '&:hover, &.hover': {
       [buttonStencil.vars.background]: system.color.bg.alt.default,
-      [systemIconStencil.vars.color]: system.color.icon.strong,
+      [systemIconStencil.vars.color]: system.color.fg.muted.stronger,
     },
 
     '&:active, &.active': {
@@ -44,7 +44,7 @@ export const toolbarIconButtonStencil = createStencil({
 
     '&:disabled, &.disabled': {
       [buttonStencil.vars.background]: system.color.bg.transparent,
-      [systemIconStencil.vars.color]: base.soap600,
+      [systemIconStencil.vars.color]: system.color.fg.disabled,
     },
 
     "&[aria-pressed='true']": {
