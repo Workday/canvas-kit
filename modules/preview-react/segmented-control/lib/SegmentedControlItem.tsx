@@ -79,6 +79,7 @@ export const segmentedControlItemStencil = createStencil({
     },
 
     '&:disabled, &.disabled': {
+      [buttonStencil.vars.background]: system.color.bg.alt.soft,
       [buttonStencil.vars.label]: system.color.static.gray.strong,
       [systemIconStencil.vars.color]: system.color.static.gray.strong,
     },
@@ -88,6 +89,11 @@ export const segmentedControlItemStencil = createStencil({
       [buttonStencil.vars.border]: system.color.border.input.default,
       [systemIconStencil.vars.color]: system.color.text.strong,
       [buttonStencil.vars.label]: system.color.text.strong,
+
+      '&:hover, &.hover': {
+        [systemIconStencil.vars.color]: system.color.text.strong,
+        [buttonStencil.vars.label]: system.color.text.strong,
+      },
 
       '&:disabled, &.disabled': {
         [buttonStencil.vars.border]: system.color.border.input.default,
