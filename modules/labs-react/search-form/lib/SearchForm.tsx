@@ -174,8 +174,20 @@ const searchFormStencil = createStencil({
     searchContainer: 'search-form-container',
     combobox: 'search-form-combobox',
     closeButton: 'search-form-close-button',
+    searchField: 'search-form-field',
+    submitSearchIcon: 'search-from-submit-search-icon',
+    openSearchIcon: 'search-form-open-search-icon',
   },
-  base: ({minWidth, searchContainerPart, height, comboboxPart, closeButtonPart}) => ({
+  base: ({
+    minWidth,
+    searchContainerPart,
+    height,
+    comboboxPart,
+    closeButtonPart,
+    searchFieldPart,
+    submitSearchIconPart,
+    openSearchIconPart,
+  }) => ({
     position: 'relative',
     flexGrow: 1,
     display: 'flex',
@@ -203,10 +215,43 @@ const searchFormStencil = createStencil({
       zIndex: 3,
       display: 'none',
     },
+    [searchFieldPart]: {
+      width: '100%',
+      height,
+      maxWidth,
+      marginBottom: 0,
+      disaply: 'none',
+      '> div': {
+        display: 'block',
+      },
+    },
+    [`${submitSearchIconPart}, ${openSearchIconPart}`]: {
+      position: `absolute`,
+      margin: `auto ${system.space.x2}`,
+      top: 0,
+      bottom: 0,
+      left: 0,
+      padding: 0,
+      zIndex: 3,
+    },
   }),
   modifiers: {
+    isHiddenSubmitSearchIcon: {
+      true: ({submitSearchIconPart}) => ({
+        [submitSearchIconPart]: {
+          display: 'none',
+        },
+      }),
+    },
+    isHiddenOpenSeachIcon: {
+      true: ({openSearchIconPart}) => ({
+        [openSearchIconPart]: {
+          display: 'none',
+        },
+      }),
+    },
     isCollapsed: {
-      true: {
+      true: ({searchFieldPart, submitSearchIconPart, openSearchIconPart}) => ({
         top: 0,
         right: 0,
         left: 0,
@@ -219,8 +264,18 @@ const searchFormStencil = createStencil({
         minWidth: calc.add(system.space.x10, system.space.x3),
         overflow: 'hidden',
         zIndex: 1,
-      },
-      false: {},
+        [searchFieldPart]: {
+          maxWidth: '100%',
+        },
+        [`${submitSearchIconPart}, ${openSearchIconPart}`]: {
+          margin: `auto ${system.space.x2}`,
+        },
+      }),
+      false: ({searchFieldPart}) => ({
+        [searchFieldPart]: {
+          display: 'inline-block',
+        },
+      }),
     },
     rightAlign: {
       true: {
@@ -232,14 +287,17 @@ const searchFormStencil = createStencil({
       false: {},
     },
     grow: {
-      true: {
+      true: ({searchFieldPart}) => ({
         maxWidth: '100%',
-      },
+        [searchFieldPart]: {
+          maxWidth: '100%',
+        },
+      }),
     },
   },
   compound: [
     {
-      modifiers: {showForm: true, isCollapsed: true},
+      modifiers: {showForm: 'true', isCollapsed: 'true'},
       styles: {
         position: 'absolute',
         backgroundColor: system.color.bg.default,
@@ -248,39 +306,12 @@ const searchFormStencil = createStencil({
         '& [data-part="search-form-close-button"]': {
           display: 'inline-block',
         },
+        '& [data-part="search-form-field"]': {
+          display: 'inline-block',
+        },
       },
     },
   ],
-});
-
-const SearchIcon = styled(TertiaryButton, {
-  shouldForwardProp: filterOutProps(['isHidden', 'isCollapsed']),
-})<Pick<SearchFormProps, 'isCollapsed'> & {isHidden: boolean}>(({isCollapsed, isHidden}) => {
-  return {
-    position: `absolute`,
-    margin: isCollapsed ? `auto ${space.xxs}` : `auto ${space.xxxs}`,
-    top: 0,
-    bottom: 0,
-    left: 0,
-    padding: 0,
-    zIndex: 3,
-    display: isHidden ? 'none' : 'flex',
-  };
-});
-
-const SearchField = styled(FormField)<
-  Pick<SearchFormProps, 'isCollapsed' | 'grow' | 'height'> & Pick<SearchFormState, 'showForm'>
->(({isCollapsed, showForm, grow, height}) => {
-  return {
-    display: (isCollapsed && showForm) || !isCollapsed ? 'inline-block' : 'none',
-    width: '100%',
-    height: height,
-    maxWidth: isCollapsed || grow ? '100%' : maxWidth,
-    marginBottom: space.zero,
-    '> div': {
-      display: 'block',
-    },
-  };
 });
 
 const SearchInput = styled(TextInput)<
@@ -476,38 +507,31 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
             isCollapsed,
             showForm: this.state.showForm,
             height: typeof height === 'number' ? px2rem(height) : height,
+            isHiddenSubmitSearchIcon: !!isCollapsed && !this.state.showForm,
+            isHiddenOpenSeachIcon: !isCollapsed || (!!isCollapsed && this.state.showForm),
           })
         )}
       >
         <div {...searchFormStencil.parts.searchContainer}>
-          <SearchIcon
+          <TertiaryButton
             aria-label={submitAriaLabel}
             icon={searchIcon}
-            isCollapsed={isCollapsed}
             variant={this.getIconButtonType()}
             type="submit"
-            isHidden={!!isCollapsed && !this.state.showForm}
+            {...searchFormStencil.parts.submitSearchIcon}
           />
-          <SearchIcon
+          <TertiaryButton
             aria-label={openButtonAriaLabel}
             icon={searchIcon}
-            isCollapsed={isCollapsed}
             variant={this.getIconButtonType()}
             onClick={this.openCollapsedSearch}
             ref={this.openRef}
             type="button"
-            isHidden={!isCollapsed || (!!isCollapsed && this.state.showForm)}
+            {...searchFormStencil.parts.openSearchIcon}
           />
-          <SearchField
-            grow={grow}
-            id={labelId}
-            isCollapsed={isCollapsed}
-            showForm={this.state.showForm}
-            height={height}
-          >
+          <FormField id={labelId} {...searchFormStencil.parts.searchField}>
             <FormField.Label cs={accessibleHideStyles}>{inputLabel}</FormField.Label>
             <Combobox
-              id="foo"
               initialValue={initialValue}
               clearButtonVariant={this.getIconButtonType()}
               autocompleteItems={autocompleteItems}
@@ -532,21 +556,13 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
                 autoComplete="off"
               />
             </Combobox>
-          </SearchField>
+          </FormField>
           <TertiaryButton
             icon={xIcon}
             aria-label={closeButtonAriaLabel}
             onClick={this.closeCollapsedSearch}
             {...searchFormStencil.parts.closeButton}
           />
-          {/* <CloseButton
-            aria-label={closeButtonAriaLabel}
-            icon={xIcon}
-            isCollapsed={isCollapsed}
-            showForm={this.state.showForm}
-            onClick={this.closeCollapsedSearch}
-            type="button"
-          /> */}
         </div>
       </form>
     );
