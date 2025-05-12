@@ -8,7 +8,7 @@ import {
   createElemPropsHook,
 } from '@workday/canvas-kit-react/common';
 import {getTransformFromPlacement} from '@workday/canvas-kit-react/popup';
-import {system, base} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 import {useMenuModel} from './useMenuModel';
 import {createStencil, calc, px2rem} from '@workday/canvas-kit-styling';
@@ -23,10 +23,11 @@ export const menuCardStencil = createStencil({
     minWidth: px2rem(1),
     transformOriginVertical: 'top',
     transformOriginHorizontal: 'left',
+    maxHeight: '',
   },
-  base: ({transformOriginVertical, transformOriginHorizontal, minWidth}) => ({
+  base: ({transformOriginVertical, transformOriginHorizontal, minWidth, maxHeight}) => ({
     ...system.type.subtext.large,
-    color: base.blackPepper300,
+    color: system.color.text.default,
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
@@ -34,7 +35,8 @@ export const menuCardStencil = createStencil({
     padding: system.space.zero,
     maxWidth: calc.subtract('100vw', system.space.x8),
     boxShadow: system.depth[3],
-    minWidth: minWidth,
+    minWidth,
+    maxHeight,
     transformOrigin: `${transformOriginVertical} ${transformOriginHorizontal}`,
     // Allow overriding of animation in special cases
     '.wd-no-animation &': {
@@ -51,7 +53,7 @@ export const MenuCard = createSubcomponent('div')({
   displayName: 'Menu.Card',
   modelHook: useMenuModel,
   elemPropsHook: useMenuCard,
-})<MenuCardProps>(({minWidth, ...elemProps}, Element, model) => {
+})<MenuCardProps>(({minWidth, maxHeight, ...elemProps}, Element, model) => {
   const transformOrigin = React.useMemo(() => {
     return getTransformFromPlacement(model.state.placement || 'bottom');
   }, [model.state.placement]);
@@ -63,6 +65,7 @@ export const MenuCard = createSubcomponent('div')({
         elemProps,
         menuCardStencil({
           minWidth: typeof minWidth === 'number' ? px2rem(minWidth as number) : minWidth,
+          maxHeight: typeof maxHeight === 'number' ? px2rem(maxHeight as number) : maxHeight,
           transformOriginVertical: transformOrigin.vertical,
           transformOriginHorizontal: transformOrigin.horizontal,
         })

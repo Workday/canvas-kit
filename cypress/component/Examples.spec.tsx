@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import {TextInputWithReactHookForm} from '@workday/canvas-kit-preview-react/_examples/stories/mdx/examples/TextInputWithReactHookForm';
 
 describe('TextInputWithReactHookForm', () => {

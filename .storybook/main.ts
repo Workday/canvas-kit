@@ -152,10 +152,7 @@ const config: StorybookConfig = {
   babel: async options => ({
     ...options,
     plugins: [...(options.plugins as []), '@babel/plugin-transform-modules-commonjs'],
-    presets: [
-      ...(options.presets as []),
-      ['@babel/preset-react', {runtime: 'classic'}, 'react-16-backwards-compatible-override'],
-    ],
+    presets: [...(options.presets as []), ['@babel/preset-react', {runtime: 'automatic'}]],
   }),
 };
 

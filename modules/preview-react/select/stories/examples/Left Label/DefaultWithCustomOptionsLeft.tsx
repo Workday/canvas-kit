@@ -7,7 +7,7 @@ import {controlComponent} from '../../../../../../utils/storybook';
 
 export const DefaultWithCustomOptionsLeft = () => {
   return (
-    <FormField orientation="horizontal" id="select-default-custom">
+    <FormField orientation="horizontalStart" id="select-default-custom">
       <FormField.Label>Label</FormField.Label>
       <FormField.Field>
         {controlComponent(

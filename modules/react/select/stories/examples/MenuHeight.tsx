@@ -1,4 +1,3 @@
-import React from 'react';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Select} from '@workday/canvas-kit-react/select';
 import {Box} from '@workday/canvas-kit-react/layout';

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {createComponent} from './utils/components';
 import {handleCsProp, CSProps} from '@workday/canvas-kit-styling';
 
