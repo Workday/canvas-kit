@@ -58,20 +58,20 @@ const buttonStencil = createStencil({
     color: 'white'
   },
   base: ({background, color}) => ({
-    background,
-    color,
+    background : cssVar(background, 'blue'),
+    color: cssVar(color, 'white'),
     padding: '8px 16px',
     borderRadius: '4px',
     cursor: 'pointer',
     '&:hover': {
-      background: 'darkblue',
+      background
       color
     }
   })
 });
 
 // Component using the stencil with variables
-function Button({background, color, children, ...props}) {
+const Button = ({background, color, children, ...props}) => {
   return (
     <button {...handleCsProp(props, buttonStencil({background, color}))}>
       {children}
@@ -83,6 +83,46 @@ function Button({background, color, children, ...props}) {
 <Button>Default Button</Button>
 <Button background="red" color="white">Danger Button</Button>
 ```
+
+>**Note:** The `cssVar` function is a utility that wraps the variable in correct syntax for the browser and handles the fallback value. In this case, if `background` is not provided, it will default to `'blue'`.
+
+#### Using Stencil Variables
+
+You can extend Stencils to build variants of the component to style it differently. Buttons are a good example of using CSS variables to create different styles.
+
+In the example below the following is happening:
+- When we `extend` a Stencil, we inherit the `styles, parts, modifiers, and variables`.
+- Using the bracket notation, we can target the variables defined by `Button` and set the background and color, ie `[buttonStencil.vars.background]` targets the variable `--background-abc123` and sets it to `transparent`.
+- We can target the same variables for a different state, in this case `&:hover` to set the background and color to `black` and `white` respectively.
+- In the render function we use `Button` which uses the variables for `background` and `color` so when we pass `secondaryButtonStencil` those variables will be set.
+
+```tsx
+// Use buttonStencil variables to create a secondary button
+const secondaryButtonStencil = createStencil({
+  extends: buttonStencil,
+  base: ({background, color}) => ({
+	// You're targeting the variables defined by `Button` and setting the background and color.
+    [buttonStencil.vars.background]: 'transparent',
+	[buttonStencil.vars.color]: 'black',
+    '&:hover': {
+      [buttonStencil.vars.background]: 'black',
+      [buttonStencil.vars.color]: 'white',
+    }
+  })
+});
+
+// Component using the stencil with variables
+const SecondaryButton = ({background, color, children, ...props}) => {
+  return (
+	// This component uses the variables for `background` and `color` so when you pass `secondaryButtonStencil` those variables will be set.
+    <Button {...handleCsProp(props, secondaryButtonStencil({background, color}))}>
+      {children}
+    </Button>
+  );
+}
+```
+
+
 
 #### Behind the Scenes
 
