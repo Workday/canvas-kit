@@ -2,18 +2,14 @@ import * as React from 'react';
 
 import {createSubcomponent} from '@workday/canvas-kit-react/common';
 import {Tooltip, TooltipProps} from '@workday/canvas-kit-react/tooltip';
-import {
-  buttonStencil,
-  buttonColorPropVars,
-  BaseButton,
-  ButtonContainerProps,
-} from '@workday/canvas-kit-react/button';
+import {buttonStencil, BaseButton, ButtonContainerProps} from '@workday/canvas-kit-react/button';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {useSegmentedControlModel} from './hooks/useSegmentedControlModel';
 import {Text} from '@workday/canvas-kit-react/text';
 import {useSegmentedControlItem} from './hooks/useSegmentedControlItem';
 import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
 export interface ItemProps extends ButtonContainerProps {
   /**
@@ -59,59 +55,45 @@ export const segmentedControlItemStencil = createStencil({
     ...system.type.subtext.large,
     fontWeight: system.fontWeight.bold,
     textAlign: 'start',
-    borderRadius: system.shape.x1,
     gap: system.space.x1,
 
-    [buttonColorPropVars.default.background]: system.color.bg.alt.soft,
-    [buttonColorPropVars.default.border]: system.color.border.transparent,
-    [buttonColorPropVars.default.icon]: system.color.static.gray.strong,
-    [buttonColorPropVars.default.label]: system.color.static.gray.strong,
+    [buttonStencil.vars.borderRadius]: system.shape.x1,
+    [buttonStencil.vars.label]: system.color.static.gray.strong,
+    [systemIconStencil.vars.color]: system.color.static.gray.strong,
 
-    [buttonColorPropVars.hover.background]: system.color.bg.alt.strong,
-    [buttonColorPropVars.hover.border]: system.color.border.transparent,
-    [buttonColorPropVars.hover.icon]: system.color.text.strong,
-    [buttonColorPropVars.hover.label]: system.color.text.strong,
+    '&:hover, &.hover': {
+      [buttonStencil.vars.background]: system.color.bg.alt.strong,
+      [buttonStencil.vars.label]: system.color.text.strong,
+      [systemIconStencil.vars.color]: system.color.text.strong,
+    },
 
-    [buttonColorPropVars.active.background]: system.color.bg.alt.strong,
-    [buttonColorPropVars.active.border]: system.color.border.transparent,
-    [buttonColorPropVars.active.icon]: system.color.text.strong,
-    [buttonColorPropVars.active.label]: system.color.text.strong,
+    '&:active, &.active': {
+      [buttonStencil.vars.background]: system.color.bg.alt.strong,
+      [buttonStencil.vars.label]: system.color.text.strong,
+      [systemIconStencil.vars.color]: system.color.text.strong,
+    },
 
-    [buttonColorPropVars.focus.background]: system.color.bg.alt.soft,
-    [buttonColorPropVars.focus.border]: system.color.border.transparent,
-    [buttonColorPropVars.focus.icon]: system.color.static.gray.strong,
-    [buttonColorPropVars.focus.label]: system.color.static.gray.strong,
+    '&:focus-visible, &.focus': {
+      [buttonStencil.vars.label]: system.color.static.gray.strong,
+      [systemIconStencil.vars.color]: system.color.static.gray.strong,
+    },
 
-    [buttonColorPropVars.disabled.background]: system.color.bg.alt.soft,
-    [buttonColorPropVars.disabled.border]: system.color.border.input.default,
-    [buttonColorPropVars.disabled.icon]: system.color.static.gray.strong,
-    [buttonColorPropVars.disabled.label]: system.color.static.gray.strong,
-    [buttonColorPropVars.disabled.opacity]: system.opacity.disabled,
+    '&:disabled, &.disabled': {
+      [buttonStencil.vars.label]: system.color.static.gray.strong,
+      [systemIconStencil.vars.color]: system.color.static.gray.strong,
+    },
 
     "&[aria-pressed='true']": {
-      [buttonColorPropVars.default.background]: system.color.bg.default,
-      [buttonColorPropVars.default.border]: system.color.border.input.default,
-      [buttonColorPropVars.default.icon]: system.color.text.strong,
-      [buttonColorPropVars.default.label]: system.color.text.strong,
+      [buttonStencil.vars.background]: system.color.bg.default,
+      [buttonStencil.vars.border]: system.color.border.input.default,
+      [systemIconStencil.vars.color]: system.color.text.strong,
+      [buttonStencil.vars.label]: system.color.text.strong,
 
-      [buttonColorPropVars.hover.background]: system.color.bg.default,
-      [buttonColorPropVars.hover.border]: system.color.border.input.default,
-      [buttonColorPropVars.hover.icon]: system.color.text.strong,
-      [buttonColorPropVars.hover.label]: system.color.text.strong,
-
-      [buttonColorPropVars.active.background]: system.color.bg.default,
-      [buttonColorPropVars.active.border]: system.color.border.input.default,
-
-      [buttonColorPropVars.focus.background]: system.color.bg.default,
-      [buttonColorPropVars.focus.border]: system.color.border.input.default,
-      [buttonColorPropVars.focus.icon]: system.color.text.strong,
-      [buttonColorPropVars.focus.label]: system.color.text.strong,
-
-      [buttonColorPropVars.disabled.background]: system.color.bg.default,
-      [buttonColorPropVars.disabled.border]: system.color.border.input.default,
-      [buttonColorPropVars.disabled.opacity]: system.opacity.disabled,
-      [buttonColorPropVars.disabled.icon]: system.color.text.strong,
-      [buttonColorPropVars.disabled.label]: system.color.text.strong,
+      '&:disabled, &.disabled': {
+        [buttonStencil.vars.border]: system.color.border.input.default,
+        [buttonStencil.vars.label]: system.color.text.strong,
+        [systemIconStencil.vars.color]: system.color.text.strong,
+      },
     },
     ':dir(rtl)': {
       svg: {

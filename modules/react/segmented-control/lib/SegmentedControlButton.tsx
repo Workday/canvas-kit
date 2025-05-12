@@ -1,9 +1,4 @@
-import {
-  BaseButton,
-  ButtonContainerProps,
-  // buttonColorPropVars,
-  buttonStencil,
-} from '@workday/canvas-kit-react/button';
+import {BaseButton, ButtonContainerProps, buttonStencil} from '@workday/canvas-kit-react/button';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
@@ -21,23 +16,19 @@ const segmentedControlButtonStencil = createStencil({
     [buttonStencil.vars.borderRadius]: system.shape.zero,
     [systemIconStencil.vars.color]: system.color.icon.default,
 
+    '&:hover, &.hover': {
+      [buttonStencil.vars.background]: system.color.bg.alt.default,
+      [systemIconStencil.vars.color]: system.color.icon.strong,
+    },
+    '&:active, &.active': {
+      [buttonStencil.vars.background]: system.color.bg.alt.stronger,
+    },
+
     '&:disabled, &.disabled': {
       [buttonStencil.vars.background]: system.color.bg.alt.softer,
       [buttonStencil.vars.border]: system.color.border.container,
       [systemIconStencil.vars.color]: base.soap600,
     },
-
-    // [buttonColorPropVars.hover.background]: system.color.bg.alt.default,
-    // [buttonColorPropVars.hover.icon]: system.color.icon.strong,
-    // [buttonColorPropVars.active.background]: system.color.bg.alt.stronger,
-    // [buttonColorPropVars.active.icon]: system.color.icon.strong,
-    // [buttonColorPropVars.focus.background]: system.color.bg.alt.soft,
-    // [buttonColorPropVars.focus.icon]: system.color.icon.strong,
-    // [buttonColorPropVars.focus.border]: system.color.border.container,
-    // [buttonColorPropVars.disabled.background]: system.color.bg.alt.softer,
-    // [buttonColorPropVars.disabled.border]: system.color.border.container,
-    // [buttonColorPropVars.disabled.icon]: base.soap600,
-    // [buttonColorPropVars.disabled.opacity]: system.opacity.full,
 
     '&:first-of-type': {
       borderRadius: `${system.shape.x1} 0 0 ${system.shape.x1}`,
@@ -53,21 +44,15 @@ const segmentedControlButtonStencil = createStencil({
       [buttonStencil.vars.border]: brand.primary.base,
       [systemIconStencil.vars.color]: system.color.icon.inverse,
 
+      '&:first-of-type': {
+        borderInlineStartColor: brand.primary.base,
+      },
+
       '&:disabled, &.disabled': {
         [buttonStencil.vars.background]: system.color.bg.alt.softer,
         [buttonStencil.vars.border]: system.color.border.container,
         [systemIconStencil.vars.color]: base.soap600,
       },
-
-      // [buttonColorPropVars.default.background]: brand.primary.base,
-      // [buttonColorPropVars.default.icon]: system.color.icon.inverse,
-      // [buttonColorPropVars.hover.background]: brand.primary.base,
-      // [buttonColorPropVars.hover.icon]: system.color.icon.inverse,
-      // [buttonColorPropVars.active.background]: brand.primary.base,
-      // [buttonColorPropVars.active.icon]: system.color.icon.inverse,
-      // [buttonColorPropVars.focus.background]: brand.primary.base,
-      // [buttonColorPropVars.focus.icon]: system.color.icon.inverse,
-      // [buttonColorPropVars.focus.border]: system.color.border.transparent,
     },
 
     '&:focus-visible, &.focus': {
