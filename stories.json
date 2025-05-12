@@ -3793,6 +3793,18 @@
         "__isArgsStory": false
       }
     },
+    "preview-multiselect--disabled": {
+      "id": "preview-multiselect--disabled",
+      "name": "Disabled",
+      "title": "Preview/MultiSelect",
+      "importPath": "./modules/preview-react/multi-select/stories/MultiSelect.stories.ts",
+      "kind": "Preview/MultiSelect",
+      "story": "Disabled",
+      "parameters": {
+        "fileName": "./modules/preview-react/multi-select/stories/MultiSelect.stories.ts",
+        "__isArgsStory": false
+      }
+    },
     "preview-multiselect--icons": {
       "id": "preview-multiselect--icons",
       "name": "Icons",
