@@ -23,7 +23,7 @@ export const GoToTextInput = createComponent('input')({
     const {inputProps} = React.useContext(GoToContext);
 
     return (
-      <TextInput ref={ref} as={Element} size={1} {...inputProps} {...handleCsProp(elemProps)} />
+      <TextInput ref={ref} as={Element} size={1} {...handleCsProp({...inputProps, ...elemProps})} />
     );
   },
 });

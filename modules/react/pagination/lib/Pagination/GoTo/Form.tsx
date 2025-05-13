@@ -32,7 +32,7 @@ export const GoToForm = createComponent('form')({
 
     return (
       <GoToContext.Provider value={goToContext}>
-        <Element ref={ref} {...mergeStyles({...elemProps, ...formProps}, goToFormStencil())}>
+        <Element ref={ref} {...mergeStyles({...formProps, ...elemProps}, goToFormStencil())}>
           {children}
         </Element>
       </GoToContext.Provider>

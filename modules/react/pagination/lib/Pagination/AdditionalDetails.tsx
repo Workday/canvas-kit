@@ -44,9 +44,8 @@ export const AdditionalDetails = createComponent('div')({
     return (
       <Element
         ref={ref}
-        {...liveRegionProps}
         {...mergeStyles(
-          elemProps,
+          {...liveRegionProps, ...elemProps},
           additionalDetailsStencil({shouldHideDetails: elemProps.shouldHideDetails})
         )}
       >
