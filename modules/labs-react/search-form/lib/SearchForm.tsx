@@ -7,6 +7,7 @@ import {
   generateUniqueId,
   filterOutProps,
   accessibleHideStyles,
+  focusRing,
 } from '@workday/canvas-kit-react/common';
 import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
 import {searchIcon, xIcon} from '@workday/canvas-system-icons-web';
@@ -18,6 +19,7 @@ import chroma from 'chroma-js';
 import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {type} from 'os';
 
 export interface SearchFormProps extends GrowthBehavior, React.FormHTMLAttributes<HTMLFormElement> {
   /**
@@ -169,6 +171,15 @@ const searchFormStencil = createStencil({
     minWidth: px2rem(120),
     maxWidth: px2rem(480),
     height: system.space.x10,
+    searchInputBackground: '',
+    searchInputBackgroundFocus: '',
+    searchInputBackgroundHover: '',
+    searchInputColor: '',
+    searchInputColorFocus: '',
+    searchInputPlaceholderColor: '',
+    searchInputPlaceholderColorFocus: '',
+    searchInputBoxShadow: '',
+    searchInputBoxShadowFocus: '',
   },
   parts: {
     searchContainer: 'search-form-container',
@@ -177,6 +188,7 @@ const searchFormStencil = createStencil({
     searchField: 'search-form-field',
     submitSearchIcon: 'search-from-submit-search-icon',
     openSearchIcon: 'search-form-open-search-icon',
+    searchInput: 'search-form-input',
   },
   base: ({
     minWidth,
@@ -187,6 +199,16 @@ const searchFormStencil = createStencil({
     searchFieldPart,
     submitSearchIconPart,
     openSearchIconPart,
+    searchInputPart,
+    searchInputBackground,
+    searchInputBackgroundFocus,
+    searchInputBackgroundHover,
+    searchInputColor,
+    searchInputColorFocus,
+    searchInputPlaceholderColor,
+    searchInputPlaceholderColorFocus,
+    searchInputBoxShadow,
+    searchInputBoxShadowFocus,
   }) => ({
     position: 'relative',
     flexGrow: 1,
@@ -234,6 +256,49 @@ const searchFormStencil = createStencil({
       padding: 0,
       zIndex: 3,
     },
+    [searchInputPart]: {
+      maxWidth,
+      minWidth,
+      paddingInlineStart: calc.add(system.space.x10, system.space.x2),
+      paddingInlineEnd: system.space.x10,
+      backgroundColor: searchInputBackground,
+      height: height,
+      fontSize: system.fontSize.subtext.large,
+      boxShadow: searchInputBoxShadow,
+      color: searchInputColor,
+      border: 'none',
+      WebkitAppearance: 'none',
+      transition: 'background-color 120ms, color 120ms, box-shadow 200ms, border-color 200ms',
+      zIndex: 2,
+      width: '100%',
+      '&::-webkit-search-cancel-button': {
+        display: 'none',
+      },
+      '&::placeholder': {
+        color: searchInputPlaceholderColor,
+      },
+      '&:placeholder-shown': {
+        textOverflow: 'ellipsis',
+      },
+      '&:is(:focus-visible, &.focus):where(:not([disabled]))': {
+        background: searchInputBackgroundFocus,
+        color: searchInputColorFocus,
+        boxShadow: searchInputBoxShadowFocus,
+        '::placeholder': {
+          color: searchInputPlaceholderColorFocus,
+        },
+        // boxShadow: 'none',
+      },
+      '&:not([disabled])': {
+        '&:focus, &:active': {
+          // outline: 'none',
+          // boxShadow: inputColors.boxShadow,
+        },
+        '&:hover': {
+          backgroundColor: searchInputBackgroundHover,
+        },
+      },
+    },
   }),
   modifiers: {
     isHiddenSubmitSearchIcon: {
@@ -251,7 +316,13 @@ const searchFormStencil = createStencil({
       }),
     },
     isCollapsed: {
-      true: ({searchFieldPart, submitSearchIconPart, openSearchIconPart}) => ({
+      true: ({
+        searchFieldPart,
+        submitSearchIconPart,
+        openSearchIconPart,
+        searchInputPart,
+        height,
+      }) => ({
         top: 0,
         right: 0,
         left: 0,
@@ -270,6 +341,15 @@ const searchFormStencil = createStencil({
         [`${submitSearchIconPart}, ${openSearchIconPart}`]: {
           margin: `auto ${system.space.x2}`,
         },
+        [searchInputPart]: {
+          fontSize: '20px',
+          paddingInlineStart: calc.add(system.space.x10, system.space.x4),
+          paddingInlineEnd: calc.add(system.space.x10, system.space.x4),
+          maxWidth: 'none',
+          minWidth: 0,
+          backgroundColor: `rgba(0, 0, 0, 0)`,
+          height,
+        },
       }),
       false: ({searchFieldPart}) => ({
         [searchFieldPart]: {
@@ -287,10 +367,63 @@ const searchFormStencil = createStencil({
       false: {},
     },
     grow: {
-      true: ({searchFieldPart}) => ({
+      true: ({searchFieldPart, searchInputPart}) => ({
         maxWidth: '100%',
-        [searchFieldPart]: {
+        [`${searchFieldPart}, ${searchInputPart}`]: {
           maxWidth: '100%',
+        },
+      }),
+    },
+    searchTheme: {
+      // Light theme
+      0: ({searchInputPart}) => ({
+        [searchInputPart]: {
+          background: system.color.bg.alt.soft,
+          color: system.color.text.default,
+          // boxShadow: 'none',
+
+          '::placeholder': {
+            color: system.color.text.hint,
+          },
+          ':hover': {
+            background: system.color.bg.alt.default,
+          },
+          '&:is(:focus-visible, &.focus):where(:not([disabled]))': {
+            background: system.color.bg.alt.soft,
+            // boxShadow: 'none',
+          },
+        },
+      }),
+      // Dark theme
+      1: ({searchInputPart}) => ({
+        [searchInputPart]: {
+          background: 'rgba(0, 0, 0, 0.2)',
+          color: system.color.text.inverse,
+          boxShadow: 'none',
+          '::placeholder': {
+            color: system.color.text.inverse,
+          },
+          '&:is(:focus-visible), &.focus': {
+            background: system.color.bg.default,
+            color: system.color.text.default,
+            '::placeholder': {
+              color: system.color.text.hint,
+            },
+            boxShadow: 'none',
+          },
+        },
+      }),
+      //Transparent theme
+      2: ({searchInputPart}) => ({
+        [searchInputPart]: {
+          background: 'rgba(0, 0, 0, 0)',
+          backgroundFocus: 'rgba(0, 0, 0, 0)',
+          color: system.color.text.default,
+          colorFocus: system.color.text.default,
+          placeholderColor: system.color.text.hint,
+          placeholderColorFocus: system.color.text.hint,
+          boxShadow: 'none',
+          boxShadowFocus: 'none',
         },
       }),
     },
@@ -312,60 +445,6 @@ const searchFormStencil = createStencil({
       },
     },
   ],
-});
-
-const SearchInput = styled(TextInput)<
-  Pick<SearchFormProps, 'isCollapsed' | 'grow' | 'height'> & {
-    inputColors: ReturnType<typeof getInputColors>;
-  }
->(({isCollapsed, inputColors, grow, height}) => {
-  const collapseStyles: CSSObject = isCollapsed
-    ? {
-        fontSize: '20px',
-        paddingLeft: `calc(${space.xl} + ${space.s})`,
-        paddingRight: `calc(${space.xl} + ${space.s})`,
-        maxWidth: 'none',
-        minWidth: 0,
-        backgroundColor: `rgba(0, 0, 0, 0)`,
-        height: height,
-      }
-    : {
-        maxWidth: grow ? '100%' : maxWidth,
-        minWidth: minWidth,
-        paddingLeft: `calc(${space.xl} + ${space.xxs})`,
-        paddingRight: space.xl,
-        backgroundColor: inputColors.background,
-        height: height,
-      };
-  return {
-    fontSize: '14px',
-    boxShadow: inputColors.boxShadow,
-    color: inputColors.color,
-    border: 'none',
-    WebkitAppearance: 'none',
-    transition: 'background-color 120ms, color 120ms, box-shadow 200ms, border-color 200ms',
-    zIndex: 2,
-    width: '100%',
-    '&::-webkit-search-cancel-button': {
-      display: 'none',
-    },
-    '&::placeholder': {
-      color: inputColors.placeholderColor,
-    },
-    '&:placeholder-shown': {
-      textOverflow: 'ellipsis',
-    },
-    '&:not([disabled])': {
-      '&:focus, &:active': {
-        outline: 'none',
-        boxShadow: inputColors.boxShadow,
-      },
-      '&:hover': {
-        backgroundColor: inputColors.backgroundHover,
-      },
-    },
-    ...collapseStyles,
-  };
 });
 
 export class SearchForm extends React.Component<SearchFormProps, SearchFormState> {
@@ -491,14 +570,13 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
       allowEmptyStringSearch = false,
       ...elemProps
     } = this.props;
-
+    console.log(typeof searchTheme);
     return (
       <form
         role="search"
         action="."
         aria-labelledby={labelId}
         onSubmit={this.handleSubmit}
-        id="foo"
         {...mergeStyles(
           elemProps,
           searchFormStencil({
@@ -509,6 +587,42 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
             height: typeof height === 'number' ? px2rem(height) : height,
             isHiddenSubmitSearchIcon: !!isCollapsed && !this.state.showForm,
             isHiddenOpenSeachIcon: !isCollapsed || (!!isCollapsed && this.state.showForm),
+            searchTheme: typeof searchTheme === 'number' ? searchTheme : undefined,
+            searchInputBackground:
+              typeof searchTheme === 'object' && searchTheme.background
+                ? searchTheme.background
+                : undefined,
+            searchInputBackgroundFocus:
+              typeof searchTheme === 'object' && searchTheme.backgroundFocus
+                ? searchTheme.backgroundFocus
+                : undefined,
+            searchInputBackgroundHover:
+              typeof searchTheme === 'object' && searchTheme.backgroundHover
+                ? searchTheme.backgroundHover
+                : undefined,
+            searchInputColor:
+              typeof searchTheme === 'object' && searchTheme.color ? searchTheme.color : undefined,
+            searchInputColorFocus:
+              typeof searchTheme === 'object' && searchTheme.colorFocus
+                ? searchTheme.colorFocus
+                : undefined,
+            searchInputPlaceholderColor:
+              typeof searchTheme === 'object' && searchTheme.placeholderColor
+                ? searchTheme.placeholderColor
+                : undefined,
+            searchInputPlaceholderColorFocus:
+              typeof searchTheme === 'object' && searchTheme.placeholderColorFocus
+                ? searchTheme.placeholderColorFocus
+                : undefined,
+            searchInputBoxShadow:
+              typeof searchTheme === 'object' && searchTheme.boxShadow
+                ? searchTheme.boxShadow
+                : undefined,
+            searchInputBoxShadowFocus:
+              typeof searchTheme === 'object' && searchTheme.boxShadowFocus
+                ? searchTheme.boxShadowFocus
+                : undefined,
+            // searchTheme: typeof of searchTheme === 'number' ? searchTheme  : undefined,
           })
         )}
       >
@@ -544,16 +658,17 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
               {...searchFormStencil.parts.combobox}
             >
               <FormField.Input
-                as={SearchInput}
+                as={TextInput}
                 ref={this.inputRef as any}
-                cs={{maxWidth: grow ? '100%' : maxWidth}}
+                // cs={{maxWidth: grow ? '100%' : maxWidth}}
                 value={this.state.searchQuery}
                 placeholder={placeholder}
-                isCollapsed={isCollapsed}
-                inputColors={this.getThemeColors()}
-                height={height}
+                // isCollapsed={isCollapsed}
+                // inputColors={this.getThemeColors()}
+                // height={height}
                 name="search"
                 autoComplete="off"
+                {...searchFormStencil.parts.searchInput}
               />
             </Combobox>
           </FormField>
