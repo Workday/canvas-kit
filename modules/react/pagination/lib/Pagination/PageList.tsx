@@ -17,7 +17,6 @@ export const pageListStencil = createStencil({
   base: {
     display: 'flex',
     margin: system.space.zero,
-    role: 'list',
     paddingInlineStart: system.space.zero,
     paddingInlineEnd: system.space.zero,
     gap: system.space.x1,
@@ -29,7 +28,7 @@ export const PageList = createComponent('ol')({
   Component({children, ...elemProps}: PageListProps, ref, Element) {
     const model = React.useContext(PaginationContext);
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, pageListStencil())}>
+      <Element ref={ref} role="list" {...mergeStyles(elemProps, pageListStencil())}>
         {typeof children === 'function' ? children(model) : children}
       </Element>
     );

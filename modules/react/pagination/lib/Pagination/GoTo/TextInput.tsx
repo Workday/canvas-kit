@@ -13,6 +13,7 @@ export type GoToTextInputProps = TextInputProps & {
 
 export const goToTextInputStencil = createStencil({
   base: {
+    minWidth: px2rem(55),
     width: px2rem(55),
   },
 });
@@ -26,7 +27,6 @@ export const GoToTextInput = createComponent('input')({
       <TextInput
         ref={ref}
         as={Element}
-        size={1}
         {...handleCsProp({...inputProps, ...elemProps}, goToTextInputStencil())}
       />
     );
