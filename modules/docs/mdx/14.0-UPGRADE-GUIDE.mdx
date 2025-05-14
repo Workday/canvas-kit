@@ -90,16 +90,18 @@ Several components have been refactored to use our Canvas tokens and styling API
 The following components have been updated:
 
 - `Breadcrumbs` [#3270](https://github.com/Workday/canvas-kit/pull/3270)
+- `SegmentedControl` (main) [#3278](https://github.com/Workday/canvas-kit/pull/3278)
+- `SegmentedControl` (preview) [#3278](https://github.com/Workday/canvas-kit/pull/3278)
 
 ## Troubleshooting
 
 - When upgrading to the latest major version of Canvas Kit, all related Canvas Kit packages should
   be updated at the same time:
-  - `"@workday/canvas-kit-react": "^12.5.6"` -> `"@workday/canvas-kit-react": "^13.0.0"`
-  - `"@workday/canvas-kit-styling": "^12.5.6"` -> `"@workday/canvas-kit-styling": "^13.0.0"`
-  - `"@workday/canvas-kit-preview-react": "^12.5.6"` ->
-    `"@workday/canvas-kit-preview-react": "^13.0.0"`
-  - `"@workday/canvas-kit-labs-react": "^12.5.6"` -> `"@workday/canvas-kit-labs-react": "^13.0.0"`
+  - `"@workday/canvas-kit-react": "^13.5.6"` -> `"@workday/canvas-kit-react": "^14.0.0"`
+  - `"@workday/canvas-kit-styling": "^13.5.6"` -> `"@workday/canvas-kit-styling": "^14.0.0"`
+  - `"@workday/canvas-kit-preview-react": "^13.5.6"` ->
+    `"@workday/canvas-kit-preview-react": "^14.0.0"`
+  - `"@workday/canvas-kit-labs-react": "^13.5.6"` -> `"@workday/canvas-kit-labs-react": "^14.0.0"`
 - Our components rely on the `@workday/canvas-tokens-web` package which provides our CSS variables
   and ensures the correct styling of our components. Make sure to upgrade to the latest version of
   Canvas Tokens Web and install it correctly. For more information,
