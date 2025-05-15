@@ -17,7 +17,7 @@ import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {searchThemes, SearchTheme, SearchThemeAttributes} from './themes';
 import chroma from 'chroma-js';
 import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {type} from 'os';
 
@@ -288,7 +288,12 @@ const searchFormStencil = createStencil({
       '&:is(:focus-visible, &.focus):where(:not([disabled]))': {
         background: searchInputBackgroundFocus,
         color: searchInputColorFocus,
-        boxShadow: searchInputBoxShadowFocus,
+        borderColor: brand.common.focusOutline,
+        outline: `${px2rem(2)} solid transparent`,
+        boxShadow: cssVar(
+          searchInputBoxShadowFocus,
+          `inset 0 0 0 ${px2rem(1)} ${brand.common.focusOutline}`
+        ),
         '::placeholder': {
           color: searchInputPlaceholderColorFocus,
         },
@@ -369,9 +374,6 @@ const searchFormStencil = createStencil({
         },
       }),
     },
-    isFocused: {
-      true: {},
-    },
     searchTheme: {
       // Light theme
       0: ({searchInputPart}) => ({
@@ -388,6 +390,7 @@ const searchFormStencil = createStencil({
           },
           '&:is(:focus-visible, &.focus):where(:not([disabled]))': {
             background: system.color.bg.alt.soft,
+            boxShadow: `0 0 0 0px ${base.frenchVanilla100}, 0 0 0 2px ${brand.common.focusOutline}`,
           },
         },
       }),
@@ -400,10 +403,9 @@ const searchFormStencil = createStencil({
           '::placeholder': {
             color: system.color.text.inverse,
           },
-          '&:not([disabled])': {
-            '&:hover': {
-              backgroundColor: 'rgba(0, 0, 0, 0.2)',
-            },
+
+          ':hover': {
+            background: 'rgba(0, 0, 0, 0.2)',
           },
 
           '&:is(:focus-visible, &.focus):where(:not([disabled]))': {
@@ -573,7 +575,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
       allowEmptyStringSearch = false,
       ...elemProps
     } = this.props;
-    console.log(this.state.isFocused);
+
     return (
       <form
         role="search"
@@ -635,6 +637,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
             icon={searchIcon}
             variant={this.getIconButtonType()}
             type="submit"
+            size="small"
             {...searchFormStencil.parts.submitSearchIcon}
           />
           <TertiaryButton
