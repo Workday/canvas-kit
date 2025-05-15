@@ -12,7 +12,7 @@ export interface GoToLabelProps {
   children?: (model: PaginationModel) => React.ReactNode | React.ReactNode;
 }
 
-export const goToLabelStencil = createStencil({
+export const paginationGoToLabelStencil = createStencil({
   base: {
     whiteSpace: 'nowrap',
   },
