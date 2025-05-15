@@ -261,11 +261,11 @@ const searchFormStencil = createStencil({
       minWidth,
       paddingInlineStart: calc.add(system.space.x10, system.space.x2),
       paddingInlineEnd: system.space.x10,
-      backgroundColor: cssVar(searchInputBackground, system.color.bg.alt.soft),
+      backgroundColor: searchInputBackground,
       height: height,
       fontSize: system.fontSize.subtext.large,
       boxShadow: searchInputBoxShadow,
-      color: cssVar(searchInputColor, system.color.text.default),
+      color: searchInputColor,
       border: 'none',
       WebkitAppearance: 'none',
       transition: 'background-color 120ms, color 120ms, box-shadow 200ms, border-color 200ms',
@@ -275,22 +275,22 @@ const searchFormStencil = createStencil({
         display: 'none',
       },
       '&::placeholder': {
-        color: cssVar(searchInputPlaceholderColor, system.color.text.hint),
+        color: searchInputPlaceholderColor,
       },
       '&:placeholder-shown': {
         textOverflow: 'ellipsis',
       },
-      '&:not([disabled])': {
-        '&:hover': {
-          backgroundColor: cssVar(searchInputBackgroundHover, system.color.bg.alt.default),
-        },
+
+      '&:hover': {
+        backgroundColor: searchInputBackgroundHover,
       },
+
       '&:is(:focus-visible, &.focus):where(:not([disabled]))': {
-        background: cssVar(searchInputBackgroundFocus, system.color.bg.alt.soft),
-        color: cssVar(searchInputColorFocus, system.color.text.default),
+        background: searchInputBackgroundFocus,
+        color: searchInputColorFocus,
         boxShadow: searchInputBoxShadowFocus,
         '::placeholder': {
-          color: cssVar(searchInputPlaceholderColorFocus, system.color.text.hint),
+          color: searchInputPlaceholderColorFocus,
         },
       },
     },
@@ -369,6 +369,9 @@ const searchFormStencil = createStencil({
         },
       }),
     },
+    isFocused: {
+      true: {},
+    },
     searchTheme: {
       // Light theme
       0: ({searchInputPart}) => ({
@@ -380,7 +383,7 @@ const searchFormStencil = createStencil({
           '::placeholder': {
             color: system.color.text.hint,
           },
-          ':hover': {
+          '&:hover': {
             background: system.color.bg.alt.default,
           },
           '&:is(:focus-visible, &.focus):where(:not([disabled]))': {
@@ -397,7 +400,13 @@ const searchFormStencil = createStencil({
           '::placeholder': {
             color: system.color.text.inverse,
           },
-          '&:is(:focus-visible), &.focus': {
+          '&:not([disabled])': {
+            '&:hover': {
+              backgroundColor: 'rgba(0, 0, 0, 0.2)',
+            },
+          },
+
+          '&:is(:focus-visible, &.focus):where(:not([disabled]))': {
             background: system.color.bg.default,
             color: system.color.text.default,
             '::placeholder': {
@@ -559,12 +568,12 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
       onInputChange,
       autocompleteItems,
       initialValue,
-      searchTheme,
+      searchTheme = SearchTheme.Light,
       rightAlign,
       allowEmptyStringSearch = false,
       ...elemProps
     } = this.props;
-    console.log(typeof searchTheme);
+    console.log(this.state.isFocused);
     return (
       <form
         role="search"
@@ -654,12 +663,10 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
               <FormField.Input
                 as={TextInput}
                 ref={this.inputRef as any}
-                // cs={{maxWidth: grow ? '100%' : maxWidth}}
+                cs={this.state.isFocused ? 'focus' : undefined}
+                onBlur={this.handleBlur}
                 value={this.state.searchQuery}
                 placeholder={placeholder}
-                // isCollapsed={isCollapsed}
-                // inputColors={this.getThemeColors()}
-                // height={height}
                 name="search"
                 autoComplete="off"
                 {...searchFormStencil.parts.searchInput}
