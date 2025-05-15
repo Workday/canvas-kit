@@ -242,7 +242,7 @@ const searchFormStencil = createStencil({
       height,
       maxWidth,
       marginBottom: 0,
-      display: 'none',
+      display: 'inline-block',
       '> div': {
         display: 'block',
       },
@@ -340,6 +340,7 @@ const searchFormStencil = createStencil({
         overflow: 'hidden',
         zIndex: 1,
         [searchFieldPart]: {
+          display: 'none',
           maxWidth: '100%',
         },
         [`${submitSearchIconPart}, ${openSearchIconPart}`]: {
@@ -462,6 +463,14 @@ const searchFormStencil = createStencil({
             background: 'rgba(0, 0, 0, 0)',
             boxShadow: 'none',
           },
+        },
+      },
+    },
+    {
+      modifiers: {isCollapsed: true, showForm: true},
+      styles: {
+        '& [data-part="search-form-field"]': {
+          display: 'inline-block',
         },
       },
     },

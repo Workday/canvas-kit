@@ -57,7 +57,6 @@ export const Basic = () => {
         autocompleteItems={menuItems}
         onInputChange={filterMenuItems}
         onSubmit={handleSubmit}
-        isCollapsed
       />
     </Flex>
   );
