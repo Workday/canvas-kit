@@ -186,7 +186,7 @@ const searchFormStencil = createStencil({
     combobox: 'search-form-combobox',
     closeButton: 'search-form-close-button',
     searchField: 'search-form-field',
-    submitSearchIcon: 'search-from-submit-search-icon',
+    submitSearchIcon: 'search-form-submit-search-icon',
     openSearchIcon: 'search-form-open-search-icon',
     searchInput: 'search-form-input',
   },
@@ -242,7 +242,7 @@ const searchFormStencil = createStencil({
       height,
       maxWidth,
       marginBottom: 0,
-      disaply: 'none',
+      display: 'none',
       '> div': {
         display: 'block',
       },
@@ -255,6 +255,10 @@ const searchFormStencil = createStencil({
       left: 0,
       padding: 0,
       zIndex: 3,
+      ':dir(rtl)': {
+        right: 0,
+        left: 'auto',
+      },
     },
     [searchInputPart]: {
       maxWidth,
@@ -435,7 +439,7 @@ const searchFormStencil = createStencil({
   },
   compound: [
     {
-      modifiers: {showForm: 'true', isCollapsed: 'true'},
+      modifiers: {showForm: true, isCollapsed: true},
       styles: {
         position: 'absolute',
         backgroundColor: system.color.bg.default,
@@ -446,6 +450,18 @@ const searchFormStencil = createStencil({
         },
         '& [data-part="search-form-field"]': {
           display: 'inline-block',
+        },
+        '& [data-part="search-form-input"]': {
+          boxShadow: 'none',
+          background: 'rgba(0, 0, 0, 0)',
+          ':hover': {
+            background: 'rgba(0, 0, 0, 0)',
+          },
+
+          '&:is(:focus-visible, &.focus):where(:not([disabled]))': {
+            background: 'rgba(0, 0, 0, 0)',
+            boxShadow: 'none',
+          },
         },
       },
     },
@@ -627,7 +643,6 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
               typeof searchTheme === 'object' && searchTheme.boxShadowFocus
                 ? searchTheme.boxShadowFocus
                 : undefined,
-            // searchTheme: typeof of searchTheme === 'number' ? searchTheme  : undefined,
           })
         )}
       >
