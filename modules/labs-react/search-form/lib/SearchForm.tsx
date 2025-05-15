@@ -16,7 +16,7 @@ import {Combobox} from '@workday/canvas-kit-labs-react/combobox';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {searchThemes, SearchTheme, SearchThemeAttributes} from './themes';
 import chroma from 'chroma-js';
-import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {type} from 'os';
@@ -261,11 +261,11 @@ const searchFormStencil = createStencil({
       minWidth,
       paddingInlineStart: calc.add(system.space.x10, system.space.x2),
       paddingInlineEnd: system.space.x10,
-      backgroundColor: searchInputBackground,
+      backgroundColor: cssVar(searchInputBackground, system.color.bg.alt.soft),
       height: height,
       fontSize: system.fontSize.subtext.large,
       boxShadow: searchInputBoxShadow,
-      color: searchInputColor,
+      color: cssVar(searchInputColor, system.color.text.default),
       border: 'none',
       WebkitAppearance: 'none',
       transition: 'background-color 120ms, color 120ms, box-shadow 200ms, border-color 200ms',
@@ -275,27 +275,22 @@ const searchFormStencil = createStencil({
         display: 'none',
       },
       '&::placeholder': {
-        color: searchInputPlaceholderColor,
+        color: cssVar(searchInputPlaceholderColor, system.color.text.hint),
       },
       '&:placeholder-shown': {
         textOverflow: 'ellipsis',
       },
+      '&:not([disabled])': {
+        '&:hover': {
+          backgroundColor: cssVar(searchInputBackgroundHover, system.color.bg.alt.default),
+        },
+      },
       '&:is(:focus-visible, &.focus):where(:not([disabled]))': {
-        background: searchInputBackgroundFocus,
-        color: searchInputColorFocus,
+        background: cssVar(searchInputBackgroundFocus, system.color.bg.alt.soft),
+        color: cssVar(searchInputColorFocus, system.color.text.default),
         boxShadow: searchInputBoxShadowFocus,
         '::placeholder': {
-          color: searchInputPlaceholderColorFocus,
-        },
-        // boxShadow: 'none',
-      },
-      '&:not([disabled])': {
-        '&:focus, &:active': {
-          // outline: 'none',
-          // boxShadow: inputColors.boxShadow,
-        },
-        '&:hover': {
-          backgroundColor: searchInputBackgroundHover,
+          color: cssVar(searchInputPlaceholderColorFocus, system.color.text.hint),
         },
       },
     },
@@ -390,7 +385,6 @@ const searchFormStencil = createStencil({
           },
           '&:is(:focus-visible, &.focus):where(:not([disabled]))': {
             background: system.color.bg.alt.soft,
-            // boxShadow: 'none',
           },
         },
       }),
