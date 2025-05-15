@@ -610,10 +610,10 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
         {...mergeStyles(
           elemProps,
           searchFormStencil({
-            grow,
-            rightAlign,
-            isCollapsed,
-            showForm: this.state.showForm,
+            grow: !!grow,
+            rightAlign: !!rightAlign,
+            isCollapsed: !!isCollapsed,
+            showForm: !!this.state.showForm,
             height: typeof height === 'number' ? px2rem(height) : height,
             isHiddenSubmitSearchIcon: !!isCollapsed && !this.state.showForm,
             isHiddenOpenSeachIcon: !isCollapsed || (!!isCollapsed && this.state.showForm),
