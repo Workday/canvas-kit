@@ -372,12 +372,12 @@ const searchFormStencil = createStencil({
       false: {},
     },
     grow: {
-      true: ({searchFieldPart, searchInputPart}) => ({
+      true: {
         maxWidth: '100%',
-        [`${searchFieldPart}, ${searchInputPart}`]: {
+        [`[data-part="search-form-field"], [data-part="search-form-input"]`]: {
           maxWidth: '100%',
         },
-      }),
+      },
     },
     searchTheme: {
       // Light theme
@@ -440,7 +440,7 @@ const searchFormStencil = createStencil({
   },
   compound: [
     {
-      modifiers: {showForm: true, isCollapsed: true},
+      modifiers: {showForm: 'true', isCollapsed: 'true'},
       styles: {
         position: 'absolute',
         backgroundColor: system.color.bg.default,
@@ -467,7 +467,7 @@ const searchFormStencil = createStencil({
       },
     },
     {
-      modifiers: {isCollapsed: true, showForm: true},
+      modifiers: {isCollapsed: 'true', showForm: 'true'},
       styles: {
         '& [data-part="search-form-field"]': {
           display: 'inline-block',
@@ -610,10 +610,10 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
         {...mergeStyles(
           elemProps,
           searchFormStencil({
-            grow: !!grow,
-            rightAlign: !!rightAlign,
-            isCollapsed: !!isCollapsed,
-            showForm: !!this.state.showForm,
+            grow,
+            rightAlign,
+            isCollapsed: isCollapsed ? 'true' : 'false',
+            showForm: this.state.showForm ? 'true' : 'false',
             height: typeof height === 'number' ? px2rem(height) : height,
             isHiddenSubmitSearchIcon: !!isCollapsed && !this.state.showForm,
             isHiddenOpenSeachIcon: !isCollapsed || (!!isCollapsed && this.state.showForm),
