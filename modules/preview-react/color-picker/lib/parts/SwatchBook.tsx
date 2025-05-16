@@ -22,13 +22,13 @@ const colorPickerSwatchBookStencil = createStencil({
     } 0 0 0 ${px2rem(3)}`,
   },
   parts: {
-    row: 'color-picker-swatch-book-row',
+    tile: 'color-picker-swatch-book-tile',
   },
-  base: ({rowPart, shadow}) => ({
+  base: ({tilePart, shadow}) => ({
     display: 'flex',
     flexWrap: 'wrap',
     margin: `0 ${calc.negate(system.space.x2)} ${calc.negate(system.space.x2)} 0`,
-    [rowPart]: {
+    [tilePart]: {
       display: 'flex',
       width: px2rem(20),
       height: px2rem(20),
@@ -83,7 +83,7 @@ export const SwatchBook = ({colors, value, onSelect}: SwatchBookProps) => {
             role="button"
             aria-label={label}
             aria-selected={isSelected}
-            {...colorPickerSwatchBookStencil.parts.row}
+            {...colorPickerSwatchBookStencil.parts.tile}
           >
             <ColorSwatch color={hexCode} showCheck={isSelected} />
           </div>

@@ -214,8 +214,8 @@ export const ColorPicker = ({
       )}
       <SwatchBook colors={colorSet} onSelect={onColorChange} value={value} />
       {showCustomHexInput && (
-        <form onSubmit={onSubmit}>
-          <FormField>
+        <form onSubmit={onSubmit} {...colorPickerStencil.parts.form}>
+          <FormField {...colorPickerStencil.parts.inputWrapper}>
             <FormField.Label>{customHexInputLabel}</FormField.Label>
             <FormField.Input
               as={ColorInput}
@@ -223,6 +223,7 @@ export const ColorPicker = ({
               onValidColorChange={onValidCustomHexChange}
               value={customHexValue}
               showCheck={value === validHexValue || value === customHexValue}
+              {...colorPickerStencil.parts.hexInput}
             />
           </FormField>
           <SecondaryButton
@@ -230,6 +231,7 @@ export const ColorPicker = ({
             icon={checkIcon}
             type="submit"
             disabled={disabled}
+            {...colorPickerStencil.parts.button}
           />
         </form>
       )}

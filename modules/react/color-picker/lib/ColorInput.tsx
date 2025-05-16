@@ -45,44 +45,30 @@ export interface ColorInputProps extends TextInputProps, GrowthBehavior {
   onValidColorChange?: (color: string) => void;
 }
 
-export const colorPickerHexInputWrapperStencil = createStencil({
+export const colorPickerHexInputStencil = createStencil({
   vars: {
     width: px2rem(116),
   },
-  base: ({width}) => ({
-    position: 'relative',
-    width,
-  }),
-  modifiers: {
-    grow: {
-      true: ({width}) => ({
-        [width]: '100%',
-      }),
-    },
-  },
-});
-
-export const colorPickerHexInputStencil = createStencil({
   parts: {
+    input: 'color-picker-hex-input',
     poundSign: 'color-picker-hex-input-pound-sign',
     swatch: 'color-picker-hex-input-swatch',
   },
-  base: ({poundSignPart, swatchPart}) => ({
-    minWidth: colorPickerHexInputWrapperStencil.vars.width,
-    width: colorPickerHexInputWrapperStencil.vars.width,
-    fontFamily: system.fontFamily.mono,
-    paddingStart: calc.subtract('100%', px2rem(86)),
+  base: ({inputPart, poundSignPart, swatchPart, width}) => ({
+    position: 'relative',
+    width,
 
-    '&:focus::placeholder': {
-      color: 'transparent',
-    },
+    [inputPart]: {
+      minWidth: width,
+      width,
+      fontFamily: system.fontFamily.mono,
+      paddingInlineStart: calc.subtract('100%', px2rem(86)),
 
-    ':dir(ltr)': {
-      paddingStart: px2rem(46),
-      [poundSignPart]: {
-        left: px2rem(36),
+      '&:focus::placeholder': {
+        color: 'transparent',
       },
     },
+
     [poundSignPart]: {
       position: 'absolute',
       top: px2rem(10),
@@ -99,11 +85,27 @@ export const colorPickerHexInputStencil = createStencil({
       boxShadow: `inset 0 0 0 ${px2rem(1)} rgba(0,0,0,0.25)`,
       pointerEvents: 'none',
     },
+
+    ':dir(ltr)': {
+      [inputPart]: {
+        paddingInlineStart: px2rem(46),
+      },
+      [poundSignPart]: {
+        left: px2rem(36),
+      },
+    },
   }),
   modifiers: {
+    grow: {
+      true: ({width}) => ({
+        [width]: '100%',
+      }),
+    },
     disabled: {
-      true: ({poundSignPart}) => ({
-        backgroundColor: system.color.bg.alt.soft,
+      true: ({inputPart, poundSignPart}) => ({
+        [inputPart]: {
+          backgroundColor: system.color.bg.alt.soft,
+        },
         [poundSignPart]: {
           color: system.color.text.disabled,
         },
@@ -152,7 +154,7 @@ export const ColorInput = createComponent('input')({
     };
 
     return (
-      <div {...colorPickerHexInputWrapperStencil({grow})}>
+      <div {...colorPickerHexInputStencil({grow, disabled})}>
         <TextInput
           dir="ltr"
           ref={ref}
@@ -164,7 +166,8 @@ export const ColorInput = createComponent('input')({
           error={error}
           spellCheck={false}
           maxLength={7} // 7 to allow pasting with a hash
-          {...handleCsProp(elemProps, colorPickerHexInputStencil({disabled}))}
+          {...colorPickerHexInputStencil.parts.input}
+          {...handleCsProp(elemProps)}
         />
         <ColorSwatch
           showCheck={showCheck}

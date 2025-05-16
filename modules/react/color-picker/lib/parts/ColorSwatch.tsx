@@ -1,5 +1,4 @@
 import * as React from 'react';
-import chroma from 'chroma-js';
 
 import {pickForegroundColor} from '@workday/canvas-kit-react/common';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
@@ -12,22 +11,13 @@ export interface ColorSwatchProps extends React.HTMLAttributes<HTMLDivElement> {
   showCheck?: boolean;
 }
 
-function compareColors(color1: string, color2: string): boolean {
-  // Check for validity or else you'll get an unknown format error when passing blank strings
-  if (!chroma.valid(color1) || !chroma.valid(color2)) {
-    return false;
-  }
-
-  return chroma(color1).hex() === chroma(color2).hex();
-}
-
 export const colorPickerColorSwatchStencil = createStencil({
   vars: {
     color: '',
     iconColor: '',
   },
   base: ({color, iconColor}) => ({
-    [systemIconStencil.vars.color]: cssVar(color, iconColor),
+    [systemIconStencil.vars.color]: iconColor,
     backgroundColor: color,
     width: px2rem(20),
     height: px2rem(20),
@@ -49,17 +39,27 @@ export const colorPickerColorSwatchStencil = createStencil({
   },
 });
 
-export const ColorSwatch = ({color, showCheck = false, ...elemProps}: ColorSwatchProps) => (
-  <div
-    {...handleCsProp(
-      elemProps,
-      colorPickerColorSwatchStencil({
-        color,
-        iconColor: pickForegroundColor(color),
-        withShadow: showCheck || compareColors(color, system.color.bg.default),
-      })
-    )}
-  >
-    {showCheck && <SystemIcon icon={checkSmallIcon} />}
-  </div>
-);
+const getIconColor = (color: string) => {
+  return color.startsWith('--cnvs')
+    ? color.match(/.*-(100|200|300|400)$/)
+      ? cssVar(system.color.text.strong)
+      : cssVar(system.color.text.inverse)
+    : pickForegroundColor(color);
+};
+
+export const ColorSwatch = ({color, showCheck = false, ...elemProps}: ColorSwatchProps) => {
+  return (
+    <div
+      {...handleCsProp(
+        elemProps,
+        colorPickerColorSwatchStencil({
+          color: color.startsWith('--cnvs') ? cssVar(color) : color,
+          iconColor: getIconColor(color),
+          withShadow: showCheck || color.includes('french-vanilla-100'),
+        })
+      )}
+    >
+      {showCheck && <SystemIcon icon={checkSmallIcon} />}
+    </div>
+  );
+};
