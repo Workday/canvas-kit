@@ -15,8 +15,8 @@ export interface SearchThemeAttributes {
   colorFocus?: string;
   placeholderColor?: string;
   placeholderColorFocus?: string;
-  boxShadow?: string | string[];
-  boxShadowFocus?: string | string[];
+  boxShadow?: string;
+  boxShadowFocus?: string;
 }
 
 export interface SearchThemes {
