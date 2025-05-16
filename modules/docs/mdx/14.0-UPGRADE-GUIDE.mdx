@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs';
+import {Meta} from '@storybook/addon-docs';
 
 <Meta title="Guides/Upgrade Guides/v14.0" />
 
@@ -8,13 +8,12 @@ This guide contains an overview of the changes in Canvas Kit v14. Please
 [reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have
 any questions.
 
-
 ## Table of contents
 
 - [Codemod](#codemod)
   - [Instructions](#instructions)
 - [Component Updates](#component-updates)
-	- [Styling API and CSS Tokens](#styling-api-and-css-tokens)
+  - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
 - [Troubleshooting](#troubleshooting)
 - [Glossary](#glossary)
   - [Main](#main)
@@ -83,9 +82,12 @@ yarn remove @workday/canvas-kit-codemod
 > your project conventions.
 
 ## Styling API and Canvas Tokens 💅
-Several components have been refactored to use our Canvas tokens and styling API. The React interface has not changed, but Canvas Tokens are now used for dynamic properties.
 
-> **Note:** These components also support our cs prop for styling. Learn more about styling with cs in our documentation.
+Several components have been refactored to use our Canvas tokens and styling API. The React
+interface has not changed, but Canvas Tokens are now used for dynamic properties.
+
+> **Note:** These components also support our cs prop for styling. Learn more about styling with cs
+> in our documentation.
 
 The following components have been updated:
 
@@ -93,6 +95,8 @@ The following components have been updated:
 - `Pagination` (preview) [#3300](https://github.com/Workday/canvas-kit/pull/3300)
 - `SegmentedControl` (main) [#3278](https://github.com/Workday/canvas-kit/pull/3278)
 - `SegmentedControl` (preview) [#3278](https://github.com/Workday/canvas-kit/pull/3278)
+- `ToolbarDropdownButton` [#3293](https://github.com/Workday/canvas-kit/pull/3293)
+- `ToolbarIconButton` [#3293](https://github.com/Workday/canvas-kit/pull/3293)
 
 ## Troubleshooting
 
@@ -110,4 +114,5 @@ The following components have been updated:
 
 ## Glossary
 
-For an overview of the different packages we provide, plase view our docs [here](https://workday.github.io/canvas-kit/?path=/docs/guides-packages--docs).
+For an overview of the different packages we provide, plase view our docs
+[here](https://workday.github.io/canvas-kit/?path=/docs/guides-packages--docs).
