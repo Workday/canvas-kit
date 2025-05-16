@@ -1,6 +1,9 @@
 import React from 'react';
+
+import {AriaLiveRegion, createComponent, useUniqueId} from '@workday/canvas-kit-react/common';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {FormField} from '@workday/canvas-kit-react/form-field';
+import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
 import {
   Popup,
   usePopupModel,
@@ -13,12 +16,11 @@ import {
 import {PrimaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
 import {Table} from '@workday/canvas-kit-react/table';
 import {Text} from '@workday/canvas-kit-react/text';
-import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {AriaLiveRegion, createComponent, useUniqueId} from '@workday/canvas-kit-react/common';
-import {funnelIcon} from '@workday/canvas-system-icons-web';
+import {filterIcon, searchIcon} from '@workday/canvas-system-icons-web';
 
 interface CountryData {
   country: string;
@@ -53,10 +55,6 @@ const textStyles = createStyles({
   paddingInlineStart: system.space.x3,
 });
 
-const liveRegionStyles = createStyles({
-  paddingLeft: system.space.x4,
-});
-
 interface FilterableColumnHeaderProps {
   label: string;
   onFilter: (filterObject: {filterText: string; column: string}) => void;
@@ -89,7 +87,12 @@ const FilterableColumnHeader = createComponent('th')({
       <Table.Header scope="col" aria-owns={targetId + ' ' + popupId}>
         <Popup model={filterPopupModel}>
           <Tooltip title={`Filter${inputVal !== '' ? `ed: "${inputVal}"` : ''}`} type="description">
-            <Popup.Target as={TertiaryButton} id={targetId} icon={funnelIcon} iconPosition="end">
+            <Popup.Target
+              as={TertiaryButton}
+              id={targetId}
+              icon={inputVal === '' ? searchIcon : filterIcon}
+              iconPosition="end"
+            >
               {label}
             </Popup.Target>
           </Tooltip>
@@ -99,13 +102,18 @@ const FilterableColumnHeader = createComponent('th')({
               <Popup.Body>
                 <FormField>
                   <FormField.Label>{label}</FormField.Label>
-                  <FormField.Input
-                    as={TextInput}
-                    type="search"
-                    ref={initialFocusRef}
-                    onChange={handleChange}
-                    value={inputVal}
-                  />
+                  <FormField.Input as={InputGroup}>
+                    <InputGroup.InnerStart>
+                      <SystemIcon icon={searchIcon} />
+                    </InputGroup.InnerStart>
+                    <InputGroup.Input
+                      as={TextInput}
+                      type="search"
+                      ref={initialFocusRef}
+                      onChange={handleChange}
+                      value={inputVal}
+                    />
+                  </FormField.Input>
                 </FormField>
               </Popup.Body>
               <Flex>
@@ -161,8 +169,8 @@ export const FilterableColumnHeaders = () => {
     <Table maxHeight="40rem">
       <Table.Caption>
         Population Listed by Country (2021)
-        <AriaLiveRegion cs={liveRegionStyles}>
-          Showing {filteredData.length} of {countryData.length} items
+        <AriaLiveRegion cs={textStyles}>
+          {filteredData.length} of {countryData.length} items
         </AriaLiveRegion>
       </Table.Caption>
       <Table.Head>
