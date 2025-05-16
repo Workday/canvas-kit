@@ -12,7 +12,7 @@ export interface GoToFormProps extends FlexProps {
   onSubmit?: React.FormEventHandler<HTMLFormElement>;
 }
 
-export const goToFormStencil = createStencil({
+export const paginationGoToFormStencil = createStencil({
   base: {
     display: 'flex',
     alignItems: 'center',
@@ -32,7 +32,10 @@ export const GoToForm = createComponent('form')({
 
     return (
       <GoToContext.Provider value={goToContext}>
-        <Element ref={ref} {...mergeStyles({...formProps, ...elemProps}, goToFormStencil())}>
+        <Element
+          ref={ref}
+          {...mergeStyles({...formProps, ...elemProps}, paginationGoToFormStencil())}
+        >
           {children}
         </Element>
       </GoToContext.Provider>

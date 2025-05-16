@@ -14,7 +14,7 @@ export interface AdditionalDetailsProps extends Omit<FlexProps, 'children'> {
   shouldHideDetails?: boolean;
 }
 
-export const additionalDetailsStencil = createStencil({
+export const paginationAdditionalDetailsStencil = createStencil({
   base: {
     display: 'flex',
     ...system.type.subtext.medium,
@@ -46,7 +46,7 @@ export const AdditionalDetails = createComponent('div')({
         ref={ref}
         {...mergeStyles(
           {...liveRegionProps, ...elemProps},
-          additionalDetailsStencil({shouldHideDetails: elemProps.shouldHideDetails})
+          paginationAdditionalDetailsStencil({shouldHideDetails: elemProps.shouldHideDetails})
         )}
       >
         {typeof children === 'function' ? children(model) : children}

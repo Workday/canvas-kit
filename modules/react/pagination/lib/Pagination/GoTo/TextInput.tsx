@@ -11,7 +11,7 @@ export type GoToTextInputProps = TextInputProps & {
   value?: string | number;
 };
 
-export const goToTextInputStencil = createStencil({
+export const paginationGoToTextInputStencil = createStencil({
   base: {
     minWidth: px2rem(55),
     width: px2rem(55),
@@ -28,7 +28,7 @@ export const GoToTextInput = createComponent('input')({
         ref={ref}
         as={Element}
         size={1}
-        {...handleCsProp({...inputProps, ...elemProps}, goToTextInputStencil())}
+        {...handleCsProp({...inputProps, ...elemProps}, paginationGoToTextInputStencil())}
       />
     );
   },

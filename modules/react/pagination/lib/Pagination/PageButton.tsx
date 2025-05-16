@@ -6,7 +6,7 @@ import {createComponent} from '@workday/canvas-kit-react/common';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {PaginationContext} from './usePaginationModel';
 
-export const pageButtonStencil = createStencil({
+export const paginationPageButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
     minWidth: system.space.x8,
@@ -69,7 +69,7 @@ export const PageButton = createComponent('button')({
         aria-pressed={undefined}
         size="small"
         onClick={handleClick}
-        {...handleCsProp(elemProps, pageButtonStencil({toggled: isCurrentPage}))}
+        {...handleCsProp(elemProps, paginationPageButtonStencil({toggled: isCurrentPage}))}
       >
         {children || pageNumber}
       </BaseButton>

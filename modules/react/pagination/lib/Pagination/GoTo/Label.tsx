@@ -28,7 +28,7 @@ export const GoToLabel = createComponent('label')({
         as={Element}
         size="medium"
         variant="hint"
-        {...handleCsProp(elemProps, goToLabelStencil())}
+        {...handleCsProp(elemProps, paginationGoToLabelStencil())}
       >
         {typeof children === 'function' ? children(model) : children}
       </Subtext>

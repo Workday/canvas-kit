@@ -13,7 +13,7 @@ export interface PageListProps extends Omit<FlexProps, 'as' | 'children'> {
   children?: (model: PaginationModel) => React.ReactNode[] | React.ReactNode;
 }
 
-export const pageListStencil = createStencil({
+export const paginationPageListStencil = createStencil({
   base: {
     display: 'flex',
     margin: system.space.zero,
@@ -28,7 +28,7 @@ export const PageList = createComponent('ol')({
   Component({children, ...elemProps}: PageListProps, ref, Element) {
     const model = React.useContext(PaginationContext);
     return (
-      <Element ref={ref} role="list" {...mergeStyles(elemProps, pageListStencil())}>
+      <Element ref={ref} role="list" {...mergeStyles(elemProps, paginationPageListStencil())}>
         {typeof children === 'function' ? children(model) : children}
       </Element>
     );
