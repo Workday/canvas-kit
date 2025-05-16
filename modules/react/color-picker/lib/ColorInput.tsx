@@ -1,19 +1,16 @@
 import * as React from 'react';
 import {
   createComponent,
-  StyledType,
   expandHex,
   GrowthBehavior,
   ErrorType,
-  styled,
-  Themeable,
-  ContentDirection,
 } from '@workday/canvas-kit-react/common';
-import {colors, space, type, inputColors} from '@workday/canvas-kit-react/tokens';
 import {TextInput, TextInputProps} from '@workday/canvas-kit-react/text-input';
 import {ColorSwatch} from './parts/ColorSwatch';
+import {calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
-export interface ColorInputProps extends Themeable, TextInputProps, GrowthBehavior {
+export interface ColorInputProps extends TextInputProps, GrowthBehavior {
   /**
    * The value of the ColorInput.
    * @default ''
@@ -48,72 +45,67 @@ export interface ColorInputProps extends Themeable, TextInputProps, GrowthBehavi
   onValidColorChange?: (color: string) => void;
 }
 
-const colorInputWidth = 116;
-
-const CustomHexInput = styled(TextInput)<Pick<ColorInputProps, 'disabled' | 'grow'> & StyledType>(
-  {
-    boxSizing: 'border-box',
-    minWidth: colorInputWidth,
-    width: colorInputWidth,
-    fontFamily: type.properties.fontFamilies.monospace,
+export const colorPickerHexInputStencil = createStencil({
+  vars: {
+    width: px2rem(116),
+  },
+  parts: {
+    container: 'color-picker-hex-input-container',
+    poundSign: 'color-picker-hex-input-pound-sign',
+    swatch: 'color-picker-hex-input-swatch',
+  },
+  base: ({containerPart, poundSignPart, swatchPart, width}) => ({
+    minWidth: width,
+    width,
+    fontFamily: system.fontFamily.mono,
+    paddingStart: calc.subtract('100%', px2rem(86)),
 
     '&:focus::placeholder': {
       color: 'transparent',
     },
-  },
-  ({grow}) =>
-    grow && {
-      minWidth: '100%',
-      width: '100%',
+
+    ':dir(ltr)': {
+      paddingStart: px2rem(46),
+      [poundSignPart]: {
+        left: px2rem(36),
+      },
     },
-  ({disabled}) => ({
-    backgroundColor: disabled ? colors.soap200 : '',
+    [containerPart]: {
+      position: 'relative',
+      width,
+    },
+    [poundSignPart]: {
+      position: 'absolute',
+      top: px2rem(10),
+      left: px2rem(88),
+      fontSize: system.type.subtext.large.fontSize,
+      lineHeight: system.type.subtext.large.lineHeight,
+      letterSpacing: system.type.subtext.large.letterSpacing,
+      fontFamily: system.fontFamily.mono,
+    },
+    [swatchPart]: {
+      position: 'absolute',
+      top: px2rem(10),
+      left: system.space.x2,
+      boxShadow: `inset 0 0 0 ${px2rem(1)} rgba(0,0,0,0.25)`,
+      pointerEvents: 'none',
+    },
   }),
-  ({theme}) => ({
-    paddingLeft:
-      theme.canvas.direction === ContentDirection.LTR ? '46px' : 'calc(100% - 86px) /* @noflip */',
-    // We're using @noflip because ColorInput should stay LTR, therefore, we need to adjust the padding using ContentDirection, not using rtl-css-js.
-  })
-);
-
-const ColorInputContainer = styled('div')<Pick<ColorInputProps, 'grow'>>(
-  {
-    position: 'relative',
-    width: colorInputWidth,
+  modifiers: {
+    grow: {
+      true: ({width}) => ({
+        [width]: '100%',
+      }),
+    },
+    disabled: {
+      true: ({poundSignPart}) => ({
+        backgroundColor: system.color.bg.alt.soft,
+        [poundSignPart]: {
+          color: system.color.text.disabled,
+        },
+      }),
+    },
   },
-  ({grow}) =>
-    grow && {
-      minWidth: '100%',
-      width: '100%',
-    }
-);
-
-const PoundSignPrefix = styled('span')<Pick<ColorInputProps, 'disabled'>>(
-  {
-    position: 'absolute',
-    top: 10,
-    ...type.levels.subtext.large,
-    fontFamily: type.properties.fontFamilies.monospace,
-  },
-  ({disabled}) => ({
-    color: disabled ? inputColors.disabled.text : undefined,
-  }),
-  ({theme}) => ({
-    left: theme.canvas.direction === ContentDirection.LTR ? '36px' : '88px',
-    //    - LTR -> left: 36px;
-    //    - RTL -> right: 88px;
-    //
-    // It's because we're changing the value of this attribute based on ContentDirection but the attribute itself is getting flipped by rtl-css-js.
-    // We're doing this to adjust the spacing of the # sign as it should always stay on the left of the input in both LTR and RTL.
-  })
-);
-
-const SwatchTile = styled(ColorSwatch)({
-  position: 'absolute',
-  top: '10px', // input is 40px high, and the tile is 20 x 20px, this centers the tile
-  left: space.xxs,
-  boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.25)',
-  pointerEvents: 'none',
 });
 
 const isValidHex = (value: string) => {
@@ -156,8 +148,8 @@ export const ColorInput = createComponent('input')({
     };
 
     return (
-      <ColorInputContainer grow={grow}>
-        <CustomHexInput
+      <div {...colorPickerHexInputStencil.parts.container}>
+        <TextInput
           dir="ltr"
           ref={ref}
           as={Element}
@@ -167,19 +159,18 @@ export const ColorInput = createComponent('input')({
           value={formattedValue}
           error={error}
           spellCheck={false}
-          disabled={disabled}
-          grow={grow}
           maxLength={7} // 7 to allow pasting with a hash
-          {...elemProps}
+          {...handleCsProp(elemProps, colorPickerHexInputStencil({grow, disabled}))}
         />
-        <SwatchTile
+        <ColorSwatch
           showCheck={showCheck}
           color={isValidHex(formattedValue) ? `#${formattedValue}` : ''}
+          {...colorPickerHexInputStencil.parts.swatch}
         />
-        <PoundSignPrefix aria-hidden={true} disabled={disabled}>
+        <span aria-hidden={true} {...colorPickerHexInputStencil.parts.poundSign}>
           #
-        </PoundSignPrefix>
-      </ColorInputContainer>
+        </span>
+      </div>
     );
   },
 });

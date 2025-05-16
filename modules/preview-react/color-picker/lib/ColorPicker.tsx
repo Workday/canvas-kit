@@ -1,13 +1,14 @@
-import {colors, space} from '@workday/canvas-kit-react/tokens';
+// import {colors} from '@workday/canvas-kit-react/tokens';
 import {checkIcon} from '@workday/canvas-system-icons-web';
 import {ColorInput} from '@workday/canvas-kit-react/color-picker';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import * as React from 'react';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import styled from '@emotion/styled';
 
 import {ResetButton} from './parts/ColorReset';
 import {SwatchBook, SwatchBookColorObject} from './parts/SwatchBook';
+import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 export interface ColorPickerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -59,94 +60,98 @@ export interface ColorPickerProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const defaultColorSet = [
-  colors.blueberry600,
-  colors.grapeSoda600,
-  colors.pomegranate600,
-  colors.cinnamon600,
-  colors.cantaloupe600,
-  colors.sourLemon600,
-  colors.greenApple600,
-  colors.jewel600,
+  base.blueberry600,
+  base.grapeSoda600,
+  base.pomegranate600,
+  base.cinnamon600,
+  base.cantaloupe600,
+  base.sourLemon600,
+  base.greenApple600,
+  base.jewel600,
 
-  colors.blueberry500,
-  colors.grapeSoda500,
-  colors.pomegranate500,
-  colors.cinnamon500,
-  colors.cantaloupe500,
-  colors.sourLemon500,
-  colors.greenApple500,
-  colors.jewel500,
+  base.blueberry500,
+  base.grapeSoda500,
+  base.pomegranate500,
+  base.cinnamon500,
+  base.cantaloupe500,
+  base.sourLemon500,
+  base.greenApple500,
+  base.jewel500,
 
-  colors.blueberry400,
-  colors.grapeSoda400,
-  colors.pomegranate400,
-  colors.cinnamon400,
-  colors.cantaloupe400,
-  colors.sourLemon400,
-  colors.greenApple400,
-  colors.jewel400,
+  base.blueberry400,
+  base.grapeSoda400,
+  base.pomegranate400,
+  base.cinnamon400,
+  base.cantaloupe400,
+  base.sourLemon400,
+  base.greenApple400,
+  base.jewel400,
 
-  colors.blueberry300,
-  colors.grapeSoda300,
-  colors.pomegranate300,
-  colors.cinnamon300,
-  colors.cantaloupe300,
-  colors.sourLemon300,
-  colors.greenApple300,
-  colors.jewel300,
+  base.blueberry300,
+  base.grapeSoda300,
+  base.pomegranate300,
+  base.cinnamon300,
+  base.cantaloupe300,
+  base.sourLemon300,
+  base.greenApple300,
+  base.jewel300,
 
-  colors.blueberry200,
-  colors.grapeSoda200,
-  colors.pomegranate200,
-  colors.cinnamon200,
-  colors.cantaloupe200,
-  colors.sourLemon200,
-  colors.greenApple200,
-  colors.jewel200,
+  base.blueberry200,
+  base.grapeSoda200,
+  base.pomegranate200,
+  base.cinnamon200,
+  base.cantaloupe200,
+  base.sourLemon200,
+  base.greenApple200,
+  base.jewel200,
 
-  colors.blueberry100,
-  colors.grapeSoda100,
-  colors.pomegranate100,
-  colors.cinnamon100,
-  colors.cantaloupe100,
-  colors.sourLemon100,
-  colors.greenApple100,
-  colors.jewel100,
+  base.blueberry100,
+  base.grapeSoda100,
+  base.pomegranate100,
+  base.cinnamon100,
+  base.cantaloupe100,
+  base.sourLemon100,
+  base.greenApple100,
+  base.jewel100,
 
-  colors.blackPepper600,
-  colors.blackPepper400,
-  colors.blackPepper300,
-  colors.blackPepper100,
-  colors.frenchVanilla500,
-  colors.frenchVanilla400,
-  colors.frenchVanilla200,
-  colors.frenchVanilla100,
+  base.blackPepper600,
+  base.blackPepper400,
+  base.blackPepper300,
+  base.blackPepper100,
+  base.frenchVanilla500,
+  base.frenchVanilla400,
+  base.frenchVanilla200,
+  base.frenchVanilla100,
 ];
 
-const ColorPickerContainer = styled('div')({
-  width: 216,
-});
-
-const ColorInputWrapper = styled('form')({
-  width: '100%',
-  marginTop: space.s,
-  display: 'flex',
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-});
-
-const ColorInputAndLabel = styled(FormField)({
-  display: 'flex',
-  flexDirection: 'column',
-  margin: 0,
-});
-
-const CheckButton = styled(SecondaryButton)({
-  alignSelf: 'flex-end',
-});
-
-const HexColorInput = styled(ColorInput)({
-  width: '168px',
+export const colorPickerStencil = createStencil({
+  parts: {
+    button: 'color-picker-button',
+    form: 'color-picker-form',
+    hexInput: 'color-picker-hex-input',
+    inputWrapper: 'color-picker-input-wrapper',
+  },
+  base: ({buttonPart, formPart, hexInputPart, inputWrapperPart}) => ({
+    width: px2rem(216),
+    [formPart]: {
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginBlockStart: system.space.x4,
+    },
+    [inputWrapperPart]: {
+      display: 'flex',
+      flexDirection: 'column',
+      margin: system.space.zero,
+    },
+    [buttonPart]: {
+      alignSelf: 'flex-end',
+    },
+    [hexInputPart]: {
+      width: px2rem(168),
+    },
+  }),
 });
 
 const isCustomColor = (colors: (string | SwatchBookColorObject)[], hexCode?: string) => {
@@ -203,32 +208,32 @@ export const ColorPicker = ({
   };
 
   return (
-    <ColorPickerContainer {...elemProps}>
+    <div {...handleCsProp(elemProps, colorPickerStencil())}>
       {onColorReset && resetColor && (
         <ResetButton onClick={onColorReset} resetColor={resetColor} label={resetLabel} />
       )}
       <SwatchBook colors={colorSet} onSelect={onColorChange} value={value} />
       {showCustomHexInput && (
-        <ColorInputWrapper onSubmit={onSubmit}>
-          <ColorInputAndLabel>
+        <form onSubmit={onSubmit}>
+          <FormField>
             <FormField.Label>{customHexInputLabel}</FormField.Label>
             <FormField.Input
-              as={HexColorInput}
+              as={ColorInput}
               onChange={onCustomHexChange}
               onValidColorChange={onValidCustomHexChange}
               value={customHexValue}
               showCheck={value === validHexValue || value === customHexValue}
             />
-          </ColorInputAndLabel>
-          <CheckButton
+          </FormField>
+          <SecondaryButton
             aria-label={submitLabel}
             icon={checkIcon}
             type="submit"
             disabled={disabled}
           />
-        </ColorInputWrapper>
+        </form>
       )}
-    </ColorPickerContainer>
+    </div>
   );
 };
 
