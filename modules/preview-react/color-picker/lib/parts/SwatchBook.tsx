@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {focusRing} from '@workday/canvas-kit-react/common';
 import {ColorSwatch} from '@workday/canvas-kit-react/color-picker';
-import {calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export interface SwatchBookColorObject {
@@ -15,42 +15,38 @@ export interface SwatchBookProps {
   onSelect: (color: string) => void;
 }
 
-export const swatchBookStencil = createStencil({
-  parts: {
-    wrapper: 'swatch-book-wrapper',
-  },
+const colorPickerSwatchBookStencil = createStencil({
   vars: {
     shadow: `${system.color.border.inverse} 0 0 0 ${px2rem(2)}, ${
       system.color.border.input.default
     } 0 0 0 ${px2rem(3)}`,
   },
-  base: ({wrapperPart, shadow}) => ({
+  parts: {
+    row: 'color-picker-swatch-book-row',
+  },
+  base: ({rowPart, shadow}) => ({
     display: 'flex',
-    width: px2rem(20),
-    height: px2rem(20),
-    cursor: 'pointer',
-    borderRadius: system.shape.half,
-    transition: 'box-shadow 120ms ease',
-    margin: `0px ${system.space.x2} ${system.space.x2} 0px`,
-
-    '&:hover': {
-      boxShadow: shadow,
-    },
-
-    '&:focus-visible': {
-      outline: 'none',
-      ...focusRing({separation: 2}),
-    },
-
-    [wrapperPart]: {
+    flexWrap: 'wrap',
+    margin: `0 ${calc.negate(system.space.x2)} ${calc.negate(system.space.x2)} 0`,
+    [rowPart]: {
       display: 'flex',
-      flexWrap: 'wrap',
-      margin: `0 ${calc.negate(system.space.x2)} ${calc.negate(system.space.x2)} 0`,
-    },
-  }),
-  modifiers: {
-    selected: {
-      true: ({shadow}) => ({
+      width: px2rem(20),
+      height: px2rem(20),
+      cursor: 'pointer',
+      borderRadius: system.shape.half,
+      transition: 'box-shadow 120ms ease',
+      margin: `0px ${system.space.x2} ${system.space.x2} 0px`,
+
+      '&:hover': {
+        boxShadow: shadow,
+      },
+
+      '&:focus-visible': {
+        outline: 'none',
+        ...focusRing({separation: 2}),
+      },
+
+      '&[aria-selected="true"]': {
         boxShadow: shadow,
 
         '&:focus-visible': {
@@ -61,14 +57,14 @@ export const swatchBookStencil = createStencil({
         '&:hover': {
           boxShadow: shadow,
         },
-      }),
+      },
     },
-  },
+  }),
 });
 
 export const SwatchBook = ({colors, value, onSelect}: SwatchBookProps) => {
   return (
-    <div {...swatchBookStencil.parts.wrapper}>
+    <div {...colorPickerSwatchBookStencil()}>
       {colors.map((color: string | SwatchBookColorObject, index: number) => {
         const hexCode = typeof color === 'object' ? color.value : color;
         const label = typeof color === 'object' ? color.label : color;
@@ -80,7 +76,6 @@ export const SwatchBook = ({colors, value, onSelect}: SwatchBookProps) => {
 
         return (
           <div
-            {...handleCsProp({}, swatchBookStencil({selected: isSelected}))}
             key={index + '-' + color}
             onClick={handleClick}
             onKeyDown={handleKeyDown}
@@ -88,6 +83,7 @@ export const SwatchBook = ({colors, value, onSelect}: SwatchBookProps) => {
             role="button"
             aria-label={label}
             aria-selected={isSelected}
+            {...colorPickerSwatchBookStencil.parts.row}
           >
             <ColorSwatch color={hexCode} showCheck={isSelected} />
           </div>

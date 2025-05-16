@@ -45,18 +45,31 @@ export interface ColorInputProps extends TextInputProps, GrowthBehavior {
   onValidColorChange?: (color: string) => void;
 }
 
-export const colorPickerHexInputStencil = createStencil({
+export const colorPickerHexInputWrapperStencil = createStencil({
   vars: {
     width: px2rem(116),
   },
+  base: ({width}) => ({
+    position: 'relative',
+    width,
+  }),
+  modifiers: {
+    grow: {
+      true: ({width}) => ({
+        [width]: '100%',
+      }),
+    },
+  },
+});
+
+export const colorPickerHexInputStencil = createStencil({
   parts: {
-    container: 'color-picker-hex-input-container',
     poundSign: 'color-picker-hex-input-pound-sign',
     swatch: 'color-picker-hex-input-swatch',
   },
-  base: ({containerPart, poundSignPart, swatchPart, width}) => ({
-    minWidth: width,
-    width,
+  base: ({poundSignPart, swatchPart}) => ({
+    minWidth: colorPickerHexInputWrapperStencil.vars.width,
+    width: colorPickerHexInputWrapperStencil.vars.width,
     fontFamily: system.fontFamily.mono,
     paddingStart: calc.subtract('100%', px2rem(86)),
 
@@ -69,10 +82,6 @@ export const colorPickerHexInputStencil = createStencil({
       [poundSignPart]: {
         left: px2rem(36),
       },
-    },
-    [containerPart]: {
-      position: 'relative',
-      width,
     },
     [poundSignPart]: {
       position: 'absolute',
@@ -92,11 +101,6 @@ export const colorPickerHexInputStencil = createStencil({
     },
   }),
   modifiers: {
-    grow: {
-      true: ({width}) => ({
-        [width]: '100%',
-      }),
-    },
     disabled: {
       true: ({poundSignPart}) => ({
         backgroundColor: system.color.bg.alt.soft,
@@ -148,7 +152,7 @@ export const ColorInput = createComponent('input')({
     };
 
     return (
-      <div {...colorPickerHexInputStencil.parts.container}>
+      <div {...colorPickerHexInputWrapperStencil({grow})}>
         <TextInput
           dir="ltr"
           ref={ref}
@@ -160,7 +164,7 @@ export const ColorInput = createComponent('input')({
           error={error}
           spellCheck={false}
           maxLength={7} // 7 to allow pasting with a hash
-          {...handleCsProp(elemProps, colorPickerHexInputStencil({grow, disabled}))}
+          {...handleCsProp(elemProps, colorPickerHexInputStencil({disabled}))}
         />
         <ColorSwatch
           showCheck={showCheck}
