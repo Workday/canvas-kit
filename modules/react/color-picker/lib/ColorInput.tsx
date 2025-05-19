@@ -48,7 +48,7 @@ export interface ColorInputProps extends TextInputProps, GrowthBehavior {
 
 export const colorPickerHexInputStencil = createStencil({
   vars: {
-    width: px2rem(116),
+    width: '',
   },
   parts: {
     input: 'color-picker-hex-input',
@@ -56,6 +56,7 @@ export const colorPickerHexInputStencil = createStencil({
     swatch: 'color-picker-hex-input-swatch',
   },
   base: ({inputPart, poundSignPart, swatchPart, width}) => ({
+    [width]: px2rem(116),
     position: 'relative',
     width,
 
@@ -76,6 +77,7 @@ export const colorPickerHexInputStencil = createStencil({
       left: px2rem(88),
       fontFamily: system.fontFamily.mono,
     },
+
     [swatchPart]: {
       position: 'absolute',
       top: px2rem(10),
@@ -102,7 +104,9 @@ export const colorPickerHexInputStencil = createStencil({
     disabled: {
       true: ({inputPart, poundSignPart}) => ({
         [inputPart]: {
+          borderColor: system.color.border.input.disabled,
           backgroundColor: system.color.bg.alt.soft,
+          color: system.color.text.disabled,
         },
         [poundSignPart]: {
           color: system.color.text.disabled,
@@ -132,6 +136,7 @@ export const ColorInput = createComponent('input')({
       disabled,
       error,
       grow,
+      width,
       ...elemProps
     }: ColorInputProps,
     ref,
@@ -152,7 +157,13 @@ export const ColorInput = createComponent('input')({
     };
 
     return (
-      <div {...colorPickerHexInputStencil({grow, disabled})}>
+      <div
+        {...colorPickerHexInputStencil({
+          grow,
+          disabled,
+          width: typeof width === 'number' ? px2rem(width) : width,
+        })}
+      >
         <TextInput
           dir="ltr"
           ref={ref}
@@ -161,6 +172,7 @@ export const ColorInput = createComponent('input')({
           type="text"
           placeholder={value ? undefined : placeholder}
           value={formattedValue}
+          disabled={disabled}
           error={error}
           spellCheck={false}
           maxLength={7} // 7 to allow pasting with a hash
