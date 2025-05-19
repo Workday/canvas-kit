@@ -1,13 +1,8 @@
 import * as React from 'react';
-import {CSSObject} from '@emotion/styled';
-import {colors, space} from '@workday/canvas-kit-react/tokens';
 import {
   GrowthBehavior,
-  styled,
   generateUniqueId,
-  filterOutProps,
   accessibleHideStyles,
-  focusRing,
 } from '@workday/canvas-kit-react/common';
 import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
 import {searchIcon, xIcon} from '@workday/canvas-system-icons-web';
@@ -19,7 +14,6 @@ import chroma from 'chroma-js';
 import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {type} from 'os';
 
 export interface SearchFormProps extends GrowthBehavior, React.FormHTMLAttributes<HTMLFormElement> {
   /**
@@ -123,48 +117,7 @@ function getInputColors(theme: SearchThemeAttributes, isFocused?: boolean) {
   };
 }
 
-const formCollapsedBackground = colors.frenchVanilla100;
-
-const maxWidth = 480;
-const minWidth = 120;
-
-// const StyledSearchForm = styled('form')<
-//   Pick<SearchFormProps, 'isCollapsed' | 'rightAlign' | 'grow'> & Pick<SearchFormState, 'showForm'>
-// >(
-//   {
-//     position: 'relative',
-//     flexGrow: 1,
-//     display: 'flex',
-//     alignItems: 'center',
-//     marginLeft: space.m,
-//     minWidth: minWidth,
-//   },
-//   ({isCollapsed, showForm, rightAlign, grow}) => {
-//     const collapseStyles: CSSObject = isCollapsed
-//       ? {
-//           top: 0,
-//           right: 0,
-//           left: 0,
-//           bottom: 0,
-//           margin: 0,
-//           position: showForm ? 'absolute' : 'relative',
-//           backgroundColor: showForm ? formCollapsedBackground : 'rgba(0, 0, 0, 0)',
-//           transition: 'background-color 120ms',
-//           maxWidth: showForm ? 'none' : `calc(${space.xl} + ${space.xxs})`,
-//           minWidth: `calc(${space.xl} + ${space.xs})`,
-//           overflow: showForm ? 'visible' : 'hidden',
-//           zIndex: 1,
-//         }
-//       : {};
-//     const rightAlignStyles: CSSObject = rightAlign
-//       ? {
-//           textAlign: 'right',
-//           maxWidth: grow ? '100%' : maxWidth,
-//         }
-//       : {};
-//     return {...rightAlignStyles, ...collapseStyles};
-//   }
-// );
+const formCollapsedBackground = cssVar(system.color.bg.default);
 
 const searchFormStencil = createStencil({
   vars: {
