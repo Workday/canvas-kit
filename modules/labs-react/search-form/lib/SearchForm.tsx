@@ -287,7 +287,7 @@ const searchFormStencil = createStencil({
         bottom: 0,
         margin: 0,
         position: 'relative',
-        backgroundColor: 'rgba(0, 0, 0, 0)',
+        backgroundColor: system.color.bg.transparent,
         transition: 'background-color 120ms',
         maxWidth: calc.add(system.space.x10, system.space.x2),
         minWidth: calc.add(system.space.x10, system.space.x3),
@@ -306,7 +306,7 @@ const searchFormStencil = createStencil({
           paddingInlineEnd: calc.add(system.space.x10, system.space.x4),
           maxWidth: 'none',
           minWidth: 0,
-          backgroundColor: `rgba(0, 0, 0, 0)`,
+          backgroundColor: system.color.bg.transparent,
           height,
         },
       }),
@@ -356,7 +356,7 @@ const searchFormStencil = createStencil({
       // Dark theme
       1: ({searchInputPart}) => ({
         [searchInputPart]: {
-          background: 'rgba(0, 0, 0, 0.2)',
+          backgroundColor: system.color.bg.overlay,
           color: system.color.text.inverse,
           boxShadow: 'none',
           '::placeholder': {
@@ -364,7 +364,7 @@ const searchFormStencil = createStencil({
           },
 
           ':hover': {
-            background: 'rgba(0, 0, 0, 0.2)',
+            background: system.color.bg.overlay,
           },
 
           '&:is(:focus-visible, &.focus):where(:not([disabled]))': {
@@ -380,8 +380,8 @@ const searchFormStencil = createStencil({
       //Transparent theme
       2: ({searchInputPart}) => ({
         [searchInputPart]: {
-          background: 'rgba(0, 0, 0, 0)',
-          backgroundFocus: 'rgba(0, 0, 0, 0)',
+          background: system.color.bg.transparent,
+          backgroundFocus: system.color.bg.transparent,
           color: system.color.text.default,
           colorFocus: system.color.text.default,
           placeholderColor: system.color.text.hint,
@@ -408,13 +408,13 @@ const searchFormStencil = createStencil({
         },
         '& [data-part="search-form-input"]': {
           boxShadow: 'none',
-          background: 'rgba(0, 0, 0, 0)',
+          background: system.color.bg.transparent,
           ':hover': {
-            background: 'rgba(0, 0, 0, 0)',
+            background: system.color.bg.transparent,
           },
 
           '&:is(:focus-visible, &.focus):where(:not([disabled]))': {
-            background: 'rgba(0, 0, 0, 0)',
+            background: system.color.bg.transparent,
             boxShadow: 'none',
           },
         },
