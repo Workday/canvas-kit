@@ -9,6 +9,7 @@ import {TextInput, TextInputProps} from '@workday/canvas-kit-react/text-input';
 import {ColorSwatch} from './parts/ColorSwatch';
 import {calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+import {Subtext} from '@workday/canvas-kit-react/text';
 
 export interface ColorInputProps extends TextInputProps, GrowthBehavior {
   /**
@@ -73,9 +74,6 @@ export const colorPickerHexInputStencil = createStencil({
       position: 'absolute',
       top: px2rem(10),
       left: px2rem(88),
-      fontSize: system.type.subtext.large.fontSize,
-      lineHeight: system.type.subtext.large.lineHeight,
-      letterSpacing: system.type.subtext.large.letterSpacing,
       fontFamily: system.fontFamily.mono,
     },
     [swatchPart]: {
@@ -174,9 +172,9 @@ export const ColorInput = createComponent('input')({
           color={isValidHex(formattedValue) ? `#${formattedValue}` : ''}
           {...colorPickerHexInputStencil.parts.swatch}
         />
-        <span aria-hidden={true} {...colorPickerHexInputStencil.parts.poundSign}>
+        <Subtext size="large" aria-hidden={true} {...colorPickerHexInputStencil.parts.poundSign}>
           #
-        </span>
+        </Subtext>
       </div>
     );
   },

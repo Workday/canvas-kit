@@ -22,6 +22,7 @@ export const resetButtonStencil = createStencil({
     margin: `${calc.negate(system.space.x2)} ${calc.negate(system.space.x4)} ${system.space.x2}`,
     padding: `0 ${system.space.x4}`,
     ...system.type.subtext.medium,
+    color: system.color.text.default,
     whiteSpace: 'nowrap',
     border: 'none',
     outline: 'none',
