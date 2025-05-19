@@ -117,7 +117,7 @@ function getInputColors(theme: SearchThemeAttributes, isFocused?: boolean) {
   };
 }
 
-const formCollapsedBackground = cssVar(system.color.bg.default);
+const formCollapsedBackground = '#fff';
 
 const searchFormStencil = createStencil({
   vars: {
