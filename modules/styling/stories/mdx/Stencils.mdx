@@ -11,6 +11,16 @@ should apply to a single element. If your component has nested elements, you can
 component, a stencil should be created for each subcomponet. If your component is a config
 component, a stencil can have nested styles.
 
+## When to use a Stencil
+We created Stencils as the reusable primitive of components. Stencils provide:
+- `vars`: CSS variables for dynamic properties
+- `base`: base styles to any component
+- `modifier`: modifiers like “size = small,medium,large” or “color=red,blue,etc”
+- `parts`: matching sub-elements that are part of a component
+- `compound`: compound modifiers - styles that match multiple modifiers
+
+Use a Stencil when building reusable components that have dynamic styles and properties.
+
 <SymbolDoc name="createStencil" />
 
 <ExampleCodeBlock code={CreateStencil} />

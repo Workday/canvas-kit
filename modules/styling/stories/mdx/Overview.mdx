@@ -11,15 +11,15 @@ Canvas Kit styling is a custom CSS-in-JS solution that provides both a runtime f
 - Static CSS compilation for optimized builds
 - Dynamic styling with CSS Variables for flexible design
 
-The motivation behind this custom styling solution stems from the need to move beyond IE11 support and implement performance improvements using CSS Variables. For more details, refer to the [Why Canvas Kit Styling](https://workday.github.io/canvas-kit/?path=/docs/styling-why-canvas-styling--docs) section.
+The motivation behind this custom styling solution stems from the need to move beyond IE11 support and implement performance improvements using static styling methods.. For more details, refer to the [Why Canvas Kit Styling](https://workday.github.io/canvas-kit/?path=/docs/styling-why-canvas-styling--docs) section.
 
-This documentation covers Canvas Kit's styling system but does not address Canvas Kit components themselves or React fundamentals.
-
-## Core Styling Approaches
+## Core Styling Approaches for Static Styling
 
 ### `createStyles`
 
-`createStyles` is a function that creates CSS styles in Canvas Kit, wrapping `@emotion/css`. It handles serialization, hashing, caching, and style injection, ensuring your styles are efficiently managed.
+The primary utility function is the `createStyles` function. It makes a call to the `css` function
+from `@emotion/css`. Emotion still does most of the heavy lifting by handling the serialization,
+hashing, caching, and style injection.
 
 #### Usage Example
 
@@ -27,15 +27,18 @@ This documentation covers Canvas Kit's styling system but does not address Canva
 // Bad example (inside render function)
 function MyComponent() {
   const styles = createStyles({ color: 'red' }); // Don't do this
-  return <div className={styles}>Text</div>;
+  return <PrimaryButton cs={styles}>Text</PrimaryButton>;
 }
 
 // Good example (outside render function)
 const styles = createStyles({ color: 'red' });
 function MyComponent() {
-  return <div className={styles}>Text</div>;
+  return <PrimaryButton cs={styles}>Text</PrimaryButton>;
 }
 ```
+
+> **Note:** We're using the `cs` prop to apply the static styles. It merges
+everything together and applies `className` and `style` attributes to a React element.
 
 #### Performance Benefits
 
