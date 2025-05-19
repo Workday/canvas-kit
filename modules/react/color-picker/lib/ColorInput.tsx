@@ -172,7 +172,12 @@ export const ColorInput = createComponent('input')({
           color={isValidHex(formattedValue) ? `#${formattedValue}` : ''}
           {...colorPickerHexInputStencil.parts.swatch}
         />
-        <Subtext size="large" aria-hidden={true} {...colorPickerHexInputStencil.parts.poundSign}>
+        <Subtext
+          as="span"
+          size="large"
+          aria-hidden={true}
+          {...colorPickerHexInputStencil.parts.poundSign}
+        >
           #
         </Subtext>
       </div>

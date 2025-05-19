@@ -2,6 +2,7 @@ import {calc, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {ColorSwatch} from '@workday/canvas-kit-react/color-picker';
 import {focusRing} from '@workday/canvas-kit-react/common';
 import {system} from '@workday/canvas-tokens-web';
+import {Subtext} from '@workday/canvas-kit-react/text';
 
 export interface ResetButtonProps {
   label: string;
@@ -21,8 +22,6 @@ export const resetButtonStencil = createStencil({
     height: system.space.x8,
     margin: `${calc.negate(system.space.x2)} ${calc.negate(system.space.x4)} ${system.space.x2}`,
     padding: `0 ${system.space.x4}`,
-    ...system.type.subtext.medium,
-    color: system.color.text.default,
     whiteSpace: 'nowrap',
     border: 'none',
     outline: 'none',
@@ -53,7 +52,9 @@ export const ResetButton = ({onClick, resetColor, label}: ResetButtonProps) => {
   return (
     <button onClick={handleResetColor} {...handleCsProp({}, resetButtonStencil())}>
       <ColorSwatch color={resetColor} />
-      <div {...resetButtonStencil.parts.label}>{label}</div>
+      <Subtext size="medium" as="div" {...resetButtonStencil.parts.label}>
+        {label}
+      </Subtext>
     </button>
   );
 };
