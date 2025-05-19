@@ -145,6 +145,7 @@ const searchFormStencil = createStencil({
   },
   base: ({
     minWidth,
+    maxWidth,
     searchContainerPart,
     height,
     comboboxPart,
