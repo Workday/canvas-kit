@@ -555,6 +555,8 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
       ...elemProps
     } = this.props;
 
+    const isCustom = typeof searchTheme === 'object';
+
     return (
       <form
         role="search"
@@ -573,39 +575,24 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
             isHiddenOpenSeachIcon: !isCollapsed || (!!isCollapsed && this.state.showForm),
             searchTheme: typeof searchTheme === 'number' ? searchTheme : undefined,
             searchInputBackground:
-              typeof searchTheme === 'object' && searchTheme.background
-                ? searchTheme.background
-                : undefined,
+              isCustom && searchTheme.background ? searchTheme.background : undefined,
             searchInputBackgroundFocus:
-              typeof searchTheme === 'object' && searchTheme.backgroundFocus
-                ? searchTheme.backgroundFocus
-                : undefined,
+              isCustom && searchTheme.backgroundFocus ? searchTheme.backgroundFocus : undefined,
             searchInputBackgroundHover:
-              typeof searchTheme === 'object' && searchTheme.backgroundHover
-                ? searchTheme.backgroundHover
-                : undefined,
-            searchInputColor:
-              typeof searchTheme === 'object' && searchTheme.color ? searchTheme.color : undefined,
+              isCustom && searchTheme.backgroundHover ? searchTheme.backgroundHover : undefined,
+            searchInputColor: isCustom && searchTheme.color ? searchTheme.color : undefined,
             searchInputColorFocus:
-              typeof searchTheme === 'object' && searchTheme.colorFocus
-                ? searchTheme.colorFocus
-                : undefined,
+              isCustom && searchTheme.colorFocus ? searchTheme.colorFocus : undefined,
             searchInputPlaceholderColor:
-              typeof searchTheme === 'object' && searchTheme.placeholderColor
-                ? searchTheme.placeholderColor
-                : undefined,
+              isCustom && searchTheme.placeholderColor ? searchTheme.placeholderColor : undefined,
             searchInputPlaceholderColorFocus:
-              typeof searchTheme === 'object' && searchTheme.placeholderColorFocus
+              isCustom && searchTheme.placeholderColorFocus
                 ? searchTheme.placeholderColorFocus
                 : undefined,
             searchInputBoxShadow:
-              typeof searchTheme === 'object' && searchTheme.boxShadow
-                ? searchTheme.boxShadow
-                : undefined,
+              isCustom && searchTheme.boxShadow ? searchTheme.boxShadow : undefined,
             searchInputBoxShadowFocus:
-              typeof searchTheme === 'object' && searchTheme.boxShadowFocus
-                ? searchTheme.boxShadowFocus
-                : undefined,
+              isCustom && searchTheme.boxShadowFocus ? searchTheme.boxShadowFocus : undefined,
           })
         )}
       >
