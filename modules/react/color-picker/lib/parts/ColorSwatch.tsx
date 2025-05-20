@@ -50,6 +50,7 @@ const getIconColor = (color: string) => {
 export const ColorSwatch = ({color, showCheck = false, ...elemProps}: ColorSwatchProps) => {
   return (
     <div
+      data-color={color}
       {...handleCsProp(
         elemProps,
         colorPickerColorSwatchStencil({
