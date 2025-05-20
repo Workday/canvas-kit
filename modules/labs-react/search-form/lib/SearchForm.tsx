@@ -243,7 +243,7 @@ const searchFormStencil = createStencil({
         backgroundColor: backgroundHover,
       },
 
-      '&:is(:focus-visible, &.focus):where(:not([disabled]))': {
+      '&:is(:focus-visible, .focus):where(:not([disabled]))': {
         background: backgroundFocus,
         color: colorFocus,
         borderColor: brand.common.focusOutline,
