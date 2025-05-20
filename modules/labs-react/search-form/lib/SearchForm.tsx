@@ -14,6 +14,7 @@ import chroma from 'chroma-js';
 import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {min} from 'lodash';
 
 export interface SearchFormProps extends GrowthBehavior, React.FormHTMLAttributes<HTMLFormElement> {
   /**
@@ -121,9 +122,9 @@ const formCollapsedBackground = '#fff';
 
 const searchFormStencil = createStencil({
   vars: {
-    minWidth: px2rem(120),
-    maxWidth: px2rem(480),
-    height: system.space.x10,
+    minWidth: '',
+    maxWidth: '',
+    height: '',
     background: '',
     backgroundFocus: '',
     backgroundHover: '',
@@ -169,15 +170,15 @@ const searchFormStencil = createStencil({
     display: 'flex',
     alignItems: 'center',
     marginInlineStart: system.space.x6,
-    minWidth,
-    maxWidth,
+    minWidth: cssVar(minWidth, px2rem(120)),
+    maxWidth: cssVar(maxWidth, px2rem(480)),
     [searchContainerPart]: {
       position: `relative`,
       display: 'flex',
       alignItems: 'center',
       width: `100%`,
       textAlign: 'left',
-      minHeight: height,
+      minHeight: cssVar(height, system.space.x10),
     },
     [comboboxPart]: {
       width: `100%`,
@@ -193,7 +194,7 @@ const searchFormStencil = createStencil({
     },
     [searchFieldPart]: {
       width: '100%',
-      height,
+      height: cssVar(height, system.space.x10),
       maxWidth,
       marginBottom: 0,
       display: 'inline-block',
@@ -220,7 +221,7 @@ const searchFormStencil = createStencil({
       paddingInlineStart: calc.add(system.space.x10, system.space.x2),
       paddingInlineEnd: system.space.x10,
       backgroundColor: background,
-      height: height,
+      height: cssVar(height, system.space.x10),
       fontSize: system.fontSize.subtext.large,
       boxShadow: boxShadow,
       color: color,
@@ -304,7 +305,7 @@ const searchFormStencil = createStencil({
           maxWidth: 'none',
           minWidth: 0,
           backgroundColor: system.color.bg.transparent,
-          height,
+          height: cssVar(height, system.space.x10),
         },
       }),
       false: ({searchFieldPart}) => ({
@@ -539,7 +540,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
       closeButtonAriaLabel = 'Cancel',
       labelId = this.defaultLabelId,
       showClearButton = true,
-      height = 40,
+      height = px2rem(40),
       grow,
       onSubmit,
       isCollapsed,
