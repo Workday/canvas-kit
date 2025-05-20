@@ -124,15 +124,15 @@ const searchFormStencil = createStencil({
     minWidth: px2rem(120),
     maxWidth: px2rem(480),
     height: system.space.x10,
-    searchInputBackground: '',
-    searchInputBackgroundFocus: '',
-    searchInputBackgroundHover: '',
-    searchInputColor: '',
-    searchInputColorFocus: '',
-    searchInputPlaceholderColor: '',
-    searchInputPlaceholderColorFocus: '',
-    searchInputBoxShadow: '',
-    searchInputBoxShadowFocus: '',
+    background: '',
+    backgroundFocus: '',
+    backgroundHover: '',
+    color: '',
+    colorFocus: '',
+    placeholderColor: '',
+    placeholderColorFocus: '',
+    boxShadow: '',
+    boxShadowFocus: '',
   },
   parts: {
     searchContainer: 'search-form-container',
@@ -154,15 +154,15 @@ const searchFormStencil = createStencil({
     submitSearchIconPart,
     openSearchIconPart,
     searchInputPart,
-    searchInputBackground,
-    searchInputBackgroundFocus,
-    searchInputBackgroundHover,
-    searchInputColor,
-    searchInputColorFocus,
-    searchInputPlaceholderColor,
-    searchInputPlaceholderColorFocus,
-    searchInputBoxShadow,
-    searchInputBoxShadowFocus,
+    background,
+    backgroundFocus,
+    backgroundHover,
+    color,
+    colorFocus,
+    placeholderColor,
+    placeholderColorFocus,
+    boxShadow,
+    boxShadowFocus,
   }) => ({
     position: 'relative',
     flexGrow: 1,
@@ -219,11 +219,11 @@ const searchFormStencil = createStencil({
       minWidth,
       paddingInlineStart: calc.add(system.space.x10, system.space.x2),
       paddingInlineEnd: system.space.x10,
-      backgroundColor: searchInputBackground,
+      backgroundColor: background,
       height: height,
       fontSize: system.fontSize.subtext.large,
-      boxShadow: searchInputBoxShadow,
-      color: searchInputColor,
+      boxShadow: boxShadow,
+      color: color,
       border: 'none',
       WebkitAppearance: 'none',
       transition: 'background-color 120ms, color 120ms, box-shadow 200ms, border-color 200ms',
@@ -233,27 +233,24 @@ const searchFormStencil = createStencil({
         display: 'none',
       },
       '&::placeholder': {
-        color: searchInputPlaceholderColor,
+        color: placeholderColor,
       },
       '&:placeholder-shown': {
         textOverflow: 'ellipsis',
       },
 
       '&:hover': {
-        backgroundColor: searchInputBackgroundHover,
+        backgroundColor: backgroundHover,
       },
 
       '&:is(:focus-visible, &.focus):where(:not([disabled]))': {
-        background: searchInputBackgroundFocus,
-        color: searchInputColorFocus,
+        background: backgroundFocus,
+        color: colorFocus,
         borderColor: brand.common.focusOutline,
         outline: `${px2rem(2)} solid transparent`,
-        boxShadow: cssVar(
-          searchInputBoxShadowFocus,
-          `inset 0 0 0 ${px2rem(1)} ${brand.common.focusOutline}`
-        ),
+        boxShadow: cssVar(boxShadowFocus, `inset 0 0 0 ${px2rem(1)} ${brand.common.focusOutline}`),
         '::placeholder': {
-          color: searchInputPlaceholderColorFocus,
+          color: placeholderColorFocus,
         },
       },
     },
@@ -335,7 +332,7 @@ const searchFormStencil = createStencil({
     },
     searchTheme: {
       // Light theme
-      0: ({searchInputPart}) => ({
+      light: ({searchInputPart}) => ({
         [searchInputPart]: {
           background: system.color.bg.alt.soft,
           color: system.color.text.default,
@@ -354,9 +351,9 @@ const searchFormStencil = createStencil({
         },
       }),
       // Dark theme
-      1: ({searchInputPart}) => ({
+      dark: ({searchInputPart}) => ({
         [searchInputPart]: {
-          backgroundColor: system.color.bg.overlay,
+          backgroundColor: 'rgba(0, 0, 0, 0.2)',
           color: system.color.text.inverse,
           boxShadow: 'none',
           '::placeholder': {
@@ -364,7 +361,7 @@ const searchFormStencil = createStencil({
           },
 
           ':hover': {
-            background: system.color.bg.overlay,
+            background: 'rgba(0, 0, 0, 0.2)',
           },
 
           '&:is(:focus-visible, &.focus):where(:not([disabled]))': {
@@ -378,7 +375,7 @@ const searchFormStencil = createStencil({
         },
       }),
       //Transparent theme
-      2: ({searchInputPart}) => ({
+      transparent: ({searchInputPart}) => ({
         [searchInputPart]: {
           background: system.color.bg.transparent,
           backgroundFocus: system.color.bg.transparent,
@@ -445,7 +442,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
 
   private getTheme = () => {
     let theme: SearchThemeAttributes;
-    if (typeof this.props.searchTheme === 'number') {
+    if (typeof this.props.searchTheme === 'string') {
       theme = searchThemes[this.props.searchTheme];
     } else if (this.props.searchTheme) {
       theme = this.props.searchTheme;
@@ -554,9 +551,9 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
       allowEmptyStringSearch = false,
       ...elemProps
     } = this.props;
+    console.log(searchTheme);
 
-    const isCustom = typeof searchTheme === 'object';
-
+    // console.log(isCustomTheme)
     return (
       <form
         role="search"
@@ -573,26 +570,8 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
             height: typeof height === 'number' ? px2rem(height) : height,
             isHiddenSubmitSearchIcon: !!isCollapsed && !this.state.showForm,
             isHiddenOpenSeachIcon: !isCollapsed || (!!isCollapsed && this.state.showForm),
-            searchTheme: typeof searchTheme === 'number' ? searchTheme : undefined,
-            searchInputBackground:
-              isCustom && searchTheme.background ? searchTheme.background : undefined,
-            searchInputBackgroundFocus:
-              isCustom && searchTheme.backgroundFocus ? searchTheme.backgroundFocus : undefined,
-            searchInputBackgroundHover:
-              isCustom && searchTheme.backgroundHover ? searchTheme.backgroundHover : undefined,
-            searchInputColor: isCustom && searchTheme.color ? searchTheme.color : undefined,
-            searchInputColorFocus:
-              isCustom && searchTheme.colorFocus ? searchTheme.colorFocus : undefined,
-            searchInputPlaceholderColor:
-              isCustom && searchTheme.placeholderColor ? searchTheme.placeholderColor : undefined,
-            searchInputPlaceholderColorFocus:
-              isCustom && searchTheme.placeholderColorFocus
-                ? searchTheme.placeholderColorFocus
-                : undefined,
-            searchInputBoxShadow:
-              isCustom && searchTheme.boxShadow ? searchTheme.boxShadow : undefined,
-            searchInputBoxShadowFocus:
-              isCustom && searchTheme.boxShadowFocus ? searchTheme.boxShadowFocus : undefined,
+            searchTheme: typeof searchTheme === 'string' ? searchTheme : undefined,
+            ...(typeof searchTheme !== 'string' ? searchTheme : {}),
           })
         )}
       >
