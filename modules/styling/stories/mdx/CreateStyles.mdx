@@ -1,0 +1,100 @@
+import {ExampleCodeBlock, SymbolDoc, StylePropsTable} from '@workday/canvas-kit-docs';
+import {CreateStyles} from './examples/CreateStyles';
+import {CreateVars} from './examples/CreateVars';
+import {CreateModifiers} from './examples/CreateModifiers';
+import {CreateStencil} from './examples/CreateStencil';
+
+<Meta title="Styling/CreateStyles" />
+
+## Create Styles Function
+
+<SymbolDoc name="createStyles" />
+
+<ExampleCodeBlock code={CreateStyles} />
+
+In this example, the HTML will look like:
+
+```html
+<div class="css-m39zwu"></div>
+```
+
+The CSS will look like this:
+
+```css
+.css-m39zwu {
+  width: 100px;
+  height: 100px;
+  background-color: gray;
+}
+```
+
+We're using `className` for simplicity here. Most components will use the `cs` prop instead for more
+versatility.
+
+
+### `keyframes`
+
+The `keyframes` function re-exports the [Emotion CSS keyframes](https://emotion.sh/docs/keyframes)
+function, but is compatible with a custom Emotion instance and is understood by the Static style
+transformer.
+
+### `injectGlobal`
+
+The `injectGlobal` function re-exports the
+[Emotion CSS injectGlobal](https://emotion.sh/docs/@emotion/css#global-styles) function, but is
+compatible with a custom Emotion instance and is understood by the Static style transformer.
+
+## CS Prop
+
+The `cs` prop takes in a single, or an array of values that are created by the `cs` function, a
+string representing a CSS class name, or the return of the `createVars` function. It merges
+everything together and applies `className` and `style` attributes to a React element. The Box
+component has been extended to handle the cs prop. For example, the following plus proceeding code:
+
+{/* <ExampleCodeBlock code={CSProp} /> */}
+
+## Custom Emotion instance
+
+Static style injection happens during the parsing stages of the files. This means when you `import`
+a component that uses static styling, the styles are injected immediately. This happens way before
+rendering, so using the Emotion [CacheProvider](https://emotion.sh/docs/cache-provider) does not
+work. A custom instance must be created _before_ any style utilities are called - during the
+bootstrapping phase of an application. We don't have a working example because it requires an
+isolated application, but here's an example adding a `nonce` to an application:
+
+```tsx
+// bootstrap-styles.ts
+import {createInstance} from '@workday/canvas-kit-styling';
+
+// assuming this file is being called via a `script` tag and that
+// script tag has a `nonce` attribute set from the server
+createInstance({nonce: document.currentScript.nonce});
+
+// index.ts
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+// call the bootstrap in the import list. This has the side-effect
+// of creating an instance
+import './bootstrap-styles';
+
+import App from './App';
+
+const root = ReactDOM.createRoot(document.querySelector('#root'));
+
+root.render(<App />);
+
+// App.tsx
+import React from 'react';
+
+// The following will create and inject styles. We cannot adjust
+// the Emotion instance after this import
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
+
+// if we call `createInstance` here, we'll get a warning in
+// development mode
+
+export default () => {
+  return <PrimaryButton>Button</PrimaryButton>;
+};
+```

@@ -1,9 +1,34 @@
+import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
+import {CreateVars} from './examples/CreateVars';
+
 <Meta title="Styling/Styling Functions" />
 
 # Styling Functions
 
 A collection of helpful functions for styling with `@workday/canvas-kit-styling`. While they're
 fairly simple, they make styling much nicer.
+
+<SymbolDoc name="createVars" />
+<ExampleCodeBlock code={CreateVars} />
+
+In this example, the HTML will look like:
+
+```html
+<div class="css-4iptxs" style="--background-c6kna: gray;"></div>
+<div class="css-4iptxs" style="--background-c6kna: blue;"></div>
+```
+
+And the CSS will look like:
+
+```css
+.css-4iptxs {
+  width: 100px;
+  height: 100px;
+  background-color: var(--background-c6kna);
+}
+```
+
+<SymbolDoc name="createModifiers" />
 
 ## CSS Var
 
@@ -110,3 +135,15 @@ const styles = {
   margin: calc.negate(system.space.x4),
 };
 ```
+
+### `keyframes`
+
+The `keyframes` function re-exports the [Emotion CSS keyframes](https://emotion.sh/docs/keyframes)
+function, but is compatible with a custom Emotion instance and is understood by the Static style
+transformer.
+
+### `injectGlobal`
+
+The `injectGlobal` function re-exports the
+[Emotion CSS injectGlobal](https://emotion.sh/docs/@emotion/css#global-styles) function, but is
+compatible with a custom Emotion instance and is understood by the Static style transformer.

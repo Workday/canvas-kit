@@ -17,11 +17,11 @@ yarn add @workday/canvas-kit-react
 ## Base
 
 The `Base` component is a low level component that automatically handles the [`cs`](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--docs#cs-prop) prop for you and style merging via [`handleCsProp`](https://workday.github.io/canvas-kit/?path=/docs/styling-merging-styles--docs#handlecsprop).
-As we transition away from supporting `Box` and `Flex` due to their support of [style props](https://workday.github.io/canvas-kit/?path=/docs/features-style-props--docs), `Base` is recommended when needing a container element where simple styles need to be applied.
+As we transition away from runtime styles, you should use `Base` when styling an element where you want more control over the styles and a Canvas Kit component doesn't quite fit your needs.
 
 ### Usage
 
-Use `Base` when you need to style a container element or you're building a complex component that is **not reusable**.
+Use `Base` when you need to statically style a container element or you're building a complex component that is **not reusable**.
 
 
 ```tsx
@@ -35,13 +35,19 @@ const headerStyles = createStyles({
 	color: system.color.text.primary,
 });
 
+const containerStyles = createStyles({
+	display: 'flex',
+	flexDirection: 'column',
+	gap: system.space.x2,
+})
+
 // Base+cs
 const AppHeader = ({children, headerText, other, props}) => {
 
   return (
-    <Base cs={{margin: system.space.x2}}>
+    <Base cs={containerStyles}>
       <Base as="h2" data-testid="my-header" cs={headerStyles}>{headerText}</Base>
-      <Base cs={someOtherContainerStyles}>
+      <Base as='p' cs={someOtherStyles}>
         // ...
       </Base>
     </Base>
@@ -83,9 +89,13 @@ import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Base} from '@workday/canvas-kit-react/common';
 import {system} from '@workday/canvas-tokens-web';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
+const containerStyles = createStyles({
+	display: 'inline-flex',
+	gap: system.space.x2,
+});
 //...
 
-<Base cs={{display: 'inline-flex', gap: system.space.x2}}>
+<Base cs={containerStyles}>
   <PrimaryButton>Button 1</PrimaryButton>
   <PrimaryButton>Button 2</PrimaryButton>
 </Base>
