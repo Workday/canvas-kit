@@ -4,12 +4,13 @@ import {brand, system} from '@workday/canvas-tokens-web';
 import {caretDownSmallIcon, searchIcon} from '@workday/canvas-system-icons-web';
 
 import {
+  ErrorType,
   composeHooks,
   createElemPropsHook,
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
-import {createStencil, CSProps, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
+import {createStencil, CSProps, handleCsProp, px2rem, calc} from '@workday/canvas-kit-styling';
+import {InputGroup, TextInput, textInputStencil} from '@workday/canvas-kit-react/text-input';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {useComboboxInput, useComboboxInputConstrained} from '@workday/canvas-kit-react/combobox';
 
@@ -18,6 +19,7 @@ import {MultiSelectedItemProps} from './MultiSelectedItem';
 import {MultiSelectedList} from './MultiSelectedList';
 
 export const multiSelectInputStencil = createStencil({
+  //@ts-ignore Types don't like defining a variable in `base` and using a variable in a nested selector. One or the other is fine, but not both.
   base: {
     border: `1px solid ${system.color.border.input.default}`,
     display: 'flex',
@@ -28,6 +30,7 @@ export const multiSelectInputStencil = createStencil({
     minHeight: system.space.x10,
     transition: '0.2s box-shadow, 0.2s border-color',
     margin: 0, // Fix Safari
+    [textInputStencil.vars.width]: '100%',
 
     '&:hover, &.hover': {
       borderColor: system.color.border.input.strong,
@@ -44,6 +47,12 @@ export const multiSelectInputStencil = createStencil({
       ...system.type.subtext.large,
       backgroundColor: system.color.bg.transparent,
       borderRadius: system.shape.x1,
+
+      // collapse the height of the input by the border width so that an empty multi-select
+      // is the same height as a `TextInput`
+      '&:where([data-part="user-input"], [data-part="form-input"])': {
+        height: calc.subtract(system.space.x10, px2rem(2)),
+      },
 
       // Remove the focus ring - it is handled at the container level
       border: 'none !important',
@@ -164,7 +173,7 @@ export interface MultiSelectInputProps
       'disabled' | 'className' | 'style' | 'aria-labelledby'
     >,
     Pick<MultiSelectedItemProps, 'removeLabel'> {
-  error?: 'error' | 'alert';
+  error?: ErrorType;
 }
 
 export const MultiSelectInput = createSubcomponent(TextInput)({
@@ -183,10 +192,8 @@ export const MultiSelectInput = createSubcomponent(TextInput)({
       formInputProps,
       ...elemProps
     },
-    Element,
-    model
+    Element
   ) => {
-    console.log('error', error);
     return (
       <div {...handleCsProp({className, cs, style}, multiSelectInputStencil({error}))}>
         <InputGroup>
@@ -224,10 +231,10 @@ export const MultiSelectSearchInput = createSubcomponent(TextInput)({
       formInputProps,
       ref,
       disabled,
+      error,
       ...elemProps
     },
-    Element,
-    model
+    Element
   ) => {
     return (
       <div {...handleCsProp({className, cs, style}, multiSelectInputStencil({}))}>

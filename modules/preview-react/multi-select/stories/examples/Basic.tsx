@@ -12,7 +12,6 @@ export const Basic = () => {
         <FormField orientation="horizontal" error="error">
           <FormField.Label>Toppings</FormField.Label>
           <FormField.Input
-            disabled
             as={MultiSelect.Input}
             placeholder="Select Multiple"
             removeLabel="Remove"
