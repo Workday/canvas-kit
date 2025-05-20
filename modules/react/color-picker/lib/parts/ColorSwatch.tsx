@@ -55,7 +55,7 @@ export const ColorSwatch = ({color, showCheck = false, ...elemProps}: ColorSwatc
         colorPickerColorSwatchStencil({
           color: color.startsWith('--cnvs') ? cssVar(color) : color,
           iconColor: getIconColor(color),
-          withShadow: showCheck || color.includes('french-vanilla-100'),
+          withShadow: showCheck || color.toLowerCase() === '#ffffff',
         })
       )}
     >

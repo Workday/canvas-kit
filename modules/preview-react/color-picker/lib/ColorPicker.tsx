@@ -8,7 +8,7 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 import {ResetButton} from './parts/ColorReset';
 import {SwatchBook, SwatchBookColorObject} from './parts/SwatchBook';
 import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 export interface ColorPickerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
