@@ -51,7 +51,7 @@ export const ResetButton = ({onClick, resetColor, label}: ResetButtonProps) => {
 
   return (
     <button onClick={handleResetColor} {...handleCsProp({}, resetButtonStencil())}>
-      <ColorSwatch color={resetColor} />
+      <ColorSwatch color={resetColor} data-color="" />
       <Subtext size="medium" as="div" {...resetButtonStencil.parts.label}>
         {label}
       </Subtext>
