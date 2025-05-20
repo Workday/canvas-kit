@@ -1,15 +1,28 @@
 import React from 'react';
 
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {MultiSelect} from '@workday/canvas-kit-preview-react/multi-select';
+import {MultiSelect, useMultiSelectModel} from '@workday/canvas-kit-preview-react/multi-select';
 
 const items = ['Cheese', 'Olives', 'Onions', 'Pepperoni', 'Peppers'];
 
-export const Basic = () => {
+export const Error = () => {
+  const model = useMultiSelectModel({
+    items,
+    initialSelectedIds: [],
+  });
   return (
     <>
-      <MultiSelect items={items} initialSelectedIds={['Olives', 'Onions', 'Pepperoni']}>
-        <FormField orientation="horizontal">
+      <MultiSelect model={model}>
+        <FormField
+          orientation="horizontal"
+          error={
+            model.state.selectedIds.length < 1
+              ? 'error'
+              : model.state.selectedIds.length > 3
+              ? 'alert'
+              : undefined
+          }
+        >
           <FormField.Label>Toppings</FormField.Label>
           <FormField.Input
             as={MultiSelect.Input}
@@ -27,6 +40,14 @@ export const Basic = () => {
               </MultiSelect.List>
             </MultiSelect.Card>
           </MultiSelect.Popper>
+
+          <FormField.Hint>
+            {model.state.selectedIds.length < 1
+              ? 'Select at least one topping.'
+              : model.state.selectedIds.length > 3
+              ? 'More than 3 toppings cost extra.'
+              : undefined}
+          </FormField.Hint>
         </FormField>
       </MultiSelect>
     </>
