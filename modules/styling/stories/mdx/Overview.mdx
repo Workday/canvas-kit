@@ -63,6 +63,8 @@ everything together and applies `className` and `style` attributes to a React el
 
 #### Usage Example
 
+In the example below, we leverage `parts`, `vars`, `base` and `modifiers` to create a reusable `Card` component. The Stencil allows us to dynamic style the component based on the props.
+
 ```tsx
 import {createStencil}from '@workday/canvas-kit-styling';
 import {Card} from '@workday/canvas-kit-react/card';
@@ -70,9 +72,11 @@ import {system} from '@workday/canvas-tokens-webs';
 
 const themedCardStencil = createStencil({
 	vars: {
+		// Create CSS variables for the color of the header
 		headerColor: ''
 	},
 	parts: {
+		// Allows for styling a sub element of the component that may not be exposed through the API
 		header: 'themed-card-header'
 	}
 	base: ({headerPart, headerColor}) => ({
@@ -80,12 +84,14 @@ const themedCardStencil = createStencil({
 		boxShadow: system.depth[2],
 		backgroundColor: system.color.bg.default,
 		color: system.color.text.default,
+		// Targets the header part via [data-part="themed-card-header"]"]
 		[headerPart]: {
 			color: headerColor
 		}
 	}),
 	modifiers: {
 		isDarkTheme: {
+			// If the prop `isDarkTheme` is true, style the component and it's parts
 			true: ({headerPart}) => ({
 				backgroundColor: system.color.bg.contrast.default,
 				color: system.color.text.inverse
@@ -99,7 +105,9 @@ const themedCardStencil = createStencil({
 
 const ThemedCard = ({isDarkTheme, headerColor, elemProps}) => {
   return (
+		/* Use the `cs` prop to apply the stencil and pass it the dynamic properties it needs to style accordingly */
     <Card cs={themedCardStencil({isDarkTheme, headerColor})} {...elemProps}>
+			/* Apply the data part selector to the header */
       <Card.Heading {...themedCardStencil.parts.header}>Canvas Supreme</Card.Heading>
       <Card.Body>
         Our house special supreme pizza includes pepperoni, sausage, bell peppers, mushrooms,
@@ -110,515 +118,35 @@ const ThemedCard = ({isDarkTheme, headerColor, elemProps}) => {
 };
 ```
 
+#### When to Use `createStencil`
+You should use `createStencil` when styling our components that have complex styles and dynamic properties. For a more in depth overview, please view our [Stencil](/docs/styling-stencils--docs) docs.
+
+
+### Using `Base`
+
+`Base` is a low level component that exposes the `cs` prop so that you can quickly apply styles to any in a static way. If our components don't quite fit your styling needs, you can use `Base` to build a fully styled component.
+
+#### Usage Example
 ```tsx
-// Define a stencil with variables
-const buttonStencil = createStencil({
-  vars: {
-    background: 'blue',
-    color: 'white'
-  },
-  base: ({background, color}) => ({
-    background : cssVar(background, 'blue'),
-    color: cssVar(color, 'white'),
-    padding: '8px 16px',
-    borderRadius: '4px',
-    cursor: 'pointer',
-    '&:hover': {
-      background
-      color
-    }
-  })
-});
+import {Base} from '@workday/canvas-kit-react/common';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
+import {system} from '@workday/canvas-tokens-web';
 
-// Component using the stencil with variables
-const Button = ({background, color, children, ...props}) => {
-  return (
-    <button {...handleCsProp(props, buttonStencil({background, color}))}>
-      {children}
-    </button>
-  );
-}
-
-// Using the component with different variable values
-<Button>Default Button</Button>
-<Button background="red" color="white">Danger Button</Button>
-```
-
->**Note:** The `cssVar` function is a utility that wraps the variable in correct syntax for the browser and handles the fallback value. In this case, if `background` is not provided, it will default to `'blue'`.
-
-#### Using Stencil Variables
-
-You can extend Stencils to build variants of the component to style it differently. Buttons are a good example of using CSS variables to create different styles.
-
-In the example below the following is happening:
-- When we `extend` a Stencil, we inherit the `styles, parts, modifiers, and variables`.
-- Using the bracket notation, we can target the variables defined by `Button` and set the background and color, ie `[buttonStencil.vars.background]` targets the variable `--background-abc123` and sets it to `transparent`.
-- We can target the same variables for a different state, in this case `&:hover` to set the background and color to `black` and `white` respectively.
-- In the render function we use `Button` which uses the variables for `background` and `color` so when we pass `secondaryButtonStencil` those variables will be set.
-
-```tsx
-// Use buttonStencil variables to create a secondary button
-const secondaryButtonStencil = createStencil({
-  extends: buttonStencil,
-  base: ({background, color}) => ({
-	// You're targeting the variables defined by `Button` and setting the background and color.
-    [buttonStencil.vars.background]: 'transparent',
-	[buttonStencil.vars.color]: 'black',
-    '&:hover': {
-      [buttonStencil.vars.background]: 'black',
-      [buttonStencil.vars.color]: 'white',
-    }
-  })
-});
-
-// Component using the stencil with variables
-const SecondaryButton = ({background, color, children, ...props}) => {
-  return (
-	// This component uses the variables for `background` and `color` so when you pass `secondaryButtonStencil` those variables will be set.
-    <Button {...handleCsProp(props, secondaryButtonStencil({background, color}))}>
-      {children}
-    </Button>
-  );
-}
-```
-
-
-
-#### Behind the Scenes
-
-```html
-<!-- This is the CSS generated by the stencil -->
-<style>
-  .css-abc123 {
-    --background-abc123: blue;
-    --color-abc123: white;
-    background: var(--background-abc123);
-    color: var(--color-abc123);
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  .css-abc123:hover {
-    background: darkblue;
-    color: var(--color-abc123);
-  }
-</style>
-
-<!-- This is the rendered HTML with variable overrides -->
-<button class="css-abc123" style="--background-abc123: red; --color-abc123: white;">
-  Danger Button
-</button>
-```
-
-#### Important Notes
-
-- Variables share the same namespace as modifiers, so never use a modifier with the same name as a variable
-- Use variables sparingly - only when you need to expose changing properties regardless of selectors
-- Variables are ideal for complex components with multiple states (hover, active, focus, disabled)
-- Without variables, overriding nested state styles would require complex selector overrides
-
-### `createStencil`
-
-`createStencil` is a function for creating reusable, complex component styling systems. It manages base styles, parts, modifiers, variables, and compound modifiers.
-
-#### Example
-
-```tsx
-const buttonStencil = createStencil({
-  base: {
-    padding: '8px 16px',
-    borderRadius: '4px',
-    transition: 'all 120ms linear'
-  },
-  modifiers: {
-    size: {
-      small: { padding: '4px 8px', fontSize: '12px' },
-      large: { padding: '12px 24px', fontSize: '16px' }
-    }
-  }
-});
-```
-
-### Theme Overrides
-
-Theme overrides provide system-wide customization of component appearance. They're built on CSS Variables under the hood and apply consistent styling across components.
-
-#### Example
-
-```tsx
-// Theme provider setup
-const myTheme = {
-  canvas: {
-    palette: {
-      primary: {
-        main: '#0077b6'
-      }
-    }
-  }
-};
-
-// Usage in a component
-<CanvasProvider theme={myTheme}>
-  <App />
-</CanvasProvider>
-```
-
-## Practical Applications
-
-### Using `createStyles` for Element Styling
-
-Follow these steps to apply `createStyles` effectively:
-
-1. Define styles outside the component render function
-2. Use semantic naming for style variables
-3. Apply styles to elements via className
-
-#### Complete Example
-
-```tsx
-// Define styles
 const containerStyles = createStyles({
-  display: 'flex',
-  flexDirection: 'column',
-  padding: '16px',
-  gap: '8px'
-});
+	display: 'flex',
+	flexDirection: 'row',
+	gap: system.space.x2,
+	padding: system.space.x6,
+	alignItems: 'end'
+})
 
-const headingStyles = createStyles({
-  fontSize: '24px',
-  fontWeight: 'bold',
-  marginBottom: '16px'
-});
-
-// Use in component
-function MyComponent() {
-  return (
-    <div className={containerStyles}>
-      <h2 className={headingStyles}>Title</h2>
-      <p>Content goes here</p>
-    </div>
-  );
+const NavContainer = () => {
+	return (
+		<Base as='section' cs={containerStyles}>
+			<PrimaryButton>Accept</PrimaryButton>
+			<SecondaryButton>Cancel</SecondaryButton>
+		</Base>
+	)
 }
 ```
-
-### Using `createStencil` for Component Styling
-
-To use `createStencil` effectively:
-
-1. Create the stencil with base styles, modifiers, and parts
-2. Use the stencil in your component
-3. Apply modifiers based on props
-
-#### Complete Example with Props-Based Styling
-
-```tsx
-// Create stencil
-const cardStencil = createStencil({
-  parts: {
-    header: 'card-header',
-    body: 'card-body',
-    footer: 'card-footer'
-  },
-  base: {
-    display: 'flex',
-    flexDirection: 'column',
-    borderRadius: '8px',
-    boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-  },
-  modifiers: {
-    variant: {
-      bordered: {
-        border: '1px solid #e0e0e0',
-        boxShadow: 'none'
-      },
-      elevated: {
-        boxShadow: '0 8px 16px rgba(0,0,0,0.1)'
-      }
-    }
-  }
-});
-
-// Use in component
-function Card({variant, headerText, footerContent, children, ...props}) {
-  return (
-    <div {...handleCsProp(props, cardStencil({variant}))}>
-      <h2 {...cardStencil.parts.header}>{headerText}</h2>
-      <div {...cardStencil.parts.body}>{children}</div>
-      <div {...cardStencil.parts.footer}>{footerContent}</div>
-    </div>
-  );
-}
-```
-
-### Using CSS Variables for Customization
-
-To implement CSS Variables for customization:
-
-1. Define stencil with variables
-2. Create a component that uses the stencil and exposes variables as props
-3. Use the component with different variable values
-
-#### Complete Example
-
-```tsx
-// Create stencil with variables
-const cardStencil = createStencil({
-  vars: {
-    borderColor: '#e0e0e0',
-    headerBackground: '#f5f5f5',
-    bodyBackground: 'white'
-  },
-  parts: {
-    header: 'card-header',
-    body: 'card-body',
-    footer: 'card-footer'
-  },
-  base: ({borderColor, headerBackground, bodyBackground, headerPart, bodyPart, footerPart}) => ({
-    display: 'flex',
-    flexDirection: 'column',
-    border: `1px solid ${borderColor}`,
-    borderRadius: '8px',
-    overflow: 'hidden',
-
-    [headerPart]: {
-      padding: '16px',
-      background: headerBackground,
-      borderBottom: `1px solid ${borderColor}`
-    },
-
-    [bodyPart]: {
-      padding: '16px',
-      background: bodyBackground
-    },
-
-    [footerPart]: {
-      padding: '16px',
-      borderTop: `1px solid ${borderColor}`
-    }
-  })
-});
-
-// Create component that exposes variables as props
-function Card({borderColor, headerBackground, bodyBackground, children, ...props}) {
-  const header = React.Children.toArray(children).find(
-    child => child.type === Card.Header
-  );
-  const body = React.Children.toArray(children).find(
-    child => child.type === Card.Body
-  );
-  const footer = React.Children.toArray(children).find(
-    child => child.type === Card.Footer
-  );
-
-  return (
-    <div {...handleCsProp(props, cardStencil({
-      borderColor,
-      headerBackground,
-      bodyBackground
-    }))}>
-      {header}
-      {body}
-      {footer}
-    </div>
-  );
-}
-
-// Sub-components
-Card.Header = ({children, ...props}) => (
-  <div {...props} {...cardStencil.parts.header}>{children}</div>
-);
-
-Card.Body = ({children, ...props}) => (
-  <div {...props} {...cardStencil.parts.body}>{children}</div>
-);
-
-Card.Footer = ({children, ...props}) => (
-  <div {...props} {...cardStencil.parts.footer}>{children}</div>
-);
-
-// Usage
-function App() {
-  return (
-    <>
-      {/* Default Card */}
-      <Card>
-        <Card.Header>Default Header</Card.Header>
-        <Card.Body>Default Body</Card.Body>
-        <Card.Footer>Default Footer</Card.Footer>
-      </Card>
-
-      {/* Customized Card */}
-      <Card
-        borderColor="#2196f3"
-        headerBackground="#bbdefb"
-        bodyBackground="#e3f2fd"
-      >
-        <Card.Header>Custom Header</Card.Header>
-        <Card.Body>Custom Body</Card.Body>
-        <Card.Footer>Custom Footer</Card.Footer>
-      </Card>
-    </>
-  );
-}
-```
-
-#### When to Use Variables
-
-- Use variables when you need to change styles across different states (hover, focus, active)
-- Use variables when the same value is used in multiple places in your styles
-- Use variables sparingly - prefer direct style overrides when possible
-
-## The `cs` Prop for Inline Styling
-
-The `cs` prop pattern is designed for quick inline styling adjustments, not for building reusable components. It accepts class names, style objects, and arrays, reducing the need for custom style props.
-
-### Appropriate Usage Examples
-
-```tsx
-// Quick inline adjustment
-<Button cs={{ marginTop: '16px' }}>Submit</Button>
-
-// Combining styles
-<Card cs={[cardStyles, highlightStyles]}>Content</Card>
-
-// Bad example - don't use for reusable patterns
-<Button cs={{ color: 'red' }}>Delete</Button> // Don't repeat this pattern
-```
-
-## Style Handling Functions
-
-Canvas Kit provides different style merging functions for different use cases:
-
-### `handleCsProp`
-
-Used internally by Canvas Kit components to properly handle the `cs` prop and merge styles.
-
-```tsx
-function MyComponent({children, ...props}) {
-  return (
-    <div {...handleCsProp(props, baseStyles)}>
-      {children}
-    </div>
-  );
-}
-```
-
-### `mergeStyles`
-
-Only for backward compatibility with style props; will be deprecated in future versions.
-
-```tsx
-function LegacyComponent({children, ...props}) {
-  return (
-    <div {...mergeStyles(props, baseStyles)}>
-      {children}
-    </div>
-  );
-}
-```
-
-### Component Hierarchy Rule
-
-- If a lower-level component uses `mergeStyles` (e.g., `TertiaryButton`)
-- And a higher-level component uses that component (e.g., `PopupCloseButton`)
-- Then the higher-level component should use `handleCsProp`
-
-## Performance Benefits
-
-Canvas Kit styling offers significant performance advantages:
-
-- Avoids expensive style recalculations by not injecting new StyleSheets during render
-- Works well with the browser's selector cache
-- CSS Variables provide dynamic styling without JavaScript overhead
-
-## Best Practices
-
-### DO
-
-- Hoist style definitions outside of component render functions
-- Use CSS Variables for dynamic styling instead of conditional styles
-- Choose the right tool for the job:
-  - `createStyles`: For one-off element styles
-  - `createStencil`: For reusable components with complex styling
-  - `cs` prop: For quick inline styling adjustments only
-  - `handleCsProp`: For Canvas Kit components exposing the `cs` prop
-
-### DON'T
-
-- Use `mergeStyles` for new components (only for backward compatibility)
-- Define styles inside render functions
-- Use the `cs` prop for building reusable components
-- Mix with Emotion's runtime APIs for optimal performance
-
-## Migration Guide
-
-### Migrating from Style Props
-
-Before:
-```tsx
-<Box padding="medium" margin="small">
-  Content
-</Box>
-```
-
-After:
-```tsx
-<Box cs={{ padding: '16px', margin: '8px' }}>
-  Content
-</Box>
-```
-
-### Migrating from Emotion
-
-Before (Emotion styled):
-```tsx
-const StyledDiv = styled('div')({
-  padding: '16px',
-  backgroundColor: 'lightblue'
-});
-```
-
-After (Canvas Kit):
-```tsx
-const divStyles = createStyles({
-  padding: '16px',
-  backgroundColor: 'lightblue'
-});
-
-function MyComponent() {
-  return <div className={divStyles}>Content</div>;
-}
-```
-
-## Troubleshooting
-
-### Common Issues
-
-**"Why are my styles not applying?"**
-- Check style order and CSS specificity
-- Ensure styles are defined outside of render functions
-- Verify that you're using the correct styling function for your use case
-
-**"Why is my component re-rendering?"**
-- Avoid creating styles inside render functions
-- Make sure you're properly hoisting style definitions
-- Check for unnecessary inline style objects
-
-**"How do I override a specific part of a component?"**
-- Use stencil parts for targeting specific elements
-- Use CSS Variables for states and dynamic properties
-- For compound components, target the specific sub-component
-
-## FAQ
-
-**"When should I use `createStyles` vs `createStencil`?"**
-- Use `createStyles` for one-off element styling or simpler components
-- Use `createStencil` when you need modifiers, parts, or variables
-
-**"How can I make my component respond to theme changes?"**
-- Connect to the Canvas Kit theme using the theme tokens
-- Use CSS Variables that are provided by the theme
-
-**"Can I still use Emotion alongside Canvas Kit styling?"**
-- Yes, but it may impact performance
-- Try to migrate completely to Canvas Kit styling for best results
