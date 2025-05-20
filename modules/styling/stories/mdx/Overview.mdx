@@ -1,138 +1,624 @@
-<Meta title="Styling/Why Canvas Styling" />
+<Meta title="Styling/Overview" />
 
-# Why Canvas Styling
+# Canvas Kit Styling
 
-This package contains everything needed to create CSS styling. This styling package contains a
-runtime for development and a static parsing process for build time.
+## Introduction
 
-Here are the goals for this project:
+Canvas Kit styling is a custom CSS-in-JS solution that provides both a runtime for development and a static parsing process for build time. This system offers several key benefits:
 
-- TypeScript autocomplete of CSS object properties
-- Low runtime for development
-- Static CSS compilation for faster user experience
-- Static CSS extraction for CSS only packages
-- Dynamic styles using CSS Variables
+- TypeScript autocomplete for enhanced developer experience
+- Low runtime overhead for better performance
+- Static CSS compilation for optimized builds
+- Dynamic styling with CSS Variables for flexible design
 
-If you're using Canvas Kit and not directly using this package, there is nothing extra to do on your
-end. The Canvas Kit packages are using the static compilation as part of the build process. If you
-want to use this package for your own styles, you don't need to do anything special to use in
-development. Included is a small runtime to get styling working. If you wish to statically compile
-your CSS from your TypeScript files for faster page loading, visit the
-[Getting Started](/docs/styling-getting-started--docs) page.
+The motivation behind this custom styling solution stems from the need to move beyond IE11 support and implement performance improvements using static styling methods. For more details, refer to the [Why Canvas Kit Styling](https://workday.github.io/canvas-kit/?path=/docs/styling-why-canvas-styling--docs) section.
 
-## Why?
+## Core Styling Approaches for Static Styling
 
-Canvas Kit no longer needs to support IE11 which allows us to use
-[CSS Custom Properties a.k.a. CSS Variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties).
-Dynamic style properties (properties that change during the lifecylce of the component) are the most
-costly in terms of performance in Emotion and should be avoided. Also, any conditionals in your
-Emotion style functions create unique hashes in the Emotion cache and makes that render frame pay an
-expensive
-[style recalculation](https://microsoftedge.github.io/DevTools/explainers/StyleTracing/explainer.html).
-
-We can avoid most of the cost of Emotion's runtime by using
-[@emotion/css](https://www.npmjs.com/package/@emotion/css) instead and hoist all style definitions
-outside of a component's render function. All dynamic styling can be moved into "modifiers" (from
-[BEM](https://getbem.com/introduction/#modifer:~:text=%2C%20header%20title-,Modifier,-A%20flag%20on)).
-
-There's still a runtime to select which styles should apply to an element and what the CSS Variable
-should be, but it is essentially only having to choose what CSS classes should apply to an element
-and changing the `style` property to set the CSS Variables. This does not require new
-[StyleSheet](https://developer.mozilla.org/en-US/docs/Web/API/StyleSheet) inserts which cause
-expensive style recalculation. Think of the runtime as being the following:
-
-```jsx
-<div
-  className={getClassNames(/* input from props */)}
-  style={getCSSVarValues(/* input from props */)}
-/>
-```
-
-For further information, please read our GitHub discussion on
-[the future of styling](https://github.com/Workday/canvas-kit/discussions/2265)
-
-## What is Canvas Kit Styling?
-
-Canvas Kit Styling includes two things:
-
-1. A utility function wrapper around `@emotion/css`
-2. An optional static compiler to remove most of the runtime
-
-### Utility Functions
-
-This packages provides three utility functions to make it easier to style element-based components.
-The following is a brief description of each function. If you'd like to read a more in-depth
-discussion of each, our [API docs](/docs/features-styling-api--create-styles).
+### `createStyles`
 
 The primary utility function is the `createStyles` function. It makes a call to the `css` function
 from `@emotion/css`. Emotion still does most of the heavy lifting by handling the serialization,
 hashing, caching, and style injection.
 
-The other two utility functions, `createVars` and `createModifiers`, provide supplemental styling
-functionality. `createVars` allows you to create temporary CSS variables within components to create
-dynamic properties. And `createModifiers` creates a modifier function to create dynamic groups of
-properties. If you're familiar with modifiers in [BEM](https://getbem.com/introduction/) (Block,
-Element, Modifier) CSS, you're well on your way to understanding this function's intent.
+#### Usage Example
 
-### Static Compiler
+```tsx
+// Bad example (inside render function)
+import {system} from '@workday/canvas-tokens-webs'
+import {PrimaryButton} from '@workday/canvas-kit-react/button'
 
-The static compiler run as a TypeScript transform during TypeScript's transpilation phase. It
-requires the TypeScript type checker to determine the static value of any variables used. The
-transformer calls `@emotion/serialize` to pre-compute the serialized styles and hash so that
-`@emotion/css` can skip these steps. For example, there's the before/after of the code.
+function MyComponent() {
+  const styles = createStyles({ color: system.color.static.red.default }); // Don't do this
+  return <PrimaryButton cs={styles}>Text</PrimaryButton>;
+}
 
-```ts
-// before
-const myVars = createVars('textColor', 'backgroundColor');
+// Good example (outside render function)
+import {system} from '@workday/canvas-tokens-webs'
+import {PrimaryButton} from '@workday/canvas-kit-react/button'
 
-const myStyles = createStyles({
-  fontSize: 12,
-  color: cssVar(myVars.textColor),
-  backgroundColor: cssVar(myVars.backgroundColor),
+const styles = createStyles({ color: system.color.static.red.default });
+
+function MyComponent() {
+  return <PrimaryButton cs={styles}>Text</PrimaryButton>;
+}
+```
+
+> **Note:** Most of our components support using the `cs` prop to apply the static styles. It merges
+everything together and applies `className` and `style` attributes to a React element.
+
+#### Performance Benefits
+
+`createStyles` is performant because:
+- Styles are statically evaluated when styles are defined outside the render function
+- No new StyleSheets are injected during render
+- It works well with the browser's selector cache
+
+#### When to Use `createStyles`
+`createStyles` is a great way to generate static styles when styling our components that don't rely on dynamic styles. Use `createStyles` if you want to create re useable styles or need to apply simple style overrides to our components.
+
+### `createStencil`
+`createStencil` is a function for creating reusable, complex component styling systems. It manages `base` styles, `parts`, `modifiers`, `variables`, and `compound` modifiers. Most of our components also export their own Stencil that might expose CSS variables in order to modify the component.
+
+
+#### Usage Example
+
+```tsx
+import {createStencil}from '@workday/canvas-kit-styling';
+import {Card} from '@workday/canvas-kit-react/card';
+import {system} from '@workday/canvas-tokens-webs';
+
+const themedCardStencil = createStencil({
+	vars: {
+		headerColor: ''
+	},
+	parts: {
+		header: 'themed-card-header'
+	}
+	base: ({headerPart, headerColor}) => ({
+		padding: system.space.x4,
+		boxShadow: system.depth[2],
+		backgroundColor: system.color.bg.default,
+		color: system.color.text.default,
+		[headerPart]: {
+			color: headerColor
+		}
+	}),
+	modifiers: {
+		isDarkTheme: {
+			true: ({headerPart}) => ({
+				backgroundColor: system.color.bg.contrast.default,
+				color: system.color.text.inverse
+				[headerPart]: {
+					color: system.color.text.inverse
+				}
+			})
+		}
+	}
+})
+
+const ThemedCard = ({isDarkTheme, headerColor, elemProps}) => {
+  return (
+    <Card cs={themedCardStencil({isDarkTheme, headerColor})} {...elemProps}>
+      <Card.Heading {...themedCardStencil.parts.header}>Canvas Supreme</Card.Heading>
+      <Card.Body>
+        Our house special supreme pizza includes pepperoni, sausage, bell peppers, mushrooms,
+        onions, and oregano.
+      </Card.Body>
+    </Card>
+  );
+};
+```
+
+```tsx
+// Define a stencil with variables
+const buttonStencil = createStencil({
+  vars: {
+    background: 'blue',
+    color: 'white'
+  },
+  base: ({background, color}) => ({
+    background : cssVar(background, 'blue'),
+    color: cssVar(color, 'white'),
+    padding: '8px 16px',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    '&:hover': {
+      background
+      color
+    }
+  })
 });
 
-// after
-const myVars = createVars('textColor', 'backgroundColor');
+// Component using the stencil with variables
+const Button = ({background, color, children, ...props}) => {
+  return (
+    <button {...handleCsProp(props, buttonStencil({background, color}))}>
+      {children}
+    </button>
+  );
+}
 
-const myStyles = createStyles({
-  name: 'a8g234',
-  styles:
-    'font-size: 12px; color: var(--css-my-vars-textColor); backgroundColor: var(--css-my-vars-backgroundColor);',
+// Using the component with different variable values
+<Button>Default Button</Button>
+<Button background="red" color="white">Danger Button</Button>
+```
+
+>**Note:** The `cssVar` function is a utility that wraps the variable in correct syntax for the browser and handles the fallback value. In this case, if `background` is not provided, it will default to `'blue'`.
+
+#### Using Stencil Variables
+
+You can extend Stencils to build variants of the component to style it differently. Buttons are a good example of using CSS variables to create different styles.
+
+In the example below the following is happening:
+- When we `extend` a Stencil, we inherit the `styles, parts, modifiers, and variables`.
+- Using the bracket notation, we can target the variables defined by `Button` and set the background and color, ie `[buttonStencil.vars.background]` targets the variable `--background-abc123` and sets it to `transparent`.
+- We can target the same variables for a different state, in this case `&:hover` to set the background and color to `black` and `white` respectively.
+- In the render function we use `Button` which uses the variables for `background` and `color` so when we pass `secondaryButtonStencil` those variables will be set.
+
+```tsx
+// Use buttonStencil variables to create a secondary button
+const secondaryButtonStencil = createStencil({
+  extends: buttonStencil,
+  base: ({background, color}) => ({
+	// You're targeting the variables defined by `Button` and setting the background and color.
+    [buttonStencil.vars.background]: 'transparent',
+	[buttonStencil.vars.color]: 'black',
+    '&:hover': {
+      [buttonStencil.vars.background]: 'black',
+      [buttonStencil.vars.color]: 'white',
+    }
+  })
+});
+
+// Component using the stencil with variables
+const SecondaryButton = ({background, color, children, ...props}) => {
+  return (
+	// This component uses the variables for `background` and `color` so when you pass `secondaryButtonStencil` those variables will be set.
+    <Button {...handleCsProp(props, secondaryButtonStencil({background, color}))}>
+      {children}
+    </Button>
+  );
+}
+```
+
+
+
+#### Behind the Scenes
+
+```html
+<!-- This is the CSS generated by the stencil -->
+<style>
+  .css-abc123 {
+    --background-abc123: blue;
+    --color-abc123: white;
+    background: var(--background-abc123);
+    color: var(--color-abc123);
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .css-abc123:hover {
+    background: darkblue;
+    color: var(--color-abc123);
+  }
+</style>
+
+<!-- This is the rendered HTML with variable overrides -->
+<button class="css-abc123" style="--background-abc123: red; --color-abc123: white;">
+  Danger Button
+</button>
+```
+
+#### Important Notes
+
+- Variables share the same namespace as modifiers, so never use a modifier with the same name as a variable
+- Use variables sparingly - only when you need to expose changing properties regardless of selectors
+- Variables are ideal for complex components with multiple states (hover, active, focus, disabled)
+- Without variables, overriding nested state styles would require complex selector overrides
+
+### `createStencil`
+
+`createStencil` is a function for creating reusable, complex component styling systems. It manages base styles, parts, modifiers, variables, and compound modifiers.
+
+#### Example
+
+```tsx
+const buttonStencil = createStencil({
+  base: {
+    padding: '8px 16px',
+    borderRadius: '4px',
+    transition: 'all 120ms linear'
+  },
+  modifiers: {
+    size: {
+      small: { padding: '4px 8px', fontSize: '12px' },
+      large: { padding: '12px 24px', fontSize: '16px' }
+    }
+  }
 });
 ```
 
-Emotion has an internal shortcut that recognizes the `styles` property and
-[short-circuits interpolation](https://github.com/emotion-js/emotion/blob/f3b268f7c52103979402da919c9c0dd3f9e0e189/packages/serialize/src/index.js#L319).
+### Theme Overrides
 
-## Performance
+Theme overrides provide system-wide customization of component appearance. They're built on CSS Variables under the hood and apply consistent styling across components.
 
-`createStyles` is more performant than `styled` components or the `css` prop because the styles must
-be statically evaluated. The actual characters of a CSS property value cannot change at runtime.
-This means we do not need to recalculate a hash every render or inject new `StyleSheet` entries into
-the `StyleSheetList` in a render cycle. Injecting new `StyleSheets` causes slow
-[Style Recalculation](https://web.dev/articles/reduce-the-scope-and-complexity-of-style-calculations).
-What is not well known is browser engines maintain an internal selector cache to make style
-recalculations as fast as possible. Adding a CSS class to a DOM element will invoke a style
-recalculation, but if the the CSS selector is already in the `StyleSheetList`, the browser can
-optimize how those styles are applied to the current element.
+#### Example
 
-In the runtime Emotion's case, a novel style will result in a new style hash which results in a new
-`StyleSheet` being injected into the `StyleSheetList`. To be safe, the browser's runtime engine will
-throw away any style recalculation cache and start from scratch. This happens if you render a new
-component on the page that hasn't been rendered yet, or if you make one of your style properties
-dynamic between render cycles. Eventually the Emotion cache gets warm and style recalcuation costs
-start to normalize and no longer invalidate the browser's selector cache.
+```tsx
+// Theme provider setup
+const myTheme = {
+  canvas: {
+    palette: {
+      primary: {
+        main: '#0077b6'
+      }
+    }
+  }
+};
 
-On a page with over 1,000 elements and over 1,000
-[CSSRules](https://developer.mozilla.org/en-US/docs/Web/API/CSSRule), (typical of a large web
-application), the difference between a &lt; 1ms for warmed selector cache and &gt; 100ms for a fresh
-selector cache. `createStyles` encourages a pattern similar to [BEM](https://getbem.com/) which
-works well with the browser's selector cache by not injecting new `StyleSheet`s during a page's
-normal operations. All styles are injected before any rendering takes place.
+// Usage in a component
+<CanvasProvider theme={myTheme}>
+  <App />
+</CanvasProvider>
+```
 
-> **Note:** Since style props force Emotion's dynamic rendering, style props will fall back to
-> Emotion's runtime performance characteristics and lose any benefits gained. Also if you use
-> `styled` components or the `css` prop in a tree that uses `createStyles`, the styles created by
-> the runtime APIs will still result in a selector cache invalidation. Even if you want to use
-> `styled` or the `css` prop, consider using CSS Variables for dynamic CSS property values to reduce
-> the performance overhead of Emotion.
+## Practical Applications
+
+### Using `createStyles` for Element Styling
+
+Follow these steps to apply `createStyles` effectively:
+
+1. Define styles outside the component render function
+2. Use semantic naming for style variables
+3. Apply styles to elements via className
+
+#### Complete Example
+
+```tsx
+// Define styles
+const containerStyles = createStyles({
+  display: 'flex',
+  flexDirection: 'column',
+  padding: '16px',
+  gap: '8px'
+});
+
+const headingStyles = createStyles({
+  fontSize: '24px',
+  fontWeight: 'bold',
+  marginBottom: '16px'
+});
+
+// Use in component
+function MyComponent() {
+  return (
+    <div className={containerStyles}>
+      <h2 className={headingStyles}>Title</h2>
+      <p>Content goes here</p>
+    </div>
+  );
+}
+```
+
+### Using `createStencil` for Component Styling
+
+To use `createStencil` effectively:
+
+1. Create the stencil with base styles, modifiers, and parts
+2. Use the stencil in your component
+3. Apply modifiers based on props
+
+#### Complete Example with Props-Based Styling
+
+```tsx
+// Create stencil
+const cardStencil = createStencil({
+  parts: {
+    header: 'card-header',
+    body: 'card-body',
+    footer: 'card-footer'
+  },
+  base: {
+    display: 'flex',
+    flexDirection: 'column',
+    borderRadius: '8px',
+    boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+  },
+  modifiers: {
+    variant: {
+      bordered: {
+        border: '1px solid #e0e0e0',
+        boxShadow: 'none'
+      },
+      elevated: {
+        boxShadow: '0 8px 16px rgba(0,0,0,0.1)'
+      }
+    }
+  }
+});
+
+// Use in component
+function Card({variant, headerText, footerContent, children, ...props}) {
+  return (
+    <div {...handleCsProp(props, cardStencil({variant}))}>
+      <h2 {...cardStencil.parts.header}>{headerText}</h2>
+      <div {...cardStencil.parts.body}>{children}</div>
+      <div {...cardStencil.parts.footer}>{footerContent}</div>
+    </div>
+  );
+}
+```
+
+### Using CSS Variables for Customization
+
+To implement CSS Variables for customization:
+
+1. Define stencil with variables
+2. Create a component that uses the stencil and exposes variables as props
+3. Use the component with different variable values
+
+#### Complete Example
+
+```tsx
+// Create stencil with variables
+const cardStencil = createStencil({
+  vars: {
+    borderColor: '#e0e0e0',
+    headerBackground: '#f5f5f5',
+    bodyBackground: 'white'
+  },
+  parts: {
+    header: 'card-header',
+    body: 'card-body',
+    footer: 'card-footer'
+  },
+  base: ({borderColor, headerBackground, bodyBackground, headerPart, bodyPart, footerPart}) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    border: `1px solid ${borderColor}`,
+    borderRadius: '8px',
+    overflow: 'hidden',
+
+    [headerPart]: {
+      padding: '16px',
+      background: headerBackground,
+      borderBottom: `1px solid ${borderColor}`
+    },
+
+    [bodyPart]: {
+      padding: '16px',
+      background: bodyBackground
+    },
+
+    [footerPart]: {
+      padding: '16px',
+      borderTop: `1px solid ${borderColor}`
+    }
+  })
+});
+
+// Create component that exposes variables as props
+function Card({borderColor, headerBackground, bodyBackground, children, ...props}) {
+  const header = React.Children.toArray(children).find(
+    child => child.type === Card.Header
+  );
+  const body = React.Children.toArray(children).find(
+    child => child.type === Card.Body
+  );
+  const footer = React.Children.toArray(children).find(
+    child => child.type === Card.Footer
+  );
+
+  return (
+    <div {...handleCsProp(props, cardStencil({
+      borderColor,
+      headerBackground,
+      bodyBackground
+    }))}>
+      {header}
+      {body}
+      {footer}
+    </div>
+  );
+}
+
+// Sub-components
+Card.Header = ({children, ...props}) => (
+  <div {...props} {...cardStencil.parts.header}>{children}</div>
+);
+
+Card.Body = ({children, ...props}) => (
+  <div {...props} {...cardStencil.parts.body}>{children}</div>
+);
+
+Card.Footer = ({children, ...props}) => (
+  <div {...props} {...cardStencil.parts.footer}>{children}</div>
+);
+
+// Usage
+function App() {
+  return (
+    <>
+      {/* Default Card */}
+      <Card>
+        <Card.Header>Default Header</Card.Header>
+        <Card.Body>Default Body</Card.Body>
+        <Card.Footer>Default Footer</Card.Footer>
+      </Card>
+
+      {/* Customized Card */}
+      <Card
+        borderColor="#2196f3"
+        headerBackground="#bbdefb"
+        bodyBackground="#e3f2fd"
+      >
+        <Card.Header>Custom Header</Card.Header>
+        <Card.Body>Custom Body</Card.Body>
+        <Card.Footer>Custom Footer</Card.Footer>
+      </Card>
+    </>
+  );
+}
+```
+
+#### When to Use Variables
+
+- Use variables when you need to change styles across different states (hover, focus, active)
+- Use variables when the same value is used in multiple places in your styles
+- Use variables sparingly - prefer direct style overrides when possible
+
+## The `cs` Prop for Inline Styling
+
+The `cs` prop pattern is designed for quick inline styling adjustments, not for building reusable components. It accepts class names, style objects, and arrays, reducing the need for custom style props.
+
+### Appropriate Usage Examples
+
+```tsx
+// Quick inline adjustment
+<Button cs={{ marginTop: '16px' }}>Submit</Button>
+
+// Combining styles
+<Card cs={[cardStyles, highlightStyles]}>Content</Card>
+
+// Bad example - don't use for reusable patterns
+<Button cs={{ color: 'red' }}>Delete</Button> // Don't repeat this pattern
+```
+
+## Style Handling Functions
+
+Canvas Kit provides different style merging functions for different use cases:
+
+### `handleCsProp`
+
+Used internally by Canvas Kit components to properly handle the `cs` prop and merge styles.
+
+```tsx
+function MyComponent({children, ...props}) {
+  return (
+    <div {...handleCsProp(props, baseStyles)}>
+      {children}
+    </div>
+  );
+}
+```
+
+### `mergeStyles`
+
+Only for backward compatibility with style props; will be deprecated in future versions.
+
+```tsx
+function LegacyComponent({children, ...props}) {
+  return (
+    <div {...mergeStyles(props, baseStyles)}>
+      {children}
+    </div>
+  );
+}
+```
+
+### Component Hierarchy Rule
+
+- If a lower-level component uses `mergeStyles` (e.g., `TertiaryButton`)
+- And a higher-level component uses that component (e.g., `PopupCloseButton`)
+- Then the higher-level component should use `handleCsProp`
+
+## Performance Benefits
+
+Canvas Kit styling offers significant performance advantages:
+
+- Avoids expensive style recalculations by not injecting new StyleSheets during render
+- Works well with the browser's selector cache
+- CSS Variables provide dynamic styling without JavaScript overhead
+
+## Best Practices
+
+### DO
+
+- Hoist style definitions outside of component render functions
+- Use CSS Variables for dynamic styling instead of conditional styles
+- Choose the right tool for the job:
+  - `createStyles`: For one-off element styles
+  - `createStencil`: For reusable components with complex styling
+  - `cs` prop: For quick inline styling adjustments only
+  - `handleCsProp`: For Canvas Kit components exposing the `cs` prop
+
+### DON'T
+
+- Use `mergeStyles` for new components (only for backward compatibility)
+- Define styles inside render functions
+- Use the `cs` prop for building reusable components
+- Mix with Emotion's runtime APIs for optimal performance
+
+## Migration Guide
+
+### Migrating from Style Props
+
+Before:
+```tsx
+<Box padding="medium" margin="small">
+  Content
+</Box>
+```
+
+After:
+```tsx
+<Box cs={{ padding: '16px', margin: '8px' }}>
+  Content
+</Box>
+```
+
+### Migrating from Emotion
+
+Before (Emotion styled):
+```tsx
+const StyledDiv = styled('div')({
+  padding: '16px',
+  backgroundColor: 'lightblue'
+});
+```
+
+After (Canvas Kit):
+```tsx
+const divStyles = createStyles({
+  padding: '16px',
+  backgroundColor: 'lightblue'
+});
+
+function MyComponent() {
+  return <div className={divStyles}>Content</div>;
+}
+```
+
+## Troubleshooting
+
+### Common Issues
+
+**"Why are my styles not applying?"**
+- Check style order and CSS specificity
+- Ensure styles are defined outside of render functions
+- Verify that you're using the correct styling function for your use case
+
+**"Why is my component re-rendering?"**
+- Avoid creating styles inside render functions
+- Make sure you're properly hoisting style definitions
+- Check for unnecessary inline style objects
+
+**"How do I override a specific part of a component?"**
+- Use stencil parts for targeting specific elements
+- Use CSS Variables for states and dynamic properties
+- For compound components, target the specific sub-component
+
+## FAQ
+
+**"When should I use `createStyles` vs `createStencil`?"**
+- Use `createStyles` for one-off element styling or simpler components
+- Use `createStencil` when you need modifiers, parts, or variables
+
+**"How can I make my component respond to theme changes?"**
+- Connect to the Canvas Kit theme using the theme tokens
+- Use CSS Variables that are provided by the theme
+
+**"Can I still use Emotion alongside Canvas Kit styling?"**
+- Yes, but it may impact performance
+- Try to migrate completely to Canvas Kit styling for best results
