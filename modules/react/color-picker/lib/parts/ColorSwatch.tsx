@@ -3,7 +3,7 @@ import * as React from 'react';
 import {pickForegroundColor} from '@workday/canvas-kit-react/common';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {calc, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export interface ColorSwatchProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -39,24 +39,18 @@ export const colorPickerColorSwatchStencil = createStencil({
   },
 });
 
-const getIconColor = (color: string) => {
-  return color.startsWith('--cnvs')
-    ? color.match(/.*-(100|200|300|400)$/)
-      ? cssVar(system.color.text.strong)
-      : cssVar(system.color.text.inverse)
-    : pickForegroundColor(color);
-};
-
 export const ColorSwatch = ({color, showCheck = false, ...elemProps}: ColorSwatchProps) => {
+  const lowerCasedColor = color.toLowerCase();
+
   return (
     <div
-      data-color={color}
+      data-color={lowerCasedColor}
       {...handleCsProp(
         elemProps,
         colorPickerColorSwatchStencil({
-          color: color.startsWith('--cnvs') ? cssVar(color) : color,
-          iconColor: getIconColor(color),
-          withShadow: showCheck || color.toLowerCase() === '#ffffff',
+          color,
+          iconColor: pickForegroundColor(color),
+          withShadow: showCheck || lowerCasedColor === '#ffffff',
         })
       )}
     >
