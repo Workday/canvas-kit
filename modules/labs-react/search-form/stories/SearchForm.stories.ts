@@ -3,6 +3,7 @@ import {SearchForm} from '@workday/canvas-kit-labs-react/search-form';
 import mdxDoc from './SearchForm.mdx';
 // examples
 import {Basic as BasicExample} from './examples/Basic';
+import {Collapsed as CollapsedExample} from './examples/Collapsed';
 import {CustomTheme as CustomThemeExample} from './examples/CustomTheme';
 import {Grow as GrowExample} from './examples/Grow';
 import {RTL as RTLExample} from './examples/RTL';
@@ -37,4 +38,8 @@ export const RTL: Story = {
 };
 export const Theming: Story = {
   render: ThemingExample,
+};
+
+export const Collapsed: Story = {
+  render: CollapsedExample,
 };
