@@ -14,7 +14,6 @@ import chroma from 'chroma-js';
 import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {min} from 'lodash';
 
 export interface SearchFormProps extends GrowthBehavior, React.FormHTMLAttributes<HTMLFormElement> {
   /**
