@@ -15,6 +15,25 @@ The motivation behind this custom styling solution stems from the need to move b
 
 ## Core Styling Approaches for Static Styling
 
+### `cs` Prop
+
+Think of the `cs` prop as  port. The `cs` prop takes in a single, or an array of values that are created by the `cs` function, a
+string representing a CSS class name, or the return of the `createVars` function. It merges
+everything together and applies `className` and `style` attributes to a React element. Most of our components extend the `cs` prop so that you can statically apply styles to them.
+
+>**Important**: While the `cs` prop accepts a style object, **this will not** be considered statically styling an element and you will lose the performance benefits. You should **only** use the `cs` prop in conjunction with `createStyles` and `createStencil`.
+
+```tsx
+import {system} from '@workday/canvas-tokens-webs'
+import {PrimaryButton} from '@workday/canvas-kit-react/button'
+
+const styles = createStyles({ color: system.color.static.red.default });
+
+function MyComponent() {
+  return <PrimaryButton cs={styles}>Text</PrimaryButton>;
+}
+```
+
 ### `createStyles`
 
 The primary utility function is the `createStyles` function. It makes a call to the `css` function
@@ -71,43 +90,43 @@ import {Card} from '@workday/canvas-kit-react/card';
 import {system} from '@workday/canvas-tokens-webs';
 
 const themedCardStencil = createStencil({
-	vars: {
-		// Create CSS variables for the color of the header
-		headerColor: ''
-	},
-	parts: {
-		// Allows for styling a sub element of the component that may not be exposed through the API
-		header: 'themed-card-header'
-	}
-	base: ({headerPart, headerColor}) => ({
-		padding: system.space.x4,
-		boxShadow: system.depth[2],
-		backgroundColor: system.color.bg.default,
-		color: system.color.text.default,
-		// Targets the header part via [data-part="themed-card-header"]"]
-		[headerPart]: {
-			color: headerColor
-		}
-	}),
-	modifiers: {
-		isDarkTheme: {
-			// If the prop `isDarkTheme` is true, style the component and it's parts
-			true: ({headerPart}) => ({
-				backgroundColor: system.color.bg.contrast.default,
-				color: system.color.text.inverse
-				[headerPart]: {
-					color: system.color.text.inverse
-				}
-			})
-		}
-	}
+  vars: {
+   // Create CSS variables for the color of the header
+    headerColor: ''
+  },
+  parts: {
+   // Allows for styling a sub element of the component that may not be exposed through the API
+    header: 'themed-card-header'
+  }
+  base: ({headerPart, headerColor}) => ({
+    padding: system.space.x4,
+    boxShadow: system.depth[2],
+    backgroundColor: system.color.bg.default,
+    color: system.color.text.default,
+    // Targets the header part via [data-part="themed-card-header"]"]
+    [headerPart]: {
+      color: headerColor
+    }
+  }),
+  modifiers: {
+    isDarkTheme: {
+    // If the prop `isDarkTheme` is true, style the component and it's parts
+      true: ({headerPart}) => ({
+        backgroundColor: system.color.bg.contrast.default,
+        color: system.color.text.inverse
+        [headerPart]: {
+          color: system.color.text.inverse
+        }
+      })
+    }
+  }
 })
 
 const ThemedCard = ({isDarkTheme, headerColor, elemProps}) => {
   return (
-		/* Use the `cs` prop to apply the stencil and pass it the dynamic properties it needs to style accordingly */
+    /* Use the `cs` prop to apply the stencil and pass it the dynamic properties it needs to style accordingly */
     <Card cs={themedCardStencil({isDarkTheme, headerColor})} {...elemProps}>
-			/* Apply the data part selector to the header */
+	/* Apply the data part selector to the header */
       <Card.Heading {...themedCardStencil.parts.header}>Canvas Supreme</Card.Heading>
       <Card.Body>
         Our house special supreme pizza includes pepperoni, sausage, bell peppers, mushrooms,
@@ -124,7 +143,7 @@ You should use `createStencil` when styling our components that have complex sty
 
 ### Using `Base`
 
-`Base` is a low level component that exposes the `cs` prop so that you can quickly apply styles to any in a static way. If our components don't quite fit your styling needs, you can use `Base` to build a fully styled component.
+`Base` is a low level component that exposes the `cs` prop so that you can quickly apply styles to any element in a static way. If our components don't quite fit your styling needs, you can use `Base` to build a fully styled component.
 
 #### Usage Example
 ```tsx
@@ -134,19 +153,22 @@ import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {system} from '@workday/canvas-tokens-web';
 
 const containerStyles = createStyles({
-	display: 'flex',
-	flexDirection: 'row',
-	gap: system.space.x2,
-	padding: system.space.x6,
-	alignItems: 'end'
+  display: 'flex',
+  flexDirection: 'row',
+  gap: system.space.x2,
+  padding: system.space.x6,
+  alignItems: 'end'
 })
 
 const NavContainer = () => {
-	return (
-		<Base as='section' cs={containerStyles}>
-			<PrimaryButton>Accept</PrimaryButton>
-			<SecondaryButton>Cancel</SecondaryButton>
-		</Base>
-	)
+ return (
+  <Base as='section' cs={containerStyles}>
+    <PrimaryButton>Accept</PrimaryButton>
+    <SecondaryButton>Cancel</SecondaryButton>
+  </Base>
+ )
 }
 ```
+
+#### When to Use `Base`
+You should use `Base` when you want to statically style an element that Canvas Kit may not support, like a container, or wrapping element. By exposing the `cs` prop it allows for quick styling and correct style merging. For more information, view our `Base` component [docs](https://workday.github.io/canvas-kit/?path=/docs/hooks-and-utilities-common--docs#base).

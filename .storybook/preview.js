@@ -44,6 +44,8 @@ export const parameters = {
         prefix('styling', '2'),
         prefix('styling-overview', '1'),
         prefix('styling-why-canvas-styling', '2'),
+        prefix('styling-getting-started', '3'),
+        prefix('styling-createstyles', '4'),
         prefix('features-', '3'),
         prefix('tokens-', '4'),
         prefix('overview', 'a'),

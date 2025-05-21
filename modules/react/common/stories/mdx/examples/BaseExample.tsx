@@ -7,6 +7,8 @@ const containerStyles = createStyles({
   padding: system.space.x4,
   boxShadow: system.depth[1],
   borderRadius: system.shape.x2,
+  flexDirection: 'column',
+  border: `1px solid ${system.color.border.container}`,
 });
 
 const headerStyles = createStyles({
