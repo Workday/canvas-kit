@@ -17,6 +17,10 @@ export const paginationNavStencil = createStencil({
 export const PaginationNav = createComponent('nav')({
   displayName: 'Pagination.Nav',
   Component: ({children, ...elemProps}: PaginationNavProps, ref, Element) => {
-    return <Element ref={ref} {...mergeStyles(elemProps, paginationNavStencil())} />;
+    return (
+      <Element ref={ref} {...mergeStyles(elemProps, paginationNavStencil())}>
+        {children}
+      </Element>
+    );
   },
 });
