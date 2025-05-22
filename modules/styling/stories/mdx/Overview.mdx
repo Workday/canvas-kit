@@ -17,11 +17,11 @@ The motivation behind this custom styling solution stems from the need to move b
 
 ### `cs` Prop
 
-Think of the `cs` prop as  port. The `cs` prop takes in a single, or an array of values that are created by the `cs` function, a
+The `cs` prop takes in a single, or an array of values that are created by the `cs` function, a
 string representing a CSS class name, or the return of the `createVars` function. It merges
 everything together and applies `className` and `style` attributes to a React element. Most of our components extend the `cs` prop so that you can statically apply styles to them.
 
->**Important**: While the `cs` prop accepts a style object, **this will not** be considered statically styling an element and you will lose the performance benefits. You should **only** use the `cs` prop in conjunction with `createStyles` and `createStencil`.
+>**Important**: While the `cs` prop accepts a style object, **this will not** be considered statically styling an element and you will lose the performance benefits.
 
 ```tsx
 import {system} from '@workday/canvas-tokens-webs'

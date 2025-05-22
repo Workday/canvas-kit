@@ -40,7 +40,7 @@ export const CreateStencil = () => {
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.currentTarget.value);
   };
-  const [size, setSize] = React.useState<string | number>('');
+  const [size, setSize] = React.useState<'large' | 'small'>('small');
 
   return (
     <>
