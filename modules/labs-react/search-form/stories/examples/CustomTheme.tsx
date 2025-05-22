@@ -57,7 +57,7 @@ export const CustomTheme = () => {
     backgroundFocus: colors.frenchVanilla100,
     placeholderColor: colors.frenchVanilla100,
     placeholderColorFocus: colors.blackPepper400,
-    backgroundHover: colors.cinnamon600,
+    // backgroundHover: 'colors.cinnamon600',
   } as SearchThemeAttributes;
 
   return (

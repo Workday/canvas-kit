@@ -240,7 +240,7 @@ const searchFormStencil = createStencil({
       },
 
       '&:hover': {
-        backgroundColor: backgroundHover,
+        backgroundColor: cssVar(backgroundHover, background),
       },
 
       '&:is(:focus-visible, .focus):where(:not([disabled]))': {
@@ -551,9 +551,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
       allowEmptyStringSearch = false,
       ...elemProps
     } = this.props;
-    console.log(searchTheme);
 
-    // console.log(isCustomTheme)
     return (
       <form
         role="search"
