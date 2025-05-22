@@ -37,7 +37,6 @@ export const multiSelectInputStencil = createStencil({
     },
 
     '&:has(:focus-visible:not([disabled])), &.focus': {
-      // '&:has(:focus-visible)': {
       borderColor: system.color.border.primary.default,
       boxShadow: `inset 0 0 0 1px ${system.color.border.primary.default}`,
     },
