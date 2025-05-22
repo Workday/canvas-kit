@@ -1,8 +1,9 @@
 import * as React from 'react';
-import {PaginationModel} from '../types';
-import {Subtext} from '@workday/canvas-kit-react/text';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {createComponent} from '@workday/canvas-kit-react/common';
+import {Subtext} from '@workday/canvas-kit-react/text';
 import {PaginationContext} from '../usePaginationModel';
+import {PaginationModel} from '../types';
 
 export interface GoToLabelProps {
   /**
@@ -10,6 +11,12 @@ export interface GoToLabelProps {
    */
   children?: (model: PaginationModel) => React.ReactNode | React.ReactNode;
 }
+
+export const paginationGoToLabelStencil = createStencil({
+  base: {
+    whiteSpace: 'nowrap',
+  },
+});
 
 export const GoToLabel = createComponent('label')({
   displayName: 'Pagination.GoToLabel',
@@ -21,8 +28,7 @@ export const GoToLabel = createComponent('label')({
         as={Element}
         size="medium"
         variant="hint"
-        whiteSpace="nowrap"
-        {...elemProps}
+        {...handleCsProp(elemProps, paginationGoToLabelStencil())}
       >
         {typeof children === 'function' ? children(model) : children}
       </Subtext>
