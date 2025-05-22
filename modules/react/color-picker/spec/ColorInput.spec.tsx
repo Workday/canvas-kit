@@ -42,9 +42,14 @@ describe('ColorInput', () => {
       test('should render a ColorInput with a value and the value as a background', () => {
         const {container} = render(<ColorInput value={value} />);
 
-        expect(container.querySelector('div div input + div')).toHaveStyle(
-          'background-color: #eee;'
-        );
+        const swatch = container.querySelector(
+          '[data-part="color-picker-hex-input-swatch"]'
+        ) as HTMLElement;
+
+        const style = getComputedStyle(swatch);
+        const varName = swatch?.style[0];
+
+        expect(style.getPropertyValue(varName)).toBe('#eee');
       });
     });
 

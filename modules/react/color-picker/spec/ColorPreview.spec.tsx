@@ -26,9 +26,15 @@ describe('ColorPreview', () => {
     describe('with a value', () => {
       test('should render ColorPreview with the value as a background', () => {
         const {container} = render(<ColorPreview value={value} data-testid={id} />);
-        expect(container.querySelector('div div input + div')).toHaveStyle(
-          'background-color: #eee;'
-        );
+
+        const swatch = container.querySelector(
+          '[data-part="color-picker-hex-input-swatch"]'
+        ) as HTMLElement;
+
+        const style = getComputedStyle(swatch);
+        const backgroundVarName = swatch.style[0];
+
+        expect(style.getPropertyValue(backgroundVarName)).toBe('#eee');
       });
     });
 

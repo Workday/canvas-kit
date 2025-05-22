@@ -66,8 +66,8 @@ export const SwatchBook = ({colors, value, onSelect}: SwatchBookProps) => {
   return (
     <div {...colorPickerSwatchBookStencil()}>
       {colors.map((color: string | SwatchBookColorObject, index: number) => {
-        const hexCode = typeof color === 'object' ? color.value : color;
-        const label = typeof color === 'object' ? color.label : color;
+        const hexCode = typeof color === 'object' ? color.value : color.toLowerCase();
+        const label = typeof color === 'object' ? color.label : color.toLowerCase();
         const isSelected = value ? hexCode.toLowerCase() === value.toLowerCase() : false;
 
         const handleClick = () => onSelect(hexCode);
