@@ -20,7 +20,7 @@ export interface ControlButtonProps extends ExtractProps<typeof TertiaryButton, 
 
 export interface PaginationControlsProps {}
 
-const paginationControlsStencil = createStencil({
+export const paginationControlsStencil = createStencil({
   base: {
     display: 'flex',
     gap: system.space.x1,
