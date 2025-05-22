@@ -5,7 +5,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 export interface ListProps extends FlexProps {}
 
-export const paginationListItemStencil = createStencil({
+export const paginationListStencil = createStencil({
   base: {
     display: 'flex',
     marginBlock: system.space.zero,
@@ -19,7 +19,7 @@ export const List = createComponent('ul')({
   displayName: 'List',
   Component: ({children, ...elemProps}: ListProps, ref, Element) => {
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, paginationListItemStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, paginationListStencil())}>
         {children}
       </Element>
     );
@@ -28,7 +28,7 @@ export const List = createComponent('ul')({
 
 export interface ListItemProps extends FlexProps {}
 
-export const listItemStencil = createStencil({
+export const paginationListItemStencil = createStencil({
   base: {
     display: 'flex',
   },
@@ -38,7 +38,7 @@ export const ListItem = createComponent('li')({
   displayName: 'ListItem',
   Component: ({children, ...elemProps}: ListItemProps, ref, Element) => {
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, listItemStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, paginationListItemStencil())}>
         {children}
       </Element>
     );
