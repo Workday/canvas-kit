@@ -95,23 +95,19 @@ Here's what we did about it:
 
 ### Sortable Column Headers
 
-The challenge in this example is, how will we clearly communicate the complexity of the column
-headers to screen readers and keep the tabular data easy to understand? The column headers must
-describe the column name, the current sort state of the column, they are interactive (a button), and
-instructions about how the column will be sorted next. When screen reader users are focused on the
-tabular data cells, instructions about how the column will be sorted next is probably not relevant,
-distracting, and makes it harder to understand the data.
+The challenge in this example is to provide all of the necessary information about the interactive
+column headers, the sort state of the column, and instructions about how the table will be sorted
+without giving too much information to users while reading the data cells below.
 
-- The `aria-sort` property has been initialized to `none` on each of the `<th>` elements; this value
-  is updated to `ascending` or `descending` to reflect the current state.
-- A `<button>` element describing the column name is used inside of the `<th>` column header.
-- The `describe` variant of the Canvas `Tooltip` component is applied to the button in the column
-  header. This is used to describe how the column will be sorted after interaction and applied to
-  the accessible description of the button with the `aria-describedby` property. This way screen
-  readers won't read the longer description of the column headers automatically while focusing on
-  the tabular data below.
-- The `aria-sort` property may not reliably provide the current sort state of the column to users
-  focused on the tabular data in the table. It may be more reliable to use an `aria-label` string on
-  the button that describes the column name and sort state together.
+- The `aria-sort` property has been added to each of the `<Table.Header>` components (`<th>`
+  element) and updated to `ascending` or `descending` to reflect the current sort state. We
+  recommend validating whether this property is well supported for your screen reader and browser
+  combinations first.
+- A `<TertiaryButton>` describing the column name is used inside of the `<Table.Header>` component.
+- The `description` variant of the Canvas `Tooltip` component is applied to the button in the column
+  header and applied to the accessible description of the button with the `aria-description`
+  property. This is used to describe how the column will be sorted when pressed and screen readers
+  will only read this description while focusing on the column headers, not while reading the data
+  cells below.
 
 <ExampleCodeBlock code={SortableColumnHeaders} />
