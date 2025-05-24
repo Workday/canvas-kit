@@ -67,7 +67,7 @@ header each time users are reading any of the Check boxes in the first column. F
 
 In this example, we demonstrate using the `Popup` component in each column header allowing users to
 search and filter the data on the table. The `Popup` component relies on React Portals to render the
-popup elements at the bottom of the browser's DOM. This presents 2 key challenges for accessibility:
+popup elements at the bottom of the browser's DOM and presents 2 key challenges for accessibility:
 
 1. Keyboard focus order of the elements in the popup,
 2. Screen readers' reading order of the content rendered in the browser.
@@ -76,20 +76,23 @@ Here's what we did about it:
 
 - Canvas Kit includes a `usePopupModel` hook, with quite a few additional hooks developers can add
   to their models including `useFocusRedirect` that will manage keyboard focus between the
-  `Popup.Target` button and the popup content.
+  `<Popup.Target>` button and the popup content.
 - The `useInitialFocus` hook allows developers to specify which element receives keyboard focus when
   the popup appears. In this example, we auto-focused the search input field.
-- To address the reading order of content, we set the `aria-owns` property onto the parent `<th>`
-  column header element with 2 unique `id` values. The first `id` refers to the `<Popup.Target>`
-  button and the second refers to the `<Popup.Card>` container element. This manually reassigns the
-  column header button and the `Popup` container as siblings in the browser's accessibility tree
-  hierarchy. Screen readers **should** read the column header buttons and the popup content
-  logically in order.
-- The `type='description'` variant of the Canvas `Tooltip` is used to communcate the filtered state
-  of the column header, and assigned to the accessible description of the button element.
+- To address the reading order of content, we set the `aria-owns` property onto the parent
+  `<Table.Header>` component (`<th>` element) with 2 unique `id` values. The first `id` refers to
+  the `<Popup.Target>` button and the second refers to the `<Popup.Card>` container element. This
+  manually reassigns the column header's `<Popup.Target>` button and the `Popup` contents as
+  siblings in the browser's accessibility tree hierarchy. Screen readers **should** read the column
+  header buttons and the popup content logically in order even though they are not siblings in the
+  DOM.
+- The `type='description'` variant of the Canvas `Tooltip` is used to communicate the filtered state
+  of the column header, and assigned to the accessible description of the column header
+  `<TertiaryButton>` component.
 - The Canvas `AriaLiveRegion` component is used to render the "X of Y items" status inside the table
   caption. This enables screen readers to automatically describe the filter state changes of the
-  table content to users in real time.
+  table content to users in real time. We recommend validating whether this use of a live region is
+  well supported for your screen reader and browser combinations first.
 
 <ExampleCodeBlock code={FilterableColumnHeaders} />
 
