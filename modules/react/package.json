@@ -57,6 +57,7 @@
     "chroma-js": "^2.2.0",
     "csstype": "^3.0.2",
     "react-innertext": "^1.1.5",
+    "@tanstack/react-virtual": "^3.13.9",
     "rtl-css-js": "^1.14.1",
     "screenfull": "^5.2.0",
     "use-resize-observer": "^9.1.0"

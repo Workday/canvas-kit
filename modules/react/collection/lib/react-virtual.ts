@@ -51,7 +51,7 @@ interface Rect {
 }
 
 // Canvas Kit compatible options interface - supporting both new and old APIs
-export interface Options<T = Element> {
+export interface Options<T extends Element | Window = Element> {
   // New TanStack API options
   count?: number;
   getScrollElement?: () => T | null;
@@ -64,7 +64,14 @@ export interface Options<T = Element> {
   estimateSize?: (index: number) => number;
   overscan?: number;
   horizontal?: boolean;
-  scrollToFn?: (offset: number, canSmooth: boolean, instance: Virtualizer<T, Element>) => void;
+  scrollToFn?: (
+    offset: number,
+    options: {
+      adjustments?: number;
+      behavior?: ScrollBehavior;
+    },
+    instance: Virtualizer<T, Element>
+  ) => void;
   paddingStart?: number;
   paddingEnd?: number;
   keyExtractor?: (index: number) => Key;
@@ -124,6 +131,49 @@ const useVirtual = <T extends Element = HTMLDivElement>(options: Options<T>): Us
     ? adaptRangeExtractor(options.rangeExtractor)
     : undefined;
 
+  // Handle legacy useObserver option by creating custom observeElementRect
+  const observeElementRect = options.useObserver
+    ? (instance: Virtualizer<T, Element>, cb: (rect: Rect) => void) => {
+        // Use the custom observer provided by the user
+        const rect = options.useObserver!(
+          options.parentRef || {current: null},
+          options.initialRect
+        );
+        cb(rect);
+        // Return cleanup function (if needed)
+        // eslint-disable-next-line no-empty-function
+        return () => {};
+      }
+    : undefined;
+
+  // Handle legacy onScrollElement and scrollOffsetFn by creating custom observeElementOffset
+  const observeElementOffset =
+    options.onScrollElement || options.scrollOffsetFn
+      ? (instance: Virtualizer<T, Element>, cb: (offset: number, isScrolling: boolean) => void) => {
+          const scrollElement = options.onScrollElement?.current || getScrollElement();
+          if (!scrollElement) {
+            return;
+          }
+
+          const handleScroll = (event?: Event) => {
+            const offset = options.scrollOffsetFn
+              ? options.scrollOffsetFn(event)
+              : scrollElement.scrollTop || scrollElement.scrollLeft || 0;
+
+            // Call the TanStack callback with the offset
+            cb(offset, false); // We don't have isScrolling info from old API
+          };
+
+          // Add scroll listener
+          scrollElement.addEventListener('scroll', handleScroll);
+
+          // Return cleanup function
+          return () => {
+            scrollElement.removeEventListener('scroll', handleScroll);
+          };
+        }
+      : undefined;
+
   // Create TanStack virtualizer options with required defaults
   const virtualizerOptions = {
     count,
@@ -135,6 +185,13 @@ const useVirtual = <T extends Element = HTMLDivElement>(options: Options<T>): Us
     scrollPaddingEnd: options.paddingEnd,
     rangeExtractor,
     getItemKey: options.keyExtractor,
+    // Only include scrollToFn if provided by user
+    ...(options.scrollToFn && {scrollToFn: options.scrollToFn}),
+    // Only include observeElementRect if we have a custom observer
+    ...(observeElementRect && {observeElementRect}),
+    // Only include observeElementOffset if we have custom scroll handling
+    ...(observeElementOffset && {observeElementOffset}),
+    initialRect: options.initialRect, // Pass through initial rect
   } as VirtualizerOptions<T, Element>;
 
   const virtualizer = useVirtualizer(virtualizerOptions);
