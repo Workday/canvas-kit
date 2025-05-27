@@ -57,7 +57,6 @@
     "chroma-js": "^2.2.0",
     "csstype": "^3.0.2",
     "react-innertext": "^1.1.5",
-    "react-virtual": "^2.10.4",
     "rtl-css-js": "^1.14.1",
     "screenfull": "^5.2.0",
     "use-resize-observer": "^9.1.0"
