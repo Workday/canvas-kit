@@ -3805,6 +3805,18 @@
         "__isArgsStory": false
       }
     },
+    "preview-multiselect--error": {
+      "id": "preview-multiselect--error",
+      "name": "Error",
+      "title": "Preview/MultiSelect",
+      "importPath": "./modules/preview-react/multi-select/stories/MultiSelect.stories.ts",
+      "kind": "Preview/MultiSelect",
+      "story": "Error",
+      "parameters": {
+        "fileName": "./modules/preview-react/multi-select/stories/MultiSelect.stories.ts",
+        "__isArgsStory": false
+      }
+    },
     "preview-multiselect--icons": {
       "id": "preview-multiselect--icons",
       "name": "Icons",
@@ -5446,6 +5458,30 @@
       "story": "Form Field Themed States",
       "parameters": {
         "fileName": "./modules/react/form-field/stories/visualTesting.stories.tsx",
+        "__isArgsStory": false
+      }
+    },
+    "testing-inputs-multiselect--multi-select-states": {
+      "id": "testing-inputs-multiselect--multi-select-states",
+      "name": "Multi Select States",
+      "title": "Testing/Inputs/MultiSelect",
+      "importPath": "./modules/preview-react/multi-select/stories/visualTesting.stories.tsx",
+      "kind": "Testing/Inputs/MultiSelect",
+      "story": "Multi Select States",
+      "parameters": {
+        "fileName": "./modules/preview-react/multi-select/stories/visualTesting.stories.tsx",
+        "__isArgsStory": false
+      }
+    },
+    "testing-inputs-multiselect--multi-select-themed-states": {
+      "id": "testing-inputs-multiselect--multi-select-themed-states",
+      "name": "Multi Select Themed States",
+      "title": "Testing/Inputs/MultiSelect",
+      "importPath": "./modules/preview-react/multi-select/stories/visualTesting.stories.tsx",
+      "kind": "Testing/Inputs/MultiSelect",
+      "story": "Multi Select Themed States",
+      "parameters": {
+        "fileName": "./modules/preview-react/multi-select/stories/visualTesting.stories.tsx",
         "__isArgsStory": false
       }
     },
