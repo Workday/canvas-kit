@@ -7,6 +7,7 @@ import {
 
 import {Basic} from './examples/Basic';
 import {Disabled} from './examples/Disabled';
+import {Error} from './examples/Error';
 import {Complex} from './examples/Complex';
 import {Icons} from './examples/Icons';
 import {Controlled} from './examples/Controlled';
@@ -62,6 +63,14 @@ attached to the `MultiSelect.Input` and read out as a group for voiceover.
 Disabling `MultiSelect` involves passing the `disabled` prop to the `MultiSelect.Input` component.
 
 <ExampleCodeBlock code={Disabled} />
+
+### Error States
+
+The `MultiSelect.Input` and `MultiSelect.SearchInput` support the `ErrorType` from the Common
+package. The error styling is identical to the `TextInput` error styling. The `error` prop is
+typically passed from the `FormField` component.
+
+<ExampleCodeBlock code={Error} />
 
 ### Complex
 
