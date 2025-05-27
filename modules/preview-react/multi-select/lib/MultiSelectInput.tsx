@@ -1,15 +1,16 @@
 import React from 'react';
 
-import {system} from '@workday/canvas-tokens-web';
+import {brand, system} from '@workday/canvas-tokens-web';
 import {caretDownSmallIcon, searchIcon} from '@workday/canvas-system-icons-web';
 
 import {
+  ErrorType,
   composeHooks,
   createElemPropsHook,
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
-import {createStencil, CSProps, handleCsProp} from '@workday/canvas-kit-styling';
-import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
+import {createStencil, CSProps, handleCsProp, px2rem, calc} from '@workday/canvas-kit-styling';
+import {InputGroup, TextInput, textInputStencil} from '@workday/canvas-kit-react/text-input';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {getCursor} from '@workday/canvas-kit-react/collection';
 import {useComboboxInput, useComboboxInputConstrained} from '@workday/canvas-kit-react/combobox';
@@ -18,7 +19,8 @@ import {useMultiSelectModel} from './useMultiSelectModel';
 import {MultiSelectedItemProps} from './MultiSelectedItem';
 import {MultiSelectedList} from './MultiSelectedList';
 
-export const multiSelectStencil = createStencil({
+export const multiSelectInputStencil = createStencil({
+  //@ts-ignore Types don't like defining a variable in `base` and using a variable in a nested selector. One or the other is fine, but not both.
   base: {
     border: `1px solid ${system.color.border.input.default}`,
     display: 'flex',
@@ -29,12 +31,13 @@ export const multiSelectStencil = createStencil({
     minHeight: system.space.x10,
     transition: '0.2s box-shadow, 0.2s border-color',
     margin: 0, // Fix Safari
+    [textInputStencil.vars.width]: '100%',
 
     '&:hover, &.hover': {
       borderColor: system.color.border.input.strong,
     },
 
-    '&:focus-within': {
+    '&:has(:focus-visible:not([disabled])), &.focus': {
       borderColor: system.color.border.primary.default,
       boxShadow: `inset 0 0 0 1px ${system.color.border.primary.default}`,
     },
@@ -44,6 +47,12 @@ export const multiSelectStencil = createStencil({
       ...system.type.subtext.large,
       backgroundColor: system.color.bg.transparent,
       borderRadius: system.shape.x1,
+
+      // collapse the height of the input by the border width so that an empty multi-select
+      // is the same height as a `TextInput`
+      '&:where([data-part="user-input"], [data-part="form-input"])': {
+        height: calc.subtract(system.space.x10, px2rem(2)),
+      },
 
       // Remove the focus ring - it is handled at the container level
       border: 'none !important',
@@ -88,7 +97,42 @@ export const multiSelectStencil = createStencil({
       flexWrap: 'wrap',
     },
   },
+  modifiers: {
+    error: {
+      error: {
+        borderColor: brand.error.base,
+        boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.error.base}`,
+        '&:has(:hover, :disabled, :focus-visible), &:is(.hover, .disabled, .focus)': {
+          borderColor: brand.error.base,
+        },
+        '&:has(:focus-visible:not([disabled])), &.focus': {
+          boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.error.base}, 0 0 0 2px ${
+            system.color.border.inverse
+          }, 0 0 0 4px ${brand.common.focusOutline}`,
+          outlineOffset: px2rem(2),
+        },
+      },
+      alert: {
+        borderColor: brand.alert.darkest,
+        boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.alert.base}`,
+        '&:has(:hover, .hover, :disabled, .disabled, :focus-visible:not([disabled])), .focus:not(:has([disabled]))':
+          {
+            borderColor: brand.alert.darkest,
+          },
+
+        '&:has(:focus-visible, .focus):not(:has([disabled]))': {
+          boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.alert.base},
+        0 0 0 2px ${system.color.border.inverse},
+        0 0 0 4px ${brand.common.focusOutline}`,
+        },
+        outlineOffset: px2rem(2),
+      },
+    },
+  },
 });
+
+/** @deprecated use `multiSelectInputStencil` instead. This will be removed in a future version. */
+export const multiSelectStencil = multiSelectInputStencil;
 
 export const useMultiSelectInput = composeHooks(
   createElemPropsHook(useMultiSelectModel)((model, ref) => {
@@ -128,7 +172,9 @@ export interface MultiSelectInputProps
       React.InputHTMLAttributes<HTMLInputElement>,
       'disabled' | 'className' | 'style' | 'aria-labelledby'
     >,
-    Pick<MultiSelectedItemProps, 'removeLabel'> {}
+    Pick<MultiSelectedItemProps, 'removeLabel'> {
+  error?: ErrorType;
+}
 
 export const MultiSelectInput = createSubcomponent(TextInput)({
   modelHook: useMultiSelectModel,
@@ -139,17 +185,17 @@ export const MultiSelectInput = createSubcomponent(TextInput)({
       className,
       cs,
       style,
+      error,
       'aria-labelledby': ariaLabelledBy,
       removeLabel,
       disabled,
       formInputProps,
       ...elemProps
     },
-    Element,
-    model
+    Element
   ) => {
     return (
-      <div {...handleCsProp({className, cs, style}, multiSelectStencil({}))}>
+      <div {...handleCsProp({className, cs, style}, multiSelectInputStencil({error}))}>
         <InputGroup>
           <InputGroup.Input data-part="form-input" {...formInputProps} />
           <InputGroup.Input
@@ -158,6 +204,7 @@ export const MultiSelectInput = createSubcomponent(TextInput)({
             aria-labelledby={ariaLabelledBy}
             readOnly
             disabled={disabled}
+            error={error}
             {...elemProps}
           />
           <InputGroup.InnerEnd pointerEvents="none">
@@ -184,13 +231,13 @@ export const MultiSelectSearchInput = createSubcomponent(TextInput)({
       formInputProps,
       ref,
       disabled,
+      error,
       ...elemProps
     },
-    Element,
-    model
+    Element
   ) => {
     return (
-      <div {...handleCsProp({className, cs, style}, multiSelectStencil({}))}>
+      <div {...handleCsProp({className, cs, style}, multiSelectInputStencil({}))}>
         <InputGroup>
           <InputGroup.InnerStart pointerEvents="none" width={system.space.x8}>
             <SystemIcon icon={searchIcon} size={system.space.x4} />
@@ -205,6 +252,7 @@ export const MultiSelectSearchInput = createSubcomponent(TextInput)({
             as={Element}
             aria-labelledby={ariaLabelledBy}
             disabled={disabled}
+            error={error}
             {...elemProps}
           />
           <InputGroup.InnerEnd width={system.space.x4}>
