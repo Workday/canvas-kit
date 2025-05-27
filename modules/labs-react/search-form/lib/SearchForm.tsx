@@ -11,11 +11,14 @@ import {Combobox} from '@workday/canvas-kit-labs-react/combobox';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {searchThemes, SearchTheme, SearchThemeAttributes} from './themes';
 import chroma from 'chroma-js';
-import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {CSProps, calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
-export interface SearchFormProps extends GrowthBehavior, React.FormHTMLAttributes<HTMLFormElement> {
+export interface SearchFormProps
+  extends GrowthBehavior,
+    React.FormHTMLAttributes<HTMLFormElement>,
+    CSProps {
   /**
    * The function called when the SearchForm form is submitted. The current input value is passed to the callback function.
    */
@@ -105,6 +108,9 @@ export interface SearchFormState {
 }
 
 function getInputColors(theme: SearchThemeAttributes, isFocused?: boolean) {
+  console.log('theme.backgroundFocus', theme.backgroundFocus);
+  console.log(isFocused);
+  console.log('theme background', theme.background);
   return {
     background: isFocused && theme.backgroundFocus ? theme.backgroundFocus : theme.background,
     backgroundHover: theme.backgroundHover,
@@ -119,7 +125,7 @@ function getInputColors(theme: SearchThemeAttributes, isFocused?: boolean) {
 
 const formCollapsedBackground = '#fff';
 
-const searchFormStencil = createStencil({
+export const searchFormStencil = createStencil({
   vars: {
     minWidth: '',
     maxWidth: '',
@@ -142,6 +148,7 @@ const searchFormStencil = createStencil({
     submitSearchIcon: 'search-form-submit-search-icon',
     openSearchIcon: 'search-form-open-search-icon',
     searchInput: 'search-form-input',
+    closeButtonPart: 'search-form-close-button',
   },
   base: ({
     minWidth,
@@ -219,11 +226,11 @@ const searchFormStencil = createStencil({
       minWidth,
       paddingInlineStart: calc.add(system.space.x10, system.space.x2),
       paddingInlineEnd: system.space.x10,
-      backgroundColor: background,
+      backgroundColor: cssVar(background, system.color.bg.alt.soft),
       height: cssVar(height, system.space.x10),
       fontSize: system.fontSize.subtext.large,
       boxShadow: boxShadow,
-      color: color,
+      color: cssVar(color, system.color.text.default),
       border: 'none',
       WebkitAppearance: 'none',
       transition: 'background-color 120ms, color 120ms, box-shadow 200ms, border-color 200ms',
@@ -233,22 +240,25 @@ const searchFormStencil = createStencil({
         display: 'none',
       },
       '&::placeholder': {
-        color: placeholderColor,
+        color: cssVar(placeholderColor, system.color.text.hint),
       },
       '&:placeholder-shown': {
         textOverflow: 'ellipsis',
       },
 
       '&:hover': {
-        backgroundColor: cssVar(backgroundHover, background),
+        backgroundColor: cssVar(backgroundHover, cssVar(background, system.color.bg.alt.default)),
       },
 
       '&:is(:focus-visible, .focus):where(:not([disabled]))': {
-        background: backgroundFocus,
+        background: cssVar(backgroundFocus, system.color.bg.alt.soft),
         color: colorFocus,
         borderColor: brand.common.focusOutline,
         outline: `${px2rem(2)} solid transparent`,
-        boxShadow: cssVar(boxShadowFocus, `inset 0 0 0 ${px2rem(1)} ${brand.common.focusOutline}`),
+        boxShadow: cssVar(
+          boxShadowFocus,
+          `0 0 0 0px ${base.frenchVanilla100}, 0 0 0 2px ${brand.common.focusOutline}`
+        ),
         '::placeholder': {
           color: placeholderColorFocus,
         },
@@ -336,7 +346,6 @@ const searchFormStencil = createStencil({
         [searchInputPart]: {
           background: system.color.bg.alt.soft,
           color: system.color.text.default,
-          // boxShadow: 'none',
 
           '::placeholder': {
             color: system.color.text.hint,
@@ -443,16 +452,20 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
   private getTheme = () => {
     let theme: SearchThemeAttributes;
     if (typeof this.props.searchTheme === 'string') {
+      console.log('theme is string');
       theme = searchThemes[this.props.searchTheme];
     } else if (this.props.searchTheme) {
       theme = this.props.searchTheme;
     } else {
       theme = searchThemes[SearchTheme.Light];
+      console.log('this.props.searchThem', theme);
     }
+    console.log(theme);
     return theme;
   };
 
   private getThemeColors = (): ReturnType<typeof getInputColors> => {
+    console.log('theme', this.getTheme());
     const theme =
       this.props.isCollapsed && this.state.showForm
         ? searchThemes[SearchTheme.Transparent]
@@ -465,7 +478,9 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
     if (this.props.isCollapsed && this.state.showForm) {
       background = formCollapsedBackground;
     }
+    // console.log('background', background);
     const isDarkBackground = chroma(background as string).get('lab.l') < 70;
+    // console.log(chroma(background as string).get('lab.l'));
     return isDarkBackground ? 'inverse' : undefined;
   };
 
@@ -546,12 +561,12 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
       onInputChange,
       autocompleteItems,
       initialValue,
-      searchTheme = SearchTheme.Light,
+      searchTheme,
       rightAlign,
       allowEmptyStringSearch = false,
       ...elemProps
     } = this.props;
-
+    console.log('search theme>>>', searchTheme);
     return (
       <form
         role="search"
@@ -622,6 +637,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
             icon={xIcon}
             aria-label={closeButtonAriaLabel}
             onClick={this.closeCollapsedSearch}
+            id="foo"
             {...searchFormStencil.parts.closeButton}
           />
         </div>
