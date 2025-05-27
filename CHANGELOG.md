@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.0.5](https://github.com/Workday/canvas-kit/releases/tag/v13.0.5) (2025-05-27)
+
+### Components
+
+- fix(multi-select): Forward the error prop to the MultiSelect Input ([#3309](https://github.com/Workday/canvas-kit/pull/3309)) ([@NicholasBoll](https://github.com/NicholasBoll), [@mannycarrera4](https://github.com/mannycarrera4))
+
+
 ## [v12.6.11](https://github.com/Workday/canvas-kit/releases/tag/v12.6.11) (2025-05-27)
 
 ### Components
