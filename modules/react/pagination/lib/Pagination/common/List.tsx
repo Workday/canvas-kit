@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 import {StyledType, styled, createComponent} from '@workday/canvas-kit-react/common';
 

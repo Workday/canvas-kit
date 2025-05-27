@@ -16,7 +16,7 @@ export interface HyperlinkProps extends CSProps {
   children?: React.ReactNode;
 }
 
-const hyperlinkStencil = createStencil({
+export const hyperlinkStencil = createStencil({
   base: {
     fontFamily: system.fontFamily.default,
     textDecoration: 'underline',

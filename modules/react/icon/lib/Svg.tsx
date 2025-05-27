@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {CanvasIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {validateIconType} from './utils';
 import {createComponent} from '@workday/canvas-kit-react/common';
