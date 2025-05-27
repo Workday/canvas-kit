@@ -16,8 +16,8 @@ yarn add @workday/canvas-kit-react
 
 ## Base
 
-The `Base` component is a low level component that automatically handles the [`cs`](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--docs#cs-prop) prop for you and style merging via [`handleCsProp`](https://workday.github.io/canvas-kit/?path=/docs/styling-merging-styles--docs#handlecsprop).
-As we transition away from runtime styles, you should use `Base` when styling an element where you want more control over the styles and a Canvas Kit component doesn't quite fit your needs.
+The `Base` component is a low level component that supports the [`cs`](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--docs#cs-prop) prop and style merging via [`handleCsProp`](https://workday.github.io/canvas-kit/?path=/docs/styling-merging-styles--docs#handlecsprop).
+As we transition away from runtime styles, you should use `Base` to style an element if a Canvas Kit component doesn't fit your needs.
 
 ### Usage
 
@@ -61,39 +61,38 @@ const AppHeader = ({children, headerText, other, props}) => {
 
 ### Transitioning from `Box` and `Flex` to `Base`
 
-> `Box` and `Flex` where great, why are you moving away from them?
+> `Box` and `Flex` are great. Why are you moving away from them?
 
 To be more specific, _style props_ are going away. And because `Box`, `Flex`, and `Grid` primarily exist to expose style props, they will almost certainly be removed as well.
 
-The two main reasons for this change:
+There are two main reasons for this change:
 - Emotion’s runtime for dynamic styling is very expensive, and with the improvements to CSS, we can no longer justify that cost.
 - Moving to static styling allows us to export our styles to Canvas Kit CSS so teams who do not use React can have 1:1 styling with what’s available in Canvas Kit React.
 
-**Before, using Flex**
+####  Before (with Flex)
 
 ```tsx
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {system} from '@workday/canvas-tokens-web';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
-//...
 
-<Flex flexDirection='row' gap={system.space.x2}>
+<Flex flexDirection="row" gap={system.space.x2}>
   <PrimaryButton>Button 1</PrimaryButton>
   <PrimaryButton>Button 2</PrimaryButton>
 </Flex>
 ```
 
-**After, using Base**
+#### After (with Base)
 
 ```tsx
 import {Base} from '@workday/canvas-kit-react/common';
 import {system} from '@workday/canvas-tokens-web';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
+
 const containerStyles = createStyles({
-	display: 'inline-flex',
-	gap: system.space.x2,
+  display: 'inline-flex',
+  gap: system.space.x2,
 });
-//...
 
 <Base cs={containerStyles}>
   <PrimaryButton>Button 1</PrimaryButton>
