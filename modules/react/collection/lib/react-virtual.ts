@@ -5,6 +5,7 @@ import React, {RefObject} from 'react';
 import {
   useVirtualizer,
   defaultRangeExtractor,
+  virtualItem,
   type VirtualItem as TanStackVirtualItem,
   type VirtualizerOptions,
   type Virtualizer,
@@ -178,7 +179,7 @@ const useVirtual = <T extends Element = HTMLDivElement>(options: Options<T>): Us
   const virtualizerOptions = {
     count,
     getScrollElement,
-    estimateSize: options.estimateSize || (() => 50), // Required by TanStack
+    estimateSize: options.estimateSize, // Required by TanStack
     overscan: options.overscan,
     horizontal: options.horizontal,
     scrollPaddingStart: options.paddingStart,
@@ -199,18 +200,23 @@ const useVirtual = <T extends Element = HTMLDivElement>(options: Options<T>): Us
   // Transform TanStack virtual items to Canvas Kit format
   const virtualItems: VirtualItem[] = virtualizer
     .getVirtualItems()
-    .map((item: TanStackVirtualItem) => ({
-      key: options.keyExtractor ? options.keyExtractor(item.index) : item.index,
-      index: item.index,
-      start: item.start,
-      end: item.end,
-      size: item.size,
-      measureRef: (el: HTMLElement | null) => {
-        if (el) {
-          virtualizer.measureElement(el);
-        }
-      },
-    }));
+    .map((item: TanStackVirtualItem) => {
+      console.log('estimate size', virtualizerOptions.estimateSize);
+      return {
+        key: options.keyExtractor ? options.keyExtractor(item.index) : item.index,
+        index: item.index,
+        start: item.start,
+        end: item.end,
+        size: item.size,
+        measureRef: (el: HTMLElement | null) => {
+          if (el) {
+            const element = el;
+            console.log('element', el);
+            virtualizer.measureElement(element);
+          }
+        },
+      };
+    });
 
   return {
     virtualItems,
