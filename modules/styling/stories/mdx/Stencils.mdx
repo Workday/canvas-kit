@@ -1,18 +1,25 @@
-import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
 
 import {CreateStencil} from './examples/CreateStencil';
 
-<Meta title="Styling/Stencils" />
+<Meta title="Styling/Getting Started/Stencils" />
 
 # Stencils
 
 Stencils are a reusable function that returns `style` and `className` props in an object. A Stencil
-should apply to a single element. If your component has nested elements, you can youse `parts` to targer those elements in the Stencil. If your component is a compound
-component, a stencil should be created for each subcomponet. If your component is a config
-component, a stencil can have nested styles.
+should apply to a single element. If your component has nested elements, you can youse `parts` to
+targer those elements in the Stencil. If your component is a compound component, a stencil should be
+created for each subcomponent. If your component is a config component, a stencil can have nested
+styles.
 
-## When to use a Stencil
+## Basic Example
+
+<ExampleCodeBlock code={CreateStencil} />
+
+## When to Use `createStencil`
+
 We created Stencils as the reusable primitive of components. Stencils provide:
+
 - `vars`: CSS variables for dynamic properties
 - `base`: base styles to any component
 - `modifier`: modifiers like “size = small,medium,large” or “color=red,blue,etc”
@@ -20,10 +27,6 @@ We created Stencils as the reusable primitive of components. Stencils provide:
 - `compound`: compound modifiers - styles that match multiple modifiers
 
 Use a Stencil when building reusable components that have dynamic styles and properties.
-
-<SymbolDoc name="createStencil" />
-
-<ExampleCodeBlock code={CreateStencil} />
 
 ## Concepts
 
@@ -314,8 +317,8 @@ const buttonStencil = createStencil({
   },
   base({width}) {
     return {
-      width: width
-    }
+      width: width,
+    };
   },
   modifiers: {
     width: {
@@ -324,7 +327,7 @@ const buttonStencil = createStencil({
       },
     },
   },
-})
+});
 
 // `'zero'` is part of autocomplete
 myStencil({width: 'zero'});
@@ -433,4 +436,3 @@ elements that are not targets for style overrides.
 > should be used sparingly. Using component parts increases CSS specificity. A component part should
 > not be used on a nested component that has its own Stencil. The result will be any style
 > properties defined with a component part will have a higher specificity than other styles.
-

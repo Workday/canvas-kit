@@ -1,11 +1,11 @@
 import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
 import {StylingOverrides} from './examples/StylingOverrides';
 
-<Meta title="Styling/Merging Styles" />
+<Meta title="Styling/Guides/Merging Styles" />
 
-## Style Merging
+# Merging Styles
 
-### Styling Precedence
+## Styling Precedence
 
 In v9, we used `@emotion/styled` or `@emotion/react` for all styling which is a runtime styling
 solution. Starting in v10, we're migrating our styling to a more static solution using
@@ -114,7 +114,7 @@ by making all styles have the same specificity of `0-1-0` and inserting `base` s
 in `base`, a `modifier`, and a `compound` modifier, the `compound` modifier would win because it is
 the last defined. This should be the expected order.
 
-### `handleCsProp`
+## `handleCsProp`
 
 But what about when using components that use `@emotion/react` or `@emotion/styled`? Those libraries
 use a different approach. Instead of multiple class names, they use a single, merged class name.
@@ -143,9 +143,3 @@ const MyComponent = elemProps => {
 CSS class name appears on the `div`'s class list. Also the `cs` prop will add the appropriate styles
 to the element via a CSS class name. If your component needs to handle being passed a `className`,
 `style`, or `cs` prop, use `handleCsProp`.
-
-## Examples
-
-<SymbolDoc name="handleCsProp" />
-
-<SymbolDoc name="mergeStyles" />
