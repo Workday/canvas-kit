@@ -43,7 +43,7 @@ export const parameters = {
         prefix('guides-getting-started', '1'),
         prefix('styling-', '2'),
         prefix('styling-getting-started', '1'),
-        prefix('styling-getting-started-installation', '1'),
+        prefix('styling-getting-started-overview', '1'),
         prefix('styling-getting-started-create-styles', '2'),
         prefix('features-', '3'),
         prefix('tokens-', '4'),

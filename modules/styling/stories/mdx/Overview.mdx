@@ -1,0 +1,245 @@
+<Meta title="Styling/Getting Started/Overview" />
+
+# Canvas Kit Styling
+
+## Introduction
+
+Canvas Kit styling is a custom CSS-in-JS solution that provides both a runtime for development and a
+static parsing process for build time. This system offers several key benefits:
+
+- TypeScript autocomplete for enhanced developer experience
+- Low runtime overhead for better performance
+- Static CSS compilation for optimized builds
+- Dynamic styling with CSS Variables for flexible design
+
+The motivation behind this custom styling solution stems from the need to move beyond IE11 support
+and implement performance improvements using static styling methods. For more details, refer to the
+[Why Canvas Kit Styling](https://workday.github.io/canvas-kit/?path=/docs/styling-why-canvas-styling--docs)
+section.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-styling
+```
+
+## Usage
+
+```tsx
+import React from 'react';
+import {createRoot} from 'react-dom/client';
+
+import {createStyles} from '@workday/canvas-kit-styling';
+
+const myStyles = createStyles({
+  backgroundColor: 'red',
+}); // returns the CSS class name created for this style
+
+myStyles; // something like "css-{hash}"
+
+const domNode = document.getElementById('root');
+const root = createRoot(domNode);
+
+root.render(<div className={myStyles}>Hello!</div>);
+```
+
+## Development
+
+Canvas Kit Styling comes with a runtime that doesn't need anything special for developement. The
+runtime uses `@emotion/css` to include your styles on the page.
+
+## Production
+
+If you wish to use the static compilation, you must use the `@workday/canvas-kit-styling-transform`
+package. Add the following to your project's `tsconfig.json` file:
+
+```json
+{
+  "compilerOptions": {
+    // other options
+    "plugins": [
+      {
+        "transform": "@workday/canvas-kit-styling-transform",
+        "prefix": "css",
+        "fallbackFiles": [""]
+      }
+    ]
+  }
+}
+```
+
+This adds a list of plugins to use when transforming TypeScript files into JavaScript files. The
+[ts-patch](https://www.npmjs.com/package/ts-patch) projects uses the `plugins` when running
+transforms.
+
+### Webpack
+
+You will need to transform TypeScript files using the `ts-patch` which is the same as the TypeScript
+tanspiler except it uses TypeScript's
+[transform API](https://levelup.gitconnected.com/writing-a-custom-typescript-ast-transformer-731e2b0b66e6)
+to transform code during compilation.
+
+In your webpack config, you add the following:
+
+```js
+{
+  rules: [
+    //...
+    {
+      test: /.\.tsx?$/,
+      loaders: [
+        // ts-loader
+        {
+          loader: require.resolve('ts-loader'),
+          options: {
+            compiler: 'ts-patch/compiler',
+          },
+        },
+        // OR awesome-typescript-loader
+        {
+          loader: require.resolve('awesome-typescript-loader'),
+        },
+      ],
+    },
+  ];
+}
+```
+
+## Core Styling Approaches for Static Styling
+
+### `cs` Prop
+
+The `cs` prop takes in a single, or an array of values that are created by the `cs` function, a
+string representing a CSS class name, or the return of the `createVars` function. It merges
+everything together and applies `className` and `style` attributes to a React element. Most of our
+components extend the `cs` prop so that you can statically apply styles to them.
+
+> **Important**: While the `cs` prop accepts a style object, **this will not** be considered
+> statically styling an element and you will lose the performance benefits.
+
+```tsx
+import {system} from '@workday/canvas-tokens-webs';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
+
+const styles = createStyles({color: system.color.static.red.default});
+
+function MyComponent() {
+  return <PrimaryButton cs={styles}>Text</PrimaryButton>;
+}
+```
+
+### `createStyles`
+
+The primary utility function is the `createStyles` function. It makes a call to the `css` function
+from `@emotion/css`. Emotion still does most of the heavy lifting by handling the serialization,
+hashing, caching, and style injection.
+
+#### Usage Example
+
+```tsx
+// Bad example (inside render function)
+import {system} from '@workday/canvas-tokens-webs';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
+
+function MyComponent() {
+  const styles = createStyles({color: system.color.static.red.default}); // Don't do this
+  return <PrimaryButton cs={styles}>Text</PrimaryButton>;
+}
+
+// Good example (outside render function)
+import {system} from '@workday/canvas-tokens-webs';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
+
+const styles = createStyles({color: system.color.static.red.default});
+
+function MyComponent() {
+  return <PrimaryButton cs={styles}>Text</PrimaryButton>;
+}
+```
+
+> **Note:** Most of our components support using the `cs` prop to apply the static styles. It merges
+> everything together and applies `className` and `style` attributes to a React element.
+
+#### Performance Benefits
+
+`createStyles` is performant because:
+
+- Styles are statically evaluated when styles are defined outside the render function
+- No new StyleSheets are injected during render
+- It works well with the browser's selector cache
+
+#### When to Use `createStyles`
+
+`createStyles` is a great way to generate static styles when styling our components that don't rely
+on dynamic styles. Use `createStyles` if you want to create re useable styles or need to apply
+simple style overrides to our components.
+
+### `createStencil`
+
+`createStencil` is a function for creating reusable, complex component styling systems. It manages
+`base` styles, `parts`, `modifiers`, `variables`, and `compound` modifiers. Most of our components
+also export their own Stencil that might expose CSS variables in order to modify the component.
+
+#### Usage Example
+
+In the example below, we leverage `parts`, `vars`, `base` and `modifiers` to create a reusable
+`Card` component. The Stencil allows us to dynamic style the component based on the props.
+
+```tsx
+import {createStencil}from '@workday/canvas-kit-styling';
+import {Card} from '@workday/canvas-kit-react/card';
+import {system} from '@workday/canvas-tokens-webs';
+
+const themedCardStencil = createStencil({
+  vars: {
+   // Create CSS variables for the color of the header
+    headerColor: ''
+  },
+  parts: {
+   // Allows for styling a sub element of the component that may not be exposed through the API
+    header: 'themed-card-header'
+  }
+  base: ({headerPart, headerColor}) => ({
+    padding: system.space.x4,
+    boxShadow: system.depth[2],
+    backgroundColor: system.color.bg.default,
+    color: system.color.text.default,
+    // Targets the header part via [data-part="themed-card-header"]"]
+    [headerPart]: {
+      color: headerColor
+    }
+  }),
+  modifiers: {
+    isDarkTheme: {
+    // If the prop `isDarkTheme` is true, style the component and it's parts
+      true: ({headerPart}) => ({
+        backgroundColor: system.color.bg.contrast.default,
+        color: system.color.text.inverse
+        [headerPart]: {
+          color: system.color.text.inverse
+        }
+      })
+    }
+  }
+})
+
+const ThemedCard = ({isDarkTheme, headerColor, elemProps}) => {
+  return (
+    /* Use the `cs` prop to apply the stencil and pass it the dynamic properties it needs to style accordingly */
+    <Card cs={themedCardStencil({isDarkTheme, headerColor})} {...elemProps}>
+	/* Apply the data part selector to the header */
+      <Card.Heading {...themedCardStencil.parts.header}>Canvas Supreme</Card.Heading>
+      <Card.Body>
+        Our house special supreme pizza includes pepperoni, sausage, bell peppers, mushrooms,
+        onions, and oregano.
+      </Card.Body>
+    </Card>
+  );
+};
+```
+
+#### When to Use `createStencil`
+
+You should use `createStencil` when styling our components that have complex styles and dynamic
+properties. For a more in depth overview, please view our [Stencil](/docs/styling-stencils--docs)
+docs.
