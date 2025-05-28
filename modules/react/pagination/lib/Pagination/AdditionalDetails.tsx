@@ -1,14 +1,10 @@
 import * as React from 'react';
-import {type, space, typeColors} from '@workday/canvas-kit-react/tokens';
-import {
-  accessibleHide,
-  styled,
-  StyledType,
-  createComponent,
-} from '@workday/canvas-kit-react/common';
+import {accessibleHide, createComponent} from '@workday/canvas-kit-react/common';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {system} from '@workday/canvas-tokens-web';
 
 import {PaginationModel} from './types';
-import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 import {useLiveRegion} from './common/useLiveRegion';
 import {PaginationContext} from './usePaginationModel';
 
@@ -18,19 +14,21 @@ export interface AdditionalDetailsProps extends Omit<FlexProps, 'children'> {
   shouldHideDetails?: boolean;
 }
 
-const StyledAdditionalDetails = styled(Flex)<
-  StyledType & Pick<AdditionalDetailsProps, 'shouldHideDetails'>
->(({shouldHideDetails}) => {
-  if (shouldHideDetails) {
-    return {
-      ...accessibleHide,
-      marginTop: space.zero,
-    };
-  } else {
-    return {
-      marginTop: space.xs,
-    };
-  }
+export const paginationAdditionalDetailsStencil = createStencil({
+  base: {
+    display: 'flex',
+    ...system.type.subtext.medium,
+    color: system.color.text.hint,
+    marginBlockStart: system.space.x3,
+  },
+  modifiers: {
+    shouldHideDetails: {
+      true: {
+        ...accessibleHide,
+        marginBlockStart: system.space.zero,
+      },
+    },
+  },
 });
 
 export const AdditionalDetails = createComponent('div')({
@@ -44,16 +42,15 @@ export const AdditionalDetails = createComponent('div')({
     const liveRegionProps = useLiveRegion({shouldAnnounceToScreenReader});
 
     return (
-      <StyledAdditionalDetails
+      <Element
         ref={ref}
-        as={Element}
-        {...type.levels.subtext.medium}
-        color={typeColors.hint}
-        {...liveRegionProps}
-        {...elemProps}
+        {...mergeStyles(
+          {...liveRegionProps, ...elemProps},
+          paginationAdditionalDetailsStencil({shouldHideDetails: elemProps.shouldHideDetails})
+        )}
       >
         {typeof children === 'function' ? children(model) : children}
-      </StyledAdditionalDetails>
+      </Element>
     );
   },
 });
