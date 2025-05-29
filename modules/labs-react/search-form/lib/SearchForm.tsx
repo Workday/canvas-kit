@@ -108,9 +108,6 @@ export interface SearchFormState {
 }
 
 function getInputColors(theme: SearchThemeAttributes, isFocused?: boolean) {
-  console.log('theme.backgroundFocus', theme.backgroundFocus);
-  console.log(isFocused);
-  console.log('theme background', theme.background);
   return {
     background: isFocused && theme.backgroundFocus ? theme.backgroundFocus : theme.background,
     backgroundHover: theme.backgroundHover,
@@ -452,20 +449,17 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
   private getTheme = () => {
     let theme: SearchThemeAttributes;
     if (typeof this.props.searchTheme === 'string') {
-      console.log('theme is string');
       theme = searchThemes[this.props.searchTheme];
     } else if (this.props.searchTheme) {
       theme = this.props.searchTheme;
     } else {
       theme = searchThemes[SearchTheme.Light];
-      console.log('this.props.searchThem', theme);
     }
-    console.log(theme);
+
     return theme;
   };
 
   private getThemeColors = (): ReturnType<typeof getInputColors> => {
-    console.log('theme', this.getTheme());
     const theme =
       this.props.isCollapsed && this.state.showForm
         ? searchThemes[SearchTheme.Transparent]
@@ -478,9 +472,9 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
     if (this.props.isCollapsed && this.state.showForm) {
       background = formCollapsedBackground;
     }
-    // console.log('background', background);
+
     const isDarkBackground = chroma(background as string).get('lab.l') < 70;
-    // console.log(chroma(background as string).get('lab.l'));
+
     return isDarkBackground ? 'inverse' : undefined;
   };
 
@@ -566,7 +560,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
       allowEmptyStringSearch = false,
       ...elemProps
     } = this.props;
-    console.log('search theme>>>', searchTheme);
+
     return (
       <form
         role="search"
