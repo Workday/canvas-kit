@@ -22,16 +22,16 @@ The CSS will look like this:
 
 ```css
 .css-m39zwu {
-  width: 100px;
-  height: 100px;
-  background-color: gray;
+  background: var(--cnvs-sys-color-bg-primary-default);
+  color: var(--cnvs-sys-color-text-inverse);
 }
 ```
 
 <ExampleCodeBlock code={CreateStyles} />
 
-We're using `className` for simplicity here. Most components will use the `cs` prop instead for more
-versatility.
+We're using `className` for simplicity here.
+
+> **Note:** The `createStyles` function handles wrapping our Tokens in `var(--${token})`.
 
 ## When to Use `createStyles`
 
