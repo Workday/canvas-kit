@@ -5,7 +5,6 @@ import React, {RefObject} from 'react';
 import {
   useVirtualizer,
   defaultRangeExtractor,
-  virtualItem,
   type VirtualItem as TanStackVirtualItem,
   type VirtualizerOptions,
   type Virtualizer,
