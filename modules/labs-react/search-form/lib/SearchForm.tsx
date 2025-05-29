@@ -198,7 +198,7 @@ export const searchFormStencil = createStencil({
     [searchFieldPart]: {
       width: '100%',
       height: cssVar(height, system.space.x10),
-      maxWidth,
+      maxWidth: cssVar(maxWidth, px2rem(480)),
       marginBottom: 0,
       display: 'inline-block',
       '> div': {
