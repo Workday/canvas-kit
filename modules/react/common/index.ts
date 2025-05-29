@@ -1,4 +1,3 @@
-export * from './lib/Base';
 export * from './lib/parts';
 export * from './lib/types';
 export * from './lib/genericStyles';
