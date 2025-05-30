@@ -200,7 +200,6 @@ const useVirtual = <T extends Element = HTMLDivElement>(options: Options<T>): Us
   const virtualItems: VirtualItem[] = virtualizer
     .getVirtualItems()
     .map((item: TanStackVirtualItem) => {
-      console.log('estimate size', virtualizerOptions.estimateSize);
       return {
         key: options.keyExtractor ? options.keyExtractor(item.index) : item.index,
         index: item.index,
@@ -210,7 +209,7 @@ const useVirtual = <T extends Element = HTMLDivElement>(options: Options<T>): Us
         measureRef: (el: HTMLElement | null) => {
           if (el) {
             const element = el;
-            console.log('element', el);
+
             virtualizer.measureElement(element);
           }
         },
