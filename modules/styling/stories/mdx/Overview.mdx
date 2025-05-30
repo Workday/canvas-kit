@@ -17,6 +17,15 @@ and implement performance improvements using static styling methods. For more de
 [Why Canvas Kit Styling](https://workday.github.io/canvas-kit/?path=/docs/styling-why-canvas-styling--docs)
 section.
 
+## Overview
+
+The Canvas Kit styling system consists of two main packages:
+
+- `@workday/canvas-kit-styling` - Core styling utilities for runtime use
+- `@workday/canvas-kit-styling-transform` - Build-time optimization tools
+
+These packages work together to provide a CSS-in-JS experience during development while enabling optimized static CSS in production.
+
 ## Installation
 
 ```sh
@@ -115,7 +124,7 @@ everything together and applies `className` and `style` attributes to a React el
 components extend the `cs` prop so that you can statically apply styles to them.
 
 > **Important**: While the `cs` prop accepts a style object, **this will not** be considered
-> statically styling an element and you will lose the performance benefits.
+> statically styling an element and you will lose the performance benefits. We plan on providing a babel plugin to extract these styles statically in a future version.
 
 ```tsx
 import {system} from '@workday/canvas-tokens-webs';
@@ -133,8 +142,6 @@ function MyComponent() {
 The primary utility function is the `createStyles` function. It makes a call to the `css` function
 from `@emotion/css`. Emotion still does most of the heavy lifting by handling the serialization,
 hashing, caching, and style injection.
-
-#### Usage Example
 
 ```tsx
 // Bad example (inside render function)
@@ -157,33 +164,16 @@ function MyComponent() {
 }
 ```
 
-> **Note:** Most of our components support using the `cs` prop to apply the static styles. It merges
-> everything together and applies `className` and `style` attributes to a React element.
+Most of our components support using the `cs` prop to apply the static styles. It merges
+everything together and applies `className` and `style` attributes to a React element.
 
-#### Performance Benefits
-
-`createStyles` is performant because:
-
-- Styles are statically evaluated when styles are defined outside the render function
-- No new StyleSheets are injected during render
-- It works well with the browser's selector cache
-
-#### When to Use `createStyles`
-
-`createStyles` is a great way to generate static styles when styling our components that don't rely
-on dynamic styles. Use `createStyles` if you want to create re useable styles or need to apply
-simple style overrides to our components.
-
-> **Note:** For a more in depth overview, please view our [CreateStyles](/docs/styling-create-styles--docs)
-> docs.
+> **Note:** For a more in depth overview, please view our [CreateStyles](https://workday.github.io/canvas-kit/?path=/docs/styling-getting-started-create-styles--docs) docs.
 
 ### `createStencil`
 
 `createStencil` is a function for creating reusable, complex component styling systems. It manages
 `base` styles, `parts`, `modifiers`, `variables`, and `compound` modifiers. Most of our components
 also export their own Stencil that might expose CSS variables in order to modify the component.
-
-#### Usage Example
 
 In the example below, we leverage `parts`, `vars`, `base` and `modifiers` to create a reusable
 `Card` component. The Stencil allows us to dynamic style the component based on the props.
@@ -201,7 +191,7 @@ const themedCardStencil = createStencil({
   parts: {
    // Allows for styling a sub element of the component that may not be exposed through the API
     header: 'themed-card-header'
-  }
+  },
   base: ({headerPart, headerColor}) => ({
     padding: system.space.x4,
     boxShadow: system.depth[2],
@@ -241,10 +231,5 @@ const ThemedCard = ({isDarkTheme, headerColor, elemProps}) => {
 };
 ```
 
-#### When to Use `createStencil`
-
-You should use `createStencil` when styling our components that have complex styles and dynamic
-properties.
-
-> **Note:** For a more in depth overview, please view our [Stencil](/docs/styling-stencils--docs)
+> **Note:** For a more in depth overview, please view our [Stencil](https://workday.github.io/canvas-kit/?path=/docs/styling-getting-started-stencils--docs)
 > docs.

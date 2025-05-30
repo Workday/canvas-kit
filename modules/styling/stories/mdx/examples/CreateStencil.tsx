@@ -1,74 +1,63 @@
-import React from 'react';
-
-import {createStencil, createStyles} from '@workday/canvas-kit-styling';
-import {ColorInput} from '@workday/canvas-kit-react/color-picker';
-import {FormField} from '@workday/canvas-kit-react/form-field';
-import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
-import {BodyText, LabelText} from '@workday/canvas-kit-react/text';
+import * as React from 'react';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {Card} from '@workday/canvas-kit-react/card';
 import {system} from '@workday/canvas-tokens-web';
+import {Switch} from '@workday/canvas-kit-react/switch';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 
-const buttonStencil = createStencil({
+const themedCardStencil = createStencil({
   vars: {
-    labelColor: 'red',
+    // Create CSS variables for the color of the header
+    headerColor: '',
   },
-  base: ({labelColor}) => ({
-    padding: 10,
-    color: labelColor,
+  parts: {
+    // Allows for styling a sub element of the component that may not be exposed through the API
+    header: 'themed-card-header',
+    body: 'themed-card-body',
+  },
+  base: ({headerPart, headerColor}) => ({
+    padding: system.space.x4,
+    boxShadow: system.depth[2],
+    backgroundColor: system.color.bg.default,
+    color: system.color.text.default,
+    // Targets the header part via [data-part="themed-card-header"]"]
+    [headerPart]: {
+      color: headerColor,
+    },
   }),
   modifiers: {
-    size: {
-      large: {
-        padding: 30,
-      },
-      small: {
-        padding: 5,
-      },
+    isDarkTheme: {
+      // If the prop `isDarkTheme` is true, style the component and it's parts
+      true: ({headerPart, bodyPart}) => ({
+        backgroundColor: system.color.bg.contrast.default,
+        color: system.color.text.inverse,
+        [`${headerPart}, ${bodyPart}`]: {
+          color: system.color.text.inverse,
+        },
+      }),
     },
   },
 });
 
-const labelStencil = createStencil({
-  base: {
-    ...system.type.subtext.large,
-    color: system.color.text.default,
-    fontWeight: system.fontWeight.medium,
-  },
-});
-
-export const CreateStencil = () => {
-  const [value, setValue] = React.useState('ff0000');
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.currentTarget.value);
+export const CreateStencil = ({isDarkTheme, headerColor, elemProps}) => {
+  const [darkTheme, setIsDarkTheme] = React.useState(false);
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsDarkTheme(event.target.checked);
   };
-  const [size, setSize] = React.useState<'large' | 'small'>('small');
-
   return (
-    <>
+    <div>
       <FormField>
-        <FormField.Label>Set Button Label Color</FormField.Label>
-        <FormField.Input as={ColorInput} value={value} onChange={onChange} />
+        <FormField.Label>Toggle Dark Theme</FormField.Label>
+        <FormField.Input as={Switch} onChange={handleChange} checked={darkTheme} />
       </FormField>
-      <div>
-        <div {...labelStencil()}>Choose Button Size</div>
-        <SegmentedControl onSelect={data => setSize(data.id)}>
-          <SegmentedControl.List aria-label="Set Size">
-            <SegmentedControl.Item data-id="small" value="small">
-              Small
-            </SegmentedControl.Item>
-            <SegmentedControl.Item data-id="large" value="large">
-              Large
-            </SegmentedControl.Item>
-          </SegmentedControl.List>
-        </SegmentedControl>
-      </div>
-      <button
-        {...buttonStencil({
-          size,
-          labelColor: `#${value}`,
-        })}
-      >
-        Button
-      </button>
-    </>
+
+      <Card cs={themedCardStencil({isDarkTheme: darkTheme, headerColor})} {...elemProps}>
+        <Card.Heading {...themedCardStencil.parts.header}>Canvas Supreme</Card.Heading>
+        <Card.Body {...themedCardStencil.parts.body}>
+          Our house special supreme pizza includes pepperoni, sausage, bell peppers, mushrooms,
+          onions, and oregano.
+        </Card.Body>
+      </Card>
+    </div>
   );
 };
