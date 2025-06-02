@@ -3,7 +3,7 @@ import React from 'react';
 import {Generic} from '@workday/canvas-kit-react/common';
 
 import {Item, useBaseListModel} from './useBaseListModel';
-import {VirtualItem} from './react-virtual';
+import {VirtualItem} from '@tanstack/react-virtual';
 
 export const ListRenderItemContext = React.createContext<{
   item?: Item<Generic>;
@@ -28,10 +28,11 @@ export function useListRenderItems<T>(
   model: ReturnType<typeof useBaseListModel>,
   children: ((item: Generic, index: number) => React.ReactNode) | React.ReactNode
 ): React.ReactNode {
+  console.log(model.state.UNSTABLE_virtual.getVirtualItems());
   const items =
     typeof children === 'function'
       ? model.state.isVirtualized
-        ? model.state.UNSTABLE_virtual.virtualItems.map(virtual => {
+        ? model.state.UNSTABLE_virtual.getVirtualItems().map(virtual => {
             const item = model.state.items[virtual.index];
             const child = children(item.value, virtual.index);
             return (

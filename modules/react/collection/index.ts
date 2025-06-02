@@ -36,17 +36,3 @@ export {
   getCursor,
   isCursor,
 } from './lib/useCursorListModel';
-export {
-  VirtualItem,
-  ScrollToOffsetOptions,
-  ScrollToIndexOptions,
-  useVirtual,
-  useVirtualizer,
-  defaultRangeExtractor,
-  type Options,
-  type Range,
-  type VirtualizerOptions,
-  type Virtualizer,
-  type TanStackVirtualItem,
-  type TanStackRange,
-} from './lib/react-virtual';
