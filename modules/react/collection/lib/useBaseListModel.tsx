@@ -167,9 +167,7 @@ export const useBaseListModel = createModelHook({
     overscan: 3, // overscan of 3 helps rapid navigation
   });
 
-  console.log('UNSTABLE_virtual', UNSTABLE_virtual);
 
-  // console.log('UNSTABLE_virtual', UNSTABLE_virtual..);
 
   // Force Typescript to recognize the `Generic` symbol
   const genericState: {items: Item<Generic>[]} = {
