@@ -1,3 +1,7 @@
+import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
+import {Hyperlink} from '@workday/canvas-kit-react/button';
+import {system} from '@workday/canvas-tokens-web'
+
 <Meta title="Styling/Getting Started/Overview" />
 
 # Canvas Kit Styling
@@ -119,7 +123,7 @@ For proper static styling there's two methods that you can use to apply styles.
 1. Using `createStyles` for simple object base styles.
 2. Using `createStencil` for dynamic styles and reusable components.
 
-Both approaches are intended to be used in tandem with the `cs` prop when applying styles our components.
+Both approaches are intended to be used in tandem with the `cs` prop when applying styles to our components.
 
 ### `cs` Prop
 
@@ -172,7 +176,13 @@ function MyComponent() {
 Most of our components support using the `cs` prop to apply the static styles. It merges
 everything together and applies `className` and `style` attributes to a React element.
 
-> **Note:** For a more in depth overview, please view our [CreateStyles](https://workday.github.io/canvas-kit/?path=/docs/styling-getting-started-create-styles--docs) docs.
+<InformationHighlight className="sb-unstyled" cs={{marginBlock: system.space.x4,}}>
+	<InformationHighlight.Icon />
+	<InformationHighlight.Heading>Information</InformationHighlight.Heading>
+	<InformationHighlight.Body>
+		For a more in depth overview, please view our <Hyperlink src="https://workday.github.io/canvas-kit/?path=/docs/styling-getting-started-create-styles--docs">Create Styles</Hyperlink> docs.
+	</InformationHighlight.Body>
+</InformationHighlight>
 
 ### `createStencil`
 
@@ -236,5 +246,10 @@ const ThemedCard = ({isDarkTheme, headerColor, elemProps}) => {
 };
 ```
 
-> **Note:** For a more in depth overview, please view our [Stencil](https://workday.github.io/canvas-kit/?path=/docs/styling-getting-started-stencils--docs)
-> docs.
+<InformationHighlight className="sb-unstyled" cs={{marginBlock: system.space.x4,}}>
+	<InformationHighlight.Icon />
+	<InformationHighlight.Heading>Information</InformationHighlight.Heading>
+	<InformationHighlight.Body>
+		For a more in depth overview, please view our <Hyperlink src="https://workday.github.io/canvas-kit/?path=/docs/styling-getting-started-stencils--docs">Create Stencil</Hyperlink> docs.
+	</InformationHighlight.Body>
+</InformationHighlight>

@@ -12,7 +12,7 @@ The `cs` prop takes in a single, or an array of values that are created by the `
 string representing a CSS class name, or the return of the `createVars` function. It merges
 everything together and applies `className` and `style` attributes to a React element. Most of our components extend the `cs` prop so that you can statically apply styles to them.
 
->**Important**: While the `cs` prop accepts a style object, **this will not** be considered statically styling an element and you will lose the performance benefits.
+>**Important**: While the `cs` prop accepts a style object, **this will not** be considered statically styling an element and you will lose the performance benefits. By default, our components extend the `cs` prop.
 
 ```tsx
 import {system} from '@workday/canvas-tokens-webs'
@@ -28,6 +28,8 @@ function MyComponent() {
 <SymbolDoc headingStart={2} name="handleCsProp" />
 
 <SymbolDoc headingStart={2} name="mergeStyles" />
+
+>**Note:** While we support `mergeStyles` we'd advise against using this in your components so that users can get the performance benefit of static styling using utilities like `createStyles` and `createStencil` in tandem with the `cs` prop.
 
 ## Styling Functions
 

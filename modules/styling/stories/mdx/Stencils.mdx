@@ -1,8 +1,10 @@
 import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
+import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
+import {system} from '@workday/canvas-tokens-web'
 
 import {CreateStencil} from './examples/CreateStencil';
 
-<Meta title="Styling/Getting Started/Stencils" />
+<Meta title="Styling/Getting Started/Create Stencils" />
 
 # Stencils
 
@@ -12,13 +14,6 @@ targer those elements in the Stencil. If your component is a compound component,
 created for each subcomponent. If your component is a config component, a stencil can have nested
 styles.
 
-## Basic Example
-In the example below, Stencils allow you to dynamically style elements or components based on properties.
-
-<ExampleCodeBlock code={CreateStencil} />
-
-## When to Use `createStencil`
-
 We created Stencils as the reusable primitive of components. Stencils provide:
 
 - `vars`: CSS variables for dynamic properties
@@ -26,6 +21,16 @@ We created Stencils as the reusable primitive of components. Stencils provide:
 - `modifier`: modifiers like “size = small,medium,large” or “color=red,blue,etc”
 - `parts`: matching sub-elements that are part of a component
 - `compound`: compound modifiers - styles that match multiple modifiers
+
+## Basic Example
+In the example below, Stencils allow you to dynamically style elements or components based on properties.
+
+<ExampleCodeBlock code={CreateStencil} />
+
+## When to Use `createStencil`
+- When you're styling parts of a component that rely on dynamic properties.
+- When you want to create a reusable component with dynamic styles.
+
 
 Use a Stencil when building reusable components that have dynamic styles and properties.
 
@@ -95,11 +100,17 @@ element.style {
 Variables are automatically added to the config of a Stencil. They share the same namespace as
 modifiers, so **do not have a modifier with the same name as a variable**.
 
-**Note:** Variables should be used sparingly. Style properties can be easily overridden without
+<InformationHighlight className="sb-unstyled" cs={{marginBlock: system.space.x4,}}>
+	<InformationHighlight.Icon />
+	<InformationHighlight.Heading>Note</InformationHighlight.Heading>
+	<InformationHighlight.Body>
+		Variables should be used sparingly. Style properties can be easily overridden without
 variables. Variables are useful if you want to expose changing properties regardless of selectors.
 For example, Buttons use variables for colors of all states (hover, active, focus, disabled, and
 nested icons). Without variables, overriding the focus color would require deeply nested selector
 overrides.
+	</InformationHighlight.Body>
+</InformationHighlight>
 
 #### Cascading Variables
 
@@ -112,8 +123,14 @@ where a component expects a parent component to set a CSS variable and that it s
 component. An example of this is the relationship between `SystemIcon` and `Button`. The `Button`
 components set the `SystemIcon` variables and they should cascade into the `SystemIcon` component.
 
-**Note:** Non-cascade variables _could_ be initialized. If you use uninitialized variables, be sure
+<InformationHighlight className="sb-unstyled" cs={{marginBlock: system.space.x4,}}>
+	<InformationHighlight.Icon />
+	<InformationHighlight.Heading>Note</InformationHighlight.Heading>
+	<InformationHighlight.Body>
+		Non-cascade variables _could_ be initialized. If you use uninitialized variables, be sure
 to use a fallback in your styles.
+	</InformationHighlight.Body>
+</InformationHighlight>
 
 ```tsx
 const myStencil = createStencil({
@@ -431,7 +448,15 @@ API. Consumers can also use the type safe Stencil to target that element to styl
 general rule, a Stencil maps to a component. Multiple Stencils per component usually means nested
 elements that are not targets for style overrides.
 
-> **Note:** While component parts are a way to give access to elements in order to style, they
-> should be used sparingly. Using component parts increases CSS specificity. A component part should
-> not be used on a nested component that has its own Stencil. The result will be any style
-> properties defined with a component part will have a higher specificity than other styles.
+<InformationHighlight className="sb-unstyled" cs={{marginBlock: system.space.x4,}}>
+	<InformationHighlight.Icon />
+	<InformationHighlight.Heading>Note</InformationHighlight.Heading>
+	<InformationHighlight.Body>
+		While component parts are a way to give access to elements in order to style, they
+ should be used sparingly. Using component parts increases CSS specificity. A component part should
+ not be used on a nested component that has its own Stencil. The result will be any style
+ properties defined with a component part will have a higher specificity than other styles.
+	</InformationHighlight.Body>
+</InformationHighlight>
+
+
