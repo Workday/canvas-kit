@@ -25,10 +25,6 @@ function MyComponent() {
 }
 ```
 
-<SymbolDoc headingStart={2} name="createStyles" />
-
-<SymbolDoc headingStart={2} name="createStencil" />
-
 <SymbolDoc headingStart={2} name="handleCsProp" />
 
 <SymbolDoc headingStart={2} name="mergeStyles" />
@@ -38,42 +34,6 @@ function MyComponent() {
 A collection of helpful functions for styling with `@workday/canvas-kit-styling`. While they're
 fairly simple, they make styling much nicer.
 
-<SymbolDoc name="createVars" />
-<ExampleCodeBlock code={CreateVars} />
-
-In this example, the HTML will look like:
-
-```html
-<div class="css-4iptxs" style="--background-c6kna: gray;"></div>
-<div class="css-4iptxs" style="--background-c6kna: blue;"></div>
-```
-
-And the CSS will look like:
-
-```css
-.css-4iptxs {
-  width: 100px;
-  height: 100px;
-  background-color: var(--background-c6kna);
-}
-```
-
-<SymbolDoc name="createModifiers" />
-
-### CSS Var
-
-The `cssVar` function wraps CSS variables in `var()` and also handles fallback values. This keeps
-you from having to use template strings and interpolate values.
-
-```ts
-import {cssVar} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
-
-const styles = {
-  // returns 'var(--cnvs-sys-space-x4)'
-  margin: cssVar(system.space.x4),
-};
-```
 
 ### Pixels to Rem
 
