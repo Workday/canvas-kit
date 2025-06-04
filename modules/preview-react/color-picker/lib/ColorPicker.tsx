@@ -1,4 +1,3 @@
-// import {colors} from '@workday/canvas-kit-react/tokens';
 import {checkIcon} from '@workday/canvas-system-icons-web';
 import {ColorInput} from '@workday/canvas-kit-react/color-picker';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
