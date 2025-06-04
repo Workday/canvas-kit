@@ -28,7 +28,6 @@ export function useListRenderItems<T>(
   model: ReturnType<typeof useBaseListModel>,
   children: ((item: Generic, index: number) => React.ReactNode) | React.ReactNode
 ): React.ReactNode {
-  console.log(model.state.UNSTABLE_virtual.getVirtualItems());
   const items =
     typeof children === 'function'
       ? model.state.isVirtualized
