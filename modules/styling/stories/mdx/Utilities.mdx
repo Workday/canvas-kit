@@ -6,38 +6,10 @@ import {CreateVars} from './examples/CreateVars';
 
 # Canvas Kit Styling Utilities
 
-## cs Prop
-
-The `cs` prop takes in a single, or an array of values that are created by the `cs` function, a
-string representing a CSS class name, or the return of the `createVars` function. It merges
-everything together and applies `className` and `style` attributes to a React element. Most of our components extend the `cs` prop so that you can statically apply styles to them.
-
->**Important**: While the `cs` prop accepts a style object, **this will not** be considered statically styling an element and you will lose the performance benefits. By default, our components extend the `cs` prop.
-
-```tsx
-import {system} from '@workday/canvas-tokens-webs'
-import {PrimaryButton} from '@workday/canvas-kit-react/button'
-
-const styles = createStyles({ color: system.color.static.red.default });
-
-function MyComponent() {
-  return <PrimaryButton cs={styles}>Text</PrimaryButton>;
-}
-```
-
-<SymbolDoc headingStart={2} name="handleCsProp" />
-
-<SymbolDoc headingStart={2} name="mergeStyles" />
-
->**Note:** While we support `mergeStyles` we'd advise against using this in your components so that users can get the performance benefit of static styling using utilities like `createStyles` and `createStencil` in tandem with the `cs` prop.
-
-## Styling Functions
-
 A collection of helpful functions for styling with `@workday/canvas-kit-styling`. While they're
 fairly simple, they make styling much nicer.
 
-
-### Pixels to Rem
+## Pixels to Rem
 
 This function converts a `px` value (number) to `rem` (string). This keeps you from having to do any
 tricky mental division or write irrational numbers.
@@ -52,12 +24,12 @@ const styles = {
 };
 ```
 
-### Calc Functions
+## Calc Functions
 
 Calc functions are useful for doing basic math operations with CSS `calc()` and variables. They will
 also wrap variables automatically in `var()`.
 
-#### Add
+### Add
 
 This function returns a CSS `calc()` addition string.
 
@@ -71,7 +43,7 @@ const styles = {
 };
 ```
 
-#### Subtract
+### Subtract
 
 This function returns a CSS `calc()` subtraction string.
 
@@ -85,7 +57,7 @@ const styles = {
 };
 ```
 
-#### Multiply
+### Multiply
 
 This function returns a CSS `calc()` multiplication string.
 
@@ -99,7 +71,7 @@ const styles = {
 };
 ```
 
-#### Divide
+### Divide
 
 This function returns a CSS `calc()` division string
 
@@ -113,7 +85,7 @@ const styles = {
 };
 ```
 
-#### Negate
+### Negate
 
 This function negates a CSS variable to give you the opposite value. This keeps you from having to
 wrap the variable in `calc()` and multiplying by `-1`.
@@ -128,17 +100,17 @@ const styles = {
 };
 ```
 
-### `keyframes`
+## keyframes
 
 The `keyframes` function re-exports the [Emotion CSS keyframes](https://emotion.sh/docs/keyframes)
 function, but is compatible with a custom Emotion instance and is understood by the Static style
 transformer.
 
-#### Usage Example
+### Usage Example
 
 ```tsx
-import { system } from '@workday/canvas-tokens-web';
-import { createComponent } from '@workday/canvas-kit-react/common';
+import {system} from '@workday/canvas-tokens-web';
+import {createComponent} from '@workday/canvas-kit-react/common';
 import {
   handleCsProp,
   keyframes,
@@ -184,24 +156,20 @@ export const loadingStencil = createStencil({
  */
 export const LoadingDot = createComponent('div')({
   displayName: 'LoadingDots',
-  Component: ({ ...elemProps }: CSProps, ref, Element) => {
-    return (
-      <Element
-        ref={ref}
-        {...handleCsProp(elemProps, loadingStencil())}
-      ></Element>
-    );
+  Component: ({...elemProps}: CSProps, ref, Element) => {
+    return <Element ref={ref} {...handleCsProp(elemProps, loadingStencil())}></Element>;
   },
 });
 ```
 
-### `injectGlobal`
+## injectGlobal
 
 The `injectGlobal` function re-exports the
 [Emotion CSS injectGlobal](https://emotion.sh/docs/@emotion/css#global-styles) function, but is
 compatible with a custom Emotion instance and is understood by the Static style transformer.
 
-#### Usage Example
+### Usage Example
+
 ```tsx
 import {createRoot} from 'react-dom/client';
 import {fonts} from '@workday/canvas-kit-react-fonts';
@@ -232,7 +200,7 @@ const root = createRoot(container);
 root.render(<App />);
 ```
 
-### Custom Emotion instance
+## Custom Emotion Instance
 
 Static style injection happens during the parsing stages of the files. This means when you `import`
 a component that uses static styling, the styles are injected immediately. This happens way before
