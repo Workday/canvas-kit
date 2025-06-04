@@ -29,11 +29,11 @@
       "id": "features-theming--theme",
       "name": "Theme",
       "title": "Features/Theming",
-      "importPath": "./modules/react/common/stories/theme.stories.tsx",
+      "importPath": "./modules/react/common/stories/mdx/theme.stories.tsx",
       "kind": "Features/Theming",
       "story": "Theme",
       "parameters": {
-        "fileName": "./modules/react/common/stories/theme.stories.tsx",
+        "fileName": "./modules/react/common/stories/mdx/theme.stories.tsx",
         "__isArgsStory": false
       }
     },
