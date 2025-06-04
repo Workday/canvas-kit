@@ -43,7 +43,10 @@ export const useListItemRegister = createElemPropsHook(useListModel)(
     const [localId, setLocalId] = React.useState(elemProps['data-id'] || item?.id || '');
 
     const {localRef, elementRef} = useLocalRef(
-      useForkRef(ref as React.Ref<HTMLElement>, virtual?.measureRef)
+      useForkRef(
+        ref as React.Ref<HTMLElement>,
+        virtual ? model.state.UNSTABLE_virtual.measureElement : null
+      )
     );
 
     // if the list is virtual, force the correct styling. Without this, weird things happen...
@@ -96,8 +99,9 @@ export const useListItemRegister = createElemPropsHook(useListModel)(
       ref: elementRef,
       'data-id': localId,
       disabled: elemProps.disabled || state.nonInteractiveIds.includes(localId) ? true : undefined,
-      'aria-setsize': virtual ? state.UNSTABLE_virtual.totalSize : undefined,
+      'aria-setsize': virtual ? state.UNSTABLE_virtual.getTotalSize() : undefined,
       'aria-posinset': virtual ? item!.index + 1 : undefined,
+      'data-index': virtual ? item!.index : undefined,
       style,
       id: slugify(`${state.id}-${localId}`),
     };
