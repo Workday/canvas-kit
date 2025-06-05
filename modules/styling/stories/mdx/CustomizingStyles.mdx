@@ -1,20 +1,19 @@
-<Meta title="Styling/ How to Customize Styles" />
+<Meta title="Styling/Guides/Customizing Styles" />
 
 # How To Customize Styles
 
-There are multiple ways to customize styles for our components within Canvas Kit. The approach you
+There are multiple ways to customize styles for components within Canvas Kit. The approach you
 choose will depend on your use case. Ranging from some simple overrides to fully custom solutions,
 here are the following options:
 
-- [Styles](#styles)
+- [Create Styles](#createstyles)
 - [Stencils](#stencils)
 
-## Styles
+## Create Styles
 
-### Using `createStyles` with `cs`
+### Using `createStyles` with `cs` prop
 
-Use [`createStyles`](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-styles)
-in tandem with `cs` prop when you're overriding static styles and making small modifications to an
+Use `createStyles` in tandem with `cs` prop when you're overriding static styles and making small modifications to an
 existing Canvas Kit component like padding, color and flex properties. Take our `Text` component as
 an example.
 
@@ -33,32 +32,27 @@ const uppercaseTextStyles = createStyles({
 
 > **Note:** `createStyles` handles wrapping our token variables in `var(--${token})`
 
-For components that expose css variables via Stencils, such as buttons and icons, you can use the
-`cs` prop to override them:
+You can also apply styles created via `createStyles` via `className`.
 
 ```tsx
 import {createStyles} from '@Workday/canvas-kit-styling';
 import {system} from '@Workday/canvas-tokens-web';
-import {SystemIcon, systemIconStencil} from '@Workday/canvas-kit-react/icon';
+import {Text} from '@Workday/canvas-kit-react/text';
 
-const greenIconStyles = createStyles({
-  [systemIconStencil.vars.color]: system.color.bg.positive.default,
-  [systemIconStencil.vars.size]: system.space.x4,
-  '&:hover': {
-    [systemIconStencil.vars.color]: system.color.bg.positive.softer,
-  },
-  '&:active': {
-    [systemIconStencil.vars.color]: system.color.bg.positive.stronger,
-  },
-  '&:disabled': {
-    [systemIconStencil.vars.color]: system.color.bg.positive.strong,
-  }
+const uppercaseTextStyles = createStyles({
+  textTransform: 'uppercase',
+  margin: system.space.x4
 })
 //...
-<SystemIcon icon={greenIconStyles} cs={uppercaseTextStyles} />;
+<Text className={uppercaseTextStyles}>My uppercased text</Text>;
 ```
 
+If you need to dynamically apply styles based on some state or prop, use [Stencils](#stencils) instead.
+
+
 ## Stencils
+
+Stencils can be useful when applying dynamic styles or building your own reusable component.
 
 ### Extending Stencils
 
