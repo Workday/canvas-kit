@@ -120,7 +120,7 @@ export const SystemIconStory = {
       <SystemIconCircle icon={activityStreamIcon} size={120} shouldMirror={true} />
       <SystemIconCircle
         icon={activityStreamIcon}
-        background={base.blueberry400}
+        background={system.color.bg.default}
         color={system.color.fg.inverse}
       />
       <SystemIconCircle
