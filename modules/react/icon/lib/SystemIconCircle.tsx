@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon, systemIconStencil} from './SystemIcon';
 import {CanvasSystemIcon} from '@workday/design-assets-types';

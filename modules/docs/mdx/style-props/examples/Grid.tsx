@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {Grid} from '@workday/canvas-kit-react/layout';
 
 const baseStyles = {
