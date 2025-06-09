@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.1.1](https://github.com/Workday/canvas-kit/releases/tag/v13.1.1) (2025-06-09)
+
+### Components
+
+- fix: Ensure icon color for SystemIconCircle can be overwritten ([#3322](https://github.com/Workday/canvas-kit/pull/3322)) ([@RayRedGoose](https://github.com/RayRedGoose))
+  Property `color` has been added to `SystemIconCircle` to fix and allow the overwriting of icon color if it's not handle automatically. `systemIconCircleStencil` is now exported.
+
+
 ## [v13.1.0](https://github.com/Workday/canvas-kit/releases/tag/v13.1.0) (2025-06-04)
 
 
