@@ -6,7 +6,7 @@ import {Checkbox} from '@workday/canvas-kit-react/checkbox';
 import {createComponent, generateUniqueId} from '@workday/canvas-kit-react/common';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {createStencil, createStyles} from '@workday/canvas-kit-styling';
-import {base} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 const selectableRowStencil = createStencil({
   base: {
@@ -16,14 +16,14 @@ const selectableRowStencil = createStencil({
   modifiers: {
     isSelected: {
       true: {
-        backgroundColor: base.blue100,
+        backgroundColor: system.color.bg.primary.soft,
       },
     },
   },
 });
 
 const tableHeaderStyles = createStyles({
-  backgroundColor: base.neutral100,
+  backgroundColor: system.color.bg.alt.soft,
 });
 
 const tableCellStyles = createStyles({

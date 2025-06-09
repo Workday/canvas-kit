@@ -11,7 +11,7 @@ import {PillCount, pillCountStencil} from './PillCount';
 import {PillAvatar} from './PillAvatar';
 import {PillLabel} from './PillLabel';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 export interface PillProps extends BoxProps {
   /**
@@ -87,7 +87,7 @@ export const pillStencil = createStencil({
       [buttonStencil.vars.border]: system.color.border.input.strong,
       [buttonStencil.vars.label]: system.color.text.strong,
       [systemIconStencil.vars.color]: system.color.icon.strong,
-      [pillCountStencil.vars.backgroundColor]: base.neutral600,
+      [pillCountStencil.vars.backgroundColor]: system.color.bg.alt.stronger,
       [pillCountStencil.vars.borderColor]: 'transparent',
     },
     '&:disabled, &.disabled': {

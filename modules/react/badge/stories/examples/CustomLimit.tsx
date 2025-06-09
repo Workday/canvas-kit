@@ -3,7 +3,7 @@ import {CountBadge} from '@workday/canvas-kit-react/badge';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 
 import {createStyles, cssVar} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 const columnStyles = createStyles({
   boxSizing: 'border-box',
@@ -14,7 +14,7 @@ const columnStyles = createStyles({
 
 const controls = createStyles({
   boxSizing: 'border-box',
-  borderBottom: `solid 1px ${cssVar(base.neutral400)}`,
+  borderBottom: `solid 1px ${cssVar(system.color.border.divider)}`,
   display: 'flex',
   gap: system.space.x1,
   padding: system.space.x1,
@@ -22,13 +22,13 @@ const controls = createStyles({
 
 const defaultBackground = createStyles({
   boxSizing: 'border-box',
-  backgroundColor: base.neutral100,
+  backgroundColor: system.color.bg.alt.soft,
   padding: system.space.x4,
 });
 
 const inverseBackground = createStyles({
   boxSizing: 'border-box',
-  backgroundColor: base.blue600,
+  backgroundColor: system.color.bg.primary.default,
   padding: system.space.x4,
 });
 

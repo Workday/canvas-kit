@@ -4,12 +4,12 @@ import {colors} from '@workday/canvas-kit-react/tokens';
 import {BodyText, Heading, LabelText, Subtext, Text, Title} from '../';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {createStyles} from '@workday/canvas-kit-styling';
-import {base} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 type TypeStateProp = {size: 'small' | 'medium' | 'large'; variant?: 'error' | 'hint' | 'inverse'};
 
 const inverseBackground = createStyles({
-  backgroundColor: base.blue600,
+  backgroundColor: system.color.bg.primary.strong,
 });
 
 export default {

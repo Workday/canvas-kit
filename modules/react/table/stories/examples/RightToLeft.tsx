@@ -3,7 +3,7 @@ import React from 'react';
 import {Table} from '@workday/canvas-kit-react/table';
 import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
 import {createStyles} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 const tableHeaderStyles = createStyles({
   backgroundColor: system.color.bg.alt.softer,

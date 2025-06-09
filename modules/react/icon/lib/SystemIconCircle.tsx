@@ -4,7 +4,7 @@ import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {createComponent, pickForegroundColor} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {calc, createStencil, cssVar, px2rem, CSProps} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 import {transformColorNameToToken} from './Svg';
 
 export enum SystemIconCircleSize {
@@ -40,7 +40,7 @@ const systemIconCircleStencil = createStencil({
     iconColor: '',
   },
   base: ({backgroundColor, containerSize, iconColor}) => ({
-    background: cssVar(backgroundColor, base.neutral200),
+    background: cssVar(backgroundColor, system.color.bg.alt.default),
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

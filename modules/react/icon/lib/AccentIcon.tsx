@@ -4,7 +4,7 @@ import {CSSObject} from '@emotion/styled';
 import {createComponent, getColor} from '@workday/canvas-kit-react/common';
 import {SystemPropValues} from '@workday/canvas-kit-react/layout';
 import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {base} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 import {Svg, SvgProps, svgStencil, transformColorNameToToken} from './Svg';
 
 /**
@@ -13,7 +13,7 @@ import {Svg, SvgProps, svgStencil, transformColorNameToToken} from './Svg';
 export interface AccentIconStyles {
   /**
    * The fill color of the AccentIcon.
-   * @default base.blue500
+   * @default system.color.bg.primary.strong
    */
   color?: SystemPropValues['color'];
   /**
@@ -59,10 +59,10 @@ export const accentIconStencil = createStencil({
   base: ({color, size}) => ({
     [size]: px2rem(56),
     '& .color-500': {
-      fill: cssVar(color, base.blue500),
+      fill: cssVar(color, system.color.bg.primary.strong),
     },
     '& .french-vanilla-100': {
-      fill: base.neutral0,
+      fill: system.color.bg.default,
     },
   }),
   modifiers: {

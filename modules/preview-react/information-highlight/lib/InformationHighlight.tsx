@@ -1,6 +1,6 @@
 import {createContainer} from '@workday/canvas-kit-react/common';
 import {cssVar, createStencil, handleCsProp, CSProps, px2rem} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 import {InformationHighlightHeading} from './parts/Heading';
 import {Body} from './parts/Body';
@@ -29,7 +29,7 @@ export const informationHighlightStencil = createStencil({
         )}`,
         backgroundColor: system.color.bg.alt.soft,
         '& [data-part="information-highlight-icon"]': {
-          [systemIconStencil.vars.accentColor]: system.color.bg.primary.default,
+          [systemIconStencil.vars.accentColor]: system.color.bg.primary.softer,
           [systemIconStencil.vars.color]: system.color.bg.primary.default,
           [systemIconStencil.vars.backgroundColor]: 'none',
         },
@@ -38,7 +38,7 @@ export const informationHighlightStencil = createStencil({
         borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(
           system.color.bg.primary.default
         )}`,
-        backgroundColor: base.blue100,
+        backgroundColor: system.color.fg.primary.default,
         '& [data-part="information-highlight-icon"]': {
           [systemIconStencil.vars.accentColor]: system.color.icon.inverse,
           [systemIconStencil.vars.color]: system.color.bg.primary.default,
@@ -62,7 +62,7 @@ export const informationHighlightStencil = createStencil({
         borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(
           system.color.border.caution.default
         )}`,
-        backgroundColor: base.amber100,
+        backgroundColor: system.color.bg.caution.soft,
         '& [data-part="information-highlight-icon"]': {
           [systemIconStencil.vars.accentColor]: system.color.icon.inverse,
           [systemIconStencil.vars.color]: system.color.fg.contrast.default,
@@ -86,7 +86,7 @@ export const informationHighlightStencil = createStencil({
         borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(
           system.color.border.critical.default
         )}`,
-        backgroundColor: base.orange100,
+        backgroundColor: system.color.bg.caution.soft,
         '& [data-part="information-highlight-icon"]': {
           [systemIconStencil.vars.accentColor]: system.color.icon.inverse,
           [systemIconStencil.vars.color]: system.color.bg.critical.default,

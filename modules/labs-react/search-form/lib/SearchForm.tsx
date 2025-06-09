@@ -12,7 +12,7 @@ import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {searchThemes, SearchTheme, SearchThemeAttributes} from './themes';
 import chroma from 'chroma-js';
 import {CSProps, calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {brand, system} from '@workday/canvas-tokens-web';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 export interface SearchFormProps
@@ -254,7 +254,7 @@ export const searchFormStencil = createStencil({
         outline: `${px2rem(2)} solid transparent`,
         boxShadow: cssVar(
           boxShadowFocus,
-          `0 0 0 0px ${base.neutral100}, 0 0 0 2px ${brand.common.focusOutline}`
+          `0 0 0 0px ${system.color.bg.default}, 0 0 0 2px ${brand.common.focusOutline}`
         ),
         '::placeholder': {
           color: placeholderColorFocus,
@@ -352,7 +352,7 @@ export const searchFormStencil = createStencil({
           },
           '&:is(:focus-visible, &.focus):where(:not([disabled]))': {
             background: system.color.bg.alt.soft,
-            boxShadow: `0 0 0 0px ${base.neutral100}, 0 0 0 2px ${brand.common.focusOutline}`,
+            boxShadow: `0 0 0 0px ${system.color.bg.default}, 0 0 0 2px ${brand.common.focusOutline}`,
           },
         },
       }),

@@ -2,8 +2,6 @@ import * as React from 'react';
 import {shieldIcon} from '@workday/canvas-accent-icons-web';
 import {benefitsIcon} from '@workday/canvas-applet-icons-web';
 import {CanvasIconTypes, CanvasGraphic} from '@workday/design-assets-types';
-
-import {colors} from '@workday/canvas-kit-react/tokens';
 import {
   AccentIcon,
   AppletIcon,
@@ -14,8 +12,8 @@ import {
 } from '../index';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
-import {base} from '@workday/canvas-tokens-web';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+import {createStyles, cssVar} from '@workday/canvas-kit-styling';
 
 const graphicExample: CanvasGraphic = {
   name: 'badgeAchievement',
@@ -44,15 +42,15 @@ export const AccentIconStory = {
   render: () => (
     <div className="story">
       <AccentIcon icon={shieldIcon} />
-      <AccentIcon icon={shieldIcon} color={colors.pomegranate500} />
+      <AccentIcon icon={shieldIcon} color={cssVar(system.color.static.red.strong)} />
       <span
         style={{
-          backgroundColor: colors.blueberry500,
+          backgroundColor: cssVar(system.color.bg.primary.default),
           display: 'inline-block',
           verticalAlign: 'top',
         }}
       >
-        <AccentIcon icon={shieldIcon} color={colors.frenchVanilla100} transparent={true} />
+        <AccentIcon icon={shieldIcon} color={cssVar(system.color.fg.inverse)} transparent={true} />
       </span>
       <br />
       <AccentIcon icon={shieldIcon} size={80} />
@@ -81,8 +79,12 @@ export const SystemIconStory = {
   render: () => (
     <div className="story">
       <SystemIcon icon={activityStreamIcon} />
-      <SystemIcon icon={activityStreamIcon} color={base.pink400} />
-      <SystemIcon icon={activityStreamIcon} color={base.pink400} colorHover={base.pink600} />
+      <SystemIcon icon={activityStreamIcon} color={system.color.static.green.default} />
+      <SystemIcon
+        icon={activityStreamIcon}
+        color={system.color.static.green.default}
+        colorHover={base.pink600}
+      />
       <SystemIcon
         className="custom-class"
         icon={activityStreamIcon}
