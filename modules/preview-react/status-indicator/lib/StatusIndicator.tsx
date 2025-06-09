@@ -57,12 +57,12 @@ const statusIndicatorStencil = createStencil({
       high: {
         color: system.color.static.gray.stronger,
         [systemIconStencil.vars.color]: system.color.static.gray.stronger,
-        background: system.color.static.orange.default,
+        background: system.color.static.amber.default,
       },
       low: {
-        color: system.color.static.gold.stronger,
-        [systemIconStencil.vars.color]: system.color.static.gold.stronger,
-        background: system.color.static.orange.soft,
+        color: system.color.static.amber.strong,
+        [systemIconStencil.vars.color]: system.color.static.amber.strong,
+        background: system.color.static.amber.soft,
       },
     },
     blue: {

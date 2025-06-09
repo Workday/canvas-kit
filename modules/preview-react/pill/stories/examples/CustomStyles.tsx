@@ -6,28 +6,28 @@ import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
 const customPillStencil = createStencil({
   base: {
-    [pillStencil.vars.background]: base.berrySmoothie300,
-    [pillStencil.vars.border]: base.berrySmoothie500,
-    [pillStencil.vars.label]: base.frenchVanilla100,
-    [systemIconStencil.vars.color]: base.frenchVanilla100,
-    [pillCountStencil.vars.backgroundColor]: base.berrySmoothie400,
+    [pillStencil.vars.background]: base.pink300,
+    [pillStencil.vars.border]: base.pink500,
+    [pillStencil.vars.label]: base.neutral100,
+    [systemIconStencil.vars.color]: base.neutral100,
+    [pillCountStencil.vars.backgroundColor]: base.pink400,
 
     '&:hover, &.hover': {
-      [pillStencil.vars.background]: base.berrySmoothie400,
-      [pillStencil.vars.label]: base.frenchVanilla100,
-      [pillCountStencil.vars.backgroundColor]: base.berrySmoothie500,
-      [systemIconStencil.vars.color]: base.frenchVanilla100,
+      [pillStencil.vars.background]: base.pink400,
+      [pillStencil.vars.label]: base.neutral100,
+      [pillCountStencil.vars.backgroundColor]: base.pink500,
+      [systemIconStencil.vars.color]: base.neutral100,
     },
     '&:active, &.active': {
-      [pillStencil.vars.background]: base.berrySmoothie400,
-      [pillStencil.vars.label]: base.frenchVanilla100,
-      [systemIconStencil.vars.color]: base.frenchVanilla100,
-      [pillCountStencil.vars.backgroundColor]: base.berrySmoothie500,
+      [pillStencil.vars.background]: base.pink400,
+      [pillStencil.vars.label]: base.neutral100,
+      [systemIconStencil.vars.color]: base.neutral100,
+      [pillCountStencil.vars.backgroundColor]: base.pink500,
     },
     '&:disabled, &.disabled': {
-      [pillStencil.vars.background]: base.berrySmoothie400,
-      [pillStencil.vars.label]: base.frenchVanilla100,
-      [systemIconStencil.vars.color]: base.frenchVanilla100,
+      [pillStencil.vars.background]: base.pink400,
+      [pillStencil.vars.label]: base.neutral100,
+      [systemIconStencil.vars.color]: base.neutral100,
     },
   },
 });

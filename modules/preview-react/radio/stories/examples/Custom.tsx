@@ -10,7 +10,7 @@ const styleOverrides = {
     width: px2rem(200),
   }),
   radioGroupLabelTextStyles: createStyles({
-    color: base.berrySmoothie400,
+    color: base.pink400,
   }),
 };
 

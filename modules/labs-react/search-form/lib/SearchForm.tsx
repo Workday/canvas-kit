@@ -254,7 +254,7 @@ export const searchFormStencil = createStencil({
         outline: `${px2rem(2)} solid transparent`,
         boxShadow: cssVar(
           boxShadowFocus,
-          `0 0 0 0px ${base.frenchVanilla100}, 0 0 0 2px ${brand.common.focusOutline}`
+          `0 0 0 0px ${base.neutral100}, 0 0 0 2px ${brand.common.focusOutline}`
         ),
         '::placeholder': {
           color: placeholderColorFocus,
@@ -352,7 +352,7 @@ export const searchFormStencil = createStencil({
           },
           '&:is(:focus-visible, &.focus):where(:not([disabled]))': {
             background: system.color.bg.alt.soft,
-            boxShadow: `0 0 0 0px ${base.frenchVanilla100}, 0 0 0 2px ${brand.common.focusOutline}`,
+            boxShadow: `0 0 0 0px ${base.neutral100}, 0 0 0 2px ${brand.common.focusOutline}`,
           },
         },
       }),

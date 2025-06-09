@@ -81,48 +81,40 @@ export const SystemIconStory = {
   render: () => (
     <div className="story">
       <SystemIcon icon={activityStreamIcon} />
-      <SystemIcon icon={activityStreamIcon} color={base.berrySmoothie400} />
-      <SystemIcon
-        icon={activityStreamIcon}
-        color={base.berrySmoothie400}
-        colorHover={base.berrySmoothie600}
-      />
+      <SystemIcon icon={activityStreamIcon} color={base.pink400} />
+      <SystemIcon icon={activityStreamIcon} color={base.pink400} colorHover={base.pink600} />
       <SystemIcon
         className="custom-class"
         icon={activityStreamIcon}
-        accent={base.frenchVanilla100}
-        fill={base.blueberry500}
-        background={base.blueberry500}
+        accent={base.neutral100}
+        fill={base.blue500}
+        background={base.blue500}
       />
       <br />
-      <SystemIcon icon={activityStreamIcon} colorHover={base.cinnamon300} />
+      <SystemIcon icon={activityStreamIcon} colorHover={base.red300} />
       <SystemIcon
         icon={activityStreamIcon}
-        color={base.blueberry500}
-        fillHover={base.chiliMango200}
-        accentHover={base.chiliMango400}
+        color={base.blue500}
+        fillHover={base.orange200}
+        accentHover={base.orange400}
       />
       <SystemIcon
         className="custom-class"
         icon={activityStreamIcon}
-        accent={base.frenchVanilla100}
-        fill={base.blueberry500}
-        background={base.blueberry500}
-        fillHover={base.cantaloupe500}
-        accentHover={base.frenchVanilla100}
-        backgroundHover={base.cantaloupe500}
+        accent={base.neutral100}
+        fill={base.blue500}
+        background={base.blue500}
+        fillHover={base.orange500}
+        accentHover={base.neutral100}
+        backgroundHover={base.orange500}
       />
       <br />
       <SystemIcon icon={activityStreamIcon} size={48} />
       <SystemIconCircle icon={activityStreamIcon} />
       <SystemIconCircle icon={activityStreamIcon} shouldMirror={true} />
       <SystemIconCircle icon={activityStreamIcon} size={120} shouldMirror={true} />
-      <SystemIconCircle icon={activityStreamIcon} background={base.blueberry400} />
-      <SystemIconCircle
-        icon={activityStreamIcon}
-        background={base.blueberry400}
-        shouldMirror={true}
-      />
+      <SystemIconCircle icon={activityStreamIcon} background={base.blue600} />
+      <SystemIconCircle icon={activityStreamIcon} background={base.blue600} shouldMirror={true} />
     </div>
   ),
 };

@@ -36,7 +36,7 @@ const imageStyles = createStyles({
 });
 
 const borderStyles = createStyles({
-  borderBottom: `1px solid ${base.blueberry200}`,
+  borderBottom: `1px solid ${base.blue200}`,
   marginBottom: system.space.x2,
 });
 
@@ -90,8 +90,8 @@ export const WelcomePage = () => {
         >
           <Grid as={Card} className={gridStyles}>
             <SystemIcon
-              color={base.cantaloupe400}
-              colorHover={base.cantaloupe400}
+              color={base.orange400}
+              colorHover={base.orange400}
               icon={rocketIcon}
               size={60}
             ></SystemIcon>
@@ -109,9 +109,9 @@ export const WelcomePage = () => {
           </Grid>
           <Grid as={Card} className={gridStyles}>
             <SystemIcon
-              color={base.blueberry400}
+              color={base.blue600}
               icon={tokensIcon}
-              colorHover={base.blueberry400}
+              colorHover={base.blue600}
               size={60}
             ></SystemIcon>
             <Card.Heading>Tokens</Card.Heading>
@@ -131,10 +131,10 @@ export const WelcomePage = () => {
           </Grid>
           <Grid as={Card} className={gridStyles}>
             <SystemIcon
-              color={base.greenApple400}
+              color={base.green400}
               icon={shapesIcon}
               size={60}
-              colorHover={base.greenApple400}
+              colorHover={base.green400}
             ></SystemIcon>
             <Card.Heading>Assets</Card.Heading>
             <Card.Body>

@@ -60,15 +60,15 @@ describe('Avatar', () => {
   it('should set the background color when background prop is specified', () => {
     const customGreenAvatarStencil = createStencil({
       base: {
-        backgroundColor: base.watermelon400,
+        backgroundColor: base.green400,
         ['[data-part="avatar-icon"]']: {
-          [systemIconStencil.vars.color]: base.watermelon100,
+          [systemIconStencil.vars.color]: base.green100,
         },
       },
     });
 
     const {container} = render(<Avatar {...customGreenAvatarStencil()} />);
-    expect(container.firstChild).toHaveStyle(`background: ${cssVar(base.watermelon400)}`);
+    expect(container.firstChild).toHaveStyle(`background: ${cssVar(base.green400)}`);
   });
 
   it('should set the object fit of the image when objectFit prop is specified', () => {

@@ -8,7 +8,7 @@ import {system, base} from '@workday/canvas-tokens-web';
 const stylesOverride = {
   panelContainer: createStyles({
     height: px2rem(320),
-    backgroundColor: base.soap100,
+    backgroundColor: base.neutral100,
     position: 'relative',
   }),
   panelContent: createStyles({

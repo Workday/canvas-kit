@@ -40,7 +40,7 @@ const systemIconCircleStencil = createStencil({
     iconColor: '',
   },
   base: ({backgroundColor, containerSize, iconColor}) => ({
-    background: cssVar(backgroundColor, base.soap200),
+    background: cssVar(backgroundColor, base.neutral200),
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

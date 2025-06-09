@@ -11,13 +11,13 @@ const containerStyles = createStyles({
 
 const defaultBackground = createStyles({
   boxSizing: 'border-box',
-  backgroundColor: base.frenchVanilla100,
+  backgroundColor: base.neutral100,
   padding: system.space.x4,
 });
 
 const inverseBackground = createStyles({
   boxSizing: 'border-box',
-  backgroundColor: base.blueberry400,
+  backgroundColor: base.blue600,
   padding: system.space.x4,
 });
 

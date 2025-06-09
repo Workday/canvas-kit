@@ -9,7 +9,7 @@ import {base} from '@workday/canvas-tokens-web';
 type TypeStateProp = {size: 'small' | 'medium' | 'large'; variant?: 'error' | 'hint' | 'inverse'};
 
 const inverseBackground = createStyles({
-  backgroundColor: base.blueberry400,
+  backgroundColor: base.blue600,
 });
 
 export default {

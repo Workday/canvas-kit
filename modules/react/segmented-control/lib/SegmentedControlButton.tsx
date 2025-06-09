@@ -27,7 +27,7 @@ const segmentedControlButtonStencil = createStencil({
     '&:disabled, &.disabled': {
       [buttonStencil.vars.background]: system.color.bg.alt.softer,
       [buttonStencil.vars.border]: system.color.border.container,
-      [systemIconStencil.vars.color]: base.soap600,
+      [systemIconStencil.vars.color]: system.color.icon.soft,
     },
 
     '&:first-of-type': {
@@ -51,7 +51,7 @@ const segmentedControlButtonStencil = createStencil({
       '&:disabled, &.disabled': {
         [buttonStencil.vars.background]: system.color.bg.alt.softer,
         [buttonStencil.vars.border]: system.color.border.container,
-        [systemIconStencil.vars.color]: base.soap600,
+        [systemIconStencil.vars.color]: base.neutral600,
       },
     },
 

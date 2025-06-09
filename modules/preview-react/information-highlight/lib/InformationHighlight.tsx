@@ -38,7 +38,7 @@ export const informationHighlightStencil = createStencil({
         borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(
           system.color.bg.primary.default
         )}`,
-        backgroundColor: base.blueberry100,
+        backgroundColor: base.blue100,
         '& [data-part="information-highlight-icon"]': {
           [systemIconStencil.vars.accentColor]: system.color.icon.inverse,
           [systemIconStencil.vars.color]: system.color.bg.primary.default,
@@ -62,7 +62,7 @@ export const informationHighlightStencil = createStencil({
         borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(
           system.color.border.caution.default
         )}`,
-        backgroundColor: base.sourLemon100,
+        backgroundColor: base.amber100,
         '& [data-part="information-highlight-icon"]': {
           [systemIconStencil.vars.accentColor]: system.color.icon.inverse,
           [systemIconStencil.vars.color]: system.color.fg.contrast.default,
@@ -86,7 +86,7 @@ export const informationHighlightStencil = createStencil({
         borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(
           system.color.border.critical.default
         )}`,
-        backgroundColor: base.peach100,
+        backgroundColor: base.orange100,
         '& [data-part="information-highlight-icon"]': {
           [systemIconStencil.vars.accentColor]: system.color.icon.inverse,
           [systemIconStencil.vars.color]: system.color.bg.critical.default,

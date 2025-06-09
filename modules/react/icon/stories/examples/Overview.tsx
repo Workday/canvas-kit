@@ -27,7 +27,7 @@ const styleOverrides = {
     gap: system.space.x4,
   }),
   systemIconStyles: createStyles({
-    background: base.berrySmoothie100,
+    background: base.pink100,
   }),
 };
 

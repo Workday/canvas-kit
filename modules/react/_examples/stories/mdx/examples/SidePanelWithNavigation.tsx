@@ -30,7 +30,7 @@ const stylesOverride = {
   navContainer: createStyles({
     height: px2rem(800),
     positio: 'relative',
-    backgroundColor: base.frenchVanilla100,
+    backgroundColor: base.neutral100,
   }),
   accordionContainer: createStyles({
     flexDirection: 'column',

@@ -13,7 +13,7 @@ import {useDirection} from './useDirection';
 const stylesOverride = {
   viewport: createStyles({
     height: px2rem(320),
-    backgroundColor: base.soap100,
+    backgroundColor: base.neutral100,
   }),
   panel: createStyles({
     alignItems: 'center',

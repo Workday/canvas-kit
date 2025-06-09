@@ -5,7 +5,7 @@ import {createStyles} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 const inverseBackground = createStyles({
-  backgroundColor: base.blueberry400,
+  backgroundColor: base.blue600,
   padding: system.space.x4,
   marginTop: system.space.x4,
 });

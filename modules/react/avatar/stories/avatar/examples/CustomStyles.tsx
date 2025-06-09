@@ -5,18 +5,18 @@ import {systemIconStencil} from '../../../../icon';
 
 const customBlueAvatarStencil = createStencil({
   base: {
-    backgroundColor: base.berrySmoothie400,
+    backgroundColor: base.purple400,
     ['[data-part="avatar-icon"]']: {
-      [systemIconStencil.vars.color]: base.berrySmoothie100,
+      [systemIconStencil.vars.color]: base.purple100,
     },
   },
 });
 
 const customGreenAvatarStencil = createStencil({
   base: {
-    backgroundColor: base.watermelon400,
+    backgroundColor: base.green400,
     ['[data-part="avatar-icon"]']: {
-      [systemIconStencil.vars.color]: base.watermelon100,
+      [systemIconStencil.vars.color]: base.green100,
     },
   },
 });

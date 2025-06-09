@@ -159,10 +159,10 @@ export const systemIconStencil = createStencil({
       height: cssVar(height, cssVar(size, system.space.x6)),
     },
     '& .wd-icon-fill': {
-      fill: cssVar(color, base.licorice200),
+      fill: cssVar(color, base.neutral200),
     },
     '& .wd-icon-accent, & .wd-icon-accent2': {
-      fill: cssVar(accentColor, cssVar(color, base.licorice200)),
+      fill: cssVar(accentColor, cssVar(color, base.neutral200)),
     },
     '& .wd-icon-background': {
       fill: cssVar(backgroundColor, 'transparent'),
@@ -171,7 +171,7 @@ export const systemIconStencil = createStencil({
     '&:where(:hover, .hover) .wd-icon-fill': {
       fill: cssVar(
         deprecatedSystemIconVars.fillHover,
-        cssVar(deprecatedSystemIconVars.colorHover, cssVar(color, base.licorice200))
+        cssVar(deprecatedSystemIconVars.colorHover, cssVar(color, base.neutral200))
       ),
     },
     '&:where(:hover, .hover) .wd-icon-accent, & .wd-icon-accent2': {
@@ -179,7 +179,7 @@ export const systemIconStencil = createStencil({
         deprecatedSystemIconVars.accentHover,
         cssVar(
           deprecatedSystemIconVars.colorHover,
-          cssVar(accentColor, cssVar(color, base.licorice200))
+          cssVar(accentColor, cssVar(color, base.neutral200))
         )
       ),
     },

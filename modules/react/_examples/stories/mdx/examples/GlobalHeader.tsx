@@ -73,7 +73,7 @@ const styleOverrides = {
   }),
   menuButtonStyles: createStyles({
     textDecoration: 'none',
-    color: base.blackPepper500,
+    color: base.neutral800,
   }),
   notificationContainerStyles: createStyles({
     boxSizing: 'border-box',
