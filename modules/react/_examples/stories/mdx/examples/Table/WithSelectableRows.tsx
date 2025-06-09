@@ -16,7 +16,7 @@ const selectableRowStencil = createStencil({
   modifiers: {
     isSelected: {
       true: {
-        backgroundColor: base.blueberry100,
+        backgroundColor: base.blue100,
       },
     },
   },

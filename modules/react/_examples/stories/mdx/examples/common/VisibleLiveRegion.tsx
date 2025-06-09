@@ -8,8 +8,8 @@ import {system, base} from '@workday/canvas-tokens-web';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 
 const liveRegionStyle = createStyles({
-  border: `${px2rem(1)} solid ${base.cantaloupe400}`,
-  backgroundColor: base.cantaloupe100,
+  border: `${px2rem(1)} solid ${base.orange400}`,
+  backgroundColor: base.orange100,
   padding: system.space.x4,
   display: 'block',
   margin: system.space.x4 + ' 0',
