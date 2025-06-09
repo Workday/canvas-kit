@@ -1,0 +1,168 @@
+import {Meta} from '@storybook/addon-docs';
+
+<Meta title="Guides/Upgrade Guides/v14.0" />
+
+# Canvas Kit 14.0 Upgrade Guide
+
+This guide contains an overview of the changes in Canvas Kit v14. Please
+[reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have
+any questions.
+
+## Table of contents
+
+- [Codemod](#codemod)
+  - [Instructions](#instructions)
+- [Component Updates](#component-updates)
+  - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
+	- [SearchForm](#search-form)
+- [Troubleshooting](#troubleshooting)
+- [Glossary](#glossary)
+  - [Main](#main)
+  - [Preview](#preview)
+  - [Labs](#labs)
+
+## Codemod
+
+We've provided a [codemod](https://github.com/Workday/canvas-kit/tree/master/modules/codemod) to
+automatically update your code to work with most of the breaking changes in v14. **Breaking changes
+handled by the codemod are marked with 🤖 in the Upgrade Guide.**
+
+A codemod is a script that makes programmatic transformations on your codebase by traversing the
+[AST](https://www.codeshiftcommunity.com/docs/understanding-asts), identifying patterns, and making
+prescribed changes. This greatly decreases opportunities for error and reduces the number of manual
+updates, which allows you to focus on changes that need your attention. **We highly recommend you
+use the codemod for these reasons.**
+
+If you're new to running codemods or if it's been a minute since you've used one, there are a few
+things you'll want to keep in mind.
+
+- Our codemods are meant to be run sequentially. For example, if you're using v8 of Canvas Kit,
+  you'll need to run the v9 codemod before you run v10 and so on.
+- The codemod will update your code to be compatible with the specified version, but it will **not**
+  remove outdated dependencies or upgrade dependencies to the latest version. You'll need to upgrade
+  dependencies on your own.
+  - We recommend upgrading dependencies before running the codemod.
+  - Always review your `package.json` files to make sure your dependency versions look correct.
+- The codemod will not handle every breaking change in v14. You will likely need to make some manual
+  changes to be compatible. Use our Upgrade Guide as a checklist.
+- Codemods are not bulletproof.
+  - Conduct a thorough PR and QA review of all changes to ensure no regressions were introduced.
+  - As a safety precaution, we recommend committing the changes from the codemod as a single
+    isolated commit (separate from other changes) so you can roll back more easily if necessary.
+
+We're here to help! Automatic changes to your codebase can feel scary. You can always reach out to
+our team. We'd be very happy to walk you through the process to set you up for success.
+
+### Instructions
+
+The easiest way to run our codemod is to use `npx` in your terminal.
+
+```sh
+npx @workday/canvas-kit-codemod v14 [path]
+```
+
+Be sure to provide specific directories that need to be updated via the `[path]` argument. This
+decreases the amount of AST the codemod needs to traverse and reduces the chances of the script
+having an error. For example, if your source code lives in `src/`, use `src/` as your `[path]`. Or,
+if you have a monorepo with three packages using Canvas Kit, provide those specific packages as your
+`[path]`.
+
+Alternatively, if you're unable to run the codemod successfully using `npx`, you can install the
+codemod package as a dev dependency, run it with `yarn`, and then remove the package after you're
+finished.
+
+```sh
+yarn add @workday/canvas-kit-codemod --dev
+yarn canvas-kit-codemod v14 [path]
+yarn remove @workday/canvas-kit-codemod
+```
+
+> **Note**: The codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` files. You'll need to
+> manually edit other file types (`.json`, `.mdx`, `.md`, etc.). You may need to run your linter
+> after executing the codemod, as its resulting formatting (spacing, quotes, etc.) may not match
+> your project conventions.
+
+## Styling API and Canvas Tokens 💅
+
+Several components have been refactored to use our Canvas tokens and styling API. The React
+interface has not changed, but Canvas Tokens are now used for dynamic properties.
+
+> **Note:** These components also support our cs prop for styling. Learn more about styling with cs
+> in our documentation.
+
+The following components have been updated:
+
+- `Breadcrumbs` [#3270](https://github.com/Workday/canvas-kit/pull/3270)
+- `Pagination` (Preview) [#3300](https://github.com/Workday/canvas-kit/pull/3300)
+- `SearchForm` (Labs) [#3303](https://github.com/Workday/canvas-kit/pull/3303)
+- `SegmentedControl` (Main) [#3278](https://github.com/Workday/canvas-kit/pull/3278)
+- `SegmentedControl` (Preview) [#3278](https://github.com/Workday/canvas-kit/pull/3278)
+- `ToolbarDropdownButton` [#3293](https://github.com/Workday/canvas-kit/pull/3293)
+- `ToolbarIconButton` [#3293](https://github.com/Workday/canvas-kit/pull/3293)
+
+### Search Form 🚨
+
+**PR:** [#3303](https://github.com/Workday/canvas-kit/pull/3303)
+
+- `SearchThemeAttributes` type has been updated. Both `boxShadow` and `boxShadowFocus` now only accept a `string` instead of `string | string[]`.
+
+**Before in v13**
+```tsx
+const customTheme = {
+	background: colors.cinnamon600,
+	backgroundFocus: colors.frenchVanilla100,
+	placeholderColor: colors.frenchVanilla100,
+	placeholderColorFocus: colors.blackPepper400,
+	boxShadow: ['10px 5px 5px red', '60px -16px teal']
+	boxShadowFocus: ['10px 5px 5px red', '60px -16px teal']
+} as SearchThemeAttributes;
+	//...
+
+	<SearchForm
+	searchTheme={customTheme}
+	autocompleteItems={menuItems}
+	onInputChange={filterMenuItems}
+	onSubmit={handleSubmit}
+/>
+```
+
+**After in v14**
+
+```tsx
+const customTheme = {
+	background: colors.cinnamon600,
+	backgroundFocus: colors.frenchVanilla100,
+	placeholderColor: colors.frenchVanilla100,
+	placeholderColorFocus: colors.blackPepper400,
+	boxShadow: '10px 5px 5px red',
+	boxShadowFocus: '10px 5px 5px red'
+} as SearchThemeAttributes;
+	//...
+
+	<SearchForm
+	searchTheme={customTheme}
+	autocompleteItems={menuItems}
+	onInputChange={filterMenuItems}
+	onSubmit={handleSubmit}
+/>
+```
+- `SearchTheme` enum type has been updated to have string values `light`, `dark` and `transparent`. This **should not** affect the way you use the type unless you're passing a `number` of `0`, `1` or `2` to the `searchTheme` prop.
+
+## Troubleshooting
+
+- When upgrading to the latest major version of Canvas Kit, all related Canvas Kit packages should
+  be updated at the same time:
+  - `"@workday/canvas-kit-react": "^13.5.6"` -> `"@workday/canvas-kit-react": "^14.0.0"`
+  - `"@workday/canvas-kit-styling": "^13.5.6"` -> `"@workday/canvas-kit-styling": "^14.0.0"`
+  - `"@workday/canvas-kit-preview-react": "^13.5.6"` ->
+    `"@workday/canvas-kit-preview-react": "^14.0.0"`
+  - `"@workday/canvas-kit-labs-react": "^13.5.6"` -> `"@workday/canvas-kit-labs-react": "^14.0.0"`
+- Our components rely on the `@workday/canvas-tokens-web` package which provides our CSS variables
+  and ensures the correct styling of our components. Make sure to upgrade to the latest version of
+  Canvas Tokens Web and install it correctly. For more information,
+  [view our docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
+
+## Glossary
+
+For an overview of the different packages we provide, plase view our docs
+[here](https://workday.github.io/canvas-kit/?path=/docs/guides-packages--docs).
