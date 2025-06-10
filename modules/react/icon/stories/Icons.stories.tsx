@@ -12,7 +12,7 @@ import {
 } from '../index';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 import {createStyles, cssVar} from '@workday/canvas-kit-styling';
 
 const graphicExample: CanvasGraphic = {
@@ -96,19 +96,19 @@ export const SystemIconStory = {
       <SystemIcon icon={activityStreamIcon} colorHover={system.color.fg.critical} />
       <SystemIcon
         icon={activityStreamIcon}
-        color={base.blue500}
-        fillHover={base.orange200}
-        accentHover={base.orange400}
+        color={system.color.static.blue.default}
+        fillHover={system.color.static.amber.default}
+        accentHover={system.color.static.amber.default}
       />
       <SystemIcon
         className="custom-class"
         icon={activityStreamIcon}
-        accent={base.neutral100}
-        fill={base.blue500}
-        background={base.blue500}
-        fillHover={base.orange500}
-        accentHover={base.neutral100}
-        backgroundHover={base.orange500}
+        accent={system.color.static.blue.default}
+        fill={system.color.static.blue.default}
+        background={system.color.static.blue.default}
+        fillHover={system.color.static.amber.default}
+        accentHover={system.color.static.blue.default}
+        backgroundHover={system.color.static.amber.default}
       />
       <br />
       <SystemIcon icon={activityStreamIcon} size={48} />
@@ -119,6 +119,7 @@ export const SystemIconStory = {
       <SystemIconCircle
         icon={activityStreamIcon}
         background={system.color.fg.primary.default}
+        color={system.color.fg.inverse}
         shouldMirror={true}
       />
     </div>
