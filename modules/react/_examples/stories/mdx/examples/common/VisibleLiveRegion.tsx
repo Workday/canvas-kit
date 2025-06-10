@@ -4,12 +4,13 @@ import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {Text} from '@workday/canvas-kit-react/text';
-import {system, base} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {sys} from 'typescript';
 
 const liveRegionStyle = createStyles({
-  border: `${px2rem(1)} solid ${base.orange400}`,
-  backgroundColor: base.orange100,
+  border: `${px2rem(1)} solid ${system.color.bg.caution.stronger}`,
+  backgroundColor: system.color.bg.caution.default,
   padding: system.space.x4,
   display: 'block',
   margin: system.space.x4 + ' 0',
