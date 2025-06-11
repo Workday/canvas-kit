@@ -53,6 +53,7 @@ export const pillStencil = createStencil({
     [buttonStencil.vars.border]: system.color.border.input.default,
     [buttonStencil.vars.label]: system.color.text.strong,
     [systemIconStencil.vars.color]: system.color.icon.default,
+    [pillCountStencil.vars.borderColor]: 'transparent',
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
     overflow: 'hidden',

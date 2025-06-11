@@ -29,7 +29,7 @@ export const informationHighlightStencil = createStencil({
         )}`,
         backgroundColor: system.color.bg.alt.soft,
         '& [data-part="information-highlight-icon"]': {
-          [systemIconStencil.vars.accentColor]: system.color.bg.primary.softer,
+          [systemIconStencil.vars.accentColor]: system.color.bg.primary.default,
           [systemIconStencil.vars.color]: system.color.bg.primary.default,
           [systemIconStencil.vars.backgroundColor]: 'none',
         },
@@ -38,7 +38,7 @@ export const informationHighlightStencil = createStencil({
         borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(
           system.color.bg.primary.default
         )}`,
-        backgroundColor: system.color.fg.primary.default,
+        backgroundColor: system.color.fg.primary.softer,
         '& [data-part="information-highlight-icon"]': {
           [systemIconStencil.vars.accentColor]: system.color.icon.inverse,
           [systemIconStencil.vars.color]: system.color.bg.primary.default,
@@ -62,7 +62,7 @@ export const informationHighlightStencil = createStencil({
         borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(
           system.color.border.caution.default
         )}`,
-        backgroundColor: system.color.bg.caution.soft,
+        backgroundColor: system.color.bg.caution.softest,
         '& [data-part="information-highlight-icon"]': {
           [systemIconStencil.vars.accentColor]: system.color.icon.inverse,
           [systemIconStencil.vars.color]: system.color.fg.contrast.default,
@@ -86,7 +86,7 @@ export const informationHighlightStencil = createStencil({
         borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(
           system.color.border.critical.default
         )}`,
-        backgroundColor: system.color.bg.caution.soft,
+        backgroundColor: system.color.bg.critical.softest,
         '& [data-part="information-highlight-icon"]': {
           [systemIconStencil.vars.accentColor]: system.color.icon.inverse,
           [systemIconStencil.vars.color]: system.color.bg.critical.default,

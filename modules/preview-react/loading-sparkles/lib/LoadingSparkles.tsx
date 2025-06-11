@@ -45,7 +45,7 @@ export const loadingSparklesStencil = createStencil({
       animationIterationCount: 'infinite',
       animationName: LOADING_ANIMATION,
       animationTimingFunction: 'ease-in-out',
-      [systemIconStencil.vars.color]: system.color.bg.ai.strongest,
+      [systemIconStencil.vars.color]: system.color.fg.ai,
       '&:nth-child(1)': {
         animationDelay: '0ms',
       },
