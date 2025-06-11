@@ -60,8 +60,8 @@ const statusIndicatorStencil = createStencil({
         background: system.color.static.amber.default,
       },
       low: {
-        color: system.color.static.gold.stronger,
-        [systemIconStencil.vars.color]: system.color.static.amber.strong,
+        color: system.color.static.amber.strongest,
+        [systemIconStencil.vars.color]: system.color.static.amber.strongest,
         background: system.color.static.amber.softer,
       },
     },
@@ -72,9 +72,9 @@ const statusIndicatorStencil = createStencil({
         background: system.color.static.blue.default,
       },
       low: {
-        color: system.color.static.blue.strong,
-        [systemIconStencil.vars.color]: system.color.static.blue.strong,
-        background: system.color.static.blue.soft,
+        color: system.color.fg.primary.strong,
+        [systemIconStencil.vars.color]: system.color.fg.primary.strong,
+        background: system.color.bg.primary.softer,
       },
     },
     green: {
@@ -86,7 +86,7 @@ const statusIndicatorStencil = createStencil({
       low: {
         color: system.color.static.green.strong,
         [systemIconStencil.vars.color]: system.color.static.green.strong,
-        background: system.color.static.green.soft,
+        background: system.color.bg.positive.softer,
       },
     },
     red: {
@@ -98,7 +98,7 @@ const statusIndicatorStencil = createStencil({
       low: {
         color: system.color.static.red.strong,
         [systemIconStencil.vars.color]: system.color.static.red.strong,
-        background: system.color.static.red.soft,
+        background: system.color.bg.critical.softer,
       },
     },
     transparent: {

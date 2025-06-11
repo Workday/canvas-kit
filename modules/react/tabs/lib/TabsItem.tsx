@@ -109,10 +109,9 @@ const tabItemStencil = createStencil({
     },
 
     '&:hover, &.hover, &:focus-visible, &.focus': {
-      backgroundColor: base.neutral200,
-      color: base.neutral800,
-
-      [systemIconStencil.vars.color]: system.color.icon.strong,
+      backgroundColor: system.color.bg.alt.default,
+      color: system.color.fg.contrast.default,
+      [systemIconStencil.vars.color]: system.color.fg.contrast.default,
     },
 
     '&:focus-visible, &.focus': {
