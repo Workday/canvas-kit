@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.1.0](https://github.com/Workday/canvas-kit/releases/tag/v13.1.0) (2025-06-04)
+
+
+
+
+## [v13.0.5](https://github.com/Workday/canvas-kit/releases/tag/v13.0.5) (2025-05-27)
+
+### Components
+
+- fix(multi-select): Forward the error prop to the MultiSelect Input ([#3309](https://github.com/Workday/canvas-kit/pull/3309)) ([@NicholasBoll](https://github.com/NicholasBoll), [@mannycarrera4](https://github.com/mannycarrera4))
+
+
+## [v12.6.11](https://github.com/Workday/canvas-kit/releases/tag/v12.6.11) (2025-05-27)
+
+### Components
+
+- fix(multi-select): Forward the error prop to the MultiSelect Input ([#3309](https://github.com/Workday/canvas-kit/pull/3309)) ([@NicholasBoll](https://github.com/NicholasBoll), [@mannycarrera4](https://github.com/mannycarrera4))
+## [v13.0.4](https://github.com/Workday/canvas-kit/releases/tag/v13.0.4) (2025-05-12)
+
+### Components
+
+- fix: Ensure disabled is passed to MultiSelect sub components so input plus options are disabled ([#3295](https://github.com/Workday/canvas-kit/pull/3295)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v12.6.10](https://github.com/Workday/canvas-kit/releases/tag/v12.6.10) (2025-05-09)
+
+### Components
+
+- fix: Ensure disabled is passed to MultiSelect sub components so input plus options are disabled ([#3295](https://github.com/Workday/canvas-kit/pull/3295)) ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v13.0.3](https://github.com/Workday/canvas-kit/releases/tag/v13.0.3) (2025-05-06)
+
+### Components
+
+- fix(select): Remove excess props from `SelectInputProps` ([#3269](https://github.com/Workday/canvas-kit/pull/3269)) ([@NicholasBoll](https://github.com/NicholasBoll), manuel.carrera, [@mannycarrera4](https://github.com/mannycarrera4))
+
+
+## [v12.6.9](https://github.com/Workday/canvas-kit/releases/tag/v12.6.9) (2025-05-06)
+
+### Components
+
+- fix(select): Remove excess props from `SelectInputProps` ([#3269](https://github.com/Workday/canvas-kit/pull/3269)) ([@NicholasBoll](https://github.com/NicholasBoll), manuel.carrera, [@mannycarrera4](https://github.com/mannycarrera4))
 ## [v13.0.2](https://github.com/Workday/canvas-kit/releases/tag/v13.0.2) (2025-04-30)
 
 ### Components

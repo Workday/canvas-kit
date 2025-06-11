@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import {Meta} from '@storybook/react';
-import React from 'react';
 
 import {
   CanvasProvider,
