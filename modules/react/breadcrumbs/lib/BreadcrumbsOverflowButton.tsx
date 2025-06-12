@@ -1,18 +1,18 @@
 import {chevronRightSmallIcon, relatedActionsIcon} from '@workday/canvas-system-icons-web';
-import {colors, space} from '@workday/canvas-kit-react/tokens';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
+import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {FlexProps} from '@workday/canvas-kit-react/layout';
 import {
   composeHooks,
   createElemPropsHook,
   createSubcomponent,
   subModelHook,
-  useIsRTL,
 } from '@workday/canvas-kit-react/common';
 import {useOverflowListTarget} from '@workday/canvas-kit-react/collection';
 import {useMenuTarget} from '@workday/canvas-kit-react/menu';
-import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
+import {system} from '@workday/canvas-tokens-web';
+import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 
 export interface BreadcrumbsOverflowButtonProps extends TertiaryButtonProps {
   'aria-label': string;
@@ -23,6 +23,29 @@ export interface BreadcrumbsOverflowButtonProps extends TertiaryButtonProps {
    */
   style?: FlexProps;
 }
+
+export const breadcrumbsOverflowButtonStencil = createStencil({
+  parts: {
+    overflowButton: 'breadcrumbs-overflow-button',
+    chevronRightIcon: 'breadcrumbs-overflow-button-chevron-right-icon',
+  },
+  base: ({chevronRightIconPart}) => ({
+    alignItems: 'center',
+    display: 'flex',
+    [systemIconStencil.vars.color]: system.color.icon.default,
+    [systemIconStencil.vars.size]: px2rem(20),
+    [chevronRightIconPart]: {
+      height: system.space.x8,
+      width: system.space.x8,
+      justifyContent: 'center',
+      alignItems: 'center',
+      display: 'inline-flex',
+      ':dir(rtl)': {
+        transform: 'scaleX(-1)',
+      },
+    },
+  }),
+});
 
 export const useBreadcrumbsOverflowButton = composeHooks(
   createElemPropsHook(useBreadcrumbsModel)(() => ({
@@ -39,19 +62,18 @@ export const BreadcrumbsOverflowButton = createSubcomponent('button')({
   elemPropsHook: useBreadcrumbsOverflowButton,
 })<BreadcrumbsOverflowButtonProps>(({style, ...elemProps}, Element) => {
   return (
-    <Flex as="li" alignItems="center" {...style}>
-      <TertiaryButton as={Element} icon={relatedActionsIcon} {...elemProps} />
+    <li {...breadcrumbsOverflowButtonStencil()} {...style}>
+      <TertiaryButton
+        as={Element}
+        icon={relatedActionsIcon}
+        {...breadcrumbsOverflowButtonStencil.parts.overflowButton}
+        {...handleCsProp(elemProps)}
+      />
       <SystemIcon
         icon={chevronRightSmallIcon}
-        color={colors.licorice200}
-        colorHover={colors.licorice200}
-        size={20}
-        height={space.l}
-        width={space.l}
-        shouldMirror={useIsRTL()}
-        cs={{justifyContent: 'center', alignItems: 'center', display: 'inline-flex'}}
+        {...breadcrumbsOverflowButtonStencil.parts.chevronRightIcon}
         aria-hidden
       />
-    </Flex>
+    </li>
   );
 });
