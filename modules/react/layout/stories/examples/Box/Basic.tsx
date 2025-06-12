@@ -12,7 +12,6 @@ const CustomCard = createComponent('div')({
   Component: (props: CustomCardProps, ref, Element) => {
     return (
       <Box
-        background={system.color.bg.caution.default}
         as={Element}
         ref={ref}
         borderRadius="m"
