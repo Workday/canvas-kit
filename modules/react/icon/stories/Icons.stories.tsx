@@ -11,11 +11,12 @@ import {
   SystemIconCircle,
   Graphic,
   graphicImageStencil,
+  systemIconCircleStencil,
 } from '../index';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
-import {base} from '@workday/canvas-tokens-web';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
+import {createStyles, cssVar} from '@workday/canvas-kit-styling';
 
 const graphicExample: CanvasGraphic = {
   name: 'badgeAchievement',
@@ -117,11 +118,16 @@ export const SystemIconStory = {
       <SystemIconCircle icon={activityStreamIcon} />
       <SystemIconCircle icon={activityStreamIcon} shouldMirror={true} />
       <SystemIconCircle icon={activityStreamIcon} size={120} shouldMirror={true} />
-      <SystemIconCircle icon={activityStreamIcon} background={base.blueberry400} />
+      <SystemIconCircle
+        icon={activityStreamIcon}
+        background={system.color.bg.default}
+        color={system.color.fg.inverse}
+      />
       <SystemIconCircle
         icon={activityStreamIcon}
         background={base.blueberry400}
         shouldMirror={true}
+        cs={{[systemIconCircleStencil.vars.color]: cssVar(system.color.fg.inverse)}}
       />
     </div>
   ),

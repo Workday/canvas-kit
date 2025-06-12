@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {Box} from '@workday/canvas-kit-react/layout';
 
 const baseStyles = {
@@ -11,7 +10,7 @@ const baseStyles = {
 };
 
 export const Border = () => (
-  <>
+  <div>
     <Box borderRadius="m" border="solid 4px" borderColor="cinnamon300" {...baseStyles}>
       Cinnamon 300
     </Box>
@@ -21,5 +20,5 @@ export const Border = () => (
     <Box borderRadius="m" border="solid 4px" borderColor="blueberry300" {...baseStyles}>
       Blueberry 300
     </Box>
-  </>
+  </div>
 );

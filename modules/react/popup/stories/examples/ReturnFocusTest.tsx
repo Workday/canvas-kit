@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';

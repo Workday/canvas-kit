@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {createRoot} from 'react-dom/client';
 import {fonts} from '@workday/canvas-kit-react-fonts';
 import {system} from '@workday/canvas-tokens-web';

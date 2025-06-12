@@ -1,6 +1,5 @@
 import {createElemPropsHook, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {CSProps, handleCsProp} from '@workday/canvas-kit-styling';
-import React from 'react';
 import {useFormFieldModel} from './hooks';
 
 export interface FormFieldGroupInputProps extends CSProps {}

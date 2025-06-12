@@ -1,39 +1,44 @@
-import React from 'react';
-
-import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
-import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
-import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
+import {createComponent} from '@workday/canvas-kit-react/common';
+import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export interface PillCountProps extends FlexProps {}
 
-const StyledCountContainer = styled(Flex.as('span'))<StyledType>({
-  borderTopLeftRadius: borderRadius.zero,
-  borderTopRightRadius: borderRadius.m,
-  borderBottomLeftRadius: borderRadius.zero,
-  borderBottomRightRadius: borderRadius.m,
+export const pillCountStencil = createStencil({
+  vars: {
+    backgroundColor: '',
+    borderColor: '',
+  },
+  base: ({backgroundColor, borderColor}) => ({
+    borderStartStartRadius: system.shape.zero,
+    borderStartEndRadius: system.shape.x1,
+    borderEndStartRadius: system.shape.zero,
+    borderEndEndRadius: system.shape.x1,
+    borderWidth: px2rem(1),
+    borderInlineStartWidth: system.space.zero,
+    borderStyle: 'solid',
+    borderColor: cssVar(borderColor, system.color.border.transparent),
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: px2rem(22),
+    width: system.space.x6,
+    padding: `${system.space.zero} ${system.space.x1}`,
+    marginInlineEnd: calc.negate(system.space.x2),
+    marginInlineStart: system.space.x1,
+    backgroundColor: cssVar(backgroundColor, system.color.bg.alt.stronger),
+    flex: '0 0 auto',
+  }),
 });
 
 export const PillCount = createComponent('span')({
-  displayName: 'Pill.Avatar',
+  displayName: 'Pill.Count',
   Component: ({children, ...elemProps}: PillCountProps, ref, Element) => {
     return (
-      <StyledCountContainer
-        display="inline-flex"
-        alignItems="center"
-        justifyContent="center"
-        as={Element}
-        height={22}
-        minWidth={22}
-        padding={`0  ${space.xxxs}`}
-        marginInlineEnd={`-${space.xxs}`} // Remove excess margin at the end
-        marginInlineStart={`${space.xxxs}`}
-        backgroundColor={colors.soap500}
-        data-count="ck-pill-count"
-        ref={ref}
-        {...elemProps}
-      >
+      <Element ref={ref} {...mergeStyles(elemProps, pillCountStencil())}>
         {children}
-      </StyledCountContainer>
+      </Element>
     );
   },
 });

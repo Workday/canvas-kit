@@ -8,9 +8,8 @@ import {
   slugify,
 } from '@workday/canvas-kit-react/common';
 
-import {Item} from './useBaseListModel';
-import {VirtualItem} from './react-virtual';
 import {useListModel} from './useListModel';
+import {ListRenderItemContext} from './useListRenderItem';
 
 /**
  * This elemProps hook is the base of all item component hooks. It registers an item with a
@@ -27,58 +26,67 @@ import {useListModel} from './useListModel';
  */
 export const useListItemRegister = createElemPropsHook(useListModel)(
   (
-    {state, events},
+    model,
     ref,
     elemProps: {
       'data-id'?: string;
       'data-text'?: string;
+      'data-has-children'?: boolean;
       children?: React.ReactNode;
       index?: number;
       disabled?: boolean;
-      item?: Item<any>;
-      virtual?: VirtualItem;
     } = {}
   ) => {
-    const [localId, setLocalId] = React.useState(elemProps['data-id'] || elemProps.item?.id || '');
+    const {state, events} = model;
+
+    const {item, virtual} = React.useContext(ListRenderItemContext);
+    const [localId, setLocalId] = React.useState(elemProps['data-id'] || item?.id || '');
+
     const {localRef, elementRef} = useLocalRef(
-      useForkRef(ref as React.Ref<HTMLElement>, elemProps.virtual?.measureRef)
+      useForkRef(
+        ref as React.Ref<HTMLElement>,
+        virtual ? model.state.UNSTABLE_virtual.measureElement : null
+      )
     );
 
     // if the list is virtual, force the correct styling. Without this, weird things happen...
-    const style: CSSProperties = elemProps.virtual
+    const style: CSSProperties = virtual
       ? {
           position: 'absolute',
           top: 0,
           left: 0,
-          transform: `translateY(${elemProps.virtual.start}px)`,
+          transform: `translateY(${virtual.start}px)`,
         }
       : {};
 
     useMountLayout(() => {
-      if (elemProps.virtual?.index === 0 && localRef.current?.clientHeight) {
+      if (virtual?.index === 0 && localRef.current?.clientHeight) {
         // TODO: This update doesn't seem to be working correctly
         // events.updateItemHeight?.(localRef.current!.clientHeight);
       }
       // if an item is already provided, there's nothing left to do
-      if (elemProps.item) {
+      if (item) {
         return;
       }
       const defaultId = state.indexRef.current;
-      const itemId = localId || String(defaultId);
+      const itemId =
+        localId || (elemProps['data-has-children'] ? `${state.id}-` : '') + String(defaultId);
 
       // TODO: Better lookup that using `items.find`. We need a more generic collection to handle seeing if an item already exists
       // bail early if item already exists. This happens if items were already provided.
       if (state.items.find(item => item.id === itemId)) {
         return;
       }
-      events.registerItem({
+
+      const registeredItem = {
         id: itemId,
         textValue: elemProps['data-text']
           ? elemProps['data-text']
           : typeof elemProps.children === 'string'
           ? elemProps.children
           : '',
-      });
+      };
+      events.registerItem(registeredItem);
 
       setLocalId(itemId);
 
@@ -91,10 +99,9 @@ export const useListItemRegister = createElemPropsHook(useListModel)(
       ref: elementRef,
       'data-id': localId,
       disabled: elemProps.disabled || state.nonInteractiveIds.includes(localId) ? true : undefined,
-      item: null, // remove `item` from prop list
-      virtual: null, // remove `virtual` from prop list
-      'aria-setsize': elemProps.virtual ? state.UNSTABLE_virtual.totalSize : undefined,
-      'aria-posinset': elemProps.virtual ? elemProps.item!.index + 1 : undefined,
+      'aria-setsize': virtual ? state.UNSTABLE_virtual.getTotalSize() : undefined,
+      'aria-posinset': virtual ? item!.index + 1 : undefined,
+      'data-index': virtual ? item!.index : undefined,
       style,
       id: slugify(`${state.id}-${localId}`),
     };
