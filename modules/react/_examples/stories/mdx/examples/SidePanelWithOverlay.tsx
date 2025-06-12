@@ -3,12 +3,12 @@ import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-pa
 import {Flex, Box} from '@workday/canvas-kit-react/layout';
 import {Heading} from '@workday/canvas-kit-react/text';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
-import {system, base} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 const stylesOverride = {
   panelContainer: createStyles({
     height: px2rem(320),
-    backgroundColor: base.soap100,
+    backgroundColor: system.color.bg.alt.soft,
     position: 'relative',
   }),
   panelContent: createStyles({

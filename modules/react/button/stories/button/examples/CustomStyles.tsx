@@ -76,21 +76,21 @@ const myCustomStyles = createStyles({
 
 const customColors = {
   default: {
-    background: system.color.static.orange.soft,
-    icon: system.color.static.orange.strong,
-    label: system.color.static.orange.strong,
+    background: system.color.static.amber.soft,
+    icon: system.color.static.amber.strong,
+    label: system.color.static.amber.strong,
   },
   focus: {
-    background: system.color.static.orange.strong,
-    boxShadowInner: system.color.static.orange.soft,
-    boxShadowOuter: system.color.static.orange.strong,
+    background: system.color.static.amber.strong,
+    boxShadowInner: system.color.static.amber.soft,
+    boxShadowOuter: system.color.static.amber.strong,
   },
   hover: {
-    background: system.color.static.orange.default,
+    background: system.color.static.amber.default,
     icon: system.color.icon.inverse,
   },
   active: {
-    background: system.color.static.orange.strong,
+    background: system.color.static.amber.strong,
   },
   disabled: {},
 };

@@ -85,22 +85,22 @@ export const appletIconStencil = createStencil({
   base: ({color200, color300, color400, color500, size}) => ({
     [size]: px2rem(92),
     '& .color-100': {
-      fill: base.frenchVanilla100,
+      fill: base.neutral0,
     },
     '& .color-200': {
-      fill: cssVar(color200, base.blueberry200),
+      fill: cssVar(color200, base.blue200),
     },
     '& .color-300': {
-      fill: cssVar(color300, base.blueberry300),
+      fill: cssVar(color300, base.blue300),
     },
     '& .color-400': {
-      fill: cssVar(color400, base.blueberry400),
+      fill: cssVar(color400, base.blue400),
     },
     '& .color-400-alpha-20': {
-      fill: cssVar(color400, base.blueberry400),
+      fill: cssVar(color400, base.blue400),
     },
     '& .color-500': {
-      fill: cssVar(color500, base.blueberry400),
+      fill: cssVar(color500, base.blue400),
     },
   }),
 });
@@ -108,12 +108,12 @@ export const appletIconStencil = createStencil({
 export const AppletIcon = createComponent('span')({
   displayName: 'AppletIcon',
   Component: ({size, icon, color, ...elemProps}: AppletIconProps, ref, Element) => {
-    const colors = color && {
-      color200: base[`${color}200` as const],
-      color300: base[`${color}300` as const],
-      color400: base[`${color}400` as const],
-      color500: base[`${color}500` as const],
-    };
+    // const colors = color && {
+    //   color200: base[`${color}200` as const],
+    //   color300: base[`${color}300` as const],
+    //   color400: base[`${color}400` as const],
+    //   color500: base[`${color}500` as const],
+    // };
 
     return (
       <Svg
