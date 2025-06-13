@@ -134,7 +134,7 @@
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@stackblitz/sdk": "^1.11.0",
-    "@storybook/react-webpack5": "7.6.20",
+    "@storybook/react-webpack5": "8.2.0",
     "@workday/canvas-accent-icons-web": "^3.0.9",
     "@workday/canvas-applet-icons-web": "^2.0.9",
     "@workday/canvas-system-icons-web": "^3.0.0",
