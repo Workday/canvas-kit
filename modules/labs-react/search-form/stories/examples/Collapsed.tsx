@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
-import {SearchForm, SearchThemeAttributes} from '@workday/canvas-kit-labs-react/search-form';
+import {SearchForm} from '@workday/canvas-kit-labs-react/search-form';
 import {Flex} from '@workday/canvas-kit-react/layout';
 
 const initialWineList = [
@@ -25,7 +25,7 @@ const initialWineList = [
   'Zinfandel',
 ];
 
-export const CustomTheme = () => {
+export const Collapsed = () => {
   const [wineList, setWineList] = React.useState(initialWineList);
   // Tracking the input value for onSubmit
   const [searchInput, setSearchInput] = React.useState('');
@@ -51,23 +51,14 @@ export const CustomTheme = () => {
     console.log(`Searching for: ${searchInput}`);
   };
 
-  const customTheme = {
-    background: '#a31b12',
-    backgroundFocus: '#fff',
-    placeholderColor: '#fff',
-    placeholderColorFocus: '#333333',
-  } as SearchThemeAttributes;
-
   return (
-    <Flex minHeight={200} alignItems="flex-start">
-      <Flex padding="xs" backgroundColor="cinnamon500" flex={1} flexBasis="auto">
-        <SearchForm
-          searchTheme={customTheme}
-          autocompleteItems={menuItems}
-          onInputChange={filterMenuItems}
-          onSubmit={handleSubmit}
-        />
-      </Flex>
+    <Flex minHeight={200} alignItems="flex-start" padding="xs">
+      <SearchForm
+        autocompleteItems={menuItems}
+        onInputChange={filterMenuItems}
+        onSubmit={handleSubmit}
+        isCollapsed
+      />
     </Flex>
   );
 };

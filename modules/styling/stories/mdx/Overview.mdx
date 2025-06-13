@@ -1,138 +1,255 @@
-<Meta title="Styling/Why Canvas Styling" />
+import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
+import {Hyperlink} from '@workday/canvas-kit-react/button';
+import {system} from '@workday/canvas-tokens-web'
 
-# Why Canvas Styling
+<Meta title="Styling/Getting Started/Overview" />
 
-This package contains everything needed to create CSS styling. This styling package contains a
-runtime for development and a static parsing process for build time.
+# Canvas Kit Styling
 
-Here are the goals for this project:
+## Introduction
 
-- TypeScript autocomplete of CSS object properties
-- Low runtime for development
-- Static CSS compilation for faster user experience
-- Static CSS extraction for CSS only packages
-- Dynamic styles using CSS Variables
+Canvas Kit styling is a custom CSS-in-JS solution that provides both a runtime for development and a
+static parsing process for build time. This system offers several key benefits:
 
-If you're using Canvas Kit and not directly using this package, there is nothing extra to do on your
-end. The Canvas Kit packages are using the static compilation as part of the build process. If you
-want to use this package for your own styles, you don't need to do anything special to use in
-development. Included is a small runtime to get styling working. If you wish to statically compile
-your CSS from your TypeScript files for faster page loading, visit the
-[Getting Started](/docs/styling-getting-started--docs) page.
+- TypeScript autocomplete for enhanced developer experience
+- Low runtime overhead for better performance
+- Static CSS compilation for optimized builds
+- Dynamic styling with CSS Variables for flexible design
 
-## Why?
+The motivation behind this custom styling solution stems from the need to move beyond IE11 support
+and implement performance improvements using static styling methods. For more details, refer to the
+[Why Canvas Kit Styling](https://workday.github.io/canvas-kit/?path=/docs/styling-why-canvas-styling--docs)
+section.
 
-Canvas Kit no longer needs to support IE11 which allows us to use
-[CSS Custom Properties a.k.a. CSS Variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties).
-Dynamic style properties (properties that change during the lifecylce of the component) are the most
-costly in terms of performance in Emotion and should be avoided. Also, any conditionals in your
-Emotion style functions create unique hashes in the Emotion cache and makes that render frame pay an
-expensive
-[style recalculation](https://microsoftedge.github.io/DevTools/explainers/StyleTracing/explainer.html).
+## Overview
 
-We can avoid most of the cost of Emotion's runtime by using
-[@emotion/css](https://www.npmjs.com/package/@emotion/css) instead and hoist all style definitions
-outside of a component's render function. All dynamic styling can be moved into "modifiers" (from
-[BEM](https://getbem.com/introduction/#modifer:~:text=%2C%20header%20title-,Modifier,-A%20flag%20on)).
+The Canvas Kit styling system consists of two main packages:
 
-There's still a runtime to select which styles should apply to an element and what the CSS Variable
-should be, but it is essentially only having to choose what CSS classes should apply to an element
-and changing the `style` property to set the CSS Variables. This does not require new
-[StyleSheet](https://developer.mozilla.org/en-US/docs/Web/API/StyleSheet) inserts which cause
-expensive style recalculation. Think of the runtime as being the following:
+- `@workday/canvas-kit-styling` - Core styling utilities for runtime use
+- `@workday/canvas-kit-styling-transform` - Build-time optimization tools
 
-```jsx
-<div
-  className={getClassNames(/* input from props */)}
-  style={getCSSVarValues(/* input from props */)}
-/>
+These packages work together to provide a CSS-in-JS experience during development while enabling optimized static CSS in production.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-styling
 ```
 
-For further information, please read our GitHub discussion on
-[the future of styling](https://github.com/Workday/canvas-kit/discussions/2265)
+## Usage
 
-## What is Canvas Kit Styling?
+```tsx
+import React from 'react';
+import {createRoot} from 'react-dom/client';
 
-Canvas Kit Styling includes two things:
+import {createStyles} from '@workday/canvas-kit-styling';
 
-1. A utility function wrapper around `@emotion/css`
-2. An optional static compiler to remove most of the runtime
+const myStyles = createStyles({
+  backgroundColor: 'red',
+}); // returns the CSS class name created for this style
 
-### Utility Functions
+myStyles; // something like "css-{hash}"
 
-This packages provides three utility functions to make it easier to style element-based components.
-The following is a brief description of each function. If you'd like to read a more in-depth
-discussion of each, our [API docs](/docs/features-styling-api--create-styles).
+const domNode = document.getElementById('root');
+const root = createRoot(domNode);
+
+root.render(<div className={myStyles}>Hello!</div>);
+```
+
+## Development
+
+Canvas Kit Styling comes with a runtime that doesn't need anything special for developement. The
+runtime uses `@emotion/css` to include your styles on the page.
+
+## Production
+
+If you wish to use the static compilation, you must use the `@workday/canvas-kit-styling-transform`
+package. Add the following to your project's `tsconfig.json` file:
+
+```json
+{
+  "compilerOptions": {
+    // other options
+    "plugins": [
+      {
+        "transform": "@workday/canvas-kit-styling-transform",
+        "prefix": "css",
+        "fallbackFiles": [""]
+      }
+    ]
+  }
+}
+```
+
+This adds a list of plugins to use when transforming TypeScript files into JavaScript files. The
+[ts-patch](https://www.npmjs.com/package/ts-patch) projects uses the `plugins` when running
+transforms.
+
+### Webpack
+
+You will need to transform TypeScript files using the `ts-patch` which is the same as the TypeScript
+tanspiler except it uses TypeScript's
+[transform API](https://levelup.gitconnected.com/writing-a-custom-typescript-ast-transformer-731e2b0b66e6)
+to transform code during compilation.
+
+In your webpack config, you add the following:
+
+```js
+{
+  rules: [
+    //...
+    {
+      test: /.\.tsx?$/,
+      loaders: [
+        // ts-loader
+        {
+          loader: require.resolve('ts-loader'),
+          options: {
+            compiler: 'ts-patch/compiler',
+          },
+        },
+        // OR awesome-typescript-loader
+        {
+          loader: require.resolve('awesome-typescript-loader'),
+        },
+      ],
+    },
+  ];
+}
+```
+
+## Core Styling Approaches for Static Styling
+For proper static styling there's two methods that you can use to apply styles.
+1. Using `createStyles` for simple object base styles.
+2. Using `createStencil` for dynamic styles and reusable components.
+
+Both approaches are intended to be used in tandem with the `cs` prop when applying styles to our components.
+
+### `cs` Prop
+
+The `cs` prop takes in a single, or an array of values that are created by the `cs` function, a
+string representing a CSS class name, or the return of the `createVars` function. It merges
+everything together and applies `className` and `style` attributes to a React element. Most of our
+components extend the `cs` prop so that you can statically apply styles to them.
+
+> **Important**: While the `cs` prop accepts a style object, **this will not** be considered
+> statically styling an element and you will lose the performance benefits. We plan on providing a babel plugin to extract these styles statically in a future version.
+
+```tsx
+import {system} from '@workday/canvas-tokens-webs';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
+
+const styles = createStyles({color: system.color.static.red.default});
+
+function MyComponent() {
+  return <PrimaryButton cs={styles}>Text</PrimaryButton>;
+}
+```
+
+### `createStyles`
 
 The primary utility function is the `createStyles` function. It makes a call to the `css` function
 from `@emotion/css`. Emotion still does most of the heavy lifting by handling the serialization,
 hashing, caching, and style injection.
 
-The other two utility functions, `createVars` and `createModifiers`, provide supplemental styling
-functionality. `createVars` allows you to create temporary CSS variables within components to create
-dynamic properties. And `createModifiers` creates a modifier function to create dynamic groups of
-properties. If you're familiar with modifiers in [BEM](https://getbem.com/introduction/) (Block,
-Element, Modifier) CSS, you're well on your way to understanding this function's intent.
+```tsx
+// Bad example (inside render function)
+import {system} from '@workday/canvas-tokens-webs';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
 
-### Static Compiler
+function MyComponent() {
+  const styles = createStyles({color: system.color.static.red.default}); // Don't do this
+  return <PrimaryButton cs={styles}>Text</PrimaryButton>;
+}
 
-The static compiler run as a TypeScript transform during TypeScript's transpilation phase. It
-requires the TypeScript type checker to determine the static value of any variables used. The
-transformer calls `@emotion/serialize` to pre-compute the serialized styles and hash so that
-`@emotion/css` can skip these steps. For example, there's the before/after of the code.
+// Good example (outside render function)
+import {system} from '@workday/canvas-tokens-webs';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
 
-```ts
-// before
-const myVars = createVars('textColor', 'backgroundColor');
+const styles = createStyles({color: system.color.static.red.default});
 
-const myStyles = createStyles({
-  fontSize: 12,
-  color: cssVar(myVars.textColor),
-  backgroundColor: cssVar(myVars.backgroundColor),
-});
-
-// after
-const myVars = createVars('textColor', 'backgroundColor');
-
-const myStyles = createStyles({
-  name: 'a8g234',
-  styles:
-    'font-size: 12px; color: var(--css-my-vars-textColor); backgroundColor: var(--css-my-vars-backgroundColor);',
-});
+function MyComponent() {
+  return <PrimaryButton cs={styles}>Text</PrimaryButton>;
+}
 ```
 
-Emotion has an internal shortcut that recognizes the `styles` property and
-[short-circuits interpolation](https://github.com/emotion-js/emotion/blob/f3b268f7c52103979402da919c9c0dd3f9e0e189/packages/serialize/src/index.js#L319).
+Most of our components support using the `cs` prop to apply the static styles. It merges
+everything together and applies `className` and `style` attributes to a React element.
 
-## Performance
+<InformationHighlight className="sb-unstyled" cs={{marginBlock: system.space.x4,}}>
+	<InformationHighlight.Icon />
+	<InformationHighlight.Heading>Information</InformationHighlight.Heading>
+	<InformationHighlight.Body>
+		For a more in depth overview, please view our <Hyperlink src="https://workday.github.io/canvas-kit/?path=/docs/styling-getting-started-create-styles--docs">Create Styles</Hyperlink> docs.
+	</InformationHighlight.Body>
+</InformationHighlight>
 
-`createStyles` is more performant than `styled` components or the `css` prop because the styles must
-be statically evaluated. The actual characters of a CSS property value cannot change at runtime.
-This means we do not need to recalculate a hash every render or inject new `StyleSheet` entries into
-the `StyleSheetList` in a render cycle. Injecting new `StyleSheets` causes slow
-[Style Recalculation](https://web.dev/articles/reduce-the-scope-and-complexity-of-style-calculations).
-What is not well known is browser engines maintain an internal selector cache to make style
-recalculations as fast as possible. Adding a CSS class to a DOM element will invoke a style
-recalculation, but if the the CSS selector is already in the `StyleSheetList`, the browser can
-optimize how those styles are applied to the current element.
+### `createStencil`
 
-In the runtime Emotion's case, a novel style will result in a new style hash which results in a new
-`StyleSheet` being injected into the `StyleSheetList`. To be safe, the browser's runtime engine will
-throw away any style recalculation cache and start from scratch. This happens if you render a new
-component on the page that hasn't been rendered yet, or if you make one of your style properties
-dynamic between render cycles. Eventually the Emotion cache gets warm and style recalcuation costs
-start to normalize and no longer invalidate the browser's selector cache.
+`createStencil` is a function for creating reusable, complex component styling systems. It manages
+`base` styles, `parts`, `modifiers`, `variables`, and `compound` modifiers. Most of our components
+also export their own Stencil that might expose CSS variables in order to modify the component.
 
-On a page with over 1,000 elements and over 1,000
-[CSSRules](https://developer.mozilla.org/en-US/docs/Web/API/CSSRule), (typical of a large web
-application), the difference between a &lt; 1ms for warmed selector cache and &gt; 100ms for a fresh
-selector cache. `createStyles` encourages a pattern similar to [BEM](https://getbem.com/) which
-works well with the browser's selector cache by not injecting new `StyleSheet`s during a page's
-normal operations. All styles are injected before any rendering takes place.
+In the example below, we leverage `parts`, `vars`, `base` and `modifiers` to create a reusable
+`Card` component. The Stencil allows us to dynamic style the component based on the props.
 
-> **Note:** Since style props force Emotion's dynamic rendering, style props will fall back to
-> Emotion's runtime performance characteristics and lose any benefits gained. Also if you use
-> `styled` components or the `css` prop in a tree that uses `createStyles`, the styles created by
-> the runtime APIs will still result in a selector cache invalidation. Even if you want to use
-> `styled` or the `css` prop, consider using CSS Variables for dynamic CSS property values to reduce
-> the performance overhead of Emotion.
+```tsx
+import {createStencil}from '@workday/canvas-kit-styling';
+import {Card} from '@workday/canvas-kit-react/card';
+import {system} from '@workday/canvas-tokens-webs';
+
+const themedCardStencil = createStencil({
+  vars: {
+   // Create CSS variables for the color of the header
+    headerColor: ''
+  },
+  parts: {
+   // Allows for styling a sub element of the component that may not be exposed through the API
+    header: 'themed-card-header'
+  },
+  base: ({headerPart, headerColor}) => ({
+    padding: system.space.x4,
+    boxShadow: system.depth[2],
+    backgroundColor: system.color.bg.default,
+    color: system.color.text.default,
+    // Targets the header part via [data-part="themed-card-header"]"]
+    [headerPart]: {
+      color: headerColor
+    }
+  }),
+  modifiers: {
+    isDarkTheme: {
+    // If the prop `isDarkTheme` is true, style the component and it's parts
+      true: ({headerPart}) => ({
+        backgroundColor: system.color.bg.contrast.default,
+        color: system.color.text.inverse
+        [headerPart]: {
+          color: system.color.text.inverse
+        }
+      })
+    }
+  }
+})
+
+const ThemedCard = ({isDarkTheme, headerColor, elemProps}) => {
+  return (
+    /* Use the `cs` prop to apply the stencil and pass it the dynamic properties it needs to style accordingly */
+    <Card cs={themedCardStencil({isDarkTheme, headerColor})} {...elemProps}>
+	/* Apply the data part selector to the header */
+      <Card.Heading {...themedCardStencil.parts.header}>Canvas Supreme</Card.Heading>
+      <Card.Body>
+        Our house special supreme pizza includes pepperoni, sausage, bell peppers, mushrooms,
+        onions, and oregano.
+      </Card.Body>
+    </Card>
+  );
+};
+```
+
+<InformationHighlight className="sb-unstyled" cs={{marginBlock: system.space.x4,}}>
+	<InformationHighlight.Icon />
+	<InformationHighlight.Heading>Information</InformationHighlight.Heading>
+	<InformationHighlight.Body>
+		For a more in depth overview, please view our <Hyperlink src="https://workday.github.io/canvas-kit/?path=/docs/styling-getting-started-stencils--docs">Create Stencil</Hyperlink> docs.
+	</InformationHighlight.Body>
+</InformationHighlight>
