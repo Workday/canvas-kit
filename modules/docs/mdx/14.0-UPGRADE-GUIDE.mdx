@@ -13,9 +13,9 @@ any questions.
 - [Codemod](#codemod)
   - [Instructions](#instructions)
 - [Component Updates](#component-updates)
+  - [ColorPicker](#color-picker)
   - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
   - [SearchForm](#search-form)
-  - [ColorPicker] (#color-picker)
 - [Troubleshooting](#troubleshooting)
 - [Glossary](#glossary)
   - [Main](#main)
@@ -83,6 +83,11 @@ yarn remove @workday/canvas-kit-codemod
 > after executing the codemod, as its resulting formatting (spacing, quotes, etc.) may not match
 > your project conventions.
 
+## ColorPicker
+
+The `color` prop of the `ColorSwatch` part has been renamed to `data-color` to better align with
+HTML data attributes.
+
 ## Styling API and Canvas Tokens 💅
 
 Several components have been refactored to use our Canvas tokens and styling API. The React
@@ -103,12 +108,7 @@ The following components have been updated:
 - `ToolbarDropdownButton` [#3293](https://github.com/Workday/canvas-kit/pull/3293)
 - `ToolbarIconButton` [#3293](https://github.com/Workday/canvas-kit/pull/3293)
 
-## ColorPicker
-
-The `color` prop of the `ColorSwatch` part has been renamed to `data-color` to better align with
-HTML data attributes.
-
-## Search Form 🚨
+### Search Form 🚨
 
 **PR:** [#3303](https://github.com/Workday/canvas-kit/pull/3303)
 
