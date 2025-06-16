@@ -9,6 +9,7 @@ import {
   SystemIconCircle,
   Graphic,
   graphicImageStencil,
+  systemIconCircleStencil,
 } from '../index';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
@@ -115,12 +116,17 @@ export const SystemIconStory = {
       <SystemIconCircle icon={activityStreamIcon} />
       <SystemIconCircle icon={activityStreamIcon} shouldMirror={true} />
       <SystemIconCircle icon={activityStreamIcon} size={120} shouldMirror={true} />
-      <SystemIconCircle icon={activityStreamIcon} background={system.color.fg.primary.default} />
+      <SystemIconCircle
+        icon={activityStreamIcon}
+        background={system.color.bg.default}
+        color={system.color.fg.inverse}
+      />
       <SystemIconCircle
         icon={activityStreamIcon}
         background={system.color.fg.primary.default}
         color={system.color.fg.inverse}
         shouldMirror={true}
+        cs={{[systemIconCircleStencil.vars.color]: cssVar(system.color.fg.inverse)}}
       />
     </div>
   ),
