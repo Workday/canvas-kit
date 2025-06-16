@@ -2,7 +2,7 @@ import React from 'react';
 
 import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
-import {system, base} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {StatusIndicatorIcon} from './StatusIndicatorIcon';

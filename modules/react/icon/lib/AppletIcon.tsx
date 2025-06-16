@@ -108,12 +108,12 @@ export const appletIconStencil = createStencil({
 export const AppletIcon = createComponent('span')({
   displayName: 'AppletIcon',
   Component: ({size, icon, color, ...elemProps}: AppletIconProps, ref, Element) => {
-    // const colors = color && {
-    //   color200: base[`${color}200` as const],
-    //   color300: base[`${color}300` as const],
-    //   color400: base[`${color}400` as const],
-    //   color500: base[`${color}500` as const],
-    // };
+    const colors = color && {
+      color200: base[`${color}200` as keyof typeof base],
+      color300: base[`${color}300` as keyof typeof base],
+      color400: base[`${color}400` as keyof typeof base],
+      color500: base[`${color}500` as keyof typeof base],
+    };
 
     return (
       <Svg

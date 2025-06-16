@@ -25,7 +25,7 @@ import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
 
 import {useTabsModel} from './useTabsModel';
 import {buttonStencil} from '@workday/canvas-kit-react/button';
-import {system, brand, base} from '@workday/canvas-tokens-web';
+import {system, brand} from '@workday/canvas-tokens-web';
 export interface TabsItemProps
   extends ExtractProps<typeof Box, never>,
     Partial<Pick<FlexProps, 'gap'>> {

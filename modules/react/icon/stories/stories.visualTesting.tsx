@@ -2,7 +2,7 @@ import React from 'react';
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
-import {system} from '@workday/canvas-tokens-web';
+import {system, base} from '@workday/canvas-tokens-web';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 
@@ -21,7 +21,7 @@ export const SystemIconStates = () => (
         },
         {
           label: 'color',
-          props: {color: system.color.fg.critical.default},
+          props: {color: system.color.fg.critical},
         },
         {
           label: 'color + colorHover',
