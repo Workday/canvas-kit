@@ -18,7 +18,7 @@ const fruits = [
 ];
 
 const liveRegionStyle = createStyles({
-  border: `${px2rem(1)} solid ${system.color.bg.caution.stronger}`,
+  border: `${px2rem(1)} solid ${system.color.border.caution.strong}`,
   backgroundColor: system.color.bg.caution.default,
   padding: system.space.x2,
 });

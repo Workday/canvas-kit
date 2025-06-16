@@ -4,7 +4,7 @@ import {CSSObject} from '@emotion/styled';
 import {Svg, SvgProps, svgStencil} from './Svg';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {handleCsProp, createStencil, px2rem, cssVar} from '@workday/canvas-kit-styling';
-import {base} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 /**
  * @deprecated Interface `AppletIconStyles` will be removed in a future version. All props will be moved inside `AppletIconProps`.
@@ -42,7 +42,7 @@ export const appletIconStyles = ({
 
   return {
     '& .color-100': {
-      fill: colors.frenchVanilla100,
+      fill: system.color.fg.inverse,
     },
     '& .color-200': {
       fill: colors[colorNames[200]],
@@ -85,7 +85,7 @@ export const appletIconStencil = createStencil({
   base: ({color200, color300, color400, color500, size}) => ({
     [size]: px2rem(92),
     '& .color-100': {
-      fill: base.neutral0,
+      fill: system.color.fg.inverse,
     },
     '& .color-200': {
       fill: cssVar(color200, base.blue200),

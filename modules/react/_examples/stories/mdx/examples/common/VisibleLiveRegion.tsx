@@ -6,7 +6,6 @@ import {Flex} from '@workday/canvas-kit-react/layout';
 import {Text} from '@workday/canvas-kit-react/text';
 import {system} from '@workday/canvas-tokens-web';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
-import {sys} from 'typescript';
 
 const liveRegionStyle = createStyles({
   border: `${px2rem(1)} solid ${system.color.bg.caution.stronger}`,

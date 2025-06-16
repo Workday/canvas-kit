@@ -2,7 +2,7 @@ import * as React from 'react';
 import {CountBadge} from '@workday/canvas-kit-react/badge';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 
-import {createStyles, cssVar} from '@workday/canvas-kit-styling';
+import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const columnStyles = createStyles({
@@ -14,7 +14,7 @@ const columnStyles = createStyles({
 
 const controls = createStyles({
   boxSizing: 'border-box',
-  borderBottom: `solid 1px ${cssVar(system.color.border.divider)}`,
+  borderBottom: `solid 1px ${system.color.border.divider}`,
   display: 'flex',
   gap: system.space.x1,
   padding: system.space.x1,
