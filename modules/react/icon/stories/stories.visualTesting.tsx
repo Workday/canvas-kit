@@ -25,69 +25,75 @@ export const SystemIconStates = () => (
         },
         {
           label: 'color + colorHover',
-          props: {color: base.red300, colorHover: base.red600},
+          props: {color: system.color.fg.critical, colorHover: system.color.static.red.strong},
         },
         {
           label: 'fill',
-          props: {fill: base.purple300},
+          props: {fill: system.color.fg.primary.default},
         },
         {
           label: 'fill + fillHover',
-          props: {fill: base.purple300, fillHover: base.purple600},
+          props: {fill: system.color.fg.primary.default, fillHover: system.color.fg.primary.strong},
         },
         {
           label: 'color + colorHover + fill + fillHover',
           props: {
-            color: base.red300,
-            colorHover: base.red600,
-            fill: base.purple300,
-            fillHover: base.purple600,
+            color: system.color.fg.primary.default,
+            colorHover: system.color.fg.primary.strong,
+            fill: system.color.fg.muted.default,
+            fillHover: system.color.fg.muted.strong,
           },
         },
         {
           label: 'accent',
-          props: {accent: base.green300},
+          props: {accent: system.color.fg.caution.default},
         },
         {
           label: 'accent + accentHover',
-          props: {accent: base.green300, accentHover: base.green600},
+          props: {
+            accent: system.color.fg.caution.default,
+            accentHover: system.color.fg.caution.strong,
+          },
         },
         {
           label: 'color + colorHover + accent + accentHover',
           props: {
-            color: base.red300,
-            colorHover: base.red600,
-            accent: base.green300,
-            accentHover: base.green600,
+            color: system.color.fg.primary.default,
+            colorHover: system.color.fg.primary.strong,
+            accent: system.color.fg.muted.default,
+            accentHover: system.color.fg.muted.strong,
           },
         },
         {
           label: 'fillColor + fillHover + accent + accentHover',
           props: {
-            fill: base.purple300,
-            fillHover: base.purple600,
-            accent: base.green300,
-            accentHover: base.green600,
+            fill: system.color.fg.primary.default,
+            fillHover: system.color.fg.primary.strong,
+            accent: system.color.fg.caution.default,
+            accentHover: system.color.fg.caution.strong,
           },
         },
         {
           label: 'color + colorHover + fillColor + fillHover + accent + accentHover',
           props: {
-            color: base.red300,
-            colorHover: base.red600,
-            fill: base.purple300,
-            fillHover: base.purple600,
-            accent: base.green300,
-            accentHover: base.green600,
+            color: system.color.fg.primary.default,
+            colorHover: system.color.fg.primary.strong,
+            fill: system.color.fg.muted.default,
+            fillHover: system.color.fg.muted.strong,
+            accent: system.color.fg.caution.default,
+            accentHover: system.color.fg.caution.strong,
           },
         },
         {
           label: 'background',
-          props: {background: base.neutral400},
+          props: {background: system.color.fg.primary.default},
         },
         {
           label: 'background + backgroundHover',
-          props: {background: base.neutral400, backgroundHover: base.neutral600},
+          props: {
+            background: system.color.fg.primary.default,
+            backgroundHover: system.color.fg.primary.strong,
+          },
         },
       ]}
       columnProps={[

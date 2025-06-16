@@ -20,7 +20,7 @@ const stylesOverride = {
     paddingX: system.space.x4,
   }),
   panelHeading: createStyles({
-    color: system.color.fg.default,
+    color: system.color.fg.muted.stronger,
   }),
   main: createStyles({
     alignItems: 'center',

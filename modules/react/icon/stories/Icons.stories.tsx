@@ -43,7 +43,7 @@ export const AccentIconStory = {
   render: () => (
     <div className="story">
       <AccentIcon icon={shieldIcon} />
-      <AccentIcon icon={shieldIcon} color={cssVar(system.color.static.red.strong)} />
+      <AccentIcon icon={shieldIcon} color={system.color.static.red.strong} />
       <span
         style={{
           backgroundColor: cssVar(system.color.bg.primary.default),
@@ -51,7 +51,7 @@ export const AccentIconStory = {
           verticalAlign: 'top',
         }}
       >
-        <AccentIcon icon={shieldIcon} color={cssVar(system.color.fg.inverse)} transparent={true} />
+        <AccentIcon icon={shieldIcon} color={system.color.fg.inverse} transparent={true} />
       </span>
       <br />
       <AccentIcon icon={shieldIcon} size={80} />

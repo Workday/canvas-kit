@@ -91,16 +91,16 @@ export const appletIconStencil = createStencil({
       fill: cssVar(color200, base.blue200),
     },
     '& .color-300': {
-      fill: cssVar(color300, base.blue300),
+      fill: cssVar(color300, base.blue400),
     },
     '& .color-400': {
-      fill: cssVar(color400, base.blue400),
+      fill: cssVar(color400, base.blue600),
     },
     '& .color-400-alpha-20': {
-      fill: cssVar(color400, base.blue400),
+      fill: cssVar(color400, base.blue600),
     },
     '& .color-500': {
-      fill: cssVar(color500, base.blue400),
+      fill: cssVar(color500, base.blue700),
     },
   }),
 });
