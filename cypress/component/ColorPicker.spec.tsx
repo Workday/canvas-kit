@@ -16,7 +16,7 @@ const getColorPickerPopup = () => cy.findByRole('dialog');
 const getOpenButton = () => cy.findByLabelText('Select Background Color');
 const getResetButton = () => cy.contains('button', 'Reset');
 const getSubmitButton = () => cy.findByLabelText('Submit');
-const getSwatch = (color: string) => cy.get(`div[color="${color}"]`);
+const getSwatch = (color: string) => cy.get(`div[data-color="${color}"]`);
 
 const value = '000000';
 
