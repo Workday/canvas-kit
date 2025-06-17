@@ -1,4 +1,3 @@
-import React from 'react';
 import {ButtonSizes} from '../types';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';

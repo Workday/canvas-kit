@@ -9,7 +9,7 @@ import {
   StyledType,
   slugify,
 } from '@workday/canvas-kit-react/common';
-import {Item} from '@workday/canvas-kit-react/collection';
+import {ListRenderItemContext} from '@workday/canvas-kit-react/collection';
 import {Box} from '@workday/canvas-kit-react/layout';
 
 import {useTabsModel} from './useTabsModel';
@@ -38,10 +38,14 @@ export interface TabPanelProps extends ExtractProps<typeof Box, never> {
 const StyledTabsPanel = styled(Box)<StyledType>();
 
 export const useTabsPanel = createElemPropsHook(useTabsModel)(
-  ({state, events}, _, elemProps: {'data-id'?: string; item?: Item<any>} = {}) => {
-    const [localId, setLocalId] = React.useState(elemProps['data-id'] || elemProps.item?.id || '');
+  ({state, events}, _, elemProps: {'data-id'?: string} = {}) => {
+    const {item} = React.useContext(ListRenderItemContext);
+    const [localId, setLocalId] = React.useState(elemProps['data-id'] || item?.id || '');
 
     useMountLayout(() => {
+      if (item) {
+        return;
+      }
       const defaultId = state.panelIndexRef.current;
       const itemId = localId || String(defaultId);
       events.registerPanel({id: itemId, textValue: ''});

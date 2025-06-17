@@ -15,6 +15,8 @@ import {
   spaceStyleFnConfigs,
   textStyleFnConfigs,
 } from '@workday/canvas-kit-react/layout';
+import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight'
+import {Hyperlink} from '@workday/canvas-kit-react/button';
 
 import {Background} from './examples/Background';
 import {Border} from './examples/Border';
@@ -36,6 +38,14 @@ import {Text} from './examples/Text';
 
 Style props provide a common, ergonomic API for modifying a component's styles by passing styles
 with props.
+
+<InformationHighlight className="sb-unstyled" variant="caution">
+	<InformationHighlight.Icon />
+	<InformationHighlight.Heading> Caution: Performance Hit</InformationHighlight.Heading>
+	<InformationHighlight.Body>
+		As we transition away from Emotion's runtime costs, we advise against using style props. Please use our <Hyperlink src="https://workday.github.io/canvas-kit/?path=/docs/styling-getting-started--docs">styling utilities</Hyperlink> instead. For more information on this change, view our discussion on the <Hyperlink src="https://github.com/Workday/canvas-kit/discussions/2265">Future of Styling</Hyperlink>.
+	</InformationHighlight.Body>
+</InformationHighlight>
 
 ## System Prop Values
 
