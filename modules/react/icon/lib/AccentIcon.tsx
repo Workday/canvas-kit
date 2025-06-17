@@ -8,7 +8,7 @@ import {system} from '@workday/canvas-tokens-web';
 import {Svg, SvgProps, svgStencil, transformColorNameToToken} from './Svg';
 
 /**
- * @deprecated Interface `AccentIconStyles` will be removed in a future version. All props will be moved inside `AccentIconProps`. Consider to use the new tokens set to set `color` prop: `color={system.color.bg.primary.default}`.
+ * @deprecated Interface `AccentIconStyles` will be removed in a future version. All props will be moved inside `AccentIconProps`. Consider use the new tokens set to set `color` prop: `color={system.color.bg.primary.strong}`.
  */
 export interface AccentIconStyles {
   /**

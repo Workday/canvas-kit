@@ -123,7 +123,7 @@ export const SystemIconStory = {
       />
       <SystemIconCircle
         icon={activityStreamIcon}
-        background={system.color.fg.primary.default}
+        background={system.color.bg.primary.default}
         color={system.color.fg.inverse}
         shouldMirror={true}
         cs={{[systemIconCircleStencil.vars.color]: cssVar(system.color.fg.inverse)}}

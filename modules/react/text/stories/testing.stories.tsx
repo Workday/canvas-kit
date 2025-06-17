@@ -1,6 +1,5 @@
 import React from 'react';
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
-import {colors} from '@workday/canvas-kit-react/tokens';
 import {BodyText, Heading, LabelText, Subtext, Text, Title} from '../';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {createStyles} from '@workday/canvas-kit-styling';
@@ -53,7 +52,7 @@ export const TextStates = {
           },
           {
             label: 'With color',
-            props: {color: colors.blueberry300},
+            props: {color: system.color.static.blue.soft},
           },
           {
             label: 'With color as color token name',
@@ -85,7 +84,7 @@ export const TextStates = {
           },
           {
             label: 'With text-shadow',
-            props: {textShadow: `2px 2px ${colors.blueberry300}`},
+            props: {textShadow: `2px 2px ${system.color.static.blue.soft}`},
           },
           {
             label: 'With white-space changed to nowrap',
