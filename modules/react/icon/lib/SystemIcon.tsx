@@ -162,7 +162,7 @@ export const systemIconStencil = createStencil({
       fill: cssVar(color, system.color.icon.default),
     },
     '& .wd-icon-accent, & .wd-icon-accent2': {
-      fill: cssVar(accentColor, cssVar(color, system.color.icon.default)),
+      fill: cssVar(accentColor, cssVar(color, system.color.fg.default)),
     },
     '& .wd-icon-background': {
       fill: cssVar(backgroundColor, 'transparent'),
