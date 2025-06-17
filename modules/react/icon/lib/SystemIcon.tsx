@@ -171,7 +171,7 @@ export const systemIconStencil = createStencil({
     '&:where(:hover, .hover) .wd-icon-fill': {
       fill: cssVar(
         deprecatedSystemIconVars.fillHover,
-        cssVar(deprecatedSystemIconVars.colorHover, cssVar(color, system.color.icon.default))
+        cssVar(deprecatedSystemIconVars.colorHover, cssVar(color, system.color.fg.default))
       ),
     },
     '&:where(:hover, .hover) .wd-icon-accent, & .wd-icon-accent2': {
