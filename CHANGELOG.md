@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.1.3](https://github.com/Workday/canvas-kit/releases/tag/v13.1.3) (2025-06-17)
+
+### Infrastructure
+
+- chore: Update chromatic action settings ([#3345](https://github.com/Workday/canvas-kit/pull/3345)) ([@RayRedGoose](https://github.com/RayRedGoose), [@mannycarrera4](https://github.com/mannycarrera4))
+
+
 ## [v12.6.13](https://github.com/Workday/canvas-kit/releases/tag/v12.6.13) (2025-06-17)
 
 ### Infrastructure
