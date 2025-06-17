@@ -2,28 +2,39 @@ import * as React from 'react';
 
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {mergeStyles, BoxProps} from '@workday/canvas-kit-react/layout';
-import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {CardHeading} from './CardHeading';
 import {CardBody} from './CardBody';
 
-export interface CardProps extends BoxProps {
+export interface CardProps extends Omit<BoxProps, 'depth'> {
   /**
    * Children of the Card. Should contain a `<Card.Body>` and an optional `<Card.Heading>`
    */
   children?: React.ReactNode;
+  /**
+   * The depth of the Card.
+   * @default 1
+   */
+  depth?: keyof typeof system.depth;
 }
 
 // .cnvs-card
 export const cardStencil = createStencil({
-  base: {
-    boxShadow: system.depth[1],
-    padding: system.space.x8,
-    backgroundColor: system.color.bg.default,
-    border: `${px2rem(1)} solid ${system.color.border.container}`,
-    borderRadius: system.shape.x2,
+  vars: {
+    depth: '',
   },
+  base: ({depth}) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    gap: system.space.x6,
+    paddingBlock: system.space.x8,
+    paddingInline: system.space.x6,
+    backgroundColor: system.color.bg.default,
+    borderRadius: system.shape.x2,
+    depth: cssVar(depth, 'none'),
+  }),
 });
 
 /**
@@ -40,9 +51,11 @@ export const cardStencil = createStencil({
  */
 export const Card = createComponent('div')({
   displayName: 'Card',
-  Component: ({children, ...elemProps}: CardProps, ref, Element) => {
+  Component: ({children, depth, ...elemProps}: CardProps, ref, Element) => {
+    const depthToken = depth ? system.depth[depth] : undefined;
+
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, cardStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, cardStencil({depth: depthToken}))}>
         {children}
       </Element>
     );
