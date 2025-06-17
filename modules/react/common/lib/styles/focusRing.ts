@@ -1,6 +1,6 @@
 import {Theme, CSSObject} from '@emotion/react';
 import {cssVar} from '@workday/canvas-kit-styling';
-import {base, brand} from '@workday/canvas-tokens-web';
+import {brand, system} from '@workday/canvas-tokens-web';
 
 interface FocusRingOptions {
   width?: number;
@@ -87,7 +87,7 @@ export function focusRing(options: FocusRingOptions = {}, theme?: Theme): CSSObj
     separation = 0,
     animate = true,
     // hard code CSS fallbacks for dynamic styles that don't use the static style transform
-    innerColor = cssVar(base.frenchVanilla100, 'rgba(255,255,255,1)'),
+    innerColor = cssVar(system.color.border.inverse, 'rgba(255,255,255,1)'),
     outerColor = cssVar(brand.common.focusOutline, 'rgba(8,117,225,1)'),
     inset,
   } = options;
