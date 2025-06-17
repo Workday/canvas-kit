@@ -17,7 +17,7 @@ export interface FormFieldGroupProps extends FlexProps, GrowthBehavior {
    * The direction the child elements should stack. In v13, `horizontal` will be removed. Please use `horizontalStart` or `horizontalEnd` for horizontal alignment.
    * @default vertical
    */
-  orientation?: 'vertical' | 'horizontalStart' | 'horizontalEnd' | 'horizontal';
+  orientation?: 'vertical' | 'horizontalStart' | 'horizontalEnd';
   children: React.ReactNode;
 }
 
@@ -120,8 +120,7 @@ export const FormFieldGroup = createContainer('div')({
         elemProps,
         formFieldStencil({
           grow,
-          orientation:
-            model.state.orientation === 'horizontal' ? 'horizontalStart' : model.state.orientation,
+          orientation: model.state.orientation,
           error: model.state.error,
           required: model.state.isRequired,
         })

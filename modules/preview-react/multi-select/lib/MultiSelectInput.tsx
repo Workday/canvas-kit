@@ -12,6 +12,7 @@ import {
 import {createStencil, CSProps, handleCsProp, px2rem, calc} from '@workday/canvas-kit-styling';
 import {InputGroup, TextInput, textInputStencil} from '@workday/canvas-kit-react/text-input';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {getCursor} from '@workday/canvas-kit-react/collection';
 import {useComboboxInput, useComboboxInputConstrained} from '@workday/canvas-kit-react/combobox';
 
 import {useMultiSelectModel} from './useMultiSelectModel';
@@ -139,7 +140,7 @@ export const useMultiSelectInput = composeHooks(
       onKeyDown(event: React.KeyboardEvent) {
         // Space bar key is hit and menu is open
         if (event.key === ' ' && model.state.visibility === 'visible') {
-          const id = model.state.cursorId;
+          const id = getCursor(model.state);
           // There are 2 modes. Search mode and navigation mode. Searching clears the cursor. Using
           // the down arrow enables the cursor and thus navigation mode.
           // - Navigation mode: toggle cursor item

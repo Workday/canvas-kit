@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {Popup} from '@workday/canvas-kit-react/popup';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';

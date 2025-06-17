@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {useToastModel} from './hooks/useToastModel';
 import {Subtext} from '@workday/canvas-kit-react/text';

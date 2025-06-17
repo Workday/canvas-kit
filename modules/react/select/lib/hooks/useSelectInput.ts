@@ -5,6 +5,7 @@ import {
   useLocalRef,
   useResizeObserver,
 } from '@workday/canvas-kit-react/common';
+import {getCursor} from '@workday/canvas-kit-react/collection';
 import {
   useComboboxInput,
   useComboboxInputConstrained,
@@ -37,14 +38,14 @@ export const useSelectInput = composeHooks(
       // since it points to the visual input and not the hidden input. This allows scroll to index to work
       React.useEffect(() => {
         if (model.state.cursorId && model.state.visibility === 'visible') {
-          const item = model.navigation.getItem(model.state.cursorId, model);
+          const item = model.navigation.getItem(getCursor(model.state), model);
           if (model.state.isVirtualized && item) {
             model.state.UNSTABLE_virtual.scrollToIndex(item.index);
           } else {
             const listboxId = localRef.current?.getAttribute('aria-controls');
             if (listboxId) {
               const menuItem = document.querySelector(
-                `[id="${listboxId}"] [data-id="${model.state.cursorId}"]`
+                `[id="${listboxId}"] [data-id="${getCursor(model.state)}"]`
               );
               if (menuItem) {
                 requestAnimationFrame(() => {
@@ -81,7 +82,7 @@ export const useSelectInput = composeHooks(
             // If key so far is empty, they're done typing, select the item where the cursor is located and hide the menu
             if (elemProps?.keySoFar === '') {
               model.events.select({
-                id: model.state.cursorId,
+                id: getCursor(model.state),
               });
               model.events.hide();
             }

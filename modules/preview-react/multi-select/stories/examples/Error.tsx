@@ -14,7 +14,7 @@ export const Error = () => {
     <>
       <MultiSelect model={model}>
         <FormField
-          orientation="horizontal"
+          orientation="horizontalStart"
           error={
             model.state.selectedIds.length < 1
               ? 'error'
