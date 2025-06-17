@@ -179,7 +179,7 @@ export const systemIconStencil = createStencil({
         deprecatedSystemIconVars.accentHover,
         cssVar(
           deprecatedSystemIconVars.colorHover,
-          cssVar(accentColor, cssVar(color, system.color.icon.default))
+          cssVar(accentColor, cssVar(color, system.color.fg.default))
         )
       ),
     },
