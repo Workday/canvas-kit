@@ -4,7 +4,7 @@ import type {
   CustomTransformerFactories,
   TransformerFactory,
   TransformerStage,
-} from './vitePluginTypescriptTypes';
+} from './vite-plugin-typescript-types';
 
 /**
  * Merges all received custom transformer definitions into a single CustomTransformers object

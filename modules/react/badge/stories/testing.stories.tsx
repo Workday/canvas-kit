@@ -1,8 +1,7 @@
 import React from 'react';
 
+import {CountBadge} from '@workday/canvas-kit-react/badge';
 import {ComponentStatesTable} from '@workday/canvas-kit-react/testing';
-
-import {CountBadge} from '../index';
 
 export default {
   title: 'Testing/Indicators/Badge/CountBadge',

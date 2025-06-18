@@ -33,12 +33,6 @@ describe('createStyles', () => {
     _reset();
   });
 
-  it.only('foo', () => {
-    const program = ts.createProgram(['modules/react/text/lib/Text.tsx'], getTSConfig());
-    const result = transform(program, 'modules/react/text/lib/Text.tsx');
-    console.log(result); //?
-  });
-
   it('should parse string literals, passing them through', () => {
     const program = createProgramFromSource(`
       import {createStyles} from '@workday/canvas-kit-styling';

@@ -7,7 +7,7 @@ import ts, {
 import {type Plugin, type PluginOption, createFilter} from 'vite';
 
 import {createDocProgram} from '../modules/docs/docgen/createDocProgram';
-import {mergeTransformers} from './vitePluginTypescriptCustomTransforms';
+import {mergeTransformers} from './vite-plugin-typescript-custom-transforms';
 
 type Filepath = string;
 type InvalidateModule = () => void;
@@ -27,6 +27,12 @@ export interface Options {
   transformers?: ((
     program: Program
   ) => ts.TransformerFactory<ts.SourceFile> | ts.CustomTransformerFactory)[];
+
+  /**
+   * A function that will be called after the typescript transform has been applied.
+   * This can be used to inject code into the file after the typescript transform has been applied.
+   */
+  postTransform?: (code: string, id: string) => string | undefined;
 }
 
 /** Get the contents of the tsconfig in the system */
@@ -181,11 +187,18 @@ export function typescriptPlugin(config: Options = {}): Plugin {
 
       const sourceFile =
         tsProgram.getSourceFile(id) || ts.createSourceFile(id, '', ts.ScriptTarget.ES2019);
-      return printer.printFile(
+
+      const transformed = printer.printFile(
         ts
           .transform(sourceFile, transformers, compilerOptions)
           .transformed.find(s => s.fileName === id) || sourceFile
       );
+
+      const postTransform = config.postTransform
+        ? config.postTransform(transformed, id)
+        : transformed;
+
+      return postTransform || transformed;
 
       // return '';
       // return output.outputText + '\n\n// compiled by typescript\n';

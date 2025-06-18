@@ -1,12 +1,9 @@
-import React from 'react';
-
+import {SidePanel} from '@workday/canvas-kit-preview-react/side-panel';
 import {
   ComponentStatesTable,
   StaticStates,
   permutateProps,
 } from '@workday/canvas-kit-react/testing';
-
-import {SidePanel} from '../index';
 
 export default {
   title: 'Testing/Preview/Side Panel',

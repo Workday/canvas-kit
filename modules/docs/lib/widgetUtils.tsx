@@ -1,16 +1,16 @@
-import React from 'react';
 import styled from '@emotion/styled';
+import React from 'react';
 
-import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
-import {useDialogModel, Dialog} from '@workday/canvas-kit-react/dialog';
-import {CanvasColor, colors, space, type} from '@workday/canvas-kit-react/tokens';
 import {Breadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
-
-import {MDX, MdxJSToJSX} from './MDXElements';
 import {Hyperlink} from '@workday/canvas-kit-react/button';
-import {docs} from './docs';
-import {Value} from './Value';
+import {StyledType, createComponent} from '@workday/canvas-kit-react/common';
+import {Dialog, useDialogModel} from '@workday/canvas-kit-react/dialog';
+import {CanvasColor, colors, space, type} from '@workday/canvas-kit-react/tokens';
+
 import * as types from '../docgen/docTypes';
+import {MDX, MdxJSToJSX} from './MDXElements';
+import {Value} from './Value';
+import {docs, subscribe} from './docs';
 
 /**
  * This context allows us to keep track if we're within a nested stack of dialog
@@ -292,8 +292,17 @@ function findDoc({name, fileName}: ValueDocProps): types.ExportedSymbol<types.Va
 }
 
 export const useDoc = (criteria: ValueDocProps) => {
+  const [doc, setDoc] = React.useState(() => {
+    return findDoc(criteria);
+  });
+
+  subscribe({
+    name: criteria.name,
+    fileName: criteria.fileName,
+    callback: setDoc,
+  });
   // Listen to criteria.name and criteria.fileName so that we can re-fetch docs in the dialog
-  const doc = React.useMemo(() => findDoc(criteria), [criteria.name, criteria.fileName || '']);
+  // const doc = React.useMemo(() => findDoc(criteria), [criteria.name, criteria.fileName || '']);
 
   return doc;
 };

@@ -1,7 +1,7 @@
-// const path = require('path');
-
-export default wallaby => {
+export default _wallaby => {
   return {
+    files: ['**/*.ts?(x)'],
+    tests: ['**/*.spec.ts*'],
     testFramework: 'vitest',
   };
   // return {

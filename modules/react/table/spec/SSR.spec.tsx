@@ -1,14 +1,9 @@
-/**
- * @jest-environment node
- */
-import React from 'react';
 import {renderToString} from 'react-dom/server';
 
 import {Table} from '..';
 
 describe('Table', () => {
   it('should render on a server without crashing', () => {
-    'here'; //?
     const ssrRender = () =>
       renderToString(
         <Table>

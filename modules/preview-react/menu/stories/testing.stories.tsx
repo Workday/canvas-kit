@@ -1,5 +1,10 @@
 import React from 'react';
 
+import {
+  DeprecatedMenu,
+  DeprecatedMenuItem,
+  DeprecatedMenuItemProps,
+} from '@workday/canvas-kit-preview-react/menu';
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 import {
   extLinkIcon,
@@ -7,8 +12,6 @@ import {
   uploadCloudIcon,
   userIcon,
 } from '@workday/canvas-system-icons-web';
-
-import {DeprecatedMenu, DeprecatedMenuItem, DeprecatedMenuItemProps} from '../index';
 
 // eslint-disable-next-line no-empty-function
 const noop = () => {};

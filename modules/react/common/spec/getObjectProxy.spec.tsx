@@ -2,13 +2,6 @@ import {getObjectProxy} from '../lib/theming';
 
 describe('getObjectProxy', () => {
   it('should use fallback property when target is an empty object', () => {
-    getObjectProxy({}, {foo: 'bar'}); //?
-    getObjectProxy({}, {foo: 'bar'}).hasOwnProperty('foo'); //?
-    for (const key in getObjectProxy({}, {foo: 'bar'})) {
-      key; //?
-    }
-    const temp = {...getObjectProxy({}, {foo: 'bar'})}; //?
-
     expect(getObjectProxy({}, {foo: 'bar'})).toHaveProperty('foo', 'bar');
   });
 

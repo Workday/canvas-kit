@@ -1,28 +1,25 @@
-import React from 'react';
-
-/* eslint-disable @emotion/no-vanilla */
-import {expectTypeOf} from 'expect-type';
-import {Properties} from 'csstype';
-import {SerializedStyles} from '@emotion/serialize';
 import {css} from '@emotion/css';
-import {jsx, CacheProvider} from '@emotion/react';
+import {CacheProvider, jsx} from '@emotion/react';
+import {SerializedStyles} from '@emotion/serialize';
 import styled from '@emotion/styled';
 import {render as rtlRender, screen} from '@testing-library/react';
+import {Properties} from 'csstype';
+import {expectTypeOf} from 'expect-type';
 
 import {
-  createStyles,
-  cssVar,
-  createVars,
-  createModifiers,
-  csToProps,
   CS,
-  createCompoundModifiers,
+  CSProps,
   CompoundModifier,
+  createCompoundModifiers,
+  createModifiers,
   createStencil,
+  createStyles,
+  createVars,
+  csToProps,
+  cssVar,
+  getCache,
   handleCsProp,
   keyframes,
-  CSProps,
-  getCache,
 } from '../lib/cs';
 
 const cache = getCache();
@@ -738,7 +735,7 @@ describe('cs', () => {
       expectTypeOf(myStencil.parts.separator).toEqualTypeOf<{'data-part': 'my-separator'}>();
 
       expect(myStencil).toHaveProperty(
-        'parts.separator[data-part]',
+        'parts.separator.data-part',
         expect.stringMatching('my-separator')
       );
     });
@@ -1249,7 +1246,7 @@ describe('cs', () => {
           'data-part': 'base-separator';
         }>();
         expect(extendedStencil).toHaveProperty(
-          'parts.separator[data-part]',
+          'parts.separator.data-part',
           expect.stringMatching('base-separator')
         );
 
@@ -1260,7 +1257,7 @@ describe('cs', () => {
           'data-part': 'extended-border';
         }>();
         expect(extendedStencil).toHaveProperty(
-          'parts.border[data-part]',
+          'parts.border.data-part',
           expect.stringMatching('extended-border')
         );
       });

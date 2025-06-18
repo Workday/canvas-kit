@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {ExportedSymbol, Value} from '../docgen/docTypes';
+import docsObject from './docs.json';
 
 export const GithubUrl = React.createContext('https://github.com/Workday/canvas-kit/');
 export const GithubBranch = React.createContext('master');
@@ -12,9 +13,7 @@ export const StorybookUrl = React.createContext(
 
 export const docs =
   (typeof window !== 'undefined' && ((window as any).__docs as ExportedSymbol<Value>[])) ||
-  [
-    /* DOCS_REPLACED_BY_BUILD */
-  ];
+  docsObject;
 
 export function getDoc(name: string, fileName?: string) {
   return docs.find(d => {
@@ -44,7 +43,7 @@ export function subscribe(listener: Subscription): Unsubscribe {
 }
 
 export function updateDocs(updatedDocs: ExportedSymbol[]) {
-  console.log('updating docs', updateDocs);
+  console.log('updating docs', updateDocs, subscriptions.length);
 
   updatedDocs.forEach(doc => {
     const foundIndex = docs.findIndex(d => d.fileName === doc.fileName && d.name === doc.name);
@@ -65,7 +64,7 @@ export function updateDocs(updatedDocs: ExportedSymbol[]) {
 // Catch dev-mode docs
 if ((import.meta as any).hot) {
   (import.meta as any).hot.on('docs:update', (data: ExportedSymbol[]) => {
-    console.log('updating docs', data);
+    console.log('hot reload updating docs', data);
     updateDocs(data);
   });
 }

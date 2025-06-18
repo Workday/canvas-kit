@@ -7,7 +7,7 @@ import {Basic} from '../../modules/${prerelease && prerelease + 'react'}/${modul
 }
 
 describe('${pascalCaseName}', () => {
-  context(\`given the [Components/Inputs/Checkbox, ${Example.name}] story is rendered`, () => {
+  context(\`given the [Components/Inputs/Checkbox, ${Example.name}] story is rendered\`, () => {
     beforeEach(() => {
       cy.mount(<Example />);
     });

@@ -100,7 +100,7 @@
   "scripts": {
     "start": "node utils/download-fonts.mjs && node ./node_modules/storybook/core/cli/bin/index.js dev -p 9001 -c .storybook",
     "watch": "TSC_NONPOLLING_WATCHER=1 lerna run watch --parallel --stream",
-    "clean": "yarn run clean",
+    "clean": "lerna run clean",
     "depcheck": "lerna run depcheck",
     "prebuild": "yarn depcheck",
     "build": "lerna run build",
@@ -120,7 +120,7 @@
     "typecheck:stories": "tsc -p tsconfig.stories.json --noEmit --incremental false",
     "format:prettier": "prettier --config=./.prettierrc.js --ignore-path=./.prettierignore \"**/*.{js,jsx,json,ts,tsx,md}\" --write",
     "format": "yarn eslint --ext=jsx,ts,tsx --fix -c .eslintrc-prettier.js",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test": "vitest run",
     "bump": "lerna version",
     "bump:prerelease": "lerna version prerelease --exact --preid",
     "cypress:open": "cypress open",

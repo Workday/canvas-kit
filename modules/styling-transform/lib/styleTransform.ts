@@ -80,10 +80,6 @@ export function styleTransformer(
 
   return context => {
     const visit: ts.Visitor = node => {
-      if (ts.isSourceFile(node)) {
-        console.log('source file', node.fileName);
-      }
-
       if (!transformContext.fileName) {
         transformContext.fileName = node.getSourceFile()?.fileName;
         transformContext.prefix = transformContext.getPrefix(transformContext.fileName);

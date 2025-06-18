@@ -3,6 +3,14 @@ import {act} from 'react-dom/test-utils';
 
 import {Tooltip} from '..';
 
+beforeEach(() => {
+  vi.useFakeTimers();
+});
+
+afterEach(() => {
+  vi.useRealTimers();
+});
+
 describe('Tooltip', () => {
   describe('when "type" is "label"', () => {
     it('should render an aria-label', () => {
@@ -17,7 +25,6 @@ describe('Tooltip', () => {
   });
 
   describe('when "type" is "describe"', () => {
-    vi.useFakeTimers();
     it('should render aria-describedby', () => {
       render(
         <Tooltip type="describe" title="This is an extra description">
@@ -27,12 +34,13 @@ describe('Tooltip', () => {
 
       fireEvent.mouseEnter(screen.getByText('Test Text')); // triggers the tooltip
 
-      vi.advanceTimersByTime(300); // advance the timer by the amount of delay time
+      act(() => {
+        vi.advanceTimersByTime(300); // advance the timer by the amount of delay time
+      });
       expect(screen.getByText('Test Text')).toHaveAttribute('aria-describedby', 'a1');
 
       expect(screen.getByRole('tooltip')).toHaveAttribute('id', 'a1');
     });
-    vi.clearAllTimers();
   });
 
   describe('when "type" is "muted"', () => {
@@ -62,7 +70,6 @@ describe('Tooltip', () => {
   });
 
   describe('when "showDelay" is passed in', () => {
-    vi.useFakeTimers();
     it('should render the tooltip after the delay', () => {
       render(
         <Tooltip type="describe" title="Delayed Tooltip Text" showDelay={1000}>
@@ -82,11 +89,9 @@ describe('Tooltip', () => {
       });
       expect(screen.getByText('Delayed Tooltip Text')).toBeInTheDocument();
     });
-    vi.clearAllTimers();
   });
 
   describe('when "hideDelay" is passed in', () => {
-    vi.useFakeTimers();
     it('should render the tooltip after the delay', () => {
       render(
         <Tooltip type="describe" title="Delayed Tooltip Text" hideDelay={300}>
@@ -112,7 +117,6 @@ describe('Tooltip', () => {
       });
       expect(screen.queryByText('Delayed Tooltip Text')).toBeNull(); // tooltip is hidden after the delay
     });
-    vi.clearAllTimers();
   });
 
   ['onMouseEnter', 'onMouseLeave', 'onFocus', 'onBlur', 'onClick', 'onMouseOver'].forEach(key => {

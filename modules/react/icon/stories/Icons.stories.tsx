@@ -2,12 +2,6 @@ import * as React from 'react';
 
 import {shieldIcon} from '@workday/canvas-accent-icons-web';
 import {benefitsIcon} from '@workday/canvas-applet-icons-web';
-import {colors} from '@workday/canvas-kit-react/tokens';
-import {createStyles} from '@workday/canvas-kit-styling';
-import {activityStreamIcon} from '@workday/canvas-system-icons-web';
-import {base} from '@workday/canvas-tokens-web';
-import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
-
 import {
   AccentIcon,
   AppletIcon,
@@ -15,7 +9,13 @@ import {
   SystemIcon,
   SystemIconCircle,
   graphicImageStencil,
-} from '../index';
+  systemIconCircleStencil,
+} from '@workday/canvas-kit-react/icon';
+import {colors} from '@workday/canvas-kit-react/tokens';
+import {createStyles, cssVar} from '@workday/canvas-kit-styling';
+import {activityStreamIcon} from '@workday/canvas-system-icons-web';
+import {base, system} from '@workday/canvas-tokens-web';
+import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
 
 const graphicExample: CanvasGraphic = {
   name: 'badgeAchievement',
@@ -113,11 +113,16 @@ export const SystemIconStory = {
       <SystemIconCircle icon={activityStreamIcon} />
       <SystemIconCircle icon={activityStreamIcon} shouldMirror={true} />
       <SystemIconCircle icon={activityStreamIcon} size={120} shouldMirror={true} />
-      <SystemIconCircle icon={activityStreamIcon} background={base.blueberry400} />
+      <SystemIconCircle
+        icon={activityStreamIcon}
+        background={system.color.bg.default}
+        color={system.color.fg.inverse}
+      />
       <SystemIconCircle
         icon={activityStreamIcon}
         background={base.blueberry400}
         shouldMirror={true}
+        cs={{[systemIconCircleStencil.vars.color]: cssVar(system.color.fg.inverse)}}
       />
     </div>
   ),

@@ -1,5 +1,4 @@
 import {DocsContainer, DocsPage} from '@storybook/addon-docs';
-import React from 'react';
 
 import {defaultCanvasTheme} from '@workday/canvas-kit-react/common';
 import '@workday/canvas-tokens-web/css/base/_variables.css';
