@@ -72,7 +72,7 @@ export const textInputStencil = createStencil({
       error: {
         borderColor: brand.common.errorInner,
         borderWidth: px2rem(2),
-        backgroundColor: system.color.bg.critical.softest,
+        backgroundColor: brand.error.lightest,
         '&:is(:hover, .hover, :disabled, .disabled, :focus-visible:not([disabled]), .focus:not([disabled]))':
           {
             borderColor: brand.common.errorInner,
@@ -85,7 +85,7 @@ export const textInputStencil = createStencil({
       alert: {
         borderColor: system.color.border.caution.strong,
         boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.common.alertInner}`,
-        backgroundColor: system.color.bg.caution.softest,
+        backgroundColor: brand.alert.lightest,
         '&:is(:hover, .hover, :disabled, .disabled, :focus-visible:not([disabled]), .focus:not([disabled]))':
           {
             borderColor: system.color.border.caution.strong,
