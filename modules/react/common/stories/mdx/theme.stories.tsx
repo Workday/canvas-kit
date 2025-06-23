@@ -102,6 +102,7 @@ type SwatchKey = keyof CanvasThemePalette;
 
 const ThemeDemo = (props: any) => {
   const theme = useTheme();
+  console.log(customTheme);
   return (
     <div>
       <StyledHeaderDefaultTheme>Default Canvas Theme</StyledHeaderDefaultTheme>

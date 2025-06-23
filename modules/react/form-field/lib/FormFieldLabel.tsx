@@ -40,7 +40,7 @@ export const formFieldLabelStencil = createStencil({
           content: '"*"',
           fontSize: system.fontSize.body.large,
           fontWeight: system.fontWeight.normal,
-          color: brand.error.base,
+          color: system.color.fg.critical,
           textDecoration: 'unset',
           marginInlineStart: system.space.x1,
         },

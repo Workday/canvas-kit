@@ -2,37 +2,33 @@ import {EmotionCanvasTheme} from '../theming/index';
 import {ErrorType} from '../types';
 import {CSSObject} from '@emotion/styled';
 import {colors, inputColors} from '@workday/canvas-kit-react/tokens';
-import chroma from 'chroma-js';
-
-const isAccessible = (foreground: string, background: string = colors.frenchVanilla100) => {
-  return chroma.contrast(foreground, background) >= 3;
-};
+import {brand, system} from '@workday/canvas-tokens-web';
 
 export function getErrorColors(error?: ErrorType, theme?: EmotionCanvasTheme) {
   if (error === ErrorType.Error) {
     if (theme) {
-      const palette = theme.canvas.palette.error;
+      const palette = theme.canvas.palette.common.errorInner;
       return {
-        outer: isAccessible(palette.main) ? palette.main : palette.darkest,
-        inner: palette.main,
+        outer: palette,
+        inner: palette,
       };
     } else {
       return {
-        outer: inputColors.error.border,
-        inner: inputColors.error.border,
+        outer: brand.common.errorInner,
+        inner: brand.common.errorInner,
       };
     }
   } else if (error === ErrorType.Alert) {
     if (theme) {
       const palette = theme.canvas.palette.alert;
       return {
-        outer: isAccessible(palette.main) ? palette.main : palette.darkest,
+        outer: palette.dark,
         inner: palette.main,
       };
     } else {
       return {
-        outer: colors.cantaloupe600,
-        inner: inputColors.alert.border,
+        outer: system.color.border.caution.strong,
+        inner: brand.common.alertInner,
       };
     }
   } else {

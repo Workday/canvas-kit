@@ -18,11 +18,7 @@ const getPaletteColorsFromTheme = (
   fallbackColors?: ContrastColors
 ): ContrastColors => {
   return {
-    outer: isAccessible(palette.main)
-      ? palette.main
-      : isAccessible(palette.darkest)
-      ? palette.darkest
-      : fallbackColors?.outer,
+    outer: fallbackColors?.outer ? fallbackColors.outer : palette.main,
     inner: fallbackColors?.inner ? fallbackColors.inner : palette.main,
   };
 };
