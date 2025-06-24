@@ -7,10 +7,10 @@ import {cssVar} from '@workday/canvas-kit-styling';
 export function getErrorColors(error?: ErrorType, theme?: EmotionCanvasTheme) {
   if (error === ErrorType.Error) {
     if (theme) {
-      const palette = theme.canvas.palette.error;
+      const palette = theme.canvas.palette;
       return {
-        outer: cssVar(palette.main),
-        inner: palette.main,
+        outer: palette.common.errorInner,
+        inner: palette.common.errorInner,
       };
     } else {
       return {
