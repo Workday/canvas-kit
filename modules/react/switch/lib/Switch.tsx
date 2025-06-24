@@ -99,6 +99,7 @@ const switchInputStencil = createStencil({
       },
       alert: {
         '& ~ div:first-of-type': {
+          // TODO: Use brand.common.alertOuter once it's added to brand tokens
           boxShadow: `
           0 0 0 ${px2rem(2)} ${system.color.border.inverse},
           0 0 0 ${system.space.x1} ${brand.common.alertInner},

@@ -18,10 +18,7 @@ const getPaletteColorsFromTheme = (
   fallbackColors?: ContrastColors,
   errorType?: 'error' | 'alert'
 ): ContrastColors => {
-  console.log(palette);
-  console.log(fallbackColors);
   if (errorType === 'error') {
-    console.log('error');
     return {
       outer: palette.palette.common.errorInner || fallbackColors?.outer,
       inner: fallbackColors?.inner || palette.palette.common.errorInner,
