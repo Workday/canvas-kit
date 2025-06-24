@@ -1,16 +1,16 @@
 import {EmotionCanvasTheme} from '../theming/index';
 import {ErrorType} from '../types';
 import {CSSObject} from '@emotion/styled';
-import {colors, inputColors} from '@workday/canvas-kit-react/tokens';
 import {brand, system} from '@workday/canvas-tokens-web';
+import {cssVar} from '@workday/canvas-kit-styling';
 
 export function getErrorColors(error?: ErrorType, theme?: EmotionCanvasTheme) {
   if (error === ErrorType.Error) {
     if (theme) {
-      const palette = theme.canvas.palette.common.errorInner;
+      const palette = theme.canvas.palette.error;
       return {
-        outer: palette,
-        inner: palette,
+        outer: cssVar(palette.main),
+        inner: palette.main,
       };
     } else {
       return {
@@ -55,8 +55,10 @@ export function errorRing(error?: ErrorType, theme?: EmotionCanvasTheme): CSSObj
     '&:focus-visible:not([disabled]), &.focus:not([disabled])': {
       borderColor: errorColors.outer,
       boxShadow: `${errorBoxShadow},
-        0 0 0 2px ${colors.frenchVanilla100},
-        0 0 0 4px ${theme ? theme.canvas.palette.common.focusOutline : inputColors.focusBorder}`,
+        0 0 0 2px ${cssVar(system.color.border.inverse)},
+        0 0 0 4px ${
+          theme ? theme.canvas.palette.common.focusOutline : cssVar(brand.common.focusOutline)
+        }`,
     },
   };
 }
