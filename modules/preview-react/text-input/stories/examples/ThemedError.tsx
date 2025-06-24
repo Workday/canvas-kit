@@ -15,9 +15,7 @@ export const ThemedError = () => {
       palette: {
         common: {
           focusOutline: colors.grapeSoda300,
-        },
-        error: {
-          main: colors.islandPunch400,
+          errorInner: colors.islandPunch400,
         },
       },
     },

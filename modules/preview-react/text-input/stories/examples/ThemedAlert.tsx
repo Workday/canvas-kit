@@ -13,10 +13,8 @@ export const ThemedAlert = () => {
       palette: {
         common: {
           focusOutline: colors.grapeSoda300,
-        },
-        alert: {
-          main: colors.kiwi200,
-          darkest: colors.kiwi600,
+          alertInner: colors.kiwi200,
+          alertOuter: colors.kiwi600,
         },
       },
     },

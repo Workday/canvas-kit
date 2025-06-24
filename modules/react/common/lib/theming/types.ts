@@ -16,6 +16,7 @@ export type CanvasThemePalette = {
 type CanvasThemeCommonPalette = {
   focusOutline: string;
   alertInner: string;
+  alertOuter: string;
   errorInner: string;
 };
 

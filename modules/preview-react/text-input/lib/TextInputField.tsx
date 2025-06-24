@@ -13,6 +13,7 @@ import {
   useThemedRing,
 } from '@workday/canvas-kit-react/common';
 import {FormField} from '@workday/canvas-kit-react/form-field';
+import {brand} from '@workday/canvas-tokens-web';
 
 import {useTextInputField, useTextInputModel} from './hooks';
 
@@ -60,19 +61,25 @@ export const TextInputField = createSubcomponent('input')({
             boxShadow: `inset 0 0 0 1px ${theme.canvas.palette.common.focusOutline}`,
           },
         };
-
+  console.log(model.state.error);
   return (
     <FormField.Input
       as="input"
       {...type.levels.subtext.large}
       cs={[baseStyles, focusStyles]}
+      backgroundColor={
+        model.state.error === 'error'
+          ? brand.error.lightest
+          : model.state.error === 'alert'
+          ? brand.alert.lightest
+          : inputColors.background
+      }
       padding={space.xxs}
       margin={0}
       display="block"
       height="40px"
       minWidth="280px"
       border={`1px solid ${inputColors.border}`}
-      backgroundColor={inputColors.background}
       borderRadius={borderRadius.m}
       {...elemProps}
     />

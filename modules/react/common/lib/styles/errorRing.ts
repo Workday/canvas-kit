@@ -20,13 +20,14 @@ export function getErrorColors(error?: ErrorType, theme?: EmotionCanvasTheme) {
     }
   } else if (error === ErrorType.Alert) {
     if (theme) {
-      const palette = theme.canvas.palette.alert;
+      const palette = theme.canvas.palette;
       return {
-        outer: palette.dark,
-        inner: palette.main,
+        outer: palette.common.alertOuter,
+        inner: palette.common.alertInner,
       };
     } else {
       return {
+        //TODO: Use brand.common.alertOuter once it's added to brand tokens
         outer: system.color.border.caution.strong,
         inner: brand.common.alertInner,
       };

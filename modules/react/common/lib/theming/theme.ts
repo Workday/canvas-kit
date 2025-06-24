@@ -49,6 +49,7 @@ export const defaultCanvasTheme: CanvasTheme = {
       focusOutline: cssVar(base.blue500),
       alertInner: cssVar(base.amber400),
       errorInner: cssVar(base.red500),
+      alertOuter: cssVar(base.amber500),
     },
   },
   breakpoints: {
