@@ -8,7 +8,7 @@ import {system} from '@workday/canvas-tokens-web';
 import {CardHeading} from './CardHeading';
 import {CardBody} from './CardBody';
 
-export interface CardProps extends Omit<BoxProps, 'depth'> {
+export interface CardProps extends BoxProps {
   /**
    * Children of the Card. Should contain a `<Card.Body>` and an optional `<Card.Heading>`
    */

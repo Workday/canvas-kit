@@ -4,6 +4,8 @@ import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Popper} from '@workday/canvas-kit-react/popup';
 import {Card} from '@workday/canvas-kit-react/card';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {system} from '@workday/canvas-tokens-web';
+import {cssVar} from '@workday/canvas-kit-styling';
 
 export default {
   title: 'Components/Popups/Popper',
