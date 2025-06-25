@@ -14,9 +14,6 @@ const menuCardStencil = createStencil({
     boxShadow: system.depth[1],
     overflow: 'hidden',
   },
-  defaultModifiers: {
-    variant: 'default',
-  },
 });
 
 const menuCardHeroStencil = createStencil({

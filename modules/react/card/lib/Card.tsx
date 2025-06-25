@@ -43,6 +43,9 @@ export const cardStencil = createStencil({
       },
     },
   },
+  defaultModifiers: {
+    variant: 'default',
+  },
 });
 
 /**
