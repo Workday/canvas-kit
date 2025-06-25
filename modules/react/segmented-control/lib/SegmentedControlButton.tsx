@@ -1,4 +1,4 @@
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {brand, system} from '@workday/canvas-tokens-web';
 import {BaseButton, ButtonContainerProps, buttonStencil} from '@workday/canvas-kit-react/button';
 import {calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
@@ -27,7 +27,7 @@ const segmentedControlButtonStencil = createStencil({
     '&:disabled, &.disabled': {
       [buttonStencil.vars.background]: system.color.bg.alt.softer,
       [buttonStencil.vars.border]: system.color.border.container,
-      [systemIconStencil.vars.color]: base.soap600,
+      [systemIconStencil.vars.color]: system.color.icon.soft,
     },
 
     '&:first-of-type': {
@@ -51,7 +51,7 @@ const segmentedControlButtonStencil = createStencil({
       '&:disabled, &.disabled': {
         [buttonStencil.vars.background]: system.color.bg.alt.softer,
         [buttonStencil.vars.border]: system.color.border.container,
-        [systemIconStencil.vars.color]: base.soap600,
+        [systemIconStencil.vars.color]: system.color.icon.soft,
       },
     },
 

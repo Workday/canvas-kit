@@ -4,7 +4,7 @@ import {CSSObject} from '@emotion/styled';
 import {Svg, SvgProps, svgStencil} from './Svg';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {handleCsProp, createStencil, px2rem, cssVar} from '@workday/canvas-kit-styling';
-import {base} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 /**
  * @deprecated Interface `AppletIconStyles` will be removed in a future version. All props will be moved inside `AppletIconProps`.
@@ -42,7 +42,7 @@ export const appletIconStyles = ({
 
   return {
     '& .color-100': {
-      fill: colors.frenchVanilla100,
+      fill: system.color.fg.inverse,
     },
     '& .color-200': {
       fill: colors[colorNames[200]],
@@ -85,22 +85,22 @@ export const appletIconStencil = createStencil({
   base: ({color200, color300, color400, color500, size}) => ({
     [size]: px2rem(92),
     '& .color-100': {
-      fill: base.frenchVanilla100,
+      fill: system.color.fg.inverse,
     },
     '& .color-200': {
-      fill: cssVar(color200, base.blueberry200),
+      fill: cssVar(color200, base.blue200),
     },
     '& .color-300': {
-      fill: cssVar(color300, base.blueberry300),
+      fill: cssVar(color300, base.blue400),
     },
     '& .color-400': {
-      fill: cssVar(color400, base.blueberry400),
+      fill: cssVar(color400, base.blue600),
     },
     '& .color-400-alpha-20': {
-      fill: cssVar(color400, base.blueberry400),
+      fill: cssVar(color400, base.blue600),
     },
     '& .color-500': {
-      fill: cssVar(color500, base.blueberry400),
+      fill: cssVar(color500, base.blue700),
     },
   }),
 });
@@ -109,10 +109,10 @@ export const AppletIcon = createComponent('span')({
   displayName: 'AppletIcon',
   Component: ({size, icon, color, ...elemProps}: AppletIconProps, ref, Element) => {
     const colors = color && {
-      color200: base[`${color}200` as const],
-      color300: base[`${color}300` as const],
-      color400: base[`${color}400` as const],
-      color500: base[`${color}500` as const],
+      color200: base[`${color}200` as keyof typeof base],
+      color300: base[`${color}300` as keyof typeof base],
+      color400: base[`${color}400` as keyof typeof base],
+      color500: base[`${color}500` as keyof typeof base],
     };
 
     return (

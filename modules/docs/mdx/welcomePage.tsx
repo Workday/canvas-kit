@@ -7,7 +7,7 @@ import {Card} from '@workday/canvas-kit-react/card';
 import {ExternalHyperlink, Hyperlink} from '@workday/canvas-kit-react/button';
 import {rocketIcon, tokensIcon, shapesIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {system, base} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 import {createStyles} from '@workday/canvas-kit-styling';
 // @ts-ignore: Cannot find module error
 import {version} from '../../../lerna.json';
@@ -26,7 +26,7 @@ const textStyles = createStyles({
 });
 
 const versionStyles = createStyles({
-  fontWeight: base.fontFamily100,
+  ...system.type.body.medium,
   marginInlineStart: system.space.x4,
 });
 
@@ -36,7 +36,7 @@ const imageStyles = createStyles({
 });
 
 const borderStyles = createStyles({
-  borderBottom: `1px solid ${base.blueberry200}`,
+  borderBottom: `1px solid ${system.color.border.primary.default}`,
   marginBottom: system.space.x2,
 });
 
@@ -90,8 +90,8 @@ export const WelcomePage = () => {
         >
           <Grid as={Card} className={gridStyles}>
             <SystemIcon
-              color={base.cantaloupe400}
-              colorHover={base.cantaloupe400}
+              color={system.color.static.amber.default}
+              colorHover={system.color.static.amber.default}
               icon={rocketIcon}
               size={60}
             ></SystemIcon>
@@ -109,9 +109,9 @@ export const WelcomePage = () => {
           </Grid>
           <Grid as={Card} className={gridStyles}>
             <SystemIcon
-              color={base.blueberry400}
+              color={system.color.fg.primary.default}
               icon={tokensIcon}
-              colorHover={base.blueberry400}
+              colorHover={system.color.fg.primary.default}
               size={60}
             ></SystemIcon>
             <Card.Heading>Tokens</Card.Heading>
@@ -131,10 +131,10 @@ export const WelcomePage = () => {
           </Grid>
           <Grid as={Card} className={gridStyles}>
             <SystemIcon
-              color={base.greenApple400}
+              color={system.color.static.green.default}
               icon={shapesIcon}
               size={60}
-              colorHover={base.greenApple400}
+              colorHover={system.color.static.green.default}
             ></SystemIcon>
             <Card.Heading>Assets</Card.Heading>
             <Card.Body>

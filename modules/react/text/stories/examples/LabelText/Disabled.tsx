@@ -2,10 +2,10 @@ import React from 'react';
 import {LabelText} from '@workday/canvas-kit-react/text';
 
 import {createStyles} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 const inverseBackground = createStyles({
-  backgroundColor: base.blueberry400,
+  backgroundColor: system.color.bg.primary.default,
   padding: system.space.x4,
   marginTop: system.space.x4,
 });
