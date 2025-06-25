@@ -38,20 +38,6 @@ describe('ColorInput', () => {
       });
     });
 
-    describe('with a value and background', () => {
-      // Skipped as backgroundColor is not provided through computed styles
-      // probably because of the way stencil renders styles with stencil-scoped CSS variables
-      test.skip('should render a ColorInput with a value and the value as a background', () => {
-        const {container} = render(<ColorInput value={value} />);
-
-        const swatch = container.querySelector(
-          '[data-part="color-picker-hex-input-swatch"]'
-        ) as HTMLElement;
-
-        expect(swatch).toHaveStyle('background-color: #eee;');
-      });
-    });
-
     describe('with disabled attribute', () => {
       test('should render a disabled ColorInput', () => {
         const {getByRole} = render(<ColorInput disabled={true} />);
