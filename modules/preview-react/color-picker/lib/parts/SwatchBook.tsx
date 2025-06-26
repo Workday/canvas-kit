@@ -1,8 +1,8 @@
 import * as React from 'react';
-import styled from '@emotion/styled';
-import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
-import {focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react/common';
+import {focusRing} from '@workday/canvas-kit-react/common';
 import {ColorSwatch} from '@workday/canvas-kit-react/color-picker';
+import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export interface SwatchBookColorObject {
   value: string;
@@ -15,60 +15,59 @@ export interface SwatchBookProps {
   onSelect: (color: string) => void;
 }
 
-interface SwatchContainerProps {
-  isSelected: boolean;
-}
-
-const accessibilityBorder = `${colors.frenchVanilla100} 0px 0px 0px 2px, ${colors.licorice200} 0px 0px 0px 3px`;
-
-const SwatchContainer = styled('div')<SwatchContainerProps>(
-  {
-    display: 'flex',
-    width: 20,
-    height: 20,
-    cursor: 'pointer',
-    borderRadius: borderRadius.s,
-    transition: 'box-shadow 120ms ease',
-    margin: `0px ${space.xxs} ${space.xxs} 0px`,
-
-    '&:hover': {
-      boxShadow: accessibilityBorder,
-    },
-
-    '&:focus': {
-      outline: 'none',
-      ...focusRing({separation: 2}),
-    },
+const colorPickerSwatchBookStencil = createStencil({
+  vars: {
+    shadow: `${system.color.border.inverse} 0 0 0 ${px2rem(2)}, ${
+      system.color.border.input.default
+    } 0 0 0 ${px2rem(3)}`,
   },
-  ({isSelected}) => ({
-    boxShadow: isSelected ? accessibilityBorder : undefined,
-    ...mouseFocusBehavior({
-      '&:focus': {
-        animation: 'none',
-        boxShadow: 'none',
-      },
-      '&:hover': {
-        boxShadow: accessibilityBorder,
-      },
-      '&': {
-        boxShadow: isSelected ? accessibilityBorder : undefined,
-      },
-    }),
-  })
-);
+  parts: {
+    tile: 'color-picker-swatch-book-tile',
+  },
+  base: ({tilePart, shadow}) => ({
+    display: 'flex',
+    flexWrap: 'wrap',
+    margin: `0 ${calc.negate(system.space.x2)} ${calc.negate(system.space.x2)} 0`,
+    [tilePart]: {
+      display: 'flex',
+      width: px2rem(20),
+      height: px2rem(20),
+      cursor: 'pointer',
+      borderRadius: system.shape.half,
+      transition: 'box-shadow 120ms ease',
+      margin: `0px ${system.space.x2} ${system.space.x2} 0px`,
 
-const Container = styled('div')({
-  display: 'flex',
-  flexWrap: 'wrap',
-  margin: `0px -${space.xxs} -${space.xxs} 0px`,
+      '&:hover': {
+        boxShadow: shadow,
+      },
+
+      '&:focus-visible': {
+        outline: 'none',
+        ...focusRing({separation: 2}),
+      },
+
+      '&[aria-selected="true"]': {
+        boxShadow: shadow,
+
+        '&:focus-visible': {
+          animation: 'none',
+          boxShadow: 'none',
+        },
+
+        '&:hover': {
+          boxShadow: shadow,
+        },
+      },
+    },
+  }),
 });
 
 export const SwatchBook = ({colors, value, onSelect}: SwatchBookProps) => {
   return (
-    <Container>
+    <div {...colorPickerSwatchBookStencil()}>
       {colors.map((color: string | SwatchBookColorObject, index: number) => {
-        const hexCode = typeof color === 'object' ? color.value : color;
-        const label = typeof color === 'object' ? color.label : color;
+        const hexCode = typeof color === 'object' ? color.value : color.toLowerCase();
+        const label = typeof color === 'object' ? color.label : color.toLowerCase();
         const isSelected = value ? hexCode.toLowerCase() === value.toLowerCase() : false;
 
         const handleClick = () => onSelect(hexCode);
@@ -76,20 +75,20 @@ export const SwatchBook = ({colors, value, onSelect}: SwatchBookProps) => {
           (event.key === 'Enter' || event.key === ' ') && onSelect(hexCode);
 
         return (
-          <SwatchContainer
+          <div
             key={index + '-' + color}
             onClick={handleClick}
             onKeyDown={handleKeyDown}
             tabIndex={0}
-            isSelected={isSelected}
             role="button"
             aria-label={label}
             aria-selected={isSelected}
+            {...colorPickerSwatchBookStencil.parts.tile}
           >
             <ColorSwatch color={hexCode} showCheck={isSelected} />
-          </SwatchContainer>
+          </div>
         );
       })}
-    </Container>
+    </div>
   );
 };
