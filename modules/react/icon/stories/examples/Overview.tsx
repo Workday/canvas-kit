@@ -9,7 +9,7 @@ import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
 import {AccentIcon, AppletIcon, SystemIcon, SystemIconCircle, Graphic} from '../../index';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 import {createStyles} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 const graphicExample: CanvasGraphic = {
   name: 'badgeAchievement',
@@ -27,7 +27,7 @@ const styleOverrides = {
     gap: system.space.x4,
   }),
   systemIconStyles: createStyles({
-    background: base.berrySmoothie100,
+    background: system.color.static.red.softer,
   }),
 };
 

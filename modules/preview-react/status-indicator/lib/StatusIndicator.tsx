@@ -48,21 +48,21 @@ const statusIndicatorStencil = createStencil({
         background: system.color.static.gray.default,
       },
       low: {
-        color: system.color.static.gray.strong,
+        color: system.color.fg.muted.default,
         [systemIconStencil.vars.color]: system.color.static.gray.strong,
-        background: system.color.static.gray.soft,
+        background: system.color.bg.alt.softer,
       },
     },
     orange: {
       high: {
         color: system.color.static.gray.stronger,
         [systemIconStencil.vars.color]: system.color.static.gray.stronger,
-        background: system.color.static.orange.default,
+        background: system.color.static.amber.default,
       },
       low: {
-        color: system.color.static.gold.stronger,
-        [systemIconStencil.vars.color]: system.color.static.gold.stronger,
-        background: system.color.static.orange.soft,
+        color: system.color.static.amber.strongest,
+        [systemIconStencil.vars.color]: system.color.static.amber.strongest,
+        background: system.color.static.amber.softer,
       },
     },
     blue: {
@@ -74,7 +74,7 @@ const statusIndicatorStencil = createStencil({
       low: {
         color: system.color.static.blue.strong,
         [systemIconStencil.vars.color]: system.color.static.blue.strong,
-        background: system.color.static.blue.soft,
+        background: system.color.static.blue.softer,
       },
     },
     green: {
@@ -86,7 +86,7 @@ const statusIndicatorStencil = createStencil({
       low: {
         color: system.color.static.green.strong,
         [systemIconStencil.vars.color]: system.color.static.green.strong,
-        background: system.color.static.green.soft,
+        background: system.color.static.green.softer,
       },
     },
     red: {
@@ -98,7 +98,7 @@ const statusIndicatorStencil = createStencil({
       low: {
         color: system.color.static.red.strong,
         [systemIconStencil.vars.color]: system.color.static.red.strong,
-        background: system.color.static.red.soft,
+        background: system.color.static.red.softer,
       },
     },
     transparent: {

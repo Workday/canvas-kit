@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {render, fireEvent} from '@testing-library/react';
 import {Avatar} from '../lib/Avatar';
-import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {base} from '@workday/canvas-tokens-web';
+import {createStencil, cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 import {systemIconStencil} from '../../icon';
 
 describe('Avatar', () => {
@@ -60,15 +60,17 @@ describe('Avatar', () => {
   it('should set the background color when background prop is specified', () => {
     const customGreenAvatarStencil = createStencil({
       base: {
-        backgroundColor: base.watermelon400,
+        backgroundColor: system.color.static.green.default,
         ['[data-part="avatar-icon"]']: {
-          [systemIconStencil.vars.color]: base.watermelon100,
+          [systemIconStencil.vars.color]: system.color.static.green.softer,
         },
       },
     });
 
     const {container} = render(<Avatar {...customGreenAvatarStencil()} />);
-    expect(container.firstChild).toHaveStyle(`background: ${cssVar(base.watermelon400)}`);
+    expect(container.firstChild).toHaveStyle(
+      `background: ${cssVar(system.color.static.green.default)}`
+    );
   });
 
   it('should set the object fit of the image when objectFit prop is specified', () => {
