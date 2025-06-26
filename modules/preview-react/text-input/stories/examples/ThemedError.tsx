@@ -1,7 +1,8 @@
 import React from 'react';
 import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
 import {CanvasProvider, PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
-import {colors, space} from '@workday/canvas-kit-react/tokens';
+import {system} from '@workday/canvas-tokens-web';
+import {cssVar} from '@workday/canvas-kit-styling';
 
 export const ThemedError = () => {
   const [value, setValue] = React.useState('');
@@ -13,9 +14,12 @@ export const ThemedError = () => {
   const theme: PartialEmotionCanvasTheme = {
     canvas: {
       palette: {
+        error: {
+          lightest: cssVar(system.color.static.amber.softer),
+        },
         common: {
-          focusOutline: colors.grapeSoda300,
-          errorInner: colors.islandPunch400,
+          focusOutline: system.color.static.green.default,
+          errorInner: system.color.static.amber.stronger,
         },
       },
     },
@@ -26,7 +30,9 @@ export const ThemedError = () => {
       <TextInput error={!value ? 'error' : undefined} isRequired={true} orientation="vertical">
         <TextInput.Label>Email</TextInput.Label>
         <TextInput.Field onChange={handleChange} value={value} />
-        <TextInput.Hint paddingTop={space.xxs}>{!value && 'Please enter an email.'}</TextInput.Hint>
+        <TextInput.Hint paddingTop={system.space.x2}>
+          {!value && 'Please enter an email.'}
+        </TextInput.Hint>
       </TextInput>
     </CanvasProvider>
   );
