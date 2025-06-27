@@ -15,6 +15,7 @@ any questions.
 - [Component Updates](#component-updates)
   - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
   - [SearchForm](#search-form)
+  - [StatusIndicator](#status-indicator)
 - [Troubleshooting](#troubleshooting)
 - [Glossary](#glossary)
   - [Main](#main)
@@ -149,6 +150,19 @@ const customTheme = {
 />
 ```
 - `SearchTheme` enum type has been updated to have string values `light`, `dark` and `transparent`. This **should not** affect the way you use the type unless you're passing a `number` of `0`, `1` or `2` to the `searchTheme` prop.
+
+## Status Indicator 🚨
+
+**PR:** [#3287](https://github.com/Workday/canvas-kit/pull/3287)
+
+Preview `StatusIndicator` is a rounder and more vibrant base emphasis (`low`). The `emphasis` prop is now deprecated and the `high` emphasis will be removed in a later version.
+
+Variant names of the preview `StatusIndicator` have been updated by the following mapping:
+- `blue` -> `primary`
+- `green` -> `success`
+- `orange` -> `caution`
+- `red` -> `critical`
+- `gray` -> `neutral`
 
 ## Troubleshooting
 

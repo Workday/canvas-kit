@@ -19,9 +19,9 @@ export interface StatusIndicatorProps
 
 // TODO: Remove this in a future release
 const deprecatedVariantsMap = {
-  green: 'primary',
-  blue: 'neutral',
-  yellow: 'caution',
+  blue: 'primary',
+  green: 'success',
+  orange: 'caution',
   red: 'critical',
   gray: 'neutral',
 };
