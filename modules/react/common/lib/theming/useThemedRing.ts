@@ -1,11 +1,7 @@
-import {
-  CanvasTheme,
-  EmotionCanvasTheme,
-  useTheme,
-  ErrorType,
-} from '@workday/canvas-kit-react/common';
-import {brand} from '@workday/canvas-tokens-web';
-import {colors, CSSProperties, statusColors} from '@workday/canvas-kit-react/tokens';
+import {CanvasTheme, EmotionCanvasTheme, useTheme} from '@workday/canvas-kit-react/common';
+import {brand, system} from '@workday/canvas-tokens-web';
+import {CSSProperties, statusColors} from '@workday/canvas-kit-react/tokens';
+import {cssVar} from '@workday/canvas-kit-styling';
 
 type paletteSelection = Exclude<keyof EmotionCanvasTheme['canvas']['palette'], 'common'>;
 interface ContrastColors {
@@ -50,14 +46,14 @@ export function getPaletteColorsForFocusRing(
       return getPaletteColorsFromTheme(theme.canvas, {outer: brand.common.errorInner}, 'error');
     }
     case 'alert': {
-      return getPaletteColorsFromTheme(theme.canvas, {outer: colors.cantaloupe600}, 'alert');
+      return getPaletteColorsFromTheme(theme.canvas, {outer: brand.common.alertInner}, 'alert');
     }
     case 'success': {
       return getPaletteColorsFromTheme(theme.canvas, {
-        outer: colors.greenApple600,
+        outer: cssVar(brand.success.dark),
         // The theme default for success.main is set to the darkest GreenApple
         // For our default ring, we need to override it so the inner ring is a bit lighter
-        inner: palette.main === colors.greenApple600 ? statusColors.success : palette.main,
+        inner: palette.main === cssVar(brand.success.base) ? statusColors.success : palette.main,
       });
     }
     default: {
@@ -119,8 +115,10 @@ export const useThemedRing = (type: paletteSelection): CSSProperties => {
     '&:focus:not([disabled])': {
       borderColor: paletteColors.outer,
       boxShadow: `${errorBoxShadow},
-        0 0 0 2px ${colors.frenchVanilla100},
-        0 0 0 4px ${theme ? theme.canvas.palette.common.focusOutline : inputColors.focusBorder}`,
+        0 0 0 2px ${cssVar(system.color.border.input.inverse)},
+        0 0 0 4px ${
+          theme ? theme.canvas.palette.common.focusOutline : cssVar(brand.common.focusOutline)
+        }`,
     },
   };
 };
