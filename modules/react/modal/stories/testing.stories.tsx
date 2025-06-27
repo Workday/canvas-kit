@@ -152,7 +152,7 @@ const TestModal = () => {
                 uses a version of Chrome that makes it appear on the top and is a known issue.
               </Box>
             </Modal.Body>
-            <Flex gap="s" padding="xxs" marginTop="xxs">
+            <Flex gap="s" padding="xxs">
               <Modal.CloseButton as={PrimaryButton}>Delete</Modal.CloseButton>
               <Modal.CloseButton>Cancel</Modal.CloseButton>
             </Flex>
@@ -223,7 +223,7 @@ export const CustomThemeModal = {
                   this software and associated documentation files (the "Software").
                 </Box>
               </Modal.Body>
-              <Flex gap="s" padding="xxs" marginTop="xxs">
+              <Flex gap="s" padding="xxs">
                 <Modal.CloseButton as={PrimaryButton}>Acknowledge</Modal.CloseButton>
                 <Modal.CloseButton>Cancel</Modal.CloseButton>
               </Flex>

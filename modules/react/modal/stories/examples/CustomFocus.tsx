@@ -39,7 +39,7 @@ export const CustomFocus = () => {
               />
             </FormField>
           </Modal.Body>
-          <Flex gap="s" padding="xxs" marginTop="xxs">
+          <Flex gap="s" padding="xxs">
             <Modal.CloseButton as={PrimaryButton} onClick={handleAcknowledge}>
               Acknowledge
             </Modal.CloseButton>

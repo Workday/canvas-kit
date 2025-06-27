@@ -97,18 +97,23 @@ export const menuItemStencil = createStencil({
       [`& :where(${selectedPart})`]: {
         opacity: system.opacity.full,
       },
+
       '&:where(.focus, :focus)': {
         [systemIconStencil.vars.color]: brand.primary.accent,
         outline: 'none',
         backgroundColor: brand.primary.base,
         color: systemIconStencil.vars.color,
       },
+
+      '&:where(.disabled, :disabled)': {
+        opacity: system.opacity.disabled,
+      },
     },
 
     // Hover styles
     '&:is(.hover, :hover)': {
       color: system.color.fg.strong,
-      backgroundColor: brand.neutral.lightest,
+      backgroundColor: system.color.bg.alt.soft,
     },
 
     // Focus styles
@@ -121,12 +126,17 @@ export const menuItemStencil = createStencil({
 
     // Disabled styles
     '&:is(:disabled, [aria-disabled=true])': {
-      color: system.color.text.disabled,
+      color: system.color.fg.disabled,
       cursor: 'default',
 
       // Focus + Disabled
       '&:where(.focus, :focus)': {
+        color: system.color.fg.inverse,
         backgroundColor: brand.primary.light,
+      },
+
+      '&:where(.hover, :hover)': {
+        background: 'none',
       },
     },
 

@@ -41,7 +41,7 @@ export const FormModal = () => {
               <FormField.Input as={TextInput} name="last" />
             </FormField>
           </Modal.Body>
-          <Flex gap="s" padding="xxs" marginTop="xxs">
+          <Flex gap="s" padding="xxs">
             <Modal.CloseButton>Cancel</Modal.CloseButton>
             <PrimaryButton type="submit">Submit</PrimaryButton>
           </Flex>
