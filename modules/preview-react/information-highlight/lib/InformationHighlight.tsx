@@ -90,7 +90,7 @@ export const informationHighlightStencil = createStencil({
         '& [data-part="information-highlight-icon"]': {
           [systemIconStencil.vars.accentColor]: system.color.icon.inverse,
           [systemIconStencil.vars.color]: system.color.bg.critical.default,
-          [systemIconStencil.vars.backgroundColor]: system.color.fg.critical,
+          [systemIconStencil.vars.backgroundColor]: system.color.fg.critical.default,
         },
       },
     },
