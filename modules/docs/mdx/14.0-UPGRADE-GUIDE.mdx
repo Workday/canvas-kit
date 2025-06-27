@@ -14,7 +14,8 @@ any questions.
   - [Instructions](#instructions)
 - [Component Updates](#component-updates)
   - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
-	- [SearchForm](#search-form)
+  - [Card](#card)
+  - [SearchForm](#search-form)
 - [Troubleshooting](#troubleshooting)
 - [Glossary](#glossary)
   - [Main](#main)
@@ -82,7 +83,9 @@ yarn remove @workday/canvas-kit-codemod
 > after executing the codemod, as its resulting formatting (spacing, quotes, etc.) may not match
 > your project conventions.
 
-## Styling API and Canvas Tokens 💅
+## Component Updates
+
+### Styling API and Canvas Tokens 💅
 
 Several components have been refactored to use our Canvas tokens and styling API. The React
 interface has not changed, but Canvas Tokens are now used for dynamic properties.
@@ -99,6 +102,95 @@ The following components have been updated:
 - `SegmentedControl` (Preview) [#3278](https://github.com/Workday/canvas-kit/pull/3278)
 - `ToolbarDropdownButton` [#3293](https://github.com/Workday/canvas-kit/pull/3293)
 - `ToolbarIconButton` [#3293](https://github.com/Workday/canvas-kit/pull/3293)
+
+### Card 🚨
+
+**PR:** [#3350](https://github.com/Workday/canvas-kit/pull/3350)
+
+We've rebranded the `Card` component to align with our new brand directions and provide better
+visual hierarchy and more flexible styling options. The following changes have been made:
+
+#### Default Card No Longer Has Shadow
+
+The default `Card` variant no longer includes a shadow, creating a cleaner, flatter appearance that
+aligns with our new brand's emphasis on simplicity and clarity. This is a **visual breaking change**
+that may affect your application's visual hierarchy. If your design requires shadow you can added
+through `cs` prop.
+
+**Before in v13**
+
+```tsx
+<Card>
+  <Card.Heading>Card Title</Card.Heading>
+  <Card.Body>Card content with shadow</Card.Body>
+</Card>
+```
+
+**After in v14**
+
+```tsx
+<Card cs={{boxShadow: system.depth[1]}}>
+  <Card.Heading>Card Title</Card.Heading>
+  <Card.Body>Card content with shadow</Card.Body>
+</Card>
+```
+
+#### New Card Variants
+
+We've added two new variants to provide more styling flexibility:
+
+- **`borderless`**: Use this variant when placing cards on colored backgrounds where you want the
+  card to blend seamlessly without borders or shadows.
+- **`filled`**: Use this variant when you need a card with a grayish background to create visual
+  separation from the page background.
+
+The `variant` prop is optional - if no variant is specified, the card will use the default styling.
+
+```tsx
+// Default card (no variant prop needed)
+<Card>
+  <Card.Heading>Default Card</Card.Heading>
+  <Card.Body>Default styling with borders, no shadow</Card.Body>
+</Card>
+
+// Borderless variant for colored backgrounds
+<Card variant="borderless">
+  <Card.Heading>Card on Colored Background</Card.Heading>
+  <Card.Body>Content blends with background</Card.Body>
+</Card>
+
+// Filled variant with grayish background
+<Card variant="filled">
+  <Card.Heading>Card with grayish Background</Card.Heading>
+  <Card.Body>Content with visual separation</Card.Body>
+</Card>
+```
+
+#### Gap Instead of Margins
+
+We've replaced the individual margins on `Card.Heading` and `Card.Body` with a `gap` prop on the
+card container. The card now uses `display: flex` with `flex-direction: column` by default, and the
+`gap` prop provides consistent spacing between all direct children. This provides more consistent
+spacing and better control over the layout. This is a **visual breaking change** that may affect the
+spacing between card elements.
+
+**Before in v13**
+
+```tsx
+<Card>
+  <Card.Heading marginBlock="zero">Title</Card.Heading>
+  <Card.Body marginBlock="zero">Card without any spacing</Card.Body>
+</Card>
+```
+
+**After in v14**
+
+```tsx
+<Card cs={{gap: system.space.zero}}>
+  <Card.Heading>Title</Card.Heading>
+  <Card.Body>Card without any spacing</Card.Body>
+</Card>
+```
 
 ### Search Form 🚨
 
