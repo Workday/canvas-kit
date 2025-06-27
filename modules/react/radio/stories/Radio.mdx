@@ -4,6 +4,7 @@ import {
   SymbolDoc,
   Specifications,
 } from '@workday/canvas-kit-docs';
+import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
 import {Alert} from './examples/Alert';
 import {Basic} from './examples/Basic';
 import {Disabled} from './examples/Disabled';
@@ -19,6 +20,10 @@ import * as RadioStories from './Radio.stories';
 <Meta of={RadioStories} />
 
 # Canvas Kit Radio
+
+<StatusIndicator variant="red">
+  <StatusIndicator.Label>Deprecated</StatusIndicator.Label>
+</StatusIndicator>
 
 Radio Buttons allow a user to select one value from a predefined list of 7 or fewer options.
 
