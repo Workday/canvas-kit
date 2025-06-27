@@ -33,7 +33,7 @@ export const InitialFocus = () => {
               Your message has been sent!
             </Box>
           </Popup.Body>
-          <Flex gap="s" padding="xxs" marginTop="xxs">
+          <Flex gap="s" padding="xxs">
             <Popup.CloseButton ref={initialFocusRef} aria-describedby="popup-message">
               OK
             </Popup.CloseButton>
