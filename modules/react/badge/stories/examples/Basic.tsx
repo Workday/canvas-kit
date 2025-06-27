@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {CountBadge} from '@workday/canvas-kit-react/badge';
 import {createStyles} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 const containerStyles = createStyles({
   boxSizing: 'border-box',
@@ -11,13 +11,13 @@ const containerStyles = createStyles({
 
 const defaultBackground = createStyles({
   boxSizing: 'border-box',
-  backgroundColor: base.frenchVanilla100,
+  backgroundColor: system.color.bg.alt.soft,
   padding: system.space.x4,
 });
 
 const inverseBackground = createStyles({
   boxSizing: 'border-box',
-  backgroundColor: base.blueberry400,
+  backgroundColor: system.color.bg.primary.default,
   padding: system.space.x4,
 });
 
