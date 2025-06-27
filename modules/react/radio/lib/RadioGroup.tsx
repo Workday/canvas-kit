@@ -8,7 +8,9 @@ import {
   styled,
   Themeable,
 } from '@workday/canvas-kit-react/common';
-
+/**
+ * @deprecated `RadioGroupProps` from Main is deprecated. Use `RadioGroup` from `@workday/canvas-kit-preview-react/radio` instead.
+ */
 export interface RadioGroupProps extends Themeable, GrowthBehavior {
   /**
    * The Radio button children of the RadioGroup (must be at least two).
@@ -66,7 +68,9 @@ const Container = styled('div')<Pick<RadioGroupProps, 'error' | 'grow' | 'theme'
     };
   }
 );
-
+/**
+ * @deprecated `RadioGroup` from Main is deprecated. Use `RadioGroup` from `@workday/canvas-kit-preview-react/radio` instead.
+ */
 export class RadioGroup extends React.Component<RadioGroupProps> {
   static ErrorType = ErrorType;
 

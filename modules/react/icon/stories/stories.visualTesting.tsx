@@ -21,11 +21,14 @@ export const SystemIconStates = () => (
         },
         {
           label: 'color',
-          props: {color: system.color.fg.critical},
+          props: {color: system.color.fg.critical.default},
         },
         {
           label: 'color + colorHover',
-          props: {color: system.color.fg.critical, colorHover: system.color.static.red.strong},
+          props: {
+            color: system.color.fg.critical.default,
+            colorHover: system.color.static.red.strong,
+          },
         },
         {
           label: 'fill',

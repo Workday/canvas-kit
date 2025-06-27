@@ -94,7 +94,7 @@ export const SystemIconStory = {
         background={system.color.fg.inverse}
       />
       <br />
-      <SystemIcon icon={activityStreamIcon} colorHover={system.color.fg.critical} />
+      <SystemIcon icon={activityStreamIcon} colorHover={system.color.fg.critical.default} />
       <SystemIcon
         icon={activityStreamIcon}
         color={system.color.static.blue.default}
