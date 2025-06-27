@@ -56,7 +56,11 @@ export const selectInputStencil = createStencil({
     [visualInputPart]: {
       caretColor: 'transparent',
       backgroundColor: system.color.bg.default,
+      color: system.color.text.default,
       cursor: 'default',
+      '&::placeholder': {
+        color: system.color.text.default,
+      },
       '&::selection': {
         backgroundColor: 'transparent',
       },

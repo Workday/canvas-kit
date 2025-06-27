@@ -13,7 +13,7 @@ const formFieldGroupListStencil = createStencil({
   base: {
     display: 'flex',
     flexDirection: 'column',
-    borderRadius: system.shape.x1,
+    borderRadius: system.shape.x1Half,
     gap: system.space.x2,
     padding: `${px2rem(10)} ${system.space.x3} ${system.space.x2}`,
     margin: `0 ${calc.negate(system.space.x3)}`,
@@ -23,9 +23,11 @@ const formFieldGroupListStencil = createStencil({
   modifiers: {
     error: {
       error: {
+        backgroundColor: brand.error.lightest,
         boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.common.errorInner}`,
       },
       alert: {
+        backgroundColor: brand.alert.lightest,
         boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.common.alertOuter}, inset 0 0 0 ${px2rem(3)} ${
           brand.common.alertInner
         }`,
