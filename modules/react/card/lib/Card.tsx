@@ -17,7 +17,7 @@ export interface CardProps extends BoxProps {
    * The variant of the Card. Can be `default`, `borderless` or `filled`.
    * @default 'default'
    */
-  variant?: 'default' | 'borderless' | 'filled';
+  variant?: 'borderless' | 'filled';
 }
 
 // .cnvs-card
@@ -30,21 +30,17 @@ export const cardStencil = createStencil({
     paddingInline: system.space.x6,
     backgroundColor: system.color.bg.default,
     borderRadius: system.shape.x2,
-    border: `${px2rem(1)} solid ${system.color.border.transparent}`,
+    border: `${px2rem(1)} solid ${system.color.border.container}`,
   },
   modifiers: {
     variant: {
-      default: {
-        borderColor: system.color.border.container,
+      borderless: {
+        borderColor: 'transparent',
       },
-      borderless: {},
       filled: {
         backgroundColor: system.color.bg.alt.soft,
       },
     },
-  },
-  defaultModifiers: {
-    variant: 'default',
   },
 });
 
@@ -62,7 +58,7 @@ export const cardStencil = createStencil({
  */
 export const Card = createComponent('div')({
   displayName: 'Card',
-  Component: ({children, variant = 'default', ...elemProps}: CardProps, ref, Element) => {
+  Component: ({children, variant, ...elemProps}: CardProps, ref, Element) => {
     return (
       <Element ref={ref} {...mergeStyles(elemProps, cardStencil({variant}))}>
         {children}
