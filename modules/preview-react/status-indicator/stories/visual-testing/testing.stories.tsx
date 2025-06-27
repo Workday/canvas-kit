@@ -34,11 +34,12 @@ export const StatusIndicatorStates = () => (
       })}
       columnProps={permutateProps({
         variant: [
-          {value: 'gray', label: 'Gray'},
-          {value: 'blue', label: 'Blue'},
-          {value: 'green', label: 'Green'},
-          {value: 'orange', label: 'Orange'},
-          {value: 'red', label: 'Red'},
+          {value: 'primary', label: 'Primary'},
+          {value: 'neutral', label: 'Neutral'},
+          {value: 'caution', label: 'Caution'},
+          {value: 'success', label: 'Success'},
+          {value: 'critical', label: 'Critical'},
+          {value: 'ai', label: 'AI'},
           {value: 'transparent', label: 'Transparent'},
         ],
       })}
