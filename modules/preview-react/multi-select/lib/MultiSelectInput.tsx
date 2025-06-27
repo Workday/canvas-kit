@@ -102,10 +102,12 @@ export const multiSelectInputStencil = createStencil({
       error: {
         borderColor: brand.common.errorInner,
         boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.common.errorInner}`,
+        backgroundColor: brand.error.lightest,
         '&:has(:hover, :disabled, :focus-visible), &:is(.hover, .disabled, .focus)': {
           borderColor: brand.common.errorInner,
         },
         '&:has(:focus-visible:not([disabled])), &.focus': {
+          borderColor: brand.common.errorInner,
           boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.common.errorInner}, 0 0 0 2px ${
             system.color.border.inverse
           }, 0 0 0 4px ${brand.common.focusOutline}`,
@@ -115,6 +117,7 @@ export const multiSelectInputStencil = createStencil({
       alert: {
         borderColor: brand.common.alertOuter,
         boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.common.alertInner}`,
+        backgroundColor: brand.alert.lightest,
         '&:has(:hover, .hover, :disabled, .disabled, :focus-visible:not([disabled])), .focus:not(:has([disabled]))':
           {
             borderColor: brand.common.alertOuter,
