@@ -13,8 +13,6 @@ import {borderRadius, space} from '@workday/canvas-kit-react/tokens';
 import {patternIcon} from '@workday/canvas-system-icons-web';
 import {styled, StyledType} from '@workday/canvas-kit-react/common';
 import {Heading} from '@workday/canvas-kit-react/text';
-import {cssVar} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
 
 const fadeOut = keyframes`
   from {
