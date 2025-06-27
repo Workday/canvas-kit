@@ -23,11 +23,11 @@ const formFieldGroupListStencil = createStencil({
   modifiers: {
     error: {
       error: {
-        boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.error.base}`,
+        boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.common.errorInner}`,
       },
       alert: {
-        boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.alert.darkest}, inset 0 0 0 ${px2rem(3)} ${
-          brand.alert.base
+        boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.common.alertOuter}, inset 0 0 0 ${px2rem(3)} ${
+          brand.common.alertInner
         }`,
       },
     },

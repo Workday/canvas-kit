@@ -6,11 +6,15 @@ import {
   useThemedRing,
 } from '@workday/canvas-kit-react/common';
 import {base, system} from '@workday/canvas-tokens-web';
+import {cssVar} from '@workday/canvas-kit-styling';
 
 export const ThemedAlert = () => {
   const theme: PartialEmotionCanvasTheme = {
     canvas: {
       palette: {
+        alert: {
+          lightest: cssVar(system.color.static.green.softer),
+        },
         common: {
           focusOutline: base.purple500,
           alertInner: base.green400,

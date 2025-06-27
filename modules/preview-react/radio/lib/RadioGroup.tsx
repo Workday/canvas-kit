@@ -33,8 +33,8 @@ const radioGroupStencil = createStencil({
         boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.error.base}`,
       },
       alert: {
-        boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.alert.darkest}, inset 0 0 0 ${px2rem(3)} ${
-          brand.alert.base
+        boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.common.alertInner}, inset 0 0 0 ${px2rem(3)} ${
+          brand.common.alertOuter
         }`,
       },
     },

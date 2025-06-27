@@ -7,7 +7,7 @@ import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {useSelectInput} from './hooks/useSelectInput';
 import {useSelectModel} from './hooks/useSelectModel';
 import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
-import {system} from '@workday/canvas-tokens-web';
+import {system, brand} from '@workday/canvas-tokens-web';
 
 export interface SelectInputProps extends ExtractProps<typeof TextInput, never>, CSProps {
   /**
@@ -55,20 +55,35 @@ export const selectInputStencil = createStencil({
     },
     [visualInputPart]: {
       caretColor: 'transparent',
+      backgroundColor: system.color.bg.default,
       cursor: 'default',
       '&::selection': {
         backgroundColor: 'transparent',
       },
     },
   }),
+  modifiers: {
+    error: {
+      error: ({visualInputPart}) => ({
+        [visualInputPart]: {
+          backgroundColor: brand.error.lightest,
+        },
+      }),
+      alert: ({visualInputPart}) => ({
+        [visualInputPart]: {
+          backgroundColor: brand.alert.lightest,
+        },
+      }),
+    },
+  },
 });
 
 export const SelectInput = createSubcomponent(TextInput)({
   modelHook: useSelectModel,
   elemPropsHook: useSelectInput,
-})<SelectInputProps>(({inputStartIcon, formInputProps, ...elemProps}, Element, model) => {
+})<SelectInputProps>(({inputStartIcon, formInputProps, error, ...elemProps}, Element, model) => {
   return (
-    <InputGroup data-width="ck-formfield-width" {...selectInputStencil()}>
+    <InputGroup data-width="ck-formfield-width" {...selectInputStencil({error: error})}>
       {inputStartIcon && model.state.selectedIds.length > 0 && (
         <InputGroup.InnerStart {...selectInputStencil.parts.startIconContainer}>
           <SystemIcon {...selectInputStencil.parts.startIcon} icon={inputStartIcon} />
@@ -80,6 +95,7 @@ export const SelectInput = createSubcomponent(TextInput)({
       <InputGroup.Input
         as={Element}
         placeholder="Choose an option"
+        error={error}
         {...selectInputStencil.parts.visualInput}
         {...elemProps}
       />

@@ -27,8 +27,7 @@ export function getErrorColors(error?: ErrorType, theme?: EmotionCanvasTheme) {
       };
     } else {
       return {
-        //TODO: Use brand.common.alertOuter once it's added to brand tokens
-        outer: system.color.border.caution.strong,
+        outer: brand.common.alertOuter,
         inner: brand.common.alertInner,
       };
     }

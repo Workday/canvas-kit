@@ -100,28 +100,28 @@ export const multiSelectInputStencil = createStencil({
   modifiers: {
     error: {
       error: {
-        borderColor: brand.error.base,
-        boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.error.base}`,
+        borderColor: brand.common.errorInner,
+        boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.common.errorInner}`,
         '&:has(:hover, :disabled, :focus-visible), &:is(.hover, .disabled, .focus)': {
-          borderColor: brand.error.base,
+          borderColor: brand.common.errorInner,
         },
         '&:has(:focus-visible:not([disabled])), &.focus': {
-          boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.error.base}, 0 0 0 2px ${
+          boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.common.errorInner}, 0 0 0 2px ${
             system.color.border.inverse
           }, 0 0 0 4px ${brand.common.focusOutline}`,
           outlineOffset: px2rem(2),
         },
       },
       alert: {
-        borderColor: brand.alert.darkest,
-        boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.alert.base}`,
+        borderColor: brand.common.alertOuter,
+        boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.common.alertInner}`,
         '&:has(:hover, .hover, :disabled, .disabled, :focus-visible:not([disabled])), .focus:not(:has([disabled]))':
           {
-            borderColor: brand.alert.darkest,
+            borderColor: brand.common.alertOuter,
           },
 
         '&:has(:focus-visible, .focus):not(:has([disabled]))': {
-          boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.alert.base},
+          boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.common.alertInner},
         0 0 0 2px ${system.color.border.inverse},
         0 0 0 4px ${brand.common.focusOutline}`,
         },
