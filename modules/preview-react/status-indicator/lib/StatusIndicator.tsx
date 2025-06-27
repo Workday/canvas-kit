@@ -8,6 +8,19 @@ import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {StatusIndicatorIcon} from './StatusIndicatorIcon';
 import {StatusIndicatorLabel} from './StatusIndicatorLabel';
 
+/**
+ * @deprecated This is being deprecated and will be removed in a future release. Use
+ * `StatusIndicatorProps['variant']` instead.
+ */
+export type StatusIndicatorVariant =
+  | 'primary'
+  | 'neutral'
+  | 'caution'
+  | 'success'
+  | 'critical'
+  | 'ai'
+  | 'transparent';
+
 export interface StatusIndicatorProps
   extends ExtractProps<typeof Flex, never>,
     ExtractStencilProps<typeof statusIndicatorStencil> {
