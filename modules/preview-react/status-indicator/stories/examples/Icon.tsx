@@ -17,7 +17,7 @@ export const Icon = () => {
         <StatusIndicator.Icon aria-label="unpublished" icon={uploadCloudIcon} />
         <StatusIndicator.Label>Unpublished</StatusIndicator.Label>
       </StatusIndicator>
-      <StatusIndicator variant="green">
+      <StatusIndicator variant="success">
         <StatusIndicator.Label>published</StatusIndicator.Label>
         <StatusIndicator.Icon aria-label="published" icon={uploadCloudIcon} />
       </StatusIndicator>
