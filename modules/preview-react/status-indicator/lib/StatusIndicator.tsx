@@ -90,7 +90,7 @@ const statusIndicatorStencil = createStencil({
         backgroundColor: system.color.bg.ai.default,
       },
       transparent: {
-        color: system.color.fg.default,
+        color: system.color.fg.inverse,
         backgroundColor: system.color.bg.translucent,
       },
     },
