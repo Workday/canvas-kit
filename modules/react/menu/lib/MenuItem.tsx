@@ -104,10 +104,6 @@ export const menuItemStencil = createStencil({
         backgroundColor: brand.primary.base,
         color: systemIconStencil.vars.color,
       },
-
-      '&:where(.disabled, :disabled)': {
-        opacity: system.opacity.disabled,
-      },
     },
 
     // Hover styles
@@ -135,7 +131,7 @@ export const menuItemStencil = createStencil({
         backgroundColor: brand.primary.light,
       },
 
-      '&:where(.hover, :hover)': {
+      '&:where(.hover, :hover, [aria-selected=true])': {
         background: 'none',
       },
     },
