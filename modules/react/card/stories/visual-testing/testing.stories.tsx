@@ -2,6 +2,8 @@ import React from 'react';
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 
 import {Card} from '@workday/canvas-kit-react/card';
+import {system} from '@workday/canvas-tokens-web';
+import {cssVar, px2rem} from '@workday/canvas-kit-styling';
 
 export default {
   title: 'Testing/Containers/Card',
@@ -18,94 +20,50 @@ export const CardStates = {
     <StaticStates>
       <ComponentStatesTable
         rowProps={[
-          {label: 'Default', props: {}},
-          {label: 'With Heading', props: {heading: 'Delete Item'}},
+          {label: 'Without Heading', props: {heading: false}},
+          {label: 'Borderless', props: {variant: 'borderless'}},
+          {label: 'Filled', props: {variant: 'filled'}},
+          {label: 'With Heading', props: {}},
           {
-            label: 'With zero padding',
-            props: {
-              heading: 'Delete Item',
-              padding: 'zero',
-            },
+            label: 'With custom padding (0px)',
+            props: {cs: {padding: system.space.zero}},
           },
           {
-            label: 'With custom padding',
-            props: {
-              heading: 'Delete Item',
-
-              padding: 's',
-            },
+            label: 'With custom padding (16px)',
+            props: {cs: {padding: system.space.x4}},
           },
           {
-            label: 'With different depth value none',
-            props: {
-              heading: 'Delete Item',
-              depth: 'none',
-            },
+            label: 'With custom gap (0px)',
+            props: {cs: {gap: system.space.zero}},
           },
           {
-            label: 'With depth value set to 1',
-            props: {
-              heading: 'Delete Item',
-              depth: 1,
-            },
+            label: 'With custom box shadow (system.depth[1])',
+            props: {cs: {boxShadow: system.depth[1]}},
           },
           {
-            label: 'With depth value set to 2',
-            props: {
-              heading: 'Delete Item',
-              depth: 2,
-            },
+            label: 'With custom width (300px)',
+            props: {cs: {width: px2rem(300)}},
           },
           {
-            label: 'With depth value set to 3',
-            props: {
-              heading: 'Delete Item',
-              depth: 3,
-            },
-          },
-          {
-            label: 'With depth value set to 4',
-            props: {
-              heading: 'Delete Item',
-              depth: 4,
-            },
-          },
-          {
-            label: 'With depth value set to 5',
-            props: {
-              heading: 'Delete Item',
-              depth: 5,
-            },
-          },
-          {
-            label: 'With depth value set to 6',
-            props: {
-              heading: 'Delete Item',
-              depth: 6,
-            },
-          },
-          {
-            label: 'With custom width',
-            props: {
-              heading: 'Delete Item',
-              width: 300,
-            },
-          },
-          {
-            label: 'With custom height',
-            props: {
-              heading: 'Delete Item',
-              height: 400,
-            },
+            label: 'With custom height (400px)',
+            props: {cs: {height: px2rem(400)}},
           },
         ]}
-        columnProps={[{label: 'Default', props: {}}]}
+        columnProps={[{label: 'Components', props: {}}]}
       >
-        {({heading, ...props}) => (
-          <Card {...props}>
-            {heading && <Card.Heading>{heading}</Card.Heading>}
-            <Card.Body>Card Content</Card.Body>
-          </Card>
+        {({heading = true, ...props}) => (
+          <div
+            style={{
+              background:
+                props.variant !== 'filled' ? cssVar(system.color.bg.alt.softer) : undefined,
+              padding: cssVar(system.space.x4),
+            }}
+          >
+            <Card {...props}>
+              {heading && <Card.Heading>Delete Item</Card.Heading>}
+              <Card.Body>Card Content</Card.Body>
+            </Card>
+          </div>
         )}
       </ComponentStatesTable>
     </StaticStates>

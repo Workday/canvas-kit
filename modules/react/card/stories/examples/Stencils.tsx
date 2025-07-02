@@ -11,6 +11,8 @@ const menuCardStencil = createStencil({
     flexDirection: 'column',
     padding: system.space.zero,
     maxWidth: px2rem(320),
+    boxShadow: system.depth[1],
+    overflow: 'hidden',
   },
 });
 
@@ -22,7 +24,6 @@ const menuCardHeroStencil = createStencil({
     aspectRatio: '1',
     maxHeight: px2rem(80),
     padding: system.space.x2,
-    borderRadius: `${system.shape.x2} ${system.shape.x2} 0 0`,
   },
 });
 
