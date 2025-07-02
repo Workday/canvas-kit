@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.1.4](https://github.com/Workday/canvas-kit/releases/tag/v13.1.4) (2025-06-17)
+
+### Documentation
+
+- docs(form-field): Update SymbolDoc link ([#3338](https://github.com/Workday/canvas-kit/pull/3338)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v12.6.14](https://github.com/Workday/canvas-kit/releases/tag/v12.6.14) (2025-06-17)
+
+### Documentation
+
+- docs(form-field): Update SymbolDoc link ([#3338](https://github.com/Workday/canvas-kit/pull/3338)) ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v13.1.3](https://github.com/Workday/canvas-kit/releases/tag/v13.1.3) (2025-06-17)
+
+### Infrastructure
+
+- chore: Update chromatic action settings ([#3345](https://github.com/Workday/canvas-kit/pull/3345)) ([@RayRedGoose](https://github.com/RayRedGoose), [@mannycarrera4](https://github.com/mannycarrera4))
+
+
+## [v12.6.13](https://github.com/Workday/canvas-kit/releases/tag/v12.6.13) (2025-06-17)
+
+### Infrastructure
+
+- chore: Update chromatic action settings ([#3345](https://github.com/Workday/canvas-kit/pull/3345)) ([@RayRedGoose](https://github.com/RayRedGoose), [@mannycarrera4](https://github.com/mannycarrera4))
 ## [v13.1.2](https://github.com/Workday/canvas-kit/releases/tag/v13.1.2) (2025-06-12)
 
 ### Components
