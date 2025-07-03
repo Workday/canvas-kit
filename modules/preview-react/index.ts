@@ -1,7 +1,6 @@
 export * from './color-picker';
 export * from './divider';
 export * from './loading-sparkles';
-export * from './menu';
 export * from './pill';
 export * from './radio';
 export * from './segmented-control';
