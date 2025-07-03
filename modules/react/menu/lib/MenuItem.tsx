@@ -109,7 +109,7 @@ export const menuItemStencil = createStencil({
     // Hover styles
     '&:is(.hover, :hover)': {
       color: system.color.fg.strong,
-      backgroundColor: system.color.bg.alt.soft,
+      backgroundColor: brand.neutral.lightest,
     },
 
     // Focus styles

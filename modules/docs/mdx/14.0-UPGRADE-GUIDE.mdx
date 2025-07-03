@@ -13,9 +13,11 @@ any questions.
 - [Codemod](#codemod)
   - [Instructions](#instructions)
 - [Component Updates](#component-updates)
-  - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
+  - [Styling Changes](#styling-changes)
   - [Card](#card)
   - [SearchForm](#search-form)
+- [Removals](#removals)
+  - [Input Icon Container](#input-icon-container)
 - [Troubleshooting](#troubleshooting)
 - [Glossary](#glossary)
   - [Main](#main)
@@ -85,7 +87,7 @@ yarn remove @workday/canvas-kit-codemod
 
 ## Component Updates
 
-### Styling API and Canvas Tokens 💅
+### Styling Changes 💅
 
 Several components have been refactored to use our Canvas tokens and styling API. The React
 interface has not changed, but Canvas Tokens are now used for dynamic properties.
@@ -246,6 +248,21 @@ const customTheme = {
 - `SearchTheme` enum type has been updated to have string values `light`, `dark` and `transparent`.
   This **should not** affect the way you use the type unless you're passing a `number` of `0`, `1`
   or `2` to the `searchTheme` prop.
+
+## Removals
+
+Removals are deletions from our codebase and you can no longer consume this component. We've either
+promoted or replaced a component or utility.
+
+### Menu (preview)
+
+**PR:** [#3353](https://github.com/Workday/canvas-kit/pull/3353)
+
+We've removed `Menu` from `@workday/canvas-kit-preview-react` package. Please use
+[Menu](https://workday.github.io/canvas-kit/?path=/docs/components-popups-menu--docs) from
+`@workday/canvas-kit-react` instead.
+
+---
 
 ## Troubleshooting
 
