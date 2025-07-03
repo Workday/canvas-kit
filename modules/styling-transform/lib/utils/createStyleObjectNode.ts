@@ -1,6 +1,7 @@
-import ts from 'typescript';
 import {serializeStyles as serializedStylesEmotion} from '@emotion/serialize';
-import {serialize, compile} from 'stylis';
+import crypto from 'node:crypto';
+import {compile, serialize} from 'stylis';
+import ts from 'typescript';
 
 import {generateUniqueId} from '@workday/canvas-kit-styling';
 
@@ -64,10 +65,9 @@ export function serializeStyles(
 ) {
   const {getFileName, styles, cache, names, extractedNames} = context;
   const fileName = getFileName(node.getSourceFile().fileName);
-  const hash = generateUniqueId(); //getHash(node, context);
-  const serialized = {...serializedStylesEmotion([input]), name: hash} as ReturnType<
-    typeof serializedStylesEmotion
-  >;
+  const serialized = serializedStylesEmotion([input]);
+  const hash = getHash(node, context);
+  serialized.name = hash;
 
   if (!cache[hash]) {
     const styleOutput = compileCSS(
@@ -91,4 +91,15 @@ export function serializeStyles(
   }
 
   return serialized;
+}
+
+/**
+ * Generate a deterministic hash that is unique to the seed +
+ */
+export function getHash(node: ts.Node, context: TransformerContext) {
+  const content = context.seed + node.getStart() + node.getEnd();
+  // Convert content to a sha256 hash and then convert to a base36 number for better compression
+  return Number(
+    `0x${crypto.createHash('sha256').update(content).digest('hex').slice(0, 7)}`
+  ).toString(36);
 }
