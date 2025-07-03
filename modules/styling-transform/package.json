@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-styling-transform",
-  "version": "13.1.2",
+  "version": "13.1.4",
   "description": "The custom CSS in JS solution that takes JS styles and turns them into static CSS",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
