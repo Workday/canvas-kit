@@ -74,6 +74,7 @@ export type TransformerContext = {
   fileName: string;
   transform: NodeTransformer;
   extractCSS: boolean;
+  seed: string;
 };
 
 export type NestedStyleObject = {[key: string]: number | string | NestedStyleObject};
@@ -206,6 +207,12 @@ export interface Config {
    * different prefix for each module in a monorepo.
    */
   getPrefix?: (path: string) => string;
+
+  /**
+   * Optional seed for the hash. This can be useful if you want each build to have a different hash.
+   * If you provide the same seed, the same hash will be generated for every style.
+   */
+  seed?: string;
 }
 
 export type ObjectTransform = (
