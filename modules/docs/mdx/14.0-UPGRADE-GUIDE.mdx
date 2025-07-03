@@ -13,10 +13,12 @@ any questions.
 - [Codemod](#codemod)
   - [Instructions](#instructions)
 - [Component Updates](#component-updates)
-  - [Styling API and CSS Tokens](#styling-api-and-css-tokens)
+  - [Styling Changes](#styling-changes)
   - [Card](#card)
   - [SearchForm](#search-form)
   - [StatusIndicator](#status-indicator)
+- [Removals](#removals)
+  - [Menu (preview)](#menu-preview)
 - [Troubleshooting](#troubleshooting)
 - [Glossary](#glossary)
   - [Main](#main)
@@ -86,7 +88,7 @@ yarn remove @workday/canvas-kit-codemod
 
 ## Component Updates
 
-### Styling API and Canvas Tokens 💅
+### Styling Changes 💅
 
 Several components have been refactored to use our Canvas tokens and styling API. The React
 interface has not changed, but Canvas Tokens are now used for dynamic properties.
@@ -262,6 +264,21 @@ Variant names of the preview `StatusIndicator` have been updated by the followin
 - `gray` -> `neutral`
 
 The `StatusIndicatorVariant` type has been updated to contain the new variant names listed above. If you use the old variant values, update to use the new ones mapped above. It has also been deprecated. Use `StatusIndicatorProps['variant']` instead.
+
+## Removals
+
+Removals are deletions from our codebase and you can no longer consume this component. We've either
+promoted or replaced a component or utility.
+
+### Menu (preview)
+
+**PR:** [#3353](https://github.com/Workday/canvas-kit/pull/3353)
+
+We've removed `Menu` from `@workday/canvas-kit-preview-react` package. Please use
+[Menu](https://workday.github.io/canvas-kit/?path=/docs/components-popups-menu--docs) from
+`@workday/canvas-kit-react` instead.
+
+---
 
 ## Troubleshooting
 
