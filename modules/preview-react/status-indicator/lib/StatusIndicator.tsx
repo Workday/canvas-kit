@@ -206,7 +206,7 @@ export const StatusIndicator = createComponent('div')({
   Component: ({variant, emphasis, children, ...elemProps}: StatusIndicatorProps, ref, Element) => {
     // TODO: Remove this in a future release
     if (process.env.NODE_ENV === 'development') {
-      if (['green', 'blue', 'yellow', 'red', 'gray'].includes(variant!)) {
+      if (Object.keys(deprecatedVariantsMap).includes(variant!)) {
         // This warning will show if the codemod fails to update the variant prop
         console.warn(
           `${variant} has been removed from the preview StatusIndicator. Please use ${

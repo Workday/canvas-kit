@@ -34,16 +34,11 @@ export function getImportRenameMap(
   });
 
   root
-    .find(j.CallExpression, (node: CallExpression) => {
-      if (
+    .find(j.CallExpression, (node: CallExpression) => 
         node.callee.type === 'Identifier' &&
         node.callee.name === 'styled' &&
         node.arguments[0].type === 'Identifier'
-      ) {
-        return true;
-      }
-      return false;
-    })
+    )
     .forEach(nodePath => {
       // const StyledName = styled(OriginalName)({})
       // const StyledName = styled(OriginalName)`` // Tagged template
