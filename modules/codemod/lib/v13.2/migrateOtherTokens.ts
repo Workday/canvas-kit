@@ -55,9 +55,7 @@ const transform: Transform = (file, api) => {
             )?.[1];
 
             const {property: value} = property.value;
-            const colorToken = tokens
-              ? tokens[value.name as keyof typeof tokens]
-              : systemColors.static[value.name as keyof typeof systemColors.static];
+            const colorToken = tokens?.[value.name as keyof typeof tokens];
 
             if (colorToken) {
               if (!isCanvasKitStyling) {
@@ -91,9 +89,7 @@ const transform: Transform = (file, api) => {
                     blockKey.split(',').some(prop => prop === property.key.name)
                   )?.[1];
 
-                  const colorToken = tokens
-                    ? tokens[expr.property.name as keyof typeof tokens]
-                    : systemColors.static[expr.property.name as keyof typeof systemColors.static];
+                  const colorToken = tokens?.[expr.property.name as keyof typeof tokens];
 
                   if (colorToken) {
                     addMissingImports(
