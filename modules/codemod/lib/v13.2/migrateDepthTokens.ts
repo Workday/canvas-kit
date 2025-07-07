@@ -1,6 +1,5 @@
 import {Transform} from 'jscodeshift';
 import {addMissingImports, filterOutImports} from './utils';
-import {mapping} from './mapping';
 
 type DeclarationType = {[key: string]: any};
 
@@ -64,6 +63,8 @@ const transform: Transform = (file, api) => {
             )
           : j.objectProperty(j.identifier('boxShadow'), j.literal('none'));
       }
+
+      return nodePath;
     });
 
   root
@@ -104,6 +105,8 @@ const transform: Transform = (file, api) => {
               ),
             ]);
       }
+
+      return nodePath;
     });
 
   root
@@ -125,7 +128,6 @@ const transform: Transform = (file, api) => {
         const lowestProperty = nodePath.value.property;
 
         const importedName = importDeclaration[mainName];
-        const map = mapping[importedName as keyof typeof mapping];
         if (importedName === 'depth' && lowestProperty.type === 'NumericLiteral') {
           const isZero = lowestProperty.value.toString() === '0';
 
