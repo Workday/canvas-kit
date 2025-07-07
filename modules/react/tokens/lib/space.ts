@@ -31,18 +31,18 @@ export type CanvasSpaceValues = ValueOf<CanvasSpace>;
  * Below is a table to show the equivalent values from `px` to `rem`.
  * This is based on the default browser font size which is `16px`.
  *
- * | px Value  | rem Value | space token |
- * | --------- | --------- | ----------- |
- * | 0         | 0         | zero        |
- * | 4px       | 0.25rem   | xxxs        |
- * | 8px       | 0.5rem    | xxs         |
- * | 12px      | 0.75rem   | xs          |
- * | 16px      | 1rem      | s           |
- * | 24px      | 1.5rem    | m           |
- * | 32px      | 2rem      | l           |
- * | 40px      | 2.5rem    | xl          |
- * | 64px      | 4rem      | xxl         |
- * | 80px      | 5rem      | xxxl        |
+ * | px Value  | rem Value | space token | new token |
+ * | --------- | --------- | ----------- | --------- |
+ * | 0         | 0         | zero        | `system.space.zero` |
+ * | 4px       | 0.25rem   | xxxs        | `system.space.x1` |
+ * | 8px       | 0.5rem    | xxs         | `system.space.x2` |
+ * | 12px      | 0.75rem   | xs          | `system.space.x3` |
+ * | 16px      | 1rem      | s           | `system.space.x4` |
+ * | 24px      | 1.5rem    | m           | `system.space.x6` |
+ * | 32px      | 2rem      | l           | `system.space.x8` |
+ * | 40px      | 2.5rem    | xl          | `system.space.x10` |
+ * | 64px      | 4rem      | xxl         | `system.space.x16` |
+ * | 80px      | 5rem      | xxxl        | `system.space.x20` |
  *
  * */
 export const space: CanvasSpace = {
