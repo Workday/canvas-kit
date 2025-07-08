@@ -26,7 +26,7 @@ export const multiSelectInputStencil = createStencil({
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: system.color.bg.default,
-    borderRadius: system.shape.x1,
+    borderRadius: system.shape.x1Half,
     boxSizing: 'border-box',
     minHeight: system.space.x10,
     transition: '0.2s box-shadow, 0.2s border-color',

@@ -11,9 +11,7 @@ import {
 import {borderRadius, colors, inputColors, space} from '@workday/canvas-kit-react/tokens';
 import {LabelText} from '@workday/canvas-kit-react/text';
 import {px2rem} from '@workday/canvas-kit-styling';
-/**
- * @deprecated `RadioProps` from Main is deprecated. Use `RadioGroup` from `@workday/canvas-kit-preview-react/radio` instead.
- */
+
 export interface RadioProps extends Themeable {
   /**
    * If true, set the Radio button to the checked state.
@@ -272,9 +270,6 @@ const RadioCheck = styled('div')<Pick<RadioProps, 'checked' | 'variant'>>(
   })
 );
 
-/**
- * @deprecated `Radio` from Main is deprecated. Use `RadioGroup` from `@workday/canvas-kit-preview-react/radio` instead.
- */
 export const Radio = createComponent('input')({
   displayName: 'Radio',
   Component: (
