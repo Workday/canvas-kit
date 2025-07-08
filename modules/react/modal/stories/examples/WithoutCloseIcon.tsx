@@ -41,7 +41,7 @@ export const WithoutCloseIcon = () => {
               Are you sure you want to delete the item?
             </Box>
           </Modal.Body>
-          <Flex gap="s" padding="xxs" marginTop="xxs">
+          <Flex gap="s" padding="xxs">
             <Modal.CloseButton ref={cancelBtnRef}>Cancel</Modal.CloseButton>
             <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
               Delete
