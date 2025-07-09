@@ -1,0 +1,264 @@
+# Canvas Kit - General Overview
+
+## What is Canvas Kit?
+
+Canvas Kit is Workday's design system providing React components, styling utilities, and tokens for building consistent, accessible user interfaces. It's a comprehensive system that supports both runtime and static styling approaches.
+
+## Package Architecture
+
+Canvas Kit is organized into several packages:
+
+### Main Packages
+- `@workday/canvas-kit-react` - Production-ready components that have undergone full design and accessibility review
+- `@workday/canvas-kit-styling` - Core styling utilities for runtime and static compilation
+- `@workday/canvas-tokens-web` - Design tokens providing CSS variables for theming
+- `@workday/canvas-kit-react-fonts` - Font definitions
+
+### Development Packages
+- `@workday/canvas-kit-preview-react` - Components approved for production but may have different APIs (beta equivalent)
+- `@workday/canvas-kit-labs-react` - Experimental components not yet fully reviewed (alpha equivalent)
+- `@workday/canvas-kit-styling-transform` - Build-time optimization tools
+
+## Installation and Setup
+
+```bash
+yarn add @workday/canvas-kit-react @workday/canvas-kit-styling @workday/canvas-tokens-web
+```
+
+### Required Setup
+
+1. **Install Canvas Tokens** - Essential for proper component styling:
+```tsx
+// Import CSS variables at your app root
+import '@workday/canvas-tokens-web/css/base/_variables.css';
+import '@workday/canvas-tokens-web/css/brand/_variables.css';
+import '@workday/canvas-tokens-web/css/system/_variables.css';
+```
+
+2. **CanvasProvider** - Required for theming and Emotion compatibility:
+```tsx
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
+
+export const App = () => {
+  return (
+    <CanvasProvider>
+      {/* Your app content */}
+    </CanvasProvider>
+  );
+};
+```
+
+## Core Concepts
+
+### Component Types
+
+**Compound Components**: Most Canvas Kit components follow the compound component pattern, providing flexibility while maintaining accessibility:
+```tsx
+<Dialog>
+  <Dialog.Target>Open Dialog</Dialog.Target>
+  <Dialog.Popup>
+    <Dialog.Heading>Title</Dialog.Heading>
+    <Dialog.Body>Content</Dialog.Body>
+  </Dialog.Popup>
+</Dialog>
+```
+
+**Configuration Components**: Simple components with props-based configuration:
+```tsx
+<Button variant="primary" size="large">Click me</Button>
+```
+
+### Styling Philosophy
+
+Canvas Kit provides multiple styling approaches:
+
+1. **Static Styling** (Recommended): Use `createStyles` and `createStencil` for optimal performance
+2. **Runtime Styling**: Traditional CSS-in-JS with Emotion (legacy support)
+3. **Token-based**: Consistent design through Canvas Tokens
+
+### The `cs` Prop
+
+Most components support the `cs` prop for custom styling:
+```tsx
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const customStyles = createStyles({
+  backgroundColor: system.color.bg.primary.default,
+  padding: system.space.x4,
+});
+
+<Button cs={customStyles}>Styled Button</Button>
+```
+
+## Key Components
+
+### Layout
+- `Box` - Flexible container with style props
+- `Flex` - Flexbox container
+- `Grid` - CSS Grid container
+- `Stack` - Vertical/horizontal stacking
+
+### Navigation
+- `Breadcrumbs` - Navigation hierarchy
+- `Tabs` - Tab navigation
+- `Menu` - Dropdown menus
+- `SidePanel` - Side navigation panels
+
+### Forms
+- `FormField` - Form field wrapper with label, input, and hint
+- `TextInput` - Text input field
+- `TextArea` - Multi-line text input
+- `Select` - Dropdown selection
+- `Checkbox` - Checkbox input
+- `Radio` - Radio button input
+
+### Feedback
+- `Toast` - Temporary notifications
+- `Banner` - Persistent notifications
+- `Modal` - Dialog overlays
+- `Tooltip` - Contextual help
+
+### Data Display
+- `Table` - Data tables
+- `Card` - Content containers
+- `Avatar` - User profile images
+- `Badge` - Status indicators
+
+## API Patterns
+
+### Props Conventions
+- Use disjoint string unions instead of enums: `size: 'small' | 'medium' | 'large'`
+- Event handlers follow `on{Event}` pattern: `onClick`, `onChange`
+- Boolean props use `is` prefix: `isDisabled`, `isRequired`
+- Avoid component name in prop names: use `type` not `buttonType`
+
+### Component Interfaces
+Components typically extend HTML element interfaces:
+```tsx
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'primary' | 'secondary';
+  size?: 'small' | 'medium' | 'large';
+}
+```
+
+### Ref Forwarding
+All components forward refs to their underlying DOM element:
+```tsx
+const buttonRef = useRef<HTMLButtonElement>(null);
+<Button ref={buttonRef}>Button</Button>
+```
+
+### The `as` Prop
+Components support polymorphic rendering:
+```tsx
+<Button as="a" href="/link">Link Button</Button>
+<Box as="section">Section</Box>
+```
+
+## Accessibility
+
+Canvas Kit prioritizes accessibility:
+- All components meet WCAG 2.1 AA standards
+- Proper ARIA attributes are applied automatically
+- Keyboard navigation is built-in
+- Screen reader support is comprehensive
+- Focus management is handled correctly
+
+## Common Patterns
+
+### Form Building
+```tsx
+<FormField>
+  <FormField.Label>Email</FormField.Label>
+  <FormField.Field>
+    <FormField.Input as={TextInput} />
+    <FormField.Hint>Enter your email address</FormField.Hint>
+  </FormField.Field>
+</FormField>
+```
+
+### Modal/Dialog
+```tsx
+<Modal>
+  <Modal.Target as={Button}>Open Modal</Modal.Target>
+  <Modal.Overlay>
+    <Modal.Card>
+      <Modal.CloseIcon />
+      <Modal.Heading>Modal Title</Modal.Heading>
+      <Modal.Body>Modal content here</Modal.Body>
+    </Modal.Card>
+  </Modal.Overlay>
+</Modal>
+```
+
+### Menu/Dropdown
+```tsx
+<Menu>
+  <Menu.Target as={Button}>Open Menu</Menu.Target>
+  <Menu.Popper>
+    <Menu.Card>
+      <Menu.List>
+        <Menu.Item>Item 1</Menu.Item>
+        <Menu.Item>Item 2</Menu.Item>
+      </Menu.List>
+    </Menu.Card>
+  </Menu.Popper>
+</Menu>
+```
+
+## Development Guidelines
+
+### Performance Best Practices
+- Use `createStyles` outside component render functions
+- Leverage static styling for better performance
+- Use Canvas Tokens for consistent theming
+- Avoid inline styles and CSS prop when possible
+
+### Testing
+- Use `data-testid` attributes for test selectors
+- Test component accessibility with screen readers
+- Verify keyboard navigation works correctly
+- Test with different themes and token values
+
+### TypeScript
+- Canvas Kit provides comprehensive TypeScript support
+- Use provided utility types: `ExtractProps`, `CSProps`
+- Components are fully typed with proper generics
+- IntelliSense works out of the box
+
+## Migration and Upgrades
+
+Canvas Kit provides codemods for major version upgrades:
+```bash
+npx @workday/canvas-kit-codemod v14 src/
+```
+
+### Version Support
+- **Main**: Breaking changes only on major versions
+- **Preview**: Breaking changes possible anytime (with communication)
+- **Labs**: Breaking changes possible anytime (limited communication)
+
+## Common Issues and Solutions
+
+### Styling Not Applied
+- Ensure Canvas Tokens CSS is imported
+- Verify CanvasProvider is wrapping your app
+- Check that you're using the `cs` prop correctly
+
+### TypeScript Errors
+- Update to Canvas Kit compatible TypeScript version (5.0+)
+- Ensure all Canvas Kit packages are the same version
+- Use proper component prop types
+
+### Build Issues
+- For static styling, configure the styling transform
+- Ensure webpack/build tool supports the transform
+- Check that import paths are correct
+
+## Resources
+
+- **Documentation**: https://workday.github.io/canvas-kit/
+- **Tokens**: https://workday.github.io/canvas-tokens/
+- **GitHub**: https://github.com/Workday/canvas-kit
+- **Support**: File issues on GitHub for bugs and feature requests

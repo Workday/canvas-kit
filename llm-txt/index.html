@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canvas Kit - LLM.txt Files</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        line-height: 1.6;
+        color: #333;
+        background-color: #f8fafc;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 3rem;
+        padding: 2rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .header h1 {
+        margin: 0;
+        font-size: 2.5rem;
+        font-weight: 700;
+      }
+
+      .header p {
+        margin: 0.5rem 0 0 0;
+        font-size: 1.1rem;
+        opacity: 0.9;
+      }
+
+      .file-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .file-card {
+        background: white;
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        border-left: 4px solid #667eea;
+      }
+
+      .file-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .file-card h3 {
+        margin: 0 0 0.5rem 0;
+        color: #667eea;
+        font-size: 1.25rem;
+      }
+
+      .file-card p {
+        margin: 0 0 1rem 0;
+        color: #666;
+        font-size: 0.95rem;
+      }
+
+      .file-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background: #667eea;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: 500;
+        transition: background-color 0.2s ease;
+      }
+
+      .file-link:hover {
+        background: #5a67d8;
+      }
+
+      .file-link::after {
+        content: '↗';
+        font-size: 0.9rem;
+      }
+
+      .instructions {
+        background: white;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-top: 2rem;
+      }
+
+      .instructions h2 {
+        margin: 0 0 1rem 0;
+        color: #333;
+        font-size: 1.5rem;
+      }
+
+      .instructions ul {
+        margin: 0;
+        padding-left: 1.5rem;
+      }
+
+      .instructions li {
+        margin: 0.5rem 0;
+      }
+
+      .footer {
+        text-align: center;
+        margin-top: 3rem;
+        padding: 1rem;
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      .footer a {
+        color: #667eea;
+        text-decoration: none;
+      }
+
+      .footer a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Canvas Kit LLM.txt Files</h1>
+      <p>Comprehensive documentation for AI-powered development with Canvas Kit</p>
+    </div>
+
+    <div class="file-grid">
+      <div class="file-card">
+        <h3>General Overview</h3>
+        <p>
+          Complete introduction to Canvas Kit covering architecture, components, API patterns, and
+          core concepts. Start here for comprehensive understanding.
+        </p>
+        <a href="./llm-general-overview.txt" class="file-link">View File</a>
+      </div>
+
+      <div class="file-card">
+        <h3>Styling Guide</h3>
+        <p>
+          Deep dive into createStyles and createStencil with Canvas Tokens, performance
+          optimization, and advanced styling patterns.
+        </p>
+        <a href="/llm-styling.txt" class="file-link">View File</a>
+      </div>
+
+      <div class="file-card">
+        <h3>Upgrade Guides</h3>
+        <p>
+          Migration assistance for major versions including codemods, breaking changes, and
+          troubleshooting common issues.
+        </p>
+        <a href="/llm-upgrade-guides.txt" class="file-link">View File</a>
+      </div>
+
+      <div class="file-card">
+        <h3>Compound Components</h3>
+        <p>
+          Complete guide for building compound components with models, behavior hooks,
+          accessibility, and advanced composition patterns.
+        </p>
+        <a href="/llm-compound-components.txt" class="file-link">View File</a>
+      </div>
+    </div>
+
+    <div class="instructions">
+      <h2>How to Use These Files</h2>
+      <ul>
+        <li>
+          <strong>Cursor/VS Code:</strong> Copy the content from these files into your project's
+          .cursor/ directory
+        </li>
+        <li>
+          <strong>GitHub Copilot:</strong> Reference these files in your workspace for better
+          context
+        </li>
+        <li>
+          <strong>Claude/ChatGPT:</strong> Copy and paste the content from these files to provide
+          Canvas Kit context
+        </li>
+        <li><strong>Direct Access:</strong> Click the links above to view the raw text files</li>
+        <li>
+          <strong>Updates:</strong> Check these files when upgrading Canvas Kit versions for the
+          latest guidance
+        </li>
+      </ul>
+    </div>
+
+    <div class="footer">
+      <p>
+        Generated for
+        <a href="https://workday.github.io/canvas-kit/" target="_blank">Canvas Kit</a> by AI
+        assistant
+      </p>
+      <p>Access these files directly or copy their content for use with your preferred AI tools</p>
+    </div>
+  </body>
+</html>
