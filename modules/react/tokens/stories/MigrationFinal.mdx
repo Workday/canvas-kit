@@ -1,0 +1,52 @@
+import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
+import * as MigrationStories from './MigrationFinal.stories';
+
+<Meta of={MigrationStories} />
+
+# Q&A and more
+
+## Common Pitfalls & Solutions
+
+### 1. Forgetting CSS Variable Imports
+
+**Problem**: Styles don't apply because CSS variables aren't defined. **Solution**: Ensure you've
+imported the CSS variable files at your app's top level.
+
+### 2. Not Using var() Wrapper
+
+**Problem**: CSS properties don't work with raw token values. **Solution**: Use `createStyles` or
+`cssVar` utility instead of direct token references.
+
+### 3. Mixing Old and New Tokens
+
+**Problem**: Inconsistent styling and potential conflicts. **Solution**: Migrate completely to new
+tokens rather than mixing systems.
+
+### 4. Using Base Tokens for Everything
+
+**Problem**: Missing out on theming capabilities. **Solution**: Prefer system tokens for their
+semantic meaning and theming support.
+
+## Incremental Migration Strategy
+
+1. **Start with New Projects**: Use new tokens for all new components and features
+2. **Component-by-Component**: Migrate existing components one at a time
+3. **Test Thoroughly**: Ensure visual consistency after each component migration
+4. **Update Style Patterns**: Migrate from style props to `createStyles` where needed
+5. **Consolidate Imports**: Remove old token imports once migration is complete
+
+## Next Steps
+
+After completing the token migration:
+
+- Review your components for consistent use of system tokens
+- Consider implementing theming if not already in place
+- Update your team's coding standards to reflect new token usage
+- Monitor for any visual regressions and address them promptly
+
+## Resources
+
+- [Canvas Tokens Documentation](https://canvas.workday.com/styles/tokens/)
+- [Canvas Kit Styling Documentation](https://workday.github.io/canvas-kit/?path=/docs/features-styling-welcome--page)
+- [Token Migration Discussion](https://github.com/Workday/canvas-tokens/discussions/77)
+- [Canvas Kit GitHub Repository](https://github.com/Workday/canvas-kit)

@@ -31,7 +31,7 @@ const graphicExampleWithURL = {
 };
 
 export default {
-  title: 'Tokens/Icon',
+  title: 'Assets/Icons',
 };
 
 const customStyles = createStyles({

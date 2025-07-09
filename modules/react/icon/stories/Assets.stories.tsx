@@ -8,7 +8,7 @@ import {AccentIconList as AccentIconListExample} from './examples/AccentIconList
 import {Overview} from './examples/Overview';
 
 export default {
-  title: 'Assets/Icons',
+  title: 'Assets/List',
   tags: ['autodocs'],
   parameters: {
     docs: {

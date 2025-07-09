@@ -1,0 +1,43 @@
+import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
+import * as MigrationStories from './MigrationInstall.stories';
+
+<Meta of={MigrationStories} />
+
+# 1. Installation & Setup
+
+### 1. Install the New Package
+
+```bash
+npm install @workday/canvas-tokens-web
+# or
+yarn add @workday/canvas-tokens-web
+```
+
+### 2. Import CSS Variables
+
+Import the variables at the top level of your application:
+
+**In a CSS file:**
+
+```css
+@import '@workday/canvas-tokens-web/css/base/_variables.css';
+@import '@workday/canvas-tokens-web/css/system/_variables.css';
+@import '@workday/canvas-tokens-web/css/brand/_variables.css';
+```
+
+**In a JavaScript/TypeScript file:**
+
+```javascript
+import '@workday/canvas-tokens-web/css/base/_variables.css';
+import '@workday/canvas-tokens-web/css/system/_variables.css';
+import '@workday/canvas-tokens-web/css/brand/_variables.css';
+```
+
+### 3. Update Styling Approach
+
+If you're not already using `createStyles`, migrate from style props to the styling utilities:
+
+```javascript
+import {createStyles, cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+```
