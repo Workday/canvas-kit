@@ -1,0 +1,551 @@
+# Canvas Kit - Styling with createStyles and createStencil
+
+## Overview
+
+Canvas Kit provides a custom CSS-in-JS solution offering both runtime development and static compilation for production. The system uses two primary utilities: `createStyles` for simple static styles and `createStencil` for complex, dynamic component styling.
+
+## Core Styling Utilities
+
+### createStyles
+
+`createStyles` is the primary utility for static styles. It wraps Emotion's `css` function while providing static compilation support.
+
+#### Basic Usage
+
+```tsx
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+// ✅ Good: Define outside render function
+const buttonStyles = createStyles({
+  backgroundColor: system.color.bg.primary.default,
+  color: system.color.text.inverse,
+  padding: system.space.x4,
+  borderRadius: system.shape.x1,
+  border: 'none',
+  cursor: 'pointer',
+
+  '&:hover': {
+    backgroundColor: system.color.bg.primary.strong,
+  },
+
+  '&:focus': {
+    outline: `2px solid ${system.color.border.focus.ring}`,
+    outlineOffset: '2px',
+  },
+});
+
+function MyComponent() {
+  return <button className={buttonStyles}>Click me</button>;
+}
+```
+
+#### Performance Best Practices
+
+```tsx
+// ❌ Bad: Creates new styles on every render
+function BadComponent() {
+  const styles = createStyles({
+    color: system.color.text.primary,
+  });
+  return <div className={styles}>Bad</div>;
+}
+
+// ✅ Good: Styles defined outside render
+const goodStyles = createStyles({
+  color: system.color.text.primary,
+});
+
+function GoodComponent() {
+  return <div className={goodStyles}>Good</div>;
+}
+```
+
+#### Using with cs Prop
+
+Most Canvas Kit components support the `cs` prop:
+
+```tsx
+const customStyles = createStyles({
+  margin: system.space.x4,
+  fontWeight: system.fontWeight.bold,
+});
+
+<Button cs={customStyles}>Styled Button</Button>
+```
+
+### createStencil
+
+`createStencil` is for complex, reusable component styling systems with dynamic properties, modifiers, and parts.
+
+#### Basic Stencil Example
+
+```tsx
+import {createStencil} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const cardStencil = createStencil({
+  base: {
+    padding: system.space.x4,
+    borderRadius: system.shape.x2,
+    backgroundColor: system.color.bg.default,
+    border: `1px solid ${system.color.border.divider}`,
+  },
+
+  modifiers: {
+    variant: {
+      default: {},
+      filled: {
+        backgroundColor: system.color.bg.muted.default,
+      },
+      borderless: {
+        border: 'none',
+        boxShadow: 'none',
+      },
+    },
+
+    size: {
+      small: {
+        padding: system.space.x2,
+      },
+      medium: {
+        padding: system.space.x4,
+      },
+      large: {
+        padding: system.space.x6,
+      },
+    },
+  },
+
+  defaultModifiers: {
+    variant: 'default',
+    size: 'medium',
+  },
+});
+
+// Usage
+<div {...cardStencil({variant: 'filled', size: 'large'})}>
+  Card content
+</div>
+```
+
+## Advanced Stencil Features
+
+### CSS Variables (vars)
+
+Use CSS variables for dynamic properties:
+
+```tsx
+const buttonStencil = createStencil({
+  vars: {
+    backgroundColor: system.color.bg.primary.default,
+    textColor: system.color.text.inverse,
+  },
+
+  base: ({backgroundColor, textColor}) => ({
+    backgroundColor,
+    color: textColor,
+    padding: system.space.x3,
+    border: 'none',
+    borderRadius: system.shape.x1,
+    cursor: 'pointer',
+
+    '&:hover': {
+      backgroundColor: system.color.bg.primary.strong,
+    },
+  }),
+});
+
+// Dynamic usage
+<button {...buttonStencil({backgroundColor: 'red', textColor: 'white'})}>
+  Custom Button
+</button>
+```
+
+### Component Parts
+
+Style nested elements within components:
+
+```tsx
+const cardStencil = createStencil({
+  parts: {
+    header: 'card-header',
+    body: 'card-body',
+    footer: 'card-footer',
+  },
+
+  base: ({headerPart, bodyPart, footerPart}) => ({
+    backgroundColor: system.color.bg.default,
+    borderRadius: system.shape.x2,
+    overflow: 'hidden',
+
+    [headerPart]: {
+      padding: system.space.x4,
+      borderBottom: `1px solid ${system.color.border.divider}`,
+      fontWeight: system.fontWeight.bold,
+    },
+
+    [bodyPart]: {
+      padding: system.space.x4,
+    },
+
+    [footerPart]: {
+      padding: system.space.x4,
+      borderTop: `1px solid ${system.color.border.divider}`,
+      backgroundColor: system.color.bg.muted.default,
+    },
+  }),
+});
+
+// Usage
+const MyCard = ({children}) => {
+  return (
+    <div {...cardStencil()}>
+      <div {...cardStencil.parts.header}>Header</div>
+      <div {...cardStencil.parts.body}>{children}</div>
+      <div {...cardStencil.parts.footer}>Footer</div>
+    </div>
+  );
+};
+```
+
+### Compound Modifiers
+
+Style intersections of multiple modifiers:
+
+```tsx
+const buttonStencil = createStencil({
+  base: {
+    padding: system.space.x3,
+    border: 'none',
+    borderRadius: system.shape.x1,
+    cursor: 'pointer',
+  },
+
+  modifiers: {
+    size: {
+      small: {
+        padding: system.space.x2,
+        fontSize: system.fontSize.body.small,
+      },
+      large: {
+        padding: system.space.x5,
+        fontSize: system.fontSize.body.large,
+      },
+    },
+
+    hasIcon: {
+      true: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: system.space.x2,
+      },
+    },
+  },
+
+  compound: [
+    {
+      modifiers: {size: 'small', hasIcon: true},
+      styles: {
+        gap: system.space.x1,
+      },
+    },
+    {
+      modifiers: {size: 'large', hasIcon: true},
+      styles: {
+        gap: system.space.x3,
+      },
+    },
+  ],
+});
+```
+
+### Extending Stencils
+
+Extend existing stencils to build upon their functionality:
+
+```tsx
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
+
+const customIconStencil = createStencil({
+  extends: systemIconStencil,
+  vars: {
+    hoverColor: '',
+  },
+
+  base: ({hoverColor}) => ({
+    transition: 'color 150ms ease-in-out',
+
+    '&:hover': {
+      color: hoverColor,
+    },
+  }),
+});
+```
+
+## Working with Canvas Tokens
+
+### Token Categories
+
+```tsx
+import {system, base, brand} from '@workday/canvas-tokens-web';
+
+// Color tokens
+system.color.bg.primary.default
+system.color.text.primary
+system.color.border.focus.ring
+
+// Spacing tokens
+system.space.x1  // 4px
+system.space.x4  // 16px
+system.space.x8  // 32px
+
+// Typography tokens
+system.fontSize.body.large
+system.fontWeight.bold
+system.lineHeight.body
+
+// Shape tokens (border radius)
+system.shape.x1   // 4px
+system.shape.x2   // 8px
+system.shape.round // 50%
+
+// Depth tokens (box-shadow)
+system.depth[1]   // subtle shadow
+system.depth[4]   // prominent shadow
+```
+
+### Token Wrapping
+
+`createStyles` automatically wraps tokens in CSS variables:
+
+```tsx
+// This:
+const styles = createStyles({
+  color: system.color.text.primary,
+});
+
+// Becomes:
+.css-hash {
+  color: var(--cnvs-sys-color-text-primary);
+}
+```
+
+## Utility Functions
+
+### CSS Calculations
+
+```tsx
+import {calc} from '@workday/canvas-kit-styling';
+
+const styles = createStyles({
+  width: calc.subtract('100%', system.space.x4),
+  height: calc.add(system.space.x8, '10px'),
+  margin: calc.negate(system.space.x2),
+  padding: calc.multiply(system.space.x1, 3),
+});
+```
+
+### Pixel to Rem Conversion
+
+```tsx
+import {px2rem} from '@workday/canvas-kit-styling';
+
+const styles = createStyles({
+  margin: px2rem(16), // converts to '1rem'
+});
+```
+
+### CSS Variables Helper
+
+```tsx
+import {cssVar} from '@workday/canvas-kit-styling';
+
+const styles = createStencil({
+  vars: {
+    customColor: '',
+  },
+  base: ({customColor}) => ({
+    // Provide fallback for uninitialized variables
+    color: cssVar(customColor, system.color.text.primary),
+  }),
+});
+```
+
+## Component Integration
+
+### handleCsProp
+
+Use `handleCsProp` for components that need to handle the `cs` prop:
+
+```tsx
+import {handleCsProp} from '@workday/canvas-kit-styling';
+
+const MyComponent = ({children, ...elemProps}) => {
+  const myStencil = createStencil({
+    base: {
+      padding: system.space.x4,
+    },
+  });
+
+  return (
+    <div {...handleCsProp(elemProps, myStencil())}>
+      {children}
+    </div>
+  );
+};
+```
+
+### Creating Styled Components
+
+```tsx
+import {createComponent} from '@workday/canvas-kit-react/common';
+
+const MyStyledComponent = createComponent('div')({
+  displayName: 'MyStyledComponent',
+  Component: ({children, ...elemProps}, ref, Element) => {
+    const styles = createStyles({
+      padding: system.space.x4,
+      backgroundColor: system.color.bg.muted.default,
+    });
+
+    return (
+      <Element ref={ref} {...elemProps} className={styles}>
+        {children}
+      </Element>
+    );
+  },
+});
+```
+
+## Build Configuration
+
+### Static Compilation Setup
+
+For production builds, configure the styling transform in `tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "plugins": [
+      {
+        "transform": "@workday/canvas-kit-styling-transform",
+        "prefix": "css",
+        "fallbackFiles": [""]
+      }
+    ]
+  }
+}
+```
+
+### Webpack Configuration
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              compiler: 'ts-patch/compiler',
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+## Performance Considerations
+
+### Static vs Runtime
+
+- **Static**: Styles are extracted at build time, no runtime overhead
+- **Runtime**: Styles are generated during execution, has performance cost
+
+### Best Practices
+
+1. **Always define styles outside render functions**
+2. **Use Canvas Tokens for consistency and theming**
+3. **Prefer `createStyles` for simple, static styles**
+4. **Use `createStencil` for complex, dynamic component systems**
+5. **Leverage the `cs` prop for style composition**
+6. **Avoid mixing styling approaches unnecessarily**
+
+## Common Patterns
+
+### Responsive Styles
+
+```tsx
+const responsiveStyles = createStyles({
+  padding: system.space.x2,
+
+  '@media (min-width: 768px)': {
+    padding: system.space.x4,
+  },
+
+  '@media (min-width: 1024px)': {
+    padding: system.space.x6,
+  },
+});
+```
+
+### Theme-aware Styles
+
+```tsx
+const themeAwareStencil = createStencil({
+  modifiers: {
+    theme: {
+      light: {
+        backgroundColor: system.color.bg.default,
+        color: system.color.text.primary,
+      },
+      dark: {
+        backgroundColor: system.color.bg.contrast.default,
+        color: system.color.text.inverse,
+      },
+    },
+  },
+});
+```
+
+### Animation with Keyframes
+
+```tsx
+import {keyframes} from '@workday/canvas-kit-styling';
+
+const fadeIn = keyframes({
+  from: {
+    opacity: 0,
+    transform: 'translateY(10px)',
+  },
+  to: {
+    opacity: 1,
+    transform: 'translateY(0)',
+  },
+});
+
+const animatedStyles = createStyles({
+  animation: `${fadeIn} 200ms ease-out`,
+});
+```
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Styles not applying**: Ensure Canvas Tokens CSS is imported
+2. **Performance issues**: Move `createStyles` outside render functions
+3. **Type errors**: Update TypeScript to 5.0+ for const type parameters
+4. **Build errors**: Configure styling transform correctly
+
+### Debugging Tips
+
+1. Use browser dev tools to inspect generated CSS classes
+2. Check that CSS variables are defined and have values
+3. Verify import paths for tokens and utilities
+4. Test with different themes to ensure token usage is correct
