@@ -1,0 +1,783 @@
+# Canvas Kit - Collections API
+
+## Overview
+
+The Collection API is a comprehensive system of models and behaviors for creating lists and grids in Canvas Kit. It provides shared functionality for components like `Tabs`, `Menu`, `Select`, and custom list/grid implementations. The API handles item registration, navigation, selection, virtualization, and data loading.
+
+## Installation
+
+```bash
+yarn add @workday/canvas-kit-react
+```
+
+## Core Concepts
+
+### Models
+- **useListModel**: Manages list state and behavior
+- **useGridModel**: Extends list model for 2D grids
+- **useOverflowListModel**: Handles overflow scenarios
+
+### Hooks
+- **Registration**: `useListItemRegister`, `useListItemAllowChildStrings`
+- **Navigation**: `useListItemRovingFocus`, `useListResetCursorOnBlur`
+- **Selection**: `useListItemSelect`
+- **Rendering**: `useListRenderItems`
+- **Data Loading**: `useListLoader`
+
+### Managers
+- **Navigation**: `navigationManager`, `wrappingNavigationManager`
+- **Selection**: Single select (default), `multiSelectionManager`
+
+## Basic Usage
+
+### Static List
+
+```tsx
+import {ListBox} from '@workday/canvas-kit-react/collection';
+
+const BasicList = () => {
+  return (
+    <ListBox>
+      <ListBox.Item>First Item</ListBox.Item>
+      <ListBox.Item>Second Item</ListBox.Item>
+      <ListBox.Item>Third Item</ListBox.Item>
+    </ListBox>
+  );
+};
+```
+
+### Identified Items
+
+Use `data-id` to provide custom identifiers:
+
+```tsx
+const IdentifiedList = () => {
+  return (
+    <ListBox>
+      <ListBox.Item data-id="home">Home</ListBox.Item>
+      <ListBox.Item data-id="about">About</ListBox.Item>
+      <ListBox.Item data-id="contact">Contact</ListBox.Item>
+    </ListBox>
+  );
+};
+```
+
+## Dynamic Items
+
+### Array of Strings
+
+Simple data where each string serves as the identifier:
+
+```tsx
+const items = ['Pizza', 'Chocolate', 'Cheeseburgers'];
+
+const DynamicStringList = () => (
+  <ListBox items={items}>
+    {item => <ListBox.Item>{item}</ListBox.Item>}
+  </ListBox>
+);
+```
+
+### Array of Objects
+
+Complex data with additional properties:
+
+```tsx
+const items = [
+  {id: 'Atlanta (United States)'},
+  {id: 'Amsterdam (Europe)'},
+  {id: 'Austin (United States)'},
+  {id: 'Beaverton (United States)', disabled: true},
+  {id: 'Belfast (Europe)'},
+];
+
+const DynamicObjectList = () => (
+  <ListBox items={items}>
+    {item => (
+      <ListBox.Item aria-disabled={item.disabled}>
+        {item.id}
+      </ListBox.Item>
+    )}
+  </ListBox>
+);
+```
+
+**Important**: The `id` should match your text value for proper selection in components like `Select` and `Autocomplete`.
+
+## Navigation and Focus
+
+### Roving Tabindex
+
+Implement keyboard navigation with roving focus:
+
+```tsx
+import {
+  useListItemRegister,
+  useListItemRovingFocus,
+  useListModel,
+  ListBox,
+  ListItemProps,
+} from '@workday/canvas-kit-react/collection';
+import {composeHooks, createSubcomponent} from '@workday/canvas-kit-react/common';
+
+// Compose hooks for roving focus behavior
+const useRovingFocusItem = composeHooks(
+  useListItemRovingFocus,
+  useListItemRegister
+);
+
+// Create custom item component
+const RovingFocusItem = createSubcomponent('li')({
+  displayName: 'RovingFocusItem',
+  modelHook: useListModel,
+  elemPropsHook: useRovingFocusItem,
+})<ListItemProps>((elemProps, Element) => {
+  return <Element {...elemProps} />;
+});
+
+const NavigableList = () => {
+  return (
+    <ListBox>
+      <ListBox.Item data-id="first" elemPropsHook={useListItemRovingFocus}>
+        First
+      </ListBox.Item>
+      <RovingFocusItem data-id="second">Second</RovingFocusItem>
+      <RovingFocusItem data-id="third">Third</RovingFocusItem>
+    </ListBox>
+  );
+};
+```
+
+### Navigation Managers
+
+Control wrapping behavior:
+
+```tsx
+import {wrappingNavigationManager} from '@workday/canvas-kit-react/collection';
+
+const WrappingList = () => {
+  const model = useListModel({
+    navigation: wrappingNavigationManager,
+  });
+
+  return (
+    <ListBox model={model}>
+      {/* items */}
+    </ListBox>
+  );
+};
+```
+
+## Selection
+
+### Single Selection
+
+```tsx
+import {
+  useListItemRegister,
+  useListItemRovingFocus,
+  useListItemSelect,
+  useListModel,
+  ListItemProps,
+  ListBox,
+  getCursor,
+} from '@workday/canvas-kit-react/collection';
+import {
+  composeHooks,
+  createElemPropsHook,
+  createSubcomponent,
+} from '@workday/canvas-kit-react/common';
+
+// Create custom hook with selection behavior
+const useSelectableItem = composeHooks(
+  createElemPropsHook(useListModel)((model, ref, elemProps: ListItemProps) => {
+    return {
+      role: 'listitem',
+      style: {
+        background: model.state.selectedIds.includes(elemProps['data-id'])
+          ? 'lightblue' : 'white',
+        border: '1px solid #ccc',
+        padding: '8px',
+        cursor: 'pointer',
+      },
+    };
+  }),
+  useListItemSelect,
+  useListItemRovingFocus,
+  useListItemRegister
+);
+
+// Create selectable item component
+const SelectableItem = createSubcomponent('button')({
+  displayName: 'SelectableItem',
+  modelHook: useListModel,
+  elemPropsHook: useSelectableItem,
+})<ListItemProps>((elemProps, Element) => {
+  return <Element {...elemProps} />;
+});
+
+const SelectableList = () => {
+  const model = useListModel({
+    initialSelectedIds: ['first'],
+  });
+
+  return (
+    <>
+      <ListBox model={model}>
+        <SelectableItem data-id="first">First</SelectableItem>
+        <SelectableItem data-id="second">Second</SelectableItem>
+        <SelectableItem data-id="third">Third</SelectableItem>
+      </ListBox>
+
+      <p>Current Focus: {getCursor(model.state)}</p>
+      <p>Selected: {model.state.selectedIds[0]}</p>
+    </>
+  );
+};
+```
+
+### Multiple Selection
+
+```tsx
+import {multiSelectionManager} from '@workday/canvas-kit-react/collection';
+
+const useMultiSelectItem = composeHooks(
+  useListItemSelect,
+  useListItemRovingFocus,
+  useListItemRegister
+);
+
+const MultiSelectItem = createSubcomponent('button')({
+  displayName: 'MultiSelectItem',
+  modelHook: useListModel,
+  elemPropsHook: useMultiSelectItem,
+})<ListItemProps>((elemProps, Element, model) => {
+  const isSelected = model.state.selectedIds.includes(elemProps['data-id']);
+
+  return (
+    <Element
+      role="listitem"
+      {...elemProps}
+      style={{
+        background: isSelected ? 'lightblue' : 'white',
+        border: '1px solid #ccc',
+        padding: '8px',
+        margin: '2px',
+      }}
+    />
+  );
+});
+
+const MultiSelectList = () => {
+  const model = useListModel({
+    initialSelectedIds: ['first', 'second'],
+    selection: multiSelectionManager,
+  });
+
+  return (
+    <>
+      <ListBox model={model}>
+        <MultiSelectItem data-id="first">First</MultiSelectItem>
+        <MultiSelectItem data-id="second">Second</MultiSelectItem>
+        <MultiSelectItem data-id="third">Third</MultiSelectItem>
+      </ListBox>
+
+      <p>Selected: {model.state.selectedIds.join(', ')}</p>
+    </>
+  );
+};
+```
+
+## Grids
+
+### Basic Grid
+
+```tsx
+import {useGridModel} from '@workday/canvas-kit-react/collection';
+import {Flex, Box} from '@workday/canvas-kit-react/layout';
+
+const useGridItem = composeHooks(
+  useListItemSelect,
+  useListItemRovingFocus,
+  useListItemRegister
+);
+
+const GridItem = createSubcomponent('button')({
+  modelHook: useGridModel,
+  elemPropsHook: useGridItem,
+})((elemProps, Element, model) => {
+  const isSelected = model.state.selectedIds.includes(elemProps['data-id']);
+
+  return (
+    <Box
+      as={Element}
+      {...elemProps}
+      width={40}
+      height={40}
+      border="solid 1px #ccc"
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      style={{
+        background: isSelected ? 'lightblue' : 'white',
+      }}
+    />
+  );
+});
+
+const BasicGrid = () => {
+  const model = useGridModel({
+    columnCount: 5,
+    items: [...Array(25).keys()].map(i => ({id: `${i + 1}`})),
+    shouldVirtualize: false,
+  });
+
+  return (
+    <ListBox model={model} as={Flex} flexDirection="row" flexWrap="wrap" width={200}>
+      {item => <GridItem data-id={item.id}>{item.id}</GridItem>}
+    </ListBox>
+  );
+};
+```
+
+### Wrapping Grid
+
+Enable wrapping navigation:
+
+```tsx
+const WrappingGrid = () => {
+  const model = useGridModel({
+    columnCount: 3,
+    items: [...Array(9).keys()].map(i => ({id: `${i + 1}`})),
+    navigation: wrappingNavigationManager,
+    shouldVirtualize: false,
+  });
+
+  return (
+    <ListBox model={model} as={Flex} flexDirection="row" flexWrap="wrap">
+      {item => <GridItem data-id={item.id}>{item.id}</GridItem>}
+    </ListBox>
+  );
+};
+```
+
+## Virtualization
+
+Handle large datasets efficiently:
+
+```tsx
+interface Item {
+  id: string;
+  text: string;
+}
+
+const items: Item[] = Array(1000)
+  .fill(true)
+  .map((_, index) => ({
+    id: String(index + 1),
+    text: `Item ${index + 1}`,
+  }));
+
+const VirtualizedList = () => {
+  return (
+    <ListBox items={items} maxHeight={300}>
+      {(item: Item) => (
+        <ListBox.Item data-id={item.id}>
+          {item.text}
+        </ListBox.Item>
+      )}
+    </ListBox>
+  );
+};
+```
+
+### Disable Virtualization
+
+For smaller lists where virtualization isn't needed:
+
+```tsx
+const SmallList = () => {
+  const model = useListModel({
+    items: ['One', 'Two', 'Three'],
+    shouldVirtualize: false,
+  });
+
+  return (
+    <ListBox model={model}>
+      {item => <ListBox.Item>{item}</ListBox.Item>}
+    </ListBox>
+  );
+};
+```
+
+## Data Loading
+
+### Asynchronous Data Loading
+
+```tsx
+import {useListLoader, LoadReturn} from '@workday/canvas-kit-react/collection';
+
+interface DataItem {
+  id: string;
+  name: string;
+}
+
+const DataLoadingList = () => {
+  const [status, setStatus] = React.useState<string[]>([]);
+
+  const {model, loader} = useListLoader(
+    {
+      getId: (item: DataItem) => item.id,
+      getTextValue: (item: DataItem) => item.name,
+      shouldVirtualize: true,
+      total: 1000,
+      pageSize: 20,
+      async load({pageNumber, pageSize}) {
+        setStatus(prev => [...prev, `Loading page ${pageNumber}...`]);
+
+        // Simulate API call
+        return new Promise<LoadReturn<DataItem>>(resolve => {
+          setTimeout(() => {
+            const start = (pageNumber - 1) * pageSize;
+            const items = Array(pageSize).fill(null).map((_, i) => ({
+              id: `item-${start + i + 1}`,
+              name: `Item ${start + i + 1}`,
+            }));
+
+            setStatus(prev => [...prev, `Page ${pageNumber} loaded`]);
+
+            resolve({
+              items,
+              total: 1000,
+            });
+          }, 500);
+        });
+      },
+    },
+    useListModel
+  );
+
+  return (
+    <div style={{display: 'flex', gap: '20px'}}>
+      <div>
+        <h3>Scrollable List</h3>
+        <ListBox model={model} maxHeight={400} width={300}>
+          {item => (
+            <ListBox.Item
+              as="button"
+              role="listitem"
+              elemPropsHook={useListItemRovingFocus}
+              style={{
+                height: '30px',
+                padding: '8px',
+                border: 'none',
+                background: 'transparent',
+                textAlign: 'left',
+                width: '100%',
+              }}
+            >
+              {item.name}
+            </ListBox.Item>
+          )}
+        </ListBox>
+      </div>
+
+      <div>
+        <h3>Loading Status</h3>
+        <ul style={{maxHeight: '400px', overflow: 'auto'}}>
+          {status.map((message, index) => (
+            <li key={index}>{message}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+};
+```
+
+## String Children Pattern
+
+Use child text as identifiers:
+
+```tsx
+import {useListItemAllowChildStrings} from '@workday/canvas-kit-react/collection';
+
+const StringChildrenList = () => {
+  return (
+    <ListBox>
+      <ListBox.Item elemPropsHook={useListItemAllowChildStrings}>
+        Pizza
+      </ListBox.Item>
+      <ListBox.Item elemPropsHook={useListItemAllowChildStrings}>
+        Chocolate
+      </ListBox.Item>
+      <ListBox.Item elemPropsHook={useListItemAllowChildStrings}>
+        Cheeseburgers
+      </ListBox.Item>
+    </ListBox>
+  );
+};
+```
+
+## Overflow Lists
+
+Handle vertical overflow with ActionBar:
+
+```tsx
+import {ActionBar, useActionBarModel} from '@workday/canvas-kit-react/action-bar';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
+
+type ActionItem = {
+  id: string;
+  text: React.ReactNode;
+};
+
+const OverflowList = () => {
+  const items: ActionItem[] = [
+    {id: 'first', text: 'First Action'},
+    {id: 'second', text: 'Second Action'},
+    {id: 'third', text: 'Third Action'},
+    {id: 'fourth', text: 'Fourth Action'},
+    {id: 'fifth', text: 'Fifth Action'},
+  ];
+
+  const model = useActionBarModel({
+    items,
+    orientation: 'vertical',
+    maximumVisible: 3,
+  });
+
+  return (
+    <ActionBar model={model}>
+      <ActionBar.List
+        flexDirection="column"
+        height="200px"
+        overflowButton={
+          <ActionBar.OverflowButton aria-label="More actions" />
+        }
+      >
+        {(item: ActionItem, index) => (
+          <ActionBar.Item
+            as={index === 0 ? PrimaryButton : undefined}
+            onClick={() => console.log(item.id)}
+          >
+            {item.text}
+          </ActionBar.Item>
+        )}
+      </ActionBar.List>
+      <ActionBar.Menu.Popper>
+        <ActionBar.Menu.Card>
+          <ActionBar.Menu.List>
+            {(item: ActionItem) => (
+              <ActionBar.Menu.Item onClick={() => console.log(item.id)}>
+                {item.text}
+              </ActionBar.Menu.Item>
+            )}
+          </ActionBar.Menu.List>
+        </ActionBar.Menu.Card>
+      </ActionBar.Menu.Popper>
+    </ActionBar>
+  );
+};
+```
+
+## Advanced Patterns
+
+### Custom List Model Configuration
+
+```tsx
+const CustomList = () => {
+  const model = useListModel({
+    // Initial selection
+    initialSelectedIds: ['item1'],
+
+    // Selection behavior
+    selection: multiSelectionManager,
+
+    // Navigation behavior
+    navigation: wrappingNavigationManager,
+
+    // Orientation
+    orientation: 'horizontal',
+
+    // Event callbacks
+    onSelect: ({id}) => console.log('Selected:', id),
+    onNavigate: ({id}) => console.log('Navigated to:', id),
+
+    // Item configuration
+    getId: (item) => item.id,
+    getTextValue: (item) => item.label,
+
+    // Virtualization
+    shouldVirtualize: true,
+  });
+
+  return <ListBox model={model}>{/* items */}</ListBox>;
+};
+```
+
+### Accessibility Enhancements
+
+```tsx
+const AccessibleList = () => {
+  return (
+    <ListBox
+      role="listbox"
+      aria-label="Selectable options"
+      aria-describedby="list-description"
+    >
+      <ListBox.Item
+        role="option"
+        aria-selected="true"
+        aria-describedby="item-help"
+      >
+        Option 1
+      </ListBox.Item>
+      <ListBox.Item role="option" aria-selected="false">
+        Option 2
+      </ListBox.Item>
+    </ListBox>
+  );
+};
+```
+
+### Performance Optimization
+
+```tsx
+// Memoize items to prevent unnecessary re-renders
+const MemoizedList = () => {
+  const items = React.useMemo(() =>
+    Array(100).fill(null).map((_, i) => ({
+      id: `item-${i}`,
+      label: `Item ${i}`,
+    })), []
+  );
+
+  return (
+    <ListBox items={items} shouldVirtualize={true}>
+      {React.memo(({ item }) => (
+        <ListBox.Item data-id={item.id}>
+          {item.label}
+        </ListBox.Item>
+      ))}
+    </ListBox>
+  );
+};
+```
+
+## Common Use Cases
+
+### Searchable List
+
+```tsx
+const SearchableList = () => {
+  const [search, setSearch] = React.useState('');
+  const allItems = ['Apple', 'Banana', 'Cherry', 'Date', 'Elderberry'];
+
+  const filteredItems = React.useMemo(() =>
+    allItems.filter(item =>
+      item.toLowerCase().includes(search.toLowerCase())
+    ), [search, allItems]
+  );
+
+  return (
+    <div>
+      <input
+        type="text"
+        placeholder="Search items..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        style={{marginBottom: '10px', padding: '8px'}}
+      />
+      <ListBox items={filteredItems}>
+        {item => (
+          <ListBox.Item>
+            {item}
+          </ListBox.Item>
+        )}
+      </ListBox>
+    </div>
+  );
+};
+```
+
+### Grouped Lists
+
+```tsx
+interface GroupedItem {
+  id: string;
+  label: string;
+  group: string;
+}
+
+const GroupedList = () => {
+  const items: GroupedItem[] = [
+    {id: '1', label: 'Apple', group: 'Fruits'},
+    {id: '2', label: 'Carrot', group: 'Vegetables'},
+    {id: '3', label: 'Banana', group: 'Fruits'},
+    {id: '4', label: 'Broccoli', group: 'Vegetables'},
+  ];
+
+  const groupedItems = React.useMemo(() => {
+    const groups: Record<string, GroupedItem[]> = {};
+    items.forEach(item => {
+      if (!groups[item.group]) groups[item.group] = [];
+      groups[item.group].push(item);
+    });
+    return groups;
+  }, [items]);
+
+  return (
+    <div>
+      {Object.entries(groupedItems).map(([group, groupItems]) => (
+        <div key={group}>
+          <h3 style={{margin: '16px 0 8px 0', fontSize: '14px', fontWeight: 'bold'}}>
+            {group}
+          </h3>
+          <ListBox items={groupItems}>
+            {item => (
+              <ListBox.Item data-id={item.id} style={{paddingLeft: '16px'}}>
+                {item.label}
+              </ListBox.Item>
+            )}
+          </ListBox>
+        </div>
+      ))}
+    </div>
+  );
+};
+```
+
+## Best Practices
+
+### 1. Model Configuration
+- Use `initialSelectedIds` for default selections
+- Configure appropriate selection and navigation managers
+- Set `shouldVirtualize: false` for small lists (<100 items)
+
+### 2. Item Identification
+- Always provide meaningful `data-id` values for complex items
+- Ensure `id` matches text value for Select/Autocomplete components
+- Use `getId` and `getTextValue` for object-based items
+
+### 3. Performance
+- Memoize item data when possible
+- Use virtualization for large datasets (>100 items)
+- Compose hooks outside of render functions
+
+### 4. Accessibility
+- Provide appropriate ARIA roles and labels
+- Use semantic HTML elements when possible
+- Implement proper keyboard navigation
+- Add descriptions for complex items
+
+### 5. Event Handling
+- Use model callbacks for centralized event handling
+- Implement proper focus management
+- Handle selection state appropriately
+
+### 6. Testing
+- Test keyboard navigation (arrow keys, home, end)
+- Verify selection behavior
+- Test with screen readers
+- Validate virtualization performance
