@@ -12,7 +12,7 @@ import {
 import {Overview} from './examples/Overview';
 
 export default {
-  title: 'Tokens/Overview',
+  title: 'Tokens/Tokens',
   tags: ['autodocs'],
   parameters: {
     docs: {
