@@ -16,26 +16,32 @@ Canvas Kit v10+ introduces a new token system that replaces the old JavaScript-b
   Android
 - **Future-Proofing**: Aligns with modern CSS capabilities and Canvas Kit's long-term direction
 
-## LLM
+## LLM Assisted Migration
 
-We provide a **LLM migration mapping file** (`llm-token-migration.txt`) that you can use with tools
-like [Cursor](https://www.cursor.so/) or other LLM-based code assistants to help automate your token
-migration.
+We provide a **LLM migration mapping file** (`llm-token-migration.txt`) specifically designed for
+use with LLM-based code assistants (such as [Cursor](https://www.cursor.so/) or similar tools). This
+file is not intended for direct human reference or team documentation, but rather as structured
+input for LLMs to automate and assist with your token migration process.
 
 > The LLM migration file is regularly updated to reflect the latest token mappings and best
 > practices.  
-> For more details, see other blocks of this migration guide
+> For more details, see other sections of this migration guide.
 
 This file contains a comprehensive mapping of old Canvas Kit token usages to their new equivalents
-in `@workday/canvas-tokens-web`, along with migration tips and examples. You can use it as a
-reference or feed it directly into your LLM/code assistant to accelerate migration.
+in `@workday/canvas-tokens-web`, along with migration tips and examples and formatted for optimal
+LLM consumption.
 
 **How to use:**
 
-- Download the file below and place it in your project or reference it in your LLM/code assistant.
-- Use it as a prompt or context for your migration workflow.
+- **View raw file**: Open the file in a new tab to see the complete migration mapping
+- **Download as txt**: Save the file locally to upload or paste into your LLM/code assistant
+- **Use with LLM**: Provide the raw content to your LLM/code assistant as context for automated
+  migration
 
-<DownloadLLMFile />
+<DownloadLLMFile
+  rawFileLink="https://gist.githubusercontent.com/mannycarrera4/e0204281afaca58abbcf57446c13428b/raw/fcbb0fdc9d5850db2424a878c3cefa507c197581"
+  filename="llm-token-migration.txt"
+/>
 
 ## Core Principles
 
