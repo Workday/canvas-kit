@@ -1,17 +1,12 @@
-import * as React from 'react';
 import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
 import {BaseButton, BaseButtonProps, buttonStencil} from '@workday/canvas-kit-react/button';
 import {createStencil, handleCsProp, calc} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import {CanvasIconTypes} from '@workday/design-assets-types';
-import {systemIconStencil} from '@workday/canvas-kit-react/icon';
-// import {brand, system} from '@workday/canvas-tokens-web';
-// import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
-// import {systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {sparkleAssistantIcon} from './SparkleAssistantIcon';
 
 export interface AiAssistantButtonProps extends Omit<BaseButtonProps, 'size' | 'variant'> {
   toggled?: boolean;
+  variant?: 'inverse';
 }
 
 export const aiAssistantButtonStencil = createStencil({
@@ -21,13 +16,14 @@ export const aiAssistantButtonStencil = createStencil({
     borderRadius: system.shape.round,
     height: calc.add(system.space.x10, system.space.x1),
     width: calc.add(system.space.x10, system.space.x1),
+    transition: 'box-shadow 300ms ease-out, background 300ms ease-out',
     '.wd-icon-ai-assistant': {
       '.wd-icon-fill': {
         fill: 'url(#ai-assistant-button-gradient)',
-        transition: 'fill .5s ease',
+        transition: 'fill 300ms ease-out',
       },
       '> linearGradient > stop': {
-        transition: '.5s ease',
+        transition: '300ms ease-out',
         stopColor: system.color.fg.inverse,
       },
     },
@@ -36,10 +32,6 @@ export const aiAssistantButtonStencil = createStencil({
       '.wd-icon-ai-assistant': {
         '.wd-icon-fill': {
           fill: 'url(#ai-assistant-button-gradient)',
-          transition: 'fill .5s ease',
-        },
-        'linearGradient > stop': {
-          transition: '.5s ease',
         },
         'linearGradient > stop:first-child': {
           stopColor: '#FFA198',
@@ -47,7 +39,6 @@ export const aiAssistantButtonStencil = createStencil({
         'linearGradient > stop:nth-child(2)': {
           stopColor: '#FFCAA0',
         },
-
         'linearGradient > stop:nth-child(3)': {
           stopColor: '#FFCA79',
         },
@@ -58,49 +49,113 @@ export const aiAssistantButtonStencil = createStencil({
           stopColor: '#FFB74D',
         },
       },
-      // [systemIconStencil.vars.color]: 'url(#ai-assistant-button-gradient)',
     },
     ':focus-visible, .focus': {
       ...focusRing({width: 2, separation: 0}),
     },
   },
   modifiers: {
+    variant: {
+      inverse: {
+        [buttonStencil.vars.background]: system.color.bg.default,
+        '.wd-icon-ai-assistant': {
+          '.wd-icon-fill': {
+            fill: 'url(#ai-assistant-button-gradient-inverse)',
+            transition: 'fill 300ms ease-out',
+          },
+          '> linearGradient > stop': {
+            transition: '300ms ease-out',
+            stopColor: system.color.fg.ai,
+          },
+        },
+        ':hover': {
+          '.wd-icon-ai-assistant': {
+            '.wd-icon-fill': {
+              fill: 'url(#ai-assistant-button-gradient-inverse)',
+            },
+            'linearGradient > stop:first-child': {
+              stopColor: '#FFA198',
+            },
+            'linearGradient > stop:nth-child(2)': {
+              stopColor: '#FFCAA0',
+            },
+            'linearGradient > stop:nth-child(3)': {
+              stopColor: '#FFCA79',
+            },
+            'linearGradient > stop:nth-child(4)': {
+              stopColor: '#FDCA44',
+            },
+            'linearGradient > stop:nth-child(5)': {
+              stopColor: '#FFB74D',
+            },
+          },
+        },
+      },
+    },
     toggled: {
       true: {
         [buttonStencil.vars.background]: system.color.bg.default,
+        transition: 'box-shadow 300ms ease-out, background 300ms ease-out',
         boxShadow:
           '0px 0px 4.9px 0px #FFC2FD, 0px 0px 0.98px 0px #FFF3A8, 0px 0px 1.96px 0px #FEC10B, 0px 0px 2.94px 0px #FEC10B, 0px 0px 4.9px 0px #FD7E00, 0px 0px 7.36px 0px #FC5B05, 0px 0px 9.81px 0px #FFC2FD, 0px 0px 12.26px 0px rgba(255, 194, 253, 0.50)',
         '.wd-icon-ai-assistant': {
           '.wd-icon-fill': {
             fill: 'url(#ai-assistant-button-gradient)',
-            transition: 'fill .5s ease',
+            transition: 'fill 300ms ease-out',
           },
           '> linearGradient > stop': {
-            transition: '.5s ease',
+            transition: '300ms ease-out',
+            stopColor: system.color.fg.ai,
+          },
+        },
+        '&:focus-visible, .focus': {
+          ...focusRing({width: 2, separation: 2}),
+          border: `1px solid ${system.color.border.container} `,
+        },
+      },
+      false: {
+        transition: 'box-shadow 300ms ease-out, background 300ms ease-out',
+      },
+    },
+  },
+  compound: [
+    {
+      modifiers: {toggled: true, variant: 'inverse'},
+      styles: {
+        // [buttonStencil.vars.background]: system.color.bg.ai.strongest,
+        '.wd-icon-ai-assistant': {
+          '.wd-icon-fill': {
+            fill: 'url(#ai-assistant-button-gradient-inverse)',
+            transition: 'fill 300ms ease-out',
+          },
+          '> linearGradient > stop': {
+            transition: '300ms ease-out',
             stopColor: system.color.fg.ai,
           },
         },
       },
     },
-  },
+  ],
 });
 
 export const AiAssistantButton = createComponent('button')({
   displayName: 'AiAssistantButton',
-  Component: ({toggled, ...elemProps}: AiAssistantButtonProps, ref, Element) => {
+  Component: ({toggled, variant, ...elemProps}: AiAssistantButtonProps, ref, Element) => {
     return (
       <BaseButton
         ref={ref}
         as={Element}
-        {...handleCsProp(elemProps, aiAssistantButtonStencil({toggled}))}
+        {...handleCsProp(elemProps, aiAssistantButtonStencil({toggled, variant}))}
       >
         <BaseButton.Icon
           icon={{
             name: 'sparkleAssistant',
             type: CanvasIconTypes.System,
             svg: `<svg class="wd-icon-ai-assistant" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" >
-                <linearGradient id="ai-assistant-button-gradient" x1="10" y1="0.000195292" x2="10" y2="19.9998" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#FFA198"/>
+                <linearGradient id="ai-assistant-button-gradient${
+                  variant === 'inverse' ? '-inverse' : ''
+                }" x1="10" y1="0.000195292" x2="10" y2="19.9998" gradientUnits="userSpaceOnUse">
+                  <stop />
                   <stop offset="0.25"/>
                   <stop offset="0.5"/>
                   <stop offset="0.75"/>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 
 import {AiAssistantButton} from '@workday/canvas-kit-labs-react/ai-assistant-button';
 
