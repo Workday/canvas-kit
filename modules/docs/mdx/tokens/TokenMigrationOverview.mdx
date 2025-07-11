@@ -1,3 +1,4 @@
+import {DownloadLLMFile} from './DownloadLLMFile';
 import {StorybookInformationHighlight} from './StorybookInformationHighlight';
 
 <Meta title="Guides/Tokens Migration/Overview" />
@@ -14,6 +15,27 @@ Canvas Kit v10+ introduces a new token system that replaces the old JavaScript-b
 - **Cross-Platform Consistency**: Single source of truth for design tokens across web, iOS, and
   Android
 - **Future-Proofing**: Aligns with modern CSS capabilities and Canvas Kit's long-term direction
+
+## LLM
+
+We provide a **LLM migration mapping file** (`llm-token-migration.txt`) that you can use with tools
+like [Cursor](https://www.cursor.so/) or other LLM-based code assistants to help automate your token
+migration.
+
+> The LLM migration file is regularly updated to reflect the latest token mappings and best
+> practices.  
+> For more details, see other blocks of this migration guide
+
+This file contains a comprehensive mapping of old Canvas Kit token usages to their new equivalents
+in `@workday/canvas-tokens-web`, along with migration tips and examples. You can use it as a
+reference or feed it directly into your LLM/code assistant to accelerate migration.
+
+**How to use:**
+
+- Download the file below and place it in your project or reference it in your LLM/code assistant.
+- Use it as a prompt or context for your migration workflow.
+
+<DownloadLLMFile />
 
 ## Core Principles
 
