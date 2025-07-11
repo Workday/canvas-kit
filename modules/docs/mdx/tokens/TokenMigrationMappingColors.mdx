@@ -1,0 +1,231 @@
+import {StorybookInformationHighlight} from './StorybookInformationHighlight';
+
+<Meta title="Guides/Tokens Migration/Mapping Tables/Colors" />
+
+# Color Token Migration
+
+<StorybookInformationHighlight
+  title="Use system tokens over base tokens"
+  description="The tables below provide mapping information for all token levels (base, system, brand) to help
+    you migrate your usage. For most use cases, we highly recommend migrating to system tokens to make future maintaining easier."
+/>
+
+<br />
+
+## Table of Contents
+
+- [Base Color Mapping](#base-color-mapping)
+- [Brand Color Migration](#brand-color-migration)
+- [System Color Usage Guide (Recommended)](#system-color-usage-guide-recommended)
+- [Migration Examples](#migration-examples)
+
+## Base Color Mapping
+
+Base colors have a direct 1:1 mapping - simply replace `colors` with `base`:
+
+| Old Token                      | New Token                    | CSS Variable                                  |
+| ------------------------------ | ---------------------------- | --------------------------------------------- |
+| `colors.cinnamon100`           | `base.cinnamon100`           | `--cnvs-base-palette-cinnamon-100`            |
+| `colors.cinnamon200`           | `base.cinnamon200`           | `--cnvs-base-palette-cinnamon-200`            |
+| `colors.cinnamon300`           | `base.cinnamon300`           | `--cnvs-base-palette-cinnamon-300`            |
+| `colors.cinnamon400`           | `base.cinnamon400`           | `--cnvs-base-palette-cinnamon-400`            |
+| `colors.cinnamon500`           | `base.cinnamon500`           | `--cnvs-base-palette-cinnamon-500`            |
+| `colors.cinnamon600`           | `base.cinnamon600`           | `--cnvs-base-palette-cinnamon-600`            |
+| `colors.peach100`              | `base.peach100`              | `--cnvs-base-palette-peach-100`               |
+| `colors.peach400`              | `base.peach400`              | `--cnvs-base-palette-peach-400`               |
+| `colors.chiliMango400`         | `base.chiliMango400`         | `--cnvs-base-palette-chili-mango-400`         |
+| `colors.cantaloupe400`         | `base.cantaloupe400`         | `--cnvs-base-palette-cantaloupe-400`          |
+| `colors.sourLemon400`          | `base.sourLemon400`          | `--cnvs-base-palette-sour-lemon-400`          |
+| `colors.juicyPear400`          | `base.juicyPear400`          | `--cnvs-base-palette-juicy-pear-400`          |
+| `colors.kiwi400`               | `base.kiwi400`               | `--cnvs-base-palette-kiwi-400`                |
+| `colors.greenApple400`         | `base.greenApple400`         | `--cnvs-base-palette-green-apple-400`         |
+| `colors.watermelon400`         | `base.watermelon400`         | `--cnvs-base-palette-watermelon-400`          |
+| `colors.jewel400`              | `base.jewel400`              | `--cnvs-base-palette-jewel-400`               |
+| `colors.toothpaste400`         | `base.toothpaste400`         | `--cnvs-base-palette-toothpaste-400`          |
+| `colors.blueberry400`          | `base.blueberry400`          | `--cnvs-base-palette-blueberry-400`           |
+| `colors.plum400`               | `base.plum400`               | `--cnvs-base-palette-plum-400`                |
+| `colors.berrySmoothie400`      | `base.berrySmoothie400`      | `--cnvs-base-palette-berry-smoothie-400`      |
+| `colors.blackberry400`         | `base.blackberry400`         | `--cnvs-base-palette-blackberry-400`          |
+| `colors.islandPunch400`        | `base.islandPunch400`        | `--cnvs-base-palette-island-punch-400`        |
+| `colors.grapeSoda400`          | `base.grapeSoda400`          | `--cnvs-base-palette-grape-soda-400`          |
+| `colors.pomegranate400`        | `base.pomegranate400`        | `--cnvs-base-palette-pomegranate-400`         |
+| `colors.fruitPunch400`         | `base.fruitPunch400`         | `--cnvs-base-palette-fruit-punch-400`         |
+| `colors.rootBeer400`           | `base.rootBeer400`           | `--cnvs-base-palette-root-beer-400`           |
+| `colors.toastedMarshmallow400` | `base.toastedMarshmallow400` | `--cnvs-base-palette-toasted-marshmallow-400` |
+| `colors.cappuccino400`         | `base.cappuccino400`         | `--cnvs-base-palette-cappuccino-400`          |
+| `colors.licorice400`           | `base.licorice400`           | `--cnvs-base-palette-licorice-400`            |
+| `colors.blackPepper100`        | `base.blackPepper100`        | `--cnvs-base-palette-black-pepper-100`        |
+| `colors.blackPepper200`        | `base.blackPepper200`        | `--cnvs-base-palette-black-pepper-200`        |
+| `colors.blackPepper300`        | `base.blackPepper300`        | `--cnvs-base-palette-black-pepper-300`        |
+| `colors.blackPepper400`        | `base.blackPepper400`        | `--cnvs-base-palette-black-pepper-400`        |
+| `colors.blackPepper500`        | `base.blackPepper500`        | `--cnvs-base-palette-black-pepper-500`        |
+| `colors.blackPepper600`        | `base.blackPepper600`        | `--cnvs-base-palette-black-pepper-600`        |
+| `colors.frenchVanilla100`      | `base.frenchVanilla100`      | `--cnvs-base-palette-french-vanilla-100`      |
+| `colors.licorice200`           | `base.licorice200`           | `--cnvs-base-palette-licorice-200`            |
+| `colors.soap200`               | `base.soap200`               | `--cnvs-base-palette-soap-200`                |
+| `colors.soap300`               | `base.soap300`               | `--cnvs-base-palette-soap-300`                |
+| `colors.soap400`               | `base.soap400`               | `--cnvs-base-palette-soap-400`                |
+| `colors.soap500`               | `base.soap500`               | `--cnvs-base-palette-soap-500`                |
+| `colors.soap600`               | `base.soap600`               | `--cnvs-base-palette-soap-600`                |
+
+## Brand Color Migration
+
+Brand colors move from the Emotion theme object to direct CSS variables:
+
+| Old Token                                  | New Token                   | CSS Variable                        |
+| ------------------------------------------ | --------------------------- | ----------------------------------- |
+| `theme.canvas.palette.primary.lightest`    | `brand.primary.lightest`    | `--cnvs-brand-primary-lightest`     |
+| `theme.canvas.palette.primary.light`       | `brand.primary.light`       | `--cnvs-brand-primary-light`        |
+| `theme.canvas.palette.primary.main`        | `brand.primary.base`        | `--cnvs-brand-primary-base`         |
+| `theme.canvas.palette.primary.dark`        | `brand.primary.dark`        | `--cnvs-brand-primary-dark`         |
+| `theme.canvas.palette.primary.darkest`     | `brand.primary.darkest`     | `--cnvs-brand-primary-darkest`      |
+| `theme.canvas.palette.primary.contrast`    | `brand.primary.accent`      | `--cnvs-brand-primary-accent`       |
+| `theme.canvas.palette.error.lightest`      | `brand.error.lightest`      | `--cnvs-brand-error-lightest`       |
+| `theme.canvas.palette.error.light`         | `brand.error.light`         | `--cnvs-brand-error-light`          |
+| `theme.canvas.palette.error.main`          | `brand.error.base`          | `--cnvs-brand-error-base`           |
+| `theme.canvas.palette.error.dark`          | `brand.error.dark`          | `--cnvs-brand-error-dark`           |
+| `theme.canvas.palette.error.darkest`       | `brand.error.darkest`       | `--cnvs-brand-error-darkest`        |
+| `theme.canvas.palette.error.contrast`      | `brand.error.accent`        | `--cnvs-brand-error-accent`         |
+| `theme.canvas.palette.alert.lightest`      | `brand.alert.lightest`      | `--cnvs-brand-alert-lightest`       |
+| `theme.canvas.palette.alert.light`         | `brand.alert.light`         | `--cnvs-brand-alert-light`          |
+| `theme.canvas.palette.alert.main`          | `brand.alert.base`          | `--cnvs-brand-alert-base`           |
+| `theme.canvas.palette.alert.dark`          | `brand.alert.dark`          | `--cnvs-brand-alert-dark`           |
+| `theme.canvas.palette.alert.darkest`       | `brand.alert.darkest`       | `--cnvs-brand-alert-darkest`        |
+| `theme.canvas.palette.alert.contrast`      | `brand.alert.accent`        | `--cnvs-brand-alert-accent`         |
+| `theme.canvas.palette.success.lightest`    | `brand.success.lightest`    | `--cnvs-brand-success-lightest`     |
+| `theme.canvas.palette.success.light`       | `brand.success.light`       | `--cnvs-brand-success-light`        |
+| `theme.canvas.palette.success.main`        | `brand.success.base`        | `--cnvs-brand-success-base`         |
+| `theme.canvas.palette.success.dark`        | `brand.success.dark`        | `--cnvs-brand-success-dark`         |
+| `theme.canvas.palette.success.darkest`     | `brand.success.darkest`     | `--cnvs-brand-success-darkest`      |
+| `theme.canvas.palette.success.contrast`    | `brand.success.accent`      | `--cnvs-brand-success-accent`       |
+| `theme.canvas.palette.neutral.lightest`    | `brand.neutral.lightest`    | `--cnvs-brand-neutral-lightest`     |
+| `theme.canvas.palette.neutral.light`       | `brand.neutral.light`       | `--cnvs-brand-neutral-light`        |
+| `theme.canvas.palette.neutral.main`        | `brand.neutral.base`        | `--cnvs-brand-neutral-base`         |
+| `theme.canvas.palette.neutral.dark`        | `brand.neutral.dark`        | `--cnvs-brand-neutral-dark`         |
+| `theme.canvas.palette.neutral.darkest`     | `brand.neutral.darkest`     | `--cnvs-brand-neutral-darkest`      |
+| `theme.canvas.palette.neutral.contrast`    | `brand.neutral.accent`      | `--cnvs-brand-neutral-accent`       |
+| `theme.canvas.palette.common.focusOutline` | `brand.common.focusOutline` | `--cnvs-brand-common-focus-outline` |
+
+## System Color Usage Guide (Recommended)
+
+**System color tokens are organized into semantic "blocks" that represent their intended use in your
+UI. Instead of referencing raw base colors, use these system tokens to ensure your application is
+themeable, understandable, and consistent.**
+
+- **Background (`system.color.bg.*`)**: For all surface and container backgrounds, including pages,
+  cards, banners, and input fields. Choose the appropriate variant (`default`, `soft`, `strong`,
+  etc.) based on the visual prominence and interaction state (default, hover, active, disabled).
+- **Foreground (`system.color.fg.*`)**: For text and icon colors. Use variants for body text,
+  headings, links, disabled states, and inverse (light-on-dark) content.
+- **Border (`system.color.border.*`)**: For outlines, dividers, and input borders. Select the
+  variant that matches the required emphasis or interaction state.
+
+### Background colors
+
+| Use Case                               |              System Token              |                                                        Old Token / React tokens                                                        | Example Usage                            |
+| -------------------------------------- | :------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------: | ---------------------------------------- |
+| **Background Colors**                  |                                        |                                                                                                                                        |                                          |
+| Main page background                   |       `system.color.bg.default`        |                        `colors.frenchVanilla100` <br/> `inputColors.background` <br/> `commonColors.background`                        | Page layout base background              |
+| Disabled elements                      |     `system.color.bg.primary.soft`     |                                                         `colors.blueberry200`                                                          | Disabled primary buttons                 |
+| Brand default background               |   `system.color.bg.primary.default`    |                  `colors.blueberry400` <br/> `commonColors.focusBackground` <br/> `inputColors.selectionControlFill`                   | Brand banners, primary button background |
+| Brand hover background                 |    `system.color.bg.primary.strong`    |                                                         `colors.blueberry500`                                                          | Primary button hover                     |
+| Brand active background                |   `system.color.bg.primary.stronger`   |                                                         `colors.blueberry600`                                                          | Primary button active                    |
+| Warning subtle background              |    `system.color.bg.caution.softer`    |                                                         `colors.cantaloupe100`                                                         | Soft warning banners                     |
+| Warning default background             |   `system.color.bg.caution.default`    |                                                         `colors.cantaloupe400`                                                         | Toast notifications                      |
+| Warning hover background               |    `system.color.bg.caution.strong`    |                                                         `colors.cantaloupe500`                                                         | Warning hover states                     |
+| Warning active background              |   `system.color.bg.caution.stronger`   |                                                         `colors.cantaloupe600`                                                         | Warning active states                    |
+| Error disabled background              |   `system.color.bg.critical.softer`    |                                                          `colors.cinnamon100`                                                          | Disabled error button                    |
+| Error default background               |   `system.color.bg.critical.default`   |                                                          `colors.cinnamon500`                                                          | Error message background                 |
+| Error hover background                 |   `system.color.bg.critical.strong`    |                                                          `colors.cinnamon600`                                                          | Delete button hover                      |
+| Success surface background             |   `system.color.bg.positive.softer`    |                                                         `colors.greenApple100`                                                         | Cards showing success status             |
+| Success default background             |   `system.color.bg.positive.default`   |                                                         `colors.greenApple400`                                                         | Disabled success buttons                 |
+| Success hover background               |   `system.color.bg.positive.strong`    |                                                         `colors.greenApple500`                                                         | Success button hover                     |
+| Success active background              |  `system.color.bg.positive.stronger`   |                                                         `colors.greenApple600`                                                         | Success button active                    |
+| Muted background (subtle)              |     `system.color.bg.muted.softer`     |                                                          `colors.licorice100`                                                          | Light containers                         |
+| Muted background (soft)                |      `system.color.bg.muted.soft`      |                                                          `colors.licorice200`                                                          | Form backgrounds                         |
+| Muted background (default)             |    `system.color.bg.muted.default`     |                                                          `colors.licorice300`                                                          | Input fields, inactive elements          |
+| Muted strong background                |     `system.color.bg.muted.strong`     |                                                          `colors.licorice500`                                                          | Switch toggles, loading indicators       |
+| Disabled input background              |      `system.color.bg.alt.softer`      |                                        `colors.soap100` <br/> `inputColors.disabled.background`                                        | Disabled text input fields               |
+| Alt page background                    |       `system.color.bg.alt.soft`       |                                                            `colors.soap200`                                                            | Dashboard sections                       |
+| Secondary surface background           |     `system.color.bg.alt.default`      |                                          `colors.soap300` <br/> `commonColors.backgroundAlt`                                           | Card hover background                    |
+| Secondary hover background             |      `system.color.bg.alt.strong`      |                                         `colors.soap400` <br/> `commonColors.hoverBackground`                                          | Hover state for modals                   |
+| Secondary active background            |     `system.color.bg.alt.stronger`     |                                                            `colors.soap500`                                                            | Clicked state for surfaces               |
+| Contrast background (default)          |   `system.color.bg.contrast.default`   |                                                        `colors.blackPepper400`                                                         | Tooltip background                       |
+| Contrast background (strong)           |   `system.color.bg.contrast.strong`    |                                                        `colors.blackPepper500`                                                         | High-contrast text container background  |
+| **Foreground Colors (text and icons)** |            **System Token**            |                                                      **Old Token / React tokens**                                                      | **Example Usage**                        |
+| Body foreground                        |       `system.color.fg.default`        |                `colors.blackPepper300` <br/> `typeColors.body` <br/> `typeColors.label` <br/> `inputColors.text` <br/>                 | Paragraphs, regular content              |
+| Headings                               |        `system.color.fg.strong`        |                                           `colors.blackPepper400` <br/> `typeColors.heading`                                           | Section and card headings                |
+| Display titles                         |       `system.color.fg.stronger`       |                                                        `colors.blackPepper500`                                                         | Hero titles, large headings              |
+| Link foreground                        |   `system.color.fg.primary.default`    | `colors.blueberry400` <br/> `iconColors.active` <br/> `statusColors.active` <br/> `typeColors.link` <br/> `typeColors.selectHighlight` | Anchor links                             |
+| Link foreground hover                  |    `system.color.fg.primary.strong`    |                                                         `colors.blueberry500`                                                          | Hover state for links                    |
+| Error foreground                       |   `system.color.fg.critical.default`   |                             `colors.cinnamon500` <br/> `inputColors.error.icon` <br/> `statusColors.error`                             | Error messages                           |
+| Inverse (white) foreground             |       `system.color.fg.inverse`        |       `colors.frenchVanilla100` <br/> `typeColors.inverse` <br/> `typeColors.selectHighlightInverse` <br/> `iconColors.inverse`        | Text on dark backgrounds                 |
+| Disabled foreground                    |       `system.color.fg.disabled`       |          `colors.licorice100` <br/> `inputColors.disabled.text` <br/> `inputColors.disabled.icon` <br/> `iconColors.disabled`          | Disabled buttons and form inputs         |
+| Muted foreground (soft)                |      `system.color.fg.muted.soft`      |                   `colors.licorice200` <br/> `iconColors.standard` <br/> `inputColors.icon` <br/> `typeColors.hint`                    | Tab labels, hint text                    |
+| Muted foreground (default)             |    `system.color.fg.muted.default`     |                                          `colors.licorice300` <br/> `inputColors.placeholder`                                          | Subtitle or secondary text               |
+| Muted foreground (strong)              |     `system.color.fg.muted.strong`     |                                                          `colors.licorice400`                                                          | Hover state for muted elements           |
+| Muted foreground (stronger)            |    `system.color.fg.muted.stronger`    |                              `colors.licorice500` <br/> `iconColors.hover` <br/> `inputColors.iconHover`                               | Active muted tabs text                   |
+| **Border Colors**                      |            **System Token**            |                                                      **Old Token / React tokens**                                                      | **Example Usage**                        |
+| Contrast border                        | `system.color.border.contrast.default` |                                                        `colors.blackPepper400`                                                         | Card outline, divider on light surfaces  |
+| Strong contrast border                 | `system.color.border.contrast.strong`  |                                                        `colors.blackPepper500`                                                         | High-contrast outlines or focus states   |
+| Primary active input border            | `system.color.border.primary.default`  |                        `colors.blueberry400` <br/> `commonColors.focusOutline` <br/> `inputColors.focusBorder`                         | Active input fields                      |
+| Warning border (inner)                 | `system.color.border.caution.default`  |                          `colors.cantaloupe400` <br/> `inputColors.alert.border` <br/> `statusColors.warning`                          | Alert field inner border                 |
+| Warning border (outer)                 |  `system.color.border.caution.strong`  |                                                         `colors.cantaloupe600`                                                         | Alert field box shadow                   |
+| Error border                           | `system.color.border.critical.default` |                            `colors.cinnamon500` <br/> `inputColors.error.border` <br/> `statusColors.error`                            | Form field with error                    |
+| Inverse surface border                 |     `system.color.border.inverse`      |                                                       `colors.frenchVanilla100`                                                        | Checkbox/radio on dark background        |
+| Disabled input border                  |  `system.color.border.input.disabled`  |                                                          `colors.licorice100`                                                          | Non-editable input fields                |
+| Default input border                   |  `system.color.border.input.default`   |                                            `colors.licorice200` <br/> `inputColors.border`                                             | Normal input field border                |
+| Hover input border                     |   `system.color.border.input.strong`   |                                        `colors.licorice500` <br/> `inputColors.disabled.border`                                        | Input field on hover                     |
+| Inverse input border                   |  `system.color.border.input.inverse`   |                                                            `colors.soap300`                                                            | Inverse theme inputs                     |
+| Divider/separator border               |     `system.color.border.divider`      |                                             `colors.soap400` <br/> `commonColors.divider`                                              | Table rows, content separators           |
+| Container border (card/table edge)     |    `system.color.border.container`     |                                                            `colors.soap500`                                                            | Card edge or section container border    |
+| **Static Colors**                      |            **System Token**            |                                                      **Old Token / React tokens**                                                      | **Example Usage**                        |
+| White                                  |      `system.color.static.white`       |                                                                                                                                        | Always white regardless of theme         |
+| Black                                  |      `system.color.static.black`       |                                                                                                                                        | Always black regardless of theme         |
+| Transparent                            |   `system.color.static.transparent`    |                                                                                                                                        | Invisible backgrounds                    |
+
+## Migration Examples
+
+**Example 1: Base Color Migration**
+
+```javascript
+// Old
+import {colors} from '@workday/canvas-kit-react/tokens';
+backgroundColor: colors.frenchVanilla100;
+
+// New (Direct mapping)
+import {base} from '@workday/canvas-tokens-web';
+backgroundColor: cssVar(base.frenchVanilla100);
+```
+
+**Example 3: Brand Color Migration**
+
+```javascript
+// Old
+import {theme} from '@emotion/react';
+backgroundColor: theme.canvas.palette.primary.main;
+
+// New
+import {brand} from '@workday/canvas-tokens-web';
+backgroundColor: cssVar(brand.primary.base);
+```
+
+**Example 2: System Color Migration**
+
+```javascript
+// Old
+import {colors} from '@workday/canvas-kit-react/tokens';
+const styles = createStyles({
+  backgroundColor: colors.frenchVanilla100,
+  borderColor: colors.soap500,
+  color: colors.blackPepper300,
+});
+
+// New - Using semantic system tokens
+import {system} from '@workday/canvas-tokens-web';
+const styles = createStyles({
+  backgroundColor: system.color.bg.default,
+  borderColor: system.color.border.container,
+  color: system.color.text.default,
+});
+```

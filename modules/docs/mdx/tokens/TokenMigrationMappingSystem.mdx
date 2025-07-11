@@ -1,0 +1,288 @@
+import {StorybookInformationHighlight} from './StorybookInformationHighlight';
+
+<Meta title="Guides/Tokens Migration/Mapping Tables/System" />
+
+# System Token Migration
+
+## Space
+
+| Old Token    | New Token           |
+| ------------ | ------------------- |
+| `space.zero` | `system.space.zero` |
+| `space.xxxs` | `system.space.x1`   |
+| `space.xxs`  | `system.space.x2`   |
+| `space.xs`   | `system.space.x3`   |
+| `space.s`    | `system.space.x4`   |
+| `space.m`    | `system.space.x6`   |
+| `space.l`    | `system.space.x8`   |
+| `space.xl`   | `system.space.x10`  |
+| `space.xxl`  | `system.space.x16`  |
+| `space.xxxl` | `system.space.x20`  |
+
+**Example migration**
+
+```javascript
+// Old
+import {space} from '@workday/canvas-kit-react/tokens';
+const styles = createStyles({
+  padding: space.l,
+  margin: space.m,
+});
+
+// New
+import {system} from '@workday/canvas-tokens-web';
+const styles = createStyles({
+  padding: system.space.x8,
+  margin: system.space.x6,
+});
+```
+
+## Shape (Border Radius) Token Migration
+
+| Old Token             | New Token            |
+| --------------------- | -------------------- |
+| `borderRadius.zero`   | `system.shape.zero`  |
+| `borderRadius.s`      | `system.shape.half`  |
+| `borderRadius.m`      | `system.shape.x1`    |
+| `borderRadius.l`      | `system.shape.x2`    |
+| `borderRadius.circle` | `system.shape.round` |
+
+**Example migration**
+
+```javascript
+// Old
+borderRadius: borderRadius.m;
+
+// New
+borderRadius: system.shape.x1;
+```
+
+## Typography Token Migration
+
+### Font Family
+
+| Old Token                                | New Token                   |
+| ---------------------------------------- | --------------------------- |
+| `type.properties.fontFamilies.default`   | `system.fontFamily.default` |
+| `type.properties.fontFamilies.monospace` | `system.fontFamily.mono`    |
+
+### Font Size
+
+| Old Token                       | New Token                        |
+| ------------------------------- | -------------------------------- |
+| `type.properties.fontSizes[10]` | `system.fontSize.subtext.small`  |
+| `type.properties.fontSizes[12]` | `system.fontSize.subtext.medium` |
+| `type.properties.fontSizes[14]` | `system.fontSize.subtext.large`  |
+| `type.properties.fontSizes[16]` | `system.fontSize.body.small`     |
+| `type.properties.fontSizes[18]` | `system.fontSize.body.medium`    |
+| `type.properties.fontSizes[20]` | `system.fontSize.body.large`     |
+| `type.properties.fontSizes[24]` | `system.fontSize.heading.small`  |
+| `type.properties.fontSizes[28]` | `system.fontSize.heading.medium` |
+| `type.properties.fontSizes[32]` | `system.fontSize.heading.large`  |
+| `type.properties.fontSizes[40]` | `system.fontSize.title.small`    |
+| `type.properties.fontSizes[48]` | `system.fontSize.title.medium`   |
+| `type.properties.fontSizes[56]` | `system.fontSize.title.large`    |
+
+### Font Weight Mappings
+
+| Old Token                             | New Token                   |
+| ------------------------------------- | --------------------------- |
+| `type.properties.fontWeights.regular` | `system.fontWeight.regular` |
+| `type.properties.fontWeights.medium`  | `system.fontWeight.medium`  |
+| `type.properties.fontWeights.bold`    | `system.fontWeight.bold`    |
+
+### Type Levels (Recommended)
+
+Use complete type level tokens for consistency:
+
+```javascript
+// Old
+import { type } from '@workday/canvas-kit-react/tokens';
+...type.levels.body.medium
+
+// New
+import { system } from '@workday/canvas-tokens-web';
+...system.type.body.medium
+```
+
+### Type Variants → Text Colors
+
+Type variants are replaced with semantic text color tokens:
+
+| Old Token              | New Token                            |
+| ---------------------- | ------------------------------------ |
+| `type.variant.error`   | `system.color.text.critical.default` |
+| `type.variant.hint`    | `system.color.text.hint`             |
+| `type.variant.inverse` | `system.color.text.inverse`          |
+
+### Depth (Shadow) Token Migration
+
+```javascript
+// Old depth tokens → New system depth tokens
+depth[1] → system.depth[1]
+depth[2] → system.depth[2]
+// ... etc
+
+// Important: Use boxShadow property (not depth)
+// Old
+const styles = createStyles({
+  ...depth[1]
+});
+
+// New
+const styles = createStyles({
+  boxShadow: system.depth[1],
+});
+```
+
+## Complete Migration Examples
+
+### Example 1: Card Component Migration
+
+#### Before (Old Tokens)
+
+```javascript
+import {colors, space, borderRadius, type, depth} from '@workday/canvas-kit-react/tokens';
+import {createStyles} from '@workday/canvas-kit-styling';
+
+const cardStyles = createStyles({
+  padding: space.l,
+  backgroundColor: colors.frenchVanilla100,
+  borderColor: colors.soap500,
+  borderRadius: borderRadius.m,
+  color: colors.blackPepper300,
+  depth: 1,
+  ...type.levels.body.medium,
+});
+
+const headerStyles = createStyles({
+  color: colors.blackPepper500,
+  marginBottom: space.s,
+  ...type.levels.heading.small,
+});
+
+const errorTextStyles = createStyles({
+  color: colors.cinnamon500,
+  ...type.levels.subtext.large,
+});
+```
+
+#### After (New Tokens - Semantic System Approach)
+
+```javascript
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const cardStyles = createStyles({
+  padding: system.space.x8,
+  backgroundColor: system.color.bg.default,
+  border: `solid ${px2rem(1)}`,
+  borderColor: system.color.border.container,
+  borderRadius: system.shape.x1,
+  color: system.color.text.default,
+  boxShadow: system.depth[1],
+  ...system.type.body.medium,
+});
+
+const headerStyles = createStyles({
+  color: system.color.text.default,
+  marginBottom: system.space.x4,
+  ...system.type.heading.small,
+});
+
+const errorTextStyles = createStyles({
+  color: system.color.text.critical.default,
+  ...system.type.subtext.large,
+});
+```
+
+### Example 2: Form Input Migration
+
+#### Before (Old Tokens)
+
+```javascript
+import {colors, space, borderRadius} from '@workday/canvas-kit-react/tokens';
+
+const inputStyles = createStyles({
+  padding: `${space.xs} ${space.s}`,
+  backgroundColor: colors.frenchVanilla100,
+  borderColor: colors.soap400,
+  borderRadius: borderRadius.s,
+  color: colors.blackPepper400,
+  '&:focus': {
+    borderColor: colors.blueberry400,
+    backgroundColor: colors.frenchVanilla100,
+  },
+  '&.error': {
+    borderColor: colors.cinnamon500,
+    backgroundColor: colors.cinnamon100,
+  },
+  '&:disabled': {
+    backgroundColor: colors.soap200,
+    color: colors.soap600,
+  },
+});
+```
+
+#### After (New Tokens - System Approach)
+
+```javascript
+import {system} from '@workday/canvas-tokens-web';
+
+const inputStyles = createStyles({
+  padding: `${system.space.x3} ${system.space.x4}`,
+  backgroundColor: system.color.bg.default,
+  borderColor: system.color.border.default,
+  borderRadius: system.shape.half,
+  color: system.color.text.default,
+  '&:focus': {
+    borderColor: system.color.border.contrast,
+    backgroundColor: system.color.bg.default,
+  },
+  '&.error': {
+    borderColor: system.color.border.critical.default,
+    backgroundColor: system.color.bg.critical.subtle,
+  },
+  '&:disabled': {
+    backgroundColor: system.color.bg.disabled,
+    color: system.color.text.disabled,
+  },
+});
+```
+
+### Example 3: Button Migration with Brand Colors
+
+#### Before (Old Tokens)
+
+```javascript
+import {colors, space, borderRadius} from '@workday/canvas-kit-react/tokens';
+import {theme} from '@emotion/react';
+
+const primaryButtonStyles = createStyles({
+  padding: `${space.xs} ${space.m}`,
+  backgroundColor: theme.canvas.palette.primary.main,
+  borderColor: theme.canvas.palette.primary.main,
+  borderRadius: borderRadius.m,
+  color: theme.canvas.palette.primary.contrast,
+  '&:hover': {
+    backgroundColor: theme.canvas.palette.primary.dark,
+  },
+});
+```
+
+#### After (New Tokens - Brand + System)
+
+```javascript
+import {system, brand} from '@workday/canvas-tokens-web';
+
+const primaryButtonStyles = createStyles({
+  padding: `${system.space.x3} ${system.space.x6}`,
+  backgroundColor: brand.primary.base,
+  borderColor: brand.primary.base,
+  borderRadius: system.shape.x1,
+  color: brand.primary.accent,
+  '&:hover': {
+    backgroundColor: brand.primary.dark,
+  },
+});
+```
