@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import {Meta, StoryObj} from '@storybook/react';
-import {CanvasProvider} from '../index';
-import {CanvasTheme, CanvasThemePalette, Themeable} from '../lib/theming';
+import {CanvasProvider} from '../../index';
+import {CanvasTheme, CanvasThemePalette, Themeable} from '../../lib/theming';
 import {colors, type, space, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {useTheme} from '@workday/canvas-kit-react/common';
-import {StyledType} from '../lib/utils';
+import {StyledType} from '../../lib/utils';
 
 const Palettes = styled('div')({
   display: 'flex',

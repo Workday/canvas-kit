@@ -82,7 +82,7 @@ jobs:
       - uses: chromaui/action@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          appCode: dlpro96xybh
+          projectToken: dlpro96xybh
           storybookBuildDir: docs
           exitOnceUploaded: false
           exitZeroOnChanges: true

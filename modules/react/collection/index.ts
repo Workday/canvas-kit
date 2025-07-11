@@ -36,4 +36,3 @@ export {
   getCursor,
   isCursor,
 } from './lib/useCursorListModel';
-export {VirtualItem, ScrollToOffsetOptions} from './lib/react-virtual';

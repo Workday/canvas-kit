@@ -281,7 +281,8 @@ export function useListLoader<
     })
   ) as ReturnType<typeof useListModel>;
 
-  const {virtualItems} = model.state.UNSTABLE_virtual;
+  const {getVirtualItems} = model.state.UNSTABLE_virtual;
+  const virtualItems = getVirtualItems();
 
   const {state} = model;
   const stateRef = React.useRef(state);
