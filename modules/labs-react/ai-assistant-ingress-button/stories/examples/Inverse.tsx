@@ -16,6 +16,7 @@ export const Inverse = () => {
       <AiAssistantIngressButton
         variant="inverse"
         onClick={() => setToggled(!toggled)}
+        aria-label={toggled ? 'Hide Assistant' : 'Show Assistant'}
         toggled={toggled}
       />
     </div>

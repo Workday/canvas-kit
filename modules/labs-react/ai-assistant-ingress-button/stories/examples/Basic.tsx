@@ -4,5 +4,11 @@ import {AiAssistantIngressButton} from '@workday/canvas-kit-labs-react/ai-assist
 
 export const Basic = () => {
   const [toggled, setToggled] = useState(false);
-  return <AiAssistantIngressButton onClick={() => setToggled(!toggled)} toggled={toggled} />;
+  return (
+    <AiAssistantIngressButton
+      aria-label={toggled ? 'Hide Assistant' : 'Show Assistant'}
+      onClick={() => setToggled(!toggled)}
+      toggled={toggled}
+    />
+  );
 };
