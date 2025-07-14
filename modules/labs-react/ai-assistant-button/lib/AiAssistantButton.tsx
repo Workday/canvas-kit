@@ -122,7 +122,7 @@ export const aiAssistantButtonStencil = createStencil({
     {
       modifiers: {toggled: true, variant: 'inverse'},
       styles: {
-        // [buttonStencil.vars.background]: system.color.bg.ai.strongest,
+        [buttonStencil.vars.background]: system.color.bg.ai.strongest,
         '.wd-icon-ai-assistant': {
           '.wd-icon-fill': {
             fill: 'url(#ai-assistant-button-gradient-inverse)',
@@ -130,7 +130,7 @@ export const aiAssistantButtonStencil = createStencil({
           },
           '> linearGradient > stop': {
             transition: '300ms ease-out',
-            stopColor: system.color.fg.ai,
+            stopColor: system.color.fg.inverse,
           },
         },
       },
