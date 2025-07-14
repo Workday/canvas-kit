@@ -1,19 +1,13 @@
 /**
  * @jest-environment node
  */
-import React from 'react';
 import {renderToString} from 'react-dom/server';
-import {AiAssistantButton} from '../';
+import {AiAssistantIngressButton} from '../lib/AiAssistantIngressButton';
 
-describe('AiAssistantButton', () => {
+describe('AiAssistantIngressButton', () => {
   it('should render on a server without crashing', () => {
     const ssrRender = () =>
-      renderToString(
-        <AiAssistantButton>
-          <AiAssistantButton.Target>Target</AiAssistantButton.Target>
-          <AiAssistantButton.Content>Content</AiAssistantButton.Content>
-        </AiAssistantButton>
-      );
+      renderToString(<AiAssistantIngressButton aria-label="Show AI Assistant" />);
     expect(ssrRender).not.toThrow();
   });
 });

@@ -6,7 +6,7 @@ export const Basic = () => {
   const [toggled, setToggled] = useState(false);
   return (
     <AiAssistantIngressButton
-      aria-label={toggled ? 'Hide Assistant' : 'Show Assistant'}
+      aria-label={toggled ? 'Hide AI Assistant' : 'Show AI Assistant'}
       onClick={() => setToggled(!toggled)}
       toggled={toggled}
     />
