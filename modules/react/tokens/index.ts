@@ -41,23 +41,23 @@ import {CSSProperties} from './lib/types';
 
 export const canvas = {
   /**
-   * @deprecated Use brand or system color tokens from `@workday/canvas-tokens-web` instead.
+   * @deprecated Use brand or system color tokens from `@workday/canvas-tokens-web` instead. View Docs [here](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
    */
   buttonColors,
   /**
-   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead.
+   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead. View Docs [here](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
    */
   chartingColorOffsets,
   /**
-   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead.
+   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead. View Docs [here](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
    */
   chartingColors,
   /**
-   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead.
+   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead. View Docs [here](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
    */
   colors,
   /**
-   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead.
+   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead. View Docs [here](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
    * @see
    * | Old Token      | New Token      |
    * |----------------|---------------------|
@@ -70,7 +70,7 @@ export const canvas = {
    */
   commonColors,
   /**
-   * @deprecated Use system depth tokens from `@workday/canvas-tokens-web` instead.
+   * @deprecated Use system depth tokens from `@workday/canvas-tokens-web` instead. View Docs [here](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
    * @see
    * | Old Token      | New Token      |
    * |----------------|---------------------|
@@ -84,15 +84,15 @@ export const canvas = {
    */
   depth,
   /**
-   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead.
+   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead. View Docs [here](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
    */
   fontFamily,
   /**
-   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead.
+   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead. View Docs [here](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
    */
   gradients,
   /**
-   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead.
+   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead. View Docs [here](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
    * @see
    * | Old Token      | New Token      |
    * |----------------|---------------------|
@@ -104,7 +104,7 @@ export const canvas = {
    */
   iconColors,
   /**
-   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead.
+   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead. View Docs [here](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
    * @see
    * | Old Token      | New Token      |
    * |----------------|---------------------|
@@ -130,11 +130,11 @@ export const canvas = {
    */
   inputColors,
   /**
-   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead.
+   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead. View Docs [here](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
    */
   monoFontFamily,
   /**
-   * @deprecated Use system space tokens from `@workday/canvas-tokens-web` instead. Check new values column for the new tokens.
+   * @deprecated Use system space tokens from `@workday/canvas-tokens-web` instead. Check new values column for the new tokens. View Docs [here](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
    * @example
    * ```ts
    * // before
@@ -149,7 +149,7 @@ export const canvas = {
    */
   space,
   /**
-   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead.
+   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead. View Docs [here](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
    * @see
    * | Old Property            | Tokens for foreground (text and icons)     | Tokens for border                          |
    * |-------------------------|-------------------------------------|---------------------------------------|
@@ -160,7 +160,7 @@ export const canvas = {
    */
   statusColors,
   /**
-   * @deprecated Use system type tokens from `@workday/canvas-tokens-web` instead.
+   * @deprecated Use system type tokens from `@workday/canvas-tokens-web` instead. View Docs [here](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
    * @see {@link } for values mapping table
    * @example
    * ```ts
@@ -184,7 +184,7 @@ export const canvas = {
    */
   type,
   /**
-   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead.
+   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead. View Docs [here](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
    * @see
    * | Old Property                        | Tokens for text                   |
    * |-------------------------------------|-----------------------------------|
@@ -202,19 +202,19 @@ export const canvas = {
 
 export {
   /**
-   * @deprecated Use brand or system color tokens from `@workday/canvas-tokens-web` instead.
+   * @deprecated Use brand or system color tokens from `@workday/canvas-tokens-web` instead. View Docs [here](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
    */
   buttonColors,
   /**
-   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead.
+   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead. View Docs [here](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
    */
   chartingColorOffsets,
   /**
-   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead.
+   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead. View Docs [here](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
    */
   chartingColors,
   /**
-   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead.
+   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead. View Docs [here](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
    * @see
    * | Old Token      | New Token      |
    * |----------------|---------------------|
@@ -227,7 +227,7 @@ export {
    */
   commonColors,
   /**
-   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead.
+   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead. View Docs [here](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
    * @see
    * | Old Token      | New Token      |
    * |----------------|---------------------|
@@ -239,7 +239,7 @@ export {
    */
   iconColors,
   /**
-   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead.
+   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead. View Docs [here](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
    * @see
    * | Old Token      | New Token      |
    * |----------------|---------------------|
@@ -265,7 +265,7 @@ export {
    */
   inputColors,
   /**
-   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead.
+   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead. View Docs [here](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
    * @see
    * | Old Property            | Tokens for foreground (text and icons)     | Tokens for border                          |
    * |-------------------------|-------------------------------------|---------------------------------------|
@@ -276,7 +276,7 @@ export {
    */
   statusColors,
   /**
-   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead.
+   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead. View Docs [here](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
    * @see
    * | Old Property                        | Tokens for text                   |
    * |-------------------------------------|-----------------------------------|
@@ -297,7 +297,7 @@ export {
    */
   BrandingColor,
   /**
-   * @deprecated Use shape system tokens from `@workday/canvas-tokens-web` instead.
+   * @deprecated Use shape system tokens from `@workday/canvas-tokens-web` instead. View Docs [here](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
    // TODO: update link
    * @see {@link } for values mapping table
    * @example
@@ -313,7 +313,7 @@ export {
    */
   borderRadius,
   /**
-   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead.
+   * @deprecated Use system color tokens from `@workday/canvas-tokens-web` instead. View Docs [here](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
    // TODO: update link
    * @see {@link } for values mapping table
    * @example
@@ -334,7 +334,7 @@ export {
    */
   gradients,
   /**
-   * @deprecated Use system depth tokens from `@workday/canvas-tokens-web` instead.
+   * @deprecated Use system depth tokens from `@workday/canvas-tokens-web` instead. View Docs [here](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
    * @see
    * | Old Token      | New Token      |
    * |----------------|---------------------|
@@ -359,7 +359,7 @@ export {
    */
   depth,
   /**
-   * @deprecated Use system space tokens from `@workday/canvas-tokens-web` instead. Check new values column for the new tokens.
+   * @deprecated Use system space tokens from `@workday/canvas-tokens-web` instead. Check new values column for the new tokens. View Docs [here](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
    * @example
    * ```ts
    * // before
@@ -374,13 +374,13 @@ export {
    */
   space,
   /**
-   * @deprecated Use system space tokens from `@workday/canvas-tokens-web` instead with canvas calc functions.
+   * @deprecated Use system space tokens from `@workday/canvas-tokens-web` instead with canvas calc functions. View Docs [here](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
    // TODO: update link
    * @see {@link } for values mapping table
    */
   spaceNumbers,
   /**
-   * @deprecated Use system type tokens from `@workday/canvas-tokens-web` instead.
+   * @deprecated Use system type tokens from `@workday/canvas-tokens-web` instead. View Docs [here](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
    * @see {@link } for values mapping table
    * @example
    * ```ts
