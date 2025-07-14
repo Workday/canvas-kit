@@ -8,9 +8,20 @@ use the new token system.
 
 ## Important Notes
 
-- **Run on Small Batches**: We recommend running the codemod on a small number of files in batches instead of your entire repository all at once. This makes the changes easier to review and allows you to catch issues more quickly with less frustration. 
-  This allows for easier manual review of the changes and helps catch any potential issues early.
-- **Use System Tokens**: You should generally always opt to use system (semantic) tokens over base tokens. This clarifies the token's intent, simplifies future updates to new tokens, and maintains better consistency across your codebase.
+- **Run on Small Batches**: We recommend running the codemod on a small number of files in batches
+  instead of your entire repository all at once. This makes the changes easier to review and allows
+  you to catch issues more quickly with less frustration. This allows for easier manual review of
+  the changes and helps catch any potential issues early.
+- **Use System Tokens**: You should generally always opt to use system (semantic) tokens over base
+  tokens. This clarifies the token's intent, simplifies future updates to new tokens, and maintains
+  better consistency across your codebase.
+- **Codemod Limitations**: The codemod does not cover every possible token usage or migration
+  scenario. Please review the codemod's changes and be prepared to update tokens as needed. Some
+  manual changes will be required, especially for:
+  - Custom or dynamic token usages
+  - Inline styles, string templates, or non-standard patterns
+  - Updating documentation, comments, or non-code files
+  - Ensuring correct semantic token choices for your specific use case
 
 ## Required Dependencies
 
@@ -28,7 +39,8 @@ You can run the codemod using npx:
 npx @workday/canvas-tokens-codemod v2 [path]
 ```
 
-Or install the package and run it directly. But remember to uninstall the package after you have completed the upgrade.
+Or install the package and run it directly. But remember to uninstall the package after you have
+completed the upgrade.
 
 ```sh
 yarn add @workday/canvas-tokens-codemod
@@ -44,6 +56,12 @@ canvas-tokens-codemod v2 [path]
 ## What This Codemod Does
 
 The codemod transforms the following tokens:
+
+- [Colors](#colors)
+- [Depth](#depth)
+- [Shape](#shape)
+- [Space](#space)
+- [Typography](#typography)
 
 ### Colors
 
@@ -128,7 +146,14 @@ The codemod transforms the following tokens:
 | `colors.blackPepper600`        | `system.color.static.black`         |
 | `colors.toastedMarshmallow600` | `system.color.static.gold.stronger` |
 
-### Border Radius / Shape
+### Depth
+
+- Converts depth tokens to objects with `boxShadow` property
+- Handles special case for depth[0] (converts to `boxShadow: "none"`)
+- Transforms depth tokens in nested CSS selectors
+- Handles depth tokens in component props
+
+### Shape
 
 - Converts border radius tokens to
   [new shape tokens](/docs/guides-tokens-migration-mapping-tables-system--docs#shape-border-radius-token-migration)
@@ -150,13 +175,6 @@ The codemod transforms the following tokens:
   [new system tokens](docs/guides-tokens-migration-mapping-tables-system--docs#font-weight)
 - Handles type levels and their properties
 - Transforms typography in component styles
-
-### Depth
-
-- Converts depth tokens to objects with `boxShadow` property
-- Handles special case for depth[0] (converts to `boxShadow: "none"`)
-- Transforms depth tokens in nested CSS selectors
-- Handles depth tokens in component props
 
 ## What to Expect
 
