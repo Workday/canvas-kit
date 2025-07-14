@@ -1,10 +1,10 @@
 import {Meta} from '@storybook/react';
-import mdxDoc from './AiAssistantButton.mdx';
+import mdxDoc from './AiAssistantIngressButton.mdx';
 
 import {Basic as BasicExample} from './examples/Basic';
 import {Inverse as InverseExample} from './examples/Inverse';
 export default {
-  title: 'Labs/Ai Assistant Button',
+  title: 'Labs/Ai Assistant Ingress Button',
   tags: ['autodocs'],
   parameters: {
     docs: {
