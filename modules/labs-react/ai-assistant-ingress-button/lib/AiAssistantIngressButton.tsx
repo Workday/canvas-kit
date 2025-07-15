@@ -35,7 +35,7 @@ export const aiAssistantIngressButtonStencil = createStencil({
       },
     },
 
-    ':hover': {
+    '&:is(:hover, .hover):not(:disabled, .disabled)': {
       [systemIconStencil.vars.color]: 'url(#ai-assistant-ingress-button-gradient)',
       '.wd-icon-ai-assistant-ingress-button': {
         'linearGradient > stop:first-child': {
@@ -55,7 +55,11 @@ export const aiAssistantIngressButtonStencil = createStencil({
         },
       },
     },
-    ':focus-visible, .focus': {
+    '&:disabled, &:disabled:active, &.disabled': {
+      [systemIconStencil.vars.color]: 'url(#ai-assistant-ingress-button-gradient)',
+      opacity: '.4',
+    },
+    '&:is(:focus-visible, .focus):not(:disabled, .disabled)': {
       [systemIconStencil.vars.color]: 'url(#ai-assistant-ingress-button-gradient)',
       ...focusRing({width: 2, separation: 0}),
     },
@@ -74,7 +78,7 @@ export const aiAssistantIngressButtonStencil = createStencil({
             stopColor: system.color.fg.ai,
           },
         },
-        ':hover': {
+        '&:is(:hover, .hover):not(:disabled, .disabled)': {
           [systemIconStencil.vars.color]: 'url(#ai-assistant-ingress-button-gradient-inverse)',
           '.wd-icon-ai-assistant-ingress-button': {
             'linearGradient > stop:first-child': {
@@ -94,7 +98,11 @@ export const aiAssistantIngressButtonStencil = createStencil({
             },
           },
         },
-        ':focus-visible, .focus': {
+        '&:disabled, &:disabled:active, &.disabled': {
+          [systemIconStencil.vars.color]: 'url(#ai-assistant-ingress-button-gradient-inverse)',
+          // opacity: '.4',
+        },
+        '&:is(:focus-visible, .focus):not(:disabled, .disabled)': {
           [systemIconStencil.vars.color]: 'url(#ai-assistant-ingress-button-gradient-inverse)',
         },
       },
@@ -115,7 +123,7 @@ export const aiAssistantIngressButtonStencil = createStencil({
             stopColor: system.color.fg.ai,
           },
         },
-        '&:focus-visible, .focus': {
+        '&:is(:focus-visible, .focus):not(:disabled, .disabled)': {
           ...focusRing({width: 2, separation: 2}),
           border: `1px solid ${system.color.border.container} `,
         },

@@ -9,6 +9,7 @@ export const Basic = () => {
       aria-label={toggled ? 'Hide AI Assistant' : 'Show AI Assistant'}
       onClick={() => setToggled(!toggled)}
       toggled={toggled}
+      disabled
     />
   );
 };

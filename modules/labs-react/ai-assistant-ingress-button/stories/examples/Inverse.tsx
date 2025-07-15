@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 
 import {AiAssistantIngressButton} from '@workday/canvas-kit-labs-react/ai-assistant-ingress-button';
 import {createStyles} from '@workday/canvas-kit-styling';
@@ -18,6 +18,7 @@ export const Inverse = () => {
         onClick={() => setToggled(!toggled)}
         aria-label={toggled ? 'Hide Assistant' : 'Show Assistant'}
         toggled={toggled}
+        disabled
       />
     </div>
   );
