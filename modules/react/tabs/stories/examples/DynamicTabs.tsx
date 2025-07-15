@@ -46,7 +46,7 @@ export const DynamicTabs = () => {
 
       // wait for stabilization of state
       requestAnimationFrame(() => {
-        document.querySelector<HTMLElement>(`#${model.state.id}-${nextId}`)?.focus();
+        document.querySelector<HTMLElement>(`[id="${model.state.id}-${nextId}"]`)?.focus();
       });
     }
   };
