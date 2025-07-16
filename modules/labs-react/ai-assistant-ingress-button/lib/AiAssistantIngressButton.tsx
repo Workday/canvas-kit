@@ -168,7 +168,6 @@ export const AiAssistantIngressButton = createComponent('button')({
   displayName: 'AiAssistantIngressButton',
   Component: ({toggled, variant, ...elemProps}: AiAssistantIngressButtonProps, ref, Element) => {
     const svgGradientId = useUniqueId();
-    console.log(aiAssistantIngressButtonStencil.vars);
     return (
       <BaseButton
         ref={ref}
