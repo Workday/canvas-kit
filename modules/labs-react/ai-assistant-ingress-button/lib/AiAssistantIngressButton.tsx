@@ -19,20 +19,20 @@ export interface AiAssistantIngressButtonProps
 /**
  * Icon gradient colors
  */
-export const illuminateStopColor1 = '#FFA198';
-export const illuminateStopColor2 = '#FFCAA0';
-export const illuminateStopColor3 = '#FFCA79';
-export const illuminateStopColor4 = '#FDCA44';
-export const illuminateStopColor5 = '#FFB74D';
+const illuminateStopColor1 = '#FFA198';
+const illuminateStopColor2 = '#FFCAA0';
+const illuminateStopColor3 = '#FFCA79';
+const illuminateStopColor4 = '#FDCA44';
+const illuminateStopColor5 = '#FFB74D';
 
 /**
  * Box shadow glow colors
  */
-export const glowEraser = '#FFC2FD';
-export const glowHighlighter = '#FFF3A8';
-export const glowLunchBreak = '#FEC10B';
-export const glowHappyHour = '#FD7E00';
-export const glowThumbtack = '#FC5B05';
+const glowEraser = '#FFC2FD';
+const glowHighlighter = '#FFF3A8';
+const glowLunchBreak = '#FEC10B';
+const glowHappyHour = '#FD7E00';
+const glowThumbtack = '#FC5B05';
 
 export const aiAssistantIngressButtonStencil = createStencil({
   extends: buttonStencil,
