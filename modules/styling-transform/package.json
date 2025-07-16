@@ -46,7 +46,7 @@
   ],
   "dependencies": {
     "@emotion/serialize": "^1.0.2",
-    "@workday/canvas-kit-styling": "^13.1.2",
+    "@workday/canvas-kit-styling": "^13.2.0",
     "stylis": "4.0.13"
   },
   "devDependencies": {
