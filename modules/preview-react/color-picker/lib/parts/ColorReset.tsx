@@ -1,9 +1,8 @@
-import styled from '@emotion/styled';
-
-import {colors, space, type} from '@workday/canvas-kit-react/tokens';
-import {focusRing, hideMouseFocus} from '@workday/canvas-kit-react/common';
-
+import {calc, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {ColorSwatch} from '@workday/canvas-kit-react/color-picker';
+import {focusRing} from '@workday/canvas-kit-react/common';
+import {system} from '@workday/canvas-tokens-web';
+import {Subtext} from '@workday/canvas-kit-react/text';
 
 export interface ResetButtonProps {
   label: string;
@@ -11,47 +10,51 @@ export interface ResetButtonProps {
   onClick: (color: string) => void;
 }
 
-const Label = styled('div')({
-  marginLeft: space.xxs,
-});
-
-const Container = styled('button')({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'flex-start',
-  width: `calc(100% + ${space.l})`,
-  height: space.l,
-  margin: `-${space.xxs} -${space.s} ${space.xxs}`,
-  padding: `0px ${space.s}`,
-  ...type.levels.subtext.medium,
-  whiteSpace: 'nowrap',
-  border: 'none',
-  outline: 'none',
-  background: 'none',
-  cursor: 'pointer',
-  transition: 'color 120ms ease, background-color 120ms ease',
-
-  '&:hover': {
-    backgroundColor: colors.soap300,
+export const resetButtonStencil = createStencil({
+  parts: {
+    label: 'reset-button-label',
   },
+  base: ({labelPart}) => ({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    width: calc.add('100%', system.space.x8),
+    height: system.space.x8,
+    margin: `${calc.negate(system.space.x2)} ${calc.negate(system.space.x4)} ${system.space.x2}`,
+    padding: `0 ${system.space.x4}`,
+    whiteSpace: 'nowrap',
+    border: 'none',
+    outline: 'none',
+    background: 'none',
+    cursor: 'pointer',
+    transition: 'color 120ms ease, background-color 120ms ease',
 
-  '&:active': {
-    backgroundColor: colors.soap400,
-  },
+    '&:hover, &.hover': {
+      backgroundColor: system.color.bg.alt.default,
+    },
 
-  '&:focus': {
-    ...focusRing(),
-  },
-  ...hideMouseFocus,
+    '&:active, &.active': {
+      backgroundColor: system.color.bg.alt.strong,
+    },
+
+    '&:focus-visible, &.focus': {
+      ...focusRing(),
+    },
+    [labelPart]: {
+      marginLeft: system.space.x2,
+    },
+  }),
 });
 
 export const ResetButton = ({onClick, resetColor, label}: ResetButtonProps) => {
   const handleResetColor = () => onClick(resetColor);
 
   return (
-    <Container onClick={handleResetColor}>
-      <ColorSwatch color={resetColor} />
-      <Label>{label}</Label>
-    </Container>
+    <button onClick={handleResetColor} {...handleCsProp({}, resetButtonStencil())}>
+      <ColorSwatch color={resetColor} data-color="" />
+      <Subtext size="medium" as="div" {...resetButtonStencil.parts.label}>
+        {label}
+      </Subtext>
+    </button>
   );
 };
