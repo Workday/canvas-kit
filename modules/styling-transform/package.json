@@ -11,6 +11,7 @@
     "directory": "modules/styling/parser"
   },
   "exports": {
+    "./*.ts": "./*.ts",
     ".": {
       "import": "./dist/es6/index.js",
       "require": "./dist/commonjs/index.js"

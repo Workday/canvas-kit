@@ -6,7 +6,11 @@ import {StorybookConfig} from '@storybook/react-webpack5';
 import {ExportedSymbol, Value} from '@workday/canvas-kit-docs/docgen/docTypes';
 import getSpecifications from '../modules/docs/utils/get-specifications';
 import {getDocParser} from '../modules/docs/docgen/createDocProgram';
-import {styleTransformer, StylingWebpackPlugin} from '@workday/canvas-kit-styling-transform';
+// Drop the `/index.ts` if using the published package
+import {
+  styleTransformer,
+  StylingWebpackPlugin,
+} from '@workday/canvas-kit-styling-transform/index.ts';
 
 const modulesPath = path.resolve(__dirname, '../modules');
 const processDocs = process.env.SKIP_DOCGEN !== 'true';
@@ -105,7 +109,10 @@ const config: StorybookConfig = {
       exclude: /examples|stories|spec|codemod|docs/,
       use: [
         {
-          loader: require.resolve('@workday/canvas-kit-styling-transform/webpack-loader'),
+          // If you copy this code, change the path to
+          // '@workday/canvas-kit-styling-transform/webpack-loader'. We have to use the direct path
+          // because we don't build the JS files first.
+          loader: require.resolve('@workday/canvas-kit-styling-transform/lib/webpack-loader.ts'),
           options: tsPlugin.getLoaderOptions(),
         },
       ],
