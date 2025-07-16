@@ -7,7 +7,7 @@
  */
 export function getMenu($select: JQuery): JQuery {
   const id = $select.attr('aria-controls');
-  return Cypress.$(`#${id}[role=listbox]`);
+  return Cypress.$(`[id="${id}"][role=listbox]`);
 }
 
 /**
@@ -48,10 +48,7 @@ export const getOption = (lookup: number | string | RegExp) =>
  */
 export const select = (label: string | RegExp) =>
   function select($select: JQuery): Cypress.Chainable<JQuery> {
-    cy.wrap($select)
-      .click()
-      .pipe(getOption(label))
-      .click();
+    cy.wrap($select).click().pipe(getOption(label)).click();
 
     return cy.wrap($select);
   };
