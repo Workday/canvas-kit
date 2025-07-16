@@ -73,7 +73,7 @@ export const aiAssistantIngressButtonStencil = createStencil({
       },
     },
     '&:disabled, &:disabled:active, &.disabled': {
-      opacity: '.4',
+      opacity: system.opacity.disabled,
     },
     '&:is(:focus-visible, .focus):not(:disabled, .disabled)': {
       ...focusRing({width: 2, separation: 0}),
