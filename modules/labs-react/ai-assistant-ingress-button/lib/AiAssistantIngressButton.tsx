@@ -73,7 +73,7 @@ export const aiAssistantIngressButtonStencil = createStencil({
       },
     },
     '&:disabled, &:disabled:active, &.disabled': {
-      opacity: '.4',
+      opacity: system.opacity.disabled,
     },
     '&:is(:focus-visible, .focus):not(:disabled, .disabled)': {
       ...focusRing({width: 2, separation: 0}),
@@ -161,7 +161,6 @@ export const AiAssistantIngressButton = createComponent('button')({
   displayName: 'AiAssistantIngressButton',
   Component: ({toggled, variant, ...elemProps}: AiAssistantIngressButtonProps, ref, Element) => {
     const svgGradientId = useUniqueId();
-    console.log(aiAssistantIngressButtonStencil.vars);
     return (
       <BaseButton
         ref={ref}
