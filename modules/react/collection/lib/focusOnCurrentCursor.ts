@@ -1,3 +1,4 @@
+import {slugify} from '@workday/canvas-kit-styling';
 import {useCursorListModel} from './useCursorListModel';
 
 // retry a function each frame so we don't rely on the timing mechanism of React's render cycle.
@@ -32,7 +33,9 @@ export const focusOnCurrentCursor = (
       }
 
       const getElement = (id?: string) => {
-        return document.querySelector<HTMLElement>(`[data-focus-id="${`${id}-${item.id}`}"]`);
+        return document.querySelector<HTMLElement>(
+          `[data-focus-id="${slugify(`${id}-${item.id}`)}"]`
+        );
       };
 
       // In React concurrent mode, there could be several render attempts before the element we're
