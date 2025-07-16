@@ -9,7 +9,7 @@ import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export default {
-  title: 'Testing/Labs/AiAssistantIngressButton',
+  title: 'Testing/Labs/AI Assistant Ingress Button',
   component: AiAssistantIngressButton,
   parameters: {
     chromatic: {
