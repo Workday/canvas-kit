@@ -137,7 +137,7 @@
     "@storybook/react-webpack5": "7.6.20",
     "@workday/canvas-accent-icons-web": "^3.0.9",
     "@workday/canvas-applet-icons-web": "^2.0.9",
-    "@workday/canvas-system-icons-web": "^3.0.0",
+    "@workday/canvas-system-icons-web": "^3.0.35",
     "@workday/canvas-tokens-web": "3.0.0-alpha.5",
     "jest-environment-jsdom": "^29.7.0",
     "ts-jest": "^29.2.4"
