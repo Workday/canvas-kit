@@ -1,5 +1,6 @@
 import React from 'react';
 
+import {slugify} from '@workday/canvas-kit-react/common';
 import {isCursor} from '@workday/canvas-kit-react/collection';
 import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
 
@@ -46,13 +47,15 @@ export const DynamicTabs = () => {
 
       // wait for stabilization of state
       requestAnimationFrame(() => {
-        document.querySelector<HTMLElement>(`#${model.state.id}-${nextId}`)?.focus();
+        document
+          .querySelector<HTMLElement>(`[id="${slugify(`${model.state.id}-${nextId}`)}"]`)
+          ?.focus();
       });
     }
   };
 
   const onKeyDown = (id: string) => (e: React.KeyboardEvent<HTMLElement>) => {
-    if (e.key === 'Delete' && id !== 'add') {
+    if ((e.key === 'Delete' || e.key === 'Backspace') && id !== 'add') {
       setTabs(tabs.filter(item => item.id !== id));
       const model = modelRef.current;
       removeItem(id, model);
