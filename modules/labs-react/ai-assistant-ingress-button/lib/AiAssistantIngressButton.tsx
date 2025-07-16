@@ -1,4 +1,4 @@
-import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
+import {createComponent, focusRing, useUniqueId} from '@workday/canvas-kit-react/common';
 import {BaseButton, BaseButtonProps, buttonStencil} from '@workday/canvas-kit-react/button';
 import {createStencil, handleCsProp, calc} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
@@ -24,7 +24,7 @@ export const aiAssistantIngressButtonStencil = createStencil({
     height: calc.add(system.space.x10, system.space.x1),
     width: calc.add(system.space.x10, system.space.x1),
     transition: 'box-shadow 300ms ease-out, background 300ms ease-out',
-    [systemIconStencil.vars.color]: 'url(#ai-assistant-ingress-button-gradient)',
+
     '.wd-icon-ai-assistant-ingress-button': {
       '.wd-icon-fill': {
         transition: 'fill 300ms ease-out',
@@ -36,7 +36,6 @@ export const aiAssistantIngressButtonStencil = createStencil({
     },
 
     '&:is(:hover, .hover):not(:disabled, .disabled)': {
-      [systemIconStencil.vars.color]: 'url(#ai-assistant-ingress-button-gradient)',
       '.wd-icon-ai-assistant-ingress-button': {
         'linearGradient > stop:first-child': {
           stopColor: '#FFA198',
@@ -56,11 +55,9 @@ export const aiAssistantIngressButtonStencil = createStencil({
       },
     },
     '&:disabled, &:disabled:active, &.disabled': {
-      [systemIconStencil.vars.color]: 'url(#ai-assistant-ingress-button-gradient)',
       opacity: '.4',
     },
     '&:is(:focus-visible, .focus):not(:disabled, .disabled)': {
-      [systemIconStencil.vars.color]: 'url(#ai-assistant-ingress-button-gradient)',
       ...focusRing({width: 2, separation: 0}),
     },
   },
@@ -68,7 +65,7 @@ export const aiAssistantIngressButtonStencil = createStencil({
     variant: {
       inverse: {
         [buttonStencil.vars.background]: system.color.bg.default,
-        [systemIconStencil.vars.color]: 'url(#ai-assistant-ingress-button-gradient-inverse)',
+        [systemIconStencil.vars.color]: 'url(#ai-assistant-ingress-button)',
         '.wd-icon-ai-assistant-ingress-button': {
           '.wd-icon-fill': {
             transition: 'fill 300ms ease-out',
@@ -79,7 +76,6 @@ export const aiAssistantIngressButtonStencil = createStencil({
           },
         },
         '&:is(:hover, .hover):not(:disabled, .disabled)': {
-          [systemIconStencil.vars.color]: 'url(#ai-assistant-ingress-button-gradient-inverse)',
           '.wd-icon-ai-assistant-ingress-button': {
             'linearGradient > stop:first-child': {
               stopColor: '#FFA198',
@@ -99,11 +95,10 @@ export const aiAssistantIngressButtonStencil = createStencil({
           },
         },
         '&:disabled, &:disabled:active, &.disabled': {
-          [systemIconStencil.vars.color]: 'url(#ai-assistant-ingress-button-gradient-inverse)',
-          // opacity: '.4',
+          [systemIconStencil.vars.color]: 'url(#ai-assistant-ingress-button)',
         },
         '&:is(:focus-visible, .focus):not(:disabled, .disabled)': {
-          [systemIconStencil.vars.color]: 'url(#ai-assistant-ingress-button-gradient-inverse)',
+          [systemIconStencil.vars.color]: 'url(#ai-assistant-ingress-button)',
         },
       },
     },
@@ -111,7 +106,7 @@ export const aiAssistantIngressButtonStencil = createStencil({
       true: {
         [buttonStencil.vars.background]: system.color.bg.default,
         transition: 'box-shadow 300ms ease-out, background 300ms ease-out',
-        [systemIconStencil.vars.color]: 'url(#ai-assistant-ingress-button-gradient)',
+
         boxShadow:
           '0px 0px 4.9px 0px #FFC2FD, 0px 0px 0.98px 0px #FFF3A8, 0px 0px 1.96px 0px #FEC10B, 0px 0px 2.94px 0px #FEC10B, 0px 0px 4.9px 0px #FD7E00, 0px 0px 7.36px 0px #FC5B05, 0px 0px 9.81px 0px #FFC2FD, 0px 0px 12.26px 0px rgba(255, 194, 253, 0.50)',
         '.wd-icon-ai-assistant-ingress-button': {
@@ -135,12 +130,11 @@ export const aiAssistantIngressButtonStencil = createStencil({
   },
   compound: [
     {
-      modifiers: {toggled: true, variant: 'inverse'},
+      modifiers: {toggled: 'true', variant: 'inverse'},
       styles: {
         [buttonStencil.vars.background]: system.color.bg.ai.strongest,
         '.wd-icon-ai-assistant-ingress-button': {
           '.wd-icon-fill': {
-            fill: 'url(#ai-assistant-ingress-button-gradient-inverse)',
             transition: 'fill 300ms ease-out',
           },
           '> linearGradient > stop': {
@@ -156,11 +150,19 @@ export const aiAssistantIngressButtonStencil = createStencil({
 export const AiAssistantIngressButton = createComponent('button')({
   displayName: 'AiAssistantIngressButton',
   Component: ({toggled, variant, ...elemProps}: AiAssistantIngressButtonProps, ref, Element) => {
+    const svgGradientId = useUniqueId();
+    console.log(aiAssistantIngressButtonStencil.vars);
     return (
       <BaseButton
         ref={ref}
         as={Element}
-        {...handleCsProp(elemProps, aiAssistantIngressButtonStencil({toggled, variant}))}
+        {...handleCsProp(elemProps, [
+          aiAssistantIngressButtonStencil({toggled, variant}),
+          {
+            [systemIconStencil.vars
+              .color]: `url(#ai-assistant-ingress-button-gradient-${svgGradientId})`,
+          },
+        ])}
       >
         <BaseButton.Icon
           size="large"
@@ -169,7 +171,7 @@ export const AiAssistantIngressButton = createComponent('button')({
             type: CanvasIconTypes.System,
             svg: `<svg class="wd-icon-ai-assistant-ingress-button" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" >
                 <linearGradient id="ai-assistant-ingress-button-gradient${
-                  variant === 'inverse' ? '-inverse' : ''
+                  '-' + svgGradientId
                 }" x1="10" y1="0.000195292" x2="10" y2="19.9998" gradientUnits="userSpaceOnUse">
                   <stop />
                   <stop offset="0.25"/>

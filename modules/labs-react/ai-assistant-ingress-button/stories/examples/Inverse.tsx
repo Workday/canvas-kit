@@ -18,7 +18,6 @@ export const Inverse = () => {
         onClick={() => setToggled(!toggled)}
         aria-label={toggled ? 'Hide Assistant' : 'Show Assistant'}
         toggled={toggled}
-        disabled
       />
     </div>
   );
