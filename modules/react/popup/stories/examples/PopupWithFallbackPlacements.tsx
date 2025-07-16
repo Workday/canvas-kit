@@ -61,7 +61,7 @@ export const PopupWithFallbackPlacements = () => {
               <Popup.CloseIcon aria-label="Close" />
               <Popup.Heading paddingTop="m">This is Popup heading</Popup.Heading>
               <Popup.Body>Are you sure you'd like to delete the item titled 'My Item'?</Popup.Body>
-              <Flex gap="s" padding="xxs" marginTop="xxs">
+              <Flex gap="s" padding="xxs">
                 <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
                   Delete
                 </Popup.CloseButton>
@@ -79,7 +79,7 @@ export const PopupWithFallbackPlacements = () => {
               <Popup.CloseIcon aria-label="Close" />
               <Popup.Heading paddingTop="m">This is Popup heading</Popup.Heading>
               <Popup.Body>Are you sure you'd like to delete the item titled 'My Item'?</Popup.Body>
-              <Flex gap="s" padding="xxs" marginTop="xxs">
+              <Flex gap="s" padding="xxs">
                 <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
                   Delete
                 </Popup.CloseButton>
@@ -97,7 +97,7 @@ export const PopupWithFallbackPlacements = () => {
               <Popup.CloseIcon aria-label="Close" />
               <Popup.Heading paddingTop="m">This is Popup heading</Popup.Heading>
               <Popup.Body>Are you sure you'd like to delete the item titled 'My Item'?</Popup.Body>
-              <Flex gap="s" padding="xxs" marginTop="xxs">
+              <Flex gap="s" padding="xxs">
                 <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
                   Delete
                 </Popup.CloseButton>
@@ -115,7 +115,7 @@ export const PopupWithFallbackPlacements = () => {
               <Popup.CloseIcon aria-label="Close" />
               <Popup.Heading paddingTop="m">This is Popup heading</Popup.Heading>
               <Popup.Body>Are you sure you'd like to delete the item titled 'My Item'?</Popup.Body>
-              <Flex gap="s" padding="xxs" marginTop="xxs">
+              <Flex gap="s" padding="xxs">
                 <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
                   Delete
                 </Popup.CloseButton>

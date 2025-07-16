@@ -29,7 +29,7 @@ export const textInputStencil = createStencil({
     transition: '0.2s box-shadow, 0.2s border-color',
     padding: system.space.x2, // Compensate for border
     margin: px2rem(0), // Fix Safari
-    width: cssVar(width),
+    width,
     minWidth: cssVar(width, calc.add(calc.multiply(system.space.x20, 3), system.space.x10)),
     color: system.color.text.default,
     textOverflow: 'ellipsis', // Always show ellipsis for long text inputs as long as it doesn't have focus
