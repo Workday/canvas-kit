@@ -1,6 +1,6 @@
 import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
 import {Hyperlink} from '@workday/canvas-kit-react/button';
-import {system} from '@workday/canvas-tokens-web'
+import {system} from '@workday/canvas-tokens-web';
 
 <Meta title="Styling/Getting Started/Overview" />
 
@@ -28,7 +28,8 @@ The Canvas Kit styling system consists of two main packages:
 - `@workday/canvas-kit-styling` - Core styling utilities for runtime use
 - `@workday/canvas-kit-styling-transform` - Build-time optimization tools
 
-These packages work together to provide a CSS-in-JS experience during development while enabling optimized static CSS in production.
+These packages work together to provide a CSS-in-JS experience during development while enabling
+optimized static CSS in production.
 
 ## Installation
 
@@ -58,72 +59,130 @@ root.render(<div className={myStyles}>Hello!</div>);
 
 ## Development
 
-Canvas Kit Styling comes with a runtime that doesn't need anything special for developement. The
-runtime uses `@emotion/css` to include your styles on the page.
+Canvas Kit Styling comes with a runtime that doesn't need anything special for development. The
+runtime uses `@emotion/css` to include your styles on the page. If you plan to use static
+compilation, we recommend enabling in production as well so you can fix static compilation errors as
+you develop rather than get errors only in production builds.
 
-## Production
+## Static compilation
 
-If you wish to use the static compilation, you must use the `@workday/canvas-kit-styling-transform`
-package. Add the following to your project's `tsconfig.json` file:
+The `@workday/canvas-kit-styling-transform` package can to pre-build styles. This process takes
+style objects and turns them into CSS strings. This process moves serialization and hashing to build
+time rather than browser runtime when `@emotion/css` is processing styles. This will speed up
+production builds at runtime.
 
-```json
-{
-  "compilerOptions": {
-    // other options
-    "plugins": [
-      {
-        "transform": "@workday/canvas-kit-styling-transform",
-        "prefix": "css",
-        "fallbackFiles": [""]
-      }
-    ]
-  }
-}
+Static compilation has stricter requirements than when doing runtime styling. The static compiler
+uses the TypeScript type system to statically analyze style values and thus requires value types to
+be known by TypeScript. See [Restrictions](#restrictions).
+
+Static compilation may be required for server side rendering (SSR), especially when using React
+Server Components.
+
+### Restrictions
+
+The static compiler uses the TypeScript type checker. The easiest way to think of these restrictions
+is if TypeScript knows the exact value, the static compiler will also know. A simple example:
+
+```ts
+// won't work - `value` is a type of `string` because `let` allows a value to be mutated
+let value = 'absolute'; // `string`
+
+const myStyles = createStyles({
+  position: value, // error - `string` isn't specific enough.
+});
+
+// will work - `value` is a type of `'absolute'` because `const` restricts to a string literal
+const value = 'absolute'; // `'absolute'`
+
+const myStyles = createStyles({
+  position: value, // works. If you mouse over `value` in your editor, you'll see the type is `'absolute'`
+});
 ```
 
-This adds a list of plugins to use when transforming TypeScript files into JavaScript files. The
-[ts-patch](https://www.npmjs.com/package/ts-patch) projects uses the `plugins` when running
-transforms.
+More complex examples may be objects:
+
+```ts
+// won't work. TypeScript will not understand that the position will only be `'absolute'` and makes it a `string` instead
+const reusableStyles = {
+  position: 'absolute',
+}; // `{ position: string }`
+
+const myStyles = createStyles({
+  ...reusableStyles, // error - `position` is a `string` and not specific enough
+});
+
+// will work. Adding `as const` tells TypeScript the object is readonly and therefore no values can change
+const reusableStyles = {
+  position: 'absolute',
+} as const; // `{ readonly position: 'absolute' }`
+
+const myStyles = createStyles({
+  ...reusableStyles, // works. If you mouse over, the position is a string literal `'absolute'`
+});
+```
+
+Functions are a little more tricky and may require generics.
+
+```ts
+// generic makes the type be statically knowable
+function getPosition<V extends 'relative' | 'absolute'>(value: V): {position: V} {
+  return {position: value};
+}
+
+// mouse over `position` in your editor an the type will be `{ position: 'absolute' }`
+const position = getPosition('absolute'); // { position: 'absolute' }
+
+const myStyles = createStyles({
+  ...getPosition('absolute'), // works - `{ position: 'absolute' }`
+});
+```
 
 ### Webpack
 
-You will need to transform TypeScript files using the `ts-patch` which is the same as the TypeScript
-tanspiler except it uses TypeScript's
-[transform API](https://levelup.gitconnected.com/writing-a-custom-typescript-ast-transformer-731e2b0b66e6)
-to transform code during compilation.
-
-In your webpack config, you add the following:
+The `@webpack/canvas-kit-styling-transform` package comes with a webpack loader that can be added to
+development and/or production.
 
 ```js
+// import the transform - CJS and ESM are supported
+import {StylingWebpackPlugin} from '@workday/canvas-kit-styling-transform';
+
+// somewhere only once. For static webpack config files, this can be near the top.
+// If inside Storybook, Gatsby, Next.js, etc configs, put inside the function that is called that
+// returns a webpack config
+const tsPlugin = const tsPlugin = new StylingWebpackPlugin({
+  tsconfigPath: path.resolve(__dirname, '../tsconfig.json'), // allows your TS config to be used
+  // A different tsconfig could be used if you want to use TS to transpile to something like ES2019 and
+  // also have Babel process the file.
+});
+
+// However you need to define rules.
+// This is different for using webpack directly or in Storybook/Gatsby/Next.js/etc
 {
   rules: [
     //...
     {
       test: /.\.tsx?$/,
-      loaders: [
-        // ts-loader
+      use: [
         {
-          loader: require.resolve('ts-loader'),
-          options: {
-            compiler: 'ts-patch/compiler',
-          },
-        },
-        // OR awesome-typescript-loader
-        {
-          loader: require.resolve('awesome-typescript-loader'),
+          loader: require.resolve('@workday/canvas-kit-styling-transform/webpack-loader'),
+          options: tsPlugin.getLoaderOptions(),
         },
       ],
+      enforce: 'pre'
     },
   ];
 }
 ```
 
 ## Core Styling Approaches for Static Styling
+
 For proper static styling there's two methods that you can use to apply styles.
+
 1. Using `createStyles` for simple object base styles.
 2. Using `createStencil` for dynamic styles and reusable components.
 
-Both approaches are intended to be used in tandem with the `cs` prop when applying styles to our components.
+Both approaches are intended to be used in tandem with the `cs` prop when applying styles to our
+components.
 
 ### `cs` Prop
 
@@ -133,7 +192,8 @@ everything together and applies `className` and `style` attributes to a React el
 components extend the `cs` prop so that you can statically apply styles to them.
 
 > **Important**: While the `cs` prop accepts a style object, **this will not** be considered
-> statically styling an element and you will lose the performance benefits. We plan on providing a babel plugin to extract these styles statically in a future version.
+> statically styling an element and you will lose the performance benefits. We plan on providing a
+> babel plugin to extract these styles statically in a future version.
 
 ```tsx
 import {system} from '@workday/canvas-tokens-webs';
@@ -173,15 +233,19 @@ function MyComponent() {
 }
 ```
 
-Most of our components support using the `cs` prop to apply the static styles. It merges
-everything together and applies `className` and `style` attributes to a React element.
+Most of our components support using the `cs` prop to apply the static styles. It merges everything
+together and applies `className` and `style` attributes to a React element.
 
-<InformationHighlight className="sb-unstyled" cs={{marginBlock: system.space.x4,}}>
-	<InformationHighlight.Icon />
-	<InformationHighlight.Heading>Information</InformationHighlight.Heading>
-	<InformationHighlight.Body>
-		For a more in depth overview, please view our <Hyperlink src="https://workday.github.io/canvas-kit/?path=/docs/styling-getting-started-create-styles--docs">Create Styles</Hyperlink> docs.
-	</InformationHighlight.Body>
+<InformationHighlight className="sb-unstyled" cs={{marginBlock: system.space.x4}}>
+  <InformationHighlight.Icon />
+  <InformationHighlight.Heading>Information</InformationHighlight.Heading>
+  <InformationHighlight.Body>
+    For a more in depth overview, please view our{' '}
+    <Hyperlink src="https://workday.github.io/canvas-kit/?path=/docs/styling-getting-started-create-styles--docs">
+      Create Styles
+    </Hyperlink>{' '}
+    docs.
+  </InformationHighlight.Body>
 </InformationHighlight>
 
 ### `createStencil`
@@ -246,10 +310,14 @@ const ThemedCard = ({isDarkTheme, headerColor, elemProps}) => {
 };
 ```
 
-<InformationHighlight className="sb-unstyled" cs={{marginBlock: system.space.x4,}}>
-	<InformationHighlight.Icon />
-	<InformationHighlight.Heading>Information</InformationHighlight.Heading>
-	<InformationHighlight.Body>
-		For a more in depth overview, please view our <Hyperlink src="https://workday.github.io/canvas-kit/?path=/docs/styling-getting-started-stencils--docs">Create Stencil</Hyperlink> docs.
-	</InformationHighlight.Body>
+<InformationHighlight className="sb-unstyled" cs={{marginBlock: system.space.x4}}>
+  <InformationHighlight.Icon />
+  <InformationHighlight.Heading>Information</InformationHighlight.Heading>
+  <InformationHighlight.Body>
+    For a more in depth overview, please view our{' '}
+    <Hyperlink src="https://workday.github.io/canvas-kit/?path=/docs/styling-getting-started-stencils--docs">
+      Create Stencil
+    </Hyperlink>{' '}
+    docs.
+  </InformationHighlight.Body>
 </InformationHighlight>
