@@ -74,13 +74,6 @@ export interface Item<T> {
 //   }
 // }
 
-export interface GroupedItems {
-  // A non intractable header that logically separates autocomplete items
-  header: React.ReactElement<any>;
-  // A group of logically distinct autocomplete items
-  items: React.ReactElement<any>[];
-}
-
 // force Typescript to use `Generic` as a symbol
 const genericDefaultConfig: {
   /**
@@ -88,7 +81,7 @@ const genericDefaultConfig: {
    * children. If the shape of each item object does not have an `id` property or uses a different
    * property to uniquely identify each item, a `getId` must also be supplied.
    */
-  items: Generic[] | GroupedItems[];
+  items: Generic[];
 } = {
   items: [],
 };
