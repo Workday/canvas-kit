@@ -124,12 +124,7 @@ export const AiAssistantIngressButtonStatesToggledDefault = () => (
             {label: 'Disabled', value: true},
           ],
         },
-        props => {
-          if (props.disabled && !['', 'hover'].includes(props.className)) {
-            return false;
-          }
-          return true;
-        }
+        props => !disabled || ['', 'hover'].includes(props.className)
       )}
     >
       {props => (
