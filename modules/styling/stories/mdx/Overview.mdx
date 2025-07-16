@@ -57,6 +57,76 @@ const root = createRoot(domNode);
 root.render(<div className={myStyles}>Hello!</div>);
 ```
 
+## Style Merging
+
+The `@workday/canvas-kit-styling` package uses `@emotion/css` to inject styles during JavaScript
+evaluation time rather than `@emotion/react` or `@emotion/styled` injecting when a component is
+rendered. This means the Emotion cache needs to be known before any style is created. In order to
+properly merge styles with components using either dynamic styling package, the Emotion cache must
+be changed on any React application. Without this, styles will not be merged correctly when static
+and dynamic styles are used on the same element.
+
+If you're using Canvas Kit React, you should use the `<CanvasProvider>` which includes Emotion's
+`<CacheProvider>` with the proper cache already set. If you're not using Canvas Kit React, you
+should use the `<CacheProvider>`:
+
+```tsx
+// ONLY use if not using the <CanvasProvider>
+import {getCache} from '@workday/canvas-kit-styling';
+
+// in your application bootstrap
+const root = React.createRoot(document.getElementById('root'));
+
+root.render(
+  <CacheProvider value={getCache()}>
+    <App />
+  </CacheProvider>
+);
+```
+
+## Known issues
+
+### Hot Reloading
+
+Style merging works by using CSS specificity rather than JavaScript runtime. This can cause problems
+during hot reloading. If you specify all styles in the same file, hot reloading shouldn't result in
+any style merging problems. But if you use `extends` in `createStencil` that references another
+file, you may run into style merge issues.
+
+For example:
+
+```ts
+// base.tsx file
+export const baseStencil = createStencil({
+  base: {
+    color: 'red',
+  },
+});
+
+// extended.tsx file
+import {baseStencil} from './base';
+
+export const extendedStencil = createStencil({
+  extends: baseStencil,
+  base: {
+    color: 'blue',
+  },
+});
+```
+
+This will render correctly until you change `color` in `base.tsx` and get a hot reload:
+
+```tsx
+// base.tsx file
+export const baseStencil = createStencil({
+  base: {
+    color: 'purple',
+  },
+});
+```
+
+The hot reload will evaluate this update and inject a new style.
+
 ## Development
 
 Canvas Kit Styling comes with a runtime that doesn't need anything special for development. The
@@ -77,6 +147,20 @@ be known by TypeScript. See [Restrictions](#restrictions).
 
 Static compilation may be required for server side rendering (SSR), especially when using React
 Server Components.
+
+### Hash generation
+
+Emotion generates hashes based on the serialized style object. This means a style should always give
+the same hash. Static styling hashes differently. Every `createStyles` or `createStencil` call will
+generate a unique hash even if the style object is the same. This is required for proper style
+merging because static styling doesn't give single class names, but rather merges styles using CSS
+specificity.
+
+For runtime development, the hash is always unique. For static compilation, the hash is based on the
+start and end character count in the source file of the style block. This is required for SSR so
+that the server and client agree on the same value during hydration. This means that while
+debugging, the hash depends on any code before it. If you add a `console.log` for example, the
+character index of a style block could shift which will generate a new hash.
 
 ### Restrictions
 
