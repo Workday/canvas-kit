@@ -8,7 +8,7 @@
  */
 export function getTitle($modal: JQuery): JQuery {
   const id = $modal.attr('aria-labelledby');
-  return $modal.find(`#${id}`).first();
+  return $modal.find(`[id="${id}"]`).first();
 }
 
 /**
