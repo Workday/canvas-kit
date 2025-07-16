@@ -5,9 +5,7 @@ export const getAiAssistantIngressIcon = (svgId: string): CanvasSystemIcon => {
     name: 'aiAssistantIngressButton',
     type: CanvasIconTypes.System,
     svg: `<svg class="wd-icon-ai-assistant-ingress-button" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" >
-            <linearGradient id="ai-assistant-ingress-button-gradient${
-              '-' + svgId
-            }" x1="10" y1="0.000195292" x2="10" y2="19.9998" gradientUnits="userSpaceOnUse">
+            <linearGradient id="${svgId}" x1="10" y1="0.000195292" x2="10" y2="19.9998" gradientUnits="userSpaceOnUse">
               <stop />
               <stop offset="0.25"/>
               <stop offset="0.5"/>
