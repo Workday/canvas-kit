@@ -49,7 +49,7 @@
     "@workday/canvas-kit-preview-react": "^13.1.7",
     "@workday/canvas-kit-react": "^13.1.7",
     "@workday/canvas-kit-styling": "^13.1.7",
-    "@workday/canvas-system-icons-web": "^3.0.0",
+    "@workday/canvas-system-icons-web": "^3.0.35",
     "@workday/canvas-tokens-web": "^2.1.1",
     "markdown-to-jsx": "^7.2.0",
     "react-syntax-highlighter": "^15.5.0",
