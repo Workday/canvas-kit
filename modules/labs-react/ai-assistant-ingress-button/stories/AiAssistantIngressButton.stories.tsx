@@ -4,7 +4,7 @@ import mdxDoc from './AiAssistantIngressButton.mdx';
 import {Basic as BasicExample} from './examples/Basic';
 import {Inverse as InverseExample} from './examples/Inverse';
 export default {
-  title: 'Labs/Ai Assistant Ingress Button',
+  title: 'Labs/AI Assistant Ingress Button',
   tags: ['autodocs'],
   parameters: {
     docs: {

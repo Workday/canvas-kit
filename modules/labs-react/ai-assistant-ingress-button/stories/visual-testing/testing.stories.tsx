@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {
   ComponentStatesTable,
   permutateProps,
@@ -124,14 +123,10 @@ export const AiAssistantIngressButtonStatesToggledDefault = () => (
             {label: 'Disabled', value: true},
           ],
         },
-        props => !disabled || ['', 'hover'].includes(props.className)
+        props => !props.disabled || ['', 'hover'].includes(props.className)
       )}
     >
-      {props => (
-        <div>
-          <AiAssistantIngressButton {...props} />
-        </div>
-      )}
+      {props => <AiAssistantIngressButton {...props} />}
     </ComponentStatesTable>
   </StaticStates>
 );
