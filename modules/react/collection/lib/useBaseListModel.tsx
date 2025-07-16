@@ -74,6 +74,13 @@ export interface Item<T> {
 //   }
 // }
 
+export interface GroupedItems {
+  // A non intractable header that logically separates autocomplete items
+  header: React.ReactElement<any>;
+  // A group of logically distinct autocomplete items
+  items: React.ReactElement<any>[];
+}
+
 // force Typescript to use `Generic` as a symbol
 const genericDefaultConfig: {
   /**
@@ -81,7 +88,7 @@ const genericDefaultConfig: {
    * children. If the shape of each item object does not have an `id` property or uses a different
    * property to uniquely identify each item, a `getId` must also be supplied.
    */
-  items: Generic[];
+  items: Generic[] | GroupedItems[];
 } = {
   items: [],
 };
@@ -166,8 +173,6 @@ export const useBaseListModel = createModelHook({
     horizontal: config.orientation === 'horizontal',
     overscan: 3, // overscan of 3 helps rapid navigation
   });
-
-
 
   // Force Typescript to recognize the `Generic` symbol
   const genericState: {items: Item<Generic>[]} = {
