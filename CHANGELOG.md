@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.0](https://github.com/Workday/canvas-kit/releases/tag/v13.2.0) (2025-07-16)
+
+
+
+
+## [v13.1.7](https://github.com/Workday/canvas-kit/releases/tag/v13.1.7) (2025-07-16)
+
+### Components
+
+- fix: Update `useUniqueId` to use `React.useId` if available ([#3383](https://github.com/Workday/canvas-kit/pull/3383)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v13.1.6](https://github.com/Workday/canvas-kit/releases/tag/v13.1.6) (2025-07-14)
 
 ### Components
