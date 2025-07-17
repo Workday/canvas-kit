@@ -4,7 +4,7 @@ import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Heading} from '@workday/canvas-kit-react/text';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {brand, system} from '@workday/canvas-tokens-web';
 import {useExpandableTarget} from './hooks/useExpandableTarget';
 import {useExpandableModel} from './hooks/useExpandableModel';
 
@@ -40,7 +40,7 @@ export const expandableTargetStencil = createStencil({
       backgroundColor: system.color.bg.alt.soft,
     },
     '&:focus-visible, &.focus': {
-      outline: `${system.color.border.primary.default} solid ${px2rem(2)}`,
+      outline: `${brand.common.focusOutline} solid ${px2rem(2)}`,
     },
   },
 });
