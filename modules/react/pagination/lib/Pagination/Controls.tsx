@@ -1,14 +1,16 @@
 import * as React from 'react';
-import {TertiaryButton} from '@workday/canvas-kit-react/button';
-import {createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {
   chevronLeftSmallIcon,
   chevron2xLeftSmallIcon,
   chevronRightSmallIcon,
   chevron2xRightSmallIcon,
 } from '@workday/canvas-system-icons-web';
+import {createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {TertiaryButton} from '@workday/canvas-kit-react/button';
+import {system} from '@workday/canvas-tokens-web';
 
-import {Flex} from '@workday/canvas-kit-react/layout';
 import {useRTL} from './common/utils/useRTL';
 import {PaginationContext} from './usePaginationModel';
 
@@ -18,10 +20,18 @@ export interface ControlButtonProps extends ExtractProps<typeof TertiaryButton, 
 
 export interface PaginationControlsProps {}
 
+export const paginationControlsStencil = createStencil({
+  base: {
+    display: 'flex',
+    gap: system.space.x1,
+    alignItems: 'center',
+  },
+});
+
 export const PaginationControls = createComponent('div')({
   displayName: 'Pagination.Controls',
   Component(elemProps: PaginationControlsProps, ref, Element) {
-    return <Flex ref={ref} as={Element} gap="xxxs" alignItems="center" {...elemProps} />;
+    return <Element ref={ref} {...mergeStyles(elemProps, paginationControlsStencil())} />;
   },
 });
 
@@ -39,6 +49,7 @@ export const JumpToFirstButton = createComponent('button')({
     };
     const {shouldUseRTL} = useRTL();
     const icon = shouldUseRTL ? chevron2xRightSmallIcon : chevron2xLeftSmallIcon;
+
     return (
       <TertiaryButton
         ref={ref}
