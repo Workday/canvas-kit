@@ -16,9 +16,9 @@ export const ThemedAlert = () => {
           lightest: cssVar(system.color.static.green.softer),
         },
         common: {
-          focusOutline: base.purple500,
-          alertInner: base.green400,
-          alertOuter: base.green500,
+          focusOutline: cssVar(base.purple500),
+          alertInner: cssVar(base.green400),
+          alertOuter: cssVar(base.green500),
         },
       },
     },
@@ -40,10 +40,12 @@ const AlertInput = () => {
   const alertStyles = useThemedRing('alert');
 
   return (
-    <TextInput orientation="vertical">
+    <TextInput error="alert" orientation="vertical">
       <TextInput.Label>Email</TextInput.Label>
       <TextInput.Field cs={alertStyles} onChange={handleChange} value={value} />
-      <TextInput.Hint paddingTop={system.space.x2}>Please enter a valid email.</TextInput.Hint>
+      <TextInput.Hint cs={{paddingTop: cssVar(system.space.x2)}}>
+        Please enter a valid email.
+      </TextInput.Hint>
     </TextInput>
   );
 };

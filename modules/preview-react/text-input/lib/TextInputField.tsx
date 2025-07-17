@@ -22,6 +22,7 @@ const textInputFieldStencil = createStencil({
     height: system.space.x10,
     minWidth: px2rem(280),
     borderRadius: system.shape.x1,
+    backgroundColor: system.color.bg.default,
     '&::placeholder': {
       color: system.color.text.default,
     },
@@ -75,7 +76,7 @@ export const TextInputField = createSubcomponent('input')({
             boxShadow: `inset 0 0 0 1px ${theme.canvas.palette.common.focusOutline}`,
           },
         };
-
+  console.log(model.state.error);
   return (
     <FormField.Input
       as="input"

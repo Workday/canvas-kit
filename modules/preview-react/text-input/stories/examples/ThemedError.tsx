@@ -18,8 +18,8 @@ export const ThemedError = () => {
           lightest: cssVar(system.color.static.amber.softer),
         },
         common: {
-          focusOutline: system.color.static.green.default,
-          errorInner: system.color.static.amber.stronger,
+          focusOutline: cssVar(system.color.static.green.default),
+          errorInner: cssVar(system.color.static.amber.stronger),
         },
       },
     },
@@ -30,7 +30,7 @@ export const ThemedError = () => {
       <TextInput error={!value ? 'error' : undefined} isRequired={true} orientation="vertical">
         <TextInput.Label>Email</TextInput.Label>
         <TextInput.Field onChange={handleChange} value={value} />
-        <TextInput.Hint paddingTop={system.space.x2}>
+        <TextInput.Hint cs={{paddingTop: cssVar(system.space.x2)}}>
           {!value && 'Please enter an email.'}
         </TextInput.Hint>
       </TextInput>
