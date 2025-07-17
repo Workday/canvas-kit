@@ -19,7 +19,8 @@
     "./webpack-loader": {
       "import": "./dist/es6/lib/webpack-loader.js",
       "require": "./dist/commonjs/lib/webpack-loader.js"
-    }
+    },
+    "./testing": "./testing.ts"
   },
   "files": [
     "package.json",

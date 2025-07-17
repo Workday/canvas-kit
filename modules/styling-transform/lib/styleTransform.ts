@@ -157,15 +157,9 @@ export function transform(
 const handleTransformers =
   (transformers: ((node: ts.Node, context: TransformerContext) => ts.Node | void)[]) =>
   (node: ts.Node, context: TransformerContext) => {
-    return transformers.reduce(
-      (result, transformer) => {
-        if (result) {
-          return result;
-        }
-        return transformer(node, context);
-      },
-      undefined as ts.Node | void
-    );
+    return transformers.reduce((result, transformer) => {
+      return result || transformer(node, context);
+    }, undefined as ts.Node | void);
   };
 
 export function getConfig(basePath = '.') {

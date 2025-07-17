@@ -1,20 +1,7 @@
 import ts from 'typescript';
 
-/**
- * @typedef {Object} LoaderContext
- * @property {function(): {builderProgram: ts.BuilderProgram, printer:
- * ts.Printer, transformers:
- * ts.TransformerFactory<ts.SourceFile>[]}} getOptions
- * @property {string} resourcePath
- * @property {function(string, string): string} postTransform
- */
-
 interface LoaderContext {
-  getOptions: () => {
-    builderProgram: ts.BuilderProgram;
-    transformers: ts.TransformerFactory<ts.SourceFile>[];
-    postTransform: (transformed: string, id: string) => string;
-  };
+  getOptions: () => ReturnType<import('./webpackPlugin').StylingWebpackPlugin['getLoaderOptions']>;
   resourcePath: string;
 }
 
@@ -37,5 +24,5 @@ export default function typescriptLoaderWithTransformers(this: LoaderContext, so
       .transformed.find(s => s.fileName === id) || sourceFile
   );
 
-  return postTransform ? postTransform(transformed, id) || transformed : transformed;
+  return postTransform?.(transformed, id) || transformed;
 }
