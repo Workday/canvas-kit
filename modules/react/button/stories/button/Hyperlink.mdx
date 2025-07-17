@@ -3,6 +3,8 @@ import {Link} from './examples/Hyperlink';
 import {LinkInverse} from './examples/HyperlinkInverse';
 import {ExternalLink} from './examples/ExternalHyperlink';
 import {ExternalLinkInverse} from './examples/ExternalHyperlinkInverse';
+import {StandaloneLink} from './examples/StandaloneHyperlink';
+import {InBodyText} from './examples/HyperlinkInBodyText';
 
 import * as HyperlinkStories from './Hyperlink.stories';
 
@@ -25,7 +27,7 @@ yarn add @workday/canvas-kit-react
 ### Hyperlink
 
 `Hyperlink`s should be used when you want to navigate away from the current page or to an anchor on
-the current page.
+the current page. By default, `Hyperlink`s have an underline for accessibility.
 
 <ExampleCodeBlock code={Link} />
 
@@ -35,6 +37,21 @@ the current page.
 on a dark or colorful background such as `blueberry400`.
 
 <ExampleCodeBlock code={LinkInverse} />
+
+#### Standalone
+
+`Hyperlink`s also have a `standalone` variant. Use this variant when you need to place a `Hyperlink`
+outside of a paragraph or body text. This will remove the underline.
+
+This variant can also be used with `ExternalHyperlink` component.
+
+<ExampleCodeBlock code={StandaloneLink} />
+
+#### In Body Text
+
+In most cases use `HyperLink` and `ExternalHyperlink` in body text ot sentence where you need to link to another page or part of the document. By default they will wrap to a new line.
+
+<ExampleCodeBlock code={InBodyText} />
 
 ### Component API
 
