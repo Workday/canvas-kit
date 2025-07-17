@@ -27,7 +27,7 @@ export const useMenuTargetBase = createElemPropsHook(useMenuModel)(model => {
           model.events.show(event);
       }
     },
-  } as const;
+  };
 });
 
 export const useMenuTarget = composeHooks(useMenuTargetBase, usePopupTarget);

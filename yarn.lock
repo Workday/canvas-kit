@@ -4589,11 +4589,6 @@
   dependencies:
     "@babel/runtime" "^7.13.10"
 
-"@reach/observe-rect@^1.1.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@reach/observe-rect/-/observe-rect-1.2.0.tgz#d7a6013b8aafcc64c778a0ccb83355a11204d3b2"
-  integrity sha512-Ba7HmkFgfQxZqqaeIWWkNK0rEhpxVQHIoVyW1YDSkGsGIXzcaW4deC8B0pZrNSSyLTdIk7y+5olKt5+g0GmFIQ==
-
 "@sinclair/typebox@^0.27.8":
   version "0.27.8"
   resolved "https://registry.yarnpkg.com/@sinclair/typebox/-/typebox-0.27.8.tgz#6667fac16c436b5434a387a34dedb013198f6e6e"
@@ -5371,6 +5366,18 @@
   integrity sha512-/JLo/l2JsT/LRd80C3HfbmVpxOAJ11FO2RCEslFrgzLltoP9j8XIbsyDcfCt2WWyX+CM96rBoNM+IToAkFOugg==
   dependencies:
     "@swc/counter" "^0.1.3"
+
+"@tanstack/react-virtual@^3.13.9":
+  version "3.13.9"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-virtual/-/react-virtual-3.13.9.tgz#6f87bce08a65c8f4ec6d2c303646ca6b3897e9fe"
+  integrity sha512-SPWC8kwG/dWBf7Py7cfheAPOxuvIv4fFQ54PdmYbg7CpXfsKxkucak43Q0qKsxVthhUJQ1A7CIMAIplq4BjVwA==
+  dependencies:
+    "@tanstack/virtual-core" "3.13.9"
+
+"@tanstack/virtual-core@3.13.9":
+  version "3.13.9"
+  resolved "https://registry.yarnpkg.com/@tanstack/virtual-core/-/virtual-core-3.13.9.tgz#62b4d2d4351d658101664beacf088fbd061190bf"
+  integrity sha512-3jztt0jpaoJO5TARe2WIHC1UQC3VMLAFUW5mmMo0yrkwtDB2AQP0+sh10BVUpWrnvHjSLvzFizydtEGLCJKFoQ==
 
 "@testing-library/cypress@^8.0.2":
   version "8.0.2"
@@ -6271,12 +6278,12 @@
   resolved "https://registry.yarnpkg.com/@workday/canvas-colors-web/-/canvas-colors-web-2.0.0.tgz#1e50e4ab70a00d8ba6037536a328ac227ce2274f"
   integrity sha512-1gqf/oLeJSqrma0xQxOhWNWky+0JxJ/vbBy3A7VG8m51CJzraTLwKN7HViqJiZM4xHjy61kK9e42IJKVEeLO2Q==
 
-"@workday/canvas-system-icons-web@^3.0.0":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@workday/canvas-system-icons-web/-/canvas-system-icons-web-3.0.1.tgz#9b46d65427dd5d07745b369f1b77ddcb5f5bb7bb"
-  integrity sha512-lN+3HJmO4NwBomDKhn+H85nPHMXqT3H7dlzbTcfkPU7dedlMhpmzgiY5QKmM7OWoM3Vdg9vwPwi5f/9ZfMX/4A==
+"@workday/canvas-system-icons-web@^3.0.35":
+  version "3.0.35"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-system-icons-web/-/canvas-system-icons-web-3.0.35.tgz#059507abff748662535063f06b0fa40e1e871f70"
+  integrity sha512-twxlpOOtTqTURetfcdAYT+dtconqrAsRI52tD2VitbDnt6QFVjH0Z7nhJ1CocbsfvXxcu78pqL1Mdr7KY0Ksdg==
   dependencies:
-    "@workday/design-assets-types" "0.2.8"
+    "@workday/design-assets-types" "0.2.10"
 
 "@workday/canvas-tokens-web@^2.1.1":
   version "2.1.1"
@@ -14332,10 +14339,15 @@ pretty-hrtime@^1.0.3:
   resolved "https://registry.yarnpkg.com/pretty-hrtime/-/pretty-hrtime-1.0.3.tgz#b7e3ea42435a4c9b2759d99e0f201eb195802ee1"
   integrity sha1-t+PqQkNaTJsnWdmeDyAesZWALuE=
 
-prismjs@~1.27.0, prismjs@^1.27.0:
+prismjs@^1.27.0:
   version "1.30.0"
   resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.30.0.tgz#d9709969d9d4e16403f6f348c63553b19f0975a9"
   integrity sha512-DEvV2ZF2r2/63V+tK8hQvrR2ZGn10srHbXviTlcv7Kpzw8jWiNTqbVgjO3IY8RxrrOUF8VPMQQFysYYYv0YZxw==
+
+prismjs@~1.27.0:
+  version "1.27.0"
+  resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.27.0.tgz#bb6ee3138a0b438a3653dd4d6ce0cc6510a45057"
+  integrity sha512-t13BGPUlFDR7wRB5kQDG4jjl7XeuH6jbJGt11JHPL96qwsEHNX2+68tFXqc1/k+/jALsbSWJKUOT/hcYAZ5LkA==
 
 proc-log@^2.0.0, proc-log@^2.0.1:
   version "2.0.1"
@@ -14712,13 +14724,6 @@ react-syntax-highlighter@^15.5.0:
     lowlight "^1.17.0"
     prismjs "^1.27.0"
     refractor "^3.6.0"
-
-react-virtual@^2.10.4:
-  version "2.10.4"
-  resolved "https://registry.yarnpkg.com/react-virtual/-/react-virtual-2.10.4.tgz#08712f0acd79d7d6f7c4726f05651a13b24d8704"
-  integrity sha512-Ir6+oPQZTVHfa6+JL9M7cvMILstFZH/H3jqeYeKI4MSUX+rIruVwFC6nGVXw9wqAw8L0Kg2KvfXxI85OvYQdpQ==
-  dependencies:
-    "@reach/observe-rect" "^1.1.0"
 
 react@18.1.0:
   version "18.1.0"

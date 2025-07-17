@@ -1,4 +1,3 @@
-import React from 'react';
 // @ts-ignore: Cannot find module error
 import headerImage from './CK-banner-temp.jpg';
 import {Flex, Grid, Box} from '@workday/canvas-kit-react/layout';

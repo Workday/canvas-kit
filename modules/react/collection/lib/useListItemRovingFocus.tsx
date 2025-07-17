@@ -1,9 +1,10 @@
 import React from 'react';
-import {useIsRTL, createElemPropsHook} from '@workday/canvas-kit-react/common';
+import {useIsRTL, createElemPropsHook, slugify} from '@workday/canvas-kit-react/common';
 
-import {useCursorListModel} from './useCursorListModel';
+import {getCursor, isCursor} from './useCursorListModel';
 import {keyboardEventToCursorEvents} from './keyUtils';
 import {focusOnCurrentCursor} from './focusOnCurrentCursor';
+import {useListModel} from './useListModel';
 
 /**
  * This elemProps hook is used for cursor navigation by using [Roving
@@ -19,7 +20,7 @@ import {focusOnCurrentCursor} from './focusOnCurrentCursor';
  * );
 ```
  */
-export const useListItemRovingFocus = createElemPropsHook(useCursorListModel)(
+export const useListItemRovingFocus = createElemPropsHook(useListModel)(
   (model, _ref, elemProps: {'data-id'?: string} = {}) => {
     // Create a ref out of state. We don't want to watch state on unmount, so we use a ref to get the
     // current value at the time of unmounting. Otherwise, `state.items` would be a cached value of an
@@ -33,7 +34,7 @@ export const useListItemRovingFocus = createElemPropsHook(useCursorListModel)(
     React.useEffect(() => {
       // If the cursor change was triggered by this hook, we should change focus
       if (keyElementRef.current) {
-        focusOnCurrentCursor(model, model.state.cursorId, keyElementRef.current).then(() => {
+        focusOnCurrentCursor(model, getCursor(model.state), keyElementRef.current).then(() => {
           // Reset key element since focus was successful
           keyElementRef.current = null;
         });
@@ -42,6 +43,7 @@ export const useListItemRovingFocus = createElemPropsHook(useCursorListModel)(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [model.state.cursorId]);
 
+    // We need to change this - maybe add an option to select first one with a keyboard action
     // Roving focus must always have a focus stop to function correctly
     React.useEffect(() => {
       if (!model.state.cursorId && model.state.items.length) {
@@ -60,10 +62,10 @@ export const useListItemRovingFocus = createElemPropsHook(useCursorListModel)(
       onClick() {
         model.events.goTo({id: elemProps['data-id']!});
       },
-      'data-focus-id': `${model.state.id}-${elemProps['data-id']}`,
+      'data-focus-id': slugify(`${model.state.id}-${elemProps['data-id']}`),
       tabIndex: !model.state.cursorId
         ? 0 // cursor isn't known yet, be safe and mark this as focusable
-        : !!elemProps['data-id'] && model.state.cursorId === elemProps['data-id']
+        : !!elemProps['data-id'] && isCursor(model.state, elemProps['data-id'])
         ? 0 // A name is known and cursor is here
         : -1, // A name is known an cursor is somewhere else
     };

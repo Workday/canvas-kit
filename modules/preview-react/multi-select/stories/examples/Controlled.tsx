@@ -41,7 +41,7 @@ export const Controlled = () => {
       >
         <Flex gap="s" flexDirection="column">
           <MultiSelect items={items}>
-            <FormField orientation="horizontal">
+            <FormField orientation="horizontalStart">
               <FormField.Label>Toppings</FormField.Label>
               <FormField.Input
                 as={MultiSelect.Input}

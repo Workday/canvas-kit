@@ -1,14 +1,10 @@
 import * as React from 'react';
 
-import {
-  ExtractProps,
-  createSubcomponent,
-  styled,
-  StyledType,
-} from '@workday/canvas-kit-react/common';
-import {Box} from '@workday/canvas-kit-react/layout';
+import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {Box, mergeStyles} from '@workday/canvas-kit-react/layout';
 
 import {useBannerActionText, useBannerModel} from './hooks';
+import {createStencil} from '@workday/canvas-kit-styling';
 
 export interface BannerActionTextProps extends ExtractProps<typeof Box, never> {
   /**
@@ -18,8 +14,18 @@ export interface BannerActionTextProps extends ExtractProps<typeof Box, never> {
   children?: React.ReactNode;
 }
 
-const StyledActionBarText = styled(Box.as('span'))<StyledType>({
-  textDecoration: 'underline',
+export const actionBarTextStencil = createStencil({
+  base: {
+    textDecoration: 'underline',
+    display: 'inline',
+  },
+  modifiers: {
+    isSticky: {
+      true: {
+        display: 'none',
+      },
+    },
+  },
 });
 
 export const BannerActionText = createSubcomponent('span')({
@@ -28,12 +34,8 @@ export const BannerActionText = createSubcomponent('span')({
   elemPropsHook: useBannerActionText,
 })<BannerActionTextProps>(({children = 'View All', ...elemProps}, Element, model) => {
   return (
-    <StyledActionBarText
-      as={Element}
-      display={model.state.isSticky ? 'none' : 'inline'}
-      {...elemProps}
-    >
+    <Element {...mergeStyles(elemProps, actionBarTextStencil({isSticky: model.state.isSticky}))}>
       {children}
-    </StyledActionBarText>
+    </Element>
   );
 });

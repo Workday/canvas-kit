@@ -1,4 +1,3 @@
-import React from 'react';
 import {createContainer, Themeable, ErrorType} from '@workday/canvas-kit-react/common';
 import {useRadioModel} from './hooks/useRadioModel';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
