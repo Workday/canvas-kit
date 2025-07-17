@@ -30,7 +30,6 @@ export interface BreadcrumbsItemProps extends FlexProps {
   'data-id'?: string;
 }
 
-
 export const breadcrumbsItemStencil = createStencil({
   parts: {
     chevronRightIcon: 'breadcrumbs-item-chevron-right-icon',
