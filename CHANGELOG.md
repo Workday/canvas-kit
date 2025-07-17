@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.1](https://github.com/Workday/canvas-kit/releases/tag/v13.2.1) (2025-07-17)
+
+### Components
+
+- fix: Add pointerEvents style to svg in BaseButtonComponent ([#3388](https://github.com/Workday/canvas-kit/pull/3388)) ([@selenajosephine](https://github.com/selenajosephine), Selena D)
+
+
 ## [v12.6.15](https://github.com/Workday/canvas-kit/releases/tag/v12.6.15) (2025-07-17)
 
 ### Components
