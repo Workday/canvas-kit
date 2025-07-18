@@ -28,8 +28,10 @@ export const CountBadgeStates = {
           {label: 'Custom Limit', props: {count: 100, limit: 100}},
         ]}
         rowProps={[
-          {label: 'Default', props: {}},
-          {label: 'Inverse', props: {variant: 'inverse'}},
+          {label: 'Default High Emphasis', props: {}},
+          {label: 'Default Low Emphasis', props: {emphasis: 'low'}},
+          {label: 'Inverse High Emphasis', props: {variant: 'inverse'}},
+          {label: 'Inverse Low Emphasis', props: {emphasis: 'low', variant: 'inverse'}},
         ]}
       >
         {props => <CountBadge {...props} />}
