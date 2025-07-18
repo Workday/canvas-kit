@@ -5,18 +5,20 @@ import {
   PartialEmotionCanvasTheme,
   useThemedRing,
 } from '@workday/canvas-kit-react/common';
-import {colors, space} from '@workday/canvas-kit-react/tokens';
+import {base, system} from '@workday/canvas-tokens-web';
+import {cssVar} from '@workday/canvas-kit-styling';
 
 export const ThemedAlert = () => {
   const theme: PartialEmotionCanvasTheme = {
     canvas: {
       palette: {
-        common: {
-          focusOutline: colors.grapeSoda300,
-        },
         alert: {
-          main: colors.kiwi200,
-          darkest: colors.kiwi600,
+          lightest: cssVar(system.color.static.green.softer),
+        },
+        common: {
+          focusOutline: cssVar(base.purple500),
+          alertInner: cssVar(base.green400),
+          alertOuter: cssVar(base.green500),
         },
       },
     },
@@ -38,10 +40,12 @@ const AlertInput = () => {
   const alertStyles = useThemedRing('alert');
 
   return (
-    <TextInput orientation="vertical">
+    <TextInput error="alert" orientation="vertical">
       <TextInput.Label>Email</TextInput.Label>
       <TextInput.Field cs={alertStyles} onChange={handleChange} value={value} />
-      <TextInput.Hint paddingTop={space.xxs}>Please enter a valid email.</TextInput.Hint>
+      <TextInput.Hint cs={{paddingTop: cssVar(system.space.x2)}}>
+        Please enter a valid email.
+      </TextInput.Hint>
     </TextInput>
   );
 };
