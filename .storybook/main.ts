@@ -87,6 +87,8 @@ const config: StorybookConfig = {
       },
     });
 
+    config.plugins?.push(tsPlugin);
+
     // Load the source code of story files to display in docs.
     config.module?.rules?.push({
       test: /\.stories\.tsx?$/,

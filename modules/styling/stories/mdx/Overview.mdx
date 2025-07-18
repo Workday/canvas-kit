@@ -255,6 +255,9 @@ const tsPlugin = const tsPlugin = new StylingWebpackPlugin({
       enforce: 'pre'
     },
   ];
+  // We need to pass the plugin to Webpack's plugin list. Failure to do this will result in a
+  // production build hanging
+  plugins: [tsPlugin]
 }
 ```
 
@@ -324,7 +327,11 @@ together and applies `className` and `style` attributes to a React element.
   <InformationHighlight.Icon />
   <InformationHighlight.Heading>Information</InformationHighlight.Heading>
   <InformationHighlight.Body>
-    For a more in depth overview, please view our <Hyperlink src="https://workday.github.io/canvas-kit/?path=/docs/styling-getting-started-create-styles--docs">Create Styles</Hyperlink> docs.
+    For a more in depth overview, please view our{' '}
+    <Hyperlink src="https://workday.github.io/canvas-kit/?path=/docs/styling-getting-started-create-styles--docs">
+      Create Styles
+    </Hyperlink>{' '}
+    docs.
   </InformationHighlight.Body>
 </InformationHighlight>
 
@@ -394,6 +401,10 @@ const ThemedCard = ({isDarkTheme, headerColor, elemProps}) => {
   <InformationHighlight.Icon />
   <InformationHighlight.Heading>Information</InformationHighlight.Heading>
   <InformationHighlight.Body>
-    For a more in depth overview, please view our <Hyperlink src="https://workday.github.io/canvas-kit/?path=/docs/styling-getting-started-stencils--docs">Create Stencil</Hyperlink> docs.
+    For a more in depth overview, please view our{' '}
+    <Hyperlink src="https://workday.github.io/canvas-kit/?path=/docs/styling-getting-started-stencils--docs">
+      Create Stencil
+    </Hyperlink>{' '}
+    docs.
   </InformationHighlight.Body>
 </InformationHighlight>
