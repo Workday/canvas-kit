@@ -2,7 +2,7 @@ import React from 'react';
 
 const flexStyles = {
   display: 'flex',
-  alignItems: 'center',
+  alignItems: 'flex-start',
   gap: '8px',
   width: '100%',
   justifyContent: 'space-between',
@@ -16,6 +16,7 @@ const deprecatedBoxStyles = {
   borderRadius: '40px',
   fontSize: '12px',
   fontWeight: 'bold',
+  marginTop: '2px',
 };
 
 export const Label = item => {
