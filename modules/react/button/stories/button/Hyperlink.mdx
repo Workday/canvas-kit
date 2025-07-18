@@ -34,7 +34,7 @@ the current page. By default, `Hyperlink`s have an underline for accessibility.
 #### Inverse
 
 `Hyperlink`s also have an `inverse` variant. Use this variant when you need to place a `Hyperlink`
-on a dark or colorful background such as `blueberry400`.
+on a dark or colorful background.
 
 <ExampleCodeBlock code={LinkInverse} />
 
@@ -43,13 +43,13 @@ on a dark or colorful background such as `blueberry400`.
 `Hyperlink`s also have a `standalone` variant. Use this variant when you need to place a `Hyperlink`
 outside of a paragraph or body text. This will remove the underline.
 
-This variant can also be used with `ExternalHyperlink` component.
+This variant can also be used with the `ExternalHyperlink` component.
 
 <ExampleCodeBlock code={StandaloneLink} />
 
 #### In Body Text
 
-In most cases use `HyperLink` and `ExternalHyperlink` in body text ot sentence where you need to link to another page or part of the document. By default they will wrap to a new line.
+In most cases use `HyperLink` and `ExternalHyperlink` in body text of a sentence where you need to link to another page or part of the document. By default they will wrap to a new line.
 
 <ExampleCodeBlock code={InBodyText} />
 
@@ -60,14 +60,13 @@ In most cases use `HyperLink` and `ExternalHyperlink` in body text ot sentence w
 ### ExternalHyperlink
 
 If your link should open in a new tab or window use the `ExternalHyperlink` component. It will let
-users know about the behavior by adding an icon, `extLinkIcon`. By default, the icon has a label of
-"Opens link in new window". You can override `aria-label` of the icon by using the `iconLabel` prop.
+users know about the behavior by adding an icon, `extLinkIcon`. To ensure proper accessibility, you **must* provide a label to the icon via the `iconLabel` prop.
 This override will be needed for translations.
 
 <ExampleCodeBlock code={ExternalLink} />
 
 `ExternalHyperlink`s also have an `inverse` variant. Use this variant when you need to place the
-link on a dark or colorful background such as `blueberry400`.
+link on a dark or colorful background.
 
 <ExampleCodeBlock code={ExternalLinkInverse} />
 

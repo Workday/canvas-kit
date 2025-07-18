@@ -15,6 +15,7 @@ any questions.
 - [Component Updates](#component-updates)
   - [Styling Changes](#styling-changes)
   - [Card](#card)
+  - [Hyperlink](#hyperlink)
   - [SearchForm](#search-form)
 - [Removals](#removals)
   - [Menu (preview)](#menu-preview)
@@ -195,6 +196,22 @@ spacing between card elements.
   <Card.Body>Card without any spacing</Card.Body>
 </Card>
 ```
+
+### Hyperlink
+
+**PR:** [#3390](https://github.com/Workday/canvas-kit/pull/3390)
+
+- `Hyperlink` and `ExternalHyperlink` now have a `standalone` variant. This removes the underline text decoration for use outside the context of body text.
+
+**HyperLink and ExternalHyperlink in v14**
+
+```tsx
+<Hyperlink variant="standalone" href="#hyperlink">Hyperlink</Hyperlink>
+<ExternalHyperlink variant="standalone" href="#external-hyperlink">External Hyperlink</ExternalHyperlink>
+```
+
+> **Note:** Only use the `standalone` variant in cases where the `<HyperLink>` and `<ExternalHyperlink>` are used outside the context of body text.
+
 
 ### Search Form 🚨
 
