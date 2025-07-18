@@ -466,6 +466,7 @@ export const Combobox = ({
             variant={clearButtonVariant}
             onClick={resetSearchInput}
             onBlur={handleBlur}
+            data-part="combobox-reset-button"
             size="small"
             type="button"
           />
