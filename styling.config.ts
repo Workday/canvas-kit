@@ -1,6 +1,6 @@
 import crypto from 'node:crypto';
 
-import {createConfig} from '@workday/canvas-kit-styling-transform/index.ts';
+import {createConfig} from '@workday/canvas-kit-styling-transform';
 
 import pkg from '../package.json';
 import {handleFocusRing} from './utils/style-transform/handleFocusRing';

@@ -7,10 +7,7 @@ import {ExportedSymbol, Value} from '@workday/canvas-kit-docs/docgen/docTypes';
 import getSpecifications from '../modules/docs/utils/get-specifications';
 import {getDocParser} from '../modules/docs/docgen/createDocProgram';
 // Drop the `/index.ts` if using the published package
-import {
-  styleTransformer,
-  StylingWebpackPlugin,
-} from '@workday/canvas-kit-styling-transform/index.ts';
+import {styleTransformer, StylingWebpackPlugin} from '@workday/canvas-kit-styling-transform';
 
 const modulesPath = path.resolve(__dirname, '../modules');
 const processDocs = process.env.SKIP_DOCGEN !== 'true';

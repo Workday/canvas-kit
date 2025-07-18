@@ -1,7 +1,7 @@
 import styleTransformer from './lib/styleTransform';
-import {type Config} from './lib/utils/types';
+import type {Config} from './lib/utils/types';
 
-export {type Config};
+export type * from './lib/utils/types';
 export {parseNodeToStaticValue} from './lib/utils/parseNodeToStaticValue';
 export {parseObjectToStaticValue} from './lib/utils/parseObjectToStaticValue';
 export {createObjectTransform} from './lib/createObjectTransform';
