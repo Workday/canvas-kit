@@ -17,7 +17,7 @@ import {Required as RequiredExample} from './examples/Required';
 import {ResizeConstraints as ResizeConstraintsExample} from './examples/ResizeConstraints';
 
 export default {
-  title: 'Preview/Inputs/Text Area',
+  title: 'Preview/Inputs/Text Area (deprecated)',
   component: TextArea,
   tags: ['autodocs'],
   parameters: {
