@@ -6,9 +6,10 @@ import {system} from '@workday/canvas-tokens-web';
 export interface HyperlinkProps extends CSProps {
   /**
    * sets modifier styles for Hyperlink
-   * - `inverse`: sets the color to frenchVanilla100 and updates hover, focus, and active pseudo-classes
+   * - `inverse`: sets the color to white and updates hover, focus, and active pseudo-classes
+   * - `standalone`: removes the underline of the Hyperlink. This is useful when a hyperlink is used outside the context of a paragraph or body text.
    */
-  variant?: 'inverse';
+  variant?: 'inverse' | 'standalone';
   /**
    * attribute for the hyperlink URL
    */
@@ -23,10 +24,10 @@ export const hyperlinkStencil = createStencil({
     color: system.color.text.primary.default,
     cursor: 'pointer',
     borderRadius: system.shape.half,
-    display: 'inline-block',
     padding: '0 2px',
     margin: '0 -2px',
     transition: 'color 0.15s,background-color 0.15s',
+    wordBreak: 'break-word',
     '&:hover, &.hover': {
       color: system.color.text.primary.strong,
       background: system.color.bg.alt.soft,
@@ -55,6 +56,9 @@ export const hyperlinkStencil = createStencil({
           color: system.color.text.primary.stronger,
           background: system.color.bg.alt.soft,
         },
+      },
+      standalone: {
+        textDecoration: 'none',
       },
     },
   },

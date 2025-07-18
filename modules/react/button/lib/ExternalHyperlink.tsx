@@ -16,10 +16,8 @@ export interface ExternalHyperlinkProps extends HyperlinkProps {
 export const externalHyperlinkStencil = createStencil({
   extends: hyperlinkStencil,
   base: {
-    display: 'inline-flex',
-    flexDirection: 'row',
-    alignItems: 'center',
     '& [data-part="external-hyperlink-icon"]': {
+      verticalAlign: 'text-top',
       [systemIconStencil.vars.color]: 'currentColor',
       [systemIconStencil.vars.size]: '1em',
       width: calc.subtract('1em', px2rem(1)),
