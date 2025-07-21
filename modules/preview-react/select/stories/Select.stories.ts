@@ -22,7 +22,7 @@ import {ErrorLeft as ErrorExampleLeft} from './examples/Left Label/ErrorLeft';
 import {GrowLeft as GrowExampleLeft} from './examples/Left Label/GrowLeft';
 
 export default {
-  title: 'Preview/Select',
+  title: 'Preview/Select (deprecated)',
   component: Select,
   tags: ['autodocs'],
   parameters: {
