@@ -2,7 +2,7 @@ import React from 'react';
 
 import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
 import {ExtractStencilProps, createStencil, px2rem} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {StatusIndicatorIcon} from './StatusIndicatorIcon';
@@ -84,24 +84,24 @@ const statusIndicatorStencil = createStencil({
      */
     variant: {
       primary: {
-        color: brand.primary.dark,
-        backgroundColor: brand.primary.lighter,
+        color: system.color.static.blue.strong,
+        backgroundColor: system.color.static.blue.soft,
       },
       success: {
-        color: brand.success.dark,
-        backgroundColor: brand.success.light,
+        color: system.color.static.green.strong,
+        backgroundColor: system.color.static.green.softer,
       },
       caution: {
-        color: brand.alert.darkest,
-        backgroundColor: brand.alert.light,
+        color: system.color.static.amber.stronger,
+        backgroundColor: system.color.static.amber.softer,
       },
       critical: {
-        color: brand.error.dark,
-        backgroundColor: brand.error.light,
+        color: system.color.static.red.strong,
+        backgroundColor: system.color.static.red.softer,
       },
       neutral: {
-        color: brand.neutral.dark,
-        backgroundColor: brand.neutral.light,
+        color: system.color.static.gray.strong,
+        backgroundColor: system.color.static.gray.softer,
       },
       ai: {
         color: system.color.fg.ai,
@@ -138,8 +138,8 @@ const statusIndicatorStencil = createStencil({
         emphasis: 'high',
       },
       styles: {
-        backgroundColor: brand.primary.base,
-        color: brand.primary.accent,
+        backgroundColor: system.color.static.blue.default,
+        color: system.color.static.white,
       },
     },
     {
@@ -148,8 +148,8 @@ const statusIndicatorStencil = createStencil({
         emphasis: 'high',
       },
       styles: {
-        backgroundColor: brand.success.base,
-        color: brand.success.accent,
+        backgroundColor: system.color.static.green.default,
+        color: system.color.static.white,
       },
     },
     {
@@ -158,8 +158,8 @@ const statusIndicatorStencil = createStencil({
         emphasis: 'high',
       },
       styles: {
-        backgroundColor: brand.alert.base,
-        color: brand.alert.accent,
+        backgroundColor: system.color.static.amber.default,
+        color: system.color.static.black,
       },
     },
     {
@@ -168,8 +168,8 @@ const statusIndicatorStencil = createStencil({
         emphasis: 'high',
       },
       styles: {
-        backgroundColor: brand.error.base,
-        color: brand.error.accent,
+        backgroundColor: system.color.static.red.default,
+        color: system.color.static.white,
       },
     },
     {
@@ -178,8 +178,8 @@ const statusIndicatorStencil = createStencil({
         emphasis: 'high',
       },
       styles: {
-        backgroundColor: brand.neutral.base,
-        color: brand.neutral.accent,
+        backgroundColor: system.color.static.gray.default,
+        color: system.color.static.white,
       },
     },
   ],
