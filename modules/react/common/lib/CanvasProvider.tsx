@@ -11,7 +11,6 @@ export interface CanvasProviderProps {
 
 // copied from brand/_variables.css
 const defaultBranding = createStyles({
-  [brand.error.darkest]: base.red800,
   [brand.common.alertInner]: base.amber400,
   [brand.common.errorInner]: base.red500,
   [brand.common.focusOutline]: base.blue500,
@@ -19,31 +18,32 @@ const defaultBranding = createStyles({
   [brand.neutral.darkest]: base.slate800,
   [brand.neutral.dark]: base.slate700,
   [brand.neutral.base]: base.slate600,
-  [brand.neutral.light]: base.slate200,
-  [brand.neutral.lightest]: base.slate100,
+  [brand.neutral.light]: base.slate150,
+  [brand.neutral.lightest]: base.slate50,
   [brand.success.accent]: base.neutral0,
   [brand.success.darkest]: base.green800,
   [brand.success.dark]: base.green700,
   [brand.success.base]: base.green600,
-  [brand.success.light]: base.green200,
-  [brand.success.lightest]: base.green100,
+  [brand.success.light]: base.green100,
+  [brand.success.lightest]: base.green25,
   [brand.error.accent]: base.neutral0,
-  [brand.error.dark]: base.red600,
-  [brand.error.base]: base.red700,
-  [brand.error.light]: base.red200,
-  [brand.error.lightest]: base.red100,
+  [brand.error.darkest]: base.red800,
+  [brand.error.dark]: base.red700,
+  [brand.error.base]: base.red600,
+  [brand.error.light]: base.red100,
+  [brand.error.lightest]: base.red25,
   [brand.alert.accent]: base.neutral900,
-  [brand.alert.darkest]: base.amber800,
-  [brand.alert.dark]: base.amber600,
+  [brand.alert.darkest]: base.amber600,
+  [brand.alert.dark]: base.amber500,
   [brand.alert.base]: base.amber400,
-  [brand.alert.light]: base.amber100,
-  [brand.alert.lightest]: base.amber50,
+  [brand.alert.light]: base.amber50,
+  [brand.alert.lightest]: base.amber25,
   [brand.primary.accent]: base.neutral0,
   [brand.primary.darkest]: base.blue800,
   [brand.primary.dark]: base.blue700,
   [brand.primary.base]: base.blue600,
   [brand.primary.light]: base.blue200,
-  [brand.primary.lightest]: base.blue100,
+  [brand.primary.lightest]: base.blue25,
   [brand.gradient
     .primary]: `linear-gradient(90deg, ${brand.primary.base} 0%, ${brand.primary.dark} 100%)`,
 });
@@ -103,3 +103,8 @@ export const CanvasProvider = ({
     </CacheProvider>
   );
 };
+
+/**
+ * oklch(0.908 0.012 255.5 / 1)
+ *
+ */
