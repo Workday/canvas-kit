@@ -222,18 +222,6 @@ export const StatusIndicator = createComponent('div')({
     Icon: StatusIndicatorIcon,
   },
   Component: ({variant, emphasis, children, ...elemProps}: StatusIndicatorProps, ref, Element) => {
-    // TODO: Remove this in a future release
-    if (process.env.NODE_ENV === 'development') {
-      if (Object.keys(deprecatedVariantsMap).includes(variant!)) {
-        // This warning will show if the codemod fails to update the variant prop
-        console.warn(
-          `${variant} has been removed from the preview StatusIndicator. Please use ${
-            deprecatedVariantsMap[variant as keyof typeof deprecatedVariantsMap]
-          } instead.`
-        );
-      }
-    }
-
     return (
       <Element
         ref={ref}
@@ -241,7 +229,10 @@ export const StatusIndicator = createComponent('div')({
           elemProps,
           statusIndicatorStencil({
             variant:
-              deprecatedVariantsMap[variant as keyof typeof deprecatedVariantsMap] || variant,
+              // collapse the type to only the allowed modifiers. Look them up in the map, then
+              // fallback to the passed variant.
+              deprecatedVariantsMap[variant as keyof typeof deprecatedVariantsMap] ||
+              (variant as keyof typeof statusIndicatorStencil.modifiers.variant),
             emphasis,
           })
         )}
