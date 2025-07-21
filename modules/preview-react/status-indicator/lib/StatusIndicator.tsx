@@ -13,6 +13,11 @@ import {StatusIndicatorLabel} from './StatusIndicatorLabel';
  * `StatusIndicatorProps['variant']` instead.
  */
 export type StatusIndicatorVariant =
+  | 'blue'
+  | 'green'
+  | 'orange'
+  | 'red'
+  | 'gray'
   | 'primary'
   | 'neutral'
   | 'caution'
@@ -23,7 +28,20 @@ export type StatusIndicatorVariant =
 
 export interface StatusIndicatorProps
   extends ExtractProps<typeof Flex, never>,
-    ExtractStencilProps<typeof statusIndicatorStencil> {
+    Omit<ExtractStencilProps<typeof statusIndicatorStencil>, 'variant'> {
+  /**
+   * Defines the color of the `StatusIndicator`.
+   * * `primary` | `blue` - Uses the primary brand color and used for many status types
+   * * `success` | `green` - Uses the success brand color and is used for positive statuses
+   * * `caution` | `orange` - Uses the caution brand color and is used for warnings or required actions
+   * * `critical` | `red` - Uses the error brand color and is used for critical statuses
+   * * `neutral` | `gray` - Uses the neutral brand color and generally doesn't have positive or negative connotations
+   * * `illuminate` - Uses the AI system color and is used for AI generated content
+   * * `transparent` - Uses the transparent brand color and is used for overlays on top of images or videos
+   *
+   * @default 'neutral'
+   */
+  variant: StatusIndicatorVariant;
   /**
    * Children of the `StatusIndicator`. Can contain a `StatusIndicator.Label` and optionally a `StatusIndicator.Icon`.
    */
@@ -37,7 +55,7 @@ const deprecatedVariantsMap = {
   orange: 'caution',
   red: 'critical',
   gray: 'neutral',
-};
+} as const;
 
 const statusIndicatorStencil = createStencil({
   base: {
@@ -54,11 +72,11 @@ const statusIndicatorStencil = createStencil({
   modifiers: {
     /**
      * Defines the color of the `StatusIndicator`.
-     * * `primary` - Uses the primary brand color and used for many status types.
-     * * `neutral` - Uses the neutral brand color and generally doesn't have positive or negative connotations
-     * * `caution` - Uses the caution brand color and is used for warnings or required actions
-     * * `success` - Uses the success brand color and is used for positive statuses
-     * * `critical` - Uses the error brand color and is used for critical statuses
+     * * `primary` | `blue` - Uses the primary brand color and used for many status types
+     * * `success` | `green` - Uses the success brand color and is used for positive statuses
+     * * `caution` | `orange` - Uses the caution brand color and is used for warnings or required actions
+     * * `critical` | `red` - Uses the error brand color and is used for critical statuses
+     * * `neutral` | `gray` - Uses the neutral brand color and generally doesn't have positive or negative connotations
      * * `illuminate` - Uses the AI system color and is used for AI generated content
      * * `transparent` - Uses the transparent brand color and is used for overlays on top of images or videos
      *
@@ -67,23 +85,23 @@ const statusIndicatorStencil = createStencil({
     variant: {
       primary: {
         color: brand.primary.dark,
-        backgroundColor: brand.primary.light,
-      },
-      neutral: {
-        color: brand.neutral.dark,
-        backgroundColor: brand.neutral.light,
-      },
-      caution: {
-        color: brand.alert.darkest,
-        backgroundColor: brand.alert.light,
+        backgroundColor: brand.primary.lighter,
       },
       success: {
         color: brand.success.dark,
         backgroundColor: brand.success.light,
       },
+      caution: {
+        color: brand.alert.darkest,
+        backgroundColor: brand.alert.light,
+      },
       critical: {
         color: brand.error.dark,
         backgroundColor: brand.error.light,
+      },
+      neutral: {
+        color: brand.neutral.dark,
+        backgroundColor: brand.neutral.light,
       },
       ai: {
         color: system.color.fg.ai,
@@ -120,28 +138,8 @@ const statusIndicatorStencil = createStencil({
         emphasis: 'high',
       },
       styles: {
-        backgroundColor: brand.primary.dark,
+        backgroundColor: brand.primary.base,
         color: brand.primary.accent,
-      },
-    },
-    {
-      modifiers: {
-        variant: 'neutral',
-        emphasis: 'high',
-      },
-      styles: {
-        backgroundColor: brand.neutral.dark,
-        color: brand.neutral.accent,
-      },
-    },
-    {
-      modifiers: {
-        variant: 'caution',
-        emphasis: 'high',
-      },
-      styles: {
-        backgroundColor: brand.alert.dark,
-        color: brand.alert.lightest,
       },
     },
     {
@@ -150,8 +148,18 @@ const statusIndicatorStencil = createStencil({
         emphasis: 'high',
       },
       styles: {
-        backgroundColor: brand.success.dark,
+        backgroundColor: brand.success.base,
         color: brand.success.accent,
+      },
+    },
+    {
+      modifiers: {
+        variant: 'caution',
+        emphasis: 'high',
+      },
+      styles: {
+        backgroundColor: brand.alert.base,
+        color: brand.alert.accent,
       },
     },
     {
@@ -160,8 +168,18 @@ const statusIndicatorStencil = createStencil({
         emphasis: 'high',
       },
       styles: {
-        backgroundColor: brand.error.dark,
+        backgroundColor: brand.error.base,
         color: brand.error.accent,
+      },
+    },
+    {
+      modifiers: {
+        variant: 'neutral',
+        emphasis: 'high',
+      },
+      styles: {
+        backgroundColor: brand.neutral.base,
+        color: brand.neutral.accent,
       },
     },
   ],
@@ -217,7 +235,17 @@ export const StatusIndicator = createComponent('div')({
     }
 
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, statusIndicatorStencil({variant, emphasis}))}>
+      <Element
+        ref={ref}
+        {...mergeStyles(
+          elemProps,
+          statusIndicatorStencil({
+            variant:
+              deprecatedVariantsMap[variant as keyof typeof deprecatedVariantsMap] || variant,
+            emphasis,
+          })
+        )}
+      >
         {children}
       </Element>
     );
