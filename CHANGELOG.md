@@ -3,6 +3,51 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.2](https://github.com/Workday/canvas-kit/releases/tag/v13.2.2) (2025-07-18)
+
+### Infrastructure
+
+- fix: Update styling transform to use deterministic hashes ([#3356](https://github.com/Workday/canvas-kit/pull/3356)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v13.2.1](https://github.com/Workday/canvas-kit/releases/tag/v13.2.1) (2025-07-17)
+
+### Components
+
+- fix: Add pointerEvents style to svg in BaseButtonComponent ([#3388](https://github.com/Workday/canvas-kit/pull/3388)) ([@selenajosephine](https://github.com/selenajosephine), Selena D)
+
+
+## [v12.6.15](https://github.com/Workday/canvas-kit/releases/tag/v12.6.15) (2025-07-17)
+
+### Components
+
+- fix: Add pointerEvents style to svg in BaseButtonComponent ([#3388](https://github.com/Workday/canvas-kit/pull/3388)) ([@selenajosephine](https://github.com/selenajosephine), Selena D)
+## [v13.2.0](https://github.com/Workday/canvas-kit/releases/tag/v13.2.0) (2025-07-16)
+
+
+
+
+## [v13.1.7](https://github.com/Workday/canvas-kit/releases/tag/v13.1.7) (2025-07-16)
+
+### Components
+
+- fix: Update `useUniqueId` to use `React.useId` if available ([#3383](https://github.com/Workday/canvas-kit/pull/3383)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v13.1.6](https://github.com/Workday/canvas-kit/releases/tag/v13.1.6) (2025-07-14)
+
+### Components
+
+- fix(tabs): Apply fade more appropriately for mobile ([#3380](https://github.com/Workday/canvas-kit/pull/3380)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v13.1.5](https://github.com/Workday/canvas-kit/releases/tag/v13.1.5) (2025-07-11)
+
+### Documentation
+
+- chore: Build out styling docs ([#3374](https://github.com/Workday/canvas-kit/pull/3374)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v13.1.4](https://github.com/Workday/canvas-kit/releases/tag/v13.1.4) (2025-06-17)
 
 ### Documentation

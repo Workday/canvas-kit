@@ -1,4 +1,4 @@
-import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, StorybookStatusIndicator} from '@workday/canvas-kit-docs';
 import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
 import * as TokenStories from './Tokens.stories';
 import {BorderRadius, Space, Depth, Colors, Type} from './examples/Tokens';
@@ -6,17 +6,17 @@ import {Overview} from './examples/Overview';
 
 <Meta of={TokenStories} />
 
-# Tokens
+# Tokens <StorybookStatusIndicator type="deprecated" />
 
-<InformationHighlight>
+<InformationHighlight variant="caution" className="sb-unstyled" cs={{p: {margin: 0}}}>
   <InformationHighlight.Icon />
-  <InformationHighlight.Heading>New Tokens Package Available!</InformationHighlight.Heading>
   <InformationHighlight.Body>
-    The tokens documented below are still available in Canvas Kit but are being replaced by our new
-    Canvas Tokens Web package. We encourage you to begin moving to our new tokens.
+    The tokens documented below are deprecated and will be removed in a future release. You must
+    migrate to the new Canvas Tokens Web package to ensure continued support and access to the
+    latest tokens.
   </InformationHighlight.Body>
-  <InformationHighlight.Link href="https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs">
-    View the Docs
+  <InformationHighlight.Link href="/?path=/docs/guides-tokens-migration-overview--docs">
+    See migration guide
   </InformationHighlight.Link>
 </InformationHighlight>
 
@@ -24,6 +24,8 @@ Tokens are the smallest pieces of our Design System with the primary function of
 information. They enable building components and patterns with consistency across our platforms.
 
 <ExampleCodeBlock code={Overview} />
+
+<br />
 
 ## Border Radius
 

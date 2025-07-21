@@ -1,3 +1,5 @@
+export {StorybookStatusIndicator} from './lib/StorybookStatusIndicator';
+export {DownloadLLMFile} from './lib/DownloadLLMFile';
 export {ExampleCodeBlock} from './lib/ExampleCodeBlock';
 export * from './lib/specs';
 export * from './lib/Specifications';

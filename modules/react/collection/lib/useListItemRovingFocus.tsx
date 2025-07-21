@@ -1,5 +1,5 @@
 import React from 'react';
-import {useIsRTL, createElemPropsHook} from '@workday/canvas-kit-react/common';
+import {useIsRTL, createElemPropsHook, slugify} from '@workday/canvas-kit-react/common';
 
 import {getCursor, isCursor} from './useCursorListModel';
 import {keyboardEventToCursorEvents} from './keyUtils';
@@ -62,7 +62,7 @@ export const useListItemRovingFocus = createElemPropsHook(useListModel)(
       onClick() {
         model.events.goTo({id: elemProps['data-id']!});
       },
-      'data-focus-id': `${model.state.id}-${elemProps['data-id']}`,
+      'data-focus-id': slugify(`${model.state.id}-${elemProps['data-id']}`),
       tabIndex: !model.state.cursorId
         ? 0 // cursor isn't known yet, be safe and mark this as focusable
         : !!elemProps['data-id'] && isCursor(model.state, elemProps['data-id'])
