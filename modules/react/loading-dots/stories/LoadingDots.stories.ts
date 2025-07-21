@@ -9,6 +9,7 @@ import {RTL as RTLExample} from './examples/RTL';
 import {Accessible as AccessibleExample} from './examples/Accessible';
 import {CustomShape as CustomShapeExample} from './examples/CustomShape';
 import {CustomColorAndAnimation as CustomColorAndAnimationExample} from './examples/CustomColorAndAnimation';
+import {Inverse as InverseExample} from './examples/Inverse';
 
 export default {
   title: 'Components/Indicators/Loading Dots',
@@ -37,4 +38,7 @@ export const CustomShape: Story = {
 };
 export const CustomColorAndAnimation: Story = {
   render: CustomColorAndAnimationExample,
+};
+export const Inverse: Story = {
+  render: InverseExample,
 };
