@@ -1,6 +1,6 @@
 import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
 import {system} from '@workday/canvas-tokens-web';
-import {exclamationTriangleIcon, sparkleSingleSmallIcon} from '@workday/canvas-system-icons-web';
+import {sparkleSingleSmallIcon} from '@workday/canvas-system-icons-web';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
