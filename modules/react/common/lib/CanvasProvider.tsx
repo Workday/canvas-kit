@@ -12,6 +12,7 @@ export interface CanvasProviderProps {
 // copied from brand/_variables.css
 const defaultBranding = createStyles({
   [brand.common.alertInner]: base.amber400,
+  [brand.common.alertOuter]: base.amber500,
   [brand.common.errorInner]: base.red500,
   [brand.common.focusOutline]: base.blue500,
   [brand.neutral.accent]: base.neutral0,
