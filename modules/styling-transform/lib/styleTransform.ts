@@ -1,18 +1,18 @@
 /// <reference types="node" />
-import ts from 'typescript';
 import path from 'node:path';
+import ts from 'typescript';
 
 import {getVariablesFromFiles} from './utils/getCssVariables';
-import {handleCreateVars} from './utils/handleCreateVars';
-import {handleCreateStyles} from './utils/handleCreateStyles';
-import {handleCreateStencil} from './utils/handleCreateStencil';
 import {handleCalc} from './utils/handleCalc';
-import {handlePx2Rem} from './utils/handlePx2Rem';
+import {handleCreateStencil} from './utils/handleCreateStencil';
+import {handleCreateStyles} from './utils/handleCreateStyles';
+import {handleCreateVars} from './utils/handleCreateVars';
 import {handleCssVar} from './utils/handleCssVar';
-import {Config, NodeTransformer, ObjectTransform, TransformerContext} from './utils/types';
-import {handleKeyframes} from './utils/handleKeyframes';
 import {handleInjectGlobal} from './utils/handleInjectGlobal';
+import {handleKeyframes} from './utils/handleKeyframes';
 import {handleParentModifier} from './utils/handleParentModifier';
+import {handlePx2Rem} from './utils/handlePx2Rem';
+import {NodeTransformer, ObjectTransform, TransformerContext} from './utils/types';
 
 export type NestedStyleObject = {[key: string]: string | NestedStyleObject};
 
@@ -26,8 +26,6 @@ let extractedNames: TransformerContext['extractedNames'] = {};
 let styles: TransformerContext['styles'] = {};
 let cache: TransformerContext['cache'] = {};
 let loadedFallbacks = false;
-let configLoaded = false;
-let config: Config = {};
 
 /**
  * The reset is used in tests and should not be called normally.
@@ -50,29 +48,15 @@ const defaultTransformers = [
   handleCreateStencil,
   handleInjectGlobal,
 ];
-
-export default function styleTransformer(
+export default styleTransformer;
+export function styleTransformer(
   program: ts.Program,
   {fallbackFiles = [], ...options}: Partial<StyleTransformerOptions> = {}
 ): ts.TransformerFactory<ts.SourceFile> {
-  if (!configLoaded) {
-    const configPath = getConfig(program.getCurrentDirectory());
-
-    if (configPath) {
-      console.log('Config file found:', configPath);
-      config = require(configPath).default;
-    }
-
-    configLoaded = true;
-  }
-
-  const {names, ...transformContext} = withDefaultContext(program.getTypeChecker(), {
-    ...config,
-    ...options,
-  });
+  const {names, ...transformContext} = withDefaultContext(program.getTypeChecker(), options);
 
   if (!loadedFallbacks) {
-    const files = fallbackFiles
+    const files: string[] = fallbackFiles
       .filter(file => file) // don't process empty files
       .map(file => {
         // Find the fully-qualified path name. This could error which should give "module not found" errors
@@ -136,6 +120,7 @@ export function withDefaultContext(
     styles,
     cache,
     checker,
+    seed: '',
     extractCSS: false,
     getFileName: path => path.replace(/\.tsx?/, '.css'),
     objectTransforms: [] as ObjectTransform[],
@@ -161,10 +146,11 @@ export function transform(
 
   const printer = ts.createPrinter();
 
+  const transformers = [styleTransformer(program, options)];
+
   return printer.printFile(
-    ts
-      .transform(source, [styleTransformer(program, options)])
-      .transformed.find(s => s.fileName === source.fileName) || source
+    ts.transform(source, transformers).transformed.find(s => s.fileName === source.fileName) ||
+      source
   );
 }
 
@@ -172,10 +158,7 @@ const handleTransformers =
   (transformers: ((node: ts.Node, context: TransformerContext) => ts.Node | void)[]) =>
   (node: ts.Node, context: TransformerContext) => {
     return transformers.reduce((result, transformer) => {
-      if (result) {
-        return result;
-      }
-      return transformer(node, context);
+      return result || transformer(node, context);
     }, undefined as ts.Node | void);
   };
 
