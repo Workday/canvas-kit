@@ -2,7 +2,7 @@ import crypto from 'node:crypto';
 
 import {createConfig} from '@workday/canvas-kit-styling-transform';
 
-import pkg from '../package.json';
+import pkg from './lerna.json';
 import {handleFocusRing} from './utils/style-transform/handleFocusRing';
 
 const config = createConfig({
