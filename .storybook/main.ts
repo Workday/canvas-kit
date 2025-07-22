@@ -8,6 +8,7 @@ import getSpecifications from '../modules/docs/utils/get-specifications';
 import {getDocParser} from '../modules/docs/docgen/createDocProgram';
 // Drop the `/index.ts` if using the published package
 import {styleTransformer, StylingWebpackPlugin} from '@workday/canvas-kit-styling-transform';
+import stylingConfig from '../styling.config';
 
 const modulesPath = path.resolve(__dirname, '../modules');
 const processDocs = process.env.SKIP_DOCGEN !== 'true';
@@ -70,7 +71,7 @@ const config: StorybookConfig = {
               };
             }
           : undefined,
-        styleTransformer,
+        program => styleTransformer(program, {...stylingConfig, extractCSS: false}),
       ],
       postTransform(code, id) {
         if (docsMap.get(id) && processDocs) {
