@@ -11,7 +11,6 @@ export interface CanvasProviderProps {
 
 // copied from brand/_variables.css
 const defaultBranding = createStyles({
-  [brand.error.darkest]: base.red800,
   [brand.common.alertInner]: base.amber400,
   [brand.common.alertOuter]: base.amber500,
   [brand.common.errorInner]: base.red500,
@@ -29,8 +28,8 @@ const defaultBranding = createStyles({
   [brand.success.light]: base.green100,
   [brand.success.lightest]: base.green25,
   [brand.error.accent]: base.neutral0,
-  [brand.error.dark]: base.red700,
   [brand.error.darkest]: base.red800,
+  [brand.error.dark]: base.red700,
   [brand.error.base]: base.red600,
   [brand.error.light]: base.red100,
   [brand.error.lightest]: base.red25,
@@ -105,3 +104,8 @@ export const CanvasProvider = ({
     </CacheProvider>
   );
 };
+
+/**
+ * oklch(0.908 0.012 255.5 / 1)
+ *
+ */
