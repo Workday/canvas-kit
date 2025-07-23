@@ -111,6 +111,10 @@ export const AIAssistantIngressButtonStencil = createStencil({
             },
           },
         },
+        '&:is(:focus-visible, .focus):not(:disabled, .disabled)': {
+          ...focusRing({width: 2, separation: 0, outerColor: system.color.fg.inverse}),
+          border: `2px solid ${system.color.border.ai} `,
+        },
       },
     },
     toggled: {
@@ -144,7 +148,7 @@ export const AIAssistantIngressButtonStencil = createStencil({
   },
   compound: [
     {
-      modifiers: {toggled: 'true', variant: 'inverse'},
+      modifiers: {toggled: true, variant: 'inverse'},
       styles: {
         [buttonStencil.vars.background]: system.color.bg.ai.strongest,
         '.wd-icon-ai-assistant-ingress-button': {
@@ -155,6 +159,10 @@ export const AIAssistantIngressButtonStencil = createStencil({
             transition: '300ms ease-out',
             stopColor: system.color.fg.inverse,
           },
+        },
+        '&:is(:focus-visible, .focus):not(:disabled, .disabled)': {
+          ...focusRing({width: 2, separation: 0, outerColor: system.color.fg.inverse}),
+          border: 'none',
         },
       },
     },
