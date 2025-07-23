@@ -44,7 +44,7 @@ const countBadgeStyles = createStyles({
 // NVDA + FF: Consistently describes count value only "{X}"
 // macOS v14.6.1
 // VoiceOver + Chrome / Safari: Consistently describes "New notifications {X}"
-export default () => {
+export const NotificationBadge = () => {
   const [count, setCount] = React.useState(4);
   const badgeID = useUniqueId();
 

@@ -21,13 +21,15 @@ const inverseBackground = createStyles({
   padding: system.space.x4,
 });
 
-export default () => (
-  <div className={containerStyles}>
-    <div className={defaultBackground}>
-      <CountBadge count={427} />
+export const Basic = () => {
+  return (
+    <div className={containerStyles}>
+      <div className={defaultBackground}>
+        <CountBadge count={427} />
+      </div>
+      <div className={inverseBackground}>
+        <CountBadge count={427} variant="inverse" />
+      </div>
     </div>
-    <div className={inverseBackground}>
-      <CountBadge count={427} variant="inverse" />
-    </div>
-  </div>
-);
+  );
+};

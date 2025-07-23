@@ -34,7 +34,7 @@ const inverseBackground = createStyles({
 
 const initialCount = 1;
 
-export default () => {
+export const CustomLimit = () => {
   const [count, setCount] = React.useState(initialCount);
 
   return (
