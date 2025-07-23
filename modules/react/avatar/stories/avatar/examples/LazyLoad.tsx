@@ -5,7 +5,7 @@ import testAvatar from './test-avatar.png';
 export const LazyLoad = () => (
   <div className="story">
     {Array.from({length: 5}, (v, index) => (
-      <>
+      <div>
         <Avatar
           altText="Avatar"
           key={index}
@@ -14,7 +14,7 @@ export const LazyLoad = () => (
           url={testAvatar + '?v=' + index}
         />
         <br />
-      </>
+      </div>
     ))}
   </div>
 );
