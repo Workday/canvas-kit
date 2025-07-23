@@ -20,7 +20,7 @@ const menuCardHeroStencil = createStencil({
   base: {
     display: 'flex',
     alignItems: 'flex-end',
-    background: brand.gradient.primary,
+    // background: brand.gradient.primary,
     aspectRatio: '1',
     maxHeight: px2rem(80),
     padding: system.space.x2,

@@ -1,7 +1,7 @@
 import {createComponent, focusRing, useUniqueId} from '@workday/canvas-kit-react/common';
 import {BaseButton, BaseButtonProps, buttonStencil} from '@workday/canvas-kit-react/button';
 import {createStencil, handleCsProp, calc} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {system, base} from '@workday/canvas-tokens-web';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {getAIAssistantIngressIcon} from './AIAssistantIngressIcon';
 export interface AIAssistantIngressButtonProps
@@ -19,20 +19,20 @@ export interface AIAssistantIngressButtonProps
 /**
  * Icon gradient colors
  */
-const illuminateStopColor1 = '#FFA198';
-const illuminateStopColor2 = '#FFCAA0';
-const illuminateStopColor3 = '#FFCA79';
-const illuminateStopColor4 = '#FDCA44';
-const illuminateStopColor5 = '#FFB74D';
+const illuminateStopColor1 = base.red200; //'#FFA198'
+const illuminateStopColor2 = base.orange200; //'#FFCAA0'
+const illuminateStopColor3 = base.orange200; //'#FFCA79'
+const illuminateStopColor4 = base.amber200; //'#FDCA44'
+const illuminateStopColor5 = base.amber300; //'#FFB74D';
 
 /**
  * Box shadow glow colors
  */
-const glowEraser = '#FFC2FD';
-const glowHighlighter = '#FFF3A8';
-const glowLunchBreak = '#FEC10B';
-const glowHappyHour = '#FD7E00';
-const glowThumbtack = '#FC5B05';
+const glowEraser = base.magenta200; //'#FFC2FD';
+const glowHighlighter = base.amber100; //'#FFF3A8';
+const glowLunchBreak = base.amber300; //'#FEC10B';
+const glowHappyHour = base.orange400; //'#FD7E00';
+const glowThumbtack = base.coral500; //'#FC5B05';
 
 export const AIAssistantIngressButtonStencil = createStencil({
   extends: buttonStencil,
@@ -127,6 +127,10 @@ export const AIAssistantIngressButtonStencil = createStencil({
             transition: '300ms ease-out',
             stopColor: system.color.fg.ai,
           },
+        },
+        '> linearGradient > stop': {
+          transition: '300ms ease-out',
+          stopColor: system.color.fg.ai,
         },
         '&:is(:focus-visible, .focus):not(:disabled, .disabled)': {
           ...focusRing({width: 2, separation: 2}),

@@ -20,7 +20,7 @@ const defaultBranding = createStyles({
   [brand.neutral.darkest]: base.slate800,
   [brand.neutral.dark]: base.slate700,
   [brand.neutral.base]: base.slate600,
-  [brand.neutral.light]: base.slate150,
+  [brand.neutral.light]: base.slate200,
   [brand.neutral.lightest]: base.slate50,
   [brand.success.accent]: base.neutral0,
   [brand.success.darkest]: base.green800,
@@ -46,8 +46,8 @@ const defaultBranding = createStyles({
   [brand.primary.base]: base.blue600,
   [brand.primary.light]: base.blue200,
   [brand.primary.lightest]: base.blue25,
-  [brand.gradient
-    .primary]: `linear-gradient(90deg, ${brand.primary.base} 0%, ${brand.primary.dark} 100%)`,
+  // [brand.gradient
+  //   .primary]: `linear-gradient(90deg, ${brand.primary.base} 0%, ${brand.primary.dark} 100%)`,
 });
 
 const mappedKeys = {
