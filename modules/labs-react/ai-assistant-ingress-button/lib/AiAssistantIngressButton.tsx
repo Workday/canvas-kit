@@ -3,8 +3,8 @@ import {BaseButton, BaseButtonProps, buttonStencil} from '@workday/canvas-kit-re
 import {createStencil, handleCsProp, calc} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {getAiAssistantIngressIcon} from './AiAssistantIngressIcon';
-export interface AiAssistantIngressButtonProps
+import {getAIAssistantIngressIcon} from './AIAssistantIngressIcon';
+export interface AIAssistantIngressButtonProps
   extends Omit<BaseButtonProps, 'size' | 'colors' | 'icon' | 'iconPosition' | 'shouldMirrorIcon'> {
   /**
    * When true, indicates that the assistant side panel is open.
@@ -34,7 +34,7 @@ const glowLunchBreak = '#FEC10B';
 const glowHappyHour = '#FD7E00';
 const glowThumbtack = '#FC5B05';
 
-export const aiAssistantIngressButtonStencil = createStencil({
+export const AIAssistantIngressButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
     [buttonStencil.vars.background]: system.color.bg.ai.strongest,
@@ -157,22 +157,22 @@ export const aiAssistantIngressButtonStencil = createStencil({
   ],
 });
 
-export const AiAssistantIngressButton = createComponent('button')({
-  displayName: 'AiAssistantIngressButton',
-  Component: ({toggled, variant, ...elemProps}: AiAssistantIngressButtonProps, ref, Element) => {
+export const AIAssistantIngressButton = createComponent('button')({
+  displayName: 'AIAssistantIngressButton',
+  Component: ({toggled, variant, ...elemProps}: AIAssistantIngressButtonProps, ref, Element) => {
     const svgGradientId = useUniqueId();
     return (
       <BaseButton
         ref={ref}
         as={Element}
         {...handleCsProp(elemProps, [
-          aiAssistantIngressButtonStencil({toggled, variant}),
+          AIAssistantIngressButtonStencil({toggled, variant}),
           {
             [systemIconStencil.vars.color]: `url(#${svgGradientId})`,
           },
         ])}
       >
-        <BaseButton.Icon size="large" icon={getAiAssistantIngressIcon(svgGradientId)} />
+        <BaseButton.Icon size="large" icon={getAIAssistantIngressIcon(svgGradientId)} />
       </BaseButton>
     );
   },
