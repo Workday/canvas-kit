@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.4](https://github.com/Workday/canvas-kit/releases/tag/v13.2.4) (2025-07-23)
+
+### Documentation
+
+- fix: Update href link in styles docs ([#3400](https://github.com/Workday/canvas-kit/pull/3400)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v13.2.3](https://github.com/Workday/canvas-kit/releases/tag/v13.2.3) (2025-07-22)
 
 ### Infrastructure
