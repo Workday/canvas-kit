@@ -2,16 +2,11 @@
 /// <reference types="@types/node" />
 
 import {useTheme as useEmotionTheme} from '@emotion/react';
-import {
-  defaultCanvasTheme,
-  createCanvasTheme,
-  EmotionCanvasTheme,
-  PartialEmotionCanvasTheme,
-} from './index';
+import {defaultCanvasTheme, EmotionCanvasTheme, PartialEmotionCanvasTheme} from './index';
 
 const getFilledTheme = (theme: PartialEmotionCanvasTheme) => ({
   ...theme,
-  canvas: createCanvasTheme(theme.canvas!),
+  canvas: {...defaultCanvasTheme, ...theme.canvas} as EmotionCanvasTheme['canvas'],
 });
 
 /**
