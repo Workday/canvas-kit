@@ -6290,10 +6290,10 @@
   dependencies:
     "@workday/design-assets-types" "0.2.10"
 
-"@workday/canvas-tokens-web@3.0.0-alpha.8":
-  version "3.0.0-alpha.8"
-  resolved "https://registry.yarnpkg.com/@workday/canvas-tokens-web/-/canvas-tokens-web-3.0.0-alpha.8.tgz#7c8025e55c7f326082ff6a4f671e32e4dd283a81"
-  integrity sha512-1LqN6DhegJ9YqJi+95ieYlFPLNunVbAadqM4GOpa6d7jbB0b98+7osev9lfvr8uaqPsLy2JGj+eFRjQazza20g==
+"@workday/canvas-tokens-web@3.0.0-alpha.9":
+  version "3.0.0-alpha.9"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-tokens-web/-/canvas-tokens-web-3.0.0-alpha.9.tgz#56fa84f1166e66ee45858274113733ad453fa663"
+  integrity sha512-yQ4IjcPgPYjgrV1XdxQRKuIIAz7tQQSHUbmhGdm2q3XyFrXpjDuRYCvc4CjV3tP9xA4/hJQae8qhw54gt0KMtw==
 
 "@workday/design-assets-types@0.2.10", "@workday/design-assets-types@^0.2.10":
   version "0.2.10"
