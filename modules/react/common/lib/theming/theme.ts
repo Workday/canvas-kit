@@ -39,7 +39,7 @@ export const defaultCanvasTheme: CanvasTheme = {
     },
     neutral: {
       lightest: cssVar(base.slate50),
-      light: cssVar(base.slate150),
+      light: cssVar(base.slate200),
       main: cssVar(base.slate600),
       dark: cssVar(base.slate700),
       darkest: cssVar(base.slate800),
