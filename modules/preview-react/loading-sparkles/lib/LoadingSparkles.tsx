@@ -1,4 +1,4 @@
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {CSProps, createStencil, handleCsProp, keyframes, px2rem} from '@workday/canvas-kit-styling';
@@ -45,7 +45,7 @@ export const loadingSparklesStencil = createStencil({
       animationIterationCount: 'infinite',
       animationName: LOADING_ANIMATION,
       animationTimingFunction: 'ease-in-out',
-      [systemIconStencil.vars.color]: base.extendedDragonFruit400,
+      [systemIconStencil.vars.color]: system.color.fg.ai,
       '&:nth-child(1)': {
         animationDelay: '0ms',
       },

@@ -23,13 +23,13 @@ export const textInputStencil = createStencil({
     display: 'block',
     border: `${px2rem(1)} solid ${cssVar(system.color.border.input.default)}`,
     backgroundColor: system.color.bg.default,
-    borderRadius: system.shape.x1,
+    borderRadius: system.shape.x1Half,
     boxSizing: 'border-box',
     height: system.space.x10,
     transition: '0.2s box-shadow, 0.2s border-color',
     padding: system.space.x2, // Compensate for border
     margin: px2rem(0), // Fix Safari
-    width: cssVar(width),
+    width,
     minWidth: cssVar(width, calc.add(calc.multiply(system.space.x20, 3), system.space.x10)),
     color: system.color.text.default,
     textOverflow: 'ellipsis', // Always show ellipsis for long text inputs as long as it doesn't have focus
@@ -51,9 +51,9 @@ export const textInputStencil = createStencil({
     '&:is(:disabled, .disabled)': {
       backgroundColor: system.color.bg.alt.softer,
       borderColor: system.color.border.input.disabled,
-      color: system.color.text.disabled,
+      color: system.color.fg.disabled,
       '&::placeholder': {
-        color: system.color.text.disabled,
+        color: system.color.fg.disabled,
       },
     },
   }),
@@ -70,29 +70,28 @@ export const textInputStencil = createStencil({
 
     error: {
       error: {
-        borderColor: brand.error.base,
-        boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.error.base}`,
+        borderColor: brand.common.errorInner,
+        borderWidth: px2rem(2),
+        backgroundColor: brand.error.lightest,
         '&:is(:hover, .hover, :disabled, .disabled, :focus-visible:not([disabled]), .focus:not([disabled]))':
           {
-            borderColor: brand.error.base,
+            borderColor: brand.common.errorInner,
           },
         '&:is(:focus-visible, .focus):not([disabled])': {
-          boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.error.base}, 0 0 0 2px ${
-            system.color.border.inverse
-          }, 0 0 0 4px ${brand.common.focusOutline}`,
+          boxShadow: `0 0 0 2px ${system.color.border.inverse}, 0 0 0 4px ${brand.common.focusOutline}`,
           outlineOffset: px2rem(2),
         },
       },
       alert: {
-        borderColor: brand.alert.darkest,
-        boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.alert.base}`,
+        borderColor: brand.common.alertOuter,
+        boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.common.alertInner}`,
+        backgroundColor: brand.alert.lightest,
         '&:is(:hover, .hover, :disabled, .disabled, :focus-visible:not([disabled]), .focus:not([disabled]))':
           {
-            borderColor: brand.alert.darkest,
+            borderColor: brand.common.alertOuter,
           },
-
         '&:is(:focus-visible, .focus):not([disabled])': {
-          boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.alert.base},
+          boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.common.alertInner},
         0 0 0 2px ${system.color.border.inverse},
         0 0 0 4px ${brand.common.focusOutline}`,
         },
