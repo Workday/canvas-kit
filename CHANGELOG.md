@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.3](https://github.com/Workday/canvas-kit/releases/tag/v13.2.3) (2025-07-22)
+
+### Infrastructure
+
+- fix: Add focusRing plugin back to style transform ([#3397](https://github.com/Workday/canvas-kit/pull/3397)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v13.2.2](https://github.com/Workday/canvas-kit/releases/tag/v13.2.2) (2025-07-18)
 
 ### Infrastructure
