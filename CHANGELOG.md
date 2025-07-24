@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.6.16](https://github.com/Workday/canvas-kit/releases/tag/v12.6.16) (2025-07-24)
+
+### Documentation
+
+- fix: Spec tables extend through container size ([#3405](https://github.com/Workday/canvas-kit/pull/3405)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
 ## [v12.6.15](https://github.com/Workday/canvas-kit/releases/tag/v12.6.15) (2025-07-17)
 
 ### Components
