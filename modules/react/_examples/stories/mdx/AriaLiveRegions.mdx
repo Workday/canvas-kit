@@ -5,7 +5,7 @@ import {VisibleLiveRegion} from './examples/AriaLiveRegions/VisibleLiveRegion';
 import {HiddenLiveRegion} from './examples/AriaLiveRegions/HiddenLiveRegion';
 import {TextInputWithLiveError} from './examples/AriaLiveRegions/TextInputWithLiveError';
 
-<Meta title="Guides/Accessibility/Aria Live Regions" component={AriaLiveRegion} />
+<Meta title="Guides/Accessibility/Examples/Aria Live Regions" component={AriaLiveRegion} />
 
 # ARIA Live Regions
 
@@ -73,9 +73,9 @@ of error conditions. As forms increase in complexity, live regions on each error
 increasingly distracting and disruptive to the experience, especially if users are trying to first
 understand the information that is required of them to complete the task.
 
-**Note:** The `<AriaLiveRegion>` component is used inside of the `Hint` to ensure the live
-region remains in the browser DOM at all times. The `Hint` is only rendered in the DOM when it
-contains content, so it will not work reliably as a live region for screen readers using the
+**Note:** The `<AriaLiveRegion>` component is used inside of the `Hint` to ensure the live region
+remains in the browser DOM at all times. The `Hint` is only rendered in the DOM when it contains
+content, so it will not work reliably as a live region for screen readers using the
 `as={AriaLiveRegion}` prop.
 
 <ExampleCodeBlock code={TextInputWithLiveError} />
