@@ -63,16 +63,14 @@ const secondaryButtonStencil = createStencil({
         [systemIconStencil.vars.color]: 'currentColor',
         // Hover Styles
         '&:hover, &.hover': {
-          [buttonStencil.vars
-            .background]: `oklch(from var(${system.color.bg.default}) l c h / var(${base.opacity100}))`,
+          [buttonStencil.vars.background]: `oklch(0 0 0 / 0.08)`,
           [buttonStencil.vars.border]: system.color.border.inverse,
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: 'currentColor',
         },
         // Focus Styles
         '&:focus-visible, &.focus': {
-          [buttonStencil.vars
-            .background]: `oklch(from var(${system.color.bg.default}) l c h / var(${base.opacity100}))`,
+          [buttonStencil.vars.background]: `oklch(0 0 0 / 0.84)`,
           [buttonStencil.vars.border]: system.color.border.primary.default,
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [buttonStencil.vars.boxShadowInner]: system.color.border.primary.default,
@@ -81,8 +79,7 @@ const secondaryButtonStencil = createStencil({
         },
         // Active Styles
         '&:active, &.active': {
-          [buttonStencil.vars
-            .background]: `oklch(from var(${system.color.bg.default}) l c h / var(${base.opacity300}))`,
+          [buttonStencil.vars.background]: `oklch(0 0 0 / 0.2)`,
           [buttonStencil.vars.border]: system.color.border.inverse,
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: 'currentColor',
