@@ -22,7 +22,7 @@
     "skipLibCheck": true,
     "plugins": [
       {
-        "transform": "./modules/styling-transform"
+        "transform": "./.storybook/typescript-transform.ts"
       }
     ]
   },
