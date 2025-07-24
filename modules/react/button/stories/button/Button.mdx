@@ -4,6 +4,8 @@ import {
 	SymbolDoc,
 	SymbolDescription,
 } from '@workday/canvas-kit-docs';
+import { Pill } from '@workday/canvas-kit-preview-react/pill';
+import { accessibilityIcon } from '@workday/canvas-system-icons-web';
 
 import { Primary } from './examples/Primary';
 import { PrimaryInverse } from './examples/PrimaryInverse';
@@ -97,7 +99,7 @@ or view the example below.
 
 ### Theme Overrides
 
-The most common way to theme our buttons is to pass a `theme` object at the root level of the application via the `CanvasProvider`. In the example below, our buttons use our `brand.action.**` tokens with the fallback being `brand.primary.**`. 
+The most common way to theme our buttons is to pass a `theme` object at the root level of the application via the `CanvasProvider`. In the example below, our buttons use our `brand.action.**` tokens with the fallback being `brand.primary.**`.
 
 > **Caution:** Setting `--cnvs-brand-action**` tokens at the `:root` CSS will override all `PrimaryButton` theme colors set at the `CanvasProvider` level.
 
@@ -105,12 +107,23 @@ The most common way to theme our buttons is to pass a `theme` object at the root
 
 <ExampleCodeBlock code={ThemeOverrides} />
 
+ ## Accessibility
+
+ <Pill className='sb-unstyled'>
+	<Pill.Icon icon={accessibilityIcon} />
+	<Pill.Label>WAI-ARIA Reference</Pill.Label>
+ </Pill>
+
 ### Accessible Use of the `as` Prop
 
 Like many of our components, Buttons accept an `as` prop, which lets you change the underlying
 semantic element - usually an `<a>`, or a `<button>`. This should be done with caution to ensure the
 best accessibility. Generally, `<button>` elements should be used for actions, and `<a>` elements
 should be used for navigation.
+
+### Role
+
+By default buttons have a `role` of `button`. If you wish to use buttons in the context of a form, the role should be set to type `submit`.
 
 ## Component API
 

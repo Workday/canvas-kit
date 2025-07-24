@@ -3,18 +3,20 @@ import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
 import {SelectableRows} from './examples/Table/WithSelectableRows';
 import {ExpandableRows} from './examples/Table/WithExpandableRows';
 import {SortableColumnHeaders} from './examples/Table/WithSortableColumnHeaders';
+import {FilterableColumnHeaders} from './examples/Table/WithColumnHeaderFilters';
 
-<Meta title="Examples/Advanced Tables" />
+<Meta title="Guides/Accessibility/Examples/Advanced Tables" />
 
 ## Advanced Table Examples
 
-Out of the box, `Table` is a lightweight component with a high degree of flexibility, but not much
-functionality outside of providing a basic table layout. This leaves a gap for developers to
+Out of the box, `Table` is a lightweight compound component with a high degree of flexibility, but
+not much functionality outside of providing a basic table layout. This flexibility lets developers
 implement common features, such as selecting rows and sorting columns, on top of `Table` to meet
-their specific application needs. During the development process, it's often unclear how to
-implement these features in an accessible way. In an effort to reduce that gap and increase clarity,
-we've documented several advanced examples below to communicate the accessibility nuances alongside
-tangible code snippets.
+their specific application needs.
+
+The Workday Accessibility Team has researched and developed the following examples below to
+demonstrate how to build these accessible table patterns. We've listed the specific considerations
+and decisions we've made for each of the examples.
 
 ### Expandable Rows
 
@@ -22,32 +24,32 @@ Expandable Rows combines the likes of an accordion with tabular data tables. Col
 buttons with 2 states, a collapsed and expanded state. A new row that spans the entire width of the
 table is added to the table just after the expanded row.
 
-- The `aria-expanded` property is added to the button to communicate this state to screen reader
-  users.
+- The `aria-expanded` property is added to the chevron button to communicate this state to screen
+  reader users.
 - A Canvas accessible `Tooltip` component is used to assign names to each icon button based on the
-  most useful value in the row. In this example, we combined the car make and model together. This
-  allows everyone to view the name of the checkboxes by hovering the mouse or focusing with the
-  keyboard.
+  most useful value in the row. In this example, we combined the car make (in column 1) and model
+  (in column 2) together. This allows everyone to view the name of the icon buttons by hovering the
+  mouse or focusing with the keyboard.
 - The expanded row uses `colspan` to span the entire width of the table and support screen readers.
   This space provides flexibility to show headings, lists, and other structured content for the
   table row above.
-- There is no explicit relationship between a row of cells, and the spanned content below it. The
+- There is no explicit relationship between a row of cells and the spanned content below it. The
   spanned content is assumed to belong to the row of cells above it, based on established accordion
   patterns and logical reading order of content rendered to the screen.
-- Outlining hierarchy in a data table is not supported for screen readers in this example.
+- Outlining hierarchy with additional nested rows in the table is not supported for screen readers
+  in this example.
 
 <ExampleCodeBlock code={ExpandableRows} />
 
 ### Selectable Rows
 
-Developed by the Workday accessibility team, using a `Checkbox` labeled "Select All" inside of a
-table column header can be a confusing experience for screen reader users. Screen readers will
-automatically announce the "Select All" column header each time users are reading any cell in
-column 1. For instance, the `Checkbox` in row 4 is decidedly not going to select all of the rows.
-Here is what we did about it:
+Using a `Checkbox` labeled "Select All" inside of a column header can be a confusing experience for
+screen reader users. Screen readers will automatically announce the "Select All" label in the column
+header each time users are reading any of the Check boxes in the first column. For instance, the
+`Checkbox` in row 4 is definitely not going to select all of the rows. Here is what we did about it:
 
 - We intentionally rendered row 1, column 1 as a standard `<td>` element so screen readers won't
-  automatically announce "Select All" while reading cells in column 1.
+  automatically announce the "Select All" label while reading cells in column 1.
 - Our research found that VoiceOver (MacOS v12.7, Safari v17.1) persistently announce "Select All"
   despite using the `<td>` element because of the optional `<thead>` element in the table. We
   omitted the optional `<thead>` and `<tbody>` elements from this example for that reason.
@@ -61,25 +63,54 @@ Here is what we did about it:
 
 <ExampleCodeBlock code={SelectableRows} />
 
+### Filterable Column Headers
+
+In this example, we demonstrate using the `Popup` component in each column header allowing users to
+search and filter the data on the table. The `Popup` component relies on React Portals to render the
+popup elements at the bottom of the browser's DOM presenting 2 key challenges for accessibility:
+
+1. Keyboard focus order of the elements in the popup,
+2. Screen readers' reading order of the content rendered in the browser.
+
+Here's what we did about it:
+
+- Canvas Kit includes a `usePopupModel` hook, with quite a few additional hooks developers can add
+  to their models. In particular, the `useFocusRedirect` hook manages keyboard focus between the
+  `<Popup.Target>` button and the popup content.
+- The `useInitialFocus` hook allows developers to specify which element receives keyboard focus when
+  the popup appears. In this example, we auto-focused the search input field.
+- To address the reading order of content, we set the `aria-owns` property onto the parent
+  `<Table.Header>` component (`<th>` DOM element) with 2 unique `id` values. The first `id` refers
+  to the `<Popup.Target>` button and the second refers to the `<Popup.Card>` container element. This
+  manually reassigns the column header's `<Popup.Target>` button and the `Popup` contents as
+  siblings in the browser's accessibility tree hierarchy. Screen readers **should** read the column
+  header buttons and the popup content in sequential order even though they are not siblings in the
+  DOM.
+- The `type='description'` variant of the Canvas `Tooltip` is used to communicate the filtered state
+  of the column header, and assigned to the accessible description of the column header
+  `<TertiaryButton>` component.
+- The Canvas `AriaLiveRegion` component is used to render the "X of Y items" status inside the table
+  caption. This enables screen readers to automatically describe the filter state changes of the
+  table content to users in real time. We recommend validating whether this use of a live region is
+  well supported for your screen reader and browser combinations first.
+
+<ExampleCodeBlock code={FilterableColumnHeaders} />
+
 ### Sortable Column Headers
 
-The challenge in this example is, how will we clearly communicate the complexity of the column
-headers to screen readers and keep the tabular data easy to understand? The column headers must
-describe the column name, the current sort state of the column, they are interactive (a button), and
-instructions about how the column will be sorted next. When screen reader users are focused on the
-tabular data cells, instructions about how the column will be sorted next is probably not relevant,
-distracting, and makes it harder to understand the data.
+The challenge in this example is to provide all of the necessary information about the interactive
+column headers, the sort state of the column, and instructions about how the table will be sorted
+without giving too much information to users while reading the data cells below.
 
-- The `aria-sort` property has been initialized to `none` on each of the `<th>` elements; this value
-  is updated to `ascending` or `descending` to reflect the current state.
-- A `<button>` element describing the column name is used inside of the `<th>` column header.
-- The `describe` variant of the Canvas `Tooltip` component is applied to the button in the column
-  header. This is used to describe how the column will be sorted after interaction and applied to
-  the accessible description of the button with the `aria-describedby` property. This way screen
-  readers won't read the longer description of the column headers automatically while focusing on
-  the tabular data below.
-- The `aria-sort` property may not reliably provide the current sort state of the column to users
-  focused on the tabular data in the table. It may be more reliable to use an `aria-label` string on
-  the button that describes the column name and sort state together.
+- The `aria-sort` property has been added to each of the `<Table.Header>` components (`<th>` DOM
+  element) and updated to `ascending` or `descending` to reflect the current sort state. We
+  recommend validating whether this property is well supported for your screen reader and browser
+  combinations first.
+- A `<TertiaryButton>` describing the column name is used inside of the `<Table.Header>` component.
+- The `description` variant of the Canvas `Tooltip` component is applied to the button in the column
+  header and applied to the accessible description of the button with the `aria-description`
+  property. This is used to describe how the column will be sorted when pressed and screen readers
+  will only read this description while focusing on the column headers, not while reading the data
+  cells below.
 
 <ExampleCodeBlock code={SortableColumnHeaders} />
