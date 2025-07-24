@@ -1,6 +1,6 @@
 import {CanvasSystemIcon, CanvasIconTypes} from '@workday/design-assets-types';
 
-export const getAiAssistantIngressIcon = (svgId: string): CanvasSystemIcon => {
+export const getAIAssistantIngressIcon = (svgId: string): CanvasSystemIcon => {
   return {
     name: 'aiAssistantIngressButton',
     type: CanvasIconTypes.System,
