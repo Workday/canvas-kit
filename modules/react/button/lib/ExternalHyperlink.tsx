@@ -15,8 +15,11 @@ export interface ExternalHyperlinkProps extends HyperlinkProps {
 
 export const externalHyperlinkStencil = createStencil({
   extends: hyperlinkStencil,
-  base: {
-    '& [data-part="external-hyperlink-icon"]': {
+  parts: {
+    externalHyperlinkIcon: 'external-hyperlink-icon',
+  },
+  base: ({externalHyperlinkIconPart}) => ({
+    [externalHyperlinkIconPart]: {
       verticalAlign: 'text-top',
       [systemIconStencil.vars.color]: 'currentColor',
       [systemIconStencil.vars.size]: '1em',
@@ -27,8 +30,11 @@ export const externalHyperlinkStencil = createStencil({
         minWidth: system.space.x4,
         minHeight: system.space.x4,
       },
+      ':dir(rtl)': {
+        transform: 'rotate(270deg)',
+      },
     },
-  },
+  }),
 });
 
 /**
@@ -53,7 +59,7 @@ export const ExternalHyperlink = createComponent('a')({
         icon={extLinkIcon}
         role="img"
         aria-label={iconLabel}
-        data-part="external-hyperlink-icon"
+        {...externalHyperlinkStencil.parts.externalHyperlinkIcon}
       />
     </Element>
   ),
