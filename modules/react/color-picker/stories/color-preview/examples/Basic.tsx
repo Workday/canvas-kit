@@ -1,4 +1,3 @@
-import React from 'react';
 import {ColorPreview} from '@workday/canvas-kit-react/color-picker';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 

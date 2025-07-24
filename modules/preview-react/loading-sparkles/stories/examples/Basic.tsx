@@ -35,7 +35,7 @@ export const Basic = () => {
   };
 
   return (
-    <>
+    <div>
       <div className={containerStyles}>
         {quote && <Text cs={{maxWidth: '60ch'}}>{quote}</Text>}
         <AriaLiveRegion>
@@ -46,7 +46,7 @@ export const Basic = () => {
         </AriaLiveRegion>
       </div>
       <SecondaryButton onClick={handleClick}>Generate Quote</SecondaryButton>
-    </>
+    </div>
   );
 };
 

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {DeleteButton, SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {Flex} from '@workday/canvas-kit-react/layout';

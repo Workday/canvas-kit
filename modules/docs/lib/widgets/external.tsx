@@ -1,4 +1,3 @@
-import React from 'react';
 import {ExternalHyperlink} from '@workday/canvas-kit-react/button';
 
 import {renderTypeParameters} from '../widgetUtils';
@@ -8,7 +7,9 @@ import {registerWidget} from '../Value';
 
 registerWidget<ExternalSymbolValue>('external', ({value}) => (
   <>
-    <ExternalHyperlink href={value.url}>{value.name}</ExternalHyperlink>
+    <ExternalHyperlink href={value.url} iconLabel="Open link in new window">
+      {value.name}
+    </ExternalHyperlink>
     {renderTypeParameters(value.typeParameters)}
   </>
 ));

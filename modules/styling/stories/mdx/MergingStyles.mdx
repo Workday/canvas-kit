@@ -1,11 +1,13 @@
 import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
+import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
+import {system} from '@workday/canvas-tokens-web';
 import {StylingOverrides} from './examples/StylingOverrides';
 
-<Meta title="Styling/Merging Styles" />
+<Meta title="Styling/Guides/Merging Styles" />
 
-## Style Merging
+# Merging Styles
 
-### Styling Precedence
+## mergeStyles
 
 In v9, we used `@emotion/styled` or `@emotion/react` for all styling which is a runtime styling
 solution. Starting in v10, we're migrating our styling to a more static solution using
@@ -114,7 +116,21 @@ by making all styles have the same specificity of `0-1-0` and inserting `base` s
 in `base`, a `modifier`, and a `compound` modifier, the `compound` modifier would win because it is
 the last defined. This should be the expected order.
 
-### `handleCsProp`
+<InformationHighlight className="sb-unstyled" variant="caution" cs={{marginBlock: system.space.x4}}>
+  <InformationHighlight.Icon />
+  <InformationHighlight.Heading>Caution</InformationHighlight.Heading>
+  <InformationHighlight.Body>
+    While we support `mergeStyles` we'd advise against using this in your components so that users
+    can get the performance benefit of static styling using utilities like `createStyles` and
+    `createStencil` in tandem with the `cs` prop.
+  </InformationHighlight.Body>
+</InformationHighlight>
+
+### mergeStyles API
+
+<SymbolDoc hideHeading name="mergeStyles" />
+
+## handleCsProp
 
 But what about when using components that use `@emotion/react` or `@emotion/styled`? Those libraries
 use a different approach. Instead of multiple class names, they use a single, merged class name.
@@ -144,8 +160,6 @@ CSS class name appears on the `div`'s class list. Also the `cs` prop will add th
 to the element via a CSS class name. If your component needs to handle being passed a `className`,
 `style`, or `cs` prop, use `handleCsProp`.
 
-## Examples
+### handleCsProp API
 
-<SymbolDoc name="handleCsProp" />
-
-<SymbolDoc name="mergeStyles" />
+<SymbolDoc hideHeading name="handleCsProp" />

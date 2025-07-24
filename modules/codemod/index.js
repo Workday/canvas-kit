@@ -81,6 +81,13 @@ const {
       describe: chalk.gray('The path to execute the transform in (recursively).'),
     });
   })
+  .command('v13 [path]', chalk.gray('Canvas Kit v12 > v13 upgrade transform'), yargs => {
+    yargs.positional('path', {
+      type: 'string',
+      default: '.',
+      describe: chalk.gray('The path to execute the transform in (recursively).'),
+    });
+  })
   .demandCommand(1, chalk.red.bold('You must provide a transform to apply.'))
   .strictCommands()
   .fail((msg, err, yargs) => {
