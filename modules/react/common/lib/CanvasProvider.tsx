@@ -46,8 +46,8 @@ const defaultBranding = createStyles({
   [brand.primary.base]: base.blue600,
   [brand.primary.light]: base.blue200,
   [brand.primary.lightest]: base.blue25,
-  // [brand.gradient
-  //   .primary]: `linear-gradient(90deg, ${brand.primary.base} 0%, ${brand.primary.dark} 100%)`,
+  [brand.gradient
+    .primary]: `linear-gradient(90deg, ${brand.primary.base} 0%, ${brand.primary.dark} 100%)`,
 });
 
 const mappedKeys = {
