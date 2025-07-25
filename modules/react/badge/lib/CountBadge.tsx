@@ -91,9 +91,7 @@ const countBadgeStencil = createStencil({
     {
       modifiers: {variant: 'inverse', emphasis: 'low'},
       styles: {
-        background: `oklch(from ${cssVar(system.color.bg.default)} l c h / ${cssVar(
-          base.opacity200
-        )})`,
+        background: system.color.bg.overlayInverse,
         color: system.color.fg.inverse,
       },
     },
