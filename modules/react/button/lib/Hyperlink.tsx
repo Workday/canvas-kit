@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, CSProps, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
+import {createStencil, CSProps, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system, brand} from '@workday/canvas-tokens-web';
 
 export interface HyperlinkProps extends CSProps {
@@ -25,7 +25,7 @@ export const hyperlinkStencil = createStencil({
     color: system.color.text.primary.default,
     cursor: 'pointer',
     borderRadius: system.shape.half,
-    padding: '0 2px',
+    padding: px2rem(2),
     margin: '0 -2px',
     transition: 'color 0.15s,background-color 0.15s',
     wordBreak: 'break-word',
@@ -34,7 +34,7 @@ export const hyperlinkStencil = createStencil({
       background: system.color.bg.alt.soft,
     },
     '&:focus, &.focus, &:focus-visible': {
-      boxShadow: `0 0 0 2px ${cssVar(brand.common.focusOutline)}`,
+      boxShadow: `0 0 0 ${px2rem(2)} ${cssVar(brand.common.focusOutline)}`,
       outline: 'none',
     },
     '&:active, &.active': {
@@ -51,7 +51,7 @@ export const hyperlinkStencil = createStencil({
           background: 'rgba(255, 255, 255, 0.1)',
         },
         '&:focus, &.focus, &:focus-visible': {
-          boxShadow: `0 0 0 2px ${cssVar(system.color.text.inverse)}`,
+          boxShadow: `0 0 0 ${px2rem(2)}  ${cssVar(system.color.text.inverse)}`,
         },
         '&:active, &.active': {
           color: system.color.text.primary.stronger,
@@ -69,7 +69,7 @@ export const hyperlinkStencil = createStencil({
           background: 'rgba(255, 255, 255, 0.1)',
         },
         '&:focus, &.focus, &:focus-visible': {
-          boxShadow: `0 0 0 2px ${cssVar(system.color.text.inverse)}`,
+          boxShadow: `0 0 0 ${px2rem(2)}  ${cssVar(system.color.text.inverse)}`,
         },
         '&:active, &.active': {
           color: system.color.text.primary.stronger,
