@@ -116,7 +116,8 @@ const tabItemStencil = createStencil({
     },
 
     '&:focus-visible, &.focus': {
-      outline: `none`,
+      // focus outline for Windows high contrast theme
+      outline: `${px2rem(2)} solid transparent`,
       ...focusRing({inset: 'outer', width: 0, separation: 2}),
       [buttonStencil.vars.boxShadowInner]: system.color.border.inverse,
       [buttonStencil.vars.boxShadowOuter]: brand.common.focusOutline,
@@ -139,7 +140,8 @@ const tabItemStencil = createStencil({
       [systemIconStencil.vars.color]: brand.primary.base,
       '&:after': {
         position: 'absolute',
-        height: system.space.x1,
+        // selected state for Windows high contrast theme
+        borderBottom: `${system.space.x1} solid transparent`,
         borderRadius: `${system.shape.x1} ${system.shape.x1} ${system.shape.zero} ${system.shape.zero}`,
         backgroundColor: brand.primary.base,
         bottom: system.space.zero,
