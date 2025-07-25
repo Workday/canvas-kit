@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.6](https://github.com/Workday/canvas-kit/releases/tag/v13.2.6) (2025-07-24)
+
+### Documentation
+
+- fix: Spec tables extend through container size ([#3405](https://github.com/Workday/canvas-kit/pull/3405)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
+## [v12.6.16](https://github.com/Workday/canvas-kit/releases/tag/v12.6.16) (2025-07-24)
+
+### Documentation
+
+- fix: Spec tables extend through container size ([#3405](https://github.com/Workday/canvas-kit/pull/3405)) ([@josh-bagwell](https://github.com/josh-bagwell))
+## [v13.2.5](https://github.com/Workday/canvas-kit/releases/tag/v13.2.5) (2025-07-23)
+
+### Documentation
+
+- fix: Fix docs and examples for Avatar and Badge ([#3402](https://github.com/Workday/canvas-kit/pull/3402)) ([@jamesfan](https://github.com/jamesfan))
+
+
+## [v13.2.4](https://github.com/Workday/canvas-kit/releases/tag/v13.2.4) (2025-07-23)
+
+### Documentation
+
+- fix: Update href link in styles docs ([#3400](https://github.com/Workday/canvas-kit/pull/3400)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v13.2.3](https://github.com/Workday/canvas-kit/releases/tag/v13.2.3) (2025-07-22)
 
 ### Infrastructure
