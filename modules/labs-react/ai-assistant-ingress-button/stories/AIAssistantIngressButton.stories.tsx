@@ -1,5 +1,5 @@
 import {Meta} from '@storybook/react';
-import mdxDoc from './AiAssistantIngressButton.mdx';
+import mdxDoc from './AIAssistantIngressButton.mdx';
 
 import {Basic as BasicExample} from './examples/Basic';
 import {Inverse as InverseExample} from './examples/Inverse';

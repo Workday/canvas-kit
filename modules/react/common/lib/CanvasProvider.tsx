@@ -20,7 +20,7 @@ const defaultBranding = createStyles({
   [brand.neutral.darkest]: base.slate800,
   [brand.neutral.dark]: base.slate700,
   [brand.neutral.base]: base.slate600,
-  [brand.neutral.light]: base.slate150,
+  [brand.neutral.light]: base.slate200,
   [brand.neutral.lightest]: base.slate50,
   [brand.success.accent]: base.neutral0,
   [brand.success.darkest]: base.green800,
