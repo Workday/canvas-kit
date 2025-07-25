@@ -1,7 +1,7 @@
 import {buttonStencil} from './BaseButton';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {createStencil} from '@workday/canvas-kit-styling';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {brand, system} from '@workday/canvas-tokens-web';
 import {Button, ButtonProps} from './Button';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
@@ -63,14 +63,14 @@ const secondaryButtonStencil = createStencil({
         [systemIconStencil.vars.color]: 'currentColor',
         // Hover Styles
         '&:hover, &.hover': {
-          [buttonStencil.vars.background]: `oklch(0 0 0 / 0.08)`,
+          [buttonStencil.vars.background]: system.color.bg.overlayInverse,
           [buttonStencil.vars.border]: system.color.border.inverse,
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: 'currentColor',
         },
         // Focus Styles
         '&:focus-visible, &.focus': {
-          [buttonStencil.vars.background]: `oklch(0 0 0 / 0.84)`,
+          [buttonStencil.vars.background]: system.color.bg.translucent,
           [buttonStencil.vars.border]: system.color.border.primary.default,
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [buttonStencil.vars.boxShadowInner]: system.color.border.primary.default,
@@ -79,7 +79,7 @@ const secondaryButtonStencil = createStencil({
         },
         // Active Styles
         '&:active, &.active': {
-          [buttonStencil.vars.background]: `oklch(0 0 0 / 0.2)`,
+          [buttonStencil.vars.background]: system.color.bg.translucentInverse,
           [buttonStencil.vars.border]: system.color.border.inverse,
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: 'currentColor',

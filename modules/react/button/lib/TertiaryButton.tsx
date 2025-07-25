@@ -42,6 +42,7 @@ const tertiaryButtonStencil = createStencil({
       [buttonStencil.vars.background]: system.color.bg.alt.soft,
       [buttonStencil.vars.label]: brand.primary.dark,
       [systemIconStencil.vars.color]: 'currentColor',
+      textDecoration: 'underline',
     },
     // Active Styles
     '&:active, &.active': {
@@ -75,22 +76,22 @@ const tertiaryButtonStencil = createStencil({
         [systemIconStencil.vars.color]: 'currentColor',
         // Focus Styles
         '&:focus-visible, &.focus': {
-          [buttonStencil.vars.background]: system.color.bg.default,
-          [buttonStencil.vars.label]: system.color.fg.strong,
+          [buttonStencil.vars.background]: system.color.bg.translucent,
+          [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: 'currentColor',
           [buttonStencil.vars.boxShadowInner]: system.color.border.primary.default,
           [buttonStencil.vars.boxShadowOuter]: system.color.border.inverse,
         },
         // Hover Styles
         '&:hover, &.hover': {
-          [buttonStencil.vars.background]: system.color.bg.default,
-          [buttonStencil.vars.label]: system.color.fg.strong,
+          [buttonStencil.vars.background]: system.color.bg.overlayInverse,
+          [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: 'currentColor',
         },
         // Active Styles
         '&:active, &.active': {
-          [buttonStencil.vars.background]: system.color.bg.alt.soft,
-          [buttonStencil.vars.label]: system.color.fg.strong,
+          [buttonStencil.vars.background]: system.color.bg.translucentInverse,
+          [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: 'currentColor',
         },
         // Disabled Styles
