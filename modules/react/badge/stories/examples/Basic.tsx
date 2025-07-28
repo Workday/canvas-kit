@@ -14,11 +14,11 @@ export const Basic = () => {
   return (
     <>
       <div className={containerStyles}>
-        <Text as="strong">Notifications</Text>
+        <Text as="strong">High Emphasis</Text>
         <CountBadge count={427} />
       </div>
       <div className={containerStyles}>
-        <Text as="strong">Notifications</Text>
+        <Text as="strong">Low Emphasis</Text>
         <CountBadge count={427} emphasis="low" />
       </div>
     </>

@@ -16,13 +16,13 @@ export function Inverse() {
     <>
       <div className={containerStyles}>
         <Text as="strong" variant="inverse">
-          Notifications
+          High Emphasis
         </Text>
         <CountBadge count={427} variant="inverse" />
       </div>
       <div className={containerStyles}>
         <Text as="strong" variant="inverse">
-          Notifications
+          Low Emphasis
         </Text>
         <CountBadge count={427} variant="inverse" emphasis="low" />
       </div>
