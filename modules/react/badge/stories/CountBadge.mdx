@@ -26,8 +26,9 @@ Accessibility section below.
 
 ### Basic
 
-In the example below, we're rendering a basic `CountBadge` with its `default` and `inverse`
-variants. The `inverse` variant is intended for darker backgrounds to create more contrast.
+The default variant is recommended for most scenarios. It supports two emphasis levels: `high`
+(default), which should be used to highlight badges representing important or primary information,
+and `low`, which is intended for less prominent or secondary indications.
 
 <ExampleCodeBlock code={Basic} />
 
@@ -36,7 +37,7 @@ variants. The `inverse` variant is intended for darker backgrounds to create mor
 The `inverse` variant should be used when placing the badge on accent or dark backgrounds to ensure
 proper contrast. When using the `inverse` variant with `low` emphasis, use caution: this combination
 is only recommended on backgrounds with
-[a token of 400 or greater](https://workday.github.io/canvas-tokens/?path=/docs/docs-base-tokens--docs)
+[a token of 600 or greater](https://workday.github.io/canvas-tokens/?path=/docs/docs-base-tokens--docs)
 to maintain sufficient contrast and readability.
 
 <ExampleCodeBlock code={Inverse} />
