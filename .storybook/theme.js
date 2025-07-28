@@ -1,5 +1,6 @@
 import { create } from '@storybook/theming';
 import {version} from '../lerna.json';
+import {system} from '@workday/canvas-tokens-web';
 
 export default create({
   base: 'light',
@@ -51,23 +52,16 @@ export default create({
   appBg: '#ffffff',
 
   // Typography
-  fontBase: '"Helvetica Neue", Helvetica, Arial, sans-serif',
-  fontCode: 'monospace',
+  mainTextFace: system.fontFamily.mono,
 
   // Text colors
-  textColor: '#0F2E66',
+  textColor: '#2B2B2B',
   textInverseColor: '#ffffff',
 
   // Toolbar default and active colors
   barTextColor: '#5D6775',
   barSelectedColor: '#0F2E66',
   barBg: '#ffffff',
-
-  // Form colors
-  inputBg: '#ffffff',
-  inputBorder: '#e4e7eb',
-  inputTextColor: '#0F2E66',
-  inputBorderRadius: 4,
 
   // Custom colors (used in UI extension if needed)
   brandColors: {
