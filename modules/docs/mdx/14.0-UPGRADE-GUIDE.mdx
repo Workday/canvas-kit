@@ -17,6 +17,7 @@ any questions.
   - [Card](#card)
   - [Expandable](#expandable)
   - [Hyperlink & ExternalHyperlink](#hyperlink-and-externalhyperlink)
+  - [Loading Dots](#loading-dots)
   - [SearchForm](#search-form)
 - [Removals](#removals)
   - [Menu (preview)](#menu-preview)
@@ -223,6 +224,16 @@ These changes are only **visual** and should not affect the functionality of the
 ```
 
 > **Note:** Only use the `standalone` or `standalone-inverse` variant in cases where the `<HyperLink>` and `<ExternalHyperlink>` are used outside the context of body text.
+
+### Loading Dots
+
+**PR:** [#3393](https://github.com/Workday/canvas-kit/pull/3393)
+
+- `LoadingDots` now has a `inverse` variant. Use this variant when the loading dots are on a dark background or image.
+
+```tsx
+<LoadingDots variant="inverse" />
+```
 
 ### Search Form 🚨
 
