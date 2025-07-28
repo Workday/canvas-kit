@@ -22,6 +22,10 @@ const transform: Transform = (file, api) => {
       importDeclaration = {...importDeclaration, ...filterOutImports(nodePath)};
     });
 
+  if (!Object.values(importDeclaration).includes('type')) {
+    return root.toSource();
+  }
+
   root
     .find(j.SpreadElement, {
       argument: {
