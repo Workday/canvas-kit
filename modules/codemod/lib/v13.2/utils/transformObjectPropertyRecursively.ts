@@ -33,6 +33,11 @@ export const transformObjectPropertyRecursively = (
         );
       }
 
+      addMissingImports(
+        {j, root},
+        {importPath: '@workday/canvas-tokens-web', specifiers: ['system']}
+      );
+
       return j.objectProperty(
         j.identifier(key),
         isCanvasKitStyling
@@ -62,6 +67,11 @@ export const transformObjectPropertyRecursively = (
           addMissingImports(
             {j, root},
             {importPath: '@workday/canvas-kit-styling', specifiers: ['cssVar']}
+          );
+
+          addMissingImports(
+            {j, root},
+            {importPath: '@workday/canvas-tokens-web', specifiers: ['system']}
           );
 
           return j.callExpression(j.identifier('cssVar'), [varToMemberExpression(j, colorToken)]);
