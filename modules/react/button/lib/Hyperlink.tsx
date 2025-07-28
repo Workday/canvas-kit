@@ -25,7 +25,7 @@ export const hyperlinkStencil = createStencil({
     color: system.color.text.primary.default,
     cursor: 'pointer',
     borderRadius: system.shape.half,
-    padding: px2rem(2),
+    padding: `0 ${px2rem(2)} `,
     margin: '0 -2px',
     transition: 'color 0.15s,background-color 0.15s',
     wordBreak: 'break-word',
