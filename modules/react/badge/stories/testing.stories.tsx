@@ -36,7 +36,20 @@ export const CountBadgeStates = {
           {label: 'Inverse Low Emphasis', props: {emphasis: 'low', variant: 'inverse'}},
         ]}
       >
-        {props => <CountBadge {...props} />}
+        {props => (
+          <div
+            style={{
+              padding: cssVar(system.space.x2),
+              backgroundColor: cssVar(
+                props.variant === 'inverse'
+                  ? system.color.bg.primary.default
+                  : system.color.bg.alt.soft
+              ),
+            }}
+          >
+            <CountBadge {...props} />
+          </div>
+        )}
       </ComponentStatesTable>
     );
   },
