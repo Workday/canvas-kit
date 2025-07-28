@@ -1,2 +1,2 @@
-export * from './lib/AiAssistantIngressButton';
-export * from './lib/AiAssistantIngressIcon';
+export * from './lib/AIAssistantIngressButton';
+export * from './lib/AIAssistantIngressIcon';
