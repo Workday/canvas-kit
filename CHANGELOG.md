@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.9](https://github.com/Workday/canvas-kit/releases/tag/v13.2.9) (2025-07-28)
+
+### Codemods
+
+- chore: Fix codemod to prevent not relevant files ([#3416](https://github.com/Workday/canvas-kit/pull/3416)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
 ## [v13.2.8](https://github.com/Workday/canvas-kit/releases/tag/v13.2.8) (2025-07-28)
 
 ### Documentation
