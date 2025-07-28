@@ -1,13 +1,6 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {
-  handleCsProp,
-  CSProps,
-  createStencil,
-  px2rem,
-  keyframes,
-  cssVar,
-} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {handleCsProp, CSProps, createStencil, px2rem, keyframes} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 const grow = keyframes({
   from: {
