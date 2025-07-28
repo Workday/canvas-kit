@@ -21,7 +21,7 @@ const inverseBackground = createStyles({
   padding: system.space.x4,
 });
 
-export function Basic() {
+export const Basic = () => {
   return (
     <div className={containerStyles}>
       <div className={defaultBackground}>
@@ -32,4 +32,4 @@ export function Basic() {
       </div>
     </div>
   );
-}
+};
