@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {CountBadge} from '@workday/canvas-kit-react/badge';
-import {createStyles, cssVar} from '@workday/canvas-kit-styling';
+import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import {Text} from '@workday/canvas-kit-react/text';
 
