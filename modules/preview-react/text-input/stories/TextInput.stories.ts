@@ -21,7 +21,7 @@ import {Error as ErrorExample} from './examples/Error';
 import {Alert as AlertExample} from './examples/Alert';
 
 export default {
-  title: 'Preview/Inputs/Text Input',
+  title: 'Preview/Inputs/Text Input (deprecated)',
   component: TextInput,
   tags: ['autodocs'],
   parameters: {

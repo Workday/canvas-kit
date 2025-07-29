@@ -10,7 +10,7 @@ import {createStyles, cssVar} from '@workday/canvas-kit-styling';
 const backgroundColors = {
   cssProp: cssVar(base.orange500),
   styledComponent: cssVar(base.green500),
-  styleProps: cssVar(base.pink500),
+  styleProps: cssVar(base.magenta500),
   createStyles: cssVar(base.purple500),
 };
 

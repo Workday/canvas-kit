@@ -4,13 +4,13 @@ import {
   StaticStates,
 } from '@workday/canvas-kit-react/testing';
 
-import {AiAssistantIngressButton} from '@workday/canvas-kit-labs-react/ai-assistant-ingress-button';
+import {AIAssistantIngressButton} from '@workday/canvas-kit-labs-react/ai-assistant-ingress-button';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export default {
   title: 'Testing/Labs/AI Assistant Ingress Button',
-  component: AiAssistantIngressButton,
+  component: AIAssistantIngressButton,
   parameters: {
     chromatic: {
       disable: false,
@@ -52,7 +52,7 @@ export const AiAssistantIngressButtonStates = () => (
     >
       {props => (
         <div className={props.variant === 'inverse' ? darkBackground : ''}>
-          <AiAssistantIngressButton {...props} />
+          <AIAssistantIngressButton {...props} />
         </div>
       )}
     </ComponentStatesTable>
@@ -85,7 +85,7 @@ export const AiAssistantIngressButtonStatesToggledInverse = () => (
     >
       {props => (
         <div className={darkBackground}>
-          <AiAssistantIngressButton variant="inverse" {...props} />
+          <AIAssistantIngressButton variant="inverse" {...props} />
         </div>
       )}
     </ComponentStatesTable>
@@ -116,7 +116,7 @@ export const AiAssistantIngressButtonStatesToggledDefault = () => (
         props => !props.disabled || !props.className || props.className === 'hover'
       )}
     >
-      {props => <AiAssistantIngressButton {...props} />}
+      {props => <AIAssistantIngressButton {...props} />}
     </ComponentStatesTable>
   </StaticStates>
 );
