@@ -20,8 +20,8 @@ const loadingStencil = createStencil({
 
 const containerStyles = createStyles({
   position: 'relative',
-  width: '200px',
-  height: '200px',
+  width: px2rem(200),
+  height: px2rem(200),
 });
 
 export const Inverse = () => {
