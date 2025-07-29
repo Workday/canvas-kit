@@ -88,13 +88,7 @@ const countBadgeStencil = createStencil({
 export const CountBadge = createComponent('span')({
   displayName: 'CountBadge',
   Component: (
-    {
-      count = 0,
-      limit = 1000,
-      variant = 'default',
-      emphasis = 'high',
-      ...elemProps
-    }: CountBadgeProps,
+    {count = 0, limit = 1000, variant, emphasis = 'high', ...elemProps}: CountBadgeProps,
     ref,
     Element
   ) => {
