@@ -1,5 +1,5 @@
 import {LoadingDots} from '@workday/canvas-kit-react/loading-dots';
-import {createStencil, createStyles} from '@workday/canvas-kit-styling';
+import {createStencil, createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import {Graphic} from '@workday/canvas-kit-react/icon';
 
