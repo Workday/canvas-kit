@@ -1,7 +1,7 @@
 import {buttonStencil} from './BaseButton';
-import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
-import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {system, brand, base} from '@workday/canvas-tokens-web';
+import {createComponent} from '@workday/canvas-kit-react/common';
+import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {system, brand} from '@workday/canvas-tokens-web';
 import {Button, ButtonProps} from './Button';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
@@ -15,6 +15,10 @@ export interface TertiaryButtonProps extends ButtonProps {
    * Variant has an option for `inverse` which will inverse the styling
    */
   variant?: 'inverse';
+  /**
+   * isThemeable is a boolean that allows the button to be themeable.
+   * @deprecated This prop is no longer needed and will be removed in the next major version. Use css tokens instead.
+   */
   isThemeable?: boolean;
 }
 
@@ -194,7 +198,6 @@ export const TertiaryButton = createComponent('button')({
     {
       children,
       icon,
-      isThemeable,
       size = 'medium',
       variant,
       iconPosition,

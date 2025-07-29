@@ -71,7 +71,7 @@ const secondaryButtonStencil = createStencil({
         // Focus Styles
         '&:focus-visible, &.focus': {
           [buttonStencil.vars.background]: system.color.bg.translucent,
-          [buttonStencil.vars.border]: system.color.border.primary.default,
+          [buttonStencil.vars.border]: 'transparent',
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [buttonStencil.vars.boxShadowInner]: system.color.border.primary.default,
           [buttonStencil.vars.boxShadowOuter]: system.color.border.inverse,
