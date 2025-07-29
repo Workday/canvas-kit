@@ -4,9 +4,10 @@ import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {transformationImportIcon} from '@workday/canvas-system-icons-web';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {SidePanelContext} from './hooks';
-import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import {SidePanelTransitionStates} from './SidePanel';
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
 export interface SidePanelToggleButtonProps extends ExtractProps<typeof TertiaryButton, never> {
   /**
@@ -131,6 +132,7 @@ export const SidePanelToggleButton = createComponent('button')({
             elemProps.onClick?.(event);
             context.handleAnimationStart();
           }}
+          cs={{[systemIconStencil.vars.color]: cssVar(system.color.fg.default)}}
         />
       </Tooltip>
     );

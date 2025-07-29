@@ -6,6 +6,9 @@ import {colors, space, CanvasSpaceValues} from '@workday/canvas-kit-react/tokens
 import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
 import {chevronLeftIcon, chevronRightIcon} from '@workday/canvas-system-icons-web';
 import {Heading} from '@workday/canvas-kit-react/text';
+import {systemIconStencil} from '../../icon';
+import {system} from '@workday/canvas-tokens-web';
+import {cssVar} from '@workday/canvas-kit-styling';
 
 export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -223,6 +226,7 @@ export class SidePanel extends React.Component<SidePanelProps, SidePanelState> {
               aria-label={open ? closeNavigationAriaLabel : openNavigationAriaLabel}
               onClick={this.onToggleClick}
               icon={this.toggleButtonDirection(open, openDirection)}
+              cs={{[systemIconStencil.vars.color]: cssVar(system.color.fg.default)}}
             />
           )}
         </SidePanelFooter>
