@@ -33,10 +33,8 @@ export interface CountBadgeProps extends CSProps {
   limit?: number;
   /**
    * Sets the variant of the Count Badge
-   *
-   * @default 'default'
    */
-  variant?: 'inverse' | 'default';
+  variant?: 'inverse';
 }
 
 // .cnvs-count-badge
@@ -54,14 +52,11 @@ const countBadgeStencil = createStencil({
     lineHeight: px2rem(20),
     minWidth: px2rem(20),
     padding: `0 ${px2rem(6.5)}`,
+    background: system.color.static.red.default,
+    color: system.color.text.inverse,
   },
   modifiers: {
     variant: {
-      // .cnvs-count-badge--variant-default
-      default: {
-        background: system.color.static.red.default,
-        color: system.color.text.inverse,
-      },
       // .cnvs-count-badge--variant-inverse
       inverse: {
         background: system.color.bg.default,
@@ -70,17 +65,13 @@ const countBadgeStencil = createStencil({
     },
     emphasis: {
       high: {},
-      low: {},
-    },
-  },
-  compound: [
-    {
-      modifiers: {variant: 'default', emphasis: 'low'},
-      styles: {
+      low: {
         background: system.color.static.blue.soft,
         color: system.color.static.blue.stronger,
       },
     },
+  },
+  compound: [
     {
       modifiers: {variant: 'inverse', emphasis: 'low'},
       styles: {
