@@ -5544,6 +5544,11 @@
   resolved "https://registry.yarnpkg.com/@types/chroma-js/-/chroma-js-1.4.3.tgz#4456e5cb46885a4952324e55a4b6d4064904790c"
   integrity sha512-m33zg9cRLtuaUSzlbMrr7iLIKNzrD4+M6Unt5+9mCu4BhR5NwnRjVKblINCwzcBXooukIgld8DtEncP8qpvbNg==
 
+"@types/common-tags@^1.8.0":
+  version "1.8.4"
+  resolved "https://registry.yarnpkg.com/@types/common-tags/-/common-tags-1.8.4.tgz#3b31fcb5952cd326a55cabe9dbe6c5be3c1671a0"
+  integrity sha512-S+1hLDJPjWNDhcGxsxEbepzaxWqURP/o+3cP4aa2w7yBXgdcmKGQtZzP8JbyfOd0m+33nh+8+kvxYE2UJtBDkg==
+
 "@types/connect@*":
   version "3.4.38"
   resolved "https://registry.yarnpkg.com/@types/connect/-/connect-3.4.38.tgz#5ba7f3bc4fbbdeaff8dded952e5ff2cc53f8d858"
@@ -6285,17 +6290,17 @@
   dependencies:
     "@workday/design-assets-types" "0.2.10"
 
-"@workday/canvas-tokens-web@3.0.0-alpha.5":
-  version "3.0.0-alpha.5"
-  resolved "https://registry.yarnpkg.com/@workday/canvas-tokens-web/-/canvas-tokens-web-3.0.0-alpha.5.tgz#ba53200edaec8cd31ac99f8a7e27abf1a8f291c5"
-  integrity sha512-ilpkTiIBpM6NV+Yt99VmV8YN/lf2SuxxdDUDl0Rky8PO0WGtBvccZMEmK2P1gMIEUr2tQ9lqtDyUU7KMI07UhA==
+"@workday/canvas-tokens-web@3.0.0-alpha.10":
+  version "3.0.0-alpha.10"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-tokens-web/-/canvas-tokens-web-3.0.0-alpha.10.tgz#38a765109485c31640662e853eaff004a7417e1f"
+  integrity sha512-UkR43imHzyTb47I+lrRuxe1No95+IdM4N4mKNpF/IcVzg/OLAjosmqOkYzztMSacKO9+lRjrVtNkrKnubWvkBg==
 
-"@workday/design-assets-types@0.2.10":
+"@workday/design-assets-types@0.2.10", "@workday/design-assets-types@^0.2.10":
   version "0.2.10"
   resolved "https://registry.yarnpkg.com/@workday/design-assets-types/-/design-assets-types-0.2.10.tgz#ebcc16377951cd0449b885a467eb68c9e715e05f"
   integrity sha512-8Za1aBNP5wIQrwOd/CrbFzlsfDLRP0yWTD6nGCR4+UFx5Dw4tEcQIQ01waW/CurBv9zDUxeWged4ld1rQkfQcg==
 
-"@workday/design-assets-types@0.2.8", "@workday/design-assets-types@^0.2.8":
+"@workday/design-assets-types@0.2.8":
   version "0.2.8"
   resolved "https://registry.yarnpkg.com/@workday/design-assets-types/-/design-assets-types-0.2.8.tgz#54026b4e6ea79861b12837a7deb83db9a16caad4"
   integrity sha512-5rYCg67W43ueng4KgRC69ZKbzl7EfO8Y3uSbs+pYJO3Qbb65yRF841Fz9SZTyuHrDpEiFMAI9s1laqLG56Bb1w==

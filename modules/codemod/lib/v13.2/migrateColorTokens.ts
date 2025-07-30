@@ -21,6 +21,10 @@ const transform: Transform = (file, api) => {
       importDeclaration = {...importDeclaration, ...filterOutImports(nodePath)};
     });
 
+  if (!Object.values(importDeclaration).includes('colors')) {
+    return root.toSource();
+  }
+
   root
     .find(j.CallExpression, {
       callee: {
@@ -28,11 +32,6 @@ const transform: Transform = (file, api) => {
       },
     })
     .forEach(nodePath => {
-      addMissingImports(
-        {j, root},
-        {importPath: '@workday/canvas-tokens-web', specifiers: ['system']}
-      );
-
       const name = (nodePath.value.callee as Identifier).name;
       const stylesDeclaration = nodePath.value.arguments[0];
 

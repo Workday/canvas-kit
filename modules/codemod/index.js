@@ -88,6 +88,13 @@ const {
       describe: chalk.gray('The path to execute the transform in (recursively).'),
     });
   })
+  .command('v13.2 [path]', chalk.gray('Canvas React Tokens > Canvas Tokens Web v2'), yargs => {
+    yargs.positional('path', {
+      type: 'string',
+      default: '.',
+      describe: chalk.gray('The path to execute the transform in (recursively).'),
+    });
+  })
   .command('v14 [path]', chalk.gray('Canvas Kit v13 > v14 upgrade transform'), yargs => {
     yargs.positional('path', {
       type: 'string',

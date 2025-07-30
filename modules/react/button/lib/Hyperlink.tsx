@@ -1,14 +1,16 @@
 import * as React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, CSProps, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {createStencil, CSProps, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {system, brand} from '@workday/canvas-tokens-web';
 
 export interface HyperlinkProps extends CSProps {
   /**
    * sets modifier styles for Hyperlink
-   * - `inverse`: sets the color to frenchVanilla100 and updates hover, focus, and active pseudo-classes
+   * - `inverse`: sets the color to white and updates hover, focus, and active pseudo-classes
+   * - `standalone`: removes the underline of the Hyperlink. This is useful when a hyperlink is used outside the context of a paragraph or body text.
+   * - `standalone-inverse`: removes the underline of the Hyperlink and sets the color to white. This is useful when a hyperlink is used outside the context of a paragraph or body text on a dark background.
    */
-  variant?: 'inverse';
+  variant?: 'inverse' | 'standalone' | 'standalone-inverse';
   /**
    * attribute for the hyperlink URL
    */
@@ -23,16 +25,16 @@ export const hyperlinkStencil = createStencil({
     color: system.color.text.primary.default,
     cursor: 'pointer',
     borderRadius: system.shape.half,
-    display: 'inline-block',
-    padding: '0 2px',
+    padding: `0 ${px2rem(2)} `,
     margin: '0 -2px',
     transition: 'color 0.15s,background-color 0.15s',
+    wordBreak: 'break-word',
     '&:hover, &.hover': {
       color: system.color.text.primary.strong,
       background: system.color.bg.alt.soft,
     },
     '&:focus, &.focus, &:focus-visible': {
-      boxShadow: `0 0 0 2px ${cssVar(system.color.bg.primary.default)}`,
+      boxShadow: `0 0 0 ${px2rem(2)} ${cssVar(brand.common.focusOutline)}`,
       outline: 'none',
     },
     '&:active, &.active': {
@@ -49,7 +51,25 @@ export const hyperlinkStencil = createStencil({
           background: 'rgba(255, 255, 255, 0.1)',
         },
         '&:focus, &.focus, &:focus-visible': {
-          boxShadow: `0 0 0 2px ${cssVar(system.color.text.inverse)}`,
+          boxShadow: `0 0 0 ${px2rem(2)}  ${cssVar(system.color.text.inverse)}`,
+        },
+        '&:active, &.active': {
+          color: system.color.text.primary.stronger,
+          background: system.color.bg.alt.soft,
+        },
+      },
+      standalone: {
+        textDecoration: 'none',
+      },
+      'standalone-inverse': {
+        textDecoration: 'none',
+        color: system.color.text.inverse,
+        '&:hover, &.hover': {
+          color: system.color.text.inverse,
+          background: 'rgba(255, 255, 255, 0.1)',
+        },
+        '&:focus, &.focus, &:focus-visible': {
+          boxShadow: `0 0 0 ${px2rem(2)}  ${cssVar(system.color.text.inverse)}`,
         },
         '&:active, &.active': {
           color: system.color.text.primary.stronger,
