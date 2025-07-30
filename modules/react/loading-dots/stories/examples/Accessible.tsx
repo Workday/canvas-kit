@@ -40,7 +40,12 @@ export const Accessible = () => {
       <SecondaryButton onClick={handleLoad}>Start</SecondaryButton>
       <AriaLiveRegion aria-label="Loading">
         {loadingState === 'loading' && (
-          <LoadingDots cs={styleOverrides.loadingStyles} role="img" aria-label="Please wait..." />
+          <LoadingDots
+            cs={styleOverrides.loadingStyles}
+            role="img"
+            variant="inverse"
+            aria-label="Please wait..."
+          />
         )}
         {loadingState === 'success' && <AccessibleHide>Complete.</AccessibleHide>}
       </AriaLiveRegion>

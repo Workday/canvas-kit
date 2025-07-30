@@ -4,21 +4,21 @@ import {CSSObject} from '@emotion/styled';
 import {createComponent, getColor} from '@workday/canvas-kit-react/common';
 import {SystemPropValues} from '@workday/canvas-kit-react/layout';
 import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {base} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 import {Svg, SvgProps, svgStencil, transformColorNameToToken} from './Svg';
 
 /**
- * @deprecated Interface `AccentIconStyles` will be removed in a future version. All props will be moved inside `AccentIconProps`. Consider to use the new tokens set to set `color` prop: `color={base.blueberry500}`.
+ * @deprecated Interface `AccentIconStyles` will be removed in a future version. All props will be moved inside `AccentIconProps`. Consider use the new tokens set to set `color` prop: `color={system.color.bg.primary.strong}`.
  */
 export interface AccentIconStyles {
   /**
    * The fill color of the AccentIcon.
-   * @default base.blueberry500
+   * @default system.color.bg.primary.strong
    */
   color?: SystemPropValues['color'];
   /**
    * If true, set the background fill of the AccentIcon to `transparent`.
-   * If false, set the background fill of the AccentIcon to `base.frenchVanilla100`.
+   * If false, set the background fill of the AccentIcon to `system.color.bg.alt.soft`.
    * @default false
    */
   transparent?: boolean;
@@ -59,10 +59,10 @@ export const accentIconStencil = createStencil({
   base: ({color, size}) => ({
     [size]: px2rem(56),
     '& .color-500': {
-      fill: cssVar(color, base.blueberry500),
+      fill: cssVar(color, system.color.bg.primary.strong),
     },
     '& .french-vanilla-100': {
-      fill: base.frenchVanilla100,
+      fill: system.color.bg.default,
     },
   }),
   modifiers: {
