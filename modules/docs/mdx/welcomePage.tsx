@@ -90,7 +90,7 @@ export const WelcomePage = () => {
         >
           <Grid as={Card} className={gridStyles}>
             <SystemIcon
-              color={base.pink600}
+              color={base.magenta600}
               icon={rocketIcon}
               size={60}
             ></SystemIcon>

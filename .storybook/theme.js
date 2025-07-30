@@ -66,7 +66,7 @@ export default create({
   // Custom colors (used in UI extension if needed)
   brandColors: {
     primary: '#0F2E66', // base.blue900
-    pink: '#B03286', // base.pink600
+    pink: '#B03286', // base.magenta600
     coral: '#FF8778', // base.red300
     teal: '#019EAC', // base.teal500
     slate: '#5D6775', // base.slate600
