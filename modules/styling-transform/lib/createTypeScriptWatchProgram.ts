@@ -41,7 +41,9 @@ export const startWatch = (
     tsconfigPath,
     compilerOptions,
     ts.sys,
-    ts.createSemanticDiagnosticsBuilderProgram
+    ts.createSemanticDiagnosticsBuilderProgram,
+    reportDiagnostic,
+    reportWatchStatusChanged
   );
   host.afterProgramCreate = builderProgram => {
     onProgramCreatedOrUpdated(builderProgram);
@@ -50,3 +52,26 @@ export const startWatch = (
   const watch = ts.createWatchProgram(host);
   return [watch.getProgram(), watch.close];
 };
+
+const formatHost: ts.FormatDiagnosticsHost = {
+  getCanonicalFileName: path => path,
+  getCurrentDirectory: ts.sys.getCurrentDirectory,
+  getNewLine: () => ts.sys.newLine,
+};
+
+function reportDiagnostic(diagnostic: ts.Diagnostic) {
+  console.error(
+    'Error',
+    diagnostic.code,
+    ':',
+    ts.flattenDiagnosticMessageText(diagnostic.messageText, formatHost.getNewLine())
+  );
+}
+
+/**
+ * Prints a diagnostic every time the watch status changes.
+ * This is mainly for messages like "Starting compilation" or "Compilation completed".
+ */
+function reportWatchStatusChanged(diagnostic: ts.Diagnostic) {
+  console.log(ts.formatDiagnostic(diagnostic, formatHost));
+}
