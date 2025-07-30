@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.10](https://github.com/Workday/canvas-kit/releases/tag/v13.2.10) (2025-07-29)
+
+### Components
+
+- fix(TabsItem): Added styles for Windows high contrast ([#3418](https://github.com/Workday/canvas-kit/pull/3418)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton)
+
+
+## [v13.2.9](https://github.com/Workday/canvas-kit/releases/tag/v13.2.9) (2025-07-28)
+
+### Codemods
+
+- chore: Fix codemod to prevent not relevant files ([#3416](https://github.com/Workday/canvas-kit/pull/3416)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v13.2.8](https://github.com/Workday/canvas-kit/releases/tag/v13.2.8) (2025-07-28)
+
+### Documentation
+
+- docs: Update codemod installation script ([#3413](https://github.com/Workday/canvas-kit/pull/3413)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
 ## [v13.2.7](https://github.com/Workday/canvas-kit/releases/tag/v13.2.7) (2025-07-24)
 
 ### Documentation
