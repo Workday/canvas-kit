@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.12](https://github.com/Workday/canvas-kit/releases/tag/v13.2.12) (2025-07-30)
+
+### Infrastructure
+
+- ci: Fix watch message to not clear terminal ([#3421](https://github.com/Workday/canvas-kit/pull/3421)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v13.2.11](https://github.com/Workday/canvas-kit/releases/tag/v13.2.11) (2025-07-30)
 
 ### Documentation
