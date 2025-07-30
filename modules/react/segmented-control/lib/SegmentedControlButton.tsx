@@ -1,106 +1,84 @@
-import {
-  BaseButton,
-  ButtonColors,
-  ButtonSizes,
-  ButtonContainerProps,
-} from '@workday/canvas-kit-react/button';
-import {
-  createComponent,
-  mouseFocusBehavior,
-  styled,
-  StyledType,
-} from '@workday/canvas-kit-react/common';
+import {brand, system} from '@workday/canvas-tokens-web';
+import {BaseButton, ButtonContainerProps, buttonStencil} from '@workday/canvas-kit-react/button';
+import {calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {colors, borderRadius, space} from '@workday/canvas-kit-react/tokens';
+import {createComponent} from '@workday/canvas-kit-react/common';
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
-const getIconButtonColors = (toggled?: boolean): ButtonColors => {
-  return {
-    default: {
-      background: toggled ? colors.blueberry400 : colors.soap200,
-      icon: toggled ? colors.frenchVanilla100 : colors.licorice200,
-    },
-    hover: {
-      background: toggled ? colors.blueberry400 : colors.soap300,
-      icon: toggled ? colors.frenchVanilla100 : colors.licorice500,
-    },
-    active: {
-      background: toggled ? colors.blueberry400 : colors.soap500,
-      icon: toggled ? colors.frenchVanilla100 : colors.licorice500,
-    },
-    focus: {
-      background: toggled ? colors.blueberry400 : colors.soap200,
-      icon: toggled ? colors.frenchVanilla100 : colors.licorice500,
-      border: toggled ? 'transparent' : colors.soap500,
-    },
-    disabled: {
-      background: toggled ? colors.soap100 : colors.soap100,
-      border: colors.soap500,
-      icon: colors.soap600,
-      opacity: '1',
-    },
-  };
-};
-
-const getSizeStyles = (size?: ButtonSizes) => {
-  const sizeValue =
-    size === 'large' ? `calc(${space.xl} + ${space.xxs})` : size === 'small' ? space.l : space.xl;
-
-  return {
-    width: sizeValue,
-    height: sizeValue,
-  };
-};
-
-const StyledButton = styled(BaseButton)<ButtonContainerProps & StyledType>(
-  {
-    borderRadius: borderRadius.zero,
-    border: `1px solid ${colors.soap500}`,
-    borderLeft: 'none',
+const segmentedControlButtonStencil = createStencil({
+  extends: buttonStencil,
+  base: {
+    borderInlineStart: 'none',
     minWidth: 'auto',
 
+    [buttonStencil.vars.background]: system.color.bg.alt.soft,
+    [buttonStencil.vars.border]: system.color.border.container,
+    [buttonStencil.vars.borderRadius]: system.shape.zero,
+    [systemIconStencil.vars.color]: system.color.fg.muted.soft,
+
+    '&:hover, &.hover': {
+      [buttonStencil.vars.background]: system.color.bg.alt.default,
+      [systemIconStencil.vars.color]: system.color.icon.strong,
+    },
+    '&:active, &.active': {
+      [buttonStencil.vars.background]: system.color.bg.alt.stronger,
+    },
+
+    '&:disabled, &.disabled': {
+      [buttonStencil.vars.background]: system.color.bg.alt.softer,
+      [buttonStencil.vars.border]: system.color.border.container,
+      [systemIconStencil.vars.color]: system.color.icon.soft,
+    },
+
     '&:first-of-type': {
-      borderRadius: `${borderRadius.m} 0 0 ${borderRadius.m}`,
-      borderLeft: `1px solid ${colors.soap500}`,
+      borderRadius: `${system.shape.x1} 0 0 ${system.shape.x1}`,
+      borderInlineStart: `${px2rem(1)} solid ${system.color.border.container}`,
     },
+
     '&:last-of-type': {
-      borderRadius: `0 ${borderRadius.m} ${borderRadius.m} 0`,
+      borderRadius: `0 ${system.shape.x1} ${system.shape.x1} 0`,
     },
+
     '&[aria-pressed="true"]': {
-      borderColor: `${colors.blueberry400} !important`,
-      '&:hover, &:focus:hover': {
-        background: colors.blueberry400,
+      [buttonStencil.vars.background]: brand.primary.base,
+      [buttonStencil.vars.border]: brand.primary.base,
+      [systemIconStencil.vars.color]: system.color.fg.inverse,
+
+      '&:first-of-type': {
+        borderInlineStartColor: brand.primary.base,
+      },
+
+      '&:disabled, &.disabled': {
+        [buttonStencil.vars.background]: system.color.bg.alt.softer,
+        [buttonStencil.vars.border]: system.color.border.container,
+        [systemIconStencil.vars.color]: system.color.icon.soft,
       },
     },
-    '&:focus': {
-      borderRadius: borderRadius.m,
+
+    '&:focus-visible, &.focus': {
+      borderRadius: system.shape.x1,
       zIndex: 1,
-      animation: 'none', // reset focusRing animation
-      transition: 'all 120ms, border-radius 1ms',
-      ...mouseFocusBehavior({
-        '&': {
-          borderRadius: borderRadius.zero,
-          '&:first-of-type': {
-            borderRadius: `${borderRadius.m} 0 0 ${borderRadius.m}`,
-          },
-          '&:last-of-type': {
-            borderRadius: `0 ${borderRadius.m} ${borderRadius.m} 0`,
-          },
-        },
-      }),
+      animation: 'none',
+      transition: 'all 120ms border-radius 1ms',
     },
   },
-  ({theme}) => ({
-    '[aria-pressed="true"]': {
-      borderColor: theme.canvas.palette.primary.main,
-      '&:hover, &:focus:hover': {
-        background: theme.canvas.palette.primary.main,
+  modifiers: {
+    segmentedControlButtonSize: {
+      small: {
+        width: system.space.x8,
+        height: system.space.x8,
+      },
+      medium: {
+        width: system.space.x10,
+        height: system.space.x10,
+      },
+      large: {
+        width: calc.add(system.space.x10, system.space.x2),
+        height: calc.add(system.space.x10, system.space.x2),
       },
     },
-  }),
-  ({size}: ButtonContainerProps) => ({
-    ...getSizeStyles(size),
-  })
-);
+  },
+});
 
 export interface SegmentedControlButtonProps extends ButtonContainerProps {
   toggled?: boolean;
@@ -113,17 +91,18 @@ export const SegmentedControlButton = createComponent('button')({
   displayName: 'Button',
   Component: ({value, icon, toggled, ...props}: SegmentedControlButtonProps, ref, Element) => {
     return (
-      <StyledButton
+      <BaseButton
         as={Element}
+        ref={ref}
         aria-pressed={toggled}
         value={value}
-        colors={getIconButtonColors(toggled)}
-        fillIcon={toggled}
-        ref={ref}
-        {...props}
+        {...handleCsProp(
+          props,
+          segmentedControlButtonStencil({segmentedControlButtonSize: props.size || 'medium'})
+        )}
       >
         <BaseButton.Icon size={props.size || 'large'} icon={icon} />
-      </StyledButton>
+      </BaseButton>
     );
   },
 });

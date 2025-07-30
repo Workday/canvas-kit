@@ -1,10 +1,12 @@
 import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
 import * as SearchFormStories from './SearchForm.stories';
 import {Basic} from './examples/Basic';
+import {Collapsed} from './examples/Collapsed';
 import {CustomTheme} from './examples/CustomTheme';
 import {Grow} from './examples/Grow';
 import {RTL} from './examples/RTL';
 import {Theming} from './examples/Theming';
+import {CustomStyles} from './examples/CustomStyles';
 
 <Meta of={SearchFormStories} />
 
@@ -56,6 +58,18 @@ Below is a table of attributes that can be supplied to `SearchForm`:
 additional configuration.
 
 <ExampleCodeBlock code={RTL} />
+
+### Collapsed
+
+<ExampleCodeBlock code={Collapsed} />
+
+### Custom Styles
+
+You can apply custom styles to the component via the `cs` prop. The example below uses CSS Variables and [createStencil](https://workday.github.io/canvas-kit/?path=/docs/styling-how-to-customize-styles--docs#stencils) to create a custom style for the `SearchForm` component.
+
+<ExampleCodeBlock code={CustomStyles} />
+
+Learn more in our [Styling](https://workday.github.io/canvas-kit/?path=/docs/styling-how-to-customize-styles--docs) docs.
 
 ## Component API
 
