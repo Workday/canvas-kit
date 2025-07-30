@@ -28,11 +28,11 @@ export const Variants = () => {
           <StatusIndicator.Label>Lorem ipsum dolor</StatusIndicator.Label>
           <StatusIndicator.Icon icon={uploadCloudIcon} />
         </StatusIndicator>
-        <StatusIndicator variant="primary">
+        <StatusIndicator variant="info">
           <StatusIndicator.Label>Lorem ipsum dolor </StatusIndicator.Label>
           <StatusIndicator.Icon icon={uploadCloudIcon} />
         </StatusIndicator>
-        <StatusIndicator variant="success">
+        <StatusIndicator variant="positive">
           <StatusIndicator.Label>Lorem ipsum dolor</StatusIndicator.Label>
           <StatusIndicator.Icon icon={uploadCloudIcon} />
         </StatusIndicator>
@@ -54,11 +54,11 @@ export const Variants = () => {
           <StatusIndicator.Label>Lorem ipsum dolor</StatusIndicator.Label>
           <StatusIndicator.Icon icon={uploadCloudIcon} />
         </StatusIndicator>
-        <StatusIndicator emphasis="high" variant="primary">
+        <StatusIndicator emphasis="high" variant="info">
           <StatusIndicator.Label>Lorem ipsum dolor </StatusIndicator.Label>
           <StatusIndicator.Icon icon={uploadCloudIcon} />
         </StatusIndicator>
-        <StatusIndicator emphasis="high" variant="success">
+        <StatusIndicator emphasis="high" variant="positive">
           <StatusIndicator.Label>Lorem ipsum dolor</StatusIndicator.Label>
           <StatusIndicator.Icon icon={uploadCloudIcon} />
         </StatusIndicator>

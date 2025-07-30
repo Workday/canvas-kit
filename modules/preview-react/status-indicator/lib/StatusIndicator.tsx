@@ -13,35 +13,35 @@ import {StatusIndicatorLabel} from './StatusIndicatorLabel';
  * `StatusIndicatorProps['variant']` instead.
  */
 export type StatusIndicatorVariant =
+  | 'info'
+  | 'neutral'
+  | 'caution'
+  | 'positive'
+  | 'critical'
+  | 'ai'
+  | 'transparent'
   | 'blue'
   | 'green'
   | 'orange'
   | 'red'
-  | 'gray'
-  | 'primary'
-  | 'neutral'
-  | 'caution'
-  | 'success'
-  | 'critical'
-  | 'ai'
-  | 'transparent';
+  | 'gray';
 
 export interface StatusIndicatorProps
   extends ExtractProps<typeof Flex, never>,
     Omit<ExtractStencilProps<typeof statusIndicatorStencil>, 'variant'> {
   /**
    * Defines the color of the `StatusIndicator`.
-   * * `primary` | `blue` - Uses the primary brand color and used for many status types
-   * * `success` | `green` - Uses the success brand color and is used for positive statuses
-   * * `caution` | `orange` - Uses the caution brand color and is used for warnings or required actions
-   * * `critical` | `red` - Uses the error brand color and is used for critical statuses
-   * * `neutral` | `gray` - Uses the neutral brand color and generally doesn't have positive or negative connotations
+   * * `info` | `blue` - Uses the info system color and is used for informational status indications
+   * * `positive` | `green` - Uses the positive system color and is used for positive status indications
+   * * `caution` | `orange` - Uses the caution system color and is used for warnings or required actions
+   * * `critical` | `red` - Uses the error system color and is used for critical or negative status indications
+   * * `neutral` | `gray` - Uses the neutral system color and generally doesn't have positive or negative connotations
    * * `illuminate` - Uses the AI system color and is used for AI generated content
-   * * `transparent` - Uses the transparent brand color and is used for overlays on top of images or videos
+   * * `transparent` - Uses the transparent system color and is used for overlays on top of images or videos
    *
    * @default 'neutral'
    */
-  variant: StatusIndicatorVariant;
+  variant?: StatusIndicatorVariant;
   /**
    * Children of the `StatusIndicator`. Can contain a `StatusIndicator.Label` and optionally a `StatusIndicator.Icon`.
    */
@@ -50,8 +50,8 @@ export interface StatusIndicatorProps
 
 // TODO: Remove this in a future release
 const deprecatedVariantsMap = {
-  blue: 'primary',
-  green: 'success',
+  blue: 'info',
+  green: 'positive',
   orange: 'caution',
   red: 'critical',
   gray: 'neutral',
@@ -72,36 +72,36 @@ const statusIndicatorStencil = createStencil({
   modifiers: {
     /**
      * Defines the color of the `StatusIndicator`.
-     * * `primary` | `blue` - Uses the primary brand color and used for many status types
-     * * `success` | `green` - Uses the success brand color and is used for positive statuses
-     * * `caution` | `orange` - Uses the caution brand color and is used for warnings or required actions
-     * * `critical` | `red` - Uses the error brand color and is used for critical statuses
-     * * `neutral` | `gray` - Uses the neutral brand color and generally doesn't have positive or negative connotations
+     * * `info` | `blue` - Uses the info system color and is used for informational status indications
+     * * `positive` | `green` - Uses the positive system color and is used for positive status indications
+     * * `caution` | `orange` - Uses the caution system color and is used for warnings or required actions
+     * * `critical` | `red` - Uses the error system color and is used for critical or negative status indications
+     * * `neutral` | `gray` - Uses the neutral system color and generally doesn't have positive or negative connotations
      * * `illuminate` - Uses the AI system color and is used for AI generated content
-     * * `transparent` - Uses the transparent brand color and is used for overlays on top of images or videos
+     * * `transparent` - Uses the transparent system color and is used for overlays on top of images or videos
      *
      * @default 'neutral'
      */
     variant: {
-      primary: {
-        color: system.color.static.blue.strong,
-        backgroundColor: system.color.static.blue.soft,
+      info: {
+        color: system.color.fg.info.strong,
+        backgroundColor: system.color.bg.info.softer,
       },
-      success: {
-        color: system.color.static.green.strong,
-        backgroundColor: system.color.static.green.softer,
+      positive: {
+        color: system.color.fg.positive.strong,
+        backgroundColor: system.color.fg.positive.softer,
       },
       caution: {
-        color: system.color.static.amber.stronger,
-        backgroundColor: system.color.static.amber.softer,
+        color: system.color.fg.caution.soft,
+        backgroundColor: system.color.bg.caution.softer,
       },
       critical: {
-        color: system.color.static.red.strong,
-        backgroundColor: system.color.static.red.softer,
+        color: system.color.fg.critical.strong,
+        backgroundColor: system.color.bg.critical.softer,
       },
       neutral: {
-        color: system.color.static.gray.strong,
-        backgroundColor: system.color.static.gray.softer,
+        color: system.color.fg.muted.strong,
+        backgroundColor: system.color.bg.alt.default,
       },
       ai: {
         color: system.color.fg.ai,
@@ -134,22 +134,22 @@ const statusIndicatorStencil = createStencil({
   compound: [
     {
       modifiers: {
-        variant: 'primary',
+        variant: 'info',
         emphasis: 'high',
       },
       styles: {
-        backgroundColor: system.color.static.blue.default,
-        color: system.color.static.white,
+        backgroundColor: system.color.bg.info.default,
+        color: system.color.fg.inverse,
       },
     },
     {
       modifiers: {
-        variant: 'success',
+        variant: 'positive',
         emphasis: 'high',
       },
       styles: {
-        backgroundColor: system.color.static.green.default,
-        color: system.color.static.white,
+        backgroundColor: system.color.bg.positive.default,
+        color: system.color.fg.inverse,
       },
     },
     {
@@ -158,8 +158,8 @@ const statusIndicatorStencil = createStencil({
         emphasis: 'high',
       },
       styles: {
-        backgroundColor: system.color.static.amber.default,
-        color: system.color.static.black,
+        backgroundColor: system.color.bg.caution.default,
+        color: system.color.fg.caution.strong,
       },
     },
     {
@@ -168,8 +168,8 @@ const statusIndicatorStencil = createStencil({
         emphasis: 'high',
       },
       styles: {
-        backgroundColor: system.color.static.red.default,
-        color: system.color.static.white,
+        backgroundColor: system.color.bg.critical.default,
+        color: system.color.fg.inverse,
       },
     },
     {
@@ -178,8 +178,8 @@ const statusIndicatorStencil = createStencil({
         emphasis: 'high',
       },
       styles: {
-        backgroundColor: system.color.static.gray.default,
-        color: system.color.static.white,
+        backgroundColor: system.color.bg.muted.default,
+        color: system.color.fg.inverse,
       },
     },
   ],

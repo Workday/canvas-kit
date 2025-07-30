@@ -30,10 +30,10 @@ describe('updateStatusIndicatorPreview', () => {
     const expected = stripIndent`
       import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator'
       <>
-        <StatusIndicator variant="primary">
+        <StatusIndicator variant="info">
           <StatusIndicator.Label>Blue</StatusIndicator.Label>
         </StatusIndicator>
-        <StatusIndicator variant="success">
+        <StatusIndicator variant="positive">
           <StatusIndicator.Label>Green</StatusIndicator.Label>
         </StatusIndicator>
         <StatusIndicator variant="caution">
@@ -78,10 +78,10 @@ describe('updateStatusIndicatorPreview', () => {
     const expected = stripIndent`
       import {StatusIndicator} from '@workday/canvas-kit-preview-react'
       <>
-        <StatusIndicator variant="primary">
+        <StatusIndicator variant="info">
           <StatusIndicator.Label>Blue</StatusIndicator.Label>
         </StatusIndicator>
-        <StatusIndicator variant="success">
+        <StatusIndicator variant="positive">
           <StatusIndicator.Label>Green</StatusIndicator.Label>
         </StatusIndicator>
         <StatusIndicator variant="caution">
@@ -129,10 +129,10 @@ describe('updateStatusIndicatorPreview', () => {
     const expected = stripIndent`
       import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator'
       <>
-        <StatusIndicator variant="primary">
+        <StatusIndicator variant="info">
           <StatusIndicator.Label>Blue</StatusIndicator.Label>
         </StatusIndicator>
-        <StatusIndicator variant="success">
+        <StatusIndicator variant="positive">
           <StatusIndicator.Label>Green</StatusIndicator.Label>
         </StatusIndicator>
         <StatusIndicator variant="caution">

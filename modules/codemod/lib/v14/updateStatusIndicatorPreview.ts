@@ -9,8 +9,8 @@ const packages = [
 const packageImports = ['StatusIndicator'];
 
 const variantMap = {
-  blue: 'primary',
-  green: 'success',
+  blue: 'info',
+  green: 'positive',
   orange: 'caution',
   red: 'critical',
   gray: 'neutral',
