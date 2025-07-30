@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.11](https://github.com/Workday/canvas-kit/releases/tag/v13.2.11) (2025-07-30)
+
+### Documentation
+
+- docs: Adding new advanced table example and Accessibility Guides ([#3375](https://github.com/Workday/canvas-kit/pull/3375)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton, manuel.carrera)
+
+
 ## [v13.2.10](https://github.com/Workday/canvas-kit/releases/tag/v13.2.10) (2025-07-29)
 
 ### Components
