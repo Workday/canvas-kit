@@ -3,6 +3,105 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.10](https://github.com/Workday/canvas-kit/releases/tag/v13.2.10) (2025-07-29)
+
+### Components
+
+- fix(TabsItem): Added styles for Windows high contrast ([#3418](https://github.com/Workday/canvas-kit/pull/3418)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton)
+
+
+## [v13.2.9](https://github.com/Workday/canvas-kit/releases/tag/v13.2.9) (2025-07-28)
+
+### Codemods
+
+- chore: Fix codemod to prevent not relevant files ([#3416](https://github.com/Workday/canvas-kit/pull/3416)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v13.2.8](https://github.com/Workday/canvas-kit/releases/tag/v13.2.8) (2025-07-28)
+
+### Documentation
+
+- docs: Update codemod installation script ([#3413](https://github.com/Workday/canvas-kit/pull/3413)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v13.2.7](https://github.com/Workday/canvas-kit/releases/tag/v13.2.7) (2025-07-24)
+
+### Documentation
+
+- fix: Fix styling docs to be compatible with site ([#3408](https://github.com/Workday/canvas-kit/pull/3408)) ([@jamesfan](https://github.com/jamesfan))
+
+
+## [v13.2.6](https://github.com/Workday/canvas-kit/releases/tag/v13.2.6) (2025-07-24)
+
+### Documentation
+
+- fix: Spec tables extend through container size ([#3405](https://github.com/Workday/canvas-kit/pull/3405)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
+## [v12.6.16](https://github.com/Workday/canvas-kit/releases/tag/v12.6.16) (2025-07-24)
+
+### Documentation
+
+- fix: Spec tables extend through container size ([#3405](https://github.com/Workday/canvas-kit/pull/3405)) ([@josh-bagwell](https://github.com/josh-bagwell))
+## [v13.2.5](https://github.com/Workday/canvas-kit/releases/tag/v13.2.5) (2025-07-23)
+
+### Documentation
+
+- fix: Fix docs and examples for Avatar and Badge ([#3402](https://github.com/Workday/canvas-kit/pull/3402)) ([@jamesfan](https://github.com/jamesfan))
+
+
+## [v13.2.4](https://github.com/Workday/canvas-kit/releases/tag/v13.2.4) (2025-07-23)
+
+### Documentation
+
+- fix: Update href link in styles docs ([#3400](https://github.com/Workday/canvas-kit/pull/3400)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v13.2.3](https://github.com/Workday/canvas-kit/releases/tag/v13.2.3) (2025-07-22)
+
+### Infrastructure
+
+- fix: Add focusRing plugin back to style transform ([#3397](https://github.com/Workday/canvas-kit/pull/3397)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v13.2.2](https://github.com/Workday/canvas-kit/releases/tag/v13.2.2) (2025-07-18)
+
+### Infrastructure
+
+- fix: Update styling transform to use deterministic hashes ([#3356](https://github.com/Workday/canvas-kit/pull/3356)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v13.2.1](https://github.com/Workday/canvas-kit/releases/tag/v13.2.1) (2025-07-17)
+
+### Components
+
+- fix: Add pointerEvents style to svg in BaseButtonComponent ([#3388](https://github.com/Workday/canvas-kit/pull/3388)) ([@selenajosephine](https://github.com/selenajosephine), Selena D)
+
+
+## [v12.6.15](https://github.com/Workday/canvas-kit/releases/tag/v12.6.15) (2025-07-17)
+
+### Components
+
+- fix: Add pointerEvents style to svg in BaseButtonComponent ([#3388](https://github.com/Workday/canvas-kit/pull/3388)) ([@selenajosephine](https://github.com/selenajosephine), Selena D)
+## [v13.2.0](https://github.com/Workday/canvas-kit/releases/tag/v13.2.0) (2025-07-16)
+
+
+
+
+## [v13.1.7](https://github.com/Workday/canvas-kit/releases/tag/v13.1.7) (2025-07-16)
+
+### Components
+
+- fix: Update `useUniqueId` to use `React.useId` if available ([#3383](https://github.com/Workday/canvas-kit/pull/3383)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v13.1.6](https://github.com/Workday/canvas-kit/releases/tag/v13.1.6) (2025-07-14)
+
+### Components
+
+- fix(tabs): Apply fade more appropriately for mobile ([#3380](https://github.com/Workday/canvas-kit/pull/3380)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v13.1.5](https://github.com/Workday/canvas-kit/releases/tag/v13.1.5) (2025-07-11)
 
 ### Documentation

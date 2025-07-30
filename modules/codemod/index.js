@@ -88,6 +88,13 @@ const {
       describe: chalk.gray('The path to execute the transform in (recursively).'),
     });
   })
+  .command('v13.2 [path]', chalk.gray('Canvas React Tokens > Canvas Tokens Web v2'), yargs => {
+    yargs.positional('path', {
+      type: 'string',
+      default: '.',
+      describe: chalk.gray('The path to execute the transform in (recursively).'),
+    });
+  })
   .demandCommand(1, chalk.red.bold('You must provide a transform to apply.'))
   .strictCommands()
   .fail((msg, err, yargs) => {

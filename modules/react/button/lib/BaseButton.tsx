@@ -248,6 +248,11 @@ export const buttonStencil = createStencil({
         outlineOffset: 0,
       },
     },
+    // prevent ReactDOM 19 SVG issue https://github.com/Workday/canvas-kit/issues/3357.
+    // Can be removed when the ReactDOM 19 issue is fixed.
+    svg: {
+      pointerEvents: 'none',
+    },
   }),
   modifiers: {
     /**
