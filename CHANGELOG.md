@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.6.18](https://github.com/Workday/canvas-kit/releases/tag/v12.6.18) (2025-07-31)
+
+### Utilities
+
+- fix: Support unwrapped CSS variables in `injectGlobal` ([#3424](https://github.com/Workday/canvas-kit/pull/3424)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v12.6.17](https://github.com/Workday/canvas-kit/releases/tag/v12.6.17) (2025-07-30)
 
 ### Components
