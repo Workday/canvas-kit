@@ -21,6 +21,12 @@ const transform: Transform = (file, api) => {
       importDeclaration = {...importDeclaration, ...filterOutImports(nodePath)};
     });
 
+  if (
+    !Object.values(importDeclaration).some(value => value === 'space' || value === 'borderRadius')
+  ) {
+    return root.toSource();
+  }
+
   root
     .find(j.CallExpression, {
       callee: {
