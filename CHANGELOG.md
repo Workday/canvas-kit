@@ -3,6 +3,48 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.6.17](https://github.com/Workday/canvas-kit/releases/tag/v12.6.17) (2025-07-30)
+
+### Components
+
+- fix: Use dvh in Popup.Card height calculation ([#3419](https://github.com/Workday/canvas-kit/pull/3419)) ([@JaredMaione](https://github.com/JaredMaione))
+
+
+## [v12.6.16](https://github.com/Workday/canvas-kit/releases/tag/v12.6.16) (2025-07-24)
+
+### Documentation
+
+- fix: Spec tables extend through container size ([#3405](https://github.com/Workday/canvas-kit/pull/3405)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
+## [v12.6.15](https://github.com/Workday/canvas-kit/releases/tag/v12.6.15) (2025-07-17)
+
+### Components
+
+- fix: Add pointerEvents style to svg in BaseButtonComponent ([#3388](https://github.com/Workday/canvas-kit/pull/3388)) ([@selenajosephine](https://github.com/selenajosephine), Selena D)
+
+
+## [v12.6.14](https://github.com/Workday/canvas-kit/releases/tag/v12.6.14) (2025-06-17)
+
+### Documentation
+
+- docs(form-field): Update SymbolDoc link ([#3338](https://github.com/Workday/canvas-kit/pull/3338)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v12.6.13](https://github.com/Workday/canvas-kit/releases/tag/v12.6.13) (2025-06-17)
+
+### Infrastructure
+
+- chore: Update chromatic action settings ([#3345](https://github.com/Workday/canvas-kit/pull/3345)) ([@RayRedGoose](https://github.com/RayRedGoose), [@mannycarrera4](https://github.com/mannycarrera4))
+
+
+## [v12.6.12](https://github.com/Workday/canvas-kit/releases/tag/v12.6.12) (2025-06-12)
+
+### Components
+
+- fix(multi-select): Support items update in selection pills ([#3334](https://github.com/Workday/canvas-kit/pull/3334)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v12.6.11](https://github.com/Workday/canvas-kit/releases/tag/v12.6.11) (2025-05-27)
 
 ### Components

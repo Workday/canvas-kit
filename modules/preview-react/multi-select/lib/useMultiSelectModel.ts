@@ -57,7 +57,7 @@ export const useMultiSelectModel = createModelHook({
         )
         .filter(item => item) as Item<any>[],
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [model.state.selectedIds]
+    [model.state.selectedIds, model.state.items]
   );
   cachedSelectedRef.current = cachedSelected;
 
