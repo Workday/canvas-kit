@@ -4,6 +4,9 @@ import {ContextMenu} from './examples/ContextMenu';
 import {Icons} from './examples/Icons';
 import {SelectableMenu} from './examples/SelectableMenu';
 import {Grouping} from './examples/Grouping';
+import {Nested} from './examples/Nested';
+import {NestedDynamic} from './examples/NestedDynamic';
+
 import * as MenuStories from './Menu.stories';
 
 <Meta of={MenuStories} />
@@ -83,6 +86,26 @@ and are not selectable with the keyboard or mouse.
 > doesn't support nested virtualization.
 
 <ExampleCodeBlock code={Grouping} />
+
+### Nested
+
+Menus support nesting. If you only have a few items and not very many nesting levels, the menu can
+be defined statically using JSX. A submenu is defined using the `<Menu.Submenu>` component. The
+`Submenu` is implemented as a special `Menu` subcomponent. The API of the submenu is the same as the
+`Menu` except the submenu's target is also a menu item. The component is named `TargetItem` to
+indicate this dual role.
+
+<ExampleCodeBlock code={Nested} />
+
+### Nested Dynamic Items
+
+Menu nesting is simpler with the dynamic API. In this example, a `renderItem` function is defined to
+allow recursive nesting of items using a data structure you define. A submenu will inherit the
+`getId` and `getTextValue` functions of the parent menu. While you can pass a specialize `getId` or
+`getTextValue` function to each submenu, it may be simpler to use the same one for the menu and
+submenus.
+
+<ExampleCodeBlock code={NestedDynamic} />
 
 ## Component API
 

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {TupleValue} from '../../docgen/docTypes';
 import {registerWidget, Value} from '../Value';
 import {RenderContext} from '../widgetUtils';
