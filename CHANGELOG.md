@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.6.17](https://github.com/Workday/canvas-kit/releases/tag/v12.6.17) (2025-07-30)
+
+### Components
+
+- fix: Use dvh in Popup.Card height calculation ([#3419](https://github.com/Workday/canvas-kit/pull/3419)) ([@JaredMaione](https://github.com/JaredMaione))
 ## [v13.2.12](https://github.com/Workday/canvas-kit/releases/tag/v13.2.12) (2025-07-30)
 
 ### Infrastructure
