@@ -384,7 +384,22 @@ transformer.
 
 The `injectGlobal` function re-exports the
 [Emotion CSS injectGlobal](https://emotion.sh/docs/@emotion/css#global-styles) function, but is
-compatible with a custom Emotion instance and is understood by the Static style transformer.
+compatible with a custom Emotion instance and is understood by the Static style transformer. It will also wrap our CSS tokens to ensure you can inject global styles using our CSS variables.
+
+```tsx
+injectGlobal({
+  ...fonts,
+  'html, body': {
+    fontFamily: system.fontFamily.default,
+    margin: 0,
+    minHeight: '100vh',
+    ...system.type.heading.large,
+  },
+  '#root, #root < div': {
+    minHeight: '100vh',
+  },
+});
+```
 
 ## CS Prop
 

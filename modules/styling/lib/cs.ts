@@ -97,7 +97,6 @@ export function wrapProperty<T>(value: T): T {
  * need special processing. An example might be using a CSS variable without a `var()` wrapping.
  */
 export function wrapAllProperties<T extends unknown>(obj: T): T {
-  console.log('wrapAllProperties', obj);
   if (typeof obj === 'object') {
     const converted = {};
     for (const key in obj) {
