@@ -7,6 +7,7 @@ export const defaultCanvasTheme: CanvasTheme = {
   palette: {
     primary: {
       lightest: cssVar(base.blue25),
+      lighter: cssVar(base.blue50),
       light: cssVar(base.blue200),
       main: cssVar(base.blue600),
       dark: cssVar(base.blue700),
@@ -15,15 +16,17 @@ export const defaultCanvasTheme: CanvasTheme = {
     },
     alert: {
       lightest: cssVar(base.amber25),
-      light: cssVar(base.amber50),
+      lighter: cssVar(base.amber50),
+      light: cssVar(base.amber200),
       main: cssVar(base.amber400),
       dark: cssVar(base.amber500),
       darkest: cssVar(base.amber600),
-      contrast: cssVar(base.neutral900),
+      contrast: cssVar(base.neutral950),
     },
     error: {
       lightest: cssVar(base.red25),
-      light: cssVar(base.red100),
+      lighter: cssVar(base.red50),
+      light: cssVar(base.red200),
       main: cssVar(base.red600),
       dark: cssVar(base.red700),
       darkest: cssVar(base.red800),
@@ -31,14 +34,16 @@ export const defaultCanvasTheme: CanvasTheme = {
     },
     success: {
       lightest: cssVar(base.green25),
-      light: cssVar(base.green100),
+      lighter: cssVar(base.green50),
+      light: cssVar(base.green200),
       main: cssVar(base.green600),
       dark: cssVar(base.green700),
       darkest: cssVar(base.green800),
       contrast: cssVar(base.neutral0),
     },
     neutral: {
-      lightest: cssVar(base.slate50),
+      lightest: cssVar(base.slate25),
+      lighter: cssVar(base.slate50),
       light: cssVar(base.slate200),
       main: cssVar(base.slate600),
       dark: cssVar(base.slate700),
