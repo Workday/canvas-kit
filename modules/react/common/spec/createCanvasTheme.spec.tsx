@@ -13,6 +13,7 @@ describe('createCanvasTheme', () => {
   test('calling with a custom palette should replace that palette', () => {
     const palette = {
       lightest: 'orange',
+      lighter: 'orange',
       light: 'orange',
       main: 'orange',
       dark: 'orange',
@@ -45,6 +46,7 @@ describe('createCanvasTheme', () => {
     const expected = {...defaultCanvasTheme};
     expected.palette.primary = {
       lightest: '#ffff7d',
+      lighter: '#ffe2a4',
       light: '#ffd64a',
       main: 'orange',
       dark: '#c67600',
