@@ -9,6 +9,7 @@ export interface AvatarNameProps extends CSProps {
 export const avatarNameStencil = createStencil({
   base: {
     textTransform: 'uppercase',
+    cursor: 'default',
   },
 });
 
