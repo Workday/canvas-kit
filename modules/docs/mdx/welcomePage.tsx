@@ -1,5 +1,5 @@
 // @ts-ignore: Cannot find module error
-import headerImage from './CK-banner-2.png';
+import headerImage from './ck-banner.jpg';
 import {Flex, Grid, Box} from '@workday/canvas-kit-react/layout';
 import {InstallBlock} from './installBlock';
 import {Text, Heading} from '@workday/canvas-kit-react/text';
@@ -35,11 +35,6 @@ const imageStyles = createStyles({
   height: 'auto',
 });
 
-const borderStyles = createStyles({
-  borderBottom: `1px solid ${base.blue900}`,
-  marginBottom: system.space.x2,
-});
-
 const gridStyles = createStyles({
   maxHeight: 320,
   gridTemplateRows: '1fr 1fr 2fr 1fr',
@@ -56,19 +51,16 @@ export const WelcomePage = () => {
     <div className="sb-unstyled">
       <div className={parentFlexStyles}>
         <Box cs={{overflow: 'hidden', position: 'relative'}}>
-          <Flex cs={{flexDirection: 'row', position: 'absolute', top: '45%', left: '10%'}}>
-            <Text typeLevel="title.medium" cs={bannerTextStyles}>
-              Canvas Kit
-            </Text>
-            <Text typeLevel="title.medium" cs={[bannerTextStyles, versionStyles]}>
-              v{version}
-            </Text>
-          </Flex>
           <img
             src={headerImage}
             alt="banner with canvas kit logo and version"
             className={imageStyles}
           />
+          <Flex cs={{flexDirection: 'row', position: 'absolute', top: '45%', right: '5%'}}>
+            <Text typeLevel="title.medium" cs={[bannerTextStyles, versionStyles]}>
+              v{version}
+            </Text>
+          </Flex>
         </Box>
         <Text typeLevel="body.medium">
           This project provides a set of components for the Workday Canvas Design System that can be
@@ -80,7 +72,7 @@ export const WelcomePage = () => {
             Workday Design Principles.
           </ExternalHyperlink>
         </Text>
-        <Heading size="medium" className={borderStyles}>
+        <Heading size="medium">
           Quick Links
         </Heading>
         <Grid
@@ -148,7 +140,7 @@ export const WelcomePage = () => {
             </Grid.Item>
           </Grid>
         </Grid>
-        <Heading size="medium" className={borderStyles}>
+        <Heading size="medium">
           Installation
         </Heading>
         <Text>
