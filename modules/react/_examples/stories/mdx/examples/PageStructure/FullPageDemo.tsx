@@ -5,6 +5,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 import {GlobalHeader} from './GlobalHeader';
 import {SideBarContent} from './SidePanelWithNavigation';
+import {Basic as Breadcrumbs} from './../../../../../breadcrumbs/stories/examples/Basic';
 
 const gridLayoutStyles = createStyles({
   gridTemplateAreas:
@@ -20,6 +21,11 @@ const regionStyles = createStyles({
   padding: system.space.x4,
 });
 
+const verticalFlexStyles = createStyles({
+  flexDirection: 'column',
+  gap: system.space.x4,
+});
+
 const headingStyles = createStyles({
   margin: system.space.zero,
 });
@@ -31,12 +37,13 @@ export const FullPageDemo = () => {
         <GlobalHeader notifications={2} />
       </Grid>
       <Grid as="nav" gridArea="SideBar" cs={regionStyles}>
-        <Flex flexDirection="column">
+        <Flex cs={verticalFlexStyles}>
           <SideBarContent />
         </Flex>
       </Grid>
       <Grid as="main" gridArea="BodyContent" cs={regionStyles}>
-        <Flex flexDirection="column" gap={system.space.x4}>
+        <Flex cs={verticalFlexStyles}>
+          <Breadcrumbs />
           <Heading as="h1" size="large" cs={headingStyles}>
             Heading Level 1
           </Heading>
