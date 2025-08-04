@@ -10,6 +10,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - chore: Fix form-data vulnerability ([#3426](https://github.com/Workday/canvas-kit/pull/3426)) ([@NicholasBoll](https://github.com/NicholasBoll))
 
 
+## [v12.6.18](https://github.com/Workday/canvas-kit/releases/tag/v12.6.18) (2025-07-31)
+
+### Utilities
+
+- fix: Support unwrapped CSS variables in `injectGlobal` ([#3424](https://github.com/Workday/canvas-kit/pull/3424)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
 ## [v13.2.13](https://github.com/Workday/canvas-kit/releases/tag/v13.2.13) (2025-07-31)
 
 ### Components
