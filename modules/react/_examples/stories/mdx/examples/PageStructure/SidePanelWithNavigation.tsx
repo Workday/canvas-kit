@@ -5,7 +5,7 @@ import {Flex} from '@workday/canvas-kit-react/layout';
 import {Heading, Subtext, Text} from '@workday/canvas-kit-react/text';
 import {Expandable} from '@workday/canvas-kit-react/expandable';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {Hyperlink, TertiaryButton} from '@workday/canvas-kit-react/button';
+import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {Menu} from '@workday/canvas-kit-react/menu';
 import {birthdayIcon, checkIcon, ribbonIcon} from '@workday/canvas-system-icons-web';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
@@ -32,6 +32,12 @@ const stylesOverride = {
     positio: 'relative',
     backgroundColor: base.frenchVanilla100,
   }),
+  heading: createStyles({
+    margin: system.space.zero,
+  }),
+  toggleBtn: createStyles({
+    top: system.space.zero,
+  }),
   accordionContainer: createStyles({
     flexDirection: 'column',
     rowGap: system.space.zero,
@@ -47,8 +53,12 @@ const stylesOverride = {
   listContainer: createStyles({
     listStyle: 'none',
     padding: system.space.x4,
-    paddingTop: system.space.x16,
+  }),
+  compactListContainer: createStyles({
+    listStyle: 'none',
+    padding: system.space.x4,
     flexDirection: 'column',
+    marginTop: system.space.x8,
   }),
   links: createStyles({
     textDecoration: 'none',
@@ -127,7 +137,7 @@ const IconButtonMenu = ({config}) => {
 
 const CompactView = () => {
   return (
-    <Flex as="ul" cs={stylesOverride.listContainer}>
+    <Flex as="ul" cs={stylesOverride.compactListContainer}>
       <Flex.Item as="li">
         <IconButtonMenu config={data.bestsellers} />
       </Flex.Item>
@@ -151,18 +161,29 @@ const ExpandedView = () => {
   );
 };
 
-export const WithNavigation = () => {
+export const SideBarContent = () => {
   const {expanded, panelProps, labelProps, controlProps} = useSidePanel();
 
   return (
-    <Flex cs={stylesOverride.navContainer}>
-      <SidePanel as="nav" {...panelProps}>
-        <Heading size="small" {...labelProps} hidden={!expanded ? true : undefined}>
-          Cake or Death Bakery
-        </Heading>
-        <SidePanel.ToggleButton {...controlProps} />
-        {expanded ? <ExpandedView /> : <CompactView />}
-      </SidePanel>
+    <SidePanel as="div" touched={panelProps.touched} expanded={panelProps.expanded}>
+      <Heading
+        size="small"
+        cs={stylesOverride.heading}
+        {...labelProps}
+        hidden={!expanded ? true : undefined}
+      >
+        Cake or Death Bakery
+      </Heading>
+      <SidePanel.ToggleButton cs={stylesOverride.toggleBtn} {...controlProps} />
+      {expanded ? <ExpandedView /> : <CompactView />}
+    </SidePanel>
+  );
+};
+
+export const WithNavigation = () => {
+  return (
+    <Flex as="nav" cs={stylesOverride.navContainer}>
+      <SideBarContent />
     </Flex>
   );
 };
