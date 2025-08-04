@@ -5,9 +5,8 @@ import mdxDoc from './CountBadge.mdx';
 import {CountBadge} from '@workday/canvas-kit-react/badge';
 
 import {Basic as BasicExample} from './examples/Basic';
-import {BasicWithLowEmphasis as BasicWithLowEmphasisExample} from './examples/BasicWithLowEmphasis';
+import {Emphasis as EmphasisExample} from './examples/Emphasis';
 import {Inverse as InverseExample} from './examples/Inverse';
-import {InverseWithLowEmphasis as InverseWithLowEmphasisExample} from './examples/InverseWithLowEmphasis';
 import {CustomLimit as CustomLimitExample} from './examples/CustomLimit';
 import {NotificationBadge as NotificationBadgeExample} from './examples/NotificationBadge';
 
@@ -28,16 +27,12 @@ export const Basic: Story = {
   render: BasicExample,
 };
 
-export const BasicWithLowEmphasis: Story = {
-  render: BasicWithLowEmphasisExample,
+export const Emphasis: Story = {
+  render: EmphasisExample,
 };
 
 export const Inverse: Story = {
   render: InverseExample,
-};
-
-export const InverseWithLowEmphasis: Story = {
-  render: InverseWithLowEmphasisExample,
 };
 
 export const CustomLimit: Story = {
