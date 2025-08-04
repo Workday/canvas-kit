@@ -13,11 +13,12 @@ any questions.
 - [Codemod](#codemod)
   - [Instructions](#instructions)
 - [Component Updates](#component-updates)
-  - [Styling Changes](#styling-changes)
+  - [Branding Changes](#branding-changes)
   - [Card](#card)
   - [Count Badge](#count-badge)
   - [Expandable](#expandable)
   - [Hyperlink & ExternalHyperlink](#hyperlink-and-externalhyperlink)
+  - [Loading Dots](#loading-dots)
   - [SearchForm](#search-form)
 - [Removals](#removals)
   - [Menu (preview)](#menu-preview)
@@ -90,19 +91,16 @@ yarn remove @workday/canvas-kit-codemod
 
 ## Component Updates
 
-### Styling Changes 💅
+### Branding Changes 💅
 
-Several components have been refactored to use our Canvas tokens and styling API. The React
-interface has not changed, but Canvas Tokens are now used for dynamic properties.
-
-> **Note:** These components also support our cs prop for styling. Learn more about styling with cs
-> in our documentation.
+Several components have been refactored to reflect our new brand direction. Most of these changes revolve around the use of our new bran colors.
 
 The following components have been updated:
 
 - `Breadcrumbs` [#3270](https://github.com/Workday/canvas-kit/pull/3270)
-- `ColorPicker` (main) [#3307](https://github.com/Workday/canvas-kit/pull/3307)
+- `ColorPicker` (Main) [#3307](https://github.com/Workday/canvas-kit/pull/3307)
 - `ColorPicker` (preview) [#3307](https://github.com/Workday/canvas-kit/pull/3307)
+- `LoadingDots` (Main) [#3393](https://github.com/Workday/canvas-kit/pull/3393)
 - `Pagination` (Preview) [#3300](https://github.com/Workday/canvas-kit/pull/3300)
 - `SearchForm` (Labs) [#3303](https://github.com/Workday/canvas-kit/pull/3303)
 - `SegmentedControl` (Main) [#3278](https://github.com/Workday/canvas-kit/pull/3278)
@@ -252,6 +250,17 @@ These changes are only **visual** and should not affect the functionality of the
 ```
 
 > **Note:** Only use the `standalone` or `standalone-inverse` variant in cases where the `<HyperLink>` and `<ExternalHyperlink>` are used outside the context of body text.
+
+### Loading Dots
+
+**PR:** [#3393](https://github.com/Workday/canvas-kit/pull/3393)
+
+- We've updated the colors to match brand refresh. The default color changes from `system.color.bg.alt.strong` to `system.color.bg.muted.strong`.
+- `LoadingDots` now has a `inverse` variant. Use this variant when the Loading Dots are on a dark background or image.
+
+```tsx
+<LoadingDots variant="inverse" />
+```
 
 ### Search Form 🚨
 
