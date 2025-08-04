@@ -1,7 +1,9 @@
 import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
 
 import {Basic} from './examples/Basic';
+import {BasicWithLowEmphasis} from './examples/BasicWithLowEmphasis';
 import {Inverse} from './examples/Inverse';
+import {InverseWithLowEmphasis} from './examples/InverseWithLowEmphasis';
 import {CustomLimit} from './examples/CustomLimit';
 import {NotificationBadge} from './examples/NotificationBadge';
 
@@ -26,21 +28,34 @@ Accessibility section below.
 
 ### Basic
 
-The default variant is recommended for most scenarios. It supports two emphasis levels: `high`
-(default), which should be used to highlight badges representing important or primary information,
-and `low`, which is intended for less prominent or secondary indications.
+Use the default `CountBadge` variant for most situations. The default `high` emphasis is ideal for
+drawing attention to important or primary information.
 
 <ExampleCodeBlock code={Basic} />
 
+### Basic Low Emphasis
+
+Select the `low` emphasis option for less prominent or secondary information. This is useful when
+you want the badge to be visible but not distracting.
+
+<ExampleCodeBlock code={BasicWithLowEmphasis} />
+
 ### Inverse
 
-The `inverse` variant should be used when placing the badge on accent or dark backgrounds to ensure
-proper contrast. When using the `inverse` variant with `low` emphasis, use caution: this combination
-is only recommended on backgrounds with
-[a token of 600 or greater](https://workday.github.io/canvas-tokens/?path=/docs/docs-base-tokens--docs)
-to maintain sufficient contrast and readability.
+Apply the `inverse` variant when displaying the badge on dark or accent backgrounds to maintain
+proper contrast and readability. This ensures the badge remains legible in visually dense or colored
+areas.
 
 <ExampleCodeBlock code={Inverse} />
+
+### Inverse Low Emphasis
+
+Combine the `inverse` variant with `low` emphasis for subtle indicators on dark or accent
+backgrounds. Only use this combination on backgrounds with
+[a token of 600 or greater](https://workday.github.io/canvas-tokens/?path=/docs/docs-base-tokens--docs)
+to ensure sufficient contrast and accessibility.
+
+<ExampleCodeBlock code={InverseWithLowEmphasis} />
 
 ### Custom Limit
 

@@ -9,15 +9,6 @@ const containerStyles = createStyles({
   padding: system.space.x4,
 });
 
-export const Basic = () => {
-  return (
-    <div className={containerStyles}>
-      <Text as="strong">High Emphasis</Text>
-      <CountBadge count={427} />
-    </div>
-  );
-};
-
 export const BasicWithLowEmphasis = () => {
   return (
     <div className={containerStyles}>

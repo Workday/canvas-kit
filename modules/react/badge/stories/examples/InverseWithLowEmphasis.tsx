@@ -10,13 +10,13 @@ const containerStyles = createStyles({
   backgroundColor: cssVar(system.color.static.blue.default),
 });
 
-export function Inverse() {
+export function InverseWithLowEmphasis() {
   return (
     <div className={containerStyles}>
       <Text as="strong" variant="inverse">
-        High Emphasis
+        Low Emphasis
       </Text>
-      <CountBadge count={427} variant="inverse" />
+      <CountBadge count={427} variant="inverse" emphasis="low" />
     </div>
   );
 }
