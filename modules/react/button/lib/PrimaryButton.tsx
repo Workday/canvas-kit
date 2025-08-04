@@ -65,7 +65,7 @@ const primaryButtonStencil = createStencil({
         '&:focus-visible, &.focus': {
           [buttonStencil.vars.background]: cssVar(brand.action.lightest, brand.primary.lightest),
           [buttonStencil.vars.label]: system.color.fg.strong,
-          [buttonStencil.vars.boxShadowInner]: system.color.border.primary.default,
+          [buttonStencil.vars.boxShadowInner]: system.color.border.contrast.default,
           [buttonStencil.vars.boxShadowOuter]: system.color.border.inverse,
           [systemIconStencil.vars.color]: 'currentColor',
         },

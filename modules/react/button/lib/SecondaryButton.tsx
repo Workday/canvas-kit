@@ -73,7 +73,7 @@ const secondaryButtonStencil = createStencil({
           [buttonStencil.vars.background]: system.color.bg.translucent,
           [buttonStencil.vars.border]: 'transparent',
           [buttonStencil.vars.label]: system.color.fg.inverse,
-          [buttonStencil.vars.boxShadowInner]: system.color.border.primary.default,
+          [buttonStencil.vars.boxShadowInner]: system.color.border.contrast.default,
           [buttonStencil.vars.boxShadowOuter]: system.color.border.inverse,
           [systemIconStencil.vars.color]: 'currentColor',
         },
