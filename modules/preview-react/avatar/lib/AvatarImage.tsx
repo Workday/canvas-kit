@@ -2,7 +2,7 @@ import {createComponent} from '@workday/canvas-kit-react/common';
 
 import React, {useState} from 'react';
 
-import {handleCsProp, cssVar, createStencil, CSProps} from '@workday/canvas-kit-styling';
+import {handleCsProp, createStencil, CSProps} from '@workday/canvas-kit-styling';
 
 export interface AvatarImageProps extends React.ImgHTMLAttributes<HTMLImageElement>, CSProps {}
 
