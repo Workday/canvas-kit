@@ -1,25 +1,31 @@
-import React from 'react';
-
 import {createSubcomponent} from '@workday/canvas-kit-react/common';
-import {Avatar, AvatarProps} from '@workday/canvas-kit-react/avatar';
+import {Avatar, AvatarProps, avatarStencil} from '@workday/canvas-kit-react/avatar';
 import {usePillModel} from './usePillModel';
-import {px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 export interface PillAvatarProps extends AvatarProps {}
 
-// When the component is created, it needs to be a button element to match AvatarProps.
-// Once Avatar becomes a `createComponent` we can default the element type to a `div`
-// and the types should be properly extracted
+export const pillAvatarStencil = createStencil({
+  extends: avatarStencil,
+  base: {
+    cursor: 'pointer',
+    flex: '0 0 auto',
+  },
+});
+
 export const PillAvatar = createSubcomponent('div')({
   modelHook: usePillModel,
-})<PillAvatarProps>(({...elemProps}: PillAvatarProps, Element, model) => {
+})<PillAvatarProps>(({size, ...elemProps}: PillAvatarProps, Element, _model) => {
   return (
     <Avatar
-      style={{opacity: model.state.disabled ? '.7' : '1'}}
-      size={px2rem(18)}
+      aria-hidden={true}
       as={Element}
-      altText={undefined}
-      {...elemProps}
-    ></Avatar>
+      size={px2rem(18)}
+      {...mergeStyles(elemProps, [
+        pillAvatarStencil(),
+        _model.state.disabled ? 'disabled' : undefined,
+      ])}
+    />
   );
 });

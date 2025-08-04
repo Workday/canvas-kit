@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {ParenthesisValue} from '../../docgen/docTypes';
 import {registerWidget, Value} from '../Value';
 

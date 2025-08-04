@@ -1,68 +1,38 @@
-import {ExampleCodeBlock, SymbolDoc, StylePropsTable} from '@workday/canvas-kit-docs';
-import {CreateStyles} from './examples/CreateStyles';
-import {CreateVars} from './examples/CreateVars';
-import {CreateModifiers} from './examples/CreateModifiers';
+import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
+import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
+import {system} from '@workday/canvas-tokens-web'
+
 import {CreateStencil} from './examples/CreateStencil';
 
-<Meta title="Styling/Basics" />
+<Meta title="Styling/Getting Started/Create Stencil" />
 
-## Usage
-
-<SymbolDoc name="createStyles" />
-
-<ExampleCodeBlock code={CreateStyles} />
-
-In this example, the HTML will look like:
-
-```html
-<div class="css-m39zwu"></div>
-```
-
-The CSS will look like this:
-
-```css
-.css-m39zwu {
-  width: 100px;
-  height: 100px;
-  background-color: gray;
-}
-```
-
-We're using `className` for simplicity here. Most components will use the `cs` prop instead for more
-versatility.
-
-<SymbolDoc name="createVars" />
-<ExampleCodeBlock code={CreateVars} />
-
-In this example, the HTML will look like:
-
-```html
-<div class="css-4iptxs" style="--background-c6kna: gray;"></div>
-<div class="css-4iptxs" style="--background-c6kna: blue;"></div>
-```
-
-And the CSS will look like:
-
-```css
-.css-4iptxs {
-  width: 100px;
-  height: 100px;
-  background-color: var(--background-c6kna);
-}
-```
-
-<SymbolDoc name="createModifiers" />
-
-## Create Stencil
+# Create Stencil
 
 Stencils are a reusable function that returns `style` and `className` props in an object. A Stencil
-should apply to a single element. If your component has nested elements, you can either nest styles
-in the stencil or create a stencil for each nested element. If your component is a compound
-component, a stencil should be created for each subcomponet. If your component is a config
-component, a stencil can have nested styles.
+should apply to a single element. If your component has nested elements, you can youse `parts` to
+targer those elements in the Stencil. If your component is a compound component, a stencil should be
+created for each subcomponent. If your component is a config component, a stencil can have nested
+styles.
 
-<SymbolDoc name="createStencil" />
+We created Stencils as the reusable primitive of components. Stencils provide:
+
+- `vars`: CSS variables for dynamic properties
+- `base`: base styles to any component
+- `modifier`: modifiers like “size = small,medium,large” or “color=red,blue,etc”
+- `parts`: matching sub-elements that are part of a component
+- `compound`: compound modifiers - styles that match multiple modifiers
+
+## Basic Example
+In the example below, Stencils allow you to dynamically style elements or components based on properties.
+
 <ExampleCodeBlock code={CreateStencil} />
+
+## When to Use `createStencil`
+- When you're styling parts of a component that rely on dynamic properties.
+- When you want to create a reusable component with dynamic styles.
+
+
+Use a Stencil when building reusable components that have dynamic styles and properties.
 
 ## Concepts
 
@@ -130,11 +100,17 @@ element.style {
 Variables are automatically added to the config of a Stencil. They share the same namespace as
 modifiers, so **do not have a modifier with the same name as a variable**.
 
-**Note:** Variables should be used sparingly. Style properties can be easily overridden without
+<InformationHighlight className="sb-unstyled" cs={{marginBlock: system.space.x4,}}>
+	<InformationHighlight.Icon />
+	<InformationHighlight.Heading>Note</InformationHighlight.Heading>
+	<InformationHighlight.Body>
+		Variables should be used sparingly. Style properties can be easily overridden without
 variables. Variables are useful if you want to expose changing properties regardless of selectors.
 For example, Buttons use variables for colors of all states (hover, active, focus, disabled, and
 nested icons). Without variables, overriding the focus color would require deeply nested selector
 overrides.
+	</InformationHighlight.Body>
+</InformationHighlight>
 
 #### Cascading Variables
 
@@ -147,8 +123,14 @@ where a component expects a parent component to set a CSS variable and that it s
 component. An example of this is the relationship between `SystemIcon` and `Button`. The `Button`
 components set the `SystemIcon` variables and they should cascade into the `SystemIcon` component.
 
-**Note:** Non-cascade variables _could_ be initialized. If you use uninitialized variables, be sure
+<InformationHighlight className="sb-unstyled" cs={{marginBlock: system.space.x4,}}>
+	<InformationHighlight.Icon />
+	<InformationHighlight.Heading>Note</InformationHighlight.Heading>
+	<InformationHighlight.Body>
+		Non-cascade variables _could_ be initialized. If you use uninitialized variables, be sure
 to use a fallback in your styles.
+	</InformationHighlight.Body>
+</InformationHighlight>
 
 ```tsx
 const myStencil = createStencil({
@@ -338,8 +320,6 @@ The HTML will look something like this:
 
 Notice the stencil adds all the class names that match the base, modifiers, and compound modifiers.
 
-<ExampleCodeBlock code={CreateStencil} />
-
 ### Variables and Modifiers with same keys
 
 It is possible to have a variable and modifier sharing the same key. The Stencil will accept either
@@ -353,8 +333,8 @@ const buttonStencil = createStencil({
   },
   base({width}) {
     return {
-      width: width
-    }
+      width: width,
+    };
   },
   modifiers: {
     width: {
@@ -363,7 +343,7 @@ const buttonStencil = createStencil({
       },
     },
   },
-})
+});
 
 // `'zero'` is part of autocomplete
 myStencil({width: 'zero'});
@@ -374,84 +354,109 @@ myStencil({width: '10px'});
 // returns {className: 'css-button', styles: { '--button-width': '10px'}}
 ```
 
-### `keyframes`
+## Styling Elements via Component Parts
 
-The `keyframes` function re-exports the [Emotion CSS keyframes](https://emotion.sh/docs/keyframes)
-function, but is compatible with a custom Emotion instance and is understood by the Static style
-transformer.
+The goal of compound components is to expose one component per semantic element. Most of the time
+this means a 1:1 relationship of a component and DOM element. Sometimes a semantic element contains
+non-semantic elements for styling. An example might be a `<button>` with a icon for visual
+reinforcement, and a label for a semantic label. The semantic element is the `<button>` while the
+icon has no semantic value and the label automatically provides the semantic button with an
+accessible name. In order to style the icon and label elements, you have to know the DOM structure
+to target those specific elements in order to style it.
 
-### `injectGlobal`
+```jsx
+import {createStencil} from '@workday/canvas-kit-styling';
 
-The `injectGlobal` function re-exports the
-[Emotion CSS injectGlobal](https://emotion.sh/docs/@emotion/css#global-styles) function, but is
-compatible with a custom Emotion instance and is understood by the Static style transformer. It will also wrap our CSS tokens to ensure you can inject global styles using our CSS variables.
-
-```tsx
-injectGlobal({
-  ...fonts,
-  'html, body': {
-    fontFamily: system.fontFamily.default,
-    margin: 0,
-    minHeight: '100vh',
-    ...system.type.heading.large,
-  },
-  '#root, #root < div': {
-    minHeight: '100vh',
+const myButtonStencil = createStencil({
+  base: {
+    background: 'transparent',
+    i: {
+      // ...icon styles
+    },
+    span: {
+      // ...label styles
+    },
+    ':hover': {
+      // ...hover button styles
+      i: {
+        // ...hover icon styles
+      },
+      span: {
+        // ...hover label styles
+      },
+    },
   },
 });
-```
 
-## CS Prop
-
-The `cs` prop takes in a single, or an array of values that are created by the `cs` function, a
-string representing a CSS class name, or the return of the `createVars` function. It merges
-everything together and applies `className` and `style` attributes to a React element. The Box
-component has been extended to handle the cs prop. For example, the following plus proceeding code:
-
-{/* <ExampleCodeBlock code={CSProp} /> */}
-
-## Custom Emotion instance
-
-Static style injection happens during the parsing stages of the files. This means when you `import`
-a component that uses static styling, the styles are injected immediately. This happens way before
-rendering, so using the Emotion [CacheProvider](https://emotion.sh/docs/cache-provider) does not
-work. A custom instance must be created _before_ any style utilities are called - during the
-bootstrapping phase of an application. We don't have a working example because it requires an
-isolated application, but here's an example adding a `nonce` to an application:
-
-```tsx
-// bootstrap-styles.ts
-import {createInstance} from '@workday/canvas-kit-styling';
-
-// assuming this file is being called via a `script` tag and that
-// script tag has a `nonce` attribute set from the server
-createInstance({nonce: document.currentScript.nonce});
-
-// index.ts
-import React from 'react';
-import ReactDOM from 'react-dom';
-
-// call the bootstrap in the import list. This has the side-effect
-// of creating an instance
-import './bootstrap-styles';
-
-import App from './App';
-
-const root = ReactDOM.createRoot(document.querySelector('#root'));
-
-root.render(<App />);
-
-// App.tsx
-import React from 'react';
-
-// The following will create and inject styles. We cannot adjust
-// the Emotion instance after this import
-import {PrimaryButton} from '@workday/canvas-kit-react/button';
-
-// if we call `createInstance` here, we'll get a warning in
-// development mode
-
-export default () => {
-  return <PrimaryButton>Button</PrimaryButton>;
+const MyButton = ({children, ...elemProps}) => {
+  return (
+    <button {...handleCsProp(elemProps, myButtonStencil())}>
+      <i />
+      <span>{children}</span>
+    </button>
+  );
 };
 ```
+
+### Using Component Parts to Style Elements
+
+To style elements in the render function, we'll need to choose what elements to add the parts to. In
+the example below, we're able to spread the parts directly to elements. The Stencil will generate
+the type and value most appropriate for the context the part is used. In the Stencil, the part is
+represented by a string that looks like `[data-part="{partValue}"]` and in the render function, it
+is an object that looks like `{'data-part': partValue}`.
+
+```jsx
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+
+const myButtonStencil = createStencil({
+  parts: {
+    icon: 'my-button-icon',
+    label: 'my-button-label',
+  },
+  base: ({iconPart, labelPart}) => ({
+    background: 'transparent',
+    [iconPart]: {
+      // `[data-part="my-button-icon"]`
+      // ...icon styles
+    },
+    [labelPart]: {
+      // `[data-part="my-button-label"]`
+      // ...label styles
+    },
+    '&:hover': {
+      // ...hover styles for button element
+      [iconPart]: {
+        // ...hover styles for icon part
+      },
+    },
+  }),
+});
+
+const MyButton = ({children, ...elemProps}) => {
+  return (
+    <button {...handleCsProp(elemProps, myButtonStencil())}>
+      <i {...myButtonStencil.parts.icon} /> {/* data-part={my-button-icon} */}
+      <span {...myButtonStencil.parts.label}>{children}</span> {/* data-part={my-button-label} */}
+    </button>
+  );
+};
+```
+
+As a reusable component, you can use component parts to style elements that are not exposed in the
+API. Consumers can also use the type safe Stencil to target that element to style it as well. As a
+general rule, a Stencil maps to a component. Multiple Stencils per component usually means nested
+elements that are not targets for style overrides.
+
+<InformationHighlight className="sb-unstyled" cs={{marginBlock: system.space.x4,}}>
+	<InformationHighlight.Icon />
+	<InformationHighlight.Heading>Note</InformationHighlight.Heading>
+	<InformationHighlight.Body>
+		While component parts are a way to give access to elements in order to style, they
+ should be used sparingly. Using component parts increases CSS specificity. A component part should
+ not be used on a nested component that has its own Stencil. The result will be any style
+ properties defined with a component part will have a higher specificity than other styles.
+	</InformationHighlight.Body>
+</InformationHighlight>
+
+

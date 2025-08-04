@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {ColorPicker} from '@workday/canvas-kit-preview-react/color-picker';
 

@@ -46,7 +46,7 @@ export const useListBox = createElemPropsHook(useListModel)(model => {
   return {
     style: {
       position: 'relative' as const,
-      height: model.state.isVirtualized ? model.state.UNSTABLE_virtual.totalSize : undefined,
+      height: model.state.isVirtualized ? model.state.UNSTABLE_virtual.getTotalSize() : undefined,
     },
   };
 });

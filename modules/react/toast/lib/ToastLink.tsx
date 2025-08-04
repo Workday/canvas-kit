@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {Hyperlink, HyperlinkProps} from '@workday/canvas-kit-react/button';
 

@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import {
   createSubcomponent,
   createElemPropsHook,
@@ -11,7 +9,7 @@ import {useReturnFocus, useFocusRedirect} from '@workday/canvas-kit-react/popup'
 
 import {useMenuModel} from './useMenuModel';
 import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 export interface MenuListProps<T = any>
   extends Omit<ExtractProps<typeof ListBox, never>, 'children'> {
@@ -26,6 +24,7 @@ export const useMenuList = composeHooks(
     return {
       role: 'menu',
       'aria-labelledby': model.state.id,
+      'aria-orientation': model.state.orientation,
     };
   }),
   useReturnFocus,
@@ -34,7 +33,7 @@ export const useMenuList = composeHooks(
 
 export const menuListStencil = createStencil({
   base: {
-    background: base.frenchVanilla100,
+    background: system.color.bg.default,
     borderRadius: system.shape.zero,
     padding: system.space.zero,
     gap: system.space.zero,

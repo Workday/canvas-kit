@@ -3,11 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.14](https://github.com/Workday/canvas-kit/releases/tag/v13.2.14) (2025-08-01)
+
+### Infrastructure
+
+- chore: Fix form-data vulnerability ([#3426](https://github.com/Workday/canvas-kit/pull/3426)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v12.6.18](https://github.com/Workday/canvas-kit/releases/tag/v12.6.18) (2025-07-31)
 
 ### Utilities
 
 - fix: Support unwrapped CSS variables in `injectGlobal` ([#3424](https://github.com/Workday/canvas-kit/pull/3424)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+## [v13.2.13](https://github.com/Workday/canvas-kit/releases/tag/v13.2.13) (2025-07-31)
+
+### Components
+
+- fix: Use dvh in Popup.Card height calculation ([#3419](https://github.com/Workday/canvas-kit/pull/3419)) ([@JaredMaione](https://github.com/JaredMaione))
 
 
 ## [v12.6.17](https://github.com/Workday/canvas-kit/releases/tag/v12.6.17) (2025-07-30)
@@ -15,6 +27,53 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Components
 
 - fix: Use dvh in Popup.Card height calculation ([#3419](https://github.com/Workday/canvas-kit/pull/3419)) ([@JaredMaione](https://github.com/JaredMaione))
+## [v13.2.12](https://github.com/Workday/canvas-kit/releases/tag/v13.2.12) (2025-07-30)
+
+### Infrastructure
+
+- ci: Fix watch message to not clear terminal ([#3421](https://github.com/Workday/canvas-kit/pull/3421)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v13.2.11](https://github.com/Workday/canvas-kit/releases/tag/v13.2.11) (2025-07-30)
+
+### Documentation
+
+- docs: Adding new advanced table example and Accessibility Guides ([#3375](https://github.com/Workday/canvas-kit/pull/3375)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton, manuel.carrera)
+
+
+## [v13.2.10](https://github.com/Workday/canvas-kit/releases/tag/v13.2.10) (2025-07-29)
+
+### Components
+
+- fix(TabsItem): Added styles for Windows high contrast ([#3418](https://github.com/Workday/canvas-kit/pull/3418)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton)
+
+
+## [v13.2.9](https://github.com/Workday/canvas-kit/releases/tag/v13.2.9) (2025-07-28)
+
+### Codemods
+
+- chore: Fix codemod to prevent not relevant files ([#3416](https://github.com/Workday/canvas-kit/pull/3416)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v13.2.8](https://github.com/Workday/canvas-kit/releases/tag/v13.2.8) (2025-07-28)
+
+### Documentation
+
+- docs: Update codemod installation script ([#3413](https://github.com/Workday/canvas-kit/pull/3413)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v13.2.7](https://github.com/Workday/canvas-kit/releases/tag/v13.2.7) (2025-07-24)
+
+### Documentation
+
+- fix: Fix styling docs to be compatible with site ([#3408](https://github.com/Workday/canvas-kit/pull/3408)) ([@jamesfan](https://github.com/jamesfan))
+
+
+## [v13.2.6](https://github.com/Workday/canvas-kit/releases/tag/v13.2.6) (2025-07-24)
+
+### Documentation
+
+- fix: Spec tables extend through container size ([#3405](https://github.com/Workday/canvas-kit/pull/3405)) ([@josh-bagwell](https://github.com/josh-bagwell))
 
 
 ## [v12.6.16](https://github.com/Workday/canvas-kit/releases/tag/v12.6.16) (2025-07-24)
@@ -22,6 +81,39 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Documentation
 
 - fix: Spec tables extend through container size ([#3405](https://github.com/Workday/canvas-kit/pull/3405)) ([@josh-bagwell](https://github.com/josh-bagwell))
+## [v13.2.5](https://github.com/Workday/canvas-kit/releases/tag/v13.2.5) (2025-07-23)
+
+### Documentation
+
+- fix: Fix docs and examples for Avatar and Badge ([#3402](https://github.com/Workday/canvas-kit/pull/3402)) ([@jamesfan](https://github.com/jamesfan))
+
+
+## [v13.2.4](https://github.com/Workday/canvas-kit/releases/tag/v13.2.4) (2025-07-23)
+
+### Documentation
+
+- fix: Update href link in styles docs ([#3400](https://github.com/Workday/canvas-kit/pull/3400)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v13.2.3](https://github.com/Workday/canvas-kit/releases/tag/v13.2.3) (2025-07-22)
+
+### Infrastructure
+
+- fix: Add focusRing plugin back to style transform ([#3397](https://github.com/Workday/canvas-kit/pull/3397)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v13.2.2](https://github.com/Workday/canvas-kit/releases/tag/v13.2.2) (2025-07-18)
+
+### Infrastructure
+
+- fix: Update styling transform to use deterministic hashes ([#3356](https://github.com/Workday/canvas-kit/pull/3356)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v13.2.1](https://github.com/Workday/canvas-kit/releases/tag/v13.2.1) (2025-07-17)
+
+### Components
+
+- fix: Add pointerEvents style to svg in BaseButtonComponent ([#3388](https://github.com/Workday/canvas-kit/pull/3388)) ([@selenajosephine](https://github.com/selenajosephine), Selena D)
 
 
 ## [v12.6.15](https://github.com/Workday/canvas-kit/releases/tag/v12.6.15) (2025-07-17)
@@ -29,6 +121,37 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Components
 
 - fix: Add pointerEvents style to svg in BaseButtonComponent ([#3388](https://github.com/Workday/canvas-kit/pull/3388)) ([@selenajosephine](https://github.com/selenajosephine), Selena D)
+## [v13.2.0](https://github.com/Workday/canvas-kit/releases/tag/v13.2.0) (2025-07-16)
+
+
+
+
+## [v13.1.7](https://github.com/Workday/canvas-kit/releases/tag/v13.1.7) (2025-07-16)
+
+### Components
+
+- fix: Update `useUniqueId` to use `React.useId` if available ([#3383](https://github.com/Workday/canvas-kit/pull/3383)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v13.1.6](https://github.com/Workday/canvas-kit/releases/tag/v13.1.6) (2025-07-14)
+
+### Components
+
+- fix(tabs): Apply fade more appropriately for mobile ([#3380](https://github.com/Workday/canvas-kit/pull/3380)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v13.1.5](https://github.com/Workday/canvas-kit/releases/tag/v13.1.5) (2025-07-11)
+
+### Documentation
+
+- chore: Build out styling docs ([#3374](https://github.com/Workday/canvas-kit/pull/3374)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v13.1.4](https://github.com/Workday/canvas-kit/releases/tag/v13.1.4) (2025-06-17)
+
+### Documentation
+
+- docs(form-field): Update SymbolDoc link ([#3338](https://github.com/Workday/canvas-kit/pull/3338)) ([@NicholasBoll](https://github.com/NicholasBoll))
 
 
 ## [v12.6.14](https://github.com/Workday/canvas-kit/releases/tag/v12.6.14) (2025-06-17)
@@ -36,6 +159,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Documentation
 
 - docs(form-field): Update SymbolDoc link ([#3338](https://github.com/Workday/canvas-kit/pull/3338)) ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v13.1.3](https://github.com/Workday/canvas-kit/releases/tag/v13.1.3) (2025-06-17)
+
+### Infrastructure
+
+- chore: Update chromatic action settings ([#3345](https://github.com/Workday/canvas-kit/pull/3345)) ([@RayRedGoose](https://github.com/RayRedGoose), [@mannycarrera4](https://github.com/mannycarrera4))
 
 
 ## [v12.6.13](https://github.com/Workday/canvas-kit/releases/tag/v12.6.13) (2025-06-17)
@@ -43,6 +171,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Infrastructure
 
 - chore: Update chromatic action settings ([#3345](https://github.com/Workday/canvas-kit/pull/3345)) ([@RayRedGoose](https://github.com/RayRedGoose), [@mannycarrera4](https://github.com/mannycarrera4))
+## [v13.1.2](https://github.com/Workday/canvas-kit/releases/tag/v13.1.2) (2025-06-12)
+
+### Components
+
+- fix(multi-select): Support items update in selection pills ([#3334](https://github.com/Workday/canvas-kit/pull/3334)) ([@NicholasBoll](https://github.com/NicholasBoll))
 
 
 ## [v12.6.12](https://github.com/Workday/canvas-kit/releases/tag/v12.6.12) (2025-06-12)
@@ -50,6 +183,24 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Components
 
 - fix(multi-select): Support items update in selection pills ([#3334](https://github.com/Workday/canvas-kit/pull/3334)) ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v13.1.1](https://github.com/Workday/canvas-kit/releases/tag/v13.1.1) (2025-06-09)
+
+### Components
+
+- fix: Ensure icon color for SystemIconCircle can be overwritten ([#3322](https://github.com/Workday/canvas-kit/pull/3322)) ([@RayRedGoose](https://github.com/RayRedGoose))
+  Property `color` has been added to `SystemIconCircle` to fix and allow the overwriting of icon color if it's not handle automatically. `systemIconCircleStencil` is now exported.
+
+
+## [v13.1.0](https://github.com/Workday/canvas-kit/releases/tag/v13.1.0) (2025-06-04)
+
+
+
+
+## [v13.0.5](https://github.com/Workday/canvas-kit/releases/tag/v13.0.5) (2025-05-27)
+
+### Components
+
+- fix(multi-select): Forward the error prop to the MultiSelect Input ([#3309](https://github.com/Workday/canvas-kit/pull/3309)) ([@NicholasBoll](https://github.com/NicholasBoll), [@mannycarrera4](https://github.com/mannycarrera4))
 
 
 ## [v12.6.11](https://github.com/Workday/canvas-kit/releases/tag/v12.6.11) (2025-05-27)
@@ -57,6 +208,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Components
 
 - fix(multi-select): Forward the error prop to the MultiSelect Input ([#3309](https://github.com/Workday/canvas-kit/pull/3309)) ([@NicholasBoll](https://github.com/NicholasBoll), [@mannycarrera4](https://github.com/mannycarrera4))
+## [v13.0.4](https://github.com/Workday/canvas-kit/releases/tag/v13.0.4) (2025-05-12)
+
+### Components
+
+- fix: Ensure disabled is passed to MultiSelect sub components so input plus options are disabled ([#3295](https://github.com/Workday/canvas-kit/pull/3295)) ([@NicholasBoll](https://github.com/NicholasBoll))
 
 
 ## [v12.6.10](https://github.com/Workday/canvas-kit/releases/tag/v12.6.10) (2025-05-09)
@@ -64,6 +220,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Components
 
 - fix: Ensure disabled is passed to MultiSelect sub components so input plus options are disabled ([#3295](https://github.com/Workday/canvas-kit/pull/3295)) ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v13.0.3](https://github.com/Workday/canvas-kit/releases/tag/v13.0.3) (2025-05-06)
+
+### Components
+
+- fix(select): Remove excess props from `SelectInputProps` ([#3269](https://github.com/Workday/canvas-kit/pull/3269)) ([@NicholasBoll](https://github.com/NicholasBoll), manuel.carrera, [@mannycarrera4](https://github.com/mannycarrera4))
 
 
 ## [v12.6.9](https://github.com/Workday/canvas-kit/releases/tag/v12.6.9) (2025-05-06)
@@ -71,6 +232,108 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Components
 
 - fix(select): Remove excess props from `SelectInputProps` ([#3269](https://github.com/Workday/canvas-kit/pull/3269)) ([@NicholasBoll](https://github.com/NicholasBoll), manuel.carrera, [@mannycarrera4](https://github.com/mannycarrera4))
+## [v13.0.2](https://github.com/Workday/canvas-kit/releases/tag/v13.0.2) (2025-04-30)
+
+### Components
+
+- docs: Collection examples should use string ids ([#3268](https://github.com/Workday/canvas-kit/pull/3268)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+### Documentation
+
+- docs: Fixed menu doc page ([#3276](https://github.com/Workday/canvas-kit/pull/3276)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v13.0.1](https://github.com/Workday/canvas-kit/releases/tag/v13.0.1) (2025-04-29)
+
+### Infrastructure
+
+- ci: Pad canary build ids with zeros ([#3271](https://github.com/Workday/canvas-kit/pull/3271)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v13.0.0](https://github.com/Workday/canvas-kit/releases/tag/v13.0.0) (2025-04-23)
+
+### BREAKING CHANGES
+
+- [#3101](https://github.com/Workday/canvas-kit/pull/3101) `iconLabel` is now a *required* prop. We've removed the default `aria-label` of `Opens link in new window` to better support internationalization. You must provide a value to `iconLabel`.
+- [#3104](https://github.com/Workday/canvas-kit/pull/3104) - `maxWidth` has been removed from the `usePillModel`. This config was used to style sub components. With the refactor to use `data-part` and [stencils](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--docs#create-stencil), it is no longer needed on the model. You can still apply `maxWidth` on the parent `<Pill>` element and the child elements will be styled accordingly.
+  - `Pill.Icon` no longer has a default `aria-labe="add"`. You *must* provide an `aria-label` for `Pill.Icon` to ensure proper accessibility. Our examples have been updated to reflect this change.
+  - `Pill.IconButton` no longer has a default `aria-label="remove"`. You *must* provide an `aria-label` for `Pill.IconButton` to ensure proper accessibility. Our examples have been updated to reflect this change.
+  - `Pill.Label` is a required element when using other sub components like `Pill.Icon` to ensure that the label truncates correctly.
+- [#3204](https://github.com/Workday/canvas-kit/pull/3204) - If you're using `react@16.x.x`, you'll need to upgrade to `react@17.x.x` to use Canvas Kit v13.
+  >**Note:** You'll need to update the way `jsx` transpiles. The automatic runtime feature, enabled through the `@babel/preset-react` preset with the `runtime: "automatic"` option, handles the importing of functions that JSX transpiles to.
+- [#3201](https://github.com/Workday/canvas-kit/pull/3201) There is a codemod that should catch a lot of instances but, if there is an instance that is not caught, users will have to update those names manually. See above table for name references.
+- [#3217](https://github.com/Workday/canvas-kit/pull/3217) The `Expandable` component has been promoted from `Labs` to `Main`. There is a codemod to handle the update of the imports.
+- [#3231](https://github.com/Workday/canvas-kit/pull/3231) The `altText` prop no longer has a default of `"Avatar"`.  You *must* provide an `altText` for `<Avatar />, <Pill.Avatar />, <Expandable.Avatar />` to ensure proper accessibility. Our examples have been updated to reflect this change.
+- [#3254](https://github.com/Workday/canvas-kit/pull/3254) `horizontal` is no longer a supported value to the `orientation` prop on `FormField` and `FormFieldGroup`. Please use `horizontalStart` instead. This value was deprecated in v12 and a codemod was added to rename the value.
+- [#3265](https://github.com/Workday/canvas-kit/pull/3265) The Collection system cursor has been updated to support `string | string[]`. This won't affect direct comparisons like `model.state.cursorId === x` if your use-case doesn't use hierarchy. There may be some edge cases where your code is expecting the `model.state.cursorId` to be a string only. This will have to be updated.
+
+### Branding
+
+- feat: Promote new Dub logos and add codemod to handle change ([#3201](https://github.com/Workday/canvas-kit/pull/3201)) ([@josh-bagwell](https://github.com/josh-bagwell))
+  We've removed the old Dub Logos in Main and promoted the new logos that were previously in our Preview package to Main as part of the brand refresh. We've also added a codemod to update the import statements as well as the name of the logos used to the new names. 
+  
+  | Old Logo Name | New Logo Name |
+  | --------------- | ----------------- | 
+  | dubLogoBlue | dubLogoPrimary | 
+  | dubLogoWhite | dubLogoReversed | 
+  | wdayLogoBlue | wdayLogoPrimary | 
+  | wdayLogoWhite | wdayLogoReversed |
+
+### Components
+
+- feat: Refactor Skeleton to use our new styling utilities and new tokens ([#3088](https://github.com/Workday/canvas-kit/pull/3088)) ([@thunguyen19](https://github.com/thunguyen19))
+  We've updated`Skeleton` to use our new Tokens and styling utilities. The React interface has not changed, but CSS variables are now used for dynamic properties.
+- feat: Refactor External Hyperlink to use new styling utilities ([#3101](https://github.com/Workday/canvas-kit/pull/3101)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  We've updated `ExternalHyperlink` to use our new styling utilities and tokens.
+- feat: Refactor Menu and its sub components to use our new styling utilities ([#3114](https://github.com/Workday/canvas-kit/pull/3114)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@josh-bagwell](https://github.com/josh-bagwell))
+  We've updated ExternalHyperlink to use our new styling utilities and tokens. Its API remains unchanged.
+- feat: Refactor LoadingSparkles component to use new styling utilities and tokens ([#3120](https://github.com/Workday/canvas-kit/pull/3120)) ([@NehaAhujaa](https://github.com/NehaAhujaa), Neha Ahuja, [@mannycarrera4](https://github.com/mannycarrera4))
+- feat: Refactor Tabs component to use new styling utilities and tokens ([#3119](https://github.com/Workday/canvas-kit/pull/3119)) ([@josh-bagwell](https://github.com/josh-bagwell))
+- feat: Refactor Tooltip component to use new styling utilities and tokens ([#3164](https://github.com/Workday/canvas-kit/pull/3164)) ([@josh-bagwell](https://github.com/josh-bagwell))
+- chore: Updated MenuItem and add CSProps to fix type check ([@josh-bagwell](https://github.com/josh-bagwell))
+- Rename skeletonShape.tsx to SkeletonShape.tsx ([@](https://github.com/))
+- feat: Refactor Pill component to use new styling utilities and tokens ([#3104](https://github.com/Workday/canvas-kit/pull/3104)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@josh-bagwell](https://github.com/josh-bagwell), [@NicholasBoll](https://github.com/NicholasBoll))
+  We've updated ExternalHyperlink to use our new styling utilities and tokens.
+  
+  - The border color on hover has been updated from `licorice400` to `licorice500` to match our design specs.
+  - We've removed extra elements and leverage [flex box}(https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Flexbox) to ensure only the label receives overflow styles. When `maxWidth` is set, it is set on the parent `<Pill/>` element and the child elements will be styled accordingly. Before v13, `maxWidth` wasn't calculating the width of all its elements and wasn't a true pixel value.
+- feat: Refactor SidePanel to use new styling utilities and tokens ([#3123](https://github.com/Workday/canvas-kit/pull/3123)) ([@thunguyen19](https://github.com/thunguyen19), [@mannycarrera4](https://github.com/mannycarrera4))
+  Refactored the `SidePanel` component in Preview to use new styling utilities and tokens.
+- chore: Update ActionBar to use new styling utils and tokens ([#3205](https://github.com/Workday/canvas-kit/pull/3205)) ([@JaredMaione](https://github.com/JaredMaione))
+  We've updated ActionBar to use our new tokens and styling utilities. The React interface has not changed.
+- fix: Update Pill styles based on spec ([#3208](https://github.com/Workday/canvas-kit/pull/3208)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- feat: Refactor Banner component to use new styling utilities and tokens ([#3210](https://github.com/Workday/canvas-kit/pull/3210)) ([@NehaAhujaa](https://github.com/NehaAhujaa), Neha Ahuja)
+  Refactored the `Banner` component to use new system tokens and style utilities.
+- feat: Promote Expandable and add codemod to handle change ([#3217](https://github.com/Workday/canvas-kit/pull/3217)) ([@josh-bagwell](https://github.com/josh-bagwell))
+  Promotion of the `Expandable` component from Labs to Main.
+- fix: Remove default altText for Avatar ([#3231](https://github.com/Workday/canvas-kit/pull/3231)) ([@NehaAhujaa](https://github.com/NehaAhujaa), Neha Ahuja)
+  Removed the default text for the `altText` prop on `Avatar`.
+- fix: Ensure stencils are exported for Pill ([#3256](https://github.com/Workday/canvas-kit/pull/3256)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- feat: Remove `horizontal` value on FormField and FormFieldGroup orientation prop ([#3254](https://github.com/Workday/canvas-kit/pull/3254)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- fix: Remove fragments if React isn't imported ([#3261](https://github.com/Workday/canvas-kit/pull/3261)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- chore: Refactor Select Input to a single Stencil ([#3240](https://github.com/Workday/canvas-kit/pull/3240)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@NicholasBoll](https://github.com/NicholasBoll))
+- feat: Use css transitions for sidepanel instead of animation ([#3258](https://github.com/Workday/canvas-kit/pull/3258)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@RayRedGoose](https://github.com/RayRedGoose))
+  When we supported IE 11 we needed to use animation to support animation events. Since we dropped support for IE11, we can now use css transitions to animate the width of the SidePanel when it's expanding or collapsing.  
+  
+  As part of this change, we also removed the `onAnimationStart` prop. Since moving to transitions, React doesn't support `onTransitionStart`, therefore the prop is no longer needed.
+- feat(menu): Add support for hierarchy in the collection system ([#3265](https://github.com/Workday/canvas-kit/pull/3265)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Documentation
+
+- chore: Set up v13 files ([#3100](https://github.com/Workday/canvas-kit/pull/3100)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- chore: Review upgrade guide for v13 ([#3246](https://github.com/Workday/canvas-kit/pull/3246)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@alanbsmith](https://github.com/alanbsmith), [@jamesfan](https://github.com/jamesfan))
+
+### Infrastrcuture
+
+- feat: Update jsx flag in tsconfig to react-jsx ([#3204](https://github.com/Workday/canvas-kit/pull/3204)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@josh-bagwell](https://github.com/josh-bagwell))
+  We've updated the `jsx` flag in our `tsconfig` to `react-jsx`. As part of this change, we've also updated our peer dependencies for our packages to a minimum version of `react@17.0.0`. This change is to provide support for modern technologies like `vite` and ES modules.
+
+### Tokens
+
+- chore: Expandable component style refactor ([#3128](https://github.com/Workday/canvas-kit/pull/3128)) ([@williamjstanton](https://github.com/williamjstanton), [@josh-bagwell](https://github.com/josh-bagwell), manuel.carrera)
+  - The `ExpandableTarget` component is now rendering the `BaseButton` component, and may have some small impact on the visual styling of the keyboard focus ring. 
+  - The `ExpandableIcon` stencil is extending the `SystemIcon` stencil, and may have had an impact on the chevron icon color. 
+  - Fixed an accessibility bug in the `Avatar` component where an `aria-label` string was rendered on a generic HTML element that did not have an explicit or implicit `role`
 
 
 ## [v12.6.8](https://github.com/Workday/canvas-kit/releases/tag/v12.6.8) (2025-04-22)
