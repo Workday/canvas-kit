@@ -2,14 +2,14 @@ import * as React from 'react';
 import {base, system} from '@workday/canvas-tokens-web';
 import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {Heading, Subtext, Text} from '@workday/canvas-kit-react/text';
+import {Heading, Subtext} from '@workday/canvas-kit-react/text';
 import {Expandable} from '@workday/canvas-kit-react/expandable';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {Menu} from '@workday/canvas-kit-react/menu';
 import {birthdayIcon, checkIcon, ribbonIcon} from '@workday/canvas-system-icons-web';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
-import {Tooltip} from '../../../../../tooltip';
+import {Tooltip} from '../../../../tooltip';
 
 const data = {
   bestsellers: {
@@ -39,6 +39,7 @@ const stylesOverride = {
     top: system.space.zero,
   }),
   accordionContainer: createStyles({
+    listStyle: 'none',
     flexDirection: 'column',
     rowGap: system.space.zero,
     paddingInlineStart: system.space.zero,

@@ -1,10 +1,12 @@
+import React from 'react';
 import {Flex, Grid} from '@workday/canvas-kit-react/layout';
 import {Heading} from '@workday/canvas-kit-react/text';
+import {SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-import {GlobalHeader} from './GlobalHeader';
-import {SideBarContent} from './SidePanelWithNavigation';
+import {GlobalHeader} from '../GlobalHeader';
+import {SideBarContent} from '../SidePanelWithNavigation';
 import {Basic as Breadcrumbs} from './../../../../../breadcrumbs/stories/examples/Basic';
 
 const gridLayoutStyles = createStyles({
@@ -31,10 +33,20 @@ const headingStyles = createStyles({
 });
 
 export const FullPageDemo = () => {
+  const [notifications, setNotifications] = React.useState(0);
+
+  function handleAdd() {
+    setNotifications(prev => prev + 1);
+  }
+
+  function handleClear() {
+    setNotifications(0);
+  }
+
   return (
     <Grid cs={gridLayoutStyles}>
       <Grid as="header" gridArea="Header" cs={regionStyles}>
-        <GlobalHeader notifications={2} />
+        <GlobalHeader notifications={notifications} />
       </Grid>
       <Grid as="nav" gridArea="SideBar" cs={regionStyles}>
         <Flex cs={verticalFlexStyles}>
@@ -44,6 +56,10 @@ export const FullPageDemo = () => {
       <Grid as="main" gridArea="BodyContent" cs={regionStyles}>
         <Flex cs={verticalFlexStyles}>
           <Breadcrumbs />
+          <Flex gap={system.space.x4}>
+            <SecondaryButton onClick={handleAdd}>Add notification</SecondaryButton>
+            <TertiaryButton onClick={handleClear}>Clear</TertiaryButton>
+          </Flex>
           <Heading as="h1" size="large" cs={headingStyles}>
             Heading Level 1
           </Heading>
