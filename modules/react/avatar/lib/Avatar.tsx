@@ -17,6 +17,9 @@ export enum AvatarVariant {
   Dark,
 }
 
+/**
+ * @deprecated `AvatarProps` is deprecated and will be removed in a future major version. Please use the `Avatar` component from the Preview package instead (@workday/canvas-kit-preview-react/avatar).
+ */
 export interface AvatarProps extends CSProps {
   /**
    * The variant of the avatar. Use `light` on dark backgrounds and `dark` on light backgrounds.
@@ -58,6 +61,9 @@ export interface AvatarProps extends CSProps {
   objectFit?: Property.ObjectFit;
 }
 
+/**
+ * @deprecated `avatarStencil` is deprecated and will be removed in a future major version. Please use `Avatar` from the Preview package instead (@workday/canvas-kit-preview-react/avatar).
+ */
 export const avatarStencil = createStencil({
   vars: {
     size: '',
@@ -236,6 +242,9 @@ export const avatarStencil = createStencil({
   },
 });
 
+/**
+ * @deprecated `Avatar` is deprecated and will be removed in a future major version. Please use `Avatar` from the Preview package instead (@workday/canvas-kit-preview-react/avatar).
+ */
 export const Avatar = createComponent('button')({
   displayName: 'Avatar',
   Component: (
