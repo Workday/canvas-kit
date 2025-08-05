@@ -23,20 +23,8 @@ export interface BaseAvatarProps extends CSProps {
    * The variant of the Avatar.
    * @default "blue"
    */
-  variant?:
-    | 'blue'
-    | 'amber'
-    | 'te al'
-    | 'purple'
-    | 'azure'
-    | 'coral'
-    | 'green'
-    | 'indigo'
-    | 'red'
-    | 'orange'
-    | 'slate'
-    | 'neutral'
-    | 'magenta';
+  variant?: 'blue' | 'amber' | 'teal' | 'purple';
+
   /**
    * The size of the Avatar.
    * @default "medium"
@@ -79,30 +67,7 @@ export const baseAvatarStencil = createStencil({
         backgroundColor: cssVar(base.amber200, backgroundColor),
         color: cssVar(base.amber700, color),
       }),
-      azure: ({backgroundColor, color}) => ({
-        backgroundColor: cssVar(base.azure300, backgroundColor),
-        color: cssVar(base.azure800, color),
-      }),
-      coral: ({backgroundColor, color}) => ({
-        backgroundColor: cssVar(base.coral300, backgroundColor),
-        color: cssVar(base.coral800, color),
-      }),
-      green: ({backgroundColor, color}) => ({
-        backgroundColor: cssVar(base.green300, backgroundColor),
-        color: cssVar(base.green800, color),
-      }),
-      orange: ({backgroundColor, color}) => ({
-        backgroundColor: cssVar(base.orange300, backgroundColor),
-        color: cssVar(base.orange800, color),
-      }),
-      indigo: ({backgroundColor, color}) => ({
-        backgroundColor: cssVar(base.indigo300, backgroundColor),
-        color: cssVar(base.indigo800, color),
-      }),
-      magenta: ({backgroundColor, color}) => ({
-        backgroundColor: cssVar(base.magenta300, backgroundColor),
-        color: cssVar(base.magenta800, color),
-      }),
+
       teal: ({backgroundColor, color}) => ({
         backgroundColor: cssVar(base.teal300, backgroundColor),
         color: cssVar(base.teal800, color),
@@ -110,18 +75,6 @@ export const baseAvatarStencil = createStencil({
       purple: ({backgroundColor, color}) => ({
         backgroundColor: cssVar(base.purple300, backgroundColor),
         color: cssVar(base.purple800, color),
-      }),
-      red: ({backgroundColor, color}) => ({
-        backgroundColor: cssVar(base.red300, backgroundColor),
-        color: cssVar(base.red800, color),
-      }),
-      slate: ({backgroundColor, color}) => ({
-        backgroundColor: cssVar(base.slate300, backgroundColor),
-        color: cssVar(base.slate800, color),
-      }),
-      neutral: ({backgroundColor, color}) => ({
-        backgroundColor: cssVar(base.neutral300, backgroundColor),
-        color: cssVar(base.neutral800, color),
       }),
     },
     size: {
