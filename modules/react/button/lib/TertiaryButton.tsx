@@ -111,7 +111,7 @@ const tertiaryButtonStencil = createStencil({
           [buttonStencil.vars.background]: system.color.bg.translucent,
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: 'currentColor',
-          [buttonStencil.vars.border]: system.color.border.primary.default,
+          [buttonStencil.vars.border]: brand.common.focusOutline,
         },
         // Hover Styles
         '&:hover, &.hover': {
