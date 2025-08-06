@@ -54,12 +54,17 @@ export const usePopupStack = <E extends HTMLElement>(
   const isRTL = useIsRTL();
   const theme = React.useContext(ThemeContext as React.Context<Theme>);
   const {className, style} = useCanvasThemeToCssVars(theme, {});
+  const firstLoadRef = React.useRef(true); // React 19 can call a useState more than once, so we need to track if we've already created a container
 
   // useState function input ensures we only create a container once.
   const [popupRef] = React.useState(() => {
-    const container = PopupStack.createContainer();
-    elementRef(container as E);
-    return container;
+    if (firstLoadRef.current) {
+      const container = PopupStack.createContainer();
+      elementRef(container as E);
+      firstLoadRef.current = false;
+      return container;
+    }
+    return localRef.current;
   });
   // We useLayoutEffect to ensure proper timing of registration of the element to the popup stack.
   // Without this, the timing is unpredictable when mixed with other frameworks. Other frameworks
