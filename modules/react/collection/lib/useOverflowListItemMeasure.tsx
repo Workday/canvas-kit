@@ -69,6 +69,7 @@ export const useOverflowListItemMeasure = createElemPropsHook(useOverflowListMod
       // The only way to remove the dev warning in React 19, but have the same functionality in all
       // versions of React, we must detect React 19 and set the attribute accordingly in either
       // case. Do not remove this wonky code until we drop support for React <19.
+      // https://github.com/facebook/react/issues/17157
       //
       // @ts-ignore
       inert: React.use ? hidden : hidden ? '' : undefined,
