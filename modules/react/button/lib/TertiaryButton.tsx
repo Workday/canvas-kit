@@ -30,12 +30,12 @@ const tertiaryButtonStencil = createStencil({
     minWidth: 'auto',
     borderWidth: px2rem(2),
     [buttonStencil.vars.borderRadius]: system.shape.round,
-    [buttonStencil.vars.background]: system.color.bg.transparent,
+    [buttonStencil.vars.background]: system.color.bg.transparent.default,
     [buttonStencil.vars.label]: brand.primary.base,
     [systemIconStencil.vars.color]: 'currentColor',
     // Focus Styles
     '&:focus-visible, &.focus': {
-      [buttonStencil.vars.background]: system.color.bg.transparent,
+      [buttonStencil.vars.background]: system.color.bg.transparent.default,
       [buttonStencil.vars.label]: brand.primary.base,
       [buttonStencil.vars.border]: system.color.border.primary.default,
       [systemIconStencil.vars.color]: 'currentColor',
