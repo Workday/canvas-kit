@@ -64,12 +64,15 @@ function fillPalette(
     palette.darkest || (palette.main && shiftColor(palette.main, 200)) || defaultPalette.darkest;
   const light =
     palette.light || (palette.main && shiftColor(palette.main, -100)) || defaultPalette.light;
+  const lighter =
+    palette.lighter || (palette.main && shiftColor(palette.main, -150)) || defaultPalette.lighter;
   const lightest =
     palette.lightest || (palette.main && shiftColor(palette.main, -200)) || defaultPalette.lightest;
   const contrast = palette.contrast || pickForegroundColor(main) || defaultPalette.contrast;
 
   return {
     lightest,
+    lighter,
     light,
     main,
     dark,
