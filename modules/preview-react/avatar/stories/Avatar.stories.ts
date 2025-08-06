@@ -8,7 +8,6 @@ import {Basic as BasicExample} from './examples/Basic';
 import {Image as ImageExample} from './examples/Image';
 import {Size as SizeExample} from './examples/Size';
 import {Variant as VariantExample} from './examples/Variant';
-import {CustomColor as CustomColorExample} from './examples/CustomColor';
 import {Custom as CustomExample} from './examples/Custom';
 
 export default {
@@ -38,10 +37,6 @@ export const Size: Story = {
 
 export const Variant: Story = {
   render: VariantExample,
-};
-
-export const CustomColor: Story = {
-  render: CustomColorExample,
 };
 
 export const Custom: Story = {

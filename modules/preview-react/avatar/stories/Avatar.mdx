@@ -5,7 +5,6 @@ import {Basic} from './examples/Basic';
 import {Image} from './examples/Image';
 import {Size} from './examples/Size';
 import {Variant} from './examples/Variant';
-import {CustomColor} from './examples/CustomColor';
 import {Custom} from './examples/Custom';
 
 <Meta title="Preview/Avatar" component={Avatar} />
@@ -25,33 +24,53 @@ yarn add @workday/canvas-kit-preview-react
 
 ### Basic Example
 
-Show and hide using a button.
+The most basic usage requires only a `name` prop. The component automatically extracts and displays
+the initials:
 
 <ExampleCodeBlock code={Basic} />
 
 ### Image Avatar
 
-You can open your component by default using the `initialOpen` prop.
+You can display a profile image by providing the `url` prop.
+
+> Note: The `url` and the `name` prop is required for the image avatar. The `name` is used for the `alt` attribute on the image.
+
+#### Image Fallback Behavior
+
+The Avatar component includes intelligent fallback handling:
+
+- While the image loads, the user's initials are displayed using the `name` prop
+- If the image fails to load, initials remain visible
+- The `name` prop serves as both the alt text and fallback content
 
 <ExampleCodeBlock code={Image} />
 
 ### Sizes
 
+The Avatar component supports the following sizes:
+- `extraExtraSmall`
+- `extraSmall`
+- `small`
+- `medium`
+- `large`
+- `extraLarge`
+- `extraExtraLarge`
+
 <ExampleCodeBlock code={Size} />
 
 ### Variants
 
+Choose from four predefined color schemes:
+
 <ExampleCodeBlock code={Variant} />
 
-### Custom Color
+### Advanced Custom Component
 
-<ExampleCodeBlock code={CustomColor} />
-
-### Custom Component
+For complete control over styling and behavior, use the `BaseAvatar` component:
 
 <ExampleCodeBlock code={Custom} />
 
 
 ## Component API
 
-<SymbolDoc name="Avatar" hideDescription />
+<SymbolDoc name="Avatar" fileName="/preview-react/" hideDescription />

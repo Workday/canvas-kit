@@ -2,12 +2,18 @@ import React from 'react';
 
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {Property} from 'csstype';
-import {createStencil, cssVar, calc, handleCsProp, CSProps} from '@workday/canvas-kit-styling';
-import {system, base} from '@workday/canvas-tokens-web';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+
 import {BaseAvatarProps, BaseAvatar, baseAvatarStencil} from './BaseAvatar';
 
 export interface AvatarProps extends BaseAvatarProps {
+  /**
+   * The URL of the user's photo. For best fit, use square images.
+   */
   url?: string;
+  /**
+   * The alt text of the Avatar image. This prop is also used for the initials. The first letter of the first name and the first letter of the second name are chosen for the initials.
+   */
   name: string;
   /**
    * An objectFit property that can customize how to resize your image to fit its container.
