@@ -4,6 +4,7 @@ import {getInitialsFromName} from './getInitialsFromName';
 
 export interface AvatarNameProps extends CSProps {
   name: string;
+  preferredInitials?: string;
 }
 
 export const avatarNameStencil = createStencil({

@@ -55,6 +55,7 @@ export const baseAvatarStencil = createStencil({
     alignItems: 'center',
     justifyContent: 'center',
     overflow: 'hidden',
+    border: 'none',
     ...system.type.body.medium,
   }),
   modifiers: {

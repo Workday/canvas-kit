@@ -1,9 +1,12 @@
-
-import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {SymbolDoc, Specifications, ExampleCodeBlock} from '@workday/canvas-kit-docs';
 
 import {Avatar} from '@workday/canvas-kit-preview-react/avatar';
 import {Basic} from './examples/Basic';
-import {Open} from './examples/Open';
+import {Image} from './examples/Image';
+import {Size} from './examples/Size';
+import {Variant} from './examples/Variant';
+import {CustomColor} from './examples/CustomColor';
+import {Custom} from './examples/Custom';
 
 <Meta title="Preview/Avatar" component={Avatar} />
 
@@ -26,11 +29,28 @@ Show and hide using a button.
 
 <ExampleCodeBlock code={Basic} />
 
-### Start Open
+### Image Avatar
 
 You can open your component by default using the `initialOpen` prop.
 
-<ExampleCodeBlock code={Open} />
+<ExampleCodeBlock code={Image} />
+
+### Sizes
+
+<ExampleCodeBlock code={Size} />
+
+### Variants
+
+<ExampleCodeBlock code={Variant} />
+
+### Custom Color
+
+<ExampleCodeBlock code={CustomColor} />
+
+### Custom Component
+
+<ExampleCodeBlock code={Custom} />
+
 
 ## Component API
 

@@ -22,17 +22,65 @@ export const avatarStencil = createStencil({
     avatarImage: 'avatar-image',
     avatarName: 'avatar-name',
   },
-  base: ({avatarImagePart}) => ({
-    [avatarImagePart]: {
-      width: '100%',
-      height: '100%',
-    },
-  }),
+  base: {},
   modifiers: {
     imageLoaded: {
       false: ({avatarImagePart}) => ({
         [avatarImagePart]: {
           display: 'none',
+        },
+      }),
+    },
+    objectFit: {
+      contain: ({avatarImagePart}) => ({
+        [avatarImagePart]: {
+          objectFit: 'contain',
+        },
+      }),
+      cover: ({avatarImagePart}) => ({
+        [avatarImagePart]: {
+          objectFit: 'cover',
+        },
+      }),
+      fill: ({avatarImagePart}) => ({
+        [avatarImagePart]: {
+          objectFit: 'fill',
+        },
+      }),
+      none: ({avatarImagePart}) => ({
+        [avatarImagePart]: {
+          objectFit: 'none',
+        },
+      }),
+      ['scale-down']: ({avatarImagePart}) => ({
+        [avatarImagePart]: {
+          objectFit: 'scale-down',
+        },
+      }),
+      initial: ({avatarImagePart}) => ({
+        [avatarImagePart]: {
+          objectFit: 'initial',
+        },
+      }),
+
+      inherit: ({avatarImagePart}) => ({
+        [avatarImagePart]: {
+          objectFit: 'inherit',
+        },
+      }),
+      unset: ({avatarImagePart}) => ({
+        [avatarImagePart]: {
+          objectFit: 'unset',
+        },
+      }),
+      ['-moz-initial']: ({avatarImagePart}) => ({
+        [avatarImagePart]: {
+          objectFit: '-moz-initial',
+        },
+      }),
+      ['revert']: ({avatarImagePart}) => ({
+        [avatarImagePart]: {
+          objectFit: 'revert',
         },
       }),
     },
@@ -45,7 +93,11 @@ export const avatarStencil = createStencil({
 export const Avatar = createComponent('div')({
   displayName: 'Avatar',
 
-  Component: ({url, name, variant, objectFit, size, ...elemProps}: AvatarProps, ref, Element) => {
+  Component: (
+    {url, name, variant, objectFit = 'cover', size, ...elemProps}: AvatarProps,
+    ref,
+    Element
+  ) => {
     const [imageLoaded, setImageLoaded] = React.useState(false);
 
     const handleImageLoad = () => {
@@ -59,13 +111,14 @@ export const Avatar = createComponent('div')({
         as={Element}
         role="img"
         ref={ref}
-        {...handleCsProp(elemProps, avatarStencil({variant, size, imageLoaded}))}
+        {...handleCsProp(elemProps, avatarStencil({variant, size, imageLoaded, objectFit}))}
       >
         {url && (
           <>
             <BaseAvatar.Image
               onLoad={handleImageLoad}
               src={url}
+              alt={name}
               {...avatarStencil.parts.avatarImage}
               role="presentation"
             />
