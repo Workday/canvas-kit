@@ -5,8 +5,8 @@ import {BodyText, Heading} from '@workday/canvas-kit-react/text';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {system, base} from '@workday/canvas-tokens-web';
-import {createStyles, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 
 const fruits = [
   'Apples',
@@ -20,8 +20,8 @@ const fruits = [
 ];
 
 const liveRegionStyle = createStyles({
-  border: `${px2rem(1)} solid ${base.cantaloupe400}`,
-  backgroundColor: base.cantaloupe100,
+  border: `${px2rem(1)} solid ${system.color.bg.caution.stronger}`,
+  backgroundColor: system.color.bg.caution.default,
   padding: system.space.x2,
 });
 

@@ -1,22 +1,22 @@
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {createStencil, createStyles} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
-const customBlueAvatarStencil = createStencil({
+const customOrangeAvatar = createStencil({
   base: {
-    backgroundColor: base.berrySmoothie400,
+    backgroundColor: system.color.static.amber.default,
     ['[data-part="avatar-icon"]']: {
-      [systemIconStencil.vars.color]: base.berrySmoothie100,
+      [systemIconStencil.vars.color]: system.color.static.white,
     },
   },
 });
 
 const customGreenAvatarStencil = createStencil({
   base: {
-    backgroundColor: base.watermelon400,
+    backgroundColor: system.color.static.green.default,
     ['[data-part="avatar-icon"]']: {
-      [systemIconStencil.vars.color]: base.watermelon100,
+      [systemIconStencil.vars.color]: system.color.static.white,
     },
   },
 });
@@ -28,7 +28,7 @@ const containerStyles = createStyles({
 
 export const CustomStyles = () => (
   <div className={containerStyles}>
-    <Avatar altText="Avatar" as="div" {...customBlueAvatarStencil()} />
+    <Avatar altText="Avatar" as="div" {...customOrangeAvatar()} />
     <Avatar altText="Avatar" as="div" {...customGreenAvatarStencil()} />
   </div>
 );

@@ -6,6 +6,7 @@ import {CanvasBreakpoints, BreakpointFnParam} from './breakpoints';
 
 export type CanvasThemePalette = {
   lightest: string;
+  lighter: string;
   light: string;
   main: string;
   dark: string;
@@ -15,6 +16,9 @@ export type CanvasThemePalette = {
 
 type CanvasThemeCommonPalette = {
   focusOutline: string;
+  alertInner: string;
+  alertOuter: string;
+  errorInner: string;
 };
 
 /**

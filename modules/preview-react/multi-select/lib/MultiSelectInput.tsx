@@ -26,7 +26,7 @@ export const multiSelectInputStencil = createStencil({
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: system.color.bg.default,
-    borderRadius: system.shape.x1,
+    borderRadius: system.shape.x1Half,
     boxSizing: 'border-box',
     minHeight: system.space.x10,
     transition: '0.2s box-shadow, 0.2s border-color',
@@ -45,7 +45,7 @@ export const multiSelectInputStencil = createStencil({
     // @ts-ignore
     '& [data-part="user-input"]': {
       ...system.type.subtext.large,
-      backgroundColor: system.color.bg.transparent,
+      backgroundColor: system.color.bg.transparent.default,
       borderRadius: system.shape.x1,
 
       // collapse the height of the input by the border width so that an empty multi-select
@@ -100,28 +100,31 @@ export const multiSelectInputStencil = createStencil({
   modifiers: {
     error: {
       error: {
-        borderColor: brand.error.base,
-        boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.error.base}`,
+        borderColor: brand.common.errorInner,
+        boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.common.errorInner}`,
+        backgroundColor: brand.error.lightest,
         '&:has(:hover, :disabled, :focus-visible), &:is(.hover, .disabled, .focus)': {
-          borderColor: brand.error.base,
+          borderColor: brand.common.errorInner,
         },
         '&:has(:focus-visible:not([disabled])), &.focus': {
-          boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.error.base}, 0 0 0 2px ${
+          borderColor: brand.common.errorInner,
+          boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.common.errorInner}, 0 0 0 2px ${
             system.color.border.inverse
           }, 0 0 0 4px ${brand.common.focusOutline}`,
           outlineOffset: px2rem(2),
         },
       },
       alert: {
-        borderColor: brand.alert.darkest,
-        boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.alert.base}`,
+        borderColor: brand.common.alertOuter,
+        boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.common.alertInner}`,
+        backgroundColor: brand.alert.lightest,
         '&:has(:hover, .hover, :disabled, .disabled, :focus-visible:not([disabled])), .focus:not(:has([disabled]))':
           {
-            borderColor: brand.alert.darkest,
+            borderColor: brand.common.alertOuter,
           },
 
         '&:has(:focus-visible, .focus):not(:has([disabled]))': {
-          boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.alert.base},
+          boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.common.alertInner},
         0 0 0 2px ${system.color.border.inverse},
         0 0 0 4px ${brand.common.focusOutline}`,
         },

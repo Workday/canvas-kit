@@ -16,7 +16,7 @@ export const RTL = () => {
             האם ברצונך למחוק פריט זה
           </Box>
         </Popup.Body>
-        <Flex gap="s" padding="xxs" marginTop="xxs">
+        <Flex gap="s" padding="xxs">
           <DeleteButton>לִמְחוֹק</DeleteButton>
           <SecondaryButton>לְבַטֵל</SecondaryButton>
         </Flex>
