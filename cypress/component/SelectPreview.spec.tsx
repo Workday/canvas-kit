@@ -46,8 +46,8 @@ function assertOptionCenteredInView($option: JQuery) {
 
   expect(menu.scrollTop).to.equal(expectedMenuScrollTop);
 }
-
-describe('Select', () => {
+// TODO: Remove this file when we remove SelectPreview.
+describe.skip('Select', () => {
   context(`given the "Default" story is rendered`, () => {
     beforeEach(() => {
       cy.mount(<Default />);

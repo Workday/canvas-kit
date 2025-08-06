@@ -8,10 +8,10 @@ import {base} from '@workday/canvas-tokens-web';
 import {createStyles, cssVar} from '@workday/canvas-kit-styling';
 
 const backgroundColors = {
-  cssProp: cssVar(base.chiliMango500),
-  styledComponent: cssVar(base.kiwi500),
-  styleProps: cssVar(base.pomegranate500),
-  createStyles: cssVar(base.grapeSoda500),
+  cssProp: cssVar(base.orange500),
+  styledComponent: cssVar(base.green500),
+  styleProps: cssVar(base.magenta500),
+  createStyles: cssVar(base.purple500),
 };
 
 const StyledPrimaryButton = styled(PrimaryButton)({
