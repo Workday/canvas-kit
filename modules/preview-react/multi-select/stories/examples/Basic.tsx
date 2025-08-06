@@ -9,7 +9,7 @@ export const Basic = () => {
   return (
     <>
       <MultiSelect items={items} initialSelectedIds={['Olives', 'Onions', 'Pepperoni']}>
-        <FormField orientation="horizontal">
+        <FormField orientation="horizontalStart">
           <FormField.Label>Toppings</FormField.Label>
           <FormField.Input
             as={MultiSelect.Input}

@@ -1,4 +1,3 @@
-import React from 'react';
 import {createSubcomponent} from '@workday/canvas-kit-react/common';
 import {useRadioModel} from './hooks/useRadioModel';
 import {RadioGroup} from './RadioGroup';

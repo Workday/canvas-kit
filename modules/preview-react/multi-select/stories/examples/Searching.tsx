@@ -83,7 +83,7 @@ export const Searching = () => {
         >
           <main className={mainContentStyles}>
             <MultiSelect model={model}>
-              <FormField orientation="horizontal">
+              <FormField orientation="horizontalStart">
                 <FormField.Label>Fruits</FormField.Label>
                 <FormField.Input
                   as={MultiSelect.SearchInput}

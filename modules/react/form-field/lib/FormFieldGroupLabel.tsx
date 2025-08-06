@@ -75,8 +75,7 @@ export const FormFieldGroupLabel = createSubcomponent('div')({
           typeLevel,
           variant,
           isRequired: model.state.isRequired as any,
-          orientation:
-            model.state.orientation === 'horizontal' ? 'horizontalStart' : model.state.orientation,
+          orientation: model.state.orientation,
         })
       )}
     >

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {handleCsProp} from '@workday/canvas-kit-styling';
 
 import {
