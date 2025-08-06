@@ -3,6 +3,72 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.15](https://github.com/Workday/canvas-kit/releases/tag/v13.2.15) (2025-08-04)
+
+### Utilities
+
+- fix: Support unwrapped CSS variables in `injectGlobal` ([#3424](https://github.com/Workday/canvas-kit/pull/3424)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v13.2.14](https://github.com/Workday/canvas-kit/releases/tag/v13.2.14) (2025-08-01)
+
+### Infrastructure
+
+- chore: Fix form-data vulnerability ([#3426](https://github.com/Workday/canvas-kit/pull/3426)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v12.6.18](https://github.com/Workday/canvas-kit/releases/tag/v12.6.18) (2025-07-31)
+
+### Utilities
+
+- fix: Support unwrapped CSS variables in `injectGlobal` ([#3424](https://github.com/Workday/canvas-kit/pull/3424)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+## [v13.2.13](https://github.com/Workday/canvas-kit/releases/tag/v13.2.13) (2025-07-31)
+
+### Components
+
+- fix: Use dvh in Popup.Card height calculation ([#3419](https://github.com/Workday/canvas-kit/pull/3419)) ([@JaredMaione](https://github.com/JaredMaione))
+
+
+## [v12.6.17](https://github.com/Workday/canvas-kit/releases/tag/v12.6.17) (2025-07-30)
+
+### Components
+
+- fix: Use dvh in Popup.Card height calculation ([#3419](https://github.com/Workday/canvas-kit/pull/3419)) ([@JaredMaione](https://github.com/JaredMaione))
+## [v13.2.12](https://github.com/Workday/canvas-kit/releases/tag/v13.2.12) (2025-07-30)
+
+### Infrastructure
+
+- ci: Fix watch message to not clear terminal ([#3421](https://github.com/Workday/canvas-kit/pull/3421)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v13.2.11](https://github.com/Workday/canvas-kit/releases/tag/v13.2.11) (2025-07-30)
+
+### Documentation
+
+- docs: Adding new advanced table example and Accessibility Guides ([#3375](https://github.com/Workday/canvas-kit/pull/3375)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton, manuel.carrera)
+
+
+## [v13.2.10](https://github.com/Workday/canvas-kit/releases/tag/v13.2.10) (2025-07-29)
+
+### Components
+
+- fix(TabsItem): Added styles for Windows high contrast ([#3418](https://github.com/Workday/canvas-kit/pull/3418)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton)
+
+
+## [v13.2.9](https://github.com/Workday/canvas-kit/releases/tag/v13.2.9) (2025-07-28)
+
+### Codemods
+
+- chore: Fix codemod to prevent not relevant files ([#3416](https://github.com/Workday/canvas-kit/pull/3416)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v13.2.8](https://github.com/Workday/canvas-kit/releases/tag/v13.2.8) (2025-07-28)
+
+### Documentation
+
+- docs: Update codemod installation script ([#3413](https://github.com/Workday/canvas-kit/pull/3413)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
 ## [v13.2.7](https://github.com/Workday/canvas-kit/releases/tag/v13.2.7) (2025-07-24)
 
 ### Documentation

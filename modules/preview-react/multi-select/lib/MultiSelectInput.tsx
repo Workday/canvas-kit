@@ -45,7 +45,7 @@ export const multiSelectInputStencil = createStencil({
     // @ts-ignore
     '& [data-part="user-input"]': {
       ...system.type.subtext.large,
-      backgroundColor: system.color.bg.transparent,
+      backgroundColor: system.color.bg.transparent.default,
       borderRadius: system.shape.x1,
 
       // collapse the height of the input by the border width so that an empty multi-select

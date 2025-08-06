@@ -41,7 +41,7 @@ export const toolbarIconButtonStencil = createStencil({
     },
 
     '&:disabled, &.disabled': {
-      [buttonStencil.vars.background]: system.color.bg.transparent,
+      [buttonStencil.vars.background]: system.color.bg.transparent.default,
       [systemIconStencil.vars.color]: system.color.fg.disabled,
     },
 
