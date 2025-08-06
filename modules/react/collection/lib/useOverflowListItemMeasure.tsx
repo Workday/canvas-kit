@@ -51,7 +51,23 @@ export const useOverflowListItemMeasure = createElemPropsHook(useOverflowListMod
       'aria-hidden': hidden || undefined,
 
       style: hidden ? hiddenStyles : {},
-      inert: hidden ? '' : undefined,
+
+      // `inert` is not directly supported in React < 19 which means the prop is forwarded directly
+      // as an HTML attribute. React 19 adds support for this prop officially as a `boolean |
+      // undefined`. React <19 will ignore `true`, so we need to make it the string `'true'`. We
+      // cannot change this until we drop support for React <19.
+      //
+      // - React 18: `inert: true` => no `inert` attribute
+      // - React 18: `inert: 'true'` => `inert="true"` in the DOM
+      // - React 19: `inert: true` => `inert` in the DOM
+      // - React 19: `inert: 'true'` => `inert` in the DOM
+      //
+      // There is a difference between `inert` in both versions, where React 18 will add the
+      // `'true'` and React 19 will not. This shouldn't cause issues unless someone has a
+      // `[inert=true]` CSS selector which will not match the React 19 behavior. For this reason, we
+      // cannot use `'false'` and must use `undefined` as the falsey case. This should ensure
+      // correct behavior in all versions of React.
+      inert: hidden ? 'true' : undefined,
     };
   }
 );
