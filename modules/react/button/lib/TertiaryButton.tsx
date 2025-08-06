@@ -1,5 +1,5 @@
 import {buttonColorPropVars, buttonStencil} from './BaseButton';
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
 import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {system, brand} from '@workday/canvas-tokens-web';
 import {Button, ButtonProps} from './Button';
@@ -37,8 +37,14 @@ const tertiaryButtonStencil = createStencil({
     '&:focus-visible, &.focus': {
       [buttonStencil.vars.background]: system.color.bg.transparent.default,
       [buttonStencil.vars.label]: brand.primary.base,
-      [buttonStencil.vars.border]: system.color.border.primary.default,
+      // [buttonStencil.vars.border]: system.color.border.primary.default,
       [systemIconStencil.vars.color]: 'currentColor',
+      ...focusRing({
+        width: 2,
+        separation: 0,
+        innerColor: system.color.border.inverse,
+        outerColor: brand.common.focusOutline,
+      }),
     },
     // Hover Styles
     '&:hover, &.hover': {
@@ -111,7 +117,7 @@ const tertiaryButtonStencil = createStencil({
           [buttonStencil.vars.background]: system.color.bg.translucent,
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: 'currentColor',
-          [buttonStencil.vars.border]: brand.common.focusOutline,
+          [buttonStencil.vars.border]: system.color.border.inverse,
         },
         // Hover Styles
         '&:hover, &.hover': {
