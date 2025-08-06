@@ -21,7 +21,7 @@ export const defaultCanvasTheme: CanvasTheme = {
       main: cssVar(base.amber400),
       dark: cssVar(base.amber500),
       darkest: cssVar(base.amber600),
-      contrast: cssVar(base.neutral950),
+      contrast: cssVar(base.neutral900),
     },
     error: {
       lightest: cssVar(base.red25),

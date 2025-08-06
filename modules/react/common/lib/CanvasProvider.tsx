@@ -36,7 +36,7 @@ const defaultBranding = createStyles({
   [brand.error.light]: base.red200,
   [brand.error.lighter]: base.red50,
   [brand.error.lightest]: base.red25,
-  [brand.alert.accent]: base.neutral950,
+  [brand.alert.accent]: base.neutral900,
   [brand.alert.darkest]: base.amber600,
   [brand.alert.dark]: base.amber500,
   [brand.alert.base]: base.amber400,
