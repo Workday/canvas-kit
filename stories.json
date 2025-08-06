@@ -3829,6 +3829,18 @@
         "__isArgsStory": false
       }
     },
+    "preview-multiselect--initial-selected-items": {
+      "id": "preview-multiselect--initial-selected-items",
+      "name": "Initial Selected Items",
+      "title": "Preview/MultiSelect",
+      "importPath": "./modules/preview-react/multi-select/stories/MultiSelect.stories.ts",
+      "kind": "Preview/MultiSelect",
+      "story": "Initial Selected Items",
+      "parameters": {
+        "fileName": "./modules/preview-react/multi-select/stories/MultiSelect.stories.ts",
+        "__isArgsStory": false
+      }
+    },
     "preview-multiselect--searching": {
       "id": "preview-multiselect--searching",
       "name": "Searching",
