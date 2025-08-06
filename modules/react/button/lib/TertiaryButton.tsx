@@ -15,11 +15,6 @@ export interface TertiaryButtonProps extends ButtonProps {
    * Variant has an option for `inverse` which will inverse the styling
    */
   variant?: 'inverse';
-  /**
-   * isThemeable is a boolean that allows the button to be themeable.
-   * @deprecated This prop is no longer needed and will be removed in the next major version. Use css tokens instead.
-   */
-  isThemeable?: boolean;
 }
 
 const tertiaryButtonStencil = createStencil({

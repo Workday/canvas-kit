@@ -15,6 +15,7 @@ any questions.
 - [Theming](#theming)
 - [Component Updates](#component-updates)
   - [Branding Changes](#branding-changes)
+  - [Buttons](#buttons)
   - [Card](#card)
   - [Count Badge](#count-badge)
   - [Expandable](#expandable)
@@ -97,16 +98,17 @@ yarn remove @workday/canvas-kit-codemod
 - `CanvasThemePalette` has been updated to include a `lighter` color.
 - `CanvasTheme` has been updated to include a `lighter` color.
 
-
 ## Component Updates
 
 ### Branding Changes 💅
 
-Several components have been refactored to reflect our new brand direction. Most of these changes revolve around the use of our new bran colors.
+Several components have been refactored to reflect our new brand direction. Most of these changes
+revolve around the use of our new bran colors.
 
 The following components have been updated:
 
 - `Breadcrumbs` [#3270](https://github.com/Workday/canvas-kit/pull/3270)
+- `Buttons` [#3394](https://github.com/Workday/canvas-kit/pull/3394)
 - `ColorPicker` (Main) [#3307](https://github.com/Workday/canvas-kit/pull/3307)
 - `ColorPicker` (preview) [#3307](https://github.com/Workday/canvas-kit/pull/3307)
 - `LoadingDots` (Main) [#3393](https://github.com/Workday/canvas-kit/pull/3393)
@@ -116,6 +118,15 @@ The following components have been updated:
 - `SegmentedControl` (Preview) [#3278](https://github.com/Workday/canvas-kit/pull/3278)
 - `ToolbarDropdownButton` [#3293](https://github.com/Workday/canvas-kit/pull/3293)
 - `ToolbarIconButton` [#3293](https://github.com/Workday/canvas-kit/pull/3293)
+
+### Buttons
+
+#### TertiaryButton
+
+The `TertiaryButton` component no longer supports the `isThemable` prop.  
+To customize the appearance of `TertiaryButton`, use the `cs` prop for custom styles or the `colors`
+prop for palette-based color overrides.
+[See more](https://workday.github.io/canvas-kit/?path=/docs/components-buttons--docs#custom-styles)
 
 ### Card 🚨
 
@@ -212,9 +223,8 @@ spacing between card elements.
 
 The `CountBadge` component has been updated to reflect our new brand direction.
 
-
-Additionally, a new `emphasis` prop has been added, allowing you to choose between `high` and
-`low` emphasis for the badge.
+Additionally, a new `emphasis` prop has been added, allowing you to choose between `high` and `low`
+emphasis for the badge.
 
 **Count Badge variants in v14**
 
@@ -241,7 +251,8 @@ These changes are only **visual** and should not affect the functionality of the
 
 **PR:** [#3390](https://github.com/Workday/canvas-kit/pull/3390)
 
-- `Hyperlink` and `ExternalHyperlink` now have a `standalone` and `standalone-inverse` variant. This removes the underline text decoration for use outside the context of body text.
+- `Hyperlink` and `ExternalHyperlink` now have a `standalone` and `standalone-inverse` variant. This
+  removes the underline text decoration for use outside the context of body text.
 
 **HyperLink and ExternalHyperlink in v14**
 
@@ -252,14 +263,17 @@ These changes are only **visual** and should not affect the functionality of the
 <ExternalHyperlink variant="standalone-inverse" href="#external-hyperlink">External Hyperlink</ExternalHyperlink>
 ```
 
-> **Note:** Only use the `standalone` or `standalone-inverse` variant in cases where the `<HyperLink>` and `<ExternalHyperlink>` are used outside the context of body text.
+> **Note:** Only use the `standalone` or `standalone-inverse` variant in cases where the
+> `<HyperLink>` and `<ExternalHyperlink>` are used outside the context of body text.
 
 ### Loading Dots
 
 **PR:** [#3393](https://github.com/Workday/canvas-kit/pull/3393)
 
-- We've updated the colors to match brand refresh. The default color changes from `system.color.bg.alt.strong` to `system.color.bg.muted.strong`.
-- `LoadingDots` now has a `inverse` variant. Use this variant when the Loading Dots are on a dark background or image.
+- We've updated the colors to match brand refresh. The default color changes from
+  `system.color.bg.alt.strong` to `system.color.bg.muted.strong`.
+- `LoadingDots` now has a `inverse` variant. Use this variant when the Loading Dots are on a dark
+  background or image.
 
 ```tsx
 <LoadingDots variant="inverse" />
