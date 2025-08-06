@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {SymbolValue} from '../../docgen/docTypes';
 import {registerWidget} from '../Value';
 import {SymbolDialog} from '../widgetUtils';

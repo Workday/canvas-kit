@@ -26,7 +26,7 @@ import {
   defaultCanvasTheme,
   StyledType,
   createComponent,
-  dubLogoBlue,
+  dubLogoPrimary,
 } from '@workday/canvas-kit-react/common';
 import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 import {SearchForm} from '@workday/canvas-kit-labs-react/search-form';
@@ -233,7 +233,7 @@ const Template = props => (
       <GlobalHeader.Item>
         <TertiaryButton aria-label="menu" icon={justifyIcon} />
         <Hyperlink>
-          <WorkdayLogo dangerouslySetInnerHTML={{__html: dubLogoBlue}} />
+          <WorkdayLogo dangerouslySetInnerHTML={{__html: dubLogoPrimary}} />
         </Hyperlink>
       </GlobalHeader.Item>
       <GlobalHeader.Item margin="auto" width="100%" maxWidth={`calc(${space.xxxl} * 6)`}>

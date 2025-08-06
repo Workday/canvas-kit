@@ -49,7 +49,7 @@ const output = `
 <a href="https://github.com/Workday/canvas-kit/blob/master/LICENSE">
   <img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="Workday Canvas Kit is released under the Apache-2.0 license" />
 </a>
-[Form Field](?path=/docs/components-inputs-form-field-react--basic)
+[Form Field](?path=/docs/components-inputs-form-field--basic)
 [ReadMe](https://github.com/Workday/canvas-kit/blob/master/modules/docs/mdx/CONTRIBUTING.mdx)
 `;
 
@@ -60,5 +60,4 @@ assert(
     output,
   'Failed webpack-loader-redirect-mdx-to-github.js check'
 );
-
 module.exports = webpackLoaderRedirectMDXToGithub;

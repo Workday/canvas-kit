@@ -152,6 +152,7 @@ export const useComboboxInputConstrained = createElemPropsHook(useComboboxModel)
         model.onFilterChange?.(event);
         return null; // Prevent further `onChange` callbacks from firing
       },
+
       name: null,
       disabled,
       /**

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {ModelHookValue, ModelValue} from '../../docgen/plugins/customTypes';
 import {PropertiesTable, registerWidget, Value} from '../Value';
 import {Heading} from '../widgetUtils';

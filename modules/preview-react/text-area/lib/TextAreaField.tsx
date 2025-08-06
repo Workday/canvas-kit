@@ -1,7 +1,3 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import {jsx} from '@emotion/react';
-
 import {
   borderRadius,
   colors,
@@ -68,7 +64,7 @@ export const TextAreaField = createSubcomponent('textarea')({
     <FormField.Input
       as={Element}
       {...type.levels.subtext.large}
-      css={[baseStyles, focusStyles]}
+      cs={[baseStyles, focusStyles]}
       {...elemProps}
       border={`1px solid ${inputColors.border}`}
       display="block"

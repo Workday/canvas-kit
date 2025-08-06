@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 
 import {
@@ -14,6 +14,7 @@ import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-ki
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {
+  isCursor,
   useListItemRegister,
   useListItemRovingFocus,
   useListItemSelect,
@@ -21,7 +22,7 @@ import {
 
 import {useMenuModel} from './useMenuModel';
 
-export interface MenuItemProps {
+export interface MenuItemProps extends CSProps {
   /**
    * Optionally pass index to menu item. This should be done if `Menu.Item` components were created
    * via a `Array::map` function. This index will ensure keyboard navigation works even if items are
@@ -53,7 +54,12 @@ export interface MenuItemProps {
 }
 
 export const menuItemStencil = createStencil({
-  base: {
+  parts: {
+    text: 'menu-item-text',
+    icon: 'menu-item-icon',
+    selected: 'menu-item-selected',
+  },
+  base: ({textPart, iconPart, selectedPart}) => ({
     ...system.type.subtext.large,
     display: 'flex',
     alignItems: 'center',
@@ -73,7 +79,7 @@ export const menuItemStencil = createStencil({
     [systemIconStencil.vars.color]: 'currentcolor',
 
     // selected checkmark
-    '& :where([data-part="menu-item-selected"])': {
+    [`& :where(${selectedPart})`]: {
       transition: 'opacity 80ms linear',
       opacity: system.opacity.zero,
     },
@@ -84,9 +90,19 @@ export const menuItemStencil = createStencil({
     },
 
     // Selected styles
-    '&:is([aria-selected=true])': {
+    '&[aria-selected=true]': {
       color: brand.primary.dark,
       backgroundColor: brand.primary.lightest,
+
+      [`& :where(${selectedPart})`]: {
+        opacity: system.opacity.full,
+      },
+      '&:where(.focus, :focus)': {
+        [systemIconStencil.vars.color]: brand.primary.accent,
+        outline: 'none',
+        backgroundColor: brand.primary.base,
+        color: systemIconStencil.vars.color,
+      },
     },
 
     // Hover styles
@@ -114,24 +130,26 @@ export const menuItemStencil = createStencil({
       },
     },
 
-    '& :where([data-part="menu-item-text"])': {
+    [`& :where(${textPart})`]: {
       flexGrow: 1,
       alignSelf: 'center',
     },
 
-    '& :where([data-part="menu-icon-icon"])': {
+    [`& :where(${iconPart})`]: {
       alignSelf: 'start',
     },
-  },
+  }),
 });
 
 const MenuItemIcon = (elemProps: SystemIconProps) => {
-  return <SystemIcon data-part="menu-item-icon" {...elemProps} />;
+  return <SystemIcon {...menuItemStencil.parts.icon} {...elemProps} />;
 };
 
-const MenuItemText = ({children}: React.PropsWithChildren) => {
-  return <span data-part="menu-item-text">{children}</span>;
-};
+const MenuItemText = createComponent('span')({
+  Component: ({...elemProps}, ref, Element) => {
+    return <Element ref={ref} {...menuItemStencil.parts.text} {...elemProps} />;
+  },
+});
 
 export const StyledMenuItem = createComponent('button')({
   displayName: 'MenuItem',
@@ -148,39 +166,68 @@ export const StyledMenuItem = createComponent('button')({
   },
 });
 
-export const useMenuItem = composeHooks(
-  createElemPropsHook(useMenuModel)(
-    (model, ref, elemProps: {'data-id': string} = {'data-id': ''}) => {
-      const {localRef, elementRef} = useLocalRef(ref as React.Ref<HTMLElement>);
-      const id = elemProps['data-id'];
+export const useMenuItemArrowReturn = createElemPropsHook(useMenuModel)(model => {
+  return {
+    onKeyDown(event: React.KeyboardEvent) {
+      const styles = getComputedStyle(event.currentTarget);
+      if (event.key === 'ArrowLeft' && styles.direction === 'ltr' && model.UNSTABLE_parentModel) {
+        model.events.hide(event);
+      }
+    },
+  };
+});
 
-      // focus on the item with the cursor
-      React.useLayoutEffect(() => {
-        if (model.state.mode === 'single') {
-          if (model.state.cursorId === id) {
-            // delay focus changes to allow PopperJS to position
-            requestAnimationFrame(() => {
-              localRef.current?.focus();
-            });
-          }
+export const useMenuItemFocus = createElemPropsHook(useMenuModel)(
+  (model, ref, elemProps: {'data-id': string} = {'data-id': ''}) => {
+    const {localRef, elementRef} = useLocalRef(ref as React.Ref<HTMLElement>);
+    const id = elemProps['data-id'];
+    // focus on the item with the cursor
+    React.useLayoutEffect(() => {
+      if (model.state.mode === 'single') {
+        if (isCursor(model.state, id)) {
+          // delay focus changes to allow PopperJS to position
+          requestAnimationFrame(() => {
+            localRef.current?.focus();
+          });
         }
-      }, [id, localRef, model.state.cursorId, model.state.mode]);
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [id, localRef, model.state.cursorId, model.state.mode]);
+    return {
+      ref: elementRef,
+      className: isCursor(model.state, elemProps['data-id']) ? 'focus' : undefined,
+    };
+  }
+);
 
-      return {
-        ref: elementRef,
-        role: 'menuitem',
-        onClick:
-          model.state.mode === 'single'
-            ? (event: React.SyntheticEvent) => {
-                // only hide if the item isn't disabled
-                if (event.currentTarget.getAttribute('aria-disabled') !== 'true') {
-                  model.events.hide(event);
-                }
+function hideParent(model: ReturnType<typeof useMenuModel>) {
+  if (model.UNSTABLE_parentModel) {
+    (model.UNSTABLE_parentModel as any).events.hide();
+    hideParent(model.UNSTABLE_parentModel as any);
+  }
+}
+
+export const useMenuItem = composeHooks(
+  createElemPropsHook(useMenuModel)(model => {
+    return {
+      role: 'menuitem',
+      onMouseDown(event: React.MouseEvent) {
+        model.events.goTo({id: event.currentTarget.getAttribute('data-id')!});
+      },
+      onClick:
+        model.state.mode === 'single'
+          ? (event: React.SyntheticEvent) => {
+              // only hide if the item isn't disabled
+              if (event.currentTarget.getAttribute('aria-disabled') !== 'true') {
+                model.events.hide(event);
+                hideParent(model);
               }
-            : undefined,
-      };
-    }
-  ),
+            }
+          : undefined,
+    };
+  }),
+  useMenuItemFocus,
+  useMenuItemArrowReturn,
   useListItemSelect,
   useListItemRovingFocus,
   useListItemRegister

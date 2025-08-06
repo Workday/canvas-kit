@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {createSubcomponent} from '@workday/canvas-kit-react/common';
 import {handleCsProp, CSProps, createStencil} from '@workday/canvas-kit-styling';
 
