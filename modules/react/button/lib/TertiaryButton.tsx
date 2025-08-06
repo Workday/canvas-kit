@@ -32,7 +32,6 @@ const tertiaryButtonStencil = createStencil({
     '&:focus-visible, &.focus': {
       [buttonStencil.vars.background]: system.color.bg.transparent.default,
       [buttonStencil.vars.label]: brand.primary.base,
-      // [buttonStencil.vars.border]: system.color.border.primary.default,
       [systemIconStencil.vars.color]: 'currentColor',
       ...focusRing({
         width: 2,
@@ -112,7 +111,11 @@ const tertiaryButtonStencil = createStencil({
           [buttonStencil.vars.background]: system.color.bg.translucent,
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: 'currentColor',
-          [buttonStencil.vars.border]: system.color.border.inverse,
+          ...focusRing({
+            width: 2,
+            separation: 0,
+            outerColor: system.color.border.inverse,
+          }),
         },
         // Hover Styles
         '&:hover, &.hover': {
