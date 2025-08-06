@@ -21,6 +21,12 @@ any questions.
   - [Hyperlink & ExternalHyperlink](#hyperlink-and-externalhyperlink)
   - [Loading Dots](#loading-dots)
   - [SearchForm](#search-form)
+- [Deprecations](#deprecations)
+  - [Combobox (labs)](#combobox-labs)
+  - [Radio (main)](#radio-main)
+  - [Segmented Control (main)](#segmented-control-main)
+  - [Side Panel (main)](#side-panel-main)
+  - [Tokens](#tokens)
 - [Removals](#removals)
   - [Menu (preview)](#menu-preview)
 - [Troubleshooting](#troubleshooting)
@@ -97,12 +103,12 @@ yarn remove @workday/canvas-kit-codemod
 - `CanvasThemePalette` has been updated to include a `lighter` color.
 - `CanvasTheme` has been updated to include a `lighter` color.
 
-
 ## Component Updates
 
 ### Branding Changes 💅
 
-Several components have been refactored to reflect our new brand direction. Most of these changes revolve around the use of our new bran colors.
+Several components have been refactored to reflect our new brand direction. Most of these changes
+revolve around the use of our new bran colors.
 
 The following components have been updated:
 
@@ -212,9 +218,8 @@ spacing between card elements.
 
 The `CountBadge` component has been updated to reflect our new brand direction.
 
-
-Additionally, a new `emphasis` prop has been added, allowing you to choose between `high` and
-`low` emphasis for the badge.
+Additionally, a new `emphasis` prop has been added, allowing you to choose between `high` and `low`
+emphasis for the badge.
 
 **Count Badge variants in v14**
 
@@ -241,7 +246,8 @@ These changes are only **visual** and should not affect the functionality of the
 
 **PR:** [#3390](https://github.com/Workday/canvas-kit/pull/3390)
 
-- `Hyperlink` and `ExternalHyperlink` now have a `standalone` and `standalone-inverse` variant. This removes the underline text decoration for use outside the context of body text.
+- `Hyperlink` and `ExternalHyperlink` now have a `standalone` and `standalone-inverse` variant. This
+  removes the underline text decoration for use outside the context of body text.
 
 **HyperLink and ExternalHyperlink in v14**
 
@@ -252,14 +258,17 @@ These changes are only **visual** and should not affect the functionality of the
 <ExternalHyperlink variant="standalone-inverse" href="#external-hyperlink">External Hyperlink</ExternalHyperlink>
 ```
 
-> **Note:** Only use the `standalone` or `standalone-inverse` variant in cases where the `<HyperLink>` and `<ExternalHyperlink>` are used outside the context of body text.
+> **Note:** Only use the `standalone` or `standalone-inverse` variant in cases where the
+> `<HyperLink>` and `<ExternalHyperlink>` are used outside the context of body text.
 
 ### Loading Dots
 
 **PR:** [#3393](https://github.com/Workday/canvas-kit/pull/3393)
 
-- We've updated the colors to match brand refresh. The default color changes from `system.color.bg.alt.strong` to `system.color.bg.muted.strong`.
-- `LoadingDots` now has a `inverse` variant. Use this variant when the Loading Dots are on a dark background or image.
+- We've updated the colors to match brand refresh. The default color changes from
+  `system.color.bg.alt.strong` to `system.color.bg.muted.strong`.
+- `LoadingDots` now has a `inverse` variant. Use this variant when the Loading Dots are on a dark
+  background or image.
 
 ```tsx
 <LoadingDots variant="inverse" />
@@ -317,6 +326,47 @@ const customTheme = {
 - `SearchTheme` enum type has been updated to have string values `light`, `dark` and `transparent`.
   This **should not** affect the way you use the type unless you're passing a `number` of `0`, `1`
   or `2` to the `searchTheme` prop.
+
+## Deprecations
+
+We add the [@deprecated](https://jsdoc.app/tags-deprecated.html) JSDoc tag to code we plan to remove
+in a future major release. This signals consumers to migrate to a more stable alternative before the
+deprecated code is removed.
+
+### Combobox (labs)
+
+The Combobox component in `@workday/canvas-kit-labs-react/combobox` has been deprecated and will be
+removed in a future major release. Please migrate to the
+[Combobox](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-combobox--docs) in
+`@workday/canvas-kit-react`.
+
+### Radio (main)
+
+The Radio component in `@workday/canvas-kit-react/radio` has been deprecated. Please use the new
+[Radio](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-radio--docs) component
+from the same package, which offers improved accessibility and API consistency.
+
+### Segmented Control (main)
+
+The Segmented Control component in `@workday/canvas-kit-react/segmented-control` has been
+deprecated. Please migrate to the new
+[Segmented Control](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-segmented-control--docs)
+for improved features and support.
+
+### Side Panel (main)
+
+The Side Panel component in `@workday/canvas-kit-react/side-panel` is now deprecated and will be
+removed in a future release. Please use the new
+[Side Panel](https://workday.github.io/canvas-kit/?path=/docs/components-navigation-side-panel--docs)
+for enhanced functionality.
+
+### Tokens
+
+The legacy tokens from `@workday/canvas-kit-react/tokens` are now deprecated. Please use the new
+[Canvas Tokens Web](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs)
+package (`@workday/canvas-tokens-web`) for all token usage. Follow
+[a migration guide](https://workday.github.io/canvas-kit?path=/docs/guides-tokens-migration-overview--docs)
+for smootier upgrade.
 
 ## Removals
 

@@ -34,9 +34,8 @@ import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {BodyText} from '@workday/canvas-kit-react/text';
 
 export default {
-  title: 'Components/Containers/Side Panel',
+  title: 'Components/Containers/Side Panel (deprecated)',
   component: SidePanel,
-  parameters: {ReadmePath: 'react/side-panel'},
   argTypes: {
     backgroundColor: {
       options: {
@@ -71,16 +70,6 @@ interface SidePanelState {
 }
 
 interface HeaderItemProps extends FlexProps {}
-
-const ListItem = styled('li')({
-  display: 'flex',
-  listStyle: 'none',
-  alignItems: 'end',
-  cursor: 'pointer',
-  '&:hover': {
-    backgroundColor: colors.soap300,
-  },
-});
 
 const UnorderedList = styled('ul')({
   paddingLeft: 0,
@@ -216,16 +205,18 @@ class SidePanelWrapper extends React.Component<SidePanelProps, SidePanelState> {
   };
 }
 
-export const Default = () => (
-  <div style={{height: '67vh', position: 'relative'}}>
-    <SidePanel
-      backgroundColor={SidePanel.BackgroundColor.Gray}
-      onToggleClick={() => console.warn('clicked')}
-      header={'Side Panel Header'}
-      open={true}
-    />
-  </div>
-);
+export const Default = {
+  render: () => (
+    <div style={{height: '67vh', position: 'relative'}}>
+      <SidePanel
+        backgroundColor={SidePanel.BackgroundColor.Gray}
+        onToggleClick={() => console.warn('clicked')}
+        header="Side Panel Header"
+        open={true}
+      />
+    </div>
+  ),
+};
 
 const Template = props => (
   <div style={{height: '67vh', position: 'relative'}}>

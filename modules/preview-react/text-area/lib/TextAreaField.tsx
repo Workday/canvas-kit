@@ -41,7 +41,7 @@ const baseStyles: CSSProperties = {
 };
 
 /**
- * @deprecated ⚠️ `TextAreaField` in Preview has been deprecated and will be removed in a future major version. Please use [`FormField`](https://workday.github.io/canvas-kit/?path=/story/preview-inputs-form-field--basic) in Preview instead.
+ * @deprecated ⚠️ `TextAreaField` in Preview has been deprecated and will be removed in a future major version. Please use [`FormField`](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-form-field--docs) in Preview instead.
  */
 export const TextAreaField = createSubcomponent('textarea')({
   displayName: 'TextArea.Field',
