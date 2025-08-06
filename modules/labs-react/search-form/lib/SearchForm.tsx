@@ -291,7 +291,7 @@ export const searchFormStencil = createStencil({
         bottom: 0,
         margin: 0,
         position: 'relative',
-        backgroundColor: system.color.bg.transparent,
+        backgroundColor: system.color.bg.transparent.default,
         transition: 'background-color 120ms',
         maxWidth: calc.add(system.space.x10, system.space.x2),
         minWidth: calc.add(system.space.x10, system.space.x3),
@@ -310,7 +310,7 @@ export const searchFormStencil = createStencil({
           paddingInlineEnd: calc.add(system.space.x10, system.space.x4),
           maxWidth: 'none',
           minWidth: 0,
-          backgroundColor: system.color.bg.transparent,
+          backgroundColor: system.color.bg.transparent.default,
           height: cssVar(height, system.space.x10),
         },
       }),
@@ -383,8 +383,8 @@ export const searchFormStencil = createStencil({
       //Transparent theme
       transparent: ({searchInputPart}) => ({
         [searchInputPart]: {
-          background: system.color.bg.transparent,
-          backgroundFocus: system.color.bg.transparent,
+          background: system.color.bg.transparent.default,
+          backgroundFocus: system.color.bg.transparent.default,
           color: system.color.text.default,
           colorFocus: system.color.text.default,
           placeholderColor: system.color.text.hint,
@@ -411,13 +411,13 @@ export const searchFormStencil = createStencil({
         },
         '& [data-part="search-form-input"]': {
           boxShadow: 'none',
-          background: system.color.bg.transparent,
+          background: system.color.bg.transparent.default,
           ':hover': {
-            background: system.color.bg.transparent,
+            background: system.color.bg.transparent.default,
           },
 
           '&:is(:focus-visible, &.focus):where(:not([disabled]))': {
-            background: system.color.bg.transparent,
+            background: system.color.bg.transparent.default,
             boxShadow: 'none',
           },
         },
