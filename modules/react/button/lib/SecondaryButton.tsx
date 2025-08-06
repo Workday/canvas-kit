@@ -63,7 +63,7 @@ const secondaryButtonStencil = createStencil({
         [systemIconStencil.vars.color]: 'currentColor',
         // Hover Styles
         '&:hover, &.hover': {
-          [buttonStencil.vars.background]: system.color.bg.overlayInverse,
+          [buttonStencil.vars.background]: system.color.bg.transparent.strong,
           [buttonStencil.vars.border]: system.color.border.inverse,
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: 'currentColor',
@@ -79,7 +79,7 @@ const secondaryButtonStencil = createStencil({
         },
         // Active Styles
         '&:active, &.active': {
-          [buttonStencil.vars.background]: system.color.bg.translucentInverse,
+          [buttonStencil.vars.background]: system.color.bg.transparent.stronger,
           [buttonStencil.vars.border]: system.color.border.inverse,
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: 'currentColor',

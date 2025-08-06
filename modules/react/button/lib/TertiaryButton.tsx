@@ -36,15 +36,14 @@ const tertiaryButtonStencil = createStencil({
     // Focus Styles
     '&:focus-visible, &.focus': {
       [buttonStencil.vars.background]: system.color.bg.transparent,
-      // [buttonStencil.vars.label]: brand.primary.base,
-      [buttonStencil.vars.boxShadowInner]: system.color.border.inverse,
-      [buttonStencil.vars.boxShadowOuter]: brand.common.focusOutline,
+      [buttonStencil.vars.label]: brand.primary.base,
+      [buttonStencil.vars.border]: system.color.border.primary.default,
       [systemIconStencil.vars.color]: 'currentColor',
     },
     // Hover Styles
     '&:hover, &.hover': {
       [buttonStencil.vars.background]: system.color.bg.alt.soft,
-      // [buttonStencil.vars.label]: brand.primary.dark,
+      [buttonStencil.vars.label]: brand.primary.dark,
       [systemIconStencil.vars.color]: 'currentColor',
       textDecoration: 'underline',
     },
@@ -57,7 +56,7 @@ const tertiaryButtonStencil = createStencil({
     },
     // Disabled Styles
     '&:disabled, &.disabled': {
-      [buttonStencil.vars.background]: system.color.bg.transparent,
+      [buttonStencil.vars.background]: system.color.bg.transparent.default,
       [buttonStencil.vars.label]: brand.primary.base,
       [buttonStencil.vars.opacity]: system.opacity.disabled,
       [systemIconStencil.vars.color]: 'currentColor',
@@ -116,13 +115,13 @@ const tertiaryButtonStencil = createStencil({
         },
         // Hover Styles
         '&:hover, &.hover': {
-          [buttonStencil.vars.background]: system.color.bg.overlayInverse,
+          [buttonStencil.vars.background]: system.color.bg.transparent.strong,
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: 'currentColor',
         },
         // Active Styles
         '&:active, &.active': {
-          [buttonStencil.vars.background]: system.color.bg.translucentInverse,
+          [buttonStencil.vars.background]: system.color.bg.transparent.stronger,
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: 'currentColor',
         },
