@@ -46,7 +46,7 @@ describe('createCanvasTheme', () => {
     const expected = {...defaultCanvasTheme};
     expected.palette.primary = {
       lightest: '#ffff7d',
-      lighter: '#ffe2a4',
+      lighter: '#fff064',
       light: '#ffd64a',
       main: 'orange',
       dark: '#c67600',

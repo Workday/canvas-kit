@@ -12,9 +12,11 @@ any questions.
 
 - [Codemod](#codemod)
   - [Instructions](#instructions)
+- [Theming](#theming)
 - [Component Updates](#component-updates)
   - [Branding Changes](#branding-changes)
   - [Card](#card)
+  - [Count Badge](#count-badge)
   - [Expandable](#expandable)
   - [Hyperlink & ExternalHyperlink](#hyperlink-and-externalhyperlink)
   - [Loading Dots](#loading-dots)
@@ -88,6 +90,14 @@ yarn remove @workday/canvas-kit-codemod
 > manually edit other file types (`.json`, `.mdx`, `.md`, etc.). You may need to run your linter
 > after executing the codemod, as its resulting formatting (spacing, quotes, etc.) may not match
 > your project conventions.
+
+## Theming
+
+**PR:** [#3394](https://github.com/Workday/canvas-kit/pull/3394)
+
+- `CanvasThemePalette` has been updated to include a `lighter` color.
+- `CanvasTheme` has been updated to include a `lighter` color.
+
 
 ## Component Updates
 
@@ -197,12 +207,34 @@ spacing between card elements.
 </Card>
 ```
 
+### Count Badge
+
+**PR:** [#3411](https://github.com/Workday/canvas-kit/pull/3411)
+
+The `CountBadge` component has been updated to reflect our new brand direction.
+
+
+Additionally, a new `emphasis` prop has been added, allowing you to choose between `high` and
+`low` emphasis for the badge.
+
+**Count Badge variants in v14**
+
+```tsx
+<CountBadge /> // Default count badge with high emphasis
+<CountBadge variant="inverse" /> // Inverse default count badge
+// new
+<CountBadge emphasis="low" /> // Default count badge with low emphasis
+<CountBadge variant="inverse" emphasis="low" /> // Inverse count badge with low emphasis
+```
+
 ### Expandable
 
 **PR:** [#3389](https://github.com/Workday/canvas-kit/pull/3389)
 
-- `<Expandable.Target>` hover state has been update to use `system.color.bg.alt.soft` instead of `system.color.bg.alt.default` to match our new brand directions.
-- The `focus` state has been update to use `system.color.border.primary.default` to ensure the same focus state color across all components.
+- `<Expandable.Target>` hover state has been update to use `system.color.bg.alt.soft` instead of
+  `system.color.bg.alt.default` to match our new brand directions.
+- The `focus` state has been update to use `system.color.border.primary.default` to ensure the same
+  focus state color across all components.
 
 These changes are only **visual** and should not affect the functionality of the component.
 
