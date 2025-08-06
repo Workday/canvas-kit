@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.6.20](https://github.com/Workday/canvas-kit/releases/tag/v12.6.20) (2025-08-06)
+
+### Components
+
+- fix(popup): Ensure popup contain is only called once in React 19 ([#3434](https://github.com/Workday/canvas-kit/pull/3434)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v12.6.19](https://github.com/Workday/canvas-kit/releases/tag/v12.6.19) (2025-08-06)
 
 ### Components
