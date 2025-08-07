@@ -23,6 +23,8 @@ any questions.
   - [Hyperlink & ExternalHyperlink](#hyperlink-and-externalhyperlink)
   - [Loading Dots](#loading-dots)
   - [SearchForm](#search-form)
+- [Deprecations](#deprecations)
+  - [Avatar in Main](#avatar-in-main)
 - [Removals](#removals)
   - [Menu (preview)](#menu-preview)
 - [Troubleshooting](#troubleshooting)
@@ -107,8 +109,24 @@ yarn remove @workday/canvas-kit-codemod
 
 A new `Avatar` component has been added to the `@workday/canvas-kit-preview-react` package that matches our brand refresh.
 
-- `Avatar` now has a `url` prop. This is required for the image avatar.
-- `Avatar` now has a `name` prop. This is required for the image avatar.
+#### API Changes from the Main Avatar
+
+- `Avatar` has a `name` prop. This is required to ensure a fallback if a `url` is not provided. The `name` prop also determines the initials and the `alt` text for the image if a `url` is provided.
+- `url` stays the same. This prop is optional and will be used to display an image avatar.
+- `variant` defines the color of the avatar. The default is `blue` but you can choose one of the following colors:
+  - `teal`
+  - `purple`
+  - `amber`
+	- `blue`
+- By default, the `Avatar` will render a `div` element. If you need to render a `button` element use the `BaseAvatar` component.
+- `size` accepts the following values:
+  - `extraExtraLarge`
+  - `extraLarge`
+  - `large`
+  - `medium`
+  - `small`
+  - `extraSmall`
+	- `extraExtraSmall`
 
 ### Branding Changes 💅
 
@@ -133,7 +151,7 @@ The following components have been updated:
 
 #### TertiaryButton
 
-The `TertiaryButton` component no longer supports the `isThemable` prop.  
+The `TertiaryButton` component no longer supports the `isThemable` prop.
 To customize the appearance of `TertiaryButton`, use the `cs` prop for custom styles or the `colors`
 prop for palette-based color overrides.
 
@@ -346,6 +364,45 @@ const customTheme = {
 - `SearchTheme` enum type has been updated to have string values `light`, `dark` and `transparent`.
   This **should not** affect the way you use the type unless you're passing a `number` of `0`, `1`
   or `2` to the `searchTheme` prop.
+
+## Deprecations
+
+### Avatar in Main
+
+**PR:** [#3430](https://github.com/Workday/canvas-kit/pull/3430)
+
+We've deprecated the `Avatar` component in `@workday/canvas-kit-react` Main package. Please use the `Avatar` component in our Preview package.
+
+**Before in v13**
+
+```tsx
+import { Avatar } from '@workday/canvas-kit-react/avatar';
+
+// For Avatars that where divs
+<Avatar altText="John Doe" size="extraExtraLarge" as="div" url={yourImageUrl} />
+
+// For Avatars that where buttons
+<Avatar altText="John Doe" onClick={() => console.log('Avatar clicked')} />
+```
+
+**After in v14**
+
+```tsx
+import { Avatar } from '@workday/canvas-kit-preview-react/avatar';
+// name is used as a fallback if the image url is broken or still loading
+// variant light or dark are not used. Instead, variant defines the color of the Avatar
+<Avatar name="John Doe" size="extraExtraLarge" variant='teal' url={yourImageUrl} />
+```
+
+If you need to render a `button` element use the `BaseAvatar` component.
+
+```tsx
+import { BaseAvatar } from '@workday/canvas-kit-preview-react/avatar';
+
+<BaseAvatar name="John Doe" size="extraExtraLarge" variant='teal' as="button" onClick={() => console.log('Avatar clicked')}>
+  <BaseAvatar.Name name="John Doe" />
+</BaseAvatar>
+```
 
 ## Removals
 
