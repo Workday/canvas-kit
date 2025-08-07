@@ -24,7 +24,7 @@ export const toolbarDropdownButtonStencil = createStencil({
     [systemIconStencil.vars.color]: system.color.fg.muted.soft,
 
     '&:focus-visible, &.focus': {
-      [buttonStencil.vars.background]: system.color.bg.transparent,
+      [buttonStencil.vars.background]: system.color.bg.transparent.default,
       [systemIconStencil.vars.color]: system.color.fg.muted.soft,
       ...focusRing({
         width: 2,
@@ -45,7 +45,7 @@ export const toolbarDropdownButtonStencil = createStencil({
     },
 
     '&:disabled, &.disabled': {
-      [buttonStencil.vars.background]: system.color.bg.transparent,
+      [buttonStencil.vars.background]: system.color.bg.transparent.default,
       [systemIconStencil.vars.color]: system.color.fg.disabled,
     },
 

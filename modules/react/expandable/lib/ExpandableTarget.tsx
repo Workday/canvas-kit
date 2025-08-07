@@ -25,8 +25,8 @@ export interface ExpandableTargetProps extends ExtractProps<typeof Flex, never> 
 
 export const expandableTargetStencil = createStencil({
   base: {
-    background: system.color.bg.transparent,
-    borderColor: system.color.bg.transparent,
+    background: system.color.bg.transparent.default,
+    borderColor: system.color.bg.transparent.default,
     borderRadius: system.shape.x1,
     borderWidth: 0,
     display: 'flex',
