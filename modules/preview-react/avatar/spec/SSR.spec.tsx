@@ -7,13 +7,7 @@ import {Avatar} from '../';
 
 describe('Avatar', () => {
   it('should render on a server without crashing', () => {
-    const ssrRender = () =>
-      renderToString(
-        <Avatar>
-          <Avatar.Target>Target</Avatar.Target>
-          <Avatar.Content>Content</Avatar.Content>
-        </Avatar>
-      );
+    const ssrRender = () => renderToString(<Avatar name="John Doe"></Avatar>);
     expect(ssrRender).not.toThrow();
   });
 });

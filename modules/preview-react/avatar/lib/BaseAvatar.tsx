@@ -4,14 +4,7 @@ import {createComponent} from '@workday/canvas-kit-react/common';
 
 import {AvatarImage} from './AvatarImage';
 import {AvatarName} from './AvatarName';
-import {
-  createStencil,
-  cssVar,
-  calc,
-  handleCsProp,
-  CSProps,
-  px2rem,
-} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, calc, handleCsProp, CSProps} from '@workday/canvas-kit-styling';
 import {system, base} from '@workday/canvas-tokens-web';
 
 export interface BaseAvatarProps extends CSProps {
