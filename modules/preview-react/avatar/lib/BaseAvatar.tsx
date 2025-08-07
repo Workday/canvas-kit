@@ -9,7 +9,7 @@ import {system, base} from '@workday/canvas-tokens-web';
 
 export interface BaseAvatarProps extends CSProps {
   /**
-   * Children of the Avatar. Should contain a `<Avatar.Image>`, a `<Avatar.Content>`
+   * Children of the BaseAvatar.
    */
   children?: React.ReactNode;
   /**

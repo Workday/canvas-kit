@@ -3,9 +3,6 @@ import React from 'react';
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 
 import {Avatar} from '@workday/canvas-kit-preview-react/avatar';
-import {stateTableColumnProps} from '@workday/canvas-kit-react/button/stories/visual-testing/utils';
-// @ts-ignore: Cannot find module error
-import testAvatar from './examples/test-avatar.png';
 
 export default {
   title: 'Testing/Preview/Avatar',
