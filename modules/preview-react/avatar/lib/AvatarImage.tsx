@@ -27,7 +27,6 @@ export const AvatarImage = createComponent('img')({
     React.useLayoutEffect(() => {
       setImageLoaded(false);
     }, [src]);
-    console.log('imageLoaded', imageLoaded);
     return (
       <Element onLoad={loadImage} src={src} {...handleCsProp(elemProps, avatarImageStencil())} />
     );

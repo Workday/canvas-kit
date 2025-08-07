@@ -20,6 +20,10 @@ export interface AvatarProps extends BaseAvatarProps {
    * @default "contain"
    */
   objectFit?: Property.ObjectFit;
+  /**
+   * If true, the Avatar won't forward the `name` prop to the `alt` attribute of the image. This is useful when the Avatar is purely decorative and is rendered next to a name or text.
+   */
+  isDecorative?: boolean;
 }
 
 export const avatarStencil = createStencil({
@@ -100,7 +104,7 @@ export const Avatar = createComponent('div')({
   displayName: 'Avatar',
 
   Component: (
-    {url, name, variant, objectFit = 'cover', size, ...elemProps}: AvatarProps,
+    {url, name, variant, objectFit = 'cover', size, isDecorative, ...elemProps}: AvatarProps,
     ref,
     Element
   ) => {
@@ -115,7 +119,6 @@ export const Avatar = createComponent('div')({
     return (
       <BaseAvatar
         as={Element}
-        role="img"
         ref={ref}
         {...handleCsProp(elemProps, avatarStencil({variant, size, imageLoaded, objectFit}))}
       >
@@ -124,9 +127,8 @@ export const Avatar = createComponent('div')({
             <BaseAvatar.Image
               onLoad={handleImageLoad}
               src={url}
-              alt={name}
+              alt={isDecorative ? undefined : name}
               {...avatarStencil.parts.avatarImage}
-              role="presentation"
             />
             {!imageLoaded && name && (
               <BaseAvatar.Name name={name} {...avatarStencil.parts.avatarName} />

@@ -9,6 +9,7 @@ import {Image as ImageExample} from './examples/Image';
 import {Size as SizeExample} from './examples/Size';
 import {Variant as VariantExample} from './examples/Variant';
 import {Custom as CustomExample} from './examples/Custom';
+import {Decorative as DecorativeExample} from './examples/Decorative';
 
 export default {
   title: 'Preview/Avatar',
@@ -41,4 +42,8 @@ export const Variant: Story = {
 
 export const Custom: Story = {
   render: CustomExample,
+};
+
+export const Decorative: Story = {
+  render: DecorativeExample,
 };

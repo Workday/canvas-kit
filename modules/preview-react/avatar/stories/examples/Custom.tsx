@@ -1,6 +1,8 @@
 import {BaseAvatar} from '@workday/canvas-kit-preview-react/avatar';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {base} from '@workday/canvas-tokens-web';
+// @ts-ignore
+import avatarImage from './nicholas-avatar.png';
 
 const customStyles = createStyles({
   cursor: 'pointer',

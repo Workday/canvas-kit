@@ -6,6 +6,7 @@ import {Image} from './examples/Image';
 import {Size} from './examples/Size';
 import {Variant} from './examples/Variant';
 import {Custom} from './examples/Custom';
+import {Decorative} from './examples/Decorative';
 
 <Meta title="Preview/Avatar" component={Avatar} />
 
@@ -70,6 +71,10 @@ For complete control over styling and behavior, use the `BaseAvatar` component:
 
 <ExampleCodeBlock code={Custom} />
 
+### Accessibility
+If the Avatar is purely decorative, you can set the `isDecorative` prop to `true` to prevent the `name` prop from being forwarded to the `alt` attribute of the image.
+
+<ExampleCodeBlock code={Decorative} />
 
 ## Component API
 
