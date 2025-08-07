@@ -10,7 +10,7 @@ import {userIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
 /**
- * @deprecated `AvatarVariant` is deprecated and will be removed in a future major version. Update your types and values to use the string literal of either `light` or `dark`.
+ * @deprecated ⚠️ `AvatarVariant` is deprecated and will be removed in a future major version. Update your types and values to use the string literal of either `light` or `dark`.
  */
 export enum AvatarVariant {
   Light,
@@ -18,7 +18,7 @@ export enum AvatarVariant {
 }
 
 /**
- * @deprecated `AvatarProps` is deprecated and will be removed in a future major version. Please use the `Avatar` component from the Preview package instead (@workday/canvas-kit-preview-react/avatar).
+ * @deprecated ⚠️ `AvatarProps` is deprecated and will be removed in a future major version. Please use the `Avatar` component from the Preview package instead (@workday/canvas-kit-preview-react/avatar).
  */
 export interface AvatarProps extends CSProps {
   /**
@@ -243,7 +243,7 @@ export const avatarStencil = createStencil({
 });
 
 /**
- * @deprecated `Avatar` is deprecated and will be removed in a future major version. Please use `Avatar` from the Preview package instead (@workday/canvas-kit-preview-react/avatar).
+ * @deprecated ⚠️ `Avatar` is deprecated and will be removed in a future major version. Please use `Avatar` from the Preview package instead (@workday/canvas-kit-preview-react/avatar).
  */
 export const Avatar = createComponent('button')({
   displayName: 'Avatar',
@@ -303,11 +303,11 @@ export const Avatar = createComponent('button')({
   },
   subComponents: {
     /**
-     * @deprecated `Avatar.Variant` is deprecated and will be removed in a future major version. Use the string literal of `light` or `dark`.
+     * @deprecated ⚠️ `Avatar.Variant` is deprecated and will be removed in a future major version. Use the string literal of `light` or `dark`.
      */
     Variant: AvatarVariant,
     /**
-     * @deprecated `Avatar.Size` is deprecated and will be removed in a future major version. Use the string literal values for size: 'extraSmall' | 'small | 'medium' | 'large' | 'extraLarge | 'extraExtraLarge' | (string & {})
+     * @deprecated ⚠️ `Avatar.Size` is deprecated and will be removed in a future major version. Use the string literal values for size: 'extraSmall' | 'small | 'medium' | 'large' | 'extraLarge | 'extraExtraLarge' | (string & {})
      */
     Size: SystemIconCircleSize,
   },
