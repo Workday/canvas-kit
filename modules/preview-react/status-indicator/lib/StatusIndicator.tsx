@@ -190,11 +190,10 @@ const statusIndicatorStencil = createStencil({
 });
 
 /**
- * `StatusIndicator` is a container component which renders an {@link Flex} under the hood to
- * apply spacing evenly between its children. It has a default maximum width of `200px`.
+ * `StatusIndicator` is a container component has a default maximum width of `200px`.
  *
  * ```tsx
- * <StatusIndicator emphasis="low" variant="blue">
+ * <StatusIndicator variant="info">
  *   {Child components}
  * </StatusIndicator>
  * ```
@@ -203,8 +202,8 @@ export const StatusIndicator = createComponent('div')({
   displayName: 'StatusIndicator',
   subComponents: {
     /**
-     * `StatusIndicator.Label` renders {@link Text} under the hood. It will apply an ellipsis if its
-     * contents exceed the component's maximum width.
+     * `StatusIndicator.Label` will apply an ellipsis if its contents exceed the component's maximum
+     * width.
      *
      * ```tsx
      * <StatusIndicator.Label>{The text to be rendered}</StatusIndicator.Label>
