@@ -29,19 +29,21 @@ export interface BaseAvatarProps extends CSProps {
     | 'medium'
     | 'large'
     | 'extraLarge'
-    | 'extraExtraLarge';
+    | 'extraExtraLarge'
+    | (string & {});
 }
 
 export const baseAvatarStencil = createStencil({
   vars: {
     backgroundColor: '',
     color: '',
+    size: '',
   },
 
-  base: ({backgroundColor, color}) => ({
+  base: ({backgroundColor, color, size}) => ({
     borderRadius: system.shape.round,
-    width: calc.add(system.space.x10, system.space.x2),
-    height: calc.add(system.space.x10, system.space.x2),
+    width: cssVar(size, calc.add(system.space.x10, system.space.x2)),
+    height: cssVar(size, calc.add(system.space.x10, system.space.x2)),
     backgroundColor: cssVar(base.blue300, backgroundColor),
     color: cssVar(color, base.blue800),
     display: 'flex',
@@ -72,43 +74,38 @@ export const baseAvatarStencil = createStencil({
       }),
     },
     size: {
-      // 24px
-      extraExtraSmall: {
-        width: system.space.x6,
-        height: system.space.x6,
+      extraExtraSmall: ({size}) => ({
+        [size]: system.space.x6,
         ...system.type.subtext.small,
-      },
-      extraSmall: {
-        width: system.space.x8,
-        height: system.space.x8,
+      }),
+      extraSmall: ({size}) => ({
+        [size]: system.space.x8,
         ...system.type.subtext.medium,
-      },
-      small: {
-        width: system.space.x10,
-        height: system.space.x10,
+      }),
+      small: ({size}) => ({
+        [size]: system.space.x10,
         ...system.type.body.small,
-      },
-      medium: {
-        width: calc.add(system.space.x10, system.space.x2),
-        height: calc.add(system.space.x10, system.space.x2),
+      }),
+      medium: ({size}) => ({
+        [size]: calc.add(system.space.x10, system.space.x2),
         ...system.type.body.medium,
-      },
-      large: {
-        width: calc.add(system.space.x16, system.space.x2),
-        height: calc.add(system.space.x16, system.space.x2),
+      }),
+      large: ({size}) => ({
+        [size]: calc.add(system.space.x16, system.space.x2),
         ...system.type.heading.medium,
-      },
-      extraLarge: {
-        width: calc.add(system.space.x20, system.space.x4),
-        height: calc.add(system.space.x20, system.space.x4),
+      }),
+      extraLarge: ({size}) => ({
+        [size]: calc.add(system.space.x20, system.space.x4),
         ...system.type.title.small,
-      },
-      extraExtraLarge: {
-        width: calc.multiply(system.space.x10, 3),
-        height: calc.multiply(system.space.x10, 3),
+      }),
+      extraExtraLarge: ({size}) => ({
+        [size]: calc.multiply(system.space.x10, 3),
         ...system.type.title.medium,
-      },
+      }),
     },
+  },
+  defaultModifiers: {
+    size: 'medium',
   },
 });
 

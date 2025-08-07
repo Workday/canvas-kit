@@ -22,7 +22,7 @@ const customStyles = createStyles({
 export const Custom = () => {
   return (
     <BaseAvatar cs={customStyles} as="button" onClick={() => console.log('clicked')}>
-      <BaseAvatar.Name name="John Doe" />
+      <BaseAvatar.Name name="John Doe Jane" />
     </BaseAvatar>
   );
 };

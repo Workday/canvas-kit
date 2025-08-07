@@ -5,16 +5,13 @@ import {Property} from 'csstype';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 
 import {BaseAvatarProps, BaseAvatar, baseAvatarStencil} from './BaseAvatar';
+import {AvatarNameProps} from './AvatarName';
 
-export interface AvatarProps extends BaseAvatarProps {
+export interface AvatarProps extends BaseAvatarProps, AvatarNameProps {
   /**
    * The URL of the user's photo. For best fit, use square images.
    */
   url?: string;
-  /**
-   * The alt text of the Avatar image. This prop is also used for the initials. The first letter of the first name and the first letter of the second name are chosen for the initials.
-   */
-  name: string;
   /**
    * An objectFit property that can customize how to resize your image to fit its container.
    * @default "contain"
@@ -104,7 +101,15 @@ export const Avatar = createComponent('div')({
   displayName: 'Avatar',
 
   Component: (
-    {url, name, variant, objectFit = 'cover', size, isDecorative, ...elemProps}: AvatarProps,
+    {
+      url,
+      name,
+      variant,
+      objectFit = 'cover',
+      size = 'medium',
+      isDecorative,
+      ...elemProps
+    }: AvatarProps,
     ref,
     Element
   ) => {
@@ -128,6 +133,7 @@ export const Avatar = createComponent('div')({
               onLoad={handleImageLoad}
               src={url}
               alt={isDecorative ? undefined : name}
+              aria-hidden={isDecorative}
               {...avatarStencil.parts.avatarImage}
             />
             {!imageLoaded && name && (
