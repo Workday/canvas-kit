@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {Basic} from '../../modules/react/toast/stories/examples/Basic';
 import {ToastAlert} from '../../modules/react/toast/stories/examples/ToastAlert';
 import {ToastDialog} from '../../modules/react/toast/stories/examples/ToastDialog';

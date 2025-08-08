@@ -1,14 +1,17 @@
-const path = require('node:path');
-const remarkGfm = require('remark-gfm').default;
+import path from 'node:path';
+import remarkGfm from 'remark-gfm';
+import ts from 'typescript';
+
+import {StorybookConfig} from '@storybook/react-webpack5';
+import {ExportedSymbol, Value} from '@workday/canvas-kit-docs/docgen/docTypes';
+import getSpecifications from '../modules/docs/utils/get-specifications';
+import {getDocParser} from '../modules/docs/docgen/createDocProgram';
+// Drop the `/index.ts` if using the published package
+import {styleTransformer, StylingWebpackPlugin} from '@workday/canvas-kit-styling-transform';
+import stylingConfig from '../styling.config';
 
 const modulesPath = path.resolve(__dirname, '../modules');
-const getSpecifications = require('../modules/docs/utils/get-specifications');
-import {StorybookConfig} from '@storybook/react-webpack5';
-const {createDocProgram} = require('../modules/docs/docgen/createDocProgram');
-
 const processDocs = process.env.SKIP_DOCGEN !== 'true';
-
-const Doc = createDocProgram();
 
 const config: StorybookConfig = {
   framework: '@storybook/react-webpack5',
@@ -47,6 +50,75 @@ const config: StorybookConfig = {
     reactDocgen: false, // we'll handle this ourselves
   },
   webpackFinal: async config => {
+    const docsMap = new Map<string, ExportedSymbol<Value>[]>();
+
+    const tsPlugin = new StylingWebpackPlugin({
+      tsconfigPath: path.resolve(__dirname, '../tsconfig.json'),
+      transformers: [
+        processDocs
+          ? program => {
+              const docParser = getDocParser(program);
+              return _context => {
+                return node => {
+                  if (ts.isSourceFile(node)) {
+                    const fileName = node.fileName;
+                    const symbols = docParser.getExportedSymbols(fileName);
+                    docsMap.set(fileName, symbols);
+                  }
+
+                  return node;
+                };
+              };
+            }
+          : undefined,
+        program => styleTransformer(program, {...stylingConfig, extractCSS: false}),
+      ],
+      postTransform(code, id) {
+        if (docsMap.get(id) && processDocs) {
+          return (
+            code +
+            `\nconst __docs = ${JSON.stringify(docsMap.get(id))}
+  if (window.__updateDocs) {
+    window.__updateDocs?.(__docs)
+  } else {
+    window.__docs = (window.__docs || []).concat(__docs)
+  }`
+          );
+        }
+      },
+    });
+
+    config.plugins?.push(tsPlugin);
+
+    // Load the source code of story files to display in docs.
+    config.module?.rules?.push({
+      test: /\.stories\.tsx?$/,
+      include: [modulesPath],
+      use: [
+        {
+          loader: require.resolve('@storybook/source-loader'),
+          options: {parser: 'typescript'},
+        },
+      ],
+      enforce: 'pre',
+    });
+
+    config.module?.rules?.push({
+      test: /.+\.tsx?$/,
+      include: [modulesPath],
+      exclude: /examples|stories|spec|codemod|docs/,
+      use: [
+        {
+          // If you copy this code, change the path to
+          // '@workday/canvas-kit-styling-transform/webpack-loader'. We have to use the direct path
+          // because we don't build the JS files first.
+          loader: require.resolve('@workday/canvas-kit-styling-transform/lib/webpack-loader.ts'),
+          options: tsPlugin.getLoaderOptions(),
+        },
+      ],
+      enforce: 'pre',
+    });
+
     // Get the specifications object and replace with a real object in the spec.ts file
     if (processDocs) {
       const specs = await getSpecifications();
@@ -63,41 +135,6 @@ const config: StorybookConfig = {
             },
           },
         ],
-      });
-
-      // Load the source code of story files to display in docs.
-      config.module?.rules?.push({
-        test: /\.stories\.tsx?$/,
-        include: [modulesPath],
-        use: [
-          {
-            loader: require.resolve('@storybook/source-loader'),
-            options: {parser: 'typescript'},
-          },
-        ],
-        enforce: 'pre',
-      });
-
-      config.module?.rules?.push({
-        test: /.+\.tsx?$/,
-        include: [modulesPath],
-        exclude: /examples|stories|spec|codemod|docs/,
-        use: [
-          // loaders are run in reverse order. symbol-doc-loader needs to be done first
-          {
-            loader: path.resolve(__dirname, 'symbol-doc-loader'),
-            options: {
-              Doc,
-            },
-          },
-          {
-            loader: path.resolve(__dirname, 'style-transform-loader'),
-            options: {
-              Doc,
-            },
-          },
-        ],
-        enforce: 'pre',
       });
     }
 
@@ -152,10 +189,7 @@ const config: StorybookConfig = {
   babel: async options => ({
     ...options,
     plugins: [...(options.plugins as []), '@babel/plugin-transform-modules-commonjs'],
-    presets: [
-      ...(options.presets as []),
-      ['@babel/preset-react', {runtime: 'classic'}, 'react-16-backwards-compatible-override'],
-    ],
+    presets: [...(options.presets as []), ['@babel/preset-react', {runtime: 'automatic'}]],
   }),
 };
 

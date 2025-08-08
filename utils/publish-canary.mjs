@@ -10,11 +10,13 @@ const exec = promisify(childProcess.exec);
 const {
   SLACK_WEBHOOK,
   GITHUB_REF,
+  GITHUB_RUN_NUMBER = '0',
   BUILD_URL = 'https://github.com/Workday/canvas-kit/actions',
 } = process.env;
 
 console.log('GITHUB_REF', GITHUB_REF);
 const branch = GITHUB_REF.replace('refs/heads/', '');
+const prefixedBuildNumber = GITHUB_RUN_NUMBER.padStart(4, '0');
 
 const isPreMajor = branch.match(/^prerelease\/major$/g);
 const isPreMinor = branch.match(/^prerelease\/minor$/g);
@@ -97,11 +99,11 @@ exec('git diff --name-only HEAD HEAD^')
       // `v5.2.3` -> `v6.0.0-beta.n`
       if (isPreMajor) {
         // for pre major releases, we'll assume we're going to start with an alpha prerelease
-        preid = `alpha.${process.env.GITHUB_RUN_NUMBER || 0}-next`;
+        preid = `alpha.${prefixedBuildNumber}-next`;
         bump = 'premajor';
       } else {
         // we'll use `next` for pre minors
-        preid = `${process.env.GITHUB_RUN_NUMBER || 0}-next`;
+        preid = `${prefixedBuildNumber}-next`;
         bump = 'preminor';
       }
     }

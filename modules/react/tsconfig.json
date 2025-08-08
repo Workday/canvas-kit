@@ -4,7 +4,7 @@
   "compilerOptions": {
     "plugins": [
       {
-        "transform": "../styling-transform"
+        "transform": "../../.storybook/typescript-transform.ts"
       }
     ]
   }

@@ -1,65 +1,63 @@
-import React from 'react';
-
+import * as React from 'react';
 import {createStencil} from '@workday/canvas-kit-styling';
-import {ColorInput} from '@workday/canvas-kit-react/color-picker';
+import {Card} from '@workday/canvas-kit-react/card';
+import {system} from '@workday/canvas-tokens-web';
+import {Switch} from '@workday/canvas-kit-react/switch';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 
-const buttonStencil = createStencil({
+const themedCardStencil = createStencil({
   vars: {
-    color: 'red',
+    // Create CSS variables for the color of the header
+    headerColor: '',
   },
-  base: ({color}) => ({
-    padding: 10,
-    color: color,
+  parts: {
+    // Allows for styling a sub element of the component that may not be exposed through the API
+    header: 'themed-card-header',
+    body: 'themed-card-body',
+  },
+  base: ({headerPart, headerColor}) => ({
+    padding: system.space.x4,
+    boxShadow: system.depth[2],
+    backgroundColor: system.color.bg.default,
+    color: system.color.text.default,
+    // Targets the header part via [data-part="themed-card-header"]"]
+    [headerPart]: {
+      color: headerColor,
+    },
   }),
   modifiers: {
-    size: {
-      large: {
-        padding: 30,
-      },
-      small: {
-        padding: 5,
-      },
-    },
-    position: {
-      start: {
-        paddingInlineStart: 5,
-      },
-      end: {
-        paddingInlineEnd: 5,
-      },
+    isDarkTheme: {
+      // If the prop `isDarkTheme` is true, style the component and it's parts
+      true: ({headerPart, bodyPart}) => ({
+        backgroundColor: system.color.bg.contrast.default,
+        color: system.color.text.inverse,
+        [`${headerPart}, ${bodyPart}`]: {
+          color: system.color.text.inverse,
+        },
+      }),
     },
   },
-  compound: [
-    {
-      modifiers: {size: 'large', position: 'start'},
-      styles: {
-        paddingInlineStart: 15,
-      },
-    },
-    {
-      modifiers: {size: 'small', position: 'end'},
-      styles: {
-        paddingInlineEnd: 0,
-      },
-    },
-  ],
 });
 
-export const CreateStencil = () => {
-  const [value, setValue] = React.useState('ff0000');
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.currentTarget.value);
+export const CreateStencil = ({isDarkTheme, headerColor, elemProps}) => {
+  const [darkTheme, setIsDarkTheme] = React.useState(false);
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsDarkTheme(event.target.checked);
   };
   return (
-    <>
-      <FormField orientation="horizontalStart">
-        <FormField.Label>Color</FormField.Label>
-        <FormField.Input as={ColorInput} value={value} onChange={onChange} />
+    <div>
+      <FormField>
+        <FormField.Label>Toggle Dark Theme</FormField.Label>
+        <FormField.Input as={Switch} onChange={handleChange} checked={darkTheme} />
       </FormField>
-      <button {...buttonStencil({size: 'large', position: 'start', color: `#${value}`})}>
-        Button
-      </button>
-    </>
+
+      <Card cs={themedCardStencil({isDarkTheme: darkTheme, headerColor})} {...elemProps}>
+        <Card.Heading {...themedCardStencil.parts.header}>Canvas Supreme</Card.Heading>
+        <Card.Body {...themedCardStencil.parts.body}>
+          Our house special supreme pizza includes pepperoni, sausage, bell peppers, mushrooms,
+          onions, and oregano.
+        </Card.Body>
+      </Card>
+    </div>
   );
 };

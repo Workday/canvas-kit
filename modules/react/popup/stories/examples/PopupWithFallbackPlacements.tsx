@@ -1,4 +1,3 @@
-import React from 'react';
 import {DeleteButton} from '@workday/canvas-kit-react/button';
 import {
   Popup,
