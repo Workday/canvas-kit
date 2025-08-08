@@ -1102,7 +1102,7 @@ export interface Stencil<
     options?: [E] extends [never]
       ? ModifierValuesStencil<M, V> & VariableValuesStencil<V>
       : E extends BaseStencil<infer ME, any, infer VE, any, any>
-      ? ModifierValuesStencil<ME & M> & VariableValuesStencil<VE & V>
+      ? ModifierValuesStencil<ME & M, VE & V> & VariableValuesStencil<VE & V>
       : never
   ): {
     className: string;
@@ -1292,6 +1292,21 @@ export function createStencil<
     }
     const composesReturn = composes?.(inputModifiers as any);
     const modifierClasses = _modifiers(inputModifiers);
+
+    // If the input is an object, we need to filter out the keys that are in both _vars and
+    // _modifiers where the input value is a valid modifier value.
+    const varInput = input
+      ? Object.keys(input).reduce((result, key) => {
+          if (
+            key in _vars &&
+            !(key in _modifiers && input[key] in _modifiers[key as keyof typeof _modifiers])
+          ) {
+            result[key] = input[key];
+          }
+          return result;
+        }, {} as Record<string, string>)
+      : {};
+
     return {
       className: combineClassNames([
         composesReturn?.className,
@@ -1306,7 +1321,7 @@ export function createStencil<
         modifierClasses.replace(/css-/g, 'm'),
         compound ? _compound(inputModifiers) : '',
       ]),
-      style: {...composesReturn?.style, ..._vars(input || {})},
+      style: {...composesReturn?.style, ..._vars(varInput)},
     };
   }) as any;
 

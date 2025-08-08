@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.6.21](https://github.com/Workday/canvas-kit/releases/tag/v12.6.21) (2025-08-08)
+
+### Styling
+
+- fix: Stencils with modifiers and variables sharing a key ([#3438](https://github.com/Workday/canvas-kit/pull/3438)) ([@NicholasBoll](https://github.com/NicholasBoll))
 ## [v13.2.18](https://github.com/Workday/canvas-kit/releases/tag/v13.2.18) (2025-08-06)
 
 ### Documentation
