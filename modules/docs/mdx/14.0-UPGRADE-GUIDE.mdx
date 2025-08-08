@@ -22,6 +22,7 @@ any questions.
   - [Expandable](#expandable)
   - [Hyperlink & ExternalHyperlink](#hyperlink-and-externalhyperlink)
   - [Loading Dots](#loading-dots)
+  - [Pill](#pill)
   - [SearchForm](#search-form)
 - [Deprecations](#deprecations)
   - [Avatar in Main](#avatar-in-main)
@@ -272,12 +273,16 @@ emphasis for the badge.
 
 ### Expandable
 
-**PR:** [#3389](https://github.com/Workday/canvas-kit/pull/3389)
+**PRs:** [#3389](https://github.com/Workday/canvas-kit/pull/3389), [#3430](https://github.com/Workday/canvas-kit/pull/3430)
 
 - `<Expandable.Target>` hover state has been update to use `system.color.bg.alt.soft` instead of
   `system.color.bg.alt.default` to match our new brand directions.
 - The `focus` state has been update to use `system.color.border.primary.default` to ensure the same
   focus state color across all components.
+- `Expandable.Avatar` has been updated to use the `Avatar` component from Preview. This change requires that you update the `altText` prop to `name`.
+
+> 🤖 The codemod will handle the change of `altText` to `name` on `Expandable.Avatar`.
+
 
 These changes are only **visual** and should not affect the functionality of the component.
 
@@ -312,6 +317,15 @@ These changes are only **visual** and should not affect the functionality of the
 ```tsx
 <LoadingDots variant="inverse" />
 ```
+
+### Pill
+
+**PR:** [#3430](https://github.com/Workday/canvas-kit/pull/3430)
+
+- `Pill` has been updated to use the `Avatar` component from Preview. This change requires that you provide a value for the `name` prop.
+
+> 🤖 The codemod will handle the change of `altText` to `name` on `Pill.Avatar`.
+
 
 ### Search Form 🚨
 
