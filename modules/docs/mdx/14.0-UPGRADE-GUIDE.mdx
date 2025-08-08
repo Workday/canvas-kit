@@ -15,17 +15,19 @@ any questions.
 - [Theming](#theming)
 - [Component Updates](#component-updates)
   - [Branding Changes](#branding-changes)
+  - [Buttons](#buttons)
   - [Card](#card)
   - [Count Badge](#count-badge)
   - [Expandable](#expandable)
   - [Hyperlink & ExternalHyperlink](#hyperlink-and-externalhyperlink)
   - [Loading Dots](#loading-dots)
   - [SearchForm](#search-form)
+  - [Status Indicator (Preview)](#status-indicator-preview)
 - [Deprecations](#deprecations)
-  - [Combobox (labs)](#combobox-labs)
-  - [Radio (main)](#radio-main)
-  - [Segmented Control (main)](#segmented-control-main)
-  - [Side Panel (main)](#side-panel-main)
+  - [Combobox (Labs)](#combobox-labs)
+  - [Radio (Main)](#radio-main)
+  - [Segmented Control (Main)](#segmented-control-main)
+  - [Side Panel (Main)](#side-panel-main)
   - [Tokens](#tokens)
 - [Removals](#removals)
   - [Menu (preview)](#menu-preview)
@@ -107,12 +109,12 @@ yarn remove @workday/canvas-kit-codemod
 
 ### Branding Changes 💅
 
-Several components have been refactored to reflect our new brand direction. Most of these changes
-revolve around the use of our new bran colors.
+Several components have been refactored to reflect our new brand direction. Most of these changes revolve around the use of our new brand colors.
 
 The following components have been updated:
 
 - `Breadcrumbs` [#3270](https://github.com/Workday/canvas-kit/pull/3270)
+- `Buttons` [#3394](https://github.com/Workday/canvas-kit/pull/3394)
 - `ColorPicker` (Main) [#3307](https://github.com/Workday/canvas-kit/pull/3307)
 - `ColorPicker` (preview) [#3307](https://github.com/Workday/canvas-kit/pull/3307)
 - `LoadingDots` (Main) [#3393](https://github.com/Workday/canvas-kit/pull/3393)
@@ -122,6 +124,20 @@ The following components have been updated:
 - `SegmentedControl` (Preview) [#3278](https://github.com/Workday/canvas-kit/pull/3278)
 - `ToolbarDropdownButton` [#3293](https://github.com/Workday/canvas-kit/pull/3293)
 - `ToolbarIconButton` [#3293](https://github.com/Workday/canvas-kit/pull/3293)
+
+### Buttons
+
+#### TertiaryButton
+
+The `TertiaryButton` component no longer supports the `isThemable` prop.
+To customize the appearance of `TertiaryButton`, use the `cs` prop for custom styles or the `colors`
+prop for palette-based color overrides.
+
+The shape of `TertiaryButton` has changed to have rounded corners, aligning with other buttons and
+our new brand direction.
+
+If you need to override default styles, follow
+[this guide](https://workday.github.io/canvas-kit/?path=/docs/components-buttons--docs#custom-styles)
 
 ### Card 🚨
 
@@ -327,33 +343,48 @@ const customTheme = {
   This **should not** affect the way you use the type unless you're passing a `number` of `0`, `1`
   or `2` to the `searchTheme` prop.
 
+### Status Indicator (Preview) 🚨
+
+**PR:** [#3287](https://github.com/Workday/canvas-kit/pull/3287)
+
+Preview `StatusIndicator` is a rounder and more vibrant base emphasis (`low`). The `emphasis` prop is now deprecated and the `high` emphasis will be removed in a later version.
+
+Variant names of the preview `StatusIndicator` have been updated by the following mapping:
+- `blue` -> `primary`
+- `green` -> `success`
+- `orange` -> `caution`
+- `red` -> `critical`
+- `gray` -> `neutral`
+
+The `StatusIndicatorVariant` type has been updated to contain the new variant names listed above. If you use the old variant values, update to use the new ones mapped above. It has also been deprecated. Use `StatusIndicatorProps['variant']` instead.
+
 ## Deprecations
 
 We add the [@deprecated](https://jsdoc.app/tags-deprecated.html) JSDoc tag to code we plan to remove
 in a future major release. This signals consumers to migrate to a more stable alternative before the
 deprecated code is removed.
 
-### Combobox (labs)
+### Combobox (Labs)
 
 The Combobox component in `@workday/canvas-kit-labs-react/combobox` has been deprecated and will be
 removed in a future major release. Please migrate to the
 [Combobox](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-combobox--docs) in
 `@workday/canvas-kit-react`.
 
-### Radio (main)
+### Radio (Main)
 
 The Radio component in `@workday/canvas-kit-react/radio` has been deprecated. Please use the new
 [Radio](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-radio--docs) component
 from the same package, which offers improved accessibility and API consistency.
 
-### Segmented Control (main)
+### Segmented Control (Main)
 
 The Segmented Control component in `@workday/canvas-kit-react/segmented-control` has been
 deprecated. Please migrate to the new
 [Segmented Control](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-segmented-control--docs)
 for improved features and support.
 
-### Side Panel (main)
+### Side Panel (Main)
 
 The Side Panel component in `@workday/canvas-kit-react/side-panel` is now deprecated and will be
 removed in a future release. Please use the new

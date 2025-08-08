@@ -11,7 +11,6 @@ export interface CanvasProviderProps {
 
 // copied from brand/_variables.css
 const defaultBranding = createStyles({
-  [brand.error.darkest]: base.red800,
   [brand.common.alertInner]: base.amber400,
   [brand.common.alertOuter]: base.amber500,
   [brand.common.errorInner]: base.red500,
@@ -27,21 +26,21 @@ const defaultBranding = createStyles({
   [brand.success.darkest]: base.green800,
   [brand.success.dark]: base.green700,
   [brand.success.base]: base.green600,
-  [brand.success.light]: base.green100,
+  [brand.success.light]: base.green200,
   [brand.success.lighter]: base.green50,
   [brand.success.lightest]: base.green25,
   [brand.error.accent]: base.neutral0,
-  [brand.error.dark]: base.red700,
   [brand.error.darkest]: base.red800,
+  [brand.error.dark]: base.red700,
   [brand.error.base]: base.red600,
-  [brand.error.light]: base.red100,
+  [brand.error.light]: base.red200,
   [brand.error.lighter]: base.red50,
   [brand.error.lightest]: base.red25,
   [brand.alert.accent]: base.neutral900,
   [brand.alert.darkest]: base.amber600,
   [brand.alert.dark]: base.amber500,
   [brand.alert.base]: base.amber400,
-  [brand.alert.light]: base.amber50,
+  [brand.alert.light]: base.amber200,
   [brand.alert.lighter]: base.amber50,
   [brand.alert.lightest]: base.amber25,
   [brand.primary.accent]: base.neutral0,
@@ -77,14 +76,16 @@ export const useCanvasThemeToCssVars = (
       // @ts-ignore
       style[brand.common.focusOutline] = palette.common.focusOutline;
     }
-    (['lightest', 'light', 'main', 'dark', 'darkest', 'contrast'] as const).forEach(key => {
-      // We only want to set custom colors if they do not match the default. The `defaultBranding` class will take care of the rest.
-      // @ts-ignore
-      if (palette[color][key] !== defaultCanvasTheme.palette[color][key]) {
+    (['lightest', 'lighter', 'light', 'main', 'dark', 'darkest', 'contrast'] as const).forEach(
+      key => {
+        // We only want to set custom colors if they do not match the default. The `defaultBranding` class will take care of the rest.
         // @ts-ignore
-        style[brand[color][mappedKeys[key]]] = palette[color][key];
+        if (palette[color][key] !== defaultCanvasTheme.palette[color][key]) {
+          // @ts-ignore
+          style[brand[color][mappedKeys[key]]] = palette[color][key];
+        }
       }
-    });
+    );
   });
   return {...elemProps, className, style};
 };

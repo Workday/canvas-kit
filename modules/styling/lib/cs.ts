@@ -51,6 +51,81 @@ export type StyleProps =
   | SerializedStyles
   | CSSObjectWithVars;
 
+/**
+ * Prettify object types. @see https://www.totaltypescript.com/concepts/the-prettify-helper
+ */
+export type Prettify<T> = {
+  [K in keyof T]: T[K];
+} & {};
+
+/**
+ * Extract all the modifiers from a stencil. Usually you'll want to use {@link ExtractStencilProps}
+ * instead.
+ */
+export type ExtractStencilModifiers<T extends BaseStencil<any, any, any, any, any>> = {
+  [K in keyof T['__modifiers']]?: MaybeBoolean<keyof T['__modifiers'][K]>;
+};
+
+/**
+ * Recursively extract all the modifiers from a stencil and its extended stencils. Usually you'll
+ * want to use {@link ExtractStencilProps} instead.
+ */
+export type ExtractExtendedStencilModifiers<T extends BaseStencil<any, any, any, any, any>> =
+  T extends BaseStencil<any, any, any, infer E>
+    ? [E] extends [never]
+      ? ExtractStencilModifiers<T>
+      : ExtractExtendedStencilModifiers<E> & ExtractStencilModifiers<T>
+    : {};
+
+/**
+ * Extract all the variables from a stencil. Usually you'll want to use {@link ExtractStencilProps}
+ * instead.
+ */
+export type ExtractStencilVars<T extends BaseStencil<any, any, any, any, any>> = {
+  [K in keyof T['__vars']]?: string;
+};
+
+/**
+ * Recursively extract all the variables from a stencil and its extended stencils. Usually you'll
+ * want to use {@link ExtractStencilProps} instead.
+ */
+export type ExtractExtendedStencilVars<T extends BaseStencil<any, any, any, any, any>> =
+  T extends BaseStencil<any, any, any, infer E>
+    ? [E] extends [never]
+      ? ExtractStencilVars<T>
+      : ExtractExtendedStencilVars<E> & ExtractStencilVars<T>
+    : {};
+
+/**
+ * Returns an interface containing all the modifiers and variables from a stencil to be used in a
+ * component's prop interface.
+ *
+ * ```ts
+ * interface MyComponentProps extends ExtractStencilProps<typeof myComponentStencil> {
+ *   // other props
+ * }
+ * ```
+ */
+export type ExtractStencilProps<T extends BaseStencil<any, any, any, any, any>> = Prettify<
+  ExtractStencilModifiers<T> & ExtractStencilVars<T>
+>;
+
+/**
+ * Returns an interface containing all the modifiers and variables from a stencil, including
+ * extended stencils, to be used in a component's prop interface. If your component's props already
+ * extend another component's props that already include stencil props, use `ExtractStencilProps`
+ * instead.
+ *
+ * ```ts
+ * interface MyComponentProps extends ExtractExtendedStencilProps<typeof myComponentStencil> {
+ *   // other props
+ * }
+ * ```
+ */
+export type ExtractExtendedStencilProps<T extends BaseStencil<any, any, any, any, any>> = Prettify<
+  ExtractExtendedStencilModifiers<T> & ExtractExtendedStencilVars<T>
+>;
+
 // Casting the types here for internal use only.
 // We can remove this when CSSType supports CSS custom properties
 type CastStyleProps = Exclude<StyleProps, CSSObjectWithVars> | CSSObject;
@@ -1102,7 +1177,7 @@ export interface Stencil<
     options?: [E] extends [never]
       ? ModifierValuesStencil<M, V> & VariableValuesStencil<V>
       : E extends BaseStencil<infer ME, any, infer VE, any, any>
-      ? ModifierValuesStencil<ME & M> & VariableValuesStencil<VE & V>
+      ? ModifierValuesStencil<ME & M, VE & V> & VariableValuesStencil<VE & V>
       : never
   ): {
     className: string;
@@ -1292,6 +1367,21 @@ export function createStencil<
     }
     const composesReturn = composes?.(inputModifiers as any);
     const modifierClasses = _modifiers(inputModifiers);
+
+    // If the input is an object, we need to filter out the keys that are in both _vars and
+    // _modifiers where the input value is a valid modifier value.
+    const varInput = input
+      ? Object.keys(input).reduce((result, key) => {
+          if (
+            key in _vars &&
+            !(key in _modifiers && input[key] in _modifiers[key as keyof typeof _modifiers])
+          ) {
+            result[key] = input[key];
+          }
+          return result;
+        }, {} as Record<string, string>)
+      : {};
+
     return {
       className: combineClassNames([
         composesReturn?.className,
@@ -1306,7 +1396,7 @@ export function createStencil<
         modifierClasses.replace(/css-/g, 'm'),
         compound ? _compound(inputModifiers) : '',
       ]),
-      style: {...composesReturn?.style, ..._vars(input || {})},
+      style: {...composesReturn?.style, ..._vars(varInput)},
     };
   }) as any;
 
