@@ -11,8 +11,8 @@ describe('Avatar', () => {
     });
     it('should show the initials HD given the name is Happy Doggo until the image is loaded ', () => {
       cy.findByText('HD').should('be.visible');
-      cy.findByRole('presentation').should('not.exist');
-      cy.findByRole('presentation').should('exist');
+      cy.findByRole('img').should('not.exist');
+      cy.findByRole('img').should('exist');
     });
   });
 });
