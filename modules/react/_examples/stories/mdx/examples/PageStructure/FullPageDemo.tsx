@@ -7,11 +7,12 @@ import {system} from '@workday/canvas-tokens-web';
 
 import {GlobalHeader} from '../GlobalHeader';
 import {SideBarContent} from '../SidePanelWithNavigation';
-import {Basic as Breadcrumbs} from './../../../../../breadcrumbs/stories/examples/Basic';
+import {BreadcrumbNavRegion} from './BreadcrumbNavRegion';
 
 const gridLayoutStyles = createStyles({
-  gridTemplateAreas:
-    "'Header Header Header Header' 'SideBar BodyContent BodyContent BodyContent' 'Footer Footer Footer Footer'",
+  gridTemplateAreas: `'Header Header Header Header'
+    'SideBar BodyContent BodyContent BodyContent'
+    'Footer Footer Footer Footer'`,
   gridGap: system.space.x4,
   gridTemplateColumns: '1fr 9fr',
   gridTemplateRows: `auto ${px2rem(800)} auto`,
@@ -55,7 +56,7 @@ export const FullPageDemo = () => {
       </Grid>
       <Grid as="main" gridArea="BodyContent" cs={regionStyles}>
         <Flex cs={verticalFlexStyles}>
-          <Breadcrumbs />
+          <BreadcrumbNavRegion />
           <Flex gap={system.space.x4}>
             <SecondaryButton onClick={handleAdd}>Add notification</SecondaryButton>
             <TertiaryButton onClick={handleClear}>Clear</TertiaryButton>
