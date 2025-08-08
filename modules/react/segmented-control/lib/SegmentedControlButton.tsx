@@ -80,6 +80,9 @@ const segmentedControlButtonStencil = createStencil({
   },
 });
 
+/**
+ * @deprecated ⚠️ `SegmentedControlButtonProps` in Main has been deprecated and will be removed in a future major version. Please use [`SegmentedControl` in Preview](https://workday.github.io/canvas-kit/?path=/docs/preview-segmented-control--docs) instead.
+ */
 export interface SegmentedControlButtonProps extends ButtonContainerProps {
   toggled?: boolean;
   icon: CanvasSystemIcon;
@@ -87,6 +90,9 @@ export interface SegmentedControlButtonProps extends ButtonContainerProps {
   size?: 'small' | 'medium' | 'large';
 }
 
+/**
+ * @deprecated ⚠️ `SegmentedControlButton` in Main has been deprecated and will be removed in a future major version. Please use [`SegmentedControl` in Preview](https://workday.github.io/canvas-kit/?path=/docs/preview-segmented-control--docs) instead.
+ */
 export const SegmentedControlButton = createComponent('button')({
   displayName: 'Button',
   Component: ({value, icon, toggled, ...props}: SegmentedControlButtonProps, ref, Element) => {

@@ -34,7 +34,9 @@ export function getImportRenameMap(
   });
 
   root
-    .find(j.CallExpression, (node: CallExpression) => 
+    .find(
+      j.CallExpression,
+      (node: CallExpression) =>
         node.callee.type === 'Identifier' &&
         node.callee.name === 'styled' &&
         node.arguments[0].type === 'Identifier'
