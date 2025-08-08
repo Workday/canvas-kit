@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.18](https://github.com/Workday/canvas-kit/releases/tag/v13.2.18) (2025-08-06)
+
+### Documentation
+
+- docs(multi-select): Add Storybook example for initial selected items ([#3428](https://github.com/Workday/canvas-kit/pull/3428)) ([@NehaAhujaa](https://github.com/NehaAhujaa), Neha Ahuja)
+
+
+## [v13.2.17](https://github.com/Workday/canvas-kit/releases/tag/v13.2.17) (2025-08-06)
+
+### Components
+
+- fix(popup): Ensure popup contain is only called once in React 19 ([#3434](https://github.com/Workday/canvas-kit/pull/3434)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v12.6.20](https://github.com/Workday/canvas-kit/releases/tag/v12.6.20) (2025-08-06)
+
+### Components
+
+- fix(popup): Ensure popup contain is only called once in React 19 ([#3434](https://github.com/Workday/canvas-kit/pull/3434)) ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v13.2.16](https://github.com/Workday/canvas-kit/releases/tag/v13.2.16) (2025-08-06)
+
+### Components
+
+- fix(collection): Fix `inert` prop in React 19 ([#3433](https://github.com/Workday/canvas-kit/pull/3433)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v12.6.19](https://github.com/Workday/canvas-kit/releases/tag/v12.6.19) (2025-08-06)
+
+### Components
+
+- fix(collection): Fix `inert` prop in React 19 ([#3433](https://github.com/Workday/canvas-kit/pull/3433)) ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v13.2.15](https://github.com/Workday/canvas-kit/releases/tag/v13.2.15) (2025-08-04)
+
+### Utilities
+
+- fix: Support unwrapped CSS variables in `injectGlobal` ([#3424](https://github.com/Workday/canvas-kit/pull/3424)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v13.2.14](https://github.com/Workday/canvas-kit/releases/tag/v13.2.14) (2025-08-01)
 
 ### Infrastructure
@@ -10,6 +48,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - chore: Fix form-data vulnerability ([#3426](https://github.com/Workday/canvas-kit/pull/3426)) ([@NicholasBoll](https://github.com/NicholasBoll))
 
 
+## [v12.6.18](https://github.com/Workday/canvas-kit/releases/tag/v12.6.18) (2025-07-31)
+
+### Utilities
+
+- fix: Support unwrapped CSS variables in `injectGlobal` ([#3424](https://github.com/Workday/canvas-kit/pull/3424)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
 ## [v13.2.13](https://github.com/Workday/canvas-kit/releases/tag/v13.2.13) (2025-07-31)
 
 ### Components

@@ -1381,4 +1381,4 @@ export function keyframes<ID extends string>(
  * Allows injecting of global styles.
  */
 export const injectGlobal: typeof EmotionCSS.injectGlobal = (...args: any[]) =>
-  getInstance().injectGlobal(...args);
+  getInstance().injectGlobal(...args.map(wrapAllProperties));
