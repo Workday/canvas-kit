@@ -63,21 +63,21 @@ export const baseAvatarStencil = createStencil({
   modifiers: {
     variant: {
       blue: ({backgroundColor, color}) => ({
-        backgroundColor: cssVar(base.blue300, backgroundColor),
-        color: cssVar(base.blue800, color),
+        backgroundColor: cssVar(backgroundColor, base.blue300),
+        color: cssVar(color, base.blue800),
       }),
       amber: ({backgroundColor, color}) => ({
-        backgroundColor: cssVar(base.amber200, backgroundColor),
-        color: cssVar(base.amber700, color),
+        backgroundColor: cssVar(backgroundColor, base.amber200),
+        color: cssVar(color, base.amber700),
       }),
 
       teal: ({backgroundColor, color}) => ({
-        backgroundColor: cssVar(base.teal300, backgroundColor),
-        color: cssVar(base.teal800, color),
+        backgroundColor: cssVar(backgroundColor, base.teal300),
+        color: cssVar(color, base.teal800),
       }),
       purple: ({backgroundColor, color}) => ({
-        backgroundColor: cssVar(base.purple300, backgroundColor),
-        color: cssVar(base.purple800, color),
+        backgroundColor: cssVar(backgroundColor, base.purple300),
+        color: cssVar(color, base.purple800),
       }),
     },
     size: {
