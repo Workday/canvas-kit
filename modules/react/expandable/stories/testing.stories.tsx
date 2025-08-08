@@ -54,7 +54,7 @@ export const StartIcon = () => {
               <Expandable depth={props?.depth} model={{...model, state}}>
                 <Expandable.Target headingLevel="h2">
                   <Expandable.Icon iconPosition="start" />
-                  {props.avatar && <Expandable.Avatar />}
+                  {props.avatar && <Expandable.Avatar name="Logan McNeil" />}
                   <Expandable.Title>Hello</Expandable.Title>
                 </Expandable.Target>
                 <Expandable.Content>Content</Expandable.Content>
@@ -97,7 +97,7 @@ export const EndIcon = () => {
             <CanvasProvider theme={{canvas: {direction: props?.direction}}}>
               <Expandable depth={props?.depth} model={{...model, state}}>
                 <Expandable.Target headingLevel="h3">
-                  {props?.avatar && <Expandable.Avatar />}
+                  {props?.avatar && <Expandable.Avatar name="Logan McNeil" />}
                   <Expandable.Title>Hello</Expandable.Title>
                   <Expandable.Icon iconPosition="end" />
                 </Expandable.Target>

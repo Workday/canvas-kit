@@ -1,5 +1,7 @@
+export * from './avatar';
 export * from './color-picker';
 export * from './divider';
+export * from './information-highlight';
 export * from './loading-sparkles';
 export * from './pill';
 export * from './radio';
@@ -9,4 +11,3 @@ export * from './side-panel';
 export * from './status-indicator';
 export * from './text-area';
 export * from './text-input';
-export * from './information-highlight';

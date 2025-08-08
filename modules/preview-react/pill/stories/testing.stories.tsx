@@ -85,7 +85,7 @@ export const PillStatesAvatar = () => {
         {({...props}) => {
           return (
             <Pill onClick={() => console.warn('clicked')} {...props}>
-              <Pill.Avatar altText="Avatar" url={testAvatar} />
+              <Pill.Avatar name="Avatar" url={testAvatar} />
               <Pill.Label>Regina Skeltor</Pill.Label>
             </Pill>
           );
@@ -143,7 +143,7 @@ export const RemovablePillStates = () => {
         {({avatar, maxWidth, ...props}) => {
           return (
             <Pill variant="removable" {...props}>
-              {avatar && <Pill.Avatar altText="Avatar" url={testAvatar} />}
+              {avatar && <Pill.Avatar name="Avatar" url={testAvatar} />}
               {maxWidth ? (
                 <Pill.Label>This is a super long text that should overflow</Pill.Label>
               ) : (

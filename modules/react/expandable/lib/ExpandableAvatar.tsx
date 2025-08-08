@@ -1,5 +1,5 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {Avatar, AvatarProps, avatarStencil} from '@workday/canvas-kit-react/avatar';
+import {Avatar, AvatarProps, avatarStencil} from '@workday/canvas-kit-preview-react/avatar';
 import {system} from '@workday/canvas-tokens-web';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
@@ -20,13 +20,13 @@ export const expandableAvatarStencil = createStencil({
 // Setting altText prop to a default empty string for decorative purposes
 export const ExpandableAvatar = createComponent('div')({
   displayName: 'Expandable.Avatar',
-  Component: ({altText = '', ...elemProps}: ExpandableAvatarProps, ref, Element) => {
+  Component: ({name = '', ...elemProps}: ExpandableAvatarProps, ref, Element) => {
     return (
       <Avatar
         as={Element}
-        altText={altText}
+        name={name}
         ref={ref}
-        size="medium"
+        size="extraSmall"
         {...mergeStyles(elemProps, expandableAvatarStencil())}
       />
     );
