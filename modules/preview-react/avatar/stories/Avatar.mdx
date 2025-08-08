@@ -26,7 +26,7 @@ yarn add @workday/canvas-kit-preview-react
 ### Basic Example
 
 The most basic usage requires only a `name` prop. The component automatically extracts and displays
-the initials:
+the initials. If you want to display a different set of initials, you can use the `preferredInitials` prop.
 
 <ExampleCodeBlock code={Basic} />
 
@@ -49,13 +49,13 @@ The Avatar component includes intelligent fallback handling:
 ### Sizes
 
 The Avatar component supports the following sizes:
-- `extraExtraSmall`
-- `extraSmall`
-- `small`
-- `medium`
-- `large`
-- `extraLarge`
-- `extraExtraLarge`
+- `extraExtraSmall` is 24px x 24px
+- `extraSmall` is 32px x 32px
+- `small` is 40px x 40px
+- `medium` is 48px x 48px
+- `large` is 72px x 72px
+- `extraLarge` is 96px x 96px
+- `extraExtraLarge` is 120px x 120px
 
 <ExampleCodeBlock code={Size} />
 

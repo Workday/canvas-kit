@@ -20,6 +20,13 @@ export interface BaseAvatarProps extends CSProps {
 
   /**
    * The size of the Avatar.
+   * `extraExtraSmall` is 24px x 24px
+   * `extraSmall` is 32px x 32px
+   * `small` is 40px x 40px
+   * `medium` is 48px x 48px
+   * `large` is 72px x 72px
+   * `extraLarge` is 96px x 96px
+   * `extraExtraLarge` is 120px x 120px
    * @default "medium"
    */
   size?:
@@ -42,8 +49,8 @@ export const baseAvatarStencil = createStencil({
 
   base: ({backgroundColor, color, size}) => ({
     borderRadius: system.shape.round,
-    width: size,
-    height: size,
+    width: cssVar(size, calc.add(system.space.x10, system.space.x2)),
+    height: cssVar(size, calc.add(system.space.x10, system.space.x2)),
     backgroundColor: cssVar(base.blue300, backgroundColor),
     color: cssVar(color, base.blue800),
     display: 'flex',
@@ -103,9 +110,6 @@ export const baseAvatarStencil = createStencil({
         ...system.type.title.medium,
       }),
     },
-  },
-  defaultModifiers: {
-    size: 'medium',
   },
 });
 

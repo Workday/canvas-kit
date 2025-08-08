@@ -101,7 +101,16 @@ export const Avatar = createComponent('div')({
   displayName: 'Avatar',
 
   Component: (
-    {url, name, variant, objectFit = 'cover', isDecorative, size, ...elemProps}: AvatarProps,
+    {
+      url,
+      name,
+      variant,
+      objectFit = 'cover',
+      preferredInitials,
+      isDecorative,
+      size,
+      ...elemProps
+    }: AvatarProps,
     ref,
     Element
   ) => {
@@ -129,11 +138,21 @@ export const Avatar = createComponent('div')({
               {...avatarStencil.parts.avatarImage}
             />
             {!imageLoaded && name && (
-              <BaseAvatar.Name name={name} {...avatarStencil.parts.avatarName} />
+              <BaseAvatar.Name
+                name={name}
+                preferredInitials={preferredInitials}
+                {...avatarStencil.parts.avatarName}
+              />
             )}
           </>
         )}
-        {!url && name && <BaseAvatar.Name name={name} {...avatarStencil.parts.avatarName} />}
+        {!url && name && (
+          <BaseAvatar.Name
+            name={name}
+            preferredInitials={preferredInitials}
+            {...avatarStencil.parts.avatarName}
+          />
+        )}
       </BaseAvatar>
     );
   },

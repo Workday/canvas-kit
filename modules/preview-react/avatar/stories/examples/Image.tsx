@@ -6,7 +6,7 @@ export const Image = () => {
       name="Happy Doggo"
       url={'https://picsum.photos/id/237/300/200'}
       objectFit="cover"
-      size="large"
+      size="medium"
     />
   );
 };

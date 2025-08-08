@@ -7,6 +7,9 @@ export interface AvatarNameProps extends CSProps {
    * The alt text of the Avatar image. This prop is also used for the initials. The first letter of the first name and the first letter of the second name are chosen for the initials.
    */
   name: string;
+  /**
+   * If you want full control over the initials, use `preferredInitials` instead.
+   */
   preferredInitials?: string;
 }
 
