@@ -11,7 +11,7 @@ describe('Color Picker', () => {
     it('should call onColorChange handler when clicking a color swatch', () => {
       const onColorChange = jest.fn();
       const {container} = renderColorPicker({onColorChange: onColorChange});
-      const colorSwatch = container.querySelector(`[color="${colors.blackPepper400}"]`)!;
+      const colorSwatch = container.querySelector(`[data-color="${colors.blackPepper400}"]`)!;
 
       fireEvent.click(colorSwatch);
       expect(onColorChange).toHaveBeenCalledWith(colors.blackPepper400);
@@ -111,6 +111,7 @@ describe('Color Picker', () => {
       expect(swatchCinnamon.getAttribute('aria-label')).toBe('#fcc9c5');
       expect(swatchBlueberry.getAttribute('aria-label')).toBe('#0875e1');
     });
+
     it('should use color labels when provided', () => {
       renderColorPicker({
         colorSet: [
