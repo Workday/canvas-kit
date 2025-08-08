@@ -9,6 +9,7 @@ import {Table} from './Table';
 import {capitalize, IndentLevelContext, RenderContext, indent} from './widgetUtils';
 import {DescriptionTooltip} from './DescriptionTooltip';
 import {colors} from '@workday/canvas-kit-react/tokens';
+import {createStyles} from '@workday/canvas-kit-styling';
 
 const widgets: Record<string, React.FC<ValueProps>> = {};
 
@@ -151,6 +152,10 @@ function getTableRows(
   });
 }
 
+const tableStyles = createStyles({
+  tableLayout: 'fixed',
+});
+
 export const PropertiesTable = ({
   properties,
   showDefault = true,
@@ -168,7 +173,7 @@ export const PropertiesTable = ({
 
   return (
     <IndentLevelContext.Provider value={0}>
-      <Table>
+      <Table cs={tableStyles}>
         <Table.Head>
           <Table.Row>
             <Table.Header>Name</Table.Header>

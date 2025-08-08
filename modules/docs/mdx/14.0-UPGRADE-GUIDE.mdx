@@ -12,11 +12,17 @@ any questions.
 
 - [Codemod](#codemod)
   - [Instructions](#instructions)
+- [Theming](#theming)
 - [Component Updates](#component-updates)
-  - [Styling Changes](#styling-changes)
+  - [Branding Changes](#branding-changes)
+  - [Buttons](#buttons)
   - [Card](#card)
-    - [Expandable](#expandable)
+  - [Count Badge](#count-badge)
+  - [Expandable](#expandable)
+  - [Hyperlink & ExternalHyperlink](#hyperlink-and-externalhyperlink)
+  - [Loading Dots](#loading-dots)
   - [SearchForm](#search-form)
+  - [StatusIndicator](#status-indicator)
 - [Removals](#removals)
   - [Menu (preview)](#menu-preview)
 - [Troubleshooting](#troubleshooting)
@@ -86,27 +92,47 @@ yarn remove @workday/canvas-kit-codemod
 > after executing the codemod, as its resulting formatting (spacing, quotes, etc.) may not match
 > your project conventions.
 
+## Theming
+
+**PR:** [#3394](https://github.com/Workday/canvas-kit/pull/3394)
+
+- `CanvasThemePalette` has been updated to include a `lighter` color.
+- `CanvasTheme` has been updated to include a `lighter` color.
+
 ## Component Updates
 
-### Styling Changes 💅
+### Branding Changes 💅
 
-Several components have been refactored to use our Canvas tokens and styling API. The React
-interface has not changed, but Canvas Tokens are now used for dynamic properties.
-
-> **Note:** These components also support our cs prop for styling. Learn more about styling with cs
-> in our documentation.
+Several components have been refactored to reflect our new brand direction. Most of these changes
+revolve around the use of our new brand colors.
 
 The following components have been updated:
 
 - `Breadcrumbs` [#3270](https://github.com/Workday/canvas-kit/pull/3270)
-- `ColorPicker` (main) [#3307](https://github.com/Workday/canvas-kit/pull/3307)
+- `Buttons` [#3394](https://github.com/Workday/canvas-kit/pull/3394)
+- `ColorPicker` (Main) [#3307](https://github.com/Workday/canvas-kit/pull/3307)
 - `ColorPicker` (preview) [#3307](https://github.com/Workday/canvas-kit/pull/3307)
+- `LoadingDots` (Main) [#3393](https://github.com/Workday/canvas-kit/pull/3393)
 - `Pagination` (Preview) [#3300](https://github.com/Workday/canvas-kit/pull/3300)
 - `SearchForm` (Labs) [#3303](https://github.com/Workday/canvas-kit/pull/3303)
 - `SegmentedControl` (Main) [#3278](https://github.com/Workday/canvas-kit/pull/3278)
 - `SegmentedControl` (Preview) [#3278](https://github.com/Workday/canvas-kit/pull/3278)
 - `ToolbarDropdownButton` [#3293](https://github.com/Workday/canvas-kit/pull/3293)
 - `ToolbarIconButton` [#3293](https://github.com/Workday/canvas-kit/pull/3293)
+
+### Buttons
+
+#### TertiaryButton
+
+The `TertiaryButton` component no longer supports the `isThemable` prop.  
+To customize the appearance of `TertiaryButton`, use the `cs` prop for custom styles or the `colors`
+prop for palette-based color overrides.
+
+The shape of `TertiaryButton` has changed to have rounded corners, aligning with other buttons and
+our new brand direction.
+
+If you need to override default styles, follow
+[this guide](https://workday.github.io/canvas-kit/?path=/docs/components-buttons--docs#custom-styles)
 
 ### Card 🚨
 
@@ -197,14 +223,67 @@ spacing between card elements.
 </Card>
 ```
 
+### Count Badge
+
+**PR:** [#3411](https://github.com/Workday/canvas-kit/pull/3411)
+
+The `CountBadge` component has been updated to reflect our new brand direction.
+
+Additionally, a new `emphasis` prop has been added, allowing you to choose between `high` and `low`
+emphasis for the badge.
+
+**Count Badge variants in v14**
+
+```tsx
+<CountBadge /> // Default count badge with high emphasis
+<CountBadge variant="inverse" /> // Inverse default count badge
+// new
+<CountBadge emphasis="low" /> // Default count badge with low emphasis
+<CountBadge variant="inverse" emphasis="low" /> // Inverse count badge with low emphasis
+```
+
 ### Expandable
 
 **PR:** [#3389](https://github.com/Workday/canvas-kit/pull/3389)
 
-- `<Expandable.Target>` hover state has been update to use `system.color.bg.alt.soft` instead of `system.color.bg.alt.default` to match our new brand directions.
-- The `focus` state has been update to use `system.color.border.primary.default` to ensure the same focus state color across all components.
+- `<Expandable.Target>` hover state has been update to use `system.color.bg.alt.soft` instead of
+  `system.color.bg.alt.default` to match our new brand directions.
+- The `focus` state has been update to use `system.color.border.primary.default` to ensure the same
+  focus state color across all components.
 
 These changes are only **visual** and should not affect the functionality of the component.
+
+### Hyperlink and External Hyperlink
+
+**PR:** [#3390](https://github.com/Workday/canvas-kit/pull/3390)
+
+- `Hyperlink` and `ExternalHyperlink` now have a `standalone` and `standalone-inverse` variant. This
+  removes the underline text decoration for use outside the context of body text.
+
+**HyperLink and ExternalHyperlink in v14**
+
+```tsx
+<Hyperlink variant="standalone" href="#hyperlink">Hyperlink</Hyperlink>
+<ExternalHyperlink variant="standalone" href="#external-hyperlink">External Hyperlink</ExternalHyperlink>
+<Hyperlink variant="standalone-inverse" href="#hyperlink">Hyperlink</Hyperlink>
+<ExternalHyperlink variant="standalone-inverse" href="#external-hyperlink">External Hyperlink</ExternalHyperlink>
+```
+
+> **Note:** Only use the `standalone` or `standalone-inverse` variant in cases where the
+> `<HyperLink>` and `<ExternalHyperlink>` are used outside the context of body text.
+
+### Loading Dots
+
+**PR:** [#3393](https://github.com/Workday/canvas-kit/pull/3393)
+
+- We've updated the colors to match brand refresh. The default color changes from
+  `system.color.bg.alt.strong` to `system.color.bg.muted.strong`.
+- `LoadingDots` now has a `inverse` variant. Use this variant when the Loading Dots are on a dark
+  background or image.
+
+```tsx
+<LoadingDots variant="inverse" />
+```
 
 ### Search Form 🚨
 
@@ -258,6 +337,21 @@ const customTheme = {
 - `SearchTheme` enum type has been updated to have string values `light`, `dark` and `transparent`.
   This **should not** affect the way you use the type unless you're passing a `number` of `0`, `1`
   or `2` to the `searchTheme` prop.
+
+## Status Indicator 🚨
+
+**PR:** [#3287](https://github.com/Workday/canvas-kit/pull/3287)
+
+Preview `StatusIndicator` is a rounder and more vibrant base emphasis (`low`). The `emphasis` prop is now deprecated and the `high` emphasis will be removed in a later version.
+
+Variant names of the preview `StatusIndicator` have been updated by the following mapping:
+- `blue` -> `primary`
+- `green` -> `success`
+- `orange` -> `caution`
+- `red` -> `critical`
+- `gray` -> `neutral`
+
+The `StatusIndicatorVariant` type has been updated to contain the new variant names listed above. If you use the old variant values, update to use the new ones mapped above. It has also been deprecated. Use `StatusIndicatorProps['variant']` instead.
 
 ## Removals
 

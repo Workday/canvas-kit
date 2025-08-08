@@ -19,6 +19,12 @@ export interface CountBadgeProps extends CSProps {
    */
   count?: number;
   /**
+   * Sets the emphasis of the badge
+   *
+   * @default 'high'
+   */
+  emphasis?: 'high' | 'low';
+  /**
    * Sets the maximum count to display before formatting the number.
    * E.g. Given a count of `100` and a limit of `100`, the badge would display `99+`.
    *
@@ -36,9 +42,7 @@ const countBadgeStencil = createStencil({
   base: {
     alignItems: 'center',
     animation: `${grow} 0.2s ease`,
-    background: system.color.static.red.default,
     borderRadius: system.shape.round,
-    color: system.color.text.inverse,
     display: 'inline-flex',
     fontFamily: system.fontFamily.default,
     fontSize: system.fontSize.subtext.medium,
@@ -48,19 +52,34 @@ const countBadgeStencil = createStencil({
     lineHeight: px2rem(20),
     minWidth: px2rem(20),
     padding: `0 ${px2rem(6.5)}`,
-    textShadow: `0 0 ${px2rem(1)} rgba(0,0,0, 0.35)`,
+    background: system.color.static.red.default,
+    color: system.color.text.inverse,
   },
   modifiers: {
     variant: {
       // .cnvs-count-badge--variant-inverse
       inverse: {
         background: system.color.bg.default,
-        boxShadow: `0 ${px2rem(1)} ${px2rem(2)} rgba(0,0,0, 0.25)`,
         color: system.color.text.primary.default,
-        textShadow: 'none',
+      },
+    },
+    emphasis: {
+      high: {},
+      low: {
+        background: system.color.static.blue.soft,
+        color: system.color.static.blue.stronger,
       },
     },
   },
+  compound: [
+    {
+      modifiers: {variant: 'inverse', emphasis: 'low'},
+      styles: {
+        background: system.color.bg.transparent.strong,
+        color: system.color.fg.inverse,
+      },
+    },
+  ],
 });
 
 /**
@@ -68,11 +87,15 @@ const countBadgeStencil = createStencil({
  */
 export const CountBadge = createComponent('span')({
   displayName: 'CountBadge',
-  Component: ({count = 0, limit = 1000, variant, ...elemProps}: CountBadgeProps, ref, Element) => {
+  Component: (
+    {count = 0, limit = 1000, variant, emphasis = 'high', ...elemProps}: CountBadgeProps,
+    ref,
+    Element
+  ) => {
     const formattedCount = count < limit ? `${count}` : `${limit - 1}+`;
 
     return (
-      <Element ref={ref} {...handleCsProp(elemProps, [countBadgeStencil({variant})])}>
+      <Element ref={ref} {...handleCsProp(elemProps, [countBadgeStencil({variant, emphasis})])}>
         {formattedCount}
       </Element>
     );

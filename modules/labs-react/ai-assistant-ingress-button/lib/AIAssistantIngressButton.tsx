@@ -1,10 +1,10 @@
 import {createComponent, focusRing, useUniqueId} from '@workday/canvas-kit-react/common';
 import {BaseButton, BaseButtonProps, buttonStencil} from '@workday/canvas-kit-react/button';
 import {createStencil, handleCsProp, calc} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {system, base} from '@workday/canvas-tokens-web';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {getAiAssistantIngressIcon} from './AiAssistantIngressIcon';
-export interface AiAssistantIngressButtonProps
+import {getAIAssistantIngressIcon} from './AIAssistantIngressIcon';
+export interface AIAssistantIngressButtonProps
   extends Omit<BaseButtonProps, 'size' | 'colors' | 'icon' | 'iconPosition' | 'shouldMirrorIcon'> {
   /**
    * When true, indicates that the assistant side panel is open.
@@ -19,22 +19,22 @@ export interface AiAssistantIngressButtonProps
 /**
  * Icon gradient colors
  */
-const illuminateStopColor1 = '#FFA198';
-const illuminateStopColor2 = '#FFCAA0';
-const illuminateStopColor3 = '#FFCA79';
-const illuminateStopColor4 = '#FDCA44';
-const illuminateStopColor5 = '#FFB74D';
+const illuminateStopColor1 = base.red200; //'#FFA198'
+const illuminateStopColor2 = base.orange200; //'#FFCAA0'
+const illuminateStopColor3 = base.orange200; //'#FFCA79'
+const illuminateStopColor4 = base.amber200; //'#FDCA44'
+const illuminateStopColor5 = base.amber300; //'#FFB74D';
 
 /**
  * Box shadow glow colors
  */
-const glowEraser = '#FFC2FD';
-const glowHighlighter = '#FFF3A8';
-const glowLunchBreak = '#FEC10B';
-const glowHappyHour = '#FD7E00';
-const glowThumbtack = '#FC5B05';
+const glowEraser = base.magenta200; //'#FFC2FD';
+const glowHighlighter = base.amber100; //'#FFF3A8';
+const glowLunchBreak = base.amber300; //'#FEC10B';
+const glowHappyHour = base.orange400; //'#FD7E00';
+const glowThumbtack = base.coral500; //'#FC5B05';
 
-export const aiAssistantIngressButtonStencil = createStencil({
+export const AIAssistantIngressButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
     [buttonStencil.vars.background]: system.color.bg.ai.strongest,
@@ -111,6 +111,10 @@ export const aiAssistantIngressButtonStencil = createStencil({
             },
           },
         },
+        '&:is(:focus-visible, .focus):not(:disabled, .disabled)': {
+          ...focusRing({width: 2, separation: 0, outerColor: system.color.fg.inverse}),
+          border: `2px solid ${system.color.border.ai} `,
+        },
       },
     },
     toggled: {
@@ -128,6 +132,10 @@ export const aiAssistantIngressButtonStencil = createStencil({
             stopColor: system.color.fg.ai,
           },
         },
+        '> linearGradient > stop': {
+          transition: '300ms ease-out',
+          stopColor: system.color.fg.ai,
+        },
         '&:is(:focus-visible, .focus):not(:disabled, .disabled)': {
           ...focusRing({width: 2, separation: 2}),
           border: `1px solid ${system.color.border.container} `,
@@ -140,7 +148,7 @@ export const aiAssistantIngressButtonStencil = createStencil({
   },
   compound: [
     {
-      modifiers: {toggled: 'true', variant: 'inverse'},
+      modifiers: {toggled: true, variant: 'inverse'},
       styles: {
         [buttonStencil.vars.background]: system.color.bg.ai.strongest,
         '.wd-icon-ai-assistant-ingress-button': {
@@ -152,27 +160,31 @@ export const aiAssistantIngressButtonStencil = createStencil({
             stopColor: system.color.fg.inverse,
           },
         },
+        '&:is(:focus-visible, .focus):not(:disabled, .disabled)': {
+          ...focusRing({width: 2, separation: 0, outerColor: system.color.fg.inverse}),
+          border: 'none',
+        },
       },
     },
   ],
 });
 
-export const AiAssistantIngressButton = createComponent('button')({
-  displayName: 'AiAssistantIngressButton',
-  Component: ({toggled, variant, ...elemProps}: AiAssistantIngressButtonProps, ref, Element) => {
+export const AIAssistantIngressButton = createComponent('button')({
+  displayName: 'AIAssistantIngressButton',
+  Component: ({toggled, variant, ...elemProps}: AIAssistantIngressButtonProps, ref, Element) => {
     const svgGradientId = useUniqueId();
     return (
       <BaseButton
         ref={ref}
         as={Element}
         {...handleCsProp(elemProps, [
-          aiAssistantIngressButtonStencil({toggled, variant}),
+          AIAssistantIngressButtonStencil({toggled, variant}),
           {
             [systemIconStencil.vars.color]: `url(#${svgGradientId})`,
           },
         ])}
       >
-        <BaseButton.Icon size="large" icon={getAiAssistantIngressIcon(svgGradientId)} />
+        <BaseButton.Icon size="large" icon={getAIAssistantIngressIcon(svgGradientId)} />
       </BaseButton>
     );
   },

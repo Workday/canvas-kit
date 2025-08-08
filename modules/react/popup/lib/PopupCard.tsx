@@ -61,7 +61,7 @@ function getMaxHeight(margin?: string | number) {
       marginOffset = `${margin * 2}px`;
     }
   }
-  return `calc(100vh - ${marginOffset})`;
+  return `calc(100dvh - ${marginOffset})`;
 }
 
 export const popupCardStencil = createStencil({

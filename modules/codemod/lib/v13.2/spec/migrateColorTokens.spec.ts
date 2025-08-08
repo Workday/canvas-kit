@@ -5,13 +5,53 @@ import transform from '../migrateColorTokens';
 const expectTransform = expectTransformFactory(transform);
 
 describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
+  it('should skip files that do not have a colors import', () => {
+    const input = stripIndent`
+      import {ColorTokens} from '../examples/Color';
+
+      export default {
+        component: ColorTokens,
+        title: 'Visual Tests/Base Tokens',
+      };
+
+      export const Colors = {
+        parameters: {
+          chromatic: {disableSnapshot: false},
+        },
+      };
+    `;
+
+    const expected = stripIndent`
+      import {ColorTokens} from '../examples/Color';
+
+      export default {
+        component: ColorTokens,
+        title: 'Visual Tests/Base Tokens',
+      };
+
+      export const Colors = {
+        parameters: {
+          chromatic: {disableSnapshot: false},
+        },
+      };
+    `;
+
+    expectTransform(input, expected);
+  });
+
   it('should not transform tokens from other imports', () => {
     const input = stripIndent`
         import { colors, depth } from "@other-package";
+
+        const color = colors.blueberry400;
+        const styles = {color: colors.pomegranate600};
       `;
 
     const expected = stripIndent`
         import { colors, depth } from "@other-package";
+
+        const color = colors.blueberry400;
+        const styles = {color: colors.pomegranate600};
       `;
 
     expectTransform(input, expected);
@@ -136,8 +176,8 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
         `;
 
       const expected = stripIndent`
-          import { system } from "@workday/canvas-tokens-web";
           import { cssVar } from "@workday/canvas-kit-styling";
+          import { system } from "@workday/canvas-tokens-web";
 
           const styles = css({
             background: cssVar(system.color.bg.default),

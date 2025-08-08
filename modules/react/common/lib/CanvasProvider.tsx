@@ -31,14 +31,16 @@ export const useCanvasThemeToCssVars = (
       // @ts-ignore
       style[brand.common.focusOutline] = palette.common.focusOutline;
     }
-    (['lightest', 'light', 'main', 'dark', 'darkest', 'contrast'] as const).forEach(key => {
-      // We only want to set custom colors if they do not match the default. The `defaultBranding` class will take care of the rest.
-      // @ts-ignore
-      if (palette[color][key] !== defaultCanvasTheme.palette[color][key]) {
+    (['lightest', 'lighter', 'light', 'main', 'dark', 'darkest', 'contrast'] as const).forEach(
+      key => {
+        // We only want to set custom colors if they do not match the default. The `defaultBranding` class will take care of the rest.
         // @ts-ignore
-        style[brand[color][mappedKeys[key]]] = palette[color][key];
+        if (palette[color][key] !== defaultCanvasTheme.palette[color][key]) {
+          // @ts-ignore
+          style[brand[color][mappedKeys[key]]] = palette[color][key];
+        }
       }
-    });
+    );
   });
   return {...elemProps, className, style};
 };
