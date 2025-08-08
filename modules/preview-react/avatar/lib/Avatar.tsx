@@ -101,15 +101,7 @@ export const Avatar = createComponent('div')({
   displayName: 'Avatar',
 
   Component: (
-    {
-      url,
-      name,
-      variant,
-      objectFit = 'cover',
-      size = 'medium',
-      isDecorative,
-      ...elemProps
-    }: AvatarProps,
+    {url, name, variant, objectFit = 'cover', isDecorative, size, ...elemProps}: AvatarProps,
     ref,
     Element
   ) => {

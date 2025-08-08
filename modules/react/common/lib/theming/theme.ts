@@ -26,7 +26,7 @@ export const defaultCanvasTheme: CanvasTheme = {
     error: {
       lightest: cssVar(base.red25),
       lighter: cssVar(base.red50),
-      light: cssVar(base.red100),
+      light: cssVar(base.red200),
       main: cssVar(base.red600),
       dark: cssVar(base.red700),
       darkest: cssVar(base.red800),
@@ -35,7 +35,7 @@ export const defaultCanvasTheme: CanvasTheme = {
     success: {
       lightest: cssVar(base.green25),
       lighter: cssVar(base.green50),
-      light: cssVar(base.green100),
+      light: cssVar(base.green200),
       main: cssVar(base.green600),
       dark: cssVar(base.green700),
       darkest: cssVar(base.green800),

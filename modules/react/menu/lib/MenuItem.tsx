@@ -76,7 +76,7 @@ export const menuItemStencil = createStencil({
     minHeight: system.space.x10,
     overflowWrap: 'anywhere',
     // We want the icon colors to be the same as the text color
-    [systemIconStencil.vars.color]: 'currentcolor',
+    [systemIconStencil.vars.color]: 'currentColor',
 
     // selected checkmark
     [`& :where(${selectedPart})`]: {
