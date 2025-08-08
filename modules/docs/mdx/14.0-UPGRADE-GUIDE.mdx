@@ -25,6 +25,7 @@ any questions.
   - [StatusIndicator](#status-indicator)
 - [Removals](#removals)
   - [Menu (preview)](#menu-preview)
+  - [Deprecated Buttons](#deprecated-buttons)
 - [Troubleshooting](#troubleshooting)
 - [Glossary](#glossary)
   - [Main](#main)
@@ -124,7 +125,7 @@ The following components have been updated:
 
 #### TertiaryButton
 
-The `TertiaryButton` component no longer supports the `isThemable` prop.  
+The `TertiaryButton` component no longer supports the `isThemable` prop.
 To customize the appearance of `TertiaryButton`, use the `cs` prop for custom styles or the `colors`
 prop for palette-based color overrides.
 
@@ -357,6 +358,14 @@ The `StatusIndicatorVariant` type has been updated to contain the new variant na
 
 Removals are deletions from our codebase and you can no longer consume this component. We've either
 promoted or replaced a component or utility.
+
+### Deprecated Buttons
+
+**PR:** [#3429](https://github.com/Workday/canvas-kit/pull/3439)
+
+Long overdue, but a sign of moving forward, we are removing our `DeprecatedButton`. Our design system supported this for quite some time, but with the advancement in theming, our components API and our flexibility, it is time for us to finally remove this component. This component has served as a reminder of how far we've come and it part we're thankful for this change.
+
+Al though unlikely, but not impossible, if you were using `DeprecatedButton` please use our flexible and themable buttons like `PrimaryButton`, `ScondaryButton` or `TertiaryButton`.
 
 ### Menu (preview)
 
