@@ -884,7 +884,7 @@ describe('cs', () => {
 
       const result2 = myStencil({width: 'zero', height: '10px'});
       expect(result2).toHaveProperty('style');
-      expect(result2.style).toHaveProperty(myStencil.vars.width, 'zero');
+      expect(result2.style).not.toHaveProperty(myStencil.vars.width, 'zero');
 
       // match base and width modifier
       expect(result2.className).toContain(`${myStencil.base} ${myStencil.modifiers.width.zero}`);
@@ -1377,6 +1377,77 @@ describe('cs', () => {
 
         // baseStencil.base, baseStencil large, baseStencil only position, baseStencil compound, extendedStencil.base, extendedStencil large, extendedStencil compound
         expect(className.split(' ')).toHaveLength(10); // 7 + 3 modifier hashes
+      });
+
+      describe('when vars and modifiers share the same key', () => {
+        function setup() {
+          const baseStencil = createStencil({
+            vars: {
+              width: '10px',
+            },
+            base: ({width}) => ({
+              width: width,
+            }),
+            modifiers: {
+              width: {
+                zero: {
+                  width: '0',
+                },
+              },
+            },
+          });
+
+          const extendedStencil = createStencil({
+            extends: baseStencil,
+            vars: {
+              height: '',
+            },
+            base: ({height}) => ({
+              height: height,
+            }),
+            modifiers: {
+              height: {
+                zero: {},
+              },
+            },
+          });
+
+          return {baseStencil, extendedStencil};
+        }
+
+        it('should set up the correct types', () => {
+          const {extendedStencil} = setup();
+
+          type Arg = Exclude<Parameters<typeof extendedStencil>[0], undefined>;
+          expectTypeOf<Arg>().toHaveProperty('width');
+          expectTypeOf<Arg['width']>().toMatchTypeOf<(string & {}) | 'zero' | undefined>();
+          expectTypeOf<Arg>().toHaveProperty('height');
+          expectTypeOf<Arg['height']>().toMatchTypeOf<(string & {}) | 'zero' | undefined>();
+        });
+
+        it('should apply modifiers when a modifier is matched', () => {
+          const {extendedStencil} = setup();
+
+          const result = extendedStencil({width: 'zero', height: 'zero'});
+          expect(result.className).toContain(extendedStencil.modifiers.width.zero);
+          expect(result.className).toContain(extendedStencil.modifiers.height.zero);
+
+          expect(result).toHaveProperty('style');
+          expect(result.style).not.toHaveProperty(extendedStencil.vars.width);
+          expect(result.style).not.toHaveProperty(extendedStencil.vars.height);
+        });
+
+        it('should apply vars when a var is matched', () => {
+          const {extendedStencil} = setup();
+
+          const result = extendedStencil({width: '10px', height: '20px'});
+          expect(result.className).not.toContain(extendedStencil.modifiers.width.zero);
+          expect(result.className).not.toContain(extendedStencil.modifiers.height.zero);
+
+          expect(result).toHaveProperty('style');
+          expect(result.style).toHaveProperty(extendedStencil.vars.width, '10px');
+          expect(result.style).toHaveProperty(extendedStencil.vars.height, '20px');
+        });
       });
     });
 
