@@ -48,8 +48,8 @@ export const informationHighlightStencil = createStencil({
         borderInlineStartColor: system.color.border.caution.default,
         backgroundColor: system.color.bg.alt.soft,
         '& [data-part="information-highlight-icon"]': {
-          [systemIconStencil.vars.accentColor]: system.color.fg.strong,
-          [systemIconStencil.vars.color]: system.color.fg.strong,
+          [systemIconStencil.vars.accentColor]: system.color.icon.strong,
+          [systemIconStencil.vars.color]: system.color.icon.strong,
           [systemIconStencil.vars.backgroundColor]: 'transparent',
         },
       },
