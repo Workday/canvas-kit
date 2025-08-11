@@ -93,6 +93,7 @@ export function getPaletteColorsForFocusRing(
  *  );
  * };
  *```
+ * @deprecated ⚠️ `useThemedRing` has been deprecated and will be removed in the next major version. Please use [`focus-visible`](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible) when applying focus styles to elements or components.
  */
 export const useThemedRing = (type: paletteSelection): CSSProperties => {
   const theme = useTheme();
