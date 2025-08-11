@@ -114,6 +114,7 @@ const supportsPassive = () => {
 
 /**
  * This component takes heavy inspiration from what-input (https://github.com/ten1seven/what-input)
+ * @deprecated ⚠️ `InputProvider` has been deprecated and will be removed in the next major version. Please use [`focus-visible`](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible) when applying focus styles to elements or components.
  */
 export class InputProvider extends React.Component<React.PropsWithChildren<InputProviderProps>> {
   private eventTimer: number | undefined;
@@ -137,7 +138,7 @@ export class InputProvider extends React.Component<React.PropsWithChildren<Input
       storedInput = window.sessionStorage.getItem('what-input') as InputType;
       storedIntent = window.sessionStorage.getItem('what-intent') as InputType;
     } catch (e) {
-      // Don't log if window is undefined (i.e. we are in an SSR environment), 
+      // Don't log if window is undefined (i.e. we are in an SSR environment),
       // because we can assume the entire implementation will not work and is not needed.
       if (typeof window !== 'undefined') {
         console.warn('Failed to retrieve input status from session storage' + e);

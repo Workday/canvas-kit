@@ -105,5 +105,6 @@ function calculateCanvasTheme(partialTheme: PartialCanvasTheme): CanvasTheme {
  * Creates a full {@link CanvasTheme} from any partial theme by deeply merging with the
  * `defaultCanvasTheme` object. The function is memoized, but it is best to run this function
  * only once and save the result.
+ * @deprecated ⚠️ `createCanvasTheme` has been deprecated and will be removed in the next major version.
  */
 export const createCanvasTheme = memoize(calculateCanvasTheme, (...args) => JSON.stringify(args));

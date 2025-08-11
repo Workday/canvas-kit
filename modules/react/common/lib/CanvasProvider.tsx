@@ -1,9 +1,8 @@
 import * as React from 'react';
 import {Theme, ThemeProvider, CacheProvider} from '@emotion/react';
-import {InputProvider} from './InputProvider';
 import {defaultCanvasTheme, PartialEmotionCanvasTheme, useTheme} from './theming';
 import {brand} from '@workday/canvas-tokens-web';
-import {createStyles, getCache} from '@workday/canvas-kit-styling';
+import {getCache} from '@workday/canvas-kit-styling';
 
 export interface CanvasProviderProps {
   theme?: PartialEmotionCanvasTheme;
@@ -11,6 +10,7 @@ export interface CanvasProviderProps {
 
 const mappedKeys = {
   lightest: 'lightest',
+  lighter: 'lighter',
   light: 'light',
   main: 'base',
   dark: 'dark',
@@ -55,7 +55,6 @@ export const CanvasProvider = ({
   return (
     <CacheProvider value={cache}>
       <ThemeProvider theme={theme as Theme}>
-        <InputProvider />
         <div
           dir={theme?.canvas?.direction || defaultCanvasTheme.direction}
           {...(elemProps as React.HTMLAttributes<HTMLDivElement>)}
