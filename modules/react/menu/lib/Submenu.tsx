@@ -120,6 +120,7 @@ export const useSubmenuTargetItem = composeHooks(
             case 'ArrowRight':
             case 'Enter':
             case ' ':
+              event.preventDefault();
               model.events.show(event);
               break;
           }
