@@ -58,8 +58,8 @@ export const informationHighlightStencil = createStencil({
         backgroundColor: system.color.bg.caution.softest,
         '& [data-part="information-highlight-icon"]': {
           [systemIconStencil.vars.accentColor]: system.color.icon.inverse,
-          [systemIconStencil.vars.color]: system.color.border.caution.default,
-          [systemIconStencil.vars.backgroundColor]: system.color.border.caution.default,
+          [systemIconStencil.vars.color]: system.color.icon.caution.softer,
+          [systemIconStencil.vars.backgroundColor]: system.color.icon.caution.softer,
         },
       },
     },
