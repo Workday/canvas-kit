@@ -1,6 +1,6 @@
 import {createContainer} from '@workday/canvas-kit-react/common';
 import {cssVar, createStencil, handleCsProp, CSProps, px2rem} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {brand, system} from '@workday/canvas-tokens-web';
 
 import {InformationHighlightHeading} from './parts/Heading';
 import {Body} from './parts/Body';
@@ -20,25 +20,22 @@ export const informationHighlightStencil = createStencil({
     padding: system.space.x4,
     borderRadius: system.shape.x1,
     outline: `${px2rem(1)} solid transparent`,
+    borderInlineStart: `${cssVar(system.space.x1)} solid transparent`,
   },
   modifiers: {
     informational: {
       low: {
-        borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(
-          system.color.bg.primary.default
-        )}`,
-        backgroundColor: system.color.bg.alt.soft,
+        borderInlineStartColor: system.color.bg.primary.default,
+        backgroundColor: system.color.bg.primary.softest,
         '& [data-part="information-highlight-icon"]': {
-          [systemIconStencil.vars.accentColor]: system.color.bg.primary.default,
-          [systemIconStencil.vars.color]: system.color.bg.primary.default,
-          [systemIconStencil.vars.backgroundColor]: 'none',
+          [systemIconStencil.vars.accentColor]: system.color.icon.primary.default,
+          [systemIconStencil.vars.color]: system.color.icon.primary.default,
+          [systemIconStencil.vars.backgroundColor]: 'transparent',
         },
       },
       high: {
-        borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(
-          system.color.bg.primary.default
-        )}`,
-        backgroundColor: system.color.bg.primary.softer,
+        borderInlineStartColor: system.color.bg.primary.default,
+        backgroundColor: system.color.bg.alt.soft,
         '& [data-part="information-highlight-icon"]': {
           [systemIconStencil.vars.accentColor]: system.color.icon.inverse,
           [systemIconStencil.vars.color]: system.color.bg.primary.default,
@@ -48,33 +45,27 @@ export const informationHighlightStencil = createStencil({
     },
     caution: {
       low: {
-        borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(
-          system.color.border.caution.default
-        )}`,
+        borderInlineStartColor: brand.common.alertInner,
         backgroundColor: system.color.bg.alt.soft,
         '& [data-part="information-highlight-icon"]': {
-          [systemIconStencil.vars.accentColor]: system.color.fg.contrast.default,
-          [systemIconStencil.vars.color]: system.color.fg.contrast.default,
+          [systemIconStencil.vars.accentColor]: system.color.fg.strong,
+          [systemIconStencil.vars.color]: system.color.fg.strong,
           [systemIconStencil.vars.backgroundColor]: 'none',
         },
       },
       high: {
-        borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(
-          system.color.border.caution.default
-        )}`,
+        borderInlineStartColor: brand.common.alertInner,
         backgroundColor: system.color.bg.caution.softest,
         '& [data-part="information-highlight-icon"]': {
           [systemIconStencil.vars.accentColor]: system.color.icon.inverse,
-          [systemIconStencil.vars.color]: system.color.fg.contrast.default,
-          [systemIconStencil.vars.backgroundColor]: system.color.fg.contrast.default,
+          [systemIconStencil.vars.color]: brand.alert.dark,
+          [systemIconStencil.vars.backgroundColor]: brand.alert.dark,
         },
       },
     },
     critical: {
       low: {
-        borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(
-          system.color.border.critical.default
-        )}`,
+        borderInlineStartColor: brand.common.errorInner,
         backgroundColor: system.color.bg.alt.soft,
         '& [data-part="information-highlight-icon"]': {
           [systemIconStencil.vars.accentColor]: system.color.bg.critical.default,
@@ -83,14 +74,12 @@ export const informationHighlightStencil = createStencil({
         },
       },
       high: {
-        borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(
-          system.color.border.critical.default
-        )}`,
+        borderInlineStartColor: brand.common.errorInner,
         backgroundColor: system.color.bg.critical.softest,
         '& [data-part="information-highlight-icon"]': {
           [systemIconStencil.vars.accentColor]: system.color.icon.inverse,
-          [systemIconStencil.vars.color]: system.color.bg.critical.default,
-          [systemIconStencil.vars.backgroundColor]: system.color.fg.critical.default,
+          [systemIconStencil.vars.color]: brand.error.base,
+          [systemIconStencil.vars.backgroundColor]: brand.error.base,
         },
       },
     },
