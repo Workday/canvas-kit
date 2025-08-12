@@ -6,3 +6,4 @@ export * from './useTheme';
 export * from './useThemedRing';
 export * from './useIsRTL';
 export * from './getObjectProxy';
+export * from './createCanvasTheme';
