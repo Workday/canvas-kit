@@ -1,5 +1,5 @@
 import {createContainer} from '@workday/canvas-kit-react/common';
-import {cssVar, createStencil, handleCsProp, CSProps, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, handleCsProp, CSProps, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {InformationHighlightHeading} from './parts/Heading';
@@ -20,7 +20,7 @@ export const informationHighlightStencil = createStencil({
     padding: system.space.x4,
     borderRadius: system.shape.x1,
     outline: `${px2rem(1)} solid transparent`,
-    borderInlineStart: `${cssVar(system.space.x1)} solid transparent`,
+    borderInlineStart: `${system.space.x1} solid transparent`,
   },
   modifiers: {
     informational: {
