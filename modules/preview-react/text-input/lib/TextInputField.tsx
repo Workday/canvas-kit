@@ -57,7 +57,7 @@ const textInputFieldStencil = createStencil({
 });
 
 /**
- * @deprecated ⚠️ `TextInputField` in Preview has been deprecated and will be removed in a future major version. Please use [`FormField` in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-inputs-form-field--basic) instead.
+ * @deprecated ⚠️ `TextInputField` in Preview has been deprecated and will be removed in a future major version. Please use [`FormField` in Preview](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-form-field--docs) instead.
  */
 export const TextInputField = createSubcomponent('input')({
   displayName: 'TextInput.Field',

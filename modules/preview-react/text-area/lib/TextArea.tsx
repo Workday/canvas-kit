@@ -7,7 +7,7 @@ import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {TextAreaField} from './TextAreaField';
 import {useTextInputModel} from '@workday/canvas-kit-preview-react/text-input';
 /**
- * @deprecated ⚠️ `TextAreaProps` in Preview has been deprecated and will be removed in a future major version. Please use [`FormField`](https://workday.github.io/canvas-kit/?path=/story/preview-inputs-form-field--basic) in Preview instead.
+ * @deprecated ⚠️ `TextAreaProps` in Preview has been deprecated and will be removed in a future major version. Please use [`TextArea` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-textarea--docs) instead.
  */
 export interface TextAreaProps extends ExtractProps<typeof FormField, never> {
   /**
@@ -18,7 +18,7 @@ export interface TextAreaProps extends ExtractProps<typeof FormField, never> {
 
 /**
  * @stencil formFieldStencil
- * @deprecated ⚠️ `TextArea` in Preview has been deprecated and will be removed in a future major version. Please use [`FormField` in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-inputs-form-field--basic) instead.
+ * @deprecated ⚠️ `TextArea` in Preview has been deprecated and will be removed in a future major version. Please use [`TextArea` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-textarea--docs) instead.
  */
 export const TextArea = createContainer('div')({
   displayName: 'TextArea',
