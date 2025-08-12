@@ -153,7 +153,8 @@ The reason for this change is to ensure that the CSS variables are properly casc
 
 ### Branding Changes 💅
 
-Several components have been refactored to reflect our new brand direction. Most of these changes revolve around the use of our new brand colors.
+Several components have been refactored to reflect our new brand direction. Most of these changes
+revolve around the use of our new brand colors.
 
 The following components have been updated:
 
@@ -161,6 +162,7 @@ The following components have been updated:
 - `Buttons` [#3394](https://github.com/Workday/canvas-kit/pull/3394)
 - `ColorPicker` (Main) [#3307](https://github.com/Workday/canvas-kit/pull/3307)
 - `ColorPicker` (preview) [#3307](https://github.com/Workday/canvas-kit/pull/3307)
+- `InformationHighlight` [#3443](https://github.com/Workday/canvas-kit/pull/3443)
 - `LoadingDots` (Main) [#3393](https://github.com/Workday/canvas-kit/pull/3393)
 - `Pagination` (Preview) [#3300](https://github.com/Workday/canvas-kit/pull/3300)
 - `SearchForm` (Labs) [#3303](https://github.com/Workday/canvas-kit/pull/3303)
@@ -173,9 +175,9 @@ The following components have been updated:
 
 #### TertiaryButton
 
-The `TertiaryButton` component no longer supports the `isThemable` prop.
-To customize the appearance of `TertiaryButton`, use the `cs` prop for custom styles or the `colors`
-prop for palette-based color overrides.
+The `TertiaryButton` component no longer supports the `isThemable` prop. To customize the appearance
+of `TertiaryButton`, use the `cs` prop for custom styles or the `colors` prop for palette-based
+color overrides.
 
 The shape of `TertiaryButton` has changed to have rounded corners, aligning with other buttons and
 our new brand direction.
@@ -391,16 +393,20 @@ const customTheme = {
 
 **PR:** [#3287](https://github.com/Workday/canvas-kit/pull/3287)
 
-Preview `StatusIndicator` is a rounder and more vibrant base emphasis (`low`). The `emphasis` prop is now deprecated and the `high` emphasis will be removed in a later version.
+Preview `StatusIndicator` is a rounder and more vibrant base emphasis (`low`). The `emphasis` prop
+is now deprecated and the `high` emphasis will be removed in a later version.
 
 Variant names of the preview `StatusIndicator` have been updated by the following mapping:
+
 - `blue` -> `primary`
 - `green` -> `success`
 - `orange` -> `caution`
 - `red` -> `critical`
 - `gray` -> `neutral`
 
-The `StatusIndicatorVariant` type has been updated to contain the new variant names listed above. If you use the old variant values, update to use the new ones mapped above. It has also been deprecated. Use `StatusIndicatorProps['variant']` instead.
+The `StatusIndicatorVariant` type has been updated to contain the new variant names listed above. If
+you use the old variant values, update to use the new ones mapped above. It has also been
+deprecated. Use `StatusIndicatorProps['variant']` instead.
 
 ## Deprecations
 
@@ -452,9 +458,13 @@ promoted or replaced a component or utility.
 
 **PR:** [#3429](https://github.com/Workday/canvas-kit/pull/3439)
 
-Long overdue, but a sign of moving forward, we are removing our `DeprecatedButton`. Our design system supported this for quite some time, but with the advancement in theming, our components API and our flexibility, it is time for us to finally remove this component. This component has served as a reminder of how far we've come and it part we're thankful for this change.
+Long overdue, but a sign of moving forward, we are removing our `DeprecatedButton`. Our design
+system supported this for quite some time, but with the advancement in theming, our components API
+and our flexibility, it is time for us to finally remove this component. This component has served
+as a reminder of how far we've come and it part we're thankful for this change.
 
-Al though unlikely, but not impossible, if you were using `DeprecatedButton` please use our flexible and themable buttons like `PrimaryButton`, `ScondaryButton` or `TertiaryButton`.
+Al though unlikely, but not impossible, if you were using `DeprecatedButton` please use our flexible
+and themable buttons like `PrimaryButton`, `ScondaryButton` or `TertiaryButton`.
 
 ### Menu (preview)
 
