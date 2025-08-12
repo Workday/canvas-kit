@@ -23,16 +23,21 @@ const getType = (name: string) => {
 };
 
 const getColors = (type: string) => {
-  switch (type) {
-    case 'AI':
+  switch (type.toLowerCase()) {
+    case 'ai':
       return {
         backgroundColor: 'rgba(207, 235, 255, 1)',
         color: 'rgba(2, 32, 67, 1)',
       };
+    case 'deprecated':
+      return {
+        backgroundColor: 'rgba(234, 237, 240, 1)',
+        color: 'rgba(77, 86, 98, 1)',
+      };
     default:
       return {
-        backgroundColor: 'rgba(219, 225, 233, 1)',
-        color: 'rgba(93, 103, 117, 1)',
+        backgroundColor: 'rgba(227, 241, 255, 1)',
+        color: 'rgba(0, 87, 174, 1)',
       };
   }
 };

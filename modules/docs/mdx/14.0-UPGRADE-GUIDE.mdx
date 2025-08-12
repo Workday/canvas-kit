@@ -24,11 +24,17 @@ any questions.
   - [Loading Dots](#loading-dots)
   - [Pill](#pill)
   - [SearchForm](#search-form)
+  - [Status Indicator (Preview)](#status-indicator-preview)
 - [Deprecations](#deprecations)
   - [Avatar in Main](#avatar-in-main)
-  - [StatusIndicator](#status-indicator)
+  - [Combobox (Labs)](#combobox-labs)
+  - [Radio (Main)](#radio-main)
+  - [Segmented Control (Main)](#segmented-control-main)
+  - [Side Panel (Main)](#side-panel-main)
+  - [Tokens](#tokens)
 - [Removals](#removals)
   - [Menu (preview)](#menu-preview)
+  - [Deprecated Buttons](#deprecated-buttons)
 - [Troubleshooting](#troubleshooting)
 - [Glossary](#glossary)
   - [Main](#main)
@@ -141,6 +147,7 @@ The following components have been updated:
 - `Buttons` [#3394](https://github.com/Workday/canvas-kit/pull/3394)
 - `ColorPicker` (Main) [#3307](https://github.com/Workday/canvas-kit/pull/3307)
 - `ColorPicker` (preview) [#3307](https://github.com/Workday/canvas-kit/pull/3307)
+- `InformationHighlight` [#3443](https://github.com/Workday/canvas-kit/pull/3443)
 - `LoadingDots` (Main) [#3393](https://github.com/Workday/canvas-kit/pull/3393)
 - `Pagination` (Preview) [#3300](https://github.com/Workday/canvas-kit/pull/3300)
 - `SearchForm` (Labs) [#3303](https://github.com/Workday/canvas-kit/pull/3303)
@@ -153,9 +160,9 @@ The following components have been updated:
 
 #### TertiaryButton
 
-The `TertiaryButton` component no longer supports the `isThemable` prop.
-To customize the appearance of `TertiaryButton`, use the `cs` prop for custom styles or the `colors`
-prop for palette-based color overrides.
+The `TertiaryButton` component no longer supports the `isThemable` prop. To customize the appearance
+of `TertiaryButton`, use the `cs` prop for custom styles or the `colors` prop for palette-based
+color overrides.
 
 The shape of `TertiaryButton` has changed to have rounded corners, aligning with other buttons and
 our new brand direction.
@@ -380,7 +387,30 @@ const customTheme = {
   This **should not** affect the way you use the type unless you're passing a `number` of `0`, `1`
   or `2` to the `searchTheme` prop.
 
+### Status Indicator (Preview) 🚨
+
+**PR:** [#3287](https://github.com/Workday/canvas-kit/pull/3287)
+
+Preview `StatusIndicator` is a rounder and more vibrant base emphasis (`low`). The `emphasis` prop
+is now deprecated and the `high` emphasis will be removed in a later version.
+
+Variant names of the preview `StatusIndicator` have been updated by the following mapping:
+
+- `blue` -> `primary`
+- `green` -> `success`
+- `orange` -> `caution`
+- `red` -> `critical`
+- `gray` -> `neutral`
+
+The `StatusIndicatorVariant` type has been updated to contain the new variant names listed above. If
+you use the old variant values, update to use the new ones mapped above. It has also been
+deprecated. Use `StatusIndicatorProps['variant']` instead.
+
 ## Deprecations
+
+We add the [@deprecated](https://jsdoc.app/tags-deprecated.html) JSDoc tag to code we plan to remove
+in a future major release. This signals consumers to migrate to a more stable alternative before the
+deprecated code is removed.
 
 ### Avatar in Main
 
@@ -418,25 +448,58 @@ import { BaseAvatar } from '@workday/canvas-kit-preview-react/avatar';
   <BaseAvatar.Name name="John Doe" />
 </BaseAvatar>
 ```
-## Status Indicator 🚨
 
-**PR:** [#3287](https://github.com/Workday/canvas-kit/pull/3287)
+### Combobox (Labs)
 
-Preview `StatusIndicator` is a rounder and more vibrant base emphasis (`low`). The `emphasis` prop is now deprecated and the `high` emphasis will be removed in a later version.
+The Combobox component in `@workday/canvas-kit-labs-react/combobox` has been deprecated and will be
+removed in a future major release. Please migrate to the
+[Combobox](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-combobox--docs) in
+`@workday/canvas-kit-react`.
 
-Variant names of the preview `StatusIndicator` have been updated by the following mapping:
-- `blue` -> `primary`
-- `green` -> `success`
-- `orange` -> `caution`
-- `red` -> `critical`
-- `gray` -> `neutral`
+### Radio (Main)
 
-The `StatusIndicatorVariant` type has been updated to contain the new variant names listed above. If you use the old variant values, update to use the new ones mapped above. It has also been deprecated. Use `StatusIndicatorProps['variant']` instead.
+The Radio component in `@workday/canvas-kit-react/radio` has been deprecated. Please use the new
+[Radio](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-radio--docs) component
+from the same package, which offers improved accessibility and API consistency.
+
+### Segmented Control (Main)
+
+The Segmented Control component in `@workday/canvas-kit-react/segmented-control` has been
+deprecated. Please migrate to the new
+[Segmented Control](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-segmented-control--docs)
+for improved features and support.
+
+### Side Panel (Main)
+
+The Side Panel component in `@workday/canvas-kit-react/side-panel` is now deprecated and will be
+removed in a future release. Please use the new
+[Side Panel](https://workday.github.io/canvas-kit/?path=/docs/components-navigation-side-panel--docs)
+for enhanced functionality.
+
+### Tokens
+
+The legacy tokens from `@workday/canvas-kit-react/tokens` are now deprecated. Please use the new
+[Canvas Tokens Web](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs)
+package (`@workday/canvas-tokens-web`) for all token usage. Follow
+[a migration guide](https://workday.github.io/canvas-kit?path=/docs/guides-tokens-migration-overview--docs)
+for smootier upgrade.
 
 ## Removals
 
 Removals are deletions from our codebase and you can no longer consume this component. We've either
 promoted or replaced a component or utility.
+
+### Deprecated Buttons
+
+**PR:** [#3429](https://github.com/Workday/canvas-kit/pull/3439)
+
+Long overdue, but a sign of moving forward, we are removing our `DeprecatedButton`. Our design
+system supported this for quite some time, but with the advancement in theming, our components API
+and our flexibility, it is time for us to finally remove this component. This component has served
+as a reminder of how far we've come and it part we're thankful for this change.
+
+Al though unlikely, but not impossible, if you were using `DeprecatedButton` please use our flexible
+and themable buttons like `PrimaryButton`, `ScondaryButton` or `TertiaryButton`.
 
 ### Menu (preview)
 

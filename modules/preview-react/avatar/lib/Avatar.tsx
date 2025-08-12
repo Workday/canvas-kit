@@ -29,6 +29,7 @@ export const avatarStencil = createStencil({
     avatarImage: 'avatar-image',
     avatarName: 'avatar-name',
   },
+
   base: {},
   modifiers: {
     imageLoaded: {
