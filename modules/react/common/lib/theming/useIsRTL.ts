@@ -11,7 +11,6 @@ function useDefaultTheme<T, C>(theme: T | undefined, config: C, fn: (config: C) 
  * It returns a boolean
  * @example
  * const isRTL = useIsRTL();
- * @deprecated ⚠️ `useIsRTL` has been deprecated and will be removed in the next major version. Please use [`dir`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/dir) attribute on the root element of your application.
  */
 
 export const useIsRTL = (partialTheme?: PartialEmotionCanvasTheme) => {

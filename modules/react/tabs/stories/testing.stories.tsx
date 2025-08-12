@@ -1,7 +1,11 @@
 import React from 'react';
 
 import {setupIcon} from '@workday/canvas-system-icons-web';
-import {PartialEmotionCanvasTheme, ContentDirection} from '@workday/canvas-kit-react/common';
+import {
+  PartialEmotionCanvasTheme,
+  ContentDirection,
+  createCanvasTheme,
+} from '@workday/canvas-kit-react/common';
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 import {customColorTheme} from '../../../../utils/storybook';
 
@@ -69,7 +73,7 @@ export const TabStates = {
       <h3>Default</h3>
       <TabsExample />
       <h3>Themed</h3>
-      <TabsExample theme={{canvas: customColorTheme}} />
+      <TabsExample theme={{canvas: createCanvasTheme(customColorTheme)}} />
       <h3>RTL</h3>
       <TabsExample theme={{canvas: {direction: ContentDirection.RTL}}} />
     </>

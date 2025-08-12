@@ -1,4 +1,4 @@
-import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
+import {PartialEmotionCanvasTheme, createCanvasTheme} from '@workday/canvas-kit-react/common';
 import {
   ComponentStatesTable,
   permutateProps,
@@ -94,9 +94,9 @@ export const TertiaryIconButtonStates = {
 };
 
 export const TertiaryButtonThemedStates = {
-  render: () => <TertiaryButtonTest theme={{canvas: customColorTheme}} />,
+  render: () => <TertiaryButtonTest theme={{canvas: createCanvasTheme(customColorTheme)}} />,
 };
 
 export const TertiaryIconButtonThemedStates = {
-  render: () => <TertiaryIconButtonTest theme={{canvas: customColorTheme}} />,
+  render: () => <TertiaryIconButtonTest theme={{canvas: createCanvasTheme(customColorTheme)}} />,
 };

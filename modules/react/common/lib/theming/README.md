@@ -114,19 +114,26 @@ direction to the component library.
 
 > Note: Our theme is namespaced under the `canvas` key within the Emotion `ThemeContext`.
 
-If you only set a `main` color, the rest of the respective palette will be automatically generated
-(note text `contrast` color will always return white if not specified).
+For a consistent theming experience, provide a value for each property in the theme object. Use our
+CSS variables.
 
 Example:
 
 ```tsx
 import {CanvasProvider, EmotionCanvasTheme} from '@workday/canvas-kit-react/common';
+import {brand} from '@workday/canvas-tokens-web';
 
 const theme: EmotionCanvasTheme = {
   canvas: {
     palette: {
       primary: {
-        main: colors.cantaloupe400,
+        lightest: cssVar(base.magenta25),
+        lighter: cssVar(base.magenta50),
+        light: cssVar(base.magenta200),
+        main: cssVar(base.magenta600),
+        dark: cssVar(base.magenta700),
+        darkest: cssVar(base.magenta800),
+        contrast: cssVar(base.neutral0),
       },
     },
   },

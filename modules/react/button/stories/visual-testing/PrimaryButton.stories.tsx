@@ -111,8 +111,7 @@ export const PrimaryIconButtonStates = {
 export const PrimaryButtonThemedStates = {
   render: () => {
     const {canvas} = useTheme();
-    console.log('canvas', canvas);
-    // console.log('customColorTheme', createCanvasTheme(customColorTheme));
+
     return <PrimaryButtonTest theme={{canvas: createCanvasTheme(customColorTheme)}} />;
   },
 };
@@ -120,11 +119,11 @@ export const PrimaryButtonThemedStates = {
 export const PrimaryButtonThemedActionStates = {
   render: () => (
     <div className={customActionTheme}>
-      <PrimaryButtonTest theme={{canvas: customColorTheme}} />
+      <PrimaryButtonTest theme={{canvas: createCanvasTheme(customColorTheme)}} />
     </div>
   ),
 };
 
 export const PrimaryIconButtonThemedStates = {
-  render: () => <PrimaryIconButtonTest theme={{canvas: customColorTheme}} />,
+  render: () => <PrimaryIconButtonTest theme={{canvas: createCanvasTheme(customColorTheme)}} />,
 };

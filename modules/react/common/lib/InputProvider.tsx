@@ -114,7 +114,6 @@ const supportsPassive = () => {
 
 /**
  * This component takes heavy inspiration from what-input (https://github.com/ten1seven/what-input)
- * @deprecated ⚠️ `InputProvider` has been deprecated and will be removed in the next major version. Please use [`focus-visible`](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible) when applying focus styles to elements or components.
  */
 export class InputProvider extends React.Component<React.PropsWithChildren<InputProviderProps>> {
   private eventTimer: number | undefined;

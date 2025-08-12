@@ -41,7 +41,5 @@ function styled<Props>(node: any, options?: ThemingStyledOptions) {
     return emotionStyled(node, options)(newArgs);
   };
 }
-/**
- * @deprecated ⚠️ `styled` has been deprecated and will be removed in the next major version. Please use [`@emotion/styled`](https://emotion.sh/docs/styled) instead.
- */
+
 export default styled as CreateStyled;

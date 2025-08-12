@@ -1,15 +1,15 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import {customColorTheme} from '../../../../utils/storybook';
-import {ContentDirection, CanvasProvider, useTheme} from '@workday/canvas-kit-react/common';
+import {
+  ContentDirection,
+  CanvasProvider,
+  useTheme,
+  createCanvasTheme,
+} from '@workday/canvas-kit-react/common';
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {DeleteButton, PrimaryButton} from '@workday/canvas-kit-react/button';
-import {
-  Popup,
-  useCloseOnOutsideClick,
-  useCloseOnEscape,
-  usePopupModel,
-} from '@workday/canvas-kit-react/popup';
+
 import {Flex, Box} from '@workday/canvas-kit-react/layout';
 
 import {WithRadioButtons as WithRadioButtonsExample} from './examples/WithRadioButtons';
@@ -211,7 +211,7 @@ export const CustomThemeModal = {
       initialVisibility: 'visible',
     });
     return (
-      <CanvasProvider theme={{canvas: customColorTheme}}>
+      <CanvasProvider theme={{canvas: createCanvasTheme(customColorTheme)}}>
         <Modal model={model}>
           <Modal.Overlay style={{animation: 'none'}}>
             <Modal.Card style={{animation: 'none'}}>

@@ -3,7 +3,7 @@ import {customColorTheme} from '../../../../../utils/storybook';
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
 import {ToolbarIconButton} from '@workday/canvas-kit-react/button';
 import {Container, stateTableColumnProps} from './utils';
-import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
+import {PartialEmotionCanvasTheme, createCanvasTheme} from '@workday/canvas-kit-react/common';
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 
 export default {
@@ -47,5 +47,5 @@ const ToolbarIconButtonTest = (props: {theme?: PartialEmotionCanvasTheme}) => (
 export const ToolbarIconButtonStates = {render: () => <ToolbarIconButtonTest />};
 
 export const ToolbarIconButtonThemedStates = {
-  render: () => <ToolbarIconButtonTest theme={{canvas: customColorTheme}} />,
+  render: () => <ToolbarIconButtonTest theme={{canvas: createCanvasTheme(customColorTheme)}} />,
 };
