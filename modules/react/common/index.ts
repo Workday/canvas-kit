@@ -10,3 +10,4 @@ export * from './lib/CanvasProvider';
 export * from './lib/InputProvider';
 export * from './lib/EllipsisText';
 export * from './lib/responsive/useResponsiveContainerStyles';
+export * from './lib/theming/createCanvasTheme';
