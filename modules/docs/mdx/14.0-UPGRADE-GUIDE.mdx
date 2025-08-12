@@ -13,6 +13,7 @@ any questions.
 - [Codemod](#codemod)
   - [Instructions](#instructions)
 - [Theming](#theming)
+  - [Canvas Provider](#canvas-provider)
 - [Component Updates](#component-updates)
   - [Branding Changes](#branding-changes)
   - [Buttons](#buttons)
@@ -105,6 +106,48 @@ yarn remove @workday/canvas-kit-codemod
 
 - `CanvasThemePalette` has been updated to include a `lighter` color.
 - `CanvasTheme` has been updated to include a `lighter` color.
+
+### Canvas Provider 🚨
+
+**PR:** [#3407](https://github.com/Workday/canvas-kit/pull/3407)
+
+#### Breaking Changes
+
+Canvas Provider has been updated to **remove** default branding colors to ensure proper cascading of our CSS variables. If you are using the `theme` prop to provide a custom theme, you will need to provide **all** properties of the palette.
+
+** Before in v13**
+In v13, the `useTheme` hook would call `createCanvasTheme` which generated a palette given a `main` color.
+
+```tsx
+<CanvasProvider theme={{canvas: {palette: {primary: {main: 'purple'}}}}}>
+  <App/>
+</CanvasProvider>
+```
+
+**After in v14**
+
+```tsx
+<CanvasProvider theme={
+	{canvas: {
+		palette: {
+			primary: {
+				lightest: cssVar(base.blue25),
+      	lighter: cssVar(base.blue50),
+      	light: cssVar(base.blue200),
+				main: cssVar(base.blue600),
+				dark: cssVar(base.blue700),
+				darkest: cssVar(base.blue800),
+				contrast: cssVar(base.neutral0),
+			}
+		}
+	}}}>
+  <App/>
+</CanvasProvider>
+```
+
+The reason for this change is to ensure that the CSS variables are properly cascaded to all components. Before in v13, the `CanvasProvider` would add the brand tokens under a class name, creating a higher specificity.
+
+- `CanvasProvider` has been updated to include a `lighter` color.
 
 ## Component Updates
 
