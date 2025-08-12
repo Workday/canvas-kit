@@ -1,3 +1,5 @@
+import {Flex} from '@workday/canvas-kit-react/layout';
+
 <Meta title="Guides/Accessibility/Overview" />
 
 ## Canvas Kit Accessibility
@@ -165,10 +167,13 @@ Further reading:
   contrast themes. If you use a meaningful image with a transparent background, it could become
   difficult to see against some background colors. Be careful when using such images for conveying
   information to users.
-- **SVG Icons:** The colors inside `<svg>` elements usually don't change with high contrast themes,
-  which can make them hard to see on some backgrounds. We’ve used a media query to set the icon
-  `fill` and `color` properties to `currentColor` ensuring the icon uses the correct color from the
-  user's preferred high contrast theme.
+
+### SVG Icons
+
+The colors inside `<svg>` elements usually don't change with high contrast themes, which can make
+them hard to see on some backgrounds. We’ve used a media query to set the icon `fill` and `color`
+properties to `currentColor` ensuring the icon uses the correct color from the user's preferred high
+contrast theme.
 
 ```
 // for Windows high contrast desktop themes
@@ -179,3 +184,15 @@ Further reading:
   },
 },
 ```
+
+<Flex justifyContent='space-between'>
+<figure margin='0'>
+  ![Mail icon](/assets/whcm/icons_before.png)
+  <figcaption>Before: The mail icon is difficult to see on dark backgrounds</figcaption>
+</figure>
+
+<figure margin='0'>
+  ![Mail icon](/assets/whcm/icons_after.png)
+  <figcaption>After: The mail icon inherits the themes current color</figcaption>
+</figure>
+</Flex>
