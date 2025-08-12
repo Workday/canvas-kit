@@ -3,7 +3,8 @@ import {PartialCanvasTheme} from '@workday/canvas-kit-react/common';
 export const customColorTheme: PartialCanvasTheme = {
   palette: {
     primary: {
-      main: 'purple', // Purple in OKLCH - will auto-generate other shades
+      main: 'purple',
+      contrast: 'turquoise',
     },
     alert: {
       main: 'coral',

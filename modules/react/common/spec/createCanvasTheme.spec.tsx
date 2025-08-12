@@ -1,5 +1,6 @@
 import colors from '@workday/canvas-colors-web';
 import {defaultCanvasTheme, createCanvasTheme, PartialCanvasTheme} from '../lib/theming';
+import {shiftColor} from '../lib/theming/createCanvasTheme';
 
 import {deepMerge} from '../lib/utils/deepMerge';
 
@@ -136,9 +137,9 @@ describe('createCanvasTheme', () => {
     expect(theme.palette.primary.contrast).toEqual('#494949');
   });
 
-  // test('shift color should darken canvas color to subsequent canvas color', () => {
-  //   const newColor = shiftColor(colors.soap300, 100);
+  test('shift color should darken canvas color to subsequent canvas color', () => {
+    const newColor = shiftColor(colors.soap300, 100);
 
-  //   expect(newColor).toEqual(colors.soap400);
-  // });
+    expect(newColor).toEqual(colors.soap400);
+  });
 });

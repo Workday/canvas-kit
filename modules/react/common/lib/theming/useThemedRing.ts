@@ -1,7 +1,7 @@
-import {CanvasTheme, EmotionCanvasTheme, useTheme} from '@workday/canvas-kit-react/common';
-import {brand, system} from '@workday/canvas-tokens-web';
-import {CSSProperties, statusColors} from '@workday/canvas-kit-react/tokens';
-import {cssVar} from '@workday/canvas-kit-styling';
+import {CanvasThemePalette, EmotionCanvasTheme, useTheme} from '@workday/canvas-kit-react/common';
+import {colors, CSSProperties, inputColors, statusColors} from '@workday/canvas-kit-react/tokens';
+
+import chroma from 'chroma-js';
 
 type paletteSelection = Exclude<keyof EmotionCanvasTheme['canvas']['palette'], 'common'>;
 interface ContrastColors {
@@ -9,29 +9,21 @@ interface ContrastColors {
   inner?: string;
 }
 
-const getPaletteColorsFromTheme = (
-  palette: CanvasTheme,
-  fallbackColors?: ContrastColors,
-  errorType?: 'error' | 'alert'
-): ContrastColors => {
-  if (errorType === 'error') {
-    return {
-      outer: palette.palette.common.errorInner || fallbackColors?.outer,
-      inner: fallbackColors?.inner || palette.palette.common.errorInner,
-    };
-  } else if (errorType === 'alert') {
-    return {
-      outer: palette.palette.common?.alertOuter || fallbackColors?.outer,
-      inner:
-        palette.palette.common?.alertInner ||
-        fallbackColors?.inner ||
-        palette.palette.common.alertInner,
-    };
-  }
+const isAccessible = (foreground: string, background: string = colors.frenchVanilla100) => {
+  return chroma.contrast(foreground, background) >= 3;
+};
 
+const getPaletteColorsFromTheme = (
+  palette: CanvasThemePalette,
+  fallbackColors?: ContrastColors
+): ContrastColors => {
   return {
-    outer: fallbackColors?.outer,
-    inner: fallbackColors?.inner || palette.palette.common.focusOutline,
+    outer: isAccessible(palette.main)
+      ? palette.main
+      : isAccessible(palette.darkest)
+      ? palette.darkest
+      : fallbackColors?.outer,
+    inner: fallbackColors?.inner ? fallbackColors.inner : palette.main,
   };
 };
 
@@ -43,21 +35,21 @@ export function getPaletteColorsForFocusRing(
 
   switch (type) {
     case 'error': {
-      return getPaletteColorsFromTheme(theme.canvas, {outer: brand.common.errorInner}, 'error');
+      return getPaletteColorsFromTheme(palette, {outer: inputColors.error.border});
     }
     case 'alert': {
-      return getPaletteColorsFromTheme(theme.canvas, {outer: brand.common.alertInner}, 'alert');
+      return getPaletteColorsFromTheme(palette, {outer: colors.cantaloupe600});
     }
     case 'success': {
-      return getPaletteColorsFromTheme(theme.canvas, {
-        outer: cssVar(brand.success.dark),
+      return getPaletteColorsFromTheme(palette, {
+        outer: colors.greenApple600,
         // The theme default for success.main is set to the darkest GreenApple
         // For our default ring, we need to override it so the inner ring is a bit lighter
-        inner: palette.main === cssVar(brand.success.base) ? statusColors.success : palette.main,
+        inner: palette.main === colors.greenApple600 ? statusColors.success : palette.main,
       });
     }
     default: {
-      return getPaletteColorsFromTheme(theme.canvas);
+      return getPaletteColorsFromTheme(palette);
     }
   }
 }
@@ -93,7 +85,6 @@ export function getPaletteColorsForFocusRing(
  *  );
  * };
  *```
- * @deprecated ⚠️ `useThemedRing` has been deprecated and will be removed in the next major version. Please use [`focus-visible`](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible) when applying focus styles to elements or components.
  */
 export const useThemedRing = (type: paletteSelection): CSSProperties => {
   const theme = useTheme();
@@ -116,10 +107,8 @@ export const useThemedRing = (type: paletteSelection): CSSProperties => {
     '&:focus:not([disabled])': {
       borderColor: paletteColors.outer,
       boxShadow: `${errorBoxShadow},
-        0 0 0 2px ${cssVar(system.color.border.input.inverse)},
-        0 0 0 4px ${
-          theme ? theme.canvas.palette.common.focusOutline : cssVar(brand.common.focusOutline)
-        }`,
+        0 0 0 2px ${colors.frenchVanilla100},
+        0 0 0 4px ${theme ? theme.canvas.palette.common.focusOutline : inputColors.focusBorder}`,
     },
   };
 };
