@@ -7,7 +7,7 @@ import {getAIIngressIcon} from './AIIngressIcon';
 export interface AIIngressButtonProps
   extends Omit<BaseButtonProps, 'size' | 'colors' | 'icon' | 'iconPosition' | 'shouldMirrorIcon'> {
   /**
-   * When true, indicates that the assistant side panel is open.
+   * When true, indicates that the AI Ingress button is toggled.
    */
   toggled?: boolean;
   /**

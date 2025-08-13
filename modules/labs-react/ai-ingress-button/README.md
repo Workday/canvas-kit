@@ -4,8 +4,8 @@
   <img src="https://img.shields.io/badge/LABS-alpha-orange" alt="LABS: Alpha" />
 </a>  This component is work in progress and currently in prerelease.
 
-CTA to open and close AI assistant
+CTA to open and close AI Ingress Button
 
 View the
-[documentation for Ai Assistant Button](https://workday.github.io/canvas-kit/?path=/docs/labs-ai-assistant-ingress-button-react)
+[documentation for AI Ingress Button](https://workday.github.io/canvas-kit/?path=/docs/labs-ai-ingress-button-ai--docs)
 on Storybook.
