@@ -1,4 +1,4 @@
-# Canvas Kit Ai Assistant Ingress Button
+# Canvas Kit Ai Ingress Button
 
 <a href="https://github.com/Workday/canvas-kit/tree/master/modules/labs-react/README.md">
   <img src="https://img.shields.io/badge/LABS-alpha-orange" alt="LABS: Alpha" />
