@@ -29,7 +29,6 @@ export const avatarStencil = createStencil({
     avatarImage: 'avatar-image',
     avatarName: 'avatar-name',
   },
-
   base: {},
   modifiers: {
     imageLoaded: {
@@ -138,16 +137,9 @@ export const Avatar = createComponent('div')({
               aria-hidden={isDecorative}
               {...avatarStencil.parts.avatarImage}
             />
-            {!imageLoaded && name && (
-              <BaseAvatar.Name
-                name={name}
-                preferredInitials={preferredInitials}
-                {...avatarStencil.parts.avatarName}
-              />
-            )}
           </>
         )}
-        {!url && name && (
+        {name && (!url || !imageLoaded) && (
           <BaseAvatar.Name
             name={name}
             preferredInitials={preferredInitials}

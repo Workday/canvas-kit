@@ -4,7 +4,6 @@ import {base} from '@workday/canvas-tokens-web';
 
 const customStyles = createStyles({
   cursor: 'pointer',
-
   backgroundColor: base.magenta300,
   color: base.magenta700,
   borderRadius: '50%',
