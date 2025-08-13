@@ -101,7 +101,7 @@ export const useThemedRing = (type: paletteSelection): CSSProperties => {
   const theme = useTheme();
 
   const paletteColors = getPaletteColorsForFocusRing(type, theme);
-  console.log('paletteColors', paletteColors);
+
   if (!(paletteColors?.outer || paletteColors?.inner)) {
     return {};
   }

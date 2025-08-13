@@ -8,13 +8,13 @@ import {cssVar} from '@workday/canvas-kit-styling';
 /**
  * @deprecated ⚠️ `TextAreaField` in Preview has been deprecated and will be removed in a future major version. Please use [`FormField`](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-form-field--docs) in Preview instead.
  */
-export const TextAreaField = createSubcomponent(TextArea)({
+export const TextAreaField = createSubcomponent('textarea')({
   displayName: 'TextArea.Field',
   modelHook: useTextInputModel,
 })<ExtractProps<typeof FormField.Input, never>>(({...elemProps}, Element, model) => {
   return (
     <FormField.Input
-      as={Element}
+      as={TextArea}
       display="block"
       minHeight={64}
       minWidth={280}

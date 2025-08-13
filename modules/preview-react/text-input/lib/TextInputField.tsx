@@ -56,14 +56,14 @@ const textInputFieldStencil = createStencil({
 /**
  * @deprecated ⚠️ `TextInputField` in Preview has been deprecated and will be removed in a future major version. Please use [`FormField` in Preview](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-form-field--docs) instead.
  */
-export const TextInputField = createSubcomponent(TextInput)({
+export const TextInputField = createSubcomponent('input')({
   displayName: 'TextInput.Field',
   modelHook: useTextInputModel,
   elemPropsHook: useTextInputField,
 })<ExtractProps<typeof FormField.Input, never>>((elemProps, Element, model) => {
   return (
     <FormField.Input
-      as="input"
+      as={TextInput}
       {...mergeStyles(elemProps, [textInputFieldStencil({error: model.state.error})])}
     />
   );
