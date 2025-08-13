@@ -6,12 +6,18 @@ import {render as rtlRender, screen} from '@testing-library/react';
 
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStyles} from '@workday/canvas-kit-styling';
-import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {CanvasProvider, createCanvasTheme} from '@workday/canvas-kit-react/common';
 
 // We need to force Emotion's cache wrapper to use the cache from `@workday/canvas-kit-styling`
 // @ts-ignore We want the types to be the same, but I don't care to fix the error
-const render: typeof rtlRender = (ui, options) =>
-  rtlRender(ui, {wrapper: CanvasProvider, ...options});
+const render: typeof rtlRender = (ui, options) => {
+  const Wrapper: React.FC<React.PropsWithChildren> = ({children}) => (
+    <CanvasProvider theme={{canvas: createCanvasTheme({palette: {primary: {main: 'orange'}}})}}>
+      {children}
+    </CanvasProvider>
+  );
+  return rtlRender(ui, {wrapper: Wrapper, ...options});
+};
 
 describe('mergeStyles', () => {
   const padding = {
