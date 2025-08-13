@@ -31,6 +31,12 @@ export const useCanvasThemeToCssVars = (
     if (color === 'common') {
       //@ts-ignore
       style[brand.common.focusOutline] = palette.common.focusOutline;
+      //@ts-ignore
+      style[brand.common.alertInner] = palette.common.alertInner;
+      //@ts-ignore
+      style[brand.common.alertOuter] = palette.common.alertOuter;
+      //@ts-ignore
+      style[brand.common.errorInner] = palette.common.errorInner;
     }
     (['lightest', 'lighter', 'light', 'main', 'dark', 'darkest', 'contrast'] as const).forEach(
       key => {
