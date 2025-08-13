@@ -4,10 +4,47 @@
 import {useTheme as useEmotionTheme} from '@emotion/react';
 import {defaultCanvasTheme, EmotionCanvasTheme, PartialEmotionCanvasTheme} from './index';
 
-const getFilledTheme = (theme: PartialEmotionCanvasTheme) => ({
-  ...theme,
-  canvas: {...defaultCanvasTheme, ...theme.canvas} as EmotionCanvasTheme['canvas'],
-});
+const getFilledTheme = (theme: PartialEmotionCanvasTheme) => {
+  const user = (theme.canvas || {}) as Partial<EmotionCanvasTheme['canvas']>;
+
+  const mergedCanvas = {
+    ...defaultCanvasTheme,
+    ...user,
+    palette: {
+      ...defaultCanvasTheme.palette,
+      ...(user as any).palette,
+      common: {
+        ...defaultCanvasTheme.palette.common,
+        ...(user as any).palette?.common,
+      },
+      primary: {
+        ...defaultCanvasTheme.palette.primary,
+        ...(user as any).palette?.primary,
+      },
+      error: {
+        ...defaultCanvasTheme.palette.error,
+        ...(user as any).palette?.error,
+      },
+      alert: {
+        ...defaultCanvasTheme.palette.alert,
+        ...(user as any).palette?.alert,
+      },
+      success: {
+        ...defaultCanvasTheme.palette.success,
+        ...(user as any).palette?.success,
+      },
+      neutral: {
+        ...defaultCanvasTheme.palette.neutral,
+        ...(user as any).palette?.neutral,
+      },
+    },
+  } as EmotionCanvasTheme['canvas'];
+
+  return {
+    ...theme,
+    canvas: mergedCanvas,
+  };
+};
 
 /**
  * Function to get the correct theme object for `styled` and class components
