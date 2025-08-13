@@ -33,48 +33,45 @@ const customActionTheme = createStyles({
   [brand.action.darkest]: 'hsla(180, 100%, 16%)',
 });
 
-const PrimaryButtonTest = (props: {theme?: PartialEmotionCanvasTheme}) => {
-  console.log(props.theme);
-  return (
-    <StaticStates theme={props.theme}>
-      <ComponentStatesTable
-        rowProps={permutateProps(
-          {
-            variant: [
-              {value: undefined, label: ''},
-              {value: 'inverse', label: 'Inverse'},
-            ],
-            size: [
-              {value: 'extraSmall', label: 'Extra Small'},
-              {value: 'small', label: 'Small'},
-              {value: 'medium', label: 'Medium'},
-              {value: 'large', label: 'Large'},
-            ],
-            icon: [
-              {value: undefined, label: ''},
-              // We don't need a label here, because `iconPosition` provides it
-              {value: playCircleIcon, label: ''},
-            ],
-            iconPosition: [
-              {value: undefined, label: ''},
-              {value: 'start', label: '& Left Icon'},
-              {value: 'end', label: '& Right Icon'},
-            ],
-          },
-          // Filter out permutations where `iconPosition` is provided and not `icon`, and vice versa
-          props => (props.iconPosition && props.icon) || (!props.icon && !props.iconPosition)
-        )}
-        columnProps={stateTableColumnProps}
-      >
-        {props => (
-          <Container blue={props.variant === 'inverse'}>
-            <PrimaryButton {...props}>Test</PrimaryButton>
-          </Container>
-        )}
-      </ComponentStatesTable>
-    </StaticStates>
-  );
-};
+const PrimaryButtonTest = (props: {theme?: PartialEmotionCanvasTheme}) => (
+  <StaticStates theme={props.theme}>
+    <ComponentStatesTable
+      rowProps={permutateProps(
+        {
+          variant: [
+            {value: undefined, label: ''},
+            {value: 'inverse', label: 'Inverse'},
+          ],
+          size: [
+            {value: 'extraSmall', label: 'Extra Small'},
+            {value: 'small', label: 'Small'},
+            {value: 'medium', label: 'Medium'},
+            {value: 'large', label: 'Large'},
+          ],
+          icon: [
+            {value: undefined, label: ''},
+            // We don't need a label here, because `iconPosition` provides it
+            {value: playCircleIcon, label: ''},
+          ],
+          iconPosition: [
+            {value: undefined, label: ''},
+            {value: 'start', label: '& Left Icon'},
+            {value: 'end', label: '& Right Icon'},
+          ],
+        },
+        // Filter out permutations where `iconPosition` is provided and not `icon`, and vice versa
+        props => (props.iconPosition && props.icon) || (!props.icon && !props.iconPosition)
+      )}
+      columnProps={stateTableColumnProps}
+    >
+      {props => (
+        <Container blue={props.variant === 'inverse'}>
+          <PrimaryButton {...props}>Test</PrimaryButton>
+        </Container>
+      )}
+    </ComponentStatesTable>
+  </StaticStates>
+);
 
 const PrimaryIconButtonTest = (props: {theme?: PartialEmotionCanvasTheme}) => (
   <StaticStates theme={props.theme}>
