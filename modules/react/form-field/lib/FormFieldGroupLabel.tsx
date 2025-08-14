@@ -18,7 +18,6 @@ export interface FormFieldGroupLabelProps
 
 export const formFieldGroupLabelStencil = createStencil({
   extends: textStencil,
-  // @ts-ignore Still weird about CSS font variables
   base: {
     fontWeight: system.fontWeight.medium,
     color: system.color.text.default,
@@ -30,7 +29,6 @@ export const formFieldGroupLabelStencil = createStencil({
   modifiers: {
     isRequired: {
       true: {
-        // @ts-ignore fonts
         '&::after': {
           content: '"*"',
           fontSize: system.fontSize.body.large,
