@@ -249,16 +249,15 @@ export const Pill = createContainer('button')({
 })<PillProps>(({variant, maxWidth = 200, children, ...elemProps}, Element, model) => {
   const maxWidthCSSValue = typeof maxWidth === 'number' ? px2rem(maxWidth) : maxWidth;
 
+  const isReadOnly = variant === 'readOnly';
+
   return variant?.match(/^(readOnly|removable)$/) ? (
     <Box
       as={Element !== 'button' ? Element : 'span'}
-      id={variant === 'readOnly' ? model.state.id : undefined}
-      {...mergeStyles(elemProps, [
-        model.state.disabled ? 'disabled' : undefined,
-        pillStencil({maxWidth: maxWidthCSSValue, variant}),
-      ])}
+      id={isReadOnly ? model.state.id : undefined}
+      {...mergeStyles(elemProps, pillStencil({maxWidth: maxWidthCSSValue, variant}))}
     >
-      {children}
+      {isReadOnly ? <PillLabel>{children}</PillLabel> : children}
     </Box>
   ) : (
     <Element
