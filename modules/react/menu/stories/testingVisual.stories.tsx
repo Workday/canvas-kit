@@ -1,10 +1,6 @@
 import React from 'react';
 
-import {
-  CanvasProvider,
-  ContentDirection,
-  createCanvasTheme,
-} from '@workday/canvas-kit-react/common';
+import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
 import {StaticStates} from '@workday/canvas-kit-react/testing';
 import {saveAsIcon} from '@workday/canvas-system-icons-web';
 
@@ -84,7 +80,7 @@ export const MenuItemStates = {
           </div>
           <div>
             <h3>Themed</h3>
-            <CanvasProvider theme={{canvas: createCanvasTheme(customColorTheme)}}>
+            <CanvasProvider theme={{canvas: customColorTheme}}>
               <AllStatesMenuItem />
             </CanvasProvider>
           </div>
@@ -197,7 +193,7 @@ export const MenuOptionStates = {
           </div>
           <div>
             <h3>Themed</h3>
-            <CanvasProvider theme={{canvas: createCanvasTheme(customColorTheme)}}>
+            <CanvasProvider theme={{canvas: customColorTheme}}>
               <AllStatesMenuOption />
             </CanvasProvider>
           </div>

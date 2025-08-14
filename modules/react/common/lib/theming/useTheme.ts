@@ -61,7 +61,7 @@ const generateTheme = (theme?: PartialEmotionCanvasTheme): EmotionCanvasTheme['c
       error: generatePalette('error', theme?.canvas?.palette as CanvasTheme['palette']),
       success: generatePalette('success', theme?.canvas?.palette as CanvasTheme['palette']),
       neutral: generatePalette('neutral', theme?.canvas?.palette as CanvasTheme['palette']),
-      common: {...theme?.canvas?.palette?.common, ...defaultCanvasTheme.palette.common},
+      common: {...defaultCanvasTheme.palette.common, ...theme?.canvas?.palette?.common},
     },
     breakpoints: defaultCanvasTheme.breakpoints,
     direction: theme?.canvas?.direction || defaultCanvasTheme.direction,

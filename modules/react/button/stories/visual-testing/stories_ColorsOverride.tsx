@@ -1,6 +1,6 @@
 import {CSSObject} from '@emotion/react';
 import React from 'react';
-import {PartialEmotionCanvasTheme, createCanvasTheme} from '@workday/canvas-kit-react/common';
+import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 import {
   ComponentStatesTable,
   permutateProps,
@@ -71,5 +71,5 @@ const ColorOverrideStates = (props: {theme?: PartialEmotionCanvasTheme}) => (
 );
 
 export const ColorOverrideThemedStates = () => (
-  <ColorOverrideStates theme={{canvas: createCanvasTheme(customColorTheme)}} />
+  <ColorOverrideStates theme={{canvas: customColorTheme}} />
 );

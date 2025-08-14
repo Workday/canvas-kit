@@ -9,7 +9,7 @@ import {customColorTheme} from '../../../../utils/storybook';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 
 import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
-import {PartialEmotionCanvasTheme, createCanvasTheme} from '@workday/canvas-kit-react/common';
+import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 
 export default {
   title: 'Testing/Inputs/Select',
@@ -151,10 +151,10 @@ const themedParameters = {
 };
 
 export const SelectThemedStates = {
-  render: () => <SelectStates theme={{canvas: createCanvasTheme(customColorTheme)}} />,
+  render: () => <SelectStates theme={{canvas: customColorTheme}} />,
 };
 
 export const SelectOpenMenuThemedStates = {
   parameters: themedParameters,
-  render: () => <SelectOpenMenuStates theme={{canvas: createCanvasTheme(customColorTheme)}} />,
+  render: () => <SelectOpenMenuStates theme={{canvas: customColorTheme}} />,
 };

@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  PartialEmotionCanvasTheme,
-  createCanvasTheme,
-  useTheme,
-} from '@workday/canvas-kit-react/common';
+import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 import {
   ComponentStatesTable,
   permutateProps,
@@ -110,18 +106,18 @@ export const PrimaryIconButtonStates = {
 
 export const PrimaryButtonThemedStates = {
   render: () => {
-    return <PrimaryButtonTest theme={{canvas: createCanvasTheme(customColorTheme)}} />;
+    return <PrimaryButtonTest theme={{canvas: customColorTheme}} />;
   },
 };
 
 export const PrimaryButtonThemedActionStates = {
   render: () => (
     <div className={customActionTheme}>
-      <PrimaryButtonTest theme={{canvas: createCanvasTheme(customColorTheme)}} />
+      <PrimaryButtonTest theme={{canvas: customColorTheme}} />
     </div>
   ),
 };
 
 export const PrimaryIconButtonThemedStates = {
-  render: () => <PrimaryIconButtonTest theme={{canvas: createCanvasTheme(customColorTheme)}} />,
+  render: () => <PrimaryIconButtonTest theme={{canvas: customColorTheme}} />,
 };

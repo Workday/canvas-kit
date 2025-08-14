@@ -1,5 +1,5 @@
 import React from 'react';
-import {PartialEmotionCanvasTheme, createCanvasTheme} from '@workday/canvas-kit-react/common';
+import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 import {
   ComponentStatesTable,
   permutateProps,
@@ -96,9 +96,9 @@ export const SecondaryIconButtonStates = {
 };
 
 export const SecondaryButtonThemedStates = {
-  render: () => <SecondaryButtonTest theme={{canvas: createCanvasTheme(customColorTheme)}} />,
+  render: () => <SecondaryButtonTest theme={{canvas: customColorTheme}} />,
 };
 
 export const SecondaryIconButtonThemedStates = {
-  render: () => <SecondaryIconButtonTest theme={{canvas: createCanvasTheme(customColorTheme)}} />,
+  render: () => <SecondaryIconButtonTest theme={{canvas: customColorTheme}} />,
 };

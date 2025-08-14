@@ -1,5 +1,5 @@
 import React from 'react';
-import {PartialEmotionCanvasTheme, createCanvasTheme} from '@workday/canvas-kit-react/common';
+import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 import {
   ComponentStatesTable,
   permutateProps,
@@ -60,5 +60,5 @@ export const DeleteButtonStates = {
 };
 
 export const DeleteButtonThemedStates = {
-  render: () => <DeleteButtonTest theme={{canvas: createCanvasTheme(customColorTheme)}} />,
+  render: () => <DeleteButtonTest theme={{canvas: customColorTheme}} />,
 };

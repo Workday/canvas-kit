@@ -1,5 +1,5 @@
 import React from 'react';
-import {ContentDirection, createCanvasTheme} from '@workday/canvas-kit-react/common';
+import {ContentDirection} from '@workday/canvas-kit-react/common';
 import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/testing';
 
 import {customColorTheme} from '../../../../utils/storybook';
@@ -136,7 +136,7 @@ export const VisualStatesThemed = {
     return (
       <>
         <h2>Themed</h2>
-        <TableRenderer theme={{canvas: createCanvasTheme(customColorTheme)}} />
+        <TableRenderer theme={{canvas: customColorTheme}} />
       </>
     );
   },

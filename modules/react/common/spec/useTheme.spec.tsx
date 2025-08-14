@@ -2,7 +2,7 @@ import * as React from 'react';
 import {screen, render} from '@testing-library/react';
 import {renderHook} from '@testing-library/react-hooks';
 import {CanvasProvider} from '../index';
-import {defaultCanvasTheme, useTheme, createCanvasTheme} from '../lib/theming';
+import {defaultCanvasTheme, useTheme} from '../lib/theming';
 
 describe('useTheme', () => {
   const customTheme = {
@@ -33,7 +33,7 @@ describe('useTheme', () => {
 
   test('with no window context available, calling useTheme within a component should return context theme', () => {
     render(
-      <CanvasProvider theme={{canvas: createCanvasTheme(customTheme.canvas)}}>
+      <CanvasProvider theme={{canvas: customTheme.canvas}}>
         <Component />
       </CanvasProvider>
     );
