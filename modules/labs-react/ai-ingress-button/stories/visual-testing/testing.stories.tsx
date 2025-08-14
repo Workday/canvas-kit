@@ -4,13 +4,13 @@ import {
   StaticStates,
 } from '@workday/canvas-kit-react/testing';
 
-import {AIAssistantIngressButton} from '@workday/canvas-kit-labs-react/ai-assistant-ingress-button';
+import {AIIngressButton} from '@workday/canvas-kit-labs-react/ai-ingress-button';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export default {
-  title: 'Testing/Labs/AI Assistant Ingress Button',
-  component: AIAssistantIngressButton,
+  title: 'Testing/Labs/AI Ingress Button',
+  component: AIIngressButton,
   parameters: {
     chromatic: {
       disable: false,
@@ -23,7 +23,7 @@ const darkBackground = createStyles({
   padding: system.space.x8,
 });
 
-export const AiAssistantIngressButtonStates = () => (
+export const AiIngressButtonStates = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={permutateProps({
@@ -52,14 +52,14 @@ export const AiAssistantIngressButtonStates = () => (
     >
       {props => (
         <div className={props.variant === 'inverse' ? darkBackground : ''}>
-          <AIAssistantIngressButton {...props} />
+          <AIIngressButton {...props} />
         </div>
       )}
     </ComponentStatesTable>
   </StaticStates>
 );
 
-export const AiAssistantIngressButtonStatesToggledInverse = () => (
+export const AIIngressButtonStatesToggledInverse = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={permutateProps({
@@ -85,14 +85,14 @@ export const AiAssistantIngressButtonStatesToggledInverse = () => (
     >
       {props => (
         <div className={darkBackground}>
-          <AIAssistantIngressButton variant="inverse" {...props} />
+          <AIIngressButton variant="inverse" {...props} />
         </div>
       )}
     </ComponentStatesTable>
   </StaticStates>
 );
 
-export const AiAssistantIngressButtonStatesToggledDefault = () => (
+export const AIIngressButtonStatesToggledDefault = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={permutateProps({
@@ -116,7 +116,7 @@ export const AiAssistantIngressButtonStatesToggledDefault = () => (
         props => !props.disabled || !props.className || props.className === 'hover'
       )}
     >
-      {props => <AIAssistantIngressButton {...props} />}
+      {props => <AIIngressButton {...props} />}
     </ComponentStatesTable>
   </StaticStates>
 );

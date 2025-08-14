@@ -3,11 +3,11 @@ import {BaseButton, BaseButtonProps, buttonStencil} from '@workday/canvas-kit-re
 import {createStencil, handleCsProp, calc} from '@workday/canvas-kit-styling';
 import {system, base} from '@workday/canvas-tokens-web';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {getAIAssistantIngressIcon} from './AIAssistantIngressIcon';
-export interface AIAssistantIngressButtonProps
+import {getAIIngressIcon} from './AIIngressIcon';
+export interface AIIngressButtonProps
   extends Omit<BaseButtonProps, 'size' | 'colors' | 'icon' | 'iconPosition' | 'shouldMirrorIcon'> {
   /**
-   * When true, indicates that the assistant side panel is open.
+   * When true, indicates that the AI Ingress button is toggled.
    */
   toggled?: boolean;
   /**
@@ -34,7 +34,7 @@ const glowLunchBreak = base.amber300; //'#FEC10B';
 const glowHappyHour = base.orange400; //'#FD7E00';
 const glowThumbtack = base.coral500; //'#FC5B05';
 
-export const AIAssistantIngressButtonStencil = createStencil({
+export const AIIngressButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
     [buttonStencil.vars.background]: system.color.bg.ai.strongest,
@@ -43,7 +43,7 @@ export const AIAssistantIngressButtonStencil = createStencil({
     width: calc.add(system.space.x10, system.space.x1),
     transition: 'box-shadow 300ms ease-out, background 300ms ease-out',
 
-    '.wd-icon-ai-assistant-ingress-button': {
+    '.wd-icon-ai-ingress-button': {
       '.wd-icon-fill': {
         transition: 'fill 300ms ease-out',
       },
@@ -54,7 +54,7 @@ export const AIAssistantIngressButtonStencil = createStencil({
     },
 
     '&:is(:hover, .hover):not(:disabled, .disabled)': {
-      '.wd-icon-ai-assistant-ingress-button': {
+      '.wd-icon-ai-ingress-button': {
         'linearGradient > stop:first-child': {
           stopColor: illuminateStopColor1,
         },
@@ -83,7 +83,7 @@ export const AIAssistantIngressButtonStencil = createStencil({
     variant: {
       inverse: {
         [buttonStencil.vars.background]: system.color.bg.default,
-        '.wd-icon-ai-assistant-ingress-button': {
+        '.wd-icon-ai-ingress-button': {
           '.wd-icon-fill': {
             transition: 'fill 300ms ease-out',
           },
@@ -93,7 +93,7 @@ export const AIAssistantIngressButtonStencil = createStencil({
           },
         },
         '&:is(:hover, .hover):not(:disabled, .disabled)': {
-          '.wd-icon-ai-assistant-ingress-button': {
+          '.wd-icon-ai-ingress-button': {
             'linearGradient > stop:first-child': {
               stopColor: illuminateStopColor1,
             },
@@ -123,7 +123,7 @@ export const AIAssistantIngressButtonStencil = createStencil({
         transition: 'box-shadow 300ms ease-out, background 300ms ease-out',
 
         boxShadow: `0px 0px 4.9px 0px ${glowEraser}, 0px 0px 0.98px 0px ${glowHighlighter}, 0px 0px 1.96px 0px ${glowLunchBreak}, 0px 0px 2.94px 0px ${glowLunchBreak}, 0px 0px 4.9px 0px ${glowHappyHour}, 0px 0px 7.36px 0px ${glowThumbtack}, 0px 0px 9.81px 0px ${glowEraser}, 0px 0px 12.26px 0px rgba(255, 194, 253, 0.50)`,
-        '.wd-icon-ai-assistant-ingress-button': {
+        '.wd-icon-ai-ingress-button': {
           '.wd-icon-fill': {
             transition: 'fill 300ms ease-out',
           },
@@ -151,7 +151,7 @@ export const AIAssistantIngressButtonStencil = createStencil({
       modifiers: {toggled: true, variant: 'inverse'},
       styles: {
         [buttonStencil.vars.background]: system.color.bg.ai.strongest,
-        '.wd-icon-ai-assistant-ingress-button': {
+        '.wd-icon-ai-ingress-button': {
           '.wd-icon-fill': {
             transition: 'fill 300ms ease-out',
           },
@@ -169,22 +169,22 @@ export const AIAssistantIngressButtonStencil = createStencil({
   ],
 });
 
-export const AIAssistantIngressButton = createComponent('button')({
-  displayName: 'AIAssistantIngressButton',
-  Component: ({toggled, variant, ...elemProps}: AIAssistantIngressButtonProps, ref, Element) => {
+export const AIIngressButton = createComponent('button')({
+  displayName: 'AIIngressButton',
+  Component: ({toggled, variant, ...elemProps}: AIIngressButtonProps, ref, Element) => {
     const svgGradientId = useUniqueId();
     return (
       <BaseButton
         ref={ref}
         as={Element}
         {...handleCsProp(elemProps, [
-          AIAssistantIngressButtonStencil({toggled, variant}),
+          AIIngressButtonStencil({toggled, variant}),
           {
             [systemIconStencil.vars.color]: `url(#${svgGradientId})`,
           },
         ])}
       >
-        <BaseButton.Icon size="large" icon={getAIAssistantIngressIcon(svgGradientId)} />
+        <BaseButton.Icon size="large" icon={getAIIngressIcon(svgGradientId)} />
       </BaseButton>
     );
   },

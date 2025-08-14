@@ -30,7 +30,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 import {SearchForm} from '@workday/canvas-kit-labs-react/search-form';
-import {Avatar} from '@workday/canvas-kit-react/avatar';
+import {Avatar} from '@workday/canvas-kit-preview-react/avatar';
 import {BodyText} from '@workday/canvas-kit-react/text';
 
 export default {
@@ -234,7 +234,7 @@ const Template = props => (
         <TertiaryButton aria-label="messages" icon={assistantIcon} />
         <TertiaryButton aria-label="notifications" icon={notificationsIcon} />
         <TertiaryButton aria-label="inbox" icon={inboxIcon} />
-        <Avatar size="medium" variant="light" />
+        <Avatar size="medium" name="Logan McNeil" />
       </GlobalHeader.Item>
     </GlobalHeader>
     <SidePanelWrapper {...props} />

@@ -1,6 +1,6 @@
 import {useState} from 'react';
 
-import {AIAssistantIngressButton} from '@workday/canvas-kit-labs-react/ai-assistant-ingress-button';
+import {AIIngressButton} from '@workday/canvas-kit-labs-react/ai-ingress-button';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -13,10 +13,10 @@ export const Inverse = () => {
   const [toggled, setToggled] = useState(false);
   return (
     <div className={darkBackground}>
-      <AIAssistantIngressButton
+      <AIIngressButton
         variant="inverse"
         onClick={() => setToggled(!toggled)}
-        aria-label={toggled ? 'Hide Assistant' : 'Show Assistant'}
+        aria-label={toggled ? 'Hide Ingress' : 'Show Ingress'}
         toggled={toggled}
       />
     </div>

@@ -1,13 +1,13 @@
 import {useState} from 'react';
 
-import {AIAssistantIngressButton} from '@workday/canvas-kit-labs-react/ai-assistant-ingress-button';
+import {AIIngressButton} from '@workday/canvas-kit-labs-react/ai-ingress-button';
 
 export const Basic = () => {
   const [toggled, setToggled] = useState(false);
   return (
     <div>
-      <AIAssistantIngressButton
-        aria-label={toggled ? 'Hide AI Assistant' : 'Show AI Assistant'}
+      <AIIngressButton
+        aria-label={toggled ? 'Hide AI Ingress' : 'Show AI Ingress'}
         onClick={() => setToggled(!toggled)}
         toggled={toggled}
       />
