@@ -28,6 +28,7 @@ A note to the reader:
 - While we still support our old tokens from `@workday/canvas-kit-react/tokens`, **you must**
   install our new tokens from `@workday/canvas-tokens-web`. You can find more info in our
   [docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
+- If your application lives within another application that already imports the CSS variables, **you do not need to import these again**.
 
 ## Table of contents
 
@@ -68,8 +69,10 @@ A note to the reader:
 In v12, all the components listed in this guide have started using our new
 [Canvas Tokens Web](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
 **You must** add `@workday/canvas-tokens-web` to ensure our components are properly styled and the
-variables are defined. For more information on installing and using, please reference our tokens
+variables are defined at the root of your application. For more information on installing and using, please reference our tokens
 [docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
+
+> **Note:** If your application lives within another application that already imports the CSS variables, **you do not need to import these again**. If you need them for local development either add them via a plugin or at the root of the environment, **do not ship code to production duplicating the imports**.
 
 ## Codemod
 
