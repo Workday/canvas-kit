@@ -1,8 +1,6 @@
-import React from 'react';
-
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 
-import {Pill, usePillModel} from '@workday/canvas-kit-preview-react/pill';
+import {Pill} from '@workday/canvas-kit-preview-react/pill';
 import {stateTableColumnProps} from '@workday/canvas-kit-react/button/stories/visual-testing/utils';
 // @ts-ignore: Cannot find module error
 import testAvatar from './examples/test-avatar.png';
@@ -33,7 +31,7 @@ export const ReadOnlyPillStates = () => {
           },
         ]}
       >
-        {({maxWidth, ...props}) => {
+        {({maxWidth}) => {
           return (
             <Pill variant="readOnly">
               {maxWidth ? 'This is a super long te that should overflow' : 'PillLabel'}
@@ -57,7 +55,7 @@ export const PillStates = () => {
         ]}
         columnProps={stateTableColumnProps}
       >
-        {({...props}) => {
+        {props => {
           return (
             <Pill onClick={() => console.warn('clicked')} {...props}>
               <Pill.Icon aria-label="add" />
@@ -82,7 +80,7 @@ export const PillStatesAvatar = () => {
         ]}
         columnProps={stateTableColumnProps}
       >
-        {({...props}) => {
+        {props => {
           return (
             <Pill onClick={() => console.warn('clicked')} {...props}>
               <Pill.Avatar name="Avatar" url={testAvatar} />
@@ -107,7 +105,7 @@ export const PillStatesCount = () => {
         ]}
         columnProps={stateTableColumnProps}
       >
-        {({count, ...props}) => {
+        {props => {
           return (
             <Pill onClick={() => console.warn('clicked')} {...props}>
               <Pill.Label>Shoes</Pill.Label>

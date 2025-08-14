@@ -49,23 +49,24 @@ export const pillStencil = createStencil({
     position: 'relative',
     gap: system.space.x1,
     maxWidth: maxWidth,
-    [buttonStencil.vars.background]: system.color.bg.alt.default,
-    [buttonStencil.vars.border]: system.color.border.input.default,
-    [buttonStencil.vars.label]: system.color.text.strong,
-    [systemIconStencil.vars.color]: system.color.icon.default,
-    [pillCountStencil.vars.borderColor]: 'transparent',
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
     overflow: 'hidden',
+    [buttonStencil.vars.background]: system.color.bg.alt.default,
+    [buttonStencil.vars.border]: system.color.border.input.default,
+    [buttonStencil.vars.label]: system.color.fg.strong,
+    [systemIconStencil.vars.color]: 'currentColor',
+    [pillCountStencil.vars.borderColor]: 'transparent',
+
     '&:has(span)': {
       display: 'flex',
       lineHeight: system.lineHeight.subtext.large, // ensure correct line height
     },
     '&:focus-visible, &.focus': {
-      [buttonStencil.vars.background]: system.color.bg.alt.soft,
+      [buttonStencil.vars.background]: system.color.bg.alt.default,
       [buttonStencil.vars.border]: system.color.border.primary.default,
-      [buttonStencil.vars.label]: system.color.text.strong,
-      [systemIconStencil.vars.color]: system.color.icon.strong,
+      [buttonStencil.vars.label]: system.color.fg.strong,
+      [systemIconStencil.vars.color]: 'currentColor',
       borderColor: system.color.border.primary.default,
       [pillCountStencil.vars.borderColor]: system.color.border.primary.default,
 
@@ -80,24 +81,26 @@ export const pillStencil = createStencil({
     '&:hover, &.hover': {
       [buttonStencil.vars.background]: system.color.bg.alt.strong,
       [buttonStencil.vars.border]: system.color.border.input.strong,
-      [buttonStencil.vars.label]: system.color.text.strong,
-      [systemIconStencil.vars.color]: system.color.icon.strong,
+      [buttonStencil.vars.label]: system.color.fg.strong,
+      [systemIconStencil.vars.color]: 'currentColor',
+      [pillCountStencil.vars.backgroundColor]: system.color.bg.muted.softer,
+      [pillCountStencil.vars.borderColor]: 'transparent',
     },
     '&:active, &.active': {
       [buttonStencil.vars.background]: system.color.bg.alt.stronger,
       [buttonStencil.vars.border]: system.color.border.input.strong,
-      [buttonStencil.vars.label]: system.color.text.strong,
-      [systemIconStencil.vars.color]: system.color.icon.strong,
-      [pillCountStencil.vars.backgroundColor]: system.color.bg.alt.stronger,
+      [buttonStencil.vars.label]: system.color.fg.strong,
+      [systemIconStencil.vars.color]: 'currentColor',
+      [pillCountStencil.vars.backgroundColor]: system.color.bg.muted.softer,
       [pillCountStencil.vars.borderColor]: 'transparent',
     },
     '&:disabled, &.disabled': {
-      [buttonStencil.vars.background]: system.color.bg.alt.softer,
+      [buttonStencil.vars.background]: system.color.bg.alt.default,
       [buttonStencil.vars.border]: system.color.border.input.disabled,
-      [buttonStencil.vars.label]: system.color.text.disabled,
-      [buttonStencil.vars.opacity]: '1',
-      [systemIconStencil.vars.color]: system.color.icon.soft,
-      [pillCountStencil.vars.backgroundColor]: system.color.bg.alt.default,
+      [buttonStencil.vars.label]: system.color.fg.disabled,
+      [buttonStencil.vars.opacity]: system.opacity.disabled,
+      [systemIconStencil.vars.color]: 'currentColor',
+      [pillCountStencil.vars.backgroundColor]: system.color.bg.alt.strong,
       [pillCountStencil.vars.borderColor]: 'transparent',
     },
   }),
@@ -107,20 +110,20 @@ export const removeablePillStencil = createStencil({
   extends: pillStencil,
   base: {
     '&:focus-visible, &.focus': {
-      [buttonStencil.vars.background]: system.color.bg.alt.soft,
+      [buttonStencil.vars.background]: system.color.bg.alt.default,
       [buttonStencil.vars.border]: system.color.border.input.default,
-      [buttonStencil.vars.label]: system.color.text.strong,
+      [buttonStencil.vars.label]: system.color.fg.strong,
       boxShadow: 'none',
     },
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: system.color.bg.alt.soft,
+      [buttonStencil.vars.background]: system.color.bg.alt.strong,
     },
     '&:active, &.active': {
       [buttonStencil.vars.background]: system.color.bg.alt.stronger,
     },
     '&:disabled, &.disabled': {
-      [buttonStencil.vars.background]: system.color.bg.alt.softer,
-      [systemIconStencil.vars.color]: system.color.icon.soft,
+      [buttonStencil.vars.background]: system.color.bg.alt.default,
+      [systemIconStencil.vars.color]: 'currentColor',
     },
     cursor: 'default',
     overflow: 'revert', // override BaseButton overflow styles so the click target exists outside the pill for removable
@@ -131,7 +134,7 @@ export const removeablePillStencil = createStencil({
 export const readyOnlyPillStencil = createStencil({
   extends: pillStencil,
   base: {
-    border: `${px2rem(1)} solid ${cssVar(system.color.border.input.default)}`,
+    border: `${px2rem(1)} solid ${system.color.border.container}`,
     cursor: 'default',
     [buttonStencil.vars.background]: 'transparent',
     '&:hover, &.hover': {
