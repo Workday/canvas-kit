@@ -42,15 +42,22 @@ export const pillIconButtonStencil = createStencil({
 
     '&:focus-visible, &.focus': {
       [buttonStencil.vars.border]: system.color.border.transparent,
+      [buttonStencil.vars.background]: system.color.bg.alt.default,
       ...focusRing({
         innerColor: system.color.border.transparent,
       }),
     },
     '&:hover, &.hover': {
       [buttonStencil.vars.border]: system.color.border.transparent,
+      [buttonStencil.vars.background]: system.color.bg.alt.strong,
+    },
+    '&:active, &.active': {
+      [buttonStencil.vars.border]: system.color.border.transparent,
+      [buttonStencil.vars.background]: system.color.bg.alt.stronger,
     },
     '&:disabled, &.disabled': {
       [buttonStencil.vars.border]: system.color.border.transparent,
+      [buttonStencil.vars.background]: system.color.bg.alt.default,
     },
   },
 });
