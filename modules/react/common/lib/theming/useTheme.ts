@@ -11,6 +11,9 @@ import {
 import {cssVar} from '@workday/canvas-kit-styling';
 import {base} from '@workday/canvas-tokens-web';
 
+/**
+ * We can adjust the shift but this should get us close enough until we clean up the algorithm to determine the colors.
+ */
 const shiftColor = (color: string, value: number) => {
   return `oklch(from ${color} calc(l ${value > 0 ? '+' : '-'} ${Math.abs(value) / 1000}) c h)`;
 };

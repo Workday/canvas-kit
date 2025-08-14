@@ -113,10 +113,10 @@ yarn remove @workday/canvas-kit-codemod
 
 #### Breaking Changes
 
-Canvas Provider has been updated to **remove** default branding colors to ensure proper cascading of our CSS variables. If you are using the `theme` prop to provide a custom theme, you will need to provide **all** properties of the palette.
+Canvas Provider has been updated to **remove** default branding colors to ensure proper cascading of our CSS variables. Instead of generating a palette and shifting the brightness and darkness with `chroma.js`, we use `oklch` to generate the palette colors.
 
 ** Before in v13**
-In v13, the `useTheme` hook would call `createCanvasTheme` which generated a palette given a `main` color.
+In v13, the `useTheme` hook would call `createCanvasTheme` which generated a palette given a `main` color via `chroma.js`.
 
 ```tsx
 <CanvasProvider theme={{canvas: {palette: {primary: {main: 'purple'}}}}}>
@@ -125,6 +125,7 @@ In v13, the `useTheme` hook would call `createCanvasTheme` which generated a pal
 ```
 
 **After in v14**
+We use `oklch` to generate the palette colors. The color shifting will be different. If you want more control over the colors, we suggest providing the full palette object..
 
 ```tsx
 <CanvasProvider theme={
