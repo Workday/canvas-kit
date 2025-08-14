@@ -15,6 +15,7 @@ any questions.
 - [Theming](#theming)
   - [Canvas Provider](#canvas-provider)
 - [Component Updates](#component-updates)
+  - [Avatar in Preview](#avatar-in-preview)
   - [Branding Changes](#branding-changes)
   - [Buttons](#buttons)
   - [Card](#card)
@@ -22,9 +23,11 @@ any questions.
   - [Expandable](#expandable)
   - [Hyperlink & ExternalHyperlink](#hyperlink-and-externalhyperlink)
   - [Loading Dots](#loading-dots)
+  - [Pill](#pill)
   - [SearchForm](#search-form)
   - [Status Indicator (Preview)](#status-indicator-preview)
 - [Deprecations](#deprecations)
+  - [Avatar in Main](#avatar-in-main)
   - [Combobox (Labs)](#combobox-labs)
   - [Radio (Main)](#radio-main)
   - [Segmented Control (Main)](#segmented-control-main)
@@ -165,6 +168,31 @@ The reason for this change is to ensure that the CSS variables are properly casc
 - `CanvasProvider` has been updated to include a `lighter` color.
 
 ## Component Updates
+
+### Avatar in Preview
+
+**PR:** [#3430](https://github.com/Workday/canvas-kit/pull/3430)
+
+A new `Avatar` component has been added to the `@workday/canvas-kit-preview-react` package that matches our brand refresh.
+
+#### API Changes from the Main Avatar
+
+- `Avatar` has a `name` prop. This is required to ensure a fallback if a `url` is not provided. The `name` prop also determines the initials and the `alt` text for the image if a `url` is provided.
+- `url` stays the same. This prop is optional and will be used to display an image `Avatar`.
+- `variant` defines the color of the `Avatar`. The default is `blue` but you can choose one of the following colors:
+  - `teal`
+  - `purple`
+  - `amber`
+  - `blue`
+- By default, the `Avatar` will render a `div` element. If you need to render a `button` element use the `BaseAvatar` component.
+- `size` accepts the following values:
+  - `extraExtraLarge`
+  - `extraLarge`
+  - `large`
+  - `medium`
+  - `small`
+  - `extraSmall`
+	- `extraExtraSmall`
 
 ### Branding Changes 💅
 
@@ -310,12 +338,16 @@ emphasis for the badge.
 
 ### Expandable
 
-**PR:** [#3389](https://github.com/Workday/canvas-kit/pull/3389)
+**PRs:** [#3389](https://github.com/Workday/canvas-kit/pull/3389), [#3430](https://github.com/Workday/canvas-kit/pull/3430)
 
 - `<Expandable.Target>` hover state has been update to use `system.color.bg.alt.soft` instead of
   `system.color.bg.alt.default` to match our new brand directions.
 - The `focus` state has been update to use `system.color.border.primary.default` to ensure the same
   focus state color across all components.
+- `Expandable.Avatar` has been updated to use the `Avatar` component from Preview. This change requires that you update the `altText` prop to `name`.
+
+> 🤖 The codemod will handle the change of `altText` to `name` on `Expandable.Avatar`.
+
 
 These changes are only **visual** and should not affect the functionality of the component.
 
@@ -350,6 +382,15 @@ These changes are only **visual** and should not affect the functionality of the
 ```tsx
 <LoadingDots variant="inverse" />
 ```
+
+### Pill
+
+**PR:** [#3430](https://github.com/Workday/canvas-kit/pull/3430)
+
+- `Pill` has been updated to use the `Avatar` component from Preview. This change requires that you provide a value for the `name` prop.
+
+> 🤖 The codemod will handle the change of `altText` to `name` on `Pill.Avatar`.
+
 
 ### Search Form 🚨
 
@@ -428,6 +469,43 @@ deprecated. Use `StatusIndicatorProps['variant']` instead.
 We add the [@deprecated](https://jsdoc.app/tags-deprecated.html) JSDoc tag to code we plan to remove
 in a future major release. This signals consumers to migrate to a more stable alternative before the
 deprecated code is removed.
+
+### Avatar in Main
+
+**PR:** [#3430](https://github.com/Workday/canvas-kit/pull/3430)
+
+We've deprecated the `Avatar` component in `@workday/canvas-kit-react` Main package. Please use the `Avatar` component in our Preview package.
+
+**Before in v13**
+
+```tsx
+import { Avatar } from '@workday/canvas-kit-react/avatar';
+
+// For Avatars that where divs
+<Avatar altText="John Doe" size="extraExtraLarge" as="div" url={yourImageUrl} />
+
+// For Avatars that where buttons
+<Avatar altText="John Doe" onClick={() => console.log('Avatar clicked')} />
+```
+
+**After in v14**
+
+```tsx
+import { Avatar } from '@workday/canvas-kit-preview-react/avatar';
+// name is used as a fallback if the image url is broken or still loading
+// variant light or dark are not used. Instead, variant defines the color of the Avatar
+<Avatar name="John Doe" size="extraExtraLarge" variant='teal' url={yourImageUrl} />
+```
+
+If you need to render a `button` element use the `BaseAvatar` component.
+
+```tsx
+import { BaseAvatar } from '@workday/canvas-kit-preview-react/avatar';
+
+<BaseAvatar name="John Doe" size="extraExtraLarge" variant='teal' as="button" onClick={() => console.log('Avatar clicked')}>
+  <BaseAvatar.Name name="John Doe" />
+</BaseAvatar>
+```
 
 ### Combobox (Labs)
 
