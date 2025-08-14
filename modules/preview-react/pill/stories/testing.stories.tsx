@@ -33,7 +33,7 @@ export const ReadOnlyPillStates = () => {
       >
         {({maxWidth}) => {
           return (
-            <Pill variant="readOnly">
+            <Pill variant="readOnly" maxWidth={maxWidth}>
               {maxWidth ? 'This is a super long te that should overflow' : 'PillLabel'}
             </Pill>
           );
@@ -133,7 +133,7 @@ export const RemovablePillStates = () => {
           },
           {
             label: 'With Max Width',
-            props: {maxWidth: true},
+            props: {maxWidth: 250},
           },
         ]}
         columnProps={stateTableColumnProps}

@@ -48,7 +48,7 @@ export const pillStencil = createStencil({
     height: system.space.x6,
     position: 'relative',
     gap: system.space.x1,
-    maxWidth: maxWidth,
+    maxWidth,
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
     overflow: 'hidden',
