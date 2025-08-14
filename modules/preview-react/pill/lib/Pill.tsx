@@ -18,7 +18,7 @@ export interface PillProps extends BoxProps {
    * Defines what kind of pill to render stylistically and its interaction states
    * @default 'default'
    */
-  variant?: 'default' | 'readOnly' | 'removable';
+  variant?: 'readOnly' | 'removable';
   /**
    * Determines the max width of the pill. If the pill text is longer than the max width,
    * text will be truncated and a tooltip will show the rest of the content when hovered over
@@ -94,8 +94,54 @@ export const pillStencil = createStencil({
       [buttonStencil.vars.opacity]: system.opacity.disabled,
     },
   }),
+  modifiers: {
+    variant: {
+      readOnly: {
+        border: `${px2rem(1)} solid ${system.color.border.container}`,
+        cursor: 'default',
+        [buttonStencil.vars.background]: 'transparent',
+        '&:hover, &.hover': {
+          borderColor: system.color.border.container,
+          [buttonStencil.vars.background]: 'transparent',
+        },
+        '&:focus-visible, &.focus': {
+          [buttonStencil.vars.background]: 'transparent',
+        },
+        '&:active, &.active': {
+          [buttonStencil.vars.background]: 'transparent',
+        },
+        '&:disabled, &.disabled': {
+          [buttonStencil.vars.background]: 'transparent',
+        },
+      },
+      removable: {
+        '&:focus-visible, &.focus': {
+          [buttonStencil.vars.background]: system.color.bg.alt.default,
+          [buttonStencil.vars.border]: system.color.border.input.default,
+          [buttonStencil.vars.label]: system.color.fg.strong,
+          boxShadow: 'none',
+        },
+        '&:hover, &.hover': {
+          [buttonStencil.vars.background]: system.color.bg.alt.strong,
+        },
+        '&:active, &.active': {
+          [buttonStencil.vars.background]: system.color.bg.alt.stronger,
+        },
+        '&:disabled, &.disabled': {
+          [buttonStencil.vars.background]: system.color.bg.alt.default,
+          [systemIconStencil.vars.color]: 'currentColor',
+        },
+        cursor: 'default',
+        overflow: 'revert', // override BaseButton overflow styles so the click target exists outside the pill for removable
+        position: 'relative',
+      },
+    },
+  },
 });
 
+/**
+ * @deprecated Use `pillStencil` instead
+ */
 export const removeablePillStencil = createStencil({
   extends: pillStencil,
   base: {
@@ -121,6 +167,9 @@ export const removeablePillStencil = createStencil({
   },
 });
 
+/**
+ * @deprecated Use `pillStencil` instead
+ */
 export const readyOnlyPillStencil = createStencil({
   extends: pillStencil,
   base: {
@@ -249,48 +298,28 @@ export const Pill = createContainer('button')({
      */
     Label: PillLabel,
   },
-})<PillProps>(({variant = 'default', maxWidth = 200, children, ...elemProps}, Element, model) => {
+})<PillProps>(({variant, maxWidth = 200, children, ...elemProps}, Element, model) => {
   const maxWidthCSSValue = typeof maxWidth === 'number' ? px2rem(maxWidth) : maxWidth;
-  return (
-    <>
-      {variant === 'readOnly' && (
-        <Box
-          as={Element !== 'button' ? Element : 'span'}
-          id={model.state.id}
-          {...mergeStyles(
-            elemProps,
-            readyOnlyPillStencil({
-              maxWidth: maxWidthCSSValue,
-            })
-          )}
-        >
-          <PillLabel>{children}</PillLabel>
-        </Box>
-      )}
-      {variant === 'default' && (
-        <Element
-          disabled={model.state.disabled}
-          {...mergeStyles(elemProps, [
-            model.state.disabled ? 'disabled' : undefined,
-            pillStencil({
-              maxWidth: maxWidthCSSValue,
-            }),
-          ])}
-        >
-          {children}
-        </Element>
-      )}
-      {variant === 'removable' && (
-        <Box
-          as={Element !== 'button' ? Element : 'span'}
-          {...mergeStyles(elemProps, [
-            model.state.disabled ? 'disabled' : undefined,
-            removeablePillStencil({maxWidth: maxWidthCSSValue}),
-          ])}
-        >
-          {children}
-        </Box>
-      )}
-    </>
+  return !variant ? (
+    <Element
+      disabled={model.state.disabled}
+      {...mergeStyles(elemProps, [
+        model.state.disabled ? 'disabled' : undefined,
+        pillStencil({maxWidth: maxWidthCSSValue}),
+      ])}
+    >
+      {children}
+    </Element>
+  ) : (
+    <Box
+      as={Element !== 'button' ? Element : 'span'}
+      id={variant === 'removable' ? model.state.id : undefined}
+      {...mergeStyles(elemProps, [
+        model.state.disabled ? 'disabled' : undefined,
+        pillStencil({maxWidth: maxWidthCSSValue, variant}),
+      ])}
+    >
+      {children}
+    </Box>
   );
 });
