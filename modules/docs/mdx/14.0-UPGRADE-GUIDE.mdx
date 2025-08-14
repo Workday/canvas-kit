@@ -13,7 +13,7 @@ any questions.
 - [Codemod](#codemod)
   - [Instructions](#instructions)
 - [Theming](#theming)
-  - [Canvas Provider](#canvas-provider)
+  - [Canvas Provider](#canvas-provider-)
 - [Component Updates](#component-updates)
   - [Avatar in Preview](#avatar-in-preview)
   - [Branding Changes](#branding-changes)
@@ -105,14 +105,12 @@ yarn remove @workday/canvas-kit-codemod
 
 ## Theming
 
-**PR:** [#3394](https://github.com/Workday/canvas-kit/pull/3394)
-
-- `CanvasThemePalette` has been updated to include a `lighter` color.
-- `CanvasTheme` has been updated to include a `lighter` color.
-
 ### Canvas Provider 🚨
 
-**PR:** [#3407](https://github.com/Workday/canvas-kit/pull/3407)
+**PRs:** [#3407](https://github.com/Workday/canvas-kit/pull/3407), [#3394](https://github.com/Workday/canvas-kit/pull/3394)
+
+- `CanvasThemePalette` and `CanvasTheme` type have been updated to include a `lighter` property.
+- `CanvasProvider` `theme` prop has been updated to include a `lighter` color for each palette.
 
 #### Breaking Changes
 
@@ -151,21 +149,20 @@ We use `oklch` to generate the palette colors. The color shifting will be differ
 **Or**
 
 ```tsx
-<CanvasProvider theme={
-	{canvas: {
-		palette: {
-			primary: {
-				main: cssVar(base.blue600),
-			},
-		},
-	}}}>
+<CanvasProvider theme={{canvas: {palette: {primary: {main: cssVar(base.blue600)}}}}}>
   <App/>
 </CanvasProvider>
 ```
 
-The reason for this change is to ensure that the CSS variables are properly cascaded to all components. Before in v13, the `CanvasProvider` would add the brand tokens under a class name, creating a higher specificity.
+> **Note:** The way `chroma.js` and `oklch` generate colors **is different**. While we work on a better algorithm to determine hue, chroma and lightness and color shifting that best represents an accessible palette, **you may see color discrepancies**. If you want to continue using the old way of generating a color palette with `chroma.js`, you can use `createCanvasTheme`.
 
-- `CanvasProvider` has been updated to include a `lighter` color.
+```tsx
+<CanvasProvider theme={{canvas: createCanvasTheme({palette: {primary: {main: cssVar(base.blue600)}}})}}>
+  <App/>
+</CanvasProvider>
+```
+
+The reason for this change is to ensure that the CSS variables properly cascade to all components. Before in v13, the `CanvasProvider` would add the brand tokens under a class name, creating a higher specificity.
 
 ## Component Updates
 
