@@ -45,6 +45,7 @@ export const BreadcrumbsLink = createComponent('a')({
           ref={ref}
           as={Element}
           role="link"
+          variant="standalone"
           {...handleCsProp(
             elemProps,
             breadcrumbsLinkStencil({
