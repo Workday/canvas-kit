@@ -66,17 +66,24 @@ export const pillStencil = createStencil({
       [buttonStencil.vars.background]: system.color.bg.alt.strong,
       [buttonStencil.vars.border]: system.color.border.input.strong,
       [buttonStencil.vars.label]: system.color.fg.strong,
+      [systemIconStencil.vars.color]: 'currentColor',
+      [pillCountStencil.vars.backgroundColor]: system.color.bg.muted.softer,
+      [pillCountStencil.vars.borderColor]: 'transparent',
     },
     '&:active, &.active': {
       [buttonStencil.vars.background]: system.color.bg.alt.stronger,
       [buttonStencil.vars.border]: system.color.border.input.strong,
       [buttonStencil.vars.label]: system.color.fg.strong,
+      [systemIconStencil.vars.color]: 'currentColor',
+      [pillCountStencil.vars.backgroundColor]: system.color.bg.muted.softer,
+      [pillCountStencil.vars.borderColor]: 'transparent',
     },
     '&:focus-visible, &.focus': {
       [buttonStencil.vars.background]: system.color.bg.alt.default,
       [buttonStencil.vars.border]: system.color.border.primary.default,
       [buttonStencil.vars.label]: system.color.fg.strong,
       borderColor: system.color.border.primary.default,
+      [systemIconStencil.vars.color]: 'currentColor',
       [pillCountStencil.vars.borderColor]: system.color.border.primary.default,
 
       ...focusRing({
@@ -92,6 +99,9 @@ export const pillStencil = createStencil({
       [buttonStencil.vars.border]: system.color.border.input.disabled,
       [buttonStencil.vars.label]: system.color.fg.disabled,
       [buttonStencil.vars.opacity]: system.opacity.disabled,
+      [systemIconStencil.vars.color]: 'currentColor',
+      [pillCountStencil.vars.backgroundColor]: system.color.bg.alt.strong,
+      [pillCountStencil.vars.borderColor]: 'transparent',
     },
   }),
   modifiers: {
