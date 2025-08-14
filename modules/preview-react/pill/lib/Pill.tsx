@@ -252,7 +252,7 @@ export const Pill = createContainer('button')({
   return variant?.match(/^(readOnly|removable)$/) ? (
     <Box
       as={Element !== 'button' ? Element : 'span'}
-      id={variant === 'removable' ? model.state.id : undefined}
+      id={variant === 'readOnly' ? model.state.id : undefined}
       {...mergeStyles(elemProps, [
         model.state.disabled ? 'disabled' : undefined,
         pillStencil({maxWidth: maxWidthCSSValue, variant}),
