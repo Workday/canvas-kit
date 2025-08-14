@@ -62,11 +62,20 @@ export const pillStencil = createStencil({
       display: 'flex',
       lineHeight: system.lineHeight.subtext.large, // ensure correct line height
     },
+    '&:hover, &.hover': {
+      [buttonStencil.vars.background]: system.color.bg.alt.strong,
+      [buttonStencil.vars.border]: system.color.border.input.strong,
+      [buttonStencil.vars.label]: system.color.fg.strong,
+    },
+    '&:active, &.active': {
+      [buttonStencil.vars.background]: system.color.bg.alt.stronger,
+      [buttonStencil.vars.border]: system.color.border.input.strong,
+      [buttonStencil.vars.label]: system.color.fg.strong,
+    },
     '&:focus-visible, &.focus': {
       [buttonStencil.vars.background]: system.color.bg.alt.default,
       [buttonStencil.vars.border]: system.color.border.primary.default,
       [buttonStencil.vars.label]: system.color.fg.strong,
-      [systemIconStencil.vars.color]: 'currentColor',
       borderColor: system.color.border.primary.default,
       [pillCountStencil.vars.borderColor]: system.color.border.primary.default,
 
@@ -78,30 +87,11 @@ export const pillStencil = createStencil({
         separation: 1,
       }),
     },
-    '&:hover, &.hover': {
-      [buttonStencil.vars.background]: system.color.bg.alt.strong,
-      [buttonStencil.vars.border]: system.color.border.input.strong,
-      [buttonStencil.vars.label]: system.color.fg.strong,
-      [systemIconStencil.vars.color]: 'currentColor',
-      [pillCountStencil.vars.backgroundColor]: system.color.bg.muted.softer,
-      [pillCountStencil.vars.borderColor]: 'transparent',
-    },
-    '&:active, &.active': {
-      [buttonStencil.vars.background]: system.color.bg.alt.stronger,
-      [buttonStencil.vars.border]: system.color.border.input.strong,
-      [buttonStencil.vars.label]: system.color.fg.strong,
-      [systemIconStencil.vars.color]: 'currentColor',
-      [pillCountStencil.vars.backgroundColor]: system.color.bg.muted.softer,
-      [pillCountStencil.vars.borderColor]: 'transparent',
-    },
     '&:disabled, &.disabled': {
       [buttonStencil.vars.background]: system.color.bg.alt.default,
       [buttonStencil.vars.border]: system.color.border.input.disabled,
       [buttonStencil.vars.label]: system.color.fg.disabled,
       [buttonStencil.vars.opacity]: system.opacity.disabled,
-      [systemIconStencil.vars.color]: 'currentColor',
-      [pillCountStencil.vars.backgroundColor]: system.color.bg.alt.strong,
-      [pillCountStencil.vars.borderColor]: 'transparent',
     },
   }),
 });
