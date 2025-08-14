@@ -140,58 +140,6 @@ export const pillStencil = createStencil({
 });
 
 /**
- * @deprecated Use `pillStencil` instead
- */
-export const removeablePillStencil = createStencil({
-  extends: pillStencil,
-  base: {
-    '&:focus-visible, &.focus': {
-      [buttonStencil.vars.background]: system.color.bg.alt.default,
-      [buttonStencil.vars.border]: system.color.border.input.default,
-      [buttonStencil.vars.label]: system.color.fg.strong,
-      boxShadow: 'none',
-    },
-    '&:hover, &.hover': {
-      [buttonStencil.vars.background]: system.color.bg.alt.strong,
-    },
-    '&:active, &.active': {
-      [buttonStencil.vars.background]: system.color.bg.alt.stronger,
-    },
-    '&:disabled, &.disabled': {
-      [buttonStencil.vars.background]: system.color.bg.alt.default,
-      [systemIconStencil.vars.color]: 'currentColor',
-    },
-    cursor: 'default',
-    overflow: 'revert', // override BaseButton overflow styles so the click target exists outside the pill for removable
-    position: 'relative',
-  },
-});
-
-/**
- * @deprecated Use `pillStencil` instead
- */
-export const readyOnlyPillStencil = createStencil({
-  extends: pillStencil,
-  base: {
-    border: `${px2rem(1)} solid ${system.color.border.container}`,
-    cursor: 'default',
-    [buttonStencil.vars.background]: 'transparent',
-    '&:hover, &.hover': {
-      [buttonStencil.vars.background]: 'transparent',
-    },
-    '&:focus-visible, &.focus': {
-      [buttonStencil.vars.background]: 'transparent',
-    },
-    '&:active, &.active': {
-      [buttonStencil.vars.background]: 'transparent',
-    },
-    '&:disabled, &.disabled': {
-      [buttonStencil.vars.background]: 'transparent',
-    },
-  },
-});
-
-/**
  * By default, a `Pill` renders an interactive element that accepts subcomponents. By "interactive"
  * we mean that the Pill container is a focusable element (a `<button>`). All leading elements
  * (icons or avatars) are intended to be descriptive, helping support the label. They should not
@@ -300,17 +248,8 @@ export const Pill = createContainer('button')({
   },
 })<PillProps>(({variant, maxWidth = 200, children, ...elemProps}, Element, model) => {
   const maxWidthCSSValue = typeof maxWidth === 'number' ? px2rem(maxWidth) : maxWidth;
-  return !variant ? (
-    <Element
-      disabled={model.state.disabled}
-      {...mergeStyles(elemProps, [
-        model.state.disabled ? 'disabled' : undefined,
-        pillStencil({maxWidth: maxWidthCSSValue}),
-      ])}
-    >
-      {children}
-    </Element>
-  ) : (
+
+  return variant?.match(/^(readOnly|removable)$/) ? (
     <Box
       as={Element !== 'button' ? Element : 'span'}
       id={variant === 'removable' ? model.state.id : undefined}
@@ -321,5 +260,15 @@ export const Pill = createContainer('button')({
     >
       {children}
     </Box>
+  ) : (
+    <Element
+      disabled={model.state.disabled}
+      {...mergeStyles(elemProps, [
+        model.state.disabled ? 'disabled' : undefined,
+        pillStencil({maxWidth: maxWidthCSSValue}),
+      ])}
+    >
+      {children}
+    </Element>
   );
 });
