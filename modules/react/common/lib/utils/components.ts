@@ -3,6 +3,7 @@ import {assert} from './assert';
 import {memoize} from './memoize';
 import {MergeProps, mergeProps, RemoveNulls} from './mergeProps';
 import {Model} from './models';
+import {setCanvasKitTags} from './insights';
 
 /**
  * Adds the `as` to the style interface to support `as` in styled components
@@ -540,7 +541,10 @@ export const createComponent =
     const ReturnedComponent = React.forwardRef<E, P & {as?: React.ElementType}>(
       ({as: asOverride, ...props}, ref) => {
         return Component(
-          props as any,
+          {
+            ...setCanvasKitTags({displayName}),
+            ...props,
+          } as any,
           ref as ExtractRef<E>,
           // Cast to `any` to avoid: "ts(2345): Type 'undefined' is not assignable to type 'E extends
           // undefined ? never : E'" I'm not sure I can actually cast to this conditional type and it
