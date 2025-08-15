@@ -9,7 +9,7 @@ import {
   ExtractProps,
   useUniqueId,
 } from '@workday/canvas-kit-react/common';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 import {calc, createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {
   notificationsIcon,
@@ -20,7 +20,7 @@ import {
 } from '@workday/canvas-system-icons-web';
 
 import {SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
-import {Avatar} from '@workday/canvas-kit-react/avatar';
+import {Avatar} from '@workday/canvas-kit-preview-react/avatar';
 import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 import {LoadReturn} from '@workday/canvas-kit-react/collection';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
@@ -73,7 +73,7 @@ const styleOverrides = {
   }),
   menuButtonStyles: createStyles({
     textDecoration: 'none',
-    color: base.blackPepper500,
+    color: system.color.fg.strong,
   }),
   notificationContainerStyles: createStyles({
     boxSizing: 'border-box',
@@ -149,7 +149,7 @@ export const Basic = () => {
             <TertiaryButton icon={inboxIcon} />
           </Tooltip>
           <Tooltip title="Profile">
-            <Avatar altText="Avatar" />
+            <Avatar name="Avatar" />
           </Tooltip>
         </GlobalHeader.Item>
       </GlobalHeader>

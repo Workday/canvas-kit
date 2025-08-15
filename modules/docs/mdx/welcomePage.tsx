@@ -1,5 +1,5 @@
 // @ts-ignore: Cannot find module error
-import headerImage from './CK-banner-temp.jpg';
+import headerImage from './ck-banner.jpg';
 import {Flex, Grid, Box} from '@workday/canvas-kit-react/layout';
 import {InstallBlock} from './installBlock';
 import {Text, Heading} from '@workday/canvas-kit-react/text';
@@ -19,25 +19,20 @@ const parentFlexStyles = createStyles({
   marginBottom: system.space.x6,
 });
 
-const textStyles = createStyles({
+const bannerTextStyles = createStyles({
   color: system.color.text.inverse,
   fontSize: '5vmin',
   lineHeight: '5vmin',
 });
 
 const versionStyles = createStyles({
-  fontWeight: base.fontFamily100,
+  ...system.type.body.medium,
   marginInlineStart: system.space.x4,
 });
 
 const imageStyles = createStyles({
   width: '100%',
   height: 'auto',
-});
-
-const borderStyles = createStyles({
-  borderBottom: `1px solid ${base.blueberry200}`,
-  marginBottom: system.space.x2,
 });
 
 const gridStyles = createStyles({
@@ -56,23 +51,20 @@ export const WelcomePage = () => {
     <div className="sb-unstyled">
       <div className={parentFlexStyles}>
         <Box cs={{overflow: 'hidden', position: 'relative'}}>
-          <Flex cs={{flexDirection: 'row', position: 'absolute', top: '45%', left: '10%'}}>
-            <Text typeLevel="title.medium" cs={textStyles}>
-              Canvas Kit
-            </Text>
-            <Text typeLevel="title.medium" cs={[textStyles, versionStyles]}>
-              v{version}
-            </Text>
-          </Flex>
           <img
             src={headerImage}
             alt="banner with canvas kit logo and version"
             className={imageStyles}
           />
+          <Flex cs={{flexDirection: 'row', position: 'absolute', top: '45%', right: '5%'}}>
+            <Text typeLevel="title.medium" cs={[bannerTextStyles, versionStyles]}>
+              v{version}
+            </Text>
+          </Flex>
         </Box>
         <Text typeLevel="body.medium">
           This project provides a set of components for the Workday Canvas Design System that can be
-          used to implement user experiences consistent with
+          used to implement user experiences consistent with {' '}
           <ExternalHyperlink
             href="https://canvas.workdaydesign.com/"
             iconLabel="Open docs in new window"
@@ -80,7 +72,7 @@ export const WelcomePage = () => {
             Workday Design Principles.
           </ExternalHyperlink>
         </Text>
-        <Heading size="medium" className={borderStyles}>
+        <Heading size="medium">
           Quick Links
         </Heading>
         <Grid
@@ -90,8 +82,7 @@ export const WelcomePage = () => {
         >
           <Grid as={Card} className={gridStyles}>
             <SystemIcon
-              color={base.cantaloupe400}
-              colorHover={base.cantaloupe400}
+              color={base.magenta600}
               icon={rocketIcon}
               size={60}
             ></SystemIcon>
@@ -109,9 +100,8 @@ export const WelcomePage = () => {
           </Grid>
           <Grid as={Card} className={gridStyles}>
             <SystemIcon
-              color={base.blueberry400}
+              color={base.red300}
               icon={tokensIcon}
-              colorHover={base.blueberry400}
               size={60}
             ></SystemIcon>
             <Card.Heading>Tokens</Card.Heading>
@@ -122,37 +112,35 @@ export const WelcomePage = () => {
               </Text>
             </Card.Body>
             <Grid.Item
-              as={Hyperlink}
+              as={ExternalHyperlink}
               className={linkStyles}
-              href="https://workday.github.io/canvas-kit/?path=/docs/tokens--overview"
+              href="https://workday.github.io/canvas-tokens/?path=%2Fdocs%2Fdocs-getting-started--docs"
             >
               View Our Tokens
             </Grid.Item>
           </Grid>
           <Grid as={Card} className={gridStyles}>
             <SystemIcon
-              color={base.greenApple400}
+              color={base.teal500}
               icon={shapesIcon}
               size={60}
-              colorHover={base.greenApple400}
             ></SystemIcon>
-            <Card.Heading>Assets</Card.Heading>
+            <Card.Heading>Styling</Card.Heading>
             <Card.Body>
               <Text>
-                Assets are graphics which help communicate meaning or highlight areas of interaction
-                to our users.
+                Learn how to style Canvas components using tokens, theming, and custom CSS approaches.
               </Text>
             </Card.Body>
             <Grid.Item
               as={Hyperlink}
               className={linkStyles}
-              href="https://workday.github.io/canvas-kit/?path=/docs/assets-icons--overview"
+              href="https://workday.github.io/canvas-kit/?path=/docs/styling-getting-started-overview--docs"
             >
-              View Assets
+              Get Started
             </Grid.Item>
           </Grid>
         </Grid>
-        <Heading size="medium" className={borderStyles}>
+        <Heading size="medium">
           Installation
         </Heading>
         <Text>
