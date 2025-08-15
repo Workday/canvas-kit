@@ -4,12 +4,7 @@ import {customColorTheme} from '../../../../utils/storybook';
 import {ContentDirection, CanvasProvider, useTheme} from '@workday/canvas-kit-react/common';
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {DeleteButton, PrimaryButton} from '@workday/canvas-kit-react/button';
-import {
-  Popup,
-  useCloseOnOutsideClick,
-  useCloseOnEscape,
-  usePopupModel,
-} from '@workday/canvas-kit-react/popup';
+
 import {Flex, Box} from '@workday/canvas-kit-react/layout';
 
 import {WithRadioButtons as WithRadioButtonsExample} from './examples/WithRadioButtons';

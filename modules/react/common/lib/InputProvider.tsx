@@ -137,7 +137,7 @@ export class InputProvider extends React.Component<React.PropsWithChildren<Input
       storedInput = window.sessionStorage.getItem('what-input') as InputType;
       storedIntent = window.sessionStorage.getItem('what-intent') as InputType;
     } catch (e) {
-      // Don't log if window is undefined (i.e. we are in an SSR environment), 
+      // Don't log if window is undefined (i.e. we are in an SSR environment),
       // because we can assume the entire implementation will not work and is not needed.
       if (typeof window !== 'undefined') {
         console.warn('Failed to retrieve input status from session storage' + e);

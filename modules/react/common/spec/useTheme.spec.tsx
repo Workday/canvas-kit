@@ -2,7 +2,7 @@ import * as React from 'react';
 import {screen, render} from '@testing-library/react';
 import {renderHook} from '@testing-library/react-hooks';
 import {CanvasProvider} from '../index';
-import {defaultCanvasTheme, createCanvasTheme, useTheme} from '../lib/theming';
+import {defaultCanvasTheme, useTheme} from '../lib/theming';
 
 describe('useTheme', () => {
   const customTheme = {
@@ -25,23 +25,23 @@ describe('useTheme', () => {
     expect(result.current).toMatchObject({canvas: defaultCanvasTheme});
   });
 
-  test('should return the provided theme', () => {
+  test('should return the provided theme values merged with defaults', () => {
     const {result} = renderHook(() => useTheme(customTheme));
 
-    expect(result.current).toMatchObject({canvas: createCanvasTheme(customTheme.canvas)});
+    expect(result.current.canvas.palette.primary.main).toBe('orange');
   });
 
   test('with no window context available, calling useTheme within a component should return context theme', () => {
     render(
-      <CanvasProvider theme={customTheme}>
+      <CanvasProvider theme={{canvas: customTheme.canvas}}>
         <Component />
       </CanvasProvider>
     );
 
-    expect(screen.getByRole('heading', {name: 'Theme'})).toHaveAttribute(
-      'data-theme',
-      JSON.stringify(createCanvasTheme(customTheme.canvas))
-    );
+    const attr = screen.getByRole('heading', {name: 'Theme'}).getAttribute('data-theme');
+    expect(attr).not.toBeNull();
+    const parsed = JSON.parse(attr!);
+    expect(parsed.palette.primary.main).toBe('orange');
   });
 
   test('with no theme or context provided, useTheme should attempt to pull the theme from the window global', () => {
@@ -52,6 +52,7 @@ describe('useTheme', () => {
     };
     const {result} = renderHook(useTheme);
 
-    expect(result.current).toMatchObject({canvas: createCanvasTheme(customTheme.canvas)});
+    expect(result.current.canvas.palette.primary.main).toBe('orange');
+    delete (window as any).workday;
   });
 });

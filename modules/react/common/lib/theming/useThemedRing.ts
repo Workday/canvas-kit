@@ -1,6 +1,6 @@
 import {CanvasTheme, EmotionCanvasTheme, useTheme} from '@workday/canvas-kit-react/common';
 import {brand, system} from '@workday/canvas-tokens-web';
-import {CSSProperties, statusColors} from '@workday/canvas-kit-react/tokens';
+import {CSSProperties} from '@workday/canvas-kit-react/tokens';
 import {cssVar} from '@workday/canvas-kit-styling';
 
 type paletteSelection = Exclude<keyof EmotionCanvasTheme['canvas']['palette'], 'common'>;
@@ -16,22 +16,27 @@ const getPaletteColorsFromTheme = (
 ): ContrastColors => {
   if (errorType === 'error') {
     return {
-      outer: palette.palette.common.errorInner || fallbackColors?.outer,
-      inner: fallbackColors?.inner || palette.palette.common.errorInner,
+      outer: cssVar(brand.common.errorInner),
+      inner: cssVar(brand.common.errorInner),
     };
   } else if (errorType === 'alert') {
     return {
-      outer: palette.palette.common?.alertOuter || fallbackColors?.outer,
-      inner:
-        palette.palette.common?.alertInner ||
-        fallbackColors?.inner ||
-        palette.palette.common.alertInner,
+      outer: cssVar(brand.common.alertOuter),
+      inner: cssVar(brand.common.alertInner),
+    };
+  }
+
+  // If specific fallback colors are provided (e.g., for success), prefer those
+  if (fallbackColors && (fallbackColors.outer || fallbackColors.inner)) {
+    return {
+      outer: fallbackColors.outer ?? cssVar(brand.common.focusOutline),
+      inner: fallbackColors.inner ?? fallbackColors.outer ?? cssVar(brand.common.focusOutline),
     };
   }
 
   return {
-    outer: fallbackColors?.outer,
-    inner: fallbackColors?.inner || palette.palette.common.focusOutline,
+    outer: cssVar(brand.common.focusOutline),
+    inner: cssVar(brand.common.focusOutline),
   };
 };
 
@@ -39,8 +44,6 @@ export function getPaletteColorsForFocusRing(
   type: paletteSelection,
   theme: EmotionCanvasTheme
 ): ContrastColors {
-  const palette = theme.canvas.palette[type];
-
   switch (type) {
     case 'error': {
       return getPaletteColorsFromTheme(theme.canvas, {outer: brand.common.errorInner}, 'error');
@@ -53,7 +56,7 @@ export function getPaletteColorsForFocusRing(
         outer: cssVar(brand.success.dark),
         // The theme default for success.main is set to the darkest GreenApple
         // For our default ring, we need to override it so the inner ring is a bit lighter
-        inner: palette.main === cssVar(brand.success.base) ? statusColors.success : palette.main,
+        inner: cssVar(brand.success.base),
       });
     }
     default: {
@@ -98,6 +101,7 @@ export const useThemedRing = (type: paletteSelection): CSSProperties => {
   const theme = useTheme();
 
   const paletteColors = getPaletteColorsForFocusRing(type, theme);
+
   if (!(paletteColors?.outer || paletteColors?.inner)) {
     return {};
   }
@@ -116,9 +120,7 @@ export const useThemedRing = (type: paletteSelection): CSSProperties => {
       borderColor: paletteColors.outer,
       boxShadow: `${errorBoxShadow},
         0 0 0 2px ${cssVar(system.color.border.input.inverse)},
-        0 0 0 4px ${
-          theme ? theme.canvas.palette.common.focusOutline : cssVar(brand.common.focusOutline)
-        }`,
+        0 0 0 4px ${cssVar(brand.common.focusOutline)}`,
     },
   };
 };
