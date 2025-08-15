@@ -29,26 +29,30 @@ export function useListRenderItems<T>(
   children: ((item: Generic, index: number) => React.ReactNode) | React.ReactNode
 ): React.ReactNode {
   const items =
-    typeof children === 'function'
-      ? model.state.isVirtualized
-        ? model.state.UNSTABLE_virtual.getVirtualItems().map(virtual => {
-            const item = model.state.items[virtual.index];
-            const child = children(item.value, virtual.index);
-            return (
-              <ListRenderItemContext.Provider key={item.id || item.index} value={{item, virtual}}>
-                {child}
-              </ListRenderItemContext.Provider>
-            );
-          })
-        : model.state.items.map(item => {
-            const child = children(item.value, item.index);
-            return (
-              <ListRenderItemContext.Provider key={item.id || item.index} value={{item}}>
-                {child}
-              </ListRenderItemContext.Provider>
-            );
-          })
-      : children;
+    typeof children === 'function' ? (
+      model.state.isVirtualized ? (
+        model.state.UNSTABLE_virtual.getVirtualItems().map(virtual => {
+          const item = model.state.items[virtual.index];
+          const child = children(item.value, virtual.index);
+          return (
+            <ListRenderItemContext.Provider key={item.id || item.index} value={{item, virtual}}>
+              {child}
+            </ListRenderItemContext.Provider>
+          );
+        })
+      ) : (
+        model.state.items.map(item => {
+          const child = children(item.value, item.index);
+          return (
+            <ListRenderItemContext.Provider key={item.id || item.index} value={{item}}>
+              {child}
+            </ListRenderItemContext.Provider>
+          );
+        })
+      )
+    ) : (
+      <ListRenderItemContext.Provider value={{}}>{children}</ListRenderItemContext.Provider>
+    );
 
   return items;
 }
