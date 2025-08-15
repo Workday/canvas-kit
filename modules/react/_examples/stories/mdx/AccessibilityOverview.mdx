@@ -1,10 +1,13 @@
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 import iconBefore from './assets/icons-before-whcm.png';
 import iconAfter from './assets/icons-after-whcm.png';
 import checkMark from './assets/checkmarks.png';
 import checkMarkWhcm from './assets/checkmarks-whcm.png';
-import modalBorder from './assets/modal-border.png';
-import tooltipClose from './assets/tooltip-close.png';
+import borderOutline from './assets/border-outline-dialog-tooltip-3.png';
+import buttonFocus from './assets/button-focus-2.png';
+import menuFocus from './assets/menu-focus.png';
 
 <Meta title="Guides/Accessibility/Overview" />
 
@@ -58,7 +61,7 @@ Further reading:
 
 ```
 <AriaLiveRegion>
-  When this text is updated, screen readers will announce it in live time.
+  When this text is updated, screen readers will announce it automatically in live time.
 </AriaLiveRegion>
 ```
 
@@ -165,6 +168,11 @@ focusable components inside popup containers like the `<Menu>` component to ensu
 indicator isn’t clipped off the edge. (For example:
 [MenuItem](https://github.com/Workday/canvas-kit/blob/master/modules/react/menu/lib/MenuItem.tsx).)
 
+<Flex justifyContent="space-evenly" paddingBottom={system.space.x4}>
+  <img src={buttonFocus} alt="Primary button with outline offset 2 pixels" />
+  <img src={menuFocus} alt="Menu item with outline offset -2 pixels" />
+</Flex>
+
 ### Boundary Borders and Outlines:
 
 If content needs to be grouped with a boundary in high contrast themes, using a `transparent` CSS
@@ -174,6 +182,15 @@ draw boundaries in components that don't have any focus state like
 and
 [TooltipContainer](https://github.com/Workday/canvas-kit/blob/master/modules/react/tooltip/lib/TooltipContainer.tsx).
 
+<Flex justifyContent="center">
+  <figure margin="0">
+    <img src={borderOutline} alt="" />
+    <figcaption style={{width: px2rem(300)}}>
+      CSS outlines appear in high contrast mode around dialog containers and tooltips
+    </figcaption>
+  </figure>
+</Flex>
+
 ### Images:
 
 `<img>` elements, which are for images like JPEGs or PNGs, are not affected by high contrast themes.
@@ -181,7 +198,7 @@ If you use a meaningful image with a transparent background, it could become dif
 against some background colors. Be careful when using such images for conveying information to
 users.
 
-<Flex justifyContent="space-around">
+<Flex justifyContent="space-evenly" paddingBottom={system.space.x4}>
   <img src={checkMark} alt="Check mark images highly visible on white background" />
   <img src={checkMarkWhcm} alt="Check mark images have poor contrast on dark background" />
 </Flex>
@@ -203,14 +220,14 @@ contrast theme.
 },
 ```
 
-<Flex justifyContent='space-around'>
+<Flex justifyContent='space-evenly'>
 <figure margin='0'>
   <img src={iconBefore} alt="" />
-  <figcaption>Before: The mail icon color has poor contrast on dark backgrounds</figcaption>
+  <figcaption style={{width: px2rem(370)}}>Before: The mail icon color has poor contrast on dark backgrounds</figcaption>
 </figure>
 
 <figure margin='0'>
   <img src={iconAfter} alt="" />
-  <figcaption>After: The mail icon inherits the theme's current color for best contrast</figcaption>
+  <figcaption style={{width: px2rem(370)}}>After: The mail icon inherits the theme's current color for best contrast</figcaption>
 </figure>
 </Flex>
