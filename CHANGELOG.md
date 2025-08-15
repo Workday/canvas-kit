@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.20](https://github.com/Workday/canvas-kit/releases/tag/v13.2.20) (2025-08-15)
+
+### Components
+
+- fix: Reset context when registering items in virtual list and static API is used ([#3450](https://github.com/Workday/canvas-kit/pull/3450)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v13.2.19](https://github.com/Workday/canvas-kit/releases/tag/v13.2.19) (2025-08-08)
 
 ### Styling
