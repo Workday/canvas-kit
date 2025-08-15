@@ -265,7 +265,10 @@ export const Pill = createContainer('button')({
     <Box
       as={Element !== 'button' ? Element : 'span'}
       id={isReadOnly ? model.state.id : undefined}
-      {...mergeStyles(elemProps, pillStencil({maxWidth: maxWidthCSSValue, variant}))}
+      {...mergeStyles(elemProps, [
+        model.state.disabled ? 'disabled' : undefined,
+        pillStencil({maxWidth: maxWidthCSSValue, variant}),
+      ])}
     >
       {isReadOnly ? <PillLabel>{children}</PillLabel> : children}
     </Box>
