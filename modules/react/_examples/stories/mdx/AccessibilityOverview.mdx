@@ -18,6 +18,17 @@ accessible components that are easy to customize for your needs. Core concepts a
 made by the Canvas Kit development team are introduced in the sections below and throughout this
 guide.
 
+## Read Me First
+
+**No ARIA is better than Bad ARIA.**
+[Read Me First | APG | WAI | W3C](https://www.w3.org/WAI/ARIA/apg/practices/read-me-first/)
+
+Accessible Rich Internet Applications (ARIA) is like CSS styling for assistive technologies. Unlike
+CSS however, ARIA mistakes and gaps in support are not clearly visible to designers and developers.
+Canvas Kit components are built with semantic HTML and include as much of the required ARIA as
+possible according to the [WAI-ARIA 1.2 specification](https://www.w3.org/TR/wai-aria-1.2/)
+recommended by the W3C and the patterns found in the ARIA Authoring Practices Guide. (APG)
+
 ## The Accessibility Tree
 
 The Accessibility Tree is created by the web browser from the semantic information provided in the
@@ -140,11 +151,12 @@ In general, we have 2 key recommendations for satisfying this guideline:
 ### How we test against this guideline:
 
 Set the browser viewport to `1280px x 1024px` and increase browser zoom to 400%. This is
-mathetmatically equivalent to a width of 320 and a height of 256 CSS pixels.
+mathetmatically equivalent to a width of 320 pixels and a height of 256 pixels required by the
+guideline.
 
 - Evaluate whether any horizontal scroll isn't necessary in the application.
 - Evaluate whether there is any loss of function due to sticky content.
-- Look for clipping and overlapping content.
+- Look for clipping, overlapping, or otherwise unreadable text.
 
 ## Supporting Windows 11 High Contrast Desktop Themes
 
