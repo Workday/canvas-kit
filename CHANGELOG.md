@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.6.23](https://github.com/Workday/canvas-kit/releases/tag/v12.6.23) (2025-08-18)
+
+### Components
+
+- fix: Add version string to packages ([#3457](https://github.com/Workday/canvas-kit/pull/3457)) ([@NicholasBoll](https://github.com/NicholasBoll), Manuel Carrera)
+
+
+## [v12.6.22](https://github.com/Workday/canvas-kit/releases/tag/v12.6.22) (2025-08-18)
+
+### Documentation
+
+- fix: Update docs around token imports ([#3449](https://github.com/Workday/canvas-kit/pull/3449)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v12.6.21](https://github.com/Workday/canvas-kit/releases/tag/v12.6.21) (2025-08-08)
 
 ### Styling
