@@ -5,6 +5,7 @@ const modulesPath = path.resolve(__dirname, '../modules');
 const getSpecifications = require('../modules/docs/utils/get-specifications');
 import {StorybookConfig} from '@storybook/react-webpack5';
 const {createDocProgram} = require('../modules/docs/docgen/createDocProgram');
+const {version} = require('../lerna.json');
 
 const processDocs = process.env.SKIP_DOCGEN !== 'true';
 
@@ -83,6 +84,13 @@ const config: StorybookConfig = {
         include: [modulesPath],
         exclude: /examples|stories|spec|codemod|docs/,
         use: [
+          {
+            loader: require.resolve('string-replace-loader'),
+            options: {
+              search: '%VERSION%',
+              replace: version,
+            },
+          },
           // loaders are run in reverse order. symbol-doc-loader needs to be done first
           {
             loader: path.resolve(__dirname, 'symbol-doc-loader'),
