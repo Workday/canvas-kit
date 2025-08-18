@@ -3,7 +3,7 @@ import React from 'react';
 /* eslint-disable @emotion/no-vanilla */
 import {expectTypeOf} from 'expect-type';
 import {Properties} from 'csstype';
-import {SerializedStyles} from '@emotion/serialize';
+import {SerializedStyles, ComponentSelector} from '@emotion/serialize';
 import {css} from '@emotion/css';
 import {jsx, CacheProvider} from '@emotion/react';
 import styled from '@emotion/styled';
@@ -37,7 +37,7 @@ describe('cs', () => {
     it('should accept an object of CSS Properties', () => {
       type Input = Exclude<
         Parameters<typeof createStyles>[0],
-        string | number | boolean | SerializedStyles | undefined
+        string | number | boolean | SerializedStyles | undefined | null | ComponentSelector
       >;
       type PositionProperty = Input['position'];
       const temp: PositionProperty = 'absolute';

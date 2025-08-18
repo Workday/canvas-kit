@@ -1,6 +1,12 @@
 import * as EmotionCSS from '@emotion/css';
 import _createInstance from '@emotion/css/create-instance';
-import {serializeStyles, Keyframes, SerializedStyles, CSSObject} from '@emotion/serialize';
+import {
+  serializeStyles,
+  Keyframes,
+  SerializedStyles,
+  CSSObject,
+  ComponentSelector,
+} from '@emotion/serialize';
 import * as CSS from 'csstype';
 
 import {generateUniqueId} from './uniqueId';
@@ -60,10 +66,12 @@ export interface CSSObjectWithVars
  * allowed here.
  */
 export type StyleProps =
+  | null
   | undefined
   | boolean
   | number
   | string
+  | ComponentSelector
   | Keyframes
   | SerializedStyles
   | CSSObjectWithVars;
@@ -684,10 +692,20 @@ export function createStyles(
         return input;
       }
 
-      // If we were called with a {name, styles} object, it must be optimized. We'll shortcut here
-      if (typeof input === 'object' && input.name) {
-        createStylesCache[`${instance.cache.key}-${input.name}`] = true;
-        return instance.css(input as CastStyleProps);
+      if (input === null) {
+        return '';
+      }
+
+      if (typeof input === 'object') {
+        if ('__emotion_styles' in input) {
+          return instance.css(input as CastStyleProps);
+        }
+
+        // If we were called with a {name, styles} object, it must be optimized. We'll shortcut here
+        if (input.name) {
+          createStylesCache[`${instance.cache.key}-${input.name}`] = true;
+          return instance.css(input as CastStyleProps);
+        }
       }
 
       const convertedStyles = wrapAllProperties(input);
