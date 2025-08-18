@@ -124,7 +124,7 @@ const getSortIcon = (sortOrder?: SortOrder) => {
   }
 };
 
-export const SortableColumnHeader = createComponent('th')({
+const SortableColumnHeader = createComponent('th')({
   displayName: 'SortableColumnHeader',
   Component: (
     {label, sortOrder, onSortAction, children, ...elemProps}: SortableColumnHeaderProps,
@@ -132,7 +132,7 @@ export const SortableColumnHeader = createComponent('th')({
   ) => {
     return (
       <Table.Header ref={ref} scope="col" aria-sort={sortOrder} {...elemProps}>
-        <Tooltip type="describe" title={`Sort ${getNextSortOrder(sortOrder)}`}>
+        <Tooltip type="description" title={`Sort ${getNextSortOrder(sortOrder)}`}>
           <TertiaryButton
             icon={getSortIcon(sortOrder)}
             iconPosition="end"

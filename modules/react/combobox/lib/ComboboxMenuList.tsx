@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {createElemPropsHook, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {useMenuModel, menuListStencil} from '@workday/canvas-kit-react/menu';
 import {ListBox, ListBoxProps} from '@workday/canvas-kit-react/collection';

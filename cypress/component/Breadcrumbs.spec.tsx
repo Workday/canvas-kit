@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {Basic} from '../../modules/react/breadcrumbs/stories/examples/Basic';
 import {OverflowBreadcrumbs} from '../../modules/react/breadcrumbs/stories/examples/Overflow';
 

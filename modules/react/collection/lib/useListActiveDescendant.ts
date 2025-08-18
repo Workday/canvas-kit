@@ -18,7 +18,13 @@ import {useCursorListModel} from './useCursorListModel';
 export const useListActiveDescendant = createElemPropsHook(useCursorListModel)(model => {
   return {
     'aria-activedescendant': model.state.cursorId
-      ? slugify(`${model.state.id}-${model.state.cursorId}`)
+      ? slugify(
+          `${model.state.id}-${
+            typeof model.state.cursorId === 'string'
+              ? model.state.cursorId
+              : model.state.cursorId.join('-')
+          }`
+        )
       : undefined,
   };
 });

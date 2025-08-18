@@ -1,0 +1,131 @@
+import {StorybookInformationHighlight} from './StorybookInformationHighlight';
+
+<Meta title="Guides/Tokens Migration/Installation & Setup" />
+
+# Installation & Setup
+
+If you are migrating from the old raw values tokens (`@workday/canvas-kit-react/tokens`), you should
+now use `@workday/canvas-tokens-web` for CSS variable tokens, and pair it with the
+`@workday/canvas-kit-styling` package for utilities that help you consume these tokens in your
+application.
+
+<StorybookInformationHighlight
+  emphasis="high"
+  title="Canvas Tokens v2"
+  description="Check out the new v2 tokens package to explore the updated token structure and see how the new CSS variable tokens look in practice. Learn more about how tokens are organized, how to use them in your application, and the benefits of migrating to the new system."
+  link="https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs"
+  linkText="View the Docs"
+  isExternal
+/>
+
+<br />
+
+## Install the New Package
+
+```bash
+npm install @workday/canvas-tokens-web
+# or
+yarn add @workday/canvas-tokens-web
+```
+
+## Import CSS Variables
+
+Import the variables at the top level of your application:
+
+**In your root CSS file:**
+
+```css
+@import '@workday/canvas-tokens-web/css/base/_variables.css';
+@import '@workday/canvas-tokens-web/css/system/_variables.css';
+@import '@workday/canvas-tokens-web/css/brand/_variables.css';
+```
+
+**OR**
+
+**In you root App JavaScript/TypeScript file:**
+
+```javascript
+import '@workday/canvas-tokens-web/css/base/_variables.css';
+import '@workday/canvas-tokens-web/css/system/_variables.css';
+import '@workday/canvas-tokens-web/css/brand/_variables.css';
+```
+
+## Updating Your Styling Approach
+
+<br />
+
+### Styles
+
+<StorybookInformationHighlight
+  title="How To Customize Styles"
+  description="There are multiple ways to customize styles for components within Canvas Kit. The approach you choose will depend on your use case."
+  link="/?path=/docs/styling-guides-customizing-styles--docs"
+  linkText="Styling utilities"
+/>
+
+If you're not already using `createStyles`, migrate from style props to the styling functions:
+
+**Old style props approach**
+
+```javascript
+// as style props (old)
+import {space, colors} from '@workday/canvas-kit-react/tokens';
+<Component padding={space.s} color={colors.blackPeppers400}>
+```
+
+**Within Canvas styling functions**
+
+If you are using Canvas styling functions, such as `createStyles` or `createStencil`, it is not
+required to wrap tokens with `var()`. You can still use it to provide value fallback.
+
+```javascript
+import {createStyles, cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+//
+const styles = createStyles({
+  padding: system.space.x4, // not required in most cases
+  color: cssVar(system.color.fg.default, '#000') // used to provide fallback
+})
+
+<Component cs={styles}>
+```
+
+**Within non-Canvas functions or objects**
+
+In all functions or objects that doesn't use Canvas styling functionality it is required to wrap
+variable with `var()`. The `cssVar` function from `@workday/canvas-kit-styling` automatially wraps
+variables and returns a string as `var($token)`.
+
+```javascript
+import {cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+<Component style={{
+  padding: cssVar(system.space.x4),
+  color: cssVar(system.color.fg.default)
+}}>
+```
+
+### Calculations
+
+<StorybookInformationHighlight
+  title="Calculation Functions"
+  description="Calc functions are useful for doing basic math operations with CSS calc() and variables. They will also wrap variables automatically in var()."
+  link="/?path=/docs/styling-utilities--docs#calc-functions"
+  linkText="See all utilities"
+/>
+
+```js
+import {calc} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const styles = {
+  // returns 'calc(var(--cnvs-sys-space-x1) + 0.125rem)'
+  padding: calc.add(system.space.x1, '0.125rem'),
+  // returns 'calc(var(--cnvs-sys-space-x1) - 0.125rem)'
+  margin: calc.subtract(system.space.x1, '0.125rem'),
+  // returns 'calc(var(--cnvs-sys-space-x4) * 3)'
+  maxWidth: calc.multiply(system.space.x4, 3),
+};
+```
