@@ -14,7 +14,7 @@ const textStyles = createStyles({
   paddingInlineEnd: system.space.x2,
 });
 
-export function Inverse() {
+export const Inverse = () => {
   return (
     <div className={containerStyles}>
       <div>
@@ -31,4 +31,4 @@ export function Inverse() {
       </div>
     </div>
   );
-}
+};
