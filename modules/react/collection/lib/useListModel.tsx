@@ -46,6 +46,11 @@ export type ListItemProps = {
  * ```
  */
 export const useListModel = createModelHook({
-  defaultConfig: useSelectionListModel.defaultConfig,
+  defaultConfig: {
+    UNSTABLE_parentModel: undefined as ReturnType<typeof useSelectionListModel> | undefined,
+    ...useSelectionListModel.defaultConfig,
+  },
   requiredConfig: useSelectionListModel.requiredConfig,
-})(useSelectionListModel);
+})(config => {
+  return {UNSTABLE_parentModel: config.UNSTABLE_parentModel, ...useSelectionListModel(config)};
+});

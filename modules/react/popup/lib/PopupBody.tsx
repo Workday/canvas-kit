@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {Card} from '@workday/canvas-kit-react/card';
 import {usePopupModel} from './hooks';

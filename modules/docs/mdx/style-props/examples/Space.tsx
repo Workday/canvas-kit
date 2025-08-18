@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {Box} from '@workday/canvas-kit-react/layout';
 
 const baseStyles = {
@@ -9,7 +8,7 @@ const baseStyles = {
 };
 
 export const Space = () => (
-  <>
+  <div>
     <Box backgroundColor="cinnamon300" margin="xxs" padding="s" textAlign="center" {...baseStyles}>
       <Box border="dotted 2px" borderColor="blackPepper500">
         Small
@@ -25,5 +24,5 @@ export const Space = () => (
         Large
       </Box>
     </Box>
-  </>
+  </div>
 );

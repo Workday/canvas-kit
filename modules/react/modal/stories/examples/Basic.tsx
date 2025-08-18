@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {Modal} from '@workday/canvas-kit-react/modal';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Flex, Box} from '@workday/canvas-kit-react/layout';

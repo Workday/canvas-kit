@@ -1,5 +1,5 @@
 import React from 'react';
-import {useVirtual} from './react-virtual';
+import {useVirtualizer} from '@tanstack/react-virtual';
 
 import {useUniqueId, createModelHook, Generic} from '@workday/canvas-kit-react/common';
 
@@ -159,9 +159,9 @@ export const useBaseListModel = createModelHook({
   );
   const [staticItems, setStaticItems] = React.useState<Item<Generic>[]>([]);
 
-  const UNSTABLE_virtual = useVirtual({
-    size: items.length,
-    parentRef: containerRef,
+  const UNSTABLE_virtual = useVirtualizer({
+    count: items.length,
+    getScrollElement: () => containerRef.current,
     estimateSize: React.useCallback(() => UNSTABLE_defaultItemHeight, [UNSTABLE_defaultItemHeight]),
     horizontal: config.orientation === 'horizontal',
     overscan: 3, // overscan of 3 helps rapid navigation
@@ -227,5 +227,5 @@ export const useBaseListModel = createModelHook({
     },
   };
 
-  return {state, events, getId: config.getId};
+  return {state, events, getId: config.getId, getTextValue: config.getTextValue};
 });
