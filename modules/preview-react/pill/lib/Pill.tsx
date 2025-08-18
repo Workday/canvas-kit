@@ -98,7 +98,7 @@ export const pillStencil = createStencil({
       [buttonStencil.vars.background]: system.color.bg.alt.default,
       [buttonStencil.vars.border]: system.color.border.input.disabled,
       [buttonStencil.vars.label]: system.color.fg.disabled,
-      [buttonStencil.vars.opacity]: system.opacity.disabled,
+      // [buttonStencil.vars.opacity]: system.opacity.disabled,
       [systemIconStencil.vars.color]: 'currentColor',
       [pillCountStencil.vars.backgroundColor]: system.color.bg.alt.strong,
       [pillCountStencil.vars.borderColor]: 'transparent',
