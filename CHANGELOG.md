@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.6.24](https://github.com/Workday/canvas-kit/releases/tag/v12.6.24) (2025-08-19)
+
+### Styling
+
+- fix: Fix nested styles containing CSS variables ([#3448](https://github.com/Workday/canvas-kit/pull/3448)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v12.6.23](https://github.com/Workday/canvas-kit/releases/tag/v12.6.23) (2025-08-18)
 
 ### Components
