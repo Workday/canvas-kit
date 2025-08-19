@@ -1,7 +1,13 @@
 import * as EmotionCSS from '@emotion/css';
 import _createInstance from '@emotion/css/create-instance';
-import {serializeStyles, Keyframes, SerializedStyles, CSSObject} from '@emotion/serialize';
-import {Properties} from 'csstype';
+import {
+  serializeStyles,
+  Keyframes,
+  SerializedStyles,
+  CSSObject,
+  ComponentSelector,
+} from '@emotion/serialize';
+import * as CSS from 'csstype';
 
 import {generateUniqueId} from './uniqueId';
 
@@ -32,21 +38,40 @@ let _instance: ReturnType<typeof _createInstance> = getGlobalInstance()!;
 
 export const createStylesCache: Record<string, boolean> = {};
 
-// CSSType doesn't support CSS custom properties
-// Extending CSSObject types to support them
-type CSSObjectWithVars<T extends CSSObject = CSSObject> = {
-  [P in keyof T]?: T[P] | (string & {});
+// Emotion's CSSObject doesn't support CSS custom properties. We're overriding and replacing with
+// `StyleProps` to support in `createStyles` and `createStencil`
+export type CSSProperties = CSS.PropertiesFallback<number | string>;
+export type CSSPropertiesWithMultiValues = {
+  [K in keyof CSSProperties]:
+    | (CSSProperties[K] | string)
+    | Array<Extract<CSSProperties[K] | (string & {}), string>>;
 };
+
+export type CSSPseudos = {[K in CSS.Pseudos]?: CSSObjectWithVars};
+
+export interface CSSOthersObject {
+  [propertiesName: string]: CSSInterpolation;
+}
+export interface ArrayStyleProps extends Array<CSSInterpolation> {}
+
+export type CSSInterpolation = StyleProps | ArrayStyleProps;
+
+export interface CSSObjectWithVars
+  extends CSSPropertiesWithMultiValues,
+    CSSPseudos,
+    CSSOthersObject {}
 
 /**
  * Style properties in a JavaScript camelCase. Everything Emotion allows is also
  * allowed here.
  */
 export type StyleProps =
+  | null
   | undefined
   | boolean
   | number
   | string
+  | ComponentSelector
   | Keyframes
   | SerializedStyles
   | CSSObjectWithVars;
@@ -164,10 +189,13 @@ export type CsVars<T extends string, ID extends string | never> = CsVarsMap<T, I
  * during the parsing phase. This is helpful for cases when CSS variables are expected, but not set
  * in the environment.
  */
-export function cssVar(input: string, fallback?: string) {
+export function cssVar<I extends string, F extends string | undefined = undefined>(
+  input: I,
+  fallback?: F
+): `var(${I}${F extends undefined ? `` : F extends `--${string}` ? `, var(${F})` : `, ${F}`})` {
   return fallback
     ? `var(${input}, ${fallback.startsWith('--') ? `var(${fallback})` : fallback})`
-    : `var(${input})`;
+    : (`var(${input})` as any); // cast because TS cannot infer type properly here. We'll cover in type and unit tests
 }
 
 /**
@@ -246,7 +274,7 @@ type OptionalVars<T> = {
  * Vars passed to style config functions. The values will always be strings.
  */
 type RequiredVars<T> = {
-  [P in keyof T]: T[P] extends string ? string : RequiredVars<T[P]>; // coerce CSS Variables to a string to allow any overrides in the function
+  [P in keyof T]: T[P] extends string ? `--${string}` : RequiredVars<T[P]>; // coerce CSS Variables to a string to allow any overrides in the function
 };
 
 type ToString<T> = string & T;
@@ -271,8 +299,8 @@ export type DefaultedVarsMapToCSSVarNames<
   ID extends string | never
 > = [ID] extends [never]
   ? V extends Record<string, string>
-    ? {[K in keyof V]: V[K]}
-    : {[K in keyof V]: {[K2 in keyof V[K]]: V[K][K2]}}
+    ? {[K in keyof V]: `--${string}`}
+    : {[K in keyof V]: {[K2 in keyof V[K]]: `--${string}`}}
   : // map type. If the ID is known from the style optimizer, use static keys using string template literals instead of `string`
     {
       [K in keyof V]: V[K] extends Record<string, string>
@@ -568,7 +596,7 @@ export function csToProps(input: CSToPropsInput): CsToPropsReturn {
     // should take care of extracting static styles out of a render function and this function
     // should not be run.
     let hasStaticStyles = false;
-    const staticStyles: CSSObject = {};
+    const staticStyles: CSSObjectWithVars = {};
     const cssVars: Record<string, string> = {};
     for (const key in input) {
       if (key.startsWith('--')) {
@@ -580,7 +608,7 @@ export function csToProps(input: CSToPropsInput): CsToPropsReturn {
     }
 
     if (hasStaticStyles) {
-      const className = instance.css(staticStyles);
+      const className = instance.css(staticStyles as CastStyleProps);
       return {style: cssVars, className};
     }
     return {style: input};
@@ -664,10 +692,20 @@ export function createStyles(
         return input;
       }
 
-      // If we were called with a {name, styles} object, it must be optimized. We'll shortcut here
-      if (typeof input === 'object' && input.name) {
-        createStylesCache[`${instance.cache.key}-${input.name}`] = true;
-        return instance.css(input as CastStyleProps);
+      if (input === null) {
+        return '';
+      }
+
+      if (typeof input === 'object') {
+        if ('__emotion_styles' in input) {
+          return instance.css(input as CastStyleProps);
+        }
+
+        // If we were called with a {name, styles} object, it must be optimized. We'll shortcut here
+        if (input.name) {
+          createStylesCache[`${instance.cache.key}-${input.name}`] = true;
+          return instance.css(input as CastStyleProps);
+        }
       }
 
       const convertedStyles = wrapAllProperties(input);
@@ -750,7 +788,7 @@ export function handleCsProp<
   T extends CSProps & {
     className?: string | undefined;
 
-    style?: Properties<string | number> | undefined;
+    style?: CSS.Properties<string | number> | undefined;
   }
 >(
   /**

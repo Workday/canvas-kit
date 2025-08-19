@@ -1,4 +1,4 @@
-import {Theme, CSSObject} from '@emotion/react';
+import {CSSObject} from '@emotion/react';
 import {cssVar} from '@workday/canvas-kit-styling';
 import {base, brand} from '@workday/canvas-tokens-web';
 
@@ -81,7 +81,7 @@ function calculateFocusRing({
  *
  * @returns {CSSObject} the css object for the focus ring style
  */
-export function focusRing(options: FocusRingOptions = {}, theme?: Theme): CSSObject {
+export function focusRing(options: FocusRingOptions = {}, theme?: any): CSSObject {
   const {
     width = 2,
     separation = 0,
