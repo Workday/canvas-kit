@@ -18,7 +18,8 @@
     "*/lib/*",
     "*/index.ts",
     "dist/",
-    "index.ts"
+    "index.ts",
+    "version.ts"
   ],
   "scripts": {
     "watch": "yarn build:es6 -w",
@@ -28,6 +29,7 @@
     "build:es6": "tspc -p tsconfig.es6.json",
     "build:rebuild": "npm-run-all clean build",
     "build": "npm-run-all build:cjs build:es6",
+    "postbuild": "node ../../utils/replace-version.js",
     "prepack": "node ../../utils/publish.js pre preview-react",
     "postpack": "node ../../utils/publish.js post preview-react",
     "depcheck": "node ../../utils/check-dependencies-exist.js",
