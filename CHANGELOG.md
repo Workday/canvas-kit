@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.23](https://github.com/Workday/canvas-kit/releases/tag/v13.2.23) (2025-08-19)
+
+### Components
+
+- fix: Add version string to packages ([#3457](https://github.com/Workday/canvas-kit/pull/3457)) ([@NicholasBoll](https://github.com/NicholasBoll), Manuel Carrera)
+
+
 ## [v12.6.23](https://github.com/Workday/canvas-kit/releases/tag/v12.6.23) (2025-08-18)
 
 ### Components
