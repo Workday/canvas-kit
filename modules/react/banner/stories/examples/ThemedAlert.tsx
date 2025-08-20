@@ -8,7 +8,7 @@ export const ThemedAlert = () => {
   const theme: PartialEmotionCanvasTheme = {
     canvas: {
       palette: {
-        alert: {
+        caution: {
           main: colors.kiwi200,
           dark: colors.kiwi300,
         },

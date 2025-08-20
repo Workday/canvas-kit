@@ -54,8 +54,8 @@ export const Disabled: Story = {
   render: DisabledExample,
 };
 
-export const Alert: Story = {
-  render: AlertExample,
+export const Caution: Story = {
+  render: CautionExample,
 };
 
 export const Error: Story = {
@@ -86,8 +86,8 @@ export const DisabledLeft: Story = {
   render: DisabledExampleLeft,
 };
 
-export const AlertLeft: Story = {
-  render: AlertExampleLeft,
+export const CautionLeft: Story = {
+  render: CautionExampleLeft,
 };
 
 export const ErrorLeft: Story = {

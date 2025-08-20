@@ -2,7 +2,7 @@ import React from 'react';
 import {Checkbox} from '@workday/canvas-kit-react/checkbox';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 
-export const Alert = () => {
+export const Caution = () => {
   const [checked, setChecked] = React.useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -10,7 +10,7 @@ export const Alert = () => {
   };
 
   return (
-    <FormField error="alert">
+    <FormField error="caution">
       <FormField.Label>Confirm</FormField.Label>
       <FormField.Field>
         <FormField.Input

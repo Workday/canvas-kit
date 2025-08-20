@@ -2,7 +2,7 @@ import React from 'react';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 
-export const Alert = () => {
+export const Caution = () => {
   const [value, setValue] = React.useState('invalid@email');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -10,7 +10,7 @@ export const Alert = () => {
   };
 
   return (
-    <FormField error="alert">
+    <FormField error="caution">
       <FormField.Label>Email</FormField.Label>
       <FormField.Field>
         <FormField.Input as={TextInput} onChange={handleChange} value={value} />

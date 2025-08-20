@@ -1,5 +1,5 @@
 import {Basic} from '../../modules/react/form-field/stories/examples/Basic';
-import {Alert} from '../../modules/react/form-field/stories/examples/Alert';
+import {Caution} from '../../modules/react/form-field/stories/examples/Caution';
 import {Error} from '../../modules/react/form-field/stories/examples/Error';
 import {Required} from '../../modules/react/form-field/stories/examples/Required';
 

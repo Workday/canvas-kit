@@ -6,7 +6,7 @@ export const customColorTheme: PartialCanvasTheme = {
       main: 'purple',
       contrast: 'turquoise',
     },
-    alert: {
+    caution: {
       main: 'coral',
     },
     error: {

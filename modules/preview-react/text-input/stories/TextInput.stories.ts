@@ -18,7 +18,7 @@ import {HiddenLabel as HiddenLabelExample} from './examples/HiddenLabel';
 import {ThemedAlert as ThemedAlertExample} from './examples/ThemedAlert';
 import {ThemedError as ThemedErrorExample} from './examples/ThemedError';
 import {Error as ErrorExample} from './examples/Error';
-import {Alert as AlertExample} from './examples/Alert';
+import {Caution as CautionExample} from './examples/Caution';
 
 export default {
   title: 'Preview/Inputs/Text Input (deprecated)',
@@ -78,6 +78,6 @@ export const ThemedError: Story = {
 export const Error: Story = {
   render: ErrorExample,
 };
-export const Alert: Story = {
-  render: AlertExample,
+export const Caution: Story = {
+  render: CautionExample,
 };

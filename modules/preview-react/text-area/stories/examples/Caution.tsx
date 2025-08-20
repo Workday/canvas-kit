@@ -4,7 +4,7 @@ import {useThemedRing} from '@workday/canvas-kit-react/common';
 import {space, colors} from '@workday/canvas-kit-react/tokens';
 import {Text} from '@workday/canvas-kit-react/text';
 
-export const Alert = () => {
+export const Caution = () => {
   const [value, setValue] = React.useState('Hello');
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
