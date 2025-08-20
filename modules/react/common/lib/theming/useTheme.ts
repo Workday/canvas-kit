@@ -28,7 +28,7 @@ const generatePalette = (
     return {
       lightest:
         colorPalette.lightest ||
-        (colorPalette.main && shiftColor(colorPalette.main, 200)) ||
+        (colorPalette.main && shiftColor(colorPalette.main, 400)) ||
         defaultPalette.lightest,
       lighter:
         colorPalette.lighter ||
