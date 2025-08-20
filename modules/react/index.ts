@@ -37,3 +37,4 @@ export * from './text-input';
 export * from './toast';
 export * from './tokens';
 export * from './tooltip';
+export {version} from './version';

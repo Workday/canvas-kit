@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.23](https://github.com/Workday/canvas-kit/releases/tag/v13.2.23) (2025-08-19)
+
+### Components
+
+- fix: Add version string to packages ([#3457](https://github.com/Workday/canvas-kit/pull/3457)) ([@NicholasBoll](https://github.com/NicholasBoll), Manuel Carrera)
+
+
+## [v12.6.23](https://github.com/Workday/canvas-kit/releases/tag/v12.6.23) (2025-08-18)
+
+### Components
+
+- fix: Add version string to packages ([#3457](https://github.com/Workday/canvas-kit/pull/3457)) ([@NicholasBoll](https://github.com/NicholasBoll), Manuel Carrera)
+## [v13.2.22](https://github.com/Workday/canvas-kit/releases/tag/v13.2.22) (2025-08-18)
+
+### Documentation
+
+- fix: Update docs around token imports ([#3449](https://github.com/Workday/canvas-kit/pull/3449)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v12.6.22](https://github.com/Workday/canvas-kit/releases/tag/v12.6.22) (2025-08-18)
+
+### Documentation
+
+- fix: Update docs around token imports ([#3449](https://github.com/Workday/canvas-kit/pull/3449)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+## [v13.2.21](https://github.com/Workday/canvas-kit/releases/tag/v13.2.21) (2025-08-18)
+
+### Components
+
+- fix(multi-select): Add MultiSelect exports to index file ([#3454](https://github.com/Workday/canvas-kit/pull/3454)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v13.2.20](https://github.com/Workday/canvas-kit/releases/tag/v13.2.20) (2025-08-15)
+
+### Components
+
+- fix: Reset context when registering items in virtual list and static API is used ([#3450](https://github.com/Workday/canvas-kit/pull/3450)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v13.2.19](https://github.com/Workday/canvas-kit/releases/tag/v13.2.19) (2025-08-08)
 
 ### Styling

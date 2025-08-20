@@ -23,7 +23,7 @@ const secondaryButtonStencil = createStencil({
     // Base Styles
     [buttonStencil.vars.background]: system.color.bg.alt.default,
     [buttonStencil.vars.borderRadius]: system.shape.round,
-    [buttonStencil.vars.label]: system.color.fg.stronger,
+    [buttonStencil.vars.label]: system.color.fg.strong,
     [systemIconStencil.vars.color]: 'currentColor',
     // Focus Styles
     '&:focus-visible, &.focus': {
