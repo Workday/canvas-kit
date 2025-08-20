@@ -3,7 +3,7 @@ import {Popper, Placement} from '@workday/canvas-kit-react/popup';
 import {TooltipContainer, Tooltip, OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 import {resetIcon} from '@workday/canvas-system-icons-web';
 import {Card} from '@workday/canvas-kit-react/card';
-import {SecondaryButton} from '@workday/canvas-kit-react/button';
+import {SecondaryButton, buttonStencil} from '@workday/canvas-kit-react/button';
 import {StaticStates} from '@workday/canvas-kit-react/testing';
 
 export default {
@@ -140,7 +140,10 @@ export const PlacementsFocus = {
           }}
         >
           <SecondaryButton
-            style={{
+            className="focus"
+            ref={ref}
+            cs={{
+              [buttonStencil.vars.background]: 'transparent',
               width: 300,
               height: 300,
               display: 'flex',
@@ -148,8 +151,6 @@ export const PlacementsFocus = {
               justifyContent: 'center',
               borderRadius: 4,
             }}
-            className="focus"
-            ref={ref}
           >
             <span style={{whiteSpace: 'normal', textOverflow: 'initial', overflow: 'visible'}}>
               Target: We set font to sans serif so we don't have to wait for roboto to load

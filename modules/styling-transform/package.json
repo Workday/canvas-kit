@@ -39,7 +39,10 @@
   "dependencies": {
     "@emotion/serialize": "^1.0.2",
     "@workday/canvas-kit-styling": "^13.2.23",
-    "stylis": "4.0.13"
+    "stylis": "4.0.13",
+    "@workday/canvas-tokens-web": "3.0.0-alpha.12",
+    "ts-node": "^10.9.1",
+    "typescript": "5.0"
   },
   "devDependencies": {
     "@types/common-tags": "^1.8.0",

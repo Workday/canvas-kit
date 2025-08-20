@@ -358,13 +358,13 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Branding
 
 - feat: Promote new Dub logos and add codemod to handle change ([#3201](https://github.com/Workday/canvas-kit/pull/3201)) ([@josh-bagwell](https://github.com/josh-bagwell))
-  We've removed the old Dub Logos in Main and promoted the new logos that were previously in our Preview package to Main as part of the brand refresh. We've also added a codemod to update the import statements as well as the name of the logos used to the new names. 
-  
+  We've removed the old Dub Logos in Main and promoted the new logos that were previously in our Preview package to Main as part of the brand refresh. We've also added a codemod to update the import statements as well as the name of the logos used to the new names.
+
   | Old Logo Name | New Logo Name |
-  | --------------- | ----------------- | 
-  | dubLogoBlue | dubLogoPrimary | 
-  | dubLogoWhite | dubLogoReversed | 
-  | wdayLogoBlue | wdayLogoPrimary | 
+  | --------------- | ----------------- |
+  | dubLogoBlue | dubLogoPrimary |
+  | dubLogoWhite | dubLogoReversed |
+  | wdayLogoBlue | wdayLogoPrimary |
   | wdayLogoWhite | wdayLogoReversed |
 
 ### Components
@@ -382,7 +382,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - Rename skeletonShape.tsx to SkeletonShape.tsx ([@](https://github.com/))
 - feat: Refactor Pill component to use new styling utilities and tokens ([#3104](https://github.com/Workday/canvas-kit/pull/3104)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@josh-bagwell](https://github.com/josh-bagwell), [@NicholasBoll](https://github.com/NicholasBoll))
   We've updated ExternalHyperlink to use our new styling utilities and tokens.
-  
+
   - The border color on hover has been updated from `licorice400` to `licorice500` to match our design specs.
   - We've removed extra elements and leverage [flex box}(https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Flexbox) to ensure only the label receives overflow styles. When `maxWidth` is set, it is set on the parent `<Pill/>` element and the child elements will be styled accordingly. Before v13, `maxWidth` wasn't calculating the width of all its elements and wasn't a true pixel value.
 - feat: Refactor SidePanel to use new styling utilities and tokens ([#3123](https://github.com/Workday/canvas-kit/pull/3123)) ([@thunguyen19](https://github.com/thunguyen19), [@mannycarrera4](https://github.com/mannycarrera4))
@@ -401,8 +401,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - fix: Remove fragments if React isn't imported ([#3261](https://github.com/Workday/canvas-kit/pull/3261)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
 - chore: Refactor Select Input to a single Stencil ([#3240](https://github.com/Workday/canvas-kit/pull/3240)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@NicholasBoll](https://github.com/NicholasBoll))
 - feat: Use css transitions for sidepanel instead of animation ([#3258](https://github.com/Workday/canvas-kit/pull/3258)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@RayRedGoose](https://github.com/RayRedGoose))
-  When we supported IE 11 we needed to use animation to support animation events. Since we dropped support for IE11, we can now use css transitions to animate the width of the SidePanel when it's expanding or collapsing.  
-  
+  When we supported IE 11 we needed to use animation to support animation events. Since we dropped support for IE11, we can now use css transitions to animate the width of the SidePanel when it's expanding or collapsing.
+
   As part of this change, we also removed the `onAnimationStart` prop. Since moving to transitions, React doesn't support `onTransitionStart`, therefore the prop is no longer needed.
 - feat(menu): Add support for hierarchy in the collection system ([#3265](https://github.com/Workday/canvas-kit/pull/3265)) ([@NicholasBoll](https://github.com/NicholasBoll))
 
@@ -419,8 +419,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Tokens
 
 - chore: Expandable component style refactor ([#3128](https://github.com/Workday/canvas-kit/pull/3128)) ([@williamjstanton](https://github.com/williamjstanton), [@josh-bagwell](https://github.com/josh-bagwell), manuel.carrera)
-  - The `ExpandableTarget` component is now rendering the `BaseButton` component, and may have some small impact on the visual styling of the keyboard focus ring. 
-  - The `ExpandableIcon` stencil is extending the `SystemIcon` stencil, and may have had an impact on the chevron icon color. 
+  - The `ExpandableTarget` component is now rendering the `BaseButton` component, and may have some small impact on the visual styling of the keyboard focus ring.
+  - The `ExpandableIcon` stencil is extending the `SystemIcon` stencil, and may have had an impact on the chevron icon color.
   - Fixed an accessibility bug in the `Avatar` component where an `aria-label` string was rendered on a generic HTML element that did not have an explicit or implicit `role`
 
 
@@ -566,7 +566,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
   Popups using `useDisableBodyScroll`, including `Modal`s now use a CSS class conditionally applied to the `document.body` element instead of setting the `overflow: hidden;` style directly. `!important` is used to win over any other style applied to the `document.body`.
 - fix: Update InformationHighlight.Body to use div ([#3222](https://github.com/Workday/canvas-kit/pull/3222)) ([@alanbsmith](https://github.com/alanbsmith))
   There are no visual changes because of this update. However, if you were relying on the `p` tag as an identifier for testing or other purposes, you'll need to adjust your implementation, as the underlying element is now a `div`. Additionally, if you'd like to keep a `p` tag around the `Body` text, you'll need to add it manually. Wrapping text in a `p` is not an accessibility requirement, but it can be helpful when you have multiple, separate content blocks.
-  
+
   ```jsx
   // before
   <InformationHighlight.Body>
@@ -577,7 +577,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
       <li>Point Three</li>
     </ul>
   </InformationHighlight.Body>
-  
+
   // after
   <InformationHighlight.Body>
     <p style={{ margin: 0 }}>Body text goes here.</p>
@@ -842,7 +842,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - fix: Remove action tokens from CanvasProvider to allow cascading ([#3125](https://github.com/Workday/canvas-kit/pull/3125)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
   The `CanvasProvider` created a cascading barrier for our brand tokens. In the case where `brand.action.**` tokens are defined at the root level, say `:root` in a a CSS file, we want those tokens to cascade through the `CanvasProvider` down to our `PrimaryButton`'s.  To allow this, we've removed them from the `CanvasProvider` and `variables.css`.
   - `@workday/canvas-tokens-web@2.1.1` **removed** `--cnvs-brand-action-**` tokens from our `variables.css` to ensure proper cascading of this token to theme our `PrimaryButton`'s.
-  - The `CanvasProvider` has **removed** defaulting `brand.action.**` for theming and is longer a valid theme property on `CanvasTheme` type. 
+  - The `CanvasProvider` has **removed** defaulting `brand.action.**` for theming and is longer a valid theme property on `CanvasTheme` type.
   - In order to ensure proper cascading of the `--cnvs-brand-action-**` token, you **must** upgrade to the latest version of Canvas Kit `v12` **and** whomever is bootstrapping the `variables.css` **must** upgrade  `@workday/canvas-tokens-web` to `@2.1.1` to ensure correct theming.
 
 
@@ -908,8 +908,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Components
 
 - feat: Update CKR Dub and Logo References ([#3089](https://github.com/Workday/canvas-kit/pull/3089)) ([@josh-bagwell](https://github.com/josh-bagwell))
-  Workday has new logos with updated colors. We've added these to the `preview` package for a smooth transition for consumers. 
-  
+  Workday has new logos with updated colors. We've added these to the `preview` package for a smooth transition for consumers.
+
   If you would like to consume these, here is the import:
   ```tsx
   import {dubLogoPrimary, dubLogoReversed} from '@workday/canvas-kit-preview-react/common'
@@ -921,8 +921,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Components
 
 - feat: Update CKR Dub and Logo References ([#3089](https://github.com/Workday/canvas-kit/pull/3089)) ([@josh-bagwell](https://github.com/josh-bagwell))
-  Workday has new logos with updated colors. We've added these to the `preview` package for a smooth transition for consumers. 
-  
+  Workday has new logos with updated colors. We've added these to the `preview` package for a smooth transition for consumers.
+
   If you would like to consume these, here is the import:
   ```tsx
   import {dubLogoPrimary, dubLogoReversed} from '@workday/canvas-kit-preview-react/common'
@@ -1201,7 +1201,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
   [compound component](https://workday.github.io/canvas-kit/?path=/docs/guides-compound-components--page).
   Due to the different APIs of the component, this change is **not codemodable**. The following shows
   an example of how to **update** your code to match the new compound component API.
-  
+
   ```tsx
   // v11 FormField in Main
   <FormField
@@ -1215,7 +1215,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
   >
     <TextInput onChange={handleChange} value={value} />
   </FormField>
-  
+
   // v12 Newly promoted FormField from Preview to Main
   <FormField
     error="error"
@@ -1229,9 +1229,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
   	</FormField.Field>
   </FormField>
   ```
-  
+
   **Noticeable changes:**
-  
+
   - `error` prop takes in the following values: `"error" | "alert"`.
   - `labelPosition` becomes `orientation` with the following values:
     `"horizontal" | "horizontalStart" | "horizontalEnd" | "vertical"`.
@@ -1254,9 +1254,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - chore: Removed Select in Preview ([#2796](https://github.com/Workday/canvas-kit/pull/2796)) ([@thunguyen19](https://github.com/thunguyen19), manuel.carrera, [@mannycarrera4](https://github.com/mannycarrera4))
   We've removed the `Select` component that was in `@workday/canvas-kit-preview-react`. Please use the `Select` in Main (https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) which is a compound component and offers more flexibility.
-  
-  Thank You Picture 
-  
+
+  Thank You Picture
+
   <img width="497" alt="image" src="https://github.com/Workday/canvas-kit/assets/32447341/3372b8dd-c963-4f7e-84bb-791f0889df57">
 - chore: Modal, Dialog, Popup and Toast Styles Refactor ([#2795](https://github.com/Workday/canvas-kit/pull/2795)) ([@josh-bagwell](https://github.com/josh-bagwell))
   Updated `Modal, Dialog, Popup and Toast` to use new `system` tokens and style utilities.
@@ -1268,40 +1268,40 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
   The Avatar component has been refactored to use our new tokens and styling utilities. The changes below highlight the breaking changes to the API.
 - feat: Add horizontal start and end label position for form field ([#2881](https://github.com/Workday/canvas-kit/pull/2881)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@josh-bagwell](https://github.com/josh-bagwell))
   The orientation prop on the FormField component will be updated to accept the following values: `vertical`, `horizontalStart`, and `horizontalEnd`. `horizontal` will still be accepted as a value in v12, but it will be deprecated and slated for removal in a future major release. These changes are intended to provide more flexibility with label alignments on FormField elements.
-  
+
   Instances where the orientation prop of the FormField component is set to `horizontal` will automatically default to `horizontalStart` via a codemod. A console warning message will also appear with a message to change the prop value to either horizontalStart or horizontalEnd.
 - chore: Updated unique id generation for classnames ([#2913](https://github.com/Workday/canvas-kit/pull/2913)) ([@josh-bagwell](https://github.com/josh-bagwell), [@mannycarrera4](https://github.com/mannycarrera4))
 - chore: Add FormFieldGroup component and density example ([#2865](https://github.com/Workday/canvas-kit/pull/2865)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@josh-bagwell](https://github.com/josh-bagwell), [@RayRedGoose](https://github.com/RayRedGoose))
   - We've added a new `FormFieldGroup` component to use when grouping inputs like checkboxes and radio inputs that need to be associated to one another. Its API matches the `FormField` API where you have `error` prop as well as `id` `isRequired` and `orienation`.
-  
+
   - `orientation` has been added back to `useFormFieldModel` to better support sub component styling.
-  
+
   - Styles have been cleaned up to use `gap` for proper spacing between labels, inputs and hint text.
-  
+
   - Added a new `FormField.Field` component to ensure proper alignment between label and inputs regardless of orientation and hint text. Ensure to wrap your inputs and hint text in this component.
 - chore: Revert Select Preview Removal ([#2933](https://github.com/Workday/canvas-kit/pull/2933)) ([@josh-bagwell](https://github.com/josh-bagwell))
 - feat(text-input): Support CSS Variables in InputGroup ([#2935](https://github.com/Workday/canvas-kit/pull/2935)) ([@NicholasBoll](https://github.com/NicholasBoll))
 - feat: Promote FormField from Preview to Main ([#2934](https://github.com/Workday/canvas-kit/pull/2934)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@josh-bagwell](https://github.com/josh-bagwell))
   We've promoted FormField from [Preview](#preview) to [Main](#main). The following changes have been
   made to provide more flexibility and better explicit components when using inputs.
-  
+
   - The orientation prop on the `FormField` component will be updated to accept the following values:
     `vertical`, `horizontalStart`, and `horizontalEnd`. `horizontal` will still be accepted as a value
     in v12, but it will be deprecated and slated for removal in a future major release. These changes
     are intended to provide more flexibility with label alignments on `FormField` elements.
-  
+
   > **Note**: The horizontal alignment of start and end are relative to its container, meaning start
   > and end match the flex property of `flex-start` and `flex-end`. This is especially applicable for
   > moving between RTL (right-to-left) and LTR (left-to-right) languages.
-  
+
   > **Note:** Orientation "horizontal" has been deprecated. You will see a console warn message
   > suggesting to update your types and usage to `horizontalStart`, `horizontalEnd` or `vertical`.
-  
+
   - `useFormFieldModel`: `orientation` has been added back into `useFormFieldModel`. While we still
     support compat mode due to
     [style merging issues](https://github.com/Workday/canvas-kit/discussions/2893), having orientation
     on the model allows for proper styling of sub components.
-  
+
   - Styles clean up. `FormField.Hint` and `FormField.Label` where using `margin` for spacing. We've
     updated styles so that the containing element uses `gap` for proper spacing.
 - fix: Add visual testing for inputs after form field promotion ([#2963](https://github.com/Workday/canvas-kit/pull/2963)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
@@ -1327,13 +1327,13 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Infrastructure
 
 - chore: Upgrade Storybook and Webpack ([#2674](https://github.com/Workday/canvas-kit/pull/2674)) ([@RayRedGoose](https://github.com/RayRedGoose), [@NicholasBoll](https://github.com/NicholasBoll), manuel.carrera, [@josh-bagwell](https://github.com/josh-bagwell))
-  - In Storybook, each component now has a "Docs" page. This is dedicated to documentation of the component and has examples as it did before. 
+  - In Storybook, each component now has a "Docs" page. This is dedicated to documentation of the component and has examples as it did before.
   - We now use the Cypress Component runner and not e2e.
-  - Codemod formatting has been updated with a dependency update and docs have been added to reflect the formatting issue. 
-  
+  - Codemod formatting has been updated with a dependency update and docs have been added to reflect the formatting issue.
+
   The following have been upgraded:
   - Storybook 7
-  - Webpack 5 
+  - Webpack 5
   - Typescript 4.9
   - Cypress 13
 - fix: Update comment for canary action ([#2950](https://github.com/Workday/canvas-kit/pull/2950)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
@@ -1472,7 +1472,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - fix: Enable styling compat mode to ensure proper style merging ([#2890](https://github.com/Workday/canvas-kit/pull/2890)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
   We're seeing style merging issues when using createStyles or createStencil. It only happens when every style override of the element uses these utilities and @emotion/react or @emotion/styled is not used on the same element. These utilities rely on module execution order and we're having a few reports where modules are possibly executing out of order. In order to allow everyone to use createStyles and createStencil without worrying about style merge issues, we're going to enable compat mode all the time. We'll look into possible out-of-order execution issues in the future and plan to re-enable full static mode (for better performance) once we know why this is happening and have a proper workaround.
-  
+
   For more information, please read our [discussion](https://github.com/Workday/canvas-kit/discussions/2893)
 
 
@@ -1496,7 +1496,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - fix: Enable styling compat mode to ensure proper style merging ([#2890](https://github.com/Workday/canvas-kit/pull/2890)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
   We're seeing style merging issues when using createStyles or createStencil. It only happens when every style override of the element uses these utilities and @emotion/react or @emotion/styled is not used on the same element. These utilities rely on module execution order and we're having a few reports where modules are possibly executing out of order. In order to allow everyone to use createStyles and createStencil without worrying about style merge issues, we're going to enable compat mode all the time. We'll look into possible out-of-order execution issues in the future and plan to re-enable full static mode (for better performance) once we know why this is happening and have a proper workaround.
-  
+
   For more information, please read our [discussion](https://github.com/Workday/canvas-kit/discussions/2893)
 ## [v11.1.5](https://github.com/Workday/canvas-kit/releases/tag/v11.1.5) (2024-08-23)
 
@@ -1876,7 +1876,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - feat: Add support for stencil extension ([#2612](https://github.com/Workday/canvas-kit/pull/2612)) ([@NicholasBoll](https://github.com/NicholasBoll))
 - chore: Refactor Select and Combobox to use new styling utilities and tokens ([#2570](https://github.com/Workday/canvas-kit/pull/2570)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@josh-bagwell](https://github.com/josh-bagwell), [@RayRedGoose](https://github.com/RayRedGoose))
 - chore: Refactor icon components ([#2615](https://github.com/Workday/canvas-kit/pull/2615)) ([@RayRedGoose](https://github.com/RayRedGoose), [@alanbsmith](https://github.com/alanbsmith), [@NicholasBoll](https://github.com/NicholasBoll), [@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
-  Icon components, `Svg`, `SystemIcon`, `AccentIcon`, `AppletIcon`, `Graphic` now uses Canvas Tokens 
+  Icon components, `Svg`, `SystemIcon`, `AccentIcon`, `AppletIcon`, `Graphic` now uses Canvas Tokens
   and new styling utilities. Components now supports the `cs` prop instead `styles`, but otherwise the API has not changed. It should behave similar as it did in previous versions.
 - chore: Update Text to use system tokens ([#2659](https://github.com/Workday/canvas-kit/pull/2659)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@RayRedGoose](https://github.com/RayRedGoose))
   Update our Text components to use our system tokens.
@@ -2576,20 +2576,20 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - fix: Fix Style prop merging with cs prop ([#2379](https://github.com/Workday/canvas-kit/pull/2379)) ([@NicholasBoll](https://github.com/NicholasBoll))
   This fix adds Emotion's `CacheProvider` to the `CanvasProvider`. Any application that uses the `CacheProvider` will not see this fix within the render tree of the custom `CacheProvider`.  For this fix to be applied everywhere, consider removing any use of Emotion's `CacheProvider`.
-  
+
   Some instances of use of `CacheProvider` were to set the `compat` mode of the cache. You can now do the following instead and not use `CacheProvider` at all:
-  
+
   ```ts
   cache.compat = true
   ```
-  
+
   Also note this fix will break automatic server side rendering because style merging is not creating server-side only `style` tags. Since `createStyles` isn't compatible with automatic server side rendering, the merge style fix isn't compatible either. Use Emotion's solution for server-side `@emotion/css`: https://emotion.sh/docs/ssr#when-using-emotioncss
-  
+
   The only modification is to import `cache` from `@emotion/css` instead of creating a new cache. Their documentation doesn't work:
-  
+
   ```patch
   - import createCache from '@emotion/cache'
-  - 
+  -
   - const key = 'custom'
   - const cache = createCache({ key })
   + import {cache} from '@emotion/css';
@@ -2634,30 +2634,30 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### BREAKING CHANGES
 
-- [#2229](https://github.com/Workday/canvas-kit/pull/2229) There is the possibility of breaking changes if users are changing the default browser font size from `16px` to another value. 
-  
+- [#2229](https://github.com/Workday/canvas-kit/pull/2229) There is the possibility of breaking changes if users are changing the default browser font size from `16px` to another value.
+
   You can convert a `px` value to a `rem` value by dividing your `px` value by `16`(if your default browser font size hasn't been updated, the value will be `16`).
-  
+
   For example:
-  
+
   | Equation    | rem Value |
   | ----------- | --------- |
   | `16px/16px` | `1rem`    |
   | `32px/16px` | `2rem`    |
   | `8px/16px`  | `0.5rem`  |
 - [#2247](https://github.com/Workday/canvas-kit/pull/2247) To move from the Menu component in Preview to the Menu compound component in Main, please read [this discussion](https://github.com/Workday/canvas-kit/discussions/2063).
-  
+
   Also, see [this](https://codesandbox.io/s/deprecatedmenu-and-menu-migration-gwi1ov) codesandbox that shows the differences between DeprecatedMenu and the Menu compound component.
 - [#2318](https://github.com/Workday/canvas-kit/pull/2318) We have removed the useBanner hook, the only function of which was to add `aria-labelledby` and `aria-describedby` references to the text inside of the Banner. This was not required for accessibility, and browsers can compute the `name` of the Banner from the text given inside.
 - [#2285](https://github.com/Workday/canvas-kit/pull/2285) - We refactored how we styled Buttons to use our `createStyles` utility function. We don't anticipate
   this as a breaking change but, there may be slight changes to visual test.
   - Icons will no longer be "filled" on toggle. This decision was made to not have the existing icon
   look different in the toggled state from default state.
-  - `PrimaryButton`: On the `inverse` variant, the focus ring is now consistent with the default variant of `PrimaryButton`. This will visually change the `inverse` variant to have a larger appearance when focused. 
+  - `PrimaryButton`: On the `inverse` variant, the focus ring is now consistent with the default variant of `PrimaryButton`. This will visually change the `inverse` variant to have a larger appearance when focused.
   - `colors` will no longer support the `focusRing` option:
     ```tsx
     import {focusRing} from '@workday/canvas-kit-react/common';
-  
+
     // before
     <PrimaryButton
       colors={{
@@ -2668,7 +2668,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
         }
       }}
     />
-  
+
     // after
     <PrimaryButton
       colors={{
@@ -2682,7 +2682,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
       }}
     />;
     ```
-- [#2309](https://github.com/Workday/canvas-kit/pull/2309) - We've converted `Select` in Main into a compound component. This component matches our pattern of providing access to lower-level elements and allows for more flexibility. 
+- [#2309](https://github.com/Workday/canvas-kit/pull/2309) - We've converted `Select` in Main into a compound component. This component matches our pattern of providing access to lower-level elements and allows for more flexibility.
   - The spacing between menu and its target element will increase from 0px to 4px
   - We've also [deprecated](https://canvas.workday.com/getting-started/canvas-glossary#deprecation) the `Select` in Preview. You may still consume this component but suggest migrating over to the one in Main.
 - [#2368](https://github.com/Workday/canvas-kit/pull/2368) The CSS kit is being removed in v10 and will come back later as derived from our React packages.
@@ -3226,12 +3226,12 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - feat: Add more layout examples ([#2178](https://github.com/Workday/canvas-kit/pull/2178)) ([@RayRedGoose](https://github.com/RayRedGoose))
 - feat(text-input): Add InputGroup component ([#2182](https://github.com/Workday/canvas-kit/pull/2182)) ([@NicholasBoll](https://github.com/NicholasBoll))
   `InputGroup` will replace `InputIconContainer`. `InputIconContainer` does not handle bidirectionality or icons at the start of an input. `InputIconContainer` will be deprecated and later removed in future versions.
-  
+
   Before:
   ```tsx
   <InputIconContainer icon={<SystemIcon icon={exclamationCircleIcon} />} />
   ```
-  
+
   After
   ```tsx
   <InputGroup>
@@ -3407,10 +3407,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - fix: Extract the correct ref with a styled component ([#2122](https://github.com/Workday/canvas-kit/pull/2122)) ([@NicholasBoll](https://github.com/NicholasBoll))
   The following is now allowed:
-  
+
   ```tsx
   const StyledComponent = styled('button')({})
-  
+
   const MyComponnent = createComponent(StyledComponent)({
     Component(elemProps, ref, Element) {
       return <Box as={Element} ref={ref} {...elemProps} />
@@ -3731,11 +3731,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - fix: Fix Expandable exports and types ([#1953](https://github.com/Workday/canvas-kit/pull/1953)) ([@alanbsmith](https://github.com/alanbsmith))
   `useExpandableModel` wasn't properly exported with the other hooks. It's been moved into the `/hooks` directory and exported from there. If you were importing this hook from `dist`, you'll  need to update the import.
-  
+
   ```tsx
   // before
   import { useExpandableModel } from "@workday/canvas-kit-labs-react/dist/es6/expandable/lib/useExpandableModel";
-  
+
   // after
   import { useExpandableModel } from "@workday/canvas-kit-labs-react/expandable";
   ```
@@ -3747,11 +3747,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - fix: Fix Expandable exports and types ([#1953](https://github.com/Workday/canvas-kit/pull/1953)) ([@alanbsmith](https://github.com/alanbsmith))
   `useExpandableModel` wasn't properly exported with the other hooks. It's been moved into the `/hooks` directory and exported from there. If you were importing this hook from `dist`, you'll  need to update the import.
-  
+
   ```tsx
   // before
   import { useExpandableModel } from "@workday/canvas-kit-labs-react/dist/es6/expandable/lib/useExpandableModel";
-  
+
   // after
   import { useExpandableModel } from "@workday/canvas-kit-labs-react/expandable";
   ```
@@ -3885,85 +3885,85 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - [#1636](https://github.com/Workday/canvas-kit/pull/1636) Canvas Kit will require teams to be on version ^18.x or at least ^17.0 for backwards compatibility. To use have all React 18 features would require teams to upgrade root API, otherwise they will be ignored.
 - [#1646](https://github.com/Workday/canvas-kit/pull/1646) Some component will now have to be imported like this: `import { export1 } from "module-name";`
-  
+
   * chore: Bump csstype to v3 and update style prop types (#1673)
-  
+
   We removed csstype in [a previous update](https://github.com/Workday/canvas-kit/commit/026b66731361064192c405e99eb0e1412c7dd09f#diff-3be175031a0046a5ad6ec23a2bfdea7e7d8e996dc4e6846a8f8d885ddc4b0edeL57), but we need to add it back. I also updated the version and corrected the style prop types to match. You can read about the V3 changes [here](https://github.com/frenic/csstype#version-30).
-  
+
   [category:Components]
-  
+
   * feat: Added gridStyleProps to Box
-  
+
   * fix: Adjusting items
-  
+
   * feat: Added unit tests and chromatic tests
-  
+
   * feat: Added chromatic test
-  
+
   * fix: Adjusted props in UI Example
-  
+
   * fix: Made adjustments per suggestions
-  
+
   * chore: Updated docs with suggestions made in PR
-  
+
   * fix: Adjusted UI Example for 12 columns
-  
+
   * fix: Fixed docs with suggestions made
 - [#1722](https://github.com/Workday/canvas-kit/pull/1722) Some component will now have to be imported like this: `import { export1 } from "module-name";`
-  
+
   * chore: Bump csstype to v3 and update style prop types (#1673)
-  
+
   We removed csstype in [a previous update](https://github.com/Workday/canvas-kit/commit/026b66731361064192c405e99eb0e1412c7dd09f#diff-3be175031a0046a5ad6ec23a2bfdea7e7d8e996dc4e6846a8f8d885ddc4b0edeL57), but we need to add it back. I also updated the version and corrected the style prop types to match. You can read about the V3 changes [here](https://github.com/frenic/csstype#version-30).
-  
+
   [category:Components]
-  
+
   * feat: Added gridStyleProps to Box
-  
+
   * fix: Adjusting items
-  
+
   * feat: Added unit tests and chromatic tests
-  
+
   * feat: Added chromatic test
-  
+
   * fix: Adjusted props in UI Example
-  
+
   * fix: Made adjustments per suggestions
-  
+
   * chore: Updated docs with suggestions made in PR
-  
+
   * fix: Adjusted UI Example for 12 columns
-  
+
   * fix: Fixed docs with suggestions made
-  
+
   * feat: Added token intake to specific grid props
-  
+
   * fix: Added tokens to tests and added docs
-  
+
   * fix: Added export for GridSpacePropsValues
-  
+
   * chore: Added gridItem props to Box
-  
+
   * chore: Updated grid and gridItem from comments
-  
+
   * fix: Added continue on line 119 of grid util
-  
+
   * fix: Made adjustment to gridSpaceStyleProps to fix visual test
-- [#1747](https://github.com/Workday/canvas-kit/pull/1747) This update soft-deprecates all exports from `canvas-kit-labs-react/drawer`, `canvas-kit-preview-react/menu` and `Layout` and `Column` imports from `canvas-kit-react/layout`. 
-  🤖 These changes are handled automatically by the codemod transform included in this PR. 
+- [#1747](https://github.com/Workday/canvas-kit/pull/1747) This update soft-deprecates all exports from `canvas-kit-labs-react/drawer`, `canvas-kit-preview-react/menu` and `Layout` and `Column` imports from `canvas-kit-react/layout`.
+  🤖 These changes are handled automatically by the codemod transform included in this PR.
   Please refer to the v8 upgrade guide for more information.
 - [#1724](https://github.com/Workday/canvas-kit/pull/1724) - `Breadcrumbs` has been promoted and now it lives in main react package
   - `Breadcrumbs.Nav` has been removed and replaced by `Breadcrumbs`
   - `Breadcrumbs.Nav` prop of `aria-label` has been removed to `Breadcrumbs`
   - `Breadcrumbs.CollapsibleList` has been renamed to `Breadcrumbs.List`
   - `Breadcrumbs.ListItem` has been renamed to `Breadcrumbs.Item`
-  
+
   🤖 All the above changes can be handled by running codemod
-  
+
   ⚠️ As `onAction` has been removed from `Breadcrumbs.Item`, it requires to change manually `onAction` usage based on examples provided in the v8 upgrade guide.
-  
+
   ⚠️ As `Breadcrumbs.CollapsibleList` has been removed, all overflow functionality provided by this component has been removed too. Now overflow functionality is provided by List system and requires to switch to `BreadcrumbsModel` manually.
 - [#1785](https://github.com/Workday/canvas-kit/pull/1785) We've removed any IE11 specific code including any polyfills. This means your application will no longer run in IE11 and fail to bootstrap with an error and a white screen. Do not upgrade to this version if your application needs to support IE11.
-- [#1800](https://github.com/Workday/canvas-kit/pull/1800) - `ComponentStatesTable`, `permutateProps`, `StaticStates` and `propTypes` have been moved to `@workday/canvas-kit-react/testing`. 
+- [#1800](https://github.com/Workday/canvas-kit/pull/1800) - `ComponentStatesTable`, `permutateProps`, `StaticStates` and `propTypes` have been moved to `@workday/canvas-kit-react/testing`.
   - `StaticStates` and `convertToStaticStates` have been moved from `@workday/canvas-kit-react/common` to `@workday/canvas-kit-react/testing`
   🤖 All the above changes can be handled by running codemod
 - [#1863](https://github.com/Workday/canvas-kit/pull/1863) Optional breaking changes message. If your PR includes breaking changes. It is extremely rare to put breaking changes outside a `prerelease/major` branch. Anything in this section will show up in release notes. Remove this section if no breaking changes are present.
@@ -3972,19 +3972,19 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
   manually add `type="button"` to these components if you wrap popup contents in a `form` element.
   While this is a very unlikely that a `CloseButton` was intentionally used as an implicit submit
   button, it is still a breaking change. This change effects the following components:
-  
+
   - `Popup.CloseIcon`
   - `Dialog.CloseIcon`
   - `Modal.CloseIcon`
   - `Popup.CloseButton`
   - `Dialog.CloseButton`
   - `Modal.CloseButton`
-- [#1874](https://github.com/Workday/canvas-kit/pull/1874) `ActionBar.OverflowButton` inside `ActionBar.List` is replaced with an `overflowButton` prop. So, now `ActionBar.List` with overflow behavior requires to pass an overflow button component as a `overflowButton` prop. 
-  
+- [#1874](https://github.com/Workday/canvas-kit/pull/1874) `ActionBar.OverflowButton` inside `ActionBar.List` is replaced with an `overflowButton` prop. So, now `ActionBar.List` with overflow behavior requires to pass an overflow button component as a `overflowButton` prop.
+
   ```tsx
   <ActionBar.List overflowButton={<ActionBar.OverflowButton aria-label="More actions" />} />
   ```
-  
+
   🤖 This change can be handled by using codemod.
 - [#1880](https://github.com/Workday/canvas-kit/pull/1880) The `LoadingAnimation` component has been renamed to `LoadingDots` and its slash import is now `@workday/canvas-kit-react/loading-dots` instead of `@workday/canvas-kit-react/loading-animation`.
 
@@ -3992,7 +3992,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - fix: Remove default imports from components ([#1634](https://github.com/Workday/canvas-kit/pull/1634)) ([@mannycarrera4](https://github.com/mannycarrera4))
   We've updated some of our components to remove default exports. This matches what most of our component are doing.
-  
+
   Some component will now have to be imported like this: `import { export1 } from "module-name";`
 - chore: Bump csstype to v3 and update style prop types ([#1673](https://github.com/Workday/canvas-kit/pull/1673)) ([@alanbsmith](https://github.com/alanbsmith))
 - feat: Add Grid component ([#1646](https://github.com/Workday/canvas-kit/pull/1646)) ([@josh-bagwell](https://github.com/josh-bagwell), Manuel Carrera, Alan B Smith)
@@ -4001,7 +4001,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
   The next changes have been made:
   - Added new `Box` component props to support font and text styles, added variant name value support to `color` prop.
   - Created basic `Text` component with `level`, `size` props to set type levels and `isTruncated` prop to have ellipsis overflow text.
-  - Created specific level components: `Title`, `Heading`, `BodyText` and `Subtext`. 
+  - Created specific level components: `Title`, `Heading`, `BodyText` and `Subtext`.
   - Created `Label` text component.
 - feat: Add responsive styles to Modal ([#1700](https://github.com/Workday/canvas-kit/pull/1700)) ([@mannycarrera4](https://github.com/mannycarrera4))
 - docs(layout): Improve Grid documentation ([#1716](https://github.com/Workday/canvas-kit/pull/1716)) ([@jamesfan](https://github.com/jamesfan), Raisa Primerova, Manuel Carrera)
@@ -4020,7 +4020,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - feat: Components and utilities to testing package ([#1800](https://github.com/Workday/canvas-kit/pull/1800)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@alanbsmith](https://github.com/alanbsmith))
 - fix: Add style prop doc examples to build-mdx script ([#1848](https://github.com/Workday/canvas-kit/pull/1848)) ([@alanbsmith](https://github.com/alanbsmith))
 - feat(breadcrumbs): Update Breadcrumbs aria props, examples, and a11y guidance ([#1850](https://github.com/Workday/canvas-kit/pull/1850)) ([@RayRedGoose](https://github.com/RayRedGoose))
-  Changes: 
+  Changes:
   - Added requirement of `aria-label` for `nav` element in `Breadcrumbs` component.
   - Added requirement of `aria-label` for overflow button.
   - Limited overflow button render: it renders only when `overflowButtonProps` containing at least `aria-label` prop passed to `Breadcrumbs.List`.
@@ -4638,7 +4638,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
       - `shouldUpdate(data, state)`
       - `onUpdate(data, prevState)`
 - [#1587](https://github.com/Workday/canvas-kit/pull/1587) Removed the data wrapper around the `event` in `show` and `hide` events. The arguments are not commonly used, however.
-  
+
   ```tsx
   // v6
   const model = usePopupModel({
@@ -4646,7 +4646,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
       console.log(event);
     }
   })
-  
+
   // v7
   const model = usePopupModel({
     onShow(event, prevState) {
@@ -4654,7 +4654,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
     }
   })
   ```
-  
+
   🤖 The codemod will update all inline guards and callbacks like in this example. If a guard or
   callback was defined outside the model config block, it will not be covered by the codemod.
 - [#1585](https://github.com/Workday/canvas-kit/pull/1585) This PR contains breaking changes because using new ActionBar requires restructure old version and adding ActionBar.List as sub-component of ActionBar. This changes are covered by codemod but using an overflow behavior requires manual implementation.
@@ -6684,7 +6684,7 @@ To review the breaking changes made in this release, check out the [v4.0.0 Upgra
 - fix(form-field): Add component prefix to exported enums and interfaces #146 @sahlhoff
 - refactor(page-header): Update marketing and breakpoint props (#143) @sahlhoff
 
-## 3.0.0-alpha.5 (2019-08-13)
+## 3.0.0-alpha.8 (2019-08-13)
 
 ### Infrastructure:
 
