@@ -5,7 +5,7 @@ import {Select} from '@workday/canvas-kit-preview-react/select';
 import {hintText, options} from '../storiesData';
 import {controlComponent} from '../../../../../../utils/storybook';
 
-export const CautionLeft = () => {
+export const AlertLeft = () => {
   return (
     <FormField orientation="horizontalStart" id="select-alert" error="caution">
       <FormField.Label>Label</FormField.Label>

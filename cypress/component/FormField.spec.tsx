@@ -54,7 +54,7 @@ describe('Form Field', () => {
 
   context(`given the 'Alert' story is rendered`, () => {
     beforeEach(() => {
-      cy.mount(<Alert />);
+      cy.mount(<Caution />);
     });
 
     it('should not have any axe errors', () => {

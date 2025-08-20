@@ -12,7 +12,7 @@ export const ThemedAlert = () => {
   const theme: PartialEmotionCanvasTheme = {
     canvas: {
       palette: {
-        caution: {
+        alert: {
           lightest: cssVar(system.color.static.green.softer),
         },
         common: {

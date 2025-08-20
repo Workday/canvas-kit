@@ -7,7 +7,7 @@ import {DefaultWithCustomOptions as DefaultWithCustomOptionsExample} from './exa
 import {DefaultWithSimpleOptions as DefaultWithSimpleOptionsExample} from './examples/Top Label/DefaultWithSimpleOptions';
 import {Scrollable as ScrollableExample} from './examples/Top Label/Scrollable';
 import {Disabled as DisabledExample} from './examples/Top Label/Disabled';
-import {Alert as AlertExample} from './examples/Top Label/Alert';
+import {Caution as CautionExample} from './examples/Top Label/Caution';
 import {Error as ErrorExample} from './examples/Top Label/Error';
 import {Grow as GrowExample} from './examples/Top Label/Grow';
 
@@ -86,8 +86,8 @@ export const DisabledLeft: Story = {
   render: DisabledExampleLeft,
 };
 
-export const CautionLeft: Story = {
-  render: CautionExampleLeft,
+export const AlertLeft: Story = {
+  render: AlertExampleLeft,
 };
 
 export const ErrorLeft: Story = {
