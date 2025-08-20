@@ -34,8 +34,9 @@ any questions.
   - [Side Panel (Main)](#side-panel-main)
   - [Tokens](#tokens)
 - [Removals](#removals)
-  - [Menu (preview)](#menu-preview)
   - [Deprecated Buttons](#deprecated-buttons)
+  - [Menu (preview)](#menu-preview)
+  - [readyOnlyPillStencil and removeablePillStencil][readyOnlyPillStencil-and-removeablePillStencil]
 - [Troubleshooting](#troubleshooting)
 - [Glossary](#glossary)
   - [Main](#main)
@@ -211,6 +212,7 @@ The following components have been updated:
 - `InformationHighlight` [#3443](https://github.com/Workday/canvas-kit/pull/3443)
 - `LoadingDots` (Main) [#3393](https://github.com/Workday/canvas-kit/pull/3393)
 - `Pagination` (Preview) [#3300](https://github.com/Workday/canvas-kit/pull/3300)
+- `Pill` [#3446](https://github.com/Workday/canvas-kit/pull/3446)
 - `SearchForm` (Labs) [#3303](https://github.com/Workday/canvas-kit/pull/3303)
 - `SegmentedControl` (Main) [#3278](https://github.com/Workday/canvas-kit/pull/3278)
 - `SegmentedControl` (Preview) [#3278](https://github.com/Workday/canvas-kit/pull/3278)
@@ -389,12 +391,36 @@ These changes are only **visual** and should not affect the functionality of the
 
 ### Pill
 
-**PR:** [#3430](https://github.com/Workday/canvas-kit/pull/3430)
+**PRs:** [#3430](https://github.com/Workday/canvas-kit/pull/3430), [#3446](https://github.com/Workday/canvas-kit/pull/3446)
 
 - `Pill` has been updated to use the `Avatar` component from Preview. This change requires that you
   provide a value for the `name` prop.
 
 > 🤖 The codemod will handle the change of `altText` to `name` on `Pill.Avatar`.
+
+- The `Pill` component no longer supports `'default'` as a value for the `variant` prop. If the
+  `variant` prop is not provided, the component will use its default styling.
+
+- `readyOnlyPillStencil` and `removeablePillStencil` have been removed due to some styling clean up. Please use `pillStencil` instead.
+
+**Before in v13**
+
+```tsx
+<Pill variant="default">
+  <Pill.Avatar altText="John Doe" />
+  <Pill.Label>John Doe</Pill.Label>
+</Pill>
+```
+
+**After in v14**
+
+```tsx
+<Pill>
+  <Pill.Avatar name="John Doe" />
+  <Pill.Label>John Doe</Pill.Label>
+</Pill>
+```
+
 
 ### Search Form 🚨
 
@@ -577,6 +603,11 @@ and themable buttons like `PrimaryButton`, `ScondaryButton` or `TertiaryButton`.
 We've removed `Menu` from `@workday/canvas-kit-preview-react` package. Please use
 [Menu](https://workday.github.io/canvas-kit/?path=/docs/components-popups-menu--docs) from
 `@workday/canvas-kit-react` instead.
+
+### readyOnlyPillStencil and removeablePillStencil
+
+The `readyOnlyPillStencil` and `removeablePillStencil` utilities have been removed from the Pill
+package. Please use `pillStencil` instead.
 
 ---
 
