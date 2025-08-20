@@ -336,10 +336,7 @@ These changes are only **visual** and should not affect the functionality of the
 
 ### Pill
 
-**PRs:**
-
-[#3430](https://github.com/Workday/canvas-kit/pull/3430)
-[#3446](https://github.com/Workday/canvas-kit/pull/3446)
+**PRs:** [#3430](https://github.com/Workday/canvas-kit/pull/3430), [#3446](https://github.com/Workday/canvas-kit/pull/3446)
 
 - `Pill` has been updated to use the `Avatar` component from Preview. This change requires that you
   provide a value for the `name` prop.
@@ -350,6 +347,25 @@ These changes are only **visual** and should not affect the functionality of the
   `variant` prop is not provided, the component will use its default styling.
 
 - `readyOnlyPillStencil` and `removeablePillStencil` have been removed due to some styling clean up. Please use `pillStencil` instead.
+
+**Before in v13**
+
+```tsx
+<Pill variant="default">
+  <Pill.Avatar altText="John Doe" />
+  <Pill.Label>John Doe</Pill.Label>
+</Pill>
+```
+
+**After in v14**
+
+```tsx
+<Pill>
+  <Pill.Avatar name="John Doe" />
+  <Pill.Label>John Doe</Pill.Label>
+</Pill>
+```
+
 
 ### Search Form 🚨
 
