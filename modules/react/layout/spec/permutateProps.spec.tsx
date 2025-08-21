@@ -64,7 +64,7 @@ describe('Component States Table', () => {
       const results = [
         {label: 'Checked Indeterminate ', props: {checked: true, indeterminate: true}},
         {
-          label: 'Checked Indeterminate Alert',
+          label: 'Checked Indeterminate Caution',
           props: {checked: true, indeterminate: true, error: ErrorType.Caution},
         },
         {
@@ -73,7 +73,7 @@ describe('Component States Table', () => {
         },
         {label: 'Checked  ', props: {checked: true, indeterminate: false}},
         {
-          label: 'Checked  Alert',
+          label: 'Checked  Caution',
           props: {checked: true, indeterminate: false, error: ErrorType.Caution},
         },
         {
@@ -82,7 +82,7 @@ describe('Component States Table', () => {
         },
         {label: 'Unchecked  ', props: {checked: false, indeterminate: false}},
         {
-          label: 'Unchecked  Alert',
+          label: 'Unchecked  Caution',
           props: {checked: false, indeterminate: false, error: ErrorType.Caution},
         },
         {
