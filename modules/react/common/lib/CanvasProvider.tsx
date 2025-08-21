@@ -3,7 +3,7 @@ import {Theme, ThemeProvider, CacheProvider} from '@emotion/react';
 import {defaultCanvasTheme, PartialEmotionCanvasTheme, useTheme} from './theming';
 import {InputProvider} from './InputProvider';
 import {brand} from '@workday/canvas-tokens-web';
-import {getCache} from '@workday/canvas-kit-styling';
+import {getCache, maybeWrapCSSVariables} from '@workday/canvas-kit-styling';
 
 export interface CanvasProviderProps {
   theme?: PartialEmotionCanvasTheme;
@@ -30,13 +30,13 @@ export const useCanvasThemeToCssVars = (
   (['common', 'primary', 'error', 'alert', 'success', 'neutral'] as const).forEach(color => {
     if (color === 'common') {
       //@ts-ignore
-      style[brand.common.focusOutline] = palette.common.focusOutline;
+      style[brand.common.focusOutline] = maybeWrapCSSVariables(palette.common.focusOutline);
       //@ts-ignore
-      style[brand.common.alertInner] = palette.common.alertInner;
+      style[brand.common.alertInner] = maybeWrapCSSVariables(palette.common.alertInner);
       //@ts-ignore
-      style[brand.common.alertOuter] = palette.common.alertOuter;
+      style[brand.common.alertOuter] = maybeWrapCSSVariables(palette.common.alertOuter);
       //@ts-ignore
-      style[brand.common.errorInner] = palette.common.errorInner;
+      style[brand.common.errorInner] = maybeWrapCSSVariables(palette.common.errorInner);
     }
     (['lightest', 'lighter', 'light', 'main', 'dark', 'darkest', 'contrast'] as const).forEach(
       key => {
@@ -44,7 +44,7 @@ export const useCanvasThemeToCssVars = (
         //@ts-ignore
         if (palette[color][key] !== defaultCanvasTheme.palette[color][key]) {
           // @ts-ignore
-          style[brand[color][mappedKeys[key]]] = palette[color][key];
+          style[brand[color][mappedKeys[key]]] = maybeWrapCSSVariables(palette[color][key]);
         }
       }
     );
