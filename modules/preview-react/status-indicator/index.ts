@@ -1,1 +1,1 @@
-export {StatusIndicator, StatusIndicatorProps, StatusIndicatorVariant} from './lib/StatusIndicator';
+export * from './lib/StatusIndicator';
