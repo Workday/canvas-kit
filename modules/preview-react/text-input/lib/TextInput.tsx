@@ -7,7 +7,7 @@ import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {TextInputField} from './TextInputField';
 
 /**
- * @deprecated ⚠️ `TextInputProps` in Preview has been deprecated and will be removed in a future major version. Please use [`FormField` in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-inputs-form-field--basic) instead.
+ * @deprecated ⚠️ `TextInputProps` in Preview has been deprecated and will be removed in a future major version. Please use [`TextInput` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-text-input--docs) instead.
  */
 export interface TextInputProps extends ExtractProps<typeof FormField, never> {
   /**
@@ -17,7 +17,7 @@ export interface TextInputProps extends ExtractProps<typeof FormField, never> {
 }
 /**
  * @stencil formFieldStencil
- * @deprecated ⚠️ `TextInput` in Preview has been deprecated and will be removed in a future major version. Please use [`FormField` in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-inputs-form-field--basic) instead.
+ * @deprecated ⚠️ `TextInput` in Preview has been deprecated and will be removed in a future major version. Please use [`TextInput` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-textinput--docs) instead.
  */
 export const TextInput = createContainer('div')({
   displayName: 'TextInput',

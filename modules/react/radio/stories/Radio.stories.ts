@@ -15,7 +15,7 @@ import {RefForwarding as RefForwardingExample} from './examples/RefForwarding';
 import {Required as RequiredExample} from './examples/Required';
 
 export default {
-  title: 'Components/Inputs/Radio',
+  title: 'Components/Inputs/Radio (deprecated)',
   component: Radio,
   tags: ['autodocs'],
   parameters: {

@@ -1,4 +1,10 @@
-import {ExampleCodeBlock, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {
+  ExampleCodeBlock,
+  StorybookStatusIndicator,
+  SymbolDoc,
+  Specifications,
+} from '@workday/canvas-kit-docs';
+import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
 
 import {Alert} from './examples/Alert';
 import {Basic} from './examples/Basic';
@@ -12,20 +18,24 @@ import {Placeholder} from './examples/Placeholder';
 import {RefForwarding} from './examples/RefForwarding';
 import {Required} from './examples/Required';
 import {ResizeConstraints} from './examples/ResizeConstraints';
+import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
 
 import * as TextAreaStories from './TextArea.stories';
 
 <Meta of={TextAreaStories} />
 
-# Canvas Kit Text Area
+# Canvas Kit Text Area <StorybookStatusIndicator type="deprecated" />
 
-<StatusIndicator variant="red">
-  <StatusIndicator.Label>Deprecated</StatusIndicator.Label>
-</StatusIndicator>
-
-`TextArea` in Preview has been deprecated and will be removed in a future major version. Please use
-[`FormField` in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-inputs-form-field--basic)
-instead.
+<InformationHighlight className="sb-unstyled" variant="caution" cs={{p: {marginBlock: 0}}}>
+  <InformationHighlight.Icon />
+  <InformationHighlight.Body>
+    `TextArea` in Preview has been deprecated and will be removed in a future major version. Please
+    use `TextArea` in Main instead.
+  </InformationHighlight.Body>
+  <InformationHighlight.Link href="https://workday.github.io/canvas-kit/?path=/docs/components-inputs-textarea--docs">
+    Text Area Docs
+  </InformationHighlight.Link>
+</InformationHighlight>
 
 TextArea's allow users to enter and edit multiple lines of text.
 
