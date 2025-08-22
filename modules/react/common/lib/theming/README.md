@@ -127,13 +127,13 @@ const theme: EmotionCanvasTheme = {
   canvas: {
     palette: {
       primary: {
-        lightest: cssVar(base.magenta25),
-        lighter: cssVar(base.magenta50),
-        light: cssVar(base.magenta200),
-        main: cssVar(base.magenta600),
-        dark: cssVar(base.magenta700),
-        darkest: cssVar(base.magenta800),
-        contrast: cssVar(base.neutral0),
+        lightest: base.magenta25,
+        lighter: base.magenta50,
+        light: base.magenta200,
+        main: base.magenta600,
+        dark: base.magenta700,
+        darkest: base.magenta800,
+        contrast: base.neutral0,
       },
     },
   },
