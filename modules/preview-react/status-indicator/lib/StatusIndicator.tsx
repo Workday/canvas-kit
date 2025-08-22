@@ -121,13 +121,9 @@ const statusIndicatorStencil = createStencil({
      *
      * @default 'low'
      *
-     * @deprecated This is being deprecated and will be removed in a future release. `high` is being removed
      */
     emphasis: {
       low: {},
-      /**
-       * @deprecated This is being deprecated and will be removed in a future release.
-       */
       high: {},
     },
   },
