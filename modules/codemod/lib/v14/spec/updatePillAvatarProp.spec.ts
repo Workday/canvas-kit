@@ -4,7 +4,7 @@ import {stripIndent} from 'common-tags';
 
 const expectTransform = expectTransformFactory(transform);
 
-describe.only('Pill', () => {
+describe('Pill', () => {
   it('should not change non-canvas imports', () => {
     const input = stripIndent`
             import {Pill} from '@workday/any-other-package'
