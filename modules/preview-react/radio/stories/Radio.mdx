@@ -113,8 +113,8 @@ some behavior handled for you.
 
 ### Error States
 
-Set the error prop of the wrapping `FormField` to `FormField.ErrorType.Caution` or
-`FormField.ErrorType.Error` to set the `RadioGroup` to the alert or error state, respectively. You
+Set the `error` prop of the wrapping `FormField` to `"caution"` or
+`"error"` to set the `RadioGroup` to the alert or error state, respectively. You
 will also need to set the `hintId` and `hintText` props on the `FormField` to meet accessibility
 standards. You must set an `aria-describedby` attribute on the `RadioGroup` element that matches the
 value of `hintId` set on the `FormField` element. These attributes ensure that the alert message is

@@ -4,7 +4,7 @@ import {stripIndent} from 'common-tags';
 
 const expectTransform = expectTransformFactory(transform);
 
-describe.only('rename horizontal', () => {
+describe('rename form field alert', () => {
   it('should not change non-canvas imports', () => {
     const input = stripIndent`
             import {FormField} from 'any-other-package'

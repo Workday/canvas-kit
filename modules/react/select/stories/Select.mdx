@@ -169,8 +169,8 @@ forward `ref` to its underlying `<input type="text" role="combobox">` element.
 
 ### Error States
 
-Set the `error` prop of the wrapping `FormField` to `FormField.ErrorType.Caution` or
-`FormField.ErrorType.Error` to set the `Select` to the caution or error state, respectively. You will
+Set the `error` prop of the wrapping `FormField` to `"caution"` or
+`"error"` to set the `Select` to the caution or error state, respectively. You will
 also need to set the `hintId` and `hintText` props on the `FormField` to meet accessibility
 standards. You must set an `id` attribute on the `Select.Input` element that matches the value of
 `inputId` set on the `FormField` element. These attributes ensure that the caution message is
