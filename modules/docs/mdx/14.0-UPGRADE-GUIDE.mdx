@@ -13,6 +13,7 @@ any questions.
 - [Codemod](#codemod)
   - [Instructions](#instructions)
 - [Theming](#theming)
+  - [Canvas Provider](#canvas-provider-)
 - [Component Updates](#component-updates)
   - [Avatar in Preview](#avatar-in-preview)
   - [Branding Changes](#branding-changes)
@@ -105,10 +106,64 @@ yarn remove @workday/canvas-kit-codemod
 
 ## Theming
 
-**PR:** [#3394](https://github.com/Workday/canvas-kit/pull/3394)
+### Canvas Provider 🚨
 
-- `CanvasThemePalette` has been updated to include a `lighter` color.
-- `CanvasTheme` has been updated to include a `lighter` color.
+**PRs:** [#3407](https://github.com/Workday/canvas-kit/pull/3407), [#3394](https://github.com/Workday/canvas-kit/pull/3394)
+
+- `CanvasThemePalette` and `CanvasTheme` type have been updated to include a `lighter` property.
+- `CanvasProvider` `theme` prop has been updated to include a `lighter` color for each palette.
+
+#### Breaking Changes
+
+Canvas Provider has been updated to **remove** default branding colors to ensure proper cascading of our CSS variables. Instead of generating a palette and shifting the brightness and darkness with `chroma.js`, we use `oklch` to generate the palette colors.
+
+**Before in v13**
+In v13, the `useTheme` hook would call `createCanvasTheme` which generated a palette given a `main` color via `chroma.js`.
+
+```tsx
+<CanvasProvider theme={{canvas: {palette: {primary: {main: 'purple'}}}}}>
+  <App/>
+</CanvasProvider>
+```
+
+**After in v14**
+We use `oklch` to generate the palette colors. The color shifting will be different. If you want more control over the colors, we suggest providing the full palette object.
+
+```tsx
+<CanvasProvider theme={
+	{canvas: {
+		palette: {
+			primary: {
+				lightest: base.blue25,
+				light: base.blue200,
+				main: base.blue600,
+				dark: base.blue700,
+				darkest: base.blue800,
+				contrast: base.neutral0,
+			},
+		},
+	}}}>
+  <App/>
+</CanvasProvider>
+```
+
+**Or**
+
+```tsx
+<CanvasProvider theme={{canvas: {palette: {primary: {main: cssVar(base.blue600)}}}}}>
+  <App/>
+</CanvasProvider>
+```
+
+> **Note:** The way `chroma.js` and `oklch` generate colors **is different**. While we work on a better algorithm to determine hue, chroma and lightness and color shifting that best represents an accessible palette, **you may see color discrepancies**. If you want to continue using the old way of generating a color palette with `chroma.js`, you can use `createCanvasTheme`.
+
+```tsx
+<CanvasProvider theme={{canvas: createCanvasTheme({palette: {primary: {main: cssVar(base.blue600)}}})}}>
+  <App/>
+</CanvasProvider>
+```
+
+The reason for this change is to ensure that the CSS variables properly cascade to all components. Before in v13, the `CanvasProvider` would add the brand tokens under a class name, creating a higher specificity.
 
 ## Component Updates
 

@@ -4,15 +4,77 @@
 import {useTheme as useEmotionTheme} from '@emotion/react';
 import {
   defaultCanvasTheme,
-  createCanvasTheme,
   EmotionCanvasTheme,
   PartialEmotionCanvasTheme,
+  CanvasTheme,
 } from './index';
+import {cssVar} from '@workday/canvas-kit-styling';
+import {base} from '@workday/canvas-tokens-web';
 
-const getFilledTheme = (theme: PartialEmotionCanvasTheme) => ({
-  ...theme,
-  canvas: createCanvasTheme(theme.canvas!),
-});
+/**
+ * We can adjust the shift but this should get us close enough until we clean up the algorithm to determine the colors.
+ */
+const shiftColor = (color: string, value: number) => {
+  return `oklch(from ${color} calc(l ${value > 0 ? '+' : '-'} ${Math.abs(value) / 1000}) c h)`;
+};
+
+const generatePalette = (
+  key: Exclude<keyof CanvasTheme['palette'], 'common'>,
+  palette?: CanvasTheme['palette']
+) => {
+  const colorPalette = palette?.[key];
+  if (colorPalette) {
+    const defaultPalette = defaultCanvasTheme.palette[key];
+    return {
+      lightest:
+        colorPalette.lightest ||
+        (colorPalette.main && shiftColor(colorPalette.main, 400)) ||
+        defaultPalette.lightest,
+      lighter:
+        colorPalette.lighter ||
+        (colorPalette.main && shiftColor(colorPalette.main, 150)) ||
+        defaultPalette.lighter,
+      light:
+        colorPalette.light ||
+        (colorPalette.main && shiftColor(colorPalette.main, 100)) ||
+        defaultPalette.light,
+      main: colorPalette.main || defaultPalette.main,
+      dark:
+        colorPalette.dark ||
+        (colorPalette.main && shiftColor(colorPalette.main, -100)) ||
+        defaultPalette.dark,
+      darkest:
+        colorPalette.darkest ||
+        (colorPalette.main && shiftColor(colorPalette.main, -200)) ||
+        defaultPalette.darkest,
+      contrast: colorPalette.contrast || cssVar(base.neutral0),
+    };
+  }
+  return defaultCanvasTheme.palette[key];
+};
+
+const generateTheme = (theme?: PartialEmotionCanvasTheme): EmotionCanvasTheme['canvas'] => {
+  return {
+    palette: {
+      primary: generatePalette('primary', theme?.canvas?.palette as CanvasTheme['palette']),
+      alert: generatePalette('alert', theme?.canvas?.palette as CanvasTheme['palette']),
+      error: generatePalette('error', theme?.canvas?.palette as CanvasTheme['palette']),
+      success: generatePalette('success', theme?.canvas?.palette as CanvasTheme['palette']),
+      neutral: generatePalette('neutral', theme?.canvas?.palette as CanvasTheme['palette']),
+      common: {...defaultCanvasTheme.palette.common, ...theme?.canvas?.palette?.common},
+    },
+    breakpoints: defaultCanvasTheme.breakpoints,
+    direction: theme?.canvas?.direction || defaultCanvasTheme.direction,
+  };
+};
+
+const getFilledTheme = (theme: PartialEmotionCanvasTheme): EmotionCanvasTheme => {
+  return {
+    ...defaultCanvasTheme,
+    ...theme,
+    canvas: generateTheme(theme),
+  };
+};
 
 /**
  * Function to get the correct theme object for `styled` and class components

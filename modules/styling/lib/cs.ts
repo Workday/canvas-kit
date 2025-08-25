@@ -144,7 +144,7 @@ type DefaultedVarsShape = Record<string, string> | Record<string, Record<string,
  * maybeWrapCSSVariables('calc(--foo)'); // calc(var(--foo))
  * ```
  */
-function maybeWrapCSSVariables(input: string): string {
+export function maybeWrapCSSVariables(input: string): string {
   // matches an string starting with `--` that isn't already wrapped in a `var()`. It tries to match
   // any character that isn't a valid separator in CSS
   return input.replace(

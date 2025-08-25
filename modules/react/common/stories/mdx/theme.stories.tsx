@@ -6,6 +6,7 @@ import {CanvasTheme, CanvasThemePalette, Themeable} from '../../lib/theming';
 import {colors, type, space, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {useTheme} from '@workday/canvas-kit-react/common';
 import {StyledType} from '../../lib/utils';
+import {cssVar} from '@workday/canvas-kit-styling';
 
 const Palettes = styled('div')({
   display: 'flex',
@@ -31,7 +32,7 @@ const Swatch = styled('li')(
     justifyContent: 'space-between',
   },
   (props: any) => ({
-    background: props.bg,
+    background: cssVar(props.bg),
     span: {
       color: props.contrast,
     },
