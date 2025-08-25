@@ -3,7 +3,7 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 import mdxDoc from './FormField.mdx';
 // examples
 import {Basic as BasicExample} from './examples/Basic';
-import {Alert as AlertExample} from './examples/Alert';
+import {Caution as CautionExample} from './examples/Caution';
 import {Error as ErrorExample} from './examples/Error';
 import {Disabled as DisabledExample} from './examples/Disabled';
 import {HiddenLabel as HiddenLabelExample} from './examples/HiddenLabel';
@@ -35,8 +35,8 @@ type Story = StoryObj<typeof FormField>;
 export const Basic: Story = {
   render: BasicExample,
 };
-export const Alert: Story = {
-  render: AlertExample,
+export const Caution: Story = {
+  render: CautionExample,
 };
 export const Error: Story = {
   render: ErrorExample,

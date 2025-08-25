@@ -18,7 +18,7 @@ export function getErrorColors(error?: ErrorType, theme?: EmotionCanvasTheme) {
         inner: brand.common.errorInner,
       };
     }
-  } else if (error === ErrorType.Alert) {
+  } else if (error === ErrorType.Caution) {
     if (theme) {
       const palette = theme.canvas.palette;
       return {
@@ -37,7 +37,7 @@ export function getErrorColors(error?: ErrorType, theme?: EmotionCanvasTheme) {
 }
 
 export function errorRing(error?: ErrorType, theme?: EmotionCanvasTheme): CSSObject {
-  if (error !== ErrorType.Error && error !== ErrorType.Alert) {
+  if (error !== ErrorType.Error && error !== ErrorType.Caution) {
     return {};
   }
   const errorColors = getErrorColors(error, theme);

@@ -31,7 +31,7 @@ export const FormFieldStates = () => (
       columnProps={permutateProps({
         error: [
           {value: undefined, label: 'Default'},
-          {value: 'alert', label: 'Alert'},
+          {value: 'caution', label: 'Caution'},
           {value: 'error', label: 'Error'},
         ],
       })}

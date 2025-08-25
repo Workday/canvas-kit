@@ -3,7 +3,7 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Radio, RadioGroup} from '@workday/canvas-kit-react/radio';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
 
-export const Alert = () => {
+export const Caution = () => {
   const [value, setValue] = React.useState<string | number>('deep-dish');
 
   const handleChange = (value: string | number) => {
@@ -11,7 +11,7 @@ export const Alert = () => {
   };
 
   return (
-    <FormField error="alert" as="fieldset">
+    <FormField error="caution" as="fieldset">
       <FormField.Label as="legend">Choose Your Pizza Crust</FormField.Label>
       <FormField.Input as={RadioGroup} name={useUniqueId()} onChange={handleChange} value={value}>
         <Radio label="Deep dish" value="deep-dish" />

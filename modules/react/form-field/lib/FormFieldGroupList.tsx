@@ -26,7 +26,7 @@ const formFieldGroupListStencil = createStencil({
         backgroundColor: brand.error.lightest,
         boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.common.errorInner}`,
       },
-      alert: {
+      caution: {
         backgroundColor: brand.alert.lightest,
         boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.common.alertOuter}, inset 0 0 0 ${px2rem(3)} ${
           brand.common.alertInner

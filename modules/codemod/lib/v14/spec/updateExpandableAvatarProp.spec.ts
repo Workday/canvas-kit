@@ -4,7 +4,7 @@ import {stripIndent} from 'common-tags';
 
 const expectTransform = expectTransformFactory(transform);
 
-describe.only('Expandable', () => {
+describe('Expandable', () => {
   it('should not change non-canvas imports', () => {
     const input = stripIndent`
             import {Expandable} from '@workday/any-other-package'

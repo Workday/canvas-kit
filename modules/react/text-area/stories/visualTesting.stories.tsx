@@ -31,7 +31,7 @@ export const TextAreaStates = () => (
           placeholder: [{value: 'Placeholder', label: 'Placeholder'}],
           error: [
             {value: undefined, label: ''},
-            {value: TextArea.ErrorType.Alert, label: 'Alert'},
+            {value: TextArea.ErrorType.Caution, label: 'Caution'},
             {value: TextArea.ErrorType.Error, label: 'Error'},
           ],
         },

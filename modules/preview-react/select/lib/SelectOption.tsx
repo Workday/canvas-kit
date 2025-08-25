@@ -102,7 +102,7 @@ const Option = styled('li')<SelectOptionProps>(
   },
   ({error}) => ({
     padding: `${optionPadding}px ${
-      error === ErrorType.Alert ? optionPadding - 1 : optionPadding
+      error === ErrorType.Caution ? optionPadding - 1 : optionPadding
     }px`,
   })
 );
