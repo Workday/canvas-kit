@@ -20,13 +20,13 @@ v14.0 Introduces Workday's new brand direction which includes a new color palett
   - [Instructions](#instructions)
 - [Theming](#theming)
 - [Component Updates](#component-updates)
-  - [Avatar in Preview](#avatar-in-preview)
+  - [Avatar Preview](#avatar-preview)
   - [Branding Changes](#branding-changes)
   - [Buttons](#buttons)
-  - [Card](#card)
+  - [Card](#card-)
   - [Count Badge](#count-badge)
   - [Expandable](#expandable)
-  - [Hyperlink & ExternalHyperlink](#hyperlink-and-externalhyperlink)
+  - [Hyperlink and ExternalHyperlink](#hyperlink-and-external-hyperlink)
   - [Loading Dots](#loading-dots)
   - [Pill](#pill)
   - [SearchForm](#search-form)
@@ -41,7 +41,7 @@ v14.0 Introduces Workday's new brand direction which includes a new color palett
 - [Removals](#removals)
   - [Deprecated Buttons](#deprecated-buttons)
   - [Menu (preview)](#menu-preview)
-  - [readyOnlyPillStencil and removeablePillStencil][readyOnlyPillStencil-and-removeablePillStencil]
+  - [readyOnlyPillStencil and removeablePillStencil](#readyOnlyPillStencil-and-removeablePillStencil)
 - [Troubleshooting](#troubleshooting)
 - [Glossary](#glossary)
   - [Main](#main)
@@ -118,7 +118,7 @@ yarn remove @workday/canvas-kit-codemod
 
 ## Component Updates
 
-### Avatar in Preview
+### Avatar (Preview)
 
 **PR:** [#3430](https://github.com/Workday/canvas-kit/pull/3430)
 
@@ -152,11 +152,11 @@ matches our brand refresh.
 Several components have been refactored to reflect our new brand direction. Most of these changes
 revolve around the use of our new brand colors. For a better guide on what has changed in our v3.0.0 tokens, please view the Tokens v3.0.0 [Upgrade Guide](https://workday.github.io/canvas-tokens/?path=/docs/guides-upgrade-guides-v3-overview--docs).
 
+> **Note:** If you want a visual diff of the changes, please view the [Visual Changes](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v14-visual-changes--docs) guide.
+
 The following components have been updated:
 
-- `Breadcrumbs`
-  - [#3270](https://github.com/Workday/canvas-kit/pull/3270)
-  - [#3447](https://github.com/Workday/canvas-kit/pull/3447)
+- `Breadcrumbs` [#3270](https://github.com/Workday/canvas-kit/pull/3270), [#3447](https://github.com/Workday/canvas-kit/pull/3447)
 - `Buttons` [#3394](https://github.com/Workday/canvas-kit/pull/3394)
 - `ColorPicker` (Main) [#3307](https://github.com/Workday/canvas-kit/pull/3307)
 - `ColorPicker` (preview) [#3307](https://github.com/Workday/canvas-kit/pull/3307)
@@ -178,6 +178,14 @@ The `TertiaryButton` component no longer supports the `isThemable` prop. To cust
 of `TertiaryButton`, use the `cs` prop for custom styles or the `colors` prop for palette-based
 color overrides.
 
+**After in v14**
+
+```tsx
+<TertiaryButton cs={{[buttonStencil.vars.background: 'red']}}>
+  Click Me
+</TertiaryButton>
+```
+
 The shape of `TertiaryButton` has changed to have rounded corners, aligning with other buttons and
 our new brand direction.
 
@@ -193,9 +201,9 @@ visual hierarchy and more flexible styling options. The following changes have b
 
 #### Default Card No Longer Has Shadow
 
-The default `Card` variant no longer includes a shadow, creating a cleaner, flatter appearance that
+The default `Card` variant no longer includes a box shadow, creating a cleaner, flatter appearance that
 aligns with our new brand's emphasis on simplicity and clarity. This is a **visual breaking change**
-that may affect your application's visual hierarchy. If your design requires shadow you can added
+that may affect your application's visual hierarchy. If your design requires a shadow you can add it
 through `cs` prop.
 
 **Before in v13**
@@ -208,8 +216,11 @@ through `cs` prop.
 ```
 
 **After in v14**
+Only do this if you need a shadow. Otherwise, adhere to the default styling.
 
 ```tsx
+import {system} from '@workday/canvas-tokens-web'
+
 <Card cs={{boxShadow: system.depth[1]}}>
   <Card.Heading>Card Title</Card.Heading>
   <Card.Body>Card content with shadow</Card.Body>
@@ -228,7 +239,7 @@ We've added two new variants to provide more styling flexibility:
 The `variant` prop is optional - if no variant is specified, the card will use the default styling.
 
 ```tsx
-// Default card (no variant prop needed)
+// Default card (no variant prop needed) with a border and no box shadow
 <Card>
   <Card.Heading>Default Card</Card.Heading>
   <Card.Body>Default styling with borders, no shadow</Card.Body>
@@ -249,8 +260,7 @@ The `variant` prop is optional - if no variant is specified, the card will use t
 
 #### Gap Instead of Margins
 
-We've replaced the individual margins on `Card.Heading` and `Card.Body` with a `gap` prop on the
-card container. The card now uses `display: flex` with `flex-direction: column` by default, and the
+We've replaced the individual margins on `Card.Heading` and `Card.Body` with `gap`. The card now uses `display: flex` with `flex-direction: column` by default, and the
 `gap` prop provides consistent spacing between all direct children. This provides more consistent
 spacing and better control over the layout. This is a **visual breaking change** that may affect the
 spacing between card elements.
@@ -286,7 +296,7 @@ emphasis for the badge.
 
 ```tsx
 <CountBadge /> // Default count badge with high emphasis
-<CountBadge variant="inverse" /> // Inverse default count badge
+<CountBadge variant="inverse" /> // Inverse default count badge to use on dark backgrounds
 // new
 <CountBadge emphasis="low" /> // Default count badge with low emphasis
 <CountBadge variant="inverse" emphasis="low" /> // Inverse count badge with low emphasis
@@ -306,8 +316,6 @@ emphasis for the badge.
 
 > 🤖 The codemod will handle the change of `altText` to `name` on `Expandable.Avatar`.
 
-These changes are only **visual** and should not affect the functionality of the component.
-
 ### Hyperlink and External Hyperlink
 
 **PR:** [#3390](https://github.com/Workday/canvas-kit/pull/3390)
@@ -315,7 +323,7 @@ These changes are only **visual** and should not affect the functionality of the
 - `Hyperlink` and `ExternalHyperlink` now have a `standalone` and `standalone-inverse` variant. This
   removes the underline text decoration for use outside the context of body text.
 
-**HyperLink and ExternalHyperlink in v14**
+**In v14**
 
 ```tsx
 <Hyperlink variant="standalone" href="#hyperlink">Hyperlink</Hyperlink>
@@ -331,16 +339,19 @@ These changes are only **visual** and should not affect the functionality of the
 
 **PR:** [#3393](https://github.com/Workday/canvas-kit/pull/3393)
 
-- We've updated the colors to match brand refresh. The default color changes from
+- We've updated the colors to match our brand refresh. The default color changes from
   `system.color.bg.alt.strong` to `system.color.bg.muted.strong`.
 - `LoadingDots` now has a `inverse` variant. Use this variant when the Loading Dots are on a dark
   background or image.
 
+**After in v14**
+
 ```tsx
+// Use inverse variant when the Loading Dots are on a dark background or image
 <LoadingDots variant="inverse" />
 ```
 
-### Pill
+### Pill (Preview)
 
 **PRs:** [#3430](https://github.com/Workday/canvas-kit/pull/3430), [#3446](https://github.com/Workday/canvas-kit/pull/3446)
 
