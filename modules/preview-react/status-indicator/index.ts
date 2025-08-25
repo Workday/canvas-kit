@@ -1,5 +1,1 @@
-export {
-  StatusIndicator,
-  type StatusIndicatorProps,
-  type StatusIndicatorVariant,
-} from './lib/StatusIndicator';
+export * from './lib/StatusIndicator';
