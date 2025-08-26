@@ -1,7 +1,7 @@
 import React from 'react';
 import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
 import {CanvasProvider, PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
-import {system} from '@workday/canvas-tokens-web';
+import {system, base} from '@workday/canvas-tokens-web';
 import {cssVar} from '@workday/canvas-kit-styling';
 
 export const ThemedError = () => {
@@ -15,11 +15,12 @@ export const ThemedError = () => {
     canvas: {
       palette: {
         error: {
-          lightest: cssVar(system.color.static.amber.softer),
+          lightest: cssVar(base.purple100),
+          main: cssVar(base.purple600),
         },
         common: {
           focusOutline: cssVar(system.color.static.green.default),
-          errorInner: cssVar(system.color.static.amber.stronger),
+          errorInner: cssVar(base.purple600),
         },
       },
     },

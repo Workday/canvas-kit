@@ -1,6 +1,7 @@
 import colors from '@workday/canvas-colors-web';
-import {defaultCanvasTheme, createCanvasTheme, PartialCanvasTheme} from '../lib/theming';
-import {shiftColor} from '../lib/theming/createCanvasTheme';
+import {defaultCanvasTheme, PartialCanvasTheme} from '../lib/theming';
+import {shiftColor, createCanvasTheme} from '../lib/theming/createCanvasTheme';
+
 import {deepMerge} from '../lib/utils/deepMerge';
 
 describe('createCanvasTheme', () => {
