@@ -13,6 +13,7 @@ any questions.
 - [Codemod](#codemod)
   - [Instructions](#instructions)
 - [Theming](#theming)
+  - [Canvas Provider](#canvas-provider-)
 - [Component Updates](#component-updates)
   - [Avatar in Preview](#avatar-in-preview)
   - [Branding Changes](#branding-changes)
@@ -33,8 +34,10 @@ any questions.
   - [Side Panel (Main)](#side-panel-main)
   - [Tokens](#tokens)
 - [Removals](#removals)
-  - [Menu (preview)](#menu-preview)
   - [Deprecated Buttons](#deprecated-buttons)
+  - [Input Provider](#input-provider)
+  - [Menu (preview)](#menu-preview)
+  - [readyOnlyPillStencil and removeablePillStencil](readyOnlyPillStencil-and-removeablePillStencil)
   - [Text Area](#text-area)
   - [Text Input](#text-input)
 - [Troubleshooting](#troubleshooting)
@@ -106,10 +109,77 @@ yarn remove @workday/canvas-kit-codemod
 
 ## Theming
 
-**PR:** [#3394](https://github.com/Workday/canvas-kit/pull/3394)
+### Canvas Provider 🚨
 
-- `CanvasThemePalette` has been updated to include a `lighter` color.
-- `CanvasTheme` has been updated to include a `lighter` color.
+**PRs:** [#3407](https://github.com/Workday/canvas-kit/pull/3407),
+[#3394](https://github.com/Workday/canvas-kit/pull/3394)
+
+- `CanvasThemePalette` and `CanvasTheme` type have been updated to include a `lighter` property.
+- `CanvasProvider` `theme` prop has been updated to include a `lighter` color for each palette.
+
+#### Breaking Changes
+
+Canvas Provider has been updated to **remove** default branding colors to ensure proper cascading of
+our CSS variables. Instead of generating a palette and shifting the brightness and darkness with
+`chroma.js`, we use `oklch` to generate the palette colors.
+
+**Before in v13** In v13, the `useTheme` hook would call `createCanvasTheme` which generated a
+palette given a `main` color via `chroma.js`.
+
+```tsx
+<CanvasProvider theme={{canvas: {palette: {primary: {main: 'purple'}}}}}>
+  <App />
+</CanvasProvider>
+```
+
+**After in v14** We use `oklch` to generate the palette colors. The color shifting will be
+different. If you want more control over the colors, we suggest providing the full palette object.
+
+```tsx
+<CanvasProvider
+  theme={{
+    canvas: {
+      palette: {
+        primary: {
+          lightest: base.blue25,
+          light: base.blue200,
+          main: base.blue600,
+          dark: base.blue700,
+          darkest: base.blue800,
+          contrast: base.neutral0,
+        },
+      },
+    },
+  }}
+>
+  <App />
+</CanvasProvider>
+```
+
+**Or**
+
+```tsx
+<CanvasProvider theme={{canvas: {palette: {primary: {main: cssVar(base.blue600)}}}}}>
+  <App />
+</CanvasProvider>
+```
+
+> **Note:** The way `chroma.js` and `oklch` generate colors **is different**. While we work on a
+> better algorithm to determine hue, chroma and lightness and color shifting that best represents an
+> accessible palette, **you may see color discrepancies**. If you want to continue using the old way
+> of generating a color palette with `chroma.js`, you can use `createCanvasTheme`.
+
+```tsx
+<CanvasProvider
+  theme={{canvas: createCanvasTheme({palette: {primary: {main: cssVar(base.blue600)}}})}}
+>
+  <App />
+</CanvasProvider>
+```
+
+The reason for this change is to ensure that the CSS variables properly cascade to all components.
+Before in v13, the `CanvasProvider` would add the brand tokens under a class name, creating a higher
+specificity.
 
 ## Component Updates
 
@@ -158,6 +228,7 @@ The following components have been updated:
 - `InformationHighlight` [#3443](https://github.com/Workday/canvas-kit/pull/3443)
 - `LoadingDots` (Main) [#3393](https://github.com/Workday/canvas-kit/pull/3393)
 - `Pagination` (Preview) [#3300](https://github.com/Workday/canvas-kit/pull/3300)
+- `Pill` [#3446](https://github.com/Workday/canvas-kit/pull/3446)
 - `SearchForm` (Labs) [#3303](https://github.com/Workday/canvas-kit/pull/3303)
 - `SegmentedControl` (Main) [#3278](https://github.com/Workday/canvas-kit/pull/3278)
 - `SegmentedControl` (Preview) [#3278](https://github.com/Workday/canvas-kit/pull/3278)
@@ -336,12 +407,37 @@ These changes are only **visual** and should not affect the functionality of the
 
 ### Pill
 
-**PR:** [#3430](https://github.com/Workday/canvas-kit/pull/3430)
+**PRs:** [#3430](https://github.com/Workday/canvas-kit/pull/3430),
+[#3446](https://github.com/Workday/canvas-kit/pull/3446)
 
 - `Pill` has been updated to use the `Avatar` component from Preview. This change requires that you
   provide a value for the `name` prop.
 
 > 🤖 The codemod will handle the change of `altText` to `name` on `Pill.Avatar`.
+
+- The `Pill` component no longer supports `'default'` as a value for the `variant` prop. If the
+  `variant` prop is not provided, the component will use its default styling.
+
+- `readyOnlyPillStencil` and `removeablePillStencil` have been removed due to some styling clean up.
+  Please use `pillStencil` instead.
+
+**Before in v13**
+
+```tsx
+<Pill variant="default">
+  <Pill.Avatar altText="John Doe" />
+  <Pill.Label>John Doe</Pill.Label>
+</Pill>
+```
+
+**After in v14**
+
+```tsx
+<Pill>
+  <Pill.Avatar name="John Doe" />
+  <Pill.Label>John Doe</Pill.Label>
+</Pill>
+```
 
 ### Search Form 🚨
 
@@ -400,8 +496,7 @@ const customTheme = {
 
 **PR:** [#3287](https://github.com/Workday/canvas-kit/pull/3287)
 
-Preview `StatusIndicator` is a rounder and more vibrant base emphasis (`low`). The `emphasis` prop
-is now deprecated and the `high` emphasis will be removed in a later version.
+Preview `StatusIndicator` is a rounder and more vibrant base emphasis (`low`).
 
 Variant names of the preview `StatusIndicator` have been updated by the following mapping:
 
@@ -517,6 +612,34 @@ as a reminder of how far we've come and it part we're thankful for this change.
 Al though unlikely, but not impossible, if you were using `DeprecatedButton` please use our flexible
 and themable buttons like `PrimaryButton`, `ScondaryButton` or `TertiaryButton`.
 
+### Input Provider
+
+We've removed `InputProvider` from our codebase and the `CanvasProvider`. The intent of the provider
+was to check the users input and apply focus styles accordingly to our components. This was needed
+when we still supported IE11 to ensure we could be consistent on styling based on user input events.
+Since dropping support and moving to `:focus-visible`, we no longer need this provider. We now allow
+browser heuristics to determine when an element should receive visual focus styles. For more
+information, please view the
+[MDN docs on `:focus-visible`](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible).
+
+If you are trying to apply focus styles to our components, we strongly avise to use `:focus-visible`
+pseudo selector.
+
+```tsx
+import {createStyles} from '@workday/canvas-kit-styling'
+import {PrimaryButton} from '@workday/canvas-kit-react/button'
+
+const buttonStyles = createStyles({
+  '&:focus-visible': {
+    outline: '2px solid red'
+  }
+})
+
+<PrimaryButton cs={buttonStyles}>
+	Click Me
+</PrimaryButton>
+```
+
 ### Menu (preview)
 
 **PR:** [#3353](https://github.com/Workday/canvas-kit/pull/3353)
@@ -524,6 +647,11 @@ and themable buttons like `PrimaryButton`, `ScondaryButton` or `TertiaryButton`.
 We've removed `Menu` from `@workday/canvas-kit-preview-react` package. Please use
 [Menu](https://workday.github.io/canvas-kit/?path=/docs/components-popups-menu--docs) from
 `@workday/canvas-kit-react` instead.
+
+### readyOnlyPillStencil and removeablePillStencil
+
+The `readyOnlyPillStencil` and `removeablePillStencil` utilities have been removed from the Pill
+package. Please use `pillStencil` instead.
 
 ### Text Area (preview)
 
@@ -539,7 +667,7 @@ We've removed `TextArea` from `@workday/canvas-kit-preview-react` package. Pleas
 
 We've removed `TextInput` from `@workday/canvas-kit-preview-react` package. Please use
 [TextInput](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-text-input--docs)
-from `@workday/canvas-kit-react` instead.
+from `@workday/canvas-kit-react` instead. =======
 
 ---
 

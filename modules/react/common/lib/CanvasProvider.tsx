@@ -1,15 +1,23 @@
 import * as React from 'react';
 import {Theme, ThemeProvider, CacheProvider} from '@emotion/react';
-import {InputProvider} from './InputProvider';
 import {defaultCanvasTheme, PartialEmotionCanvasTheme, useTheme} from './theming';
 import {brand, base} from '@workday/canvas-tokens-web';
-import {createStyles, getCache} from '@workday/canvas-kit-styling';
+import {getCache, maybeWrapCSSVariables, createStyles} from '@workday/canvas-kit-styling';
 
 export interface CanvasProviderProps {
   theme?: PartialEmotionCanvasTheme;
 }
 
-// copied from brand/_variables.css
+const mappedKeys = {
+  lightest: 'lightest',
+  lighter: 'lighter',
+  light: 'light',
+  main: 'base',
+  dark: 'dark',
+  darkest: 'darkest',
+  contrast: 'accent',
+};
+
 const defaultBranding = createStyles({
   [brand.common.alertInner]: base.amber400,
   [brand.common.alertOuter]: base.amber500,
@@ -54,15 +62,6 @@ const defaultBranding = createStyles({
     .primary]: `linear-gradient(90deg, ${brand.primary.base} 0%, ${brand.primary.dark} 100%)`,
 });
 
-const mappedKeys = {
-  lightest: 'lightest',
-  light: 'light',
-  main: 'base',
-  dark: 'dark',
-  darkest: 'darkest',
-  contrast: 'accent',
-};
-
 export const useCanvasThemeToCssVars = (
   theme: PartialEmotionCanvasTheme | undefined,
   elemProps: React.HTMLAttributes<HTMLElement>
@@ -73,37 +72,49 @@ export const useCanvasThemeToCssVars = (
   const {palette} = filledTheme.canvas;
   (['common', 'primary', 'error', 'alert', 'success', 'neutral'] as const).forEach(color => {
     if (color === 'common') {
-      // @ts-ignore
-      style[brand.common.focusOutline] = palette.common.focusOutline;
+      (['focusOutline', 'alertInner', 'alertOuter', 'errorInner'] as const).forEach(key => {
+        if (palette.common[key] !== defaultCanvasTheme.palette.common[key]) {
+          //@ts-ignore
+          style[brand.common.focusOutline] = maybeWrapCSSVariables(palette.common.focusOutline);
+          //@ts-ignore
+          style[brand.common.alertInner] = maybeWrapCSSVariables(palette.common.alertInner);
+          //@ts-ignore
+          style[brand.common.alertOuter] = maybeWrapCSSVariables(palette.common.alertOuter);
+          //@ts-ignore
+          style[brand.common.errorInner] = maybeWrapCSSVariables(palette.common.errorInner);
+        }
+      });
     }
     (['lightest', 'lighter', 'light', 'main', 'dark', 'darkest', 'contrast'] as const).forEach(
       key => {
         // We only want to set custom colors if they do not match the default. The `defaultBranding` class will take care of the rest.
-        // @ts-ignore
+        //@ts-ignore
         if (palette[color][key] !== defaultCanvasTheme.palette[color][key]) {
           // @ts-ignore
-          style[brand[color][mappedKeys[key]]] = palette[color][key];
+          style[brand[color][mappedKeys[key]]] = maybeWrapCSSVariables(palette[color][key]);
         }
       }
     );
   });
+
   return {...elemProps, className, style};
 };
 
 export const CanvasProvider = ({
   children,
-  theme = {canvas: defaultCanvasTheme},
+  theme,
   ...props
 }: CanvasProviderProps & React.HTMLAttributes<HTMLElement>) => {
-  const elemProps = useCanvasThemeToCssVars(theme, props);
+  const {className, style, ...rest} = useCanvasThemeToCssVars(theme, props);
   const cache = getCache();
+
   return (
     <CacheProvider value={cache}>
       <ThemeProvider theme={theme as Theme}>
-        <InputProvider />
         <div
           dir={theme?.canvas?.direction || defaultCanvasTheme.direction}
-          {...(elemProps as React.HTMLAttributes<HTMLDivElement>)}
+          style={style}
+          {...(rest as React.HTMLAttributes<HTMLDivElement>)}
         >
           {children}
         </div>
