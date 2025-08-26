@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {BodyText, Heading} from '@workday/canvas-kit-react/text';
 import {AriaLiveRegion} from '@workday/canvas-kit-react/common';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {system} from '@workday/canvas-tokens-web';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 
 const fruits = [
   'Apples',
@@ -49,10 +50,12 @@ export const FilterListWithLiveStatus = () => {
           </BodyText>
         </AriaLiveRegion>
       </Flex>
-      <TextInput orientation="vertical">
-        <TextInput.Label>Filter Items:</TextInput.Label>
-        <TextInput.Field value={filter} onChange={handleFilter} />
-      </TextInput>
+      <FormField>
+        <FormField.Label>Filter Items:</FormField.Label>
+        <FormField.Field>
+          <FormField.Input as={TextInput} value={filter} onChange={handleFilter} />
+        </FormField.Field>
+      </FormField>
       <ul style={listStyles}>
         {filteredFruits.map(i => (
           <BodyText size="small" as="li" cs={listItemStyles} key={i}>
