@@ -76,7 +76,8 @@ export function getPaletteColorsForFocusRing(
  * // Add here jsx pragma to use css
  * import {jsx} from '@emotion/react';
  * import React from 'react';
- * import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
+ * import {FormField} from '@workday/canvas-kit-react/form-field';
+ * import {TextInput} from '@workday/canvas-kit-react/text-input';
  * import {useThemedRing} from '@workday/canvas-kit-react/common';
  *
  * export const MyInput = ({handleChange}) => {
@@ -88,11 +89,13 @@ export function getPaletteColorsForFocusRing(
  *  const alertStyles = useThemedRing('alert');
  *
  *  return (
- *    <TextInput>
- *     <TextInput.Label>Email</TextInput.Label>
- *      <TextInput.Field css={alertStyles} onChange={handleChange} value={value} />
- *      <TextInput.Hint>Please enter a valid email.</TextInput.Hint>
- *    </TextInput>
+ *    <FormField>
+ *      <FormField.Label>Email</FormField.Label>
+ *      <FormField.Field css={alertStyles}>
+ *        <FormField.Input as={TextInput} onChange={handleChange} value={value} />
+ *        <FormField.Hint>Add a valid email</FormField.Hint>
+ *      </FormField.Field>
+ *    </FormField>
  *  );
  * };
  *```
