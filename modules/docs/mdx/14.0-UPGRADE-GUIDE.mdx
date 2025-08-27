@@ -669,13 +669,63 @@ We've removed `TextArea` from `@workday/canvas-kit-preview-react` package. Pleas
 [TextArea](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-textarea--docs) from
 `@workday/canvas-kit-react` instead.
 
+**Before in v13**
+
+```tsx
+import {TextArea} from '@workday/canvas-kit-preview-react/text-area';
+
+<TextArea orientation="vertical">
+  <TextArea.Label>Leave a review</TextArea.Label>
+  <TextArea.Field onChange={handleChange} value={value} />
+</TextArea>
+```
+
+**After in v14**
+
+```tsx
+import {TextArea} from '@workday/canvas-kit-preview-react/text-area';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+
+<FormField>
+  <FormField.Label>Leave a Review</FormField.Label>
+  <FormField.Field>
+    <FormField.Input as={TextArea} onChange={handleChange} value={value} />
+  </FormField.Field>
+</FormField>
+```
+
 ### Text Input (preview)
 
 **PR:** [#3471](https://github.com/Workday/canvas-kit/pull/3471)
 
 We've removed `TextInput` from `@workday/canvas-kit-preview-react` package. Please use
 [TextInput](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-text-input--docs)
-from `@workday/canvas-kit-react` instead. =======
+from `@workday/canvas-kit-react` instead.
+
+**Before in v13**
+
+```tsx
+import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
+
+<TextInput orientation="vertical">
+  <TextInput.Label>Email</TextInput.Label>
+  <TextInput.Field onChange={handleChange} value={value} />
+</TextInput>
+```
+
+**After in v14**
+
+```tsx
+import {TextArea} from '@workday/canvas-kit-preview-react/text-input';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+
+<FormField>
+  <FormField.Label>Leave a Review</FormField.Label>
+  <FormField.Field>
+    <FormField.Input as={TextInput} onChange={handleChange} value={value} />
+  </FormField.Field>
+</FormField>
+```
 
 ---
 

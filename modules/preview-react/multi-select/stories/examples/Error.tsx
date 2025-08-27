@@ -24,30 +24,32 @@ export const Error = () => {
           }
         >
           <FormField.Label>Toppings</FormField.Label>
-          <FormField.Input
-            as={MultiSelect.Input}
-            placeholder="Select Multiple"
-            removeLabel="Remove"
-          />
-          <MultiSelect.Popper>
-            <MultiSelect.Card>
-              <MultiSelect.List>
-                {item => (
-                  <MultiSelect.Item data-id={item}>
-                    <MultiSelect.Item.Text>{item}</MultiSelect.Item.Text>
-                  </MultiSelect.Item>
-                )}
-              </MultiSelect.List>
-            </MultiSelect.Card>
-          </MultiSelect.Popper>
+          <FormField.Field>
+            <FormField.Input
+              as={MultiSelect.Input}
+              placeholder="Select Multiple"
+              removeLabel="Remove"
+            />
+            <MultiSelect.Popper>
+              <MultiSelect.Card>
+                <MultiSelect.List>
+                  {item => (
+                    <MultiSelect.Item data-id={item}>
+                      <MultiSelect.Item.Text>{item}</MultiSelect.Item.Text>
+                    </MultiSelect.Item>
+                  )}
+                </MultiSelect.List>
+              </MultiSelect.Card>
+            </MultiSelect.Popper>
 
-          <FormField.Hint>
-            {model.state.selectedIds.length < 1
-              ? 'Select at least one topping.'
-              : model.state.selectedIds.length > 3
-              ? 'More than 3 toppings cost extra.'
-              : undefined}
-          </FormField.Hint>
+            <FormField.Hint>
+              {model.state.selectedIds.length < 1
+                ? 'Select at least one topping.'
+                : model.state.selectedIds.length > 3
+                ? 'More than 3 toppings cost extra.'
+                : undefined}
+            </FormField.Hint>
+          </FormField.Field>
         </FormField>
       </MultiSelect>
     </>
