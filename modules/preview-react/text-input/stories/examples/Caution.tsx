@@ -3,7 +3,7 @@ import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
 import {useThemedRing} from '@workday/canvas-kit-react/common';
 import {space} from '@workday/canvas-kit-react/tokens';
 
-export const Alert = () => {
+export const Caution = () => {
   const [value, setValue] = React.useState('foo');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

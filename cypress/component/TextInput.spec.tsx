@@ -1,5 +1,5 @@
 import {Basic} from '../../modules/react/text-input/stories/examples/Basic';
-import {Alert} from '../../modules/react/text-input/stories/examples/Alert';
+import {Caution} from '../../modules/react/text-input/stories/examples/Caution';
 import {Error} from '../../modules/react/text-input/stories/examples/Error';
 import {Disabled} from '../../modules/react/text-input/stories/examples/Disabled';
 import {Placeholder} from '../../modules/react/text-input/stories/examples/Placeholder';
@@ -9,7 +9,7 @@ const getTextInput = () => {
 };
 
 describe('TextInput', () => {
-  [Basic, Alert, Error].forEach(Example => {
+  [Basic, Caution, Error].forEach(Example => {
     context(`given the '${Example.name}' story is rendered`, () => {
       beforeEach(() => {
         cy.mount(<Example />);

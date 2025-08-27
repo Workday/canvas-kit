@@ -21,7 +21,7 @@ export interface TransformOrigin {
  */
 export enum ErrorType {
   Error = 'error',
-  Alert = 'alert',
+  Caution = 'caution',
 }
 
 /**

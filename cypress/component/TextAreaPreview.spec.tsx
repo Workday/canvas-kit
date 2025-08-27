@@ -1,5 +1,5 @@
 import {Basic} from '../../modules/preview-react/text-area/stories/examples/Basic';
-import {Alert} from '../../modules/preview-react/text-area/stories/examples/Alert';
+import {Caution} from '../../modules/preview-react/text-area/stories/examples/Caution';
 import {Error} from '../../modules/preview-react/text-area/stories/examples/Error';
 import {Disabled} from '../../modules/preview-react/text-area/stories/examples/Disabled';
 import {Placeholder} from '../../modules/preview-react/text-area/stories/examples/Placeholder';
@@ -9,7 +9,7 @@ const getTextArea = () => {
 };
 
 describe('Text Area', () => {
-  [Basic, Alert, Error].forEach(Example => {
+  [Basic, Caution, Error].forEach(Example => {
     context(`given the '${Example.name}' story is rendered`, () => {
       beforeEach(() => {
         cy.mount(<Example />);

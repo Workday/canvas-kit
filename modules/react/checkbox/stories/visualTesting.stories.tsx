@@ -34,7 +34,7 @@ export const CheckboxStates = () => (
           ],
           error: [
             {value: undefined, label: ''},
-            {value: Checkbox.ErrorType.Alert, label: 'Alert'},
+            {value: Checkbox.ErrorType.Caution, label: 'Caution'},
             {value: Checkbox.ErrorType.Error, label: 'Error'},
           ],
         },
@@ -94,7 +94,7 @@ export const InverseCheckboxStates = () => (
           ],
           error: [
             {value: undefined, label: ''},
-            {value: Checkbox.ErrorType.Alert, label: 'Alert'},
+            {value: Checkbox.ErrorType.Caution, label: 'Caution'},
             {value: Checkbox.ErrorType.Error, label: 'Error'},
           ],
         },

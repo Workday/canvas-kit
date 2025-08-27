@@ -1,10 +1,10 @@
 import {Basic} from '../../modules/react/radio/stories/examples/Basic';
-import {Alert} from '../../modules/react/radio/stories/examples/Alert';
+import {Caution} from '../../modules/react/radio/stories/examples/Caution';
 import {Error} from '../../modules/react/radio/stories/examples/Error';
 import {Disabled} from '../../modules/react/radio/stories/examples/Disabled';
 
 describe('Radio', () => {
-  [Basic, Alert, Error].forEach(Example => {
+  [Basic, Caution, Error].forEach(Example => {
     context(`given the '${Example.name}' story is rendered`, () => {
       beforeEach(() => {
         cy.mount(<Example />);

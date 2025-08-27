@@ -17,7 +17,7 @@ const options = [
   'The Ontologically Anthropocentric Sensory Immersive Simulation',
 ];
 
-export const Alert = () => {
+export const Caution = () => {
   const [value, setValue] = React.useState('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +25,7 @@ export const Alert = () => {
   };
   return (
     <Flex cs={parentContainerStyles}>
-      <FormField error="alert">
+      <FormField error="caution">
         <FormField.Label>Contact</FormField.Label>
         <FormField.Field>
           <Select items={options}>

@@ -15,7 +15,7 @@ const textInputFieldStencil = createStencil({
       error: {
         backgroundColor: brand.error.lightest,
       },
-      alert: {
+      caution: {
         backgroundColor: brand.alert.lightest,
       },
     },

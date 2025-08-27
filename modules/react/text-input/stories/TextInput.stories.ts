@@ -4,7 +4,7 @@ import mdxDoc from './TextInput.mdx';
 
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 
-import {Alert as AlertExample} from './examples/Alert';
+import {Caution as CautionExample} from './examples/Caution';
 import {Basic as BasicExample} from './examples/Basic';
 import {Disabled as DisabledExample} from './examples/Disabled';
 import {Error as ErrorExample} from './examples/Error';
@@ -28,8 +28,8 @@ export default {
 
 type Story = StoryObj<typeof TextInput>;
 
-export const Alert: Story = {
-  render: AlertExample,
+export const Caution: Story = {
+  render: CautionExample,
 };
 export const Basic: Story = {
   render: BasicExample,
