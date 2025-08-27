@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {Theme, ThemeProvider, CacheProvider} from '@emotion/react';
 import {defaultCanvasTheme, PartialEmotionCanvasTheme, useTheme} from './theming';
-import {InputProvider} from './InputProvider';
 import {brand, base} from '@workday/canvas-tokens-web';
 import {getCache, maybeWrapCSSVariables, createStyles} from '@workday/canvas-kit-styling';
 
@@ -112,7 +111,6 @@ export const CanvasProvider = ({
   return (
     <CacheProvider value={cache}>
       <ThemeProvider theme={theme as Theme}>
-        <InputProvider />
         <div
           dir={theme?.canvas?.direction || defaultCanvasTheme.direction}
           style={style}

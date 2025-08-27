@@ -36,8 +36,9 @@ any questions.
   - [Tokens](#tokens)
 - [Removals](#removals)
   - [Deprecated Buttons](#deprecated-buttons)
+  - [Input Provider](#input-provider)
   - [Menu (preview)](#menu-preview)
-  - [readyOnlyPillStencil and removeablePillStencil][readyOnlyPillStencil-and-removeablePillStencil]
+  - [readyOnlyPillStencil and removeablePillStencil](readyOnlyPillStencil-and-removeablePillStencil)
 - [Troubleshooting](#troubleshooting)
 - [Glossary](#glossary)
   - [Main](#main)
@@ -602,6 +603,28 @@ as a reminder of how far we've come and it part we're thankful for this change.
 
 Al though unlikely, but not impossible, if you were using `DeprecatedButton` please use our flexible
 and themable buttons like `PrimaryButton`, `ScondaryButton` or `TertiaryButton`.
+
+### Input Provider
+
+We've removed `InputProvider` from our codebase and the `CanvasProvider`. The intent of the provider was to check the users input and apply focus styles accordingly to our components. This was needed when we still supported IE11 to ensure we could be consistent on styling based on user input events. Since dropping support and moving to `:focus-visible`, we no longer need this provider.
+We now allow browser heuristics to determine when an element should receive visual focus styles. For more information, please view the [MDN docs on `:focus-visible`](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible).
+
+If you are trying to apply focus styles to our components, we strongly avise to use `:focus-visible` pseudo selector.
+
+```tsx
+import {createStyles} from '@workday/canvas-kit-styling'
+import {PrimaryButton} from '@workday/canvas-kit-react/button'
+
+const buttonStyles = createStyles({
+  '&:focus-visible': {
+    outline: '2px solid red'
+  }
+})
+
+<PrimaryButton cs={buttonStyles}>
+	Click Me
+</PrimaryButton>
+```
 
 ### Menu (preview)
 
