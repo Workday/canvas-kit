@@ -1,12 +1,18 @@
 import {focusRing} from '@workday/canvas-kit-react/common';
 import {colors} from '@workday/canvas-kit-react/tokens';
 
+/**
+ * @deprecated ⚠️ `SearchTheme` is deprecated and will be removed in a future major version. Please our CSS tokens to theme components.
+ */
 export enum SearchTheme {
   Light = 'light',
   Dark = 'dark',
   Transparent = 'transparent',
 }
 
+/**
+ * @deprecated ⚠️ `SearchThemeAttributes` is deprecated and will be removed in a future major version. Please our CSS tokens to theme components.
+ */
 export interface SearchThemeAttributes {
   background?: string;
   backgroundFocus?: string;
@@ -19,10 +25,16 @@ export interface SearchThemeAttributes {
   boxShadowFocus?: string;
 }
 
+/**
+ * @deprecated ⚠️ `SearchThemes` is deprecated and will be removed in a future major version. Please our CSS tokens to theme components.
+ */
 export interface SearchThemes {
   [key: string]: SearchThemeAttributes;
 }
 
+/**
+ * @deprecated ⚠️ `searchThemes` is deprecated and will be removed in a future major version. Please our CSS tokens to theme components.
+ */
 export const searchThemes: SearchThemes = {
   [SearchTheme.Transparent]: {
     background: 'rgba(0, 0, 0, 0)',
