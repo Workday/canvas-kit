@@ -102,7 +102,7 @@ export const useCanvasThemeToCssVars = (
 
 export const CanvasProvider = ({
   children,
-  theme,
+  theme = {canvas: {}}, // default to empty theme to avoid breaking changes
   ...props
 }: CanvasProviderProps & React.HTMLAttributes<HTMLElement>) => {
   const {className, style, ...rest} = useCanvasThemeToCssVars(theme, props);
