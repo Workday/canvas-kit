@@ -363,7 +363,7 @@ These changes are only **visual** and should not affect the functionality of the
 
 **PR:** [#3390](https://github.com/Workday/canvas-kit/pull/3390)
 
-- `Hyperlink` and `ExternalHyperlink` now have a `standalone` and `standalone-inverse` variant. This
+- `Hyperlink` and `ExternalHyperlink` now have a `standalone` and `standaloneInverse` variant. This
   removes the underline text decoration for use outside the context of body text.
 
 **HyperLink and ExternalHyperlink in v14**
@@ -371,11 +371,11 @@ These changes are only **visual** and should not affect the functionality of the
 ```tsx
 <Hyperlink variant="standalone" href="#hyperlink">Hyperlink</Hyperlink>
 <ExternalHyperlink variant="standalone" href="#external-hyperlink">External Hyperlink</ExternalHyperlink>
-<Hyperlink variant="standalone-inverse" href="#hyperlink">Hyperlink</Hyperlink>
-<ExternalHyperlink variant="standalone-inverse" href="#external-hyperlink">External Hyperlink</ExternalHyperlink>
+<Hyperlink variant="standaloneInverse" href="#hyperlink">Hyperlink</Hyperlink>
+<ExternalHyperlink variant="standaloneInverse" href="#external-hyperlink">External Hyperlink</ExternalHyperlink>
 ```
 
-> **Note:** Only use the `standalone` or `standalone-inverse` variant in cases where the
+> **Note:** Only use the `standalone` or `standaloneInverse` variant in cases where the
 > `<HyperLink>` and `<ExternalHyperlink>` are used outside the context of body text.
 
 ### Loading Dots

@@ -76,7 +76,7 @@ export const loadingDotsStencil = createStencil({
     variant: {
       inverse: ({loadingDotColor, loadingAnimationDotPart}) => ({
         [loadingAnimationDotPart]: {
-          backgroundColor: cssVar(system.color.bg.muted.softer, loadingDotColor),
+          backgroundColor: cssVar(system.color.bg.default, loadingDotColor),
         },
       }),
     },
