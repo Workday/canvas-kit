@@ -11,14 +11,14 @@ import {PillCount, pillCountStencil} from './PillCount';
 import {PillAvatar} from './PillAvatar';
 import {PillLabel} from './PillLabel';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 export interface PillProps extends BoxProps {
   /**
    * Defines what kind of pill to render stylistically and its interaction states
    * @default 'default'
    */
-  variant?: 'default' | 'readOnly' | 'removable';
+  variant?: 'readOnly' | 'removable';
   /**
    * Determines the max width of the pill. If the pill text is longer than the max width,
    * text will be truncated and a tooltip will show the rest of the content when hovered over
@@ -48,24 +48,42 @@ export const pillStencil = createStencil({
     height: system.space.x6,
     position: 'relative',
     gap: system.space.x1,
-    maxWidth: maxWidth,
-    [buttonStencil.vars.background]: system.color.bg.alt.default,
-    [buttonStencil.vars.border]: system.color.border.input.default,
-    [buttonStencil.vars.label]: system.color.text.strong,
-    [systemIconStencil.vars.color]: system.color.icon.default,
+    maxWidth,
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
     overflow: 'hidden',
+    [buttonStencil.vars.background]: system.color.bg.alt.default,
+    [buttonStencil.vars.border]: system.color.border.input.default,
+    [buttonStencil.vars.label]: system.color.fg.strong,
+    [systemIconStencil.vars.color]: 'currentColor',
+    [pillCountStencil.vars.borderColor]: 'transparent',
+
     '&:has(span)': {
       display: 'flex',
       lineHeight: system.lineHeight.subtext.large, // ensure correct line height
     },
+    '&:hover, &.hover': {
+      [buttonStencil.vars.background]: system.color.bg.alt.strong,
+      [buttonStencil.vars.border]: system.color.border.input.strong,
+      [buttonStencil.vars.label]: system.color.fg.strong,
+      [systemIconStencil.vars.color]: 'currentColor',
+      [pillCountStencil.vars.backgroundColor]: system.color.bg.muted.softer,
+      [pillCountStencil.vars.borderColor]: 'transparent',
+    },
+    '&:active, &.active': {
+      [buttonStencil.vars.background]: system.color.bg.alt.stronger,
+      [buttonStencil.vars.border]: system.color.border.input.strong,
+      [buttonStencil.vars.label]: system.color.fg.strong,
+      [systemIconStencil.vars.color]: 'currentColor',
+      [pillCountStencil.vars.backgroundColor]: system.color.bg.muted.softer,
+      [pillCountStencil.vars.borderColor]: 'transparent',
+    },
     '&:focus-visible, &.focus': {
-      [buttonStencil.vars.background]: system.color.bg.alt.soft,
+      [buttonStencil.vars.background]: system.color.bg.alt.default,
       [buttonStencil.vars.border]: system.color.border.primary.default,
-      [buttonStencil.vars.label]: system.color.text.strong,
-      [systemIconStencil.vars.color]: system.color.icon.strong,
+      [buttonStencil.vars.label]: system.color.fg.strong,
       borderColor: system.color.border.primary.default,
+      [systemIconStencil.vars.color]: 'currentColor',
       [pillCountStencil.vars.borderColor]: system.color.border.primary.default,
 
       ...focusRing({
@@ -76,74 +94,56 @@ export const pillStencil = createStencil({
         separation: 1,
       }),
     },
-    '&:hover, &.hover': {
-      [buttonStencil.vars.background]: system.color.bg.alt.strong,
-      [buttonStencil.vars.border]: system.color.border.input.strong,
-      [buttonStencil.vars.label]: system.color.text.strong,
-      [systemIconStencil.vars.color]: system.color.icon.strong,
-    },
-    '&:active, &.active': {
-      [buttonStencil.vars.background]: system.color.bg.alt.stronger,
-      [buttonStencil.vars.border]: system.color.border.input.strong,
-      [buttonStencil.vars.label]: system.color.text.strong,
-      [systemIconStencil.vars.color]: system.color.icon.strong,
-      [pillCountStencil.vars.backgroundColor]: base.soap600,
-      [pillCountStencil.vars.borderColor]: 'transparent',
-    },
     '&:disabled, &.disabled': {
-      [buttonStencil.vars.background]: system.color.bg.alt.softer,
+      [buttonStencil.vars.background]: system.color.bg.alt.default,
       [buttonStencil.vars.border]: system.color.border.input.disabled,
-      [buttonStencil.vars.label]: system.color.text.disabled,
-      [buttonStencil.vars.opacity]: '1',
-      [systemIconStencil.vars.color]: system.color.icon.soft,
-      [pillCountStencil.vars.backgroundColor]: system.color.bg.alt.default,
+      [buttonStencil.vars.label]: system.color.fg.disabled,
+      [systemIconStencil.vars.color]: 'currentColor',
+      [pillCountStencil.vars.backgroundColor]: system.color.bg.alt.strong,
       [pillCountStencil.vars.borderColor]: 'transparent',
     },
   }),
-});
-
-export const removeablePillStencil = createStencil({
-  extends: pillStencil,
-  base: {
-    '&:focus-visible, &.focus': {
-      [buttonStencil.vars.background]: system.color.bg.alt.soft,
-      [buttonStencil.vars.border]: system.color.border.input.default,
-      [buttonStencil.vars.label]: system.color.text.strong,
-      boxShadow: 'none',
-    },
-    '&:hover, &.hover': {
-      [buttonStencil.vars.background]: system.color.bg.alt.soft,
-    },
-    '&:active, &.active': {
-      [buttonStencil.vars.background]: system.color.bg.alt.stronger,
-    },
-    '&:disabled, &.disabled': {
-      [buttonStencil.vars.background]: system.color.bg.alt.softer,
-      [systemIconStencil.vars.color]: system.color.icon.soft,
-    },
-    cursor: 'default',
-    overflow: 'revert', // override BaseButton overflow styles so the click target exists outside the pill for removable
-    position: 'relative',
-  },
-});
-
-export const readyOnlyPillStencil = createStencil({
-  extends: pillStencil,
-  base: {
-    border: `${px2rem(1)} solid ${cssVar(system.color.border.input.default)}`,
-    cursor: 'default',
-    [buttonStencil.vars.background]: 'transparent',
-    '&:hover, &.hover': {
-      [buttonStencil.vars.background]: 'transparent',
-    },
-    '&:focus-visible, &.focus': {
-      [buttonStencil.vars.background]: 'transparent',
-    },
-    '&:active, &.active': {
-      [buttonStencil.vars.background]: 'transparent',
-    },
-    '&:disabled, &.disabled': {
-      [buttonStencil.vars.background]: 'transparent',
+  modifiers: {
+    variant: {
+      readOnly: {
+        border: `${px2rem(1)} solid ${system.color.border.container}`,
+        cursor: 'default',
+        [buttonStencil.vars.background]: 'transparent',
+        '&:hover, &.hover': {
+          borderColor: system.color.border.container,
+          [buttonStencil.vars.background]: 'transparent',
+        },
+        '&:focus-visible, &.focus': {
+          [buttonStencil.vars.background]: 'transparent',
+        },
+        '&:active, &.active': {
+          [buttonStencil.vars.background]: 'transparent',
+        },
+        '&:disabled, &.disabled': {
+          [buttonStencil.vars.background]: 'transparent',
+        },
+      },
+      removable: {
+        '&:focus-visible, &.focus': {
+          [buttonStencil.vars.background]: system.color.bg.alt.default,
+          [buttonStencil.vars.border]: system.color.border.input.default,
+          [buttonStencil.vars.label]: system.color.fg.strong,
+          boxShadow: 'none',
+        },
+        '&:hover, &.hover': {
+          [buttonStencil.vars.background]: system.color.bg.alt.strong,
+        },
+        '&:active, &.active': {
+          [buttonStencil.vars.background]: system.color.bg.alt.stronger,
+        },
+        '&:disabled, &.disabled': {
+          [buttonStencil.vars.background]: system.color.bg.alt.default,
+          [systemIconStencil.vars.color]: 'currentColor',
+        },
+        cursor: 'default',
+        overflow: 'revert', // override BaseButton overflow styles so the click target exists outside the pill for removable
+        position: 'relative',
+      },
     },
   },
 });
@@ -255,48 +255,31 @@ export const Pill = createContainer('button')({
      */
     Label: PillLabel,
   },
-})<PillProps>(({variant = 'default', maxWidth = 200, children, ...elemProps}, Element, model) => {
+})<PillProps>(({variant, maxWidth = 200, children, ...elemProps}, Element, model) => {
   const maxWidthCSSValue = typeof maxWidth === 'number' ? px2rem(maxWidth) : maxWidth;
-  return (
-    <>
-      {variant === 'readOnly' && (
-        <Box
-          as={Element !== 'button' ? Element : 'span'}
-          id={model.state.id}
-          {...mergeStyles(
-            elemProps,
-            readyOnlyPillStencil({
-              maxWidth: maxWidthCSSValue,
-            })
-          )}
-        >
-          <PillLabel>{children}</PillLabel>
-        </Box>
-      )}
-      {variant === 'default' && (
-        <Element
-          disabled={model.state.disabled}
-          {...mergeStyles(elemProps, [
-            model.state.disabled ? 'disabled' : undefined,
-            pillStencil({
-              maxWidth: maxWidthCSSValue,
-            }),
-          ])}
-        >
-          {children}
-        </Element>
-      )}
-      {variant === 'removable' && (
-        <Box
-          as={Element !== 'button' ? Element : 'span'}
-          {...mergeStyles(elemProps, [
-            model.state.disabled ? 'disabled' : undefined,
-            removeablePillStencil({maxWidth: maxWidthCSSValue}),
-          ])}
-        >
-          {children}
-        </Box>
-      )}
-    </>
+
+  const isReadOnly = variant === 'readOnly';
+
+  return variant?.match(/^(readOnly|removable)$/) ? (
+    <Box
+      as={Element !== 'button' ? Element : 'span'}
+      id={isReadOnly ? model.state.id : undefined}
+      {...mergeStyles(elemProps, [
+        model.state.disabled ? 'disabled' : undefined,
+        pillStencil({maxWidth: maxWidthCSSValue, variant}),
+      ])}
+    >
+      {isReadOnly ? <PillLabel>{children}</PillLabel> : children}
+    </Box>
+  ) : (
+    <Element
+      disabled={model.state.disabled}
+      {...mergeStyles(elemProps, [
+        model.state.disabled ? 'disabled' : undefined,
+        pillStencil({maxWidth: maxWidthCSSValue}),
+      ])}
+    >
+      {children}
+    </Element>
   );
 });

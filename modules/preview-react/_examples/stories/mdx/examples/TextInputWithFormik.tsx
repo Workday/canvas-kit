@@ -3,11 +3,12 @@ import React from 'react';
 import {useFormik} from 'formik';
 import {object, SchemaOf, string} from 'yup';
 
-import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {TertiaryButton, PrimaryButton} from '@workday/canvas-kit-react/button';
 import {visibleIcon, invisibleIcon} from '@workday/canvas-system-icons-web';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 
 interface LoginSchema {
   email: string;
@@ -47,40 +48,46 @@ export const TextInputWithFormik = () => {
   return (
     <form onSubmit={formik.handleSubmit} action=".">
       <Flex gap="xs" flexDirection="column" alignItems="flex-start">
-        <TextInput
+        <FormField
           orientation="vertical"
           isRequired={true}
           error={formik.touched.email && !!formik.errors.email ? 'error' : undefined}
         >
-          <TextInput.Label>Email</TextInput.Label>
-          <TextInput.Field
-            name="email"
-            autoComplete="username"
-            placeholder="yourName@example.com"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.email}
-          />
-          <TextInput.Hint>{formik.touched.email && formik.errors.email}</TextInput.Hint>
-        </TextInput>
-        <TextInput
+          <FormField.Label>Email</FormField.Label>
+          <FormField.Field>
+            <FormField.Input
+              as={TextInput}
+              name="email"
+              autoComplete="username"
+              placeholder="yourName@example.com"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.email}
+            />
+          </FormField.Field>
+          <FormField.Hint>{formik.touched.email && formik.errors.email}</FormField.Hint>
+        </FormField>
+        <FormField
           orientation="vertical"
           id={passwordId}
           error={formik.touched.password && !!formik.errors.password ? 'error' : undefined}
           isRequired={true}
         >
-          <TextInput.Label>Password</TextInput.Label>
+          <FormField.Label>Password</FormField.Label>
           <Flex gap="xxs">
-            <TextInput.Field
-              type={showPassword ? 'text' : 'password'}
-              name="password"
-              autoComplete="current-password"
-              spellCheck={false}
-              ref={passwordRef}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.password}
-            />
+            <FormField.Field>
+              <FormField.Input
+                as={TextInput}
+                type={showPassword ? 'text' : 'password'}
+                name="password"
+                autoComplete="current-password"
+                spellCheck={false}
+                ref={passwordRef}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.password}
+              />
+            </FormField.Field>
             <TertiaryButton
               type="button"
               icon={showPassword ? invisibleIcon : visibleIcon}
@@ -92,10 +99,10 @@ export const TextInputWithFormik = () => {
               }}
             />
           </Flex>
-          <TextInput.Hint>
+          <FormField.Hint>
             {(formik.touched.password && formik.errors.password) || passwordHint}
-          </TextInput.Hint>
-        </TextInput>
+          </FormField.Hint>
+        </FormField>
 
         <PrimaryButton type="submit">Submit</PrimaryButton>
       </Flex>

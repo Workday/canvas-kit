@@ -8,7 +8,7 @@ import {Flex} from '@workday/canvas-kit-react/layout';
 import {Heading, Text} from '@workday/canvas-kit-react/text';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 const stylesOverride = {
   viewport: createStyles({
@@ -20,7 +20,7 @@ const stylesOverride = {
     paddingX: system.space.x4,
   }),
   panelHeading: createStyles({
-    color: base.licorice500,
+    color: system.color.fg.muted.stronger,
   }),
   main: createStyles({
     alignItems: 'center',
