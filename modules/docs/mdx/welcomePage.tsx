@@ -64,7 +64,7 @@ export const WelcomePage = () => {
         </Box>
         <Text typeLevel="body.medium">
           This project provides a set of components for the Workday Canvas Design System that can be
-          used to implement user experiences consistent with {' '}
+          used to implement user experiences consistent with{' '}
           <ExternalHyperlink
             href="https://canvas.workdaydesign.com/"
             iconLabel="Open docs in new window"
@@ -72,20 +72,14 @@ export const WelcomePage = () => {
             Workday Design Principles.
           </ExternalHyperlink>
         </Text>
-        <Heading size="medium">
-          Quick Links
-        </Heading>
+        <Heading size="medium">Quick Links</Heading>
         <Grid
           gridAutoColumns="auto"
           gridTemplateColumns="repeat(auto-fill, minmax(250px, 1fr))"
           gridGap="s"
         >
           <Grid as={Card} className={gridStyles}>
-            <SystemIcon
-              color={base.magenta600}
-              icon={rocketIcon}
-              size={60}
-            ></SystemIcon>
+            <SystemIcon color={base.magenta600} icon={rocketIcon} size={60}></SystemIcon>
             <Card.Heading>Getting Started</Card.Heading>
             <Card.Body>
               <Text>For all things getting started including helpful guides and docs.</Text>
@@ -99,11 +93,7 @@ export const WelcomePage = () => {
             </Grid.Item>
           </Grid>
           <Grid as={Card} className={gridStyles}>
-            <SystemIcon
-              color={base.red300}
-              icon={tokensIcon}
-              size={60}
-            ></SystemIcon>
+            <SystemIcon color={base.red300} icon={tokensIcon} size={60}></SystemIcon>
             <Card.Heading>Tokens</Card.Heading>
             <Card.Body>
               <Text>
@@ -114,21 +104,18 @@ export const WelcomePage = () => {
             <Grid.Item
               as={ExternalHyperlink}
               className={linkStyles}
-              href="https://workday.github.io/canvas-tokens/?path=%2Fdocs%2Fdocs-getting-started--docs"
+              href="https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs"
             >
               View Our Tokens
             </Grid.Item>
           </Grid>
           <Grid as={Card} className={gridStyles}>
-            <SystemIcon
-              color={base.teal500}
-              icon={shapesIcon}
-              size={60}
-            ></SystemIcon>
+            <SystemIcon color={base.teal500} icon={shapesIcon} size={60}></SystemIcon>
             <Card.Heading>Styling</Card.Heading>
             <Card.Body>
               <Text>
-                Learn how to style Canvas components using tokens, theming, and custom CSS approaches.
+                Learn how to style Canvas components using tokens, theming, and custom CSS
+                approaches.
               </Text>
             </Card.Body>
             <Grid.Item
@@ -140,9 +127,7 @@ export const WelcomePage = () => {
             </Grid.Item>
           </Grid>
         </Grid>
-        <Heading size="medium">
-          Installation
-        </Heading>
+        <Heading size="medium">Installation</Heading>
         <Text>
           To get started using Canvas Kit React first add or install the module to your existing
           React project
