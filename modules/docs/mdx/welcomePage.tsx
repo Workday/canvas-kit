@@ -64,10 +64,11 @@ export const WelcomePage = () => {
         </Box>
         <Text typeLevel="body.medium">
           This project provides a set of components for the Workday Canvas Design System that can be
-          used to implement user experiences consistent with{' '}
+          used to implement user experiences consistent with
           <ExternalHyperlink
             href="https://canvas.workdaydesign.com/"
             iconLabel="Open docs in new window"
+            cs={{marginInlineStart: system.space.x1}}
           >
             Workday Design Principles.
           </ExternalHyperlink>
@@ -79,7 +80,7 @@ export const WelcomePage = () => {
           gridGap="s"
         >
           <Grid as={Card} className={gridStyles}>
-            <SystemIcon color={base.magenta600} icon={rocketIcon} size={60}></SystemIcon>
+            <SystemIcon color={base.magenta600} icon={rocketIcon} size={60} />
             <Card.Heading>Getting Started</Card.Heading>
             <Card.Body>
               <Text>For all things getting started including helpful guides and docs.</Text>
@@ -93,7 +94,7 @@ export const WelcomePage = () => {
             </Grid.Item>
           </Grid>
           <Grid as={Card} className={gridStyles}>
-            <SystemIcon color={base.red300} icon={tokensIcon} size={60}></SystemIcon>
+            <SystemIcon color={base.red300} icon={tokensIcon} size={60} />
             <Card.Heading>Tokens</Card.Heading>
             <Card.Body>
               <Text>
@@ -110,7 +111,7 @@ export const WelcomePage = () => {
             </Grid.Item>
           </Grid>
           <Grid as={Card} className={gridStyles}>
-            <SystemIcon color={base.teal500} icon={shapesIcon} size={60}></SystemIcon>
+            <SystemIcon color={base.teal500} icon={shapesIcon} size={60} />
             <Card.Heading>Styling</Card.Heading>
             <Card.Body>
               <Text>
