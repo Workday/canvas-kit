@@ -104,7 +104,7 @@ export const WelcomePage = () => {
             <Grid.Item
               as={ExternalHyperlink}
               className={linkStyles}
-              href="https://workday.github.io/canvas-tokens/?path=/docs/guides-getting-started--docs"
+              href="https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs"
             >
               View Our Tokens
             </Grid.Item>
