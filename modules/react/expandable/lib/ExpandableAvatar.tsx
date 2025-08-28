@@ -9,7 +9,6 @@ export interface ExpandableAvatarProps extends AvatarProps {}
 export const expandableAvatarStencil = createStencil({
   extends: avatarStencil,
   base: {
-    marginInlineEnd: system.space.x2,
     flexShrink: 0,
   },
 });
