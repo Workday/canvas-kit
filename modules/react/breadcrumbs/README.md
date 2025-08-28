@@ -6,4 +6,4 @@ users to keep track and maintain awareness of their location as they navigate th
 folders, files, etc.
 
 For more detailed information on this component, please refer to the
-[storybook documentation](https://workday.github.io/canvas-kit/?path=/docs/components-navigation-breadcrumbs-react--basic)
+[storybook documentation](https://workday.github.io/canvas-kit/?path=/docs/components-navigation-breadcrumbs--docs)
