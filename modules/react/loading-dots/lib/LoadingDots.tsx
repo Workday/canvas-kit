@@ -20,6 +20,15 @@ const keyframesLoading = keyframes({
   '40%': {
     transform: 'scale(1)',
   },
+  '0%, 79%, 100%': {
+    opacity: 0.6,
+  },
+  '27%': {
+    opacity: 1,
+  },
+  '53%': {
+    opacity: 0.8,
+  },
 });
 
 export interface LoadingDotsProps extends CSProps {
