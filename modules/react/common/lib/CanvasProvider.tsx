@@ -99,7 +99,6 @@ export const useCanvasThemeToCssVars = (
       }
     );
   });
-  console.log('elemProps>>>', elemProps);
   return {...elemProps, className, style};
 };
 
@@ -110,7 +109,6 @@ export const CanvasProvider = ({
 }: CanvasProviderProps & React.HTMLAttributes<HTMLElement>) => {
   const {className, ...elemProps} = useCanvasThemeToCssVars(theme, props);
   const cache = getCache();
-  console.log('props', props);
   const rest = {...elemProps, ...props};
   return (
     <CacheProvider value={cache}>
