@@ -1,5 +1,7 @@
 // @ts-ignore: Cannot find module error
 import headerImage from './ck-banner.jpg';
+import componentsImage from './Components.png';
+import tokensImage from './Tokens.png';
 import {Flex, Grid, Box} from '@workday/canvas-kit-react/layout';
 import {InstallBlock} from './installBlock';
 import {Text, Heading} from '@workday/canvas-kit-react/text';
@@ -9,6 +11,7 @@ import {rocketIcon, tokensIcon, shapesIcon} from '@workday/canvas-system-icons-w
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {system, base} from '@workday/canvas-tokens-web';
 import {createStyles} from '@workday/canvas-kit-styling';
+import {Graphic} from '@workday/canvas-kit-react/icon';
 // @ts-ignore: Cannot find module error
 import {version} from '../../../lerna.json';
 
@@ -80,7 +83,7 @@ export const WelcomePage = () => {
           gridGap="s"
         >
           <Grid as={Card} className={gridStyles}>
-            <SystemIcon color={base.magenta600} icon={rocketIcon} size={60} />
+            <Graphic src={{url: componentsImage}} />
             <Card.Heading>Getting Started</Card.Heading>
             <Card.Body>
               <Text>For all things getting started including helpful guides and docs.</Text>
@@ -94,7 +97,7 @@ export const WelcomePage = () => {
             </Grid.Item>
           </Grid>
           <Grid as={Card} className={gridStyles}>
-            <SystemIcon color={base.red300} icon={tokensIcon} size={60} />
+            <Graphic src={{url: tokensImage}} />
             <Card.Heading>Tokens</Card.Heading>
             <Card.Body>
               <Text>

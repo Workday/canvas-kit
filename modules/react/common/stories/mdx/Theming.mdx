@@ -1,0 +1,351 @@
+<Meta title="Features/Theming/Overview" />
+
+# Canvas Kit v14 Theming Guide
+
+## Overview
+
+Canvas Kit v14 introduces a significant shift in theming approach, moving away from JavaScript-based theme objects to CSS variables. This change provides better performance, improved developer experience, and greater flexibility for theming applications.
+
+## Migration from v10 Theme Prop to v14 CSS Variables
+
+### The Evolution
+
+**Canvas Kit v10** introduced CSS tokens through the `@workday/canvas-tokens-web` package, providing a foundation for consistent design system values.
+
+**Canvas Kit v14** deprecates the `CanvasProvider` theme prop in favor of CSS variables, offering a more performant and flexible theming solution.
+
+## ❌ Deprecated Approach (v10-v13)
+
+The old theming approach used JavaScript objects passed to the `CanvasProvider` theme prop:
+
+```tsx
+import {CanvasProvider} from "@workday/canvas-kit-react/common"
+import {base} from "@workday/canvas-tokens-web"
+
+<CanvasProvider theme={{canvas: {palette: {primary: base.magenta600}}}}>
+   <App/>
+</CanvasProvider>
+```
+
+**Why we're moving away from this approach:**
+- Performance overhead from JavaScript theme object processing
+- Runtime theme generation using OKLCH color space
+- Limited flexibility for complex theming scenarios
+- Inconsistent cascade behavior
+
+## ✅ Preferred Approach (v14+)
+
+Canvas Kit v14 promotes using CSS variables for theming, which can be applied in two ways:
+
+### Method 1: Global CSS Variables (Recommended)
+
+Apply theming at the global level by importing CSS variable files and overriding values in your root CSS:
+
+```css
+/* index.css */
+@import '@workday/canvas-tokens-web/css/base/_variables.css';
+@import '@workday/canvas-tokens-web/css/system/_variables.css';
+@import '@workday/canvas-tokens-web/css/brand/_variables.css';
+
+:root {
+  /* Override brand primary colors */
+  --cnvs-brand-primary-base: var(--cnvs-base-palette-magenta-600);
+  --cnvs-brand-primary-light: var(--cnvs-base-palette-magenta-200);
+  --cnvs-brand-primary-lighter: var(--cnvs-base-palette-magenta-50);
+  --cnvs-brand-primary-lightest: var(--cnvs-base-palette-magenta-25);
+  --cnvs-brand-primary-dark: var(--cnvs-base-palette-magenta-700);
+  --cnvs-brand-primary-darkest: var(--cnvs-base-palette-magenta-800);
+  --cnvs-brand-primary-accent: var(--cnvs-base-palette-neutral-0);
+}
+```
+
+### Method 2: Component-Level CSS Variables
+
+Use Canvas Kit's `createStyles` utility to generate themed class names that can be applied to specific components or sections:
+
+```tsx
+import {createStyles} from "@workday/canvas-kit-styling"
+import {brand, base} from "@workday/canvas-tokens-web"
+import {CanvasProvider} from "@workday/canvas-kit-react/common"
+
+// Generate a class name that defines CSS variables
+const themedBrand = createStyles({
+  [brand.primary.accent]: base.neutral0,
+  [brand.primary.darkest]: base.blue800,
+  [brand.primary.dark]: base.blue700,
+  [brand.primary.base]: base.blue600,
+  [brand.primary.light]: base.blue200,
+  [brand.primary.lighter]: base.blue50,
+  [brand.primary.lightest]: base.blue25,
+})
+
+<CanvasProvider className={themedBrand}>
+  <App/>
+</CanvasProvider>
+```
+
+## CSS Token Structure
+
+Canvas Kit provides three layers of CSS variables:
+
+### Base Tokens (`base/_variables.css`)
+Foundation palette and design values:
+```css
+--cnvs-base-palette-blue-600: oklch(0.5198 0.1782 256.11 / 1);
+--cnvs-base-palette-magenta-600: oklch(0.534 0.183 344.19 / 1);
+--cnvs-base-font-size-100: 1rem;
+--cnvs-base-space-x4: calc(var(--cnvs-base-unit) * 4);
+```
+
+### Brand Tokens (`brand/_variables.css`)
+Semantic color assignments:
+```css
+--cnvs-brand-primary-base: var(--cnvs-base-palette-blue-600);
+--cnvs-brand-primary-accent: var(--cnvs-base-palette-neutral-0);
+--cnvs-brand-error-base: var(--cnvs-base-palette-red-600);
+--cnvs-brand-success-base: var(--cnvs-base-palette-green-600);
+```
+
+### System Tokens (`system/_variables.css`)
+Component-specific values:
+```css
+--cnvs-sys-color-bg-primary-default: var(--cnvs-base-palette-blue-600);
+--cnvs-sys-color-text-primary-default: var(--cnvs-base-palette-blue-600);
+--cnvs-sys-space-x4: calc(var(--cnvs-base-unit) * 4);
+```
+
+## Practical Examples
+
+### Complete Brand Theming
+
+```css
+/* themes/magenta-theme.css */
+@import '@workday/canvas-tokens-web/css/base/_variables.css';
+@import '@workday/canvas-tokens-web/css/system/_variables.css';
+@import '@workday/canvas-tokens-web/css/brand/_variables.css';
+
+:root {
+  /* Primary brand colors */
+  --cnvs-brand-primary-base: var(--cnvs-base-palette-magenta-600);
+  --cnvs-brand-primary-light: var(--cnvs-base-palette-magenta-200);
+  --cnvs-brand-primary-lighter: var(--cnvs-base-palette-magenta-50);
+  --cnvs-brand-primary-lightest: var(--cnvs-base-palette-magenta-25);
+  --cnvs-brand-primary-dark: var(--cnvs-base-palette-magenta-700);
+  --cnvs-brand-primary-darkest: var(--cnvs-base-palette-magenta-800);
+  --cnvs-brand-primary-accent: var(--cnvs-base-palette-neutral-0);
+}
+```
+
+### Section-Specific Theming
+
+```tsx
+import {createStyles} from "@workday/canvas-kit-styling";
+import {brand, base} from "@workday/canvas-tokens-web";
+import {PrimaryButton} from "@workday/canvas-kit-react/button";
+
+const greenTheme = createStyles({
+  [brand.primary.base]: base.green600,
+  [brand.primary.dark]: base.green700,
+  [brand.primary.darkest]: base.green800,
+  [brand.primary.light]: base.green200,
+  [brand.primary.lighter]: base.green50,
+  [brand.primary.lightest]: base.green25,
+  [brand.primary.accent]: base.neutral0,
+});
+
+const MyComponent = () => (
+  <div className={greenTheme}>
+    <PrimaryButton>Success Action</PrimaryButton>
+  </div>
+);
+```
+
+### Dark Mode Implementation
+
+```css
+/* Dark mode theming */
+[data-theme="dark"] {
+  --cnvs-sys-color-bg-default: var(--cnvs-base-palette-neutral-950);
+  --cnvs-sys-color-text-default: var(--cnvs-base-palette-neutral-50);
+  --cnvs-sys-color-border-container: var(--cnvs-base-palette-slate-700);
+  --cnvs-sys-color-bg-alt-default: var(--cnvs-base-palette-slate-800);
+}
+```
+
+## Migration Guide
+
+### Step 1: Identify Current Theme Usage
+
+Find all instances of `CanvasProvider` with theme props in your application:
+
+```tsx
+// Find these patterns:
+<CanvasProvider theme={{canvas: {palette: {...}}}}>
+```
+
+### Step 2: Extract Theme Values
+
+Convert JavaScript theme objects to CSS variable overrides:
+
+```tsx
+// Old approach:
+const theme = {
+  canvas: {
+    palette: {
+      primary: {
+        main: colors.greenApple400,
+        dark: colors.greenApple500,
+      }
+    }
+  }
+};
+
+// New approach - CSS variables:
+:root {
+  --cnvs-brand-primary-base: var(--cnvs-base-palette-green-400);
+  --cnvs-brand-primary-dark: var(--cnvs-base-palette-green-500);
+}
+```
+
+### Step 3: Update Component Usage
+
+Replace theme-based `CanvasProvider` usage with CSS class-based theming:
+
+```tsx
+// Before:
+<CanvasProvider theme={customTheme}>
+  <MyComponent />
+</CanvasProvider>
+
+// After:
+<CanvasProvider className={customThemeClass}>
+  <MyComponent />
+</CanvasProvider>
+```
+
+### Step 4: Test Component Rendering
+
+Verify that Canvas Kit components (like `PrimaryButton`) correctly use the new CSS variables:
+
+```tsx
+import {PrimaryButton} from "@workday/canvas-kit-react/button";
+
+// This should automatically use your CSS variable overrides
+<PrimaryButton>Themed Button</PrimaryButton>
+```
+
+## Best Practices
+
+### 1. Use Semantic Token Names
+Prefer brand tokens over base tokens for better maintainability:
+
+```css
+/* ✅ Good - semantic meaning */
+--cnvs-brand-primary-base: var(--cnvs-base-palette-blue-600);
+
+/* ❌ Avoid - direct base token usage */
+--cnvs-sys-color-bg-primary-default: var(--cnvs-base-palette-blue-600);
+```
+
+### 2. Organize Theme Files
+Create dedicated theme files for different contexts:
+
+```
+styles/
+  themes/
+    base-theme.css          // Default theme
+    dark-theme.css          // Dark mode overrides
+    brand-variations/
+      marketing-theme.css   // Marketing site theme
+      admin-theme.css       // Admin interface theme
+```
+
+### 3. Document Color Relationships
+When creating custom themes, document the color relationships:
+
+```css
+:root {
+  /* Primary brand colors - maintain accessibility ratios */
+  --cnvs-brand-primary-base: var(--cnvs-base-palette-blue-600);    /* 4.5:1 contrast */
+  --cnvs-brand-primary-light: var(--cnvs-base-palette-blue-200);   /* Background use */
+  --cnvs-brand-primary-dark: var(--cnvs-base-palette-blue-700);    /* Hover state */
+}
+```
+
+### 4. Test Accessibility
+Ensure color combinations meet accessibility standards:
+
+```css
+/* Verify contrast ratios for text/background combinations */
+:root {
+  --cnvs-brand-primary-base: var(--cnvs-base-palette-blue-600);
+  --cnvs-brand-primary-accent: var(--cnvs-base-palette-neutral-0); /* White text */
+}
+```
+
+## Component Compatibility
+
+All Canvas Kit components in v14 automatically consume CSS variables. No component-level changes are required when switching from the theme prop approach to CSS variables.
+
+### Supported Components
+- ✅ All Button variants (`PrimaryButton`, `SecondaryButton`, etc.)
+- ✅ Form components (`TextInput`, `FormField`, etc.)
+- ✅ Layout components (`Card`, `Modal`, etc.)
+- ✅ Navigation components (`Tabs`, `SidePanel`, etc.)
+
+## Performance Benefits
+
+The CSS variable approach provides several performance improvements:
+
+- **Reduced Bundle Size**: No JavaScript theme object processing
+- **Better Caching**: CSS variables can be cached by the browser
+- **Faster Rendering**: Native CSS cascade instead of JavaScript calculations
+- **Runtime Efficiency**: No theme context propagation overhead
+
+## Troubleshooting
+
+### Theme Not Applied
+Ensure CSS variable files are imported in the correct order:
+
+```css
+/* Correct order */
+@import '@workday/canvas-tokens-web/css/base/_variables.css';
+@import '@workday/canvas-tokens-web/css/system/_variables.css';
+@import '@workday/canvas-tokens-web/css/brand/_variables.css';
+
+/* Your overrides after imports */
+:root {
+  --cnvs-brand-primary-base: var(--cnvs-base-palette-magenta-600);
+}
+```
+
+### Inconsistent Theming
+Check for CSS specificity issues:
+
+```css
+/* Ensure your overrides have sufficient specificity */
+:root {
+  --cnvs-brand-primary-base: var(--cnvs-base-palette-blue-600) !important;
+}
+
+/* Or use more specific selectors */
+.my-app {
+  --cnvs-brand-primary-base: var(--cnvs-base-palette-blue-600);
+}
+```
+
+### Missing Token Values
+Verify all required CSS token files are imported and token names are correct:
+
+```tsx
+import {brand, base, system} from "@workday/canvas-tokens-web";
+
+// Check token availability in development
+console.log(brand.primary.base); // Should output CSS variable name
+```
+
+## Conclusion
+
+The migration to CSS variables in Canvas Kit v14 provides a more performant, flexible, and maintainable theming solution. By following this guide and best practices, you can successfully migrate your applications and take advantage of the improved theming capabilities.
+
+For additional support and examples, refer to the Canvas Kit Storybook documentation and the `@workday/canvas-tokens` repository.
