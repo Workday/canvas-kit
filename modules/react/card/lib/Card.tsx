@@ -38,6 +38,7 @@ export const cardStencil = createStencil({
       },
       filled: {
         backgroundColor: system.color.bg.alt.soft,
+        border: `${px2rem(1)} solid ${system.color.border.transparent}`,
       },
     },
   },

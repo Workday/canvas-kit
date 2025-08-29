@@ -30,10 +30,12 @@ export const expandableTargetStencil = createStencil({
     borderRadius: system.shape.x1,
     borderWidth: 0,
     display: 'flex',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     flexDirection: 'row',
+    gap: system.space.x2,
     justifyContent: 'start',
     padding: system.space.x2,
+
     cursor: 'pointer',
     width: '100%',
     '&:hover, &.hover': {
