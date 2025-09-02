@@ -2,7 +2,7 @@ import React from 'react';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {TextArea} from '@workday/canvas-kit-react/text-area';
 
-export const Alert = () => {
+export const Caution = () => {
   const [value, setValue] = React.useState('');
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -10,7 +10,7 @@ export const Alert = () => {
   };
 
   return (
-    <FormField error="alert">
+    <FormField error="caution">
       <FormField.Label>Please enter your review.</FormField.Label>
       <FormField.Field>
         <FormField.Input as={TextArea} onChange={handleChange} value={value} />

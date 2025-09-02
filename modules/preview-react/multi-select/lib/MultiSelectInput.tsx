@@ -116,7 +116,7 @@ export const multiSelectInputStencil = createStencil({
           outlineOffset: px2rem(2),
         },
       },
-      alert: {
+      caution: {
         borderColor: brand.common.alertOuter,
         boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.common.alertInner}`,
         backgroundColor: brand.alert.lightest,

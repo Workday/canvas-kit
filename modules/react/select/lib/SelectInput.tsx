@@ -79,7 +79,7 @@ export const selectInputStencil = createStencil({
           backgroundColor: brand.error.lightest,
         },
       }),
-      alert: ({visualInputPart}) => ({
+      caution: ({visualInputPart}) => ({
         [visualInputPart]: {
           backgroundColor: brand.alert.lightest,
         },

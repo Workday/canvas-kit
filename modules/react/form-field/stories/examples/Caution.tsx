@@ -3,7 +3,7 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {Flex} from '@workday/canvas-kit-react/layout';
 
-export const Alert = () => {
+export const Caution = () => {
   const [value, setValue] = React.useState('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -12,7 +12,7 @@ export const Alert = () => {
 
   return (
     <Flex>
-      <FormField error="alert">
+      <FormField error="caution">
         <FormField.Label>First Name</FormField.Label>
         <FormField.Field>
           <FormField.Input as={TextInput} value={value} onChange={handleChange} />

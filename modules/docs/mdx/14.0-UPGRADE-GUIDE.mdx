@@ -12,6 +12,7 @@ any questions.
 
 - [Codemod](#codemod)
   - [Instructions](#instructions)
+- [Caution Naming](#caution-naming)
 - [Theming](#theming)
   - [Canvas Provider](#canvas-provider-)
 - [Component Updates](#component-updates)
@@ -107,6 +108,74 @@ yarn remove @workday/canvas-kit-codemod
 > manually edit other file types (`.json`, `.mdx`, `.md`, etc.). You may need to run your linter
 > after executing the codemod, as its resulting formatting (spacing, quotes, etc.) may not match
 > your project conventions.
+
+## Caution Naming
+
+**PR:** [#3462](https://github.com/Workday/canvas-kit/pull/3462)
+
+To better align with the brand refresh, Alert and Warning states are being renamed to Caution for better semantics.
+
+This change mostly affects how you pass an error state to our input components. In most cases, our inputs components should be used with our `FormField` component to
+ensure correct accessiblity.
+
+**Before in v13**
+
+```tsx
+<FormField error="alert">
+	<FormField.Label>First Name</FormField.Label>
+	<FormField.Field>
+		<FormField.Input as={TextInput} value={value} onChange={handleChange} />
+		<FormField.Hint>Cannot contain numbers</FormField.Hint>
+	</FormField.Field>
+</FormField>
+```
+
+**After in v14**
+
+```tsx
+<FormField error="caution">
+	<FormField.Label>First Name</FormField.Label>
+	<FormField.Field>
+		<FormField.Input as={TextInput} value={value} onChange={handleChange} />
+		<FormField.Hint>Cannot contain numbers</FormField.Hint>
+	</FormField.Field>
+</FormField>
+```
+
+If you are using the error type either from our `Common` package or the one exposed from the component, the naming as also changed.
+
+**Before in v13**
+
+```tsx
+import {ErrorType} from '@workday/canvas-kit-react/common';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {Switch} from '@workday/canvas-kit-react/switch';
+import {TextArea} from '@workday/canvas-kit-react/text-area';
+
+someFunction(ErrorType.Alert);
+
+<TextInput error={TextInput.ErrorType.Alert} />
+<Switch error={Switch.ErrorType.Alert} />
+<TextArea error={TextArea.ErrorType.Alert} />
+```
+
+**After in v14**
+
+```tsx
+import {ErrorType} from '@workday/canvas-kit-react/common';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {Switch} from '@workday/canvas-kit-react/switch';
+import {TextArea} from '@workday/canvas-kit-react/text-area';
+
+
+someFunction(ErrorType.Caution);
+
+<TextInput error={TextInput.ErrorType.Caution} />
+<Switch error={Switch.ErrorType.Caution} />
+<TextArea error={TextArea.ErrorType.Caution} />
+```
+
+> 🤖 The codemod will handle the change of `ErrorType.Alert` to `ErrorType.Caution` and `error="alert"` to `error="caution"`.
 
 ## Theming
 
@@ -213,6 +282,28 @@ matches our brand refresh.
   - `extraSmall`
   - `extraExtraSmall`
 
+**Avatar in Main**
+
+```tsx
+import { Avatar } from '@workday/canvas-kit-react/avatar';
+
+<Avatar altText="John Doe" size="extraExtraLarge" variant="light" as="div" url={yourImageUrl} />
+
+// For Avatars that where buttons
+<Avatar altText="John Doe" size="extraExtraLarge" variant="dark" url={yourImageUrl} />
+```
+
+**Avatar in Preview**
+
+```tsx
+import { Avatar } from '@workday/canvas-kit-preview-react/avatar';
+
+<Avatar name="John Doe" size="extraExtraLarge" variant="blue" />
+
+// Preferred Initials
+<Avatar name="Julian Doe Smith" size="extraExtraLarge" variant="blue" preferredInitials="JS" />
+```
+
 ### Branding Changes 💅
 
 Several components have been refactored to reflect our new brand direction. Most of these changes
@@ -243,6 +334,8 @@ The following components have been updated:
 The `TertiaryButton` component no longer supports the `isThemable` prop. To customize the appearance
 of `TertiaryButton`, use the `cs` prop for custom styles or the `colors` prop for palette-based
 color overrides.
+
+
 
 The shape of `TertiaryButton` has changed to have rounded corners, aligning with other buttons and
 our new brand direction.
