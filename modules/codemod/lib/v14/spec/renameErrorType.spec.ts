@@ -8,16 +8,12 @@ describe('rename ErrorType.Alert to ErrorType.Caution', () => {
   it('should not change non-canvas imports', () => {
     const input = stripIndent`
             import {ErrorType} from 'any-other-package'
-            <>
-                <Component error={ErrorType.Alert} />
-            </>
+            <Component error={ErrorType.Alert} />
         `;
 
     const expected = stripIndent`
             import {ErrorType} from 'any-other-package'
-            <>
-                <Component error={ErrorType.Alert} />
-            </>
+            <Component error={ErrorType.Alert} />
         `;
     expectTransform(input, expected);
   });

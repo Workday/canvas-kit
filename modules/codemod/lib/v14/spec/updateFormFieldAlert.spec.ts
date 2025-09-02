@@ -8,16 +8,12 @@ describe('rename form field alert', () => {
   it('should not change non-canvas imports', () => {
     const input = stripIndent`
             import {FormField} from 'any-other-package'
-            <>
-                <FormField error={true} />
-            </>
+            <FormField error={true} />
         `;
 
     const expected = stripIndent`
             import {FormField} from 'any-other-package'
-            <>
-                <FormField error={true} />
-            </>
+            <FormField error={true} />
         `;
     expectTransform(input, expected);
   });
@@ -25,16 +21,12 @@ describe('rename form field alert', () => {
   it('should rename alert to caution', () => {
     const input = stripIndent`
         import {FormField} from '@workday/canvas-kit-react/form-field'
-        <>
-            <FormField error="alert" />
-        </>
+        <FormField error="alert" />
     `;
 
     const expected = stripIndent`
         import {FormField} from '@workday/canvas-kit-react/form-field'
-        <>
-            <FormField error="caution" />
-        </>
+        <FormField error="caution" />
     `;
     expectTransform(input, expected);
   });
@@ -42,18 +34,12 @@ describe('rename form field alert', () => {
   it('should change renamed FormField', () => {
     const input = stripIndent`
         import {FormField as CanvasForm} from '@workday/canvas-kit-react/form-field'
-
-        <>
-            <CanvasForm error="alert" />
-        </>
+        <CanvasForm error="alert" />
     `;
 
     const expected = stripIndent`
         import {FormField as CanvasForm} from '@workday/canvas-kit-react/form-field'
-
-        <>
-            <CanvasForm error="caution" />
-        </>
+        <CanvasForm error="caution" />
     `;
     expectTransform(input, expected);
   });

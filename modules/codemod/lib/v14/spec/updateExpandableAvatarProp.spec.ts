@@ -9,18 +9,18 @@ describe('Expandable', () => {
     const input = stripIndent`
             import {Expandable} from '@workday/any-other-package'
             <>
-                <Expandable>Hello<Expandable.Icon/></Expandable>
-                <Expandable />
-                <Expandable />
+              <Expandable>Hello<Expandable.Icon/></Expandable>
+              <Expandable />
+              <Expandable />
             </>
         `;
 
     const expected = stripIndent`
             import {Expandable} from '@workday/any-other-package'
             <>
-                <Expandable>Hello<Expandable.Icon/></Expandable>
-                <Expandable />
-                <Expandable />
+              <Expandable>Hello<Expandable.Icon/></Expandable>
+              <Expandable />
+              <Expandable />
             </>
         `;
     expectTransform(input, expected);

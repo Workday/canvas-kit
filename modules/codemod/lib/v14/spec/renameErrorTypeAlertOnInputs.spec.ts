@@ -8,16 +8,12 @@ describe('rename alert to caution on inputs', () => {
   it('should not change non-canvas imports', () => {
     const input = stripIndent`
             import {FormField} from 'any-other-package'
-            <>
-                <FormField error={true} />
-            </>
+            <FormField error={true} />
         `;
 
     const expected = stripIndent`
             import {FormField} from 'any-other-package'
-            <>
-                <FormField error={true} />
-            </>
+            <FormField error={true} />
         `;
     expectTransform(input, expected);
   });
@@ -26,18 +22,18 @@ describe('rename alert to caution on inputs', () => {
     const input = stripIndent`
         import {TextInput, Switch, TextArea} from '@workday/canvas-kit-react'
         <>
-            <TextInput error={TextInput.ErrorType.Alert} />
-            <Switch error={Switch.ErrorType.Alert} />
-            <TextArea error={TextArea.ErrorType.Alert} />
+          <TextInput error={TextInput.ErrorType.Alert} />
+          <Switch error={Switch.ErrorType.Alert} />
+          <TextArea error={TextArea.ErrorType.Alert} />
         </>
     `;
 
     const expected = stripIndent`
         import {TextInput, Switch, TextArea} from '@workday/canvas-kit-react'
         <>
-            <TextInput error={TextInput.ErrorType.Caution} />
-            <Switch error={Switch.ErrorType.Caution} />
-            <TextArea error={TextArea.ErrorType.Caution} />
+          <TextInput error={TextInput.ErrorType.Caution} />
+          <Switch error={Switch.ErrorType.Caution} />
+          <TextArea error={TextArea.ErrorType.Caution} />
         </>
     `;
     expectTransform(input, expected);
@@ -46,21 +42,19 @@ describe('rename alert to caution on inputs', () => {
   it('should change renamed TextInput, Switch, and TextArea', () => {
     const input = stripIndent`
         import {TextInput as CanvasTextInput, Switch as CanvasSwitch, TextArea as CanvasTextArea} from '@workday/canvas-kit-react'
-
         <>
-            <CanvasTextInput error={CanvasTextInput.ErrorType.Alert} />
-            <CanvasSwitch error={CanvasSwitch.ErrorType.Alert} />
-            <CanvasTextArea error={CanvasTextArea.ErrorType.Alert} />
+          <CanvasTextInput error={CanvasTextInput.ErrorType.Alert} />
+          <CanvasSwitch error={CanvasSwitch.ErrorType.Alert} />
+          <CanvasTextArea error={CanvasTextArea.ErrorType.Alert} />
         </>
     `;
 
     const expected = stripIndent`
         import {TextInput as CanvasTextInput, Switch as CanvasSwitch, TextArea as CanvasTextArea} from '@workday/canvas-kit-react'
-
         <>
-            <CanvasTextInput error={CanvasTextInput.ErrorType.Caution} />
-            <CanvasSwitch error={CanvasSwitch.ErrorType.Caution} />
-            <CanvasTextArea error={CanvasTextArea.ErrorType.Caution} />
+          <CanvasTextInput error={CanvasTextInput.ErrorType.Caution} />
+          <CanvasSwitch error={CanvasSwitch.ErrorType.Caution} />
+          <CanvasTextArea error={CanvasTextArea.ErrorType.Caution} />
         </>
     `;
     expectTransform(input, expected);
