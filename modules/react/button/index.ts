@@ -1,7 +1,7 @@
-export {ToolbarIconButton, ToolbarIconButtonProps} from './lib/ToolbarIconButton';
-export {ToolbarDropdownButton, ToolbarDropdownButtonProps} from './lib/ToolbarDropdownButton';
-export {Hyperlink, HyperlinkProps} from './lib/Hyperlink';
-export {ExternalHyperlink, ExternalHyperlinkProps} from './lib/ExternalHyperlink';
+export * from './lib/ToolbarIconButton';
+export * from './lib/ToolbarDropdownButton';
+export * from './lib/Hyperlink';
+export * from './lib/ExternalHyperlink';
 export * from './lib/types';
 export * from './lib/PrimaryButton';
 export * from './lib/SecondaryButton';

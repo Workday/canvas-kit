@@ -9,7 +9,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {colors, commonColors, type} from '@workday/canvas-kit-react/tokens';
 /**
- * @deprecated ⚠️ `SelectOptionProps` in Preview has been deprecated and will be removed in a future major version. Please use [`Select` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) instead.
+ * @deprecated ⚠️ `SelectOptionProps` in Preview has been deprecated and will be removed in a future major version. Please use [`Select` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--docs) instead.
  */
 export interface SelectOptionProps extends Themeable, React.LiHTMLAttributes<HTMLLIElement> {
   /**
@@ -108,7 +108,7 @@ const Option = styled('li')<SelectOptionProps>(
 );
 
 /**
- * @deprecated ⚠️ `SelectOption` in Preview has been deprecated and will be removed in a future major version. Please use [`Select` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) instead.
+ * @deprecated ⚠️ `SelectOption` in Preview has been deprecated and will be removed in a future major version. Please use [`Select` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--docs) instead.
  */
 export const SelectOption = ({
   children,

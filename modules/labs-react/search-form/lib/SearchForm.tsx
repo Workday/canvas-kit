@@ -14,7 +14,9 @@ import chroma from 'chroma-js';
 import {CSProps, calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
-
+/**
+ * @deprecated ⚠️ `SearchFormProps` is deprecated and will be removed in a future major version. Please reference our [Autocomplete example](https://workday.github.io/canvas-kit/?path=/docs/features-combobox--docs#usage).
+ */
 export interface SearchFormProps
   extends GrowthBehavior,
     React.FormHTMLAttributes<HTMLFormElement>,
@@ -100,7 +102,9 @@ export interface SearchFormProps
    */
   labelId?: string;
 }
-
+/**
+ * @deprecated ⚠️ `SearchFormState` is deprecated and will be removed in a future major version. Please reference our [Autocomplete example](https://workday.github.io/canvas-kit/?path=/docs/features-combobox--docs#usage).
+ */
 export interface SearchFormState {
   showForm: boolean;
   searchQuery: string;
@@ -122,6 +126,9 @@ function getInputColors(theme: SearchThemeAttributes, isFocused?: boolean) {
 
 const formCollapsedBackground = '#fff';
 
+/**
+ * @deprecated ⚠️ `searchFormStencil` is deprecated and will be removed in a future major version. Please reference our [Autocomplete example](https://workday.github.io/canvas-kit/?path=/docs/features-combobox--docs#usage).
+ */
 export const searchFormStencil = createStencil({
   vars: {
     minWidth: '',
@@ -434,6 +441,9 @@ export const searchFormStencil = createStencil({
   ],
 });
 
+/**
+ * @deprecated ⚠️ `SearchForm` is deprecated and will be removed in a future major version. Please reference our [Autocomplete example](https://workday.github.io/canvas-kit/?path=/docs/features-combobox--docs#usage).
+ */
 export class SearchForm extends React.Component<SearchFormProps, SearchFormState> {
   static Theme = SearchTheme;
   private inputRef = React.createRef<HTMLInputElement>();

@@ -11,7 +11,7 @@ import {RTL as RTLExample} from './examples/RTL';
 import {Theming as ThemingExample} from './examples/Theming';
 
 const meta: Meta<typeof SearchForm> = {
-  title: 'Labs/Search Form',
+  title: 'Labs/Search Form (deprecated)',
   component: SearchForm,
   tags: ['autodocs'],
   parameters: {

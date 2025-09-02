@@ -31,7 +31,14 @@ export const InstallBlock = ({command, packageName}: InstallBlockProps) => {
       flexWrap="wrap"
     >
       <pre ref={commandRef}>
-        <span style={{color: cssVar(system.color.fg.primary.soft)}}>{command}</span>{' '}
+        <span
+          style={{
+            color: cssVar(system.color.fg.primary.soft),
+            marginInlineEnd: cssVar(system.space.x2),
+          }}
+        >
+          {command}
+        </span>
         <span style={{color: cssVar(system.color.fg.inverse)}}>{packageName}</span>
       </pre>
       <PrimaryButton variant="inverse" onClick={handleCopy} size="small">

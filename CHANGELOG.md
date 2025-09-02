@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.25](https://github.com/Workday/canvas-kit/releases/tag/v13.2.25) (2025-08-28)
+
+### Documentation
+
+- docs: Update Getting Started guide ([#3467](https://github.com/Workday/canvas-kit/pull/3467)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v13.2.24](https://github.com/Workday/canvas-kit/releases/tag/v13.2.24) (2025-08-21)
+
+### Infrastructure
+
+- fix: Export all props to avoid TS using source files ([#3461](https://github.com/Workday/canvas-kit/pull/3461)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v13.2.23](https://github.com/Workday/canvas-kit/releases/tag/v13.2.23) (2025-08-19)
 
 ### Components
