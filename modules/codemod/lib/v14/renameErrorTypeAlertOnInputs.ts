@@ -39,7 +39,6 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
 
   // Update the `error` prop from ComponentName.ErrorType.Alert to ComponentName.ErrorType.Caution
   components.forEach(component => {
-    //?
     const errorProp = component.value.openingElement.attributes?.find(
       attr => attr.type === 'JSXAttribute' && attr.name.name === 'error'
     ) as JSXAttribute;

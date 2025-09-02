@@ -60,7 +60,7 @@ describe('rename alert to caution on inputs', () => {
     expectTransform(input, expected);
   });
 
-  it('should change styled FormField', () => {
+  it('should change styled TextInput, Switch and TextArea', () => {
     const input = stripIndent`
         import {TextInput, Switch, TextArea} from '@workday/canvas-kit-react'
         const StyledTextInput = styled(TextInput)({color: "#000"});

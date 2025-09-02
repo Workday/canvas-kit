@@ -48,6 +48,21 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     ) {
       errorProp.value = j.stringLiteral('caution');
     }
+
+    if (
+      errorProp &&
+      errorProp.value &&
+      errorProp.value.type === 'JSXExpressionContainer' &&
+      errorProp.value.expression.type === 'ConditionalExpression'
+    ) {
+      errorProp.value = j.jsxExpressionContainer(
+        j.conditionalExpression(
+          errorProp.value.expression.test,
+          j.stringLiteral('error'),
+          j.stringLiteral('caution')
+        )
+      );
+    }
   });
 
   return root.toSource();

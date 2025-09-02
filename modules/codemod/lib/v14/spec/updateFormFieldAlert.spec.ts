@@ -72,4 +72,18 @@ describe('rename form field alert', () => {
     `;
     expectTransform(input, expected);
   });
+  it('should handle expressions', () => {
+    const input = stripIndent`
+        import {FormField} from '@workday/canvas-kit-react/form-field'
+        const StyledForm = styled(FormField)({color: "#000"});
+        <StyledForm error={hasError ? 'error' : 'alert'} />
+    `;
+
+    const expected = stripIndent`
+        import {FormField} from '@workday/canvas-kit-react/form-field'
+        const StyledForm = styled(FormField)({color: "#000"});
+        <StyledForm error={hasError ? "error" : "caution"} />
+    `;
+    expectTransform(input, expected);
+  });
 });
