@@ -19,7 +19,7 @@ export const Error = () => {
             model.state.selectedIds.length < 1
               ? 'error'
               : model.state.selectedIds.length > 3
-              ? 'alert'
+              ? 'caution'
               : undefined
           }
         >
