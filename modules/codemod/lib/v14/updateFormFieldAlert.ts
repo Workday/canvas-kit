@@ -19,7 +19,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
   // and give us an importMap to track what identifiers we need to update
   const {importMap, styledMap} = getImportRenameMap(j, root, '@workday/canvas-kit-react');
 
-  // Find all <StatusIndicator> components
+  // Find all <FormField> components
   const components = root.find(
     j.JSXElement,
     (value: JSXElement) =>
@@ -28,18 +28,17 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
         value.openingElement.name.name === styledMap.FormField)
   );
 
-  // Update the `variant` prop to the new value
+  // Update the `error` prop to the new value
   components.forEach(component => {
     const errorProp = component.value.openingElement.attributes?.find(
       attr => attr.type === 'JSXAttribute' && attr.name.name === 'error'
     ) as JSXAttribute;
-    //?
+
     // For string literals like `error="alert"`
     if (errorProp && errorProp.value && errorProp.value.type === 'StringLiteral') {
       errorProp.value = j.stringLiteral('caution');
     }
 
-    // For object literals like `variant={'blue'}`
     if (
       errorProp &&
       errorProp.value &&
