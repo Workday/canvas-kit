@@ -97,7 +97,7 @@ const switchInputStencil = createStencil({
               0 0 0 ${px2rem(5)} transparent`,
         },
       },
-      alert: {
+      caution: {
         '& ~ div:first-of-type': {
           boxShadow: `
           0 0 0 ${px2rem(2)} ${system.color.border.inverse},
