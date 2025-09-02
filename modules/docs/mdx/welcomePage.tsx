@@ -1,13 +1,16 @@
 // @ts-ignore: Cannot find module error
 import headerImage from './ck-banner.jpg';
+// @ts-ignore: Cannot find module error
 import componentsImage from './Components.png';
+// @ts-ignore: Cannot find module error
 import tokensImage from './Tokens.png';
+// @ts-ignore: Cannot find module error
+import stylingImage from './Styling.png';
 import {Flex, Grid, Box} from '@workday/canvas-kit-react/layout';
 import {InstallBlock} from './installBlock';
 import {Text, Heading} from '@workday/canvas-kit-react/text';
 import {Card} from '@workday/canvas-kit-react/card';
 import {ExternalHyperlink, Hyperlink} from '@workday/canvas-kit-react/button';
-import {rocketIcon, tokensIcon, shapesIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {system, base} from '@workday/canvas-tokens-web';
 import {createStyles} from '@workday/canvas-kit-styling';
@@ -39,7 +42,7 @@ const imageStyles = createStyles({
 });
 
 const gridStyles = createStyles({
-  maxHeight: 320,
+  maxHeight: 400,
   gridTemplateRows: '1fr 1fr 2fr 1fr',
   display: 'grid',
 });
@@ -114,7 +117,7 @@ export const WelcomePage = () => {
             </Grid.Item>
           </Grid>
           <Grid as={Card} className={gridStyles}>
-            <SystemIcon color={base.teal500} icon={shapesIcon} size={60} />
+            <Graphic src={{url: stylingImage}} />
             <Card.Heading>Styling</Card.Heading>
             <Card.Body>
               <Text>
