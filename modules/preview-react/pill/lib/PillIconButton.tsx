@@ -58,6 +58,7 @@ export const pillIconButtonStencil = createStencil({
     '&:disabled, &.disabled': {
       [buttonStencil.vars.border]: system.color.border.transparent,
       [buttonStencil.vars.background]: system.color.bg.alt.default,
+      [systemIconStencil.vars.color]: system.color.fg.disabled,
     },
   },
 });
