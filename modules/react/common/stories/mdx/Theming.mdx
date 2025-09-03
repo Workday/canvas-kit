@@ -1,3 +1,6 @@
+import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
+import {Theming} from './examples/Theming';
+
 <Meta title="Features/Theming/Overview" />
 
 # Canvas Kit v14 Theming Guide
@@ -14,7 +17,7 @@ Canvas Kit v14 introduces a significant shift in theming approach, moving away f
 
 **Canvas Kit v14** deprecates the `CanvasProvider` theme prop in favor of CSS variables, offering a more performant and flexible theming solution.
 
-## ❌ Deprecated Approach (v10-v13)
+## Old Approach (v10-v13)
 
 The old theming approach used JavaScript objects passed to the `CanvasProvider` theme prop:
 
@@ -22,16 +25,20 @@ The old theming approach used JavaScript objects passed to the `CanvasProvider` 
 import {CanvasProvider} from "@workday/canvas-kit-react/common"
 import {base} from "@workday/canvas-tokens-web"
 
-<CanvasProvider theme={{canvas: {palette: {primary: base.magenta600}}}}>
+<CanvasProvider theme={{canvas: {palette: {primary: {main: 'purple'}}}}}>
    <App/>
 </CanvasProvider>
 ```
 
+This would use `chroma.js` to generate a palette based on the `main` color provided.
+
 **Why we're moving away from this approach:**
 - Performance overhead from JavaScript theme object processing
-- Runtime theme generation using OKLCH color space
 - Limited flexibility for complex theming scenarios
 - Inconsistent cascade behavior
+
+Any time `theme` is passed, the `CanvasProvider` would generate a palette and attach brand variables via a `className` scoping those brand variables to a wrapping div.
+In order for us to provide a better solution to theming that is scalable and is more aligned with our CSS variables, we changed this approach.
 
 ## ✅ Preferred Approach (v14+)
 
@@ -59,7 +66,9 @@ Apply theming at the global level by importing CSS variable files and overriding
 }
 ```
 
-### Method 2: Component-Level CSS Variables
+> **Note:** You should only import the CSS variables *once* at the root level of your application. If you application renders within another environment that imports these and sets it, **do not** re import them.
+
+### Method 2: Provider-Level CSS Variables
 
 Use Canvas Kit's `createStyles` utility to generate themed class names that can be applied to specific components or sections:
 
@@ -67,6 +76,12 @@ Use Canvas Kit's `createStyles` utility to generate themed class names that can 
 import {createStyles} from "@workday/canvas-kit-styling"
 import {brand, base} from "@workday/canvas-tokens-web"
 import {CanvasProvider} from "@workday/canvas-kit-react/common"
+import {brand} from '@workday/canvas-tokens-web'
+
+// You can import the CSS variables in a ts file or an index.css file. You do not need to do both.
+import '@workday/canvas-tokens-web/css/base/_variables.css';
+import '@workday/canvas-tokens-web/css/system/_variables.css';
+import '@workday/canvas-tokens-web/css/brand/_variables.css';
 
 // Generate a class name that defines CSS variables
 const themedBrand = createStyles({
@@ -83,6 +98,8 @@ const themedBrand = createStyles({
   <App/>
 </CanvasProvider>
 ```
+
+> **Note:** doing the following **will create a cascade barrier**. Only use this method if you intentionally want to override the default theme.
 
 ## CSS Token Structure
 
@@ -136,12 +153,13 @@ Component-specific values:
 }
 ```
 
-### Section-Specific Theming
+### App-Specific Theming
 
 ```tsx
 import {createStyles} from "@workday/canvas-kit-styling";
 import {brand, base} from "@workday/canvas-tokens-web";
 import {PrimaryButton} from "@workday/canvas-kit-react/button";
+import {CanvasProvider} from "@workday/canvas-kit-react/common";
 
 const greenTheme = createStyles({
   [brand.primary.base]: base.green600,
@@ -153,12 +171,14 @@ const greenTheme = createStyles({
   [brand.primary.accent]: base.neutral0,
 });
 
-const MyComponent = () => (
-  <div className={greenTheme}>
-    <PrimaryButton>Success Action</PrimaryButton>
-  </div>
+const App = () => (
+  <CanvasProvider className={greenTheme}>
+    <App/>
+  </CanvasProvider>
 );
 ```
+
+<ExampleCodeBlock code={Theming} />
 
 ### Dark Mode Implementation
 
@@ -247,32 +267,8 @@ Prefer brand tokens over base tokens for better maintainability:
 --cnvs-sys-color-bg-primary-default: var(--cnvs-base-palette-blue-600);
 ```
 
-### 2. Organize Theme Files
-Create dedicated theme files for different contexts:
 
-```
-styles/
-  themes/
-    base-theme.css          // Default theme
-    dark-theme.css          // Dark mode overrides
-    brand-variations/
-      marketing-theme.css   // Marketing site theme
-      admin-theme.css       // Admin interface theme
-```
-
-### 3. Document Color Relationships
-When creating custom themes, document the color relationships:
-
-```css
-:root {
-  /* Primary brand colors - maintain accessibility ratios */
-  --cnvs-brand-primary-base: var(--cnvs-base-palette-blue-600);    /* 4.5:1 contrast */
-  --cnvs-brand-primary-light: var(--cnvs-base-palette-blue-200);   /* Background use */
-  --cnvs-brand-primary-dark: var(--cnvs-base-palette-blue-700);    /* Hover state */
-}
-```
-
-### 4. Test Accessibility
+### 2. Test Accessibility
 Ensure color combinations meet accessibility standards:
 
 ```css

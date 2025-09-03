@@ -10,8 +10,7 @@ import { version } from '../../../lerna.json';
 
 ### Canvas Provider
 
-The `<CanvasProvider>` is required for proper branding support. Furthermore, if you use Emotion for
-styling your components, the `<CanvasProvider>` ensures your styles will merge as expected. Note:
+If you use Emotion for styling your components, the `<CanvasProvider>` ensures your styles will merge as expected. Note:
 Custom use of `<CacheProvider>` provided by Emotion is not supported. `@workday/canvas-kit-styling`
 owns the creating of the cache reference. This ensures both static styling and Emotion’s dynamic
 styling solutions work together. In most cases you'll want to wrap your application at the root
@@ -21,9 +20,6 @@ level in `<CanvasProvider>`.
 import * as React from 'react';
 import {
   CanvasProvider,
-  ContentDirection,
-  PartialEmotionCanvasTheme,
-  useTheme,
 } from '@workday/canvas-kit-react/common';
 // Ensure CSS variables are defined. You Can also do this at the root index.css
 import '@workday/canvas-tokens-web/css/base/_variables.css';
@@ -31,15 +27,8 @@ import '@workday/canvas-tokens-web/css/brand/_variables.css';
 import '@workday/canvas-tokens-web/css/system/_variables.css';
 
 export const App = () => {
-  // useTheme is filling in the Canvas theme object if any keys are missing
-  const canvasTheme: PartialEmotionCanvasTheme = useTheme({
-    canvas: {
-      // Switch to `ContentDirection.RTL` to change direction
-      direction: ContentDirection.LTR,
-    },
-  });
   return (
-    <CanvasProvider theme={canvasTheme}>
+    <CanvasProvider>
         <main>
           <p>Get Started With Canvas Kit</p>
         </main>
