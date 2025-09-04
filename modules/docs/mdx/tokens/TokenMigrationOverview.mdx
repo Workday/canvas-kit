@@ -6,7 +6,10 @@ import {StorybookInformationHighlight} from './StorybookInformationHighlight';
 # Canvas Kit Token Migration Guide: Moving to `@workday/canvas-tokens-web`
 
 Canvas Kit v10+ introduces a new token system that replaces the old JavaScript-based tokens from
-`@workday/canvas-kit-react/tokens` with CSS variables from `@workday/canvas-tokens-web`.
+`@workday/canvas-kit-react/tokens` with CSS variables from `@workday/canvas-tokens-web`. Canvas Kit
+is using tokens from `@workday/canvas-tokens-web` v3 that indroduced a new color palette with more
+clear names (like `red.600`, `blue100`) instead of the previous "fruity" palette (like `watermelon`,
+`blueberry`, etc).
 
 ## Why Migrate?
 
@@ -38,8 +41,8 @@ LLM consumption.
   migration
 
 <DownloadLLMFile
-  rawFileLink="https://raw.githubusercontent.com/Workday/canvas-kit/master/modules/docs/llm-txt/llm-token-migration.txt"
-  filename="llm-token-migration-13.2.0.txt"
+  rawFileDir="https://raw.githubusercontent.com/Workday/canvas-kit/master/modules/docs/llm-txt/llm-token-migration-14.0.0.txt"
+  filenames="llm-token-migration-14.0.0.txt"
 />
 
 ## Core Principles
@@ -101,7 +104,7 @@ Use system tokens over base tokens whenever possible for better theming support:
 backgroundColor: system.color.bg.default;
 
 // Avoid - Hard-coded base value
-backgroundColor: base.frenchVanilla100;
+backgroundColor: base.neutral0;
 ```
 
 ### Use Complete Type Levels

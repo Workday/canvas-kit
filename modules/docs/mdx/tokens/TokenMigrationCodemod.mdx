@@ -2,9 +2,9 @@
 
 # Canvas Kit Tokens Migration Codemod
 
-This codemod helps migrate Canvas Kit tokens from `@workday/canvas-kit-react/tokens` to
-`@workday/canvas-tokens-web` v2 format. It automatically transforms token usage in your codebase to
-use the new token system.
+This codemod helps migrate Canvas Kit tokens from `@workday/canvas-kit-react/tokens` or
+`@workday/canvas-tokens-web` v2 to `@workday/canvas-tokens-web` v3 format It automatically
+transforms token usage in your codebase to use the new token system.
 
 ## Important Notes
 
@@ -36,7 +36,7 @@ The codemod requires the following packages to be installed:
 You can run the codemod using npx:
 
 ```sh
-npx @workday/canvas-kit-codemod v13.2 [path]
+npx @workday/canvas-kit-codemod v14-tokens [path]
 ```
 
 Or install the package and run it directly. But remember to uninstall the package after you have
@@ -44,7 +44,7 @@ completed the upgrade.
 
 ```sh
 yarn add @workday/canvas-kit-codemod
-canvas-kit-codemod v13.2 [path]
+canvas-kit-codemod v14-tokens [path]
 ```
 
 > Note: These codemods only work on .js, .jsx, .ts, and .tsx extensions. You may need to make some
