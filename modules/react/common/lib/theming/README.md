@@ -144,32 +144,9 @@ const theme: EmotionCanvasTheme = {
 
 ### Bidirectionality
 
-The `CanvasProvider` also provides support for bidirectionality, useful for RTL languages. The
-direction, part of the theme, is set using `ContentDirection.LTR` or `ContentDirection.RTL`.
-
-You can nest `CanvasProvider` if you need to set a different direction for some components in your
-React tree (See below: Nesting CanvasProvider components).
-
-`CanvasProvider` wraps your components with a `bdo` element that has the `dir` attribute set to the
-value of the theme direction. Styled components using the
-[Canvas `styled` function](https://github.com/Workday/canvas-kit/blob/master/modules/common/react/lib/theming/styled.ts)
-will have their styles automatically flipped if dictated by the closest theme object.
-
-```tsx
-import {
-  CanvasProvider,
-  ContentDirection,
-  EmotionCanvasTheme,
-} from '@workday/canvas-kit-react/common';
-
-const rtlTheme: EmotionCanvasTheme = {
-  canvas: {
-    direction: ContentDirection.RTL,
-  },
-};
-
-<CanvasProvider theme={rtlTheme}>{/* Your app with Canvas components */}</CanvasProvider>;
-```
+We strongly encourage the use of
+[CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties)
+for styling. All previous bidirectionality in the Canvas theme have been deprecated.
 
 ### Nesting CanvasProvider components
 
@@ -545,26 +522,4 @@ const styles = {
     padding: space.s,
   },
 };
-```
-
-## useIsRTL Hook
-
-`useIsRTL` is a small hook to support right-to-left logic. If a theme exists in React context, the
-component will use it automatically, or you can explicitly provide a theme object.
-
-### Usage
-
-```ts
-// this will automatically pull the theme from context if it exists.
-const isRTL = useIsRTL();
-```
-
-```ts
-// or you can explicitly provide a (partial) theme object.
-const RTLTheme = {
-  canvas: {
-    direction: ContentDirection.RTL,
-  },
-};
-const isRTL = useIsRTL(RTLTheme);
 ```
