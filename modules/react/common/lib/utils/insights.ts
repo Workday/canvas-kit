@@ -1,3 +1,5 @@
+/// <reference types="@types/node" />
+
 import {version} from '@workday/canvas-kit-react/version';
 import {slugify} from '@workday/canvas-kit-styling';
 
