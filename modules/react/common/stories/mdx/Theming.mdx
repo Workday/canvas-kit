@@ -66,17 +66,16 @@ Apply theming at the global level by importing CSS variable files and overriding
 }
 ```
 
-> **Note:** You should only import the CSS variables *once* at the root level of your application. If you application renders within another environment that imports these and sets it, **do not** re import them.
+> **Note:** You should only import the CSS variables *once* at the root level of your application. If your application renders within another environment that imports these and sets it, **do not** re import them.
 
 ### Method 2: Provider-Level CSS Variables
 
 Use Canvas Kit's `createStyles` utility to generate themed class names that can be applied to specific components or sections:
 
 ```tsx
-import {createStyles} from "@workday/canvas-kit-styling"
+import {createStyles}from "@workday/canvas-kit-styling"
 import {brand, base} from "@workday/canvas-tokens-web"
 import {CanvasProvider} from "@workday/canvas-kit-react/common"
-import {brand} from '@workday/canvas-tokens-web'
 
 // You can import the CSS variables in a ts file or an index.css file. You do not need to do both.
 import '@workday/canvas-tokens-web/css/base/_variables.css';
@@ -99,7 +98,7 @@ const themedBrand = createStyles({
 </CanvasProvider>
 ```
 
-> **Note:** doing the following **will create a cascade barrier**. Only use this method if you intentionally want to override the default theme.
+> **Note:** Doing the following **will create a cascade barrier**. Only use this method if you intentionally want to override the default theme.
 
 ## CSS Token Structure
 
@@ -171,9 +170,7 @@ const greenTheme = createStyles({
   [brand.primary.accent]: base.neutral0,
 });
 
-const App = () => (
-  <CanvasProvider className={greenTheme}>
-    <App/>
+    <PrimaryButton>Click me</PrimaryButton>
   </CanvasProvider>
 );
 ```
