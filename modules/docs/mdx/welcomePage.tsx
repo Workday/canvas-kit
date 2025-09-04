@@ -11,8 +11,7 @@ import {InstallBlock} from './installBlock';
 import {Text, Heading} from '@workday/canvas-kit-react/text';
 import {Card} from '@workday/canvas-kit-react/card';
 import {ExternalHyperlink, Hyperlink} from '@workday/canvas-kit-react/button';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {system, base} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {Graphic} from '@workday/canvas-kit-react/icon';
 // @ts-ignore: Cannot find module error

@@ -3,7 +3,7 @@ import {Theming} from './examples/Theming';
 
 <Meta title="Features/Theming/Overview" />
 
-# Canvas Kit v14 Theming Guide
+# Canvas Kit Theming Guide
 
 ## Overview
 
@@ -191,6 +191,12 @@ const App = () => (
   --cnvs-sys-color-bg-alt-default: var(--cnvs-base-palette-slate-800);
 }
 ```
+
+### RTL Support
+Canvas Kit supports RTL out of the box. Our components are styled to use [CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values). If you want to add additional styles based on RTL,
+you can also use `:dir` [pseudo selector](https://developer.mozilla.org/en-US/docs/Web/CSS/:dir).
+
+<ExampleCodeBlock code={RTL} />
 
 ## Migration Guide
 
