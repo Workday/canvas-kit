@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react",
-  "version": "12.6.25",
+  "version": "13.2.25",
   "description": "The parent module that contains all Workday Canvas Kit React components",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -43,23 +43,23 @@
     "workday"
   ],
   "peerDependencies": {
-    "react": ">=16.14"
+    "react": ">=17.0"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.1.1",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@popperjs/core": "^2.5.4",
+    "@tanstack/react-virtual": "^3.13.9",
     "@workday/canvas-colors-web": "^2.0.0",
-    "@workday/canvas-kit-popup-stack": "^12.6.25",
-    "@workday/canvas-kit-styling": "^12.6.25",
-    "@workday/canvas-system-icons-web": "^3.0.0",
+    "@workday/canvas-kit-popup-stack": "^13.2.25",
+    "@workday/canvas-kit-styling": "^13.2.25",
+    "@workday/canvas-system-icons-web": "^3.0.35",
     "@workday/canvas-tokens-web": "^2.1.1",
-    "@workday/design-assets-types": "^0.2.8",
+    "@workday/design-assets-types": "^0.2.10",
     "chroma-js": "^2.2.0",
     "csstype": "^3.0.2",
     "react-innertext": "^1.1.5",
-    "react-virtual": "^2.10.4",
     "rtl-css-js": "^1.14.1",
     "screenfull": "^5.2.0",
     "use-resize-observer": "^9.1.0"

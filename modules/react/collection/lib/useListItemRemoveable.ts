@@ -1,7 +1,7 @@
 import React from 'react';
-import {useIsRTL, createElemPropsHook} from '@workday/canvas-kit-react/common';
+import {useIsRTL, createElemPropsHook, slugify} from '@workday/canvas-kit-react/common';
 
-import {useCursorListModel} from './useCursorListModel';
+import {getCursor, isCursor, useCursorListModel} from './useCursorListModel';
 import {keyboardEventToCursorEvents} from './keyUtils';
 
 // retry a function each frame so we don't rely on the timing mechanism of React's render cycle.
@@ -40,14 +40,16 @@ export const useListItemRemove = createElemPropsHook(useCursorListModel)(
 
     React.useEffect(() => {
       if (keyElementRef.current) {
-        const item = model.navigation.getItem(model.state.cursorId, model);
+        const item = model.navigation.getItem(getCursor(model.state), model);
         if (item) {
           if (model.state.isVirtualized) {
             model.state.UNSTABLE_virtual.scrollToIndex(item.index);
           }
 
           const selector = (id?: string) => {
-            return document.querySelector<HTMLElement>(`[data-focus-id="${`${id}-${item.id}`}"]`);
+            return document.querySelector<HTMLElement>(
+              `[data-focus-id="${slugify(`${id}-${item.id}`)}"]`
+            );
           };
 
           // In React concurrent mode, there could be several render attempts before the element we're
@@ -88,10 +90,10 @@ export const useListItemRemove = createElemPropsHook(useCursorListModel)(
       onClick() {
         model.events.goTo({id: elemProps['data-id']!});
       },
-      'data-focus-id': `${model.state.id}-${elemProps['data-id']}`,
+      'data-focus-id': slugify(`${model.state.id}-${elemProps['data-id']}`),
       tabIndex: !model.state.cursorId
         ? 0 // cursor isn't known yet, be safe and mark this as focusable
-        : !!elemProps['data-id'] && model.state.cursorId === elemProps['data-id']
+        : !!elemProps['data-id'] && isCursor(model.state, elemProps['data-id'])
         ? 0 // A name is known and cursor is here
         : -1, // A name is known an cursor is somewhere else
     };

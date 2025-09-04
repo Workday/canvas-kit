@@ -24,9 +24,10 @@ export const useAlwaysCloseOnOutsideClick = createElemPropsHook(usePopupModel)(m
         // Use `PopupStack.contains` instead of `ref.current.contains` so that the application can
         // decide if clicking the target should toggle the popup rather than it toggling implicitly
         // because the target is outside `ref.current`
+        document.contains(event.target as HTMLElement) &&
         !PopupStack.contains(model.state.stackRef.current, event.target as HTMLElement)
       ) {
-        model.events.hide();
+        model.events.hide(event);
       }
     },
     [model.events, model.state.stackRef]

@@ -1,4 +1,4 @@
-export {useMultiSelectInput} from './lib/MultiSelectInput';
-export {useMultiSelectModel} from './lib/useMultiSelectModel';
+export * from './lib/MultiSelectInput';
+export * from './lib/useMultiSelectModel';
 
-export {MultiSelect} from './lib/MultiSelect';
+export * from './lib/MultiSelect';

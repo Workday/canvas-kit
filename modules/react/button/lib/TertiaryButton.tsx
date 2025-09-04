@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import {buttonColorPropVars, buttonStencil} from './BaseButton';
 import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
 import {calc, createStencil, cssVar} from '@workday/canvas-kit-styling';

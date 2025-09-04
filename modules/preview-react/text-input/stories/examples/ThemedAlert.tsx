@@ -1,6 +1,3 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import {jsx} from '@emotion/react';
 import React from 'react';
 import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
 import {
@@ -43,7 +40,7 @@ const AlertInput = () => {
   return (
     <TextInput orientation="vertical">
       <TextInput.Label>Email</TextInput.Label>
-      <TextInput.Field css={alertStyles} onChange={handleChange} value={value} />
+      <TextInput.Field cs={alertStyles} onChange={handleChange} value={value} />
       <TextInput.Hint paddingTop={space.xxs}>Please enter a valid email.</TextInput.Hint>
     </TextInput>
   );

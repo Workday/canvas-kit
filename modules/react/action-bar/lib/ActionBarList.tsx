@@ -1,17 +1,12 @@
 import * as React from 'react';
 
-import {commonColors, colors, space} from '@workday/canvas-kit-react/tokens';
-import {
-  createSubcomponent,
-  ExtractProps,
-  getTheme,
-  styled,
-  StyledType,
-} from '@workday/canvas-kit-react/common';
-import {Flex} from '@workday/canvas-kit-react/layout';
+import {system} from '@workday/canvas-tokens-web';
+import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {useOverflowListMeasure, useListRenderItems} from '@workday/canvas-kit-react/collection';
 
 import {useActionBarModel} from './useActionBarModel';
+import {createStencil, cssVar} from '@workday/canvas-kit-styling';
 
 export interface ActionBarListProps<T = any>
   extends Omit<ExtractProps<typeof Flex, never>, 'children'> {
@@ -36,16 +31,25 @@ export interface ActionBarListProps<T = any>
   overflowButton?: React.ReactNode;
 }
 
-const ResponsiveList = styled(Flex)<ActionBarListProps & StyledType>(({theme}) => {
-  const {canvas: canvasTheme} = getTheme(theme);
-  return {
-    [canvasTheme.breakpoints.down('s')]: {
-      padding: space.s,
+export const actionBarListStencil = createStencil({
+  base: {
+    display: 'flex',
+    boxShadow: system.depth[1],
+    gap: system.space.x4,
+    background: system.color.bg.default,
+    borderBlockStart: `solid 1px ${cssVar(system.color.border.divider)}`,
+    padding: `${cssVar(system.space.x4)} ${cssVar(system.space.x10)} `,
+    position: 'fixed',
+    insetBlockEnd: 0,
+    insetInlineStart: 0,
+    insetInlineEnd: 0,
+    '@media (max-width: 767.5px)': {
+      padding: system.space.x4,
       '> *': {
         flex: 1,
       },
     },
-  };
+  },
 });
 
 export const useActionBarList = useOverflowListMeasure;
@@ -56,21 +60,9 @@ export const ActionBarList = createSubcomponent('div')({
   elemPropsHook: useActionBarList,
 })<ActionBarListProps>(({children, overflowButton, ...elemProps}, Element, model) => {
   return (
-    <ResponsiveList
-      as={Element}
-      gap="s"
-      depth={1}
-      background={commonColors.background}
-      borderTop={`solid 1px ${colors.soap400}`}
-      padding={`${space.s} ${space.xl} `}
-      position="fixed"
-      bottom={0}
-      left={0}
-      right={0}
-      {...elemProps}
-    >
+    <Element {...mergeStyles(elemProps, actionBarListStencil())}>
       {useListRenderItems(model, children)}
       {overflowButton}
-    </ResponsiveList>
+    </Element>
   );
 });

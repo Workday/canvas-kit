@@ -1,0 +1,203 @@
+<Meta title="Guides/Tokens Migration/Q&A and more" />
+
+# Q&A and more
+
+## Common Pitfalls & Solutions
+
+### Forgetting CSS Variable Imports
+
+**Problem**: Styles don't apply because CSS variables aren't defined. **Solution**: Ensure you've
+imported the CSS variable files at your app's top level.
+
+### Not Using var() Wrapper
+
+**Problem**: CSS properties don't work with raw token values. **Solution**: Use `createStyles` or
+`cssVar` utility instead of direct token references.
+
+### Mixing Old and New Tokens
+
+**Problem**: Inconsistent styling and potential conflicts. **Solution**: Migrate completely to new
+tokens rather than mixing systems.
+
+### Using Base Tokens for Everything
+
+**Problem**: Missing out on theming capabilities. **Solution**: Prefer system tokens for their
+semantic meaning and theming support.
+
+## Incremental Migration Strategy
+
+1. **Start with New Projects**: Use new tokens for all new components and features
+2. **Component-by-Component**: Migrate existing components one at a time
+3. **Test Thoroughly**: Ensure visual consistency after each component migration
+4. **Update Style Patterns**: Migrate from style props to `createStyles` where needed
+5. **Consolidate Imports**: Remove old token imports once migration is complete
+
+## Complete Migration Examples
+
+<br />
+
+### Example 1: Card Component Migration
+
+#### Before (Old Tokens)
+
+```javascript
+import {colors, space, borderRadius, type, depth} from '@workday/canvas-kit-react/tokens';
+import {createStyles} from '@workday/canvas-kit-styling';
+
+const cardStyles = createStyles({
+  padding: space.l,
+  backgroundColor: colors.frenchVanilla100,
+  borderColor: colors.soap500,
+  borderRadius: borderRadius.m,
+  color: colors.blackPepper300,
+  depth: 1,
+  ...type.levels.body.medium,
+});
+
+const headerStyles = createStyles({
+  color: colors.blackPepper500,
+  marginBottom: space.s,
+  ...type.levels.heading.small,
+});
+
+const errorTextStyles = createStyles({
+  color: colors.cinnamon500,
+  ...type.levels.subtext.large,
+});
+```
+
+#### After (New Tokens - Semantic System Approach)
+
+```javascript
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const cardStyles = createStyles({
+  padding: system.space.x8,
+  backgroundColor: system.color.bg.default,
+  border: `solid ${px2rem(1)}`,
+  borderColor: system.color.border.container,
+  borderRadius: system.shape.x1,
+  color: system.color.text.default,
+  boxShadow: system.depth[1],
+  ...system.type.body.medium,
+});
+
+const headerStyles = createStyles({
+  color: system.color.text.default,
+  marginBottom: system.space.x4,
+  ...system.type.heading.small,
+});
+
+const errorTextStyles = createStyles({
+  color: system.color.text.critical.default,
+  ...system.type.subtext.large,
+});
+```
+
+### Example 2: Form Input Migration
+
+#### Before (Old Tokens)
+
+```javascript
+import {colors, space, borderRadius} from '@workday/canvas-kit-react/tokens';
+
+const inputStyles = createStyles({
+  padding: `${space.xs} ${space.s}`,
+  backgroundColor: colors.frenchVanilla100,
+  borderColor: colors.soap400,
+  borderRadius: borderRadius.s,
+  color: colors.blackPepper400,
+  '&:focus': {
+    borderColor: colors.blueberry400,
+    backgroundColor: colors.frenchVanilla100,
+  },
+  '&.error': {
+    borderColor: colors.cinnamon500,
+    backgroundColor: colors.cinnamon100,
+  },
+  '&:disabled': {
+    backgroundColor: colors.soap200,
+    color: colors.soap600,
+  },
+});
+```
+
+#### After (New Tokens - System Approach)
+
+```javascript
+import {system} from '@workday/canvas-tokens-web';
+
+const inputStyles = createStyles({
+  padding: `${system.space.x3} ${system.space.x4}`,
+  backgroundColor: system.color.bg.default,
+  borderColor: system.color.border.default,
+  borderRadius: system.shape.half,
+  color: system.color.text.default,
+  '&:focus': {
+    borderColor: system.color.border.contrast,
+    backgroundColor: system.color.bg.default,
+  },
+  '&.error': {
+    borderColor: system.color.border.critical.default,
+    backgroundColor: system.color.bg.critical.subtle,
+  },
+  '&:disabled': {
+    backgroundColor: system.color.bg.disabled,
+    color: system.color.text.disabled,
+  },
+});
+```
+
+### Example 3: Button Migration with Brand Colors
+
+#### Before (Old Tokens)
+
+```javascript
+import {colors, space, borderRadius} from '@workday/canvas-kit-react/tokens';
+import {theme} from '@emotion/react';
+
+const primaryButtonStyles = createStyles({
+  padding: `${space.xs} ${space.m}`,
+  backgroundColor: theme.canvas.palette.primary.main,
+  borderColor: theme.canvas.palette.primary.main,
+  borderRadius: borderRadius.m,
+  color: theme.canvas.palette.primary.contrast,
+  '&:hover': {
+    backgroundColor: theme.canvas.palette.primary.dark,
+  },
+});
+```
+
+#### After (New Tokens - Brand + System)
+
+```javascript
+import {system, brand} from '@workday/canvas-tokens-web';
+
+const primaryButtonStyles = createStyles({
+  padding: `${system.space.x3} ${system.space.x6}`,
+  backgroundColor: brand.primary.base,
+  borderColor: brand.primary.base,
+  borderRadius: system.shape.x1,
+  color: brand.primary.accent,
+  '&:hover': {
+    backgroundColor: brand.primary.dark,
+  },
+});
+```
+
+## Next Steps
+
+After completing the token migration:
+
+- Review your components for consistent use of system tokens
+- Consider implementing theming if not already in place
+- Update your team's coding standards to reflect new token usage
+- Monitor for any visual regressions and address them promptly
+
+## Resources
+
+- [Canvas Tokens Documentation](https://canvas.workday.com/styles/tokens/)
+- [Canvas Kit Styling Documentation](https://workday.github.io/canvas-kit/?path=/docs/features-styling-welcome--page)
+- [Token Migration Discussion](https://github.com/Workday/canvas-tokens/discussions/77)
+- [Canvas Kit GitHub Repository](https://github.com/Workday/canvas-kit)

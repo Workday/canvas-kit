@@ -1,0 +1,85 @@
+import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
+
+import {StartIcon} from './examples/StartIcon';
+import {EndIcon} from './examples/EndIcon';
+import {Avatar} from './examples/Avatar';
+import {Depth} from './examples/Depth';
+import {RTL} from './examples/RTL';
+import {LongTitle} from './examples/LongTitle';
+import {HoistedModel} from './examples/HoistedModel';
+
+import * as ExpandableStories from './Expandable.stories';
+
+<Meta of={ExpandableStories} />
+
+# Canvas Kit Expandable
+
+`Expandable` is a compound component that creates a header to expand or collapse related content.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Start Icon
+
+For a basic expandable container with a chevron icon before the title, place`Expandable.Icon` before
+`Expandable.Title` as children of `Expandable.Target` and pass the `iconPosition` prop to
+`Expandable.Icon` with a value of `start`. `Expandable.Icon` will use a right chevron icon when
+collapsed and a down chevron icon when expanded.
+
+<ExampleCodeBlock code={StartIcon} />
+
+### End Icon
+
+For an expandable container with a chevron icon after the title, place `Expandable.Title` before
+`Expandable.Icon` as children of `Expandable.Target` and pass the `iconPosition` prop to
+`Expandable.Icon` with a value of `end`. `Expandable.Icon` will use a down chevron icon when
+collapsed and an up chevron icon when expanded.
+
+<ExampleCodeBlock code={EndIcon} />
+
+### With Avatar
+
+To include an avatar image, `Expandable.Avatar` should be placed between `Expandable.Icon` and
+`Expandable.Title`. An `iconPosition` prop with a value of either `start` or `end` should be passed
+to `Expandable.Icon` depending on whether the `Expandable.Icon` is placed before or after
+`Expandable.Title`.
+
+<ExampleCodeBlock code={Avatar} />
+
+### Right to Left (RTL)
+
+Expandable container has bidirectional support and should function as expected with RTL languages as
+long as the content direction is set in your Canvas theme.
+
+<ExampleCodeBlock code={RTL} />
+
+### Depth
+
+The `depth` prop passed to `Expandable` allows you to adjust the visual elevation of a component
+using our depth tokens.
+
+<ExampleCodeBlock code={Depth} />
+
+### Title Wrap
+
+Long titles will wrap to the next line and increase the height of the container.
+
+<ExampleCodeBlock code={LongTitle} />
+
+You can also have direct access to the model if
+
+### Hoisted Model
+
+If you you need direct access to the model, you can hoist it with the `useExpandableModel` hook. In
+the example below, we're hoisting the models to expand and collapse all three containers at once.
+
+<ExampleCodeBlock code={HoistedModel} />
+
+## Component API
+
+<SymbolDoc name="Expandable" fileName="/react/" />

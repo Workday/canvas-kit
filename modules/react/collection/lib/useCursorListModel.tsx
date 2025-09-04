@@ -136,6 +136,20 @@ const getItem: (id: string, model: NavigationInput) => Item<Generic> | undefined
   return state.items.find(item => item.id === id);
 };
 
+/**
+ * Get the current cursor id of a Collection model's state.
+ */
+export const getCursor = (state: NavigationInput['state']): string =>
+  typeof state.cursorId === 'string' ? state.cursorId : state.cursorId.slice(-1)[0] || '';
+
+/**
+ * Check if the provided id is the current cursor id of a Collection model's state.
+ */
+export const isCursor = (state: NavigationInput['state'], id?: string): boolean =>
+  state.cursorId && typeof state.cursorId === 'string'
+    ? state.cursorId === id
+    : state.cursorId.includes(id as string);
+
 export const getWrappingOffsetItem =
   (offset: number) =>
   (index: number, {state}: NavigationInput, tries = state.items.length): number => {
@@ -289,7 +303,7 @@ export const useCursorListModel = createModelHook({
     /**
      * Initial cursor position. If not provided, the cursor will point to the first item in the list
      */
-    initialCursorId: '',
+    initialCursorId: '' as string | string[],
     /**
      * If this is set it will cause a wrapping of a list that will turn it into a grid
      * @default 0
