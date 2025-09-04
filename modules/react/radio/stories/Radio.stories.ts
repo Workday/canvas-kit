@@ -4,7 +4,7 @@ import mdxDoc from './Radio.mdx';
 
 import {Radio} from '@workday/canvas-kit-react/radio';
 
-import {Alert as AlertExample} from './examples/Alert';
+import {Caution as CautionExample} from './examples/Caution';
 import {Basic as BasicExample} from './examples/Basic';
 import {Disabled as DisabledExample} from './examples/Disabled';
 import {Inverse as InverseExample} from './examples/Inverse';
@@ -27,8 +27,8 @@ export default {
 
 type Story = StoryObj<typeof Radio>;
 
-export const Alert: Story = {
-  render: AlertExample,
+export const Caution: Story = {
+  render: CautionExample,
 };
 export const Basic: Story = {
   render: BasicExample,

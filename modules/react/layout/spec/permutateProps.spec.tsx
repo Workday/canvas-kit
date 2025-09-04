@@ -50,7 +50,7 @@ describe('Component States Table', () => {
         ],
         error: [
           {value: undefined, label: ''},
-          {value: ErrorType.Alert, label: 'Alert'},
+          {value: ErrorType.Caution, label: 'Caution'},
           {value: ErrorType.Error, label: 'Error'},
         ],
       };
@@ -64,8 +64,8 @@ describe('Component States Table', () => {
       const results = [
         {label: 'Checked Indeterminate ', props: {checked: true, indeterminate: true}},
         {
-          label: 'Checked Indeterminate Alert',
-          props: {checked: true, indeterminate: true, error: ErrorType.Alert},
+          label: 'Checked Indeterminate Caution',
+          props: {checked: true, indeterminate: true, error: ErrorType.Caution},
         },
         {
           label: 'Checked Indeterminate Error',
@@ -73,8 +73,8 @@ describe('Component States Table', () => {
         },
         {label: 'Checked  ', props: {checked: true, indeterminate: false}},
         {
-          label: 'Checked  Alert',
-          props: {checked: true, indeterminate: false, error: ErrorType.Alert},
+          label: 'Checked  Caution',
+          props: {checked: true, indeterminate: false, error: ErrorType.Caution},
         },
         {
           label: 'Checked  Error',
@@ -82,8 +82,8 @@ describe('Component States Table', () => {
         },
         {label: 'Unchecked  ', props: {checked: false, indeterminate: false}},
         {
-          label: 'Unchecked  Alert',
-          props: {checked: false, indeterminate: false, error: ErrorType.Alert},
+          label: 'Unchecked  Caution',
+          props: {checked: false, indeterminate: false, error: ErrorType.Caution},
         },
         {
           label: 'Unchecked  Error',

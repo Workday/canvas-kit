@@ -4,23 +4,23 @@ import {
   SymbolDoc,
   Specifications,
 } from '@workday/canvas-kit-docs';
-import {Alert} from './examples/Alert';
-import {Basic} from './examples/Basic';
-import {Complex} from './examples/Complex';
-import {Controlled} from './examples/Controlled';
-import {Disabled} from './examples/Disabled';
-import {DisabledOptions} from './examples/DisabledOption';
-import {Error} from './examples/Error';
-import {Grow} from './examples/Grow';
-import {LabelPosition} from './examples/LabelPosition';
-import {WithIcons} from './examples/WithIcons';
-import {Required} from './examples/Required';
-import {MenuHeight} from './examples/MenuHeight';
-import {HoistedModel} from './examples/HoistedModel';
-import {RefForwarding} from './examples/RefForwarding';
-import {FetchingDynamicItems} from './examples/FetchingDynamicItems';
-import {Placeholder} from './examples/Placeholder';
-import {InitialSelectedItem} from './examples/InitialSelectedItem';
+import { Caution } from './examples/Caution';
+import { Basic } from './examples/Basic';
+import { Complex } from './examples/Complex';
+import { Controlled } from './examples/Controlled';
+import { Disabled } from './examples/Disabled';
+import { DisabledOptions } from './examples/DisabledOption';
+import { Error } from './examples/Error';
+import { Grow } from './examples/Grow';
+import { LabelPosition } from './examples/LabelPosition';
+import { WithIcons } from './examples/WithIcons';
+import { Required } from './examples/Required';
+import { MenuHeight } from './examples/MenuHeight';
+import { HoistedModel } from './examples/HoistedModel';
+import { RefForwarding } from './examples/RefForwarding';
+import { FetchingDynamicItems } from './examples/FetchingDynamicItems';
+import { Placeholder } from './examples/Placeholder';
+import { InitialSelectedItem } from './examples/InitialSelectedItem';
 import * as SelectStories from './Select.stories';
 import {Table} from '@workday/canvas-kit-react/table';
 
@@ -169,11 +169,11 @@ forward `ref` to its underlying `<input type="text" role="combobox">` element.
 
 ### Error States
 
-Set the `error` prop of the wrapping `FormField` to `FormField.ErrorType.Alert` or
-`FormField.ErrorType.Error` to set the `Select` to the alert or error state, respectively. You will
+Set the `error` prop of the wrapping `FormField` to `"caution"` or
+`"error"` to set the `Select` to the caution or error state, respectively. You will
 also need to set the `hintId` and `hintText` props on the `FormField` to meet accessibility
 standards. You must set an `id` attribute on the `Select.Input` element that matches the value of
-`inputId` set on the `FormField` element. These attributes ensure that the alert message is
+`inputId` set on the `FormField` element. These attributes ensure that the caution message is
 associated to the `Select` and read out by voiceover.
 
 **Note: The Select container component, `Select`, must wrap `FormField` to ensure `Select.Input` is
@@ -188,11 +188,11 @@ styled correctly.**
 </Select>
 ```
 
-#### Alert
+#### Caution
 
 Use the alert state when a selection is valid but there is additional information.
 
-<ExampleCodeBlock code={Alert} />
+<ExampleCodeBlock code={Caution} />
 
 #### Error
 

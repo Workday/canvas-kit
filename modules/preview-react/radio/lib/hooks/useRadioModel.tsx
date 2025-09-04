@@ -10,7 +10,7 @@ export const useRadioModel = createModelHook({
      *
      * ```tsx
      * <FormField
-     *    error={FormField.ErrorType.Alert}
+     *    error="caution"
      *    hintId="hint-alert"
      *    hintText="Deep dish is an extra $2.99"
      *    label="Choose Your Pizza Crust"

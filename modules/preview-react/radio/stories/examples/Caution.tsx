@@ -2,7 +2,7 @@ import React from 'react';
 import {FormFieldGroup} from '@workday/canvas-kit-react/form-field';
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 
-export const Alert = () => {
+export const Caution = () => {
   const [value, setValue] = React.useState<string | number>('deep-dish');
 
   const handleChange = (e: React.ChangeEvent) => {
@@ -13,7 +13,7 @@ export const Alert = () => {
   };
 
   return (
-    <FormFieldGroup error="alert" id="hint-alert">
+    <FormFieldGroup error="caution" id="hint-alert">
       <FormFieldGroup.Label>Choose Your Pizza Crust</FormFieldGroup.Label>
       <FormFieldGroup.Field>
         <FormFieldGroup.List

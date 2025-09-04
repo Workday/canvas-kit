@@ -18,7 +18,10 @@ const mappedKeys = {
   contrast: 'accent',
 };
 
-const defaultBranding = createStyles({
+/**
+ * If you wish to reset the theme to the default, apply this class on the CanvasProvider.
+ */
+export const defaultBranding = createStyles({
   [brand.common.alertInner]: base.amber400,
   [brand.common.alertOuter]: base.amber500,
   [brand.common.errorInner]: base.red500,
@@ -96,7 +99,6 @@ export const useCanvasThemeToCssVars = (
       }
     );
   });
-
   return {...elemProps, className, style};
 };
 
@@ -105,15 +107,14 @@ export const CanvasProvider = ({
   theme = {canvas: {}}, // default to empty theme to avoid breaking changes
   ...props
 }: CanvasProviderProps & React.HTMLAttributes<HTMLElement>) => {
-  const {className, style, ...rest} = useCanvasThemeToCssVars(theme, props);
+  const {className, ...elemProps} = useCanvasThemeToCssVars(theme, props);
   const cache = getCache();
-
+  const rest = {...elemProps, ...props};
   return (
     <CacheProvider value={cache}>
       <ThemeProvider theme={theme as Theme}>
         <div
           dir={theme?.canvas?.direction || defaultCanvasTheme.direction}
-          style={style}
           {...(rest as React.HTMLAttributes<HTMLDivElement>)}
         >
           {children}

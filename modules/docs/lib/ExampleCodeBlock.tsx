@@ -18,7 +18,7 @@ import eslintrc from '!!raw-loader!./stackblitzFiles/.eslintrc.cjs.txt';
 import tsconfigNodeFile from '!!raw-loader!./stackblitzFiles/tsconfig.node.json';
 import appFile from '!!raw-loader!./stackblitzFiles/App.tsx';
 import viteEnvFile from '!!raw-loader!./stackblitzFiles/vite-env.d.ts';
-import {CanvasProvider, defaultCanvasTheme} from '@workday/canvas-kit-react/common';
+import {CanvasProvider, defaultBranding} from '@workday/canvas-kit-react/common';
 
 const cardStencil = createStencil({
   base: {
@@ -124,7 +124,7 @@ export const ExampleCodeBlock = ({code}: any) => {
     <div {...cardStencil({opened: isCodeDisplayed})}>
       <Card data-part="example-block" className="sb-unstyled">
         <Card.Body>
-          <CanvasProvider theme={{canvas: defaultCanvasTheme}}>
+          <CanvasProvider className={defaultBranding}>
             {React.createElement(code)}
             {code && (
               <div data-part="code-toggle-stackblitz-btn-container">
@@ -144,7 +144,7 @@ export const ExampleCodeBlock = ({code}: any) => {
       </Card>
       <Card data-part="code-block" padding={0}>
         <Card.Body cs={{position: 'relative'}}>
-          <CanvasProvider theme={{canvas: defaultCanvasTheme}}>
+          <CanvasProvider className={defaultBranding}>
             {code && (
               <div ref={textInput}>
                 <SyntaxHighlighter

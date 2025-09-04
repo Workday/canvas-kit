@@ -92,7 +92,7 @@ export const RadioStates = {
             rowProps={permutateProps({
               error: [
                 {value: undefined, label: 'No Error'},
-                {value: 'alert', label: 'Alert'},
+                {value: 'caution', label: 'Caution'},
                 {value: 'error', label: 'Error'},
               ],
             })}
@@ -130,7 +130,7 @@ export const RadioStates = {
             rowProps={permutateProps({
               error: [
                 {value: undefined, label: 'No Error'},
-                {value: 'alert', label: 'Alert'},
+                {value: 'caution', label: 'Caution'},
                 {value: 'error', label: 'Error'},
               ],
             })}

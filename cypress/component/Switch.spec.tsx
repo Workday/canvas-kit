@@ -1,6 +1,6 @@
 import {Basic} from '../../modules/react/switch/stories/examples/Basic';
 import {Error} from '../../modules/react/switch/stories/examples/Error';
-import {Alert} from '../../modules/react/switch/stories/examples/Alert';
+import {Caution} from '../../modules/react/switch/stories/examples/Caution';
 import {Disabled} from '../../modules/react/switch/stories/examples/Disabled';
 
 const getSwitch = () => {
@@ -8,7 +8,7 @@ const getSwitch = () => {
 };
 
 describe('Switch', () => {
-  [Basic, Alert, Error].forEach(Example => {
+  [Basic, Caution, Error].forEach(Example => {
     context(`given the '${Example.name}' story is rendered`, () => {
       beforeEach(() => {
         cy.mount(<Example />);

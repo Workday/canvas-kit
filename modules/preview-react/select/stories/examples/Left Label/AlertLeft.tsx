@@ -7,7 +7,7 @@ import {controlComponent} from '../../../../../../utils/storybook';
 
 export const AlertLeft = () => {
   return (
-    <FormField orientation="horizontalStart" id="select-alert" error="alert">
+    <FormField orientation="horizontalStart" id="select-alert" error="caution">
       <FormField.Label>Label</FormField.Label>
       <FormField.Field>
         {controlComponent(<FormField.Input as={Select} name="contact" options={options} />)}

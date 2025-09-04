@@ -2,7 +2,7 @@ import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {createStencil, CSProps} from '@workday/canvas-kit-styling';
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 
 import {useSelectInput} from './hooks/useSelectInput';
 import {useSelectModel} from './hooks/useSelectModel';
@@ -35,6 +35,7 @@ export const selectInputStencil = createStencil({
     visualInputPart,
     caretContainerPart,
     startIconContainerPart,
+    caretPart,
   }) => ({
     [hiddenInputPart]: {
       position: 'absolute',
@@ -65,6 +66,11 @@ export const selectInputStencil = createStencil({
         backgroundColor: 'transparent',
       },
     },
+    '&:has(:disabled, .disabled)': {
+      [caretPart]: {
+        [systemIconStencil.vars.color]: system.color.fg.disabled,
+      },
+    },
   }),
   modifiers: {
     error: {
@@ -73,7 +79,7 @@ export const selectInputStencil = createStencil({
           backgroundColor: brand.error.lightest,
         },
       }),
-      alert: ({visualInputPart}) => ({
+      caution: ({visualInputPart}) => ({
         [visualInputPart]: {
           backgroundColor: brand.alert.lightest,
         },

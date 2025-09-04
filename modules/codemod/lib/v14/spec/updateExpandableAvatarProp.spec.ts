@@ -4,23 +4,23 @@ import {stripIndent} from 'common-tags';
 
 const expectTransform = expectTransformFactory(transform);
 
-describe.only('Expandable', () => {
+describe('Expandable', () => {
   it('should not change non-canvas imports', () => {
     const input = stripIndent`
             import {Expandable} from '@workday/any-other-package'
             <>
-                <Expandable>Hello<Expandable.Icon/></Expandable>
-                <Expandable />
-                <Expandable />
+              <Expandable>Hello<Expandable.Icon/></Expandable>
+              <Expandable />
+              <Expandable />
             </>
         `;
 
     const expected = stripIndent`
             import {Expandable} from '@workday/any-other-package'
             <>
-                <Expandable>Hello<Expandable.Icon/></Expandable>
-                <Expandable />
-                <Expandable />
+              <Expandable>Hello<Expandable.Icon/></Expandable>
+              <Expandable />
+              <Expandable />
             </>
         `;
     expectTransform(input, expected);

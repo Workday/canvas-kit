@@ -12,6 +12,8 @@ describe('Avatar', () => {
     it('should show the initials HD given the name is Happy Doggo until the image is loaded ', () => {
       cy.findByText('HD').should('be.visible');
       cy.findByRole('img').should('not.exist');
+      // wait for the image to load
+      cy.wait(1000);
       cy.findByRole('img').should('exist');
     });
   });

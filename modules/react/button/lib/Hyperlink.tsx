@@ -8,9 +8,9 @@ export interface HyperlinkProps extends CSProps {
    * sets modifier styles for Hyperlink
    * - `inverse`: sets the color to white and updates hover, focus, and active pseudo-classes
    * - `standalone`: removes the underline of the Hyperlink. This is useful when a hyperlink is used outside the context of a paragraph or body text.
-   * - `standalone-inverse`: removes the underline of the Hyperlink and sets the color to white. This is useful when a hyperlink is used outside the context of a paragraph or body text on a dark background.
+   * - `standaloneInverse`: removes the underline of the Hyperlink and sets the color to white. This is useful when a hyperlink is used outside the context of a paragraph or body text on a dark background.
    */
-  variant?: 'inverse' | 'standalone' | 'standalone-inverse';
+  variant?: 'inverse' | 'standalone' | 'standaloneInverse';
   /**
    * attribute for the hyperlink URL
    */
@@ -61,7 +61,7 @@ export const hyperlinkStencil = createStencil({
       standalone: {
         textDecoration: 'none',
       },
-      'standalone-inverse': {
+      standaloneInverse: {
         textDecoration: 'none',
         color: system.color.text.inverse,
         '&:hover, &.hover': {
