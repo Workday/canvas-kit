@@ -6,7 +6,7 @@ const baseMapping = {
   cinnamon500: 'red600',
   cinnamon600: 'red700',
 
-  peach100: 'coral150',
+  peach100: 'coral50',
   peach200: 'coral200',
   peach300: 'coral300',
   peach400: 'red400',
@@ -111,7 +111,7 @@ const baseMapping = {
   islandPunch500: 'purple700',
   islandPunch600: 'purple800',
 
-  grapeSoda100: 'magenta59',
+  grapeSoda100: 'magenta50',
   grapeSoda200: 'magenta200',
   grapeSoda300: 'purple400',
   grapeSoda400: 'purple500',
@@ -137,7 +137,7 @@ const baseMapping = {
   rootBeer300: 'coral200',
   rootBeer400: 'coral200',
   rootBeer500: 'coral200',
-  rootBeer600: 'coral950',
+  rootBeer600: 'amber950',
 
   toastedMarshmallow100: 'amber25',
   toastedMarshmallow200: 'orange100',

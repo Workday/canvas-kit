@@ -12,6 +12,7 @@ any questions.
 
 - [Codemod](#codemod)
   - [Instructions](#instructions)
+- [Tokens](#tokens)
 - [Theming](#theming)
   - [Canvas Provider](#canvas-provider-)
 - [Component Updates](#component-updates)
@@ -107,6 +108,20 @@ yarn remove @workday/canvas-kit-codemod
 > manually edit other file types (`.json`, `.mdx`, `.md`, etc.). You may need to run your linter
 > after executing the codemod, as its resulting formatting (spacing, quotes, etc.) may not match
 > your project conventions.
+
+## Tokens
+
+Canvas Kit v14 now uses `@workday/canvas-tokens-web` v3, which introduces new color palettes and
+replaces the old "fruity" color names (for example, use `red` instead of `cinnamon`, `blue` instead
+of `blueberry`, and `green` instead of `greenApple`). We strongly recommend upgrading to
+`@workday/canvas-tokens-web` v3, as using older versions will not match the new brand guidelines or
+color system.
+
+Follow these guides to migrate:
+
+- Migrate from `@workday/canvas-kit-react/tokens` to `@workday/canvas-tokens-web` v3:
+  [Migration Guide](https://workday.github.io/canvas-kit/?path=/docs/guides-tokens-migration-overview--docs)
+- [v2 to v3 Migration Guide](https://workday.github.io/canvas-tokens/?path=/docs/guides-upgrade-guides-v3-overview--docs)
 
 ## Theming
 
