@@ -116,34 +116,41 @@ Canvas Kit v14 now uses `@workday/canvas-tokens-web` v3, which introduces new co
 replaces the old "fruity" color names (for example, use `red` instead of `cinnamon`, `blue` instead
 of `blueberry`, and `green` instead of `greenApple`). We strongly recommend upgrading to
 `@workday/canvas-tokens-web` v3, as using older versions will not match the new brand guidelines or
-color system. Although this dependency upgrade is not required, we've offered migration guides and codemods separately from the v14 upgrade so that teams can upgrade when they can.
+color system. Although this dependency upgrade is not required, we've offered migration guides and
+codemods separately from the v14 upgrade so that teams can upgrade when they can.
 
 > **Note:** v3 Tokens should be backwards compatible with older versions of Canvas Kit.
 
 Follow these guides to migrate:
 
-- If you are still using our old tokens from (`@workday/canvas-kit-react/tokens`): Migrate from `@workday/canvas-kit-react/tokens` to `@workday/canvas-tokens-web` v3:
+- If you are still using our old tokens from (`@workday/canvas-kit-react/tokens`): Migrate from
+  `@workday/canvas-kit-react/tokens` to `@workday/canvas-tokens-web` v3:
   [Migration Guide](https://workday.github.io/canvas-kit/?path=/docs/guides-tokens-migration-overview--docs)
 - [v2 to v3 Migration Guide](https://workday.github.io/canvas-tokens/?path=/docs/guides-upgrade-guides-v3-overview--docs)
+
+> 🤖 The `v14-tokens` codemod will automatically migrate your tokens, whether you're upgrading from
+> old tokens or from v2 to v3. Read
+> [the codemod instructions](https://workday.github.io/canvas-kit/?path=/docs/guides-tokens-migration-codemod--docs)
 
 ## Caution Naming
 
 **PR:** [#3462](https://github.com/Workday/canvas-kit/pull/3462)
 
-To better align with the brand refresh, Alert and Warning states are being renamed to Caution for better semantics.
+To better align with the brand refresh, Alert and Warning states are being renamed to Caution for
+better semantics.
 
-This change mostly affects how you pass an error state to our input components. In most cases, our inputs components should be used with our `FormField` component to
-ensure correct accessiblity.
+This change mostly affects how you pass an error state to our input components. In most cases, our
+inputs components should be used with our `FormField` component to ensure correct accessiblity.
 
 **Before in v13**
 
 ```tsx
 <FormField error="alert">
-	<FormField.Label>First Name</FormField.Label>
-	<FormField.Field>
-		<FormField.Input as={TextInput} value={value} onChange={handleChange} />
-		<FormField.Hint>Cannot contain numbers</FormField.Hint>
-	</FormField.Field>
+  <FormField.Label>First Name</FormField.Label>
+  <FormField.Field>
+    <FormField.Input as={TextInput} value={value} onChange={handleChange} />
+    <FormField.Hint>Cannot contain numbers</FormField.Hint>
+  </FormField.Field>
 </FormField>
 ```
 
@@ -151,15 +158,16 @@ ensure correct accessiblity.
 
 ```tsx
 <FormField error="caution">
-	<FormField.Label>First Name</FormField.Label>
-	<FormField.Field>
-		<FormField.Input as={TextInput} value={value} onChange={handleChange} />
-		<FormField.Hint>Cannot contain numbers</FormField.Hint>
-	</FormField.Field>
+  <FormField.Label>First Name</FormField.Label>
+  <FormField.Field>
+    <FormField.Input as={TextInput} value={value} onChange={handleChange} />
+    <FormField.Hint>Cannot contain numbers</FormField.Hint>
+  </FormField.Field>
 </FormField>
 ```
 
-If you are using the error type either from our `Common` package or the one exposed from the component, the naming as also changed.
+If you are using the error type either from our `Common` package or the one exposed from the
+component, the naming as also changed.
 
 **Before in v13**
 
@@ -192,7 +200,8 @@ someFunction(ErrorType.Caution);
 <TextArea error={TextArea.ErrorType.Caution} />
 ```
 
-> 🤖 The codemod will handle the change of `ErrorType.Alert` to `ErrorType.Caution` and `error="alert"` to `error="caution"`.
+> 🤖 The codemod will handle the change of `ErrorType.Alert` to `ErrorType.Caution` and
+> `error="alert"` to `error="caution"`.
 
 ## Theming
 
@@ -351,8 +360,6 @@ The following components have been updated:
 The `TertiaryButton` component no longer supports the `isThemable` prop. To customize the appearance
 of `TertiaryButton`, use the `cs` prop for custom styles or the `colors` prop for palette-based
 color overrides.
-
-
 
 The shape of `TertiaryButton` has changed to have rounded corners, aligning with other buttons and
 our new brand direction.
@@ -789,7 +796,7 @@ import {TextArea} from '@workday/canvas-kit-preview-react/text-area';
 <TextArea orientation="vertical">
   <TextArea.Label>Leave a review</TextArea.Label>
   <TextArea.Field onChange={handleChange} value={value} />
-</TextArea>
+</TextArea>;
 ```
 
 **After in v14**
@@ -803,7 +810,7 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
   <FormField.Field>
     <FormField.Input as={TextArea} onChange={handleChange} value={value} />
   </FormField.Field>
-</FormField>
+</FormField>;
 ```
 
 ### Text Input (preview)
@@ -822,7 +829,7 @@ import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
 <TextInput orientation="vertical">
   <TextInput.Label>Email</TextInput.Label>
   <TextInput.Field onChange={handleChange} value={value} />
-</TextInput>
+</TextInput>;
 ```
 
 **After in v14**
@@ -836,7 +843,7 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
   <FormField.Field>
     <FormField.Input as={TextInput} onChange={handleChange} value={value} />
   </FormField.Field>
-</FormField>
+</FormField>;
 ```
 
 ---
