@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.26](https://github.com/Workday/canvas-kit/releases/tag/v13.2.26) (2025-09-04)
+
+### Infrastructure
+
+- chore: Add component tracking tags ([#3452](https://github.com/Workday/canvas-kit/pull/3452)) ([@alanbsmith](https://github.com/alanbsmith), manuel.carrera)
+
+### Styling
+
+- fix: Fix nested styles containing CSS variables ([#3448](https://github.com/Workday/canvas-kit/pull/3448)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v12.6.25](https://github.com/Workday/canvas-kit/releases/tag/v12.6.25) (2025-09-04)
 
 ### Infrastructure
