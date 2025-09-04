@@ -2,7 +2,7 @@ import React from 'react';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {ColorInput} from '@workday/canvas-kit-react/color-picker';
 
-export const Alert = () => {
+export const Caution = () => {
   const [value, setValue] = React.useState('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -10,7 +10,7 @@ export const Alert = () => {
   };
 
   return (
-    <FormField error="alert">
+    <FormField error="caution">
       <FormField.Label>Background Color</FormField.Label>
       <FormField.Field>
         <FormField.Input as={ColorInput} onChange={handleChange} value={value} />
