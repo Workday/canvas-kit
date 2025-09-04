@@ -5,10 +5,10 @@ import {Card} from '@workday/canvas-kit-react/card';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 
 const customTheme = createStyles({
-  [brand.primary.base]: base.magenta600,
-  [brand.primary.dark]: base.magenta700,
-  [brand.primary.darkest]: base.magenta800,
-  [brand.common.focusOutline]: base.magenta600,
+  [brand.primary.base]: base.green600,
+  [brand.primary.dark]: base.green700,
+  [brand.primary.darkest]: base.green800,
+  [brand.common.focusOutline]: base.green600,
 });
 
 export const Theming = () => {

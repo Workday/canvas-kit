@@ -15,7 +15,7 @@ Canvas Kit v14 introduces a significant shift in theming approach, moving away f
 
 **Canvas Kit v10** introduced CSS tokens through the `@workday/canvas-tokens-web` package, providing a foundation for consistent design system values.
 
-**Canvas Kit v14** deprecates the `CanvasProvider` theme prop in favor of CSS variables, offering a more performant and flexible theming solution.
+**Canvas Kit v14** Removes the cascade barrier created by the `CanvasProvider`, allowing CSS variables to work as intended.
 
 ## Old Approach (v10-v13)
 
@@ -227,21 +227,23 @@ const theme = {
 }
 ```
 
-### Step 3: Update Component Usage
+### Step 3: App Level Theming Usage
 
 Replace theme-based `CanvasProvider` usage with CSS class-based theming:
 
 ```tsx
 // Before:
 <CanvasProvider theme={customTheme}>
-  <MyComponent />
+  <App />
 </CanvasProvider>
 
 // After:
 <CanvasProvider className={customThemeClass}>
-  <MyComponent />
+  <App />
 </CanvasProvider>
 ```
+
+> **Note:** Using a class means you will need to define each property of the palette for full control over theming.
 
 ### Step 4: Test Component Rendering
 
@@ -264,7 +266,7 @@ Prefer brand tokens over base tokens for better maintainability:
 --cnvs-brand-primary-base: var(--cnvs-base-palette-blue-600);
 
 /* ❌ Avoid - direct base token usage */
---cnvs-sys-color-bg-primary-default: var(--cnvs-base-palette-blue-600);
+--cnvs-base-palette-blue-600: blue;
 ```
 
 
@@ -277,6 +279,39 @@ Ensure color combinations meet accessibility standards:
   --cnvs-brand-primary-base: var(--cnvs-base-palette-blue-600);
   --cnvs-brand-primary-accent: var(--cnvs-base-palette-neutral-0); /* White text */
 }
+```
+
+### 3. Avoid Component Level Theming
+
+Theming is meant to be done at the app level or root level of the application. Avoid theming at the component level.
+
+```tsx
+/* ✅ Good - App level theming */
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {base, brand} from '@workday/canvas-tokens-web';
+
+const myCustomTheme = createStyles({
+  [brand.primary.base]: base.magenta600
+})
+
+
+<CanvasProvider className={myCustomTheme}>
+  <App/>
+</CanvasProvider>
+
+/* ❌ Avoid - wrapping components to theme */
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
+
+const myCustomTheme = createStyles({
+  [brand.primary.base]: base.magenta600
+})
+
+<CanvasProvider className={myCustomTheme}>
+  <PrimaryButton>Click Me</PrimaryButton>
+</CanvasProvider>
+
 ```
 
 ## Component Compatibility
@@ -344,4 +379,4 @@ console.log(brand.primary.base); // Should output CSS variable name
 
 The migration to CSS variables in Canvas Kit v14 provides a more performant, flexible, and maintainable theming solution. By following this guide and best practices, you can successfully migrate your applications and take advantage of the improved theming capabilities.
 
-For additional support and examples, refer to the Canvas Kit Storybook documentation and the `@workday/canvas-tokens` repository.
+For additional support and examples, refer to the Canvas Kit Storybook documentation and the `@workday/canvas-tokens` [repository](https://github.com/Workday/canvas-tokens).
