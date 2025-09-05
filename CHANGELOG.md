@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.6.28](https://github.com/Workday/canvas-kit/releases/tag/v12.6.28) (2025-09-05)
+
+### Utilities
+
+- fix: Add backwards compat to focusRing ([#3487](https://github.com/Workday/canvas-kit/pull/3487)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v12.6.27](https://github.com/Workday/canvas-kit/releases/tag/v12.6.27) (2025-09-05)
 
 ### Utilities
