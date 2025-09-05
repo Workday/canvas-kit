@@ -6,7 +6,7 @@
     "declaration": true,
     "declarationMap": true,
     "esModuleInterop": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "lib": ["es2015", "es2017", "es2018", "es2019", "dom"],
     "moduleResolution": "node",
     "forceConsistentCasingInFileNames": true,
@@ -22,7 +22,7 @@
     "skipLibCheck": true,
     "plugins": [
       {
-        "transform": "./modules/styling-transform"
+        "transform": "./.storybook/typescript-transform.ts"
       }
     ]
   },

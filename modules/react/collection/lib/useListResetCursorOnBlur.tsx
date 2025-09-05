@@ -3,6 +3,7 @@ import React from 'react';
 import {createElemPropsHook, useMountLayout} from '@workday/canvas-kit-react/common';
 import {orientationKeyMap} from './keyUtils';
 import {useListModel} from './useListModel';
+import {isCursor} from './useCursorListModel';
 
 /**
  * This elemProps hook resets the cursor when the list looses focus. By default,
@@ -43,7 +44,7 @@ export const useListResetCursorOnBlur = createElemPropsHook(useListModel)(({stat
       if (!programmaticFocusRef.current) {
         // use an animation frame to wait for any other model changes that may happen on a blur
         requestAnimationFrameRef.current = requestAnimationFrame(() => {
-          if (state.selectedIds[0] !== state.cursorId) {
+          if (!isCursor(state, state.selectedIds[0])) {
             events.goTo({id: state.selectedIds[0]});
           }
         });

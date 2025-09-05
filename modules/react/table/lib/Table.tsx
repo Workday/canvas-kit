@@ -1,4 +1,3 @@
-import React from 'react';
 import {GridProps, FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {baseTableStencil} from './BaseTable';

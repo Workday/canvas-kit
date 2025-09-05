@@ -1,19 +1,16 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import {jsx} from '@emotion/react';
 import * as React from 'react';
 
-import {borderRadius, CSSProperties, space, type} from '@workday/canvas-kit-react/tokens';
-import {createContainer, ExtractProps, useIsRTL} from '@workday/canvas-kit-react/common';
-import {Flex} from '@workday/canvas-kit-react/layout';
+import {createContainer, ExtractProps, focusRing} from '@workday/canvas-kit-react/common';
+import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 
-import {useBannerModel, useThemedPalette} from './hooks';
+import {useBannerModel} from './hooks';
 
 import {BannerIcon} from './BannerIcon';
 import {BannerLabel} from './BannerLabel';
 import {BannerActionText} from './BannerActionText';
-import {px2rem} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
 export interface BannerProps extends ExtractProps<typeof Flex, never> {
   /**
@@ -22,17 +19,68 @@ export interface BannerProps extends ExtractProps<typeof Flex, never> {
   children?: React.ReactNode;
 }
 
-const styles: CSSProperties = {
-  cursor: 'pointer',
-  transition: 'background-color 120ms',
-  outline: `${system.space.x1} solid transparent`,
-  '&:focus-visible, &.focus': {
-    outline: `${px2rem(4)} double transparent`,
-    // using `focusRing` in support doesn't work for components that use `styled` function because we changed the type to be `CSSObjectWithVars`. Changing this to use `boxShadow` works in support for non stencil components.
-    boxShadow:
-      '0 0 0 2px var(--cnvs-base-palette-french-vanilla-100, rgba(255,255,255,1)),0 0 0 4px var(--cnvs-brand-common-focus-outline, rgba(8,117,225,1))',
+export const bannerStencil = createStencil({
+  base: {
+    ...system.type.subtext.large,
+    // TODO: Need to update fontFamily token [#3221](https://github.com/Workday/canvas-kit/issues/3221).
+    fontFamily: `${system.fontFamily.default}, Helvetica Neue, Helvetica, Arial, sans-serif`,
+    fontWeight: system.fontWeight.medium,
+    padding: `${system.space.x2} ${system.space.x4}`,
+    border: '0',
+    display: 'flex',
+    alignItems: 'center',
+    textAlign: 'left',
+    borderStartStartRadius: system.shape.x1,
+    borderStartEndRadius: system.shape.x1,
+    borderEndStartRadius: system.shape.x1,
+    borderEndEndRadius: system.shape.x1,
+    cursor: 'pointer',
+    transition: 'background-color 120ms',
+    outline: `${system.space.x1} solid transparent`,
+    '&:focus-visible, &.focus': {
+      outline: `${system.shape.x1} double transparent`,
+      ...focusRing({separation: 2}),
+    },
   },
-};
+  modifiers: {
+    hasErrors: {
+      true: {
+        backgroundColor: brand.error.base,
+        color: brand.error.accent,
+        '&:hover, &.hover': {
+          background: brand.error.dark,
+        },
+        '& [data-part="exclamation-circle-icon"]': {
+          [systemIconStencil.vars.accentColor]: brand.error.accent,
+          [systemIconStencil.vars.color]: brand.error.accent,
+          [systemIconStencil.vars.backgroundColor]: 'none',
+        },
+      },
+      false: {
+        backgroundColor: brand.alert.base,
+        color: system.color.fg.contrast.default,
+        '&:hover, &.hover': {
+          background: brand.alert.dark,
+        },
+        '& [data-part="exclamation-triangle-icon"]': {
+          [systemIconStencil.vars.accentColor]: system.color.fg.contrast.default,
+          [systemIconStencil.vars.color]: system.color.fg.contrast.default,
+          [systemIconStencil.vars.backgroundColor]: 'none',
+        },
+      },
+    },
+    isSticky: {
+      true: {
+        width: px2rem(222),
+        borderStartEndRadius: 0,
+        borderEndEndRadius: 0,
+      },
+      false: {
+        width: px2rem(328),
+      },
+    },
+  },
+});
 
 /**
  * `Banner` is a container component rendered as a `<button>` element that is responsible for creating
@@ -79,7 +127,7 @@ export const Banner = createContainer('button')({
      */
     Icon: BannerIcon,
     /**
-     * `Banner.Label` is a styled {@link Flex}. This component will get an id that will be used for
+     * `Banner.Label` is a div element with flex styles. This component will get an id that will be used for
      * the aria-describedby on the top level `<button>`.
      *
      * ```tsx
@@ -88,7 +136,7 @@ export const Banner = createContainer('button')({
      */
     Label: BannerLabel,
     /**
-     * `Banner.ActionText` is a styled {@link Box}. This component will get an id that will be used
+     * `Banner.ActionText` is a span element. This component will get an id that will be used
      * for the aria-labelledby on the top level `<button>`. This component will be visually hidden
      * when the model's `isSticky` prop is set to true.
      *
@@ -99,44 +147,14 @@ export const Banner = createContainer('button')({
     ActionText: BannerActionText,
   },
 })<BannerProps>(({children, ...elemProps}, Element, model) => {
-  const palette = useThemedPalette(model.state.hasError ? 'error' : 'alert');
-  const themedBackgroundStyles: CSSProperties = {
-    '&:hover': {
-      backgroundColor: palette.hover,
-    },
-  };
-
-  const isRTL = useIsRTL();
-  const borderBottomLeftRadius = isRTL ? 'borderBottomRightRadius' : 'borderBottomLeftRadius';
-  const borderTopLeftRadius = isRTL ? 'borderTopRightRadius' : 'borderTopLeftRadius';
-  const borderBottomRightRadius = isRTL ? 'borderBottomLeftRadius' : 'borderBottomRightRadius';
-  const borderTopRightRadius = isRTL ? 'borderTopLeftRadius' : 'borderTopRightRadius';
-
-  const borderStyleProps = {
-    [borderBottomLeftRadius]: borderRadius.m,
-    [borderTopLeftRadius]: borderRadius.m,
-    [borderBottomRightRadius]: model.state.isSticky ? 0 : borderRadius.m,
-    [borderTopRightRadius]: model.state.isSticky ? 0 : borderRadius.m,
-  };
-
   return (
-    <Flex
-      as={Element}
-      {...type.levels.subtext.large}
-      fontWeight="medium"
-      textAlign="left"
-      width={model.state.isSticky ? '222px' : '328px'}
-      backgroundColor={palette.normal}
-      color={palette.contrast}
-      padding={`${space.xxs} ${space.s}`}
-      border="0"
-      display="flex"
-      alignItems="center"
-      {...borderStyleProps}
-      css={[styles, themedBackgroundStyles]}
-      {...elemProps}
+    <Element
+      {...mergeStyles(
+        elemProps,
+        bannerStencil({hasErrors: model.state.hasError, isSticky: model.state.isSticky})
+      )}
     >
       {children}
-    </Flex>
+    </Element>
   );
 });
