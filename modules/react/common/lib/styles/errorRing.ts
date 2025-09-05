@@ -7,7 +7,7 @@ import {colors, inputColors} from '@workday/canvas-kit-react/tokens';
 import chroma from 'chroma-js';
 
 // Backwards compatible type that works with both styled components and Canvas Kit styling
-export type CompatibleCSSObject = CSSObject & CSSObjectWithVars;
+type CompatibleCSSObject = CSSObject & CSSObjectWithVars;
 
 const isAccessible = (foreground: string, background: string = colors.frenchVanilla100) => {
   return chroma.contrast(foreground, background) >= 3;
