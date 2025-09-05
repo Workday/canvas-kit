@@ -1,6 +1,6 @@
 import {EmotionCanvasTheme} from '../theming/index';
 import {ErrorType} from '../types';
-import {CSSObject} from '@emotion/styled';
+import {CSSObjectWithVars} from '@workday/canvas-kit-styling';
 import {colors, inputColors} from '@workday/canvas-kit-react/tokens';
 import chroma from 'chroma-js';
 
@@ -40,7 +40,7 @@ export function getErrorColors(error?: ErrorType, theme?: EmotionCanvasTheme) {
   }
 }
 
-export function errorRing(error?: ErrorType, theme?: EmotionCanvasTheme): CSSObject {
+export function errorRing(error?: ErrorType, theme?: EmotionCanvasTheme): CSSObjectWithVars {
   if (error !== ErrorType.Error && error !== ErrorType.Alert) {
     return {};
   }
