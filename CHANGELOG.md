@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.6.27](https://github.com/Workday/canvas-kit/releases/tag/v12.6.27) (2025-09-05)
+
+### Utilities
+
+- fix: Properly export version from React package ([#3488](https://github.com/Workday/canvas-kit/pull/3488)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v12.6.26](https://github.com/Workday/canvas-kit/releases/tag/v12.6.26) (2025-09-05)
 
 ### Utilities
