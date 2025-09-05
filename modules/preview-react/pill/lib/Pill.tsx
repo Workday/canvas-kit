@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {BaseButton, buttonStencil} from '@workday/canvas-kit-react/button';
-import {createContainer, focusRing, styled, StyledType} from '@workday/canvas-kit-react/common';
+import {createContainer, styled, StyledType} from '@workday/canvas-kit-react/common';
 import {BoxProps, boxStyleFn, Flex} from '@workday/canvas-kit-react/layout';
 import {borderRadius, colors, space, type} from '@workday/canvas-kit-react/tokens';
 import {handleCsProp, CSProps, px2rem} from '@workday/canvas-kit-styling';
@@ -103,13 +103,7 @@ const StyledBasePill = styled(BaseButton)<StyledType & PillProps>(
   ({variant}) => ({
     '&:focus-visible, &.focus': {
       borderColor: variant === 'removable' ? undefined : colors.blueberry400,
-      ...focusRing({
-        width: 0,
-        inset: 'inner',
-        innerColor: colors.blueberry400,
-        outerColor: colors.blueberry400,
-        separation: 1,
-      }),
+      boxShadow: 'rgb(8, 117, 225) 0px 0px 0px 1px inset, rgb(8, 117, 225) 0px 0px 0px 0px',
     },
   }),
   boxStyleFn

@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   createComponent,
   StyledType,
-  focusRing,
   mouseFocusBehavior,
   styled,
   Themeable,
@@ -153,34 +152,31 @@ const RadioInput = styled('input')<RadioProps & StyledType>(
       '& ~ div:first-of-type': {
         borderWidth: '2px',
         borderColor: variant === 'inverse' ? colors.blackPepper400 : themeFocusOutline,
-        boxShadow: 'none',
         outline: `${px2rem(2)} solid transparent`,
         outlineOffset: variant === 'inverse' ? '0' : '2px',
-        ...focusRing({
-          width: variant === 'inverse' ? 2 : 0,
-          separation: 0,
-          animate: false,
-          innerColor: variant === 'inverse' ? colors.blackPepper400 : undefined,
-          outerColor: variant === 'inverse' ? colors.frenchVanilla100 : undefined,
-        }),
+        // using `focusRing` in support doesn't work for components that use `styled` function because we changed the type to be `CSSObjectWithVars`. Changing this to use `boxShadow` works in support for non stencil components.
+        boxShadow:
+          variant === 'inverse'
+            ? `0 0 0 0px var(--cnvs-base-palette-french-vanilla-100, rgba(255,255,255,1)), 0 0 0 2px var(--cnvs-base-palette-blackpepper-400, rgba(51,51,51,1))`
+            : '0 0 0 0px transparent, 0 0 0 2px var(--cnvs-brand-common-focus-outline, rgba(8,117,225,1))',
       },
     },
     '&:checked:focus ~ div:first-of-type': {
-      ...focusRing({
-        separation: 2,
-        width: 2,
-        innerColor: variant === 'inverse' ? colors.blackPepper400 : undefined,
-        outerColor: variant === 'inverse' ? colors.frenchVanilla100 : themeFocusOutline,
-      }),
+      // using `focusRing` in support doesn't work for components that use `styled` function because we changed the type to be `CSSObjectWithVars`. Changing this to use `boxShadow` works in support for non stencil components.
+      boxShadow:
+        variant === 'inverse'
+          ? `0 0 0 2px var(--cnvs-base-palette-french-vanilla-100, rgba(255,255,255,1)), 0 0 0 4px var(--cnvs-brand-common-focus-outline, rgba(8,117,225,1))`
+          : `0 0 0 2px transparent, 0 0 0 4px var(--cnvs-brand-common-focus-outline, rgba(8,117,225,1))`,
       borderColor: variant === 'inverse' ? colors.frenchVanilla100 : themePrimary.main,
       borderWidth: '2px',
     },
     ...mouseFocusBehavior({
       '&:focus ~ div:first-of-type': {
-        ...focusRing({
-          width: 0,
-          outerColor: variant === 'inverse' ? colors.frenchVanilla100 : themeFocusOutline,
-        }),
+        // using `focusRing` in support doesn't work for components that use `styled` function because we changed the type to be `CSSObjectWithVars`. Changing this to use `boxShadow` works in support for non stencil components.
+        boxShadow:
+          variant === 'inverse'
+            ? '0 0 0 0px transparent, 0 0 0 2px var(--cnvs-base-palette-french-vanilla-100, rgba(255,255,255,1))'
+            : '0 0 0 0px transparent, 0 0 0 2px var(--cnvs-brand-common-focus-outline, rgba(8,117,225,1))',
         borderWidth: '1px',
         borderColor: checked
           ? variant === 'inverse'

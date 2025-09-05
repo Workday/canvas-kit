@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {focusRing, styled, StyledType, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {styled, StyledType, createSubcomponent} from '@workday/canvas-kit-react/common';
 
 import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
 import {usePillModel} from './usePillModel';
@@ -41,9 +41,9 @@ const StyledIconButton = styled(BaseButton)<StyledType & PillIconButtonProps>({
   },
 
   '&:focus-visible, &.focus': {
-    ...focusRing({
-      innerColor: 'transparent',
-    }),
+    // using `focusRing` in support doesn't work for components that use `styled` function because we changed the type to be `CSSObjectWithVars`. Changing this to use `boxShadow` works in support for non stencil components.
+    boxShadow:
+      '0 0 0 0px transparent,0 0 0 2px var(--cnvs-brand-common-focus-outline, rgba(8,117,225,1))',
     [buttonStencil.vars.background]: colors.soap300,
     [buttonStencil.vars.border]: 'transparent',
     [buttonStencil.vars.label]: colors.blackPepper400,

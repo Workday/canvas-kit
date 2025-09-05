@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import {colors, space, type, borderRadius, iconColors} from '@workday/canvas-kit-react/tokens';
 import {
-  focusRing,
   styled,
   StyledType,
   slugify,
@@ -108,7 +107,8 @@ export const StyledTabItem = styled(Box.as('button'))<StyledType & Pick<TabsItem
 
     '&:focus-visible, &.focus': {
       outline: `${px2rem(2)} solid transparent`,
-      ...focusRing({inset: 'outer', width: 0, separation: 2}, theme),
+      // using `focusRing` in support doesn't work for components that use `styled` function because we changed the type to be `CSSObjectWithVars`. Changing this to use `boxShadow` works in support for non stencil components.
+      boxShadow: `inset 0 0 0 2px var(--cnvs-brand-common-focus-outline, rgba(8,117,225,1)),inset 0 0 0 2px var(--cnvs-base-palette-french-vanilla-100, rgba(255,255,255,1))`,
     },
 
     '&:disabled, &[aria-disabled]': {

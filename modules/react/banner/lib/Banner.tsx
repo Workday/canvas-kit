@@ -4,7 +4,7 @@ import {jsx} from '@emotion/react';
 import * as React from 'react';
 
 import {borderRadius, CSSProperties, space, type} from '@workday/canvas-kit-react/tokens';
-import {createContainer, ExtractProps, focusRing, useIsRTL} from '@workday/canvas-kit-react/common';
+import {createContainer, ExtractProps, useIsRTL} from '@workday/canvas-kit-react/common';
 import {Flex} from '@workday/canvas-kit-react/layout';
 
 import {useBannerModel, useThemedPalette} from './hooks';
@@ -28,7 +28,9 @@ const styles: CSSProperties = {
   outline: `${system.space.x1} solid transparent`,
   '&:focus-visible, &.focus': {
     outline: `${px2rem(4)} double transparent`,
-    ...focusRing({separation: 2}),
+    // using `focusRing` in support doesn't work for components that use `styled` function because we changed the type to be `CSSObjectWithVars`. Changing this to use `boxShadow` works in support for non stencil components.
+    boxShadow:
+      '0 0 0 2px var(--cnvs-base-palette-french-vanilla-100, rgba(255,255,255,1)),0 0 0 4px var(--cnvs-brand-common-focus-outline, rgba(8,117,225,1))',
   },
 };
 
