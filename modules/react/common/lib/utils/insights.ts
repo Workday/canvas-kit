@@ -1,6 +1,6 @@
 /// <reference types="@types/node" />
 
-import {version} from '@workday/canvas-kit-react/version';
+import {version} from '@workday/canvas-kit-react';
 import {slugify} from '@workday/canvas-kit-styling';
 
 // Only add the major version tag for development and test environments
