@@ -157,16 +157,16 @@ const RadioInput = styled('input')<RadioProps & StyledType>(
         // using `focusRing` in support doesn't work for components that use `styled` function because we changed the type to be `CSSObjectWithVars`. Changing this to use `boxShadow` works in support for non stencil components.
         boxShadow:
           variant === 'inverse'
-            ? `0 0 0 0px var(--cnvs-base-palette-french-vanilla-100, rgba(255,255,255,1)), 0 0 0 2px var(--cnvs-base-palette-blackpepper-400, rgba(51,51,51,1))`
-            : '0 0 0 0px transparent, 0 0 0 2px var(--cnvs-brand-common-focus-outline, rgba(8,117,225,1))',
+            ? '0 0 0 2px var(--cnvs-base-palette-french-vanilla-100, rgba(255,255,255,1))'
+            : '0 0 0 0px transparent',
       },
     },
     '&:checked:focus ~ div:first-of-type': {
       // using `focusRing` in support doesn't work for components that use `styled` function because we changed the type to be `CSSObjectWithVars`. Changing this to use `boxShadow` works in support for non stencil components.
       boxShadow:
         variant === 'inverse'
-          ? `0 0 0 2px var(--cnvs-base-palette-french-vanilla-100, rgba(255,255,255,1)), 0 0 0 4px var(--cnvs-brand-common-focus-outline, rgba(8,117,225,1))`
-          : `0 0 0 2px transparent, 0 0 0 4px var(--cnvs-brand-common-focus-outline, rgba(8,117,225,1))`,
+          ? '0 0 0 2px var(--cnvs-base-palette-blackpepper-400, rgba(51,51,51,1)), 0 0 0 4px var(--cnvs-base-palette-french-vanilla-100, rgba(255,255,255,1))'
+          : '0 0 0 2px transparent, 0 0 0 4px var(--cnvs-brand-common-focus-outline, rgba(8,117,225,1))',
       borderColor: variant === 'inverse' ? colors.frenchVanilla100 : themePrimary.main,
       borderWidth: '2px',
     },
@@ -175,8 +175,8 @@ const RadioInput = styled('input')<RadioProps & StyledType>(
         // using `focusRing` in support doesn't work for components that use `styled` function because we changed the type to be `CSSObjectWithVars`. Changing this to use `boxShadow` works in support for non stencil components.
         boxShadow:
           variant === 'inverse'
-            ? '0 0 0 0px transparent, 0 0 0 2px var(--cnvs-base-palette-french-vanilla-100, rgba(255,255,255,1))'
-            : '0 0 0 0px transparent, 0 0 0 2px var(--cnvs-brand-common-focus-outline, rgba(8,117,225,1))',
+            ? '0 0 0 2px var(--cnvs-base-palette-french-vanilla-100, rgba(255,255,255,1))'
+            : '0 0 0 2px var(--cnvs-brand-common-focus-outline, rgba(8,117,225,1))',
         borderWidth: '1px',
         borderColor: checked
           ? variant === 'inverse'
