@@ -3,7 +3,7 @@ import React from 'react';
 import {useForm, FieldErrorsImpl} from 'react-hook-form';
 import {object, SchemaOf, string} from 'yup';
 
-import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {TertiaryButton, PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Select} from '@workday/canvas-kit-react/select';
@@ -120,34 +120,40 @@ export const TextInputWithReactHookForm = () => {
             <FormField.Hint>{errors.role?.message}</FormField.Hint>
           </Select>
         </FormField>
-        <TextInput
+        <FormField
           orientation="vertical"
           isRequired={true}
           error={!!errors.email ? 'error' : undefined}
         >
-          <TextInput.Label>Email</TextInput.Label>
-          <TextInput.Field
-            {...register('email')}
-            autoComplete="username"
-            placeholder="yourName@example.com"
-          />
-          <TextInput.Hint>{errors.email?.message}</TextInput.Hint>
-        </TextInput>
-        <TextInput
+          <FormField.Label>Email</FormField.Label>
+          <FormField.Field>
+            <FormField.Input
+              as={TextInput}
+              {...register('email')}
+              autoComplete="username"
+              placeholder="yourName@example.com"
+            />
+          </FormField.Field>
+          <FormField.Hint>{errors.email?.message}</FormField.Hint>
+        </FormField>
+        <FormField
           orientation="vertical"
           id={passwordId}
           isRequired={true}
           error={!!errors.password ? 'error' : undefined}
         >
-          <TextInput.Label>Password</TextInput.Label>
+          <FormField.Label>Password</FormField.Label>
           <Flex gap="xxs">
-            <TextInput.Field
-              {...passwordRegistration}
-              type={showPassword ? 'text' : 'password'}
-              autoComplete="current-password"
-              spellCheck={false}
-              ref={combinePasswordRef}
-            />
+            <FormField.Field>
+              <FormField.Input
+                as={TextInput}
+                {...passwordRegistration}
+                type={showPassword ? 'text' : 'password'}
+                autoComplete="current-password"
+                spellCheck={false}
+                ref={combinePasswordRef}
+              />
+            </FormField.Field>
             <TertiaryButton
               type="button"
               icon={showPassword ? invisibleIcon : visibleIcon}
@@ -159,8 +165,8 @@ export const TextInputWithReactHookForm = () => {
               }}
             />
           </Flex>
-          <TextInput.Hint>{errors.password?.message || passwordHint}</TextInput.Hint>
-        </TextInput>
+          <FormField.Hint>{errors.password?.message || passwordHint}</FormField.Hint>
+        </FormField>
 
         <PrimaryButton type="submit">Submit</PrimaryButton>
       </Flex>

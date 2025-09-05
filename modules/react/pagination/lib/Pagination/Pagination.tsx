@@ -1,5 +1,6 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 
 import {PaginationModel} from './types';
 import {
@@ -41,6 +42,14 @@ function useDefaultModel<T, C>(model: T | undefined, config: C, fn: (config: C) 
 export interface PaginationNavProps extends FlexProps {
   'aria-label': string;
 }
+
+export const paginationStencil = createStencil({
+  base: {
+    display: 'inline-flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+});
 
 /**
  * `Pagination` is a container component rendered as a `<nav>` element that is responsible for creating
@@ -88,14 +97,7 @@ export const Pagination = createComponent('nav')({
 
     return (
       <PaginationContext.Provider value={model}>
-        <Flex
-          ref={ref}
-          as={Element}
-          display="inline-flex"
-          flexDirection="column"
-          alignItems="center"
-          {...elemProps}
-        />
+        <Element ref={ref} {...mergeStyles(elemProps, paginationStencil())} />
       </PaginationContext.Provider>
     );
   },

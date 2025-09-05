@@ -64,7 +64,7 @@ const menuBorderStyles = (theme: EmotionCanvasTheme, error?: ErrorType): CSSObje
   if (error === ErrorType.Error) {
     borderColor = theme.canvas.palette.error.main;
     dividerBorderColor = borderColor;
-  } else if (error === ErrorType.Alert) {
+  } else if (error === ErrorType.Caution) {
     borderColor = theme.canvas.palette.alert.darkest;
     dividerBorderColor = theme.canvas.palette.alert.main;
     dividerBorderWidth = 2;
@@ -103,7 +103,7 @@ const menuListBorderStyles = (theme: EmotionCanvasTheme, error?: ErrorType): CSS
 
   if (error === ErrorType.Error) {
     borderColor = theme.canvas.palette.error.main;
-  } else if (error === ErrorType.Alert) {
+  } else if (error === ErrorType.Caution) {
     borderColor = theme.canvas.palette.alert.main;
     borderWidth = 2;
   }
@@ -229,7 +229,7 @@ const generatePopperOptions = (
 };
 
 /**
- * @deprecated ⚠️ `SelectMenu` in Preview has been deprecated and will be removed in a future major version. Please use [`Select` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) instead.
+ * @deprecated ⚠️ `SelectMenu` in Preview has been deprecated and will be removed in a future major version. Please use [`Select` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--docs) instead.
  */
 export const SelectMenu = ({
   buttonRef,

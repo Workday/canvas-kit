@@ -1,34 +1,69 @@
 import * as React from 'react';
-import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
-import {
-  useTheme,
-  Themeable,
-  EmotionCanvasTheme,
-  createComponent,
-  styled,
-  StyledType,
-} from '@workday/canvas-kit-react/common';
-import {ButtonColors} from './types';
-import {BaseButton} from './BaseButton';
+import {focusRing, createComponent} from '@workday/canvas-kit-react/common';
+import {BaseButton, buttonStencil} from './BaseButton';
 import {TertiaryButtonProps} from './TertiaryButton';
+import {brand, system} from '@workday/canvas-tokens-web';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
-export interface ToolbarIconButtonProps
-  extends Omit<TertiaryButtonProps, 'size' | 'variant'>,
-    Themeable {
+export interface ToolbarIconButtonProps extends Omit<TertiaryButtonProps, 'size' | 'variant'> {
   onToggleChange?: (toggled: boolean | undefined) => void;
   toggled?: boolean;
   shouldMirrorIcon?: boolean;
 }
 
-const StyledToolbarIconButton = styled(BaseButton)<StyledType & ToolbarIconButtonProps>({
-  ['& .wd-icon']: {
-    display: 'inline-block',
-    width: 20,
-    height: 20,
-  },
-  '&:focus-visible, &.focus': {
-    // using `focusRing` in support doesn't work for components that use `styled` function because we changed the type to be `CSSObjectWithVars`. Changing this to use `boxShadow` works in support for non stencil components.
-    boxShadow: '0 0 0 0px transparent,0 0 0 2px var(--cnvs-brand-common-focus-outline)',
+export const toolbarIconButtonStencil = createStencil({
+  extends: buttonStencil,
+  base: {
+    minWidth: system.space.x8,
+    padding: system.space.zero,
+    height: system.space.x8,
+    [buttonStencil.vars.borderRadius]: system.shape.x1,
+    [systemIconStencil.vars.color]: system.color.fg.muted.soft,
+
+    '&:focus-visible, &.focus': {
+      [systemIconStencil.vars.color]: system.color.fg.muted.soft,
+      ...focusRing({
+        width: 2,
+        separation: 0,
+        innerColor: system.color.border.transparent,
+        outerColor: brand.common.focusOutline,
+      }),
+    },
+
+    '&:hover, &.hover': {
+      [buttonStencil.vars.background]: system.color.bg.alt.default,
+      [systemIconStencil.vars.color]: system.color.fg.muted.stronger,
+    },
+
+    '&:active, &.active': {
+      [buttonStencil.vars.background]: system.color.bg.alt.stronger,
+    },
+
+    '&:disabled, &.disabled': {
+      [buttonStencil.vars.background]: system.color.bg.transparent.default,
+      [systemIconStencil.vars.color]: system.color.fg.disabled,
+    },
+
+    "&[aria-pressed='true']": {
+      [systemIconStencil.vars.color]: brand.primary.base,
+      [buttonStencil.vars.background]: brand.primary.lightest,
+
+      '&:hover, &.hover': {
+        [buttonStencil.vars.background]: system.color.bg.alt.default,
+        [systemIconStencil.vars.color]: brand.primary.dark,
+      },
+
+      '&:active, &.active': {
+        [buttonStencil.vars.background]: system.color.bg.alt.stronger,
+        [systemIconStencil.vars.color]: brand.primary.dark,
+      },
+
+      '&:disabled, &.disabled': {
+        [buttonStencil.vars.background]: brand.primary.lightest,
+        [systemIconStencil.vars.color]: brand.primary.light,
+      },
+    },
   },
 });
 
@@ -36,9 +71,6 @@ export const ToolbarIconButton = createComponent('button')({
   displayName: 'ToolbarIconButton',
   Component: (
     {
-      // TODO: Fix useTheme and make it a real hook
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      theme = useTheme(),
       onToggleChange,
       icon,
       shouldMirrorIcon = false,
@@ -55,61 +87,22 @@ export const ToolbarIconButton = createComponent('button')({
     React.useEffect(() => {
       if (isInitialMount.current) {
         isInitialMount.current = false;
-      } else {
-        if (toggled && typeof onToggleChange === 'function') {
-          onToggleChange(toggled);
-        }
+      } else if (toggled && typeof onToggleChange === 'function') {
+        onToggleChange(toggled);
       }
     }, [toggled, onToggleChange]);
 
     return (
-      <StyledToolbarIconButton
+      <BaseButton
         ref={ref}
         as={Element}
-        colors={getToolbarIconButtonColors(theme, toggled)}
-        size={'small'}
+        size="small"
         fillIcon={toggled}
         aria-pressed={toggled}
-        padding="zero"
-        minWidth={space.l}
-        width={space.l}
-        height={space.l}
-        borderRadius={borderRadius.m}
-        {...elemProps}
+        {...handleCsProp(elemProps, toolbarIconButtonStencil())}
       >
         {icon ? <BaseButton.Icon icon={icon} shouldMirrorIcon={shouldMirrorIcon} /> : children}
-      </StyledToolbarIconButton>
+      </BaseButton>
     );
   },
 });
-
-const getToolbarIconButtonColors = (theme: EmotionCanvasTheme, toggled?: boolean): ButtonColors => {
-  const {
-    canvas: {
-      palette: {primary: themePrimary},
-    },
-  } = theme;
-  return {
-    default: {
-      icon: toggled ? themePrimary.main : colors.licorice200,
-      background: toggled ? themePrimary.lightest : 'transparent',
-    },
-    hover: {
-      icon: toggled ? themePrimary.dark : colors.licorice500,
-      background: colors.soap300,
-    },
-    active: {
-      icon: toggled ? themePrimary.dark : colors.licorice500,
-      background: colors.soap500,
-    },
-    focus: {
-      icon: toggled ? themePrimary.main : colors.licorice200,
-      background: toggled ? themePrimary.lightest : 'transparent',
-    },
-    disabled: {
-      icon: toggled ? themePrimary.light : colors.soap600,
-      background: toggled ? themePrimary.lightest : 'transparent',
-      opacity: '1',
-    },
-  };
-};
