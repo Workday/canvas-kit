@@ -1,12 +1,13 @@
 import {EmotionCanvasTheme} from '../theming/index';
 import {ErrorType} from '../types';
-import {CSSObject} from '@emotion/styled';
+import {CSSObject} from '@emotion/react';
+import {CSSObjectWithVars} from '@workday/canvas-kit-styling';
 import {colors, inputColors} from '@workday/canvas-kit-react/tokens';
 
 import chroma from 'chroma-js';
 
-// Use a type that works with both new and old styling systems
-type CSSReturnType = CSSObject & Record<string, any>;
+// Backwards compatible type that works with both styled components and Canvas Kit styling
+export type CompatibleCSSObject = CSSObject & CSSObjectWithVars;
 
 const isAccessible = (foreground: string, background: string = colors.frenchVanilla100) => {
   return chroma.contrast(foreground, background) >= 3;
@@ -44,7 +45,7 @@ export function getErrorColors(error?: ErrorType, theme?: EmotionCanvasTheme) {
   }
 }
 
-export function errorRing(error?: ErrorType, theme?: EmotionCanvasTheme): CSSReturnType {
+export function errorRing(error?: ErrorType, theme?: EmotionCanvasTheme): CompatibleCSSObject {
   if (error !== ErrorType.Error && error !== ErrorType.Alert) {
     return {};
   }
