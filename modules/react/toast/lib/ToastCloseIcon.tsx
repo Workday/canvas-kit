@@ -1,4 +1,3 @@
-import React from 'react';
 import {createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {Popup} from '@workday/canvas-kit-react/popup';
 import {createStencil} from '@workday/canvas-kit-styling';

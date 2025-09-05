@@ -1,4 +1,3 @@
-import React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {BoxProps} from '@workday/canvas-kit-react/layout';
 

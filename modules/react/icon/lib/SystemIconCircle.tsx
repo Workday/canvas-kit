@@ -1,6 +1,5 @@
-import * as React from 'react';
 import {colors} from '@workday/canvas-kit-react/tokens';
-import {SystemIcon, SystemIconProps, systemIconStencil} from './SystemIcon';
+import {SystemIcon, systemIconStencil} from './SystemIcon';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {createComponent, pickForegroundColor} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
@@ -17,12 +16,18 @@ export enum SystemIconCircleSize {
   xxl = 120,
 }
 
-export interface SystemIconCircleProps extends CSProps, Pick<SystemIconProps, 'shouldMirror'> {
+export interface SystemIconCircleProps extends CSProps {
   /**
-   * The background color of the SystemIconCircle from `@workday/canvas-colors-web`.
+   * The background color of the SystemIconCircle
    * @default base.soap300
    */
   background?: string;
+  /**
+   * The icon color for the SystemIconCircle. Required if background specified as a CSS variable.
+   * If not specified, it will be calculated based on the background color.
+   * @default rgba(0,0,0,0.65)
+   */
+  color?: string;
   /**
    * The icon to display from `@workday/canvas-accent-icons-web`.
    */
@@ -32,16 +37,21 @@ export interface SystemIconCircleProps extends CSProps, Pick<SystemIconProps, 's
    * @default SystemIconCircleSize.l
    */
   size?: SystemIconCircleSize | number;
+  /**
+   * If set to `true`, transform the SVG's x-axis to mirror the graphic
+   * @default false
+   */
+  shouldMirror?: boolean;
 }
 
-const systemIconCircleStencil = createStencil({
+export const systemIconCircleStencil = createStencil({
   vars: {
     containerSize: '',
-    backgroundColor: '',
-    iconColor: '',
+    background: '',
+    color: '',
   },
-  base: ({backgroundColor, containerSize, iconColor}) => ({
-    background: cssVar(backgroundColor, base.soap200),
+  base: ({background, containerSize, color}) => ({
+    background: cssVar(background, base.soap200),
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -52,7 +62,7 @@ const systemIconCircleStencil = createStencil({
     width: cssVar(containerSize, system.space.x10),
     height: cssVar(containerSize, system.space.x10),
     [systemIconStencil.vars.size]: calc.multiply(cssVar(containerSize, system.space.x10), 0.625),
-    [systemIconStencil.vars.color]: iconColor,
+    [systemIconStencil.vars.color]: color,
     '& img': {
       width: '100%',
       height: '100%',
@@ -63,13 +73,14 @@ const systemIconCircleStencil = createStencil({
 export const SystemIconCircle = createComponent('span')({
   displayName: 'SystemIconCircle',
   Component: (
-    {background, size, icon, shouldMirror, ...elemProps}: SystemIconCircleProps,
+    {background, color, size, icon, shouldMirror, ...elemProps}: SystemIconCircleProps,
     ref,
     Element
   ) => {
     // `pickForegroundColor` hasn't support to use css variables to generate foregroundColor
     const backgroundFallback =
       background && !background.startsWith('--') ? background : colors.soap200;
+
     const iconColor = pickForegroundColor(
       backgroundFallback,
       'rgba(0,0,0,0.65)',
@@ -82,8 +93,8 @@ export const SystemIconCircle = createComponent('span')({
           elemProps,
           systemIconCircleStencil({
             containerSize: typeof size === 'number' ? px2rem(size) : size,
-            backgroundColor: transformColorNameToToken(background),
-            iconColor,
+            background: transformColorNameToToken(background),
+            color: color || iconColor,
           })
         )}
       >

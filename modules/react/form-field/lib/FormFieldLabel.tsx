@@ -85,10 +85,7 @@ export const FormFieldLabel = createSubcomponent('label')({
             variant,
             isHidden: isHidden ? 'true' : undefined,
             isRequired: model.state.isRequired as any,
-            orientation:
-              model.state.orientation === 'horizontal'
-                ? 'horizontalStart'
-                : model.state.orientation,
+            orientation: model.state.orientation,
           })
         )}
       >
