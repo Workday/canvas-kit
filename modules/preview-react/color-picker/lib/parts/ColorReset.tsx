@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 import {colors, space, type} from '@workday/canvas-kit-react/tokens';
-import {focusRing, hideMouseFocus} from '@workday/canvas-kit-react/common';
+import {hideMouseFocus} from '@workday/canvas-kit-react/common';
 
 import {ColorSwatch} from '@workday/canvas-kit-react/color-picker';
 
@@ -40,7 +40,9 @@ const Container = styled('button')({
   },
 
   '&:focus': {
-    ...focusRing(),
+    // using `focusRing` in support doesn't work for components that use `styled` function because we changed the type to be `CSSObjectWithVars`. Changing this to use `boxShadow` works in support for non stencil components.
+    boxShadow:
+      '0 0 0 0px var(--cnvs-base-palette-french-vanilla-100, rgba(255,255,255,1)),0 0 0 2px var(--cnvs-brand-common-focus-outline, rgba(8,117,225,1))',
   },
   ...hideMouseFocus,
 });

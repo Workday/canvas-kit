@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v12.6.26](https://github.com/Workday/canvas-kit/releases/tag/v12.6.26) (2025-09-05)
+
+### Utilities
+
+- fix: Ensure focus ring and error focus ring uses CSSObjectWithVars ([#3484](https://github.com/Workday/canvas-kit/pull/3484)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
 ## [v13.2.26](https://github.com/Workday/canvas-kit/releases/tag/v13.2.26) (2025-09-04)
 
 ### Infrastructure
