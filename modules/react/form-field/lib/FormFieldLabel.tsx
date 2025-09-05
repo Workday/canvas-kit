@@ -23,7 +23,6 @@ export interface FormFieldLabelProps
 
 export const formFieldLabelStencil = createStencil({
   extends: textStencil,
-  // @ts-ignore Still weird about CSS font variables
   base: {
     fontWeight: system.fontWeight.medium,
     color: system.color.text.default,
@@ -35,7 +34,6 @@ export const formFieldLabelStencil = createStencil({
   modifiers: {
     isRequired: {
       true: {
-        // @ts-ignore Still weird about CSS font variables
         '&::after': {
           content: '"*"',
           fontSize: system.fontSize.body.large,
