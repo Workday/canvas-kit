@@ -34,7 +34,7 @@ export const TextInputStates = () => (
           placeholder: [{value: 'Placeholder', label: 'Placeholder'}],
           error: [
             {value: undefined, label: ''},
-            {value: TextInput.ErrorType.Alert, label: 'Alert'},
+            {value: TextInput.ErrorType.Caution, label: 'Caution'},
             {value: TextInput.ErrorType.Error, label: 'Error'},
           ],
         },

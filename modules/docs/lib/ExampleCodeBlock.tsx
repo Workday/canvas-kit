@@ -18,6 +18,7 @@ import eslintrc from '!!raw-loader!./stackblitzFiles/.eslintrc.cjs.txt';
 import tsconfigNodeFile from '!!raw-loader!./stackblitzFiles/tsconfig.node.json';
 import appFile from '!!raw-loader!./stackblitzFiles/App.tsx';
 import viteEnvFile from '!!raw-loader!./stackblitzFiles/vite-env.d.ts';
+import {CanvasProvider, defaultBranding} from '@workday/canvas-kit-react/common';
 
 const cardStencil = createStencil({
   base: {
@@ -123,48 +124,55 @@ export const ExampleCodeBlock = ({code}: any) => {
     <div {...cardStencil({opened: isCodeDisplayed})}>
       <Card data-part="example-block" className="sb-unstyled">
         <Card.Body>
-          {React.createElement(code)}
-          {code && (
-            <div data-part="code-toggle-stackblitz-btn-container">
-              <TertiaryButton size="extraSmall" onClick={() => openProjectInStackblitz()}>
-                ⚡️ Edit in Stackblitz
-              </TertiaryButton>
-              <TertiaryButton size="extraSmall" onClick={() => setCodeDisplayed(!isCodeDisplayed)}>
-                {!isCodeDisplayed ? 'Show Code' : 'Hide Code'}
-              </TertiaryButton>
-            </div>
-          )}
+          <CanvasProvider className={defaultBranding}>
+            {React.createElement(code)}
+            {code && (
+              <div data-part="code-toggle-stackblitz-btn-container">
+                <TertiaryButton size="extraSmall" onClick={() => openProjectInStackblitz()}>
+                  ⚡️ Edit in Stackblitz
+                </TertiaryButton>
+                <TertiaryButton
+                  size="extraSmall"
+                  onClick={() => setCodeDisplayed(!isCodeDisplayed)}
+                >
+                  {!isCodeDisplayed ? 'Show Code' : 'Hide Code'}
+                </TertiaryButton>
+              </div>
+            )}
+          </CanvasProvider>
         </Card.Body>
       </Card>
       <Card data-part="code-block" padding={0}>
         <Card.Body cs={{position: 'relative'}}>
-          {code && (
-            <div ref={textInput}>
-              <SyntaxHighlighter
-                className="sb-unstyled"
-                language="jsx"
-                style={vscDarkPlus}
-                customStyle={{
-                  fontSize: cssVar(system.fontSize.subtext.large),
-                  lineHeight: cssVar(system.lineHeight.subtext.large),
-                  margin: '0',
-                  padding: `${cssVar(system.space.x8)} ${cssVar(system.space.x10)}`,
-                }}
-                children={code.__RAW__}
+          <CanvasProvider className={defaultBranding}>
+            {code && (
+              <div ref={textInput}>
+                <SyntaxHighlighter
+                  className="sb-unstyled"
+                  language="jsx"
+                  style={vscDarkPlus}
+                  customStyle={{
+                    fontSize: cssVar(system.fontSize.subtext.large),
+                    lineHeight: cssVar(system.lineHeight.subtext.large),
+                    margin: '0',
+                    padding: `${cssVar(system.space.x8)} ${cssVar(system.space.x10)}`,
+                  }}
+                  children={code.__RAW__}
+                />
+              </div>
+            )}
+            <Tooltip title={copied ? 'Copied!' : 'Copy Source Code'}>
+              <TertiaryButton
+                aria-label="Copy Code"
+                size="large"
+                data-part="copy-btn"
+                variant="inverse"
+                iconPosition="end"
+                icon={copied ? checkCircleIcon : copyIcon}
+                onClick={onCopy}
               />
-            </div>
-          )}
-          <Tooltip title={copied ? 'Copied!' : 'Copy Source Code'}>
-            <TertiaryButton
-              aria-label="Copy Code"
-              size="large"
-              data-part="copy-btn"
-              variant="inverse"
-              iconPosition="end"
-              icon={copied ? checkCircleIcon : copyIcon}
-              onClick={onCopy}
-            />
-          </Tooltip>
+            </Tooltip>
+          </CanvasProvider>
         </Card.Body>
       </Card>
     </div>

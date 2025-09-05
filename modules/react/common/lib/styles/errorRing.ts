@@ -1,43 +1,38 @@
 import {EmotionCanvasTheme} from '../theming/index';
 import {ErrorType} from '../types';
-import {CSSObject} from '@emotion/react';
-import {CSSObjectWithVars} from '@workday/canvas-kit-styling';
-import {colors, inputColors} from '@workday/canvas-kit-react/tokens';
-
-import chroma from 'chroma-js';
+import {CSSObject} from '@emotion/styled';
+import {CSSObjectWithVars, cssVar} from '@workday/canvas-kit-styling';
 
 // Backwards compatible type that works with both styled components and Canvas Kit styling
 type CompatibleCSSObject = CSSObject & CSSObjectWithVars;
 
-const isAccessible = (foreground: string, background: string = colors.frenchVanilla100) => {
-  return chroma.contrast(foreground, background) >= 3;
-};
+import {brand, system} from '@workday/canvas-tokens-web';
 
 export function getErrorColors(error?: ErrorType, theme?: EmotionCanvasTheme) {
   if (error === ErrorType.Error) {
     if (theme) {
-      const palette = theme.canvas.palette.error;
+      const palette = theme.canvas.palette;
       return {
-        outer: isAccessible(palette.main) ? palette.main : palette.darkest,
-        inner: palette.main,
+        outer: palette.common.errorInner,
+        inner: palette.common.errorInner,
       };
     } else {
       return {
-        outer: inputColors.error.border,
-        inner: inputColors.error.border,
+        outer: brand.common.errorInner,
+        inner: brand.common.errorInner,
       };
     }
-  } else if (error === ErrorType.Alert) {
+  } else if (error === ErrorType.Caution) {
     if (theme) {
-      const palette = theme.canvas.palette.alert;
+      const palette = theme.canvas.palette;
       return {
-        outer: isAccessible(palette.main) ? palette.main : palette.darkest,
-        inner: palette.main,
+        outer: palette.common.alertOuter,
+        inner: palette.common.alertInner,
       };
     } else {
       return {
-        outer: colors.cantaloupe600,
-        inner: inputColors.alert.border,
+        outer: brand.common.alertOuter,
+        inner: brand.common.alertInner,
       };
     }
   } else {
@@ -46,7 +41,7 @@ export function getErrorColors(error?: ErrorType, theme?: EmotionCanvasTheme) {
 }
 
 export function errorRing(error?: ErrorType, theme?: EmotionCanvasTheme): CompatibleCSSObject {
-  if (error !== ErrorType.Error && error !== ErrorType.Alert) {
+  if (error !== ErrorType.Error && error !== ErrorType.Caution) {
     return {};
   }
   const errorColors = getErrorColors(error, theme);
@@ -64,8 +59,10 @@ export function errorRing(error?: ErrorType, theme?: EmotionCanvasTheme): Compat
     '&:focus-visible:not([disabled]), &.focus:not([disabled])': {
       borderColor: errorColors.outer,
       boxShadow: `${errorBoxShadow},
-        0 0 0 2px ${colors.frenchVanilla100},
-        0 0 0 4px ${theme ? theme.canvas.palette.common.focusOutline : inputColors.focusBorder}`,
+        0 0 0 2px ${cssVar(system.color.border.inverse)},
+        0 0 0 4px ${
+          theme ? theme.canvas.palette.common.focusOutline : cssVar(brand.common.focusOutline)
+        }`,
     },
   };
 }

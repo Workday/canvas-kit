@@ -1,5 +1,10 @@
-import {ExampleCodeBlock, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
-
+import {
+  ExampleCodeBlock,
+  StorybookStatusIndicator,
+  SymbolDoc,
+  Specifications,
+} from '@workday/canvas-kit-docs';
+import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
 import {Basic} from './examples/Basic';
 import {DisabledItem} from './examples/DisabledItem';
 import {GroupOfResult} from './examples/GroupOfResult';
@@ -11,7 +16,18 @@ import * as ComboboxStories from './Combobox.stories';
 
 <Meta of={ComboboxStories} />
 
-# Combobox
+# Combobox <StorybookStatusIndicator type="deprecated" />
+
+<InformationHighlight className="sb-unstyled" variant="caution" cs={{p: {marginBlock: 0}}}>
+  <InformationHighlight.Icon />
+  <InformationHighlight.Body>
+    `Combobox` in Labs has been deprecated and will be removed in a future major version. Please
+    use `Combobox` in Main instead.
+  </InformationHighlight.Body>
+  <InformationHighlight.Link href="https://workday.github.io/canvas-kit/?path=/docs/features-combobox--docs">
+    Combobox Docs
+  </InformationHighlight.Link>
+</InformationHighlight>
 
 The term "Combobox" is based on the
 [Combobox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) as defined in the ARIA
