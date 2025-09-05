@@ -5,9 +5,20 @@ import {ExpandableRows} from './examples/Table/WithExpandableRows';
 import {SortableColumnHeaders} from './examples/Table/WithSortableColumnHeaders';
 import {FilterableColumnHeaders} from './examples/Table/WithColumnHeaderFilters';
 
-<Meta title="Guides/Accessibility/Examples/Advanced Tables" />
+<Meta title="Guides/Accessibility/Advanced Tables" />
 
 ## Advanced Table Examples
+
+Tables should only be used to organize data that has a clear relationship between rows and columns,
+like a calendar or a schedule. Never use a table just for page layout.
+
+When you use the proper HTML table markup, a screen reader can help a user navigate the table. It
+will automatically read the column and row headers as they move through the data, so they always
+know what information they're looking at.
+
+- All tables should have a clear header and a descriptive title.
+- Keep your tables simple. If a table is too complex, it might be better to break it up into several
+  smaller tables or use a different format.
 
 Out of the box, `Table` is a lightweight compound component with a high degree of flexibility, but
 not much functionality outside of providing a basic table layout. This flexibility lets developers
