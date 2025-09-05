@@ -138,3 +138,15 @@ function createDocProgram() {
 }
 
 module.exports.createDocProgram = createDocProgram;
+
+/**
+ * Gets a configured DocParser. It does not create a TypeScript program and is suitable for watch
+ * programs.
+ * @param {ts.Program} program
+ */
+module.exports.getDocParser = function getDocParser(program) {
+  const {path, config} = getConfig();
+
+  const plugins = getPlugins(path, config);
+  return new DocParser(program, plugins);
+};

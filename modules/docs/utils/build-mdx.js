@@ -6,7 +6,7 @@ const glob = require('glob');
 const args = process.argv.slice(2);
 const inputPath = path.resolve(args[0]);
 const distFolder = path.join(__dirname, '../dist');
-const srcFolders = ['react', 'labs-react', 'preview-react', 'docs/mdx/style-props'];
+const srcFolders = ['react', 'labs-react', 'preview-react', 'docs/mdx/style-props', 'styling'];
 
 if (!inputPath) {
   console.error('You must supply a valid path');
