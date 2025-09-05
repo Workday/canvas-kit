@@ -1,6 +1,7 @@
 # Canvas Kit Theming
 
-Canvas Kit Common contains wrappers and types to enabling theming of Canvas components.
+Canvas Kit Common contains wrappers and types to enabling theming of Canvas components as well as
+utilities that are used across components.
 
 ## Installation
 
