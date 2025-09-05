@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 import {
-  focusRing,
   useTheme,
   Themeable,
   EmotionCanvasTheme,
@@ -12,7 +11,6 @@ import {
 import {ButtonColors} from './types';
 import {BaseButton} from './BaseButton';
 import {TertiaryButtonProps} from './TertiaryButton';
-import {brand} from '@workday/canvas-tokens-web';
 
 export interface ToolbarIconButtonProps
   extends Omit<TertiaryButtonProps, 'size' | 'variant'>,
@@ -29,12 +27,8 @@ const StyledToolbarIconButton = styled(BaseButton)<StyledType & ToolbarIconButto
     height: 20,
   },
   '&:focus-visible, &.focus': {
-    ...focusRing({
-      width: 2,
-      separation: 0,
-      innerColor: 'transparent',
-      outerColor: brand.common.focusOutline,
-    }),
+    // using `focusRing` in support doesn't work for components that use `styled` function because we changed the type to be `CSSObjectWithVars`. Changing this to use `boxShadow` works in support for non stencil components.
+    boxShadow: '0 0 0 0px transparent,0 0 0 2px var(--cnvs-brand-common-focus-outline)',
   },
 });
 

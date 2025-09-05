@@ -42,7 +42,6 @@ export const multiSelectInputStencil = createStencil({
       boxShadow: `inset 0 0 0 1px ${system.color.border.primary.default}`,
     },
 
-    // @ts-ignore
     '& [data-part="user-input"]': {
       ...system.type.subtext.large,
       backgroundColor: system.color.bg.transparent,

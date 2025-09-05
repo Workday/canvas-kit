@@ -3,7 +3,7 @@ import React from 'react';
 /* eslint-disable @emotion/no-vanilla */
 import {expectTypeOf} from 'expect-type';
 import {Properties} from 'csstype';
-import {SerializedStyles} from '@emotion/serialize';
+import {SerializedStyles, ComponentSelector} from '@emotion/serialize';
 import {css} from '@emotion/css';
 import {jsx, CacheProvider} from '@emotion/react';
 import styled from '@emotion/styled';
@@ -37,7 +37,7 @@ describe('cs', () => {
     it('should accept an object of CSS Properties', () => {
       type Input = Exclude<
         Parameters<typeof createStyles>[0],
-        string | number | boolean | SerializedStyles | undefined
+        string | number | boolean | SerializedStyles | undefined | null | ComponentSelector
       >;
       type PositionProperty = Input['position'];
       const temp: PositionProperty = 'absolute';
@@ -45,7 +45,7 @@ describe('cs', () => {
         position: 'absolute',
       });
       expectTypeOf<PositionProperty>().toMatchTypeOf<
-        Properties['position'] | Properties['position'][] | (string & {})
+        (Properties['position'] | (string & {})) | (Properties['position'] | (string & {}))[]
       >();
     });
 
@@ -118,6 +118,7 @@ describe('cs', () => {
       const expected = cssVar(input);
 
       expect(expected).toEqual('var(--my-var)');
+      expectTypeOf(expected).toEqualTypeOf<`var(--my-var)`>();
     });
 
     it('should return a css var wrapper that includes a fallback', () => {
@@ -125,12 +126,14 @@ describe('cs', () => {
       const expected = cssVar(input, 'red');
 
       expect(expected).toEqual('var(--my-var, red)');
+      expectTypeOf(expected).toEqualTypeOf<`var(--my-var, red)`>();
     });
 
     it('should return a css var wrapper that includes a fallback without cssVar wrapping', () => {
       const expected = cssVar('--my-var', '--my-fallback-var');
 
       expect(expected).toEqual('var(--my-var, var(--my-fallback-var))');
+      expectTypeOf(expected).toEqualTypeOf<`var(--my-var, var(--my-fallback-var))`>();
     });
   });
 
@@ -178,7 +181,7 @@ describe('cs', () => {
       expect(myVars).toHaveProperty('color');
       expect(myVars).toHaveProperty('$$defaults');
 
-      expectTypeOf(myVars.color).toEqualTypeOf<string>();
+      expectTypeOf(myVars.color).toEqualTypeOf<`--${string}`>();
       expectTypeOf(myVars.$$defaults).toEqualTypeOf<Record<string, string>>();
     });
 
@@ -240,9 +243,9 @@ describe('cs', () => {
       );
 
       expectTypeOf(myVars).toHaveProperty('default');
-      expectTypeOf(myVars.default).toEqualTypeOf<Record<'color', string>>();
+      expectTypeOf(myVars.default).toEqualTypeOf<Record<'color', `--${string}`>>();
       expectTypeOf(myVars).toHaveProperty('hover');
-      expectTypeOf(myVars.hover).toEqualTypeOf<Record<'color', string>>();
+      expectTypeOf(myVars.hover).toEqualTypeOf<Record<'color', `--${string}`>>();
     });
 
     it('should handle nested variables $$defaults', () => {
@@ -716,7 +719,7 @@ describe('cs', () => {
 
       expectTypeOf(myStencil).toHaveProperty('vars');
       expectTypeOf(myStencil.vars).toHaveProperty('color');
-      expectTypeOf(myStencil.vars.color).toEqualTypeOf<string>();
+      expectTypeOf(myStencil.vars.color).toEqualTypeOf<`--${string}`>();
 
       expect(myStencil).toHaveProperty('vars.color', expect.stringMatching(/--color-[a-z0-9]+/));
     });
@@ -819,6 +822,7 @@ describe('cs', () => {
         }
       }
       expect(found).toEqual(true);
+      expectTypeOf(myStencil.vars.default.color).toEqualTypeOf<`--${string}`>();
     });
 
     it('should handle variables and pass them to the modifier function', () => {
@@ -900,7 +904,7 @@ describe('cs', () => {
         modifiers: {
           width: {
             zero: ({width}) => {
-              expectTypeOf(width).toEqualTypeOf<string>();
+              expectTypeOf(width).toEqualTypeOf<`--${string}`>();
 
               return {
                 width: width,
@@ -1204,13 +1208,13 @@ describe('cs', () => {
           base: {},
         });
 
-        expectTypeOf(extendedStencil.vars.color).toEqualTypeOf<string>();
+        expectTypeOf(extendedStencil.vars.color).toEqualTypeOf<`--${string}`>();
         expect(extendedStencil).toHaveProperty(
           'vars.color',
           expect.stringMatching(/--color-[0-9a-z]+/i)
         );
 
-        expectTypeOf(extendedStencil.vars.background).toEqualTypeOf<string>();
+        expectTypeOf(extendedStencil.vars.background).toEqualTypeOf<`--${string}`>();
         expect(extendedStencil).toHaveProperty(
           'vars.background',
           expect.stringMatching(/--background-[0-9a-z]+/i)

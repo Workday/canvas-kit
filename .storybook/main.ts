@@ -9,6 +9,7 @@ import {getDocParser} from '../modules/docs/docgen/createDocProgram';
 // Drop the `/index.ts` if using the published package
 import {styleTransformer, StylingWebpackPlugin} from '@workday/canvas-kit-styling-transform';
 import stylingConfig from '../styling.config';
+import {version} from '../lerna.json';
 
 const modulesPath = path.resolve(__dirname, '../modules');
 const processDocs = process.env.SKIP_DOCGEN !== 'true';
@@ -74,9 +75,10 @@ const config: StorybookConfig = {
         program => styleTransformer(program, {...stylingConfig, extractCSS: false}),
       ],
       postTransform(code, id) {
+        let newCode = code.replace('%VERSION%', version);
         if (docsMap.get(id) && processDocs) {
           return (
-            code +
+            newCode +
             `\nconst __docs = ${JSON.stringify(docsMap.get(id))}
   if (window.__updateDocs) {
     window.__updateDocs?.(__docs)
@@ -85,6 +87,7 @@ const config: StorybookConfig = {
   }`
           );
         }
+        return newCode;
       },
     });
 

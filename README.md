@@ -19,9 +19,17 @@ implement user experiences consistent with
 
 ---
 
-## Getting started
+## Getting Started
 
 ### React
+
+**Dependency Version Support**
+
+The following are supported versions of dependencies.
+
+* React:  >=16.8 < 17
+* Typescript: >=5.0 (optional)
+* Emotion: ^11.7.0
 
 **Installation**
 
