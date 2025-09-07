@@ -9,7 +9,7 @@ import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {Menu} from '@workday/canvas-kit-react/menu';
 import {birthdayIcon, checkIcon, ribbonIcon} from '@workday/canvas-system-icons-web';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
-import {Tooltip} from '../../../../tooltip';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 
 const data = {
   bestsellers: {
