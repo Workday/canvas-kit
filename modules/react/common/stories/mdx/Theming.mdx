@@ -1,4 +1,5 @@
 import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
+import {RTL} from './examples/RTL';
 import {Theming} from './examples/Theming';
 
 <Meta title="Features/Theming/Overview" />
@@ -7,7 +8,7 @@ import {Theming} from './examples/Theming';
 
 ## Overview
 
-Canvas Kit v14 introduces a significant shift in theming approach, moving away from JavaScript-based theme objects to CSS variables. This change provides better performance, improved developer experience, and greater flexibility for theming applications.
+Canvas Kit v14 introduces a significant shift in our approach to theming: we've moved away from JavaScript-based theme objects to CSS variables. This change provides better performance, improved developer experience, and greater flexibility for theming applications.
 
 ## Migration from v10 Theme Prop to v14 CSS Variables
 
@@ -66,7 +67,7 @@ Apply theming at the global level by importing CSS variable files and overriding
 }
 ```
 
-> **Note:** You should only import the CSS variables *once* at the root level of your application. If your application renders within another environment that imports these and sets it, **do not** re import them.
+> **Note:** You should only import the CSS variables *once* at the root level of your application. If your application renders within another environment that imports these and sets them, **do not** re import them.
 
 ### Method 2: Provider-Level CSS Variables
 
@@ -102,10 +103,10 @@ const themedBrand = createStyles({
 
 ## CSS Token Structure
 
-Canvas Kit provides three layers of CSS variables:
+Canvas Kit provides three layers of CSS variables.
 
 ### Base Tokens (`base/_variables.css`)
-Foundation palette and design values:
+Base tokens define foundation palette and design values.
 ```css
 --cnvs-base-palette-blue-600: oklch(0.5198 0.1782 256.11 / 1);
 --cnvs-base-palette-magenta-600: oklch(0.534 0.183 344.19 / 1);
@@ -114,7 +115,7 @@ Foundation palette and design values:
 ```
 
 ### Brand Tokens (`brand/_variables.css`)
-Semantic color assignments:
+Brand tokens define semantic color assignments.
 ```css
 --cnvs-brand-primary-base: var(--cnvs-base-palette-blue-600);
 --cnvs-brand-primary-accent: var(--cnvs-base-palette-neutral-0);
@@ -123,7 +124,7 @@ Semantic color assignments:
 ```
 
 ### System Tokens (`system/_variables.css`)
-Component-specific values:
+System tokens define component-specific values.
 ```css
 --cnvs-sys-color-bg-primary-default: var(--cnvs-base-palette-blue-600);
 --cnvs-sys-color-text-primary-default: var(--cnvs-base-palette-blue-600);
@@ -170,6 +171,7 @@ const greenTheme = createStyles({
   [brand.primary.accent]: base.neutral0,
 });
 
+<CanvasProvider className={greenTheme}>
     <PrimaryButton>Click me</PrimaryButton>
   </CanvasProvider>
 );
@@ -191,7 +193,7 @@ const greenTheme = createStyles({
 
 ### RTL Support
 Canvas Kit supports RTL out of the box. Our components are styled to use [CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values). If you want to add additional styles based on RTL,
-you can also use `:dir` [pseudo selector](https://developer.mozilla.org/en-US/docs/Web/CSS/:dir).
+you can also use the `:dir` [pseudo selector](https://developer.mozilla.org/en-US/docs/Web/CSS/:dir).
 
 <ExampleCodeBlock code={RTL} />
 
@@ -199,7 +201,7 @@ you can also use `:dir` [pseudo selector](https://developer.mozilla.org/en-US/do
 
 ### Step 1: Identify Current Theme Usage
 
-Find all instances of `CanvasProvider` with theme props in your application:
+Find all instances of `CanvasProvider` with theme props in your application.
 
 ```tsx
 // Find these patterns:
@@ -208,7 +210,7 @@ Find all instances of `CanvasProvider` with theme props in your application:
 
 ### Step 2: Extract Theme Values
 
-Convert JavaScript theme objects to CSS variable overrides:
+Convert JavaScript theme objects to CSS variable overrides.
 
 ```tsx
 // Old approach:
@@ -232,7 +234,7 @@ const theme = {
 
 ### Step 3: App Level Theming Usage
 
-Replace theme-based `CanvasProvider` usage with CSS class-based theming:
+Replace theme-based `CanvasProvider` usage with CSS class-based theming.
 
 ```tsx
 // Before:
@@ -250,7 +252,7 @@ Replace theme-based `CanvasProvider` usage with CSS class-based theming:
 
 ### Step 4: Test Component Rendering
 
-Verify that Canvas Kit components (like `PrimaryButton`) correctly use the new CSS variables:
+Verify that Canvas Kit components (like `PrimaryButton`) correctly use the new CSS variables.
 
 ```tsx
 import {PrimaryButton} from "@workday/canvas-kit-react/button";
@@ -262,7 +264,7 @@ import {PrimaryButton} from "@workday/canvas-kit-react/button";
 ## Best Practices
 
 ### 1. Use Semantic Token Names
-Prefer brand tokens over base tokens for better maintainability:
+Use brand tokens instead of base tokens for better maintainability.
 
 ```css
 /* ✅ Good - semantic meaning */
@@ -274,7 +276,7 @@ Prefer brand tokens over base tokens for better maintainability:
 
 
 ### 2. Test Accessibility
-Ensure color combinations meet accessibility standards:
+Ensure color combinations meet accessibility standards.
 
 ```css
 /* Verify contrast ratios for text/background combinations */
@@ -339,7 +341,7 @@ The CSS variable approach provides several performance improvements:
 ## Troubleshooting
 
 ### Theme Not Applied
-Ensure CSS variable files are imported in the correct order:
+Ensure CSS variable files are imported in the correct order.
 
 ```css
 /* Correct order */
@@ -354,7 +356,7 @@ Ensure CSS variable files are imported in the correct order:
 ```
 
 ### Inconsistent Theming
-Check for CSS specificity issues:
+Check for CSS specificity issues.
 
 ```css
 /* Ensure your overrides have sufficient specificity */
@@ -369,7 +371,7 @@ Check for CSS specificity issues:
 ```
 
 ### Missing Token Values
-Verify all required CSS token files are imported and token names are correct:
+Verify all required CSS token files are imported and token names are correct.
 
 ```tsx
 import {brand, base, system} from "@workday/canvas-tokens-web";
