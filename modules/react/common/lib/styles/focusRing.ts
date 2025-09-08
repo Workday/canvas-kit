@@ -81,7 +81,7 @@ function calculateFocusRing({
  *
  * @returns {{boxShadow: string}} the css object for the focus ring style
  */
-export function focusRing(options: FocusRingOptions = {}, theme?: any) {
+export function focusRing(options: FocusRingOptions = {}) {
   const {
     width = 2,
     separation = 0,
