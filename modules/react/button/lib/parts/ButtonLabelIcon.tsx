@@ -25,7 +25,6 @@ const iconSizes: Record<ButtonSizes, number> = {
 };
 
 export const ButtonLabelIcon = createComponent('span')({
-  displayName: 'ButtonLabelIcon',
   Component: (
     {icon, size = 'medium', shouldMirrorIcon = false, ...elemProps}: ButtonLabelIconProps,
     ref,

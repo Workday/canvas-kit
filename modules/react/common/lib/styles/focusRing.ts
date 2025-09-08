@@ -1,6 +1,7 @@
-import {Theme, CSSObject} from '@emotion/react';
 import {cssVar} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+
+// Backwards compatible type that works with both styled components and Canvas Kit styling
+import {system, brand} from '@workday/canvas-tokens-web';
 
 interface FocusRingOptions {
   width?: number;
@@ -23,8 +24,7 @@ function calculateFocusRing({
   inset,
   innerColor,
   outerColor,
-}: Required<Omit<FocusRingOptions, 'memoize' | 'inset'>> &
-  Pick<FocusRingOptions, 'inset'>): CSSObject {
+}: Required<Omit<FocusRingOptions, 'memoize' | 'inset'>> & Pick<FocusRingOptions, 'inset'>) {
   let boxShadow, innerWidth, outerWidth;
   if (innerColor && innerColor.startsWith('--')) {
     // eslint-disable-next-line no-param-reassign
@@ -71,7 +71,7 @@ function calculateFocusRing({
  * @param innerShadowColor Allows the user to specify the inner shadow color
  * @param outerShadowColor Allows the user to specify the outer shadow color
  *
- * @returns {CSSObject} the css object for the focus ring style
+ * @returns {{boxShadow: string}} the css object for the focus ring style
  */
 
 /**
@@ -79,9 +79,9 @@ function calculateFocusRing({
  * By default, this mixin will create a 2px focus ring tightly wrapped
  * to the container (no whitespace).
  *
- * @returns {CSSObject} the css object for the focus ring style
+ * @returns {{boxShadow: string}} the css object for the focus ring style
  */
-export function focusRing(options: FocusRingOptions = {}, theme?: Theme): CSSObject {
+export function focusRing(options: FocusRingOptions = {}) {
   const {
     width = 2,
     separation = 0,

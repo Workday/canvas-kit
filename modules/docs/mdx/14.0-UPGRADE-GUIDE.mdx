@@ -1,6 +1,6 @@
 import {Meta} from '@storybook/addon-docs';
 
-<Meta title="Guides/Upgrade Guides/v14.0" />
+<Meta title="Guides/Upgrade Guides/v14.0/Overview" />
 
 # Canvas Kit 14.0 Upgrade Guide
 
@@ -8,30 +8,40 @@ This guide contains an overview of the changes in Canvas Kit v14. Please
 [reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have
 any questions.
 
-## Table of Contents
+## Why You Should Upgrade
+
+v14.0 Introduces Workday's new brand direction which includes a new color palette and with it, some
+styling updates to our components.
+
+- For a list of visual changes, please view our v14 visual changes doc [here](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v14-0-visual-changes--docs).
+
+> **Note:** While v14 does not require an upgrade to our v3 tokens, we strongly advise to upgrade to the latest to ensure proper branding.
+
+## Table of contents
 
 - [Codemod](#codemod)
   - [Instructions](#instructions)
+- [Tokens](#tokens)
 - [Caution Naming](#caution-naming)
 - [Theming](#theming)
   - [Canvas Provider](#canvas-provider-)
 - [Component Updates](#component-updates)
-  - [Avatar in Preview](#avatar-in-preview)
-  - [Branding Changes](#branding-changes)
+  - [Avatar (Preview)](#avatar-preview)
+  - [Branding Changes](#branding-changes-)
   - [Buttons](#buttons)
-  - [Card](#card)
+  - [Card](#card-)
   - [Count Badge](#count-badge)
   - [Expandable](#expandable)
-  - [Hyperlink & ExternalHyperlink](#hyperlink-and-externalhyperlink)
+  - [Hyperlink and ExternalHyperlink](#hyperlink-and-external-hyperlink)
   - [Loading Dots](#loading-dots)
-  - [Pill](#pill)
-  - [SearchForm](#searchform)
-  - [Status Indicator (Preview)](#status-indicator-preview)
+  - [Pill (Preview)](#pill-preview)
+  - [Search Form (Labs)](#searchform-)
+  - [Status Indicator (Preview)](#status-indicator-preview-)
 - [Deprecations](#deprecations)
-  - [Avatar in Main](#avatar-in-main)
+  - [Avatar (Main)](#avatar-in-main)
   - [Combobox (Labs)](#combobox-labs)
   - [Radio (Main)](#radio-main)
-  - [SearchForm (Labs)](#searchform-labs)
+  - [Search Form (Labs)](#searchform-labs)
   - [Segmented Control (Main)](#segmented-control-main)
   - [Side Panel (Main)](#side-panel-main)
   - [Tokens](#tokens)
@@ -40,8 +50,8 @@ any questions.
   - [Input Provider](#input-provider)
   - [Menu (Preview)](#menu-preview)
   - [readyOnlyPillStencil and removeablePillStencil](#readonlypillstencil-and-removeablepillstencil)
-  - [Text Area](#text-area)
-  - [Text Input](#text-input)
+  - [Text Area (Labs)](#text-area)
+  - [Text Input (Labs)](#text-input)
 - [Troubleshooting](#troubleshooting)
 - [Glossary](#glossary)
   - [Main](#main)
@@ -109,11 +119,34 @@ yarn remove @workday/canvas-kit-codemod
 > after executing the codemod, as its resulting formatting (spacing, quotes, etc.) may not match
 > your project conventions.
 
+## Tokens
+
+Canvas Kit v14 now uses `@workday/canvas-tokens-web` v3, which introduces new color palettes and
+deprecates the old "fruity" color names (for example, use `red` instead of `cinnamon`, `blue` instead
+of `blueberry`, and `green` instead of `greenApple`). We strongly recommend upgrading to
+`@workday/canvas-tokens-web` v3, as using older versions will not match the new brand guidelines or
+color system. Although this dependency upgrade is not required, we've offered migration guides and
+codemods separately from the v14 upgrade so that teams can upgrade when they can.
+
+> **Note:** v3 Tokens should be backwards compatible with older versions of Canvas Kit.
+
+Follow these guides to migrate:
+
+- If you are still using our old tokens from (`@workday/canvas-kit-react/tokens`): Migrate from
+  `@workday/canvas-kit-react/tokens` to `@workday/canvas-tokens-web` v3:
+  [Migration Guide](https://workday.github.io/canvas-kit/?path=/docs/guides-tokens-migration-overview--docs)
+- [v2 to v3 Migration Guide](https://workday.github.io/canvas-tokens/?path=/docs/guides-upgrade-guides-v3-overview--docs)
+
+> 🤖 The `v14-tokens` codemod will automatically migrate your tokens, whether you're upgrading from
+> old tokens or from v2 to v3. Read
+> [the codemod instructions](https://workday.github.io/canvas-kit/?path=/docs/guides-tokens-migration-codemod--docs)
+
 ## Caution Naming
 
 **PR:** [#3462](https://github.com/Workday/canvas-kit/pull/3462)
 
-To better align with the brand refresh, Alert and Warning states are being renamed to Caution for better semantics.
+To better align with the brand refresh, Alert and Warning states are being renamed to Caution for
+better semantics.
 
 This change mostly affects how you pass an error state to our input components. In most cases, our input components should be used with our `FormField` component to ensure correct accessibility.
 
@@ -173,7 +206,8 @@ someFunction(ErrorType.Caution);
 <TextArea error={TextArea.ErrorType.Caution} />
 ```
 
-> 🤖 The codemod will handle the change of `ErrorType.Alert` to `ErrorType.Caution` and `error="alert"` to `error="caution"`.
+> 🤖 The codemod will handle the change of `ErrorType.Alert` to `ErrorType.Caution` and
+> `error="alert"` to `error="caution"`.
 
 ## Theming
 
@@ -191,7 +225,11 @@ Canvas Provider has been updated to **remove** default branding colors to ensure
 our CSS variables. Instead of generating a palette and shifting the brightness and darkness with
 `chroma.js`, we use `oklch` to generate the palette colors.
 
-**Before in v13** In v13, the `useTheme` hook would call `createCanvasTheme` which generated a
+Prior to v14, the `CanvasProvider` created a cascade barrier, re definding brand CSS variables under a class, creating a higher specificity. This made it difficult to override brand tokens in certain scenarios. v14 Removes that barrier.
+For more information on what is a cascade barrier, please [view our theming docs here](https://github.com/Workday/canvas-kit/issues). For a mode detailed overview of the changes in v14, please view our [v14 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs#what-is-a-cascade-barrier).
+
+**Before in v13**
+In v13, the `useTheme` hook would call `createCanvasTheme` which generated a
 palette given a `main` color via `chroma.js`.
 
 ```tsx
@@ -227,7 +265,7 @@ different. If you want more control over the colors, we suggest providing the fu
 **Or**
 
 ```tsx
-<CanvasProvider theme={{canvas: {palette: {primary: {main: cssVar(base.blue600)}}}}}>
+<CanvasProvider theme={{canvas: {palette: {primary: {main: base.blue600}}}}}>
   <App />
 </CanvasProvider>
 ```
@@ -249,16 +287,18 @@ The reason for this change is to ensure that the CSS variables properly cascade 
 Before in v13, the `CanvasProvider` would add the brand tokens under a class name, creating a higher
 specificity.
 
+For a thorough guide on theming, please view our theming docs [here](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs).
+
 ## Component Updates
 
-### Avatar in Preview
+### Avatar (Preview)
 
 **PR:** [#3430](https://github.com/Workday/canvas-kit/pull/3430)
 
 A new `Avatar` component has been added to the `@workday/canvas-kit-preview-react` package that
 matches our brand refresh.
 
-#### API Changes from the Main Avatar
+#### API Changes from Avatar in Main
 
 - `Avatar` has a `name` prop. This is required to ensure a fallback if a `url` is not provided. The
   `name` prop also determines the initials and the `alt` text for the image if a `url` is provided.
@@ -305,33 +345,33 @@ import { Avatar } from '@workday/canvas-kit-preview-react/avatar';
 ### Branding Changes 💅
 
 Several components have been refactored to reflect our new brand direction. Most of these changes
-revolve around the use of our new brand colors and visual styling updates.
+revolve around the use of our new brand colors. For a better guide on what has changed in our v3.0.0
+tokens, please view the Tokens v3.0.0
+[Upgrade Guide](https://workday.github.io/canvas-tokens/?path=/docs/guides-upgrade-guides-v3-overview--docs).
+
+> **Note:** If you want a visual diff of the changes, please view the [Visual Changes](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v14-0-visual-changes--docs) guide.
 
 The following components have been updated:
 
-- `Breadcrumbs` - Updated colors and styling to match brand refresh
-  - [#3270](https://github.com/Workday/canvas-kit/pull/3270)
-  - [#3447](https://github.com/Workday/canvas-kit/pull/3447)
-- `Buttons` - New color palette and theming improvements [#3394](https://github.com/Workday/canvas-kit/pull/3394)
-- `ColorPicker` (Main) - Visual updates [#3307](https://github.com/Workday/canvas-kit/pull/3307)
-- `ColorPicker` (Preview) - Visual updates [#3307](https://github.com/Workday/canvas-kit/pull/3307)
-- `InformationHighlight` - Brand color updates [#3443](https://github.com/Workday/canvas-kit/pull/3443)
-- `LoadingDots` (Main) - Color and animation updates [#3393](https://github.com/Workday/canvas-kit/pull/3393)
-- `Pagination` (Preview) - Styling refresh [#3300](https://github.com/Workday/canvas-kit/pull/3300)
-- `Pill` - Visual and color updates [#3446](https://github.com/Workday/canvas-kit/pull/3446)
-- `SearchForm` (Labs) - Styling updates [#3303](https://github.com/Workday/canvas-kit/pull/3303)
-- `SegmentedControl` (Main) - Brand refresh styling [#3278](https://github.com/Workday/canvas-kit/pull/3278)
-- `SegmentedControl` (Preview) - Brand refresh styling [#3278](https://github.com/Workday/canvas-kit/pull/3278)
-- `ToolbarDropdownButton` - Visual updates [#3293](https://github.com/Workday/canvas-kit/pull/3293)
-- `ToolbarIconButton` - Visual updates [#3293](https://github.com/Workday/canvas-kit/pull/3293)
-
-These updates primarily affect visual appearance and should not require code changes, but may result in visual differences in your application.
+- `Breadcrumbs` [#3270](https://github.com/Workday/canvas-kit/pull/3270),[#3447](https://github.com/Workday/canvas-kit/pull/3447)
+- `Buttons` [#3394](https://github.com/Workday/canvas-kit/pull/3394)
+- `ColorPicker` (Main) [#3307](https://github.com/Workday/canvas-kit/pull/3307)
+- `ColorPicker` (preview) [#3307](https://github.com/Workday/canvas-kit/pull/3307)
+- `InformationHighlight` [#3443](https://github.com/Workday/canvas-kit/pull/3443)
+- `LoadingDots` (Main) [#3393](https://github.com/Workday/canvas-kit/pull/3393)
+- `Pagination` (Preview) [#3300](https://github.com/Workday/canvas-kit/pull/3300)
+- `Pill` [#3446](https://github.com/Workday/canvas-kit/pull/3446)
+- `SearchForm` (Labs) [#3303](https://github.com/Workday/canvas-kit/pull/3303)
+- `SegmentedControl` (Main) [#3278](https://github.com/Workday/canvas-kit/pull/3278)
+- `SegmentedControl` (Preview) [#3278](https://github.com/Workday/canvas-kit/pull/3278)
+- `ToolbarDropdownButton` [#3293](https://github.com/Workday/canvas-kit/pull/3293)
+- `ToolbarIconButton` [#3293](https://github.com/Workday/canvas-kit/pull/3293)
 
 ### Buttons
 
 #### TertiaryButton 🚨
 
-**Breaking Changes:**
+**Breaking Changes**
 
 - The `TertiaryButton` component no longer supports the `isThemable` prop. To customize the appearance
   of `TertiaryButton`, use the `cs` prop for custom styles or the `colors` prop for palette-based
@@ -363,9 +403,9 @@ If you need to override default styles, follow
 We've rebranded the `Card` component to align with our new brand directions and provide better
 visual hierarchy and more flexible styling options. The following changes have been made:
 
-#### Default Card No Longer Has Shadow
+#### Default Card No Longer Has a Box Shadow
 
-The default `Card` variant no longer includes a shadow, creating a cleaner, flatter appearance that
+The default `Card` variant no longer includes a box shadow, creating a cleaner, flatter appearance that
 aligns with our new brand's emphasis on simplicity and clarity. This is a **visual breaking change**
 that may affect your application's visual hierarchy. If your design requires shadow you can add it
 through the `cs` prop.
@@ -380,12 +420,15 @@ through the `cs` prop.
 ```
 
 **After in v14**
+Only do this if you need a shadow. Otherwise, adhere to the default styling.
 
 ```tsx
+import {system} from '@workday/canvas-tokens-web';
+
 <Card cs={{boxShadow: system.depth[1]}}>
   <Card.Heading>Card Title</Card.Heading>
   <Card.Body>Card content with shadow</Card.Body>
-</Card>
+</Card>;
 ```
 
 #### New Card Variants
@@ -400,7 +443,7 @@ We've added two new variants to provide more styling flexibility:
 The `variant` prop is optional - if no variant is specified, the card will use the default styling.
 
 ```tsx
-// Default card (no variant prop needed)
+// Default card (no variant prop needed) with a border and no box shadow
 <Card>
   <Card.Heading>Default Card</Card.Heading>
   <Card.Body>Default styling with borders, no shadow</Card.Body>
@@ -421,11 +464,11 @@ The `variant` prop is optional - if no variant is specified, the card will use t
 
 #### Gap Instead of Margins
 
-We've replaced the individual margins on `Card.Heading` and `Card.Body` with a `gap` prop on the
-card container. The card now uses `display: flex` with `flex-direction: column` by default, and the
-`gap` prop provides consistent spacing between all direct children. This provides more consistent
-spacing and better control over the layout. This is a **visual breaking change** that may affect the
-spacing between card elements.
+We've replaced the individual margins on `Card.Heading` and `Card.Body` with `gap`. The card now
+uses `display: flex` with `flex-direction: column` by default, and the `gap` prop provides
+consistent spacing between all direct children. This provides more consistent spacing and better
+control over the layout. This is a **visual breaking change** that may affect the spacing between
+card elements.
 
 **Before in v13**
 
@@ -503,16 +546,19 @@ These changes are only **visual** and should not affect the functionality of the
 
 **PR:** [#3393](https://github.com/Workday/canvas-kit/pull/3393)
 
-- We've updated the colors to match brand refresh. The default color changes from
+- We've updated the colors to match our brand refresh. The default color changes from
   `system.color.bg.alt.strong` to `system.color.bg.muted.strong`.
 - `LoadingDots` now has an `inverse` variant. Use this variant when the Loading Dots are on a dark
   background or image.
 
+**After in v14**
+
 ```tsx
+// Use inverse variant when the Loading Dots are on a dark background or image
 <LoadingDots variant="inverse" />
 ```
 
-### Pill
+### Pill (Preview)
 
 **PRs:** [#3430](https://github.com/Workday/canvas-kit/pull/3430),
 [#3446](https://github.com/Workday/canvas-kit/pull/3446)
@@ -803,7 +849,7 @@ import {TextArea} from '@workday/canvas-kit-preview-react/text-area';
 <TextArea orientation="vertical">
   <TextArea.Label>Leave a review</TextArea.Label>
   <TextArea.Field onChange={handleChange} value={value} />
-</TextArea>
+</TextArea>;
 ```
 
 **After in v14**
@@ -817,7 +863,7 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
   <FormField.Field>
     <FormField.Input as={TextArea} onChange={handleChange} value={value} />
   </FormField.Field>
-</FormField>
+</FormField>;
 ```
 
 ### Text Input (preview)
@@ -836,7 +882,7 @@ import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
 <TextInput orientation="vertical">
   <TextInput.Label>Email</TextInput.Label>
   <TextInput.Field onChange={handleChange} value={value} />
-</TextInput>
+</TextInput>;
 ```
 
 **After in v14**
@@ -850,7 +896,7 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
   <FormField.Field>
     <FormField.Input as={TextInput} onChange={handleChange} value={value} />
   </FormField.Field>
-</FormField>
+</FormField>;
 ```
 
 ---

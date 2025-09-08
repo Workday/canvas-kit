@@ -41,6 +41,22 @@ This would use `chroma.js` to generate a palette based on the `main` color provi
 Any time `theme` is passed, the `CanvasProvider` would generate a palette and attach brand variables via a `className` scoping those brand variables to a wrapping div.
 In order for us to provide a better solution to theming that is scalable and is more aligned with our CSS variables, we changed this approach.
 
+## What is a Cascade Barrier?
+
+When we say "cascade barrier", we're talking about how [CSS cascades](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascade/Cascade) and takes precedence. Take the following example:
+
+```css
+:root {
+	--cnbvs-brand-primary-base: blue;
+}
+
+// the element with the class .my-app will have a higher specificity than root, creating a barrier where the CSS variables gets redefined and takes precedence over what is defined at root.
+.my-app {
+	--cnvs-brand-primary-base: red;
+}
+```
+In the case of the `CanvasProvider` prior to v14, all our brand tokens where defined within a class and scoped to the `div` that the `CanvasProvider` created. This meant that anything set on `:root` or outside of the `CanvasProvider` would not be able to cascade down to the components within the `CanvasProvider`.
+
 ## ✅ Preferred Approach (v14+)
 
 Canvas Kit v14 promotes using CSS variables for theming, which can be applied in two ways:
@@ -73,6 +89,8 @@ Apply theming at the global level by importing CSS variable files and overriding
 
 Use Canvas Kit's `createStyles` utility to generate themed class names that can be applied to specific components or sections:
 
+> **Note:** Doing the following **will create a cascade barrier**. Only use this method if you intentionally want to override the default theme.
+
 ```tsx
 import {createStyles}from "@workday/canvas-kit-styling"
 import {brand, base} from "@workday/canvas-tokens-web"
@@ -98,8 +116,6 @@ const themedBrand = createStyles({
   <App/>
 </CanvasProvider>
 ```
-
-> **Note:** Doing the following **will create a cascade barrier**. Only use this method if you intentionally want to override the default theme.
 
 ## CSS Token Structure
 
