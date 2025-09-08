@@ -5,7 +5,7 @@ import {CanvasFontSizes, fontSizes} from './fontSizes';
 import {CanvasFontWeights, fontWeights} from './fontWeights';
 
 /** ### Canvas Type Hierarchy
- * [View Storybook Docs](https://workday.github.io/canvas-kit/?path=/story/tokens-tokens-react--type)
+ * [View Storybook Docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-type--docs)
  *
  * ---
  * The hierarchy is organized into four levels, which correspond to levels defined in Figma.
@@ -33,6 +33,7 @@ import {CanvasFontWeights, fontWeights} from './fontWeights';
  *   </h3>
  * );
  * ```
+ * @deprecated ⚠️ `levels` has been deprecated in a future major version. Please use our css var based [`fontFamily`](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-type--docs) tokens.
  */
 export const levels: CanvasTypeHierarchy = {
   title: {
@@ -161,6 +162,7 @@ export const levels: CanvasTypeHierarchy = {
   },
 };
 
+/** @deprecated ⚠️ `CanvasTypeHierarchy` has been deprecated in a future major version. Please use our css var based [`fontFamily`](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-type--docs) tokens. */
 export type CanvasTypeHierarchy = {
   /** ### Title Type Level
    * [View Storybook Docs](https://github.workday.io/canvas-kit/)
@@ -264,6 +266,7 @@ export type CanvasTypeHierarchy = {
   subtext: CanvasTypeSubtextLevel;
 };
 
+/** @deprecated ⚠️ `CanvasTypeTitleLevel` has been deprecated in a future major version. Please use our css var based [`fontFamily`](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-type--docs) tokens. */
 type CanvasTypeTitleLevel = {
   large: {
     fontFamily: CanvasFontFamilies['default'];
@@ -324,6 +327,7 @@ type CanvasTypeHeadingLevel = {
   };
 };
 
+/** @deprecated ⚠️ `CanvasTypeBodyLevel` has been deprecated in a future major version. Please use our css var based [`fontFamily`](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-type--docs) tokens. */
 type CanvasTypeBodyLevel = {
   large: {
     fontFamily: CanvasFontFamilies['default'];
@@ -356,6 +360,7 @@ type CanvasTypeBodyLevel = {
   };
 };
 
+/** @deprecated ⚠️ `CanvasTypeSubtextLevel` has been deprecated in a future major version. Please use our css var based [`fontFamily`](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-type--docs) tokens. */
 type CanvasTypeSubtextLevel = {
   large: {
     fontFamily: CanvasFontFamilies['default'];

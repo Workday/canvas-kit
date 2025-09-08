@@ -1,6 +1,7 @@
 # Canvas Kit Theming
 
-Canvas Kit Common contains wrappers and types to enabling theming of Canvas components.
+Canvas Kit Common contains wrappers and types to enabling theming of Canvas components as well as
+utilities that are used across components.
 
 ## Installation
 
@@ -51,7 +52,7 @@ export const defaultCanvasTheme: CanvasTheme = {
       darkest: colors.blueberry600,
       contrast: colors.frenchVanilla100,
     },
-    alert: {
+    caution: {
       lightest: colors.cantaloupe100,
       light: colors.cantaloupe300,
       main: colors.cantaloupe400,
@@ -114,19 +115,26 @@ direction to the component library.
 
 > Note: Our theme is namespaced under the `canvas` key within the Emotion `ThemeContext`.
 
-If you only set a `main` color, the rest of the respective palette will be automatically generated
-(note text `contrast` color will always return white if not specified).
+For a consistent theming experience, provide a value for each property in the theme object. Use our
+CSS variables.
 
 Example:
 
 ```tsx
 import {CanvasProvider, EmotionCanvasTheme} from '@workday/canvas-kit-react/common';
+import {brand} from '@workday/canvas-tokens-web';
 
 const theme: EmotionCanvasTheme = {
   canvas: {
     palette: {
       primary: {
-        main: colors.cantaloupe400,
+        lightest: base.magenta25,
+        lighter: base.magenta50,
+        light: base.magenta200,
+        main: base.magenta600,
+        dark: base.magenta700,
+        darkest: base.magenta800,
+        contrast: base.neutral0,
       },
     },
   },

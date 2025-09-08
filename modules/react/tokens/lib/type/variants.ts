@@ -1,7 +1,7 @@
 import {typeColors, statusColors} from '@workday/canvas-colors-web';
 
 /** ### Canvas Type Variants
- * [View Storybook Docs](https://workday.github.io/canvas-kit/?path=/story/tokens-tokens-react--type)
+ * [View Storybook Docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-type--docs)
  *
  * ---
  * There are three type variants:
@@ -25,6 +25,7 @@ import {typeColors, statusColors} from '@workday/canvas-colors-web';
  *   </span>
  * );
  * ```
+ * @deprecated ⚠️ `variants` has been deprecated in a future major version. Please use our css var based [`fontFamily`](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-type--docs) tokens.
  */
 export const variants: CanvasTypeVariants = {
   error: {
@@ -38,6 +39,7 @@ export const variants: CanvasTypeVariants = {
   },
 };
 
+/** @deprecated ⚠️ `CanvasTypeVariants` has been deprecated in a future major version. Please use our css var based [`fontFamily`](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-type--docs) tokens. */
 export type CanvasTypeVariants = {
   /**
    * - Sets color to Cinnamon 500

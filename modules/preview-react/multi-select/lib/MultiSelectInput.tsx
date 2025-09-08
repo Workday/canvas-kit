@@ -11,7 +11,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {createStencil, CSProps, handleCsProp, px2rem, calc} from '@workday/canvas-kit-styling';
 import {InputGroup, TextInput, textInputStencil} from '@workday/canvas-kit-react/text-input';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {getCursor} from '@workday/canvas-kit-react/collection';
 import {useComboboxInput, useComboboxInputConstrained} from '@workday/canvas-kit-react/combobox';
 
@@ -42,7 +42,6 @@ export const multiSelectInputStencil = createStencil({
       boxShadow: `inset 0 0 0 1px ${system.color.border.primary.default}`,
     },
 
-    // @ts-ignore
     '& [data-part="user-input"]': {
       ...system.type.subtext.large,
       backgroundColor: system.color.bg.transparent.default,
@@ -71,6 +70,8 @@ export const multiSelectInputStencil = createStencil({
     '&:has(:disabled, .disabled)': {
       borderColor: system.color.border.input.disabled,
       color: system.color.text.disabled,
+      backgroundColor: system.color.bg.alt.softer,
+      [systemIconStencil.vars.color]: system.color.fg.disabled,
     },
 
     '& :where([data-part="form-input"])': {
@@ -114,7 +115,7 @@ export const multiSelectInputStencil = createStencil({
           outlineOffset: px2rem(2),
         },
       },
-      alert: {
+      caution: {
         borderColor: brand.common.alertOuter,
         boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.common.alertInner}`,
         backgroundColor: brand.alert.lightest,
