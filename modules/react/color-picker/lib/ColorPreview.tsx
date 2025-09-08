@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {ColorInput} from './ColorInput';
 import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
 import {TextInputProps} from '@workday/canvas-kit-react/text-input';

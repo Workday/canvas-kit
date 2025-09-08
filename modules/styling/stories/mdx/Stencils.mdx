@@ -1,0 +1,462 @@
+import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
+import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
+import {system} from '@workday/canvas-tokens-web'
+
+import {CreateStencil} from './examples/CreateStencil';
+
+<Meta title="Styling/Getting Started/Create Stencil" />
+
+# Create Stencil
+
+Stencils are a reusable function that returns `style` and `className` props in an object. A Stencil
+should apply to a single element. If your component has nested elements, you can youse `parts` to
+targer those elements in the Stencil. If your component is a compound component, a stencil should be
+created for each subcomponent. If your component is a config component, a stencil can have nested
+styles.
+
+We created Stencils as the reusable primitive of components. Stencils provide:
+
+- `vars`: CSS variables for dynamic properties
+- `base`: base styles to any component
+- `modifier`: modifiers like “size = small,medium,large” or “color=red,blue,etc”
+- `parts`: matching sub-elements that are part of a component
+- `compound`: compound modifiers - styles that match multiple modifiers
+
+## Basic Example
+In the example below, Stencils allow you to dynamically style elements or components based on properties.
+
+<ExampleCodeBlock code={CreateStencil} />
+
+## When to Use `createStencil`
+- When you're styling parts of a component that rely on dynamic properties.
+- When you want to create a reusable component with dynamic styles.
+
+
+Use a Stencil when building reusable components that have dynamic styles and properties.
+
+## Concepts
+
+### Base styles
+
+Base styles are always applied to a Stencil. All your default styles should go here. Base styles
+support psuedo selectors like `:focus-visible` or `:hover` as well as child selectors. Any selector
+supported by `@emotion/css` is valid here. All styles must be static and statically analyzable by
+the tranformer. If you need dynamic styling, look at Variables and Modifiers.
+
+### Variables
+
+Variables allow some properties to be dynamic. They work by creating
+[CSS Variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) with
+unique names and are applied using the
+[style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) property of an element
+to locally scope an override. Since we don't have access to those names, we need a function wrapper
+around our style objects. This includes `base`, `modifiers`, and `compound` modifiers.
+
+Here's a simplified example:
+
+```tsx
+const myStencil = createStencil({
+  vars: {
+    defaultColor: 'red' // default value
+    nonDefaultedColor: '', // will allow for uninitialization
+  },
+  base: ({defaultColor}) => {
+    color: defaultColor // `defaultColor` is '--defaultColor-abc123', not 'red'
+  }
+})
+
+const elemProps = myStencil({color: 'blue'}) // {style: {'--defaultColor-abc123': 'blue'}}
+
+<div {...elemProps} />
+```
+
+This will produce the following HTML:
+
+```html
+<style>
+  .css-abc123 {
+    --defaultColor-abc123: red;
+    color: var(--defaultColor-abc123);
+  }
+</style>
+<div class="css-123abc" style="--defaultColor-abc123: blue;"></div>
+```
+
+The element will have a `color` property of `'blue'` because the element style is the highest
+specificity and wins over a local class name. In the "Styles" tab of developer tools, it will look
+like the following:
+
+```
+element.style {
+  --defaultColor-abc123: blue;
+}
+
+.css-abc123 {
+  --defaultColor-abc123: red;
+  color: var(--defaultColor-abc123); // blue
+}
+```
+
+Variables are automatically added to the config of a Stencil. They share the same namespace as
+modifiers, so **do not have a modifier with the same name as a variable**.
+
+<InformationHighlight className="sb-unstyled" cs={{marginBlock: system.space.x4,}}>
+	<InformationHighlight.Icon />
+	<InformationHighlight.Heading>Note</InformationHighlight.Heading>
+	<InformationHighlight.Body>
+		Variables should be used sparingly. Style properties can be easily overridden without
+variables. Variables are useful if you want to expose changing properties regardless of selectors.
+For example, Buttons use variables for colors of all states (hover, active, focus, disabled, and
+nested icons). Without variables, overriding the focus color would require deeply nested selector
+overrides.
+	</InformationHighlight.Body>
+</InformationHighlight>
+
+#### Cascading Variables
+
+Notice the `nonDefaultedColor` is not included in the base styles like `defaultColor` was. If a
+variable has an empty string, it will can be uninitialized. Stencil variables with a default value
+will create a "cascade barrier". A cascade barrier prevents the variable from "leaking" into the
+component. For example, if a `Card` component was rendered within another `Card` component, the
+variables from the parent `Card` would not leak into the child `Card` component. But there are times
+where a component expects a parent component to set a CSS variable and that it should cascade to the
+component. An example of this is the relationship between `SystemIcon` and `Button`. The `Button`
+components set the `SystemIcon` variables and they should cascade into the `SystemIcon` component.
+
+<InformationHighlight className="sb-unstyled" cs={{marginBlock: system.space.x4,}}>
+	<InformationHighlight.Icon />
+	<InformationHighlight.Heading>Note</InformationHighlight.Heading>
+	<InformationHighlight.Body>
+		Non-cascade variables _could_ be initialized. If you use uninitialized variables, be sure
+to use a fallback in your styles.
+	</InformationHighlight.Body>
+</InformationHighlight>
+
+```tsx
+const myStencil = createStencil({
+  vars: {
+    color: '', // uninitialized
+  },
+  base({color}) {
+    return {
+      // provide a fallback. A uninitialized CSS variable will fall back to `initial`.
+      // for the `color` CSS property, that's most likely black (default text color)
+      color: cssVar(color, 'red'),
+    };
+  },
+});
+```
+
+#### Nested Variables
+
+Variables can be nested one level. This can be useful for colors with different psuedo selectors
+like `:hover` or `:focus`. Here's an example:
+
+```tsx
+const myStencil = createStencil({
+  vars: {
+    default: {
+      color: 'red'
+    },
+    hover: {
+      color: 'blue'
+    },
+    focus: {
+      color: 'orange'
+    }
+  },
+  base: ({default, hover, focus}) => {
+    color: default.color,
+    '&:hover': {
+      color: hover.color
+    },
+    '&:focus': {
+      color: focus.color
+    }
+  }
+})
+```
+
+### Modifiers
+
+Modifiers are modifications to base styles. It should be used to change the appearance of a base
+style. For example, a button may have a modifier for "primary" or "secondary" which may change the
+visual emphasis of the button. Each modifier has its own CSS class name and the stencil will return
+the correct CSS classes to apply to an element based on what modifiers are active.
+
+```tsx
+const buttonStencil = createStencil({
+  base: {
+    padding: 5
+    // base styles
+  },
+  modifiers: {
+    variant: { // modifier name
+      primary: {
+        background: 'blue'
+      },
+      secondary: {
+        background: 'gray'
+      }
+    }
+  },
+  defaultModifiers: {
+    variant: 'secondary'
+  }
+})
+
+const elemProps = myStencil({variant: 'primary'}) // {className: "css-a0 css-a1"}
+
+<div {...elemProps} />
+```
+
+The HTML may look something like this:
+
+```html
+<style>
+  .css-a0 {
+    padding: 5px;
+  }
+  .css-a1 {
+    background: 'blue';
+  }
+  .css-a2 {
+    background: 'gray';
+  }
+</style>
+<div class="css-a0 css-a1"></div>
+```
+
+The optional `defaultModifiers` config property will default modifiers to a value. If a modifier is
+not passed to the stencil, the default will be used.
+
+```tsx
+myStencil(); // className will be `'css-a0 css-a2'`
+```
+
+### Compound Modifiers
+
+A compound modifier creates a new CSS class for the intersection of two or more modifiers. Each
+modifier can have its own separate CSS class while the intersection is a different CSS class.
+
+For example:
+
+```tsx
+const buttonStencil = createStencil({
+  base: {
+    padding: 10,
+    // base styles
+  },
+  modifiers: {
+    size: {
+      // modifier name
+      large: {
+        padding: 20,
+      },
+      small: {
+        padding: 5,
+      },
+    },
+    iconPosition: {
+      start: {
+        paddingInlineStart: 5,
+      },
+      end: {
+        paddingInlineEnd: 5,
+      },
+    },
+  },
+  compound: [
+    {
+      modifiers: {size: 'large', position: 'start'},
+      styles: {
+        paddingInlineStart: 15,
+      },
+    },
+    {
+      modifiers: {size: 'small', position: 'end'},
+      styles: {
+        paddingInlineEnd: 0,
+      },
+    },
+  ],
+});
+
+<div {...buttonStencil()} />
+<div {...buttonStencil({size: 'small'})} />
+<div {...buttonStencil({size: 'small', iconPosition: 'end'})} />
+```
+
+The HTML will look something like this:
+
+```html
+<style>
+  .a0 {
+    padding: 10px;
+  }
+  .a1 {
+    padding: 20px;
+  }
+  .a2 {
+    padding: 5px;
+  }
+  .a3 {
+    padding-inline-start: 5px;
+  }
+  .a4 {
+    padding-inline-end: 5px;
+  }
+  .a5 {
+    padding-inline-start: 15px;
+  }
+  .a6 {
+    padding-inline-start: 0px;
+  }
+</style>
+<div class="a0"></div>
+<div class="a0 a2"></div>
+<div class="a0 a2 a4 a6"></div>
+```
+
+Notice the stencil adds all the class names that match the base, modifiers, and compound modifiers.
+
+### Variables and Modifiers with same keys
+
+It is possible to have a variable and modifier sharing the same key. The Stencil will accept either
+the modifier option or a string. The value will be sent as a variable regardless while the modifer
+will only match if it is a valid modifer key.
+
+```tsx
+const buttonStencil = createStencil({
+  vars: {
+    width: '10px',
+  },
+  base({width}) {
+    return {
+      width: width,
+    };
+  },
+  modifiers: {
+    width: {
+      zero: {
+        width: '0', // overrides base styles
+      },
+    },
+  },
+});
+
+// `'zero'` is part of autocomplete
+myStencil({width: 'zero'});
+// returns {className: 'css-button css-button--width-zero', styles: { '--button-width': 'zero'}}
+
+// width also accepts a string
+myStencil({width: '10px'});
+// returns {className: 'css-button', styles: { '--button-width': '10px'}}
+```
+
+## Styling Elements via Component Parts
+
+The goal of compound components is to expose one component per semantic element. Most of the time
+this means a 1:1 relationship of a component and DOM element. Sometimes a semantic element contains
+non-semantic elements for styling. An example might be a `<button>` with a icon for visual
+reinforcement, and a label for a semantic label. The semantic element is the `<button>` while the
+icon has no semantic value and the label automatically provides the semantic button with an
+accessible name. In order to style the icon and label elements, you have to know the DOM structure
+to target those specific elements in order to style it.
+
+```jsx
+import {createStencil} from '@workday/canvas-kit-styling';
+
+const myButtonStencil = createStencil({
+  base: {
+    background: 'transparent',
+    i: {
+      // ...icon styles
+    },
+    span: {
+      // ...label styles
+    },
+    ':hover': {
+      // ...hover button styles
+      i: {
+        // ...hover icon styles
+      },
+      span: {
+        // ...hover label styles
+      },
+    },
+  },
+});
+
+const MyButton = ({children, ...elemProps}) => {
+  return (
+    <button {...handleCsProp(elemProps, myButtonStencil())}>
+      <i />
+      <span>{children}</span>
+    </button>
+  );
+};
+```
+
+### Using Component Parts to Style Elements
+
+To style elements in the render function, we'll need to choose what elements to add the parts to. In
+the example below, we're able to spread the parts directly to elements. The Stencil will generate
+the type and value most appropriate for the context the part is used. In the Stencil, the part is
+represented by a string that looks like `[data-part="{partValue}"]` and in the render function, it
+is an object that looks like `{'data-part': partValue}`.
+
+```jsx
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+
+const myButtonStencil = createStencil({
+  parts: {
+    icon: 'my-button-icon',
+    label: 'my-button-label',
+  },
+  base: ({iconPart, labelPart}) => ({
+    background: 'transparent',
+    [iconPart]: {
+      // `[data-part="my-button-icon"]`
+      // ...icon styles
+    },
+    [labelPart]: {
+      // `[data-part="my-button-label"]`
+      // ...label styles
+    },
+    '&:hover': {
+      // ...hover styles for button element
+      [iconPart]: {
+        // ...hover styles for icon part
+      },
+    },
+  }),
+});
+
+const MyButton = ({children, ...elemProps}) => {
+  return (
+    <button {...handleCsProp(elemProps, myButtonStencil())}>
+      <i {...myButtonStencil.parts.icon} /> {/* data-part={my-button-icon} */}
+      <span {...myButtonStencil.parts.label}>{children}</span> {/* data-part={my-button-label} */}
+    </button>
+  );
+};
+```
+
+As a reusable component, you can use component parts to style elements that are not exposed in the
+API. Consumers can also use the type safe Stencil to target that element to style it as well. As a
+general rule, a Stencil maps to a component. Multiple Stencils per component usually means nested
+elements that are not targets for style overrides.
+
+<InformationHighlight className="sb-unstyled" cs={{marginBlock: system.space.x4,}}>
+	<InformationHighlight.Icon />
+	<InformationHighlight.Heading>Note</InformationHighlight.Heading>
+	<InformationHighlight.Body>
+		While component parts are a way to give access to elements in order to style, they
+ should be used sparingly. Using component parts increases CSS specificity. A component part should
+ not be used on a nested component that has its own Stencil. The result will be any style
+ properties defined with a component part will have a higher specificity than other styles.
+	</InformationHighlight.Body>
+</InformationHighlight>
+
+

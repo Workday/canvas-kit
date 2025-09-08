@@ -2,7 +2,8 @@ import * as React from 'react';
 
 export const SidePanelContext = React.createContext({
   state: 'expanded',
-  origin: 'left',
+  origin: 'left' as 'left' | 'right',
+  handleAnimationStart: () => undefined,
 });
 
 import {useUniqueId} from '@workday/canvas-kit-react/common';

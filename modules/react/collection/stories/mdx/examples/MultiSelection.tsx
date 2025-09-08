@@ -8,6 +8,7 @@ import {
   useListModel,
   ListItemProps,
   ListBox,
+  getCursor,
 } from '@workday/canvas-kit-react/collection';
 import {composeHooks, createSubcomponent} from '@workday/canvas-kit-react/common';
 
@@ -47,7 +48,7 @@ export const MultiSelection = () => {
         <Item data-id="third">Third</Item>
       </ListBox>
 
-      <p>Cursor ID: {model.state.cursorId}</p>
+      <p>Cursor ID: {getCursor(model.state)}</p>
       <p>
         Selected IDs: {(model.state.selectedIds !== 'all' ? model.state.selectedIds : []).join(',')}
       </p>

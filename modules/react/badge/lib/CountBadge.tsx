@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {handleCsProp, CSProps, createStencil, px2rem, keyframes} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';

@@ -1,5 +1,8 @@
+import crypto from 'node:crypto';
+
 import {createConfig} from '@workday/canvas-kit-styling-transform';
 
+import pkg from './lerna.json';
 import {handleFocusRing} from './utils/style-transform/handleFocusRing';
 
 const config = createConfig({
@@ -21,11 +24,8 @@ const config = createConfig({
       })
       .toLowerCase();
   },
-  fallbackFiles: [
-    '@workday/canvas-tokens-web/css/base/_variables.css',
-    '@workday/canvas-tokens-web/css/brand/_variables.css',
-    '@workday/canvas-tokens-web/css/system/_variables.css',
-  ],
+  seed: crypto.createHash('sha256').update(pkg.version).digest('hex').slice(0, 6),
+  fallbackFiles: [],
   objectTransforms: [handleFocusRing],
 });
 

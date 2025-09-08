@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {Primary} from '../../modules/react/button/stories/button/examples/Primary';
 import {Delete} from '../../modules/react/button/stories/button/examples/Delete';
 
