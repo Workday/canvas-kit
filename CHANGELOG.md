@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.30](https://github.com/Workday/canvas-kit/releases/tag/v13.2.30) (2025-09-08)
+
+### Infrastructure
+
+- fix: Update labs and preview version exports ([#3491](https://github.com/Workday/canvas-kit/pull/3491)) ([@alanbsmith](https://github.com/alanbsmith), Alan Smith)
+
+
 ## [v12.6.29](https://github.com/Workday/canvas-kit/releases/tag/v12.6.29) (2025-09-08)
 
 ### Infrastructure
