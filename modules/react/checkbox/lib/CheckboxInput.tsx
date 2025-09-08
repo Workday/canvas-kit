@@ -94,7 +94,6 @@ const checkboxInputStencil = createStencil({
     '&:where(:focus-visible, .focus) ~ div:first-of-type': {
       borderColor: brand.primary.base,
       borderWidth: px2rem(2),
-      boxShadow: 'none',
       ...focusRing({
         width: 0,
         separation: 0,

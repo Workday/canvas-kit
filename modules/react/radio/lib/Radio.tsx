@@ -153,7 +153,6 @@ const RadioInput = styled('input')<RadioProps & StyledType>(
       '& ~ div:first-of-type': {
         borderWidth: '2px',
         borderColor: variant === 'inverse' ? colors.blackPepper400 : themeFocusOutline,
-        boxShadow: 'none',
         outline: `${px2rem(2)} solid transparent`,
         outlineOffset: variant === 'inverse' ? '0' : '2px',
         ...focusRing({
