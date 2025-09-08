@@ -10,7 +10,8 @@ any questions.
 
 ## Why You Should Upgrade
 
-v14.0 Introduces Workday's new brand direction which includes a new color palette and with it, some styling updates to our components.
+v14.0 Introduces Workday's new brand direction which includes a new color palette and with it, some
+styling updates to our components.
 
 > **Note:** v14.0 requires an upgrade to the `@workday/canvas-tokens-web` package to `@v3.0.0`.
 
@@ -339,13 +340,16 @@ import { Avatar } from '@workday/canvas-kit-preview-react/avatar';
 ### Branding Changes 💅
 
 Several components have been refactored to reflect our new brand direction. Most of these changes
-revolve around the use of our new brand colors. For a better guide on what has changed in our v3.0.0 tokens, please view the Tokens v3.0.0 [Upgrade Guide](https://workday.github.io/canvas-tokens/?path=/docs/guides-upgrade-guides-v3-overview--docs).
+revolve around the use of our new brand colors. For a better guide on what has changed in our v3.0.0
+tokens, please view the Tokens v3.0.0
+[Upgrade Guide](https://workday.github.io/canvas-tokens/?path=/docs/guides-upgrade-guides-v3-overview--docs).
 
 > **Note:** If you want a visual diff of the changes, please view the [Visual Changes](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v14-0-visual-changes--docs) guide.
 
 The following components have been updated:
 
-- `Breadcrumbs` [#3270](https://github.com/Workday/canvas-kit/pull/3270), [#3447](https://github.com/Workday/canvas-kit/pull/3447)
+- `Breadcrumbs` [#3270](https://github.com/Workday/canvas-kit/pull/3270),
+  [#3447](https://github.com/Workday/canvas-kit/pull/3447)
 - `Buttons` [#3394](https://github.com/Workday/canvas-kit/pull/3394)
 - `ColorPicker` (Main) [#3307](https://github.com/Workday/canvas-kit/pull/3307)
 - `ColorPicker` (preview) [#3307](https://github.com/Workday/canvas-kit/pull/3307)
@@ -390,10 +394,10 @@ visual hierarchy and more flexible styling options. The following changes have b
 
 #### Default Card No Longer Has Shadow
 
-The default `Card` variant no longer includes a box shadow, creating a cleaner, flatter appearance that
-aligns with our new brand's emphasis on simplicity and clarity. This is a **visual breaking change**
-that may affect your application's visual hierarchy. If your design requires a shadow you can add it
-through `cs` prop.
+The default `Card` variant no longer includes a box shadow, creating a cleaner, flatter appearance
+that aligns with our new brand's emphasis on simplicity and clarity. This is a **visual breaking
+change** that may affect your application's visual hierarchy. If your design requires a shadow you
+can add it through `cs` prop.
 
 **Before in v13**
 
@@ -404,16 +408,15 @@ through `cs` prop.
 </Card>
 ```
 
-**After in v14**
-Only do this if you need a shadow. Otherwise, adhere to the default styling.
+**After in v14** Only do this if you need a shadow. Otherwise, adhere to the default styling.
 
 ```tsx
-import {system} from '@workday/canvas-tokens-web'
+import {system} from '@workday/canvas-tokens-web';
 
 <Card cs={{boxShadow: system.depth[1]}}>
   <Card.Heading>Card Title</Card.Heading>
   <Card.Body>Card content with shadow</Card.Body>
-</Card>
+</Card>;
 ```
 
 #### New Card Variants
@@ -449,10 +452,11 @@ The `variant` prop is optional - if no variant is specified, the card will use t
 
 #### Gap Instead of Margins
 
-We've replaced the individual margins on `Card.Heading` and `Card.Body` with `gap`. The card now uses `display: flex` with `flex-direction: column` by default, and the
-`gap` prop provides consistent spacing between all direct children. This provides more consistent
-spacing and better control over the layout. This is a **visual breaking change** that may affect the
-spacing between card elements.
+We've replaced the individual margins on `Card.Heading` and `Card.Body` with `gap`. The card now
+uses `display: flex` with `flex-direction: column` by default, and the `gap` prop provides
+consistent spacing between all direct children. This provides more consistent spacing and better
+control over the layout. This is a **visual breaking change** that may affect the spacing between
+card elements.
 
 **Before in v13**
 
