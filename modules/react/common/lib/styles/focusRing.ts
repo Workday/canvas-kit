@@ -1,8 +1,5 @@
 import {CSSObject} from '@emotion/react';
-import {cssVar, CSSObjectWithVars} from '@workday/canvas-kit-styling';
-
-// Backwards compatible type that works with both styled components and Canvas Kit styling
-export type CompatibleCSSObject = CSSObject & CSSObjectWithVars;
+import {cssVar} from '@workday/canvas-kit-styling';
 import {base, brand} from '@workday/canvas-tokens-web';
 
 interface FocusRingOptions {
@@ -27,7 +24,7 @@ function calculateFocusRing({
   innerColor,
   outerColor,
 }: Required<Omit<FocusRingOptions, 'memoize' | 'inset'>> &
-  Pick<FocusRingOptions, 'inset'>): CompatibleCSSObject {
+  Pick<FocusRingOptions, 'inset'>): CSSObject {
   let boxShadow, innerWidth, outerWidth;
   if (innerColor && innerColor.startsWith('--')) {
     // eslint-disable-next-line no-param-reassign
@@ -84,7 +81,7 @@ function calculateFocusRing({
  *
  * @returns {CSSObject} the css object for the focus ring style
  */
-export function focusRing(options: FocusRingOptions = {}, theme?: any): CompatibleCSSObject {
+export function focusRing(options: FocusRingOptions = {}, theme?: any): CSSObject {
   const {
     width = 2,
     separation = 0,
