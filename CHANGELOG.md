@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.31](https://github.com/Workday/canvas-kit/releases/tag/v13.2.31) (2025-09-08)
+
+### Utilities.
+
+- fix: Let typescript infer type from focusRing ([#3495](https://github.com/Workday/canvas-kit/pull/3495)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  `focusRing` returns `boxShadow`. You can't define two properties of the same type on a styled object.
+
+
+## [v12.6.30](https://github.com/Workday/canvas-kit/releases/tag/v12.6.30) (2025-09-08)
+
+### Utilities.
+
+- fix: Let typescript infer type from focusRing ([#3495](https://github.com/Workday/canvas-kit/pull/3495)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  `focusRing` returns `boxShadow`. You can't define two properties of the same type on a styled object.
+## [v13.2.30](https://github.com/Workday/canvas-kit/releases/tag/v13.2.30) (2025-09-08)
+
+### Infrastructure
+
+- fix: Update labs and preview version exports ([#3491](https://github.com/Workday/canvas-kit/pull/3491)) ([@alanbsmith](https://github.com/alanbsmith), Alan Smith)
+
+
+## [v12.6.29](https://github.com/Workday/canvas-kit/releases/tag/v12.6.29) (2025-09-08)
+
+### Infrastructure
+
+- fix: Update labs and preview version exports ([#3491](https://github.com/Workday/canvas-kit/pull/3491)) ([@alanbsmith](https://github.com/alanbsmith), Alan Smith)
 ## [v13.2.29](https://github.com/Workday/canvas-kit/releases/tag/v13.2.29) (2025-09-05)
 
 ### Utilities
