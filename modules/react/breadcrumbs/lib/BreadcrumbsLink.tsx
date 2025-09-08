@@ -1,10 +1,10 @@
-import React from 'react';
-import {styled, createComponent, ellipsisStyles} from '@workday/canvas-kit-react/common';
-import {Hyperlink} from '@workday/canvas-kit-react/button';
+import {createComponent} from '@workday/canvas-kit-react/common';
+import {Hyperlink, HyperlinkProps} from '@workday/canvas-kit-react/button';
 import {OverflowTooltip, OverflowTooltipProps} from '@workday/canvas-kit-react/tooltip';
-import {type} from '@workday/canvas-kit-react/tokens';
+import {system} from '@workday/canvas-tokens-web';
+import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 
-export interface BreadcrumbsLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface BreadcrumbsLinkProps extends HyperlinkProps {
   /**
    * The href url of the anchor tag
    */
@@ -18,34 +18,43 @@ export interface BreadcrumbsLinkProps extends React.AnchorHTMLAttributes<HTMLAnc
   tooltipProps?: OverflowTooltipProps | {};
 }
 
-type StyledLinkProps = Pick<BreadcrumbsLinkProps, 'maxWidth' | 'href'>;
-
-const {color, ...subtextLargeStyles} = type.levels.subtext.large;
-
-const StyledLink = styled(Hyperlink)(
-  {
-    ...subtextLargeStyles,
+export const breadcrumbsLinkStencil = createStencil({
+  vars: {
+    maxWidth: '',
   },
-  ({maxWidth}: StyledLinkProps) => ({
-    ...ellipsisStyles,
+  base: ({maxWidth}) => ({
+    ...system.type.subtext.large,
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
     maxWidth,
-  })
-);
+  }),
+});
 
 export const BreadcrumbsLink = createComponent('a')({
   displayName: 'Breadcrumbs.Link',
-  Component: ({
-    maxWidth = 350,
-    href,
-    tooltipProps = {},
-    children,
-    ...props
-  }: BreadcrumbsLinkProps) => {
+  Component: (
+    {maxWidth = 350, href, tooltipProps = {}, children, ...elemProps}: BreadcrumbsLinkProps,
+    ref,
+    Element
+  ) => {
     return (
       <OverflowTooltip {...tooltipProps}>
-        <StyledLink maxWidth={maxWidth} href={href} role="link" {...props}>
+        <Hyperlink
+          href={href}
+          ref={ref}
+          as={Element}
+          role="link"
+          variant="standalone"
+          {...handleCsProp(
+            elemProps,
+            breadcrumbsLinkStencil({
+              maxWidth: typeof maxWidth === 'number' ? px2rem(maxWidth) : maxWidth,
+            })
+          )}
+        >
           {children}
-        </StyledLink>
+        </Hyperlink>
       </OverflowTooltip>
     );
   },

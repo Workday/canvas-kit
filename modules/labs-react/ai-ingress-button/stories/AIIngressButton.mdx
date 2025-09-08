@@ -1,0 +1,39 @@
+
+import {SymbolDoc, Specifications, ExampleCodeBlock} from '@workday/canvas-kit-docs';
+
+import {AIIngressButton} from '@workday/canvas-kit-labs-react/ai-ingress-button';
+import {Basic} from './examples/Basic';
+import {Inverse} from './examples/Inverse';
+import * as AIIngressButtonStories from './AIIngressButton.stories';
+
+<Meta of={AIIngressButtonStories} />
+
+# AI Ingress Button
+
+CTA to open and close AI Ingress Button
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-labs-react
+```
+
+
+## Usage
+
+### Basic Example
+
+You can click to toggle the AI Ingress Button.
+
+<ExampleCodeBlock code={Basic} />
+
+### Inverse Example
+
+The Button can also be used on dark backgrounds.
+
+<ExampleCodeBlock code={Inverse} />
+
+
+## Component API
+
+<SymbolDoc name="AIIngressButton" hideDescription />

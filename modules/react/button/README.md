@@ -3,7 +3,7 @@
 Clickable button elements that extend the native `<button>` element with Canvas styling.
 
 For `PrimaryButton`, `SecondaryButton`, `TertiaryButton` or `DeleteButton`, view the
-[documentation on Storybook](https://workday.github.io/canvas-kit/?path=/docs/components-buttons-button-react--primary).
+[documentation on Storybook](https://workday.github.io/canvas-kit/?path=/docs/components-buttons--docs).
 
 [> Workday Design Reference](https://design.workday.com/components/buttons/buttons)
 
@@ -230,10 +230,7 @@ export type BasicButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 
 export const BasicButton = ({children, ...elemProps}: BasicButtonProps) => {
   return (
-    <BaseButton
-      colors={getPaginationButtonColors(toggled)}
-      {...elemProps}
-    >
+    <BaseButton colors={getPaginationButtonColors(toggled)} {...elemProps}>
       <BaseButton.Label>{children}</BaseButton.Label>
       <BaseButton.Icon icon={plusIcon} />
     </BaseButton>
@@ -248,25 +245,3 @@ system.
 
 **Disclaimer** We strongly advise consumers not to use this component if possible and to rely on our
 `PrimaryButton`, `SecondaryButton` and `TertiaryButton` when possible.
-
-### Deprecated Buttons
-
-> We have rolled out our next iteration of our buttons and will be deprecating the old style (orange
-> primary, and accompanying secondary, and delete). These are still avialable, but will be removed
-> in the first major release after they are available for all Workday customers. The biggest change
-> is with regards to colors and styling, but the behavior should remain the same.
-
-If you need to continue to use the old style buttons, you can use the `deprecated_Button` component.
-Usage will be the same as before, but you must change your imports. Note: this will be removed
-entirely in a future release.
-
-```tsx
-import * as React from 'react';
-import {deprecated_Button as Button} from '@workday/canvas-kit-react/button';
-
-<Button>Button Label</Button>;
-```
-
-Deprecation tags have been added to all the pieces regarding the old buttons including it's types
-and the component itself. Tslint and your IDE should reflect this warning but you should still be
-able to compile your code.

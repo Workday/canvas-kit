@@ -1,7 +1,7 @@
-import {CanvasThemePalette, EmotionCanvasTheme, useTheme} from '@workday/canvas-kit-react/common';
-import {colors, CSSProperties, inputColors, statusColors} from '@workday/canvas-kit-react/tokens';
-
-import chroma from 'chroma-js';
+import {CanvasTheme, EmotionCanvasTheme, useTheme} from '@workday/canvas-kit-react/common';
+import {brand, system} from '@workday/canvas-tokens-web';
+import {CSSProperties} from '@workday/canvas-kit-react/tokens';
+import {cssVar} from '@workday/canvas-kit-styling';
 
 type paletteSelection = Exclude<keyof EmotionCanvasTheme['canvas']['palette'], 'common'>;
 interface ContrastColors {
@@ -9,21 +9,34 @@ interface ContrastColors {
   inner?: string;
 }
 
-const isAccessible = (foreground: string, background: string = colors.frenchVanilla100) => {
-  return chroma.contrast(foreground, background) >= 3;
-};
-
 const getPaletteColorsFromTheme = (
-  palette: CanvasThemePalette,
-  fallbackColors?: ContrastColors
+  palette: CanvasTheme,
+  fallbackColors?: ContrastColors,
+  errorType?: 'error' | 'alert'
 ): ContrastColors => {
+  if (errorType === 'error') {
+    return {
+      outer: cssVar(brand.common.errorInner),
+      inner: cssVar(brand.common.errorInner),
+    };
+  } else if (errorType === 'alert') {
+    return {
+      outer: cssVar(brand.common.alertOuter),
+      inner: cssVar(brand.common.alertInner),
+    };
+  }
+
+  // If specific fallback colors are provided (e.g., for success), prefer those
+  if (fallbackColors && (fallbackColors.outer || fallbackColors.inner)) {
+    return {
+      outer: fallbackColors.outer ?? cssVar(brand.common.focusOutline),
+      inner: fallbackColors.inner ?? fallbackColors.outer ?? cssVar(brand.common.focusOutline),
+    };
+  }
+
   return {
-    outer: isAccessible(palette.main)
-      ? palette.main
-      : isAccessible(palette.darkest)
-      ? palette.darkest
-      : fallbackColors?.outer,
-    inner: fallbackColors?.inner ? fallbackColors.inner : palette.main,
+    outer: cssVar(brand.common.focusOutline),
+    inner: cssVar(brand.common.focusOutline),
   };
 };
 
@@ -31,25 +44,23 @@ export function getPaletteColorsForFocusRing(
   type: paletteSelection,
   theme: EmotionCanvasTheme
 ): ContrastColors {
-  const palette = theme.canvas.palette[type];
-
   switch (type) {
     case 'error': {
-      return getPaletteColorsFromTheme(palette, {outer: inputColors.error.border});
+      return getPaletteColorsFromTheme(theme.canvas, {outer: brand.common.errorInner}, 'error');
     }
     case 'alert': {
-      return getPaletteColorsFromTheme(palette, {outer: colors.cantaloupe600});
+      return getPaletteColorsFromTheme(theme.canvas, {outer: brand.common.alertInner}, 'alert');
     }
     case 'success': {
-      return getPaletteColorsFromTheme(palette, {
-        outer: colors.greenApple600,
+      return getPaletteColorsFromTheme(theme.canvas, {
+        outer: cssVar(brand.success.dark),
         // The theme default for success.main is set to the darkest GreenApple
         // For our default ring, we need to override it so the inner ring is a bit lighter
-        inner: palette.main === colors.greenApple600 ? statusColors.success : palette.main,
+        inner: cssVar(brand.success.base),
       });
     }
     default: {
-      return getPaletteColorsFromTheme(palette);
+      return getPaletteColorsFromTheme(theme.canvas);
     }
   }
 }
@@ -65,7 +76,8 @@ export function getPaletteColorsForFocusRing(
  * // Add here jsx pragma to use css
  * import {jsx} from '@emotion/react';
  * import React from 'react';
- * import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
+ * import {FormField} from '@workday/canvas-kit-react/form-field';
+ * import {TextInput} from '@workday/canvas-kit-react/text-input';
  * import {useThemedRing} from '@workday/canvas-kit-react/common';
  *
  * export const MyInput = ({handleChange}) => {
@@ -77,11 +89,13 @@ export function getPaletteColorsForFocusRing(
  *  const alertStyles = useThemedRing('alert');
  *
  *  return (
- *    <TextInput>
- *     <TextInput.Label>Email</TextInput.Label>
- *      <TextInput.Field css={alertStyles} onChange={handleChange} value={value} />
- *      <TextInput.Hint>Please enter a valid email.</TextInput.Hint>
- *    </TextInput>
+ *    <FormField>
+ *      <FormField.Label>Email</FormField.Label>
+ *      <FormField.Field css={alertStyles}>
+ *        <FormField.Input as={TextInput} onChange={handleChange} value={value} />
+ *        <FormField.Hint>Add a valid email</FormField.Hint>
+ *      </FormField.Field>
+ *    </FormField>
  *  );
  * };
  *```
@@ -90,6 +104,7 @@ export const useThemedRing = (type: paletteSelection): CSSProperties => {
   const theme = useTheme();
 
   const paletteColors = getPaletteColorsForFocusRing(type, theme);
+
   if (!(paletteColors?.outer || paletteColors?.inner)) {
     return {};
   }
@@ -107,8 +122,8 @@ export const useThemedRing = (type: paletteSelection): CSSProperties => {
     '&:focus:not([disabled])': {
       borderColor: paletteColors.outer,
       boxShadow: `${errorBoxShadow},
-        0 0 0 2px ${colors.frenchVanilla100},
-        0 0 0 4px ${theme ? theme.canvas.palette.common.focusOutline : inputColors.focusBorder}`,
+        0 0 0 2px ${cssVar(system.color.border.input.inverse)},
+        0 0 0 4px ${cssVar(brand.common.focusOutline)}`,
     },
   };
 };
