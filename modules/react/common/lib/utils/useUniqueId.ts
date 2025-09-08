@@ -1,3 +1,4 @@
+import React from 'react';
 import {useConstant} from './useConstant';
 
 // Create a unique seed per import to prevent collisions from other versions of `useUniqueId`
@@ -8,6 +9,8 @@ let seed = Math.random()
   .substr(0, 4);
 
 let c = 0;
+
+const hasStableId = typeof React.useId === 'function';
 
 /**
  * Generates a unique and HTML5 compliant identifier every time it is called. Internally it uses a 4
@@ -21,12 +24,14 @@ let c = 0;
 export const generateUniqueId = () => seed + (c++).toString(36);
 
 /**
- * Generate a unique ID if one is not provided. The generated ID will be stable across renders
+ * Generate a unique ID if one is not provided. The generated ID will be stable across renders. Uses
+ * `React.useId()` if available.
  * @param id Optional ID provided that will be used instead of a unique ID
  */
 export const useUniqueId = (id?: string) => {
   // https://codesandbox.io/s/react-functional-component-ids-p2ndq
-  const generatedId = useConstant(generateUniqueId);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const generatedId = hasStableId ? React.useId() : useConstant(generateUniqueId);
   return id || generatedId;
 };
 

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {Basic} from '../../modules/preview-react/pill/stories/examples/Basic';
 import {WithAvatar} from '../../modules/preview-react/pill/stories/examples/WithAvatar';
 import {WithCount} from '../../modules/preview-react/pill/stories/examples/WithCount';
@@ -17,7 +16,7 @@ describe('Pill', () => {
         cy.checkA11y();
       });
 
-      it('should have two elements with a role of "button"', () => {
+      it('should render two pills with role "button"', () => {
         cy.findAllByRole('button').should('have.length', 2);
       });
 

@@ -7,6 +7,7 @@ import {
   useListModel,
   ListItemProps,
   ListBox,
+  getCursor,
 } from '@workday/canvas-kit-react/collection';
 import {
   composeHooks,
@@ -51,7 +52,7 @@ export const Selection = () => {
         <SelectableItem data-id="third">Third</SelectableItem>
       </ListBox>
 
-      <p>Cursor ID: {model.state.cursorId}</p>
+      <p>Cursor ID: {getCursor(model.state)}</p>
       <p>Selected ID: {model.state.selectedIds[0]}</p>
     </>
   );

@@ -2,7 +2,13 @@ import React from 'react';
 
 import {Generic} from '@workday/canvas-kit-react/common';
 
-import {useBaseListModel} from './useBaseListModel';
+import {Item, useBaseListModel} from './useBaseListModel';
+import {VirtualItem} from '@tanstack/react-virtual';
+
+export const ListRenderItemContext = React.createContext<{
+  item?: Item<Generic>;
+  virtual?: VirtualItem;
+}>({});
 
 /**
  * This hook is meant to be used inside the render function of `List` style components. It is used
@@ -23,34 +29,30 @@ export function useListRenderItems<T>(
   children: ((item: Generic, index: number) => React.ReactNode) | React.ReactNode
 ): React.ReactNode {
   const items =
-    typeof children === 'function'
-      ? model.state.isVirtualized
-        ? model.state.UNSTABLE_virtual.virtualItems.map(virtual => {
-            const item = model.state.items[virtual.index];
-            const child = children(item.value, virtual.index);
-            if (React.isValidElement(child)) {
-              return React.cloneElement(child as any, {
-                // We call this `virtual` instead of `virtualItem` to avoid a React render warning
-                // about capital letters in attributes. React thinks this will be applied to the DOM
-                // element even though we remove it later...
-                virtual,
-                key: item.id || item.index,
-                item,
-              });
-            }
-            return child;
-          })
-        : model.state.items.map(item => {
-            const child = children(item.value, item.index);
-            if (React.isValidElement(child)) {
-              return React.cloneElement(child as any, {
-                key: item.id || item.index,
-                item,
-              });
-            }
-            return child;
-          })
-      : children;
+    typeof children === 'function' ? (
+      model.state.isVirtualized ? (
+        model.state.UNSTABLE_virtual.getVirtualItems().map(virtual => {
+          const item = model.state.items[virtual.index];
+          const child = children(item.value, virtual.index);
+          return (
+            <ListRenderItemContext.Provider key={item.id || item.index} value={{item, virtual}}>
+              {child}
+            </ListRenderItemContext.Provider>
+          );
+        })
+      ) : (
+        model.state.items.map(item => {
+          const child = children(item.value, item.index);
+          return (
+            <ListRenderItemContext.Provider key={item.id || item.index} value={{item}}>
+              {child}
+            </ListRenderItemContext.Provider>
+          );
+        })
+      )
+    ) : (
+      <ListRenderItemContext.Provider value={{}}>{children}</ListRenderItemContext.Provider>
+    );
 
   return items;
 }

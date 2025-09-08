@@ -1,4 +1,3 @@
-import React from 'react';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {

@@ -1,6 +1,6 @@
 import {createElemPropsHook} from '@workday/canvas-kit-react/common';
 
-import {useCursorListModel} from './useCursorListModel';
+import {isCursor, useCursorListModel} from './useCursorListModel';
 
 /**
  * This elemProps hook is used for cursor navigation by using [Active
@@ -20,7 +20,7 @@ export const useListItemActiveDescendant = createElemPropsHook(useCursorListMode
   (model, _ref, elemProps: {'data-id'?: string} = {}) => {
     const id = elemProps['data-id'] || '';
     return {
-      className: model.state.cursorId && model.state.cursorId === id ? 'focus' : '',
+      className: isCursor(model.state, id) ? 'focus' : '',
     };
   }
 );

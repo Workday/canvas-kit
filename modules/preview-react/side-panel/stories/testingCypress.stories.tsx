@@ -87,7 +87,7 @@ export const FirstFocusable = () => {
   return (
     <React.Fragment>
       <Header>
-        <Avatar onClick={noop} />
+        <Avatar altText="Avatar" onClick={noop} />
       </Header>
       <Container>
         <SidePanel {...panelProps}>
