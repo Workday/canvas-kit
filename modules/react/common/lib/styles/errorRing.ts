@@ -1,12 +1,12 @@
 import {EmotionCanvasTheme} from '../theming/index';
 import {ErrorType} from '../types';
 import {CSSObject} from '@emotion/styled';
+import {CSSObjectWithVars, cssVar} from '@workday/canvas-kit-styling';
 
-// Use a type that works with both new and old styling systems
-type CSSReturnType = CSSObject & Record<string, any>;
+// Backwards compatible type that works with both styled components and Canvas Kit styling
+type CompatibleCSSObject = CSSObject & CSSObjectWithVars;
 
 import {brand, system} from '@workday/canvas-tokens-web';
-import {cssVar} from '@workday/canvas-kit-styling';
 
 export function getErrorColors(error?: ErrorType, theme?: EmotionCanvasTheme) {
   if (error === ErrorType.Error) {
@@ -40,7 +40,7 @@ export function getErrorColors(error?: ErrorType, theme?: EmotionCanvasTheme) {
   }
 }
 
-export function errorRing(error?: ErrorType, theme?: EmotionCanvasTheme): CSSReturnType {
+export function errorRing(error?: ErrorType, theme?: EmotionCanvasTheme): CompatibleCSSObject {
   if (error !== ErrorType.Error && error !== ErrorType.Caution) {
     return {};
   }
