@@ -42,6 +42,7 @@ const routes = {
   '/components/text/text/': 'components-text-text--docs',
   '/components/text/title/': 'components-text-title--docs',
   '/examples/layout/': 'examples-layouts--docs',
+  '/get-started/for-developers/theming/overview/': 'features-theming-overview--docs',
   '/getting-started/for-developers/contributing/': 'guides-contributing--docs',
   '/getting-started/for-developers/resources/api-pattern-guidelines/':
     'guides-api-pattern-guidelines--docs',
@@ -55,6 +56,9 @@ const routes = {
   '/getting-started/for-developers/resources/style-props/': 'features-style-props--docs',
   '/getting-started/for-developers/resources/testing/': 'guides-testing--docs',
   '/getting-started/introduction/': 'guides-getting-started--docs',
+  '/help/upgrade-guides/canvas-v14-upgrade-guide/': 'guides-upgrade-guides-v14-0-overview--docs',
+  '/help/upgrade-guides/canvas-v14-upgrade-guide/#tab=visual-changes':
+    'guides-upgrade-guides-v14-0-visual-changes--docs',
   '/tokens/color/': 'tokens-tokens--docs#colors',
   '/tokens/depth/': 'tokens-tokens--docs#depth',
   '/tokens/space/': 'tokens-tokens--docs#space',
