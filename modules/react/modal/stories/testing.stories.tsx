@@ -186,8 +186,8 @@ export const ModalRTL = {
     });
     return (
       <CanvasProvider theme={theme}>
-        <Modal.Target style={{display: 'none'}}></Modal.Target>
         <Modal model={model}>
+          <Modal.Target style={{display: 'none'}}></Modal.Target>
           <Modal.Overlay style={{animation: 'none'}}>
             <Modal.Card style={{animation: 'none'}} width={300}>
               <Modal.CloseIcon aria-label="" />
