@@ -114,19 +114,21 @@ yarn canvas-kit-codemod v14 [path]
 yarn remove @workday/canvas-kit-codemod
 ```
 
-> **Note**: The codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` files. You'll need to
+> **Note:** The codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` files. You'll need to
 > manually edit other file types (`.json`, `.mdx`, `.md`, etc.). You may need to run your linter
 > after executing the codemod, as its resulting formatting (spacing, quotes, etc.) may not match
 > your project conventions.
 
 ## Tokens
 
-Canvas Kit v14 now uses `@workday/canvas-tokens-web` v3, which introduces new color palettes and
+Canvas Kit v14 uses `@workday/canvas-tokens-web` v3, which introduces new color palettes and
 deprecates the old "fruity" color names (for example, use `red` instead of `cinnamon`, `blue` instead
 of `blueberry`, and `green` instead of `greenApple`). We strongly recommend upgrading to
 `@workday/canvas-tokens-web` v3, as using older versions will not match the new brand guidelines or
 color system. Although this dependency upgrade is not required, we've offered migration guides and
 codemods separately from the v14 upgrade so that teams can upgrade when they can.
+
+For more information and changes, please view our [Tokens v3 Upgrade Guide](https://workday.github.io/canvas-tokens/?path=/guides-upgrade-guides-v3-overview--docs).
 
 > **Note:** v3 Tokens should be backwards compatible with older versions of Canvas Kit.
 
