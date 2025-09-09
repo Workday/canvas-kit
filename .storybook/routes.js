@@ -56,8 +56,8 @@ const routes = {
   '/getting-started/for-developers/resources/style-props/': 'features-style-props--docs',
   '/getting-started/for-developers/resources/testing/': 'guides-testing--docs',
   '/getting-started/introduction/': 'guides-getting-started--docs',
-  '/help/upgrade-guides/canvas-v14-upgrade-guide': 'guides-upgrade-guides-v14-0-overview--docs',
-  '/help/upgrade-guides/canvas-v14-upgrade-guide#tab=visual-changes':
+  '/help/upgrade-guides/canvas-v14-upgrade-guide/': 'guides-upgrade-guides-v14-0-overview--docs',
+  '/help/upgrade-guides/canvas-v14-upgrade-guide/#tab=visual-changes':
     'guides-upgrade-guides-v14-0-visual-changes--docs',
   '/tokens/color/': 'tokens-tokens--docs#colors',
   '/tokens/depth/': 'tokens-tokens--docs#depth',
