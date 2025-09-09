@@ -13,8 +13,7 @@ any questions.
 v14.0 Introduces Workday's new brand direction which includes a new color palette and with it, some
 styling updates to our components.
 
-- For a list of visual changes, please view our v14 visual changes doc
-  [here](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v14-0-visual-changes--docs).
+**Please consult our [v14 Visual Changes](/help/upgrade-guides/canvas-v14-upgrade-guide/#tab=visual-changes) page for a visual reference of what's changed.**
 
 > **Note:** While v14 does not require an upgrade to our v3 tokens, we strongly advise to upgrade to
 > the latest to ensure proper branding.
@@ -26,6 +25,7 @@ styling updates to our components.
 - [Tokens](#tokens)
 - [Caution Naming](#caution-naming)
 - [Theming](#theming)
+  - [New Documentation](#new-documentation)
   - [Canvas Provider](#canvas-provider-)
 - [Component Updates](#component-updates)
   - [Avatar (Preview)](#avatar-preview)
@@ -217,6 +217,10 @@ someFunction(ErrorType.Caution);
 
 ## Theming
 
+### New Documentation
+
+We've **significantly** improved our theming documentation. Please consult our new [Canvas Kit Theming Guide](/get-started/for-developers/theming/overview/).
+
 ### Canvas Provider 🚨
 
 **PRs:** [#3407](https://github.com/Workday/canvas-kit/pull/3407),
@@ -231,12 +235,7 @@ Canvas Provider has been updated to **remove** default branding colors to ensure
 our CSS variables. Instead of generating a palette and shifting the brightness and darkness with
 `chroma.js`, we use `oklch` to generate the palette colors.
 
-Prior to v14, the `CanvasProvider` created a cascade barrier, re definding brand CSS variables under
-a class, creating a higher specificity. This made it difficult to override brand tokens in certain
-scenarios. v14 Removes that barrier. For more information on what is a cascade barrier, please
-[view our theming docs here](https://github.com/Workday/canvas-kit/issues). For a mode detailed
-overview of the changes in v14, please view our
-[v14 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs#what-is-a-cascade-barrier).
+Prior to v14, `CanvasProvider` created a [cascade barrier](/get-started/for-developers/theming/overview/#what-is-a-cascade-barrier), which redefined brand CSS variables under a class and created a higher specificity. This made it difficult to override brand tokens in certain scenarios. v14 removes that barrier.
 
 **Before in v13** In v13, the `useTheme` hook would call `createCanvasTheme` which generated a
 palette given a `main` color via `chroma.js`.
@@ -296,8 +295,6 @@ The reason for this change is to ensure that the CSS variables properly cascade 
 Before in v13, the `CanvasProvider` would add the brand tokens under a class name, creating a higher
 specificity.
 
-For a thorough guide on theming, please view our theming docs
-[here](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs).
 
 ### useIsRTL
 
@@ -369,11 +366,9 @@ revolve around the use of our new brand colors. For a better guide on what has c
 tokens, please view the Tokens v3.0.0
 [Upgrade Guide](https://workday.github.io/canvas-tokens/?path=/docs/guides-upgrade-guides-v3-overview--docs).
 
-> **Note:** If you want a visual diff of the changes, please view the
-> [Visual Changes](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v14-0-visual-changes--docs)
-> guide.
 
-The following components have been updated:
+The following components have been updated (**see [v14 Visual Changes](/help/upgrade-guides/canvas-v14-upgrade-guide/#tab=visual-changes) for a visual reference of the updates**):
+
 
 - `Breadcrumbs`
   [#3270](https://github.com/Workday/canvas-kit/pull/3270),[#3447](https://github.com/Workday/canvas-kit/pull/3447)
