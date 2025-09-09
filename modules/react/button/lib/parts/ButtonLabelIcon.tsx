@@ -34,7 +34,6 @@ const iconSizes: Record<ButtonSizes, number> = {
 };
 
 export const ButtonLabelIcon = createComponent('span')({
-  displayName: 'ButtonLabelIconNew',
   Component: (
     {
       icon,

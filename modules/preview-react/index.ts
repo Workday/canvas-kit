@@ -10,4 +10,4 @@ export * from './segmented-control';
 export * from './select';
 export * from './side-panel';
 export * from './status-indicator';
-export {version} from './version';
+export * from './version';

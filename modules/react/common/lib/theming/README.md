@@ -1,6 +1,7 @@
 # Canvas Kit Theming
 
-Canvas Kit Common contains wrappers and types to enabling theming of Canvas components.
+Canvas Kit Common contains wrappers and types to enabling theming of Canvas components as well as
+utilities that are used across components.
 
 ## Installation
 
@@ -51,7 +52,7 @@ export const defaultCanvasTheme: CanvasTheme = {
       darkest: colors.blueberry600,
       contrast: colors.frenchVanilla100,
     },
-    alert: {
+    caution: {
       lightest: colors.cantaloupe100,
       light: colors.cantaloupe300,
       main: colors.cantaloupe400,

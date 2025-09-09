@@ -108,19 +108,19 @@ export const pillStencil = createStencil({
       readOnly: {
         border: `${px2rem(1)} solid ${system.color.border.container}`,
         cursor: 'default',
-        [buttonStencil.vars.background]: 'transparent',
+        [buttonStencil.vars.background]: system.color.bg.default,
         '&:hover, &.hover': {
           borderColor: system.color.border.container,
-          [buttonStencil.vars.background]: 'transparent',
+          [buttonStencil.vars.background]: system.color.bg.default,
         },
         '&:focus-visible, &.focus': {
-          [buttonStencil.vars.background]: 'transparent',
+          [buttonStencil.vars.background]: system.color.bg.default,
         },
         '&:active, &.active': {
-          [buttonStencil.vars.background]: 'transparent',
+          [buttonStencil.vars.background]: system.color.bg.default,
         },
         '&:disabled, &.disabled': {
-          [buttonStencil.vars.background]: 'transparent',
+          [buttonStencil.vars.background]: system.color.bg.default,
         },
       },
       removable: {

@@ -21,13 +21,14 @@ const secondaryButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
     // Base Styles
-    [buttonStencil.vars.background]: system.color.bg.alt.default,
+    [buttonStencil.vars.background]: system.color.bg.transparent.default,
     [buttonStencil.vars.borderRadius]: system.shape.round,
+    [buttonStencil.vars.border]: system.color.border.input.default,
     [buttonStencil.vars.label]: system.color.fg.strong,
     [systemIconStencil.vars.color]: 'currentColor',
     // Focus Styles
     '&:focus-visible, &.focus': {
-      [buttonStencil.vars.background]: system.color.bg.alt.default,
+      [buttonStencil.vars.background]: system.color.bg.default,
       [buttonStencil.vars.label]: system.color.fg.stronger,
       [buttonStencil.vars.boxShadowInner]: system.color.border.inverse,
       [buttonStencil.vars.boxShadowOuter]: brand.common.focusOutline,
@@ -35,19 +36,21 @@ const secondaryButtonStencil = createStencil({
     },
     // Hover Styles
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: system.color.bg.alt.strong,
+      [buttonStencil.vars.background]: system.color.bg.alt.default,
       [buttonStencil.vars.label]: system.color.fg.stronger,
+      [buttonStencil.vars.border]: system.color.border.input.strong,
       [systemIconStencil.vars.color]: 'currentColor',
     },
     // Active Styles
     '&:active, &.active': {
-      [buttonStencil.vars.background]: system.color.bg.alt.stronger,
+      [buttonStencil.vars.background]: system.color.bg.alt.strong,
       [buttonStencil.vars.label]: system.color.fg.stronger,
+      [buttonStencil.vars.border]: system.color.border.input.strong,
       [systemIconStencil.vars.color]: 'currentColor',
     },
     // Disabled Styles
     '&:disabled, &.disabled': {
-      [buttonStencil.vars.background]: system.color.bg.alt.default,
+      [buttonStencil.vars.background]: system.color.bg.transparent.default,
       [buttonStencil.vars.label]: system.color.fg.stronger,
       [buttonStencil.vars.opacity]: system.opacity.disabled,
       [systemIconStencil.vars.color]: 'currentColor',

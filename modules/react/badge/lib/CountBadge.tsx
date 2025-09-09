@@ -52,7 +52,7 @@ const countBadgeStencil = createStencil({
     lineHeight: px2rem(20),
     minWidth: px2rem(20),
     padding: `0 ${px2rem(6.5)}`,
-    background: system.color.static.red.default,
+    background: system.color.fg.critical.default,
     color: system.color.text.inverse,
   },
   modifiers: {
@@ -66,8 +66,8 @@ const countBadgeStencil = createStencil({
     emphasis: {
       high: {},
       low: {
-        background: system.color.static.blue.soft,
-        color: system.color.static.blue.stronger,
+        background: system.color.bg.info.softer,
+        color: system.color.fg.info.stronger,
       },
     },
   },
