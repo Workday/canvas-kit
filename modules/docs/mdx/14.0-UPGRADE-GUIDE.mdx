@@ -14,7 +14,9 @@ any questions.
 v14.0 Introduces Workday's new brand direction which includes a new color palette and with it, some
 styling updates to our components.
 
-**Please consult our [v14 Visual Changes](/help/upgrade-guides/canvas-v14-upgrade-guide/#tab=visual-changes) page for a visual reference of what's changed.**
+**Please consult our
+[v14 Visual Changes](/help/upgrade-guides/canvas-v14-upgrade-guide/#tab=visual-changes) page for a
+visual reference of what's changed.**
 
 > **Note:** While v14 does not require an upgrade to our v3 tokens, we strongly advise to upgrade to
 > the latest to ensure proper branding.
@@ -66,10 +68,10 @@ styling updates to our components.
 
 ## LLM Assisted Migration <StorybookStatusIndicator type="ai" />
 
-We provide a **LLM migration mapping file** (`llm-canvas-kit-upgrade-guide-v14.txt`) specifically designed for
-use with LLM-based code assistants (such as [Cursor](https://www.cursor.so/) or similar tools). This
-file is not intended for direct human reference or team documentation, but rather as structured
-input for LLMs to automate and assist with your token migration process.
+We provide a **LLM migration mapping file** (`llm-canvas-kit-upgrade-guide-v14.txt`) specifically
+designed for use with LLM-based code assistants (such as [Cursor](https://www.cursor.so/) or similar
+tools). This file is not intended for direct human reference or team documentation, but rather as
+structured input for LLMs to automate and assist with your token migration process.
 
 > **Important:** LLMs can make mistakes. Please review changes to be sure they are correct using our
 > docs and upgrade guides.
@@ -84,8 +86,8 @@ This file contains a compiled LLM consumption version of this v14 Upgrade Guide.
   migration
 
 <DownloadLLMFile
-  rawFileDir="https://raw.githubusercontent.com/Workday/canvas-kit/master/modules/docs/llm-txt/llm-canvas-kit-upgrade-guide-v14.txt"
-  filenames="llm-canvas-kit-upgrade-guide-v14.txt"
+  rawFileLink="https://raw.githubusercontent.com/Workday/canvas-kit/master/modules/docs/llm-txt/llm-canvas-kit-upgrade-guide-v14.txt"
+  filename="llm-canvas-kit-upgrade-guide-v14.txt"
 />
 
 ## Codemod
@@ -248,7 +250,8 @@ someFunction(ErrorType.Caution);
 
 ### New Documentation
 
-We've **significantly** improved our theming documentation. Please consult our new [Canvas Kit Theming Guide](/get-started/for-developers/theming/overview/).
+We've **significantly** improved our theming documentation. Please consult our new
+[Canvas Kit Theming Guide](/get-started/for-developers/theming/overview/).
 
 ### Canvas Provider 🚨
 
@@ -264,7 +267,10 @@ Canvas Provider has been updated to **remove** default branding colors to ensure
 our CSS variables. Instead of generating a palette and shifting the brightness and darkness with
 `chroma.js`, we use `oklch` to generate the palette colors.
 
-Prior to v14, `CanvasProvider` created a [cascade barrier](/get-started/for-developers/theming/overview/#what-is-a-cascade-barrier), which redefined brand CSS variables under a class and created a higher specificity. This made it difficult to override brand tokens in certain scenarios. v14 removes that barrier.
+Prior to v14, `CanvasProvider` created a
+[cascade barrier](/get-started/for-developers/theming/overview/#what-is-a-cascade-barrier), which
+redefined brand CSS variables under a class and created a higher specificity. This made it difficult
+to override brand tokens in certain scenarios. v14 removes that barrier.
 
 **Before in v13** In v13, the `useTheme` hook would call `createCanvasTheme` which generated a
 palette given a `main` color via `chroma.js`.
@@ -323,7 +329,6 @@ different. If you want more control over the colors, we suggest providing the fu
 The reason for this change is to ensure that the CSS variables properly cascade to all components.
 Before in v13, the `CanvasProvider` would add the brand tokens under a class name, creating a higher
 specificity.
-
 
 ### useIsRTL
 
@@ -395,9 +400,9 @@ revolve around the use of our new brand colors. For a better guide on what has c
 tokens, please view the Tokens v3.0.0
 [Upgrade Guide](https://workday.github.io/canvas-tokens/?path=/docs/guides-upgrade-guides-v3-overview--docs).
 
-
-The following components have been updated (**see [v14 Visual Changes](/help/upgrade-guides/canvas-v14-upgrade-guide/#tab=visual-changes) for a visual reference of the updates**):
-
+The following components have been updated (**see
+[v14 Visual Changes](/help/upgrade-guides/canvas-v14-upgrade-guide/#tab=visual-changes) for a visual
+reference of the updates**):
 
 - `Breadcrumbs`
   [#3270](https://github.com/Workday/canvas-kit/pull/3270),[#3447](https://github.com/Workday/canvas-kit/pull/3447)
