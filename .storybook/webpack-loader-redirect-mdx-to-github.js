@@ -12,9 +12,8 @@ function webpackLoaderRedirectMDXToGithub(source) {
   // find absolute paths that match something in routes
   return source
     .replace(/\[([^\]]+)\]\((\/[^\)]+)\)/g, function replacer(_match, p1, p2) {
-      const [url, hash] = p2.split('#');
-      if (routeKeys.includes(url)) {
-        return `[${p1}](?path=/docs/${routes[url]}${hash ? '#' + hash : ''})`;
+      if (routeKeys.includes(p2)) {
+        return `[${p1}](?path=/docs/${routes[p2]})`;
       }
       // no match, return original
       return `[${p1}](${p2})`;
