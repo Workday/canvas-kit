@@ -62,7 +62,9 @@ export const appletIconStyles = ({
   };
 };
 
-export interface AppletIconProps extends AppletIconStyles, Pick<SvgProps, 'shouldMirror' | 'cs'> {
+export interface AppletIconProps
+  extends AppletIconStyles,
+    Pick<SvgProps, 'shouldMirror' | 'shouldMirrorInRTL' | 'cs'> {
   /**
    * The icon to display from `@workday/canvas-applet-icons-web`.
    */

@@ -10,6 +10,7 @@ export interface ToolbarIconButtonProps extends Omit<TertiaryButtonProps, 'size'
   onToggleChange?: (toggled: boolean | undefined) => void;
   toggled?: boolean;
   shouldMirrorIcon?: boolean;
+  shouldMirrorIconInRTL?: boolean;
 }
 
 export const toolbarIconButtonStencil = createStencil({
@@ -74,6 +75,7 @@ export const ToolbarIconButton = createComponent('button')({
       onToggleChange,
       icon,
       shouldMirrorIcon = false,
+      shouldMirrorIconInRTL = false,
       toggled,
       children,
       ...elemProps
@@ -101,7 +103,15 @@ export const ToolbarIconButton = createComponent('button')({
         aria-pressed={toggled}
         {...handleCsProp(elemProps, toolbarIconButtonStencil())}
       >
-        {icon ? <BaseButton.Icon icon={icon} shouldMirrorIcon={shouldMirrorIcon} /> : children}
+        {icon ? (
+          <BaseButton.Icon
+            icon={icon}
+            shouldMirrorIcon={shouldMirrorIcon}
+            shouldMirrorIconInRTL={shouldMirrorIconInRTL}
+          />
+        ) : (
+          children
+        )}
       </BaseButton>
     );
   },

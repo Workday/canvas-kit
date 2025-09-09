@@ -4,7 +4,6 @@ import {
   GrowthBehavior,
   useForkRef,
   styled,
-  useIsRTL,
   useUniqueId,
   filterOutProps,
 } from '@workday/canvas-kit-react/common';
@@ -240,9 +239,6 @@ export const Combobox = ({
     }
   }, [getStatusText, interactiveAutocompleteItems, isOpened]);
 
-  // Used to set the position of the reset button and the padding direction inside the input container
-  const isRTL = useIsRTL();
-
   const setInputValue = useCallback(
     (newValue: string) => {
       _setValue(newValue);
@@ -434,10 +430,9 @@ export const Combobox = ({
   const renderChildren = (inputElement: React.ReactElement<TextInputProps>): React.ReactNode => {
     let cssOverride: CSSObject = {':focus': {zIndex: 2}};
     if (showClearButton) {
-      const paddingDirection = isRTL ? 'paddingLeft' : 'paddingRight';
       cssOverride = {
         ...cssOverride,
-        [paddingDirection]: space.xl,
+        paddingInlineEnd: space.xl,
       };
     }
     const newTextInputProps: Partial<

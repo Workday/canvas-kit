@@ -95,7 +95,7 @@ export const CustomPlacement = {
 export const PopperRTL = () => (
   <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
     <Popper open={true}>
-      <Popup.Card style={{animation: 'none'}} width={300}>
+      <Popup.Card style={{animation: 'none'}} width={300} dir="rtl">
         <Popup.CloseIcon aria-label="" />
         <Popup.Heading>למחוק פריט</Popup.Heading>
         <Popup.Body>האם ברצונך למחוק פריט זה</Popup.Body>

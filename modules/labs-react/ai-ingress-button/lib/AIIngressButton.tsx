@@ -5,7 +5,10 @@ import {system, base} from '@workday/canvas-tokens-web';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {getAIIngressIcon} from './AIIngressIcon';
 export interface AIIngressButtonProps
-  extends Omit<BaseButtonProps, 'size' | 'colors' | 'icon' | 'iconPosition' | 'shouldMirrorIcon'> {
+  extends Omit<
+    BaseButtonProps,
+    'size' | 'colors' | 'icon' | 'iconPosition' | 'shouldMirrorIcon' | 'shouldMirrorIconInRTL'
+  > {
   /**
    * When true, indicates that the AI Ingress button is toggled.
    */
