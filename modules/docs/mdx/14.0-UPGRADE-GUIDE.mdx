@@ -1,4 +1,5 @@
 import {Meta} from '@storybook/addon-docs';
+import {StorybookStatusIndicator, DownloadLLMFile} from '@workday/canvas-kit-docs';
 
 <Meta title="Guides/Upgrade Guides/v14.0/Overview" />
 
@@ -20,6 +21,7 @@ styling updates to our components.
 
 ## Table of contents
 
+- [LLM Assisted Migration](#llm)
 - [Codemod](#codemod)
   - [Instructions](#instructions)
 - [Tokens](#tokens)
@@ -61,6 +63,30 @@ styling updates to our components.
   - [Main](#main)
   - [Preview](#preview)
   - [Labs](#labs)
+
+## LLM Assisted Migration <StorybookStatusIndicator type="ai" />
+
+We provide a **LLM migration mapping file** (`llm-canvas-kit-upgrade-guide-v14.txt`) specifically designed for
+use with LLM-based code assistants (such as [Cursor](https://www.cursor.so/) or similar tools). This
+file is not intended for direct human reference or team documentation, but rather as structured
+input for LLMs to automate and assist with your token migration process.
+
+> **Important:** LLMs can make mistakes. Please review changes to be sure they are correct using our
+> docs and upgrade guides.
+
+This file contains a compiled LLM consumption version of this v14 Upgrade Guide.
+
+**How to use:**
+
+- **View raw file**: Open the file in a new tab to see the complete migration mapping
+- **Download as txt**: Save the file locally to upload or paste into your LLM/code assistant
+- **Use with LLM**: Provide the raw content to your LLM/code assistant as context for automated
+  migration
+
+<DownloadLLMFile
+  rawFileDir="https://raw.githubusercontent.com/Workday/canvas-kit/master/modules/docs/llm-txt/llm-canvas-kit-upgrade-guide-v14.txt"
+  filenames="llm-canvas-kit-upgrade-guide-v14.txt"
+/>
 
 ## Codemod
 
@@ -118,19 +144,22 @@ yarn canvas-kit-codemod v14 [path]
 yarn remove @workday/canvas-kit-codemod
 ```
 
-> **Note**: The codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` files. You'll need to
+> **Note:** The codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` files. You'll need to
 > manually edit other file types (`.json`, `.mdx`, `.md`, etc.). You may need to run your linter
 > after executing the codemod, as its resulting formatting (spacing, quotes, etc.) may not match
 > your project conventions.
 
 ## Tokens
 
-Canvas Kit v14 now uses `@workday/canvas-tokens-web` v3, which introduces new color palettes and
+Canvas Kit v14 uses `@workday/canvas-tokens-web` v3, which introduces new color palettes and
 deprecates the old "fruity" color names (for example, use `red` instead of `cinnamon`, `blue`
 instead of `blueberry`, and `green` instead of `greenApple`). We strongly recommend upgrading to
 `@workday/canvas-tokens-web` v3, as using older versions will not match the new brand guidelines or
 color system. Although this dependency upgrade is not required, we've offered migration guides and
 codemods separately from the v14 upgrade so that teams can upgrade when they can.
+
+For more information and changes, please view our
+[Tokens v3 Upgrade Guide](https://workday.github.io/canvas-tokens/?path=/guides-upgrade-guides-v3-overview--docs).
 
 > **Note:** v3 Tokens should be backwards compatible with older versions of Canvas Kit.
 
@@ -675,8 +704,8 @@ Variant names of the preview `StatusIndicator` have been updated by the followin
 - `gray` → `neutral`
 
 The `StatusIndicatorVariant` type has been updated to contain the new variant names listed above. If
-you use the old variant values, update to use the new ones mapped above. It has also been
-deprecated. Use `StatusIndicatorProps['variant']` instead.
+you use the old variant values, update to use the new ones mapped above. Use
+`StatusIndicatorProps['variant']` instead.
 
 **Before in v13**
 
