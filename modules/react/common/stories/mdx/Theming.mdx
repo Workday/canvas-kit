@@ -213,6 +213,21 @@ you can also use the `:dir` [pseudo selector](https://developer.mozilla.org/en-U
 
 <ExampleCodeBlock code={RTL} />
 
+### Resetting to Default Brand Theme
+
+If you need to reset the theme in parts of your application, there's a few ways to do this.
+We export a `defaultBranding` class that can be applied to the `CanvasProvider` which can wrap parts of your application.
+
+```tsx
+import {CanvasProvider, defaultBranding} from "@workday/canvas-kit-react/common"
+
+<CanvasProvider className={defaultBranding}>
+	<SomeSubComponent/>
+</CanvasProvider>
+```
+
+> **Note:** Doing the following **will create a cascade barrier**. Only use this method if you intentionally want to override the default theme.
+
 ## Migration Guide
 
 ### Step 1: Identify Current Theme Usage
