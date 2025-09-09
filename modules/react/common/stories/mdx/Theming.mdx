@@ -8,54 +8,67 @@ import {Theming} from './examples/Theming';
 
 ## Overview
 
-Canvas Kit v14 introduces a significant shift in our approach to theming: we've moved away from JavaScript-based theme objects to CSS variables. This change provides better performance, improved developer experience, and greater flexibility for theming applications.
+Canvas Kit v14 introduces a significant shift in our approach to theming: we've moved away from
+JavaScript-based theme objects to CSS variables. This change provides better performance, improved
+developer experience, and greater flexibility for theming applications.
 
 ## Migration from v10 Theme Prop to v14 CSS Variables
 
 ### The Evolution
 
-**Canvas Kit v10** introduced CSS tokens through the `@workday/canvas-tokens-web` package, providing a foundation for consistent design system values.
+**Canvas Kit v10** introduced CSS tokens through the `@workday/canvas-tokens-web` package, providing
+a foundation for consistent design system values.
 
-**Canvas Kit v14** Removes the cascade barrier created by the `CanvasProvider`, allowing CSS variables to work as intended.
+**Canvas Kit v14** Removes the cascade barrier created by the `CanvasProvider`, allowing CSS
+variables to work as intended.
 
 ## Old Approach (v10-v13)
 
 The old theming approach used JavaScript objects passed to the `CanvasProvider` theme prop:
 
 ```tsx
-import {CanvasProvider} from "@workday/canvas-kit-react/common"
-import {base} from "@workday/canvas-tokens-web"
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {base} from '@workday/canvas-tokens-web';
 
 <CanvasProvider theme={{canvas: {palette: {primary: {main: 'purple'}}}}}>
-   <App/>
-</CanvasProvider>
+  <App />
+</CanvasProvider>;
 ```
 
 This would use `chroma.js` to generate a palette based on the `main` color provided.
 
 **Why we're moving away from this approach:**
+
 - Performance overhead from JavaScript theme object processing
 - Limited flexibility for complex theming scenarios
 - Inconsistent cascade behavior
 
-Any time `theme` is passed, the `CanvasProvider` would generate a palette and attach brand variables via a `className` scoping those brand variables to a wrapping div.
-In order for us to provide a better solution to theming that is scalable and is more aligned with our CSS variables, we changed this approach.
+Any time `theme` is passed, the `CanvasProvider` would generate a palette and attach brand variables
+via a `className` scoping those brand variables to a wrapping div. In order for us to provide a
+better solution to theming that is scalable and is more aligned with our CSS variables, we changed
+this approach.
 
 ## What is a Cascade Barrier?
 
-When we say "cascade barrier", we're talking about how [CSS cascades](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascade/Cascade) and takes precedence. Take the following example:
+When we say "cascade barrier", we're talking about how
+[CSS cascades](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascade/Cascade) and takes
+precedence. Take the following example:
 
 ```css
 :root {
-	--cnbvs-brand-primary-base: blue;
+  --cnbvs-brand-primary-base: blue;
 }
 
 // the element with the class .my-app will have a higher specificity than root, creating a barrier where the CSS variables gets redefined and takes precedence over what is defined at root.
 .my-app {
-	--cnvs-brand-primary-base: red;
+  --cnvs-brand-primary-base: red;
 }
 ```
-In the case of the `CanvasProvider` prior to v14, all our brand tokens where defined within a class and scoped to the `div` that the `CanvasProvider` created. This meant that anything set on `:root` or outside of the `CanvasProvider` would not be able to cascade down to the components within the `CanvasProvider`.
+
+In the case of the `CanvasProvider` prior to v14, all our brand tokens where defined within a class
+and scoped to the `div` that the `CanvasProvider` created. This meant that anything set on `:root`
+or outside of the `CanvasProvider` would not be able to cascade down to the components within the
+`CanvasProvider`.
 
 ## ✅ Preferred Approach (v14+)
 
@@ -63,7 +76,8 @@ Canvas Kit v14 promotes using CSS variables for theming, which can be applied in
 
 ### Method 1: Global CSS Variables (Recommended)
 
-Apply theming at the global level by importing CSS variable files and overriding values in your root CSS:
+Apply theming at the global level by importing CSS variable files and overriding values in your root
+CSS:
 
 ```css
 /* index.css */
@@ -83,13 +97,17 @@ Apply theming at the global level by importing CSS variable files and overriding
 }
 ```
 
-> **Note:** You should only import the CSS variables *once* at the root level of your application. If your application renders within another environment that imports these and sets them, **do not** re import them.
+> **Note:** You should only import the CSS variables _once_ at the root level of your application.
+> If your application renders within another environment that imports these and sets them, **do
+> not** re import them.
 
 ### Method 2: Provider-Level CSS Variables
 
-Use Canvas Kit's `createStyles` utility to generate themed class names that can be applied to specific components or sections:
+Use Canvas Kit's `createStyles` utility to generate themed class names that can be applied to
+specific components or sections:
 
-> **Note:** Doing the following **will create a cascade barrier**. Only use this method if you intentionally want to override the default theme.
+> **Note:** Doing the following **will create a cascade barrier**. Only use this method if you
+> intentionally want to override the default theme.
 
 ```tsx
 import {createStyles}from "@workday/canvas-kit-styling"
@@ -122,7 +140,9 @@ const themedBrand = createStyles({
 Canvas Kit provides three layers of CSS variables.
 
 ### Base Tokens (`base/_variables.css`)
+
 Base tokens define foundation palette and design values.
+
 ```css
 --cnvs-base-palette-blue-600: oklch(0.5198 0.1782 256.11 / 1);
 --cnvs-base-palette-magenta-600: oklch(0.534 0.183 344.19 / 1);
@@ -131,7 +151,9 @@ Base tokens define foundation palette and design values.
 ```
 
 ### Brand Tokens (`brand/_variables.css`)
+
 Brand tokens define semantic color assignments.
+
 ```css
 --cnvs-brand-primary-base: var(--cnvs-base-palette-blue-600);
 --cnvs-brand-primary-accent: var(--cnvs-base-palette-neutral-0);
@@ -140,7 +162,9 @@ Brand tokens define semantic color assignments.
 ```
 
 ### System Tokens (`system/_variables.css`)
+
 System tokens define component-specific values.
+
 ```css
 --cnvs-sys-color-bg-primary-default: var(--cnvs-base-palette-blue-600);
 --cnvs-sys-color-text-primary-default: var(--cnvs-base-palette-blue-600);
@@ -172,10 +196,10 @@ System tokens define component-specific values.
 ### App-Specific Theming
 
 ```tsx
-import {createStyles} from "@workday/canvas-kit-styling";
-import {brand, base} from "@workday/canvas-tokens-web";
-import {PrimaryButton} from "@workday/canvas-kit-react/button";
-import {CanvasProvider} from "@workday/canvas-kit-react/common";
+import {createStyles} from '@workday/canvas-kit-styling';
+import {brand, base} from '@workday/canvas-tokens-web';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 
 const greenTheme = createStyles({
   [brand.primary.base]: base.green600,
@@ -189,7 +213,7 @@ const greenTheme = createStyles({
 
 <CanvasProvider className={greenTheme}>
   <PrimaryButton>Click me</PrimaryButton>
-</CanvasProvider>
+</CanvasProvider>;
 ```
 
 <ExampleCodeBlock code={Theming} />
@@ -198,7 +222,7 @@ const greenTheme = createStyles({
 
 ```css
 /* Dark mode theming */
-[data-theme="dark"] {
+[data-theme='dark'] {
   --cnvs-sys-color-bg-default: var(--cnvs-base-palette-neutral-950);
   --cnvs-sys-color-text-default: var(--cnvs-base-palette-neutral-50);
   --cnvs-sys-color-border-container: var(--cnvs-base-palette-slate-700);
@@ -207,25 +231,30 @@ const greenTheme = createStyles({
 ```
 
 ### RTL Support
-Canvas Kit supports RTL out of the box. Our components are styled to use [CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values). If you want to add additional styles based on RTL,
-you can also use the `:dir` [pseudo selector](https://developer.mozilla.org/en-US/docs/Web/CSS/:dir).
+
+Canvas Kit supports RTL out of the box. Our components are styled to use
+[CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values).
+If you want to add additional styles based on RTL, you can also use the `:dir`
+[pseudo selector](https://developer.mozilla.org/en-US/docs/Web/CSS/:dir).
 
 <ExampleCodeBlock code={RTL} />
 
 ### Resetting to Default Brand Theme
 
-If you need to reset the theme in parts of your application, there's a few ways to do this.
-We export a `defaultBranding` class that can be applied to the `CanvasProvider` which can wrap parts of your application.
+If you need to reset the theme in parts of your application, there's a few ways to do this. We
+export a `defaultBranding` class that can be applied to the `CanvasProvider` which can wrap parts of
+your application.
 
 ```tsx
-import {CanvasProvider, defaultBranding} from "@workday/canvas-kit-react/common"
+import {CanvasProvider, defaultBranding} from '@workday/canvas-kit-react/common';
 
 <CanvasProvider className={defaultBranding}>
-	<SomeSubComponent/>
-</CanvasProvider>
+  <SomeSubComponent />
+</CanvasProvider>;
 ```
 
-> **Note:** Doing the following **will create a cascade barrier**. Only use this method if you intentionally want to override the default theme.
+> **Note:** Doing the following **will create a cascade barrier**. Only use this method if you
+> intentionally want to override the default theme.
 
 ## Migration Guide
 
@@ -278,22 +307,24 @@ Replace theme-based `CanvasProvider` usage with CSS class-based theming.
 </CanvasProvider>
 ```
 
-> **Note:** Using a class means you will need to define each property of the palette for full control over theming.
+> **Note:** Using a class means you will need to define each property of the palette for full
+> control over theming.
 
 ### Step 4: Test Component Rendering
 
 Verify that Canvas Kit components (like `PrimaryButton`) correctly use the new CSS variables.
 
 ```tsx
-import {PrimaryButton} from "@workday/canvas-kit-react/button";
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
 
 // This should automatically use your CSS variable overrides
-<PrimaryButton>Themed Button</PrimaryButton>
+<PrimaryButton>Themed Button</PrimaryButton>;
 ```
 
 ## Best Practices
 
 ### 1. Use Semantic Token Names
+
 Use brand tokens instead of base tokens for better maintainability.
 
 ```css
@@ -304,8 +335,8 @@ Use brand tokens instead of base tokens for better maintainability.
 --cnvs-base-palette-blue-600: blue;
 ```
 
-
 ### 2. Test Accessibility
+
 Ensure color combinations meet accessibility standards.
 
 ```css
@@ -318,7 +349,8 @@ Ensure color combinations meet accessibility standards.
 
 ### 3. Avoid Component Level Theming
 
-Theming is meant to be done at the app level or root level of the application. Avoid theming at the component level.
+Theming is meant to be done at the app level or root level of the application. Avoid theming at the
+component level.
 
 ```tsx
 /* ✅ Good - App level theming */
@@ -351,9 +383,11 @@ const myCustomTheme = createStyles({
 
 ## Component Compatibility
 
-All Canvas Kit components in v14 automatically consume CSS variables. No component-level changes are required when switching from the theme prop approach to CSS variables.
+All Canvas Kit components in v14 automatically consume CSS variables. No component-level changes are
+required when switching from the theme prop approach to CSS variables.
 
 ### Supported Components
+
 - ✅ All Button variants (`PrimaryButton`, `SecondaryButton`, etc.)
 - ✅ Form components (`TextInput`, `FormField`, etc.)
 - ✅ Layout components (`Card`, `Modal`, etc.)
@@ -371,9 +405,12 @@ The CSS variable approach provides several performance improvements:
 ## Troubleshooting
 
 ### Theme Not Applied
+
 Ensure CSS variable files are imported in the correct order.
 
->**Note:** You should only import the CSS variables *once* at the root level of your application. If your application renders within another environment that imports these and sets them, **do not** re import them.
+> **Note:** You should only import the CSS variables _once_ at the root level of your application.
+> If your application renders within another environment that imports these and sets them, **do
+> not** re import them.
 
 ```css
 /* Correct order */
@@ -388,6 +425,7 @@ Ensure CSS variable files are imported in the correct order.
 ```
 
 ### Inconsistent Theming
+
 Check for CSS specificity issues.
 
 ```css
@@ -403,10 +441,11 @@ Check for CSS specificity issues.
 ```
 
 ### Missing Token Values
+
 Verify all required CSS token files are imported and token names are correct.
 
 ```tsx
-import {brand, base, system} from "@workday/canvas-tokens-web";
+import {brand, base, system} from '@workday/canvas-tokens-web';
 
 // Check token availability in development
 console.log(brand.primary.base); // Should output CSS variable name
@@ -414,6 +453,9 @@ console.log(brand.primary.base); // Should output CSS variable name
 
 ## Conclusion
 
-The migration to CSS variables in Canvas Kit v14 provides a more performant, flexible, and maintainable theming solution. By following this guide and best practices, you can successfully migrate your applications and take advantage of the improved theming capabilities.
+The migration to CSS variables in Canvas Kit v14 provides a more performant, flexible, and
+maintainable theming solution. By following this guide and best practices, you can successfully
+migrate your applications and take advantage of the improved theming capabilities.
 
-For additional support and examples, refer to the Canvas Kit Storybook documentation and the `@workday/canvas-tokens` [repository](https://github.com/Workday/canvas-tokens).
+For additional support and examples, refer to the Canvas Kit Storybook documentation and the
+`@workday/canvas-tokens` [repository](https://github.com/Workday/canvas-tokens).
