@@ -26,6 +26,7 @@ any questions.
   - [Pill](#pill)
   - [SearchForm](#search-form)
   - [Status Indicator (Preview)](#status-indicator-preview)
+  - [Icons](#icons)
 - [Deprecations](#deprecations)
   - [Avatar in Main](#avatar-in-main)
   - [Combobox (Labs)](#combobox-labs)
@@ -34,6 +35,7 @@ any questions.
   - [Segmented Control (Main)](#segmented-control-main)
   - [Side Panel (Main)](#side-panel-main)
   - [Tokens](#tokens)
+  - [useIsRTL](#useisrtl)
 - [Removals](#removals)
   - [Deprecated Buttons](#deprecated-buttons)
   - [Input Provider](#input-provider)
@@ -181,6 +183,16 @@ different. If you want more control over the colors, we suggest providing the fu
 The reason for this change is to ensure that the CSS variables properly cascade to all components.
 Before in v13, the `CanvasProvider` would add the brand tokens under a class name, creating a higher
 specificity.
+
+### useIsRTL
+
+**PR:** [#3480](https://github.com/Workday/canvas-kit/pull/3477)
+
+The `useIsRTL` hook has been deprecated. Please use
+[CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties)
+for styling, `isElementRTL` for event handlers, and `shouldMirrorInRTL` for icons. If you need
+`useIsRTL` for any other reason, please file a issue. See the [Icons](#icons) section for more
+details on the new `shouldMirrorInRTL` prop.
 
 ## Component Updates
 
@@ -510,6 +522,34 @@ Variant names of the preview `StatusIndicator` have been updated by the followin
 The `StatusIndicatorVariant` type has been updated to contain the new variant names listed above. If
 you use the old variant values, update to use the new ones mapped above. It has also been
 deprecated. Use `StatusIndicatorProps['variant']` instead.
+
+### Icons
+
+**PR:** [#3477](https://github.com/Workday/canvas-kit/pull/3477)
+
+`shouldMirrorInRTL` has been added to `Icon` components (`SVG`, `SystemIcon`, `AccentIcon`,
+`AppletIcon`, `SystemIconCircle`, `AIIngressButton`, `BaseButton.Icon`, `Button`,
+`ToolbarDropdownButton`, `ToolbarIconButton`, `ButtonLabelIcon`, `PrimaryButton`, `SecondaryButton`,
+and `TertiaryButton`). This is used to mirror the icon when the content direction is `rtl`. This is
+meant to replace `useIsRTL` combined with the `shouldMirror` prop. Instead of getting the content
+direction from JavaScript and passing to components, you can now pass `shouldMirrorInRTL={true}` to
+the component which will mirror the icon only when the content direction is `rtl`.
+
+**Before in v13**
+
+```tsx
+<IconComponent shouldMirror={useIsRTL()} />
+```
+
+**After in v14**
+
+```tsx
+<IconComponent shouldMirrorInRTL />
+```
+
+You can still use `shouldMirror` if you intend to always mirror an icon. This is less ideal because
+you cannot use `shouldMirror` and `shouldMirrorInRTL` together. The icon will be mirrored regardless
+of content direction if both props are used.
 
 ## Deprecations
 

@@ -68,13 +68,27 @@ export const toolbarDropdownButtonStencil = createStencil({
         },
       }),
     },
+    shouldMirrorIconInRTL: {
+      true: ({customIconPart}) => ({
+        [`&:dir(rtl) ${customIconPart}`]: {
+          marginInlineEnd: 0,
+          marginInlineStart: px2rem(2),
+        },
+      }),
+    },
   },
 });
 
 export const ToolbarDropdownButton = createComponent('button')({
   displayName: 'ToolbarDropdownButton',
   Component: (
-    {icon, shouldMirrorIcon = false, children, ...elemProps}: ToolbarDropdownButtonProps,
+    {
+      icon,
+      shouldMirrorIcon = false,
+      shouldMirrorIconInRTL = false,
+      children,
+      ...elemProps
+    }: ToolbarDropdownButtonProps,
     ref,
     Element
   ) => {
@@ -83,13 +97,17 @@ export const ToolbarDropdownButton = createComponent('button')({
         ref={ref}
         as={Element}
         size="small"
-        {...handleCsProp(elemProps, toolbarDropdownButtonStencil({shouldMirrorIcon}))}
+        {...handleCsProp(
+          elemProps,
+          toolbarDropdownButtonStencil({shouldMirrorIcon, shouldMirrorIconInRTL})
+        )}
       >
         {icon ? (
           <BaseButton.Icon
             className="wdc-toolbar-dropdown-btn-custom-icon"
             icon={icon}
             shouldMirrorIcon={shouldMirrorIcon}
+            shouldMirrorIconInRTL={shouldMirrorIconInRTL}
             {...toolbarDropdownButtonStencil.parts.customIcon}
           />
         ) : (
@@ -99,6 +117,7 @@ export const ToolbarDropdownButton = createComponent('button')({
           className="wdc-toolbar-dropdown-btn-arrow"
           icon={chevronDownSmallIcon}
           shouldMirrorIcon={shouldMirrorIcon}
+          shouldMirrorIconInRTL={shouldMirrorIconInRTL}
           {...toolbarDropdownButtonStencil.parts.chevron}
         />
       </BaseButton>

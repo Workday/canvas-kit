@@ -40,11 +40,6 @@ export interface ButtonContainerProps extends Partial<SystemIconProps>, GrowthBe
    * @default 'start'
    */
   iconPosition?: IconPositions;
-  /**
-   * If set to `true`, transform the icon's x-axis to mirror the graphic
-   * @default false
-   */
-  shouldMirrorIcon?: boolean;
   children?: React.ReactNode;
 }
 
@@ -131,6 +126,7 @@ export const buttonStencil = createStencil({
     lineHeight: 'normal',
     letterSpacing: '0.015rem',
     fontWeight: system.fontWeight.bold,
+    test: system.color.text.default,
     backgroundColor: cssVar(
       buttonColorPropVars.default.background,
       cssVar(background, 'transparent')
@@ -406,7 +402,6 @@ export const BaseButton = createComponent('button')({
       iconPosition,
       icon,
       colors,
-      shouldMirrorIcon = false,
       ...elemProps
     }: ButtonContainerProps,
     ref,
