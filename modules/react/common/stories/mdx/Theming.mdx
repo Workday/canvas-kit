@@ -188,9 +188,8 @@ const greenTheme = createStyles({
 });
 
 <CanvasProvider className={greenTheme}>
-    <PrimaryButton>Click me</PrimaryButton>
-  </CanvasProvider>
-);
+  <PrimaryButton>Click me</PrimaryButton>
+</CanvasProvider>
 ```
 
 <ExampleCodeBlock code={Theming} />
@@ -373,6 +372,8 @@ The CSS variable approach provides several performance improvements:
 
 ### Theme Not Applied
 Ensure CSS variable files are imported in the correct order.
+
+>**Note:** You should only import the CSS variables *once* at the root level of your application. If your application renders within another environment that imports these and sets them, **do not** re import them.
 
 ```css
 /* Correct order */
