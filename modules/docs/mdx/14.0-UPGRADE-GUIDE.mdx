@@ -41,6 +41,7 @@ styling updates to our components.
   - [Pill (Preview)](#pill-preview)
   - [Search Form (Labs)](#searchform-)
   - [Status Indicator (Preview)](#status-indicator-preview-)
+  - [Icons](#icons)
 - [Deprecations](#deprecations)
   - [Avatar (Main)](#avatar-in-main)
   - [Combobox (Labs)](#combobox-labs)
@@ -49,6 +50,7 @@ styling updates to our components.
   - [Segmented Control (Main)](#segmented-control-main)
   - [Side Panel (Main)](#side-panel-main)
   - [Tokens](#tokens)
+  - [useIsRTL](#useisrtl)
 - [Removals](#removals)
   - [Deprecated Buttons](#deprecated-buttons)
   - [Input Provider](#input-provider)
@@ -322,6 +324,17 @@ The reason for this change is to ensure that the CSS variables properly cascade 
 Before in v13, the `CanvasProvider` would add the brand tokens under a class name, creating a higher
 specificity.
 
+
+### useIsRTL
+
+**PR:** [#3480](https://github.com/Workday/canvas-kit/pull/3477)
+
+The `useIsRTL` hook has been deprecated. Please use
+[CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties)
+for styling, `isElementRTL` for event handlers, and `shouldMirrorInRTL` for icons. If you need
+`useIsRTL` for any other reason, please file a issue. See the [Icons](#icons) section for more
+details on the new `shouldMirrorInRTL` prop.
+
 ## Component Updates
 
 ### Avatar (Preview)
@@ -382,7 +395,9 @@ revolve around the use of our new brand colors. For a better guide on what has c
 tokens, please view the Tokens v3.0.0
 [Upgrade Guide](https://workday.github.io/canvas-tokens/?path=/docs/guides-upgrade-guides-v3-overview--docs).
 
+
 The following components have been updated (**see [v14 Visual Changes](/help/upgrade-guides/canvas-v14-upgrade-guide/#tab=visual-changes) for a visual reference of the updates**):
+
 
 - `Breadcrumbs`
   [#3270](https://github.com/Workday/canvas-kit/pull/3270),[#3447](https://github.com/Workday/canvas-kit/pull/3447)
@@ -711,6 +726,34 @@ you use the old variant values, update to use the new ones mapped above. Use
 <StatusIndicator variant="critical" />
 <StatusIndicator variant="neutral" />
 ```
+
+### Icons
+
+**PR:** [#3477](https://github.com/Workday/canvas-kit/pull/3477)
+
+`shouldMirrorInRTL` has been added to `Icon` components (`SVG`, `SystemIcon`, `AccentIcon`,
+`AppletIcon`, `SystemIconCircle`, `AIIngressButton`, `BaseButton.Icon`, `Button`,
+`ToolbarDropdownButton`, `ToolbarIconButton`, `ButtonLabelIcon`, `PrimaryButton`, `SecondaryButton`,
+and `TertiaryButton`). This is used to mirror the icon when the content direction is `rtl`. This is
+meant to replace `useIsRTL` combined with the `shouldMirror` prop. Instead of getting the content
+direction from JavaScript and passing to components, you can now pass `shouldMirrorInRTL={true}` to
+the component which will mirror the icon only when the content direction is `rtl`.
+
+**Before in v13**
+
+```tsx
+<IconComponent shouldMirror={useIsRTL()} />
+```
+
+**After in v14**
+
+```tsx
+<IconComponent shouldMirrorInRTL />
+```
+
+You can still use `shouldMirror` if you intend to always mirror an icon. This is less ideal because
+you cannot use `shouldMirror` and `shouldMirrorInRTL` together. The icon will be mirrored regardless
+of content direction if both props are used.
 
 ## Deprecations
 

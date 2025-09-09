@@ -79,7 +79,15 @@ export const accentIconStencil = createStencil({
 export const AccentIcon = createComponent('span')({
   displayName: 'AccentIcon',
   Component: (
-    {transparent, size, icon, color, shouldMirror, ...elemProps}: AccentIconProps,
+    {
+      transparent,
+      size,
+      icon,
+      color,
+      shouldMirror,
+      shouldMirrorInRTL,
+      ...elemProps
+    }: AccentIconProps,
     ref,
     Element
   ) => {
@@ -94,6 +102,7 @@ export const AccentIcon = createComponent('span')({
             color: transformColorNameToToken(color),
             size: typeof size === 'number' ? px2rem(size) : undefined,
             shouldMirror,
+            shouldMirrorInRTL,
             transparent,
           }),
         ])}
