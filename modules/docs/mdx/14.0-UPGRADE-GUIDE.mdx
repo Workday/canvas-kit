@@ -1,4 +1,5 @@
 import {Meta} from '@storybook/addon-docs';
+import {StorybookStatusIndicator, DownloadLLMFile} from '@workday/canvas-kit-docs';
 
 <Meta title="Guides/Upgrade Guides/v14.0/Overview" />
 
@@ -13,12 +14,15 @@ any questions.
 v14.0 Introduces Workday's new brand direction which includes a new color palette and with it, some
 styling updates to our components.
 
-- For a list of visual changes, please view our v14 visual changes doc [here](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v14-0-visual-changes--docs).
+- For a list of visual changes, please view our v14 visual changes doc
+  [here](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v14-0-visual-changes--docs).
 
-> **Note:** While v14 does not require an upgrade to our v3 tokens, we strongly advise to upgrade to the latest to ensure proper branding.
+> **Note:** While v14 does not require an upgrade to our v3 tokens, we strongly advise to upgrade to
+> the latest to ensure proper branding.
 
 ## Table of contents
 
+- [LLM Assisted Migration](#llm)
 - [Codemod](#codemod)
   - [Instructions](#instructions)
 - [Tokens](#tokens)
@@ -57,6 +61,30 @@ styling updates to our components.
   - [Main](#main)
   - [Preview](#preview)
   - [Labs](#labs)
+
+## LLM Assisted Migration <StorybookStatusIndicator type="ai" />
+
+We provide a **LLM migration mapping file** (`llm-token-migration.txt`) specifically designed for
+use with LLM-based code assistants (such as [Cursor](https://www.cursor.so/) or similar tools). This
+file is not intended for direct human reference or team documentation, but rather as structured
+input for LLMs to automate and assist with your token migration process.
+
+> Important: LLMs can make mistakes. Please review changes to be sure they are correct using our
+> docs and upgrade guides.
+
+This file contains a compiled for LLM consumption version of this v14 Upgrade Guide.
+
+**How to use:**
+
+- **View raw file**: Open the file in a new tab to see the complete migration mapping
+- **Download as txt**: Save the file locally to upload or paste into your LLM/code assistant
+- **Use with LLM**: Provide the raw content to your LLM/code assistant as context for automated
+  migration
+
+<DownloadLLMFile
+  rawFileDir="https://raw.githubusercontent.com/Workday/canvas-kit/master/modules/docs/llm-txt/llm-canvas-kit-upgrade-guide-v14.txt"
+  filenames="llm-canvas-kit-upgrade-guide-v14.txt"
+/>
 
 ## Codemod
 
@@ -122,13 +150,14 @@ yarn remove @workday/canvas-kit-codemod
 ## Tokens
 
 Canvas Kit v14 uses `@workday/canvas-tokens-web` v3, which introduces new color palettes and
-deprecates the old "fruity" color names (for example, use `red` instead of `cinnamon`, `blue` instead
-of `blueberry`, and `green` instead of `greenApple`). We strongly recommend upgrading to
+deprecates the old "fruity" color names (for example, use `red` instead of `cinnamon`, `blue`
+instead of `blueberry`, and `green` instead of `greenApple`). We strongly recommend upgrading to
 `@workday/canvas-tokens-web` v3, as using older versions will not match the new brand guidelines or
 color system. Although this dependency upgrade is not required, we've offered migration guides and
 codemods separately from the v14 upgrade so that teams can upgrade when they can.
 
-For more information and changes, please view our [Tokens v3 Upgrade Guide](https://workday.github.io/canvas-tokens/?path=/guides-upgrade-guides-v3-overview--docs).
+For more information and changes, please view our
+[Tokens v3 Upgrade Guide](https://workday.github.io/canvas-tokens/?path=/guides-upgrade-guides-v3-overview--docs).
 
 > **Note:** v3 Tokens should be backwards compatible with older versions of Canvas Kit.
 
@@ -150,7 +179,8 @@ Follow these guides to migrate:
 To better align with the brand refresh, Alert and Warning states are being renamed to Caution for
 better semantics.
 
-This change mostly affects how you pass an error state to our input components. In most cases, our input components should be used with our `FormField` component to ensure correct accessibility.
+This change mostly affects how you pass an error state to our input components. In most cases, our
+input components should be used with our `FormField` component to ensure correct accessibility.
 
 **Before in v13**
 
@@ -176,7 +206,8 @@ This change mostly affects how you pass an error state to our input components. 
 </FormField>
 ```
 
-If you are using the error type either from our `Common` package or the one exposed from the component, the naming has also changed.
+If you are using the error type either from our `Common` package or the one exposed from the
+component, the naming has also changed.
 
 **Before in v13**
 
@@ -227,11 +258,14 @@ Canvas Provider has been updated to **remove** default branding colors to ensure
 our CSS variables. Instead of generating a palette and shifting the brightness and darkness with
 `chroma.js`, we use `oklch` to generate the palette colors.
 
-Prior to v14, the `CanvasProvider` created a cascade barrier, re definding brand CSS variables under a class, creating a higher specificity. This made it difficult to override brand tokens in certain scenarios. v14 Removes that barrier.
-For more information on what is a cascade barrier, please [view our theming docs here](https://github.com/Workday/canvas-kit/issues). For a mode detailed overview of the changes in v14, please view our [v14 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs#what-is-a-cascade-barrier).
+Prior to v14, the `CanvasProvider` created a cascade barrier, re definding brand CSS variables under
+a class, creating a higher specificity. This made it difficult to override brand tokens in certain
+scenarios. v14 Removes that barrier. For more information on what is a cascade barrier, please
+[view our theming docs here](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs).
+For a mode detailed overview of the changes in v14, please view our
+[v14 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs#what-is-a-cascade-barrier).
 
-**Before in v13**
-In v13, the `useTheme` hook would call `createCanvasTheme` which generated a
+**Before in v13** In v13, the `useTheme` hook would call `createCanvasTheme` which generated a
 palette given a `main` color via `chroma.js`.
 
 ```tsx
@@ -289,7 +323,8 @@ The reason for this change is to ensure that the CSS variables properly cascade 
 Before in v13, the `CanvasProvider` would add the brand tokens under a class name, creating a higher
 specificity.
 
-For a thorough guide on theming, please view our theming docs [here](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs).
+For a thorough guide on theming, please view our theming docs
+[here](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs).
 
 ## Component Updates
 
@@ -351,11 +386,14 @@ revolve around the use of our new brand colors. For a better guide on what has c
 tokens, please view the Tokens v3.0.0
 [Upgrade Guide](https://workday.github.io/canvas-tokens/?path=/docs/guides-upgrade-guides-v3-overview--docs).
 
-> **Note:** If you want a visual diff of the changes, please view the [Visual Changes](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v14-0-visual-changes--docs) guide.
+> **Note:** If you want a visual diff of the changes, please view the
+> [Visual Changes](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v14-0-visual-changes--docs)
+> guide.
 
 The following components have been updated:
 
-- `Breadcrumbs` [#3270](https://github.com/Workday/canvas-kit/pull/3270),[#3447](https://github.com/Workday/canvas-kit/pull/3447)
+- `Breadcrumbs`
+  [#3270](https://github.com/Workday/canvas-kit/pull/3270),[#3447](https://github.com/Workday/canvas-kit/pull/3447)
 - `Buttons` [#3394](https://github.com/Workday/canvas-kit/pull/3394)
 - `ColorPicker` (Main) [#3307](https://github.com/Workday/canvas-kit/pull/3307)
 - `ColorPicker` (preview) [#3307](https://github.com/Workday/canvas-kit/pull/3307)
@@ -375,9 +413,9 @@ The following components have been updated:
 
 **Breaking Changes**
 
-- The `TertiaryButton` component no longer supports the `isThemable` prop. To customize the appearance
-  of `TertiaryButton`, use the `cs` prop for custom styles or the `colors` prop for palette-based
-  color overrides.
+- The `TertiaryButton` component no longer supports the `isThemable` prop. To customize the
+  appearance of `TertiaryButton`, use the `cs` prop for custom styles or the `colors` prop for
+  palette-based color overrides.
 - The shape of `TertiaryButton` has changed to have rounded corners, aligning with other buttons and
   our new brand direction.
 
@@ -407,10 +445,10 @@ visual hierarchy and more flexible styling options. The following changes have b
 
 #### Default Card No Longer Has a Box Shadow
 
-The default `Card` variant no longer includes a box shadow, creating a cleaner, flatter appearance that
-aligns with our new brand's emphasis on simplicity and clarity. This is a **visual breaking change**
-that may affect your application's visual hierarchy. If your design requires shadow you can add it
-through the `cs` prop.
+The default `Card` variant no longer includes a box shadow, creating a cleaner, flatter appearance
+that aligns with our new brand's emphasis on simplicity and clarity. This is a **visual breaking
+change** that may affect your application's visual hierarchy. If your design requires shadow you can
+add it through the `cs` prop.
 
 **Before in v13**
 
@@ -421,8 +459,7 @@ through the `cs` prop.
 </Card>
 ```
 
-**After in v14**
-Only do this if you need a shadow. Otherwise, adhere to the default styling.
+**After in v14** Only do this if you need a shadow. Otherwise, adhere to the default styling.
 
 ```tsx
 import {system} from '@workday/canvas-tokens-web';
@@ -610,7 +647,7 @@ const customTheme = {
   placeholderColor: colors.frenchVanilla100,
   placeholderColorFocus: colors.blackPepper400,
   boxShadow: ['10px 5px 5px red', '60px -16px teal'],
-  boxShadowFocus: ['10px 5px 5px red', '60px -16px teal']
+  boxShadowFocus: ['10px 5px 5px red', '60px -16px teal'],
 } as SearchThemeAttributes;
 
 <SearchForm
@@ -618,7 +655,7 @@ const customTheme = {
   autocompleteItems={menuItems}
   onInputChange={filterMenuItems}
   onSubmit={handleSubmit}
-/>
+/>;
 ```
 
 **After in v14**
@@ -638,7 +675,7 @@ const customTheme = {
   autocompleteItems={menuItems}
   onInputChange={filterMenuItems}
   onSubmit={handleSubmit}
-/>
+/>;
 ```
 
 - `SearchTheme` enum type has been updated to have string values `light`, `dark` and `transparent`.
@@ -660,8 +697,8 @@ Variant names of the preview `StatusIndicator` have been updated by the followin
 - `gray` → `neutral`
 
 The `StatusIndicatorVariant` type has been updated to contain the new variant names listed above. If
-you use the old variant values, update to use the new ones mapped above. It has also been
-deprecated. Use `StatusIndicatorProps['variant']` instead.
+you use the old variant values, update to use the new ones mapped above. Use
+`StatusIndicatorProps['variant']` instead.
 
 **Before in v13**
 
@@ -714,7 +751,7 @@ import { Avatar } from '@workday/canvas-kit-react/avatar';
 import {Avatar} from '@workday/canvas-kit-preview-react/avatar';
 // name is used as a fallback if the image url is broken or still loading
 // variant defines the color of the Avatar
-<Avatar name="John Doe" size="extraExtraLarge" variant="teal" url={yourImageUrl} />
+<Avatar name="John Doe" size="extraExtraLarge" variant="teal" url={yourImageUrl} />;
 ```
 
 If you need to render a `button` element use the `BaseAvatar` component.
@@ -730,7 +767,7 @@ import {BaseAvatar} from '@workday/canvas-kit-preview-react/avatar';
   onClick={() => console.log('Avatar clicked')}
 >
   <BaseAvatar.Name name="John Doe" />
-</BaseAvatar>
+</BaseAvatar>;
 ```
 
 ### Combobox (Labs)
@@ -791,8 +828,8 @@ system supported this for quite some time, but with the advancement in theming, 
 and our flexibility, it is time for us to finally remove this component. This component has served
 as a reminder of how far we've come and we're thankful for this change.
 
-Although unlikely, if you were using `DeprecatedButton` please use our flexible
-and themable buttons like `PrimaryButton`, `SecondaryButton` or `TertiaryButton`.
+Although unlikely, if you were using `DeprecatedButton` please use our flexible and themable buttons
+like `PrimaryButton`, `SecondaryButton` or `TertiaryButton`.
 
 ### Input Provider
 
@@ -804,8 +841,8 @@ browser heuristics to determine when an element should receive visual focus styl
 information, please view the
 [MDN docs on `:focus-visible`](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible).
 
-If you are trying to apply focus styles to our components, we strongly advise using the `:focus-visible`
-pseudo selector.
+If you are trying to apply focus styles to our components, we strongly advise using the
+`:focus-visible` pseudo selector.
 
 ```tsx
 import {createStyles} from '@workday/canvas-kit-styling'
@@ -907,22 +944,26 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 
 ### Common Issues
 
-- **Dependency Conflicts**: When upgrading to the latest major version of Canvas Kit, all related Canvas Kit packages should
-  be updated at the same time:
+- **Dependency Conflicts**: When upgrading to the latest major version of Canvas Kit, all related
+  Canvas Kit packages should be updated at the same time:
+
   - `"@workday/canvas-kit-react": "^13.5.6"` → `"@workday/canvas-kit-react": "^14.0.0"`
   - `"@workday/canvas-kit-styling": "^13.5.6"` → `"@workday/canvas-kit-styling": "^14.0.0"`
   - `"@workday/canvas-kit-preview-react": "^13.5.6"` →
     `"@workday/canvas-kit-preview-react": "^14.0.0"`
   - `"@workday/canvas-kit-labs-react": "^13.5.6"` → `"@workday/canvas-kit-labs-react": "^14.0.0"`
 
-- **Token Issues**: Our components rely on the `@workday/canvas-tokens-web` package which provides our CSS variables
-  and ensures the correct styling of our components. Make sure to upgrade to the latest version of
-  Canvas Tokens Web and install it correctly. For more information,
+- **Token Issues**: Our components rely on the `@workday/canvas-tokens-web` package which provides
+  our CSS variables and ensures the correct styling of our components. Make sure to upgrade to the
+  latest version of Canvas Tokens Web and install it correctly. For more information,
   [view our docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
 
-- **Color Discrepancies**: If you notice visual differences after upgrading, this may be due to the change from `chroma.js` to `oklch` color generation. Consider providing explicit color values in your theme configuration.
+- **Color Discrepancies**: If you notice visual differences after upgrading, this may be due to the
+  change from `chroma.js` to `oklch` color generation. Consider providing explicit color values in
+  your theme configuration.
 
-- **Build Errors**: If you encounter build errors after running the codemod, ensure your linter is run as the codemod's formatting may not match your project conventions.
+- **Build Errors**: If you encounter build errors after running the codemod, ensure your linter is
+  run as the codemod's formatting may not match your project conventions.
 
 ## Glossary
 
@@ -930,10 +971,15 @@ For an overview of the different packages we provide, please view our docs
 [here](https://workday.github.io/canvas-kit/?path=/docs/guides-packages--docs).
 
 ### Main
+
 Components in the Main package are stable and ready for production use.
 
 ### Preview
-Components in the Preview package are mostly stable but may still receive breaking changes before being promoted to Main.
+
+Components in the Preview package are mostly stable but may still receive breaking changes before
+being promoted to Main.
 
 ### Labs
-Components in the Labs package are experimental and may receive significant changes or be removed entirely.
+
+Components in the Labs package are experimental and may receive significant changes or be removed
+entirely.
