@@ -3,6 +3,232 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.0.0](https://github.com/Workday/canvas-kit/releases/tag/v14.0.0) (2025-09-10)
+
+### BREAKING CHANGES
+
+- [#3350](https://github.com/Workday/canvas-kit/pull/3350) - Default `Card` no longer has shadow - this is a visual breaking change that may affect application hierarchy.
+  - `Card` layout now uses flexbox with gap spacing instead of individual margins on child elements - this may affect spacing between card elements.
+- [#3353](https://github.com/Workday/canvas-kit/pull/3353) `Menu` from preview package has been removed. Please use `Menu` from main instead.
+- [#3349](https://github.com/Workday/canvas-kit/pull/3349) - The utility function isAccessible and its use have been removed from errorRing.ts. This may affect any code relying on error color accessibility checks via chroma.contrast.
+  - Error and alert color assignments have been updated to use new token sources (@workday/canvas-tokens-web and @workday/canvas-kit-styling) and CSS custom properties. Hardcoded or legacy color references (inputColors, colors, etc.) have been replaced. Any custom overrides or direct imports of these color tokens should be reviewed for compatibility.
+  - The logic for determining the outer color in the useThemedRing.ts hook has changed.
+  Before: The outer color was chosen based on accessibility checks:
+  
+  If palette.main was accessible, it was used.
+  Otherwise, if palette.darkest was accessible, it was used.
+  Otherwise, fallbackColors.outer was used.
+  Now: The outer color is chosen as fallbackColors.outer if provided; otherwise, it defaults to palette.main without any accessibility check.
+  
+  Impact:
+  If your code relied on the previous accessibility-based color selection for the ring, you may need to update your usage or provide explicit fallbackColors.outer values.
+- [#3354](https://github.com/Workday/canvas-kit/pull/3354) Preview `StatusIndicator` is a rounder and more vibrant base emphasis (`low`). The `emphasis` prop is now deprecated and the `high` emphasis will be removed in a later version.
+  
+  Variant names of the preview `StatusIndicator` have been updated by the following mapping:
+  - `blue` -> `primary`
+  - `green` -> `success`
+  - `orange` -> `caution`
+  - `red` -> `critical`
+  - `gray` -> `neutral`
+- [#3439](https://github.com/Workday/canvas-kit/pull/3439) Al though unlikely, but not impossible, if you were using `DeprecatedButton` please use our flexible and themable buttons like `PrimaryButton`, `ScondaryButon` or `TertiaryButton`.
+- [#3407](https://github.com/Workday/canvas-kit/pull/3407) Canvas Provider has been updated to **remove** default branding colors to ensure proper cascading of our CSS variables. Instead of generating a palette and shifting the brightness and darkness with `chroma.js`, we use `oklch` to generate the palette colors.
+  
+  **Before in v13**
+  In v13, the `useTheme` hook would call `createCanvasTheme` which generated a palette given a `main` color via `chroma.js`.
+  
+  ```tsx
+  <CanvasProvider theme={{canvas: {palette: {primary: {main: 'purple'}}}}}>
+    <App/>
+  </CanvasProvider>
+  ```
+  
+  **After in v14**
+  We use `oklch` to generate the palette colors. The color shifting will be different. If you want more control over the colors, we suggest providing the full palette object.
+  
+  ```tsx
+  <CanvasProvider theme={
+  	{canvas: {
+  		palette: {
+  			primary: {
+  				lightest: base.blue25,
+  				light: base.blue200,
+  				main: base.blue600,
+  				dark: base.blue700,
+  				darkest: base.blue800,
+  				contrast: base.neutral0,
+  			},
+  		},
+  	}}}>
+    <App/>
+  </CanvasProvider>
+  ```
+  
+  **Or**
+  
+  ```tsx
+  <CanvasProvider theme={{canvas: {palette: {primary: {main: base.blue600}}}}}>
+    <App/>
+  </CanvasProvider>
+  ```
+  
+  > **Note:** The way `chroma.js` and `oklch` generate colors **is different**. While we work on a better algorithm to determine hue, chroma and lightness and color shifting that best represents an accessible palette, **you may see color discrepancies**. If you want to continue using the old way of generating a color palette with `chroma.js`, you can use `createCanvasTheme`.
+  
+  ```tsx
+  <CanvasProvider theme={{canvas: createCanvasTheme({palette: {primary: {main: cssVar(base.blue600)}}})}}>
+    <App/>
+  </CanvasProvider>
+  ```
+  
+  The reason for this change is to ensure that the CSS variables properly cascade to all components. Before in v13, the `CanvasProvider` would add the brand tokens under a class name, creating a higher specificity.
+- [#3471](https://github.com/Workday/canvas-kit/pull/3471) `TextArea` and `TextInput` from Preview have been removed, use `TextArea` and `TextInput` from Main instead.
+- [#3462](https://github.com/Workday/canvas-kit/pull/3462) If you are using `ErrorType.Alert` or `error="alert"` you must update the values to `ErrorType.Caution` or `error="caution"`. A codemod in v14 should handle most of the code changes for you for our components. The follow components are affected:
+  - FormField
+  - FormFieldGroup
+  - TextInput
+  - TextArea
+  - Switch
+
+### Components
+
+- chore(breadcrumbs): Refactor Breadcrumbs to use styling API ([#3270](https://github.com/Workday/canvas-kit/pull/3270)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  We've updated Breadcrumbs to use our new Tokens and styling utilities. The React interface has not changed, but CSS variables are now used for dynamic properties.
+- feat: Update styling for Segmented Control ([#3278](https://github.com/Workday/canvas-kit/pull/3278)) ([@RayRedGoose](https://github.com/RayRedGoose), Raisa Primerova)
+  We've updated Segmented Control components in main and preview packages to use our new tokens and styling utilities. The React interface has not changed, but CSS variables are now used for dynamic properties.
+- chore: Refactor Toolbar Button to use styling API ([#3293](https://github.com/Workday/canvas-kit/pull/3293)) ([@RayRedGoose](https://github.com/RayRedGoose), Raisa Primerova)
+  `ToolbarIconButton` and `ToolbarDropdownButton` components have been updated to use our new tokens and styling utilities. The React interface has not changed, but CSS variables are now used for dynamic properties.
+- feat: Refactor Pagination component to use our styling API ([#3300](https://github.com/Workday/canvas-kit/pull/3300)) ([@RayRedGoose](https://github.com/RayRedGoose), [@mannycarrera4](https://github.com/mannycarrera4))
+  `Pagination` component has been refactored to use our new tokens and styling utilities. The React interface has not changed, but CSS variables are now used for dynamic properties.
+- chore: Refactor SearchForm to use our styling API ([#3303](https://github.com/Workday/canvas-kit/pull/3303)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@RayRedGoose](https://github.com/RayRedGoose), [@NicholasBoll](https://github.com/NicholasBoll), [@josh-bagwell](https://github.com/josh-bagwell))
+  - `SearchThemeAttributes` type has been updated. Both `boxShadow` and `boxShadowFocus` now only accept a `string` instead of `string | string[]`.
+  - `SearchTheme` enum type has been updated to have string values `light`, `dark` and `transparent`. This **should not** affect the way you use the type unless you're passing a `number` of `0`, `1` or `2` to the `searchTheme` prop.
+- feat: Update Color Picker to use new color palette from brand ([#3307](https://github.com/Workday/canvas-kit/pull/3307)) ([@RayRedGoose](https://github.com/RayRedGoose), [@mannycarrera4](https://github.com/mannycarrera4))
+  We've updated `ColorPicker` components in Main and Preview packages to use our new tokens and styling utilities. The React interface has not changed, but CSS variables are now used for dynamic properties.
+- feat: Change Card styles to match new branding ([#3350](https://github.com/Workday/canvas-kit/pull/3350)) ([@RayRedGoose](https://github.com/RayRedGoose), [@mannycarrera4](https://github.com/mannycarrera4))
+  Rebranded `Card` component to align with new brand directions emphasizing simplicity and clarity:
+  - Removed shadow for default variant.
+  - Added `borderless` variant for seamless integration on colored backgroundsa and `filled` variant for visual separation with grayish background.
+  - Updated `Card` to use flexbox layout with `display: flex` and `flex-direction: column` by default.
+  - Replaced individual margins on `Card.Heading` and `Card.Body` with `gap` prop on card container.
+- chore: Remove Preview Menu ([#3353](https://github.com/Workday/canvas-kit/pull/3353)) ([@RayRedGoose](https://github.com/RayRedGoose))
+  Updated styles for `MenuItem` selected hover and disabled states.
+- Apply suggestions from code review ([@mannycarrera4](https://github.com/mannycarrera4))
+- fix: Fix ai colors ([@RayRedGoose](https://github.com/RayRedGoose))
+- feat: Add Ingress AI Assistant button to Labs ([#3376](https://github.com/Workday/canvas-kit/pull/3376)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@RayRedGoose](https://github.com/RayRedGoose))
+  Added a ingress button that should be used to trigger an AI assistant.
+- fix: Update background hover color on Expandable ([#3389](https://github.com/Workday/canvas-kit/pull/3389)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@RayRedGoose](https://github.com/RayRedGoose))
+- feat: Update inputs with brand refresh colors and styles ([#3349](https://github.com/Workday/canvas-kit/pull/3349)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  - Updated border radius on `TextInput, Select, TextArea, MultiSelect` to `.375rem` or `6px`.
+  - `Error` state inputs like `Checkbox`, `TextInput` and `TextArea` have a light red background.
+  - `Caution` state inputs like `Checkbox`, `TextInput` and `TextArea` have a light amber background.
+  - Replaced references to the legacy `@workday/canvas-kit-react/tokens` color tokens with new CSS variable-based tokens from @workday/canvas-tokens-web and the cssVar helper.
+  - Updated all theme palette color values (primary, alert, error, success, neutral, common) to use the new base tokens, improving consistency and alignment with the latest design tokens.
+  - Updated the theme palette’s common section to add new color tokens:
+    - Added `alertInner` using base.amber400
+    - Added `errorInner` using base.red500
+  -  If you want to change alert or error colors, you need to update them under palette.common in the theme configuration.
+- fix: Update AI Ingress Button Colors ([#3403](https://github.com/Workday/canvas-kit/pull/3403)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- feat: Add standalone variant to Hyperlink and External Hyperlink ([#3390](https://github.com/Workday/canvas-kit/pull/3390)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- feat: Add inverse variant to loading dots ([#3393](https://github.com/Workday/canvas-kit/pull/3393)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@RayRedGoose](https://github.com/RayRedGoose))
+  - We've updated the colors to match brand refresh. The default color changes from `system.color.bg.alt.strong` to `system.color.bg.muted.strong`.
+  - `LoadingDots` now has a `inverse` variant. Use this variant when the Loading Dots are on a dark background or image.
+- feat: Update count badge styles ([#3411](https://github.com/Workday/canvas-kit/pull/3411)) ([@RayRedGoose](https://github.com/RayRedGoose), manuel.carrera)
+  The `CountBadge` component has been updated with new styling options. The default `variant` and `inverse` styles have been updated to match new branding. Additionally, a new `emphasis` prop has been added, allowing you to choose between `high` and `low` emphasis for the badge.
+- feat: Update button colors ([#3394](https://github.com/Workday/canvas-kit/pull/3394)) ([@RayRedGoose](https://github.com/RayRedGoose), [@mannycarrera4](https://github.com/mannycarrera4))
+  Default and inverse styles of `PrimaryButton`, `SecondaryButton` and `TertiaryButton` components have been updated to match new branding direction. `isThemeable` prop of `TertiaryButton` has been deprecated as theming is handled by brand tokens.
+- chore: Update preview StatusIndicator with new tokens and variant ([#3354](https://github.com/Workday/canvas-kit/pull/3354)) ([@NicholasBoll](https://github.com/NicholasBoll), [@RayRedGoose](https://github.com/RayRedGoose))
+- feat: Deprecate components after audit ([#3435](https://github.com/Workday/canvas-kit/pull/3435)) ([@RayRedGoose](https://github.com/RayRedGoose), manuel.carrera)
+  `Combobox ` (labs), `Radio` (main), `SegmentedControl` (main), `SidePanel` (main) and legacy tokens have been deprecated and will be removed in future versions. See upgrade guide for migration instructions.
+- feat: Remove deprecated orange buttons ([#3439](https://github.com/Workday/canvas-kit/pull/3439)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- feat: Rebrand information highlight ([#3443](https://github.com/Workday/canvas-kit/pull/3443)) ([@RayRedGoose](https://github.com/RayRedGoose))
+  `InformationHighlight` component has been updated to use newest tokens as alignment with new brand direction.
+- feat: Add new Preview Avatar and Deprecated Avatar in Main ([#3430](https://github.com/Workday/canvas-kit/pull/3430)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@RayRedGoose](https://github.com/RayRedGoose))
+  - Added a new `Avatar` component to our Preview Package. This component not only aligns with our brand refresh but has the following API changes:
+  - `Avatar` has a `name` prop. This is required to ensure a fallback if a `url` is not provided. The `name` prop also determines the initials and the `alt` text for the image if a `url` is provided.
+  - `url` stays the same. This prop is optional and will be used to display an image avatar.
+  - `variant` defines the color of the avatar. The default is `blue` but you can choose one of the following colors:
+    - `teal`
+    - `purple`
+    - `amber`
+    - `blue`
+  - By default, the `Avatar` will render a `div` element. If you need to render a `button` element use the `BaseAvatar` component.
+  - `size` accepts the following values:
+    - `extraExtraLarge`
+    - `extraLarge`
+    - `large`
+    - `medium`
+    - `small`
+    - `extraSmall`
+    - `extraExtraSmall`
+  - `Avatar` in our Main package has been deprecated. Please use the one in Preview instead.
+  - `Pill.Avatar` and `Expandable.Avatar` now use the `Avatar` from the Preview package. This requires that you provide a `name` instead of `altText` to the component. A codemod will handle changing the prop name if provided.
+- fix: Change name to AIIngressButton ([#3445](https://github.com/Workday/canvas-kit/pull/3445)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- feat: Rebrand Breadcrumbs ([#3447](https://github.com/Workday/canvas-kit/pull/3447)) ([@RayRedGoose](https://github.com/RayRedGoose))
+  The `Breadcrumbs` component has been updated to use newest tokens as alignment with new brand direction. The component uses the `standAlone` variant which removes the underline styles of the link. This change follows our usage guidance that links when used outside the context of body text, should not have an underline.
+- fix: Update export inverse on count badge ([#3455](https://github.com/Workday/canvas-kit/pull/3455)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- fix: Update text color for secondary button ([#3460](https://github.com/Workday/canvas-kit/pull/3460)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- feat: Update Pills to match our brand Refresh ([#3446](https://github.com/Workday/canvas-kit/pull/3446)) ([@RayRedGoose](https://github.com/RayRedGoose), [@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  The `Pill` component has been updated to use newest tokens as alignment with new brand direction. 
+  - The component no longer takes `default` as value for variant prop if the `variant` prop is not provided, the component will use its default styling. 
+  - `readyOnlyPillStencil` and `removeablePillStencil` have been removed with the clean up of `pillStencil`.
+- fix: Remove emphasis deprecation on StatusIndicator ([#3465](https://github.com/Workday/canvas-kit/pull/3465)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- feat: Remove cascade barrier in Canvas Provider ([#3407](https://github.com/Workday/canvas-kit/pull/3407)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- feat: Remove InputProvider ([#3468](https://github.com/Workday/canvas-kit/pull/3468)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  We've removed `InputProvider` from our codebase and the `CanvasProvider`. The intent of the provider was to check the users input and apply focus styles accordingly to our components. This was needed when we still supported IE11 to ensure we could be consistent on styling based on user input events. Since dropping support and moving to `:focus-visible`, we no longer need this provider.
+  We now allow browser heuristics to determine when an element should receive visual focus styles. For more information, please view the [MDN docs on `:focus-visible`](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible).
+  
+  If you are trying to apply focus styles to our components, we strongly avise to use `:focus-visible` pseudo selector.
+  
+  ```tsx
+  import {createStyles} from '@workday/canvas-kit-styling'
+  import {PrimaryButton} from '@workday/canvas-kit-react/button'
+  
+  const buttonStyles = createStyles({
+    '&:focus-visible': {
+      outline: '2px solid red'
+    }
+  })
+  
+  <PrimaryButton cs={buttonStyles}>
+  	Click Me
+  </PrimaryButton>
+  ```
+- feat: Deprecated SearchForm in Labs ([#3469](https://github.com/Workday/canvas-kit/pull/3469)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  We've deprecated `SearchForm` in Labs. Please reference the [Autocomplete example](https://workday.github.io/canvas-kit/?path=/docs/features-combobox--docs#usage) as reference.
+- fix: Pass empty plain object to theme as default ([#3472](https://github.com/Workday/canvas-kit/pull/3472)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- feat: Remove TextArea and TextInput from preview ([#3471](https://github.com/Workday/canvas-kit/pull/3471)) ([@RayRedGoose](https://github.com/RayRedGoose))
+- fix: Update reseting default brand ([#3476](https://github.com/Workday/canvas-kit/pull/3476)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- feat: Update naming of alert to caution to match brand refresh ([#3462](https://github.com/Workday/canvas-kit/pull/3462)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- fix: Update token usage per latest spec ([#3473](https://github.com/Workday/canvas-kit/pull/3473)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+### Dependencies
+
+- chore: Update alpha tokens to include brand gradient ([#3406](https://github.com/Workday/canvas-kit/pull/3406)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+### Documentation
+
+- docs: Add deprecation and AI indicator to the storybook side panel ([#3392](https://github.com/Workday/canvas-kit/pull/3392)) ([@RayRedGoose](https://github.com/RayRedGoose), [@mannycarrera4](https://github.com/mannycarrera4))
+- docs: Apply new branding ([#3414](https://github.com/Workday/canvas-kit/pull/3414)) ([@jaclynjessup](https://github.com/jaclynjessup))
+- fix: Add cascade barrier to prevent doc theming bleeding into example… ([#3463](https://github.com/Workday/canvas-kit/pull/3463)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- docs: Fix links for docs ([#3475](https://github.com/Workday/canvas-kit/pull/3475)) ([@RayRedGoose](https://github.com/RayRedGoose))
+- fix: Minor change to trigger canary ([#3493](https://github.com/Workday/canvas-kit/pull/3493)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+### Infrastructure
+
+- chore: Bump tokens alpha version to latest ([#3352](https://github.com/Workday/canvas-kit/pull/3352)) ([@RayRedGoose](https://github.com/RayRedGoose))
+- chore: Upgrade to tokens alpha.10 ([#3412](https://github.com/Workday/canvas-kit/pull/3412)) ([@RayRedGoose](https://github.com/RayRedGoose))
+- feat: Update tokens to latest alpha ([#3432](https://github.com/Workday/canvas-kit/pull/3432)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+### Tokens
+
+- feat: Update Canvas Kit to use Tokens v3 alpha ([#3328](https://github.com/Workday/canvas-kit/pull/3328)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@RayRedGoose](https://github.com/RayRedGoose))
+
+### Utilities
+
+- feat: Add `lighter` object to our theme. ([#3429](https://github.com/Workday/canvas-kit/pull/3429)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  - `CanvasThemePalette` has been updated to include a `lighter` color.
+  - `CanvasTheme` has been updated to include a `lighter` color.
+
+
 ## [v13.2.31](https://github.com/Workday/canvas-kit/releases/tag/v13.2.31) (2025-09-08)
 
 ### Utilities.
