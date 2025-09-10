@@ -1,4 +1,5 @@
 import {Meta} from '@storybook/addon-docs';
+import {StorybookStatusIndicator, DownloadLLMFile} from '@workday/canvas-kit-docs';
 
 <Meta title="Guides/Upgrade Guides/v14.0/Overview" />
 
@@ -13,13 +14,16 @@ any questions.
 v14.0 Introduces Workday's new brand direction which includes a new color palette and with it, some
 styling updates to our components.
 
-**Please consult our [v14 Visual Changes](/help/upgrade-guides/canvas-v14-upgrade-guide/#tab=visual-changes) page for a visual reference of what's changed.**
+**Please consult our
+[v14 Visual Changes](/help/upgrade-guides/canvas-v14-upgrade-guide/#tab=visual-changes) page for a
+visual reference of what's changed.**
 
 > **Note:** While v14 does not require an upgrade to our v3 tokens, we strongly advise to upgrade to
 > the latest to ensure proper branding.
 
 ## Table of contents
 
+- [LLM Assisted Migration](#llm-assisted-migration)
 - [Codemod](#codemod)
   - [Instructions](#instructions)
 - [Tokens](#tokens)
@@ -61,6 +65,30 @@ styling updates to our components.
   - [Main](#main)
   - [Preview](#preview)
   - [Labs](#labs)
+
+## LLM Assisted Migration <StorybookStatusIndicator type="ai" />
+
+We provide a **LLM migration mapping file** (`llm-canvas-kit-upgrade-guide-v14.txt`) specifically
+designed for use with LLM-based code assistants (such as [Cursor](https://www.cursor.so/) or similar
+tools). This file is not intended for direct human reference or team documentation, but rather as
+structured input for LLMs to automate and assist with your token migration process.
+
+> **Important:** LLMs can make mistakes. Please review changes to be sure they are correct using our
+> docs and upgrade guides.
+
+This file contains a compiled LLM consumption version of this v14 Upgrade Guide.
+
+**How to use:**
+
+- **View raw file**: Open the file in a new tab to see the complete migration mapping
+- **Download as txt**: Save the file locally to upload or paste into your LLM/code assistant
+- **Use with LLM**: Provide the raw content to your LLM/code assistant as context for automated
+  migration
+
+<DownloadLLMFile
+  rawFileLink="https://raw.githubusercontent.com/Workday/canvas-kit/master/modules/docs/llm-txt/llm-canvas-kit-upgrade-guide-v14.txt"
+  filename="llm-canvas-kit-upgrade-guide-v14.txt"
+/>
 
 ## Codemod
 
@@ -118,19 +146,22 @@ yarn canvas-kit-codemod v14 [path]
 yarn remove @workday/canvas-kit-codemod
 ```
 
-> **Note**: The codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` files. You'll need to
+> **Note:** The codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` files. You'll need to
 > manually edit other file types (`.json`, `.mdx`, `.md`, etc.). You may need to run your linter
 > after executing the codemod, as its resulting formatting (spacing, quotes, etc.) may not match
 > your project conventions.
 
 ## Tokens
 
-Canvas Kit v14 now uses `@workday/canvas-tokens-web` v3, which introduces new color palettes and
+Canvas Kit v14 uses `@workday/canvas-tokens-web` v3, which introduces new color palettes and
 deprecates the old "fruity" color names (for example, use `red` instead of `cinnamon`, `blue`
 instead of `blueberry`, and `green` instead of `greenApple`). We strongly recommend upgrading to
 `@workday/canvas-tokens-web` v3, as using older versions will not match the new brand guidelines or
 color system. Although this dependency upgrade is not required, we've offered migration guides and
 codemods separately from the v14 upgrade so that teams can upgrade when they can.
+
+For more information and changes, please view our
+[Tokens v3 Upgrade Guide](https://workday.github.io/canvas-tokens/?path=/guides-upgrade-guides-v3-overview--docs).
 
 > **Note:** v3 Tokens should be backwards compatible with older versions of Canvas Kit.
 
@@ -219,7 +250,8 @@ someFunction(ErrorType.Caution);
 
 ### New Documentation
 
-We've **significantly** improved our theming documentation. Please consult our new [Canvas Kit Theming Guide](/get-started/for-developers/theming/overview/).
+We've **significantly** improved our theming documentation. Please consult our new
+[Canvas Kit Theming Guide](/get-started/for-developers/theming/overview/).
 
 ### Canvas Provider 🚨
 
@@ -235,7 +267,10 @@ Canvas Provider has been updated to **remove** default branding colors to ensure
 our CSS variables. Instead of generating a palette and shifting the brightness and darkness with
 `chroma.js`, we use `oklch` to generate the palette colors.
 
-Prior to v14, `CanvasProvider` created a [cascade barrier](/get-started/for-developers/theming/overview/#what-is-a-cascade-barrier), which redefined brand CSS variables under a class and created a higher specificity. This made it difficult to override brand tokens in certain scenarios. v14 removes that barrier.
+Prior to v14, `CanvasProvider` created a
+[cascade barrier](/get-started/for-developers/theming/overview/#what-is-a-cascade-barrier), which
+redefined brand CSS variables under a class and created a higher specificity. This made it difficult
+to override brand tokens in certain scenarios. v14 removes that barrier.
 
 **Before in v13** In v13, the `useTheme` hook would call `createCanvasTheme` which generated a
 palette given a `main` color via `chroma.js`.
@@ -294,7 +329,6 @@ different. If you want more control over the colors, we suggest providing the fu
 The reason for this change is to ensure that the CSS variables properly cascade to all components.
 Before in v13, the `CanvasProvider` would add the brand tokens under a class name, creating a higher
 specificity.
-
 
 ### useIsRTL
 
@@ -366,9 +400,9 @@ revolve around the use of our new brand colors. For a better guide on what has c
 tokens, please view the Tokens v3.0.0
 [Upgrade Guide](https://workday.github.io/canvas-tokens/?path=/docs/guides-upgrade-guides-v3-overview--docs).
 
-
-The following components have been updated (**see [v14 Visual Changes](/help/upgrade-guides/canvas-v14-upgrade-guide/#tab=visual-changes) for a visual reference of the updates**):
-
+The following components have been updated (**see
+[v14 Visual Changes](/help/upgrade-guides/canvas-v14-upgrade-guide/#tab=visual-changes) for a visual
+reference of the updates**):
 
 - `Breadcrumbs`
   [#3270](https://github.com/Workday/canvas-kit/pull/3270),[#3447](https://github.com/Workday/canvas-kit/pull/3447)
@@ -675,8 +709,8 @@ Variant names of the preview `StatusIndicator` have been updated by the followin
 - `gray` → `neutral`
 
 The `StatusIndicatorVariant` type has been updated to contain the new variant names listed above. If
-you use the old variant values, update to use the new ones mapped above. It has also been
-deprecated. Use `StatusIndicatorProps['variant']` instead.
+you use the old variant values, update to use the new ones mapped above. Use
+`StatusIndicatorProps['variant']` instead.
 
 **Before in v13**
 
