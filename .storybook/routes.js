@@ -20,7 +20,7 @@ const routes = {
   '/components/inputs/checkbox/': 'components-inputs-checkbox--docs',
   '/components/inputs/color-input/': 'components-inputs-color-picker-color-input--docs',
   '/components/inputs/form-field/': 'components-inputs-form-field--docs',
-  '/components/inputs/radio/': 'components-inputs-radio--docs',
+  '/components/inputs/radio/': 'preview-inputs-radio--docs',
   '/components/inputs/select/': 'components-inputs-select--docs',
   '/components/inputs/switch/': 'components-inputs-switch--docs',
   '/components/inputs/text-area/': 'components-inputs-textarea--docs',
@@ -47,6 +47,7 @@ const routes = {
   '/getting-started/for-developers/resources/api-pattern-guidelines/':
     'guides-api-pattern-guidelines--docs',
   '/getting-started/for-developers/resources/collection-api/': 'features-collections--docs',
+  '/get-started/for-developers/resources/combobox/': 'features-combobox--docs',
   '/getting-started/for-developers/resources/compound-components/':
     'guides-compound-components--docs',
   '/getting-started/for-developers/resources/creating-compound-components/':
