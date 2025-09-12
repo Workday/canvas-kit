@@ -25,6 +25,12 @@ import {filterIcon, searchIcon} from '@workday/canvas-system-icons-web';
 interface CountryData {
   country: string;
   capital: string;
+  population: number;
+}
+
+interface CountryFilters {
+  country: string;
+  capital: string;
   population: string;
 }
 
@@ -127,12 +133,12 @@ const FilterableColumnHeader = createComponent('th')({
   },
 });
 
-function filterTableData(data: CountryData[], filters: CountryData) {
+function filterTableData(data: CountryData[], filters: CountryFilters) {
   return data.filter(item => {
     for (const key in filters) {
-      if (filters.hasOwnProperty(key) && filters[key]) {
-        const filterText = filters[key].toLowerCase();
-        const itemValue = String(item[key]).toLowerCase();
+      if (filters.hasOwnProperty(key) && filters[key as keyof CountryFilters]) {
+        const filterText = filters[key as keyof CountryFilters].toLowerCase();
+        const itemValue = String(item[key as keyof CountryData]).toLowerCase();
         if (!itemValue.includes(filterText)) {
           return false;
         }
@@ -144,7 +150,7 @@ function filterTableData(data: CountryData[], filters: CountryData) {
 
 export const FilterableColumnHeaders = () => {
   const [filteredData, setFilteredData] = React.useState(countryData);
-  const [colFilters, setColFilters] = React.useState<CountryData>({
+  const [colFilters, setColFilters] = React.useState<CountryFilters>({
     country: '',
     capital: '',
     population: '',
@@ -155,7 +161,7 @@ export const FilterableColumnHeaders = () => {
   }, [colFilters]);
 
   let typingDelay: NodeJS.Timeout;
-  function handleColFilters({filterText, column}) {
+  function handleColFilters({filterText, column}: {filterText: string; column: string}) {
     clearTimeout(typingDelay);
     typingDelay = setTimeout(() => {
       setColFilters(prev => {

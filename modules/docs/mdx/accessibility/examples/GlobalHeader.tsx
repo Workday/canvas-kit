@@ -35,7 +35,9 @@ import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {CountBadge} from '@workday/canvas-kit-react/badge';
 
-interface HeaderItemProps extends FlexProps {}
+interface GlobalHeaderProps extends FlexProps {
+  notifications: number;
+}
 interface LiveCountBadgeProps extends FlexProps {
   cnt: number;
 }
@@ -53,6 +55,11 @@ const styleOverrides = {
     MozOsxFontSmoothing: 'grayscale',
     backgroundColor: system.color.bg.default,
     padding: system.space.x1,
+  }),
+  flexItems: createStyles({
+    gap: system.space.x4,
+    alignItems: 'center',
+    marginX: system.space.x3,
   }),
   inputGroupInner: createStyles({
     marginLeft: '1rem',
@@ -121,59 +128,51 @@ export const Basic = () => {
   }
 
   return (
-    <>
-      <GlobalHeader>
-        <GlobalHeader.Item>
-          <Tooltip title="Global Navigation" type="describe">
-            <TertiaryButton icon={justifyIcon} cs={styleOverrides.menuButtonStyles}>
-              MENU
-            </TertiaryButton>
-          </Tooltip>
-          <Tooltip title="Workday Home">
-            <TertiaryButton>
-              <img src="https://design.workday.com/images/ck-dub-logo-blue.svg" alt="" />
-            </TertiaryButton>
-          </Tooltip>
-        </GlobalHeader.Item>
-        <GlobalHeader.Item cs={styleOverrides.comboboxContainer}>
-          <Autocomplete aria-label="Search Workday" />
-        </GlobalHeader.Item>
-        <GlobalHeader.Item>
-          <Tooltip title="Assistant">
-            <TertiaryButton icon={assistantIcon} />
-          </Tooltip>
-
-          <NotificationLiveBadge cnt={notifications} />
-
-          <Tooltip title="My Tasks">
-            <TertiaryButton icon={inboxIcon} />
-          </Tooltip>
-          <Tooltip title="Profile">
-            <Avatar name="Avatar" />
-          </Tooltip>
-        </GlobalHeader.Item>
-      </GlobalHeader>
+    <header>
+      <GlobalHeader notifications={notifications} />
       <Flex cs={styleOverrides.actionButtonStyles}>
         <SecondaryButton onClick={handleAdd}>Add notification</SecondaryButton>
         <TertiaryButton onClick={handleClear}>Clear</TertiaryButton>
       </Flex>
-    </>
+    </header>
   );
 };
 
-const GlobalHeaderItem = createComponent('div')({
-  displayName: 'GlobalHeader.Item',
-  Component: ({gap = 's', ...props}: HeaderItemProps, ref) => (
-    <Flex gap={gap} alignItems="center" marginX={system.space.x3} ref={ref} {...props} />
-  ),
-});
-
-const GlobalHeader = createComponent('header')({
+export const GlobalHeader = createComponent('div')({
   displayName: 'GlobalHeader',
-  Component: (props, ref) => (
-    <header className={styleOverrides.headerWrapper} ref={ref} {...props} />
+  Component: ({notifications, ...props}: GlobalHeaderProps) => (
+    <div className={styleOverrides.headerWrapper}>
+      <Flex cs={styleOverrides.flexItems}>
+        <Tooltip title="Global Navigation" type="describe">
+          <TertiaryButton icon={justifyIcon} cs={styleOverrides.menuButtonStyles}>
+            MENU
+          </TertiaryButton>
+        </Tooltip>
+        <Tooltip title="Workday Home">
+          <TertiaryButton>
+            <img src="https://design.workday.com/images/ck-dub-logo-blue.svg" alt="" />
+          </TertiaryButton>
+        </Tooltip>
+      </Flex>
+      <Flex cs={styleOverrides.flexItems}>
+        <Autocomplete aria-label="Search Workday" />
+      </Flex>
+      <Flex cs={styleOverrides.flexItems}>
+        <Tooltip title="Assistant">
+          <TertiaryButton icon={assistantIcon} />
+        </Tooltip>
+
+        <NotificationLiveBadge cnt={notifications} />
+
+        <Tooltip title="My Tasks">
+          <TertiaryButton icon={inboxIcon} />
+        </Tooltip>
+        <Tooltip title="Profile">
+          <Avatar name="Logan McNeil" isDecorative />
+        </Tooltip>
+      </Flex>
+    </div>
   ),
-  subComponents: {Item: GlobalHeaderItem},
 });
 
 const Autocomplete = createComponent('div')({
@@ -181,7 +180,7 @@ const Autocomplete = createComponent('div')({
   Component: props => {
     const [searchText, setSearchText] = React.useState('');
 
-    function handleChange(e) {
+    function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
       setSearchText(e.target.value);
     }
 

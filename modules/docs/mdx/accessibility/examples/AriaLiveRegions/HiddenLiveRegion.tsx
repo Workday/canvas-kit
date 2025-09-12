@@ -19,11 +19,11 @@ const flexStyles = createStyles({
 export const HiddenLiveRegion = () => {
   const [message, setMessage] = React.useState('');
 
-  function handleChange(e) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setMessage(e.target.value);
   }
 
-  function handleSendMessage(e) {
+  function handleSendMessage(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     liveRegionStr = message;
     setMessage('');

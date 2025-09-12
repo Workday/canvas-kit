@@ -1,0 +1,169 @@
+<Meta title="Guides/Accessibility/Overview" />
+
+## Canvas Kit Accessibility
+
+Canvas Kit is built with accessibility in mind and we continuously strive to provide a robust set of
+accessible components that are easy to customize for your needs. Core concepts and key investments
+made by the Canvas Kit development team are introduced in the sections below and throughout this
+guide.
+
+## Read Me First
+
+**No ARIA is better than Bad ARIA.**
+[Read Me First | APG | WAI | W3C](https://www.w3.org/WAI/ARIA/apg/practices/read-me-first/)
+
+Accessible Rich Internet Applications (ARIA) is like CSS styling for assistive technologies. Unlike
+CSS however, ARIA mistakes and gaps in support are not clearly visible to designers and developers.
+Canvas Kit components are built with semantic HTML and include as much of the required ARIA as
+possible according to the [WAI-ARIA 1.2 specification](https://www.w3.org/TR/wai-aria-1.2/)
+recommended by the W3C and the patterns found in the ARIA Authoring Practices Guide. (APG)
+
+## The Accessibility Tree
+
+The Accessibility Tree is created by the web browser from the semantic information provided in the
+document object model (DOM). It's like a simplified outline containing only the most important
+information: the elements on the page, what they are (e.g., a button, a link, a heading), and what
+they do. This tree is what a screen reader uses to tell a person what's on the page and how to
+interact with it.
+
+- `name:` a.k.a. “Label” describes the purpose of an element. (E.g. text fields provided for first
+  name, last name, and street address.)
+- `role:` describes what an element is and how it can be used. (E.g. a text field, radio button
+  group, or single checkbox.)
+- `state:` describes the current state of an element. (E.g. whether a text field is empty or
+  displaying text.)
+
+Further reading:
+[Full accessibility tree in Chrome DevTools](https://developer.chrome.com/blog/full-accessibility-tree#main-content)
+
+## Accessible Names and Descriptions
+
+Giving an element an **accessible name** is like giving it a label. It's a short phrase, like
+"Search" or "Submit," that a screen reader uses to tell a person what an item is. This helps a user
+understand the element's purpose and tell it apart from other items on the page. Some items, like
+buttons and links, are required to have an accessible name. You can also add an **accessible
+description** if you need to provide more information. This could be instructions for a form field
+or a longer explanation of what a button does. A screen reader will read the name first, and then
+the description, giving the user all the information they need to understand and use the element.
+
+To make a website accessible to everyone, follow these five cardinal rules for naming web elements:
+always **prefer visible text and native techniques** like HTML labels, which are simpler and more
+reliable. You should also **avoid browser fallback** like the title attribute or placeholder values.
+The names themselves should be **brief and useful**. Lastly, you should always **heed warnings and
+test thoroughly** to ensure everything works correctly.
+
+### Naming Priority (Simplified):
+
+1. `aria-labelledby` (unique id)
+2. `aria-label` (string)
+3. `<label>` and `for` attribute with unique `id` (for input)
+4. `placeholder` (for input)
+5. `alt` (for images)
+6. `text content` (between opening and closing tags)
+7. `title` (string)
+
+Further reading:
+[Providing Accessible Names and Descriptions | APG | WAI | W3C](https://www.w3.org/WAI/ARIA/apg/practices/names-and-descriptions/)
+
+## `<AccessibleHide>` Component
+
+```
+<AccessibleHide>
+  This text is hidden using CSS and still available to screen readers.
+</AccessibleHide>
+```
+
+## `<AriaLiveRegion>` Component
+
+```
+/**
+* This component includes:
+* aria-atomic="true"
+* aria-live="polite"
+* role="status"
+*/
+<AriaLiveRegion>
+  When this text is updated, screen readers will announce it automatically in live time.
+</AriaLiveRegion>
+```
+
+Check out our [Aria Live Region Examples](?path=/docs/guides-accessibility-aria-live-regions--docs)
+for more detailed information about this topic.
+
+Sometimes, things change on a webpage without the whole page reloading. Think of a live sports score
+that updates every few seconds or a search result that appears as you type. For users of screen
+readers, these changes can be missed because the screen reader doesn't know to look for them. This
+is where **ARIA live regions** come in. An ARIA live region is a special area on a webpage that
+tells a screen reader to pay close attention to it. When the content in this area changes, the
+screen reader automatically announces the update to the user. This ensures that everyone, including
+those using assistive technology, is kept aware of important, real-time changes on the page.
+
+## `useUniqueId()` Hook
+
+This handy utility function is useful anytime a unique ID is needed for assigning labels,
+descriptions, or for anything else in the web application.
+
+```
+/**
+* This example demonstrates using 'aria-labelledby' on the table container
+* instead of using HTML <caption> to assign a name for the table.
+*/
+const tableHeadingId = useUniqueId();
+...
+<Heading id={tableHeadingId}> Pizza Toppings </Heading>
+...
+<Table aria-labelledby={tableHeadingId}>
+  /* table rows */
+</Table>
+
+```
+
+Example:
+[Components > Containers > Table > Basic With Heading](?path=/story/components-containers-table--basic-with-heading)
+
+## `px2rem()` Function
+
+This is another handy utility function that will convert pixel units into relative units. While
+using the [Canvas Token System](?path=/docs/guides-tokens-migration-overview--docs) is **strongly
+recommended** first, this is a nice tool for using relative units if a space token isn't feasible.
+
+Further reading: [Canvas Kit Styling Utilities](?path=/docs/styling-utilities--docs)
+
+```
+/**
+* This example demonstrates the main content region
+* of the grid to have a height of 800px.
+*/
+const gridLayoutStyles = createStyles({
+  ...
+  gridTemplateRows: `auto ${px2rem(800)} auto`,
+});
+```
+
+Example:
+[Guides > Accessibility > Page Structure](?path=/docs/guides-accessibility-page-structure--docs)
+
+## Responsiveness and Reflow
+
+**WCAG v2.2 success criterion 1.4.10 Reflow states:**
+
+> _“Content can be presented without loss of information or functionality, and without requiring
+> scrolling in two dimensions for vertical scrolling content at a width equivalent to 320 CSS pixels
+> and horizontal scrolling content at a height equivalent to 256 CSS pixels. ”_
+
+Of course, there are exceptions to this guideline, including tables that do not apply. (Source:
+[Understanding Success Criterion 1.4.10 Reflow](https://www.w3.org/WAI/WCAG22/Understanding/reflow.html))
+In general, we have 2 key recommendations for satisfying this guideline:
+
+1. Do not specify a minimum width greater than `320px` to avoid unnecessary horizontal scroll.
+2. Do not use any sticky headers or footers at the smallest responsive breakpoints.
+
+### How we test against this guideline:
+
+Set the browser viewport to `1280px x 1024px` and increase browser zoom to 400%. This is
+mathetmatically equivalent to a width of 320 pixels and a height of 256 pixels required by the
+guideline.
+
+- Evaluate whether any horizontal scroll isn't necessary in the application.
+- Evaluate whether there is any loss of function due to sticky content.
+- Look for clipping, overlapping, or otherwise unreadable text.
