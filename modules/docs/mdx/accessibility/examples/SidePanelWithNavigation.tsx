@@ -10,6 +10,14 @@ import {Menu} from '@workday/canvas-kit-react/menu';
 import {birthdayIcon, checkIcon, ribbonIcon} from '@workday/canvas-system-icons-web';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {CanvasSystemIcon} from '@workday/design-assets-types';
+
+interface AccordionItem {
+  icon: CanvasSystemIcon;
+  title: string;
+  subtitle: string;
+  items: string[];
+}
 
 const data = {
   bestsellers: {
@@ -73,12 +81,13 @@ const stylesOverride = {
   }),
 };
 
-const Accordion = ({config}) => {
+const Accordion = ({config}: {config: AccordionItem}) => {
   const [currentPage, setCurrentPage] = React.useState('');
 
-  const handleClick = e => {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    setCurrentPage(e.target.textContent);
+    const target = e.target as HTMLAnchorElement;
+    setCurrentPage(target.textContent || '');
   };
 
   return (
@@ -94,7 +103,7 @@ const Accordion = ({config}) => {
         <Expandable.Icon iconPosition="end" />
       </Expandable.Target>
       <Expandable.Content as="ul" cs={stylesOverride.listContainer}>
-        {config.items.map(i => {
+        {config.items.map((i: string) => {
           return (
             <li key={i}>
               <Flex
@@ -115,7 +124,7 @@ const Accordion = ({config}) => {
   );
 };
 
-const IconButtonMenu = ({config}) => {
+const IconButtonMenu = ({config}: {config: AccordionItem}) => {
   return (
     <Menu>
       <Tooltip title={config.title} placement="right">
@@ -126,8 +135,8 @@ const IconButtonMenu = ({config}) => {
       <Menu.Popper placement="right">
         <Menu.Card cs={stylesOverride.flyOut}>
           <Menu.List>
-            {config.items.map(i => (
-              <Menu.Item>{i}</Menu.Item>
+            {config.items.map((i: string) => (
+              <Menu.Item key={i}>{i}</Menu.Item>
             ))}
           </Menu.List>
         </Menu.Card>

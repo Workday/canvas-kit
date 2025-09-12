@@ -42,7 +42,7 @@ let filteredFruits = fruits;
 
 export const FilterListWithLiveStatus = () => {
   const [filter, setFilter] = React.useState('');
-  function handleFilter(e) {
+  function handleFilter(e: React.ChangeEvent<HTMLInputElement>) {
     filteredFruits = fruits.filter(i => i.toUpperCase().indexOf(e.target.value.toUpperCase()) >= 0);
     setFilter(e.target.value);
   }
