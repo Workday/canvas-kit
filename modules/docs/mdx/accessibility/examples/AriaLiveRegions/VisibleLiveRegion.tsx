@@ -10,8 +10,8 @@ import {system, base} from '@workday/canvas-tokens-web';
 import {createStyles, px2rem, calc} from '@workday/canvas-kit-styling';
 
 const liveRegionStyle = createStyles({
-  border: `${px2rem(1)} solid ${system.color.border.caution.default}`,
-  backgroundColor: system.color.bg.caution.default,
+  border: `${px2rem(1)} solid ${system.color.border.caution.strong}`,
+  backgroundColor: system.color.bg.caution.softer,
   padding: system.space.x4,
   display: 'block',
   marginBlockStart: system.space.x4,
