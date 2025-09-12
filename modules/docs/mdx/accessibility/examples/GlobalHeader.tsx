@@ -168,7 +168,7 @@ export const GlobalHeader = createComponent('div')({
           <TertiaryButton icon={inboxIcon} />
         </Tooltip>
         <Tooltip title="Profile">
-          <Avatar altText="Avatar" />
+          <Avatar name="Logan McNeil" isDecorative />
         </Tooltip>
       </Flex>
     </div>
@@ -180,7 +180,7 @@ const Autocomplete = createComponent('div')({
   Component: props => {
     const [searchText, setSearchText] = React.useState('');
 
-    function handleChange(e) {
+    function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
       setSearchText(e.target.value);
     }
 
