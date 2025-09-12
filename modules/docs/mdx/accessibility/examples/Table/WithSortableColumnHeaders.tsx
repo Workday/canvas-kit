@@ -156,7 +156,7 @@ export const SortableColumnHeaders = () => {
     initialHeaderRowState
   );
 
-  function sortColumnHandler(columnName) {
+  function sortColumnHandler(columnName: string) {
     headerRowDispatch({
       column: columnName,
       payload: countryData,
