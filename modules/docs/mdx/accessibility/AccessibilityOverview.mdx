@@ -52,7 +52,7 @@ reliable. You should also **avoid browser fallback** like the title attribute or
 The names themselves should be **brief and useful**. Lastly, you should always **heed warnings and
 test thoroughly** to ensure everything works correctly.
 
-### Naming Priority with Chromium-based browsers:
+### Naming Priority (Simplified):
 
 1. `aria-labelledby` (unique id)
 2. `aria-label` (string)
@@ -70,20 +70,25 @@ Further reading:
 ```
 <AccessibleHide>
   This text is hidden using CSS and still available to screen readers.
-</Accessibility>
+</AccessibleHide>
 ```
 
 ## `<AriaLiveRegion>` Component
 
 ```
+/**
+* This component includes:
+* aria-atomic="true"
+* aria-live="polite"
+* role="status"
+*/
 <AriaLiveRegion>
   When this text is updated, screen readers will announce it automatically in live time.
 </AriaLiveRegion>
 ```
 
-Check out our
-[Aria Live Region Examples](?path=/docs/guides-accessibility-examples-aria-live-regions--docs) for
-more detailed information about this topic.
+Check out our [Aria Live Region Examples](?path=/docs/guides-accessibility-aria-live-regions--docs)
+for more detailed information about this topic.
 
 Sometimes, things change on a webpage without the whole page reloading. Think of a live sports score
 that updates every few seconds or a search result that appears as you type. For users of screen
@@ -100,8 +105,8 @@ descriptions, or for anything else in the web application.
 
 ```
 /**
-In this example, we use 'aria-labelledby' on the table container
-instead of using HTML <caption> to assign a name for the table.
+* This example demonstrates using 'aria-labelledby' on the table container
+* instead of using HTML <caption> to assign a name for the table.
 */
 const tableHeadingId = useUniqueId();
 ...
@@ -126,7 +131,7 @@ Further reading: [Canvas Kit Styling Utilities](?path=/docs/styling-utilities--d
 
 ```
 /**
-* In this example, we wanted the main content region
+* This example demonstrates the main content region
 * of the grid to have a height of 800px.
 */
 const gridLayoutStyles = createStyles({
