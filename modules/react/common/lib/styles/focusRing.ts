@@ -1,5 +1,7 @@
-import {cssVar, CSSObjectWithVars} from '@workday/canvas-kit-styling';
-import {base, brand} from '@workday/canvas-tokens-web';
+import {cssVar} from '@workday/canvas-kit-styling';
+
+// Backwards compatible type that works with both styled components and Canvas Kit styling
+import {system, brand} from '@workday/canvas-tokens-web';
 
 interface FocusRingOptions {
   width?: number;
@@ -22,8 +24,7 @@ function calculateFocusRing({
   inset,
   innerColor,
   outerColor,
-}: Required<Omit<FocusRingOptions, 'memoize' | 'inset'>> &
-  Pick<FocusRingOptions, 'inset'>): CSSObjectWithVars {
+}: Required<Omit<FocusRingOptions, 'memoize' | 'inset'>> & Pick<FocusRingOptions, 'inset'>) {
   let boxShadow, innerWidth, outerWidth;
   if (innerColor && innerColor.startsWith('--')) {
     // eslint-disable-next-line no-param-reassign
@@ -70,7 +71,7 @@ function calculateFocusRing({
  * @param innerShadowColor Allows the user to specify the inner shadow color
  * @param outerShadowColor Allows the user to specify the outer shadow color
  *
- * @returns {CSSObjectWithVars} the css object for the focus ring style
+ * @returns {{boxShadow: string}} the css object for the focus ring style
  */
 
 /**
@@ -78,15 +79,15 @@ function calculateFocusRing({
  * By default, this mixin will create a 2px focus ring tightly wrapped
  * to the container (no whitespace).
  *
- * @returns {CSSObjectWithVars} the css object for the focus ring style
+ * @returns {{boxShadow: string}} the css object for the focus ring style
  */
-export function focusRing(options: FocusRingOptions = {}, theme?: any): CSSObjectWithVars {
+export function focusRing(options: FocusRingOptions = {}) {
   const {
     width = 2,
     separation = 0,
     animate = true,
     // hard code CSS fallbacks for dynamic styles that don't use the static style transform
-    innerColor = cssVar(base.frenchVanilla100, 'rgba(255,255,255,1)'),
+    innerColor = cssVar(system.color.border.inverse, 'rgba(255,255,255,1)'),
     outerColor = cssVar(brand.common.focusOutline, 'rgba(8,117,225,1)'),
     inset,
   } = options;

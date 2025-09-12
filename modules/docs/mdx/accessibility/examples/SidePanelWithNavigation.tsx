@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {Heading, Subtext} from '@workday/canvas-kit-react/text';
@@ -30,7 +30,7 @@ const stylesOverride = {
   navContainer: createStyles({
     height: px2rem(800),
     positio: 'relative',
-    backgroundColor: base.frenchVanilla100,
+    backgroundColor: system.color.bg.alt.default,
   }),
   heading: createStyles({
     margin: system.space.zero,

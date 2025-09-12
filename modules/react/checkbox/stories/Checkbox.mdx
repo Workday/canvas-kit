@@ -1,10 +1,10 @@
 import {
-	ExampleCodeBlock,
-	SymbolDoc,
-	Specifications,
-	InformationHighlight,
+  ExampleCodeBlock,
+  SymbolDoc,
+  Specifications,
+  InformationHighlight,
 } from '@workday/canvas-kit-docs';
-import { Alert } from './examples/Alert';
+import { Caution } from './examples/Caution';
 import { Basic } from './examples/Basic';
 import { Inverse } from './examples/Inverse';
 import { Disabled } from './examples/Disabled';
@@ -87,18 +87,18 @@ Labels for required fields are suffixed by a red asterisk.
 
 ### Error States
 
-Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Alert` or
-`FormField.ErrorType.Error` to set the Checkbox to the Alert or Error state, respectively. You will
+Set the `error` prop of the wrapping Form Field to `"caution"` or
+`"error"` to set the Checkbox to the Alert or Error state, respectively. You will
 also need to set the `hintId` and `hintText` props on the Form Field to meet accessibility
 standards. You may wish to omit the `label` prop on the Form Field given that Checkbox already
 includes a label.
 
-The `error` prop may be applied directly to the Checkbox with a value of `Checkbox.ErrorType.Alert`
-or `Checkbox.ErrorType.Error` if Form Field is not being used.
+The `error` prop may be applied directly to the Checkbox with a value of `"caution"`
+or `"error"` if Form Field is not being used.
 
-#### Alert
+#### Caution
 
-<ExampleCodeBlock code={Alert} />
+<ExampleCodeBlock code={Caution} />
 
 #### Error
 
@@ -107,7 +107,7 @@ or `Checkbox.ErrorType.Error` if Form Field is not being used.
 ### Custom Styles
 
 Checkbox supports custom styling via the `cs` prop. For more information, check our
-["How To Customize Styles"](https://workday.github.io/canvas-kit/?path=/docs/styling-how-to-customize-styles--docs).
+["How To Customize Styles"](https://workday.github.io/canvas-kit/?path=/docs/styling-guides-customizing-styles--docs).
 
 ## Component API
 
