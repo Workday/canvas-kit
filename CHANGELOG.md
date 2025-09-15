@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.0.1](https://github.com/Workday/canvas-kit/releases/tag/v14.0.1) (2025-09-15)
+
+### Infrastructure
+
+- chore: Update cypress to v14 ([#3511](https://github.com/Workday/canvas-kit/pull/3511)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v14.0.0](https://github.com/Workday/canvas-kit/releases/tag/v14.0.0) (2025-09-10)
 
 ### BREAKING CHANGES
