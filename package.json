@@ -44,7 +44,7 @@
     "common-tags": "^1.8.0",
     "conventional-changelog-conventionalcommits": "^4.6.1",
     "core-js": "^3.5.0",
-    "cypress": "^13.13.0",
+    "cypress": "^14.5.4",
     "cypress-axe": "^1.5.0",
     "cypress-keyboard-plugin": "^1.0.3",
     "cypress-pipe": "^2.0.0",
