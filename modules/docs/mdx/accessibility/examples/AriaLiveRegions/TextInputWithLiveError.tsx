@@ -13,7 +13,8 @@ export const TextInputWithLiveError = () => {
   const errMsg = 'Error: First name is required.';
   const [hasError, setHasError] = React.useState('no');
   const inputRef = React.useRef(null);
-  const handleBlur = e => setHasError(e.target.value.trim().length === 0 ? 'error' : 'no');
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) =>
+    setHasError(e.target.value.trim().length === 0 ? 'error' : 'no');
   const handleSubmit = () => hasError && changeFocus(inputRef.current);
 
   return (

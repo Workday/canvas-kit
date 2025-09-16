@@ -52,7 +52,7 @@ interface HeaderRowAction {
 }
 
 const initialHeaderRowState: HeaderRowState = {
-  column1SortDirection: 'none',
+  column1SortDirection: 'ascending',
   column2SortDirection: 'none',
   column3SortDirection: 'none',
 };
@@ -94,7 +94,7 @@ function headerRowReducer(state: HeaderRowState, action: HeaderRowAction): Heade
       if (state.column3SortDirection === 'ascending') {
         action.payload.sort((a, b) => b.population - a.population);
       } else {
-        action.payload.sort();
+        action.payload.sort((a, b) => a.population - b.population);
       }
 
       return {
@@ -108,8 +108,8 @@ function headerRowReducer(state: HeaderRowState, action: HeaderRowAction): Heade
 }
 
 interface SortableColumnHeaderProps {
-  label: string;
-  onSortAction: (label: string) => void;
+  label: 'Country' | 'Capital' | 'Population';
+  onSortAction: (label: 'Country' | 'Capital' | 'Population') => void;
   children?: React.ReactNode;
   sortOrder: SortOrder;
 }
@@ -156,7 +156,7 @@ export const SortableColumnHeaders = () => {
     initialHeaderRowState
   );
 
-  function sortColumnHandler(columnName) {
+  function sortColumnHandler(columnName: 'Country' | 'Capital' | 'Population') {
     headerRowDispatch({
       column: columnName,
       payload: countryData,

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {AccessibleHide, AriaLiveRegion, useUniqueId} from '@workday/canvas-kit-react/common';
 import {notificationsIcon, inboxIcon, assistantIcon} from '@workday/canvas-system-icons-web';
 import {space} from '@workday/canvas-kit-react/tokens';
@@ -7,7 +7,7 @@ import {Flex} from '@workday/canvas-kit-react/layout';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {CountBadge} from '@workday/canvas-kit-react/badge';
 
-const MyTasksLiveBadge = ({cnt}) => {
+const MyTasksLiveBadge = ({cnt}: {cnt: number}) => {
   // use tooltip to assign name,
   // use AriaLiveRegion inside button,
   // assign name to live region referencing the button,
@@ -41,7 +41,7 @@ const MyTasksLiveBadge = ({cnt}) => {
 // JAWS 2024 => Announces full button name twice (previous state, then new state)
 // JAWS 2024 + Firefox => Works as expected :)
 // NVDA (All Browsers) => Atomic property isn't working, only announcing number change, announces twice
-const NotificationsLiveBadge = ({cnt}) => (
+const NotificationsLiveBadge = ({cnt}: {cnt: number}) => (
   <AriaLiveRegion>
     <Tooltip title={`Notifications ${cnt} new`}>
       <TertiaryButton icon={notificationsIcon}>
@@ -51,7 +51,7 @@ const NotificationsLiveBadge = ({cnt}) => (
   </AriaLiveRegion>
 );
 
-const AssistantLiveBadge = ({cnt}) => {
+const AssistantLiveBadge = ({cnt}: {cnt: number}) => {
   // use AriaLiveRegion around the button
   // use muted type Tooltip (avoid using aria-label to name button)
   // use AccessibleHide inside of button to compose name
@@ -73,9 +73,9 @@ const AssistantLiveBadge = ({cnt}) => {
 };
 
 export const IconButtonsWithLiveBadges = () => {
-  const [counter, setCounter] = useState(0);
-  const [notifications, setNotifications] = useState(0);
-  const [assistant, setAssistant] = useState(0);
+  const [counter, setCounter] = React.useState(0);
+  const [notifications, setNotifications] = React.useState(0);
+  const [assistant, setAssistant] = React.useState(0);
 
   const handleAddTask = () => setCounter(prev => prev + 1);
   const handleAddNotification = () => setNotifications(prev => prev + 1);

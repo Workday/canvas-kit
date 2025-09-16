@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 import {AriaLiveRegion} from '@workday/canvas-kit-react/common';
 import {BodyText, Heading} from '@workday/canvas-kit-react/text';
@@ -20,8 +20,8 @@ const fruits = [
 ];
 
 const liveRegionStyle = createStyles({
-  border: `${px2rem(1)} solid ${system.color.bg.caution.stronger}`,
-  backgroundColor: system.color.bg.caution.default,
+  border: `${px2rem(1)} solid ${system.color.border.caution.strong}`,
+  backgroundColor: system.color.bg.caution.softer,
   padding: system.space.x2,
 });
 
@@ -41,8 +41,8 @@ const flexStyles = createStyles({
 let filteredFruits = fruits;
 
 export const FilterListWithLiveStatus = () => {
-  const [filter, setFilter] = useState('');
-  function handleFilter(e) {
+  const [filter, setFilter] = React.useState('');
+  function handleFilter(e: React.ChangeEvent<HTMLInputElement>) {
     filteredFruits = fruits.filter(i => i.toUpperCase().indexOf(e.target.value.toUpperCase()) >= 0);
     setFilter(e.target.value);
   }
