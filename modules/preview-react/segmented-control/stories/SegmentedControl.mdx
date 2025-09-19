@@ -39,10 +39,34 @@ one button can be active at a time.
 
 <ExampleCodeBlock code={Basic} />
 
-Note that you must provide `SegmentedControl.List` with an `aria-label` prop for accessibility
-reasons.
-
 We **strongly** discourage including more than four buttons in a single `SegmentedControl`.
+
+### Accessibility
+
+Our `SegmentedControl` component renders semantic HTML `<button>` elements to the browser DOM,
+wrapped inside of a `<div>` with an explicit ARIA `role="group"`. This is equivalent to an HTML
+`<fieldset>` element, and useful for screen readers to describe the relationship between the
+buttons.
+
+- Each button is a 2-state toggle button with `aria-pressed={true | false}` to indicate the current
+  state to screen readers.
+- Providing your own `aria-label`string to `SegmentedControl.List` is recommended for describing the
+  purpose of the component.
+
+#### Screen Reader Experience
+
+When users interact with a `SegmentedControl` using screen readers:
+
+- The group context is announced (e.g., "View options, group" when using
+  `aria-label="View options"`)
+- Each button announces its text/label, "toggle button" role, and pressed/unpressed state (e.g.,
+  "List view, toggle button, pressed" or "Grid view, toggle button, not pressed")
+- For icon-only buttons with tooltips, the tooltip text is announced along with the button role and
+  state
+- When a button is activated, screen readers should announce the new state
+
+Refer to [Button](?path=/docs/components-buttons--docs#accessibility) for more information about
+accessibility of these components.
 
 ### Variations
 
