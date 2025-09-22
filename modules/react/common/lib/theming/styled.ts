@@ -10,6 +10,9 @@ interface ThemingStyledOptions {
   shouldForwardProp?: (prop: any) => boolean;
 }
 
+/**
+ * `@deprecated ⚠️ `filterOutProps` is deprecated and will be removed in a future major version. Use
+ */
 export const filterOutProps = (omittedProps: string[]) => {
   return (prop: string) => !omittedProps.includes(prop);
 };
@@ -42,4 +45,7 @@ function styled<Props>(node: any, options?: ThemingStyledOptions) {
   };
 }
 
+/**
+ * @deprecated ⚠️ `styled` is deprecated and will be removed in a future major version. Please use `createStyles` or `createStencil` instead with [CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values). For more information, view our [Styling docs](https://workday.github.io/canvas-kit/?path=/docs/styling-getting-started-overview--docs).
+ */
 export default styled as CreateStyled;

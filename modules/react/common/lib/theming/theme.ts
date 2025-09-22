@@ -2,6 +2,9 @@ import {CanvasTheme, ContentDirection} from './types';
 import {base} from '@workday/canvas-tokens-web';
 import {breakpoints, up, down, between, only} from './breakpoints';
 
+/**
+ * @deprecated ⚠️ `defaultCanvasTheme` is deprecated and will be removed in a future major version. If you want to reset the theme, use `defaultBranding` and apply the the `CanvasProvider`. For more information, view out [theming docs](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs).
+ */
 export const defaultCanvasTheme: CanvasTheme = {
   palette: {
     primary: {
