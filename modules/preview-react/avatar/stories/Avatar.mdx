@@ -1,0 +1,81 @@
+import {SymbolDoc, Specifications, ExampleCodeBlock} from '@workday/canvas-kit-docs';
+
+import {Avatar} from '@workday/canvas-kit-preview-react/avatar';
+import {Basic} from './examples/Basic';
+import {Image} from './examples/Image';
+import {Size} from './examples/Size';
+import {Variant} from './examples/Variant';
+import {Custom} from './examples/Custom';
+import {Decorative} from './examples/Decorative';
+
+<Meta title="Preview/Avatar" component={Avatar} />
+
+# Avatar
+
+
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-preview-react
+```
+
+
+## Usage
+
+### Basic Example
+
+The most basic usage requires only a `name` prop. The component automatically extracts and displays
+the initials. If you want to display a different set of initials, you can use the `preferredInitials` prop.
+
+<ExampleCodeBlock code={Basic} />
+
+### Image Avatar
+
+You can display a profile image by providing the `url` prop.
+
+> Note: The `url` and the `name` prop is required for the image avatar. The `name` is used for the `alt` attribute on the image.
+
+#### Image Fallback Behavior
+
+The Avatar component includes intelligent fallback handling:
+
+- While the image loads, the user's initials are displayed using the `name` prop
+- If the image fails to load, initials remain visible
+- The `name` prop serves as both the alt text and fallback content
+
+<ExampleCodeBlock code={Image} />
+
+### Sizes
+
+The Avatar component supports the following sizes:
+- `extraExtraSmall` is 24px x 24px
+- `extraSmall` is 32px x 32px
+- `small` is 40px x 40px
+- `medium` is 48px x 48px
+- `large` is 72px x 72px
+- `extraLarge` is 96px x 96px
+- `extraExtraLarge` is 120px x 120px
+
+<ExampleCodeBlock code={Size} />
+
+### Variants
+
+Choose from four predefined color schemes:
+
+<ExampleCodeBlock code={Variant} />
+
+### Advanced Custom Component
+
+For complete control over styling and behavior, use the `BaseAvatar` component:
+
+<ExampleCodeBlock code={Custom} />
+
+### Accessibility
+If the Avatar is purely decorative, you can set the `isDecorative` prop to `true` to prevent the `name` prop from being forwarded to the `alt` attribute of the image.
+
+<ExampleCodeBlock code={Decorative} />
+
+## Component API
+
+<SymbolDoc name="Avatar" fileName="/preview-react/" hideDescription />

@@ -1,6 +1,7 @@
 import colors from '@workday/canvas-colors-web';
-import {defaultCanvasTheme, createCanvasTheme, PartialCanvasTheme} from '../lib/theming';
-import {shiftColor} from '../lib/theming/createCanvasTheme';
+import {defaultCanvasTheme, PartialCanvasTheme} from '../lib/theming';
+import {shiftColor, createCanvasTheme} from '../lib/theming/createCanvasTheme';
+
 import {deepMerge} from '../lib/utils/deepMerge';
 
 describe('createCanvasTheme', () => {
@@ -13,6 +14,7 @@ describe('createCanvasTheme', () => {
   test('calling with a custom palette should replace that palette', () => {
     const palette = {
       lightest: 'orange',
+      lighter: 'orange',
       light: 'orange',
       main: 'orange',
       dark: 'orange',
@@ -45,6 +47,7 @@ describe('createCanvasTheme', () => {
     const expected = {...defaultCanvasTheme};
     expected.palette.primary = {
       lightest: '#ffff7d',
+      lighter: '#fff064',
       light: '#ffd64a',
       main: 'orange',
       dark: '#c67600',

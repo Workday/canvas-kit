@@ -140,7 +140,7 @@ export const systemColors = {
     soap400: 'system.color.bg.alt.strong',
     soap500: 'system.color.bg.alt.stronger',
   },
-  'color,fill,colorFocus,colorHover,colorActive,icon,iconColor': {
+  'color,fill,colorFocus,colorHover,colorActive,icon,iconColor,textShadow': {
     blackPepper300: 'system.color.fg.default',
     blackPepper400: 'system.color.fg.strong',
     blackPepper500: 'system.color.fg.stronger',
@@ -154,7 +154,7 @@ export const systemColors = {
     licorice400: 'system.color.fg.muted.strong',
     licorice500: 'system.color.fg.muted.stronger',
   },
-  'border,borderColor,borderTopColor,borderRightColor,borderBottomColor,borderLeftColor,borderInlineColor,borderBlockColor,borderInlineStartColor,borderInlineEndColor,borderBlockStartColor,borderBlockEndColor,borderColorFocus,borderColorHover,borderColorActive':
+  'border,borderColor,borderTopColor,borderRightColor,borderBottomColor,borderLeftColor,borderInline,borderInlineStart,borderInlineEnd,borderBlock,borderBlockStart,borderBlockEnd,borderInlineColor,borderBlockColor,borderInlineStartColor,borderInlineEndColor,borderBlockStartColor,borderBlockEndColor,borderColorFocus,borderColorHover,borderColorActive':
     {
       blackPepper400: 'system.color.border.contrast.default',
       blackPepper500: 'system.color.border.contrast.strong',

@@ -1,0 +1,47 @@
+<Meta title="Guides/Packages" />
+
+### Main
+
+Our Main package of Canvas Kit components and utilities at `@workday/canvas-kit-react` has undergone
+a full design and a11y review and is approved for use in product.
+
+Breaking changes to code in Main will only occur during major version updates and will always be
+communicated in advance and accompanied by migration strategies.
+
+---
+
+### Preview
+
+Our Preview package of Canvas Kit components and utilities at `@workday/canvas-kit-preview-react`
+has undergone a full design and a11y review and is approved for use in product, but may not be up to
+the high code standards upheld in the [Main](#main) package. Preview is analagous to code in beta.
+
+Breaking changes are unlikely, but possible, and can be deployed to Preview at any time without
+triggering a major version update, though such changes will be communicated in advance and
+accompanied by migration strategies.
+
+Generally speaking, our goal is to eventually promote code from Preview to [Main](#main).
+Occasionally, a component with the same name will exist in both [Main](#main) and Preview (for
+example, see Segmented Control in [Preview](/components/buttons/segmented-control/) and
+[Main](https://workday.github.io/canvas-kit//?path=/docs/components-buttons-segmented-control--docs)).
+In these cases, Preview serves as a staging ground for an improved version of the component with a
+different API. The component in [Main](#main) will eventually be replaced with the one in Preview.
+
+---
+
+### Labs
+
+Our Labs package of Canvas Kit components and utilities at `@workday/canvas-kit-labs-react` has
+**not** undergone a full design and a11y review. Labs serves as an incubator space for new and
+experimental code and is analagous to code in alpha.
+
+Breaking changes can be deployed to Labs at any time without triggering a major version update and
+may not be subject to the same rigor in communcation and migration strategies reserved for breaking
+changes in [Preview](#preview) and [Main](#main).
+`import { opacity } from "@workday/canvas-tokens-web/dist/es6/system"`
+
+### Styling
+
+This package contains everything needed to create CSS styling. This styling package contains a
+runtime for development and a static parsing process for build time. For more information, visit
+https://workday.github.io/canvas-kit/?path=/docs/styling-guides-why-canvas-styling--docs
