@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.0.5](https://github.com/Workday/canvas-kit/releases/tag/v14.0.5) (2025-09-30)
+
+### Documentation
+
+- fix: Update token version number for stackblitz files ([#3526](https://github.com/Workday/canvas-kit/pull/3526)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v14.0.4](https://github.com/Workday/canvas-kit/releases/tag/v14.0.4) (2025-09-30)
 
 ### Documentation
