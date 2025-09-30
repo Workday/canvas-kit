@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.0.4](https://github.com/Workday/canvas-kit/releases/tag/v14.0.4) (2025-09-30)
+
+### Documentation
+
+- docs: Adding documentation for useModalModel hook ([#3525](https://github.com/Workday/canvas-kit/pull/3525)) ([@WorkdayHenry](https://github.com/WorkdayHenry))
+
+
+## [v13.2.32](https://github.com/Workday/canvas-kit/releases/tag/v13.2.32) (2025-09-30)
+
+### Documentation
+
+- docs: Adding documentation for useModalModel hook ([#3525](https://github.com/Workday/canvas-kit/pull/3525)) ([@WorkdayHenry](https://github.com/WorkdayHenry))
 ## [v14.0.3](https://github.com/Workday/canvas-kit/releases/tag/v14.0.3) (2025-09-19)
 
 ### Components
