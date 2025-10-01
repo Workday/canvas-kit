@@ -11,7 +11,7 @@ interface ThemingStyledOptions {
 }
 
 /**
- * `@deprecated ⚠️ `filterOutProps` is deprecated and will be removed in a future major version. Use
+ * @deprecated ⚠️ `filterOutProps` is deprecated and will be removed in a future major version. Use our `createComponent` and `handleCsProp` helpers to handle props. For more information, view our [Meriging Styles Docs](https://workday.github.io/canvas-kit/?path=/docs/styling-guides-merging-styles--docs#handlecsprop).
  */
 export const filterOutProps = (omittedProps: string[]) => {
   return (prop: string) => !omittedProps.includes(prop);
