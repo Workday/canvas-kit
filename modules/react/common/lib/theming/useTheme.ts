@@ -13,6 +13,7 @@ import {base} from '@workday/canvas-tokens-web';
 
 /**
  * We can adjust the shift but this should get us close enough until we clean up the algorithm to determine the colors.
+ * @deprecated ⚠️ `shiftColor` is deprecated and will be removed in a future major version. While we work on a algorithm for color shifting, you can use [`oklch from`](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch) to generate a palette.
  */
 const shiftColor = (color: string, value: number) => {
   return `oklch(from ${color} calc(l ${value > 0 ? '+' : '-'} ${Math.abs(value) / 1000}) c h)`;
@@ -108,6 +109,7 @@ const getFilledTheme = (theme: PartialEmotionCanvasTheme): EmotionCanvasTheme =>
  *    margin: space.l
  *  }
  * }
+ * @deprecated ⚠️ `getTheme` is deprecated and will be removed in a future major version. Please use our [CSS tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-brand-tokens--docs) to theme components.
  */
 export function getTheme(theme?: PartialEmotionCanvasTheme): EmotionCanvasTheme {
   if (theme?.canvas) {
@@ -150,6 +152,7 @@ export function getTheme(theme?: PartialEmotionCanvasTheme): EmotionCanvasTheme 
  *    <Subtext size="large" color={theme.canvas.palette.error.main}>
  *  );
  * }
+ * @deprecated ⚠️ `useTheme` is deprecated and will be removed in a future major version. Please use our [CSS tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-brand-tokens--docs) to theme components.
  */
 export function useTheme(theme?: PartialEmotionCanvasTheme): EmotionCanvasTheme {
   if (!theme) {

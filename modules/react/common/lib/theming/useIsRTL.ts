@@ -14,7 +14,7 @@ function useDefaultTheme<T, C>(theme: T | undefined, config: C, fn: (config: C) 
  * const isRTL = useIsRTL();
  * ```
  *
- * @deprecated Use isElementRTL instead.
+ * @deprecated ⚠️ `useIsRTL` is deprecated and will be removed in a future major version. Please use `isElementRTL` instead.
  */
 
 export const useIsRTL = (partialTheme?: PartialEmotionCanvasTheme) => {
