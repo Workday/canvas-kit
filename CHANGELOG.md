@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.0.6](https://github.com/Workday/canvas-kit/releases/tag/v14.0.6) (2025-10-01)
+
+### Components
+
+- fix: Menu items when disabled should still have a background when focused and hovered ([#3528](https://github.com/Workday/canvas-kit/pull/3528)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v14.0.5](https://github.com/Workday/canvas-kit/releases/tag/v14.0.5) (2025-09-30)
 
 ### Documentation
