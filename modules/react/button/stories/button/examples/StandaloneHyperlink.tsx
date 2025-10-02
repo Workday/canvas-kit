@@ -12,7 +12,11 @@ export const StandaloneLink = () => (
     <Hyperlink variant="standalone" href="#standalone-hyperlink">
       Standalone Hyperlink
     </Hyperlink>
-    <ExternalHyperlink variant="standalone" href="#standalone-external-hyperlink">
+    <ExternalHyperlink
+      variant="standalone"
+      href="#standalone-external-hyperlink"
+      iconLabel="Opens new window"
+    >
       Standalone External Hyperlink
     </ExternalHyperlink>
   </div>
