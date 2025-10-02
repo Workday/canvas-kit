@@ -125,14 +125,13 @@ export const menuItemStencil = createStencil({
       color: system.color.fg.disabled,
       cursor: 'default',
 
+      '&:where(.hover, :hover, [aria-selected=true])': {
+        background: 'none',
+      },
       // Focus + Disabled
       '&:where(.focus, :focus)': {
         color: system.color.fg.inverse,
         backgroundColor: brand.primary.light,
-      },
-
-      '&:where(.hover, :hover, [aria-selected=true])': {
-        background: 'none',
       },
     },
 

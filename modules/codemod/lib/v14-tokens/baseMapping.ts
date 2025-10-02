@@ -169,9 +169,9 @@ const baseMapping = {
 
   blackPepper100: 'neutral500',
   blackPepper200: 'neutral700',
-  blackPepper300: 'neutral900',
-  blackPepper400: 'neutral950',
-  blackPepper500: 'neutral975',
+  blackPepper300: 'neutral800',
+  blackPepper400: 'neutral900',
+  blackPepper500: 'neutral950',
   blackPepper600: 'neutral1000',
 
   dragonFruit100: 'purple25',

@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.0.6](https://github.com/Workday/canvas-kit/releases/tag/v14.0.6) (2025-10-01)
+
+### Components
+
+- fix: Menu items when disabled should still have a background when focused and hovered ([#3528](https://github.com/Workday/canvas-kit/pull/3528)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v14.0.5](https://github.com/Workday/canvas-kit/releases/tag/v14.0.5) (2025-09-30)
+
+### Documentation
+
+- fix: Update token version number for stackblitz files ([#3526](https://github.com/Workday/canvas-kit/pull/3526)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v14.0.4](https://github.com/Workday/canvas-kit/releases/tag/v14.0.4) (2025-09-30)
+
+### Documentation
+
+- docs: Adding documentation for useModalModel hook ([#3525](https://github.com/Workday/canvas-kit/pull/3525)) ([@WorkdayHenry](https://github.com/WorkdayHenry))
+
+
+## [v13.2.32](https://github.com/Workday/canvas-kit/releases/tag/v13.2.32) (2025-09-30)
+
+### Documentation
+
+- docs: Adding documentation for useModalModel hook ([#3525](https://github.com/Workday/canvas-kit/pull/3525)) ([@WorkdayHenry](https://github.com/WorkdayHenry))
+## [v14.0.3](https://github.com/Workday/canvas-kit/releases/tag/v14.0.3) (2025-09-19)
+
+### Components
+
+- fix: Update tokens ([#3517](https://github.com/Workday/canvas-kit/pull/3517)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
 ## [v14.0.2](https://github.com/Workday/canvas-kit/releases/tag/v14.0.2) (2025-09-16)
 
 ### Documentation
