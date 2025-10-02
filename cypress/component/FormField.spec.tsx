@@ -1,5 +1,5 @@
 import {Basic} from '../../modules/react/form-field/stories/examples/Basic';
-import {Alert} from '../../modules/react/form-field/stories/examples/Alert';
+import {Caution} from '../../modules/react/form-field/stories/examples/Caution';
 import {Error} from '../../modules/react/form-field/stories/examples/Error';
 import {Required} from '../../modules/react/form-field/stories/examples/Required';
 
@@ -54,7 +54,7 @@ describe('Form Field', () => {
 
   context(`given the 'Alert' story is rendered`, () => {
     beforeEach(() => {
-      cy.mount(<Alert />);
+      cy.mount(<Caution />);
     });
 
     it('should not have any axe errors', () => {

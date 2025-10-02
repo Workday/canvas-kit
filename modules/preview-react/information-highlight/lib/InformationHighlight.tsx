@@ -1,6 +1,6 @@
 import {createContainer} from '@workday/canvas-kit-react/common';
-import {cssVar, createStencil, handleCsProp, CSProps, px2rem} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {createStencil, handleCsProp, CSProps, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 import {InformationHighlightHeading} from './parts/Heading';
 import {Body} from './parts/Body';
@@ -20,77 +20,66 @@ export const informationHighlightStencil = createStencil({
     padding: system.space.x4,
     borderRadius: system.shape.x1,
     outline: `${px2rem(1)} solid transparent`,
+    borderInlineStart: `${system.space.x1} solid transparent`,
   },
   modifiers: {
     informational: {
       low: {
-        borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(
-          system.color.bg.primary.default
-        )}`,
+        borderInlineStartColor: system.color.border.info.default,
         backgroundColor: system.color.bg.alt.soft,
         '& [data-part="information-highlight-icon"]': {
-          [systemIconStencil.vars.accentColor]: system.color.bg.primary.default,
-          [systemIconStencil.vars.color]: system.color.bg.primary.default,
-          [systemIconStencil.vars.backgroundColor]: 'none',
+          [systemIconStencil.vars.accentColor]: system.color.icon.info.default,
+          [systemIconStencil.vars.color]: system.color.icon.info.default,
+          [systemIconStencil.vars.backgroundColor]: 'transparent',
         },
       },
       high: {
-        borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(
-          system.color.bg.primary.default
-        )}`,
-        backgroundColor: base.blueberry100,
+        borderInlineStartColor: system.color.border.info.default,
+        backgroundColor: system.color.bg.info.softest,
         '& [data-part="information-highlight-icon"]': {
           [systemIconStencil.vars.accentColor]: system.color.icon.inverse,
-          [systemIconStencil.vars.color]: system.color.bg.primary.default,
-          [systemIconStencil.vars.backgroundColor]: system.color.bg.primary.default,
+          [systemIconStencil.vars.color]: system.color.icon.info.default,
+          [systemIconStencil.vars.backgroundColor]: system.color.icon.info.default,
         },
       },
     },
     caution: {
       low: {
-        borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(
-          system.color.border.caution.default
-        )}`,
+        borderInlineStartColor: system.color.border.caution.default,
         backgroundColor: system.color.bg.alt.soft,
         '& [data-part="information-highlight-icon"]': {
-          [systemIconStencil.vars.accentColor]: system.color.fg.contrast.default,
-          [systemIconStencil.vars.color]: system.color.fg.contrast.default,
-          [systemIconStencil.vars.backgroundColor]: 'none',
+          [systemIconStencil.vars.accentColor]: system.color.icon.strong,
+          [systemIconStencil.vars.color]: system.color.icon.strong,
+          [systemIconStencil.vars.backgroundColor]: 'transparent',
         },
       },
       high: {
-        borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(
-          system.color.border.caution.default
-        )}`,
-        backgroundColor: base.sourLemon100,
+        borderInlineStartColor: system.color.border.caution.default,
+        backgroundColor: system.color.bg.caution.softest,
         '& [data-part="information-highlight-icon"]': {
           [systemIconStencil.vars.accentColor]: system.color.icon.inverse,
-          [systemIconStencil.vars.color]: system.color.fg.contrast.default,
-          [systemIconStencil.vars.backgroundColor]: system.color.fg.contrast.default,
+          [systemIconStencil.vars.color]: system.color.icon.caution.softer,
+          [systemIconStencil.vars.backgroundColor]: system.color.icon.caution.softer,
         },
       },
     },
     critical: {
       low: {
-        borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(
-          system.color.border.critical.default
-        )}`,
+        borderInlineStartColor: system.color.border.critical.default,
         backgroundColor: system.color.bg.alt.soft,
         '& [data-part="information-highlight-icon"]': {
-          [systemIconStencil.vars.accentColor]: system.color.bg.critical.default,
-          [systemIconStencil.vars.color]: system.color.bg.critical.default,
-          [systemIconStencil.vars.backgroundColor]: 'none',
+          [systemIconStencil.vars.accentColor]: system.color.icon.critical.default,
+          [systemIconStencil.vars.color]: system.color.icon.critical.default,
+          [systemIconStencil.vars.backgroundColor]: 'transparent',
         },
       },
       high: {
-        borderInlineStart: `solid ${cssVar(system.space.x1)} ${cssVar(
-          system.color.border.critical.default
-        )}`,
-        backgroundColor: base.peach100,
+        borderInlineStartColor: system.color.border.critical.default,
+        backgroundColor: system.color.bg.critical.softest,
         '& [data-part="information-highlight-icon"]': {
           [systemIconStencil.vars.accentColor]: system.color.icon.inverse,
-          [systemIconStencil.vars.color]: system.color.bg.critical.default,
-          [systemIconStencil.vars.backgroundColor]: system.color.bg.critical.default,
+          [systemIconStencil.vars.color]: system.color.icon.critical.default,
+          [systemIconStencil.vars.backgroundColor]: system.color.icon.critical.default,
         },
       },
     },

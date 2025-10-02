@@ -1,39 +1,46 @@
-import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
-import {StyledType, styled, createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent} from '@workday/canvas-kit-react/common';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {system} from '@workday/canvas-tokens-web';
 
 export interface ListProps extends FlexProps {}
 
-const StyledList = styled(Flex.as('ul'))<StyledType & FlexProps>({
-  listStyle: 'none',
+export const paginationListStencil = createStencil({
+  base: {
+    display: 'flex',
+    marginBlock: system.space.zero,
+    marginInline: system.space.zero,
+    padding: system.space.zero,
+    listStyle: 'none',
+  },
 });
 
 export const List = createComponent('ul')({
   displayName: 'List',
   Component: ({children, ...elemProps}: ListProps, ref, Element) => {
     return (
-      <StyledList
-        as={Element}
-        marginY="zero"
-        marginX="zero"
-        padding="zero"
-        ref={ref}
-        {...elemProps}
-      >
+      <Element ref={ref} {...mergeStyles(elemProps, paginationListStencil())}>
         {children}
-      </StyledList>
+      </Element>
     );
   },
 });
 
 export interface ListItemProps extends FlexProps {}
 
+export const paginationListItemStencil = createStencil({
+  base: {
+    display: 'flex',
+  },
+});
+
 export const ListItem = createComponent('li')({
   displayName: 'ListItem',
   Component: ({children, ...elemProps}: ListItemProps, ref, Element) => {
     return (
-      <Flex as={Element} ref={ref} {...elemProps}>
+      <Element ref={ref} {...mergeStyles(elemProps, paginationListItemStencil())}>
         {children}
-      </Flex>
+      </Element>
     );
   },
 });

@@ -51,20 +51,20 @@ export const bannerStencil = createStencil({
           background: brand.error.dark,
         },
         '& [data-part="exclamation-circle-icon"]': {
-          [systemIconStencil.vars.accentColor]: brand.error.accent,
-          [systemIconStencil.vars.color]: brand.error.accent,
+          [systemIconStencil.vars.accentColor]: 'currentColor',
+          [systemIconStencil.vars.color]: 'currentColor',
           [systemIconStencil.vars.backgroundColor]: 'none',
         },
       },
       false: {
         backgroundColor: brand.alert.base,
-        color: system.color.fg.contrast.default,
+        color: brand.alert.accent,
         '&:hover, &.hover': {
           background: brand.alert.dark,
         },
         '& [data-part="exclamation-triangle-icon"]': {
-          [systemIconStencil.vars.accentColor]: system.color.fg.contrast.default,
-          [systemIconStencil.vars.color]: system.color.fg.contrast.default,
+          [systemIconStencil.vars.accentColor]: 'currentColor',
+          [systemIconStencil.vars.color]: 'currentColor',
           [systemIconStencil.vars.backgroundColor]: 'none',
         },
       },
