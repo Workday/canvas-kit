@@ -99,7 +99,7 @@ export const useListItemRegister = createElemPropsHook(useListModel)(
       ref: elementRef,
       'data-id': localId,
       disabled: elemProps.disabled || state.nonInteractiveIds.includes(localId) ? true : undefined,
-      'aria-setsize': virtual ? state.UNSTABLE_virtual.getTotalSize() : undefined,
+      'aria-setsize': virtual ? state.UNSTABLE_virtual.options.count : undefined,
       'aria-posinset': virtual ? item!.index + 1 : undefined,
       'data-index': virtual ? item!.index : undefined,
       style,
