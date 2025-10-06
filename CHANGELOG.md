@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.0.7](https://github.com/Workday/canvas-kit/releases/tag/v14.0.7) (2025-10-02)
+
+### Components
+
+- fix: Properly set aria-setsize to total count of virtual items ([#3530](https://github.com/Workday/canvas-kit/pull/3530)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v13.2.33](https://github.com/Workday/canvas-kit/releases/tag/v13.2.33) (2025-10-02)
+
+### Components
+
+- fix: Properly set aria-setsize to total count of virtual items ([#3530](https://github.com/Workday/canvas-kit/pull/3530)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
 ## [v14.0.6](https://github.com/Workday/canvas-kit/releases/tag/v14.0.6) (2025-10-01)
 
 ### Components
