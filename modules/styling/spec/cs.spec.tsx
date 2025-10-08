@@ -874,10 +874,17 @@ describe('cs', () => {
         base: {},
         modifiers: {
           variant: {
-            regular: {},
+            regular: {
+              '--variant': 'regular',
+            },
           },
           size: {
-            large: {},
+            large: {
+              '--size': 'large',
+            },
+            small: {
+              '--size': 'small',
+            },
           },
         },
         compound: [
@@ -895,8 +902,18 @@ describe('cs', () => {
               ).toEqualTypeOf<'[data-part="my-separator"]'>();
 
               return {
+                '--modifiers': 'var(--regular-large)',
                 color: varsAndParts.color,
               };
+            },
+          },
+          {
+            modifiers: {
+              variant: 'regular',
+              size: 'small',
+            },
+            styles: {
+              color: 'blue',
             },
           },
         ],
@@ -908,7 +925,7 @@ describe('cs', () => {
       let found = false;
       for (const sheet of document.styleSheets as any as Iterable<CSSStyleSheet>) {
         for (const rule of sheet.cssRules as any as Iterable<CSSRule>) {
-          if (rule.cssText.includes(myStencil.modifiers.variant.regular)) {
+          if (rule.cssText.includes('var(--regular-large)')) {
             expect(rule.cssText).toContain(`color: var(${myStencil.vars.color})`);
             found = true;
           }

@@ -1320,7 +1320,11 @@ export function createStencil<
         compound.map(compoundModifier => {
           return {
             modifiers: compoundModifier.modifiers,
-            styles: createStyles(compoundModifier.styles),
+            styles: createStyles(
+              typeof compoundModifier.styles === 'function'
+                ? compoundModifier.styles({..._vars, ..._partsVars})
+                : compoundModifier.styles
+            ),
           };
         })
       )
