@@ -835,9 +835,15 @@ describe('cs', () => {
         base: {},
         modifiers: {
           variant: {
-            regular: vars => ({
-              color: vars.default.color,
-            }),
+            regular: vars => {
+              expectTypeOf(vars).toHaveProperty('default');
+              expectTypeOf(vars.default).toHaveProperty('color');
+              expectTypeOf(vars.default.color).toEqualTypeOf<`--${string}`>();
+
+              return {
+                color: vars.default.color,
+              };
+            },
           },
         },
       });
@@ -850,6 +856,60 @@ describe('cs', () => {
         for (const rule of sheet.cssRules as any as Iterable<CSSRule>) {
           if (rule.cssText.includes(myStencil.modifiers.variant.regular)) {
             expect(rule.cssText).toContain(`color: var(${myStencil.vars.default.color})`);
+            found = true;
+          }
+        }
+      }
+      expect(found).toEqual(true);
+    });
+
+    it('should handle variables and pass them to the compound modifier function', () => {
+      const myStencil = createStencil({
+        vars: {
+          color: 'red',
+        },
+        parts: {
+          separator: 'my-separator',
+        },
+        base: {},
+        modifiers: {
+          variant: {
+            regular: {},
+          },
+          size: {
+            large: {},
+          },
+        },
+        compound: [
+          {
+            modifiers: {
+              variant: 'regular',
+              size: 'large',
+            },
+            styles: varsAndParts => {
+              expectTypeOf(varsAndParts).toHaveProperty('color');
+              expectTypeOf(varsAndParts.color).toEqualTypeOf<`--${string}`>();
+              expectTypeOf(varsAndParts).toHaveProperty('separatorPart');
+              expectTypeOf(
+                varsAndParts.separatorPart
+              ).toEqualTypeOf<'[data-part="my-separator"]'>();
+
+              return {
+                color: varsAndParts.color,
+              };
+            },
+          },
+        ],
+      });
+
+      // `.toHaveStyle` doesn't work with variables and worse, it ALWAYS passes when passed anything
+      // other than a parsable color string. https://github.com/testing-library/jest-dom/issues/322
+      // We'll resort to iterating over injected styles instead.
+      let found = false;
+      for (const sheet of document.styleSheets as any as Iterable<CSSStyleSheet>) {
+        for (const rule of sheet.cssRules as any as Iterable<CSSRule>) {
+          if (rule.cssText.includes(myStencil.modifiers.variant.regular)) {
+            expect(rule.cssText).toContain(`color: var(${myStencil.vars.color})`);
             found = true;
           }
         }
