@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.0.8](https://github.com/Workday/canvas-kit/releases/tag/v14.0.8) (2025-10-09)
+
+### Documentation
+
+- docs: Migrating button accessibility guidelines ([#3514](https://github.com/Workday/canvas-kit/pull/3514)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton)
+
+
 ## [v14.0.7](https://github.com/Workday/canvas-kit/releases/tag/v14.0.7) (2025-10-02)
 
 ### Components
