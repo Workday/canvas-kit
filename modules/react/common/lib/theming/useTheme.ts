@@ -13,7 +13,7 @@ import {base} from '@workday/canvas-tokens-web';
 
 /**
  * We can adjust the shift but this should get us close enough until we clean up the algorithm to determine the colors.
- * @deprecated ⚠️ `shiftColor` is deprecated and will be removed in a future major version. While we work on a algorithm for color shifting, you can use [`oklch from`](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch) to generate a palette.
+ * @deprecated ⚠️ `shiftColor` is deprecated and will be removed in a future major version. While we work on an algorithm for color shifting, you can use [`oklch from`](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch) to generate a palette.
  */
 const shiftColor = (color: string, value: number) => {
   return `oklch(from ${color} calc(l ${value > 0 ? '+' : '-'} ${Math.abs(value) / 1000}) c h)`;
