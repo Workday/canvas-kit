@@ -76,7 +76,7 @@ export const menuItemStencil = createStencil({
     minHeight: system.space.x10,
     overflowWrap: 'anywhere',
     // We want the icon colors to be the same as the text color
-    [systemIconStencil.vars.color]: 'currentcolor',
+    [systemIconStencil.vars.color]: 'currentColor',
 
     // selected checkmark
     [`& :where(${selectedPart})`]: {
@@ -97,6 +97,7 @@ export const menuItemStencil = createStencil({
       [`& :where(${selectedPart})`]: {
         opacity: system.opacity.full,
       },
+
       '&:where(.focus, :focus)': {
         [systemIconStencil.vars.color]: brand.primary.accent,
         outline: 'none',
@@ -121,11 +122,15 @@ export const menuItemStencil = createStencil({
 
     // Disabled styles
     '&:is(:disabled, [aria-disabled=true])': {
-      color: system.color.text.disabled,
+      color: system.color.fg.disabled,
       cursor: 'default',
 
+      '&:where(.hover, :hover, [aria-selected=true])': {
+        background: 'none',
+      },
       // Focus + Disabled
       '&:where(.focus, :focus)': {
+        color: system.color.fg.inverse,
         backgroundColor: brand.primary.light,
       },
     },

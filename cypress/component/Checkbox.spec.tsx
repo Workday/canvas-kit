@@ -1,5 +1,5 @@
 import {Basic} from '../../modules/react/checkbox/stories/examples/Basic';
-import {Alert} from '../../modules/react/checkbox/stories/examples/Alert';
+import {Caution} from '../../modules/react/checkbox/stories/examples/Caution';
 import {Error} from '../../modules/react/checkbox/stories/examples/Error';
 import {Disabled} from '../../modules/react/checkbox/stories/examples/Disabled';
 import {Indeterminate} from '../../modules/react/checkbox/stories/examples/Indeterminate';
@@ -9,7 +9,7 @@ const getCheckbox = () => {
 };
 
 describe('Checkbox', () => {
-  [Basic, Alert, Error].forEach(Example => {
+  [Basic, Caution, Error].forEach(Example => {
     context(`given the '${Example.name}' example is rendered`, () => {
       beforeEach(() => {
         cy.mount(<Example />);

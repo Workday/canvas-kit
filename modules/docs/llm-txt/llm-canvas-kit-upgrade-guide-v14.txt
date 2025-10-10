@@ -1,0 +1,605 @@
+Canvas Kit 14.0 Upgrade Guide
+
+This guide contains an overview of the changes in Canvas Kit v14.
+
+Why You Should Upgrade
+
+v14.0 Introduces Workday’s new brand direction which includes a new color palette and with it, some styling updates to our components.
+
+Note: While v14 does not require an upgrade to our v3 tokens, we strongly advise to upgrade to the latest to ensure proper branding.
+
+Table of contents
+
+-   Codemod
+    -   Instructions
+-   Tokens
+-   Caution Naming
+-   Theming
+    -   Canvas Provider
+-   Component Updates
+    -   Avatar Preview
+    -   Branding Changes
+    -   Buttons
+    -   Card
+    -   Count Badge
+    -   Expandable
+    -   Hyperlink and ExternalHyperlink
+    -   Loading Dots
+    -   Pill
+    -   SearchForm
+    -   Status Indicator (Preview)
+-   Deprecations
+    -   Avatar in Main
+    -   Combobox (Labs)
+    -   Radio (Main)
+    -   SearchForm (Labs)
+    -   Segmented Control (Main)
+    -   Side Panel (Main)
+    -   Tokens
+-   Removals
+    -   Deprecated Buttons
+    -   Input Provider
+    -   Menu (preview)
+    -   readyOnlyPillStencil and removeablePillStencil
+    -   Text Area
+    -   Text Input
+-   Troubleshooting
+-   Glossary
+    -   Main
+    -   Preview
+    -   Labs
+
+Codemod Overview
+
+A codemod automatically updates your code to work with most of the breaking changes in v14. Breaking changes handled by the codemod are marked with 🤖 in the Upgrade Guide.
+
+A codemod is a script that makes programmatic transformations on your codebase by traversing the AST, identifying patterns, and making prescribed changes. This decreases opportunities for error and reduces manual updates. Using the codemod is recommended.
+
+-   Codemods must be run sequentially across versions (v8 -> v9 -> v10, etc.).
+-   The codemod will not remove outdated dependencies or upgrade dependencies. Do this manually first.
+-   Codemods will not cover every breaking change in v14. Manual changes are required.
+-   Codemods are not bulletproof. Perform a full PR and QA review of all changes.
+-   Commit codemod changes in a separate commit for rollback safety.
+
+Codemod Instructions
+
+Run with npx:
+
+    npx @workday/canvas-kit-codemod v14 [path]
+
+Run with yarn:
+
+    yarn add @workday/canvas-kit-codemod --dev
+    yarn canvas-kit-codemod v14 [path]
+    yarn remove @workday/canvas-kit-codemod
+
+The codemod works only on .js, .jsx, .ts, and .tsx files. Edit .json, .mdx, .md, etc. manually. Run your linter after executing codemod.
+
+Tokens
+
+Canvas Kit v14 uses @workday/canvas-tokens-web v3. Old “fruity” color names are replaced (e.g., cinnamon -> red, blueberry -> blue, greenApple -> green). Upgrade is recommended.
+
+Migration guides:
+- Migration from @workday/canvas-kit-react/tokens
+- v2 to v3 Migration Guide
+
+🤖 The v14-tokens codemod will migrate tokens automatically.
+
+Run v14-tokens with npx:
+
+    npx @workday/canvas-kit-codemod v14-tokens [path]
+
+Caution Naming
+
+Alert and Warning states are renamed to Caution. This affects error states in components.
+
+Before in v13
+
+    <FormField error="alert">
+      <FormField.Label>First Name</FormField.Label>
+      <FormField.Field>
+        <FormField.Input as={TextInput} value={value} onChange={handleChange} />
+        <FormField.Hint>Cannot contain numbers</FormField.Hint>
+      </FormField.Field>
+    </FormField>
+
+After in v14
+
+    <FormField error="caution">
+      <FormField.Label>First Name</FormField.Label>
+      <FormField.Field>
+        <FormField.Input as={TextInput} value={value} onChange={handleChange} />
+        <FormField.Hint>Cannot contain numbers</FormField.Hint>
+      </FormField.Field>
+    </FormField>
+
+🤖 The codemod changes ErrorType.Alert to ErrorType.Caution and
+error="alert" to error="caution".
+
+If using error enums from `@workday/canvas-kit-react/common` or component-specific `ErrorType`, names change accordingly.
+
+Before in v13:
+
+  import {ErrorType} from '@workday/canvas-kit-react/common';
+  import {TextInput} from '@workday/canvas-kit-react/text-input';
+  import {Switch} from '@workday/canvas-kit-react/switch';
+  import {TextArea} from '@workday/canvas-kit-react/text-area';
+
+  someFunction(ErrorType.Alert);
+
+  <TextInput error={TextInput.ErrorType.Alert} />
+  <Switch error={Switch.ErrorType.Alert} />
+  <TextArea error={TextArea.ErrorType.Alert} />
+
+After in v14:
+
+  import {ErrorType} from '@workday/canvas-kit-react/common';
+  import {TextInput} from '@workday/canvas-kit-react/text-input';
+  import {Switch} from '@workday/canvas-kit-react/switch';
+  import {TextArea} from '@workday/canvas-kit-react/text-area';
+
+  someFunction(ErrorType.Caution);
+
+  <TextInput error={TextInput.ErrorType.Caution} />
+  <Switch error={Switch.ErrorType.Caution} />
+  <TextArea error={TextArea.ErrorType.Caution} />
+
+🤖 Codemod updates `ErrorType.Alert` → `ErrorType.Caution` and `error="alert"` → `error="caution"`.
+
+Theming
+
+Theming >> Canvas Provider
+
+- `CanvasThemePalette` and `CanvasTheme` types include a new `lighter` property;
+- `CanvasProvider` `theme` prop now includes a `lighter` color for each palette.
+
+Breaking changes: 
+
+Canvas Provider has been updated to **remove** default branding colors to ensure proper cascading of our CSS variables. Instead of generating a palette and shifting the brightness and darkness with `chroma.js`, we use `oklch` to generate the palette colors.
+
+Prior to v14, the `CanvasProvider` created a cascade barrier, re definding brand CSS variables under a class, creating a higher specificity. This made it difficult to override brand tokens in certain scenarios. v14 Removes that barrier. For a mode detailed overview of the changes in v14, please view our [v14 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs#what-is-a-cascade-barrier).
+
+Before in v13:
+
+  <CanvasProvider theme={{canvas: {palette: {primary: {main: 'purple'}}}}}>
+    <App />
+  </CanvasProvider>
+
+After in v14 (provide full palette):
+
+  <CanvasProvider
+    theme={{
+      canvas: {
+        palette: {
+          primary: {
+            lightest: base.blue25,
+            light: base.blue200,
+            main: base.blue600,
+            dark: base.blue700,
+            darkest: base.blue800,
+            contrast: base.neutral0,
+          },
+        },
+      },
+    }}
+  >
+    <App />
+  </CanvasProvider>
+
+Or (minimal main using css var):
+
+  <CanvasProvider theme={{canvas: {palette: {primary: {main: cssVar(base.blue600)}}}}}>
+    <App />
+  </CanvasProvider>
+
+Note: `chroma.js` vs `oklch` produce different results; color discrepancies may occur. To continue v13 palette generation using `chroma.js`, use `createCanvasTheme`:
+
+  <CanvasProvider theme={{canvas: createCanvasTheme({palette: {primary: {main: cssVar(base.blue600)}}})}}>
+    <App />
+  </CanvasProvider>
+
+The reason for this change is to ensure that the CSS variables properly cascade to all components. Before in v13, the `CanvasProvider` would add the brand tokens under a class name, creating a higher specificity.
+
+Component Updates
+
+Component Updates >> Avatar (Preview)
+
+A new `Avatar` component has been added to the `@workday/canvas-kit-preview-react` package that matches our brand refresh.
+
+API changes vs Main Avatar:
+
+- `Avatar` has a `name` prop. This is required to ensure a fallback if a `url` is not provided. The 1name` prop also determines the initials and the `alt` text for the image if a `url` is provided.
+- `url` stays the same. This prop is optional and will be used to display an image `Avatar`.
+- `variant` defines the color of the `Avatar`. The default is `blue` but you can choose one of the following colors: teal, purple, amber, blue.
+- By default, the `Avatar` will render a `div` element. If you need to render a `button` element use the `BaseAvatar` component.
+- `size` accepts the following values: extraExtraLarge, extraLarge, large, medium, small, extraSmall, extraExtraSmall.
+
+Avatar in Main:
+
+  import { Avatar } from '@workday/canvas-kit-react/avatar';
+  <Avatar altText="John Doe" size="extraExtraLarge" variant="light" as="div" url={yourImageUrl} />
+
+  // For Avatars that where buttons
+  <Avatar altText="John Doe" size="extraExtraLarge" variant="dark" url={yourImageUrl} />
+
+Avatar in Preview:
+
+  import { Avatar } from '@workday/canvas-kit-preview-react/avatar';
+
+  <Avatar name="John Doe" size="extraExtraLarge" variant="blue" />
+  
+  // Preferred Initials
+  <Avatar name="Julian Doe Smith" size="extraExtraLarge" variant="blue" preferredInitials="JS" />
+
+Component Updates >> Branding Changes
+
+Multiple components updated to reflect brand colors; see Tokens v3 guide for color details: https://workday.github.io/canvas-tokens/?path=/docs/guides-upgrade-guides-v3-overview--docs. For a visual diff, see: https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v14-visual-changes--docs.
+
+Updated components:
+- `Breadcrumbs`
+- `Buttons`
+- `ColorPicker` (Main) 
+- `ColorPicker` (Preview) 
+- `InformationHighlight`
+- `LoadingDots` (Main)
+- `Pagination` (Preview)
+- `Pill`
+- `SearchForm` (Labs)
+- `SegmentedControl` (Main)
+- `SegmentedControl` (Preview)
+- `ToolbarDropdownButton`
+- `ToolbarIconButton`
+
+Component Updates >> Buttons
+
+- The `TertiaryButton` component no longer supports the `isThemable` prop. To customize the appearance of `TertiaryButton`, use the `cs` prop for custom styles or the `colors` prop for palette-based color overrides.
+- The shape of `TertiaryButton` has changed to have rounded corners, aligning with other buttons and our new brand direction.
+
+For overriding default styles, see: https://workday.github.io/canvas-kit/?path=/docs/components-buttons--docs#custom-styles.
+
+Before in v13:
+
+  <TertiaryButton isThemable>Themable Button</TertiaryButton>
+
+After in v14:
+
+  <TertiaryButton cs={{[buttonStencil.vars.background]: 'red'}}>
+    Click Me
+  </TertiaryButton>
+
+Component Updates >> Card
+
+Card component has been rebranded for hierarchy and flexibility. Default card no longer has shadow (visual breaking change). Add shadows via `cs` if needed.
+
+Before in v13:
+
+  <Card>
+    <Card.Heading>Card Title</Card.Heading>
+    <Card.Body>Card content with shadow</Card.Body>
+  </Card>
+
+After in v14 (only if a shadow is needed):
+
+  import {system} from '@workday/canvas-tokens-web';
+  <Card cs={{boxShadow: system.depth[1]}}>
+    <Card.Heading>Card Title</Card.Heading>
+    <Card.Body>Card content with shadow</Card.Body>
+  </Card>;
+
+New variants:
+
+- `borderless`: for colored backgrounds without borders/shadows.
+- `filled`: grayish background for separation.
+
+The `variant` prop is optional - if no variant is specified, the card will use the default styling.
+
+Examples:
+  // Default card (border, no shadow)
+  <Card>
+    <Card.Heading>Default Card</Card.Heading>
+    <Card.Body>Default styling with borders, no shadow</Card.Body>
+  </Card>
+
+  // Borderless variant
+  <Card variant="borderless">
+    <Card.Heading>Card on Colored Background</Card.Heading>
+    <Card.Body>Content blends with background</Card.Body>
+  </Card>
+
+  // Filled variant
+  <Card variant="filled">
+    <Card.Heading>Card with grayish Background</Card.Heading>
+    <Card.Body>Content with visual separation</Card.Body>
+  </Card>
+
+Gap instead of margins: `Card` uses flex column with `gap` for consistent spacing (visual breaking change).
+
+Before in v13:
+
+  <Card>
+    <Card.Heading marginBlock="zero">Title</Card.Heading>
+    <Card.Body marginBlock="zero">Card without any spacing</Card.Body>
+  </Card>
+
+After in v14:
+
+  <Card cs={{gap: system.space.zero}}>
+    <Card.Heading>Title</Card.Heading>
+    <Card.Body>Card without any spacing</Card.Body>
+  </Card>
+
+
+Component Updates >> Count Badge
+
+CountBadge component has been updated to new brand and added `emphasis` prop (`high` | `low`).
+
+Examples (v14):
+
+  <CountBadge />                         // default high emphasis
+  <CountBadge variant="inverse" />       // inverse for dark backgrounds
+  <CountBadge emphasis="low" />          // low emphasis
+  <CountBadge variant="inverse" emphasis="low" />
+
+Component Updates >> Expandable
+
+- `<Expandable.Target>` hover state has been updated to use `system.color.bg.alt.soft` instead of `system.color.bg.alt.default` to match our new brand directions.
+- The `focus` state has been updated to use `system.color.border.primary.default` to ensure the same focus state color across all components.
+- `Expandable.Avatar` has been updated to use the `Avatar` component from Preview. This change requires that you update the `altText` prop to `name`.
+
+🤖 Codemod updates `altText` → `name` on `Expandable.Avatar`.
+
+Component Updates >> Hyperlink and External Hyperlink
+
+New variants `standalone` and `standaloneInverse` remove underline for use outside body text.
+
+Examples:
+
+  <Hyperlink variant="standalone" href="#hyperlink">Hyperlink</Hyperlink>
+  <ExternalHyperlink variant="standalone" href="#external-hyperlink">External Hyperlink</ExternalHyperlink>
+  <Hyperlink variant="standaloneInverse" href="#hyperlink">Hyperlink</Hyperlink>
+  <ExternalHyperlink variant="standaloneInverse" href="#external-hyperlink">External Hyperlink</ExternalHyperlink>
+
+Note: Use `standalone` or `standaloneInverse` only outside body text contexts.
+
+Component Updates >> Loading Dots
+
+- The default color changes from `system.color.bg.alt.strong` to `system.color.bg.muted.strong`.
+- `LoadingDots` now has an `inverse` variant. Use this variant when the Loading Dots are on a dark background or image.
+
+Example:
+
+  // Use inverse on dark backgrounds/images
+  <LoadingDots variant="inverse" />
+
+Component Updates >> Pill (Preview)
+
+`Pill` uses Preview `Avatar`; `name` is required on `Pill.Avatar`. `variant="default"` is no longer supported (omit to use default styling). `readyOnlyPillStencil` and `removeablePillStencil` removed; use `pillStencil`.
+
+🤖 Codemod updates `altText` → `name` on `Pill.Avatar`.
+
+Before in v13:
+
+    <Pill variant="default">
+      <Pill.Avatar altText="John Doe" />
+      <Pill.Label>John Doe</Pill.Label>
+    </Pill>
+
+After in v14:
+
+    <Pill>
+      <Pill.Avatar name="John Doe" />
+      <Pill.Label>John Doe</Pill.Label>
+    </Pill>
+
+
+Component Updates >> Search Form
+
+`SearchThemeAttributes.boxShadow` and `.boxShadowFocus` now accept `string` only (not `string[]`).
+
+Before in v13:
+
+    const customTheme = {
+      background: colors.cinnamon600,
+      backgroundFocus: colors.frenchVanilla100,
+      placeholderColor: colors.frenchVanilla100,
+      placeholderColorFocus: colors.blackPepper400,
+      boxShadow: ['10px 5px 5px red', '60px -16px teal'],
+      boxShadowFocus: ['10px 5px 5px red', '60px -16px teal']
+    } as SearchThemeAttributes;
+
+    <SearchForm searchTheme={customTheme} autocompleteItems={menuItems} onInputChange={filterMenuItems} onSubmit={handleSubmit} />
+
+After in v14:
+
+    const customTheme = {
+      background: colors.cinnamon600,
+      backgroundFocus: colors.frenchVanilla100,
+      placeholderColor: colors.frenchVanilla100,
+      placeholderColorFocus: colors.blackPepper400,
+      boxShadow: '10px 5px 5px red',
+      boxShadowFocus: '10px 5px 5px red',
+    } as SearchThemeAttributes;
+
+    <SearchForm searchTheme={customTheme} autocompleteItems={menuItems} onInputChange={filterMenuItems} onSubmit={handleSubmit} />;
+
+`SearchTheme` enum now uses string values `light`, `dark`, `transparent`; this should not affect usage unless numeric values `0|1|2` were being passed.
+
+Component Updates >> Status Indicator (Preview)
+
+Preview `StatusIndicator` is rounder with more vibrant base emphasis (`low`). 
+
+Variant names updated:
+- `blue` → `primary`
+- `green` → `success`
+- `orange` → `caution`
+- `red` → `critical`
+- `gray` → `neutral`
+
+The `StatusIndicatorVariant` type has been updated to contain the new variant names listed above. If only the old variant values can be used, update to use the new ones mapped above. Use `StatusIndicatorProps['variant']` instead.
+
+Before in v13
+
+    <StatusIndicator variant="blue" />
+    <StatusIndicator variant="green" />
+    <StatusIndicator variant="orange" />
+    <StatusIndicator variant="red" />
+    <StatusIndicator variant="gray" />
+
+After in v14
+
+    <StatusIndicator variant="primary" />
+    <StatusIndicator variant="success" />
+    <StatusIndicator variant="caution" />
+    <StatusIndicator variant="critical" />
+    <StatusIndicator variant="neutral" />
+
+Deprecations
+
+`@deprecated` JSDoc tags have been added for items planned for removal in a future major release; migrate to alternatives.
+
+Deprecations >> Avatar in Main
+
+Main `Avatar` is deprecated; use Preview `Avatar`.
+
+Before in v13:
+
+    import { Avatar } from '@workday/canvas-kit-react/avatar';
+    // For Avatars that where divs
+    <Avatar altText="John Doe" size="extraExtraLarge" as="div" url={yourImageUrl} />
+    // For Avatars that where buttons
+    <Avatar altText="John Doe" onClick={() => console.log('Avatar clicked')} />
+
+After in v14:
+
+    import {Avatar} from '@workday/canvas-kit-preview-react/avatar';
+    // name is used as a fallback if the image url is broken or still loading
+    // variant light or dark are not used. Instead, variant defines the color of the Avatar
+    <Avatar name="John Doe" size="extraExtraLarge" variant="teal" url={yourImageUrl} />;
+
+To render a `button` element, use `BaseAvatar`:
+
+Example:
+
+    import {BaseAvatar} from '@workday/canvas-kit-preview-react/avatar';
+    <BaseAvatar name="John Doe" size="extraExtraLarge" variant="teal" as="button" onClick={() => console.log('Avatar clicked')}>
+      <BaseAvatar.Name name="John Doe" />
+    </BaseAvatar>;
+
+Deprecations >> Combobox (Labs)
+
+The Combobox component in `@workday/canvas-kit-labs-react/combobox` has been deprecated and will be removed in a future major release. Please migrate to the [Combobox](https://workday.github.io/canvas-kit/?path=/docs/features-combobox--docs) in `@workday/canvas-kit-react`.
+
+Deprecations >> Radio (Main)
+
+The Radio component in `@workday/canvas-kit-react/radio` has been deprecated. Please use the new [Radio](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-radio--docs) component from the same package, which offers improved accessibility and API consistency.
+
+Deprecations >> Search Form (Labs)
+
+The `SearchForm` in `@workday/canvas-kit-labs-react/search-form` has been deprecated and will be removed in a future major release. Please migrate to the new [Combobox](https://workday.github.io/canvas-kit/?path=/docs/features-combobox--docs#usage) in `@workday/canvas-kit-react`.
+
+Deprecations >> Segmented Control (Main)
+
+The Segmented Control component in `@workday/canvas-kit-react/segmented-control` has been deprecated. Please migrate to the new [Segmented Control](https://workday.github.io/canvas-kit/?path=/docs/components-buttons-segmented-control--docs) for improved features and support.
+
+Deprecations >> Side Panel (Main)
+
+The Side Panel component in `@workday/canvas-kit-react/side-panel` is now deprecated and will be removed in a future release. Please use the new [Side Panel](https://workday.github.io/canvas-kit/?path=/docs/preview-side-panel--docs) for enhanced functionality.
+
+Deprecations >> Tokens (Deprecation)
+
+The legacy tokens from `@workday/canvas-kit-react/tokens` are now deprecated. Please use the new [Canvas Tokens Web](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) package (`@workday/canvas-tokens-web`) for all token usage. Follow the [migration guide](https://workday.github.io/canvas-kit?path=/docs/guides-tokens-migration-overview--docs)
+for a smoother upgrade.
+
+Removals
+
+Removals are deletions from our codebase and you can no longer consume this component. We've either promoted or replaced a component or utility.
+
+Removals >> Deprecated Buttons
+
+`DeprecatedButton` removed. Use `PrimaryButton`, `SecondaryButton`, or `TertiaryButton` which provide theme flexibility.
+
+Removals >> Input Provider
+
+`InputProvider` removed from codebase and `CanvasProvider`. It previously applied focus styles based on input modality (legacy IE11 considerations). Use `:focus-visible` per browser heuristics instead.
+
+Example:
+
+    import {createStyles} from '@workday/canvas-kit-styling'
+    import {PrimaryButton} from '@workday/canvas-kit-react/button'
+
+    const buttonStyles = createStyles({
+      '&:focus-visible': {
+        outline: '2px solid red'
+      }
+    })
+
+    <PrimaryButton cs={buttonStyles}>
+      Click Me
+    </PrimaryButton>
+
+Removals >> Menu (Preview)
+
+`Menu` in `@workday/canvas-kit-preview-react` removed; use Menu in `@workday/canvas-kit-react` Menu (docs: https://workday.github.io/canvas-kit/?path=/docs/components-popups-menu--docs).
+
+Removals >> readyOnlyPillStencil and removeablePillStencil
+
+readyOnlyPillStencil and removeablePillStencil utilities were removed from Pill; use `pillStencil`.
+
+Removals >> Text Area (Preview)
+
+TextArea from `@workday/canvas-kit-preview-react/text-area` removed; use TextArea in `@workday/canvas-kit-react` (docs: https://workday.github.io/canvas-kit/?path=/docs/components-inputs-textarea--docs).
+
+Before in v13:
+
+    import {TextArea} from '@workday/canvas-kit-preview-react/text-area';
+    <TextArea orientation="vertical">
+      <TextArea.Label>Leave a review</TextArea.Label>
+      <TextArea.Field onChange={handleChange} value={value} />
+    </TextArea>;
+
+After in v14:
+
+    import {TextArea} from '@workday/canvas-kit-preview-react/text-area';
+    import {FormField} from '@workday/canvas-kit-react/form-field';
+    <FormField>
+      <FormField.Label>Leave a Review</FormField.Label>
+      <FormField.Field>
+        <FormField.Input as={TextArea} onChange={handleChange} value={value} />
+      </FormField.Field>
+    </FormField>;
+
+Removals >> Text Input (Preview)
+
+TextInput in `@workday/canvas-kit-preview-react/text-input` removed; use TextInput in `@workday/canvas-kit-react` TextInput (docs: https://workday.github.io/canvas-kit/?path=/docs/components-inputs-text-input--docs).
+
+Before in v13:
+
+    import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
+    <TextInput orientation="vertical">
+      <TextInput.Label>Email</TextInput.Label>
+      <TextInput.Field onChange={handleChange} value={value} />
+    </TextInput>;
+
+After in v14:
+
+    import {TextArea} from '@workday/canvas-kit-preview-react/text-input';
+    import {FormField} from '@workday/canvas-kit-react/form-field';
+    <FormField>
+      <FormField.Label>Leave a Review</FormField.Label>
+      <FormField.Field>
+        <FormField.Input as={TextInput} onChange={handleChange} value={value} />
+      </FormField.Field>
+    </FormField>;
+
+**Troubleshooting**
+
+When upgrading to the latest major version of Canvas Kit, update all related packages at the same time:
+- `"@workday/canvas-kit-react": "^13.5.6"` → `"@workday/canvas-kit-react": "^14.0.0"`
+- `"@workday/canvas-kit-styling": "^13.5.6"` → `"@workday/canvas-kit-styling": "^14.0.0"`
+- `"@workday/canvas-kit-preview-react": "^13.5.6"` → `"@workday/canvas-kit-preview-react": "^14.0.0"`
+- `"@workday/canvas-kit-labs-react": "^13.5.6"` → `"@workday/canvas-kit-labs-react": "^14.0.0"`
+Ensure `@workday/canvas-tokens-web` is installed and up to date to provide CSS variables and correct styling; docs: https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs.
+
+**Glossary**
+
+For an overview of available packages, see: https://workday.github.io/canvas-kit/?path=/docs/guides-packages--docs

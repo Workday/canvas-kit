@@ -105,7 +105,9 @@ export const PrimaryIconButtonStates = {
 };
 
 export const PrimaryButtonThemedStates = {
-  render: () => <PrimaryButtonTest theme={{canvas: customColorTheme}} />,
+  render: () => {
+    return <PrimaryButtonTest theme={{canvas: customColorTheme}} />;
+  },
 };
 
 export const PrimaryButtonThemedActionStates = {

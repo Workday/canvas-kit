@@ -1,4 +1,4 @@
-import {AIIndicator, DownloadLLMFile} from '@workday/canvas-kit-docs';
+import {StorybookStatusIndicator, DownloadLLMFile} from '@workday/canvas-kit-docs';
 import {StorybookInformationHighlight} from './StorybookInformationHighlight';
 
 <Meta title="Guides/Tokens Migration/Overview" />
@@ -6,7 +6,10 @@ import {StorybookInformationHighlight} from './StorybookInformationHighlight';
 # Canvas Kit Token Migration Guide: Moving to `@workday/canvas-tokens-web`
 
 Canvas Kit v10+ introduces a new token system that replaces the old JavaScript-based tokens from
-`@workday/canvas-kit-react/tokens` with CSS variables from `@workday/canvas-tokens-web`.
+`@workday/canvas-kit-react/tokens` with CSS variables from `@workday/canvas-tokens-web`. Canvas Kit
+is using tokens from `@workday/canvas-tokens-web` v3 that introduced a new color palette with more
+clear names (like `red.600`, `blue100`) instead of the previous "fruity" palette (like `watermelon`,
+`blueberry`, etc).
 
 ## Why Migrate?
 
@@ -16,16 +19,16 @@ Canvas Kit v10+ introduces a new token system that replaces the old JavaScript-b
   Android
 - **Future-Proofing**: Aligns with modern CSS capabilities and Canvas Kit's long-term direction
 
-## LLM Assisted Migration <AIIndicator />
+## LLM Assisted Migration <StorybookStatusIndicator type="ai" />
 
 We provide a **LLM migration mapping file** (`llm-token-migration.txt`) specifically designed for
 use with LLM-based code assistants (such as [Cursor](https://www.cursor.so/) or similar tools). This
 file is not intended for direct human reference or team documentation, but rather as structured
 input for LLMs to automate and assist with your token migration process.
 
-> The LLM migration file is regularly updated to reflect the latest token mappings and best
-> practices.
-> For more details, see other sections of this migration guide.
+> Important: LLMs can make mistakes. Please review changes to be sure they are correct using our
+> docs and upgrade guides. The LLM migration file is regularly updated to reflect the latest token
+> mappings and best practices. For more details, see other sections of this migration guide.
 
 This file contains a comprehensive mapping of old Canvas Kit token usages to their new equivalents
 in `@workday/canvas-tokens-web`, along with migration tips and examples and formatted for optimal
@@ -39,8 +42,8 @@ LLM consumption.
   migration
 
 <DownloadLLMFile
-  rawFileLink="https://raw.githubusercontent.com/Workday/canvas-kit/master/modules/docs/llm-txt/llm-token-migration.txt"
-  filename="llm-token-migration-13.2.0.txt"
+  rawFileLink="https://raw.githubusercontent.com/Workday/canvas-kit/master/modules/docs/llm-txt/llm-token-migration-14.txt"
+  filename="llm-token-migration-14.0.0.txt"
 />
 
 ## Core Principles
@@ -102,7 +105,7 @@ Use system tokens over base tokens whenever possible for better theming support:
 backgroundColor: system.color.bg.default;
 
 // Avoid - Hard-coded base value
-backgroundColor: base.frenchVanilla100;
+backgroundColor: base.neutral0;
 ```
 
 ### Use Complete Type Levels
