@@ -876,10 +876,21 @@ export type StencilModifierConfig<
   E extends BaseStencil<any, any, any, any, any> = never
 > = Record<string, Record<string, StylesReturn<P, V, E>>>;
 
-export type StencilCompoundConfig<M> = {
-  modifiers: {[K in keyof M]?: MaybeBoolean<keyof M[K]>};
-  styles: SerializedStyles | CSSObjectWithVars;
+export type StencilCompoundConfig<
+  M,
+  P extends Record<string, string>,
+  V extends DefaultedVarsShape = {},
+  E extends BaseStencil<any, any, any, any, any> = never
+> = {
+  modifiers: [E] extends [never]
+    ? MappedBoolean<M>
+    : [E] extends [BaseStencil<infer ME, any, any, any, any>]
+    ? MappedBoolean<ME & M>
+    : never;
+  styles: StylesReturn<P, V, E>;
 };
+
+export type MappedBoolean<T> = {[K in keyof T]?: MaybeBoolean<keyof T[K]>};
 
 type ModifierValuesStencil<
   M extends StencilModifierConfig<any, any, any> = {},
@@ -1087,11 +1098,7 @@ export interface StencilConfig<
    * // {padding: 10px; paddingInlineStart: 5px;}
    * ```
    */
-  compound?: ([E] extends [never]
-    ? StencilCompoundConfig<M>
-    : E extends BaseStencil<infer ME, any, any, any, any>
-    ? StencilCompoundConfig<ME & M>
-    : never)[];
+  compound?: StencilCompoundConfig<M, P, V, E>[];
   /**
    * Modifiers are optional. If you need a modifier to always be defined, a default modifier value
    * will be used when a modifier is `undefined`
@@ -1238,7 +1245,7 @@ function makePartProps<const T extends Record<string, string>>(parts?: T): Stenc
  * compound modifiers.
  */
 export function createStencil<
-  M extends StencilModifierConfig<P, V>, // TODO: default to `{}` and fix inference in `StyleReturn` types so that modifier style return functions give correct inference to variables
+  M extends StencilModifierConfig<P, V, E>, // TODO: default to `{}` and fix inference in `StylesReturn` types so that modifier style return functions give correct inference to variables
   const P extends Record<string, string> = {},
   V extends DefaultedVarsShape = {},
   E extends BaseStencil<any, any, any, any, any> = never, // use BaseStencil to avoid infinite loops
@@ -1313,7 +1320,11 @@ export function createStencil<
         compound.map(compoundModifier => {
           return {
             modifiers: compoundModifier.modifiers,
-            styles: createStyles(compoundModifier.styles),
+            styles: createStyles(
+              typeof compoundModifier.styles === 'function'
+                ? compoundModifier.styles({..._vars, ..._partsVars})
+                : compoundModifier.styles
+            ),
           };
         })
       )
