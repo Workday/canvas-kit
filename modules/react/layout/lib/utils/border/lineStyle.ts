@@ -6,34 +6,48 @@ import {buildStyleFns, StyleFnConfig} from '../buildStyleFns';
  * @deprecated
  */
 export type BorderLineStyleProps = {
-  /** sets [CSS border-collapse property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-collapse) */
+  /** sets [CSS border-collapse property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-collapse)
+   * @deprecated
+   */
   borderCollapse?: Property.BorderCollapse;
-  /** sets [CSS border-spacing property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-spacing) */
+  /** sets [CSS border-spacing property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-spacing)
+   * @deprecated
+   */
   borderSpacing?: Property.BorderSpacing;
-  /** sets [CSS border-style property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-style) */
+  /** sets [CSS border-style property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-style)
+   * @deprecated
+   */
   borderStyle?: Property.Border;
-  /** sets [CSS border-top-style property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-style) */
+  /** sets [CSS border-top-style property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-style)
+   * @deprecated
+   */
   borderTopStyle?: Property.Border;
   /**
    * - sets [CSS border-right-style property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-style)
    * - no bidirectional support
+   * @deprecated
    */
   borderRightStyle?: Property.Border;
-  /** sets [CSS border-bottom-style property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-style) */
+  /** sets [CSS border-bottom-style property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-style)
+   * @deprecated
+   */
   borderBottomStyle?: Property.Border;
   /**
    * - sets [CSS border-left-style property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-style)
    * - no bidirectional support
+   * @deprecated
    */
   borderLeftStyle?: Property.Border;
   /**
    * - sets [CSS border-inline-start-style property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start-style)
    * - bidirectional support
+   * @deprecated
    */
   borderInlineStartStyle?: Property.Border;
   /**
    * - sets [CSS border-inline-end-style property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end-style)
    * - bidirectional support
+   * @deprecated
    */
   borderInlineEndStyle?: Property.Border;
 };

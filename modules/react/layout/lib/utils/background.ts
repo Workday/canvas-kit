@@ -10,22 +10,34 @@ export type BackgroundStyleProps = {
   /**
    * - sets [CSS background property](https://developer.mozilla.org/en-US/docs/Web/CSS/background)
    * - system tokens: `color`
+   * @deprecated
    * */
   background?: SystemPropValues['color'];
-  /** sets [CSS background-attachment property](https://developer.mozilla.org/en-US/docs/Web/CSS/) */
+  /** sets [CSS background-attachment property](https://developer.mozilla.org/en-US/docs/Web/CSS/)
+   * @deprecated
+   */
   backgroundAttachment?: Property.BackgroundAttachment;
   /**
    * - sets [CSS background-color property](https://developer.mozilla.org/en-US/docs/Web/CSS/background-color)
    * - system tokens: `color`
+   * @deprecated
    * */
   backgroundColor?: SystemPropValues['color'];
-  /** sets [CSS background-image property](https://developer.mozilla.org/en-US/docs/Web/CSS/background-image) */
+  /** sets [CSS background-image property](https://developer.mozilla.org/en-US/docs/Web/CSS/background-image)
+   * @deprecated
+   */
   backgroundImage?: Property.BackgroundImage;
-  /** sets [CSS background-position property](https://developer.mozilla.org/en-US/docs/Web/CSS/background-position) */
+  /** sets [CSS background-position property](https://developer.mozilla.org/en-US/docs/Web/CSS/background-position)
+   * @deprecated
+   */
   backgroundPosition?: Property.BackgroundPosition;
-  /** sets [CSS background-repeat property](https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat) */
+  /** sets [CSS background-repeat property](https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat)
+   * @deprecated
+   */
   backgroundRepeat?: Property.BackgroundRepeat;
-  /** sets [CSS background-size property](https://developer.mozilla.org/en-US/docs/Web/CSS/background-size) */
+  /** sets [CSS background-size property](https://developer.mozilla.org/en-US/docs/Web/CSS/background-size)
+   * @deprecated
+   */
   backgroundSize?: Property.BackgroundSize;
 };
 

@@ -9,6 +9,8 @@ import {TertiaryButton, PrimaryButton} from '@workday/canvas-kit-react/button';
 import {visibleIcon, invisibleIcon} from '@workday/canvas-system-icons-web';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
 import {FormField} from '@workday/canvas-kit-react/form-field';
+import {createStyles, cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 interface LoginSchema {
   email: string;
@@ -23,6 +25,12 @@ const passwordRequired = 'Password is required';
 const validationSchema: SchemaOf<LoginSchema> = object({
   email: string().email('Enter a valid email').required(emailRequired),
   password: string().min(passwordMinimum, passwordHint).required(passwordRequired),
+});
+
+const styles = createStyles({
+  gap: system.space.x3,
+  flexDirection: 'column',
+  alignItems: 'flex-start',
 });
 
 export const TextInputWithFormik = () => {
@@ -47,7 +55,7 @@ export const TextInputWithFormik = () => {
 
   return (
     <form onSubmit={formik.handleSubmit} action=".">
-      <Flex gap="xs" flexDirection="column" alignItems="flex-start">
+      <Flex cs={styles}>
         <FormField
           orientation="vertical"
           isRequired={true}
@@ -74,7 +82,7 @@ export const TextInputWithFormik = () => {
           isRequired={true}
         >
           <FormField.Label>Password</FormField.Label>
-          <Flex gap="xxs">
+          <Flex cs={{gap: cssVar(system.space.x2)}}>
             <FormField.Field>
               <FormField.Input
                 as={TextInput}

@@ -6,30 +6,40 @@ import {buildStyleFns, StyleFnConfig} from '../buildStyleFns';
  * @deprecated
  */
 export type BorderWidthStyleProps = {
-  /** sets [CSS border-width property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-width) */
+  /** sets [CSS border-width property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-width)
+   * @deprecated
+   */
   borderWidth?: Property.BorderWidth | number;
-  /** sets [CSS border-top-width property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-width) */
+  /** sets [CSS border-top-width property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-width)
+   * @deprecated
+   */
   borderTopWidth?: Property.BorderTopWidth | number;
   /**
    * - sets [CSS border-right-width property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-width)
    * - no bidirectional support
+   * @deprecated
    * */
   borderRightWidth?: Property.BorderRightWidth | number;
-  /** sets [CSS border-bottom-width property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-width) */
+  /** sets [CSS border-bottom-width property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-width)
+   * @deprecated
+   */
   borderBottomWidth?: Property.BorderBottomWidth | number;
   /**
    * - sets [CSS border-left-width property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-width)
    * - no bidirectional support
+   * @deprecated
    * */
   borderLeftWidth?: Property.BorderLeftWidth | number;
   /**
    * - sets [CSS border-inline-start-width property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start-width)
    * - bidirectional support
+   * @deprecated
    * */
   borderInlineStartWidth?: Property.BorderInlineStartWidth | number;
   /**
    * - sets [CSS border-inline-end property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end)
    * - bidirectional support
+   * @deprecated
    * */
   borderInlineEndWidth?: Property.BorderInlineEndWidth | number;
 };

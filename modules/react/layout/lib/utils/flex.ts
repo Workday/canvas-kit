@@ -7,36 +7,52 @@ import {SystemPropValues} from './systemProps';
  * @deprecated
  */
 export type FlexStyleProps = {
-  /** sets [CSS align-items property](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items) */
+  /** sets [CSS align-items property](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items)
+   * @deprecated
+   */
   alignItems?: Property.AlignItems;
-  /** sets [CSS align-content property](https://developer.mozilla.org/en-US/docs/Web/CSS/align-content) */
+  /** sets [CSS align-content property](https://developer.mozilla.org/en-US/docs/Web/CSS/align-content)
+   * @deprecated
+   */
   alignContent?: Property.AlignContent;
   /**
    * - sets [CSS display property](https://developer.mozilla.org/en-US/docs/Web/CSS/display)
    * - @default 'flex'
+   * @deprecated
    * */
   display?: 'flex' | 'inline-flex' | 'none' | Globals | (string & {});
-  /** sets [CSS justify-items property](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-items) */
+  /** sets [CSS justify-items property](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-items)
+   * @deprecated
+   */
   justifyItems?: Property.JustifyItems;
-  /** sets [CSS justify-content property](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content) */
+  /** sets [CSS justify-content property](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content)
+   * @deprecated
+   */
   justifyContent?: Property.JustifyContent;
-  /** sets [CSS flex-wrap property](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap) */
+  /** sets [CSS flex-wrap property](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap)
+   * @deprecated
+   */
   flexWrap?: Property.FlexWrap;
-  /** sets [CSS flex-direction property](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction) */
+  /** sets [CSS flex-direction property](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction)
+   * @deprecated
+   */
   flexDirection?: Property.FlexDirection;
   /**
    * - sets [CSS gap property](https://developer.mozilla.org/en-US/docs/Web/CSS/gap)
    * - system tokens: `space`
+   * @deprecated
    * */
   gap?: SystemPropValues['space'];
   /**
    * - sets [CSS column-gap property](https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap)
    * - system tokens: `space`
+   * @deprecated
    * */
   columnGap?: SystemPropValues['space'];
   /**
    * - sets [CSS row-gap property](https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap)
    * - system tokens: `space`
+   * @deprecated
    * */
   rowGap?: SystemPropValues['space'];
 };

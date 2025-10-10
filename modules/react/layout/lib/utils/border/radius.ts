@@ -8,26 +8,31 @@ export type BorderRadiusStyleProps = {
   /**
    * - sets [CSS border-radius property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius)
    * - system tokens: `shape`
+   * @deprecated
    * */
   borderRadius?: SystemPropValues['shape'];
   /**
    * - sets [CSS border-top-left-radius property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius)
    * - system tokens: `shape`
+   * @deprecated
    * */
   borderTopLeftRadius?: SystemPropValues['shape'];
   /**
    * - sets [CSS border-top-right-radius property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius)
    * - system tokens: `shape`
+   * @deprecated
    * */
   borderTopRightRadius?: SystemPropValues['shape'];
   /**
    * - sets [CSS border-bottom-left-radius property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius)
    * - system tokens: `shape`
+   * @deprecated
    * */
   borderBottomLeftRadius?: SystemPropValues['shape'];
   /**
    * - sets [CSS border-bottom-right-radius property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius)
    * - system tokens: `shape`
+   * @deprecated
    * */
   borderBottomRightRadius?: SystemPropValues['shape'];
 };
