@@ -1,7 +1,9 @@
 import {buildStyleFns, buildStylePropFn, StyleFnConfig} from './buildStyleFns';
 import {SystemPropValues} from './systemProps';
 
-/** style props to for CSS space properties */
+/** style props to for CSS space properties
+ * @deprecated
+ */
 export type SpaceStyleProps = {
   /**
    * - sets [CSS margin-inline-start property](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-start)
@@ -103,6 +105,7 @@ export type SpaceStyleProps = {
   paddingLeft?: SystemPropValues['space'];
 };
 
+/** @deprecated */
 export const spaceStyleFnConfigs: StyleFnConfig[] = [
   {
     name: 'marginInlineStart',
@@ -196,6 +199,7 @@ export const spaceStyleFnConfigs: StyleFnConfig[] = [
   },
 ];
 
+/** @deprecated */
 export const spaceStyleFns = buildStyleFns(spaceStyleFnConfigs);
 /**
  * A style prop function that takes component props and returns space styles.
@@ -209,5 +213,6 @@ export const spaceStyleFns = buildStyleFns(spaceStyleFnConfigs);
  *   </Box>
  * );
  * ```
+ * @deprecated
  */
 export const space = buildStylePropFn<SpaceStyleProps>(spaceStyleFns);

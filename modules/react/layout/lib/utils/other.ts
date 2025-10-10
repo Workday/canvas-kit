@@ -2,7 +2,10 @@ import {Property} from 'csstype';
 
 import {buildStyleFns, buildStylePropFn, StyleFnConfig} from './buildStyleFns';
 
-/** style props to for other CSS properties */
+/**
+ * style props to for other CSS properties
+ * @deprecated
+ */
 export type OtherStyleProps = {
   /** sets [CSS animation property](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) */
   animation?: Property.Animation;
@@ -72,6 +75,7 @@ export type OtherStyleProps = {
   visibility?: Property.Visibility;
 };
 
+/** @deprecated */
 export const otherStyleFnConfigs: StyleFnConfig[] = [
   {
     name: 'animation',
@@ -170,6 +174,8 @@ export const otherStyleFnConfigs: StyleFnConfig[] = [
   },
 ];
 
+/** @deprecated */
 export const otherStyleFns = buildStyleFns(otherStyleFnConfigs);
 
+/** @deprecated */
 export const other = buildStylePropFn<OtherStyleProps>(otherStyleFns);

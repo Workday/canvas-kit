@@ -3,7 +3,9 @@ import {Property, Globals} from 'csstype';
 import {buildStyleFns, buildStylePropFn, StyleFnConfig} from './buildStyleFns';
 import {SystemPropValues} from './systemProps';
 
-/** style props to for CSS flexbox container properties */
+/** style props to for CSS flexbox container properties
+ * @deprecated
+ */
 export type FlexStyleProps = {
   /** sets [CSS align-items property](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items) */
   alignItems?: Property.AlignItems;
@@ -39,6 +41,7 @@ export type FlexStyleProps = {
   rowGap?: SystemPropValues['space'];
 };
 
+/** @deprecated */
 export const flexStyleFnConfigs: StyleFnConfig[] = [
   {
     name: 'alignContent',
@@ -92,6 +95,7 @@ export const flexStyleFnConfigs: StyleFnConfig[] = [
   },
 ];
 
+/** @deprecated */
 export const flexStyleFns = buildStyleFns(flexStyleFnConfigs);
 /**
  * A style prop function that takes component props and returns flexbox styles.
@@ -105,5 +109,6 @@ export const flexStyleFns = buildStyleFns(flexStyleFnConfigs);
  *   </Flex>
  * );
  * ```
+ * @deprecated
  */
 export const flex = buildStylePropFn<FlexStyleProps>(flexStyleFns);

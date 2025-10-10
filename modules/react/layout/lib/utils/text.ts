@@ -3,7 +3,9 @@ import {Property} from 'csstype';
 import {buildStyleFns, buildStylePropFn, StyleFnConfig} from './buildStyleFns';
 import {SystemPropValues} from './systemProps';
 
-/** style props to for CSS font and text properties */
+/** style props to for CSS font and text properties
+ * @deprecated
+ */
 export type TextStyleProps = {
   /**
    * - sets [CSS font-family property](https://developer.mozilla.org/en-US/docs/Web/CSS/font-family)
@@ -39,6 +41,7 @@ export type TextStyleProps = {
   wordBreak?: Property.WordBreak;
 };
 
+/** @deprecated */
 export const textStyleFnConfigs: StyleFnConfig[] = [
   {
     name: 'fontFamily',
@@ -107,6 +110,7 @@ export const textStyleFnConfigs: StyleFnConfig[] = [
   },
 ];
 
+/** @deprecated */
 export const textStyleFns = buildStyleFns(textStyleFnConfigs);
 /**
  * A style prop function that takes component props and returns font and text styles.
@@ -118,5 +122,6 @@ export const textStyleFns = buildStyleFns(textStyleFnConfigs);
  *   <Box textAlign="center" fontWeight="medium">Hello, alignment!</Box>
  * );
  * ```
+ * @deprecated
  */
 export const text = buildStylePropFn<TextStyleProps>(textStyleFns);

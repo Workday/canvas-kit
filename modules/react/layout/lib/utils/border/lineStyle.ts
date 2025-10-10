@@ -2,7 +2,9 @@ import {Property} from 'csstype';
 
 import {buildStyleFns, StyleFnConfig} from '../buildStyleFns';
 
-/** style props to set CSS border style properties */
+/** style props to set CSS border style properties
+ * @deprecated
+ */
 export type BorderLineStyleProps = {
   /** sets [CSS border-collapse property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-collapse) */
   borderCollapse?: Property.BorderCollapse;
@@ -36,6 +38,7 @@ export type BorderLineStyleProps = {
   borderInlineEndStyle?: Property.Border;
 };
 
+/** @deprecated */
 export const borderLineStyleFnConfigs: StyleFnConfig[] = [
   {
     name: 'borderCollapse',
@@ -84,4 +87,5 @@ export const borderLineStyleFnConfigs: StyleFnConfig[] = [
   },
 ];
 
+/** @deprecated */
 export const borderLineStyleFns = buildStyleFns(borderLineStyleFnConfigs);

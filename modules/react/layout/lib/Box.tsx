@@ -63,6 +63,7 @@ const omittedProps = [
   'wordBreak',
 ];
 
+/** @deprecated */
 const shouldForwardProp = (prop: string) => {
   return isPropValid(prop) && !omittedProps.includes(prop);
 };
@@ -84,6 +85,7 @@ const shouldForwardProp = (prop: string) => {
  *
  * <StyledHeader color='red'>Hello World</StyledHeader>
  * ```
+ * @deprecated
  */
 export const boxStyleFn = <P extends BoxProps>(props: P) => {
   return [

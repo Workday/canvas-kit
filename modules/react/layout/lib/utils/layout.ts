@@ -3,7 +3,9 @@ import {Property} from 'csstype';
 import {buildStyleFns, buildStylePropFn, StyleFnConfig} from './buildStyleFns';
 import {SystemPropValues} from './systemProps';
 
-/** style props to for CSS layout properties */
+/** style props to for CSS layout properties
+ * @deprecated
+ */
 export type LayoutStyleProps = {
   /** sets [CSS display property](https://developer.mozilla.org/en-US/docs/Web/CSS/display) */
   display?: Property.Display;
@@ -49,6 +51,7 @@ export type LayoutStyleProps = {
   width?: SystemPropValues['space'];
 };
 
+/** @deprecated */
 export const layoutStyleFnConfigs: StyleFnConfig[] = [
   {
     name: 'display',
@@ -112,6 +115,7 @@ export const layoutStyleFnConfigs: StyleFnConfig[] = [
   },
 ];
 
+/** @deprecated */
 export const layoutStyleFns = buildStyleFns(layoutStyleFnConfigs);
 /**
  * A style prop function that takes component props and returns layout styles.
@@ -125,5 +129,6 @@ export const layoutStyleFns = buildStyleFns(layoutStyleFnConfigs);
  *   </Box>
  * );
  * ```
+ * @deprecated
  */
 export const layout = buildStylePropFn<LayoutStyleProps>(layoutStyleFns);

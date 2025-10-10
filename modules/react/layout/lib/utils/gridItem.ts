@@ -2,7 +2,9 @@ import {Property} from 'csstype';
 
 import {buildStyleFns, buildStylePropFn, StyleFnConfig} from './buildStyleFns';
 
-/** style props to for CSS grid item properties */
+/** style props to for CSS grid item properties
+ * @deprecated
+ */
 export type GridItemStyleProps = {
   /** sets [CSS grid-column-start property](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column-start) */
   gridColumnStart?: Property.GridColumnStart;
@@ -26,6 +28,7 @@ export type GridItemStyleProps = {
   placeSelf?: Property.PlaceSelf;
 };
 
+/** @deprecated */
 export const gridItemStyleFnConfigs: StyleFnConfig[] = [
   {
     name: 'gridColumnStart',
@@ -79,6 +82,7 @@ export const gridItemStyleFnConfigs: StyleFnConfig[] = [
   },
 ];
 
+/** @deprecated */
 export const gridItemStyleFns = buildStyleFns(gridItemStyleFnConfigs);
 /**
  * A style prop function that takes component props and returns grid styles.
@@ -92,5 +96,6 @@ export const gridItemStyleFns = buildStyleFns(gridItemStyleFnConfigs);
  *   </Grid.Item>
  * );
  * ```
+ * @deprecated
  */
 export const gridItem = buildStylePropFn<GridItemStyleProps>(gridItemStyleFns);

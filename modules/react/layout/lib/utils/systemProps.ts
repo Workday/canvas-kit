@@ -6,6 +6,7 @@ import {
   CanvasTypeProperties,
 } from '@workday/canvas-kit-react/tokens';
 
+/** @deprecated */
 export type SystemPropNames =
   | 'color'
   | 'depth'
@@ -19,6 +20,7 @@ export type SystemPropNames =
  * Canvas System Prop Values
  * ---
  * These system prop values are restricted to Canvas token values.
+ * @deprecated
  */
 export type CanvasSystemPropValues = {
   color: CanvasColor;
@@ -34,6 +36,7 @@ export type CanvasSystemPropValues = {
  * System Prop Values
  * ---
  * These system prop values include Canvas System Prop Values and generic values.
+ * @deprecated
  */
 export type SystemPropValues = {
   color: CanvasSystemPropValues['color'] | (string & {});

@@ -1,7 +1,9 @@
 import {buildStyleFns, StyleFnConfig} from '../buildStyleFns';
 import {SystemPropValues} from '../systemProps';
 
-/** style props to set CSS border color properties */
+/** style props to set CSS border color properties
+ * @deprecated
+ */
 export type BorderColorStyleProps = {
   /**
    * - sets [CSS border-color property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-color)
@@ -44,6 +46,7 @@ export type BorderColorStyleProps = {
   borderInlineEndColor?: SystemPropValues['color'];
 };
 
+/** @deprecated */
 export const borderColorStyleFnConfigs: StyleFnConfig[] = [
   {
     name: 'borderColor',
@@ -82,4 +85,5 @@ export const borderColorStyleFnConfigs: StyleFnConfig[] = [
   },
 ];
 
+/** @deprecated */
 export const borderColorFns = buildStyleFns(borderColorStyleFnConfigs);

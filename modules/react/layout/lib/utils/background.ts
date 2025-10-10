@@ -3,7 +3,9 @@ import {Property} from 'csstype';
 import {buildStyleFns, buildStylePropFn, StyleFnConfig} from './buildStyleFns';
 import {SystemPropValues} from './systemProps';
 
-/** style props to set CSS background properties */
+/** style props to set CSS background properties
+ * @deprecated
+ */
 export type BackgroundStyleProps = {
   /**
    * - sets [CSS background property](https://developer.mozilla.org/en-US/docs/Web/CSS/background)
@@ -27,6 +29,7 @@ export type BackgroundStyleProps = {
   backgroundSize?: Property.BackgroundSize;
 };
 
+/** @deprecated */
 export const backgroundStyleFnConfigs: StyleFnConfig[] = [
   {
     name: 'background',
@@ -65,6 +68,7 @@ export const backgroundStyleFnConfigs: StyleFnConfig[] = [
   },
 ];
 
+/** @deprecated */
 export const backgroundFns = buildStyleFns(backgroundStyleFnConfigs);
 /**
  * A style prop function that takes component props and returns border styles.
@@ -79,5 +83,6 @@ export const backgroundFns = buildStyleFns(backgroundStyleFnConfigs);
  *   </Box>
  * );
  *```
+ @deprecated
  */
 export const background = buildStylePropFn<BackgroundStyleProps>(backgroundFns);

@@ -2,7 +2,9 @@ import {Property} from 'csstype';
 
 import {buildStyleFns, StyleFnConfig} from '../buildStyleFns';
 
-/** style props to set CSS border properties */
+/** style props to set CSS border properties
+ * @deprecated
+ */
 export type BorderShorthandStyleProps = {
   /** sets [CSS border property](https://developer.mozilla.org/en-US/docs/Web/CSS/border) */
   border?: Property.Border;
@@ -32,6 +34,7 @@ export type BorderShorthandStyleProps = {
   borderInlineEnd?: Property.BorderInlineEnd;
 };
 
+/** @deprecated */
 export const borderShorthandStyleFnConfigs: StyleFnConfig[] = [
   {
     name: 'border',
@@ -70,4 +73,5 @@ export const borderShorthandStyleFnConfigs: StyleFnConfig[] = [
   },
 ];
 
+/** @deprecated */
 export const borderShorthandFns = buildStyleFns(borderShorthandStyleFnConfigs);

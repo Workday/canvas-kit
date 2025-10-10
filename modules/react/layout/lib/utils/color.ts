@@ -3,7 +3,9 @@ import {Property} from 'csstype';
 import {buildStyleFns, buildStylePropFn, StyleFnConfig} from './buildStyleFns';
 import {SystemPropValues} from './systemProps';
 
-/** style props to set CSS color properties */
+/** style props to set CSS color properties
+ * @deprecated
+ */
 export type ColorStyleProps = {
   /**
    * - sets [CSS background-color property](https://developer.mozilla.org/en-US/docs/Web/CSS/background-color)
@@ -19,6 +21,7 @@ export type ColorStyleProps = {
   opacity?: Property.Opacity;
 };
 
+/** @deprecated */
 export const colorStyleFnConfigs: StyleFnConfig[] = [
   {
     name: 'backgroundColor',
@@ -37,6 +40,7 @@ export const colorStyleFnConfigs: StyleFnConfig[] = [
   },
 ];
 
+/** @deprecated */
 export const colorFns = buildStyleFns(colorStyleFnConfigs);
 /**
  * A style prop function that takes component props and returns color styles from Canvas token values.
@@ -48,5 +52,6 @@ export const colorFns = buildStyleFns(colorStyleFnConfigs);
  *   <Box color="frenchVanilla100" opacity={0.6}>Hello, colors!</Box>
  * );
  * ```
+ * @deprecated
  */
 export const color = buildStylePropFn<ColorStyleProps>(colorFns);

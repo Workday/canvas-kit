@@ -1,7 +1,9 @@
 import {Property} from 'csstype';
 import {buildStyleFns, buildStylePropFn, StyleFnConfig} from './buildStyleFns';
 
-/** style props to for CSS flex item properties */
+/** style props to for CSS flex item properties
+ * @deprecated
+ */
 export type FlexItemStyleProps = {
   /** sets [CSS flex property](https://developer.mozilla.org/en-US/docs/Web/CSS/flex) */
   flex?: Property.Flex;
@@ -19,6 +21,7 @@ export type FlexItemStyleProps = {
   order?: Property.Order;
 };
 
+/** @deprecated */
 export const flexItemStyleFnConfigs: StyleFnConfig[] = [
   {
     name: 'flex',
@@ -57,6 +60,7 @@ export const flexItemStyleFnConfigs: StyleFnConfig[] = [
   },
 ];
 
+/** @deprecated */
 export const flexItemStyleFns = buildStyleFns(flexItemStyleFnConfigs);
 /**
  * A style prop function that takes component props and returns flexbox item styles.
@@ -70,5 +74,6 @@ export const flexItemStyleFns = buildStyleFns(flexItemStyleFnConfigs);
  *   </Box>
  * );
  * ```
+ * @deprecated
  */
 export const flexItem = buildStylePropFn<FlexItemStyleProps>(flexItemStyleFns);

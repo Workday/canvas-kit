@@ -28,6 +28,7 @@ import {TextStyleProps} from './text';
  * - position
  * - space
  * - text
+ * @deprecated
  */
 export type CommonStyleProps = BackgroundStyleProps &
   BorderStyleProps &
@@ -48,6 +49,7 @@ export type CommonStyleProps = BackgroundStyleProps &
  * - common
  * - flex
  * - grid
+ * @deprecated
  */
 export type AllStyleProps = CommonStyleProps &
   // Omitting 'display' here to default to the standard csstype type Property.Display

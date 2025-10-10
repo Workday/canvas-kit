@@ -2,7 +2,9 @@ import {Property} from 'csstype';
 
 import {buildStyleFns, StyleFnConfig} from '../buildStyleFns';
 
-/** style props to set CSS border width properties */
+/** style props to set CSS border width properties
+ * @deprecated
+ */
 export type BorderWidthStyleProps = {
   /** sets [CSS border-width property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-width) */
   borderWidth?: Property.BorderWidth | number;
@@ -32,6 +34,7 @@ export type BorderWidthStyleProps = {
   borderInlineEndWidth?: Property.BorderInlineEndWidth | number;
 };
 
+/** @deprecated */
 export const borderWidthStyleFnConfigs: StyleFnConfig[] = [
   {
     name: 'borderWidth',
@@ -70,4 +73,5 @@ export const borderWidthStyleFnConfigs: StyleFnConfig[] = [
   },
 ];
 
+/** @deprecated */
 export const borderWidthFns = buildStyleFns(borderWidthStyleFnConfigs);

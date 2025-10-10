@@ -2,7 +2,10 @@ import {Property} from 'csstype';
 
 import {buildStyleFns, buildStylePropFn, StyleFnConfig} from './buildStyleFns';
 
-/** style props to for CSS position properties */
+/**
+ * style props to for CSS position properties
+ * @deprecated
+ */
 export type PositionStyleProps = {
   /**
    * - sets [CSS position property](https://developer.mozilla.org/en-US/docs/Web/CSS/position)
@@ -46,6 +49,7 @@ export type PositionStyleProps = {
   insetInlineEnd?: number | string;
 };
 
+/** @deprecated */
 export const positionStyleFnConfigs: StyleFnConfig[] = [
   {
     name: 'position',
@@ -94,6 +98,7 @@ export const positionStyleFnConfigs: StyleFnConfig[] = [
   },
 ];
 
+/** @deprecated */
 export const positionStyleFns = buildStyleFns(positionStyleFnConfigs);
 /**
  * A style prop function that takes component props and returns position styles.
@@ -107,5 +112,6 @@ export const positionStyleFns = buildStyleFns(positionStyleFnConfigs);
  *   </Box>
  * );
  * ```
+ * @deprecated
  */
 export const position = buildStylePropFn<PositionStyleProps>(positionStyleFns);

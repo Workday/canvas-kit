@@ -1,7 +1,9 @@
 import {buildStyleFns, StyleFnConfig} from '../buildStyleFns';
 import {SystemPropValues} from '../systemProps';
 
-/** style props to set CSS border radius properties */
+/** style props to set CSS border radius properties
+ * @deprecated
+ */
 export type BorderRadiusStyleProps = {
   /**
    * - sets [CSS border-radius property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius)
@@ -30,6 +32,7 @@ export type BorderRadiusStyleProps = {
   borderBottomRightRadius?: SystemPropValues['shape'];
 };
 
+/** @deprecated */
 export const borderRadiusStyleFnConfigs: StyleFnConfig[] = [
   {
     name: 'borderRadius',
@@ -58,4 +61,5 @@ export const borderRadiusStyleFnConfigs: StyleFnConfig[] = [
   },
 ];
 
+/** @deprecated */
 export const borderRadiusFns = buildStyleFns(borderRadiusStyleFnConfigs);

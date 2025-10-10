@@ -3,7 +3,9 @@ import {Property, Globals} from 'csstype';
 import {buildStyleFns, buildStylePropFn, StyleFnConfig} from './buildStyleFns';
 import {SystemPropValues} from './systemProps';
 
-/** style props to for CSS grid container properties */
+/** style props to for CSS grid container properties
+ * @deprecated
+ */
 export type GridStyleProps = {
   /** sets [CSS align-items property](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items) */
   alignItems?: Property.AlignItems;
@@ -55,6 +57,7 @@ export type GridStyleProps = {
   grid?: Property.Grid;
 };
 
+/** @deprecated */
 export const gridStyleFnConfigs: StyleFnConfig[] = [
   {
     name: 'gridGap',
@@ -148,6 +151,7 @@ export const gridStyleFnConfigs: StyleFnConfig[] = [
   },
 ];
 
+/** @deprecated */
 export const gridStyleFns = buildStyleFns(gridStyleFnConfigs);
 /**
  * A style prop function that takes component props and returns grid styles.
@@ -162,5 +166,6 @@ export const gridStyleFns = buildStyleFns(gridStyleFnConfigs);
  *   </Grid>
  * );
  * ```
+ * @deprecated
  */
 export const grid = buildStylePropFn<GridStyleProps>(gridStyleFns);
