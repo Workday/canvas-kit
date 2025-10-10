@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.0.9](https://github.com/Workday/canvas-kit/releases/tag/v14.0.9) (2025-10-10)
+
+### Styling
+
+- fix: Add support for vars and parts to compound modifiers ([#3533](https://github.com/Workday/canvas-kit/pull/3533)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v13.2.34](https://github.com/Workday/canvas-kit/releases/tag/v13.2.34) (2025-10-10)
+
+### Styling
+
+- fix: Add support for vars and parts to compound modifiers ([#3533](https://github.com/Workday/canvas-kit/pull/3533)) ([@NicholasBoll](https://github.com/NicholasBoll))
 ## [v14.0.8](https://github.com/Workday/canvas-kit/releases/tag/v14.0.8) (2025-10-09)
 
 ### Documentation
