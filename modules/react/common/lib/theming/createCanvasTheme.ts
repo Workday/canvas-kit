@@ -16,7 +16,7 @@ import {deepMerge} from '../utils/deepMerge';
 import {memoize} from '../utils/memoize';
 
 /**
- * @deprecated ⚠️ `shiftColor` is deprecated and will be removed in a future major version. While we work on an algorithm for color shifting, you can use
+ * @deprecated ⚠️ `shiftColor` is deprecated and will be removed in a future major version. While we work on an algorithm for color shifting, you can use [oklch from or with calc](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch) to calculate colors.
  */
 export const shiftColor = memoize(
   (hexColor: string, amount = 100) => {
