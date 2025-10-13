@@ -15,7 +15,7 @@ export type LayoutStyleProps = {
    * - sets [CSS height property](https://developer.mozilla.org/en-US/docs/Web/CSS/height)
    * - system tokens: `space`
    * @deprecated
-   * */
+   */
   height?: SystemPropValues['space'];
   /** sets [CSS list-style property](https://developer.mozilla.org/en-US/docs/Web/CSS/list-style)
    * @deprecated
@@ -25,25 +25,25 @@ export type LayoutStyleProps = {
    * - sets [CSS max-height property](https://developer.mozilla.org/en-US/docs/Web/CSS/max-height)
    * - system tokens: `space`
    * @deprecated
-   * */
+   */
   maxHeight?: SystemPropValues['space'];
   /**
    * - sets [CSS max-width property](https://developer.mozilla.org/en-US/docs/Web/CSS/max-width)
    * - system tokens: `space`
    * @deprecated
-   * */
+   */
   maxWidth?: SystemPropValues['space'];
   /**
    * - sets [CSS min-height property](https://developer.mozilla.org/en-US/docs/Web/CSS/min-height)
    * - system tokens: `space`
    * @deprecated
-   * */
+   */
   minHeight?: SystemPropValues['space'];
   /**
    * - sets [CSS min-width property](https://developer.mozilla.org/en-US/docs/Web/CSS/min-width)
    * - system tokens: `space`
    * @deprecated
-   * */
+   */
   minWidth?: SystemPropValues['space'];
   /** sets [CSS overflow property](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow)
    * @deprecated
@@ -65,7 +65,7 @@ export type LayoutStyleProps = {
    * - sets [CSS width property](https://developer.mozilla.org/en-US/docs/Web/CSS/width)
    * - system tokens: `space`
    * @deprecated
-   * */
+   */
   width?: SystemPropValues['space'];
 };
 

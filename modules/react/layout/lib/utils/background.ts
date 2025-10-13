@@ -10,8 +10,8 @@ export type BackgroundStyleProps = {
   /**
    * - sets [CSS background property](https://developer.mozilla.org/en-US/docs/Web/CSS/background)
    * - system tokens: `color`
-   * @deprecated
-   * */
+   * @deprecated Use `cs` prop with `system.color.bg.*` tokens
+   */
   background?: SystemPropValues['color'];
   /** sets [CSS background-attachment property](https://developer.mozilla.org/en-US/docs/Web/CSS/)
    * @deprecated
@@ -20,8 +20,8 @@ export type BackgroundStyleProps = {
   /**
    * - sets [CSS background-color property](https://developer.mozilla.org/en-US/docs/Web/CSS/background-color)
    * - system tokens: `color`
-   * @deprecated
-   * */
+   * @deprecated Use `cs` prop with `system.color.bg.*` tokens
+   */
   backgroundColor?: SystemPropValues['color'];
   /** sets [CSS background-image property](https://developer.mozilla.org/en-US/docs/Web/CSS/background-image)
    * @deprecated

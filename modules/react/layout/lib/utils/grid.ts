@@ -19,7 +19,7 @@ export type GridStyleProps = {
    * - sets [CSS display property](https://developer.mozilla.org/en-US/docs/Web/CSS/display)
    * - @default 'grid'
    * @deprecated
-   * */
+   */
   display?: 'grid' | 'inline-grid' | 'none' | Globals | (string & {});
   /** sets [CSS justify-items property](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-items)
    * @deprecated
@@ -49,19 +49,19 @@ export type GridStyleProps = {
    * - sets [CSS column-gap property](https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap)
    * - system tokens: `space`
    * @deprecated
-   * */
+   */
   gridColumnGap?: Property.GridColumnGap | SystemPropValues['space'];
   /**
    * - sets [CSS row-gap property](https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap)
    * - system tokens: `space`
    * @deprecated
-   * */
+   */
   gridRowGap?: Property.GridRowGap | SystemPropValues['space'];
   /**
    * - sets [CSS grid-gap property](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-gap)
    * - system tokens: `space`
    * @deprecated
-   * */
+   */
   gridGap?: Property.GridGap | SystemPropValues['space'];
   /** sets [CSS place-items property](https://developer.mozilla.org/en-US/docs/Web/CSS/place-items)
    * @deprecated

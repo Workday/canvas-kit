@@ -11,13 +11,13 @@ export type ColorStyleProps = {
    * - sets [CSS background-color property](https://developer.mozilla.org/en-US/docs/Web/CSS/background-color)
    * - system tokens: `color`
    * @deprecated
-   * */
+   */
   backgroundColor?: SystemPropValues['color'];
   /**
    * - sets [CSS color property](https://developer.mozilla.org/en-US/docs/Web/CSS/color)
    * - system tokens: `color`
    * @deprecated
-   * */
+   */
   color?: SystemPropValues['color'];
   /** sets [CSS opacity property](https://developer.mozilla.org/en-US/docs/Web/CSS/opacity)
    * @deprecated

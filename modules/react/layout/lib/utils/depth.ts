@@ -14,7 +14,7 @@ export type DepthStyleProps = {
    * - sets [CSS box-shadow styles](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow)
    * - system tokens: `depth`
    * @deprecated
-   * */
+   */
   depth?: SystemPropValues['depth'];
 };
 

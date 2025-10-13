@@ -19,7 +19,7 @@ export type FlexStyleProps = {
    * - sets [CSS display property](https://developer.mozilla.org/en-US/docs/Web/CSS/display)
    * - @default 'flex'
    * @deprecated
-   * */
+   */
   display?: 'flex' | 'inline-flex' | 'none' | Globals | (string & {});
   /** sets [CSS justify-items property](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-items)
    * @deprecated
@@ -41,19 +41,19 @@ export type FlexStyleProps = {
    * - sets [CSS gap property](https://developer.mozilla.org/en-US/docs/Web/CSS/gap)
    * - system tokens: `space`
    * @deprecated
-   * */
+   */
   gap?: SystemPropValues['space'];
   /**
    * - sets [CSS column-gap property](https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap)
    * - system tokens: `space`
    * @deprecated
-   * */
+   */
   columnGap?: SystemPropValues['space'];
   /**
    * - sets [CSS row-gap property](https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap)
    * - system tokens: `space`
    * @deprecated
-   * */
+   */
   rowGap?: SystemPropValues['space'];
 };
 

@@ -11,59 +11,59 @@ export type TextStyleProps = {
    * - sets [CSS font-family property](https://developer.mozilla.org/en-US/docs/Web/CSS/font-family)
    * - system tokens: `font`
    * @deprecated
-   * */
+   */
   fontFamily?: Property.FontFamily | SystemPropValues['font'];
   /**
    * - sets [CSS font-size property](https://developer.mozilla.org/en-US/docs/Web/CSS/font-size)
    * - system tokens: `fontSize`
    * @deprecated
-   * */
+   */
   fontSize?: Property.FontSize | SystemPropValues['fontSize'];
   /** sets [CSS font-style property](https://developer.mozilla.org/en-US/docs/Web/CSS/font-style)
    * @deprecated
-   * */
+   */
   fontStyle?: Property.FontStyle;
   /**
    * - sets [CSS font-weight property](https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight)
    * - system tokens: `fontWeight`
    * @deprecated
-   * */
+   */
   fontWeight?: Property.FontWeight | SystemPropValues['fontWeight'];
   /** sets [CSS line-height property](https://developer.mozilla.org/en-US/docs/Web/CSS/line-height)
    * @deprecated
-   * */
+   */
   lineHeight?: Property.LineHeight;
   /** sets [CSS letter-spacing property](https://developer.mozilla.org/en-US/docs/Web/CSS/letter-spacing)
    * @deprecated
-   * */
+   */
   letterSpacing?: Property.LetterSpacing;
   /** sets [CSS text-align property](https://developer.mozilla.org/en-US/docs/Web/CSS/text-align)
    * @deprecated
-   * */
+   */
   textAlign?: Property.TextAlign;
   /** sets [CSS text-decoration property](https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration)
    * @deprecated
-   * */
+   */
   textDecoration?: Property.TextDecoration;
   /** sets [CSS text-overflow property](https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow)
    * @deprecated
-   * */
+   */
   textOverflow?: Property.TextOverflow;
   /** sets [CSS text-transform property](https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform)
    * @deprecated
-   * */
+   */
   textTransform?: Property.TextTransform;
   /** sets [CSS text-shadow property](https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow)
    * @deprecated
-   * */
+   */
   textShadow?: Property.TextShadow;
   /** sets [CSS white-space property](https://developer.mozilla.org/en-US/docs/Web/CSS/white-space)
    * @deprecated
-   * */
+   */
   whiteSpace?: Property.WhiteSpace;
   /** sets [CSS word-break property](https://developer.mozilla.org/en-US/docs/Web/CSS/word-break)
    * @deprecated
-   * */
+   */
   wordBreak?: Property.WordBreak;
 };
 

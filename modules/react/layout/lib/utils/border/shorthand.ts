@@ -18,7 +18,7 @@ export type BorderShorthandStyleProps = {
    * - sets [CSS border-right property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-right)
    * - no bidirectional support
    * @deprecated
-   * */
+   */
   borderRight?: Property.BorderRight;
   /** sets [CSS border-bottom property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom)
    * @deprecated
@@ -28,19 +28,19 @@ export type BorderShorthandStyleProps = {
    * - sets [CSS border-left property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-left)
    * - no bidirectional support
    * @deprecated
-   * */
+   */
   borderLeft?: Property.BorderLeft;
   /**
    * - sets [CSS border-inline-start property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start)
    * - bidirectional support
    * @deprecated
-   * */
+   */
   borderInlineStart?: Property.BorderInlineStart;
   /**
    * - sets [CSS border-inline-end property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end)
    * - bidirectional support
    * @deprecated
-   * */
+   */
   borderInlineEnd?: Property.BorderInlineEnd;
 };
 
