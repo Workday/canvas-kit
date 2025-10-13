@@ -43,6 +43,7 @@ function isStyleProps(prop: string): boolean {
 /**
  * This function has the same signature as {@link handleCsProp} and also calls `handleCsProps`, but
  * adds support for style props. It can be used as a drop-in replacement for `handleCsProps`.
+ * @deprecated Use `handleCsProp` instead.
  */
 export function mergeStyles<T extends {}>(
   /**
