@@ -13,6 +13,8 @@ import {
   useInitialFocus,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
+import {cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 interface WindowProps {
   top: number;
@@ -41,7 +43,7 @@ const Window = ({children, heading, relativeNode, top, left}: WindowProps) => {
 
   return ReactDOM.createPortal(
     <Popup model={model}>
-      <Popup.Card width={500}>
+      <Popup.Card cs={{width: 500}}>
         <Popup.Heading>{heading}</Popup.Heading>
         <Popup.Body>{children}</Popup.Body>
       </Popup.Card>
@@ -72,7 +74,7 @@ const TempPopup = ({
         {deleteText}
       </Popup.Target>
       <Popup.Popper>
-        <Popup.Card width={400} padding="s">
+        <Popup.Card cs={{width: 400, padding: cssVar(system.space.x4)}}>
           <Popup.Heading>{heading}</Popup.Heading>
           <Popup.Body>{children({onClose: model.events.hide})}</Popup.Body>
         </Popup.Card>

@@ -1,23 +1,22 @@
-import React from 'react';
-import styled from '@emotion/styled';
 import {StatusIndicator} from '@workday/canvas-kit-react/status-indicator';
-import {space} from '@workday/canvas-kit-react/tokens';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
-const StatusIndicators = styled('div')({
+const containerStyles = createStyles({
   '& > *': {
-    margin: space.xxs,
+    margin: system.space.x1,
   },
 });
 
 export const Basic = () => {
   return (
-    <StatusIndicators>
+    <div className={containerStyles}>
       <StatusIndicator label="unpublished" type={StatusIndicator.Type.Gray} />
       <StatusIndicator label="submitted" type={StatusIndicator.Type.Orange} />
       <StatusIndicator label="in progress" type={StatusIndicator.Type.Blue} />
       <StatusIndicator label="published" type={StatusIndicator.Type.Green} />
       <StatusIndicator label="failed" type={StatusIndicator.Type.Red} />
       <StatusIndicator label="normal" type={StatusIndicator.Type.Transparent} />
-    </StatusIndicators>
+    </div>
   );
 };

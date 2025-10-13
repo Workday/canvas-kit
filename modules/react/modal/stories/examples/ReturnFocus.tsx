@@ -4,6 +4,17 @@ import {DeleteButton} from '@workday/canvas-kit-react/button';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Flex, Box} from '@workday/canvas-kit-react/layout';
 import {Select} from '@workday/canvas-kit-react/select';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const flexStyles = createStyles({
+  gap: system.space.x4,
+  padding: system.space.x2,
+});
+
+const boxStyles = createStyles({
+  marginBlock: system.space.zero,
+});
 
 export const ReturnFocus = () => {
   const ref = React.useRef(null);
@@ -46,11 +57,11 @@ export const ReturnFocus = () => {
           <Modal.CloseIcon aria-label="Close" />
           <Modal.Heading>Delete Item</Modal.Heading>
           <Modal.Body>
-            <Box as="p" marginY="zero">
+            <Box as="p" cs={boxStyles}>
               Are you sure you want to delete the item?
             </Box>
           </Modal.Body>
-          <Flex gap="s" padding="xxs">
+          <Flex cs={flexStyles}>
             <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
               Delete
             </Modal.CloseButton>

@@ -1,6 +1,12 @@
 import {Modal} from '@workday/canvas-kit-react/modal';
 import {DeleteButton} from '@workday/canvas-kit-react/button';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {system} from '@workday/canvas-tokens-web';
+import {createStyles} from '@workday/canvas-kit-styling';
+
+const flexStyles = createStyles({
+  gap: system.space.x4,
+});
 
 export const IframeTest = () => {
   return (
@@ -12,7 +18,7 @@ export const IframeTest = () => {
           <Modal.Heading>Delete Item</Modal.Heading>
           <Modal.Body>
             <p>Are you sure you want to delete the item?</p>
-            <Flex gap="s">
+            <Flex cs={flexStyles}>
               <Modal.CloseButton as={DeleteButton}>Delete</Modal.CloseButton>
               <Modal.CloseButton>Cancel</Modal.CloseButton>
             </Flex>

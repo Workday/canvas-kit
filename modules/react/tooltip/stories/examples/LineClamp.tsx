@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 
 export const LineClamp = () => {

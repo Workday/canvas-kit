@@ -2,6 +2,8 @@ import React from 'react';
 
 import {Menu} from '@workday/canvas-kit-react/menu';
 import {BodyText} from '@workday/canvas-kit-react/text';
+import {cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export const Grouping = () => {
   const [selected, setSelected] = React.useState('');
@@ -23,7 +25,7 @@ export const Grouping = () => {
             </Menu.List>
           </Menu.Card>
         </Menu.Popper>
-        <BodyText size="small" marginTop="s">
+        <BodyText size="small" cs={{marginTop: cssVar(system.space.x4)}}>
           Selected: <span data-testid="output">{selected}</span>
         </BodyText>
       </Menu>

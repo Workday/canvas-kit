@@ -11,6 +11,24 @@ import {
   usePopupModel,
 } from '@workday/canvas-kit-react/popup';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const styles = {
+  container: createStyles({
+    gap: system.space.x4,
+  }),
+  card: createStyles({
+    width: 400,
+  }),
+  flex: createStyles({
+    gap: system.space.x4,
+    padding: system.space.x2,
+  }),
+  box: createStyles({
+    marginBlock: system.space.zero,
+  }),
+};
 
 export const FocusTrap = () => {
   const model = usePopupModel();
@@ -35,19 +53,19 @@ export const FocusTrap = () => {
 
   return (
     <Popup model={model}>
-      <Flex gap="s">
+      <Flex cs={styles.container}>
         <Popup.Target as={DeleteButton}>Delete Item</Popup.Target>
         <div aria-owns={popupId} style={{position: 'absolute'}} />
         <Popup.Popper>
-          <Popup.Card width={400}>
+          <Popup.Card cs={styles.card}>
             <Popup.CloseIcon aria-label="Close" />
             <Popup.Heading>Delete Item</Popup.Heading>
             <Popup.Body>
-              <Box as="p" marginY="zero">
+              <Box as="p" cs={styles.box}>
                 Are you sure you'd like to delete the item titled 'My Item'?
               </Box>
             </Popup.Body>
-            <Flex gap="s" padding="xxs">
+            <Flex cs={styles.flex}>
               <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
                 Delete
               </Popup.CloseButton>

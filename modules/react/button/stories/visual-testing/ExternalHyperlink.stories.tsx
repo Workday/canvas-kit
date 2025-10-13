@@ -12,6 +12,8 @@ import {ExternalHyperlink} from '@workday/canvas-kit-react/button';
 import {Container} from './utils';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {BodyText, Subtext} from '@workday/canvas-kit-react/text';
+import {system} from '@workday/canvas-tokens-web';
+import {createStyles} from '@workday/canvas-kit-styling';
 
 export default {
   title: 'Testing/Buttons/Button/ExternalHyperlink',
@@ -22,6 +24,11 @@ export default {
     },
   },
 };
+
+const flexStyles = createStyles({
+  flexDirection: 'column',
+  gap: system.space.x2,
+});
 
 export const ExternalHyperlinkStates = {
   render: () => (
@@ -59,7 +66,7 @@ export const ExternalHyperlinkStates = {
           )}
         </ComponentStatesTable>
       </StaticStates>
-      <Flex flexDirection="column" gap="xxs">
+      <Flex cs={flexStyles}>
         <h3>Typography</h3>
         <Subtext size="large">
           The quick{' '}
@@ -83,7 +90,7 @@ export const ExternalHyperlinkStates = {
         </BodyText>
       </Flex>
       <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
-        <Flex flexDirection="column" gap="xxs">
+        <Flex cs={flexStyles}>
           <Subtext size="large">
             The quick{' '}
             <ExternalHyperlink iconLabel="Opens link in new window">brown fox</ExternalHyperlink>{' '}

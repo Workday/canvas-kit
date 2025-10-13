@@ -3,12 +3,29 @@ import React from 'react';
 import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
 import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
 import {Box} from '@workday/canvas-kit-react/layout';
+import {system} from '@workday/canvas-tokens-web';
+import {createStencil, createStyles, cssVar} from '@workday/canvas-kit-styling';
 
 type MyTabItem = {
   id: string;
   text: React.ReactNode;
   contents: string;
 };
+
+const containerStyles = createStencil({
+  vars: {
+    width: '',
+  },
+  base: ({width}) => ({
+    width,
+    marginBottom: system.space.x10,
+  }),
+});
+
+const cardStyles = createStyles({
+  maxWidth: 300,
+  maxHeight: 200,
+});
 
 export const OverflowTabs = () => {
   const [items] = React.useState<MyTabItem[]>([
@@ -26,20 +43,22 @@ export const OverflowTabs = () => {
   const [containerWidth, setContainerWidth] = React.useState('100%');
   return (
     <div>
-      <Box width={containerWidth} marginBottom="xl">
+      <Box cs={containerStyles({width: containerWidth})}>
         <Tabs model={model}>
           <Tabs.List overflowButton={<Tabs.OverflowButton>More</Tabs.OverflowButton>}>
             {(item: MyTabItem) => <Tabs.Item>{item.text}</Tabs.Item>}
           </Tabs.List>
           <Tabs.Menu.Popper>
-            <Tabs.Menu.Card maxWidth={300} maxHeight={200}>
+            <Tabs.Menu.Card cs={cardStyles}>
               <Tabs.Menu.List>
                 {(item: MyTabItem) => <Tabs.Menu.Item>{item.text}</Tabs.Menu.Item>}
               </Tabs.Menu.List>
             </Tabs.Menu.Card>
           </Tabs.Menu.Popper>
           <Tabs.Panels>
-            {(item: MyTabItem) => <Tabs.Panel marginTop="m">{item.contents}</Tabs.Panel>}
+            {(item: MyTabItem) => (
+              <Tabs.Panel cs={{marginTop: cssVar(system.space.x6)}}>{item.contents}</Tabs.Panel>
+            )}
           </Tabs.Panels>
         </Tabs>
       </Box>

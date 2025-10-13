@@ -6,6 +6,13 @@ import {Flex} from '@workday/canvas-kit-react/layout';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {plusIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
+import {createStyles} from '@workday/canvas-kit-styling';
+
+const flexStyles = createStyles({
+  gap: system.space.x4,
+  padding: system.space.x2,
+});
 
 export const FormModal = () => {
   const model = useModalModel();
@@ -41,7 +48,7 @@ export const FormModal = () => {
               <FormField.Input as={TextInput} name="last" />
             </FormField>
           </Modal.Body>
-          <Flex gap="s" padding="xxs">
+          <Flex cs={flexStyles}>
             <Modal.CloseButton>Cancel</Modal.CloseButton>
             <PrimaryButton type="submit">Submit</PrimaryButton>
           </Flex>

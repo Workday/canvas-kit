@@ -1,4 +1,3 @@
-import React from 'react';
 import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 import {
   ComponentStatesTable,

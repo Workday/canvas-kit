@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {Popper} from '@workday/canvas-kit-react/popup';
 import {xIcon} from '@workday/canvas-system-icons-web';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';

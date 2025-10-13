@@ -8,6 +8,13 @@ import {
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {system} from '@workday/canvas-tokens-web';
+import {createStyles} from '@workday/canvas-kit-styling';
+
+const flexStyles = createStyles({
+  gap: system.space.x4,
+  padding: system.space.x2,
+});
 
 export const Basic = () => {
   const model = usePopupModel();
@@ -25,15 +32,15 @@ export const Basic = () => {
     <Popup model={model}>
       <Popup.Target as={DeleteButton}>Delete Item</Popup.Target>
       <Popup.Popper placement="top">
-        <Popup.Card width={400}>
+        <Popup.Card cs={{width: 400}}>
           <Popup.CloseIcon aria-label="Close" />
           <Popup.Heading>Delete Item</Popup.Heading>
           <Popup.Body>
-            <Box as="p" marginY="zero">
+            <Box as="p" cs={{marginBlock: 0}}>
               Are you sure you'd like to delete the item titled 'My Item'?
             </Box>
           </Popup.Body>
-          <Flex gap="s" padding="xxs">
+          <Flex cs={flexStyles}>
             <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
               Delete
             </Popup.CloseButton>

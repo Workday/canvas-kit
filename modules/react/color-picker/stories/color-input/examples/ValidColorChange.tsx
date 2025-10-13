@@ -1,7 +1,6 @@
 import React from 'react';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {ColorInput} from '@workday/canvas-kit-react/color-picker';
-import {type} from '@workday/canvas-kit-react/tokens';
 
 export const ValidColorChange = () => {
   const [value, setValue] = React.useState('');
@@ -28,7 +27,7 @@ export const ValidColorChange = () => {
           />
         </FormField.Field>
       </FormField>
-      <p style={type.levels.subtext.large}>Last valid color: {validColor}</p>
+      <p className="cnvs-sys-type-subtext-large">Last valid color: {validColor}</p>
     </>
   );
 };

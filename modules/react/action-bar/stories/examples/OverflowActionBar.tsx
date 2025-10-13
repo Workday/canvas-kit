@@ -4,6 +4,8 @@ import {ActionBar, useActionBarModel} from '@workday/canvas-kit-react/action-bar
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
 import {Box} from '@workday/canvas-kit-react/layout';
+import {cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 type MyActionItem = {
   id: string;
@@ -24,7 +26,7 @@ export const OverflowActionBar = () => {
 
   return (
     <div>
-      <Box maxWidth={containerWidth} marginBottom="xl">
+      <Box cs={{maxWidth: containerWidth, marginBottom: cssVar(system.space.x8)}}>
         <ActionBar model={model}>
           <ActionBar.List
             position="relative"
@@ -42,7 +44,7 @@ export const OverflowActionBar = () => {
             )}
           </ActionBar.List>
           <ActionBar.Menu.Popper>
-            <ActionBar.Menu.Card maxWidth={300} maxHeight={200}>
+            <ActionBar.Menu.Card cs={{maxWidth: 300, maxHeight: 200}}>
               <ActionBar.Menu.List>
                 {(item: MyActionItem) => (
                   <ActionBar.Menu.Item onClick={() => console.log(item.id)}>
@@ -57,7 +59,11 @@ export const OverflowActionBar = () => {
       <footer>
         <h4>Change Action Bar container size</h4>
         <SegmentedControl onSelect={data => setContainerWidth(data.id)}>
-          <SegmentedControl.List role="group" aria-label="container width control" marginBottom="m">
+          <SegmentedControl.List
+            role="group"
+            aria-label="container width control"
+            cs={{marginBottom: cssVar(system.space.x3)}}
+          >
             <SegmentedControl.Item data-id="100%">100%</SegmentedControl.Item>
             <SegmentedControl.Item data-id={`${breakpoints.m}px`}>Small</SegmentedControl.Item>
             <SegmentedControl.Item data-id="420px">420px</SegmentedControl.Item>

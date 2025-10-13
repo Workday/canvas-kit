@@ -12,6 +12,8 @@ import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {bgColorIcon} from '@workday/canvas-system-icons-web';
 import {ColorPicker} from '@workday/canvas-kit-preview-react/color-picker';
 import {changeFocus} from '@workday/canvas-kit-react/common';
+import {cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export const IconButtonPopup = () => {
   const model = usePopupModel();
@@ -35,7 +37,13 @@ export const IconButtonPopup = () => {
     <Popup model={model}>
       <Popup.Target as={TertiaryButton} icon={bgColorIcon} aria-label="Select Background Color" />
       <Popup.Popper>
-        <Popup.Card marginTop="xxs" padding="s" depth={3}>
+        <Popup.Card
+          cs={{
+            marginTop: cssVar(system.space.x2),
+            padding: cssVar(system.space.x4),
+            boxShadow: cssVar(system.depth[3]),
+          }}
+        >
           <Popup.Body>
             <ColorPicker
               resetColor={colors.blueberry400}

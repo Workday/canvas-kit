@@ -1,4 +1,3 @@
-import React from 'react';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {
   gridIcon,
@@ -8,11 +7,16 @@ import {
 } from '@workday/canvas-system-icons-web';
 import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
 import {BodyText} from '@workday/canvas-kit-react/text';
+import {system} from '@workday/canvas-tokens-web';
+import {cssVar} from '@workday/canvas-kit-styling';
 
 export const Sizes = () => (
   <>
     <Box>
-      <BodyText size="medium" fontWeight="bold" marginTop={0}>
+      <BodyText
+        size="medium"
+        cs={{marginTop: cssVar(system.space.zero), fontWeight: cssVar(system.fontWeight.bold)}}
+      >
         Small
       </BodyText>
       <SegmentedControl size="small">
@@ -33,7 +37,7 @@ export const Sizes = () => (
       </SegmentedControl>
     </Box>
     <Box>
-      <BodyText size="medium" fontWeight="bold">
+      <BodyText size="medium" cs={{fontWeight: cssVar(system.fontWeight.bold)}}>
         Medium
       </BodyText>
       <SegmentedControl size="medium">
@@ -54,7 +58,7 @@ export const Sizes = () => (
       </SegmentedControl>
     </Box>
     <Box>
-      <BodyText size="medium" fontWeight="bold">
+      <BodyText size="medium" cs={{fontWeight: cssVar(system.fontWeight.bold)}}>
         Large
       </BodyText>
       <SegmentedControl size="large">

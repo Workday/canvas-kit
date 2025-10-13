@@ -3,6 +3,37 @@ import * as React from 'react';
 import {Grid, Box} from '@workday/canvas-kit-react/layout';
 import {BodyText, Heading} from '@workday/canvas-kit-react/text';
 import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
+import {createStencil, createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const styles = {
+  container: createStencil({
+    vars: {
+      maxWidth: '',
+    },
+    base: ({maxWidth}) => ({
+      maxWidth,
+      border: '2px solid black',
+      marginTop: system.space.x4,
+      padding: system.space.x4,
+    }),
+  }),
+  grid: createStyles({
+    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+    gridGap: system.space.x4,
+    '> *': {
+      height: px2rem(120),
+    },
+  }),
+  box: createStencil({
+    vars: {
+      backgroundColor: '',
+    },
+    base: ({backgroundColor}) => ({
+      backgroundColor,
+    }),
+  }),
+};
 
 export const ResponsiveColumns = () => {
   const [screen, setScreen] = React.useState('100%');
@@ -19,12 +50,12 @@ export const ResponsiveColumns = () => {
           <SegmentedControl.Item data-id="25%">25%</SegmentedControl.Item>
         </SegmentedControl.List>
       </SegmentedControl>
-      <Box maxWidth={screen} border="2px solid black" padding="s">
-        <Grid gridTemplateColumns="repeat(auto-fit, minmax(200px, 1fr))" gridGap="m">
-          <Box height="120px" backgroundColor="blueberry300" />
-          <Box height="120px" backgroundColor="blueberry400" />
-          <Box height="120px" backgroundColor="blueberry500" />
-          <Box height="120px" backgroundColor="blueberry600" />
+      <Box cs={styles.container({maxWidth: screen})}>
+        <Grid cs={styles.grid}>
+          <Box cs={styles.box({backgroundColor: system.color.bg.primary.soft})} />
+          <Box cs={styles.box({backgroundColor: system.color.bg.primary.default})} />
+          <Box cs={styles.box({backgroundColor: system.color.bg.primary.strong})} />
+          <Box cs={styles.box({backgroundColor: system.color.bg.primary.stronger})} />
         </Grid>
       </Box>
     </>

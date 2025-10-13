@@ -1,8 +1,8 @@
-import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
+import {createComponent} from '@workday/canvas-kit-react/common';
 import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
 import {Text, TextProps} from '@workday/canvas-kit-react/text';
-import styled from '@emotion/styled';
-import {type} from '@workday/canvas-kit-react/tokens';
+import {system} from '@workday/canvas-tokens-web';
+import {createStyles, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 
 const TableHead = createComponent('thead')({
   Component: (props: BoxProps, ref, Element) => {
@@ -16,12 +16,21 @@ const TableBody = createComponent('tbody')({
   },
 });
 
+const tableRowStyles = createStyles({
+  borderBottom: `${px2rem(1)} solid ${system.color.border.divider}`,
+});
+
 const TableRow = createComponent('tr')({
   Component: (props: BoxProps, ref, Element) => {
-    return (
-      <Box as={Element} ref={ref} borderBottom="solid 1px" borderBottomColor="soap400" {...props} />
-    );
+    return <Box as={Element} ref={ref} {...handleCsProp(props, tableRowStyles)} />;
   },
+});
+
+const tableHeaderStyles = createStyles({
+  fontWeight: system.fontWeight.medium,
+  paddingInline: system.space.x2,
+  paddingBlock: system.space.x4,
+  textAlign: 'start',
 });
 
 const TableHeader = createComponent('th')({
@@ -30,52 +39,43 @@ const TableHeader = createComponent('th')({
       <Text
         as={Element}
         ref={ref}
-        fontWeight="medium"
-        paddingX="xxs"
-        paddingY="s"
-        textAlign="start"
         typeLevel="subtext.large"
-        {...props}
+        {...handleCsProp(props, tableHeaderStyles)}
       />
     );
   },
 });
 
-const StyledText = styled(Text)<StyledType>({
-  code: {
-    fontFamily: type.properties.fontFamilies.monospace,
-  },
+const tableDataStyles = createStyles({
+  paddingInline: system.space.x2,
+  paddingBlock: system.space.x4,
+  textAlign: 'start',
+  fontFamily: system.fontFamily.mono,
 });
 
 const TableData = createComponent('td')({
   Component: (props: TextProps, ref, Element) => {
     return (
-      <StyledText
+      <Text
         as={Element}
         ref={ref}
-        paddingX="xxs"
-        paddingY="s"
-        textAlign="start"
         typeLevel="subtext.large"
-        {...props}
+        {...handleCsProp(props, tableDataStyles)}
       />
     );
   },
 });
 
+const tableStyles = createStyles({
+  borderCollapse: 'collapse',
+  width: '100%',
+  marginBottom: system.space.x4,
+});
+
 export const Table = createComponent('table')({
   displayName: 'Table',
   Component: (props: BoxProps, ref, Element) => {
-    return (
-      <Box
-        as={Element}
-        ref={ref}
-        borderCollapse="collapse"
-        width="100%"
-        {...props}
-        marginBottom="s"
-      />
-    );
+    return <Box as={Element} ref={ref} {...handleCsProp(props, tableStyles)} />;
   },
   subComponents: {
     Head: TableHead,

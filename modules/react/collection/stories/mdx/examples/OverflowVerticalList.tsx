@@ -2,18 +2,27 @@ import React from 'react';
 import {ActionBar, useActionBarModel} from '@workday/canvas-kit-react/action-bar';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Box} from '@workday/canvas-kit-react/layout';
-import styled from '@emotion/styled';
-import {StyledType} from '@workday/canvas-kit-react/common';
+import {createStencil, createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 type MyActionItem = {
   id: string;
   text: React.ReactNode;
 };
 
-const StyledActionbarList = styled(ActionBar.List)<StyledType>({
-  '> *': {
-    flex: '0 0 auto',
+const actionBarListStencil = createStencil({
+  base: {
+    flexDirection: 'column',
+    height: '100%',
+    '> *': {
+      flex: '0 0 auto',
+    },
   },
+});
+
+const containerStyles = createStyles({
+  marginBottom: system.space.x8,
+  height: '50vh',
 });
 
 export const OverflowVerticalList = () => {
@@ -31,14 +40,13 @@ export const OverflowVerticalList = () => {
 
   return (
     <>
-      <Box marginBottom="xl" height="50vh">
+      <Box cs={containerStyles}>
         <ActionBar model={model}>
-          <StyledActionbarList
+          <ActionBar.List
             position="relative"
             as="section"
             aria-label="Overflow example actions"
-            flexDirection="column"
-            height="100%"
+            cs={actionBarListStencil()}
             overflowButton={
               <ActionBar.OverflowButton
                 cs={{overflow: 'visible', flex: 0}}
@@ -54,9 +62,9 @@ export const OverflowVerticalList = () => {
                 {item.text}
               </ActionBar.Item>
             )}
-          </StyledActionbarList>
+          </ActionBar.List>
           <ActionBar.Menu.Popper>
-            <ActionBar.Menu.Card maxWidth={300} maxHeight={200}>
+            <ActionBar.Menu.Card cs={{maxWidth: 300, maxHeight: 200}}>
               <ActionBar.Menu.List>
                 {(item: MyActionItem) => (
                   <ActionBar.Menu.Item onClick={() => console.log(item.id)}>

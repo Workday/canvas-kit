@@ -2,17 +2,46 @@ import * as React from 'react';
 
 import {Grid, Box} from '@workday/canvas-kit-react/layout';
 import {BodyText, Heading} from '@workday/canvas-kit-react/text';
-import {colors} from '@workday/canvas-kit-react/tokens';
+import {system} from '@workday/canvas-tokens-web';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+
+const styles = {
+  grid: createStyles({
+    gridTemplateAreas: "'Heading Heading Heading'",
+    gridColumn: 'repeat(3, 1fr)',
+    gridAutoRows: 'min-content',
+    gridRowGap: system.space.x4,
+    gridColumnGap: system.space.x20,
+  }),
+  heading: createStyles({
+    gridArea: 'Heading',
+    paddingInline: system.space.x4,
+    border: `1px solid ${system.color.border.primary.default}`,
+  }),
+  skeleton: createStyles({
+    border: `1px dashed ${system.color.border.primary.default}`,
+    paddingInline: system.space.x6,
+    fontWeight: system.fontWeight.bold,
+  }),
+  cell: createStyles({
+    gridGap: system.space.x4,
+    marginBottom: system.space.x10,
+  }),
+  cellItem1: createStyles({
+    backgroundColor: system.color.bg.alt.strong,
+    width: px2rem(120),
+    height: system.space.x4,
+  }),
+  cellItem2: createStyles({
+    border: `${px2rem(1)} solid ${system.color.border.input.default}`,
+    width: '100%',
+    height: system.space.x10,
+  }),
+};
 
 export const FullWidthWith3Columns2Rows = () => (
-  <Grid
-    gridTemplateAreas="'Heading Heading Heading'"
-    gridColumn="repeat(3, 1fr)"
-    gridAutoRows="min-content"
-    gridRowGap="s"
-    gridColumnGap="xxxl"
-  >
-    <Box gridArea="Heading" paddingX="s" border={`1px solid ${colors.blueberry400}`}>
+  <Grid cs={styles.grid}>
+    <Box cs={styles.heading}>
       <Heading size="medium">Full Width With 3 Columns and 2 Rows</Heading>
     </Box>
     <FormSkeleton />
@@ -25,14 +54,12 @@ export const FullWidthWith3Columns2Rows = () => (
 );
 
 const FormSkeleton = props => (
-  <Box border={`1px dashed ${colors.blueberry400}`} paddingX="m" {...props}>
-    <BodyText size="small" fontWeight="bold">
-      Form Block
-    </BodyText>
+  <Box cs={styles.skeleton} {...props}>
+    <BodyText size="small">Form Block</BodyText>
     {Array.from({length: 3}).map(() => (
-      <Grid gridGap="s" marginBottom="xl">
-        <Box backgroundColor="soap500" width="120px" height="s" />
-        <Box borderWidth="1px" borderStyle="solid" borderColor="soap500" width="100%" height="xl" />
+      <Grid cs={styles.cell}>
+        <Box cs={styles.cellItem1} />
+        <Box cs={styles.cellItem2} />
       </Grid>
     ))}
   </Box>

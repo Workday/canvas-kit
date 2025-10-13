@@ -3,6 +3,18 @@ import React from 'react';
 import {Modal} from '@workday/canvas-kit-react/modal';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {system} from '@workday/canvas-tokens-web';
+import {createStyles} from '@workday/canvas-kit-styling';
+
+const flexStyles = createStyles({
+  gap: system.space.x4,
+  padding: system.space.x2,
+});
+
+const cardStyles = createStyles({
+  maxHeight: 'inherit',
+  height: 'inherit',
+});
 
 export const FullOverflow = () => {
   const handleAcknowledge = () => {
@@ -17,7 +29,7 @@ export const FullOverflow = () => {
     <Modal>
       <Modal.Target as={PrimaryButton}>Open License</Modal.Target>
       <Modal.OverflowOverlay>
-        <Modal.Card maxHeight="inherit" height="inherit">
+        <Modal.Card cs={cardStyles}>
           <Modal.CloseIcon aria-label="Close" />
           <Modal.Heading>MIT License</Modal.Heading>
           <Modal.Body tabIndex={0}>
@@ -81,7 +93,7 @@ export const FullOverflow = () => {
               ut aliquam purus sit.
             </p>
           </Modal.Body>
-          <Flex gap="s" padding="xxs">
+          <Flex cs={flexStyles}>
             <Modal.CloseButton as={PrimaryButton} onClick={handleAcknowledge}>
               Acknowledge
             </Modal.CloseButton>

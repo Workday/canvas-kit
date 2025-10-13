@@ -70,9 +70,8 @@ export const InformationHighlightStates = () => {
               {heading && <InformationHighlight.Heading>Lorem ipsum</InformationHighlight.Heading>}
               {body && (
                 <InformationHighlight.Body>
-                  {' '}
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                  incididunt ut labore et dolore magna aliqua.{' '}
+                  incididunt ut labore et dolore magna aliqua.
                 </InformationHighlight.Body>
               )}
               {link && <InformationHighlight.Link>Link</InformationHighlight.Link>}

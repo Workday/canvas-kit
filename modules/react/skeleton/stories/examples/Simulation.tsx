@@ -9,10 +9,10 @@ import {SystemIconCircle} from '@workday/canvas-kit-react/icon';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {Skeleton} from '@workday/canvas-kit-react/skeleton';
-import {borderRadius, space} from '@workday/canvas-kit-react/tokens';
 import {patternIcon} from '@workday/canvas-system-icons-web';
-import {styled, StyledType} from '@workday/canvas-kit-react/common';
 import {Heading} from '@workday/canvas-kit-react/text';
+import {createStencil, createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 const fadeOut = keyframes`
   from {
@@ -24,9 +24,54 @@ const fadeOut = keyframes`
   }
 `;
 
-const StyledSimulation = styled(Box)<StyledType>({
-  pointerEvents: 'none',
-});
+const styles = {
+  forms: createStyles({
+    marginBottom: system.space.x8,
+  }),
+  wrapper: createStyles({
+    minHeigh: 180,
+    position: 'relative',
+  }),
+  simulation: createStencil({
+    vars: {
+      fadeOut: '',
+    },
+    base: {
+      pointerEvents: 'none',
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+    },
+    modifiers: {
+      loading: {
+        true: ({fadeOut}) => ({
+          animation: `${fadeOut} 150ms ease-out forwards`,
+        }),
+      },
+    },
+  }),
+  simulationFlex: createStyles({
+    alignItems: 'center',
+  }),
+  shape: createStyles({
+    width: system.space.x10,
+    height: system.space.x10,
+    borderRadius: system.shape.round,
+  }),
+  headerBox: createStyles({
+    flex: 1,
+    marginInlineStart: system.space.x3,
+  }),
+  altFlex: createStyles({
+    alignItems: 'center',
+    display: 'inline-flex',
+    marginBottom: system.space.x4,
+  }),
+  heading: createStyles({
+    marginInlineStart: `0 0 0 ${system.space.x1}`,
+  }),
+};
 
 export const Simulation = () => {
   const [loading, setLoading] = React.useState(true);
@@ -63,7 +108,7 @@ export const Simulation = () => {
 
   return (
     <Box>
-      <Box marginBottom="l">
+      <Box cs={styles.forms}>
         <FormField orientation="horizontalStart">
           <FormField.Label>Load Time</FormField.Label>
           <FormField.Input as={TextInput} onChange={onChangeLoadTime} value={loadTime} />
@@ -76,34 +121,24 @@ export const Simulation = () => {
       </Box>
       <Card>
         <Card.Body>
-          <Box minHeight={180} position="relative">
+          <Box cs={styles.wrapper}>
             {loading ? (
-              <StyledSimulation
-                position="absolute"
-                top={0}
-                left={0}
-                width="100%"
-                animation={!loading ? `${fadeOut} 150ms ease-out forwards` : undefined}
-              >
+              <Box cs={styles.simulation({loading, fadeOut})}>
                 <Skeleton>
-                  <Flex alignItems="center">
-                    <Skeleton.Shape
-                      width={space.xl}
-                      height={space.xl}
-                      borderRadius={borderRadius.circle}
-                    />
-                    <Box flex={1} marginLeft="xs">
+                  <Flex cs={styles.simulationFlex}>
+                    <Skeleton.Shape cs={styles.shape} />
+                    <Box cs={styles.headerBox}>
                       <Skeleton.Header />
                     </Box>
                   </Flex>
                   <Skeleton.Text lineCount={3} />
                 </Skeleton>
-              </StyledSimulation>
+              </Box>
             ) : (
               <Box>
-                <Flex alignItems="center" display="inline-flex" marginBottom="s">
+                <Flex cs={styles.altFlex}>
                   <SystemIconCircle icon={patternIcon} />
-                  <Heading as="h3" size="small" margin={`0 0 0 ${space.xxs}`}>
+                  <Heading as="h3" size="small" cs={styles.heading}>
                     Patterns
                   </Heading>
                 </Flex>

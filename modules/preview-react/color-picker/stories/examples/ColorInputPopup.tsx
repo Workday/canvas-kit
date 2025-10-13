@@ -12,6 +12,8 @@ import {
 import {ColorPicker} from '@workday/canvas-kit-preview-react/color-picker';
 import {changeFocus} from '@workday/canvas-kit-react/common';
 import {FormField} from '@workday/canvas-kit-react/form-field';
+import {cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export const ColorInputPopup = () => {
   const defaultColor = colors.blueberry400;
@@ -81,7 +83,13 @@ export const ColorInputPopup = () => {
           onBlur={onBlur}
         />
         <Popup.Popper>
-          <Popup.Card style={{marginTop: 8}} padding="s" depth={3}>
+          <Popup.Card
+            cs={{
+              marginTop: cssVar(system.space.x2),
+              padding: cssVar(system.space.x4),
+              boxShadow: cssVar(system.depth[3]),
+            }}
+          >
             <Popup.Body>
               <ColorPicker
                 resetColor={colors.blueberry400}

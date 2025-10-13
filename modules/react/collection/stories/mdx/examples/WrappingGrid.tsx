@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {Flex, Box} from '@workday/canvas-kit-react/layout';
 import {
   ListBox,
@@ -10,6 +8,7 @@ import {
   wrappingNavigationManager,
 } from '@workday/canvas-kit-react/collection';
 import {composeHooks, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {createStyles} from '@workday/canvas-kit-styling';
 
 const useItem = composeHooks(useListItemSelect, useListItemRovingFocus, useListItemRegister);
 
@@ -30,6 +29,12 @@ const Item = createSubcomponent('button')({
   );
 });
 
+const flexStyles = createStyles({
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  width: 200,
+});
+
 export const WrappingGrid = () => {
   const model = useGridModel({
     columnCount: 5,
@@ -41,7 +46,7 @@ export const WrappingGrid = () => {
   });
 
   return (
-    <ListBox model={model} as={Flex} flexDirection="row" flexWrap="wrap" width={200}>
+    <ListBox model={model} as={Flex} cs={flexStyles}>
       {item => <Item>{item.id}</Item>}
     </ListBox>
   );

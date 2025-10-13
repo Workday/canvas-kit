@@ -19,7 +19,7 @@ export const Basic = () => {
   };
 
   return (
-    <Flex flexDirection="column">
+    <Flex cs={{flexDirection: 'column'}}>
       <FormFieldGroup>
         <FormFieldGroup.Label>Choose Your Pizza Crust</FormFieldGroup.Label>
         <FormFieldGroup.Field>

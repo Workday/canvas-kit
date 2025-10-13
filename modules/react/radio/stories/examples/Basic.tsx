@@ -2,7 +2,8 @@ import React from 'react';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Radio, RadioGroup} from '@workday/canvas-kit-react/radio';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
-import {space} from '@workday/canvas-kit-react/tokens';
+import {cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export const Basic = () => {
   const [value, setValue] = React.useState<string | number>('deep-dish');
@@ -12,7 +13,7 @@ export const Basic = () => {
   };
 
   return (
-    <FormField as="fieldset" cs={{width: space.xl}}>
+    <FormField as="fieldset" cs={{width: cssVar(system.space.x8)}}>
       <FormField.Label as="legend">Choose Your Pizza Crust</FormField.Label>
       <FormField.Input as={RadioGroup} name={useUniqueId()} onChange={handleChange} value={value}>
         <Radio label="Deep dish" value="deep-dish" />

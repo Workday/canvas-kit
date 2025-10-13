@@ -9,6 +9,15 @@ import {
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {Text} from '@workday/canvas-kit-react/text';
 import {useResizeObserver, useTheme} from '@workday/canvas-kit-react/common';
+import {createStyles, cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const flexStyles = createStyles({
+  border: 'solid 1px',
+  justifyContent: 'space-between',
+  padding: system.space.x4,
+  alignItems: 'center',
+});
 
 export const ResponsiveRange = () => {
   const resultCount = 10;
@@ -62,14 +71,8 @@ export const ResponsiveRange = () => {
   });
 
   return (
-    <Flex
-      border="solid 1px"
-      ref={containerRef}
-      justifyContent="space-between"
-      padding="s"
-      alignItems="center"
-    >
-      <Text typeLevel="body.small" fontWeight="bold">
+    <Flex ref={containerRef} cs={flexStyles}>
+      <Text typeLevel="body.small" cs={{fontWeight: cssVar(system.fontWeight.bold)}}>
         Width: {containerWidth}px
       </Text>
       <Pagination model={model} aria-label="Pagination">

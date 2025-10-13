@@ -16,6 +16,13 @@ import {
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {useIsFullscreen} from '@workday/canvas-kit-react/common';
 import screenfull from 'screenfull';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const cardStyles = createStyles({
+  width: 400,
+  padding: system.space.x4,
+});
 
 const SelfClosePopup = () => {
   const model = usePopupModel();
@@ -31,7 +38,7 @@ const SelfClosePopup = () => {
     <Popup model={model}>
       <Popup.Target>Open Self-close Popup</Popup.Target>
       <Popup.Popper>
-        <Popup.Card width={400} padding="s">
+        <Popup.Card cs={cardStyles}>
           <Popup.CloseIcon aria-label="Close" />
           <Popup.Heading>Self-close Popup</Popup.Heading>
           <Popup.Body>
@@ -62,7 +69,7 @@ const TransferClosePopup = () => {
     <Popup model={model}>
       <Popup.Target>Open Transfer Popup</Popup.Target>
       <Popup.Popper>
-        <Popup.Card width={400} padding="s">
+        <Popup.Card cs={cardStyles}>
           <Popup.CloseIcon aria-label="Close" />
           <Popup.Heading>Transfer Popup</Popup.Heading>
           <Popup.Body>
@@ -78,6 +85,17 @@ const TransferClosePopup = () => {
       </Popup.Popper>
     </Popup>
   );
+};
+
+const styles = {
+  container: createStyles({
+    alignItems: 'center',
+    justifyContent: 'center',
+    background: 'white',
+  }),
+  flex: createStyles({
+    gap: system.space.x4,
+  }),
 };
 
 export const FullScreen = () => {
@@ -96,13 +114,8 @@ export const FullScreen = () => {
   return (
     <>
       <SecondaryButton onClick={enterFullScreen}>Open Fullscreen</SecondaryButton>
-      <Flex
-        ref={fullscreenElementRef}
-        alignItems="center"
-        justifyContent="center"
-        background="white"
-      >
-        <Flex gap="s">
+      <Flex ref={fullscreenElementRef} cs={styles.container}>
+        <Flex cs={styles.flex}>
           <SelfClosePopup />
           <TransferClosePopup />
           {isFullscreen ? (

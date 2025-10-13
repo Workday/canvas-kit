@@ -1,6 +1,12 @@
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {DeleteButton} from '@workday/canvas-kit-react/button';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const flexStyles = createStyles({
+  gap: system.space.x4,
+});
 
 export const StackedModals = () => {
   const model = useModalModel();
@@ -18,7 +24,7 @@ export const StackedModals = () => {
           <Modal.Heading>Delete Item</Modal.Heading>
           <Modal.Body>
             <p>Are you sure you want to delete the item?</p>
-            <Flex gap="s">
+            <Flex cs={flexStyles}>
               <Modal>
                 <Modal.Target as={DeleteButton}>Yes, Delete</Modal.Target>
                 <Modal.Overlay>
@@ -29,7 +35,7 @@ export const StackedModals = () => {
                       <p>
                         Are you <em>really</em> sure you want to delete the item?
                       </p>
-                      <Flex gap="s">
+                      <Flex cs={flexStyles}>
                         <Modal.CloseButton
                           as={DeleteButton}
                           onClick={event => {

@@ -3,6 +3,11 @@ import {InformationHighlight} from '@workday/canvas-kit-preview-react/informatio
 import {system} from '@workday/canvas-tokens-web';
 import {createStyles} from '@workday/canvas-kit-styling';
 
+const contentWrapperStyles = createStyles({
+  gap: system.space.x2,
+  flexDirection: 'column',
+});
+
 const contentTextStyles = createStyles({
   margin: 0,
 });
@@ -17,7 +22,7 @@ const contentListStyles = createStyles({
 
 export const Informational = () => {
   return (
-    <Flex flexDirection={'column'} gap={system.space.x2}>
+    <Flex cs={contentWrapperStyles}>
       <InformationHighlight variant={'informational'}>
         <InformationHighlight.Icon />
         <InformationHighlight.Heading> Informational Highlight </InformationHighlight.Heading>

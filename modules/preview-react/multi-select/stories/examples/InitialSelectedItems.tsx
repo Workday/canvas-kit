@@ -79,51 +79,49 @@ export const InitialSelectedItems = () => {
 
   return (
     <CanvasProvider>
-      <>
-        <form
-          onSubmit={e => {
-            console.log('form submitted');
-            e.preventDefault();
-          }}
-        >
-          <main className={mainContentStyles}>
-            <MultiSelect model={model}>
-              <FormField orientation="horizontalStart">
-                <FormField.Label>Fruits</FormField.Label>
-                <FormField.Input
-                  as={MultiSelect.SearchInput}
-                  placeholder="Search"
-                  removeLabel="Remove"
-                  name="toppings"
-                  onChange={e => {
-                    setValue(e.currentTarget.value);
-                  }}
-                  value={value}
-                />
-                <MultiSelect.Popper>
-                  <MultiSelect.Card>
-                    {model.state.items.length === 0 && (
-                      <StyledMenuItem as="span">No Results Found</StyledMenuItem>
-                    )}
-                    {model.state.items.length > 0 && (
-                      <MultiSelect.List maxHeight={200}>
-                        {item =>
-                          item ? (
-                            <MultiSelect.Item data-id={item.id}>
-                              <MultiSelect.Item.Text>{item.text}</MultiSelect.Item.Text>
-                            </MultiSelect.Item>
-                          ) : undefined
-                        }
-                      </MultiSelect.List>
-                    )}
-                  </MultiSelect.Card>
-                </MultiSelect.Popper>
-              </FormField>
-            </MultiSelect>
-          </main>
-        </form>
-        <div>Selected: {value}</div>
-      </>
+      <form
+        onSubmit={e => {
+          console.log('form submitted');
+          e.preventDefault();
+        }}
+      >
+        <main className={mainContentStyles}>
+          <MultiSelect model={model}>
+            <FormField orientation="horizontalStart">
+              <FormField.Label>Fruits</FormField.Label>
+              <FormField.Input
+                as={MultiSelect.SearchInput}
+                placeholder="Search"
+                removeLabel="Remove"
+                name="toppings"
+                onChange={e => {
+                  setValue(e.currentTarget.value);
+                }}
+                value={value}
+              />
+              <MultiSelect.Popper>
+                <MultiSelect.Card>
+                  {model.state.items.length === 0 && (
+                    <StyledMenuItem as="span">No Results Found</StyledMenuItem>
+                  )}
+                  {model.state.items.length > 0 && (
+                    <MultiSelect.List maxHeight={200}>
+                      {item =>
+                        item ? (
+                          <MultiSelect.Item data-id={item.id}>
+                            <MultiSelect.Item.Text>{item.text}</MultiSelect.Item.Text>
+                          </MultiSelect.Item>
+                        ) : undefined
+                      }
+                    </MultiSelect.List>
+                  )}
+                </MultiSelect.Card>
+              </MultiSelect.Popper>
+            </FormField>
+          </MultiSelect>
+        </main>
+      </form>
+      <div>Selected: {value}</div>
     </CanvasProvider>
   );
 };

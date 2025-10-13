@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {Flex, Box} from '@workday/canvas-kit-react/layout';
 import {
   ListBox,
@@ -9,8 +7,20 @@ import {
   useListItemRegister,
 } from '@workday/canvas-kit-react/collection';
 import {composeHooks, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {createStencil, createStyles} from '@workday/canvas-kit-styling';
 
 const useItem = composeHooks(useListItemSelect, useListItemRovingFocus, useListItemRegister);
+
+const boxStyles = createStencil({
+  vars: {
+    background: '',
+  },
+  base: ({background}) => ({
+    width: 40,
+    border: 'solid 1px black',
+    background,
+  }),
+});
 
 const Item = createSubcomponent('button')({
   modelHook: useGridModel,
@@ -20,13 +30,17 @@ const Item = createSubcomponent('button')({
     <Box
       as={Element}
       {...elemProps}
-      width={40}
-      border="solid 1px black"
-      style={{
+      cs={boxStyles({
         background: model.state.selectedIds.includes(elemProps['data-id']) ? 'gray' : 'white',
-      }}
+      })}
     />
   );
+});
+
+const flexStyles = createStyles({
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  width: 200,
 });
 
 export const BasicGrid = () => {
@@ -39,7 +53,7 @@ export const BasicGrid = () => {
   });
 
   return (
-    <ListBox model={model} as={Flex} flexDirection="row" flexWrap="wrap" width={200}>
+    <ListBox model={model} as={Flex} cs={flexStyles}>
       {item => <Item>{item.id}</Item>}
     </ListBox>
   );

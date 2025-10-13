@@ -23,7 +23,7 @@ const StyledStickyBanner = styled(Banner)({
 export const StickyRTL = () => {
   return (
     <CanvasProvider theme={theme}>
-      <Box height={64}>
+      <Box cs={{height: 64}}>
         <StyledStickyBanner isSticky={true}>
           <Banner.Icon />
           <Banner.Label>3 אזהרות</Banner.Label>

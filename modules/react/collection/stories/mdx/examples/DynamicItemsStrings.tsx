@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {ListBox} from '@workday/canvas-kit-react/collection';
 
 const items = ['Pizza', 'Chocolate', 'Cheeseburgers'];

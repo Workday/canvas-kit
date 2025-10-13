@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {ListBox, useListItemRovingFocus} from '@workday/canvas-kit-react/collection';
 
 interface Item {

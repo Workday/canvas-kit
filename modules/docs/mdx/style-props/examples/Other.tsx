@@ -1,42 +1,39 @@
 import {Box} from '@workday/canvas-kit-react/layout';
-import {colors} from '@workday/canvas-kit-react/tokens';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
-const baseStyles = {
-  color: 'blackPepper500',
-  display: 'inline-block',
-  margin: 'xxs',
-  minHeight: 'xl',
-  padding: 'xs',
+const styles = {
+  conteiner: createStyles({
+    '> *': {
+      color: system.color.fg.stronger,
+      display: 'inline-block',
+      margin: system.space.x1,
+      minHeight: system.space.x10,
+      padding: system.space.x2,
+      outlineOffset: px2rem(2),
+    },
+  }),
+  grab: createStyles({
+    cursor: 'grab',
+    backgroundColor: base.red300,
+    outline: `2px dashed ${base.red300}`,
+  }),
+  text: createStyles({
+    cursor: 'text',
+    backgroundColor: base.amber200,
+    outline: `2px dashed ${base.amber200}`,
+  }),
+  wait: createStyles({
+    cursor: 'wait',
+    backgroundColor: base.blue400,
+    outline: `2px dashed ${base.blue400}`,
+  }),
 };
 
 export const Other = () => (
-  <Box>
-    <Box
-      backgroundColor="cinnamon300"
-      cursor="grab"
-      outline={`2px dashed ${colors.cinnamon300}`}
-      outlineOffset="2px"
-      {...baseStyles}
-    >
-      Cursor Grab
-    </Box>
-    <Box
-      backgroundColor="sourLemon300"
-      cursor="text"
-      outline={`2px dashed ${colors.sourLemon300}`}
-      outlineOffset="2px"
-      {...baseStyles}
-    >
-      Cursor Text
-    </Box>
-    <Box
-      backgroundColor="blueberry300"
-      cursor="wait"
-      outline={`2px dashed ${colors.blueberry300}`}
-      outlineOffset="2px"
-      {...baseStyles}
-    >
-      Cursor Wait
-    </Box>
+  <Box cs={styles.conteiner}>
+    <Box cs={styles.grab}>Cursor Grab</Box>
+    <Box cs={styles.text}>Cursor Text</Box>
+    <Box cs={styles.wait}>Cursor Wait</Box>
   </Box>
 );
