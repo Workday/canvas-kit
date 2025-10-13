@@ -8,7 +8,7 @@ export type BorderRadiusStyleProps = {
   /**
    * - sets [CSS border-radius property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius)
    * - system tokens: `shape`
-   * @deprecated
+   * @deprecated ⚠️ Please use the `cs` prop with `createStyles` and `createStencil` to apply styles to our components. For more information, view our [Styling docs](https://workday.github.io/canvas-kit/?path=/docs/styling-getting-started-overview--docs).
    */
   borderRadius?: SystemPropValues['shape'];
   /**

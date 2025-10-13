@@ -85,7 +85,7 @@ const shouldForwardProp = (prop: string) => {
  *
  * <StyledHeader color='red'>Hello World</StyledHeader>
  * ```
- * @deprecated
+ * @deprecated ⚠️ `boxStyleFn` is deprecated and will be removed in a future major version. Please reference our new way of styling components [here](https://workday.github.io/canvas-kit/?path=/docs/styling-getting-started-overview--docs).
  */
 export const boxStyleFn = <P extends BoxProps>(props: P) => {
   return [

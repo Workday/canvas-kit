@@ -2,7 +2,7 @@ import {Property} from 'csstype';
 import {buildStyleFns, buildStylePropFn, StyleFnConfig} from './buildStyleFns';
 
 /** style props to for CSS flex item properties
- * @deprecated
+ * @deprecated ⚠️ Style props are deprecated. Please use our `cs` prop with `createStencil` or `createStyles` to apply styles. For more information view our [Styling docs](* @deprecated ⚠️ `boxStyleFn` is deprecated and will be removed in a future major version. Please reference our new way of styling components [here](https://workday.github.io/canvas-kit/?path=/docs/styling-getting-started-overview--docs).
  */
 export type FlexItemStyleProps = {
   /** sets [CSS flex property](https://developer.mozilla.org/en-US/docs/Web/CSS/flex)
