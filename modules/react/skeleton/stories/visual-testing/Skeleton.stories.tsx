@@ -1,6 +1,6 @@
-import * as React from 'react';
 import {Skeleton} from '@workday/canvas-kit-react/skeleton';
-import styled from '@emotion/styled';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export default {
   title: 'Testing/Indicators/Skeleton',
@@ -12,15 +12,31 @@ export default {
   },
 };
 
-const Container = styled('span')({
-  width: '60%',
-  height: '100%',
-  margin: '8px',
-});
-
-const FlexContainer = styled('div')({
-  display: 'flex',
-});
+const styles = {
+  container: createStyles({
+    width: '60%',
+    height: '100%',
+    margin: system.space.x2,
+  }),
+  flexContainer: createStyles({
+    display: 'flex',
+  }),
+  shape50: createStyles({
+    width: 50,
+    height: 50,
+    borderRadius: system.shape.round,
+  }),
+  shape120: createStyles({
+    width: 120,
+    height: 120,
+    borderRadius: system.shape.round,
+  }),
+  shape200: createStyles({
+    width: 200,
+    height: 50,
+    borderRadius: system.shape.x1,
+  }),
+};
 
 export const SkeletonStates = {
   render: () => (
@@ -28,35 +44,35 @@ export const SkeletonStates = {
       <h1>Custom Elements Skeleton</h1>
       <div>
         <Skeleton>
-          <FlexContainer>
-            <Skeleton.Shape width={50} height={50} borderRadius={99} />
-            <Container>
+          <div className={styles.flexContainer}>
+            <Skeleton.Shape cs={styles.shape50} />
+            <span className={styles.container}>
               <Skeleton.Header />
-            </Container>
-          </FlexContainer>
+            </span>
+          </div>
           <div>
             <Skeleton.Text lineCount={3} />
           </div>
         </Skeleton>
       </div>
       <h1>Header Skeleton</h1>
-      <FlexContainer>
+      <div className={styles.flexContainer}>
         <Skeleton>
           <Skeleton.Header />
         </Skeleton>
-      </FlexContainer>
+      </div>
       <h1>Shape Skeleton</h1>
-      <FlexContainer>
+      <div className={styles.flexContainer}>
         <Skeleton>
-          <Skeleton.Shape width={120} height={120} borderRadius={99} />
+          <Skeleton.Shape cs={styles.shape120} />
         </Skeleton>
-      </FlexContainer>
+      </div>
       <h1>Custom Shape Skeleton</h1>
-      <FlexContainer>
+      <div className={styles.flexContainer}>
         <Skeleton>
-          <Skeleton.Shape width={200} height={50} borderRadius={4} />
+          <Skeleton.Shape cs={styles.shape200} />
         </Skeleton>
-      </FlexContainer>
+      </div>
       <h1>Text Skeleton</h1>
       <Skeleton>
         <Skeleton.Text lineCount={2} />

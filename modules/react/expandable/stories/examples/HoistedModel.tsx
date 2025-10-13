@@ -1,8 +1,29 @@
-import React from 'react';
-
 import {Expandable, useExpandableModel} from '@workday/canvas-kit-react/expandable';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const styles = {
+  container: createStyles({
+    gap: system.space.x6,
+    flexDirection: 'column',
+  }),
+  buttons: createStyles({
+    gap: system.space.x4,
+  }),
+  expandables: createStyles({
+    flexDirection: 'column',
+  }),
+  list: createStyles({
+    flexDirection: 'column',
+    gap: system.space.x2,
+    maxWidth: '60ch',
+    padding: system.space.zero,
+    marginInline: system.space.x4,
+    marginBlock: system.space.zero,
+  }),
+};
 
 export const HoistedModel = () => {
   const modelOne = useExpandableModel();
@@ -22,12 +43,12 @@ export const HoistedModel = () => {
   };
 
   return (
-    <Flex gap="m" flexDirection="column">
-      <Flex gap="s">
+    <Flex cs={styles.container}>
+      <Flex cs={styles.buttons}>
         <SecondaryButton onClick={handleExpandAll}>Expand All</SecondaryButton>
         <SecondaryButton onClick={handleCollapseAll}>Collapse All</SecondaryButton>
       </Flex>
-      <Flex flexDirection="column">
+      <Flex cs={styles.expandables}>
         <Expandable model={modelOne}>
           <Expandable.Target headingLevel="h4">
             <Expandable.Title>Usage Guidance</Expandable.Title>
@@ -49,15 +70,7 @@ export const HoistedModel = () => {
           </Expandable.Target>
 
           <Expandable.Content>
-            <Flex
-              flexDirection="column"
-              as="ul"
-              gap="xxs"
-              maxWidth="60ch"
-              padding="zero"
-              marginX="s"
-              marginY="zero"
-            >
+            <Flex as="ul" cs={styles.list}>
               <li>
                 The state of a component being open or closed must be conveyed to assistive
                 technologies.

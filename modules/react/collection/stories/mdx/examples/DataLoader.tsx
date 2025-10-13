@@ -10,6 +10,8 @@ import {
 } from '@workday/canvas-kit-react/collection';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {composeHooks} from '@workday/canvas-kit-react/common';
+import {system} from '@workday/canvas-tokens-web';
+import {createStyles} from '@workday/canvas-kit-styling';
 
 function pickRandom<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -25,10 +27,29 @@ const options = Array(1000)
     return `${pickRandom(colors)} ${pickRandom(fruits)} ${index + 1}`;
   });
 
+const styles = {
+  wrapper: createStyles({
+    gap: system.space.x8,
+  }),
+  column: createStyles({
+    gap: system.space.zero,
+    flexDirection: 'column',
+  }),
+  listItem: createStyles({
+    height: 20,
+    background: 'transparent',
+    border: 'none',
+  }),
+  box: createStyles({
+    maxHeight: 400,
+    overflowY: 'auto',
+  }),
+};
+
 export const DataLoader = () => {
   const [messages, setMessages] = React.useState<string[]>([]);
 
-  const {model, loader} = useListLoader(
+  const {model} = useListLoader(
     {
       getId: (item: string) => item,
       getTextValue: (item: string) => item,
@@ -61,8 +82,8 @@ export const DataLoader = () => {
   );
 
   return (
-    <Flex gap="xl">
-      <Flex flexDirection="column" gap="zero">
+    <Flex cs={styles.wrapper}>
+      <Flex cs={styles.column}>
         <p>Scroll or focus and use keys to navigate</p>
         <ListBox model={model} maxHeight={400} width={300}>
           {item => (
@@ -70,18 +91,16 @@ export const DataLoader = () => {
               as="button"
               role="listitem"
               elemPropsHook={useListItem}
-              height={20}
-              background="transparent"
-              border="none"
+              cs={styles.listItem}
             >
               {item}
             </ListBox.Item>
           )}
         </ListBox>
       </Flex>
-      <Flex flexDirection="column" gap="zero">
+      <Flex cs={styles.column}>
         <p>Events:</p>
-        <Box as="ul" maxHeight={400} overflowY="auto">
+        <Box as="ul" cs={styles.box}>
           {messages.map(message => (
             <li key={message}>{message}</li>
           ))}

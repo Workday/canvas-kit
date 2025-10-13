@@ -4,6 +4,21 @@ import {Placement} from '@workday/canvas-kit-react/popup';
 import {Menu} from '@workday/canvas-kit-react/menu';
 import {BodyText} from '@workday/canvas-kit-react/text';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const flexStyles = createStyles({
+  width: '100%',
+  marginTop: 240,
+  justifyContent: 'center',
+  alignItems: 'center',
+  flexDirection: 'column',
+});
+
+const bodyTextStyles = createStyles({
+  marginTop: system.space.x4,
+  marginLeft: 20,
+});
 
 export const MenuWithFallbackPlacements = () => {
   const [placement, setPlacement] = React.useState<Placement>('top');
@@ -33,13 +48,7 @@ export const MenuWithFallbackPlacements = () => {
         onSetMarginLeftBtn={handleMarginLeftBtn}
         onSetMarginRightBtn={handleMarginRightBtn}
       >
-        <Flex
-          width="100%"
-          marginTop={240}
-          justifyContent="center"
-          alignItems="center"
-          flexDirection="column"
-        >
+        <Flex cs={flexStyles}>
           <Menu onSelect={data => setSelected(data.id)}>
             <Menu.Target style={{marginLeft: marginLeftBtn, marginRight: marginRightBtn}}>
               Open Menu
@@ -55,7 +64,7 @@ export const MenuWithFallbackPlacements = () => {
                 </Menu.List>
               </Menu.Card>
             </Menu.Popper>
-            <BodyText size="small" marginTop="s" marginLeft={20}>
+            <BodyText size="small" cs={bodyTextStyles}>
               Selected: <span data-testid="output">{selected}</span>
             </BodyText>
           </Menu>

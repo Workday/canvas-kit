@@ -2,17 +2,23 @@ import {Property} from 'csstype';
 import {buildStyleFns, buildStylePropFn, StyleFnConfig} from './buildStyleFns';
 import {SystemPropValues} from './systemProps';
 
-/** style props to for depth styles */
+/** style props to for depth styles
+ * @deprecated
+ */
 export type DepthStyleProps = {
-  /** sets [CSS box-shadow styles](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow) */
+  /** sets [CSS box-shadow styles](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow)
+   * @deprecated
+   */
   boxShadow?: Property.BoxShadow;
   /**
    * - sets [CSS box-shadow styles](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow)
    * - system tokens: `depth`
-   * */
+   * @deprecated
+   */
   depth?: SystemPropValues['depth'];
 };
 
+/** @deprecated */
 export const depthStyleFnConfigs: StyleFnConfig[] = [
   {
     name: 'boxShadow',
@@ -26,6 +32,7 @@ export const depthStyleFnConfigs: StyleFnConfig[] = [
   },
 ];
 
+/** @deprecated */
 export const depthStyleFns = buildStyleFns(depthStyleFnConfigs);
 /**
  * A style prop function that takes component props and returns depth styles from Canvas token values.
@@ -37,5 +44,6 @@ export const depthStyleFns = buildStyleFns(depthStyleFnConfigs);
  *   <Box depth={3}>Hello, box shadows!</Box>
  * );
  * ```
+ * @deprecated
  */
 export const depth = buildStylePropFn<DepthStyleProps>(depthStyleFns);

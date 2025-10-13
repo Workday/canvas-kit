@@ -1,4 +1,3 @@
-import React from 'react';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {Card} from '@workday/canvas-kit-react/card';
 import {Placement} from '@workday/canvas-kit-react/popup';

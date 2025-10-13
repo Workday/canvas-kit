@@ -10,6 +10,8 @@ import {Select} from '../lib/Select';
 import {manyOptions, options} from './examples/storiesData';
 import {Modal} from '@workday/canvas-kit-react/modal';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export default {
   title: 'Testing/Preview/Select/Cypress',
@@ -61,7 +63,7 @@ const SelectModal = () => {
                 )}
               </FormField.Field>
             </FormField>
-            <Flex gap="s">
+            <Flex cs={{gap: cssVar(system.space.x4)}}>
               <Modal.CloseButton as={PrimaryButton}>Submit</Modal.CloseButton>
               <Modal.CloseButton>Cancel</Modal.CloseButton>
             </Flex>

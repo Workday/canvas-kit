@@ -2,8 +2,9 @@ import React from 'react';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Select} from '@workday/canvas-kit-react/select';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {createStyles, cssVar} from '@workday/canvas-kit-styling';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
+import {system} from '@workday/canvas-tokens-web';
 
 const parentContainerStyles = createStyles({
   flexDirection: 'column',
@@ -52,7 +53,7 @@ export const Controlled = () => {
       </FormField>
       <p>Id: {value}</p>
       <p>Label: {label}</p>
-      <Flex gap="s">
+      <Flex cs={{gap: cssVar(system.space.x4)}}>
         <SecondaryButton
           onClick={e => {
             setValue('fax');

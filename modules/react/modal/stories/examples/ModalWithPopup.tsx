@@ -7,6 +7,12 @@ import {
   usePopupModel,
 } from '@workday/canvas-kit-react/popup';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {system} from '@workday/canvas-tokens-web';
+import {createStyles} from '@workday/canvas-kit-styling';
+
+const flexStyles = createStyles({
+  gap: system.space.x4,
+});
 
 export const ModalWithPopup = () => {
   const modal = useModalModel();
@@ -30,7 +36,7 @@ export const ModalWithPopup = () => {
             <Modal.Body>
               <p>Are you sure you want to delete the item?</p>
               <Popup model={popup}>
-                <Flex gap="s">
+                <Flex cs={flexStyles}>
                   <Popup.Target as={DeleteButton}>Yes, Delete</Popup.Target>
                   <Popup.CloseButton>Cancel</Popup.CloseButton>
                 </Flex>
@@ -40,7 +46,7 @@ export const ModalWithPopup = () => {
                     <Popup.Heading>Really Delete Item</Popup.Heading>
                     <Popup.Body>
                       <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
-                      <Flex gap="s">
+                      <Flex cs={flexStyles}>
                         <Popup.CloseButton
                           as={DeleteButton}
                           onClick={event => {

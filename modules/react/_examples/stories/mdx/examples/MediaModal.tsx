@@ -3,8 +3,34 @@ import {Modal} from '@workday/canvas-kit-react/modal';
 import {Box, BoxProps, Flex} from '@workday/canvas-kit-react/layout';
 import {Text} from '@workday/canvas-kit-react/text';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {space} from '@workday/canvas-kit-react/tokens';
 import {createComponent} from '@workday/canvas-kit-react/common';
+import {system} from '@workday/canvas-tokens-web';
+import {calc, createStencil, createStyles, px2rem} from '@workday/canvas-kit-styling';
+
+const mediaImageStencil = createStencil({
+  base: {
+    display: 'block',
+    backgroundColor: system.color.bg.alt.softer,
+    transition: 'opacity ease 200ms',
+    width: '100%',
+    height: px2rem(293),
+    opacity: 0,
+  },
+  modifiers: {
+    loaded: {
+      true: {
+        opacity: 1,
+      },
+    },
+  },
+});
+
+const mediaStyles = createStyles({
+  width: calc.add(calc.multiply(system.space.x8, 2), '100%'),
+  marginInlineStart: calc.negate(system.space.x8),
+  marginTop: system.space.x6,
+  marginBottom: system.space.x4,
+});
 
 const MediaImage = createComponent('img')({
   displayName: 'Media.Image',
@@ -15,13 +41,8 @@ const MediaImage = createComponent('img')({
       <Box
         as={Element}
         ref={ref}
-        display="block"
-        backgroundColor="frenchVanilla200"
-        transition="opacity ease 200ms"
-        width="100%"
-        height={293}
-        style={{opacity: loaded ? 1 : 0}}
         onLoad={() => setLoaded(true)}
+        cs={mediaImageStencil({loaded})}
         {...elemProps}
       />
     );
@@ -33,20 +54,22 @@ const Media = createComponent('div')({
   subComponents: {Image: MediaImage},
   Component: ({children, ...elemProps}: BoxProps, ref, Element) => {
     return (
-      <Box
-        as={Element}
-        ref={ref}
-        width={`calc(100% + (${space.l} * 2))`}
-        marginLeft={`calc(-${space.l})`}
-        marginTop="m"
-        marginBottom="s"
-        {...elemProps}
-      >
+      <Box as={Element} ref={ref} cs={mediaStyles} {...elemProps}>
         {children}
       </Box>
     );
   },
 });
+
+const styles = {
+  text: createStyles({
+    marginTop: system.space.zero,
+    marginBottom: system.space.x6,
+  }),
+  flex: createStyles({
+    gap: system.space.x4,
+  }),
+};
 
 export const BasicExample = () => {
   return (
@@ -63,11 +86,11 @@ export const BasicExample = () => {
           </Media>
           <Modal.Heading>TED's Secret to Public Speaking</Modal.Heading>
           <Modal.Body>
-            <Text as="p" marginTop={0} marginBottom="m">
+            <Text as="p" cs={styles.text}>
               The secret to great public speaking, according to former actor Martin Danielson, is as
               simple as one, two, three.
             </Text>
-            <Flex gap="s">
+            <Flex cs={styles.flex}>
               <Modal.CloseButton as={PrimaryButton}>Learn More</Modal.CloseButton>
             </Flex>
           </Modal.Body>

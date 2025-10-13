@@ -6,7 +6,7 @@ import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {searchIcon} from '@workday/canvas-system-icons-web';
 
 export const HiddenLabel = () => {
-  const [value, setValue] = React.useState('');
+  const [_, setValue] = React.useState('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);

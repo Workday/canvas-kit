@@ -2,15 +2,15 @@ import React from 'react';
 
 import {Banner} from '@workday/canvas-kit-react/banner';
 import {CanvasProvider, PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
-import {colors} from '@workday/canvas-kit-react/tokens';
+import {base} from '@workday/canvas-tokens-web';
 
 export const ThemedAlert = () => {
   const theme: PartialEmotionCanvasTheme = {
     canvas: {
       palette: {
         alert: {
-          main: colors.kiwi200,
-          dark: colors.kiwi300,
+          main: base.orange600,
+          dark: base.orange800,
         },
       },
     },

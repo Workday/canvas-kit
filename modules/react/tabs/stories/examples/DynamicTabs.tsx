@@ -3,6 +3,8 @@ import React from 'react';
 import {slugify} from '@workday/canvas-kit-react/common';
 import {isCursor} from '@workday/canvas-kit-react/collection';
 import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
+import {cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 type Tab = {
   tab: string;
@@ -86,14 +88,16 @@ export const DynamicTabs = () => {
         )}
       </Tabs.List>
       <Tabs.Menu.Popper>
-        <Tabs.Menu.Card maxWidth={300} maxHeight={200}>
+        <Tabs.Menu.Card cs={{maxWidth: 300, maxHeight: 200}}>
           <Tabs.Menu.List>
             {(item: Tab) => <Tabs.Menu.Item>{item.tab}</Tabs.Menu.Item>}
           </Tabs.Menu.List>
         </Tabs.Menu.Card>
       </Tabs.Menu.Popper>
       <Tabs.Panels>
-        {(item: Tab) => <Tabs.Panel marginTop="m">Contents of {item.tab}</Tabs.Panel>}
+        {(item: Tab) => (
+          <Tabs.Panel cs={{marginTop: cssVar(system.space.x6)}}>Contents of {item.tab}</Tabs.Panel>
+        )}
       </Tabs.Panels>
     </Tabs>
   );

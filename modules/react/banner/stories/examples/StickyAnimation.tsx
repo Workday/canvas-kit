@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {CSSProperties, space} from '@workday/canvas-kit-react/tokens';
+import {CSSProperties} from '@workday/canvas-kit-react/tokens';
 import {useTheme} from '@workday/canvas-kit-react/common';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {loopIcon} from '@workday/canvas-system-icons-web';
@@ -56,7 +56,7 @@ export const StickyAnimation = () => {
   }, [theme.canvas.direction, rerun]);
 
   return (
-    <Box height={64}>
+    <Box cs={{height: 64}}>
       <div className={containerStyles} ref={containerRef}>
         <div
           key={rerun}

@@ -9,32 +9,39 @@ import {wrapProperty} from '@workday/canvas-kit-styling';
 
 import {CanvasSystemPropValues, SystemPropNames, SystemPropValues} from './systemProps';
 
+/** @deprecated */
 export type StyleFnConfig = {
   name: string;
   properties: string[];
   system: SystemPropNames | 'none';
 };
 
+/** @deprecated */
 export type StyleFns = {
   [key: string]: (value: unknown) => {};
 };
 
+/** @deprecated */
 const getColor = (value: SystemPropValues['color']) => {
   return colorTokens[value] || wrapProperty(value);
 };
 
+/** @deprecated */
 const getDepth = (value: SystemPropValues['depth']) => {
   return depthTokens[value];
 };
 
+/** @deprecated */
 const getShape = (value: SystemPropValues['shape']) => {
   return borderRadiusTokens[value as CanvasSystemPropValues['shape']] || wrapProperty(value);
 };
 
+/** @deprecated */
 const getSpace = (value: SystemPropValues['space']) => {
   return spaceTokens[value as CanvasSystemPropValues['space']] || wrapProperty(value);
 };
 
+/** @deprecated */
 const getFont = (value: SystemPropValues['font']) => {
   return (
     typeTokens.properties.fontFamilies[value as CanvasSystemPropValues['font']] ||
@@ -42,6 +49,7 @@ const getFont = (value: SystemPropValues['font']) => {
   );
 };
 
+/** @deprecated */
 const getFontSize = (value: SystemPropValues['fontSize'] | string) => {
   return (
     typeTokens.properties.fontSizes[value as CanvasSystemPropValues['fontSize']] ||
@@ -49,6 +57,7 @@ const getFontSize = (value: SystemPropValues['fontSize'] | string) => {
   );
 };
 
+/** @deprecated */
 const getFontWeight = (value: SystemPropValues['fontWeight'] | string) => {
   return (
     typeTokens.properties.fontWeights[value as CanvasSystemPropValues['fontWeight']] ||
@@ -56,6 +65,7 @@ const getFontWeight = (value: SystemPropValues['fontWeight'] | string) => {
   );
 };
 
+/** @deprecated */
 export function buildStyleFns(styleFnConfigs: StyleFnConfig[]): StyleFns {
   return styleFnConfigs.reduce((styleFns = {}, styleFnConfig) => {
     const styleFn = (value: unknown) => {
@@ -110,6 +120,7 @@ export function buildStyleFns(styleFnConfigs: StyleFnConfig[]): StyleFns {
   }, {});
 }
 
+/** @deprecated */
 export function buildStylePropFn<P extends {}>(styleFns: StyleFns) {
   return (props: P) => {
     let styles = {};

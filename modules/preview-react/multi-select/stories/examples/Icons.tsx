@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {
   mediaPauseIcon,

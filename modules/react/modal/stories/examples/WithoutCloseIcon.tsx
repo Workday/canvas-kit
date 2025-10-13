@@ -12,6 +12,17 @@ import {
 import {DeleteButton} from '@workday/canvas-kit-react/button';
 import {Flex, Box} from '@workday/canvas-kit-react/layout';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const flexStyles = createStyles({
+  gap: system.space.x4,
+  padding: system.space.x2,
+});
+
+const boxStyles = createStyles({
+  marginBlock: system.space.zero,
+});
 
 export const WithoutCloseIcon = () => {
   const longDescId = useUniqueId();
@@ -37,11 +48,11 @@ export const WithoutCloseIcon = () => {
         <Modal.Card aria-describedby={longDescId}>
           <Modal.Heading>Delete Item</Modal.Heading>
           <Modal.Body>
-            <Box as="p" id={longDescId} marginY="zero">
+            <Box as="p" id={longDescId} cs={boxStyles}>
               Are you sure you want to delete the item?
             </Box>
           </Modal.Body>
-          <Flex gap="s" padding="xxs">
+          <Flex cs={flexStyles}>
             <Modal.CloseButton ref={cancelBtnRef}>Cancel</Modal.CloseButton>
             <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
               Delete

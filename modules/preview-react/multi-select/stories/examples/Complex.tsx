@@ -25,52 +25,50 @@ export const Complex = () => {
   const [label, setLabel] = React.useState('');
   return (
     <CanvasProvider>
-      <>
-        <form
-          onSubmit={e => {
-            console.log('form submitted');
-            e.preventDefault();
-          }}
-        >
-          <main className={mainContentStyles}>
-            <MultiSelect items={items} getId={i => i.id} getTextValue={i => i.text}>
-              <FormField orientation="horizontalStart">
-                <FormField.Label>Toppings</FormField.Label>
-                <FormField.Input
-                  as={MultiSelect.Input}
-                  placeholder="Select Multiple"
-                  removeLabel="Remove"
-                  name="toppings"
-                  onChange={e => {
-                    const value = e.currentTarget.value;
-                    setValue(value);
-                    setLabel(
-                      value
-                        .split(', ')
-                        .map(item => items.find(i => i.id === item)?.text || 'Not Found')
-                        .join(', ')
-                    );
-                  }}
-                  value={value}
-                />
-                <MultiSelect.Popper>
-                  <MultiSelect.Card>
-                    <MultiSelect.List>
-                      {item => (
-                        <MultiSelect.Item data-id={item.id}>
-                          <MultiSelect.Item.Text>{item.text}</MultiSelect.Item.Text>
-                        </MultiSelect.Item>
-                      )}
-                    </MultiSelect.List>
-                  </MultiSelect.Card>
-                </MultiSelect.Popper>
-              </FormField>
-            </MultiSelect>
-          </main>
-        </form>
-        <div>Selected IDs: {value}</div>
-        <div>Selected Labels: {label}</div>
-      </>
+      <form
+        onSubmit={e => {
+          console.log('form submitted');
+          e.preventDefault();
+        }}
+      >
+        <main className={mainContentStyles}>
+          <MultiSelect items={items} getId={i => i.id} getTextValue={i => i.text}>
+            <FormField orientation="horizontalStart">
+              <FormField.Label>Toppings</FormField.Label>
+              <FormField.Input
+                as={MultiSelect.Input}
+                placeholder="Select Multiple"
+                removeLabel="Remove"
+                name="toppings"
+                onChange={e => {
+                  const value = e.currentTarget.value;
+                  setValue(value);
+                  setLabel(
+                    value
+                      .split(', ')
+                      .map(item => items.find(i => i.id === item)?.text || 'Not Found')
+                      .join(', ')
+                  );
+                }}
+                value={value}
+              />
+              <MultiSelect.Popper>
+                <MultiSelect.Card>
+                  <MultiSelect.List>
+                    {item => (
+                      <MultiSelect.Item data-id={item.id}>
+                        <MultiSelect.Item.Text>{item.text}</MultiSelect.Item.Text>
+                      </MultiSelect.Item>
+                    )}
+                  </MultiSelect.List>
+                </MultiSelect.Card>
+              </MultiSelect.Popper>
+            </FormField>
+          </MultiSelect>
+        </main>
+      </form>
+      <div>Selected IDs: {value}</div>
+      <div>Selected Labels: {label}</div>
     </CanvasProvider>
   );
 };

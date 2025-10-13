@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
 import {Flex} from '@workday/canvas-kit-react/layout';

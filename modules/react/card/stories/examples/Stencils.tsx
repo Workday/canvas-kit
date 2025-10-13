@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {cardStencil, cardBodyStencil, cardHeadingStencil} from '@workday/canvas-kit-react/card';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {createStencil, px2rem, CSProps, handleCsProp} from '@workday/canvas-kit-styling';

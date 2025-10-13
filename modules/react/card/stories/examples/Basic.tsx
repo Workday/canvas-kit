@@ -1,4 +1,3 @@
-import React from 'react';
 import {Card} from '@workday/canvas-kit-react/card';
 
 export const Basic = () => {

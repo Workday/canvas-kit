@@ -14,11 +14,11 @@ export const Basic = () => {
           <Breadcrumbs.Link href="/lunch">Lunch</Breadcrumbs.Link>
         </Breadcrumbs.Item>
         <Breadcrumbs.Item>
-          <Breadcrumbs.Link href="/house-specialty-pies" maxWidth={100}>
+          <Breadcrumbs.Link href="/house-specialty-pies" cs={{maxWidth: 100}}>
             House Specialty Pies
           </Breadcrumbs.Link>
         </Breadcrumbs.Item>
-        <Breadcrumbs.CurrentItem maxWidth={100}>Canvas Supreme</Breadcrumbs.CurrentItem>
+        <Breadcrumbs.CurrentItem cs={{maxWidth: 100}}>Canvas Supreme</Breadcrumbs.CurrentItem>
       </Breadcrumbs.List>
     </Breadcrumbs>
   );

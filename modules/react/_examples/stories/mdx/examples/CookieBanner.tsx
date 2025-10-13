@@ -1,61 +1,25 @@
-import * as React from 'react';
-
-import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
-import {colors, commonColors, depth, type, space} from '@workday/canvas-kit-react/tokens';
+import {createComponent} from '@workday/canvas-kit-react/common';
 import {PrimaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
+import {createStencil, createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+import {Box} from '@workday/canvas-kit-react/layout';
 
-const CookieBannerItem = createComponent('div')({
-  displayName: 'CookieBanner.Item',
-  Component: ({isRow, ...elProps}: ItemProps, ref) => (
-    <BannerItem ref={ref} isRow={isRow} {...elProps} />
-  ),
-});
-
-const CookieBanner = createComponent('div')({
-  displayName: 'CookieBanner',
-  Component: (props: BannerProps, ref, Element) => <Banner ref={ref} as={Element} {...props} />,
-  subComponents: {Item: CookieBannerItem},
-});
-
-export const BasicExample = () => {
-  const DefaultNotice = `We use cookies to ensure that we give you the best experience on our website. 
-    If you continue without changing your settings, we'll assume that you are willing to receive cookies.`;
-
-  return (
-    <ExampleContainer>
-      <CookieBanner isClosed={false}>
-        <CookieBanner.Item>{DefaultNotice}</CookieBanner.Item>
-        <CookieBanner.Item isRow>
-          <TertiaryButton>Settings</TertiaryButton>
-          <PrimaryButton>Continue</PrimaryButton>
-        </CookieBanner.Item>
-      </CookieBanner>
-    </ExampleContainer>
-  );
+const styles = {
+  container: createStyles({
+    minHeight: px2rem(84),
+    margin: system.space.x3,
+    position: 'relative',
+  }),
 };
 
-interface BannerProps {
-  isClosed?: boolean;
-}
-
-interface ItemProps {
-  isRow?: boolean;
-}
-
-const ExampleContainer = styled('div')({
-  minHeight: 84,
-  margin: space.xs,
-  position: 'relative',
-});
-
-const Banner = styled('div')<BannerProps & StyledType>(
-  type.levels.subtext.medium,
-  {
-    backgroundColor: commonColors.background,
-    borderTop: `1px solid ${colors.soap400}`,
+const bannerStencil = createStencil({
+  base: {
+    ...system.type.subtext.medium,
+    backgroundColor: system.color.bg.default,
+    borderTop: `1px solid ${system.color.border.divider}`,
     display: 'flex',
-    ...depth[1],
-    padding: space.m,
+    boxShadow: system.depth[1],
+    padding: system.space.x6,
     alignItems: 'center',
     justifyContent: 'space-between',
     position: 'absolute',
@@ -68,30 +32,79 @@ const Banner = styled('div')<BannerProps & StyledType>(
       flexDirection: 'column',
       alignItems: 'stretch',
       textAlign: 'center',
-      padding: `${space.s} 0`,
+      padding: `${system.space.x4} 0`,
     },
   },
-  ({isClosed}) => isClosed && {transform: 'translateY(100%)'}
-);
+  modifiers: {
+    isClosed: {
+      true: {
+        transform: 'translateY(100%)',
+      },
+    },
+  },
+});
 
-const BannerItem = styled('div')<ItemProps & StyledType>(
-  {
-    marginLeft: space.s,
-    marginRight: space.s,
+const bannerItemStencil = createStencil({
+  base: {
+    marginLeft: system.space.x4,
+    marginRight: system.space.x4,
     '@media (max-width: 450px)': {
       '&:not(:first-of-type)': {
-        marginTop: space.s,
+        marginTop: system.space.x4,
         '> *': {
           flex: 1,
         },
       },
     },
   },
-  ({isRow}) =>
-    isRow && {
-      display: 'flex',
-      '> *': {
-        marginLeft: space.s,
+  modifiers: {
+    isRow: {
+      true: {
+        display: 'flex',
+        '> *': {
+          marginLeft: system.space.x4,
+        },
       },
-    }
-);
+    },
+  },
+});
+
+const CookieBannerItem = createComponent('div')({
+  displayName: 'CookieBanner.Item',
+  Component: ({isRow, ...elProps}: ItemProps, ref) => (
+    <Box cs={bannerItemStencil({isRow})} ref={ref} {...elProps} />
+  ),
+});
+
+const CookieBanner = createComponent('div')({
+  displayName: 'CookieBanner',
+  Component: (props: BannerProps, ref, Element) => (
+    <Box cs={bannerStencil({isClosed: props.isClosed})} ref={ref} as={Element} {...props} />
+  ),
+  subComponents: {Item: CookieBannerItem},
+});
+
+export const BasicExample = () => {
+  const DefaultNotice = `We use cookies to ensure that we give you the best experience on our website. 
+    If you continue without changing your settings, we'll assume that you are willing to receive cookies.`;
+
+  return (
+    <Box cs={styles.container}>
+      <CookieBanner isClosed={false}>
+        <CookieBanner.Item>{DefaultNotice}</CookieBanner.Item>
+        <CookieBanner.Item isRow>
+          <TertiaryButton>Settings</TertiaryButton>
+          <PrimaryButton>Continue</PrimaryButton>
+        </CookieBanner.Item>
+      </CookieBanner>
+    </Box>
+  );
+};
+
+interface BannerProps {
+  isClosed?: boolean;
+}
+
+interface ItemProps {
+  isRow?: boolean;
+}

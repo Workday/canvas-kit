@@ -8,8 +8,8 @@ import {MdxJSToJSX} from './MDXElements';
 import {Table} from './Table';
 import {capitalize, IndentLevelContext, RenderContext, indent} from './widgetUtils';
 import {DescriptionTooltip} from './DescriptionTooltip';
-import {colors} from '@workday/canvas-kit-react/tokens';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {createStyles, cssVar} from '@workday/canvas-kit-styling';
+import {base} from '@workday/canvas-tokens-web';
 
 const widgets: Record<string, React.FC<ValueProps>> = {};
 
@@ -66,7 +66,7 @@ export const PropertiesInline = ({properties}: {properties: types.ObjectProperty
                     cursor: 'pointer',
                     textDecoration: p.tags.deprecated ? 'line-through' : 'underline',
                     textDecorationStyle: 'dotted',
-                    color: p.tags.deprecated ? colors.cinnamon600 : colors.plum600,
+                    color: p.tags.deprecated ? cssVar(base.red700) : cssVar(base.blue800),
                   }}
                 >
                   {p.name}
@@ -104,16 +104,20 @@ function getTableRows(
     const title = property.declarations?.[0]?.filePath;
 
     const propName = (
-      <Text as="code" whiteSpace={'nowrap !important' as any}>
+      <Text as="code" cs={{whiteSpace: 'nowrap !important'}}>
         {indent(level)}
         {level > 0 && '\u2514\u00A0'}
         {property.name}
-        {showRequired && property.required ? <Text color="chiliMango600">*</Text> : ''}
+        {showRequired && property.required ? (
+          <Text cs={{color: cssVar(base.orange700)}}>*</Text>
+        ) : (
+          ''
+        )}
       </Text>
     );
     return [
       <Table.Row key={index + i}>
-        <Table.Data color="plum600">
+        <Table.Data cs={{color: cssVar(base.blue800)}}>
           {/* Use a tooltip to help with debugging where the type sources are coming from */}
           {title ? (
             <Tooltip type="describe" title={title}>

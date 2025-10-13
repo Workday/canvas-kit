@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {renderToString} from 'react-dom/server';
 
 import {
@@ -10,6 +9,8 @@ import {
   Popup,
 } from '@workday/canvas-kit-react/popup';
 import {DeleteButton} from '@workday/canvas-kit-react/button';
+import {system} from '@workday/canvas-tokens-web';
+import {cssVar} from '@workday/canvas-kit-styling';
 
 describe('Popup', () => {
   it('should render on a server without crashing', () => {
@@ -25,7 +26,7 @@ describe('Popup', () => {
         <Popup model={model}>
           <Popup.Target as={DeleteButton}>Delete Item</Popup.Target>
           <Popup.Popper placement={'bottom'}>
-            <Popup.Card width={400} padding="s">
+            <Popup.Card cs={{width: 400, padding: cssVar(system.space.x4)}}>
               <Popup.CloseIcon aria-label="Close" />
               <Popup.Heading>Delete Item</Popup.Heading>
               <Popup.Body>

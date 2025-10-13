@@ -11,6 +11,48 @@ import {Flex, Grid} from '@workday/canvas-kit-react/layout';
 import {createStyles, calc} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
+const flexStyles = createStyles({
+  gap: system.space.x4,
+  padding: system.space.x2,
+});
+
+const grid = createStyles({
+  gridTemplateAreas: "'topButton topButton''leftButton rightButton''bottomButton bottomButton'",
+  height: calc.subtract('100vh', system.space.x16),
+  width: calc.subtract('100vw', system.space.x20),
+});
+
+const topButton = createStyles({
+  gridArea: 'topButton',
+  justifySelf: 'center',
+});
+
+const rightButton = createStyles({
+  gridArea: 'rightButton',
+  justifySelf: 'right',
+  alignSelf: 'center',
+});
+
+const bottomButton = createStyles({
+  gridArea: 'bottomButton',
+  justifySelf: 'center',
+  alignSelf: 'end',
+});
+
+const leftButton = createStyles({
+  gridArea: 'leftButton',
+  justifySelf: 'left',
+  alignSelf: 'center',
+});
+
+const cardStyles = createStyles({
+  width: 400,
+});
+
+const headingStyles = createStyles({
+  paddingTop: system.space.x6,
+});
+
 export const PopupWithFallbackPlacements = () => {
   const model = usePopupModel();
 
@@ -23,32 +65,6 @@ export const PopupWithFallbackPlacements = () => {
     console.log('Delete Item');
   };
 
-  const grid = createStyles({
-    gridTemplateAreas: "'topButton topButton''leftButton rightButton''bottomButton bottomButton'",
-    height: calc.subtract('100vh', system.space.x16),
-    width: calc.subtract('100vw', system.space.x20),
-  });
-
-  const topButton = createStyles({
-    gridArea: 'topButton',
-    justifySelf: 'center',
-  });
-  const rightButton = createStyles({
-    gridArea: 'rightButton',
-    justifySelf: 'right',
-    alignSelf: 'center',
-  });
-  const bottomButton = createStyles({
-    gridArea: 'bottomButton',
-    justifySelf: 'center',
-    alignSelf: 'end',
-  });
-  const leftButton = createStyles({
-    gridArea: 'leftButton',
-    justifySelf: 'left',
-    alignSelf: 'center',
-  });
-
   return (
     <div data-testid="scroll-area-fallback-placement">
       <Grid cs={grid}>
@@ -57,11 +73,11 @@ export const PopupWithFallbackPlacements = () => {
             Placement Top
           </Popup.Target>
           <Popup.Popper placement="top">
-            <Popup.Card width={400}>
+            <Popup.Card cs={cardStyles}>
               <Popup.CloseIcon aria-label="Close" />
-              <Popup.Heading paddingTop="m">This is Popup heading</Popup.Heading>
+              <Popup.Heading cs={headingStyles}>This is Popup heading</Popup.Heading>
               <Popup.Body>Are you sure you'd like to delete the item titled 'My Item'?</Popup.Body>
-              <Flex gap="s" padding="xxs">
+              <Flex cs={flexStyles}>
                 <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
                   Delete
                 </Popup.CloseButton>
@@ -75,11 +91,11 @@ export const PopupWithFallbackPlacements = () => {
             Placement Left
           </Popup.Target>
           <Popup.Popper placement="left">
-            <Popup.Card width={400}>
+            <Popup.Card cs={cardStyles}>
               <Popup.CloseIcon aria-label="Close" />
-              <Popup.Heading paddingTop="m">This is Popup heading</Popup.Heading>
+              <Popup.Heading cs={headingStyles}>This is Popup heading</Popup.Heading>
               <Popup.Body>Are you sure you'd like to delete the item titled 'My Item'?</Popup.Body>
-              <Flex gap="s" padding="xxs">
+              <Flex cs={flexStyles}>
                 <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
                   Delete
                 </Popup.CloseButton>
@@ -93,11 +109,11 @@ export const PopupWithFallbackPlacements = () => {
             Placement Right
           </Popup.Target>
           <Popup.Popper placement="right">
-            <Popup.Card width={400}>
+            <Popup.Card cs={cardStyles}>
               <Popup.CloseIcon aria-label="Close" />
-              <Popup.Heading paddingTop="m">This is Popup heading</Popup.Heading>
+              <Popup.Heading cs={headingStyles}>This is Popup heading</Popup.Heading>
               <Popup.Body>Are you sure you'd like to delete the item titled 'My Item'?</Popup.Body>
-              <Flex gap="s" padding="xxs">
+              <Flex cs={flexStyles}>
                 <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
                   Delete
                 </Popup.CloseButton>
@@ -111,11 +127,11 @@ export const PopupWithFallbackPlacements = () => {
             Placement Bottom
           </Popup.Target>
           <Popup.Popper placement="bottom">
-            <Popup.Card width={400}>
+            <Popup.Card cs={cardStyles}>
               <Popup.CloseIcon aria-label="Close" />
-              <Popup.Heading paddingTop="m">This is Popup heading</Popup.Heading>
+              <Popup.Heading cs={headingStyles}>This is Popup heading</Popup.Heading>
               <Popup.Body>Are you sure you'd like to delete the item titled 'My Item'?</Popup.Body>
-              <Flex gap="s" padding="xxs">
+              <Flex cs={flexStyles}>
                 <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
                   Delete
                 </Popup.CloseButton>

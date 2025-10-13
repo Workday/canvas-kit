@@ -9,7 +9,8 @@ import {
 import {Card} from '@workday/canvas-kit-react/card';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Box} from '@workday/canvas-kit-react/layout';
-import {colors} from '@workday/canvas-kit-react/tokens';
+import {cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export type Theme = 'dark' | 'light';
 interface CustomCardProps extends ExtractProps<typeof Card> {
@@ -22,8 +23,8 @@ interface CustomCardProps extends ExtractProps<typeof Card> {
 const useCustomCardModel = createModelHook({
   defaultConfig: {theme: 'dark' as Theme},
 })(config => {
-  const lightThemeColor = colors.frenchVanilla100;
-  const darkThemeColor = colors.blackPepper300;
+  const lightThemeColor = system.color.bg.primary.default;
+  const darkThemeColor = system.color.bg.contrast.default;
   const inverseColor = color => (color === darkThemeColor ? lightThemeColor : darkThemeColor);
 
   const [theme, setTheme] = React.useState(config.theme);
@@ -95,7 +96,7 @@ const CustomCard = createContainer(Card)({
   elemPropsHook: useCustomCard,
 })<CustomCardProps>(({theme, children, ...elemProps}) => {
   return (
-    <Card depth={2} {...elemProps}>
+    <Card cs={{boxShadow: cssVar(system.depth[2])}} {...elemProps}>
       {children}
     </Card>
   );
@@ -115,7 +116,7 @@ export const Template = () => {
   return (
     <CustomCard model={model}>
       <CustomCard.Heading>
-        <Box color={model.state.contrastColor}>Change your theme {icon}</Box>
+        <Box cs={{color: cssVar(model.state.contrastColor)}}>Change your theme {icon}</Box>
       </CustomCard.Heading>
       <CustomCard.Body>
         <CustomCard.Button ref={buttonRef}>Toggle</CustomCard.Button>

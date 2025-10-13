@@ -149,7 +149,7 @@ export const PopupRTL = {
         <Popup model={model}>
           <Popup.Target style={{display: 'none'}}></Popup.Target>
           <Popup.Popper>
-            <Popup.Card style={{animation: 'none'}} width={300}>
+            <Popup.Card style={{animation: 'none', width: 300}}>
               <Popup.CloseIcon aria-label="" />
               <Popup.Heading>למחוק פריט</Popup.Heading>
               <Popup.Body>האם ברצונך למחוק פריט זה</Popup.Body>

@@ -2,13 +2,14 @@ import React from 'react';
 
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
-import {space} from '@workday/canvas-kit-react/tokens';
 import {resetIcon} from '@workday/canvas-system-icons-web';
+import {cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 const CustomContent = ({...elemProps}) => (
   <button
     style={{
-      marginTop: space.xs,
+      marginTop: cssVar(system.space.x3),
       maxWidth: 200,
       overflow: 'hidden',
       textOverflow: 'ellipsis',
@@ -39,7 +40,7 @@ export const Ellipsis = () => {
       <OverflowTooltip>
         <button
           style={{
-            marginTop: space.xs,
+            marginTop: cssVar(system.space.x3),
             maxWidth: 200,
             overflow: 'hidden',
             textOverflow: 'ellipsis',

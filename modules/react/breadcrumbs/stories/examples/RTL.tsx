@@ -27,13 +27,13 @@ export const RTLOverflowList = () => {
 
   return (
     <CanvasProvider theme={theme}>
-      <Box maxWidth="300px">
+      <Box cs={{maxWidth: '300px'}}>
         <Breadcrumbs items={items} aria-label="Breadcrumbs">
           <Breadcrumbs.List overflowButton={<Breadcrumbs.OverflowButton aria-label="More links" />}>
             {item =>
               item.link ? (
                 <Breadcrumbs.Item>
-                  <Breadcrumbs.Link maxWidth={100} href={item.link}>
+                  <Breadcrumbs.Link href={item.link} cs={{maxWidth: 100}}>
                     {item.text}
                   </Breadcrumbs.Link>
                 </Breadcrumbs.Item>
@@ -43,7 +43,7 @@ export const RTLOverflowList = () => {
             }
           </Breadcrumbs.List>
           <Breadcrumbs.Menu.Popper>
-            <Breadcrumbs.Menu.Card maxWidth={300} maxHeight={200}>
+            <Breadcrumbs.Menu.Card cs={{maxWidth: 300, maxHeight: 200}}>
               <Breadcrumbs.Menu.List>
                 {(item: Breadcrumb) => (
                   <Breadcrumbs.Menu.Item href={item.link}>{item.text}</Breadcrumbs.Menu.Item>

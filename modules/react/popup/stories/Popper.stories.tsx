@@ -4,6 +4,8 @@ import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Popper} from '@workday/canvas-kit-react/popup';
 import {Card} from '@workday/canvas-kit-react/card';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export default {
   title: 'Components/Popups/Popper',
@@ -42,7 +44,7 @@ export const PopperStory = {
             <Card.Body>
               <p>A card positioned by Popper!</p>
               <div style={big ? {width: 500} : {}}></div>
-              <Flex gap="s">
+              <Flex cs={{gap: cssVar(system.space.x4)}}>
                 <SecondaryButton
                   onClick={() => {
                     setBig(!big);

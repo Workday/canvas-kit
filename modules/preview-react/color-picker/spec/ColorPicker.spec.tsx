@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {fireEvent, render, screen} from '@testing-library/react';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {ColorPicker, ColorPickerProps} from '@workday/canvas-kit-preview-react/color-picker';

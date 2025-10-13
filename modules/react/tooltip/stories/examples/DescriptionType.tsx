@@ -2,10 +2,12 @@ import {DeleteButton, SecondaryButton, TertiaryButton} from '@workday/canvas-kit
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {chartConfigIcon} from '@workday/canvas-system-icons-web';
+import {cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export const DescriptionType = () => {
   return (
-    <Flex gap="s">
+    <Flex cs={{gap: cssVar(system.space.x4)}}>
       <Tooltip type="description" title="Search using additional criteria">
         <TertiaryButton icon={chartConfigIcon}>Advanced Search</TertiaryButton>
       </Tooltip>

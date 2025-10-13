@@ -5,6 +5,14 @@ import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {Dialog} from '@workday/canvas-kit-react/dialog';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const flexStyles = createStyles({
+  gap: system.space.x4,
+  padding: system.space.x2,
+  marginTop: system.space.x2,
+});
 
 export const Focus = () => {
   const [value, setValue] = React.useState('');
@@ -17,20 +25,22 @@ export const Focus = () => {
     console.log('Email Submitted');
   };
   return (
-    <Flex gap="m">
+    <Flex cs={{gap: system.space.x6}}>
       <Dialog>
         <Dialog.Target as={PrimaryButton}>Open for Offer</Dialog.Target>
         <Dialog.Popper>
           <Dialog.Card>
             <Dialog.CloseIcon aria-label="Close" />
-            <Dialog.Heading paddingTop="m">Sign Up for 15% Off Your Next Order</Dialog.Heading>
+            <Dialog.Heading cs={{paddingTop: system.space.x6}}>
+              Sign Up for 15% Off Your Next Order
+            </Dialog.Heading>
             <Dialog.Body>
               <FormField>
                 <FormField.Label>Email</FormField.Label>
                 <FormField.Input as={TextInput} onChange={handleChange} value={value} />
               </FormField>
             </Dialog.Body>
-            <Flex gap="s" padding="xxs" marginTop="xxs">
+            <Flex cs={flexStyles}>
               <Dialog.CloseButton as={PrimaryButton} onClick={handleEmail}>
                 Submit
               </Dialog.CloseButton>

@@ -5,6 +5,8 @@ import {
   usePopupModel,
 } from '@workday/canvas-kit-react/popup';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export const MultiplePopups = () => {
   const popup1 = usePopupModel();
@@ -17,7 +19,7 @@ export const MultiplePopups = () => {
   useCloseOnEscape(popup2);
 
   return (
-    <Flex gap="s">
+    <Flex cs={{gap: cssVar(system.space.x4)}}>
       <Popup model={popup1}>
         <Popup.Target>Open Popup 1</Popup.Target>
         <Popup.Popper>

@@ -1,5 +1,3 @@
-import {CSSObject} from '@emotion/react';
-import React from 'react';
 import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 import {
   ComponentStatesTable,
@@ -18,17 +16,21 @@ import {
 import {stateTableColumnProps} from './utils';
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export default withSnapshotsEnabled({
   title: 'Testing/Buttons/Button/Color Overrides',
 });
 
+const flexStyles = createStyles({
+  flexDirection: 'column',
+  gap: system.space.x6,
+  alignItems: 'center',
+});
+
 const ColorOverrideContainer = props => {
-  return (
-    <Flex flexDirection="column" gap="m" alignItems="center">
-      {props.children}
-    </Flex>
-  );
+  return <Flex cs={flexStyles}>{props.children}</Flex>;
 };
 
 const ColorOverrideStates = (props: {theme?: PartialEmotionCanvasTheme}) => (

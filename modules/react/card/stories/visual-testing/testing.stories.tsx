@@ -1,4 +1,3 @@
-import React from 'react';
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 
 import {Card} from '@workday/canvas-kit-react/card';

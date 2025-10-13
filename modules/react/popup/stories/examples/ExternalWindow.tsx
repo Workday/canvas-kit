@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import {system} from '@workday/canvas-tokens-web';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {createStyles, cssVar} from '@workday/canvas-kit-styling';
 import {infoIcon} from '@workday/canvas-system-icons-web';
 
 import {
@@ -160,7 +160,7 @@ export const ExternalWindow = () => {
             </Tooltip>
             <PopupExternalWindow>
               <p>External Window Contents! Mouse over the info icon to get a tooltip</p>
-              <Flex gap="s">
+              <Flex cs={{gap: cssVar(system.space.x4)}}>
                 <Tooltip title="More information">
                   <SecondaryButton icon={infoIcon} />
                 </Tooltip>

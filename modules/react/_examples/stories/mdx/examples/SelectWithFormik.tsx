@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {useFormik} from 'formik';
 import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
 import {FormField} from '@workday/canvas-kit-react/form-field';
@@ -10,6 +9,8 @@ import {
   uploadCloudIcon,
   userIcon,
 } from '@workday/canvas-system-icons-web';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export const customOptionsMain = [
   {
@@ -29,6 +30,12 @@ export const customOptionsMain = [
   },
   {label: 'Mastering Pasta by Marc Verti', serverId: 4, icon: userIcon},
 ];
+
+const styles = createStyles({
+  gap: system.space.x3,
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+});
 
 export const SelectWithFormik = () => {
   const formik = useFormik({
@@ -53,7 +60,7 @@ export const SelectWithFormik = () => {
 
   return (
     <form onSubmit={formik.handleSubmit} action=".">
-      <Flex gap="xs" flexDirection="column" alignItems="flex-start">
+      <Flex cs={styles}>
         <FormField orientation="vertical" alignSelf="stretch" alignItems="normal">
           <Select model={selectModel}>
             <FormField.Label>Choose a book</FormField.Label>

@@ -1,8 +1,9 @@
 import React from 'react';
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
-import {colors, space} from '@workday/canvas-kit-react/tokens';
 import {ActionBar} from '@workday/canvas-kit-react/action-bar';
 import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
+import {cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export default {
   title: 'Testing/Buttons/ActionBar',
@@ -33,13 +34,13 @@ export const ActionBarStates = {
         {props => (
           <div
             style={{
-              background: colors.soap100,
+              background: cssVar(system.color.bg.alt.softer),
               position: 'relative',
-              height: `calc(${space.xxl} + 2.25rem)`,
-              marginBottom: space.xs,
+              height: `calc(${system.space.x16} + 2.25rem)`,
+              marginBottom: system.space.x3,
             }}
           >
-            <p style={{padding: space.xs}}>Outer Block</p>
+            <p style={{padding: system.space.x3}}>Outer Block</p>
             <ActionBar>
               <ActionBar.List {...props}>
                 <PrimaryButton>First Action</PrimaryButton>
@@ -110,7 +111,7 @@ export const ActionBarWithOverflowMenuStates = {
                 )}
               </ActionBar.List>
               <ActionBar.Menu.Popper>
-                <ActionBar.Menu.Card maxWidth={300} maxHeight={200}>
+                <ActionBar.Menu.Card cs={{maxWidth: 300, maxHeight: 200}}>
                   <ActionBar.Menu.List>
                     {(item: MyActionItem) => <ActionBar.Menu.Item>{item.text}</ActionBar.Menu.Item>}
                   </ActionBar.Menu.List>

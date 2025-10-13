@@ -1,10 +1,11 @@
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
 import {system} from '@workday/canvas-tokens-web';
+import {cssVar} from '@workday/canvas-kit-styling';
 
 export const Critical = () => {
   return (
-    <Flex flexDirection={'column'} gap={system.space.x2}>
+    <Flex cs={{gap: cssVar(system.space.x2), flexDirection: 'column'}}>
       <InformationHighlight variant={'critical'}>
         <InformationHighlight.Icon />
         <InformationHighlight.Heading>Attention! Highlight Something</InformationHighlight.Heading>

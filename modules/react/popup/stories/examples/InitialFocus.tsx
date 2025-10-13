@@ -9,6 +9,21 @@ import {
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const styles = {
+  card: createStyles({
+    width: 400,
+  }),
+  flex: createStyles({
+    gap: system.space.x4,
+    padding: system.space.x2,
+  }),
+  box: createStyles({
+    marginBlock: system.space.zero,
+  }),
+};
 
 export const InitialFocus = () => {
   const initialFocusRef = React.useRef(null);
@@ -25,15 +40,15 @@ export const InitialFocus = () => {
     <Popup model={model}>
       <Popup.Target>Send Message</Popup.Target>
       <Popup.Popper placement={'bottom'}>
-        <Popup.Card width={400}>
+        <Popup.Card cs={styles.card}>
           <Popup.CloseIcon aria-label="Close" />
           <Popup.Heading>Confirmation</Popup.Heading>
           <Popup.Body>
-            <Box as="p" marginY="zero" id="popup-message">
+            <Box as="p" cs={styles.box} id="popup-message">
               Your message has been sent!
             </Box>
           </Popup.Body>
-          <Flex gap="s" padding="xxs">
+          <Flex cs={styles.flex}>
             <Popup.CloseButton ref={initialFocusRef} aria-describedby="popup-message">
               OK
             </Popup.CloseButton>

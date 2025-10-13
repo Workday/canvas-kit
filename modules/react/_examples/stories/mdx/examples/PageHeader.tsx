@@ -1,12 +1,10 @@
-import * as React from 'react';
-import {createComponent, styled} from '@workday/canvas-kit-react/common';
-
-import {colors, gradients, space} from '@workday/canvas-kit-react/tokens';
-
-import {Flex, FlexProps, SystemPropValues} from '@workday/canvas-kit-react/layout';
+import {createComponent} from '@workday/canvas-kit-react/common';
+import {Box, Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {justifyIcon, notificationsIcon} from '@workday/canvas-system-icons-web';
 import {Heading} from '@workday/canvas-kit-react/text';
+import {createStencil, createStyles} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
 
 interface HeaderItemProps extends FlexProps {}
 
@@ -20,10 +18,26 @@ export const Basic = () => (
   </PageHeader>
 );
 
+const styles = {
+  headerItem: createStencil({
+    vars: {
+      gap: '',
+    },
+    base: ({gap}) => ({
+      gap: gap,
+    }),
+  }),
+  headerTitle: createStyles({
+    padding: `${system.space.x3} 0`,
+    margin: 0,
+    whiteSpace: 'nowrap',
+  }),
+};
+
 const PageHeaderItem = createComponent('div')({
   displayName: 'PageHeader.Item',
-  Component: ({gap = 'xxs', ...props}: HeaderItemProps, ref, Element) => (
-    <Flex gap={gap} ref={ref} as={Element} {...props} />
+  Component: ({gap = system.space.x2, ...props}: HeaderItemProps, ref, Element) => (
+    <Flex ref={ref} as={Element} cs={styles.headerItem({gap: gap as string})} {...props} />
   ),
 });
 
@@ -35,9 +49,7 @@ const PageHeaderTitle = createComponent('h2')({
       ref={ref}
       size="medium"
       variant="inverse"
-      padding={`${space.xs} 0`}
-      margin={0}
-      whiteSpace="nowrap"
+      cs={styles.headerTitle}
       {...props}
     >
       {children}
@@ -47,14 +59,14 @@ const PageHeaderTitle = createComponent('h2')({
 
 const PageHeader = createComponent('header')({
   displayName: 'PageHeader',
-  Component: (props, ref, Element) => <Header ref={ref} as={Element} {...props} />,
+  Component: (props, ref, Element) => <Box ref={ref} as={Element} cs={headerStyles} {...props} />,
   subComponents: {Item: PageHeaderItem, Title: PageHeaderTitle},
 });
 
-const Header = styled('header')({
-  padding: `${space.xs} ${space.xl}`,
-  backgroundImage: gradients.blueberry,
-  color: colors.frenchVanilla100,
+const headerStyles = createStyles({
+  padding: `${system.space.x3} ${system.space.x8}`,
+  backgroundImage: brand.gradient.primary,
+  color: system.color.fg.inverse,
   WebkitFontSmoothing: 'antialiased',
   MozOsxFontSmoothing: 'grayscale',
   display: 'flex',

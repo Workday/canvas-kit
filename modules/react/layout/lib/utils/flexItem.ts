@@ -1,24 +1,41 @@
 import {Property} from 'csstype';
 import {buildStyleFns, buildStylePropFn, StyleFnConfig} from './buildStyleFns';
 
-/** style props to for CSS flex item properties */
+/** style props to for CSS flex item properties
+ * @deprecated
+ */
 export type FlexItemStyleProps = {
-  /** sets [CSS flex property](https://developer.mozilla.org/en-US/docs/Web/CSS/flex) */
+  /** sets [CSS flex property](https://developer.mozilla.org/en-US/docs/Web/CSS/flex)
+   * @deprecated
+   */
   flex?: Property.Flex;
-  /** sets [CSS flex-grow property](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow) */
+  /** sets [CSS flex-grow property](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow)
+   * @deprecated
+   */
   flexGrow?: Property.FlexGrow;
-  /** sets [CSS flex-shrink property](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink) */
+  /** sets [CSS flex-shrink property](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink)
+   * @deprecated
+   */
   flexShrink?: Property.FlexShrink;
-  /** sets [CSS flex-basis property](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis) */
+  /** sets [CSS flex-basis property](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis)
+   * @deprecated
+   */
   flexBasis?: Property.FlexBasis;
-  /** sets [CSS justify-self property](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-self) */
+  /** sets [CSS justify-self property](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-self)
+   * @deprecated
+   */
   justifySelf?: Property.JustifySelf;
-  /** sets [CSS align-self property](https://developer.mozilla.org/en-US/docs/Web/CSS/align-self) */
+  /** sets [CSS align-self property](https://developer.mozilla.org/en-US/docs/Web/CSS/align-self)
+   * @deprecated
+   */
   alignSelf?: Property.AlignSelf;
-  /** sets [CSS order property](https://developer.mozilla.org/en-US/docs/Web/CSS/order) */
+  /** sets [CSS order property](https://developer.mozilla.org/en-US/docs/Web/CSS/order)
+   * @deprecated
+   */
   order?: Property.Order;
 };
 
+/** @deprecated */
 export const flexItemStyleFnConfigs: StyleFnConfig[] = [
   {
     name: 'flex',
@@ -57,6 +74,7 @@ export const flexItemStyleFnConfigs: StyleFnConfig[] = [
   },
 ];
 
+/** @deprecated */
 export const flexItemStyleFns = buildStyleFns(flexItemStyleFnConfigs);
 /**
  * A style prop function that takes component props and returns flexbox item styles.
@@ -70,5 +88,6 @@ export const flexItemStyleFns = buildStyleFns(flexItemStyleFnConfigs);
  *   </Box>
  * );
  * ```
+ * @deprecated
  */
 export const flexItem = buildStylePropFn<FlexItemStyleProps>(flexItemStyleFns);

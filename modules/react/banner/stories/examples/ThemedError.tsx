@@ -1,17 +1,15 @@
-import React from 'react';
-
 import {Banner} from '@workday/canvas-kit-react/banner';
 import {CanvasProvider, PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
-import {colors} from '@workday/canvas-kit-react/tokens';
+import {base} from '@workday/canvas-tokens-web';
 
 export const ThemedError = () => {
   const theme: PartialEmotionCanvasTheme = {
     canvas: {
       palette: {
         error: {
-          main: colors.islandPunch500,
-          dark: colors.islandPunch600,
-          contrast: colors.berrySmoothie100,
+          main: base.magenta500,
+          dark: base.magenta800,
+          contrast: base.magenta25,
         },
       },
     },
