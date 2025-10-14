@@ -23,7 +23,8 @@ export const textInputStencil = createStencil({
     display: 'block',
     border: `${px2rem(1)} solid ${cssVar(system.color.border.input.default)}`,
     backgroundColor: system.color.bg.default,
-    borderRadius: system.shape.x1Half,
+    //TODO: Replace string with new token in v15/v4
+    borderRadius: cssVar('--cnvs-sys-shape-m', system.shape.x1Half),
     boxSizing: 'border-box',
     height: system.space.x10,
     transition: '0.2s box-shadow, 0.2s border-color',
