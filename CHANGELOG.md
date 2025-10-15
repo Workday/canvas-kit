@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.35](https://github.com/Workday/canvas-kit/releases/tag/v13.2.35) (2025-10-15)
+
+### Component
+
+- fix(menu): Change to :focus-visible in MenuItem ([#3540](https://github.com/Workday/canvas-kit/pull/3540)) ([@thomasatran](https://github.com/thomasatran), [@thomas-tran-wd](https://github.com/thomas-tran-wd))
+
+
 ## [v13.2.34](https://github.com/Workday/canvas-kit/releases/tag/v13.2.34) (2025-10-10)
 
 ### Styling
