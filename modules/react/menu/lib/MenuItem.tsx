@@ -97,7 +97,7 @@ export const menuItemStencil = createStencil({
       [`& :where(${selectedPart})`]: {
         opacity: system.opacity.full,
       },
-      '&:where(.focus, :focus)': {
+      '&:where(.focus, :focus-visible)': {
         [systemIconStencil.vars.color]: brand.primary.accent,
         outline: 'none',
         backgroundColor: brand.primary.base,
@@ -112,7 +112,7 @@ export const menuItemStencil = createStencil({
     },
 
     // Focus styles
-    '&:is(.focus, :focus)': {
+    '&:is(.focus, :focus-visible)': {
       color: brand.primary.accent,
       backgroundColor: brand.primary.base,
       outline: `${px2rem(2)} solid transparent`,
@@ -125,7 +125,7 @@ export const menuItemStencil = createStencil({
       cursor: 'default',
 
       // Focus + Disabled
-      '&:where(.focus, :focus)': {
+      '&:where(.focus, :focus-visible)': {
         backgroundColor: brand.primary.light,
       },
     },
