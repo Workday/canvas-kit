@@ -7,7 +7,7 @@ export const Avatar = () => (
     <Expandable>
       <Expandable.Target headingLevel="h4">
         <Expandable.Icon iconPosition="start" />
-        <Expandable.Avatar name="Avatar" url={testAvatar} />
+        <Expandable.Avatar name="Avatar" isDecorative url={testAvatar} />
         <Expandable.Title>Title</Expandable.Title>
       </Expandable.Target>
 
@@ -15,7 +15,7 @@ export const Avatar = () => (
     </Expandable>
     <Expandable>
       <Expandable.Target headingLevel="h4">
-        <Expandable.Avatar name="Avatar" url={testAvatar} />
+        <Expandable.Avatar name="Avatar" isDecorative url={testAvatar} />
         <Expandable.Title>Title</Expandable.Title>
         <Expandable.Icon iconPosition="end" />
       </Expandable.Target>
