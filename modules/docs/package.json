@@ -27,9 +27,11 @@
     "build:docs": "node ./utils/build-docs.js",
     "build:rebuild": "npm-run-all clean build",
     "build:specs": "node ./utils/build-specifications.js",
-    "build": "npm-run-all build:es6 build:mdx build:specs build:docs",
+    "build:mcp": "ts-node ./utils/build-mcp.ts",
+    "build": "npm-run-all build:es6 build:mdx build:specs build:docs build:mcp",
     "depcheck": "node ../../utils/check-dependencies-exist.js",
-    "typecheck:src": "tsc -p . --noEmit --incremental false"
+    "typecheck:src": "tsc -p . --noEmit --incremental false",
+    "mcp:inspect": "npm-run-all build:es6 build:mcp && cp mcp/testServer.mjs dist/mcp/ && npx @modelcontextprotocol/inspector node dist/mcp/testServer.mjs"
   },
   "publishConfig": {
     "access": "public"
@@ -43,6 +45,7 @@
   ],
   "dependencies": {
     "@emotion/styled": "^11.6.0",
+    "@modelcontextprotocol/sdk": "^1.20.0",
     "@stackblitz/sdk": "^1.11.0",
     "@storybook/csf": "0.0.1",
     "@workday/canvas-kit-labs-react": "^13.2.35",
