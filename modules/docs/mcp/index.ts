@@ -29,6 +29,9 @@ function getServer() {
     }
   );
 
+  /**
+   * Metadata for agents about the resource files.
+   */
   function getBestPracticesResource(fileName: BestPracticesResourceFile) {
     switch (fileName) {
       case 'COMPOUND_COMPONENTS.mdx':
