@@ -25,7 +25,7 @@ const cardStencil = createStencil({
       boxShadow: system.depth[1],
       borderRadius: system.shape.x1,
       position: 'relative',
-      overflow: 'auto',
+      overflow: 'auto', // This allows for the entire ExampleCodeBlock to scroll on smaller viewports
     },
     '[data-part="code-block"]': {
       display: 'none',
