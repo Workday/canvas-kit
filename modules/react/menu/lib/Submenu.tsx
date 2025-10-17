@@ -88,6 +88,7 @@ export const useSubmenuTargetItem = composeHooks(
       model.events.show(event);
     }, 300);
     return {
+      id: model.state.id,
       role: 'menuitem',
       'aria-haspopup': 'true',
       'aria-expanded': model.state.visibility === 'visible',
