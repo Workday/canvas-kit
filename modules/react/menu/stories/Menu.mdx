@@ -109,7 +109,19 @@ submenus.
 
 ## Accessibility
 
-This content is coming soon!
+Our Menu component is based on the Menu Button pattern on the ARIA Authoring Practices Guide from
+the W3C. This means that the minimum requirements for screen reader support and keyboard navigation
+are included in the component.
+
+[Menu Button Pattern | APG | WAI | W3C](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/)
+
+- The `<Menu.Target>` sub-component uses `aria-haspopup=”true”` and `aria-expanded={true | false}`
+  properties. This benefits screen reader users by indicating when a button element has an attached
+  menu.
+- The `<Menu.List>` sub-component uses `role=”menu”` and `<Menu.Item>` uses `role=”menuitem”` ARIA
+  roles. These roles allow screen readers to pass through arrow key events to the web application.
+- The `<Menu.List>` sub-component inludes an `aria-labelledby` ID reference to the `<Menu.Target>`
+  sub-component. This assigns a label to the menu for context.
 
 ## Component API
 
