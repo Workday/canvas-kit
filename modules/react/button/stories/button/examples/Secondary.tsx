@@ -13,7 +13,6 @@ import {system} from '@workday/canvas-tokens-web';
 const parentContainerStyles = createStyles({
   gap: system.space.x4,
   padding: system.space.x4,
-  flexWrap: 'wrap',
 });
 
 export const Secondary = () => (
