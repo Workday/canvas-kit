@@ -88,6 +88,9 @@ export const useSubmenuTargetItem = composeHooks(
       model.events.show(event);
     }, 300);
     return {
+      role: 'menuitem',
+      'aria-haspopup': 'true',
+      'aria-expanded': model.state.visibility === 'visible',
       onMouseDown(event: React.MouseEvent) {
         model.UNSTABLE_parentModel.events.goTo({id: event.currentTarget.getAttribute('data-id')!});
       },
