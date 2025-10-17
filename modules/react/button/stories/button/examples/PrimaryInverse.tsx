@@ -14,6 +14,7 @@ const parentContainerStyles = createStyles({
   gap: system.space.x4,
   backgroundColor: system.color.bg.primary.default,
   padding: system.space.x4,
+  flexWrap: 'wrap',
 });
 
 export const PrimaryInverse = () => (

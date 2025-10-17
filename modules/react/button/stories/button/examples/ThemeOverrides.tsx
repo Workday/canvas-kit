@@ -15,6 +15,7 @@ import {Heading} from '@workday/canvas-kit-react/text';
 const parentContainerStyles = createStyles({
   gap: system.space.x4,
   padding: system.space.x4,
+  flexWrap: 'wrap',
 });
 
 const customActionTheme = createStyles({

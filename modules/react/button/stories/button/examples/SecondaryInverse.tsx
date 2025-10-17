@@ -14,6 +14,7 @@ const parentContainerStyles = createStyles({
   gap: system.space.x4,
   padding: system.space.x4,
   backgroundColor: system.color.bg.primary.default,
+  flexWrap: 'wrap',
 });
 
 export const SecondaryInverse = () => (
