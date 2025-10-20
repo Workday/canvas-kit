@@ -1,4 +1,10 @@
-import {ExampleCodeBlock, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {
+  ExampleCodeBlock,
+  StorybookStatusIndicator,
+  SymbolDoc,
+  Specifications,
+} from '@workday/canvas-kit-docs';
+import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
 import * as SelectStories from './Select.stories';
 
 import {Default} from './examples/Top Label/Default';
@@ -6,7 +12,7 @@ import {DefaultWithCustomOptions} from './examples/Top Label/DefaultWithCustomOp
 import {DefaultWithSimpleOptions} from './examples/Top Label/DefaultWithSimpleOptions';
 import {Scrollable} from './examples/Top Label/Scrollable';
 import {Disabled} from './examples/Top Label/Disabled';
-import {Alert} from './examples/Top Label/Alert';
+import {Caution} from './examples/Top Label/Caution';
 import {Error} from './examples/Top Label/Error';
 import {Grow} from './examples/Top Label/Grow';
 import {DefaultLeft} from './examples/Left Label/DefaultLeft';
@@ -18,10 +24,22 @@ import {AlertLeft} from './examples/Left Label/AlertLeft';
 import {ErrorLeft} from './examples/Left Label/ErrorLeft';
 import {GrowLeft} from './examples/Left Label/GrowLeft';
 
-
 <Meta of={SelectStories} />
 
-# Canvas Kit Select
+# Canvas Kit Select <StorybookStatusIndicator type="deprecated" />
+
+<InformationHighlight className="sb-unstyled" variant="caution" cs={{p: {marginBlock: 0}}}>
+  <InformationHighlight.Icon />
+  <InformationHighlight.Body>
+    `Select` in Preview has been deprecated and will be removed in a future major version. Please
+    use `Select` in Main instead.
+  </InformationHighlight.Body>
+  <InformationHighlight.Link href="https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--docs">
+    Select (main) Docs
+  </InformationHighlight.Link>
+</InformationHighlight>
+
+<br />
 
 ## Top Label
 
@@ -47,7 +65,7 @@ import {GrowLeft} from './examples/Left Label/GrowLeft';
 
 ### Alert
 
-<ExampleCodeBlock code={Alert} />
+<ExampleCodeBlock code={Caution} />
 
 ### Error
 
@@ -81,7 +99,7 @@ import {GrowLeft} from './examples/Left Label/GrowLeft';
 
 ### Alert
 
-<ExampleCodeBlock code={AlertLeft} />
+<ExampleCodeBlock code={CautionLeft} />
 
 ### Error
 
@@ -90,4 +108,3 @@ import {GrowLeft} from './examples/Left Label/GrowLeft';
 ### Grow
 
 <ExampleCodeBlock code={GrowLeft} />
-

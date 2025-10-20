@@ -184,6 +184,8 @@ recommend against using it in production until the first stable version has been
   - [v10.0 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v10-0--docs)
   - [v11.0 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v11-0--docs)
   - [v12.0 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v12-0--docs)
+  - [v13.0 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v13-0--docs)
+  - [v14.0 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v14-0--docs)
 - Code Style / Best Practices:
   - [API & Pattern Guidelines](https://workday.github.io/canvas-kit/?path=/docs/guides-api-pattern-guidelines--docs)
   - [Compound Components](https://workday.github.io/canvas-kit/?path=/docs/guides-compound-components--docs)

@@ -9,6 +9,7 @@ import {
 } from '@workday/canvas-system-icons-web';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 
 const parentContainerStyles = createStyles({
   gap: system.space.x4,
@@ -25,6 +26,8 @@ export const PrimaryInverse = () => (
     <PrimaryButton icon={caretDownIcon} iconPosition="end" variant="inverse">
       Primary
     </PrimaryButton>
-    <PrimaryButton icon={relatedActionsVerticalIcon} variant="inverse" />
+    <Tooltip title="Related Actions">
+      <PrimaryButton icon={relatedActionsVerticalIcon} variant="inverse" />
+    </Tooltip>
   </Flex>
 );
