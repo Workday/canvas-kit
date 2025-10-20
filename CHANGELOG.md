@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.37](https://github.com/Workday/canvas-kit/releases/tag/v13.2.37) (2025-10-20)
+
+### Documentation
+
+- docs: Updated the spec tables and examples to wrap ([#3545](https://github.com/Workday/canvas-kit/pull/3545)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
 ## [v13.2.36](https://github.com/Workday/canvas-kit/releases/tag/v13.2.36) (2025-10-16)
 
 ### Documentation
