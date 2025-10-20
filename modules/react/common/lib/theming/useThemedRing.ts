@@ -40,6 +40,9 @@ const getPaletteColorsFromTheme = (
   };
 };
 
+/**
+ * @deprecated ⚠️ `getPaletteColorsForFocusRing` is deprecated and will be removed in a future major version. Please use the `brand.common.focusRing` CSS variable to theme focus rings. For more information, view our [CSS tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-brand-tokens--docs).
+ */
 export function getPaletteColorsForFocusRing(
   type: paletteSelection,
   theme: EmotionCanvasTheme
@@ -99,6 +102,7 @@ export function getPaletteColorsForFocusRing(
  *  );
  * };
  *```
+ * @deprecated `useThemedRing` is deprecated and will be removed in a future major version. Please use `brand.common.focusOutline` CSS variable instead. View our [CSS tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-brand-tokens--docs) for more information.
  */
 export const useThemedRing = (type: paletteSelection): CSSProperties => {
   const theme = useTheme();
