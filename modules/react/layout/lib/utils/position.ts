@@ -2,50 +2,63 @@ import {Property} from 'csstype';
 
 import {buildStyleFns, buildStylePropFn, StyleFnConfig} from './buildStyleFns';
 
-/** style props to for CSS position properties */
+/**
+ * style props to for CSS position properties
+ * @deprecated ⚠️ Style props are deprecated. Please use our `cs` prop with `createStencil` or `createStyles` to apply styles. For more information view our [Styling docs](* @deprecated ⚠️ `boxStyleFn` is deprecated and will be removed in a future major version. Please reference our new way of styling components [here](https://workday.github.io/canvas-kit/?path=/docs/styling-getting-started-overview--docs).
+ */
 export type PositionStyleProps = {
   /**
    * - sets [CSS position property](https://developer.mozilla.org/en-US/docs/Web/CSS/position)
-   * */
+   * @deprecated
+   */
   position?: Property.Position;
   /**
    * - sets [CSS z-index property](https://developer.mozilla.org/en-US/docs/Web/CSS/z-index)
-   * */
+   * @deprecated
+   */
   zIndex?: Property.ZIndex;
   /**
    * - sets [CSS top property](https://developer.mozilla.org/en-US/docs/Web/CSS/top)
-   * */
+   * @deprecated
+   */
   top?: number | string;
   /**
    * - sets [CSS right property](https://developer.mozilla.org/en-US/docs/Web/CSS/right)
    * - no bidirectional support
-   * */
+   * @deprecated
+   */
   right?: number | string;
   /**
    * - sets [CSS bottom property](https://developer.mozilla.org/en-US/docs/Web/CSS/bottom)
-   * */
+   * @deprecated
+   */
   bottom?: number | string;
   /**
    * - sets [CSS left property](https://developer.mozilla.org/en-US/docs/Web/CSS/left)
    * - no bidirectional support
-   * */
+   * @deprecated
+   */
   left?: number | string;
   /**
    * - sets [CSS inset property](https://developer.mozilla.org/en-US/docs/Web/CSS/inset)
+   * @deprecated
    */
   inset?: number | string;
   /**
    * - sets [CSS inset-inline-start property](https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline-start)
    * - bidirectional support
-   * */
+   * @deprecated
+   */
   insetInlineStart?: number | string;
   /**
    * - sets [CSS inset-inline-end property](https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline-end)
    * - bidirectional support
-   * */
+   * @deprecated
+   */
   insetInlineEnd?: number | string;
 };
 
+/** @deprecated */
 export const positionStyleFnConfigs: StyleFnConfig[] = [
   {
     name: 'position',
@@ -94,6 +107,7 @@ export const positionStyleFnConfigs: StyleFnConfig[] = [
   },
 ];
 
+/** @deprecated */
 export const positionStyleFns = buildStyleFns(positionStyleFnConfigs);
 /**
  * A style prop function that takes component props and returns position styles.
@@ -107,5 +121,6 @@ export const positionStyleFns = buildStyleFns(positionStyleFnConfigs);
  *   </Box>
  * );
  * ```
+ * @deprecated
  */
 export const position = buildStylePropFn<PositionStyleProps>(positionStyleFns);

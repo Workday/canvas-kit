@@ -3,30 +3,45 @@ import {Property} from 'csstype';
 import {buildStyleFns, buildStylePropFn, StyleFnConfig} from './buildStyleFns';
 import {SystemPropValues} from './systemProps';
 
-/** style props to set CSS background properties */
+/** style props to set CSS background properties
+ * @deprecated
+ */
 export type BackgroundStyleProps = {
   /**
    * - sets [CSS background property](https://developer.mozilla.org/en-US/docs/Web/CSS/background)
    * - system tokens: `color`
-   * */
+   * @deprecated Use `cs` prop with `system.color.bg.*` tokens
+   */
   background?: SystemPropValues['color'];
-  /** sets [CSS background-attachment property](https://developer.mozilla.org/en-US/docs/Web/CSS/) */
+  /** sets [CSS background-attachment property](https://developer.mozilla.org/en-US/docs/Web/CSS/)
+   * @deprecated
+   */
   backgroundAttachment?: Property.BackgroundAttachment;
   /**
    * - sets [CSS background-color property](https://developer.mozilla.org/en-US/docs/Web/CSS/background-color)
    * - system tokens: `color`
-   * */
+   * @deprecated Use `cs` prop with `system.color.bg.*` tokens
+   */
   backgroundColor?: SystemPropValues['color'];
-  /** sets [CSS background-image property](https://developer.mozilla.org/en-US/docs/Web/CSS/background-image) */
+  /** sets [CSS background-image property](https://developer.mozilla.org/en-US/docs/Web/CSS/background-image)
+   * @deprecated
+   */
   backgroundImage?: Property.BackgroundImage;
-  /** sets [CSS background-position property](https://developer.mozilla.org/en-US/docs/Web/CSS/background-position) */
+  /** sets [CSS background-position property](https://developer.mozilla.org/en-US/docs/Web/CSS/background-position)
+   * @deprecated
+   */
   backgroundPosition?: Property.BackgroundPosition;
-  /** sets [CSS background-repeat property](https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat) */
+  /** sets [CSS background-repeat property](https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat)
+   * @deprecated
+   */
   backgroundRepeat?: Property.BackgroundRepeat;
-  /** sets [CSS background-size property](https://developer.mozilla.org/en-US/docs/Web/CSS/background-size) */
+  /** sets [CSS background-size property](https://developer.mozilla.org/en-US/docs/Web/CSS/background-size)
+   * @deprecated
+   */
   backgroundSize?: Property.BackgroundSize;
 };
 
+/** @deprecated */
 export const backgroundStyleFnConfigs: StyleFnConfig[] = [
   {
     name: 'background',
@@ -65,6 +80,7 @@ export const backgroundStyleFnConfigs: StyleFnConfig[] = [
   },
 ];
 
+/** @deprecated */
 export const backgroundFns = buildStyleFns(backgroundStyleFnConfigs);
 /**
  * A style prop function that takes component props and returns border styles.
@@ -79,5 +95,6 @@ export const backgroundFns = buildStyleFns(backgroundStyleFnConfigs);
  *   </Box>
  * );
  *```
+ @deprecated
  */
 export const background = buildStylePropFn<BackgroundStyleProps>(backgroundFns);
