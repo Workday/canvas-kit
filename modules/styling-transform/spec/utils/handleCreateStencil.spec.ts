@@ -603,6 +603,10 @@ describe('handleCreateStencil', () => {
             {
               modifiers: { size: 'large', inverse: true},
               styles: { padding: 40 }
+            },
+            {
+              modifiers: { size: 'small', inverse: true},
+              styles: ({color}) => ({ padding: 20, color })
             }
           ]
         })
@@ -633,6 +637,10 @@ describe('handleCreateStencil', () => {
       // compound
       expect(styles['test.css']).toContainEqual(
         compileCSS('.css-button.size-large.inverse{padding:40px;}')
+      );
+      // compound function wrapper
+      expect(styles['test.css']).toContainEqual(
+        compileCSS('.css-button.size-small.inverse{padding:20px;color:var(--css-button-color);}')
       );
     });
 

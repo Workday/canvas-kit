@@ -4,8 +4,6 @@ import {
   SymbolDoc,
   SymbolDescription,
 } from '@workday/canvas-kit-docs';
-import {Pill} from '@workday/canvas-kit-preview-react/pill';
-import {accessibilityIcon} from '@workday/canvas-system-icons-web';
 
 import {Primary} from './examples/Primary';
 import {PrimaryInverse} from './examples/PrimaryInverse';
@@ -113,22 +111,48 @@ tokens with the fallback being `brand.primary.**`.
 
 ## Accessibility
 
-<Pill className="sb-unstyled">
-  <Pill.Icon icon={accessibilityIcon} />
-  <Pill.Label>WAI-ARIA Reference</Pill.Label>
-</Pill>
+Our button components render semantic HTML `<button>` elements to the browser DOM. This means that
+ARIA roles won't be necessary in most cases, and `onClick` listeners will automatically support the
+Enter and Space keys for keyboard interactions.
 
-### Accessible Use of the `as` Prop
+[Button Pattern | APG | WAI | W3C](https://www.w3.org/WAI/ARIA/apg/patterns/button/)
 
-Like many of our components, Buttons accept an `as` prop, which lets you change the underlying
-semantic element - usually an `<a>`, or a `<button>`. This should be done with caution to ensure the
-best accessibility. Generally, `<button>` elements should be used for actions, and `<a>` elements
-should be used for navigation.
+- An `aria-label` is only necessary for icon-only buttons in most cases. Using
+  [Canvas Kit's tooltip component](?path=/docs/components-popups-tooltip--docs) will handle this for
+  you, and all users will be able to see the label for the button.
+- When button designs have 2 toggle states, an `aria-pressed={true | false}` property is required
+  for screen reader support. For example, see Canvas Kit's
+  [Segmented Control component](?path=/docs/preview-segmented-control--docs).
+- When buttons have an attached menu, an `aria-haspopup=”true”` property is required. Using
+  [Canvas Kit's Menu component](?path=/docs/components-menus-menu--docs) will handle this for you.
+- The icons used in text buttons are decorative in most cases and include ARIA `role="presentation"`
+  and `focusable="false"`. In some special cases where an icon does add meaning, you may be required
+  to change the `role` and add an `aria-label` to the icon for equivalent screen reader support.
 
-### Role
+### Disabled Buttons
 
-By default buttons have a `role` of `button`. If you wish to use buttons in the context of a form,
-the role should be set to type `submit`.
+- Disabled buttons use the `disabled` attribute, removing them from the tab order.
+- Disabled styling is exempt from WCAG contrast requirements.
+
+### Screen Reader Experience
+
+- Button text content is announced along with the button role (e.g., "Primary, button").
+- Icon-only buttons announce the `aria-label` value along with the button role.
+- Toggle buttons announce their pressed/unpressed state (e.g., "Activity Stream, toggle button,
+  pressed" and check out the
+  [Segmented Control component](?path=/docs/preview-segmented-control--docs)).
+
+### Touch Target Size
+
+- All buttons meet the minimum 24px by 24px touch target size requirement for mobile accessibility.
+- Button padding ensures adequate spacing between interactive elements to prevent accidental
+  activation.
+
+### Button Groups
+
+- Related buttons can be grouped together with HTML unordered list elements or with `<fieldset>` and
+  `<legend>` elements. This can help give additional context to screen readers about the purpose of
+  the group.
 
 ## Component API
 
