@@ -16,7 +16,7 @@ const checkboxRippleStencil = createStencil({
 
 export const CheckboxRipple = createComponent('span')({
   displayName: 'CheckboxRipple',
-  Component: elemProps => {
+  Component: () => {
     return <span {...checkboxRippleStencil()} />;
   },
 });
