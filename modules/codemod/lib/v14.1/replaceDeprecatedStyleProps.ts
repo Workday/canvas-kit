@@ -108,9 +108,6 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
 
   const {importMap, styledMap} = getImportRenameMap(j, root, packages);
 
-  // console.log('i', importMap);
-  // console.log('s', styledMap);
-
   root
     .find(
       j.JSXElement,
