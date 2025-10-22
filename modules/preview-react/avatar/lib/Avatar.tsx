@@ -3,6 +3,7 @@ import React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {Property} from 'csstype';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 import {BaseAvatarProps, BaseAvatar, baseAvatarStencil} from './BaseAvatar';
 import {AvatarNameProps} from './AvatarName';
@@ -37,6 +38,9 @@ export const avatarStencil = createStencil({
           display: 'none',
         },
       }),
+      true: {
+        backgroundColor: system.color.bg.default,
+      },
     },
     objectFit: {
       contain: ({avatarImagePart}) => ({
