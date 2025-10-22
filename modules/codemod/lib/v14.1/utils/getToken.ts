@@ -12,7 +12,7 @@ export const getToken = (
 ) => {
   if (system in tokensMap) {
     const tokens = tokensMap[system as keyof typeof tokensMap];
-    let token = null;
+    let token = '';
 
     if (system === 'color') {
       const tokens = Object.entries(systemColors).find(([blockKey]) =>
@@ -22,7 +22,7 @@ export const getToken = (
       token = key || `base.${value.value}`;
     } else {
       const key = tokens[(value?.value ?? value) as keyof typeof tokens];
-      token = createSystemToken(key, system);
+      token = createSystemToken(key, system) || '';
     }
 
     if (token) {
