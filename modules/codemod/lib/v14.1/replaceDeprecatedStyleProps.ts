@@ -101,7 +101,6 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
   const j = api.jscodeshift;
   const root = j(file.source);
 
-  // Skip transformation if Expandable is not imported from the target package
   if (!hasImportSpecifiers(api, root, packages, [])) {
     return file.source;
   }
