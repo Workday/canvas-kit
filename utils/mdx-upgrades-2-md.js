@@ -1,184 +1,175 @@
 #!/usr/bin/env node
 
+/**
+ * Canvas Kit Upgrade Guide Migration Script
+ *
+ * Converts MDX upgrade guides to Markdown format for LLM consumption.
+ * Always regenerates all files to ensure consistency.
+ */
+
 const fs = require('fs').promises;
 const path = require('path');
 
 // Configuration
-const SOURCE_DIR = path.join(process.cwd(), 'modules', 'docs', 'mdx');
-const TARGET_DIR = path.join(process.cwd(), 'modules', 'docs', 'llm', 'upgrade-guides');
-const MIN_VERSION = 12.0;
-
-// ANSI color codes for output
-const colors = {
-  green: '\x1b[32m',
-  red: '\x1b[31m',
-  yellow: '\x1b[33m',
-  blue: '\x1b[34m',
-  reset: '\x1b[0m',
+const CONFIG = {
+  sourceDir: path.join(process.cwd(), 'modules', 'docs', 'mdx'),
+  targetDir: path.join(process.cwd(), 'modules', 'docs', 'llm', 'upgrade-guides'),
+  minVersion: 12.0,
+  colors: {
+    success: '\x1b[32m',
+    error: '\x1b[31m',
+    warning: '\x1b[33m',
+    info: '\x1b[34m',
+    reset: '\x1b[0m',
+  },
 };
 
-// Helper function to log with colors
-function log(message, color = 'reset') {
-  console.log(`${colors[color]}${message}${colors.reset}`);
-}
+// Logging utility
+const log = (message, type = 'reset') => {
+  const color = CONFIG.colors[type] || CONFIG.colors.reset;
+  console.log(`${color}${message}${CONFIG.colors.reset}`);
+};
 
-// Helper function to parse version from filename
-function parseVersion(filename) {
+// Parse version from filename
+const parseVersion = filename => {
   const match = filename.match(/^(\d+)\.(\d+)-UPGRADE-GUIDE\.mdx$/);
-  if (!match) return null;
+  if (!match) {
+    return null;
+  }
 
-  const major = parseInt(match[1]);
-  const minor = parseInt(match[2]);
-  return {major, minor, full: major + minor * 0.1};
-}
+  return {
+    major: parseInt(match[1], 10),
+    minor: parseInt(match[2], 10),
+    full: parseFloat(`${match[1]}.${match[2]}`),
+  };
+};
 
-// Helper function to process file content
-async function processContent(content, sourceDir) {
-  // Remove Meta tag
-  content = content.replace(/<Meta[^>]*\/>/g, '');
-  content = content.replace(/<Meta[^>]*>[\s\S]*?<\/Meta>/g, '');
+// Remove unnecessary imports for MD format
+const cleanImports = content => {
+  const patterns = [
+    // Canvas Kit component imports
+    /import\s+(?:\{[^}]+\}|\w+)\s+from\s+['"]@workday\/canvas-kit-[^'"]+['"]/g,
+    // Local component imports
+    /import\s+(?:\{[^}]+\}|\w+)\s+from\s+['"]\.\.\/[^'"]+(?:tsx?|jsx?)['"]/g,
+    // Style imports
+    /import\s+['"][^'"]+\.(?:css|scss|sass)['"]/g,
+    // React imports
+    /import\s+(?:\*\s+as\s+)?React\s+from\s+['"]react['"]/g,
+  ];
 
-  // Find and include referenced files
-  const importRegex = /import\s+.*\s+from\s+['"]([^'"]+)['"]/g;
-  const mdxImportRegex = /{\/\*\s*import\s+([^\s]+)\s*\*\/}/g;
+  let cleaned = content;
+  patterns.forEach(pattern => {
+    cleaned = cleaned.replace(pattern, '');
+  });
 
-  let processedContent = content;
+  // Remove excessive newlines
+  return cleaned.replace(/\n{3,}/g, '\n\n').trim();
+};
 
-  // Process standard imports
+// Process MDX content to Markdown
+const processContent = async (content, sourceDir) => {
+  // Remove Meta tags
+  let processed = content.replace(/<Meta[^>]*\/>/g, '').replace(/<Meta[^>]*>[\s\S]*?<\/Meta>/g, '');
+
+  // Clean imports
+  processed = cleanImports(processed);
+
+  // Include referenced example files
+  const exampleRegex = /{\/\*\s*import\s+Examples?\s+from\s+['"]([^'"]+\.mdx)['"]\s*\*\/}/g;
+  const includedFiles = new Set();
+
   let match;
-  while ((match = importRegex.exec(content)) !== null) {
-    const importPath = match[1];
-    try {
-      const fullPath = path.resolve(sourceDir, importPath);
-      const importedContent = await fs.readFile(fullPath, 'utf-8');
-
-      processedContent += `\n\n---\n## Referenced from: ${importPath}\n\n${importedContent}`;
-      log(`  - Included reference: ${importPath}`, 'blue');
-    } catch (error) {
-      log(`  - Warning: Could not include reference ${importPath}: ${error.message}`, 'yellow');
+  while ((match = exampleRegex.exec(content)) !== null) {
+    const examplePath = match[1];
+    if (!includedFiles.has(examplePath)) {
+      try {
+        const fullPath = path.resolve(sourceDir, examplePath);
+        const exampleContent = await fs.readFile(fullPath, 'utf-8');
+        processed += `\n\n---\n\n## Examples from: ${examplePath}\n\n${exampleContent}`;
+        includedFiles.add(examplePath);
+        log(`  → Included: ${examplePath}`, 'info');
+      } catch (error) {
+        log(`  ⚠ Could not include: ${examplePath}`, 'warning');
+      }
     }
   }
 
-  // Process MDX-style imports
-  while ((match = mdxImportRegex.exec(content)) !== null) {
-    const importPath = match[1];
-    try {
-      const fullPath = path.resolve(sourceDir, importPath);
-      const importedContent = await fs.readFile(fullPath, 'utf-8');
-
-      processedContent += `\n\n---\n## Referenced from: ${importPath}\n\n${importedContent}`;
-      log(`  - Included MDX reference: ${importPath}`, 'blue');
-    } catch (error) {
-      log(`  - Warning: Could not include MDX reference ${importPath}: ${error.message}`, 'yellow');
-    }
-  }
-
-  return processedContent;
-}
+  return processed;
+};
 
 // Main migration function
-async function migrateUpgradeGuides() {
-  log('Starting Canvas Kit Upgrade Guide Migration', 'green');
-  log('=========================================\n');
+const migrate = async () => {
+  log('🚀 Canvas Kit Upgrade Guide Migration\n', 'success');
 
   try {
-    // Check if source directory exists
-    try {
-      await fs.access(SOURCE_DIR);
-    } catch (error) {
-      throw new Error(
-        `Source directory not found: ${SOURCE_DIR}\nPlease run this script from the Canvas Kit root directory.`
-      );
-    }
-
-    log(`Source directory: ${SOURCE_DIR}`, 'blue');
-    log(`Target directory: ${TARGET_DIR}`, 'blue');
-    log(`Minimum version: ${MIN_VERSION}\n`);
-
-    // Create target directory if it doesn't exist
-    await fs.mkdir(TARGET_DIR, {recursive: true});
-    log('Created target directory structure\n');
-
-    // Read all files from source directory
-    const files = await fs.readdir(SOURCE_DIR);
-
-    // Filter for upgrade guide files
-    const upgradeGuides = files.filter(file => {
-      if (!file.endsWith('-UPGRADE-GUIDE.mdx')) return false;
-
-      const version = parseVersion(file);
-      if (!version) return false;
-
-      return version.full >= MIN_VERSION;
+    // Validate source directory
+    await fs.access(CONFIG.sourceDir).catch(() => {
+      throw new Error(`Source directory not found: ${CONFIG.sourceDir}`);
     });
+
+    // Create target directory
+    await fs.mkdir(CONFIG.targetDir, {recursive: true});
+
+    // Get upgrade guide files
+    const files = await fs.readdir(CONFIG.sourceDir);
+    const upgradeGuides = files
+      .filter(file => {
+        const version = parseVersion(file);
+        return version && version.full >= CONFIG.minVersion;
+      })
+      .sort((a, b) => {
+        const vA = parseVersion(a);
+        const vB = parseVersion(b);
+        return vA.full - vB.full;
+      });
 
     if (upgradeGuides.length === 0) {
-      throw new Error('No upgrade guide files found matching criteria');
+      throw new Error('No upgrade guides found for versions >= 12.0');
     }
 
-    log(`Found ${upgradeGuides.length} upgrade guides to process:\n`);
-
-    // Sort by version
-    upgradeGuides.sort((a, b) => {
-      const versionA = parseVersion(a);
-      const versionB = parseVersion(b);
-      return versionA.full - versionB.full;
-    });
+    log(`Found ${upgradeGuides.length} upgrade guides\n`);
 
     // Process each file
-    let successCount = 0;
-    let errorCount = 0;
+    const results = {success: 0, failed: 0};
 
     for (const file of upgradeGuides) {
       try {
-        log(`Processing: ${file}`);
+        log(`📄 ${file}`);
 
-        // Read file content
-        const sourcePath = path.join(SOURCE_DIR, file);
+        const sourcePath = path.join(CONFIG.sourceDir, file);
+        const targetPath = path.join(CONFIG.targetDir, file.replace('.mdx', '.md'));
+
         const content = await fs.readFile(sourcePath, 'utf-8');
+        const processed = await processContent(content, CONFIG.sourceDir);
 
-        // Process content
-        const processedContent = await processContent(content, SOURCE_DIR);
+        await fs.writeFile(targetPath, processed, 'utf-8');
 
-        // Create new filename (.mdx -> .md)
-        const newFilename = file.replace('.mdx', '.md');
-        const targetPath = path.join(TARGET_DIR, newFilename);
-
-        // Write processed content
-        await fs.writeFile(targetPath, processedContent, 'utf-8');
-
-        log(`  ✓ Successfully converted to: ${newFilename}`, 'green');
-        successCount++;
+        log(`  ✓ Converted successfully`, 'success');
+        results.success++;
       } catch (error) {
-        log(`  ✗ Error processing ${file}: ${error.message}`, 'red');
-        errorCount++;
+        log(`  ✗ Error: ${error.message}`, 'error');
+        results.failed++;
       }
     }
 
     // Summary
-    log('\n=========================================');
-    log('Migration Summary:', 'green');
-    log(`  - Total files processed: ${upgradeGuides.length}`);
-    log(`  - Successful conversions: ${successCount}`, successCount > 0 ? 'green' : 'yellow');
-    if (errorCount > 0) {
-      log(`  - Failed conversions: ${errorCount}`, 'red');
+    log('\n📊 Summary', 'info');
+    log(`  Total: ${upgradeGuides.length}`);
+    log(`  ✓ Success: ${results.success}`, 'success');
+    if (results.failed > 0) {
+      log(`  ✗ Failed: ${results.failed}`, 'error');
     }
-    log('=========================================\n');
 
-    // Exit with appropriate code for CI
-    if (errorCount > 0) {
-      process.exit(1);
-    }
+    process.exit(results.failed > 0 ? 1 : 0);
   } catch (error) {
-    log(`\nFatal Error: ${error.message}`, 'red');
-    log('\nStack trace:', 'red');
-    console.error(error.stack);
+    log(`\n❌ Fatal Error: ${error.message}`, 'error');
     process.exit(1);
   }
+};
+
+// Run if called directly
+if (require.main === module) {
+  migrate();
 }
 
-// Run the migration
-migrateUpgradeGuides().catch(error => {
-  log(`Unhandled error: ${error.message}`, 'red');
-  process.exit(1);
-});
+module.exports = {migrate};
