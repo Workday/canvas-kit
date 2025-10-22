@@ -52,7 +52,7 @@
     "@workday/canvas-system-icons-web": "^3.0.36",
     "@workday/canvas-tokens-web": "^3.1.1",
     "markdown-to-jsx": "^7.2.0",
-    "react-syntax-highlighter": "^15.5.0",
+    "react-syntax-highlighter": "^16.0.0",
     "ts-node": "^10.9.1"
   },
   "devDependencies": {
