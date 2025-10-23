@@ -3,6 +3,8 @@ import {Link} from './examples/Hyperlink';
 import {LinkInverse} from './examples/HyperlinkInverse';
 import {ExternalLink} from './examples/ExternalHyperlink';
 import {ExternalLinkInverse} from './examples/ExternalHyperlinkInverse';
+import {StandaloneLink} from './examples/StandaloneHyperlink';
+import {InBodyText} from './examples/HyperlinkInBodyText';
 
 import * as HyperlinkStories from './Hyperlink.stories';
 
@@ -25,16 +27,61 @@ yarn add @workday/canvas-kit-react
 ### Hyperlink
 
 `Hyperlink`s should be used when you want to navigate away from the current page or to an anchor on
-the current page.
+the current page. By default, `Hyperlink`s have an underline for accessibility.
 
 <ExampleCodeBlock code={Link} />
 
 #### Inverse
 
 `Hyperlink`s also have an `inverse` variant. Use this variant when you need to place a `Hyperlink`
-on a dark or colorful background such as `blueberry400`.
+on a dark or colorful background.
 
 <ExampleCodeBlock code={LinkInverse} />
+
+#### Standalone
+
+`Hyperlink`s also have a `standalone` variant. Use this variant when you need to place a `Hyperlink`
+outside of a paragraph or body text. This will remove the underline.
+
+This variant can also be used with the `ExternalHyperlink` component.
+
+<ExampleCodeBlock code={StandaloneLink} />
+
+#### In Body Text
+
+In most cases use `HyperLink` and `ExternalHyperlink` in body text of a sentence where you need to
+link to another page or part of the document. By default they will wrap to a new line.
+
+<ExampleCodeBlock code={InBodyText} />
+
+> **Accessibility Note:** Underlining links is not required in most cases. However, the example
+> above is one such exception. When hyperlinked text appears inline with static text, a text
+> decoration is required to avoid failing WCAG v2.2 success criterion 1.4.1 Use of Color.
+>
+> [Failure of Success Criterion 1.4.1 due to creating links that are not visually evident without color vision](https://www.w3.org/WAI/WCAG22/Techniques/failures/F73)
+
+### Accessibility
+
+Our link components render semantic HTML `<a>` elements to the browser DOM. This means that ARIA
+roles won't be necessary in most cases. The `href` prop is required for accessibility. Activation
+links with the Enter key is standard expected behavior, while Space is only expected for buttons.
+
+#### When to Use Links vs Buttons
+
+- **Use Hyperlinks when:** Navigating to different pages or sections, or changing the browser's
+  location
+- **Use Buttons when:** Performing actions like submitting forms, opening modals, or triggering
+  functions without navigation
+- **Why This Matters:** Screen reader users expect different behaviors from links vs buttons. Users
+  navigate between links using different keyboard shortcuts than buttons. Browser behaviors like
+  "Open in new tab" only work with proper links.
+
+#### Common Mistakes to Avoid
+
+- Using buttons styled as links for navigation (breaks right-click context menus)
+- Using links for actions like "Delete" or "Save" (confuses user expectations)
+- Missing `href` attributes on navigation elements (breaks keyboard accessibility)
+- Using `href="#"` with `onClick` handlers instead of proper buttons
 
 ### Component API
 
@@ -43,14 +90,16 @@ on a dark or colorful background such as `blueberry400`.
 ### ExternalHyperlink
 
 If your link should open in a new tab or window use the `ExternalHyperlink` component. It will let
-users know about the behavior by adding an icon, `extLinkIcon`. By default, the icon has a label of
-"Opens link in new window". You can override `aria-label` of the icon by using the `iconLabel` prop.
-This override will be needed for translations.
+users know about the behavior by adding an icon, `extLinkIcon`.
+
+> **Accessibility Note:** Providing a label to the icon via the `iconLabel` prop is required for
+> accessibility because the icon adds meaning to the link text. We recommend keeping the alt text as
+> concise as possible, such as "Opens new window". This override will be needed for translations.
 
 <ExampleCodeBlock code={ExternalLink} />
 
 `ExternalHyperlink`s also have an `inverse` variant. Use this variant when you need to place the
-link on a dark or colorful background such as `blueberry400`.
+link on a dark or colorful background.
 
 <ExampleCodeBlock code={ExternalLinkInverse} />
 
@@ -63,13 +112,6 @@ link on a dark or colorful background such as `blueberry400`.
   hideHeading
   headingStart={4}
 />
-
-### Accessible Use of the `as` Prop
-
-Like many of our components, `Hyperlink` and `ExternalHyperlink` accept an `as` prop, which lets you
-change the underlying semantic element - usually an `<a>`, or a `<button>`. This should be done with
-caution to ensure the best accessibility. Generally, `<button>` elements should be used for actions,
-and `<a>` elements should be used for navigation.
 
 ## Specifications
 

@@ -1,6 +1,6 @@
 // Modified from https://gist.github.com/hsablonniere/2581101
 /**
- * @deprecated ⚠️ `scrollIntoViewIfNeeded` in Preview has been deprecated and will be removed in a future major version. Please use [`Select` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) instead.
+ * @deprecated ⚠️ `scrollIntoViewIfNeeded` in Preview has been deprecated and will be removed in a future major version. Please use [`Select` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--docs) instead.
  */
 export const scrollIntoViewIfNeeded = (elem: HTMLElement, centerIfNeeded = true): void => {
   const parent = elem.parentElement;

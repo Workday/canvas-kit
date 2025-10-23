@@ -45,7 +45,7 @@ export const SelectStates = (props: {theme?: PartialEmotionCanvasTheme}) => {
       <ComponentStatesTable
         rowProps={[
           {label: 'Default', props: {}},
-          {label: 'Alert', props: {error: 'alert'}},
+          {label: 'Caution', props: {error: 'caution'}},
           {label: 'Error', props: {error: 'error'}},
         ]}
         columnProps={permutateProps(
@@ -109,7 +109,7 @@ export const SelectOpenMenuStates = (props: {theme?: PartialEmotionCanvasTheme})
           rowProps={[{label: '', props: {}}]}
           columnProps={[
             {label: 'Default', props: {}},
-            {label: 'Alert', props: {error: 'alert'}},
+            {label: 'Caution', props: {error: 'caution'}},
             {label: 'Error', props: {error: 'error'}},
           ]}
         >

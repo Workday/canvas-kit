@@ -4,7 +4,7 @@ import mdxDoc from './Select.mdx';
 
 import {Select} from '@workday/canvas-kit-react/select';
 
-import {Alert as AlertExample} from './examples/Alert';
+import {Caution as CautionExample} from './examples/Caution';
 import {Basic as BasicExample} from './examples/Basic';
 import {Complex as ComplexExample} from './examples/Complex';
 import {Controlled as ControlledExample} from './examples/Controlled';
@@ -35,8 +35,8 @@ export default {
 
 type Story = StoryObj<typeof Select>;
 
-export const Alert: Story = {
-  render: AlertExample,
+export const Caution: Story = {
+  render: CautionExample,
 };
 export const Basic: Story = {
   render: BasicExample,
