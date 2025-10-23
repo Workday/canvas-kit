@@ -10,6 +10,14 @@ import {Select} from '@workday/canvas-kit-react/select';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {visibleIcon, invisibleIcon} from '@workday/canvas-system-icons-web';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
+import {createStyles, cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const styles = createStyles({
+  gap: system.space.x3,
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+});
 
 type YupValidationResolver = <T extends {}>(
   validationSchema: SchemaOf<T>
@@ -99,7 +107,7 @@ export const TextInputWithReactHookForm = () => {
   };
   return (
     <form onSubmit={onSubmit} action="." noValidate={true}>
-      <Flex gap="xs" flexDirection="column" alignItems="flex-start">
+      <Flex cs={styles}>
         <FormField
           orientation="vertical"
           isRequired={true}
@@ -143,7 +151,7 @@ export const TextInputWithReactHookForm = () => {
           error={!!errors.password ? 'error' : undefined}
         >
           <FormField.Label>Password</FormField.Label>
-          <Flex gap="xxs">
+          <Flex cs={{gap: cssVar(system.space.x2)}}>
             <FormField.Field>
               <FormField.Input
                 as={TextInput}
