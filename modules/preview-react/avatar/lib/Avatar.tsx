@@ -109,7 +109,7 @@ export const Avatar = createComponent('div')({
       url,
       name,
       variant,
-      objectFit = 'cover',
+      objectFit = 'contain',
       preferredInitials,
       isDecorative,
       size,
