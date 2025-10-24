@@ -1,5 +1,6 @@
-import {Meta} from '@storybook/addon-docs';
-import {StorybookStatusIndicator, DownloadLLMFile} from '@workday/canvas-kit-docs';
+import {Meta} from '@storybook/blocks';
+
+import {DownloadLLMFile, StorybookStatusIndicator} from '@workday/canvas-kit-docs';
 
 <Meta title="Guides/Upgrade Guides/v14.0/Overview" />
 
@@ -798,6 +799,7 @@ import { Avatar } from '@workday/canvas-kit-react/avatar';
 
 ```tsx
 import {Avatar} from '@workday/canvas-kit-preview-react/avatar';
+
 // name is used as a fallback if the image url is broken or still loading
 // variant defines the color of the Avatar
 <Avatar name="John Doe" size="extraExtraLarge" variant="teal" url={yourImageUrl} />;
@@ -936,8 +938,8 @@ import {TextArea} from '@workday/canvas-kit-preview-react/text-area';
 **After in v14**
 
 ```tsx
-import {TextArea} from '@workday/canvas-kit-react/text-area';
 import {FormField} from '@workday/canvas-kit-react/form-field';
+import {TextArea} from '@workday/canvas-kit-react/text-area';
 
 <FormField>
   <FormField.Label>Leave a Review</FormField.Label>
@@ -968,8 +970,8 @@ import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
 **After in v14**
 
 ```tsx
-import {TextArea} from '@workday/canvas-kit-react/text-input';
 import {FormField} from '@workday/canvas-kit-react/form-field';
+import {TextArea} from '@workday/canvas-kit-react/text-input';
 
 <FormField>
   <FormField.Label>Leave a Review</FormField.Label>
@@ -987,7 +989,6 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 
 - **Dependency Conflicts**: When upgrading to the latest major version of Canvas Kit, all related
   Canvas Kit packages should be updated at the same time:
-
   - `"@workday/canvas-kit-react": "^13.5.6"` → `"@workday/canvas-kit-react": "^14.0.0"`
   - `"@workday/canvas-kit-styling": "^13.5.6"` → `"@workday/canvas-kit-styling": "^14.0.0"`
   - `"@workday/canvas-kit-preview-react": "^13.5.6"` →

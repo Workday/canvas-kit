@@ -5,9 +5,8 @@
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
   "sideEffects": false,
-  "main": "dist/commonjs/index.js",
-  "module": "dist/es6/index.js",
-  "types": "dist/es6/index.d.ts",
+  "main": "index.ts",
+  "module": "index.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/workday/canvas-kit.git",
@@ -16,7 +15,6 @@
   "files": [
     "package.json",
     "lib/*",
-    "index.js",
     "dist/*",
     "index.ts",
     "testing.ts"

@@ -1,5 +1,5 @@
-import {createProgramFromSource} from './createProgramFromSource';
 import {parse} from '../docParser';
+import {createProgramFromSource} from './createProgramFromSource';
 
 describe('docParser', () => {
   describe('simple values', () => {
@@ -1199,6 +1199,23 @@ describe('docParser', () => {
       kind: 'string',
       value: 'baz',
     });
+  });
+
+  it('should understand @link in jsdoc to object properties', () => {
+    const program = createProgramFromSource(`
+    export const foo = {
+      /**
+       * Click {@link TabsItem Tabs.Item} more text
+       */
+      bar: 'baz'
+    };
+  `);
+    const docs = parse(program, 'test.ts'); //?
+
+    expect(docs).toHaveProperty('0.name', 'foo');
+    expect(docs).toHaveProperty('0.type.kind', 'object');
+    expect(docs).toHaveProperty('0.type.properties.0.name', 'bar');
+    expect(docs).toHaveProperty('0.type.properties.0.description', 'Click {@link Foobar Foo.Bar}');
   });
 
   it('should handle conditional types', () => {

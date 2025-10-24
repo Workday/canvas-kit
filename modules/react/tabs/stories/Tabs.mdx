@@ -1,15 +1,18 @@
+import {Meta} from '@storybook/blocks';
+
 import {ExampleCodeBlock, Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
-import {Basic} from './examples/Basic';
-import {NamedTabs} from './examples/NamedTabs';
-import {RightToLeft} from './examples/RightToLeft';
-import {OverflowTabs} from './examples/OverflowTabs';
-import {DisabledTab} from './examples/DisabledTab';
-import {Icons} from './examples/Icons';
-import {SinglePanel} from './examples/SinglePanel';
-import {AlternativeTabStop} from './examples/AlternativeTabStop';
-import {HoistedModel} from './examples/HoistedModel';
-import {DynamicTabs} from './examples/DynamicTabs';
+
 import * as TabsStories from './Tabs.stories';
+import {AlternativeTabStop} from './examples/AlternativeTabStop';
+import {Basic} from './examples/Basic';
+import {DisabledTab} from './examples/DisabledTab';
+import {DynamicTabs} from './examples/DynamicTabs';
+import {HoistedModel} from './examples/HoistedModel';
+import {Icons} from './examples/Icons';
+import {NamedTabs} from './examples/NamedTabs';
+import {OverflowTabs} from './examples/OverflowTabs';
+import {RightToLeft} from './examples/RightToLeft';
+import {SinglePanel} from './examples/SinglePanel';
 
 <Meta of={TabsStories} />
 
@@ -128,4 +131,4 @@ array.
 
 ## Specifications
 
-<Specifications file="Tabs.spec.ts" name="Tabs" />
+<Specifications file="./cypress/component/Tabs.spec.tsx" name="Tabs" />

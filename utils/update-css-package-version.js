@@ -2,12 +2,10 @@
 // but not prerelease/major. Lerna pre-releases only update version strings on latest versions. This
 // file keeps the CSS packages up to date with the `lerna.json` version.
 
-const fs = require('node:fs/promises');
-const path = require('node:path');
+import fs from 'node:fs/promises';
+import lernaConfig from '../lerna.json' assert { type: 'json' }
 
 async function main() {
-  // Read lerna.json version for the version number
-  const lernaConfig = require('../lerna.json');
 
   // Update each package.json file
   const packagePath = `${process.cwd()}/package.json`;

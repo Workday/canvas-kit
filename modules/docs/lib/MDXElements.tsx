@@ -1,9 +1,9 @@
-//@ts-ignore
 import {useMDXComponents} from '@mdx-js/react';
-import React from 'react';
 import MarkdownToJSX from 'markdown-to-jsx';
+import React from 'react';
 
-import {createComponent} from '@workday/canvas-kit-react';
+import {createComponent} from '@workday/canvas-kit-react/common';
+
 import {HeadingLevelContext, SymbolDialog} from './widgetUtils';
 
 /**
@@ -50,6 +50,7 @@ function convertLinkToSymbolLinks(input: string): string {
   return input.replace(
     /{@link ([a-z0-9.]+)( [a-z0-9.]+)?}/gi,
     (_substr, symbol, text = '') =>
+      console.log(_substr, symbol, text) ||
       `<button data-symbol="${text.trim()}" className="token symbol">${symbol}</button>`
   );
 }

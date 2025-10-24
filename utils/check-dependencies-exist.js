@@ -1,10 +1,9 @@
-#!/usr/bin/env node
-'use strict';
+import fs from 'node:fs';
+import chalk from 'chalk';
+import depCheck from 'depcheck'
+import pkg from '../package.json' assert {type: 'json'}
 
-const fs = require('fs');
-const path = require('path');
-const chalk = require('chalk');
-const depCheck = require('depcheck');
+const packageName = pkg.name
 
 // Disable - It doesn't work with TS 5.0 and future versions of depcheck don't work. Maybe try knip
 process.exit(0);
@@ -142,9 +141,6 @@ function formatErrorMessage(pkgFile, errors) {
     })
     .join('\n\n');
 }
-
-const modulePath = process.cwd();
-const packageName = require(path.join(modulePath, 'package.json')).name;
 
 // TODO: Figure out why we need this.
 if (modulePath.endsWith('/modules/react')) {

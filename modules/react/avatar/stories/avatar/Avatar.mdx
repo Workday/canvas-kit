@@ -1,20 +1,22 @@
+import {Meta} from '@storybook/blocks';
+
 import {
-  Specifications,
-  SymbolDoc,
-  SymbolDescription,
   ExampleCodeBlock,
+  Specifications,
   StorybookStatusIndicator,
+  SymbolDescription,
+  SymbolDoc,
 } from '@workday/canvas-kit-docs';
 import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
 
 import {Basic} from './examples/Basic';
 import {Button} from './examples/Button';
+import {CustomStyles} from './examples/CustomStyles';
 import {Image} from './examples/Image';
 import {LazyLoad} from './examples/LazyLoad';
 import {ObjectFit} from './examples/ObjectFit';
 import {Size} from './examples/Size';
 import {Variant} from './examples/Variant';
-import {CustomStyles} from './examples/CustomStyles';
 
 import * as AvatarStories from './Avatar.stories';
 
@@ -109,4 +111,4 @@ To change the background color of the Avatar, you can use our `createStencil` fu
 
 ## Specifications
 
-<Specifications file="Avatar.spec.ts" name="Avatar" />
+<Specifications file="./cypress/component/Avatar.spec.tsx" name="Avatar" />

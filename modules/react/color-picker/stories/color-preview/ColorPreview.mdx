@@ -1,9 +1,12 @@
+import {Meta} from '@storybook/blocks';
+
 import {
   ExampleCodeBlock,
   InformationHighlight,
-  SymbolDoc,
   Specifications,
+  SymbolDoc,
 } from '@workday/canvas-kit-docs';
+
 import * as ColorPreviewStories from './ColorPreview.stories';
 
 import {Basic} from './examples/Basic';
@@ -50,4 +53,4 @@ input component. By default, the orientation will be set to `vertical`.
 
 ## Specifications
 
-<Specifications file="ColorPicker.spec.ts" name="ColorPreview" />
+<Specifications file="./cypress/component/ColorPicker.spec.tsx" name="ColorPreview" />

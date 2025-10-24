@@ -76,4 +76,4 @@ const routes = {
   '/whats-new/upgrade-guides/canvas-v12-upgrade-guide/': 'guides-upgrade-guides-v12-0--docs',
 };
 
-module.exports = routes;
+export default routes;

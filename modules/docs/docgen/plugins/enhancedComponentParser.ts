@@ -1,24 +1,17 @@
 import ts from 'typescript';
-import {
-  EnhancedComponentValue,
-  CanvasColorValue,
-  ElemPropsHookValue,
-  ComposedElemPropsHookValue,
-  SubModelElemPropsHookValue,
-} from './customTypes';
 
 import {
+  DocParser,
   createParserPlugin,
   defaultJSDoc,
-  DocParser,
+  filterObjectProperties,
   findDocComment,
+  getDefaultFromTags,
   getDefaultsFromObjectBindingParameter,
   getSymbolFromNode,
+  getValidDefaultFromNode,
   getValueDeclaration,
   unknownValue,
-  filterObjectProperties,
-  getDefaultFromTags,
-  getValidDefaultFromNode,
 } from '../docParser';
 import {
   CallExpression,
@@ -29,6 +22,13 @@ import {
   Value,
 } from '../docTypes';
 import t from '../traverse';
+import {
+  CanvasColorValue,
+  ComposedElemPropsHookValue,
+  ElemPropsHookValue,
+  EnhancedComponentValue,
+  SubModelElemPropsHookValue,
+} from './customTypes';
 
 /** Track if we've set a custom color symbol yet */
 let shouldCreateColorSymbol = true;
@@ -429,8 +429,8 @@ export const enhancedComponentParser = createParserPlugin<SupportedValues>((node
         const componentExpression = t.isMethodDeclaration(signature)
           ? signature
           : t.isPropertyAssignment(signature)
-          ? signature.initializer
-          : undefined;
+            ? signature.initializer
+            : undefined;
 
         if (componentExpression && ts.isFunctionLike(componentExpression)) {
           const type = parser.checker.getTypeAtLocation(componentExpression.parameters[0]);
@@ -677,7 +677,9 @@ function getSubcomponents(
             t.isIdentifier(p.initializer)
           ) {
             const symbol = getSymbolFromNode(parser, p.name);
+            symbol; //?
             const jsDoc = findDocComment(parser.checker, symbol);
+            jsDoc; //?
 
             const initializerSymbol = getSymbolFromNode(parser, p.initializer);
 

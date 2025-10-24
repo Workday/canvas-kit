@@ -1,15 +1,16 @@
 import ts from 'typescript';
+
 import {
-  JSDoc,
   ExportedSymbol,
-  Value,
-  TypeParameter,
-  UnknownValue,
-  ObjectProperty,
+  FunctionParameter,
   FunctionValue,
   IndexSignatureValue,
-  FunctionParameter,
+  JSDoc,
+  ObjectProperty,
   PrimitiveValue,
+  TypeParameter,
+  UnknownValue,
+  Value,
 } from './docTypes';
 import {getExternalSymbol} from './getExternalSymbol';
 import t, {find} from './traverse';
@@ -28,7 +29,10 @@ export class DocParser<T extends {kind: string} = any> {
    */
   public symbols: ExportedSymbol<Value | T>[] = [];
 
-  constructor(public program: ts.Program, public plugins: ParserPlugin<T>[] = []) {
+  constructor(
+    public program: ts.Program,
+    public plugins: ParserPlugin<T>[] = []
+  ) {
     this.checker = program.getTypeChecker();
   }
 
@@ -112,9 +116,12 @@ function getValueFromNode(parser: DocParser, node: ts.Node): Value {
   }
 
   return (
-    parser.plugins.reduce((result, fn) => {
-      return result || fn(node, parser);
-    }, undefined as Value | undefined) || _getValueFromNode(parser, node)
+    parser.plugins.reduce(
+      (result, fn) => {
+        return result || fn(node, parser);
+      },
+      undefined as Value | undefined
+    ) || _getValueFromNode(parser, node)
   );
 }
 
@@ -483,8 +490,8 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
       ((t.isIdentifier(node.name)
         ? node.name.text
         : t.isStringLiteral(node.name)
-        ? node.name.text
-        : '') as string);
+          ? node.name.text
+          : '') as string);
     return {
       kind: 'property',
       name,
@@ -1041,10 +1048,10 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     const isRequired = node.questionToken
       ? false
       : node.initializer
-      ? false
-      : symbol
-      ? !isOptional(symbol) && !includesUndefined(type)
-      : false;
+        ? false
+        : symbol
+          ? !isOptional(symbol) && !includesUndefined(type)
+          : false;
 
     const typeInfo = node.type
       ? getValueFromNode(parser, node.type)
@@ -1121,7 +1128,19 @@ export function getFullJsDocComment(checker: ts.TypeChecker, symbol: ts.Symbol) 
     return defaultJSDoc;
   }
 
-  let mainComment = ts.displayPartsToString(symbol.getDocumentationComment(checker));
+  let mainComment = ts.displayPartsToString(
+    symbol
+      .getDocumentationComment(checker)
+      .map(s =>
+        s.kind === 'linkText'
+          ? {...s, text: s.text.trim()}
+          : s.kind === 'linkName'
+            ? {...s, text: s.text.trim() + ' '}
+            : s
+      )
+  );
+  symbol.getDocumentationComment(checker); //?
+  mainComment; //?
 
   if (mainComment) {
     mainComment = mainComment.replace(/\r\n/g, '\n');
@@ -1152,7 +1171,7 @@ export function getFullJsDocComment(checker: ts.TypeChecker, symbol: ts.Symbol) 
 
 export function findDocComment(checker: ts.TypeChecker, symbol?: ts.Symbol): JSDoc {
   if (symbol) {
-    const comment = getFullJsDocComment(checker, symbol);
+    const comment = getFullJsDocComment(checker, symbol); //?
     if (comment.description || comment.declarations.length || comment.tags.default) {
       return comment;
     }
@@ -1249,15 +1268,18 @@ export function getDefaultsFromObjectBindingParameter(
   node: ts.ParameterDeclaration
 ): Record<string, Value> {
   if (t.isObjectBindingPattern(node.name)) {
-    return node.name.elements.reduce((result, element) => {
-      if (t.isBindingElement(element) && t.isIdentifier(element.name) && element.initializer) {
-        const defaultValue = getValidDefaultFromNode(parser, element.initializer);
-        if (defaultValue) {
-          result[element.name.text] = defaultValue;
+    return node.name.elements.reduce(
+      (result, element) => {
+        if (t.isBindingElement(element) && t.isIdentifier(element.name) && element.initializer) {
+          const defaultValue = getValidDefaultFromNode(parser, element.initializer);
+          if (defaultValue) {
+            result[element.name.text] = defaultValue;
+          }
         }
-      }
-      return result;
-    }, {} as Record<string, Value>);
+        return result;
+      },
+      {} as Record<string, Value>
+    );
   }
 
   return {};
