@@ -1,4 +1,9 @@
-import {createComponent, GrowthBehavior, ErrorType} from '@workday/canvas-kit-react/common';
+import {
+  createComponent,
+  GrowthBehavior,
+  ErrorType,
+  forwardFitTokens,
+} from '@workday/canvas-kit-react/common';
 import {createStencil, cssVar, px2rem, calc, CSProps} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
@@ -24,7 +29,7 @@ export const textInputStencil = createStencil({
     border: `${px2rem(1)} solid ${cssVar(system.color.border.input.default)}`,
     backgroundColor: system.color.bg.default,
     //TODO: Replace string with new token in v15/v4
-    borderRadius: cssVar('--cnvs-sys-shape-m', system.shape.x1Half),
+    borderRadius: cssVar(forwardFitTokens.system.shape.sm, system.shape.x1Half),
     boxSizing: 'border-box',
     height: system.space.x10,
     transition: '0.2s box-shadow, 0.2s border-color',
