@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.38](https://github.com/Workday/canvas-kit/releases/tag/v13.2.38) (2025-10-24)
+
+### Documentation
+
+- fix: Updated ExampleCodeBlock ([#3550](https://github.com/Workday/canvas-kit/pull/3550)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
 ## [v13.2.37](https://github.com/Workday/canvas-kit/releases/tag/v13.2.37) (2025-10-20)
 
 ### Documentation
