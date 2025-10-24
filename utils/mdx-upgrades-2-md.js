@@ -14,6 +14,8 @@ const path = require('path');
 const CONFIG = {
   sourceDir: path.join(process.cwd(), 'modules', 'docs', 'mdx'),
   targetDir: path.join(process.cwd(), 'modules', 'docs', 'llm', 'upgrade-guides'),
+  codemodDir: path.join(process.cwd(), 'modules', 'codemod', 'lib'),
+  codemodsFile: path.join(process.cwd(), 'modules', 'docs', 'mdx', 'CODEMODS.mdx'),
   minVersion: 12.0,
   colors: {
     success: '\x1b[32m',
@@ -66,8 +68,76 @@ const cleanImports = content => {
   return cleaned.replace(/\n{3,}/g, '\n\n').trim();
 };
 
+// Get codemod transformations for a specific version
+const getCodemodTransformations = async version => {
+  try {
+    const versionDir = path.join(CONFIG.codemodDir, `v${version}`);
+    const files = await fs.readdir(versionDir);
+
+    // Filter out non-transform files (spec, utils, index.ts)
+    const transformFiles = files
+      .filter(
+        file =>
+          file.endsWith('.ts') &&
+          !file.includes('spec') &&
+          !file.includes('utils') &&
+          file !== 'index.ts'
+      )
+      .map(file => file.replace('.ts', ''));
+
+    return transformFiles;
+  } catch (error) {
+    log(`  ⚠ Could not read codemod directory for v${version}: ${error.message}`, 'warning');
+    return [];
+  }
+};
+
+// Create codemod summary for a version
+const createCodemodSummary = async version => {
+  const transformations = await getCodemodTransformations(version);
+
+  if (transformations.length === 0) {
+    return `No codemod transformations available for v${version}.`;
+  }
+
+  let summary = `## Codemod Transformations for v${version}\n\n`;
+  summary += `The following automated transformations are available for upgrading to v${version}:\n\n`;
+
+  transformations.forEach(transform => {
+    // Convert camelCase to readable format
+    const readableName = transform
+      .replace(/([A-Z])/g, ' $1')
+      .replace(/^./, str => str.toUpperCase())
+      .trim();
+
+    summary += `- **${readableName}**: ${transform}\n`;
+  });
+
+  summary += `\nRun the codemod with: \`npx @workday/canvas-kit-codemod v${version} [path]\`\n`;
+
+  return summary;
+};
+
+// Process CODEMODS.mdx content
+const processCodemodsMdx = async () => {
+  try {
+    const content = await fs.readFile(CONFIG.codemodsFile, 'utf-8');
+
+    // Remove Meta tags and clean imports
+    let processed = content
+      .replace(/<Meta[^>]*\/>/g, '')
+      .replace(/<Meta[^>]*>[\s\S]*?<\/Meta>/g, '');
+    processed = cleanImports(processed);
+
+    return processed;
+  } catch (error) {
+    log(`  ⚠ Could not read CODEMODS.mdx: ${error.message}`, 'warning');
+    return '';
+  }
+};
+
 // Process MDX content to Markdown
-const processContent = async (content, sourceDir) => {
+const processContent = async (content, sourceDir, version, codemodsContent) => {
   // Remove Meta tags
   let processed = content.replace(/<Meta[^>]*\/>/g, '').replace(/<Meta[^>]*>[\s\S]*?<\/Meta>/g, '');
 
@@ -94,6 +164,15 @@ const processContent = async (content, sourceDir) => {
     }
   }
 
+  // Add codemod information
+  if (codemodsContent) {
+    processed += `\n\n---\n\n## Codemod Reference\n\n${codemodsContent}`;
+  }
+
+  // Add version-specific codemod transformations
+  const codemodSummary = await createCodemodSummary(version);
+  processed += `\n\n${codemodSummary}`;
+
   return processed;
 };
 
@@ -109,6 +188,13 @@ const migrate = async () => {
 
     // Create target directory
     await fs.mkdir(CONFIG.targetDir, {recursive: true});
+
+    // Process CODEMODS.mdx once
+    log('📚 Processing CODEMODS.mdx...');
+    const codemodsContent = await processCodemodsMdx();
+    if (codemodsContent) {
+      log('  ✓ CODEMODS.mdx processed successfully', 'success');
+    }
 
     // Get upgrade guide files
     const files = await fs.readdir(CONFIG.sourceDir);
@@ -140,7 +226,13 @@ const migrate = async () => {
         const targetPath = path.join(CONFIG.targetDir, file.replace('.mdx', '.md'));
 
         const content = await fs.readFile(sourcePath, 'utf-8');
-        const processed = await processContent(content, CONFIG.sourceDir);
+        const version = parseVersion(file);
+        const processed = await processContent(
+          content,
+          CONFIG.sourceDir,
+          version.major,
+          codemodsContent
+        );
 
         await fs.writeFile(targetPath, processed, 'utf-8');
 
