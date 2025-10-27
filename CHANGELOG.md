@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.0.16](https://github.com/Workday/canvas-kit/releases/tag/v14.0.16) (2025-10-27)
+
+### Components
+
+- fix: Add fallback to our inputs for border radius ([#3539](https://github.com/Workday/canvas-kit/pull/3539)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v14.0.15](https://github.com/Workday/canvas-kit/releases/tag/v14.0.15) (2025-10-27)
 
 ### Components
