@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.0.15](https://github.com/Workday/canvas-kit/releases/tag/v14.0.15) (2025-10-27)
+
+### Components
+
+- fix: Default background to white for avatar when image is loaded ([#3557](https://github.com/Workday/canvas-kit/pull/3557)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v14.0.14](https://github.com/Workday/canvas-kit/releases/tag/v14.0.14) (2025-10-27)
 
 ### Components
