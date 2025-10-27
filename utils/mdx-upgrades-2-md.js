@@ -48,24 +48,46 @@ const parseVersion = filename => {
 
 // Remove unnecessary imports for MD format
 const cleanImports = content => {
+  // Find where the actual content starts (after imports and Meta tag)
+  const codeBlockRegex = /```[\s\S]*?```/g;
+  let firstCodeBlockIndex = content.length;
+  let match;
+  while ((match = codeBlockRegex.exec(content)) !== null) {
+    firstCodeBlockIndex = match.index;
+    break;
+  }
+
+  // Process content in two parts: top (before first code block) and rest
+  let topContent = content.substring(0, firstCodeBlockIndex);
+  const restContent = content.substring(firstCodeBlockIndex);
+
+  // More specific import patterns that capture the semicolon
   const patterns = [
-    // Canvas Kit component imports
-    /import\s+(?:\{[^}]+\}|\w+)\s+from\s+['"]@workday\/canvas-kit-[^'"]+['"]/g,
-    // Local component imports
-    /import\s+(?:\{[^}]+\}|\w+)\s+from\s+['"]\.\.\/[^'"]+(?:tsx?|jsx?)['"]/g,
-    // Style imports
-    /import\s+['"][^'"]+\.(?:css|scss|sass)['"]/g,
-    // React imports
-    /import\s+(?:\*\s+as\s+)?React\s+from\s+['"]react['"]/g,
+    // Import from @workday (with optional path)
+    /import\s+(?:\{[^}]+\}|\*\s+as\s+\w+|\w+)\s+from\s+['"]@workday\/[^'"]+['"]\s*;\s*\n?/g,
+    // Import from @storybook
+    /import\s+(?:\{[^}]+\}|\*\s+as\s+\w+|\w+)\s+from\s+['"]@storybook\/[^'"]+['"]\s*;\s*\n?/g,
+    // Meta tag lines
+    /<Meta[^>]*\/>\s*\n?/g,
+    /<Meta[^>]*>[\s\S]*?<\/Meta>\s*\n?/g,
+    // Orphaned semicolons on their own lines
+    /^\s*;\s*$/gm,
   ];
 
-  let cleaned = content;
+  // Remove imports and Meta tags from top content
   patterns.forEach(pattern => {
-    cleaned = cleaned.replace(pattern, '');
+    topContent = topContent.replace(pattern, '');
   });
 
-  // Remove excessive newlines
-  return cleaned.replace(/\n{3,}/g, '\n\n').trim();
+  // Clean up excessive newlines
+  topContent = topContent.replace(/\n{3,}/g, '\n\n').trim();
+
+  // Combine cleaned top content with rest
+  const cleaned = (topContent + restContent)
+    .replace(/\n{3,}/g, '\n\n') // Remove excessive newlines
+    .trim();
+
+  return cleaned;
 };
 
 // Get codemod transformations for a specific version
