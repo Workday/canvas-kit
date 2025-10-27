@@ -133,7 +133,7 @@ describe('Popup', () => {
         });
 
         it('should move focus back to the "Open" button', () => {
-          cy.focused().should('have.attr', 'aria-label', 'Open');
+          cy.findByRole('button', {name: 'Open'}).should('be.visible').should('have.focus');
         });
       });
     });
@@ -163,7 +163,9 @@ describe('Popup', () => {
         });
 
         it('should redirect focus to the "Next Focusable Button" button', () => {
-          cy.focused().should('contain.text', 'Next Focusable Button');
+          cy.findByRole('button', {name: 'Next Focusable Button'})
+            .should('be.visible')
+            .should('have.focus');
         });
       });
     });
@@ -414,7 +416,7 @@ describe('Popup', () => {
         });
 
         it('should focus the "Open Popup" button', () => {
-          cy.focused().should('contain.text', 'Open Popup');
+          cy.findByRole('button', {name: 'Open Popup'}).should('be.visible').should('have.focus');
         });
       });
 
@@ -424,17 +426,17 @@ describe('Popup', () => {
         });
 
         it('should not focus the "Open Popup" button', () => {
-          cy.focused().should('not.contain.text', 'Open Popup');
+          cy.findByRole('button', {name: 'Open Popup'}).should('not.have.focus');
         });
       });
 
       context('when the user clicks on the tabindex button', () => {
         beforeEach(() => {
-          cy.focused().should('not.contain.text', 'Button with TabIndex=-1');
+          cy.findByRole('button', {name: 'Button with TabIndex=-1'}).should('not.have.focus');
         });
 
         it('should not focus the "Open Popup" button', () => {
-          cy.focused().should('not.contain.text', 'Open Popup');
+          cy.findByRole('button', {name: 'Open Popup'}).should('not.have.focus');
         });
       });
 
@@ -449,7 +451,7 @@ describe('Popup', () => {
           });
 
           it('should not focus the "Open Popup" button', () => {
-            cy.focused().should('not.contain.text', 'Open Popup');
+            cy.findByRole('button', {name: 'Open Popup'}).should('not.have.focus');
           });
         });
       });
@@ -465,7 +467,7 @@ describe('Popup', () => {
           });
 
           it('should not focus the "Open Popup" button', () => {
-            cy.focused().should('not.contain.text', 'Open Popup');
+            cy.findByRole('button', {name: 'Open Popup'}).should('not.have.focus');
           });
         });
       });
@@ -481,7 +483,7 @@ describe('Popup', () => {
           });
 
           it('should not focus the "Open Popup" button', () => {
-            cy.focused().should('not.contain.text', 'Open Popup');
+            cy.findByRole('button', {name: 'Open Popup'}).should('not.have.focus');
           });
         });
       });
@@ -497,7 +499,7 @@ describe('Popup', () => {
           });
 
           it('should not focus the "Open Popup" button', () => {
-            cy.focused().should('not.contain.text', 'Open Popup');
+            cy.findByRole('button', {name: 'Open Popup'}).should('not.have.focus');
           });
         });
       });
@@ -508,8 +510,8 @@ describe('Popup', () => {
         });
 
         it('should focus the "Name" input', () => {
-          cy.focused().should('not.contain.text', 'Open Popup');
-          cy.focused().should('have.attr', 'aria-label', 'Name');
+          cy.findByRole('button', {name: 'Open Popup'}).should('not.have.focus');
+          cy.findByLabelText('Name').should('be.visible').should('have.focus');
         });
       });
     });
@@ -612,7 +614,7 @@ describe('Popup', () => {
         });
 
         it('should focus on the icon button', () => {
-          cy.focused().should('contain.text', 'Open Popup');
+          cy.findByRole('button', {name: 'Open Popup'}).should('be.visible').should('have.focus');
         });
 
         it('should show the tooltip', () => {
