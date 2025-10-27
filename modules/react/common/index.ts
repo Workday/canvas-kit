@@ -8,4 +8,5 @@ export * from './lib/AccessibleHide';
 export * from './lib/AriaLiveRegion';
 export * from './lib/CanvasProvider';
 export * from './lib/EllipsisText';
+export * from './lib/forwardFitTokens';
 export * from './lib/responsive/useResponsiveContainerStyles';
