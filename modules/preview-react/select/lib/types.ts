@@ -8,7 +8,7 @@
  * This rounding causes problems with browsers that allow subpixel values for elements
  * like Firefox and Edge.
  *
- * @deprecated ⚠️ `MenuPlacement` in Preview has been deprecated and will be removed in a future major version. Please use [`Select` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) instead.
+ * @deprecated ⚠️ `MenuPlacement` in Preview has been deprecated and will be removed in a future major version. Please use [`Select` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--docs) instead.
  */
 export type MenuPlacement = 'bottom' | 'top';
 
@@ -32,6 +32,6 @@ export type MenuPlacement = 'bottom' | 'top';
  * closing in which case the menu can transition from `closing` > `opening` (and
  * vice-versa).
  *
- * @deprecated ⚠️ `MenuVisibility` in Preview has been deprecated and will be removed in a future major version. Please use [`Select` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) instead.
+ * @deprecated ⚠️ `MenuVisibility` in Preview has been deprecated and will be removed in a future major version. Please use [`Select` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--docs) instead.
  */
 export type MenuVisibility = 'closed' | 'open' | 'opening' | 'opened' | 'close' | 'closing';
