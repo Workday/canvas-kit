@@ -31,7 +31,8 @@ describe('Avatar', () => {
       });
 
       it('should have images', () => {
-        cy.get('img').should('be.visible'); // wait for image to load
+        // Use Cypress 'should("be.visible")' with 'find' to ensure at least one visible image.
+        cy.get('img').should('exist').and('be.visible');
       });
     });
   });
