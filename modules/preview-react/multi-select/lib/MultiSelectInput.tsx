@@ -20,7 +20,6 @@ import {MultiSelectedItemProps} from './MultiSelectedItem';
 import {MultiSelectedList} from './MultiSelectedList';
 
 export const multiSelectInputStencil = createStencil({
-  //@ts-ignore Types don't like defining a variable in `base` and using a variable in a nested selector. One or the other is fine, but not both.
   base: {
     border: `1px solid ${system.color.border.input.default}`,
     display: 'flex',

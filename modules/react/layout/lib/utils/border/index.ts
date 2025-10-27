@@ -9,6 +9,7 @@ import {
 } from './shorthand';
 import {BorderWidthStyleProps, borderWidthFns, borderWidthStyleFnConfigs} from './width';
 
+/** @deprecated */
 export type BorderStyleProps = BorderColorStyleProps &
   BorderLineStyleProps &
   BorderRadiusStyleProps &
@@ -31,6 +32,7 @@ export type BorderStyleProps = BorderColorStyleProps &
  *   </Box>
  * );
  *```
+ * @deprecated
  */
 export const border = buildStylePropFn<BorderStyleProps>({
   ...borderColorFns,
@@ -40,6 +42,7 @@ export const border = buildStylePropFn<BorderStyleProps>({
   ...borderWidthFns,
 });
 
+/** @deprecated */
 export const borderStyleFnConfigs = [
   ...borderColorStyleFnConfigs,
   ...borderLineStyleFnConfigs,
