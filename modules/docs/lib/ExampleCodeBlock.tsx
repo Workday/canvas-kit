@@ -128,21 +128,7 @@ export const ExampleCodeBlock = ({code}: any) => {
     <div {...cardStencil({opened: isCodeDisplayed})}>
       <Card data-part="example-block" className="sb-unstyled">
         {/* This allows for the div to scroll on smaller viewports while not allowing the components to overflow over the container */}
-<<<<<<< HEAD
         <Card.Body data-part="example-block-container">
-          {React.createElement(code)}
-          {code && (
-            <div data-part="code-toggle-stackblitz-btn-container">
-              <TertiaryButton size="extraSmall" onClick={() => openProjectInStackblitz()}>
-                ⚡️ Edit in Stackblitz
-              </TertiaryButton>
-              <TertiaryButton size="extraSmall" onClick={() => setCodeDisplayed(!isCodeDisplayed)}>
-                {!isCodeDisplayed ? 'Show Code' : 'Hide Code'}
-              </TertiaryButton>
-            </div>
-          )}
-=======
-        <Card.Body cs={{overflow: 'auto'}}>
           <CanvasProvider className={defaultBranding}>
             {React.createElement(code)}
             {code && (
@@ -159,7 +145,6 @@ export const ExampleCodeBlock = ({code}: any) => {
               </div>
             )}
           </CanvasProvider>
->>>>>>> upstream/master
         </Card.Body>
       </Card>
       <Card data-part="code-block" padding={0}>
