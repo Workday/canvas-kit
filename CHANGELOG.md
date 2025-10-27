@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.39](https://github.com/Workday/canvas-kit/releases/tag/v13.2.39) (2025-10-24)
+
+### Components
+
+- fix: Missing ARIA roles and properties on Submenu ([#3546](https://github.com/Workday/canvas-kit/pull/3546)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton)
+
+
+## [v13.2.38](https://github.com/Workday/canvas-kit/releases/tag/v13.2.38) (2025-10-24)
+
+### Documentation
+
+- fix: Updated ExampleCodeBlock ([#3550](https://github.com/Workday/canvas-kit/pull/3550)) ([@josh-bagwell](https://github.com/josh-bagwell))
 ## [v14.0.13](https://github.com/Workday/canvas-kit/releases/tag/v14.0.13) (2025-10-23)
 
 ### Dependencies
