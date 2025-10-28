@@ -1,0 +1,349 @@
+import {Meta} from '@storybook/addon-docs';
+import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
+import {StorybookStatusIndicator, DownloadLLMFile} from '@workday/canvas-kit-docs';
+
+<Meta title="Styling/Style Props Migration/Overview" />
+
+# Style Props Deprecation Overview
+
+### Purpose
+
+As part of the Canvas Kit’s modernization process, we’re moving away from Emotion’s runtime styling
+and promoting a custom CSS-in-JS solution: `@workday/canvas-kit-styling`. This change improves
+**performance**, **consistency**, and **maintainability** across our codebase.
+
+### Goals
+
+- **Reduce runtime overhead** by removing Emotion’s runtime from `@emotion/react`
+- **Promote prescriptive, opinionated styling** across Workday
+- **Enable static CSS compilation** for faster load times and smaller bundles
+- **Support new design tokens and CSS Variables** for scalable theming
+- **Ensure proper style merging** and stable selector behavior
+- **Support advanced styling patterns** like compounds, modifiers, and data-parts
+
+> Emotion dynamically injects styles at runtime, causing costly re-renders and cache
+> invalidations.  
+> The new system statically compiles styles at build time for optimal performance.
+
+### Timeline
+
+- **Deprecation introduced:** Canvas Kit **v14.1**
+- **Removal:** _Not immediate_ — style props and `styled()` will continue to function in upcoming
+  releases
+- **Migration timeline:** Gradual; no immediate codebase-wide update required
+
+## LLM Assisted Migration <StorybookStatusIndicator type="ai" />
+
+We've provided an **LLM migration mapping file** (`llm-style-props-migration.txt`) specifically
+designed for use with LLM-based code assistants such as [Cursor](https://www.cursor.so/). It
+contains a compiled LLM consumption version of this v14 Upgrade Guide. It is not intended for direct
+human reference or team documentation, but rather as structured input for LLMs to automate and
+assist with your migration process.
+
+> **Important:** LLMs can make mistakes. Please verify changes using this Migration Guide.
+
+**How to use:**
+
+- **View raw file**: Open the file in a new tab to see the complete migration mapping
+- **Download LLM File**: Save the file locally to upload or paste into your LLM/code assistant
+- **Use with LLM**: Provide the raw content to your LLM/code assistant as context for automated
+  migration
+
+<DownloadLLMFile
+  rawFileLink="https://raw.githubusercontent.com/Workday/canvas-kit/master/modules/docs/llm-txt/llm-style-props-migration.txt"
+  filename="llm-style-props-migration.txt"
+/>
+
+## Changes Overview
+
+### Replacements
+
+Use the new **Canvas Kit Styling** utilities:
+
+| Old API                                            | New API                          | Purpose                                    |
+| -------------------------------------------------- | -------------------------------- | ------------------------------------------ |
+| `styled()`                                         | `createStyles` / `createStencil` | Define static or component-level styles    |
+| Inline style props, like `background` or `padding` | `cs` prop                        | Safely merge class names and styles        |
+| Dynamic values                                     | `createVars`                     | Manage CSS variables for runtime overrides |
+| Emotion modifiers                                  | `modifiers`, `compound`          | Define consistent appearance variants      |
+
+## Canvas Kit Styling
+
+<InformationHighlight className="sb-unstyled" cs={{p: {marginBlock: 0}}}>
+  <InformationHighlight.Icon />
+  <InformationHighlight.Heading>Canvas Kit Styling Docs</InformationHighlight.Heading>
+  <InformationHighlight.Link href="https://workday.github.io/canvas-kit/?path=/docs/features-combobox--docs">
+    Read more
+  </InformationHighlight.Link>
+</InformationHighlight>
+
+Canvas Kit’s styling utilities are built for **static CSS generation**, **token integration**, and
+**predictable composition**.
+
+### Core APIs
+
+- **`createStyles`** — define reusable, static CSS objects.
+- **`createStencil`** — define reusable, dynamic component styles with parts, vars, and modifiers
+- **`createVars`** — declare type-safe CSS variables for dynamic properties
+- **`createModifiers`** — define named variant sets for visual states
+- **`cs` prop** — apply multiple styles and handle merges consistently
+
+### Best Practices
+
+These best practices ensure your components remain **performant**, **consistent**, and
+**maintainable** under the new Canvas Kit Styling system.
+
+#### Define Styles Outside the Render Function
+
+Always declare styles at the module level.  
+Creating styles inside the render or component function will trigger component re-render.
+
+✅ **Do**
+
+```tsx
+const buttonStyles = createStyles({
+  backgroundColor: system.color.bg.primary.default,
+  color: system.color.text.inverse,
+});
+
+export const MyButton = () => <button cs={buttonStyles}>Click me</button>;
+```
+
+❌ **Don’t**
+
+```tsx
+export const MyButton = () => {
+  const buttonStyles = createStyles({backgroundColor: 'red'}); // bad
+  return <button cs={buttonStyles}>Click me</button>;
+};
+```
+
+#### Use `createStyles` for Static Styling
+
+Use `createStyles` for simple, reusable style objects that do **not** depend on dynamic data or
+props.
+
+✅ Ideal for:
+
+- Defining base styles
+- Applying static overrides
+- Styling tokens-based components
+
+#### Use `createStencil` for Dynamic or Complex Styling
+
+Use `createStencil` when styles depend on **props**, **variants**, or **component parts**.
+
+Examples:
+
+- Size or color variants (`primary`, `secondary`)
+- Compound state combinations (`size=small`, `iconPosition=end`)
+- Multi-part components (e.g. `Button`, `Card`, `MenuItem`)
+
+✅ **Do**
+
+```tsx
+const buttonStencil = createStencil({
+  vars: {color: '', background: ''},
+  modifiers: {
+    variant: {
+      primary: {background: system.color.bg.primary.default},
+      secondary: {background: system.color.bg.muted.default},
+    },
+  },
+});
+```
+
+#### Use `cs` Prop to Merge Styles
+
+The `cs` prop merges `className` and `style` attributes safely and consistently.  
+Prefer it over the old `style` prop or `className` concatenation.
+
+✅ **Do**
+
+```tsx
+<PrimaryButton cs={[baseStyles, variantStyles]} />
+```
+
+❌ **Don’t**
+
+```tsx
+<PrimaryButton className={`${baseStyles} ${variantStyles}`} />
+```
+
+#### Use Variables for Dynamic Values
+
+Instead of inline styles or runtime calculations, use stencil variables.
+
+✅ **Do**
+
+```tsx
+<PrimaryButton cs={{[buttonStencil.vars.background]: 'orange'}} />
+```
+
+❌ **Don’t**
+
+```tsx
+<PrimaryButton cs={{backgroundColor: 'orange'}} /> // breaks static optimization
+```
+
+#### Extend Existing Stencils Instead of Overriding Styles
+
+When modifying Canvas Kit components, extend the provided `Stencil` instead of creating your own
+from scratch.
+
+✅ **Do**
+
+```tsx
+const customIconStencil = createStencil({
+  extends: systemIconStencil,
+  base: {
+    margin: system.space.x2,
+  },
+});
+```
+
+#### Use Modifiers for Variants and States
+
+Define component variations (size, color, emphasis) using **modifiers** rather than conditional
+logic.
+
+✅ **Do**
+
+```tsx
+const badgeStencil = createStencil({
+  modifiers: {
+    status: {
+      success: {background: system.color.bg.success.default},
+      error: {background: system.color.bg.negative.default},
+    },
+  },
+});
+```
+
+#### Use Compound Modifiers for Complex Conditions
+
+When two or more modifiers combine to produce a new style, define a **compound modifier**.
+
+✅ **Do**
+
+```tsx
+compound: [
+  {
+    modifiers: {variant: 'primary', size: 'large'},
+    styles: {paddingInline: system.space.x5},
+  },
+];
+```
+
+#### Avoid Nested Stencils Unless Necessary
+
+Each Stencil should map to one semantic component.  
+Nested stencils can increase CSS specificity and complexity.  
+Use **parts** instead of deep nesting.
+
+✅ **Do**
+
+```tsx
+const cardStencil = createStencil({
+  parts: {header: 'card-header', body: 'card-body'},
+  base: ({headerPart}) => ({
+    [headerPart]: {
+      fontWeight: 'bold',
+    },
+  }),
+});
+```
+
+#### Prefer Tokens and System Variables
+
+Always use design tokens (`system`) for spacing, colors, typography, etc., instead of raw values.
+
+✅ **Do**
+
+```tsx
+color: system.color.text.default;
+margin: system.space.x2;
+```
+
+❌ **Don’t**
+
+```tsx
+color: '#333';
+margin: '8px';
+```
+
+#### Debugging and Static Compilation
+
+- Enable static compilation during development to catch type or value errors early.
+- Use `as const` for static objects to ensure values are type-locked for the compiler.
+
+✅ **Do**
+
+```tsx
+const reusableStyles = {
+  position: 'absolute',
+} as const;
+```
+
+#### Don’t Mix Emotion and Static Styling
+
+Avoid combining Emotion’s `styled` or `css` with `createStyles` or `createStencil`.  
+It reintroduces runtime style recalculations and negates static benefits.
+
+❌ **Don’t**
+
+```tsx
+const StyledButton = styled(Button)(styles);
+<StyledButton cs={createStyles({padding: 8})} />;
+```
+
+## Migration Example
+
+### Style Props
+
+#### Before
+
+```typescript
+import {Flex} from '@workday/canvas-kit-react/layout';
+
+<Flex depth={1} marginX={10} background="frenchVanilla100" />;
+```
+
+#### After
+
+```typescript
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {system} from '@workday/canvas-tokens-web';
+
+<Flex
+  cs={{
+    boxShadow: system.depth[1],
+    marginInline: 10,
+    background: system.color.bg.default,
+  }}
+/>;
+```
+
+### Emotion styled
+
+#### Before (Emotion)
+
+```tsx
+const StyledButton = styled('button')({
+  backgroundColor: 'blue',
+  color: 'white',
+});
+```
+
+#### After (Canvas Kit Styling)
+
+```tsx
+import {createStyles} from '@workday/canvas-kit-styling';
+
+const buttonStyles = createStyles({
+  backgroundColor: 'blue',
+  color: 'white',
+});
+
+<button cs={buttonStyles}>Click me</button>;
+```
