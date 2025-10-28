@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.0.17](https://github.com/Workday/canvas-kit/releases/tag/v14.0.17) (2025-10-28)
+
+### Infrastructure
+
+- chore: Add script to convert mdx upgrades to md ([#3556](https://github.com/Workday/canvas-kit/pull/3556)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v13.2.40](https://github.com/Workday/canvas-kit/releases/tag/v13.2.40) (2025-10-28)
 
 ### Infrastructure
