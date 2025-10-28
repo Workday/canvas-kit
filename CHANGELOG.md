@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.40](https://github.com/Workday/canvas-kit/releases/tag/v13.2.40) (2025-10-28)
+
+### Infrastructure
+
+- chore: Add script to convert mdx upgrades to md ([#3556](https://github.com/Workday/canvas-kit/pull/3556)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v13.2.39](https://github.com/Workday/canvas-kit/releases/tag/v13.2.39) (2025-10-24)
+
+### Components
+
+- fix: Missing ARIA roles and properties on Submenu ([#3546](https://github.com/Workday/canvas-kit/pull/3546)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton)
+
+
+## [v13.2.38](https://github.com/Workday/canvas-kit/releases/tag/v13.2.38) (2025-10-24)
+
+### Documentation
+
+- fix: Updated ExampleCodeBlock ([#3550](https://github.com/Workday/canvas-kit/pull/3550)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
+## [v13.2.37](https://github.com/Workday/canvas-kit/releases/tag/v13.2.37) (2025-10-20)
+
+### Documentation
+
+- docs: Updated the spec tables and examples to wrap ([#3545](https://github.com/Workday/canvas-kit/pull/3545)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
+## [v13.2.36](https://github.com/Workday/canvas-kit/releases/tag/v13.2.36) (2025-10-16)
+
+### Documentation
+
+- docs: Fix migration guide link ([#3542](https://github.com/Workday/canvas-kit/pull/3542)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v13.2.35](https://github.com/Workday/canvas-kit/releases/tag/v13.2.35) (2025-10-15)
 
 ### Component

@@ -25,6 +25,10 @@ const cardStencil = createStencil({
       boxShadow: system.depth[1],
       borderRadius: system.shape.x1,
       position: 'relative',
+      overflow: 'auto', // This allows for the entire ExampleCodeBlock to scroll on smaller viewports
+    },
+    '[data-part="example-block-container"]': {
+      overflow: 'auto',
     },
     '[data-part="code-block"]': {
       display: 'none',
@@ -122,7 +126,8 @@ export const ExampleCodeBlock = ({code}: any) => {
   return (
     <div {...cardStencil({opened: isCodeDisplayed})}>
       <Card data-part="example-block" className="sb-unstyled">
-        <Card.Body>
+        {/* This allows for the div to scroll on smaller viewports while not allowing the components to overflow over the container */}
+        <Card.Body data-part="example-block-container">
           {React.createElement(code)}
           {code && (
             <div data-part="code-toggle-stackblitz-btn-container">

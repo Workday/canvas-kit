@@ -3,7 +3,7 @@ import {useMDXComponents} from '@mdx-js/react';
 import React from 'react';
 import MarkdownToJSX from 'markdown-to-jsx';
 
-import {createComponent} from '@workday/canvas-kit-react';
+import {Box, createComponent} from '@workday/canvas-kit-react';
 import {HeadingLevelContext, SymbolDialog} from './widgetUtils';
 
 /**
@@ -80,8 +80,12 @@ export const MdxJSToJSX = (props: {children: string}) => {
   const components = useMDXComponents();
   const headingLevel = React.useContext(HeadingLevelContext);
   return (
-    <MarkdownToJSX options={{overrides: {...components, button: Button}, forceBlock: true}}>
-      {rewriteHeadingLevels(convertLinkToSymbolLinks(props.children), headingLevel)}
-    </MarkdownToJSX>
+    // This fixes the `pre` element inside of the `<Table.Cell/>` element.
+    // This prevents the code block from going outside the width of the `<Table.Cell/>` element.
+    <Box cs={{minWidth: '0'}}>
+      <MarkdownToJSX options={{overrides: {...components, button: Button}, forceBlock: true}}>
+        {rewriteHeadingLevels(convertLinkToSymbolLinks(props.children), headingLevel)}
+      </MarkdownToJSX>
+    </Box>
   );
 };
