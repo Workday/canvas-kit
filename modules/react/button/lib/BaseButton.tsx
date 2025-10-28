@@ -40,11 +40,6 @@ export interface ButtonContainerProps extends Partial<SystemIconProps>, GrowthBe
    * @default 'start'
    */
   iconPosition?: IconPositions;
-  /**
-   * If set to `true`, transform the icon's x-axis to mirror the graphic
-   * @default false
-   */
-  shouldMirrorIcon?: boolean;
   children?: React.ReactNode;
 }
 
@@ -406,7 +401,6 @@ export const BaseButton = createComponent('button')({
       iconPosition,
       icon,
       colors,
-      shouldMirrorIcon = false,
       ...elemProps
     }: ButtonContainerProps,
     ref,

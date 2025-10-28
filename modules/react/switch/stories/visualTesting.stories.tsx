@@ -29,7 +29,7 @@ export const SwitchStates = () => (
           ],
           error: [
             {value: undefined, label: ''},
-            {value: Switch.ErrorType.Alert, label: 'Alert'},
+            {value: Switch.ErrorType.Caution, label: 'Caution'},
             {value: Switch.ErrorType.Error, label: 'Error'},
           ],
         },
