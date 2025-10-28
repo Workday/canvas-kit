@@ -3,52 +3,73 @@ import {Property} from 'csstype';
 import {buildStyleFns, buildStylePropFn, StyleFnConfig} from './buildStyleFns';
 import {SystemPropValues} from './systemProps';
 
-/** style props to for CSS layout properties */
+/** style props to for CSS layout properties
+ * @deprecated ⚠️ Style props are deprecated. Please use our `cs` prop with `createStencil` or `createStyles` to apply styles. For more information view our [Styling docs](* @deprecated ⚠️ `boxStyleFn` is deprecated and will be removed in a future major version. Please reference our new way of styling components [here](https://workday.github.io/canvas-kit/?path=/docs/styling-getting-started-overview--docs).
+ */
 export type LayoutStyleProps = {
-  /** sets [CSS display property](https://developer.mozilla.org/en-US/docs/Web/CSS/display) */
+  /** sets [CSS display property](https://developer.mozilla.org/en-US/docs/Web/CSS/display)
+   * @deprecated
+   */
   display?: Property.Display;
   /**
    * - sets [CSS height property](https://developer.mozilla.org/en-US/docs/Web/CSS/height)
    * - system tokens: `space`
-   * */
+   * @deprecated
+   */
   height?: SystemPropValues['space'];
-  /** sets [CSS list-style property](https://developer.mozilla.org/en-US/docs/Web/CSS/list-style) */
+  /** sets [CSS list-style property](https://developer.mozilla.org/en-US/docs/Web/CSS/list-style)
+   * @deprecated
+   */
   listStyle?: Property.ListStyle;
   /**
    * - sets [CSS max-height property](https://developer.mozilla.org/en-US/docs/Web/CSS/max-height)
    * - system tokens: `space`
-   * */
+   * @deprecated
+   */
   maxHeight?: SystemPropValues['space'];
   /**
    * - sets [CSS max-width property](https://developer.mozilla.org/en-US/docs/Web/CSS/max-width)
    * - system tokens: `space`
-   * */
+   * @deprecated
+   */
   maxWidth?: SystemPropValues['space'];
   /**
    * - sets [CSS min-height property](https://developer.mozilla.org/en-US/docs/Web/CSS/min-height)
    * - system tokens: `space`
-   * */
+   * @deprecated
+   */
   minHeight?: SystemPropValues['space'];
   /**
    * - sets [CSS min-width property](https://developer.mozilla.org/en-US/docs/Web/CSS/min-width)
    * - system tokens: `space`
-   * */
+   * @deprecated
+   */
   minWidth?: SystemPropValues['space'];
-  /** sets [CSS overflow property](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow) */
+  /** sets [CSS overflow property](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow)
+   * @deprecated
+   */
   overflow?: Property.Overflow;
-  /** sets [CSS overflow-x property](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-x) */
+  /** sets [CSS overflow-x property](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-x)
+   * @deprecated
+   */
   overflowX?: Property.OverflowX;
-  /** sets [CSS overflow-y property](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-y) */
+  /** sets [CSS overflow-y property](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-y)
+   * @deprecated
+   */
   overflowY?: Property.OverflowY;
-  /** sets [CSS vertical-align property](https://developer.mozilla.org/en-US/docs/Web/CSS/vertical-align) */
+  /** sets [CSS vertical-align property](https://developer.mozilla.org/en-US/docs/Web/CSS/vertical-align)
+   * @deprecated
+   */
   verticalAlign?: Property.VerticalAlign;
   /**
    * - sets [CSS width property](https://developer.mozilla.org/en-US/docs/Web/CSS/width)
    * - system tokens: `space`
-   * */
+   * @deprecated
+   */
   width?: SystemPropValues['space'];
 };
 
+/** @deprecated */
 export const layoutStyleFnConfigs: StyleFnConfig[] = [
   {
     name: 'display',
@@ -112,6 +133,7 @@ export const layoutStyleFnConfigs: StyleFnConfig[] = [
   },
 ];
 
+/** @deprecated */
 export const layoutStyleFns = buildStyleFns(layoutStyleFnConfigs);
 /**
  * A style prop function that takes component props and returns layout styles.
@@ -125,5 +147,6 @@ export const layoutStyleFns = buildStyleFns(layoutStyleFnConfigs);
  *   </Box>
  * );
  * ```
+ * @deprecated
  */
 export const layout = buildStylePropFn<LayoutStyleProps>(layoutStyleFns);
