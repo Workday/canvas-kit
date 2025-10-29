@@ -376,15 +376,20 @@ import {Flex} from '@workday/canvas-kit-react/layout';
 ```typescript
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {system} from '@workday/canvas-tokens-web';
+import {px2rem} from '@workday/canvas-kit-styling';
 
 <Flex
   cs={{
     boxShadow: system.depth[1],
-    marginInline: 10,
+    marginInline: px2rem(10),
     background: system.color.bg.default,
   }}
 />;
 ```
+
+- **px2rem**: The `px2rem` function is used to convert a pixel value to a rem value.
+- Use [CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values
+- Use `system` tokens over `base` tokens for better theming support.
 
 ### Emotion styled
 
@@ -401,11 +406,13 @@ const StyledButton = styled('button')({
 
 ```tsx
 import {createStyles} from '@workday/canvas-kit-styling';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {system} from '@workday/canvas-tokens-web';
 
-const buttonStyles = createStyles({
-  backgroundColor: 'blue',
-  color: 'white',
+const primaryButtonStyles = createStyles({
+  backgroundColor: system.color.bg.primary.default,
+  color: system.color.text.inverse,
 });
 
-<button cs={buttonStyles}>Click me</button>;
+<PrimaryButton cs={primaryButtonStyles}>Click me</PrimaryButton>;
 ```

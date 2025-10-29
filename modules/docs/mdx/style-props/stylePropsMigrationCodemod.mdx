@@ -13,8 +13,7 @@ your codebase to use the new token system.
 
 - **Run on Small Batches**: We recommend running the codemod on a small number of files in batches
   instead of your entire repository all at once. This makes the changes easier to review and allows
-  you to catch issues more quickly with less frustration. This allows for easier manual review of
-  the changes and helps catch any potential issues early.
+  you to catch issues more quickly with less frustration.
 - **Codemod Limitations**: The codemod does not cover every possible token usage or migration
   scenario. Please review the codemod's changes and be prepared to update style props as needed.
   Some manual changes will be required, especially for:
@@ -95,3 +94,7 @@ import {system} from '@workday/canvas-tokens-web';
   }}
 />;
 ```
+
+## What the Codemod Does Not Do
+
+The codemod will not hoist your styles to the top of the file. While we don't expet you to do this immediately, we strongly encourage you to do this in the future and at a gradual pace.
