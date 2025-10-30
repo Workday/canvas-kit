@@ -3,6 +3,109 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.1.0](https://github.com/Workday/canvas-kit/releases/tag/v14.1.0) (2025-10-29)
+
+
+
+
+## [v14.0.17](https://github.com/Workday/canvas-kit/releases/tag/v14.0.17) (2025-10-28)
+
+### Infrastructure
+
+- chore: Add script to convert mdx upgrades to md ([#3556](https://github.com/Workday/canvas-kit/pull/3556)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v13.2.40](https://github.com/Workday/canvas-kit/releases/tag/v13.2.40) (2025-10-28)
+
+### Infrastructure
+
+- chore: Add script to convert mdx upgrades to md ([#3556](https://github.com/Workday/canvas-kit/pull/3556)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+## [v14.0.16](https://github.com/Workday/canvas-kit/releases/tag/v14.0.16) (2025-10-27)
+
+### Components
+
+- fix: Add fallback to our inputs for border radius ([#3539](https://github.com/Workday/canvas-kit/pull/3539)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v14.0.15](https://github.com/Workday/canvas-kit/releases/tag/v14.0.15) (2025-10-27)
+
+### Components
+
+- fix: Default background to white for avatar when image is loaded ([#3557](https://github.com/Workday/canvas-kit/pull/3557)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v14.0.14](https://github.com/Workday/canvas-kit/releases/tag/v14.0.14) (2025-10-27)
+
+### Components
+
+- fix: Missing ARIA roles and properties on Submenu ([#3546](https://github.com/Workday/canvas-kit/pull/3546)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton)
+
+### Documentation
+
+- fix: Updated ExampleCodeBlock ([#3550](https://github.com/Workday/canvas-kit/pull/3550)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
+## [v13.2.39](https://github.com/Workday/canvas-kit/releases/tag/v13.2.39) (2025-10-24)
+
+### Components
+
+- fix: Missing ARIA roles and properties on Submenu ([#3546](https://github.com/Workday/canvas-kit/pull/3546)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton)
+
+
+## [v13.2.38](https://github.com/Workday/canvas-kit/releases/tag/v13.2.38) (2025-10-24)
+
+### Documentation
+
+- fix: Updated ExampleCodeBlock ([#3550](https://github.com/Workday/canvas-kit/pull/3550)) ([@josh-bagwell](https://github.com/josh-bagwell))
+## [v14.0.13](https://github.com/Workday/canvas-kit/releases/tag/v14.0.13) (2025-10-23)
+
+### Dependencies
+
+- fix: Add preview react as dep ([#3560](https://github.com/Workday/canvas-kit/pull/3560)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v14.0.12](https://github.com/Workday/canvas-kit/releases/tag/v14.0.12) (2025-10-23)
+
+### Documentation
+
+- docs: Updated the spec tables and examples to wrap ([#3545](https://github.com/Workday/canvas-kit/pull/3545)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
+## [v13.2.37](https://github.com/Workday/canvas-kit/releases/tag/v13.2.37) (2025-10-20)
+
+### Documentation
+
+- docs: Updated the spec tables and examples to wrap ([#3545](https://github.com/Workday/canvas-kit/pull/3545)) ([@josh-bagwell](https://github.com/josh-bagwell))
+## [v14.0.11](https://github.com/Workday/canvas-kit/releases/tag/v14.0.11) (2025-10-20)
+
+### Documentation
+
+- docs: Update Popup.mdx to remove duplicate  ([#3534](https://github.com/Workday/canvas-kit/pull/3534)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v14.0.10](https://github.com/Workday/canvas-kit/releases/tag/v14.0.10) (2025-10-20)
+
+### Component
+
+- fix(menu): Change to :focus-visible in MenuItem ([#3540](https://github.com/Workday/canvas-kit/pull/3540)) ([@thomasatran](https://github.com/thomasatran), [@thomas-tran-wd](https://github.com/thomas-tran-wd))
+
+### Documentation
+
+- docs: Fix migration guide link ([#3542](https://github.com/Workday/canvas-kit/pull/3542)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v13.2.36](https://github.com/Workday/canvas-kit/releases/tag/v13.2.36) (2025-10-16)
+
+### Documentation
+
+- docs: Fix migration guide link ([#3542](https://github.com/Workday/canvas-kit/pull/3542)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v13.2.35](https://github.com/Workday/canvas-kit/releases/tag/v13.2.35) (2025-10-15)
+
+### Component
+
+- fix(menu): Change to :focus-visible in MenuItem ([#3540](https://github.com/Workday/canvas-kit/pull/3540)) ([@thomasatran](https://github.com/thomasatran), [@thomas-tran-wd](https://github.com/thomas-tran-wd))
 ## [v14.0.9](https://github.com/Workday/canvas-kit/releases/tag/v14.0.9) (2025-10-10)
 
 ### Styling

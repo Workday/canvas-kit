@@ -1,4 +1,8 @@
-import {ExampleCodeBlock, StylePropsTable} from '@workday/canvas-kit-docs';
+import {
+  ExampleCodeBlock,
+  StylePropsTable,
+  StorybookStatusIndicator,
+} from '@workday/canvas-kit-docs';
 
 import {
   backgroundStyleFnConfigs,
@@ -15,8 +19,7 @@ import {
   spaceStyleFnConfigs,
   textStyleFnConfigs,
 } from '@workday/canvas-kit-react/layout';
-import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight'
-import {Hyperlink} from '@workday/canvas-kit-react/button';
+import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
 
 import {Background} from './examples/Background';
 import {Border} from './examples/Border';
@@ -32,20 +35,25 @@ import {Position} from './examples/Position';
 import {Space} from './examples/Space';
 import {Text} from './examples/Text';
 
-<Meta title="Features/Style Props" />
+<Meta title="Features/Style Props (deprecated)" />
 
-# Style Props
+# Style Props <StorybookStatusIndicator type="deprecated" />
 
 Style props provide a common, ergonomic API for modifying a component's styles by passing styles
 with props.
 
 <InformationHighlight className="sb-unstyled" variant="caution">
-	<InformationHighlight.Icon />
-	<InformationHighlight.Heading> Caution: Performance Hit</InformationHighlight.Heading>
-	<InformationHighlight.Body>
-		As we transition away from Emotion's runtime costs, we advise against using style props. Please use our <Hyperlink src="https://workday.github.io/canvas-kit/?path=/docs/styling-getting-started-overview--docs">styling utilities</Hyperlink> instead. For more information on this change, view our discussion on the <Hyperlink src="https://github.com/Workday/canvas-kit/discussions/2265">Future of Styling</Hyperlink>.
-	</InformationHighlight.Body>
+  <InformationHighlight.Icon />
+  <InformationHighlight.Heading> Style props are deprecated!</InformationHighlight.Heading>
+  <InformationHighlight.Body>
+    As we transition away from Emotion's runtime costs, we advise to move away from using style props. Please use our [styling utilities](https://workday.github.io/canvas-kit/?path=/docs/styling-getting-started-overview--docs) instead. For more information on this change, view our discussion on the [Future of Styling](https://github.com/Workday/canvas-kit/discussions/2265).
+
+    You can use `14.1` codemod to automatic migration to `cs` prop. [Migration Docs](https://workday.github.io/canvas-kit/?path=/docs/guides-codemods--docs)
+
+  </InformationHighlight.Body>
 </InformationHighlight>
+
+<br />
 
 ## System Prop Values
 
