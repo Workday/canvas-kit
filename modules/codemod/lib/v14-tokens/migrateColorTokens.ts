@@ -10,6 +10,7 @@ const canvasImportSources = [
   '@workday/canvas-kit-styling',
   '@workday/canvas-kit-react/tokens',
   '@workday/canvas-tokens-web',
+  '@workday/canvas-colors-web',
 ];
 
 const transform: Transform = (file, api) => {

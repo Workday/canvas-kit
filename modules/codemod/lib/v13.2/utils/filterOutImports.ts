@@ -1,5 +1,12 @@
 import {ASTPath, ImportDeclaration} from 'jscodeshift';
 
+const canvasImportSources = [
+  '@workday/canvas-kit-react/tokens',
+  '@workday/canvas-colors-web',
+  '@workday/canvas-space-web',
+  '@workday/canvas-depth-web',
+];
+
 export const filterOutImports = (nodePath: ASTPath<ImportDeclaration>) => {
   const importName: Record<string, string> = {};
 
@@ -12,7 +19,7 @@ export const filterOutImports = (nodePath: ASTPath<ImportDeclaration>) => {
 
       return !(
         typeof nodePath.value.source.value === 'string' &&
-        nodePath.value.source.value?.endsWith('tokens')
+        canvasImportSources.includes(nodePath.value.source.value)
       );
     }
 

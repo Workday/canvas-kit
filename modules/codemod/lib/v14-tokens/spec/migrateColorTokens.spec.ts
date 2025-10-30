@@ -93,6 +93,23 @@ describe('Canvas Kit Tokens > Canvas Tokens v3', () => {
       expectTransform(input, expected);
     });
 
+    it('should convert color tokens from canvas-colors-web to base tokens', () => {
+      const input = stripIndent`
+          import { colors } from "@workday/canvas-colors-web";
+
+          const color = colors.blueberry400;
+        `;
+
+      const expected = stripIndent`
+          import { base } from "@workday/canvas-tokens-web";
+          import { cssVar } from "@workday/canvas-kit-styling";
+
+          const color = cssVar(base.blue600);
+        `;
+
+      expectTransform(input, expected);
+    });
+
     it('should convert base tokens to new base tokens', () => {
       const input = stripIndent`
           import { base } from "@workday/canvas-tokens-web";
@@ -362,6 +379,33 @@ describe('Canvas Kit Tokens > Canvas Tokens v3', () => {
     it('should transform color tokens in other objects', () => {
       const input = stripIndent`
           import { colors } from "@workday/canvas-kit-react/tokens";
+
+          const styles = {
+            color: toggled ? colors.blueberry400 : colors.blackPepper300,
+            default: {
+              background: toggled ? colors.blueberry400 : colors.soap200,
+            }
+          };
+        `;
+
+      const expected = stripIndent`
+          import { cssVar } from "@workday/canvas-kit-styling";
+          import { system } from "@workday/canvas-tokens-web";
+
+          const styles = {
+            color: toggled ? cssVar(system.color.fg.primary.default) : cssVar(system.color.fg.default),
+            default: {
+              background: toggled ? cssVar(system.color.bg.primary.default) : cssVar(system.color.bg.alt.soft)
+            }
+          };
+        `;
+
+      expectTransform(input, expected);
+    });
+
+    it('should transform color tokens in other objects', () => {
+      const input = stripIndent`
+          import { colors } from "@workday/canvas-colors-web";
 
           const styles = {
             color: toggled ? colors.blueberry400 : colors.blackPepper300,

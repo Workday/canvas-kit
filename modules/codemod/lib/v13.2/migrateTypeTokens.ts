@@ -5,7 +5,13 @@ import {mapping} from './mapping';
 
 type DeclarationType = {[key: string]: any};
 
-const canvasImportSources = ['@workday/canvas-kit-styling', '@workday/canvas-kit-react/tokens'];
+const canvasImportSources = [
+  '@workday/canvas-kit-styling',
+  '@workday/canvas-kit-react/tokens',
+  '@workday/canvas-colors-web',
+  '@workday/canvas-space-web',
+  '@workday/canvas-depth-web',
+];
 
 const transform: Transform = (file, api) => {
   const j = api.jscodeshift;
