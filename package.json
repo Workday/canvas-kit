@@ -108,7 +108,7 @@
     "promote-component": "./utils/promote-component.js",
     "precommit": "lint-staged",
     "chromatic": "chromatic",
-    "build-storybook": "node utils/download-fonts.js && node utils/mdx-upgrades-2-md.js && storybook build .storybook -o docs",
+    "build-storybook": "node utils/download-fonts.js && storybook build .storybook -o docs",
     "lint": "node utils/check-lockfile.js && node utils/check-mismatched-dependencies.js && eslint -c ./.eslintrc.js --ext=jsx,ts,tsx .",
     "mdxUpgrade2md": "node ./utils/mdx-upgrades-2-md.js",
     "typecheck": "npm-run-all --parallel typecheck:src typecheck:cypress typecheck:types typecheck:specs typecheck:stories",
@@ -128,7 +128,10 @@
   "lint-staged": {
     "*.{ts,tsx}": "yarn format",
     "*.json": "node utils/check-mismatched-dependencies.js",
-    "yarn.lock": "node utils/check-lockfile.js"
+    "yarn.lock": "node utils/check-lockfile.js",
+    "modules/docs/mdx/**/*.mdx": "node utils/mdx-upgrades-2-md.js",
+    "utils/mdx-upgrades-2-md.js": "node utils/mdx-upgrades-2-md.js",
+    "modules/codemod/lib/**/*.ts": "node utils/mdx-upgrades-2-md.js"
   },
   "workspaces": [
     "modules/**"
