@@ -52,6 +52,8 @@ using roving tabindex. Below is table of supported keyboard shortcuts and associ
 
 <ExampleCodeBlock code={ContextMenu} />
 
+> **Accessibility Note**:
+
 ### Icons
 
 Menu supports more complex children, including icons, but the text of the item will no longer be
@@ -62,6 +64,8 @@ component will jump to the first item that starts with a "C". This functionality
 about the text of the item.
 
 <ExampleCodeBlock code={Icons} />
+
+> **Accessibility Note**:
 
 ### Selectable Menu
 
@@ -76,6 +80,8 @@ behaviors depend on many other things. To see a full example of all these behavi
 
 <ExampleCodeBlock code={SelectableMenu} />
 
+> **Accessibility Note**:
+
 ### Grouping
 
 Grouping adds hierarchy and categorization to menu items. Group headers do not represent menu items
@@ -87,6 +93,8 @@ and are not selectable with the keyboard or mouse.
 
 <ExampleCodeBlock code={Grouping} />
 
+> **Accessibility Note**:
+
 ### Nested
 
 Menus support nesting. If you only have a few items and not very many nesting levels, the menu can
@@ -96,6 +104,8 @@ be defined statically using JSX. A submenu is defined using the `<Menu.Submenu>`
 indicate this dual role.
 
 <ExampleCodeBlock code={Nested} />
+
+> **Accessibility Note**:
 
 ### Nested Dynamic Items
 
@@ -115,13 +125,41 @@ are included in the component.
 
 [Menu Button Pattern | APG | WAI | W3C](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/)
 
-- The `<Menu.Target>` sub-component uses `aria-haspopup=”true”` and `aria-expanded={true | false}`
+- The `<Menu.Target>` sub-component uses `aria-haspopup="true"` and `aria-expanded={true | false}`
   properties. This benefits screen reader users by indicating when a button element has an attached
   menu.
-- The `<Menu.List>` sub-component uses `role=”menu”` and `<Menu.Item>` uses `role=”menuitem”` ARIA
+- The `<Menu.List>` sub-component uses `role="menu"` and `<Menu.Item>` uses `role="menuitem"` ARIA
   roles. These roles allow screen readers to pass through arrow key events to the web application.
 - The `<Menu.List>` sub-component inludes an `aria-labelledby` ID reference to the `<Menu.Target>`
   sub-component. This assigns a label to the menu for context.
+- When a menu item has an attached submenu, then the menu item should also include an
+  `aria-haspopup="true"` and `aria-expanded={true | false}` properties. These properties will alert
+  screen reader users to the available submenu systems.
+
+### Navigation
+
+- **Enter or Space**: When focused on the menu button, opens the menu and moves focus to the first
+  menu item. When focused on a menu item, activates the item and closes the menu
+- **Escape**: Closes the menu and returns focus to the menu button
+- **Up & Down Arrow**: Moves focus up and down the menu items
+- **Home & End**: Moves focus to the first or last menu item
+- **Right & Left Arrow**: When focused on a menu item with a submenu, opens the submenu and moves
+  focus to the first item in the submenu or closes the submenu and returns focus to the parent menu
+  item
+
+### Screen Reader Experience
+
+- The menu button will be announced with its label text followed by the button role, a notification
+  that it has a popup menu, and the current state of the menu (For example: "Actions, button, menu
+  popup, collapsed")
+- **Opening the Menu:** When the menu button is activated, screen readers will announce the menu
+  opening, the number of menu items available, and the currently focused item (For example:
+  "Actions, menu, First Action, menu item, 1 of 4")
+- **Navigating Menu Items:** As focus moves between menu items, screen readers will announce the
+  item name and its position in the list (For example: "Second Action, menu item, 2 of 4")
+- **Menu Items with Submenus:** When focused on a menu item that has a submenu, screen readers will
+  announce that it has a submenu and provide the expanded/collapsed state (For example: "More
+  Actions, menu item, has submenu, collapsed, 3 of 4")
 
 ## Component API
 
