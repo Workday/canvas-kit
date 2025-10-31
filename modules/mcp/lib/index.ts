@@ -3,7 +3,7 @@ import * as path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
 import packageJson from '../package.json';
-import fileNames from '../lib/config.json';
+import fileNames from './config.json';
 import {McpServer} from '@modelcontextprotocol/sdk/server/mcp.js';
 
 const __filename = fileURLToPath(import.meta.url);
