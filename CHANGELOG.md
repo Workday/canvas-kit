@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.1.3](https://github.com/Workday/canvas-kit/releases/tag/v14.1.3) (2025-11-03)
+
+### Documentation
+
+- docs: Remove theme object from readme ([#3580](https://github.com/Workday/canvas-kit/pull/3580)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v14.1.2](https://github.com/Workday/canvas-kit/releases/tag/v14.1.2) (2025-11-03)
 
 ### Documentation
