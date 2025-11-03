@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-mcp",
-  "version": "13.2.40",
+  "version": "13.2.41",
   "description": "MCP package for Canvas Kit",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -48,8 +48,8 @@
   "devDependencies": {
     "@types/node": "^14.0.0",
     "esbuild": "^0.25.11",
-    "rimraf": "^5.0.0",
     "mkdirp": "^1.0.3",
+    "rimraf": "^5.0.0",
     "tsx": "^4.7.0",
     "typescript": "5.0"
   }
