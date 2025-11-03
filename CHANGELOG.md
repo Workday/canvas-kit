@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.1.1](https://github.com/Workday/canvas-kit/releases/tag/v14.1.1) (2025-11-03)
+
+### Utilities
+
+- chore: Add MCP package ([#3576](https://github.com/Workday/canvas-kit/pull/3576)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@vibdev](https://github.com/vibdev), [@alanbsmith](https://github.com/alanbsmith))
+  Our MCP server provides resources to help you upgrade Canvas Kit.
+
+
+## [v13.2.41](https://github.com/Workday/canvas-kit/releases/tag/v13.2.41) (2025-11-03)
+
+### Utilities
+
+- chore: Add MCP package ([#3576](https://github.com/Workday/canvas-kit/pull/3576)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@vibdev](https://github.com/vibdev), [@alanbsmith](https://github.com/alanbsmith))
+  Our MCP server provides resources to help you upgrade Canvas Kit.
 ## [v14.1.0](https://github.com/Workday/canvas-kit/releases/tag/v14.1.0) (2025-10-29)
 
 
