@@ -6,6 +6,8 @@ import {Link as LinkExample} from './examples/Hyperlink';
 import {LinkInverse as LinkInverseExample} from './examples/HyperlinkInverse';
 import {ExternalLink as ExternalLinkExample} from './examples/ExternalHyperlink';
 import {ExternalLinkInverse as ExternalLinkInverseExample} from './examples/ExternalHyperlinkInverse';
+import {StandaloneLink as StandaloneLinkExample} from './examples/StandaloneHyperlink';
+import {InBodyText as InBodyTextExample} from './examples/HyperlinkInBodyText';
 
 export default {
   title: 'Components/Hyperlink',
@@ -28,4 +30,11 @@ export const ExternalLink: StoryObj = {
 };
 export const ExternalLinkInverse: StoryObj = {
   render: ExternalLinkInverseExample,
+};
+
+export const StandaloneLink: StoryObj = {
+  render: StandaloneLinkExample,
+};
+export const InBodyText: StoryObj = {
+  render: InBodyTextExample,
 };

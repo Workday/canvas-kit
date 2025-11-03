@@ -147,6 +147,7 @@ export const PopupRTL = {
     return (
       <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
         <Popup model={model}>
+          <Popup.Target style={{display: 'none'}}></Popup.Target>
           <Popup.Popper>
             <Popup.Card style={{animation: 'none'}} width={300}>
               <Popup.CloseIcon aria-label="" />

@@ -4,7 +4,7 @@ import mdxDoc from './Checkbox.mdx';
 
 import {Checkbox} from '@workday/canvas-kit-react/checkbox';
 
-import {Alert as AlertExample} from './examples/Alert';
+import {Caution as CautionExample} from './examples/Caution';
 import {Basic as BasicExample} from './examples/Basic';
 import {Inverse as InverseExample} from './examples/Inverse';
 import {Disabled as DisabledExample} from './examples/Disabled';
@@ -27,8 +27,8 @@ export default {
 
 type Story = StoryObj<typeof Checkbox>;
 
-export const Alert: Story = {
-  render: AlertExample,
+export const Caution: Story = {
+  render: CautionExample,
 };
 export const Basic: Story = {
   render: BasicExample,

@@ -11,10 +11,19 @@ export interface ButtonLabelIconProps extends Partial<SystemIconProps> {
    */
   size?: ButtonSizes;
   /**
-   * If set to `true`, transform the icon's x-axis to mirror the graphic
+   * If set to `true`, transform the icon's x-axis to mirror the graphic. Use this if you want to
+   * always mirror the icon regardless of the content direction. If the icon should mirror only when
+   * in an right-to-left language, use `shouldMirrorIconInRTL` instead.
    * @default false
    */
   shouldMirrorIcon?: boolean;
+  /**
+   * If set to `true`, transform the icon's x-axis to mirror the graphic when the content direction
+   * is `rtl`. Icons don't have enough context to know if they should be mirrored in all cases.
+   * Setting this to `true` indicates the icon should be mirrored in right-to-left languages.
+   * @default false
+   */
+  shouldMirrorIconInRTL?: boolean;
 }
 
 const iconSizes: Record<ButtonSizes, number> = {
@@ -26,7 +35,13 @@ const iconSizes: Record<ButtonSizes, number> = {
 
 export const ButtonLabelIcon = createComponent('span')({
   Component: (
-    {icon, size = 'medium', shouldMirrorIcon = false, ...elemProps}: ButtonLabelIconProps,
+    {
+      icon,
+      size = 'medium',
+      shouldMirrorIcon = false,
+      shouldMirrorIconInRTL = false,
+      ...elemProps
+    }: ButtonLabelIconProps,
     ref,
     Element
   ) => {
@@ -38,12 +53,15 @@ export const ButtonLabelIcon = createComponent('span')({
 
     return (
       <SystemIcon
+        ref={ref}
+        as={Element}
         size={iconSize}
         icon={icon}
-        shouldMirror={shouldMirrorIcon}
         width={px2rem(iconSize)}
         height={px2rem(iconSize)}
         display="inline-block"
+        shouldMirror={shouldMirrorIcon}
+        shouldMirrorInRTL={shouldMirrorIconInRTL}
         {...elemProps}
       />
     );
