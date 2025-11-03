@@ -1,49 +1,59 @@
 import {buildStyleFns, StyleFnConfig} from '../buildStyleFns';
 import {SystemPropValues} from '../systemProps';
 
-/** style props to set CSS border color properties */
+/** style props to set CSS border color properties
+ * @deprecated
+ */
 export type BorderColorStyleProps = {
   /**
    * - sets [CSS border-color property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-color)
    * - system tokens: `color`
+   * @deprecated Use `cs` prop with `system.color.border.*` tokens
    */
   borderColor?: SystemPropValues['color'];
   /**
    * - sets [CSS border-top-color property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-color)
    * - system tokens: `color`
+   * @deprecated Use `cs` prop with `system.color.border.*` tokens
    */
   borderTopColor?: SystemPropValues['color'];
   /**
    * - sets [CSS border-right-color property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-color)
    * - no bidirectional support
    * - system tokens: `color`
+   * @deprecated Use `cs` prop with `system.color.border.*` tokens
    */
   borderRightColor?: SystemPropValues['color'];
   /**
    * - sets [CSS border-bottom-color property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-color)
    * - system tokens: `color`
+   * @deprecated Use `cs` prop with `system.color.border.*` tokens
    */
   borderBottomColor?: SystemPropValues['color'];
   /**
    * - sets [CSS border-left-color property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-color)
    * - no bidirectional support
    * - system tokens: `color`
+   * @deprecated Use `cs` prop with `system.color.border.*` tokens
    */
   borderLeftColor?: SystemPropValues['color'];
   /**
    * - sets [CSS border-inline-start-color property ](https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start-color)
    * - bidirectional support
    * - system tokens: `color`
+   * @deprecated Use `cs` prop with `system.color.border.*` tokens
    */
   borderInlineStartColor?: SystemPropValues['color'];
   /**
    * - sets [CSS border-inline-end-color property ](https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end-color)
    * - bidirectional support
    * - system tokens: `color`
+   * @deprecated Use `cs` prop with `system.color.border.*` tokens
    */
   borderInlineEndColor?: SystemPropValues['color'];
 };
 
+/** @deprecated */
 export const borderColorStyleFnConfigs: StyleFnConfig[] = [
   {
     name: 'borderColor',
@@ -82,4 +92,5 @@ export const borderColorStyleFnConfigs: StyleFnConfig[] = [
   },
 ];
 
+/** @deprecated */
 export const borderColorFns = buildStyleFns(borderColorStyleFnConfigs);
