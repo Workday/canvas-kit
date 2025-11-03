@@ -14,7 +14,7 @@ Our MCP server provides resources to help you upgrade Canvas Kit.
 
 ---
 
-## Not running cursor?
+## Not Running Cursor?
 
 You will need to check how to install MCP servers, but the config will look something like:
 
@@ -43,7 +43,7 @@ Canvas Kit MCP is has two exports.
 `src/index.js` provides low level module exports. You can use these extend the sever or host it
 using other transports.
 
-### To test locally
+### Testing Locally
 
 #### MCP Inspector
 
