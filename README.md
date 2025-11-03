@@ -27,9 +27,9 @@ implement user experiences consistent with
 
 The following are supported versions of dependencies.
 
-* React:  >=16.8 < 17
-* Typescript: >=5.0 (optional)
-* Emotion: ^11.7.0
+- React: >=16.8 < 17
+- Typescript: >=5.0 (optional)
+- Emotion: ^11.7.0
 
 **Installation**
 
@@ -95,16 +95,8 @@ import {
 } from '@workday/canvas-kit-react/common';
 
 export const App = () => {
-  // useTheme is filling in the Canvas theme object if any keys are missing
-  const canvasTheme: PartialEmotionCanvasTheme = useTheme({
-    canvas: {
-      // Switch to `ContentDirection.RTL` to change direction
-      direction: ContentDirection.LTR,
-    },
-  });
-
   return (
-    <CanvasProvider theme={canvasTheme}>
+    <CanvasProvider>
       <>
         <main>
           <p>Get Started With Canvas Kit</p>
