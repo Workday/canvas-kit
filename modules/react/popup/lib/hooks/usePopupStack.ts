@@ -2,7 +2,6 @@ import React from 'react';
 
 import {PopupStack} from '@workday/canvas-kit-popup-stack';
 import {useLocalRef, isElementRTL} from '@workday/canvas-kit-react/common';
-import {ThemeContext, Theme} from '@emotion/react';
 
 /**
  * **Note:** If you're using {@link Popper}, you do not need to use this hook directly.
