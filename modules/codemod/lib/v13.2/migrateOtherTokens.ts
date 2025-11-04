@@ -52,7 +52,7 @@ const transform: Transform = (file, api) => {
       const isCanvasKitStyling =
         importDeclaration[name] === 'createStyles' || importDeclaration[name] === 'createStencil';
 
-      if (stylesDeclaration.type === 'ObjectExpression') {
+      if (stylesDeclaration?.type === 'ObjectExpression') {
         const transformProperty = (property: any): any => {
           if (
             property.type === 'ObjectProperty' &&

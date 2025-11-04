@@ -32,8 +32,6 @@ export const filterOutImports = (
     return true;
   });
 
-  console.log(nodePath.value.specifiers?.length);
-
   if (!nodePath.value.specifiers?.length) {
     nodePath.prune();
   }
