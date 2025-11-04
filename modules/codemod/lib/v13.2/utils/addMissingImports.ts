@@ -40,8 +40,8 @@ export const addMissingImports = ({j, root}: any, {importPath, specifiers, local
         );
 
         existingImport.specifiers.sort((a: any, b: any) => {
-          const aName = (a.imported && a.imported.name ? a.imported.name.toString() : '') || '';
-          const bName = (b.imported && b.imported.name ? b.imported.name.toString() : '') || '';
+          const aName = (a.imported && a.imported.name ? a.imported.name.toString() : '');
+          const bName = (b.imported && b.imported.name ? b.imported.name.toString() : '');
           return aName.localeCompare(bName);
         });
       }
