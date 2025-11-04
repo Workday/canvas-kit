@@ -211,7 +211,7 @@ export const systemColors = {
     licorice400: 'system.color.fg.muted.strong',
     licorice500: 'system.color.fg.muted.stronger',
   },
-  'border,borderColor,borderTop,borderTopColor,borderRight,borderRightColor,borderBottom,borderBottomColor,borderLeft,borderLeftColor,borderInlineColor,borderBlockColor,borderInlineStart,borderInlineStartColor,borderInlineEnd,borderInlineEndColor,borderBlockStart,borderBlockStartColor,borderBlockEnd,borderBlockEndColor,borderColorFocus,borderColorHover,borderColorActive':
+  'border,borderColor,borderTop,borderTopColor,borderRight,borderRightColor,borderBottom,borderBottomColor,borderLeft,borderLeftColor,borderInlineColor,borderBlockColor,borderInline,borderInlineStart,borderInlineStartColor,borderInlineEnd,borderInlineEndColor,borderBlockStart,borderBlockStartColor,borderBlockEnd,borderBlockEndColor,borderColorFocus,borderColorHover,borderColorActive':
     {
       blackPepper400: 'system.color.border.contrast.default',
       blackPepper500: 'system.color.border.contrast.strong',
