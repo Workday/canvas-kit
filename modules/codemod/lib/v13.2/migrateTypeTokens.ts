@@ -19,7 +19,7 @@ const transform: Transform = (file, api) => {
       source: {value: (value: string) => canvasImportSources.includes(value)},
     })
     .forEach(nodePath => {
-      importDeclaration = {...importDeclaration, ...filterOutImports(nodePath)};
+      importDeclaration = {...importDeclaration, ...filterOutImports(nodePath, 'type')};
     });
 
   if (!Object.values(importDeclaration).includes('type')) {

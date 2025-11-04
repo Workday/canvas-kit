@@ -159,6 +159,21 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
       expectTransform(input, expected);
     });
 
+    it('should convert color tokens from canvas-colors-web to base tokens', () => {
+      const input = stripIndent`
+          import { colors } from "@workday/canvas-colors-web";
+          const color = colors.blueberry400;
+        `;
+
+      const expected = stripIndent`
+          import { base } from "@workday/canvas-tokens-web";
+          import { cssVar } from "@workday/canvas-kit-styling";
+          const color = cssVar(base.blueberry400);
+        `;
+
+      expectTransform(input, expected);
+    });
+
     it('should transform color tokens in css', () => {
       const input = stripIndent`
           import { colors } from "@workday/canvas-kit-react/tokens";

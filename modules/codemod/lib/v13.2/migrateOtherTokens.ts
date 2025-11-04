@@ -4,7 +4,11 @@ import {mapping, systemColors} from './mapping';
 
 type DeclarationType = {[key: string]: any};
 
-const canvasImportSources = ['@workday/canvas-kit-styling', '@workday/canvas-kit-react/tokens'];
+const canvasImportSources = [
+  '@workday/canvas-kit-styling',
+  '@workday/canvas-kit-react/tokens',
+  '@workday/canvas-space-web',
+];
 
 const transform: Transform = (file, api) => {
   const j = api.jscodeshift;
@@ -18,7 +22,10 @@ const transform: Transform = (file, api) => {
       source: {value: (value: string) => canvasImportSources.includes(value)},
     })
     .forEach(nodePath => {
-      importDeclaration = {...importDeclaration, ...filterOutImports(nodePath)};
+      importDeclaration = {
+        ...importDeclaration,
+        ...filterOutImports(nodePath, ['space', 'borderRadius']),
+      };
     });
 
   if (
