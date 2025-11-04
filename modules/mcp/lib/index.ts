@@ -57,6 +57,40 @@ In this release, we:
           uri: 'docs://upgrade-guides/13.0-UPGRADE-GUIDE',
           contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
         };
+      case 'llm-txt/llm-token-migration-14.txt':
+        return {
+          title: 'Canvas Kit Token Migration Guide',
+          description: `# Canvas Kit Token Migration Guide
+Guide for migrating from @workday/canvas-kit-react/tokens to @workday/canvas-tokens-web.
+This migration enables better theming capabilities, improved performance, and a more standardized approach to styling.`,
+          mimeType: 'text/plain',
+          uri: 'docs://llm-txt/llm-token-migration-14',
+          contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
+        };
+      case 'llm-txt/llm-style-props-migration.txt':
+        return {
+          title: 'Canvas Kit Style Props Migration Guide',
+          description: `# Canvas Kit Style Props Migration Guide
+Guide for migrating from Emotion's style props to @workday/canvas-kit-styling.
+This migration improves performance, consistency, and maintainability by moving away from runtime styling to static CSS compilation.`,
+          mimeType: 'text/plain',
+          uri: 'docs://llm-txt/llm-style-props-migration',
+          contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
+        };
+      case 'upgrade-guides/14.0-UPGRADE-GUIDE.md':
+        return {
+          title: 'Canvas Kit 14.0 Upgrade Guide',
+          description: `# Canvas Kit 14.0 Upgrade Guide
+This guide contains an overview of the changes in Canvas Kit v14.
+
+In this release, we:
+- introduced Workday's new brand direction with a new color palette
+- made styling updates to our components
+- improved token system and theming capabilities`,
+          mimeType: 'text/markdown',
+          uri: 'docs://upgrade-guides/14.0-UPGRADE-GUIDE',
+          contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
+        };
       default:
         throw new Error(`${fileName} is not a valid resource`);
     }

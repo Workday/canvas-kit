@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.1.4](https://github.com/Workday/canvas-kit/releases/tag/v14.1.4) (2025-11-03)
+
+### Infrastructure
+
+- fix: Remove upgrade guide commit from build ([#3581](https://github.com/Workday/canvas-kit/pull/3581)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v14.1.3](https://github.com/Workday/canvas-kit/releases/tag/v14.1.3) (2025-11-03)
+
+### Documentation
+
+- docs: Remove theme object from readme ([#3580](https://github.com/Workday/canvas-kit/pull/3580)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v14.1.2](https://github.com/Workday/canvas-kit/releases/tag/v14.1.2) (2025-11-03)
+
+### Documentation
+
+- docs: Add v14 upgrade guide md file ([#3567](https://github.com/Workday/canvas-kit/pull/3567)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@Copilot](https://github.com/Copilot))
+
+### MCP
+
+- fix: Add v14 upgrade guide to mcp ([#3578](https://github.com/Workday/canvas-kit/pull/3578)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v14.1.1](https://github.com/Workday/canvas-kit/releases/tag/v14.1.1) (2025-11-03)
 
 ### Utilities
