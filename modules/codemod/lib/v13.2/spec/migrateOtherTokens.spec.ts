@@ -62,23 +62,23 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
 
     it('should convert space tokens in css object', () => {
       const input = stripIndent`
-          import { space } from "@workday/canvas-kit-react/tokens";
+        import { space } from "@workday/canvas-kit-react/tokens";
 
-          const styles = css({
-            margin: space.m,
-            padding: \`\${space.m} \${space.l}\`,
-          });
-        `;
+        const styles = css({
+          margin: space.m,
+          padding: \`\${space.m} \${space.l}\`,
+        });
+      `;
 
       const expected = stripIndent`
-          import { system } from "@workday/canvas-tokens-web";
-          import { cssVar } from "@workday/canvas-kit-styling";
+        import { cssVar } from "@workday/canvas-kit-styling";
+        import { system } from "@workday/canvas-tokens-web";
 
-          const styles = css({
-            margin: cssVar(system.space.x6),
-            padding: \`\${cssVar(system.space.x6)} \${cssVar(system.space.x8)}\`,
-          });
-        `;
+        const styles = css({
+          margin: cssVar(system.space.x6),
+          padding: \`\${cssVar(system.space.x6)} \${cssVar(system.space.x8)}\`,
+        });
+      `;
 
       expectTransform(input, expected);
     });

@@ -228,7 +228,7 @@ const transform: Transform = (file, api) => {
         }
       }
 
-      return nodePath;
+      return nodePath.value;
     });
 
   return root.toSource();

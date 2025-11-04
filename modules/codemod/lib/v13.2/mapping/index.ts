@@ -88,6 +88,63 @@ export const mapping = {
     type: 'base',
     name: 'colors',
   },
+  commonColors: {
+    type: 'system',
+    name: 'commonColors',
+    keys: {
+      background: 'system.color.bg.default',
+      backgroundAlt: 'system.color.bg.alt.default',
+      focusOutline: 'system.color.border.primary.default',
+      focusBackground: 'system.color.bg.primary.default',
+      hoverBackground: 'system.color.bg.alt.strong',
+      divider: 'system.color.border.divider',
+    },
+  },
+  inputColors: {
+    type: 'system',
+    name: 'inputColors',
+    keys: {
+      background: 'system.color.bg.default',
+      border: 'system.color.border.input.default',
+      placeholder: 'system.color.fg.muted.default',
+      text: 'system.color.fg.default',
+      icon: 'system.color.fg.muted.soft',
+      iconHover: 'system.color.fg.muted.stronger',
+      selectionControlFill: 'system.color.bg.primary.default',
+      hoverBorder: 'system.color.border.input.strong',
+      focusBorder: 'system.color.border.primary.default',
+      disabled: {
+        background: 'system.color.bg.alt.softer',
+        border: 'system.color.border.input.strong',
+        text: 'system.color.fg.disabled',
+        icon: 'system.color.fg.disabled',
+      },
+      error: {
+        border: 'system.color.border.critical.default',
+        message: 'system.color.fg.critical.default',
+        icon: 'system.color.fg.critical.default',
+      },
+      alert: {
+        border: 'system.color.border.caution.default',
+        message: 'system.color.fg.caution.default',
+        icon: 'system.color.fg.caution.default',
+      },
+    },
+  },
+  typeColors: {
+    type: 'system',
+    name: 'typeColors',
+    keys: {
+      body: 'system.color.fg.default',
+      heading: 'system.color.fg.strong',
+      hint: 'system.color.fg.muted.soft',
+      inverse: 'system.color.fg.inverse',
+      label: 'system.color.fg.default',
+      link: 'system.color.fg.primary.default',
+      selectHighlight: 'system.color.fg.primary.default',
+      selectHighlightInverse: 'system.color.fg.inverse',
+    },
+  },
   borderRadius: {
     name: 'shape',
     type: 'system',
@@ -154,7 +211,7 @@ export const systemColors = {
     licorice400: 'system.color.fg.muted.strong',
     licorice500: 'system.color.fg.muted.stronger',
   },
-  'border,borderColor,borderTopColor,borderRightColor,borderBottomColor,borderLeftColor,borderInlineColor,borderBlockColor,borderInlineStartColor,borderInlineEndColor,borderBlockStartColor,borderBlockEndColor,borderColorFocus,borderColorHover,borderColorActive':
+  'border,borderColor,borderTop,borderTopColor,borderRight,borderRightColor,borderBottom,borderBottomColor,borderLeft,borderLeftColor,borderInlineColor,borderBlockColor,borderInlineStart,borderInlineStartColor,borderInlineEnd,borderInlineEndColor,borderBlockStart,borderBlockStartColor,borderBlockEnd,borderBlockEndColor,borderColorFocus,borderColorHover,borderColorActive':
     {
       blackPepper400: 'system.color.border.contrast.default',
       blackPepper500: 'system.color.border.contrast.strong',
