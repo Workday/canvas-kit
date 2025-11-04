@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.42](https://github.com/Workday/canvas-kit/releases/tag/v13.2.42) (2025-11-04)
+
+### Codemods
+
+- chore: Update v13.2 codemod to correctly transform tokens ([#3583](https://github.com/Workday/canvas-kit/pull/3583)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
 ## [v13.2.41](https://github.com/Workday/canvas-kit/releases/tag/v13.2.41) (2025-11-03)
 
 ### Utilities
