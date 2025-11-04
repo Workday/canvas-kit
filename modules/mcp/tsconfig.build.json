@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "exclude": ["node_modules", "ts-tmp", "dist", "spec", "build"],
+  "compilerOptions": {
+    "declaration": true,
+    "outDir": "dist",
+    "noEmit": false,
+    "types": ["node"]
+  }
+}
