@@ -82,7 +82,7 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
 
     it('should not convert space tokens if variables are used', () => {
       const input = stripIndent`
-          import { space } from "@workday/canvas-kit-react/tokens";
+        import { space } from "@workday/canvas-kit-react/tokens";
 
           const size = 'm';
 
