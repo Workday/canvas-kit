@@ -2,6 +2,7 @@ import {Identifier, Transform} from 'jscodeshift';
 import {
   addMissingImports,
   filterOutImports,
+  getImports,
   transformObjectPropertyRecursively,
   varToMemberExpression,
 } from './utils';
@@ -27,7 +28,7 @@ const transform: Transform = (file, api) => {
       source: {value: (value: string) => canvasImportSources.includes(value)},
     })
     .forEach(nodePath => {
-      importDeclaration = {...importDeclaration, ...filterOutImports(nodePath, 'colors')};
+      importDeclaration = {...importDeclaration, ...getImports(nodePath)};
     });
 
   if (!Object.values(importDeclaration).includes('colors')) {
@@ -170,6 +171,14 @@ const transform: Transform = (file, api) => {
       }
 
       return nodePath.value;
+    });
+
+  root
+    .find(j.ImportDeclaration, {
+      source: {value: (value: string) => canvasImportSources.includes(value)},
+    })
+    .forEach(nodePath => {
+      filterOutImports({root, j}, nodePath, 'colors');
     });
 
   return root.toSource();

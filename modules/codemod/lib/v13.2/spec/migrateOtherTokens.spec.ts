@@ -14,8 +14,8 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
         `;
 
       const expected = stripIndent`
-          import { cssVar } from "@workday/canvas-kit-styling";
           import { system } from "@workday/canvas-tokens-web";
+          import { cssVar } from "@workday/canvas-kit-styling";
 
           const radius = cssVar(system.shape.x1);
         `;
@@ -34,6 +34,8 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
         `;
 
       const expected = stripIndent`
+          import { borderRadius } from "@workday/canvas-kit-react/tokens";
+
           const propertyName = 'borderRadius';
           const size = 'm';
 
@@ -62,8 +64,8 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
         `;
 
       const expected = stripIndent`
-          import { cssVar } from "@workday/canvas-kit-styling";
           import { system } from "@workday/canvas-tokens-web";
+          import { cssVar } from "@workday/canvas-kit-styling";
 
           const spacingZero = cssVar(system.space.zero);
           const spacingXxxs = cssVar(system.space.x1);
@@ -91,8 +93,10 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
         `;
 
       const expected = stripIndent`
-          import { cssVar } from "@workday/canvas-kit-styling";
+          import { space } from "@workday/canvas-kit-react/tokens";
+
           import { system } from "@workday/canvas-tokens-web";
+          import { cssVar } from "@workday/canvas-kit-styling";
 
           const size = 'm';
 
@@ -114,8 +118,8 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
       `;
 
       const expected = stripIndent`
-        import { cssVar } from "@workday/canvas-kit-styling";
         import { system } from "@workday/canvas-tokens-web";
+        import { cssVar } from "@workday/canvas-kit-styling";
 
         const styles = css({
           margin: cssVar(system.space.x6),
@@ -146,6 +150,7 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
         import { breakpoints } from "./breakpoints";
         import { system } from "@workday/canvas-tokens-web";
         import { cssVar } from "@workday/canvas-kit-styling";
+        import { space } from "@workday/canvas-kit-react/tokens";
 
         const size = 'm';
 
@@ -187,8 +192,8 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
     `;
 
       const expected = stripIndent`
-      import { cssVar } from "@workday/canvas-kit-styling";
       import { system } from "@workday/canvas-tokens-web";
+      import { cssVar } from "@workday/canvas-kit-styling";
 
       <Popup model={model}>
         <Popup.Popper>
@@ -222,8 +227,8 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
         `;
 
       const expected = stripIndent`
-          import { cssVar } from "@workday/canvas-kit-styling";
           import { system } from "@workday/canvas-tokens-web";
+          import { cssVar } from "@workday/canvas-kit-styling";
 
           const spacingZero = cssVar(system.space.zero);
         `;
@@ -239,8 +244,8 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
         `;
 
       const expected = stripIndent`
-          import { cssVar } from "@workday/canvas-kit-styling";
           import { system } from "@workday/canvas-tokens-web";
+          import { cssVar } from "@workday/canvas-kit-styling";
 
           const spacingZero = cssVar(system.space.zero);
         `;
@@ -256,8 +261,8 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
         `;
 
       const expected = stripIndent`
-          import { cssVar } from "@workday/canvas-kit-styling";
           import { system } from "@workday/canvas-tokens-web";
+          import { cssVar } from "@workday/canvas-kit-styling";
 
           const spacingZero = cssVar(system.space.zero);
         `;

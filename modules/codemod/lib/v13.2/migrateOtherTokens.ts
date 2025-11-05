@@ -1,5 +1,10 @@
 import {Identifier, Transform} from 'jscodeshift';
-import {addMissingImports, filterOutImports, transformObjectPropertyRecursively} from './utils';
+import {
+  addMissingImports,
+  filterOutImports,
+  getImports,
+  transformObjectPropertyRecursively,
+} from './utils';
 import {mapping} from './mapping';
 
 type DeclarationType = {[key: string]: any};
@@ -26,7 +31,7 @@ const transform: Transform = (file, api) => {
     .forEach(nodePath => {
       importDeclaration = {
         ...importDeclaration,
-        ...filterOutImports(nodePath, tokens),
+        ...getImports(nodePath),
       };
     });
 
@@ -113,6 +118,14 @@ const transform: Transform = (file, api) => {
       }
 
       return nodePath.value;
+    });
+
+  root
+    .find(j.ImportDeclaration, {
+      source: {value: (value: string) => canvasImportSources.includes(value)},
+    })
+    .forEach(nodePath => {
+      filterOutImports({root, j}, nodePath, tokens);
     });
 
   return root.toSource();

@@ -66,8 +66,8 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
         `;
 
       const expected = stripIndent`
-          import { base } from "@workday/canvas-tokens-web";
           import { cssVar } from "@workday/canvas-kit-styling";
+          import { base } from "@workday/canvas-tokens-web";
 
           const color = cssVar(base.blueberry400);
         `;
@@ -84,6 +84,8 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
         `;
 
       const expected = stripIndent`
+          import { colors } from "@workday/canvas-kit-react/tokens";
+
           const propertyName = 'blueberry400';
           const color = colors[propertyName];
         `;
@@ -100,8 +102,8 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
         `;
 
       const expected = stripIndent`
-          import { base } from "@workday/canvas-tokens-web";
           import { cssVar } from "@workday/canvas-kit-styling";
+          import { base } from "@workday/canvas-tokens-web";
 
           const color = cssVar(base.blueberry400);
           const color2 = cssVar(base.pomegranate600);
@@ -182,8 +184,8 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
         `;
 
       const expected = stripIndent`
-          import { base } from "@workday/canvas-tokens-web";
           import { cssVar } from "@workday/canvas-kit-styling";
+          import { base } from "@workday/canvas-tokens-web";
           const color = cssVar(base.blueberry400);
         `;
 
@@ -207,8 +209,8 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
         `;
 
       const expected = stripIndent`
-          import { cssVar } from "@workday/canvas-kit-styling";
           import { system } from "@workday/canvas-tokens-web";
+          import { cssVar } from "@workday/canvas-kit-styling";
 
           const styles = css({
             background: cssVar(system.color.bg.default),
@@ -281,8 +283,8 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
         `;
 
       const expected = stripIndent`
-          import { cssVar } from "@workday/canvas-kit-styling";
           import { system } from "@workday/canvas-tokens-web";
+          import { cssVar } from "@workday/canvas-kit-styling";
 
           const styles = {
             color: toggled ? cssVar(system.color.fg.primary.default) : cssVar(system.color.fg.default),

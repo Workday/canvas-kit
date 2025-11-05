@@ -14,8 +14,8 @@ describe('Typography: from /tokens to v2', () => {
       `;
 
     const expected = stripIndent`
-        import { system } from "@workday/canvas-tokens-web";
         import { cssVar } from "@workday/canvas-kit-styling";
+        import { system } from "@workday/canvas-tokens-web";
 
         const fontFamily = cssVar(system.fontFamily.default);
         const fontFamilyMono = cssVar(system.fontFamily.mono);
@@ -32,8 +32,8 @@ describe('Typography: from /tokens to v2', () => {
       `;
 
     const expected = stripIndent`
-        import { system } from "@workday/canvas-tokens-web";
         import { cssVar } from "@workday/canvas-kit-styling";
+        import { system } from "@workday/canvas-tokens-web";
 
         const fontSize = cssVar(system.fontSize.subtext.small);
       `;
@@ -49,8 +49,8 @@ describe('Typography: from /tokens to v2', () => {
       `;
 
     const expected = stripIndent`
-        import { system } from "@workday/canvas-tokens-web";
         import { cssVar } from "@workday/canvas-kit-styling";
+        import { system } from "@workday/canvas-tokens-web";
 
         const fontWeight = cssVar(system.fontWeight.regular);
       `;
@@ -70,8 +70,10 @@ describe('Typography: from /tokens to v2', () => {
       `;
 
     const expected = stripIndent`
-        import { system } from "@workday/canvas-tokens-web";
+        import { type } from "@workday/canvas-kit-react/tokens";
+
         import { cssVar } from "@workday/canvas-kit-styling";
+        import { system } from "@workday/canvas-tokens-web";
 
         const propertyName = 'fontWeights';
         const size = 'bold';
@@ -92,8 +94,8 @@ describe('Typography: from /tokens to v2', () => {
         `;
 
       const expected = stripIndent`
-          import { system } from "@workday/canvas-tokens-web";
           import { cssVar } from "@workday/canvas-kit-styling";
+          import { system } from "@workday/canvas-tokens-web";
           
           const styles = {
             fontFamily: cssVar(system.fontFamily.default),
@@ -115,8 +117,8 @@ describe('Typography: from /tokens to v2', () => {
         `;
 
       const expected = stripIndent`
-          import { system } from "@workday/canvas-tokens-web";
           import { cssVar } from "@workday/canvas-kit-styling";
+          import { system } from "@workday/canvas-tokens-web";
           
           const styles = {
             fontFamily: cssVar(system.fontFamily.default),
@@ -139,8 +141,8 @@ describe('Typography: from /tokens to v2', () => {
         `;
 
       const expected = stripIndent`
-          import { system } from "@workday/canvas-tokens-web";
           import { cssVar } from "@workday/canvas-kit-styling";
+          import { system } from "@workday/canvas-tokens-web";
 
           const color = cssVar(system.color.fg.default);
           const fontSize = cssVar(system.fontSize.subtext.small);
