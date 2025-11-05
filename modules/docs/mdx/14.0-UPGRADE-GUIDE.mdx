@@ -655,13 +655,9 @@ instead.
 
 ### Modals and Dialogs
 
-Prior to v14, the `usePopupStack` would grab the theme passed to the `CanvasProvider` and generate a
-`className` that would be added to Modals and Dialogs, forwarding the theme set at the `theme` prop
-level by the `CanvasProvider`. This would create a cascade barrier for any CSS variables defined at
-the root since the `className` had higher specificity.
+Previously, the `usePopupStack` hook created a CSS class name that was passed to our Popups. We attached those theme styles to that class name. This allowed the theme to be available in our Popups. But it also created a cascade barrier that blocked the global theme from being applied to our Popup components.
+Because we now use global CSS variables, we no longer need this class name to provide the global theme to Popups. But we have to remove this generated class name to allow the global theme to be applied to Popups.
 
-This has since been removed to ensure global theming works as intended, meaning CSS variables
-defined at the root level will cascade through to Modals and Dialogs.
 
 > **Important:** Passing a `theme` to the `CanvasProvider` **will not** theme components in Modals
 > and Dialogs. You can either pass a `className` or define CSS variables at the root.
