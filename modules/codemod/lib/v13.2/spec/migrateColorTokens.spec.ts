@@ -75,6 +75,22 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
       expectTransform(input, expected);
     });
 
+    it('should not convert color tokens if variables are used', () => {
+      const input = stripIndent`
+          import { colors } from "@workday/canvas-kit-react/tokens";
+
+          const propertyName = 'blueberry400';
+          const color = colors[propertyName];
+        `;
+
+      const expected = stripIndent`
+          const propertyName = 'blueberry400';
+          const color = colors[propertyName];
+        `;
+
+      expectTransform(input, expected);
+    });
+
     it('should convert color tokens to base tokens', () => {
       const input = stripIndent`
           import { colors } from "@workday/canvas-kit-react/tokens";
@@ -202,6 +218,51 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
               fill: props.isSelected ? cssVar(system.color.fg.primary.default) : cssVar(system.color.fg.inverse)
             }
           });
+        `;
+
+      expectTransform(input, expected);
+    });
+
+    it('should not transform objects only color tokens in css', () => {
+      const input = stripIndent`
+          import { breakpoints } from "./breakpoints";
+          import { colors } from "@workday/canvas-kit-react/tokens";
+
+          const styles = {
+            background: colors.frenchVanilla100,
+            color: colors.blueberry400,
+            border: \`1px solid \${colors.blueberry400}\`,
+            svg: {
+              fill: colors.blueberry400,
+            },
+            [breakpoints.s]: {
+              background: colors.soap200,
+            },
+            p: {
+              textAlign: 'center',
+            }
+          };
+        `;
+
+      const expected = stripIndent`
+          import { breakpoints } from "./breakpoints";
+          import { system } from "@workday/canvas-tokens-web";
+          import { cssVar } from "@workday/canvas-kit-styling";
+
+          const styles = {
+            background: cssVar(system.color.bg.default),
+            color: cssVar(system.color.fg.primary.default),
+            border: \`1px solid \${cssVar(system.color.border.primary.default)}\`,
+            svg: {
+              fill: cssVar(system.color.fg.primary.default)
+            },
+            [breakpoints.s]: {
+              background: cssVar(system.color.bg.alt.soft)
+            },
+            p: {
+              textAlign: 'center'
+            }
+          };
         `;
 
       expectTransform(input, expected);

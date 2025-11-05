@@ -25,6 +25,24 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
       expectTransform(input, expected);
     });
 
+    it('should not transform depth token to object with boxShadow property if variables are used', () => {
+      const input = stripIndent`
+          import { depth } from "@workday/canvas-kit-react/tokens";
+
+          const size = '1';
+
+          const newDepth = depth[size];
+        `;
+
+      const expected = stripIndent`
+          const size = '1';
+
+          const newDepth = depth[size];
+        `;
+
+      expectTransform(input, expected);
+    });
+
     it('should transform aliased depth token to object with boxShadow property', () => {
       const input = stripIndent`
           import { depth as canvasDepth } from "@workday/canvas-kit-react/tokens";
@@ -63,21 +81,30 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
 
     it('should transform depth token spread in css object', () => {
       const input = stripIndent`
+          import { breakpoints } from "./breakpoints";
           import { depth as canvasDepth } from "@workday/canvas-kit-react/tokens";
 
           const styles = css({
-            ...depth[1],
-            color: 'red'
+            ...depth[2],
+            color: 'red',
+            [breakpoints.s]: {
+              ...depth[1],
+            }
           });
         `;
 
       const expected = stripIndent`
-          import { system } from "@workday/canvas-tokens-web";
+          import { breakpoints } from "./breakpoints";
           import { cssVar } from "@workday/canvas-kit-styling";
+          import { system } from "@workday/canvas-tokens-web";
 
           const styles = css({
-            boxShadow: cssVar(system.depth[1]),
-            color: 'red'
+            boxShadow: cssVar(system.depth[2]),
+            color: 'red',
+          
+            [breakpoints.s]: {
+              boxShadow: cssVar(system.depth[1])
+            }
           });
         `;
 

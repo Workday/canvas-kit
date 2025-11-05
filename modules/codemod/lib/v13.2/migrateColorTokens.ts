@@ -5,7 +5,7 @@ import {
   transformObjectPropertyRecursively,
   varToMemberExpression,
 } from './utils';
-import {mapping} from './mapping';
+import {mapping, paletteNames} from './mapping';
 
 type DeclarationType = {[key: string]: any};
 
@@ -148,7 +148,11 @@ const transform: Transform = (file, api) => {
           }
         }
 
-        if (map?.type === 'base' && lowestProperty.type === 'Identifier') {
+        if (
+          map?.type === 'base' &&
+          lowestProperty.type === 'Identifier' &&
+          paletteNames.some(name => lowestProperty.name.includes(name))
+        ) {
           addMissingImports(
             {j, root},
             {importPath: '@workday/canvas-tokens-web', specifiers: ['base']}
