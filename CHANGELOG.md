@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.1.5](https://github.com/Workday/canvas-kit/releases/tag/v14.1.5) (2025-11-05)
+
+### Components
+
+- docs: Add Contextual Help examples ([#3573](https://github.com/Workday/canvas-kit/pull/3573)) ([@JaredMaione](https://github.com/JaredMaione))
+
+
 ## [v14.1.4](https://github.com/Workday/canvas-kit/releases/tag/v14.1.4) (2025-11-03)
 
 ### Infrastructure
