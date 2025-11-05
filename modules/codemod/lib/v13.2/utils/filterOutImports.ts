@@ -23,7 +23,8 @@ export const filterOutImports = (
       importName[localName] = importedName;
 
       return !(
-        type.includes(importedName as any) &&
+        ((typeof type === 'string' && importedName.toLowerCase().includes(type as any)) ||
+          type.includes(importedName as any)) &&
         typeof nodePath.value.source.value === 'string' &&
         canvasImportSources.includes(nodePath.value.source.value)
       );

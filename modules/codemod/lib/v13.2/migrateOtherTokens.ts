@@ -10,6 +10,8 @@ const canvasImportSources = [
   '@workday/canvas-space-web',
 ];
 
+const tokens = ['space', 'borderRadius'] as 'space' | 'borderRadius'[];
+
 const transform: Transform = (file, api) => {
   const j = api.jscodeshift;
   const root = j(file.source);
@@ -24,13 +26,11 @@ const transform: Transform = (file, api) => {
     .forEach(nodePath => {
       importDeclaration = {
         ...importDeclaration,
-        ...filterOutImports(nodePath, ['space', 'borderRadius']),
+        ...filterOutImports(nodePath, tokens),
       };
     });
 
-  if (
-    !Object.values(importDeclaration).some(value => value === 'space' || value === 'borderRadius')
-  ) {
+  if (!Object.values(importDeclaration).some(value => tokens.includes(value))) {
     return root.toSource();
   }
 
@@ -41,11 +41,6 @@ const transform: Transform = (file, api) => {
       },
     })
     .forEach(nodePath => {
-      addMissingImports(
-        {j, root},
-        {importPath: '@workday/canvas-tokens-web', specifiers: ['system']}
-      );
-
       const name = (nodePath.value.callee as Identifier).name;
       const stylesDeclaration = nodePath.value.arguments[0];
 
@@ -60,7 +55,7 @@ const transform: Transform = (file, api) => {
             property.value.type === 'MemberExpression' &&
             property.value.object.type === 'Identifier' &&
             property.value.property.type === 'Identifier' &&
-            importDeclaration[property.value.object.name] === 'colors'
+            tokens.includes(importDeclaration[property.value.object.name])
           ) {
             const key = property.key.name;
             const tokens = Object.entries(systemColors).find(([blockKey]) =>
@@ -77,6 +72,11 @@ const transform: Transform = (file, api) => {
                   {importPath: '@workday/canvas-kit-styling', specifiers: ['cssVar']}
                 );
               }
+
+              addMissingImports(
+                {j, root},
+                {importPath: '@workday/canvas-tokens-web', specifiers: ['system']}
+              );
 
               return j.objectProperty(
                 j.identifier(key),
@@ -96,7 +96,7 @@ const transform: Transform = (file, api) => {
                   expr.type === 'MemberExpression' &&
                   expr.object.type === 'Identifier' &&
                   expr.property.type === 'Identifier' &&
-                  importDeclaration[expr.object.name] === 'colors'
+                  tokens.includes(importDeclaration[expr.object.name])
                 ) {
                   const tokens = Object.entries(systemColors).find(([blockKey]) =>
                     blockKey.split(',').some(prop => prop === property.key.name)
@@ -108,6 +108,10 @@ const transform: Transform = (file, api) => {
                     addMissingImports(
                       {j, root},
                       {importPath: '@workday/canvas-kit-styling', specifiers: ['cssVar']}
+                    );
+                    addMissingImports(
+                      {j, root},
+                      {importPath: '@workday/canvas-tokens-web', specifiers: ['system']}
                     );
 
                     return j.callExpression(j.identifier('cssVar'), [
@@ -152,36 +156,40 @@ const transform: Transform = (file, api) => {
     .replaceWith(nodePath => {
       const mainWrapper = nodePath.value.object;
 
-      if (mainWrapper.type === 'Identifier' && importDeclaration[mainWrapper.name] !== 'type') {
-        const mainObject = mainWrapper;
-        const mainName = mainObject.name;
+      if (
+        mainWrapper.type === 'Identifier' &&
+        tokens.includes(importDeclaration[mainWrapper.name])
+      ) {
+        const mainName = mainWrapper.name;
         const lowestProperty = nodePath.value.property;
 
         const importedName = importDeclaration[mainName];
         const map = mapping[importedName as keyof typeof mapping];
-        if (importedName !== 'depth') {
-          if (map.type === 'system' && lowestProperty.type === 'Identifier') {
-            addMissingImports(
-              {j, root},
-              {importPath: '@workday/canvas-kit-styling', specifiers: ['cssVar']}
-            );
 
-            addMissingImports(
-              {j, root},
-              {importPath: '@workday/canvas-tokens-web', specifiers: ['system']}
-            );
+        if (
+          ['space', 'borderRadius'].includes(importedName) &&
+          map?.type === 'system' &&
+          lowestProperty.type === 'Identifier'
+        ) {
+          addMissingImports(
+            {j, root},
+            {importPath: '@workday/canvas-kit-styling', specifiers: ['cssVar']}
+          );
+          addMissingImports(
+            {j, root},
+            {importPath: '@workday/canvas-tokens-web', specifiers: ['system']}
+          );
 
-            return j.callExpression(j.identifier('cssVar'), [
-              j.memberExpression(
-                j.memberExpression(j.identifier(map.type), j.identifier(map.name)),
-                j.identifier(map.keys[lowestProperty.name as keyof typeof map.keys])
-              ),
-            ]);
-          }
+          return j.callExpression(j.identifier('cssVar'), [
+            j.memberExpression(
+              j.memberExpression(j.identifier(map.type), j.identifier(map.name)),
+              j.identifier(map.keys[lowestProperty.name as keyof typeof map.keys])
+            ),
+          ]);
         }
       }
 
-      return nodePath;
+      return nodePath.value;
     });
 
   return root.toSource();
