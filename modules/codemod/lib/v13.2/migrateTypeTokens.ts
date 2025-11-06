@@ -133,7 +133,7 @@ const transform: Transform = (file, api) => {
         }
       }
 
-      return nodePath;
+      return nodePath.value;
     });
 
   root
@@ -210,22 +210,24 @@ const transform: Transform = (file, api) => {
             const levels = values[innerKey as keyof typeof values];
 
             const lowestKey = lowestPropertyValue as keyof typeof levels;
-            const tokens = levels[lowestKey];
+            const tokens = levels?.[lowestKey];
 
-            const props = Object.entries(tokens).map(([key, value]) => {
-              addMissingImports(
-                {j, root},
-                {importPath: '@workday/canvas-kit-styling', specifiers: ['cssVar']}
-              );
+            if (tokens) {
+              const props = Object.entries(tokens).map(([key, value]) => {
+                addMissingImports(
+                  {j, root},
+                  {importPath: '@workday/canvas-kit-styling', specifiers: ['cssVar']}
+                );
 
-              return j.property(
-                'init',
-                j.identifier(key),
-                j.callExpression(j.identifier('cssVar'), [varToMemberExpression(j, value)])
-              );
-            });
+                return j.property(
+                  'init',
+                  j.identifier(key),
+                  j.callExpression(j.identifier('cssVar'), [varToMemberExpression(j, value)])
+                );
+              });
 
-            return j.objectExpression(props);
+              return j.objectExpression(props);
+            }
           }
         }
       }
