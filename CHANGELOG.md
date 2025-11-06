@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.44](https://github.com/Workday/canvas-kit/releases/tag/v13.2.44) (2025-11-06)
+
+### Codemods
+
+- fix: Fix issue with changing object props in token codemod ([#3593](https://github.com/Workday/canvas-kit/pull/3593)) ([@RayRedGoose](https://github.com/RayRedGoose), [@Copilot](https://github.com/Copilot))
+
+
+## [v13.2.43](https://github.com/Workday/canvas-kit/releases/tag/v13.2.43) (2025-11-05)
+
+### Codemods
+
+- chore: Add more color transforms to codemod ([#3585](https://github.com/Workday/canvas-kit/pull/3585)) ([@RayRedGoose](https://github.com/RayRedGoose), [@Copilot](https://github.com/Copilot))
+
+
 ## [v14.1.5](https://github.com/Workday/canvas-kit/releases/tag/v14.1.5) (2025-11-05)
 
 ### Components
@@ -10,6 +24,14 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - docs: Add Contextual Help examples ([#3573](https://github.com/Workday/canvas-kit/pull/3573)) ([@JaredMaione](https://github.com/JaredMaione))
 
 
+## [v13.2.42](https://github.com/Workday/canvas-kit/releases/tag/v13.2.42) (2025-11-04)
+
+### Codemods
+
+- chore: Update v13.2 codemod to correctly transform tokens ([#3583](https://github.com/Workday/canvas-kit/pull/3583)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v13.2.41](https://github.com/Workday/canvas-kit/releases/tag/v13.2.41) (2025-11-03)
 ## [v14.1.4](https://github.com/Workday/canvas-kit/releases/tag/v14.1.4) (2025-11-03)
 
 ### Infrastructure

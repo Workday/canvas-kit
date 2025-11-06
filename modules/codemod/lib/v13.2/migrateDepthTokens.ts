@@ -1,9 +1,13 @@
 import {Transform} from 'jscodeshift';
-import {addMissingImports, filterOutImports} from './utils';
+import {addMissingImports, filterOutImports, getImports} from './utils';
 
 type DeclarationType = {[key: string]: any};
 
-const canvasImportSources = ['@workday/canvas-kit-styling', '@workday/canvas-kit-react/tokens'];
+const canvasImportSources = [
+  '@workday/canvas-kit-styling',
+  '@workday/canvas-kit-react/tokens',
+  '@workday/canvas-depth-web',
+];
 
 const transform: Transform = (file, api) => {
   const j = api.jscodeshift;
@@ -17,7 +21,7 @@ const transform: Transform = (file, api) => {
       source: {value: (value: string) => canvasImportSources.includes(value)},
     })
     .forEach(nodePath => {
-      importDeclaration = {...importDeclaration, ...filterOutImports(nodePath)};
+      importDeclaration = {...importDeclaration, ...getImports(nodePath)};
     });
 
   if (!Object.values(importDeclaration).includes('depth')) {
@@ -30,7 +34,7 @@ const transform: Transform = (file, api) => {
         type: 'MemberExpression',
         object: {
           type: 'Identifier',
-          name: 'depth',
+          name: (name: string) => importDeclaration[name] === 'depth',
         },
         property: {
           type: 'NumericLiteral',
@@ -41,20 +45,21 @@ const transform: Transform = (file, api) => {
       const argument = nodePath.value.argument;
       if (argument.type === 'MemberExpression' && argument.property.type === 'NumericLiteral') {
         const depthValue = argument.property.value;
+        const isDepthNotZero = depthValue > 0;
 
         addMissingImports(
           {j, root},
           {importPath: '@workday/canvas-tokens-web', specifiers: ['system']}
         );
 
-        if (depthValue > 0) {
+        if (isDepthNotZero) {
           addMissingImports(
             {j, root},
             {importPath: '@workday/canvas-kit-styling', specifiers: ['cssVar']}
           );
         }
 
-        return depthValue > 0
+        return isDepthNotZero
           ? j.objectProperty(
               j.identifier('boxShadow'),
               j.callExpression(j.identifier('cssVar'), [
@@ -68,7 +73,7 @@ const transform: Transform = (file, api) => {
           : j.objectProperty(j.identifier('boxShadow'), j.literal('none'));
       }
 
-      return nodePath;
+      return nodePath.value;
     });
 
   root
@@ -110,7 +115,7 @@ const transform: Transform = (file, api) => {
             ]);
       }
 
-      return nodePath;
+      return nodePath.value;
     });
 
   root
@@ -165,7 +170,15 @@ const transform: Transform = (file, api) => {
         }
       }
 
-      return nodePath;
+      return nodePath.value;
+    });
+
+  root
+    .find(j.ImportDeclaration, {
+      source: {value: (value: string) => canvasImportSources.includes(value)},
+    })
+    .forEach(nodePath => {
+      filterOutImports({root, j}, nodePath, 'depth');
     });
 
   return root.toSource();
