@@ -40,7 +40,7 @@ visual reference of what's changed.**
   - [Expandable](#expandable)
   - [Hyperlink and External Hyperlink](#hyperlink-and-external-hyperlink)
   - [Loading Dots](#loading-dots)
-	- [Modals and Dialogs](#modals-and-dialogs)
+  - [Modals and Dialogs](#modals-and-dialogs)
   - [Pill (Preview)](#pill-preview)
   - [Search Form (Labs)](#search-form-labs-)
   - [Status Indicator (Preview)](#status-indicator-preview-)
@@ -683,14 +683,6 @@ Because we now use global CSS variables, we no longer need this class name to pr
   <Modal>//... rest of modal code</Modal>
 </CanvasProvider>
 ```
-
-Prior to v14, the `usePopupStack` would grab the theme passed to the `CanvasProvider` and generate a
-`className` that would be added to Modals and Dialogs, forwarding the theme set at the `theme` prop
-level by the `CanvasProvider`. This would create a cascade barrier for any CSS variables defined at
-the root since the `className` had higher specificity.
-
-This has since been removed to ensure global theming works as intended, meaning CSS variables
-defined at the root level will cascade through to Modals and Dialogs.
 ### Search Form (Labs) 🚨
 
 **PR:** [#3303](https://github.com/Workday/canvas-kit/pull/3303)

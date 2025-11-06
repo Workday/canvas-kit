@@ -172,8 +172,8 @@ const myTheme = createStyles({
   [brand.primary.base]: 'blue'
 })
 
-<CanvasProvider className={myTheme}>
-  <Modal>//... rest of modal code</Modal>
+<CanvasProvider>
+  <Modal><Modal.Overlay className={myTheme}><Modal.Card>//... rest of modal code</Modal.Card></Modal.Overlay></Modal>
 </CanvasProvider>
 ```
 
