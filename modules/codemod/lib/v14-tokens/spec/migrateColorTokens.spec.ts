@@ -1,6 +1,6 @@
 import {stripIndent} from 'common-tags';
 import {expectTransformFactory} from './expectTransformFactory';
-import transform from '../migrateColorTokens';
+import transform from '../index';
 
 const expectTransform = expectTransformFactory(transform);
 
@@ -101,8 +101,8 @@ describe('Canvas Kit Tokens > Canvas Tokens v3', () => {
         `;
 
       const expected = stripIndent`
-          import { base } from "@workday/canvas-tokens-web";
           import { cssVar } from "@workday/canvas-kit-styling";
+          import { base } from "@workday/canvas-tokens-web";
 
           const color = cssVar(base.blue600);
         `;
@@ -322,7 +322,7 @@ describe('Canvas Kit Tokens > Canvas Tokens v3', () => {
             background: cssVar(system.color.bg.default),
             color: cssVar(system.color.fg.primary.default),
             border: \`1px solid \${cssVar(system.color.border.primary.default)}\`,
-            borderInline: \`5px solid \${darken(system.color.border.primary.default)}\`,
+            borderInline: \`5px solid \${darken(cssVar(system.color.border.primary.default))}\`,
             svg: {
               fill: props.isSelected ? cssVar(system.color.fg.primary.default) : cssVar(system.color.fg.inverse)
             }
@@ -416,8 +416,8 @@ describe('Canvas Kit Tokens > Canvas Tokens v3', () => {
         `;
 
       const expected = stripIndent`
-          import { cssVar } from "@workday/canvas-kit-styling";
           import { system } from "@workday/canvas-tokens-web";
+          import { cssVar } from "@workday/canvas-kit-styling";
 
           const styles = {
             color: toggled ? cssVar(system.color.fg.primary.default) : cssVar(system.color.fg.default),
