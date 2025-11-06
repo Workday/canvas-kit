@@ -133,6 +133,7 @@ export const SelectOpenMenuStates = (selectProps: {
               <Select model={model}>
                 <FormField.Input as={Select.Input} {...props} id="contact-select" />
                 <Select.Popper>
+                  {/* We are only adding the custom theme via class name for testing purposes. Custom themes should be set on the :root element in CSS using CSS variables */}
                   <Select.Card maxHeight="200px" className={selectProps.className}>
                     {!!model.state.items.length && (
                       <Select.List>

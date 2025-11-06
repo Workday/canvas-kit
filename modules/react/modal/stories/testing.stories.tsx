@@ -226,6 +226,7 @@ export const CustomThemeModal = {
     return (
       <CanvasProvider>
         <Modal model={model}>
+          {/* We are only adding the custom theme via class name for testing purposes. Custom themes should be set on the :root element in CSS using CSS variables */}
           <Modal.Overlay style={{animation: 'none'}} className={customTheme}>
             <Modal.Card style={{animation: 'none'}}>
               <Modal.CloseIcon aria-label="Close" />
