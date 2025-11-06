@@ -127,14 +127,14 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
         `;
 
       const expected = stripIndent`
-          import { createStyles, cssVar } from "@workday/canvas-kit-styling";
+          import { createStyles } from "@workday/canvas-kit-styling";
           import { base, system } from "@workday/canvas-tokens-web";
 
           const styles = createStyles({
             background: system.color.bg.default,
             color: system.color.fg.primary.default,
             svg: {
-              fill: cssVar(base.pomegranate600)
+              fill: base.pomegranate600
             }
           });
       `;
