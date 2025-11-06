@@ -1,5 +1,4 @@
-import {MemberExpression} from 'jscodeshift';
-import {mapping, systemColors} from '../mapping';
+import {mapping, paletteNames, systemColors} from '../mapping';
 import {addMissingImports} from './addMissingImports';
 import {varToMemberExpression} from './varToMemberExpression';
 
@@ -24,6 +23,7 @@ export const transformObjectPropertyRecursively = (
     }
     return prop;
   };
+
   if (
     property.type === 'ObjectProperty' &&
     property.key.type === 'Identifier' &&
@@ -107,7 +107,33 @@ export const transformObjectPropertyRecursively = (
   if (property.type === 'ObjectProperty' && property.value.type === 'TemplateLiteral') {
     const templateLiteral = property.value;
     const transformedQuasis = templateLiteral.quasis.map((quasi: string) => quasi);
-    const transformedExpressions = templateLiteral.expressions.map((expr: MemberExpression) => {
+    const transformedExpressions = templateLiteral.expressions.map((expr: any) => {
+      if (expr.type === 'CallExpression') {
+        expr.arguments = expr.arguments.map((arg: any) => {
+          if (
+            arg.type === 'MemberExpression' &&
+            arg.object.type === 'Identifier' &&
+            arg.object.name === 'colors' &&
+            arg.property.type === 'Identifier'
+          ) {
+            const keyName = property.key.type === 'Identifier' ? property.key.name : null;
+            const tokens = keyName
+              ? Object.entries(systemColors).find(([blockKey]) =>
+                  blockKey.split(',').some(prop => prop === keyName)
+                )?.[1]
+              : {};
+            const colorToken = tokens?.[arg.property.name as keyof typeof tokens];
+
+            if (colorToken) {
+              return isCanvasKitStyling
+                ? varToMemberExpression(j, colorToken)
+                : j.callExpression(j.identifier('cssVar'), [varToMemberExpression(j, colorToken)]);
+            }
+          }
+          return arg;
+        });
+      }
+
       if (
         expr.type === 'MemberExpression' &&
         expr.object.type === 'Identifier' &&
@@ -118,6 +144,7 @@ export const transformObjectPropertyRecursively = (
         // Handle colors tokens
         if (importedTokenName === 'colors' && (!tokenTypes || tokenTypes.includes('colors'))) {
           const keyName = property.key.type === 'Identifier' ? property.key.name : null;
+
           const tokens = keyName
             ? Object.entries(systemColors).find(([blockKey]) =>
                 blockKey.split(',').some(prop => prop === keyName)
@@ -127,17 +154,21 @@ export const transformObjectPropertyRecursively = (
           const colorToken = tokens?.[expr.property.name as keyof typeof tokens];
 
           if (colorToken) {
-            addMissingImports(
-              {j, root},
-              {importPath: '@workday/canvas-kit-styling', specifiers: ['cssVar']}
-            );
+            if (!isCanvasKitStyling) {
+              addMissingImports(
+                {j, root},
+                {importPath: '@workday/canvas-kit-styling', specifiers: ['cssVar']}
+              );
+            }
 
             addMissingImports(
               {j, root},
               {importPath: '@workday/canvas-tokens-web', specifiers: ['system']}
             );
 
-            return j.callExpression(j.identifier('cssVar'), [varToMemberExpression(j, colorToken)]);
+            return isCanvasKitStyling
+              ? varToMemberExpression(j, colorToken)
+              : j.callExpression(j.identifier('cssVar'), [varToMemberExpression(j, colorToken)]);
           }
         }
 
@@ -154,10 +185,12 @@ export const transformObjectPropertyRecursively = (
             const newValue = map.keys[propertyName as keyof typeof map.keys];
 
             if (newValue) {
-              addMissingImports(
-                {j, root},
-                {importPath: '@workday/canvas-kit-styling', specifiers: ['cssVar']}
-              );
+              if (!isCanvasKitStyling) {
+                addMissingImports(
+                  {j, root},
+                  {importPath: '@workday/canvas-kit-styling', specifiers: ['cssVar']}
+                );
+              }
 
               addMissingImports(
                 {j, root},
@@ -169,7 +202,9 @@ export const transformObjectPropertyRecursively = (
                 j.identifier(newValue)
               );
 
-              return j.callExpression(j.identifier('cssVar'), [tokenPath]);
+              return isCanvasKitStyling
+                ? tokenPath
+                : j.callExpression(j.identifier('cssVar'), [tokenPath]);
             }
           }
         }
@@ -216,10 +251,12 @@ export const transformObjectPropertyRecursively = (
         alternateTokens?.[alternate.property.name as keyof typeof alternateTokens];
 
       if (consequentColorToken && alternateColorToken) {
-        addMissingImports(
-          {j, root},
-          {importPath: '@workday/canvas-kit-styling', specifiers: ['cssVar']}
-        );
+        if (!isCanvasKitStyling) {
+          addMissingImports(
+            {j, root},
+            {importPath: '@workday/canvas-kit-styling', specifiers: ['cssVar']}
+          );
+        }
 
         addMissingImports(
           {j, root},
@@ -230,12 +267,16 @@ export const transformObjectPropertyRecursively = (
           property.key,
           j.conditionalExpression(
             test,
-            j.callExpression(j.identifier('cssVar'), [
-              varToMemberExpression(j, consequentColorToken),
-            ]),
-            j.callExpression(j.identifier('cssVar'), [
-              varToMemberExpression(j, alternateColorToken),
-            ])
+            isCanvasKitStyling
+              ? varToMemberExpression(j, consequentColorToken)
+              : j.callExpression(j.identifier('cssVar'), [
+                  varToMemberExpression(j, consequentColorToken),
+                ]),
+            isCanvasKitStyling
+              ? varToMemberExpression(j, alternateColorToken)
+              : j.callExpression(j.identifier('cssVar'), [
+                  varToMemberExpression(j, alternateColorToken),
+                ])
           )
         );
       }
@@ -257,6 +298,44 @@ export const transformObjectPropertyRecursively = (
         )
       )
     );
+  }
+
+  if (
+    property.type === 'ObjectProperty' &&
+    property.key.type === 'Identifier' &&
+    property.value.type === 'MemberExpression' &&
+    property.value.object.type === 'Identifier' &&
+    property.value.property.type === 'Identifier'
+  ) {
+    const importedTokenName = importDeclaration[property.value.object.name];
+
+    // Handle colors tokens
+    if (importedTokenName === 'colors' && (!tokenTypes || tokenTypes.includes('colors'))) {
+      const {property: value} = property.value;
+
+      if (paletteNames.some(name => value.name.includes(name))) {
+        if (!isCanvasKitStyling) {
+          addMissingImports(
+            {j, root},
+            {importPath: '@workday/canvas-kit-styling', specifiers: ['cssVar']}
+          );
+        }
+
+        addMissingImports(
+          {j, root},
+          {importPath: '@workday/canvas-tokens-web', specifiers: ['base']}
+        );
+
+        return createObjectProperty(
+          property.key,
+          isCanvasKitStyling
+            ? j.memberExpression(j.identifier('base'), j.identifier(value.name))
+            : j.callExpression(j.identifier('cssVar'), [
+                j.memberExpression(j.identifier('base'), j.identifier(value.name)),
+              ])
+        );
+      }
+    }
   }
 
   return property;
