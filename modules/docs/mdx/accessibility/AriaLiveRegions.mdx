@@ -1,0 +1,81 @@
+import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
+import {AriaLiveRegion} from '@workday/canvas-kit-react/common';
+import {FilterListWithLiveStatus} from './examples/AriaLiveRegions/FilterListWithLiveStatus';
+import {VisibleLiveRegion} from './examples/AriaLiveRegions/VisibleLiveRegion';
+import {HiddenLiveRegion} from './examples/AriaLiveRegions/HiddenLiveRegion';
+import {TextInputWithLiveError} from './examples/AriaLiveRegions/TextInputWithLiveError';
+
+<Meta title="Guides/Accessibility/ARIA Live Regions" component={AriaLiveRegion} />
+
+# ARIA Live Regions
+
+These examples are provided to demonstrate a variety of different use cases for the `AriaLiveRegion`
+component. For the full experience, get started by first turning on your favorite screen reading
+software. On Windows, we recommend the open source
+[NVDA (Non-Visual Desktop Access)](https://www.nvaccess.org/download/) software, or
+[JAWS (Job Access With Speech)](https://support.freedomscientific.com/Downloads/JAWS) if you have
+purchased a license. MacOS and iOS include VoiceOver, which can be turned on in your settings.
+
+Live regions work by designating specific DOM nodes for screen readers to monitor for any content
+updates inside the node. When an update occurs, screen readers will announce the update to users in
+real time, based on a few rules:
+
+1. `polite` will “politely” wait for users to finish what they are doing before announcing an update
+2. `assertive` will interrupt what users are doing (or reading) by immediately announcing an update
+
+### CAUTION: Don't get carried away
+
+Key things to understand about live regions:
+
+1. A live region update will only be announced once. Users are unable to repeat them or re-examine
+   them if the announcement was not understood.
+2. Users may be able to pause a live region announcement, but they cannot prevent a live region
+   announcement from occurring. Sending frequent, repetitive, or simply too much information to a
+   live region can be very disruptive to users.
+3. Users cannot act on, or navigate to, a live region. Live regions must only contain plain text.
+   (No images, links, buttons, or other input.)
+4. Support for live regions is limited across platforms, browsers, and screen reader software. Real
+   time announcements may not be perfectly reliable.
+
+## Visible Live Regions
+
+Live regions can be applied to dynamic text on the UI. When the dynamic text is updated, screen
+readers can describe the text update in live time as it occurs. In the example below, type text into
+the input field and activate the "Send Message" button. Listen and observe the screen reader
+automatically announce the text update.
+
+<ExampleCodeBlock code={VisibleLiveRegion} />
+
+## Hidden Live Regions
+
+Live regions don't need to be visible UI text, they can be used to assist the non-visual listening
+experience when moving the keyboard focus to a new element on screen isn't feasible.
+
+<ExampleCodeBlock code={HiddenLiveRegion} />
+
+## Filtering lists with a live status
+
+In this example, a live region is applied to a short UI text describing the number of items shown in
+the list. As you type characters into the input, listen for the screen reader to automatically
+describe how many items in the list are shown.
+
+<ExampleCodeBlock code={FilterListWithLiveStatus} />
+
+## Text input with live inline error
+
+In this example, a live region is applied to the inline error message that will appear below the
+text input. Listen for the screen reader to automatically describe the error message as you leave
+the input field blank.
+
+**Note:** Use this example with discretion. Using live regions for automatically announcing form
+errors to screen reader users can be a nice experience for simple forms with a very limited number
+of error conditions. As forms increase in complexity, live regions on each error message can become
+increasingly distracting and disruptive to the experience, especially if users are trying to first
+understand the information that is required of them to complete the task.
+
+**Note:** The `<AriaLiveRegion>` component is used inside of the `Hint` to ensure the live region
+remains in the browser DOM at all times. The `Hint` is only rendered in the DOM when it contains
+content, so it will not work reliably as a live region for screen readers using the
+`as={AriaLiveRegion}` prop.
+
+<ExampleCodeBlock code={TextInputWithLiveError} />

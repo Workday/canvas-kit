@@ -7,7 +7,7 @@ import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
 import {Basic as BasicExample} from './examples/Basic';
 
 export default {
-  title: 'Components/Buttons/Segmented Control',
+  title: 'Components/Buttons/Segmented Control (deprecated)',
   component: SegmentedControl,
   tags: ['autodocs'],
   parameters: {

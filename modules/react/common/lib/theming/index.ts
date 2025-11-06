@@ -1,5 +1,4 @@
 export * from './breakpoints';
-export {createCanvasTheme} from './createCanvasTheme';
 export * from './types';
 export {default as styled, StyleRewriteFn, filterOutProps} from './styled';
 export * from './theme';
