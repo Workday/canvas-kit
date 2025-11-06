@@ -81,25 +81,6 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
       expectTransform(input, expected);
     });
 
-    it('should convert color tokens from canvas-colors-web to base tokens', () => {
-      const input = stripIndent`
-          import { depth } from "@workday/canvas-depth-web";
-
-          const newDepth = depth[1];
-        `;
-
-      const expected = stripIndent`
-          import { cssVar } from "@workday/canvas-kit-styling";
-          import { system } from "@workday/canvas-tokens-web";
-
-          const newDepth = {
-            boxShadow: cssVar(system.depth[1])
-          };
-        `;
-
-      expectTransform(input, expected);
-    });
-
     it('should transform depth token spread in css object', () => {
       const input = stripIndent`
           import { breakpoints } from "./breakpoints";

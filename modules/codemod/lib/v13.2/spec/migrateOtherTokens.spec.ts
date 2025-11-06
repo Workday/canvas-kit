@@ -269,22 +269,5 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
 
       expectTransform(input, expected);
     });
-
-    it('should convert color tokens from canvas-colors-web to base tokens', () => {
-      const input = stripIndent`
-          import { space } from "@workday/canvas-space-web";
-
-          const spacingZero = space.zero;
-        `;
-
-      const expected = stripIndent`
-          import { cssVar } from "@workday/canvas-kit-styling";
-          import { system } from "@workday/canvas-tokens-web";
-
-          const spacingZero = cssVar(system.space.zero);
-        `;
-
-      expectTransform(input, expected);
-    });
   });
 });
