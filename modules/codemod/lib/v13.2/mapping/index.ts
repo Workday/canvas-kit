@@ -1,5 +1,36 @@
 import {generateLevelTokens} from '../utils/generateLevelTokens';
 
+export const paletteNames = [
+  'cinnamon',
+  'peach',
+  'chiliMango',
+  'cantaloupe',
+  'sourLemon',
+  'juicyPear',
+  'kiwi',
+  'greenApple',
+  'watermelon',
+  'jewel',
+  'toothpaste',
+  'blueberry',
+  'plum',
+  'berrySmoothie',
+  'blackberry',
+  'islandPunch',
+  'grapeSoda',
+  'pomegranate',
+  'fruitPunch',
+  'rootBeer',
+  'toastedMarshmallow',
+  'licorice',
+  'soap',
+  'frenchVanilla',
+  'blackPepper',
+  'coconut',
+  'cappuccino',
+  'dragonFruit',
+];
+
 const typeLevelsMap = {
   subtext: {
     small: generateLevelTokens(['subtext', 'small']),
