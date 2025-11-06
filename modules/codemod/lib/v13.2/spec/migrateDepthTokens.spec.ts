@@ -14,12 +14,32 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
         `;
 
       const expected = stripIndent`
-          import { cssVar } from "@workday/canvas-kit-styling";
           import { system } from "@workday/canvas-tokens-web";
+          import { cssVar } from "@workday/canvas-kit-styling";
 
           const newDepth = {
             boxShadow: cssVar(system.depth[1])
           };
+        `;
+
+      expectTransform(input, expected);
+    });
+
+    it('should not transform depth token to object with boxShadow property if variables are used', () => {
+      const input = stripIndent`
+          import { depth } from "@workday/canvas-kit-react/tokens";
+
+          const size = '1';
+
+          const newDepth = depth[size];
+        `;
+
+      const expected = stripIndent`
+          import { depth } from "@workday/canvas-kit-react/tokens";
+
+          const size = '1';
+
+          const newDepth = depth[size];
         `;
 
       expectTransform(input, expected);
@@ -33,8 +53,8 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
         `;
 
       const expected = stripIndent`
-          import { cssVar } from "@workday/canvas-kit-styling";
           import { system } from "@workday/canvas-tokens-web";
+          import { cssVar } from "@workday/canvas-kit-styling";
 
           const newDepth = {
             boxShadow: cssVar(system.depth[1])
@@ -52,8 +72,8 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
         `;
 
       const expected = stripIndent`
-          import { cssVar } from "@workday/canvas-kit-styling";
           import { system } from "@workday/canvas-tokens-web";
+          import { cssVar } from "@workday/canvas-kit-styling";
 
           const newDepth = cssVar(system.depth[1]);
         `;
@@ -82,22 +102,50 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
 
     it('should transform depth token spread in css object', () => {
       const input = stripIndent`
+          import { breakpoints } from "./breakpoints";
           import { depth as canvasDepth } from "@workday/canvas-kit-react/tokens";
 
           const styles = css({
-            ...depth[1],
-            color: 'red'
+            ...canvasDepth[2],
+            color: 'red',
+            [breakpoints.s]: {
+              ...canvasDepth[1],
+            }
           });
+        `;
+
+      const expected = stripIndent`
+          import { breakpoints } from "./breakpoints";
+          import { cssVar } from "@workday/canvas-kit-styling";
+          import { system } from "@workday/canvas-tokens-web";
+
+          const styles = css({
+            boxShadow: cssVar(system.depth[2]),
+            color: 'red',
+          
+            [breakpoints.s]: {
+              boxShadow: cssVar(system.depth[1])
+            }
+          });
+        `;
+
+      expectTransform(input, expected);
+    });
+
+    it('should convert color tokens from canvas-colors-web to base tokens', () => {
+      const input = stripIndent`
+          import { depth } from "@workday/canvas-depth-web";
+
+          const newDepth = depth[1];
         `;
 
       const expected = stripIndent`
           import { system } from "@workday/canvas-tokens-web";
           import { cssVar } from "@workday/canvas-kit-styling";
-
-          const styles = css({
-            boxShadow: cssVar(system.depth[1]),
-            color: 'red'
-          });
+          
+          const newDepth = {
+            boxShadow: cssVar(system.depth[1])
+          };
         `;
 
       expectTransform(input, expected);
@@ -149,8 +197,8 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
         `;
 
       const expected = stripIndent`
-          import { cssVar } from "@workday/canvas-kit-styling";
           import { system } from "@workday/canvas-tokens-web";
+          import { cssVar } from "@workday/canvas-kit-styling";
 
           const styles = css({
             '&:hover': {
@@ -173,8 +221,8 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
         `;
 
       const expected = stripIndent`
-          import { system } from "@workday/canvas-tokens-web";
           import { cssVar } from "@workday/canvas-kit-styling";
+          import { system } from "@workday/canvas-tokens-web";
 
           <>
             <Component depth={{

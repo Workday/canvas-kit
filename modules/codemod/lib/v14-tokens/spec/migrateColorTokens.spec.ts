@@ -84,8 +84,8 @@ describe('Canvas Kit Tokens > Canvas Tokens v3', () => {
         `;
 
       const expected = stripIndent`
-          import { base } from "@workday/canvas-tokens-web";
           import { cssVar } from "@workday/canvas-kit-styling";
+          import { base } from "@workday/canvas-tokens-web";
 
           const color = cssVar(base.blue600);
         `;
@@ -137,8 +137,8 @@ describe('Canvas Kit Tokens > Canvas Tokens v3', () => {
         `;
 
       const expected = stripIndent`
-          import { base } from "@workday/canvas-tokens-web";
           import { cssVar } from "@workday/canvas-kit-styling";
+          import { base } from "@workday/canvas-tokens-web";
 
           const color = cssVar(base.blue600);
           const color2 = cssVar(base.red800);
@@ -315,8 +315,8 @@ describe('Canvas Kit Tokens > Canvas Tokens v3', () => {
         `;
 
       const expected = stripIndent`
-          import { cssVar } from "@workday/canvas-kit-styling";
           import { system } from "@workday/canvas-tokens-web";
+          import { cssVar } from "@workday/canvas-kit-styling";
 
           const styles = css({
             background: cssVar(system.color.bg.default),
@@ -389,8 +389,8 @@ describe('Canvas Kit Tokens > Canvas Tokens v3', () => {
         `;
 
       const expected = stripIndent`
-          import { cssVar } from "@workday/canvas-kit-styling";
           import { system } from "@workday/canvas-tokens-web";
+          import { cssVar } from "@workday/canvas-kit-styling";
 
           const styles = {
             color: toggled ? cssVar(system.color.fg.primary.default) : cssVar(system.color.fg.default),

@@ -1,5 +1,5 @@
 import {Identifier, MemberExpression, Transform} from 'jscodeshift';
-import {addMissingImports, filterOutImports, varToMemberExpression} from './utils';
+import {addMissingImports, filterOutImports, getImports, varToMemberExpression} from './utils';
 import {typeProps} from './mapping/typeProps';
 import {mapping} from './mapping';
 
@@ -25,7 +25,7 @@ const transform: Transform = (file, api) => {
       source: {value: (value: string) => canvasImportSources.includes(value)},
     })
     .forEach(nodePath => {
-      importDeclaration = {...importDeclaration, ...filterOutImports(nodePath)};
+      importDeclaration = {...importDeclaration, ...getImports(nodePath)};
     });
 
   if (!Object.values(importDeclaration).includes('type')) {
@@ -56,42 +56,40 @@ const transform: Transform = (file, api) => {
       const level = (object.property as Identifier).name;
       const size = (argument.property as Identifier).name;
 
-      addMissingImports(
-        {j, root},
-        {importPath: '@workday/canvas-kit-styling', specifiers: ['cssVar']}
-      );
+      const mapKeys = mapping.type.keys.levels.values;
+      const levelKeys = mapKeys[level as keyof typeof mapKeys] || {};
+      const tokens = levelKeys[size as keyof typeof levelKeys];
 
-      addMissingImports(
-        {j, root},
-        {importPath: '@workday/canvas-tokens-web', specifiers: ['system']}
-      );
+      if (tokens) {
+        addMissingImports(
+          {j, root},
+          {importPath: '@workday/canvas-kit-styling', specifiers: ['cssVar']}
+        );
 
-      nodePath.insertAfter(
-        j.objectProperty(
-          j.identifier('color'),
-          j.callExpression(j.identifier('cssVar'), [
-            j.memberExpression(
-              j.memberExpression(
-                j.memberExpression(j.identifier('system'), j.identifier('color')),
-                j.identifier('fg')
-              ),
-              j.identifier(['heading', 'title'].includes(level) ? 'strong' : 'default')
-            ),
-          ])
-        )
-      );
+        addMissingImports(
+          {j, root},
+          {importPath: '@workday/canvas-tokens-web', specifiers: ['system']}
+        );
 
-      return [
-        j.spreadElement(
-          j.memberExpression(
-            j.memberExpression(
-              j.memberExpression(j.identifier('system'), j.identifier('type')),
-              j.identifier(level)
-            ),
-            j.identifier(size)
-          )
-        ),
-      ];
+        const properties = typeProps
+          .filter(prop => tokens[prop])
+          .map((key: keyof typeof tokens) => {
+            const tokenValue = tokens[key];
+            if (!tokenValue) {
+              return null;
+            }
+            return j.objectProperty(
+              j.identifier(key),
+              j.callExpression(j.identifier('cssVar'), [varToMemberExpression(j, tokenValue)])
+            );
+          })
+          .filter((prop): prop is NonNullable<typeof prop> => prop !== null);
+
+        // Replace the spread element with individual properties
+        return properties;
+      }
+
+      return nodePath.value;
     });
 
   root
@@ -181,7 +179,11 @@ const transform: Transform = (file, api) => {
           const innerKey = innerProperty.name as keyof typeof mapping.type.keys;
 
           if (mainProperty.name === 'properties') {
-            const {name, values} = mapping.type.keys[innerKey];
+            const {name, values} = mapping.type.keys[innerKey] || {};
+
+            if (!name || !values) {
+              return nodePath.value;
+            }
 
             const newValue: string = values[lowestPropertyValue as keyof typeof values];
 
@@ -234,7 +236,15 @@ const transform: Transform = (file, api) => {
         }
       }
 
-      return nodePath;
+      return nodePath.value;
+    });
+
+  root
+    .find(j.ImportDeclaration, {
+      source: {value: (value: string) => canvasImportSources.includes(value)},
+    })
+    .forEach(nodePath => {
+      filterOutImports({root, j}, nodePath, 'type');
     });
 
   return root.toSource();

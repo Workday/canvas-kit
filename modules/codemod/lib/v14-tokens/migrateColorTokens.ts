@@ -1,5 +1,5 @@
 import {Identifier, Transform} from 'jscodeshift';
-import {addMissingImports, filterOutImports} from '../v13.2/utils';
+import {addMissingImports, filterOutImports, getImports} from '../v13.2/utils';
 import {transformObjectPropertyRecursively} from './utils/transformObjectPropertyRecursively';
 import {mapping} from '../v13.2/mapping';
 import baseMapping from './baseMapping';
@@ -25,7 +25,7 @@ const transform: Transform = (file, api) => {
       source: {value: (value: string) => canvasImportSources.includes(value)},
     })
     .forEach(nodePath => {
-      importDeclaration = {...importDeclaration, ...filterOutImports(nodePath)};
+      importDeclaration = {...importDeclaration, ...getImports(nodePath)};
     });
 
   if (
@@ -146,6 +146,15 @@ const transform: Transform = (file, api) => {
         return true;
       });
     });
+
+  root
+    .find(j.ImportDeclaration, {
+      source: {value: (value: string) => canvasImportSources.includes(value)},
+    })
+    .forEach(nodePath => {
+      filterOutImports({root, j}, nodePath, 'colors');
+    });
+
   return root.toSource();
 };
 
