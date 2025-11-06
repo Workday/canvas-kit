@@ -37,7 +37,7 @@ export interface DividerProps extends CSProps {
  * # Divider
  * A divider to segment and visually organize content. By default, it renders a semantic `[<hr>](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/hr)` element.
  *
- * [View Docs](https://workday.github.io/canvas-kit/?path=/docs/preview-divider-react)
+ * [View Docs](https://workday.github.io/canvas-kit/?path=/docs/preview-divider--docs)
  *
  * The `space` prop will equally apply top and bottom margin styles.
  * In the example below, `x2` (0.5rem), adds `0.25rem` margin to the top and `0.25rem` to the bottom

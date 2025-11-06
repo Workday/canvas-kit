@@ -12,7 +12,7 @@ export const RTL = () => {
       <Expandable>
         <Expandable.Target headingLevel="h4">
           <Expandable.Icon iconPosition="start" />
-          <Expandable.Avatar />
+          <Expandable.Avatar name="Avatar" />
           <Expandable.Title>Title</Expandable.Title>
         </Expandable.Target>
 
@@ -20,7 +20,7 @@ export const RTL = () => {
       </Expandable>
       <Expandable>
         <Expandable.Target headingLevel="h4">
-          <Expandable.Avatar />
+          <Expandable.Avatar name="Avatar" />
           <Expandable.Title>Title</Expandable.Title>
           <Expandable.Icon iconPosition="end" />
         </Expandable.Target>

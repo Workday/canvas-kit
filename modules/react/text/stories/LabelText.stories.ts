@@ -2,14 +2,13 @@ import {Meta, StoryObj} from '@storybook/react';
 
 import mdxDoc from './LabelText.mdx';
 
-import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
 import {LabelText} from '@workday/canvas-kit-react/text';
 import {Basic as BasicExample} from './examples/LabelText/Basic';
 import {Cursor as CursorExample} from './examples/LabelText/Cursor';
 import {Disabled as DisabledExample} from './examples/LabelText/Disabled';
 
 export default {
-  title: 'Components/Text/Label Text',
+  title: 'Components/Text/Label Text (deprecated)',
   component: LabelText,
   tags: ['autodocs'],
   parameters: {

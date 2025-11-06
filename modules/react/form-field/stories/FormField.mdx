@@ -1,8 +1,8 @@
-import { ExampleCodeBlock, Specifications, SymbolDoc } from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
 import * as FormFieldStories from './FormField.stories';
 
 import { Basic } from './examples/Basic';
-import { Alert } from './examples/Alert';
+import { Caution } from './examples/Caution';
 import { Error } from './examples/Error';
 import { Disabled } from './examples/Disabled';
 import { HiddenLabel } from './examples/HiddenLabel';
@@ -82,13 +82,13 @@ accessibility standards. The orientation of the label by default is `vertical`.
 Set the `error` prop of the Form Field or define it in the model to indicate it has an error.
 `error` accepts the following values:
 
-`"error" | "alert" | undefined`
+`"error" | "caution" | undefined`
 
-### Alert
+### Caution
 
-Use the alert state when a value is valid but there is additional information.
+Use the caution state when a value is valid but there is additional information.
 
-<ExampleCodeBlock code={Alert} />
+<ExampleCodeBlock code={Caution} />
 
 ### Error
 
@@ -158,7 +158,7 @@ accessibility of grouped inputs.
 
 `FormFieldGroup` supports the same props of `FormField`:
 
-- `error`: `"alert" | "error"` Defines the error around the whole group of inputs.
+- `error`: `"caution" | "error"` Defines the error around the whole group of inputs.
 - `orientation`: `"horizontal" | "vertical"` Defines the legend placement.
 - `isRequired`: `true` Defines if a group like RadioGroup is required.
 
@@ -205,7 +205,7 @@ You can theme your error rings by wrapping an input in a `CanvasProvider` and de
 
 Form Field and its subcomponents support custom styling via the `cs` prop. For more information,
 check our
-["How To Customize Styles"](https://workday.github.io/canvas-kit/?path=/docs/styling-how-to-customize-styles--docs).
+["How To Customize Styles"](https://workday.github.io/canvas-kit/?path=/docs/styling-guides-customizing-styles--docs).
 
 ## Component API
 
