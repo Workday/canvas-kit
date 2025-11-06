@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.1.6](https://github.com/Workday/canvas-kit/releases/tag/v14.1.6) (2025-11-06)
+
+### Codemods
+
+- chore: Update v13.2 codemod to correctly transform tokens ([#3583](https://github.com/Workday/canvas-kit/pull/3583)) ([@RayRedGoose](https://github.com/RayRedGoose))
+- chore: Add more color transforms to codemod ([#3585](https://github.com/Workday/canvas-kit/pull/3585)) ([@RayRedGoose](https://github.com/RayRedGoose), [@Copilot](https://github.com/Copilot))
+- fix: Fix issue with changing object props in token codemod ([#3593](https://github.com/Workday/canvas-kit/pull/3593)) ([@RayRedGoose](https://github.com/RayRedGoose), [@Copilot](https://github.com/Copilot))
+
+### Components
+
+- fix: Fix type and test issues ([@RayRedGoose](https://github.com/RayRedGoose))
+
+### Theming
+
+- fix: Remove scoped className and style from popups for global theming ([#3572](https://github.com/Workday/canvas-kit/pull/3572)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  Previously, the `usePopupStack` hook created a CSS class name that was passed to our Popups. We attached those theme styles to that class name. This allowed the theme to be available in our Popups. But it also created a cascade barrier that blocked the global theme from being applied to our Popup components.
+  Because we now use global CSS variables, we no longer need this class name to provide the global theme to Popups. But we have to remove this generated class name to allow the global theme to be applied to Popups.
+  
+  > **Important:** Passing a `theme` to the `CanvasProvider` **will not** theme components in Modals and Dialogs. You can either pass a `className` or define CSS variables at the root.
+  
+  **Before in v13**
+  
+  ```tsx
+  // When passing a theme to the Canvas Provider, the `usePopupStack` would grab the theme and generate a class to forward the theme to Modals and Dialogs. This would create a cascade barrier for any CSS variables deinfed at the root.
+  <CanvasProvider theme={{canvas: {palette: {primary: {main: 'blue'}}}}}>
+    <Modal>//... rest of modal code</Modal>
+  </CanvasProvider>
+  ```
+  
+  **After in v14**
+  
+  ```tsx
+  // If you wish to still theme you application and Modals, you can either define the CSS variables at the root level of your application or define a className and pass it to the CanvasProvider.
+  :root {
+  // use index.css file
+   --cnvs-brand-primary-base: blue;
+  }
+  
+  <CanvasProvider>
+    <Modal>//... rest of modal code</Modal>
+  </CanvasProvider>
+  ```
+
+
 ## [v13.2.44](https://github.com/Workday/canvas-kit/releases/tag/v13.2.44) (2025-11-06)
 
 ### Codemods
