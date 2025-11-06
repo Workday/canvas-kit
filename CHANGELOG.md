@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.44](https://github.com/Workday/canvas-kit/releases/tag/v13.2.44) (2025-11-06)
+
+### Codemods
+
+- fix: Fix issue with changing object props in token codemod ([#3593](https://github.com/Workday/canvas-kit/pull/3593)) ([@RayRedGoose](https://github.com/RayRedGoose), [@Copilot](https://github.com/Copilot))
+
+
 ## [v13.2.43](https://github.com/Workday/canvas-kit/releases/tag/v13.2.43) (2025-11-05)
 
 ### Codemods
