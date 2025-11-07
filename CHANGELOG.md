@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.1.9](https://github.com/Workday/canvas-kit/releases/tag/v14.1.9) (2025-11-07)
+
+### Codemod
+
+- fix: Fix v14 token codemod issues ([#3596](https://github.com/Workday/canvas-kit/pull/3596)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
 ## [v14.1.8](https://github.com/Workday/canvas-kit/releases/tag/v14.1.8) (2025-11-07)
 
 ### Codemods
