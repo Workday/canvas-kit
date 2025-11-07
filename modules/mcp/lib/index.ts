@@ -168,5 +168,15 @@ In this release, we:
       };
     }
   );
+  server.registerTool(
+    'get-canvas-kit-tokens',
+    {
+      title: 'Get Canvas Kit Tokens',
+      description: 'Retrieve the Canvas Kit Token documentation.',
+    },
+    async () => {
+      return {content: [{type: 'text', text: JSON.stringify(fileNames.tokenFiles)}]};
+    }
+  );
   return server;
 }
