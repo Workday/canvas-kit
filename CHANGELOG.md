@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.1.8](https://github.com/Workday/canvas-kit/releases/tag/v14.1.8) (2025-11-07)
+
+### Codemods
+
+- chore: Update token codemod in v14 to handle v2 -> v3 transform  ([#3575](https://github.com/Workday/canvas-kit/pull/3575)) ([@RayRedGoose](https://github.com/RayRedGoose))
+  Token codemod `v14-tokens` has been updated to reuse v13.2 for all other token modifications and handle `v2 -> v3` transforms.
+
+
 ## [v14.1.7](https://github.com/Workday/canvas-kit/releases/tag/v14.1.7) (2025-11-06)
 
 ### Codemods
