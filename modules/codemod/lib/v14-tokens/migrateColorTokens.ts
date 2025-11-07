@@ -6,11 +6,7 @@ import baseMapping from './baseMapping';
 
 type DeclarationType = {[key: string]: any};
 
-const canvasImportSources = [
-  '@workday/canvas-kit-styling',
-  '@workday/canvas-kit-react/tokens',
-  '@workday/canvas-tokens-web',
-];
+const canvasImportSources = ['@workday/canvas-kit-styling', '@workday/canvas-tokens-web'];
 
 const transform: Transform = (file, api) => {
   const j = api.jscodeshift;
@@ -27,11 +23,7 @@ const transform: Transform = (file, api) => {
       importDeclaration = {...importDeclaration, ...getImports(nodePath)};
     });
 
-  if (
-    !Object.values(importDeclaration).some(
-      importedValue => importedValue === 'colors' || importedValue === 'base'
-    )
-  ) {
+  if (!Object.values(importDeclaration).some(importedValue => importedValue === 'base')) {
     return root.toSource();
   }
 
@@ -83,25 +75,6 @@ const transform: Transform = (file, api) => {
 
         if (map.type === 'base' && lowestProperty.type === 'Identifier') {
           const colorName = baseMapping[lowestProperty.name as keyof typeof baseMapping];
-
-          if (mainName === 'colors') {
-            addMissingImports(
-              {j, root},
-              {importPath: '@workday/canvas-tokens-web', specifiers: ['base']}
-            );
-
-            addMissingImports(
-              {j, root},
-              {importPath: '@workday/canvas-kit-styling', specifiers: ['cssVar']}
-            );
-
-            return j.callExpression(j.identifier('cssVar'), [
-              j.memberExpression(
-                j.identifier(map.type),
-                j.identifier(colorName || lowestProperty.name)
-              ),
-            ]);
-          }
 
           if (mainName === 'base') {
             addMissingImports(
