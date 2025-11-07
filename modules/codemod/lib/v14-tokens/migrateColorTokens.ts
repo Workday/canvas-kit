@@ -1,7 +1,6 @@
 import {Identifier, Transform} from 'jscodeshift';
-import {addMissingImports, filterOutImports, getImports} from '../v13.2/utils';
+import {addMissingImports, getImports} from '../v13.2/utils';
 import {transformObjectPropertyRecursively} from './utils/transformObjectPropertyRecursively';
-import {mapping} from '../v13.2/mapping';
 import baseMapping from './baseMapping';
 
 type DeclarationType = {[key: string]: any};
@@ -58,7 +57,8 @@ const transform: Transform = (file, api) => {
       return (
         value.type === 'MemberExpression' &&
         checkImport(value.object.name) &&
-        Object.keys(baseMapping).includes(value.property.name)
+        Object.keys(baseMapping).includes(value.property.name) &&
+        importDeclaration[value.object.name] === 'base'
       );
     })
     .replaceWith(nodePath => {
@@ -69,25 +69,21 @@ const transform: Transform = (file, api) => {
         const mainName = mainObject.name;
         const lowestProperty = nodePath.value.property;
 
-        const importedName = importDeclaration[mainName];
-        const map =
-          importedName === 'base' ? {type: 'base'} : mapping[importedName as keyof typeof mapping];
-
-        if (map.type === 'base' && lowestProperty.type === 'Identifier') {
+        if (lowestProperty.type === 'Identifier') {
           const colorName = baseMapping[lowestProperty.name as keyof typeof baseMapping];
 
-          if (mainName === 'base') {
+          if (mainName === 'base' && colorName) {
             addMissingImports(
               {j, root},
               {importPath: '@workday/canvas-tokens-web', specifiers: ['base']}
             );
 
-            return j.memberExpression(j.identifier(map.type), j.identifier(colorName));
+            return j.memberExpression(j.identifier('base'), j.identifier(colorName));
           }
         }
       }
 
-      return nodePath;
+      return nodePath.value;
     });
 
   // Filter out base imports if no base tokens are used
@@ -117,14 +113,6 @@ const transform: Transform = (file, api) => {
 
         return true;
       });
-    });
-
-  root
-    .find(j.ImportDeclaration, {
-      source: {value: (value: string) => canvasImportSources.includes(value)},
-    })
-    .forEach(nodePath => {
-      filterOutImports({root, j}, nodePath, 'colors');
     });
 
   return root.toSource();
