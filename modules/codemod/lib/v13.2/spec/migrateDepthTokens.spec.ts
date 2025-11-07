@@ -64,6 +64,25 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
       expectTransform(input, expected);
     });
 
+    it('should transform aliased depth token to object with boxShadow property', () => {
+      const input = stripIndent`
+          import { depth as canvasDepth } from "@workday/canvas-kit-react/tokens";
+
+          const newDepth = canvasDepth['1'];
+        `;
+
+      const expected = stripIndent`
+          import { system } from "@workday/canvas-tokens-web";
+          import { cssVar } from "@workday/canvas-kit-styling";
+
+          const newDepth = {
+            boxShadow: cssVar(system.depth[1])
+          };
+        `;
+
+      expectTransform(input, expected);
+    });
+
     it('should transform depth token boxShadow property to cssVar', () => {
       const input = stripIndent`
           import { depth } from "@workday/canvas-kit-react/tokens";
@@ -91,6 +110,38 @@ describe('Canvas Kit Tokens > Canvas Tokens v2', () => {
             color: 'red',
             [breakpoints.s]: {
               ...canvasDepth[1],
+            }
+          });
+        `;
+
+      const expected = stripIndent`
+          import { breakpoints } from "./breakpoints";
+          import { cssVar } from "@workday/canvas-kit-styling";
+          import { system } from "@workday/canvas-tokens-web";
+
+          const styles = css({
+            boxShadow: cssVar(system.depth[2]),
+            color: 'red',
+          
+            [breakpoints.s]: {
+              boxShadow: cssVar(system.depth[1])
+            }
+          });
+        `;
+
+      expectTransform(input, expected);
+    });
+
+    it('should transform depth token spread in css object', () => {
+      const input = stripIndent`
+          import { breakpoints } from "./breakpoints";
+          import { depth as canvasDepth } from "@workday/canvas-kit-react/tokens";
+
+          const styles = css({
+            ...canvasDepth[2],
+            color: 'red',
+            [breakpoints.s]: {
+              ...canvasDepth['1'],
             }
           });
         `;

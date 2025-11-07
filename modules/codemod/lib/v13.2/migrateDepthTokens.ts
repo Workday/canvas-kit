@@ -9,6 +9,8 @@ const canvasImportSources = [
   '@workday/canvas-depth-web',
 ];
 
+const depthValues = ['0', '1', '2', '3', '4', '5', '6'];
+
 const transform: Transform = (file, api) => {
   const j = api.jscodeshift;
   const root = j(file.source);
@@ -37,15 +39,20 @@ const transform: Transform = (file, api) => {
           name: (name: string) => importDeclaration[name] === 'depth',
         },
         property: {
-          type: 'NumericLiteral',
+          type: (type: string) => type === 'NumericLiteral' || type === 'StringLiteral',
+          value: (value: any) => ['0', '1', '2', '3', '4', '5', '6'].includes(`${value}`),
         },
       },
     })
     .replaceWith(nodePath => {
       const argument = nodePath.value.argument;
-      if (argument.type === 'MemberExpression' && argument.property.type === 'NumericLiteral') {
+
+      if (
+        argument.type === 'MemberExpression' &&
+        (argument.property.type === 'NumericLiteral' || argument.property.type === 'StringLiteral')
+      ) {
         const depthValue = argument.property.value;
-        const isDepthNotZero = depthValue > 0;
+        const isDepthNotZero = `${depthValue}` !== '0';
 
         addMissingImports(
           {j, root},
@@ -59,18 +66,18 @@ const transform: Transform = (file, api) => {
           );
         }
 
-        return isDepthNotZero
-          ? j.objectProperty(
-              j.identifier('boxShadow'),
-              j.callExpression(j.identifier('cssVar'), [
+        return j.objectProperty(
+          j.identifier('boxShadow'),
+          isDepthNotZero
+            ? j.callExpression(j.identifier('cssVar'), [
                 j.memberExpression(
                   j.memberExpression(j.identifier('system'), j.identifier('depth')),
-                  j.numericLiteral(depthValue),
+                  j.numericLiteral(parseInt(`${depthValue}`, 10)),
                   true
                 ),
               ])
-            )
-          : j.objectProperty(j.identifier('boxShadow'), j.literal('none'));
+            : j.literal('none')
+        );
       }
 
       return nodePath.value;
@@ -88,11 +95,14 @@ const transform: Transform = (file, api) => {
       if (
         nodePath.value.object.type === 'MemberExpression' &&
         nodePath.value.object.object.type === 'Identifier' &&
-        nodePath.value.object.property.type === 'NumericLiteral'
+        (nodePath.value.object.property.type === 'NumericLiteral' ||
+          (nodePath.value.object.property.type === 'StringLiteral' &&
+            depthValues.includes(nodePath.value.object.property.value)))
       ) {
         const value = nodePath.value.object.property.value;
+        const isNotZero = `${value}` !== '0';
 
-        if (value.toString() !== '0') {
+        if (isNotZero) {
           addMissingImports(
             {j, root},
             {importPath: '@workday/canvas-kit-styling', specifiers: ['cssVar']}
@@ -104,12 +114,12 @@ const transform: Transform = (file, api) => {
           );
         }
 
-        return value.toString() === '0'
+        return !isNotZero
           ? j.literal('none')
           : j.callExpression(j.identifier('cssVar'), [
               j.memberExpression(
                 j.memberExpression(j.identifier('system'), j.identifier('depth')),
-                j.numericLiteral(value),
+                j.numericLiteral(parseInt(`${value}`, 10)),
                 true
               ),
             ]);
@@ -131,14 +141,14 @@ const transform: Transform = (file, api) => {
     .replaceWith(nodePath => {
       const mainWrapper = nodePath.value.object;
 
-      if (mainWrapper.type === 'Identifier' && importDeclaration[mainWrapper.name] !== 'type') {
-        const mainObject = mainWrapper;
-        const mainName = mainObject.name;
+      if (mainWrapper.type === 'Identifier' && importDeclaration[mainWrapper.name] === 'depth') {
         const lowestProperty = nodePath.value.property;
 
-        const importedName = importDeclaration[mainName];
-        if (importedName === 'depth' && lowestProperty.type === 'NumericLiteral') {
-          const isZero = lowestProperty.value.toString() === '0';
+        if (
+          lowestProperty.type === 'NumericLiteral' ||
+          (lowestProperty.type === 'StringLiteral' && depthValues.includes(lowestProperty.value))
+        ) {
+          const isZero = `${lowestProperty.value}` === '0';
 
           if (!isZero) {
             addMissingImports(
@@ -161,7 +171,7 @@ const transform: Transform = (file, api) => {
                 : j.callExpression(j.identifier('cssVar'), [
                     j.memberExpression(
                       j.memberExpression(j.identifier('system'), j.identifier('depth')),
-                      j.numericLiteral(lowestProperty.value),
+                      j.numericLiteral(parseInt(`${lowestProperty.value}`, 10)),
                       true
                     ),
                   ])

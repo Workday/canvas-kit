@@ -53,74 +53,64 @@ export const transformObjectPropertyRecursively = (
   importDeclaration: {[key: string]: any},
   isCanvasKitStyling?: boolean
 ): any => {
+  const createObjectProperty = (key: any, value: any) => {
+    const prop = j.objectProperty(key, value);
+    // Preserve computed flag: if explicitly true, or if key is not a simple literal/identifier
+    if (
+      property.computed === true ||
+      (property.key?.type !== 'Identifier' &&
+        property.key?.type !== 'StringLiteral' &&
+        property.key?.type !== 'NumericLiteral')
+    ) {
+      prop.computed = true;
+    }
+    return prop;
+  };
+
   if (
     property.type === 'ObjectProperty' &&
     property.key.type === 'Identifier' &&
-    property.value.type === 'MemberExpression' &&
+    property.value?.type === 'MemberExpression' &&
     property.value.object.type === 'Identifier' &&
     property.value.property.type === 'Identifier'
   ) {
     const cssProperty = property.key.name;
-    const tokens = Object.entries(systemColors).find(([blockKey]) =>
+    const propsName = Object.keys(systemColors).find(blockKey =>
       blockKey.split(',').some(prop => prop === cssProperty)
-    )?.[1];
+    );
 
-    const {
-      property: value,
-      object: {name},
-    } = property.value;
-    const colorToken = tokens?.[value.name as keyof typeof tokens];
+    const tokens = propsName ? systemColors[propsName as keyof typeof systemColors] : null;
 
-    if (colorToken) {
-      if (importDeclaration[name] === 'colors') {
-        if (!isCanvasKitStyling) {
-          addMissingImports(
-            {j, root},
-            {importPath: '@workday/canvas-kit-styling', specifiers: ['cssVar']}
-          );
-        }
+    const propertyName = property.value.object.name;
+    const valueName = property.value.property.name;
 
-        addMissingImports(
-          {j, root},
-          {importPath: '@workday/canvas-tokens-web', specifiers: ['system']}
-        );
+    if (!(tokens && importDeclaration[propertyName] === 'base')) {
+      return property;
+    }
 
-        return j.objectProperty(
-          j.identifier(cssProperty),
-          isCanvasKitStyling
-            ? varToMemberExpression(j, colorToken)
-            : j.callExpression(j.identifier('cssVar'), [varToMemberExpression(j, colorToken)])
-        );
-      }
+    const colorToken = tokens[valueName as keyof typeof tokens];
+    const baseToken = baseMapping[valueName as keyof typeof baseMapping];
 
-      if (importDeclaration[property.value.object.name] === 'base') {
-        addMissingImports(
-          {j, root},
-          {importPath: '@workday/canvas-tokens-web', specifiers: ['system']}
-        );
+    if (colorToken || baseToken) {
+      addMissingImports(
+        {j, root},
+        {importPath: '@workday/canvas-tokens-web', specifiers: [colorToken ? 'system' : 'base']}
+      );
 
-        return j.objectProperty(j.identifier(cssProperty), varToMemberExpression(j, colorToken));
-      }
-    } else {
-      const baseToken = baseMapping[property.value.property.name as keyof typeof baseMapping];
+      const newToken = colorToken
+        ? varToMemberExpression(j, colorToken)
+        : j.memberExpression(j.identifier('base'), j.identifier(baseToken));
 
-      if (baseToken) {
-        addMissingImports(
-          {j, root},
-          {importPath: '@workday/canvas-tokens-web', specifiers: ['base']}
-        );
-
-        return j.objectProperty(
-          j.identifier(cssProperty),
-          j.memberExpression(j.identifier('base'), j.identifier(baseToken))
-        );
-      }
+      return createObjectProperty(
+        j.identifier(cssProperty),
+        isCanvasKitStyling ? newToken : j.callExpression(j.identifier('cssVar'), [newToken])
+      );
     }
 
     return property;
   }
 
-  if (property.value.type === 'CallExpression') {
+  if (property.type === 'ObjectProperty' && property.value.type === 'CallExpression') {
     property.value.arguments = updateArguments(
       {j, root},
       property.value,
@@ -180,7 +170,7 @@ export const transformObjectPropertyRecursively = (
       }
     );
 
-    return j.objectProperty(
+    return createObjectProperty(
       property.key,
       j.templateLiteral(transformedQuasis, transformedExpressions)
     );
@@ -249,14 +239,14 @@ export const transformObjectPropertyRecursively = (
       alternate.arguments = updateArguments({j, root}, alternate, property, importDeclaration);
     }
 
-    return j.objectProperty(
+    return createObjectProperty(
       property.key,
       j.conditionalExpression(test, consequentNode, alternateNode)
     );
   }
 
   if (property.type === 'ObjectProperty' && property.value.type === 'ObjectExpression') {
-    return j.objectProperty(
+    return createObjectProperty(
       property.key,
       j.objectExpression(
         property.value.properties.map((prop: any) =>
