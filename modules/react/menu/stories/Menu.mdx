@@ -35,24 +35,17 @@ yarn add @workday/canvas-kit-react
 `Menu` will automatically focus on the cursor item (first item by default). The `Menu` uses a menu
 model which composes a list model and a popup model and sets up accessibility features for you.
 
-`Menu` follows the
-[Actions Menu pattern](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/examples/menu-button-actions/)
-using roving tabindex. Below is table of supported keyboard shortcuts and associated actions.
-
-| Key                | Action                                                                                                       |
-| ------------------ | ------------------------------------------------------------------------------------------------------------ |
-| `Enter` or `Space` | Activates the menu item and then closes the menu                                                             |
-| `Escape`           | Closes the menu                                                                                              |
-| `Up Arrow`         | Moves focus to the previous menu item – if focus is on first menu item, it moves focus to the last menu item |
-| `Down Arrow`       | Moves focus to the next menu item – if focus is on last menu item, it moves focus to the first menu item     |
-| `Home`             | Moves focus to the first menu item                                                                           |
-| `End`              | Moves focus to the last menu item                                                                            |
-
 ### Context Menu
 
 <ExampleCodeBlock code={ContextMenu} />
 
-> **Accessibility Note**:
+> **Accessibility Note**: This variation relies on the `contextmenu` browser event, which has
+> varying levels of support across different operating systems. On Windows, this feature is better
+> supported and users can typically trigger context menus using the **Shift + F10** keyboard
+> shortcut or the dedicated **Context Menu** key (if available on their keyboard). However, on
+> macOS, context menu support is limited and may require users to enable specific accessibility
+> settings in their system preferences to function properly. Consider providing alternative access
+> methods for critical functionality.
 
 ### Icons
 
@@ -65,22 +58,10 @@ about the text of the item.
 
 <ExampleCodeBlock code={Icons} />
 
-> **Accessibility Note**:
-
-### Selectable Menu
-
-The `Menu.Item` renders a `role=menuitem` element which does not have `aria-selected` and thus no
-selected state. If you wish your menu to have selectable menu items, use `Menu.Option` instead of
-`Menu.Item`. The `Menu.Option` is meant to be used when the `Menu.Card` has a role of `listbox` and
-is controlled via `aria-activedescendant`. This example uses `Menu.Option` to should what the
-checkmark looks like, but the example is not keyboard or screen reader accessible. There are many
-other behaviors that need to be composed into the `Menu.Target` and `Menu.List` components and the
-behaviors depend on many other things. To see a full example of all these behaviors, look at the
-`<Combobox>` and `<Select>` component source code as examples.
-
-<ExampleCodeBlock code={SelectableMenu} />
-
-> **Accessibility Note**:
+> **Accessibility Note**: Icons in menu items do not inherently provide text alternatives to
+> assistive technologies. However, in most cases, icons are used decoratively alongside text labels,
+> and additional text alternatives are not necessary since the menu item text itself provides the
+> accessible name.
 
 ### Grouping
 
@@ -93,7 +74,13 @@ and are not selectable with the keyboard or mouse.
 
 <ExampleCodeBlock code={Grouping} />
 
-> **Accessibility Note**:
+> **Accessibility Note**: Menu groups use `role="group"` with appropriate labeling to provide
+> semantic structure for assistive technologies. When navigating through grouped menu items, screen
+> readers will announce the group label when users enter a new group, providing important context
+> about the organization of the menu. Group headers are not part of the keyboard navigation
+> sequence, allowing users to efficiently move between actionable menu items. This semantic grouping
+> helps all users, including those using assistive technologies, understand the hierarchy and
+> categorization of menu options.
 
 ### Nested
 
@@ -105,7 +92,9 @@ indicate this dual role.
 
 <ExampleCodeBlock code={Nested} />
 
-> **Accessibility Note**:
+> **Accessibility Note**: When a menu item has an attached submenu, the `<Menu.Submenu.TargetItem>`
+> includes `aria-haspopup="true"` and `aria-expanded={true | false}` properties. These properties
+> will alert screen reader users to the available submenu systems.
 
 ### Nested Dynamic Items
 
@@ -120,8 +109,9 @@ submenus.
 ## Accessibility
 
 Our Menu component is based on the Menu Button pattern on the ARIA Authoring Practices Guide from
-the W3C. This means that the minimum requirements for screen reader support and keyboard navigation
-are included in the component.
+the W3C and relies on the roving tabindex technique for managing focus within the opened menu. This
+means that the minimum requirements for screen reader support and keyboard navigation are included
+in the component.
 
 [Menu Button Pattern | APG | WAI | W3C](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/)
 
@@ -130,11 +120,8 @@ are included in the component.
   menu.
 - The `<Menu.List>` sub-component uses `role="menu"` and `<Menu.Item>` uses `role="menuitem"` ARIA
   roles. These roles allow screen readers to pass through arrow key events to the web application.
-- The `<Menu.List>` sub-component inludes an `aria-labelledby` ID reference to the `<Menu.Target>`
+- The `<Menu.List>` sub-component includes an `aria-labelledby` ID reference to the `<Menu.Target>`
   sub-component. This assigns a label to the menu for context.
-- When a menu item has an attached submenu, then the menu item should also include an
-  `aria-haspopup="true"` and `aria-expanded={true | false}` properties. These properties will alert
-  screen reader users to the available submenu systems.
 
 ### Navigation
 
