@@ -131,7 +131,6 @@
     "yarn.lock": "node utils/check-lockfile.js",
     "modules/docs/mdx/**/*.mdx": "node utils/mdx-upgrades-2-md.js",
     "utils/mdx-upgrades-2-md.js": "node utils/mdx-upgrades-2-md.js",
-    "modules/codemod/lib/**/*.ts": "node utils/mdx-upgrades-2-md.js"
   },
   "workspaces": [
     "modules/**"
