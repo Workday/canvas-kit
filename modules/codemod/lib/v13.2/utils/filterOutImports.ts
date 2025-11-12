@@ -1,18 +1,48 @@
 import {ASTPath, ImportDeclaration} from 'jscodeshift';
 
-export const filterOutImports = (nodePath: ASTPath<ImportDeclaration>) => {
+type ImportType = 'colors' | 'depth' | 'space' | 'type' | 'borderRadius';
+
+const canvasImportSources = [
+  '@workday/canvas-kit-react/tokens',
+  '@workday/canvas-colors-web',
+  '@workday/canvas-space-web',
+  '@workday/canvas-depth-web',
+];
+
+export const filterOutImports = (
+  {root, j}: {root: any; j: any},
+  nodePath: ASTPath<ImportDeclaration>,
+  type: ImportType | ImportType[]
+) => {
   const importName: Record<string, string> = {};
 
   nodePath.value.specifiers = nodePath.value.specifiers?.filter(specifier => {
     if (specifier.type === 'ImportSpecifier' && specifier.local) {
+      let isInstanceExist = false;
+
       const localName = specifier.local.name.toString();
       const importedName = specifier.imported.name.toString();
 
       importName[localName] = importedName;
 
-      return !(
-        typeof nodePath.value.source.value === 'string' &&
-        nodePath.value.source.value?.endsWith('tokens')
+      root
+        .find(j.MemberExpression, {
+          object: {
+            name: importedName,
+          },
+        })
+        .forEach(() => {
+          isInstanceExist = true;
+        });
+
+      return (
+        isInstanceExist ||
+        !(
+          ((typeof type === 'string' && importedName.toLowerCase().includes(type as any)) ||
+            type.includes(importedName as any)) &&
+          typeof nodePath.value.source.value === 'string' &&
+          canvasImportSources.includes(nodePath.value.source.value)
+        )
       );
     }
 

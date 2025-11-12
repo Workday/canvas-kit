@@ -14,8 +14,8 @@ describe('Typography: from /tokens to v2', () => {
       `;
 
     const expected = stripIndent`
-        import { system } from "@workday/canvas-tokens-web";
         import { cssVar } from "@workday/canvas-kit-styling";
+        import { system } from "@workday/canvas-tokens-web";
 
         const fontFamily = cssVar(system.fontFamily.default);
         const fontFamilyMono = cssVar(system.fontFamily.mono);
@@ -32,8 +32,8 @@ describe('Typography: from /tokens to v2', () => {
       `;
 
     const expected = stripIndent`
-        import { system } from "@workday/canvas-tokens-web";
         import { cssVar } from "@workday/canvas-kit-styling";
+        import { system } from "@workday/canvas-tokens-web";
 
         const fontSize = cssVar(system.fontSize.subtext.small);
       `;
@@ -49,10 +49,37 @@ describe('Typography: from /tokens to v2', () => {
       `;
 
     const expected = stripIndent`
-        import { system } from "@workday/canvas-tokens-web";
         import { cssVar } from "@workday/canvas-kit-styling";
+        import { system } from "@workday/canvas-tokens-web";
 
         const fontWeight = cssVar(system.fontWeight.regular);
+      `;
+
+    expectTransform(input, expected);
+  });
+
+  it('should not convert font weight tokens if variables are used', () => {
+    const input = stripIndent`
+        import { type } from "@workday/canvas-kit-react/tokens";
+
+        const propertyName = 'fontWeights';
+        const size = 'bold';
+
+        const fontWeight = type.properties.fontWeights.regular;
+        const fontWeight2 = type.properties[propertyName][size];
+      `;
+
+    const expected = stripIndent`
+        import { type } from "@workday/canvas-kit-react/tokens";
+
+        import { cssVar } from "@workday/canvas-kit-styling";
+        import { system } from "@workday/canvas-tokens-web";
+
+        const propertyName = 'fontWeights';
+        const size = 'bold';
+
+        const fontWeight = cssVar(system.fontWeight.regular);
+        const fontWeight2 = type.properties[propertyName][size];
       `;
 
     expectTransform(input, expected);
@@ -67,8 +94,8 @@ describe('Typography: from /tokens to v2', () => {
         `;
 
       const expected = stripIndent`
-          import { system } from "@workday/canvas-tokens-web";
           import { cssVar } from "@workday/canvas-kit-styling";
+          import { system } from "@workday/canvas-tokens-web";
           
           const styles = {
             fontFamily: cssVar(system.fontFamily.default),
@@ -90,8 +117,8 @@ describe('Typography: from /tokens to v2', () => {
         `;
 
       const expected = stripIndent`
-          import { system } from "@workday/canvas-tokens-web";
           import { cssVar } from "@workday/canvas-kit-styling";
+          import { system } from "@workday/canvas-tokens-web";
           
           const styles = {
             fontFamily: cssVar(system.fontFamily.default),
@@ -114,8 +141,8 @@ describe('Typography: from /tokens to v2', () => {
         `;
 
       const expected = stripIndent`
-          import { system } from "@workday/canvas-tokens-web";
           import { cssVar } from "@workday/canvas-kit-styling";
+          import { system } from "@workday/canvas-tokens-web";
 
           const color = cssVar(system.color.fg.default);
           const fontSize = cssVar(system.fontSize.subtext.small);
@@ -126,20 +153,41 @@ describe('Typography: from /tokens to v2', () => {
 
     it('should transform type levels to object with system color', () => {
       const input = stripIndent`
+          import { breakpoints } from "./breakpoints";
           import { type } from "@workday/canvas-kit-react/tokens";
 
           const styles = css({
             ...type.levels.subtext.small,
+
+            p: {
+              fontSize: type.levels.subtext.small.fontSize,
+            },
+
+            [breakpoints.s]: {
+              width: '100%',
+            }
           });
         `;
 
       const expected = stripIndent`
-          import { cssVar } from "@workday/canvas-kit-styling";
+          import { breakpoints } from "./breakpoints";
           import { system } from "@workday/canvas-tokens-web";
+          import { cssVar } from "@workday/canvas-kit-styling";
 
           const styles = css({
-            ...system.type.subtext.small,
-            color: cssVar(system.color.fg.default)
+            fontFamily: cssVar(system.fontFamily.default),
+            fontSize: cssVar(system.fontSize.subtext.small),
+            lineHeight: cssVar(system.lineHeight.subtext.small),
+            fontWeight: cssVar(system.fontWeight.regular),
+            color: cssVar(system.color.fg.default),
+
+            p: {
+              fontSize: cssVar(system.fontSize.subtext.small),
+            },
+
+            [breakpoints.s]: {
+              width: '100%',
+            }
           });
         `;
 
