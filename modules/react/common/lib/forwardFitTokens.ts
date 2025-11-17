@@ -19,6 +19,7 @@ export const forwardFitTokens = {
     },
     padding: {
       none: cssVar(system.padding.none, system.space.zero),
+      '2XS': cssVar(system.padding['2Xs'], system.space.x1),
       xs: cssVar(system.padding.xs, system.space.x2),
       sm: cssVar(system.padding.sm, system.space.x3),
       md: cssVar(system.padding.md, system.space.x4),
