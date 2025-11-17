@@ -1,5 +1,5 @@
 import {buttonColorPropVars, buttonStencil} from './BaseButton';
-import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
+import {createComponent, focusRing, forwardFitTokens} from '@workday/canvas-kit-react/common';
 import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {system, brand} from '@workday/canvas-tokens-web';
 import {Button, ButtonProps} from './Button';
@@ -21,10 +21,10 @@ const tertiaryButtonStencil = createStencil({
   extends: buttonStencil,
   // Base Styles
   base: {
-    paddingInline: system.space.x2,
+    paddingInline: forwardFitTokens.system.padding.xs,
     minWidth: 'auto',
     borderWidth: px2rem(2),
-    [buttonStencil.vars.borderRadius]: system.shape.round,
+    [buttonStencil.vars.borderRadius]: forwardFitTokens.system.shape.full,
     [buttonStencil.vars.background]: system.color.bg.transparent.default,
     [buttonStencil.vars.label]: brand.primary.base,
     [systemIconStencil.vars.color]: 'currentColor',
