@@ -9,7 +9,7 @@ import {
   focusRing,
   forwardFitTokens,
 } from '@workday/canvas-kit-react/common';
-import {cssVar, createStencil, px2rem, createVars, calc} from '@workday/canvas-kit-styling';
+import {cssVar, createStencil, px2rem, createVars} from '@workday/canvas-kit-styling';
 import {SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {brand, system, base} from '@workday/canvas-tokens-web';
 import {ButtonColors, ButtonSizes, IconPositions} from './types';
