@@ -37,6 +37,7 @@ export const forwardFitTokens = {
     gap: {
       xs: cssVar(system.gap.xs, system.space.x1),
       sm: cssVar(system.gap.sm, system.space.x2),
+      md: cssVar(system.gap.md, system.space.x4),
     },
   },
 } as const;

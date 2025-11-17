@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {system} from '@workday/canvas-tokens-web';
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {createSubcomponent, ExtractProps, forwardFitTokens} from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {useOverflowListMeasure, useListRenderItems} from '@workday/canvas-kit-react/collection';
 
@@ -35,7 +35,7 @@ export const actionBarListStencil = createStencil({
   base: {
     display: 'flex',
     boxShadow: system.depth[1],
-    gap: system.space.x4,
+    gap: forwardFitTokens.system.gap.md,
     background: system.color.bg.default,
     borderBlockStart: `solid 1px ${cssVar(system.color.border.divider)}`,
     padding: `${cssVar(system.space.x4)} ${cssVar(system.space.x10)} `,
@@ -44,7 +44,7 @@ export const actionBarListStencil = createStencil({
     insetInlineStart: 0,
     insetInlineEnd: 0,
     '@media (max-width: 767.5px)': {
-      padding: system.space.x4,
+      padding: forwardFitTokens.system.padding.md,
       '> *': {
         flex: 1,
       },
