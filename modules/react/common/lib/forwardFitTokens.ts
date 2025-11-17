@@ -1,4 +1,4 @@
-import {cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {cssVar, px2rem, calc} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 /**
@@ -18,9 +18,11 @@ export const forwardFitTokens = {
       xl: cssVar(system.size.xl, px2rem(48)),
     },
     padding: {
+      none: cssVar(system.padding.none, system.space.zero),
       xs: cssVar(system.padding.xs, system.space.x2),
       sm: cssVar(system.padding.sm, system.space.x3),
       md: cssVar(system.padding.md, system.space.x4),
+      lg: cssVar(system.padding.lg, calc.multiply(system.space.x1, 5)),
       xl: cssVar(system.padding.xl, system.space.x6),
       '2XL': cssVar(system.padding['2Xl'], system.space.x8),
     },

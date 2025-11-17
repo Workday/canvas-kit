@@ -301,7 +301,7 @@ export const buttonStencil = createStencil({
     },
     // IconPosition Styles
     iconPosition: {
-      only: {padding: system.space.zero},
+      only: {padding: forwardFitTokens.system.padding.none},
       start: {},
       end: {},
     },
@@ -311,81 +311,81 @@ export const buttonStencil = createStencil({
     {
       modifiers: {size: 'large', iconPosition: 'only'},
       styles: {
-        minWidth: calc.multiply(system.space.x4, 3),
+        minWidth: base.size600,
       },
     },
     {
       modifiers: {size: 'large', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: system.space.x6,
-        paddingInlineEnd: system.space.x8,
+        paddingInlineStart: forwardFitTokens.system.padding.xl,
+        paddingInlineEnd: forwardFitTokens.system.padding['2XL'],
       },
     },
     {
       modifiers: {size: 'large', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: system.space.x8,
-        paddingInlineEnd: system.space.x6,
+        paddingInlineStart: forwardFitTokens.system.padding['2XL'],
+        paddingInlineEnd: forwardFitTokens.system.padding.xl,
       },
     },
     {
       modifiers: {size: 'medium', iconPosition: 'only'},
       styles: {
-        minWidth: system.space.x10,
+        minWidth: forwardFitTokens.system.size.lg,
       },
     },
     {
       modifiers: {size: 'medium', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: calc.multiply(system.space.x1, 5),
-        paddingInlineEnd: system.space.x6,
+        paddingInlineStart: forwardFitTokens.system.padding.lg,
+        paddingInlineEnd: forwardFitTokens.system.padding.xl,
       },
     },
     {
       modifiers: {size: 'medium', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: system.space.x6,
-        paddingInlineEnd: calc.multiply(system.space.x1, 5),
+        paddingInlineStart: forwardFitTokens.system.padding.xl,
+        paddingInlineEnd: forwardFitTokens.system.padding.lg,
       },
     },
     {
       modifiers: {size: 'small', iconPosition: 'only'},
       styles: {
-        minWidth: system.space.x8,
+        minWidth: forwardFitTokens.system.size.md,
       },
     },
     {
       modifiers: {size: 'small', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: system.space.x3,
-        paddingInlineEnd: system.space.x4,
+        paddingInlineStart: forwardFitTokens.system.padding.sm,
+        paddingInlineEnd: forwardFitTokens.system.padding.md,
       },
     },
     {
       modifiers: {size: 'small', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: system.space.x4,
-        paddingInlineEnd: system.space.x3,
+        paddingInlineStart: forwardFitTokens.system.padding.md,
+        paddingInlineEnd: forwardFitTokens.system.padding.sm,
       },
     },
     {
       modifiers: {size: 'extraSmall', iconPosition: 'only'},
       styles: {
-        minWidth: system.space.x6,
+        minWidth: forwardFitTokens.system.size.sm,
       },
     },
     {
       modifiers: {size: 'extraSmall', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: system.space.x2,
-        paddingInlineEnd: system.space.x3,
+        paddingInlineStart: forwardFitTokens.system.padding.xs,
+        paddingInlineEnd: forwardFitTokens.system.padding.sm,
       },
     },
     {
       modifiers: {size: 'extraSmall', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: system.space.x3,
-        paddingInlineEnd: system.space.x2,
+        paddingInlineStart: forwardFitTokens.system.padding.sm,
+        paddingInlineEnd: forwardFitTokens.system.padding.xs,
       },
     },
   ],
