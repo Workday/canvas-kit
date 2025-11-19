@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {createComponent, forwardFitTokens} from '@workday/canvas-kit-react/common';
+import {createComponent} from '@workday/canvas-kit-react/common';
 import {createStencil, CSProps, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system, brand} from '@workday/canvas-tokens-web';
 
