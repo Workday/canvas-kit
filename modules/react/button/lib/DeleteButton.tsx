@@ -1,5 +1,5 @@
 import {buttonColorPropVars, buttonStencil} from './BaseButton';
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, forwardFitTokens} from '@workday/canvas-kit-react/common';
 import {createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 import {Button, ButtonProps} from './Button';
@@ -17,7 +17,7 @@ const deleteButtonStencil = createStencil({
   base: {
     // Base Styles
     [buttonStencil.vars.background]: brand.error.base,
-    [buttonStencil.vars.borderRadius]: system.shape.round,
+    [buttonStencil.vars.borderRadius]: forwardFitTokens.system.shape.full,
     [buttonStencil.vars.label]: brand.error.accent,
     [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, brand.error.accent),
     // Focus Styles
