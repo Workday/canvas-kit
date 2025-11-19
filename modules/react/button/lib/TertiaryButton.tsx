@@ -209,7 +209,7 @@ const tertiaryButtonStencil = createStencil({
     {
       modifiers: {size: 'extraSmall', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: forwardFitTokens.system.padding['2XS'],
+        paddingInlineStart: forwardFitTokens.system.padding.xxs,
         paddingInlineEnd: forwardFitTokens.system.padding.xs,
       },
     },
@@ -217,7 +217,7 @@ const tertiaryButtonStencil = createStencil({
       modifiers: {size: 'extraSmall', iconPosition: 'end'},
       styles: {
         paddingInlineStart: forwardFitTokens.system.padding.xs,
-        paddingInlineEnd: forwardFitTokens.system.padding['2XS'],
+        paddingInlineEnd: forwardFitTokens.system.padding.xxs,
       },
     },
   ],
