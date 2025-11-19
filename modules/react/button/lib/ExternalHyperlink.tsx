@@ -3,7 +3,6 @@ import {extLinkIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {HyperlinkProps, hyperlinkStencil} from './Hyperlink';
 import {calc, createStencil, px2rem, handleCsProp} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
 
 export interface ExternalHyperlinkProps extends HyperlinkProps {
   /**
