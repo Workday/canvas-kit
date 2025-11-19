@@ -4,10 +4,8 @@ import {
   SymbolDoc,
   Specifications,
 } from '@workday/canvas-kit-docs';
-import {Caution} from './examples/Caution';
 import {Basic} from './examples/Basic';
 import {Disabled} from './examples/Disabled';
-import {Error} from './examples/Error';
 import {Grow} from './examples/Grow';
 import {LabelPosition} from './examples/LabelPosition';
 import {Placeholder} from './examples/Placeholder';
@@ -112,20 +110,10 @@ method to change width. The `width` prop is used to correctly position other inn
 
 ### Error States
 
-Set the `error` prop of the wrapping Form Field to `"caution"` or `"error"` to set the Text Input to
-the Caution or Error state, respectively. You will also need to set the `hintId` and `hintText`
-props on the Form Field to meet accessibility standards.
-
-The `error` prop may be applied directly to the Text Input with a value of
-`TextInput.ErrorType.Caution` or `TextInput.ErrorType.Error` if Form Field is not being used.
-
-#### Caution
-
-<ExampleCodeBlock code={Caution} />
-
-#### Error
-
-<ExampleCodeBlock code={Error} />
+Form Field provides error and caution states for Text Input. Set the `error` prop on Form Field to
+`"error"` or `"caution"` and use `FormField.Hint` to provide error messages. See
+[Form Field's Error documentation](?path=/docs/components-inputs-form-field--docs#error-states) for
+examples and accessibility guidance.
 
 ## Accessibility
 
@@ -145,13 +133,8 @@ for comprehensive guidance on form accessibility best practices.
 
 ### Input Type for Mobile Keyboards
 
-While `TextInput` renders `<input type="text">`, consider using specialized input types for better
-mobile keyboard support:
-
-- `type="email"` for email addresses (shows @ key on mobile keyboards)
-- `type="tel"` for phone numbers (shows numeric keypad on mobile)
-- `type="url"` for web addresses (shows .com key on mobile keyboards)
-- `type="search"` for search inputs (shows search icon and enables search-specific behaviors)
+`TextInput` defaults to `<input type="text">`, but for better mobile keyboard support, use more
+specific `type` attributes (like `"email"`, `"tel"`, `"url"`, or `"search"`) as needed.
 
 ### Screen Reader Experience
 

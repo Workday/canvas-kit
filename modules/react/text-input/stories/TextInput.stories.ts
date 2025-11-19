@@ -4,10 +4,8 @@ import mdxDoc from './TextInput.mdx';
 
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 
-import {Caution as CautionExample} from './examples/Caution';
 import {Basic as BasicExample} from './examples/Basic';
 import {Disabled as DisabledExample} from './examples/Disabled';
-import {Error as ErrorExample} from './examples/Error';
 import {Grow as GrowExample} from './examples/Grow';
 import {LabelPosition as LabelPositionExample} from './examples/LabelPosition';
 import {Placeholder as PlaceholderExample} from './examples/Placeholder';
@@ -28,17 +26,11 @@ export default {
 
 type Story = StoryObj<typeof TextInput>;
 
-export const Caution: Story = {
-  render: CautionExample,
-};
 export const Basic: Story = {
   render: BasicExample,
 };
 export const Disabled: Story = {
   render: DisabledExample,
-};
-export const Error: Story = {
-  render: ErrorExample,
 };
 export const Grow: Story = {
   render: GrowExample,
