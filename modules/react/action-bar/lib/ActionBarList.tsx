@@ -38,9 +38,7 @@ export const actionBarListStencil = createStencil({
     gap: forwardFitTokens.system.gap.md,
     background: system.color.bg.default,
     borderBlockStart: `solid 1px ${cssVar(system.color.border.divider)}`,
-    padding: `${cssVar(forwardFitTokens.system.padding.md)} ${cssVar(
-      forwardFitTokens.system.padding.xxl
-    )} `,
+    padding: `${forwardFitTokens.system.padding.md} ${forwardFitTokens.system.padding.xxl} `,
     position: 'fixed',
     insetBlockEnd: 0,
     insetInlineStart: 0,
