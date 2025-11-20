@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.1.11](https://github.com/Workday/canvas-kit/releases/tag/v14.1.11) (2025-11-20)
+
+### Components
+
+- fix: Update release.yml to use openid connect for npm publishing ([#3606](https://github.com/Workday/canvas-kit/pull/3606)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  Update our release.yml to handle openid connect for npm publishing.
+
+### Infrastructure
+
+- fix: Update node version to 22.x ([#3607](https://github.com/Workday/canvas-kit/pull/3607)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- fix: Update index ([#3608](https://github.com/Workday/canvas-kit/pull/3608)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v14.1.10](https://github.com/Workday/canvas-kit/releases/tag/v14.1.10) (2025-11-10)
 
 ### fix
