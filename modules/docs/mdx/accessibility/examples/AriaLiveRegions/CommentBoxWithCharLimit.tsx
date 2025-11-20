@@ -6,7 +6,7 @@ import {AriaLiveRegion, AccessibleHide} from '@workday/canvas-kit-react/common';
 const MAX_CHARACTERS = 200;
 const DEBOUNCE_DELAY = 2000; // 2 seconds after user stops typing
 
-export default function CommentBoxWithCharLimit() {
+export const CommentBoxWithCharLimit = () => {
   const [value, setValue] = React.useState('');
   const [liveUpdateStr, setLiveUpdateStr] = React.useState('');
   const hintTextStr = `${value.length} of ${MAX_CHARACTERS} characters`;
@@ -44,11 +44,9 @@ export default function CommentBoxWithCharLimit() {
           value={value}
           maxLength={MAX_CHARACTERS}
         />
-        <FormField.Hint>
-          {hintTextStr}
-          <AriaLiveRegion as={AccessibleHide}>{liveUpdateStr}</AriaLiveRegion>
-        </FormField.Hint>
+        <FormField.Hint>{hintTextStr}</FormField.Hint>
+        <AriaLiveRegion as={AccessibleHide}>{liveUpdateStr}</AriaLiveRegion>
       </FormField.Field>
     </FormField>
   );
-}
+};
