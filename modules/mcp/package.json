@@ -46,7 +46,7 @@
     "@modelcontextprotocol/sdk": "^1.20.2"
   },
   "devDependencies": {
-    "@types/node": "^14.0.0",
+    "@types/node": "^22.0.0",
     "esbuild": "^0.25.11",
     "mkdirp": "^1.0.3",
     "rimraf": "^5.0.0",
