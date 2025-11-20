@@ -51,6 +51,24 @@ const config: StorybookConfig = {
     reactDocgen: false, // we'll handle this ourselves
   },
   webpackFinal: async config => {
+    // Add resolve configuration for README.md imports
+    if (!config.resolve) {
+      config.resolve = {};
+    }
+    if (!config.resolve.alias) {
+      config.resolve.alias = {};
+    }
+    // Add root directory to modules to help resolve relative paths
+    if (!config.resolve.modules) {
+      config.resolve.modules = ['node_modules'];
+    }
+    // Ensure the project root is in the resolve path
+    config.resolve.modules.push(path.resolve(__dirname, '..'));
+    // Also add alias for common README.md import patterns
+    const readmePath = path.resolve(__dirname, '../README.md');
+    config.resolve.alias['../../../README.md'] = readmePath;
+    config.resolve.alias['../../../../README.md'] = readmePath;
+    
     const docsMap = new Map<string, ExportedSymbol<Value>[]>();
 
     const tsPlugin = new StylingWebpackPlugin({
