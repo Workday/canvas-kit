@@ -36,7 +36,7 @@ jobs:
 
       - uses: Workday/canvas-kit-actions/install@v1
         with:
-          node_version: 18.x
+          node_version: 22.x
 
       # Ensure npm version 11.5.1+ for OIDC support
       - name: Upgrade npm for OIDC
