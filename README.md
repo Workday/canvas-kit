@@ -107,7 +107,10 @@ export const App = () => {
 };
 ```
 
-> **Note:** Don't use the `CanvasProvider` to theme, instead use our CSS tokens from `@workday/canvas-tokens-web`. For more information, view our [Token docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
+> **Note:** Don't use the `CanvasProvider` to theme, instead use our CSS tokens from
+> `@workday/canvas-tokens-web`. For more information, view our
+> [Token docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
+> Theming should be global.
 
 ## Reporting a Bug
 
