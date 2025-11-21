@@ -107,6 +107,8 @@ export const App = () => {
 };
 ```
 
+> **Note:** Don't use the `CanvasProvider` to theme, instead use our CSS tokens from `@workday/canvas-tokens-web`.
+
 ## Reporting a Bug
 
 If you spot a bug, inconsistency, or typo, please
