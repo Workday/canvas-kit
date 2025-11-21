@@ -8,7 +8,7 @@
   "sideEffects": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/workday/canvas-kit.git",
+    "url": "https://github.com/Workday/canvas-kit.git",
     "directory": "modules/mcp"
   },
   "bin": {
