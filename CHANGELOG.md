@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.1.14](https://github.com/Workday/canvas-kit/releases/tag/v14.1.14) (2025-11-21)
+
+### Components
+
+- chore: Update lerna to v9 for OIDC support ([@](https://github.com/))
+
+
 ## [v14.1.13](https://github.com/Workday/canvas-kit/releases/tag/v14.1.13) (2025-11-21)
 
 ### Documentation
