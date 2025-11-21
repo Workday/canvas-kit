@@ -38,6 +38,26 @@ jobs:
         with:
           node_version: 22.x
 
+      # Debug: Check if NODE_AUTH_TOKEN is set after install action
+      - name: Check for NODE_AUTH_TOKEN after install
+        run: |
+          echo "=== Checking if NODE_AUTH_TOKEN is set after install action ==="
+          if [ -n "$NODE_AUTH_TOKEN" ]; then
+            echo "❌ NODE_AUTH_TOKEN is set! Length: ${#NODE_AUTH_TOKEN}"
+            echo "   This might be coming from:"
+            echo "   1. The install action"
+            echo "   2. A GitHub secret (NPM_CI_PUBLISH_TOKEN or similar)"
+            echo "   3. setup-node action with registry-url"
+            echo ""
+            echo "   Checking npm config:"
+            npm config get //registry.npmjs.org/:_authToken 2>&1 || echo "No token in npm config"
+          else
+            echo "✅ NODE_AUTH_TOKEN is not set (good)"
+          fi
+          echo ""
+          echo "Checking for npm-related secrets that might auto-inject:"
+          env | grep -i "npm\|token" | grep -v "NODE_AUTH_TOKEN" || echo "No other npm tokens found"
+
       # Ensure npm version 11.5.1+ for OIDC support
       - name: Upgrade npm for OIDC
         run: npm install -g npm@latest
@@ -45,6 +65,18 @@ jobs:
       # Configure npm registry (OIDC will be used automatically by npm 11.5.1+)
       - name: Configure npm registry
         run: npm config set registry https://registry.npmjs.org/
+
+      # CRITICAL: Unset NODE_AUTH_TOKEN to allow OIDC to work
+      # If NODE_AUTH_TOKEN is set, npm will use it instead of OIDC
+      - name: Clear npm auth token for OIDC
+        run: |
+          echo "=== Clearing npm auth token to enable OIDC ==="
+          # Remove any existing auth token from npm config
+          npm config delete //registry.npmjs.org/:_authToken || true
+          # Unset NODE_AUTH_TOKEN environment variable
+          unset NODE_AUTH_TOKEN || true
+          echo "NODE_AUTH_TOKEN cleared (if it was set)"
+          echo "OIDC will now be used automatically by npm 11.5.1+"
 
       # Verify npm trusted publisher configuration matches
       - name: Verify npm trusted publisher configuration
@@ -82,8 +114,25 @@ jobs:
           echo "Repository: $REPO_NAME"
           echo "Workflow file: .github/workflows/release.yml"
           echo ""
-          echo "⚠️  IMPORTANT: Organization name is CASE-SENSITIVE!"
-          echo "   If npm shows 'orkday' but GitHub shows 'workday', they won't match!"
+          echo "⚠️  CRITICAL: Organization name is CASE-SENSITIVE!"
+          echo "   GitHub repository shows: $ORG_NAME"
+          echo "   npm trusted publisher MUST have: $ORG_NAME (exact case match required!)"
+          echo ""
+          echo "   From your logs:"
+          echo "   - GitHub: Workday/canvas-kit (capital W)"
+          echo "   - Package URL: https://github.com/workday/canvas-kit.git (lowercase w)"
+          echo "   - npm should have: Workday (capital W) to match GitHub!"
+          echo ""
+          echo "   If npm trusted publisher has 'workday' (lowercase) but GitHub is 'Workday' (capital),"
+          echo "   they won't match and OIDC will fail with 404!"
+          echo ""
+          echo "=== Checking for NODE_AUTH_TOKEN (should be unset for OIDC) ==="
+          if [ -n "$NODE_AUTH_TOKEN" ]; then
+            echo "❌ ERROR: NODE_AUTH_TOKEN is set! This will prevent OIDC from working."
+            echo "   NODE_AUTH_TOKEN length: ${#NODE_AUTH_TOKEN}"
+          else
+            echo "✅ NODE_AUTH_TOKEN is not set (good for OIDC)"
+          fi
 
       # Debug: Verify OIDC setup and npm configuration
       - name: Debug npm OIDC setup
