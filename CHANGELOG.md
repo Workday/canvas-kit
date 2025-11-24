@@ -3,6 +3,68 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.1.18](https://github.com/Workday/canvas-kit/releases/tag/v14.1.18) (2025-11-24)
+
+### Infrastructure
+
+- fix: Clean up release files ([#3613](https://github.com/Workday/canvas-kit/pull/3613)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v14.1.17](https://github.com/Workday/canvas-kit/releases/tag/v14.1.17) (2025-11-21)
+
+### Components
+
+- fix: Update repository url ([@](https://github.com/))
+
+
+## [v14.1.16](https://github.com/Workday/canvas-kit/releases/tag/v14.1.16) (2025-11-21)
+
+### Documentation
+
+- docs: Update readme ([@](https://github.com/))
+
+
+## [v14.1.15](https://github.com/Workday/canvas-kit/releases/tag/v14.1.15) (2025-11-21)
+
+### Components
+
+- chore: Add more logging to our release ([@](https://github.com/))
+
+
+## [v14.1.14](https://github.com/Workday/canvas-kit/releases/tag/v14.1.14) (2025-11-21)
+
+### Components
+
+- chore: Update lerna to v9 for OIDC support ([@](https://github.com/))
+
+
+## [v14.1.13](https://github.com/Workday/canvas-kit/releases/tag/v14.1.13) (2025-11-21)
+
+### Documentation
+
+- docs: Update README.md to add info around tokens ([@mannycarrera4](https://github.com/mannycarrera4))
+
+
+## [v14.1.12](https://github.com/Workday/canvas-kit/releases/tag/v14.1.12) (2025-11-21)
+
+### documentation
+
+- docs: Update README.md ([#3611](https://github.com/Workday/canvas-kit/pull/3611)) ([@mannycarrera4](https://github.com/mannycarrera4))
+
+
+## [v14.1.11](https://github.com/Workday/canvas-kit/releases/tag/v14.1.11) (2025-11-20)
+
+### Components
+
+- fix: Update release.yml to use openid connect for npm publishing ([#3606](https://github.com/Workday/canvas-kit/pull/3606)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  Update our release.yml to handle openid connect for npm publishing.
+
+### Infrastructure
+
+- fix: Update node version to 22.x ([#3607](https://github.com/Workday/canvas-kit/pull/3607)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- fix: Update index ([#3608](https://github.com/Workday/canvas-kit/pull/3608)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v14.1.10](https://github.com/Workday/canvas-kit/releases/tag/v14.1.10) (2025-11-10)
 
 ### fix

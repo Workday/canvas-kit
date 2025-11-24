@@ -13,6 +13,10 @@ on:
           decide which version'
         required: false
 
+permissions:
+  id-token: write # Required for OIDC
+  contents: write
+
 jobs:
   release:
     # Only run if:
@@ -25,20 +29,28 @@ jobs:
       ## First, we'll checkout the repository. We don't persist credentials because we need a
       ## Personal Access Token to push on a branch that is protected. See
       ## https://github.com/cycjimmy/semantic-release-action#basic-usage
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           persist-credentials: false
           fetch-depth: 0 # Used for conventional commit ranges
 
       - uses: Workday/canvas-kit-actions/install@v1
         with:
-          node_version: 18.x
+          node_version: 22.x
+
+      - name: Clear auth token for OIDC
+        run: echo "NODE_AUTH_TOKEN=" >> $GITHUB_ENV
+
+      - name: Upgrade npm for OIDC
+        run: npm install -g npm@latest
+
+      - name: Configure npm registry
+        run: npm config set registry https://registry.npmjs.org/
 
       - uses: Workday/canvas-kit-actions/release@v1
         with:
           gh_token: ${{ secrets.GITHUB_TOKEN }}
           gh_rw_token: ${{ secrets.GH_RW_TOKEN }}
-          publish_token: ${{ secrets.NPM_CI_PUBLISH_TOKEN }}
           chromatic_project_token: ${{ secrets.CHROMATIC_APP_CODE }}
           version: ${{ inputs.version || 'patch' }}
 

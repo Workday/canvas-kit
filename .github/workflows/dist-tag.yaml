@@ -22,7 +22,7 @@ jobs:
 
       - uses: Workday/canvas-kit-actions/install@v1
         with:
-          node_version: 18.x
+          node_version: 22.x
 
       - name: Check packages
         run: node utils/dist-tag.mjs
