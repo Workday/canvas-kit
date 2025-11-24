@@ -6,6 +6,10 @@ on:
       - prerelease/*
   workflow_dispatch: # Allow manual triggering of this job in case of failures
 
+permissions:
+  id-token: write # Required for OIDC
+  contents: write
+
 jobs:
   canary:
     runs-on: ubuntu-latest
@@ -21,7 +25,18 @@ jobs:
 
       - uses: Workday/canvas-kit-actions/install@v1
         with:
-          node_version: 18.x
+          node_version: 22.x
+
+      - name: Upgrade npm for OIDC
+        run: npm install -g npm@latest
+
+      - name: Configure npm registry
+        run: npm config set registry https://registry.npmjs.org/
+
+      - name: Clear npm auth token for OIDC
+        run: |
+          npm config delete //registry.npmjs.org/:_authToken || true
+          unset NODE_AUTH_TOKEN || true
 
       ## Build Storybook and extract component stories for Storybook aggregation. This will be used
       ## for Chromatic rebaselining and publishing to GH Pages. Should be before `yarn build` since
@@ -41,7 +56,6 @@ jobs:
       - name: Publish
         run: node utils/publish-canary.mjs
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_CI_PUBLISH_TOKEN}}
           SLACK_WEBHOOK: ${{secrets.SLACK_WEBHOOK}}
           BUILD_URL:
             ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}

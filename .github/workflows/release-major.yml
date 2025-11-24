@@ -3,6 +3,10 @@ name: Major Release
 on:
   workflow_dispatch:
 
+permissions:
+  id-token: write # Required for OIDC
+  contents: write
+
 jobs:
   release-major:
     runs-on: ubuntu-latest
@@ -34,14 +38,24 @@ jobs:
 
       - uses: Workday/canvas-kit-actions/install@v1
         with:
-          node_version: 18.x
+          node_version: 22.x
+
+      - name: Upgrade npm for OIDC
+        run: npm install -g npm@latest
+
+      - name: Configure npm registry
+        run: npm config set registry https://registry.npmjs.org/
+
+      - name: Clear npm auth token for OIDC
+        run: |
+          npm config delete //registry.npmjs.org/:_authToken || true
+          unset NODE_AUTH_TOKEN || true
 
       # Run the release job to publish the next major version to npm
       - uses: Workday/canvas-kit-actions/release@v1
         with:
           gh_token: ${{ secrets.GITHUB_TOKEN }}
           gh_rw_token: ${{ secrets.GH_RW_TOKEN }}
-          publish_token: ${{ secrets.NPM_CI_PUBLISH_TOKEN }}
           chromatic_project_token: ${{ secrets.CHROMATIC_APP_CODE }}
           version: 'major'
           toRef: 'prerelease/major'
@@ -64,6 +78,5 @@ jobs:
       - name: Update support dist tag
         run: node utils/dist-tag.mjs
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_CI_PUBLISH_TOKEN }}
           DIST_TAG: 'support'
           VERSION: ${{ steps.previous-tag.outputs.tag }}
