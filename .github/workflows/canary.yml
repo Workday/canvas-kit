@@ -33,11 +33,6 @@ jobs:
       - name: Configure npm registry
         run: npm config set registry https://registry.npmjs.org/
 
-      - name: Clear npm auth token for OIDC
-        run: |
-          npm config delete //registry.npmjs.org/:_authToken || true
-          unset NODE_AUTH_TOKEN || true
-
       ## Build Storybook and extract component stories for Storybook aggregation. This will be used
       ## for Chromatic rebaselining and publishing to GH Pages. Should be before `yarn build` since
       ## built assets mess up this command

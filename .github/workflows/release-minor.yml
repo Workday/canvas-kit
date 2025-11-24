@@ -31,11 +31,6 @@ jobs:
       - name: Configure npm registry
         run: npm config set registry https://registry.npmjs.org/
 
-      - name: Clear npm auth token for OIDC
-        run: |
-          npm config delete //registry.npmjs.org/:_authToken || true
-          unset NODE_AUTH_TOKEN || true
-
       - uses: Workday/canvas-kit-actions/release@v1
         with:
           gh_token: ${{ secrets.GITHUB_TOKEN }}
