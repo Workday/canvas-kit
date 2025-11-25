@@ -107,6 +107,11 @@ export const App = () => {
 };
 ```
 
+> **Note:** Don't use the `CanvasProvider` to theme, instead use our CSS tokens from
+> `@workday/canvas-tokens-web`. For more information, view our
+> [Token docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
+> Theming should be global.
+
 ## Reporting a Bug
 
 If you spot a bug, inconsistency, or typo, please
@@ -177,7 +182,7 @@ recommend against using it in production until the first stable version has been
   - [v11.0 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v11-0--docs)
   - [v12.0 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v12-0--docs)
   - [v13.0 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v13-0--docs)
-  - [v14.0 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v14-0--docs)
+  - [v14.0 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v14-0-overview--docs)
 - Code Style / Best Practices:
   - [API & Pattern Guidelines](https://workday.github.io/canvas-kit/?path=/docs/guides-api-pattern-guidelines--docs)
   - [Compound Components](https://workday.github.io/canvas-kit/?path=/docs/guides-compound-components--docs)

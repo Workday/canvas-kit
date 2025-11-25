@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-mcp",
-  "version": "14.1.5",
+  "version": "14.1.18",
   "description": "MCP package for Canvas Kit",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -8,7 +8,7 @@
   "sideEffects": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/workday/canvas-kit.git",
+    "url": "https://github.com/Workday/canvas-kit.git",
     "directory": "modules/mcp"
   },
   "bin": {
@@ -46,7 +46,7 @@
     "@modelcontextprotocol/sdk": "^1.20.2"
   },
   "devDependencies": {
-    "@types/node": "^14.0.0",
+    "@types/node": "^22.0.0",
     "esbuild": "^0.25.11",
     "mkdirp": "^1.0.3",
     "rimraf": "^5.0.0",
