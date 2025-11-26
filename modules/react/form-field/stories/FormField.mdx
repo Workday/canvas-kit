@@ -67,6 +67,17 @@ Use the error state when the value is no longer valid.
 > error state from fields with standard hint text. Read more about
 > [Failure of Success Criterion 1.4.1 due to identifying required or error fields using color differences only](https://www.w3.org/WAI/WCAG22/Techniques/failures/F81)
 
+### Hint
+
+Use `FormField.Hint` to display a short message below the input component and `FormField.Field` to
+ensure proper alignment.
+
+<ExampleCodeBlock code={Hint} />
+
+> **Accessibility Note**: Hints are automatically associated to the input field with the
+> `aria-describedby` attribute. This ensures that screen readers can automatically announce the hint
+> text to users when the input field is focused.
+
 ### Disabled
 
 Set the `disabled` prop of `FormField.Input` to prevent users from interacting with it.
@@ -78,17 +89,6 @@ Set the `disabled` prop of `FormField.Input` to prevent users from interacting w
 > Despite this exemption, disabled fields are more difficult for low vision and colorblind users to
 > perceive and may harm the usability of the form. Consider using text elements instead, or
 > read-only fields if users cannot modify data.
-
-### Hint
-
-Use `FormField.Hint` to display a short message below the input component and `FormField.Field` to
-ensure proper alignment.
-
-<ExampleCodeBlock code={Hint} />
-
-> **Accessibility Note**: Hints are automatically associated to the input field with the
-> `aria-describedby` attribute. This ensures that screen readers can automatically announce the hint
-> text to users when the input field is focused.
 
 ### Label Position
 
@@ -130,9 +130,9 @@ for required fields are suffixed by a red asterisk.
 
 <ExampleCodeBlock code={Required} />
 
-> **Accessibility Note**: The HTML `required` attribute is automatically added to the input field
-> and announced by screen readers. Consider adding a note at the top of your form indicating that
-> fields marked with an asterisk (\*) are required. This provides context for all users.
+> **Accessibility Note**: The HTML `required` attribute will be added to the input field and
+> announced by screen readers. Consider adding a note at the top of your form indicating that fields
+> marked with an asterisk (\*) are required. This provides context for all users.
 
 ### Grouped Inputs
 
@@ -183,6 +183,10 @@ In cases where you want to hide the label while still meeting accessibility stan
 `isHidden` on the `<FormField.Label/>`. This prop will visually hide the label.
 
 <ExampleCodeBlock code={HiddenLabel} />
+
+> **Accessibility Note**: Hidden labels are typically not recommended. In this example, a
+> universally recognizable icon like a magnifying glass signaling "search"may be a suitable
+> alternative to visible text labels.
 
 ### Themed Errors
 

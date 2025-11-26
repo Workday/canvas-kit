@@ -121,6 +121,10 @@ When limiting text area length:
 - For longer limits (100+ characters), consider adding character count information to
   `FormField.Hint`.
 - Avoid announcing character counts after every keystroke, as this disrupts screen reader users.
+  Check out
+  [Debouncing an AriaLiveRegion: TextArea with character limit](?path=/docs/guides-accessibility-aria-live-regions--docs#debouncing-an-arialiveregion-textarea-with-character-limit)
+  for an example of how to wait for users to stop typing before announcing the character count to
+  screen readers.
 
 ### Screen Reader Experience
 
