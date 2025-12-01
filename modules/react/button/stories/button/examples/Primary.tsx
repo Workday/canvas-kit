@@ -10,8 +10,8 @@ import {system} from '@workday/canvas-tokens-web';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 
 const parentContainerStyles = createStyles({
-  gap: system.space.x4,
-  padding: system.space.x4,
+  gap: system.gap.md,
+  padding: system.padding.md,
 });
 
 export const Primary = () => (

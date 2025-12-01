@@ -1,5 +1,5 @@
 import {cssVar} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {system, base} from '@workday/canvas-tokens-web';
 
 /**
  * This file is NOT INTENDED to be used by consumers, only internally by Canvas Kit.
@@ -41,6 +41,33 @@ export const forwardFitTokens = {
       xs: cssVar(system.gap.xs, system.space.x1),
       sm: cssVar(system.gap.sm, system.space.x2),
       md: cssVar(system.gap.md, system.space.x4),
+    },
+    type: {
+      subtext: {
+        lg: {
+          fontFamily: cssVar(system.fontFamily.default, system.fontFamily.default),
+          fontWeight: cssVar(system.fontWeight.normal, system.fontWeight.normal),
+          lineHeight: cssVar(system.lineHeight.subtext.lg, system.lineHeight.subtext.large),
+          fontSize: cssVar(system.fontSize.subtext.lg, system.fontSize.subtext.large),
+          letterSpacing: cssVar(system.letterSpacing.subtext.lg, base.letterSpacing50),
+        },
+        md: {
+          fontFamily: cssVar(system.fontFamily.default, system.fontFamily.default),
+          fontWeight: cssVar(system.fontWeight.normal, system.fontWeight.normal),
+          lineHeight: cssVar(system.lineHeight.subtext.md, system.lineHeight.subtext.medium),
+          fontSize: cssVar(system.fontSize.subtext.md, system.fontSize.subtext.medium),
+          letterSpacing: cssVar(system.letterSpacing.subtext.md, base.letterSpacing100),
+        },
+      },
+      body: {
+        sm: {
+          fontFamily: system.fontFamily.default,
+          fontWeight: system.fontWeight.normal,
+          lineHeight: cssVar(system.lineHeight.body.sm, system.lineHeight.body.small),
+          fontSize: cssVar(system.fontSize.body.sm, system.fontSize.body.small),
+          letterSpacing: cssVar(system.letterSpacing.body.sm, base.letterSpacing200),
+        },
+      },
     },
   },
 } as const;

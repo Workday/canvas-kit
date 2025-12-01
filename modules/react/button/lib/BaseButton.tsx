@@ -263,21 +263,21 @@ export const buttonStencil = createStencil({
      */
     size: {
       large: {
-        ...system.type.body.sm,
+        ...forwardFitTokens.system.type.body.sm,
         fontWeight: system.fontWeight.bold,
         height: forwardFitTokens.system.size.xl,
         paddingInline: forwardFitTokens.system.padding.xxl,
         minWidth: base.size1400,
       },
       medium: {
-        ...system.type.subtext.lg,
+        ...forwardFitTokens.system.type.subtext.lg,
         fontWeight: system.fontWeight.bold,
         minWidth: base.size1200,
         paddingInline: forwardFitTokens.system.padding.xl,
         height: forwardFitTokens.system.size.lg,
       },
       small: {
-        ...system.type.subtext.lg,
+        ...forwardFitTokens.system.type.subtext.lg,
         fontWeight: system.fontWeight.bold,
         height: forwardFitTokens.system.size.md,
         minWidth: base.size1000,
@@ -285,7 +285,7 @@ export const buttonStencil = createStencil({
         gap: forwardFitTokens.system.gap.xs,
       },
       extraSmall: {
-        ...system.type.subtext.md,
+        ...forwardFitTokens.system.type.subtext.md,
         fontWeight: system.fontWeight.bold,
         height: forwardFitTokens.system.size.sm,
         minWidth: 'auto',

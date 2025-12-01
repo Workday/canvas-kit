@@ -13,8 +13,8 @@ import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {Heading} from '@workday/canvas-kit-react/text';
 
 const parentContainerStyles = createStyles({
-  gap: system.space.x4,
-  padding: system.space.x4,
+  gap: system.gap.md,
+  padding: system.padding.md,
 });
 
 const customActionTheme = createStyles({
