@@ -7,7 +7,6 @@ import {system, base} from '@workday/canvas-tokens-web';
 export const forwardFitTokens = {
   system: {
     shape: {
-      //TODO: in v4 Tokens and v15, we should replace this forward fit token with the actual token value
       xs: cssVar(system.shape.xs, system.shape.x1),
       sm: cssVar(system.shape.sm, system.shape.x1Half),
       full: cssVar(system.shape.full, system.shape.round),

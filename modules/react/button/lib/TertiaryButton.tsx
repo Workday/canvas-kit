@@ -66,7 +66,7 @@ const tertiaryButtonStencil = createStencil({
     // IconPosition Styles
     iconPosition: {
       only: {
-        padding: system.padding.none,
+        padding: forwardFitTokens.system.padding.none,
         [systemIconStencil.vars.color]: system.color.fg.default,
         [systemIconStencil.vars.color]: cssVar(
           buttonColorPropVars.default.icon,
