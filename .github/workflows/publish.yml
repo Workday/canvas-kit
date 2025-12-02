@@ -1,0 +1,78 @@
+name: Publish to npm (Automatic Releases)
+
+# This workflow handles AUTOMATIC publishing to npm for:
+# - Canary releases (prerelease/* branches)
+# - Patch releases (master/support branches)
+#
+# Manual minor/major releases are handled by:
+# - release-minor.yml
+# - release-major.yml
+#
+# IMPORTANT: Configure this workflow (publish.yml) as a trusted publisher on npm
+# along with release-minor.yml and release-major.yml
+
+on:
+  push:
+    branches:
+      - master
+      - support
+      - 'prerelease/*'
+
+permissions:
+  id-token: write # Required for OIDC
+  contents: write
+
+jobs:
+  # Determine which type of publish to perform
+  determine-publish-type:
+    runs-on: ubuntu-latest
+    outputs:
+      publish_type: ${{ steps.determine.outputs.publish_type }}
+      branch: ${{ steps.determine.outputs.branch }}
+    steps:
+      - name: Determine publish type
+        id: determine
+        run: |
+          # For push events, determine type based on branch
+          BRANCH="${{ github.ref_name }}"
+          echo "branch=${BRANCH}" >> $GITHUB_OUTPUT
+
+          if [[ "$BRANCH" == prerelease/* ]]; then
+            echo "publish_type=canary" >> $GITHUB_OUTPUT
+          elif [[ "$BRANCH" == "master" ]] || [[ "$BRANCH" == "support" ]]; then
+            # Check if commit message contains [skip release]
+            if [[ "${{ github.event.head_commit.message }}" == *"[skip release]"* ]]; then
+              echo "publish_type=skip" >> $GITHUB_OUTPUT
+            else
+              echo "publish_type=release" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "publish_type=skip" >> $GITHUB_OUTPUT
+          fi
+
+  # Call canary publish workflow for prerelease branches
+  canary-publish:
+    needs: determine-publish-type
+    if: needs.determine-publish-type.outputs.publish_type == 'canary'
+    uses: ./.github/workflows/canary.yml
+    with:
+      branch: ${{ needs.determine-publish-type.outputs.branch }}
+    secrets:
+      SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      CHROMATIC_APP_CODE: ${{ secrets.CHROMATIC_APP_CODE }}
+
+  # Call release publish workflow for master/support branches
+  release-publish:
+    needs: determine-publish-type
+    if: needs.determine-publish-type.outputs.publish_type == 'release'
+    uses: ./.github/workflows/release.yml
+    with:
+      version: 'patch' # Automatic releases are always patch
+      branch: ${{ needs.determine-publish-type.outputs.branch }}
+      to_ref: '' # Not needed for patch releases
+    secrets:
+      GH_RW_TOKEN: ${{ secrets.GH_RW_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      CHROMATIC_APP_CODE: ${{ secrets.CHROMATIC_APP_CODE }}
+      SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

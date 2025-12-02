@@ -1,16 +1,30 @@
-name: Release
+name: Reusable Release Publish
 
 on:
-  push:
-    branches:
-      - master
-      - support
-  workflow_dispatch: # Allow manual triggering of this job in case of failures
+  workflow_call:
     inputs:
       version:
-        description:
-          'The version override. Example: "8.1.2". Leave blank if you want conventional commits to
-          decide which version'
+        required: false
+        type: string
+        description: 'The version override. Example: "8.1.2". Leave blank if you want conventional commits to decide which version'
+        default: 'patch'
+      branch:
+        required: true
+        type: string
+        description: 'The branch being published (master or support)'
+      to_ref:
+        required: false
+        type: string
+        description: 'Git ref that marks the end of changelog generation comparison to overwrite default value. Tag, SHA, or branch'
+        default: ''
+    secrets:
+      GH_RW_TOKEN:
+        required: true
+      GITHUB_TOKEN:
+        required: true
+      CHROMATIC_APP_CODE:
+        required: true
+      SLACK_WEBHOOK:
         required: false
 
 permissions:
@@ -19,10 +33,6 @@ permissions:
 
 jobs:
   release:
-    # Only run if:
-    # - The commit message does not contain `[skip release]`
-    # - OR the workflow was manually triggered and has a `version` string
-    if: "!contains(github.event.head_commit.message, '[skip release]') || inputs.version"
     runs-on: ubuntu-latest
 
     steps:
@@ -38,156 +48,22 @@ jobs:
         with:
           node_version: 22.x
 
-      # Debug: Check if NODE_AUTH_TOKEN is set after install action
-      - name: Check for NODE_AUTH_TOKEN after install
-        run: |
-          echo "=== Checking if NODE_AUTH_TOKEN is set after install action ==="
-          if [ -n "$NODE_AUTH_TOKEN" ]; then
-            echo "❌ NODE_AUTH_TOKEN is set! Length: ${#NODE_AUTH_TOKEN}"
-            echo "   This might be coming from:"
-            echo "   1. The install action"
-            echo "   2. A GitHub secret (NPM_CI_PUBLISH_TOKEN or similar)"
-            echo "   3. setup-node action with registry-url"
-            echo ""
-            echo "   Checking npm config:"
-            npm config get //registry.npmjs.org/:_authToken 2>&1 || echo "No token in npm config"
-          else
-            echo "✅ NODE_AUTH_TOKEN is not set (good)"
-          fi
-          echo ""
-          echo "Checking for npm-related secrets that might auto-inject:"
-          env | grep -i "npm\|token" | grep -v "NODE_AUTH_TOKEN" || echo "No other npm tokens found"
+      - name: Clear auth token for OIDC
+        run: echo "NODE_AUTH_TOKEN=" >> $GITHUB_ENV
 
-      # Ensure npm version 11.5.1+ for OIDC support
       - name: Upgrade npm for OIDC
         run: npm install -g npm@latest
 
-      # Configure npm registry (OIDC will be used automatically by npm 11.5.1+)
       - name: Configure npm registry
         run: npm config set registry https://registry.npmjs.org/
-
-      # CRITICAL: Unset NODE_AUTH_TOKEN to allow OIDC to work
-      # If NODE_AUTH_TOKEN is set, npm will use it instead of OIDC
-      - name: Clear npm auth token for OIDC
-        run: |
-          echo "=== Clearing npm auth token to enable OIDC ==="
-          # Remove any existing auth token from npm config
-          npm config delete //registry.npmjs.org/:_authToken || true
-          # Unset NODE_AUTH_TOKEN environment variable
-          unset NODE_AUTH_TOKEN || true
-          echo "NODE_AUTH_TOKEN cleared (if it was set)"
-          echo "OIDC will now be used automatically by npm 11.5.1+"
-
-      # Verify npm trusted publisher configuration matches
-      - name: Verify npm trusted publisher configuration
-        run: |
-          echo "=== NPM Trusted Publisher Configuration Check ==="
-          echo ""
-          echo "These values MUST match exactly what's configured in npm trusted publishers:"
-          echo ""
-          echo "1. Organization/User:"
-          ORG_NAME=$(echo "${{ github.repository }}" | cut -d'/' -f1)
-          echo "   GitHub: $ORG_NAME"
-          echo "   npm should have: $ORG_NAME (case-sensitive!)"
-          echo ""
-          echo "2. Repository:"
-          REPO_NAME=$(echo "${{ github.repository }}" | cut -d'/' -f2)
-          echo "   GitHub: $REPO_NAME"
-          echo "   npm should have: $REPO_NAME"
-          echo ""
-          echo "3. Workflow file path:"
-          echo "   GitHub: .github/workflows/release.yml"
-          echo "   npm should have: .github/workflows/release.yml"
-          echo ""
-          echo "4. Package scope (from package.json):"
-          SCOPE=$(cat modules/react/package.json | grep -o '"name": "@[^/]*' | cut -d'@' -f2 || echo "not found")
-          echo "   Package scope: @$SCOPE"
-          echo "   npm organization should match: $ORG_NAME (case-sensitive!)"
-          echo ""
-          echo "=== Full repository URL ==="
-          echo "Repository URL: https://github.com/${{ github.repository }}"
-          echo "Package repository (from package.json):"
-          cat modules/react/package.json | grep -A 2 '"repository"' | grep '"url"' | head -1 || echo "Not found"
-          echo ""
-          echo "=== Summary for npm trusted publisher ==="
-          echo "Organization: $ORG_NAME"
-          echo "Repository: $REPO_NAME"
-          echo "Workflow file: .github/workflows/release.yml"
-          echo ""
-          echo "⚠️  CRITICAL: Organization name is CASE-SENSITIVE!"
-          echo "   GitHub repository shows: $ORG_NAME"
-          echo "   npm trusted publisher MUST have: $ORG_NAME (exact case match required!)"
-          echo ""
-          echo "   From your logs:"
-          echo "   - GitHub: Workday/canvas-kit (capital W)"
-          echo "   - Package URL: https://github.com/workday/canvas-kit.git (lowercase w)"
-          echo "   - npm should have: Workday (capital W) to match GitHub!"
-          echo ""
-          echo "   If npm trusted publisher has 'workday' (lowercase) but GitHub is 'Workday' (capital),"
-          echo "   they won't match and OIDC will fail with 404!"
-          echo ""
-          echo "=== Checking for NODE_AUTH_TOKEN (should be unset for OIDC) ==="
-          if [ -n "$NODE_AUTH_TOKEN" ]; then
-            echo "❌ ERROR: NODE_AUTH_TOKEN is set! This will prevent OIDC from working."
-            echo "   NODE_AUTH_TOKEN length: ${#NODE_AUTH_TOKEN}"
-          else
-            echo "✅ NODE_AUTH_TOKEN is not set (good for OIDC)"
-          fi
-
-      # Debug: Verify OIDC setup and npm configuration
-      - name: Debug npm OIDC setup
-        run: |
-          echo "=== npm version ==="
-          npm --version
-          echo ""
-          echo "=== npm config ==="
-          npm config list
-          echo ""
-          echo "=== GitHub context ==="
-          echo "Repository: ${{ github.repository }}"
-          echo "Actor: ${{ github.actor }}"
-          echo "Ref: ${{ github.ref }}"
-          echo "Workflow: ${{ github.workflow }}"
-          echo "Workflow file: ${{ github.event.repository.name }}/.github/workflows/release.yml"
-          echo ""
-          echo "=== Check if packages exist ==="
-          npm view @workday/canvas-kit-react versions --json 2>&1 | head -20 || echo "Package view failed"
-          echo ""
-          echo "=== Verify registry ==="
-          npm config get registry
-          echo ""
-          echo "=== Check for auth token (should be empty for OIDC) ==="
-          npm config get //registry.npmjs.org/:_authToken || echo "No auth token set (good for OIDC)"
-          echo ""
-          echo "=== Environment variables ==="
-          env | grep -i "npm\|node\|auth" || echo "No npm/auth env vars found"
-          echo ""
-          echo "=== Test npm access (this will fail with OIDC, but shows the error) ==="
-          npm access ls-packages @workday 2>&1 || echo "Access check completed (may fail with OIDC)"
-          echo ""
-          echo "=== Check lerna config ==="
-          cat lerna.json | grep -A 2 npmClient || echo "No npmClient in lerna.json"
-          echo ""
-          echo "=== Verify package.json repository fields ==="
-          echo "Sample package repository:"
-          cat modules/react/package.json | grep -A 3 '"repository"' || echo "No repository field found"
-          echo ""
-          echo "=== Check if yarn is being used (lerna might use yarn instead of npm) ==="
-          which yarn && yarn --version || echo "yarn not found"
-          echo ""
-          echo "=== Check lerna publish command (what it would run) ==="
-          echo "Lerna version:"
-          npx lerna --version || yarn lerna --version || echo "lerna not found"
-          echo ""
-          echo "=== Note: Lerna 5.x uses npm for publishing even if npmClient is yarn ==="
-          echo "The npmClient setting only affects dependency installation, not publishing"
 
       - uses: Workday/canvas-kit-actions/release@v1
         with:
           gh_token: ${{ secrets.GITHUB_TOKEN }}
           gh_rw_token: ${{ secrets.GH_RW_TOKEN }}
           chromatic_project_token: ${{ secrets.CHROMATIC_APP_CODE }}
-          version: ${{ inputs.version || 'patch' }}
+          version: ${{ inputs.version }}
+          toRef: ${{ inputs.to_ref }}
 
       - uses: Workday/canvas-kit-actions/report-failure@v1
         if: failure()
