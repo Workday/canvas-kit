@@ -20,16 +20,15 @@ We've consolidated **all releases into a single workflow** (`publish.yml`):
 publish.yml (single entry point for ALL releases)
 ├── Automatic: canary.yml (reusable - handles prerelease/* branches)
 ├── Automatic: release.yml (reusable - handles master/support branches)
-├── Manual: minor release (inline job)
-└── Manual: major release (inline job)
+├── Manual: release-minor.yml (reusable - handles minor releases)
+└── Manual: release-major.yml (reusable - handles major releases)
 ```
 
 ### Why 1 Workflow?
 
 By consolidating everything into `publish.yml`, you only need to configure **1 trusted publisher** per package on npm. The workflow uses:
-- Reusable workflows for canary and patch releases
-- Inline jobs for minor and major releases
-- `workflow_dispatch` with a dropdown to select release type
+- Reusable workflows for all release types (canary, patch, minor, major)
+- `workflow_dispatch` with a dropdown to select release type for manual releases
 
 ### How It Works
 
@@ -39,8 +38,8 @@ By consolidating everything into `publish.yml`, you only need to configure **1 t
 |---------|--------------|--------------|
 | Push to `prerelease/*` | Canary | Calls `canary.yml` reusable workflow |
 | Push to `master`/`support` | Patch | Calls `release.yml` reusable workflow |
-| Manual → select "minor" | Minor | Runs inline minor-release job |
-| Manual → select "major" | Major | Runs inline major-release job |
+| Manual → select "minor" | Minor | Calls `release-minor.yml` reusable workflow |
+| Manual → select "major" | Major | Calls `release-major.yml` reusable workflow |
 
 ## Branch Workflow Guide
 
@@ -178,6 +177,7 @@ determine-publish-type job:
   - Sets: publish_type = "minor"
   ↓
 minor-release job:
+  - Calls release-minor.yml (reusable workflow)
   - Checks out master branch
   - Pulls changes from prerelease/minor
   - Calls canvas-kit-actions/release@v1 with version="minor":
@@ -210,6 +210,7 @@ determine-publish-type job:
   - Sets: publish_type = "major"
   ↓
 major-release job:
+  - Calls release-major.yml (reusable workflow)
   - Pushes current master to support branch
   - Gets current version (e.g., v14.2.0) - saves for later
   - Pulls changes from prerelease/major into master
@@ -305,15 +306,15 @@ Just push to the appropriate branch:
 ### Step 1: Update Workflows (Already Done)
 
 The following changes have been made:
-- `publish.yml` - Updated to handle all release types via `workflow_dispatch`
-- `release-minor.yml` - Deleted (functionality moved to publish.yml)
-- `release-major.yml` - Deleted (functionality moved to publish.yml)
+- `publish.yml` - Orchestrates all release types via reusable workflows
+- `release-minor.yml` - Reusable workflow for minor releases
+- `release-major.yml` - Reusable workflow for major releases
 
 ### Step 2: Configure npm Trusted Publishers
 
 Follow the steps in the "npm Configuration Steps" section above for each package. You only need to add `publish.yml` as a trusted publisher.
 
-If you previously had `release-minor.yml` and `release-major.yml` configured, you can remove them (optional - they won't cause issues if left).
+The reusable workflows (`release-minor.yml`, `release-major.yml`, `canary.yml`, `release.yml`) don't need to be configured as trusted publishers since they're called from `publish.yml`.
 
 ### Step 3: Test the Setup
 
@@ -340,19 +341,14 @@ If you previously had `release-minor.yml` and `release-major.yml` configured, yo
 
 ## Rollback Plan
 
-If you need to rollback to the old multi-workflow setup:
+If you need to rollback to standalone workflows (not using `publish.yml` as orchestrator):
 
-1. Restore the deleted workflow files from git history:
-   ```bash
-   git checkout HEAD~1 -- .github/workflows/release-minor.yml .github/workflows/release-major.yml
-   ```
+1. Update `release-minor.yml` and `release-major.yml` to trigger on `workflow_dispatch` directly instead of `workflow_call`
 
-2. Restore the original `publish.yml` (before workflow_dispatch was added)
-
-3. Configure npm trusted publishers:
+2. Configure npm trusted publishers for each workflow that publishes:
    - Add `release-minor.yml` as a trusted publisher
    - Add `release-major.yml` as a trusted publisher
-   - Keep `publish.yml` configured
+   - Keep `publish.yml` configured for canary and patch releases
 
 ## Troubleshooting
 
