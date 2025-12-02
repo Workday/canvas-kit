@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.1.18](https://github.com/Workday/canvas-kit/releases/tag/v14.1.18) (2025-11-24)
+
+### Infrastructure
+
+- fix: Clean up release files ([#3613](https://github.com/Workday/canvas-kit/pull/3613)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v14.1.17](https://github.com/Workday/canvas-kit/releases/tag/v14.1.17) (2025-11-21)
+
+### Components
+
+- fix: Update repository url ([@](https://github.com/))
+
+
 ## [v14.1.16](https://github.com/Workday/canvas-kit/releases/tag/v14.1.16) (2025-11-21)
 
 ### Documentation

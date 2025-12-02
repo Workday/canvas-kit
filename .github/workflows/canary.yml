@@ -19,6 +19,10 @@ permissions:
   id-token: write # Required for OIDC
   contents: write
 
+permissions:
+  id-token: write # Required for OIDC
+  contents: write
+
 jobs:
   canary:
     runs-on: ubuntu-latest
