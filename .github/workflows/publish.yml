@@ -1,15 +1,13 @@
-name: Publish to npm (Automatic Releases)
+name: Publish to npm
 
-# This workflow handles AUTOMATIC publishing to npm for:
-# - Canary releases (prerelease/* branches)
-# - Patch releases (master/support branches)
+# This workflow handles ALL publishing to npm:
+# - Canary releases (automatic on prerelease/* branches)
+# - Patch releases (automatic on master/support branches)
+# - Minor releases (manual workflow_dispatch)
+# - Major releases (manual workflow_dispatch)
 #
-# Manual minor/major releases are handled by:
-# - release-minor.yml
-# - release-major.yml
-#
-# IMPORTANT: Configure this workflow (publish.yml) as a trusted publisher on npm
-# along with release-minor.yml and release-major.yml
+# IMPORTANT: Configure this workflow (publish.yml) as the ONLY trusted publisher on npm
+# for all Canvas Kit packages.
 
 on:
   push:
@@ -17,6 +15,15 @@ on:
       - master
       - support
       - 'prerelease/*'
+  workflow_dispatch:
+    inputs:
+      release_type:
+        description: 'Release type (minor or major)'
+        required: true
+        type: choice
+        options:
+          - minor
+          - major
 
 permissions:
   id-token: write # Required for OIDC
@@ -33,6 +40,13 @@ jobs:
       - name: Determine publish type
         id: determine
         run: |
+          # For workflow_dispatch, use the selected release type
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "publish_type=${{ inputs.release_type }}" >> $GITHUB_OUTPUT
+            echo "branch=master" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
           # For push events, determine type based on branch
           BRANCH="${{ github.ref_name }}"
           echo "branch=${BRANCH}" >> $GITHUB_OUTPUT
@@ -62,7 +76,7 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       CHROMATIC_APP_CODE: ${{ secrets.CHROMATIC_APP_CODE }}
 
-  # Call release publish workflow for master/support branches
+  # Call release publish workflow for master/support branches (automatic patch)
   release-publish:
     needs: determine-publish-type
     if: needs.determine-publish-type.outputs.publish_type == 'release'
@@ -76,3 +90,126 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       CHROMATIC_APP_CODE: ${{ secrets.CHROMATIC_APP_CODE }}
       SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
+  # Minor release (manual workflow_dispatch)
+  minor-release:
+    needs: determine-publish-type
+    if: needs.determine-publish-type.outputs.publish_type == 'minor'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+          ref: master
+
+      - name: Pull minor changes
+        run: git pull origin prerelease/minor
+
+      - uses: Workday/canvas-kit-actions/install@v1
+        with:
+          node_version: 22.x
+
+      - name: Clear auth token for OIDC
+        run: echo "NODE_AUTH_TOKEN=" >> $GITHUB_ENV
+
+      - name: Upgrade npm for OIDC
+        run: npm install -g npm@latest
+
+      - name: Configure npm registry
+        run: npm config set registry https://registry.npmjs.org/
+
+      - uses: Workday/canvas-kit-actions/release@v1
+        with:
+          gh_token: ${{ secrets.GITHUB_TOKEN }}
+          gh_rw_token: ${{ secrets.GH_RW_TOKEN }}
+          chromatic_project_token: ${{ secrets.CHROMATIC_APP_CODE }}
+          version: 'minor'
+
+      - uses: Workday/canvas-kit-actions/report-failure@v1
+        if: failure()
+        with:
+          slackWebhook: ${{ secrets.SLACK_WEBHOOK }}
+          slackMessage: |
+            Minor Release job failed. Please check error logs.
+
+  # Major release (manual workflow_dispatch)
+  major-release:
+    needs: determine-publish-type
+    if: needs.determine-publish-type.outputs.publish_type == 'major'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      # Update support to point to the current major version
+      - name: Push current master to support
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GH_RW_TOKEN }}
+          branch: support
+
+      # Get and save the current major version tag
+      # before the next major version is released
+      # to use it for updating dist-tag on support branch.
+      - name: Get previous tag
+        id: previous-tag
+        run: echo "tag=$(node -p 'require("./lerna.json").version')" >> $GITHUB_OUTPUT
+
+      # Pull changes from prerelease/major into master.
+      # Changes will be pushed with a release commit
+      - name: Pull changes >> prerelease/major -> master
+        run: git pull origin prerelease/major
+
+      - uses: Workday/canvas-kit-actions/install@v1
+        with:
+          node_version: 22.x
+
+      - name: Clear auth token for OIDC
+        run: echo "NODE_AUTH_TOKEN=" >> $GITHUB_ENV
+
+      - name: Upgrade npm for OIDC
+        run: npm install -g npm@latest
+
+      - name: Configure npm registry
+        run: npm config set registry https://registry.npmjs.org/
+
+      # Run the release job to publish the next major version to npm
+      - uses: Workday/canvas-kit-actions/release@v1
+        with:
+          gh_token: ${{ secrets.GITHUB_TOKEN }}
+          gh_rw_token: ${{ secrets.GH_RW_TOKEN }}
+          chromatic_project_token: ${{ secrets.CHROMATIC_APP_CODE }}
+          version: 'major'
+          toRef: 'prerelease/major'
+
+      # Update prerelease/minor to point to the next major release.
+      - name: Push to prerelease/minor
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GH_RW_TOKEN }}
+          branch: prerelease/minor
+
+      # Update prerelease/major with the changes from prerelease/minor which include the major release version bump.
+      - name: Push to prerelease/major
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GH_RW_TOKEN }}
+          branch: prerelease/major
+
+      # Update npm dist tag for support by adding a current major release version
+      - name: Update support dist tag
+        run: node utils/dist-tag.mjs
+        env:
+          DIST_TAG: 'support'
+          VERSION: ${{ steps.previous-tag.outputs.tag }}
+
+      - uses: Workday/canvas-kit-actions/report-failure@v1
+        if: failure()
+        with:
+          slackWebhook: ${{ secrets.SLACK_WEBHOOK }}
+          slackMessage: |
+            Major Release job failed. Please check error logs.
