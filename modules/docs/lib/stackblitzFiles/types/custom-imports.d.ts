@@ -3,9 +3,9 @@ declare module '!!raw-loader!*' {
   export default content;
 }
 
-declare module 'vite' {
-  export function defineConfig(config: any): any;
-}
+// declare module 'vite' {
+//   export function defineConfig(config: any): any;
+// }
 
 declare module '@vitejs/plugin-react' {
   const react: any;

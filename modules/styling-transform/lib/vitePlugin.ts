@@ -1,5 +1,5 @@
 import ts, {type CompilerOptions, type Program} from 'typescript';
-import {type Plugin, type PluginOption, createFilter} from 'vite';
+import {type Plugin, createFilter} from 'vite';
 
 import {getCompilerOptions, startWatch} from './createTypeScriptWatchProgram';
 
@@ -18,10 +18,7 @@ export interface Options {
   /** Specify TypeScript compiler options. Can not be used with tsconfigPath. */
   compilerOptions?: CompilerOptions;
 
-  transformers?: (
-    | ((program: Program) => ts.TransformerFactory<ts.SourceFile> | ts.CustomTransformerFactory)
-    | undefined
-  )[];
+  transformers?: (((program: Program) => ts.TransformerFactory<ts.SourceFile>) | undefined)[];
 
   /**
    * A function that will be called after the typescript transform has been applied.
@@ -65,20 +62,11 @@ export function vitePluginTypescriptWithTransformers(config: Options = {}): Plug
         return;
       }
 
-      // const output = ts.transpileModule(src, {
-      //   compilerOptions: {
-      //     ...compilerOptions,
-      //     jsx: id.endsWith('ts') ? ts.JsxEmit.None : compilerOptions.jsx,
-      //   },
-      //   transformers: config.transformers
-      //     ? {before: [config.transformers.before[0].factory(tsProgram)]}
-      //     : // ? mergeTransformers(tsProgram, config.transformers)
-      //       undefined,
-      // });
-
       const printer = ts.createPrinter(compilerOptions);
 
-      const transformers = config.transformers?.map(t => t(tsProgram.getProgram())) || [];
+      const transformers =
+        config.transformers?.filter(t => t !== undefined).map(t => t!(tsProgram.getProgram())) ||
+        [];
 
       const sourceFile =
         tsProgram.getSourceFile(id) || ts.createSourceFile(id, '', ts.ScriptTarget.ES2019);
@@ -94,13 +82,6 @@ export function vitePluginTypescriptWithTransformers(config: Options = {}): Plug
         : transformed;
 
       return postTransform || transformed;
-
-      // return '';
-      // return output.outputText + '\n\n// compiled by typescript\n';
-      // return {
-      //   code: output.outputText,
-      //   map: output.sourceMapText,
-      // };
     },
 
     closeBundle() {

@@ -1,6 +1,6 @@
-import {defineConfig} from 'vite';
+import {defineConfig} from 'vitest/config';
 
-export default defineConfig(({mode}) => ({
+export default defineConfig({
   resolve: {
     alias: [
       {
@@ -17,4 +17,19 @@ export default defineConfig(({mode}) => ({
       },
     ],
   },
-}));
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    include: ['**/spec/*.spec.ts?(x)'],
+    setupFiles: './vitest.setup.ts',
+    server: {
+      deps: {
+        inline: [
+          '@workday/canvas-kit-styling',
+          '@workday/canvas-kit-popup-stack',
+          '@workday/canvas-kit-docs',
+        ],
+      },
+    },
+  },
+});

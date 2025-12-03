@@ -1139,8 +1139,6 @@ export function getFullJsDocComment(checker: ts.TypeChecker, symbol: ts.Symbol) 
             : s
       )
   );
-  symbol.getDocumentationComment(checker); //?
-  mainComment; //?
 
   if (mainComment) {
     mainComment = mainComment.replace(/\r\n/g, '\n');
@@ -1171,7 +1169,7 @@ export function getFullJsDocComment(checker: ts.TypeChecker, symbol: ts.Symbol) 
 
 export function findDocComment(checker: ts.TypeChecker, symbol?: ts.Symbol): JSDoc {
   if (symbol) {
-    const comment = getFullJsDocComment(checker, symbol); //?
+    const comment = getFullJsDocComment(checker, symbol);
     if (comment.description || comment.declarations.length || comment.tags.default) {
       return comment;
     }

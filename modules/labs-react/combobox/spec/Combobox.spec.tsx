@@ -1,15 +1,17 @@
+import {fireEvent, render} from '@testing-library/react';
 import * as React from 'react';
-import {Combobox, ComboboxProps} from '../lib/Combobox';
+
 import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {render, fireEvent} from '@testing-library/react';
+
+import {Combobox, ComboboxProps} from '../lib/Combobox';
 
 const renderCombobox = (props: ComboboxProps) => render(<Combobox {...props} />);
 
 describe('Combobox', () => {
   let defaultProps: ComboboxProps;
   const placeholderText = 'placeholder';
-  const cb = jest.fn().mockImplementation((event: Event) => event);
+  const cb = vi.fn().mockImplementation((event: Event) => event);
 
   beforeEach(() => {
     defaultProps = {

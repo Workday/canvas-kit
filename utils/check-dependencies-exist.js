@@ -18,7 +18,6 @@ const depCheckOptions = {
     'expect-type',
     'react',
     'react-dom',
-    'jest-axe',
   ],
 };
 

@@ -1,6 +1,6 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["./jest/verifyComponent.d.ts", "**/*.spec.tsx", "**/*.spec.ts", "vitest.config.ts"],
+  "include": ["./jest/verifyComponent.d.ts", "**/*.spec.tsx", "**/*.spec.ts", "vitest.config.ts", "vitest.setup.ts"],
   "exclude": ["cypress"],
   "compilerOptions": {
     "declaration": false,

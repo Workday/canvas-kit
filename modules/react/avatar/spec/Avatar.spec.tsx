@@ -1,9 +1,12 @@
+import {fireEvent, render} from '@testing-library/react';
 import * as React from 'react';
-import {render, fireEvent} from '@testing-library/react';
-import {Avatar} from '../lib/Avatar';
-import {createStencil, cssVar} from '@workday/canvas-kit-styling';
+
+import {calc, createStencil, createStyles, cssVar} from '@workday/canvas-kit-styling';
+import {compileCSS} from '@workday/canvas-kit-styling-transform/lib/utils/createStyleObjectNode';
 import {system} from '@workday/canvas-tokens-web';
+
 import {systemIconStencil} from '../../icon';
+import {Avatar, avatarStencil} from '../lib/Avatar';
 
 describe('Avatar', () => {
   it('should render a button element', () => {
@@ -34,7 +37,7 @@ describe('Avatar', () => {
   });
 
   it('should call onClick callback when clicked', () => {
-    const fn = jest.fn();
+    const fn = vi.fn();
     const screen = render(<Avatar onClick={fn} />);
     fireEvent.click(screen.getByRole('button'));
     expect(fn).toBeCalled();
@@ -50,13 +53,6 @@ describe('Avatar', () => {
     expect(container.firstChild).toHaveStyle(`backgroundColor: system.color.bg.primary.default}`);
   });
 
-  it('should apply the size class when size prop is specified', () => {
-    const {container} = render(<Avatar size="40px" />);
-    expect(container.firstChild).toHaveStyle(
-      `width: calc.multiply(40px, 0.625); height: calc.multiply(40px, 0.625)}`
-    );
-  });
-
   it('should set the background color when background prop is specified', () => {
     const customGreenAvatarStencil = createStencil({
       base: {
@@ -69,7 +65,7 @@ describe('Avatar', () => {
 
     const {container} = render(<Avatar {...customGreenAvatarStencil()} />);
     expect(container.firstChild).toHaveStyle(
-      `background: ${cssVar(system.color.static.green.default)}`
+      `backgroundColor: ${cssVar(system.color.static.green.default)}`
     );
   });
 

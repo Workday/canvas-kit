@@ -1,9 +1,10 @@
-import * as React from 'react';
 import {fireEvent, render} from '@testing-library/react';
+import * as React from 'react';
+
 import {Select} from '../lib/Select';
 
 describe('Select', () => {
-  const cb = jest.fn();
+  const cb = vi.fn();
 
   const selectButtonRole = 'button';
   const listboxRole = 'listbox';

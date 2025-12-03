@@ -1,10 +1,12 @@
+import {fireEvent, render} from '@testing-library/react';
 import * as React from 'react';
-import {render, fireEvent} from '@testing-library/react';
-import {SegmentedControl} from '../lib/SegmentedControl';
+
 import {listViewIcon, worksheetsIcon} from '@workday/canvas-system-icons-web';
 
+import {SegmentedControl} from '../lib/SegmentedControl';
+
 describe('Segmented Control', () => {
-  const cb = jest.fn();
+  const cb = vi.fn();
   afterEach(() => {
     cb.mockReset();
   });
@@ -46,7 +48,7 @@ describe('Segmented Control', () => {
     });
 
     it('should preserve existing button onClick callbacks', () => {
-      const existingCb = jest.fn();
+      const existingCb = vi.fn();
       const {getAllByRole} = render(
         <SegmentedControl onChange={cb}>
           <SegmentedControl.Button icon={listViewIcon} value="list-view" aria-label="List View" />

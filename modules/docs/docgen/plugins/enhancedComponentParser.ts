@@ -677,9 +677,7 @@ function getSubcomponents(
             t.isIdentifier(p.initializer)
           ) {
             const symbol = getSymbolFromNode(parser, p.name);
-            symbol; //?
             const jsDoc = findDocComment(parser.checker, symbol);
-            jsDoc; //?
 
             const initializerSymbol = getSymbolFromNode(parser, p.initializer);
 

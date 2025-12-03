@@ -48,9 +48,8 @@ const Button = (props: any) => {
  */
 function convertLinkToSymbolLinks(input: string): string {
   return input.replace(
-    /{@link ([a-z0-9.]+)( [a-z0-9.]+)?}/gi,
+    /{@link\s+([^\s}]+)(?:\s+([^}]+))?\s?}/gi,
     (_substr, symbol, text = '') =>
-      console.log(_substr, symbol, text) ||
       `<button data-symbol="${text.trim()}" className="token symbol">${symbol}</button>`
   );
 }

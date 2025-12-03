@@ -38,7 +38,7 @@
     "@emotion/serialize": "^1.0.2",
     "@workday/canvas-kit-styling": "^14.0.9",
     "@workday/canvas-tokens-web": "^3.1.1",
-    "stylis": "4.0.13",
+    "stylis": "4.3.6",
     "ts-node": "^10.9.1",
     "typescript": "5.0"
   },
