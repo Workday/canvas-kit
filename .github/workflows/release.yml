@@ -21,15 +21,6 @@ on:
           'Git ref that marks the end of changelog generation comparison to overwrite default value.
           Tag, SHA, or branch'
         default: ''
-    secrets:
-      GH_RW_TOKEN:
-        required: true
-      GITHUB_TOKEN:
-        required: true
-      CHROMATIC_APP_CODE:
-        required: true
-      SLACK_WEBHOOK:
-        required: false
 
 permissions:
   id-token: write # Required for OIDC
