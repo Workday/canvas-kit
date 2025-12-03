@@ -103,6 +103,7 @@ jobs:
     uses: ./.github/workflows/canary.yml
     with:
       branch: ${{ needs.determine-publish-type.outputs.branch }}
+    secrets: inherit
 
   # Call release publish workflow for master/support branches (automatic patch)
   release-publish:
@@ -113,15 +114,18 @@ jobs:
       version: 'patch' # Automatic releases are always patch
       branch: ${{ needs.determine-publish-type.outputs.branch }}
       to_ref: '' # Not needed for patch releases
+    secrets: inherit
 
   # Call minor release workflow (manual workflow_dispatch)
   minor-release:
     needs: determine-publish-type
     if: needs.determine-publish-type.outputs.publish_type == 'minor'
     uses: ./.github/workflows/release-minor.yml
+    secrets: inherit
 
   # Call major release workflow (manual workflow_dispatch)
   major-release:
     needs: determine-publish-type
     if: needs.determine-publish-type.outputs.publish_type == 'major'
     uses: ./.github/workflows/release-major.yml
+    secrets: inherit
