@@ -3,12 +3,12 @@ import React from 'react';
 import {Expandable} from '@workday/canvas-kit-react/expandable';
 
 import {defaultJSDoc} from '../../docgen/docParser';
+import * as types from '../../docgen/docTypes';
 import {EnhancedComponentValue} from '../../docgen/plugins/customTypes';
 import {MDX} from '../MDXElements';
 import {SymbolDoc} from '../SymbolDoc';
-import {PropertiesTable, registerWidget, Value} from '../Value';
+import {PropertiesTable, Value, registerWidget} from '../Value';
 import {Heading, HeadingLevelContext, SymbolDialog} from '../widgetUtils';
-import * as types from '../../docgen/docTypes';
 
 const ParentComponentNameContext = React.createContext('');
 /**
@@ -194,10 +194,13 @@ function groupProps(props: types.ObjectProperty[]): Record<string, types.ObjectP
   }
 
   // clear out categories that don't have anything in them
-  return Object.keys(categories).reduce((result, key) => {
-    if (categories[key].length) {
-      result[key] = categories[key];
-    }
-    return result;
-  }, {} as typeof categories);
+  return Object.keys(categories).reduce(
+    (result, key) => {
+      if (categories[key].length) {
+        result[key] = categories[key];
+      }
+      return result;
+    },
+    {} as typeof categories
+  );
 }

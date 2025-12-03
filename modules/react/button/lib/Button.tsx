@@ -1,5 +1,6 @@
-import {BaseButton, ButtonContainerProps} from './BaseButton';
 import {createComponent} from '@workday/canvas-kit-react/common';
+
+import {BaseButton, ButtonContainerProps} from './BaseButton';
 
 /**
  * Extends all the style properties from Box to our buttons as well as props from ButtonContainerProps.
@@ -49,10 +50,10 @@ export const Button = createComponent('button')({
     const baseIconPosition = iconPosition
       ? iconPosition
       : icon
-      ? children
-        ? 'start'
-        : 'only'
-      : undefined;
+        ? children
+          ? 'start'
+          : 'only'
+        : undefined;
 
     return (
       <BaseButton

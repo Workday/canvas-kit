@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Flex} from '@workday/canvas-kit-react';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {Table} from '@workday/canvas-kit-react/table';
 import {Text} from '@workday/canvas-kit-react/text';
 import {colors} from '@workday/canvas-kit-react/tokens';
