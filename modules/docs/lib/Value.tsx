@@ -1,5 +1,7 @@
 import React from 'react';
 
+import {Flex} from '@workday/canvas-kit-react';
+import {Table} from '@workday/canvas-kit-react/table';
 import {Text} from '@workday/canvas-kit-react/text';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
@@ -8,7 +10,6 @@ import {createStyles} from '@workday/canvas-kit-styling';
 import * as types from '../docgen/docTypes';
 import {DescriptionTooltip} from './DescriptionTooltip';
 import {MdxJSToJSX} from './MDXElements';
-import {Table} from './Table';
 import {IndentLevelContext, RenderContext, capitalize, indent} from './widgetUtils';
 
 const widgets: Record<string, React.FC<ValueProps>> = {};
@@ -113,7 +114,7 @@ function getTableRows(
     );
     return [
       <Table.Row key={index + i}>
-        <Table.Data color="plum600">
+        <Table.Cell color="plum600">
           {/* Use a tooltip to help with debugging where the type sources are coming from */}
           {title ? (
             <Tooltip type="describe" title={title}>
@@ -122,21 +123,21 @@ function getTableRows(
           ) : (
             propName
           )}
-        </Table.Data>
-        <Table.Data>
-          <code>
+        </Table.Cell>
+        <Table.Cell>
+          <Flex as="code" cs={{flexWrap: 'wrap'}}>
             {
               <RenderContext.Provider value="inline">
                 <Value value={property.type} />
               </RenderContext.Provider>
             }
-          </code>
-        </Table.Data>
-        <Table.Data>
+          </Flex>
+        </Table.Cell>
+        <Table.Cell>
           <MdxJSToJSX>{property.description || ''}</MdxJSToJSX>
-        </Table.Data>
+        </Table.Cell>
         {showDefault ? (
-          <Table.Data>
+          <Table.Cell>
             {property.defaultValue ? (
               property.defaultValue.kind === 'primitive' &&
               property.defaultValue.value === 'undefined' ? null : (
@@ -145,7 +146,7 @@ function getTableRows(
                 </code>
               )
             ) : null}
-          </Table.Data>
+          </Table.Cell>
         ) : null}
       </Table.Row>,
     ];

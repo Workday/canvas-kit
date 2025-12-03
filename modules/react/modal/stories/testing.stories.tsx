@@ -17,6 +17,8 @@ import {StackedModals as StackedModalsExample} from './examples/StackedModals';
 import {WithTooltips as WithTooltipsExample} from './examples/WithTooltips';
 import {ModalWithPopup as ModalWithPopupExample} from './examples/ModalWithPopup';
 import {IframeTest as IframeTestExample} from './examples/IframeTest';
+import {brand} from '@workday/canvas-tokens-web';
+import {createStyles} from '@workday/canvas-kit-styling';
 
 export default {
   title: 'Testing/Popups/Modal',
@@ -201,6 +203,16 @@ export const ModalRTL = {
   },
 };
 
+const customTheme = createStyles({
+  [brand.primary.base]: 'purple',
+  [brand.primary.accent]: 'turquoise',
+  [brand.common.focusOutline]: 'turquoise',
+  [brand.common.alertInner]: 'coral',
+  [brand.common.errorInner]: 'crimson',
+  [brand.success.base]: 'aquamarine',
+  [brand.neutral.base]: 'gray',
+});
+
 export const CustomThemeModal = {
   parameters: {
     chromatic: {
@@ -212,9 +224,10 @@ export const CustomThemeModal = {
       initialVisibility: 'visible',
     });
     return (
-      <CanvasProvider theme={{canvas: customColorTheme}}>
+      <CanvasProvider>
         <Modal model={model}>
-          <Modal.Overlay style={{animation: 'none'}}>
+          {/* We are only adding the custom theme via class name for testing purposes. Custom themes should be set on the :root element in CSS using CSS variables */}
+          <Modal.Overlay style={{animation: 'none'}} className={customTheme}>
             <Modal.Card style={{animation: 'none'}}>
               <Modal.CloseIcon aria-label="Close" />
               <Modal.Heading>MIT License</Modal.Heading>

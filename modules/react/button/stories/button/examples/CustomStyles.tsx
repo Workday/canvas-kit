@@ -7,7 +7,7 @@ import {createStencil, createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const customContainer = createStyles({
-  gap: system.space.x4,
+  gap: system.gap.md,
   maxWidth: 'max-content',
 });
 
@@ -47,7 +47,7 @@ const MyCustomButton = createComponent('button')({
 });
 
 const myCustomStyles = createStyles({
-  padding: system.space.x4,
+  padding: system.padding.md,
   textTransform: 'uppercase',
   [buttonStencil.vars.background]: system.color.static.gray.soft,
   [buttonStencil.vars.label]: system.color.static.gray.strong,

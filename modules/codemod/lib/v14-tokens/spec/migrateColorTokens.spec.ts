@@ -1,6 +1,6 @@
 import {stripIndent} from 'common-tags';
 import {expectTransformFactory} from './expectTransformFactory';
-import transform from '../migrateColorTokens';
+import transform from '../index';
 
 const expectTransform = expectTransformFactory(transform);
 
@@ -84,8 +84,25 @@ describe('Canvas Kit Tokens > Canvas Tokens v3', () => {
         `;
 
       const expected = stripIndent`
-          import { base } from "@workday/canvas-tokens-web";
           import { cssVar } from "@workday/canvas-kit-styling";
+          import { base } from "@workday/canvas-tokens-web";
+
+          const color = cssVar(base.blue600);
+        `;
+
+      expectTransform(input, expected);
+    });
+
+    it('should convert color tokens from canvas-colors-web to base tokens', () => {
+      const input = stripIndent`
+          import { colors } from "@workday/canvas-colors-web";
+
+          const color = colors.blueberry400;
+        `;
+
+      const expected = stripIndent`
+          import { cssVar } from "@workday/canvas-kit-styling";
+          import { base } from "@workday/canvas-tokens-web";
 
           const color = cssVar(base.blue600);
         `;
@@ -120,8 +137,8 @@ describe('Canvas Kit Tokens > Canvas Tokens v3', () => {
         `;
 
       const expected = stripIndent`
-          import { base } from "@workday/canvas-tokens-web";
           import { cssVar } from "@workday/canvas-kit-styling";
+          import { base } from "@workday/canvas-tokens-web";
 
           const color = cssVar(base.blue600);
           const color2 = cssVar(base.red800);
@@ -298,14 +315,14 @@ describe('Canvas Kit Tokens > Canvas Tokens v3', () => {
         `;
 
       const expected = stripIndent`
-          import { cssVar } from "@workday/canvas-kit-styling";
           import { system } from "@workday/canvas-tokens-web";
+          import { cssVar } from "@workday/canvas-kit-styling";
 
           const styles = css({
             background: cssVar(system.color.bg.default),
             color: cssVar(system.color.fg.primary.default),
             border: \`1px solid \${cssVar(system.color.border.primary.default)}\`,
-            borderInline: \`5px solid \${darken(system.color.border.primary.default)}\`,
+            borderInline: \`5px solid \${darken(cssVar(system.color.border.primary.default))}\`,
             svg: {
               fill: props.isSelected ? cssVar(system.color.fg.primary.default) : cssVar(system.color.fg.inverse)
             }
@@ -372,8 +389,35 @@ describe('Canvas Kit Tokens > Canvas Tokens v3', () => {
         `;
 
       const expected = stripIndent`
-          import { cssVar } from "@workday/canvas-kit-styling";
           import { system } from "@workday/canvas-tokens-web";
+          import { cssVar } from "@workday/canvas-kit-styling";
+
+          const styles = {
+            color: toggled ? cssVar(system.color.fg.primary.default) : cssVar(system.color.fg.default),
+            default: {
+              background: toggled ? cssVar(system.color.bg.primary.default) : cssVar(system.color.bg.alt.soft)
+            }
+          };
+        `;
+
+      expectTransform(input, expected);
+    });
+
+    it('should transform color tokens in other objects', () => {
+      const input = stripIndent`
+          import { colors } from "@workday/canvas-colors-web";
+
+          const styles = {
+            color: toggled ? colors.blueberry400 : colors.blackPepper300,
+            default: {
+              background: toggled ? colors.blueberry400 : colors.soap200,
+            }
+          };
+        `;
+
+      const expected = stripIndent`
+          import { system } from "@workday/canvas-tokens-web";
+          import { cssVar } from "@workday/canvas-kit-styling";
 
           const styles = {
             color: toggled ? cssVar(system.color.fg.primary.default) : cssVar(system.color.fg.default),

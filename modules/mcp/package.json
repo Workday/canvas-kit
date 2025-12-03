@@ -1,0 +1,56 @@
+{
+  "name": "@workday/canvas-kit-mcp",
+  "version": "14.1.18",
+  "description": "MCP package for Canvas Kit",
+  "author": "Workday, Inc. (https://www.workday.com)",
+  "license": "Apache-2.0",
+  "type": "module",
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Workday/canvas-kit.git",
+    "directory": "modules/mcp"
+  },
+  "bin": {
+    "canvas-kit-mcp": "./dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./lib": {
+      "types": "./dist/types/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build:copy": "tsx ./build/index.ts",
+    "build:types": "tsc --project tsconfig.build.json -d true --declarationDir dist/types --emitDeclarationOnly --pretty",
+    "build:mcp": "esbuild lib/index.ts --bundle --platform=node --outfile=dist/index.js --format=esm --sourcemap && esbuild lib/cli.ts --bundle --platform=node --outfile=dist/cli.js --format=esm --sourcemap",
+    "build": "npm-run-all build:copy build:types build:mcp",
+    "clean": "rimraf dist && rimraf .build-info && mkdirp dist"
+  },
+  "keywords": [
+    "canvas",
+    "canvas-kit",
+    "workday",
+    "mcp"
+  ],
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.20.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "esbuild": "^0.25.11",
+    "mkdirp": "^1.0.3",
+    "rimraf": "^5.0.0",
+    "tsx": "^4.7.0",
+    "typescript": "5.0"
+  }
+}

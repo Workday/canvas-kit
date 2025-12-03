@@ -30,7 +30,7 @@
     "@types/lodash": "^4.14.136",
     "@types/markdown-to-jsx": "^6.9.0",
     "@types/mdx-js__react": "^2.0.0",
-    "@types/node": "^14.0.0",
+    "@types/node": "^22.0.0",
     "@types/react": "^18.3.0",
     "@types/react-dom": "^18.0.5",
     "@types/react-syntax-highlighter": "^15.5.13",
@@ -69,7 +69,7 @@
     "glob": "^7.1.6",
     "husky": "^0.14.3",
     "inquirer": "^7.0.0",
-    "lerna": "^5.6.2",
+    "lerna": "^9.0.0",
     "lint-staged": "^14.0.1",
     "markdown-to-jsx": "^7.7.4",
     "mkdirp": "^1.0.3",
@@ -108,6 +108,7 @@
     "chromatic": "chromatic",
     "build-storybook": "node utils/download-fonts.js && storybook build .storybook -o docs",
     "lint": "node utils/check-lockfile.js && node utils/check-mismatched-dependencies.js && eslint -c ./.eslintrc.js --ext=jsx,ts,tsx .",
+    "mdxUpgrade2md": "node ./utils/mdx-upgrades-2-md.js",
     "typecheck": "npm-run-all --parallel typecheck:src typecheck:cypress typecheck:types typecheck:specs typecheck:stories",
     "typecheck:src": "lerna run typecheck:src",
     "typecheck:cypress": "tsc -p cypress --noEmit",
@@ -125,7 +126,9 @@
   "lint-staged": {
     "*.{ts,tsx}": "yarn format",
     "*.json": "node utils/check-mismatched-dependencies.js",
-    "yarn.lock": "node utils/check-lockfile.js"
+    "yarn.lock": "node utils/check-lockfile.js",
+    "modules/docs/mdx/**/*.mdx": "node utils/mdx-upgrades-2-md.js",
+    "utils/mdx-upgrades-2-md.js": "node utils/mdx-upgrades-2-md.js"
   },
   "workspaces": [
     "modules/**"
@@ -137,7 +140,7 @@
   "@workday/canvas-accent-icons-web": "^3.0.17",
   "@workday/canvas-applet-icons-web": "^2.0.15",
   "@workday/canvas-system-icons-web": "^3.0.36",
-  "@workday/canvas-tokens-web": "^3.1.1",
+  "@workday/canvas-tokens-web": "4.0.0-alpha.3",
   "resolutions": {
     "ansi-regex": "3.0.1",
     "braces": "3.0.3",

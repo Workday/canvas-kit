@@ -152,12 +152,12 @@ export const spaceStyleFnConfigs: StyleFnConfig[] = [
   },
   {
     name: 'marginX',
-    properties: ['marginLeft', 'marginRight'],
+    properties: ['marginInline'],
     system: 'space',
   },
   {
     name: 'marginY',
-    properties: ['marginTop', 'marginBottom'],
+    properties: ['marginBlock'],
     system: 'space',
   },
   {
@@ -187,12 +187,12 @@ export const spaceStyleFnConfigs: StyleFnConfig[] = [
   },
   {
     name: 'paddingX',
-    properties: ['paddingLeft', 'paddingRight'],
+    properties: ['paddingInline'],
     system: 'space',
   },
   {
     name: 'paddingY',
-    properties: ['paddingTop', 'paddingBottom'],
+    properties: ['paddingBlock'],
     system: 'space',
   },
   {

@@ -3,6 +3,317 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.1.18](https://github.com/Workday/canvas-kit/releases/tag/v14.1.18) (2025-11-24)
+
+### Infrastructure
+
+- fix: Clean up release files ([#3613](https://github.com/Workday/canvas-kit/pull/3613)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v14.1.17](https://github.com/Workday/canvas-kit/releases/tag/v14.1.17) (2025-11-21)
+
+### Components
+
+- fix: Update repository url ([@](https://github.com/))
+
+
+## [v14.1.16](https://github.com/Workday/canvas-kit/releases/tag/v14.1.16) (2025-11-21)
+
+### Documentation
+
+- docs: Update readme ([@](https://github.com/))
+
+
+## [v14.1.15](https://github.com/Workday/canvas-kit/releases/tag/v14.1.15) (2025-11-21)
+
+### Components
+
+- chore: Add more logging to our release ([@](https://github.com/))
+
+
+## [v14.1.14](https://github.com/Workday/canvas-kit/releases/tag/v14.1.14) (2025-11-21)
+
+### Components
+
+- chore: Update lerna to v9 for OIDC support ([@](https://github.com/))
+
+
+## [v14.1.13](https://github.com/Workday/canvas-kit/releases/tag/v14.1.13) (2025-11-21)
+
+### Documentation
+
+- docs: Update README.md to add info around tokens ([@mannycarrera4](https://github.com/mannycarrera4))
+
+
+## [v14.1.12](https://github.com/Workday/canvas-kit/releases/tag/v14.1.12) (2025-11-21)
+
+### documentation
+
+- docs: Update README.md ([#3611](https://github.com/Workday/canvas-kit/pull/3611)) ([@mannycarrera4](https://github.com/mannycarrera4))
+
+
+## [v14.1.11](https://github.com/Workday/canvas-kit/releases/tag/v14.1.11) (2025-11-20)
+
+### Components
+
+- fix: Update release.yml to use openid connect for npm publishing ([#3606](https://github.com/Workday/canvas-kit/pull/3606)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  Update our release.yml to handle openid connect for npm publishing.
+
+### Infrastructure
+
+- fix: Update node version to 22.x ([#3607](https://github.com/Workday/canvas-kit/pull/3607)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- fix: Update index ([#3608](https://github.com/Workday/canvas-kit/pull/3608)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v14.1.10](https://github.com/Workday/canvas-kit/releases/tag/v14.1.10) (2025-11-10)
+
+### fix
+
+- fix: Upgrade guide link for v14 ([#3597](https://github.com/Workday/canvas-kit/pull/3597)) ([@hugihlynsson](https://github.com/hugihlynsson))
+
+
+## [v14.1.9](https://github.com/Workday/canvas-kit/releases/tag/v14.1.9) (2025-11-07)
+
+### Codemod
+
+- fix: Fix v14 token codemod issues ([#3596](https://github.com/Workday/canvas-kit/pull/3596)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v14.1.8](https://github.com/Workday/canvas-kit/releases/tag/v14.1.8) (2025-11-07)
+
+### Codemods
+
+- chore: Update token codemod in v14 to handle v2 -> v3 transform  ([#3575](https://github.com/Workday/canvas-kit/pull/3575)) ([@RayRedGoose](https://github.com/RayRedGoose))
+  Token codemod `v14-tokens` has been updated to reuse v13.2 for all other token modifications and handle `v2 -> v3` transforms.
+
+
+## [v14.1.7](https://github.com/Workday/canvas-kit/releases/tag/v14.1.7) (2025-11-06)
+
+### Codemods
+
+- fix: Fix base colors in objects ([#3594](https://github.com/Workday/canvas-kit/pull/3594)) ([@RayRedGoose](https://github.com/RayRedGoose), [@Copilot](https://github.com/Copilot))
+
+
+## [v13.2.45](https://github.com/Workday/canvas-kit/releases/tag/v13.2.45) (2025-11-06)
+
+### Codemods
+
+- fix: Fix base colors in objects ([#3594](https://github.com/Workday/canvas-kit/pull/3594)) ([@RayRedGoose](https://github.com/RayRedGoose), [@Copilot](https://github.com/Copilot))
+## [v14.1.6](https://github.com/Workday/canvas-kit/releases/tag/v14.1.6) (2025-11-06)
+
+### Codemods
+
+- chore: Update v13.2 codemod to correctly transform tokens ([#3583](https://github.com/Workday/canvas-kit/pull/3583)) ([@RayRedGoose](https://github.com/RayRedGoose))
+- chore: Add more color transforms to codemod ([#3585](https://github.com/Workday/canvas-kit/pull/3585)) ([@RayRedGoose](https://github.com/RayRedGoose), [@Copilot](https://github.com/Copilot))
+- fix: Fix issue with changing object props in token codemod ([#3593](https://github.com/Workday/canvas-kit/pull/3593)) ([@RayRedGoose](https://github.com/RayRedGoose), [@Copilot](https://github.com/Copilot))
+
+### Components
+
+- fix: Fix type and test issues ([@RayRedGoose](https://github.com/RayRedGoose))
+
+### Theming
+
+- fix: Remove scoped className and style from popups for global theming ([#3572](https://github.com/Workday/canvas-kit/pull/3572)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  Previously, the `usePopupStack` hook created a CSS class name that was passed to our Popups. We attached those theme styles to that class name. This allowed the theme to be available in our Popups. But it also created a cascade barrier that blocked the global theme from being applied to our Popup components.
+  Because we now use global CSS variables, we no longer need this class name to provide the global theme to Popups. But we have to remove this generated class name to allow the global theme to be applied to Popups.
+  
+  > **Important:** Passing a `theme` to the `CanvasProvider` **will not** theme components in Modals and Dialogs. You can either pass a `className` or define CSS variables at the root.
+  
+  **Before in v13**
+  
+  ```tsx
+  // When passing a theme to the Canvas Provider, the `usePopupStack` would grab the theme and generate a class to forward the theme to Modals and Dialogs. This would create a cascade barrier for any CSS variables deinfed at the root.
+  <CanvasProvider theme={{canvas: {palette: {primary: {main: 'blue'}}}}}>
+    <Modal>//... rest of modal code</Modal>
+  </CanvasProvider>
+  ```
+  
+  **After in v14**
+  
+  ```tsx
+  // If you wish to still theme you application and Modals, you can either define the CSS variables at the root level of your application or define a className and pass it to the CanvasProvider.
+  :root {
+  // use index.css file
+   --cnvs-brand-primary-base: blue;
+  }
+  
+  <CanvasProvider>
+    <Modal>//... rest of modal code</Modal>
+  </CanvasProvider>
+  ```
+
+
+## [v13.2.44](https://github.com/Workday/canvas-kit/releases/tag/v13.2.44) (2025-11-06)
+
+### Codemods
+
+- fix: Fix issue with changing object props in token codemod ([#3593](https://github.com/Workday/canvas-kit/pull/3593)) ([@RayRedGoose](https://github.com/RayRedGoose), [@Copilot](https://github.com/Copilot))
+
+
+## [v13.2.43](https://github.com/Workday/canvas-kit/releases/tag/v13.2.43) (2025-11-05)
+
+### Codemods
+
+- chore: Add more color transforms to codemod ([#3585](https://github.com/Workday/canvas-kit/pull/3585)) ([@RayRedGoose](https://github.com/RayRedGoose), [@Copilot](https://github.com/Copilot))
+
+
+## [v14.1.5](https://github.com/Workday/canvas-kit/releases/tag/v14.1.5) (2025-11-05)
+
+### Components
+
+- docs: Add Contextual Help examples ([#3573](https://github.com/Workday/canvas-kit/pull/3573)) ([@JaredMaione](https://github.com/JaredMaione))
+
+
+## [v13.2.42](https://github.com/Workday/canvas-kit/releases/tag/v13.2.42) (2025-11-04)
+
+### Codemods
+
+- chore: Update v13.2 codemod to correctly transform tokens ([#3583](https://github.com/Workday/canvas-kit/pull/3583)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v13.2.41](https://github.com/Workday/canvas-kit/releases/tag/v13.2.41) (2025-11-03)
+## [v14.1.4](https://github.com/Workday/canvas-kit/releases/tag/v14.1.4) (2025-11-03)
+
+### Infrastructure
+
+- fix: Remove upgrade guide commit from build ([#3581](https://github.com/Workday/canvas-kit/pull/3581)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v14.1.3](https://github.com/Workday/canvas-kit/releases/tag/v14.1.3) (2025-11-03)
+
+### Documentation
+
+- docs: Remove theme object from readme ([#3580](https://github.com/Workday/canvas-kit/pull/3580)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v14.1.2](https://github.com/Workday/canvas-kit/releases/tag/v14.1.2) (2025-11-03)
+
+### Documentation
+
+- docs: Add v14 upgrade guide md file ([#3567](https://github.com/Workday/canvas-kit/pull/3567)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@Copilot](https://github.com/Copilot))
+
+### MCP
+
+- fix: Add v14 upgrade guide to mcp ([#3578](https://github.com/Workday/canvas-kit/pull/3578)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v14.1.1](https://github.com/Workday/canvas-kit/releases/tag/v14.1.1) (2025-11-03)
+
+### Utilities
+
+- chore: Add MCP package ([#3576](https://github.com/Workday/canvas-kit/pull/3576)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@vibdev](https://github.com/vibdev), [@alanbsmith](https://github.com/alanbsmith))
+  Our MCP server provides resources to help you upgrade Canvas Kit.
+
+
+## [v13.2.41](https://github.com/Workday/canvas-kit/releases/tag/v13.2.41) (2025-11-03)
+
+### Utilities
+
+- chore: Add MCP package ([#3576](https://github.com/Workday/canvas-kit/pull/3576)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@vibdev](https://github.com/vibdev), [@alanbsmith](https://github.com/alanbsmith))
+  Our MCP server provides resources to help you upgrade Canvas Kit.
+## [v14.1.0](https://github.com/Workday/canvas-kit/releases/tag/v14.1.0) (2025-10-29)
+
+
+
+
+## [v14.0.17](https://github.com/Workday/canvas-kit/releases/tag/v14.0.17) (2025-10-28)
+
+### Infrastructure
+
+- chore: Add script to convert mdx upgrades to md ([#3556](https://github.com/Workday/canvas-kit/pull/3556)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v13.2.40](https://github.com/Workday/canvas-kit/releases/tag/v13.2.40) (2025-10-28)
+
+### Infrastructure
+
+- chore: Add script to convert mdx upgrades to md ([#3556](https://github.com/Workday/canvas-kit/pull/3556)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+## [v14.0.16](https://github.com/Workday/canvas-kit/releases/tag/v14.0.16) (2025-10-27)
+
+### Components
+
+- fix: Add fallback to our inputs for border radius ([#3539](https://github.com/Workday/canvas-kit/pull/3539)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v14.0.15](https://github.com/Workday/canvas-kit/releases/tag/v14.0.15) (2025-10-27)
+
+### Components
+
+- fix: Default background to white for avatar when image is loaded ([#3557](https://github.com/Workday/canvas-kit/pull/3557)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v14.0.14](https://github.com/Workday/canvas-kit/releases/tag/v14.0.14) (2025-10-27)
+
+### Components
+
+- fix: Missing ARIA roles and properties on Submenu ([#3546](https://github.com/Workday/canvas-kit/pull/3546)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton)
+
+### Documentation
+
+- fix: Updated ExampleCodeBlock ([#3550](https://github.com/Workday/canvas-kit/pull/3550)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
+## [v13.2.39](https://github.com/Workday/canvas-kit/releases/tag/v13.2.39) (2025-10-24)
+
+### Components
+
+- fix: Missing ARIA roles and properties on Submenu ([#3546](https://github.com/Workday/canvas-kit/pull/3546)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton)
+
+
+## [v13.2.38](https://github.com/Workday/canvas-kit/releases/tag/v13.2.38) (2025-10-24)
+
+### Documentation
+
+- fix: Updated ExampleCodeBlock ([#3550](https://github.com/Workday/canvas-kit/pull/3550)) ([@josh-bagwell](https://github.com/josh-bagwell))
+## [v14.0.13](https://github.com/Workday/canvas-kit/releases/tag/v14.0.13) (2025-10-23)
+
+### Dependencies
+
+- fix: Add preview react as dep ([#3560](https://github.com/Workday/canvas-kit/pull/3560)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v14.0.12](https://github.com/Workday/canvas-kit/releases/tag/v14.0.12) (2025-10-23)
+
+### Documentation
+
+- docs: Updated the spec tables and examples to wrap ([#3545](https://github.com/Workday/canvas-kit/pull/3545)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
+## [v13.2.37](https://github.com/Workday/canvas-kit/releases/tag/v13.2.37) (2025-10-20)
+
+### Documentation
+
+- docs: Updated the spec tables and examples to wrap ([#3545](https://github.com/Workday/canvas-kit/pull/3545)) ([@josh-bagwell](https://github.com/josh-bagwell))
+## [v14.0.11](https://github.com/Workday/canvas-kit/releases/tag/v14.0.11) (2025-10-20)
+
+### Documentation
+
+- docs: Update Popup.mdx to remove duplicate  ([#3534](https://github.com/Workday/canvas-kit/pull/3534)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v14.0.10](https://github.com/Workday/canvas-kit/releases/tag/v14.0.10) (2025-10-20)
+
+### Component
+
+- fix(menu): Change to :focus-visible in MenuItem ([#3540](https://github.com/Workday/canvas-kit/pull/3540)) ([@thomasatran](https://github.com/thomasatran), [@thomas-tran-wd](https://github.com/thomas-tran-wd))
+
+### Documentation
+
+- docs: Fix migration guide link ([#3542](https://github.com/Workday/canvas-kit/pull/3542)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v13.2.36](https://github.com/Workday/canvas-kit/releases/tag/v13.2.36) (2025-10-16)
+
+### Documentation
+
+- docs: Fix migration guide link ([#3542](https://github.com/Workday/canvas-kit/pull/3542)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v13.2.35](https://github.com/Workday/canvas-kit/releases/tag/v13.2.35) (2025-10-15)
+
+### Component
+
+- fix(menu): Change to :focus-visible in MenuItem ([#3540](https://github.com/Workday/canvas-kit/pull/3540)) ([@thomasatran](https://github.com/thomasatran), [@thomas-tran-wd](https://github.com/thomas-tran-wd))
 ## [v14.0.9](https://github.com/Workday/canvas-kit/releases/tag/v14.0.9) (2025-10-10)
 
 ### Styling
