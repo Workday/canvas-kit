@@ -1,0 +1,146 @@
+name: Publish to npm
+
+# This workflow orchestrates ALL publishing to npm by delegating to reusable workflows:
+# - Canary releases (automatic on prerelease/* branches) → canary.yml
+# - Patch releases (automatic on master/support branches) → release.yml
+# - Minor releases (manual workflow_dispatch) → release-minor.yml
+# - Major releases (manual workflow_dispatch) → release-major.yml
+#
+# Commits containing [skip release] will skip publishing but still trigger forward-merge.
+#
+# IMPORTANT: Configure this workflow (publish.yml) as the ONLY trusted publisher on npm
+# for all Canvas Kit packages.
+
+on:
+  push:
+    branches:
+      - master
+      - support
+      - 'prerelease/*'
+  workflow_dispatch:
+    inputs:
+      release_type:
+        description: 'Release type (minor or major)'
+        required: true
+        type: choice
+        options:
+          - minor
+          - major
+
+permissions:
+  id-token: write # Required for OIDC
+  contents: write
+
+jobs:
+  # Determine which type of publish to perform
+  determine-publish-type:
+    runs-on: ubuntu-latest
+    outputs:
+      publish_type: ${{ steps.determine.outputs.publish_type }}
+      branch: ${{ steps.determine.outputs.branch }}
+    steps:
+      - name: Determine publish type
+        id: determine
+        run: |
+          # Debug: Show incoming event information
+          echo "::group::Debug Information"
+          echo "Event name: ${{ github.event_name }}"
+          echo "Ref: ${{ github.ref }}"
+          echo "Ref name: ${{ github.ref_name }}"
+          echo "SHA: ${{ github.sha }}"
+          echo "Commit message: ${{ github.event.head_commit.message }}"
+          echo "::endgroup::"
+
+          # For workflow_dispatch, use the selected release type
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "publish_type=${{ inputs.release_type }}" >> $GITHUB_OUTPUT
+            echo "branch=master" >> $GITHUB_OUTPUT
+            echo "::notice::Workflow dispatch detected - release type: ${{ inputs.release_type }}"
+            exit 0
+          fi
+
+          # For push events, determine type based on branch
+          BRANCH="${{ github.ref_name }}"
+          echo "branch=${BRANCH}" >> $GITHUB_OUTPUT
+
+          if [[ "$BRANCH" == prerelease/* ]]; then
+            echo "publish_type=canary" >> $GITHUB_OUTPUT
+            echo "::notice::Branch '${BRANCH}' matched prerelease/* - publish type: canary"
+          elif [[ "$BRANCH" == "master" ]] || [[ "$BRANCH" == "support" ]]; then
+            # Check if commit message contains [skip release]
+            if [[ "${{ github.event.head_commit.message }}" == *"[skip release]"* ]]; then
+              echo "publish_type=skip" >> $GITHUB_OUTPUT
+              echo "::notice::Commit contains [skip release] - skipping publish"
+            else
+              echo "publish_type=release" >> $GITHUB_OUTPUT
+              echo "::notice::Branch '${BRANCH}' - publish type: release (patch)"
+            fi
+          else
+            echo "publish_type=skip" >> $GITHUB_OUTPUT
+            echo "::warning::Branch '${BRANCH}' did not match any publish criteria - skipping"
+          fi
+
+      - name: Summary
+        run: |
+          echo "## Publish Decision" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Parameter | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Event | \`${{ github.event_name }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| Branch | \`${{ github.ref_name }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| Publish Type | \`${{ steps.determine.outputs.publish_type }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [[ "${{ steps.determine.outputs.publish_type }}" == "skip" ]]; then
+            echo "> ⏭️ **Skipping publish** - no release workflow will be triggered" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "> ✅ **Proceeding with ${{ steps.determine.outputs.publish_type }} publish**" >> $GITHUB_STEP_SUMMARY
+          fi
+
+  # Call canary publish workflow for prerelease branches
+  canary-publish:
+    needs: determine-publish-type
+    if: needs.determine-publish-type.outputs.publish_type == 'canary'
+    uses: ./.github/workflows/canary.yml
+    with:
+      branch: ${{ needs.determine-publish-type.outputs.branch }}
+    secrets:
+      SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      CHROMATIC_APP_CODE: ${{ secrets.CHROMATIC_APP_CODE }}
+
+  # Call release publish workflow for master/support branches (automatic patch)
+  release-publish:
+    needs: determine-publish-type
+    if: needs.determine-publish-type.outputs.publish_type == 'release'
+    uses: ./.github/workflows/release.yml
+    with:
+      version: 'patch' # Automatic releases are always patch
+      branch: ${{ needs.determine-publish-type.outputs.branch }}
+      to_ref: '' # Not needed for patch releases
+    secrets:
+      GH_RW_TOKEN: ${{ secrets.GH_RW_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      CHROMATIC_APP_CODE: ${{ secrets.CHROMATIC_APP_CODE }}
+      SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
+  # Call minor release workflow (manual workflow_dispatch)
+  minor-release:
+    needs: determine-publish-type
+    if: needs.determine-publish-type.outputs.publish_type == 'minor'
+    uses: ./.github/workflows/release-minor.yml
+    secrets:
+      GH_RW_TOKEN: ${{ secrets.GH_RW_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      CHROMATIC_APP_CODE: ${{ secrets.CHROMATIC_APP_CODE }}
+      SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
+  # Call major release workflow (manual workflow_dispatch)
+  major-release:
+    needs: determine-publish-type
+    if: needs.determine-publish-type.outputs.publish_type == 'major'
+    uses: ./.github/workflows/release-major.yml
+    secrets:
+      GH_RW_TOKEN: ${{ secrets.GH_RW_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      CHROMATIC_APP_CODE: ${{ secrets.CHROMATIC_APP_CODE }}
+      SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
