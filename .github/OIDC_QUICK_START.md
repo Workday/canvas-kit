@@ -2,7 +2,8 @@
 
 ## TL;DR
 
-You need to configure **1 workflow** (`publish.yml`) as an npm trusted publisher for **each of the 14 Canvas Kit packages**.
+You need to configure **1 workflow** (`publish.yml`) as an npm trusted publisher for **each of the
+14 Canvas Kit packages**.
 
 ## Quick Steps
 
@@ -67,8 +68,6 @@ release-minor.yml → npm
 release-major.yml → npm
 ```
 
-Required 3 trusted publishers per package (publish.yml, release-minor.yml, release-major.yml).
-
 ### New Setup
 
 ```
@@ -82,18 +81,19 @@ Requires only **1 trusted publisher** per package (publish.yml).
 
 ## Workflow Responsibilities
 
-| Trigger                                     | Release Type | Purpose                 |
-| ------------------------------------------- | ------------ | ----------------------- |
-| Auto (push to prerelease/\*)                | Canary       | Prerelease testing      |
-| Auto (push to master/support)               | Patch        | Bug fixes               |
-| Manual (workflow_dispatch → select "minor") | Minor        | New features            |
-| Manual (workflow_dispatch → select "major") | Major        | Breaking changes        |
+| Trigger                                     | Release Type | Purpose            |
+| ------------------------------------------- | ------------ | ------------------ |
+| Auto (push to prerelease/\*)                | Canary       | Prerelease testing |
+| Auto (push to master/support)               | Patch        | Bug fixes          |
+| Manual (workflow_dispatch → select "minor") | Minor        | New features       |
+| Manual (workflow_dispatch → select "major") | Major        | Breaking changes   |
 
 ## How to Release
 
 ### Automatic Releases (Canary & Patch)
 
 Just push to the appropriate branch:
+
 - `prerelease/*` → Canary release
 - `master` or `support` → Patch release
 
