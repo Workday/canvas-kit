@@ -1,4 +1,4 @@
-name: Reusable Canary Publish
+name: Canary
 
 on:
   workflow_call:
@@ -67,7 +67,7 @@ jobs:
       - name: Publish
         run: node utils/publish-canary.mjs
         env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_WEBHOOK: ${{secrets.SLACK_WEBHOOK}}
           BUILD_URL:
             ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
 

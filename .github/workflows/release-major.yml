@@ -1,4 +1,4 @@
-name: Reusable Major Release
+name: Major Release
 
 on:
   workflow_call:
@@ -21,7 +21,7 @@ permissions:
   contents: write
 
 jobs:
-  major:
+  release-major:
     runs-on: ubuntu-latest
 
     steps:

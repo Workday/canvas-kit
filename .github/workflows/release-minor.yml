@@ -1,4 +1,4 @@
-name: Reusable Minor Release
+name: Minor Release
 
 on:
   workflow_call:
