@@ -42,10 +42,20 @@ jobs:
       - name: Determine publish type
         id: determine
         run: |
+          # Debug: Show incoming event information
+          echo "::group::Debug Information"
+          echo "Event name: ${{ github.event_name }}"
+          echo "Ref: ${{ github.ref }}"
+          echo "Ref name: ${{ github.ref_name }}"
+          echo "SHA: ${{ github.sha }}"
+          echo "Commit message: ${{ github.event.head_commit.message }}"
+          echo "::endgroup::"
+
           # For workflow_dispatch, use the selected release type
           if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
             echo "publish_type=${{ inputs.release_type }}" >> $GITHUB_OUTPUT
             echo "branch=master" >> $GITHUB_OUTPUT
+            echo "::notice::Workflow dispatch detected - release type: ${{ inputs.release_type }}"
             exit 0
           fi
 
@@ -55,15 +65,35 @@ jobs:
 
           if [[ "$BRANCH" == prerelease/* ]]; then
             echo "publish_type=canary" >> $GITHUB_OUTPUT
+            echo "::notice::Branch '${BRANCH}' matched prerelease/* - publish type: canary"
           elif [[ "$BRANCH" == "master" ]] || [[ "$BRANCH" == "support" ]]; then
             # Check if commit message contains [skip release]
             if [[ "${{ github.event.head_commit.message }}" == *"[skip release]"* ]]; then
               echo "publish_type=skip" >> $GITHUB_OUTPUT
+              echo "::notice::Commit contains [skip release] - skipping publish"
             else
               echo "publish_type=release" >> $GITHUB_OUTPUT
+              echo "::notice::Branch '${BRANCH}' - publish type: release (patch)"
             fi
           else
             echo "publish_type=skip" >> $GITHUB_OUTPUT
+            echo "::warning::Branch '${BRANCH}' did not match any publish criteria - skipping"
+          fi
+
+      - name: Summary
+        run: |
+          echo "## Publish Decision" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Parameter | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Event | \`${{ github.event_name }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| Branch | \`${{ github.ref_name }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| Publish Type | \`${{ steps.determine.outputs.publish_type }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [[ "${{ steps.determine.outputs.publish_type }}" == "skip" ]]; then
+            echo "> ⏭️ **Skipping publish** - no release workflow will be triggered" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "> ✅ **Proceeding with ${{ steps.determine.outputs.publish_type }} publish**" >> $GITHUB_STEP_SUMMARY
           fi
 
   # Call canary publish workflow for prerelease branches
