@@ -1,4 +1,4 @@
-name: Reusable Release Publish
+name: Patch Release
 
 on:
   workflow_call:
@@ -6,7 +6,9 @@ on:
       version:
         required: false
         type: string
-        description: 'The version override. Example: "8.1.2". Leave blank if you want conventional commits to decide which version'
+        description:
+          'The version override. Example: "8.1.2". Leave blank if you want conventional commits to
+          decide which version'
         default: 'patch'
       branch:
         required: true
@@ -15,7 +17,9 @@ on:
       to_ref:
         required: false
         type: string
-        description: 'Git ref that marks the end of changelog generation comparison to overwrite default value. Tag, SHA, or branch'
+        description:
+          'Git ref that marks the end of changelog generation comparison to overwrite default value.
+          Tag, SHA, or branch'
         default: ''
     secrets:
       GH_RW_TOKEN:

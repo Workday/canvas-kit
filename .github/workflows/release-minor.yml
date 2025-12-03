@@ -16,10 +16,6 @@ permissions:
   id-token: write # Required for OIDC
   contents: write
 
-permissions:
-  id-token: write # Required for OIDC
-  contents: write
-
 jobs:
   release-minor:
     runs-on: ubuntu-latest

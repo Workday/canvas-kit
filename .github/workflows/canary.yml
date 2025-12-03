@@ -9,15 +9,11 @@ on:
         description: 'The branch being published'
     secrets:
       SLACK_WEBHOOK:
-        required: true
+        required: false
       GITHUB_TOKEN:
         required: true
       CHROMATIC_APP_CODE:
         required: true
-
-permissions:
-  id-token: write # Required for OIDC
-  contents: write
 
 permissions:
   id-token: write # Required for OIDC
