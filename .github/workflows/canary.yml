@@ -24,7 +24,7 @@ permissions:
   contents: write
 
 jobs:
-  canary:
+  release-canary:
     runs-on: ubuntu-latest
 
     steps:

@@ -21,7 +21,7 @@ permissions:
   contents: write
 
 jobs:
-  minor:
+  release-minor:
     runs-on: ubuntu-latest
 
     steps:
