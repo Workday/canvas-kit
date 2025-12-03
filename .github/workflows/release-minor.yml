@@ -2,15 +2,6 @@ name: Minor Release
 
 on:
   workflow_call:
-    secrets:
-      GH_RW_TOKEN:
-        required: true
-      GITHUB_TOKEN:
-        required: true
-      CHROMATIC_APP_CODE:
-        required: true
-      SLACK_WEBHOOK:
-        required: false
 
 permissions:
   id-token: write # Required for OIDC

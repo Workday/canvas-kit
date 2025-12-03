@@ -7,13 +7,6 @@ on:
         required: true
         type: string
         description: 'The branch being published'
-    secrets:
-      SLACK_WEBHOOK:
-        required: false
-      GITHUB_TOKEN:
-        required: true
-      CHROMATIC_APP_CODE:
-        required: true
 
 permissions:
   id-token: write # Required for OIDC
