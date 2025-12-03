@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.1.19](https://github.com/Workday/canvas-kit/releases/tag/v14.1.19) (2025-12-03)
+
+### Components
+
+- fix: Make actions  OIDC compliant ([#3618](https://github.com/Workday/canvas-kit/pull/3618)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  We're moving to NPM's OIDC to provide a more secure way to publish packages. More information [here](https://github.com/orgs/community/discussions/174507#discussioncomment-14716618).
+  
+  This requires our release actions to be update:
+  - use the correct permissions
+  - Ensure trusted publishers has a single workflow file to make the the release
+  - Ensure our packages have the correct repository url
+  - Ensure our workflows for different branches get referenced by the single source of truth.
+  
+  For more information on this approach here's how [we're approaching it](https://github.com/orgs/community/discussions/174507#discussioncomment-14716618)
+
+### Infrastructure
+
+- ci: Remove secrets config from publish ([#3621](https://github.com/Workday/canvas-kit/pull/3621)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- ci: Update release.yml to remove secret requirements ([@mannycarrera4](https://github.com/mannycarrera4))
+- ci: Remove secrets config from files ([@](https://github.com/))
+- ci: Add secrets inherit ([@](https://github.com/))
+
+
 ## [v14.1.18](https://github.com/Workday/canvas-kit/releases/tag/v14.1.18) (2025-11-24)
 
 ### Infrastructure
