@@ -1,7 +1,16 @@
 name: Major Release
 
 on:
-  workflow_dispatch:
+  workflow_call:
+    secrets:
+      GH_RW_TOKEN:
+        required: true
+      GITHUB_TOKEN:
+        required: true
+      CHROMATIC_APP_CODE:
+        required: true
+      SLACK_WEBHOOK:
+        required: false
 
 permissions:
   id-token: write # Required for OIDC
@@ -12,13 +21,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           persist-credentials: false
-          fetch-depth: 0 # Needed to do a proper push
+          fetch-depth: 0
 
       # Update support to point to the current major version
-      - name: Push changes
+      - name: Push current master to support
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GH_RW_TOKEN }}
@@ -29,7 +38,7 @@ jobs:
       # to use it for updating dist-tag on support branch.
       - name: Get previous tag
         id: previous-tag
-        run: echo "::set-output name=tag::$(node -p 'require("./lerna.json").version')"
+        run: echo "tag=$(node -p 'require("./lerna.json").version')" >> $GITHUB_OUTPUT
 
       # Pull changes from prerelease/major into master.
       # Changes will be pushed with a release commit
@@ -59,14 +68,14 @@ jobs:
           toRef: 'prerelease/major'
 
       # Update prerelease/minor to point to the next major release.
-      - name: Push changes
+      - name: Push to prerelease/minor
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GH_RW_TOKEN }}
           branch: prerelease/minor
 
       # Update prerelease/major with the changes from prerelease/minor which include the major release version bump.
-      - name: Push changes
+      - name: Push to prerelease/major
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GH_RW_TOKEN }}
@@ -78,3 +87,10 @@ jobs:
         env:
           DIST_TAG: 'support'
           VERSION: ${{ steps.previous-tag.outputs.tag }}
+
+      - uses: Workday/canvas-kit-actions/report-failure@v1
+        if: failure()
+        with:
+          slackWebhook: ${{ secrets.SLACK_WEBHOOK }}
+          slackMessage: |
+            Major Release job failed. Please check error logs.
