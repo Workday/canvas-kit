@@ -43,6 +43,7 @@ const TabsExample = (props: React.ComponentProps<typeof StaticStates> = {}) => {
             {label: 'Selected', props: {'aria-selected': true}},
             {label: 'Focus', props: {className: 'focus'}},
             {label: 'Hover', props: {className: 'hover'}},
+
             {label: 'Disabled', props: {'aria-disabled': true}},
           ]}
         >
