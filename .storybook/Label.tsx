@@ -54,5 +54,5 @@ export const Label = item => {
     );
   }
 
-  return name;
+  return item.name;
 };

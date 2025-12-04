@@ -56,8 +56,7 @@ const config: StorybookConfig = {
     check: false,
     reactDocgen: false, // we'll handle this ourselves
   },
-  viteFinal(config, options) {
-    console.log(config);
+  viteFinal(config) {
     return mergeConfig(
       {
         plugins: [

@@ -26,7 +26,6 @@ export const transform = async (code: string, id: string) => {
     const specRegEx = /<Specifications([\s\S]*?)file=[{'"]([^"'}]+)[}'"]([\s\S]*?)\/>/m;
     const specMatch = code.match(specRegEx);
     if (specMatch) {
-      console.log('id', id, specMatch[2]);
       try {
         const spec = await parseSpecFile(specMatch[2]).then(contents => JSON.stringify(contents));
         return code.replace(
