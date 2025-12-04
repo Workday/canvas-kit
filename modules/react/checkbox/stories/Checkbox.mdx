@@ -1,18 +1,21 @@
+import {Meta} from '@storybook/blocks';
+
 import {
   ExampleCodeBlock,
-  SymbolDoc,
-  Specifications,
   InformationHighlight,
+  Specifications,
+  SymbolDoc,
 } from '@workday/canvas-kit-docs';
-import { Caution } from './examples/Caution';
-import { Basic } from './examples/Basic';
-import { Inverse } from './examples/Inverse';
-import { Disabled } from './examples/Disabled';
-import { Error } from './examples/Error';
-import { Indeterminate } from './examples/Indeterminate';
-import { LabelPosition } from './examples/LabelPosition';
-import { RefForwarding } from './examples/RefForwarding';
-import { Required } from './examples/Required';
+
+import {Basic} from './examples/Basic';
+import {Caution} from './examples/Caution';
+import {Disabled} from './examples/Disabled';
+import {Error} from './examples/Error';
+import {Indeterminate} from './examples/Indeterminate';
+import {Inverse} from './examples/Inverse';
+import {LabelPosition} from './examples/LabelPosition';
+import {RefForwarding} from './examples/RefForwarding';
+import {Required} from './examples/Required';
 
 import * as CheckboxStories from './Checkbox.stories';
 
@@ -87,14 +90,13 @@ Labels for required fields are suffixed by a red asterisk.
 
 ### Error States
 
-Set the `error` prop of the wrapping Form Field to `"caution"` or
-`"error"` to set the Checkbox to the Alert or Error state, respectively. You will
-also need to set the `hintId` and `hintText` props on the Form Field to meet accessibility
-standards. You may wish to omit the `label` prop on the Form Field given that Checkbox already
-includes a label.
+Set the `error` prop of the wrapping Form Field to `"caution"` or `"error"` to set the Checkbox to
+the Alert or Error state, respectively. You will also need to set the `hintId` and `hintText` props
+on the Form Field to meet accessibility standards. You may wish to omit the `label` prop on the Form
+Field given that Checkbox already includes a label.
 
-The `error` prop may be applied directly to the Checkbox with a value of `"caution"`
-or `"error"` if Form Field is not being used.
+The `error` prop may be applied directly to the Checkbox with a value of `"caution"` or `"error"` if
+Form Field is not being used.
 
 #### Caution
 
@@ -115,4 +117,4 @@ Checkbox supports custom styling via the `cs` prop. For more information, check 
 
 ## Specifications
 
-<Specifications file="Checkbox.spec.ts" name="Checkbox" />
+<Specifications file="./cypress/component/Checkbox.spec.tsx" name="Checkbox" />

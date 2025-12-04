@@ -1,14 +1,16 @@
-import {ExampleCodeBlock, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {Meta} from '@storybook/blocks';
 
-import {Basic} from './examples/Basic';
-import {WithoutCloseIcon} from './examples/WithoutCloseIcon';
-import {CustomFocus} from './examples/CustomFocus';
-import {ReturnFocus} from './examples/ReturnFocus';
-import {CustomTarget} from './examples/CustomTarget';
-import {BodyOverflow} from './examples/BodyOverflow';
-import {FullOverflow} from './examples/FullOverflow';
-import {FormModal} from './examples/FormModal';
+import {ExampleCodeBlock, Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
+
 import * as ModalStories from './Modal.stories';
+import {Basic} from './examples/Basic';
+import {BodyOverflow} from './examples/BodyOverflow';
+import {CustomFocus} from './examples/CustomFocus';
+import {CustomTarget} from './examples/CustomTarget';
+import {FormModal} from './examples/FormModal';
+import {FullOverflow} from './examples/FullOverflow';
+import {ReturnFocus} from './examples/ReturnFocus';
+import {WithoutCloseIcon} from './examples/WithoutCloseIcon';
 
 <Meta of={ModalStories} />
 
@@ -114,4 +116,4 @@ hoisted to allow for form validation and allow you to control when the modal clo
 
 ## Specifications
 
-<Specifications file="Modal.spec.ts" name="Modal" />
+<Specifications file="./cypress/component/Modal.spec.tsx" name="Modal" />

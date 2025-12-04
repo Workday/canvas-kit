@@ -1,14 +1,17 @@
-import {ExampleCodeBlock, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {Meta} from '@storybook/blocks';
+
+import {ExampleCodeBlock, Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
+
 import * as SidePanelStories from './SidePanel.stories';
 
-import {Basic} from './examples/Basic';
-import {HiddenName} from './examples/HiddenName';
-import {AlternatePanel} from './examples/Variant';
-import {ExternalControl} from './examples/ExternalControl';
-import {RightOrigin} from './examples/RightOrigin';
 import {AlwaysOpen} from './examples/AlwaysOpen';
+import {Basic} from './examples/Basic';
+import {ExternalControl} from './examples/ExternalControl';
+import {HiddenName} from './examples/HiddenName';
 import {OnExpandedChange} from './examples/OnExpandedChange';
 import {OnStateTransition} from './examples/OnStateTransition';
+import {RightOrigin} from './examples/RightOrigin';
+import {AlternatePanel} from './examples/Variant';
 
 <Meta of={SidePanelStories} />
 
@@ -138,4 +141,4 @@ is an example:
 
 ## Specifications
 
-<Specifications file="SidePanelPreview.spec.ts" name="Side Panel" />
+<Specifications file="./cypress/component/SidePanelPreview.spec.tsx" name="Side Panel" />

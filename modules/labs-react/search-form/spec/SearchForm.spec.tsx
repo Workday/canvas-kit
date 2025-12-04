@@ -1,11 +1,12 @@
-import * as React from 'react';
-import {SearchForm} from '../lib/SearchForm';
-import {render, screen, fireEvent} from '@testing-library/react';
-import {searchThemes, SearchTheme} from '../lib/themes';
+import {fireEvent, render, screen} from '@testing-library/react';
 import chroma from 'chroma-js';
+import * as React from 'react';
+
+import {SearchForm} from '../lib/SearchForm';
+import {SearchTheme, searchThemes} from '../lib/themes';
 
 describe('SearchForm', () => {
-  const cb = jest.fn().mockImplementation((event: Event) => event);
+  const cb = vi.fn().mockImplementation((event: Event) => event);
 
   afterEach(() => {
     cb.mockReset();
@@ -69,7 +70,7 @@ describe('SearchForm', () => {
   test('Input change should fire callback', () => {
     const inputLabelText = `label`;
     const newValue = `label`;
-    render(<SearchForm onSubmit={jest.fn()} onInputChange={cb} inputLabel={inputLabelText} />);
+    render(<SearchForm onSubmit={vi.fn()} onInputChange={cb} inputLabel={inputLabelText} />);
 
     const input = screen.getByRole('combobox', {name: inputLabelText});
     fireEvent.change(input, {target: {value: newValue}});
@@ -116,7 +117,7 @@ describe('SearchForm', () => {
   });
 
   test('SearchForm should spread extra props', () => {
-    const cb = jest.fn();
+    const cb = vi.fn();
     const data = 'test';
     render(<SearchForm onSubmit={cb} data-propspread={data} />);
 
@@ -124,7 +125,7 @@ describe('SearchForm', () => {
   });
 
   test('SearchForm supports overriding the generated labelId', () => {
-    const cb = jest.fn();
+    const cb = vi.fn();
     const labelId = 'search-form-fixed-label-id';
 
     const {container} = render(<SearchForm onSubmit={cb} labelId={labelId} />);

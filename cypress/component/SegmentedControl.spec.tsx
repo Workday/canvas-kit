@@ -1,7 +1,7 @@
 import {Basic} from '../../modules/preview-react/segmented-control/stories/examples/Basic';
-import {Vertical} from '../../modules/preview-react/segmented-control/stories/examples/Vertical';
-import {RTL} from '../../modules/preview-react/segmented-control/stories/examples/RTL';
 import {Disabled} from '../../modules/preview-react/segmented-control/stories/examples/Disabled';
+import {RTL} from '../../modules/preview-react/segmented-control/stories/examples/RTL';
+import {Vertical} from '../../modules/preview-react/segmented-control/stories/examples/Vertical';
 
 describe('SegmentedControl', () => {
   [Basic, Vertical].forEach(Example => {
@@ -69,7 +69,7 @@ describe('SegmentedControl', () => {
 
         context('when the tab key is pressed', () => {
           beforeEach(() => {
-            cy.tab();
+            cy.realPress('Tab');
           });
 
           it('should focus on the second button', () => {
@@ -104,14 +104,20 @@ describe('SegmentedControl', () => {
             });
           });
         });
+      });
+
+      context('when the second button is active and focused', () => {
+        beforeEach(() => {
+          cy.findByRole('button', {name: 'List'}).click().focus();
+        });
 
         context('when the tab+shift is pressed', () => {
           beforeEach(() => {
-            cy.tab({shift: true});
+            cy.realPress(['Shift', 'Tab']);
           });
 
-          it('should focus on the last button', () => {
-            cy.findByRole('button', {name: 'Diagram'}).should('have.focus');
+          it('should focus on the first button', () => {
+            cy.findByRole('button', {name: 'Table'}).should('have.focus');
           });
         });
       });
@@ -160,7 +166,7 @@ describe('SegmentedControl', () => {
 
       context('when the tab key is pressed', () => {
         beforeEach(() => {
-          cy.tab();
+          cy.realPress('Tab');
         });
 
         it('should focus on the second button', () => {
@@ -195,14 +201,20 @@ describe('SegmentedControl', () => {
           });
         });
       });
+    });
+
+    context('when the second button is active and focused', () => {
+      beforeEach(() => {
+        cy.findByRole('button', {name: 'רשימה'}).click().focus();
+      });
 
       context('when the tab+shift is pressed', () => {
         beforeEach(() => {
-          cy.tab({shift: true});
+          cy.realPress(['Shift', 'Tab']);
         });
 
         it('should focus on the last button', () => {
-          cy.findByRole('button', {name: 'תרשים'}).should('have.focus');
+          cy.findByRole('button', {name: 'שולחן'}).should('have.focus');
         });
       });
     });

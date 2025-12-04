@@ -1,24 +1,25 @@
+import sdk from '@stackblitz/sdk';
 import React from 'react';
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
+import {vscDarkPlus} from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {Card} from '@workday/canvas-kit-react/card';
-import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
-import {vscDarkPlus} from 'react-syntax-highlighter/dist/cjs/styles/prism';
-import {checkCircleIcon, copyIcon} from '@workday/canvas-system-icons-web';
-import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import sdk from '@stackblitz/sdk';
-import tsconfigFile from '!!raw-loader!./stackblitzFiles/tsconfig.json';
-import {packageJSONFile} from './stackblitzFiles/packageJSONFile';
-import indexHTMLFile from '!!raw-loader!./stackblitzFiles/index.html';
-import mainFile from '!!raw-loader!./stackblitzFiles/main.tsx';
-import viteConfigFile from '!!raw-loader!./stackblitzFiles/vite.config.ts';
-import eslintrc from '!!raw-loader!./stackblitzFiles/.eslintrc.cjs.txt';
-import tsconfigNodeFile from '!!raw-loader!./stackblitzFiles/tsconfig.node.json';
-import appFile from '!!raw-loader!./stackblitzFiles/App.tsx';
-import viteEnvFile from '!!raw-loader!./stackblitzFiles/vite-env.d.ts';
 import {CanvasProvider, defaultBranding} from '@workday/canvas-kit-react/common';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {checkCircleIcon, copyIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
+
+import eslintrc from './stackblitzFiles/.eslintrc.cjs.txt?raw';
+import appFile from './stackblitzFiles/App.tsx?raw';
+import indexHTMLFile from './stackblitzFiles/index.html?raw';
+import mainFile from './stackblitzFiles/main.tsx?raw';
+import {packageJSONFile} from './stackblitzFiles/packageJSONFile';
+import tsconfigFile from './stackblitzFiles/tsconfig.json?raw';
+import tsconfigNodeFile from './stackblitzFiles/tsconfig.node.json?raw';
+import viteEnvFile from './stackblitzFiles/vite-env.d.ts?raw';
+import viteConfigFile from './stackblitzFiles/vite.config.ts?raw';
 
 const cardStencil = createStencil({
   base: {

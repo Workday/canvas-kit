@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "es6",
+    "module": "es2020",
     "target": "es2019",
     "allowJs": false,
     "declaration": true,
@@ -28,9 +28,7 @@
   },
   "ts-node": {
     "transpileOnly": true,
-    "compilerOptions": {
-      "module": "commonjs"
-    }
+    "module": "commonjs"
   },
   "exclude": [
     "cypress",

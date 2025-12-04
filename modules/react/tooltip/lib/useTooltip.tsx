@@ -1,12 +1,13 @@
 import * as React from 'react';
+
+import {useUniqueId} from '@workday/canvas-kit-react/common';
 import {
-  useCloseOnEscape,
   useAlwaysCloseOnOutsideClick,
-  usePopupModel,
+  useCloseOnEscape,
   useCloseOnFullscreenExit,
   useCloseOnTargetHidden,
+  usePopupModel,
 } from '@workday/canvas-kit-react/popup';
-import {useUniqueId} from '@workday/canvas-kit-react/common';
 
 const useIntentTimer = (fn: Function, waitMs: number = 0): {start(): void; clear(): void} => {
   const timer = React.useRef() as React.MutableRefObject<number | undefined>;
@@ -150,6 +151,8 @@ export function useTooltip<T extends Element = Element>({
   if (targetProps['aria-describedby'] === undefined) {
     delete targetProps['aria-describedby'];
   }
+
+  targetProps; //?
 
   return {
     /** Mix these properties into the target element. **Must be an Element** */

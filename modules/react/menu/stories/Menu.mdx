@@ -1,11 +1,14 @@
-import {ExampleCodeBlock, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {Meta} from '@storybook/blocks';
+
+import {ExampleCodeBlock, Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
+
 import {Basic} from './examples/Basic';
 import {ContextMenu} from './examples/ContextMenu';
-import {Icons} from './examples/Icons';
-import {SelectableMenu} from './examples/SelectableMenu';
 import {Grouping} from './examples/Grouping';
+import {Icons} from './examples/Icons';
 import {Nested} from './examples/Nested';
 import {NestedDynamic} from './examples/NestedDynamic';
+import {SelectableMenu} from './examples/SelectableMenu';
 
 import * as MenuStories from './Menu.stories';
 
@@ -117,4 +120,4 @@ This content is coming soon!
 
 ## Specifications
 
-<Specifications file="Menu.spec.ts" name="Menu" />
+<Specifications file="./cypress/component/Menu.spec.tsx" name="Menu" />

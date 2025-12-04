@@ -1,4 +1,3 @@
-import * as h from '../helpers';
 // Top Examples
 import {
   Default,
@@ -10,6 +9,7 @@ import {
   DisabledOptionsTest,
   PortalTest,
 } from '../../modules/preview-react/select/stories/stories_CypressTesting';
+import * as h from '../helpers';
 
 function getAssistiveFocus($menu: JQuery): JQuery {
   const activeId = $menu.attr('aria-activedescendant');
@@ -47,7 +47,7 @@ function assertOptionCenteredInView($option: JQuery) {
   expect(menu.scrollTop).to.equal(expectedMenuScrollTop);
 }
 // TODO: Remove this file when we remove SelectPreview.
-describe.skip('Select', () => {
+describe('Select', () => {
   context(`given the "Default" story is rendered`, () => {
     beforeEach(() => {
       cy.mount(<Default />);

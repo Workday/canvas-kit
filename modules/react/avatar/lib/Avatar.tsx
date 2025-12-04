@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
 import {Property} from 'csstype';
+import React, {useState} from 'react';
+
 import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
-import {createStencil, calc, CSProps, px2rem} from '@workday/canvas-kit-styling';
+import {SystemIcon, SystemIconCircleSize, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {borderRadius} from '@workday/canvas-kit-react/tokens';
-import {SystemIcon, SystemIconCircleSize, systemIconStencil} from '@workday/canvas-kit-react/icon';
-
+import {CSProps, calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {userIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -288,8 +288,8 @@ export const Avatar = createComponent('button')({
               variant === AvatarVariant.Light
                 ? 'light'
                 : variant === AvatarVariant.Dark
-                ? 'dark'
-                : variant,
+                  ? 'dark'
+                  : variant,
             size: typeof size === 'number' ? px2rem(size) : size,
             objectFit,
             isImageLoaded: imageLoaded,

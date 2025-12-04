@@ -1,16 +1,16 @@
 import React from 'react';
 
-import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {Table} from '@workday/canvas-kit-react/table';
 import {Text} from '@workday/canvas-kit-react/text';
+import {colors} from '@workday/canvas-kit-react/tokens';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {createStyles} from '@workday/canvas-kit-styling';
 
 import * as types from '../docgen/docTypes';
-import {MdxJSToJSX} from './MDXElements';
-import {Table} from '@workday/canvas-kit-react';
-import {capitalize, IndentLevelContext, RenderContext, indent} from './widgetUtils';
 import {DescriptionTooltip} from './DescriptionTooltip';
-import {colors} from '@workday/canvas-kit-react/tokens';
-import {createStyles} from '@workday/canvas-kit-styling';
-import {Flex} from '@workday/canvas-kit-react';
+import {MdxJSToJSX} from './MDXElements';
+import {IndentLevelContext, RenderContext, capitalize, indent} from './widgetUtils';
 
 const widgets: Record<string, React.FC<ValueProps>> = {};
 
