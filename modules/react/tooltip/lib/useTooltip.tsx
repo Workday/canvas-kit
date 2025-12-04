@@ -91,11 +91,7 @@ export function useTooltip<T extends Element = Element>({
   hideDelay?: number;
 } = {}) {
   const mouseDownRef = React.useRef(false); // use to prevent newly focused from making tooltip flash
-  const popupModel = usePopupModel({
-    onShow() {
-      console.log('onShow');
-    },
-  });
+  const popupModel = usePopupModel();
   const [anchorElement, setAnchorElement] = React.useState<T | null>(null);
   const id = useUniqueId();
   const intentTimerHide = useIntentTimer(popupModel.events.hide, hideDelay);
@@ -107,7 +103,6 @@ export function useTooltip<T extends Element = Element>({
   };
 
   const onOpen = () => {
-    console.log('onOpen');
     intentTimerShow.start();
     intentTimerHide.clear();
   };
