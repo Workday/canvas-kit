@@ -5,6 +5,9 @@ import {brand, base} from '@workday/canvas-tokens-web';
 import {getCache, maybeWrapCSSVariables, createStyles} from '@workday/canvas-kit-styling';
 
 export interface CanvasProviderProps {
+  /**
+   * @deprecated ⚠️ `theme` is deprecated. In Previous versions of Canvas Kit, we allowed teams to pass a theme object, this supported [Emotion's theming](https://emotion.sh/docs/theming). Now that we're shifting to a global theming approach based on CSS variables, we advise to no longer using the theme prop. For more information, view our [Theming Docs](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs#-preferred-approach-v14).
+   */
   theme?: PartialEmotionCanvasTheme;
 }
 
@@ -66,6 +69,9 @@ export const defaultBranding = createStyles({
 });
 
 export const useCanvasThemeToCssVars = (
+  /**
+   * @deprecated ⚠️ `theme` is deprecated. In Previous versions of Canvas Kit, we allowed teams to pass a theme object, this supported [Emotion's theming](https://emotion.sh/docs/theming). Now that we're shifting to a global theming approach based on CSS variables, we advise to no longer using the theme prop. For more information, view our [Theming Docs](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs#-preferred-approach-v14).
+   */
   theme: PartialEmotionCanvasTheme | undefined,
   elemProps: React.HTMLAttributes<HTMLElement>
 ) => {
