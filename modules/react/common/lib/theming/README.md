@@ -1,6 +1,10 @@
 # Canvas Kit Theming
 
-> **Deprecation Notice:** The `theme` prop on `CanvasProvider` and all associated theming utilities (`useTheme`, `getTheme`, `styled`, `defaultCanvasTheme`, `ContentDirection`, etc.) are deprecated. Please use CSS variables from `@workday/canvas-tokens-web` for theming. For the full theming guide, see our [Theming Documentation](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs).
+> **Deprecation Notice:** The `theme` prop on `CanvasProvider` and all associated theming utilities
+> (`useTheme`, `getTheme`, `styled`, `defaultCanvasTheme`, `ContentDirection`, etc.) are deprecated.
+> Please use CSS variables from `@workday/canvas-tokens-web` for theming. For the full theming
+> guide, see our
+> [Theming Documentation](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs).
 
 ## Installation
 
@@ -10,7 +14,8 @@ yarn add @workday/canvas-kit-react/common
 
 ## Recommended Approach: CSS Variables
 
-Canvas Kit v14+ promotes using CSS variables for theming. Import CSS variable files and override values in your root CSS:
+Canvas Kit v14+ promotes using CSS variables for theming. Import CSS variable files and override
+values in your root CSS:
 
 ```css
 /* index.css */
@@ -47,19 +52,22 @@ const themedBrand = createStyles({
 
 ### Setting RTL Direction
 
-Use the native HTML `dir` attribute to set the text direction. The `CanvasProvider` accepts a `dir` prop:
+Use the native HTML `dir` attribute to set the text direction. The `CanvasProvider` accepts a `dir`
+prop:
 
 ```tsx
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
 
 <CanvasProvider dir="rtl">
   <App />
-</CanvasProvider>
+</CanvasProvider>;
 ```
 
 ### CSS Logical Properties
 
-Use [CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties) for styling. These automatically adapt to the text direction:
+Use
+[CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties)
+for styling. These automatically adapt to the text direction:
 
 ```css
 /* Use CSS logical properties */
@@ -71,7 +79,8 @@ Use [CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CS
 
 ### Conditional RTL Styles
 
-For styles that need to change based on direction, use the [`:dir()` pseudo-class selector](https://developer.mozilla.org/en-US/docs/Web/CSS/:dir):
+For styles that need to change based on direction, use the
+[`:dir()` pseudo-class selector](https://developer.mozilla.org/en-US/docs/Web/CSS/:dir):
 
 ```css
 /* Use :dir() for RTL-specific styles */
@@ -94,7 +103,8 @@ const styles = createStyles({
 
 ## Breakpoints
 
-Breakpoints are used by media queries to conditionally apply or modify styles based on viewport width.
+Breakpoints are used by media queries to conditionally apply or modify styles based on viewport
+width.
 
 ### Values
 
@@ -123,23 +133,6 @@ You can use standard CSS media queries:
     padding: 1rem;
   }
 }
-```
-
-Or import the breakpoint utilities:
-
-```ts
-import {up, down, between, only} from '@workday/canvas-kit-react/common';
-
-const styles = {
-  [up('m')]: {
-    // @media (min-width: 768px)
-    padding: '1rem',
-  },
-  [down('m')]: {
-    // @media (max-width: 1023.5px)
-    padding: '0.5rem',
-  },
-};
 ```
 
 ---
@@ -189,4 +182,5 @@ import {defaultCanvasTheme} from '@workday/canvas-kit-react/common';
 import {defaultBranding} from '@workday/canvas-kit-react/common';
 ```
 
-For detailed migration guidance, see our [Theming Documentation](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs).
+For detailed migration guidance, see our
+[Theming Documentation](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs).
