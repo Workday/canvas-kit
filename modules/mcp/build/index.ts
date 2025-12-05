@@ -21,8 +21,11 @@ function copyFile(relativePath: string): void {
     // For llm-txt files, use llm-txt source directory and remove the llm-txt/ prefix
     const fileName = relativePath.replace('llm-txt/', '');
     srcPath = path.resolve(llmTxtSourceDir, fileName);
+  } else if (relativePath.startsWith('tokens/') || relativePath.startsWith('upgrade-guides/')) {
+    // For tokens and upgrade-guides files, use llm source directory
+    srcPath = path.resolve(llmSourceDir, relativePath);
   } else {
-    // For upgrade-guides files, use llm source directory
+    // Default to llm source directory
     srcPath = path.resolve(llmSourceDir, relativePath);
   }
   const destPath = path.resolve(targetDir, relativePath);
@@ -43,11 +46,12 @@ function copyFile(relativePath: string): void {
 }
 
 // Get file list from index.json and copy only those files
-const filesToCopy = index.upgradeGuideFiles;
+// Combine upgradeGuideFiles and tokenFiles, removing duplicates
+const allFiles = [...new Set([...index.upgradeGuideFiles, ...index.tokenFiles])];
 
-console.log(`Found ${filesToCopy.length} files to copy:`);
-filesToCopy.forEach(file => console.log(`  - ${file}`));
+console.log(`Found ${allFiles.length} files to copy:`);
+allFiles.forEach(file => console.log(`  - ${file}`));
 
-filesToCopy.forEach(file => copyFile(file));
+allFiles.forEach(file => copyFile(file));
 
 console.log('\nCopy completed successfully!');
