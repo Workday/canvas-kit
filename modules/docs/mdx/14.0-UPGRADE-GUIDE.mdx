@@ -58,7 +58,7 @@ visual reference of what's changed.**
   - [Deprecated Buttons](#deprecated-buttons)
   - [Input Provider](#input-provider)
   - [Menu (Preview)](#menu-preview)
-  - [readyOnlyPillStencil and removeablePillStencil](#readonlypillstencil-and-removeablepillstencil)
+  - [readOnlyPillStencil and removeablePillStencil](#readonlypillstencil-and-removeablepillstencil)
   - [Text Area (Labs)](#text-area)
   - [Text Input (Labs)](#text-input)
 - [Troubleshooting](#troubleshooting)
@@ -632,7 +632,7 @@ provide a value for the `name` prop.
 The `Pill` component no longer supports `default` as a value for the `variant` prop. If the
 `variant` prop is not provided, the component will use its default styling.
 
-`readyOnlyPillStencil` and `removeablePillStencil` have been removed. Please use `pillStencil`
+`readOnlyPillStencil` and `removeablePillStencil` have been removed. Please use `pillStencil`
 instead.
 
 **Before in v13**
@@ -941,9 +941,9 @@ const buttonStyles = createStyles({
 We've removed `Menu` from `@workday/canvas-kit-preview-react`. Please use
 [Menu](/components/popups/menu/) from `@workday/canvas-kit-react` instead.
 
-### readyOnlyPillStencil and removeablePillStencil
+### readOnlyPillStencil and removeablePillStencil
 
-The `readyOnlyPillStencil` and `removeablePillStencil` utilities have been removed from the Pill
+The `readOnlyPillStencil` and `removeablePillStencil` utilities have been removed from the Pill
 package. Please use `pillStencil` instead.
 
 ### Text Area (Preview)
@@ -999,7 +999,7 @@ import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
 **After in v14**
 
 ```tsx
-import {TextArea} from '@workday/canvas-kit-react/text-input';
+import {TextArea} from '@workday/canvas-kit-react/text-area';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 
 <FormField>
