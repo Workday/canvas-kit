@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.1.21](https://github.com/Workday/canvas-kit/releases/tag/v14.1.21) (2025-12-08)
+
+### Documentation
+
+- docs: Simplify import statements in README ([#3627](https://github.com/Workday/canvas-kit/pull/3627)) ([@mannycarrera4](https://github.com/mannycarrera4))
+
+
 ## [v14.1.20](https://github.com/Workday/canvas-kit/releases/tag/v14.1.20) (2025-12-08)
 
 ### Infrastructure
