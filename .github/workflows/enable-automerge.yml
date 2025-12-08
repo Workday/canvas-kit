@@ -4,10 +4,6 @@ on:
   pull_request_target:
     types: [ edited, labeled, synchronize ]
 
-permissions:
-  contents: write
-  pull-requests: write
-
 jobs:
   enable-automerge:
     if: contains(github.event.pull_request.labels.*.name, 'automerge')
@@ -17,4 +13,4 @@ jobs:
     - name: Enable Automerge
       uses: Workday/canvas-kit-actions/enable-automerge@v1
       with:
-        token: ${{ github.token }}
+        token: ${{ secrets.GH_RW_TOKEN }}
