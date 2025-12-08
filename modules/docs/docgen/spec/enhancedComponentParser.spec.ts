@@ -548,7 +548,7 @@ describe('enhancedComponentParser', () => {
   });
 
   describe('createContainer', () => {
-    it.only('should handle "createContainer" utility', () => {
+    it('should handle "createContainer" utility', () => {
       const program = createProgramFromSource(
         'test.tsx',
         `
