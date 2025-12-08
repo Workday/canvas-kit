@@ -35,7 +35,7 @@ const transform: Transform = (file, api) => {
       }
     });
 
-  const existinSegmentedControlImports = root.find(j.ImportDeclaration, {
+  const existingSegmentedControlImports = root.find(j.ImportDeclaration, {
     source: {value: '@workday/canvas-kit-react/segmented-control'},
   });
 
@@ -47,8 +47,8 @@ const transform: Transform = (file, api) => {
   };
 
   // add to existing import
-  if (existinSegmentedControlImports.length) {
-    existinSegmentedControlImports.forEach(nodePath => {
+  if (existingSegmentedControlImports.length) {
+    existingSegmentedControlImports.forEach(nodePath => {
       nodePath.value.specifiers = nodePath.value.specifiers?.concat(
         segmentedControlSpecifiers.map(mapToSpecifiers)
       );
