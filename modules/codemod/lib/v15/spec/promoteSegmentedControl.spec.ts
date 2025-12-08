@@ -67,7 +67,7 @@ describe('Promote SegmentedControl to main package', () => {
   });
 
   describe('Main package import', () => {
-    it('should properly transform main preeview import for SegmentedControl to react SegmentedControl', () => {
+    it('should properly transform main preview import for SegmentedControl to react SegmentedControl', () => {
       const input = stripIndent`
           import { SegmentedControl } from "@workday/canvas-kit-preview-react";
         `;
@@ -79,7 +79,7 @@ describe('Promote SegmentedControl to main package', () => {
       expectTransform(input, expected);
     });
 
-    it('should properly transform named main prewview import for SegmentedControl only to react SegmentedControl', () => {
+    it('should properly transform named main preview import for SegmentedControl only to react SegmentedControl', () => {
       const input = stripIndent`
           import { SegmentedControl as CanvasSegmentedControl } from "@workday/canvas-kit-preview-react";
         `;
