@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.1.21](https://github.com/Workday/canvas-kit/releases/tag/v14.1.21) (2025-12-08)
+
+### Documentation
+
+- docs: Simplify import statements in README ([#3627](https://github.com/Workday/canvas-kit/pull/3627)) ([@mannycarrera4](https://github.com/mannycarrera4))
+
+
+## [v14.1.20](https://github.com/Workday/canvas-kit/releases/tag/v14.1.20) (2025-12-08)
+
+### Infrastructure
+
+- ci: Update automerge workflow to use GitHub token ([#3619](https://github.com/Workday/canvas-kit/pull/3619)) ([@mannycarrera4](https://github.com/mannycarrera4))
+- ci: Update token for automerge workflow ([@mannycarrera4](https://github.com/mannycarrera4))
+
+
 ## [v14.1.19](https://github.com/Workday/canvas-kit/releases/tag/v14.1.19) (2025-12-03)
 
 ### Components
