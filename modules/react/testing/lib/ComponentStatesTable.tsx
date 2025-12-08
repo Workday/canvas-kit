@@ -28,14 +28,14 @@ export interface ComponentStatesTableProps {
 const Table = styled('table')({
   width: '100%',
   thead: {
-    textAlign: 'left',
-    paddingBottom: 16,
+    textAlign: 'start',
+    paddingBlockEnd: 16,
   },
   'td, th': {
     minWidth: 100,
-    paddingBottom: 16,
-    paddingRight: 16,
-    textAlign: 'left',
+    paddingBlockEnd: 16,
+    paddingInlineEnd: 16,
+    textAlign: 'start',
   },
 });
 

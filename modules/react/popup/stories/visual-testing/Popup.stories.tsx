@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 import {Popup, usePopupModel} from '@workday/canvas-kit-react/popup';
 
@@ -145,7 +145,7 @@ export const PopupRTL = {
       initialVisibility: 'visible',
     });
     return (
-      <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
+      <CanvasProvider dir="rtl">
         <Popup model={model}>
           <Popup.Target style={{display: 'none'}}></Popup.Target>
           <Popup.Popper>

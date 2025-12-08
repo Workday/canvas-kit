@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {StaticStates} from '@workday/canvas-kit-react/testing';
 import {saveAsIcon} from '@workday/canvas-system-icons-web';
 
@@ -86,7 +86,7 @@ export const MenuItemStates = {
           </div>
           <div>
             <h3>RTL</h3>
-            <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
+            <CanvasProvider dir="rtl">
               <AllStatesMenuItem />
             </CanvasProvider>
           </div>
@@ -199,7 +199,7 @@ export const MenuOptionStates = {
           </div>
           <div>
             <h3>RTL</h3>
-            <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
+            <CanvasProvider dir="rtl">
               <AllStatesMenuOption />
             </CanvasProvider>
           </div>
@@ -220,7 +220,7 @@ export const MenuGroups = {
           </div>
           <div>
             <h3>RTL</h3>
-            <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
+            <CanvasProvider dir="rtl">
               <MenuWithGroups />
             </CanvasProvider>
           </div>

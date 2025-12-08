@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Box} from '@workday/canvas-kit-react/layout';
 import {ComponentStatesTable} from '@workday/canvas-kit-react/testing';
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 
 export default {
   title: 'Testing/Layout/Box',
@@ -59,13 +59,13 @@ export const BoxStates = {
             },
           ]}
           rowProps={[
-            {label: 'LTR', props: {theme: {canvas: {direction: ContentDirection.LTR}}}},
-            {label: 'RTL', props: {theme: {canvas: {direction: ContentDirection.RTL}}}},
+            {label: 'LTR', props: {dir: 'ltr'}},
+            {label: 'RTL', props: {dir: 'rtl'}},
           ]}
         >
           {props => {
             return (
-              <CanvasProvider theme={props.theme}>
+              <CanvasProvider dir={props.dir}>
                 <Box {...props}>Box</Box>
               </CanvasProvider>
             );
