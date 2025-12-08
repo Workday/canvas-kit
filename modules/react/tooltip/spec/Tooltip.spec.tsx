@@ -38,7 +38,6 @@ describe('Tooltip', () => {
         vi.advanceTimersByTime(300); // advance the timer by the amount of delay time
       });
       const id = screen.getByText('Test Text').getAttribute('aria-describedby');
-      screen.getByText('Test Text').outerHTML; //?
       expect(screen.getByText('Test Text')).toHaveAttribute('aria-describedby', id);
 
       expect(screen.getByRole('tooltip')).toHaveAttribute('id', id);
