@@ -87,12 +87,7 @@ root.render(<App />);
 The in your `App.js` you can set a global theme.
 
 ```jsx
-import {
-  CanvasProvider,
-  ContentDirection,
-  PartialEmotionCanvasTheme,
-  useTheme,
-} from '@workday/canvas-kit-react/common';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 
 export const App = () => {
   return (

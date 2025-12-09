@@ -1,17 +1,26 @@
-name: Release
+name: Patch Release
 
 on:
-  push:
-    branches:
-      - master
-      - support
-  workflow_dispatch: # Allow manual triggering of this job in case of failures
+  workflow_call:
     inputs:
       version:
+        required: false
+        type: string
         description:
           'The version override. Example: "8.1.2". Leave blank if you want conventional commits to
           decide which version'
+        default: 'patch'
+      branch:
+        required: true
+        type: string
+        description: 'The branch being published (master or support)'
+      to_ref:
         required: false
+        type: string
+        description:
+          'Git ref that marks the end of changelog generation comparison to overwrite default value.
+          Tag, SHA, or branch'
+        default: ''
 
 permissions:
   id-token: write # Required for OIDC
@@ -19,10 +28,6 @@ permissions:
 
 jobs:
   release:
-    # Only run if:
-    # - The commit message does not contain `[skip release]`
-    # - OR the workflow was manually triggered and has a `version` string
-    if: "!contains(github.event.head_commit.message, '[skip release]') || inputs.version"
     runs-on: ubuntu-latest
 
     steps:
@@ -52,7 +57,8 @@ jobs:
           gh_token: ${{ secrets.GITHUB_TOKEN }}
           gh_rw_token: ${{ secrets.GH_RW_TOKEN }}
           chromatic_project_token: ${{ secrets.CHROMATIC_APP_CODE }}
-          version: ${{ inputs.version || 'patch' }}
+          version: ${{ inputs.version }}
+          toRef: ${{ inputs.to_ref }}
 
       - uses: Workday/canvas-kit-actions/report-failure@v1
         if: failure()
