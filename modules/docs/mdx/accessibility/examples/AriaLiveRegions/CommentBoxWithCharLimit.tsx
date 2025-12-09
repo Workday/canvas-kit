@@ -28,10 +28,10 @@ export const CommentBoxWithCharLimit = () => {
 
     // Otherwise, debounce the updates
     const timer = setTimeout(() => {
-      setLiveUpdateStr(hintTextStr);
+      setLiveUpdateStr(`${value.length} of ${MAX_CHARACTERS} characters`);
     }, DEBOUNCE_DELAY);
     return () => clearTimeout(timer);
-  }, [hintTextStr]);
+  }, [value.length]);
 
   return (
     <FormField>
