@@ -4,7 +4,7 @@ import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/test
 import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
 
 export default {
-  title: 'Testing/Preview/Information Highlight',
+  title: 'Testing/Indicators/Information Highlight',
   component: InformationHighlight,
   parameters: {
     chromatic: {
