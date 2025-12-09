@@ -52,8 +52,9 @@ to `Expandable.Icon` depending on whether the `Expandable.Icon` is placed before
 <ExampleCodeBlock code={Avatar} />
 
 > **Accessibility Note:** In this situation, the Avatar is decorative and should not be announced to
-> screen readers. The `isDecorative` prop is passed to `<Expandable.Avatar>` to hide it from screen
-> readers.
+> screen readers. The `<Expandable.Avatar>` component has `isDecorative` set to `true` by default to
+> hide it from screen readers, as avatars in expandable headers are typically decorative when paired
+> with adjacent text.
 
 ### Right to Left (RTL)
 
