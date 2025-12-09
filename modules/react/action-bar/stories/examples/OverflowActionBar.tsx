@@ -2,7 +2,7 @@ import React from 'react';
 import {breakpoints} from '@workday/canvas-kit-react/common';
 import {ActionBar, useActionBarModel} from '@workday/canvas-kit-react/action-bar';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
+import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
 import {Box} from '@workday/canvas-kit-react/layout';
 
 type MyActionItem = {

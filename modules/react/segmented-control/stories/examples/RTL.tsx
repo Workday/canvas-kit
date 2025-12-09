@@ -5,7 +5,7 @@ import {
   listDetailIcon,
   pieChartIcon,
 } from '@workday/canvas-system-icons-web';
-import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
+import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
 
 export const RTL = () => (
   <CanvasProvider dir="rtl">
