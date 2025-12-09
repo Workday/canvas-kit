@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
+import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
 
 export const Basic = () => {
   return (

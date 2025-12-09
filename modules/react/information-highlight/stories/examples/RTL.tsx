@@ -1,6 +1,6 @@
 import React from 'react';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
+import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {system} from '@workday/canvas-tokens-web';
 export const RTL = () => {
