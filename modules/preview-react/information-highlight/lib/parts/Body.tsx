@@ -1,4 +1,4 @@
-import {createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {createComponent, ExtractProps, forwardFitTokens} from '@workday/canvas-kit-react/common';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import {Text} from '@workday/canvas-kit-react/text';
@@ -6,10 +6,9 @@ import {Text} from '@workday/canvas-kit-react/text';
 const informationHighlightBodyStencil = createStencil({
   base: () => {
     return {
-      ...system.type.subtext.large,
+      ...forwardFitTokens.system.type.subtext.lg,
       color: system.color.text.strong,
       gridColumn: '2',
-      marginBlockEnd: system.space.x2, // change this token
     };
   },
 });

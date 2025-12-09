@@ -18,7 +18,7 @@ export const informationHighlightStencil = createStencil({
     columnGap: forwardFitTokens.system.gap.md,
     rowGap: forwardFitTokens.system.gap.sm,
     padding: forwardFitTokens.system.padding.md,
-    borderRadius: system.shape.x1,
+    borderRadius: forwardFitTokens.system.shape.xs,
     outline: `${px2rem(1)} solid transparent`,
     borderInlineStart: `${system.space.x1} solid transparent`,
   },
