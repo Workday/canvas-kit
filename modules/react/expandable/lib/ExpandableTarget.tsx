@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {createSubcomponent, ExtractProps, forwardFitTokens} from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Heading} from '@workday/canvas-kit-react/text';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
@@ -27,14 +27,14 @@ export const expandableTargetStencil = createStencil({
   base: {
     background: system.color.bg.transparent.default,
     borderColor: system.color.bg.transparent.default,
-    borderRadius: system.shape.x1,
+    borderRadius: forwardFitTokens.system.shape.xs,
     borderWidth: 0,
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',
-    gap: system.space.x2,
+    gap: forwardFitTokens.system.gap.sm,
     justifyContent: 'start',
-    padding: system.space.x2,
+    padding: forwardFitTokens.system.padding.xs,
     cursor: 'pointer',
     width: '100%',
     '&:hover, &.hover': {

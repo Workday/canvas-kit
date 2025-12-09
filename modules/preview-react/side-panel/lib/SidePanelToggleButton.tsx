@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {createComponent, ExtractProps, forwardFitTokens} from '@workday/canvas-kit-react/common';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {transformationImportIcon} from '@workday/canvas-system-icons-web';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
@@ -22,9 +22,9 @@ export interface SidePanelToggleButtonProps extends ExtractProps<typeof Tertiary
 export const sidePanelToggleButtonStencil = createStencil({
   base: {
     position: 'absolute',
-    top: system.space.x6,
-    width: system.space.x8,
-    insetInlineEnd: system.space.x4,
+    top: system.space.x6, // change this token
+    width: forwardFitTokens.system.size.md,
+    insetInlineEnd: system.space.x4, // change this token
   },
   modifiers: {
     state: {
@@ -76,21 +76,21 @@ export const sidePanelToggleButtonStencil = createStencil({
       modifiers: {state: 'collapsing', origin: 'right'},
       styles: {
         transform: `scaleX(-1)`,
-        insetInlineStart: system.space.x4,
+        insetInlineStart: system.space.x4, // change this token
       },
     },
     {
       modifiers: {state: 'expanded', origin: 'right'},
       styles: {
         transform: `scaleX(1)`,
-        insetInlineStart: system.space.x4,
+        insetInlineStart: system.space.x4, // change this token
       },
     },
     {
       modifiers: {state: 'expanding', origin: 'right'},
       styles: {
         transform: `scaleX(1)`,
-        insetInlineStart: system.space.x4,
+        insetInlineStart: system.space.x4, // change this token
       },
     },
   ],

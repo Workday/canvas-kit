@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {createContainer, ExtractProps} from '@workday/canvas-kit-react/common';
+import {createContainer, ExtractProps, forwardFitTokens} from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 
 import {ExpandableContent} from './ExpandableContent';
@@ -24,7 +24,7 @@ export const expandableContainerStencil = createStencil({
   base: {
     display: 'flex',
     flexDirection: 'column',
-    padding: system.space.x2,
+    padding: forwardFitTokens.system.padding.xs,
   },
 });
 

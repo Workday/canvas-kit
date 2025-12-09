@@ -9,7 +9,7 @@ const informationHighlightBodyStencil = createStencil({
       ...system.type.subtext.large,
       color: system.color.text.strong,
       gridColumn: '2',
-      marginBlockEnd: system.space.x2,
+      marginBlockEnd: system.space.x2, // change this token
     };
   },
 });

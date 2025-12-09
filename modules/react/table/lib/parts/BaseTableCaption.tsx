@@ -1,11 +1,11 @@
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, forwardFitTokens} from '@workday/canvas-kit-react/common';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export const baseTableCaptionStencil = createStencil({
   base: {
-    padding: `${system.space.x2} ${system.space.x4}`,
+    padding: `${forwardFitTokens.system.padding.xs} ${forwardFitTokens.system.padding.md}`,
   },
 });
 

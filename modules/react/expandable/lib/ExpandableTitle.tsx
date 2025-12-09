@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {createComponent, ExtractProps, forwardFitTokens} from '@workday/canvas-kit-react/common';
 import {Box, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {system} from '@workday/canvas-tokens-web';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
@@ -14,10 +14,10 @@ export interface ExpandableTitleProps extends ExtractProps<typeof Box, never> {
 
 export const expandableTitleStencil = createStencil({
   base: {
-    ...system.type.body.medium,
+    ...forwardFitTokens.system.type.body.md,
     fontWeight: system.fontWeight.bold,
     color: system.color.text.strong,
-    padding: `${px2rem(2)} ${system.space.zero}`,
+    padding: `${px2rem(2)} ${forwardFitTokens.system.padding.none}`,
     textAlign: 'left',
   },
 });

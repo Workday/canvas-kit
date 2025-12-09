@@ -9,6 +9,7 @@ export const forwardFitTokens = {
     shape: {
       xs: cssVar(system.shape.xs, system.shape.x1),
       sm: cssVar(system.shape.sm, system.shape.x1Half),
+      md: cssVar(system.shape.md, system.shape.x2),
       full: cssVar(system.shape.full, system.shape.round),
     },
     size: {
@@ -40,6 +41,7 @@ export const forwardFitTokens = {
       xs: cssVar(system.gap.xs, system.space.x1),
       sm: cssVar(system.gap.sm, system.space.x2),
       md: cssVar(system.gap.md, system.space.x4),
+      lg: cssVar(system.gap.lg, system.space.x6),
     },
     type: {
       subtext: {
@@ -65,6 +67,12 @@ export const forwardFitTokens = {
           lineHeight: cssVar(system.lineHeight.body.sm, system.lineHeight.body.small),
           fontSize: cssVar(system.fontSize.body.sm, system.fontSize.body.small),
           letterSpacing: cssVar(system.letterSpacing.body.sm, base.letterSpacing200),
+        },
+        md: {
+          fontFamily: system.fontFamily.default,
+          fontWeight: system.fontWeight.normal,
+          lineHeight: cssVar(system.lineHeight.body.md, system.lineHeight.body.medium),
+          fontSize: cssVar(system.fontSize.body.md, system.fontSize.body.medium),
         },
       },
     },

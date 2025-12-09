@@ -1,5 +1,5 @@
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, forwardFitTokens} from '@workday/canvas-kit-react/common';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -11,7 +11,7 @@ export const baseTableCellStencil = createStencil({
     gridTemplateColumns: '1fr',
     justifyContent: 'start',
     minHeight: '3.5rem',
-    padding: `${system.space.x2} ${system.space.x4}`,
+    padding: `${forwardFitTokens.system.padding.xs} ${forwardFitTokens.system.padding.md}`,
     wordBreak: 'break-word',
   },
 });
