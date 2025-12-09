@@ -10,7 +10,7 @@ export const baseTableCellStencil = createStencil({
     borderBottom: `${px2rem(1)} solid ${system.color.border.divider}`,
     gridTemplateColumns: '1fr',
     justifyContent: 'start',
-    minHeight: '3.5rem',
+    minHeight: forwardFitTokens.system.size.xxl,
     padding: `${forwardFitTokens.system.padding.xs} ${forwardFitTokens.system.padding.md}`,
     wordBreak: 'break-word',
   },

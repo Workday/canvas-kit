@@ -18,6 +18,7 @@ export const forwardFitTokens = {
       md: cssVar(system.size.md, system.space.x8),
       lg: cssVar(system.size.lg, system.space.x10),
       xl: cssVar(system.size.xl, '3rem'),
+      xxl: cssVar(system.size.xxl, '3.5rem'),
     },
     padding: {
       none: cssVar(system.padding.none, system.space.zero),

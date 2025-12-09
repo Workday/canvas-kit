@@ -1,12 +1,12 @@
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createComponent} from '@workday/canvas-kit-react/common';
-import {calc, createStencil} from '@workday/canvas-kit-styling';
+import {createComponent, forwardFitTokens} from '@workday/canvas-kit-react/common';
+import {createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export const baseTableHeadStencil = createStencil({
   base: {
     backgroundColor: system.color.bg.alt.softer,
-    minHeight: calc.subtract(system.space.x16, system.space.x4),
+    minHeight: forwardFitTokens.system.size.xxl,
     'th ': {
       '&:first-of-type': {
         borderInlineStart: 'none',

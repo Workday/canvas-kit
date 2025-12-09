@@ -1,5 +1,5 @@
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, forwardFitTokens} from '@workday/canvas-kit-react/common';
 import {BaseTableHead} from './parts/BaseTableHead';
 import {BaseTableBody} from './parts/BaseTableBody';
 import {BaseTableRow} from './parts/BaseTableRow';
@@ -14,9 +14,9 @@ export interface BaseTableProps extends Omit<BoxProps, 'ref'> {}
 
 export const baseTableStencil = createStencil({
   base: {
-    ...system.type.subtext.large,
+    ...forwardFitTokens.system.type.subtext.lg,
     border: `${px2rem(1)} solid ${system.color.border.container}`,
-    borderRadius: system.shape.x2,
+    borderRadius: forwardFitTokens.system.shape.md,
     overflow: 'auto',
     color: system.color.text.default,
   },
