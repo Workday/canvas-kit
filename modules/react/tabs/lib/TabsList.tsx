@@ -7,6 +7,7 @@ import {
   ExtractProps,
   useModalityType,
   useLocalRef,
+  forwardFitTokens,
 } from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {
@@ -119,14 +120,14 @@ export const tabsListStencil = createStencil({
     display: 'flex',
     position: 'relative',
     borderBottom: `${px2rem(1)} solid ${system.color.border.divider}`,
-    gap: system.space.x3,
-    paddingInline: system.space.x6,
+    gap: forwardFitTokens.system.gap.xs, // change this token
+    paddingInline: forwardFitTokens.system.padding.xl,
   },
   modifiers: {
     modality: {
       touch: {
         overflowX: 'auto',
-        paddingInline: system.space.zero,
+        paddingInline: forwardFitTokens.system.padding.none,
         // data attributes are needed until scroll-driven animations are supported. Once they are,
         // we can use a CSS-only solution:
         // https://www.bram.us/2023/09/16/solved-by-css-scroll-driven-animations-detect-if-an-element-can-scroll-or-not/

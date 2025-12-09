@@ -10,6 +10,7 @@ import {
   createSubcomponent,
   useModalityType,
   createComponent,
+  forwardFitTokens,
 } from '@workday/canvas-kit-react/common';
 import {Box, FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
@@ -83,20 +84,20 @@ export interface TabsItemProps
 
 const tabItemStencil = createStencil({
   base: {
-    ...system.type.subtext.large,
+    ...forwardFitTokens.system.type.subtext.lg,
     fontFamily: `${system.fontFamily.default}, Helvetica Neue, Helvetica, Arial, sans-serif`,
     fontWeight: system.fontWeight.medium,
     border: 'none',
     backgroundColor: 'transparent',
     flex: '0 0 auto',
-    minWidth: system.space.zero,
+    minWidth: 0,
     alignItems: 'center',
-    padding: `${system.space.x3} ${system.space.x4}`,
-    height: px2rem(52),
+    padding: `${forwardFitTokens.system.padding.sm} ${forwardFitTokens.system.padding.md}`,
+    height: forwardFitTokens.system.size.xl,
     cursor: 'pointer',
     color: system.color.fg.muted.default,
     position: 'relative',
-    borderRadius: `${system.space.x1} ${system.space.x1} ${system.space.zero} ${system.space.zero}`,
+    borderRadius: `${forwardFitTokens.system.shape.xs} ${forwardFitTokens.system.shape.xs} ${system.space.zero} ${system.space.zero}`,
     transition: 'background 150ms ease, color 150ms ease',
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
@@ -105,7 +106,7 @@ const tabItemStencil = createStencil({
 
     '&:has(span)': {
       display: 'flex',
-      gap: system.space.x2,
+      gap: forwardFitTokens.system.gap.sm,
     },
 
     '&:hover, &.hover, &:focus-visible, &.focus': {
@@ -141,11 +142,11 @@ const tabItemStencil = createStencil({
         position: 'absolute',
         // selected state for Windows high contrast theme
         borderBottom: `${system.space.x1} solid transparent`,
-        borderRadius: `${system.shape.x1} ${system.shape.x1} ${system.shape.zero} ${system.shape.zero}`,
+        borderRadius: `${forwardFitTokens.system.shape.xs} ${forwardFitTokens.system.shape.xs} ${system.shape.zero} ${system.shape.zero}`,
         backgroundColor: brand.primary.base,
-        bottom: system.space.zero,
+        bottom: 0,
         content: `''`,
-        left: system.space.zero,
+        left: 0,
         marginBlockStart: `${calc.negate(calc.divide(system.space.x2, system.space.x1))}`,
         width: '100%',
       },

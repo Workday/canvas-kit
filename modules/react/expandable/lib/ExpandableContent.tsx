@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {createSubcomponent, ExtractProps, forwardFitTokens} from '@workday/canvas-kit-react/common';
 import {Box, mergeStyles} from '@workday/canvas-kit-react/layout';
 
 import {useExpandableContent} from './hooks/useExpandableContent';
@@ -19,7 +19,7 @@ export interface ExpandableContentProps extends ExtractProps<typeof Box, never> 
 export const expandableContentStencil = createStencil({
   base: {
     background: system.color.bg.transparent.default,
-    padding: `${system.space.x4} ${system.space.x2} ${system.space.x2}`,
+    padding: forwardFitTokens.system.padding.xs,
   },
 });
 

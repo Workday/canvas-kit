@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, forwardFitTokens} from '@workday/canvas-kit-react/common';
 import {mergeStyles, BoxProps} from '@workday/canvas-kit-react/layout';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
@@ -25,10 +25,10 @@ export const cardStencil = createStencil({
   base: {
     display: 'flex',
     flexDirection: 'column',
-    gap: system.space.x6,
-    padding: system.space.x8,
+    gap: forwardFitTokens.system.gap.lg,
+    padding: forwardFitTokens.system.padding.xl,
     backgroundColor: system.color.bg.default,
-    borderRadius: system.shape.x2,
+    borderRadius: forwardFitTokens.system.shape.md,
     border: `${px2rem(1)} solid ${system.color.border.container}`,
   },
   modifiers: {

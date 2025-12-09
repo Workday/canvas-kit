@@ -1,5 +1,5 @@
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, forwardFitTokens} from '@workday/canvas-kit-react/common';
 import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -9,7 +9,7 @@ export const baseTableHeaderStencil = createStencil({
     borderBottom: `${px2rem(1)} solid ${system.color.border.divider}`,
     justifyContent: 'start',
     minHeight: calc.subtract(system.space.x16, system.space.x2),
-    padding: `${system.space.x2} ${system.space.x4}`,
+    padding: `${forwardFitTokens.system.padding.xs} ${forwardFitTokens.system.padding.md}`,
     wordBreak: 'break-word',
     fontWeight: system.fontWeight.medium,
   },
