@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.1.23](https://github.com/Workday/canvas-kit/releases/tag/v14.1.23) (2025-12-10)
+
+### Infrastructure
+
+- fix: Update mcp build to account for node require error ([#3637](https://github.com/Workday/canvas-kit/pull/3637)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v14.1.22](https://github.com/Workday/canvas-kit/releases/tag/v14.1.22) (2025-12-08)
 
 
