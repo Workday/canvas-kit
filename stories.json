@@ -5977,6 +5977,18 @@
         "__isArgsStory": false
       }
     },
+    "testing-popups-popup--popup-themed": {
+      "id": "testing-popups-popup--popup-themed",
+      "name": "Popup Themed",
+      "title": "Testing/Popups/Popup",
+      "importPath": "./modules/react/popup/stories/visual-testing/Popup.stories.tsx",
+      "kind": "Testing/Popups/Popup",
+      "story": "Popup Themed",
+      "parameters": {
+        "fileName": "./modules/react/popup/stories/visual-testing/Popup.stories.tsx",
+        "__isArgsStory": false
+      }
+    },
     "testing-popups-popup--popup-with-body-scroll": {
       "id": "testing-popups-popup--popup-with-body-scroll",
       "name": "Popup With Body Scroll",
