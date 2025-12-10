@@ -4,7 +4,6 @@ export * from './divider';
 export * from './information-highlight';
 export * from './loading-sparkles';
 export * from './multi-select';
-export * from './pill';
 export * from './radio';
 export * from './select';
 export * from './side-panel';

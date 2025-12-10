@@ -1,4 +1,4 @@
-import {Pill} from '@workday/canvas-kit-preview-react/pill';
+import {Pill} from '@workday/canvas-kit-react/pill';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 

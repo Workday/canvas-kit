@@ -1,7 +1,7 @@
 import {Meta, StoryObj} from '@storybook/react';
 import mdxDoc from './Pill.mdx';
 
-import {Pill} from '@workday/canvas-kit-preview-react/pill';
+import {Pill} from '@workday/canvas-kit-react/pill';
 // examples
 import {WithReadOnly as WithReadOnlyExample} from './examples/WithReadOnly';
 import {WithAvatar as WithAvatarExample} from './examples/WithAvatar';
@@ -12,7 +12,7 @@ import {WithList as WithListExample} from './examples/WithList';
 import {CustomStyles as CustomStylesExample} from './examples/CustomStyles';
 
 export default {
-  title: 'Preview/Pill',
+  title: 'Components/Indicators/Pill',
   component: Pill,
   tags: ['autodocs'],
   parameters: {
