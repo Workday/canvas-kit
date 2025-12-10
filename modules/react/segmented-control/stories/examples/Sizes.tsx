@@ -6,7 +6,7 @@ import {
   listDetailIcon,
   pieChartIcon,
 } from '@workday/canvas-system-icons-web';
-import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
+import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
 import {BodyText} from '@workday/canvas-kit-react/text';
 
 export const Sizes = () => (
