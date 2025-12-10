@@ -70,6 +70,43 @@ and scoped to the `div` that the `CanvasProvider` created. This meant that anyth
 or outside of the `CanvasProvider` would not be able to cascade down to the components within the
 `CanvasProvider`.
 
+## Global vs Scoped Theming
+
+Canvas Kit v14 supports two theming strategies: **global theming** and **scoped theming**. Understanding the difference is important to avoid unexpected behavior.
+
+### Global Theming
+
+Global theming applies CSS variables at the `:root` level, making them available throughout your entire application. This is the **recommended approach** for most use cases.
+
+```css
+:root {
+  --cnvs-brand-primary-base: var(--cnvs-base-palette-magenta-600);
+}
+```
+
+### Scoped Theming
+
+Scoped theming applies CSS variables to a specific section of your application using the `CanvasProvider` with either a `className` or `theme` prop. The theme only affects components within that provider.
+
+```tsx
+// Using the theme prop for scoped theming
+<CanvasProvider theme={{canvas: {palette: {primary: {main: 'purple'}}}}}>
+  <ScopedSection />
+</CanvasProvider>
+```
+
+> **⚠️ Warning:** Scoped theming creates a cascade barrier that **will break global theming** within its scope. Any CSS variables defined at `:root` will be overridden by the scoped theme. Only the tokens explicitly defined in the `theme` prop will be changed - other tokens will use their default values, not your global overrides.
+
+### When to Use Scoped Theming
+
+Only use scoped theming when you intentionally need a different theme for a specific section of your application, such as:
+
+- Embedding a Canvas Kit component in a third-party application with a different brand
+- Creating a preview panel that shows components with different themes
+- Supporting multi-tenant applications where sections have different branding
+
+For all other cases, use global theming at `:root` to ensure consistent theming throughout your application.
+
 ## ✅ Preferred Approach (v14+)
 
 Canvas Kit v14 promotes using CSS variables for theming, which can be applied in two ways:
