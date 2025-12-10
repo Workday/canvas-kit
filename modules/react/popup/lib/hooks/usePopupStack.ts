@@ -103,22 +103,18 @@ export const usePopupStack = <E extends HTMLElement>(
 
   React.useLayoutEffect(() => {
     const element = localRef.current;
-    if (element && theme) {
-      // eslint-disable-next-line guard-for-in
-      for (const key in style) {
+    const keys = Object.keys(style);
+    if (element && theme && keys.length > 0) {
+      for (const key of keys) {
         // @ts-ignore
         element.style.setProperty(key, style[key]);
       }
-    }
-    return () => {
-      if (element && theme) {
-        // eslint-disable-next-line guard-for-in
-        for (const key in style) {
-          // @ts-ignore
-          element.style.removeProperty(key, style[key]);
+      return () => {
+        for (const key of keys) {
+          element.style.removeProperty(key);
         }
-      }
-    };
+      };
+    }
   }, [localRef, style, theme]);
 
   return localRef;
