@@ -172,7 +172,6 @@ export const PopupThemed = {
       <CanvasProvider theme={{canvas: {palette: {primary: {main: base.magenta600}}}}}>
         <PrimaryButton>Primary Button</PrimaryButton>
         <Popup model={model}>
-          <Popup.Target style={{display: 'none'}}></Popup.Target>
           <Popup.Popper>
             <Popup.Card style={{animation: 'none'}} width={300}>
               <Popup.CloseIcon aria-label="" />
