@@ -6,6 +6,8 @@ import {Theming} from './examples/Theming';
 
 # Canvas Kit Theming Guide
 
+> **Deprecation Notice:** The `theme` prop on `CanvasProvider` and all associated theming utilities (`useTheme`, `getTheme`, `styled`, `defaultCanvasTheme`, etc.) are deprecated. Please use CSS variables from `@workday/canvas-tokens-web` for theming. See the [Preferred Approach](#-preferred-approach-v14) section below.
+
 ## Overview
 
 Canvas Kit v14 introduces a significant shift in our approach to theming: we've moved away from
@@ -266,6 +268,65 @@ Canvas Kit supports RTL out of the box. Our components are styled to use
 [CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values).
 If you want to add additional styles based on RTL, you can also use the `:dir`
 [pseudo selector](https://developer.mozilla.org/en-US/docs/Web/CSS/:dir).
+
+#### Setting RTL Direction
+
+Use the native HTML `dir` attribute to set the text direction. The `CanvasProvider` accepts a `dir` prop which sets this attribute on its wrapper element:
+
+```tsx
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
+
+// Set RTL direction
+<CanvasProvider dir="rtl">
+  <App />
+</CanvasProvider>
+```
+
+You can also set it on any HTML element:
+
+```tsx
+<div dir="rtl">
+  <MyComponent />
+</div>
+```
+
+> **Note:** The `dir` attribute is the standard HTML way to set text direction. It's preferred over the deprecated `theme.canvas.direction` approach because it works natively with CSS logical properties and the `:dir()` pseudo-class.
+
+#### Using CSS Logical Properties
+
+CSS logical properties automatically adapt to the text direction. Use these instead of physical properties:
+
+```css
+/* Physical properties (don't adapt to RTL) */
+.my-component {
+  margin-left: 1rem;
+  padding-right: 1rem;
+  border-left: 1px solid;
+}
+
+/* Logical properties (adapt to RTL automatically) */
+.my-component {
+  margin-inline-start: 1rem;
+  padding-inline-end: 1rem;
+  border-inline-start: 1px solid;
+}
+```
+
+#### Conditional RTL Styles with `:dir()`
+
+For styles that need to change based on direction (like rotating icons), use the `:dir()` pseudo-class:
+
+```tsx
+import {createStyles} from '@workday/canvas-kit-styling';
+
+const rtlButtonStyles = createStyles({
+  ':dir(rtl)': {
+    svg: {
+      transform: 'rotate(180deg)',
+    },
+  },
+});
+```
 
 <ExampleCodeBlock code={RTL} />
 
