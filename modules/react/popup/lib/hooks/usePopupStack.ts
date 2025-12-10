@@ -1,7 +1,8 @@
 import React from 'react';
 
 import {PopupStack} from '@workday/canvas-kit-popup-stack';
-import {useLocalRef, isElementRTL} from '@workday/canvas-kit-react/common';
+import {useLocalRef, useCanvasThemeToCssVars, isElementRTL} from '@workday/canvas-kit-react/common';
+import {ThemeContext, Theme} from '@emotion/react';
 
 /**
  * **Note:** If you're using {@link Popper}, you do not need to use this hook directly.
@@ -50,7 +51,8 @@ export const usePopupStack = <E extends HTMLElement>(
   target?: HTMLElement | React.RefObject<HTMLElement>
 ): React.RefObject<HTMLElement> => {
   const {elementRef, localRef} = useLocalRef(ref);
-
+  const theme = React.useContext(ThemeContext as React.Context<Theme>);
+  const {style} = useCanvasThemeToCssVars(theme, {});
   const firstLoadRef = React.useRef(true); // React 19 can call a useState more than once, so we need to track if we've already created a container
 
   // useState function input ensures we only create a container once.
@@ -98,6 +100,26 @@ export const usePopupStack = <E extends HTMLElement>(
       }
     }
   }, [localRef, target]);
+
+  React.useLayoutEffect(() => {
+    const element = localRef.current;
+    if (element) {
+      // eslint-disable-next-line guard-for-in
+      for (const key in style) {
+        // @ts-ignore
+        element.style.setProperty(key, style[key]);
+      }
+    }
+    return () => {
+      if (element) {
+        // eslint-disable-next-line guard-for-in
+        for (const key in style) {
+          // @ts-ignore
+          element.style.removeProperty(key, style[key]);
+        }
+      }
+    };
+  }, [localRef, style]);
 
   return localRef;
 };
