@@ -655,33 +655,47 @@ instead.
 
 ### Modals and Dialogs
 
-Previously, the `usePopupStack` hook created a CSS class name that was passed to our Popups. We attached those theme styles to that class name. This allowed the theme to be available in our Popups. But it also created a cascade barrier that blocked the global theme from being applied to our Popup components.
-Because we now use global CSS variables, we no longer need this class name to provide the global theme to Popups. But we have to remove this generated class name to allow the global theme to be applied to Popups.
+Previously, the `usePopupStack` hook created a CSS class name that was passed to our Popups. We
+attached those theme styles to that class name. This allowed the theme to be available in our
+Popups. But it also created a cascade barrier that blocked the global theme from being applied to
+our Popup components. Because we now use global CSS variables, we no longer need this class name to
+provide the global theme to Popups. But we have to remove this generated class name to allow the
+global theme to be applied to Popups.
 
+If you want to have scoped theming where a part of your application needs different theming, you can
+still do this via the `theme` prop.
 
-> **Important:** Passing a `theme` to the `CanvasProvider` **will not** theme components in Modals
-> and Dialogs. You can either pass a `className` or define CSS variables at the root.
+> **Note:** Only the properties of the theme object that are changed will be forward to popups and
+> modals. IE, if you change theme.palette.primary.main, only those tokens will change for popups and
+> modals.
 
-**Before in v13**
+#### Scoped Theming vs Global Theming
+
+**Only** use the `theme` prop on the `CanvasProvider` if you intentionally want to theme part of
+your application that is different from global theming.
+
+**Scoped Theming**
 
 ```tsx
-// When passing a theme to the Canvas Provider, the `usePopupStack` would grab the theme and generate a class to forward the theme to Modals and Dialogs. This would create a cascade barrier for any CSS variables deinfed at the root.
-<CanvasProvider theme={{canvas: {palette: {primary: {main: 'blue'}}}}}>
-  <Modal>//... rest of modal code</Modal>
+
+<CanvasProvider theme={{canvas: {palette: {primary: {main: 'teal'}}}}}>
+ {//part of your app to have different theme from the rest of your application}
 </CanvasProvider>
 ```
 
-**After in v14**
+> **Important:** Use the `theme` prop on the `CanvasProvider` if you intentionally want to theme
+> part of your application that is different from global theming.
+
+**Global Theming**
 
 ```tsx
-// If you wish to still theme you application and Modals, you can either define the CSS variables at the root level of your application or define a className and pass it to the CanvasProvider.
-:root {
- --cnvs-brand-primary-base: blue;
-}
+import '@workday/canvas-tokens-web/css/base/_variables.css';
+import '@workday/canvas-tokens-web/css/brand/_variables.css';
+import '@workday/canvas-tokens-web/css/system/_variables.css';
 
 <CanvasProvider>
-  <Modal>//... rest of modal code</Modal>
-</CanvasProvider>
+  <App />
+</CanvasProvider>;
 ```
 ### Search Form (Labs) 🚨
 
