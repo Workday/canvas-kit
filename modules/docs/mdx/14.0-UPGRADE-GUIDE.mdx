@@ -660,7 +660,7 @@ attached those theme styles to that class name. This allowed the theme to be ava
 Popups. But it also created a cascade barrier that blocked the global theme from being applied to
 our Popup components. Because we now use global CSS variables, we no longer need this class name to
 provide the global theme to Popups. But we have to remove this generated class name to allow the
-global theme to be applied to Popups.
+global theme to be applied to Popups. Instead, only the defined theme properties from the `theme` prop from the `CanvasProvider` will be applied to Popups and Modals.
 
 If you want to have scoped theming where a part of your application needs different theming, you can
 still do this via the `theme` prop.
