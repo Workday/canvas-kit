@@ -104,7 +104,7 @@ export const usePopupStack = <E extends HTMLElement>(
   React.useLayoutEffect(() => {
     const element = localRef.current;
     const keys = Object.keys(style);
-    if (element && theme && keys.length > 0) {
+    if (element && theme) {
       for (const key of keys) {
         // @ts-ignore
         element.style.setProperty(key, style[key]);
@@ -115,6 +115,8 @@ export const usePopupStack = <E extends HTMLElement>(
         }
       };
     }
+    // No cleanup is needed if element or theme is not set, so return undefined (no effect)
+    return undefined;
   }, [localRef, style, theme]);
 
   return localRef;
