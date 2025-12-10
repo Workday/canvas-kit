@@ -103,7 +103,7 @@ export const usePopupStack = <E extends HTMLElement>(
 
   React.useLayoutEffect(() => {
     const element = localRef.current;
-    if (element) {
+    if (element && theme) {
       // eslint-disable-next-line guard-for-in
       for (const key in style) {
         // @ts-ignore
@@ -111,7 +111,7 @@ export const usePopupStack = <E extends HTMLElement>(
       }
     }
     return () => {
-      if (element) {
+      if (element && theme) {
         // eslint-disable-next-line guard-for-in
         for (const key in style) {
           // @ts-ignore
@@ -119,7 +119,7 @@ export const usePopupStack = <E extends HTMLElement>(
         }
       }
     };
-  }, [localRef, style]);
+  }, [localRef, style, theme]);
 
   return localRef;
 };
