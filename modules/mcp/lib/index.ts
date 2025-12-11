@@ -32,6 +32,54 @@ export function getServer() {
    */
   function getUpgradeGuideResource(fileName: string) {
     switch (fileName) {
+      case 'markdown/docs/mdx/9.0-UPGRADE-GUIDE.md':
+        return {
+          title: 'Canvas Kit 9.0 Upgrade Guide',
+          description: `# Canvas Kit 9.0 Upgrade Guide
+This guide contains an overview of the changes in Canvas Kit v9.
+
+In this release, we:
+- introduced new Table component
+- removed Drawer, Layout, Column, Stack, HStack, and VStack components
+- removed focusRing and composeModelHooks utilities
+- updated Button, Toast, and Collection components
+- added depth token updates`,
+          mimeType: 'text/markdown',
+          uri: 'docs://upgrade-guides/9.0-UPGRADE-GUIDE',
+          contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
+        };
+      case 'markdown/docs/mdx/10.0-UPGRADE-GUIDE.md':
+        return {
+          title: 'Canvas Kit 10.0 Upgrade Guide',
+          description: `# Canvas Kit 10.0 Upgrade Guide
+This guide contains an overview of the changes in Canvas Kit v10.
+
+In this release, we:
+- introduced new styling package @workday/canvas-kit-styling
+- removed CSS packages and useBanner
+- deprecated Input Icon Container, Select Preview, Space Numbers, and Table
+- updated space and depth tokens
+- updated Button, Popups, and Select components`,
+          mimeType: 'text/markdown',
+          uri: 'docs://upgrade-guides/10.0-UPGRADE-GUIDE',
+          contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
+        };
+      case 'markdown/docs/mdx/11.0-UPGRADE-GUIDE.md':
+        return {
+          title: 'Canvas Kit 11.0 Upgrade Guide',
+          description: `# Canvas Kit 11.0 Upgrade Guide
+This guide contains an overview of the changes in Canvas Kit v11.
+
+In this release, we:
+- transitioned to new CSS variable-based styling approach
+- introduced Canvas Tokens Web package for semantic tokens
+- introduced new styling API for component styling
+- deprecated Form Field Main, Label Text, Text Area Preview, Text Input Preview
+- updated components to use CSS tokens`,
+          mimeType: 'text/markdown',
+          uri: 'docs://upgrade-guides/11.0-UPGRADE-GUIDE',
+          contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
+        };
       case 'upgrade-guides/12.0-UPGRADE-GUIDE.md':
         return {
           title: 'Canvas Kit 12.0 Upgrade Guide',
@@ -90,6 +138,25 @@ In this release, we:
 - improved token system and theming capabilities`,
           mimeType: 'text/markdown',
           uri: 'docs://upgrade-guides/14.0-UPGRADE-GUIDE',
+          contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
+        };
+      case 'markdown/react/common/stories/mdx/Theming.md':
+        return {
+          title: 'Canvas Kit Theming Guide',
+          description: `# Canvas Kit Theming Guide
+Comprehensive guide for theming Canvas Kit applications in v14.
+
+Covers:
+- Global theming with CSS variables at :root level (recommended approach)
+- Scoped theming with CanvasProvider for specific sections
+- CSS token structure: base tokens, brand tokens, and system tokens
+- Dark mode implementation
+- RTL support with CSS logical properties
+- Migration from JavaScript theme objects to CSS variables
+- Theming modals, dialogs, and popups
+- Best practices for semantic token usage and accessibility`,
+          mimeType: 'text/markdown',
+          uri: 'docs://features/theming',
           contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
         };
       default:

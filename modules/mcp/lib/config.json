@@ -1,10 +1,14 @@
 {
   "upgradeGuideFiles": [
+    "markdown/docs/mdx/9.0-UPGRADE-GUIDE.md",
+    "markdown/docs/mdx/10.0-UPGRADE-GUIDE.md",
+    "markdown/docs/mdx/11.0-UPGRADE-GUIDE.md",
     "upgrade-guides/12.0-UPGRADE-GUIDE.md",
     "upgrade-guides/13.0-UPGRADE-GUIDE.md",
     "upgrade-guides/14.0-UPGRADE-GUIDE.md",
     "llm-token-migration-14.txt",
-    "llm-style-props-migration.txt"
+    "llm-style-props-migration.txt",
+    "markdown/react/common/stories/mdx/Theming.md"
   ],
   "tokenFiles": [
     "tokens/token-migration.md",
