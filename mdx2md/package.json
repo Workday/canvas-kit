@@ -1,7 +1,0 @@
-{
-  "name": "mdx2md",
-  "version": "1.0.0",
-  "description": "MDX to Markdown converter",
-  "main": "mdx2md.js",
-  "type": "module"
-}

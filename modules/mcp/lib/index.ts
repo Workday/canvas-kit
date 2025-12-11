@@ -32,7 +32,7 @@ export function getServer() {
    */
   function getUpgradeGuideResource(fileName: string) {
     switch (fileName) {
-      case 'markdown/docs/mdx/9.0-UPGRADE-GUIDE.md':
+      case 'upgrade-guides/9.0-UPGRADE-GUIDE.md':
         return {
           title: 'Canvas Kit 9.0 Upgrade Guide',
           description: `# Canvas Kit 9.0 Upgrade Guide
@@ -48,7 +48,7 @@ In this release, we:
           uri: 'docs://upgrade-guides/9.0-UPGRADE-GUIDE',
           contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
         };
-      case 'markdown/docs/mdx/10.0-UPGRADE-GUIDE.md':
+      case 'upgrade-guides/10.0-UPGRADE-GUIDE.md':
         return {
           title: 'Canvas Kit 10.0 Upgrade Guide',
           description: `# Canvas Kit 10.0 Upgrade Guide
@@ -64,7 +64,7 @@ In this release, we:
           uri: 'docs://upgrade-guides/10.0-UPGRADE-GUIDE',
           contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
         };
-      case 'markdown/docs/mdx/11.0-UPGRADE-GUIDE.md':
+      case 'upgrade-guides/11.0-UPGRADE-GUIDE.md':
         return {
           title: 'Canvas Kit 11.0 Upgrade Guide',
           description: `# Canvas Kit 11.0 Upgrade Guide
@@ -140,7 +140,7 @@ In this release, we:
           uri: 'docs://upgrade-guides/14.0-UPGRADE-GUIDE',
           contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
         };
-      case 'markdown/react/common/stories/mdx/Theming.md':
+      case 'theming.md':
         return {
           title: 'Canvas Kit Theming Guide',
           description: `# Canvas Kit Theming Guide
@@ -156,7 +156,7 @@ Covers:
 - Theming modals, dialogs, and popups
 - Best practices for semantic token usage and accessibility`,
           mimeType: 'text/markdown',
-          uri: 'docs://features/theming',
+          uri: 'docs://llm/theming',
           contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
         };
       default:
