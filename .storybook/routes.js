@@ -34,7 +34,7 @@ const routes = {
   '/components/popups/modal/': 'components-popups-modal--docs',
   '/components/popups/popup/': 'components-popups-popup--docs',
   '/components/popups/toast/': 'components-popups-toast--docs',
-  '/components/popups/tooltip/': 'omponents-popups-tooltip--docs',
+  '/components/popups/tooltip/': 'components-popups-tooltip--docs',
   '/components/text/body-text/': 'components-text-body-text--docs',
   '/components/text/heading/': 'components-text-heading--docs',
   '/components/text/label-text/': 'components-text-label-text--docs',

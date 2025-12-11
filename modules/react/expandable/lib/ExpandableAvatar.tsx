@@ -15,14 +15,19 @@ export const expandableAvatarStencil = createStencil({
 // When the component is created, it needs to be a button element to match AvatarProps.
 // Once Avatar becomes a `createComponent` we can default the element type to a `div`
 // and the types should be properly extracted
-// Setting altText prop to a default empty string for decorative purposes
+// Setting isDecorative prop to true by default since avatars in expandable headers are typically decorative
 export const ExpandableAvatar = createComponent('div')({
   displayName: 'Expandable.Avatar',
-  Component: ({name = '', ...elemProps}: ExpandableAvatarProps, ref, Element) => {
+  Component: (
+    {name = '', isDecorative = true, ...elemProps}: ExpandableAvatarProps,
+    ref,
+    Element
+  ) => {
     return (
       <Avatar
         as={Element}
         name={name}
+        isDecorative={isDecorative}
         ref={ref}
         size="extraSmall"
         {...mergeStyles(elemProps, expandableAvatarStencil())}
