@@ -1,32 +1,24 @@
-import {
-  ExampleCodeBlock,
-  StorybookStatusIndicator,
-  SymbolDoc,
-  Specifications,
-} from '@workday/canvas-kit-docs';
-
-import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
+import {ExampleCodeBlock, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import * as SegmentedControlStories from './SegmentedControl.stories';
 
 import {Basic} from './examples/Basic';
-import * as SegmentedControlStories from './SegmentedControl.stories';
+import {Disabled} from './examples/Disabled';
+import {TextAndIcon} from './examples/TextAndIcon';
+import {TextOnly} from './examples/TextOnly';
+import {Sizes} from './examples/Sizes';
+import {Vertical} from './examples/Vertical';
+import {RTL} from './examples/RTL';
+import {Dynamic} from './examples/Dynamic';
 
 <Meta of={SegmentedControlStories} />
 
-# Canvas Kit Segmented Control <StorybookStatusIndicator type="deprecated" />
+# Canvas Kit Segmented Control
 
-<InformationHighlight className="sb-unstyled" variant="caution" cs={{p: {marginBlock: 0}}}>
-  <InformationHighlight.Icon />
-  <InformationHighlight.Body>
-    `SegmentedControl` in Main has been deprecated and will be removed in a future major version.
-    Please use `Segmented Control` in Preview instead.
-  </InformationHighlight.Body>
-  <InformationHighlight.Link href="https://workday.github.io/canvas-kit/?path=/docs/preview-segmented-control--docs">
-    Segmented Control Docs
-  </InformationHighlight.Link>
-</InformationHighlight>
+Segmented Control is a
+[compound component](/getting-started/for-developers/resources/compound-components/) that represents
+a linear group of multiple buttons allowing the selection of a specific value.
 
-A linear set of two or more segments, each of which functions as a mutually exclusive button. This
-is a [_controlled_](https://reactjs.org/docs/forms.html#controlled-components) component.
+[> Workday Design Reference](https://design.workday.com/components/buttons/segmented-control)
 
 ## Installation
 
@@ -38,12 +30,113 @@ yarn add @workday/canvas-kit-react
 
 ### Basic Example
 
-Here is a basic example of a Segmented Control with multiple nested `Button`s. **Note:** while
-managing state using a unique `value` for each `Button` child is encouraged, you can also use
-indexes and omit the `value` field. It is strongly recommended to not mix these two methods.
+`SegmentedControl` includes a container `SegmentedControl` component and the following
+subcomponents: `SegmentedControl.List` and `SegmentedControl.Item`.
+
+The example below contains a `SegmentedControl` with four icon-only buttons. Each button is rendered
+using a `SegmentedControl.Item` and is paired with a tooltip describing the button's function. Only
+one button can be active at a time.
 
 <ExampleCodeBlock code={Basic} />
+
+We **strongly** discourage including more than four buttons in a single `SegmentedControl`.
+
+### Accessibility
+
+Our `SegmentedControl` component renders semantic HTML `<button>` elements to the browser DOM,
+wrapped inside of a `<div>` with an explicit ARIA `role="group"`. This is equivalent to an HTML
+`<fieldset>` element, and useful for screen readers to describe the relationship between the
+buttons.
+
+- Each button is a 2-state toggle button with `aria-pressed={true | false}` to indicate the current
+  state to screen readers.
+- Providing your own `aria-label` string to `SegmentedControl.List` is recommended for describing the
+  purpose of the component.
+
+#### Screen Reader Experience
+
+When users interact with a `SegmentedControl` using screen readers:
+
+- The group context is announced (e.g., "View options, group" when using
+  `aria-label="View options"`)
+- Each button announces its text/label, "toggle button" role, and pressed/unpressed state (e.g.,
+  "List view, toggle button, pressed" or "Grid view, toggle button, not pressed")
+- For icon-only buttons with tooltips, the tooltip text is announced along with the button role and
+  state
+- When a button is activated, screen readers should announce the new state
+
+Refer to [Button](?path=/docs/components-buttons--docs#accessibility) for more information about
+accessibility of these components.
+
+### Variations
+
+`SegmentedControl` supports three variations based on whether or not its `SegmentedControl.Item`
+components have an `icon` prop and/or text content: icon-only, text-only, and text-and-icon.
+
+All `SegmentedControl.Item` components within a given `SegmentedControl` must be of the same
+variation.
+
+#### Icon-Only
+
+To render an icon-only `SegmentedControl`, apply the `icon` prop to `SegmentedControl.Item` and do
+not provide it with text content. Refer to the [basic example](#basic-example) above for an instance
+of an icon-only `SegmentedControl`.
+
+The icon-only variation is the only variation which supports a vertical orientation in addition to
+the default horizontal orientation. Set the `orientation` prop of `SegmentedControl` to `vertical`
+to configure the component to render vertically.
+
+<ExampleCodeBlock code={Vertical} />
+
+#### Text-Only
+
+To render a text-only `SegmentedControl`, omit the `icon` prop from `SegmentedControl.Item` and
+provide it with text content.
+
+<ExampleCodeBlock code={TextOnly} />
+
+#### Text-and-Icon
+
+To render a text-and-icon `SegmentedControl`, apply the `icon` prop to `SegmentedControl.Item` and
+provide it with text content.
+
+<ExampleCodeBlock code={TextAndIcon} />
+
+### Sizes
+
+`SegmentedControl` accepts a `size` prop which supports the following values:
+
+- `small`
+- `medium` (Default)
+- `large`
+
+<ExampleCodeBlock code={Sizes} />
+
+### Disabled
+
+Set the `disabled` prop of `SegmentedControl` to disable the entire component including its buttons.
+
+<ExampleCodeBlock code={Disabled} />
+
+### Right-to-Left (RTL)
+
+`SegmentedControl` supports right-to-left languages when specified in the `CanvasProvider` `theme`.
+
+<ExampleCodeBlock code={RTL} />
+
+### Dynamic Items
+
+`SegmentedControl` supports a
+[dynamic API](/getting-started/for-developers/resources/collection-api/#dynamic-items) where instead
+of statically providing the JSX for each `SegmentedControl.Item`, you pass an array of `items` in
+the `model` state and provide a render function to display the items.
+
+<ExampleCodeBlock code={Dynamic} />
 
 ## Component API
 
 <SymbolDoc name="SegmentedControl" fileName="/react/" />
+
+## Specifications
+
+<Specifications file="SegmentedControl.spec.ts" name="SegmentedControl" />

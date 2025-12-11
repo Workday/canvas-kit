@@ -1,86 +1,57 @@
-import * as React from 'react';
+import React from 'react';
+import {createContainer} from '@workday/canvas-kit-react/common';
 
-import {createComponent} from '@workday/canvas-kit-react/common';
-import {SegmentedControlButton, SegmentedControlButtonProps} from './SegmentedControlButton';
+import {useSegmentedControlModel} from './hooks/useSegmentedControlModel';
+import {SegmentedControlList} from './SegmentedControlList';
+import {SegmentedControlItem} from './SegmentedControlItem';
 
-/**
- * @deprecated ⚠️ `SegmentedControlProps` in Main has been deprecated and will be removed in a future major version. Please use [`SegmentedControl` in Preview](https://workday.github.io/canvas-kit/?path=/docs/preview-segmented-control--docs) instead.
- */
 export interface SegmentedControlProps {
-  /**
-   * The Button children of the SegmentedControl (must be at least two).
-   * TODO: Add support for text children
-   */
-  children: React.ReactElement<SegmentedControlButtonProps>[];
-
-  /**
-   * The value or index of the Button that the SegmentedControl should be toggled on to.
-   * If a string is provided, the Button with the corresponding value will be selected.
-   * If a number is provided, the Button with the corresponding index will be selected.
-   * @default 0
-   */
-  value?: string | number;
-
-  /**
-   * The function called when a button in the SegmentedControl is toggled.
-   * If the selected button has a value, that value will be passed to the callback function;
-   * otherwise, the index of the button will be passed.
-   */
-  onChange?: (value: string | number) => void;
+  children: React.ReactNode;
 }
 
-const onButtonClick = (
-  existingOnClick: ((e: React.MouseEvent<HTMLButtonElement>) => void) | undefined,
-  onChange: ((value: string | number) => void) | undefined,
-  index: number,
-  event: React.MouseEvent<HTMLButtonElement>
-): void => {
-  if (existingOnClick) {
-    existingOnClick(event);
-  }
-
-  const target = event.currentTarget;
-  if (target && onChange) {
-    if (target.value) {
-      onChange(target.value);
-    } else {
-      onChange(index);
-    }
-  }
-};
-
 /**
- * @deprecated ⚠️ `SegmentedControl` in Main has been deprecated and will be removed in a future major version. Please use [`SegmentedControl` in Preview](https://workday.github.io/canvas-kit/?path=/docs/preview-segmented-control--docs) instead.
+ * `SegmentedControl` is a container component that is responsible for creating a
+ * {@link SegmentedControlModel} and sharing it with its subcomponents using React context. It does
+ * not represent a real element.
+ *
+ * ```tsx
+ * <SegmentedControl items={[]}>{Child components}</SegmentedControl>
+ * ```
+ *
+ * Alternatively, you may pass in a model using the [hoisted model
+ * pattern](/getting-started/for-developers/resources/compound-components/#configuring-a-model).
+ *
+ * ```tsx
+ * const model = useSegmentedControlModel({
+ *   items: [],
+ * });
+ *
+ * <SegmentedControl model={model}>{Child components}</SegmentedControl>;
+ * ```
  */
-export const SegmentedControl = createComponent('div')({
+export const SegmentedControl = createContainer()({
   displayName: 'SegmentedControl',
-  Component: ({value = 0, children, onChange, ...elemProps}: SegmentedControlProps, ref) => {
-    return (
-      <div {...elemProps}>
-        {React.Children.map(
-          children,
-          (
-            child: React.ReactElement<
-              SegmentedControlButtonProps & {
-                onClick?: React.MouseEventHandler<HTMLButtonElement>;
-              } & React.HTMLAttributes<HTMLButtonElement> // segmented control button will have correct props
-            >,
-            index: number
-          ) => {
-            if (typeof child.type === typeof SegmentedControlButton) {
-              return React.cloneElement(child, {
-                toggled: typeof value === 'number' ? index === value : child.props.value === value,
-                onClick: onButtonClick.bind(undefined, child.props.onClick, onChange, index),
-              });
-            }
-
-            return child;
-          }
-        )}
-      </div>
-    );
-  },
+  modelHook: useSegmentedControlModel,
   subComponents: {
-    Button: SegmentedControlButton,
+    /**
+     * `SegmentedControl.List` renders {@link Grid} under the hood. It is a container for
+     * {@link SegmentedControlItem SegmentedControl.Item} subcomponents.
+     *
+     * ```tsx
+     * <SegmentedControl.List>{SegmentedControl.Items}</SegmentedControl.List>
+     * ```
+     */
+    List: SegmentedControlList,
+    /**
+     * `SegmentedControl.Item` is a `button` element built on `BaseButton`. `SegmentedControl.Item`
+     * has a `data-id` prop to handle `onSelect` properly.
+     *
+     * ```tsx
+     * <SegmentedControl.Item data-id="table">Table</SegmentedControl.Item>
+     * ```
+     */
+    Item: SegmentedControlItem,
   },
+})<SegmentedControlProps>(({children}) => {
+  return <>{children}</>;
 });

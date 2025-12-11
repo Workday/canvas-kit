@@ -4,7 +4,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 const containerStyles = createStyles({
   display: 'inline-flex',
-  gap: system.space.x4,
+  gap: system.gap.md,
 });
 
 export const StandaloneLink = () => (
