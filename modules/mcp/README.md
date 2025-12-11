@@ -34,6 +34,12 @@ You will need to check how to install MCP servers, but the config will look some
 }
 ```
 
+## Integrate MCP with Claude Code
+
+```sh
+claude mcp add --scope project --transport stdio canvas-kit -- npx -y @workday/canvas-kit-mcp
+```
+
 ## Contributing
 
 Canvas Kit MCP is has two exports.

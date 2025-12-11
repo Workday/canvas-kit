@@ -1,9 +1,22 @@
 {
   "upgradeGuideFiles": [
+    "upgrade-guides/9.0-UPGRADE-GUIDE.md",
+    "upgrade-guides/10.0-UPGRADE-GUIDE.md",
+    "upgrade-guides/11.0-UPGRADE-GUIDE.md",
     "upgrade-guides/12.0-UPGRADE-GUIDE.md",
     "upgrade-guides/13.0-UPGRADE-GUIDE.md",
     "upgrade-guides/14.0-UPGRADE-GUIDE.md",
-    "llm-txt/llm-token-migration-14.txt",
-    "llm-txt/llm-style-props-migration.txt"
+    "llm-token-migration-14.txt",
+    "llm-style-props-migration.txt",
+    "theming.md"
+  ],
+  "tokenFiles": [
+    "tokens/token-migration.md",
+    "tokens/color-palette.md",
+    "tokens/color-tokens.md",
+    "tokens/color-contrast.md",
+    "tokens/color-roles.md",
+    "tokens/color-scale.md",
+    "llm-token-migration-14.txt"
   ]
 }

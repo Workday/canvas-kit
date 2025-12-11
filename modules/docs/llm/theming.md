@@ -1,6 +1,7 @@
-import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
-import {RTL} from './examples/RTL';
-import {Theming} from './examples/Theming';
+---
+source_file: react/common/stories/mdx/Theming.mdx
+live_url: https://workday.github.io/canvas-kit/react/common/stories/mdx/Theming
+---
 
 <Meta title="Features/Theming/Overview" />
 
@@ -13,34 +14,18 @@ JavaScript-based theme objects to CSS variables. This change provides better per
 developer experience, and greater flexibility for theming applications.
 
 > **📌 Quick Start:**
+>
 > 1. **Import CSS variables once** at the root level of your application (e.g., in `index.css`)
 > 2. **Override tokens at `:root`** for global theming — this is the recommended approach
-> 3. **Use `CanvasProvider` scoped theming only** for specific scenarios like multi-brand sections or embedded components
+> 3. **Use `CanvasProvider` scoped theming only** for specific scenarios like multi-brand sections
+>    or embedded components
 >
-> If your application renders within an environment that already imports these CSS variables, **do not re-import them**.
+> If your application renders within an environment that already imports these CSS variables, \*\*do
+> not re-
 
-## Migration from v10 Theme Prop to v14 CSS Variables
+<CanvasProvider theme={{canvas: {palette: {primary: {main: 'purple'}}}}}> <App /> </CanvasProvider>;
 
-### The Evolution
-
-**Canvas Kit v10** introduced CSS tokens through the `@workday/canvas-tokens-web` package, providing
-a foundation for consistent design system values.
-
-**Canvas Kit v14** Removes the cascade barrier created by the `CanvasProvider`, allowing CSS
-variables to work as intended.
-
-## Old Approach (v10-v13)
-
-The old theming approach used JavaScript objects passed to the `CanvasProvider` theme prop:
-
-```tsx
-import {CanvasProvider} from '@workday/canvas-kit-react/common';
-import {base} from '@workday/canvas-tokens-web';
-
-<CanvasProvider theme={{canvas: {palette: {primary: {main: 'purple'}}}}}>
-  <App />
-</CanvasProvider>;
-```
+````
 
 This would use `chroma.js` to generate a palette based on the `main` color provided.
 
@@ -72,34 +57,39 @@ precedence. Take the following example:
 .my-app {
   --cnvs-brand-primary-base: red;
 }
-```
+````
 
 In the case of the `CanvasProvider` prior to v14, all our brand tokens where defined within a class
 and scoped to the `div` that the `CanvasProvider` created. This meant that anything set on `:root`
 or outside of the `CanvasProvider` would not be able to cascade down to the components within the
 `CanvasProvider`.
 
-If you provide a `theme` to the `CanvasProvider`, it will create a scoped theme. Note that in v14, global CSS variables are the recommended way to theme Popups and Modals consistently.
+If you provide a `theme` to the `CanvasProvider`, it will create a scoped theme. Note that in v14,
+global CSS variables are the recommended way to theme Popups and Modals consistently.
 
 ## Global vs Scoped Theming
 
-Canvas Kit v14 supports two theming strategies: **global theming** and **scoped theming**. Understanding the difference is important to avoid unexpected behavior.
+Canvas Kit v14 supports two theming strategies: **global theming** and **scoped theming**.
+Understanding the difference is important to avoid unexpected behavior.
 
 ### Global Theming
 
-Global theming applies CSS variables at the `:root` level, making them available throughout your entire application. This is the **recommended approach** for most use cases.
+Global theming applies CSS variables at the `:root` level, making them available throughout your
+entire application. This is the **recommended approach** for most use cases.
 
 ```css
 @import '@workday/canvas-tokens-web/css/base/_variables.css';
 :root {
-	// This is showing how you can change the value of a token at the root level of your application.
+  // This is showing how you can change the value of a token at the root level of your application.
   --cnvs-brand-primary-base: var(--cnvs-base-palette-magenta-600);
 }
 ```
 
 ### Scoped Theming
 
-Scoped theming applies CSS variables to a specific section of your application using the `CanvasProvider` with either a `className` or `theme` prop. The theme only affects components within that provider.
+Scoped theming applies CSS variables to a specific section of your application using the
+`CanvasProvider` with either a `className` or `theme` prop. The theme only affects components within
+that provider.
 
 ```tsx
 // Using the theme prop for scoped theming. This will set the [brand.primary.**] tokens to shades of purple.
@@ -108,17 +98,22 @@ Scoped theming applies CSS variables to a specific section of your application u
 </CanvasProvider>
 ```
 
-> **⚠️ Warning:** Scoped theming creates a cascade barrier that **will break global theming**. Any CSS variables defined at `:root` will be overridden by the scoped theme. Only the tokens explicitly defined in the `theme` prop will be changed - other tokens will use their default values, not your global overrides.
+> **⚠️ Warning:** Scoped theming creates a cascade barrier that **will break global theming**. Any
+> CSS variables defined at `:root` will be overridden by the scoped theme. Only the tokens
+> explicitly defined in the `theme` prop will be changed - other tokens will use their default
+> values, not your global overrides.
 
 ### When to Use Scoped Theming
 
-Only use scoped theming when you intentionally need a different theme for a specific section of your application, such as:
+Only use scoped theming when you intentionally need a different theme for a specific section of your
+application, such as:
 
 - Embedding a Canvas Kit component in a third-party application with a different brand
 - Creating a preview panel that shows components with different themes
 - Supporting multi-tenant applications where sections have different branding
 
-For all other cases, use global theming at `:root` to ensure consistent theming throughout your application.
+For all other cases, use global theming at `:root` to ensure consistent theming throughout your
+application.
 
 ## ✅ Preferred Approach (v14+)
 
@@ -147,38 +142,17 @@ CSS:
 }
 ```
 
-> **Note:** You should only import the CSS variables _once_ at the root level of your application.
-> If your application renders within another environment that imports these and sets them, **do
-> not** re import them.
-
-### Method 2: Provider-Level CSS Variables
-
-Use Canvas Kit's `createStyles` utility to generate themed class names that can be applied to
-specific components or sections:
-
-> **Note:** Doing the following **will create a cascade barrier**. Only use this method if you
-> intentionally want to override the default theme.
-
-```tsx
-import {createStyles}from "@workday/canvas-kit-styling"
-import {brand, base} from "@workday/canvas-tokens-web"
-import {CanvasProvider} from "@workday/canvas-kit-react/common"
+> **Note:** You should only
 
 // You can import the CSS variables in a ts file or an index.css file. You do not need to do both.
-import '@workday/canvas-tokens-web/css/base/_variables.css';
-import '@workday/canvas-tokens-web/css/system/_variables.css';
-import '@workday/canvas-tokens-web/css/brand/_variables.css';
+import '@workday/canvas-tokens-web/css/base/\_variables.css'; import
+'@workday/canvas-tokens-web/css/system/\_variables.css'; import
+'@workday/canvas-tokens-web/css/brand/\_variables.css';
 
-// Generate a class name that defines CSS variables
-const themedBrand = createStyles({
-  [brand.primary.accent]: base.neutral0,
-  [brand.primary.darkest]: base.blue800,
-  [brand.primary.dark]: base.blue700,
-  [brand.primary.base]: base.blue600,
-  [brand.primary.light]: base.blue200,
-  [brand.primary.lighter]: base.blue50,
-  [brand.primary.lightest]: base.blue25,
-})
+// Generate a class name that defines CSS variables const themedBrand = createStyles({
+[brand.primary.accent]: base.neutral0, [brand.primary.darkest]: base.blue800, [brand.primary.dark]:
+base.blue700, [brand.primary.base]: base.blue600, [brand.primary.light]: base.blue200,
+[brand.primary.lighter]: base.blue50, [brand.primary.lightest]: base.blue25, })
 
 <CanvasProvider className={themedBrand}>
   <App/>
@@ -187,8 +161,12 @@ const themedBrand = createStyles({
 
 ### Theming Modals and Dialogs
 
-Previously, the `usePopupStack` hook created a CSS class name that was passed to our Popups. We attached those theme styles to that class name. This allowed the theme to be available in our Popups. But it also created a cascade barrier that blocked the global theme from being applied to our Popup components.
-Because we now use global CSS variables, we no longer need this class name to provide the global theme to Popups. But we have to remove this generated class name to allow the global theme to be applied to Popups.
+Previously, the `usePopupStack` hook created a CSS class name that was passed to our Popups. We
+attached those theme styles to that class name. This allowed the theme to be available in our
+Popups. But it also created a cascade barrier that blocked the global theme from being applied to
+our Popup components. Because we now use global CSS variables, we no longer need this class name to
+provide the global theme to Popups. But we have to remove this generated class name to allow the
+global theme to be applied to Popups.
 
 **Before in v13**
 
@@ -270,7 +248,60 @@ System tokens define component-specific values.
 }
 ```
 
-<ExampleCodeBlock code={Theming} />
+```tsx
+import {createStyles} from '@workday/canvas-kit-styling';
+import {brand, base, system} from '@workday/canvas-tokens-web';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {Card} from '@workday/canvas-kit-react/card';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
+
+const customTheme = createStyles({
+  [brand.primary.base]: base.green600,
+  [brand.primary.dark]: base.green700,
+  [brand.primary.darkest]: base.green800,
+  [brand.common.focusOutline]: base.green600,
+  [system.color.fg.strong]: base.indigo900,
+  [system.color.border.container]: base.indigo300,
+});
+
+const App = () => {
+  return (
+    <CanvasProvider
+      theme={{
+        canvas: {
+          palette: {
+            primary: {
+              main: base.green600,
+              dark: base.green700,
+              darkest: base.green800,
+              light: base.green200,
+              lighter: base.green50,
+              lightest: base.green25,
+              contrast: base.neutral0,
+            },
+          },
+        },
+      }}
+    >
+      <Card>
+        <Card.Heading>Theming</Card.Heading>
+        <Card.Body>
+          <PrimaryButton>Theming</PrimaryButton>
+          <input />
+        </Card.Body>
+      </Card>
+    </CanvasProvider>
+  );
+};
+
+export const Theming = () => {
+  return (
+    <CanvasProvider className={customTheme}>
+      <App />
+    </CanvasProvider>
+  );
+};
+```
 
 ### Dark Mode Implementation
 
@@ -293,11 +324,10 @@ If you want to add additional styles based on RTL, you can also use the `:dir`
 
 #### Setting RTL Direction
 
-Use the native HTML `dir` attribute to set the text direction. The `CanvasProvider` accepts a `dir` prop which sets this attribute on its wrapper element:
+Use the native HTML `dir` attribute to set the text direction. The `CanvasProvider` accepts a `dir`
+prop which sets this attribute on its wrapper element:
 
 ```tsx
-import {CanvasProvider} from '@workday/canvas-kit-react/common';
-
 // Set RTL direction
 <CanvasProvider dir="rtl">
   <App />
@@ -312,11 +342,14 @@ You can also set it on any HTML element:
 </div>
 ```
 
-> **Note:** The `dir` attribute is the standard HTML way to set text direction. It's preferred over the deprecated `theme.canvas.direction` approach because it works natively with CSS logical properties and the `:dir()` pseudo-class.
+> **Note:** The `dir` attribute is the standard HTML way to set text direction. It's preferred over
+> the deprecated `theme.canvas.direction` approach because it works natively with CSS logical
+> properties and the `:dir()` pseudo-class.
 
 #### Using CSS Logical Properties
 
-CSS logical properties automatically adapt to the text direction. Use these instead of physical properties:
+CSS logical properties automatically adapt to the text direction. Use these instead of physical
+properties:
 
 ```css
 /* Physical properties (don't adapt to RTL) */
@@ -336,11 +369,10 @@ CSS logical properties automatically adapt to the text direction. Use these inst
 
 #### Conditional RTL Styles with `:dir()`
 
-For styles that need to change based on direction (like rotating icons), use the `:dir()` pseudo-class:
+For styles that need to change based on direction (like rotating icons), use the `:dir()`
+pseudo-class:
 
 ```tsx
-import {createStyles} from '@workday/canvas-kit-styling';
-
 const rtlButtonStyles = createStyles({
   ':dir(rtl)': {
     svg: {
@@ -350,7 +382,62 @@ const rtlButtonStyles = createStyles({
 });
 ```
 
-<ExampleCodeBlock code={RTL} />
+```tsx
+import React from 'react';
+import {createStyles} from '@workday/canvas-kit-styling';
+
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {Card} from '@workday/canvas-kit-react/card';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {arrowRightSmallIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
+
+const rtlStyles = createStyles({
+  paddingInlineStart: system.space.x16,
+});
+
+const rtlButtonStyles = createStyles({
+  ':dir(rtl)': {
+    svg: {
+      transform: 'rotate(180deg)',
+    },
+  },
+});
+
+const App = () => {
+  const [value, setValue] = React.useState('');
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value);
+  };
+  return (
+    <Card>
+      <Card.Heading>RTL Support</Card.Heading>
+      <Card.Body cs={rtlStyles}>
+        <FormField>
+          <FormField.Label>Email</FormField.Label>
+          <FormField.Field>
+            <FormField.Input as={TextInput} onChange={handleChange} value={value} />
+          </FormField.Field>
+        </FormField>
+        <PrimaryButton cs={rtlButtonStyles} iconPosition="end" icon={arrowRightSmallIcon}>
+          RTL
+        </PrimaryButton>
+      </Card.Body>
+    </Card>
+  );
+};
+
+export const RTL = () => {
+  return (
+    <CanvasProvider dir="rtl">
+      <App />
+    </CanvasProvider>
+  );
+};
+```
 
 ### Resetting to Default Brand Theme
 
@@ -359,11 +446,9 @@ export a `defaultBranding` class that can be applied to the `CanvasProvider` whi
 your application.
 
 ```tsx
-import {CanvasProvider, defaultBranding} from '@workday/canvas-kit-react/common';
-
 <CanvasProvider className={defaultBranding}>
   <SomeSubComponent />
-</CanvasProvider>;
+</CanvasProvider>
 ```
 
 > **Note:** Doing the following **will create a cascade barrier**. Only use this method if you
@@ -428,10 +513,8 @@ Replace theme-based `CanvasProvider` usage with CSS class-based theming.
 Verify that Canvas Kit components (like `PrimaryButton`) correctly use the new CSS variables.
 
 ```tsx
-import {PrimaryButton} from '@workday/canvas-kit-react/button';
-
 // This should automatically use your CSS variable overrides
-<PrimaryButton>Themed Button</PrimaryButton>;
+<PrimaryButton>Themed Button</PrimaryButton>
 ```
 
 ## Best Practices
@@ -467,22 +550,16 @@ component level.
 
 ```tsx
 /* ✅ Good - App level theming */
-import {CanvasProvider} from '@workday/canvas-kit-react/common';
-import {createStyles} from '@workday/canvas-kit-styling';
-import {base, brand} from '@workday/canvas-tokens-web';
 
 const myCustomTheme = createStyles({
   [brand.primary.base]: base.magenta600
 })
-
 
 <CanvasProvider className={myCustomTheme}>
   <App/>
 </CanvasProvider>
 
 /* ❌ Avoid - wrapping components to theme */
-import {CanvasProvider} from '@workday/canvas-kit-react/common';
-import {PrimaryButton} from '@workday/canvas-kit-react/button';
 
 const myCustomTheme = createStyles({
   [brand.primary.base]: base.magenta600
@@ -558,8 +635,6 @@ Check for CSS specificity issues.
 Verify all required CSS token files are imported and token names are correct.
 
 ```tsx
-import {brand, base, system} from '@workday/canvas-tokens-web';
-
 // Check token availability in development
 console.log(brand.primary.base); // Should output CSS variable name
 ```
