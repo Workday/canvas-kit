@@ -96,7 +96,6 @@ export function createFileUtils(config) {
             const normalizedPath = fullPath.replace(/\\/g, '/').toLowerCase();
             if (normalizedPath.includes('/docs/docgen') ||
                 normalizedPath.includes('/docs/llm') ||
-                normalizedPath.includes('/docs/llm-txt') ||
                 normalizedPath.includes('/docs/mdx/images') ||
                 normalizedPath.includes('/docs/utils') ||
                 normalizedPath.includes('/docs/webpack')) {
@@ -411,7 +410,6 @@ export function createFileUtils(config) {
             const normalizedPath = fullPath.replace(/\\/g, '/').toLowerCase();
             if (normalizedPath.includes('/docs/docgen') ||
                 normalizedPath.includes('/docs/llm') ||
-                normalizedPath.includes('/docs/llm-txt') ||
                 normalizedPath.includes('/docs/mdx/images') ||
                 normalizedPath.includes('/docs/utils') ||
                 normalizedPath.includes('/docs/webpack')) {

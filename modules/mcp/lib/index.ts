@@ -58,24 +58,24 @@ In this release, we:
           uri: 'docs://upgrade-guides/13.0-UPGRADE-GUIDE',
           contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
         };
-      case 'llm-txt/llm-token-migration-14.txt':
+      case 'llm-token-migration-14.txt':
         return {
           title: 'Canvas Kit Token Migration Guide',
           description: `# Canvas Kit Token Migration Guide
 Guide for migrating from @workday/canvas-kit-react/tokens to @workday/canvas-tokens-web.
 This migration enables better theming capabilities, improved performance, and a more standardized approach to styling.`,
           mimeType: 'text/plain',
-          uri: 'docs://llm-txt/llm-token-migration-14',
+          uri: 'docs://llm/llm-token-migration-14',
           contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
         };
-      case 'llm-txt/llm-style-props-migration.txt':
+      case 'llm-style-props-migration.txt':
         return {
           title: 'Canvas Kit Style Props Migration Guide',
           description: `# Canvas Kit Style Props Migration Guide
 Guide for migrating from Emotion's style props to @workday/canvas-kit-styling.
 This migration improves performance, consistency, and maintainability by moving away from runtime styling to static CSS compilation.`,
           mimeType: 'text/plain',
-          uri: 'docs://llm-txt/llm-style-props-migration',
+          uri: 'docs://llm/llm-style-props-migration',
           contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
         };
       case 'upgrade-guides/14.0-UPGRADE-GUIDE.md':
@@ -253,7 +253,7 @@ Tonal scale system from 0 (lightest) to 1000 (darkest). Includes:
           uri: 'docs://tokens/color-scale',
           contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
         };
-      case 'llm-txt/llm-token-migration-14.txt':
+      case 'llm-token-migration-14.txt':
         return {
           title: 'Canvas Kit v14 Token Migration Guide',
           description: `# Canvas Kit v14 Token Migration Guide
@@ -266,7 +266,7 @@ Complete migration guide from @workday/canvas-kit-react/tokens to @workday/canva
 - Complete before/after code examples for cards, forms, and buttons
 - Best practices and common pitfalls`,
           mimeType: 'text/plain',
-          uri: 'docs://llm-txt/llm-token-migration-14',
+          uri: 'docs://llm/llm-token-migration-14',
           contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
         };
       default:

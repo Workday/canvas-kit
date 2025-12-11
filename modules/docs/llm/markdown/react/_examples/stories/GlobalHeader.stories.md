@@ -1,0 +1,40 @@
+---
+source_file: react/_examples/stories/GlobalHeader.stories.mdx
+live_url: https://workday.github.io/canvas-kit/react/_examples/stories/GlobalHeader.stories
+---
+
+<Meta title="Examples/GlobalHeader" />
+
+# GlobalHeader Example
+
+Developers building internal Workday applications will likely not need to create this component.
+However, if you're building components to be used outside of Workday, this is a helpful reference
+for building a global navigation header that looks like our internal `GlobalHeader`.
+
+<!-- Could not find example code for Basic -->
+
+## Tooltip usage
+
+- The `default` variant Tooltip is used on all of the icon buttons, which will automatically set the
+  Tooltip's text to the accessible name. (`aria-label`)
+- The `describe` variant Tooltip is used instead on the "MENU" button because this is a text button.
+  The Tooltip's text "Global Navigation" will instead be assigned to the accessible description to
+  ensure that the visible button text "MENU" is not overriden.
+
+## Count badge usage
+
+When `<CountBadge>` is used as a sibling component for button, the `aria-describedby` property is
+set on the button referencing the `id` value of the `<CountBadge>`. This practice helps support
+users depending on screen readers to describe both the name of the button and the value of the
+`<CountBadge>`.
+
+When a web app dynamically updates count badges in real-time, consider the following accessibility
+enhancements to support live, real-time announcements for screen readers:
+
+- The `<CountBadge>` component is rendered as a child of the `<AriaLiveRegion>` container.
+- The `<AriaLiveRegion>` container is assigned a name by using `aria-labelledby` to reference the
+  name of the icon button `"Notifications"`.
+- The `<AccessibleHide>` component is used following the `<CountBadge>` to render a hidden word
+  "new" that only screen reader users can access.
+- When the `<CountBadge>` is updated, then screen readers can automatically describe (in real-time)
+  the name of the live region, "Notifications" and the text updated inside of it, "1 new".

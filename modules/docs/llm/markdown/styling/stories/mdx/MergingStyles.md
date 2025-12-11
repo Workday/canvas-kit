@@ -1,0 +1,322 @@
+---
+source_file: styling/stories/mdx/MergingStyles.mdx
+live_url: https://workday.github.io/canvas-kit/styling/stories/mdx/MergingStyles
+---
+
+<Meta title="Styling/Guides/Merging Styles" />
+
+# Merging Styles
+
+## handleCsProp
+
+But what about when using components that use `@emotion/react` or `@emotion/styled`? Those libraries
+use a different approach. Instead of multiple class names, they use a single, merged class name.
+
+`handleCsProp` was created to handle integration with existing components that use the `css` prop
+from `@emotion/react` or the `styled` components from `@emotion/styled`. If a class name from one of
+those libraries is detected, style merging will follow the same rules as those libraries. Instead of
+multiple class names, a single class name with all matching properties is created. The
+`handleCsProp` also takes care of merging `style` props, `className` props, and can handle the `cs`
+prop:
+
+```tsx
+const myStencil = createStencil({
+  // ...
+});
+
+const MyComponent = elemProps => {
+  return <div {...handleProps(elemProps, myStencil({}))} />;
+};
+
+// All props will be merged for you
+<MyComponent style={{color: 'red'}} className="my-classname" cs={{position: 'relative'}} />;
+```
+
+`handleCsProp` will make sure the `style` prop is passed to the `div` and that the `my-classname`
+CSS class name appears on the `div`'s class list. Also the `cs` prop will add the appropriate styles
+to the element via a CSS class name. If your component needs to handle being passed a `className`,
+`style`, or `cs` prop, use `handleCsProp`.
+
+### handleCsProp API
+
+<SymbolDoc hideHeading name="handleCsProp" />
+
+## mergeStyles <StorybookStatusIndicator type="deprecated" />
+
+In v9, we used `@emotion/styled` or `@emotion/react` for all styling which is a runtime styling
+solution. Starting in v10, we're migrating our styling to a more static solution using
+`createStyles` and the `cs` prop.
+
+For a transition period, we're opting for backwards compatibility. If style props are present,
+[styled components](https://emotion.sh/docs/styled) are used, or the
+[css prop](https://emotion.sh/docs/css-prop) is used in a component, Emotion's style merging will be
+invoked to make sure the following style precedence:
+
+```
+createStyles > CSS Prop > Styled Component > Style props
+```
+
+This will mean that any `css` prop or use of `styled` within the component tree _per element_ will
+cause style class merging. For example:
+
+```tsx
+
+const styles1 = createStyles({
+  padding: 4,
+});
+
+const styles2 = createStyles({
+  padding: 12,
+});
+
+const Component1 = props => {
+  return <div {...mergeStyles(props, [styles1])} />;
+};
+
+const Component2 = props => {
+  return <Component1 cs={styles2} />;
+};
+
+const Component3 = styled(Component1)({
+  padding: 8,
+});
+
+const Component4 = props => {
+  return <Component3 cs={styles2} />;
+};
+
+export default () => (
+  <>
+    <Component1 />
+    <Component2 />
+    <Component3 />
+    <Component4 />
+  </>
+);
+```
+
+The `styled` component API is forcing `mergeStyles` to go into Emotion merge mode, which removes the
+`style1` class name and creates a new class based on all the merged style properties. So
+`.component3` is a new class created by Emotion at render time that merges `.style1` and
+`{padding: 8px}`. `Component4` renders `Component3` with a `cs` prop, but `Component3` is already in
+merge mode and so `Component4` will also merge all styles into a new class name of `.component4`
+that has the styles from `.style1`, `.component3`, and `{padding: 12px}`:
+
+```html
+<head>
+  <style>
+    .styles1 {
+      padding: 4px;
+    }
+    .styles2 {
+      padding: 8px;
+    }
+    .component3 {
+      padding: 4px;
+      padding: 8px;
+    }
+    .component4 {
+      padding: 4px;
+      padding: 8px;
+      padding: 12px;
+    }
+  </style>
+</head>
+
+<div class="styles1"></div>
+<div class="styles1 styles2"></div>
+<div class="component3"></div>
+<div class="component4"></div>
+```
+
+The `css` prop and `styled` component APIs will rewrite the `className` React prop by iterating over
+all class names and seeing if any exist within the cache. If a class name does exist in the cache,
+the CSS properties are copied to a new style property map until all the class names are evaluated
+and removed from the `className` prop. Emotion will then combine all the CSS properties and inject a
+new `StyleSheet` with a new class name and add that class name to the element.
+
+The following example shows this style merging.
+
+```tsx
+import * as React from 'react';
+import styled from '@emotion/styled';
+import {jsx} from '@emotion/react';
+
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {base} from '@workday/canvas-tokens-web';
+import {createStyles, cssVar} from '@workday/canvas-kit-styling';
+
+const backgroundColors = {
+  cssProp: cssVar(base.orange500),
+  styledComponent: cssVar(base.green500),
+  styleProps: cssVar(base.magenta500),
+  createStyles: cssVar(base.purple500),
+};
+
+const StyledPrimaryButton = styled(PrimaryButton)({
+  backgroundColor: backgroundColors.styledComponent,
+});
+
+const styles = createStyles({
+  backgroundColor: backgroundColors.createStyles,
+});
+
+const CSSProp = () => (
+  <div
+    style={{
+      color: 'white',
+      padding: '0 4px',
+      height: 40,
+      width: 100,
+      backgroundColor: backgroundColors.cssProp,
+    }}
+  >
+    CSS Prop
+  </div>
+);
+const StyledComponent = () => (
+  <div
+    style={{
+      color: 'white',
+      padding: '0 4px',
+      height: 40,
+      width: 100,
+      backgroundColor: backgroundColors.styledComponent,
+    }}
+  >
+    Styled Component
+  </div>
+);
+const CreateStyles = () => (
+  <div
+    style={{
+      color: 'white',
+      padding: '0 4px',
+      height: 40,
+      width: 100,
+      backgroundColor: backgroundColors.createStyles,
+    }}
+  >
+    createStyles
+  </div>
+);
+const StyleProps = () => (
+  <div
+    style={{
+      color: 'white',
+      padding: '0 4px',
+      height: 40,
+      width: 100,
+      backgroundColor: backgroundColors.styleProps,
+    }}
+  >
+    Style Props
+  </div>
+);
+
+// We use this object and cast to `{}` to keep TypeScript happy. Emotion extends the JSX interface
+// to include the `css` prop, but the `jsx` function type doesn't accept the `css` prop. Casting to
+// an empty object keeps TypeScript happy and the `css` prop is valid at runtime.
+const cssProp = {css: {backgroundColor: backgroundColors.cssProp}} as {};
+
+export const StylingOverrides = () => {
+  return (
+    <Flex flexDirection="column" minHeight="100vh" gap="s">
+      <Flex flexDirection="column" gap="s">
+        <h2>Buttons</h2>
+        <Flex flexDirection="row" gap="s">
+          <PrimaryButton cs={styles}>createStyles</PrimaryButton>
+          {jsx(PrimaryButton, {...cssProp}, 'CSS Prop')}
+          <StyledPrimaryButton>Styled Component</StyledPrimaryButton>
+          <PrimaryButton backgroundColor={backgroundColors.styleProps}>Style Props</PrimaryButton>
+        </Flex>
+        <div>
+          {jsx(
+            PrimaryButton,
+            {
+              ...cssProp,
+              cs: styles,
+            },
+            'createStyles + CSS Prop'
+          )}
+        </div>
+        <div>
+          <StyledPrimaryButton cs={styles}>createStyles + Styled Component</StyledPrimaryButton>
+        </div>
+        <div>
+          <PrimaryButton cs={styles} backgroundColor={backgroundColors.styleProps}>
+            createStyles + Style Props
+          </PrimaryButton>
+        </div>
+        <div>
+          <StyledPrimaryButton backgroundColor={backgroundColors.styleProps} cs={styles}>
+            createStyles + Styled Component + Style Props
+          </StyledPrimaryButton>
+        </div>
+        <div>
+          {jsx(
+            StyledPrimaryButton,
+            {
+              ...cssProp,
+              backgroundColor: backgroundColors.styleProps,
+              cs: styles,
+            },
+            'createStyles + CSS Prop + Styled Component + Style Props'
+          )}
+        </div>
+        <div>{jsx(StyledPrimaryButton, {...cssProp}, 'CSS Prop + Styled Component')}</div>
+        <div>
+          {jsx(
+            PrimaryButton,
+            {
+              ...cssProp,
+              backgroundColor: backgroundColors.styleProps,
+            },
+            'CSS Prop + Style Props'
+          )}
+        </div>
+        <div>
+          <StyledPrimaryButton backgroundColor={backgroundColors.styleProps}>
+            Styled Component + Style Props
+          </StyledPrimaryButton>
+        </div>
+      </Flex>
+      <div>
+        <p>Legend:</p>
+        <CreateStyles />
+        <CSSProp />
+        <StyledComponent />
+        <StyleProps />
+      </div>
+      <p>
+        Style Precedence: <strong>createStyles</strong> &gt; <strong>CSS Props</strong> &gt;{' '}
+        <strong>Styled Component</strong> &gt; <strong>Style Props</strong>
+      </p>
+    </Flex>
+  );
+};
+
+```
+
+CSS style property merging works by
+[CSS specificity](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity). If two matching
+selectors have the same specificity, the last defined property wins. Stencils take advantage of this
+by making all styles have the same specificity of `0-1-0` and inserting `base` styles, then
+`modifiers` (in order), then `compound` modifiers (in order). This means if a property was defined
+in `base`, a `modifier`, and a `compound` modifier, the `compound` modifier would win because it is
+the last defined. This should be the expected order.
+
+<InformationHighlight className="sb-unstyled" variant="caution" cs={{marginBlock: system.space.x4}}>
+  <InformationHighlight.Icon />
+  <InformationHighlight.Heading>Caution</InformationHighlight.Heading>
+  <InformationHighlight.Body>
+    While we support `mergeStyles` we'd advise against using this in your components so that users
+    can get the performance benefit of static styling using utilities like `createStyles` and
+    `createStencil` in tandem with the `cs` prop.
+  </InformationHighlight.Body>
+</InformationHighlight>
+
+### mergeStyles API
+
+<SymbolDoc hideHeading name="mergeStyles" />

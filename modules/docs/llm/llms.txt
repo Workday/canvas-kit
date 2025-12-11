@@ -1,0 +1,148 @@
+# Markdown Docs
+
+## Components
+
+- [GlobalHeader Example](https://workday.github.io/canvas-kit/llm/markdown/react/_examples/stories/GlobalHeader.stories.md): Developers building internal Workday applications will likely not need to create this component.
+- [Accessible Tooltip Examples](https://workday.github.io/canvas-kit/llm/markdown/react/_examples/stories/Tooltips.stories.md): 
+- [Canvas Kit Examples](https://workday.github.io/canvas-kit/llm/markdown/react/_examples/stories/mdx/CompoundComponent.md): 
+- [ContextualHelp](https://workday.github.io/canvas-kit/llm/markdown/react/_examples/stories/mdx/ContextualHelp.md): 
+- [Canvas Kit Examples](https://workday.github.io/canvas-kit/llm/markdown/react/_examples/stories/mdx/CookieBanner.md): 
+- [Canvas Kit Density Examples](https://workday.github.io/canvas-kit/llm/markdown/react/_examples/stories/mdx/Density.md): Although we currently don't support a density system, it's common practice to provide varying
+- [Canvas Kit Examples](https://workday.github.io/canvas-kit/llm/markdown/react/_examples/stories/mdx/FormsWithFormik.md): 
+- [Canvas Kit Examples](https://workday.github.io/canvas-kit/llm/markdown/react/_examples/stories/mdx/Layouts.md): Below are layout examples to reference as you build your own. For more in-depth information on our
+- [MediaModal](https://workday.github.io/canvas-kit/llm/markdown/react/_examples/stories/mdx/MediaModal.md): 
+- [Canvas Kit Action Bar](https://workday.github.io/canvas-kit/llm/markdown/react/action-bar/stories/ActionBar.md): Action Bar is a [compound component](/getting-started/for-developers/resources/compound-components/)
+- [Canvas Kit Avatar](https://workday.github.io/canvas-kit/llm/markdown/react/avatar/stories/avatar/Avatar.md): 
+- [Canvas Kit Count Badge](https://workday.github.io/canvas-kit/llm/markdown/react/badge/stories/CountBadge.md): `CountBadge` provides a quantity-based summary with dynamic values.
+- [Canvas Kit Banner](https://workday.github.io/canvas-kit/llm/markdown/react/banner/stories/Banner.md): `Banner` is a [compound component](/getting-started/for-developers/resources/compound-components/)
+- [Canvas Kit Breadcrumbs](https://workday.github.io/canvas-kit/llm/markdown/react/breadcrumbs/stories/Breadcrumbs.md): Breadcrumbs is a
+- [Canvas Kit Button](https://workday.github.io/canvas-kit/llm/markdown/react/button/stories/button/Button.md): Clickable button elements that extend the native `` element with Canvas styling.
+- [Canvas Kit Hyperlinks](https://workday.github.io/canvas-kit/llm/markdown/react/button/stories/button/Hyperlink.md): Clickable anchor elements that extend the native `` element with Canvas styling.
+- [Canvas Kit Card](https://workday.github.io/canvas-kit/llm/markdown/react/card/stories/card.md): A Card is a preview that serves as an entry point to more detailed information. Card is a
+- [Canvas Kit Checkbox](https://workday.github.io/canvas-kit/llm/markdown/react/checkbox/stories/Checkbox.md): Checkboxes allow a user to select zero, one, or multiple values from a predefined list of 7 or less
+- [Canvas Kit Collection API](https://workday.github.io/canvas-kit/llm/markdown/react/collection/stories/mdx/Collection.md): The Collection API is a system of models and behaviors for creating lists and grids. For example,
+- [Canvas Kit Color Input](https://workday.github.io/canvas-kit/llm/markdown/react/color-picker/stories/color-input/ColorInput.md): Color Input lets a user specify a color by entering a hexadecimal value into a text field.
+- [Canvas Kit Color Preview](https://workday.github.io/canvas-kit/llm/markdown/react/color-picker/stories/color-preview/ColorPreview.md): Color Preview displays a color swatch.
+- [Combobox](https://workday.github.io/canvas-kit/llm/markdown/react/combobox/stories/Combobox.md): Combobox is an _abstract_ compound component - it should not be used on its own, but used as a base
+- [Compound Component Utilities](https://workday.github.io/canvas-kit/llm/markdown/react/common/stories/mdx/CompoundComponentUtilities.md): The following utilities are used to create and compose
+- [Responsive Styling](https://workday.github.io/canvas-kit/llm/markdown/react/common/stories/mdx/Responsive.md): 
+- [Canvas Kit Theming Guide](https://workday.github.io/canvas-kit/llm/markdown/react/common/stories/mdx/Theming.md): 
+- [Canvas Kit Dialog](https://workday.github.io/canvas-kit/llm/markdown/react/dialog/stories/Dialog.md): A Dialog component is a non-modal type of dialog that will not render the rest of the page inert
+- [Canvas Kit Expandable](https://workday.github.io/canvas-kit/llm/markdown/react/expandable/stories/Expandable.md): `Expandable` is a compound component that creates a header to expand or collapse related content.
+- [Canvas Kit Form Field](https://workday.github.io/canvas-kit/llm/markdown/react/form-field/stories/FormField.md): FormField allows users to wrap input components to make them accessible. You can customize the field
+- [Assets](https://workday.github.io/canvas-kit/llm/markdown/react/icon/stories/Assets.md): Assets are graphics which help communicate meaning or highlight areas of interaction to our users.
+- [Box](https://workday.github.io/canvas-kit/llm/markdown/react/layout/stories/Box.md): `Box` is a primitive component that provides a common, ergonomic API around Canvas design tokens. It
+- [Canvas Kit Flex](https://workday.github.io/canvas-kit/llm/markdown/react/layout/stories/Flex.md): `Flex` is a low-level layout component that provides a common, ergonomic API for building
+- [Canvas Kit Grid](https://workday.github.io/canvas-kit/llm/markdown/react/layout/stories/Grid.md): `Grid` is a low-level layout component that provides a common, ergonomic API for building
+- [Canvas Kit Loading Dots](https://workday.github.io/canvas-kit/llm/markdown/react/loading-dots/stories/LoadingDots.md): Loading Dots make users aware that content is currently being loaded, processing, or that change
+- [Canvas Kit Menu](https://workday.github.io/canvas-kit/llm/markdown/react/menu/stories/Menu.md): `Menu` displays a list of options when triggered by an action or UI element like an icon or button.
+- [Canvas Kit Modal](https://workday.github.io/canvas-kit/llm/markdown/react/modal/stories/Modal.md): A Modal component is a type of Dialog that renders a translucent overlay that prevents user
+- [Canvas Kit Pagination](https://workday.github.io/canvas-kit/llm/markdown/react/pagination/stories/pagination.md): `Pagination` is a
+- [Canvas Kit Popups](https://workday.github.io/canvas-kit/llm/markdown/react/popup/stories/Popup.md): A "popup" is a classification for a type of stacked UI element that appears "on top" of statically
+- [Canvas Kit Radio](https://workday.github.io/canvas-kit/llm/markdown/react/radio/stories/Radio.md): 
+- [Canvas Kit Segmented Control](https://workday.github.io/canvas-kit/llm/markdown/react/segmented-control/stories/SegmentedControl.md): 
+- [Canvas Kit Select](https://workday.github.io/canvas-kit/llm/markdown/react/select/stories/Select.md): Select inputs allow users to choose one option from a list of items or type a matching option.
+- [Canvas Kit Skeleton](https://workday.github.io/canvas-kit/llm/markdown/react/skeleton/stories/Skeleton.md): A Skeleton is a low-fidelity visual placeholder that represents the loading of interface elements
+- [Canvas Kit Status Indicator](https://workday.github.io/canvas-kit/llm/markdown/react/status-indicator/stories/StatusIndicator.md): 
+- [Canvas Kit Switch](https://workday.github.io/canvas-kit/llm/markdown/react/switch/stories/Switch.md): Switch is a selection control that is used to switch between two potential states.
+- [Canvas Kit Table](https://workday.github.io/canvas-kit/llm/markdown/react/table/stories/Table.md): `Table` is a simple styled compound component that renders a
+- [Canvas Kit Tabs](https://workday.github.io/canvas-kit/llm/markdown/react/tabs/stories/Tabs.md): `Tabs` is a [compound component](/getting-started/for-developers/resources/compound-components/)
+- [Testing](https://workday.github.io/canvas-kit/llm/markdown/react/testing/stories/Testing.md): A package that provides components and utilities for testing
+- [Canvas Kit Body Text](https://workday.github.io/canvas-kit/llm/markdown/react/text/stories/BodyText.md): `BodyText` provides a simple way to render body-level text with built-in support for Canvas type
+- [Canvas Kit Heading](https://workday.github.io/canvas-kit/llm/markdown/react/text/stories/Heading.md): `Heading` provides a simple way to render heading-level text with built-in support for Canvas type
+- [Canvas Kit Label Text](https://workday.github.io/canvas-kit/llm/markdown/react/text/stories/LabelText.md): 
+- [Canvas Kit Subtext](https://workday.github.io/canvas-kit/llm/markdown/react/text/stories/Subtext.md): `Subtext` provides a simple way to render subtext-level text with built-in support for Canvas type
+- [Canvas Kit Text](https://workday.github.io/canvas-kit/llm/markdown/react/text/stories/Text.md): `Text` provides an ergonomic API for rendering text. It includes built-in support for Canvas type
+- [Canvas Kit Title](https://workday.github.io/canvas-kit/llm/markdown/react/text/stories/Title.md): `Title` provides a simple way to render title-level text with built-in support for Canvas type
+- [Canvas Kit Text Area](https://workday.github.io/canvas-kit/llm/markdown/react/text-area/stories/TextArea.md): Text Areas allow users to enter and edit multiple lines of text.
+- [Canvas Kit Text Input](https://workday.github.io/canvas-kit/llm/markdown/react/text-input/stories/TextInput.md): Text Inputs allow users to enter words or characters without styling.
+- [Canvas Kit Toast](https://workday.github.io/canvas-kit/llm/markdown/react/toast/stories/toast.md): `Toast` is a [compound component](/getting-started/for-developers/resources/compound-components/)
+- [Tokens](https://workday.github.io/canvas-kit/llm/markdown/react/tokens/stories/Tokens.md): 
+- [Canvas Kit React Tooltips](https://workday.github.io/canvas-kit/llm/markdown/react/tooltip/stories/Tooltip.md): A Tooltip component that renders information/text when the user hovers over an element. A tooltip is
+
+## Preview Components
+
+- [FormLibraryExample](https://workday.github.io/canvas-kit/llm/markdown/preview-react/_examples/stories/mdx/FormLibraryExample.md): 
+- [Avatar](https://workday.github.io/canvas-kit/llm/markdown/preview-react/avatar/stories/Avatar.md): 
+- [Divider](https://workday.github.io/canvas-kit/llm/markdown/preview-react/divider/stories/Divider.md): A `Divider` segments and visually organizes content.
+- [Canvas Kit Information Highlight](https://workday.github.io/canvas-kit/llm/markdown/preview-react/information-highlight/stories/InformationHighlight.md): A container to call out important information on a page or a section of a page that the user should
+- [Canvas Kit Loading Sparkles](https://workday.github.io/canvas-kit/llm/markdown/preview-react/loading-sparkles/stories/LoadingSparkles.md): `LoadingSparkles` is a loading animation that makes users aware an AI operation is in progress.
+- [Canvas Kit MultiSelect](https://workday.github.io/canvas-kit/llm/markdown/preview-react/multi-select/stories/MultiSelect.md): MultiSelect inputs allow users to choose multiple options from a list of items.
+- [Canvas Kit Pill](https://workday.github.io/canvas-kit/llm/markdown/preview-react/pill/stories/Pill.md): `Pill`s are static or interactive indicators that allow users to input, filter, or label
+- [Canvas Kit Radio](https://workday.github.io/canvas-kit/llm/markdown/preview-react/radio/stories/Radio.md): Radio Buttons allow a user to select one value from a predefined list of 7 or fewer options.
+- [Canvas Kit Segmented Control](https://workday.github.io/canvas-kit/llm/markdown/preview-react/segmented-control/stories/SegmentedControl.md): Segmented Control is a
+- [Canvas Kit Select](https://workday.github.io/canvas-kit/llm/markdown/preview-react/select/stories/Select.md): 
+- [Canvas Kit Side Panel](https://workday.github.io/canvas-kit/llm/markdown/preview-react/side-panel/stories/SidePanel.md): `SidePanel` is a collaspible container that anchors to the left or right side of the screen.
+- [Canvas Kit Status Indicator](https://workday.github.io/canvas-kit/llm/markdown/preview-react/status-indicator/stories/StatusIndicator.md): Status Indicators help the user quickly identify the status of a task, action, or page element.
+
+## Labs Components
+
+- [AI Ingress Button](https://workday.github.io/canvas-kit/llm/markdown/labs-react/ai-ingress-button/stories/AIIngressButton.md): CTA to open and close AI Ingress Button
+- [Combobox](https://workday.github.io/canvas-kit/llm/markdown/labs-react/combobox/stories/Combobox.md): 
+- [Canvas Kit Search Form](https://workday.github.io/canvas-kit/llm/markdown/labs-react/search-form/stories/SearchForm.md): 
+
+## Guides
+
+- [Canvas Kit 10.0 Upgrade Guide](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/10.0-UPGRADE-GUIDE.md): This guide contains an overview of the changes in Canvas Kit v10. Please
+- [Canvas Kit 11.0 Upgrade Guide](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/11.0-UPGRADE-GUIDE.md): This guide contains an overview of the changes in Canvas Kit v11. Please
+- [Canvas Kit 12.0 Upgrade Guide](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/12.0-UPGRADE-GUIDE.md): This guide contains an overview of the changes in Canvas Kit v12. Please
+- [Canvas Kit 13.0 Upgrade Guide](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/13.0-UPGRADE-GUIDE.md): This guide contains an overview of the changes in Canvas Kit v13. Please
+- [Canvas Kit 14.0 Upgrade Guide](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/14.0-UPGRADE-GUIDE.md): This guide contains an overview of the changes in Canvas Kit v14. Please
+- [Canvas Kit 14.0 Visual Changes](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/14.0-VISUAL-CHANGES.md): This guide contains an overview of the changes in Canvas Kit v14. If you have any issues, feel free
+- [Canvas Kit 4.0 Upgrade Guide](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/4.0-UPGRADE-GUIDE.md): Below are the breaking changes made in Canvas Kit v4. Please reach out if you have any questions
+- [Canvas Kit 5.0 Upgrade Guide](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/5.0-UPGRADE-GUIDE.md): Below are the breaking changes made in Canvas Kit v5. Please
+- [Canvas Kit 6.0 Upgrade Guide](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/6.0-UPGRADE-GUIDE.md): Below are the breaking changes made in Canvas Kit v6. Please
+- [Canvas Kit 7.0 Upgrade Guide](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/7.0-UPGRADE-GUIDE.md): This guide contains breaking changes in Canvas Kit v7. Please
+- [Canvas Kit 8.0 Upgrade Guide](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/8.0-UPGRADE-GUIDE.md): This guide contains an overview of the changes in Canvas Kit v8. Please
+- [Canvas Kit 9.0 Upgrade Guide](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/9.0-UPGRADE-GUIDE.md): This guide contains an overview of the changes in Canvas Kit v9. Please
+- [API & Pattern Guidelines](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/API_PATTERN_GUIDELINES.md): Note: This repo hasn't seen a full audit, so you may find examples that contradict these guidelines.
+- [What is a Codemod?](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/CODEMODS.md): A codemod is a script that makes programmatic transformations on your codebase by traversing the
+- [Compound Components](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/COMPOUND_COMPONENTS.md): 
+- [Contributing to Canvas](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/CONTRIBUTING.md): On behalf of the Canvas team, thank you so much for your contribution to this project and being a
+- [Building a Compound Component](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/CREATING_COMPOUND_COMPONENTS.md): Refer to the
+- [Documentation Guidelines](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/DOCUMENTATION_GUIDELINES.md): Short description of Component.
+- [GETTING_STARTED](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/GETTING_STARTED.md): 
+- [Maintaining Canvas Kit](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/MAINTAINING.md): If you're a Canvas Kit core maintainer, this doc is for you! Consider this a field guide to help you
+- [PACKAGES](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/PACKAGES.md): 
+- [Testing](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/TESTING.md): `canvas-kit` has 3 levels of testing: unit, functional and visual. Each area has special use-cases
+- [Versions](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/Versions.md): 
+- [changelog](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/changelog.md): 
+- [welcome](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/welcome.md): 
+
+## Accessibility
+
+- [AccessibilityOverview](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/accessibility/AccessibilityOverview.md): 
+- [AccessibilityTesting](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/accessibility/AccessibilityTesting.md): 
+- [ARIA Live Regions](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/accessibility/AriaLiveRegions.md): These examples are provided to demonstrate a variety of different use cases for the `AriaLiveRegion`
+- [Headers](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/accessibility/Headers.md): 
+- [PageStructure](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/accessibility/PageStructure.md): 
+- [SidePanel](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/accessibility/SidePanel.md): 
+- [TablesAdvanced](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/accessibility/TablesAdvanced.md): 
+- [WindowsHighContrastThemes](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/accessibility/WindowsHighContrastThemes.md): 
+
+## Style Props
+
+- [Style Props](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/style-props/STYLE_PROPS.md): Style props provide a common, ergonomic API for modifying a component's styles by passing styles
+- [Canvas Kit Style Props Migration Codemod](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/style-props/stylePropsMigrationCodemod.md): This codemod helps migrate style props to `cs` prop. It also automatically transforms token usage in
+- [Style Props Deprecation Overview](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/style-props/stylePropsMigrationOverview.md): 
+
+## Tokens
+
+- [Canvas Kit Tokens Migration Codemod](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/tokens/TokenMigrationCodemod.md): This codemod helps migrate Canvas Kit tokens from `@workday/canvas-kit-react/tokens` or
+- [Q&A and more](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/tokens/TokenMigrationFinal.md): 
+- [Installation & Setup](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/tokens/TokenMigrationInstall.md): If you are migrating from the old raw values tokens (`@workday/canvas-kit-react/tokens`), you should
+- [Color Token Migration](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/tokens/TokenMigrationMappingColors.md): <StorybookInformationHighlight
+- [System Token Migration](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/tokens/TokenMigrationMappingSystem.md): 
+- [Canvas Kit Token Migration Guide: Moving to `@workday/canvas-tokens-web`](https://workday.github.io/canvas-kit/llm/markdown/docs/mdx/tokens/TokenMigrationOverview.md): Canvas Kit v10+ introduces a new token system that replaces the old JavaScript-based tokens from
+
+## Styling
+
+- [Create Styles](https://workday.github.io/canvas-kit/llm/markdown/styling/stories/mdx/CreateStyles.md): The primary utility function is the `createStyles` function. It makes a call to the `css` function
+- [How To Customize Styles](https://workday.github.io/canvas-kit/llm/markdown/styling/stories/mdx/CustomizingStyles.md): There are multiple ways to customize styles for components within Canvas Kit. The approach you
+- [Converting from @emotion/styled](https://workday.github.io/canvas-kit/llm/markdown/styling/stories/mdx/FromEmotion.md): The most difficult part of understanding styling without Emotion's runtime is the mindset shift. You
+- [Merging Styles](https://workday.github.io/canvas-kit/llm/markdown/styling/stories/mdx/MergingStyles.md): 
+- [Canvas Kit Styling](https://workday.github.io/canvas-kit/llm/markdown/styling/stories/mdx/Overview.md): 
+- [Create Stencil](https://workday.github.io/canvas-kit/llm/markdown/styling/stories/mdx/Stencils.md): Stencils are a reusable function that returns `style` and `className` props in an object. A Stencil
+- [Canvas Kit Styling Utilities](https://workday.github.io/canvas-kit/llm/markdown/styling/stories/mdx/Utilities.md): A collection of helpful functions for styling with `@workday/canvas-kit-styling`. While they're
+- [Why Canvas Styling](https://workday.github.io/canvas-kit/llm/markdown/styling/stories/mdx/WhyCanvasStyling.md): This package contains everything needed to create CSS styling. This styling package contains a
+

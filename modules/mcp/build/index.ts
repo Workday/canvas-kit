@@ -8,26 +8,14 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const llmSourceDir = path.resolve(__dirname, '../../docs/llm');
-const llmTxtSourceDir = path.resolve(__dirname, '../../docs/llm-txt');
 const targetDir = path.resolve(__dirname, '../dist/lib');
 
 /**
  * Copy a specific file from source to destination, creating directories as needed
  */
 function copyFile(relativePath: string): void {
-  // Determine source directory based on file path
-  let srcPath: string;
-  if (relativePath.startsWith('llm-txt/')) {
-    // For llm-txt files, use llm-txt source directory and remove the llm-txt/ prefix
-    const fileName = relativePath.replace('llm-txt/', '');
-    srcPath = path.resolve(llmTxtSourceDir, fileName);
-  } else if (relativePath.startsWith('tokens/') || relativePath.startsWith('upgrade-guides/')) {
-    // For tokens and upgrade-guides files, use llm source directory
-    srcPath = path.resolve(llmSourceDir, relativePath);
-  } else {
-    // Default to llm source directory
-    srcPath = path.resolve(llmSourceDir, relativePath);
-  }
+  // All files are now in the llm source directory
+  const srcPath = path.resolve(llmSourceDir, relativePath);
   const destPath = path.resolve(targetDir, relativePath);
 
   // Check if source file exists

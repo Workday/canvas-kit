@@ -12,7 +12,7 @@
 export function parseCliArgs() {
   // Define default directories for canvas-kit
   const DEFAULT_INPUT_DIR = './modules';
-  const DEFAULT_OUTPUT_DIR = './docs/markdown';
+  const DEFAULT_OUTPUT_DIR = './modules/docs/llm/markdown';
 
   // Extract arguments and handle defaults
   const args = process.argv.slice(2);

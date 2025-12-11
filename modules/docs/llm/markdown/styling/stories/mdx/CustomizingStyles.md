@@ -1,0 +1,176 @@
+---
+source_file: styling/stories/mdx/CustomizingStyles.mdx
+live_url: https://workday.github.io/canvas-kit/styling/stories/mdx/CustomizingStyles
+---
+<Meta title="Styling/Guides/Customizing Styles" />
+
+# How To Customize Styles
+
+There are multiple ways to customize styles for components within Canvas Kit. The approach you
+choose will depend on your use case. Ranging from some simple overrides to fully custom solutions,
+here are the following options:
+
+- [Create Styles](#createstyles)
+- [Stencils](#stencils)
+
+## Create Styles
+
+### Using `createStyles` with `cs` prop
+
+Use `createStyles` in tandem with `cs` prop when you're overriding static styles and making small
+modifications to an existing Canvas Kit component like padding, color and flex properties. Take our
+`Text` component as an example.
+
+```tsx
+
+const uppercaseTextStyles = createStyles({
+  textTransform: 'uppercase',
+  margin: system.space.x4
+})
+//...
+<Text cs={uppercaseTextStyles}>My uppercased text</Text>;
+```
+
+> **Note:** `createStyles` handles wrapping our token variables in `var(--${token})`
+
+You can also apply styles created via `createStyles` via `className`.
+
+```tsx
+
+const uppercaseTextStyles = createStyles({
+  textTransform: 'uppercase',
+  margin: system.space.x4
+})
+//...
+<Text className={uppercaseTextStyles}>My uppercased text</Text>;
+```
+
+If you need to dynamically apply styles based on some state or prop, use [Stencils](#stencils)
+instead.
+
+## Stencils
+
+Stencils can be useful when applying dynamic styles or building your own reusable component.
+
+### Extending Stencils
+
+[Stencils](https://workday.github.io/canvas-kit/?path=/docs/styling-getting-started-create-stencil--docs)
+help you organize the styling of reusable components into base styles, modifiers, and variables. The
+organization makes it more natural to produce static and clean CSS with optional extraction into CSS
+files.
+
+Stencils that define variables, modifiers and base styles can be extended to create your own
+reusable component using Canvas Kit styles.
+
+If we take `SystemIcon` component as an example, it defines `systemIconStencil` which defines styles
+for an icon. This stencil can be extended to build a custom icon component for your use case.
+
+**Before v11** you'd have to use `systemIconStyles` function to overwrite styles for an icon:
+
+```tsx
+// Before v11
+
+ // old tokens
+
+// old way of styling with Emotion styled
+const StyledNavIcon = styled('span')(({size, iconStyles}){
+  display: 'inline-flex',
+  pointerEvents: 'unset',
+  margin: `${space.xxxs} ${space.xxxs} 0 0`,
+  padding: '0',
+  'svg': {
+    ...iconStyles,
+    width: size,
+    height: size,
+  }
+});
+
+const NavIcon = ({iconColor, iconHover, iconBackground, iconBackgroundHover, icon, size}) => {
+  // old way of styling with systemIconStyles function
+  // systemIconStyles is deprecated in v11
+  const iconStyles = systemIconStyles({
+    fill: iconColor,
+    fillHover: iconHover,
+    background: iconBackground,
+    backgroundHover: iconBackgroundHover,
+  });
+
+  // insert icon function used by platform or any other functionality here
+
+  return (
+    <StyledNavIcon
+      icon={icon}
+      size={size}
+      iconStyles={iconStyles}
+    />
+  );
+};
+```
+
+**In v11** you'd extend `systemIconStencil` to reuse its styles:
+
+```tsx
+// v11
+
+const navIconStencil = createStencil({
+  // We extend `systemIconStencil` to inherit it's base styles, modifiers and variables so that we can customize it
+  extends: systemIconStencil,
+  vars: {
+    // These variables support our styling iconHover and iconBackgroundHover
+    // they can be removed later and overwritten by `cs`.
+    // Also note the variables have no value. This allows for cascading styles.
+    fillHover: '',
+    backgroundHover: '',
+  },
+  base: ({fillHover, backgroundHover}) => ({
+    display: 'inline-flex',
+    pointerEvents: 'unset',
+    // instead of using our old tokens it's better to use our new system tokens
+    margin: `${system.space.x1} ${system.space.x1} 0 0`,
+    padding: '0',
+    '&:hover, &.hover': {
+      // systemIconStencil doesn't have hover specific variables
+      // so we reassigned color and backgroundColor variables using pseudo-selector
+      [systemIconStencil.vars.color]: fillHover,
+      [systemIconStencil.vars.backgroundColor]: backgroundHover,
+    },
+  }),
+});
+
+// Your reusable NavIcon component using Stencils
+const NavIcon = ({
+  iconColor,
+  iconHover,
+  iconBackground,
+  iconBackgroundHover,
+  icon,
+  size,
+  ...elemProps
+}) => {
+  // insert icon function used by platform or any other functionality here
+
+  return (
+    <span
+      icon={icon}
+      {...handleCsProp(
+        elemProps,
+        navIconStencil({
+          // Because we're extending systemIconStencil, it already has a size prop and applies size to the svg's width and height
+          // so we don't need to set these variables in our navIconStencil
+          size,
+          // systemIconStencil already has color (for icon fill) and backgroundColor variables
+          // so we assigned them to our prop values
+          color: iconColor,
+          backgroundColor: iconBackground,
+          fillHover: iconHover,
+          backgroundHover: iconBackgroundHover,
+        })
+      )}
+    />
+  );
+};
+```
+
+Another example of Stencil extension and customization is our
+[CustomButton](https://workday.github.io/canvas-kit/?path=/story/components-buttons--docs#custom-styles)
+example. This example highlights the power of inheritance that you get from extending stencils.

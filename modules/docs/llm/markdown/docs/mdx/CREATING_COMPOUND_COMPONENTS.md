@@ -1,0 +1,1000 @@
+---
+source_file: docs/mdx/CREATING_COMPOUND_COMPONENTS.mdx
+live_url: https://workday.github.io/canvas-kit/docs/mdx/CREATING_COMPOUND_COMPONENTS
+---
+<Meta title="Guides/Creating Compound Components" />
+
+# Building a Compound Component
+
+Refer to the
+[Compound Component documentation](/getting-started/for-developers/resources/compound-components/)
+document to learn about what a compound component is.
+
+This document will go through building a simplified Disclosure component to help solidify the
+concepts. We will cover:
+
+- [Non Coordinated Components](#non-coordinated-components)
+- [Models](#models)
+- [Container Components](#disclosure-component)
+- [Sub-components](#disclosuretarget-component)
+- [Model Composition](#model-composition)
+- [Behavior hooks](#behavior-hooks)
+
+## Non Coordinated Components
+
+In most cases you'll create compound components that have a model and share information across subcomponents. However, in the case where information doesn't need to be shared, you can create a non
+coordinated component. These components often represent some styled element with no associated role
+or behavior and don't rely on state and events such as a `Card`, `Flex` or `Button` components. Use
+`createComponent` factory function in these scenarios.
+
+### `createComponent`
+
+Use `createComponent` when you want to create a rendered element with _no behavior_. This is useful
+for elements that you want to use for styling purposes like container elements, or subcomponents
+that are simple rendered elements. This utility function will wrap your component in a
+`React.ForwardRef` and allow you to add subcomponents as well.
+
+```tsx
+export const Card = createComponent('div')({
+  displayName: 'Card',
+  subComponents: {
+    Heading: CardHeading, // this is also using createComponent
+  },
+  Component: ({children, ...elemProps}: CardProps, ref, Element) => {
+    return (
+      <Box as={Element} {...elemProps} ref={ref}>
+        {children}
+      </Box>
+    );
+  },
+});
+```
+
+## Models
+
+A model is composed of state and events. The shape of the model used by components looks like this:
+
+```tsx
+type Model = {
+  state: Record<string, any>;
+  events: Record<string, (data?: any) => void>;
+};
+```
+
+Our model hook will take a config for `initialVisible` and return a model.
+
+```tsx
+// useDisclosureModel.ts
+type DisclosureConfig = {
+  initialVisible?: boolean;
+};
+
+export const useDisclosureModel = (config: DisclosureConfig = {}) => {
+  const [visible, setVisible] = React.useState(config.initialVisible || false);
+
+  const state = {
+    visible,
+  };
+
+  const events = {
+    show() {
+      setVisible(true);
+    },
+    hide() {
+      setVisible(false);
+    },
+  };
+
+  return {state, events};
+};
+```
+
+The model has a single `visible` state property and `show` and `hide` events we can send to the
+model. So far using the model might look like this:
+
+```jsx
+const Test = () => {
+  const model = useDisclosureModel();
+
+  return (
+    <>
+      <button
+        onClick={() => {
+          if (model.state.visible) {
+            model.events.hide();
+          } else {
+            model.events.show();
+          }
+        }}
+      >
+        Toggle
+      </button>
+      <div hidden={model.state.visible ? undefined : true}>Content</div>
+    </>
+  );
+};
+```
+
+You can find a working example here: https://codesandbox.io/s/basic-disclosure-model-5gold
+
+It would be nice to add guards and callbacks to our events. Let's add configuration to our model:
+
+```tsx
+type DisclosureConfig = {
+  initialVisible?: boolean;
+  // guards
+  shouldShow?(data: void, state: DisclosureState): boolean;
+  shouldHide?(data: void, state: DisclosureState): boolean;
+  // callbacks
+  onShow?(data: void, prevState: DisclosureState): void;
+  onHide?(data: void, prevState: DisclosureState): void;
+};
+```
+
+We'll also have to add the runtime of the guards and actions:
+
+```tsx
+const events = {
+  show() {
+    if (config.shouldShow?.(undefined, state) === false) {
+      return;
+    }
+    setVisible(true);
+    config.onShow?.(undefined, state);
+  },
+  hide() {
+    if (config.shouldHide?.(undefined, state) === false) {
+      return;
+    }
+    setVisible(false);
+    config.onHide?.(undefined, state);
+  },
+};
+```
+
+Now we should be able to configure the model via the guards and do something in the callbacks:
+
+```jsx
+const Test = () => {
+  const [should, setShould] = React.useState(true);
+  const model = useDisclosureModel({
+    shouldShow(data, state) {
+      console.log('shouldShow', data, state, should);
+      return should;
+    },
+    shouldHide(data, state) {
+      console.log('shouldHide', data, state, should);
+      return should;
+    },
+    onShow(data, prevState) {
+      console.log('onShow', data, prevState);
+    },
+    onHide(data, prevState) {
+      console.log('onHide', data, prevState);
+    },
+  });
+
+  return (
+    <>
+      <button
+        onClick={() => {
+          setShould(!should);
+        }}
+      >
+        Toggle "should"
+      </button>{' '}
+      Buttons below should {should ? '' : 'NOT'} work
+      <br />
+      <button
+        onClick={() => {
+          model.events.show();
+        }}
+      >
+        Show
+      </button>
+      <button
+        onClick={() => {
+          model.events.hide();
+        }}
+      >
+        Hide
+      </button>
+      <div hidden={model.state.visible ? undefined : true}>Content</div>
+      <br />
+      Check the console output
+    </>
+  );
+};
+```
+
+You can see it in action here: https://codesandbox.io/s/basic-configurable-disclosure-model-nuteg
+
+That's a lot of extra boilerplate code for actions and callbacks. Our events don't have any data,
+but if they did, we'd have to keep the event + guard and callback data types in sync. We are also
+creating the `events` object every render. We could use React refs and `React.useMemo` to decrease
+extra object creation. Luckily, the common module has the `createModelHook` factory function to help
+us reduce boilerplate and reduce the possibility of making mistakes.
+
+`createModelHook` creates a model and infers the config, state, and events. The callbacks and guard
+types will automatically be inferred.
+
+```tsx
+// useDisclosureModel.ts
+
+export const useDisclosureModel = createModelHook({
+  defaultConfig: {
+    initialVisible: false,
+  },
+})(config => {
+  const [visible, setVisible] = React.useState(config.initialVisible || false);
+
+  const state = {
+    visible,
+  };
+
+  const events = {
+    show() {
+      setVisible(true);
+    },
+    hide() {
+      setVisible(false);
+    },
+  };
+
+  return {state, events};
+});
+```
+
+`createModelHook` takes a config object to determine the default config and the required config. We
+only need default config. This function returns a function with a `config` object with all config
+defaults applied. This is the body of the `useDisclosureModel` hook from earlier. Notice we don't
+need to implement guards and callbacks directly inside our event implementations. `createModelHook`
+will return an object that has that functionality built right in! Neat!
+
+The full working implementation is here:
+https://codesandbox.io/s/configurable-disclosure-model-3y5qh
+
+## Components
+
+Now that our model is figured out, we can work on the container component and sub-components. An
+external API might look something like this:
+
+```tsx
+<Disclosure>
+  <Disclosure.Target>Toggle</Disclosure.Target>
+  <Disclosure.Content>Content</Disclosure.Content>
+</Disclosure>
+```
+
+The `<Disclosure>` is our container component and will be responsible for creating a
+`DisclosureModel` if a model isn't passed in. The `<Disclosure.Target>` and `<Disclosure.Content>`
+components are sub-components with specific functionality built into them. The `Target` controls the
+visibility of the `Content`. We already created a simplified render function for our model, now
+let's create the real components.
+
+### Disclosure Component
+
+First, let's create the `<Disclosure>` container component:
+
+```tsx
+// Disclosure.tsx
+
+type DisclosureConfig = typeof useDisclosureModel.TConfig;
+
+export interface DisclosureProps extends DisclosureConfig {
+  children: React.ReactNode;
+}
+
+const DisclosureModelContext = useDisclosureModel.Context;
+
+export const Disclosure = ({children, ...config}: DisclosureProps) => {
+  const model = useDisclosureModel(config);
+
+  return (
+    <DisclosureModelContext.Provider value={model}>{children}</DisclosureModelContext.Provider>
+  );
+};
+
+Disclosure.Target = DisclosureTarget;
+Disclosure.Content = DisclosureContent;
+```
+
+We can see that the `DisclosureProps` interface extends the config of `useDisclosureModel`.
+`createModelHook` exposes a `TConfig` property to capture the config type. This allows us to pass
+the model config directly to the `<Disclosure>` component. A user of this `<Disclosure>` component
+might want to register a callback when the `show` event is called, for instance.
+
+The `createModelHook` creates a React Context that can be used by the `Disclosure` component to
+expose the disclosure model to subcomponents without having to pass it via props. This allows our
+compound component API to remain clean for consumers of compound components.
+
+In this particular compound component, the container component doesn't have a real element.
+Accessibility specifications have no `role` for this component, so an element is not required.
+
+Let's go ahead and finish out our sub-components.
+
+### DisclosureTarget Component
+
+```tsx
+// DisclosureTarget.tsx
+
+export interface DisclosureTargetProps {
+  children: React.ReactNode;
+}
+
+export const DisclosureTarget = ({children}: DisclosureTargetProps) => {
+  const model = React.useContext(useDisclosureModel.Context);
+
+  return (
+    <button
+      onClick={() => {
+        if (model.state.visible) {
+          model.events.hide();
+        } else {
+          model.events.show();
+        }
+      }}
+    >
+      {children}
+    </button>
+  );
+};
+```
+
+The `DisclosureTarget` component is in charge of the toggle button and it calls the `show` or `hide`
+event on the model.
+
+### DisclosureContent Component
+
+```tsx
+// DisclosureContent.tsx
+
+export interface DisclosureContentProps {
+  children: React.ReactNode;
+}
+
+export const DisclosureContent = ({children}: DisclosureContentProps) => {
+  const model = React.useContext(useDisclosureModel.Context);
+
+  return <div hidden={model.state.visible ? undefined : true}>{children}</div>;
+};
+```
+
+The `DisclosureContent` component is in charge of the content. It uses the `visible` state value to
+set a `hidden` attribute.
+
+The working example can be found here:
+https://codesandbox.io/s/configurable-disclosure-model-components-nvhtv
+
+These components are not fully compliant yet. They do not support `model`, `ref`, `as`, or extra
+props as HTML attributes. Also, we have to use `typeof` to create types and a `DisclosureContext`
+variable (capitalized for JSX). We also have to worry about the `model` prop. The boilerplate for
+supporting all of this gets very complicated. For this reason, `createContainer` and
+`createSubcomponent` were created to handle this boilerplate for you out of the box. Both functions
+take a default `React.ElementType` which can be an element string like `div` or `button` or a
+component like `Button`. It also takes a config object containing the following:
+
+- `displayName`: This will be the name of the component when shown by the React Dev tools. By
+  convention, we make that name be the same as typed in a render function. For example
+  `Disclosure.Target` vs `DisclosureTarget`.
+- `modelHook`: This is the model hook used by the compound component (`useDisclosureModel` in our
+  case). This model hook is used to determine proper prop types and seamlessly handle the option
+  `model` prop. For `createContainer`, if a `model` is not passed, a model is created and added to
+  React Context. For `createSubcomponent`, if a `model` is not passed, the model comes from React
+  Context.
+- `elemPropsHook`: This is the elemPropsHook that takes a model and elemProps and returns elemProps.
+- `subComponents`: For container components. A list of sub components to add to the returned
+  component. For example, a sub component called `DisclosureTarget` will be added to the export of
+  `Disclosure` so that the user can
+
+export interface DisclosureProps {}
+
+export const Disclosure = createContainer()({
+  displayName: 'Disclosure',
+  modelHook: useDisclosureModel,
+  subComponents: {
+    Target: DisclosureTarget,
+    Content: DisclosureContent,
+  },
+})<DisclosureProps>(({children}) => {
+  return <>{children}</>;
+});
+```
+
+Notice we do not need to add `children` or `model` to our prop definition. `createContainer` is
+adding those prop types for us. The `displayName` helps identify the component in React developer
+tools. This is only needed by container components. The `subComponents` automatically adds a
+`displayName` to subcomponents using the property key. For example, our `DisclosureTarget` will have
+a `displayName` of `Disclosure.Target`. You can still provide a `displayName` to override this
+naming convention.
+
+```tsx
+// DisclosureTarget.tsx
+
+export interface DisclosureTargetProps {}
+
+export const DisclosureTarget = createSubcomponent('button')({
+  modelHook: useDisclosureModel,
+})<DisclosureTargetProps>((elemProps, Element, model) => {
+  return (
+    <Element
+      onClick={() => {
+        if (model.state.visible) {
+          model.events.hide();
+        } else {
+          model.events.show();
+        }
+      }}
+      {...elemProps}
+    />
+  );
+});
+```
+
+```tsx
+// DisclosureContent.tsx
+
+export interface DisclosureContentProps {}
+
+export const DisclosureContent = createSubcomponent('div')({
+  modelHook: useDisclosureModel,
+})<DisclosureContentProps>(({children, ...elemProps}, Element, model) => {
+  return (
+    <Element hidden={model.state.visible ? undefined : true} {...elemProps}>
+      {children}
+    </Element>
+  );
+});
+```
+
+The `as` prop is being passed to the second argument in the and we're calling it `Element`. The
+variable is passed to JSX as `<Element>`. `Element` is capitalized because the JSX parser treats
+capitalized elements as variables and lower case elements as strings:
+
+```tsx
+() => <Div />;
+() => <div />;
+
+// transpiled output:
+() => React.createElement(Div, null);
+() => React.createElement('div', null);
+```
+
+[Typescript Playground](https://www.typescriptlang.org/play?ssl=2&ssc=14&pln=1&pc=1#code/BQSgBAvAfGA8AiBLAbmA9FAUKSNYBMV0og)
+
+In our example, there are no styles associated with `Target` or `Content` sub-components, so we
+render `as` as an element. If we were using Emotion's `styled` components, we'd pass the `as` like
+`<StyledElement as={Element}>`. Using the `as` prop this way retains styles while `<Element>` does
+not. Use `<Element>` when styling should come from the passed in element and use
+`<StyledElement as={Element}>` when the component handles styling.
+
+`createContainer` and `createSubcomponent` return a component with a type interface that includes
+ref forwarding, the `as` prop for changing the underlying element, the `model` prop, and additional
+attributes/props the element type normally takes.
+
+For example, we can now do the following:
+
+```tsx
+<Disclosure>
+  <Disclosure.Target ref={targetRef} data-testid="target-button">
+    Toggle
+  </Disclosure.Target>
+  <Disclosure.Content as="section">Content</Disclosure.Content>
+</Disclosure>
+```
+
+In this example, we added a `data-testid` to the Disclosure `Target` element and rendered the
+`Content` element as a `section` tag.
+
+The full code can be found here:
+https://codesandbox.io/s/configurable-disclosure-model-components-utility-pk9s6
+
+## Model Composition
+
+Our example isn't fully accessible yet. The Disclosure target needs a `aria-controls` attribute to
+tie the target and content in the accessibility tree. This is done by the use of id references
+(string IDs that starts with a letter). We could add an `id` to our model, but it is extremely
+common so let's make a new model and compose from it instead. We'll later use this model in a
+reusable behavioral hook.
+
+```tsx
+// useIDModel.ts
+
+export type IDState = {
+  id: string;
+};
+
+export type IDEvents = {};
+
+export type IDModel = Model<IDState, IDEvents>;
+
+export type IDConfig = {
+  id?: string;
+};
+
+export const useIDModel = (config: IDConfig = {}) => {
+  const id = useUniqueId(config.id);
+
+  const state = {
+    id,
+  };
+
+  const events = {};
+
+  return {state, events};
+};
+```
+
+This model only provides an `id` since that's all that is needed for id reference functionality.
+Also later we'll add behavioral hook that will require this model.
+
+Let's update the `DisclosureModel` to compose the `IDModel`:
+
+```tsx
+// useDisclosureModel.ts
+
+export const useDisclosureModel = createModelHook({
+  defaultConfig: {
+    ...useIDModel.defaultConfig,
+    initialVisible: false,
+  },
+})(config => {
+  const [visible, setVisible] = React.useState(config.initialVisible || false);
+  const idModel = useIDModel(config);
+
+  const state = {
+    ...idModel.state,
+    visible,
+  };
+
+  const events = {
+    ...idModel.events,
+    show() {
+      setVisible(true);
+    },
+    hide() {
+      setVisible(false);
+    },
+  };
+
+  return {state, events};
+});
+```
+
+We can now add `aria-controls` to `DisclosureTarget` and `id` to `DisclosureContent`. We'll also add
+`aria-expanded` to `DisclosureTarget` to finish off the accessibility specifications:
+
+```tsx
+// DisclosureTarget.tsx
+
+// ...
+
+return (
+  <Element
+    aria-controls={model.state.id}
+    aria-expanded={model.state.visible}
+    onClick={() => {
+      if (model.state.visible) {
+        model.events.hide();
+      } else {
+        model.events.show();
+      }
+    }}
+    {...elemProps}
+  >
+    {children}
+  </Element>
+);
+
+// ...
+```
+
+```tsx
+// DisclosureContent.tsx
+
+// ...
+
+return (
+  <Element id={model.state.id} hidden={model.state.visible ? undefined : true} {...elemProps}>
+    {children}
+  </Element>
+);
+
+// ...
+```
+
+Here's the working example now: https://codesandbox.io/s/disclosure-composable-model-9shjn
+
+At this point, we have an accessible disclosure compound component that composes 2 models. But the
+disclosure pattern is more than just the component level. For example, a tooltip uses the disclosure
+pattern as well. Let's extract out some behaviors into hooks.
+
+## Behavior Hooks
+
+Behavior hooks allow us to reuse pieces of functionality in difference components. For example, the
+`Tabs` component utilizes a cursor hook for keyboard navigation even though the UI of tabs and the
+UI of a dropdown menu look very different!
+
+We'll build a behavior hook for the `DisclosureTarget` component:
+
+```tsx
+// useExpandableControls.ts
+
+export const useExpandableControls = (
+  {state}: ReturnType<typeof useDisclosureModel>,
+  elemProps = {},
+  ref?: React.Ref<any>
+) => {
+  return {
+    'aria-controls': state.id,
+    'aria-expanded': state.visible,
+    ...elemProps,
+  };
+};
+```
+
+At this point, we should reiterate that compound components should always merge passed in props
+properly. If the prop is a primitive prop, it should _override_ the props of the component. If the
+prop is a callback function like `onClick`, the `style` tag or the `css` prop, they should be merged
+properly. Luckily, the `common` package has a `mergeProps` utility function that takes care of this
+for us. Hooks can use an optional 3rd parameter that is a `ref` if they need to fork the ref. We
+won't get into that here, but it is useful and works with `composeHooks` that is available via the
+`common` module. Let's refactor the above to use that function:
+
+```tsx
+// useExpandableControls.ts
+
+export const useExpandableControls = (
+  {state}: ReturnType<typeof useDisclosureModel>,
+  elemProps = {},
+  ref?: React.Ref<any>
+) => {
+  return mergeProps(
+    {
+      'aria-controls': state.id,
+      'aria-expanded': state.visible,
+    },
+    elemProps
+  );
+};
+```
+
+Even though the `useExpandableControls` did not use any special props that need special merging, it
+is a good habit to use `mergeProps` anytime you define props.
+
+This is still a lot of boilerplate. We need the return type of the model hook, we need to specify
+that our hook can optionally accept `elemProps` and a `ref`, and we need to call `mergeProps`.
+`createElemPropsHook` helps with a lot of this boilerplate:
+
+```tsx
+
+export const useExpandableControls = createElemPropsHook(useDisclosureModel)(({state}) => {
+  return {
+    'aria-controls': state.id,
+    'aria-expanded': state.visible,
+  };
+});
+```
+
+`createElemPropsHook` takes the model hook and an elem props hook body as arguments. The hook
+function body doesn't need to call `mergeProps` since `createElemPropsHook` takes care of that for
+us. Our logic can focus only on the props we need to add to an element!
+
+Now we have a reusable elemProps hook that can be composed into other hooks or used on its own.
+"expandable controls" could be used on a select component, a popup component, or any other type of
+disclosure target component. We don't add the `onClick` because how the disclosure is revealed
+depends on the disclosure target type. In a `Select` component, that could be by clicking on the
+target, or using the down arrow. On a `Tooltip` component, it could be revealed by a mouse hover or
+focus event. Lets create a `useDisclosureTarget` elemProps hook that merges in an `onClick` with
+`useExpandableControls`:
+
+```tsx
+// useDisclosureTarget.ts
+
+export const useDisclosureTarget = createElemPropsHook(useDisclosureModel)(
+  (model, ref, elemProps) => {
+    const props = useExpandableControls(model, elemProps, ref);
+
+    return mergeProps(
+      {
+        onClick() {
+          if (model.state.visible) {
+            model.events.hide();
+          } else {
+            model.events.show();
+          }
+        },
+      },
+      props
+    );
+  }
+);
+```
+
+Notice we still need to use `mergeProps` to compose the behavior of our two elemProps hooks?
+`composeHooks` was created to handle this common composition use case. `composeHooks` takes two or
+more elemProps hooks and returns a new hook with all props merged for us:
+
+```tsx
+// useDisclosureTarget.ts
+
+export const useDisclosureTarget = composeHooks(
+  createElemPropsHook(useDisclosureModel)(model => {
+    return {
+      onClick() {
+        if (model.state.visible) {
+          model.events.hide();
+        } else {
+          model.events.show();
+        }
+      },
+    };
+  }),
+  useExpandableControls
+);
+```
+
+We don't even need to declare `elemProps` or `ref` parameters if we don't use them!
+
+Now we can use the behavior hook in the `DiscloseTarget` component:
+
+```tsx
+// DisclosureTarget.tsx
+
+export interface DisclosureTargetProps {}
+
+export const DisclosureTarget = createSubcomponent('button')({
+  modelHook: useDisclosureModel,
+})<DisclosureTargetProps>((elemProps, Element, model) => {
+  const props = useDisclosureTarget(model, elemProps);
+  return <Element {...props} />;
+});
+```
+
+Note: We should never use `createElemPropsHook` or `composeHooks` inside a render function as that
+would be slower. Always hoist the hook definition outside a render function.
+
+It is very common to use an elemProps hook with a compound component, so `createContainer` and
+`createSubcomponent` both take an `elemPropsHook` configuration option. This way we don't have to
+worry about the `model` or using `mergeProps` in our component definition. Here's the final code.
+
+```tsx
+// DisclosureTarget.tsx
+
+export interface DisclosureTargetProps {}
+
+export const DisclosureTarget = createSubcomponent('button')({
+  modelHook: useDisclosureModel,
+  elemPropsHook: useDisclosureTarget,
+})<DisclosureTargetProps>((elemProps, Element) => {
+  return <Element {...elemProps} />;
+});
+```
+
+We'll also make a `useDisclosureContent` behavior hook for the `hidden` attribute on the
+`Disclosure.Content` element:
+
+```tsx
+// useDisclosureContent.ts
+
+export const useDisclosureContent = createElemPropsHook(useDisclosureModel)(model => {
+  return {
+    id: model.state.id,
+    hidden: model.state.visible ? undefined : true,
+  };
+});
+```
+
+The `Disclosure.Content` subcomponent can now be updated to use this hook:
+
+```tsx
+// DisclosureContent.tsx
+
+export interface DisclosureContentProps {}
+
+export const DisclosureContent = createSubcomponent('div')({
+  modelHook: useDisclosureModel,
+  elemPropsHook: useDisclosureContent,
+})<DisclosureContentProps>(({children, ...elemProps}, Element) => {
+  return <Element {...elemProps}>{children}</Element>;
+});
+```
+
+The full code can be found here:
+https://codesandbox.io/s/disclosure-composable-model-behavior-hooks-iwzl8
+
+## Composing Compound Components
+
+Having composable models, behaviors, and components means we can reuse parts of other compound
+components. For example, let's make a simple tooltip component that has a target and content,
+similar to the disclosure component, but behaves differently. A tooltip shows and hides based on
+mouse and focus events.
+
+Here's a tooltip model composing the disclosure model:
+
+```tsx
+// useTooltipModel.ts
+
+const {
+  initialVisible, // tooltips are never initially visible, so remove the option
+  ...defaultConfig
+} = useDisclosureModel.defaultConfig;
+
+export const useTooltipModel = createModelHook({
+  defaultConfig,
+  requiredConfig: useDisclosureModel.requiredConfig,
+})(config => {
+  return useDisclosureModel(config);
+});
+```
+
+Not much interesting is happening here. We're not adding additional state or events, but we're
+removing the `initialVisible` config option from the model.
+
+The final Tooltip compound component API will look something like this when we're done:
+
+```tsx
+<Tooltip>
+  <Tooltip.Target>Target</Tooltip.Target>
+  <Tooltip.Content>The content of the Tooltip</Tooltip>
+</Tooltip>
+```
+
+The `Tooltip` container component looks almost exactly like the Disclosure component:
+
+```tsx
+// Tooltip.tsx
+
+export interface TooltipProps {
+  children?: React.ReactNode;
+}
+
+export const Tooltip = createContainer()({
+  displayName: 'Tooltip',
+  modelHook: useTooltipModel,
+  subComponents: {
+    Target: TooltipTarget,
+    Content: TooltipContent,
+  },
+})(({children}: TooltipProps) => {
+  return <>{children}</>;
+});
+```
+
+The `Tooltip.Target` component is similar to the `DisclosureTarget` component, but has different
+behavior. The tooltip triggers on different events. Here's the code:
+
+```tsx
+// TooltipTarget.tsx
+
+export interface TooltipTargetProps {
+  children: React.ReactNode;
+}
+
+export const useTooltipTarget = createElemPropsHook(useTooltipModel)(({state, events}) => {
+  return {
+    onFocus(event: any) {
+      events.show();
+    },
+    onBlur() {
+      events.hide();
+    },
+    onMouseEnter() {
+      events.show();
+    },
+    onMouseLeave() {
+      events.hide();
+    },
+    'aria-describedby': state.id,
+  };
+});
+
+export const TooltipTarget = createSubcomponent('button')({
+  displayName: 'Tooltip.Target',
+  modelHook: useTooltipModel,
+  elemPropsHook: useTooltipTarget,
+})<TooltipTargetProps>(({children, ...elemProps}, Element) => {
+  return <Element {...elemProps}>{children}</Element>;
+});
+```
+
+The `Tooltip.Target` component also uses the `aria-described` for accessibility. The `state.id`
+comes from the `IDModel`.
+
+The `Tooltip.Content` component is similar to the `Disclosure.Content` component, except that it
+uses a ReactDOM portal to ensure the content appears on top of other content. This example doesn't
+include a positional library and instead hard-codes positional values. Notice we can reuse our
+`useDisclosureContent` behavior hook in this component!
+
+```tsx
+
+export interface TooltipContentProps {}
+
+const useTooltipContent = composeHooks(
+  createElemPropsHook(useTooltipModel)(model => {
+    return {
+      style: {position: 'absolute', left: 80, top: 10},
+    };
+  }),
+  useDisclosureContent
+);
+
+export const TooltipContent = createSubcomponent('div')({
+  modelHook: useTooltipModel,
+  elemPropsHook: useTooltipContent,
+})<TooltipContentProps>(({children, ...elemProps}, Element, model) => {
+  return ReactDOM.createPortal(
+    model.state.id ? <Element {...elemProps}>{children}</Element> : null,
+    document.body
+  );
+});
+```
+
+The tooltip target could be anything. By default it is a `button` element since tooltips need to
+receive focus. What if we want a tooltip around the disclosure target element without introducing
+another `button` element? This is where the `as` prop comes in handy:
+
+```tsx
+<Disclosure>
+  <Tooltip>
+    <Tooltip.Target as={Disclosure.Target}>Toggle</Tooltip.Target>
+    <Tooltip.Content>Tooltip!</Tooltip.Content>
+  </Tooltip>
+  <Disclosure.Content>Content</Disclosure.Content>
+</Disclosure>
+```
+
+In the example, we can see the `Tooltip.Target` element will be the `Disclosure.Target` element.
+
+Here's the working example:
+https://codesandbox.io/s/disclosure-composable-model-behavior-hooks-tooltip-df7ht
+
+## Wrap it up
+
+Hopefully, by now, you have a much better idea how compound components work internally and how to
+create your own. Model composition is a powerful way to create more complex models out of smaller
+parts. Compound components can be composed to make much more complicated UIs.
+
+This API seems more verbose, but it is extremely flexible. The nice thing about a compound component
+API is we can create more terse components out of them. We expect applications to create wrapper
+components the have a more tightly controlled interface. For example, if we wanted an expandable
+component with a tooltip baked in, we could create a component API like this:
+
+```tsx
+<Expandable tooltipText="Tooltip!" targetText="Toggle">
+  Content
+</Expandable>
+```
+
+We'll make an `Expandable` component that abstracts the compound component API for re-use in
+applications (expandable components are so in these days!):
+
+```tsx
+// Expandable.tsx
+
+export interface ExpandableProps {
+  tooltipText: string;
+  targetText: string;
+  children: React.ReactNode;
+}
+
+export const Expandable = ({tooltipText, targetText, children}: ExpandableProps) => {
+  return (
+    <Disclosure>
+      <Tooltip>
+        <Tooltip.Target as={Disclosure.Target}>{targetText}</Tooltip.Target>
+        <Tooltip.Content>{tooltipText}</Tooltip.Content>
+      </Tooltip>
+      <Disclosure.Content>{children}</Disclosure.Content>
+    </Disclosure>
+  );
+};
+```
+
+This configuration API has lost the flexibility of the compound component API, but it is simpler to
+use. Applications can create these APIs for internal components since they know more about the
+context that a component will live in. Things like how to do translations, if there's any additional
+attributes to add (test ids or analytics metadata).
+
+The full working code can be found here:
+https://codesandbox.io/s/disclosure-composable-model-behavior-hooks-tooltip-wrapped-2u8mk

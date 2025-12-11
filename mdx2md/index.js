@@ -74,6 +74,7 @@ async function main() {
       await genLlmsTxt(
         cliOptions.outputDir,
         path.join(cliOptions.outputDir, '..', 'llms.txt'),
+        cliOptions.baseUrl,
         config.logger
       );
 
