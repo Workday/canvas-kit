@@ -2,7 +2,7 @@ import {Meta, StoryObj} from '@storybook/react';
 
 import mdxDoc from './InformationHighlight.mdx';
 
-import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
+import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
 import {Basic as BasicExample} from './examples/Basic';
 import {Body as BodyExample} from './examples/Body';
 import {Heading as HeadingExample} from './examples/Heading';
@@ -13,7 +13,7 @@ import {IconCritical as IconCriticalExamples} from './examples/CustomIconCritica
 import {RTL as RTLExample} from './examples/RTL';
 
 export default {
-  title: 'Preview/Information Highlight',
+  title: 'Components/Indicators/Information Highlight',
   component: InformationHighlight,
   tags: ['autodocs'],
   parameters: {

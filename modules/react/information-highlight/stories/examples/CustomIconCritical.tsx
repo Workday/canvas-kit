@@ -1,5 +1,5 @@
 import React from 'react';
-import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
+import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
 import {chartIcon} from '@workday/canvas-system-icons-web';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {system} from '@workday/canvas-tokens-web';

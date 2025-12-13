@@ -8,7 +8,7 @@ import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
 import {gridIcon, listViewIcon, listDetailIcon} from '@workday/canvas-system-icons-web';
 
 export default {
-  title: 'Testing/Components/Segmented Control',
+  title: 'Testing/Buttons/Segmented Control',
   component: SegmentedControl,
   parameters: {
     chromatic: {
