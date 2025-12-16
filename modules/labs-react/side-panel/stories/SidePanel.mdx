@@ -1,0 +1,141 @@
+import {ExampleCodeBlock, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import * as SidePanelStories from './SidePanel.stories';
+
+import {Basic} from './examples/Basic';
+import {HiddenName} from './examples/HiddenName';
+import {AlternatePanel} from './examples/Variant';
+import {ExternalControl} from './examples/ExternalControl';
+import {RightOrigin} from './examples/RightOrigin';
+import {AlwaysOpen} from './examples/AlwaysOpen';
+import {OnExpandedChange} from './examples/OnExpandedChange';
+import {OnStateTransition} from './examples/OnStateTransition';
+
+<Meta of={SidePanelStories} />
+
+# Canvas Kit Side Panel
+
+`SidePanel` is a collaspible container that anchors to the left or right side of the screen.
+
+[> Workday Design Reference](https://design.workday.com/components/containers/side-panel)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-preview-react
+```
+
+## Usage
+
+### Basic Example
+
+`SidePanel` is composed of three parts:
+
+- The panel container
+- An accessible name (either on a visible element or hidden)
+- A toggle button to control the expand / collapse states
+
+Bidirectional support is built into `SidePanel`. As seen in the example below, CSS Flexbox flips the
+page layout and the panel's contents. `SidePanel` also has logic to flip the position and direction
+of the `ToggleButton` as well as the direction of the expand / collapse animation. If you're using
+CSS Flexbox for layouts and using the provided components, you shouldn't have to provide any custom
+logic or styling for bidirecitonal support.
+
+<ExampleCodeBlock code={Basic} />
+
+### Hidden Name
+
+`SidePanel` must always have an accessible label for both the HTML `<section>` container and the
+`ToggleButton`. The `labelProps` component must always be present in the DOM in order for the
+`panelProps` and `controlProps` component labels to be assigned properly. A `hidden` attribute can
+be applied to the `labelProps` component. In the example below, we are demonstrating the
+`AccessibleHide` component that relies on CSS properties to visually hide text for screen readers
+only.
+
+<ExampleCodeBlock code={HiddenName} />
+
+### Alternate Variant
+
+`SidePanel` has one variant, `alternate`, which you can supply as a top-level prop. Default depth of
+`alternate` variant is 5, if `alternate` SidePanel has an overlay behavior the depth 6 should be
+used (this case is covered in the Examples section).
+
+<ExampleCodeBlock code={AlternatePanel} />
+
+### External Control
+
+Sometimes you'll want to control `SidePanel`'s' expand / collapse behavior from outside the
+component. In that case, you can use the `controlProps` supplied by the `useSidePanel` hook.
+
+#### Notes about accessibility
+
+The `controlProps` object delivers ARIA attributes to a component under the following assumptions:
+
+1. The control is an icon button that does not already have an accessible name
+2. The control appears at (or near) the top of the expandable content in the `SidePanel`
+
+Spreading the `controlProps` onto an external control can introduce serious accessibility issues:
+
+- `aria-labelledby` HTML `id` reference may become invalid when the SidePanel is collapsed, or when
+  the `labelProps` component isn't present in the DOM.
+- `aria-labelledby` will change the name of `controlProps` component to the title of the
+  `SidePanel`. (This may be undesirable. For example, the "Show Side Panel" button will be
+  overwritten with the "Tasks Panel" heading.)
+- `aria-expanded` won't make sense to screen reader users when the expanded `SidePanel` content
+  isn't logically following the control.
+- `aria-controls` is unsupported by screen readers and will not allow users to navigate to the
+  controlled content.
+
+In the following example, the `controlProps` click handler function is passed down to the
+`SecondaryButton` and a toggle state was added to the button using the `aria-pressed` property.
+
+<ExampleCodeBlock code={ExternalControl} />
+
+### Right Origin
+
+By default, `SidePanel` uses a `left` origin. This sets the `ToggleButton`'s position and direction
+as well as the direction of the animation. But you can set `SidePanel`'s origin to `"right"` to flip
+these. As with the left-origin panel, all right-origin styles have bidirecitonal support.
+
+<ExampleCodeBlock code={RightOrigin} />
+
+### Always Open
+
+If you do not need `SidePanel`'s' expand / collapse behavior, you can simply omit the `controlProps`
+and `ToggleButton`.
+
+<ExampleCodeBlock code={AlwaysOpen} />
+
+The majority of `SidePanel`'s logic and funcitonality lives in this container component. Most of
+this functionality has been described in the examples above, but there a couple specific callbacks
+worth mentioning here.
+
+### onExpandedChange
+
+The `onExpandedChange` callback is called when the boolean `expanded` state is updated. This is a
+handy way to hook into these updates to trigger side-effects. Below is an example:
+
+<ExampleCodeBlock code={OnExpandedChange} />
+
+### onStateTransition
+
+While `onExpandedChange` works well for discrete boolean state changes, there may be occasions where
+you also need transition states. In these situations, `onStateTransition` is a better fit. This
+callback it called on all state transitions and returns the current transtion state. This can be one
+of four `SidePanelTransitionStates`, `expanding`, `expanded`, `collapsing`, and `collapsed`. Below
+is an example:
+
+<ExampleCodeBlock code={OnStateTransition} />
+
+## Component API
+
+<SymbolDoc name="SidePanel" fileName="/preview-react/" />
+
+## Hooks
+
+### useSidePanel
+
+<SymbolDoc name="useSidePanel" fileName="/preview-react/" />
+
+## Specifications
+
+<Specifications file="SidePanelPreview.spec.ts" name="Side Panel" />
