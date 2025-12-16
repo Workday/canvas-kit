@@ -59,7 +59,7 @@ describe('Promote InformationHighlight to main package', () => {
         `;
 
       const expected = stripIndent`
-            import { InformationHighlight as CanvasInformationHighlight } from "@workday/canvas-kit-react/information-highlight";
+          import { InformationHighlight as CanvasInformationHighlight } from "@workday/canvas-kit-react/information-highlight";
         `;
 
       expectTransform(input, expected);
