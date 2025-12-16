@@ -4,7 +4,6 @@
   ],
   "version": "13.2.45",
   "npmClient": "yarn",
-  "useWorkspaces": true,
   "command": {
     "version": {
       "gitTagVersion": false,
