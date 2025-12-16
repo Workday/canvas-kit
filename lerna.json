@@ -2,9 +2,8 @@
   "packages": [
     "modules/**"
   ],
-  "version": "13.2.45",
+  "version": "13.2.46",
   "npmClient": "yarn",
-  "useWorkspaces": true,
   "command": {
     "version": {
       "gitTagVersion": false,
