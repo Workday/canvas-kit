@@ -43,6 +43,7 @@ function isStyleProps(prop: string): boolean {
 /**
  * This function has the same signature as {@link handleCsProp} and also calls `handleCsProps`, but
  * adds support for style props. It can be used as a drop-in replacement for `handleCsProps`.
+ * @deprecated ⚠️ `mergeStyles` is deprecated since it supports style props. Use `handleCsProps` to ensure correct style merging order. For more information view our [docs](https://workday.github.io/canvas-kit/?path=/docs/styling-guides-merging-styles--docs#handlecsprop).
  */
 export function mergeStyles<T extends {}>(
   /**

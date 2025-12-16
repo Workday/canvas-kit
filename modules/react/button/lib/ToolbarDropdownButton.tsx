@@ -1,50 +1,81 @@
-import {colors, space, borderRadius} from '@workday/canvas-kit-react/tokens';
-import {
-  useTheme,
-  Themeable,
-  EmotionCanvasTheme,
-  createComponent,
-  styled,
-  StyledType,
-  focusRing,
-} from '@workday/canvas-kit-react/common';
-import {ButtonColors} from './types';
-import {BaseButton} from './BaseButton';
+import {brand, system} from '@workday/canvas-tokens-web';
+import {calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
+import {focusRing, createComponent} from '@workday/canvas-kit-react/common';
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
+
+import {BaseButton, buttonStencil} from './BaseButton';
 import {ToolbarIconButtonProps} from './ToolbarIconButton';
-import {brand} from '@workday/canvas-tokens-web';
 
 export interface ToolbarDropdownButtonProps
-  extends Omit<ToolbarIconButtonProps, 'toggled' | 'onToggleChange'>,
-    Themeable {}
+  extends Omit<ToolbarIconButtonProps, 'toggled' | 'onToggleChange'> {}
 
-const StyledToolbarDropdownButton = styled(BaseButton)<StyledType & ToolbarDropdownButtonProps>({
-  padding: space.zero,
-  minWidth: space.l,
-  width: 'auto',
-  height: space.l,
-  borderRadius: borderRadius.m,
-  gap: space.zero,
-  '& .wd-icon': {
-    display: 'inline-block',
-    width: 20,
-    height: 20,
+export const toolbarDropdownButtonStencil = createStencil({
+  extends: buttonStencil,
+  parts: {
+    chevron: 'toolbar-dropdown-btn-arrow',
+    customIcon: 'toolbar-dropdown-btn-custom-icon',
   },
-  '& .wdc-toolbar-dropdown-btn-arrow': {
-    margin: '0 2px 0 0',
-  },
-  '& .wdc-toolbar-dropdown-btn-custom-icon': {
-    marginLeft: `${space.xxxs}`,
-    marginRight: 0,
-    width: 18, // decrease the space between a custom icon and the chevron per design
-  },
-  '&:focus-visible, &.focus': {
-    ...focusRing({
-      width: 2,
-      separation: 0,
-      innerColor: 'transparent',
-      outerColor: brand.common.focusOutline,
-    }),
+  base: ({chevronPart, customIconPart}) => ({
+    padding: system.space.zero,
+    minWidth: system.space.x8,
+    gap: system.space.zero,
+    [buttonStencil.vars.borderRadius]: system.shape.x1,
+    [systemIconStencil.vars.color]: system.color.fg.muted.soft,
+
+    '&:focus-visible, &.focus': {
+      [buttonStencil.vars.background]: system.color.bg.transparent.default,
+      [systemIconStencil.vars.color]: system.color.fg.muted.soft,
+      ...focusRing({
+        width: 2,
+        separation: 0,
+        innerColor: system.color.border.transparent,
+        outerColor: brand.common.focusOutline,
+      }),
+    },
+
+    '&:hover, &.hover': {
+      [buttonStencil.vars.background]: system.color.bg.alt.default,
+      [systemIconStencil.vars.color]: system.color.fg.muted.stronger,
+    },
+
+    '&:active, &.active': {
+      [buttonStencil.vars.background]: system.color.bg.alt.stronger,
+      [systemIconStencil.vars.color]: system.color.fg.muted.stronger,
+    },
+
+    '&:disabled, &.disabled': {
+      [buttonStencil.vars.background]: system.color.bg.transparent.default,
+      [systemIconStencil.vars.color]: system.color.fg.disabled,
+    },
+
+    [customIconPart]: {
+      marginInlineStart: system.space.x1,
+      marginInlineEnd: calc.negate(px2rem(2)),
+    },
+
+    [chevronPart]: {
+      margin: 0,
+      marginInlineEnd: px2rem(2),
+    },
+  }),
+  modifiers: {
+    shouldMirrorIcon: {
+      true: ({customIconPart}) => ({
+        [customIconPart]: {
+          marginInlineEnd: 0,
+          marginInlineStart: px2rem(2),
+        },
+      }),
+    },
+    shouldMirrorIconInRTL: {
+      true: ({customIconPart}) => ({
+        [`&:dir(rtl) ${customIconPart}`]: {
+          marginInlineEnd: 0,
+          marginInlineStart: px2rem(2),
+        },
+      }),
+    },
   },
 });
 
@@ -52,11 +83,9 @@ export const ToolbarDropdownButton = createComponent('button')({
   displayName: 'ToolbarDropdownButton',
   Component: (
     {
-      // TODO: Fix useTheme and make it a real hook
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      theme = useTheme(),
       icon,
       shouldMirrorIcon = false,
+      shouldMirrorIconInRTL = false,
       children,
       ...elemProps
     }: ToolbarDropdownButtonProps,
@@ -64,52 +93,34 @@ export const ToolbarDropdownButton = createComponent('button')({
     Element
   ) => {
     return (
-      <StyledToolbarDropdownButton
+      <BaseButton
         ref={ref}
         as={Element}
-        colors={getToolbarDropdownButtonColors(theme)}
-        {...elemProps}
+        size="small"
+        {...handleCsProp(
+          elemProps,
+          toolbarDropdownButtonStencil({shouldMirrorIcon, shouldMirrorIconInRTL})
+        )}
       >
         {icon ? (
           <BaseButton.Icon
-            className={'wdc-toolbar-dropdown-btn-custom-icon'}
+            className="wdc-toolbar-dropdown-btn-custom-icon"
             icon={icon}
             shouldMirrorIcon={shouldMirrorIcon}
+            shouldMirrorIconInRTL={shouldMirrorIconInRTL}
+            {...toolbarDropdownButtonStencil.parts.customIcon}
           />
         ) : (
           children
         )}
         <BaseButton.Icon
-          className={'wdc-toolbar-dropdown-btn-arrow'}
+          className="wdc-toolbar-dropdown-btn-arrow"
           icon={chevronDownSmallIcon}
           shouldMirrorIcon={shouldMirrorIcon}
+          shouldMirrorIconInRTL={shouldMirrorIconInRTL}
+          {...toolbarDropdownButtonStencil.parts.chevron}
         />
-      </StyledToolbarDropdownButton>
+      </BaseButton>
     );
   },
 });
-
-const getToolbarDropdownButtonColors = (theme: EmotionCanvasTheme): ButtonColors => {
-  return {
-    default: {
-      icon: colors.licorice200,
-    },
-    hover: {
-      icon: colors.licorice500,
-      background: colors.soap300,
-    },
-    active: {
-      icon: colors.licorice500,
-      background: colors.soap500,
-    },
-    focus: {
-      icon: colors.licorice200,
-      background: 'transparent',
-    },
-    disabled: {
-      icon: colors.soap600,
-      background: 'transparent',
-      opacity: '1',
-    },
-  };
-};

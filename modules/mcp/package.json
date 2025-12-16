@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-mcp",
-  "version": "13.2.47",
+  "version": "14.1.24",
   "description": "MCP package for Canvas Kit",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -32,7 +32,7 @@
   "scripts": {
     "build:copy": "tsx ./build/index.ts",
     "build:types": "tsc --project tsconfig.build.json -d true --declarationDir dist/types --emitDeclarationOnly --pretty",
-    "build:mcp": "esbuild lib/index.ts --bundle --platform=node --outfile=dist/index.js --format=esm --sourcemap && esbuild lib/cli.ts --bundle --platform=node --outfile=dist/cli.js --format=esm --sourcemap",
+    "build:mcp": "esbuild lib/index.ts --bundle --platform=node --packages=external --outfile=dist/index.js --format=esm --sourcemap && esbuild lib/cli.ts --bundle --platform=node --packages=external --outfile=dist/cli.js --format=esm --sourcemap",
     "build": "npm-run-all build:copy build:types build:mcp",
     "clean": "rimraf dist && rimraf .build-info && mkdirp dist"
   },
@@ -46,7 +46,7 @@
     "@modelcontextprotocol/sdk": "^1.20.2"
   },
   "devDependencies": {
-    "@types/node": "^14.0.0",
+    "@types/node": "^22.0.0",
     "esbuild": "^0.25.11",
     "mkdirp": "^1.0.3",
     "rimraf": "^5.0.0",
