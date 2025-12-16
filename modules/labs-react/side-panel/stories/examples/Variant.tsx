@@ -30,7 +30,6 @@ const stylesOverride = {
 
 export const AlternatePanel = () => {
   const {direction, toggleDirection} = useDirection();
-  // const {expanded, panelProps, labelProps, controlProps} = useSidePanel();
   const model = useSidePanelModel({});
 
   return (
