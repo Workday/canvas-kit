@@ -8,7 +8,7 @@ import {
 import {SidePanel} from '../index';
 
 export default {
-  title: 'Testing/Preview/Side Panel',
+  title: 'Testing/Labs/Side Panel',
   component: SidePanel,
   parameters: {
     chromatic: {
@@ -51,8 +51,8 @@ export const SidePanelStates = () => (
     >
       {props => (
         <div style={{height: 480}}>
-          <SidePanel {...props} touched={false}>
-            <SidePanel.ToggleButton aria-label="toggle button" />
+          <SidePanel {...props}>
+            <SidePanel.ToggleButton />
           </SidePanel>
         </div>
       )}

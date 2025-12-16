@@ -1,7 +1,7 @@
 import {Meta, StoryObj} from '@storybook/react';
 import mdxDoc from './SidePanel.mdx';
 
-import {SidePanel} from '@workday/canvas-kit-preview-react/side-panel';
+import {SidePanel} from '@workday/canvas-kit-labs-react/side-panel';
 // Examples
 import {Basic as BasicExample} from './examples/Basic';
 import {HiddenName as HiddenNameExample} from './examples/HiddenName';
@@ -13,7 +13,7 @@ import {OnExpandedChange as OnExpandedChangeExample} from './examples/OnExpanded
 import {OnStateTransition as OnStateTransitionExample} from './examples/OnStateTransition';
 
 export default {
-  title: 'Preview/Side Panel',
+  title: 'Labs/Side Panel',
   component: SidePanel,
   tags: ['autodocs'],
   parameters: {

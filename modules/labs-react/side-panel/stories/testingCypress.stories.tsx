@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {SidePanel, useSidePanel} from '@workday/canvas-kit-labs-react/side-panel';
+import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-labs-react/side-panel';
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 
@@ -15,43 +15,31 @@ const Container = props => {
 const label = `Accessible Label Name`;
 
 export const Default = () => {
-  const {labelProps, panelProps, controlProps} = useSidePanel();
-
   return (
     <Container>
-      <SidePanel {...panelProps}>
-        <span hidden {...labelProps}>
-          {label}
-        </span>
-        <SidePanel.ToggleButton {...controlProps} />
+      <SidePanel>
+        <span hidden>{label}</span>
+        <SidePanel.ToggleButton />
       </SidePanel>
     </Container>
   );
 };
 export const AsDiv = () => {
-  const {labelProps, panelProps, controlProps} = useSidePanel();
-
   return (
     <Container>
-      <SidePanel as="div" role="region" {...panelProps}>
-        <span hidden {...labelProps}>
-          {label}
-        </span>
-        <SidePanel.ToggleButton {...controlProps} />
+      <SidePanel as="div" role="region">
+        <span hidden>{label}</span>
+        <SidePanel.ToggleButton />
       </SidePanel>
     </Container>
   );
 };
 export const AsAside = () => {
-  const {labelProps, panelProps, controlProps} = useSidePanel();
-
   return (
     <Container>
-      <SidePanel as="aside" {...panelProps}>
-        <span hidden {...labelProps}>
-          {label}
-        </span>
-        <SidePanel.ToggleButton {...controlProps} />
+      <SidePanel as="aside">
+        <span hidden>{label}</span>
+        <SidePanel.ToggleButton />
       </SidePanel>
       <div>Main Content</div>
     </Container>
@@ -59,8 +47,6 @@ export const AsAside = () => {
 };
 
 export const FirstFocusable = () => {
-  const {labelProps, panelProps, controlProps} = useSidePanel();
-
   const Header = props => {
     return (
       <div
@@ -90,12 +76,10 @@ export const FirstFocusable = () => {
         <Avatar altText="Avatar" onClick={noop} />
       </Header>
       <Container>
-        <SidePanel {...panelProps}>
-          <span hidden {...labelProps}>
-            {label}
-          </span>
+        <SidePanel>
+          <span hidden>{label}</span>
           <h1>Panel Name</h1>
-          <SidePanel.ToggleButton {...controlProps} />
+          <SidePanel.ToggleButton />
           <PrimaryButton>Another Button</PrimaryButton>
         </SidePanel>
       </Container>
