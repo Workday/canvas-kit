@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.1.24](https://github.com/Workday/canvas-kit/releases/tag/v14.1.24) (2025-12-10)
+
+### Components
+
+- fix: Update popupstack to account for scoped theming ([#3635](https://github.com/Workday/canvas-kit/pull/3635)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  [This change](https://github.com/Workday/canvas-kit/pull/3572) completely removed theme forwarding to popups and modals. However, what we really want is to **only** forward theme and the tokens defined by theme if they are provided, otherwise allow global tokens to trickle through to popups and modals.
+  
+  Previously, the `usePopupStack` hook created a CSS class name that was passed to our Popups. We
+  attached those theme styles to that class name. This allowed the theme to be available in our
+  Popups. But it also created a cascade barrier that blocked the global theme from being applied to
+  our Popup components. Because we now use global CSS variables, we no longer need this class name to
+  provide the global theme to Popups. But we have to remove this generated class name to allow the
+  global theme to be applied to Popups.
+  
+  If you want to have scoped theming where a part of your application needs different theming, you can
+  still do this via the `theme` prop.
+  
+  > **Note:** Only the properties of the theme object that are changed will be forward to popups and
+  > modals. IE, if you change theme.palette.primary.main, only those tokens will change for popups and
+  > modals.
+
+
+## [v14.1.23](https://github.com/Workday/canvas-kit/releases/tag/v14.1.23) (2025-12-10)
+
+### Infrastructure
+
+- fix: Update mcp build to account for node require error ([#3637](https://github.com/Workday/canvas-kit/pull/3637)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v14.1.22](https://github.com/Workday/canvas-kit/releases/tag/v14.1.22) (2025-12-08)
 
 
