@@ -21,7 +21,7 @@ export interface SidePanelProps {
    */
   expandedWidth?: number | string;
   /**
-   * The style variant of the side panel. 'standard' is with a `soap100` background, no depth. 'alternate' is a `frenchVanilla100` background with a level 6 depth.
+   * The style variant of the side panel. 'standard' uses a lighter gray background (`system.color.bg.alt.softer`), no depth. 'alternate' uses a white background with depth (`system.color.bg.default` and level 6 depth).
    *
    * @default 'standard'
    */
