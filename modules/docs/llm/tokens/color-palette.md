@@ -1,13 +1,4 @@
----
-title: Color Palette
-tags: hue, base, tokens, palette, global
-platform: web, ios, android
-preamble: true
-description:
-rank: 2
-source_file: guidelines/color/color-palette.mdx
-live_url: https://canvas.workdaydesign.com/guidelines/color/color-palette
----
+# Color Palette
 
 ## Global Palette
 

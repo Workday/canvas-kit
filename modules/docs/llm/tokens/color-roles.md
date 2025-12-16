@@ -1,13 +1,4 @@
----
-title: Color Roles
-tags: color, roles, accessibility
-platform: web, iOS, Android
-preamble: true
-description:
-rank: 3
-source_file: guidelines/color/color-roles.mdx
-live_url: https://canvas.workdaydesign.com/guidelines/color/color-roles
----
+# Color Roles
 
 Color roles provide a systematic approach to applying color across interfaces. Each role serves a
 specific purpose and includes modifiers to control visual emphasis and hierarchy.

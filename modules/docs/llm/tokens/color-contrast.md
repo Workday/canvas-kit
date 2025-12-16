@@ -1,13 +1,4 @@
----
-title: Color Contrast
-preamble: true
-platform: web, ios, android
-description:
-tags: color, contrast, accessibility
-rank: 6
-source_file: guidelines/color/color-contrast.mdx
-live_url: https://canvas.workdaydesign.com/guidelines/color/color-contrast
----
+# Color Contrast
 
 Color pairings should pass contrast requirements to ensure content is readable for everyone. Colors
 in the palette are built with contrast baked in to make it simple to create accessible color

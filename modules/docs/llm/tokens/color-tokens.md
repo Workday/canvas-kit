@@ -1,13 +1,4 @@
----
-title: Color Tokens
-preamble: true
-platform: web, ios, android
-tags: color, scale, palette, lightness, contrast, semantic, system, tokens
-description: Color tokens assign color roles through design tokens
-rank: 5
-source_file: guidelines/color/color-tokens.mdx
-live_url: https://canvas.workdaydesign.com/guidelines/color/color-tokens
----
+# Color Tokens
 
 Design tokens represent design decisions as reusable, named values that drive consistency across
 product teams. Tokens work as a shared language between design and development teams, replacing

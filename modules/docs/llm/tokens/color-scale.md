@@ -1,13 +1,4 @@
----
-title: Color Scale
-preamble: true
-platform: web, ios, android
-tags: color, tonal-scale, palette, lightness, contrast
-description:
-rank: 4
-source_file: guidelines/color/color-scale.mdx
-live_url: https://canvas.workdaydesign.com/guidelines/color/color-scale
----
+# Color Scale
 
 Colors are organized into scales with steps from 0 (lightest) to 1000 (darkest). Colors are designed
 to be perceptually balanced, ensuring consistent lightness across color families. Colors with the
