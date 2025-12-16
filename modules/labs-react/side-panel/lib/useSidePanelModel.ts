@@ -12,12 +12,14 @@ export const useSidePanelModel = createModelHook({
   },
 })(config => {
   // const model = usePopupModel(config);
-  const id = useUniqueId(config.panelId);
+  const panelId = useUniqueId(config.panelId);
+  const labelId = useUniqueId(config.labelId);
   const [expanded, setExpanded] = React.useState<SidePanelTransitionStates>(config.initialExpanded);
 
   const state = {
-    id,
     ...config,
+    panelId,
+    labelId,
     expanded,
   };
 

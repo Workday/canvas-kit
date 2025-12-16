@@ -19,11 +19,7 @@ const stylesOverride = {
 };
 
 export const OnExpandedChange = () => {
-  const model = useSidePanelModel({
-    onExpand: expanded => {
-      console.log(`Side panel is ${expanded ? 'expanded' : 'collapsed'}`);
-    },
-  });
+  const model = useSidePanelModel();
 
   return (
     <Flex cs={stylesOverride.viewport}>

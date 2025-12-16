@@ -18,20 +18,7 @@ const stylesOverride = {
 };
 
 export const OnStateTransition = () => {
-  // const {panelProps, labelProps, controlProps} = useSidePanel();
-  // const [transitionState, setTransitionState] =
-  //   React.useState<SidePanelTransitionStates>('expanded');
-
-  // const handleStateTransition = (transition: SidePanelTransitionStates) => {
-  //   setTransitionState(transition);
-  // };
-
-  const model = useSidePanelModel({
-    onHandleAnimationEnd: data => {
-      console.log(data);
-      // setTransitionState(data.expanded);
-    },
-  });
+  const model = useSidePanelModel();
 
   return (
     <Flex cs={stylesOverride.viewport}>

@@ -23,9 +23,6 @@ export const HiddenName = () => {
     onExpand: expanded => {
       console.log(`expanded prop is: ${expanded ? 'true' : 'false'}`);
     },
-    onHandleAnimationEnd: () => {
-      console.log(`Side Panel is ${model.state.expanded}`);
-    },
   });
 
   return (
