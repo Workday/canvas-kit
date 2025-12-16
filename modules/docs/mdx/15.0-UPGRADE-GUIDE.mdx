@@ -1,0 +1,231 @@
+import {Meta} from '@storybook/addon-docs';
+
+<Meta title="Guides/Upgrade Guides/v15.0/Overview" />
+
+# Canvas Kit 15.0 Upgrade Guide
+
+This guide contains an overview of the changes in Canvas Kit v15. Please
+[reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have
+any questions.
+
+
+## Why You Should Upgrade
+
+v15.0 and v4.0 Canvas Tokens Web introduces new shape, size, gap, and padding tokens to our components. While we still support our old shape and
+space tokens, the new tokens aim to add more semantic meaning to allow for better use and theming.
+
+> **Note:** While v15 and v4 tokens should be backwards compatible with previous versions that use
+> CSS tokens, we strongly advise to migrate both Canvas Kit and Canvas Tokens Web together.
+
+## Table of Contents
+
+- [Codemod](#codemod)
+  - [Instructions](#instructions)
+- [Component Promotions](#component-promotions)
+  - [Segmented Control](#segmented-control-)
+- [Component Updates](#component-updates)
+  - [Buttons](#buttons)
+- [Removals](#removals)
+  - [Segmented Control (Deprecated)](#segmented-control-deprecated)
+- [Glossary](#glossary)
+  - [Main](#main)
+  - [Preview](#preview)
+
+## Codemod
+
+We've provided a [codemod](https://github.com/Workday/canvas-kit/tree/master/modules/codemod) to
+automatically update your code to work with most of the breaking changes in v15. **Breaking changes
+handled by the codemod are marked with 🤖 in the Upgrade Guide.**
+
+A codemod is a script that makes programmatic transformations on your codebase by traversing the
+AST, identifying patterns, and making prescribed changes. This greatly decreases opportunities for
+error and reduces the number of manual updates, which allows you to focus on changes that need your
+attention. **We highly recommend you use the codemod for these reasons.**
+
+If you're new to running codemods or if it's been a minute since you've used one, there are a few
+things you'll want to keep in mind.
+
+- Our codemods are meant to be run sequentially. For example, if you're using v13 of Canvas Kit,
+  you'll need to run the v14 codemod before you run v15.
+- The codemod will update your code to be compatible with the specified version, but it will **not**
+  remove outdated dependencies or upgrade dependencies to the latest version. You'll need to upgrade
+  dependencies on your own.
+  - We recommend upgrading dependencies before running the codemod.
+  - Always review your `package.json` files to make sure your dependency versions look correct.
+- The codemod will not handle every breaking change in v15. You will likely need to make some manual
+  changes to be compatible. Use our Upgrade Guide as a checklist.
+- Codemods are not bulletproof.
+  - Conduct a thorough PR and QA review of all changes to ensure no regressions were introduced.
+  - As a safety precaution, we recommend committing the changes from the codemod as a single
+    isolated commit (separate from other changes) so you can roll back more easily if necessary.
+
+We're here to help! Automatic changes to your codebase can feel scary. You can always reach out to
+our team. We'd be very happy to walk you through the process to set you up for success.
+
+### Instructions
+
+The easiest way to run our codemod is to use `npx` in your terminal.
+
+```sh
+npx @workday/canvas-kit-codemod v15 [path]
+```
+
+Be sure to provide specific directories that need to be updated via the `[path]` argument. This
+decreases the amount of AST the codemod needs to traverse and reduces the chances of the script
+having an error. For example, if your source code lives in `src/`, use `src/` as your `[path]`. Or,
+if you have a monorepo with three packages using Canvas Kit, provide those specific packages as your
+`[path]`.
+
+Alternatively, if you're unable to run the codemod successfully using `npx`, you can install the
+codemod package as a dev dependency, run it with `yarn`, and then remove the package after you're
+finished.
+
+```sh
+yarn add @workday/canvas-kit-codemod --dev
+yarn canvas-kit-codemod v15 [path]
+yarn remove @workday/canvas-kit-codemod
+```
+
+> **Note:** The codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` files. You'll need to
+> manually edit other file types (`.json`, `.mdx`, `.md`, etc.). You may need to run your linter
+> after executing the codemod, as its resulting formatting (spacing, quotes, etc.) may not match
+> your project conventions.
+
+## Component Promotions
+
+### Segmented Control ⚡️
+
+We've promoted `SegmentedControl` from [Preview](/components/buttons/segmented-control/) to [Main](#main). This replaces the deprecated `SegmentedControl` that was previously in Main.
+
+**Before in v14**
+
+```tsx
+import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
+```
+
+**After in v15**
+
+```tsx
+import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
+```
+
+> 🤖 The codemod will handle the change of imports as shown above.
+
+#### API Differences
+
+The new `SegmentedControl` is a [compound component](/getting-started/for-developers/resources/compound-components/)
+with a different API than the deprecated version.
+
+##### Structure Changes
+
+| Deprecated (Old Main) | New (Promoted from Preview)         |
+| --------------------- | ----------------------------------- |
+| `SegmentedControl`    | `SegmentedControl`                  |
+| `SegmentedControl.Button` | `SegmentedControl.List` + `SegmentedControl.Item` |
+
+##### Prop Changes
+
+| Feature          | Deprecated (Old Main)                      | New (Promoted from Preview)                      |
+| ---------------- | ------------------------------------------ | ------------------------------------------------ |
+| Selection        | `value` prop on container                  | `initialValue` prop on container                 |
+| Change handler   | `onChange={(value) => {}}`                 | `onSelect={(data) => setSelected(data.id)}`      |
+| Item identifier  | `value` prop on Button                     | `data-id` prop on Item                           |
+| Disabled (all)   | Not supported                              | `disabled` prop on container model               |
+| Size             | Not supported                              | `size` prop (`small`, `medium`, `large`)         |
+| Orientation      | Not supported                              | `orientation` prop (`horizontal`, `vertical`)    |
+| Text labels      | Not supported                              | `children` on Item                               |
+| Tooltips         | Not supported                              | `tooltipProps` on Item                           |
+| Accessibility    | Manual                                     | Built-in `aria-label` on List                    |
+
+##### Code Migration
+
+**Deprecated API (Old Main)**
+
+```tsx
+import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
+
+const [value, setValue] = React.useState<string | number>('list-view');
+
+<SegmentedControl value={value} onChange={setValue}>
+  <SegmentedControl.Button icon={listViewIcon} value="list-view" />
+  <SegmentedControl.Button icon={worksheetsIcon} value="table-view" />
+  <SegmentedControl.Button icon={deviceTabletIcon} value="device-view" />
+</SegmentedControl>
+```
+
+**New API (v15)**
+
+```tsx
+import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
+
+const [value, setValue] = React.useState('list-view');
+
+<SegmentedControl initialValue={value} onSelect={data => setValue(data.id)}>
+  <SegmentedControl.List aria-label="View type">
+    <SegmentedControl.Item data-id="list-view" icon={listViewIcon} tooltipProps={{title: 'List'}} />
+    <SegmentedControl.Item data-id="table-view" icon={worksheetsIcon} tooltipProps={{title: 'Table'}} />
+    <SegmentedControl.Item data-id="device-view" icon={deviceTabletIcon} tooltipProps={{title: 'Device'}} />
+  </SegmentedControl.List>
+</SegmentedControl>
+```
+
+##### New Features
+
+The promoted `SegmentedControl` includes several new features:
+
+- **Text and icon support**: Items can display text, icons, or both
+- **Size variants**: `small`, `medium`, and `large` sizes
+- **Vertical orientation**: Use `orientation="vertical"` for vertical layouts
+- **Built-in tooltips**: Add tooltips via `tooltipProps` on items
+- **Disabled state**: Disable all items via the model or individual items
+- **Dynamic items**: Render items dynamically using the collection API
+
+```tsx
+// Text only
+<SegmentedControl.Item data-id="yearly">Yearly</SegmentedControl.Item>
+
+// Icon with text
+<SegmentedControl.Item data-id="list" icon={listViewIcon}>List View</SegmentedControl.Item>
+
+// With size and orientation
+<SegmentedControl size="large" orientation="vertical">
+  ...
+</SegmentedControl>
+```
+
+## Component Updates
+
+### Buttons
+
+**PR:** [#3604](https://github.com/Workday/canvas-kit/pull/3604)
+
+The Following components have been updated to use our new `size`, `padding`, `gap` and `shape`
+tokens. These changes are **only visual**.
+
+`PrimaryButton`, `SecondaryButton`, `DeleteButton`, `TertiaryButton`, `ToolbarButton`,
+`ToolbarDropdownButton`, `Hyperlink`, `ExternalHyperlink`, and `ActionBar`.
+
+## Removals
+
+### Segmented Control (Deprecated)
+
+The deprecated `SegmentedControl` that was previously in `@workday/canvas-kit-react/segmented-control`
+has been removed. This was the older implementation that used `SegmentedControl.Button` subcomponents.
+
+Please migrate to the new `SegmentedControl` component (promoted from Preview) which uses a compound
+component pattern with `SegmentedControl.List` and `SegmentedControl.Item`. See the
+[API Differences](#api-differences) section above for migration guidance.
+
+## Glossary
+
+For an overview of the different packages we provide, please view our docs
+[here](https://workday.github.io/canvas-kit/?path=/docs/guides-packages--docs).
+
+### Main
+
+Components in the Main package are stable and ready for production use.
+
+### Preview
+
+Components in the Preview package are mostly stable but may still receive breaking changes before
+being promoted to Main.
