@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.1.28](https://github.com/Workday/canvas-kit/releases/tag/v14.1.28) (2025-12-17)
+
+### Components
+
+- fix: Update buttons to use the colors prop value for icons and fallback to currentColor ([#3649](https://github.com/Workday/canvas-kit/pull/3649)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v14.1.27](https://github.com/Workday/canvas-kit/releases/tag/v14.1.27) (2025-12-17)
 
 ### Dependencies
