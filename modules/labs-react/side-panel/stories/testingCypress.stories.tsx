@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {SidePanel} from '@workday/canvas-kit-labs-react/side-panel';
+import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-labs-react/side-panel';
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 
@@ -15,30 +15,39 @@ const Container = props => {
 const label = `Accessible Label Name`;
 
 export const Default = () => {
+  const model = useSidePanelModel();
   return (
     <Container>
-      <SidePanel>
-        <span hidden>{label}</span>
+      <SidePanel model={model}>
+        <span hidden id={model.state.labelId}>
+          {label}
+        </span>
         <SidePanel.ToggleButton />
       </SidePanel>
     </Container>
   );
 };
 export const AsDiv = () => {
+  const model = useSidePanelModel();
   return (
     <Container>
-      <SidePanel as="div" role="region">
-        <span hidden>{label}</span>
+      <SidePanel as="div" role="region" model={model}>
+        <span hidden id={model.state.labelId}>
+          {label}
+        </span>
         <SidePanel.ToggleButton />
       </SidePanel>
     </Container>
   );
 };
 export const AsAside = () => {
+  const model = useSidePanelModel();
   return (
     <Container>
-      <SidePanel as="aside">
-        <span hidden>{label}</span>
+      <SidePanel as="aside" model={model}>
+        <span hidden id={model.state.labelId}>
+          {label}
+        </span>
         <SidePanel.ToggleButton />
       </SidePanel>
       <div>Main Content</div>
@@ -47,6 +56,7 @@ export const AsAside = () => {
 };
 
 export const FirstFocusable = () => {
+  const model = useSidePanelModel();
   const Header = props => {
     return (
       <div
@@ -76,8 +86,10 @@ export const FirstFocusable = () => {
         <Avatar altText="Avatar" onClick={noop} />
       </Header>
       <Container>
-        <SidePanel>
-          <span hidden>{label}</span>
+        <SidePanel model={model}>
+          <span hidden id={model.state.labelId}>
+            {label}
+          </span>
           <h1>Panel Name</h1>
           <SidePanel.ToggleButton />
           <PrimaryButton>Another Button</PrimaryButton>
