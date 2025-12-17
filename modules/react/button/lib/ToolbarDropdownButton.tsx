@@ -1,10 +1,10 @@
 import {brand, system} from '@workday/canvas-tokens-web';
-import {calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {calc, createStencil, handleCsProp, px2rem, cssVar} from '@workday/canvas-kit-styling';
 import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {focusRing, createComponent} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
-import {BaseButton, buttonStencil} from './BaseButton';
+import {BaseButton, buttonColorPropVars, buttonStencil} from './BaseButton';
 import {ToolbarIconButtonProps} from './ToolbarIconButton';
 
 export interface ToolbarDropdownButtonProps
@@ -21,11 +21,17 @@ export const toolbarDropdownButtonStencil = createStencil({
     minWidth: system.space.x8,
     gap: system.space.zero,
     [buttonStencil.vars.borderRadius]: system.shape.x1,
-    [systemIconStencil.vars.color]: system.color.fg.muted.soft,
+    [systemIconStencil.vars.color]: cssVar(
+      buttonColorPropVars.default.icon,
+      system.color.fg.muted.soft
+    ),
 
     '&:focus-visible, &.focus': {
       [buttonStencil.vars.background]: system.color.bg.transparent.default,
-      [systemIconStencil.vars.color]: system.color.fg.muted.soft,
+      [systemIconStencil.vars.color]: cssVar(
+        buttonColorPropVars.focus.icon,
+        system.color.fg.muted.soft
+      ),
       ...focusRing({
         width: 2,
         separation: 0,
@@ -36,17 +42,26 @@ export const toolbarDropdownButtonStencil = createStencil({
 
     '&:hover, &.hover': {
       [buttonStencil.vars.background]: system.color.bg.alt.default,
-      [systemIconStencil.vars.color]: system.color.fg.muted.stronger,
+      [systemIconStencil.vars.color]: cssVar(
+        buttonColorPropVars.hover.icon,
+        system.color.fg.muted.stronger
+      ),
     },
 
     '&:active, &.active': {
       [buttonStencil.vars.background]: system.color.bg.alt.stronger,
-      [systemIconStencil.vars.color]: system.color.fg.muted.stronger,
+      [systemIconStencil.vars.color]: cssVar(
+        buttonColorPropVars.active.icon,
+        system.color.fg.muted.stronger
+      ),
     },
 
     '&:disabled, &.disabled': {
       [buttonStencil.vars.background]: system.color.bg.transparent.default,
-      [systemIconStencil.vars.color]: system.color.fg.disabled,
+      [systemIconStencil.vars.color]: cssVar(
+        buttonColorPropVars.disabled.icon,
+        system.color.fg.disabled
+      ),
     },
 
     [customIconPart]: {

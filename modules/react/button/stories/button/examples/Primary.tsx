@@ -17,7 +17,11 @@ const parentContainerStyles = createStyles({
 export const Primary = () => (
   <Flex cs={parentContainerStyles}>
     <PrimaryButton>Primary</PrimaryButton>
-    <PrimaryButton icon={plusIcon} iconPosition="start">
+    <PrimaryButton
+      icon={plusIcon}
+      iconPosition="start"
+      // colors={{default: {icon: 'yellow', label: 'blue'}}}
+    >
       Primary
     </PrimaryButton>
     <PrimaryButton icon={caretDownIcon} iconPosition="end">
