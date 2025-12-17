@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.48](https://github.com/Workday/canvas-kit/releases/tag/v13.2.48) (2025-12-17)
+
+### Dependencies
+
+- fix: Update Storybook version based a security vulnerability ([#3648](https://github.com/Workday/canvas-kit/pull/3648)) ([@alanbsmith](https://github.com/alanbsmith), Alan Smith)
+
+
 ## [v13.2.47](https://github.com/Workday/canvas-kit/releases/tag/v13.2.47) (2025-12-16)
 
 ### Components
