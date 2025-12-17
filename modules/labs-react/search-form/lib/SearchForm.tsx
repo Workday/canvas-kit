@@ -1,11 +1,7 @@
 import * as React from 'react';
-import {CSSObject} from '@emotion/styled';
-import {colors, space} from '@workday/canvas-kit-react/tokens';
 import {
   GrowthBehavior,
-  styled,
   generateUniqueId,
-  filterOutProps,
   accessibleHideStyles,
 } from '@workday/canvas-kit-react/common';
 import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
@@ -15,8 +11,16 @@ import {Combobox} from '@workday/canvas-kit-labs-react/combobox';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {searchThemes, SearchTheme, SearchThemeAttributes} from './themes';
 import chroma from 'chroma-js';
-
-export interface SearchFormProps extends GrowthBehavior, React.FormHTMLAttributes<HTMLFormElement> {
+import {CSProps, calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
+/**
+ * @deprecated ⚠️ `SearchFormProps` is deprecated and will be removed in a future major version. Please reference our [Autocomplete example](https://workday.github.io/canvas-kit/?path=/docs/features-combobox--docs#usage).
+ */
+export interface SearchFormProps
+  extends GrowthBehavior,
+    React.FormHTMLAttributes<HTMLFormElement>,
+    CSProps {
   /**
    * The function called when the SearchForm form is submitted. The current input value is passed to the callback function.
    */
@@ -98,7 +102,9 @@ export interface SearchFormProps extends GrowthBehavior, React.FormHTMLAttribute
    */
   labelId?: string;
 }
-
+/**
+ * @deprecated ⚠️ `SearchFormState` is deprecated and will be removed in a future major version. Please reference our [Autocomplete example](https://workday.github.io/canvas-kit/?path=/docs/features-combobox--docs#usage).
+ */
 export interface SearchFormState {
   showForm: boolean;
   searchQuery: string;
@@ -118,175 +124,326 @@ function getInputColors(theme: SearchThemeAttributes, isFocused?: boolean) {
   };
 }
 
-const formCollapsedBackground = colors.frenchVanilla100;
+const formCollapsedBackground = '#fff';
 
-const maxWidth = 480;
-const minWidth = 120;
-
-const StyledSearchForm = styled('form')<
-  Pick<SearchFormProps, 'isCollapsed' | 'rightAlign' | 'grow'> & Pick<SearchFormState, 'showForm'>
->(
-  {
+/**
+ * @deprecated ⚠️ `searchFormStencil` is deprecated and will be removed in a future major version. Please reference our [Autocomplete example](https://workday.github.io/canvas-kit/?path=/docs/features-combobox--docs#usage).
+ */
+export const searchFormStencil = createStencil({
+  vars: {
+    minWidth: '',
+    maxWidth: '',
+    height: '',
+    background: '',
+    backgroundFocus: '',
+    backgroundHover: '',
+    color: '',
+    colorFocus: '',
+    placeholderColor: '',
+    placeholderColorFocus: '',
+    boxShadow: '',
+    boxShadowFocus: '',
+  },
+  parts: {
+    searchContainer: 'search-form-container',
+    combobox: 'search-form-combobox',
+    closeButton: 'search-form-close-button',
+    searchField: 'search-form-field',
+    submitSearchIcon: 'search-form-submit-search-icon',
+    openSearchIcon: 'search-form-open-search-icon',
+    searchInput: 'search-form-input',
+    closeButtonPart: 'search-form-close-button',
+  },
+  base: ({
+    minWidth,
+    maxWidth,
+    searchContainerPart,
+    height,
+    comboboxPart,
+    closeButtonPart,
+    searchFieldPart,
+    submitSearchIconPart,
+    openSearchIconPart,
+    searchInputPart,
+    background,
+    backgroundFocus,
+    backgroundHover,
+    color,
+    colorFocus,
+    placeholderColor,
+    placeholderColorFocus,
+    boxShadow,
+    boxShadowFocus,
+  }) => ({
     position: 'relative',
     flexGrow: 1,
     display: 'flex',
     alignItems: 'center',
-    marginLeft: space.m,
-    minWidth: minWidth,
-  },
-  ({isCollapsed, showForm, rightAlign, grow}) => {
-    const collapseStyles: CSSObject = isCollapsed
-      ? {
-          top: 0,
-          right: 0,
-          left: 0,
-          bottom: 0,
-          margin: 0,
-          position: showForm ? 'absolute' : 'relative',
-          backgroundColor: showForm ? formCollapsedBackground : 'rgba(0, 0, 0, 0)',
-          transition: 'background-color 120ms',
-          maxWidth: showForm ? 'none' : `calc(${space.xl} + ${space.xxs})`,
-          minWidth: `calc(${space.xl} + ${space.xs})`,
-          overflow: showForm ? 'visible' : 'hidden',
-          zIndex: 1,
-        }
-      : {};
-    const rightAlignStyles: CSSObject = rightAlign
-      ? {
-          textAlign: 'right',
-          maxWidth: grow ? '100%' : maxWidth,
-        }
-      : {};
-    return {...rightAlignStyles, ...collapseStyles};
-  }
-);
-
-const SearchContainer = styled('div')<Pick<SearchFormProps, 'height'>>(
-  {
-    position: `relative`,
-    display: 'flex',
-    alignItems: 'center',
-    width: `100%`,
-    textAlign: 'left',
-  },
-  ({height}) => ({
-    minHeight: height,
-  })
-);
-
-const SearchCombobox = styled(Combobox)({
-  width: `100%`,
-});
-
-const SearchIcon = styled(TertiaryButton, {
-  shouldForwardProp: filterOutProps(['isHidden', 'isCollapsed']),
-})<Pick<SearchFormProps, 'isCollapsed'> & {isHidden: boolean}>(({isCollapsed, isHidden}) => {
-  return {
-    position: `absolute`,
-    margin: isCollapsed ? `auto ${space.xxs}` : `auto ${space.xxxs}`,
-    top: 0,
-    bottom: 0,
-    left: 0,
-    padding: 0,
-    zIndex: 3,
-    display: isHidden ? 'none' : 'flex',
-  };
-});
-
-const CloseButton = styled(TertiaryButton, {
-  shouldForwardProp: filterOutProps(['isCollapsed', 'showForm']),
-})<Pick<SearchFormProps, 'isCollapsed'> & Pick<SearchFormState, 'showForm'>>(
-  ({isCollapsed, showForm}) => {
-    const collapseStyles: CSSObject =
-      isCollapsed && showForm
-        ? {
-            display: 'inline-block',
-          }
-        : {
-            display: 'none',
-          };
-
-    return {
+    marginInlineStart: system.space.x6,
+    minWidth: cssVar(minWidth, px2rem(120)),
+    maxWidth: cssVar(maxWidth, px2rem(480)),
+    [searchContainerPart]: {
+      position: `relative`,
+      display: 'flex',
+      alignItems: 'center',
+      width: `100%`,
+      textAlign: 'left',
+      minHeight: cssVar(height, system.space.x10),
+    },
+    [comboboxPart]: {
+      width: `100%`,
+    },
+    [closeButtonPart]: {
       position: `absolute`,
       top: 0,
       bottom: 0,
       right: 0,
-      margin: `auto ${space.xxs}`,
+      margin: `auto ${system.space.x2}`,
       zIndex: 3,
-      ...collapseStyles,
-    };
-  }
-);
-
-const SearchField = styled(FormField)<
-  Pick<SearchFormProps, 'isCollapsed' | 'grow' | 'height'> & Pick<SearchFormState, 'showForm'>
->(({isCollapsed, showForm, grow, height}) => {
-  return {
-    display: (isCollapsed && showForm) || !isCollapsed ? 'inline-block' : 'none',
-    width: '100%',
-    height: height,
-    maxWidth: isCollapsed || grow ? '100%' : maxWidth,
-    marginBottom: space.zero,
-    '> div': {
-      display: 'block',
-    },
-  };
-});
-
-const SearchInput = styled(TextInput)<
-  Pick<SearchFormProps, 'isCollapsed' | 'grow' | 'height'> & {
-    inputColors: ReturnType<typeof getInputColors>;
-  }
->(({isCollapsed, inputColors, grow, height}) => {
-  const collapseStyles: CSSObject = isCollapsed
-    ? {
-        fontSize: '20px',
-        paddingLeft: `calc(${space.xl} + ${space.s})`,
-        paddingRight: `calc(${space.xl} + ${space.s})`,
-        maxWidth: 'none',
-        minWidth: 0,
-        backgroundColor: `rgba(0, 0, 0, 0)`,
-        height: height,
-      }
-    : {
-        maxWidth: grow ? '100%' : maxWidth,
-        minWidth: minWidth,
-        paddingLeft: `calc(${space.xl} + ${space.xxs})`,
-        paddingRight: space.xl,
-        backgroundColor: inputColors.background,
-        height: height,
-      };
-  return {
-    fontSize: '14px',
-    boxShadow: inputColors.boxShadow,
-    color: inputColors.color,
-    border: 'none',
-    WebkitAppearance: 'none',
-    transition: 'background-color 120ms, color 120ms, box-shadow 200ms, border-color 200ms',
-    zIndex: 2,
-    width: '100%',
-    '&::-webkit-search-cancel-button': {
       display: 'none',
     },
-    '&::placeholder': {
-      color: inputColors.placeholderColor,
-    },
-    '&:placeholder-shown': {
-      textOverflow: 'ellipsis',
-    },
-    '&:not([disabled])': {
-      '&:focus, &:active': {
-        outline: 'none',
-        boxShadow: inputColors.boxShadow,
+    [searchFieldPart]: {
+      width: '100%',
+      height: cssVar(height, system.space.x10),
+      maxWidth: cssVar(maxWidth, px2rem(480)),
+      marginBottom: 0,
+      display: 'inline-block',
+      '> div': {
+        display: 'block',
       },
+    },
+    [`${submitSearchIconPart}, ${openSearchIconPart}`]: {
+      position: `absolute`,
+      margin: `auto ${system.space.x2}`,
+      top: 0,
+      bottom: 0,
+      left: 0,
+      padding: 0,
+      zIndex: 3,
+      ':dir(rtl)': {
+        right: 0,
+        left: 'auto',
+      },
+    },
+    [searchInputPart]: {
+      maxWidth,
+      minWidth,
+      paddingInlineStart: calc.add(system.space.x10, system.space.x2),
+      paddingInlineEnd: system.space.x10,
+      backgroundColor: cssVar(background, system.color.bg.alt.soft),
+      height: cssVar(height, system.space.x10),
+      fontSize: system.fontSize.subtext.large,
+      boxShadow: boxShadow,
+      color: cssVar(color, system.color.text.default),
+      border: 'none',
+      WebkitAppearance: 'none',
+      transition: 'background-color 120ms, color 120ms, box-shadow 200ms, border-color 200ms',
+      zIndex: 2,
+      width: '100%',
+      '&::-webkit-search-cancel-button': {
+        display: 'none',
+      },
+      '&::placeholder': {
+        color: cssVar(placeholderColor, system.color.text.hint),
+      },
+      '&:placeholder-shown': {
+        textOverflow: 'ellipsis',
+      },
+
       '&:hover': {
-        backgroundColor: inputColors.backgroundHover,
+        backgroundColor: cssVar(backgroundHover, cssVar(background, system.color.bg.alt.default)),
+      },
+
+      '&:is(:focus-visible, .focus):where(:not([disabled]))': {
+        background: cssVar(backgroundFocus, system.color.bg.alt.soft),
+        color: colorFocus,
+        borderColor: brand.common.focusOutline,
+        outline: `${px2rem(2)} solid transparent`,
+        boxShadow: cssVar(
+          boxShadowFocus,
+          `0 0 0 0px ${system.color.bg.default}, 0 0 0 2px ${brand.common.focusOutline}`
+        ),
+        '::placeholder': {
+          color: placeholderColorFocus,
+        },
       },
     },
-    ...collapseStyles,
-  };
+  }),
+  modifiers: {
+    isHiddenSubmitSearchIcon: {
+      true: ({submitSearchIconPart}) => ({
+        [submitSearchIconPart]: {
+          display: 'none',
+        },
+      }),
+    },
+    isHiddenOpenSeachIcon: {
+      true: ({openSearchIconPart}) => ({
+        [openSearchIconPart]: {
+          display: 'none',
+        },
+      }),
+    },
+    isCollapsed: {
+      true: ({
+        searchFieldPart,
+        submitSearchIconPart,
+        openSearchIconPart,
+        searchInputPart,
+        height,
+      }) => ({
+        top: 0,
+        right: 0,
+        left: 0,
+        bottom: 0,
+        margin: 0,
+        position: 'relative',
+        backgroundColor: system.color.bg.transparent.default,
+        transition: 'background-color 120ms',
+        maxWidth: calc.add(system.space.x10, system.space.x2),
+        minWidth: calc.add(system.space.x10, system.space.x3),
+        overflow: 'hidden',
+        zIndex: 1,
+        [searchFieldPart]: {
+          display: 'none',
+          maxWidth: '100%',
+        },
+        [`${submitSearchIconPart}, ${openSearchIconPart}`]: {
+          margin: `auto ${system.space.x2}`,
+        },
+        [searchInputPart]: {
+          fontSize: '20px',
+          paddingInlineStart: calc.add(system.space.x10, system.space.x4),
+          paddingInlineEnd: calc.add(system.space.x10, system.space.x4),
+          maxWidth: 'none',
+          minWidth: 0,
+          backgroundColor: system.color.bg.transparent.default,
+          height: cssVar(height, system.space.x10),
+        },
+      }),
+      false: ({searchFieldPart}) => ({
+        [searchFieldPart]: {
+          display: 'inline-block',
+        },
+      }),
+    },
+    rightAlign: {
+      true: {
+        textAlign: 'right',
+      },
+    },
+    showForm: {
+      true: {},
+      false: {},
+    },
+    grow: {
+      true: {
+        maxWidth: '100%',
+        [`[data-part="search-form-field"], [data-part="search-form-input"]`]: {
+          maxWidth: '100%',
+        },
+      },
+    },
+    searchTheme: {
+      // Light theme
+      light: ({searchInputPart}) => ({
+        [searchInputPart]: {
+          background: system.color.bg.alt.soft,
+          color: system.color.text.default,
+
+          '::placeholder': {
+            color: system.color.text.hint,
+          },
+          '&:hover': {
+            background: system.color.bg.alt.default,
+          },
+          '&:is(:focus-visible, &.focus):where(:not([disabled]))': {
+            background: system.color.bg.alt.soft,
+            boxShadow: `0 0 0 0px ${system.color.border.inverse}, 0 0 0 2px ${brand.common.focusOutline}`,
+          },
+        },
+      }),
+      // Dark theme
+      dark: ({searchInputPart}) => ({
+        [searchInputPart]: {
+          backgroundColor: 'rgba(0, 0, 0, 0.2)',
+          color: system.color.text.inverse,
+          boxShadow: 'none',
+          '::placeholder': {
+            color: system.color.text.inverse,
+          },
+
+          ':hover': {
+            background: 'rgba(0, 0, 0, 0.2)',
+          },
+
+          '&:is(:focus-visible, &.focus):where(:not([disabled]))': {
+            background: system.color.bg.default,
+            color: system.color.text.default,
+            '::placeholder': {
+              color: system.color.text.hint,
+            },
+            boxShadow: 'none',
+          },
+        },
+      }),
+      //Transparent theme
+      transparent: ({searchInputPart}) => ({
+        [searchInputPart]: {
+          background: system.color.bg.transparent.default,
+          backgroundFocus: system.color.bg.transparent.default,
+          color: system.color.text.default,
+          colorFocus: system.color.text.default,
+          placeholderColor: system.color.text.hint,
+          placeholderColorFocus: system.color.text.hint,
+          boxShadow: 'none',
+          boxShadowFocus: 'none',
+        },
+      }),
+    },
+  },
+  compound: [
+    {
+      modifiers: {showForm: 'true', isCollapsed: 'true'},
+      styles: {
+        position: 'absolute',
+        backgroundColor: system.color.bg.default,
+        maxWidth: 'none',
+        overflow: 'visible',
+        '& [data-part="search-form-close-button"]': {
+          display: 'inline-block',
+        },
+        '& [data-part="search-form-field"]': {
+          display: 'inline-block',
+        },
+        '& [data-part="search-form-input"]': {
+          boxShadow: 'none',
+          background: system.color.bg.transparent.default,
+          ':hover': {
+            background: system.color.bg.transparent.default,
+          },
+
+          '&:is(:focus-visible, &.focus):where(:not([disabled]))': {
+            background: system.color.bg.transparent.default,
+            boxShadow: 'none',
+          },
+        },
+      },
+    },
+    {
+      modifiers: {isCollapsed: 'true', showForm: 'true'},
+      styles: {
+        '& [data-part="search-form-field"]': {
+          display: 'inline-block',
+        },
+      },
+    },
+  ],
 });
 
+/**
+ * @deprecated ⚠️ `SearchForm` is deprecated and will be removed in a future major version. Please reference our [Autocomplete example](https://workday.github.io/canvas-kit/?path=/docs/features-combobox--docs#usage).
+ */
 export class SearchForm extends React.Component<SearchFormProps, SearchFormState> {
   static Theme = SearchTheme;
   private inputRef = React.createRef<HTMLInputElement>();
@@ -301,13 +458,14 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
 
   private getTheme = () => {
     let theme: SearchThemeAttributes;
-    if (typeof this.props.searchTheme === 'number') {
+    if (typeof this.props.searchTheme === 'string') {
       theme = searchThemes[this.props.searchTheme];
     } else if (this.props.searchTheme) {
       theme = this.props.searchTheme;
     } else {
       theme = searchThemes[SearchTheme.Light];
     }
+
     return theme;
   };
 
@@ -324,7 +482,9 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
     if (this.props.isCollapsed && this.state.showForm) {
       background = formCollapsedBackground;
     }
+
     const isDarkBackground = chroma(background as string).get('lab.l') < 70;
+
     return isDarkBackground ? 'inverse' : undefined;
   };
 
@@ -398,7 +558,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
       closeButtonAriaLabel = 'Cancel',
       labelId = this.defaultLabelId,
       showClearButton = true,
-      height = 40,
+      height = px2rem(40),
       grow,
       onSubmit,
       isCollapsed,
@@ -412,45 +572,47 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
     } = this.props;
 
     return (
-      <StyledSearchForm
+      <form
         role="search"
         action="."
-        rightAlign={rightAlign}
-        grow={grow}
         aria-labelledby={labelId}
-        isCollapsed={isCollapsed}
         onSubmit={this.handleSubmit}
-        showForm={this.state.showForm}
-        {...elemProps}
+        {...mergeStyles(
+          elemProps,
+          searchFormStencil({
+            grow,
+            rightAlign,
+            isCollapsed: isCollapsed ? 'true' : 'false',
+            showForm: this.state.showForm ? 'true' : 'false',
+            height: typeof height === 'number' ? px2rem(height) : height,
+            isHiddenSubmitSearchIcon: !!isCollapsed && !this.state.showForm,
+            isHiddenOpenSeachIcon: !isCollapsed || (!!isCollapsed && this.state.showForm),
+            searchTheme: typeof searchTheme === 'string' ? searchTheme : undefined,
+            ...(typeof searchTheme !== 'string' ? searchTheme : {}),
+          })
+        )}
       >
-        <SearchContainer height={height}>
-          <SearchIcon
+        <div {...searchFormStencil.parts.searchContainer}>
+          <TertiaryButton
             aria-label={submitAriaLabel}
             icon={searchIcon}
-            isCollapsed={isCollapsed}
             variant={this.getIconButtonType()}
             type="submit"
-            isHidden={!!isCollapsed && !this.state.showForm}
+            size="small"
+            {...searchFormStencil.parts.submitSearchIcon}
           />
-          <SearchIcon
+          <TertiaryButton
             aria-label={openButtonAriaLabel}
             icon={searchIcon}
-            isCollapsed={isCollapsed}
             variant={this.getIconButtonType()}
             onClick={this.openCollapsedSearch}
             ref={this.openRef}
             type="button"
-            isHidden={!isCollapsed || (!!isCollapsed && this.state.showForm)}
+            {...searchFormStencil.parts.openSearchIcon}
           />
-          <SearchField
-            grow={grow}
-            id={labelId}
-            isCollapsed={isCollapsed}
-            showForm={this.state.showForm}
-            height={height}
-          >
+          <FormField id={labelId} {...searchFormStencil.parts.searchField}>
             <FormField.Label cs={accessibleHideStyles}>{inputLabel}</FormField.Label>
-            <SearchCombobox
+            <Combobox
               initialValue={initialValue}
               clearButtonVariant={this.getIconButtonType()}
               autocompleteItems={autocompleteItems}
@@ -460,31 +622,30 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
               showClearButton={!isCollapsed && showClearButton}
               clearButtonAriaLabel={clearButtonAriaLabel}
               labelId={labelId}
+              {...searchFormStencil.parts.combobox}
             >
               <FormField.Input
-                as={SearchInput}
+                as={TextInput}
                 ref={this.inputRef as any}
-                cs={{maxWidth: grow ? '100%' : maxWidth}}
+                cs={this.state.isFocused ? 'focus' : undefined}
+                onBlur={this.handleBlur}
                 value={this.state.searchQuery}
                 placeholder={placeholder}
-                isCollapsed={isCollapsed}
-                inputColors={this.getThemeColors()}
-                height={height}
                 name="search"
                 autoComplete="off"
+                {...searchFormStencil.parts.searchInput}
               />
-            </SearchCombobox>
-          </SearchField>
-          <CloseButton
-            aria-label={closeButtonAriaLabel}
+            </Combobox>
+          </FormField>
+          <TertiaryButton
             icon={xIcon}
-            isCollapsed={isCollapsed}
-            showForm={this.state.showForm}
+            aria-label={closeButtonAriaLabel}
             onClick={this.closeCollapsedSearch}
-            type="button"
+            id="foo"
+            {...searchFormStencil.parts.closeButton}
           />
-        </SearchContainer>
-      </StyledSearchForm>
+        </div>
+      </form>
     );
   }
 }

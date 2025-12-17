@@ -23,8 +23,8 @@ export const packageJSONFile = `{
     "@workday/canvas-kit-react": "${version}",
     "@workday/canvas-kit-react-fonts": "^${version}",
     "@workday/canvas-kit-styling": "${version}",
-    "@workday/canvas-system-icons-web": "3.0.22",
-    "@workday/canvas-tokens-web": "2.0.0"
+    "@workday/canvas-system-icons-web": "3.0.36",
+    "@workday/canvas-tokens-web": "3.1.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.59",

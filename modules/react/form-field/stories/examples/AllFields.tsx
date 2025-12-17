@@ -27,7 +27,7 @@ export const AllFields = () => {
         </FormField.Field>
       </FormField>
 
-      <FormField isRequired={true} error="alert" grow>
+      <FormField isRequired={true} error="caution" grow>
         <FormField.Label>Email</FormField.Label>
         <FormField.Field>
           <FormField.Input as={TextInput} />

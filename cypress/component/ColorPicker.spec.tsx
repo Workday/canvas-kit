@@ -1,5 +1,5 @@
 import {Basic} from '../../modules/react/color-picker/stories/color-input/examples/Basic';
-import {Alert} from '../../modules/react/color-picker/stories/color-input/examples/Alert';
+import {Caution} from '../../modules/react/color-picker/stories/color-input/examples/Caution';
 import {Error} from '../../modules/react/color-picker/stories/color-input/examples/Error';
 import {Checked} from '../../modules/react/color-picker/stories/color-input/examples/Checked';
 import {Grow} from '../../modules/react/color-picker/stories/color-input/examples/Grow';
@@ -16,12 +16,12 @@ const getColorPickerPopup = () => cy.findByRole('dialog');
 const getOpenButton = () => cy.findByLabelText('Select Background Color');
 const getResetButton = () => cy.contains('button', 'Reset');
 const getSubmitButton = () => cy.findByLabelText('Submit');
-const getSwatch = (color: string) => cy.get(`div[color="${color}"]`);
+const getSwatch = (color: string) => cy.get(`div[data-color="${color}"]`);
 
 const value = '000000';
 
 describe('ColorInput', () => {
-  [Basic, Alert, Error, Checked, Grow].forEach(Example => {
+  [Basic, Caution, Error, Checked, Grow].forEach(Example => {
     context(`given the '${Example.name}' example is rendered`, () => {
       beforeEach(() => {
         cy.mount(<Example />);
