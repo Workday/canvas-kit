@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.1.26](https://github.com/Workday/canvas-kit/releases/tag/v14.1.26) (2025-12-17)
+
+### Documentation
+
+- docs: Fix codemod instructions link in upgrade guide ([#3641](https://github.com/Workday/canvas-kit/pull/3641)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v14.1.25](https://github.com/Workday/canvas-kit/releases/tag/v14.1.25) (2025-12-16)
+
+### Components
+
+- fix: Update mcp type to make build pass ([#3645](https://github.com/Workday/canvas-kit/pull/3645)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- fix: Update useUniqueId to use unicode safe selector ([#3643](https://github.com/Workday/canvas-kit/pull/3643)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@alanbsmith](https://github.com/alanbsmith))
+
+### Infrastructure
+
+- fix: Update support branch to publish via OIDC to NPM ([#3644](https://github.com/Workday/canvas-kit/pull/3644)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v13.2.47](https://github.com/Workday/canvas-kit/releases/tag/v13.2.47) (2025-12-16)
+
+### Components
+
+- fix: Update useUniqueId to use unicode safe selector ([#3643](https://github.com/Workday/canvas-kit/pull/3643)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v13.2.46](https://github.com/Workday/canvas-kit/releases/tag/v13.2.46) (2025-12-16)
+
+### Components
+
+- fix: Update mcp type to make build pass ([#3645](https://github.com/Workday/canvas-kit/pull/3645)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+### Infrastructure
+
+- fix: Update support branch to publish via OIDC to NPM ([#3644](https://github.com/Workday/canvas-kit/pull/3644)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
 ## [v14.1.24](https://github.com/Workday/canvas-kit/releases/tag/v14.1.24) (2025-12-10)
 
 ### Components
