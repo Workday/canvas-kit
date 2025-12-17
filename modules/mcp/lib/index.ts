@@ -226,7 +226,7 @@ Covers:
               mimeType: resource.mimeType,
               description: resource.description,
               annotations: {
-                audience: ['user', 'assistant'],
+                audience: ['user', 'assistant'] as ('user' | 'assistant')[],
               },
             };
           }),
