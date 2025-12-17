@@ -20,7 +20,6 @@ export const Primary = () => (
     <PrimaryButton
       icon={plusIcon}
       iconPosition="start"
-      // colors={{default: {icon: 'yellow', label: 'blue'}}}
     >
       Primary
     </PrimaryButton>
