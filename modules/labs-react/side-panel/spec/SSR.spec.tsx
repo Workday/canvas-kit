@@ -7,7 +7,7 @@ import {SidePanel} from '../';
 
 describe('SidePanel', () => {
   it('should render on a server without crashing', () => {
-    const ssrRender = () => renderToString(<SidePanel touched={false} />);
+    const ssrRender = () => renderToString(<SidePanel />);
     expect(ssrRender).not.toThrow();
   });
 });
