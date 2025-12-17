@@ -81,12 +81,6 @@ export const panelStencil = createStencil({
         maxWidth: collapsedWidth,
       }),
     },
-    touched: {
-      true: {},
-      false: {
-        animation: 'none',
-      },
-    },
   },
 });
 
