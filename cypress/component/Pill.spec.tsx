@@ -1,9 +1,9 @@
-import {Basic} from '../../modules/preview-react/pill/stories/examples/Basic';
-import {WithAvatar} from '../../modules/preview-react/pill/stories/examples/WithAvatar';
-import {WithCount} from '../../modules/preview-react/pill/stories/examples/WithCount';
-import {WithList} from '../../modules/preview-react/pill/stories/examples/WithList';
-import {WithRemovable} from '../../modules/preview-react/pill/stories/examples/WithRemovable';
-import {WithReadOnly} from '../../modules/preview-react/pill/stories/examples/WithReadOnly';
+import {Basic} from '../../modules/react/pill/stories/examples/Basic';
+import {WithAvatar} from '../../modules/react/pill/stories/examples/WithAvatar';
+import {WithCount} from '../../modules/react/pill/stories/examples/WithCount';
+import {WithList} from '../../modules/react/pill/stories/examples/WithList';
+import {WithRemovable} from '../../modules/react/pill/stories/examples/WithRemovable';
+import {WithReadOnly} from '../../modules/react/pill/stories/examples/WithReadOnly';
 
 describe('Pill', () => {
   [Basic, WithAvatar, WithCount].forEach(Example => {
@@ -32,7 +32,7 @@ describe('Pill', () => {
     });
   });
 
-  context(`given the [Preview/Pill, With List] story is rendered`, () => {
+  context(`given the [Components/Indicators/Pill, With List] story is rendered`, () => {
     beforeEach(() => {
       cy.mount(<WithList />);
     });
@@ -52,7 +52,7 @@ describe('Pill', () => {
     });
   });
 
-  context(`given the [Preview/Pill, With Removable] story is rendered`, () => {
+  context(`given the [Components/Indicators/Pill, With Removable] story is rendered`, () => {
     beforeEach(() => {
       cy.mount(<WithRemovable />);
     });
@@ -82,7 +82,7 @@ describe('Pill', () => {
     });
   });
 
-  context(`given the [Preview/Pill, With Read Only] story is rendered`, () => {
+  context(`given the [Components/Indicators/Pill, With Read Only] story is rendered`, () => {
     beforeEach(() => {
       cy.mount(<WithReadOnly />);
     });
