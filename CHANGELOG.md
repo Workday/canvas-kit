@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.1.28](https://github.com/Workday/canvas-kit/releases/tag/v14.1.28) (2025-12-17)
+
+### Components
+
+- fix: Update buttons to use the colors prop value for icons and fallback to currentColor ([#3649](https://github.com/Workday/canvas-kit/pull/3649)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v14.1.27](https://github.com/Workday/canvas-kit/releases/tag/v14.1.27) (2025-12-17)
+
+### Dependencies
+
+- fix: Update Storybook version based a security vulnerability ([#3648](https://github.com/Workday/canvas-kit/pull/3648)) ([@alanbsmith](https://github.com/alanbsmith), Alan Smith)
+
+
+## [v13.2.48](https://github.com/Workday/canvas-kit/releases/tag/v13.2.48) (2025-12-17)
+
+### Dependencies
+
+- fix: Update Storybook version based a security vulnerability ([#3648](https://github.com/Workday/canvas-kit/pull/3648)) ([@alanbsmith](https://github.com/alanbsmith), Alan Smith)
+## [v14.1.26](https://github.com/Workday/canvas-kit/releases/tag/v14.1.26) (2025-12-17)
+
+### Documentation
+
+- docs: Fix codemod instructions link in upgrade guide ([#3641](https://github.com/Workday/canvas-kit/pull/3641)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
 ## [v14.1.25](https://github.com/Workday/canvas-kit/releases/tag/v14.1.25) (2025-12-16)
 
 ### Components
