@@ -6,6 +6,7 @@
     "upgrade-guides/12.0-UPGRADE-GUIDE.md",
     "upgrade-guides/13.0-UPGRADE-GUIDE.md",
     "upgrade-guides/14.0-UPGRADE-GUIDE.md",
+    "upgrade-guides/15.0-UPGRADE-GUIDE.md",
     "llm-token-migration-14.txt",
     "llm-style-props-migration.txt",
     "theming.md"
@@ -17,6 +18,7 @@
     "tokens/color-contrast.md",
     "tokens/color-roles.md",
     "tokens/color-scale.md",
-    "llm-token-migration-14.txt"
+    "llm-txt/llm-token-migration-14.txt",
+    "llm-txt/llm-style-props-migration.txt"
   ]
 }

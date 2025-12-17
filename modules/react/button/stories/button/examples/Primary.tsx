@@ -10,17 +10,14 @@ import {system} from '@workday/canvas-tokens-web';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 
 const parentContainerStyles = createStyles({
-  gap: system.space.x4,
-  padding: system.space.x4,
+  gap: system.gap.md,
+  padding: system.padding.md,
 });
 
 export const Primary = () => (
   <Flex cs={parentContainerStyles}>
     <PrimaryButton>Primary</PrimaryButton>
-    <PrimaryButton
-      icon={plusIcon}
-      iconPosition="start"
-    >
+    <PrimaryButton icon={plusIcon} iconPosition="start">
       Primary
     </PrimaryButton>
     <PrimaryButton icon={caretDownIcon} iconPosition="end">
