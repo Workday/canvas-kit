@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {setupIcon} from '@workday/canvas-system-icons-web';
-import {PartialEmotionCanvasTheme, ContentDirection} from '@workday/canvas-kit-react/common';
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 import {customColorTheme} from '../../../../utils/storybook';
 
@@ -30,9 +29,9 @@ type MyTabItem = {
   contents: string;
 };
 
-const TabsExample = ({theme}: {theme?: PartialEmotionCanvasTheme} = {theme: undefined}) => {
+const TabsExample = (props: React.ComponentProps<typeof StaticStates> = {}) => {
   return (
-    <StaticStates theme={theme}>
+    <StaticStates {...props}>
       <Tabs>
         <ComponentStatesTable
           rowProps={[
@@ -44,6 +43,7 @@ const TabsExample = ({theme}: {theme?: PartialEmotionCanvasTheme} = {theme: unde
             {label: 'Selected', props: {'aria-selected': true}},
             {label: 'Focus', props: {className: 'focus'}},
             {label: 'Hover', props: {className: 'hover'}},
+
             {label: 'Disabled', props: {'aria-disabled': true}},
           ]}
         >
@@ -71,7 +71,7 @@ export const TabStates = {
       <h3>Themed</h3>
       <TabsExample theme={{canvas: customColorTheme}} />
       <h3>RTL</h3>
-      <TabsExample theme={{canvas: {direction: ContentDirection.RTL}}} />
+      <TabsExample dir="rtl" />
     </>
   ),
 };
