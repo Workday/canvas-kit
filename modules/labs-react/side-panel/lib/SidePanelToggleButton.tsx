@@ -65,7 +65,12 @@ export const sidePanelToggleButtonStencil = createStencil({
     },
     origin: {
       start: {},
-      end: {},
+      end: {
+        transform: `scaleX(1)`,
+        ':dir(rtl)': {
+          transform: `scaleX(-1)`,
+        },
+      },
     },
   },
 

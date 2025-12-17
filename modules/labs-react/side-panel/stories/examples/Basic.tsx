@@ -39,12 +39,7 @@ export const Basic = () => {
   return (
     <CanvasProvider dir={direction}>
       <Flex cs={stylesOverride.viewPortContainer}>
-        <SidePanel
-          onExpand={data => console.log('state>>', data)}
-          onCollapse={data => console.log('state>>', data)}
-          onHandleAnimationStart={data => console.log('state>>', data)}
-          onHandleAnimationEnd={data => console.log('state>>', data)}
-        >
+        <SidePanel model={model}>
           <SidePanel.ToggleButton />
           <Flex cs={stylesOverride.panel}>
             {model.state.transitionState === 'expanded' && (

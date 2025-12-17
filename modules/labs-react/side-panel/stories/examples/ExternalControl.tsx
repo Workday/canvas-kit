@@ -68,7 +68,7 @@ export const ExternalControl = () => {
           }
           aria-pressed={model.state.transitionState === 'expanded'}
         >
-          Show Side Panel
+          {model.state.transitionState === 'expanded' ? 'Hide Side Panel' : 'Show Side Panel'}
         </SecondaryButton>
       </Flex>
     </Flex>
