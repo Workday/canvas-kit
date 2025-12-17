@@ -14,7 +14,8 @@ import {OnStateTransition} from './examples/OnStateTransition';
 
 # Canvas Kit Side Panel
 
-`SidePanel` is a collaspible container that anchors to the left or right side of the screen.
+`SidePanel` is a collapsible container that anchors to the left or right side of the screen. It uses
+the model pattern for state management and is fully accessible.
 
 [> Workday Design Reference](https://design.workday.com/components/containers/side-panel)
 
@@ -24,32 +25,119 @@ import {OnStateTransition} from './examples/OnStateTransition';
 yarn add @workday/canvas-kit-labs-react
 ```
 
+## Migrating from Preview
+
+If you're migrating from `@workday/canvas-kit-preview-react/side-panel`, here are the key API changes:
+
+### Import Changes
+
+```tsx
+// Before (preview-react)
+import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
+
+// After (labs-react)
+import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-labs-react/side-panel';
+```
+
+### Hook API Changes
+
+| Preview (`useSidePanel`) | Labs (`useSidePanelModel`) |
+|--------------------------|----------------------------|
+| `initialExpanded: boolean` | `initialTransitionState: 'expanded' \| 'collapsed'` |
+| `origin: 'left' \| 'right'` | `origin: 'start' \| 'end'` |
+| Returns `expanded: boolean` | Returns `model.state.transitionState` |
+| Returns `setExpanded(bool)` | Use `model.events.expand()` / `model.events.collapse()` |
+| Returns `panelProps` to spread | Props applied automatically via `elemPropsHook` |
+| Returns `labelProps` to spread | Use `id={model.state.labelId}` on label element |
+| Returns `controlProps` to spread | Props applied automatically to `SidePanel.ToggleButton` |
+
+### Component API Changes
+
+| Preview | Labs |
+|---------|------|
+| `<SidePanel {...panelProps}>` | `<SidePanel model={model}>` or just `<SidePanel>` |
+| `<SidePanel.ToggleButton {...controlProps} />` | `<SidePanel.ToggleButton />` |
+| `<Heading {...labelProps}>` | `<Heading id={model.state.labelId}>` |
+| `expanded` prop on SidePanel | Managed by model's `transitionState` |
+| `touched` prop on SidePanel | Managed internally |
+| `onExpandedChange` callback | Use `onStateTransition` and derive expanded state |
+| `onStateTransition` on component | `onStateTransition` on model config |
+
+### Code Migration Example
+
+```tsx
+// Before (preview-react)
+const {expanded, panelProps, labelProps, controlProps} = useSidePanel({
+  initialExpanded: false,
+});
+
+<SidePanel {...panelProps} origin="right" onExpandedChange={(exp) => console.log(exp)}>
+  <SidePanel.ToggleButton {...controlProps} />
+  <Heading {...labelProps}>Panel Title</Heading>
+  {expanded && <Content />}
+</SidePanel>
+
+// After (labs-react)
+const model = useSidePanelModel({
+  initialTransitionState: 'collapsed',
+  origin: 'end',
+  onStateTransition: (state) => {
+    const isExpanded = state === 'expanded' || state === 'expanding';
+    console.log(isExpanded);
+  },
+});
+
+<SidePanel model={model}>
+  <SidePanel.ToggleButton />
+  <Heading id={model.state.labelId}>Panel Title</Heading>
+  {model.state.transitionState === 'expanded' && <Content />}
+</SidePanel>
+```
+
+### Checking Expanded State
+
+```tsx
+// Before (preview-react)
+if (expanded) { /* ... */ }
+
+// After (labs-react) - for exact state
+if (model.state.transitionState === 'expanded') { /* ... */ }
+
+// After (labs-react) - including animation states
+const isExpanded = model.state.transitionState === 'expanded' ||
+                   model.state.transitionState === 'expanding';
+```
+
 ## Usage
 
 ### Basic Example
 
 `SidePanel` is composed of three parts:
 
-- The panel container
-- An accessible name (either on a visible element or hidden)
-- A toggle button to control the expand / collapse states
+- The panel container (with an optional `model` prop)
+- An accessible name (using `model.state.labelId` on a visible or hidden element)
+- A toggle button (`SidePanel.ToggleButton`) to control the expand / collapse states
+
+The component automatically handles:
+- ARIA attributes (`aria-labelledby`, `aria-controls`, `aria-expanded`)
+- Transition states (`expanding`, `expanded`, `collapsing`, `collapsed`)
+- CSS transitions for smooth animations
 
 Bidirectional support is built into `SidePanel`. As seen in the example below, CSS Flexbox flips the
 page layout and the panel's contents. `SidePanel` also has logic to flip the position and direction
 of the `ToggleButton` as well as the direction of the expand / collapse animation. If you're using
 CSS Flexbox for layouts and using the provided components, you shouldn't have to provide any custom
-logic or styling for bidirecitonal support.
+logic or styling for bidirectional support.
 
 <ExampleCodeBlock code={Basic} />
 
 ### Hidden Name
 
 `SidePanel` must always have an accessible label for both the HTML `<section>` container and the
-`ToggleButton`. The `labelProps` component must always be present in the DOM in order for the
-`panelProps` and `controlProps` component labels to be assigned properly. A `hidden` attribute can
-be applied to the `labelProps` component. In the example below, we are demonstrating the
-`AccessibleHide` component that relies on CSS properties to visually hide text for screen readers
-only.
+`ToggleButton`. The label element must have `id={model.state.labelId}` to properly connect it to
+the panel and toggle button via `aria-labelledby`. The label can be visually hidden using
+`AccessibleHide` which relies on CSS properties to hide text visually while keeping it available
+for screen readers.
 
 <ExampleCodeBlock code={HiddenName} />
 
@@ -63,66 +151,61 @@ used (this case is covered in the Examples section).
 
 ### External Control
 
-Sometimes you'll want to control `SidePanel`'s' expand / collapse behavior from outside the
-component. In that case, you can use the `controlProps` supplied by the `useSidePanel` hook.
+Sometimes you'll want to control `SidePanel`'s expand / collapse behavior from outside the
+component. You can use the model's events (`model.events.expand()` and `model.events.collapse()`)
+to programmatically control the panel.
 
 #### Notes about accessibility
 
-The `controlProps` object delivers ARIA attributes to a component under the following assumptions:
+When using external controls, be mindful of accessibility:
 
-1. The control is an icon button that does not already have an accessible name
-2. The control appears at (or near) the top of the expandable content in the `SidePanel`
+- Use `aria-pressed` on toggle buttons to indicate the current state
+- The `SidePanel.ToggleButton` inside the panel automatically receives the correct ARIA attributes
+- External buttons should have their own accessible labels (don't rely on `aria-labelledby` pointing
+  to the panel's label)
 
-Spreading the `controlProps` onto an external control can introduce serious accessibility issues:
-
-- `aria-labelledby` HTML `id` reference may become invalid when the SidePanel is collapsed, or when
-  the `labelProps` component isn't present in the DOM.
-- `aria-labelledby` will change the name of `controlProps` component to the title of the
-  `SidePanel`. (This may be undesirable. For example, the "Show Side Panel" button will be
-  overwritten with the "Tasks Panel" heading.)
-- `aria-expanded` won't make sense to screen reader users when the expanded `SidePanel` content
-  isn't logically following the control.
-- `aria-controls` is unsupported by screen readers and will not allow users to navigate to the
-  controlled content.
-
-In the following example, the `controlProps` click handler function is passed down to the
-`SecondaryButton` and a toggle state was added to the button using the `aria-pressed` property.
+In the following example, we use the model's `transitionState` to determine the button's pressed
+state and call `model.events.expand()` or `model.events.collapse()` on click.
 
 <ExampleCodeBlock code={ExternalControl} />
 
 ### Right Origin
 
-By default, `SidePanel` uses a `left` origin. This sets the `ToggleButton`'s position and direction
-as well as the direction of the animation. But you can set `SidePanel`'s origin to `"right"` to flip
-these. As with the left-origin panel, all right-origin styles have bidirecitonal support.
+By default, `SidePanel` uses a `start` origin (left in LTR, right in RTL). This sets the
+`ToggleButton`'s position and direction as well as the direction of the animation. You can set
+the origin to `"end"` to flip these. The origin uses logical properties (`start`/`end`) for
+proper bidirectional support.
 
 <ExampleCodeBlock code={RightOrigin} />
 
 ### Always Open
 
-If you do not need `SidePanel`'s' expand / collapse behavior, you can simply omit the `controlProps`
-and `ToggleButton`.
+If you do not need `SidePanel`'s expand / collapse behavior, you can simply omit the `ToggleButton`.
 
 <ExampleCodeBlock code={AlwaysOpen} />
 
-The majority of `SidePanel`'s logic and funcitonality lives in this container component. Most of
-this functionality has been described in the examples above, but there a couple specific callbacks
-worth mentioning here.
+### Deriving Expanded State
 
-### onExpandedChange
-
-The `onExpandedChange` callback is called when the boolean `expanded` state is updated. This is a
-handy way to hook into these updates to trigger side-effects. Below is an example:
+If you need a simple boolean `expanded` state (similar to the preview-react `onExpandedChange`
+callback), you can derive it from the `transitionState` using the `onStateTransition` callback
+on the model.
 
 <ExampleCodeBlock code={OnExpandedChange} />
 
 ### onStateTransition
 
-While `onExpandedChange` works well for discrete boolean state changes, there may be occasions where
-you also need transition states. In these situations, `onStateTransition` is a better fit. This
-callback it called on all state transitions and returns the current transtion state. This can be one
-of four `SidePanelTransitionStates`, `expanding`, `expanded`, `collapsing`, and `collapsed`. Below
-is an example:
+The `onStateTransition` callback is called whenever the panel's transition state changes. This
+includes all four states: `expanding`, `expanded`, `collapsing`, and `collapsed`. You can pass
+this callback directly to the `SidePanel` component or to the `useSidePanelModel` hook.
+
+The transition flow is:
+1. **Collapsing**: `expanded` → `collapsing` → `collapsed`
+2. **Expanding**: `collapsed` → `expanding` → `expanded`
+
+This is useful for:
+- Triggering side effects when the panel state changes
+- Syncing the panel state with external state management
+- Animating child components based on the transition state
 
 <ExampleCodeBlock code={OnStateTransition} />
 
@@ -132,9 +215,47 @@ is an example:
 
 ## Hooks
 
-### useSidePanel
+### useSidePanelModel
 
-<SymbolDoc name="useSidePanel" fileName="/labs-react/" />
+The `useSidePanelModel` hook creates a model for managing the SidePanel's state and events. You can
+pass this model to the `SidePanel` component, or let the component create one internally.
+
+```tsx
+import {useSidePanelModel} from '@workday/canvas-kit-labs-react/side-panel';
+
+// Create a model with custom configuration
+const model = useSidePanelModel({
+  initialTransitionState: 'collapsed',
+  origin: 'end',
+  onStateTransition: (state) => console.log('State:', state),
+});
+
+// Access state
+model.state.transitionState; // 'expanded' | 'expanding' | 'collapsed' | 'collapsing'
+model.state.panelId;         // unique ID for the panel
+model.state.labelId;         // unique ID for the label
+
+// Trigger events
+model.events.expand();              // Set to expanded (no animation)
+model.events.collapse();            // Set to collapsed (no animation)
+model.events.handleAnimationStart(); // Start expand/collapse animation
+```
+
+<SymbolDoc name="useSidePanelModel" fileName="/labs-react/" />
+
+### useSidePanelContainer
+
+The `useSidePanelContainer` elemProps hook provides the necessary props for the SidePanel container
+element, including `id`, `aria-labelledby`, and `onTransitionEnd`.
+
+<SymbolDoc name="useSidePanelContainer" fileName="/labs-react/" />
+
+### useSidePanelToggleButtonElemProps
+
+The `useSidePanelToggleButtonElemProps` elemProps hook provides ARIA attributes for the toggle
+button, including `aria-controls`, `aria-expanded`, and `aria-labelledby`.
+
+<SymbolDoc name="useSidePanelToggleButtonElemProps" fileName="/labs-react/" />
 
 ## Specifications
 

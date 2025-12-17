@@ -1,9 +1,21 @@
 import * as React from 'react';
-import {createContainer} from '@workday/canvas-kit-react/common';
+import {createContainer, createElemPropsHook} from '@workday/canvas-kit-react/common';
 import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import {useSidePanelModel} from './useSidePanelModel';
 import {SidePanelToggleButton} from './SidePanelToggleButton';
+
+/**
+ * Adds the necessary props to the SidePanel container element.
+ * This includes the `id` and `aria-labelledby` attributes for accessibility.
+ */
+export const useSidePanelContainer = createElemPropsHook(useSidePanelModel)(({state, events}) => {
+  return {
+    id: state.panelId,
+    'aria-labelledby': state.labelId,
+    onTransitionEnd: events.handleAnimationEnd,
+  };
+});
 
 export type SidePanelVariant = 'standard' | 'alternate';
 
@@ -60,8 +72,14 @@ export const panelStencil = createStencil({
         width: collapsedWidth,
         maxWidth: collapsedWidth,
       }),
-      expanding: {},
-      collapsing: {},
+      expanding: ({expandedWidth}) => ({
+        width: expandedWidth,
+        maxWidth: expandedWidth,
+      }),
+      collapsing: ({collapsedWidth}) => ({
+        width: collapsedWidth,
+        maxWidth: collapsedWidth,
+      }),
     },
     touched: {
       true: {},
@@ -75,7 +93,16 @@ export const panelStencil = createStencil({
 export const SidePanel = createContainer('section')({
   displayName: 'SidePanel',
   modelHook: useSidePanelModel,
+  elemPropsHook: useSidePanelContainer,
   subComponents: {
+    /**
+     * `SidePanel.ToggleButton` is a control that toggles between expanded and collapsed states.
+     * It must be used within the `SidePanel` component as a child. For accessibility purposes,
+     * it should be the first focusable element in the panel.
+     *
+     * The button automatically receives `aria-controls`, `aria-expanded`, and `aria-labelledby`
+     * attributes from the model.
+     */
     ToggleButton: SidePanelToggleButton,
   },
 })<SidePanelProps>(
@@ -92,11 +119,9 @@ export const SidePanel = createContainer('section')({
   ) => {
     return (
       <Element
-        onTransitionEnd={model.events.handleAnimationEnd}
-        id={model.state.panelId}
         {...handleCsProp(elemProps, [
           panelStencil({
-            expanded: model.state.expanded,
+            expanded: model.state.transitionState,
             variant,
             expandedWidth:
               typeof expandedWidth === 'number' ? px2rem(expandedWidth) : expandedWidth,

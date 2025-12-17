@@ -39,10 +39,15 @@ export const Basic = () => {
   return (
     <CanvasProvider dir={direction}>
       <Flex cs={stylesOverride.viewPortContainer}>
-        <SidePanel model={model}>
+        <SidePanel
+          onExpand={data => console.log('state>>', data)}
+          onCollapse={data => console.log('state>>', data)}
+          onHandleAnimationStart={data => console.log('state>>', data)}
+          onHandleAnimationEnd={data => console.log('state>>', data)}
+        >
           <SidePanel.ToggleButton />
           <Flex cs={stylesOverride.panel}>
-            {model.state.expanded === 'expanded' && (
+            {model.state.transitionState === 'expanded' && (
               <Flex cs={stylesOverride.accentIcon}>
                 <AccentIcon icon={rocketIcon} />
               </Flex>
@@ -50,7 +55,7 @@ export const Basic = () => {
             <Heading
               size="small"
               id={model.state.labelId}
-              hidden={model.state.expanded === 'collapsed' ? true : undefined}
+              hidden={model.state.transitionState === 'collapsed' ? true : undefined}
             >
               Tasks Panel
             </Heading>

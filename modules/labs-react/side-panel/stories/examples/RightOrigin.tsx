@@ -33,7 +33,7 @@ const stylesOverride = {
 
 const RightPanel = () => {
   const model = useSidePanelModel({
-    origin: 'right',
+    origin: 'end',
   });
 
   return (
@@ -42,7 +42,7 @@ const RightPanel = () => {
       <Flex cs={stylesOverride.panel}>
         <Heading
           size="small"
-          hidden={model.state.expanded === 'collapsed' ? true : undefined}
+          hidden={model.state.transitionState === 'collapsed' ? true : undefined}
           id={model.state.labelId}
         >
           Tasks Panel

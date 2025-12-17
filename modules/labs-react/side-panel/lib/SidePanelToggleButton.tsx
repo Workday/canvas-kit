@@ -6,7 +6,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {transformationImportIcon} from '@workday/canvas-system-icons-web';
-import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {Tooltip, TooltipProps} from '@workday/canvas-kit-react/tooltip';
 import {useSidePanelModel} from './useSidePanelModel';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
@@ -20,6 +20,7 @@ export interface SidePanelToggleButtonProps extends ExtractProps<typeof Tertiary
    * The tooltip text to collapse the side panel
    */
   tooltipTextCollapse?: string;
+  tooltipProps?: Omit<TooltipProps, 'children'>;
 }
 
 export const sidePanelToggleButtonStencil = createStencil({
@@ -63,34 +64,34 @@ export const sidePanelToggleButtonStencil = createStencil({
       },
     },
     origin: {
-      left: {},
-      right: {},
+      start: {},
+      end: {},
     },
   },
 
   compound: [
     {
-      modifiers: {state: 'collapsed', origin: 'right'},
+      modifiers: {state: 'collapsed', origin: 'end'},
       styles: {
         transform: `scaleX(-1)`,
       },
     },
     {
-      modifiers: {state: 'collapsing', origin: 'right'},
+      modifiers: {state: 'collapsing', origin: 'end'},
       styles: {
         transform: `scaleX(-1)`,
         insetInlineStart: system.space.x4,
       },
     },
     {
-      modifiers: {state: 'expanded', origin: 'right'},
+      modifiers: {state: 'expanded', origin: 'end'},
       styles: {
         transform: `scaleX(1)`,
         insetInlineStart: system.space.x4,
       },
     },
     {
-      modifiers: {state: 'expanding', origin: 'right'},
+      modifiers: {state: 'expanding', origin: 'end'},
       styles: {
         transform: `scaleX(1)`,
         insetInlineStart: system.space.x4,
@@ -103,7 +104,7 @@ export const useSidePanelToggleButtonElemProps = createElemPropsHook(useSidePane
   ({state}) => {
     return {
       'aria-controls': state.panelId,
-      'aria-expanded': state.expanded === 'expanded',
+      'aria-expanded': state.transitionState === 'expanded',
       'aria-labelledby': state.labelId,
     };
   }
@@ -120,6 +121,7 @@ export const SidePanelToggleButton = createSubcomponent('button')({
       icon = transformationImportIcon,
       tooltipTextExpand = 'Expand',
       tooltipTextCollapse = 'Collapse',
+      tooltipProps,
       ...elemProps
     }: SidePanelToggleButtonProps,
     Element,
@@ -127,30 +129,27 @@ export const SidePanelToggleButton = createSubcomponent('button')({
   ) => {
     return (
       <Tooltip
-        title={model.state.expanded === 'collapsed' ? tooltipTextExpand : tooltipTextCollapse}
         type="muted"
+        {...tooltipProps}
+        title={
+          model.state.transitionState === 'collapsed' ? tooltipTextExpand : tooltipTextCollapse
+        }
       >
         <TertiaryButton
-          type="button"
           icon={icon}
           as={Element}
           variant={variant}
           {...handleCsProp(
             elemProps,
             sidePanelToggleButtonStencil({
-              state: model.state.expanded,
+              state: model.state.transitionState,
               origin: model.state.origin,
             })
           )}
           onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
             //@ts-ignore this gets called from the useSidePanel hook.
             elemProps.onClick?.(event);
-            if (model.state.expanded === 'expanded') {
-              model.events.collapse();
-            } else {
-              model.events.handleAnimationStart();
-              model.events.expand();
-            }
+            model.events.handleAnimationStart();
           }}
         />
       </Tooltip>

@@ -1,6 +1,10 @@
 import * as React from 'react';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-labs-react/side-panel';
+import {
+  SidePanel,
+  useSidePanelModel,
+  SidePanelTransitionStates,
+} from '@workday/canvas-kit-labs-react/side-panel';
 import {Text} from '@workday/canvas-kit-react/text';
 import {AccessibleHide} from '@workday/canvas-kit-react/common';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
@@ -18,8 +22,25 @@ const stylesOverride = {
   }),
 };
 
+/**
+ * Helper to derive expanded boolean from transition state.
+ * Useful when migrating from preview-react's onExpandedChange callback.
+ */
+const isExpanded = (state: SidePanelTransitionStates) =>
+  state === 'expanded' || state === 'expanding';
+
 export const OnExpandedChange = () => {
-  const model = useSidePanelModel();
+  const [expanded, setExpanded] = React.useState(true);
+
+  const model = useSidePanelModel({
+    onStateTransition: state => {
+      const newExpanded = isExpanded(state);
+      if (newExpanded !== expanded) {
+        setExpanded(newExpanded);
+        console.log('Expanded changed to:', newExpanded);
+      }
+    },
+  });
 
   return (
     <Flex cs={stylesOverride.viewport}>
@@ -29,7 +50,7 @@ export const OnExpandedChange = () => {
       </SidePanel>
       <Flex as="main" cs={stylesOverride.main}>
         <Text as="p" typeLevel="body.large">
-          Side panel is {model.state.expanded}.
+          Side panel is {expanded ? 'expanded' : 'collapsed'}.
         </Text>
       </Flex>
     </Flex>

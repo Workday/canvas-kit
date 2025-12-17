@@ -42,14 +42,15 @@ const stylesOverride = {
  */
 export const ExternalControl = () => {
   const model = useSidePanelModel({
-    initialExpanded: 'collapsed',
+    initialTransitionState: 'collapsed',
     labelId: 'tasks-panel-label',
   });
 
   return (
     <Flex cs={stylesOverride.viewport}>
       <SidePanel model={model}>
-        {model.state.expanded === 'expanded' && (
+        <SidePanel.ToggleButton />
+        {model.state.transitionState === 'expanded' && (
           <Flex cs={stylesOverride.panel}>
             <Heading size="small" cs={stylesOverride.panelHeading} id={model.state.labelId}>
               Tasks Panel
@@ -63,9 +64,9 @@ export const ExternalControl = () => {
         </Text>
         <SecondaryButton
           onClick={
-            model.state.expanded === 'expanded' ? model.events.collapse : model.events.expand
+            model.state.transitionState === 'expanded' ? model.events.collapse : model.events.expand
           }
-          aria-pressed={model.state.expanded === 'expanded'}
+          aria-pressed={model.state.transitionState === 'expanded'}
         >
           Show Side Panel
         </SecondaryButton>
