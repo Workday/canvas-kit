@@ -6,7 +6,6 @@
     "upgrade-guides/12.0-UPGRADE-GUIDE.md",
     "upgrade-guides/13.0-UPGRADE-GUIDE.md",
     "upgrade-guides/14.0-UPGRADE-GUIDE.md",
-    "llm-token-migration-14.txt",
     "llm-style-props-migration.txt",
     "theming.md"
   ],
