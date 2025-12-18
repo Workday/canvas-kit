@@ -11,7 +11,7 @@ import {useSidePanelModel} from './useSidePanelModel';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-export interface SidePanelToggleButtonProps extends ExtractProps<typeof TertiaryButton, never> {
+export interface SidePanelToggleButtonProps extends ExtractProps<typeof TertiaryButton> {
   /**
    * The tooltip text to expand the side panel
    */
@@ -79,6 +79,9 @@ export const sidePanelToggleButtonStencil = createStencil({
       modifiers: {state: 'collapsed', origin: 'end'},
       styles: {
         transform: `scaleX(-1)`,
+        ':dir(rtl)': {
+          transform: `scaleX(1)`,
+        },
       },
     },
     {
@@ -86,6 +89,10 @@ export const sidePanelToggleButtonStencil = createStencil({
       styles: {
         transform: `scaleX(-1)`,
         insetInlineStart: system.space.x4,
+        ':dir(rtl)': {
+          transform: `scaleX(1)`,
+          insetInlineEnd: system.space.x4,
+        },
       },
     },
     {
@@ -93,6 +100,10 @@ export const sidePanelToggleButtonStencil = createStencil({
       styles: {
         transform: `scaleX(1)`,
         insetInlineStart: system.space.x4,
+        ':dir(rtl)': {
+          transform: `scaleX(-1)`,
+          insetInlineEnd: system.space.x4,
+        },
       },
     },
     {
@@ -100,6 +111,10 @@ export const sidePanelToggleButtonStencil = createStencil({
       styles: {
         transform: `scaleX(1)`,
         insetInlineStart: system.space.x4,
+        ':dir(rtl)': {
+          transform: `scaleX(-1)`,
+          insetInlineEnd: system.space.x4,
+        },
       },
     },
   ],
@@ -152,7 +167,6 @@ export const SidePanelToggleButton = createSubcomponent('button')({
             })
           )}
           onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
-            //@ts-ignore this gets called from the useSidePanel hook.
             elemProps.onClick?.(event);
             model.events.handleAnimationStart();
           }}

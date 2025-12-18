@@ -9,11 +9,10 @@ import {AlternatePanel as AlternatePanelExample} from './examples/Variant';
 import {ExternalControl as ExternalControlExample} from './examples/ExternalControl';
 import {RightOrigin as RightOriginExample} from './examples/RightOrigin';
 import {AlwaysOpen as AlwaysOpenExample} from './examples/AlwaysOpen';
-import {OnExpandedChange as OnExpandedChangeExample} from './examples/OnExpandedChange';
 import {OnStateTransition as OnStateTransitionExample} from './examples/OnStateTransition';
 
 export default {
-  title: 'Labs/Side Panel',
+  title: 'Labs/Side Panel (New)',
   component: SidePanel,
   tags: ['autodocs'],
   parameters: {
@@ -42,9 +41,6 @@ export const RightOrigin: Story = {
 };
 export const AlwaysOpen: Story = {
   render: AlwaysOpenExample,
-};
-export const OnExpandedChange: Story = {
-  render: OnExpandedChangeExample,
 };
 export const OnStateTransition: Story = {
   render: OnStateTransitionExample,

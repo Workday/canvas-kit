@@ -3,7 +3,7 @@ import {
   AsAside,
   AsDiv,
   FirstFocusable,
-} from '../../modules/labs-react/side-panel/stories/testingCypress.stories';
+} from '@workday/canvas-kit-labs-react/side-panel/stories/testingCypress.stories';
 
 describe('Side Panel', () => {
   const name = /Accessible Label Name/i;

@@ -1,4 +1,4 @@
-import {ExampleCodeBlock, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, SymbolDoc, Specifications, StorybookStatusIndicator} from '@workday/canvas-kit-docs';
 import * as SidePanelStories from './SidePanel.stories';
 
 import {Basic} from './examples/Basic';
@@ -7,12 +7,11 @@ import {AlternatePanel} from './examples/Variant';
 import {ExternalControl} from './examples/ExternalControl';
 import {RightOrigin} from './examples/RightOrigin';
 import {AlwaysOpen} from './examples/AlwaysOpen';
-import {OnExpandedChange} from './examples/OnExpandedChange';
 import {OnStateTransition} from './examples/OnStateTransition';
 
 <Meta of={SidePanelStories} />
 
-# Canvas Kit Side Panel
+# Canvas Kit Side Panel <StorybookStatusIndicator type="new" />
 
 `SidePanel` is a collapsible container that anchors to the left or right side of the screen. It uses
 the model pattern for state management and is fully accessible.
@@ -189,8 +188,6 @@ If you do not need `SidePanel`'s expand / collapse behavior, you can simply omit
 If you need a simple boolean `expanded` state (similar to the preview-react `onExpandedChange`
 callback), you can derive it from the `transitionState` using the `onStateTransition` callback
 on the model.
-
-<ExampleCodeBlock code={OnExpandedChange} />
 
 ### onStateTransition
 

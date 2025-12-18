@@ -20,8 +20,8 @@ const stylesOverride = {
 
 export const HiddenName = () => {
   const model = useSidePanelModel({
-    onExpand: expanded => {
-      console.log(`expanded prop is: ${expanded ? 'true' : 'false'}`);
+    onStateTransition: state => {
+      console.log(`state is: ${state}`);
     },
   });
 

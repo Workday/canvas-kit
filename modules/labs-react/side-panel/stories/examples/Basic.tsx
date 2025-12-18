@@ -3,10 +3,8 @@ import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-labs-react/side-panel';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {Heading, Text} from '@workday/canvas-kit-react/text';
-import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {AccentIcon} from '@workday/canvas-kit-react/icon';
 import {rocketIcon} from '@workday/canvas-accent-icons-web';
-import {useDirection} from './useDirection';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -32,39 +30,27 @@ const stylesOverride = {
 };
 
 export const Basic = () => {
-  const {direction, toggleDirection} = useDirection();
-
   const model = useSidePanelModel();
 
   return (
-    <CanvasProvider dir={direction}>
-      <Flex cs={stylesOverride.viewPortContainer}>
-        <SidePanel model={model}>
-          <SidePanel.ToggleButton />
-          <Flex cs={stylesOverride.panel}>
-            {model.state.transitionState === 'expanded' && (
-              <Flex cs={stylesOverride.accentIcon}>
-                <AccentIcon icon={rocketIcon} />
-              </Flex>
-            )}
-            <Heading
-              size="small"
-              id={model.state.labelId}
-              hidden={model.state.transitionState === 'collapsed' ? true : undefined}
-            >
-              Tasks Panel
-            </Heading>
-          </Flex>
-        </SidePanel>
-        <Flex as="main" cs={stylesOverride.mainContent}>
-          <Text as="p" typeLevel="body.large">
-            Toggle the content direction
-          </Text>
-          <SecondaryButton onClick={toggleDirection}>
-            Set to {direction === 'ltr' ? 'Right-to-Left' : 'Left-to-Right'}
-          </SecondaryButton>
+    <Flex cs={stylesOverride.viewPortContainer}>
+      <SidePanel model={model}>
+        <SidePanel.ToggleButton />
+        <Flex cs={stylesOverride.panel}>
+          {model.state.transitionState === 'expanded' && (
+            <Flex cs={stylesOverride.accentIcon}>
+              <AccentIcon icon={rocketIcon} />
+            </Flex>
+          )}
+          <Heading
+            size="small"
+            id={model.state.labelId}
+            hidden={model.state.transitionState === 'collapsed' ? true : undefined}
+          >
+            Tasks Panel
+          </Heading>
         </Flex>
-      </Flex>
-    </CanvasProvider>
+      </SidePanel>
+    </Flex>
   );
 };
