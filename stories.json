@@ -3985,96 +3985,96 @@
         "__isArgsStory": false
       }
     },
-    "preview-side-panel--basic": {
-      "id": "preview-side-panel--basic",
+    "preview-side-panel-deprecated--basic": {
+      "id": "preview-side-panel-deprecated--basic",
       "name": "Basic",
-      "title": "Preview/Side Panel",
+      "title": "Preview/Side Panel (Deprecated)",
       "importPath": "./modules/preview-react/side-panel/stories/SidePanel.stories.ts",
-      "kind": "Preview/Side Panel",
+      "kind": "Preview/Side Panel (Deprecated)",
       "story": "Basic",
       "parameters": {
         "fileName": "./modules/preview-react/side-panel/stories/SidePanel.stories.ts",
         "__isArgsStory": false
       }
     },
-    "preview-side-panel--alternate-panel": {
-      "id": "preview-side-panel--alternate-panel",
+    "preview-side-panel-deprecated--alternate-panel": {
+      "id": "preview-side-panel-deprecated--alternate-panel",
       "name": "Alternate Panel",
-      "title": "Preview/Side Panel",
+      "title": "Preview/Side Panel (Deprecated)",
       "importPath": "./modules/preview-react/side-panel/stories/SidePanel.stories.ts",
-      "kind": "Preview/Side Panel",
+      "kind": "Preview/Side Panel (Deprecated)",
       "story": "Alternate Panel",
       "parameters": {
         "fileName": "./modules/preview-react/side-panel/stories/SidePanel.stories.ts",
         "__isArgsStory": false
       }
     },
-    "preview-side-panel--always-open": {
-      "id": "preview-side-panel--always-open",
+    "preview-side-panel-deprecated--always-open": {
+      "id": "preview-side-panel-deprecated--always-open",
       "name": "Always Open",
-      "title": "Preview/Side Panel",
+      "title": "Preview/Side Panel (Deprecated)",
       "importPath": "./modules/preview-react/side-panel/stories/SidePanel.stories.ts",
-      "kind": "Preview/Side Panel",
+      "kind": "Preview/Side Panel (Deprecated)",
       "story": "Always Open",
       "parameters": {
         "fileName": "./modules/preview-react/side-panel/stories/SidePanel.stories.ts",
         "__isArgsStory": false
       }
     },
-    "preview-side-panel--external-control": {
-      "id": "preview-side-panel--external-control",
+    "preview-side-panel-deprecated--external-control": {
+      "id": "preview-side-panel-deprecated--external-control",
       "name": "External Control",
-      "title": "Preview/Side Panel",
+      "title": "Preview/Side Panel (Deprecated)",
       "importPath": "./modules/preview-react/side-panel/stories/SidePanel.stories.ts",
-      "kind": "Preview/Side Panel",
+      "kind": "Preview/Side Panel (Deprecated)",
       "story": "External Control",
       "parameters": {
         "fileName": "./modules/preview-react/side-panel/stories/SidePanel.stories.ts",
         "__isArgsStory": false
       }
     },
-    "preview-side-panel--hidden-name": {
-      "id": "preview-side-panel--hidden-name",
+    "preview-side-panel-deprecated--hidden-name": {
+      "id": "preview-side-panel-deprecated--hidden-name",
       "name": "Hidden Name",
-      "title": "Preview/Side Panel",
+      "title": "Preview/Side Panel (Deprecated)",
       "importPath": "./modules/preview-react/side-panel/stories/SidePanel.stories.ts",
-      "kind": "Preview/Side Panel",
+      "kind": "Preview/Side Panel (Deprecated)",
       "story": "Hidden Name",
       "parameters": {
         "fileName": "./modules/preview-react/side-panel/stories/SidePanel.stories.ts",
         "__isArgsStory": false
       }
     },
-    "preview-side-panel--on-expanded-change": {
-      "id": "preview-side-panel--on-expanded-change",
+    "preview-side-panel-deprecated--on-expanded-change": {
+      "id": "preview-side-panel-deprecated--on-expanded-change",
       "name": "On Expanded Change",
-      "title": "Preview/Side Panel",
+      "title": "Preview/Side Panel (Deprecated)",
       "importPath": "./modules/preview-react/side-panel/stories/SidePanel.stories.ts",
-      "kind": "Preview/Side Panel",
+      "kind": "Preview/Side Panel (Deprecated)",
       "story": "On Expanded Change",
       "parameters": {
         "fileName": "./modules/preview-react/side-panel/stories/SidePanel.stories.ts",
         "__isArgsStory": false
       }
     },
-    "preview-side-panel--on-state-transition": {
-      "id": "preview-side-panel--on-state-transition",
+    "preview-side-panel-deprecated--on-state-transition": {
+      "id": "preview-side-panel-deprecated--on-state-transition",
       "name": "On State Transition",
-      "title": "Preview/Side Panel",
+      "title": "Preview/Side Panel (Deprecated)",
       "importPath": "./modules/preview-react/side-panel/stories/SidePanel.stories.ts",
-      "kind": "Preview/Side Panel",
+      "kind": "Preview/Side Panel (Deprecated)",
       "story": "On State Transition",
       "parameters": {
         "fileName": "./modules/preview-react/side-panel/stories/SidePanel.stories.ts",
         "__isArgsStory": false
       }
     },
-    "preview-side-panel--right-origin": {
-      "id": "preview-side-panel--right-origin",
+    "preview-side-panel-deprecated--right-origin": {
+      "id": "preview-side-panel-deprecated--right-origin",
       "name": "Right Origin",
-      "title": "Preview/Side Panel",
+      "title": "Preview/Side Panel (Deprecated)",
       "importPath": "./modules/preview-react/side-panel/stories/SidePanel.stories.ts",
-      "kind": "Preview/Side Panel",
+      "kind": "Preview/Side Panel (Deprecated)",
       "story": "Right Origin",
       "parameters": {
         "fileName": "./modules/preview-react/side-panel/stories/SidePanel.stories.ts",
@@ -4318,6 +4318,90 @@
       "story": "Theming",
       "parameters": {
         "fileName": "./modules/labs-react/search-form/stories/SearchForm.stories.ts",
+        "__isArgsStory": false
+      }
+    },
+    "labs-side-panel-new--basic": {
+      "id": "labs-side-panel-new--basic",
+      "name": "Basic",
+      "title": "Labs/Side Panel (New)",
+      "importPath": "./modules/labs-react/side-panel/stories/SidePanel.stories.ts",
+      "kind": "Labs/Side Panel (New)",
+      "story": "Basic",
+      "parameters": {
+        "fileName": "./modules/labs-react/side-panel/stories/SidePanel.stories.ts",
+        "__isArgsStory": false
+      }
+    },
+    "labs-side-panel-new--alternate-panel": {
+      "id": "labs-side-panel-new--alternate-panel",
+      "name": "Alternate Panel",
+      "title": "Labs/Side Panel (New)",
+      "importPath": "./modules/labs-react/side-panel/stories/SidePanel.stories.ts",
+      "kind": "Labs/Side Panel (New)",
+      "story": "Alternate Panel",
+      "parameters": {
+        "fileName": "./modules/labs-react/side-panel/stories/SidePanel.stories.ts",
+        "__isArgsStory": false
+      }
+    },
+    "labs-side-panel-new--always-open": {
+      "id": "labs-side-panel-new--always-open",
+      "name": "Always Open",
+      "title": "Labs/Side Panel (New)",
+      "importPath": "./modules/labs-react/side-panel/stories/SidePanel.stories.ts",
+      "kind": "Labs/Side Panel (New)",
+      "story": "Always Open",
+      "parameters": {
+        "fileName": "./modules/labs-react/side-panel/stories/SidePanel.stories.ts",
+        "__isArgsStory": false
+      }
+    },
+    "labs-side-panel-new--external-control": {
+      "id": "labs-side-panel-new--external-control",
+      "name": "External Control",
+      "title": "Labs/Side Panel (New)",
+      "importPath": "./modules/labs-react/side-panel/stories/SidePanel.stories.ts",
+      "kind": "Labs/Side Panel (New)",
+      "story": "External Control",
+      "parameters": {
+        "fileName": "./modules/labs-react/side-panel/stories/SidePanel.stories.ts",
+        "__isArgsStory": false
+      }
+    },
+    "labs-side-panel-new--hidden-name": {
+      "id": "labs-side-panel-new--hidden-name",
+      "name": "Hidden Name",
+      "title": "Labs/Side Panel (New)",
+      "importPath": "./modules/labs-react/side-panel/stories/SidePanel.stories.ts",
+      "kind": "Labs/Side Panel (New)",
+      "story": "Hidden Name",
+      "parameters": {
+        "fileName": "./modules/labs-react/side-panel/stories/SidePanel.stories.ts",
+        "__isArgsStory": false
+      }
+    },
+    "labs-side-panel-new--on-state-transition": {
+      "id": "labs-side-panel-new--on-state-transition",
+      "name": "On State Transition",
+      "title": "Labs/Side Panel (New)",
+      "importPath": "./modules/labs-react/side-panel/stories/SidePanel.stories.ts",
+      "kind": "Labs/Side Panel (New)",
+      "story": "On State Transition",
+      "parameters": {
+        "fileName": "./modules/labs-react/side-panel/stories/SidePanel.stories.ts",
+        "__isArgsStory": false
+      }
+    },
+    "labs-side-panel-new--right-origin": {
+      "id": "labs-side-panel-new--right-origin",
+      "name": "Right Origin",
+      "title": "Labs/Side Panel (New)",
+      "importPath": "./modules/labs-react/side-panel/stories/SidePanel.stories.ts",
+      "kind": "Labs/Side Panel (New)",
+      "story": "Right Origin",
+      "parameters": {
+        "fileName": "./modules/labs-react/side-panel/stories/SidePanel.stories.ts",
         "__isArgsStory": false
       }
     },
@@ -4726,6 +4810,66 @@
       "story": "Search Form Themes",
       "parameters": {
         "fileName": "./modules/labs-react/search-form/stories/testing.stories.tsx",
+        "__isArgsStory": false
+      }
+    },
+    "testing-labs-side-panel--side-panel-states": {
+      "id": "testing-labs-side-panel--side-panel-states",
+      "name": "Side Panel States",
+      "title": "Testing/Labs/Side Panel",
+      "importPath": "./modules/labs-react/side-panel/stories/testingVisual.stories.tsx",
+      "kind": "Testing/Labs/Side Panel",
+      "story": "Side Panel States",
+      "parameters": {
+        "fileName": "./modules/labs-react/side-panel/stories/testingVisual.stories.tsx",
+        "__isArgsStory": false
+      }
+    },
+    "testing-labs-side-panel-cypress--default": {
+      "id": "testing-labs-side-panel-cypress--default",
+      "name": "Default",
+      "title": "Testing/Labs/Side Panel/Cypress",
+      "importPath": "./modules/labs-react/side-panel/stories/testingCypress.stories.tsx",
+      "kind": "Testing/Labs/Side Panel/Cypress",
+      "story": "Default",
+      "parameters": {
+        "fileName": "./modules/labs-react/side-panel/stories/testingCypress.stories.tsx",
+        "__isArgsStory": false
+      }
+    },
+    "testing-labs-side-panel-cypress--as-aside": {
+      "id": "testing-labs-side-panel-cypress--as-aside",
+      "name": "As Aside",
+      "title": "Testing/Labs/Side Panel/Cypress",
+      "importPath": "./modules/labs-react/side-panel/stories/testingCypress.stories.tsx",
+      "kind": "Testing/Labs/Side Panel/Cypress",
+      "story": "As Aside",
+      "parameters": {
+        "fileName": "./modules/labs-react/side-panel/stories/testingCypress.stories.tsx",
+        "__isArgsStory": false
+      }
+    },
+    "testing-labs-side-panel-cypress--as-div": {
+      "id": "testing-labs-side-panel-cypress--as-div",
+      "name": "As Div",
+      "title": "Testing/Labs/Side Panel/Cypress",
+      "importPath": "./modules/labs-react/side-panel/stories/testingCypress.stories.tsx",
+      "kind": "Testing/Labs/Side Panel/Cypress",
+      "story": "As Div",
+      "parameters": {
+        "fileName": "./modules/labs-react/side-panel/stories/testingCypress.stories.tsx",
+        "__isArgsStory": false
+      }
+    },
+    "testing-labs-side-panel-cypress--first-focusable": {
+      "id": "testing-labs-side-panel-cypress--first-focusable",
+      "name": "First Focusable",
+      "title": "Testing/Labs/Side Panel/Cypress",
+      "importPath": "./modules/labs-react/side-panel/stories/testingCypress.stories.tsx",
+      "kind": "Testing/Labs/Side Panel/Cypress",
+      "story": "First Focusable",
+      "parameters": {
+        "fileName": "./modules/labs-react/side-panel/stories/testingCypress.stories.tsx",
         "__isArgsStory": false
       }
     },
