@@ -113,7 +113,7 @@ In this release, we:
 Guide for migrating from @workday/canvas-kit-react/tokens to @workday/canvas-tokens-web.
 This migration enables better theming capabilities, improved performance, and a more standardized approach to styling.`,
           mimeType: 'text/plain',
-          uri: 'docs://llm/llm-token-migration-14',
+          uri: 'docs://llm-token-migration-14',
           contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
         };
       case 'llm-style-props-migration.txt':
@@ -123,7 +123,7 @@ This migration enables better theming capabilities, improved performance, and a 
 Guide for migrating from Emotion's style props to @workday/canvas-kit-styling.
 This migration improves performance, consistency, and maintainability by moving away from runtime styling to static CSS compilation.`,
           mimeType: 'text/plain',
-          uri: 'docs://llm/llm-style-props-migration',
+          uri: 'docs://llm-style-props-migration',
           contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
         };
       case 'upgrade-guides/14.0-UPGRADE-GUIDE.md':
@@ -156,7 +156,7 @@ Covers:
 - Theming modals, dialogs, and popups
 - Best practices for semantic token usage and accessibility`,
           mimeType: 'text/markdown',
-          uri: 'docs://llm/theming',
+          uri: 'docs://theming',
           contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
         };
       default:
@@ -333,7 +333,7 @@ Complete migration guide from @workday/canvas-kit-react/tokens to @workday/canva
 - Complete before/after code examples for cards, forms, and buttons
 - Best practices and common pitfalls`,
           mimeType: 'text/plain',
-          uri: 'docs://llm/llm-token-migration-14',
+          uri: 'docs://llm-token-migration-14',
           contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
         };
       default:
