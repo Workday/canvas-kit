@@ -12,8 +12,7 @@ const stylesOverride = {
   }),
   panel: createStyles({
     alignItems: 'center',
-    paddingY: system.space.x4,
-    paddingX: system.space.x4,
+    padding: system.space.x4,
   }),
   panelHeading: createStyles({
     color: system.color.fg.muted.stronger,
