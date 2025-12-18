@@ -5,9 +5,18 @@ import {system} from '@workday/canvas-tokens-web';
 import {SidePanelContext} from './hooks';
 import {SidePanelToggleButton} from './SidePanelToggleButton';
 
+/**
+ * @deprecated ⚠️ `SidePanelVariant` in Preview has been deprecated and will be removed in a future major version. Please use [`SidePanel` in Labs](https://workday.github.io/canvas-kit/?path=/docs/labs-side-panel--docs) instead.
+ */
 export type SidePanelVariant = 'standard' | 'alternate';
+/**
+ * @deprecated ⚠️ `SidePanelTransitionStates` in Preview has been deprecated and will be removed in a future major version. Please use [`SidePanel` in Labs](https://workday.github.io/canvas-kit/?path=/docs/labs-side-panel--docs) instead.
+ */
 export type SidePanelTransitionStates = 'collapsed' | 'collapsing' | 'expanded' | 'expanding';
 
+/**
+ * @deprecated ⚠️ `SidePanelProps` in Preview has been deprecated and will be removed in a future major version. Please use [`SidePanel` in Labs](https://workday.github.io/canvas-kit/?path=/docs/labs-side-panel--docs) instead.
+ */
 export interface SidePanelProps {
   /**
    * The width of the component (in `px` if it's a `number`) when it is collapsed.
@@ -62,6 +71,9 @@ export interface SidePanelProps {
   onAnimationEnd?: React.TransitionEvent<HTMLElement>;
 }
 
+/**
+ * @deprecated ⚠️ `panelStencil` in Preview has been deprecated and will be removed in a future major version. Please use [`SidePanel` in Labs](https://workday.github.io/canvas-kit/?path=/docs/labs-side-panel--docs) instead.
+ */
 export const panelStencil = createStencil({
   vars: {
     expandedWidth: '',
@@ -103,6 +115,9 @@ export const panelStencil = createStencil({
   },
 });
 
+/**
+ * @deprecated ⚠️ `SidePanel` in Preview has been deprecated and will be removed in a future major version. Please use [`SidePanel` in Labs](https://workday.github.io/canvas-kit/?path=/docs/labs-side-panel--docs) instead.
+ */
 export const SidePanel = createComponent('section')({
   displayName: 'SidePanel',
   Component(

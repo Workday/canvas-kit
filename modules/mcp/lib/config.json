@@ -18,7 +18,7 @@
     "tokens/color-contrast.md",
     "tokens/color-roles.md",
     "tokens/color-scale.md",
-    "llm-txt/llm-token-migration-14.txt",
-    "llm-txt/llm-style-props-migration.txt"
+    "llm-token-migration-14.txt",
+    "llm-style-props-migration.txt"
   ]
 }
