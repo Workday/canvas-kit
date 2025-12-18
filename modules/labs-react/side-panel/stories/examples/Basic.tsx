@@ -14,8 +14,7 @@ const stylesOverride = {
   }),
   panel: createStyles({
     alignItems: 'center',
-    paddingY: system.space.x4,
-    paddingX: system.space.x4,
+    padding: system.space.x4,
   }),
   accentIcon: createStyles({
     marginInlineEnd: system.space.x4,
