@@ -6,7 +6,6 @@ import {system} from '@workday/canvas-tokens-web';
 import {sparkleSingleSmallIcon} from '@workday/canvas-system-icons-web';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {cssVar} from '@workday/canvas-kit-styling';
 
 const storybookStatusIndicatorStencil = createStencil({
   base: {
