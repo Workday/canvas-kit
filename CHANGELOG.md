@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.2.1](https://github.com/Workday/canvas-kit/releases/tag/v14.2.1) (2025-12-18)
+
+### Components
+
+- fix: Remove duplicate resource from MCP ([#3653](https://github.com/Workday/canvas-kit/pull/3653)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v14.2.0](https://github.com/Workday/canvas-kit/releases/tag/v14.2.0) (2025-12-18)
 
 
