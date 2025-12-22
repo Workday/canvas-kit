@@ -18,23 +18,17 @@ export const sidePanelHeadingStencil = createStencil({
   base: {
     padding: system.space.x4,
   },
-  modifiers: {
-    hidden: {
-      true: {
-        display: 'none',
-      },
-      false: {},
-    },
-  },
 });
 
 /**
  * Adds the necessary props to the SidePanelHeading subcomponent.
- * This sets the `id` to the `labelId` from the model for accessibility purposes.
+ * This sets the `id` to the `labelId` from the model for accessibility purposes,
+ * and hides the heading when the panel is not expanded.
  */
 export const useSidePanelHeading = createElemPropsHook(useSidePanelModel)(({state}) => {
   return {
     id: state.labelId,
+    hidden: state.transitionState !== 'expanded',
   };
 });
 
@@ -49,20 +43,9 @@ export const SidePanelHeading = createSubcomponent('h2')({
   displayName: 'SidePanel.Heading',
   modelHook: useSidePanelModel,
   elemPropsHook: useSidePanelHeading,
-})<SidePanelHeadingProps>(({size = 'small', children, ...elemProps}, Element, model) => {
-  const isHidden = model.state.transitionState !== 'expanded';
-
+})<SidePanelHeadingProps>(({size = 'small', children, ...elemProps}, Element) => {
   return (
-    <Heading
-      as={Element}
-      size={size}
-      {...handleCsProp(
-        elemProps,
-        sidePanelHeadingStencil({
-          hidden: isHidden,
-        })
-      )}
-    >
+    <Heading as={Element} size={size} {...handleCsProp(elemProps, sidePanelHeadingStencil())}>
       {children}
     </Heading>
   );
