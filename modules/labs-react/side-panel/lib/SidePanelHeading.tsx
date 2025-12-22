@@ -39,14 +39,14 @@ export const useSidePanelHeading = createElemPropsHook(useSidePanelModel)(({stat
  *
  * The heading is automatically hidden when the panel is collapsed.
  */
-export const SidePanelHeading = createSubcomponent('h2')({
+export const SidePanelHeading = createSubcomponent(Heading)({
   displayName: 'SidePanel.Heading',
   modelHook: useSidePanelModel,
   elemPropsHook: useSidePanelHeading,
 })<SidePanelHeadingProps>(({size = 'small', children, ...elemProps}, Element) => {
   return (
-    <Heading as={Element} size={size} {...handleCsProp(elemProps, sidePanelHeadingStencil())}>
+    <Element size={size} {...handleCsProp(elemProps, sidePanelHeadingStencil())}>
       {children}
-    </Heading>
+    </Element>
   );
 });
