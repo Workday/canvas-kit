@@ -34,8 +34,9 @@ export const Basic = () => {
   return (
     <Flex cs={stylesOverride.viewPortContainer}>
       <SidePanel model={model}>
+        <SidePanel.Heading size="small">Tasks Panel</SidePanel.Heading>
         <SidePanel.ToggleButton />
-        <Flex cs={stylesOverride.panel}>
+        {/* <Flex cs={stylesOverride.panel}>
           {model.state.transitionState === 'expanded' && (
             <Flex cs={stylesOverride.accentIcon}>
               <AccentIcon icon={rocketIcon} />
@@ -48,7 +49,7 @@ export const Basic = () => {
           >
             Tasks Panel
           </Heading>
-        </Flex>
+        </Flex> */}
       </SidePanel>
     </Flex>
   );
