@@ -125,6 +125,7 @@ export const useSidePanelToggleButtonElemProps = createElemPropsHook(useSidePane
     return {
       'aria-controls': state.panelId,
       'aria-pressed': state.transitionState === 'collapsed',
+      'aria-describedby': state.labelId,
     };
   }
 );
