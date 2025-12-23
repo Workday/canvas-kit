@@ -201,7 +201,7 @@ export const InputGroupStates = () => (
       ]}
     >
       {({value, placeholder, ...props}) => (
-        <CanvasProvider theme={{canvas: {direction: props.dir}}}>
+        <CanvasProvider dir={props.dir}>
           <InputGroup width={300}>
             {props.start}
             <InputGroup.Input

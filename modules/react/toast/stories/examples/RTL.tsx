@@ -3,13 +3,13 @@ import React from 'react';
 import {Toast} from '@workday/canvas-kit-react/toast';
 import {checkIcon} from '@workday/canvas-system-icons-web';
 import {colors} from '@workday/canvas-kit-react/tokens';
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 
 export const RTL = () => {
   const handleClose = () => console.log('close button clicked');
 
   return (
-    <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
+    <CanvasProvider dir="rtl">
       <Toast>
         <Toast.Icon icon={checkIcon} color="greenApple400" />
         <Toast.Body>
