@@ -13,7 +13,7 @@ import {OnExpandedChange as OnExpandedChangeExample} from './examples/OnExpanded
 import {OnStateTransition as OnStateTransitionExample} from './examples/OnStateTransition';
 
 export default {
-  title: 'Preview/Side Panel',
+  title: 'Preview/Side Panel (Deprecated)',
   component: SidePanel,
   tags: ['autodocs'],
   parameters: {
