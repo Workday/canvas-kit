@@ -106,16 +106,6 @@ In this release, we:
           uri: 'docs://upgrade-guides/13.0-UPGRADE-GUIDE',
           contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
         };
-      case 'llm-token-migration-14.txt':
-        return {
-          title: 'Canvas Kit Token Migration Guide',
-          description: `# Canvas Kit Token Migration Guide
-Guide for migrating from @workday/canvas-kit-react/tokens to @workday/canvas-tokens-web.
-This migration enables better theming capabilities, improved performance, and a more standardized approach to styling.`,
-          mimeType: 'text/plain',
-          uri: 'docs://llm-token-migration-14',
-          contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
-        };
       case 'llm-style-props-migration.txt':
         return {
           title: 'Canvas Kit Style Props Migration Guide',
