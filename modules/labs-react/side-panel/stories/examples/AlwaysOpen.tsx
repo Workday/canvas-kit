@@ -37,9 +37,9 @@ export const AlwaysOpen = () => {
       <SidePanel model={model}>
         <Flex cs={stylesOverride.panelContainer}>
           <AccentIcon icon={rocketIcon} cs={stylesOverride.accentIcon} />
-          <Heading size="small" cs={stylesOverride.panelHeading} id={model.state.labelId}>
+          <SidePanel.Heading size="small" cs={stylesOverride.panelHeading}>
             Tasks Panel
-          </Heading>
+          </SidePanel.Heading>
         </Flex>
       </SidePanel>
       <Flex as="main" cs={stylesOverride.mainContent}>
