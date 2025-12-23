@@ -1,7 +1,7 @@
-import {Basic} from '../../modules/preview-react/segmented-control/stories/examples/Basic';
-import {Vertical} from '../../modules/preview-react/segmented-control/stories/examples/Vertical';
-import {RTL} from '../../modules/preview-react/segmented-control/stories/examples/RTL';
-import {Disabled} from '../../modules/preview-react/segmented-control/stories/examples/Disabled';
+import {Basic} from '../../modules/react/segmented-control/stories/examples/Basic';
+import {Vertical} from '../../modules/react/segmented-control/stories/examples/Vertical';
+import {RTL} from '../../modules/react/segmented-control/stories/examples/RTL';
+import {Disabled} from '../../modules/react/segmented-control/stories/examples/Disabled';
 
 describe('SegmentedControl', () => {
   [Basic, Vertical].forEach(Example => {
