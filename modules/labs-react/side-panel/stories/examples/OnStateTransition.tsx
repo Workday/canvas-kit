@@ -37,7 +37,9 @@ export const OnStateTransition = () => {
     <Flex cs={stylesOverride.viewport}>
       <SidePanel model={model}>
         <SidePanel.ToggleButton />
-        <AccessibleHide id={model.state.labelId}>Hidden Title</AccessibleHide>
+        <SidePanel.Heading hidden size="small">
+          Hidden Title
+        </SidePanel.Heading>
       </SidePanel>
       <Flex as="main" cs={stylesOverride.main}>
         <Text as="p" typeLevel="body.large">

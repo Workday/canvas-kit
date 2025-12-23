@@ -18,7 +18,7 @@ const stylesOverride = {
   }),
 };
 
-export const HiddenName = () => {
+export const Heading = () => {
   const model = useSidePanelModel({
     onStateTransition: state => {
       console.log(`state is: ${state}`);
@@ -29,7 +29,9 @@ export const HiddenName = () => {
     <Flex cs={stylesOverride.viewport}>
       <SidePanel model={model}>
         <SidePanel.ToggleButton />
-        <AccessibleHide id={model.state.labelId}>Hidden Title</AccessibleHide>
+        <SidePanel.Heading hidden size="small">
+          Hidden Title
+        </SidePanel.Heading>
       </SidePanel>
       <Flex as="main" cs={stylesOverride.main}>
         <Text as="p" typeLevel="body.large">
