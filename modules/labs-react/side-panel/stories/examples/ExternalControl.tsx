@@ -26,19 +26,6 @@ const stylesOverride = {
   }),
 };
 
-/*
- * NOTE TO DEV:
- * Spreading the `controlProps` onto an external control creates serious accessibility issues.
- * - `aria-labelledby` id reference is invalid when the SidePanel is collapsed
- * - `aria-labelledby` will change the name of "Toggle Side Panel" button to "Tasks Panel"
- * - `aria-expanded` won't make sense to screen reader users when the expanded SidePanel content isn't following the control
- * - `aria-controls` is unsupported by screen readers and will not allow users to navigate to the controlled content
- *
- * SOLUTION:
- * - Pass the `controlProps` click handler function down to the external control component.
- * - Add a toggle state to Button components with `aria-pressed` for screen readers,
- * - OR use a similar toggle input like Checkbox or Switch.
- */
 export const ExternalControl = () => {
   const model = useSidePanelModel({
     initialTransitionState: 'collapsed',
@@ -49,12 +36,11 @@ export const ExternalControl = () => {
     <Flex cs={stylesOverride.viewport}>
       <SidePanel model={model}>
         <SidePanel.ToggleButton />
+        <SidePanel.Heading size="small" cs={stylesOverride.panelHeading}>
+          Task Panel
+        </SidePanel.Heading>
         {model.state.transitionState === 'expanded' && (
-          <Flex cs={stylesOverride.panel}>
-            <Heading size="small" cs={stylesOverride.panelHeading} id={model.state.labelId}>
-              Tasks Panel
-            </Heading>
-          </Flex>
+          <Flex cs={stylesOverride.panel}>Contents</Flex>
         )}
       </SidePanel>
       <Flex as="main" cs={stylesOverride.main}>
