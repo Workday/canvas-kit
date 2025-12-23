@@ -28,7 +28,7 @@ export const Basic = () => {
             Tasks Panel
           </Flex>
         </SidePanel.Heading>
-        <SidePanel.ToggleButton />
+        <SidePanel.ToggleButton aria-label="Collapse View" />
       </SidePanel>
     </Flex>
   );
