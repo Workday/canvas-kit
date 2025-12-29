@@ -37,7 +37,6 @@ describe('useTooltip with type="label"', () => {
 describe('useTooltip with type="describe"', () => {
   beforeEach(() => {});
   it('should add aria attributes to correlate the target and the tooltip', () => {
-    const test = vi.fn();
     vi.useFakeTimers();
     render(<TooltipWithHook type="describe" />);
 

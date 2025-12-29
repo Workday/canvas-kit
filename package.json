@@ -107,7 +107,7 @@
     "precommit": "lint-staged",
     "chromatic": "chromatic",
     "build-storybook": "node utils/download-fonts.js && storybook build .storybook -o docs",
-    "lint": "node utils/check-lockfile.js && node utils/check-mismatched-dependencies.js && eslint -c ./.eslintrc.js --ext=jsx,ts,tsx .",
+    "lint": "node utils/check-lockfile.js && node utils/check-mismatched-dependencies.js && eslint .",
     "mdxUpgrade2md": "node ./utils/mdx-upgrades-2-md.js",
     "typecheck": "npm-run-all --parallel typecheck:src typecheck:cypress typecheck:types typecheck:specs typecheck:stories",
     "typecheck:src": "lerna run typecheck:src",

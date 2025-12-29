@@ -152,9 +152,6 @@ export function useTooltip<T extends Element = Element>({
     delete targetProps['aria-describedby'];
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-  targetProps; //?
-
   return {
     /** Mix these properties into the target element. **Must be an Element** */
     targetProps,

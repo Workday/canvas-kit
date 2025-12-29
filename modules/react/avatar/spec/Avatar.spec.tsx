@@ -1,12 +1,11 @@
 import {fireEvent, render} from '@testing-library/react';
 import * as React from 'react';
 
-import {calc, createStencil, createStyles, cssVar} from '@workday/canvas-kit-styling';
-import {compileCSS} from '@workday/canvas-kit-styling-transform/lib/utils/createStyleObjectNode';
+import {createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {systemIconStencil} from '../../icon';
-import {Avatar, avatarStencil} from '../lib/Avatar';
+import {Avatar} from '../lib/Avatar';
 
 describe('Avatar', () => {
   it('should render a button element', () => {
