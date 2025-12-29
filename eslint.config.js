@@ -13,10 +13,14 @@ export default [
   {
     ignores: [
       '**/node_modules/**',
+      'node_modules/**',
       '**/dist/**',
       '**/coverage/**',
+      '**/.cache/**',
+      '.cache/**',
+      '.cache/',
       'docs/**',
-      'jest/**',
+      'test-utils/**',
       '.storybook/**',
     ],
   },

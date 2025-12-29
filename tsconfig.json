@@ -39,6 +39,6 @@
     "utils/**/spec/*",
     "modules/**/spec/*",
     "modules/**/stories/*",
-    "jest/**/*"
+    "test-utils/**/*"
   ]
 }
