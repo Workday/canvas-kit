@@ -1,15 +1,15 @@
 import * as React from 'react';
+
 import {
   ComponentStatesTable,
-  permutateProps,
   StaticStates,
+  permutateProps,
 } from '@workday/canvas-kit-react/testing';
-import {withSnapshotsEnabled, customColorTheme} from '../../../../utils/storybook';
 
+import {customColorTheme, withSnapshotsEnabled} from '../../../../utils/storybook';
 import {Select} from '../lib/Select';
 import {SelectBase} from '../lib/SelectBase';
 import {SelectOption} from '../lib/SelectOption';
-
 import {options} from './examples/storiesData';
 
 const normalizedOptions = options.map(option => {

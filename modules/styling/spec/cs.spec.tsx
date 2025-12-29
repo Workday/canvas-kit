@@ -4,7 +4,6 @@ import {ComponentSelector, SerializedStyles} from '@emotion/serialize';
 import styled from '@emotion/styled';
 import {render as rtlRender, screen} from '@testing-library/react';
 import {Properties} from 'csstype';
-/* eslint-disable @emotion/no-vanilla */
 import {expectTypeOf} from 'expect-type';
 
 import {compileCSS} from '../../styling-transform/lib/utils/createStyleObjectNode';

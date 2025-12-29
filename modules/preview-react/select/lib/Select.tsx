@@ -1,15 +1,18 @@
 import * as React from 'react';
+
 import {
   ErrorType,
   StyledType,
   createComponent,
-  useForkRef,
   generateUniqueId,
+  useForkRef,
 } from '@workday/canvas-kit-react/common';
+
+import {CoreSelectBaseProps, NormalizedOption, Option, SelectBase} from './SelectBase';
 import {menuAnimationDuration} from './SelectMenu';
-import {SelectBase, CoreSelectBaseProps, Option, NormalizedOption} from './SelectBase';
 import {MenuVisibility} from './types';
 import {getCorrectedIndexByValue} from './utils';
+
 /**
  * @deprecated ⚠️ `SelectProps` in Preview has been deprecated and will be removed in a future major version. Please use [`Select` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--docs) instead.
  */

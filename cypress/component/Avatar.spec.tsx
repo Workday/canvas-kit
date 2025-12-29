@@ -1,11 +1,11 @@
 import {Basic} from '../../modules/react/avatar/stories/avatar/examples/Basic';
-import {Size} from '../../modules/react/avatar/stories/avatar/examples/Size';
-import {Variant} from '../../modules/react/avatar/stories/avatar/examples/Variant';
+import {Button} from '../../modules/react/avatar/stories/avatar/examples/Button';
 import {CustomStyles} from '../../modules/react/avatar/stories/avatar/examples/CustomStyles';
 import {Image} from '../../modules/react/avatar/stories/avatar/examples/Image';
-import {Button} from '../../modules/react/avatar/stories/avatar/examples/Button';
 import {LazyLoad} from '../../modules/react/avatar/stories/avatar/examples/LazyLoad';
 import {ObjectFit} from '../../modules/react/avatar/stories/avatar/examples/ObjectFit';
+import {Size} from '../../modules/react/avatar/stories/avatar/examples/Size';
+import {Variant} from '../../modules/react/avatar/stories/avatar/examples/Variant';
 
 describe('Avatar', () => {
   [Basic, Size, Variant, CustomStyles].forEach(Example => {

@@ -1,8 +1,10 @@
 import React from 'react';
 
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
-import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {Popup, usePopupModel} from '@workday/canvas-kit-react/popup';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
+import {base} from '@workday/canvas-tokens-web';
 
 export default {
   title: 'Testing/Popups/Popup',
@@ -145,7 +147,7 @@ export const PopupRTL = {
       initialVisibility: 'visible',
     });
     return (
-      <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
+      <CanvasProvider dir="rtl">
         <Popup model={model}>
           <Popup.Target style={{display: 'none'}}></Popup.Target>
           <Popup.Popper>
@@ -153,6 +155,29 @@ export const PopupRTL = {
               <Popup.CloseIcon aria-label="" />
               <Popup.Heading>למחוק פריט</Popup.Heading>
               <Popup.Body>האם ברצונך למחוק פריט זה</Popup.Body>
+            </Popup.Card>
+          </Popup.Popper>
+        </Popup>
+      </CanvasProvider>
+    );
+  },
+};
+
+export const PopupThemed = {
+  render: () => {
+    const model = usePopupModel({
+      initialVisibility: 'visible',
+    });
+    return (
+      <CanvasProvider theme={{canvas: {palette: {primary: {main: base.magenta600}}}}}>
+        <PrimaryButton>Primary Button</PrimaryButton>
+        <Popup model={model}>
+          <Popup.Popper>
+            <Popup.Card style={{animation: 'none'}} width={300}>
+              <Popup.CloseIcon aria-label="" />
+              <Popup.Heading>Title</Popup.Heading>
+              <Popup.Body>Body</Popup.Body>
+              <PrimaryButton>Primary Button</PrimaryButton>
             </Popup.Card>
           </Popup.Popper>
         </Popup>

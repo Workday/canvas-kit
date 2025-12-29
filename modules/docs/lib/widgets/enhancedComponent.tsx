@@ -175,6 +175,7 @@ registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta})
 
 function groupProps(props: types.ObjectProperty[]): Record<string, types.ObjectProperty[]> {
   const categories: Record<string, types.ObjectProperty[]> = {Local: []};
+  // eslint-disable-next-line guard-for-in
   for (const key in fileNameToCategoryMap) {
     categories[key] = [];
   }

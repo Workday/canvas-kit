@@ -1,19 +1,22 @@
+import chroma from 'chroma-js';
 import * as React from 'react';
+
+import {Combobox} from '@workday/canvas-kit-labs-react/combobox';
+import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
 import {
   GrowthBehavior,
-  generateUniqueId,
   accessibleHideStyles,
+  generateUniqueId,
 } from '@workday/canvas-kit-react/common';
-import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
-import {searchIcon, xIcon} from '@workday/canvas-system-icons-web';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {Combobox} from '@workday/canvas-kit-labs-react/combobox';
-import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {searchThemes, SearchTheme, SearchThemeAttributes} from './themes';
-import chroma from 'chroma-js';
-import {CSProps, calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {CSProps, calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {searchIcon, xIcon} from '@workday/canvas-system-icons-web';
+import {brand, system} from '@workday/canvas-tokens-web';
+
+import {SearchTheme, SearchThemeAttributes, searchThemes} from './themes';
+
 /**
  * @deprecated ⚠️ `SearchFormProps` is deprecated and will be removed in a future major version. Please reference our [Autocomplete example](https://workday.github.io/canvas-kit/?path=/docs/features-combobox--docs#usage).
  */

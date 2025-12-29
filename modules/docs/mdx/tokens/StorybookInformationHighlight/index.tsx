@@ -1,5 +1,5 @@
-import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
 import {ExternalHyperlink} from '@workday/canvas-kit-react/button';
+import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
 
 export const StorybookInformationHighlight = ({
   variant,

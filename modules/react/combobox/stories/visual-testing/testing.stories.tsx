@@ -1,8 +1,7 @@
 import React from 'react';
 
-import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/testing';
-
 import {Combobox, useComboboxModel} from '@workday/canvas-kit-react/combobox';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 
 export default {
   title: 'Testing/Combobox',
@@ -33,11 +32,11 @@ export const ComboboxStates = {
         >
           {({visibility, ...props}) => {
             // Do this work to make the test look correct
-            // eslint-disable-next-line react-hooks/rules-of-hooks
+
             const model = useComboboxModel({
               initialVisibility: visibility,
             });
-            // eslint-disable-next-line react-hooks/rules-of-hooks
+
             React.useLayoutEffect(() => {
               if (visibility === 'visible') {
                 model.events.setWidth(model.state.inputRef.current.clientWidth);

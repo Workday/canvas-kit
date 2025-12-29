@@ -1,9 +1,10 @@
 import React from 'react';
 
-import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Select} from '@workday/canvas-kit-preview-react/select';
-import {manyOptions} from '../storiesData';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+
 import {controlComponent} from '../../../../../../utils/storybook';
+import {manyOptions} from '../storiesData';
 
 export const ScrollableLeft = () => {
   return (

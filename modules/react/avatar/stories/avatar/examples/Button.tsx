@@ -1,6 +1,7 @@
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+
 // @ts-ignore: Cannot find module error
 import testAvatar from './test-avatar.png';
 

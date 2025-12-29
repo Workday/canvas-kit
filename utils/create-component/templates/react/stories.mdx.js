@@ -1,4 +1,4 @@
-module.exports = (
+const storiesMdx = (
   modulePath,
   storyPath,
   pascalCaseName,
@@ -41,3 +41,5 @@ You can open your component by default using the \`initialOpen\` prop.
 
 <SymbolDoc name="${pascalCaseName}" hideDescription />
 `;
+
+export default storiesMdx;

@@ -1,18 +1,16 @@
 import * as React from 'react';
+
+import {rocketIcon} from '@workday/canvas-accent-icons-web';
+import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
-import {
-  SidePanel,
-  useSidePanel,
-  SidePanelTransitionStates,
-} from '@workday/canvas-kit-preview-react/side-panel';
-import {Flex} from '@workday/canvas-kit-react/layout';
-import {Heading, Text} from '@workday/canvas-kit-react/text';
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {AccentIcon} from '@workday/canvas-kit-react/icon';
-import {rocketIcon} from '@workday/canvas-accent-icons-web';
-import {useDirection} from './useDirection';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {Heading, Text} from '@workday/canvas-kit-react/text';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
-import {system, base} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
+
+import {useDirection} from './useDirection';
 
 const stylesOverride = {
   viewPortContainer: createStyles({
@@ -40,7 +38,7 @@ export const Basic = () => {
   const {expanded, panelProps, labelProps, controlProps} = useSidePanel();
 
   return (
-    <CanvasProvider theme={{canvas: {direction}}}>
+    <CanvasProvider dir={direction}>
       <Flex cs={stylesOverride.viewPortContainer}>
         <SidePanel {...panelProps}>
           <SidePanel.ToggleButton {...controlProps} />

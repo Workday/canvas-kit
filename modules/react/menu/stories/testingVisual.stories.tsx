@@ -1,14 +1,13 @@
 import React from 'react';
 
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {Flex} from '@workday/canvas-kit-react/layout';
+// unreleased path
+import {Menu} from '@workday/canvas-kit-react/menu';
 import {StaticStates} from '@workday/canvas-kit-react/testing';
 import {saveAsIcon} from '@workday/canvas-system-icons-web';
 
 import {customColorTheme} from '../../../../utils/storybook';
-
-// unreleased path
-import {Menu} from '@workday/canvas-kit-react/menu';
-import {Flex} from '@workday/canvas-kit-react/layout';
 
 const fontDelay = 150; // best guess for the font delay to prevent incorrect Chromatic regressions
 
@@ -86,7 +85,7 @@ export const MenuItemStates = {
           </div>
           <div>
             <h3>RTL</h3>
-            <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
+            <CanvasProvider dir="rtl">
               <AllStatesMenuItem />
             </CanvasProvider>
           </div>
@@ -199,7 +198,7 @@ export const MenuOptionStates = {
           </div>
           <div>
             <h3>RTL</h3>
-            <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
+            <CanvasProvider dir="rtl">
               <AllStatesMenuOption />
             </CanvasProvider>
           </div>
@@ -220,7 +219,7 @@ export const MenuGroups = {
           </div>
           <div>
             <h3>RTL</h3>
-            <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
+            <CanvasProvider dir="rtl">
               <MenuWithGroups />
             </CanvasProvider>
           </div>

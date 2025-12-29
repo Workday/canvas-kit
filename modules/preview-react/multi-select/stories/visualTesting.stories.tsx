@@ -1,13 +1,13 @@
 import * as React from 'react';
 
+import {MultiSelect} from '@workday/canvas-kit-preview-react/multi-select';
 import {
   ComponentStatesTable,
-  permutateProps,
   StaticStates,
+  permutateProps,
 } from '@workday/canvas-kit-react/testing';
-import {customColorTheme} from '../../../../utils/storybook';
 
-import {MultiSelect} from '@workday/canvas-kit-preview-react/multi-select';
+import {customColorTheme} from '../../../../utils/storybook';
 
 export default {
   title: 'Testing/Inputs/MultiSelect',

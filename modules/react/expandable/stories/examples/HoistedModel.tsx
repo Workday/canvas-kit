@@ -1,8 +1,8 @@
 import React from 'react';
 
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Expandable, useExpandableModel} from '@workday/canvas-kit-react/expandable';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {SecondaryButton} from '@workday/canvas-kit-react/button';
 
 export const HoistedModel = () => {
   const modelOne = useExpandableModel();

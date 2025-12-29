@@ -1,7 +1,8 @@
-const lint = require('eslint');
-const ckSlashImportRule = require('./use-ck-slash-imports');
+import eslint from 'eslint';
 
-const slashImportRuleTester = new lint.RuleTester({
+import ckSlashImportRule from './use-ck-slash-imports.js';
+
+const slashImportRuleTester = new eslint.RuleTester({
   parserOptions: {ecmaVersion: 2015, sourceType: 'module'},
 });
 slashImportRuleTester.run('use-ck-slash-imports', ckSlashImportRule, {

@@ -1,9 +1,10 @@
-import {createSubcomponent} from '@workday/canvas-kit-react/common';
 import {Avatar, AvatarProps, avatarStencil} from '@workday/canvas-kit-preview-react/avatar';
-import {usePillModel} from './usePillModel';
-import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {createSubcomponent} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+
+import {usePillModel} from './usePillModel';
 
 export interface PillAvatarProps extends AvatarProps {}
 

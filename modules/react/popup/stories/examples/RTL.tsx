@@ -1,13 +1,13 @@
 import React from 'react';
 
-import {SecondaryButton, DeleteButton} from '@workday/canvas-kit-react/button';
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
-import {Popup} from '@workday/canvas-kit-react/popup';
+import {DeleteButton, SecondaryButton} from '@workday/canvas-kit-react/button';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {Popup} from '@workday/canvas-kit-react/popup';
 
 export const RTL = () => {
   return (
-    <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
+    <CanvasProvider dir="rtl">
       <Popup.Card width={400}>
         <Popup.CloseIcon aria-label="סגור" />
         <Popup.Heading>למחוק פריט</Popup.Heading>

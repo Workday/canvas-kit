@@ -1,9 +1,12 @@
-import fs from 'node:fs';
 import chalk from 'chalk';
-import depCheck from 'depcheck'
-import pkg from '../package.json' assert {type: 'json'}
+import depCheck from 'depcheck';
+import fs from 'node:fs';
+import {createRequire} from 'node:module';
 
-const packageName = pkg.name
+const require = createRequire(import.meta.url);
+const pkg = require('../package.json');
+
+const packageName = pkg.name;
 
 // Disable - It doesn't work with TS 5.0 and future versions of depcheck don't work. Maybe try knip
 process.exit(0);

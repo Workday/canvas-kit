@@ -1,10 +1,11 @@
-import React, {ReactNode, ReactElement, FC, ChangeEvent} from 'react';
-import {ExtractProps} from '@workday/canvas-kit-react/common';
+import React, {ChangeEvent, FC, ReactElement, ReactNode} from 'react';
+
 import {
+  ComboBoxMenuItemGroup,
   Combobox,
   ComboboxProps,
-  ComboBoxMenuItemGroup,
 } from '@workday/canvas-kit-labs-react/combobox';
+import {ExtractProps} from '@workday/canvas-kit-react/common';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
 import {TextInput} from '@workday/canvas-kit-react/text-input';

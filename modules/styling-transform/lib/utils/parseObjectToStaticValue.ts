@@ -1,6 +1,6 @@
 import ts from 'typescript';
-import {getFallbackVariable} from './getFallbackVariable';
 
+import {getFallbackVariable} from './getFallbackVariable';
 import {parseNodeToStaticValue} from './parseNodeToStaticValue';
 import {NestedStyleObject, TransformerContext} from './types';
 
@@ -42,9 +42,12 @@ function handleObjectTransforms(
   node: ts.Node,
   context: TransformerContext
 ): NestedStyleObject | undefined {
-  return context.objectTransforms.reduce((result, transformer) => {
-    return result || transformer(node, context) || undefined;
-  }, undefined as undefined | NestedStyleObject);
+  return context.objectTransforms.reduce(
+    (result, transformer) => {
+      return result || transformer(node, context) || undefined;
+    },
+    undefined as undefined | NestedStyleObject
+  );
 }
 
 function parsePropertyToStaticValue(node: ts.Node, context: TransformerContext): NestedStyleObject {

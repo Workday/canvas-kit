@@ -1,12 +1,13 @@
 import * as React from 'react';
-import {
-  ComponentStatesTable,
-  permutateProps,
-  StaticStates,
-} from '@workday/canvas-kit-react/testing';
-import {customColorTheme} from '../../../../utils/storybook';
 
 import {Switch} from '@workday/canvas-kit-react/switch';
+import {
+  ComponentStatesTable,
+  StaticStates,
+  permutateProps,
+} from '@workday/canvas-kit-react/testing';
+
+import {customColorTheme} from '../../../../utils/storybook';
 
 export default {
   title: 'Testing/Inputs/Switch',

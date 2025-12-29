@@ -1,15 +1,15 @@
+import {
+  RenderOptionFunction,
+  RenderSelectedFunction,
+} from '@workday/canvas-kit-preview-react/select';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {colors, typeColors} from '@workday/canvas-kit-react/tokens';
 import {
   activityStreamIcon,
   avatarIcon,
   uploadCloudIcon,
   userIcon,
 } from '@workday/canvas-system-icons-web';
-import {colors, typeColors} from '@workday/canvas-kit-react/tokens';
-import {
-  RenderOptionFunction,
-  RenderSelectedFunction,
-} from '@workday/canvas-kit-preview-react/select';
 
 export const hintText = 'Helpful text goes here.';
 export const hintId = 'error-desc-id';

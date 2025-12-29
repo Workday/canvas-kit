@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {useConstant} from './useConstant';
 
 // Create a unique seed per import to prevent collisions from other versions of `useUniqueId`
@@ -26,12 +27,20 @@ export const generateUniqueId = () => seed + (c++).toString(36);
 /**
  * Generate a unique ID if one is not provided. The generated ID will be stable across renders. Uses
  * `React.useId()` if available.
+ *
+ * Note: In React 18, `useId()` generates IDs with colons (e.g., `:r0:`), which are not valid in CSS
+ * selectors. We transform to use unicode guillemets (`«r0»`) matching React's upcoming format
+ * change (https://github.com/facebook/react/pull/32001).
+ *
  * @param id Optional ID provided that will be used instead of a unique ID
  */
 export const useUniqueId = (id?: string) => {
   // https://codesandbox.io/s/react-functional-component-ids-p2ndq
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const generatedId = hasStableId ? React.useId() : useConstant(generateUniqueId);
+  const reactId = hasStableId ? React.useId() : useConstant(generateUniqueId);
+  // Transform React's useId format (:r0:) to CSS-safe format («r0»)
+  // This matches React 19's [format](https://github.com/facebook/react/pull/32001). When we bump to >= React 19.1.0, we can remove this logic and use `useId()` directly.
+  const generatedId = hasStableId ? reactId.replace(/^:/, '«').replace(/:$/, '»') : reactId;
   return id || generatedId;
 };
 

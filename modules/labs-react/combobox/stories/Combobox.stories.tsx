@@ -1,8 +1,8 @@
 import {Meta, StoryObj} from '@storybook/react';
-import mdxDoc from './Combobox.mdx';
 
 import {Combobox} from '@workday/canvas-kit-labs-react/combobox';
 
+import mdxDoc from './Combobox.mdx';
 import {Basic as BasicExample} from './examples/Basic';
 import {DisabledItem as DisabledItemExample} from './examples/DisabledItem';
 import {GroupOfResult as GroupOfResultExample} from './examples/GroupOfResult';

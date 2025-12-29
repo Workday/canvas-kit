@@ -1,37 +1,37 @@
-import * as React from 'react';
-import {
-  homeIcon,
-  starIcon,
-  rocketIcon,
-  plusIcon,
-  justifyIcon,
-  assistantIcon,
-  notificationsIcon,
-  inboxIcon,
-} from '@workday/canvas-system-icons-web';
 import styled from '@emotion/styled';
+import * as React from 'react';
 
-import {colors, type, space, depth} from '@workday/canvas-kit-react/tokens';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {
-  TertiaryButton,
-  PrimaryButton,
-  Hyperlink,
-  SecondaryButton,
-} from '@workday/canvas-kit-react/button';
-import {SidePanel} from '@workday/canvas-kit-react/side-panel';
-import {SidePanelProps} from '../lib/SidePanel';
-
-import {
-  defaultCanvasTheme,
-  StyledType,
-  createComponent,
-  dubLogoPrimary,
-} from '@workday/canvas-kit-react/common';
-import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 import {SearchForm} from '@workday/canvas-kit-labs-react/search-form';
 import {Avatar} from '@workday/canvas-kit-preview-react/avatar';
+import {
+  Hyperlink,
+  PrimaryButton,
+  SecondaryButton,
+  TertiaryButton,
+} from '@workday/canvas-kit-react/button';
+import {
+  StyledType,
+  createComponent,
+  defaultCanvasTheme,
+  dubLogoPrimary,
+} from '@workday/canvas-kit-react/common';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
+import {SidePanel} from '@workday/canvas-kit-react/side-panel';
 import {BodyText} from '@workday/canvas-kit-react/text';
+import {colors, depth, space, type} from '@workday/canvas-kit-react/tokens';
+import {
+  assistantIcon,
+  homeIcon,
+  inboxIcon,
+  justifyIcon,
+  notificationsIcon,
+  plusIcon,
+  rocketIcon,
+  starIcon,
+} from '@workday/canvas-system-icons-web';
+
+import {SidePanelProps} from '../lib/SidePanel';
 
 export default {
   title: 'Components/Containers/Side Panel (deprecated)',

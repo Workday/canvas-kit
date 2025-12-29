@@ -1,8 +1,9 @@
 import {Avatar} from '@workday/canvas-kit-react/avatar';
-// @ts-ignore: Cannot find module error
-import testAvatar from './test-avatar.png';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+
+// @ts-ignore: Cannot find module error
+import testAvatar from './test-avatar.png';
 
 const containerStyles = createStyles({
   display: 'flex',

@@ -1,17 +1,17 @@
 import React, {useLayoutEffect} from 'react';
 
 import {
-  GrowthBehavior,
   ErrorType,
+  GrowthBehavior,
   StyledType,
   Themeable,
   errorRing,
   styled,
   useUniqueId,
 } from '@workday/canvas-kit-react/common';
-import {colors, borderRadius, inputColors, type, space} from '@workday/canvas-kit-react/tokens';
-import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {borderRadius, colors, inputColors, space, type} from '@workday/canvas-kit-react/tokens';
+import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 
 import {SelectMenu} from './SelectMenu';
 import {SelectOption} from './SelectOption';

@@ -1,5 +1,6 @@
 import {ContentDirection} from '@workday/canvas-kit-react/common';
-import {position, PositionStyleProps} from '@workday/canvas-kit-react/layout';
+import {PositionStyleProps, position} from '@workday/canvas-kit-react/layout';
+
 const context = describe;
 
 describe('Layout Style Props Function', () => {

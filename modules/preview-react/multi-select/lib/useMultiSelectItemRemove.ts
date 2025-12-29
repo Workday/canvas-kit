@@ -1,8 +1,9 @@
 import React from 'react';
+
+import {focusOnCurrentCursor, listItemRemove} from '@workday/canvas-kit-react/collection';
 import {createElemPropsHook} from '@workday/canvas-kit-react/common';
 
 import {useMultiSelectModel} from './useMultiSelectModel';
-import {focusOnCurrentCursor, listItemRemove} from '@workday/canvas-kit-react/collection';
 
 /**
  * This elemProps hook is used when a menu item is expected to be removed. It will advance the cursor to

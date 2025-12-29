@@ -1,15 +1,14 @@
 import * as React from 'react';
-import {controlComponent} from '../../../../utils/storybook';
 
-import {colors} from '@workday/canvas-kit-react/tokens';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-
-import {Select} from '../lib/Select';
-
-import {manyOptions, options} from './examples/storiesData';
-import {Modal} from '@workday/canvas-kit-react/modal';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {Modal} from '@workday/canvas-kit-react/modal';
+import {colors} from '@workday/canvas-kit-react/tokens';
+
+import {controlComponent} from '../../../../utils/storybook';
+import {Select} from '../lib/Select';
+import {manyOptions, options} from './examples/storiesData';
 
 export default {
   title: 'Testing/Preview/Select/Cypress',

@@ -1,4 +1,3 @@
-/* eslint-disable compat/compat */
 import fs from 'node:fs';
 import https from 'node:https';
 import {dirname, resolve} from 'node:path';

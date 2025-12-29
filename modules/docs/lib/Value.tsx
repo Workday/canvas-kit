@@ -45,6 +45,7 @@ export const PropertiesInline = ({properties}: {properties: types.ObjectProperty
   if (properties.length === 0) {
     return <span className="token punctuation">&#123;&#125;</span>;
   }
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const level = React.useContext(IndentLevelContext);
 
   return (

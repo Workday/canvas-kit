@@ -1,6 +1,7 @@
 import * as React from 'react';
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
+
 import {Breadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {Box} from '@workday/canvas-kit-react/layout';
 
 export interface Breadcrumb {
@@ -10,12 +11,6 @@ export interface Breadcrumb {
 }
 
 export const RTLOverflowList = () => {
-  const theme = {
-    canvas: {
-      direction: ContentDirection.RTL,
-    },
-  };
-
   const [items] = React.useState<Breadcrumb[]>([
     {id: '1', text: 'תנ״ך', link: '/tanakh'},
     {id: '2', text: 'כתובים', link: '/ketuvim'},
@@ -26,7 +21,7 @@ export const RTLOverflowList = () => {
   ]);
 
   return (
-    <CanvasProvider theme={theme}>
+    <CanvasProvider dir="rtl">
       <Box maxWidth="300px">
         <Breadcrumbs items={items} aria-label="Breadcrumbs">
           <Breadcrumbs.List overflowButton={<Breadcrumbs.OverflowButton aria-label="More links" />}>

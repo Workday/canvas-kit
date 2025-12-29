@@ -1,5 +1,6 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {CSProps, handleCsProp, createStencil} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+
 import {getInitialsFromName} from './getInitialsFromName';
 
 export interface AvatarNameProps extends CSProps {

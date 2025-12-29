@@ -1,5 +1,7 @@
 import {Meta, StoryObj} from '@storybook/react';
+
 import {SearchForm} from '@workday/canvas-kit-labs-react/search-form';
+
 import mdxDoc from './SearchForm.mdx';
 // examples
 import {Basic as BasicExample} from './examples/Basic';

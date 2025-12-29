@@ -1,4 +1,4 @@
-module.exports = (modulePath, storyPath, pascalCaseName, rootPath) => `
+const storiesVisualTesting = (modulePath, storyPath, pascalCaseName, rootPath) => `
 import React from 'react';
 
 import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/testing';
@@ -39,3 +39,5 @@ export const ${pascalCaseName}States = () => {
   );
 };
 `;
+
+export default storiesVisualTesting;

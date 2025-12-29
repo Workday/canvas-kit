@@ -1,18 +1,20 @@
-import React, {useEffect, useLayoutEffect, useRef, useState, useCallback} from 'react';
-import {jsx, keyframes, CSSObject} from '@emotion/react';
+import {CSSObject, jsx, keyframes} from '@emotion/react';
+import flatten from 'lodash.flatten';
+import React, {useCallback, useEffect, useLayoutEffect, useRef, useState} from 'react';
+
+import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
+import {Card} from '@workday/canvas-kit-react/card';
 import {
   GrowthBehavior,
-  useForkRef,
-  styled,
-  useUniqueId,
   filterOutProps,
+  styled,
+  useForkRef,
+  useUniqueId,
 } from '@workday/canvas-kit-react/common';
-import {space, commonColors, borderRadius} from '@workday/canvas-kit-react/tokens';
-import {Card} from '@workday/canvas-kit-react/card';
-import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
-import {xSmallIcon} from '@workday/canvas-system-icons-web';
 import {TextInputProps} from '@workday/canvas-kit-react/text-input';
-import flatten from 'lodash.flatten';
+import {borderRadius, commonColors, space} from '@workday/canvas-kit-react/tokens';
+import {xSmallIcon} from '@workday/canvas-system-icons-web';
+
 import {AutocompleteList} from './AutocompleteList';
 import {Status} from './Status';
 

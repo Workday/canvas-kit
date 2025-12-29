@@ -1,22 +1,26 @@
 // refactor for v5
 /// <reference types="@types/node" />
-
 import {useTheme as useEmotionTheme} from '@emotion/react';
-import {
-  defaultCanvasTheme,
-  EmotionCanvasTheme,
-  PartialEmotionCanvasTheme,
-  CanvasTheme,
-} from './index';
+
 import {cssVar} from '@workday/canvas-kit-styling';
 import {base} from '@workday/canvas-tokens-web';
 
+import {
+  CanvasTheme,
+  EmotionCanvasTheme,
+  PartialEmotionCanvasTheme,
+  defaultCanvasTheme,
+} from './index';
+
 /**
- * We can adjust the shift but this should get us close enough until we clean up the algorithm to determine the colors.
+ * Attempt to match chroma-js's darken/brighten behavior using OKLCH.
+ * Chroma's darken(1) reduces LAB lightness by ~18 units (out of 100).
+ * In OKLCH, lightness is 0-1, so we scale: value/100 * 0.18 = value * 0.0018
  * @deprecated ⚠️ `shiftColor` is deprecated and will be removed in a future major version. While we work on an algorithm for color shifting, you can use [`oklch from`](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch) to generate a palette.
  */
 const shiftColor = (color: string, value: number) => {
-  return `oklch(from ${color} calc(l ${value > 0 ? '+' : '-'} ${Math.abs(value) / 1000}) c h)`;
+  const shift = Math.abs(value) * 0.0018;
+  return `oklch(from ${color} calc(l ${value > 0 ? '+' : '-'} ${shift}) c h)`;
 };
 
 const generatePalette = (

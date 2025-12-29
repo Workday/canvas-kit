@@ -1,7 +1,8 @@
-import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
+import styled from '@emotion/styled';
+
+import {StyledType, createComponent} from '@workday/canvas-kit-react/common';
 import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
 import {Text, TextProps} from '@workday/canvas-kit-react/text';
-import styled from '@emotion/styled';
 import {type} from '@workday/canvas-kit-react/tokens';
 
 const TableHead = createComponent('thead')({

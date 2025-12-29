@@ -1,10 +1,18 @@
+import {CacheProvider, Theme, ThemeProvider} from '@emotion/react';
 import * as React from 'react';
-import {Theme, ThemeProvider, CacheProvider} from '@emotion/react';
-import {defaultCanvasTheme, PartialEmotionCanvasTheme, useTheme} from './theming';
-import {brand, base} from '@workday/canvas-tokens-web';
-import {getCache, maybeWrapCSSVariables, createStyles} from '@workday/canvas-kit-styling';
+
+import {createStyles, getCache, maybeWrapCSSVariables} from '@workday/canvas-kit-styling';
+import {base, brand} from '@workday/canvas-tokens-web';
+
+import {PartialEmotionCanvasTheme, defaultCanvasTheme, useTheme} from './theming';
 
 export interface CanvasProviderProps {
+  /**
+   * ⚠️ Only use this prop if you intent to to theme a part of your application that is different from global theming.
+   * For more information, view our [Theming Docs](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs#global-vs-scoped-theming).
+   *
+   * While we support theme overrides, we advise to use global theming via CSS Variables.
+   */
   theme?: PartialEmotionCanvasTheme;
 }
 
@@ -61,11 +69,14 @@ export const defaultBranding = createStyles({
   [brand.primary.light]: base.blue200,
   [brand.primary.lighter]: base.blue50,
   [brand.primary.lightest]: base.blue25,
-  [brand.gradient
-    .primary]: `linear-gradient(90deg, ${brand.primary.base} 0%, ${brand.primary.dark} 100%)`,
+  [brand.gradient.primary]:
+    `linear-gradient(90deg, ${brand.primary.base} 0%, ${brand.primary.dark} 100%)`,
 });
 
 export const useCanvasThemeToCssVars = (
+  /**
+   * @deprecated ⚠️ `theme` is deprecated. In previous versions of Canvas Kit, we allowed teams to pass a theme object, this supported [Emotion's theming](https://emotion.sh/docs/theming). Now that we're shifting to a global theming approach based on CSS variables, we advise to no longer using the theme prop. For more information, view our [Theming Docs](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs#-preferred-approach-v14).
+   */
   theme: PartialEmotionCanvasTheme | undefined,
   elemProps: React.HTMLAttributes<HTMLElement>
 ) => {

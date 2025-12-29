@@ -1,6 +1,6 @@
 import {Meta} from '@storybook/react';
-import mdxDoc from './Avatar.mdx';
 
+import mdxDoc from './Avatar.mdx';
 import {Basic as BasicExample} from './examples/Basic';
 import {Button as ButtonExample} from './examples/Button';
 import {CustomStyles as CustomStylesExample} from './examples/CustomStyles';

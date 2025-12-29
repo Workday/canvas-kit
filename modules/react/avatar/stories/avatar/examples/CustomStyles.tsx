@@ -1,7 +1,7 @@
 import {Avatar} from '@workday/canvas-kit-react/avatar';
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {createStencil, createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
 const customOrangeAvatar = createStencil({
   base: {

@@ -1,5 +1,6 @@
-import * as React from 'react';
 import {CSSObject} from '@emotion/styled';
+import * as React from 'react';
+
 import {
   EmotionCanvasTheme,
   ErrorType,
@@ -8,6 +9,7 @@ import {
   styled,
 } from '@workday/canvas-kit-react/common';
 import {colors, commonColors, type} from '@workday/canvas-kit-react/tokens';
+
 /**
  * @deprecated ⚠️ `SelectOptionProps` in Preview has been deprecated and will be removed in a future major version. Please use [`Select` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--docs) instead.
  */

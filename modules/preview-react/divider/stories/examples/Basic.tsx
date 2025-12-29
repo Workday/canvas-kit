@@ -1,8 +1,9 @@
 import React from 'react';
+
 import {Divider} from '@workday/canvas-kit-preview-react/divider';
+import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {Avatar} from '@workday/canvas-kit-react/avatar';
 
 const sectionStyles = createStyles({
   display: 'flex',

@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {Card} from '@workday/canvas-kit-react/card';
-
-import {usePopupHeading, usePopupModel} from './hooks';
+import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+
 import {mergeStyles} from '../../layout';
+import {usePopupHeading, usePopupModel} from './hooks';
 
 export interface PopupHeadingProps extends ExtractProps<typeof Card.Heading, never> {
   children?: React.ReactNode;

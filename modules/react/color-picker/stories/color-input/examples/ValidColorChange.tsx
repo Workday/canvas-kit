@@ -1,6 +1,7 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+
 import {ColorInput} from '@workday/canvas-kit-react/color-picker';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {type} from '@workday/canvas-kit-react/tokens';
 
 export const ValidColorChange = () => {

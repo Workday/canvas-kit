@@ -1,24 +1,25 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import {customColorTheme} from '../../../../utils/storybook';
-import {ContentDirection, CanvasProvider, useTheme} from '@workday/canvas-kit-react/common';
-import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
+
 import {DeleteButton, PrimaryButton} from '@workday/canvas-kit-react/button';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {
   Popup,
-  useCloseOnOutsideClick,
   useCloseOnEscape,
+  useCloseOnOutsideClick,
   usePopupModel,
 } from '@workday/canvas-kit-react/popup';
-import {Flex, Box} from '@workday/canvas-kit-react/layout';
-
-import {WithRadioButtons as WithRadioButtonsExample} from './examples/WithRadioButtons';
-import {StackedModals as StackedModalsExample} from './examples/StackedModals';
-import {WithTooltips as WithTooltipsExample} from './examples/WithTooltips';
-import {ModalWithPopup as ModalWithPopupExample} from './examples/ModalWithPopup';
-import {IframeTest as IframeTestExample} from './examples/IframeTest';
-import {brand} from '@workday/canvas-tokens-web';
 import {createStyles} from '@workday/canvas-kit-styling';
+import {brand} from '@workday/canvas-tokens-web';
+
+import {customColorTheme} from '../../../../utils/storybook';
+import {IframeTest as IframeTestExample} from './examples/IframeTest';
+import {ModalWithPopup as ModalWithPopupExample} from './examples/ModalWithPopup';
+import {StackedModals as StackedModalsExample} from './examples/StackedModals';
+import {WithRadioButtons as WithRadioButtonsExample} from './examples/WithRadioButtons';
+import {WithTooltips as WithTooltipsExample} from './examples/WithTooltips';
 
 export default {
   title: 'Testing/Popups/Modal',
@@ -182,12 +183,11 @@ export const ModalRTL = {
     },
   },
   render: () => {
-    const theme = useTheme({canvas: {direction: ContentDirection.RTL}});
     const model = useModalModel({
       initialVisibility: 'visible',
     });
     return (
-      <CanvasProvider theme={theme}>
+      <CanvasProvider dir="rtl">
         <Modal model={model}>
           <Modal.Target style={{display: 'none'}}></Modal.Target>
           <Modal.Overlay style={{animation: 'none'}}>

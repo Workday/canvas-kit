@@ -1,4 +1,4 @@
-module.exports = (modulePath, storyPath, pascalCaseName, prerelease) => `import React from 'react';
+const stories = (modulePath, storyPath, pascalCaseName, prerelease) => `import React from 'react';
 
 \`\`\`sh
 yarn add @workday/canvas-kit-${prerelease && prerelease + '-'}react
@@ -18,3 +18,5 @@ export const Default = () => (
     <${pascalCaseName}.Content>Content</${pascalCaseName}.Content>
   </${pascalCaseName}>
 );`;
+
+export default stories;

@@ -1,8 +1,9 @@
 import * as React from 'react';
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
+
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {Menu} from '@workday/canvas-kit-react/menu';
-import {Popup, Popper} from '@workday/canvas-kit-react/popup';
-import {colors, space, borderRadius} from '@workday/canvas-kit-react/tokens';
+import {Popper, Popup} from '@workday/canvas-kit-react/popup';
+import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 
 export default {
   title: 'Testing/Popups/Popper',
@@ -93,7 +94,7 @@ export const CustomPlacement = {
 };
 
 export const PopperRTL = () => (
-  <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
+  <CanvasProvider dir="rtl">
     <Popper open={true}>
       <Popup.Card style={{animation: 'none'}} width={300} dir="rtl">
         <Popup.CloseIcon aria-label="" />

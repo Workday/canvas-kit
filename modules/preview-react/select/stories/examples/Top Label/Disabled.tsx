@@ -1,7 +1,8 @@
-import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Select} from '@workday/canvas-kit-preview-react/select';
-import {options} from '../storiesData';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+
 import {controlComponent} from '../../../../../../utils/storybook';
+import {options} from '../storiesData';
 
 export const Disabled = () => {
   return (

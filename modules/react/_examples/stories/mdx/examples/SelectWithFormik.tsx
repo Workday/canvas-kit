@@ -1,9 +1,10 @@
-import * as React from 'react';
 import {useFormik} from 'formik';
-import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
+import * as React from 'react';
+
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
 import {
   activityStreamIcon,
   avatarIcon,

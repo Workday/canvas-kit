@@ -50,7 +50,7 @@ export const VersionTable = () => {
   const minVersion = 6;
   const currentMajorVersion = Number(version?.split('.')[0]);
   React.useEffect(() => {
-    let arr: VersionType[] = [];
+    const arr: VersionType[] = [];
     for (let i = minVersion; i <= currentMajorVersion; i++) {
       arr.push({
         versionNumber: i,
@@ -61,6 +61,7 @@ export const VersionTable = () => {
       });
     }
     setVersions(arr);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <Table>

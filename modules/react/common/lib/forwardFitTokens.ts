@@ -1,5 +1,5 @@
 import {cssVar} from '@workday/canvas-kit-styling';
-import {system, base} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 /**
  * This file is NOT INTENDED to be used by consumers, only internally by Canvas Kit.

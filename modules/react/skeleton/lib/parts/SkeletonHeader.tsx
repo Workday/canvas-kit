@@ -1,13 +1,14 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {
+  CSProps,
+  calc,
   createStencil,
+  cssVar,
   handleCsProp,
   px2rem,
-  cssVar,
-  calc,
-  CSProps,
 } from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+
 import {SkeletonShape} from './SkeletonShape';
 
 export interface SkeletonHeaderProps extends CSProps {

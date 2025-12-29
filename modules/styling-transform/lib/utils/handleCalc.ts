@@ -1,6 +1,7 @@
 import ts from 'typescript';
 
 import {calc} from '@workday/canvas-kit-styling';
+
 import {createPropertyTransform} from '../createPropertyTransform';
 import {parseNodeToStaticValue} from './parseNodeToStaticValue';
 

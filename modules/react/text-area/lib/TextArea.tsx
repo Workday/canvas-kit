@@ -1,7 +1,8 @@
-import {createComponent, GrowthBehavior, ErrorType} from '@workday/canvas-kit-react/common';
-import {createStencil, calc, handleCsProp} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {ErrorType, GrowthBehavior, createComponent} from '@workday/canvas-kit-react/common';
 import {textInputStencil} from '@workday/canvas-kit-react/text-input';
+import {calc, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
 export type ValueOf<T> = T[keyof T];
 
 export interface TextAreaProps extends GrowthBehavior {

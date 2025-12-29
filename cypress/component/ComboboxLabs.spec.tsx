@@ -1,5 +1,5 @@
-import {GroupOfResult} from '../../modules/labs-react/combobox/stories/examples/GroupOfResult';
 import {DisabledItem} from '../../modules/labs-react/combobox/stories/examples/DisabledItem';
+import {GroupOfResult} from '../../modules/labs-react/combobox/stories/examples/GroupOfResult';
 
 const haveAttrMatchingIdOf = (name: string, selector: string) => ($el: JQuery) => {
   const $matchingEl = Cypress.$(selector);

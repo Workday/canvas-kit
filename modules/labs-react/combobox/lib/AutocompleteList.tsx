@@ -1,8 +1,10 @@
-import React, {Fragment, useState} from 'react';
 import styled from '@emotion/styled';
-import {space} from '@workday/canvas-kit-react/tokens';
+import React, {Fragment, useState} from 'react';
+
 import {accessibleHide, generateUniqueId} from '@workday/canvas-kit-react/common';
-import {ComboBoxMenuItemGroup, getOptionId, listBoxIdPart, getTextFromElement} from './Combobox';
+import {space} from '@workday/canvas-kit-react/tokens';
+
+import {ComboBoxMenuItemGroup, getOptionId, getTextFromElement, listBoxIdPart} from './Combobox';
 
 const Autocomplete = styled('ul')({
   margin: 0,

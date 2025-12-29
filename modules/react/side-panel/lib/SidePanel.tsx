@@ -1,11 +1,11 @@
-import * as React from 'react';
 import styled from '@emotion/styled';
+import * as React from 'react';
 
-import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {colors, space, CanvasSpaceValues} from '@workday/canvas-kit-react/tokens';
 import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
-import {chevronLeftIcon, chevronRightIcon} from '@workday/canvas-system-icons-web';
 import {Heading} from '@workday/canvas-kit-react/text';
+import {CanvasSpaceValues, colors, space} from '@workday/canvas-kit-react/tokens';
+import {chevronLeftIcon, chevronRightIcon} from '@workday/canvas-system-icons-web';
+import {CanvasSystemIcon} from '@workday/design-assets-types';
 
 /**
  * @deprecated ⚠️ `SidePanelProps` in Main has been deprecated and will be removed in a future major version. Please use [`SidePanel` in Preview](https://workday.github.io/canvas-kit/?path=/docs/preview-side-panel--docs) instead.

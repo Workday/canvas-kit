@@ -113,8 +113,8 @@ export function createDocProgram() {
 
   const plugins = getPlugins(path, config);
   let files = getFiles(path, config);
-  let program = ts.createProgram(files, tsConfig);
-  let parser = new DocParser(program, plugins);
+  const program = ts.createProgram(files, tsConfig);
+  const parser = new DocParser(program, plugins);
 
   const Doc = {
     parser,

@@ -42,7 +42,9 @@ export class DocParser<T extends {kind: string} = any> {
   getExportedSymbols(fileName: string): ExportedSymbol<T | Value>[] {
     const symbols: ExportedSymbol[] = [];
     const sourceFile = this.program.getSourceFile(fileName);
-    if (!sourceFile) return symbols;
+    if (!sourceFile) {
+      return symbols;
+    }
 
     find(sourceFile, node => {
       const kind = node.kind;
@@ -356,6 +358,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     const type = checker.getTypeAtLocation(node);
     const jsDoc = findDocComment(checker, symbol);
 
+    // eslint-disable-next-line no-empty
     if (jsDoc.tags.default) {
     }
 
@@ -470,7 +473,9 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     }
 
     const value = getValueFromType(parser, type);
-    if (value) return value;
+    if (value) {
+      return value;
+    }
   }
 
   /**
@@ -928,6 +933,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     const type = checker.getTypeAtLocation(node);
     if (symbol) {
       if (type.getFlags() & ts.TypeFlags.Instantiable) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         symbol.name;
         // It is a generic type
         return {kind: 'generic', name: symbol?.name};
@@ -1478,7 +1484,7 @@ export function getValueFromType(
   if (type.isUnion()) {
     // If we got here, it means a TypeNode was a TypeReference that wasn't exported or a synthetic
     // TypeNode `keyof *` that `getValueFromNode` couldn't properly parse.
-    let filteredTypes = type.types;
+    const filteredTypes = type.types;
 
     return {
       kind: 'union',

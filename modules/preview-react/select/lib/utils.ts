@@ -1,4 +1,5 @@
 import {NormalizedOption} from './SelectBase';
+
 /**
  * @deprecated ⚠️ `getIndexByValue` in Preview has been deprecated and will be removed in a future major version. Please use [`Select` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) instead.
  */

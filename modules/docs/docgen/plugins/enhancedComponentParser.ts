@@ -596,6 +596,7 @@ function getReturnTypeFromElemPropsHook(
     if (typeNode) {
       const value = parser.getValueFromNode(typeNode);
       if (value.kind === 'object') {
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         value.properties;
       }
       return value;

@@ -1,6 +1,7 @@
-import {expectTransformFactory} from './expectTransformFactory';
-import transformer from '../renameLoadingAnimation';
 import {stripIndent} from 'common-tags';
+
+import transformer from '../renameLoadingAnimation';
+import {expectTransformFactory} from './expectTransformFactory';
 
 const expectTransform = expectTransformFactory(transformer);
 

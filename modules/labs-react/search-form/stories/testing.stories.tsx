@@ -1,7 +1,8 @@
 import React from 'react';
-import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
+
 import {SearchForm, SearchTheme} from '@workday/canvas-kit-labs-react/search-form';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 import {colors} from '@workday/canvas-kit-react/tokens';
 
 export default {

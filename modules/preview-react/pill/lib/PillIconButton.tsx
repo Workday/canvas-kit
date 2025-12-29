@@ -1,11 +1,12 @@
-import {focusRing, createSubcomponent} from '@workday/canvas-kit-react/common';
-import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {usePillModel} from './usePillModel';
-import {xSmallIcon} from '@workday/canvas-system-icons-web';
 import {buttonStencil} from '@workday/canvas-kit-react/button';
-import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {createSubcomponent, focusRing} from '@workday/canvas-kit-react/common';
+import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {xSmallIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
+
+import {usePillModel} from './usePillModel';
 
 export interface PillIconButtonProps extends Partial<SystemIconProps> {
   /**

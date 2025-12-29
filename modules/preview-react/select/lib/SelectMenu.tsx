@@ -1,6 +1,6 @@
-import React, {useState, useEffect, useLayoutEffect, useCallback} from 'react';
-
 import {CSSObject} from '@emotion/styled';
+import React, {useCallback, useEffect, useLayoutEffect, useState} from 'react';
+
 import {EmotionCanvasTheme, ErrorType, Themeable, styled} from '@workday/canvas-kit-react/common';
 import {
   Placement,
@@ -11,7 +11,7 @@ import {
   useReturnFocus,
   useTransferOnFullscreenExit,
 } from '@workday/canvas-kit-react/popup';
-import {colors, borderRadius, inputColors} from '@workday/canvas-kit-react/tokens';
+import {borderRadius, colors, inputColors} from '@workday/canvas-kit-react/tokens';
 
 import {SelectProps} from './Select';
 import {MenuPlacement, MenuVisibility} from './types';

@@ -2,16 +2,18 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/react';
 import React from 'react';
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
+
+import {ExternalHyperlink} from '@workday/canvas-kit-react/button';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {
   ComponentStatesTable,
-  permutateProps,
   StaticStates,
+  permutateProps,
 } from '@workday/canvas-kit-react/testing';
-import {ExternalHyperlink} from '@workday/canvas-kit-react/button';
-import {Container} from './utils';
-import {Flex} from '@workday/canvas-kit-react/layout';
 import {BodyText, Subtext} from '@workday/canvas-kit-react/text';
+
+import {Container} from './utils';
 
 export default {
   title: 'Testing/Buttons/Button/ExternalHyperlink',
@@ -82,7 +84,7 @@ export const ExternalHyperlinkStates = {
           jumps over the lazy dog
         </BodyText>
       </Flex>
-      <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
+      <CanvasProvider dir="rtl">
         <Flex flexDirection="column" gap="xxs">
           <Subtext size="large">
             The quick{' '}

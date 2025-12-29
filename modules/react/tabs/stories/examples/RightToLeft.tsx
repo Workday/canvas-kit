@@ -1,11 +1,10 @@
-import {space} from '@workday/canvas-kit-react/tokens';
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
-
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {Tabs} from '@workday/canvas-kit-react/tabs';
+import {space} from '@workday/canvas-kit-react/tokens';
 
 export const RightToLeft = () => {
   return (
-    <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
+    <CanvasProvider dir="rtl">
       <Tabs>
         <Tabs.List>
           <Tabs.Item>ראשון</Tabs.Item>

@@ -1,10 +1,11 @@
 import * as React from 'react';
-import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
+
 import {SearchForm, searchFormStencil} from '@workday/canvas-kit-labs-react/search-form';
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
 const initialWineList = [
   'Beaujolais',

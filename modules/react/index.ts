@@ -15,6 +15,7 @@ export * from './disclosure';
 export * from './expandable';
 export * from './form-field';
 export * from './icon';
+export * from './information-highlight';
 export * from './layout';
 export * from './loading-dots';
 export * from './menu';

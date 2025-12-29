@@ -1,39 +1,39 @@
 import * as React from 'react';
+
+import {Avatar} from '@workday/canvas-kit-preview-react/avatar';
+import {CountBadge} from '@workday/canvas-kit-react/badge';
+import {SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
+import {LoadReturn} from '@workday/canvas-kit-react/collection';
+import {
+  Combobox,
+  useComboboxInput,
+  useComboboxLoader,
+  useComboboxModel,
+} from '@workday/canvas-kit-react/combobox';
 import {
   AccessibleHide,
   AriaLiveRegion,
+  ExtractProps,
   composeHooks,
   createComponent,
   createElemPropsHook,
   createSubcomponent,
-  ExtractProps,
   useUniqueId,
 } from '@workday/canvas-kit-react/common';
-import {system} from '@workday/canvas-tokens-web';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
+import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
+import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {calc, createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {
-  notificationsIcon,
+  assistantIcon,
   inboxIcon,
   justifyIcon,
-  assistantIcon,
+  notificationsIcon,
   searchIcon,
 } from '@workday/canvas-system-icons-web';
-
-import {SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
-import {Avatar} from '@workday/canvas-kit-preview-react/avatar';
-import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
-import {LoadReturn} from '@workday/canvas-kit-react/collection';
-import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {
-  Combobox,
-  useComboboxModel,
-  useComboboxInput,
-  useComboboxLoader,
-} from '@workday/canvas-kit-react/combobox';
-import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
-import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {CountBadge} from '@workday/canvas-kit-react/badge';
+import {system} from '@workday/canvas-tokens-web';
 
 interface GlobalHeaderProps extends FlexProps {
   notifications: number;

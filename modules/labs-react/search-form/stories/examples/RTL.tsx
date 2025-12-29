@@ -1,8 +1,9 @@
 import * as React from 'react';
-import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
+
 import {SearchForm} from '@workday/canvas-kit-labs-react/search-form';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
+import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
 
 const initialWineList = [
   'Beaujolais',
@@ -52,14 +53,8 @@ export const RTL = () => {
     console.log(`Searching for: ${searchInput}`);
   };
 
-  const theme = {
-    canvas: {
-      direction: ContentDirection.RTL,
-    },
-  };
-
   return (
-    <CanvasProvider theme={theme}>
+    <CanvasProvider dir="rtl">
       <Flex minHeight={200} alignItems="flex-start" padding="xs">
         <SearchForm
           autocompleteItems={menuItems}

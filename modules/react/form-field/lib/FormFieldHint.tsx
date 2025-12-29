@@ -1,8 +1,8 @@
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
-import {system, brand} from '@workday/canvas-tokens-web';
-import {createStencil} from '@workday/canvas-kit-styling';
-import {Text, textStencil} from '@workday/canvas-kit-react/text';
+import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {Text, textStencil} from '@workday/canvas-kit-react/text';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
 
 import {useFormFieldHint, useFormFieldModel} from './hooks';
 

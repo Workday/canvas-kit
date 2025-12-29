@@ -1,14 +1,13 @@
 import {Meta, StoryObj} from '@storybook/react';
 
-import mdxDoc from './Breadcrumbs.mdx';
-
 import {Breadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
 
+import mdxDoc from './Breadcrumbs.mdx';
 import {Basic as BasicExample} from './examples/Basic';
-import {OverflowBreadcrumbs as OverflowBreadcrumbsExample} from './examples/Overflow';
-import {RTLOverflowList as RTLOverflowListExample} from './examples/RTL';
 import {CurrentItemTruncation as CurrentItemTruncationExample} from './examples/CurrentItemTruncation';
 import {LinkTruncation as LinkTruncationExample} from './examples/LinkTruncation';
+import {OverflowBreadcrumbs as OverflowBreadcrumbsExample} from './examples/Overflow';
+import {RTLOverflowList as RTLOverflowListExample} from './examples/RTL';
 
 export default {
   title: 'Components/Navigation/Breadcrumbs',

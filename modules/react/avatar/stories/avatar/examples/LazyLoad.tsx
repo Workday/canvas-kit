@@ -1,4 +1,5 @@
 import {Avatar} from '@workday/canvas-kit-react/avatar';
+
 // @ts-ignore: Cannot find module error
 import testAvatar from './test-avatar.png';
 

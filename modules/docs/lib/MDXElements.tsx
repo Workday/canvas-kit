@@ -40,7 +40,7 @@ const Button = (props: any) => {
       </code>
     );
   }
-  return React.createElement(components['button'] || 'button', props, props.children);
+  return React.createElement(components.button || 'button', props, props.children);
 };
 
 /**

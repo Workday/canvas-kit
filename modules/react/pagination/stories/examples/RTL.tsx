@@ -1,4 +1,6 @@
 import * as React from 'react';
+
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {
   Pagination,
   getLastPage,
@@ -7,15 +9,13 @@ import {
   usePaginationModel,
 } from '@workday/canvas-kit-react/pagination';
 
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
-
 export const RTL = () => {
   const resultCount = 10;
   const totalCount = 100;
   const lastPage = getLastPage(resultCount, totalCount);
 
   return (
-    <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
+    <CanvasProvider dir="rtl">
       <Pagination aria-label="Pagination" lastPage={lastPage}>
         <Pagination.Controls>
           <Pagination.JumpToFirstButton aria-label="First" />

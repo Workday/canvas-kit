@@ -1,26 +1,25 @@
 import {Meta, StoryObj} from '@storybook/react';
 
-import mdxDoc from './Select.mdx';
-
 import {Select} from '@workday/canvas-kit-react/select';
 
-import {Caution as CautionExample} from './examples/Caution';
+import mdxDoc from './Select.mdx';
 import {Basic as BasicExample} from './examples/Basic';
+import {Caution as CautionExample} from './examples/Caution';
 import {Complex as ComplexExample} from './examples/Complex';
 import {Controlled as ControlledExample} from './examples/Controlled';
 import {Disabled as DisabledExample} from './examples/Disabled';
 import {DisabledOptions as DisabledOptionsExample} from './examples/DisabledOption';
 import {Error as ErrorExample} from './examples/Error';
-import {Grow as GrowExample} from './examples/Grow';
-import {LabelPosition as LabelPositionExample} from './examples/LabelPosition';
-import {WithIcons as WithIconsExample} from './examples/WithIcons';
-import {Required as RequiredExample} from './examples/Required';
-import {MenuHeight as MenuHeightExample} from './examples/MenuHeight';
-import {HoistedModel as HoistedModelExample} from './examples/HoistedModel';
-import {RefForwarding as RefForwardingExample} from './examples/RefForwarding';
 import {FetchingDynamicItems as FetchingDynamicItemsExample} from './examples/FetchingDynamicItems';
-import {Placeholder as PlaceholderExample} from './examples/Placeholder';
+import {Grow as GrowExample} from './examples/Grow';
+import {HoistedModel as HoistedModelExample} from './examples/HoistedModel';
 import {InitialSelectedItem as InitialSelectedItemExample} from './examples/InitialSelectedItem';
+import {LabelPosition as LabelPositionExample} from './examples/LabelPosition';
+import {MenuHeight as MenuHeightExample} from './examples/MenuHeight';
+import {Placeholder as PlaceholderExample} from './examples/Placeholder';
+import {RefForwarding as RefForwardingExample} from './examples/RefForwarding';
+import {Required as RequiredExample} from './examples/Required';
+import {WithIcons as WithIconsExample} from './examples/WithIcons';
 
 export default {
   title: 'Components/Inputs/Select',

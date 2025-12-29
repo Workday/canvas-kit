@@ -1,9 +1,10 @@
 import React from 'react';
 
-import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Select} from '@workday/canvas-kit-preview-react/select';
-import {customOptions, customRenderOption, customRenderSelected} from '../storiesData';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+
 import {controlComponent} from '../../../../../../utils/storybook';
+import {customOptions, customRenderOption, customRenderSelected} from '../storiesData';
 
 export const DefaultWithCustomOptionsLeft = () => {
   return (

@@ -2,9 +2,11 @@
  * @jest-environment node
  */
 import {renderToString} from 'react-dom/server';
-import {Combobox} from '../lib/Combobox';
+
 import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
+
+import {Combobox} from '../lib/Combobox';
 
 describe('InputProvider', () => {
   it('should render on a server without crashing', () => {

@@ -1,7 +1,7 @@
-import {system} from '@workday/canvas-tokens-web';
 import {createComponent} from '@workday/canvas-kit-react/common';
+import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil} from '@workday/canvas-kit-styling';
-import {mergeStyles, BoxProps} from '@workday/canvas-kit-react/layout';
+import {system} from '@workday/canvas-tokens-web';
 
 type TypeSize = 'large' | 'medium' | 'small';
 type TokenName = `${keyof typeof system.type}.${TypeSize}`;

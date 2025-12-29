@@ -1,11 +1,11 @@
+import {Pill} from '@workday/canvas-kit-preview-react/pill';
+import {useListItemRegister, useListItemRovingFocus} from '@workday/canvas-kit-react/collection';
 import {
   composeHooks,
   createElemPropsHook,
   createSubModelElemPropsHook,
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
-import {useListItemRegister, useListItemRovingFocus} from '@workday/canvas-kit-react/collection';
-import {Pill} from '@workday/canvas-kit-preview-react/pill';
 
 import {useMultiSelectItemRemove} from './useMultiSelectItemRemove';
 import {useMultiSelectModel} from './useMultiSelectModel';
