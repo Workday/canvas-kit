@@ -3,7 +3,7 @@ import eslint from 'eslint';
 import rule from './restricted-imports.js';
 
 const ruleTester = new eslint.RuleTester({
-  parserOptions: {ecmaVersion: 2015, sourceType: 'module'},
+  languageOptions: {ecmaVersion: 2015, sourceType: 'module'},
 });
 ruleTester.run('restricted-imports', rule, {
   valid: [

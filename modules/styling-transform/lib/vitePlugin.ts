@@ -28,7 +28,6 @@ export interface Options {
 }
 
 export function vitePluginTypescriptWithTransformers(config: Options = {}): Plugin {
-  console.log('typescriptPlugin');
   let tsProgram: ts.BuilderProgram;
   let compilerOptions: CompilerOptions;
   let filter: ReturnType<(typeof import('vite'))['createFilter']>;

@@ -3,7 +3,7 @@ import eslint from 'eslint';
 import ckSlashImportRule from './use-ck-slash-imports.js';
 
 const slashImportRuleTester = new eslint.RuleTester({
-  parserOptions: {ecmaVersion: 2015, sourceType: 'module'},
+  languageOptions: {ecmaVersion: 2015, sourceType: 'module'},
 });
 slashImportRuleTester.run('use-ck-slash-imports', ckSlashImportRule, {
   valid: [
