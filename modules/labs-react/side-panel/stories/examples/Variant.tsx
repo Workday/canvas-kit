@@ -35,7 +35,7 @@ export const AlternatePanel = () => {
     <CanvasProvider dir={direction}>
       <Flex cs={stylesOverride.viewport}>
         <SidePanel model={model} variant="alternate">
-          <SidePanel.ToggleButton />
+          <SidePanel.ToggleButton aria-label="Collapse View" />
           <Flex cs={stylesOverride.panel}>
             <SidePanel.Heading size="small">Alternate Panel</SidePanel.Heading>
           </Flex>
