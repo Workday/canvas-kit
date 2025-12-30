@@ -2,10 +2,10 @@ import React from 'react';
 
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 
-import {Avatar} from '@workday/canvas-kit-preview-react/avatar';
+import {Avatar} from '@workday/canvas-kit-react/avatar';
 
 export default {
-  title: 'Testing/Preview/Avatar',
+  title: 'Testing/Indicators/Avatar',
   component: Avatar,
   parameters: {
     chromatic: {

@@ -1,4 +1,4 @@
-import {Avatar} from '@workday/canvas-kit-preview-react/avatar';
+import {Avatar} from '@workday/canvas-kit-react/avatar';
 
 export const Image = () => {
   return (

@@ -30,7 +30,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 import {SearchForm} from '@workday/canvas-kit-labs-react/search-form';
-import {Avatar} from '@workday/canvas-kit-preview-react/avatar';
+import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {BodyText} from '@workday/canvas-kit-react/text';
 
 export default {

@@ -2,7 +2,7 @@ import {Meta, StoryObj} from '@storybook/react';
 
 import mdxDoc from './Avatar.mdx';
 
-import {Avatar} from '@workday/canvas-kit-preview-react/avatar';
+import {Avatar} from '@workday/canvas-kit-react/avatar';
 
 import {Basic as BasicExample} from './examples/Basic';
 import {Image as ImageExample} from './examples/Image';

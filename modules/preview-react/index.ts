@@ -1,4 +1,4 @@
-export * from './avatar';
+export * from '@workday/canvas-kit-react/avatar';
 export * from './color-picker';
 export * from './divider';
 export * from './loading-sparkles';

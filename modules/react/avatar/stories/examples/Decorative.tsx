@@ -1,4 +1,4 @@
-import {Avatar} from '@workday/canvas-kit-preview-react/avatar';
+import {Avatar} from '@workday/canvas-kit-react/avatar';
 // @ts-ignore
 import nicholasAvatar from './nicholas-avatar.jpg';
 import {createStyles} from '@workday/canvas-kit-styling';
