@@ -1,4 +1,4 @@
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 import {verifyComponent} from './verifyComponent';
 import {jest} from '@jest/globals';
 import {ResizeObserver} from '@juggle/resize-observer';

@@ -1,5 +1,6 @@
-import {ExampleCodeBlock, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, SymbolDoc, Specifications, StorybookStatusIndicator} from '@workday/canvas-kit-docs';
 import * as SidePanelStories from './SidePanel.stories';
+import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight'
 
 import {Basic} from './examples/Basic';
 import {HiddenName} from './examples/HiddenName';
@@ -12,9 +13,20 @@ import {OnStateTransition} from './examples/OnStateTransition';
 
 <Meta of={SidePanelStories} />
 
-# Canvas Kit Side Panel
+# Canvas Kit Side Panel <StorybookStatusIndicator type="deprecated" />
 
-`SidePanel` is a collaspible container that anchors to the left or right side of the screen.
+<InformationHighlight className="sb-unstyled" variant="caution" cs={{p: {marginBlock: 0}}}>
+  <InformationHighlight.Icon />
+  <InformationHighlight.Body>
+    `SidePanel` in Preview has been deprecated and will be removed in a future major version. Please
+    use `SidePanel` in Labs instead.
+  </InformationHighlight.Body>
+  <InformationHighlight.Link href="https://workday.github.io/canvas-kit/?path=/docs/labs-side-panel--docs">
+    View SidePanel Docs
+  </InformationHighlight.Link>
+</InformationHighlight>
+
+`SidePanel` is a collapsible container that anchors to the left or right side of the screen.
 
 [> Workday Design Reference](https://design.workday.com/components/containers/side-panel)
 

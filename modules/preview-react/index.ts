@@ -1,7 +1,6 @@
 export * from './avatar';
 export * from './color-picker';
 export * from './divider';
-export * from './information-highlight';
 export * from './loading-sparkles';
 export * from './multi-select';
 export * from './radio';

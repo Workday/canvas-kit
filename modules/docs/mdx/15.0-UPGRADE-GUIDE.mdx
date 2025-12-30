@@ -23,6 +23,7 @@ space tokens, the new tokens aim to add more semantic meaning to allow for bette
   - [Instructions](#instructions)
 - [Component Promotions](#component-promotions)
   - [Segmented Control](#segmented-control-)
+  - [Information Highlight](#information-highlight-)
 - [Component Updates](#component-updates)
   - [Buttons](#buttons)
 - [Removals](#removals)
@@ -95,7 +96,7 @@ yarn remove @workday/canvas-kit-codemod
 
 ### Segmented Control ⚡️
 
-We've promoted `SegmentedControl` from [Preview](/components/buttons/segmented-control/) to [Main](#main). This replaces the deprecated `SegmentedControl` that was previously in Main.
+We've promoted `SegmentedControl` from [Preview](#preview) to [Main](#main). This replaces the deprecated `SegmentedControl` that was previously in Main.
 
 **Before in v14**
 
@@ -192,6 +193,24 @@ The promoted `SegmentedControl` includes several new features:
   ...
 </SegmentedControl>
 ```
+
+### Information Highlight ⚡️
+
+We've promoted `InformationHighlight` from [Preview](#preview) to [Main](#main). There are no changes to the functionality or styling of the component. The only change required is updating the import statement.
+
+**Before in v14**
+
+```tsx
+import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
+```
+
+**After in v15**
+
+```tsx
+import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
+```
+
+> 🤖 The codemod will handle the change of imports as shown above.
 
 ## Component Updates
 
