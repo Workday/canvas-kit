@@ -5,7 +5,6 @@ export * from './loading-sparkles';
 export * from './multi-select';
 export * from './pill';
 export * from './radio';
-export * from './select';
 export * from './side-panel';
 export * from './status-indicator';
 export * from './version';
