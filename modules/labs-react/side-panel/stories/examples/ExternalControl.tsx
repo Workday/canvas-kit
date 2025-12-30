@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-labs-react/side-panel';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {Heading, Text} from '@workday/canvas-kit-react/text';
+import {Text} from '@workday/canvas-kit-react/text';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
@@ -35,7 +35,7 @@ export const ExternalControl = () => {
   return (
     <Flex cs={stylesOverride.viewport}>
       <SidePanel model={model}>
-        <SidePanel.ToggleButton />
+        <SidePanel.ToggleButton aria-label="Collapse View" />
         <SidePanel.Heading size="small" cs={stylesOverride.panelHeading}>
           Task Panel
         </SidePanel.Heading>
