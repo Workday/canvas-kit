@@ -12,7 +12,7 @@ import {Custom as CustomExample} from './examples/Custom';
 import {Decorative as DecorativeExample} from './examples/Decorative';
 
 export default {
-  title: 'Preview/Avatar',
+  title: 'Components/Indicators/Avatar (Promoted)',
   component: Avatar,
   tags: ['autodocs'],
   parameters: {

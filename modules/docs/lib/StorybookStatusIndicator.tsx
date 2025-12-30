@@ -28,14 +28,23 @@ const content = {
     icon: undefined,
     label: 'New',
   },
+  promoted: {
+    icon: undefined,
+    label: 'Promoted',
+  },
 };
 
-export const StorybookStatusIndicator = ({type}: {type: 'ai' | 'deprecated' | 'new'}) => {
+export const StorybookStatusIndicator = ({
+  type,
+}: {
+  type: 'ai' | 'deprecated' | 'new' | 'promoted';
+}) => {
   const {icon, label} = content[type];
   const variantMapping = {
     ai: 'ai',
     deprecated: 'caution',
     new: 'positive',
+    promoted: 'info',
   };
   console.log(variantMapping[type]);
   return (
