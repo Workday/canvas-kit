@@ -5,7 +5,7 @@ import {expectTransformFactory} from './expectTransformFactory';
 
 const expectTransform = expectTransformFactory(transform);
 
-describe.only('replace deprecated style props', () => {
+describe('replace deprecated style props', () => {
   it('should not change non-canvas imports', () => {
     const input = stripIndent`
       import {Flex} from "any-other-package";
