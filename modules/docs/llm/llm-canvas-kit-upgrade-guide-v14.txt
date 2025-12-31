@@ -40,7 +40,7 @@ Table of contents
     -   Deprecated Buttons
     -   Input Provider
     -   Menu (preview)
-    -   readyOnlyPillStencil and removeablePillStencil
+    -   readOnlyPillStencil and removeablePillStencil
     -   Text Area
     -   Text Input
 -   Troubleshooting
@@ -373,7 +373,7 @@ Example:
 
 Component Updates >> Pill (Preview)
 
-`Pill` uses Preview `Avatar`; `name` is required on `Pill.Avatar`. `variant="default"` is no longer supported (omit to use default styling). `readyOnlyPillStencil` and `removeablePillStencil` removed; use `pillStencil`.
+`Pill` uses Preview `Avatar`; `name` is required on `Pill.Avatar`. `variant="default"` is no longer supported (omit to use default styling). `readOnlyPillStencil` and `removeablePillStencil` removed; use `pillStencil`.
 
 🤖 Codemod updates `altText` → `name` on `Pill.Avatar`.
 
@@ -541,9 +541,9 @@ Removals >> Menu (Preview)
 
 `Menu` in `@workday/canvas-kit-preview-react` removed; use Menu in `@workday/canvas-kit-react` Menu (docs: https://workday.github.io/canvas-kit/?path=/docs/components-popups-menu--docs).
 
-Removals >> readyOnlyPillStencil and removeablePillStencil
+Removals >> readOnlyPillStencil and removeablePillStencil
 
-readyOnlyPillStencil and removeablePillStencil utilities were removed from Pill; use `pillStencil`.
+readOnlyPillStencil and removeablePillStencil utilities were removed from Pill; use `pillStencil`.
 
 Removals >> Text Area (Preview)
 

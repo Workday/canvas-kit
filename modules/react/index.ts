@@ -20,6 +20,7 @@ export * from './layout';
 export * from './loading-dots';
 export * from './menu';
 export * from './modal';
+export * from './pill';
 export * from './pagination';
 export * from './popup';
 export * from './radio';

@@ -23,16 +23,32 @@ space tokens, the new tokens aim to add more semantic meaning to allow for bette
   - [Instructions](#instructions)
 - [Component Promotions](#component-promotions)
   - [Avatar](#avatar-)
+  - [Pill](#pill-)
   - [Segmented Control](#segmented-control-)
   - [Information Highlight](#information-highlight-)
+  - [Segmented Control ⚡️](#segmented-control-️)
+    - [API Differences](#api-differences)
+      - [Structure Changes](#structure-changes)
+      - [Prop Changes](#prop-changes)
+      - [Code Migration](#code-migration)
+      - [New Features](#new-features)
+  - [Information Highlight ⚡️](#information-highlight-️)
 - [Component Updates](#component-updates)
   - [Buttons](#buttons)
 - [Removals](#removals)
   - [Avatar (Deprecated)](#avatar-deprecated)
   - [Segmented Control (Deprecated)](#segmented-control-deprecated)
+  - [Select (Deprecated)](#select-deprecated)
+  - [Search Form (Labs)](#search-form-labs)
+  - [Combobox (Labs)](#combobox-labs)
 - [Glossary](#glossary)
   - [Main](#main)
   - [Preview](#preview)
+- [Codemod Reference](#codemod-reference)
+  - [What is a Codemod?](#what-is-a-codemod)
+  - [Running a Codemod](#running-a-codemod)
+    - [Instructions](#instructions-1)
+  - [Codemod Transformations for v15](#codemod-transformations-for-v15)
 
 ## Codemod
 
@@ -211,7 +227,31 @@ The promoted `Avatar` includes several new features:
 </BaseAvatar>
 ```
 
+### Pill ⚡️
+
+**PR** [#3634](https://github.com/Workday/canvas-kit/pull/3634)
+
+We've promoted `Pill` from [Preview](#preview) to [Main](#main). There are no changes to the
+functionality or styling of the component. The only change required is updating the import
+statement.
+
+**Before in v14**
+
+```tsx
+import {Pill} from '@workday/canvas-kit-preview-react/pill';
+```
+
+**After in v15**
+
+```tsx
+import {Pill} from '@workday/canvas-kit-react/pill';
+```
+
+> 🤖 The codemod will handle the change of imports as shown above.
+
 ### Segmented Control ⚡️
+
+**PR:** [#3633](https://github.com/Workday/canvas-kit/pull/3633)
 
 We've promoted `SegmentedControl` from [Preview](#preview) to [Main](#main). This replaces the deprecated `SegmentedControl` that was previously in Main.
 
@@ -313,6 +353,8 @@ The promoted `SegmentedControl` includes several new features:
 
 ### Information Highlight ⚡️
 
+**PR:** [#3633](https://github.com/Workday/canvas-kit/pull/3633)
+
 We've promoted `InformationHighlight` from [Preview](#preview) to [Main](#main). There are no changes to the functionality or styling of the component. The only change required is updating the import statement.
 
 **Before in v14**
@@ -361,6 +403,149 @@ has been removed. This was the older implementation that used `SegmentedControl.
 Please migrate to the new `SegmentedControl` component (promoted from Preview) which uses a compound
 component pattern with `SegmentedControl.List` and `SegmentedControl.Item`. See the
 [API Differences](#api-differences) section above for migration guidance.
+
+### Select (Deprecated)
+
+**PR:** [#3658](https://github.com/Workday/canvas-kit/pull/3658)
+
+The `Select` component in `@workday/canvas-kit-preview-react/select` has been removed. Please use the
+`Select` component from `@workday/canvas-kit-react/select` instead.
+
+**Before in v14**
+
+```tsx
+import {Select} from '@workday/canvas-kit-preview-react/select';
+```
+
+**After in v15**
+
+```tsx
+import {Select} from '@workday/canvas-kit-react/select';
+```
+
+#### API Differences
+
+The Main `Select` is a [compound component](/getting-started/for-developers/resources/compound-components/)
+built on top of the Combobox component with a composition-based API, whereas the Preview Select was a
+monolithic class-based component.
+
+##### Structure Changes
+
+| Preview (Removed)           | Main                                                          |
+| --------------------------- | ------------------------------------------------------------- |
+| `Select` (single component) | `Select` + `Select.Input` + `Select.Popper` + `Select.Card` + `Select.List` + `Select.Item` |
+
+##### Prop Changes
+
+| Feature          | Preview (Removed)                          | Main                                             |
+| ---------------- | ------------------------------------------ | ------------------------------------------------ |
+| Options          | `options` prop (array of Option objects)   | `items` prop (array of any type)                 |
+| Selected value   | `value` prop                               | Managed via model (`useSelectModel`)             |
+| Change handler   | `onChange={(e) => {}}`                     | `onChange` on `Select.Input`                     |
+| Error state      | `error={Select.ErrorType.Error}`           | `error="error"` or `error="caution"`             |
+| Custom rendering | `renderOption` / `renderSelected` props    | Composition via `Select.Item` children           |
+| Form integration | Manual                                     | Built-in with `FormField` wrapper                |
+| Accessibility    | Manual ARIA                                | Built-in via Combobox foundation                 |
+
+##### Code Migration
+
+**Preview API (Removed)**
+
+```tsx
+import {Select} from '@workday/canvas-kit-preview-react/select';
+
+const options = [
+  {label: 'Small', value: 'small'},
+  {label: 'Medium', value: 'medium'},
+  {label: 'Large', value: 'large'},
+];
+
+const [value, setValue] = React.useState('medium');
+
+<Select
+  options={options}
+  value={value}
+  onChange={e => setValue(e.target.value)}
+/>
+```
+
+**Main API (v15)**
+
+```tsx
+import {Select} from '@workday/canvas-kit-react/select';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+
+const items = ['Small', 'Medium', 'Large'];
+
+<Select items={items}>
+  <FormField label="Size">
+    <Select.Input onChange={e => console.log('Selected:', e.target.value)} />
+    <Select.Popper>
+      <Select.Card>
+        <Select.List>
+          {item => <Select.Item>{item}</Select.Item>}
+        </Select.List>
+      </Select.Card>
+    </Select.Popper>
+  </FormField>
+</Select>
+```
+
+##### Main Select Features
+
+The Main `Select` includes features not available in the Preview version:
+
+- **Composition-based API**: Full control over structure with subcomponents
+- **FormField integration**: Built-in accessibility when wrapped with FormField
+- **Model-based state**: Use `useSelectModel` for advanced state management
+- **Virtualization support**: Enable for large lists via model config
+- **Icons in input**: Use `inputStartIcon` prop on `Select.Input`
+- **Icons in items**: Use `Select.Item.Icon` subcomponent
+
+```tsx
+// With icons
+<Select.Input inputStartIcon={myIcon} />
+
+// With item icons
+<Select.Item>
+  <Select.Item.Icon icon={starIcon} />
+  Favorite
+</Select.Item>
+
+// With model for controlled state
+const model = useSelectModel({
+  items: myItems,
+  onSelect: ({id}) => console.log('Selected:', id),
+});
+
+<Select model={model}>
+  ...
+</Select>
+```
+### Search Form (Labs)
+
+The deprecated `SearchForm` component has been removed from `@workday/canvas-kit-labs-react`.
+
+The following exports are no longer available:
+- `SearchForm`
+- `SearchFormProps`
+- `SearchFormState`
+- `SearchTheme`
+- `SearchThemeAttributes`
+
+Please migrate to the [Combobox](/get-started/for-developers/guides/combobox/) in `@workday/canvas-kit-react`.
+
+### Combobox (Labs)
+
+The deprecated `Combobox` component has been removed from `@workday/canvas-kit-labs-react`.
+
+The following exports are no longer available:
+- `Combobox`
+- `ComboboxProps`
+- `AutocompleteList`
+- `Status`
+
+Please migrate to the [Combobox](/get-started/for-developers/guides/combobox/) in `@workday/canvas-kit-react`.
 
 ## Glossary
 
