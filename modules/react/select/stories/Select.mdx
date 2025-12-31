@@ -21,6 +21,7 @@ import { RefForwarding } from './examples/RefForwarding';
 import { FetchingDynamicItems } from './examples/FetchingDynamicItems';
 import { Placeholder } from './examples/Placeholder';
 import { InitialSelectedItem } from './examples/InitialSelectedItem';
+import { GroupedItems } from './examples/GroupedItems';
 import * as SelectStories from './Select.stories';
 import {Table} from '@workday/canvas-kit-react/table';
 
@@ -303,6 +304,12 @@ prop as well as the `value` DOM property and will update the model accordingly.
     </FormField>
   </Select>
   ```
+
+### Grouped Items
+
+In order to group items, you have to use the static API in combination of the `Menu.Group` component.
+
+<ExampleCodeBlock code={GroupedItems} />
 
 ### Custom Styles
 
