@@ -30,7 +30,7 @@ import {Tabs} from '@workday/canvas-kit-react/tabs';
 Every component MDX (with a few [exceptions](#component-families)) should follow the structure
 outlined below.
 
-````md
+```md
 <!--
 Import components which will be used to render documentation in the MDX file.
 The Specifications import is optional; only include it if the Specifications
@@ -134,7 +134,7 @@ folder).
 ## Specifications
 
 <Specifications file="[Component].spec.ts" name="[Component]" />
-````
+```
 
 > **Note:** Refer to [Tabs](/components/containers/tabs/) and [Modal](/components/popups/modal/) for
 > examples of how to write well-structured component documentation.
@@ -149,7 +149,7 @@ they're all similar.
 Upon identifying a `ComponentFamily` name (e.g., `Button`) for the collection of related components,
 you'll then follow the same document structure defined above with slight modifications.
 
-````md
+```md
 <!-- Only import SymbolDescription if necessary (see below) -->
 
 import {Specifications, SymbolDoc, SymbolDescription} from '@workday/canvas-kit-docs';
@@ -240,7 +240,7 @@ file.
 ## Specifications
 
 <Specifications file="[ComponentFamily].spec.ts" name="[ComponentFamily]" />
-````
+```
 
 > **Note:** Refer to [Button](/components/buttons/button/) for an example of how to write
 > well-structured component family documentation.
