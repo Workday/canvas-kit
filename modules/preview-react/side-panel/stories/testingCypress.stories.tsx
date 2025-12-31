@@ -81,9 +81,6 @@ export const FirstFocusable = () => {
     );
   };
 
-  // eslint-disable-next-line no-empty-function
-  const noop = () => {};
-
   return (
     <React.Fragment>
       <Header>
