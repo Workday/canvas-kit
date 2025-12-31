@@ -44,10 +44,10 @@ const routes = {
   '/examples/layout/': 'examples-layouts--docs',
   '/get-started/for-developers/theming/overview/': 'features-theming-overview--docs',
   '/getting-started/for-developers/contributing/': 'guides-contributing--docs',
+  '/get-started/for-developers/guides/combobox/': 'features-combobox--docs',
   '/getting-started/for-developers/resources/api-pattern-guidelines/':
     'guides-api-pattern-guidelines--docs',
   '/getting-started/for-developers/resources/collection-api/': 'features-collections--docs',
-  '/get-started/for-developers/resources/combobox/': 'features-combobox--docs',
   '/getting-started/for-developers/resources/compound-components/':
     'guides-compound-components--docs',
   '/getting-started/for-developers/resources/creating-compound-components/':

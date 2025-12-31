@@ -6,6 +6,28 @@ import {
   Specifications,
   SymbolDoc,
 } from '@workday/canvas-kit-docs';
+<<<<<<< HEAD
+=======
+import { Caution } from './examples/Caution';
+import { Basic } from './examples/Basic';
+import { Complex } from './examples/Complex';
+import { Controlled } from './examples/Controlled';
+import { Disabled } from './examples/Disabled';
+import { DisabledOptions } from './examples/DisabledOption';
+import { Error } from './examples/Error';
+import { Grow } from './examples/Grow';
+import { LabelPosition } from './examples/LabelPosition';
+import { WithIcons } from './examples/WithIcons';
+import { Required } from './examples/Required';
+import { MenuHeight } from './examples/MenuHeight';
+import { HoistedModel } from './examples/HoistedModel';
+import { RefForwarding } from './examples/RefForwarding';
+import { FetchingDynamicItems } from './examples/FetchingDynamicItems';
+import { Placeholder } from './examples/Placeholder';
+import { InitialSelectedItem } from './examples/InitialSelectedItem';
+import { GroupedItems } from './examples/GroupedItems';
+import * as SelectStories from './Select.stories';
+>>>>>>> 5d389f1b5a66cf5bde37eb570ff634a7b143ee98
 import {Table} from '@workday/canvas-kit-react/table';
 
 import * as SelectStories from './Select.stories';
@@ -305,6 +327,12 @@ prop as well as the `value` DOM property and will update the model accordingly.
     </FormField>
   </Select>
   ```
+
+### Grouped Items
+
+In order to group items, you have to use the static API in combination of the `Menu.Group` component.
+
+<ExampleCodeBlock code={GroupedItems} />
 
 ### Custom Styles
 

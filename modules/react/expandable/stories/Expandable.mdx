@@ -52,6 +52,11 @@ to `Expandable.Icon` depending on whether the `Expandable.Icon` is placed before
 
 <ExampleCodeBlock code={Avatar} />
 
+> **Accessibility Note:** In this situation, the Avatar is decorative and should not be announced to
+> screen readers. The `<Expandable.Avatar>` component has `isDecorative` set to `true` by default to
+> hide it from screen readers, as avatars in expandable headers are typically decorative when paired
+> with adjacent text.
+
 ### Right to Left (RTL)
 
 Expandable container has bidirectional support and should function as expected with RTL languages as
@@ -76,10 +81,52 @@ You can also have direct access to the model if
 
 ### Hoisted Model
 
-If you you need direct access to the model, you can hoist it with the `useExpandableModel` hook. In
-the example below, we're hoisting the models to expand and collapse all three containers at once.
+If you need direct access to the model, you can hoist it with the `useExpandableModel` hook. In the
+example below, we're hoisting the models to expand and collapse all three containers at once.
 
 <ExampleCodeBlock code={HoistedModel} />
+
+> **Accessibility Note:** When using multiple Expandable Containers on a page, use the `as` prop to
+> render the `<Expandable.Content>` sub-component as an HTML `<section>` element. Then, use
+> `aria-labelledby` to reference the unique `id` of the `<Expandable.Title>` element. This practice
+> can be useful to screen reader users when multiple Expandable Containers are opened at one time
+> for uniquely describing the boundaries of the expandable content.
+
+## Accessibility
+
+Our Expandable component renders a semantic HTML `<button>` element to the DOM, with an optional
+parent heading element as defined by the `headingLevel` prop. The `aria-expanded` property is
+included on the button to indicate the state of the content to screen readers.
+
+[Accordion Pattern | APG | WAI | W3C](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/)
+
+- Use the `headingLevel` prop to assign an appropriate heading level based on the context of the
+  page content.
+- When using Expandable Container for navigation elements, then we don't recommend using the
+  `headingLevel` prop. This will render only expandable buttons to the DOM, reserving headings for
+  organizing content in the main body of the page.
+- The `as` prop may also be used on `<Expandable.Content>` to render an HTML `<ul>` element for
+  displaying a list of items. For example, check out
+  [Side Panel with Navigation](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-examples-side-panel-navigation--docs).
+
+### Navigation
+
+- **Tab key**: Moves focus to the next expandable button or focusable element
+- **Shift + Tab**: Moves focus to the previous focusable element
+- **Enter or Space**: Toggles the expanded/collapsed state
+
+### Screen Reader Experience
+
+- The expandable button will be announced with its title text followed by the button role
+- The current state will be announced as either "collapsed" or "expanded" (For example: "Usage
+  Guidance, button, collapsed" or "Usage Guidance, button, expanded")
+- **State Changes:** When activating the button to expand content, screen readers will announce the
+  new "expanded" state and vice versa when collapsing content.
+- **Content Regions:** Screen reader users can use landmark navigation to jump between sections and
+  each section will be announced with its associated title (For example: "Usage Guidance, landmark
+  region")
+- **Heading Structure:** Using heading levels with expandable buttons allows screen reader users to
+  navigate by headings, making the document structure and hierarchy easier to understand.
 
 ## Component API
 

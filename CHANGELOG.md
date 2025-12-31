@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.2.2](https://github.com/Workday/canvas-kit/releases/tag/v14.2.2) (2025-12-31)
+
+### Documentation
+
+- docs: Migrating accessibility guidelines for Expandable & Menu ([#3600](https://github.com/Workday/canvas-kit/pull/3600)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton, [@mannycarrera4](https://github.com/mannycarrera4))
+- docs: Fix broken Combobox guide links ([#3663](https://github.com/Workday/canvas-kit/pull/3663)) ([@alanbsmith](https://github.com/alanbsmith), Alan Smith)
+
+
 ## [v14.2.1](https://github.com/Workday/canvas-kit/releases/tag/v14.2.1) (2025-12-18)
 
 ### Components
@@ -696,7 +704,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - feat: Update Pills to match our brand Refresh ([#3446](https://github.com/Workday/canvas-kit/pull/3446)) ([@RayRedGoose](https://github.com/RayRedGoose), [@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
   The `Pill` component has been updated to use newest tokens as alignment with new brand direction. 
   - The component no longer takes `default` as value for variant prop if the `variant` prop is not provided, the component will use its default styling. 
-  - `readyOnlyPillStencil` and `removeablePillStencil` have been removed with the clean up of `pillStencil`.
+  - `readOnlyPillStencil` and `removeablePillStencil` have been removed with the clean up of `pillStencil`.
 - fix: Remove emphasis deprecation on StatusIndicator ([#3465](https://github.com/Workday/canvas-kit/pull/3465)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
 - feat: Remove cascade barrier in Canvas Provider ([#3407](https://github.com/Workday/canvas-kit/pull/3407)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
 - feat: Remove InputProvider ([#3468](https://github.com/Workday/canvas-kit/pull/3468)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)

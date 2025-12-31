@@ -27,7 +27,7 @@ export interface SegmentedControlProps {
  *   items: [],
  * });
  *
- * <SegmentedControl model={model}>{Child components}</SegmentedControl>;
+ * <SegmentedControl model={model}>{Child components}</SegmentedControl>
  * ```
  */
 export const SegmentedControl = createContainer()({

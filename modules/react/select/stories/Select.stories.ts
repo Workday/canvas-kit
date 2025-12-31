@@ -11,6 +11,7 @@ import {Disabled as DisabledExample} from './examples/Disabled';
 import {DisabledOptions as DisabledOptionsExample} from './examples/DisabledOption';
 import {Error as ErrorExample} from './examples/Error';
 import {FetchingDynamicItems as FetchingDynamicItemsExample} from './examples/FetchingDynamicItems';
+import {GroupedItems as GroupedItemsExample} from './examples/GroupedItems';
 import {Grow as GrowExample} from './examples/Grow';
 import {HoistedModel as HoistedModelExample} from './examples/HoistedModel';
 import {InitialSelectedItem as InitialSelectedItemExample} from './examples/InitialSelectedItem';
@@ -84,4 +85,7 @@ export const Placeholder: Story = {
 };
 export const InitialSelectedItem: Story = {
   render: InitialSelectedItemExample,
+};
+export const GroupedItems: Story = {
+  render: GroupedItemsExample,
 };
