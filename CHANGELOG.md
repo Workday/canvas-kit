@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.2.2](https://github.com/Workday/canvas-kit/releases/tag/v14.2.2) (2025-12-31)
+
+### Documentation
+
+- docs: Migrating accessibility guidelines for Expandable & Menu ([#3600](https://github.com/Workday/canvas-kit/pull/3600)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton, [@mannycarrera4](https://github.com/mannycarrera4))
+- docs: Fix broken Combobox guide links ([#3663](https://github.com/Workday/canvas-kit/pull/3663)) ([@alanbsmith](https://github.com/alanbsmith), Alan Smith)
+
+
 ## [v14.2.1](https://github.com/Workday/canvas-kit/releases/tag/v14.2.1) (2025-12-18)
 
 ### Components
