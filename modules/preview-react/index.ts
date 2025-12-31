@@ -3,7 +3,6 @@ export * from './color-picker';
 export * from './divider';
 export * from './loading-sparkles';
 export * from './multi-select';
-export * from './pill';
 export * from './radio';
 export * from './side-panel';
 export * from './status-indicator';
