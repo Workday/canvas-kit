@@ -1,12 +1,12 @@
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 
-import {Pill} from '@workday/canvas-kit-preview-react/pill';
+import {Pill} from '@workday/canvas-kit-react/pill';
 import {stateTableColumnProps} from '@workday/canvas-kit-react/button/stories/visual-testing/utils';
 // @ts-ignore: Cannot find module error
 import testAvatar from './examples/test-avatar.png';
 
 export default {
-  title: 'Testing/Preview/Pill',
+  title: 'Testing/Indicators/Pill',
   component: Pill,
   parameters: {
     chromatic: {

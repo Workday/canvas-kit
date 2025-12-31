@@ -22,6 +22,9 @@ space tokens, the new tokens aim to add more semantic meaning to allow for bette
 - [Codemod](#codemod)
   - [Instructions](#instructions)
 - [Component Promotions](#component-promotions)
+  - [Pill](#pill-)
+  - [Segmented Control](#segmented-control-)
+  - [Information Highlight](#information-highlight-)
   - [Segmented Control ⚡️](#segmented-control-️)
     - [API Differences](#api-differences)
       - [Structure Changes](#structure-changes)
@@ -105,6 +108,28 @@ yarn remove @workday/canvas-kit-codemod
 > your project conventions.
 
 ## Component Promotions
+
+### Pill ⚡️
+
+**PR** [#3634](https://github.com/Workday/canvas-kit/pull/3634)
+
+We've promoted `Pill` from [Preview](#preview) to [Main](#main). There are no changes to the
+functionality or styling of the component. The only change required is updating the import
+statement.
+
+**Before in v14**
+
+```tsx
+import {Pill} from '@workday/canvas-kit-preview-react/pill';
+```
+
+**After in v15**
+
+```tsx
+import {Pill} from '@workday/canvas-kit-react/pill';
+```
+
+> 🤖 The codemod will handle the change of imports as shown above.
 
 ### Segmented Control ⚡️
 

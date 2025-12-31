@@ -1,4 +1,4 @@
-import {Pill, pillCountStencil, pillStencil} from '@workday/canvas-kit-preview-react/pill';
+import {Pill, pillCountStencil, pillStencil} from '@workday/canvas-kit-react/pill';
 
 import {createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
