@@ -13,7 +13,7 @@ import * as PaginationStories from './pagination.stories';
 # Canvas Kit Pagination
 
 `Pagination` is a
-[compound component](/getting-started/for-developers/resources/compound-components/) that allows
+[compound component](/get-started/for-developers/documentation/compound-components/) that allows
 users to navigate between pages in a range.
 
 [> Workday Design Reference](https://design.workday.com/components/navigation/pagination)
@@ -49,7 +49,7 @@ readers.
 By default, `Pagination` will create and use its own [model](#model) internally. Alternatively, you
 may configure your own model with `usePaginationModel` and pass it to `Pagination` via the `model`
 prop. This pattern is referred to as
-[hoisting the model](/getting-started/for-developers/resources/compound-components/#configuring-a-model)
+[hoisting the model](/get-started/for-developers/documentation/compound-components/#configuring-a-model)
 and provides direct access to its `state` and `events` outside of the `Pagination` component.
 
 In this example, we set up external observation of the model state and create an external button to
@@ -97,7 +97,7 @@ You can use `useResizeObserver` to accomplish this as in the example below.
 ## Model
 
 If `Pagination` was stripped of all its markup, attributes, and styling, what would remain is the
-[model](/getting-started/for-developers/resources/compound-components/#models). The model is an
+[model](/get-started/for-developers/documentation/compound-components/#models). The model is an
 object composed of two parts: `state` which describes the current snapshot in time of the component
 and `events` which describes events that can be sent to the model.
 
@@ -138,7 +138,7 @@ export const CustomPagination = () => {
 Alternatively, if you need direct access to the model's `state` and `events` outside of the
 `Pagination` component, you may configure your own model with `usePaginationModel` and pass it to
 `Pagination` via a pattern called
-[hoisting the model](/getting-started/for-developers/resources/compound-components/#configuring-a-model).
+[hoisting the model](/get-started/for-developers/documentation/compound-components/#configuring-a-model).
 
 ```tsx
 const model = usePaginationModel({

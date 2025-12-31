@@ -43,20 +43,20 @@ const routes = {
   '/components/text/title/': 'components-text-title--docs',
   '/examples/layout/': 'examples-layouts--docs',
   '/get-started/for-developers/theming/overview/': 'features-theming-overview--docs',
-  '/getting-started/for-developers/contributing/': 'guides-contributing--docs',
+  '/get-started/for-contributors/code/': 'guides-contributing--docs',
   '/get-started/for-developers/guides/combobox/': 'features-combobox--docs',
-  '/getting-started/for-developers/resources/api-pattern-guidelines/':
+  '/get-started/for-developers/documentation/api-pattern-guidelines/':
     'guides-api-pattern-guidelines--docs',
-  '/getting-started/for-developers/resources/collection-api/': 'features-collections--docs',
-  '/getting-started/for-developers/resources/compound-components/':
+  '/get-started/for-developers/guides/collection-api/': 'features-collections--docs',
+  '/get-started/for-developers/documentation/compound-components/':
     'guides-compound-components--docs',
-  '/getting-started/for-developers/resources/creating-compound-components/':
+  '/get-started/for-developers/documentation/creating-compound-components/':
     'guides-creating-compound-components--docs',
-  '/getting-started/for-developers/resources/responsive-styling/':
+  '/get-started/for-developers/guides/responsive-styling/':
     'features-responsive-styling--responsive-container',
-  '/getting-started/for-developers/resources/style-props/': 'features-style-props--docs',
-  '/getting-started/for-developers/resources/testing/': 'guides-testing--docs',
-  '/getting-started/introduction/': 'guides-getting-started--docs',
+  '/get-started/for-developers/documentation/style-props/': 'features-style-props--docs',
+  '/get-started/for-developers/documentation/testing/': 'guides-testing--docs',
+  '/get-started/introduction/': 'guides-getting-started--docs',
   '/help/upgrade-guides/canvas-v14-upgrade-guide/': 'guides-upgrade-guides-v14-0-overview--docs',
   '/help/upgrade-guides/canvas-v14-upgrade-guide/#tab=visual-changes':
     'guides-upgrade-guides-v14-0-visual-changes--docs',
