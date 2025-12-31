@@ -34,7 +34,7 @@ const routes = {
   '/components/popups/modal/': 'components-popups-modal--docs',
   '/components/popups/popup/': 'components-popups-popup--docs',
   '/components/popups/toast/': 'components-popups-toast--docs',
-  '/components/popups/tooltip/': 'omponents-popups-tooltip--docs',
+  '/components/popups/tooltip/': 'components-popups-tooltip--docs',
   '/components/text/body-text/': 'components-text-body-text--docs',
   '/components/text/heading/': 'components-text-heading--docs',
   '/components/text/label-text/': 'components-text-label-text--docs',
@@ -44,10 +44,10 @@ const routes = {
   '/examples/layout/': 'examples-layouts--docs',
   '/get-started/for-developers/theming/overview/': 'features-theming-overview--docs',
   '/getting-started/for-developers/contributing/': 'guides-contributing--docs',
+  '/get-started/for-developers/guides/combobox/': 'features-combobox--docs',
   '/getting-started/for-developers/resources/api-pattern-guidelines/':
     'guides-api-pattern-guidelines--docs',
   '/getting-started/for-developers/resources/collection-api/': 'features-collections--docs',
-  '/get-started/for-developers/resources/combobox/': 'features-combobox--docs',
   '/getting-started/for-developers/resources/compound-components/':
     'guides-compound-components--docs',
   '/getting-started/for-developers/resources/creating-compound-components/':
