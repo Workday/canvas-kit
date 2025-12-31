@@ -62,7 +62,7 @@ describe('Side Panel', () => {
     context(`when focused on a focusable element preceding the Side Panel`, () => {
       beforeEach(() => {
         cy.mount(<FirstFocusable />);
-        cy.findByLabelText('Avatar').focus();
+        cy.findByRole('button', {name: 'Open'}).focus();
       });
 
       context('when the tab key is pressed once', () => {
