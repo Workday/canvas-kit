@@ -3,11 +3,26 @@ import React from 'react';
 import {Expandable, useExpandableModel} from '@workday/canvas-kit-react/expandable';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
+import {useUniqueId} from '@workday/canvas-kit-react/common';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const listStyles = createStyles({
+  flexDirection: 'column',
+  gap: system.space.x2,
+  padding: system.space.zero,
+  marginX: system.space.x4,
+  marginY: system.space.zero,
+});
 
 export const HoistedModel = () => {
   const modelOne = useExpandableModel();
   const modelTwo = useExpandableModel();
   const modelThree = useExpandableModel();
+
+  const idOne = useUniqueId();
+  const idTwo = useUniqueId();
+  const idThree = useUniqueId();
 
   const handleExpandAll = () => {
     modelOne.events.show();
@@ -22,19 +37,19 @@ export const HoistedModel = () => {
   };
 
   return (
-    <Flex gap="m" flexDirection="column">
-      <Flex gap="s">
+    <Flex gap={system.space.x6} flexDirection="column">
+      <Flex gap={system.space.x4}>
         <SecondaryButton onClick={handleExpandAll}>Expand All</SecondaryButton>
         <SecondaryButton onClick={handleCollapseAll}>Collapse All</SecondaryButton>
       </Flex>
       <Flex flexDirection="column">
         <Expandable model={modelOne}>
           <Expandable.Target headingLevel="h4">
-            <Expandable.Title>Usage Guidance</Expandable.Title>
+            <Expandable.Title id={idOne}>Usage Guidance</Expandable.Title>
             <Expandable.Icon iconPosition="end" />
           </Expandable.Target>
 
-          <Expandable.Content>
+          <Expandable.Content as="section" aria-labelledby={idOne}>
             This component highlights the most important details of a section and reveals more when
             a user taps or clicks on the header part of the container. Enabling users to hide and
             show information ensures the design remains focused and relevant to their expectations.
@@ -44,20 +59,12 @@ export const HoistedModel = () => {
         </Expandable>
         <Expandable model={modelTwo}>
           <Expandable.Target headingLevel="h4">
-            <Expandable.Title>Accessibility Guidelines</Expandable.Title>
+            <Expandable.Title id={idTwo}>Accessibility Guidelines</Expandable.Title>
             <Expandable.Icon iconPosition="end" />
           </Expandable.Target>
 
-          <Expandable.Content>
-            <Flex
-              flexDirection="column"
-              as="ul"
-              gap="xxs"
-              maxWidth="60ch"
-              padding="zero"
-              marginX="s"
-              marginY="zero"
-            >
+          <Expandable.Content as="section" aria-labelledby={idTwo}>
+            <Flex as="ul" cs={listStyles}>
               <li>
                 The state of a component being open or closed must be conveyed to assistive
                 technologies.
@@ -92,10 +99,10 @@ export const HoistedModel = () => {
         </Expandable>
         <Expandable model={modelThree}>
           <Expandable.Target headingLevel="h4">
-            <Expandable.Title>Content Guidelines</Expandable.Title>
+            <Expandable.Title id={idThree}>Content Guidelines</Expandable.Title>
             <Expandable.Icon iconPosition="end" />
           </Expandable.Target>
-          <Expandable.Content>
+          <Expandable.Content as="section" aria-labelledby={idThree}>
             Titles should be short and concise, yet long enough to explain what the user would
             expect to see when the content is expanded. If titles must be long, make sure it doesn't
             wrap more than two lines.

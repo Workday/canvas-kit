@@ -22,16 +22,31 @@ space tokens, the new tokens aim to add more semantic meaning to allow for bette
 - [Codemod](#codemod)
   - [Instructions](#instructions)
 - [Component Promotions](#component-promotions)
-  - [Segmented Control](#segmented-control-)
-  - [Information Highlight](#information-highlight-)
+  - [Segmented Control ⚡️](#segmented-control-️)
+    - [API Differences](#api-differences)
+      - [Structure Changes](#structure-changes)
+      - [Prop Changes](#prop-changes)
+      - [Code Migration](#code-migration)
+      - [New Features](#new-features)
+  - [Information Highlight ⚡️](#information-highlight-️)
 - [Component Updates](#component-updates)
   - [Buttons](#buttons)
 - [Removals](#removals)
   - [Segmented Control (Deprecated)](#segmented-control-deprecated)
+<<<<<<< HEAD
   - [Select (Deprecated)](#select-deprecated)
+=======
+  - [Search Form (Labs)](#search-form-labs)
+  - [Combobox (Labs)](#combobox-labs)
+>>>>>>> 3fbdd82f3f92e4c6aaebd87c84fcdcd6b39f87cc
 - [Glossary](#glossary)
   - [Main](#main)
   - [Preview](#preview)
+- [Codemod Reference](#codemod-reference)
+  - [What is a Codemod?](#what-is-a-codemod)
+  - [Running a Codemod](#running-a-codemod)
+    - [Instructions](#instructions-1)
+  - [Codemod Transformations for v15](#codemod-transformations-for-v15)
 
 ## Codemod
 
@@ -358,6 +373,30 @@ const model = useSelectModel({
   ...
 </Select>
 ```
+### Search Form (Labs)
+
+The deprecated `SearchForm` component has been removed from `@workday/canvas-kit-labs-react`.
+
+The following exports are no longer available:
+- `SearchForm`
+- `SearchFormProps`
+- `SearchFormState`
+- `SearchTheme`
+- `SearchThemeAttributes`
+
+Please migrate to the [Combobox](/get-started/for-developers/guides/combobox/) in `@workday/canvas-kit-react`.
+
+### Combobox (Labs)
+
+The deprecated `Combobox` component has been removed from `@workday/canvas-kit-labs-react`.
+
+The following exports are no longer available:
+- `Combobox`
+- `ComboboxProps`
+- `AutocompleteList`
+- `Status`
+
+Please migrate to the [Combobox](/get-started/for-developers/guides/combobox/) in `@workday/canvas-kit-react`.
 
 ## Glossary
 

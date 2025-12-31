@@ -29,7 +29,6 @@ import {
   dubLogoPrimary,
 } from '@workday/canvas-kit-react/common';
 import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
-import {SearchForm} from '@workday/canvas-kit-labs-react/search-form';
 import {Avatar} from '@workday/canvas-kit-preview-react/avatar';
 import {BodyText} from '@workday/canvas-kit-react/text';
 
@@ -226,9 +225,6 @@ const Template = props => (
         <Hyperlink>
           <WorkdayLogo dangerouslySetInnerHTML={{__html: dubLogoPrimary}} />
         </Hyperlink>
-      </GlobalHeader.Item>
-      <GlobalHeader.Item margin="auto" width="100%" maxWidth={`calc(${space.xxxl} * 6)`}>
-        <SearchForm onSubmit={() => 1} />
       </GlobalHeader.Item>
       <GlobalHeader.Item>
         <TertiaryButton aria-label="messages" icon={assistantIcon} />
