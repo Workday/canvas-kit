@@ -20,7 +20,7 @@ import {
 } from '@workday/canvas-system-icons-web';
 
 import {SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
-import {Avatar} from '@workday/canvas-kit-preview-react/avatar';
+import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 import {LoadReturn} from '@workday/canvas-kit-react/collection';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';

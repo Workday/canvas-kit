@@ -1,5 +1,5 @@
 import {createSubcomponent} from '@workday/canvas-kit-react/common';
-import {Avatar, AvatarProps, avatarStencil} from '@workday/canvas-kit-preview-react/avatar';
+import {Avatar, AvatarProps, avatarStencil} from '@workday/canvas-kit-react/avatar';
 import {usePillModel} from './usePillModel';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
