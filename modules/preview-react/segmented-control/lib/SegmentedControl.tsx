@@ -19,7 +19,7 @@ export interface SegmentedControlProps {
  * ```
  *
  * Alternatively, you may pass in a model using the [hoisted model
- * pattern](/getting-started/for-developers/resources/compound-components/#configuring-a-model).
+ * pattern](/get-started/for-developers/documentation/compound-components/#configuring-a-model).
  *
  * ```tsx
  * const model = useSegmentedControlModel({

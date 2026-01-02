@@ -43,11 +43,11 @@ yarn add @workday/canvas-kit-react
 ### Basic Example
 
 `Select` supports a
-[dynamic API](/getting-started/for-developers/resources/collection-api/#dynamic-items) where you
+[dynamic API](/get-started/for-developers/guides/collection-api/#dynamic-items) where you
 pass an array of items via the `items` prop and provide a render function to display the items. The
 items may be provided as an
-[array of strings](/getting-started/for-developers/resources/collection-api/#array-of-strings) or an
-[array of objects](/getting-started/for-developers/resources/collection-api/#array-of-objects).
+[array of strings](/get-started/for-developers/guides/collection-api/#array-of-strings) or an
+[array of objects](/get-started/for-developers/guides/collection-api/#array-of-objects).
 
 `Select` should be used in tandem with [Form Field](/components/inputs/form-field/) where the
 `Select` wraps the `FormField` element and the `FormField` element wraps the children of `Select` to
@@ -77,7 +77,7 @@ value of the `Select`.
 By default, `Select` will create and use its own model internally. Alternatively, you may configure
 your own model with `useSelectModel` and pass it to `Select` via the `model` prop. This pattern is
 referred to as
-[hoisting the model](/getting-started/for-developers/resources/compound-components/#configuring-a-model)
+[hoisting the model](/get-started/for-developers/documentation/compound-components/#configuring-a-model)
 and provides direct access to its `state` and `events` outside of the `Select` component.
 
 In this example, we set up external observation of the model state and create an external button to
