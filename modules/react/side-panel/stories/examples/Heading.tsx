@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-labs-react/side-panel';
+import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-react/side-panel';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {AccessibleHide} from '@workday/canvas-kit-react/common';
 import {Text} from '@workday/canvas-kit-react/text';
@@ -18,7 +18,7 @@ const stylesOverride = {
   }),
 };
 
-export const HiddenName = () => {
+export const Heading = () => {
   const model = useSidePanelModel({
     onStateTransition: state => {
       console.log(`state is: ${state}`);
@@ -28,8 +28,12 @@ export const HiddenName = () => {
   return (
     <Flex cs={stylesOverride.viewport}>
       <SidePanel model={model}>
-        <SidePanel.ToggleButton />
-        <AccessibleHide id={model.state.labelId}>Hidden Title</AccessibleHide>
+        <SidePanel.ToggleButton
+          tooltipTextCollapse="Collapsing View"
+          tooltipTextExpand="Expand View"
+          tooltipText="Control Side Panel"
+        />
+        <SidePanel.Heading hidden>Hidden Title</SidePanel.Heading>
       </SidePanel>
       <Flex as="main" cs={stylesOverride.main}>
         <Text as="p" typeLevel="body.large">
