@@ -21,6 +21,7 @@ import {RefForwarding as RefForwardingExample} from './examples/RefForwarding';
 import {FetchingDynamicItems as FetchingDynamicItemsExample} from './examples/FetchingDynamicItems';
 import {Placeholder as PlaceholderExample} from './examples/Placeholder';
 import {InitialSelectedItem as InitialSelectedItemExample} from './examples/InitialSelectedItem';
+import {GroupedItems as GroupedItemsExample} from './examples/GroupedItems';
 
 export default {
   title: 'Components/Inputs/Select',
@@ -85,4 +86,7 @@ export const Placeholder: Story = {
 };
 export const InitialSelectedItem: Story = {
   render: InitialSelectedItemExample,
+};
+export const GroupedItems: Story = {
+  render: GroupedItemsExample,
 };
