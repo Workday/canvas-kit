@@ -1,13 +1,13 @@
 import {DeleteButton} from '@workday/canvas-kit-react/button';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {
   Popup,
-  usePopupModel,
   useCloseOnEscape,
   useCloseOnOutsideClick,
   useInitialFocus,
+  usePopupModel,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
-import {Box, Flex} from '@workday/canvas-kit-react/layout';
 
 export const Basic = () => {
   const model = usePopupModel();

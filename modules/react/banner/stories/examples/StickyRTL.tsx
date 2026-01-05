@@ -1,8 +1,8 @@
 import React from 'react';
 
-import {Box} from '@workday/canvas-kit-react/layout';
-import {CanvasProvider, styled} from '@workday/canvas-kit-react/common';
 import {Banner} from '@workday/canvas-kit-react/banner';
+import {CanvasProvider, styled} from '@workday/canvas-kit-react/common';
+import {Box} from '@workday/canvas-kit-react/layout';
 
 const StyledStickyBanner = styled(Banner)({
   position: 'absolute',

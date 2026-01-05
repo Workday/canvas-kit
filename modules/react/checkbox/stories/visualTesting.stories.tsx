@@ -1,13 +1,13 @@
 import * as React from 'react';
 
+import {Checkbox} from '@workday/canvas-kit-react/checkbox';
 import {
   ComponentStatesTable,
-  permutateProps,
   StaticStates,
+  permutateProps,
 } from '@workday/canvas-kit-react/testing';
-import {customColorTheme} from '../../../../utils/storybook';
 
-import {Checkbox} from '@workday/canvas-kit-react/checkbox';
+import {customColorTheme} from '../../../../utils/storybook';
 
 export default {
   title: 'Testing/Inputs/Checkbox',

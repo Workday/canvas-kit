@@ -1,9 +1,13 @@
+import {Meta} from '@storybook/blocks';
+
 import {
   ExampleCodeBlock,
   InformationHighlight,
-  SymbolDoc,
   Specifications,
+  SymbolDoc,
 } from '@workday/canvas-kit-docs';
+<<<<<<< HEAD
+=======
 import { Caution } from './examples/Caution';
 import { Basic } from './examples/Basic';
 import { Complex } from './examples/Complex';
@@ -23,7 +27,27 @@ import { Placeholder } from './examples/Placeholder';
 import { InitialSelectedItem } from './examples/InitialSelectedItem';
 import { GroupedItems } from './examples/GroupedItems';
 import * as SelectStories from './Select.stories';
+>>>>>>> 5d389f1b5a66cf5bde37eb570ff634a7b143ee98
 import {Table} from '@workday/canvas-kit-react/table';
+
+import * as SelectStories from './Select.stories';
+import {Basic} from './examples/Basic';
+import {Caution} from './examples/Caution';
+import {Complex} from './examples/Complex';
+import {Controlled} from './examples/Controlled';
+import {Disabled} from './examples/Disabled';
+import {DisabledOptions} from './examples/DisabledOption';
+import {Error} from './examples/Error';
+import {FetchingDynamicItems} from './examples/FetchingDynamicItems';
+import {Grow} from './examples/Grow';
+import {HoistedModel} from './examples/HoistedModel';
+import {InitialSelectedItem} from './examples/InitialSelectedItem';
+import {LabelPosition} from './examples/LabelPosition';
+import {MenuHeight} from './examples/MenuHeight';
+import {Placeholder} from './examples/Placeholder';
+import {RefForwarding} from './examples/RefForwarding';
+import {Required} from './examples/Required';
+import {WithIcons} from './examples/WithIcons';
 
 <Meta of={SelectStories} />
 
@@ -44,11 +68,11 @@ yarn add @workday/canvas-kit-react
 ### Basic Example
 
 `Select` supports a
-[dynamic API](/getting-started/for-developers/resources/collection-api/#dynamic-items) where you
+[dynamic API](/get-started/for-developers/guides/collection-api/#dynamic-items) where you
 pass an array of items via the `items` prop and provide a render function to display the items. The
 items may be provided as an
-[array of strings](/getting-started/for-developers/resources/collection-api/#array-of-strings) or an
-[array of objects](/getting-started/for-developers/resources/collection-api/#array-of-objects).
+[array of strings](/get-started/for-developers/guides/collection-api/#array-of-strings) or an
+[array of objects](/get-started/for-developers/guides/collection-api/#array-of-objects).
 
 `Select` should be used in tandem with [Form Field](/components/inputs/form-field/) where the
 `Select` wraps the `FormField` element and the `FormField` element wraps the children of `Select` to
@@ -78,7 +102,7 @@ value of the `Select`.
 By default, `Select` will create and use its own model internally. Alternatively, you may configure
 your own model with `useSelectModel` and pass it to `Select` via the `model` prop. This pattern is
 referred to as
-[hoisting the model](/getting-started/for-developers/resources/compound-components/#configuring-a-model)
+[hoisting the model](/get-started/for-developers/documentation/compound-components/#configuring-a-model)
 and provides direct access to its `state` and `events` outside of the `Select` component.
 
 In this example, we set up external observation of the model state and create an external button to
@@ -170,12 +194,11 @@ forward `ref` to its underlying `<input type="text" role="combobox">` element.
 
 ### Error States
 
-Set the `error` prop of the wrapping `FormField` to `"caution"` or
-`"error"` to set the `Select` to the caution or error state, respectively. You will
-also need to set the `hintId` and `hintText` props on the `FormField` to meet accessibility
-standards. You must set an `id` attribute on the `Select.Input` element that matches the value of
-`inputId` set on the `FormField` element. These attributes ensure that the caution message is
-associated to the `Select` and read out by voiceover.
+Set the `error` prop of the wrapping `FormField` to `"caution"` or `"error"` to set the `Select` to
+the caution or error state, respectively. You will also need to set the `hintId` and `hintText`
+props on the `FormField` to meet accessibility standards. You must set an `id` attribute on the
+`Select.Input` element that matches the value of `inputId` set on the `FormField` element. These
+attributes ensure that the caution message is associated to the `Select` and read out by voiceover.
 
 **Note: The Select container component, `Select`, must wrap `FormField` to ensure `Select.Input` is
 styled correctly.**
@@ -323,4 +346,4 @@ our
 
 ## Specifications
 
-<Specifications file="Select.spec.ts" name="Select" />
+<Specifications file="./cypress/component/Select.spec.tsx" name="Select" />

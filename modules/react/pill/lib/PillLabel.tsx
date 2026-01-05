@@ -1,10 +1,9 @@
 import {createSubcomponent} from '@workday/canvas-kit-react/common';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {OverflowTooltip, OverflowTooltipProps} from '@workday/canvas-kit-react/tooltip';
+import {createStencil} from '@workday/canvas-kit-styling';
 
 import {usePillModel} from './usePillModel';
-
-import {createStencil} from '@workday/canvas-kit-styling';
 
 export interface PillLabelProps extends BoxProps {
   tooltipProps?: Omit<OverflowTooltipProps, 'children'>;

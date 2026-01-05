@@ -1,22 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import {system} from '@workday/canvas-tokens-web';
-import {createStyles} from '@workday/canvas-kit-styling';
-import {infoIcon} from '@workday/canvas-system-icons-web';
-
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {
   CanvasProvider,
   ContentDirection,
-  createSubcomponent,
   PartialEmotionCanvasTheme,
+  createSubcomponent,
   useMount,
   useTheme,
 } from '@workday/canvas-kit-react/common';
-import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {Popup, usePopupModel} from '@workday/canvas-kit-react/popup';
-import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {Popup, usePopupModel} from '@workday/canvas-kit-react/popup';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {infoIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
 const mainContentStyles = createStyles({
   padding: system.space.x4,

@@ -1,6 +1,7 @@
 import React from 'react';
-import {gridIcon, listViewIcon, pieChartIcon} from '@workday/canvas-system-icons-web';
+
 import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
+import {gridIcon, listViewIcon, pieChartIcon} from '@workday/canvas-system-icons-web';
 
 export const TextAndIcon = () => (
   <SegmentedControl>

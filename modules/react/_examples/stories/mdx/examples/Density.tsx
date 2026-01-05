@@ -1,10 +1,11 @@
 import React from 'react';
+
 import {FormField, FormFieldGroup} from '@workday/canvas-kit-react/form-field';
-import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
 import {Select} from '@workday/canvas-kit-react/select';
 import {Switch} from '@workday/canvas-kit-react/switch';
 import {Heading, Text} from '@workday/canvas-kit-react/text';
-import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {calc, createStencil, createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 

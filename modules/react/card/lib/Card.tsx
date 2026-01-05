@@ -1,12 +1,12 @@
 import * as React from 'react';
 
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {mergeStyles, BoxProps} from '@workday/canvas-kit-react/layout';
+import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-import {CardHeading} from './CardHeading';
 import {CardBody} from './CardBody';
+import {CardHeading} from './CardHeading';
 
 export interface CardProps extends BoxProps {
   /**

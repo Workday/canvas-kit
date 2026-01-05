@@ -2,10 +2,10 @@ import {
   StatusIndicator,
   type StatusIndicatorVariant,
 } from '@workday/canvas-kit-preview-react/status-indicator';
-import {system} from '@workday/canvas-tokens-web';
-import {sparkleSingleSmallIcon} from '@workday/canvas-system-icons-web';
-import {createStencil} from '@workday/canvas-kit-styling';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {sparkleSingleSmallIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
 const storybookStatusIndicatorStencil = createStencil({
   base: {

@@ -1,10 +1,12 @@
-import {colors, BrandingColor, CanvasColor} from '@workday/canvas-kit-react/tokens';
-import {CanvasAppletIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
-import {Svg, SvgProps, svgStencil} from './Svg';
+
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {handleCsProp, createStencil, px2rem, cssVar} from '@workday/canvas-kit-styling';
+import {BrandingColor, CanvasColor, colors} from '@workday/canvas-kit-react/tokens';
+import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
+import {CanvasAppletIcon, CanvasIconTypes} from '@workday/design-assets-types';
+
+import {Svg, SvgProps, svgStencil} from './Svg';
 
 /**
  * @deprecated Interface `AppletIconStyles` will be removed in a future version. All props will be moved inside `AppletIconProps`.

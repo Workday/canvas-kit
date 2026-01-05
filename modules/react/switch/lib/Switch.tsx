@@ -1,7 +1,9 @@
 import * as React from 'react';
-import {createComponent, ErrorType, focusRing, useUniqueId} from '@workday/canvas-kit-react/common';
+
+import {ErrorType, createComponent, focusRing, useUniqueId} from '@workday/canvas-kit-react/common';
 import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
+
 import {mergeStyles} from '../../layout';
 
 export interface SwitchProps {

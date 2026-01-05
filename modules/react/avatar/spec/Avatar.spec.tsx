@@ -1,14 +1,14 @@
-import * as React from 'react';
 import {render, waitFor} from '@testing-library/react';
+
 import {Avatar} from '../lib/Avatar';
 
 describe('Avatar', () => {
-  it('shoudld show the initials JD given the name is John Doe', () => {
+  it('should show the initials JD given the name is John Doe', () => {
     const screen = render(<Avatar name="John Doe" />);
 
     expect(screen.getByText('JD')).toBeVisible();
   });
-  it('shoudld show the initials J given the name is John', () => {
+  it('should show the initials J given the name is John', () => {
     const screen = render(<Avatar name="John" />);
 
     expect(screen.getByText('J')).toBeVisible();

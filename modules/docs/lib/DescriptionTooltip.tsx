@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
-import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+
 import {colors} from '@workday/canvas-kit-react/tokens';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 
 export const DescriptionTooltip = styled(Tooltip)({
   ':before': {

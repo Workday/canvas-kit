@@ -1,10 +1,11 @@
 import * as React from 'react';
-import {SecondaryButton} from '@workday/canvas-kit-react/button';
+
+import {rocketIcon} from '@workday/canvas-accent-icons-web';
 import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-labs-react/side-panel';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
+import {AccentIcon} from '@workday/canvas-kit-react/icon';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {Heading, Text} from '@workday/canvas-kit-react/text';
-import {AccentIcon} from '@workday/canvas-kit-react/icon';
-import {rocketIcon} from '@workday/canvas-accent-icons-web';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 

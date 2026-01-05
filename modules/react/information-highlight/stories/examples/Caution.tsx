@@ -1,5 +1,5 @@
-import {Flex} from '@workday/canvas-kit-react/layout';
 import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {system} from '@workday/canvas-tokens-web';
 
 export const Caution = () => {

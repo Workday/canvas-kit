@@ -1,15 +1,16 @@
 import * as React from 'react';
 
 import {BaseButton, ButtonContainerProps, buttonStencil} from '@workday/canvas-kit-react/button';
-import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {createSubcomponent} from '@workday/canvas-kit-react/common';
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {Text} from '@workday/canvas-kit-react/text';
+import {Tooltip, TooltipProps} from '@workday/canvas-kit-react/tooltip';
 import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {Tooltip, TooltipProps} from '@workday/canvas-kit-react/tooltip';
-import {Text} from '@workday/canvas-kit-react/text';
-import {useSegmentedControlModel} from './hooks/useSegmentedControlModel';
+import {CanvasSystemIcon} from '@workday/design-assets-types';
+
 import {useSegmentedControlItem} from './hooks/useSegmentedControlItem';
+import {useSegmentedControlModel} from './hooks/useSegmentedControlModel';
 
 export interface ItemProps extends ButtonContainerProps {
   /**

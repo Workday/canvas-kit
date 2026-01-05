@@ -1,15 +1,17 @@
 import * as React from 'react';
+
+import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {
+  ExtractProps,
   createElemPropsHook,
   createSubcomponent,
-  ExtractProps,
 } from '@workday/canvas-kit-react/common';
-import {TertiaryButton} from '@workday/canvas-kit-react/button';
-import {transformationImportIcon} from '@workday/canvas-system-icons-web';
 import {Tooltip, TooltipProps} from '@workday/canvas-kit-react/tooltip';
-import {useSidePanelModel} from './useSidePanelModel';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {transformationImportIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
+
+import {useSidePanelModel} from './useSidePanelModel';
 
 export interface SidePanelToggleButtonProps extends ExtractProps<typeof TertiaryButton> {
   /**
@@ -120,15 +122,15 @@ export const sidePanelToggleButtonStencil = createStencil({
   ],
 });
 
-export const useSidePanelToggleButtonElemProps = createElemPropsHook(useSidePanelModel)(
-  ({state}) => {
-    return {
-      'aria-controls': state.panelId,
-      'aria-expanded': state.transitionState === 'expanded',
-      'aria-labelledby': state.labelId,
-    };
-  }
-);
+export const useSidePanelToggleButtonElemProps = createElemPropsHook(useSidePanelModel)(({
+  state,
+}) => {
+  return {
+    'aria-controls': state.panelId,
+    'aria-expanded': state.transitionState === 'expanded',
+    'aria-labelledby': state.labelId,
+  };
+});
 
 export const SidePanelToggleButton = createSubcomponent('button')({
   displayName: 'SidePanel.ToggleButton',

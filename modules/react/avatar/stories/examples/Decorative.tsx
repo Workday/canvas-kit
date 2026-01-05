@@ -1,9 +1,8 @@
 import {Avatar} from '@workday/canvas-kit-react/avatar';
+
 // @ts-ignore
 import nicholasAvatar from './nicholas-avatar.jpg';
-import {createStyles} from '@workday/canvas-kit-styling';
-import {Text} from '@workday/canvas-kit-react/text';
-import {system} from '@workday/canvas-tokens-web';
+
 const containerStyles = createStyles({
   display: 'inline-flex',
   gap: system.space.x2,

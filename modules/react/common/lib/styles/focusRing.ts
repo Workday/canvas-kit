@@ -1,7 +1,6 @@
 import {cssVar} from '@workday/canvas-kit-styling';
-
 // Backwards compatible type that works with both styled components and Canvas Kit styling
-import {system, brand} from '@workday/canvas-tokens-web';
+import {brand, system} from '@workday/canvas-tokens-web';
 
 interface FocusRingOptions {
   width?: number;

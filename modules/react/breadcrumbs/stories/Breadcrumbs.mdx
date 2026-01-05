@@ -1,17 +1,20 @@
-import {ExampleCodeBlock, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {Meta} from '@storybook/blocks';
+
+import {ExampleCodeBlock, Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
+
+import * as BreadcrumbsStories from './Breadcrumbs.stories';
 import {Basic} from './examples/Basic';
-import {OverflowBreadcrumbs} from './examples/Overflow';
-import {RTLOverflowList} from './examples/RTL';
 import {CurrentItemTruncation} from './examples/CurrentItemTruncation';
 import {LinkTruncation} from './examples/LinkTruncation';
-import * as BreadcrumbsStories from './Breadcrumbs.stories';
+import {OverflowBreadcrumbs} from './examples/Overflow';
+import {RTLOverflowList} from './examples/RTL';
 
 <Meta of={BreadcrumbsStories} />
 
 # Canvas Kit Breadcrumbs
 
 Breadcrumbs is a
-[compound component](/getting-started/for-developers/resources/compound-components/) that allows
+[compound component](/get-started/for-developers/documentation/compound-components/) that allows
 users to keep track and maintain awareness of their location as they navigate through pages,
 folders, files, etc.
 
@@ -133,4 +136,4 @@ return (
 
 ## Specifications
 
-<Specifications file="Breadcrumbs.spec.ts" name="Breadcrumbs" />
+<Specifications file="./cypress/component/Breadcrumbs.spec.tsx" name="Breadcrumbs" />

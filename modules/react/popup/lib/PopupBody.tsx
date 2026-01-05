@@ -1,9 +1,10 @@
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {Card} from '@workday/canvas-kit-react/card';
-import {usePopupModel} from './hooks';
+import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {createStencil} from '@workday/canvas-kit-styling';
-import {mergeStyles} from '../../layout';
 import {system} from '@workday/canvas-tokens-web';
+
+import {mergeStyles} from '../../layout';
+import {usePopupModel} from './hooks';
 
 export const popupBodyStencil = createStencil({
   base: {

@@ -1,6 +1,6 @@
-import {Informational} from '../../modules/react/information-highlight/stories/examples/Informational';
 import {Caution} from '../../modules/react/information-highlight/stories/examples/Caution';
 import {Critical} from '../../modules/react/information-highlight/stories/examples/Critical';
+import {Informational} from '../../modules/react/information-highlight/stories/examples/Informational';
 
 describe('Information Highlight', () => {
   [Informational, Caution, Critical].forEach(Example => {

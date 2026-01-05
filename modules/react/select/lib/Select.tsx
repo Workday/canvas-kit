@@ -1,9 +1,10 @@
 import {Combobox} from '@workday/canvas-kit-react/combobox';
-import {useSelectModel} from './hooks/useSelectModel';
 import {ExtractProps, createContainer} from '@workday/canvas-kit-react/common';
-import {SelectInput} from './SelectInput';
+
 import {SelectCard} from './SelectCard';
+import {SelectInput} from './SelectInput';
 import {SelectItem} from './SelectItem';
+import {useSelectModel} from './hooks/useSelectModel';
 
 export interface SelectProps extends ExtractProps<typeof Combobox> {}
 /**

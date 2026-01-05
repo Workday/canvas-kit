@@ -1,8 +1,8 @@
+import {cssVar} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
+
 import {EmotionCanvasTheme} from '../theming/index';
 import {ErrorType} from '../types';
-import {cssVar} from '@workday/canvas-kit-styling';
-
-import {brand, system} from '@workday/canvas-tokens-web';
 
 export function getErrorColors(error?: ErrorType, theme?: EmotionCanvasTheme) {
   if (error === ErrorType.Error) {

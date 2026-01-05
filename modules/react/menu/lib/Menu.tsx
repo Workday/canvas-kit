@@ -2,16 +2,16 @@ import React from 'react';
 
 import {createContainer} from '@workday/canvas-kit-react/common';
 
-import {useMenuModel} from './useMenuModel';
+import {MenuCard} from './MenuCard';
+import {MenuDivider} from './MenuDivider';
+import {MenuGroup} from './MenuGroup';
+import {MenuItem} from './MenuItem';
+import {MenuList} from './MenuList';
+import {MenuOption} from './MenuOption';
 import {MenuPopper} from './MenuPopper';
 import {MenuTarget, MenuTargetContext} from './MenuTarget';
-import {MenuItem} from './MenuItem';
-import {MenuCard} from './MenuCard';
-import {MenuList} from './MenuList';
-import {MenuDivider} from './MenuDivider';
-import {MenuOption} from './MenuOption';
-import {MenuGroup} from './MenuGroup';
 import {Submenu} from './Submenu';
+import {useMenuModel} from './useMenuModel';
 
 export interface MenuProps {
   /**

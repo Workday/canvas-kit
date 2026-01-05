@@ -1,6 +1,7 @@
 import {jsx} from '@emotion/react';
+import {fireEvent, render} from '@testing-library/react';
 import React from 'react';
-import {render, fireEvent} from '@testing-library/react';
+import {vi} from 'vitest';
 
 /**
  * Verify aspects of a component such as ref forwarding, element remapping, and extra prop
@@ -109,7 +110,7 @@ export function verifyComponent(
     for (const key in callbacks) {
       it(`should call the '${key}' callback when the '${callbacks[key]}' event is fired`, () => {
         const ref: React.RefObject<Element> = {current: null};
-        const fn = jest.fn();
+        const fn = vi.fn();
         render(<Test ref={ref} {...{[key]: fn}} />);
 
         fireEvent[callbacks[key]](ref.current!);

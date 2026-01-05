@@ -1,7 +1,7 @@
 import {
-  Default,
   AsAside,
   AsDiv,
+  Default,
   FirstFocusable,
 } from '@workday/canvas-kit-labs-react/side-panel/stories/testingCypress.stories';
 
@@ -67,7 +67,7 @@ describe('Side Panel', () => {
 
       context('when the tab key is pressed once', () => {
         beforeEach(() => {
-          cy.tab();
+          cy.realPress('Tab');
         });
 
         context('the expand/collapse control button', () => {

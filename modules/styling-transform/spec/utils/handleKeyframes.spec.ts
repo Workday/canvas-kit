@@ -1,9 +1,9 @@
 import ts from 'typescript';
 
-import {transform, withDefaultContext, _reset} from '../../lib/styleTransform';
+import {_reset, transform, withDefaultContext} from '../../lib/styleTransform';
+import {handleKeyframes} from '../../lib/utils/handleKeyframes';
 import {createProgramFromSource} from '../createProgramFromSource';
 import {findNodes} from '../findNodes';
-import {handleKeyframes} from '../../lib/utils/handleKeyframes';
 
 describe('handleKeyframes', () => {
   beforeEach(() => {

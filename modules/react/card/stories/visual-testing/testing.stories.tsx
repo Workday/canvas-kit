@@ -1,9 +1,9 @@
 import React from 'react';
-import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 
 import {Card} from '@workday/canvas-kit-react/card';
-import {system} from '@workday/canvas-tokens-web';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 import {cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export default {
   title: 'Testing/Containers/Card',

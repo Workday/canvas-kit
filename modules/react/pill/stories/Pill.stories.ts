@@ -1,15 +1,16 @@
 import {Meta, StoryObj} from '@storybook/react';
-import mdxDoc from './Pill.mdx';
 
 import {Pill} from '@workday/canvas-kit-react/pill';
+
+import mdxDoc from './Pill.mdx';
+import {Basic as BasicExample} from './examples/Basic';
+import {CustomStyles as CustomStylesExample} from './examples/CustomStyles';
+import {WithAvatar as WithAvatarExample} from './examples/WithAvatar';
+import {WithCount as WithCountExample} from './examples/WithCount';
+import {WithList as WithListExample} from './examples/WithList';
 // examples
 import {WithReadOnly as WithReadOnlyExample} from './examples/WithReadOnly';
-import {WithAvatar as WithAvatarExample} from './examples/WithAvatar';
-import {Basic as BasicExample} from './examples/Basic';
-import {WithCount as WithCountExample} from './examples/WithCount';
 import {WithRemovable as WithRemovableExample} from './examples/WithRemovable';
-import {WithList as WithListExample} from './examples/WithList';
-import {CustomStyles as CustomStylesExample} from './examples/CustomStyles';
 
 export default {
   title: 'Components/Indicators/Pill',

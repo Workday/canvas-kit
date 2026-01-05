@@ -1,7 +1,7 @@
-import {createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
+import {Text} from '@workday/canvas-kit-react/text';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {Text} from '@workday/canvas-kit-react/text';
 
 const informationHighlightBodyStencil = createStencil({
   base: () => {

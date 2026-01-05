@@ -1,16 +1,16 @@
 import React from 'react';
 
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {Heading} from '@workday/canvas-kit-react/text';
+import {createStyles} from '@workday/canvas-kit-styling';
 import {
+  caretDownIcon,
   plusIcon,
   relatedActionsVerticalIcon,
-  caretDownIcon,
 } from '@workday/canvas-system-icons-web';
-import {createStyles} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
-import {CanvasProvider} from '@workday/canvas-kit-react/common';
-import {Heading} from '@workday/canvas-kit-react/text';
 
 const parentContainerStyles = createStyles({
   gap: system.gap.md,

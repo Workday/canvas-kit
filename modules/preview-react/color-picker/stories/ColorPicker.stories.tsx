@@ -1,9 +1,10 @@
-import React from 'react';
 import {Meta, StoryObj} from '@storybook/react';
+import React from 'react';
+
 import {ColorPicker} from '@workday/canvas-kit-preview-react/color-picker';
 
-import {IconButtonPopup as IconButtonPopupExample} from './examples/IconButtonPopup';
 import {ColorInputPopup as ColorInputPopupExample} from './examples/ColorInputPopup';
+import {IconButtonPopup as IconButtonPopupExample} from './examples/IconButtonPopup';
 
 // eslint-disable-next-line no-empty-function
 const noop = () => {};

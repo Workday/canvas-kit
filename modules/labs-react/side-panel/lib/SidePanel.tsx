@@ -1,9 +1,11 @@
 import * as React from 'react';
+
 import {createContainer, createElemPropsHook} from '@workday/canvas-kit-react/common';
 import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {useSidePanelModel} from './useSidePanelModel';
+
 import {SidePanelToggleButton} from './SidePanelToggleButton';
+import {useSidePanelModel} from './useSidePanelModel';
 
 /**
  * Adds the necessary props to the SidePanel container element.

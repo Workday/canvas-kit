@@ -1,13 +1,14 @@
 import React from 'react';
+
 import {Box} from '@workday/canvas-kit-react/layout';
-import {
-  gridIcon,
-  listViewIcon,
-  listDetailIcon,
-  pieChartIcon,
-} from '@workday/canvas-system-icons-web';
 import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
 import {BodyText} from '@workday/canvas-kit-react/text';
+import {
+  gridIcon,
+  listDetailIcon,
+  listViewIcon,
+  pieChartIcon,
+} from '@workday/canvas-system-icons-web';
 
 export const Sizes = () => (
   <>

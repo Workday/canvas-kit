@@ -1,9 +1,10 @@
 import React from 'react';
-import * as CanvasIcons from '@workday/canvas-system-icons-web';
-import {Box, Flex} from '@workday/canvas-kit-react/layout';
+
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {createStyles} from '@workday/canvas-kit-styling';
+import * as CanvasIcons from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
 const ImportedIcons = Object.keys(CanvasIcons);

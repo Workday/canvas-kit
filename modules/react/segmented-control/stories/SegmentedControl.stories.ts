@@ -1,16 +1,16 @@
 import {Meta, StoryObj} from '@storybook/react';
-import mdxDoc from './SegmentedControl.mdx';
 
 import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
 
+import mdxDoc from './SegmentedControl.mdx';
 import {Basic as BasicExample} from './examples/Basic';
 import {Disabled as DisabledExample} from './examples/Disabled';
+import {Dynamic as DynamicExample} from './examples/Dynamic';
+import {RTL as RTLExample} from './examples/RTL';
+import {Sizes as SizesExample} from './examples/Sizes';
 import {TextAndIcon as TextAndIconExample} from './examples/TextAndIcon';
 import {TextOnly as TextOnlyExample} from './examples/TextOnly';
-import {Sizes as SizesExample} from './examples/Sizes';
 import {Vertical as VerticalExample} from './examples/Vertical';
-import {RTL as RTLExample} from './examples/RTL';
-import {Dynamic as DynamicExample} from './examples/Dynamic';
 
 export default {
   title: 'Components/Buttons/Segmented Control',

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/testing';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 
 export default {
   title: 'Testing/Layout/Flex',

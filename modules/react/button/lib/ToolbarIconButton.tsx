@@ -1,10 +1,12 @@
 import * as React from 'react';
-import {focusRing, createComponent, forwardFitTokens} from '@workday/canvas-kit-react/common';
+
+import {createComponent, focusRing, forwardFitTokens} from '@workday/canvas-kit-react/common';
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
+
 import {BaseButton, buttonStencil} from './BaseButton';
 import {TertiaryButtonProps} from './TertiaryButton';
-import {brand, system} from '@workday/canvas-tokens-web';
-import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
-import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
 export interface ToolbarIconButtonProps extends Omit<TertiaryButtonProps, 'size' | 'variant'> {
   onToggleChange?: (toggled: boolean | undefined) => void;
