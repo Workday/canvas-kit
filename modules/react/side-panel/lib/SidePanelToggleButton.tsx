@@ -120,27 +120,25 @@ export const sidePanelToggleButtonStencil = createStencil({
   ],
 });
 
-export const useSidePanelToggleButtonElemProps = createElemPropsHook(useSidePanelModel)(
-  ({state}) => {
-    return {
-      'aria-controls': state.panelId,
-      'aria-expanded': state.transitionState === 'expanded',
-      'aria-labelledby': state.labelId,
-    };
-  }
-);
+export const useSidePanelToggleButton = createElemPropsHook(useSidePanelModel)(({state}) => {
+  return {
+    'aria-controls': state.panelId,
+    'aria-pressed': state.transitionState === 'expanded',
+    'aria-describedby': state.labelId,
+  };
+});
 
 export const SidePanelToggleButton = createSubcomponent('button')({
   displayName: 'SidePanel.ToggleButton',
   modelHook: useSidePanelModel,
-  elemPropsHook: useSidePanelToggleButtonElemProps,
+  elemPropsHook: useSidePanelToggleButton,
 })(
   (
     {
       variant = undefined,
       icon = transformationImportIcon,
-      tooltipTextExpand = 'Expand',
-      tooltipTextCollapse = 'Collapse',
+      tooltipTextExpand,
+      tooltipTextCollapse,
       tooltipProps,
       ...elemProps
     }: SidePanelToggleButtonProps,

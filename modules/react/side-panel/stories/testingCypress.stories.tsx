@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-labs-react/side-panel';
+import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-react/side-panel';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 
 export default {

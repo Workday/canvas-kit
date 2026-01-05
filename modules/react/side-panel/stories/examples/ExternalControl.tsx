@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-labs-react/side-panel';
+import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-react/side-panel';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {Heading, Text} from '@workday/canvas-kit-react/text';
+import {Text} from '@workday/canvas-kit-react/text';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
@@ -48,14 +48,13 @@ export const ExternalControl = () => {
   return (
     <Flex cs={stylesOverride.viewport}>
       <SidePanel model={model}>
-        <SidePanel.ToggleButton />
-        {model.state.transitionState === 'expanded' && (
-          <Flex cs={stylesOverride.panel}>
-            <Heading size="small" cs={stylesOverride.panelHeading} id={model.state.labelId}>
-              Tasks Panel
-            </Heading>
-          </Flex>
-        )}
+        <SidePanel.ToggleButton
+          tooltipTextCollapse="Collapsing View"
+          tooltipTextExpand="Expand View"
+        />
+        <Flex cs={stylesOverride.panel}>
+          <SidePanel.Heading cs={stylesOverride.panelHeading}>Tasks Panel</SidePanel.Heading>
+        </Flex>
       </SidePanel>
       <Flex as="main" cs={stylesOverride.main}>
         <Text as="p" typeLevel="body.large">
