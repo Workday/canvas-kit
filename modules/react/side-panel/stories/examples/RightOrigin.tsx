@@ -39,7 +39,7 @@ const RightPanel = () => {
     <SidePanel model={model} className={stylesOverride.panelContainer}>
       <SidePanel.ToggleButton
         tooltipTextCollapse="Collapsing View"
-        tooltipTextExpand="Expand View"
+        tooltipText="Control Side Panel"
       />
       <Flex cs={stylesOverride.panel}>
         <SidePanel.Heading>Tasks Panel</SidePanel.Heading>

@@ -14,10 +14,15 @@ import {system} from '@workday/canvas-tokens-web';
 export interface SidePanelToggleButtonProps extends ExtractProps<typeof TertiaryButton> {
   /**
    * The tooltip text to expand the side panel
+   * @deprecated Use
    */
   tooltipTextExpand?: string;
   /**
-   * The tooltip text to collapse the side panel
+   * Provides an accessible label to the button. This text **should not** convey visual state but rather what it does like "control data panel."
+   */
+  tooltipText?: string;
+  /**
+   * The tooltip text to collapse the side panel. Optional text for when the side panel is in a collapsed state.
    */
   tooltipTextCollapse?: string;
   tooltipProps?: Omit<TooltipProps, 'children'>;
@@ -140,6 +145,7 @@ export const SidePanelToggleButton = createSubcomponent('button')({
       tooltipTextExpand,
       tooltipTextCollapse,
       tooltipProps,
+      tooltipText,
       ...elemProps
     }: SidePanelToggleButtonProps,
     Element,
@@ -150,13 +156,15 @@ export const SidePanelToggleButton = createSubcomponent('button')({
         type="muted"
         {...tooltipProps}
         title={
-          model.state.transitionState === 'collapsed' ? tooltipTextExpand : tooltipTextCollapse
+          tooltipText ||
+          (model.state.transitionState === 'collapsed' ? tooltipTextCollapse : tooltipTextExpand)
         }
       >
         <TertiaryButton
           icon={icon}
           as={Element}
           variant={variant}
+          aria-label={tooltipText}
           {...handleCsProp(
             elemProps,
             sidePanelToggleButtonStencil({

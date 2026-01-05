@@ -38,7 +38,7 @@ export const OnStateTransition = () => {
       <SidePanel model={model}>
         <SidePanel.ToggleButton
           tooltipTextCollapse="Collapsing View"
-          tooltipTextExpand="Expand View"
+          tooltipText="Control Side Panel"
         />
         <AccessibleHide id={model.state.labelId}>Hidden Title</AccessibleHide>
       </SidePanel>

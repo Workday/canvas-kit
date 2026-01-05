@@ -50,7 +50,7 @@ export const ExternalControl = () => {
       <SidePanel model={model}>
         <SidePanel.ToggleButton
           tooltipTextCollapse="Collapsing View"
-          tooltipTextExpand="Expand View"
+          tooltipText="Control Side Panel"
         />
         <Flex cs={stylesOverride.panel}>
           <SidePanel.Heading cs={stylesOverride.panelHeading}>Tasks Panel</SidePanel.Heading>

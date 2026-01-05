@@ -5,12 +5,17 @@ import {
   createSubcomponent,
   ExtractProps,
 } from '@workday/canvas-kit-react/common';
-import {Heading} from '@workday/canvas-kit-react/text';
+import {Heading, TypeLevelProps} from '@workday/canvas-kit-react/text';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import {useSidePanelModel} from './useSidePanelModel';
 
-export interface SidePanelHeadingProps extends ExtractProps<typeof Heading, never> {
+export interface SidePanelHeadingProps extends Omit<ExtractProps<typeof Heading, never>, 'size'> {
+  /**
+   * The size of the heading.
+   * @default 'small'
+   */
+  size?: TypeLevelProps['size'];
   children?: React.ReactNode;
 }
 
@@ -45,7 +50,7 @@ export const SidePanelHeading = createSubcomponent(Heading)({
   elemPropsHook: useSidePanelHeading,
 })<SidePanelHeadingProps>(({size = 'small', children, ...elemProps}, Element) => {
   return (
-    <Element size={size} {...handleCsProp(elemProps, sidePanelHeadingStencil())}>
+    <Element size={size} {...handleCsProp(elemProps, sidePanelHeadingStencil({size}))}>
       {children}
     </Element>
   );

@@ -31,6 +31,7 @@ export const Heading = () => {
         <SidePanel.ToggleButton
           tooltipTextCollapse="Collapsing View"
           tooltipTextExpand="Expand View"
+          tooltipText="Control Side Panel"
         />
         <SidePanel.Heading hidden>Hidden Title</SidePanel.Heading>
       </SidePanel>

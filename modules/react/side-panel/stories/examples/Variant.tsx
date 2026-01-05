@@ -38,6 +38,7 @@ export const AlternatePanel = () => {
           <SidePanel.ToggleButton
             tooltipTextCollapse="Collapsing View"
             tooltipTextExpand="Expand View"
+            tooltipText="Control Side Panel"
           />
           <Flex cs={stylesOverride.panel}>
             <SidePanel.Heading>Alternate Panel</SidePanel.Heading>

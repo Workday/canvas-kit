@@ -36,7 +36,7 @@ export const Basic = () => {
       <SidePanel model={model}>
         <SidePanel.ToggleButton
           tooltipTextCollapse="Collapsing View"
-          tooltipTextExpand="Expand View"
+          tooltipText="Control Side Panel"
         />
         <Flex cs={stylesOverride.panel}>
           {model.state.transitionState === 'expanded' && (
