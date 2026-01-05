@@ -42,6 +42,7 @@ const routes = {
   '/components/text/text/': 'components-text-text--basic',
   '/components/text/title/': 'components-text-title--basic',
   '/examples/layout/': 'examples-layouts--area-column-positioning',
+  '/get-started/for-developers/documentation/style-props/': 'features-style-props-deprecated--docs',
   '/getting-started/for-developers/contributing/': 'guides-contributing--docs',
   '/getting-started/for-developers/resources/api-pattern-guidelines/':
     'guides-api-pattern-guidelines--docs',
