@@ -4,7 +4,7 @@ import mdxDoc from './SidePanel.mdx';
 import {SidePanel} from '@workday/canvas-kit-react/side-panel';
 // Examples
 import {Basic as BasicExample} from './examples/Basic';
-import {HiddenName as HiddenNameExample} from './examples/HiddenName';
+import {Heading as HeadingExample} from './examples/Heading';
 import {AlternatePanel as AlternatePanelExample} from './examples/Variant';
 import {ExternalControl as ExternalControlExample} from './examples/ExternalControl';
 import {RightOrigin as RightOriginExample} from './examples/RightOrigin';
@@ -27,8 +27,8 @@ type Story = StoryObj<typeof SidePanel>;
 export const Basic: Story = {
   render: BasicExample,
 };
-export const HiddenName: Story = {
-  render: HiddenNameExample,
+export const Heading: Story = {
+  render: HeadingExample,
 };
 export const AlternatePanel: Story = {
   render: AlternatePanelExample,

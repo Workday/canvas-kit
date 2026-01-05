@@ -18,7 +18,7 @@ const stylesOverride = {
   }),
 };
 
-export const HiddenName = () => {
+export const Heading = () => {
   const model = useSidePanelModel({
     onStateTransition: state => {
       console.log(`state is: ${state}`);

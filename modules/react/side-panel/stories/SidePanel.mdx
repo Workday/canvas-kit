@@ -62,7 +62,7 @@ import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-react/side-panel
 | ---------------------------------------------- | ------------------------------------------------- |
 | `<SidePanel {...panelProps}>`                  | `<SidePanel model={model}>` or just `<SidePanel>` |
 | `<SidePanel.ToggleButton {...controlProps} />` | `<SidePanel.ToggleButton />`                      |
-| `<Heading {...labelProps}>`                    | `<Heading id={model.state.labelId}>`              |
+| `<Heading {...labelProps}>`                    | `<SidePanel.Heading>Panel Title</SidePanel.Heading>`              |
 | `expanded` prop on SidePanel                   | Managed by model's `transitionState`              |
 | `touched` prop on SidePanel                    | Managed internally                                |
 | `onExpandedChange` callback                    | Use `onStateTransition` and derive expanded state |
@@ -94,7 +94,7 @@ const model = useSidePanelModel({
 
 <SidePanel model={model}>
   <SidePanel.ToggleButton />
-  <SidePanel.Heading id={model.state.labelId}>Panel Title</SidePanel.Heading>
+  <SidePanel.Heading>Panel Title</SidePanel.Heading>
   {model.state.transitionState === 'expanded' && <Content />}
 </SidePanel>;
 ```

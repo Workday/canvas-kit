@@ -67,7 +67,7 @@ export const sourceMap: {
   '@workday/canvas-kit-labs-react-menu': '@workday/canvas-kit-labs-react/menu',
   '@workday/canvas-kit-labs-react-pagination': '@workday/canvas-kit-labs-react/pagination',
   '@workday/canvas-kit-labs-react-select': '@workday/canvas-kit-labs-react/select',
-  '@workday/canvas-kit-labs-react-side-panel': '@workday/canvas-kit-react/side-panel',
+  '@workday/canvas-kit-labs-react-side-panel': '@workday/canvas-kit-labs-react/side-panel',
   '@workday/canvas-kit-labs-react-tabs': '@workday/canvas-kit-labs-react/tabs',
 };
 
