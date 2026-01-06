@@ -3,50 +3,6 @@
 // and will rewrite the URL to point to the correct URL for the story. The Storybook key will be
 // rewritten to something like `?path=/docs/${id}`
 const routes = {
-<<<<<<< HEAD
-  '/assets/accent-icons/': 'tokens-icon--accent-icon',
-  '/assets/applet-icons/': 'tokens-icon--applet-icon',
-  '/assets/system-icons/': 'tokens-icon--system-icon',
-  '/components/buttons/action-bar/': 'components-buttons-action-bar--basic',
-  '/components/buttons/button/': 'components-buttons--primary',
-  '/components/buttons/segmented-control/': 'preview-segmented-control--basic',
-  '/components/containers/card/': 'components-containers-card--basic',
-  '/components/containers/side-panel/': 'preview-side-panel--basic',
-  '/components/containers/table/': 'components-containers-table--basic',
-  '/components/containers/tabs/': 'components-containers-tabs--basic',
-  '/components/indicators/banner/': 'components-indicators-banner--basic',
-  '/components/indicators/loading-dots/': 'components-indicators-loading-dots--basic',
-  '/components/indicators/skeleton/': 'components-indicators-skeleton--basic',
-  '/components/indicators/status-indicator/': 'preview-status-indicator--basic',
-  '/components/inputs/checkbox/': 'components-inputs-checkbox--basic',
-  '/components/inputs/color-input/': 'components-inputs-color-picker-color-input--basic',
-  '/components/inputs/form-field/': 'components-inputs-form-field--basic',
-  '/components/inputs/radio/': 'components-inputs-radio--basic',
-  '/components/inputs/select/': 'components-inputs-select--basic',
-  '/components/inputs/switch/': 'components-inputs-switch--basic',
-  '/components/inputs/text-area/': 'components-inputs-textarea--basic',
-  '/components/inputs/text-input/': 'components-inputs-text-input--basic',
-  '/components/layout/box/': 'components-layout-box--basic',
-  '/components/layout/flex/': 'components-layout-flex--basic',
-  '/components/layout/grid/': 'components-layout-grid--basic',
-  '/components/navigation/breadcrumbs/': 'components-navigation-breadcrumbs--basic',
-  '/components/navigation/pagination/': 'components-navigation-pagination--basic',
-  '/components/popups/menu/': 'components-popups-menu--basic',
-  '/components/popups/modal/': 'components-popups-modal--basic',
-  '/components/popups/popup/': 'components-popups-popup--basic',
-  '/components/popups/toast/': 'components-popups-toast--basic',
-  '/components/popups/tooltip/': 'components-popups-tooltip--default-story',
-  '/components/text/body-text/': 'components-text-body-text--basic',
-  '/components/text/heading/': 'components-text-heading--basic',
-  '/components/text/label-text/': 'components-text-label-text--basic',
-  '/components/text/subtext/': 'components-text-subtext--basic',
-  '/components/text/text/': 'components-text-text--basic',
-  '/components/text/title/': 'components-text-title--basic',
-  '/examples/layout/': 'examples-layouts--area-column-positioning',
-  '/get-started/for-developers/documentation/style-props/': 'features-style-props--docs',
-  '/getting-started/for-developers/contributing/': 'guides-contributing--docs',
-  '/getting-started/for-developers/resources/api-pattern-guidelines/':
-=======
   // Assets
   '/assets/accent-icons/': 'assets-icons--docs#accent-icon-list',
   '/assets/applet-icons/': 'assets-icons--docs#applet-icon-list',
@@ -92,7 +48,6 @@ const routes = {
   '/get-started/for-contributors/code/': 'guides-contributing--docs',
   '/get-started/for-developers/guides/combobox/': 'features-combobox--docs',
   '/get-started/for-developers/documentation/api-pattern-guidelines/':
->>>>>>> upstream/master
     'guides-api-pattern-guidelines--docs',
   '/get-started/for-developers/guides/collection-api/': 'features-collections--docs',
   '/get-started/for-developers/documentation/compound-components/':
