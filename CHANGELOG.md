@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.49](https://github.com/Workday/canvas-kit/releases/tag/v13.2.49) (2026-01-06)
+
+### Documentation
+
+- docs: Fixed Box style props links ([#3672](https://github.com/Workday/canvas-kit/pull/3672)) ([@josh-bagwell](https://github.com/josh-bagwell))
+  Updates style props links in the `Box` component documentation.
+
+
 ## [v13.2.48](https://github.com/Workday/canvas-kit/releases/tag/v13.2.48) (2025-12-17)
 
 ### Dependencies
