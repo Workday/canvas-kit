@@ -22,7 +22,7 @@ export const Default = () => {
         <span hidden id={model.state.labelId}>
           {label}
         </span>
-        <SidePanel.ToggleButton />
+        <SidePanel.ToggleButton aria-label={label} />
       </SidePanel>
     </Container>
   );
@@ -35,7 +35,7 @@ export const AsDiv = () => {
         <span hidden id={model.state.labelId}>
           {label}
         </span>
-        <SidePanel.ToggleButton />
+        <SidePanel.ToggleButton aria-label={label} />
       </SidePanel>
     </Container>
   );
@@ -48,7 +48,7 @@ export const AsAside = () => {
         <span hidden id={model.state.labelId}>
           {label}
         </span>
-        <SidePanel.ToggleButton />
+        <SidePanel.ToggleButton aria-label={label} />
       </SidePanel>
       <div>Main Content</div>
     </Container>
@@ -91,7 +91,7 @@ export const FirstFocusable = () => {
             {label}
           </span>
           <h1>Panel Name</h1>
-          <SidePanel.ToggleButton />
+          <SidePanel.ToggleButton aria-label={label} />
           <PrimaryButton>Another Button</PrimaryButton>
         </SidePanel>
       </Container>

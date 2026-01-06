@@ -28,8 +28,8 @@ describe('Side Panel', () => {
           cy.findByRole('button', {name}).should('exist');
         });
 
-        it(`should have an aria-expanded attribute of 'true'`, () => {
-          cy.findByRole('button', {name}).should('have.attr', 'aria-expanded', 'true');
+        it(`should have an aria-pressed attribute of 'false'`, () => {
+          cy.findByRole('button', {name}).should('have.attr', 'aria-pressed', 'false');
         });
 
         it(`should have an aria-controls attribute equal to the id of the panel`, () => {
@@ -50,8 +50,8 @@ describe('Side Panel', () => {
         });
 
         context('the button', () => {
-          it(`should have an aria-expanded attribute of 'false'`, () => {
-            cy.findByRole('button', {name}).should('have.attr', 'aria-expanded', 'false');
+          it(`should have an aria-pressed attribute of 'false'`, () => {
+            cy.findByRole('button', {name}).should('have.attr', 'aria-pressed', 'false');
           });
         });
       });
