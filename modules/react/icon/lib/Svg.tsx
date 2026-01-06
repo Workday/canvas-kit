@@ -9,10 +9,19 @@ export interface SvgProps extends BoxProps {
   src: CanvasIcon;
   type: CanvasIconTypes;
   /**
-   * If set to `true`, transform the SVG's x-axis to mirror the graphic
+   * If set to `true`, transform the SVG's x-axis to mirror the graphic. Use this if you want to
+   * always mirror the icon regardless of the content direction. If the SVG should mirror only when
+   * in an right-to-left language, use `shouldMirrorInRTL` instead.
    * @default false
    */
   shouldMirror?: boolean;
+  /**
+   * If set to `true`, transform the SVG's x-axis to mirror the graphic when the content direction
+   * is `rtl`. Icons don't have enough context to know if they should be mirrored in all cases.
+   * Setting this to `true` indicates the icon should be mirrored in right-to-left languages.
+   * @default false
+   */
+  shouldMirrorInRTL?: boolean;
 }
 
 export const svgStencil = createStencil({
@@ -38,6 +47,13 @@ export const svgStencil = createStencil({
         transform: 'scaleX(-1)',
       },
     },
+    shouldMirrorInRTL: {
+      true: {
+        '&:dir(rtl)': {
+          transform: 'scaleX(-1)',
+        },
+      },
+    },
   },
 });
 
@@ -56,7 +72,11 @@ export const transformColorNameToToken = (color?: string) => {
 
 export const Svg = createComponent('span')({
   displayName: 'Svg',
-  Component: ({shouldMirror, src, type, ...elemProps}: SvgProps, ref, Element) => {
+  Component: (
+    {shouldMirror, shouldMirrorInRTL, src, type, ...elemProps}: SvgProps,
+    ref,
+    Element
+  ) => {
     try {
       validateIconType(src, type);
     } catch (e) {
@@ -68,7 +88,7 @@ export const Svg = createComponent('span')({
       <Element
         ref={ref}
         dangerouslySetInnerHTML={{__html: src.svg}}
-        {...mergeStyles(elemProps, svgStencil({shouldMirror}))}
+        {...mergeStyles(elemProps, svgStencil({shouldMirror, shouldMirrorInRTL}))}
       />
     );
   },

@@ -39,7 +39,7 @@ export const ColorInputStates = () => (
           ],
           error: [
             {value: undefined, label: ''},
-            {value: 'alert', label: 'Alert'},
+            {value: 'caution', label: 'Caution'},
             {value: 'error', label: 'Error'},
           ],
         },

@@ -15,6 +15,9 @@ import {pickForegroundColor} from '../utils';
 import {deepMerge} from '../utils/deepMerge';
 import {memoize} from '../utils/memoize';
 
+/**
+ * @deprecated ⚠️ `shiftColor` is deprecated and will be removed in a future major version. While we work on an algorithm for color shifting, you can use [oklch from or with calc](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch) to calculate colors.
+ */
 export const shiftColor = memoize(
   (hexColor: string, amount = 100) => {
     const canvasColor = Object.keys(colors).find(color => colors[color] === hexColor);
@@ -64,12 +67,15 @@ function fillPalette(
     palette.darkest || (palette.main && shiftColor(palette.main, 200)) || defaultPalette.darkest;
   const light =
     palette.light || (palette.main && shiftColor(palette.main, -100)) || defaultPalette.light;
+  const lighter =
+    palette.lighter || (palette.main && shiftColor(palette.main, -150)) || defaultPalette.lighter;
   const lightest =
     palette.lightest || (palette.main && shiftColor(palette.main, -200)) || defaultPalette.lightest;
   const contrast = palette.contrast || pickForegroundColor(main) || defaultPalette.contrast;
 
   return {
     lightest,
+    lighter,
     light,
     main,
     dark,
@@ -102,5 +108,6 @@ function calculateCanvasTheme(partialTheme: PartialCanvasTheme): CanvasTheme {
  * Creates a full {@link CanvasTheme} from any partial theme by deeply merging with the
  * `defaultCanvasTheme` object. The function is memoized, but it is best to run this function
  * only once and save the result.
+ * @deprecated ⚠️ `createCanvasTheme` is deprecated and will be removed in a future major version. Please use our CSS Branding tokens to create a theme. For more information, please use our [theming docs](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs).
  */
 export const createCanvasTheme = memoize(calculateCanvasTheme, (...args) => JSON.stringify(args));

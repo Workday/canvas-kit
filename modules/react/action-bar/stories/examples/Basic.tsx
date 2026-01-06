@@ -4,7 +4,7 @@ import {PrimaryButton} from '@workday/canvas-kit-react/button';
 export const Basic = () => {
   return (
     <ActionBar>
-      <ActionBar.List position="relative" as="section" aria-label="Basic example actions">
+      <ActionBar.List position="relative" as="section" aria-label="Action Bar">
         <ActionBar.Item as={PrimaryButton} onClick={() => console.log('first action')}>
           First Action
         </ActionBar.Item>

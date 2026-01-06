@@ -3,13 +3,21 @@ import React from 'react';
 import {useForm, FieldErrorsImpl} from 'react-hook-form';
 import {object, SchemaOf, string} from 'yup';
 
-import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {TertiaryButton, PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Select} from '@workday/canvas-kit-react/select';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {visibleIcon, invisibleIcon} from '@workday/canvas-system-icons-web';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
+import {createStyles, cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const styles = createStyles({
+  gap: system.space.x3,
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+});
 
 type YupValidationResolver = <T extends {}>(
   validationSchema: SchemaOf<T>
@@ -99,7 +107,7 @@ export const TextInputWithReactHookForm = () => {
   };
   return (
     <form onSubmit={onSubmit} action="." noValidate={true}>
-      <Flex gap="xs" flexDirection="column" alignItems="flex-start">
+      <Flex cs={styles}>
         <FormField
           orientation="vertical"
           isRequired={true}
@@ -120,34 +128,40 @@ export const TextInputWithReactHookForm = () => {
             <FormField.Hint>{errors.role?.message}</FormField.Hint>
           </Select>
         </FormField>
-        <TextInput
+        <FormField
           orientation="vertical"
           isRequired={true}
           error={!!errors.email ? 'error' : undefined}
         >
-          <TextInput.Label>Email</TextInput.Label>
-          <TextInput.Field
-            {...register('email')}
-            autoComplete="username"
-            placeholder="yourName@example.com"
-          />
-          <TextInput.Hint>{errors.email?.message}</TextInput.Hint>
-        </TextInput>
-        <TextInput
+          <FormField.Label>Email</FormField.Label>
+          <FormField.Field>
+            <FormField.Input
+              as={TextInput}
+              {...register('email')}
+              autoComplete="username"
+              placeholder="yourName@example.com"
+            />
+          </FormField.Field>
+          <FormField.Hint>{errors.email?.message}</FormField.Hint>
+        </FormField>
+        <FormField
           orientation="vertical"
           id={passwordId}
           isRequired={true}
           error={!!errors.password ? 'error' : undefined}
         >
-          <TextInput.Label>Password</TextInput.Label>
-          <Flex gap="xxs">
-            <TextInput.Field
-              {...passwordRegistration}
-              type={showPassword ? 'text' : 'password'}
-              autoComplete="current-password"
-              spellCheck={false}
-              ref={combinePasswordRef}
-            />
+          <FormField.Label>Password</FormField.Label>
+          <Flex cs={{gap: cssVar(system.space.x2)}}>
+            <FormField.Field>
+              <FormField.Input
+                as={TextInput}
+                {...passwordRegistration}
+                type={showPassword ? 'text' : 'password'}
+                autoComplete="current-password"
+                spellCheck={false}
+                ref={combinePasswordRef}
+              />
+            </FormField.Field>
             <TertiaryButton
               type="button"
               icon={showPassword ? invisibleIcon : visibleIcon}
@@ -159,8 +173,8 @@ export const TextInputWithReactHookForm = () => {
               }}
             />
           </Flex>
-          <TextInput.Hint>{errors.password?.message || passwordHint}</TextInput.Hint>
-        </TextInput>
+          <FormField.Hint>{errors.password?.message || passwordHint}</FormField.Hint>
+        </FormField>
 
         <PrimaryButton type="submit">Submit</PrimaryButton>
       </Flex>

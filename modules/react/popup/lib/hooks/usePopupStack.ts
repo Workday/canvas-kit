@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {PopupStack} from '@workday/canvas-kit-popup-stack';
-import {useLocalRef, useIsRTL, useCanvasThemeToCssVars} from '@workday/canvas-kit-react/common';
+import {useLocalRef, useCanvasThemeToCssVars, isElementRTL} from '@workday/canvas-kit-react/common';
 import {ThemeContext, Theme} from '@emotion/react';
 
 /**
@@ -51,9 +51,8 @@ export const usePopupStack = <E extends HTMLElement>(
   target?: HTMLElement | React.RefObject<HTMLElement>
 ): React.RefObject<HTMLElement> => {
   const {elementRef, localRef} = useLocalRef(ref);
-  const isRTL = useIsRTL();
   const theme = React.useContext(ThemeContext as React.Context<Theme>);
-  const {className, style} = useCanvasThemeToCssVars(theme, {});
+  const {style} = useCanvasThemeToCssVars(theme, {});
   const firstLoadRef = React.useRef(true); // React 19 can call a useState more than once, so we need to track if we've already created a container
 
   // useState function input ensures we only create a container once.
@@ -91,41 +90,34 @@ export const usePopupStack = <E extends HTMLElement>(
   // The direction will properly follow the theme via React context, but portals lose the `dir`
   // hierarchy, so we'll add it back here.
   React.useLayoutEffect(() => {
-    if (isRTL) {
-      localRef.current?.setAttribute('dir', 'rtl');
-    } else {
-      localRef.current?.removeAttribute('dir');
+    const targetEl = target ? ('current' in target ? target.current : target) : undefined;
+    if (targetEl) {
+      const isRTL = isElementRTL(targetEl);
+      if (isRTL) {
+        localRef.current?.setAttribute('dir', 'rtl');
+      } else {
+        localRef.current?.setAttribute('dir', 'ltr');
+      }
     }
-  }, [localRef, isRTL]);
-
-  // theming className
-  React.useLayoutEffect(() => {
-    const element = localRef.current;
-    element?.classList.add(className.trim());
-    return () => {
-      element?.classList.remove(className.trim());
-    };
-  }, [localRef, className]);
+  }, [localRef, target]);
 
   React.useLayoutEffect(() => {
     const element = localRef.current;
-    if (element) {
-      // eslint-disable-next-line guard-for-in
-      for (const key in style) {
+    const keys = Object.keys(style);
+    if (element && theme) {
+      for (const key of keys) {
         // @ts-ignore
         element.style.setProperty(key, style[key]);
       }
-    }
-    return () => {
-      if (element) {
-        // eslint-disable-next-line guard-for-in
-        for (const key in style) {
-          // @ts-ignore
-          element.style.removeProperty(key, style[key]);
+      return () => {
+        for (const key of keys) {
+          element.style.removeProperty(key);
         }
-      }
-    };
-  }, [localRef, style]);
+      };
+    }
+    // No cleanup is needed if element or theme is not set, so return undefined (no effect)
+    return undefined;
+  }, [localRef, style, theme]);
 
   return localRef;
 };

@@ -3,6 +3,7 @@
 // and will rewrite the URL to point to the correct URL for the story. The Storybook key will be
 // rewritten to something like `?path=/docs/${id}`
 const routes = {
+<<<<<<< HEAD
   '/assets/accent-icons/': 'tokens-icon--accent-icon',
   '/assets/applet-icons/': 'tokens-icon--applet-icon',
   '/assets/system-icons/': 'tokens-icon--system-icon',
@@ -45,32 +46,84 @@ const routes = {
   '/get-started/for-developers/documentation/style-props/': 'features-style-props--docs',
   '/getting-started/for-developers/contributing/': 'guides-contributing--docs',
   '/getting-started/for-developers/resources/api-pattern-guidelines/':
+=======
+  // Assets
+  '/assets/accent-icons/': 'assets-icons--docs#accent-icon-list',
+  '/assets/applet-icons/': 'assets-icons--docs#applet-icon-list',
+  '/assets/system-icons/': 'assets-icons--docs#system-icon-list',
+  // Components
+  '/components/buttons/action-bar/': 'components-buttons-action-bar--docs',
+  '/components/buttons/button/': 'components-buttons--docs',
+  '/components/buttons/segmented-control/': 'preview-segmented-control--docs',
+  '/components/containers/card/': 'components-containers-card--docs',
+  '/components/containers/side-panel/': 'preview-side-panel--docs',
+  '/components/containers/table/': 'components-containers-table--docs',
+  '/components/containers/tabs/': 'components-containers-tabs--docs',
+  '/components/indicators/banner/': 'components-indicators-banner--docs',
+  '/components/indicators/loading-dots/': 'components-indicators-loading-dots--docs',
+  '/components/indicators/skeleton/': 'components-indicators-skeleton--docs',
+  '/components/indicators/status-indicator/': 'preview-status-indicator--docs',
+  '/components/inputs/checkbox/': 'components-inputs-checkbox--docs',
+  '/components/inputs/color-input/': 'components-inputs-color-picker-color-input--docs',
+  '/components/inputs/form-field/': 'components-inputs-form-field--docs',
+  '/components/inputs/radio/': 'preview-inputs-radio--docs',
+  '/components/inputs/select/': 'components-inputs-select--docs',
+  '/components/inputs/switch/': 'components-inputs-switch--docs',
+  '/components/inputs/text-area/': 'components-inputs-textarea--docs',
+  '/components/inputs/text-input/': 'components-inputs-text-input--docs',
+  '/components/layout/box/': 'components-layout-box--docs',
+  '/components/layout/flex/': 'components-layout-flex--docs',
+  '/components/layout/grid/': 'components-layout-grid--docs',
+  '/components/navigation/breadcrumbs/': 'components-navigation-breadcrumbs--docs',
+  '/components/navigation/pagination/': 'components-navigation-pagination--docs',
+  '/components/popups/menu/': 'components-popups-menu--docs',
+  '/components/popups/modal/': 'components-popups-modal--docs',
+  '/components/popups/popup/': 'components-popups-popup--docs',
+  '/components/popups/toast/': 'components-popups-toast--docs',
+  '/components/popups/tooltip/': 'components-popups-tooltip--docs',
+  '/components/text/body-text/': 'components-text-body-text--docs',
+  '/components/text/heading/': 'components-text-heading--docs',
+  '/components/text/label-text/': 'components-text-label-text--docs',
+  '/components/text/subtext/': 'components-text-subtext--docs',
+  '/components/text/text/': 'components-text-text--docs',
+  '/components/text/title/': 'components-text-title--docs',
+  // Get Started
+  '/get-started/for-developers/theming/overview/': 'features-theming-overview--docs',
+  '/get-started/for-contributors/code/': 'guides-contributing--docs',
+  '/get-started/for-developers/guides/combobox/': 'features-combobox--docs',
+  '/get-started/for-developers/documentation/api-pattern-guidelines/':
+>>>>>>> upstream/master
     'guides-api-pattern-guidelines--docs',
-  '/getting-started/for-developers/resources/collection-api/': 'features-collections--basic',
-  '/getting-started/for-developers/resources/compound-components/':
+  '/get-started/for-developers/guides/collection-api/': 'features-collections--docs',
+  '/get-started/for-developers/documentation/compound-components/':
     'guides-compound-components--docs',
-  '/getting-started/for-developers/resources/creating-compound-components/':
+  '/get-started/for-developers/documentation/creating-compound-components/':
     'guides-creating-compound-components--docs',
-  '/getting-started/for-developers/resources/responsive-styling/':
+  '/get-started/for-developers/guides/responsive-styling/':
     'features-responsive-styling--responsive-container',
-  '/getting-started/for-developers/resources/style-props/':
-    'features-style-props--background-example',
-  '/getting-started/for-developers/resources/testing/': 'guides-testing--docs',
-  '/getting-started/introduction/': 'guides-getting-started--docs',
-  '/tokens/color/': 'tokens--colors',
-  '/tokens/depth/': 'tokens--depth',
-  '/tokens/space/': 'tokens--space',
-  '/tokens/type/': 'tokens--type',
-  '/utilities/testing/': 'hooks-and-utilities-testing--basic',
-  '/whats-new/upgrade-guides/canvas-kit-v4-upgrade-guide/': 'guides-upgrade-guides-v4-0--docs',
-  '/whats-new/upgrade-guides/canvas-kit-v5-upgrade-guide/': 'guides-upgrade-guides-v5-0--docs',
-  '/whats-new/upgrade-guides/canvas-kit-v6-upgrade-guide/': 'guides-upgrade-guides-v6-0--docs',
-  '/whats-new/upgrade-guides/canvas-kit-v7-upgrade-guide/': 'guides-upgrade-guides-v7-0--docs',
-  '/whats-new/upgrade-guides/canvas-kit-v8-upgrade-guide/': 'guides-upgrade-guides-v8-0--docs',
-  '/whats-new/upgrade-guides/canvas-v9-upgrade-guide/': 'guides-upgrade-guides-v9-0--docs',
-  '/whats-new/upgrade-guides/canvas-v10-upgrade-guide/': 'guides-upgrade-guides-v10-0--docs',
-  '/whats-new/upgrade-guides/canvas-v11-upgrade-guide/': 'guides-upgrade-guides-v11-0--docs',
-  '/whats-new/upgrade-guides/canvas-v12-upgrade-guide/': 'guides-upgrade-guides-v12-0--docs',
+  '/get-started/for-developers/documentation/style-props/': 'features-style-props--docs',
+  '/get-started/for-developers/documentation/testing/': 'guides-testing--docs',
+  '/get-started/for-developers/documentation/testing#visual-tests':
+    'hooks-and-utilities-testing--docs',
+  '/get-started/introduction/': 'guides-getting-started--docs',
+  // Tokens
+  '/tokens/color/': 'tokens-tokens--docs#colors',
+  '/tokens/depth/': 'tokens-tokens--docs#depth',
+  '/tokens/space/': 'tokens-tokens--docs#space',
+  '/tokens/type/': 'tokens-tokens--docs#type',
+  // Upgrade Guides
+  '/help/upgrade-guides/canvas-kit-v4-upgrade-guide/': 'guides-upgrade-guides-v4-0--docs',
+  '/help/upgrade-guides/canvas-kit-v5-upgrade-guide/': 'guides-upgrade-guides-v5-0--docs',
+  '/help/upgrade-guides/canvas-kit-v6-upgrade-guide/': 'guides-upgrade-guides-v6-0--docs',
+  '/help/upgrade-guides/canvas-kit-v7-upgrade-guide/': 'guides-upgrade-guides-v7-0--docs',
+  '/help/upgrade-guides/canvas-kit-v8-upgrade-guide/': 'guides-upgrade-guides-v8-0--docs',
+  '/help/upgrade-guides/canvas-v9-upgrade-guide/': 'guides-upgrade-guides-v9-0--docs',
+  '/help/upgrade-guides/canvas-v10-upgrade-guide/': 'guides-upgrade-guides-v10-0--docs',
+  '/help/upgrade-guides/canvas-v11-upgrade-guide/': 'guides-upgrade-guides-v11-0--docs',
+  '/help/upgrade-guides/canvas-v12-upgrade-guide/': 'guides-upgrade-guides-v12-0--docs',
+  '/help/upgrade-guides/canvas-v14-upgrade-guide/': 'guides-upgrade-guides-v14-0-overview--docs',
+  '/help/upgrade-guides/canvas-v14-upgrade-guide/#tab=visual-changes':
+    'guides-upgrade-guides-v14-0-visual-changes--docs',
 };
 
 module.exports = routes;
