@@ -1,13 +1,13 @@
 import {createContainer} from '@workday/canvas-kit-react/common';
-import {createStencil, handleCsProp, CSProps, px2rem} from '@workday/canvas-kit-styling';
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {CSProps, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-import {InformationHighlightHeading} from './parts/Heading';
+import {useInformationHighlightModel} from './hooks/useInformationHighlightModel';
 import {Body} from './parts/Body';
+import {InformationHighlightHeading} from './parts/Heading';
 import {Icon} from './parts/Icon';
 import {Link} from './parts/Link';
-import {useInformationHighlightModel} from './hooks/useInformationHighlightModel';
-import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
 interface InformationHighlightProps extends CSProps {}
 

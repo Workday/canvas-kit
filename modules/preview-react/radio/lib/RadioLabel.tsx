@@ -1,12 +1,13 @@
 import React from 'react';
 
-import {Themeable, createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
-import {useRadioModel} from './hooks/useRadioModel';
+import {ExtractProps, Themeable, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {CSProps, createStencil} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
 import {RadioInput} from './RadioInput';
 import {RadioText} from './RadioText';
-import {createStencil, CSProps} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {useRadioModel} from './hooks/useRadioModel';
 
 interface RadioLabelContextInterface {
   disabled?: boolean | undefined;

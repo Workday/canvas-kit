@@ -1,6 +1,5 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-
-import {handleCsProp, createStencil, CSProps} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 
 export interface AvatarImageProps extends CSProps {}
 

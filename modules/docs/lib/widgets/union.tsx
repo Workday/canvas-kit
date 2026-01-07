@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {UnionValue} from '../../docgen/docTypes';
-import {registerWidget, Value} from '../Value';
+import {Value, registerWidget} from '../Value';
 import {IndentLevelContext, RenderContext, indent} from '../widgetUtils';
 
 registerWidget<UnionValue>('union', ({value}) => {

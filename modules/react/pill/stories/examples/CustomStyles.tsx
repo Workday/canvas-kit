@@ -1,8 +1,7 @@
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Pill, pillCountStencil, pillStencil} from '@workday/canvas-kit-react/pill';
-
 import {createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
 const customPillStencil = createStencil({
   base: {

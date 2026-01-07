@@ -1,14 +1,13 @@
 import React from 'react';
 
 import {
-  StyledType,
-  focusRing,
-  createComponent,
   ExtractProps,
+  StyledType,
+  createComponent,
+  focusRing,
 } from '@workday/canvas-kit-react/common';
-
 import {Box, Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {CSProps, calc, createStencil, px2rem, handleCsProp} from '@workday/canvas-kit-styling';
+import {CSProps, calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 
 import {RadioLabelContext} from './RadioLabel';

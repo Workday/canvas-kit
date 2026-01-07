@@ -1,13 +1,12 @@
 import {Meta, StoryObj} from '@storybook/react';
 
-import mdxDoc from './CountBadge.mdx';
-
 import {CountBadge} from '@workday/canvas-kit-react/badge';
 
+import mdxDoc from './CountBadge.mdx';
 import {Basic as BasicExample} from './examples/Basic';
+import {CustomLimit as CustomLimitExample} from './examples/CustomLimit';
 import {Emphasis as EmphasisExample} from './examples/Emphasis';
 import {Inverse as InverseExample} from './examples/Inverse';
-import {CustomLimit as CustomLimitExample} from './examples/CustomLimit';
 import {NotificationBadge as NotificationBadgeExample} from './examples/NotificationBadge';
 
 export default {

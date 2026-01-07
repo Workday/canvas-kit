@@ -1,6 +1,7 @@
+import {CSSProperties} from 'react';
+
 import {createElemPropsHook} from '@workday/canvas-kit-react/common';
 import {usePopupModel} from '@workday/canvas-kit-react/popup';
-import {CSSProperties} from 'react';
 
 export const useDialogPopper = createElemPropsHook(usePopupModel)(({state}) => {
   return {

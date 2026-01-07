@@ -1,17 +1,16 @@
 import {buttonStencil} from '@workday/canvas-kit-react/button';
 import {createContainer, focusRing} from '@workday/canvas-kit-react/common';
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Box, BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {px2rem, createStencil, cssVar} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
-import {usePillModel} from './usePillModel';
-
+import {PillAvatar} from './PillAvatar';
+import {PillCount, pillCountStencil} from './PillCount';
 import {PillIcon} from './PillIcon';
 import {PillIconButton} from './PillIconButton';
-import {PillCount, pillCountStencil} from './PillCount';
-import {PillAvatar} from './PillAvatar';
 import {PillLabel} from './PillLabel';
-import {systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {system} from '@workday/canvas-tokens-web';
+import {usePillModel} from './usePillModel';
 
 export interface PillProps extends BoxProps {
   /**

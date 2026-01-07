@@ -1,6 +1,6 @@
-import {createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
-import {Popup} from '@workday/canvas-kit-react/popup';
+import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {Popup} from '@workday/canvas-kit-react/popup';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 

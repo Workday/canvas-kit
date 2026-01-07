@@ -1,8 +1,9 @@
-import {ColorInput} from './ColorInput';
 import {createComponent} from '@workday/canvas-kit-react/common';
+import {TextInputProps} from '@workday/canvas-kit-react/text-input';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {TextInputProps} from '@workday/canvas-kit-react/text-input';
+
+import {ColorInput} from './ColorInput';
 
 export interface ColorPreviewProps extends TextInputProps {
   /**

@@ -1,8 +1,8 @@
 import React from 'react';
 
-import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
-import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
 import {Box} from '@workday/canvas-kit-react/layout';
+import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
+import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
 
 type MyTabItem = {
   id: string;

@@ -1,8 +1,9 @@
 import * as React from 'react';
-import {createComponent, focusRing, ErrorType} from '@workday/canvas-kit-react/common';
 
-import {calc, createStencil, handleCsProp, px2rem, CSProps} from '@workday/canvas-kit-styling';
+import {ErrorType, createComponent, focusRing} from '@workday/canvas-kit-react/common';
+import {CSProps, calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
+
 import {checkboxBackgroundStencil} from './CheckBackground';
 
 export interface CheckboxProps extends CSProps {

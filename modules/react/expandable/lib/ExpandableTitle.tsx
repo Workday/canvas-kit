@@ -1,9 +1,9 @@
 import React from 'react';
 
-import {createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
 import {Box, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {system} from '@workday/canvas-tokens-web';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export interface ExpandableTitleProps extends ExtractProps<typeof Box, never> {
   /**

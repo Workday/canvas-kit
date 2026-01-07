@@ -1,7 +1,7 @@
 import {Basic} from '../../modules/react/text-input/stories/examples/Basic';
 import {Caution} from '../../modules/react/text-input/stories/examples/Caution';
-import {Error} from '../../modules/react/text-input/stories/examples/Error';
 import {Disabled} from '../../modules/react/text-input/stories/examples/Disabled';
+import {Error} from '../../modules/react/text-input/stories/examples/Error';
 import {Placeholder} from '../../modules/react/text-input/stories/examples/Placeholder';
 
 const getTextInput = () => {

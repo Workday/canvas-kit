@@ -1,10 +1,11 @@
+import {fireEvent, render} from '@testing-library/react';
 import * as React from 'react';
-import {render, fireEvent} from '@testing-library/react';
 import {renderToString} from 'react-dom/server';
+
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 
 describe('RadioGroup', () => {
-  const cb = jest.fn();
+  const cb = vi.fn();
   afterEach(() => {
     cb.mockReset();
   });

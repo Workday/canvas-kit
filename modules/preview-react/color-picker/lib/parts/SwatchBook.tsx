@@ -1,6 +1,7 @@
 import * as React from 'react';
-import {focusRing} from '@workday/canvas-kit-react/common';
+
 import {ColorSwatch} from '@workday/canvas-kit-react/color-picker';
+import {focusRing} from '@workday/canvas-kit-react/common';
 import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 

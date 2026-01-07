@@ -1,9 +1,8 @@
 import React from 'react';
 
-import {checkIcon, exclamationCircleIcon} from '@workday/canvas-system-icons-web';
-
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 import {Toast} from '@workday/canvas-kit-react/toast';
+import {checkIcon, exclamationCircleIcon} from '@workday/canvas-system-icons-web';
 
 export default {
   title: 'Testing/Popups/Toast',

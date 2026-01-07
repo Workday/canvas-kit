@@ -1,5 +1,5 @@
 import {Hyperlink} from '@workday/canvas-kit-react/button';
-import {createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 

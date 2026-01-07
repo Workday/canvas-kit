@@ -1,4 +1,6 @@
 import * as React from 'react';
+
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {
   Pagination,
   getLastPage,
@@ -6,8 +8,6 @@ import {
   getVisibleResultsMin,
   usePaginationModel,
 } from '@workday/canvas-kit-react/pagination';
-
-import {CanvasProvider} from '@workday/canvas-kit-react/common';
 
 export const RTL = () => {
   const resultCount = 10;

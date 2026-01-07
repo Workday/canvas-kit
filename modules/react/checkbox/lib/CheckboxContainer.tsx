@@ -1,8 +1,9 @@
 import * as React from 'react';
+
 import {createComponent} from '@workday/canvas-kit-react/common';
+import {LabelText} from '@workday/canvas-kit-react/text';
 import {CSProps, calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {LabelText} from '@workday/canvas-kit-react/text';
 
 interface CheckboxContainerProps extends CSProps {
   children: React.ReactNode;

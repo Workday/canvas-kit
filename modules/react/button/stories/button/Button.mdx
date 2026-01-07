@@ -1,19 +1,21 @@
+import {Meta} from '@storybook/blocks';
+
 import {
   ExampleCodeBlock,
   Specifications,
-  SymbolDoc,
   SymbolDescription,
+  SymbolDoc,
 } from '@workday/canvas-kit-docs';
 
+import {CustomStyles} from './examples/CustomStyles';
+import {Delete} from './examples/Delete';
+import {Grow} from './examples/Grow';
 import {Primary} from './examples/Primary';
 import {PrimaryInverse} from './examples/PrimaryInverse';
 import {Secondary} from './examples/Secondary';
 import {SecondaryInverse} from './examples/SecondaryInverse';
 import {Tertiary} from './examples/Tertiary';
 import {TertiaryInverse} from './examples/TertiaryInverse';
-import {Delete} from './examples/Delete';
-import {Grow} from './examples/Grow';
-import {CustomStyles} from './examples/CustomStyles';
 import {ThemeOverrides} from './examples/ThemeOverrides';
 
 import * as ButtonStories from './Button.stories';
@@ -162,4 +164,4 @@ Enter and Space keys for keyboard interactions.
 
 ## Specifications
 
-<Specifications file="Button.spec.tsx" name="Button" />
+<Specifications file="./cypress/component/Button.spec.tsx" name="Button" />

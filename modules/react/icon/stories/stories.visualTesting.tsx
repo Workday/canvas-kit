@@ -1,10 +1,11 @@
 import React from 'react';
-import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
-import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
-import {system, base} from '@workday/canvas-tokens-web';
-import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
+import {activityStreamIcon} from '@workday/canvas-system-icons-web';
+import {base, system} from '@workday/canvas-tokens-web';
+
+import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 export default withSnapshotsEnabled({
   title: 'Testing/Icon',

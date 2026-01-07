@@ -1,12 +1,12 @@
+import {Property} from 'csstype';
 import React from 'react';
 
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {Property} from 'csstype';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-import {BaseAvatarProps, BaseAvatar, baseAvatarStencil} from './BaseAvatar';
 import {AvatarNameProps} from './AvatarName';
+import {BaseAvatar, BaseAvatarProps, baseAvatarStencil} from './BaseAvatar';
 
 export interface AvatarProps extends BaseAvatarProps, AvatarNameProps {
   /**

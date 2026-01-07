@@ -1,7 +1,8 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {TextProps, textStencil} from './Text';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil} from '@workday/canvas-kit-styling';
+
+import {TextProps, textStencil} from './Text';
 
 type Size = 'large' | 'medium' | 'small';
 

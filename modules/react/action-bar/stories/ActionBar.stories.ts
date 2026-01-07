@@ -1,11 +1,11 @@
 import {Meta, StoryObj} from '@storybook/react';
-import mdxDoc from './ActionBar.mdx';
 
 import {ActionBar} from '@workday/canvas-kit-react/action-bar';
 
+import mdxDoc from './ActionBar.mdx';
 import {Basic as BasicExample} from './examples/Basic';
-import {Icons as IconsExample} from './examples/Icons';
 import {DeleteAction as DeleteActionExample} from './examples/DeleteAction';
+import {Icons as IconsExample} from './examples/Icons';
 import {OverflowActionBar as OverflowActionBarExample} from './examples/OverflowActionBar';
 import {OverflowActionBarCustomButtonCount as OverflowActionBarCustomButtonCountExample} from './examples/OverflowActionBarCustomButtonCount';
 
