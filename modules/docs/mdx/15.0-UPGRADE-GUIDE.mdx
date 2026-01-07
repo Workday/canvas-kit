@@ -22,6 +22,7 @@ space tokens, the new tokens aim to add more semantic meaning to allow for bette
 - [Codemod](#codemod)
   - [Instructions](#instructions)
 - [Component Promotions](#component-promotions)
+  - [Avatar](#avatar-)
   - [Pill](#pill-)
   - [Segmented Control](#segmented-control-)
   - [Information Highlight](#information-highlight-)
@@ -35,6 +36,7 @@ space tokens, the new tokens aim to add more semantic meaning to allow for bette
 - [Component Updates](#component-updates)
   - [Buttons](#buttons)
 - [Removals](#removals)
+  - [Avatar (Deprecated)](#avatar-deprecated)
   - [Segmented Control (Deprecated)](#segmented-control-deprecated)
   - [Select (Deprecated)](#select-deprecated)
   - [Search Form (Labs)](#search-form-labs)
@@ -109,6 +111,121 @@ yarn remove @workday/canvas-kit-codemod
 > your project conventions.
 
 ## Component Promotions
+
+### Avatar ⚡️
+
+**PR:** [](https://github.com/Workday/canvas-kit/issues/3659)
+
+We've promoted `Avatar` from [Preview](#preview) to [Main](#main). This replaces the deprecated `Avatar` that was previously in Main.
+
+**Before in v14**
+
+```tsx
+import {Avatar} from '@workday/canvas-kit-preview-react/avatar';
+```
+
+**After in v15**
+
+```tsx
+import {Avatar} from '@workday/canvas-kit-react/avatar';
+```
+
+> 🤖 The codemod will handle the change of imports as shown above.
+
+#### API Differences
+
+The new `Avatar` is a [compound component](/getting-started/for-developers/resources/compound-components/)
+with a different API than the deprecated version.
+
+##### Structure Changes
+
+| Deprecated (Old Main) | New (Promoted from Preview)         |
+| --------------------- | ----------------------------------- |
+| `Avatar`              | `Avatar`                            |
+| -                     | `BaseAvatar`                        |
+| -                     | `BaseAvatar.Image` / `AvatarImage`  |
+| -                     | `BaseAvatar.Name` / `AvatarName`    |
+
+##### Prop Changes
+
+| Feature              | Deprecated (Old Main)                      | New (Promoted from Preview)                      |
+| -------------------- | ------------------------------------------ | ------------------------------------------------ |
+| Variant              | `variant` (`light`, `dark`)                | `variant` (`blue`, `amber`, `teal`, `purple`)    |
+| Size                 | `size` (extraSmall=16px to extraExtraLarge=120px) | `size` (extraExtraSmall=24px to extraExtraLarge=120px) |
+| User identifier      | `altText` prop                             | `name` prop                                      |
+| Custom initials      | Not supported                              | `preferredInitials` prop                         |
+| Decorative mode      | Not supported                              | `isDecorative` prop                              |
+| Image URL            | `url` prop                                 | `url` prop                                       |
+| Object fit           | `objectFit` prop                           | `objectFit` prop                                 |
+| Initials display     | Not supported (shows user icon)            | Shows initials from `name` when no image         |
+
+##### Size Mapping
+
+| Size Name        | Deprecated (Old Main) | New (Promoted from Preview) |
+| ---------------- | --------------------- | --------------------------- |
+| extraExtraSmall  | -                     | 24px                        |
+| extraSmall       | 16px                  | 32px                        |
+| small            | 24px                  | 40px                        |
+| medium           | 32px                  | 48px                        |
+| large            | 40px                  | 72px                        |
+| extraLarge       | 64px                  | 96px                        |
+| extraExtraLarge  | 120px                 | 120px                       |
+
+##### Code Migration
+
+**Deprecated API (Old Main)**
+
+```tsx
+import {Avatar} from '@workday/canvas-kit-react/avatar';
+
+<Avatar
+  size="medium"
+  variant="light"
+  url="https://example.com/photo.jpg"
+  altText="John Doe"
+/>
+```
+
+**New API (v15)**
+
+```tsx
+import {Avatar} from '@workday/canvas-kit-react/avatar';
+
+<Avatar
+  size="medium"
+  variant="blue"
+  url="https://example.com/photo.jpg"
+  name="John Doe"
+/>
+```
+
+##### New Features
+
+The promoted `Avatar` includes several new features:
+
+- **Initials display**: Automatically shows initials from the `name` prop when no image URL is provided
+- **Color variants**: Four color variants (`blue`, `amber`, `teal`, `purple`) instead of light/dark
+- **Custom initials**: Use `preferredInitials` for full control over displayed initials
+- **Decorative mode**: Use `isDecorative` when Avatar is purely decorative (rendered next to a name)
+- **Compound components**: Build custom avatars using `BaseAvatar`, `BaseAvatar.Image`, and `BaseAvatar.Name`
+- **Utility function**: Use `getInitialsFromName` to extract initials from a name string
+
+```tsx
+// With initials (no image)
+<Avatar name="John Doe" variant="blue" />
+
+// Custom initials
+<Avatar name="John Doe" preferredInitials="JD" />
+
+// Decorative (next to text name)
+<Avatar name="John Doe" url="..." isDecorative />
+
+// Using compound components for custom layouts
+<BaseAvatar variant="teal" size="large">
+  <BaseAvatar.Image src="..." alt="John Doe" />
+  <BaseAvatar.Name name="John Doe" />
+</BaseAvatar>
+```
 
 ### Pill ⚡️
 
@@ -267,6 +384,16 @@ tokens. These changes are **only visual**.
 `ToolbarDropdownButton`, `Hyperlink`, `ExternalHyperlink`, and `ActionBar`.
 
 ## Removals
+
+### Avatar (Deprecated)
+
+The deprecated `Avatar` that was previously in `@workday/canvas-kit-react/avatar`
+has been removed. This was the older implementation that showed a user icon placeholder
+and supported `light`/`dark` variants.
+
+Please migrate to the new `Avatar` component (promoted from Preview) which uses initials
+display, color variants (`blue`, `amber`, `teal`, `purple`), and supports compound components.
+See the [API Differences](#api-differences) section above for migration guidance.
 
 ### Segmented Control (Deprecated)
 
@@ -433,3 +560,4 @@ Components in the Main package are stable and ready for production use.
 
 Components in the Preview package are mostly stable but may still receive breaking changes before
 being promoted to Main.
+

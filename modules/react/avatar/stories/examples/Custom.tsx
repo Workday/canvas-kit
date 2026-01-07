@@ -1,4 +1,4 @@
-import {BaseAvatar} from '@workday/canvas-kit-preview-react/avatar';
+import {BaseAvatar} from '@workday/canvas-kit-react/avatar';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {base} from '@workday/canvas-tokens-web';
 

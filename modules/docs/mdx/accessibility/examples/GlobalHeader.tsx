@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {Avatar} from '@workday/canvas-kit-preview-react/avatar';
+import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {CountBadge} from '@workday/canvas-kit-react/badge';
 import {SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
 import {LoadReturn} from '@workday/canvas-kit-react/collection';

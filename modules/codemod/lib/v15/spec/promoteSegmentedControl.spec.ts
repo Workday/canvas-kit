@@ -21,7 +21,7 @@ describe('Promote SegmentedControl to main package', () => {
 
     it('should not transform other preview imports', () => {
       const input = stripIndent`
-          import { Avatar } from "@workday/canvas-kit-preview-react/avatar";
+          import { Divider } from "@workday/canvas-kit-preview-react/divider";
           import { Pill } from "@workday/canvas-kit-preview-react/pill";
         `;
 

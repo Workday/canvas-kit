@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-labs-react/side-panel';
-import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 
 export default {
@@ -23,7 +22,7 @@ export const Default = () => {
         <span hidden id={model.state.labelId}>
           {label}
         </span>
-        <SidePanel.ToggleButton />
+        <SidePanel.ToggleButton aria-label={label} />
       </SidePanel>
     </Container>
   );
@@ -36,7 +35,7 @@ export const AsDiv = () => {
         <span hidden id={model.state.labelId}>
           {label}
         </span>
-        <SidePanel.ToggleButton />
+        <SidePanel.ToggleButton aria-label={label} />
       </SidePanel>
     </Container>
   );
@@ -49,7 +48,7 @@ export const AsAside = () => {
         <span hidden id={model.state.labelId}>
           {label}
         </span>
-        <SidePanel.ToggleButton />
+        <SidePanel.ToggleButton aria-label={label} />
       </SidePanel>
       <div>Main Content</div>
     </Container>
@@ -78,13 +77,10 @@ export const FirstFocusable = () => {
     );
   };
 
-  // eslint-disable-next-line no-empty-function
-  const noop = () => {};
-
   return (
     <React.Fragment>
       <Header>
-        <Avatar altText="Avatar" onClick={noop} />
+        <PrimaryButton>Open</PrimaryButton>
       </Header>
       <Container>
         <SidePanel model={model}>
@@ -92,7 +88,7 @@ export const FirstFocusable = () => {
             {label}
           </span>
           <h1>Panel Name</h1>
-          <SidePanel.ToggleButton />
+          <SidePanel.ToggleButton aria-label={label} />
           <PrimaryButton>Another Button</PrimaryButton>
         </SidePanel>
       </Container>

@@ -5,7 +5,7 @@ import {Pill} from '@workday/canvas-kit-react/pill';
 import {BodyText} from '@workday/canvas-kit-react/text';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-
+// @ts-ignore: Cannot find module error
 import testAvatar from './test-avatar.png';
 
 const flexStyles = createStyles({

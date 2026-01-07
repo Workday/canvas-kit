@@ -97,7 +97,7 @@ const ProfileCard = ({id, name, bio}: ProfileCardProps) => (
     <Avatar
       size="extraLarge"
       url={`https://avatars.githubusercontent.com/u/${id}?v=4`}
-      altText={`${name}'s avatar`}
+      name={`${name}'s avatar`}
       className={profileCardAvatarStyles}
     />
     <h3 className={profileCardHeadingStyles}>{name}</h3>

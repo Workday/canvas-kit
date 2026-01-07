@@ -35,15 +35,9 @@ export const AlternatePanel = () => {
     <CanvasProvider dir={direction}>
       <Flex cs={stylesOverride.viewport}>
         <SidePanel model={model} variant="alternate">
-          <SidePanel.ToggleButton />
+          <SidePanel.ToggleButton aria-label="Collapse View" />
           <Flex cs={stylesOverride.panel}>
-            <Heading
-              size="small"
-              hidden={model.state.transitionState === 'collapsed' ? true : undefined}
-              id={model.state.labelId}
-            >
-              Alternate Panel
-            </Heading>
+            <SidePanel.Heading size="small">Alternate Panel</SidePanel.Heading>
           </Flex>
         </SidePanel>
         <Flex as="main" cs={stylesOverride.main}>

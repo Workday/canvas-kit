@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.2.4](https://github.com/Workday/canvas-kit/releases/tag/v14.2.4) (2026-01-07)
+
+### Components
+
+- fix: Add missing heading component and update to remove aria labels on toggle button ([#3655](https://github.com/Workday/canvas-kit/pull/3655)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton, manuel.carrera)
+- fix: Select should close on blur ([#3674](https://github.com/Workday/canvas-kit/pull/3674)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+### Documentation
+
+- docs: Fixed Box style props links ([#3672](https://github.com/Workday/canvas-kit/pull/3672)) ([@josh-bagwell](https://github.com/josh-bagwell))
+  Updates style props links in the `Box` component documentation.
+
+
+## [v13.2.50](https://github.com/Workday/canvas-kit/releases/tag/v13.2.50) (2026-01-06)
+
+### Components
+
+- fix: Select should close on blur ([#3674](https://github.com/Workday/canvas-kit/pull/3674)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v13.2.49](https://github.com/Workday/canvas-kit/releases/tag/v13.2.49) (2026-01-06)
+
+### Documentation
+
+- docs: Fixed Box style props links ([#3672](https://github.com/Workday/canvas-kit/pull/3672)) ([@josh-bagwell](https://github.com/josh-bagwell))
+  Updates style props links in the `Box` component documentation.
+## [v14.2.3](https://github.com/Workday/canvas-kit/releases/tag/v14.2.3) (2026-01-02)
+
+### Documentation
+
+- docs: Fix broken docs links ([#3667](https://github.com/Workday/canvas-kit/pull/3667)) ([@alanbsmith](https://github.com/alanbsmith), [@jamesfan](https://github.com/jamesfan), Alan Smith)
+
+
 ## [v14.2.2](https://github.com/Workday/canvas-kit/releases/tag/v14.2.2) (2025-12-31)
 
 ### Documentation

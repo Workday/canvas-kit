@@ -2,7 +2,7 @@ import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-labs-react/side-
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {Heading, Text} from '@workday/canvas-kit-react/text';
+import {Text} from '@workday/canvas-kit-react/text';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -37,15 +37,9 @@ const RightPanel = () => {
 
   return (
     <SidePanel model={model} className={stylesOverride.panelContainer}>
-      <SidePanel.ToggleButton />
+      <SidePanel.ToggleButton aria-label="Collapse View" />
       <Flex cs={stylesOverride.panel}>
-        <Heading
-          size="small"
-          hidden={model.state.transitionState === 'collapsed' ? true : undefined}
-          id={model.state.labelId}
-        >
-          Tasks Panel
-        </Heading>
+        <SidePanel.Heading size="small">Tasks Panel</SidePanel.Heading>
       </Flex>
     </SidePanel>
   );

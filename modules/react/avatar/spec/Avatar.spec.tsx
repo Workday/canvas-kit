@@ -1,86 +1,50 @@
-import {fireEvent, render} from '@testing-library/react';
+import {render, waitFor} from '@testing-library/react';
 import * as React from 'react';
 
-import {createStencil, cssVar} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
-
-import {systemIconStencil} from '../../icon';
 import {Avatar} from '../lib/Avatar';
 
 describe('Avatar', () => {
-  it('should render a button element', () => {
-    const screen = render(<Avatar data-testid="test" />);
-    expect(screen.getByRole('button')).toBeInTheDocument();
+  it('shoudld show the initials JD given the name is John Doe', () => {
+    const screen = render(<Avatar name="John Doe" />);
+
+    expect(screen.getByText('JD')).toBeVisible();
+  });
+  it('shoudld show the initials J given the name is John', () => {
+    const screen = render(<Avatar name="John" />);
+
+    expect(screen.getByText('J')).toBeVisible();
   });
 
-  it('should forward extra attributes to the container', () => {
-    const {getByRole} = render(<Avatar id="myAvatar" />);
-    expect(getByRole('button')).toHaveAttribute('id', 'myAvatar');
+  it('should show the initials JM given the name is John Doe Mee', () => {
+    const screen = render(<Avatar name="John Doe Mee" />);
+
+    expect(screen.getByText('JM')).toBeVisible();
   });
 
-  it('should set the aria-label of the button with the altText prop', () => {
-    const screen = render(<Avatar altText="My alt text" />);
-    expect(screen.getByRole('button')).toHaveAttribute('aria-label', 'My alt text');
-  });
+  describe('Image loading states and fallback behavior', () => {
+    it('should show initials when no url is provided', () => {
+      const screen = render(<Avatar name="Jane Smith" />);
 
-  it('should set the url of the image when passed the url prop', () => {
-    const screen = render(<Avatar url="https://example.com/image.png" altText="My alt text" />);
-    expect(screen.getByRole('img')).toHaveAttribute('src', 'https://example.com/image.png');
-    expect(screen.getByRole('img')).toHaveAttribute('alt', 'My alt text');
-  });
-
-  it('should forward ref to the button element', () => {
-    const ref = React.createRef<HTMLButtonElement>();
-    const screen = render(<Avatar ref={ref} />);
-    expect(ref.current).toEqual(screen.getByRole('button'));
-  });
-
-  it('should call onClick callback when clicked', () => {
-    const fn = vi.fn();
-    const screen = render(<Avatar onClick={fn} />);
-    fireEvent.click(screen.getByRole('button'));
-    expect(fn).toBeCalled();
-  });
-
-  it('should render a div when as prop is specified', () => {
-    const screen = render(<Avatar as="div" data-testid="test" />);
-    expect(screen.getByTestId('test').tagName.toLowerCase()).toEqual('div');
-  });
-
-  it('should apply the variant class when variant prop is specified', () => {
-    const {container} = render(<Avatar variant="dark" />);
-    expect(container.firstChild).toHaveStyle(`backgroundColor: system.color.bg.primary.default}`);
-  });
-
-  it('should set the background color when background prop is specified', () => {
-    const customGreenAvatarStencil = createStencil({
-      base: {
-        backgroundColor: system.color.static.green.default,
-        ['[data-part="avatar-icon"]']: {
-          [systemIconStencil.vars.color]: system.color.static.green.softer,
-        },
-      },
+      expect(screen.getByText('JS')).toBeVisible();
+      expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
     });
 
-    const {container} = render(<Avatar {...customGreenAvatarStencil()} />);
-    expect(container.firstChild).toHaveStyle(
-      `backgroundColor: ${cssVar(system.color.static.green.default)}`
-    );
-  });
+    it('should initially show initials when url is provided but image not loaded', () => {
+      const screen = render(<Avatar name="John Doe" url="https://picsum.photos/id/237/300/200" />);
 
-  it('should set the object fit of the image when objectFit prop is specified', () => {
-    const {container} = render(<Avatar url="https://example.com/image.png" objectFit="cover" />);
-    expect(container.querySelector('[data-part="avatar-image"]')).toHaveStyle('object-fit: cover');
-  });
+      // Before image loads, initials should be visible
+      expect(screen.getByText('JD')).toBeVisible();
+      waitFor(() => {
+        expect(screen.getByRole('presentation')).toBeInTheDocument();
+        expect(screen.getByText('JD')).not.toBeInTheDocument();
+      });
+    });
 
-  it('should hide the icon when the image is loaded', () => {
-    const screen = render(<Avatar url="https://example.com/image.png" />);
-    fireEvent.load(screen.getByRole('img'));
-    expect(screen.queryByRole('img')).toHaveStyle('opacity: 1');
-  });
-
-  it('should show the icon when the image is not loaded', () => {
-    const {container} = render(<Avatar url="https://example.com/image.png" />);
-    expect(container.querySelector('svg')).toBeInTheDocument();
+    it('should show initials if image fails to load', () => {
+      const screen = render(
+        <Avatar name="Bob Wilson" url="https://example.com/invalid-image.jpg" />
+      );
+      expect(screen.getByText('BW')).toBeVisible();
+    });
   });
 });

@@ -1,6 +1,6 @@
 import {Meta, StoryObj} from '@storybook/react';
 
-import {Avatar} from '@workday/canvas-kit-preview-react/avatar';
+import {Avatar} from '@workday/canvas-kit-react/avatar';
 
 import mdxDoc from './Avatar.mdx';
 import {Basic as BasicExample} from './examples/Basic';
@@ -11,7 +11,7 @@ import {Size as SizeExample} from './examples/Size';
 import {Variant as VariantExample} from './examples/Variant';
 
 export default {
-  title: 'Preview/Avatar',
+  title: 'Components/Indicators/Avatar (Promoted)',
   component: Avatar,
   tags: ['autodocs'],
   parameters: {

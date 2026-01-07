@@ -1,4 +1,4 @@
-import {Avatar, AvatarProps, avatarStencil} from '@workday/canvas-kit-preview-react/avatar';
+import {Avatar, AvatarProps, avatarStencil} from '@workday/canvas-kit-react/avatar';
 import {createSubcomponent} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';

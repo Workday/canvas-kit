@@ -127,8 +127,8 @@ export const useSidePanelToggleButtonElemProps = createElemPropsHook(useSidePane
 }) => {
   return {
     'aria-controls': state.panelId,
-    'aria-expanded': state.transitionState === 'expanded',
-    'aria-labelledby': state.labelId,
+    'aria-pressed': state.transitionState === 'collapsed',
+    'aria-describedby': state.labelId,
   };
 });
 
@@ -141,8 +141,8 @@ export const SidePanelToggleButton = createSubcomponent('button')({
     {
       variant = undefined,
       icon = transformationImportIcon,
-      tooltipTextExpand = 'Expand',
-      tooltipTextCollapse = 'Collapse',
+      tooltipTextExpand = 'Expand View',
+      tooltipTextCollapse = 'Collapse View',
       tooltipProps,
       ...elemProps
     }: SidePanelToggleButtonProps,

@@ -1,55 +1,14 @@
 import {Property} from 'csstype';
-import React, {useState} from 'react';
+import React from 'react';
 
-import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
-import {SystemIcon, SystemIconCircleSize, systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {borderRadius} from '@workday/canvas-kit-react/tokens';
-import {CSProps, calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
-import {userIcon} from '@workday/canvas-system-icons-web';
+import {createComponent} from '@workday/canvas-kit-react/common';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-/**
- * @deprecated ⚠️ `AvatarVariant` is deprecated and will be removed in a future major version. Update your types and values to use the string literal of either `light` or `dark`.
- */
-export enum AvatarVariant {
-  Light,
-  Dark,
-}
+import {AvatarNameProps} from './AvatarName';
+import {BaseAvatar, BaseAvatarProps, baseAvatarStencil} from './BaseAvatar';
 
-/**
- * @deprecated ⚠️ `AvatarProps` is deprecated and will be removed in a future major version. Please use the `Avatar` component from the Preview package instead (@workday/canvas-kit-preview-react/avatar).
- */
-export interface AvatarProps extends CSProps {
-  /**
-   * The variant of the avatar. Use `light` on dark backgrounds and `dark` on light backgrounds.
-   * @default "light"
-   */
-  variant?: 'light' | 'dark' | AvatarVariant;
-  /**
-   * The size of the Avatar.
-   * - `extraExtraLarge`: 7.5rem x 7.5rem (120px  x 120px)
-   * - `extraLarge`: 4.5rem x 4.5rem (64px x 64px)
-   * - `large`: 2.5rem x 2.5rem (40px x 40px)
-   * - `medium`: 2rem x 2rem (32px x 32px)
-   * - `small`: 1.5rem x 1.5rem (24px x 24px)
-   * - `small`: 1rem x 1rem (16px x 16px)
-   * @default "medium"
-   */
-  size?: /** size of small */
-  | 'extraSmall'
-    | 'small'
-    | 'medium'
-    | 'large'
-    | 'extraLarge'
-    | 'extraExtraLarge'
-    | (string & {})
-    | SystemIconCircleSize
-    | number;
-  /**
-   * The alt text of the Avatar image. This prop is also used for the aria-label.
-   */
-  altText?: string;
+export interface AvatarProps extends BaseAvatarProps, AvatarNameProps {
   /**
    * The URL of the user's photo. For best fit, use square images.
    */
@@ -59,256 +18,139 @@ export interface AvatarProps extends CSProps {
    * @default "contain"
    */
   objectFit?: Property.ObjectFit;
+  /**
+   * If true, the Avatar won't forward the `name` prop to the `alt` attribute of the image. This is useful when the Avatar is purely decorative and is rendered next to a name or text.
+   */
+  isDecorative?: boolean;
 }
 
-/**
- * @deprecated `avatarStencil` is deprecated and will be removed in a future major version. Please use `Avatar` from the Preview package instead (@workday/canvas-kit-preview-react/avatar).
- */
 export const avatarStencil = createStencil({
-  vars: {
-    size: '',
-  },
+  extends: baseAvatarStencil,
   parts: {
-    icon: 'avatar-icon',
-    image: 'avatar-image',
+    avatarImage: 'avatar-image',
+    avatarName: 'avatar-name',
   },
-  base: ({size, iconPart, imagePart}) => ({
-    background: system.color.bg.caution.default,
-    position: 'relative',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 0,
-    border: 0,
-    overflow: 'hidden',
-    cursor: 'default',
-    pointerEvents: 'none',
-    borderRadius: system.shape.round,
-    width: size,
-    height: size,
-    '&:focus-visible, &.focus': {
-      outline: 'none',
-      ...focusRing({separation: 2}),
-    },
-    ':is(button)': {
-      cursor: 'pointer',
-      pointerEvents: 'auto',
-    },
-    '&:disabled, &.disabled': {
-      opacity: system.opacity.disabled,
-    },
-    [iconPart]: {
-      transition: 'opacity 150ms linear',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      [systemIconStencil.vars.size]: calc.multiply(size, 0.625),
-      opacity: 1,
-    },
-    [imagePart]: {
-      position: 'absolute',
-      width: '100%',
-      height: '100%',
-      borderRadius: borderRadius.circle,
-      transition: 'opacity 150ms linear',
-      opacity: 0,
-    },
-  }),
+  base: {},
   modifiers: {
-    variant: {
-      light: ({iconPart}) => ({
-        backgroundColor: system.color.bg.alt.default,
-        [iconPart]: {
-          [systemIconStencil.vars.color]: system.color.fg.default,
+    imageLoaded: {
+      false: ({avatarImagePart}) => ({
+        [avatarImagePart]: {
+          display: 'none',
         },
       }),
-      dark: ({iconPart}) => ({
-        backgroundColor: system.color.bg.primary.default,
-        [iconPart]: {
-          [systemIconStencil.vars.color]: system.color.fg.inverse,
-        },
-      }),
-    },
-    size: {
-      extraSmall: ({iconPart}) => ({
-        width: system.space.x4,
-        height: system.space.x4,
-        [iconPart]: {
-          [systemIconStencil.vars.size]: calc.multiply(system.space.x4, 0.625),
-        },
-      }),
-      small: ({iconPart}) => ({
-        width: system.space.x6,
-        height: system.space.x6,
-        [iconPart]: {
-          [systemIconStencil.vars.size]: calc.multiply(system.space.x6, 0.625),
-        },
-      }),
-      medium: ({iconPart}) => ({
-        width: system.space.x8,
-        height: system.space.x8,
-        [iconPart]: {
-          [systemIconStencil.vars.size]: calc.multiply(system.space.x8, 0.625),
-        },
-      }),
-      large: ({iconPart}) => ({
-        width: system.space.x10,
-        height: system.space.x10,
-        [iconPart]: {
-          [systemIconStencil.vars.size]: calc.multiply(system.space.x10, 0.625),
-        },
-      }),
-      extraLarge: ({iconPart}) => ({
-        width: system.space.x16,
-        height: system.space.x16,
-        [iconPart]: {
-          [systemIconStencil.vars.size]: calc.multiply(system.space.x16, 0.625),
-        },
-      }),
-      extraExtraLarge: ({iconPart}) => ({
-        width: calc.multiply(system.space.x10, 3),
-        height: calc.multiply(system.space.x10, 3),
-        [iconPart]: {
-          [systemIconStencil.vars.size]: calc.multiply(calc.multiply(system.space.x10, 3), 0.625),
-        },
-      }),
+      true: {
+        backgroundColor: system.color.bg.default,
+      },
     },
     objectFit: {
-      contain: ({imagePart}) => ({
-        [imagePart]: {
+      contain: ({avatarImagePart}) => ({
+        [avatarImagePart]: {
           objectFit: 'contain',
         },
       }),
-      fill: ({imagePart}) => ({
-        [imagePart]: {
-          objectFit: 'fill',
-        },
-      }),
-      cover: ({imagePart}) => ({
-        [imagePart]: {
+      cover: ({avatarImagePart}) => ({
+        [avatarImagePart]: {
           objectFit: 'cover',
         },
       }),
-      ['scale-down']: ({imagePart}) => ({
-        [imagePart]: {
-          objectFit: 'scale-down',
+      fill: ({avatarImagePart}) => ({
+        [avatarImagePart]: {
+          objectFit: 'fill',
         },
       }),
-      none: ({imagePart}) => ({
-        [imagePart]: {
+      none: ({avatarImagePart}) => ({
+        [avatarImagePart]: {
           objectFit: 'none',
         },
       }),
-      ['-moz-initial']: ({imagePart}) => ({
-        [imagePart]: {
-          objectFit: '-moz-initial',
+      ['scale-down']: ({avatarImagePart}) => ({
+        [avatarImagePart]: {
+          objectFit: 'scale-down',
         },
       }),
-      ['initial']: ({imagePart}) => ({
-        [imagePart]: {
+      initial: ({avatarImagePart}) => ({
+        [avatarImagePart]: {
           objectFit: 'initial',
         },
       }),
-      ['inherit']: ({imagePart}) => ({
-        [imagePart]: {
+
+      inherit: ({avatarImagePart}) => ({
+        [avatarImagePart]: {
           objectFit: 'inherit',
         },
       }),
-      ['revert']: ({imagePart}) => ({
-        [imagePart]: {
-          objectFit: 'revert',
-        },
-      }),
-      ['unset']: ({imagePart}) => ({
-        [imagePart]: {
+      unset: ({avatarImagePart}) => ({
+        [avatarImagePart]: {
           objectFit: 'unset',
         },
       }),
-    },
-    isImageLoaded: {
-      true: ({iconPart, imagePart}) => ({
-        [iconPart]: {
-          opacity: 0,
+      ['-moz-initial']: ({avatarImagePart}) => ({
+        [avatarImagePart]: {
+          objectFit: '-moz-initial',
         },
-        [imagePart]: {
-          opacity: 1,
+      }),
+      ['revert']: ({avatarImagePart}) => ({
+        [avatarImagePart]: {
+          objectFit: 'revert',
         },
       }),
     },
-  },
-  defaultModifiers: {
-    variant: 'light',
-    objectFit: 'contain',
   },
 });
 
 /**
- * @deprecated ⚠️ `Avatar` is deprecated and will be removed in a future major version. Please use `Avatar` from the Preview package instead (@workday/canvas-kit-preview-react/avatar).
+ * JSDoc for Avatar. Will be part of the Component API docs
  */
-export const Avatar = createComponent('button')({
+export const Avatar = createComponent('div')({
   displayName: 'Avatar',
+
   Component: (
-    {variant, size = 'medium', altText, url, objectFit, ...elemProps}: AvatarProps,
+    {
+      url,
+      name,
+      variant,
+      objectFit = 'contain',
+      preferredInitials,
+      isDecorative,
+      size,
+      ...elemProps
+    }: AvatarProps,
     ref,
     Element
   ) => {
-    const [imageLoaded, setImageLoaded] = useState(false);
+    const [imageLoaded, setImageLoaded] = React.useState(false);
 
-    const loadImage = () => {
+    const handleImageLoad = () => {
       if (!imageLoaded) {
         setImageLoaded(true);
       }
     };
 
-    React.useLayoutEffect(() => {
-      setImageLoaded(false);
-    }, [url]);
-
-    // TODO: Remove this warning for a hard breaking change in v13
-    if (process.env.NODE_ENV === 'development') {
-      if (typeof variant === 'number') {
-        console.warn(
-          'Avatar: Avatar.Variant is deprecated and will be removed in v13. Please use a string literal of "light"  or "dark"'
-        );
-      }
-      if (typeof size === 'number') {
-        console.warn(
-          "Avatar: Avatar.Size is deprecated and will be removed in v13. Use the string literal values for size: 'extraSmall' | 'small | 'medium' | 'large' | 'extraLarge | 'extraExtraLarge' | (string & {})"
-        );
-      }
-    }
-
     return (
-      <Element
+      <BaseAvatar
+        as={Element}
         ref={ref}
-        aria-label={Element === 'button' ? altText : undefined}
-        {...mergeStyles(elemProps, [
-          avatarStencil({
-            variant:
-              variant === AvatarVariant.Light
-                ? 'light'
-                : variant === AvatarVariant.Dark
-                  ? 'dark'
-                  : variant,
-            size: typeof size === 'number' ? px2rem(size) : size,
-            objectFit,
-            isImageLoaded: imageLoaded,
-          }),
-        ])}
+        {...handleCsProp(elemProps, avatarStencil({variant, size, imageLoaded, objectFit}))}
       >
-        <SystemIcon {...avatarStencil.parts.icon} icon={userIcon} />
-        {url && <img {...avatarStencil.parts.image} src={url} alt={altText} onLoad={loadImage} />}
-      </Element>
+        {url && (
+          <>
+            <BaseAvatar.Image
+              onLoad={handleImageLoad}
+              src={url}
+              alt={isDecorative ? undefined : name}
+              aria-hidden={isDecorative}
+              {...avatarStencil.parts.avatarImage}
+            />
+          </>
+        )}
+        {name && (!url || !imageLoaded) && (
+          <BaseAvatar.Name
+            name={name}
+            preferredInitials={preferredInitials}
+            {...avatarStencil.parts.avatarName}
+          />
+        )}
+      </BaseAvatar>
     );
-  },
-  subComponents: {
-    /**
-     * @deprecated ⚠️ `Avatar.Variant` is deprecated and will be removed in a future major version. Use the string literal of `light` or `dark`.
-     */
-    Variant: AvatarVariant,
-    /**
-     * @deprecated ⚠️ `Avatar.Size` is deprecated and will be removed in a future major version. Use the string literal values for size: 'extraSmall' | 'small | 'medium' | 'large' | 'extraLarge | 'extraExtraLarge' | (string & {})
-     */
-    Size: SystemIconCircleSize,
   },
 });

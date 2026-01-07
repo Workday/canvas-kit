@@ -4,6 +4,7 @@ import {createContainer, createElemPropsHook} from '@workday/canvas-kit-react/co
 import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
+import {SidePanelHeading} from './SidePanelHeading';
 import {SidePanelToggleButton} from './SidePanelToggleButton';
 import {useSidePanelModel} from './useSidePanelModel';
 
@@ -100,6 +101,12 @@ export const SidePanel = createContainer('section')({
      * attributes from the model.
      */
     ToggleButton: SidePanelToggleButton,
+    /**
+     * `SidePanel.Heading` is a styled heading that provides the accessible name for the SidePanel.
+     * The heading's `id` is automatically linked to the panel's `aria-labelledby` attribute.
+     * By default, the heading is hidden when the panel is collapsed.
+     */
+    Heading: SidePanelHeading,
   },
 })<SidePanelProps>(
   (
