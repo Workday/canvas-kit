@@ -4369,13 +4369,13 @@
         "__isArgsStory": false
       }
     },
-    "labs-side-panel-new--hidden-name": {
-      "id": "labs-side-panel-new--hidden-name",
-      "name": "Hidden Name",
+    "labs-side-panel-new--heading": {
+      "id": "labs-side-panel-new--heading",
+      "name": "Heading",
       "title": "Labs/Side Panel (New)",
       "importPath": "./modules/labs-react/side-panel/stories/SidePanel.stories.ts",
       "kind": "Labs/Side Panel (New)",
-      "story": "Hidden Name",
+      "story": "Heading",
       "parameters": {
         "fileName": "./modules/labs-react/side-panel/stories/SidePanel.stories.ts",
         "__isArgsStory": false
