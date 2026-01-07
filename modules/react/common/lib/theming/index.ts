@@ -34,3 +34,16 @@ export * from './useIsRTL';
  * For more information, view our [Theming Docs](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs#-preferred-approach-v14).
  */
 export * from './getObjectProxy';
+/**
+ * Accessible Palette Generator
+ *
+ * Generate WCAG-compliant color palettes from any input color.
+ * @example
+ * ```tsx
+ * import { generateAccessiblePalette } from '@workday/canvas-kit-react/common';
+ *
+ * const palette = generateAccessiblePalette('#0875E1');
+ * const primaryColor = palette.getHex(500);
+ * ```
+ */
+export * from './palette';
