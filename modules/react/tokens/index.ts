@@ -62,10 +62,10 @@ export const canvas = {
    * | Old Token      | New Token      |
    * |----------------|---------------------|
    * | `commonColors.background`      | `system.color.bg.default`               |
-   * | `commonColors.backgroundAlt`   | `system.color.bg.alt.default`           |
+   * | `commonColors.backgroundAlt`   | `system.color.surface.alt.strong`           |
    * | `commonColors.focusOutline`    | `system.color.border.primary.default`   |
    * | `commonColors.focusBackground` | `system.color.bg.primary.default`       |
-   * | `commonColors.hoverBackground` | `system.color.bg.alt.strong`            |
+   * | `commonColors.hoverBackground` | `system.color.surface.alt.strong`            |
    * | `commonColors.divider`         | `system.color.border.divider`           |
    */
   commonColors,
@@ -117,7 +117,7 @@ export const canvas = {
    * | `inputColors.selectionControlFill` | `system.color.bg.primary.default` |
    * | `inputColors.hoverBorder` | `system.color.border.input.strong` |
    * | `inputColors.focusBorder` | `system.color.border.primary.default` |
-   * | `inputColors.disabled.background` | `system.color.bg.alt.softer` |
+   * | `inputColors.disabled.background` | `system.color.surface.alt.default` |
    * | `inputColors.disabled.border` | `system.color.border.input.disabled` |
    * | `inputColors.disabled.text` | `system.color.fg.disabled` |
    * | `inputColors.disabled.icon` | `system.color.fg.disabled` |
@@ -219,10 +219,10 @@ export {
    * | Old Token      | New Token      |
    * |----------------|---------------------|
    * | `commonColors.background`      | `system.color.bg.default`               |
-   * | `commonColors.backgroundAlt`   | `system.color.bg.alt.default`           |
+   * | `commonColors.backgroundAlt`   | `system.color.surface.alt.strong`           |
    * | `commonColors.focusOutline`    | `system.color.border.primary.default`   |
    * | `commonColors.focusBackground` | `system.color.bg.primary.default`       |
-   * | `commonColors.hoverBackground` | `system.color.bg.alt.strong`            |
+   * | `commonColors.hoverBackground` | `system.color.surface.alt.strong`            |
    * | `commonColors.divider`         | `system.color.border.divider`           |
    */
   commonColors,
@@ -252,7 +252,7 @@ export {
    * | `inputColors.selectionControlFill` | `system.color.bg.primary.default` |
    * | `inputColors.hoverBorder` | `system.color.border.input.strong` |
    * | `inputColors.focusBorder` | `system.color.border.primary.default` |
-   * | `inputColors.disabled.background` | `system.color.bg.alt.softer` |
+   * | `inputColors.disabled.background` | `system.color.surface.alt.default` |
    * | `inputColors.disabled.border` | `system.color.border.input.disabled` |
    * | `inputColors.disabled.text` | `system.color.fg.disabled` |
    * | `inputColors.disabled.icon` | `system.color.fg.disabled` |

@@ -16,7 +16,7 @@ export const paginationPageButtonStencil = createStencil({
     [buttonStencil.vars.label]: system.color.fg.default,
 
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: system.color.bg.alt.soft,
+      [buttonStencil.vars.background]: system.color.surface.alt.default,
       [buttonStencil.vars.label]: system.color.fg.strong,
     },
 

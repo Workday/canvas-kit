@@ -33,7 +33,7 @@ export const menuCardStencil = createStencil({
     transition: `transform ease-out 150ms`,
     padding: system.space.zero,
     maxWidth: calc.subtract('100vw', system.space.x8),
-    boxShadow: system.depth[3],
+    boxShadow: system.depth3,
     minWidth,
     maxHeight,
     transformOrigin: `${transformOriginVertical} ${transformOriginHorizontal}`,

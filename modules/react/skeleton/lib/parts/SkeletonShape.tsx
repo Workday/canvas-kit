@@ -20,7 +20,7 @@ export interface SkeletonShapeProps extends CSProps {
   borderRadius?: number | string;
   /**
    * The background color of the skeleton
-   * @default `system.color.bg.alt.strong`
+   * @default `system.color.surface.alt.strong`
    */
   backgroundColor?: string;
 }
@@ -33,7 +33,7 @@ export const skeletonShapeStencil = createStencil({
     backgroundColor: '',
   },
   base: ({width, height, borderRadius, backgroundColor}) => ({
-    backgroundColor: cssVar(backgroundColor, system.color.bg.alt.strong),
+    backgroundColor: cssVar(backgroundColor, system.color.surface.alt.strong),
     borderRadius: cssVar(borderRadius, system.space.zero),
     height: cssVar(height, '100%'),
     width: width,

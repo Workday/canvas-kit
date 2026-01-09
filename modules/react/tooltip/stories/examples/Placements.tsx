@@ -7,7 +7,7 @@ import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const placementCardStyles = createStyles({
-  boxShadow: system.depth[2],
+  boxShadow: system.depth2,
   display: 'flex',
   width: 100,
   height: 100,

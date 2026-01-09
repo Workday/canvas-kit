@@ -39,7 +39,7 @@ const stylesOverride = {
   navContainer: createStyles({
     height: px2rem(800),
     positio: 'relative',
-    backgroundColor: system.color.bg.alt.default,
+    backgroundColor: system.color.surface.alt.strong,
   }),
   heading: createStyles({
     margin: system.space.zero,

@@ -71,7 +71,7 @@ const exampleData = [
 
 const tableHeaderStencil = createStencil({
   base: {
-    backgroundColor: system.color.bg.alt.softer,
+    backgroundColor: system.color.surface.alt.default,
     borderRight: `${px2rem(1)} solid ${system.color.border.divider}`,
   },
   modifiers: {

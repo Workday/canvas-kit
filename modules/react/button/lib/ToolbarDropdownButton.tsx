@@ -38,7 +38,7 @@ export const toolbarDropdownButtonStencil = createStencil({
     },
 
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: system.color.bg.alt.default,
+      [buttonStencil.vars.background]: system.color.surface.alt.strong,
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.hover.icon,
         system.color.fg.muted.stronger
@@ -46,7 +46,7 @@ export const toolbarDropdownButtonStencil = createStencil({
     },
 
     '&:active, &.active': {
-      [buttonStencil.vars.background]: system.color.bg.alt.stronger,
+      [buttonStencil.vars.background]: system.color.surface.alt.strong,
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.active.icon,
         system.color.fg.muted.stronger

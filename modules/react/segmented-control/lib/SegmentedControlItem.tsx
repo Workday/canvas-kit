@@ -64,13 +64,13 @@ export const segmentedControlItemStencil = createStencil({
     [systemIconStencil.vars.color]: system.color.fg.muted.strong,
 
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: system.color.bg.alt.strong,
+      [buttonStencil.vars.background]: system.color.surface.alt.strong,
       [buttonStencil.vars.label]: system.color.fg.muted.strong,
       [systemIconStencil.vars.color]: system.color.fg.muted.strong,
     },
 
     '&:active, &.active': {
-      [buttonStencil.vars.background]: system.color.bg.alt.strong,
+      [buttonStencil.vars.background]: system.color.surface.alt.strong,
       [buttonStencil.vars.label]: system.color.fg.muted.strong,
       [systemIconStencil.vars.color]: system.color.fg.muted.strong,
     },
@@ -81,7 +81,7 @@ export const segmentedControlItemStencil = createStencil({
     },
 
     '&:disabled, &.disabled': {
-      [buttonStencil.vars.background]: system.color.bg.alt.soft,
+      [buttonStencil.vars.background]: system.color.surface.alt.default,
     },
 
     "&[aria-pressed='true']": {

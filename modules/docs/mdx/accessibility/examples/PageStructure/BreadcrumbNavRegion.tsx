@@ -3,7 +3,7 @@ import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const regionStyles = createStyles({
-  border: `${px2rem(1)} solid ${system.color.border.contrast.default}`,
+  border: `${px2rem(1)} solid ${system.color.border.contrast}`,
   borderRadius: system.shape.x2,
   paddingLeft: system.space.x4,
 });

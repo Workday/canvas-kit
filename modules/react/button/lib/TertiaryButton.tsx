@@ -37,20 +37,20 @@ const tertiaryButtonStencil = createStencil({
       ...focusRing({
         width: 2,
         separation: 0,
-        innerColor: system.color.border.inverse,
+        innerColor: system.color.border.inverse.default,
         outerColor: brand.common.focusOutline,
       }),
     },
     // Hover Styles
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: system.color.bg.alt.soft,
+      [buttonStencil.vars.background]: system.color.surface.alt.default,
       [buttonStencil.vars.label]: brand.primary.dark,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.hover.icon, 'currentColor'),
       textDecoration: 'underline',
     },
     // Active Styles
     '&:active, &.active': {
-      [buttonStencil.vars.background]: system.color.bg.alt.default,
+      [buttonStencil.vars.background]: system.color.surface.alt.strong,
       [buttonStencil.vars.label]: brand.primary.darkest,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.active.icon, 'currentColor'),
       textDecoration: 'underline',
@@ -115,7 +115,7 @@ const tertiaryButtonStencil = createStencil({
           ...focusRing({
             width: 2,
             separation: 0,
-            outerColor: system.color.border.inverse,
+            outerColor: system.color.border.inverse.default,
           }),
         },
         // Hover Styles

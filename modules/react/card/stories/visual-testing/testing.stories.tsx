@@ -37,8 +37,8 @@ export const CardStates = {
             props: {cs: {gap: system.space.zero}},
           },
           {
-            label: 'With custom box shadow (system.depth[1])',
-            props: {cs: {boxShadow: system.depth[1]}},
+            label: 'With custom box shadow (system.depth1)',
+            props: {cs: {boxShadow: system.depth1}},
           },
           {
             label: 'With custom width (300px)',
@@ -55,7 +55,7 @@ export const CardStates = {
           <div
             style={{
               background:
-                props.variant !== 'filled' ? cssVar(system.color.bg.alt.softer) : undefined,
+                props.variant !== 'filled' ? cssVar(system.color.surface.alt.default) : undefined,
               padding: cssVar(system.space.x4),
             }}
           >

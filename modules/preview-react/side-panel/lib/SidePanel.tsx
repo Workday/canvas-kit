@@ -92,10 +92,10 @@ export const panelStencil = createStencil({
     variant: {
       alternate: {
         backgroundColor: system.color.bg.default,
-        boxShadow: system.depth[5],
+        boxShadow: system.depth5,
       },
       standard: {
-        backgroundColor: system.color.bg.alt.softer,
+        backgroundColor: system.color.surface.alt.default,
       },
     },
     expanded: {

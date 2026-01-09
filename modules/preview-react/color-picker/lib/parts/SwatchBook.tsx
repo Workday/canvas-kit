@@ -18,7 +18,7 @@ export interface SwatchBookProps {
 
 const colorPickerSwatchBookStencil = createStencil({
   vars: {
-    shadow: `${system.color.border.inverse} 0 0 0 ${px2rem(2)}, ${
+    shadow: `${system.color.border.inverse.default} 0 0 0 ${px2rem(2)}, ${
       system.color.border.input.default
     } 0 0 0 ${px2rem(3)}`,
   },

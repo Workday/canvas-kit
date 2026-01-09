@@ -20,7 +20,7 @@ export const segmentedControlListStencil = createStencil({
   },
   base: {
     display: 'inline-grid',
-    backgroundColor: system.color.bg.alt.soft,
+    backgroundColor: system.color.surface.alt.default,
     border: `${px2rem(1)} solid ${system.color.border.input.default}`,
     borderRadius: system.shape.x2,
     padding: px2rem(3),

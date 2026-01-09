@@ -102,7 +102,7 @@ const statusIndicatorStencil = createStencil({
       },
       neutral: {
         color: system.color.fg.muted.strong,
-        backgroundColor: system.color.bg.alt.default,
+        backgroundColor: system.color.surface.alt.strong,
       },
       ai: {
         color: system.color.fg.ai,

@@ -18,7 +18,7 @@ const themedCardStencil = createStencil({
   },
   base: ({headerPart, headerColor}) => ({
     padding: system.space.x4,
-    boxShadow: system.depth[2],
+    boxShadow: system.depth2,
     backgroundColor: system.color.bg.default,
     color: system.color.text.default,
     // Targets the header part via [data-part="themed-card-header"]"]

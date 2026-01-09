@@ -30,11 +30,11 @@ export const resetButtonStencil = createStencil({
     transition: 'color 120ms ease, background-color 120ms ease',
 
     '&:hover, &.hover': {
-      backgroundColor: system.color.bg.alt.default,
+      backgroundColor: system.color.surface.alt.strong,
     },
 
     '&:active, &.active': {
-      backgroundColor: system.color.bg.alt.strong,
+      backgroundColor: system.color.surface.alt.strong,
     },
     '&:focus-visible, &.focus': {
       ...focusRing(),

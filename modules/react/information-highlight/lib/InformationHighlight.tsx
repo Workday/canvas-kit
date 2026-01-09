@@ -25,8 +25,8 @@ export const informationHighlightStencil = createStencil({
   modifiers: {
     informational: {
       low: {
-        borderInlineStartColor: system.color.border.info.default,
-        backgroundColor: system.color.bg.alt.soft,
+        borderInlineStartColor: system.color.border.info,
+        backgroundColor: system.color.surface.alt.default,
         '& [data-part="information-highlight-icon"]': {
           [systemIconStencil.vars.accentColor]: system.color.icon.info.default,
           [systemIconStencil.vars.color]: system.color.icon.info.default,
@@ -34,7 +34,7 @@ export const informationHighlightStencil = createStencil({
         },
       },
       high: {
-        borderInlineStartColor: system.color.border.info.default,
+        borderInlineStartColor: system.color.border.info,
         backgroundColor: system.color.bg.info.softest,
         '& [data-part="information-highlight-icon"]': {
           [systemIconStencil.vars.accentColor]: system.color.icon.inverse,
@@ -46,7 +46,7 @@ export const informationHighlightStencil = createStencil({
     caution: {
       low: {
         borderInlineStartColor: system.color.border.caution.default,
-        backgroundColor: system.color.bg.alt.soft,
+        backgroundColor: system.color.surface.alt.default,
         '& [data-part="information-highlight-icon"]': {
           [systemIconStencil.vars.accentColor]: system.color.icon.strong,
           [systemIconStencil.vars.color]: system.color.icon.strong,
@@ -66,7 +66,7 @@ export const informationHighlightStencil = createStencil({
     critical: {
       low: {
         borderInlineStartColor: system.color.border.critical.default,
-        backgroundColor: system.color.bg.alt.soft,
+        backgroundColor: system.color.surface.alt.default,
         '& [data-part="information-highlight-icon"]': {
           [systemIconStencil.vars.accentColor]: system.color.icon.critical.default,
           [systemIconStencil.vars.color]: system.color.icon.critical.default,

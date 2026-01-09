@@ -12,7 +12,7 @@ const menuCardStencil = createStencil({
     flexDirection: 'column',
     padding: system.space.zero,
     maxWidth: px2rem(320),
-    boxShadow: system.depth[1],
+    boxShadow: system.depth1,
     overflow: 'hidden',
   },
 });

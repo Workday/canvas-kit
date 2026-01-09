@@ -20,7 +20,7 @@ export interface AccentIconStyles {
   color?: SystemPropValues['color'];
   /**
    * If true, set the background fill of the AccentIcon to `transparent`.
-   * If false, set the background fill of the AccentIcon to `system.color.bg.alt.soft`.
+   * If false, set the background fill of the AccentIcon to `system.color.surface.alt.default`.
    * @default false
    */
   transparent?: boolean;

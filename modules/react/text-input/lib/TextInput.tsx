@@ -55,7 +55,7 @@ export const textInputStencil = createStencil({
       outline: `${px2rem(2)} solid transparent`,
     },
     '&:is(:disabled, .disabled)': {
-      backgroundColor: system.color.bg.alt.softer,
+      backgroundColor: system.color.surface.alt.default,
       borderColor: system.color.border.input.disabled,
       color: system.color.fg.disabled,
       '&::placeholder': {
@@ -84,7 +84,7 @@ export const textInputStencil = createStencil({
             borderColor: brand.common.errorInner,
           },
         '&:is(:focus-visible, .focus):not([disabled])': {
-          boxShadow: `0 0 0 2px ${system.color.border.inverse}, 0 0 0 4px ${brand.common.focusOutline}`,
+          boxShadow: `0 0 0 2px ${system.color.border.inverse.default}, 0 0 0 4px ${brand.common.focusOutline}`,
           outlineOffset: px2rem(2),
         },
       },
@@ -98,7 +98,7 @@ export const textInputStencil = createStencil({
           },
         '&:is(:focus-visible, .focus):not([disabled])': {
           boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.common.alertInner},
-        0 0 0 2px ${system.color.border.inverse},
+        0 0 0 2px ${system.color.border.inverse.default},
         0 0 0 4px ${brand.common.focusOutline}`,
         },
         outlineOffset: px2rem(2),

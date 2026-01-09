@@ -66,7 +66,7 @@ const checkboxInputStencil = createStencil({
     },
 
     '&:where(:hover,.hover) ~ span:first-of-type': {
-      boxShadow: `0 0 0 ${px2rem(7)} ${system.color.bg.alt.soft}`,
+      boxShadow: `0 0 0 ${px2rem(7)} ${system.color.surface.alt.default}`,
     },
 
     // Disabled State
@@ -80,7 +80,7 @@ const checkboxInputStencil = createStencil({
     },
     '&:disabled ~ div:first-of-type': {
       borderColor: system.color.border.input.disabled,
-      backgroundColor: system.color.bg.alt.softer,
+      backgroundColor: system.color.surface.alt.default,
       opacity: system.opacity.full,
     },
     '&:disabled:where(:checked, :indeterminate) ~ div:first-of-type': {
@@ -139,7 +139,7 @@ const checkboxInputStencil = createStencil({
           backgroundColor: system.color.bg.default,
         },
         '&:disabled ~ div:first-of-type': {
-          backgroundColor: system.color.bg.alt.default,
+          backgroundColor: system.color.surface.alt.strong,
           opacity: system.opacity.disabled,
         },
         '&:disabled:where(:checked, :indeterminate) ~ div:first-of-type': {
@@ -149,13 +149,13 @@ const checkboxInputStencil = createStencil({
 
         // Focus state for inverse variant
         '&:where(:focus-visible, .focus) ~ div:first-of-type': {
-          borderColor: system.color.border.contrast.default,
+          borderColor: system.color.border.contrast,
           ...focusRing({
             width: 2,
             separation: 0,
             animate: false,
-            innerColor: system.color.border.contrast.default,
-            outerColor: system.color.border.inverse,
+            innerColor: system.color.border.contrast,
+            outerColor: system.color.border.inverse.default,
           }),
         },
         '&:checked:focus-visible, &:checked.focus, &:indeterminate:focus-visible, &:indeterminate.focus':
@@ -165,10 +165,10 @@ const checkboxInputStencil = createStencil({
                 width: 2,
                 separation: 2,
                 animate: false,
-                innerColor: system.color.border.contrast.default,
-                outerColor: system.color.border.inverse,
+                innerColor: system.color.border.contrast,
+                outerColor: system.color.border.inverse.default,
               }),
-              borderColor: system.color.border.inverse,
+              borderColor: system.color.border.inverse.default,
             },
           },
       },
@@ -191,7 +191,7 @@ const checkboxInputStencil = createStencil({
         '&:where(:checked, :indeterminate) ~ div:first-of-type': {
           borderColor: 'transparent',
           boxShadow: `
-            0 0 0 ${px2rem(2)} ${system.color.border.inverse},
+            0 0 0 ${px2rem(2)} ${system.color.border.inverse.default},
             0 0 0 ${px2rem(4)} ${checkboxBackgroundStencil.vars.errorRingColorInner},
             0 0 0 ${px2rem(5)} ${checkboxBackgroundStencil.vars.errorRingColorOuter}`,
         },
