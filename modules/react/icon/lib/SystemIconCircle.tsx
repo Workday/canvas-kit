@@ -61,7 +61,7 @@ export const systemIconCircleStencil = createStencil({
     color: '',
   },
   base: ({background, containerSize, color}) => ({
-    background: cssVar(background, system.color.bg.alt.soft),
+    background: cssVar(background, system.color.surface.alt.default),
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

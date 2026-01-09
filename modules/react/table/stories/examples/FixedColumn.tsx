@@ -16,7 +16,7 @@ const styleOverrides = {
   tableHeaderStyles: createStyles({
     position: 'sticky',
     left: system.space.zero,
-    backgroundColor: system.color.bg.alt.softer,
+    backgroundColor: system.color.surface.alt.default,
     borderRight: `2px solid ${system.color.border.divider}`,
   }),
 };

@@ -35,12 +35,12 @@ export const toolbarIconButtonStencil = createStencil({
     },
 
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: system.color.bg.alt.default,
+      [buttonStencil.vars.background]: system.color.surface.alt.strong,
       [systemIconStencil.vars.color]: system.color.fg.muted.stronger,
     },
 
     '&:active, &.active': {
-      [buttonStencil.vars.background]: system.color.bg.alt.stronger,
+      [buttonStencil.vars.background]: system.color.surface.alt.strong,
     },
 
     '&:disabled, &.disabled': {
@@ -53,12 +53,12 @@ export const toolbarIconButtonStencil = createStencil({
       [buttonStencil.vars.background]: brand.primary.lightest,
 
       '&:hover, &.hover': {
-        [buttonStencil.vars.background]: system.color.bg.alt.default,
+        [buttonStencil.vars.background]: system.color.surface.alt.strong,
         [systemIconStencil.vars.color]: brand.primary.dark,
       },
 
       '&:active, &.active': {
-        [buttonStencil.vars.background]: system.color.bg.alt.stronger,
+        [buttonStencil.vars.background]: system.color.surface.alt.strong,
         [systemIconStencil.vars.color]: brand.primary.dark,
       },
 

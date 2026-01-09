@@ -23,7 +23,7 @@ const selectableRowStencil = createStencil({
 });
 
 const tableHeaderStyles = createStyles({
-  backgroundColor: system.color.bg.alt.soft,
+  backgroundColor: system.color.surface.alt.default,
 });
 
 const tableCellStyles = createStyles({

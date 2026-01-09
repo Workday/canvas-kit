@@ -10,7 +10,7 @@ export interface SkeletonTextProps {
   lineCount?: number;
   /**
    * The background color of the skeleton
-   * @default `system.color.bg.alt.strong`
+   * @default `system.color.surface.alt.strong`
    */
   backgroundColor?: string;
 }
@@ -22,7 +22,7 @@ export const skeletonTextStencil = createStencil({
   base: ({backgroundColor}) => ({
     marginBottom: system.space.x6,
     '& [data-part="skeleton-text-lines"]': {
-      backgroundColor: cssVar(backgroundColor, system.color.bg.alt.strong),
+      backgroundColor: cssVar(backgroundColor, system.color.surface.alt.strong),
       height: px2rem(21),
       marginBlockEnd: system.space.x3,
       borderRadius: system.shape.half,

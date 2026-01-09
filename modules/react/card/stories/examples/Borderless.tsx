@@ -5,7 +5,7 @@ import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const styles = createStyles({
-  background: system.color.bg.alt.softer,
+  background: system.color.surface.alt.default,
   padding: system.space.x4,
 });
 

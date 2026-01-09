@@ -14,7 +14,7 @@ import {useDirection} from './useDirection';
 const stylesOverride = {
   viewport: createStyles({
     height: px2rem(320),
-    backgroundColor: system.color.bg.alt.default,
+    backgroundColor: system.color.surface.alt.strong,
   }),
   panel: createStyles({
     alignItems: 'center',

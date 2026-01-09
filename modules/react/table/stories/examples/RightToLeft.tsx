@@ -6,7 +6,7 @@ import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const tableHeaderStyles = createStyles({
-  backgroundColor: system.color.bg.alt.softer,
+  backgroundColor: system.color.surface.alt.default,
 });
 
 export const RightToLeft = () => {

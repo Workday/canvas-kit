@@ -39,7 +39,7 @@ export const expandableTargetStencil = createStencil({
     cursor: 'pointer',
     width: '100%',
     '&:hover, &.hover': {
-      backgroundColor: system.color.bg.alt.soft,
+      backgroundColor: system.color.surface.alt.default,
     },
     '&:focus-visible, &.focus': {
       outline: `${brand.common.focusOutline} solid ${px2rem(2)}`,

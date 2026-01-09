@@ -22,7 +22,7 @@ const controls = createStyles({
 
 const defaultBackground = createStyles({
   boxSizing: 'border-box',
-  backgroundColor: system.color.bg.alt.soft,
+  backgroundColor: system.color.surface.alt.default,
   padding: system.space.x4,
 });
 

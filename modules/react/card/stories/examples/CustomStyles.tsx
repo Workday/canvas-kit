@@ -5,7 +5,7 @@ import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const customCardStyles = createStyles({
-  boxShadow: system.depth[2],
+  boxShadow: system.depth2,
   maxWidth: px2rem(320),
   padding: system.space.x3,
 });

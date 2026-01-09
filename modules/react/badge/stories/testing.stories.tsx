@@ -45,7 +45,7 @@ export const CountBadgeStates = {
               backgroundColor: cssVar(
                 props.variant === 'inverse'
                   ? system.color.bg.primary.default
-                  : system.color.bg.alt.soft
+                  : system.color.surface.alt.default
               ),
             }}
           >

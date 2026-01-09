@@ -34,7 +34,7 @@ const radioInputStencil = createStencil({
       cursor: 'auto',
       '+ .cnvs-radio-check': {
         borderColor: system.color.border.input.disabled,
-        backgroundColor: system.color.bg.alt.softer,
+        backgroundColor: system.color.surface.alt.default,
       },
       '&:hover + .cnvs-radio-check, &.hover + .cnvs-radio-check': {
         borderColor: system.color.border.input.disabled,
@@ -71,12 +71,12 @@ const radioInputStencil = createStencil({
     },
 
     '&:focus-visible + .cnvs-radio-check, &.focus + .cnvs-radio-check': {
-      borderColor: system.color.border.primary.default,
+      borderColor: system.color.brand.border.primary.default,
       ...focusRing({
         width: 1,
         separation: 0,
         animate: false,
-        innerColor: system.color.border.inverse,
+        innerColor: system.color.focus.inverse,
         outerColor: brand.common.focusOutline,
       }),
     },
@@ -99,7 +99,7 @@ const radioInputStencil = createStencil({
           width: 2,
           separation: 2,
           animate: false,
-          innerColor: system.color.border.inverse,
+          innerColor: system.color.border.inverse.default,
           outerColor: brand.common.focusOutline,
         }),
       },
@@ -108,13 +108,13 @@ const radioInputStencil = createStencil({
     variant: {
       inverse: {
         '+ .cnvs-radio-check': {
-          backgroundColor: system.color.bg.alt.softer,
+          backgroundColor: system.color.surface.alt.default,
           borderColor: system.color.border.input.inverse,
         },
         '&:disabled, &.disabled': {
           opacity: system.opacity.disabled,
           '+ .cnvs-radio-check': {
-            backgroundColor: system.color.bg.alt.softer,
+            backgroundColor: system.color.surface.alt.default,
             borderColor: system.color.border.input.disabled,
             opacity: system.opacity.disabled,
           },
@@ -123,7 +123,7 @@ const radioInputStencil = createStencil({
           // The borderColor represents the border around the middle dot of the radio.
           '&:checked + .cnvs-radio-check, &.checked + .cnvs-radio-check': {
             backgroundColor: brand.primary.base, // inner circle background color
-            borderColor: system.color.border.inverse, // inner circle border color
+            borderColor: system.color.border.inverse.default, // inner circle border color
           },
         },
         '&:hover + .cnvs-radio-check, &.hover + .cnvs-radio-check': {
@@ -137,15 +137,15 @@ const radioInputStencil = createStencil({
         // The borderColor represents the border around the middle dot of the radio.
         '&:checked + .cnvs-radio-check, &.checked + .cnvs-radio-check': {
           backgroundColor: brand.primary.base, // inner circle background color
-          borderColor: system.color.border.inverse, // inner circle border color
+          borderColor: system.color.border.inverse.default, // inner circle border color
         },
         '&:focus-visible + .cnvs-radio-check, &:focus-visible:hover + .cnvs-radio-check, &.focus + .cnvs-radio-check, &.focus:hover + .cnvs-radio-check':
           {
             ...focusRing({
               width: 2,
               separation: 0,
-              innerColor: system.color.border.contrast.default,
-              outerColor: system.color.border.inverse,
+              innerColor: system.color.border.contrast,
+              outerColor: system.color.border.inverse.default,
             }),
           },
         '&:focus-visible:checked + .cnvs-radio-check, &:focus-visible:hover:checked + .cnvs-radio-check, &.focus:checked + .cnvs-radio-check, &.focus:hover:checked + .cnvs-radio-check':
@@ -153,8 +153,8 @@ const radioInputStencil = createStencil({
             ...focusRing({
               width: 2,
               separation: 2,
-              innerColor: system.color.border.contrast.default,
-              outerColor: system.color.border.inverse,
+              innerColor: system.color.border.contrast,
+              outerColor: system.color.border.inverse.default,
             }),
           },
       },
@@ -186,7 +186,7 @@ const radioInputWrapperStyles = createStencil({
       opacity: system.opacity.full,
     },
     '&:hover:before, &.hover:before': {
-      boxShadow: `0 0 0 ${calc.subtract(system.space.x2, px2rem(1))} ${system.color.bg.alt.soft}`,
+      boxShadow: `0 0 0 ${calc.subtract(system.space.x2, px2rem(1))} ${system.color.surface.alt.default}`,
     },
   },
   modifiers: {

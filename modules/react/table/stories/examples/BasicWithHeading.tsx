@@ -11,7 +11,7 @@ const styleOverrides = {
     marginBottom: system.space.x4,
   }),
   tableHeaderStyles: createStyles({
-    backgroundColor: system.color.bg.alt.softer,
+    backgroundColor: system.color.surface.alt.default,
   }),
 };
 

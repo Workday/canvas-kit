@@ -27,7 +27,7 @@ export const pillIconButtonStencil = createStencil({
     overflow: 'visible',
     flex: '0 0 auto',
     [buttonStencil.vars.border]: system.color.border.transparent,
-    [buttonStencil.vars.background]: system.color.bg.alt.default,
+    [buttonStencil.vars.background]: system.color.surface.alt.strong,
     [systemIconStencil.vars.color]: system.color.fg.strong,
     [systemIconStencil.vars.size]: system.space.x6,
     '::after': {
@@ -43,22 +43,22 @@ export const pillIconButtonStencil = createStencil({
 
     '&:focus-visible, &.focus': {
       [buttonStencil.vars.border]: system.color.border.transparent,
-      [buttonStencil.vars.background]: system.color.bg.alt.default,
+      [buttonStencil.vars.background]: system.color.surface.alt.strong,
       ...focusRing({
         innerColor: system.color.border.transparent,
       }),
     },
     '&:hover, &.hover': {
       [buttonStencil.vars.border]: system.color.border.transparent,
-      [buttonStencil.vars.background]: system.color.bg.alt.strong,
+      [buttonStencil.vars.background]: system.color.surface.alt.strong,
     },
     '&:active, &.active': {
       [buttonStencil.vars.border]: system.color.border.transparent,
-      [buttonStencil.vars.background]: system.color.bg.alt.stronger,
+      [buttonStencil.vars.background]: system.color.surface.alt.strong,
     },
     '&:disabled, &.disabled': {
       [buttonStencil.vars.border]: system.color.border.transparent,
-      [buttonStencil.vars.background]: system.color.bg.alt.default,
+      [buttonStencil.vars.background]: system.color.surface.alt.strong,
       [systemIconStencil.vars.color]: system.color.fg.disabled,
     },
   },

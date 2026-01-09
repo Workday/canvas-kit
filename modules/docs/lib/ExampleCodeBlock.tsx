@@ -24,7 +24,7 @@ import viteConfigFile from './stackblitzFiles/vite.config.ts?raw';
 const cardStencil = createStencil({
   base: {
     '[data-part="example-block"]': {
-      boxShadow: system.depth[1],
+      boxShadow: system.depth1,
       borderRadius: system.shape.x1,
       position: 'relative',
       overflow: 'auto', // This allows for the entire ExampleCodeBlock to scroll on smaller viewports
@@ -34,7 +34,7 @@ const cardStencil = createStencil({
     },
     '[data-part="code-block"]': {
       display: 'none',
-      boxShadow: system.depth[1],
+      boxShadow: system.depth1,
       borderRadius: system.shape.x1,
     },
     '[data-part="code-toggle-stackblitz-btn-container"]': {

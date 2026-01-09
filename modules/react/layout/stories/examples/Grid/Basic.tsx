@@ -14,7 +14,7 @@ const containerStyles = createStyles({
 const gridStyles = createStyles({
   backgroundColor: system.color.bg.primary.default,
   borderRadius: system.shape.x1,
-  boxShadow: system.depth[1],
+  boxShadow: system.depth1,
   padding: system.space.x4,
 });
 

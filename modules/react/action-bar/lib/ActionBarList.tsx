@@ -34,7 +34,7 @@ export interface ActionBarListProps<T = any>
 export const actionBarListStencil = createStencil({
   base: {
     display: 'flex',
-    boxShadow: system.depth[1],
+    boxShadow: system.depth1,
     gap: forwardFitTokens.system.gap.md,
     background: system.color.bg.default,
     borderBlockStart: `solid 1px ${cssVar(system.color.border.divider)}`,

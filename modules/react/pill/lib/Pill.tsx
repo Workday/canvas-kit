@@ -51,7 +51,7 @@ export const pillStencil = createStencil({
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
     overflow: 'hidden',
-    [buttonStencil.vars.background]: system.color.bg.alt.default,
+    [buttonStencil.vars.background]: system.color.surface.alt.strong,
     [buttonStencil.vars.border]: system.color.border.input.default,
     [buttonStencil.vars.label]: system.color.fg.strong,
     [systemIconStencil.vars.color]: 'currentColor',
@@ -62,7 +62,7 @@ export const pillStencil = createStencil({
       lineHeight: system.lineHeight.subtext.large, // ensure correct line height
     },
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: system.color.bg.alt.strong,
+      [buttonStencil.vars.background]: system.color.surface.alt.strong,
       [buttonStencil.vars.border]: system.color.border.input.strong,
       [buttonStencil.vars.label]: system.color.fg.strong,
       [systemIconStencil.vars.color]: 'currentColor',
@@ -70,7 +70,7 @@ export const pillStencil = createStencil({
       [pillCountStencil.vars.borderColor]: 'transparent',
     },
     '&:active, &.active': {
-      [buttonStencil.vars.background]: system.color.bg.alt.stronger,
+      [buttonStencil.vars.background]: system.color.surface.alt.strong,
       [buttonStencil.vars.border]: system.color.border.input.strong,
       [buttonStencil.vars.label]: system.color.fg.strong,
       [systemIconStencil.vars.color]: 'currentColor',
@@ -78,27 +78,27 @@ export const pillStencil = createStencil({
       [pillCountStencil.vars.borderColor]: 'transparent',
     },
     '&:focus-visible, &.focus': {
-      [buttonStencil.vars.background]: system.color.bg.alt.default,
-      [buttonStencil.vars.border]: system.color.border.primary.default,
+      [buttonStencil.vars.background]: system.color.surface.alt.strong,
+      [buttonStencil.vars.border]: system.color.brand.border.primary.default,
       [buttonStencil.vars.label]: system.color.fg.strong,
-      borderColor: system.color.border.primary.default,
+      borderColor: system.color.brand.border.primary.default,
       [systemIconStencil.vars.color]: 'currentColor',
-      [pillCountStencil.vars.borderColor]: system.color.border.primary.default,
+      [pillCountStencil.vars.borderColor]: system.color.brand.border.primary.default,
 
       ...focusRing({
         width: 0,
         inset: 'inner',
-        innerColor: system.color.border.primary.default,
-        outerColor: system.color.border.primary.default,
+        innerColor: system.color.brand.border.primary.default,
+        outerColor: system.color.brand.border.primary.default,
         separation: 1,
       }),
     },
     '&:disabled, &.disabled': {
-      [buttonStencil.vars.background]: system.color.bg.alt.default,
+      [buttonStencil.vars.background]: system.color.surface.alt.strong,
       [buttonStencil.vars.border]: system.color.border.input.disabled,
       [buttonStencil.vars.label]: system.color.fg.disabled,
       [systemIconStencil.vars.color]: 'currentColor',
-      [pillCountStencil.vars.backgroundColor]: system.color.bg.alt.strong,
+      [pillCountStencil.vars.backgroundColor]: system.color.surface.alt.strong,
       [pillCountStencil.vars.borderColor]: 'transparent',
     },
   }),
@@ -124,19 +124,19 @@ export const pillStencil = createStencil({
       },
       removable: {
         '&:focus-visible, &.focus': {
-          [buttonStencil.vars.background]: system.color.bg.alt.default,
+          [buttonStencil.vars.background]: system.color.surface.alt.strong,
           [buttonStencil.vars.border]: system.color.border.input.default,
           [buttonStencil.vars.label]: system.color.fg.strong,
           boxShadow: 'none',
         },
         '&:hover, &.hover': {
-          [buttonStencil.vars.background]: system.color.bg.alt.strong,
+          [buttonStencil.vars.background]: system.color.surface.alt.strong,
         },
         '&:active, &.active': {
-          [buttonStencil.vars.background]: system.color.bg.alt.stronger,
+          [buttonStencil.vars.background]: system.color.surface.alt.strong,
         },
         '&:disabled, &.disabled': {
-          [buttonStencil.vars.background]: system.color.bg.alt.default,
+          [buttonStencil.vars.background]: system.color.surface.alt.strong,
           [systemIconStencil.vars.color]: 'currentColor',
         },
         cursor: 'default',

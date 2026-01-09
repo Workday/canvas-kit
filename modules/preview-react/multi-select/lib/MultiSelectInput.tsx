@@ -10,7 +10,14 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {InputGroup, TextInput, textInputStencil} from '@workday/canvas-kit-react/text-input';
-import {CSProps, calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {
+  CSProps,
+  calc,
+  createStencil,
+  cssVar,
+  handleCsProp,
+  px2rem,
+} from '@workday/canvas-kit-styling';
 import {caretDownSmallIcon, searchIcon} from '@workday/canvas-system-icons-web';
 import {brand, system} from '@workday/canvas-tokens-web';
 
@@ -36,8 +43,8 @@ export const multiSelectInputStencil = createStencil({
     },
 
     '&:has(:focus-visible:not([disabled])), &.focus': {
-      borderColor: system.color.border.primary.default,
-      boxShadow: `inset 0 0 0 1px ${system.color.border.primary.default}`,
+      borderColor: system.color.brand.border.primary.default,
+      boxShadow: `inset 0 0 0 1px ${system.color.brand.border.primary.default}`,
     },
 
     '& [data-part="user-input"]': {
@@ -68,7 +75,7 @@ export const multiSelectInputStencil = createStencil({
     '&:has(:disabled, .disabled)': {
       borderColor: system.color.border.input.disabled,
       color: system.color.text.disabled,
-      backgroundColor: system.color.bg.alt.softer,
+      backgroundColor: system.color.surface.alt.default,
       [systemIconStencil.vars.color]: system.color.fg.disabled,
     },
 
@@ -107,9 +114,9 @@ export const multiSelectInputStencil = createStencil({
         },
         '&:has(:focus-visible:not([disabled])), &.focus': {
           borderColor: brand.common.errorInner,
-          boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.common.errorInner}, 0 0 0 2px ${
-            system.color.border.inverse
-          }, 0 0 0 4px ${brand.common.focusOutline}`,
+          boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.common.errorInner}, 0 0 0 2px ${cssVar(
+            system.color.border.inverse.default
+          )}, 0 0 0 4px ${brand.common.focusOutline}`,
           outlineOffset: px2rem(2),
         },
       },
@@ -124,7 +131,7 @@ export const multiSelectInputStencil = createStencil({
 
         '&:has(:focus-visible, .focus):not(:has([disabled]))': {
           boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.common.alertInner},
-        0 0 0 2px ${system.color.border.inverse},
+        0 0 0 2px ${cssVar(system.color.border.inverse.default)},
         0 0 0 4px ${brand.common.focusOutline}`,
         },
         outlineOffset: px2rem(2),

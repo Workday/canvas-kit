@@ -14,7 +14,7 @@ export const modalCardStencil = createStencil({
     width: calc.add(calc.multiply(system.space.x20, 5), system.space.x10),
     borderWidth: system.space.zero,
     outline: `${px2rem(1)} solid transparent`,
-    boxShadow: system.depth[6],
+    boxShadow: system.depth6,
     '@media screen and (max-width: 768px)': {
       gap: system.space.zero,
       margin: system.space.x4, // 16px all around margin on smaller screen sizes

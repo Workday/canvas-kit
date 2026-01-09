@@ -20,7 +20,7 @@ const gridLayoutStyles = createStyles({
 });
 
 const regionStyles = createStyles({
-  border: `${px2rem(1)} solid ${system.color.border.contrast.default}`,
+  border: `${px2rem(1)} solid ${system.color.border.contrast}`,
   borderRadius: system.shape.x2,
   padding: system.space.x4,
 });
