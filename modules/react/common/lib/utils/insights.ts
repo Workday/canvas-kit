@@ -10,7 +10,7 @@ const versionTag = process.env.NODE_ENV === 'production' ? version : version.spl
  * This function returns data attributes for tagging
  * We use this to track when and where our components render. It also allows us to see what version is rendering.
  */
-export function setCanvasKitTags(displayName = '') {
+export function setCanvasKitTags(displayName = '', props: any = {}) {
   // Do not add tags for subcomponents. E.g. Card.Text
   const shouldAddTag = displayName.length && !displayName.includes('.');
 
@@ -18,6 +18,7 @@ export function setCanvasKitTags(displayName = '') {
     return {
       ['data-uxi-canvas-kit-version']: versionTag,
       ['data-uxi-canvas-kit-component-type']: slugify(displayName),
+      ['data-uxi-canvas-kit-component-variant']: props.variant ? slugify(props.variant) : undefined,
     };
   }
 
@@ -25,5 +26,6 @@ export function setCanvasKitTags(displayName = '') {
   return {
     ['data-uxi-canvas-kit-version']: undefined,
     ['data-uxi-canvas-kit-component-type']: undefined,
+    ['data-uxi-canvas-kit-component-variant']: undefined,
   };
 }

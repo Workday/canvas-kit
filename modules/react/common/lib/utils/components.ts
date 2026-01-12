@@ -542,7 +542,7 @@ export const createComponent =
       ({as: asOverride, ...props}, ref) => {
         return Component(
           {
-            ...setCanvasKitTags(displayName),
+            ...setCanvasKitTags(displayName, props),
             ...props,
           } as any,
           ref as ExtractRef<E>,
