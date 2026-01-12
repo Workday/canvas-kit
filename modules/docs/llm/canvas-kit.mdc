@@ -111,15 +111,15 @@ Use `createStencil` when styles depend on **props**, **variants**, or **componen
 
 ```tsx
 const buttonStencil = createStencil({
-  vars: {color: '', background: ''},
+  vars: {color: '', backgroundColor: ''},
   base: ({color, backgroundColor}) => ({
     color: cssVar(color, system.color.text.default),
     backgroundColor: cssVar(backgroundColor, system.color.bg.default),
   }),
   modifiers: {
     variant: {
-      primary: {background: system.color.bg.primary.default},
-      secondary: {background: system.color.bg.muted.default},
+      primary: {backgroundColor: system.color.bg.primary.default},
+      secondary: {backgroundColor: system.color.bg.muted.default},
     },
   },
 });
@@ -345,12 +345,16 @@ Use `useUniqueId()` hook for generating unique IDs for accessibility:
 ```tsx
 import {useUniqueId} from '@workday/canvas-kit-react/common';
 
-const tableHeadingId = useUniqueId();
+const MyTable = () => {
+  const tableHeadingId = useUniqueId();
 
-<Heading id={tableHeadingId}>Pizza Toppings</Heading>
-<Table aria-labelledby={tableHeadingId}>
-  {/* table rows */}
-</Table>
+  return (
+    <>
+      <Heading id={tableHeadingId}>Pizza Toppings</Heading>
+      <Table aria-labelledby={tableHeadingId}>{/* table rows */}</Table>
+    </>
+  );
+};
 ```
 
 ### Naming Conventions
