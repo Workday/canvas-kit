@@ -1,13 +1,14 @@
 import React from 'react';
 
+import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
+import {FormFieldGroup} from '@workday/canvas-kit-react/form-field';
 import {
   ComponentStatesTable,
   StaticStates,
   permutateProps,
 } from '@workday/canvas-kit-react/testing';
+
 import {customColorTheme} from '../../../../utils/storybook';
-import {FormFieldGroup} from '@workday/canvas-kit-react/form-field';
-import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';

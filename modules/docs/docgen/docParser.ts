@@ -1,15 +1,16 @@
 import ts from 'typescript';
+
 import {
-  JSDoc,
   ExportedSymbol,
-  Value,
-  TypeParameter,
-  UnknownValue,
-  ObjectProperty,
+  FunctionParameter,
   FunctionValue,
   IndexSignatureValue,
-  FunctionParameter,
+  JSDoc,
+  ObjectProperty,
   PrimitiveValue,
+  TypeParameter,
+  UnknownValue,
+  Value,
 } from './docTypes';
 import {getExternalSymbol} from './getExternalSymbol';
 import t, {find} from './traverse';
@@ -28,7 +29,10 @@ export class DocParser<T extends {kind: string} = any> {
    */
   public symbols: ExportedSymbol<Value | T>[] = [];
 
-  constructor(public program: ts.Program, public plugins: ParserPlugin<T>[] = []) {
+  constructor(
+    public program: ts.Program,
+    public plugins: ParserPlugin<T>[] = []
+  ) {
     this.checker = program.getTypeChecker();
   }
 
@@ -38,7 +42,9 @@ export class DocParser<T extends {kind: string} = any> {
   getExportedSymbols(fileName: string): ExportedSymbol<T | Value>[] {
     const symbols: ExportedSymbol[] = [];
     const sourceFile = this.program.getSourceFile(fileName);
-    if (!sourceFile) return symbols;
+    if (!sourceFile) {
+      return symbols;
+    }
 
     find(sourceFile, node => {
       const kind = node.kind;
@@ -112,9 +118,12 @@ function getValueFromNode(parser: DocParser, node: ts.Node): Value {
   }
 
   return (
-    parser.plugins.reduce((result, fn) => {
-      return result || fn(node, parser);
-    }, undefined as Value | undefined) || _getValueFromNode(parser, node)
+    parser.plugins.reduce(
+      (result, fn) => {
+        return result || fn(node, parser);
+      },
+      undefined as Value | undefined
+    ) || _getValueFromNode(parser, node)
   );
 }
 
@@ -349,6 +358,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     const type = checker.getTypeAtLocation(node);
     const jsDoc = findDocComment(checker, symbol);
 
+    // eslint-disable-next-line no-empty
     if (jsDoc.tags.default) {
     }
 
@@ -463,7 +473,9 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     }
 
     const value = getValueFromType(parser, type);
-    if (value) return value;
+    if (value) {
+      return value;
+    }
   }
 
   /**
@@ -483,8 +495,8 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
       ((t.isIdentifier(node.name)
         ? node.name.text
         : t.isStringLiteral(node.name)
-        ? node.name.text
-        : '') as string);
+          ? node.name.text
+          : '') as string);
     return {
       kind: 'property',
       name,
@@ -921,6 +933,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     const type = checker.getTypeAtLocation(node);
     if (symbol) {
       if (type.getFlags() & ts.TypeFlags.Instantiable) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         symbol.name;
         // It is a generic type
         return {kind: 'generic', name: symbol?.name};
@@ -1041,10 +1054,10 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     const isRequired = node.questionToken
       ? false
       : node.initializer
-      ? false
-      : symbol
-      ? !isOptional(symbol) && !includesUndefined(type)
-      : false;
+        ? false
+        : symbol
+          ? !isOptional(symbol) && !includesUndefined(type)
+          : false;
 
     const typeInfo = node.type
       ? getValueFromNode(parser, node.type)
@@ -1121,7 +1134,17 @@ export function getFullJsDocComment(checker: ts.TypeChecker, symbol: ts.Symbol) 
     return defaultJSDoc;
   }
 
-  let mainComment = ts.displayPartsToString(symbol.getDocumentationComment(checker));
+  let mainComment = ts.displayPartsToString(
+    symbol
+      .getDocumentationComment(checker)
+      .map(s =>
+        s.kind === 'linkText'
+          ? {...s, text: s.text.trim()}
+          : s.kind === 'linkName'
+            ? {...s, text: s.text.trim() + ' '}
+            : s
+      )
+  );
 
   if (mainComment) {
     mainComment = mainComment.replace(/\r\n/g, '\n');
@@ -1249,15 +1272,18 @@ export function getDefaultsFromObjectBindingParameter(
   node: ts.ParameterDeclaration
 ): Record<string, Value> {
   if (t.isObjectBindingPattern(node.name)) {
-    return node.name.elements.reduce((result, element) => {
-      if (t.isBindingElement(element) && t.isIdentifier(element.name) && element.initializer) {
-        const defaultValue = getValidDefaultFromNode(parser, element.initializer);
-        if (defaultValue) {
-          result[element.name.text] = defaultValue;
+    return node.name.elements.reduce(
+      (result, element) => {
+        if (t.isBindingElement(element) && t.isIdentifier(element.name) && element.initializer) {
+          const defaultValue = getValidDefaultFromNode(parser, element.initializer);
+          if (defaultValue) {
+            result[element.name.text] = defaultValue;
+          }
         }
-      }
-      return result;
-    }, {} as Record<string, Value>);
+        return result;
+      },
+      {} as Record<string, Value>
+    );
   }
 
   return {};
@@ -1458,7 +1484,7 @@ export function getValueFromType(
   if (type.isUnion()) {
     // If we got here, it means a TypeNode was a TypeReference that wasn't exported or a synthetic
     // TypeNode `keyof *` that `getValueFromNode` couldn't properly parse.
-    let filteredTypes = type.types;
+    const filteredTypes = type.types;
 
     return {
       kind: 'union',

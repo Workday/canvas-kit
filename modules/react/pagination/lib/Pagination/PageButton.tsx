@@ -1,9 +1,10 @@
 import * as React from 'react';
 
-import {brand, system} from '@workday/canvas-tokens-web';
 import {BaseButton, buttonStencil} from '@workday/canvas-kit-react/button';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
+
 import {PaginationContext} from './usePaginationModel';
 
 export const paginationPageButtonStencil = createStencil({

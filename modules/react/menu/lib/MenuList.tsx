@@ -1,15 +1,15 @@
+import {ListBox, ListProps} from '@workday/canvas-kit-react/collection';
 import {
-  createSubcomponent,
-  createElemPropsHook,
   ExtractProps,
   composeHooks,
+  createElemPropsHook,
+  createSubcomponent,
 } from '@workday/canvas-kit-react/common';
-import {ListBox, ListProps} from '@workday/canvas-kit-react/collection';
-import {useReturnFocus, useFocusRedirect} from '@workday/canvas-kit-react/popup';
-
-import {useMenuModel} from './useMenuModel';
+import {useFocusRedirect, useReturnFocus} from '@workday/canvas-kit-react/popup';
 import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+
+import {useMenuModel} from './useMenuModel';
 
 export interface MenuListProps<T = any>
   extends Omit<ExtractProps<typeof ListBox, never>, 'children'> {

@@ -1,20 +1,19 @@
 import React from 'react';
 
-import {createStencil, handleCsProp, wrapProperty} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {
+  ExtractProps,
   createContainer,
   createElemPropsHook,
   createModelHook,
   createSubcomponent,
   dispatchInputEvent,
-  ExtractProps,
   useForkRef,
 } from '@workday/canvas-kit-react/common';
-
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {TertiaryButton} from '@workday/canvas-kit-react/button';
+import {createStencil, handleCsProp, wrapProperty} from '@workday/canvas-kit-styling';
 import {xSmallIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
 import {TextInput} from './TextInput';
 

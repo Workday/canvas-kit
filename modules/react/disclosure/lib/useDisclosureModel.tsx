@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {createModelHook, useUniqueId} from '@workday/canvas-kit-react/common';
 
 export type Visibility = 'hidden' | 'visible';

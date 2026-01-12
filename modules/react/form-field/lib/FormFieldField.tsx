@@ -1,8 +1,8 @@
 import {createSubcomponent} from '@workday/canvas-kit-react/common';
-import {handleCsProp, CSProps, createStencil} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 import {useFormFieldModel} from './hooks';
-import {system} from '@workday/canvas-tokens-web';
 
 export const formFieldFieldStencil = createStencil({
   base: {

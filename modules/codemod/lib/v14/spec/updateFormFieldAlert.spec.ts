@@ -1,6 +1,7 @@
-import {expectTransformFactory} from './expectTransformFactory';
-import transform from '../updateFormFieldAlert';
 import {stripIndent} from 'common-tags';
+
+import transform from '../updateFormFieldAlert';
+import {expectTransformFactory} from './expectTransformFactory';
 
 const expectTransform = expectTransformFactory(transform);
 

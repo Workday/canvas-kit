@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import {ContentDirection} from '@workday/canvas-kit-react/common';
 
 export function useDirection(initialDirection = ContentDirection.LTR) {

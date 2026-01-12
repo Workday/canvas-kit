@@ -1,9 +1,9 @@
 import {Basic} from '../../modules/react/tabs/stories/examples/Basic';
-import {NamedTabs} from '../../modules/react/tabs/stories/examples/NamedTabs';
 import {DisabledTab} from '../../modules/react/tabs/stories/examples/DisabledTab';
 import {DynamicTabs} from '../../modules/react/tabs/stories/examples/DynamicTabs';
-import {RightToLeft} from '../../modules/react/tabs/stories/examples/RightToLeft';
+import {NamedTabs} from '../../modules/react/tabs/stories/examples/NamedTabs';
 import {OverflowTabs} from '../../modules/react/tabs/stories/examples/OverflowTabs';
+import {RightToLeft} from '../../modules/react/tabs/stories/examples/RightToLeft';
 
 describe('Tabs', () => {
   [Basic, NamedTabs].forEach(Example => {
@@ -511,7 +511,7 @@ describe('Tabs', () => {
 
       context('when the Tab key is pressed', () => {
         beforeEach(() => {
-          cy.focused().tab();
+          cy.focused().realPress('Tab');
         });
 
         it('should focus on the tab panel', () => {

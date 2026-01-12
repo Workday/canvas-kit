@@ -1,13 +1,14 @@
 import React from 'react';
-import {type} from '@workday/canvas-kit-react/tokens';
 
+import {Hyperlink} from '@workday/canvas-kit-react/button';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {
   ComponentStatesTable,
-  permutateProps,
   StaticStates,
+  permutateProps,
 } from '@workday/canvas-kit-react/testing';
-import {Hyperlink} from '@workday/canvas-kit-react/button';
+import {type} from '@workday/canvas-kit-react/tokens';
+
 import {Container} from './utils';
 
 export default {

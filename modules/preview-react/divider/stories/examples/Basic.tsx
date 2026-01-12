@@ -1,8 +1,9 @@
 import React from 'react';
+
 import {Divider} from '@workday/canvas-kit-preview-react/divider';
+import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {Avatar} from '@workday/canvas-kit-react/avatar';
 
 const sectionStyles = createStyles({
   display: 'flex',
@@ -96,7 +97,7 @@ const ProfileCard = ({id, name, bio}: ProfileCardProps) => (
     <Avatar
       size="extraLarge"
       url={`https://avatars.githubusercontent.com/u/${id}?v=4`}
-      altText={`${name}'s avatar`}
+      name={`${name}'s avatar`}
       className={profileCardAvatarStyles}
     />
     <h3 className={profileCardHeadingStyles}>{name}</h3>

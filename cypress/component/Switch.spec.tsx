@@ -1,7 +1,7 @@
 import {Basic} from '../../modules/react/switch/stories/examples/Basic';
-import {Error} from '../../modules/react/switch/stories/examples/Error';
 import {Caution} from '../../modules/react/switch/stories/examples/Caution';
 import {Disabled} from '../../modules/react/switch/stories/examples/Disabled';
+import {Error} from '../../modules/react/switch/stories/examples/Error';
 
 const getSwitch = () => {
   return cy.findByRole('switch');

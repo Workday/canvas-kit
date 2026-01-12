@@ -1,12 +1,12 @@
 import {
-  createComponent,
-  GrowthBehavior,
   ErrorType,
+  GrowthBehavior,
+  createComponent,
   forwardFitTokens,
 } from '@workday/canvas-kit-react/common';
-import {createStencil, cssVar, px2rem, calc, CSProps} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {CSProps, calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
 
 export interface TextInputProps extends GrowthBehavior, CSProps {
   /**

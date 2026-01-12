@@ -1,4 +1,5 @@
 import {Interpolation} from '@emotion/react';
+
 import {CSSProperties} from '@workday/canvas-kit-react/tokens';
 
 /**

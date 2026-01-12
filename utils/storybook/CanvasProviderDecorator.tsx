@@ -1,20 +1,18 @@
+import {makeDecorator} from '@storybook/preview-api';
 import * as React from 'react';
+
 import {
-  defaultCanvasTheme,
   CanvasProvider,
   PartialEmotionCanvasTheme,
+  defaultCanvasTheme,
 } from '@workday/canvas-kit-react/common';
-
-import {makeDecorator, useArgs} from '@storybook/preview-api';
 
 export default makeDecorator({
   name: 'canvasProviderDecorator',
   parameterName: 'canvasProviderDecorator',
   wrapper: (storyFn, context, {parameters = {}}) => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [args] = useArgs();
     const theme: PartialEmotionCanvasTheme = {
-      canvas: parameters.theme || args.theme || defaultCanvasTheme,
+      canvas: parameters.theme || defaultCanvasTheme,
     };
     return <CanvasProvider theme={theme}>{storyFn(context) as React.ReactNode}</CanvasProvider>;
   },

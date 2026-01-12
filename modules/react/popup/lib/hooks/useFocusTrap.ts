@@ -1,8 +1,8 @@
 import React from 'react';
-import {tabTrappingKey} from './focus-trap-js';
 
 import {createElemPropsHook} from '@workday/canvas-kit-react/common';
 
+import {tabTrappingKey} from './focus-trap-js';
 import {usePopupModel} from './usePopupModel';
 
 /**

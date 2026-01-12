@@ -1,8 +1,8 @@
 import React from 'react';
 
+import {useUniqueId} from '@workday/canvas-kit-react/common';
 import {Table} from '@workday/canvas-kit-react/table';
 import {Heading} from '@workday/canvas-kit-react/text';
-import {useUniqueId} from '@workday/canvas-kit-react/common';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 

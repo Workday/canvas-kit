@@ -1,18 +1,19 @@
 import {
-  createElemPropsHook,
-  useLocalRef,
-  composeHooks,
-  createSubcomponent,
-  useForkRef,
-} from '@workday/canvas-kit-react/common';
-import {OverflowTooltip, OverflowTooltipProps} from '@workday/canvas-kit-react/tooltip';
-import {
   useListItemRegister,
   useOverflowListItemMeasure,
 } from '@workday/canvas-kit-react/collection';
+import {
+  composeHooks,
+  createElemPropsHook,
+  createSubcomponent,
+  useForkRef,
+  useLocalRef,
+} from '@workday/canvas-kit-react/common';
 import {Text, TextProps} from '@workday/canvas-kit-react/text';
-import {system} from '@workday/canvas-tokens-web';
+import {OverflowTooltip, OverflowTooltipProps} from '@workday/canvas-kit-react/tooltip';
 import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
 import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 
 export interface BreadcrumbsCurrentItemProps extends TextProps {

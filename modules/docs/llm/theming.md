@@ -23,9 +23,12 @@ developer experience, and greater flexibility for theming applications.
 > If your application renders within an environment that already imports these CSS variables, \*\*do
 > not re-
 
-<CanvasProvider theme={{canvas: {palette: {primary: {main: 'purple'}}}}}> <App /> </CanvasProvider>;
-
-````
+```tsx
+<CanvasProvider theme={{canvas: {palette: {primary: {main: 'purple'}}}}}>
+  {' '}
+  <App />{' '}
+</CanvasProvider>
+```
 
 This would use `chroma.js` to generate a palette based on the `main` color provided.
 
@@ -57,7 +60,7 @@ precedence. Take the following example:
 .my-app {
   --cnvs-brand-primary-base: red;
 }
-````
+```
 
 In the case of the `CanvasProvider` prior to v14, all our brand tokens where defined within a class
 and scoped to the `div` that the `CanvasProvider` created. This meant that anything set on `:root`

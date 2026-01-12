@@ -1,11 +1,11 @@
 import * as EmotionCSS from '@emotion/css';
 import _createInstance from '@emotion/css/create-instance';
 import {
-  serializeStyles,
-  Keyframes,
-  SerializedStyles,
   CSSObject,
   ComponentSelector,
+  Keyframes,
+  SerializedStyles,
+  serializeStyles,
 } from '@emotion/serialize';
 import * as CSS from 'csstype';
 
@@ -371,7 +371,7 @@ type ToString<T> = string & T;
  */
 export type DefaultedVarsMapToCSSVarNames<
   V extends DefaultedVarsShape,
-  ID extends string | never
+  ID extends string | never,
 > = [ID] extends [never]
   ? V extends Record<string, string>
     ? {[K in keyof V]: `--${string}`}
@@ -386,10 +386,10 @@ export type DefaultedVarsMapToCSSVarNames<
 type ExtractValue<T, K> = K extends keyof T
   ? T[K]
   : K extends `${infer K1}-${infer K2}`
-  ? K1 extends keyof T
-    ? ExtractValue<T[K1], K2>
-    : never
-  : never;
+    ? K1 extends keyof T
+      ? ExtractValue<T[K1], K2>
+      : never
+    : never;
 
 /**
  * Maps CSS var names to defaulted values if possible. If no ID is provided, TypeScript won't know
@@ -407,10 +407,10 @@ export type DefaultedVarsMap<V extends DefaultedVarsShape, ID extends string> = 
   $$defaults: [ID] extends [never] // test if `ID` extends `never`.
     ? Record<string, string> // it does. It means we don't know the ID and`Record<string, string>` is as accurate as we can get
     : V extends Record<string, string> // it does not. ID is a string and we need to test what the structure looks like
-    ? {
-        [K in keyof V as CSSVarName<ID, K>]: V[K]; // The variables are a simple flat object with string values
-      }
-    : {[K in FlattenObjectKeys<V> as CSSVarName<ID, K>]: ExtractValue<V, K>};
+      ? {
+          [K in keyof V as CSSVarName<ID, K>]: V[K]; // The variables are a simple flat object with string values
+        }
+      : {[K in FlattenObjectKeys<V> as CSSVarName<ID, K>]: ExtractValue<V, K>};
 };
 
 type DefaultedVars<V extends DefaultedVarsShape, ID extends string> = DefaultedVarsMapToCSSVarNames<
@@ -423,16 +423,16 @@ type DefaultedVars<V extends DefaultedVarsShape, ID extends string> = DefaultedV
 type StencilDefaultVars<
   V extends DefaultedVarsShape,
   E extends BaseStencil<any, any, any, any, any> = never,
-  ID extends string = never
+  ID extends string = never,
 > = [E] extends [never]
   ? DefaultedVars<V, ID>
   : E extends BaseStencil<any, any, infer VE, any, infer IDE>
-  ? DefaultedVarsMapToCSSVarNames<VE, IDE> &
-      DefaultedVarsMap<VE, IDE> &
-      DefaultedVarsMapToCSSVarNames<V, ID> &
-      DefaultedVarsMap<V, ID> &
-      DefaultVarsFn<V>
-  : never;
+    ? DefaultedVarsMapToCSSVarNames<VE, IDE> &
+        DefaultedVarsMap<VE, IDE> &
+        DefaultedVarsMapToCSSVarNames<V, ID> &
+        DefaultedVarsMap<V, ID> &
+        DefaultVarsFn<V>
+    : never;
 
 type DefaultVarsFn<V extends DefaultedVarsShape> = {
   (input: OptionalVars<V>): Record<string, string>;
@@ -864,7 +864,7 @@ export function handleCsProp<
     className?: string | undefined;
 
     style?: CSS.Properties<string | number> | undefined;
-  }
+  },
 >(
   /**
    * All the props to be spread onto an element. The `cs` prop will be removed an reduced to
@@ -933,7 +933,7 @@ export function handleCsProp<
 type StylesReturn<
   P extends Record<string, string>,
   V extends DefaultedVarsShape = {},
-  E extends BaseStencil<any, any, any, any, any> = never
+  E extends BaseStencil<any, any, any, any, any> = never,
 > =
   | SerializedStyles
   | CSSObjectWithVars
@@ -941,27 +941,27 @@ type StylesReturn<
       vars: [E] extends [never]
         ? RequiredVars<V> & StencilVarsParts<P>
         : [E] extends [BaseStencil<any, infer PE, infer VE, any, any>]
-        ? RequiredVars<VE & V> & StencilVarsParts<PE & P>
-        : never
+          ? RequiredVars<VE & V> & StencilVarsParts<PE & P>
+          : never
     ) => SerializedStyles | CSSObjectWithVars);
 
 export type StencilModifierConfig<
   P extends Record<string, string>,
   V extends DefaultedVarsShape = {},
-  E extends BaseStencil<any, any, any, any, any> = never
+  E extends BaseStencil<any, any, any, any, any> = never,
 > = Record<string, Record<string, StylesReturn<P, V, E>>>;
 
 export type StencilCompoundConfig<
   M,
   P extends Record<string, string>,
   V extends DefaultedVarsShape = {},
-  E extends BaseStencil<any, any, any, any, any> = never
+  E extends BaseStencil<any, any, any, any, any> = never,
 > = {
   modifiers: [E] extends [never]
     ? MappedBoolean<M>
     : [E] extends [BaseStencil<infer ME, any, any, any, any>]
-    ? MappedBoolean<ME & M>
-    : never;
+      ? MappedBoolean<ME & M>
+      : never;
   styles: StylesReturn<P, V, E>;
 };
 
@@ -969,7 +969,7 @@ export type MappedBoolean<T> = {[K in keyof T]?: MaybeBoolean<keyof T[K]>};
 
 type ModifierValuesStencil<
   M extends StencilModifierConfig<any, any, any> = {},
-  V extends DefaultedVarsShape = {}
+  V extends DefaultedVarsShape = {},
 > = {
   [K in keyof M]?: K extends keyof V
     ? MaybeBoolean<keyof M[K]> | (string & {}) // If both modifiers and variables define the same key, the value can be either a modifier or a string
@@ -981,7 +981,7 @@ export interface StencilConfig<
   P extends Record<string, string> = {},
   V extends DefaultedVarsShape = {},
   E extends BaseStencil<any, any, any, any, any> = never,
-  ID extends string | never = never
+  ID extends string | never = never,
 > {
   /**
    * A Stencil can extend another stencil. Styles are not copied from one stencil to another, but
@@ -1181,13 +1181,13 @@ export interface StencilConfig<
   defaultModifiers?: [E] extends [never]
     ? StencilDefaultModifierReturn<M>
     : E extends BaseStencil<infer ME, any, any, any, any>
-    ? StencilDefaultModifierReturn<ME & M>
-    : undefined;
+      ? StencilDefaultModifierReturn<ME & M>
+      : undefined;
 }
 
 type StencilModifierReturn<
   M extends StencilModifierConfig<any, V>,
-  V extends DefaultedVarsShape
+  V extends DefaultedVarsShape,
 > = {
   [K1 in keyof M]: {[K2 in keyof M[K1]]: string};
 };
@@ -1201,7 +1201,7 @@ export interface BaseStencil<
   P extends Record<string, string> = {},
   V extends DefaultedVarsShape = {},
   E extends BaseStencil<any, any, any, any, any> = never,
-  ID extends string = never
+  ID extends string = never,
 > {
   __extends?: E;
   __vars: V;
@@ -1215,15 +1215,15 @@ export interface Stencil<
   P extends Record<string, string> = {},
   V extends DefaultedVarsShape = {},
   E extends BaseStencil<any, any, any, any, any> = never,
-  ID extends string = never
+  ID extends string = never,
 > extends BaseStencil<M, P, V, E, ID> {
   (
     // If this stencil extends another stencil, merge the inputs
     options?: [E] extends [never]
       ? ModifierValuesStencil<M, V> & VariableValuesStencil<V>
       : E extends BaseStencil<infer ME, any, infer VE, any, any>
-      ? ModifierValuesStencil<ME & M, VE & V> & VariableValuesStencil<VE & V>
-      : never
+        ? ModifierValuesStencil<ME & M, VE & V> & VariableValuesStencil<VE & V>
+        : never
   ): {
     className: string;
     style?: Record<string, string>;
@@ -1241,9 +1241,10 @@ export interface Stencil<
     : StencilDefaultModifierReturn<M>;
 }
 
-type VariableValuesStencil<V extends DefaultedVarsShape> = V extends Record<string, string>
-  ? {[K in keyof V]?: string}
-  : {[K1 in keyof V]?: {[K2 in keyof V[K1]]: string}};
+type VariableValuesStencil<V extends DefaultedVarsShape> =
+  V extends Record<string, string>
+    ? {[K in keyof V]?: string}
+    : {[K1 in keyof V]?: {[K2 in keyof V[K1]]: string}};
 
 function onlyDefined<T>(input: T | undefined): input is T {
   return !!input;
@@ -1324,12 +1325,12 @@ export function createStencil<
   const P extends Record<string, string> = {},
   V extends DefaultedVarsShape = {},
   E extends BaseStencil<any, any, any, any, any> = never, // use BaseStencil to avoid infinite loops
-  ID extends string = never
+  ID extends string = never,
 >(config: StencilConfig<M, P, V, E, ID>, id?: ID): Stencil<M, P, V, E, ID> {
   const {parts, vars, base, modifiers, compound, defaultModifiers} = config;
   const composes = config.extends as unknown as Stencil<any, any> | undefined;
   const _parts = makePartProps({...composes?.__parts, ...parts}) as [E] extends [
-    BaseStencil<any, infer PE extends Record<string, string>, any, any, any>
+    BaseStencil<any, infer PE extends Record<string, string>, any, any, any>,
   ]
     ? StencilPartProps<PE & P>
     : StencilPartProps<P>;
@@ -1420,15 +1421,18 @@ export function createStencil<
     // If the input is an object, we need to filter out the keys that are in both _vars and
     // _modifiers where the input value is a valid modifier value.
     const varInput = input
-      ? Object.keys(input).reduce((result, key) => {
-          if (
-            key in _vars &&
-            !(key in _modifiers && input[key] in _modifiers[key as keyof typeof _modifiers])
-          ) {
-            result[key] = input[key];
-          }
-          return result;
-        }, {} as Record<string, string>)
+      ? Object.keys(input).reduce(
+          (result, key) => {
+            if (
+              key in _vars &&
+              !(key in _modifiers && input[key] in _modifiers[key as keyof typeof _modifiers])
+            ) {
+              result[key] = input[key];
+            }
+            return result;
+          },
+          {} as Record<string, string>
+        )
       : {};
 
     return {
