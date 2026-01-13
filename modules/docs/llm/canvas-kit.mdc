@@ -127,14 +127,28 @@ const buttonStencil = createStencil({
 
 ### Using the `cs` Prop
 
-The `cs` prop merges `className` and `style` attributes safely and consistently:
+The `cs` prop accepts styles created by `createStyles`, `createStencil`, or `createVars`. Canvas Kit
+components already handle style merging internally via `handleCsProp`:
 
 ```tsx
-// ✅ Good - Use cs prop
-<PrimaryButton cs={[baseStyles, variantStyles]} />
+// ✅ Good - Pass styles to cs prop on Canvas Kit components
+<PrimaryButton cs={myCustomStyles} />
 
-// ❌ Avoid - Manual className concatenation
-<PrimaryButton className={`${baseStyles} ${variantStyles}`} />
+// ✅ Good - Multiple styles via array
+<PrimaryButton cs={[baseStyles, variantStyles]} />
+```
+
+**Important:** When building custom components, use `handleCsProp` to properly merge `className`,
+`style`, and `cs` props. Do not manually concatenate class names:
+
+```tsx
+// ✅ Good - Use handleCsProp in custom components
+const MyComponent = elemProps => {
+  return <div {...handleCsProp(elemProps, myStyles)} />;
+};
+
+// ❌ Avoid - Manual className concatenation loses style merging
+<div className={`${baseStyles} ${variantStyles}`} />;
 ```
 
 ### CSS Logical Properties for RTL Support
@@ -518,14 +532,3 @@ const {checked = false, disabled = false} = props;
 - Avoid default exports
 - Export everything else as named exports (`export * from ...`)
 - Consider naming of exports to avoid clashes
-
-### Element Choice
-
-- Use the correct native element wherever possible
-- This enables browser behavior for free (keyboard handling, focus management, etc.)
-
-### Server Side Rendering (SSR)
-
-- Cannot reference global objects (`window`, `document`) before component is hydrated/mounted
-- Only safe to use within `componentDidMount`, `useEffect`, and `useLayoutEffect`
-- Check `typeof window !== 'undefined'` if needed in avoided places
