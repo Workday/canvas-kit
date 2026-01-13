@@ -234,18 +234,68 @@ const [value, setValue] = useState('');
 
 ### Prop Spreading Pattern
 
-Extend HTML element interfaces and intentionally destructure props:
+Use Canvas Kit utility functions to handle ref forwarding and HTML attribute extraction:
+
+**For simple components**, use `createComponent`:
 
 ```tsx
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+import {createComponent} from '@workday/canvas-kit-react/common';
+
+interface ButtonProps {
   variant: 'primary' | 'secondary';
   size: 'small' | 'medium' | 'large';
+  children: React.ReactNode;
 }
 
-const Button = ({variant, size, ...elemProps}: ButtonProps) => {
-  return <button {...elemProps} />;
-};
+export const Button = createComponent('button')({
+  displayName: 'Button',
+  Component: ({variant, size, children, ...elemProps}: ButtonProps, ref, Element) => {
+    return (
+      <Element ref={ref} {...elemProps}>
+        {children}
+      </Element>
+    );
+  },
+});
 ```
+
+`createComponent` automatically handles:
+- Ref forwarding
+- HTML attribute extraction based on the element type
+- The `as` prop for changing the rendered element
+- Proper TypeScript typing
+
+**For compound components with models**, use `createContainer` and `createSubComponent`:
+
+```tsx
+import {createContainer, createSubComponent} from '@workday/canvas-kit-react/common';
+
+// Container component
+export const Disclosure = createContainer()({
+  displayName: 'Disclosure',
+  modelHook: useDisclosureModel,
+  subComponents: {
+    Target: DisclosureTarget,
+    Content: DisclosureContent,
+  },
+})<DisclosureProps>(({children}) => {
+  return <>{children}</>;
+});
+
+// Sub-component
+export const DisclosureTarget = createSubComponent('button')({
+  modelHook: useDisclosureModel,
+})<DisclosureTargetProps>((elemProps, Element, model) => {
+  return (
+    <Element
+      onClick={() => model.events.toggle()}
+      {...elemProps}
+    />
+  );
+});
+```
+
+These utilities handle ref forwarding, HTML attribute extraction, and model context automatically.
 
 ### CanvasProvider
 
