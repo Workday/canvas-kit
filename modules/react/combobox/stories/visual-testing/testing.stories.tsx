@@ -40,7 +40,7 @@ export const ComboboxStates = {
             // eslint-disable-next-line react-hooks/rules-of-hooks
             React.useLayoutEffect(() => {
               if (visibility === 'visible') {
-                model.events.setWidth(model.state.inputRef.current.clientWidth);
+                model.events.setWidth(model.state.inputRef.current.getBoundingClientRect().width);
               }
             }, [visibility, model.events, model.state.inputRef]);
             return (
