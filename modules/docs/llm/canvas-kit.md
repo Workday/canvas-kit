@@ -127,7 +127,7 @@ const buttonStencil = createStencil({
 
 ### Using the `cs` Prop
 
-The `cs` prop accepts styles created by `createStyles`, `createStencil`, or `createVars`. Canvas Kit
+The `cs` prop accepts styles created by `createStyles`, `createStencil`, or a class name. Canvas Kit
 components already handle style merging internally via `handleCsProp`:
 
 ```tsx
@@ -260,6 +260,7 @@ export const Button = createComponent('button')({
 ```
 
 `createComponent` automatically handles:
+
 - Ref forwarding
 - HTML attribute extraction based on the element type
 - The `as` prop for changing the rendered element
@@ -286,12 +287,7 @@ export const Disclosure = createContainer()({
 export const DisclosureTarget = createSubComponent('button')({
   modelHook: useDisclosureModel,
 })<DisclosureTargetProps>((elemProps, Element, model) => {
-  return (
-    <Element
-      onClick={() => model.events.toggle()}
-      {...elemProps}
-    />
-  );
+  return <Element onClick={() => model.events.toggle()} {...elemProps} />;
 });
 ```
 
