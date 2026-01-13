@@ -51,7 +51,7 @@
     "@workday/canvas-kit-react": "^14.2.4",
     "@workday/canvas-kit-styling": "^14.2.4",
     "@workday/canvas-system-icons-web": "^3.0.36",
-    "@workday/canvas-tokens-web": "4.0.0-alpha.7",
+    "@workday/canvas-tokens-web": "4.0.0-alpha.8",
     "@workday/design-assets-types": "^0.2.10",
     "chroma-js": "^2.2.0",
     "lodash.flatten": "^4.4.0",
