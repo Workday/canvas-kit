@@ -34,7 +34,7 @@ export const AlternatePanel = () => {
   const {expanded, panelProps, labelProps, controlProps} = useSidePanel();
 
   return (
-    <CanvasProvider theme={{canvas: {direction}}}>
+    <CanvasProvider dir={direction}>
       <Flex cs={stylesOverride.viewport}>
         <SidePanel {...panelProps} variant="alternate">
           <SidePanel.ToggleButton {...controlProps} />

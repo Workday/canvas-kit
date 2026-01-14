@@ -2,7 +2,7 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/react';
 import React from 'react';
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {
   ComponentStatesTable,
   permutateProps,
@@ -82,7 +82,7 @@ export const ExternalHyperlinkStates = {
           jumps over the lazy dog
         </BodyText>
       </Flex>
-      <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
+      <CanvasProvider dir="rtl">
         <Flex flexDirection="column" gap="xxs">
           <Subtext size="large">
             The quick{' '}

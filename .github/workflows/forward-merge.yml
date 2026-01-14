@@ -94,7 +94,7 @@ jobs:
 
       - uses: Workday/canvas-kit-actions/install@v1
         with:
-          node_version: 18.x
+          node_version: 22.x
 
       ## A `yarn bump` will create a commit and a tag. We need to set up the git user to do this.
       ## We'll make that user be the github-actions user.

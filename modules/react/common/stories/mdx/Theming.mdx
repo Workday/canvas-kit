@@ -12,6 +12,13 @@ Canvas Kit v14 introduces a significant shift in our approach to theming: we've 
 JavaScript-based theme objects to CSS variables. This change provides better performance, improved
 developer experience, and greater flexibility for theming applications.
 
+> **📌 Quick Start:**
+> 1. **Import CSS variables once** at the root level of your application (e.g., in `index.css`)
+> 2. **Override tokens at `:root`** for global theming — this is the recommended approach
+> 3. **Use `CanvasProvider` scoped theming only** for specific scenarios like multi-brand sections or embedded components
+>
+> If your application renders within an environment that already imports these CSS variables, **do not re-import them**.
+
 ## Migration from v10 Theme Prop to v14 CSS Variables
 
 ### The Evolution
@@ -48,6 +55,8 @@ via a `className` scoping those brand variables to a wrapping div. In order for 
 better solution to theming that is scalable and is more aligned with our CSS variables, we changed
 this approach.
 
+**Note:** While we support theme overrides, we advise to use global theming via CSS Variables.
+
 ## What is a Cascade Barrier?
 
 When we say "cascade barrier", we're talking about how
@@ -69,6 +78,47 @@ In the case of the `CanvasProvider` prior to v14, all our brand tokens where def
 and scoped to the `div` that the `CanvasProvider` created. This meant that anything set on `:root`
 or outside of the `CanvasProvider` would not be able to cascade down to the components within the
 `CanvasProvider`.
+
+If you provide a `theme` to the `CanvasProvider`, it will create a scoped theme. Note that in v14, global CSS variables are the recommended way to theme Popups and Modals consistently.
+
+## Global vs Scoped Theming
+
+Canvas Kit v14 supports two theming strategies: **global theming** and **scoped theming**. Understanding the difference is important to avoid unexpected behavior.
+
+### Global Theming
+
+Global theming applies CSS variables at the `:root` level, making them available throughout your entire application. This is the **recommended approach** for most use cases.
+
+```css
+@import '@workday/canvas-tokens-web/css/base/_variables.css';
+:root {
+	// This is showing how you can change the value of a token at the root level of your application.
+  --cnvs-brand-primary-base: var(--cnvs-base-palette-magenta-600);
+}
+```
+
+### Scoped Theming
+
+Scoped theming applies CSS variables to a specific section of your application using the `CanvasProvider` with either a `className` or `theme` prop. The theme only affects components within that provider.
+
+```tsx
+// Using the theme prop for scoped theming. This will set the [brand.primary.**] tokens to shades of purple.
+<CanvasProvider theme={{canvas: {palette: {primary: {main: 'purple'}}}}}>
+  <ScopedSection />
+</CanvasProvider>
+```
+
+> **⚠️ Warning:** Scoped theming creates a cascade barrier that **will break global theming**. Any CSS variables defined at `:root` will be overridden by the scoped theme. Only the tokens explicitly defined in the `theme` prop will be changed - other tokens will use their default values, not your global overrides.
+
+### When to Use Scoped Theming
+
+Only use scoped theming when you intentionally need a different theme for a specific section of your application, such as:
+
+- Embedding a Canvas Kit component in a third-party application with a different brand
+- Creating a preview panel that shows components with different themes
+- Supporting multi-tenant applications where sections have different branding
+
+For all other cases, use global theming at `:root` to ensure consistent theming throughout your application.
 
 ## ✅ Preferred Approach (v14+)
 
@@ -140,13 +190,10 @@ const themedBrand = createStyles({
 Previously, the `usePopupStack` hook created a CSS class name that was passed to our Popups. We attached those theme styles to that class name. This allowed the theme to be available in our Popups. But it also created a cascade barrier that blocked the global theme from being applied to our Popup components.
 Because we now use global CSS variables, we no longer need this class name to provide the global theme to Popups. But we have to remove this generated class name to allow the global theme to be applied to Popups.
 
-> **Important:** Passing a `theme` to the `CanvasProvider` **will not** theme components in Modals
-> and Dialogs. You can either pass a `className` or define CSS variables at the root.
-
 **Before in v13**
 
 ```tsx
-// When passing a theme to the Canvas Provider, the `usePopupStack` would grab the theme and generate a class to forward the theme to Modals and Dialogs. This would create a cascade barrier for any CSS variables deinfed at the root.
+// When passing a theme to the Canvas Provider, the `usePopupStack` would grab the theme and generate a class to forward the theme to Modals and Dialogs. This would create a cascade barrier for any CSS variables defined at the root.
 <CanvasProvider theme={{canvas: {palette: {primary: {main: 'blue'}}}}}>
   <Modal>//... rest of modal code</Modal>
 </CanvasProvider>
@@ -223,29 +270,6 @@ System tokens define component-specific values.
 }
 ```
 
-### App-Specific Theming
-
-```tsx
-import {createStyles} from '@workday/canvas-kit-styling';
-import {brand, base} from '@workday/canvas-tokens-web';
-import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {CanvasProvider} from '@workday/canvas-kit-react/common';
-
-const greenTheme = createStyles({
-  [brand.primary.base]: base.green600,
-  [brand.primary.dark]: base.green700,
-  [brand.primary.darkest]: base.green800,
-  [brand.primary.light]: base.green200,
-  [brand.primary.lighter]: base.green50,
-  [brand.primary.lightest]: base.green25,
-  [brand.primary.accent]: base.neutral0,
-});
-
-<CanvasProvider className={greenTheme}>
-  <PrimaryButton>Click me</PrimaryButton>
-</CanvasProvider>;
-```
-
 <ExampleCodeBlock code={Theming} />
 
 ### Dark Mode Implementation
@@ -266,6 +290,65 @@ Canvas Kit supports RTL out of the box. Our components are styled to use
 [CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values).
 If you want to add additional styles based on RTL, you can also use the `:dir`
 [pseudo selector](https://developer.mozilla.org/en-US/docs/Web/CSS/:dir).
+
+#### Setting RTL Direction
+
+Use the native HTML `dir` attribute to set the text direction. The `CanvasProvider` accepts a `dir` prop which sets this attribute on its wrapper element:
+
+```tsx
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
+
+// Set RTL direction
+<CanvasProvider dir="rtl">
+  <App />
+</CanvasProvider>
+```
+
+You can also set it on any HTML element:
+
+```tsx
+<div dir="rtl">
+  <MyComponent />
+</div>
+```
+
+> **Note:** The `dir` attribute is the standard HTML way to set text direction. It's preferred over the deprecated `theme.canvas.direction` approach because it works natively with CSS logical properties and the `:dir()` pseudo-class.
+
+#### Using CSS Logical Properties
+
+CSS logical properties automatically adapt to the text direction. Use these instead of physical properties:
+
+```css
+/* Physical properties (don't adapt to RTL) */
+.my-component {
+  margin-left: 1rem;
+  padding-right: 1rem;
+  border-left: 1px solid;
+}
+
+/* Logical properties (adapt to RTL automatically) */
+.my-component {
+  margin-inline-start: 1rem;
+  padding-inline-end: 1rem;
+  border-inline-start: 1px solid;
+}
+```
+
+#### Conditional RTL Styles with `:dir()`
+
+For styles that need to change based on direction (like rotating icons), use the `:dir()` pseudo-class:
+
+```tsx
+import {createStyles} from '@workday/canvas-kit-styling';
+
+const rtlButtonStyles = createStyles({
+  ':dir(rtl)': {
+    svg: {
+      transform: 'rotate(180deg)',
+    },
+  },
+});
+```
 
 <ExampleCodeBlock code={RTL} />
 

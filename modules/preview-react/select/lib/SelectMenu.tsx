@@ -253,7 +253,7 @@ export const SelectMenu = ({
 
   const handleWidthChange = useCallback(() => {
     if (buttonRef && buttonRef.current && visibility !== 'closed') {
-      const newMenuWidth = buttonRef.current.clientWidth + 2;
+      const newMenuWidth = buttonRef.current.getBoundingClientRect().width;
       setWidth(newMenuWidth);
     }
   }, [buttonRef, visibility]);

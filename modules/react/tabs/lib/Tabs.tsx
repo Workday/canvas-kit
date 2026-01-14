@@ -42,7 +42,7 @@ export interface TabsProps {
  * ```
  *
  * See [Configuring a
- * Model](/getting-started/for-developers/resources/compound-components/#configuring-a-model) for
+ * Model](/get-started/for-developers/documentation/compound-components/#configuring-a-model) for
  * more information on model configuration.
  */
 export const Tabs = createContainer()({

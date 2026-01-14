@@ -1,19 +1,8 @@
 import React from 'react';
 
 import {Box} from '@workday/canvas-kit-react/layout';
-import {
-  CanvasProvider,
-  ContentDirection,
-  PartialEmotionCanvasTheme,
-  styled,
-} from '@workday/canvas-kit-react/common';
+import {CanvasProvider, styled} from '@workday/canvas-kit-react/common';
 import {Banner} from '@workday/canvas-kit-react/banner';
-
-const theme: PartialEmotionCanvasTheme = {
-  canvas: {
-    direction: ContentDirection.RTL,
-  },
-};
 
 const StyledStickyBanner = styled(Banner)({
   position: 'absolute',
@@ -22,7 +11,7 @@ const StyledStickyBanner = styled(Banner)({
 
 export const StickyRTL = () => {
   return (
-    <CanvasProvider theme={theme}>
+    <CanvasProvider dir="rtl">
       <Box height={64}>
         <StyledStickyBanner isSticky={true}>
           <Banner.Icon />

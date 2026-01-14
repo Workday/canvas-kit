@@ -57,11 +57,11 @@ export const useComboboxInput = composeHooks(
         }
       },
       onBlur(event: React.FocusEvent) {
-        // model.events.hide(event);
+        model.events.hide(event);
       },
       onClick(event: React.MouseEvent) {
         if (model.state.visibility === 'hidden') {
-          model.events.setWidth(event.currentTarget.clientWidth);
+          model.events.setWidth(event.currentTarget.getBoundingClientRect().width);
         }
       },
       value: model.state.value,

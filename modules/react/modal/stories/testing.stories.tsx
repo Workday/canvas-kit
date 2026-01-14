@@ -1,7 +1,7 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import {customColorTheme} from '../../../../utils/storybook';
-import {ContentDirection, CanvasProvider, useTheme} from '@workday/canvas-kit-react/common';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {DeleteButton, PrimaryButton} from '@workday/canvas-kit-react/button';
 import {
@@ -182,12 +182,11 @@ export const ModalRTL = {
     },
   },
   render: () => {
-    const theme = useTheme({canvas: {direction: ContentDirection.RTL}});
     const model = useModalModel({
       initialVisibility: 'visible',
     });
     return (
-      <CanvasProvider theme={theme}>
+      <CanvasProvider dir="rtl">
         <Modal model={model}>
           <Modal.Target style={{display: 'none'}}></Modal.Target>
           <Modal.Overlay style={{animation: 'none'}}>

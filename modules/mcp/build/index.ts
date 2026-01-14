@@ -8,23 +8,14 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const llmSourceDir = path.resolve(__dirname, '../../docs/llm');
-const llmTxtSourceDir = path.resolve(__dirname, '../../docs/llm-txt');
 const targetDir = path.resolve(__dirname, '../dist/lib');
 
 /**
  * Copy a specific file from source to destination, creating directories as needed
  */
 function copyFile(relativePath: string): void {
-  // Determine source directory based on file path
-  let srcPath: string;
-  if (relativePath.startsWith('llm-txt/')) {
-    // For llm-txt files, use llm-txt source directory and remove the llm-txt/ prefix
-    const fileName = relativePath.replace('llm-txt/', '');
-    srcPath = path.resolve(llmTxtSourceDir, fileName);
-  } else {
-    // For upgrade-guides files, use llm source directory
-    srcPath = path.resolve(llmSourceDir, relativePath);
-  }
+  // All files are now in the llm source directory
+  const srcPath = path.resolve(llmSourceDir, relativePath);
   const destPath = path.resolve(targetDir, relativePath);
 
   // Check if source file exists
@@ -43,11 +34,12 @@ function copyFile(relativePath: string): void {
 }
 
 // Get file list from index.json and copy only those files
-const filesToCopy = index.upgradeGuideFiles;
+// Combine upgradeGuideFiles and tokenFiles, removing duplicates
+const allFiles = [...new Set([...index.upgradeGuideFiles, ...index.tokenFiles])];
 
-console.log(`Found ${filesToCopy.length} files to copy:`);
-filesToCopy.forEach(file => console.log(`  - ${file}`));
+console.log(`Found ${allFiles.length} files to copy:`);
+allFiles.forEach(file => console.log(`  - ${file}`));
 
-filesToCopy.forEach(file => copyFile(file));
+allFiles.forEach(file => copyFile(file));
 
 console.log('\nCopy completed successfully!');
