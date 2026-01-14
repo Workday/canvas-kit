@@ -19,7 +19,7 @@ export interface ColorPreviewProps extends TextInputProps {
 export const colorPreviewStencil = createStencil({
   base: {
     backgroundColor: system.color.bg.default,
-    borderColor: system.color.border.inverse,
+    borderColor: system.color.border.inverse.default,
     pointerEvents: 'none',
   },
 });

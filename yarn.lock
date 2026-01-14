@@ -2264,11 +2264,6 @@
     "@eslint/core" "^0.17.0"
     levn "^0.4.1"
 
-"@hono/node-server@^1.19.7":
-  version "1.19.7"
-  resolved "https://registry.yarnpkg.com/@hono/node-server/-/node-server-1.19.7.tgz#ecb2d3a7af40d1d378e53ce1fc1219f199fbcd6f"
-  integrity sha512-vUcD0uauS7EU2caukW8z5lJKtoGMokxNbJtBiwHgpqxEXokaHCBkQUmCHhjFB1VUTWdqj25QoMkMKzgjq+uhrw==
-
 "@humanfs/core@^0.19.1":
   version "0.19.1"
   resolved "https://registry.yarnpkg.com/@humanfs/core/-/core-0.19.1.tgz#17c55ca7d426733fe3c561906b8173c336b40a77"
@@ -4282,10 +4277,10 @@
   dependencies:
     "@workday/design-assets-types" "0.2.10"
 
-"@workday/canvas-tokens-web@4.0.0-alpha.3":
-  version "4.0.0-alpha.3"
-  resolved "https://registry.yarnpkg.com/@workday/canvas-tokens-web/-/canvas-tokens-web-4.0.0-alpha.3.tgz#a705aeb5201a7d08d16a09a2ade7a48b270692eb"
-  integrity sha512-4G5t83xPnIFzksiSB0aU6xOYp9Svx8W1JYkaGCo1l90oaP0hktaMv1876gR/VAbtcwL53sk8j0TP6fDvkZuaVQ==
+"@workday/canvas-tokens-web@4.0.0-alpha.8":
+  version "4.0.0-alpha.8"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-tokens-web/-/canvas-tokens-web-4.0.0-alpha.8.tgz#3892d7d5087f851a518895ba31d32a9b1c0336e1"
+  integrity sha512-j2OjxiIk4vn+ByhiBgT+bzK+k7DzbLQFvMuKVLhTVbvCebUwo+aRSlzhV74Vw78v87kpNbETserPopnMKVbKew==
 
 "@workday/design-assets-types@0.2.10", "@workday/design-assets-types@^0.2.10":
   version "0.2.10"

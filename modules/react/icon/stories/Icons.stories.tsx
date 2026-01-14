@@ -90,8 +90,8 @@ export const SystemIconStory = {
       <SystemIcon
         className="custom-class"
         icon={activityStreamIcon}
-        accent={system.color.fg.primary.default}
-        fill={system.color.fg.primary.default}
+        accent={system.color.brand.fg.primary.default}
+        fill={system.color.brand.fg.primary.default}
         background={system.color.fg.inverse}
       />
       <br />
