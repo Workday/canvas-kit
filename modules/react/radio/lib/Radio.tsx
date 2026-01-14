@@ -11,7 +11,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {LabelText} from '@workday/canvas-kit-react/text';
 import {borderRadius, colors, inputColors, space} from '@workday/canvas-kit-react/tokens';
-import {px2rem} from '@workday/canvas-kit-styling';
+import {cssVar, maybeWrapCSSVariables, px2rem} from '@workday/canvas-kit-styling';
 
 /**
  * @deprecated ⚠️ `RadioProps` in Main has been deprecated and will be removed in a future major version. Please use [`Radio` in Preview](https://workday.github.io/canvas-kit/?path=/docs/preview-inputs-radio--docs) instead.
@@ -264,8 +264,8 @@ const RadioCheck = styled('div')<Pick<RadioProps, 'checked' | 'variant'>>(
   ({theme, variant}) => ({
     backgroundColor:
       variant === 'inverse'
-        ? theme.canvas.palette.primary.main
-        : theme.canvas.palette.primary.contrast,
+        ? maybeWrapCSSVariables(theme.canvas.palette.primary.main)
+        : maybeWrapCSSVariables(theme.canvas.palette.primary.contrast),
   }),
   ({checked}) => ({
     opacity: checked ? 1 : 0,
