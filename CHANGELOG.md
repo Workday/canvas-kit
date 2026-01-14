@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.2.6](https://github.com/Workday/canvas-kit/releases/tag/v14.2.6) (2026-01-13)
+
+### Components
+
+- fix: Use getBoundingClientRect for popup width measurement ([#3686](https://github.com/Workday/canvas-kit/pull/3686)) ([@Zav39](https://github.com/Zav39))
+
+
 ## [v14.2.5](https://github.com/Workday/canvas-kit/releases/tag/v14.2.5) (2026-01-08)
 
 
