@@ -11,7 +11,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {LabelText} from '@workday/canvas-kit-react/text';
 import {borderRadius, colors, inputColors, space} from '@workday/canvas-kit-react/tokens';
-import {cssVar, maybeWrapCSSVariables, px2rem} from '@workday/canvas-kit-styling';
+import {maybeWrapCSSVariables, px2rem} from '@workday/canvas-kit-styling';
 
 /**
  * @deprecated ⚠️ `RadioProps` in Main has been deprecated and will be removed in a future major version. Please use [`Radio` in Preview](https://workday.github.io/canvas-kit/?path=/docs/preview-inputs-radio--docs) instead.
