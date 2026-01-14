@@ -94,7 +94,7 @@ const switchInputStencil = createStencil({
       error: {
         '& ~ div:first-of-type': {
           boxShadow: `
-              0 0 0 ${px2rem(2)} ${system.color.border.inverse},
+              0 0 0 ${px2rem(2)} ${system.color.border.inverse.default},
               0 0 0 ${system.space.x1} ${brand.common.errorInner},
               0 0 0 ${px2rem(5)} transparent`,
         },
@@ -102,7 +102,7 @@ const switchInputStencil = createStencil({
       caution: {
         '& ~ div:first-of-type': {
           boxShadow: `
-          0 0 0 ${px2rem(2)} ${system.color.border.inverse},
+          0 0 0 ${px2rem(2)} ${system.color.border.inverse.default},
           0 0 0 ${system.space.x1} ${brand.common.alertInner},
           0 0 0 ${px2rem(5)} ${brand.common.alertOuter}`,
         },
