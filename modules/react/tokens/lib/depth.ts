@@ -1,3 +1,4 @@
+/** @deprecated ⚠️ `CanvasDepth` has been deprecated in a future major version. Please use our css var based [`depth tokens`](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-depth--docs) tokens. */
 export type CanvasDepth = {
   /**
    * ### Depth None
@@ -113,6 +114,7 @@ export type CanvasDepth = {
 };
 
 type ValueOf<T> = T[keyof T];
+/** @deprecated ⚠️ `CanvasDepthValues` has been deprecated in a future major version. Please use our css var based [`depth tokens`](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-depth--docs) tokens. */
 export type CanvasDepthValues = ValueOf<CanvasDepth>;
 
 /**
@@ -135,9 +137,8 @@ export type CanvasDepthValues = ValueOf<CanvasDepth>;
  *   );
  * }
  * ```
- *
+ * @deprecated ⚠️ `depth` has been deprecated in a future major version. Please use our css var based [`depth tokens`](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-depth--docs) tokens.
  */
-
 export const depth: CanvasDepth = {
   none: {
     boxShadow: 'none',

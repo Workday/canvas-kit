@@ -51,7 +51,7 @@ export const RightOrigin = () => {
   const {direction, toggleDirection} = useDirection();
 
   return (
-    <CanvasProvider theme={{canvas: {direction}}}>
+    <CanvasProvider dir={direction}>
       <Flex cs={stylesOverride.viewport}>
         <Flex as="main" cs={stylesOverride.main}>
           <Text as="p" typeLevel="body.large">

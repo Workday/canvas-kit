@@ -1,5 +1,5 @@
 import React from 'react';
-import {useIsRTL, createElemPropsHook, slugify} from '@workday/canvas-kit-react/common';
+import {createElemPropsHook, slugify} from '@workday/canvas-kit-react/common';
 
 import {getCursor, isCursor} from './useCursorListModel';
 import {keyboardEventToCursorEvents} from './keyUtils';
@@ -29,7 +29,6 @@ export const useListItemRovingFocus = createElemPropsHook(useListModel)(
     stateRef.current = model.state;
 
     const keyElementRef = React.useRef<HTMLElement | null>(null);
-    const isRTL = useIsRTL();
 
     React.useEffect(() => {
       // If the cursor change was triggered by this hook, we should change focus
@@ -53,7 +52,7 @@ export const useListItemRovingFocus = createElemPropsHook(useListModel)(
 
     return {
       onKeyDown(event: React.KeyboardEvent<HTMLElement>) {
-        const handled = keyboardEventToCursorEvents(event, model, isRTL);
+        const handled = keyboardEventToCursorEvents(event, model);
         if (handled) {
           event.preventDefault();
           keyElementRef.current = event.currentTarget;

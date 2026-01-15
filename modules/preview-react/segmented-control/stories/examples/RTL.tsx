@@ -1,4 +1,4 @@
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {
   gridIcon,
   listViewIcon,
@@ -8,7 +8,7 @@ import {
 import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
 
 export const RTL = () => (
-  <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
+  <CanvasProvider dir="rtl">
     <SegmentedControl initialValue="list-detail">
       <SegmentedControl.List aria-label="View type">
         <SegmentedControl.Item data-id="table" icon={gridIcon}>
