@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.51](https://github.com/Workday/canvas-kit/releases/tag/v13.2.51) (2026-01-15)
+
+### Components
+
+- fix: Add variant type to insights ([#3685](https://github.com/Workday/canvas-kit/pull/3685)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, Alan Smith)
+
+
 ## [v13.2.50](https://github.com/Workday/canvas-kit/releases/tag/v13.2.50) (2026-01-06)
 
 ### Components
