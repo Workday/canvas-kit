@@ -1,4 +1,4 @@
-import {flex, FlexStyleProps} from '../lib/utils/flex';
+import {FlexStyleProps, flex} from '../lib/utils/flex';
 
 describe('Flex Style Props Function', () => {
   it('should ignore non-flex props', () => {

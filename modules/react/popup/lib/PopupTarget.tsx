@@ -1,7 +1,7 @@
-import {createSubcomponent} from '@workday/canvas-kit-react/common';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
+import {createSubcomponent} from '@workday/canvas-kit-react/common';
 
-import {usePopupTarget, usePopupModel} from './hooks';
+import {usePopupModel, usePopupTarget} from './hooks';
 
 export interface PopupTargetProps {}
 

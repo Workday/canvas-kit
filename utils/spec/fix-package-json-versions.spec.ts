@@ -1,5 +1,6 @@
-import fixPackageJsonVersions from '../fix-package-json-versions';
 import {stripIndent} from 'common-tags';
+
+import fixPackageJsonVersions from '../fix-package-json-versions';
 
 describe('updatePackageJson', () => {
   it('should replace a matched dependency with the provided version', () => {

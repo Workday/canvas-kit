@@ -5,9 +5,8 @@
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
   "sideEffects": false,
-  "main": "dist/commonjs/index.js",
-  "module": "dist/es6/index.js",
-  "types": "dist/es6/index.d.ts",
+  "main": "index.ts",
+  "module": "index.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/Workday/canvas-kit.git",
@@ -16,7 +15,6 @@
   "files": [
     "package.json",
     "lib/*",
-    "index.js",
     "dist/*",
     "index.ts",
     "testing.ts"
@@ -39,8 +37,8 @@
   "dependencies": {
     "@emotion/serialize": "^1.0.2",
     "@workday/canvas-kit-styling": "^14.2.9",
-    "@workday/canvas-tokens-web": "^3.1.1",
-    "stylis": "4.0.13",
+    "@workday/canvas-tokens-web": "4.0.0-alpha.8",
+    "stylis": "4.3.6",
     "ts-node": "^10.9.1",
     "typescript": "5.0"
   },

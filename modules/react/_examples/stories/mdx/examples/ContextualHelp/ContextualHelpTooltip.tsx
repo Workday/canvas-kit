@@ -1,12 +1,13 @@
-import {PrimaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
-import {infoIcon} from '@workday/canvas-system-icons-web';
-import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {FormField} from '@workday/canvas-kit-react/form-field';
-import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {Flex} from '@workday/canvas-kit-react/layout';
-import {createStyles} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
 import React from 'react';
+
+import {PrimaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {infoIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
 const outerContainerStyles = createStyles({
   flexDirection: 'column',

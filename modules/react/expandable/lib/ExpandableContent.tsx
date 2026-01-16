@@ -1,12 +1,12 @@
 import React from 'react';
 
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {Box, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 import {useExpandableContent} from './hooks/useExpandableContent';
 import {useExpandableModel} from './hooks/useExpandableModel';
-import {createStencil} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
 
 export interface ExpandableContentProps extends ExtractProps<typeof Box, never> {
   /**

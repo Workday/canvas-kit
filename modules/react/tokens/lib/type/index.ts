@@ -1,8 +1,8 @@
-import {fontFamilies, CanvasFontFamilies} from './fontFamilies';
-import {fontSizes, CanvasFontSizes} from './fontSizes';
-import {fontWeights, CanvasFontWeights} from './fontWeights';
-import {levels, CanvasTypeHierarchy} from './levels';
-import {variants, CanvasTypeVariants} from './variants';
+import {CanvasFontFamilies, fontFamilies} from './fontFamilies';
+import {CanvasFontSizes, fontSizes} from './fontSizes';
+import {CanvasFontWeights, fontWeights} from './fontWeights';
+import {CanvasTypeHierarchy, levels} from './levels';
+import {CanvasTypeVariants, variants} from './variants';
 
 export {fontFamily, monoFontFamily} from './fontFamilies';
 

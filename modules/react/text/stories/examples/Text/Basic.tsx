@@ -1,8 +1,8 @@
 import React from 'react';
 
-import {type, typeColors} from '@workday/canvas-kit-react/tokens';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {Text} from '@workday/canvas-kit-react/text';
+import {type, typeColors} from '@workday/canvas-kit-react/tokens';
 
 export const Basic = () => (
   <Box>

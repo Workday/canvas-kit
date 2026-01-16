@@ -1,4 +1,4 @@
-module.exports = pascalCaseName => `
+const componentContent = pascalCaseName => `
 import React from 'react';
 
 import {
@@ -36,3 +36,5 @@ export const ${pascalCaseName}Content = createSubcomponent('p')({
   );
 });
 `;
+
+export default componentContent;

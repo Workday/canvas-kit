@@ -1,8 +1,9 @@
+import React from 'react';
+
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {BodyText} from '@workday/canvas-kit-react/text';
 import {Placement} from '@workday/canvas-kit-react/popup';
-import React from 'react';
+import {BodyText} from '@workday/canvas-kit-react/text';
 
 interface PopperControllerProps {
   marginLeftBtn: number;

@@ -1,10 +1,13 @@
+import {Meta} from '@storybook/blocks';
+
 import {ExampleCodeBlock, Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
-import {Link} from './examples/Hyperlink';
-import {LinkInverse} from './examples/HyperlinkInverse';
+
 import {ExternalLink} from './examples/ExternalHyperlink';
 import {ExternalLinkInverse} from './examples/ExternalHyperlinkInverse';
-import {StandaloneLink} from './examples/StandaloneHyperlink';
+import {Link} from './examples/Hyperlink';
 import {InBodyText} from './examples/HyperlinkInBodyText';
+import {LinkInverse} from './examples/HyperlinkInverse';
+import {StandaloneLink} from './examples/StandaloneHyperlink';
 
 import * as HyperlinkStories from './Hyperlink.stories';
 
@@ -115,4 +118,4 @@ link on a dark or colorful background.
 
 ## Specifications
 
-<Specifications file="Hyperlink.spec.ts" name="Hyperlink" />
+<Specifications file="./cypress/component/Hyperlink.spec.tsx" name="Hyperlink" />

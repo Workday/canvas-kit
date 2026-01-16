@@ -1,10 +1,10 @@
 import React from 'react';
 
-import {FunctionValue, FunctionParameter} from '../../docgen/docTypes';
+import {FunctionParameter, FunctionValue} from '../../docgen/docTypes';
 import {DescriptionTooltip} from '../DescriptionTooltip';
 import {MdxJSToJSX} from '../MDXElements';
-import {registerWidget, Value} from '../Value';
-import {RenderContext, IndentLevelContext, indent, renderTypeParameters} from '../widgetUtils';
+import {Value, registerWidget} from '../Value';
+import {IndentLevelContext, RenderContext, indent, renderTypeParameters} from '../widgetUtils';
 
 registerWidget<FunctionValue>('function', ({value}) => {
   const level = React.useContext(IndentLevelContext);

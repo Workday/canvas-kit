@@ -1,5 +1,6 @@
-import React from 'react';
 import styled from '@emotion/styled';
+import React from 'react';
+
 import {StatusIndicator} from '@workday/canvas-kit-react/status-indicator';
 import {space} from '@workday/canvas-kit-react/tokens';
 

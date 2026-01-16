@@ -1,5 +1,6 @@
 import {createElemPropsHook} from '@workday/canvas-kit-react/common';
 import {exclamationCircleIcon, exclamationTriangleIcon} from '@workday/canvas-system-icons-web';
+
 import {useBannerModel} from './useBannerModel';
 
 /**
