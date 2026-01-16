@@ -52,7 +52,7 @@ describe('Form Field', () => {
     });
   });
 
-  context(`given the 'Alert' story is rendered`, () => {
+  context(`given the 'Caution' story is rendered`, () => {
     beforeEach(() => {
       cy.mount(<Caution />);
     });
@@ -63,7 +63,10 @@ describe('Form Field', () => {
 
     it('should connect the input with the hint text', () => {
       cy.get('input').should('have.attr', 'aria-describedby');
-      cy.get('input').should('have.ariaDescription', 'Cannot contain numbers');
+      cy.get('input').should(
+        'have.ariaDescription',
+        'Alert: Password strength is weak, using more characters is recommended.'
+      );
     });
   });
 
@@ -78,7 +81,10 @@ describe('Form Field', () => {
 
     it('should connect the input with the hint text', () => {
       cy.get('input').should('have.attr', 'aria-describedby');
-      cy.get('input').should('have.ariaDescription', 'Must Contain a number and a capital letter');
+      cy.get('input').should(
+        'have.ariaDescription',
+        'Error: Must Contain a number and a capital letter'
+      );
     });
   });
 
