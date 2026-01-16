@@ -3,6 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.2.9](https://github.com/Workday/canvas-kit/releases/tag/v14.2.9) (2026-01-16)
+
+### Components
+
+- fix: Fix default icon colors for ToolbarIconButton and ToolbarDropdownButton ([#3691](https://github.com/Workday/canvas-kit/pull/3691)) ([@adamtbui](https://github.com/adamtbui), Adam Bui)
+
+
+## [v14.2.8](https://github.com/Workday/canvas-kit/releases/tag/v14.2.8) (2026-01-15)
+
+### Components
+
+- fix: Add variant type to insights ([#3685](https://github.com/Workday/canvas-kit/pull/3685)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, Alan Smith)
+
+
+## [v13.2.51](https://github.com/Workday/canvas-kit/releases/tag/v13.2.51) (2026-01-15)
+
+### Components
+
+- fix: Add variant type to insights ([#3685](https://github.com/Workday/canvas-kit/pull/3685)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, Alan Smith)
+## [v14.2.7](https://github.com/Workday/canvas-kit/releases/tag/v14.2.7) (2026-01-15)
+
+### Documentation
+
+- chore: Add llm cursor rules mdc ([#3684](https://github.com/Workday/canvas-kit/pull/3684)) ([@youryss](https://github.com/youryss), Youry Stancatte)
+  Added `modules/docs/llm/canvas-kit.mdc` - a Cursor/Claude rules file containing Canvas Kit best practices. Teams can add this to their `.cursor/rules/` directory to have AI assistants follow Canvas Kit conventions automatically.
+
+
+## [v14.2.6](https://github.com/Workday/canvas-kit/releases/tag/v14.2.6) (2026-01-13)
+
+### Components
+
+- fix: Use getBoundingClientRect for popup width measurement ([#3686](https://github.com/Workday/canvas-kit/pull/3686)) ([@Zav39](https://github.com/Zav39))
+
+
 ## [v14.2.5](https://github.com/Workday/canvas-kit/releases/tag/v14.2.5) (2026-01-08)
 
 

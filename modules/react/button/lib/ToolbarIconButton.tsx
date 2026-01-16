@@ -22,10 +22,10 @@ export const toolbarIconButtonStencil = createStencil({
     padding: forwardFitTokens.system.padding.none,
     height: forwardFitTokens.system.size.md,
     [buttonStencil.vars.borderRadius]: forwardFitTokens.system.shape.xs,
-    [systemIconStencil.vars.color]: system.color.fg.muted.soft,
+    [systemIconStencil.vars.color]: system.color.fg.default,
 
     '&:focus-visible, &.focus': {
-      [systemIconStencil.vars.color]: system.color.fg.muted.soft,
+      [systemIconStencil.vars.color]: system.color.fg.default,
       ...focusRing({
         width: 2,
         separation: 0,
