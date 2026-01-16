@@ -25,7 +25,7 @@ export const informationHighlightStencil = createStencil({
   modifiers: {
     informational: {
       low: {
-        borderInlineStartColor: system.color.border.info,
+        borderInlineStartColor: system.color.border.info.default,
         backgroundColor: system.color.bg.alt.soft,
         '& [data-part="information-highlight-icon"]': {
           [systemIconStencil.vars.accentColor]: system.color.icon.info.default,
@@ -34,7 +34,7 @@ export const informationHighlightStencil = createStencil({
         },
       },
       high: {
-        borderInlineStartColor: system.color.border.info,
+        borderInlineStartColor: system.color.border.info.default,
         backgroundColor: system.color.bg.info.softest,
         '& [data-part="information-highlight-icon"]': {
           [systemIconStencil.vars.accentColor]: system.color.icon.inverse,

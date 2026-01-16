@@ -14,10 +14,7 @@ const styleOverrides = {
 export const CustomColorAndAnimation = () => {
   return (
     <div className={styleOverrides.parentContainer}>
-      <LoadingDots
-        loadingDotColor={system.color.brand.fg.primary.default}
-        animationDurationMs="60ms"
-      />
+      <LoadingDots loadingDotColor={system.color.fg.primary.default} animationDurationMs="60ms" />
     </div>
   );
 };
