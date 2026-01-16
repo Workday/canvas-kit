@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.2.9](https://github.com/Workday/canvas-kit/releases/tag/v14.2.9) (2026-01-16)
+
+### Components
+
+- fix: Fix default icon colors for ToolbarIconButton and ToolbarDropdownButton ([#3691](https://github.com/Workday/canvas-kit/pull/3691)) ([@adamtbui](https://github.com/adamtbui), Adam Bui)
+
+
 ## [v14.2.8](https://github.com/Workday/canvas-kit/releases/tag/v14.2.8) (2026-01-15)
 
 ### Components
