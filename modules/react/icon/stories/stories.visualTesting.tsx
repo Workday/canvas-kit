@@ -33,20 +33,20 @@ export const SystemIconStates = () => (
         },
         {
           label: 'fill',
-          props: {fill: system.color.brand.fg.primary.default},
+          props: {fill: system.color.fg.primary.default},
         },
         {
           label: 'fill + fillHover',
           props: {
-            fill: system.color.brand.fg.primary.default,
-            fillHover: system.color.brand.fg.primary.strong,
+            fill: system.color.fg.primary.default,
+            fillHover: system.color.fg.primary.strong,
           },
         },
         {
           label: 'color + colorHover + fill + fillHover',
           props: {
-            color: system.color.brand.fg.primary.default,
-            colorHover: system.color.brand.fg.primary.strong,
+            color: system.color.fg.primary.default,
+            colorHover: system.color.fg.primary.strong,
             fill: system.color.fg.muted.default,
             fillHover: system.color.fg.muted.strong,
           },
@@ -65,8 +65,8 @@ export const SystemIconStates = () => (
         {
           label: 'color + colorHover + accent + accentHover',
           props: {
-            color: system.color.brand.fg.primary.default,
-            colorHover: system.color.brand.fg.primary.strong,
+            color: system.color.fg.primary.default,
+            colorHover: system.color.fg.primary.strong,
             accent: system.color.fg.muted.default,
             accentHover: system.color.fg.muted.strong,
           },
@@ -74,8 +74,8 @@ export const SystemIconStates = () => (
         {
           label: 'fillColor + fillHover + accent + accentHover',
           props: {
-            fill: system.color.brand.fg.primary.default,
-            fillHover: system.color.brand.fg.primary.strong,
+            fill: system.color.fg.primary.default,
+            fillHover: system.color.fg.primary.strong,
             accent: system.color.fg.caution.default,
             accentHover: system.color.fg.caution.strong,
           },
@@ -83,8 +83,8 @@ export const SystemIconStates = () => (
         {
           label: 'color + colorHover + fillColor + fillHover + accent + accentHover',
           props: {
-            color: system.color.brand.fg.primary.default,
-            colorHover: system.color.brand.fg.primary.strong,
+            color: system.color.fg.primary.default,
+            colorHover: system.color.fg.primary.strong,
             fill: system.color.fg.muted.default,
             fillHover: system.color.fg.muted.strong,
             accent: system.color.fg.caution.default,
@@ -93,13 +93,13 @@ export const SystemIconStates = () => (
         },
         {
           label: 'background',
-          props: {background: system.color.brand.fg.primary.default},
+          props: {background: system.color.fg.primary.default},
         },
         {
           label: 'background + backgroundHover',
           props: {
-            background: system.color.brand.fg.primary.default,
-            backgroundHover: system.color.brand.fg.primary.strong,
+            background: system.color.fg.primary.default,
+            backgroundHover: system.color.fg.primary.strong,
           },
         },
       ]}

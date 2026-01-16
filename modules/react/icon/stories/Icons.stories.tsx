@@ -87,11 +87,12 @@ export const SystemIconStory = {
         color={system.color.static.green.default}
         colorHover={system.color.static.green.stronger}
       />
+      foo
       <SystemIcon
         className="custom-class"
         icon={activityStreamIcon}
-        accent={system.color.brand.fg.primary.default}
-        fill={system.color.brand.fg.primary.default}
+        accent={system.color.fg.primary.default}
+        fill={system.color.fg.primary.default}
         background={system.color.fg.inverse}
       />
       <br />
