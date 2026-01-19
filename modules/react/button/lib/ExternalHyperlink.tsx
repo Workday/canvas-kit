@@ -11,6 +11,11 @@ export interface ExternalHyperlinkProps extends HyperlinkProps {
    * This value will need to be translated.
    */
   iconLabel?: string;
+  /**
+   * If set to `true`, transform the SVG's x-axis to mirror the graphic.
+   * @default false
+   */
+  shouldMirror?: boolean;
 }
 
 export const externalHyperlinkStencil = createStencil({
@@ -40,7 +45,7 @@ export const externalHyperlinkStencil = createStencil({
 export const ExternalHyperlink = createComponent('a')({
   displayName: 'ExternalHyperlink',
   Component: (
-    {children, iconLabel, variant, ...elemProps}: ExternalHyperlinkProps,
+    {children, iconLabel, variant, shouldMirror, ...elemProps}: ExternalHyperlinkProps,
     ref,
     Element
   ) => (
@@ -55,6 +60,7 @@ export const ExternalHyperlink = createComponent('a')({
         icon={extLinkIcon}
         role="img"
         aria-label={iconLabel}
+        shouldMirror={shouldMirror}
         data-part="external-hyperlink-icon"
       />
     </Element>
