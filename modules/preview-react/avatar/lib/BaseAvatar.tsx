@@ -51,6 +51,7 @@ export const baseAvatarStencil = createStencil({
     width: cssVar(size, calc.add(system.space.x10, system.space.x2)),
     height: cssVar(size, calc.add(system.space.x10, system.space.x2)),
     minWidth: cssVar(size, calc.add(system.space.x10, system.space.x2)),
+    minHeight: cssVar(size, calc.add(system.space.x10, system.space.x2)),
     backgroundColor: cssVar(backgroundColor, base.blue300),
     color: cssVar(color, base.blue800),
     display: 'flex',
