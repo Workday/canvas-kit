@@ -21,13 +21,13 @@ export const toolbarDropdownButtonStencil = createStencil({
     minWidth: forwardFitTokens.system.size.md,
     gap: forwardFitTokens.system.gap.none,
     [buttonStencil.vars.borderRadius]: forwardFitTokens.system.shape.xs,
-    [systemIconStencil.vars.color]: system.color.fg.muted.soft,
+    [systemIconStencil.vars.color]: system.color.fg.default,
 
     '&:focus-visible, &.focus': {
       [buttonStencil.vars.background]: system.color.bg.transparent.default,
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.focus.icon,
-        system.color.fg.muted.soft
+        system.color.fg.default
       ),
       ...focusRing({
         width: 2,
