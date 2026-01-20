@@ -1,5 +1,5 @@
 import {cssVar} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 
 /**
  * This file is NOT INTENDED to be used by consumers, only internally by Canvas Kit.
@@ -9,6 +9,7 @@ export const forwardFitTokens = {
     shape: {
       xs: cssVar(system.shape.xs, system.shape.x1),
       sm: cssVar(system.shape.sm, system.shape.x1Half),
+      xxl: cssVar(system.shape.xxl, system.shape.x6),
       full: cssVar(system.shape.full, system.shape.round),
     },
     size: {
@@ -67,6 +68,22 @@ export const forwardFitTokens = {
           letterSpacing: cssVar(system.letterSpacing.body.sm, base.letterSpacing200),
         },
       },
+    },
+    color: {
+      surface: {
+        transparent: cssVar(system.color.surface.transparent, system.color.bg.transparent.default),
+        alt: {
+          default: cssVar(system.color.surface.alt.default, system.color.bg.alt.soft),
+        },
+      },
+      fg: {
+        strong: cssVar(system.color.fg.strong, system.color.text.strong),
+      },
+    },
+  },
+  brand: {
+    common: {
+      focus: cssVar(brand.common.focus, brand.common.focusOutline),
     },
   },
 } as const;
