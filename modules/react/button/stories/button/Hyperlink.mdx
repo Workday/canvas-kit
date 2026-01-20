@@ -3,6 +3,7 @@ import {Link} from './examples/Hyperlink';
 import {LinkInverse} from './examples/HyperlinkInverse';
 import {ExternalLink} from './examples/ExternalHyperlink';
 import {ExternalLinkInverse} from './examples/ExternalHyperlinkInverse';
+import {ExternalLinkRTL} from './examples/ExternalHyperlinkRTL';
 
 import * as HyperlinkStories from './Hyperlink.stories';
 
@@ -53,6 +54,10 @@ This override will be needed for translations.
 link on a dark or colorful background such as `blueberry400`.
 
 <ExampleCodeBlock code={ExternalLinkInverse} />
+
+`ExternalHyperlink`s also have a `shouldMirror` prop to flip the icon for right-to-left (RTL) languages.
+
+<ExampleCodeBlock code={ExternalLinkRTL} />
 
 ### Component API
 
