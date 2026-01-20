@@ -85,24 +85,24 @@ export const ExternalHyperlinkStates = {
       <CanvasProvider dir="rtl">
         <Flex flexDirection="column" gap="xxs">
           <Subtext size="large">
-            The quick{' '}
-            <ExternalHyperlink iconLabel="Opens link in new window">brown fox</ExternalHyperlink>{' '}
-            jumps over the lazy dog
+            השועל החום{' '}
+            <ExternalHyperlink iconLabel="Opens link in new window">המהיר</ExternalHyperlink> קופץ
+            מעל הכלב העצל
           </Subtext>
           <BodyText size="small">
-            The quick{' '}
-            <ExternalHyperlink iconLabel="Opens link in new window">brown fox</ExternalHyperlink>{' '}
-            jumps over the lazy dog
+            השועל החום{' '}
+            <ExternalHyperlink iconLabel="Opens link in new window">המהיר</ExternalHyperlink> קופץ
+            מעל הכלב העצל
           </BodyText>
           <BodyText size="medium">
-            The quick{' '}
-            <ExternalHyperlink iconLabel="Opens link in new window">brown fox</ExternalHyperlink>{' '}
-            jumps over the lazy dog
+            השועל החום{' '}
+            <ExternalHyperlink iconLabel="Opens link in new window">המהיר</ExternalHyperlink> קופץ
+            מעל הכלב העצל
           </BodyText>
           <BodyText size="large">
-            The quick{' '}
-            <ExternalHyperlink iconLabel="Opens link in new window">brown fox</ExternalHyperlink>{' '}
-            jumps over the lazy dog
+            השועל החום{' '}
+            <ExternalHyperlink iconLabel="Opens link in new window">המהיר</ExternalHyperlink> קופץ
+            מעל הכלב העצל
           </BodyText>
         </Flex>
       </CanvasProvider>
