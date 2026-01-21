@@ -7,8 +7,8 @@ import {base, brand, system} from '@workday/canvas-tokens-web';
 export const forwardFitTokens = {
   system: {
     shape: {
-      xs: cssVar(system.shape.xs, system.shape.x1),
-      sm: cssVar(system.shape.sm, system.shape.x1Half),
+      xs: cssVar(system.shape.sm, system.shape.x1),
+      sm: cssVar(system.shape.md, system.shape.x2),
       xxl: cssVar(system.shape.xxl, system.shape.x6),
       full: cssVar(system.shape.full, system.shape.round),
     },
