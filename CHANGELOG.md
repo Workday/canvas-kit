@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.2.10](https://github.com/Workday/canvas-kit/releases/tag/v14.2.10) (2026-01-21)
+
+### Components
+
+- fix: Set min width on avatar so it doesn't squish ([#3698](https://github.com/Workday/canvas-kit/pull/3698)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@Copilot](https://github.com/Copilot))
+
+### Documentation
+
+- docs: Update ExternalHyperlink stories to show full RTL example ([#3695](https://github.com/Workday/canvas-kit/pull/3695)) ([@ahayes91](https://github.com/ahayes91))
+
+
 ## [v14.2.9](https://github.com/Workday/canvas-kit/releases/tag/v14.2.9) (2026-01-16)
 
 ### Components
