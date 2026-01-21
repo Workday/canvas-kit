@@ -1,17 +1,17 @@
 import React from 'react';
 
+import {DeleteButton} from '@workday/canvas-kit-react/button';
+import {useUniqueId} from '@workday/canvas-kit-react/common';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {Modal} from '@workday/canvas-kit-react/modal';
 import {
-  usePopupModel,
-  useInitialFocus,
-  useReturnFocus,
-  useFocusTrap,
   useAssistiveHideSiblings,
   useDisableBodyScroll,
+  useFocusTrap,
+  useInitialFocus,
+  usePopupModel,
+  useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
-import {DeleteButton} from '@workday/canvas-kit-react/button';
-import {Flex, Box} from '@workday/canvas-kit-react/layout';
-import {useUniqueId} from '@workday/canvas-kit-react/common';
 
 export const WithoutCloseIcon = () => {
   const longDescId = useUniqueId();

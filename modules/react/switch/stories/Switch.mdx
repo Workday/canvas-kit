@@ -1,16 +1,19 @@
+import {Meta} from '@storybook/blocks';
+
 import {
   ExampleCodeBlock,
-  SymbolDoc,
-  Specifications,
   InformationHighlight,
+  Specifications,
+  SymbolDoc,
 } from '@workday/canvas-kit-docs';
-import { Caution } from './examples/Caution';
-import { Basic } from './examples/Basic';
-import { Disabled } from './examples/Disabled';
-import { Error } from './examples/Error';
-import { LabelPosition } from './examples/LabelPosition';
-import { RefForwarding } from './examples/RefForwarding';
+
 import * as SwitchStories from './Switch.stories';
+import {Basic} from './examples/Basic';
+import {Caution} from './examples/Caution';
+import {Disabled} from './examples/Disabled';
+import {Error} from './examples/Error';
+import {LabelPosition} from './examples/LabelPosition';
+import {RefForwarding} from './examples/RefForwarding';
 
 <Meta of={SwitchStories} />
 
@@ -57,10 +60,9 @@ input component. By default, the orientation will be set to `vertical`.
 
 ### Error States
 
-Set the `error` prop of the wrapping Form Field to `"caution"` or
-`"error"` to set the Switch to the Caution or Error state, respectively. You will
-also need to set the `hintId` and `hintText` props on the Form Field to meet accessibility
-standards.
+Set the `error` prop of the wrapping Form Field to `"caution"` or `"error"` to set the Switch to the
+Caution or Error state, respectively. You will also need to set the `hintId` and `hintText` props on
+the Form Field to meet accessibility standards.
 
 The `error` prop may be applied directly to the Switch with a value of `Switch.ErrorType.Caution` or
 `Switch.ErrorType.Error` if Form Field is not being used.
@@ -84,4 +86,4 @@ Switch supports custom styling via the `cs` prop. For more information, check ou
 
 ## Specifications
 
-<Specifications file="Switch.spec.ts" name="Switch" />
+<Specifications file="./cypress/component/Switch.spec.tsx" name="Switch" />

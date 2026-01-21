@@ -1,10 +1,11 @@
 import React from 'react';
 
 import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {ExtractStencilProps, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {systemIconStencil} from '@workday/canvas-kit-react/icon';
+
 import {StatusIndicatorIcon} from './StatusIndicatorIcon';
 import {StatusIndicatorLabel} from './StatusIndicatorLabel';
 
@@ -92,7 +93,7 @@ const statusIndicatorStencil = createStencil({
         backgroundColor: system.color.fg.positive.softer,
       },
       caution: {
-        color: system.color.fg.caution.soft,
+        color: system.color.fg.caution.strong,
         backgroundColor: system.color.bg.caution.softer,
       },
       critical: {

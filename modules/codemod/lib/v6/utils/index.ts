@@ -1,9 +1,9 @@
 import {
-  ImportSpecifier,
+  API,
+  Collection,
   ImportDefaultSpecifier,
   ImportNamespaceSpecifier,
-  Collection,
-  API,
+  ImportSpecifier,
 } from 'jscodeshift';
 
 export type ImportSpecifierArray = (

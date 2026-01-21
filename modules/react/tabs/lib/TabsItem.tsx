@@ -1,31 +1,32 @@
 import * as React from 'react';
 
+import {buttonStencil} from '@workday/canvas-kit-react/button';
 import {
-  focusRing,
-  slugify,
-  createElemPropsHook,
-  composeHooks,
-  ExtractProps,
-  EllipsisText,
-  createSubcomponent,
-  useModalityType,
-  createComponent,
-} from '@workday/canvas-kit-react/common';
-import {Box, FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
-import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {
+  isSelected,
   useListItemRegister,
   useListItemRovingFocus,
-  isSelected,
   useListItemSelect,
   useOverflowListItemMeasure,
 } from '@workday/canvas-kit-react/collection';
+import {
+  EllipsisText,
+  ExtractProps,
+  composeHooks,
+  createComponent,
+  createElemPropsHook,
+  createSubcomponent,
+  focusRing,
+  slugify,
+  useModalityType,
+} from '@workday/canvas-kit-react/common';
+import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {Box, FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
 
 import {useTabsModel} from './useTabsModel';
-import {buttonStencil} from '@workday/canvas-kit-react/button';
-import {system, brand} from '@workday/canvas-tokens-web';
+
 export interface TabsItemProps
   extends ExtractProps<typeof Box, never>,
     Partial<Pick<FlexProps, 'gap'>> {
@@ -118,7 +119,7 @@ const tabItemStencil = createStencil({
       // focus outline for Windows high contrast theme
       outline: `${px2rem(2)} solid transparent`,
       ...focusRing({inset: 'outer', width: 0, separation: 2}),
-      [buttonStencil.vars.boxShadowInner]: system.color.border.inverse,
+      [buttonStencil.vars.boxShadowInner]: system.color.border.inverse.default,
       [buttonStencil.vars.boxShadowOuter]: brand.common.focusOutline,
       [systemIconStencil.vars.color]: system.color.icon.strong,
     },

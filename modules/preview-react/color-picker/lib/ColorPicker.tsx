@@ -1,13 +1,14 @@
-import {checkIcon} from '@workday/canvas-system-icons-web';
-import {ColorInput} from '@workday/canvas-kit-react/color-picker';
-import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import * as React from 'react';
+
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
+import {ColorInput} from '@workday/canvas-kit-react/color-picker';
 import {FormField} from '@workday/canvas-kit-react/form-field';
+import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {checkIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
 import {ResetButton} from './parts/ColorReset';
 import {SwatchBook, SwatchBookColorObject} from './parts/SwatchBook';
-import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
 
 export interface ColorPickerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

@@ -1,8 +1,9 @@
-const eslint = require('eslint');
-const rule = require('./restricted-imports');
+import eslint from 'eslint';
+
+import rule from './restricted-imports.js';
 
 const ruleTester = new eslint.RuleTester({
-  parserOptions: {ecmaVersion: 2015, sourceType: 'module'},
+  languageOptions: {ecmaVersion: 2015, sourceType: 'module'},
 });
 ruleTester.run('restricted-imports', rule, {
   valid: [
@@ -11,8 +12,7 @@ ruleTester.run('restricted-imports', rule, {
   ],
   invalid: [
     {
-      code:
-        "import { ColorSwatch } from '@workday/canvas-kit-react/color-picker/lib/parts/ColorSwatch.tsx'",
+      code: "import { ColorSwatch } from '@workday/canvas-kit-react/color-picker/lib/parts/ColorSwatch.tsx'",
       errors: [
         {
           message:

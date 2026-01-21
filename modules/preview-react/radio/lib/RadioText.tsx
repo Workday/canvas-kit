@@ -1,11 +1,13 @@
 import React from 'react';
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
-import {useRadioModel} from './hooks/useRadioModel';
-import {RadioLabelContext} from './RadioLabel';
+
+import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Text, textStencil} from '@workday/canvas-kit-react/text';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
+
+import {RadioLabelContext} from './RadioLabel';
+import {useRadioModel} from './hooks/useRadioModel';
 
 const radioTextStencil = createStencil({
   extends: textStencil,

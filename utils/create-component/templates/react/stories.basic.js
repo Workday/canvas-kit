@@ -1,4 +1,4 @@
-module.exports = (modulePath, pascalCaseName) => `
+const storiesBasic = (modulePath, pascalCaseName) => `
 import React from 'react';
 
 import {${pascalCaseName}} from '${modulePath}';
@@ -15,3 +15,5 @@ export const Basic = () => {
   );
 };
 `;
+
+export default storiesBasic;

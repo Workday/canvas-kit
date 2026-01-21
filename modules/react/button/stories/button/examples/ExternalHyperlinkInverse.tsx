@@ -7,9 +7,9 @@ import {system} from '@workday/canvas-tokens-web';
 
 const parentContainerStyles = createStyles({
   backgroundColor: system.color.bg.primary.default,
-  padding: system.space.x4,
+  padding: system.padding.md,
   display: 'inline-flex',
-  gap: system.space.x4,
+  gap: system.gap.md,
 });
 
 export const ExternalLinkInverse = () => (

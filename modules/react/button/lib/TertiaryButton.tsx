@@ -1,9 +1,10 @@
-import {buttonColorPropVars, buttonStencil} from './BaseButton';
-import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
-import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {system, brand} from '@workday/canvas-tokens-web';
-import {Button, ButtonProps} from './Button';
+import {createComponent, focusRing, forwardFitTokens} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
+
+import {buttonColorPropVars, buttonStencil} from './BaseButton';
+import {Button, ButtonProps} from './Button';
 
 /**
  * Extends all the style properties from Box to our buttons as well as props from ButtonProps.
@@ -21,10 +22,10 @@ const tertiaryButtonStencil = createStencil({
   extends: buttonStencil,
   // Base Styles
   base: {
-    paddingInline: system.space.x2,
+    paddingInline: forwardFitTokens.system.padding.xs,
     minWidth: 'auto',
     borderWidth: px2rem(2),
-    [buttonStencil.vars.borderRadius]: system.shape.round,
+    [buttonStencil.vars.borderRadius]: forwardFitTokens.system.shape.full,
     [buttonStencil.vars.background]: system.color.bg.transparent.default,
     [buttonStencil.vars.label]: brand.primary.base,
     [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
@@ -36,7 +37,7 @@ const tertiaryButtonStencil = createStencil({
       ...focusRing({
         width: 2,
         separation: 0,
-        innerColor: system.color.border.inverse,
+        innerColor: system.color.border.inverse.default,
         outerColor: brand.common.focusOutline,
       }),
     },
@@ -66,7 +67,7 @@ const tertiaryButtonStencil = createStencil({
     // IconPosition Styles
     iconPosition: {
       only: {
-        padding: 0,
+        padding: forwardFitTokens.system.padding.none,
         [systemIconStencil.vars.color]: system.color.fg.default,
         [systemIconStencil.vars.color]: cssVar(
           buttonColorPropVars.default.icon,
@@ -114,7 +115,7 @@ const tertiaryButtonStencil = createStencil({
           ...focusRing({
             width: 2,
             separation: 0,
-            outerColor: system.color.border.inverse,
+            outerColor: system.color.border.inverse.default,
           }),
         },
         // Hover Styles
@@ -143,81 +144,81 @@ const tertiaryButtonStencil = createStencil({
     {
       modifiers: {size: 'large', iconPosition: 'only'},
       styles: {
-        minWidth: calc.multiply(system.space.x4, 3),
+        minWidth: forwardFitTokens.system.size.xl,
       },
     },
     {
       modifiers: {size: 'large', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: system.space.x2,
-        paddingInlineEnd: system.space.x3,
+        paddingInlineStart: forwardFitTokens.system.padding.xs,
+        paddingInlineEnd: forwardFitTokens.system.padding.sm,
       },
     },
     {
       modifiers: {size: 'large', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: system.space.x3,
-        paddingInlineEnd: system.space.x2,
+        paddingInlineStart: forwardFitTokens.system.padding.sm,
+        paddingInlineEnd: forwardFitTokens.system.padding.xs,
       },
     },
     {
       modifiers: {size: 'medium', iconPosition: 'only'},
       styles: {
-        minWidth: system.space.x10,
+        minWidth: forwardFitTokens.system.size.lg,
       },
     },
     {
       modifiers: {size: 'medium', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: system.space.x2,
-        paddingInlineEnd: system.space.x3,
+        paddingInlineStart: forwardFitTokens.system.padding.xs,
+        paddingInlineEnd: forwardFitTokens.system.padding.sm,
       },
     },
     {
       modifiers: {size: 'medium', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: system.space.x3,
-        paddingInlineEnd: system.space.x2,
+        paddingInlineStart: forwardFitTokens.system.padding.sm,
+        paddingInlineEnd: forwardFitTokens.system.padding.xs,
       },
     },
     {
       modifiers: {size: 'small', iconPosition: 'only'},
       styles: {
-        minWidth: system.space.x8,
+        minWidth: forwardFitTokens.system.size.md,
       },
     },
     {
       modifiers: {size: 'small', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: system.space.x2,
-        paddingInlineEnd: system.space.x3,
+        paddingInlineStart: forwardFitTokens.system.padding.xs,
+        paddingInlineEnd: forwardFitTokens.system.padding.sm,
       },
     },
     {
       modifiers: {size: 'small', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: system.space.x3,
-        paddingInlineEnd: system.space.x2,
+        paddingInlineStart: forwardFitTokens.system.padding.sm,
+        paddingInlineEnd: forwardFitTokens.system.padding.xs,
       },
     },
     {
       modifiers: {size: 'extraSmall', iconPosition: 'only'},
       styles: {
-        minWidth: system.space.x6,
+        minWidth: forwardFitTokens.system.size.sm,
       },
     },
     {
       modifiers: {size: 'extraSmall', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: system.space.x1,
-        paddingInlineEnd: system.space.x2,
+        paddingInlineStart: forwardFitTokens.system.padding.xxs,
+        paddingInlineEnd: forwardFitTokens.system.padding.xs,
       },
     },
     {
       modifiers: {size: 'extraSmall', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: system.space.x2,
-        paddingInlineEnd: system.space.x1,
+        paddingInlineStart: forwardFitTokens.system.padding.xs,
+        paddingInlineEnd: forwardFitTokens.system.padding.xxs,
       },
     },
   ],
@@ -242,10 +243,10 @@ export const TertiaryButton = createComponent('button')({
     const baseIconPosition = iconPosition
       ? iconPosition
       : icon
-      ? children
-        ? 'start'
-        : 'only'
-      : undefined;
+        ? children
+          ? 'start'
+          : 'only'
+        : undefined;
 
     return (
       <Button

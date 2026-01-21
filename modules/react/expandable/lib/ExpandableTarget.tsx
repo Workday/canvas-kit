@@ -1,12 +1,13 @@
 import React from 'react';
 
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Heading} from '@workday/canvas-kit-react/text';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
-import {useExpandableTarget} from './hooks/useExpandableTarget';
+
 import {useExpandableModel} from './hooks/useExpandableModel';
+import {useExpandableTarget} from './hooks/useExpandableTarget';
 
 export interface ExpandableTargetProps extends ExtractProps<typeof Flex, never> {
   /**

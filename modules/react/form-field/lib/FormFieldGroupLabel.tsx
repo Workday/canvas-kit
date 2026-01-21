@@ -1,10 +1,11 @@
 import React from 'react';
 
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
-import {createStencil, px2rem} from '@workday/canvas-kit-styling';
-import {Text, textStencil} from '@workday/canvas-kit-react/text';
+import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {Text, textStencil} from '@workday/canvas-kit-react/text';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
+
 import {useFormFieldModel} from './hooks';
 
 export interface FormFieldGroupLabelProps

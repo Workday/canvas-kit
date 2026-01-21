@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import {Grid, Box} from '@workday/canvas-kit-react/layout';
+import {Box, Grid} from '@workday/canvas-kit-react/layout';
+import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
 import {BodyText, Heading} from '@workday/canvas-kit-react/text';
-import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
 
 export const ResponsiveColumns = () => {
   const [screen, setScreen] = React.useState('100%');

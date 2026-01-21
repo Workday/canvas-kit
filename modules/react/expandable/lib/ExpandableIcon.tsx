@@ -1,13 +1,14 @@
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
-import {chevronUpIcon} from '@workday/canvas-system-icons-web';
-import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {useExpandableIcon} from './hooks/useExpandableIcon';
-import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {IconPositions} from '@workday/canvas-kit-react/button';
-import {useExpandableModel} from './hooks/useExpandableModel';
-import {createStencil} from '@workday/canvas-kit-styling';
+import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {chevronUpIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
+import {CanvasSystemIcon} from '@workday/design-assets-types';
+
+import {useExpandableIcon} from './hooks/useExpandableIcon';
+import {useExpandableModel} from './hooks/useExpandableModel';
 
 export interface ExpandableIconProps extends Omit<ExtractProps<typeof SystemIcon, never>, 'icon'> {
   /**

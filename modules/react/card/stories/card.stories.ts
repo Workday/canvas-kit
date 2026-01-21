@@ -1,9 +1,8 @@
 import {Meta, StoryObj} from '@storybook/react';
 
-import mdxDoc from './card.mdx';
-
 import {Card} from '@workday/canvas-kit-react/card';
 
+import mdxDoc from './card.mdx';
 import {Basic as BasicExample} from './examples/Basic';
 import {Borderless as BorderlessExample} from './examples/Borderless';
 import {Filled as FilledExample} from './examples/Filled';

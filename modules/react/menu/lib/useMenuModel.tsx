@@ -1,14 +1,14 @@
+import {
+  multiSelectionManager,
+  singleSelectionManager,
+  useListModel,
+} from '@workday/canvas-kit-react/collection';
 import {createModelHook} from '@workday/canvas-kit-react/common';
 import {
   useAlwaysCloseOnOutsideClick,
   useCloseOnEscape,
   usePopupModel,
 } from '@workday/canvas-kit-react/popup';
-import {
-  multiSelectionManager,
-  singleSelectionManager,
-  useListModel,
-} from '@workday/canvas-kit-react/collection';
 
 export const useMenuModel = createModelHook({
   defaultConfig: {

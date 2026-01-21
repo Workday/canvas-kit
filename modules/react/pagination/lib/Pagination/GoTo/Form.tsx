@@ -1,12 +1,12 @@
 import * as React from 'react';
 
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil} from '@workday/canvas-kit-styling';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-import {GoToContext, useGoToForm} from './useGoToForm';
 import {PaginationContext} from '../usePaginationModel';
+import {GoToContext, useGoToForm} from './useGoToForm';
 
 export interface GoToFormProps extends FlexProps {
   onSubmit?: React.FormEventHandler<HTMLFormElement>;

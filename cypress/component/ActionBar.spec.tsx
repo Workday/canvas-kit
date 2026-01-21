@@ -33,7 +33,7 @@ describe('ActionBar', () => {
 
         context('when the tab key is pressed', () => {
           beforeEach(() => {
-            cy.tab();
+            cy.realPress('Tab');
           });
 
           it('should move focus to the tabpanel', () => {
@@ -83,7 +83,7 @@ describe('ActionBar', () => {
       context('when the "Second Action" is focused and tab key is clicked', () => {
         beforeEach(() => {
           cy.findByRole('button', {name: 'Second Action'}).focus();
-          cy.focused().tab();
+          cy.focused().realPress('Tab');
         });
 
         it('should focus on the "More" button', () => {
@@ -118,7 +118,7 @@ describe('ActionBar', () => {
       context('when the "First Action" is focused and tab key is clicked', () => {
         beforeEach(() => {
           cy.findByRole('button', {name: 'First Action'}).focus();
-          cy.focused().tab();
+          cy.focused().realPress('Tab');
         });
 
         it('should focus on the "More" button', () => {

@@ -1,12 +1,11 @@
 #!/usr/bin/env node
-'use strict';
+import chalk from 'chalk';
+import globPkg from 'glob';
+import fs from 'node:fs';
+import path from 'node:path';
+import {promisify} from 'node:util';
 
-const chalk = require('chalk');
-const fs = require('fs');
-const path = require('path');
-const {promisify} = require('util');
-const glob = promisify(require('glob'));
-
+const glob = promisify(globPkg.glob);
 const readFile = promisify(fs.readFile);
 
 function findLine(pkg, dependency) {
@@ -30,8 +29,9 @@ async function main() {
   const dependencies = {};
   const errors = [];
 
-  for (let packageFile of packageFiles) {
-    const pkg = require(path.resolve(process.cwd(), packageFile));
+  for (const packageFile of packageFiles) {
+    const pkgContents = await readFile(path.resolve(process.cwd(), packageFile), 'utf8');
+    const pkg = JSON.parse(pkgContents);
     const dependencyKeys = Object.keys(pkg.dependencies || {});
 
     dependencyKeys.forEach(key => {

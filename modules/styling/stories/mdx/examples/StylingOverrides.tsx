@@ -1,11 +1,11 @@
-import * as React from 'react';
-import styled from '@emotion/styled';
 import {jsx} from '@emotion/react';
+import styled from '@emotion/styled';
+import * as React from 'react';
 
-import {Flex} from '@workday/canvas-kit-react/layout';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {base} from '@workday/canvas-tokens-web';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {createStyles, cssVar} from '@workday/canvas-kit-styling';
+import {base} from '@workday/canvas-tokens-web';
 
 const backgroundColors = {
   cssProp: cssVar(base.orange500),
