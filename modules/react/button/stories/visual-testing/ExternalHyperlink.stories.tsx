@@ -86,22 +86,22 @@ export const ExternalHyperlinkStates = {
         <Flex flexDirection="column" gap="xxs">
           <Subtext size="large">
             The quick{' '}
-            <ExternalHyperlink iconLabel="Opens link in new window" shouldMirror>brown fox</ExternalHyperlink>{' '}
+            <ExternalHyperlink iconLabel="Opens link in new window">brown fox</ExternalHyperlink>{' '}
             jumps over the lazy dog
           </Subtext>
           <BodyText size="small">
             The quick{' '}
-            <ExternalHyperlink iconLabel="Opens link in new window" shouldMirror>brown fox</ExternalHyperlink>{' '}
+            <ExternalHyperlink iconLabel="Opens link in new window">brown fox</ExternalHyperlink>{' '}
             jumps over the lazy dog
           </BodyText>
           <BodyText size="medium">
             The quick{' '}
-            <ExternalHyperlink iconLabel="Opens link in new window" shouldMirror>brown fox</ExternalHyperlink>{' '}
+            <ExternalHyperlink iconLabel="Opens link in new window">brown fox</ExternalHyperlink>{' '}
             jumps over the lazy dog
           </BodyText>
           <BodyText size="large">
             The quick{' '}
-            <ExternalHyperlink iconLabel="Opens link in new window" shouldMirror>brown fox</ExternalHyperlink>{' '}
+            <ExternalHyperlink iconLabel="Opens link in new window">brown fox</ExternalHyperlink>{' '}
             jumps over the lazy dog
           </BodyText>
         </Flex>
