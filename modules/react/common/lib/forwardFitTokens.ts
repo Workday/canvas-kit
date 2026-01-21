@@ -70,20 +70,25 @@ export const forwardFitTokens = {
       },
     },
     color: {
+      border: {
+        transparent: cssVar(system.color.border.transparent, system.color.bg.transparent.default),
+      },
       surface: {
         transparent: cssVar(system.color.surface.transparent, system.color.bg.transparent.default),
-        alt: {
-          default: cssVar(system.color.surface.alt.default, system.color.bg.alt.soft),
+        overlay: {
+          hover: {
+            default: cssVar(system.color.surface.overlay.hover.default, system.color.bg.alt.soft),
+          },
         },
       },
       fg: {
         strong: cssVar(system.color.fg.strong, system.color.text.strong),
       },
-    },
-  },
-  brand: {
-    common: {
-      focus: cssVar(brand.common.focus, brand.common.focusOutline),
+      brand: {
+        border: {
+          primary: cssVar(system.color.brand.border.primary, brand.common.focusOutline),
+        },
+      },
     },
   },
 } as const;

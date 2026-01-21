@@ -4,7 +4,6 @@ import {ExtractProps, createSubcomponent, forwardFitTokens} from '@workday/canva
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Heading} from '@workday/canvas-kit-react/text';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
-import {brand} from '@workday/canvas-tokens-web';
 
 import {useExpandableModel} from './hooks/useExpandableModel';
 import {useExpandableTarget} from './hooks/useExpandableTarget';
@@ -27,22 +26,22 @@ export interface ExpandableTargetProps extends ExtractProps<typeof Flex, never> 
 export const expandableTargetStencil = createStencil({
   base: {
     background: forwardFitTokens.system.color.surface.transparent,
-    borderColor: forwardFitTokens.system.color.surface.transparent,
+    borderColor: forwardFitTokens.system.color.border.transparent,
     borderRadius: forwardFitTokens.system.shape.xxl,
     borderWidth: 0,
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',
-    gap: forwardFitTokens.system.gap.xs,
+    gap: forwardFitTokens.system.gap.sm,
     justifyContent: 'start',
     padding: forwardFitTokens.system.padding.xs,
     cursor: 'pointer',
     width: '100%',
     '&:hover, &.hover': {
-      backgroundColor: forwardFitTokens.system.color.surface.alt.default,
+      backgroundColor: forwardFitTokens.system.color.surface.overlay.hover.default,
     },
     '&:focus-visible, &.focus': {
-      outline: `${forwardFitTokens.brand.common.focus} solid ${px2rem(2)}`,
+      outline: `${forwardFitTokens.system.color.brand.border.primary} solid ${px2rem(2)}`,
     },
   },
 });
