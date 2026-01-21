@@ -5,7 +5,7 @@ import {
   permutateProps,
   StaticStates,
 } from '@workday/canvas-kit-react/testing';
-import {customColorTheme} from '../../../../../utils/storybook';
+import {customColorTheme, v2tokens} from '../../../../../utils/storybook';
 import {playCircleIcon, relatedActionsVerticalIcon} from '@workday/canvas-system-icons-web';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Container, stateTableColumnProps} from './utils';
@@ -96,12 +96,44 @@ const PrimaryIconButtonTest = (props: {theme?: PartialEmotionCanvasTheme}) => (
   </StaticStates>
 );
 
+const sectionTitleStyle = createStyles({
+  fontSize: '1.25rem',
+  fontWeight: 700,
+  marginBottom: '1rem',
+  marginTop: '2rem',
+  '&:first-of-type': {
+    marginTop: 0,
+  },
+});
+
 export const PrimaryButtonStates = {
   render: () => <PrimaryButtonTest />,
 };
 
-export const PrimaryIconButtonStates = {
-  render: () => <PrimaryIconButtonTest />,
+export const PrimaryButtonTokenDifferences = {
+  render: () => (
+    <>
+      <div className={sectionTitleStyle}>Primary Buttons with v3 Tokens</div>
+      <PrimaryButtonTest />
+      <div className={sectionTitleStyle}>Primary Buttons with v2 Tokens</div>
+      <div className={v2tokens}>
+        <PrimaryButtonTest />
+      </div>
+    </>
+  ),
+};
+
+export const PrimaryIconButtonTokenDifferences = {
+  render: () => (
+    <>
+      <div className={sectionTitleStyle}>Primary Icon Buttons with v3 Tokens</div>
+      <PrimaryIconButtonTest />
+      <div className={sectionTitleStyle}>Primary Icon Buttons with v2 Tokens</div>
+      <div className={v2tokens}>
+        <PrimaryIconButtonTest />
+      </div>
+    </>
+  ),
 };
 
 export const PrimaryButtonThemedStates = {

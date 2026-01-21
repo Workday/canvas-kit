@@ -5,6 +5,7 @@ export {
   useControlledCheck,
 } from './ControlledComponentWrapper';
 export {customColorTheme} from './customThemes';
+export {v2tokens} from './v2tokens';
 export {withSnapshotsEnabled} from './withSnapshotsEnabled';
 export {default as CanvasProviderDecorator} from './CanvasProviderDecorator';
 export {PopperController, customViewport} from './PopperController';
