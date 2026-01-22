@@ -1,5 +1,5 @@
 import {IconPositions} from '@workday/canvas-kit-react/button';
-import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createSubcomponent, forwardFitTokens} from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil} from '@workday/canvas-kit-styling';
@@ -27,7 +27,7 @@ export interface ExpandableIconProps extends Omit<ExtractProps<typeof SystemIcon
 export const expandableIconStencil = createStencil({
   extends: systemIconStencil,
   base: {
-    padding: system.space.x1,
+    padding: forwardFitTokens.system.padding.xs,
   },
   modifiers: {
     isExpanded: {
@@ -46,20 +46,20 @@ export const expandableIconStencil = createStencil({
       styles: {
         marginInlineStart: 'auto',
         transform: 'rotate(180deg)',
-        paddingInlineEnd: system.space.x3,
+        paddingInlineEnd: forwardFitTokens.system.padding.sm,
       },
     },
     {
       modifiers: {position: 'end', isExpanded: true},
       styles: {
         marginInlineStart: 'auto',
-        paddingInlineStart: system.space.x3,
+        paddingInlineStart: forwardFitTokens.system.padding.sm,
       },
     },
     {
       modifiers: {position: 'start', isExpanded: false},
       styles: {
-        marginInlineEnd: system.space.x2,
+        marginInlineEnd: forwardFitTokens.system.padding.xs,
         transform: 'rotate(90deg)',
         ':dir(rtl)': {
           transform: 'rotate(-90deg)',
@@ -69,7 +69,7 @@ export const expandableIconStencil = createStencil({
     {
       modifiers: {position: 'start', isExpanded: true},
       styles: {
-        marginInlineEnd: system.space.x2,
+        marginInlineEnd: forwardFitTokens.system.padding.xs,
         transform: 'rotate(180deg)',
       },
     },
