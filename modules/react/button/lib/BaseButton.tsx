@@ -152,7 +152,10 @@ export const buttonStencil = createStencil({
     position: 'relative',
     verticalAlign: 'middle',
     overflow: 'hidden',
-    [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, system.color.fg.strong),
+    [systemIconStencil.vars.color]: cssVar(
+      buttonColorPropVars.default.icon,
+      system.color.fg.strong
+    ),
     transition:
       'box-shadow 120ms linear, border 120ms linear, background-color 120ms linear, color 120ms linear',
     '&:disabled, &:disabled:active, &.disabled': {

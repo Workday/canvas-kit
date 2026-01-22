@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.53](https://github.com/Workday/canvas-kit/releases/tag/v13.2.53) (2026-01-22)
+
+### Components
+
+- fix: Remove global selector on body for tooltip ([#3705](https://github.com/Workday/canvas-kit/pull/3705)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v13.2.52](https://github.com/Workday/canvas-kit/releases/tag/v13.2.52) (2026-01-22)
+
+### Components
+
+- fix: Add RTL icon support to ExternalHyperlink component in v13 ([#3694](https://github.com/Workday/canvas-kit/pull/3694)) ([@ahayes91](https://github.com/ahayes91))
 ## [v14.2.10](https://github.com/Workday/canvas-kit/releases/tag/v14.2.10) (2026-01-21)
 
 ### Components
