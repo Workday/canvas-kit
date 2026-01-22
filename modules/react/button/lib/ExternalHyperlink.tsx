@@ -29,6 +29,9 @@ export const externalHyperlinkStencil = createStencil({
         minWidth: system.space.x4,
         minHeight: system.space.x4,
       },
+      ':dir(rtl)': {
+        transform: 'rotate(270deg)',
+      },
     },
   },
 });
