@@ -4,6 +4,7 @@ import {
   TransformOrigin,
   createComponent,
   getTransformOrigin,
+  useForkRef,
 } from '@workday/canvas-kit-react/common';
 
 import {
@@ -91,7 +92,12 @@ export const tooltipContainerStencil = createStencil({
       right: 0,
       bottom: 0,
     },
-
+    '&[data-anchor-focus-visible]': {
+      padding: calc.subtract(system.space.x4, calc.divide(system.space.x1, 2)),
+      '&:before': {
+        margin: calc.add(system.space.x1, calc.divide(system.space.x1, 2)),
+      },
+    },
     // Hide tooltip when the reference element is either clipped or fully hidden
     '[data-popper-reference-hidden] &': {
       visibility: 'hidden',
@@ -121,9 +127,38 @@ export const TooltipContainer = createComponent('div')<TooltipContainerProps>({
       transformOrigin || defaultTransformOrigin,
       cssVar(system.space.x2)
     );
+
+    const tooltipRef = React.useRef<HTMLElement>(null);
+    const forkedRef = useForkRef(ref, tooltipRef);
+
+    React.useEffect(() => {
+      const anchor = elemProps.popperProps?.anchorElement;
+      const tooltip = tooltipRef.current;
+      if (!anchor || !tooltip) {
+        return;
+      }
+
+      const updateFocusState = () => {
+        if (anchor.matches(':focus-visible')) {
+          tooltip.setAttribute('data-anchor-focus-visible', '');
+        } else {
+          tooltip.removeAttribute('data-anchor-focus-visible');
+        }
+      };
+
+      updateFocusState(); // Check initial state
+      anchor.addEventListener('focus', updateFocusState);
+      anchor.addEventListener('blur', updateFocusState);
+
+      return () => {
+        anchor.removeEventListener('focus', updateFocusState);
+        anchor.removeEventListener('blur', updateFocusState);
+      };
+    }, [elemProps.popperProps?.anchorElement]);
+
     return (
       <Element
-        ref={ref}
+        ref={forkedRef}
         {...mergeStyles(elemProps, [
           tooltipContainerStencil({
             tooltipTransformOriginHorizontal: transformOrigin?.horizontal,
