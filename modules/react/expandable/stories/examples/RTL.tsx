@@ -1,18 +1,13 @@
 import {Expandable} from '@workday/canvas-kit-react/expandable';
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 
 export const RTL = () => {
-  const theme = {
-    canvas: {
-      direction: ContentDirection.RTL,
-    },
-  };
   return (
-    <CanvasProvider theme={theme}>
+    <CanvasProvider dir="rtl">
       <Expandable>
         <Expandable.Target headingLevel="h4">
           <Expandable.Icon iconPosition="start" />
-          <Expandable.Avatar />
+          <Expandable.Avatar name="Avatar" />
           <Expandable.Title>Title</Expandable.Title>
         </Expandable.Target>
 
@@ -20,7 +15,7 @@ export const RTL = () => {
       </Expandable>
       <Expandable>
         <Expandable.Target headingLevel="h4">
-          <Expandable.Avatar />
+          <Expandable.Avatar name="Avatar" />
           <Expandable.Title>Title</Expandable.Title>
           <Expandable.Icon iconPosition="end" />
         </Expandable.Target>

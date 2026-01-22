@@ -1,5 +1,5 @@
-import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
-import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
+import {ExampleCodeBlock, StorybookStatusIndicator, SymbolDoc} from '@workday/canvas-kit-docs';
+import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
 
 import {Basic} from './examples/Basic';
 import {Icon} from './examples/Icon';
@@ -9,16 +9,17 @@ import * as StatusIndicatorStories from './StatusIndicator.stories';
 
 <Meta of={StatusIndicatorStories} />
 
-# Canvas Kit Status Indicator
+# Canvas Kit Status Indicator <StorybookStatusIndicator type="deprecated" />
 
-<StatusIndicator variant="red">
-  <StatusIndicator.Label>Deprecated</StatusIndicator.Label>
-</StatusIndicator>
-
-`StatusIndicator` in Main has been deprecated and will be removed in a future major version. Please
-use
-[`StatusIndicator`](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator--basic)
-in Preview instead.
+<InformationHighlight className="sb-unstyled" variant="caution" cs={{p: {marginBlock: 0}}}>
+  <InformationHighlight.Icon />
+  <InformationHighlight.Body>
+    `StatusIndicator` in Main has been deprecated and will be removed in a future major version.
+    Please use [Status
+    Indicator](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator--docs) in
+    Preview instead.
+  </InformationHighlight.Body>
+</InformationHighlight>
 
 Status Indicators help the user quickly identify the status of a task, action, or page element.
 

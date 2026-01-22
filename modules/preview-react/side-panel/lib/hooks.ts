@@ -9,6 +9,7 @@ export const SidePanelContext = React.createContext({
 import {useUniqueId} from '@workday/canvas-kit-react/common';
 /**
  * The optional config options for the `useSidePanel` hook
+ * @deprecated ⚠️ `UseSidePanelProps` in Preview has been deprecated and will be removed in a future major version. Please use [`SidePanel` in Labs](https://workday.github.io/canvas-kit/?path=/docs/labs-side-panel--docs) instead.
  */
 export interface UseSidePanelProps {
   /**
@@ -30,6 +31,7 @@ export interface UseSidePanelProps {
 
 /**
  * The `panelProps` provided by the `useSidePanel` hook
+ * @deprecated ⚠️ `PanelProps` in Preview has been deprecated and will be removed in a future major version. Please use [`SidePanel` in Labs](https://workday.github.io/canvas-kit/?path=/docs/labs-side-panel--docs) instead.
  */
 export interface PanelProps {
   /**
@@ -53,6 +55,9 @@ export interface PanelProps {
   touched: boolean;
 }
 
+/**
+ * @deprecated ⚠️ `LabelProps` in Preview has been deprecated and will be removed in a future major version. Please use [`SidePanel` in Labs](https://workday.github.io/canvas-kit/?path=/docs/labs-side-panel--docs) instead.
+ */
 export interface LabelProps {
   /**
    * the accessible `id`
@@ -61,6 +66,9 @@ export interface LabelProps {
   id: string;
 }
 
+/**
+ * @deprecated ⚠️ `ControlProps` in Preview has been deprecated and will be removed in a future major version. Please use [`SidePanel` in Labs](https://workday.github.io/canvas-kit/?path=/docs/labs-side-panel--docs) instead.
+ */
 export interface ControlProps {
   /**
    * the accessible `id` that connects the panel to this control
@@ -97,6 +105,7 @@ export interface ControlProps {
  *   labelId: 'custom-label-id',
  * });
  * ```
+ * @deprecated ⚠️ `useSidePanel` in Preview has been deprecated and will be removed in a future major version. Please use [`SidePanel` in Labs](https://workday.github.io/canvas-kit/?path=/docs/labs-side-panel--docs) instead.
  */
 export const useSidePanel = (config?: UseSidePanelProps) => {
   const [touched, setTouched] = React.useState(false);

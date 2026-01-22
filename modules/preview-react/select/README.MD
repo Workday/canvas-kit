@@ -165,7 +165,7 @@ function Example() {
 #### `ErrorType: ErrorType`
 
 ```tsx
-<Select error={Select.ErrorType.Alert} />
+<Select error={Select.ErrorType.Caution} />
 ```
 
 ## Component Props

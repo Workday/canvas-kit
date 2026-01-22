@@ -7,6 +7,7 @@ import {
 } from '@workday/canvas-system-icons-web';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 
 const parentContainerStyles = createStyles({
   gap: system.space.x4,
@@ -22,6 +23,8 @@ export const Primary = () => (
     <PrimaryButton icon={caretDownIcon} iconPosition="end">
       Primary
     </PrimaryButton>
-    <PrimaryButton aria-label="Related Actions" icon={relatedActionsVerticalIcon} />
+    <Tooltip title="Related Actions">
+      <PrimaryButton icon={relatedActionsVerticalIcon} />
+    </Tooltip>
   </Flex>
 );

@@ -13,9 +13,22 @@ function webpackLoaderRedirectMDXToGithub(source) {
   return source
     .replace(/\[([^\]]+)\]\((\/[^\)]+)\)/g, function replacer(_match, p1, p2) {
       const [url, hash] = p2.split('#');
+
+      // Normally, we want to carry the hash over when we rewrite the path (for
+      // example, so `/components/buttons/button/#foo` is rewritten to
+      // `?path=/docs/components-buttons--docs#foo`). However, if the hash
+      // references the tab feature of the Canvas site (i.e., it includes
+      // `tab=`), we don't want to carry the hash over since the concept of
+      // tabbed content doesn't exist in Storybook -- in this case, we
+      // rewrite the path strictly based on the mapping in the routes file.
+      if (hash && hash.includes('tab=') && routeKeys.includes(p2)) {
+        return `[${p1}](?path=/docs/${routes[p2]})`;
+      }
+
       if (routeKeys.includes(url)) {
         return `[${p1}](?path=/docs/${routes[url]}${hash ? '#' + hash : ''})`;
       }
+
       // no match, return original
       return `[${p1}](${p2})`;
     })

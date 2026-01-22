@@ -5,7 +5,7 @@ import {Flex} from '@workday/canvas-kit-react/layout';
 import {Heading, Text} from '@workday/canvas-kit-react/text';
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 // local helper hook for setting content direction;
 import {useDirection} from './useDirection';
@@ -13,7 +13,7 @@ import {useDirection} from './useDirection';
 const stylesOverride = {
   viewport: createStyles({
     height: px2rem(320),
-    backgroundColor: base.soap100,
+    backgroundColor: system.color.bg.alt.default,
   }),
   panel: createStyles({
     alignItems: 'center',
@@ -34,7 +34,7 @@ export const AlternatePanel = () => {
   const {expanded, panelProps, labelProps, controlProps} = useSidePanel();
 
   return (
-    <CanvasProvider theme={{canvas: {direction}}}>
+    <CanvasProvider dir={direction}>
       <Flex cs={stylesOverride.viewport}>
         <SidePanel {...panelProps} variant="alternate">
           <SidePanel.ToggleButton {...controlProps} />
