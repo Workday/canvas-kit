@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.52](https://github.com/Workday/canvas-kit/releases/tag/v13.2.52) (2026-01-22)
+
+### Components
+
+- fix: Add RTL icon support to ExternalHyperlink component in v13 ([#3694](https://github.com/Workday/canvas-kit/pull/3694)) ([@ahayes91](https://github.com/ahayes91))
+
+
 ## [v13.2.51](https://github.com/Workday/canvas-kit/releases/tag/v13.2.51) (2026-01-15)
 
 ### Components
