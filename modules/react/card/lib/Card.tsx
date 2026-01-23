@@ -3,7 +3,6 @@ import * as React from 'react';
 import {createComponent, forwardFitTokens} from '@workday/canvas-kit-react/common';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
 
 import {CardBody} from './CardBody';
 import {CardHeading} from './CardHeading';
@@ -14,10 +13,10 @@ export interface CardProps extends BoxProps {
    */
   children?: React.ReactNode;
   /**
-   * The variant of the Card. Can be `default`, `borderless` or `filled`.
+   * The variant of the Card. Can be `default`, `borderless` or `tonal`.
    * @default 'default'
    */
-  variant?: 'borderless' | 'filled';
+  variant?: 'borderless' | 'tonal';
 }
 
 // .cnvs-card
@@ -25,10 +24,10 @@ export const cardStencil = createStencil({
   base: {
     display: 'flex',
     flexDirection: 'column',
-    gap: system.space.x6,
-    padding: system.space.x8,
-    backgroundColor: system.color.bg.default,
-    borderRadius: system.shape.x2,
+    gap: forwardFitTokens.system.gap.lg,
+    padding: forwardFitTokens.system.padding.xl,
+    backgroundColor: forwardFitTokens.system.color.surface.default,
+    borderRadius: forwardFitTokens.system.shape.xxl,
     border: `${px2rem(1)} solid ${forwardFitTokens.system.color.border.default}`,
   },
   modifiers: {
@@ -36,9 +35,9 @@ export const cardStencil = createStencil({
       borderless: {
         borderColor: 'transparent',
       },
-      filled: {
-        backgroundColor: system.color.bg.alt.soft,
-        borderColor: system.color.border.transparent,
+      tonal: {
+        backgroundColor: forwardFitTokens.system.color.surface.alt.default,
+        borderColor: forwardFitTokens.system.color.border.transparent,
       },
     },
   },
