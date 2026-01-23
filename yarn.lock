@@ -6285,10 +6285,10 @@
   dependencies:
     "@workday/design-assets-types" "0.2.10"
 
-"@workday/canvas-tokens-web@^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@workday/canvas-tokens-web/-/canvas-tokens-web-4.0.0.tgz#9bc8d3f4b41eb0aa766f3faf7e554a9fcf74bc5f"
-  integrity sha512-EKJYK0IdjKaGU1kZOreKwcedFsNxg1VyWJQAUk1CgZH/KBbBZBR/6pApvmFm9cgunMF1UhKcg1aoy+RIq+C+ww==
+"@workday/canvas-tokens-web@^4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-tokens-web/-/canvas-tokens-web-4.0.2.tgz#66dbb91427dcc53c031b857d5bef889071e7495b"
+  integrity sha512-kwJP3mfhkhyBoJHTey0ru7fWhBRbt1qfGoQd4Hi//N9uf7mABft+CFBqeW0o/ucIrC3wfB6tJ0vbbzoofTiB3g==
 
 "@workday/design-assets-types@0.2.10", "@workday/design-assets-types@^0.2.10":
   version "0.2.10"
@@ -16488,6 +16488,7 @@ string-replace-loader@^3.1.0:
     schema-utils "^3.0.0"
 
 "string-width-cjs@npm:string-width@^4.2.0", "string-width@^1.0.2 || 2 || 3 || 4", string-width@^4.2.3:
+  name string-width-cjs
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
@@ -16575,6 +16576,7 @@ string_decoder@~1.1.1:
     safe-buffer "~5.1.0"
 
 "strip-ansi-cjs@npm:strip-ansi@^6.0.1", strip-ansi@^6.0.1:
+  name strip-ansi-cjs
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
   integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
@@ -17826,6 +17828,7 @@ wordwrap@^1.0.0:
   integrity sha1-J1hIEIkUVqQXHI0CJkQa3pDLyus=
 
 "wrap-ansi-cjs@npm:wrap-ansi@^7.0.0", wrap-ansi@^7.0.0:
+  name wrap-ansi-cjs
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
   integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
