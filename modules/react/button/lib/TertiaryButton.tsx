@@ -36,7 +36,7 @@ const tertiaryButtonStencil = createStencil({
       ...focusRing({
         width: 2,
         separation: 0,
-        innerColor: system.color.border.inverse.default,
+        innerColor: system.color.border.inverse,
         outerColor: brand.common.focusOutline,
       }),
     },
@@ -114,7 +114,7 @@ const tertiaryButtonStencil = createStencil({
           ...focusRing({
             width: 2,
             separation: 0,
-            outerColor: system.color.border.inverse.default,
+            outerColor: system.color.border.inverse,
           }),
         },
         // Hover Styles

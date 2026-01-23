@@ -359,7 +359,7 @@ export const searchFormStencil = createStencil({
           },
           '&:is(:focus-visible, &.focus):where(:not([disabled]))': {
             background: system.color.bg.alt.soft,
-            boxShadow: `0 0 0 0px ${system.color.border.inverse.default}, 0 0 0 2px ${brand.common.focusOutline}`,
+            boxShadow: `0 0 0 0px ${system.color.border.inverse}, 0 0 0 2px ${brand.common.focusOutline}`,
           },
         },
       }),

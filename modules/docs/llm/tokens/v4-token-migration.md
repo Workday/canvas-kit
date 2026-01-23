@@ -307,7 +307,7 @@ different border use cases, including input fields, status indicators, and inver
 | color.border.warning         | `{base.amber400}`    | `--cnvs-sys-color-border-warning`     |
 | color.border.contrast        | `{base.neutralA900}` | `--cnvs-sys-color-border-contrast`    |
 | color.border.transparent     | `{base.neutralA0}`   | `--cnvs-sys-color-border-transparent` |
-| color.border.inverse.default | `{base.whiteA500}`   | `--cnvs-sys-color-border-inverse-default` |
+| color.border.inverse | `{base.whiteA500}`   | `--cnvs-sys-color-border-inverse-default` |
 | color.border.inverse.strong  | `{base.whiteA700}`   | `--cnvs-sys-color-border-inverse-strong` |
 
 
@@ -778,13 +778,13 @@ backgroundColor: system.color.brand.accent.primary
 | ------------------------------------- | ----------------------------------------------- | ---------------------------------------------------------- |
 | `sys.color.border.input.disabled`     | `sys.opacity.disabled`                          | Use `sys.color.fg.disabled` instead                       |
 | `sys.color.border.input.strong`      | `sys.color.border.input.hover`                   | Use `sys.color.border.input.hover` instead                |
-| `sys.color.border.input.inverse`     | `sys.color.border.inverse.default`              | Use `sys.color.border.inverse.default` instead            |
+| `sys.color.border.input.inverse`     | `sys.color.border.inverse`              | Use `sys.color.border.inverse` instead            |
 
 **Inverse Border Tokens:**
 
 | Deprecated Token                      | Points To (New Token Value)                    | Notes                                                      |
 | ------------------------------------- | ----------------------------------------------- | ---------------------------------------------------------- |
-| `sys.color.border.inverse.default`   | `base.palette.neutral.0`                        | Use `sys.color.border.inverse.default` instead            |
+| `sys.color.border.inverse`   | `base.palette.neutral.0`                        | Use `sys.color.border.inverse` instead            |
 
 **Contrast Border Tokens:**
 

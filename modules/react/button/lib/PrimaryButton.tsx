@@ -29,7 +29,7 @@ const primaryButtonStencil = createStencil({
     '&:focus-visible, &.focus': {
       [buttonStencil.vars.background]: cssVar(brand.action.base, brand.primary.base),
       [buttonStencil.vars.label]: cssVar(brand.action.accent, brand.primary.accent),
-      [buttonStencil.vars.boxShadowInner]: system.color.border.inverse.default,
+      [buttonStencil.vars.boxShadowInner]: system.color.border.inverse,
       [buttonStencil.vars.boxShadowOuter]: brand.common.focusOutline,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
     },
@@ -66,7 +66,7 @@ const primaryButtonStencil = createStencil({
           [buttonStencil.vars.background]: cssVar(brand.action.lightest, brand.primary.lightest),
           [buttonStencil.vars.label]: system.color.fg.strong,
           [buttonStencil.vars.boxShadowInner]: system.color.border.contrast.default,
-          [buttonStencil.vars.boxShadowOuter]: system.color.border.inverse.default,
+          [buttonStencil.vars.boxShadowOuter]: system.color.border.inverse,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
         },
         // Hover Styles
