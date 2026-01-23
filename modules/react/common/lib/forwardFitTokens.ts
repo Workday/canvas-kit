@@ -72,6 +72,7 @@ export const forwardFitTokens = {
     color: {
       border: {
         transparent: cssVar(system.color.border.transparent, system.color.bg.transparent.default),
+        default: cssVar(system.color.border.default, system.color.border.divider),
       },
       surface: {
         transparent: cssVar(system.color.surface.transparent, system.color.bg.transparent.default),
