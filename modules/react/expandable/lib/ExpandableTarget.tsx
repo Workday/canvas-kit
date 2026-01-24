@@ -32,7 +32,7 @@ export const expandableTargetStencil = createStencil({
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',
-    gap: forwardFitTokens.system.gap.sm,
+    gap: forwardFitTokens.system.gap.none,
     justifyContent: 'start',
     padding: forwardFitTokens.system.padding.xs,
     cursor: 'pointer',

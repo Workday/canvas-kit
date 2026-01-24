@@ -17,9 +17,7 @@ export const expandableTitleStencil = createStencil({
     ...system.type.body.medium,
     fontWeight: system.fontWeight.bold,
     color: forwardFitTokens.system.color.fg.strong,
-    // TODO: update this to include padding if we're 100% removing the ExpandableTarget gap value
-    // padding: `${px2rem(2)} ${forwardFitTokens.system.padding.xs}`,
-    padding: `${px2rem(2)} ${forwardFitTokens.system.padding.none}`,
+    padding: `${px2rem(2)} ${forwardFitTokens.system.padding.xs}`,
     textAlign: 'left',
   },
 });
