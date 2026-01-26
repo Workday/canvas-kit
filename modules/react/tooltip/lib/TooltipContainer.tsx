@@ -92,14 +92,6 @@ export const tooltipContainerStencil = createStencil({
       bottom: 0,
     },
 
-    // offset tooltips by 2 pixels when a keyboard focus ring is detected
-    'body:has(:focus-visible, .focus) &': {
-      padding: calc.subtract(system.space.x4, calc.divide(system.space.x1, 2)),
-      '&:before': {
-        margin: calc.add(system.space.x1, calc.divide(system.space.x1, 2)),
-      },
-    },
-
     // Hide tooltip when the reference element is either clipped or fully hidden
     '[data-popper-reference-hidden] &': {
       visibility: 'hidden',
