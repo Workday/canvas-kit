@@ -3,7 +3,8 @@ import React from 'react';
 import {ExtractProps, createSubcomponent, forwardFitTokens} from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Heading} from '@workday/canvas-kit-react/text';
-import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 import {useExpandableModel} from './hooks/useExpandableModel';
 import {useExpandableTarget} from './hooks/useExpandableTarget';
@@ -24,10 +25,13 @@ export interface ExpandableTargetProps extends ExtractProps<typeof Flex, never> 
 }
 
 export const expandableTargetStencil = createStencil({
-  base: {
+  vars: {
+    expandableTargetShape: cssVar(system.shape.xxl, system.shape.x6),
+  },
+  base: ({expandableTargetShape}) => ({
     background: forwardFitTokens.system.color.surface.transparent,
     borderColor: forwardFitTokens.system.color.border.transparent,
-    borderRadius: forwardFitTokens.system.shape.xxl,
+    borderRadius: expandableTargetShape,
     borderWidth: 0,
     display: 'flex',
     alignItems: 'center',
@@ -43,7 +47,7 @@ export const expandableTargetStencil = createStencil({
     '&:focus-visible, &.focus': {
       outline: `${forwardFitTokens.system.color.brand.border.primary} solid ${px2rem(2)}`,
     },
-  },
+  }),
 });
 
 export const ExpandableTarget = createSubcomponent('button')({

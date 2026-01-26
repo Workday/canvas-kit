@@ -2,7 +2,8 @@ import * as React from 'react';
 
 import {createComponent, forwardFitTokens} from '@workday/canvas-kit-react/common';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 import {CardBody} from './CardBody';
 import {CardHeading} from './CardHeading';
@@ -21,15 +22,18 @@ export interface CardProps extends BoxProps {
 
 // .cnvs-card
 export const cardStencil = createStencil({
-  base: {
+  vars: {
+    cardShape: cssVar(system.shape.xxl, system.shape.x6),
+  },
+  base: ({cardShape}) => ({
     display: 'flex',
     flexDirection: 'column',
     gap: forwardFitTokens.system.gap.lg,
     padding: forwardFitTokens.system.padding.xl,
     backgroundColor: forwardFitTokens.system.color.surface.default,
-    borderRadius: forwardFitTokens.system.shape.xxl,
+    borderRadius: cardShape,
     border: `${px2rem(1)} solid ${forwardFitTokens.system.color.border.default}`,
-  },
+  }),
   modifiers: {
     variant: {
       borderless: {
