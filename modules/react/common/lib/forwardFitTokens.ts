@@ -9,6 +9,7 @@ export const forwardFitTokens = {
     shape: {
       xs: cssVar(system.shape.xs, system.shape.x1),
       sm: cssVar(system.shape.sm, system.shape.x1Half),
+      md: cssVar(system.shape.md, system.shape.x1Half),
       full: cssVar(system.shape.full, system.shape.round),
     },
     size: {
