@@ -1,13 +1,17 @@
-import {createStencil} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export const formFieldStencil = createStencil({
-  base: {
+  vars: {
+    width: '',
+  },
+  base: ({width}) => ({
     display: 'flex',
     border: 'none',
     padding: system.space.zero,
     margin: `${system.space.zero} ${system.space.zero} ${system.space.x6}`,
-  },
+    width: cssVar(width, '280px'),
+  }),
   modifiers: {
     grow: {
       true: {

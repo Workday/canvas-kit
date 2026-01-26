@@ -1,5 +1,5 @@
 import {cssVar} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 
 /**
  * This file is NOT INTENDED to be used by consumers, only internally by Canvas Kit.
@@ -7,15 +7,30 @@ import {base, system} from '@workday/canvas-tokens-web';
 export const forwardFitTokens = {
   system: {
     shape: {
-      xs: cssVar(system.shape.sm, system.shape.x1),
-      sm: cssVar(system.shape.sm, system.shape.x1Half),
-      md: cssVar(system.shape.md, system.shape.x1Half),
       full: cssVar(system.shape.full, system.shape.round),
+    },
+    color: {
+      brand: {
+        border: {
+          primary: cssVar(system.color.brand.border.primary, brand.common.focusOutline),
+        },
+      },
+      border: {
+        input: {
+          hover: cssVar(system.color.border.input.hover, system.color.border.input.strong),
+        },
+      },
+      fg: {
+        default: cssVar(system.color.fg.default, system.color.text.default),
+        muted: {
+          default: cssVar(system.color.fg.muted.default, system.color.text.hint),
+        },
+      },
     },
     size: {
       xxs: cssVar(system.size.xxs, system.space.x4),
-      sm: cssVar(system.size.sm, system.space.x6),
-      md: cssVar(system.size.md, system.space.x8),
+      sm: cssVar(system.size.sm, system.space.x8),
+      md: cssVar(system.size.md, system.space.x10),
       lg: cssVar(system.size.lg, system.space.x10),
       xl: cssVar(system.size.xl, '3rem'),
     },

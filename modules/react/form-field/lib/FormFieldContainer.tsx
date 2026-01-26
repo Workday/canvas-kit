@@ -12,6 +12,7 @@ export const formFieldContainerStencil = createStencil({
     display: 'flex',
     flexDirection: 'column',
     gap: system.space.x2,
+    width: '100%',
   },
 });
 

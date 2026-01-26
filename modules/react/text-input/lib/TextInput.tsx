@@ -5,7 +5,7 @@ import {
   forwardFitTokens,
 } from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {CSProps, calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 
 export interface TextInputProps extends GrowthBehavior, CSProps {
@@ -27,39 +27,34 @@ export const textInputStencil = createStencil({
     ...system.type.subtext.large,
     display: 'block',
     border: `${px2rem(1)} solid ${cssVar(system.color.border.input.default)}`,
-    backgroundColor: system.color.bg.default,
-    //TODO: Replace string with new token in v15/v4
-    borderRadius: forwardFitTokens.system.shape.sm,
-    boxSizing: 'border-box',
-    height: system.space.x10,
+    backgroundColor: cssVar(system.color.surface.default, system.color.bg.default),
+    borderRadius: cssVar(system.shape.md, system.shape.x1Half),
+    height: forwardFitTokens.system.size.md,
     transition: '0.2s box-shadow, 0.2s border-color',
-    padding: system.space.x2, // Compensate for border
-    margin: px2rem(0), // Fix Safari
+    padding: cssVar(system.padding.xs, system.space.x2), // Compensate for border
+    margin: system.padding.none, // Fix Safari
     width,
-    minWidth: cssVar(width, calc.add(calc.multiply(system.space.x20, 3), system.space.x10)),
-    color: system.color.text.default,
+    color: forwardFitTokens.system.color.fg.default,
     textOverflow: 'ellipsis', // Always show ellipsis for long text inputs as long as it doesn't have focus
 
     '::-ms-clear': {
       display: 'none',
     },
     '&::placeholder': {
-      color: system.color.text.hint,
+      color: forwardFitTokens.system.color.fg.muted.default,
     },
     '&:is(:hover, .hover)': {
-      borderColor: system.color.border.input.strong,
+      borderColor: forwardFitTokens.system.color.border.input.hover,
     },
     '&:is(:focus-visible, .focus):where(:not([disabled]))': {
-      borderColor: brand.common.focusOutline,
-      boxShadow: `inset 0 0 0 1px ${cssVar(brand.common.focusOutline)}`,
+      borderColor: forwardFitTokens.system.color.brand.border.primary,
+      boxShadow: `inset 0 0 0 1px ${forwardFitTokens.system.color.brand.border.primary}`,
       outline: `${px2rem(2)} solid transparent`,
     },
     '&:is(:disabled, .disabled)': {
-      backgroundColor: system.color.bg.alt.softer,
-      borderColor: system.color.border.input.disabled,
-      color: system.color.fg.disabled,
+      opacity: system.opacity.disabled,
       '&::placeholder': {
-        color: system.color.fg.disabled,
+        opacity: system.opacity.disabled,
       },
     },
   }),

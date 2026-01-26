@@ -21,7 +21,7 @@ export const toolbarIconButtonStencil = createStencil({
     minWidth: forwardFitTokens.system.size.md,
     padding: forwardFitTokens.system.padding.none,
     height: forwardFitTokens.system.size.md,
-    [buttonStencil.vars.borderRadius]: forwardFitTokens.system.shape.xs,
+    [buttonStencil.vars.borderRadius]: system.shape.x1,
     [systemIconStencil.vars.color]: system.color.fg.default,
 
     '&:focus-visible, &.focus': {
