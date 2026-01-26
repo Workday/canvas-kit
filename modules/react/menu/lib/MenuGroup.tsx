@@ -1,17 +1,16 @@
 import * as React from 'react';
 
-import {createStencil, CSProps} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
-
 import {
-  createSubcomponent,
+  createContainer,
   createElemPropsHook,
   createModelHook,
-  createContainer,
+  createSubcomponent,
   useUniqueId,
 } from '@workday/canvas-kit-react/common';
-import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
+import {CSProps, createStencil} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export interface MenuGroupHeaderProps extends CSProps, FlexProps {
   /**

@@ -1,8 +1,10 @@
+import {CacheProvider, Theme, ThemeProvider} from '@emotion/react';
 import * as React from 'react';
-import {Theme, ThemeProvider, CacheProvider} from '@emotion/react';
-import {defaultCanvasTheme, PartialEmotionCanvasTheme, useTheme} from './theming';
-import {brand, base} from '@workday/canvas-tokens-web';
-import {getCache, maybeWrapCSSVariables, createStyles} from '@workday/canvas-kit-styling';
+
+import {createStyles, getCache, maybeWrapCSSVariables} from '@workday/canvas-kit-styling';
+import {base, brand} from '@workday/canvas-tokens-web';
+
+import {PartialEmotionCanvasTheme, defaultCanvasTheme, useTheme} from './theming';
 
 export interface CanvasProviderProps {
   /**
@@ -67,8 +69,8 @@ export const defaultBranding = createStyles({
   [brand.primary.light]: base.blue200,
   [brand.primary.lighter]: base.blue50,
   [brand.primary.lightest]: base.blue25,
-  [brand.gradient
-    .primary]: `linear-gradient(90deg, ${brand.primary.base} 0%, ${brand.primary.dark} 100%)`,
+  [brand.gradient.primary]:
+    `linear-gradient(90deg, ${brand.primary.base} 0%, ${brand.primary.dark} 100%)`,
 });
 
 export const useCanvasThemeToCssVars = (

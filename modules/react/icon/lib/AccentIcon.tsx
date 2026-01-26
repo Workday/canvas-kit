@@ -1,10 +1,12 @@
-import {colors} from '@workday/canvas-kit-react/tokens';
-import {CanvasAccentIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
+
 import {createComponent, getColor} from '@workday/canvas-kit-react/common';
 import {SystemPropValues} from '@workday/canvas-kit-react/layout';
+import {colors} from '@workday/canvas-kit-react/tokens';
 import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+import {CanvasAccentIcon, CanvasIconTypes} from '@workday/design-assets-types';
+
 import {Svg, SvgProps, svgStencil, transformColorNameToToken} from './Svg';
 
 /**

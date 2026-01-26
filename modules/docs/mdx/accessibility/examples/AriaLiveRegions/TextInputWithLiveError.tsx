@@ -1,10 +1,11 @@
 import React from 'react';
+
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {AriaLiveRegion, changeFocus} from '@workday/canvas-kit-react/common';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {system} from '@workday/canvas-tokens-web';
 import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 const hintStyles = createStyles({
   height: system.space.x6,

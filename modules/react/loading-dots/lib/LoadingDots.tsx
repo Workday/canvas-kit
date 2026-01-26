@@ -1,14 +1,14 @@
-import {system} from '@workday/canvas-tokens-web';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {
+  CSProps,
+  calc,
+  createStencil,
+  cssVar,
   handleCsProp,
   keyframes,
-  CSProps,
-  createStencil,
-  calc,
   px2rem,
-  cssVar,
 } from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 /**
  * Keyframe for the dots loading animation.

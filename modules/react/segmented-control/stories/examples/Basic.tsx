@@ -1,38 +1,42 @@
-import * as React from 'react';
+import React from 'react';
 
-import {
-  listViewIcon,
-  worksheetsIcon,
-  deviceTabletIcon,
-  percentageIcon,
-} from '@workday/canvas-system-icons-web';
 import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
+import {BodyText} from '@workday/canvas-kit-react/text';
+import {
+  gridIcon,
+  listDetailIcon,
+  listViewIcon,
+  pieChartIcon,
+} from '@workday/canvas-system-icons-web';
 
 export const Basic = () => {
-  const [value, setValue] = React.useState<string | number>();
-  const handleToggle = (selectedValue: string | number) => {
-    setValue(selectedValue);
-  };
+  const [viewType, setViewType] = React.useState('table');
 
   return (
-    <SegmentedControl value={value} onChange={handleToggle}>
-      <SegmentedControl.Button
-        icon={listViewIcon}
-        value="list-view"
-        onClick={e => console.log('Existing TertiaryButton onClick callback')}
-        id="test"
-      />
-      <SegmentedControl.Button icon={worksheetsIcon} value="table-view" disabled={true} />
-      <SegmentedControl.Button
-        icon={deviceTabletIcon}
-        value="device-view"
-        aria-label="Device View"
-      />
-      <SegmentedControl.Button
-        icon={percentageIcon}
-        value="percent-view"
-        aria-label="Percent View"
-      />
-    </SegmentedControl>
+    <>
+      <SegmentedControl initialValue={viewType} onSelect={data => setViewType(data.id)}>
+        <SegmentedControl.List aria-label="View type">
+          <SegmentedControl.Item data-id="table" icon={gridIcon} tooltipProps={{title: 'Table'}} />
+          <SegmentedControl.Item
+            data-id="list-view"
+            icon={listViewIcon}
+            tooltipProps={{title: 'List'}}
+          />
+          <SegmentedControl.Item
+            data-id="list-detail"
+            icon={listDetailIcon}
+            tooltipProps={{title: 'Detail'}}
+          />
+          <SegmentedControl.Item
+            data-id="diagrams"
+            icon={pieChartIcon}
+            tooltipProps={{title: 'Diagram'}}
+          />
+        </SegmentedControl.List>
+      </SegmentedControl>
+      <BodyText size="small" marginTop="s">
+        Selected: {viewType}
+      </BodyText>
+    </>
   );
 };

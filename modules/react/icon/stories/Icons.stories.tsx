@@ -1,20 +1,21 @@
 import * as React from 'react';
+
 import {shieldIcon} from '@workday/canvas-accent-icons-web';
 import {benefitsIcon} from '@workday/canvas-applet-icons-web';
-import {CanvasIconTypes, CanvasGraphic} from '@workday/design-assets-types';
+import {createStyles, cssVar} from '@workday/canvas-kit-styling';
+import {activityStreamIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
+import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
+
 import {
   AccentIcon,
   AppletIcon,
+  Graphic,
   SystemIcon,
   SystemIconCircle,
-  Graphic,
   graphicImageStencil,
   systemIconCircleStencil,
 } from '../index';
-import {activityStreamIcon} from '@workday/canvas-system-icons-web';
-
-import {system} from '@workday/canvas-tokens-web';
-import {createStyles, cssVar} from '@workday/canvas-kit-styling';
 
 const graphicExample: CanvasGraphic = {
   name: 'badgeAchievement',
@@ -89,8 +90,8 @@ export const SystemIconStory = {
       <SystemIcon
         className="custom-class"
         icon={activityStreamIcon}
-        accent={system.color.fg.primary.default}
-        fill={system.color.fg.primary.default}
+        accent={system.color.brand.fg.primary.default}
+        fill={system.color.brand.fg.primary.default}
         background={system.color.fg.inverse}
       />
       <br />

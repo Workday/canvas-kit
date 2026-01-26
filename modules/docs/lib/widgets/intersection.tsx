@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {IntersectionValue} from '../../docgen/docTypes';
-import {registerWidget, Value} from '../Value';
+import {Value, registerWidget} from '../Value';
 import {RenderContext} from '../widgetUtils';
 
 registerWidget<IntersectionValue>('intersection', ({value}) => {

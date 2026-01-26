@@ -1,8 +1,9 @@
 import {ErrorType, createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, calc, px2rem} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
+import {brand, system} from '@workday/canvas-tokens-web';
+
 import {CheckBackground} from './CheckBackground';
 
 interface CheckboxCheckProps {

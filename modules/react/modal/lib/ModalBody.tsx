@@ -1,10 +1,10 @@
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Popup} from '@workday/canvas-kit-react/popup';
-
-import {useModalModel} from './hooks';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
+
+import {useModalModel} from './hooks';
 
 export interface ModalBodyProps extends ExtractProps<typeof Popup.Body, never> {}
 

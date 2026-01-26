@@ -3,10 +3,10 @@ import React from 'react';
 import {createSubcomponent} from '@workday/canvas-kit-react/common';
 import {Menu} from '@workday/canvas-kit-react/menu';
 
-import {useComboboxModel} from './hooks/useComboboxModel';
-import {ComboboxMenuList} from './ComboboxMenuList';
 import {ComboboxCard} from './ComboboxCard';
+import {ComboboxMenuList} from './ComboboxMenuList';
 import {ComboboxMenuPopper} from './ComboboxPopper';
+import {useComboboxModel} from './hooks/useComboboxModel';
 
 export interface ComboboxMenuProps {
   /**

@@ -1,15 +1,15 @@
 import React from 'react';
 
-import {createContainer, GrowthBehavior} from '@workday/canvas-kit-react/common';
+import {GrowthBehavior, createContainer} from '@workday/canvas-kit-react/common';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 
-import {useFormFieldModel} from './hooks';
+import {FormFieldContainer} from './FormFieldContainer';
+import {FormFieldField} from './FormFieldField';
+import {FormFieldHint} from './FormFieldHint';
 import {FormFieldInput} from './FormFieldInput';
 import {FormFieldLabel} from './FormFieldLabel';
-import {FormFieldHint} from './FormFieldHint';
-import {FormFieldContainer} from './FormFieldContainer';
 import {formFieldStencil} from './formFieldStencil';
-import {FormFieldField} from './FormFieldField';
+import {useFormFieldModel} from './hooks';
 
 export interface FormFieldProps extends FlexProps, GrowthBehavior {
   /**

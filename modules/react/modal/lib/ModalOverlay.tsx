@@ -1,16 +1,17 @@
 import ReactDOM from 'react-dom';
 
 import {
-  createSubcomponent,
   createElemPropsHook,
-  useWindowSize,
+  createSubcomponent,
   useForkRef,
+  useWindowSize,
 } from '@workday/canvas-kit-react/common';
-import {usePopupModel, usePopupStack} from '@workday/canvas-kit-react/popup';
 import {Box, BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {useModalModel} from './hooks';
+import {usePopupModel, usePopupStack} from '@workday/canvas-kit-react/popup';
 import {createStencil, cssVar, keyframes} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+
+import {useModalModel} from './hooks';
 
 export interface ModalOverlayProps extends BoxProps {}
 

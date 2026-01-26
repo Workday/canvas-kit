@@ -1,24 +1,23 @@
 import * as React from 'react';
 
-import {CSProps, createStencil, px2rem} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
-
-import {
-  createSubcomponent,
-  composeHooks,
-  createElemPropsHook,
-  useLocalRef,
-  createComponent,
-} from '@workday/canvas-kit-react/common';
-import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {
   isCursor,
   useListItemRegister,
   useListItemRovingFocus,
   useListItemSelect,
 } from '@workday/canvas-kit-react/collection';
+import {
+  composeHooks,
+  createComponent,
+  createElemPropsHook,
+  createSubcomponent,
+  useLocalRef,
+} from '@workday/canvas-kit-react/common';
+import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
+import {CSProps, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
 
 import {useMenuModel} from './useMenuModel';
 
@@ -180,28 +179,30 @@ export const useMenuItemArrowReturn = createElemPropsHook(useMenuModel)(model =>
   };
 });
 
-export const useMenuItemFocus = createElemPropsHook(useMenuModel)(
-  (model, ref, elemProps: {'data-id': string} = {'data-id': ''}) => {
-    const {localRef, elementRef} = useLocalRef(ref as React.Ref<HTMLElement>);
-    const id = elemProps['data-id'];
-    // focus on the item with the cursor
-    React.useLayoutEffect(() => {
-      if (model.state.mode === 'single') {
-        if (isCursor(model.state, id)) {
-          // delay focus changes to allow PopperJS to position
-          requestAnimationFrame(() => {
-            localRef.current?.focus();
-          });
-        }
+export const useMenuItemFocus = createElemPropsHook(useMenuModel)((
+  model,
+  ref,
+  elemProps: {'data-id': string} = {'data-id': ''}
+) => {
+  const {localRef, elementRef} = useLocalRef(ref as React.Ref<HTMLElement>);
+  const id = elemProps['data-id'];
+  // focus on the item with the cursor
+  React.useLayoutEffect(() => {
+    if (model.state.mode === 'single') {
+      if (isCursor(model.state, id)) {
+        // delay focus changes to allow PopperJS to position
+        requestAnimationFrame(() => {
+          localRef.current?.focus();
+        });
       }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [id, localRef, model.state.cursorId, model.state.mode]);
-    return {
-      ref: elementRef,
-      className: isCursor(model.state, elemProps['data-id']) ? 'focus' : undefined,
-    };
-  }
-);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id, localRef, model.state.cursorId, model.state.mode]);
+  return {
+    ref: elementRef,
+    className: isCursor(model.state, elemProps['data-id']) ? 'focus' : undefined,
+  };
+});
 
 function hideParent(model: ReturnType<typeof useMenuModel>) {
   if (model.UNSTABLE_parentModel) {

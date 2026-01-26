@@ -1,17 +1,17 @@
 import React from 'react';
 
-import {createContainer, ExtractProps} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createContainer} from '@workday/canvas-kit-react/common';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Popup} from '@workday/canvas-kit-react/popup';
-
-import {ToastCloseIcon} from './ToastCloseIcon';
-import {ToastIcon} from './ToastIcon';
-import {ToastMessage} from './ToastMessage';
-import {ToastLink} from './ToastLink';
-import {ToastBody} from './ToastBody';
-import {useToastModel} from './hooks/useToastModel';
 import {calc, createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
+
+import {ToastBody} from './ToastBody';
+import {ToastCloseIcon} from './ToastCloseIcon';
+import {ToastIcon} from './ToastIcon';
+import {ToastLink} from './ToastLink';
+import {ToastMessage} from './ToastMessage';
+import {useToastModel} from './hooks/useToastModel';
 
 export interface ToastProps extends Omit<ExtractProps<typeof Popup.Card, never>, 'model'> {}
 

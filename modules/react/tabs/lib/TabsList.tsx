@@ -1,23 +1,23 @@
 import * as React from 'react';
 
 import {
-  composeHooks,
-  createSubcomponent,
-  createElemPropsHook,
-  ExtractProps,
-  useModalityType,
-  useLocalRef,
-} from '@workday/canvas-kit-react/common';
-import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {
-  useOverflowListMeasure,
   useListRenderItems,
   useListResetCursorOnBlur,
+  useOverflowListMeasure,
 } from '@workday/canvas-kit-react/collection';
-
-import {useTabsModel} from './useTabsModel';
+import {
+  ExtractProps,
+  composeHooks,
+  createElemPropsHook,
+  createSubcomponent,
+  useLocalRef,
+  useModalityType,
+} from '@workday/canvas-kit-react/common';
+import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+
+import {useTabsModel} from './useTabsModel';
 
 export interface TabListProps<T = any> extends Omit<ExtractProps<typeof Flex, never>, 'children'> {
   /**
@@ -58,10 +58,10 @@ function getScrollPosition(
   return percentage <= -1
     ? undefined
     : percentage > 0.99
-    ? 'end'
-    : percentage > 0.01
-    ? 'middle'
-    : 'start';
+      ? 'end'
+      : percentage > 0.01
+        ? 'middle'
+        : 'start';
 }
 
 function setScrollPosition(elem: HTMLDivElement, scrollPosition?: 'start' | 'middle' | 'end') {
@@ -72,35 +72,33 @@ function setScrollPosition(elem: HTMLDivElement, scrollPosition?: 'start' | 'mid
   }
 }
 
-export const useTabOverflowScroll = createElemPropsHook(useTabsModel)(
-  (
-    _model,
-    ref,
-    elemProps: {
-      'aria-orientation'?: 'vertical' | 'horizontal';
-    } = {}
-  ) => {
-    const direction = elemProps['aria-orientation'] || 'vertical';
+export const useTabOverflowScroll = createElemPropsHook(useTabsModel)((
+  _model,
+  ref,
+  elemProps: {
+    'aria-orientation'?: 'vertical' | 'horizontal';
+  } = {}
+) => {
+  const direction = elemProps['aria-orientation'] || 'vertical';
 
-    const {localRef, elementRef} = useLocalRef<HTMLDivElement>(ref as React.Ref<HTMLDivElement>);
+  const {localRef, elementRef} = useLocalRef<HTMLDivElement>(ref as React.Ref<HTMLDivElement>);
 
-    React.useLayoutEffect(() => {
-      if (!localRef.current) {
-        return;
-      }
+  React.useLayoutEffect(() => {
+    if (!localRef.current) {
+      return;
+    }
 
-      setScrollPosition(localRef.current, getScrollPosition(localRef.current, direction));
-    }, [localRef, direction]);
+    setScrollPosition(localRef.current, getScrollPosition(localRef.current, direction));
+  }, [localRef, direction]);
 
-    return {
-      ref: elementRef,
-      onScroll: (event: React.UIEvent<HTMLDivElement>) => {
-        const elem = event.currentTarget;
-        setScrollPosition(elem, getScrollPosition(elem, direction));
-      },
-    };
-  }
-);
+  return {
+    ref: elementRef,
+    onScroll: (event: React.UIEvent<HTMLDivElement>) => {
+      const elem = event.currentTarget;
+      setScrollPosition(elem, getScrollPosition(elem, direction));
+    },
+  };
+});
 
 export const useTabsList = composeHooks(
   useTabOverflowScroll,
