@@ -150,18 +150,16 @@ Primary brand color for main actions and interactions. Use sparingly for maximum
 
 ![Primary Button component showing primary background and text colors](color-roles-primary-role.png)
 
-<Do>
+**Do:**
 
 - Apply to brand elements and main actions
 
-</Do>
 
-<Dont>
+**Dont:**
 
 - Use for secondary UI or informational content
 - Apply to decorative elements
 
-</Dont>
 
 ### Positive Colors
 
@@ -169,46 +167,41 @@ Success states and completion feedback. Provides immediate confirmation when tas
 
 ![Success Alert component with positive background and text colors](color-roles-positive-role.png)
 
-<Do>
+**Do:**
 
 - Use for success messages and completed states
 - Apply to confirmation feedback
 
-</Do>
 
 ### Alt Colors
 
 Alternative styling for secondary elements that need visual distinction from primary elements.
 
-<Do>
+**Do:**
 
 - Use to create subtle differences against the default background color
 
-</Do>
 
-<Dont>
+**Dont:**
 
 - Use on foregrounds, text or icons
 - Use on main actions
 
-</Dont>
 
 ### Muted Colors
 
 Subtle elements with reduced emphasis. Present but not prominent.
 
-<Do>
+**Do:**
 
 - Use on interactive secondary UI borders
 
-</Do>
 
-<Dont>
+**Dont:**
 
 - Use for main actions
 - Apply to non-interactive surfaces
 
-</Dont>
 
 ### Caution Colors
 
@@ -216,18 +209,16 @@ Non-blocking warnings and alerts. Informs the user of potential risk without blo
 
 ![Warning Alert component and TextInput with caution border showing validation error](color-roles-caution-role.png)
 
-<Do>
+**Do:**
 
 - Use for alerts in forms
 - Use for non-critical messaging
 
-</Do>
 
-<Dont>
+**Dont:**
 
 - Use for blocking errors or destructive actions
 
-</Dont>
 
 ### Critical Colors
 
@@ -235,39 +226,35 @@ Blocking errors and destructive actions. Reserved for situations that call for i
 
 ![Error Alert component and Destructive Button with critical background and text colors](color-roles-critical-role.png)
 
-<Do>
+**Do:**
 
 - Use for blocking errors and to confirm destructive actions
 - Apply to system failures
 
-</Do>
 
-<Dont>
+**Dont:**
 
 - Use for warnings or informational messages
 - Apply to non-destructive actions
 
-</Dont>
 
 ### Info Colors
 
 System announcements and informational messages that provide context or status updates.
 
-<Do>
+**Do:**
 
 - Use for system announcements and status updates
 - Apply to informational banners and notices
 - Use for contextual information about features or changes
 
-</Do>
 
-<Dont>
+**Dont:**
 
 - Use for errors, warnings, or success messages
 - Apply to instructional or helper content
 - Use for placeholder text or form guidance
 
-</Dont>
 
 ### AI Colors
 
@@ -275,19 +262,17 @@ Highlights AI-powered content and features. Use consistently for all AI function
 
 ![AI Badge and Button components with AI-specific background and accent colors](color-roles-ai-role.png)
 
-<Do>
+**Do:**
 
 - Use for AI-driven features and ML-powered content
 - Apply to intelligent assistance widgets
 
-</Do>
 
-<Dont>
+**Dont:**
 
 - Use for standard automation or manual processes
 - Apply to features not powered by AI
 
-</Dont>
 
 ### Focus Colors
 
@@ -295,34 +280,30 @@ Used for focus indicators. Shows the interactive element currently has focus.
 
 ![Button and TextInput components with focus ring outlines for keyboard navigation](color-roles-focus-role.png)
 
-<Do>
+**Do:**
 
 - Use for focus rings and keyboard navigation indicators
 
-</Do>
 
-<Dont>
+**Dont:**
 
 - Use for active or selected states
 
-</Dont>
 
 ### Transparent Colors
 
 Colors that are fully or slightly transparent. Consistent behavior across dynamic backgrounds.
 
-<Do>
+**Do:**
 
 - Use for invisible borders and spacing elements
 - Use when backgrounds are unpredictable/dynamic
 
-</Do>
 
-<Dont>
+**Dont:**
 
 - Apply to content that should be visible
 
-</Dont>
 
 ### Inverse Colors
 
@@ -330,87 +311,77 @@ High contrast text on dark backgrounds. May be used when backgrounds use a color
 
 ![Dark Card component with inverse text color for high contrast on dark backgrounds](color-roles-inverse-role.png)
 
-<Do>
+**Do:**
 
 - Use for text on dark backgrounds (step 600+)
 - Apply when high contrast is required
 
-</Do>
 
-<Dont>
+**Dont:**
 
 - Use on backgrounds lighter than 600
 - Apply solely as a means to draw attention
 
-</Dont>
 
 ### Contrast Colors
 
 Contrast tokens are used to stand out strongly against the default page or surface background. Use
 them for situations that require high contrast.
 
-<Do>
+**Do:**
 
 - Use for strong contrast on the default page background
 
-</Do>
 
-<Dont>
+**Dont:**
 
 - Use for standard prose
 
-</Dont>
 
 ### Input Colors
 
 Form field borders ensuring 3:1 contrast against surface backgrounds.
 
-<Do>
+**Do:**
 
 - Use for form field borders and input outlines
 - Apply to interactive form elements
 
-</Do>
 
-<Dont>
+**Dont:**
 
 - Use on non-interactive surfaces
 
-</Dont>
 
 ### Container Colors
 
 Surfaces that exist on top of the page background.
 
-<Do>
+**Do:**
 
 - Use for cards, side panels, and dialogs, popups
 - Add a border or some other treatment (e.g. Depth) to visually separate from page backgrounds
 
-</Do>
 
-<Dont>
+**Dont:**
 
 - Use for page sections or content areas
 
-</Dont>
 
 ### Divider Colors
 
 Content separators that organize information between sections.
 
-<Do>
+**Do:**
 
 - Use to create visual separation between page sections or content areas
 - Apply consistently between sections in a group
 
-</Do>
 
-<Dont>
+**Dont:**
 
 - Apply to Containers
 
-</Dont>
 
 ### Overlay Colors
 
@@ -418,19 +389,17 @@ Semi-transparent scrims that dim the background to focus attention on a modal vi
 
 ![Modal Dialog with semi-transparent overlay background dimming page content](color-roles-overlay-role.png)
 
-<Do>
+**Do:**
 
 - Use to focus attention on modals
 - Apply consistent opacity (`opacity.overlay`) for all scrims
 
-</Do>
 
-<Dont>
+**Dont:**
 
 - Use for non-modal views or when content visibility is a priority
 - Stack overlays on top of each other
 
-</Dont>
 
 ### Disabled Colors
 
@@ -438,57 +407,51 @@ Non-interactive elements that are unavailable. Some disabled elements use opacit
 
 ![Disabled Button and TextInput components with reduced opacity disabled colors](color-roles-disabled-role.png)
 
-<Do>
+**Do:**
 
 - Use to indicate disabled elements, like Buttons or FormFields
 
-</Do>
 
-<Dont>
+**Dont:**
 
 - Use for interactive elements
 - Apply when opacity works better
 
-</Dont>
 
 ### Translucent Colors
 
 Slightly opaque overlays for dynamic surfaces. More opaque than transparent.
 
-<Do>
+**Do:**
 
 - Use on dynamic surfaces like video players
 - Apply to tooltips and overlays needing background visibility
 
-</Do>
 
-<Dont>
+**Dont:**
 
 - Use when full transparency is needed
 - Apply to static surfaces
 
-</Dont>
 
 ### Hint Colors
 
 Helper text and instructional content that guides users through tasks and interactions.
 
-<Do>
+**Do:**
 
 - Use for placeholder text in form fields
 - Apply to instructional content and step-by-step guidance
 - Use for tooltips and contextual help
 - Apply to field descriptions and input formatting requirements
 
-</Do>
 
-<Dont>
+**Dont:**
 
 - Use for system announcements or status updates
 - Apply to error or critical messages
 - Use for informational banners or notices
 
-</Dont>
 
 ## Modifiers
 

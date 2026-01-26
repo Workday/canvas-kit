@@ -73,19 +73,15 @@ Full rounding for high-visibility components intended to draw attention. Used fo
 
 ## Using our Shapes
 
-<Do>
+**Do:**
 
 - Apply the same border radius value to all corners of an element. This ensures the shape doesn't get distorted.
 - Choose shape tokens based on component type and use case. Follow the recommended usage for each token size.
 
-</Do>
-
-<Dont>
+**Dont:**
 
 - Don't combine different border radius values on the same element.
 - Don't use different values for different corners unless specifically required.
-
-</Dont>
 
 ## Web Examples
 
@@ -109,17 +105,3 @@ const styles = {
   border-radius: var(--cnvs-sys-shape-xxl);
 }
 ```
-
-<ShapeTokens />
-
-<InternalContent>
-
-## iOS Examples
-
-Coming soon!
-
-## Android Examples
-
-Coming soon!
-
-</InternalContent>

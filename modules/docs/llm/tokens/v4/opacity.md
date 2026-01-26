@@ -131,15 +131,3 @@ const modalScrimStyles = {
   opacity: var(--cnvs-sys-opacity-overlay);
 }
 ```
-
-<InternalContent>
-
-## iOS Examples
-
-Coming soon!
-
-## Android Examples
-
-Coming soon!
-
-</InternalContent>

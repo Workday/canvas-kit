@@ -182,20 +182,3 @@ const styles = {
 }
 ```
 
-<SpaceTokens />
-
-<InternalContent>
-
-## iOS Examples
-
-Coming soon!
-
-## Android Examples
-
-Coming soon!
-
-</InternalContent>
-
-## Deprecated Space Tokens
-
-<DeprecatedSpaceTokens/>
