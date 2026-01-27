@@ -18,6 +18,11 @@
     "tokens/color-roles.md",
     "tokens/color-scale.md",
     "llm-token-migration-14.txt",
-    "llm-style-props-migration.txt"
+    "llm-style-props-migration.txt",
+    "tokens/v4/v4-token-migration.md",
+    "tokens/v4/opacity.md",
+    "tokens/v4/shape.md",
+    "tokens/v4/size.md",
+    "tokens/v4/space.md"
   ]
 }

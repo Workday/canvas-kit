@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.2.14](https://github.com/Workday/canvas-kit/releases/tag/v14.2.14) (2026-01-27)
+
+### Components
+
+- fix: When no Popup or Modal.Target element is used, make sure RTL direction is inherited correctly ([#3720](https://github.com/Workday/canvas-kit/pull/3720)) ([@ahayes91](https://github.com/ahayes91))
+
+
+## [v14.2.13](https://github.com/Workday/canvas-kit/releases/tag/v14.2.13) (2026-01-27)
+
+### Documentation
+
+- docs: Add v4 token upgrade to mcp ([#3711](https://github.com/Workday/canvas-kit/pull/3711)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  Add v4 token docs and upgrade guide to mcp to help teams migrate to v4 tokens. For a thorough guide, please view our [token docs](https://workday.github.io/canvas-tokens/?path=/docs/guides-upgrade-guides-v4-overview--docs).
+
+
+## [v14.2.12](https://github.com/Workday/canvas-kit/releases/tag/v14.2.12) (2026-01-26)
+
+
+
+
 ## [v14.2.11](https://github.com/Workday/canvas-kit/releases/tag/v14.2.11) (2026-01-22)
 
 ### Components

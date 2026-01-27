@@ -326,6 +326,60 @@ Complete migration guide from @workday/canvas-kit-react/tokens to @workday/canva
           uri: 'docs://llm-token-migration-14',
           contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
         };
+      case 'tokens/v4/v4-token-migration.md':
+        return {
+          title: 'Canvas Kit v4 Token Migration Guide',
+          description: `# Canvas Kit v4 Token Migration Guide
+Complete migration guide from @workday/canvas-tokens-web v3 to v4. Includes:
+- Extended alpha scales across base color palettes (A25, A50, A100, A200) and extended alpha range (A0-A975) for slate, neutral, and white palettes
+- New magenta palette added to the color system
+- Brand token updates with numerical naming (25, 50, 100, 200...900, 950, 975) replacing descriptive names (darkest, darker, dark, base, light, lighter, lightest)
+- Brand common token updates: focus-outline → focus, error-inner → critical, alert-inner → caution.inner, alert-outer → caution.outer
+- Comprehensive surface token system (system.color.surface.*) replacing color.bg.surface.* tokens for better UI component support
+- New semantic tokens for size, space, shape, and breakpoints
+- Focus, accent, and semantic token additions
+- Complete deprecation mapping tables showing old tokens → new token replacements
+- Migration examples and best practices for updating code from v3 to v4`,
+          mimeType: 'text/markdown',
+          uri: 'docs://tokens/v4/v4-token-migration',
+          contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
+        };
+      case 'tokens/v4/opacity.md':
+        return {
+          title: 'Canvas Kit v4 Opacity Token Migration Guide',
+          description: `# Canvas Kit v4 Opacity Token Migration Guide
+Opacity tokens control transparency values for UI elements. Use them to create visual hierarchy, indicate states, and guide user focus.`,
+          mimeType: 'text/markdown',
+          uri: 'docs://tokens/v4/opacity',
+          contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
+        };
+      case 'tokens/v4/shape.md':
+        return {
+          title: 'Canvas Kit v4 Shape Token Migration Guide',
+          description: `# Canvas Kit v4 Shape Token Migration Guide
+Shape tokens control border radius values for UI elements. Use them to create consistent rounded corners across components.`,
+          mimeType: 'text/markdown',
+          uri: 'docs://tokens/v4/shape',
+          contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
+        };
+      case 'tokens/v4/size.md':
+        return {
+          title: 'Canvas Kit v4 Size Token Migration Guide',
+          description: `# Canvas Kit v4 Size Token Migration Guide
+Size tokens control the size of UI elements. Use them to create consistent sizes across components.`,
+          mimeType: 'text/markdown',
+          uri: 'docs://tokens/v4/size',
+          contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
+        };
+      case 'tokens/v4/space.md':
+        return {
+          title: 'Canvas Kit v4 Space Token Migration Guide',
+          description: `# Canvas Kit v4 Space Token Migration Guide
+Space tokens control the spacing of UI elements. Use them to create consistent spacing across components.`,
+          mimeType: 'text/markdown',
+          uri: 'docs://tokens/v4/space',
+          contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
+        };
       default:
         throw new Error(`${fileName} is not a valid token resource`);
     }
