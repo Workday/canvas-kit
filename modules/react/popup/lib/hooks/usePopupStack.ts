@@ -89,21 +89,22 @@ export const usePopupStack = <E extends HTMLElement>(
 
   // The direction will properly follow the theme via React context, but portals lose the `dir`
   // hierarchy, so we'll add it back here. When there's no target (e.g. consumer doesn't use
-  // Popup.Target), the container is appended to body and loses the source tree's dir. Use
-  // document.activeElement (the trigger is often still focused when the effect runs) so we
-  // inherit from the correct hierarchy; otherwise fall back to document.body.
+  // Popup.Target), find the nearest element with a `dir` attribute: start from the focused element
+  // (the trigger) or body, then use closest('[dir]'). Prefer reading getAttribute('dir') when
+  // present to avoid getComputedStyle.
   React.useLayoutEffect(() => {
     const targetEl = target ? ('current' in target ? target.current : target) : undefined;
     let elementToCheck: Element | undefined = targetEl ?? undefined;
     if (elementToCheck == null && typeof document !== 'undefined') {
       const active = document.activeElement;
       const container = localRef.current;
-      // Prefer the focused element (e.g. the trigger) only if it's outside our container,
-      // so we inherit from the app tree that opened the popup.
-      elementToCheck = active && container && !container.contains(active) ? active : document.body;
+      const start = active && container && !container.contains(active) ? active : document.body;
+      elementToCheck = start.closest('[dir]') ?? document.documentElement;
     }
     if (elementToCheck) {
-      const isRTL = isElementRTL(elementToCheck);
+      const explicitDir = elementToCheck.getAttribute('dir');
+      const isRTL =
+        explicitDir != null ? explicitDir.toLowerCase() === 'rtl' : isElementRTL(elementToCheck);
       if (isRTL) {
         localRef.current?.setAttribute('dir', 'rtl');
       } else {
