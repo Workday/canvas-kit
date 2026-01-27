@@ -29,6 +29,7 @@ export interface TooltipContainerProps extends React.HTMLAttributes<HTMLDivEleme
   id?: string;
   /**
    * Whether the anchor element has focus-visible. Used to adjust tooltip styling.
+   * @private
    */
   elementHasFocus?: boolean;
 }
@@ -139,7 +140,7 @@ export const TooltipContainer = createComponent('div')<TooltipContainerProps>({
           tooltipContainerStencil({
             tooltipTransformOriginHorizontal: transformOrigin?.horizontal,
             tooltipTransformOriginVertical: transformOrigin?.vertical,
-            ...(elementHasFocus ? {elementHasFocus: true} : {}),
+            elementHasFocus,
           }),
           tooltipTranslateVars({positionX: translate.x, positionY: translate.y}),
         ])}
