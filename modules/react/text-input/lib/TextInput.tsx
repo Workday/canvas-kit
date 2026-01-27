@@ -71,12 +71,12 @@ export const textInputStencil = createStencil({
 
     error: {
       error: {
-        borderColor: brand.common.errorInner,
+        borderColor: forwardFitTokens.system.color.brand.border.critical,
         borderWidth: px2rem(2),
-        backgroundColor: brand.error.lightest,
+        backgroundColor: forwardFitTokens.system.color.brand.surface.critical.default,
         '&:is(:hover, .hover, :disabled, .disabled, :focus-visible:not([disabled]), .focus:not([disabled]))':
           {
-            borderColor: brand.common.errorInner,
+            borderColor: forwardFitTokens.system.color.brand.border.critical,
           },
         '&:is(:focus-visible, .focus):not([disabled])': {
           boxShadow: `0 0 0 2px ${system.color.border.inverse.default}, 0 0 0 4px ${brand.common.focusOutline}`,

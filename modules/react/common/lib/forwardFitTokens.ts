@@ -11,8 +11,14 @@ export const forwardFitTokens = {
     },
     color: {
       brand: {
+        surface: {
+          critical: {
+            default: cssVar(system.color.brand.surface.critical.default, brand.error.lightest),
+          },
+        },
         border: {
           primary: cssVar(system.color.brand.border.primary, brand.common.focusOutline),
+          critical: cssVar(system.color.brand.border.critical, brand.common.errorInner),
         },
       },
       border: {
