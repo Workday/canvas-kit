@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import {createComponent, forwardFitTokens} from '@workday/canvas-kit-react/common';
+import {createComponent} from '@workday/canvas-kit-react/common';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {textStencil} from '@workday/canvas-kit-react/text';
-import {createStencil} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export interface CardHeadingProps extends BoxProps {
@@ -20,7 +20,8 @@ export const cardHeadingStencil = createStencil({
   base: {
     color: system.color.fg.strong,
     fontWeight: system.fontWeight.bold,
-    marginBlock: forwardFitTokens.system.padding.none,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    marginBlock: cssVar(system.padding.none, system.space.zero),
   },
   defaultModifiers: {typeLevel: 'body.large'},
 });

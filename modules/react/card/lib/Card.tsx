@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {createComponent, forwardFitTokens} from '@workday/canvas-kit-react/common';
+import {createComponent} from '@workday/canvas-kit-react/common';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
@@ -22,26 +22,29 @@ export interface CardProps extends BoxProps {
 
 // .cnvs-card
 export const cardStencil = createStencil({
-  vars: {
-    cardShape: cssVar(system.shape.xxl, system.shape.x6),
-  },
-  base: ({cardShape}) => ({
+  base: {
     display: 'flex',
     flexDirection: 'column',
-    gap: forwardFitTokens.system.gap.lg,
-    padding: forwardFitTokens.system.padding.xl,
-    backgroundColor: forwardFitTokens.system.color.surface.default,
-    borderRadius: cardShape,
-    border: `${px2rem(1)} solid ${forwardFitTokens.system.color.border.default}`,
-  }),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    gap: cssVar(system.gap.lg, system.space.x6),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    padding: cssVar(system.padding.xl, system.space.x6),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    backgroundColor: cssVar(system.color.surface.default, system.color.bg.default),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    borderRadius: cssVar(system.shape.xxl, system.shape.x6),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    border: `${px2rem(1)} solid ${cssVar(system.color.border.default, system.color.border.divider)}`,
+  },
   modifiers: {
     variant: {
       borderless: {
         borderColor: 'transparent',
       },
       tonal: {
-        backgroundColor: forwardFitTokens.system.color.surface.alt.default,
-        borderColor: forwardFitTokens.system.color.border.transparent,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        backgroundColor: cssVar(system.color.surface.alt.default, system.color.bg.alt.soft),
+        borderColor: system.color.border.transparent,
       },
     },
   },
