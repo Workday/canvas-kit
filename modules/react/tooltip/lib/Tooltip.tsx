@@ -117,7 +117,6 @@ export const Tooltip = createComponent('div')({
 
     React.useEffect(() => {
       const target = targetRef.current;
-      console.log('target', target);
       if (!target) {
         return;
       }
