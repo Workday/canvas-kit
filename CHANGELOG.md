@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.2.14](https://github.com/Workday/canvas-kit/releases/tag/v14.2.14) (2026-01-27)
+
+### Components
+
+- fix: When no Popup or Modal.Target element is used, make sure RTL direction is inherited correctly ([#3720](https://github.com/Workday/canvas-kit/pull/3720)) ([@ahayes91](https://github.com/ahayes91))
+
+
 ## [v14.2.13](https://github.com/Workday/canvas-kit/releases/tag/v14.2.13) (2026-01-27)
 
 ### Documentation
