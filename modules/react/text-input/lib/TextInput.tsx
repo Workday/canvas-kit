@@ -26,32 +26,43 @@ export const textInputStencil = createStencil({
   base: ({width}) => ({
     ...system.type.subtext.large,
     display: 'block',
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     border: `${px2rem(1)} solid ${cssVar(system.color.border.input.default)}`,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     backgroundColor: cssVar(system.color.surface.default, system.color.bg.default),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     borderRadius: cssVar(system.shape.md, system.shape.x1Half),
-    height: forwardFitTokens.system.size.md,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    height: cssVar(system.size.md, system.space.x10),
     transition: '0.2s box-shadow, 0.2s border-color',
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     padding: cssVar(system.padding.xs, system.space.x2), // Compensate for border
     margin: system.padding.none, // Fix Safari
     width,
-    color: forwardFitTokens.system.color.fg.default,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    color: cssVar(system.color.fg.default, system.color.text.default),
     textOverflow: 'ellipsis', // Always show ellipsis for long text inputs as long as it doesn't have focus
 
     '::-ms-clear': {
       display: 'none',
     },
     '&::placeholder': {
-      color: forwardFitTokens.system.color.fg.muted.default,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      color: cssVar(system.color.fg.muted.default, system.color.text.hint),
     },
     '&:is(:hover, .hover)': {
-      borderColor: forwardFitTokens.system.color.border.input.hover,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      borderColor: cssVar(system.color.border.input.hover, system.color.border.input.strong),
     },
     '&:is(:focus-visible, .focus):where(:not([disabled]))': {
-      borderColor: forwardFitTokens.system.color.brand.border.primary,
-      boxShadow: `inset 0 0 0 1px ${forwardFitTokens.system.color.brand.border.primary}`,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      borderColor: cssVar(system.color.brand.border.primary, brand.common.focusOutline),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      boxShadow: `inset 0 0 0 1px ${cssVar(system.color.brand.border.primary, brand.common.focusOutline)}`,
       outline: `${px2rem(2)} solid transparent`,
     },
     '&:is(:disabled, .disabled)': {
+      // TODO: Revisit this, we use different styles
       opacity: system.opacity.disabled,
       '&::placeholder': {
         opacity: system.opacity.disabled,
@@ -71,30 +82,38 @@ export const textInputStencil = createStencil({
 
     error: {
       error: {
-        borderColor: forwardFitTokens.system.color.brand.border.critical,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        borderColor: cssVar(system.color.brand.border.critical, brand.common.errorInner),
         borderWidth: px2rem(2),
-        backgroundColor: forwardFitTokens.system.color.brand.surface.critical.default,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        backgroundColor: cssVar(system.color.brand.surface.critical.default, brand.error.lightest),
         '&:is(:hover, .hover, :disabled, .disabled, :focus-visible:not([disabled]), .focus:not([disabled]))':
           {
-            borderColor: forwardFitTokens.system.color.brand.border.critical,
+            // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+            borderColor: cssVar(system.color.brand.border.critical, brand.common.errorInner),
           },
         '&:is(:focus-visible, .focus):not([disabled])': {
-          boxShadow: `0 0 0 2px ${system.color.border.inverse.default}, 0 0 0 4px ${brand.common.focusOutline}`,
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          boxShadow: `0 0 0 2px ${cssVar(system.color.focus.inverse, system.color.border.inverse.default)}, 0 0 0 4px ${cssVar(system.color.brand.border.primary, brand.common.focusOutline)}`,
           outlineOffset: px2rem(2),
         },
       },
       caution: {
-        borderColor: brand.common.alertOuter,
-        boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.common.alertInner}`,
-        backgroundColor: brand.alert.lightest,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        borderColor: cssVar(system.color.brand.border.caution, brand.common.alertOuter),
+        boxShadow: `inset 0 0 0 ${px2rem(2)} ${cssVar(system.color.brand.focus.caution.inner)}`,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        backgroundColor: cssVar(system.color.brand.surface.caution.default, brand.alert.lightest),
         '&:is(:hover, .hover, :disabled, .disabled, :focus-visible:not([disabled]), .focus:not([disabled]))':
           {
-            borderColor: brand.common.alertOuter,
+            // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+            borderColor: cssVar(system.color.brand.border.caution, brand.common.alertOuter),
           },
         '&:is(:focus-visible, .focus):not([disabled])': {
-          boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.common.alertInner},
-        0 0 0 2px ${system.color.border.inverse.default},
-        0 0 0 4px ${brand.common.focusOutline}`,
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          boxShadow: `inset 0 0 0 ${px2rem(2)} ${cssVar(system.color.brand.focus.caution.inner, brand.common.alertInner)},
+        0 0 0 2px ${cssVar(system.color.focus.inverse, system.color.border.inverse.default)},
+        0 0 0 4px ${cssVar(system.color.brand.border.primary, brand.common.focusOutline)}`,
         },
         outlineOffset: px2rem(2),
       },
