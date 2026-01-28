@@ -1,6 +1,6 @@
 import {ErrorType, createComponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import {brand, system} from '@workday/canvas-tokens-web';
 
@@ -17,16 +17,12 @@ const checkboxCheckStencil = createStencil({
   base: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
     maxWidth: '100%',
     pointerEvents: 'none',
     transition: 'transform 200ms ease, opacity 200ms ease',
-    transformOrigin: 'center',
     span: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
+      marginInlineStart: calc.negate(px2rem(6)),
+      transition: 'margin 200ms ease',
     },
     opacity: system.opacity.zero,
     transform: 'scale(0.5)',
@@ -34,7 +30,7 @@ const checkboxCheckStencil = createStencil({
   modifiers: {
     checked: {
       true: {
-        [systemIconStencil.vars.color]: cssVar(system.color.fg.inverse, brand.primary.accent),
+        [systemIconStencil.vars.color]: brand.primary.accent,
         opacity: system.opacity.full,
         transform: 'scale(1)',
       },
@@ -47,14 +43,9 @@ const checkboxCheckStencil = createStencil({
     },
     variant: {
       inverse: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        [systemIconStencil.vars.color]: cssVar(
-          system.color.brand.fg.primary.default,
-          brand.primary.base
-        ),
+        [systemIconStencil.vars.color]: brand.primary.base,
         '& > div': {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          backgroundColor: cssVar(system.color.brand.fg.primary.default, brand.primary.base),
+          backgroundColor: brand.primary.base,
         },
       },
     },
@@ -65,16 +56,7 @@ const indeterminateBoxStencil = createStencil({
   base: {
     width: px2rem(10),
     height: calc.divide(system.space.x1, 2),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    backgroundColor: cssVar(system.color.fg.inverse, brand.primary.accent),
-  },
-  modifiers: {
-    variant: {
-      inverse: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        backgroundColor: cssVar(system.color.brand.fg.primary.default, brand.primary.base),
-      },
-    },
+    backgroundColor: brand.primary.accent,
   },
 });
 

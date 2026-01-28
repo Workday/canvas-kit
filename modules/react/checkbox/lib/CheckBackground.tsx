@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {ErrorType, createComponent} from '@workday/canvas-kit-react/common';
-import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 
 interface CheckBackgroundProps {
@@ -16,42 +16,29 @@ export const checkboxBackgroundStencil = createStencil({
   },
   base: {
     alignItems: 'center',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    backgroundColor: cssVar(system.color.surface.default, system.color.bg.default),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderRadius: cssVar(system.shape.sm, system.shape.half),
+    backgroundColor: system.color.bg.default,
+    borderRadius: system.shape.half,
     display: 'flex',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    height: cssVar(system.size.xxs, system.space.x4),
+    height: calc.add(system.space.x4, px2rem(2)),
     justifyContent: 'center',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    padding: `${cssVar(system.padding.none, system.space.zero)} ${calc.divide(system.space.x1, 2)}`,
+    padding: `${system.space.zero} ${calc.divide(system.space.x1, 2)}`,
     pointerEvents: 'none',
     position: 'absolute',
     transition: 'border 200ms ease, background 200ms',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    width: cssVar(system.size.xxs, calc.add(system.space.x4, px2rem(2))),
+    width: calc.add(system.space.x4, px2rem(2)),
     border: `${px2rem(1)} solid ${system.color.border.input.default}`,
   },
   modifiers: {
     error: {
       error: ({errorRingColorInner, errorRingColorOuter}) => ({
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        [errorRingColorInner]: cssVar(system.color.brand.border.critical, brand.common.errorInner),
+        [errorRingColorInner]: brand.common.errorInner,
         [errorRingColorOuter]: 'transparent',
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        backgroundColor: cssVar(system.color.brand.surface.critical.default, brand.error.lightest),
+        backgroundColor: brand.error.lightest,
       }),
       caution: ({errorRingColorInner, errorRingColorOuter}) => ({
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        [errorRingColorInner]: cssVar(
-          system.color.brand.focus.caution.inner,
-          brand.common.alertInner
-        ),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        [errorRingColorOuter]: cssVar(system.color.brand.border.caution, brand.common.alertOuter),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        backgroundColor: cssVar(system.color.brand.surface.caution.default, brand.alert.lightest),
+        [errorRingColorInner]: brand.common.alertInner,
+        [errorRingColorOuter]: brand.common.alertOuter,
+        backgroundColor: brand.alert.lightest,
       }),
     },
   },

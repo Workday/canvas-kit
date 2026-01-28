@@ -15,9 +15,9 @@ const checkboxRippleStencil = createStencil({
     borderRadius: cssVar(system.shape.full, system.shape.round),
     boxShadow: 'none',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    height: cssVar(system.size.xxs, calc.add(system.space.x4, px2rem(2))),
+    height: calc.add(cssVar(system.size.xxs, system.space.x4), px2rem(2)),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    width: cssVar(system.size.xxs, calc.add(system.space.x4, px2rem(2))),
+    width: calc.add(cssVar(system.size.xxs, system.space.x4), px2rem(2)),
     transition: 'box-shadow 150ms ease-out',
     position: 'absolute',
     pointerEvents: 'none',
