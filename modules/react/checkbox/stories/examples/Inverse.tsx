@@ -20,6 +20,7 @@ export const Inverse = () => {
   return (
     <Flex cs={styleOverrides}>
       <Checkbox
+        error={Checkbox.ErrorType.Caution}
         variant="inverse"
         checked={checked}
         label="I agree to the terms"
