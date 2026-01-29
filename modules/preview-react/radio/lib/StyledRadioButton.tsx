@@ -27,6 +27,9 @@ export interface StyledRadioButtonProps extends CSProps {
 }
 
 const radioInputStencil = createStencil({
+  parts: {
+    check: 'cnvs-radio-check',
+  },
   base: {
     cursor: 'pointer',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
@@ -119,16 +122,19 @@ const radioInputStencil = createStencil({
   },
   modifiers: {
     variant: {
-      inverse: {
-        '+ .cnvs-radio-check': {
+      inverse: ({checkPart}) => ({
+        [`+ ${checkPart}`]: {
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
           backgroundColor: cssVar(system.color.surface.inverse, system.color.bg.alt.softer),
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          borderColor: cssVar(system.color.focus.inverse, system.color.border.inverse.default),
+          borderColor: cssVar(
+            system.color.border.inverse.default,
+            system.color.border.inverse.default
+          ),
         },
         '&:disabled, &.disabled': {
           opacity: system.opacity.disabled,
-          '+ .cnvs-radio-check': {
+          [`+ ${checkPart}`]: {
             // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
             backgroundColor: cssVar(system.color.surface.inverse, system.color.bg.alt.softer),
             // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
@@ -138,25 +144,35 @@ const radioInputStencil = createStencil({
           // This creates the inner circle when the Radio is checked.
           // The backgroundColor represents the dot in the middle of the radio.
           // The borderColor represents the border around the middle dot of the radio.
-          '&:checked + .cnvs-radio-check, &.checked + .cnvs-radio-check': {
-            backgroundColor: brand.primary.base, // inner circle background color
+          [`&:checked + ${checkPart}, &.checked + ${checkPart}`]: {
+            // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+            backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.base), // inner circle background color
             borderColor: system.color.border.inverse.default, // inner circle border color
           },
         },
-        '&:hover + .cnvs-radio-check, &.hover + .cnvs-radio-check': {
-          borderColor: system.color.border.input.inverse,
+        [`&:hover + ${checkPart}, &.hover + ${checkPart}`]: {
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          borderColor: cssVar(
+            system.color.border.inverse.default,
+            system.color.border.inverse.default
+          ),
         },
-        '&:focus-visible + .cnvs-radio-check, &.focus + .cnvs-radio-check': {
-          borderColor: system.color.border.input.inverse,
+        [`&:focus-visible + ${checkPart}, &.focus + ${checkPart}`]: {
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          borderColor: cssVar(
+            system.color.border.inverse.default,
+            system.color.border.inverse.default
+          ),
         },
         // This creates the inner circle when the Radio is checked.
         // The backgroundColor represents the dot in the middle of the radio.
         // The borderColor represents the border around the middle dot of the radio.
-        '&:checked + .cnvs-radio-check, &.checked + .cnvs-radio-check': {
-          backgroundColor: brand.primary.base, // inner circle background color
+        [`&:checked + ${checkPart}, &.checked + ${checkPart}`]: {
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.base), // inner circle background color
           borderColor: system.color.border.inverse.default, // inner circle border color
         },
-        '&:focus-visible + .cnvs-radio-check, &:focus-visible:hover + .cnvs-radio-check, &.focus + .cnvs-radio-check, &.focus:hover + .cnvs-radio-check':
+        [`&:focus-visible + ${checkPart}, &:focus-visible:hover + ${checkPart}, &.focus + ${checkPart}, &.focus:hover + ${checkPart}`]:
           {
             ...focusRing({
               width: 2,
@@ -165,7 +181,7 @@ const radioInputStencil = createStencil({
               outerColor: system.color.border.inverse.default,
             }),
           },
-        '&:focus-visible:checked + .cnvs-radio-check, &:focus-visible:hover:checked + .cnvs-radio-check, &.focus:checked + .cnvs-radio-check, &.focus:hover:checked + .cnvs-radio-check':
+        [`&:focus-visible:checked + ${checkPart}, &:focus-visible:hover:checked + ${checkPart}, &.focus:checked + ${checkPart}, &.focus:hover:checked + ${checkPart}`]:
           {
             ...focusRing({
               width: 2,
@@ -174,7 +190,7 @@ const radioInputStencil = createStencil({
               outerColor: system.color.border.inverse.default,
             }),
           },
-      },
+      }),
     },
   },
 });
@@ -186,7 +202,7 @@ const StyledRadioInput = createComponent('input')<StyledRadioButtonProps & Style
   },
 });
 
-const radioInputWrapperStyles = createStencil({
+const radioInputWrapperStencil = createStencil({
   base: {
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     height: cssVar(system.size.xxs, px2rem(radioHeight)),
@@ -237,7 +253,10 @@ const RadioInputWrapper = createComponent(Flex)<
   Component: ({children, variant, ...elemProps}: StyledRadioButtonProps, ref, Element) => {
     const {disabled} = React.useContext(RadioLabelContext);
     return (
-      <Element ref={ref} {...handleCsProp(elemProps, radioInputWrapperStyles({variant, disabled}))}>
+      <Element
+        ref={ref}
+        {...handleCsProp(elemProps, radioInputWrapperStencil({variant, disabled}))}
+      >
         {children}
       </Element>
     );
@@ -270,7 +289,7 @@ export const StyledRadioButton = createComponent('input')({
           disabled={disabled}
           {...elemProps}
         />
-        <span className="cnvs-radio-check" />
+        <span {...radioInputStencil.parts.check} className="cnvs-radio-check" />
       </RadioInputWrapper>
     );
   },
