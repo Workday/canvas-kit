@@ -38,7 +38,7 @@ const customStyles = createStyles({
 });
 
 export const AccentIconStory = {
-  name: 'Accent Icon',
+  name: 'Accent Icon (deprecated)',
   component: AccentIcon,
   parameters: {ReadmePath: 'react/icon'},
   render: () => (
@@ -62,7 +62,7 @@ export const AccentIconStory = {
 };
 
 export const AppletIconStory = {
-  name: 'Applet Icon',
+  name: 'Applet Icon (deprecated)',
   component: AppletIcon,
   render: () => (
     <div className="story">
@@ -127,7 +127,9 @@ export const SystemIconStory = {
         background={system.color.bg.primary.default}
         color={system.color.fg.inverse}
         shouldMirror={true}
-        cs={{[systemIconCircleStencil.vars.color]: cssVar(system.color.fg.inverse)}}
+        cs={{
+          [systemIconCircleStencil.vars.color]: cssVar(system.color.fg.inverse),
+        }}
       />
     </div>
   ),
