@@ -7,6 +7,7 @@ import {brand, system} from '@workday/canvas-tokens-web';
 interface CheckBackgroundProps {
   children: React.ReactNode;
   error?: ErrorType;
+  variant?: 'inverse';
 }
 
 export const checkboxBackgroundStencil = createStencil({
@@ -33,6 +34,11 @@ export const checkboxBackgroundStencil = createStencil({
     border: `${px2rem(1)} solid ${system.color.border.input.default}`,
   },
   modifiers: {
+    variant: {
+      inverse: {
+        backgroundColor: cssVar(system.color.surface.inverse, system.color.bg.default),
+      },
+    },
     error: {
       error: ({errorRingColorInner, errorRingColorOuter}) => ({
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
@@ -54,13 +60,27 @@ export const checkboxBackgroundStencil = createStencil({
       }),
     },
   },
+  compound: [
+    {
+      modifiers: {variant: 'inverse', error: 'error'},
+      styles: {
+        backgroundColor: cssVar(system.color.surface.inverse, brand.error.lightest),
+      },
+    },
+    {
+      modifiers: {variant: 'inverse', error: 'caution'},
+      styles: {
+        backgroundColor: cssVar(system.color.surface.inverse, brand.alert.lightest),
+      },
+    },
+  ],
 });
 
 export const CheckBackground = createComponent('div')({
   displayName: 'CheckBackground',
-  Component: ({error, children}: CheckBackgroundProps) => {
+  Component: ({error, variant, children}: CheckBackgroundProps) => {
     return (
-      <div id="foo-bar" {...checkboxBackgroundStencil({error})}>
+      <div id="foo-bar" {...checkboxBackgroundStencil({error, variant})}>
         {children}
       </div>
     );

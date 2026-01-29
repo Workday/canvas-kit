@@ -56,7 +56,15 @@ const indeterminateBoxStencil = createStencil({
   base: {
     width: px2rem(10),
     height: calc.divide(system.space.x1, 2),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     backgroundColor: brand.primary.accent,
+  },
+  modifiers: {
+    variant: {
+      inverse: {
+        backgroundColor: brand.primary.base,
+      },
+    },
   },
 });
 
@@ -64,7 +72,7 @@ export const CheckboxCheck = createComponent('div')({
   displayName: 'CheckboxCheck',
   Component: ({checked, error, indeterminate, variant}: CheckboxCheckProps) => {
     return (
-      <CheckBackground error={error}>
+      <CheckBackground error={error} variant={variant}>
         <div {...checkboxCheckStencil({checked, indeterminate, variant})}>
           {indeterminate ? (
             <div {...indeterminateBoxStencil()} />
