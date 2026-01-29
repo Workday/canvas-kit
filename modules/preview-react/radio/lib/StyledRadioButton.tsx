@@ -7,7 +7,14 @@ import {
   focusRing,
 } from '@workday/canvas-kit-react/common';
 import {Box, Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {CSProps, calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {
+  CSProps,
+  calc,
+  createStencil,
+  cssVar,
+  handleCsProp,
+  px2rem,
+} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 
 import {RadioLabelContext} from './RadioLabel';
@@ -22,9 +29,12 @@ export interface StyledRadioButtonProps extends CSProps {
 const radioInputStencil = createStencil({
   base: {
     cursor: 'pointer',
-    height: px2rem(radioHeight),
-    width: px2rem(radioWidth),
-    borderRadius: system.shape.round,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    height: cssVar(system.size.xxs, px2rem(radioHeight)),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    width: cssVar(system.size.xxs, px2rem(radioWidth)),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    borderRadius: cssVar(system.shape.full, system.shape.round),
     position: 'absolute',
     margin: system.space.zero,
     '&:focus-visible, &.focus, &:active': {
@@ -54,11 +64,14 @@ const radioInputStencil = createStencil({
       flexDirection: 'column',
       alignItems: 'center',
       backgroundColor: system.color.bg.default,
-      borderRadius: system.shape.round,
       boxSizing: 'border-box',
       border: `${px2rem(1)} solid ${system.color.border.input.default}`,
-      height: px2rem(radioHeight),
-      width: px2rem(radioWidth),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      height: cssVar(system.size.xxs, px2rem(radioHeight)),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      width: cssVar(system.size.xxs, px2rem(radioWidth)),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      borderRadius: cssVar(system.shape.full, system.shape.round),
       justifyContent: 'center',
       pointerEvents: 'none',
       position: 'absolute',
@@ -178,10 +191,11 @@ const radioInputWrapperStyles = createStencil({
     '::before': {
       content: "''",
       position: 'absolute',
-      borderRadius: system.shape.round,
-      height: px2rem(radioHeight),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      borderRadius: cssVar(system.shape.full, system.shape.round),
+      height: cssVar(system.size.xxs, px2rem(radioHeight)),
       transition: 'box-shadow 150ms ease-out',
-      width: px2rem(radioWidth),
+      width: cssVar(system.size.xxs, px2rem(radioWidth)),
       pointerEvents: 'none',
       opacity: system.opacity.full,
     },
