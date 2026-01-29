@@ -135,43 +135,47 @@ const checkboxInputStencil = createStencil({
   modifiers: {
     variant: {
       inverse: {
-        '& ~ span:first-of-type': {
-          opacity: system.opacity.disabled,
+        [`& ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]: {
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          borderColor: cssVar(system.color.focus.inverse, system.color.border.inverse.default),
         },
 
-        '& ~ div:first-of-type': {
-          borderColor: system.color.border.input.inverse,
-        },
-
-        // Disabled State for inverse variant
-        '&:not(:where(:checked, :indeterminate, :disabled, :focus-visible, .focus)):where(:hover, .hover, :active, .active) ~ div:first-of-type':
+        // Hover state and not disabled
+        [`&:not(:where(:checked, :indeterminate, :disabled, :focus-visible, .focus)):where(:hover, .hover, :active, .active) ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]:
           {
-            borderColor: system.color.border.input.inverse,
+            // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+            borderColor: cssVar(system.color.focus.inverse, system.color.border.inverse.default),
           },
-        '&:where(:checked, :indeterminate) ~ div:first-of-type': {
-          borderColor: system.color.border.input.inverse,
-          backgroundColor: system.color.bg.default,
-        },
-        '&:disabled ~ div:first-of-type': {
-          backgroundColor: system.color.bg.alt.default,
+        [`&:where(:hover,.hover) ~ [data-part="${checkboxRippleStencil.parts.ripple['data-part']}"]`]:
+          {
+            // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+            boxShadow: `0 0 0 ${px2rem(7)} ${cssVar(system.color.surface.overlay.hover.inverse, system.color.bg.default)}`,
+          },
+        [`&:where(:checked, :indeterminate) ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]:
+          {
+            // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+            borderColor: cssVar(system.color.focus.inverse, system.color.border.inverse.default),
+            // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+            backgroundColor: cssVar(system.color.surface.inverse, system.color.bg.default),
+          },
+        // Disabled State for inverse variant
+        [`&:disabled ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]: {
           opacity: system.opacity.disabled,
-        },
-        '&:disabled:where(:checked, :indeterminate) ~ div:first-of-type': {
-          borderColor: system.color.border.input.inverse,
-          backgroundColor: system.color.bg.default,
         },
 
         // Focus state for inverse variant
-        '&:where(:focus-visible, .focus) ~ div:first-of-type': {
-          borderColor: system.color.border.contrast.default,
-          ...focusRing({
-            width: 2,
-            separation: 0,
-            animate: false,
-            innerColor: system.color.border.contrast.default,
-            outerColor: system.color.focus.inverse,
-          }),
-        },
+        [`&:where(:focus-visible, .focus) ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]:
+          {
+            borderColor: system.color.border.contrast.default,
+            ...focusRing({
+              width: 2,
+              separation: 0,
+              animate: false,
+              innerColor: system.color.border.contrast.default,
+              // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+              outerColor: cssVar(system.color.focus.inverse, system.color.border.inverse.default),
+            }),
+          },
         '&:checked:focus-visible, &:checked.focus, &:indeterminate:focus-visible, &:indeterminate.focus':
           {
             '& ~ div:first-of-type': {
@@ -221,14 +225,17 @@ const checkboxInputStencil = createStencil({
       modifiers: {variant: 'inverse', error: true},
       styles: {
         '&:not(:where(:focus-visible, .focus)) ~ div:first-of-type': {
-          border: `${px2rem(1)} solid ${system.color.border.input.inverse}`,
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          border: `${px2rem(1)} solid ${cssVar(system.color.focus.inverse, system.color.border.inverse.default)}`,
         },
         '&:not(where(:checked, :indeterminate, :disabled, :focus-visible, .focus)):where(:hover, .hover, :active, .active) ~ div:first-of-type':
           {
-            borderColor: system.color.border.input.inverse,
+            // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+            borderColor: cssVar(system.color.focus.inverse, system.color.border.inverse.default),
           },
         '&:where(:checked, :indeterminate) ~ div:first-of-type': {
-          borderColor: system.color.border.input.inverse,
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          borderColor: cssVar(system.color.focus.inverse, system.color.border.inverse.default),
         },
       },
     },
