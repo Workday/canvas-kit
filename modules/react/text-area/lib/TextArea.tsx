@@ -1,6 +1,6 @@
 import {ErrorType, GrowthBehavior, createComponent} from '@workday/canvas-kit-react/common';
 import {textInputStencil} from '@workday/canvas-kit-react/text-input';
-import {calc, createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export type ValueOf<T> = T[keyof T];

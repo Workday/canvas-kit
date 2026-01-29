@@ -1,9 +1,4 @@
-import {
-  ErrorType,
-  GrowthBehavior,
-  createComponent,
-  forwardFitTokens,
-} from '@workday/canvas-kit-react/common';
+import {ErrorType, GrowthBehavior, createComponent} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {CSProps, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
