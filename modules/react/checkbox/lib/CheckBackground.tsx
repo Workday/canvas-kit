@@ -15,6 +15,9 @@ export const checkboxBackgroundStencil = createStencil({
     errorRingColorInner: '',
     errorRingColorOuter: '',
   },
+  parts: {
+    background: 'checkbox-background',
+  },
   base: {
     alignItems: 'center',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
@@ -64,12 +67,14 @@ export const checkboxBackgroundStencil = createStencil({
     {
       modifiers: {variant: 'inverse', error: 'error'},
       styles: {
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         backgroundColor: cssVar(system.color.surface.inverse, brand.error.lightest),
       },
     },
     {
       modifiers: {variant: 'inverse', error: 'caution'},
       styles: {
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         backgroundColor: cssVar(system.color.surface.inverse, brand.alert.lightest),
       },
     },
@@ -80,7 +85,10 @@ export const CheckBackground = createComponent('div')({
   displayName: 'CheckBackground',
   Component: ({error, variant, children}: CheckBackgroundProps) => {
     return (
-      <div id="foo-bar" {...checkboxBackgroundStencil({error, variant})}>
+      <div
+        {...checkboxBackgroundStencil.parts.background}
+        {...checkboxBackgroundStencil({error, variant})}
+      >
         {children}
       </div>
     );

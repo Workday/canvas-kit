@@ -9,7 +9,10 @@ import {
 } from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-const checkboxRippleStencil = createStencil({
+export const checkboxRippleStencil = createStencil({
+  parts: {
+    ripple: 'checkbox-ripple',
+  },
   base: {
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     borderRadius: cssVar(system.shape.full, system.shape.round),
@@ -27,6 +30,11 @@ const checkboxRippleStencil = createStencil({
 export const CheckboxRipple = createComponent('span')({
   displayName: 'CheckboxRipple',
   Component: (elemProps: CSProps) => {
-    return <span {...handleCsProp(elemProps, checkboxRippleStencil())} />;
+    return (
+      <span
+        {...handleCsProp(elemProps, checkboxRippleStencil())}
+        {...checkboxRippleStencil.parts.ripple}
+      />
+    );
   },
 });

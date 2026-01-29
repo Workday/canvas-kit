@@ -12,6 +12,7 @@ import {
 import {brand, system} from '@workday/canvas-tokens-web';
 
 import {checkboxBackgroundStencil} from './CheckBackground';
+import {checkboxRippleStencil} from './CheckboxRipple';
 
 export interface CheckboxProps extends CSProps {
   /**
@@ -64,7 +65,8 @@ const checkboxInputStencil = createStencil({
     width: cssVar(system.size.xxs, system.space.x6),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     height: cssVar(system.size.xxs, system.space.x6),
-    margin: system.space.zero,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    margin: cssVar(system.padding.none, system.space.zero),
     marginTop: calc.negate(px2rem(3)),
     marginInlineStart: calc.negate(px2rem(3)),
     position: 'absolute',
@@ -74,52 +76,55 @@ const checkboxInputStencil = createStencil({
       cursor: 'pointer',
     },
 
-    '&:where(:hover,.hover) ~ span:first-of-type': {
-      boxShadow: `0 0 0 ${px2rem(7)} ${system.color.bg.alt.soft}`,
+    [`&:where(:hover,.hover) ~ [data-part="${checkboxRippleStencil.parts.ripple['data-part']}"]`]: {
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      boxShadow: `0 0 0 ${px2rem(7)} ${cssVar(system.color.surface.overlay.hover.default, system.color.bg.alt.soft)}`,
     },
 
-    // Disabled State
+    // Hover state and not disabled
     '&:not(:where(:checked, :indeterminate, :disabled, :focus-visible, .focus)):where(:hover, .hover, :active, .active) ~ div:first-of-type':
       {
-        borderColor: system.color.border.input.strong,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        borderColor: cssVar(system.color.border.input.hover, system.color.border.input.strong),
       },
-    '&:where(:checked, :indeterminate) ~ div:first-of-type': {
-      borderColor: brand.primary.base,
-      backgroundColor: brand.primary.base,
-    },
-    '&:disabled ~ div:first-of-type': {
-      borderColor: system.color.border.input.disabled,
-      backgroundColor: system.color.bg.alt.softer,
-      opacity: system.opacity.full,
-    },
-    '&:disabled:where(:checked, :indeterminate) ~ div:first-of-type': {
-      borderColor: brand.primary.light,
-      backgroundColor: brand.primary.light,
-    },
+
+    [`&:where(:checked, :indeterminate) ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]:
+      {
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        borderColor: cssVar(system.color.brand.accent.primary, brand.common.focusOutline),
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.base),
+      },
 
     // Focus State
     '&:where(:focus-visible, :active, .focus, .active)': {
       outline: 'none',
     },
-    '&:where(:focus-visible, .focus) ~ div:first-of-type': {
-      borderColor: brand.primary.base,
-      borderWidth: px2rem(2),
-      ...focusRing({
-        width: 0,
-        separation: 0,
-        animate: false,
-      }),
-    },
+    // When not checked, the border is within the input
+    [`&:where(:focus-visible, .focus) ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]:
+      {
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        borderColor: cssVar(system.color.brand.border.primary, brand.primary.base),
+        borderWidth: px2rem(2),
+        ...focusRing({
+          width: 0,
+          separation: 0,
+          animate: false,
+        }),
+      },
+    // When checked, the border is outside the input
     '&:checked:focus-visible, &:indeterminate:focus-visible, &:checked.focus, &:indeterminate.focus':
       {
-        '& ~ div:first-of-type': {
+        [`& ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]: {
           ...focusRing({
             width: 2,
             separation: 2,
             animate: false,
-            outerColor: brand.common.focusOutline,
+            // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+            outerColor: cssVar(system.color.brand.border.primary, brand.common.focusOutline),
           }),
-          borderColor: brand.primary.base,
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          borderColor: cssVar(system.color.brand.accent.primary, brand.primary.base),
           borderWidth: px2rem(2),
           span: {
             marginInlineStart: calc.negate(px2rem(7)),
