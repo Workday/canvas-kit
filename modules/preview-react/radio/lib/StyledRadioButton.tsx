@@ -43,18 +43,18 @@ const radioInputStencil = createStencil({
     '&:disabled, &.disabled': {
       cursor: 'auto',
       '+ .cnvs-radio-check': {
-        borderColor: system.color.border.input.disabled,
-        backgroundColor: system.color.bg.alt.softer,
+        opacity: system.opacity.disabled,
       },
       '&:hover + .cnvs-radio-check, &.hover + .cnvs-radio-check': {
-        borderColor: system.color.border.input.disabled,
+        opacity: system.opacity.disabled,
       },
       // This creates the inner circle when the Radio is checked.
       // The backgroundColor represents the dot in the middle of the radio.
       // The borderColor represents the border around the middle dot of the radio.
       '&:checked + .cnvs-radio-check, &.checked + .cnvs-radio-check': {
-        backgroundColor: brand.primary.accent, // inner circle background color
-        border: `${px2rem(5)} solid ${brand.primary.base}`, // inner circle border color
+        opacity: system.opacity.disabled,
+        // backgroundColor: brand.primary.accent, // inner circle background color
+        // border: `${px2rem(5)} solid ${brand.primary.base}`, // inner circle border color
       },
     },
 
@@ -121,15 +121,19 @@ const radioInputStencil = createStencil({
     variant: {
       inverse: {
         '+ .cnvs-radio-check': {
-          backgroundColor: system.color.bg.alt.softer,
-          borderColor: system.color.border.input.inverse,
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          backgroundColor: cssVar(system.color.surface.inverse, system.color.bg.alt.softer),
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          borderColor: cssVar(system.color.focus.inverse, system.color.border.inverse.default),
         },
         '&:disabled, &.disabled': {
           opacity: system.opacity.disabled,
           '+ .cnvs-radio-check': {
-            backgroundColor: system.color.bg.alt.softer,
-            borderColor: system.color.border.input.disabled,
-            opacity: system.opacity.disabled,
+            // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+            backgroundColor: cssVar(system.color.surface.inverse, system.color.bg.alt.softer),
+            // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+            borderColor: cssVar(system.color.focus.inverse, system.color.border.inverse.default),
+            // opacity: system.opacity.disabled,
           },
           // This creates the inner circle when the Radio is checked.
           // The backgroundColor represents the dot in the middle of the radio.
@@ -184,8 +188,10 @@ const StyledRadioInput = createComponent('input')<StyledRadioButtonProps & Style
 
 const radioInputWrapperStyles = createStencil({
   base: {
-    height: px2rem(radioHeight),
-    width: px2rem(radioWidth),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    height: cssVar(system.size.xxs, px2rem(radioHeight)),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    width: cssVar(system.size.xxs, px2rem(radioWidth)),
     flex: '0 0 auto',
     // Hover Ripple element
     '::before': {
@@ -193,8 +199,10 @@ const radioInputWrapperStyles = createStencil({
       position: 'absolute',
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       borderRadius: cssVar(system.shape.full, system.shape.round),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       height: cssVar(system.size.xxs, px2rem(radioHeight)),
       transition: 'box-shadow 150ms ease-out',
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       width: cssVar(system.size.xxs, px2rem(radioWidth)),
       pointerEvents: 'none',
       opacity: system.opacity.full,
