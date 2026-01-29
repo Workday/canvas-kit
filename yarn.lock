@@ -4277,10 +4277,10 @@
   dependencies:
     "@workday/design-assets-types" "0.2.10"
 
-"@workday/canvas-tokens-web@4.0.2":
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/@workday/canvas-tokens-web/-/canvas-tokens-web-4.0.2.tgz#66dbb91427dcc53c031b857d5bef889071e7495b"
-  integrity sha512-kwJP3mfhkhyBoJHTey0ru7fWhBRbt1qfGoQd4Hi//N9uf7mABft+CFBqeW0o/ucIrC3wfB6tJ0vbbzoofTiB3g==
+"@workday/canvas-tokens-web@4.0.4":
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-tokens-web/-/canvas-tokens-web-4.0.4.tgz#cfad61e98e9f274045d12ecf65fa3114d47f1f70"
+  integrity sha512-crUERhrKnP1/DHI2F1LSdhG/rEndR5xEx01+pGeo8l1D6M/PUWGGiuDvoqa6HC7KXSWLijZHkZ18BoU9ITYj6g==
 
 "@workday/design-assets-types@0.2.10", "@workday/design-assets-types@^0.2.10":
   version "0.2.10"

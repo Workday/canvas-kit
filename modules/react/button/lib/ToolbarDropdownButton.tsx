@@ -20,7 +20,7 @@ export const toolbarDropdownButtonStencil = createStencil({
     padding: forwardFitTokens.system.padding.none,
     minWidth: forwardFitTokens.system.size.md,
     gap: forwardFitTokens.system.gap.none,
-    [buttonStencil.vars.borderRadius]: forwardFitTokens.system.shape.xs,
+    [buttonStencil.vars.borderRadius]: system.shape.x1,
     [systemIconStencil.vars.color]: system.color.fg.default,
 
     '&:focus-visible, &.focus': {
