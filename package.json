@@ -3,7 +3,6 @@
   "name": "canvas-kit",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
-  "type": "module",
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.26.3",
     "@babel/plugin-transform-runtime": "^7.26.3",

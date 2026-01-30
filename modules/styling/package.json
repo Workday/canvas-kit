@@ -7,7 +7,6 @@
   "main": "dist/commonjs/index.js",
   "module": "dist/es6/index.js",
   "sideEffects": false,
-  "type": "module",
   "types": "dist/es6/index.d.ts",
   "repository": {
     "type": "git",
@@ -29,7 +28,7 @@
     "build:es6": "tsc -p tsconfig.es6.json",
     "build:rebuild": "npm-run-all clean build",
     "build": "npm-run-all build:cjs build:es6",
-    "depcheck": "node ../../utils/check-dependencies-exist.js",
+    "depcheck": "node ../../utils/check-dependencies-exist.mjs",
     "typecheck:src": "tsc -p . --noEmit --incremental false"
   },
   "publishConfig": {

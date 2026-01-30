@@ -4,7 +4,6 @@
   "description": "Documentation components of Canvas Kit components",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
-  "type": "module",
   "main": "dist/commonjs/index.js",
   "module": "dist/es6/index.js",
   "sideEffects": true,
@@ -23,13 +22,13 @@
   "scripts": {
     "watch": "yarn build:es6 -w",
     "clean": "rimraf dist && rimraf .build-info && mkdirp dist",
-    "build:mdx": "node ./utils/build-mdx.js mdx/",
+    "build:mdx": "tsx ./utils/build-mdx.js mdx/",
     "build:es6": "tsc -p tsconfig.es6.json",
-    "build:docs": "node ./utils/build-docs.js",
+    "build:docs": "tsx ./utils/build-docs.js",
     "build:rebuild": "npm-run-all clean build",
-    "build:specs": "node ./utils/build-specifications.js",
+    "build:specs": "tsx ./utils/build-specifications.js",
     "build": "npm-run-all build:es6 build:mdx build:specs build:docs",
-    "depcheck": "node ../../utils/check-dependencies-exist.js",
+    "depcheck": "node ../../utils/check-dependencies-exist.mjs",
     "typecheck:src": "tsc -p . --noEmit --incremental false"
   },
   "publishConfig": {
