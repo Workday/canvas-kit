@@ -4,6 +4,7 @@
   "description": "Documentation components of Canvas Kit components",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
+  "type": "module",
   "main": "dist/commonjs/index.js",
   "module": "dist/es6/index.js",
   "sideEffects": true,
@@ -43,6 +44,7 @@
   ],
   "dependencies": {
     "@emotion/styled": "^11.6.0",
+    "@mdx-js/react": "^3.1.0",
     "@stackblitz/sdk": "^1.11.0",
     "@storybook/csf": "0.0.1",
     "@workday/canvas-kit-labs-react": "^14.2.18",
@@ -50,7 +52,7 @@
     "@workday/canvas-kit-react": "^14.2.18",
     "@workday/canvas-kit-styling": "^14.2.18",
     "@workday/canvas-system-icons-web": "^3.0.36",
-    "@workday/canvas-tokens-web": "^3.1.6",
+    "@workday/canvas-tokens-web": "4.0.2",
     "markdown-to-jsx": "^7.2.0",
     "react-syntax-highlighter": "^15.5.0",
     "ts-node": "^10.9.1"

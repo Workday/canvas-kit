@@ -1,6 +1,7 @@
 import {stripIndent} from 'common-tags';
-import {expectTransformFactory} from './expectTransformFactory';
+
 import transform from '../index';
+import {expectTransformFactory} from './expectTransformFactory';
 
 const expectTransform = expectTransformFactory(transform);
 

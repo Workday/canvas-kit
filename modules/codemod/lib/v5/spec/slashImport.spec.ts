@@ -1,6 +1,7 @@
 'use strict';
 
 import {defineInlineTest} from 'jscodeshift/dist/testUtils';
+
 import transform from '../slashImports';
 
 describe('slashImport', () => {

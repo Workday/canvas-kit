@@ -1,6 +1,7 @@
 import React from 'react';
-import {Skeleton} from '@workday/canvas-kit-react/skeleton';
+
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {Skeleton} from '@workday/canvas-kit-react/skeleton';
 import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 
 export const Color = () => {

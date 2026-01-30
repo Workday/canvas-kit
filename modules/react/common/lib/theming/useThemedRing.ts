@@ -1,7 +1,7 @@
 import {CanvasTheme, EmotionCanvasTheme, useTheme} from '@workday/canvas-kit-react/common';
-import {brand, system} from '@workday/canvas-tokens-web';
 import {CSSProperties} from '@workday/canvas-kit-react/tokens';
 import {cssVar} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
 
 type paletteSelection = Exclude<keyof EmotionCanvasTheme['canvas']['palette'], 'common'>;
 interface ContrastColors {

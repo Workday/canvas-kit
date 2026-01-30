@@ -1,8 +1,9 @@
-import React from 'react';
 import styled from '@emotion/styled';
+import React from 'react';
+
 import {StatusIndicator} from '@workday/canvas-kit-react/status-indicator';
-import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 import {space} from '@workday/canvas-kit-react/tokens';
+import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 
 const StatusIndicators = styled('div')({
   '& > *': {

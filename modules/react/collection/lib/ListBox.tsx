@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
   createContainer,
   createElemPropsHook,
@@ -8,9 +9,9 @@ import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
+import {useListItemRegister} from './useListItemRegister';
 import {useListModel} from './useListModel';
 import {useListRenderItems} from './useListRenderItem';
-import {useListItemRegister} from './useListItemRegister';
 
 export interface ListBoxProps<T = any> extends Omit<FlexProps, 'children'> {
   children?: React.ReactNode | ((item: T, index: number) => React.ReactNode);

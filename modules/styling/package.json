@@ -7,6 +7,7 @@
   "main": "dist/commonjs/index.js",
   "module": "dist/es6/index.js",
   "sideEffects": false,
+  "type": "module",
   "types": "dist/es6/index.d.ts",
   "repository": {
     "type": "git",
@@ -55,7 +56,7 @@
     "@emotion/styled": "^11.6.0",
     "@workday/canvas-kit-react": "^14.2.18",
     "@workday/canvas-system-icons-web": "^3.0.36",
-    "@workday/canvas-tokens-web": "^3.1.6",
+    "@workday/canvas-tokens-web": "4.0.2",
     "typescript": "5.0"
   }
 }

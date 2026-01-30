@@ -1,7 +1,8 @@
 import React from 'react';
+
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {FormField} from '@workday/canvas-kit-react/form-field';
 import {ColorPreview} from '@workday/canvas-kit-react/color-picker';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {type} from '@workday/canvas-kit-react/tokens';
 
 export const RefForwarding = () => {

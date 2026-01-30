@@ -1,4 +1,5 @@
 import {createElemPropsHook} from '@workday/canvas-kit-react/common';
+
 import {useBannerModel} from './useBannerModel';
 
 /**

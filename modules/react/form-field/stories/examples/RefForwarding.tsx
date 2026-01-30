@@ -1,9 +1,10 @@
 import React from 'react';
-import {changeFocus} from '@workday/canvas-kit-react/common';
-import {Flex} from '@workday/canvas-kit-react/layout';
+
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
-import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {changeFocus} from '@workday/canvas-kit-react/common';
 import {FormField} from '@workday/canvas-kit-react/form-field';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 

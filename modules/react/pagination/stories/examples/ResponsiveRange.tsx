@@ -1,4 +1,7 @@
 import * as React from 'react';
+
+import {useResizeObserver, useTheme} from '@workday/canvas-kit-react/common';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {
   Pagination,
   getLastPage,
@@ -6,9 +9,7 @@ import {
   getVisibleResultsMin,
   usePaginationModel,
 } from '@workday/canvas-kit-react/pagination';
-import {Flex} from '@workday/canvas-kit-react/layout';
 import {Text} from '@workday/canvas-kit-react/text';
-import {useResizeObserver, useTheme} from '@workday/canvas-kit-react/common';
 
 export const ResponsiveRange = () => {
   const resultCount = 10;

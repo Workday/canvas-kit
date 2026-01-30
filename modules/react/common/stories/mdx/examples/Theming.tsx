@@ -1,8 +1,8 @@
-import {createStyles} from '@workday/canvas-kit-styling';
-import {brand, base, system} from '@workday/canvas-tokens-web';
-import {CanvasProvider} from '@workday/canvas-kit-react/common';
-import {Card} from '@workday/canvas-kit-react/card';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {Card} from '@workday/canvas-kit-react/card';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 
 const customTheme = createStyles({
   [brand.primary.base]: base.green600,

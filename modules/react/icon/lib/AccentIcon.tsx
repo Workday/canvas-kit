@@ -1,10 +1,12 @@
-import {colors} from '@workday/canvas-kit-react/tokens';
-import {CanvasAccentIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
+
 import {createComponent, getColor} from '@workday/canvas-kit-react/common';
 import {SystemPropValues} from '@workday/canvas-kit-react/layout';
+import {colors} from '@workday/canvas-kit-react/tokens';
 import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+import {CanvasAccentIcon, CanvasIconTypes} from '@workday/design-assets-types';
+
 import {Svg, SvgProps, svgStencil, transformColorNameToToken} from './Svg';
 
 /**
@@ -24,6 +26,9 @@ export interface AccentIconStyles {
   transparent?: boolean;
 }
 
+/**
+ *  @deprecated ⚠️ `AccentIconProps` is deprecated and will be removed in a future major version. Deprecated in v15.0.0.
+ */
 export interface AccentIconProps extends AccentIconStyles, Omit<SvgProps, 'src' | 'type'> {
   /**
    *  The icon to display from `@workday/canvas-accent-icons-web`.
@@ -51,6 +56,9 @@ export const accentIconStyles = ({
   },
 });
 
+/**
+ *  @deprecated ⚠️ `accentIconStencil` is deprecated and will be removed in a future major version. Deprecated in v15.0.0.
+ */
 export const accentIconStencil = createStencil({
   extends: svgStencil,
   vars: {
@@ -76,6 +84,9 @@ export const accentIconStencil = createStencil({
   },
 });
 
+/**
+ *  @deprecated ⚠️ `AccentIcon` is deprecated and will be removed in a future major version. Deprecated in v15.0.0.
+ */
 export const AccentIcon = createComponent('span')({
   displayName: 'AccentIcon',
   Component: (

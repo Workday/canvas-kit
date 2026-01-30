@@ -1,15 +1,14 @@
 import React from 'react';
 
+import {MultiSelect} from '@workday/canvas-kit-preview-react/multi-select';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {
   mediaPauseIcon,
   mediaPlayIcon,
   mediaTopicsIcon,
-  skipIcon,
   previousIcon,
+  skipIcon,
 } from '@workday/canvas-system-icons-web';
-
-import {MultiSelect} from '@workday/canvas-kit-preview-react/multi-select';
 
 const items = [
   {id: '1', text: 'Pause', icon: mediaPauseIcon},

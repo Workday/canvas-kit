@@ -1,19 +1,20 @@
 import chroma from 'chroma-js';
-import colors from '@workday/canvas-colors-web';
-import {defaultCanvasTheme} from './theme';
-import {
-  CanvasTheme,
-  PartialCanvasTheme,
-  CanvasThemePalette,
-  PartialCanvasThemePalette,
-  ContentDirection,
-} from './types';
-import {CanvasColor} from '@workday/canvas-kit-react/tokens';
-import {pickForegroundColor} from '../utils';
 
+import colors from '@workday/canvas-colors-web';
+import {CanvasColor} from '@workday/canvas-kit-react/tokens';
+
+import {pickForegroundColor} from '../utils';
 // Should these be exported?
 import {deepMerge} from '../utils/deepMerge';
 import {memoize} from '../utils/memoize';
+import {defaultCanvasTheme} from './theme';
+import {
+  CanvasTheme,
+  CanvasThemePalette,
+  ContentDirection,
+  PartialCanvasTheme,
+  PartialCanvasThemePalette,
+} from './types';
 
 /**
  * @deprecated ⚠️ `shiftColor` is deprecated and will be removed in a future major version. While we work on an algorithm for color shifting, you can use [oklch from or with calc](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch) to calculate colors.

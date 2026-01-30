@@ -1,14 +1,15 @@
 import * as React from 'react';
-import {
-  chevronLeftSmallIcon,
-  chevron2xLeftSmallIcon,
-  chevronRightSmallIcon,
-  chevron2xRightSmallIcon,
-} from '@workday/canvas-system-icons-web';
-import {createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
-import {createStencil} from '@workday/canvas-kit-styling';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
+
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
+import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {
+  chevron2xLeftSmallIcon,
+  chevron2xRightSmallIcon,
+  chevronLeftSmallIcon,
+  chevronRightSmallIcon,
+} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
 import {PaginationContext} from './usePaginationModel';

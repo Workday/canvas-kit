@@ -1,13 +1,12 @@
 import React from 'react';
 
-import {StaticStates} from '@workday/canvas-kit-react/testing';
-
+import {Flex} from '@workday/canvas-kit-react/layout';
 // unreleased path
 import {Table} from '@workday/canvas-kit-react/table';
-import {Flex} from '@workday/canvas-kit-react/layout';
+import {StaticStates} from '@workday/canvas-kit-react/testing';
 import {Heading} from '@workday/canvas-kit-react/text';
-import {system} from '@workday/canvas-tokens-web';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export default {
   title: 'Testing/Containers/Table',

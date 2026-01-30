@@ -5,7 +5,7 @@ import {
   createComponent,
   getTransformOrigin,
 } from '@workday/canvas-kit-react/common';
-
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {
   calc,
   createStencil,
@@ -15,7 +15,7 @@ import {
   px2rem,
 } from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
+
 export interface TooltipContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * The origin from which the Tooltip will animate. Pass in `null` for no animation

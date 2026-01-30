@@ -1,7 +1,8 @@
 import React from 'react';
+
 import * as CanvasAccenttIcons from '@workday/canvas-accent-icons-web';
-import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {AccentIcon} from '@workday/canvas-kit-react/icon';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';

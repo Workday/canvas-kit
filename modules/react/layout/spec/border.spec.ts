@@ -1,5 +1,6 @@
 import {ContentDirection} from '@workday/canvas-kit-react/common';
 import {border} from '@workday/canvas-kit-react/layout';
+
 const context = describe;
 
 describe('Border Style Props Function', () => {
