@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {ErrorType, createComponent, focusRing, useUniqueId} from '@workday/canvas-kit-react/common';
-import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 
 import {mergeStyles} from '../../layout';
@@ -39,8 +39,10 @@ export interface SwitchProps {
 const switchContainerStencil = createStencil({
   base: {
     position: 'relative',
-    height: system.space.x6,
-    width: system.space.x8,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    height: cssVar(system.size.xs, system.space.x6),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    width: cssVar(system.size.sm, system.space.x8),
   },
 });
 
@@ -59,16 +61,18 @@ const switchInputStencil = createStencil({
   base: {
     display: 'flex',
     position: 'absolute',
-    height: system.space.x6,
-    width: system.space.x8,
-    margin: system.space.zero,
-    marginLeft: system.space.x1,
-    borderRadius: system.shape.round,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    height: cssVar(system.size.xs, system.space.x6),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    width: cssVar(system.size.sm, system.space.x8),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    borderRadius: cssVar(system.shape.full, system.shape.round),
     opacity: '0',
     cursor: 'pointer',
     '&:checked, &.checked': {
       '& ~ div:first-of-type': {
-        backgroundColor: brand.primary.base,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.base),
       },
       '&:disabled, &.disabled': {
         '& ~ div:first-of-type': {
