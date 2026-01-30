@@ -10,7 +10,6 @@ use numerical naming conventions, and introducing new surface, focus, accent, an
 The v4 release includes:
 
 - **Extended alpha scales** across base color palettes (A25, A50, A100, A200)
-- **New magenta palette** added to the color system
 - **Brand token updates** with numerical naming (25, 50, 100, 200...900, 950, 975)
 - **Comprehensive surface token system** for better UI component support
 - **New semantic tokens** for size, space, shape, and breakpoints
@@ -22,11 +21,6 @@ The v4 release includes:
 
 Base color palettes have been updated by adding alpha scales: **A25, A50, A100, A200**. Extended
 alpha range (**A0-A975**) has been added to slate, neutral, and white palettes.
-
-### New Magenta Palette
-
-A new **magenta palette** has been added to the color system, providing additional color options for
-design consistency.
 
 ## Brand Token Updates
 
