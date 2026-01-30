@@ -120,8 +120,12 @@ export const tabsListStencil = createStencil({
     borderBottom: `${px2rem(1)} solid ${cssVar(system.color.border.default, system.color.border.divider)}`,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     gap: cssVar(system.padding.xxs, system.space.x1),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    paddingInline: cssVar(system.padding.xl, system.space.x6),
+    // TODO: update this to use a grid token if we make those available as tokens
+    paddingInline: px2rem(40),
+
+    '@media screen and (max-width: 768px)': {
+      paddingInline: cssVar(system.padding.md, system.space.x4),
+    },
   },
   modifiers: {
     modality: {
