@@ -2,9 +2,27 @@
 
 # Canvas Kit MCP
 
-Model Context Protocol (MCP) server that provides Canvas Kit upgrade guides and design token migration documentation to AI assistants.
+This Model Context Protocol (MCP) server provides Canvas Kit upgrade guides and design token migration documentation to AI assistants.
+
+## Table of Contents
+
+- [Installation](#installation)
+  - [Cursor Quick Install](#cursor-quick-install)
+  - [Other IDEs (Windsurf, VS Code, etc.)](#other-ides-windsurf-vs-code-etc)
+- [Tools](#tools)
+  - [`get-canvas-kit-upgrade-guides`](#get-canvas-kit-upgrade-guides)
+  - [`get-canvas-kit-tokens`](#get-canvas-kit-tokens)
+- [Resources](#resources)
+  - [Upgrade Guides](#upgrade-guides)
+  - [Token Documentation](#token-documentation)
+- [Source Documentation](#source-documentation)
+- [Contributing](#contributing)
+  - [Testing Locally](#testing-locally)
+    - [MCP Inspector](#mcp-inspector)
 
 ## Installation
+
+You can add this MCP server to Cursor, or other IDEs by following the instructions below.
 
 ### Cursor Quick Install
 
@@ -69,7 +87,7 @@ This MCP server provides the following tools:
 
 ### `get-canvas-kit-upgrade-guides`
 
-Retrieves Canvas Kit version upgrade documentation covering major version migrations.
+Retrieves Canvas Kit version upgrade documentation covering major version migrations. This tool can help you upgrade to Canvas Kit v9 and up.
 
 **Use cases:**
 - Upgrading Canvas Kit to a new major version
@@ -99,6 +117,7 @@ Retrieves Canvas Kit design token migration documentation for transitioning to t
 The server exposes documentation resources organized into two categories:
 
 ### Upgrade Guides
+
 Version-specific migration documentation covering:
 - Breaking changes and deprecations
 - New components and features
@@ -107,6 +126,7 @@ Version-specific migration documentation covering:
 - Accessibility improvements
 
 ### Token Documentation
+
 Design token migration and usage guides covering:
 - Token system migrations (v2 → v3 → v4)
 - Color palette and semantic color roles
