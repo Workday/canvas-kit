@@ -81,11 +81,40 @@ export const usePopupStack = <E extends HTMLElement>(
       : undefined;
     const element = localRef.current!;
 
+    // Set dir attribute so Popper.js reads the correct direction when it initializes.
+    // When there's no target (e.g. consumer doesn't use Popup.Target), find the nearest
+    // element with a `dir` attribute: start from the focused element (the trigger) or body,
+    // then use closest('[dir]'). Prefer reading getAttribute('dir') when present to avoid
+    // getComputedStyle.
+    if (typeof document !== 'undefined') {
+      let elementToCheck: Element | undefined = targetEl ?? undefined;
+      if (elementToCheck == null) {
+        const active = document.activeElement;
+        const start = active && !element.contains(active) ? active : document.body;
+        elementToCheck = start.closest('[dir]') ?? document.documentElement;
+      }
+      // Find closest ancestor with dir attribute, or use document element
+      elementToCheck = elementToCheck.closest('[dir]') ?? document.documentElement;
+      const explicitDir = elementToCheck.getAttribute('dir');
+      const isRTL =
+        explicitDir != null ? explicitDir.toLowerCase() === 'rtl' : isElementRTL(elementToCheck);
+      element.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+    }
+
+    // Set theme CSS variables to prevent flashing of styles
+    const keys = Object.keys(style);
+    if (theme) {
+      for (const key of keys) {
+        // @ts-ignore
+        element.style.setProperty(key, style[key]);
+      }
+    }
+
     PopupStack.add({element: element, owner: targetEl});
     return () => {
       PopupStack.remove(element);
     };
-  }, [localRef, target, popupRef]);
+  }, [localRef, target, popupRef, style, theme]);
 
   // The direction will properly follow the theme via React context, but portals lose the `dir`
   // hierarchy, so we'll add it back here. When there's no target (e.g. consumer doesn't use
@@ -112,24 +141,6 @@ export const usePopupStack = <E extends HTMLElement>(
       }
     }
   }, [localRef, target]);
-
-  React.useLayoutEffect(() => {
-    const element = localRef.current;
-    const keys = Object.keys(style);
-    if (element && theme) {
-      for (const key of keys) {
-        // @ts-ignore
-        element.style.setProperty(key, style[key]);
-      }
-      return () => {
-        for (const key of keys) {
-          element.style.removeProperty(key);
-        }
-      };
-    }
-    // No cleanup is needed if element or theme is not set, so return undefined (no effect)
-    return undefined;
-  }, [localRef, style, theme]);
 
   return localRef;
 };
