@@ -92,7 +92,7 @@
     "yargs": "^16.2.0"
   },
   "scripts": {
-    "start": "node utils/download-fonts.js && node ./node_modules/storybook/core/cli/bin/index.js dev -p 9001 -c .storybook",
+    "start": "node utils/download-fonts.mjs && node ./node_modules/storybook/core/cli/bin/index.js dev -p 9001 -c .storybook",
     "watch": "TSC_NONPOLLING_WATCHER=1 lerna run watch --parallel --stream",
     "clean": "lerna run clean",
     "depcheck": "lerna run depcheck",
@@ -104,8 +104,8 @@
     "promote-component": "./utils/promote-component.js",
     "precommit": "lint-staged",
     "chromatic": "chromatic",
-    "build-storybook": "node utils/download-fonts.js && storybook build .storybook -o docs",
-    "lint": "node utils/check-lockfile.js && node utils/check-mismatched-dependencies.js && eslint .",
+    "build-storybook": "node utils/download-fonts.mjs && storybook build .storybook -o docs",
+    "lint": "node utils/check-lockfile.mjs && node utils/check-mismatched-dependencies.mjs && eslint .",
     "mdxUpgrade2md": "node ./utils/mdx-upgrades-2-md.js",
     "typecheck": "npm-run-all --parallel typecheck:src typecheck:cypress typecheck:types typecheck:specs typecheck:stories",
     "typecheck:src": "lerna run typecheck:src",
@@ -123,8 +123,8 @@
   },
   "lint-staged": {
     "*.{ts,tsx}": "yarn format",
-    "*.json": "node utils/check-mismatched-dependencies.js",
-    "yarn.lock": "node utils/check-lockfile.js",
+    "*.json": "node utils/check-mismatched-dependencies.mjs",
+    "yarn.lock": "node utils/check-lockfile.mjs",
     "modules/docs/mdx/**/*.mdx": "node utils/mdx-upgrades-2-md.js",
     "utils/mdx-upgrades-2-md.js": "node utils/mdx-upgrades-2-md.js"
   },
