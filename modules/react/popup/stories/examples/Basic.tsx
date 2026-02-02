@@ -22,27 +22,25 @@ export const Basic = () => {
   };
 
   return (
-    <div dir="rtl">
-      <Popup model={model}>
-        <Popup.Target as={DeleteButton}>Delete Item</Popup.Target>
-        <Popup.Popper placement="top">
-          <Popup.Card width={400}>
-            <Popup.CloseIcon aria-label="Close" />
-            <Popup.Heading>Delete Item</Popup.Heading>
-            <Popup.Body>
-              <Box as="p" marginY="zero">
-                Are you sure you'd like to delete the item titled 'My Item'?
-              </Box>
-            </Popup.Body>
-            <Flex gap="s" padding="xxs">
-              <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
-                Delete
-              </Popup.CloseButton>
-              <Popup.CloseButton>Cancel</Popup.CloseButton>
-            </Flex>
-          </Popup.Card>
-        </Popup.Popper>
-      </Popup>
-    </div>
+    <Popup model={model}>
+      <Popup.Target as={DeleteButton}>Delete Item</Popup.Target>
+      <Popup.Popper placement="top">
+        <Popup.Card width={400}>
+          <Popup.CloseIcon aria-label="Close" />
+          <Popup.Heading>Delete Item</Popup.Heading>
+          <Popup.Body>
+            <Box as="p" marginY="zero">
+              Are you sure you'd like to delete the item titled 'My Item'?
+            </Box>
+          </Popup.Body>
+          <Flex gap="s" padding="xxs">
+            <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
+              Delete
+            </Popup.CloseButton>
+            <Popup.CloseButton>Cancel</Popup.CloseButton>
+          </Flex>
+        </Popup.Card>
+      </Popup.Popper>
+    </Popup>
   );
 };
