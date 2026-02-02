@@ -65,18 +65,6 @@ export const usePopupStack = <E extends HTMLElement>(
     }
     return localRef.current;
   });
-
-  // Set CSS variables during render (before any effects) to prevent flashing
-  // This is safe because setting style properties is idempotent
-  if (localRef.current && theme) {
-    const element = localRef.current;
-    const keys = Object.keys(style);
-    for (const key of keys) {
-      // @ts-ignore
-      element.style.setProperty(key, style[key]);
-    }
-  }
-
   // We useLayoutEffect to ensure proper timing of registration of the element to the popup stack.
   // Without this, the timing is unpredictable when mixed with other frameworks. Other frameworks
   // should also register as soon as the element is available
