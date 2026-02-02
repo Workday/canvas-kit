@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.2.18](https://github.com/Workday/canvas-kit/releases/tag/v14.2.18) (2026-01-30)
+
+### Components
+
+- fix: Update canary script to not use extract since we upgrade sb ([#3731](https://github.com/Workday/canvas-kit/pull/3731)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v14.2.17](https://github.com/Workday/canvas-kit/releases/tag/v14.2.17) (2026-01-30)
+
+### Documentation
+
+- docs: Add mcp docs and info about v4 tokens ([#3724](https://github.com/Workday/canvas-kit/pull/3724)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@Copilot](https://github.com/Copilot), Alan Smith)
+
+
 ## [v14.2.16](https://github.com/Workday/canvas-kit/releases/tag/v14.2.16) (2026-01-27)
 
 ### Documentation

@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-mcp",
-  "version": "14.2.16",
+  "version": "14.2.18",
   "description": "MCP package for Canvas Kit",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",

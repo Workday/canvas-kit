@@ -3,7 +3,14 @@ import {StorybookInformationHighlight} from './StorybookInformationHighlight';
 
 <Meta title="Guides/Tokens Migration/Overview" />
 
-# Canvas Kit Token Migration Guide: Moving to `@workday/canvas-tokens-web`
+# Canvas Kit Token Migration Guide: Moving to `@workday/canvas-tokens-web@3.0.0`
+
+<StorybookInformationHighlight
+  title="Note: This guide is for Canvas Tokens v3"
+  description="This guide is meant to help you migrate to Canvas Tokens v3. When we upgrade to Canvas Kit v15, we will update this guide to reflect the new tokens."
+  link="https://workday.github.io/canvas-tokens/?path=/docs/guides-upgrade-guides-v4-overview--docs"
+  linkText="Looking for Canvas Tokens v4? View docs here."
+/>
 
 Canvas Kit v10+ introduces a new token system that replaces the old JavaScript-based tokens from
 `@workday/canvas-kit-react/tokens` with CSS variables from `@workday/canvas-tokens-web`. Canvas Kit
@@ -20,6 +27,13 @@ clear names (like `red.600`, `blue100`) instead of the previous "fruity" palette
 - **Future-Proofing**: Aligns with modern CSS capabilities and Canvas Kit's long-term direction
 
 ## LLM Assisted Migration <StorybookStatusIndicator type="ai" />
+
+<StorybookInformationHighlight
+  title="Note: Looking for an easier path to migrate?"
+  description="We recommend using the Canvas Kit MCP"
+  link="/?path=/docs/ai-for-llms-mcp-docs--docs"
+  linkText="Learn more about the Canvas Kit MCP"
+/>
 
 We provide a **LLM migration mapping file** (`llm-token-migration.txt`) specifically designed for
 use with LLM-based code assistants (such as [Cursor](https://www.cursor.so/) or similar tools). This
