@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.54](https://github.com/Workday/canvas-kit/releases/tag/v13.2.54) (2026-02-02)
+
+### Components
+
+- fix: Update tooltip to add spacing when element has focus ([#3707](https://github.com/Workday/canvas-kit/pull/3707)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  Update logic in tooltip to check if the target has focus visible to add a little extra spacing
+
+
 ## [v13.2.53](https://github.com/Workday/canvas-kit/releases/tag/v13.2.53) (2026-01-22)
 
 ### Components
