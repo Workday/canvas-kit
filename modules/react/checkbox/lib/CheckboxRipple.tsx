@@ -1,5 +1,5 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {calc, CSProps, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const checkboxRippleStencil = createStencil({
@@ -16,7 +16,7 @@ const checkboxRippleStencil = createStencil({
 
 export const CheckboxRipple = createComponent('span')({
   displayName: 'CheckboxRipple',
-  Component: elemProps => {
-    return <span {...checkboxRippleStencil()} />;
+  Component: (elemProps: CSProps) => {
+    return <span {...handleCsProp(elemProps, checkboxRippleStencil())} />;
   },
 });

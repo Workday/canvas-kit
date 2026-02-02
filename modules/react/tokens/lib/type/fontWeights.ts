@@ -18,6 +18,7 @@ type ValueOf<T> = T[keyof T];
  *   </p>
  * );
  * ```
+ * @deprecated ⚠️ `fontWeights` has been deprecated in a future major version. Please use our css var based [`fontFamily`](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-type--docs) tokens.
  */
 export const fontWeights: CanvasFontWeights = {
   regular: 400,
@@ -25,6 +26,7 @@ export const fontWeights: CanvasFontWeights = {
   bold: 700,
 };
 
+/** @deprecated ⚠️ `CanvasFontWeights` has been deprecated in a future major version. Please use our css var based [`fontFamily`](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-type--docs) tokens. */
 export type CanvasFontWeights = {
   /** regular font-weight (400) */
   regular: 400;
@@ -34,4 +36,5 @@ export type CanvasFontWeights = {
   bold: 700;
 };
 
+/** @deprecated ⚠️ `CanvasFontWeightValues` has been deprecated in a future major version. Please use our css var based [`fontFamily`](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-type--docs) tokens. */
 export type CanvasFontWeightValues = ValueOf<CanvasFontWeights>;

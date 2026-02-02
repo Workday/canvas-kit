@@ -2,12 +2,12 @@ import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {createStencil, CSProps} from '@workday/canvas-kit-styling';
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 
 import {useSelectInput} from './hooks/useSelectInput';
 import {useSelectModel} from './hooks/useSelectModel';
 import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
-import {system} from '@workday/canvas-tokens-web';
+import {system, brand} from '@workday/canvas-tokens-web';
 
 export interface SelectInputProps extends ExtractProps<typeof TextInput, never>, CSProps {
   /**
@@ -35,6 +35,7 @@ export const selectInputStencil = createStencil({
     visualInputPart,
     caretContainerPart,
     startIconContainerPart,
+    caretPart,
   }) => ({
     [hiddenInputPart]: {
       position: 'absolute',
@@ -55,20 +56,44 @@ export const selectInputStencil = createStencil({
     },
     [visualInputPart]: {
       caretColor: 'transparent',
+      backgroundColor: system.color.bg.default,
+      color: system.color.text.default,
       cursor: 'default',
+      '&::placeholder': {
+        color: system.color.text.default,
+      },
       '&::selection': {
         backgroundColor: 'transparent',
       },
     },
+    '&:has(:disabled, .disabled)': {
+      [caretPart]: {
+        [systemIconStencil.vars.color]: system.color.fg.disabled,
+      },
+    },
   }),
+  modifiers: {
+    error: {
+      error: ({visualInputPart}) => ({
+        [visualInputPart]: {
+          backgroundColor: brand.error.lightest,
+        },
+      }),
+      caution: ({visualInputPart}) => ({
+        [visualInputPart]: {
+          backgroundColor: brand.alert.lightest,
+        },
+      }),
+    },
+  },
 });
 
 export const SelectInput = createSubcomponent(TextInput)({
   modelHook: useSelectModel,
   elemPropsHook: useSelectInput,
-})<SelectInputProps>(({inputStartIcon, formInputProps, ...elemProps}, Element, model) => {
+})<SelectInputProps>(({inputStartIcon, formInputProps, error, ...elemProps}, Element, model) => {
   return (
-    <InputGroup data-width="ck-formfield-width" {...selectInputStencil()}>
+    <InputGroup data-width="ck-formfield-width" {...selectInputStencil({error: error})}>
       {inputStartIcon && model.state.selectedIds.length > 0 && (
         <InputGroup.InnerStart {...selectInputStencil.parts.startIconContainer}>
           <SystemIcon {...selectInputStencil.parts.startIcon} icon={inputStartIcon} />
@@ -80,6 +105,7 @@ export const SelectInput = createSubcomponent(TextInput)({
       <InputGroup.Input
         as={Element}
         placeholder="Choose an option"
+        error={error}
         {...selectInputStencil.parts.visualInput}
         {...elemProps}
       />

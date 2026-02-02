@@ -3,6 +3,7 @@ import {Flex} from '@workday/canvas-kit-react/layout';
 import {trashIcon} from '@workday/canvas-system-icons-web';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 
 const parentContainerStyles = createStyles({
   gap: system.space.x4,
@@ -18,6 +19,8 @@ export const Delete = () => (
     <DeleteButton icon={trashIcon} iconPosition="end">
       Delete
     </DeleteButton>
-    <DeleteButton aria-label="trash" icon={trashIcon} />
+    <Tooltip title="Delete">
+      <DeleteButton icon={trashIcon} />
+    </Tooltip>
   </Flex>
 );

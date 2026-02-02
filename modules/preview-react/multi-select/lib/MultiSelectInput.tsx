@@ -11,7 +11,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {createStencil, CSProps, handleCsProp, px2rem, calc} from '@workday/canvas-kit-styling';
 import {InputGroup, TextInput, textInputStencil} from '@workday/canvas-kit-react/text-input';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {getCursor} from '@workday/canvas-kit-react/collection';
 import {useComboboxInput, useComboboxInputConstrained} from '@workday/canvas-kit-react/combobox';
 
@@ -20,13 +20,12 @@ import {MultiSelectedItemProps} from './MultiSelectedItem';
 import {MultiSelectedList} from './MultiSelectedList';
 
 export const multiSelectInputStencil = createStencil({
-  //@ts-ignore Types don't like defining a variable in `base` and using a variable in a nested selector. One or the other is fine, but not both.
   base: {
     border: `1px solid ${system.color.border.input.default}`,
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: system.color.bg.default,
-    borderRadius: system.shape.x1,
+    borderRadius: system.shape.x1Half,
     boxSizing: 'border-box',
     minHeight: system.space.x10,
     transition: '0.2s box-shadow, 0.2s border-color',
@@ -44,7 +43,7 @@ export const multiSelectInputStencil = createStencil({
 
     '& [data-part="user-input"]': {
       ...system.type.subtext.large,
-      backgroundColor: system.color.bg.transparent,
+      backgroundColor: system.color.bg.transparent.default,
       borderRadius: system.shape.x1,
 
       // collapse the height of the input by the border width so that an empty multi-select
@@ -70,6 +69,8 @@ export const multiSelectInputStencil = createStencil({
     '&:has(:disabled, .disabled)': {
       borderColor: system.color.border.input.disabled,
       color: system.color.text.disabled,
+      backgroundColor: system.color.bg.alt.softer,
+      [systemIconStencil.vars.color]: system.color.fg.disabled,
     },
 
     '& :where([data-part="form-input"])': {
@@ -99,28 +100,31 @@ export const multiSelectInputStencil = createStencil({
   modifiers: {
     error: {
       error: {
-        borderColor: brand.error.base,
-        boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.error.base}`,
+        borderColor: brand.common.errorInner,
+        boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.common.errorInner}`,
+        backgroundColor: brand.error.lightest,
         '&:has(:hover, :disabled, :focus-visible), &:is(.hover, .disabled, .focus)': {
-          borderColor: brand.error.base,
+          borderColor: brand.common.errorInner,
         },
         '&:has(:focus-visible:not([disabled])), &.focus': {
-          boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.error.base}, 0 0 0 2px ${
+          borderColor: brand.common.errorInner,
+          boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.common.errorInner}, 0 0 0 2px ${
             system.color.border.inverse
           }, 0 0 0 4px ${brand.common.focusOutline}`,
           outlineOffset: px2rem(2),
         },
       },
-      alert: {
-        borderColor: brand.alert.darkest,
-        boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.alert.base}`,
+      caution: {
+        borderColor: brand.common.alertOuter,
+        boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.common.alertInner}`,
+        backgroundColor: brand.alert.lightest,
         '&:has(:hover, .hover, :disabled, .disabled, :focus-visible:not([disabled])), .focus:not(:has([disabled]))':
           {
-            borderColor: brand.alert.darkest,
+            borderColor: brand.common.alertOuter,
           },
 
         '&:has(:focus-visible, .focus):not(:has([disabled]))': {
-          boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.alert.base},
+          boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.common.alertInner},
         0 0 0 2px ${system.color.border.inverse},
         0 0 0 4px ${brand.common.focusOutline}`,
         },
