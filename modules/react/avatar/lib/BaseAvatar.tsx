@@ -1,7 +1,14 @@
 import React from 'react';
 
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {CSProps, calc, createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
+import {
+  CSProps,
+  calc,
+  createStencil,
+  cssVar,
+  handleCsProp,
+  px2rem,
+} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 import {AvatarImage} from './AvatarImage';
@@ -47,7 +54,8 @@ export const baseAvatarStencil = createStencil({
     size: '',
   },
   base: ({backgroundColor, color, size}) => ({
-    borderRadius: system.shape.round,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    borderRadius: cssVar(system.shape.full, system.shape.round),
     width: cssVar(size, calc.add(system.space.x10, system.space.x2)),
     height: cssVar(size, calc.add(system.space.x10, system.space.x2)),
     minWidth: cssVar(size, calc.add(system.space.x10, system.space.x2)),
@@ -83,31 +91,32 @@ export const baseAvatarStencil = createStencil({
     },
     size: {
       extraExtraSmall: ({size}) => ({
-        [size]: system.space.x6,
+        [size]: cssVar(system.size.xs, system.space.x6),
         ...system.type.subtext.small,
       }),
       extraSmall: ({size}) => ({
-        [size]: system.space.x8,
+        [size]: cssVar(system.size.sm, system.space.x8),
         ...system.type.subtext.medium,
       }),
       small: ({size}) => ({
-        [size]: system.space.x10,
+        [size]: cssVar(system.size.md, system.space.x10),
         ...system.type.body.small,
       }),
       medium: ({size}) => ({
-        [size]: calc.add(system.space.x10, system.space.x2),
+        // TODO: There are no size tokens for medium, large, extraLarge and extraExtraLarge
+        [size]: px2rem(48),
         ...system.type.body.medium,
       }),
       large: ({size}) => ({
-        [size]: calc.add(system.space.x16, system.space.x2),
+        [size]: px2rem(72),
         ...system.type.heading.medium,
       }),
       extraLarge: ({size}) => ({
-        [size]: calc.add(system.space.x20, system.space.x4),
+        [size]: px2rem(96),
         ...system.type.title.small,
       }),
       extraExtraLarge: ({size}) => ({
-        [size]: calc.multiply(system.space.x10, 3),
+        [size]: px2rem(120),
         ...system.type.title.medium,
       }),
     },
