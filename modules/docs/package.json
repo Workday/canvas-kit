@@ -28,7 +28,7 @@
     "build:rebuild": "npm-run-all clean build",
     "build:specs": "tsx ./utils/build-specifications.js",
     "build": "npm-run-all build:es6 build:mdx build:specs build:docs",
-    "depcheck": "node ../../utils/check-dependencies-exist.mjs",
+    "depcheck": "node ../../utils/check-dependencies-exist.js",
     "typecheck:src": "tsc -p . --noEmit --incremental false"
   },
   "publishConfig": {

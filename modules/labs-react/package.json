@@ -29,10 +29,10 @@
     "build:es6": "tspc -p tsconfig.es6.json",
     "build:rebuild": "npm-run-all clean build",
     "build": "npm-run-all build:cjs build:es6",
-    "postbuild": "node ../../utils/replace-version.mjs",
+    "postbuild": "node ../../utils/replace-version.js",
     "prepack": "node ../../utils/publish.js pre labs-react",
     "postpack": "node ../../utils/publish.js post labs-react",
-    "depcheck": "node ../../utils/check-dependencies-exist.mjs",
+    "depcheck": "node ../../utils/check-dependencies-exist.js",
     "typecheck:src": "tsc -p . --noEmit --incremental false"
   },
   "keywords": [

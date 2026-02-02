@@ -17,7 +17,7 @@
   ],
   "scripts": {
     "clean": "rimraf *.css",
-    "build": "node ../../utils/update-css-package-version.mjs"
+    "build": "node ../../utils/update-css-package-version.js"
   },
   "keywords": [
     "canvas",

@@ -28,7 +28,7 @@
     "build:es6": "tsc -p tsconfig.es6.json",
     "build:rebuild": "npm-run-all clean build",
     "build": "npm-run-all build:cjs build:es6",
-    "depcheck": "node ../../utils/check-dependencies-exist.mjs",
+    "depcheck": "node ../../utils/check-dependencies-exist.js",
     "typecheck:src": "tsc -p . --noEmit --incremental false"
   },
   "publishConfig": {
