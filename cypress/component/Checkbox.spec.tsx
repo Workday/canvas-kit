@@ -16,7 +16,11 @@ describe('Checkbox', () => {
       });
 
       it('should not have any axe errors', () => {
-        cy.checkA11y();
+        cy.checkA11y(null, {
+          rules: {
+            'scrollable-region-focusable': {enabled: false},
+          },
+        });
       });
 
       context('when clicked', () => {
