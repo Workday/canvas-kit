@@ -1,5 +1,4 @@
 import {ErrorType, GrowthBehavior, createComponent} from '@workday/canvas-kit-react/common';
-import {formFieldStencil} from '@workday/canvas-kit-react/form-field';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {CSProps, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
@@ -71,6 +70,7 @@ export const textInputStencil = createStencil({
         width: '100%',
         resize: 'vertical',
       },
+      false: {},
     },
 
     error: {
