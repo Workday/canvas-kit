@@ -26,8 +26,10 @@ export const multiSelectInputStencil = createStencil({
     backgroundColor: system.color.bg.default,
     borderRadius: system.shape.x1Half,
     boxSizing: 'border-box',
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     minHeight: system.space.x10,
     transition: '0.2s box-shadow, 0.2s border-color',
+    width: px2rem(280),
     margin: 0, // Fix Safari
     [textInputStencil.vars.width]: '100%',
 

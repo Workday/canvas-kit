@@ -31,11 +31,13 @@ export const formFieldStencil = createStencil({
         flexDirection: 'row',
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         gap: cssVar(system.gap.xl, system.space.x8),
+        width: '100%',
       },
       horizontalEnd: {
         flexDirection: 'row',
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         gap: cssVar(system.gap.xl, system.space.x8),
+        width: '100%',
       },
       vertical: {
         flexDirection: 'column',

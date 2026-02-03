@@ -1,4 +1,5 @@
 import {ErrorType, GrowthBehavior, createComponent} from '@workday/canvas-kit-react/common';
+import {formFieldStencil} from '@workday/canvas-kit-react/form-field';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {CSProps, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
@@ -33,7 +34,7 @@ export const textInputStencil = createStencil({
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     padding: cssVar(system.padding.xs, system.space.x2), // Compensate for border
     margin: system.padding.none, // Fix Safari
-    width,
+    width: cssVar(width, px2rem(280)),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     color: cssVar(system.color.fg.default, system.color.text.default),
     textOverflow: 'ellipsis', // Always show ellipsis for long text inputs as long as it doesn't have focus
@@ -69,9 +70,6 @@ export const textInputStencil = createStencil({
       true: {
         width: '100%',
         resize: 'vertical',
-      },
-      false: {
-        width: 'initial',
       },
     },
 
