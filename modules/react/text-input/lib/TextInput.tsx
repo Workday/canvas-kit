@@ -45,7 +45,7 @@ export const textInputStencil = createStencil({
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       color: cssVar(system.color.fg.muted.default, system.color.text.hint),
     },
-    '&:is(:hover, .hover)': {
+    '&:is(:hover, .hover):where(:not([disabled], .disabled))': {
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       borderColor: cssVar(system.color.border.input.hover, system.color.border.input.strong),
     },
