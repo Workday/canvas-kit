@@ -30,7 +30,8 @@ const checkboxCheckStencil = createStencil({
   modifiers: {
     checked: {
       true: {
-        [systemIconStencil.vars.color]: brand.primary.accent,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        [systemIconStencil.vars.color]: cssVar(system.color.fg.inverse, brand.primary.accent),
         opacity: system.opacity.full,
         transform: 'scale(1)',
       },
@@ -49,7 +50,8 @@ const checkboxCheckStencil = createStencil({
           brand.primary.base
         ),
         '& > div': {
-          backgroundColor: brand.primary.base,
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.base),
         },
       },
     },

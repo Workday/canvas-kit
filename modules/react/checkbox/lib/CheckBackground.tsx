@@ -39,6 +39,7 @@ export const checkboxBackgroundStencil = createStencil({
   modifiers: {
     variant: {
       inverse: {
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         backgroundColor: cssVar(system.color.surface.inverse, system.color.bg.default),
       },
     },

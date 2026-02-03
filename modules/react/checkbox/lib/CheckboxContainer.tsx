@@ -35,7 +35,8 @@ const checkboxContainerStencil = createStencil({
       position: 'relative',
     },
     '& > label': {
-      paddingInlineStart: system.space.x3,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      paddingInlineStart: cssVar(system.padding.sm, system.space.x3),
     },
   },
 });
