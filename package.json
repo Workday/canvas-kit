@@ -3,7 +3,6 @@
   "name": "canvas-kit",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
-  "type": "module",
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.26.3",
     "@babel/plugin-transform-runtime": "^7.26.3",
@@ -93,7 +92,7 @@
     "yargs": "^16.2.0"
   },
   "scripts": {
-    "start": "node utils/download-fonts.js && node ./node_modules/storybook/core/cli/bin/index.js dev -p 9001 -c .storybook",
+    "start": "tsx utils/download-fonts.js && node ./node_modules/storybook/core/cli/bin/index.js dev -p 9001 -c .storybook",
     "watch": "TSC_NONPOLLING_WATCHER=1 lerna run watch --parallel --stream",
     "clean": "lerna run clean",
     "depcheck": "lerna run depcheck",
