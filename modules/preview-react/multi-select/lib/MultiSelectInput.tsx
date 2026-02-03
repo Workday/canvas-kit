@@ -34,7 +34,7 @@ export const multiSelectInputStencil = createStencil({
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     backgroundColor: cssVar(system.color.surface.default, system.color.bg.default),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderRadius: cssVar(system.shape.sm, system.shape.x1Half),
+    borderRadius: cssVar(system.shape.md, system.shape.x1Half),
     boxSizing: 'border-box',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     minHeight: cssVar(system.size.md, system.space.x10),
@@ -84,10 +84,13 @@ export const multiSelectInputStencil = createStencil({
       },
     },
 
-    '&:has(:disabled, .disabled)': {
-      // borderColor: system.color.border.input.disabled,
-      // color: system.color.text.disabled,
-      // backgroundColor: system.color.bg.alt.softer,
+    '&:has(:disabled, .disabled) :where([data-part="user-input"])': {
+      opacity: system.opacity.disabled,
+      [systemIconStencil.vars.color]: system.color.fg.disabled,
+    },
+
+    '&:has(:disabled, .disabled) :where([data-part="form-input"])': {
+      opacity: system.opacity.zero,
       [systemIconStencil.vars.color]: system.color.fg.disabled,
     },
 
