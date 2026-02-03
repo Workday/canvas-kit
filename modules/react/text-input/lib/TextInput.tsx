@@ -77,7 +77,8 @@ export const textInputStencil = createStencil({
       error: {
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         borderColor: cssVar(system.color.brand.border.critical, brand.common.errorInner),
-        borderWidth: px2rem(2),
+        // borderWidth: px2rem(2),
+        boxShadow: `inset 0 0 0 ${px2rem(2)} ${cssVar(system.color.brand.border.critical, brand.common.errorInner)}`,
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         backgroundColor: cssVar(system.color.brand.surface.critical.default, brand.error.lightest),
         '&:is(:hover, .hover, :disabled, .disabled, :focus-visible:not([disabled]), .focus:not([disabled]))':
@@ -87,7 +88,9 @@ export const textInputStencil = createStencil({
           },
         '&:is(:focus-visible, .focus):not([disabled])': {
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          boxShadow: `0 0 0 2px ${cssVar(system.color.focus.inverse, system.color.border.inverse.default)}, 0 0 0 4px ${cssVar(system.color.brand.border.primary, brand.common.focusOutline)}`,
+          boxShadow: `inset 0 0 0 ${px2rem(2)} ${cssVar(system.color.brand.border.critical, brand.common.errorInner)},
+        0 0 0 2px ${cssVar(system.color.focus.inverse, system.color.border.inverse.default)},
+        0 0 0 4px ${cssVar(system.color.brand.border.primary, brand.common.focusOutline)}`,
           outlineOffset: px2rem(2),
         },
       },
