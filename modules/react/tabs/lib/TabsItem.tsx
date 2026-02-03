@@ -25,7 +25,7 @@ import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
 
 import {useTabsModel} from './useTabsModel';
 import {buttonStencil} from '@workday/canvas-kit-react/button';
-import {system, brand, base} from '@workday/canvas-tokens-web';
+import {system, brand} from '@workday/canvas-tokens-web';
 export interface TabsItemProps
   extends ExtractProps<typeof Box, never>,
     Partial<Pick<FlexProps, 'gap'>> {
@@ -101,7 +101,7 @@ const tabItemStencil = createStencil({
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
     overflow: 'hidden',
-    [systemIconStencil.vars.color]: system.color.fg.muted.soft,
+    [systemIconStencil.vars.color]: 'currentColor',
 
     '&:has(span)': {
       display: 'flex',
@@ -109,10 +109,9 @@ const tabItemStencil = createStencil({
     },
 
     '&:hover, &.hover, &:focus-visible, &.focus': {
-      backgroundColor: base.soap200,
-      color: base.blackPepper400,
-
-      [systemIconStencil.vars.color]: system.color.icon.strong,
+      backgroundColor: system.color.bg.alt.default,
+      color: system.color.fg.contrast.default,
+      [systemIconStencil.vars.color]: system.color.fg.contrast.default,
     },
 
     '&:focus-visible, &.focus': {
@@ -129,7 +128,7 @@ const tabItemStencil = createStencil({
       [systemIconStencil.vars.color]: system.color.fg.disabled,
       '&:hover': {
         cursor: 'auto',
-        backgroundColor: system.color.bg.transparent,
+        backgroundColor: system.color.bg.transparent.default,
         [systemIconStencil.vars.color]: system.color.fg.disabled,
       },
     },
@@ -151,7 +150,7 @@ const tabItemStencil = createStencil({
         width: '100%',
       },
       '&:hover, &.hover, &:focus-visible, &.focus': {
-        backgroundColor: system.color.bg.transparent,
+        backgroundColor: system.color.bg.transparent.default,
         color: brand.primary.base,
       },
     },

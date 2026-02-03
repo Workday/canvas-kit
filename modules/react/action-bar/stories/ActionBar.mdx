@@ -10,7 +10,7 @@ import * as ActionBarStories from './ActionBar.stories';
 
 # Canvas Kit Action Bar
 
-Action Bar is a [compound component](/getting-started/for-developers/resources/compound-components/)
+Action Bar is a [compound component](/get-started/for-developers/documentation/compound-components/)
 that contains primary and secondary actions related to a page or task.
 
 [> Workday Design Reference](https://design.workday.com/components/buttons/action-bar)
@@ -71,6 +71,16 @@ The number of visible buttons can also be adjusted by using the model's `maximum
 You can change it from the default of 3 to any number greater than 1 and less than items.length.
 
 <ExampleCodeBlock code={OverflowActionBarCustomButtonCount} />
+
+## Accessibility
+
+Grouping the actions into an HTML `<section>` element with an `aria-label` string is recommended.
+This can be useful for helping screen reader users quickly jump down to the actions at the bottom of
+a page.
+
+Refer to [Button](/components/buttons/button/#accessibility) and
+[Menus](/components/popups/menu/#accessibility) for more information about accessibiliy of these
+components in the Action Bar.
 
 ## Component API
 

@@ -1,14 +1,28 @@
-import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, SymbolDoc, StorybookStatusIndicator} from '@workday/canvas-kit-docs';
+import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
 import * as SearchFormStories from './SearchForm.stories';
 import {Basic} from './examples/Basic';
+import {Collapsed} from './examples/Collapsed';
 import {CustomTheme} from './examples/CustomTheme';
 import {Grow} from './examples/Grow';
 import {RTL} from './examples/RTL';
 import {Theming} from './examples/Theming';
+import {CustomStyles} from './examples/CustomStyles';
 
 <Meta of={SearchFormStories} />
 
-# Canvas Kit Search Form
+# Canvas Kit Search Form <StorybookStatusIndicator type="deprecated" />
+
+<InformationHighlight className="sb-unstyled" variant="caution" cs={{p: {marginBlock: 0}}}>
+  <InformationHighlight.Icon />
+  <InformationHighlight.Body>
+    `SearchForm` in Labs has been deprecated and will be removed in a future major version. Please
+    use `Combobox` in Main instead.
+  </InformationHighlight.Body>
+  <InformationHighlight.Link href="https://workday.github.io/canvas-kit/?path=/docs/features-combobox--docs#usage">
+    View Autocomplete Example
+  </InformationHighlight.Link>
+</InformationHighlight>
 
 `SearchForm` is a search form that contains a `Combobox` for rendering search results. It's
 primarily intended to be used within a `Header`.
@@ -56,6 +70,23 @@ Below is a table of attributes that can be supplied to `SearchForm`:
 additional configuration.
 
 <ExampleCodeBlock code={RTL} />
+
+### Collapsed
+
+<ExampleCodeBlock code={Collapsed} />
+
+### Custom Styles
+
+You can apply custom styles to the component via the `cs` prop. The example below uses CSS Variables
+and
+[createStencil](https://workday.github.io/canvas-kit/?path=/docs/styling-guides-customizing-styles--docs#stencils)
+to create a custom style for the `SearchForm` component.
+
+<ExampleCodeBlock code={CustomStyles} />
+
+Learn more in our
+[Styling](https://workday.github.io/canvas-kit/?path=/docs/styling-guides-customizing-styles--docs)
+docs.
 
 ## Component API
 

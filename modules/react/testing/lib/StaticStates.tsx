@@ -30,14 +30,19 @@ export const convertToStaticStates: StyleRewriteFn = obj => {
   }, {} as CSSProperties);
 };
 
-export const StaticStates: React.FC<React.PropsWithChildren<
-  {theme?: PartialEmotionCanvasTheme} & React.HTMLAttributes<HTMLElement>
->> = ({children, theme, ...elemProps}) => {
+export const StaticStates: React.FC<
+  React.PropsWithChildren<
+    {
+      theme?: PartialEmotionCanvasTheme;
+      className?: React.HTMLAttributes<HTMLElement>['className'];
+    } & React.HTMLAttributes<HTMLElement>
+  >
+> = ({children, theme, className, ...elemProps}) => {
   const localTheme: EmotionCanvasTheme & {_styleRewriteFn?: StyleRewriteFn} = useTheme(theme);
   localTheme._styleRewriteFn = convertToStaticStates;
-
+  console.log('className', className);
   return (
-    <CanvasProvider theme={localTheme} {...elemProps}>
+    <CanvasProvider theme={localTheme} className={className} {...elemProps}>
       {children}
     </CanvasProvider>
   );
