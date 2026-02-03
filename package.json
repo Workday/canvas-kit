@@ -146,7 +146,8 @@
     "jscodeshift": "0.14.0",
     "puppeteer-core": "^13.7.0",
     "estree-walker": "^2.0.0",
-    "loader-utils": "@1.4.1"
+    "loader-utils": "@1.4.1",
+     "semver": "^7.6.2"
   },
   "dependencies": {
     "jsdom": "^27.1.0"
