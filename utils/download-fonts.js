@@ -56,7 +56,7 @@ async function main() {
   }
   await Promise.all(
     fontsToDownload.map(fileName => {
-      download(fontBaseUrl + fileName, resolve(__dirname, '../public', fileName));
+      return download(fontBaseUrl + fileName, resolve(__dirname, '../public', fileName));
     })
   );
 }
