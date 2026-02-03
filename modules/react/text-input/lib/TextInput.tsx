@@ -52,9 +52,9 @@ export const textInputStencil = createStencil({
     },
     '&:is(:focus-visible, .focus):where(:not([disabled]))': {
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      borderColor: cssVar(system.color.brand.border.primary, brand.common.focusOutline),
+      borderColor: cssVar(system.color.brand.focus.primary, brand.common.focusOutline),
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      boxShadow: `inset 0 0 0 1px ${cssVar(system.color.brand.border.primary, brand.common.focusOutline)}`,
+      boxShadow: `inset 0 0 0 1px ${cssVar(system.color.brand.focus.primary, brand.common.focusOutline)}`,
       outline: `${px2rem(2)} solid transparent`,
     },
     '&:is(:disabled, .disabled)': {

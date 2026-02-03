@@ -10,7 +10,14 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {InputGroup, TextInput, textInputStencil} from '@workday/canvas-kit-react/text-input';
-import {CSProps, calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {
+  CSProps,
+  calc,
+  createStencil,
+  cssVar,
+  handleCsProp,
+  px2rem,
+} from '@workday/canvas-kit-styling';
 import {caretDownSmallIcon, searchIcon} from '@workday/canvas-system-icons-web';
 import {brand, system} from '@workday/canvas-tokens-web';
 
@@ -20,32 +27,42 @@ import {useMultiSelectModel} from './useMultiSelectModel';
 
 export const multiSelectInputStencil = createStencil({
   base: {
-    border: `1px solid ${system.color.border.input.default}`,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    border: `1px solid ${cssVar(system.color.border.input.default, system.color.border.input.default)}`,
     display: 'flex',
     flexDirection: 'column',
-    backgroundColor: system.color.bg.default,
-    borderRadius: system.shape.x1Half,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    backgroundColor: cssVar(system.color.surface.default, system.color.bg.default),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    borderRadius: cssVar(system.shape.sm, system.shape.x1Half),
     boxSizing: 'border-box',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    minHeight: system.space.x10,
+    minHeight: cssVar(system.size.md, system.space.x10),
     transition: '0.2s box-shadow, 0.2s border-color',
     width: px2rem(280),
     margin: 0, // Fix Safari
     [textInputStencil.vars.width]: '100%',
 
     '&:hover, &.hover': {
-      borderColor: system.color.border.input.strong,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      borderColor: cssVar(system.color.border.input.hover, system.color.border.input.strong),
     },
 
     '&:has(:focus-visible:not([disabled])), &.focus': {
-      borderColor: system.color.border.primary.default,
-      boxShadow: `inset 0 0 0 1px ${system.color.border.primary.default}`,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      borderColor: cssVar(system.color.brand.focus.primary, system.color.border.primary.default),
+      boxShadow: `inset 0 0 0 1px ${cssVar(system.color.brand.focus.primary, system.color.border.primary.default)}`,
     },
 
     '& [data-part="user-input"]': {
       ...system.type.subtext.large,
-      backgroundColor: system.color.bg.transparent.default,
-      borderRadius: system.shape.x1,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      backgroundColor: cssVar(
+        system.color.surface.transparent,
+        system.color.bg.transparent.default
+      ),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      borderRadius: cssVar(system.shape.md, system.shape.x1),
 
       // collapse the height of the input by the border width so that an empty multi-select
       // is the same height as a `TextInput`
@@ -68,9 +85,9 @@ export const multiSelectInputStencil = createStencil({
     },
 
     '&:has(:disabled, .disabled)': {
-      borderColor: system.color.border.input.disabled,
-      color: system.color.text.disabled,
-      backgroundColor: system.color.bg.alt.softer,
+      // borderColor: system.color.border.input.disabled,
+      // color: system.color.text.disabled,
+      // backgroundColor: system.color.bg.alt.softer,
       [systemIconStencil.vars.color]: system.color.fg.disabled,
     },
 
