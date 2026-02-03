@@ -31,7 +31,6 @@ const checkboxContainerStencil = createStencil({
       height: cssVar(base.size225, calc.add(system.space.x4, px2rem(2))),
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       minWidth: cssVar(base.size225, calc.add(system.space.x4, px2rem(2))),
-      marginTop: px2rem(3),
       alignSelf: 'flex-start',
       position: 'relative',
     },

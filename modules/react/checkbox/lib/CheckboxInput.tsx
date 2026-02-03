@@ -62,9 +62,9 @@ const checkboxInputStencil = createStencil({
   base: {
     borderRadius: system.shape.half,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    width: cssVar(base.size225, system.space.x6),
+    width: cssVar(base.size300, system.space.x6),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    height: cssVar(base.size225, system.space.x6),
+    height: cssVar(base.size300, system.space.x6),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     margin: cssVar(system.padding.none, system.space.zero),
     marginTop: calc.negate(px2rem(3)),
@@ -82,7 +82,7 @@ const checkboxInputStencil = createStencil({
     },
 
     // Hover state and not disabled
-    '&:not(:where(:checked, :indeterminate, :disabled, :focus-visible, .focus)):where(:hover, .hover, :active, .active) ~ div:first-of-type':
+    [`&:not(:where(:checked, :indeterminate, :disabled, :focus-visible, .focus)):where(:hover, .hover, :active, .active) ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]:
       {
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         borderColor: cssVar(system.color.border.input.hover, system.color.border.input.strong),

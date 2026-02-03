@@ -1,6 +1,6 @@
 import {ErrorType, createComponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import {brand, system} from '@workday/canvas-tokens-web';
 
@@ -43,7 +43,11 @@ const checkboxCheckStencil = createStencil({
     },
     variant: {
       inverse: {
-        [systemIconStencil.vars.color]: brand.primary.base,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        [systemIconStencil.vars.color]: cssVar(
+          system.color.brand.fg.primary.default,
+          brand.primary.base
+        ),
         '& > div': {
           backgroundColor: brand.primary.base,
         },
@@ -57,12 +61,13 @@ const indeterminateBoxStencil = createStencil({
     width: px2rem(10),
     height: calc.divide(system.space.x1, 2),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    backgroundColor: brand.primary.accent,
+    backgroundColor: cssVar(system.color.fg.inverse, brand.primary.accent),
   },
   modifiers: {
     variant: {
       inverse: {
-        backgroundColor: brand.primary.base,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.base),
       },
     },
   },
