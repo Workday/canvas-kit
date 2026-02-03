@@ -15,7 +15,7 @@ import {
   handleCsProp,
   px2rem,
 } from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 
 import {RadioLabelContext} from './RadioLabel';
 
@@ -33,9 +33,9 @@ const radioInputStencil = createStencil({
   base: {
     cursor: 'pointer',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    height: cssVar(system.size.xxs, px2rem(radioHeight)),
+    height: cssVar(base.size225, px2rem(radioHeight)),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    width: cssVar(system.size.xxs, px2rem(radioWidth)),
+    width: cssVar(base.size225, px2rem(radioWidth)),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     borderRadius: cssVar(system.shape.full, system.shape.round),
     position: 'absolute',
@@ -70,9 +70,9 @@ const radioInputStencil = createStencil({
       boxSizing: 'border-box',
       border: `${px2rem(1)} solid ${system.color.border.input.default}`,
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      height: cssVar(system.size.xxs, px2rem(radioHeight)),
+      height: cssVar(base.size225, px2rem(radioHeight)),
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      width: cssVar(system.size.xxs, px2rem(radioWidth)),
+      width: cssVar(base.size225, px2rem(radioWidth)),
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       borderRadius: cssVar(system.shape.full, system.shape.round),
       justifyContent: 'center',
@@ -205,9 +205,9 @@ const StyledRadioInput = createComponent('input')<StyledRadioButtonProps & Style
 const radioInputWrapperStencil = createStencil({
   base: {
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    height: cssVar(system.size.xxs, px2rem(radioHeight)),
+    height: cssVar(base.size225, px2rem(radioHeight)),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    width: cssVar(system.size.xxs, px2rem(radioWidth)),
+    width: cssVar(base.size225, px2rem(radioWidth)),
     flex: '0 0 auto',
     // Hover Ripple element
     '::before': {
@@ -216,10 +216,10 @@ const radioInputWrapperStencil = createStencil({
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       borderRadius: cssVar(system.shape.full, system.shape.round),
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      height: cssVar(system.size.xxs, px2rem(radioHeight)),
+      height: cssVar(base.size225, px2rem(radioHeight)),
       transition: 'box-shadow 150ms ease-out',
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      width: cssVar(system.size.xxs, px2rem(radioWidth)),
+      width: cssVar(base.size225, px2rem(radioWidth)),
       pointerEvents: 'none',
       opacity: system.opacity.full,
     },

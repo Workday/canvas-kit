@@ -32,6 +32,7 @@ export const parameters = {
         prefix('welcome-', '0'),
         prefix('guides-', '1'),
         prefix('guides-getting-started', '1'),
+        prefix('ai-for-llms-', '1a'),
         prefix('styling-', '2'),
         prefix('styling-getting-started', '1'),
         prefix('styling-getting-started-overview', '1'),

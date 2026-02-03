@@ -26,6 +26,9 @@ export interface AccentIconStyles {
   transparent?: boolean;
 }
 
+/**
+ *  @deprecated ⚠️ `AccentIconProps` is deprecated and will be removed in a future major version. Deprecated in v15.0.0.
+ */
 export interface AccentIconProps extends AccentIconStyles, Omit<SvgProps, 'src' | 'type'> {
   /**
    *  The icon to display from `@workday/canvas-accent-icons-web`.
@@ -53,6 +56,9 @@ export const accentIconStyles = ({
   },
 });
 
+/**
+ *  @deprecated ⚠️ `accentIconStencil` is deprecated and will be removed in a future major version. Deprecated in v15.0.0.
+ */
 export const accentIconStencil = createStencil({
   extends: svgStencil,
   vars: {
@@ -78,6 +84,9 @@ export const accentIconStencil = createStencil({
   },
 });
 
+/**
+ *  @deprecated ⚠️ `AccentIcon` is deprecated and will be removed in a future major version. Deprecated in v15.0.0.
+ */
 export const AccentIcon = createComponent('span')({
   displayName: 'AccentIcon',
   Component: (

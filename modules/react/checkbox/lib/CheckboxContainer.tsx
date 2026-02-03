@@ -3,7 +3,7 @@ import * as React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {LabelText} from '@workday/canvas-kit-react/text';
 import {CSProps, calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 interface CheckboxContainerProps extends CSProps {
   children: React.ReactNode;
@@ -18,7 +18,7 @@ const checkboxContainerStencil = createStencil({
     display: 'flex',
     alignItems: 'center',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    minHeight: cssVar(system.size.xxs, system.space.x6),
+    minHeight: cssVar(base.size225, system.space.x6),
     position: 'relative',
     /**
      * Using a wrapper prevents the browser default behavior of trigging
@@ -28,9 +28,9 @@ const checkboxContainerStencil = createStencil({
     '&>div': {
       display: 'flex',
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      height: cssVar(system.size.xxs, calc.add(system.space.x4, px2rem(2))),
+      height: cssVar(base.size225, calc.add(system.space.x4, px2rem(2))),
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      minWidth: cssVar(system.size.xxs, calc.add(system.space.x4, px2rem(2))),
+      minWidth: cssVar(base.size225, calc.add(system.space.x4, px2rem(2))),
       marginTop: px2rem(3),
       alignSelf: 'flex-start',
       position: 'relative',

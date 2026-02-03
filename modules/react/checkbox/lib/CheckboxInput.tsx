@@ -9,7 +9,7 @@ import {
   handleCsProp,
   px2rem,
 } from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 
 import {checkboxBackgroundStencil} from './CheckBackground';
 import {checkboxRippleStencil} from './CheckboxRipple';
@@ -62,9 +62,9 @@ const checkboxInputStencil = createStencil({
   base: {
     borderRadius: system.shape.half,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    width: cssVar(system.size.xxs, system.space.x6),
+    width: cssVar(base.size225, system.space.x6),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    height: cssVar(system.size.xxs, system.space.x6),
+    height: cssVar(base.size225, system.space.x6),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     margin: cssVar(system.padding.none, system.space.zero),
     marginTop: calc.negate(px2rem(3)),

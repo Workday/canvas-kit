@@ -24,21 +24,19 @@ the middle.
 Accent colors are saturated colors - like blue, red, orange, purple. Accent colors are used to draw
 attention towards them and should be used sparingly, and for a specific purpose.
 
-<Do>
+**Do:**
 
 - Use accent colors to highlight important information
 - Use existing color roles to inform selection
 - Use accent colors sparingly
 - for important actions, alerts, or states
 
-</Do>
 
-<Dont>
+**Dont:**
 
 - Avoid decorative use of accent colors
 - Avoid applying accent colors to secondary or supporting content
 
-</Dont>
 
 ### Neutral Colors
 
@@ -50,18 +48,16 @@ palette includes 2 neutrals meant for different purposes.
 - Neutral is an achromatic greyscale with no hue or chroma, from white to black. It's meant for
   consistent contrast against backgrounds, such as prose text.
 
-<Do>
+**Do:**
 
 - Use Neutral for prose and structural content - Use Slate for secondary UI elements, borders, and
   text
 
-</Do>
 
-<Dont>
+**Dont:**
 
 - Use Neutral and Slate interchangeably
 
-</Dont>
 
 ### Alpha Colors
 
@@ -69,12 +65,11 @@ Alpha colors are colors with transparency that adaptive dynamically to backgroun
 creates a natural layering effect on the background without requiring new color definitions for each
 background.
 
-<Do>
+**Do:**
 
 - Use alpha colors when elements need to adapt to different backgrounds - Use alpha colors in a
   consistent way throughout the experience - Ensure sufficient contrast for underlying content
 
-</Do>
 
 ## Brand Palette
 

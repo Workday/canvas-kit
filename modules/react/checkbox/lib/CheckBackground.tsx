@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {ErrorType, createComponent} from '@workday/canvas-kit-react/common';
 import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 
 interface CheckBackgroundProps {
   children: React.ReactNode;
@@ -26,14 +26,14 @@ export const checkboxBackgroundStencil = createStencil({
     borderRadius: cssVar(system.shape.sm, system.shape.half),
     display: 'flex',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    height: cssVar(system.size.xxs, calc.add(system.space.x4, px2rem(2))),
+    height: cssVar(base.size225, calc.add(system.space.x4, px2rem(2))),
     justifyContent: 'center',
     padding: px2rem(3),
     pointerEvents: 'none',
     position: 'absolute',
     transition: 'border 200ms ease, background 200ms',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    width: cssVar(system.size.xxs, calc.add(system.space.x4, px2rem(2))),
+    width: cssVar(base.size225, calc.add(system.space.x4, px2rem(2))),
     border: `${px2rem(1)} solid ${system.color.border.input.default}`,
   },
   modifiers: {
