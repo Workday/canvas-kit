@@ -1,7 +1,7 @@
 import * as React from 'react';
 import innerText from 'react-innertext';
 
-import {createComponent, mergeCallback} from '@workday/canvas-kit-react/common';
+import {createComponent, mergeCallback, useLocalRef} from '@workday/canvas-kit-react/common';
 import {
   Placement,
   Popper,
