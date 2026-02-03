@@ -1,12 +1,13 @@
 import React from 'react';
-import {
-  setupIcon,
-  uploadCloudIcon,
-  userIcon,
-  taskContactIcon,
-} from '@workday/canvas-system-icons-web';
+
 import {Menu} from '@workday/canvas-kit-react/menu';
 import {BodyText} from '@workday/canvas-kit-react/text';
+import {
+  setupIcon,
+  taskContactIcon,
+  uploadCloudIcon,
+  userIcon,
+} from '@workday/canvas-system-icons-web';
 
 export const Icons = () => {
   const [selected, setSelected] = React.useState('');

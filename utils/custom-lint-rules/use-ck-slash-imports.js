@@ -11,9 +11,9 @@
  * // => "bears, beets, and Battlestar Galactica"
  * ```
  * */
-const formatter = new Intl.ListFormat('en', { style: 'long', type: 'conjunction' });
+const formatter = new Intl.ListFormat('en', {style: 'long', type: 'conjunction'});
 
-module.exports = {
+const useCKSlashImports = {
   meta: {
     type: 'problem',
     docs: {
@@ -23,13 +23,16 @@ module.exports = {
     },
     fixable: 'code',
   },
-  create: function(context) {
+  create: function (context) {
     return {
       ImportDeclaration(node) {
         const {value} = node.source;
         const {specifiers} = node;
         const specifierNames = specifiers.map(specifier => {
-          if (specifier.type === 'ImportDefaultSpecifier' || specifier.type === 'ImportNamespaceSpecifier') {
+          if (
+            specifier.type === 'ImportDefaultSpecifier' ||
+            specifier.type === 'ImportNamespaceSpecifier'
+          ) {
             return specifier.local.name;
           }
           if (specifier.type === 'ImportSpecifier') {
@@ -50,3 +53,5 @@ module.exports = {
     };
   },
 };
+
+export default useCKSlashImports;

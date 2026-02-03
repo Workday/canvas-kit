@@ -1,14 +1,14 @@
 import {DeleteButton} from '@workday/canvas-kit-react/button';
+import {Flex, Grid} from '@workday/canvas-kit-react/layout';
 import {
   Popup,
-  usePopupModel,
   useCloseOnEscape,
   useCloseOnOutsideClick,
   useInitialFocus,
+  usePopupModel,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
-import {Flex, Grid} from '@workday/canvas-kit-react/layout';
-import {createStyles, calc} from '@workday/canvas-kit-styling';
+import {calc, createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export const PopupWithFallbackPlacements = () => {

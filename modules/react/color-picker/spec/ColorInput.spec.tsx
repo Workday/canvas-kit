@@ -1,13 +1,14 @@
+import {fireEvent, render} from '@testing-library/react';
 import * as React from 'react';
+
 import {ColorInput} from '../lib/ColorInput';
-import {render, fireEvent} from '@testing-library/react';
 
 const id = 'color-input';
 const placeholder = '000000';
 const value = 'eee';
 
 describe('ColorInput', () => {
-  const cb = jest.fn();
+  const cb = vi.fn();
   afterEach(() => {
     cb.mockReset();
   });

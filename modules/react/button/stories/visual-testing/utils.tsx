@@ -1,5 +1,4 @@
 import {createStyles} from '@workday/canvas-kit-styling';
-
 import * as systemIcons from '@workday/canvas-system-icons-web';
 
 const buttonLayout = createStyles({

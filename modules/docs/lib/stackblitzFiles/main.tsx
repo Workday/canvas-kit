@@ -1,12 +1,13 @@
 import {createRoot} from 'react-dom/client';
-import {fonts} from '@workday/canvas-kit-react-fonts';
-import {system} from '@workday/canvas-tokens-web';
-import {injectGlobal} from '@workday/canvas-kit-styling';
-import {App} from './App';
 
+import {fonts} from '@workday/canvas-kit-react-fonts';
+import {injectGlobal} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 import '@workday/canvas-tokens-web/css/base/_variables.css';
 import '@workday/canvas-tokens-web/css/brand/_variables.css';
 import '@workday/canvas-tokens-web/css/system/_variables.css';
+
+import {App} from './App';
 
 //@ts-ignore
 injectGlobal({

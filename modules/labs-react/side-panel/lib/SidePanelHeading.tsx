@@ -1,13 +1,14 @@
 import * as React from 'react';
 
 import {
+  ExtractProps,
   createElemPropsHook,
   createSubcomponent,
-  ExtractProps,
 } from '@workday/canvas-kit-react/common';
 import {Heading} from '@workday/canvas-kit-react/text';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+
 import {useSidePanelModel} from './useSidePanelModel';
 
 export interface SidePanelHeadingProps extends ExtractProps<typeof Heading, never> {

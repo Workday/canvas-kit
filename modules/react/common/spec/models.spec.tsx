@@ -1,8 +1,8 @@
+import {act, renderHook} from '@testing-library/react-hooks';
+import {expectTypeOf} from 'expect-type';
 import React from 'react';
-import {renderHook, act} from '@testing-library/react-hooks';
 
 import {createEventMap, createModelHook, useEventMap} from '../lib/utils/models';
-import {expectTypeOf} from 'expect-type';
 
 describe('createEventMap', () => {
   it('should return the original config object', () => {
@@ -47,7 +47,7 @@ describe('useEventMap', () => {
   };
 
   it('should call a guard if defined', () => {
-    const guard = jest.fn();
+    const guard = vi.fn();
     const {result} = renderHook(() =>
       useModel({
         shouldFoo: guard,
@@ -59,7 +59,7 @@ describe('useEventMap', () => {
   });
 
   it('should call a guard with data and state', () => {
-    const guard = jest.fn();
+    const guard = vi.fn();
 
     const {result} = renderHook(() =>
       useModel({
@@ -72,7 +72,7 @@ describe('useEventMap', () => {
   });
 
   it('should call a callback if defined', () => {
-    const callback = jest.fn();
+    const callback = vi.fn();
 
     const {result} = renderHook(() =>
       useModel({
@@ -87,7 +87,7 @@ describe('useEventMap', () => {
   });
 
   it('should call a callback with data and the previous state', () => {
-    const callback = jest.fn();
+    const callback = vi.fn();
     const {result} = renderHook(() =>
       useModel({
         onFoo: callback,
@@ -103,7 +103,7 @@ describe('useEventMap', () => {
   });
 
   it('should call a callback if a guard returns true', () => {
-    const callback = jest.fn();
+    const callback = vi.fn();
     const {result} = renderHook(() =>
       useModel({
         shouldFoo: () => true,
@@ -118,7 +118,7 @@ describe('useEventMap', () => {
   });
 
   it('should not call a callback if a guard returns false', () => {
-    const callback = jest.fn();
+    const callback = vi.fn();
     const {result} = renderHook(() =>
       useModel({
         shouldFoo: () => false,
@@ -160,7 +160,7 @@ describe('useEventMap', () => {
     };
 
     it('should only call a guard once', () => {
-      const guard = jest.fn();
+      const guard = vi.fn();
       guard.mockReturnValue(true);
 
       const {result} = renderHook(() =>
@@ -175,7 +175,7 @@ describe('useEventMap', () => {
     });
 
     it('should only call a callback once', () => {
-      const callback = jest.fn();
+      const callback = vi.fn();
 
       const {result} = renderHook(() =>
         useComposedModel({

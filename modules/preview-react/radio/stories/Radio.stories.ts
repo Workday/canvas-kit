@@ -1,18 +1,18 @@
 import {Meta, StoryObj} from '@storybook/react';
-import mdxDoc from './Radio.mdx';
 
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 
+import mdxDoc from './Radio.mdx';
 import {Basic as BasicExample} from './examples/Basic';
 import {Caution as CautionExample} from './examples/Caution';
+import {Custom as CustomExample} from './examples/Custom';
+import {Disabled as DisabledExample} from './examples/Disabled';
 import {Error as ErrorExample} from './examples/Error';
 import {Inverse as InverseExample} from './examples/Inverse';
 import {LabelPosition as LabelPositionExample} from './examples/LabelPosition';
 import {NoValue as NoValueExample} from './examples/NoValue';
 import {RefForwarding as RefForwardingExample} from './examples/RefForwarding';
-import {Disabled as DisabledExample} from './examples/Disabled';
 import {Required as RequiredExample} from './examples/Required';
-import {Custom as CustomExample} from './examples/Custom';
 import {StandaloneRadio as StandaloneRadioExample} from './examples/StandaloneRadio';
 
 export default {

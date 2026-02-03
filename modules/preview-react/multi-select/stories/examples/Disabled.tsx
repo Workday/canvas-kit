@@ -1,7 +1,7 @@
 import React from 'react';
 
-import {FormField} from '@workday/canvas-kit-react/form-field';
 import {MultiSelect} from '@workday/canvas-kit-preview-react/multi-select';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 
 const items = ['Cheese', 'Olives', 'Onions', 'Pepperoni', 'Peppers'];
 

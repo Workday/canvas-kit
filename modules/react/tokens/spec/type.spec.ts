@@ -1,5 +1,4 @@
 import {type} from '../lib/type';
-
 import {typeLevelMap} from './helpers';
 
 const context = describe;

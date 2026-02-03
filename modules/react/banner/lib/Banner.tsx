@@ -1,16 +1,15 @@
 import * as React from 'react';
 
-import {createContainer, ExtractProps, focusRing} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createContainer, focusRing} from '@workday/canvas-kit-react/common';
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
-
-import {useBannerModel} from './hooks';
-
-import {BannerIcon} from './BannerIcon';
-import {BannerLabel} from './BannerLabel';
-import {BannerActionText} from './BannerActionText';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
-import {systemIconStencil} from '@workday/canvas-kit-react/icon';
+
+import {BannerActionText} from './BannerActionText';
+import {BannerIcon} from './BannerIcon';
+import {BannerLabel} from './BannerLabel';
+import {useBannerModel} from './hooks';
 
 export interface BannerProps extends ExtractProps<typeof Flex, never> {
   /**

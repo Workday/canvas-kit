@@ -1,18 +1,18 @@
 import * as React from 'react';
 
 import {Card} from '@workday/canvas-kit-react/card';
-import {space} from '@workday/canvas-kit-react/tokens';
 import {
   ExtractProps,
   createSubcomponent,
   getTransformOrigin,
 } from '@workday/canvas-kit-react/common';
 import {FlexStyleProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {space} from '@workday/canvas-kit-react/tokens';
+import {createStencil, createVars, cssVar, keyframes} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 import {getTransformFromPlacement} from './getTransformFromPlacement';
 import {usePopupCard, usePopupModel} from './hooks';
-import {createStencil, createVars, cssVar, keyframes} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
 
 export type FlexAndBoxProps = ExtractProps<typeof Card, never> & FlexStyleProps;
 export interface PopupCardProps extends FlexAndBoxProps {

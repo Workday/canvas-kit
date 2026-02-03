@@ -1,6 +1,7 @@
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import {fileURLToPath} from 'node:url';
+
 import index from '../lib/config.json';
 
 // Get __dirname equivalent for ES modules

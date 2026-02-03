@@ -1,0 +1,130 @@
+import {Meta} from '@storybook/blocks';
+import {ExampleCodeBlock, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+
+import * as InformationHighlight from './InformationHighlight.stories.ts';
+import {Basic} from './examples/Basic';
+import {Body} from './examples/Body';
+import {Heading} from './examples/Heading';
+import {Informational} from './examples/Informational';
+import {Caution} from './examples/Caution';
+import {Critical} from './examples/Critical';
+import {IconCritical} from './examples/CustomIconCritical';
+import {RTL} from './examples/RTL';
+
+<Meta of={InformationHighlight} />
+
+# Canvas Kit Information Highlight
+
+A container to call out important information on a page or a section of a page that the user should
+be aware of.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+`InformationHighlight` should be used to call out important information to the user and are paired
+with a meaningful icon and color to differentiate information type. It should not be removed from
+the interface until some system or admin level action has been taken to do so.
+
+You can use an `InformationHighlight` to:
+
+- Prevent unwanted consequences from destructive actions
+- Reassure users in their next steps
+- Provide detail into information on the page
+- Show changes in page content
+
+### When to Consider Something Else
+
+- Consider a
+  [Banner](https://workday.github.io/canvas-kit/?path=/docs/components-indicators-banner--docs) if
+  the message is about system-wide errors or alerts, or if the message appears in response to user
+  action.
+- Consider a
+  [Dialog](https://workday.github.io/canvas-kit/?path=/docs/components-popups-dialog--docs) if the
+  message is critical and requires user action or decision before proceeding
+- Consider a [Toast](https://workday.github.io/canvas-kit/?path=/docs/components-popups-toast--docs)
+  if the message is timely, such as communicating updates on the process of an application.
+
+### Basic Example
+
+<ExampleCodeBlock code={Basic} />
+
+## Variants
+
+`InformationHighlight` has three variants and each `variant` has two types of `emphasis`.
+
+Variants: `informational`, `caution`, `critical`
+
+Emphasis: `low`, `high`
+
+The variants have different icons and colors to convey severity and the emphasis changes the
+background color to have a lower or higher contrast. If no `variant` or `emphasis` is selected the
+layout will default to `Variant: informational, Emphasis: low`.
+
+The following examples will show the `low` and `high` emphasis of the three variants. `low` Emphasis
+will be shown first and should be used when there is other more important information on the page.
+`high` Emphasis will be shown second, and should be used when the highlight is not competing with
+other, more important information.
+
+### Informational
+
+The informational variant is for _nice to have_ information, such as related features or
+opportunities.
+
+<ExampleCodeBlock code={Informational} />
+
+### Caution
+
+The caution variant is for _important to know_ information, such as the potential consequences of
+specific actions.
+
+<ExampleCodeBlock code={Caution} />
+
+### Critical
+
+The critical variant is for _must know_ information that could otherwise cause failure if the user
+is unaware.
+
+<ExampleCodeBlock code={Critical} />
+
+### RTL Example
+
+Information Highlight also supports RTL Languages. To enable RTL, set the `dir` attribute on the
+parent dom element that renders your application.
+
+<ExampleCodeBlock code={RTL} />
+
+## Partial and Custom Information Highlights
+
+`InformationHighlight` can use custom icons or be designed to only use some of its components.
+
+### Custom Icon: Critical
+
+<ExampleCodeBlock code={IconCritical} />
+
+### Body Only Example
+
+<ExampleCodeBlock code={Body} />
+
+### Heading Only Example
+
+<ExampleCodeBlock code={Heading} />
+
+### Accessible Use of the `as` Prop
+
+Like many of our components, `InformationHighlight` and its subcomponents accept an `as` prop,
+which lets you change the underlying semantic element. For `InformationHighlight.Heading`, you can
+change the heading level if you were needing to define a different level of importance. This should
+be done with caution to ensure the best accessibility.
+
+## Component API
+
+<SymbolDoc name="InformationHighlight" fileName="/react/" />
+
+## Specifications
+
+<Specifications file="./cypress/component/InformationHighlight.spec.tsx" name="InformationHighlight" />

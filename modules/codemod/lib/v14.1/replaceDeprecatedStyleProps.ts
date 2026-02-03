@@ -1,21 +1,23 @@
 import {API, FileInfo, JSXElement, Options} from 'jscodeshift';
-import {getImportRenameMap} from './utils/getImportRenameMap';
-import {hasImportSpecifiers} from '../v6/utils';
+
 import {
   backgroundStyleFnConfigs,
   borderStyleFnConfigs,
   colorStyleFnConfigs,
   depthStyleFnConfigs,
-  flexStyleFnConfigs,
   flexItemStyleFnConfigs,
-  gridStyleFnConfigs,
+  flexStyleFnConfigs,
   gridItemStyleFnConfigs,
+  gridStyleFnConfigs,
   layoutStyleFnConfigs,
   otherStyleFnConfigs,
   positionStyleFnConfigs,
   spaceStyleFnConfigs,
   textStyleFnConfigs,
 } from '@workday/canvas-kit-react/layout';
+
+import {hasImportSpecifiers} from '../v6/utils';
+import {getImportRenameMap} from './utils/getImportRenameMap';
 import {getToken} from './utils/getToken';
 
 const mainPackage = '@workday/canvas-kit-react';

@@ -1,7 +1,7 @@
 import {Basic} from '../../modules/react/text-area/stories/examples/Basic';
 import {Caution} from '../../modules/react/text-area/stories/examples/Caution';
-import {Error} from '../../modules/react/text-area/stories/examples/Error';
 import {Disabled} from '../../modules/react/text-area/stories/examples/Disabled';
+import {Error} from '../../modules/react/text-area/stories/examples/Error';
 import {Placeholder} from '../../modules/react/text-area/stories/examples/Placeholder';
 
 const getTextArea = () => {

@@ -1,16 +1,17 @@
 import * as React from 'react';
+
 import {
-  createComponent,
   StyledType,
+  Themeable,
+  createComponent,
   focusRing,
   mouseFocusBehavior,
   styled,
-  Themeable,
   useUniqueId,
 } from '@workday/canvas-kit-react/common';
-import {borderRadius, colors, inputColors, space} from '@workday/canvas-kit-react/tokens';
 import {LabelText} from '@workday/canvas-kit-react/text';
-import {px2rem} from '@workday/canvas-kit-styling';
+import {borderRadius, colors, inputColors, space} from '@workday/canvas-kit-react/tokens';
+import {maybeWrapCSSVariables, px2rem} from '@workday/canvas-kit-styling';
 
 /**
  * @deprecated ⚠️ `RadioProps` in Main has been deprecated and will be removed in a future major version. Please use [`Radio` in Preview](https://workday.github.io/canvas-kit/?path=/docs/preview-inputs-radio--docs) instead.
@@ -139,17 +140,17 @@ const RadioInput = styled('input')<RadioProps & StyledType>(
           ? colors.frenchVanilla100
           : themePrimary.main
         : disabled
-        ? inputColors.disabled.background
-        : 'white',
+          ? inputColors.disabled.background
+          : 'white',
       borderColor: checked
         ? variant === 'inverse'
           ? colors.soap300
           : themePrimary.main
         : disabled
-        ? inputColors.disabled.border
-        : variant === 'inverse'
-        ? colors.soap300
-        : inputColors.hoverBorder,
+          ? inputColors.disabled.border
+          : variant === 'inverse'
+            ? colors.soap300
+            : inputColors.hoverBorder,
       borderWidth: '1px',
     },
     '&:focus, &focus:hover': {
@@ -196,8 +197,8 @@ const RadioInput = styled('input')<RadioProps & StyledType>(
             ? colors.soap300
             : themePrimary.main
           : variant === 'inverse'
-          ? colors.soap300
-          : inputColors.hoverBorder,
+            ? colors.soap300
+            : inputColors.hoverBorder,
       },
     }),
   })
@@ -235,17 +236,17 @@ const RadioBackground = styled('div')<RadioProps>(
         ? colors.soap300
         : themePrimary.main
       : disabled
-      ? colors.licorice100
-      : variant === 'inverse'
-      ? colors.soap300
-      : inputColors.border,
+        ? colors.licorice100
+        : variant === 'inverse'
+          ? colors.soap300
+          : inputColors.border,
     backgroundColor: checked
       ? variant === 'inverse'
         ? colors.frenchVanilla100
         : themePrimary.main
       : disabled
-      ? inputColors.disabled.background
-      : 'white',
+        ? inputColors.disabled.background
+        : 'white',
     opacity: disabled && variant === 'inverse' ? '.4' : '1',
   })
 );
@@ -263,8 +264,8 @@ const RadioCheck = styled('div')<Pick<RadioProps, 'checked' | 'variant'>>(
   ({theme, variant}) => ({
     backgroundColor:
       variant === 'inverse'
-        ? theme.canvas.palette.primary.main
-        : theme.canvas.palette.primary.contrast,
+        ? maybeWrapCSSVariables(theme.canvas.palette.primary.main)
+        : maybeWrapCSSVariables(theme.canvas.palette.primary.contrast),
   }),
   ({checked}) => ({
     opacity: checked ? 1 : 0,

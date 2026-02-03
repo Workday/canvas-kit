@@ -1,15 +1,16 @@
-import * as React from 'react';
 import {fireEvent, render, screen} from '@testing-library/react';
-import {colors} from '@workday/canvas-kit-react/tokens';
+import * as React from 'react';
+
 import {ColorPicker, ColorPickerProps} from '@workday/canvas-kit-preview-react/color-picker';
+import {colors} from '@workday/canvas-kit-react/tokens';
 
 describe('Color Picker', () => {
   const renderColorPicker = (props?: Partial<ColorPickerProps>) =>
-    render(<ColorPicker onColorChange={jest.fn()} {...props} />);
+    render(<ColorPicker onColorChange={vi.fn()} {...props} />);
 
   describe('when clicking a color swatch', () => {
     it('should call onColorChange handler when clicking a color swatch', () => {
-      const onColorChange = jest.fn();
+      const onColorChange = vi.fn();
       const {container} = renderColorPicker({onColorChange: onColorChange});
       const colorSwatch = container.querySelector(`[data-color="${colors.blackPepper400}"]`)!;
 
@@ -71,7 +72,7 @@ describe('Color Picker', () => {
     });
 
     it('should render when onColorReset and resetColor props is provided', () => {
-      const onColorReset = jest.fn();
+      const onColorReset = vi.fn();
       const resetColor = colors.berrySmoothie100;
       const {getByText} = renderColorPicker({onColorReset, resetColor});
 
@@ -79,7 +80,7 @@ describe('Color Picker', () => {
     });
 
     it('should use custom label', () => {
-      const onColorReset = jest.fn();
+      const onColorReset = vi.fn();
       const resetLabel = 'foobarbaz';
       const resetColor = colors.blueberry400;
       const {getByText} = renderColorPicker({onColorReset, resetColor, resetLabel});
@@ -89,7 +90,7 @@ describe('Color Picker', () => {
 
     describe('when clicking reset', () => {
       it('should call onColorReset', () => {
-        const onColorReset = jest.fn();
+        const onColorReset = vi.fn();
         const resetColor = colors.blueberry400;
         const {getByText} = renderColorPicker({onColorReset, resetColor});
         const reset = getByText('Reset');
