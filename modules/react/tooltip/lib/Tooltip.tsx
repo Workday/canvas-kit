@@ -1,7 +1,7 @@
 import * as React from 'react';
 import innerText from 'react-innertext';
 
-import {createComponent, mergeCallback} from '@workday/canvas-kit-react/common';
+import {createComponent, mergeCallback, useLocalRef} from '@workday/canvas-kit-react/common';
 import {
   Placement,
   Popper,
@@ -115,6 +115,29 @@ export const Tooltip = createComponent('div')({
       hideDelay,
     });
 
+    const [elementHasFocus, setElementHasFocus] = React.useState(false);
+    const {localRef: targetRef, elementRef} = useLocalRef<HTMLElement>();
+
+    React.useEffect(() => {
+      const target = targetRef.current;
+      if (!target) {
+        return;
+      }
+
+      const updateFocusState = () => {
+        setElementHasFocus(target.matches(':focus-visible') || target.classList.contains('focus'));
+      };
+
+      updateFocusState(); // Check initial state
+      target.addEventListener('focus', updateFocusState);
+      target.addEventListener('blur', updateFocusState);
+
+      return () => {
+        target.removeEventListener('focus', updateFocusState);
+        target.removeEventListener('blur', updateFocusState);
+      };
+    }, [targetRef]);
+
     return (
       <React.Fragment>
         {React.cloneElement(children, {
@@ -123,12 +146,18 @@ export const Tooltip = createComponent('div')({
           ...(/^(muted|describe)$/.test(type) && children.props['aria-label']
             ? {'aria-label': children.props['aria-label']}
             : {}),
+          ref: elementRef,
         })}
         <Popper placement={placement} fallbackPlacements={fallbackPlacements} {...popperProps}>
           {({placement}) => {
             const transformOrigin = getTransformFromPlacement(placement);
             return (
-              <TooltipContainer transformOrigin={transformOrigin} {...elemProps} {...tooltipProps}>
+              <TooltipContainer
+                transformOrigin={transformOrigin}
+                {...elemProps}
+                {...tooltipProps}
+                elementHasFocus={elementHasFocus}
+              >
                 {title}
               </TooltipContainer>
             );

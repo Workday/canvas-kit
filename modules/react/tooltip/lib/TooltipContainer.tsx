@@ -28,12 +28,10 @@ export interface TooltipContainerProps extends React.HTMLAttributes<HTMLDivEleme
    */
   id?: string;
   /**
-   * optional popper properties if `placement` is set
+   * Whether the anchor element has focus-visible. Used to adjust tooltip styling.
+   * @private
    */
-  popperProps?: {
-    open: boolean;
-    anchorElement: HTMLElement | null;
-  };
+  elementHasFocus?: boolean;
 }
 
 const defaultTransformOrigin = {
@@ -91,7 +89,6 @@ export const tooltipContainerStencil = createStencil({
       right: 0,
       bottom: 0,
     },
-
     // Hide tooltip when the reference element is either clipped or fully hidden
     '[data-popper-reference-hidden] &': {
       visibility: 'hidden',
@@ -112,15 +109,30 @@ export const tooltipContainerStencil = createStencil({
       bottom: calc.negate(system.space.x1),
     },
   }),
+  modifiers: {
+    elementHasFocus: {
+      true: {
+        padding: calc.subtract(system.space.x4, calc.divide(system.space.x1, 2)),
+        '&:before': {
+          margin: calc.add(system.space.x1, calc.divide(system.space.x1, 2)),
+        },
+      },
+    },
+  },
 });
 
 export const TooltipContainer = createComponent('div')<TooltipContainerProps>({
   displayName: 'TooltipContainer',
-  Component: ({children, transformOrigin = defaultTransformOrigin, ...elemProps}, ref, Element) => {
+  Component: (
+    {children, transformOrigin = defaultTransformOrigin, elementHasFocus = false, ...elemProps},
+    ref,
+    Element
+  ) => {
     const translate = getTransformOrigin(
       transformOrigin || defaultTransformOrigin,
       cssVar(system.space.x2)
     );
+
     return (
       <Element
         ref={ref}
@@ -128,6 +140,7 @@ export const TooltipContainer = createComponent('div')<TooltipContainerProps>({
           tooltipContainerStencil({
             tooltipTransformOriginHorizontal: transformOrigin?.horizontal,
             tooltipTransformOriginVertical: transformOrigin?.vertical,
+            elementHasFocus,
           }),
           tooltipTranslateVars({positionX: translate.x, positionY: translate.y}),
         ])}

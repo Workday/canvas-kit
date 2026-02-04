@@ -2,6 +2,7 @@ import {createComponent, forwardFitTokens} from '@workday/canvas-kit-react/commo
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {extLinkIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
 import {HyperlinkProps, hyperlinkStencil} from './Hyperlink';
 
@@ -27,8 +28,8 @@ export const externalHyperlinkStencil = createStencil({
       minWidth: calc.subtract(forwardFitTokens.system.size.xxs, px2rem(1)),
       marginInlineStart: calc.subtract(forwardFitTokens.system.gap.xs, px2rem(2)),
       '& > svg': {
-        minWidth: forwardFitTokens.system.size.xxs,
-        minHeight: forwardFitTokens.system.size.xxs,
+        minWidth: system.space.x4,
+        minHeight: system.space.x4,
       },
       ':dir(rtl)': {
         transform: 'rotate(270deg)',

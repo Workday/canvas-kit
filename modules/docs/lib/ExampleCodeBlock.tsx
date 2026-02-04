@@ -28,6 +28,7 @@ const cardStencil = createStencil({
       borderRadius: system.shape.x1,
       position: 'relative',
       overflow: 'auto', // This allows for the entire ExampleCodeBlock to scroll on smaller viewports
+      padding: system.padding.xxl, // Increase padding since new Card default is smaller
     },
     '[data-part="example-block-container"]': {
       overflow: 'auto',
@@ -40,7 +41,7 @@ const cardStencil = createStencil({
     '[data-part="code-toggle-stackblitz-btn-container"]': {
       position: 'absolute',
       right: calc.negate(px2rem(1)),
-      bottom: calc.negate(px2rem(1)),
+      bottom: calc.negate(px2rem(4)),
       display: 'flex',
       gap: system.space.x2,
     },

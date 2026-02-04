@@ -31,7 +31,7 @@ export async function parseSpecFile(file: string): Promise<FileBlock | null> {
   const [_, fileName] = file.match(/.+(cypress\/.+)$/) || [];
   if (fileName) {
     const contents = await fs
-      .readFile(path.join(__dirname, '../../..', fileName))
+      .readFile(file)
       .then(contents => contents.toString())
       .then(contents =>
         contents.replace(/import (.+) from .+/g, (substr: string, imports: string) => {
