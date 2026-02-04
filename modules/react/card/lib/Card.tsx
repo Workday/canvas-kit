@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {CardBody} from './CardBody';
@@ -14,10 +14,10 @@ export interface CardProps extends BoxProps {
    */
   children?: React.ReactNode;
   /**
-   * The variant of the Card. Can be `default`, `borderless` or `filled`.
+   * The variant of the Card. Can be `default`, `borderless` or `tonal`.
    * @default 'default'
    */
-  variant?: 'borderless' | 'filled';
+  variant?: 'borderless' | 'tonal';
 }
 
 // .cnvs-card
@@ -25,19 +25,25 @@ export const cardStencil = createStencil({
   base: {
     display: 'flex',
     flexDirection: 'column',
-    gap: system.space.x6,
-    padding: system.space.x8,
-    backgroundColor: system.color.bg.default,
-    borderRadius: system.shape.x2,
-    border: `${px2rem(1)} solid ${system.color.border.container}`,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    gap: cssVar(system.gap.lg, system.space.x6),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    padding: cssVar(system.padding.xl, system.space.x6),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    backgroundColor: cssVar(system.color.surface.default, system.color.bg.default),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    borderRadius: cssVar(system.shape.xxl, system.shape.x6),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    border: `${px2rem(1)} solid ${cssVar(system.color.border.default, system.color.border.divider)}`,
   },
   modifiers: {
     variant: {
       borderless: {
         borderColor: 'transparent',
       },
-      filled: {
-        backgroundColor: system.color.bg.alt.soft,
+      tonal: {
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        backgroundColor: cssVar(system.color.surface.alt.default, system.color.bg.alt.soft),
         borderColor: system.color.border.transparent,
       },
     },

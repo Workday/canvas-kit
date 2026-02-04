@@ -615,8 +615,8 @@ describe('Tabs', () => {
         cy.findByRole('tablist').its('scrollX').should('not.exist');
       });
 
-      it('should show only 2 tab items', () => {
-        cy.findAllByRole('tab').should('have.length', 2);
+      it('should show only 1 tab item', () => {
+        cy.findAllByRole('tab').should('have.length', 1);
       });
 
       context('when the "More" button is clicked', () => {
@@ -629,8 +629,8 @@ describe('Tabs', () => {
           cy.get('[role="menu"]').should('exist');
         });
 
-        it('should have the third Tab as the first menu item', () => {
-          cy.get('button[role="menuitem"]').first().should('have.text', 'Third Tab');
+        it('should have the second Tab as the first menu item', () => {
+          cy.get('button[role="menuitem"]').first().should('have.text', 'Second Tab');
         });
       });
     });
