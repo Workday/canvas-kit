@@ -82,7 +82,7 @@ export const CheckboxCheck = createComponent('div')({
       <CheckBackground error={error} variant={variant}>
         <div {...checkboxCheckStencil({checked, indeterminate, variant})}>
           {indeterminate ? (
-            <div {...indeterminateBoxStencil()} />
+            <div {...indeterminateBoxStencil({variant})} />
           ) : (
             checked && <SystemIcon icon={checkSmallIcon} />
           )}

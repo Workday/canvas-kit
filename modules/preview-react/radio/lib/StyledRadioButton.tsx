@@ -56,8 +56,6 @@ const radioInputStencil = createStencil({
       // The borderColor represents the border around the middle dot of the radio.
       '&:checked + .cnvs-radio-check, &.checked + .cnvs-radio-check': {
         opacity: system.opacity.disabled,
-        // backgroundColor: brand.primary.accent, // inner circle background color
-        // border: `${px2rem(5)} solid ${brand.primary.base}`, // inner circle border color
       },
     },
 
