@@ -3,7 +3,7 @@ import React from 'react';
 import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Heading} from '@workday/canvas-kit-react/text';
-import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 
 import {useExpandableModel} from './hooks/useExpandableModel';
@@ -26,23 +26,30 @@ export interface ExpandableTargetProps extends ExtractProps<typeof Flex, never> 
 
 export const expandableTargetStencil = createStencil({
   base: {
-    background: system.color.bg.transparent.default,
-    borderColor: system.color.bg.transparent.default,
-    borderRadius: system.shape.x1,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    background: cssVar(system.color.surface.transparent, system.color.bg.transparent.default),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    borderColor: cssVar(system.color.border.transparent, system.color.bg.transparent.default),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    borderRadius: cssVar(system.shape.xxl, system.shape.x6),
     borderWidth: 0,
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',
-    gap: system.space.x2,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    gap: cssVar(system.gap.none, system.space.zero),
     justifyContent: 'start',
-    padding: system.space.x2,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    padding: cssVar(system.padding.xs, system.space.x2),
     cursor: 'pointer',
     width: '100%',
     '&:hover, &.hover': {
-      backgroundColor: system.color.bg.alt.soft,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      backgroundColor: cssVar(system.color.surface.overlay.hover.default, system.color.bg.alt.soft),
     },
     '&:focus-visible, &.focus': {
-      outline: `${brand.common.focusOutline} solid ${px2rem(2)}`,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      outline: `${cssVar(system.color.brand.border.primary, brand.common.focusOutline)} solid ${px2rem(2)}`,
     },
   },
 });

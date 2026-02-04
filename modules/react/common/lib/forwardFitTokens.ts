@@ -1,5 +1,5 @@
 import {cssVar} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 
 /**
  * This file is NOT INTENDED to be used by consumers, only internally by Canvas Kit.
@@ -41,6 +41,7 @@ export const forwardFitTokens = {
       xs: cssVar(system.gap.xs, system.space.x1),
       sm: cssVar(system.gap.sm, system.space.x2),
       md: cssVar(system.gap.md, system.space.x4),
+      lg: cssVar(system.gap.lg, system.space.x6),
     },
     type: {
       subtext: {
@@ -66,6 +67,32 @@ export const forwardFitTokens = {
           lineHeight: cssVar(system.lineHeight.body.sm, system.lineHeight.body.small),
           fontSize: cssVar(system.fontSize.body.sm, system.fontSize.body.small),
           letterSpacing: cssVar(system.letterSpacing.body.sm, base.letterSpacing200),
+        },
+      },
+    },
+    color: {
+      border: {
+        transparent: cssVar(system.color.border.transparent, system.color.border.transparent),
+        default: cssVar(system.color.border.default, system.color.border.divider),
+      },
+      surface: {
+        transparent: cssVar(system.color.surface.transparent, system.color.bg.transparent.default),
+        default: cssVar(system.color.surface.default, system.color.bg.default),
+        alt: {
+          default: cssVar(system.color.surface.alt.default, system.color.bg.alt.soft),
+        },
+        overlay: {
+          hover: {
+            default: cssVar(system.color.surface.overlay.hover.default, system.color.bg.alt.soft),
+          },
+        },
+      },
+      fg: {
+        strong: cssVar(system.color.fg.strong, system.color.text.strong),
+      },
+      brand: {
+        border: {
+          primary: cssVar(system.color.brand.border.primary, brand.common.focusOutline),
         },
       },
     },
