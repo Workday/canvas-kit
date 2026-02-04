@@ -4,6 +4,7 @@ import ts from 'typescript';
 
 import {getVariablesFromFiles} from './utils/getCssVariables';
 import {handleCalc} from './utils/handleCalc';
+import {handleColorSpace} from './utils/handleColorSpace';
 import {handleCreateStencil} from './utils/handleCreateStencil';
 import {handleCreateStyles} from './utils/handleCreateStyles';
 import {handleCreateVars} from './utils/handleCreateVars';
@@ -126,9 +127,13 @@ export function withDefaultContext(
     objectTransforms: [] as ObjectTransform[],
     transform: handleTransformers(transformers || defaultTransformers),
     ...input,
-    propertyTransforms: [handleCalc, handlePx2Rem, handleCssVar, handleParentModifier].concat(
-      input.propertyTransforms || []
-    ),
+    propertyTransforms: [
+      handleCalc,
+      handleColorSpace,
+      handlePx2Rem,
+      handleCssVar,
+      handleParentModifier,
+    ].concat(input.propertyTransforms || []),
   } as TransformerContext;
 }
 

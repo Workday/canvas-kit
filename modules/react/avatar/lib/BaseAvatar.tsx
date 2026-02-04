@@ -56,6 +56,7 @@ export const baseAvatarStencil = createStencil({
   base: ({backgroundColor, color, size}) => ({
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     borderRadius: cssVar(system.shape.full, system.shape.round),
+    // TODO: These are the fallbacks if "size" is not defined
     width: cssVar(size, calc.add(system.space.x10, system.space.x2)),
     height: cssVar(size, calc.add(system.space.x10, system.space.x2)),
     minWidth: cssVar(size, calc.add(system.space.x10, system.space.x2)),
@@ -91,31 +92,37 @@ export const baseAvatarStencil = createStencil({
     },
     size: {
       extraExtraSmall: ({size}) => ({
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         [size]: cssVar(system.size.xs, system.space.x6),
         ...system.type.subtext.small,
       }),
       extraSmall: ({size}) => ({
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         [size]: cssVar(system.size.sm, system.space.x8),
         ...system.type.subtext.medium,
       }),
       small: ({size}) => ({
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         [size]: cssVar(system.size.md, system.space.x10),
         ...system.type.body.small,
       }),
       medium: ({size}) => ({
-        // TODO: There are no size tokens for medium, large, extraLarge and extraExtraLarge
-        [size]: px2rem(48),
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        [size]: base.size600,
         ...system.type.body.medium,
       }),
       large: ({size}) => ({
-        [size]: px2rem(72),
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        [size]: base.size900,
         ...system.type.heading.medium,
       }),
       extraLarge: ({size}) => ({
-        [size]: px2rem(96),
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        [size]: base.size1200,
         ...system.type.title.small,
       }),
       extraExtraLarge: ({size}) => ({
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         [size]: px2rem(120),
         ...system.type.title.medium,
       }),

@@ -2,7 +2,7 @@ import {buttonStencil} from '@workday/canvas-kit-react/button';
 import {createContainer, focusRing} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Box, BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {colorSpace, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {PillAvatar} from './PillAvatar';
@@ -25,6 +25,8 @@ export interface PillProps extends BoxProps {
   maxWidth?: string | number;
 }
 
+console.log(colorSpace.darken(system.color.surface.alt.strong, 0.1, 0.12));
+
 export const pillStencil = createStencil({
   extends: buttonStencil,
   vars: {
@@ -43,16 +45,22 @@ export const pillStencil = createStencil({
     WebkitFontSmoothing: 'antialiased',
     MozOsxFontSmoothing: 'grayscale',
     width: 'fit-content',
-    padding: `${px2rem(2)} ${cssVar(system.space.x2)}`,
-    height: system.space.x6,
+    padding: `${px2rem(2)} ${cssVar(system.padding.sm, system.space.x2)}`,
+    height: cssVar(system.size.xs, system.space.x6),
     position: 'relative',
-    gap: system.space.x1,
+    gap: cssVar(system.gap.xs, system.space.x1),
     maxWidth,
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
     overflow: 'hidden',
-    [buttonStencil.vars.background]: system.color.bg.alt.default,
-    [buttonStencil.vars.border]: system.color.border.input.default,
+    [buttonStencil.vars.background]: cssVar(
+      system.color.surface.alt.strong,
+      system.color.bg.alt.default
+    ),
+    [buttonStencil.vars.border]: cssVar(
+      system.color.border.transparent,
+      system.color.border.input.default
+    ),
     [buttonStencil.vars.label]: system.color.fg.strong,
     [systemIconStencil.vars.color]: 'currentColor',
     [pillCountStencil.vars.borderColor]: 'transparent',
@@ -62,11 +70,15 @@ export const pillStencil = createStencil({
       lineHeight: system.lineHeight.subtext.large, // ensure correct line height
     },
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: system.color.bg.alt.strong,
-      [buttonStencil.vars.border]: system.color.border.input.strong,
-      [buttonStencil.vars.label]: system.color.fg.strong,
+      [buttonStencil.vars.background]: colorSpace.darken(
+        system.color.surface.alt.strong,
+        0.1,
+        0.12
+      ),
+      [buttonStencil.vars.border]: system.color.border.transparent,
+      [buttonStencil.vars.label]: system.color.fg.stronger,
       [systemIconStencil.vars.color]: 'currentColor',
-      [pillCountStencil.vars.backgroundColor]: system.color.bg.muted.softer,
+      [pillCountStencil.vars.backgroundColor]: system.color.surface.alt.strong,
       [pillCountStencil.vars.borderColor]: 'transparent',
     },
     '&:active, &.active': {
