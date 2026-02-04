@@ -2,9 +2,9 @@ import React from 'react';
 
 import {Card} from '@workday/canvas-kit-react/card';
 
-export const Filled = () => {
+export const Tonal = () => {
   return (
-    <Card variant="filled">
+    <Card variant="tonal">
       <Card.Heading>Canvas Supreme</Card.Heading>
       <Card.Body>
         Our house special supreme pizza includes pepperoni, sausage, bell peppers, mushrooms,
