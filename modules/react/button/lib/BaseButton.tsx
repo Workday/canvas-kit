@@ -161,6 +161,33 @@ export const buttonStencil = createStencil({
       buttonColorPropVars.default.icon,
       system.color.fg.strong
     ),
+    // Ensure button content sits above the ::before overlay
+    '& > *': {
+      position: 'relative',
+      zIndex: 1,
+    },
+    '&::before': {
+      content: "''",
+      position: 'absolute',
+      inset: 0,
+      opacity: 0,
+      background: cssVar(
+        buttonColorPropVars.hover.background,
+        `linear-gradient(${cssVar(system.color.accent.overlay.hover)}, ${cssVar(system.color.accent.overlay.hover)})`
+      ),
+      borderRadius: 'inherit',
+      transition: 'opacity 120ms linear',
+      pointerEvents: 'none',
+    },
+    //   '&::before': {
+    //    content: "",
+    //    position: 'absolute',
+    //    inset: 0,
+    //    opacity: 0,
+    //    background: system.color.accent.overlay.hover,
+    //    borderRadius: 'inherit',
+    //    transition: 'opacity 120ms linear',
+    //  },
     transition:
       'box-shadow 120ms linear, border 120ms linear, background-color 120ms linear, color 120ms linear',
     '&:disabled, &:disabled:active, &.disabled': {
@@ -199,14 +226,18 @@ export const buttonStencil = createStencil({
     '&:hover, &.hover': {
       backgroundColor: cssVar(
         buttonColorPropVars.hover.background,
-        cssVar(background, system.color.bg.contrast.strong)
+        cssVar(background, 'transparent')
       ),
       borderColor: cssVar(buttonColorPropVars.hover.border, cssVar(border, 'transparent')),
-      color: cssVar(buttonColorPropVars.hover.label, cssVar(label, system.color.fg.stronger)),
+      color: cssVar(buttonColorPropVars.hover.label, cssVar(label, system.color.fg.strong)),
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.hover.icon,
-        system.color.fg.stronger
+        system.color.fg.strong
       ),
+      '&::before': {
+        opacity: 1,
+        [systemIconStencil.vars.color]: system.color.fg.inverse,
+      },
     },
     '&:hover:active': {transitionDuration: '40ms'},
     // Active Styles
@@ -221,6 +252,13 @@ export const buttonStencil = createStencil({
         buttonColorPropVars.active.icon,
         system.color.fg.strong
       ),
+      '&::before': {
+        opacity: 1,
+        background: cssVar(
+          buttonColorPropVars.active.background,
+          `linear-gradient(${cssVar(system.color.accent.overlay.pressed)}, ${cssVar(system.color.accent.overlay.pressed)})`
+        ),
+      },
     },
     // Disabled Styles
     '&:disabled, &.disabled': {

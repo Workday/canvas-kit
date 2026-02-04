@@ -36,15 +36,24 @@ const primaryButtonStencil = createStencil({
     },
     // Hover Styles
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: cssVar(brand.action.dark, brand.primary.dark),
       [buttonStencil.vars.label]: cssVar(brand.action.accent, brand.primary.accent),
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.hover.icon, 'currentColor'),
+      '&::before': {
+        opacity: 1,
+        [systemIconStencil.vars.color]: system.color.fg.inverse,
+      },
     },
     // Active Styles
     '&:active, &.active': {
-      [buttonStencil.vars.background]: cssVar(brand.action.darkest, brand.primary.darkest),
       [buttonStencil.vars.label]: cssVar(brand.action.accent, brand.primary.accent),
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.active.icon, 'currentColor'),
+      '&::before': {
+        opacity: 1,
+        background: cssVar(
+          buttonColorPropVars.active.background,
+          `linear-gradient(${cssVar(system.color.accent.overlay.pressed)}, ${cssVar(system.color.accent.overlay.pressed)})`
+        ),
+      },
     },
     // Disabled Styles
     '&:disabled, &.disabled': {
