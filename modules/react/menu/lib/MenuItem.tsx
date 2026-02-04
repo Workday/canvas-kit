@@ -16,7 +16,7 @@ import {
 import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
-import {CSProps, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 
 import {useMenuModel} from './useMenuModel';
@@ -64,14 +64,17 @@ export const menuItemStencil = createStencil({
     alignItems: 'center',
     width: '100%',
     gap: system.space.x4,
-    padding: `${system.space.x2} ${system.space.x4}`,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    padding: `${cssVar(system.padding.sm, system.space.x2)} ${cssVar(system.padding.md, system.space.x4)}`,
     boxSizing: 'border-box',
     cursor: 'pointer',
     color: system.color.fg.default,
     borderWidth: 0,
+    borderRadius: system.shape.xxl,
     textAlign: 'start',
     transition: 'background-color 80ms, color 80ms',
     backgroundColor: 'inherit',
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     minHeight: system.space.x10,
     overflowWrap: 'anywhere',
     // We want the icon colors to be the same as the text color
@@ -97,10 +100,11 @@ export const menuItemStencil = createStencil({
         opacity: system.opacity.full,
       },
       '&:where(.focus, :focus-visible)': {
-        [systemIconStencil.vars.color]: brand.primary.accent,
+        [systemIconStencil.vars.color]: 'currentColor',
         outline: 'none',
-        backgroundColor: brand.primary.base,
-        color: systemIconStencil.vars.color,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.base),
+        color: cssVar(system.color.fg.inverse, brand.primary.accent),
       },
     },
 

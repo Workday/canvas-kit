@@ -33,10 +33,14 @@ export const useMenuList = composeHooks(
 
 export const menuListStencil = createStencil({
   base: {
-    background: system.color.bg.default,
-    borderRadius: system.shape.zero,
-    padding: system.space.zero,
-    gap: system.space.zero,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    background: cssVar(system.color.surface.popover, system.color.bg.default),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    borderRadius: cssVar(system.shape.xxl, system.shape.zero),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    padding: cssVar(system.padding.none, system.space.zero),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    gap: cssVar(system.gap.xs, system.space.zero),
   },
   modifiers: {
     orientation: {
@@ -59,7 +63,7 @@ export const MenuList = createSubcomponent('div')({
     <ListBox
       as={Element}
       model={model}
-      marginY={cssVar(system.space.x2)}
+      marginY={cssVar(system.padding.none, system.space.x2)}
       {...handleCsProp(elemProps, menuListStencil({orientation: model.state.orientation}))}
     >
       {children}
