@@ -15,7 +15,8 @@ export const formFieldHintStencil = createStencil({
   modifiers: {
     error: {
       error: {
-        color: brand.error.base,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        color: cssVar(system.color.brand.fg.critical.default, brand.error.base),
       },
       caution: {
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token

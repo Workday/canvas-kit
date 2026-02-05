@@ -96,6 +96,12 @@ const checkboxInputStencil = createStencil({
         backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.base),
       },
 
+    [`&:where(:disabled, .disabled) ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]:
+      {
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        opacity: system.opacity.disabled,
+      },
+
     // Focus State
     '&:where(:focus-visible, :active, .focus, .active)': {
       outline: 'none',
@@ -126,9 +132,6 @@ const checkboxInputStencil = createStencil({
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
           borderColor: cssVar(system.color.brand.accent.primary, brand.primary.base),
           borderWidth: px2rem(2),
-          span: {
-            marginInlineStart: calc.negate(px2rem(7)),
-          },
         },
       },
   },
@@ -151,17 +154,22 @@ const checkboxInputStencil = createStencil({
             // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
             boxShadow: `0 0 0 ${px2rem(7)} ${cssVar(system.color.surface.overlay.hover.inverse, system.color.bg.default)}`,
           },
-        [`&:where(:checked, :indeterminate) ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]:
+        [`&:where(:checked, :indeterminate):not(:disabled):not(.disabled) ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]:
           {
             // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
             borderColor: cssVar(system.color.focus.inverse, system.color.border.inverse.default),
             // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
             backgroundColor: cssVar(system.color.surface.inverse, system.color.bg.default),
           },
-        // Disabled State for inverse variant
+        // Disabled State for inverse variant (applies to all disabled states: unchecked, checked, and indeterminate)
         [`&:disabled ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]: {
           opacity: system.opacity.disabled,
         },
+        // Disabled + checked/indeterminate state for inverse variant
+        [`&:where(:checked, :indeterminate):where(:disabled, .disabled) ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]:
+          {
+            backgroundColor: system.color.surface.inverse,
+          },
 
         // Focus state for inverse variant
         [`&:where(:focus-visible, .focus) ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]:

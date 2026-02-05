@@ -24,6 +24,7 @@ export const checkboxBackgroundStencil = createStencil({
     backgroundColor: cssVar(system.color.surface.default, system.color.bg.default),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     borderRadius: cssVar(system.shape.sm, system.shape.half),
+    boxSizing: 'border-box',
     display: 'flex',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     height: cssVar(base.size225, calc.add(system.space.x4, px2rem(2))),

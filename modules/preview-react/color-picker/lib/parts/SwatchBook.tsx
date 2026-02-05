@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {ColorSwatch} from '@workday/canvas-kit-react/color-picker';
 import {focusRing} from '@workday/canvas-kit-react/common';
-import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export interface SwatchBookColorObject {
@@ -34,7 +34,9 @@ const colorPickerSwatchBookStencil = createStencil({
       width: px2rem(20),
       height: px2rem(20),
       cursor: 'pointer',
-      borderRadius: system.shape.half,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      borderRadius: cssVar(system.shape.sm, system.shape.half),
+
       transition: 'box-shadow 120ms ease',
       margin: `0px ${system.space.x2} ${system.space.x2} 0px`,
 
