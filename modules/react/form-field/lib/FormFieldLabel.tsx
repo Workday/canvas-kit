@@ -31,7 +31,7 @@ export const formFieldLabelStencil = createStencil({
     paddingInlineStart: cssVar(system.padding.none, system.space.zero),
     display: 'flex',
     alignItems: 'center',
-    width: px2rem(180),
+    minWidth: px2rem(180),
   },
   modifiers: {
     isRequired: {

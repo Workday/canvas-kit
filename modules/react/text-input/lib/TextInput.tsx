@@ -1,6 +1,6 @@
 import {ErrorType, GrowthBehavior, createComponent} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {CSProps, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {CSProps, calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 
 export interface TextInputProps extends GrowthBehavior, CSProps {
@@ -32,8 +32,9 @@ export const textInputStencil = createStencil({
     transition: '0.2s box-shadow, 0.2s border-color',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     padding: cssVar(system.padding.xs, system.space.x2), // Compensate for border
-    margin: system.padding.none, // Fix Safari
-    width: cssVar(width, px2rem(280)),
+    margin: px2rem(0), // Fix Safari
+    width,
+    minWidth: cssVar(width, calc.add(calc.multiply(system.space.x20, 3), system.space.x10)),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     color: cssVar(system.color.fg.default, system.color.text.default),
     textOverflow: 'ellipsis', // Always show ellipsis for long text inputs as long as it doesn't have focus

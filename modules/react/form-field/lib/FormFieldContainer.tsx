@@ -13,7 +13,6 @@ export const formFieldContainerStencil = createStencil({
     flexDirection: 'column',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     gap: cssVar(system.gap.sm, system.space.x2),
-    width: '100%',
   },
 });
 

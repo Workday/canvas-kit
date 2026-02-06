@@ -9,7 +9,6 @@ export const formFieldFieldStencil = createStencil({
     display: 'flex',
     flexDirection: 'column',
     gap: cssVar(system.gap.sm, system.space.x2),
-    width: '100%',
   },
 });
 
