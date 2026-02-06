@@ -229,8 +229,9 @@ const radioInputWrapperStencil = createStencil({
   modifiers: {
     variant: {
       inverse: {
-        '::before': {
-          opacity: system.opacity.disabled,
+        '&:hover:before, &.hover:before': {
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          boxShadow: `0 0 0 ${calc.subtract(cssVar(system.gap.sm, system.space.x2), px2rem(1))} ${cssVar(system.color.surface.overlay.hover.inverse, system.color.bg.default)}`,
         },
       },
     },
