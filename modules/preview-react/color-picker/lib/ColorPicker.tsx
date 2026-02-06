@@ -3,7 +3,7 @@ import * as React from 'react';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {ColorInput} from '@workday/canvas-kit-react/color-picker';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {checkIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
