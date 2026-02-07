@@ -23,7 +23,7 @@ const primaryButtonStencil = createStencil({
   base: {
     // Base Styles
     [buttonStencil.vars.background]: cssVar(brand.action.base, brand.primary.base),
-    [buttonStencil.vars.borderRadius]: forwardFitTokens.system.shape.full,
+    [buttonStencil.vars.borderRadius]: cssVar(system.shape.full, system.shape.round),
     [buttonStencil.vars.label]: cssVar(brand.action.accent, brand.primary.accent),
     [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
     // Focus Styles

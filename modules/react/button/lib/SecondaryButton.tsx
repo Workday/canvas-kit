@@ -1,4 +1,4 @@
-import {createComponent, forwardFitTokens} from '@workday/canvas-kit-react/common';
+import {createComponent} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
@@ -23,7 +23,7 @@ const secondaryButtonStencil = createStencil({
   base: {
     // Base Styles
     [buttonStencil.vars.background]: system.color.bg.transparent.default,
-    [buttonStencil.vars.borderRadius]: forwardFitTokens.system.shape.full,
+    [buttonStencil.vars.borderRadius]: system.shape.round,
     [buttonStencil.vars.border]: system.color.border.input.default,
     [buttonStencil.vars.label]: system.color.fg.strong,
     [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
@@ -31,7 +31,7 @@ const secondaryButtonStencil = createStencil({
     '&:focus-visible, &.focus': {
       [buttonStencil.vars.background]: system.color.bg.default,
       [buttonStencil.vars.label]: system.color.fg.stronger,
-      [buttonStencil.vars.boxShadowInner]: system.color.focus.inverse,
+      [buttonStencil.vars.boxShadowInner]: system.color.border.inverse.default,
       [buttonStencil.vars.boxShadowOuter]: brand.common.focusOutline,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
     },
@@ -78,20 +78,20 @@ const secondaryButtonStencil = createStencil({
           [buttonStencil.vars.border]: 'transparent',
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [buttonStencil.vars.boxShadowInner]: system.color.border.contrast.default,
-          [buttonStencil.vars.boxShadowOuter]: system.color.focus.inverse,
+          [buttonStencil.vars.boxShadowOuter]: system.color.border.inverse.default,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
         },
         // Active Styles
         '&:active, &.active': {
           [buttonStencil.vars.background]: system.color.bg.transparent.stronger,
-          [buttonStencil.vars.border]: system.color.focus.inverse,
+          [buttonStencil.vars.border]: system.color.border.inverse.default,
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.active.icon, 'currentColor'),
         },
         // Disabled Styles
         '&:disabled, &.disabled': {
           [buttonStencil.vars.background]: 'transparent',
-          [buttonStencil.vars.border]: system.color.focus.inverse,
+          [buttonStencil.vars.border]: system.color.border.inverse.default,
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.disabled.icon, 'currentColor'),
         },

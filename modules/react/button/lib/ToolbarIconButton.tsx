@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {createComponent, focusRing, forwardFitTokens} from '@workday/canvas-kit-react/common';
+import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
@@ -18,14 +18,14 @@ export interface ToolbarIconButtonProps extends Omit<TertiaryButtonProps, 'size'
 export const toolbarIconButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
-    minWidth: forwardFitTokens.system.size.md,
-    padding: forwardFitTokens.system.padding.none,
-    height: forwardFitTokens.system.size.md,
+    minWidth: system.space.x8,
+    padding: system.space.zero,
+    height: system.space.x8,
     [buttonStencil.vars.borderRadius]: system.shape.x1,
-    [systemIconStencil.vars.color]: system.color.fg.default,
+    [systemIconStencil.vars.color]: system.color.fg.muted.soft,
 
     '&:focus-visible, &.focus': {
-      [systemIconStencil.vars.color]: system.color.fg.default,
+      [systemIconStencil.vars.color]: system.color.fg.muted.soft,
       ...focusRing({
         width: 2,
         separation: 0,

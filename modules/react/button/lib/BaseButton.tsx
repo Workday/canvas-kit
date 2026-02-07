@@ -1,15 +1,10 @@
 import * as React from 'react';
 
-import {
-  GrowthBehavior,
-  createComponent,
-  focusRing,
-  forwardFitTokens,
-} from '@workday/canvas-kit-react/common';
+import {GrowthBehavior, createComponent, focusRing} from '@workday/canvas-kit-react/common';
 import {SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStencil, createVars, cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {calc, createStencil, createVars, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 
 import {ButtonLabel} from '../lib/parts/ButtonLabel';
@@ -127,9 +122,9 @@ export const buttonStencil = createStencil({
   base: ({background, border, boxShadowInner, boxShadowOuter, label, opacity, borderRadius}) => ({
     // Default Styles
     fontFamily: '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif',
-    fontSize: forwardFitTokens.system.fontSize.subtext.lg,
-    lineHeight: system.lineHeight.subtext.large,
-    letterSpacing: system.letterSpacing.subtext.lg,
+    fontSize: '0.875rem',
+    lineHeight: 'normal',
+    letterSpacing: '0.015rem',
     fontWeight: system.fontWeight.bold,
     backgroundColor: cssVar(
       buttonColorPropVars.default.background,
@@ -138,7 +133,7 @@ export const buttonStencil = createStencil({
     color: cssVar(buttonColorPropVars.default.label, cssVar(label, system.color.fg.strong)),
     borderWidth: px2rem(1),
     borderStyle: 'solid',
-    gap: forwardFitTokens.system.gap.sm,
+    gap: system.space.x2,
     borderColor: cssVar(buttonColorPropVars.default.border, cssVar(border, 'transparent')),
     cursor: 'pointer',
     display: 'inline-flex',
@@ -187,7 +182,7 @@ export const buttonStencil = createStencil({
         separation: 2,
         innerColor: cssVar(
           buttonColorPropVars.focus.boxShadowInner,
-          cssVar(boxShadowInner, system.color.focus.inverse)
+          cssVar(boxShadowInner, system.color.border.inverse.default)
         ),
         outerColor: cssVar(
           buttonColorPropVars.focus.boxShadowOuter,
@@ -263,34 +258,34 @@ export const buttonStencil = createStencil({
      */
     size: {
       large: {
-        ...forwardFitTokens.system.type.body.sm,
+        ...system.type.body.small,
         fontWeight: system.fontWeight.bold,
-        height: forwardFitTokens.system.size.xl,
-        paddingInline: forwardFitTokens.system.padding.xxl,
-        minWidth: base.size1400,
+        height: px2rem(48),
+        paddingInline: system.space.x8,
+        minWidth: px2rem(112),
       },
       medium: {
-        ...forwardFitTokens.system.type.subtext.lg,
+        ...system.type.subtext.large,
         fontWeight: system.fontWeight.bold,
-        minWidth: forwardFitTokens.system.size.md,
-        paddingInline: forwardFitTokens.system.padding.xl,
-        height: forwardFitTokens.system.size.md,
+        minWidth: px2rem(96),
+        paddingInline: system.space.x6,
+        height: system.space.x10,
       },
       small: {
-        ...forwardFitTokens.system.type.subtext.lg,
+        ...system.type.subtext.large,
         fontWeight: system.fontWeight.bold,
-        height: forwardFitTokens.system.size.md,
-        minWidth: base.size1000,
-        paddingInline: forwardFitTokens.system.padding.md,
-        gap: forwardFitTokens.system.gap.xs,
+        height: system.space.x8,
+        minWidth: system.space.x20,
+        paddingInline: system.space.x4,
+        gap: system.space.x1,
       },
       extraSmall: {
-        ...forwardFitTokens.system.type.subtext.md,
+        ...system.type.subtext.medium,
         fontWeight: system.fontWeight.bold,
-        height: forwardFitTokens.system.size.sm,
+        height: system.space.x6,
         minWidth: 'auto',
-        paddingInline: forwardFitTokens.system.padding.sm,
-        gap: forwardFitTokens.system.gap.xs,
+        paddingInline: system.space.x3,
+        gap: system.space.x1,
       },
     },
     grow: {
@@ -301,7 +296,7 @@ export const buttonStencil = createStencil({
     },
     // IconPosition Styles
     iconPosition: {
-      only: {padding: forwardFitTokens.system.padding.none},
+      only: {padding: system.space.zero},
       start: {},
       end: {},
     },
@@ -311,81 +306,81 @@ export const buttonStencil = createStencil({
     {
       modifiers: {size: 'large', iconPosition: 'only'},
       styles: {
-        minWidth: base.size600,
+        minWidth: calc.multiply(system.space.x4, 3),
       },
     },
     {
       modifiers: {size: 'large', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: forwardFitTokens.system.padding.xl,
-        paddingInlineEnd: forwardFitTokens.system.padding.xxl,
+        paddingInlineStart: system.space.x6,
+        paddingInlineEnd: system.space.x8,
       },
     },
     {
       modifiers: {size: 'large', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: forwardFitTokens.system.padding.xxl,
-        paddingInlineEnd: forwardFitTokens.system.padding.xl,
+        paddingInlineStart: system.space.x8,
+        paddingInlineEnd: system.space.x6,
       },
     },
     {
       modifiers: {size: 'medium', iconPosition: 'only'},
       styles: {
-        minWidth: forwardFitTokens.system.size.md,
+        minWidth: system.space.x10,
       },
     },
     {
       modifiers: {size: 'medium', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: forwardFitTokens.system.padding.lg,
-        paddingInlineEnd: forwardFitTokens.system.padding.xl,
+        paddingInlineStart: calc.multiply(system.space.x1, 5),
+        paddingInlineEnd: system.space.x6,
       },
     },
     {
       modifiers: {size: 'medium', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: forwardFitTokens.system.padding.xl,
-        paddingInlineEnd: forwardFitTokens.system.padding.lg,
+        paddingInlineStart: system.space.x6,
+        paddingInlineEnd: calc.multiply(system.space.x1, 5),
       },
     },
     {
       modifiers: {size: 'small', iconPosition: 'only'},
       styles: {
-        minWidth: forwardFitTokens.system.size.md,
+        minWidth: system.space.x8,
       },
     },
     {
       modifiers: {size: 'small', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: forwardFitTokens.system.padding.sm,
-        paddingInlineEnd: forwardFitTokens.system.padding.md,
+        paddingInlineStart: system.space.x3,
+        paddingInlineEnd: system.space.x4,
       },
     },
     {
       modifiers: {size: 'small', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: forwardFitTokens.system.padding.md,
-        paddingInlineEnd: forwardFitTokens.system.padding.sm,
+        paddingInlineStart: system.space.x4,
+        paddingInlineEnd: system.space.x3,
       },
     },
     {
       modifiers: {size: 'extraSmall', iconPosition: 'only'},
       styles: {
-        minWidth: forwardFitTokens.system.size.sm,
+        minWidth: system.space.x6,
       },
     },
     {
       modifiers: {size: 'extraSmall', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: forwardFitTokens.system.padding.xs,
-        paddingInlineEnd: forwardFitTokens.system.padding.sm,
+        paddingInlineStart: system.space.x2,
+        paddingInlineEnd: system.space.x3,
       },
     },
     {
       modifiers: {size: 'extraSmall', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: forwardFitTokens.system.padding.sm,
-        paddingInlineEnd: forwardFitTokens.system.padding.xs,
+        paddingInlineStart: system.space.x3,
+        paddingInlineEnd: system.space.x2,
       },
     },
   ],
