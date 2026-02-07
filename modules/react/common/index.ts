@@ -3,6 +3,7 @@ export * from './lib/types';
 export * from './lib/theming';
 export * from './lib/styles';
 export * from './lib/utils';
+export * from './lib/genericStyles';
 export * from './lib/AccessibleHide';
 export * from './lib/AriaLiveRegion';
 export * from './lib/CanvasProvider';
