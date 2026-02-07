@@ -9,7 +9,7 @@ import {
 import {Box, BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {usePopupModel, usePopupStack} from '@workday/canvas-kit-react/popup';
 import {createStencil, cssVar, keyframes} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {useModalModel} from './hooks';
 
@@ -20,7 +20,7 @@ const fadeIn = keyframes({
     background: 'none',
   },
   '100%': {
-    background: cssVar(system.color.bg.overlay),
+    background: cssVar(system.color.surface.overlay.scrim, system.color.bg.overlay),
   },
 });
 
@@ -30,11 +30,14 @@ export const modalOverlayContainerStencil = createStencil({
   },
   base: ({containerCenter}) => ({
     position: 'fixed',
-    top: system.space.zero,
-    left: system.space.zero,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    top: cssVar(base.size0, system.space.zero),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    left: cssVar(base.size0, system.space.zero),
     width: '100vw',
     height: '100vh',
-    background: system.color.bg.overlay,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    background: cssVar(system.color.surface.overlay.scrim, system.color.bg.overlay),
     animationDuration: '0.3s',
     animationName: fadeIn,
     // Allow overriding of animation in special cases
@@ -46,8 +49,10 @@ export const modalOverlayContainerStencil = createStencil({
       maxHeight: '100%',
       display: 'flex',
       position: 'absolute',
-      left: system.space.zero,
-      top: system.space.zero,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      left: cssVar(base.size0, system.space.zero),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      top: cssVar(base.size0, system.space.zero),
       justifyContent: 'center',
       alignItems: 'center',
       height: '100%',

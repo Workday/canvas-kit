@@ -75,7 +75,7 @@ export const popupCardStencil = createStencil({
     position: 'relative',
     maxWidth: `calc(100vw - ${system.space.x8})`,
     gap: system.space.x2,
-    boxShadow: system.depth[5],
+    boxShadow: system.depth[3],
     minHeight: system.space.zero,
     padding: system.space.x6,
     maxHeight: maxHeight,

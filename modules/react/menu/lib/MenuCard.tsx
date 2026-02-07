@@ -33,8 +33,10 @@ export const menuCardStencil = createStencil({
     transition: `transform ease-out 150ms`,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     padding: cssVar(system.padding.xxs, system.space.zero),
-    borderRadius: system.shape.xxl,
-    maxWidth: calc.subtract('100vw', system.space.x8),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    borderRadius: cssVar(system.shape.xxl, system.shape.x2),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    maxWidth: calc.subtract('100vw', cssVar(system.size.sm, system.space.x8)),
     boxShadow: system.depth[3],
     minWidth,
     maxHeight,
