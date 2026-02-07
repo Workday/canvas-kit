@@ -8,6 +8,8 @@ import {
   usePopupModel,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
+import {cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export const Basic = () => {
   const model = usePopupModel();
@@ -33,7 +35,7 @@ export const Basic = () => {
               Are you sure you'd like to delete the item titled 'My Item'?
             </Box>
           </Popup.Body>
-          <Flex gap="s" padding="xxs">
+          <Flex gap="s" cs={{paddingInline: cssVar(system.padding.xs)}}>
             <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
               Delete
             </Popup.CloseButton>

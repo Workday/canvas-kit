@@ -8,6 +8,7 @@ import {
   usePopupModel,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
+import {px2rem} from '@workday/canvas-kit-styling';
 
 interface MyTargetProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
@@ -33,7 +34,7 @@ export const CustomTarget = () => {
     <Popup model={model}>
       <Popup.Target as={MyTarget} label="Open" />
       <Popup.Popper>
-        <Popup.Card>
+        <Popup.Card cs={{minWidth: px2rem(320)}}>
           <Popup.CloseIcon aria-label="Close" />
           <Popup.Heading>Popup</Popup.Heading>
           <Popup.Body>Contents</Popup.Body>

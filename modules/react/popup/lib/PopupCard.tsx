@@ -9,7 +9,7 @@ import {
 import {FlexStyleProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {space} from '@workday/canvas-kit-react/tokens';
 import {createStencil, createVars, cssVar, keyframes} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {getTransformFromPlacement} from './getTransformFromPlacement';
 import {usePopupCard, usePopupModel} from './hooks';
@@ -74,10 +74,15 @@ export const popupCardStencil = createStencil({
     ...system.type.subtext.large,
     position: 'relative',
     maxWidth: `calc(100vw - ${system.space.x8})`,
-    gap: system.space.x2,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    gap: cssVar(system.gap.lg, system.space.x2),
     boxShadow: system.depth[3],
-    minHeight: system.space.zero,
-    padding: system.space.x6,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    minHeight: cssVar(base.size0, system.space.zero),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    padding: cssVar(system.padding.xl, system.space.x6),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    borderRadius: cssVar(system.shape.xxxl, system.shape.x6),
     maxHeight: maxHeight,
     overflowY: 'auto',
     animationName: fadeIn,
