@@ -6,7 +6,7 @@ import {BodyText} from '@workday/canvas-kit-react/text';
 export const Basic = () => {
   const [selected, setSelected] = React.useState('');
   return (
-    <Menu onSelect={data => setSelected(data.id)} initialVisibility="visible">
+    <Menu onSelect={data => setSelected(data.id)}>
       <Menu.Target>Open Menu</Menu.Target>
       <Menu.Popper>
         <Menu.Card>
