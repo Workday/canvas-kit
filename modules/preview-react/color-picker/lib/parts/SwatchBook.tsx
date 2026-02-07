@@ -28,17 +28,20 @@ const colorPickerSwatchBookStencil = createStencil({
   base: ({tilePart, shadow}) => ({
     display: 'flex',
     flexWrap: 'wrap',
-    margin: `0 ${calc.negate(system.space.x2)} ${calc.negate(system.space.x2)} 0`,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    margin: `0 ${calc.negate(cssVar(system.padding.xs, system.space.x2))} ${calc.negate(cssVar(system.padding.xs, system.space.x2))} 0`,
     [tilePart]: {
       display: 'flex',
-      width: px2rem(20),
-      height: px2rem(20),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      width: cssVar(system.size.xxs, px2rem(20)),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      height: cssVar(system.size.xxs, px2rem(20)),
       cursor: 'pointer',
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       borderRadius: cssVar(system.shape.sm, system.shape.half),
-
       transition: 'box-shadow 120ms ease',
-      margin: `0px ${system.space.x2} ${system.space.x2} 0px`,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      margin: `0px ${cssVar(system.padding.xs, system.space.x2)} ${cssVar(system.padding.xs, system.space.x2)} 0px`,
 
       '&:hover': {
         boxShadow: shadow,

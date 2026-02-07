@@ -104,9 +104,14 @@ export const colorPickerHexInputStencil = createStencil({
       }),
     },
     disabled: {
-      true: ({poundSignPart}) => ({
+      true: ({inputPart, poundSignPart}) => ({
+        [inputPart]: {
+          borderColor: system.color.border.input.disabled,
+          backgroundColor: system.color.bg.alt.soft,
+          color: system.color.text.disabled,
+        },
         [poundSignPart]: {
-          opacity: system.opacity.disabled,
+          color: system.color.text.disabled,
         },
       }),
     },

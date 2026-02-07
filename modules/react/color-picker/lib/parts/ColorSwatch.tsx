@@ -18,8 +18,10 @@ export const colorPickerColorSwatchStencil = createStencil({
   },
   base: ({color, iconColor}) => ({
     [systemIconStencil.vars.color]: iconColor,
-    width: px2rem(20),
-    height: px2rem(20),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    width: cssVar(system.size.xxs, px2rem(20)),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    height: cssVar(system.size.xxs, px2rem(20)),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     borderRadius: cssVar(system.shape.sm, system.shape.half),
     backgroundColor: color,

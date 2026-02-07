@@ -138,16 +138,20 @@ export const colorPickerStencil = createStencil({
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-between',
-      marginBlockStart: system.space.x4,
-      gap: cssVar(system.gap.xs, system.space.x1),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      marginBlockStart: cssVar(system.padding.md, system.space.x4),
     },
     [inputWrapperPart]: {
       display: 'flex',
       flexDirection: 'column',
-      margin: system.space.zero,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      margin: cssVar(system.padding.none, system.space.zero),
     },
     [buttonPart]: {
       alignSelf: 'flex-end',
+    },
+    [hexInputPart]: {
+      width: px2rem(168),
     },
   }),
 });
@@ -213,7 +217,7 @@ export const ColorPicker = ({
       <SwatchBook colors={colorSet} onSelect={onColorChange} value={value} />
       {showCustomHexInput && (
         <form onSubmit={onSubmit} {...colorPickerStencil.parts.form}>
-          <FormField {...colorPickerStencil.parts.inputWrapper} grow>
+          <FormField {...colorPickerStencil.parts.inputWrapper}>
             <FormField.Label>{customHexInputLabel}</FormField.Label>
             <FormField.Input
               as={ColorInput}

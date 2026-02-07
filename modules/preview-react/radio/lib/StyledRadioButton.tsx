@@ -45,17 +45,13 @@ const radioInputStencil = createStencil({
     },
     '&:disabled, &.disabled': {
       cursor: 'auto',
-      '+ .cnvs-radio-check': {
-        opacity: system.opacity.disabled,
-      },
-      '&:hover + .cnvs-radio-check, &.hover + .cnvs-radio-check': {
-        opacity: system.opacity.disabled,
-      },
+      opacity: system.opacity.disabled,
       // This creates the inner circle when the Radio is checked.
       // The backgroundColor represents the dot in the middle of the radio.
       // The borderColor represents the border around the middle dot of the radio.
       '&:checked + .cnvs-radio-check, &.checked + .cnvs-radio-check': {
-        opacity: system.opacity.disabled,
+        backgroundColor: cssVar(system.color.surface.default, brand.primary.accent), // inner circle background color
+        border: `${px2rem(5)} solid ${cssVar(system.color.brand.accent.primary, brand.primary.base)}`, // inner circle border color
       },
     },
 
@@ -81,11 +77,13 @@ const radioInputStencil = createStencil({
     },
 
     '&:hover + .cnvs-radio-check, &.hover + .cnvs-radio-check': {
-      borderColor: system.color.border.input.strong,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      borderColor: cssVar(system.color.border.input.default, system.color.border.input.strong),
     },
 
     '&:focus-visible + .cnvs-radio-check, &.focus + .cnvs-radio-check': {
-      borderColor: system.color.border.primary.default,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      borderColor: cssVar(system.color.brand.border.primary, system.color.border.primary.default),
       ...focusRing({
         width: 1,
         separation: 0,
@@ -102,8 +100,8 @@ const radioInputStencil = createStencil({
     // The backgroundColor represents the dot in the middle of the radio.
     // The borderColor represents the border around the middle dot of the radio.
     '&:checked + .cnvs-radio-check, &.checked + .cnvs-radio-check': {
-      backgroundColor: brand.primary.accent, // inner circle background color
-      border: `${px2rem(5)} solid ${brand.primary.base}`, // inner circle border color
+      backgroundColor: cssVar(system.color.surface.default, brand.primary.accent), // inner circle background color
+      border: `${px2rem(5)} solid ${cssVar(system.color.brand.accent.primary, brand.primary.base)}`, // inner circle border color
     },
 
     '&:focus-visible:checked + .cnvs-radio-check, &:focus-visible:hover:checked + .cnvs-radio-check, &.focus:checked + .cnvs-radio-check, &.focus:hover:checked + .cnvs-radio-check':
@@ -172,12 +170,7 @@ const radioInputStencil = createStencil({
         },
         [`&:focus-visible + ${checkPart}, &:focus-visible:hover + ${checkPart}, &.focus + ${checkPart}, &.focus:hover + ${checkPart}`]:
           {
-            ...focusRing({
-              width: 2,
-              separation: 0,
-              innerColor: system.color.border.contrast.default,
-              outerColor: system.color.border.inverse.default,
-            }),
+            boxShadow: `0 0 0 2px ${cssVar(system.color.brand.border.primary, system.color.border.primary.default)}`,
           },
         [`&:focus-visible:checked + ${checkPart}, &:focus-visible:hover:checked + ${checkPart}, &.focus:checked + ${checkPart}, &.focus:hover:checked + ${checkPart}`]:
           {
@@ -237,6 +230,7 @@ const radioInputWrapperStencil = createStencil({
     },
     disabled: {
       true: {
+        opacity: system.opacity.disabled,
         '&:hover:before, &.hover:before': {
           boxShadow: 'none',
           cursor: 'auto',
