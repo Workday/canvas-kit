@@ -53,6 +53,9 @@ export const useListBox = createElemPropsHook(useListModel)(model => {
 });
 
 const listBoxContainerStencil = createStencil({
+  parts: {
+    listContainer: 'list-container',
+  },
   base: {
     '& :where([data-part="list"])': {
       display: 'flex',
@@ -120,6 +123,7 @@ export const ListBox = createContainer('ul')({
     return (
       <div
         ref={model.state.containerRef}
+        {...listBoxContainerStencil.parts.listContainer}
         {...handleCsProp(
           {
             style: {

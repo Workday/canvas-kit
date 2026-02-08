@@ -11,8 +11,10 @@ export const toastBodyStencil = createStencil({
     alignItems: 'flex-start',
     flexDirection: 'column',
     justifyContent: 'center',
-    paddingTop: system.space.x4,
-    paddingBottom: system.space.x4,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    paddingTop: cssVar(system.padding.md, system.space.x4),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    paddingBottom: cssVar(system.padding.md, system.space.x4),
     flexGrow: 1,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     gap: cssVar(system.gap.xs, system.space.x1),

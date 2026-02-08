@@ -1,7 +1,7 @@
 import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Subtext} from '@workday/canvas-kit-react/text';
-import {createStencil} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {useToastModel} from './hooks/useToastModel';
@@ -11,8 +11,8 @@ export interface ToastMessageProps extends Omit<ExtractProps<typeof Subtext>, 's
 export const toastMessageStencil = createStencil({
   base: {
     wordBreak: 'break-word',
-    marginBlockStart: system.space.zero,
-    marginBlockEnd: system.space.zero,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    marginBlock: cssVar(system.padding.none, system.space.zero),
   },
 });
 
