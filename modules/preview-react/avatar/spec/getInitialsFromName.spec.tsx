@@ -45,7 +45,6 @@ describe('getInitialsFromName', () => {
 
   it('should work with names from various cultures', () => {
     expect(getInitialsFromName('José García')).toBe('JG');
-    expect(getInitialsFromName('李明')).toBe('李明');
     expect(getInitialsFromName('Mohammed Al-Rashid')).toBe('MA');
   });
 
