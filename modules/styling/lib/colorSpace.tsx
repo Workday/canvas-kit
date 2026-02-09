@@ -46,7 +46,7 @@ export function maybeWrapValue(input: string, fallback: string): string {
  *
  */
 const darken = (color: string, fallback: string, mixinColor: string, mixinValue: string) => {
-  return `color-mix(in oklch, ${maybeWrapValue(color, fallback)} , ${maybeWrapValue(mixinColor, 'black')} ${calc.multiply(mixinValue, '100%')})`;
+  return `color-mix(in oklch, ${maybeWrapValue(color, fallback)} , ${maybeWrapValue(mixinColor, 'black')} ${calc.multiply(maybeWrapValue(mixinValue, '0.08'), '100%')})`;
 };
 
 export const colorSpace = {
