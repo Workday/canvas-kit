@@ -1,5 +1,4 @@
 import {calc} from './calc';
-import {cssVar} from './cs';
 
 /**
  * Wrap all unwrapped CSS Variables. For example, `{padding: '--foo'}` will be replaced with
@@ -24,31 +23,6 @@ export function maybeWrapValue(input: string, fallback: string): string {
   });
 }
 
-/**
- * Function that lightens the value of a CSS variable or value.
- * CSS vars will be automatically wrapped in `var()` if provided.
- *
- * ```ts
- * const styles = {
- *   // returns 'color-mix(in oklch, var(--color), var(--mixinColor) var(--mixinValue)'
- *   backgroundColor: 'color-mix(in oklch, var(--color), var(--mixinColor) var(--mixinValue)'
- * }
- * ```
- *
- * @param color
- * The value being darkened.
- *
- * @param mixinColor
- * The mixinColor is the color that will be mixed in with `color`.
- *
- *
- * @param mixinValue
- * The mixinValue is the percent of the `mixinColor` that will be mixed in with `color`.
- *
- */
-const lighten = (color: string, fallback: string, mixinColor: string, mixinValue: string) => {
-  return `color-mix(in oklch, ${maybeWrapValue(color, fallback)} , ${maybeWrapValue(mixinColor, 'white')} ${calc.multiply(mixinValue, '100%')})`;
-};
 /**
  * Function that darkens the value of a CSS variable or value.
  * CSS vars will be automatically wrapped in `var()` if provided.
