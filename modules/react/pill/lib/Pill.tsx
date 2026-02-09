@@ -46,7 +46,7 @@ export const pillStencil = createStencil({
     MozOsxFontSmoothing: 'grayscale',
     width: 'fit-content',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    padding: `${px2rem(2)} ${cssVar(system.padding.sm, system.space.x2)}`,
+    padding: `${px2rem(2)} ${cssVar(system.padding.xs, system.space.x2)}`,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     height: cssVar(system.size.xs, system.space.x6),
     position: 'relative',
