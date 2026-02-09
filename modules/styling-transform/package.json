@@ -37,7 +37,7 @@
   "dependencies": {
     "@emotion/serialize": "^1.0.2",
     "@workday/canvas-kit-styling": "^14.2.20",
-    "@workday/canvas-tokens-web": "4.0.2",
+    "@workday/canvas-tokens-web": "4.1.0",
     "stylis": "4.3.6",
     "ts-node": "^10.9.1",
     "typescript": "5.0"

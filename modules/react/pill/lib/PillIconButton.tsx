@@ -18,7 +18,7 @@ export interface PillIconButtonProps extends Partial<SystemIconProps> {
 export const pillIconButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
-    marginInlineEnd: calc.negate(px2rem(7)), // visually pull in the pill to the right size  by -7px
+    marginInlineEnd: calc.negate(px2rem(11)), // visually pull in the pill to the right size  by -11px
     marginInlineStart: calc.negate(px2rem(2)), // visually create space between label and the button by -2px
     borderRadius: system.shape.half,
     height: calc.add(system.space.x4, system.space.x1),
@@ -54,7 +54,9 @@ export const pillIconButtonStencil = createStencil({
     },
     '&:active, &.active': {
       [buttonStencil.vars.border]: system.color.border.transparent,
-      [buttonStencil.vars.background]: system.color.bg.alt.stronger,
+      // Since we are using transparent colors for the Pill background, this is too match the background
+      // on the active state instead of getting darker on click
+      [buttonStencil.vars.background]: 'transparent',
     },
     '&:disabled, &.disabled': {
       [buttonStencil.vars.border]: system.color.border.transparent,

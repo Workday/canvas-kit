@@ -18,8 +18,9 @@ export const handleColorSpace = createPropertyTransform((node, context) => {
 
     return colorSpace.darken(
       args[0] as string,
-      args[1] ? parseFloat(args[1] as string) : undefined,
-      args[2] ? parseFloat(args[2] as string) : undefined
+      args[1] as string,
+      args[2] as string,
+      args[3] as string
     );
   }
 

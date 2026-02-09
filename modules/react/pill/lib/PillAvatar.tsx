@@ -1,7 +1,6 @@
 import {Avatar, AvatarProps, avatarStencil} from '@workday/canvas-kit-react/avatar';
 import {createSubcomponent} from '@workday/canvas-kit-react/common';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {usePillModel} from './usePillModel';
@@ -27,7 +26,7 @@ export const PillAvatar = createSubcomponent('div')({
       isDecorative
       as={Element}
       size={px2rem(18)}
-      {...mergeStyles(elemProps, [
+      {...handleCsProp(elemProps, [
         pillAvatarStencil(),
         _model.state.disabled ? 'disabled' : undefined,
       ])}
