@@ -1,6 +1,6 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {FlexProps} from '@workday/canvas-kit-react/layout';
-import {calc, createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
+import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {calc, createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export interface PillCountProps extends FlexProps {}
@@ -34,7 +34,7 @@ export const pillCountStencil = createStencil({
     padding: `${cssVar(system.padding.none, system.space.zero)} ${cssVar(system.padding.xxs, system.space.x1)}`,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     // Using the `padding` token here as we don't have a `margin` token
-    marginInlineEnd: calc.negate(cssVar(system.padding.sm, system.space.x3)),
+    marginInlineEnd: calc.negate(cssVar(system.padding.xs, system.space.x3)),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     marginInlineStart: cssVar(system.padding.xxs, system.space.x1),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
@@ -47,7 +47,7 @@ export const PillCount = createComponent('span')({
   displayName: 'Pill.Count',
   Component: ({children, ...elemProps}: PillCountProps, ref, Element) => {
     return (
-      <Element ref={ref} {...handleCsProp(elemProps, pillCountStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, pillCountStencil())}>
         {children}
       </Element>
     );

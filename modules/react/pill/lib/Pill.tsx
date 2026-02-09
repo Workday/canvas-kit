@@ -1,8 +1,8 @@
 import {buttonStencil} from '@workday/canvas-kit-react/button';
 import {createContainer, focusRing} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
-import {colorSpace, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {Box, BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {colorSpace, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {PillAvatar} from './PillAvatar';
@@ -309,7 +309,7 @@ export const Pill = createContainer('button')({
     <Box
       as={Element !== 'button' ? Element : 'span'}
       id={isReadOnly ? model.state.id : undefined}
-      {...handleCsProp(elemProps, [
+      {...mergeStyles(elemProps, [
         model.state.disabled ? 'disabled' : undefined,
         pillStencil({maxWidth: maxWidthCSSValue, variant}),
       ])}
@@ -319,7 +319,7 @@ export const Pill = createContainer('button')({
   ) : (
     <Element
       disabled={model.state.disabled}
-      {...handleCsProp(elemProps, [
+      {...mergeStyles(elemProps, [
         model.state.disabled ? 'disabled' : undefined,
         pillStencil({maxWidth: maxWidthCSSValue}),
       ])}

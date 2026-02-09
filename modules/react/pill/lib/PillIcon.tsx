@@ -1,6 +1,7 @@
 import {createSubcomponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {calc, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {plusIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -26,7 +27,7 @@ export const PillIcon = createSubcomponent('span')({
       as={Element}
       role="img"
       icon={icon || plusIcon}
-      {...handleCsProp(elemProps, pillIconStencil())}
+      {...mergeStyles(elemProps, pillIconStencil())}
     />
   );
 });
