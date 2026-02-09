@@ -4277,10 +4277,10 @@
   dependencies:
     "@workday/design-assets-types" "0.2.10"
 
-"@workday/canvas-tokens-web@4.0.4":
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/@workday/canvas-tokens-web/-/canvas-tokens-web-4.0.4.tgz#cfad61e98e9f274045d12ecf65fa3114d47f1f70"
-  integrity sha512-crUERhrKnP1/DHI2F1LSdhG/rEndR5xEx01+pGeo8l1D6M/PUWGGiuDvoqa6HC7KXSWLijZHkZ18BoU9ITYj6g==
+"@workday/canvas-tokens-web@4.1.2":
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-tokens-web/-/canvas-tokens-web-4.1.2.tgz#162aa6a90bc64e31bc5ca2defb57fe78bd84de64"
+  integrity sha512-y6kPAEAGxPx33BUTVdkwTFAiSZb0rcvntF6J5tox2k3WEmWKtNHqv7k6U7RND+HM+5H4gBFLvnee7OAFFy4suA==
 
 "@workday/design-assets-types@0.2.10", "@workday/design-assets-types@^0.2.10":
   version "0.2.10"
@@ -13618,7 +13618,7 @@ tslib@~2.1.0:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.1.0.tgz#da60860f1c2ecaa5703ab7d39bc05b6bf988b97a"
   integrity sha512-hcVC3wYEziELGGmEEXue7D75zbwIIVUMWAVbHItGPx0ziyXxrOMQx4rQEVEV45Ut/1IotuEvwqPopzIOkDMf0A==
 
-tsx@^4.19.2, tsx@^4.7.0:
+tsx@^4.19.2:
   version "4.20.6"
   resolved "https://registry.yarnpkg.com/tsx/-/tsx-4.20.6.tgz#8fb803fd9c1f70e8ccc93b5d7c5e03c3979ccb2e"
   integrity sha512-ytQKuwgmrrkDTFP4LjR0ToE2nqgy886GpvRSpU0JAnrdBYppuY5rLkRUYPU1yCryb24SsKBTL/hlDQAEFVwtZg==
