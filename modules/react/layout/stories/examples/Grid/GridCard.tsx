@@ -1,6 +1,7 @@
 import * as React from 'react';
-import {Grid, Box} from '@workday/canvas-kit-react/layout';
+
 import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
+import {Box, Grid} from '@workday/canvas-kit-react/layout';
 import {type} from '@workday/canvas-kit-react/tokens';
 
 // temporary placeholder until type components are added to canvas-kit

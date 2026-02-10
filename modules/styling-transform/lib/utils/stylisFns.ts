@@ -1,16 +1,15 @@
-/* eslint-disable no-param-reassign */
 /* eslint-disable no-fallthrough */
 /* eslint-disable default-case */
 import {
   COMMENT,
   DECLARATION,
+  Element,
   IMPORT,
   KEYFRAMES,
   LAYER,
   Middleware,
   RULESET,
   serialize,
-  Element,
 } from 'stylis';
 
 function strlen(input: string): number {

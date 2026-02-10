@@ -1,9 +1,10 @@
-import {createComponent} from '@workday/canvas-kit-react/common';
-import {extLinkIcon} from '@workday/canvas-system-icons-web';
+import {createComponent, forwardFitTokens} from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {HyperlinkProps, hyperlinkStencil} from './Hyperlink';
-import {calc, createStencil, px2rem, handleCsProp} from '@workday/canvas-kit-styling';
+import {calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {extLinkIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
+
+import {HyperlinkProps, hyperlinkStencil} from './Hyperlink';
 
 export interface ExternalHyperlinkProps extends HyperlinkProps {
   /**
@@ -24,8 +25,8 @@ export const externalHyperlinkStencil = createStencil({
       [systemIconStencil.vars.color]: 'currentColor',
       [systemIconStencil.vars.size]: '1em',
       width: calc.subtract('1em', px2rem(1)),
-      minWidth: calc.subtract(system.space.x4, px2rem(1)),
-      marginInlineStart: calc.subtract(system.space.x1, px2rem(2)),
+      minWidth: calc.subtract(forwardFitTokens.system.size.xxs, px2rem(1)),
+      marginInlineStart: calc.subtract(forwardFitTokens.system.gap.xs, px2rem(2)),
       '& > svg': {
         minWidth: system.space.x4,
         minHeight: system.space.x4,

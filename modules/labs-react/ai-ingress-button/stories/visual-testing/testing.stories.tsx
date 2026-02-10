@@ -1,10 +1,9 @@
+import {AIIngressButton} from '@workday/canvas-kit-labs-react/ai-ingress-button';
 import {
   ComponentStatesTable,
-  permutateProps,
   StaticStates,
+  permutateProps,
 } from '@workday/canvas-kit-react/testing';
-
-import {AIIngressButton} from '@workday/canvas-kit-labs-react/ai-ingress-button';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 

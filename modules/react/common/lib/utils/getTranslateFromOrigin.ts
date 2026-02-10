@@ -1,6 +1,7 @@
 import {CanvasSpaceValues} from '@workday/canvas-kit-react/tokens';
-import {TransformOrigin} from '../types';
 import {calc} from '@workday/canvas-kit-styling';
+
+import {TransformOrigin} from '../types';
 
 type translateMapType = {
   x: {[key in TransformOrigin['horizontal']]: number};

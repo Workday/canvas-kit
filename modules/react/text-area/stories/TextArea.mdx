@@ -1,11 +1,14 @@
+import {Meta} from '@storybook/blocks';
+
 import {
   ExampleCodeBlock,
-  SymbolDoc,
   Specifications,
-  InformationHighlight,
+  SymbolDoc,
 } from '@workday/canvas-kit-docs';
-import {Caution} from './examples/Caution';
+
+import * as TextAreaStories from './TextArea.stories';
 import {Basic} from './examples/Basic';
+import {Caution} from './examples/Caution';
 import {Disabled} from './examples/Disabled';
 import {Error} from './examples/Error';
 import {Grow} from './examples/Grow';
@@ -14,7 +17,6 @@ import {Placeholder} from './examples/Placeholder';
 import {RefForwarding} from './examples/RefForwarding';
 import {Required} from './examples/Required';
 import {ResizeConstraints} from './examples/ResizeConstraints';
-import * as TextAreaStories from './TextArea.stories';
 
 <Meta of={TextAreaStories} />
 
@@ -94,13 +96,12 @@ Labels for required fields are suffixed by a red asterisk.
 
 ### Error States
 
-Set the `error` prop of the wrapping Form Field to `"caution"` or
-`"error"` to set the Text Area to the Caution or Error state, respectively. You will
-also need to set the `hintId` and `hintText` props on the Form Field to meet accessibility
-standards.
+Set the `error` prop of the wrapping Form Field to `"caution"` or `"error"` to set the Text Area to
+the Caution or Error state, respectively. You will also need to set the `hintId` and `hintText`
+props on the Form Field to meet accessibility standards.
 
-The `error` prop may be applied directly to the Text Area with a value of `"TextArea.ErrorType.Caution"`
-or `TextArea.ErrorType.Error` if Form Field is not being used.
+The `error` prop may be applied directly to the Text Area with a value of
+`"TextArea.ErrorType.Caution"` or `TextArea.ErrorType.Error` if Form Field is not being used.
 
 #### Caution
 
@@ -116,4 +117,4 @@ or `TextArea.ErrorType.Error` if Form Field is not being used.
 
 ## Specifications
 
-<Specifications file="TextArea.spec.ts" name="Text Area" />
+<Specifications file="./cypress/component/TextArea.spec.tsx" name="Text Area" />

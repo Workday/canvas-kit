@@ -1,9 +1,8 @@
 import {ExternalHyperlink} from '@workday/canvas-kit-react/button';
 
-import {renderTypeParameters} from '../widgetUtils';
 import {ExternalSymbolValue} from '../../docgen/docTypes';
-
 import {registerWidget} from '../Value';
+import {renderTypeParameters} from '../widgetUtils';
 
 registerWidget<ExternalSymbolValue>('external', ({value}) => (
   <>

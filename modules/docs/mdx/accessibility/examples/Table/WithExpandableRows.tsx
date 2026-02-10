@@ -1,13 +1,12 @@
 import React from 'react';
 
 import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
-import {Table} from '@workday/canvas-kit-react/table';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {generateUniqueId} from '@workday/canvas-kit-react/common';
+import {Table} from '@workday/canvas-kit-react/table';
 import {Heading, Subtext} from '@workday/canvas-kit-react/text';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {createStyles} from '@workday/canvas-kit-styling';
-
 import {chevronDownSmallIcon, chevronRightSmallIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 

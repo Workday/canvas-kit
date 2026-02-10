@@ -1,19 +1,21 @@
+import {Meta} from '@storybook/blocks';
+
 import {
   ExampleCodeBlock,
-  InformationHighlight,
-  SymbolDoc,
   Specifications,
+  SymbolDoc,
 } from '@workday/canvas-kit-docs';
-import {Caution} from './examples/Caution';
+
 import {Basic} from './examples/Basic';
+import {Caution} from './examples/Caution';
 import {Disabled} from './examples/Disabled';
 import {Error} from './examples/Error';
 import {Grow} from './examples/Grow';
+import {Icons} from './examples/Icons';
 import {LabelPosition} from './examples/LabelPosition';
 import {Placeholder} from './examples/Placeholder';
 import {RefForwarding} from './examples/RefForwarding';
 import {Required} from './examples/Required';
-import {Icons} from './examples/Icons';
 
 import * as TextInputStories from './TextInput.stories';
 
@@ -102,10 +104,9 @@ method to change width. The `width` prop is used to correctly position other inn
 
 ### Error States
 
-Set the `error` prop of the wrapping Form Field to `"caution"` or
-`"error"` to set the Text Input to the Caution or Error state, respectively. You
-will also need to set the `hintId` and `hintText` props on the Form Field to meet accessibility
-standards.
+Set the `error` prop of the wrapping Form Field to `"caution"` or `"error"` to set the Text Input to
+the Caution or Error state, respectively. You will also need to set the `hintId` and `hintText`
+props on the Form Field to meet accessibility standards.
 
 The `error` prop may be applied directly to the Text Input with a value of
 `TextInput.ErrorType.Caution` or `TextInput.ErrorType.Error` if Form Field is not being used.
@@ -126,4 +127,4 @@ The `error` prop may be applied directly to the Text Input with a value of
 
 ## Specifications
 
-<Specifications file="TextInput.spec.ts" name="TextInput" />
+<Specifications file="./cypress/component/TextInput.spec.tsx" name="TextInput" />

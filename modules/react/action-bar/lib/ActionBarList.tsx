@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-import {system} from '@workday/canvas-tokens-web';
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {useListRenderItems, useOverflowListMeasure} from '@workday/canvas-kit-react/collection';
+import {ExtractProps, createSubcomponent, forwardFitTokens} from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {useOverflowListMeasure, useListRenderItems} from '@workday/canvas-kit-react/collection';
+import {createStencil, cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 import {useActionBarModel} from './useActionBarModel';
-import {createStencil, cssVar} from '@workday/canvas-kit-styling';
 
 export interface ActionBarListProps<T = any>
   extends Omit<ExtractProps<typeof Flex, never>, 'children'> {
@@ -35,16 +35,16 @@ export const actionBarListStencil = createStencil({
   base: {
     display: 'flex',
     boxShadow: system.depth[1],
-    gap: system.space.x4,
+    gap: forwardFitTokens.system.gap.md,
     background: system.color.bg.default,
     borderBlockStart: `solid 1px ${cssVar(system.color.border.divider)}`,
-    padding: `${cssVar(system.space.x4)} ${cssVar(system.space.x10)} `,
+    padding: `${forwardFitTokens.system.padding.md} ${forwardFitTokens.system.padding.xxl} `,
     position: 'fixed',
     insetBlockEnd: 0,
     insetInlineStart: 0,
     insetInlineEnd: 0,
     '@media (max-width: 767.5px)': {
-      padding: system.space.x4,
+      padding: forwardFitTokens.system.padding.md,
       '> *': {
         flex: 1,
       },

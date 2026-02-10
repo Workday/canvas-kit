@@ -1,5 +1,5 @@
-import {createModelHook} from '@workday/canvas-kit-react/common';
 import {useComboboxModel} from '@workday/canvas-kit-react/combobox';
+import {createModelHook} from '@workday/canvas-kit-react/common';
 
 /**
  * `SelectModel` extends the {@link ComboboxModel}. Selecting items from

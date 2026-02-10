@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-
 import {StdioServerTransport} from '@modelcontextprotocol/sdk/server/stdio.js';
+
 import {getServer} from './index.js';
 
 export async function main() {

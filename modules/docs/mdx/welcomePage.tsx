@@ -1,21 +1,22 @@
 // @ts-ignore: Cannot find module error
-import headerImage from './ck-banner.jpg';
+import {ExternalHyperlink, Hyperlink} from '@workday/canvas-kit-react/button';
+import {Card} from '@workday/canvas-kit-react/card';
+import {Graphic} from '@workday/canvas-kit-react/icon';
+import {Box, Flex, Grid} from '@workday/canvas-kit-react/layout';
+import {Heading, Text} from '@workday/canvas-kit-react/text';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+// @ts-ignore: Cannot find module error
+import {version} from '../../../lerna.json';
 // @ts-ignore: Cannot find module error
 import componentsImage from './Components.png';
 // @ts-ignore: Cannot find module error
-import tokensImage from './Tokens.png';
-// @ts-ignore: Cannot find module error
 import stylingImage from './Styling.png';
-import {Flex, Grid, Box} from '@workday/canvas-kit-react/layout';
-import {InstallBlock} from './installBlock';
-import {Text, Heading} from '@workday/canvas-kit-react/text';
-import {Card} from '@workday/canvas-kit-react/card';
-import {ExternalHyperlink, Hyperlink} from '@workday/canvas-kit-react/button';
-import {system} from '@workday/canvas-tokens-web';
-import {createStyles} from '@workday/canvas-kit-styling';
-import {Graphic} from '@workday/canvas-kit-react/icon';
 // @ts-ignore: Cannot find module error
-import {version} from '../../../lerna.json';
+import tokensImage from './Tokens.png';
+import headerImage from './ck-banner.jpg';
+import {InstallBlock} from './installBlock';
 
 const parentFlexStyles = createStyles({
   display: 'flex',

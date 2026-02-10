@@ -1,8 +1,9 @@
 import * as React from 'react';
-import {ColorPicker} from '@workday/canvas-kit-preview-react/color-picker';
 
+import {ColorPicker} from '@workday/canvas-kit-preview-react/color-picker';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 import {colors} from '@workday/canvas-kit-react/tokens';
-import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/testing';
+
 import {InputInteraction as InputInteractionExample} from '../examples/InputInteraction';
 
 export default {

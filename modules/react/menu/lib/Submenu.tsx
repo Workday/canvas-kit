@@ -1,27 +1,26 @@
 import React from 'react';
 
-import {chevronRightSmallIcon} from '@workday/canvas-system-icons-web';
-
+import {useListItemRegister, useListItemRovingFocus} from '@workday/canvas-kit-react/collection';
 import {
+  ExtractProps,
+  PropsWithModel,
   composeHooks,
   createElemPropsHook,
   createSubcomponent,
-  ExtractProps,
-  PropsWithModel,
   subModelHook,
   useForkRef,
 } from '@workday/canvas-kit-react/common';
-
-import {useMenuModel} from './useMenuModel';
-import {defaultMenuPopperOptions, useMenuPopper} from './MenuPopper';
-import {MenuItem, StyledMenuItem, useMenuItemArrowReturn, useMenuItemFocus} from './MenuItem';
-import {MenuCard} from './MenuCard';
-import {MenuList} from './MenuList';
-import {MenuDivider} from './MenuDivider';
-import {MenuOption} from './MenuOption';
-import {MenuGroup} from './MenuGroup';
-import {useListItemRegister, useListItemRovingFocus} from '@workday/canvas-kit-react/collection';
 import {Popper} from '@workday/canvas-kit-react/popup';
+import {chevronRightSmallIcon} from '@workday/canvas-system-icons-web';
+
+import {MenuCard} from './MenuCard';
+import {MenuDivider} from './MenuDivider';
+import {MenuGroup} from './MenuGroup';
+import {MenuItem, StyledMenuItem, useMenuItemArrowReturn, useMenuItemFocus} from './MenuItem';
+import {MenuList} from './MenuList';
+import {MenuOption} from './MenuOption';
+import {defaultMenuPopperOptions, useMenuPopper} from './MenuPopper';
+import {useMenuModel} from './useMenuModel';
 
 type MenuModelConfig = (typeof useMenuModel)['TConfig'];
 

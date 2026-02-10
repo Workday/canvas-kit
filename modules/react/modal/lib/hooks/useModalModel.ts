@@ -1,13 +1,13 @@
-import {
-  usePopupModel,
-  useInitialFocus,
-  useReturnFocus,
-  useCloseOnEscape,
-  useFocusTrap,
-  useAssistiveHideSiblings,
-  useDisableBodyScroll,
-} from '@workday/canvas-kit-react/popup';
 import {createModelHook} from '@workday/canvas-kit-react/common';
+import {
+  useAssistiveHideSiblings,
+  useCloseOnEscape,
+  useDisableBodyScroll,
+  useFocusTrap,
+  useInitialFocus,
+  usePopupModel,
+  useReturnFocus,
+} from '@workday/canvas-kit-react/popup';
 
 import {useCloseOnOverlayClick} from './useCloseOnOverlayClick';
 

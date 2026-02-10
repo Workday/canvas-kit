@@ -1,8 +1,8 @@
 import React from 'react';
 
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
-import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 import {space} from '@workday/canvas-kit-react/tokens';
+import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 import {resetIcon} from '@workday/canvas-system-icons-web';
 
 const CustomContent = ({...elemProps}) => (

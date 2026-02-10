@@ -1,4 +1,4 @@
-import {background, BackgroundStyleProps} from '@workday/canvas-kit-react/layout';
+import {BackgroundStyleProps, background} from '@workday/canvas-kit-react/layout';
 
 describe('Background Style Props Function', () => {
   it('should ignore non-background props', () => {

@@ -1,6 +1,6 @@
 import {buildStylePropFn} from '../buildStyleFns';
 import {BorderColorStyleProps, borderColorFns, borderColorStyleFnConfigs} from './color';
-import {BorderLineStyleProps, borderLineStyleFns, borderLineStyleFnConfigs} from './lineStyle';
+import {BorderLineStyleProps, borderLineStyleFnConfigs, borderLineStyleFns} from './lineStyle';
 import {BorderRadiusStyleProps, borderRadiusFns, borderRadiusStyleFnConfigs} from './radius';
 import {
   BorderShorthandStyleProps,

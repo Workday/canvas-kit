@@ -1,13 +1,15 @@
 import * as React from 'react';
-import {Radio, RadioProps} from './Radio';
-import {borderRadius, space} from '@workday/canvas-kit-react/tokens';
+
 import {
   ErrorType,
   GrowthBehavior,
+  Themeable,
   getErrorColors,
   styled,
-  Themeable,
 } from '@workday/canvas-kit-react/common';
+import {borderRadius, space} from '@workday/canvas-kit-react/tokens';
+
+import {Radio, RadioProps} from './Radio';
 
 /**
  * @deprecated ⚠️ `RadioGroupProps` in Main has been deprecated and will be removed in a future major version. Please use [`Radio` in Preview](https://workday.github.io/canvas-kit/?path=/docs/preview-inputs-radio--docs) instead.
