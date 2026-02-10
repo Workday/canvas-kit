@@ -70,12 +70,13 @@ export const menuItemStencil = createStencil({
     cursor: 'pointer',
     color: system.color.fg.default,
     borderWidth: 0,
-    borderRadius: system.shape.xxl,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    borderRadius: cssVar(system.shape.xxl, system.shape.zero),
     textAlign: 'start',
     transition: 'background-color 80ms, color 80ms',
     backgroundColor: 'inherit',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    minHeight: system.space.x10,
+    minHeight: cssVar(system.size.md, system.space.x10),
     overflowWrap: 'anywhere',
     // We want the icon colors to be the same as the text color
     [systemIconStencil.vars.color]: 'currentColor',
@@ -93,8 +94,10 @@ export const menuItemStencil = createStencil({
 
     // Selected styles
     '&[aria-selected=true]': {
-      color: brand.primary.dark,
-      backgroundColor: brand.primary.lightest,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      color: cssVar(system.color.brand.fg.primary.strong, brand.primary.dark),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      backgroundColor: cssVar(system.color.brand.surface.primary.strong, brand.primary.lightest),
 
       [`& :where(${selectedPart})`]: {
         opacity: system.opacity.full,
@@ -111,28 +114,35 @@ export const menuItemStencil = createStencil({
     // Hover styles
     '&:is(.hover, :hover)': {
       color: system.color.fg.strong,
-      backgroundColor: brand.neutral.lightest,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      backgroundColor: cssVar(system.color.surface.overlay.hover.default, brand.neutral.lightest),
     },
 
     // Focus styles
     '&:is(.focus, :focus-visible)': {
-      color: brand.primary.accent,
-      backgroundColor: brand.primary.base,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      color: cssVar(system.color.fg.inverse, brand.primary.accent),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.base),
       outline: `${px2rem(2)} solid transparent`,
       outlineOffset: `-${px2rem(2)}`,
     },
 
     // Disabled styles
     '&:is(:disabled, [aria-disabled=true])': {
-      color: system.color.fg.disabled,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      // color: system.color.fg.disabled,
       cursor: 'default',
+      opacity: system.opacity.disabled,
 
       '&:where(.hover, :hover, [aria-selected=true])': {
         background: 'none',
       },
       // Focus + Disabled
       '&:where(.focus, :focus-visible)': {
-        backgroundColor: brand.primary.light,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.light),
+        opacity: system.opacity.disabled,
       },
     },
 
