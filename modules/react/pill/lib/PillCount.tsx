@@ -27,7 +27,8 @@ export const pillCountStencil = createStencil({
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
-    height: system.size.xs,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    height: cssVar(system.size.xs, system.space.x6),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     width: cssVar(system.size.xs, system.space.x6),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
