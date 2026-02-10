@@ -131,7 +131,6 @@ export const menuItemStencil = createStencil({
     // Disabled styles
     '&:is(:disabled, [aria-disabled=true])': {
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      // color: system.color.fg.disabled,
       cursor: 'default',
       opacity: system.opacity.disabled,
 

@@ -22,9 +22,9 @@ export const useComboboxCard = createElemPropsHook(useComboboxModel)(model => {
   } as const;
 });
 
-const comboboxCardStencil = createStencil({
+export const comboboxCardStencil = createStencil({
   base: {
-    '& :where([data-part="list-container"])': {
+    '& :where([data-part="list-box-container"])': {
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       borderRadius: cssVar(system.shape.xxl, system.shape.x2),
     },

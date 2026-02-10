@@ -23,9 +23,9 @@ export const modalCardStencil = createStencil({
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       gap: cssVar(system.gap.none, system.space.zero),
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      margin: cssVar(system.padding.md, system.space.x4), // 16px all around margin on smaller screen sizes
+      margin: cssVar(system.gap.md, system.space.x4), // 16px all around margin on smaller screen sizes
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      padding: cssVar(system.padding.md, system.space.x4), // brings total padding between edge and content to 24px
+      padding: cssVar(system.gap.md, system.space.x4), // brings total padding between edge and content to 24px
     },
   },
 });

@@ -86,7 +86,7 @@ export const tooltipContainerStencil = createStencil({
       outlineOffset: `-${px2rem(1)}`,
       zIndex: -1,
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      margin: cssVar(system.padding.xxs, system.space.x1),
+      margin: cssVar(system.gap.xs, system.space.x1),
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       backgroundColor: cssVar(system.color.surface.contrast.default, system.color.bg.translucent),
       position: 'absolute',
@@ -104,7 +104,7 @@ export const tooltipContainerStencil = createStencil({
 
     // Fix offsets based on placement
     '[data-popper-placement="top-start"] &, [data-popper-placement="bottom-start"] &': {
-      //TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       left: calc.negate(cssVar(base.size50, system.space.x1)),
     },
     '[data-popper-placement="top-end"] &, [data-popper-placement="bottom-end"] &': {
@@ -129,11 +129,7 @@ export const tooltipContainerStencil = createStencil({
           calc.divide(cssVar(system.padding.xxs, system.space.x1), 2)
         ),
         '&:before': {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token, margin token is not available in v4
-          margin: calc.add(
-            cssVar(system.padding.xxs, system.space.x1),
-            calc.divide(cssVar(system.padding.xxs, system.space.x1), 2)
-          ),
+          margin: cssVar(base.size75, px2rem(6)),
         },
       },
     },

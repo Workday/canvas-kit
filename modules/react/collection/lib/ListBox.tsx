@@ -54,7 +54,7 @@ export const useListBox = createElemPropsHook(useListModel)(model => {
 
 const listBoxContainerStencil = createStencil({
   parts: {
-    listContainer: 'list-container',
+    listBoxContainer: 'list-box-container',
   },
   base: {
     '& :where([data-part="list"])': {
@@ -123,7 +123,7 @@ export const ListBox = createContainer('ul')({
     return (
       <div
         ref={model.state.containerRef}
-        {...listBoxContainerStencil.parts.listContainer}
+        {...listBoxContainerStencil.parts.listBoxContainer}
         {...handleCsProp(
           {
             style: {

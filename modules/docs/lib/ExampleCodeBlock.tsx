@@ -53,9 +53,6 @@ const cardStencil = createStencil({
       borderRadius: system.shape.zero,
       borderTopLeftRadius: system.shape.x1,
     },
-    code: {
-      whiteSpace: 'normal',
-    },
   },
   modifiers: {
     opened: {
