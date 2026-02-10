@@ -1,5 +1,12 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {CSProps, createStencil, handleCsProp, keyframes, px2rem} from '@workday/canvas-kit-styling';
+import {
+  CSProps,
+  createStencil,
+  cssVar,
+  handleCsProp,
+  keyframes,
+  px2rem,
+} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const grow = keyframes({
@@ -42,25 +49,30 @@ const countBadgeStencil = createStencil({
   base: {
     alignItems: 'center',
     animation: `${grow} 0.2s ease`,
-    borderRadius: system.shape.round,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    borderRadius: cssVar(system.shape.full, system.shape.round),
     display: 'inline-flex',
     fontFamily: system.fontFamily.default,
-    fontSize: system.fontSize.subtext.medium,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    fontSize: cssVar(system.fontSize.subtext.md, system.fontSize.subtext.medium),
     fontWeight: system.fontWeight.bold,
     height: px2rem(20),
     justifyContent: 'center',
     lineHeight: px2rem(20),
     minWidth: px2rem(20),
     padding: `0 ${px2rem(6.5)}`,
-    background: system.color.fg.critical.default,
-    color: system.color.text.inverse,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    background: cssVar(system.color.accent.danger, system.color.fg.critical.default),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    color: cssVar(system.color.fg.inverse, system.color.text.inverse),
   },
   modifiers: {
     variant: {
       // .cnvs-count-badge--variant-inverse
       inverse: {
         background: system.color.bg.default,
-        color: system.color.text.primary.default,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        color: cssVar(system.color.fg.info.strong, system.color.text.primary.default),
       },
     },
     emphasis: {
