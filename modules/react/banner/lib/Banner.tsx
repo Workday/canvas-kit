@@ -58,9 +58,15 @@ export const bannerStencil = createStencil({
           ),
         },
         '& [data-part="exclamation-circle-icon"]': {
-          [systemIconStencil.vars.accentColor]: 'currentColor',
-          [systemIconStencil.vars.color]: 'currentColor',
-          [systemIconStencil.vars.backgroundColor]: 'none',
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          [systemIconStencil.vars.accentColor]: cssVar(
+            system.color.brand.accent.critical,
+            'currentColor'
+          ),
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          [systemIconStencil.vars.color]: cssVar(system.color.fg.inverse, 'currentColor'),
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          [systemIconStencil.vars.backgroundColor]: cssVar(system.color.fg.inverse, 'none'),
         },
       },
       false: {
@@ -77,9 +83,18 @@ export const bannerStencil = createStencil({
           ),
         },
         '& [data-part="exclamation-triangle-icon"]': {
-          [systemIconStencil.vars.accentColor]: 'currentColor',
-          [systemIconStencil.vars.color]: 'currentColor',
-          [systemIconStencil.vars.backgroundColor]: 'none',
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          [systemIconStencil.vars.accentColor]: cssVar(system.color.fg.inverse, 'currentColor'),
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          [systemIconStencil.vars.color]: cssVar(
+            system.color.brand.fg.caution.strong,
+            'currentColor'
+          ),
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          [systemIconStencil.vars.backgroundColor]: cssVar(
+            system.color.brand.fg.caution.strong,
+            'none'
+          ),
         },
       },
     },
