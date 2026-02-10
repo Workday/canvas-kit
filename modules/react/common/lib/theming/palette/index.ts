@@ -42,5 +42,10 @@ export {
 // Re-export gamut utilities for advanced use cases
 export {computeMaxChroma, computeMaxChromaForGamuts, isInGamut, mapToGamut} from './gamut';
 
+// Re-export alpha/transparency utilities
+export {minAlpha, alpha, composite, formatRGBA, rgbToHex, alphaColor} from './alpha';
+
+export type {AlphaColorResult} from './alpha';
+
 // Re-export Color class for advanced use cases
 export {default as Color} from 'colorjs.io';
