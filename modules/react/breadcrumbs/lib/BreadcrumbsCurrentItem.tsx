@@ -11,12 +11,13 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {Text, TextProps} from '@workday/canvas-kit-react/text';
 import {OverflowTooltip, OverflowTooltipProps} from '@workday/canvas-kit-react/tooltip';
-import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 
 export interface BreadcrumbsCurrentItemProps extends TextProps {
+  maxWidth?: string | number;
   tooltipProps?: OverflowTooltipProps;
 }
 
@@ -25,9 +26,18 @@ export const breadcrumbsCurrentItemStencil = createStencil({
     maxWidth: '',
   },
   base: ({maxWidth}) => ({
-    ...system.type.subtext.large,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    fontFamily: system.fontFamily.default,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    fontSize: cssVar(system.fontSize.subtext.lg, system.fontSize.subtext.large),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     fontWeight: system.fontWeight.medium,
-    color: system.color.text.default,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    letterSpacing: cssVar(system.letterSpacing.subtext.lg, base.letterSpacing150),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    lineHeight: cssVar(system.lineHeight.subtext.lg, system.lineHeight.subtext.large),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    color: cssVar(system.color.fg.default, system.color.text.default),
     display: 'inline-block',
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
@@ -37,7 +47,7 @@ export const breadcrumbsCurrentItemStencil = createStencil({
 });
 
 export const useBreadcrumbsItem = composeHooks(
-  createElemPropsHook(useBreadcrumbsModel)((_model: any, ref: any, elemProps) => {
+  createElemPropsHook(useBreadcrumbsModel)((_model: any, ref: any) => {
     const {localRef} = useLocalRef(useForkRef(ref));
     let shouldShowTooltip = false;
     const refCurrent = localRef.current;

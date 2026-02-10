@@ -3,7 +3,7 @@ import * as React from 'react';
 import {useListRenderItems, useOverflowListMeasure} from '@workday/canvas-kit-react/collection';
 import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
@@ -29,7 +29,7 @@ export const breadcrumbsListStencil = createStencil({
     margin: 0,
     display: 'inline-flex',
     alignItems: 'center',
-    minHeight: system.space.x10,
+    minHeight: cssVar(system.size.lg, system.space.x10),
     listStyle: 'none',
     width: '100%',
   },

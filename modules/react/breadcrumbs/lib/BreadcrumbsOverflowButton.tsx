@@ -9,7 +9,7 @@ import {
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {FlexProps} from '@workday/canvas-kit-react/layout';
 import {useMenuTarget} from '@workday/canvas-kit-react/menu';
-import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {chevronRightSmallIcon, relatedActionsIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -33,11 +33,14 @@ export const breadcrumbsOverflowButtonStencil = createStencil({
   base: ({chevronRightIconPart}) => ({
     alignItems: 'center',
     display: 'flex',
-    [systemIconStencil.vars.color]: system.color.icon.default,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    [systemIconStencil.vars.color]: cssVar(system.color.fg.default, system.color.icon.default),
     [systemIconStencil.vars.size]: px2rem(20),
     [chevronRightIconPart]: {
-      height: system.space.x8,
-      width: system.space.x8,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      height: cssVar(system.size.md, system.space.x8),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      width: cssVar(system.size.md, system.space.x8),
       justifyContent: 'center',
       alignItems: 'center',
       display: 'inline-flex',
