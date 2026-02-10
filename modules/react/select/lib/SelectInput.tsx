@@ -3,7 +3,7 @@ import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
 import {CSProps, createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 
 import {useSelectInput} from './hooks/useSelectInput';
@@ -40,10 +40,10 @@ export const selectInputStencil = createStencil({
     [hiddenInputPart]: {
       position: 'absolute',
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      top: cssVar(system.padding.none, system.space.zero),
-      bottom: cssVar(system.padding.none, system.space.zero),
-      left: cssVar(system.padding.none, system.space.zero),
-      right: cssVar(system.padding.none, system.space.zero),
+      top: cssVar(base.size0, system.space.zero),
+      bottom: cssVar(base.size0, system.space.zero),
+      left: cssVar(base.size0, system.space.zero),
+      right: cssVar(base.size0, system.space.zero),
       opacity: system.opacity.zero,
       cursor: 'default',
       pointerEvents: 'none',
@@ -73,10 +73,7 @@ export const selectInputStencil = createStencil({
     '&:has(:disabled, .disabled)': {
       [caretPart]: {
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        [systemIconStencil.vars.color]: cssVar(
-          system.color.fg.disabled,
-          system.color.text.disabled
-        ),
+        [systemIconStencil.vars.color]: system.color.fg.disabled,
       },
     },
   }),

@@ -71,7 +71,9 @@ export const textInputStencil = createStencil({
         width: '100%',
         resize: 'vertical',
       },
-      false: {},
+      false: {
+        width: 'initial',
+      },
     },
 
     error: {

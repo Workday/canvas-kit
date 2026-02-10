@@ -2,18 +2,14 @@ import {createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export const formFieldStencil = createStencil({
-  vars: {
-    width: '',
-  },
-  base: ({width}) => ({
+  base: {
     display: 'flex',
     border: 'none',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     padding: cssVar(system.padding.none, system.space.zero),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     margin: `${cssVar(system.padding.none, system.space.zero)} ${cssVar(system.padding.none, system.space.zero)} ${cssVar(system.padding.xl, system.space.x6)}`,
-    width: cssVar(width, '280px'),
-  }),
+  },
   modifiers: {
     grow: {
       true: {

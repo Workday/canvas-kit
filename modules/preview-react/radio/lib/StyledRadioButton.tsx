@@ -147,18 +147,10 @@ const radioInputStencil = createStencil({
           },
         },
         [`&:hover + ${checkPart}, &.hover + ${checkPart}`]: {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          borderColor: cssVar(
-            system.color.border.inverse.default,
-            system.color.border.inverse.default
-          ),
+          borderColor: system.color.border.inverse.default,
         },
         [`&:focus-visible + ${checkPart}, &.focus + ${checkPart}`]: {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          borderColor: cssVar(
-            system.color.border.inverse.default,
-            system.color.border.inverse.default
-          ),
+          borderColor: system.color.border.inverse.default,
         },
         // This creates the inner circle when the Radio is checked.
         // The backgroundColor represents the dot in the middle of the radio.

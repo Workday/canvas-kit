@@ -19,7 +19,7 @@ import {
   px2rem,
 } from '@workday/canvas-kit-styling';
 import {caretDownSmallIcon, searchIcon} from '@workday/canvas-system-icons-web';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 
 import {MultiSelectedItemProps} from './MultiSelectedItem';
 import {MultiSelectedList} from './MultiSelectedList';
@@ -28,7 +28,7 @@ import {useMultiSelectModel} from './useMultiSelectModel';
 export const multiSelectInputStencil = createStencil({
   base: {
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    border: `1px solid ${cssVar(system.color.border.input.default, system.color.border.input.default)}`,
+    border: `1px solid ${system.color.border.input.default}`,
     display: 'flex',
     flexDirection: 'column',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
@@ -39,7 +39,6 @@ export const multiSelectInputStencil = createStencil({
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     minHeight: cssVar(system.size.md, system.space.x10),
     transition: '0.2s box-shadow, 0.2s border-color',
-    width: px2rem(280),
     margin: 0, // Fix Safari
     [textInputStencil.vars.width]: '100%',
 
@@ -50,7 +49,7 @@ export const multiSelectInputStencil = createStencil({
 
     '&:has(:focus-visible:not([disabled])), &.focus': {
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      borderColor: cssVar(system.color.brand.focus.primary, system.color.border.primary.default),
+      borderColor: cssVar(system.color.brand.border.primary, system.color.border.primary.default),
       boxShadow: `inset 0 0 0 1px ${cssVar(system.color.brand.focus.primary, system.color.border.primary.default)}`,
     },
 
@@ -102,10 +101,14 @@ export const multiSelectInputStencil = createStencil({
 
     '& :where([data-part="form-input"])': {
       position: 'absolute',
-      top: system.space.zero,
-      bottom: system.space.zero,
-      left: system.space.zero,
-      right: system.space.zero,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      top: cssVar(base.size0, system.space.zero),
+      bottom: cssVar(base.size0, system.space.zero),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      left: cssVar(base.size0, system.space.zero),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      right: cssVar(base.size0, system.space.zero),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       opacity: system.opacity.zero,
       cursor: 'default',
       pointerEvents: 'none',
@@ -116,7 +119,7 @@ export const multiSelectInputStencil = createStencil({
       backgroundColor: cssVar(system.color.border.default, system.color.border.divider),
       height: 1,
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      margin: `${system.space.zero} ${cssVar(system.padding.xs, system.space.x2)}`,
+      margin: `${cssVar(system.padding.none, system.space.zero)} ${cssVar(system.padding.xs, system.space.x2)}`,
     },
 
     '& :where([data-part="list"])': {
