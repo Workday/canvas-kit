@@ -1,15 +1,17 @@
 import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
 import {Text} from '@workday/canvas-kit-react/text';
-import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const informationHighlightBodyStencil = createStencil({
   base: () => {
     return {
       ...system.type.subtext.large,
-      color: system.color.text.strong,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      color: cssVar(system.color.fg.default, system.color.text.strong),
       gridColumn: '2',
-      marginBlockEnd: system.space.x2,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      marginBlockEnd: cssVar(system.padding.xs, system.space.x2),
     };
   },
 });

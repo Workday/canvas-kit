@@ -93,7 +93,7 @@ const statusIndicatorStencil = createStencil({
         backgroundColor: system.color.fg.positive.softer,
       },
       caution: {
-        color: system.color.fg.caution.strong,
+        color: system.color.fg.caution.soft,
         backgroundColor: system.color.bg.caution.softer,
       },
       critical: {

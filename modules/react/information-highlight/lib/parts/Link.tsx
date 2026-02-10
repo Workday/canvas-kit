@@ -1,6 +1,6 @@
 import {Hyperlink} from '@workday/canvas-kit-react/button';
 import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const informationHighlightLinkStencil = createStencil({
@@ -9,7 +9,8 @@ const informationHighlightLinkStencil = createStencil({
       ...system.type.subtext.large,
       gridColumn: '2',
       justifySelf: 'start',
-      color: system.color.text.strong,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      color: cssVar(system.color.fg.default, system.color.text.strong),
       fontWeight: system.fontWeight.bold,
     };
   },
