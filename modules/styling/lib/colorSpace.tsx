@@ -37,9 +37,11 @@ export function maybeWrapValue(input: string, fallback: string): string {
  * @param color
  * The value being darkened.
  *
+ * @param fallback
+ * This is the color that will be used if `color` is not defined.
+ *
  * @param mixinColor
  * The mixinColor is the color that will be mixed in with `color`.
- *
  *
  * @param mixinValue
  * The mixinValue is the percent of the `mixinColor` that will be mixed in with `color`.
