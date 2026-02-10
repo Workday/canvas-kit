@@ -56,10 +56,14 @@ export const baseAvatarStencil = createStencil({
   base: ({backgroundColor, color, size}) => ({
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     borderRadius: cssVar(system.shape.full, system.shape.round),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     // TODO: These are the fallbacks if "size" is not defined
     width: cssVar(size, calc.add(system.space.x10, system.space.x2)),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     height: cssVar(size, calc.add(system.space.x10, system.space.x2)),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     minWidth: cssVar(size, calc.add(system.space.x10, system.space.x2)),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     minHeight: cssVar(size, calc.add(system.space.x10, system.space.x2)),
     backgroundColor: cssVar(backgroundColor, base.blue300),
     color: cssVar(color, base.blue800),
