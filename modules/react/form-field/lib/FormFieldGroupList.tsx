@@ -8,7 +8,7 @@ import {
   handleCsProp,
   px2rem,
 } from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 
 import {useFormFieldModel} from './hooks';
 
@@ -22,8 +22,8 @@ const formFieldGroupListStencil = createStencil({
     borderRadius: cssVar(system.shape.md, system.shape.x1Half),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     gap: cssVar(system.gap.sm, system.space.x2),
-    padding: `${px2rem(10)} ${system.space.x3} ${system.space.x2}`,
-    margin: `0 ${calc.negate(system.space.x3)}`,
+    padding: `${px2rem(10)} ${cssVar(base.size150, system.space.x3)} ${cssVar(system.padding.xs, system.space.x2)}`,
+    margin: `0 ${calc.negate(cssVar(base.size150, system.space.x3))}`,
     transition: '100ms box-shadow',
     width: 'fit-content',
   },

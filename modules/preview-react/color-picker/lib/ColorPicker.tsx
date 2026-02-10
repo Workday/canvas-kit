@@ -139,13 +139,12 @@ export const colorPickerStencil = createStencil({
       flexDirection: 'row',
       justifyContent: 'space-between',
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      marginBlockStart: cssVar(system.padding.md, system.space.x4),
+      marginBlockStart: cssVar(system.gap.md, system.space.x4),
     },
     [inputWrapperPart]: {
       display: 'flex',
       flexDirection: 'column',
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      margin: cssVar(system.padding.none, system.space.zero),
+      margin: 0,
     },
     [buttonPart]: {
       alignSelf: 'flex-end',

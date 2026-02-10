@@ -39,7 +39,7 @@ const radioInputStencil = createStencil({
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     borderRadius: cssVar(system.shape.full, system.shape.round),
     position: 'absolute',
-    margin: system.space.zero,
+    margin: 0,
     '&:focus-visible, &.focus, &:active': {
       outline: 'transparent',
     },

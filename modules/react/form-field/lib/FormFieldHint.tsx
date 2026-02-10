@@ -9,8 +9,7 @@ import {useFormFieldHint, useFormFieldModel} from './hooks';
 export const formFieldHintStencil = createStencil({
   extends: textStencil,
   base: {
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    margin: cssVar(system.padding.none, system.space.zero),
+    margin: 0,
   },
   modifiers: {
     error: {

@@ -27,8 +27,7 @@ export const formFieldLabelStencil = createStencil({
     fontWeight: system.fontWeight.medium,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     color: cssVar(system.color.fg.default, system.color.text.default),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    paddingInlineStart: cssVar(system.padding.none, system.space.zero),
+    paddingInlineStart: 0,
     display: 'flex',
     alignItems: 'center',
     minWidth: px2rem(180),
@@ -43,7 +42,8 @@ export const formFieldLabelStencil = createStencil({
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
           color: cssVar(system.color.brand.fg.critical.default, brand.error.base),
           textDecoration: 'unset',
-          marginInlineStart: system.space.x1,
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          marginInlineStart: cssVar(system.gap.xs, system.space.x1),
         },
       },
     },

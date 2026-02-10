@@ -119,7 +119,7 @@ export const multiSelectInputStencil = createStencil({
       backgroundColor: cssVar(system.color.border.default, system.color.border.divider),
       height: 1,
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      margin: `${cssVar(system.padding.none, system.space.zero)} ${cssVar(system.padding.xs, system.space.x2)}`,
+      margin: `0 ${cssVar(system.gap.sm, system.space.x2)}`,
     },
 
     '& :where([data-part="list"])': {

@@ -40,7 +40,7 @@ export const formFieldGroupLabelStencil = createStencil({
           color: cssVar(system.color.brand.fg.critical.default, brand.error.base),
           textDecoration: 'unset',
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          marginInlineStart: cssVar(system.padding.xxs, system.space.x1),
+          marginInlineStart: cssVar(system.gap.xs, system.space.x1),
         },
       },
     },

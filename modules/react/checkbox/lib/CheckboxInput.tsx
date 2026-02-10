@@ -65,8 +65,7 @@ const checkboxInputStencil = createStencil({
     width: cssVar(base.size300, system.space.x6),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     height: cssVar(base.size300, system.space.x6),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    margin: cssVar(system.padding.none, system.space.zero),
+    margin: 0,
     marginTop: calc.negate(px2rem(3)),
     marginInlineStart: calc.negate(px2rem(3)),
     position: 'absolute',

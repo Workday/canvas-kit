@@ -130,7 +130,7 @@ const switchBackgroundStencil = createStencil({
     alignItems: 'center',
     pointerEvents: 'none',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    marginTop: cssVar(system.padding.xxs, system.space.x1),
+    marginTop: cssVar(system.gap.xs, system.space.x1),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     width: cssVar(system.size.sm, system.space.x8),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
