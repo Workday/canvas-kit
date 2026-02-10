@@ -112,7 +112,6 @@ export const pillStencil = createStencil({
 
       ...focusRing({
         width: 0,
-        inset: 'inner',
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         innerColor: cssVar(system.color.brand.border.primary, system.color.border.primary.default),
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
