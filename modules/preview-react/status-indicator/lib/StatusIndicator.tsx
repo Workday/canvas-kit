@@ -3,7 +3,7 @@ import React from 'react';
 import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {ExtractStencilProps, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {ExtractStencilProps, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {StatusIndicatorIcon} from './StatusIndicatorIcon';
@@ -61,12 +61,15 @@ const deprecatedVariantsMap = {
 const statusIndicatorStencil = createStencil({
   base: {
     display: 'inline-flex',
-    gap: system.space.x1,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    gap: cssVar(system.gap.xs, system.space.x1),
     maxWidth: px2rem(200),
     alignItems: 'center',
-    borderRadius: system.shape.round,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    borderRadius: cssVar(system.shape.full, system.shape.round),
     height: px2rem(20),
-    padding: `${system.space.zero} ${system.space.x2}`,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    padding: `0 ${cssVar(system.padding.xs, system.space.x2)}`,
     outline: `${px2rem(1)} solid transparent`,
     [systemIconStencil.vars.color]: 'currentColor',
   },
@@ -86,31 +89,50 @@ const statusIndicatorStencil = createStencil({
     variant: {
       info: {
         color: system.color.fg.info.strong,
-        backgroundColor: system.color.bg.info.softer,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        backgroundColor: cssVar(system.color.surface.info.strong, system.color.bg.info.softer),
       },
       positive: {
-        color: system.color.fg.positive.strong,
-        backgroundColor: system.color.fg.positive.softer,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        color: cssVar(system.color.fg.success.strong, system.color.fg.positive.strong),
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        backgroundColor: cssVar(
+          system.color.surface.success.strong,
+          system.color.fg.positive.softer
+        ),
       },
       caution: {
-        color: system.color.fg.caution.soft,
-        backgroundColor: system.color.bg.caution.softer,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        color: cssVar(system.color.fg.warning.strong, system.color.fg.caution.soft),
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        backgroundColor: cssVar(
+          system.color.surface.warning.strong,
+          system.color.bg.caution.softer
+        ),
       },
       critical: {
-        color: system.color.fg.critical.strong,
-        backgroundColor: system.color.bg.critical.softer,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        color: cssVar(system.color.fg.danger.strong, system.color.fg.critical.strong),
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        backgroundColor: cssVar(
+          system.color.surface.danger.strong,
+          system.color.bg.critical.softer
+        ),
       },
       neutral: {
         color: system.color.fg.muted.strong,
-        backgroundColor: system.color.bg.alt.default,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        backgroundColor: cssVar(system.color.surface.alt.strong, system.color.bg.alt.default),
       },
       ai: {
         color: system.color.fg.ai,
-        backgroundColor: system.color.bg.ai.default,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        backgroundColor: cssVar(system.color.surface.ai.default, system.color.bg.ai.default),
       },
       transparent: {
         color: system.color.fg.inverse,
-        backgroundColor: system.color.bg.translucent,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        backgroundColor: cssVar(system.color.surface.contrast.default, system.color.bg.translucent),
       },
     },
     /**
@@ -135,7 +157,8 @@ const statusIndicatorStencil = createStencil({
         emphasis: 'high',
       },
       styles: {
-        backgroundColor: system.color.bg.info.default,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        backgroundColor: cssVar(system.color.accent.info, system.color.bg.info.default),
         color: system.color.fg.inverse,
       },
     },
@@ -145,7 +168,8 @@ const statusIndicatorStencil = createStencil({
         emphasis: 'high',
       },
       styles: {
-        backgroundColor: system.color.bg.positive.default,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        backgroundColor: cssVar(system.color.accent.success, system.color.bg.positive.default),
         color: system.color.fg.inverse,
       },
     },
@@ -155,8 +179,10 @@ const statusIndicatorStencil = createStencil({
         emphasis: 'high',
       },
       styles: {
-        backgroundColor: system.color.bg.caution.default,
-        color: system.color.fg.caution.strong,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        backgroundColor: cssVar(system.color.accent.warning, system.color.bg.caution.default),
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        color: cssVar(system.color.fg.contrast.default, system.color.fg.caution.strong),
       },
     },
     {
@@ -165,7 +191,8 @@ const statusIndicatorStencil = createStencil({
         emphasis: 'high',
       },
       styles: {
-        backgroundColor: system.color.bg.critical.default,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        backgroundColor: cssVar(system.color.accent.danger, system.color.bg.critical.default),
         color: system.color.fg.inverse,
       },
     },
@@ -175,7 +202,8 @@ const statusIndicatorStencil = createStencil({
         emphasis: 'high',
       },
       styles: {
-        backgroundColor: system.color.bg.muted.default,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        backgroundColor: cssVar(system.color.accent.muted.default, system.color.bg.muted.default),
         color: system.color.fg.inverse,
       },
     },
