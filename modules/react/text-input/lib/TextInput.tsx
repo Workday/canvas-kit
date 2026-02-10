@@ -58,7 +58,6 @@ export const textInputStencil = createStencil({
       outline: `${px2rem(2)} solid transparent`,
     },
     '&:is(:disabled, .disabled)': {
-      // TODO: Revisit this, we use different styles
       opacity: system.opacity.disabled,
       '&::placeholder': {
         opacity: system.opacity.disabled,
