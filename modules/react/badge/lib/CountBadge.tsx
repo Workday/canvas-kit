@@ -78,8 +78,10 @@ const countBadgeStencil = createStencil({
     emphasis: {
       high: {},
       low: {
-        background: system.color.bg.info.softer,
-        color: system.color.fg.info.stronger,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        background: cssVar(system.color.surface.info.strong, system.color.bg.info.softer),
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        color: cssVar(system.color.fg.info.strong, system.color.fg.info.stronger),
       },
     },
   },
@@ -87,7 +89,11 @@ const countBadgeStencil = createStencil({
     {
       modifiers: {variant: 'inverse', emphasis: 'low'},
       styles: {
-        background: system.color.bg.transparent.strong,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        background: cssVar(
+          system.color.surface.overlay.hover.inverse,
+          system.color.bg.transparent.strong
+        ),
         color: system.color.fg.inverse,
       },
     },
