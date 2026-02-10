@@ -11,7 +11,7 @@ const informationHighlightBodyStencil = createStencil({
       color: cssVar(system.color.fg.default, system.color.text.strong),
       gridColumn: '2',
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      marginBlockEnd: cssVar(system.padding.xs, system.space.x2),
+      marginBlockEnd: cssVar(system.gap.sm, system.space.x2),
     };
   },
 });

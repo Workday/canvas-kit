@@ -35,9 +35,9 @@ export const pillCountStencil = createStencil({
     padding: `${cssVar(system.padding.none, system.space.zero)} ${cssVar(system.padding.xxs, system.space.x1)}`,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     // Using the `padding` token here as we don't have a `margin` token
-    marginInlineEnd: calc.negate(cssVar(system.padding.xs, system.space.x3)),
+    marginInlineEnd: calc.negate(cssVar(system.gap.sm, system.space.x3)),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    marginInlineStart: cssVar(system.padding.xxs, system.space.x1),
+    marginInlineStart: cssVar(system.gap.xs, system.space.x1),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     backgroundColor: cssVar(backgroundColor, system.color.bg.alt.stronger),
     flex: '0 0 auto',

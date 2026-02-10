@@ -31,6 +31,7 @@ export const skeletonTextStencil = createStencil({
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       height: cssVar(system.size.xxxs, px2rem(21)),
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      // We do not have a `gap` token for 0.75renm so `padding` is being used here
       marginBlockEnd: cssVar(system.padding.sm, system.space.x3),
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       borderRadius: cssVar(system.shape.md, system.shape.half),
