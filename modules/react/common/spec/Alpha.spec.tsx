@@ -228,6 +228,16 @@ describe('alpha utilities', () => {
         expect(composited[1]).toBeCloseTo(target[1], 1);
         expect(composited[2]).toBeCloseTo(target[2], 1);
       });
+
+      it('should return original at 100% alpha when targetAlpha cannot achieve target', () => {
+        const white: RGB = [1, 1, 1];
+        const gray: RGB = [0.5, 0.5, 0.5];
+        const result = alphaColor(white, gray, 0.5); // White on gray at 50% is impossible
+        expect(result.alpha).toBe(1);
+        expect(result.color[0]).toBeCloseTo(1, 5);
+        expect(result.color[1]).toBeCloseTo(1, 5);
+        expect(result.color[2]).toBeCloseTo(1, 5);
+      });
     });
 
     describe('with hex strings', () => {

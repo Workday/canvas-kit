@@ -7,7 +7,7 @@ import type {RGB} from './types';
 import {hexToRgb, clamp} from './conversion';
 
 /**
- * Result of transparent color calculation
+ * Result of alpha color calculation
  */
 export interface AlphaColorResult {
   /** RGB channels (values 0-1) */
@@ -21,7 +21,7 @@ export interface AlphaColorResult {
 }
 
 /**
- * Checks if color is a valid RGB tuple
+ * Checks if color is valid RGB
  */
 const isRGB = (color: RGB, param: string): void => {
   if (!Array.isArray(color) || color.length !== 3) {
@@ -43,7 +43,7 @@ const parseColor = (input: RGB | string): RGB =>
   typeof input === 'string' ? hexToRgb(input) : input;
 
 /**
- * Minimum transparency needed to represent the solid color with the specified background.
+ * Min alpha needed to represent the solid color using the background.
  * @param color - Target RGB (0-1)
  * @param bgColor - Background RGB (0-1)
  * @returns Alpha 0.01-0.99
@@ -57,7 +57,7 @@ export const minAlpha = (color: RGB, bgColor: RGB): number => {
   for (let i = 0; i < 3; i++) {
     const out = color[i];
     const bg = bgColor[i];
-    // When the channel values are very close, we can assume they are the same.
+    // < 0.0001 is the same
     if (Math.abs(out - bg) < 0.0001) {
       continue;
     }
@@ -115,9 +115,9 @@ export const composite = (color: RGB, bgColor: RGB, a: number): RGB => {
 };
 
 /**
- * Formats RGB tuple to CSS rgb() or rgba() string
+ * Formats RGB to CSS rgb() or rgba() string
  *
- * @param color - RGB tuple (values 0-1)
+ * @param color - RGB (0-1)
  * @param alpha - If omitted, rgb(); if provided, rgba()
  * @returns CSS color string
  */
@@ -132,7 +132,7 @@ export const formatRGBA = (color: RGB, alpha?: number): string => {
 };
 
 /**
- * Converts RGB tuple to hex string
+ * Converts RGB to hex string
  *
  * @param color - RGB tuple (values 0-1)
  * @param alpha - If omitted, #RRGGBB; if provided, #RRGGBBAA
@@ -156,7 +156,7 @@ export const rgbToHex = (color: RGB, alpha?: number): string => {
  *
  * @param color - Target color as RGB tuple (values 0-1)
  * @param bg - Background as RGB tuple (default: white [1,1,1])
- * @param targetAlpha - Alpha (0-1). Omit to use minimum required.
+ * @param targetAlpha - Alpha (0-1). Omit to use minimum required. If too low to achieve target, returns original at 100%.
  * @returns {AlphaColorResult}
  * @throws {TypeError} Invalid color/bg or targetAlpha
  * @throws {RangeError} NaN or Infinity in color values
@@ -189,6 +189,23 @@ export function alphaColor(
 
   const a = targetAlpha !== undefined ? clamp(targetAlpha, 0, 1) : minAlpha(color, bgColor);
   const transparent = alpha(color, bgColor, a);
+  const composited = composite(transparent, bgColor, a);
+
+  // Target not achievable at this alpha (values were clamped) — use solid color
+  const eps = 1 / 255;
+  const matches =
+    Math.abs(composited[0] - color[0]) < eps &&
+    Math.abs(composited[1] - color[1]) < eps &&
+    Math.abs(composited[2] - color[2]) < eps;
+
+  if (!matches) {
+    return {
+      color,
+      alpha: 1,
+      rgba: formatRGBA(color, 1),
+      hex: rgbToHex(color, 1),
+    };
+  }
 
   return {
     color: transparent,
