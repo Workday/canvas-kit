@@ -3,6 +3,7 @@ import React from 'react';
 import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
 import {StaticStates} from '@workday/canvas-kit-react/testing';
 import {saveAsIcon} from '@workday/canvas-system-icons-web';
+import {base} from '@workday/canvas-tokens-web';
 
 import {customColorTheme} from '../../../../utils/storybook';
 
@@ -87,6 +88,30 @@ export const MenuItemStates = {
           <div>
             <h3>RTL</h3>
             <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
+              <AllStatesMenuItem />
+            </CanvasProvider>
+          </div>
+        </Flex>
+      </StaticStates>
+    );
+  },
+};
+
+export const MenuItemStatesCustomTheme = {
+  render: () => {
+    return (
+      <StaticStates>
+        <Flex gap="xs">
+          <div>
+            <h3>Custom Themed</h3>
+            <CanvasProvider
+              theme={{
+                canvas: {
+                  palette: {primary: {main: base.blackberry600}},
+                  common: {focusOutline: base.blackPepper600},
+                },
+              }}
+            >
               <AllStatesMenuItem />
             </CanvasProvider>
           </div>

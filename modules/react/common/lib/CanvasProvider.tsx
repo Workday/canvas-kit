@@ -67,14 +67,11 @@ export const useCanvasThemeToCssVars = (
   const {palette} = filledTheme.canvas;
   (['common', 'primary', 'error', 'alert', 'success', 'neutral'] as const).forEach(color => {
     if (color === 'common') {
-      // @ts-ignore
-      style[brand.common.focusOutline] = maybeWrapCSSVariables(palette.common.focusOutline);
-      //@ts-ignore
-      style[brand.common.alertInner] = maybeWrapCSSVariables(palette.common.alertInner);
-      //@ts-ignore
-      style[brand.common.alertOuter] = maybeWrapCSSVariables(palette.common.alertOuter);
-      //@ts-ignore
-      style[brand.common.errorInner] = maybeWrapCSSVariables(palette.common.errorInner);
+      // Only focusOutline exists on CanvasThemeCommonPalette
+      if (palette.common.focusOutline !== defaultCanvasTheme.palette.common.focusOutline) {
+        // @ts-ignore
+        style[brand.common.focusOutline] = maybeWrapCSSVariables(palette.common.focusOutline);
+      }
     }
     (['lightest', 'light', 'main', 'dark', 'darkest', 'contrast'] as const).forEach(key => {
       // We only want to set custom colors if they do not match the default. The `defaultBranding` class will take care of the rest.
