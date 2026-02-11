@@ -1,13 +1,15 @@
 import * as React from 'react';
-import {composeHooks, createSubcomponent, useIsRTL} from '@workday/canvas-kit-react/common';
+import {composeHooks, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {
   useListItemRegister,
   useOverflowListItemMeasure,
 } from '@workday/canvas-kit-react/collection';
-import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
+
 import {chevronRightSmallIcon} from '@workday/canvas-system-icons-web';
-import {colors, space} from '@workday/canvas-kit-react/tokens';
+import {system} from '@workday/canvas-tokens-web';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 import {BreadcrumbsLink} from './BreadcrumbsLink';
 
@@ -28,6 +30,29 @@ export interface BreadcrumbsItemProps extends FlexProps {
   'data-id'?: string;
 }
 
+export const breadcrumbsItemStencil = createStencil({
+  parts: {
+    chevronRightIcon: 'breadcrumbs-item-chevron-right-icon',
+  },
+  base: ({chevronRightIconPart}) => ({
+    alignItems: 'center',
+    display: 'inline-flex',
+    whiteSpace: 'nowrap',
+    [systemIconStencil.vars.size]: px2rem(20),
+    [systemIconStencil.vars.color]: system.color.icon.default,
+    [chevronRightIconPart]: {
+      height: system.space.x8,
+      width: system.space.x8,
+      justifyContent: 'center',
+      alignItems: 'center',
+      display: 'inline-flex',
+      ':dir(rtl)': {
+        transform: 'scaleX(-1)',
+      },
+    },
+  }),
+});
+
 export const useBreadcrumbsItem = composeHooks(useOverflowListItemMeasure, useListItemRegister);
 
 export const BreadcrumbsItem = createSubcomponent('li')({
@@ -39,19 +64,13 @@ export const BreadcrumbsItem = createSubcomponent('li')({
   },
 })<BreadcrumbsItemProps>(({children, ...elemProps}, Element) => {
   return (
-    <Flex as={Element} alignItems="center" whiteSpace="nowrap" {...elemProps}>
+    <Element {...mergeStyles(elemProps, breadcrumbsItemStencil())}>
       {children}
       <SystemIcon
         icon={chevronRightSmallIcon}
-        color={colors.licorice200}
-        colorHover={colors.licorice200}
-        size={20}
-        height={space.l}
-        width={space.l}
-        shouldMirror={useIsRTL()}
-        cs={{justifyContent: 'center', alignItems: 'center', display: 'inline-flex'}}
+        {...breadcrumbsItemStencil.parts.chevronRightIcon}
         aria-hidden
       />
-    </Flex>
+    </Element>
   );
 });

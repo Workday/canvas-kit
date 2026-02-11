@@ -16,7 +16,7 @@ export function getColor(value?: CanvasColor | string) {
 // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
 export const expandHex = (hex: string) => {
   const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-  return hex.replace(shorthandRegex, function(m: string, r: string, g: string, b: string) {
+  return hex.replace(shorthandRegex, function (m: string, r: string, g: string, b: string) {
     return r + r + g + g + b + b;
   });
 };
@@ -37,6 +37,7 @@ const colorPriority = [
  * have a high enough contrast ratio, picks the first color of the following that meets 4.5:1 or higher:
  * [frenchVanilla100, blackPepper300, blackPepper400, blackPepper500, blackPepper600]
  * (https://www.w3.org/TR/WCAG20-TECHS/G18.html)
+ * @deprecated ⚠️ `pickForegroundColor` is deprecated. In previous versions of Canvas Kit, we allowed teams to pass a theme object, this supported [Emotion's theming](https://emotion.sh/docs/theming). Now that we're shifting to a global theming approach based on CSS variables, we advise to no longer using the theme prop. For more information, view our [Theming Docs](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs#-preferred-approach-v14).
  */
 export const pickForegroundColor = (
   background: string,

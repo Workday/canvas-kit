@@ -13,7 +13,7 @@ const varStyles = createStyles({
   // we also can change system icon variable for color
   [systemIconStencil.vars.color]: system.color.static.blue.strong,
   '&:hover': {
-    [buttonStencil.vars.background]: system.color.static.orange.default,
+    [buttonStencil.vars.background]: system.color.static.amber.default,
     [buttonStencil.vars.label]: system.color.static.white,
     [systemIconStencil.vars.color]: system.color.static.white,
   },

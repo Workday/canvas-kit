@@ -1,10 +1,6 @@
 import * as React from 'react';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
-import {
-  SidePanel,
-  useSidePanel,
-  SidePanelTransitionStates,
-} from '@workday/canvas-kit-preview-react/side-panel';
+import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {Heading, Text} from '@workday/canvas-kit-react/text';
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
@@ -40,7 +36,7 @@ export const Basic = () => {
   const {expanded, panelProps, labelProps, controlProps} = useSidePanel();
 
   return (
-    <CanvasProvider theme={{canvas: {direction}}}>
+    <CanvasProvider dir={direction}>
       <Flex cs={stylesOverride.viewPortContainer}>
         <SidePanel {...panelProps}>
           <SidePanel.ToggleButton {...controlProps} />
