@@ -24,6 +24,7 @@ export const textInputStencil = createStencil({
     fontSize: cssVar(system.fontSize.subtext.lg, system.fontSize.subtext.large),
     fontWeight: system.fontWeight.normal,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     lineHeight: cssVar(system.lineHeight.subtext.lg, system.lineHeight.subtext.large),
     display: 'block',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
