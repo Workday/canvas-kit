@@ -5905,6 +5905,18 @@
         "__isArgsStory": false
       }
     },
+    "testing-popups-menu--menu-item-states-custom-theme": {
+      "id": "testing-popups-menu--menu-item-states-custom-theme",
+      "name": "Menu Item States Custom Theme",
+      "title": "Testing/Popups/Menu",
+      "importPath": "./modules/react/menu/stories/testingVisual.stories.tsx",
+      "kind": "Testing/Popups/Menu",
+      "story": "Menu Item States Custom Theme",
+      "parameters": {
+        "fileName": "./modules/react/menu/stories/testingVisual.stories.tsx",
+        "__isArgsStory": false
+      }
+    },
     "testing-popups-menu--menu-option-states": {
       "id": "testing-popups-menu--menu-option-states",
       "name": "Menu Option States",
