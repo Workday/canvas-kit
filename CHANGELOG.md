@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.2.22](https://github.com/Workday/canvas-kit/releases/tag/v14.2.22) (2026-02-11)
+
+### Components
+
+- fix: Ensure variables are wrapped ([#3755](https://github.com/Workday/canvas-kit/pull/3755)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v13.2.55](https://github.com/Workday/canvas-kit/releases/tag/v13.2.55) (2026-02-11)
 ## [v14.2.21](https://github.com/Workday/canvas-kit/releases/tag/v14.2.21) (2026-02-10)
 
