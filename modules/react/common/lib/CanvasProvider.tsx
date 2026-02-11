@@ -3,7 +3,7 @@ import {Theme, ThemeProvider, CacheProvider} from '@emotion/react';
 import {InputProvider} from './InputProvider';
 import {defaultCanvasTheme, PartialEmotionCanvasTheme, useTheme} from './theming';
 import {brand, base} from '@workday/canvas-tokens-web';
-import {createStyles, getCache} from '@workday/canvas-kit-styling';
+import {createStyles, getCache, maybeWrapCSSVariables} from '@workday/canvas-kit-styling';
 
 export interface CanvasProviderProps {
   theme?: PartialEmotionCanvasTheme;
@@ -67,15 +67,18 @@ export const useCanvasThemeToCssVars = (
   const {palette} = filledTheme.canvas;
   (['common', 'primary', 'error', 'alert', 'success', 'neutral'] as const).forEach(color => {
     if (color === 'common') {
-      // @ts-ignore
-      style[brand.common.focusOutline] = palette.common.focusOutline;
+      // Only focusOutline exists on CanvasThemeCommonPalette
+      if (palette.common.focusOutline !== defaultCanvasTheme.palette.common.focusOutline) {
+        // @ts-ignore
+        style[brand.common.focusOutline] = maybeWrapCSSVariables(palette.common.focusOutline);
+      }
     }
     (['lightest', 'light', 'main', 'dark', 'darkest', 'contrast'] as const).forEach(key => {
       // We only want to set custom colors if they do not match the default. The `defaultBranding` class will take care of the rest.
       // @ts-ignore
       if (palette[color][key] !== defaultCanvasTheme.palette[color][key]) {
         // @ts-ignore
-        style[brand[color][mappedKeys[key]]] = palette[color][key];
+        style[brand[color][mappedKeys[key]]] = maybeWrapCSSVariables(palette[color][key]);
       }
     });
   });
