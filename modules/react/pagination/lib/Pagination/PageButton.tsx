@@ -11,7 +11,9 @@ export const paginationPageButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    minWidth: cssVar(system.size.sm, system.space.x8),
+    minWidth: cssVar(system.size.md, system.space.x10),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    height: cssVar(system.size.md, system.space.x10),
     padding: 0,
     fontWeight: system.fontWeight.normal,
     [buttonStencil.vars.label]: system.color.fg.default,
