@@ -62,7 +62,6 @@ export const multiSelectInputStencil = createStencil({
       // collapse the height of the input by the border width so that an empty multi-select
       // is the same height as a `TextInput`
       '&:where([data-part="user-input"], [data-part="form-input"])': {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         height: px2rem(38),
       },
 
@@ -97,14 +96,10 @@ export const multiSelectInputStencil = createStencil({
 
     '& :where([data-part="form-input"])': {
       position: 'absolute',
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      top: cssVar(base.size0, system.space.zero),
-      bottom: cssVar(base.size0, system.space.zero),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      left: cssVar(base.size0, system.space.zero),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      right: cssVar(base.size0, system.space.zero),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
       opacity: system.opacity.zero,
       cursor: 'default',
       pointerEvents: 'none',

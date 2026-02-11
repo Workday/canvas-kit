@@ -71,7 +71,6 @@ export const selectInputStencil = createStencil({
     },
     '&:has(:disabled, .disabled)': {
       [caretPart]: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         [systemIconStencil.vars.color]: system.color.fg.disabled,
       },
     },
