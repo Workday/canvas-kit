@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.55](https://github.com/Workday/canvas-kit/releases/tag/v13.2.55) (2026-02-11)
+
+### Components
+
+- fix: Update out of sync lock file ([#3736](https://github.com/Workday/canvas-kit/pull/3736)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- fix: Ensure variables are wrapped ([#3755](https://github.com/Workday/canvas-kit/pull/3755)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v13.2.54](https://github.com/Workday/canvas-kit/releases/tag/v13.2.54) (2026-02-02)
 
 ### Components
