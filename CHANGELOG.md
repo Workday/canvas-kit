@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.2.21](https://github.com/Workday/canvas-kit/releases/tag/v14.2.21) (2026-02-10)
+
+### Components
+
+- fix: Update SecondaryButton hover color ([#3751](https://github.com/Workday/canvas-kit/pull/3751)) ([@alanbsmith](https://github.com/alanbsmith), Alan Smith)
+
+
 ## [v14.2.20](https://github.com/Workday/canvas-kit/releases/tag/v14.2.20) (2026-02-03)
 
 ### Components
