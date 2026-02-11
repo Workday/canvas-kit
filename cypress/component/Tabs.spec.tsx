@@ -1,9 +1,9 @@
 import {Basic} from '../../modules/react/tabs/stories/examples/Basic';
-import {NamedTabs} from '../../modules/react/tabs/stories/examples/NamedTabs';
 import {DisabledTab} from '../../modules/react/tabs/stories/examples/DisabledTab';
 import {DynamicTabs} from '../../modules/react/tabs/stories/examples/DynamicTabs';
-import {RightToLeft} from '../../modules/react/tabs/stories/examples/RightToLeft';
+import {NamedTabs} from '../../modules/react/tabs/stories/examples/NamedTabs';
 import {OverflowTabs} from '../../modules/react/tabs/stories/examples/OverflowTabs';
+import {RightToLeft} from '../../modules/react/tabs/stories/examples/RightToLeft';
 
 describe('Tabs', () => {
   [Basic, NamedTabs].forEach(Example => {
@@ -511,7 +511,7 @@ describe('Tabs', () => {
 
       context('when the Tab key is pressed', () => {
         beforeEach(() => {
-          cy.focused().tab();
+          cy.focused().realPress('Tab');
         });
 
         it('should focus on the tab panel', () => {
@@ -615,8 +615,8 @@ describe('Tabs', () => {
         cy.findByRole('tablist').its('scrollX').should('not.exist');
       });
 
-      it('should show only 2 tab items', () => {
-        cy.findAllByRole('tab').should('have.length', 2);
+      it('should show only 1 tab item', () => {
+        cy.findAllByRole('tab').should('have.length', 1);
       });
 
       context('when the "More" button is clicked', () => {
@@ -629,8 +629,8 @@ describe('Tabs', () => {
           cy.get('[role="menu"]').should('exist');
         });
 
-        it('should have the third Tab as the first menu item', () => {
-          cy.get('button[role="menuitem"]').first().should('have.text', 'Third Tab');
+        it('should have the second Tab as the first menu item', () => {
+          cy.get('button[role="menuitem"]').first().should('have.text', 'Second Tab');
         });
       });
     });

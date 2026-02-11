@@ -1,6 +1,6 @@
 import {Property} from 'csstype';
 
-import {buildStyleFns, StyleFnConfig} from '../buildStyleFns';
+import {StyleFnConfig, buildStyleFns} from '../buildStyleFns';
 
 /** style props to set CSS border style properties
  * @deprecated

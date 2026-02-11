@@ -1,8 +1,8 @@
 import React from 'react';
 
-import {space} from '@workday/canvas-kit-react/tokens';
-import {starIcon, searchIcon, selectIcon, shareIcon} from '@workday/canvas-system-icons-web';
 import {Tabs} from '@workday/canvas-kit-react/tabs';
+import {space} from '@workday/canvas-kit-react/tokens';
+import {searchIcon, selectIcon, shareIcon, starIcon} from '@workday/canvas-system-icons-web';
 
 export const Icons = () => {
   return (

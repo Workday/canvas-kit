@@ -1,18 +1,17 @@
 import * as React from 'react';
 
 import {Card} from '@workday/canvas-kit-react/card';
-
 import {
-  createSubcomponent,
   ExtractProps,
   createElemPropsHook,
+  createSubcomponent,
 } from '@workday/canvas-kit-react/common';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {getTransformFromPlacement} from '@workday/canvas-kit-react/popup';
+import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {useMenuModel} from './useMenuModel';
-import {createStencil, calc, px2rem} from '@workday/canvas-kit-styling';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 export interface MenuCardProps extends ExtractProps<typeof Card, never> {
   children?: React.ReactNode;

@@ -1,8 +1,9 @@
 import * as React from 'react';
+
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {Menu} from '@workday/canvas-kit-react/menu';
-import {Popup, Popper} from '@workday/canvas-kit-react/popup';
-import {colors, space, borderRadius} from '@workday/canvas-kit-react/tokens';
+import {Popper, Popup} from '@workday/canvas-kit-react/popup';
+import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 
 export default {
   title: 'Testing/Popups/Popper',

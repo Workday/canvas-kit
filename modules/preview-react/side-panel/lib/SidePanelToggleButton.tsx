@@ -1,12 +1,14 @@
 import * as React from 'react';
-import {createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
+
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
-import {transformationImportIcon} from '@workday/canvas-system-icons-web';
+import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {SidePanelContext} from './hooks';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {transformationImportIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
+
 import {SidePanelTransitionStates} from './SidePanel';
+import {SidePanelContext} from './hooks';
 
 export interface SidePanelToggleButtonProps extends ExtractProps<typeof TertiaryButton, never> {
   /**

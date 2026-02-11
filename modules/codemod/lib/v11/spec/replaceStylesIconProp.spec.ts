@@ -1,6 +1,7 @@
-import {expectTransformFactory} from './expectTransformFactory';
-import transform from '../replaceStylesIconProp';
 import {stripIndent} from 'common-tags';
+
+import transform from '../replaceStylesIconProp';
+import {expectTransformFactory} from './expectTransformFactory';
 
 const expectTransform = expectTransformFactory(transform);
 

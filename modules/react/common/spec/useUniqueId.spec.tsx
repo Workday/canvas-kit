@@ -1,4 +1,4 @@
-import {setUniqueSeed, resetUniqueIdCount, generateUniqueId} from '../index';
+import {generateUniqueId, resetUniqueIdCount, setUniqueSeed} from '../index';
 
 describe('useUniqueId.ts', () => {
   afterEach(() => {

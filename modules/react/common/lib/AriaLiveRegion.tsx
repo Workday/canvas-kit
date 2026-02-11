@@ -1,5 +1,6 @@
+import {CSProps, handleCsProp} from '@workday/canvas-kit-styling';
+
 import {createComponent} from './utils/components';
-import {handleCsProp, CSProps} from '@workday/canvas-kit-styling';
 
 export interface AriaLiveRegionProps extends CSProps {
   /**

@@ -1,6 +1,7 @@
 import React from 'react';
-import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const myIconStencil = createStencil({

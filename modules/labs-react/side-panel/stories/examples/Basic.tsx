@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-labs-react/side-panel';
-import {Flex} from '@workday/canvas-kit-react/layout';
-import {AccentIcon} from '@workday/canvas-kit-react/icon';
-import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {rocketIcon} from '@workday/canvas-accent-icons-web';
+import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-labs-react/side-panel';
+import {AccentIcon} from '@workday/canvas-kit-react/icon';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const flexHeadingStyles = createStyles({

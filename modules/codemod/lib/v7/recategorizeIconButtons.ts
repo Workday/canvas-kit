@@ -1,15 +1,16 @@
+import chalk from 'chalk';
 import {
   API,
+  ASTPath,
   FileInfo,
+  JSXAttribute,
+  JSXElement,
+  JSXIdentifier,
   Options,
   StringLiteral,
-  JSXIdentifier,
-  JSXAttribute,
-  ASTPath,
-  JSXElement,
 } from 'jscodeshift';
+
 import {getImportRenameMap} from './utils/getImportRenameMap';
-import chalk from 'chalk';
 
 const updateJSXTag = (nodePath: ASTPath<JSXElement>, newTag: string) => {
   const {name: componentName} = nodePath.value.openingElement.name as JSXIdentifier;

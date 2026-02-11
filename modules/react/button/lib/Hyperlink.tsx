@@ -1,7 +1,8 @@
 import * as React from 'react';
+
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, CSProps, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {system, brand} from '@workday/canvas-tokens-web';
+import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
 
 export interface HyperlinkProps extends CSProps {
   /**
@@ -24,7 +25,7 @@ export const hyperlinkStencil = createStencil({
     textDecoration: 'underline',
     color: system.color.text.primary.default,
     cursor: 'pointer',
-    borderRadius: system.shape.half,
+    borderRadius: px2rem(2),
     padding: `0 ${px2rem(2)} `,
     margin: '0 -2px',
     transition: 'color 0.15s,background-color 0.15s',

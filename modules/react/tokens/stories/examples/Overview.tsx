@@ -1,8 +1,8 @@
-import * as React from 'react';
 import styled from '@emotion/styled';
+import * as React from 'react';
 
-import {colors, type, depth, space, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {borderRadius, colors, depth, space, type} from '@workday/canvas-kit-react/tokens';
 
 const StyledCard = styled('div')({
   ...depth[3],

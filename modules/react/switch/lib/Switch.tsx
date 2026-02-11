@@ -1,7 +1,9 @@
 import * as React from 'react';
-import {createComponent, ErrorType, focusRing, useUniqueId} from '@workday/canvas-kit-react/common';
-import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+
+import {ErrorType, createComponent, focusRing, useUniqueId} from '@workday/canvas-kit-react/common';
+import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {base, brand, system} from '@workday/canvas-tokens-web';
+
 import {mergeStyles} from '../../layout';
 
 export interface SwitchProps {
@@ -37,8 +39,10 @@ export interface SwitchProps {
 const switchContainerStencil = createStencil({
   base: {
     position: 'relative',
-    height: system.space.x6,
-    width: system.space.x8,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    height: cssVar(system.size.xs, system.space.x6),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    width: cssVar(system.size.sm, system.space.x8),
   },
 });
 
@@ -57,16 +61,18 @@ const switchInputStencil = createStencil({
   base: {
     display: 'flex',
     position: 'absolute',
-    height: system.space.x6,
-    width: system.space.x8,
-    margin: system.space.zero,
-    marginLeft: system.space.x1,
-    borderRadius: system.shape.round,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    height: cssVar(system.size.xs, system.space.x6),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    width: cssVar(system.size.sm, system.space.x8),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    borderRadius: cssVar(system.shape.full, system.shape.round),
     opacity: '0',
     cursor: 'pointer',
     '&:checked, &.checked': {
       '& ~ div:first-of-type': {
-        backgroundColor: brand.primary.base,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.base),
       },
       '&:disabled, &.disabled': {
         '& ~ div:first-of-type': {
@@ -91,18 +97,19 @@ const switchInputStencil = createStencil({
     error: {
       error: {
         '& ~ div:first-of-type': {
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
           boxShadow: `
-              0 0 0 ${px2rem(2)} ${system.color.border.inverse},
-              0 0 0 ${system.space.x1} ${brand.common.errorInner},
+              0 0 0 ${px2rem(2)} ${cssVar(system.color.focus.inverse, system.color.border.inverse.default)},
+              0 0 0 ${system.space.x1} ${cssVar(system.color.brand.focus.critical, brand.common.errorInner)},
               0 0 0 ${px2rem(5)} transparent`,
         },
       },
       caution: {
         '& ~ div:first-of-type': {
           boxShadow: `
-          0 0 0 ${px2rem(2)} ${system.color.border.inverse},
-          0 0 0 ${system.space.x1} ${brand.common.alertInner},
-          0 0 0 ${px2rem(5)} ${brand.common.alertOuter}`,
+          0 0 0 ${px2rem(2)} ${cssVar(system.color.focus.inverse, system.color.border.inverse.default)},
+          0 0 0 ${system.space.x1} ${cssVar(system.color.brand.focus.caution.inner, brand.common.alertInner)},
+          0 0 0 ${px2rem(5)} ${cssVar(system.color.brand.border.caution, brand.common.alertOuter)}`,
         },
       },
     },
@@ -122,13 +129,19 @@ const switchBackgroundStencil = createStencil({
     display: 'flex',
     alignItems: 'center',
     pointerEvents: 'none',
-    marginTop: system.space.x1,
-    width: system.space.x8,
-    height: system.space.x4,
-    borderRadius: system.shape.round,
-    padding: `${system.space.zero} ${px2rem(2)}`,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    marginTop: cssVar(system.gap.xs, system.space.x1),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    width: cssVar(system.size.sm, system.space.x8),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    height: cssVar(system.size.xxxs, system.space.x4),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    borderRadius: cssVar(system.shape.full, system.shape.round),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    padding: `${cssVar(system.padding.none, system.space.zero)} ${px2rem(2)}`,
     transition: 'background-color 200ms ease',
-    backgroundColor: system.color.bg.muted.soft,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    backgroundColor: cssVar(system.color.accent.muted.soft, system.color.bg.muted.soft),
   },
 });
 
@@ -145,21 +158,29 @@ const SwitchBackground = createComponent('div')({
 
 const switchCircleStencil = createStencil({
   base: {
-    width: system.space.x3,
-    height: system.space.x3,
-    borderRadius: system.shape.round,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    width: cssVar(base.size150, system.space.x3),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    height: cssVar(base.size150, system.space.x3),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    borderRadius: cssVar(system.shape.full, system.shape.round),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     boxShadow: system.depth[1],
     transition: 'transform 150ms ease',
     pointerEvents: 'none',
-    backgroundColor: brand.primary.accent,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    backgroundColor: cssVar(system.color.fg.inverse, brand.primary.accent),
     transform: `translateX(${system.space.zero})`,
   },
   modifiers: {
     checked: {
       true: {
-        transform: `translateX(${system.space.x4})`,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        transform: `translateX(${cssVar(system.size.xxxs, system.space.x4)})`,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         ':dir(rtl)': {
-          transform: `translateX(${calc.negate(system.space.x4)})`,
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          transform: `translateX(${calc.negate(cssVar(system.size.xxxs, system.space.x4))})`,
         },
       },
     },

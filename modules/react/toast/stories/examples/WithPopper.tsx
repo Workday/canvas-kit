@@ -1,10 +1,10 @@
 import React from 'react';
 
-import {Toast} from '@workday/canvas-kit-react/toast';
-import {checkIcon} from '@workday/canvas-system-icons-web';
-import {colors} from '@workday/canvas-kit-react/tokens';
-import {Popper} from '@workday/canvas-kit-react/popup';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
+import {Popper} from '@workday/canvas-kit-react/popup';
+import {Toast} from '@workday/canvas-kit-react/toast';
+import {colors} from '@workday/canvas-kit-react/tokens';
+import {checkIcon} from '@workday/canvas-system-icons-web';
 
 export const WithPopper = () => {
   const [open, setOpen] = React.useState(false);
