@@ -123,10 +123,7 @@ const radioInputStencil = createStencil({
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
           backgroundColor: cssVar(system.color.surface.inverse, system.color.bg.alt.softer),
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          borderColor: cssVar(
-            system.color.border.inverse.default,
-            system.color.border.inverse.default
-          ),
+          borderColor: cssVar(system.color.border.inverse.default),
         },
         '&:disabled, &.disabled': {
           opacity: system.opacity.disabled,

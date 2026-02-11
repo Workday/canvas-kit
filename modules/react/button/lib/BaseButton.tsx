@@ -121,7 +121,7 @@ export const buttonStencil = createStencil({
   },
   base: ({background, border, boxShadowInner, boxShadowOuter, label, opacity, borderRadius}) => ({
     // Default Styles
-    fontFamily: '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif',
+    fontFamily: system.fontFamily.default,
     fontSize: '0.875rem',
     lineHeight: 'normal',
     letterSpacing: '0.015rem',
@@ -133,7 +133,8 @@ export const buttonStencil = createStencil({
     color: cssVar(buttonColorPropVars.default.label, cssVar(label, system.color.fg.strong)),
     borderWidth: px2rem(1),
     borderStyle: 'solid',
-    gap: system.space.x2,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    gap: cssVar(system.gap.sm, system.space.x2),
     borderColor: cssVar(buttonColorPropVars.default.border, cssVar(border, 'transparent')),
     cursor: 'pointer',
     display: 'inline-flex',
@@ -147,7 +148,7 @@ export const buttonStencil = createStencil({
     MozOsxFontSmoothing: 'grayscale',
     borderRadius: cssVar(
       buttonColorPropVars.default.borderRadius,
-      cssVar(borderRadius, system.shape.round)
+      cssVar(borderRadius, cssVar(system.shape.full, system.shape.round))
     ),
     position: 'relative',
     verticalAlign: 'middle',
