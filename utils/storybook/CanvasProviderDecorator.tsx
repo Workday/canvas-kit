@@ -6,6 +6,12 @@ import {
   PartialEmotionCanvasTheme,
   defaultCanvasTheme,
 } from '@workday/canvas-kit-react/common';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const storyStyles = createStyles({
+  padding: system.padding.md,
+});
 
 export default makeDecorator({
   name: 'canvasProviderDecorator',
@@ -14,6 +20,10 @@ export default makeDecorator({
     const theme: PartialEmotionCanvasTheme = {
       canvas: parameters.theme || defaultCanvasTheme,
     };
-    return <CanvasProvider theme={theme}>{storyFn(context) as React.ReactNode}</CanvasProvider>;
+    return (
+      <CanvasProvider theme={theme} className={storyStyles}>
+        {storyFn(context) as React.ReactNode}
+      </CanvasProvider>
+    );
   },
 });

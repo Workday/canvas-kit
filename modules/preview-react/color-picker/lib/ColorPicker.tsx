@@ -3,7 +3,7 @@ import * as React from 'react';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {ColorInput} from '@workday/canvas-kit-react/color-picker';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {checkIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -138,12 +138,13 @@ export const colorPickerStencil = createStencil({
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-between',
-      marginBlockStart: system.space.x4,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      marginBlockStart: cssVar(system.gap.md, system.space.x4),
     },
     [inputWrapperPart]: {
       display: 'flex',
       flexDirection: 'column',
-      margin: system.space.zero,
+      margin: 0,
     },
     [buttonPart]: {
       alignSelf: 'flex-end',
