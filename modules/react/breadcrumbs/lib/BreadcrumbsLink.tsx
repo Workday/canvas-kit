@@ -23,7 +23,6 @@ export const breadcrumbsLinkStencil = createStencil({
     maxWidth: '',
   },
   base: ({maxWidth}) => ({
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     fontFamily: system.fontFamily.default,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     fontSize: cssVar(system.fontSize.subtext.lg, system.fontSize.subtext.large),

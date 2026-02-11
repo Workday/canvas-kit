@@ -29,6 +29,7 @@ export const breadcrumbsListStencil = createStencil({
     margin: 0,
     display: 'inline-flex',
     alignItems: 'center',
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     minHeight: cssVar(system.size.xl, system.space.x10),
     listStyle: 'none',
     width: '100%',
