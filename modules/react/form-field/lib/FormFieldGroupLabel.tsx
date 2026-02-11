@@ -34,7 +34,8 @@ export const formFieldGroupLabelStencil = createStencil({
       true: {
         '&::after': {
           content: '"*"',
-          fontSize: system.fontSize.body.large,
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          fontSize: cssVar(system.fontSize.body.lg, system.fontSize.body.large),
           fontWeight: system.fontWeight.normal,
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
           color: cssVar(system.color.brand.fg.critical.default, brand.error.base),
