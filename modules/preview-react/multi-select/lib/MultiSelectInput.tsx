@@ -49,7 +49,7 @@ export const multiSelectInputStencil = createStencil({
     '& [data-part="user-input"]': {
       fontFamily: system.fontFamily.default,
       fontSize: cssVar(system.fontSize.subtext.lg, system.fontSize.subtext.large),
-      fontWeight: cssVar(system.fontWeight.normal),
+      fontWeight: system.fontWeight.normal,
       lineHeight: cssVar(system.lineHeight.subtext.lg, system.lineHeight.subtext.large),
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       backgroundColor: cssVar(
