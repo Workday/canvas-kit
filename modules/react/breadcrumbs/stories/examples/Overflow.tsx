@@ -27,7 +27,7 @@ export const OverflowBreadcrumbs = ({width = '100%'}) => {
   const [containerWidth, setContainerWidth] = React.useState(width);
   return (
     <div>
-      <Box cs={{width: containerWidth, marginBottom: system.size.xl}}>
+      <Box cs={{width: containerWidth, marginBottom: system.gap.lg}}>
         <div style={{display: 'flex', flexDirection: 'column'}}>
           <span>Current Container Width: {containerWidth}</span>
           <span>Overflow visibility: {model.menu.state.visibility}</span>

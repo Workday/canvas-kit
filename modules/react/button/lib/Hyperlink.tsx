@@ -61,7 +61,6 @@ export const hyperlinkStencil = createStencil({
         },
         '&:focus, &.focus, &:focus-visible': {
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token.
-          // Use string as fallback because of difference between v3 and v4 `border.inverse` tokens. The v4 token is --cnvs-sys-color-border-inverse-default.
           boxShadow: `0 0 0 ${px2rem(2)}  ${cssVar(system.color.fg.inverse, system.color.text.inverse)}`,
         },
         '&:active, &.active': {

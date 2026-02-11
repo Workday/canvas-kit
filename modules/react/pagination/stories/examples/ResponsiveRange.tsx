@@ -9,7 +9,7 @@ import {
   getVisibleResultsMin,
   usePaginationModel,
 } from '@workday/canvas-kit-react/pagination';
-import {BodyText, Text} from '@workday/canvas-kit-react/text';
+import {BodyText} from '@workday/canvas-kit-react/text';
 import {system} from '@workday/canvas-tokens-web';
 
 export const ResponsiveRange = () => {
