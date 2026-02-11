@@ -15,12 +15,15 @@ import {calc} from './calc';
 export function maybeWrapValue(input: string, fallback: string): string {
   // matches an string starting with `--` that isn't already wrapped in a `var()`. It tries to match
   // any character that isn't a valid separator in CSS
-  return input.replace(/([a-z]*[ (]*)(--[^\s;,'})]+)/gi, (match: string, prefix: string) => {
-    if (prefix === 'var(') {
-      return match;
+  return input.replace(
+    /([a-z]*[ (]*)(--[^\s;,'})]+)/gi,
+    (match: string, prefix: string, variable: string) => {
+      if (prefix === 'var(') {
+        return match;
+      }
+      return `${prefix}var(${variable}, ${fallback.startsWith('--') ? `${prefix}var(${fallback})` : fallback})`;
     }
-    return `var(${input}, ${fallback.startsWith('--') ? `${prefix}var(${fallback})` : fallback})`;
-  });
+  );
 }
 
 /**
