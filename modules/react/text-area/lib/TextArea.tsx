@@ -1,6 +1,6 @@
 import {ErrorType, GrowthBehavior, createComponent} from '@workday/canvas-kit-react/common';
 import {textInputStencil} from '@workday/canvas-kit-react/text-input';
-import {calc, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export type ValueOf<T> = T[keyof T];
@@ -27,8 +27,9 @@ export const TextAreaResizeDirection = {
 export const textAreaStencil = createStencil({
   extends: textInputStencil,
   base: {
-    minHeight: system.space.x16,
-    minWidth: calc.add(calc.multiply(system.space.x20, 3), system.space.x10),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    minHeight: cssVar(system.size.xxl, system.space.x16),
+    minWidth: px2rem(280),
     '&::webkit-resizer': {
       display: 'none',
     },
