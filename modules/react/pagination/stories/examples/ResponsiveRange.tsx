@@ -9,7 +9,8 @@ import {
   getVisibleResultsMin,
   usePaginationModel,
 } from '@workday/canvas-kit-react/pagination';
-import {Text} from '@workday/canvas-kit-react/text';
+import {BodyText, Text} from '@workday/canvas-kit-react/text';
+import {system} from '@workday/canvas-tokens-web';
 
 export const ResponsiveRange = () => {
   const resultCount = 10;
@@ -64,15 +65,17 @@ export const ResponsiveRange = () => {
 
   return (
     <Flex
-      border="solid 1px"
       ref={containerRef}
-      justifyContent="space-between"
-      padding="s"
-      alignItems="center"
+      cs={{
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        border: '1px solid',
+        padding: system.padding.md,
+      }}
     >
-      <Text typeLevel="body.small" fontWeight="bold">
+      <BodyText as="span" size="small" cs={{fontWeight: system.fontWeight.bold}}>
         Width: {containerWidth}px
-      </Text>
+      </BodyText>
       <Pagination model={model} aria-label="Pagination">
         <Pagination.Controls>
           <Pagination.StepToPreviousButton aria-label="Previous" />
