@@ -27,7 +27,6 @@ export const breadcrumbsLinkStencil = createStencil({
     fontFamily: system.fontFamily.default,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     fontSize: cssVar(system.fontSize.subtext.lg, system.fontSize.subtext.large),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     fontWeight: system.fontWeight.normal,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     letterSpacing: cssVar(system.letterSpacing.subtext.lg, base.letterSpacing150),
