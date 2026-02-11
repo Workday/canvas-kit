@@ -21,6 +21,7 @@ export const textInputStencil = createStencil({
   base: ({width}) => ({
     fontFamily: system.fontFamily.default,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     fontSize: cssVar(system.fontSize.subtext.lg, system.fontSize.subtext.large),
     fontWeight: system.fontWeight.normal,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
