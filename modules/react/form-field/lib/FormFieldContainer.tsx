@@ -1,5 +1,5 @@
 import {createSubcomponent} from '@workday/canvas-kit-react/common';
-import {CSProps, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {useFormFieldModel} from './hooks';
@@ -11,7 +11,8 @@ export const formFieldContainerStencil = createStencil({
   base: {
     display: 'flex',
     flexDirection: 'column',
-    gap: system.space.x2,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    gap: cssVar(system.gap.sm, system.space.x2),
   },
 });
 

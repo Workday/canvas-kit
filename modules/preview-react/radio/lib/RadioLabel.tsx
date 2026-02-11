@@ -2,8 +2,8 @@ import React from 'react';
 
 import {ExtractProps, Themeable, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {CSProps, createStencil} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {CSProps, createStencil, cssVar} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {RadioInput} from './RadioInput';
 import {RadioText} from './RadioText';
@@ -28,9 +28,11 @@ export interface RadioLabelProps
 const radioLabelStencil = createStencil({
   base: {
     alignItems: 'flex-start',
-    minHeight: system.space.x6,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    minHeight: cssVar(base.size225, system.space.x6),
     position: 'relative',
-    gap: system.space.x3,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    gap: cssVar(system.gap.sm, system.space.x3),
   },
 });
 

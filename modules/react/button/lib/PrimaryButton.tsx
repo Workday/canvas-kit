@@ -1,4 +1,4 @@
-import {createComponent, forwardFitTokens} from '@workday/canvas-kit-react/common';
+import {createComponent} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
@@ -23,7 +23,7 @@ const primaryButtonStencil = createStencil({
   base: {
     // Base Styles
     [buttonStencil.vars.background]: cssVar(brand.action.base, brand.primary.base),
-    [buttonStencil.vars.borderRadius]: forwardFitTokens.system.shape.full,
+    [buttonStencil.vars.borderRadius]: cssVar(system.shape.full, system.shape.round),
     [buttonStencil.vars.label]: cssVar(brand.action.accent, brand.primary.accent),
     [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
     // Focus Styles

@@ -1,4 +1,4 @@
-import {createComponent, focusRing, forwardFitTokens} from '@workday/canvas-kit-react/common';
+import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {calc, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
@@ -17,17 +17,20 @@ export const toolbarDropdownButtonStencil = createStencil({
     customIcon: 'toolbar-dropdown-btn-custom-icon',
   },
   base: ({chevronPart, customIconPart}) => ({
-    padding: forwardFitTokens.system.padding.none,
-    minWidth: forwardFitTokens.system.size.md,
-    gap: forwardFitTokens.system.gap.none,
-    [buttonStencil.vars.borderRadius]: forwardFitTokens.system.shape.xs,
-    [systemIconStencil.vars.color]: system.color.fg.default,
+    padding: system.space.zero,
+    minWidth: system.space.x8,
+    gap: system.space.zero,
+    [buttonStencil.vars.borderRadius]: system.shape.x1,
+    [systemIconStencil.vars.color]: cssVar(
+      buttonColorPropVars.default.icon,
+      system.color.fg.muted.soft
+    ),
 
     '&:focus-visible, &.focus': {
       [buttonStencil.vars.background]: system.color.bg.transparent.default,
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.focus.icon,
-        system.color.fg.default
+        system.color.fg.muted.soft
       ),
       ...focusRing({
         width: 2,
@@ -62,7 +65,7 @@ export const toolbarDropdownButtonStencil = createStencil({
     },
 
     [customIconPart]: {
-      marginInlineStart: forwardFitTokens.system.gap.xs,
+      marginInlineStart: system.space.x1,
       marginInlineEnd: calc.negate(px2rem(2)),
     },
 
