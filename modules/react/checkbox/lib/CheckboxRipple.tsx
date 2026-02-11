@@ -1,12 +1,5 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {
-  CSProps,
-  calc,
-  createStencil,
-  cssVar,
-  handleCsProp,
-  px2rem,
-} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 export const checkboxRippleStencil = createStencil({
@@ -18,9 +11,9 @@ export const checkboxRippleStencil = createStencil({
     borderRadius: cssVar(system.shape.full, system.shape.round),
     boxShadow: 'none',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    height: cssVar(base.size225, calc.add(system.space.x4, px2rem(2))),
+    height: cssVar(base.size225, px2rem(18)),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    width: cssVar(base.size225, calc.add(system.space.x4, px2rem(2))),
+    width: cssVar(base.size225, px2rem(18)),
     transition: 'box-shadow 150ms ease-out',
     position: 'absolute',
     pointerEvents: 'none',

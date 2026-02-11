@@ -10,14 +10,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {InputGroup, TextInput, textInputStencil} from '@workday/canvas-kit-react/text-input';
-import {
-  CSProps,
-  calc,
-  createStencil,
-  cssVar,
-  handleCsProp,
-  px2rem,
-} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {caretDownSmallIcon, searchIcon} from '@workday/canvas-system-icons-web';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 
@@ -70,7 +63,7 @@ export const multiSelectInputStencil = createStencil({
       // is the same height as a `TextInput`
       '&:where([data-part="user-input"], [data-part="form-input"])': {
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        height: calc.subtract(cssVar(system.size.md, system.space.x10), px2rem(2)),
+        height: px2rem(38),
       },
 
       // Remove the focus ring - it is handled at the container level

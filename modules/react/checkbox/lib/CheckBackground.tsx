@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {ErrorType, createComponent} from '@workday/canvas-kit-react/common';
-import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 
 interface CheckBackgroundProps {
@@ -29,7 +29,7 @@ export const checkboxBackgroundStencil = createStencil({
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     height: cssVar(base.size225, px2rem(18)),
     justifyContent: 'center',
-    padding: `${system.space.zero} ${calc.divide(system.space.x1, 2)}`,
+    padding: `0 ${px2rem(2)}`,
     pointerEvents: 'none',
     position: 'absolute',
     transition: 'border 200ms ease, background 200ms',

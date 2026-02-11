@@ -7,14 +7,7 @@ import {
   focusRing,
 } from '@workday/canvas-kit-react/common';
 import {Box, Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {
-  CSProps,
-  calc,
-  createStencil,
-  cssVar,
-  handleCsProp,
-  px2rem,
-} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 
 import {RadioLabelContext} from './RadioLabel';
@@ -205,7 +198,7 @@ const radioInputWrapperStencil = createStencil({
     },
     '&:hover:before, &.hover:before': {
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      boxShadow: `0 0 0 ${calc.subtract(cssVar(system.gap.sm, system.space.x2), px2rem(1))} ${cssVar(system.color.surface.overlay.hover.default, system.color.bg.alt.soft)}`,
+      boxShadow: `0 0 0 ${px2rem(7)} ${cssVar(system.color.surface.overlay.hover.default, system.color.bg.alt.soft)}`,
     },
   },
   modifiers: {
@@ -213,7 +206,7 @@ const radioInputWrapperStencil = createStencil({
       inverse: {
         '&:hover:before, &.hover:before': {
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          boxShadow: `0 0 0 ${calc.subtract(cssVar(system.gap.sm, system.space.x2), px2rem(1))} ${cssVar(system.color.surface.overlay.hover.inverse, system.color.bg.alt.soft)}`,
+          boxShadow: `0 0 0 ${px2rem(7)} ${cssVar(system.color.surface.overlay.hover.inverse, system.color.bg.alt.soft)}`,
         },
       },
     },

@@ -23,8 +23,7 @@ export const formFieldGroupLabelStencil = createStencil({
     fontWeight: system.fontWeight.medium,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     color: cssVar(system.color.fg.default, system.color.text.default),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    paddingInlineStart: cssVar(system.padding.none, system.space.zero),
+    paddingInlineStart: 0,
     display: 'flex',
     alignItems: 'center',
     minWidth: px2rem(180),

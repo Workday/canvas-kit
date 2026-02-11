@@ -3,7 +3,7 @@ import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
 import {CSProps, createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {brand, system} from '@workday/canvas-tokens-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 
 import {useSelectInput} from './hooks/useSelectInput';
@@ -39,11 +39,10 @@ export const selectInputStencil = createStencil({
   }) => ({
     [hiddenInputPart]: {
       position: 'absolute',
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      top: cssVar(base.size0, system.space.zero),
-      bottom: cssVar(base.size0, system.space.zero),
-      left: cssVar(base.size0, system.space.zero),
-      right: cssVar(base.size0, system.space.zero),
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
       opacity: system.opacity.zero,
       cursor: 'default',
       pointerEvents: 'none',

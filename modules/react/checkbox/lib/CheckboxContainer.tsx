@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {LabelText} from '@workday/canvas-kit-react/text';
-import {CSProps, calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 interface CheckboxContainerProps extends CSProps {
@@ -28,9 +28,9 @@ const checkboxContainerStencil = createStencil({
     '&>div': {
       display: 'flex',
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      height: cssVar(base.size225, calc.add(system.space.x4, px2rem(2))),
+      height: cssVar(base.size225, px2rem(18)),
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      minWidth: cssVar(base.size225, calc.add(system.space.x4, px2rem(2))),
+      minWidth: cssVar(base.size225, px2rem(18)),
       alignSelf: 'flex-start',
       position: 'relative',
     },

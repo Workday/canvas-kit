@@ -61,7 +61,7 @@ const checkboxCheckStencil = createStencil({
 const indeterminateBoxStencil = createStencil({
   base: {
     width: px2rem(10),
-    height: calc.divide(system.space.x1, 2),
+    height: px2rem(2),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     backgroundColor: cssVar(system.color.fg.inverse, brand.primary.accent),
   },

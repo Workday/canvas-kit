@@ -5,8 +5,7 @@ export const formFieldStencil = createStencil({
   base: {
     display: 'flex',
     border: 'none',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    padding: cssVar(system.padding.none, system.space.zero),
+    padding: 0,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     margin: `0 0 ${cssVar(system.gap.lg, system.space.x6)}`,
   },
