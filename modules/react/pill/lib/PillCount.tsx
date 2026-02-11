@@ -39,7 +39,10 @@ export const pillCountStencil = createStencil({
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     marginInlineStart: cssVar(system.gap.xs, system.space.x1),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    backgroundColor: cssVar(backgroundColor, system.color.bg.alt.stronger),
+    backgroundColor: cssVar(
+      backgroundColor,
+      cssVar(system.color.surface.alt.strong, system.color.bg.alt.stronger)
+    ),
     flex: '0 0 auto',
   }),
 });

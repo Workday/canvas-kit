@@ -1,13 +1,10 @@
-import React from 'react';
-
 import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
-import {calc, createStyles} from '@workday/canvas-kit-styling';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {uploadCloudIcon} from '@workday/canvas-system-icons-web';
-import {system} from '@workday/canvas-tokens-web';
 
 const statusIndicatorStyles = createStyles({
-  maxWidth: calc.add(system.space.x20, system.space.x4),
+  maxWidth: px2rem(96),
 });
 
 export const Overflow = () => {

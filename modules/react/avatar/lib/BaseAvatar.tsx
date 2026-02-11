@@ -1,14 +1,7 @@
 import React from 'react';
 
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {
-  CSProps,
-  calc,
-  createStencil,
-  cssVar,
-  handleCsProp,
-  px2rem,
-} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 import {AvatarImage} from './AvatarImage';
@@ -58,13 +51,13 @@ export const baseAvatarStencil = createStencil({
     borderRadius: cssVar(system.shape.full, system.shape.round),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     // TODO: These are the fallbacks if "size" is not defined
-    width: cssVar(size, calc.add(system.space.x10, system.space.x2)),
+    width: cssVar(size, cssVar(system.size.lg, px2rem(48))),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    height: cssVar(size, calc.add(system.space.x10, system.space.x2)),
+    height: cssVar(size, cssVar(system.size.lg, px2rem(48))),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    minWidth: cssVar(size, calc.add(system.space.x10, system.space.x2)),
+    minWidth: cssVar(size, cssVar(system.size.lg, px2rem(48))),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    minHeight: cssVar(size, calc.add(system.space.x10, system.space.x2)),
+    minHeight: cssVar(size, cssVar(system.size.lg, px2rem(48))),
     backgroundColor: cssVar(backgroundColor, base.blue300),
     color: cssVar(color, base.blue800),
     display: 'flex',
@@ -112,17 +105,17 @@ export const baseAvatarStencil = createStencil({
       }),
       medium: ({size}) => ({
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        [size]: base.size600,
+        [size]: cssVar(base.size600, px2rem(48)),
         ...system.type.body.medium,
       }),
       large: ({size}) => ({
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        [size]: base.size900,
+        [size]: cssVar(base.size900, px2rem(72)),
         ...system.type.heading.medium,
       }),
       extraLarge: ({size}) => ({
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        [size]: base.size1200,
+        [size]: cssVar(base.size1200, px2rem(96)),
         ...system.type.title.small,
       }),
       extraExtraLarge: ({size}) => ({

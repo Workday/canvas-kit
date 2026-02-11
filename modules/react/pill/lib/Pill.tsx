@@ -170,6 +170,10 @@ export const pillStencil = createStencil({
             system.color.surface.overlay.mixin,
             system.opacity.surface.hover
           ),
+          [pillCountStencil.vars.backgroundColor]: cssVar(
+            system.color.surface.transparent,
+            system.color.bg.muted.softer
+          ),
         },
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         '&:active, &.active': {
@@ -178,6 +182,10 @@ export const pillStencil = createStencil({
             system.color.bg.alt.stronger,
             system.color.surface.overlay.mixin,
             system.opacity.surface.pressed
+          ),
+          [pillCountStencil.vars.backgroundColor]: cssVar(
+            system.color.surface.transparent,
+            system.color.bg.muted.softer
           ),
         },
         '&:disabled, &.disabled': {

@@ -22,9 +22,9 @@ export const pillIconButtonStencil = createStencil({
     marginInlineStart: calc.negate(px2rem(2)), // visually create space between label and the button by -2px
     borderRadius: px2rem(2),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    height: cssVar(system.size.xxs, calc.add(system.space.x4, system.space.x1)),
+    height: cssVar(system.size.xxs, px2rem(20)),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    width: cssVar(system.size.xxs, calc.add(system.space.x4, system.space.x1)),
+    width: cssVar(system.size.xxs, px2rem(20)),
     padding: 0,
     overflow: 'visible',
     flex: '0 0 auto',

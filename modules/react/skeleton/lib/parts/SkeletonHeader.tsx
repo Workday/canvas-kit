@@ -1,12 +1,5 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {
-  CSProps,
-  calc,
-  createStencil,
-  cssVar,
-  handleCsProp,
-  px2rem,
-} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {SkeletonShape} from './SkeletonShape';
@@ -43,10 +36,7 @@ export const skeletonHeaderStencil = createStencil({
     ),
     borderRadius: 0,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    height: cssVar(
-      height,
-      cssVar(system.size.xs, calc.multiply(cssVar(system.gap.xs, system.space.x1), 7))
-    ),
+    height: cssVar(height, cssVar(system.size.xs, px2rem(28))),
     width: width,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     marginBottom: cssVar(system.size.xxxs, system.space.x4),
