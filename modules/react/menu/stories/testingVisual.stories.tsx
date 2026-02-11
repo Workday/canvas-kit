@@ -107,8 +107,10 @@ export const MenuItemStatesCustomTheme = {
             <CanvasProvider
               theme={{
                 canvas: {
-                  palette: {primary: {main: base.blackberry600}},
-                  common: {focusOutline: base.blackPepper600},
+                  palette: {
+                    primary: {main: base.blackberry600},
+                    common: {focusOutline: base.blackPepper600},
+                  },
                 },
               }}
             >
