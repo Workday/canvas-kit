@@ -6,16 +6,9 @@ import {
   createSubcomponent,
   getTransformOrigin,
 } from '@workday/canvas-kit-react/common';
-import {FlexStyleProps} from '@workday/canvas-kit-react/layout';
+import {FlexStyleProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {space} from '@workday/canvas-kit-react/tokens';
-import {
-  calc,
-  createStencil,
-  createVars,
-  cssVar,
-  handleCsProp,
-  keyframes,
-} from '@workday/canvas-kit-styling';
+import {calc, createStencil, createVars, cssVar, keyframes} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 import {getTransformFromPlacement} from './getTransformFromPlacement';
@@ -130,7 +123,7 @@ export const PopupCard = createSubcomponent('div')({
     <Card
       as={Element}
       ref={ref}
-      {...handleCsProp(elemProps, [
+      {...mergeStyles(elemProps, [
         popupCardStencil({
           transformOriginHorizontal: transformOrigin.horizontal,
           transformOriginVertical: transformOrigin.vertical,

@@ -13,7 +13,7 @@ export const modalCardStencil = createStencil({
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     margin: cssVar(base.size500, system.space.x10),
     width: px2rem(440),
-    borderWidth: 0,
+    border: '0',
     outline: `${px2rem(1)} solid transparent`,
     boxShadow: system.depth[5],
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
