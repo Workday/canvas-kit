@@ -175,7 +175,7 @@ const checkboxInputStencil = createStencil({
           {
             borderColor: system.color.border.contrast.default,
             // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-            boxShadow: `0 0 0 ${px2rem(2)}  ${system.color.border.contrast.default} ,0 0 0 ${px2rem(4)}  ${cssVar(system.color.focus.inverse, base.neutral0)} `,
+            boxShadow: `0 0 0 ${px2rem(0)}  ${system.color.border.contrast.default} ,0 0 0 ${px2rem(2)}  ${cssVar(system.color.focus.inverse, base.neutral0)} `,
           },
         '&:checked:focus-visible, &:checked.focus, &:indeterminate:focus-visible, &:indeterminate.focus':
           {

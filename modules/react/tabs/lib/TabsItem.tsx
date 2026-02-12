@@ -88,7 +88,7 @@ const tabItemStencil = createStencil({
     fontSize: cssVar(system.fontSize.subtext.lg, system.fontSize.subtext.large),
     lineHeight: cssVar(system.lineHeight.subtext.lg, system.lineHeight.subtext.large),
     letterSpacing: cssVar(system.letterSpacing.subtext.lg, base.letterSpacing150),
-    fontWeight: system.fontWeight.normal,
+    fontWeight: system.fontWeight.medium,
     border: 'none',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     backgroundColor: cssVar(system.color.surface.transparent, system.color.bg.transparent.default),
