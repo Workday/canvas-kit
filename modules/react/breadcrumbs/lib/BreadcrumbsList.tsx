@@ -25,7 +25,8 @@ export interface BreadcrumbsListProps<T = any>
 
 export const breadcrumbsListStencil = createStencil({
   base: {
-    padding: 0,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    padding: `${cssVar(system.padding.xs, system.space.x2)} 0`,
     margin: 0,
     display: 'inline-flex',
     alignItems: 'center',
