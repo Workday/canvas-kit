@@ -21,11 +21,11 @@ import {
   useListItemSelect,
   useOverflowListItemMeasure,
 } from '@workday/canvas-kit-react/collection';
-import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {calc, cssVar, createStencil, px2rem} from '@workday/canvas-kit-styling';
 
 import {useTabsModel} from './useTabsModel';
 import {buttonStencil} from '@workday/canvas-kit-react/button';
-import {system, brand} from '@workday/canvas-tokens-web';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 export interface TabsItemProps
   extends ExtractProps<typeof Box, never>,
     Partial<Pick<FlexProps, 'gap'>> {
@@ -118,7 +118,8 @@ const tabItemStencil = createStencil({
       // focus outline for Windows high contrast theme
       outline: `${px2rem(2)} solid transparent`,
       ...focusRing({inset: 'outer', width: 0, separation: 2}),
-      [buttonStencil.vars.boxShadowInner]: system.color.border.inverse,
+      /* TODO: Update to `system.color.border.inverse.default` in v15. */
+      [buttonStencil.vars.boxShadowInner]: cssVar(system.color.border.inverse, base.neutral0),
       [buttonStencil.vars.boxShadowOuter]: brand.common.focusOutline,
       [systemIconStencil.vars.color]: system.color.icon.strong,
     },

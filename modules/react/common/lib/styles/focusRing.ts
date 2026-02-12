@@ -87,6 +87,7 @@ export function focusRing(options: FocusRingOptions = {}) {
     separation = 0,
     animate = true,
     // hard code CSS fallbacks for dynamic styles that don't use the static style transform
+    /* TODO: Update to `system.color.border.inverse.default` in v15. */
     innerColor = cssVar(system.color.border.inverse, 'rgba(255,255,255,1)'),
     outerColor = cssVar(brand.common.focusOutline, 'rgba(8,117,225,1)'),
     inset,
