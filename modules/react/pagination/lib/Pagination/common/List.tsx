@@ -1,16 +1,14 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
 
 export interface ListProps extends FlexProps {}
 
 export const paginationListStencil = createStencil({
   base: {
     display: 'flex',
-    marginBlock: system.space.zero,
-    marginInline: system.space.zero,
-    padding: system.space.zero,
+    margin: 0,
+    padding: 0,
     listStyle: 'none',
   },
 });
