@@ -17,7 +17,7 @@ import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-ki
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 import {CSProps, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 
 import {useMenuModel} from './useMenuModel';
 
@@ -65,6 +65,7 @@ export const menuItemStencil = createStencil({
     fontSize: cssVar(system.fontSize.subtext.lg, system.fontSize.subtext.large),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     lineHeight: cssVar(system.lineHeight.subtext.lg, system.lineHeight.subtext.large),
+    letterSpacing: cssVar(system.letterSpacing.subtext.lg, base.letterSpacing150),
     display: 'flex',
     alignItems: 'center',
     width: '100%',

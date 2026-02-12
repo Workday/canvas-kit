@@ -99,7 +99,7 @@ const switchInputStencil = createStencil({
         '& ~ div:first-of-type': {
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
           boxShadow: `
-              0 0 0 ${px2rem(2)} ${cssVar(system.color.focus.inverse, system.color.border.inverse.default)},
+              0 0 0 ${px2rem(2)} ${cssVar(system.color.focus.inverse, base.neutral0)},
               0 0 0 ${system.space.x1} ${cssVar(system.color.brand.focus.critical, brand.common.errorInner)},
               0 0 0 ${px2rem(5)} transparent`,
         },
@@ -107,7 +107,7 @@ const switchInputStencil = createStencil({
       caution: {
         '& ~ div:first-of-type': {
           boxShadow: `
-          0 0 0 ${px2rem(2)} ${cssVar(system.color.focus.inverse, system.color.border.inverse.default)},
+          0 0 0 ${px2rem(2)} ${cssVar(system.color.focus.inverse, base.neutral0)},
           0 0 0 ${system.space.x1} ${cssVar(system.color.brand.focus.caution.inner, brand.common.alertInner)},
           0 0 0 ${px2rem(5)} ${cssVar(system.color.brand.border.caution, brand.common.alertOuter)}`,
         },
