@@ -53,7 +53,7 @@ const toastStencil = createStencil({
     flexDirection: 'row',
     width: px2rem(360),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    padding: cssVar(system.padding.none, system.space.zero),
+    padding: 0,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     gap: cssVar(system.gap.xs, system.space.x1),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token

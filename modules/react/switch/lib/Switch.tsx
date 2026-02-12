@@ -137,8 +137,7 @@ const switchBackgroundStencil = createStencil({
     height: cssVar(system.size.xxxs, system.space.x4),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     borderRadius: cssVar(system.shape.full, system.shape.round),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    padding: `${cssVar(system.padding.none, system.space.zero)} ${px2rem(2)}`,
+    padding: `0 ${px2rem(2)}`,
     transition: 'background-color 200ms ease',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     backgroundColor: cssVar(system.color.accent.muted.soft, system.color.bg.muted.soft),

@@ -63,7 +63,7 @@ export const ToastStates = {
               props: {
                 mode: 'polite',
                 hasCloseIcon: true,
-                padding: 's',
+                padding: '0px',
                 icon: checkIcon,
                 iconColor: 'greenApple400',
                 message: 'Your workbook was successfully processed.',

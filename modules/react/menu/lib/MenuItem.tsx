@@ -65,6 +65,7 @@ export const menuItemStencil = createStencil({
     fontSize: cssVar(system.fontSize.subtext.lg, system.fontSize.subtext.large),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     lineHeight: cssVar(system.lineHeight.subtext.lg, system.lineHeight.subtext.large),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     letterSpacing: cssVar(system.letterSpacing.subtext.lg, base.letterSpacing150),
     display: 'flex',
     alignItems: 'center',
@@ -78,7 +79,7 @@ export const menuItemStencil = createStencil({
     color: system.color.fg.default,
     borderWidth: 0,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderRadius: cssVar(system.shape.xxl, system.shape.zero),
+    borderRadius: cssVar(system.shape.xxl, '0'),
     textAlign: 'start',
     transition: 'background-color 80ms, color 80ms',
     backgroundColor: 'inherit',

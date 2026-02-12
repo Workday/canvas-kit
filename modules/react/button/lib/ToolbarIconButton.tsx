@@ -19,7 +19,7 @@ export const toolbarIconButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
     minWidth: system.space.x8,
-    padding: system.space.zero,
+    padding: 0,
     height: system.space.x8,
     [buttonStencil.vars.borderRadius]: system.shape.x1,
     [systemIconStencil.vars.color]: system.color.fg.muted.soft,

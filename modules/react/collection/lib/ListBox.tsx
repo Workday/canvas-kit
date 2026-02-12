@@ -7,7 +7,6 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
 
 import {useListItemRegister} from './useListItemRegister';
 import {useListModel} from './useListModel';
@@ -60,8 +59,7 @@ const listBoxContainerStencil = createStencil({
     '& :where([data-part="list"])': {
       display: 'flex',
       flexDirection: 'column',
-      marginBlockStart: system.space.zero,
-      marginBlockEnd: system.space.zero,
+      marginBlock: 0,
     },
   },
   modifiers: {

@@ -12,7 +12,7 @@ export const menuDividerStencil = createStencil({
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     borderTop: `${px2rem(1)} solid ${cssVar(system.color.border.default, system.color.border.divider)}`,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    margin: `${cssVar(system.gap.sm, system.space.x2)} ${cssVar(system.gap.md, system.space.zero)}`,
+    margin: `${cssVar(system.gap.sm, system.space.x2)} ${cssVar(system.gap.md, '0')}`,
   },
 });
 

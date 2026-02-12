@@ -94,7 +94,7 @@ const tabItemStencil = createStencil({
     backgroundColor: cssVar(system.color.surface.transparent, system.color.bg.transparent.default),
     flex: '0 0 auto',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    minWidth: cssVar(system.padding.none, system.space.zero),
+    minWidth: 0,
     alignItems: 'center',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     padding: `0 ${cssVar(system.padding.md, system.space.x4)}`,

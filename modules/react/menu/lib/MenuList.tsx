@@ -36,10 +36,10 @@ export const menuListStencil = createStencil({
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     background: cssVar(system.color.surface.popover, system.color.bg.default),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderRadius: cssVar(system.shape.xxl, system.shape.zero),
+    borderRadius: cssVar(system.shape.xxl, '0'),
     padding: 0,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    gap: cssVar(system.gap.xs, system.space.zero),
+    gap: cssVar(system.gap.xs, '0'),
   },
   modifiers: {
     orientation: {

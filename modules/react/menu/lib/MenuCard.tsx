@@ -32,7 +32,7 @@ export const menuCardStencil = createStencil({
     flexDirection: 'column',
     transition: `transform ease-out 150ms`,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    padding: cssVar(system.padding.xxs, '0px'),
+    padding: cssVar(system.padding.xxs, '0'),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     borderRadius: cssVar(system.shape.xxl, system.shape.x2),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
