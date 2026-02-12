@@ -24,7 +24,7 @@ export const hyperlinkStencil = createStencil({
     fontFamily: system.fontFamily.default,
     textDecoration: 'underline',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    color: cssVar(system.color.brand.fg.primary.default, system.color.text.primary.default),
+    color: cssVar(system.color.fg.info.default, system.color.text.primary.default),
     cursor: 'pointer',
     borderRadius: px2rem(2),
     padding: `0 ${px2rem(2)} `,
@@ -33,7 +33,7 @@ export const hyperlinkStencil = createStencil({
     wordBreak: 'break-word',
     '&:hover, &.hover': {
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      color: cssVar(system.color.brand.fg.primary.strong, system.color.text.primary.strong),
+      color: cssVar(system.color.fg.info.strong, system.color.text.primary.strong),
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       background: cssVar(system.color.surface.alt.default, system.color.bg.alt.soft),
     },
@@ -44,7 +44,7 @@ export const hyperlinkStencil = createStencil({
     },
     '&:active, &.active': {
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      color: cssVar(system.color.brand.fg.primary.strong, system.color.text.primary.stronger),
+      color: cssVar(system.color.fg.info.strong, system.color.text.primary.stronger),
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       background: cssVar(system.color.surface.alt.default, system.color.bg.alt.default),
     },

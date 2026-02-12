@@ -18,8 +18,7 @@ export const paginationPageListStencil = createStencil({
   base: {
     display: 'flex',
     margin: 0,
-    paddingInlineStart: 0,
-    paddingInlineEnd: 0,
+    paddingInline: 0,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     gap: cssVar(system.gap.xs, system.space.x1),
   },
