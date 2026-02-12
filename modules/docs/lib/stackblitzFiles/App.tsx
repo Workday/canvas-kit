@@ -1,9 +1,4 @@
-import {
-  CanvasProvider,
-  ContentDirection,
-  PartialEmotionCanvasTheme,
-  useTheme,
-} from '@workday/canvas-kit-react/common';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {createStyles} from '@workday/canvas-kit-styling';
 
 import {Demo} from './Demo';
@@ -14,15 +9,8 @@ const mainContentStyles = createStyles({
 });
 
 export const App = () => {
-  // useTheme is filling in the Canvas theme object if any keys are missing
-  const canvasTheme: PartialEmotionCanvasTheme = useTheme({
-    canvas: {
-      direction: ContentDirection.LTR,
-    },
-  });
-
   return (
-    <CanvasProvider theme={canvasTheme}>
+    <CanvasProvider>
       <>
         <main className={mainContentStyles}>
           <Demo />

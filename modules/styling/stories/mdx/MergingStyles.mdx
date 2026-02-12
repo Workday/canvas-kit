@@ -1,4 +1,4 @@
-import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, SymbolDoc, StorybookStatusIndicator} from '@workday/canvas-kit-docs';
 import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
 import {system} from '@workday/canvas-tokens-web';
 import {StylingOverrides} from './examples/StylingOverrides';
@@ -7,7 +7,41 @@ import {StylingOverrides} from './examples/StylingOverrides';
 
 # Merging Styles
 
-## mergeStyles
+## handleCsProp
+
+But what about when using components that use `@emotion/react` or `@emotion/styled`? Those libraries
+use a different approach. Instead of multiple class names, they use a single, merged class name.
+
+`handleCsProp` was created to handle integration with existing components that use the `css` prop
+from `@emotion/react` or the `styled` components from `@emotion/styled`. If a class name from one of
+those libraries is detected, style merging will follow the same rules as those libraries. Instead of
+multiple class names, a single class name with all matching properties is created. The
+`handleCsProp` also takes care of merging `style` props, `className` props, and can handle the `cs`
+prop:
+
+```tsx
+const myStencil = createStencil({
+  // ...
+});
+
+const MyComponent = elemProps => {
+  return <div {...handleProps(elemProps, myStencil({}))} />;
+};
+
+// All props will be merged for you
+<MyComponent style={{color: 'red'}} className="my-classname" cs={{position: 'relative'}} />;
+```
+
+`handleCsProp` will make sure the `style` prop is passed to the `div` and that the `my-classname`
+CSS class name appears on the `div`'s class list. Also the `cs` prop will add the appropriate styles
+to the element via a CSS class name. If your component needs to handle being passed a `className`,
+`style`, or `cs` prop, use `handleCsProp`.
+
+### handleCsProp API
+
+<SymbolDoc hideHeading name="handleCsProp" />
+
+## mergeStyles <StorybookStatusIndicator type="deprecated" />
 
 In v9, we used `@emotion/styled` or `@emotion/react` for all styling which is a runtime styling
 solution. Starting in v10, we're migrating our styling to a more static solution using
@@ -130,36 +164,3 @@ the last defined. This should be the expected order.
 
 <SymbolDoc hideHeading name="mergeStyles" />
 
-## handleCsProp
-
-But what about when using components that use `@emotion/react` or `@emotion/styled`? Those libraries
-use a different approach. Instead of multiple class names, they use a single, merged class name.
-
-`handleCsProp` was created to handle integration with existing components that use the `css` prop
-from `@emotion/react` or the `styled` components from `@emotion/styled`. If a class name from one of
-those libraries is detected, style merging will follow the same rules as those libraries. Instead of
-multiple class names, a single class name with all matching properties is created. The
-`handleCsProp` also takes care of merging `style` props, `className` props, and can handle the `cs`
-prop:
-
-```tsx
-const myStencil = createStencil({
-  // ...
-});
-
-const MyComponent = elemProps => {
-  return <div {...handleProps(elemProps, myStencil({}))} />;
-};
-
-// All props will be merged for you
-<MyComponent style={{color: 'red'}} className="my-classname" cs={{position: 'relative'}} />;
-```
-
-`handleCsProp` will make sure the `style` prop is passed to the `div` and that the `my-classname`
-CSS class name appears on the `div`'s class list. Also the `cs` prop will add the appropriate styles
-to the element via a CSS class name. If your component needs to handle being passed a `className`,
-`style`, or `cs` prop, use `handleCsProp`.
-
-### handleCsProp API
-
-<SymbolDoc hideHeading name="handleCsProp" />

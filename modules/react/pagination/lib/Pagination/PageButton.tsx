@@ -1,57 +1,51 @@
 import * as React from 'react';
-import {
-  EmotionCanvasTheme,
-  styled,
-  useTheme,
-  createComponent,
-} from '@workday/canvas-kit-react/common';
-import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
-import {BaseButton} from '@workday/canvas-kit-react/button';
 
+import {brand, system} from '@workday/canvas-tokens-web';
+import {BaseButton, buttonStencil} from '@workday/canvas-kit-react/button';
+import {createComponent} from '@workday/canvas-kit-react/common';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {PaginationContext} from './usePaginationModel';
 
-const StyledPageButton = styled(BaseButton)<{toggled?: boolean}>(
-  {
-    minWidth: space.l,
-    width: space.l,
-    borderRadius: borderRadius.circle,
-    height: space.l,
-  },
-  ({toggled}) => {
-    return {
-      fontWeight: toggled ? 700 : 'normal',
-    };
-  }
-);
+export const paginationPageButtonStencil = createStencil({
+  extends: buttonStencil,
+  base: {
+    minWidth: system.space.x8,
+    padding: system.space.zero,
+    fontWeight: system.fontWeight.normal,
+    [buttonStencil.vars.label]: system.color.fg.default,
 
-const getPaginationButtonColors = (toggled: boolean, theme: EmotionCanvasTheme) => {
-  const {
-    canvas: {
-      palette: {primary: themePrimary},
+    '&:hover, &.hover': {
+      [buttonStencil.vars.background]: system.color.bg.alt.soft,
+      [buttonStencil.vars.label]: system.color.fg.strong,
     },
-  } = theme;
-  return {
-    default: {
-      background: toggled ? themePrimary.main : 'transparent',
-      label: toggled ? colors.frenchVanilla100 : colors.blackPepper400,
+
+    '&:active, &.active, &:focus-visible, &.focus': {
+      [buttonStencil.vars.label]: system.color.fg.strong,
     },
-    hover: {
-      background: toggled ? themePrimary.main : colors.soap300,
-      label: toggled ? colors.frenchVanilla100 : colors.blackPepper400,
+
+    '&:disabled, &.disabled': {
+      [buttonStencil.vars.background]: system.color.fg.disabled,
     },
-    active: {
-      background: toggled ? themePrimary.main : 'transparent',
-      label: toggled ? colors.frenchVanilla100 : colors.blackPepper400,
+  },
+  modifiers: {
+    toggled: {
+      true: {
+        fontWeight: system.fontWeight.bold,
+        [buttonStencil.vars.background]: brand.primary.base,
+        [buttonStencil.vars.label]: system.color.fg.inverse,
+
+        '&:hover, &.hover, &:active, &.active, &:focus-visible, &.focus': {
+          [buttonStencil.vars.background]: brand.primary.base,
+          [buttonStencil.vars.label]: system.color.fg.inverse,
+        },
+
+        '&:disabled, &.disabled': {
+          [buttonStencil.vars.background]: system.color.fg.disabled,
+        },
+      },
     },
-    focus: {
-      background: toggled ? themePrimary.main : 'transparent',
-      label: toggled ? colors.frenchVanilla100 : colors.blackPepper400,
-    },
-    disabled: {
-      background: colors.licorice100,
-    },
-  };
-};
+  },
+});
 
 export interface PageButtonProps {
   pageNumber: number;
@@ -63,7 +57,6 @@ export const PageButton = createComponent('button')({
   Component({pageNumber, children, ...elemProps}: PageButtonProps) {
     const model = React.useContext(PaginationContext);
     const isCurrentPage = pageNumber === model.state.currentPage;
-    const theme = useTheme();
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       (elemProps as any).onClick?.(e);
@@ -71,16 +64,15 @@ export const PageButton = createComponent('button')({
     };
 
     return (
-      <StyledPageButton
+      <BaseButton
         aria-current={isCurrentPage ? 'page' : undefined}
-        colors={getPaginationButtonColors(isCurrentPage, theme)}
         aria-pressed={undefined}
+        size="small"
         onClick={handleClick}
-        toggled={isCurrentPage}
-        {...elemProps}
+        {...handleCsProp(elemProps, paginationPageButtonStencil({toggled: isCurrentPage}))}
       >
         {children || pageNumber}
-      </StyledPageButton>
+      </BaseButton>
     );
   },
 });

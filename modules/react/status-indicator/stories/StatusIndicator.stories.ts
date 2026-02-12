@@ -10,7 +10,7 @@ import {Emphasis as EmphasisExample} from './examples/Emphasis';
 import {MaxWidth as MaxWidthExample} from './examples/MaxWidth';
 
 export default {
-  title: 'Components/Indicators/Status Indicator',
+  title: 'Components/Indicators/Status Indicator (deprecated)',
   component: StatusIndicator,
   tags: ['autodocs'],
   parameters: {

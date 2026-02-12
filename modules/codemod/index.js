@@ -95,6 +95,31 @@ const {
       describe: chalk.gray('The path to execute the transform in (recursively).'),
     });
   })
+  .command('v14 [path]', chalk.gray('Canvas Kit v13 > v14 upgrade transform'), yargs => {
+    yargs.positional('path', {
+      type: 'string',
+      default: '.',
+      describe: chalk.gray('The path to execute the transform in (recursively).'),
+    });
+  })
+  .command('v14-tokens [path]', chalk.gray('Canvas Kit v13 > v14 upgrade transform'), yargs => {
+    yargs.positional('path', {
+      type: 'string',
+      default: '.',
+      describe: chalk.gray('The path to execute the transform in (recursively).'),
+    });
+  })
+  .command(
+    'v14.1 [path]',
+    chalk.gray('Canvas Kit v14.1 upgrade transform (style props deprecation)'),
+    yargs => {
+      yargs.positional('path', {
+        type: 'string',
+        default: '.',
+        describe: chalk.gray('The path to execute the transform in (recursively).'),
+      });
+    }
+  )
   .demandCommand(1, chalk.red.bold('You must provide a transform to apply.'))
   .strictCommands()
   .fail((msg, err, yargs) => {

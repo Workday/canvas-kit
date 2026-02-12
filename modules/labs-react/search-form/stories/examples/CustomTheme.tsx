@@ -2,7 +2,6 @@ import * as React from 'react';
 import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
 import {SearchForm, SearchThemeAttributes} from '@workday/canvas-kit-labs-react/search-form';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {colors} from '@workday/canvas-kit-react/tokens';
 
 const initialWineList = [
   'Beaujolais',
@@ -53,10 +52,10 @@ export const CustomTheme = () => {
   };
 
   const customTheme = {
-    background: colors.cinnamon600,
-    backgroundFocus: colors.frenchVanilla100,
-    placeholderColor: colors.frenchVanilla100,
-    placeholderColorFocus: colors.blackPepper400,
+    background: '#a31b12',
+    backgroundFocus: '#fff',
+    placeholderColor: '#fff',
+    placeholderColorFocus: '#333333',
   } as SearchThemeAttributes;
 
   return (

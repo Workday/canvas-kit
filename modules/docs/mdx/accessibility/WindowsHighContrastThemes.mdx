@@ -1,0 +1,98 @@
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+import iconBefore from './assets/icons-before-whcm.png';
+import iconAfter from './assets/icons-after-whcm.png';
+import checkMark from './assets/checkmarks.png';
+import checkMarkWhcm from './assets/checkmarks-whcm.png';
+import borderOutline from './assets/border-outline-dialog-tooltip-3.png';
+import buttonFocus from './assets/button-focus-2.png';
+import menuFocus from './assets/menu-focus.png';
+
+<Meta title="Guides/Accessibility/Windows High Contrast" />
+
+## Supporting Windows 11 High Contrast Desktop Themes
+
+High-contrast themes in Windows 11 are crucial for accessibility. High contrast themes overwrite CSS
+colors including `color`, `backgroundColor`, and `boxShadow`, while `border` and `outline`
+properties retain their settings. To ensure your UI is compatible, follow these best practices for
+improved visibility.
+
+Further reading:
+[Change color contrast in Windows](https://support.microsoft.com/en-us/windows/change-color-contrast-in-windows-fedc744c-90ac-69df-aed5-c8a90125e696)
+
+### Focus Indicators:
+
+Since Canvas Kit components rely on `boxShadow` for the keyboard focus state, it won’t be visible in
+high contrast themes. We’ve added a `2px solid transparent` CSS `outline` to ensure a focus
+indicator remains visible. Use `outlineOffset` to add space between the element and the outline for
+aesthetics. We’ve used a `2px` offset on components like
+[BaseButton](https://github.com/Workday/canvas-kit/blob/master/modules/react/button/lib/BaseButton.tsx)
+to match the visual design of the `boxShadow` in the system. A `-2px` negative offset is used for
+focusable components inside popup containers like the `<Menu>` component to ensure the focus
+indicator isn’t clipped off the edge. (For example:
+[MenuItem](https://github.com/Workday/canvas-kit/blob/master/modules/react/menu/lib/MenuItem.tsx).)
+
+<Flex justifyContent="space-evenly" paddingBottom={system.space.x4}>
+  <img src={buttonFocus} alt="Primary button with outline offset 2 pixels" />
+  <img src={menuFocus} alt="Menu item with outline offset -2 pixels" />
+</Flex>
+
+### Boundary Borders and Outlines:
+
+If content needs to be grouped with a boundary in high contrast themes, using a `transparent` CSS
+`outline` can be useful because it won’t cause alignment problems on the page. We’ve done this to
+draw boundaries in components that don't have any focus state like
+[ModalCard](https://github.com/Workday/canvas-kit/blob/master/modules/react/modal/lib/ModalCard.tsx)
+and
+[TooltipContainer](https://github.com/Workday/canvas-kit/blob/master/modules/react/tooltip/lib/TooltipContainer.tsx).
+
+<Flex justifyContent="center">
+  <figure margin="0">
+    <img src={borderOutline} alt="" />
+    <figcaption style={{width: px2rem(300)}}>
+      CSS outlines appear in high contrast mode around dialog containers and tooltips
+    </figcaption>
+  </figure>
+</Flex>
+
+### Images:
+
+`<img>` elements, which are for images like JPEGs or PNGs, are not affected by high contrast themes.
+If you use a meaningful image with a transparent background, it could become difficult to see
+against some background colors. Be careful when using such images for conveying information to
+users.
+
+<Flex justifyContent="space-evenly" paddingBottom={system.space.x4}>
+  <img src={checkMark} alt="Check mark images highly visible on white background" />
+  <img src={checkMarkWhcm} alt="Check mark images have poor contrast on dark background" />
+</Flex>
+
+### SVG Icons
+
+The colors inside `<svg>` elements usually don't change with high contrast themes, which can make
+them hard to see on some backgrounds. We’ve used a media query to set the icon `fill` and `color`
+properties to `currentColor` ensuring the icon uses the correct color from the user's preferred high
+contrast theme.
+
+```
+// for Windows high contrast desktop themes
+'@media (prefers-contrast: more)': {
+  '.wd-icon-fill, .wd-icon-accent': {
+    color: 'currentColor',
+    fill: 'currentColor',
+  },
+},
+```
+
+<Flex justifyContent='space-evenly'>
+<figure margin='0'>
+  <img src={iconBefore} alt="" />
+  <figcaption style={{width: px2rem(370)}}>Before: The mail icon color has poor contrast on dark backgrounds</figcaption>
+</figure>
+
+<figure margin='0'>
+  <img src={iconAfter} alt="" />
+  <figcaption style={{width: px2rem(370)}}>After: The mail icon inherits the theme's current color for best contrast</figcaption>
+</figure>
+</Flex>

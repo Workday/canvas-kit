@@ -2,7 +2,7 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/react';
 import React from 'react';
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {
   ComponentStatesTable,
   permutateProps,
@@ -82,27 +82,27 @@ export const ExternalHyperlinkStates = {
           jumps over the lazy dog
         </BodyText>
       </Flex>
-      <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
+      <CanvasProvider dir="rtl">
         <Flex flexDirection="column" gap="xxs">
           <Subtext size="large">
-            The quick{' '}
-            <ExternalHyperlink iconLabel="Opens link in new window">brown fox</ExternalHyperlink>{' '}
-            jumps over the lazy dog
+            השועל החום{' '}
+            <ExternalHyperlink iconLabel="Opens link in new window">המהיר</ExternalHyperlink> קופץ
+            מעל הכלב העצל
           </Subtext>
           <BodyText size="small">
-            The quick{' '}
-            <ExternalHyperlink iconLabel="Opens link in new window">brown fox</ExternalHyperlink>{' '}
-            jumps over the lazy dog
+            השועל החום{' '}
+            <ExternalHyperlink iconLabel="Opens link in new window">המהיר</ExternalHyperlink> קופץ
+            מעל הכלב העצל
           </BodyText>
           <BodyText size="medium">
-            The quick{' '}
-            <ExternalHyperlink iconLabel="Opens link in new window">brown fox</ExternalHyperlink>{' '}
-            jumps over the lazy dog
+            השועל החום{' '}
+            <ExternalHyperlink iconLabel="Opens link in new window">המהיר</ExternalHyperlink> קופץ
+            מעל הכלב העצל
           </BodyText>
           <BodyText size="large">
-            The quick{' '}
-            <ExternalHyperlink iconLabel="Opens link in new window">brown fox</ExternalHyperlink>{' '}
-            jumps over the lazy dog
+            השועל החום{' '}
+            <ExternalHyperlink iconLabel="Opens link in new window">המהיר</ExternalHyperlink> קופץ
+            מעל הכלב העצל
           </BodyText>
         </Flex>
       </CanvasProvider>

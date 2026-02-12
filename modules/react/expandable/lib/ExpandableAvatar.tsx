@@ -1,6 +1,5 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {Avatar, AvatarProps, avatarStencil} from '@workday/canvas-kit-react/avatar';
-import {system} from '@workday/canvas-tokens-web';
+import {Avatar, AvatarProps, avatarStencil} from '@workday/canvas-kit-preview-react/avatar';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
@@ -9,7 +8,6 @@ export interface ExpandableAvatarProps extends AvatarProps {}
 export const expandableAvatarStencil = createStencil({
   extends: avatarStencil,
   base: {
-    marginInlineEnd: system.space.x2,
     flexShrink: 0,
   },
 });
@@ -17,16 +15,21 @@ export const expandableAvatarStencil = createStencil({
 // When the component is created, it needs to be a button element to match AvatarProps.
 // Once Avatar becomes a `createComponent` we can default the element type to a `div`
 // and the types should be properly extracted
-// Setting altText prop to a default empty string for decorative purposes
+// Setting isDecorative prop to true by default since avatars in expandable headers are typically decorative
 export const ExpandableAvatar = createComponent('div')({
   displayName: 'Expandable.Avatar',
-  Component: ({altText = '', ...elemProps}: ExpandableAvatarProps, ref, Element) => {
+  Component: (
+    {name = '', isDecorative = true, ...elemProps}: ExpandableAvatarProps,
+    ref,
+    Element
+  ) => {
     return (
       <Avatar
         as={Element}
-        altText={altText}
+        name={name}
+        isDecorative={isDecorative}
         ref={ref}
-        size="medium"
+        size="extraSmall"
         {...mergeStyles(elemProps, expandableAvatarStencil())}
       />
     );
