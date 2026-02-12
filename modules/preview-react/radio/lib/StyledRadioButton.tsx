@@ -75,19 +75,10 @@ const radioInputStencil = createStencil({
     },
 
     '&:focus-visible + .cnvs-radio-check, &.focus + .cnvs-radio-check': {
+      outline: 'transparent',
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       borderColor: cssVar(system.color.brand.border.primary, system.color.border.primary.default),
-      ...focusRing({
-        width: 1,
-        separation: 0,
-        animate: false,
-        innerColor: system.color.border.inverse.default,
-        outerColor: brand.common.focusOutline,
-      }),
-    },
-
-    '&:focus-visible:hover + .cnvs-radio-check, &.focus:hover + .cnvs-radio-check': {
-      outline: 'transparent',
+      boxShadow: `0 0 0 0px ${cssVar(system.color.focus.inverse, base.neutral0)} ,0 0 0 1px ${cssVar(system.color.brand.focus.primary, brand.common.focusOutline)} `,
     },
     // This creates the inner circle when the Radio is checked.
     // The backgroundColor represents the dot in the middle of the radio.
@@ -100,7 +91,7 @@ const radioInputStencil = createStencil({
     '&:focus-visible:checked + .cnvs-radio-check, &:focus-visible:hover:checked + .cnvs-radio-check, &.focus:checked + .cnvs-radio-check, &.focus:hover:checked + .cnvs-radio-check':
       {
         outline: 'transparent',
-        boxShadow: `0 0 0 ${px2rem(2)}  ${cssVar(system.color.focus.inverse, '--cnvs-sys-color-border-inverse')} , 0 0 0 ${px2rem(4)}  ${cssVar(system.color.brand.focus.primary, brand.common.focusOutline)} `,
+        boxShadow: `0 0 0 ${px2rem(2)}  ${cssVar(system.color.focus.inverse, base.neutral0)} ,0 0 0 ${px2rem(4)}  ${cssVar(system.color.brand.focus.primary, brand.common.focusOutline)} `,
       },
   },
   modifiers: {
@@ -110,10 +101,7 @@ const radioInputStencil = createStencil({
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
           backgroundColor: cssVar(system.color.surface.inverse, system.color.bg.alt.softer),
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          borderColor: cssVar(
-            system.color.border.inverse.default,
-            '--cnvs-sys-color-border-inverse'
-          ),
+          borderColor: cssVar(system.color.border.inverse.default, base.neutral0),
         },
         '&:disabled, &.disabled': {
           opacity: system.opacity.disabled,
@@ -121,7 +109,7 @@ const radioInputStencil = createStencil({
             // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
             backgroundColor: cssVar(system.color.surface.inverse, system.color.bg.alt.softer),
             // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-            borderColor: cssVar(system.color.focus.inverse, '--cnvs-sys-color-border-inverse'),
+            borderColor: cssVar(system.color.focus.inverse, base.neutral0),
             // opacity: system.opacity.disabled,
           },
           // This creates the inner circle when the Radio is checked.
@@ -130,23 +118,17 @@ const radioInputStencil = createStencil({
           [`&:checked + ${checkPart}, &.checked + ${checkPart}`]: {
             // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
             backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.base), // inner circle background color
-            borderColor: cssVar(
-              system.color.border.inverse.default,
-              '--cnvs-sys-color-border-inverse'
-            ), // inner circle border color
+            // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+            borderColor: cssVar(system.color.border.inverse.default, base.neutral0), // inner circle border color
           },
         },
         [`&:hover + ${checkPart}, &.hover + ${checkPart}`]: {
-          borderColor: cssVar(
-            system.color.border.inverse.default,
-            '--cnvs-sys-color-border-inverse'
-          ),
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          borderColor: cssVar(system.color.border.inverse.default, base.neutral0),
         },
         [`&:focus-visible + ${checkPart}, &.focus + ${checkPart}`]: {
-          borderColor: cssVar(
-            system.color.border.inverse.default,
-            '--cnvs-sys-color-border-inverse'
-          ),
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          borderColor: cssVar(system.color.border.inverse.default, base.neutral0),
         },
         // This creates the inner circle when the Radio is checked.
         // The backgroundColor represents the dot in the middle of the radio.
@@ -154,23 +136,18 @@ const radioInputStencil = createStencil({
         [`&:checked + ${checkPart}, &.checked + ${checkPart}`]: {
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
           backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.base), // inner circle background color
-          borderColor: cssVar(
-            system.color.border.inverse.default,
-            '--cnvs-sys-color-border-inverse'
-          ), // inner circle border color
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          borderColor: cssVar(system.color.border.inverse.default, base.neutral0), // inner circle border color
         },
         [`&:focus-visible + ${checkPart}, &:focus-visible:hover + ${checkPart}, &.focus + ${checkPart}, &.focus:hover + ${checkPart}`]:
           {
-            boxShadow: `0 0 0 2px ${cssVar(system.color.brand.border.primary, system.color.border.primary.default)}`,
+            // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+            boxShadow: `0 0 0 ${px2rem(2)}  ${cssVar(system.color.brand.border.primary, system.color.border.primary.default)}`,
           },
         [`&:focus-visible:checked + ${checkPart}, &:focus-visible:hover:checked + ${checkPart}, &.focus:checked + ${checkPart}, &.focus:hover:checked + ${checkPart}`]:
           {
-            ...focusRing({
-              width: 2,
-              separation: 2,
-              innerColor: system.color.border.contrast.default,
-              outerColor: '--cnvs-sys-color-border-inverse',
-            }),
+            // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+            boxShadow: `0 0 0 ${px2rem(2)}  ${system.color.border.contrast.default} ,0 0 0 ${px2rem(4)}  ${cssVar(system.color.focus.inverse, base.neutral0)} `,
           },
       }),
     },

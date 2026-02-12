@@ -168,7 +168,7 @@ export const textStencil = createStencil({
         color: cssVar(system.color.brand.fg.critical.default, system.color.text.critical.default),
       },
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      hint: {color: cssVar(system.color.fg.default, system.color.text.hint)},
+      hint: {color: cssVar(system.color.fg.muted.default, system.color.text.hint)},
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       inverse: {color: cssVar(system.color.fg.inverse, system.color.text.inverse)},
     },
