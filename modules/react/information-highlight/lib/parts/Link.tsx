@@ -6,7 +6,6 @@ import {base, system} from '@workday/canvas-tokens-web';
 const informationHighlightLinkStencil = createStencil({
   base: () => {
     return {
-      ...system.type.subtext.large,
       fontFamily: system.fontFamily.default,
       fontWeight: system.fontWeight.bold,
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token

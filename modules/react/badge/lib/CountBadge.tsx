@@ -7,7 +7,7 @@ import {
   keyframes,
   px2rem,
 } from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 const grow = keyframes({
   from: {
@@ -61,6 +61,7 @@ const countBadgeStencil = createStencil({
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     lineHeight: cssVar(system.lineHeight.subtext.lg, px2rem(20)),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    letterSpacing: cssVar(system.letterSpacing.subtext.md, base.letterSpacing100),
     minWidth: cssVar(system.size.xxs, px2rem(20)),
     padding: `0 ${px2rem(6.5)}`,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token

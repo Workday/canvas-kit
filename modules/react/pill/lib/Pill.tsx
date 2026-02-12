@@ -78,8 +78,6 @@ export const pillStencil = createStencil({
     },
     '&:hover, &.hover': {
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      // This is also a new way of introducing hover styles.
-      // This is taking the first color value given and darkening with the mixin color.
       [buttonStencil.vars.background]: colorSpace.darken(
         system.color.surface.alt.strong,
         system.color.bg.alt.strong,
