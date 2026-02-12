@@ -25,7 +25,7 @@ export const breadcrumbsMenuCardStencil = createStencil({
   },
 });
 
-export const BreadcrumbsMenuCard = (elemProps: ExtractProps<typeof Menu.Card, never>) => (
+export const BreadcrumbsMenuCard = (elemProps: ExtractProps<typeof Menu.Card>) => (
   <Menu.Card {...handleCsProp(elemProps, breadcrumbsMenuCardStencil())} />
 );
 
