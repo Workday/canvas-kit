@@ -1,7 +1,7 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, cssVar} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 type TypeSize = 'large' | 'medium' | 'small';
 type TokenName = `${keyof typeof system.type}.${TypeSize}`;
@@ -100,6 +100,7 @@ export const textStencil = createStencil({
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         lineHeight: cssVar(system.lineHeight.body.lg, system.lineHeight.body.large),
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         color: cssVar(system.color.fg.default, system.color.text.default),
       },
       'body.medium': {
@@ -120,6 +121,7 @@ export const textStencil = createStencil({
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         lineHeight: cssVar(system.lineHeight.body.sm, system.lineHeight.body.small),
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        letterSpacing: cssVar(system.letterSpacing.body.sm, base.letterSpacing200),
         color: cssVar(system.color.fg.default, system.color.text.default),
       },
       // Subtext level styles
@@ -131,6 +133,8 @@ export const textStencil = createStencil({
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         lineHeight: cssVar(system.lineHeight.subtext.lg, system.lineHeight.subtext.large),
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        letterSpacing: cssVar(system.letterSpacing.subtext.lg, base.letterSpacing150),
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         color: cssVar(system.color.fg.default, system.color.text.default),
       },
       'subtext.medium': {
@@ -141,6 +145,8 @@ export const textStencil = createStencil({
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         lineHeight: cssVar(system.lineHeight.subtext.md, system.lineHeight.subtext.medium),
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        letterSpacing: cssVar(system.letterSpacing.subtext.md, base.letterSpacing100),
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         color: cssVar(system.color.fg.default, system.color.text.default),
       },
       'subtext.small': {
@@ -150,6 +156,8 @@ export const textStencil = createStencil({
         fontSize: cssVar(system.fontSize.subtext.sm, system.fontSize.subtext.small),
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         lineHeight: cssVar(system.lineHeight.subtext.sm, system.lineHeight.subtext.small),
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        letterSpacing: cssVar(system.letterSpacing.subtext.sm, base.letterSpacing50),
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         color: cssVar(system.color.fg.default, system.color.text.default),
       },
