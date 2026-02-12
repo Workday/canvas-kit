@@ -59,11 +59,17 @@ export const menuItemStencil = createStencil({
     selected: 'menu-item-selected',
   },
   base: ({textPart, iconPart, selectedPart}) => ({
-    ...system.type.subtext.large,
+    fontFamily: system.fontFamily.default,
+    fontWeight: system.fontWeight.medium,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    fontSize: cssVar(system.fontSize.subtext.lg, system.fontSize.subtext.large),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    lineHeight: cssVar(system.lineHeight.subtext.lg, system.lineHeight.subtext.large),
     display: 'flex',
     alignItems: 'center',
     width: '100%',
-    gap: system.space.x4,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    gap: cssVar(system.gap.md, system.space.x4),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     padding: `${cssVar(system.padding.sm, system.space.x2)} ${cssVar(system.padding.md, system.space.x4)}`,
     boxSizing: 'border-box',
@@ -130,7 +136,6 @@ export const menuItemStencil = createStencil({
 
     // Disabled styles
     '&:is(:disabled, [aria-disabled=true])': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       cursor: 'default',
       opacity: system.opacity.disabled,
 

@@ -30,10 +30,8 @@ export const modalOverlayContainerStencil = createStencil({
   },
   base: ({containerCenter}) => ({
     position: 'fixed',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    top: cssVar(base.size0, system.space.zero),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    left: cssVar(base.size0, system.space.zero),
+    top: 0,
+    left: 0,
     width: '100vw',
     height: '100vh',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
@@ -49,10 +47,8 @@ export const modalOverlayContainerStencil = createStencil({
       maxHeight: '100%',
       display: 'flex',
       position: 'absolute',
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      left: cssVar(base.size0, system.space.zero),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      top: cssVar(base.size0, system.space.zero),
+      left: 0,
+      top: 0,
       justifyContent: 'center',
       alignItems: 'center',
       height: '100%',

@@ -3,9 +3,8 @@ import {
   createElemPropsHook,
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Menu} from '@workday/canvas-kit-react/menu';
-import {createStencil, cssVar} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {useComboboxModel} from './hooks/useComboboxModel';
@@ -36,7 +35,7 @@ export const ComboboxCard = createSubcomponent('div')({
   elemPropsHook: useComboboxCard,
 })<ComboboxCardProps>(({children, ...elemProps}, Element) => {
   return (
-    <Menu.Card as={Element} {...mergeStyles(elemProps, comboboxCardStencil())}>
+    <Menu.Card as={Element} {...handleCsProp(elemProps, comboboxCardStencil())}>
       {children}
     </Menu.Card>
   );

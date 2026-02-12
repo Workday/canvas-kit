@@ -1,7 +1,8 @@
 import {ListBox, ListBoxProps} from '@workday/canvas-kit-react/collection';
 import {createElemPropsHook, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {menuListStencil, useMenuModel} from '@workday/canvas-kit-react/menu';
-import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 import {useComboboxModel} from './hooks/useComboboxModel';
 
@@ -33,6 +34,8 @@ export const ComboboxMenuList = createSubcomponent('ul')({
     <ListBox
       as={Element}
       model={model}
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      marginY={cssVar(system.gap.none, system.space.x2)}
       {...handleCsProp(elemProps, comboboxMenuListStencil({orientation: model.state.orientation}))}
     >
       {children}

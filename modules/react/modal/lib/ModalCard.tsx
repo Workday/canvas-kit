@@ -20,8 +20,7 @@ export const modalCardStencil = createStencil({
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     borderRadius: cssVar(system.shape.xxxl, system.shape.x6),
     '@media screen and (max-width: 768px)': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      gap: cssVar(system.gap.none, system.space.zero),
+      gap: 0,
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       margin: cssVar(system.gap.md, system.space.x4), // 16px all around margin on smaller screen sizes
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
