@@ -1,12 +1,9 @@
-import * as React from 'react';
-
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {
   Pagination,
   getLastPage,
   getVisibleResultsMax,
   getVisibleResultsMin,
-  usePaginationModel,
 } from '@workday/canvas-kit-react/pagination';
 
 export const RTL = () => {
