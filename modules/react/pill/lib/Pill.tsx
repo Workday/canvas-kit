@@ -35,7 +35,7 @@ export const pillStencil = createStencil({
     flexDirection: 'row',
     alignItems: 'center',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderRadius: cssVar(system.shape.sm, system.space.x1),
+    borderRadius: cssVar(system.shape.sm, system.shape.x1),
     fontFamily: system.fontFamily.default,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     fontSize: cssVar(system.fontSize.subtext.lg, system.fontSize.subtext.large),

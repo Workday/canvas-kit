@@ -36,7 +36,13 @@ export const bannerStencil = createStencil({
     alignItems: 'center',
     textAlign: 'left',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderRadius: cssVar(system.shape.sm, system.shape.x1),
+    borderStartStartRadius: cssVar(system.shape.sm, system.shape.x1),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    borderStartEndRadius: cssVar(system.shape.sm, system.shape.x1),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    borderEndStartRadius: cssVar(system.shape.sm, system.shape.x1),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    borderEndEndRadius: cssVar(system.shape.sm, system.shape.x1),
     cursor: 'pointer',
     transition: 'background-color 120ms',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token

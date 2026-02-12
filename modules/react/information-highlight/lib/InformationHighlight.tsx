@@ -1,7 +1,7 @@
 import {createContainer} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {useInformationHighlightModel} from './hooks/useInformationHighlightModel';
 import {Body} from './parts/Body';
@@ -23,7 +23,7 @@ export const informationHighlightStencil = createStencil({
     borderRadius: cssVar(system.shape.sm, system.shape.x1),
     outline: `${px2rem(1)} solid transparent`,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderInlineStart: `${cssVar(system.shape.sm, system.space.x1)} solid transparent`,
+    borderInlineStart: `${cssVar(base.size50, system.space.x1)} solid transparent`,
   },
   modifiers: {
     informational: {

@@ -66,8 +66,9 @@ const statusIndicatorStencil = createStencil({
     maxWidth: px2rem(200),
     alignItems: 'center',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderRadius: cssVar(system.shape.full, system.shape.round),
-    height: px2rem(20),
+    borderRadius: cssVar(system.shape.sm, system.shape.round),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    height: cssVar(system.size.xxs, px2rem(20)),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     padding: `0 ${cssVar(system.padding.xs, system.space.x2)}`,
     outline: `${px2rem(1)} solid transparent`,
