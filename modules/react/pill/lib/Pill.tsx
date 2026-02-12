@@ -3,7 +3,7 @@ import {createContainer, focusRing} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Box, BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {colorSpace, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {PillAvatar} from './PillAvatar';
 import {PillCount, pillCountStencil} from './PillCount';
@@ -36,7 +36,11 @@ export const pillStencil = createStencil({
     alignItems: 'center',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     borderRadius: cssVar(system.shape.sm, system.space.x1),
-    ...system.type.subtext.large,
+    fontFamily: system.fontFamily.default,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    fontSize: cssVar(system.fontSize.subtext.lg, system.fontSize.subtext.large),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    letterSpacing: cssVar(system.letterSpacing.subtext.lg, base.letterSpacing150),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     lineHeight: cssVar(system.lineHeight.subtext.sm, system.lineHeight.subtext.small), // ensure correct line height when there's no elements and just text
     boxShadow: 'none',

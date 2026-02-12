@@ -58,8 +58,10 @@ const countBadgeStencil = createStencil({
     fontWeight: system.fontWeight.bold,
     height: px2rem(20),
     justifyContent: 'center',
-    lineHeight: px2rem(20),
-    minWidth: px2rem(20),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    lineHeight: cssVar(system.size.xxs, px2rem(20)),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    minWidth: cssVar(system.size.xxs, px2rem(20)),
     padding: `0 ${px2rem(6.5)}`,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     background: cssVar(system.color.accent.danger, system.color.fg.critical.default),

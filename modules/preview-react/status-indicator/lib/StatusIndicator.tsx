@@ -103,7 +103,7 @@ const statusIndicatorStencil = createStencil({
       },
       caution: {
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        color: cssVar(system.color.fg.warning.strong, system.color.fg.caution.soft),
+        color: cssVar(system.color.fg.warning.strong, system.color.fg.caution.softer),
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         backgroundColor: cssVar(
           system.color.surface.warning.strong,

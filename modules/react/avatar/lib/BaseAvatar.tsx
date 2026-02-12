@@ -50,7 +50,7 @@ export const baseAvatarStencil = createStencil({
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     borderRadius: cssVar(system.shape.full, system.shape.round),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    // TODO: These are the fallbacks if "size" is not defined
+    // These are the fallbacks if "size" is not defined
     width: cssVar(size, cssVar(system.size.lg, px2rem(48))),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     height: cssVar(size, cssVar(system.size.lg, px2rem(48))),
@@ -65,7 +65,12 @@ export const baseAvatarStencil = createStencil({
     justifyContent: 'center',
     overflow: 'hidden',
     border: 'none',
-    ...system.type.body.medium,
+    fontFamily: system.fontFamily.default,
+    fontWeight: system.fontWeight.normal,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    lineHeight: cssVar(system.lineHeight.body.md, system.lineHeight.body.medium),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    fontSize: cssVar(system.fontSize.body.md, system.fontSize.body.medium),
   }),
   modifiers: {
     variant: {
