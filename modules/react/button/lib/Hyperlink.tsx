@@ -67,7 +67,7 @@ export const hyperlinkStencil = createStencil({
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
           color: cssVar(system.color.brand.fg.primary.strong, system.color.text.primary.stronger),
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          background: cssVar(system.color.surface.alt.default, system.color.bg.alt.soft),
+          background: cssVar(system.color.surface.navigation, system.color.bg.alt.soft),
         },
       },
       standalone: {
@@ -90,7 +90,7 @@ export const hyperlinkStencil = createStencil({
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
           color: cssVar(system.color.brand.fg.primary.strong, system.color.text.primary.stronger),
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          background: cssVar(system.color.surface.alt.default, system.color.bg.alt.soft),
+          background: cssVar(system.color.surface.navigation, system.color.bg.alt.soft),
         },
       },
     },
