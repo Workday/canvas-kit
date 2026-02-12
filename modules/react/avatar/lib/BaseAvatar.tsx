@@ -136,15 +136,14 @@ export const baseAvatarStencil = createStencil({
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       }),
       large: ({size}) => ({
+        ...system.type.heading.medium,
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         [size]: cssVar(base.size900, px2rem(72)),
+        fontWeight: system.fontWeight.bold,
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        lineHeight: cssVar(system.lineHeight.subtext.md, system.lineHeight.subtext.medium),
+        lineHeight: cssVar(system.lineHeight.heading.md, system.lineHeight.subtext.medium),
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        fontSize: cssVar(system.fontSize.subtext.md, system.fontSize.subtext.medium),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        letterSpacing: cssVar(system.letterSpacing.subtext.md, base.letterSpacing100),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        fontSize: cssVar(system.fontSize.heading.md, system.fontSize.subtext.medium),
       }),
       extraLarge: ({size}) => ({
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token

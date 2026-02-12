@@ -58,7 +58,8 @@ export const bannerStencil = createStencil({
       true: {
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         backgroundColor: cssVar(system.color.brand.accent.critical, brand.error.base),
-        color: brand.error.accent,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        color: cssVar(system.color.fg.inverse, brand.error.accent),
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         '&:hover, &.hover': {
           background: colorSpace.darken(
