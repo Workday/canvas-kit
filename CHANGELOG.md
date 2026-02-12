@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.2.23](https://github.com/Workday/canvas-kit/releases/tag/v14.2.23) (2026-02-12)
+
+### Components
+
+- fix: Update MenuItem.Text to support cs prop ([#3760](https://github.com/Workday/canvas-kit/pull/3760)) ([@alanbsmith](https://github.com/alanbsmith), Alan Smith)
+
+
 ## [v14.2.22](https://github.com/Workday/canvas-kit/releases/tag/v14.2.22) (2026-02-11)
 
 ### Components
