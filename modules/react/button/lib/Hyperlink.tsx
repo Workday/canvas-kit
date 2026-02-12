@@ -84,7 +84,7 @@ export const hyperlinkStencil = createStencil({
         },
         '&:focus, &.focus, &:focus-visible': {
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          boxShadow: `0 0 0 ${px2rem(2)}  ${cssVar(system.color.fg.inverse, system.color.text.inverse)}`,
+          boxShadow: `0 0 0 ${px2rem(2)}  ${cssVar(system.color.focus.inverse, system.color.text.inverse)}`,
         },
         '&:active, &.active': {
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
