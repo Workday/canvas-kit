@@ -9,7 +9,7 @@ import {
 import {Box, BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {usePopupModel, usePopupStack} from '@workday/canvas-kit-react/popup';
 import {createStencil, cssVar, keyframes} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 import {useModalModel} from './hooks';
 
