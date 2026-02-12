@@ -3,11 +3,10 @@ import React from 'react';
 
 import {StatusIndicator} from '@workday/canvas-kit-react/status-indicator';
 import {space} from '@workday/canvas-kit-react/tokens';
-import {system} from '@workday/canvas-tokens-web';
 
 const StatusIndicators = styled('div')({
   '& > *': {
-    margin: system.gap.sm,
+    margin: space.xxs,
   },
 });
 

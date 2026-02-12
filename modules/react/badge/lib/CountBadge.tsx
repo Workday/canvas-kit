@@ -59,7 +59,7 @@ const countBadgeStencil = createStencil({
     height: px2rem(20),
     justifyContent: 'center',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    lineHeight: cssVar(system.size.xxs, px2rem(20)),
+    lineHeight: cssVar(system.lineHeight.subtext.lg, px2rem(20)),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     minWidth: cssVar(system.size.xxs, px2rem(20)),
     padding: `0 ${px2rem(6.5)}`,
@@ -72,7 +72,8 @@ const countBadgeStencil = createStencil({
     variant: {
       // .cnvs-count-badge--variant-inverse
       inverse: {
-        background: system.color.bg.default,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        background: cssVar(system.color.surface.inverse, system.color.bg.default),
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         color: cssVar(system.color.fg.info.strong, system.color.text.primary.default),
       },
