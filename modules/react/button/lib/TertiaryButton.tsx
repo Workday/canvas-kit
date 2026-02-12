@@ -1,6 +1,6 @@
-import {createComponent, focusRing, forwardFitTokens} from '@workday/canvas-kit-react/common';
+import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 
 import {buttonColorPropVars, buttonStencil} from './BaseButton';
@@ -22,10 +22,10 @@ const tertiaryButtonStencil = createStencil({
   extends: buttonStencil,
   // Base Styles
   base: {
-    paddingInline: forwardFitTokens.system.padding.xs,
+    paddingInline: system.space.x2,
     minWidth: 'auto',
     borderWidth: px2rem(2),
-    [buttonStencil.vars.borderRadius]: forwardFitTokens.system.shape.full,
+    [buttonStencil.vars.borderRadius]: system.shape.round,
     [buttonStencil.vars.background]: system.color.bg.transparent.default,
     [buttonStencil.vars.label]: brand.primary.base,
     [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
@@ -67,7 +67,7 @@ const tertiaryButtonStencil = createStencil({
     // IconPosition Styles
     iconPosition: {
       only: {
-        padding: forwardFitTokens.system.padding.none,
+        padding: 0,
         [systemIconStencil.vars.color]: system.color.fg.default,
         [systemIconStencil.vars.color]: cssVar(
           buttonColorPropVars.default.icon,
@@ -144,81 +144,81 @@ const tertiaryButtonStencil = createStencil({
     {
       modifiers: {size: 'large', iconPosition: 'only'},
       styles: {
-        minWidth: forwardFitTokens.system.size.xl,
+        minWidth: calc.multiply(system.space.x4, 3),
       },
     },
     {
       modifiers: {size: 'large', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: forwardFitTokens.system.padding.xs,
-        paddingInlineEnd: forwardFitTokens.system.padding.sm,
+        paddingInlineStart: system.space.x2,
+        paddingInlineEnd: system.space.x3,
       },
     },
     {
       modifiers: {size: 'large', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: forwardFitTokens.system.padding.sm,
-        paddingInlineEnd: forwardFitTokens.system.padding.xs,
+        paddingInlineStart: system.space.x3,
+        paddingInlineEnd: system.space.x2,
       },
     },
     {
       modifiers: {size: 'medium', iconPosition: 'only'},
       styles: {
-        minWidth: forwardFitTokens.system.size.lg,
+        minWidth: system.space.x10,
       },
     },
     {
       modifiers: {size: 'medium', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: forwardFitTokens.system.padding.xs,
-        paddingInlineEnd: forwardFitTokens.system.padding.sm,
+        paddingInlineStart: system.space.x2,
+        paddingInlineEnd: system.space.x3,
       },
     },
     {
       modifiers: {size: 'medium', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: forwardFitTokens.system.padding.sm,
-        paddingInlineEnd: forwardFitTokens.system.padding.xs,
+        paddingInlineStart: system.space.x3,
+        paddingInlineEnd: system.space.x2,
       },
     },
     {
       modifiers: {size: 'small', iconPosition: 'only'},
       styles: {
-        minWidth: forwardFitTokens.system.size.md,
+        minWidth: system.space.x8,
       },
     },
     {
       modifiers: {size: 'small', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: forwardFitTokens.system.padding.xs,
-        paddingInlineEnd: forwardFitTokens.system.padding.sm,
+        paddingInlineStart: system.space.x2,
+        paddingInlineEnd: system.space.x3,
       },
     },
     {
       modifiers: {size: 'small', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: forwardFitTokens.system.padding.sm,
-        paddingInlineEnd: forwardFitTokens.system.padding.xs,
+        paddingInlineStart: system.space.x3,
+        paddingInlineEnd: system.space.x2,
       },
     },
     {
       modifiers: {size: 'extraSmall', iconPosition: 'only'},
       styles: {
-        minWidth: forwardFitTokens.system.size.sm,
+        minWidth: system.space.x6,
       },
     },
     {
       modifiers: {size: 'extraSmall', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: forwardFitTokens.system.padding.xxs,
-        paddingInlineEnd: forwardFitTokens.system.padding.xs,
+        paddingInlineStart: system.space.x1,
+        paddingInlineEnd: system.space.x2,
       },
     },
     {
       modifiers: {size: 'extraSmall', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: forwardFitTokens.system.padding.xs,
-        paddingInlineEnd: forwardFitTokens.system.padding.xxs,
+        paddingInlineStart: system.space.x2,
+        paddingInlineEnd: system.space.x1,
       },
     },
   ],
