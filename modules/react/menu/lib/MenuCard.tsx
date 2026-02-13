@@ -8,7 +8,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {getTransformFromPlacement} from '@workday/canvas-kit-react/popup';
-import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {useMenuModel} from './useMenuModel';
@@ -31,8 +31,12 @@ export const menuCardStencil = createStencil({
     display: 'flex',
     flexDirection: 'column',
     transition: `transform ease-out 150ms`,
-    padding: system.space.zero,
-    maxWidth: calc.subtract('100vw', system.space.x8),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    padding: cssVar(system.padding.xxs, '0'),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    borderRadius: cssVar(system.shape.xxl, system.shape.x2),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    maxWidth: calc.subtract('100vw', cssVar(system.size.sm, system.space.x8)),
     boxShadow: system.depth[3],
     minWidth,
     maxHeight,

@@ -26,12 +26,13 @@ const cardStencil = createStencil({
     '[data-part="example-block"]': {
       boxShadow: system.depth[1],
       borderRadius: system.shape.x1,
+      padding: system.padding.md,
       position: 'relative',
       overflow: 'auto', // This allows for the entire ExampleCodeBlock to scroll on smaller viewports
-      padding: system.padding.xxl, // Increase padding since new Card default is smaller
     },
     '[data-part="example-block-container"]': {
       overflow: 'auto',
+      padding: system.padding.md,
     },
     '[data-part="code-block"]': {
       display: 'none',

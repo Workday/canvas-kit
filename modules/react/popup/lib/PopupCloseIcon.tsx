@@ -1,6 +1,6 @@
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
-import {createStencil} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {xIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -12,8 +12,10 @@ export interface PopupCloseIconProps extends ExtractProps<typeof TertiaryButton,
 export const popupCloseIconStencil = createStencil({
   base: {
     position: 'absolute',
-    insetInlineEnd: system.space.x1,
-    top: system.space.x1,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    insetInlineEnd: cssVar(system.padding.xs, system.space.x1),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    top: cssVar(system.padding.xs, system.space.x1),
   },
 });
 

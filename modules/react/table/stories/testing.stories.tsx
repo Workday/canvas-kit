@@ -78,7 +78,7 @@ const tableHeaderStencil = createStencil({
     variant: {
       sticky: {
         position: 'sticky',
-        left: system.space.zero,
+        left: 0,
         zIndex: 2,
       },
     },

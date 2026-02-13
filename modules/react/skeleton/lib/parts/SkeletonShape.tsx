@@ -39,7 +39,7 @@ export const skeletonShapeStencil = createStencil({
       cssVar(system.color.surface.loading, system.color.bg.alt.strong)
     ),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderRadius: cssVar(borderRadius, cssVar(system.shape.none, system.space.zero)),
+    borderRadius: cssVar(borderRadius, '0'),
     height: cssVar(height, '100%'),
     width: width,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token

@@ -1,7 +1,7 @@
 import {ErrorType, GrowthBehavior, createComponent} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {CSProps, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 
 export interface TextInputProps extends GrowthBehavior, CSProps {
   /**
@@ -21,12 +21,12 @@ export const textInputStencil = createStencil({
   base: ({width}) => ({
     fontFamily: system.fontFamily.default,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     fontSize: cssVar(system.fontSize.subtext.lg, system.fontSize.subtext.large),
     fontWeight: system.fontWeight.normal,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     lineHeight: cssVar(system.lineHeight.subtext.lg, system.lineHeight.subtext.large),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    letterSpacing: cssVar(system.letterSpacing.subtext.lg, base.letterSpacing150),
     display: 'block',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     border: `${px2rem(1)} solid ${cssVar(system.color.border.input.default)}`,
@@ -39,7 +39,7 @@ export const textInputStencil = createStencil({
     transition: '0.2s box-shadow, 0.2s border-color',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     padding: cssVar(system.padding.xs, system.space.x2), // Compensate for border
-    margin: px2rem(0), // Fix Safari
+    margin: 0, // Fix Safari
     width,
     minWidth: cssVar(width, px2rem(280)),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
@@ -98,7 +98,7 @@ export const textInputStencil = createStencil({
         '&:is(:focus-visible, .focus):not([disabled])': {
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
           boxShadow: `inset 0 0 0 ${px2rem(2)} ${cssVar(system.color.brand.border.critical, brand.common.errorInner)},
-        0 0 0 2px ${cssVar(system.color.focus.inverse, system.color.border.inverse.default)},
+        0 0 0 2px ${cssVar(system.color.focus.inverse, base.neutral0)},
         0 0 0 4px ${cssVar(system.color.brand.border.primary, brand.common.focusOutline)}`,
           outlineOffset: px2rem(2),
         },
@@ -117,7 +117,7 @@ export const textInputStencil = createStencil({
         '&:is(:focus-visible, .focus):not([disabled])': {
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
           boxShadow: `inset 0 0 0 ${px2rem(2)} ${cssVar(system.color.brand.focus.caution.inner, brand.common.alertInner)},
-        0 0 0 2px ${cssVar(system.color.focus.inverse, system.color.border.inverse.default)},
+        0 0 0 2px ${cssVar(system.color.focus.inverse, base.neutral0)},
         0 0 0 4px ${cssVar(system.color.brand.border.primary, brand.common.focusOutline)}`,
         },
         outlineOffset: px2rem(2),

@@ -23,7 +23,7 @@ import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Box, FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 
 import {useTabsModel} from './useTabsModel';
 
@@ -84,15 +84,17 @@ export interface TabsItemProps
 
 const tabItemStencil = createStencil({
   base: {
-    ...system.type.subtext.large,
-    fontFamily: `${system.fontFamily.default}, Helvetica Neue, Helvetica, Arial, sans-serif`,
+    fontFamily: system.fontFamily.default,
+    fontSize: cssVar(system.fontSize.subtext.lg, system.fontSize.subtext.large),
+    lineHeight: cssVar(system.lineHeight.subtext.lg, system.lineHeight.subtext.large),
+    letterSpacing: cssVar(system.letterSpacing.subtext.lg, base.letterSpacing150),
     fontWeight: system.fontWeight.medium,
     border: 'none',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     backgroundColor: cssVar(system.color.surface.transparent, system.color.bg.transparent.default),
     flex: '0 0 auto',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    minWidth: cssVar(system.padding.none, system.space.zero),
+    minWidth: 0,
     alignItems: 'center',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     padding: `0 ${cssVar(system.padding.md, system.space.x4)}`,
@@ -135,7 +137,7 @@ const tabItemStencil = createStencil({
       // focus outline for Windows high contrast theme
       outline: `${px2rem(2)} solid transparent`,
       ...focusRing({inset: 'outer', width: 0, separation: 2}),
-      [buttonStencil.vars.boxShadowInner]: system.color.border.inverse.default,
+      [buttonStencil.vars.boxShadowInner]: cssVar(system.color.focus.inverse, base.neutral0),
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.boxShadowOuter]: cssVar(
         system.color.brand.focus.primary,
