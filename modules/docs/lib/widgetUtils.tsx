@@ -1,11 +1,11 @@
-import styled from '@emotion/styled';
 import React from 'react';
 
 import {Breadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
 import {Hyperlink} from '@workday/canvas-kit-react/button';
 import {StyledType, createComponent} from '@workday/canvas-kit-react/common';
 import {Dialog, useDialogModel} from '@workday/canvas-kit-react/dialog';
-import {CanvasColor, colors, space, type} from '@workday/canvas-kit-react/tokens';
+import {CSProps, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import * as types from '../docgen/docTypes';
 import {MDX, MdxJSToJSX} from './MDXElements';
@@ -129,7 +129,7 @@ export const SymbolDialog = ({value}: SymbolDialogProps) => {
   if (nestedContext) {
     return (
       <ButtonHyperLink
-        style={{
+        cs={{
           border: 'none',
           background: 'transparent',
           fontSize: 'inherit',
@@ -149,7 +149,7 @@ export const SymbolDialog = ({value}: SymbolDialogProps) => {
           as={ButtonHyperLink}
           className="token symbol"
           onClick={handleTargetClick}
-          style={{
+          cs={{
             border: 'none',
             background: 'transparent',
             fontSize: 'inherit',
@@ -163,13 +163,13 @@ export const SymbolDialog = ({value}: SymbolDialogProps) => {
         {renderTypeParameters(value.typeParameters)}
 
         <Dialog.Popper>
-          <Dialog.Card maxHeight="50vh" maxWidth="90vh" minWidth={'600px'}>
+          <Dialog.Card cs={{maxHeight: '50vh', maxWidth: '90vh', minWidth: px2rem(600)}}>
             <Dialog.CloseIcon />
 
             <Dialog.Heading>{value.name} </Dialog.Heading>
             {breadcrumbsList.length > 1 && (
               <Breadcrumbs aria-label="Breadcrumbs">
-                <Breadcrumbs.List paddingX="xxs">
+                <Breadcrumbs.List cs={{paddingInline: system.padding.xs}}>
                   {breadcrumbsList.map((item, index) => {
                     return (
                       <>
@@ -223,41 +223,39 @@ export const SymbolDialog = ({value}: SymbolDialogProps) => {
   );
 };
 
-function createColor(color: CanvasColor) {
-  return {
-    color: colors[color],
-  };
-}
-
-const StyledSymbolDoc = styled('div')({
-  marginBottom: space.m,
-  'button[data-symbol]': {
-    border: 'none',
-    background: 'transparent',
-    fontSize: 'inherit',
-    fontFamily: 'inherit',
-  },
-  code: {
-    fontSize: type.properties.fontSizes[14],
-    lineHeight: 1.5,
-    fontFamily: type.properties.fontFamilies.monospace,
-    whiteSpace: 'nowrap',
-    '.token': {
-      '&.string': createColor('juicyPear600'),
-      '&.symbol': createColor('grapeSoda600'),
-
-      '&.property': createColor('berrySmoothie600'),
-      '&.primitive': createColor('pomegranate600'),
-      '&.number': createColor('pomegranate600'),
-      '&.boolean': createColor('pomegranate600'),
-      '&.variable': createColor('pomegranate600'),
-      '&.keyword': createColor('pomegranate600'),
-      '&.punctuation': createColor('blackPepper600'),
-      '&.operator': createColor('blackPepper600'),
-      '&.bold': {fontWeight: 700},
+const symbolDocStencil = createStencil({
+  base: {
+    marginBottom: system.gap.lg,
+    'button[data-symbol]': {
+      border: 'none',
+      background: 'transparent',
+      fontSize: 'inherit',
+      fontFamily: 'inherit',
+    },
+    code: {
+      ...system.type.subtext.large,
+      fontFamily: system.fontFamily.mono,
+      whiteSpace: 'nowrap',
+      '.token': {
+        '&.string': base.green700,
+        '&.symbol': base.purple800,
+        '&.property': base.blue800,
+        '&.primitive': base.red800,
+        '&.number': base.red800,
+        '&.boolean': base.red800,
+        '&.variable': base.red800,
+        '&.keyword': base.red800,
+        '&.punctuation': base.neutral1000,
+        '&.operator': base.neutral1000,
+        '&.bold': {fontWeight: system.fontWeight.bold},
+      },
     },
   },
 });
+
+const StyledSymbolDoc = (props: Pick<SymbolDocProps, 'as' | 'className'> & CSProps) => {
+  return <div {...handleCsProp(props, symbolDocStencil())} />;
+};
 
 function getSymbolDocChildren(doc?: types.ExportedSymbol, meta?: any, name?: string) {
   if (!doc) {

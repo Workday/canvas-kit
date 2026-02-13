@@ -1,8 +1,7 @@
-import React from 'react';
 import {renderToString} from 'react-dom/server';
 
-import {colors} from '@workday/canvas-kit-react/tokens';
 import {checkIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
 import {Toast} from '../';
 
@@ -11,7 +10,7 @@ describe('Toast', () => {
     const SimpleToast = () => (
       <Toast mode="dialog">
         <Toast.Body>
-          <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
+          <Toast.Icon icon={checkIcon} cs={{color: system.color.fg.success.default}} />
           <Toast.Message>
             Your workbook was successfully processed.
             <Toast.Link href="#href">View more details</Toast.Link>
