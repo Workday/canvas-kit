@@ -3,7 +3,7 @@ import * as React from 'react';
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {Menu} from '@workday/canvas-kit-react/menu';
 import {Popper, Popup} from '@workday/canvas-kit-react/popup';
-import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {createStyles, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export default {
@@ -58,8 +58,8 @@ export const CustomPlacement = {
               fill="none"
               viewBox="0 0 100 100"
             >
-              <path stroke={system.color.fg.default} d="M0.5 0.5H99.5V99.5H0.5z"></path>
-              <path fill={system.color.fg.danger.default} d="M30 30H70V70H30z"></path>
+              <path stroke={cssVar(system.color.fg.default)} d="M0.5 0.5H99.5V99.5H0.5z"></path>
+              <path fill={cssVar(system.color.fg.danger.default)} d="M30 30H70V70H30z"></path>
             </svg>
           </div>
           <Popper
