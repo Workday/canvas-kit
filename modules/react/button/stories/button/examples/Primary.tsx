@@ -20,7 +20,7 @@ export const Primary = () => (
     <PrimaryButton icon={plusIcon} iconPosition="start">
       Primary
     </PrimaryButton>
-    <PrimaryButton icon={caretDownIcon} iconPosition="end">
+    <PrimaryButton icon={caretDownIcon} disabled iconPosition="end">
       Primary
     </PrimaryButton>
     <Tooltip title="Related Actions">

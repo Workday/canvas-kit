@@ -1,6 +1,6 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {createStencil, cssVar} from '@workday/canvas-kit-styling';
+import {colorSpace, createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 
 import {buttonColorPropVars, buttonStencil} from './BaseButton';
@@ -22,9 +22,18 @@ const primaryButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
     // Base Styles
-    [buttonStencil.vars.background]: cssVar(brand.action.base, brand.primary.base),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    [buttonStencil.vars.background]: cssVar(
+      system.color.brand.accent.primary,
+      cssVar(brand.action.base, brand.primary.base)
+    ),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     [buttonStencil.vars.borderRadius]: cssVar(system.shape.full, system.shape.round),
-    [buttonStencil.vars.label]: cssVar(brand.action.accent, brand.primary.accent),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    [buttonStencil.vars.label]: cssVar(
+      system.color.fg.inverse,
+      cssVar(brand.action.accent, brand.primary.accent)
+    ),
     [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
     // Focus Styles
     '&:focus-visible, &.focus': {
@@ -36,14 +45,30 @@ const primaryButtonStencil = createStencil({
     },
     // Hover Styles
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: cssVar(brand.action.dark, brand.primary.dark),
-      [buttonStencil.vars.label]: cssVar(brand.action.accent, brand.primary.accent),
+      [buttonStencil.vars.background]: colorSpace.darken(
+        system.color.brand.accent.primary,
+        cssVar(brand.action.dark, brand.primary.dark),
+        system.color.accent.overlay.mixin,
+        system.opacity.accent.hover
+      ),
+      [buttonStencil.vars.label]: cssVar(
+        system.color.fg.inverse,
+        cssVar(brand.action.accent, brand.primary.accent)
+      ),
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.hover.icon, 'currentColor'),
     },
     // Active Styles
     '&:active, &.active': {
-      [buttonStencil.vars.background]: cssVar(brand.action.darkest, brand.primary.darkest),
-      [buttonStencil.vars.label]: cssVar(brand.action.accent, brand.primary.accent),
+      [buttonStencil.vars.background]: colorSpace.darken(
+        system.color.brand.accent.primary,
+        cssVar(brand.action.darkest, brand.primary.darkest),
+        system.color.accent.overlay.mixin,
+        system.opacity.accent.pressed
+      ),
+      [buttonStencil.vars.label]: cssVar(
+        system.color.fg.inverse,
+        cssVar(brand.action.accent, brand.primary.accent)
+      ),
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.active.icon, 'currentColor'),
     },
     // Disabled Styles
@@ -58,13 +83,19 @@ const primaryButtonStencil = createStencil({
     variant: {
       // Inverse Styles
       inverse: {
-        [buttonStencil.vars.background]: cssVar(brand.action.lightest, brand.primary.lightest),
-        [buttonStencil.vars.borderRadius]: system.shape.round,
+        [buttonStencil.vars.background]: cssVar(
+          system.color.surface.inverse,
+          cssVar(brand.action.lightest, brand.primary.lightest)
+        ),
+        [buttonStencil.vars.borderRadius]: cssVar(system.shape.full, system.shape.round),
         [buttonStencil.vars.label]: system.color.fg.strong,
         [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
         // Focus Styles
         '&:focus-visible, &.focus': {
-          [buttonStencil.vars.background]: cssVar(brand.action.lightest, brand.primary.lightest),
+          [buttonStencil.vars.background]: cssVar(
+            system.color.surface.inverse,
+            cssVar(brand.action.lightest, brand.primary.lightest)
+          ),
           [buttonStencil.vars.label]: system.color.fg.strong,
           [buttonStencil.vars.boxShadowInner]: system.color.border.contrast.default,
           [buttonStencil.vars.boxShadowOuter]: system.color.focus.inverse,
@@ -72,13 +103,23 @@ const primaryButtonStencil = createStencil({
         },
         // Hover Styles
         '&:hover, &.hover': {
-          [buttonStencil.vars.background]: cssVar(brand.action.lighter, brand.primary.lightest),
+          [buttonStencil.vars.background]: colorSpace.darken(
+            system.color.surface.inverse,
+            cssVar(brand.action.lighter, brand.primary.lightest),
+            system.color.surface.overlay.mixin,
+            system.opacity.surface.hover
+          ),
           [buttonStencil.vars.label]: system.color.fg.stronger,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.hover.icon, 'currentColor'),
         },
         // Active Styles
         '&:active, &.active': {
-          [buttonStencil.vars.background]: cssVar(brand.action.light, brand.primary.light),
+          [buttonStencil.vars.background]: colorSpace.darken(
+            system.color.surface.inverse,
+            cssVar(brand.action.light, brand.primary.light),
+            system.color.surface.overlay.mixin,
+            system.opacity.surface.pressed
+          ),
           [buttonStencil.vars.label]: system.color.fg.stronger,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.active.icon, 'currentColor'),
         },

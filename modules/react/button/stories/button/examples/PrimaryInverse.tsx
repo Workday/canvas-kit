@@ -23,7 +23,7 @@ export const PrimaryInverse = () => (
     <PrimaryButton icon={plusIcon} iconPosition="start" variant="inverse">
       Primary
     </PrimaryButton>
-    <PrimaryButton icon={caretDownIcon} iconPosition="end" variant="inverse">
+    <PrimaryButton disabled icon={caretDownIcon} iconPosition="end" variant="inverse">
       Primary
     </PrimaryButton>
     <Tooltip title="Related Actions">
