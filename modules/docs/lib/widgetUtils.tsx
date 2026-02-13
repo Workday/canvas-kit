@@ -237,23 +237,23 @@ const symbolDocStencil = createStencil({
       fontFamily: system.fontFamily.mono,
       whiteSpace: 'nowrap',
       '.token': {
-        '&.string': base.green700,
-        '&.symbol': base.purple800,
-        '&.property': base.blue800,
-        '&.primitive': base.red800,
-        '&.number': base.red800,
-        '&.boolean': base.red800,
-        '&.variable': base.red800,
-        '&.keyword': base.red800,
-        '&.punctuation': base.neutral1000,
-        '&.operator': base.neutral1000,
+        '&.string': {color: base.green700},
+        '&.symbol': {color: base.purple800},
+        '&.property': {color: base.blue800},
+        '&.primitive': {color: base.red800},
+        '&.number': {color: base.red800},
+        '&.boolean': {color: base.red800},
+        '&.variable': {color: base.red800},
+        '&.keyword': {color: base.red800},
+        '&.punctuation': {color: base.neutral1000},
+        '&.operator': {color: base.neutral1000},
         '&.bold': {fontWeight: system.fontWeight.bold},
       },
     },
   },
 });
 
-const StyledSymbolDoc = (props: Pick<SymbolDocProps, 'as' | 'className'> & CSProps) => {
+const StyledSymbolDoc = (props: Pick<SymbolDocProps, 'className'> & CSProps) => {
   return <div {...handleCsProp(props, symbolDocStencil())} />;
 };
 
