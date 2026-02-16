@@ -1,7 +1,7 @@
 import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {calc, colorSpace, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 
 import {buttonColorPropVars, buttonStencil} from './BaseButton';
 import {Button, ButtonProps} from './Button';
@@ -22,43 +22,70 @@ const tertiaryButtonStencil = createStencil({
   extends: buttonStencil,
   // Base Styles
   base: {
-    paddingInline: system.space.x2,
+    paddingInline: cssVar(system.padding.xs, system.space.x2),
     minWidth: 'auto',
     borderWidth: px2rem(2),
-    [buttonStencil.vars.borderRadius]: system.shape.round,
-    [buttonStencil.vars.background]: system.color.bg.transparent.default,
-    [buttonStencil.vars.label]: brand.primary.base,
+    [buttonStencil.vars.borderRadius]: cssVar(system.shape.full, system.shape.round),
+    [buttonStencil.vars.background]: cssVar(
+      system.color.surface.transparent,
+      system.color.bg.transparent.default
+    ),
+    [buttonStencil.vars.label]: cssVar(system.color.fg.default, brand.primary.base),
     [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
     // Focus Styles
     '&:focus-visible, &.focus': {
-      [buttonStencil.vars.background]: system.color.bg.transparent.default,
-      [buttonStencil.vars.label]: brand.primary.base,
+      [buttonStencil.vars.background]: cssVar(
+        system.color.surface.transparent,
+        system.color.bg.transparent.default
+      ),
+      [buttonStencil.vars.label]: cssVar(system.color.fg.default, brand.primary.base),
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
-      ...focusRing({
-        width: 2,
-        separation: 0,
-        innerColor: system.color.border.inverse.default,
-        outerColor: brand.common.focusOutline,
-      }),
+      // ...focusRing({
+      //   width: 2,
+      //   separation: 0,
+      //   innerColor: system.color.border.inverse.default,
+      //   outerColor: brand.common.focusOutline,
+      // }),
+      [buttonStencil.vars.boxShadowInner]: cssVar(
+        system.color.focus.inverse,
+        cssVar(system.color.border.inverse.default, base.neutral0)
+      ),
+      [buttonStencil.vars.boxShadowOuter]: cssVar(
+        system.color.brand.focus.primary,
+        brand.common.focusOutline
+      ),
     },
     // Hover Styles
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: system.color.bg.alt.soft,
-      [buttonStencil.vars.label]: brand.primary.dark,
+      [buttonStencil.vars.background]: colorSpace.darken(
+        system.color.surface.transparent,
+        system.color.bg.alt.soft,
+        system.color.surface.overlay.mixin,
+        system.opacity.surface.hover
+      ),
+      [buttonStencil.vars.label]: cssVar(system.color.fg.strong, brand.primary.dark),
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.hover.icon, 'currentColor'),
       textDecoration: 'underline',
     },
     // Active Styles
     '&:active, &.active': {
-      [buttonStencil.vars.background]: system.color.bg.alt.default,
-      [buttonStencil.vars.label]: brand.primary.darkest,
+      [buttonStencil.vars.background]: colorSpace.darken(
+        system.color.surface.transparent,
+        system.color.bg.alt.default,
+        system.color.surface.overlay.mixin,
+        system.opacity.surface.pressed
+      ),
+      [buttonStencil.vars.label]: cssVar(system.color.fg.strong, brand.primary.dark),
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.active.icon, 'currentColor'),
       textDecoration: 'underline',
     },
     // Disabled Styles
     '&:disabled, &.disabled': {
-      [buttonStencil.vars.background]: system.color.bg.transparent.default,
-      [buttonStencil.vars.label]: brand.primary.base,
+      [buttonStencil.vars.background]: cssVar(
+        system.color.surface.transparent,
+        system.color.bg.transparent.default
+      ),
+      [buttonStencil.vars.label]: cssVar(system.color.fg.default, brand.primary.base),
       [buttonStencil.vars.opacity]: system.opacity.disabled,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.disabled.icon, 'currentColor'),
     },
