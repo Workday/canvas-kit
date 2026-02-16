@@ -131,37 +131,68 @@ const tertiaryButtonStencil = createStencil({
     variant: {
       // Inverse Styles
       inverse: {
-        [buttonStencil.vars.background]: 'transparent',
+        [buttonStencil.vars.background]: cssVar(system.color.surface.transparent, 'transparent'),
         [buttonStencil.vars.label]: system.color.fg.inverse,
-        [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
+        [systemIconStencil.vars.color]: cssVar(
+          system.color.fg.inverse,
+          cssVar(buttonColorPropVars.default.icon, 'currentColor')
+        ),
         // Focus Styles
         '&:focus-visible, &.focus': {
-          [buttonStencil.vars.background]: system.color.bg.translucent,
-          [buttonStencil.vars.label]: system.color.fg.inverse,
-          [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
-          ...focusRing({
-            width: 2,
-            separation: 0,
-            outerColor: system.color.border.inverse.default,
-          }),
+          [buttonStencil.vars.background]: cssVar(
+            system.color.surface.inverse,
+            system.color.bg.translucent
+          ),
+          [buttonStencil.vars.label]: cssVar(
+            system.color.fg.contrast.default,
+            system.color.fg.inverse
+          ),
+          [systemIconStencil.vars.color]: cssVar(
+            system.color.fg.contrast.default,
+            cssVar(buttonColorPropVars.focus.icon, 'currentColor')
+          ),
+          [buttonStencil.vars.boxShadowInner]: system.color.border.contrast.default,
+          [buttonStencil.vars.boxShadowOuter]: cssVar(
+            system.color.focus.inverse,
+            cssVar(system.color.border.inverse.default, base.neutral0)
+          ),
         },
         // Hover Styles
         '&:hover, &.hover': {
-          [buttonStencil.vars.background]: system.color.bg.transparent.strong,
+          [buttonStencil.vars.background]: colorSpace.darken(
+            system.color.surface.transparent,
+            system.color.bg.transparent.strong,
+            system.color.surface.overlay.mixin,
+            system.opacity.surface.hover
+          ),
           [buttonStencil.vars.label]: system.color.fg.inverse,
-          [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.hover.icon, 'currentColor'),
+          [systemIconStencil.vars.color]: cssVar(
+            system.color.fg.inverse,
+            cssVar(buttonColorPropVars.hover.icon, 'currentColor')
+          ),
         },
         // Active Styles
         '&:active, &.active': {
-          [buttonStencil.vars.background]: system.color.bg.transparent.stronger,
+          [buttonStencil.vars.background]: colorSpace.darken(
+            system.color.surface.transparent,
+            system.color.bg.transparent.stronger,
+            system.color.surface.overlay.mixin,
+            system.opacity.surface.pressed
+          ),
           [buttonStencil.vars.label]: system.color.fg.inverse,
-          [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.active.icon, 'currentColor'),
+          [systemIconStencil.vars.color]: cssVar(
+            system.color.fg.inverse,
+            cssVar(buttonColorPropVars.hover.icon, 'currentColor')
+          ),
         },
         // Disabled Styles
         '&:disabled, &.disabled': {
-          [buttonStencil.vars.background]: 'transparent',
+          [buttonStencil.vars.background]: cssVar(system.color.surface.transparent, 'transparent'),
           [buttonStencil.vars.label]: system.color.fg.inverse,
-          [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.disabled.icon, 'currentColor'),
+          [systemIconStencil.vars.color]: cssVar(
+            system.color.fg.inverse,
+            cssVar(buttonColorPropVars.disabled.icon, 'currentColor')
+          ),
         },
       },
     },
@@ -171,81 +202,81 @@ const tertiaryButtonStencil = createStencil({
     {
       modifiers: {size: 'large', iconPosition: 'only'},
       styles: {
-        minWidth: calc.multiply(system.space.x4, 3),
+        minWidth: cssVar(system.size.lg, px2rem(48)),
       },
     },
     {
       modifiers: {size: 'large', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: system.space.x2,
-        paddingInlineEnd: system.space.x3,
+        paddingInlineStart: cssVar(system.padding.xs, system.space.x2),
+        paddingInlineEnd: cssVar(system.padding.sm, system.space.x3),
       },
     },
     {
       modifiers: {size: 'large', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: system.space.x3,
-        paddingInlineEnd: system.space.x2,
+        paddingInlineStart: cssVar(system.padding.sm, system.space.x3),
+        paddingInlineEnd: cssVar(system.padding.xs, system.space.x2),
       },
     },
     {
       modifiers: {size: 'medium', iconPosition: 'only'},
       styles: {
-        minWidth: system.space.x10,
+        minWidth: cssVar(system.size.md, system.space.x10),
       },
     },
     {
       modifiers: {size: 'medium', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: system.space.x2,
-        paddingInlineEnd: system.space.x3,
+        paddingInlineStart: cssVar(system.padding.xs, system.space.x2),
+        paddingInlineEnd: cssVar(system.padding.sm, system.space.x3),
       },
     },
     {
       modifiers: {size: 'medium', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: system.space.x3,
-        paddingInlineEnd: system.space.x2,
+        paddingInlineStart: cssVar(system.padding.sm, system.space.x3),
+        paddingInlineEnd: cssVar(system.padding.xs, system.space.x2),
       },
     },
     {
       modifiers: {size: 'small', iconPosition: 'only'},
       styles: {
-        minWidth: system.space.x8,
+        minWidth: cssVar(system.size.sm, system.space.x8),
       },
     },
     {
       modifiers: {size: 'small', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: system.space.x2,
-        paddingInlineEnd: system.space.x3,
+        paddingInlineStart: cssVar(system.padding.xs, system.space.x2),
+        paddingInlineEnd: cssVar(system.padding.sm, system.space.x3),
       },
     },
     {
       modifiers: {size: 'small', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: system.space.x3,
-        paddingInlineEnd: system.space.x2,
+        paddingInlineStart: cssVar(system.padding.sm, system.space.x3),
+        paddingInlineEnd: cssVar(system.padding.xs, system.space.x2),
       },
     },
     {
       modifiers: {size: 'extraSmall', iconPosition: 'only'},
       styles: {
-        minWidth: system.space.x6,
+        minWidth: cssVar(system.size.xs, system.space.x6),
       },
     },
     {
       modifiers: {size: 'extraSmall', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: system.space.x1,
-        paddingInlineEnd: system.space.x2,
+        paddingInlineStart: cssVar(system.padding.xxs, system.space.x1),
+        paddingInlineEnd: cssVar(system.padding.xs, system.space.x2),
       },
     },
     {
       modifiers: {size: 'extraSmall', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: system.space.x2,
-        paddingInlineEnd: system.space.x1,
+        paddingInlineStart: cssVar(system.padding.xs, system.space.x2),
+        paddingInlineEnd: cssVar(system.padding.xxs, system.space.x1),
       },
     },
   ],
