@@ -17,8 +17,11 @@ const deleteButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
     // Base Styles
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     [buttonStencil.vars.background]: cssVar(system.color.brand.accent.critical, brand.error.base),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     [buttonStencil.vars.borderRadius]: cssVar(system.shape.full, system.shape.round),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     [buttonStencil.vars.label]: cssVar(system.color.fg.inverse, brand.error.accent),
     [systemIconStencil.vars.color]: cssVar(
       system.color.fg.inverse,
@@ -26,16 +29,21 @@ const deleteButtonStencil = createStencil({
     ),
     // Focus Styles
     '&:focus-visible, &.focus': {
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.background]: cssVar(system.color.brand.accent.critical, brand.error.base),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.label]: cssVar(system.color.fg.inverse, brand.error.accent),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [systemIconStencil.vars.color]: cssVar(
         system.color.fg.inverse,
         cssVar(buttonColorPropVars.focus.icon, brand.error.accent)
       ),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.boxShadowInner]: cssVar(
         system.color.focus.inverse,
         cssVar(system.color.border.inverse.default, base.neutral0)
       ),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.boxShadowOuter]: cssVar(
         system.color.brand.focus.primary,
         brand.common.focusOutline
@@ -43,13 +51,16 @@ const deleteButtonStencil = createStencil({
     },
     // Hover Styles
     '&:hover, &.hover': {
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.background]: colorSpace.darken(
         system.color.brand.accent.critical,
         brand.error.dark,
         system.color.accent.overlay.mixin,
         system.opacity.accent.hover
       ),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.label]: cssVar(system.color.fg.inverse, brand.error.accent),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [systemIconStencil.vars.color]: cssVar(
         system.color.fg.inverse,
         cssVar(buttonColorPropVars.focus.icon, brand.error.accent)
@@ -57,13 +68,16 @@ const deleteButtonStencil = createStencil({
     },
     // Active Styles
     '&:active, &.active': {
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.background]: colorSpace.darken(
         system.color.brand.accent.critical,
         brand.error.darkest,
         system.color.accent.overlay.mixin,
         system.opacity.accent.pressed
       ),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.label]: cssVar(system.color.fg.inverse, brand.error.accent),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [systemIconStencil.vars.color]: cssVar(
         system.color.fg.inverse,
         cssVar(buttonColorPropVars.focus.icon, brand.error.accent)

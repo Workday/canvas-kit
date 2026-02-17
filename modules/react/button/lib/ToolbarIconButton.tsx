@@ -18,18 +18,25 @@ export interface ToolbarIconButtonProps extends Omit<TertiaryButtonProps, 'size'
 export const toolbarIconButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     minWidth: cssVar(system.size.sm, system.space.x8),
     padding: 0,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     height: cssVar(system.size.sm, system.space.x8),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     [buttonStencil.vars.borderRadius]: cssVar(system.shape.sm, system.shape.x1),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     [systemIconStencil.vars.color]: cssVar(system.color.fg.default, system.color.fg.muted.soft),
 
     '&:focus-visible, &.focus': {
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [systemIconStencil.vars.color]: cssVar(system.color.fg.strong, system.color.fg.muted.soft),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.boxShadowInner]: cssVar(
         system.color.focus.inverse,
         cssVar(system.color.border.inverse.default, base.neutral0)
       ),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.boxShadowOuter]: cssVar(
         system.color.brand.focus.primary,
         brand.common.focusOutline
@@ -37,12 +44,14 @@ export const toolbarIconButtonStencil = createStencil({
     },
 
     '&:hover, &.hover': {
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.background]: colorSpace.darken(
         system.color.surface.transparent,
         system.color.bg.alt.default,
         system.color.surface.overlay.mixin,
         system.opacity.surface.hover
       ),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [systemIconStencil.vars.color]: cssVar(
         system.color.fg.strong,
         system.color.fg.muted.stronger
@@ -50,11 +59,17 @@ export const toolbarIconButtonStencil = createStencil({
     },
 
     '&:active, &.active': {
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.background]: colorSpace.darken(
         system.color.surface.transparent,
         system.color.bg.alt.stronger,
         system.color.surface.overlay.mixin,
         system.opacity.surface.pressed
+      ),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      [systemIconStencil.vars.color]: cssVar(
+        system.color.fg.strong,
+        system.color.fg.muted.stronger
       ),
     },
 
@@ -63,16 +78,19 @@ export const toolbarIconButtonStencil = createStencil({
     },
 
     "&[aria-pressed='true']": {
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [systemIconStencil.vars.color]: cssVar(
         system.color.brand.fg.primary.default,
         brand.primary.base
       ),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.background]: cssVar(
         system.color.brand.surface.primary.default,
         brand.primary.lightest
       ),
 
       '&:focus-visible, &.focus': {
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         [systemIconStencil.vars.color]: cssVar(
           system.color.brand.fg.primary.strong,
           brand.primary.dark
@@ -80,12 +98,14 @@ export const toolbarIconButtonStencil = createStencil({
       },
 
       '&:hover, &.hover': {
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         [buttonStencil.vars.background]: colorSpace.darken(
           system.color.brand.surface.primary.default,
           system.color.bg.alt.default,
           system.color.surface.overlay.mixin,
           system.opacity.surface.hover
         ),
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         [systemIconStencil.vars.color]: cssVar(
           system.color.brand.fg.primary.strong,
           brand.primary.dark
@@ -93,12 +113,14 @@ export const toolbarIconButtonStencil = createStencil({
       },
 
       '&:active, &.active': {
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         [buttonStencil.vars.background]: colorSpace.darken(
           system.color.brand.surface.primary.default,
           system.color.bg.alt.stronger,
           system.color.surface.overlay.mixin,
           system.opacity.surface.pressed
         ),
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         [systemIconStencil.vars.color]: cssVar(
           system.color.brand.fg.primary.strong,
           brand.primary.dark
