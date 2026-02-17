@@ -91,6 +91,14 @@ const tertiaryButtonStencil = createStencil({
     // Disabled Styles
     '&:disabled, &.disabled': {
       [buttonStencil.vars.opacity]: system.opacity.disabled,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      [buttonStencil.vars.background]: cssVar(
+        system.color.surface.transparent,
+        system.color.bg.transparent.default
+      ),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      [buttonStencil.vars.label]: cssVar(system.color.fg.default, brand.primary.base),
+      [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
     },
   },
   modifiers: {
@@ -181,6 +189,10 @@ const tertiaryButtonStencil = createStencil({
         // Disabled Styles
         '&:disabled, &.disabled': {
           [buttonStencil.vars.opacity]: system.opacity.disabled,
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          [buttonStencil.vars.background]: cssVar(system.color.surface.transparent, 'transparent'),
+          [buttonStencil.vars.label]: system.color.fg.inverse,
+          [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
         },
       },
     },

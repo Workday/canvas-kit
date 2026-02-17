@@ -86,6 +86,11 @@ const deleteButtonStencil = createStencil({
     // Disabled Styles
     '&:disabled, &.disabled': {
       [buttonStencil.vars.opacity]: system.opacity.disabled,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      [buttonStencil.vars.background]: cssVar(system.color.brand.accent.critical, brand.error.base),
+      [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.disabled.icon, brand.error.accent),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      [buttonStencil.vars.label]: cssVar(system.color.fg.inverse, brand.error.accent),
     },
   },
 });

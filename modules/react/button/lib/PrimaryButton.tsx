@@ -94,6 +94,15 @@ const primaryButtonStencil = createStencil({
     // Disabled Styles
     '&:disabled, &.disabled': {
       [buttonStencil.vars.opacity]: system.opacity.disabled,
+      [buttonStencil.vars.background]: cssVar(
+        brand.action.base,
+        cssVar(system.color.brand.accent.primary, brand.primary.base)
+      ),
+      [buttonStencil.vars.label]: cssVar(
+        brand.action.accent,
+        cssVar(system.color.fg.inverse, brand.primary.accent)
+      ),
+      [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
     },
   },
   modifiers: {
@@ -152,6 +161,12 @@ const primaryButtonStencil = createStencil({
         // Disabled Styles
         '&:disabled, &.disabled': {
           [buttonStencil.vars.opacity]: system.opacity.disabled,
+          [buttonStencil.vars.background]: cssVar(
+            brand.action.lightest,
+            cssVar(system.color.surface.inverse, brand.primary.lightest)
+          ),
+          [buttonStencil.vars.label]: system.color.fg.strong,
+          [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.disabled.icon, 'currentColor'),
         },
       },
     },

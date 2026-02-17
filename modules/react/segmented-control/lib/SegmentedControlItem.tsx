@@ -70,6 +70,7 @@ export const segmentedControlItemStencil = createStencil({
     [buttonStencil.vars.borderRadius]: cssVar(system.shape.md, system.shape.x1),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     [buttonStencil.vars.label]: cssVar(system.color.fg.muted.default, system.color.fg.muted.strong),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     [systemIconStencil.vars.color]: cssVar(
       system.color.fg.muted.default,
       system.color.fg.muted.strong
@@ -110,6 +111,18 @@ export const segmentedControlItemStencil = createStencil({
 
     '&:disabled, &.disabled': {
       [buttonStencil.vars.opacity]: system.opacity.disabled,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      [buttonStencil.vars.background]: cssVar(system.color.surface.transparent, 'transparent'),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      [buttonStencil.vars.label]: cssVar(
+        system.color.fg.muted.default,
+        system.color.fg.muted.strong
+      ),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      [systemIconStencil.vars.color]: cssVar(
+        system.color.fg.muted.default,
+        system.color.fg.muted.strong
+      ),
     },
 
     "&[aria-pressed='true']": {

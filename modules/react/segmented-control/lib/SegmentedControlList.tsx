@@ -31,11 +31,6 @@ export const segmentedControlListStencil = createStencil({
     gridGap: cssVar(system.gap.sm, system.space.x2),
   },
   modifiers: {
-    disabled: {
-      true: {
-        opacity: system.opacity.disabled,
-      },
-    },
     orientation: {
       vertical: ({items}) => ({
         gridTemplateRows: `repeat(${items}, 1fr)`,
@@ -57,7 +52,6 @@ export const SegmentedControlList = createSubcomponent('div')({
       {...handleCsProp(
         elemProps,
         segmentedControlListStencil({
-          disabled: model.state.disabled,
           items: `${model.state.items.length}`,
           orientation: model.state.orientation,
         })

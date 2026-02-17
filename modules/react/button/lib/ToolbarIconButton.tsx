@@ -75,6 +75,8 @@ export const toolbarIconButtonStencil = createStencil({
 
     '&:disabled, &.disabled': {
       [buttonStencil.vars.opacity]: system.opacity.disabled,
+      [buttonStencil.vars.background]: cssVar(system.color.surface.transparent, 'transparent'),
+      [systemIconStencil.vars.color]: cssVar(system.color.fg.default, system.color.fg.disabled),
     },
 
     "&[aria-pressed='true']": {
