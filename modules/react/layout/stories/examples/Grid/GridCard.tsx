@@ -40,7 +40,7 @@ export const GridCard = () => {
   return (
     <Grid cs={containerStyles}>
       <H3>Learn about Grid {isComplete && '🥳'}</H3>
-      <Box cs={{paddingBloxk: system.padding.md}}>
+      <Box cs={{paddingBlock: system.padding.md}}>
         <Body>Complete this task when you have a functional understanding of Grid.</Body>
       </Box>
       <Grid cs={{gridTemplate: 'auto / 1fr auto', justifyItems: 'end'}}>
