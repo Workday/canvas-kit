@@ -18,7 +18,6 @@ export const Basic = () => {
         <SegmentedControl.List aria-label="View type">
           <SegmentedControl.Item data-id="table" icon={gridIcon} tooltipProps={{title: 'Table'}} />
           <SegmentedControl.Item
-            disabled
             data-id="list-view"
             icon={listViewIcon}
             tooltipProps={{title: 'List'}}
