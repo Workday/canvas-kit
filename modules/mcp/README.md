@@ -72,9 +72,9 @@ Design token migration guides, color palette, roles, contrast, and scale documen
 
 ### `docs://examples/{slug}`
 
-Markdown documentation and inline code examples for each component. These are extracted from the
-MDX story files at build time, with `ExampleCodeBlock` references replaced by the actual source code
-of each example.
+Markdown documentation and inline code examples for each component. These are extracted from the MDX
+story files at build time, with `ExampleCodeBlock` references replaced by the actual source code of
+each example.
 
 ### `ui://story/{slug}`
 
@@ -134,8 +134,8 @@ Add an entry to your MCP servers configuration pointing to your local build:
   "mcpServers": {
     "canvas-kit-mcp-local": {
       "command": "node",
-      "args": ["/absolute/path/to/canvas-kit/modules/mcp/dist/cli.js"]
     }
+      "args": ["/absolute/path/to/canvas-kit/modules/mcp/dist/cli.js"]
   }
 }
 ```

@@ -127,6 +127,11 @@ async function main() {
       continue;
     }
 
+    const mdxContent = fs.readFileSync(mdxPath, 'utf8');
+    if (mdxContent.includes('type="deprecated"')) {
+      continue;
+    }
+
     const slug = titleToSlug(title);
     const count = slugCounts.get(slug) || 0;
     slugCounts.set(slug, count + 1);
