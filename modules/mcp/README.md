@@ -1,6 +1,6 @@
 # Canvas Kit MCP
 
-Model Context Protocol (MCP) server that provides Canvas Kit upgrade guides and design token migration documentation to AI assistants.
+Our MCP server provides resources and tools to help you work with Canvas Kit components.
 
 ## Installation
 
@@ -23,19 +23,11 @@ Add to your MCP servers configuration file:
   "mcpServers": {
     "canvas-kit-mcp": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@workday/canvas-kit-mcp"
-      ]
+      "args": ["-y", "@workday/canvas-kit-mcp"]
     }
   }
 }
 ```
-
-Configuration file locations:
-- **Cursor**: `~/.cursor-tutor/config.json` (macOS/Linux) or `%APPDATA%\cursor-tutor\config.json` (Windows)
-- **Windsurf**: Settings → MCP Servers
-- **VS Code**: Cline/Continue extension settings
 
 ### Claude Code CLI
 
@@ -43,100 +35,89 @@ Configuration file locations:
 claude mcp add --scope project --transport stdio canvas-kit -- npx -y @workday/canvas-kit-mcp
 ```
 
-### Claude Desktop
-
-Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS):
-
-```json
-{
-  "mcpServers": {
-    "canvas-kit-mcp": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@workday/canvas-kit-mcp"
-      ]
-    }
-  }
-}
-```
-
 ## Tools
-
-This MCP server provides the following tools:
 
 ### `get-canvas-kit-upgrade-guides`
 
-Retrieves Canvas Kit version upgrade documentation covering major version migrations.
-
-**Use cases:**
-- Upgrading Canvas Kit to a new major version
-- Understanding breaking changes between versions
-- Finding migration paths for deprecated components
-- Learning about new features and components
-
-**Returns:** Links to upgrade guide resources including version-specific migration steps, deprecation notices, theming guides, and styling migration documentation.
+Returns Canvas Kit upgrade guide documentation (v9 through v14) as resource links.
 
 ### `get-canvas-kit-tokens`
 
-Retrieves Canvas Kit design token migration documentation for transitioning to the modern `@workday/canvas-tokens-web` package.
+Returns Canvas Kit design token documentation for migrating to `@workday/canvas-tokens-web`.
 
-**Use cases:**
-- Migrating from old token systems to `@workday/canvas-tokens-web`
-- Converting deprecated color tokens to the new token system
-- Understanding token hierarchy: base tokens, system tokens, and brand tokens
-- Finding correct system token replacements
-- Learning token naming patterns and semantic color roles
-- Migrating spacing, shape, typography, opacity, and depth tokens
-- Ensuring WCAG accessibility compliance with color contrast requirements
+### `fetch-component-documentation-example`
 
-**Returns:** Links to token documentation including migration guides, color palettes, color roles, contrast guidelines, and token system references.
+Renders an interactive Canvas Kit component story inline for the user. Accepts a `story` parameter
+with an enum of all available component slugs (e.g. `buttons`, `text-input`, `modal`, `tabs`, etc.).
+
+The tool returns:
+
+- The Storybook documentation URL
+- A `resource_link` to `docs://examples/{story}` with documentation and code examples
+- Story HTML via `_meta` for inline MCP App rendering
+
+**LLMs should read the `docs://examples/{story}` resource first** for documentation and code
+examples. Only call `fetch-component-documentation-example` to show the user a live interactive
+preview.
 
 ## Resources
 
-The server exposes documentation resources organized into two categories:
+### `docs://upgrade-guides/*`
 
-### Upgrade Guides
-Version-specific migration documentation covering:
-- Breaking changes and deprecations
-- New components and features
-- Styling system migrations (Emotion, CSS variables, `@workday/canvas-kit-styling`)
-- Theming and component refactoring
-- Accessibility improvements
+Markdown upgrade guides for Canvas Kit major versions (v9-v14).
 
-### Token Documentation
-Design token migration and usage guides covering:
-- Token system migrations (v2 → v3 → v4)
-- Color palette and semantic color roles
-- Token naming conventions and hierarchy
-- Accessibility and contrast guidelines
-- Spacing, shape, size, opacity, and depth tokens
-- OKLCH color space implementation
+### `docs://tokens/*`
 
-All resources are available to AI assistants through MCP resource URIs.
+Design token migration guides, color palette, roles, contrast, and scale documentation.
 
-## Source Documentation
+### `docs://examples/{slug}`
 
-The documentation files served by this MCP server are maintained in the Canvas Kit repository at [`modules/docs/llm`](../../docs/llm). This directory contains:
+Markdown documentation and inline code examples for each component. These are extracted from the
+MDX story files at build time, with `ExampleCodeBlock` references replaced by the actual source code
+of each example.
 
-- **Upgrade Guides** (`upgrade-guides/`) - Version-specific migration documentation
-- **Token Documentation** (`tokens/`) - Design token guides and migration resources
-- **LLM-Optimized Files** - Specialized documentation formatted for AI assistants
+### `ui://story/{slug}`
 
-To update the documentation served by this MCP server, modify the files in `modules/docs/llm` and rebuild the MCP package.
+Interactive HTML previews of Canvas Kit components, served as MCP App resources
+(`text/html;profile=mcp-app`). These are compiled from each component's Storybook MDX documentation
+and include live, styled component examples.
 
 ## Contributing
 
 Canvas Kit MCP has two exports:
 
-- `src/cli.js` - Node server that can be invoked via npx for local stdio
-- `src/index.js` - Low-level module exports for extending the server or hosting with other transports
+- `dist/cli.js` -- a Node server that can be invoked via npx for local stdio
+- `dist/index.js` -- module exports for extending the server or hosting with other transports
 
-### Testing Locally
+### Build Pipeline
+
+The build runs in stages via `npm run build`:
+
+1. **`build:discover`** -- scans `modules/react` and `modules/preview-react` for story files,
+   extracts metadata (title, slug, Storybook URL, MDX path, prose with inlined code examples), and
+   writes `lib/stories-config.json`
+2. **`build:apps`** -- compiles each MDX story into a self-contained single-file HTML app using
+   Vite, bundling React, Emotion, Canvas Tokens CSS, and lightweight Storybook stubs
+3. **`build:copy`** -- copies static resources (upgrade guides, token docs) into `dist/lib`
+4. **`build:types`** -- generates TypeScript declarations
+5. **`build:mcp`** -- bundles `lib/index.ts` and `lib/cli.ts` with esbuild
+
+### Key build files
+
+- `build/vite-plugins.ts` -- shared Vite plugins (`canvasKitSourceResolver`) and
+  `CANVAS_KIT_PACKAGE_MAP` for monorepo package resolution
+- `build/discover-stories.ts` -- story discovery and `stories-config.json` generation
+- `build/build-story-apps.ts` -- MDX-to-HTML compilation with Vite
+- `build/harness.html` -- HTML template for MCP App stories (MCP bridge, base typography, font
+  loading)
+- `build/storybook-stubs/` -- lightweight replacements for Storybook components (`Meta`,
+  `ExampleCodeBlock`, `SymbolDoc`, etc.) used in MDX files
+
+### To test locally
 
 #### MCP Inspector
 
-The inspector requires Node.js v22+:
+The inspector requires Node >= 22 so you will need to temporarily switch:
 
 ```bash
 nvm use 22
@@ -153,9 +134,7 @@ Add an entry to your MCP servers configuration pointing to your local build:
   "mcpServers": {
     "canvas-kit-mcp-local": {
       "command": "node",
-      "args": [
-        "/absolute/path/to/canvas-kit/modules/mcp/dist/cli.js"
-      ]
+      "args": ["/absolute/path/to/canvas-kit/modules/mcp/dist/cli.js"]
     }
   }
 }
