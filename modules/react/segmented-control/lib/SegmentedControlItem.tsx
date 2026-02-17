@@ -71,6 +71,7 @@ export const segmentedControlItemStencil = createStencil({
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     [buttonStencil.vars.label]: cssVar(system.color.fg.muted.default, system.color.fg.muted.strong),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     [systemIconStencil.vars.color]: cssVar(
       system.color.fg.muted.default,
       system.color.fg.muted.strong
