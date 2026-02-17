@@ -129,10 +129,10 @@ const primaryButtonStencil = createStencil({
         '&:hover, &.hover': {
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
           [buttonStencil.vars.background]: colorSpace.darken(
-            cssVar(brand.action.lighter, system.color.surface.inverse),
-            cssVar(brand.action.lighter, brand.primary.lightest),
-            system.color.surface.overlay.mixin,
-            system.opacity.surface.hover
+            brand.action.lighter,
+            cssVar(system.color.surface.inverse, brand.primary.lighter),
+            system.color.accent.overlay.mixin,
+            system.opacity.accent.hover
           ),
           [buttonStencil.vars.label]: system.color.fg.stronger,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.hover.icon, 'currentColor'),
@@ -141,10 +141,10 @@ const primaryButtonStencil = createStencil({
         '&:active, &.active': {
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
           [buttonStencil.vars.background]: colorSpace.darken(
-            cssVar(brand.action.light, system.color.surface.inverse),
-            cssVar(brand.action.light, brand.primary.light),
-            system.color.surface.overlay.mixin,
-            system.opacity.surface.pressed
+            brand.action.light,
+            cssVar(system.color.surface.inverse, brand.primary.light),
+            system.color.accent.overlay.mixin,
+            system.opacity.accent.pressed
           ),
           [buttonStencil.vars.label]: system.color.fg.stronger,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.active.icon, 'currentColor'),
