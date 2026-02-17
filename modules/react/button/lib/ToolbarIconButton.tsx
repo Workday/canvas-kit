@@ -27,20 +27,15 @@ export const toolbarIconButtonStencil = createStencil({
     [buttonStencil.vars.borderRadius]: cssVar(system.shape.sm, system.shape.x1),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     [systemIconStencil.vars.color]: cssVar(system.color.fg.default, system.color.fg.muted.soft),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    [buttonStencil.vars.background]: cssVar(
+      system.color.surface.transparent,
+      system.color.bg.transparent.default
+    ),
 
     '&:focus-visible, &.focus': {
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [systemIconStencil.vars.color]: cssVar(system.color.fg.strong, system.color.fg.muted.soft),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.boxShadowInner]: cssVar(
-        system.color.focus.inverse,
-        cssVar(system.color.border.inverse.default, base.neutral0)
-      ),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.boxShadowOuter]: cssVar(
-        system.color.brand.focus.primary,
-        brand.common.focusOutline
-      ),
     },
 
     '&:hover, &.hover': {

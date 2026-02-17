@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {GrowthBehavior, createComponent, focusRing} from '@workday/canvas-kit-react/common';
+import {GrowthBehavior, createComponent} from '@workday/canvas-kit-react/common';
 import {SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, createVars, cssVar, px2rem} from '@workday/canvas-kit-styling';
@@ -180,18 +180,13 @@ export const buttonStencil = createStencil({
       ),
       outline: `${px2rem(2)} solid transparent`,
       outlineOffset: px2rem(2),
-      ...focusRing({
-        width: 2,
-        separation: 2,
-        innerColor: cssVar(
-          buttonColorPropVars.focus.boxShadowInner,
-          cssVar(boxShadowInner, system.color.border.inverse.default)
-        ),
-        outerColor: cssVar(
-          buttonColorPropVars.focus.boxShadowOuter,
-          cssVar(boxShadowOuter, brand.common.focusOutline)
-        ),
-      }),
+      boxShadow: `0 0 0 ${px2rem(2)} ${cssVar(
+        buttonColorPropVars.focus.boxShadowInner,
+        cssVar(boxShadowInner, cssVar(system.color.border.inverse.default, base.neutral0))
+      )},0 0 0 ${px2rem(4)} ${cssVar(
+        buttonColorPropVars.focus.boxShadowOuter,
+        cssVar(boxShadowOuter, cssVar(system.color.brand.focus.primary, brand.common.focusOutline))
+      )}`,
     },
     // Hover Styles
     '&:hover, &.hover': {
