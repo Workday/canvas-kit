@@ -3,7 +3,7 @@ import * as React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {colorSpace, createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {brand, system} from '@workday/canvas-tokens-web';
 
 import {BaseButton, buttonStencil} from './BaseButton';
 import {TertiaryButtonProps} from './TertiaryButton';
